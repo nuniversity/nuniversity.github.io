@@ -21,10 +21,10 @@ export default function HomePage() {
     <>
       <Hero />
       <Features />
-      <FeaturedCourses />
-      <Tools />
-      <Stats />
-      <Newsletter />
+      {/* <FeaturedCourses /> */}
+      {/* <Tools /> */}
+      {/* <Stats /> */}
+      {/* <Newsletter /> */}
     </>
   )
 }

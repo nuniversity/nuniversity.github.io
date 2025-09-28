@@ -4,9 +4,9 @@ import { Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIco
 const footerLinks = {
   platform: [
     { name: 'Courses', href: '/courses', icon: BookOpen },
-    { name: 'Tools', href: '/tools', icon: Code },
-    { name: 'Games', href: '/games', icon: GamepadIcon },
-    { name: 'API Explorer', href: '/tools/api-explorer', icon: Calculator },
+    // { name: 'Tools', href: '/tools', icon: Code },
+    // { name: 'Games', href: '/games', icon: GamepadIcon },
+    // { name: 'API Explorer', href: '/tools/api-explorer', icon: Calculator },
   ],
   subjects: [
     { name: 'Computer Science', href: '/courses/computer-science' },
@@ -15,22 +15,22 @@ const footerLinks = {
     { name: 'Physics', href: '/courses/physics' },
   ],
   resources: [
-    { name: 'Documentation', href: '/docs' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Community', href: '/community' },
-    { name: 'Support', href: '/support' },
+    { name: 'Documentation', href: '/' },
+    { name: 'Blog', href: '/' },
+    { name: 'Community', href: '/' },
+    { name: 'Support', href: '/' },
   ],
   company: [
-    { name: 'About Us', href: '/about' },
-    { name: 'Contact', href: '/contact' },
-    { name: 'Privacy Policy', href: '/privacy' },
-    { name: 'Terms of Service', href: '/terms' },
+    { name: 'About Us', href: '/' },
+    { name: 'Contact', href: '/' },
+    { name: 'Privacy Policy', href: '/' },
+    { name: 'Terms of Service', href: '/' },
   ],
 }
 
 const socialLinks = [
   { name: 'GitHub', href: '#', icon: Github },
-  { name: 'Twitter', href: '#', icon: Twitter },
+  // { name: 'Twitter', href: '#', icon: Twitter },
   { name: 'LinkedIn', href: '#', icon: Linkedin },
   { name: 'Email', href: 'mailto:contact@nuniversity.com', icon: Mail },
 ]

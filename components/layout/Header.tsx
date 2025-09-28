@@ -12,9 +12,9 @@ export default function Header() {
   const navigation = [
     { name: 'Home', href: '/', icon: null },
     { name: 'Courses', href: '/courses', icon: BookOpen },
-    { name: 'Tools', href: '/tools', icon: Code },
-    { name: 'Games', href: '/games', icon: GamepadIcon },
-    { name: 'Contact', href: '/contact', icon: null },
+    // { name: 'Tools', href: '/tools', icon: Code },
+    // { name: 'Games', href: '/games', icon: GamepadIcon },
+    // { name: 'Contact', href: '/contact', icon: null },
   ]
 
   return (

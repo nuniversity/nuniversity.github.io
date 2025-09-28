@@ -49,13 +49,13 @@ export default function Hero() {
               <ArrowRight className="w-5 h-5" />
             </Link>
             
-            <Link
+            {/* <Link
               href="/tools"
               className="btn-secondary flex items-center space-x-2 text-lg px-8 py-4 bg-white/20 backdrop-blur-md text-white border-white/30 hover:bg-white/30"
             >
               <Play className="w-5 h-5" />
               <span>Try Tools</span>
-            </Link>
+            </Link> */}
           </div>
 
           {/* Feature Icons */}

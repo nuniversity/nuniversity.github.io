@@ -36,7 +36,11 @@ async function getCourse(slug: string) {
   return fs.readFileSync(fullPath, "utf8");
 }
 
-export default async function CoursePage({ params }: { params: { slug: string } }) {
+export default async function CoursePage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const markdown = await getCourse(params.slug);
   if (!markdown) return notFound();
 
@@ -46,18 +50,18 @@ export default async function CoursePage({ params }: { params: { slug: string } 
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
-          code({ className, children, ...props }) {
+          code({ className, children }) {
             const match = /language-(\w+)/.exec(className || "");
             return match ? (
               <SyntaxHighlighter
                 language={match[1]}
                 PreTag="div"
-                {...props}
+                style={duotoneLight}
               >
                 {String(children).replace(/\n$/, "")}
               </SyntaxHighlighter>
             ) : (
-              <code className="bg-gray-200 px-1 py-0.5 rounded text-sm" {...props}>
+              <code className="bg-gray-200 px-1 py-0.5 rounded text-sm">
                 {children}
               </code>
             );
