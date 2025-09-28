@@ -29,10 +29,10 @@ const footerLinks = {
 }
 
 const socialLinks = [
-  { name: 'GitHub', href: '#', icon: Github },
+  { name: 'GitHub', href: 'https://github.com/nuniversity', icon: Github },
   // { name: 'Twitter', href: '#', icon: Twitter },
-  { name: 'LinkedIn', href: '#', icon: Linkedin },
-  { name: 'Email', href: 'mailto:contact@nuniversity.com', icon: Mail },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/company/nuniversity/', icon: Linkedin },
+  { name: 'Email', href: 'mailto:thenuniversitybr@gmail.com', icon: Mail },
 ]
 
 export default function Footer() {
@@ -126,7 +126,7 @@ export default function Footer() {
       </div>
 
       {/* Newsletter Section */}
-      <div className="border-t border-gray-800">
+      {/* <div className="border-t border-gray-800">
         <div className="container-custom py-8">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div>
@@ -145,7 +145,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Bottom Footer */}
       <div className="border-t border-gray-800">
@@ -153,7 +153,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-400">
               <p>&copy; {currentYear} NUniversity. All rights reserved.</p>
-              <div className="flex space-x-4">
+              {/* <div className="flex space-x-4">
                 <Link href="/privacy" className="hover:text-white transition-colors">
                   Privacy
                 </Link>
@@ -163,7 +163,7 @@ export default function Footer() {
                 <Link href="/cookies" className="hover:text-white transition-colors">
                   Cookies
                 </Link>
-              </div>
+              </div> */}
             </div>
             
             <div className="flex items-center space-x-2 text-sm text-gray-400">
