@@ -1,9 +1,9 @@
 import Hero from '@/components/home/Hero'
-import FeaturedCourses from '@/components/home/FeaturedCourses'
+// import FeaturedCourses from '@/components/home/FeaturedCourses'
 import Features from '@/components/home/Features'
-import Tools from '@/components/home/Tools'
-import Stats from '@/components/home/Stats'
-import Newsletter from '@/components/home/Newsletter'
+// import Tools from '@/components/home/Tools'
+// import Stats from '@/components/home/Stats'
+// import Newsletter from '@/components/home/Newsletter'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

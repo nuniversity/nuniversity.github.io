@@ -8,8 +8,8 @@
 
 <!-- Top link navigation -->
 <div class="mb-2 flex justify-end">
-  <a href="/courses/test" class="text-base text-blue-700 font-medium hover:underline">
-    Next: Test &rarr;
+  <a href="/courses/Introduction-to-Cloud-Computing" class="text-base text-blue-700 font-medium hover:underline">
+    Next: Introduction to Cloud-Computing &rarr;
   </a>
 </div>
 
@@ -115,8 +115,8 @@
 
 <!-- Bottom link navigation -->
 <div class="mt-8 flex justify-end">
-  <a href="/courses/test" class="text-base text-blue-700 font-medium hover:underline">
-    Next: Test &rarr;
+  <a href="/courses/Introduction-to-Cloud-Computing" class="text-base text-blue-700 font-medium hover:underline">
+    Next: Introduction to Cloud-Computing &rarr;
   </a>
 </div>
 
