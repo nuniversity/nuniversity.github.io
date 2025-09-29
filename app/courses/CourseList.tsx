@@ -8,8 +8,9 @@ export default function CourseList({ courses }) {
     const query = search.toLowerCase();
     return courses.filter(
       (c) =>
-        c.title.toLowerCase().includes(query) ||
-        c.description.toLowerCase().includes(query)
+        c.title.toLowerCase().includes(query) 
+        || c.description.toLowerCase().includes(query) 
+        || c.field.toLowerCase().includes(query) 
     );
   }, [search, courses]);
 
@@ -29,12 +30,40 @@ export default function CourseList({ courses }) {
           <Link
             key={course.slug}
             href={`/courses/${course.slug}`}
-            className="block rounded-2xl border border-border card-hover bg-card text-card-foreground shadow-sm p-6"
+            className="
+              group relative flex flex-col justify-between 
+              rounded-xl border border-gray-200 dark:border-gray-700 
+              bg-white dark:bg-gray-900 
+              shadow-sm hover:shadow-lg hover:border-primary 
+              transition-all duration-200 
+              p-6
+            "
           >
-            <h2 className="text-xl font-semibold mb-2">{course.title}</h2>
-            <p className="text-muted-foreground text-sm">
-              {course.description || "Click to learn more."}
-            </p>
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-primary mb-3">
+                {course.title}
+              </h2>
+
+              <div className="mb-2">
+                <span className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                  Description:
+                </span>
+                <p className="text-sm text-gray-700 dark:text-gray-300 mt-1 line-clamp-2">
+                  {course.description || "Click to learn more."}
+                </p>
+              </div>
+
+              {course.field && (
+                <div>
+                  <span className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    Field:
+                  </span>
+                  <p className="inline-block mt-1 text-xs font-medium text-primary bg-primary/10 dark:bg-primary/20 px-2 py-1 rounded">
+                    {course.field}
+                  </p>
+                </div>
+              )}
+            </div>
           </Link>
         ))}
         {filteredCourses.length === 0 && (
