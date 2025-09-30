@@ -8,6 +8,7 @@ import { Metadata } from "next";
 import rehypeRaw from "rehype-raw";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { duotoneLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 // Directory for course markdown files
 const COURSES_PATH = path.join(process.cwd(), "courses");
@@ -45,7 +46,7 @@ export default async function CoursePage({
   if (!markdown) return notFound();
 
   return (
-    <article className="prose prose-lg max-w-4xl mx-auto p-6 dark:prose-invert">
+    <article className="prose prose-lg max-w-4xl mx-auto p-3 dark:prose-invert">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
@@ -56,12 +57,14 @@ export default async function CoursePage({
               <SyntaxHighlighter
                 language={match[1]}
                 PreTag="div"
-                style={duotoneLight}
+                style={oneDark}
+                useInlineStyles={false}
+                className="text-sm rounded-lg overflow-x-auto"
               >
                 {String(children).replace(/\n$/, "")}
               </SyntaxHighlighter>
             ) : (
-              <code className="bg-gray-200 px-1 py-0.5 rounded text-sm">
+              <code className="px-2 py-1 rounded text-sm font-mono">
                 {children}
               </code>
             );
@@ -71,7 +74,7 @@ export default async function CoursePage({
               <img
                 src={src ?? ""}
                 alt={alt ?? ""}
-                className="rounded-lg shadow-md mx-auto my-4"
+                className="rounded-lg shadow-md mx-auto my-1"
               />
             );
           },
@@ -79,7 +82,7 @@ export default async function CoursePage({
             return (
               <a
                 href={href}
-                target="_blank"
+                target="_self"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:underline"
               >

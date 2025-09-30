@@ -45,9 +45,6 @@ export default function CourseList({ courses }) {
               </h2>
 
               <div className="mb-2">
-                <span className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                  Description:
-                </span>
                 <p className="text-sm text-gray-700 dark:text-gray-300 mt-1 line-clamp-2">
                   {course.description || "Click to learn more."}
                 </p>
@@ -55,9 +52,6 @@ export default function CourseList({ courses }) {
 
               {course.field && (
                 <div>
-                  <span className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    Field:
-                  </span>
                   <p className="inline-block mt-1 text-xs font-medium text-primary bg-primary/10 dark:bg-primary/20 px-2 py-1 rounded">
                     {course.field}
                   </p>

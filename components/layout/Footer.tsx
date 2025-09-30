@@ -9,10 +9,10 @@ const footerLinks = {
     // { name: 'API Explorer', href: '/tools/api-explorer', icon: Calculator },
   ],
   subjects: [
-    { name: 'Computer Science', href: '/courses/computer-science' },
-    { name: 'Engineering', href: '/courses/engineering' },
-    { name: 'Mathematics', href: '/courses/mathematics' },
-    { name: 'Physics', href: '/courses/physics' },
+    { name: 'Computer Science', href: '/courses/' },
+    { name: 'Engineering', href: '/courses/' },
+    { name: 'Mathematics', href: '/courses/' },
+    { name: 'Physics', href: '/courses/' },
   ],
   resources: [
     { name: 'Documentation', href: '/' },
@@ -152,18 +152,18 @@ export default function Footer() {
         <div className="container-custom py-6">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-400">
-              <p>&copy; {currentYear} NUniversity. All rights reserved.</p>
-              {/* <div className="flex space-x-4">
-                <Link href="/privacy" className="hover:text-white transition-colors">
+              <p>&copy; {currentYear} NUniversity: Empowering Minds, Shaping Futures.. All rights reserved.</p>
+              <div className="flex space-x-4">
+                <Link href="/" className="hover:text-white transition-colors">
                   Privacy
                 </Link>
-                <Link href="/terms" className="hover:text-white transition-colors">
+                <Link href="/" className="hover:text-white transition-colors">
                   Terms
                 </Link>
-                <Link href="/cookies" className="hover:text-white transition-colors">
+                <Link href="/" className="hover:text-white transition-colors">
                   Cookies
                 </Link>
-              </div> */}
+              </div>
             </div>
             
             <div className="flex items-center space-x-2 text-sm text-gray-400">
