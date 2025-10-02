@@ -1,8 +1,8 @@
-# Module 2: Python for Data Engineering
-
-## Course Overview
-
-This module provides a comprehensive foundation in Python for data engineering, covering essential libraries, best practices, and hands-on implementations. You'll learn to build robust, performant data pipelines using modern tools like Polars and PyArrow.
+---
+Title: Python for Data Engineering
+Description: A comprehensive foundation in Python for data engineering, covering essential libraries, best practices, and hands-on implementations. You'll learn to build robust, performant data pipelines using modern tools like Polars and PyArrow.
+Field: Computer-Sciences
+---
 
 **Prerequisites:**
 - Basic Python knowledge
