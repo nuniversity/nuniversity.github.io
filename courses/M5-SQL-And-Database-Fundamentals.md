@@ -1,18 +1,14 @@
 ---
-Title: SQL and Database Fundamentals
-Description: Advanced SQL concepts, database design principles, and practical implementation using SQLite and PostgreSQL. You'll master query optimization techniques and build real-world data engineering solutions through hands-on projects.
-Field: Computer Sciences
+# Title: SQL and Database Fundamentals
+#### Description: Advanced SQL concepts, database design principles, and practical implementation using SQLite and PostgreSQL. You'll master query optimization techniques and build real-world data engineering solutions through hands-on projects.
+#### Field: Computer Sciences
 ---
-
-# SQL and Database Fundamentals
 
 Advanced SQL concepts, database design principles, and practical implementation using SQLite and PostgreSQL. You'll master query optimization techniques and build real-world data engineering solutions through hands-on projects.
 
----
-
 ## Advanced SQL Concepts
 
-### 1 Complex Joins
+### Complex Joins
 
 Joins are fundamental operations that combine rows from two or more tables based on related columns. Understanding when and how to use different join types is crucial for effective data analysis.
 
@@ -158,7 +154,7 @@ INNER JOIN products p2
     AND p1.product_id < p2.product_id;
 ```
 
-### 3.1.2 Subqueries and CTEs
+### Subqueries and CTEs
 
 #### Subqueries
 
@@ -327,7 +323,7 @@ SELECT * FROM employee_hierarchy
 ORDER BY level, employee_name;
 ```
 
-### 3.1.3 Window Functions
+### Window Functions
 
 Window functions perform calculations across a set of rows related to the current row, without collapsing rows like aggregate functions do.
 
@@ -502,7 +498,7 @@ FROM (
 ORDER BY order_date;
 ```
 
-### 3.1.4 Aggregate Functions and GROUP BY with HAVING
+### Aggregate Functions and GROUP BY with HAVING
 
 #### Common Aggregate Functions
 
@@ -628,7 +624,7 @@ GROUP BY CUBE (region, product_category, year)
 ORDER BY region, product_category, year;
 ```
 
-### 3.1.5 Set Operations
+### Set Operations
 
 Set operations combine results from multiple queries.
 
@@ -701,9 +697,9 @@ JOIN orders o ON c.customer_id = o.customer_id;
 
 ---
 
-## 3.2 Database Design
+## Database Design
 
-### 3.2.1 Normalization
+### Normalization
 
 Normalization is the process of organizing data to reduce redundancy and improve data integrity. It involves decomposing tables into smaller, well-structured tables.
 
@@ -845,7 +841,7 @@ CS101     | P1
 CS102     | P2
 ```
 
-### 3.2.2 Denormalization for Analytical Workloads
+### Denormalization for Analytical Workloads
 
 While normalization optimizes for transactional systems (OLTP), analytical workloads (OLAP) benefit from denormalization to reduce joins and improve query performance.
 
@@ -1001,7 +997,7 @@ GROUP BY d.year, d.month_name, d.month, p.category, c.region
 ORDER BY d.year, d.month, p.category;
 ```
 
-### 3.2.4 Snowflake Schema
+### Snowflake Schema
 
 The snowflake schema is a normalized version of the star schema where dimension tables are normalized into multiple related tables.
 
@@ -1160,7 +1156,7 @@ CREATE TABLE fact_inventory (..., date_key INT REFERENCES dim_date(date_key));
 CREATE TABLE fact_shipments (..., date_key INT REFERENCES dim_date(date_key));
 ```
 
-### 3.2.6 Slowly Changing Dimensions (SCD)
+### Slowly Changing Dimensions (SCD)
 
 SCDs handle changes to dimension attributes over time.
 
@@ -1314,9 +1310,9 @@ CREATE TABLE dim_customer_hybrid (
 
 ---
 
-## 3.3 SQLite
+## SQLite
 
-### 3.3.1 When to Use SQLite
+### When to Use SQLite
 
 SQLite is a lightweight, serverless, self-contained database engine ideal for specific use cases.
 
@@ -1411,7 +1407,7 @@ SELECT * FROM employees;
 sqlite3 newdb.db < backup.sql
 ```
 
-### 3.3.3 Transactions and ACID Properties
+### Transactions and ACID Properties
 
 SQLite is fully ACID compliant (Atomicity, Consistency, Isolation, Durability).
 
@@ -1469,7 +1465,7 @@ PRAGMA journal_mode = WAL;
 PRAGMA journal_mode;
 ```
 
-### 3.3.4 Indexes and Query Optimization
+### Indexes and Query Optimization
 
 **Creating indexes:**
 ```
@@ -1535,7 +1531,7 @@ PRAGMA integrity_check;
 PRAGMA optimize;
 ```
 
-### 3.3.5 Full-Text Search Capabilities
+### Full-Text Search Capabilities
 
 SQLite provides FTS (Full-Text Search) through virtual tables.
 
@@ -1591,7 +1587,7 @@ ORDER BY rank
 LIMIT 10;
 ```
 
-### 3.3.6 Common Use Cases in Data Engineering
+### Common Use Cases in Data Engineering
 
 **1. Local ETL processing:**
 ```
@@ -1695,9 +1691,9 @@ def get_cached_data(cache_hours=24):
 
 ---
 
-## 3.4 PostgreSQL
+## PostgreSQL
 
-### 3.4.1 Installation and Configuration
+### Installation and Configuration
 
 **Installation on Ubuntu/Debian:**
 ```
@@ -1768,7 +1764,7 @@ host    all            all             ::1/128                 md5
 SELECT pg_reload_conf();
 ```
 
-### 3.4.2 User Management and Permissions
+### User Management and Permissions
 
 **Creating users and roles:**
 ```
@@ -1871,7 +1867,7 @@ FROM information_schema.role_table_grants
 WHERE table_name = 'orders';
 ```
 
-### 3.4.3 Data Types and Constraints
+### Data Types and Constraints
 
 **Numeric types:**
 ```
@@ -2007,7 +2003,7 @@ CREATE TABLE orders (
 );
 ```
 
-### 3.4.4 Indexes (B-tree, Hash, GiST, GIN)
+### Indexes (B-tree, Hash, GiST, GIN)
 
 **B-tree indexes (default):**
 Best for equality and range queries.
@@ -2124,7 +2120,7 @@ REINDEX TABLE orders;
 DROP INDEX idx_orders_customer;
 ```
 
-### 3.4.5 Partitioning Strategies
+### Partitioning Strategies
 
 Partitioning divides large tables into smaller, more manageable pieces.
 
@@ -2263,7 +2259,7 @@ WHERE order_date BETWEEN '2024-01-15' AND '2024-02-15';
 SET enable_partition_pruning = on;
 ```
 
-### 3.4.6 Performance Tuning and EXPLAIN Plans
+### Performance Tuning and EXPLAIN Plans
 
 **Understanding EXPLAIN:**
 ```
@@ -2428,7 +2424,7 @@ SELECT pg_cancel_backend(pid);  -- Graceful
 SELECT pg_terminate_backend(pid);  -- Forceful
 ```
 
-### 3.4.7 JSON and JSONB Support
+### JSON and JSONB Support
 
 **JSONB vs JSON:**
 - **JSON:** Stores text representation, preserves formatting and key order
@@ -2569,7 +2565,7 @@ SELECT * FROM products
 WHERE attributes->>'brand' = 'Dell';  -- Uses B-tree index
 ```
 
-### 3.4.8 Extensions
+### Extensions
 
 **pg_stat_statements:**
 Tracks execution statistics for all SQL statements.
@@ -2714,9 +2710,9 @@ SELECT * FROM pg_extension;
 
 ---
 
-## 3.5 Query Optimization
+## Query Optimization
 
-### 3.5.1 Understanding Query Execution Plans
+### Understanding Query Execution Plans
 
 **Components of an execution plan:**
 
@@ -2862,7 +2858,7 @@ FROM pg_stat_user_indexes
 ORDER BY pg_relation_size(indexrelid) DESC;
 ```
 
-### 3.5.3 Statistics and Query Planner
+### Statistics and Query Planner
 
 **How statistics work:**
 PostgreSQL collects statistics about data distribution to estimate query costs.
@@ -2940,7 +2936,7 @@ SET enable_mergejoin = off;
 RESET enable_seqscan;
 ```
 
-### 3.5.4 Avoiding Common Anti-Patterns
+### Avoiding Common Anti-Patterns
 
 **Anti-pattern 1: SELECT ***
 ```
@@ -3053,7 +3049,7 @@ SELECT * FROM orders WHERE order_id = 12345;
 \d orders
 ```
 
-### 3.5.5 Materialized Views
+### Materialized Views
 
 Materialized views store query results physically, trading storage for query performance.
 
@@ -3191,3 +3187,99 @@ BEGIN
 END;
 $ LANGUAGE plpgsql;
 ```
+
+---
+
+# Study Review
+
+## Core Concepts Overview
+
+This comprehensive material covers the spectrum from advanced SQL techniques to practical database implementation. Here's what you need to know:
+
+### Advanced SQL Operations
+
+**Joins & Data Combination**
+- Master all join types (INNER, LEFT, RIGHT, FULL OUTER, CROSS, SELF) and understand when each is appropriate
+- Know how to simulate FULL OUTER JOIN in SQLite using UNION
+- Recognize that join order and type significantly impact query performance
+
+**Subqueries vs CTEs**
+- Subqueries work inline but can be hard to read when nested
+- CTEs improve readability and enable recursive queries (date series, hierarchical data)
+- Window functions (ROW_NUMBER, RANK, LAG, LEAD) allow calculations without collapsing rows
+
+**Aggregation Techniques**
+- Standard aggregates: COUNT, SUM, AVG, MIN, MAX
+- Advanced grouping: GROUPING SETS, ROLLUP, CUBE for multi-dimensional analysis
+- HAVING filters aggregated results; WHERE filters pre-aggregation
+
+### Database Design Principles
+
+**Normalization (1NF → BCNF)**
+- Progressively eliminates redundancy and anomalies
+- 1NF: Atomic values only
+- 2NF: No partial dependencies
+- 3NF: No transitive dependencies
+- BCNF: Every determinant is a candidate key
+
+**Dimensional Modeling**
+- Star schema: Simple, denormalized dimensions around central fact table (best for most use cases)
+- Snowflake schema: Normalized dimensions (reduces storage, increases join complexity)
+- Fact tables store metrics; dimension tables provide context
+- Slowly Changing Dimensions (SCD) track historical changes: Type 1 (overwrite), Type 2 (new row), Type 3 (new column)
+
+### SQLite - Lightweight & Embedded
+
+**When to Use**
+- Embedded applications, prototyping, local storage, IoT devices
+- Not for: high concurrency writes, distributed systems, network access requirements
+
+**Key Features**
+- Fully ACID compliant with transaction support
+- WAL mode improves concurrency
+- FTS5 for full-text search capabilities
+- Excellent for ETL pipelines and data analysis workflows
+
+### PostgreSQL - Enterprise Database
+
+**Performance Features**
+- Multiple index types: B-tree (default), Hash, GiST (geometric), GIN (JSON/arrays), BRIN (time-series)
+- Table partitioning: Range, List, Hash strategies for managing large datasets
+- EXPLAIN ANALYZE reveals query execution plans and performance bottlenecks
+
+**Advanced Capabilities**
+- JSONB for high-performance JSON storage with indexing support
+- Rich extension ecosystem: pg_stat_statements (query monitoring), TimescaleDB (time-series), PostGIS (geospatial)
+- Row-level security and granular permission management
+- Materialized views for pre-computed results
+
+### Query Optimization Essentials
+
+**Index Strategy**
+- Index WHERE, JOIN, ORDER BY, and GROUP BY columns
+- Multi-column indexes: most selective column first
+- Monitor usage with pg_stat_user_indexes
+- Remove unused indexes to reduce maintenance overhead
+
+**Anti-Patterns to Avoid**
+- SELECT * (retrieves unnecessary data)
+- N+1 queries (use JOINs or aggregation instead)
+- Functions on indexed columns (prevents index usage)
+- NOT IN with NULLs (use NOT EXISTS)
+- Large OFFSETs (use keyset pagination)
+
+**Understanding EXPLAIN**
+- Sequential scans indicate missing or unused indexes
+- Compare estimated vs actual rows to diagnose statistics issues
+- Nested loops with large tables suggest index problems
+- Run ANALYZE regularly to update statistics
+
+## Study Tips
+
+1. **Practice incrementally**: Start with basic joins, then progress to CTEs and window functions
+2. **Use EXPLAIN liberally**: Always check execution plans for queries on real data
+3. **Understand your workload**: OLTP needs normalization; OLAP benefits from denormalization
+4. **Index judiciously**: More isn't always better; monitor and remove unused indexes
+5. **Know your database**: SQLite and PostgreSQL have different strengths and limitations
+
+This material provides both theoretical foundations and practical implementation patterns. Focus on understanding *why* certain approaches work, not just *how* to implement them.
