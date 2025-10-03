@@ -1,4 +1,4 @@
-----
+---
 Title: SQL and Database Fundamentals
 Description: Advanced SQL concepts, database design principles, and practical implementation using SQLite and PostgreSQL. You'll master query optimization techniques and build real-world data engineering solutions through hands-on projects.
 Field: Computer Sciences
