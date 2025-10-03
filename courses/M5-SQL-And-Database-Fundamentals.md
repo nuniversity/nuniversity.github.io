@@ -1,21 +1,18 @@
 ----
 Title: SQL and Database Fundamentals
-Description: 
+Description: Advanced SQL concepts, database design principles, and practical implementation using SQLite and PostgreSQL. You'll master query optimization techniques and build real-world data engineering solutions through hands-on projects.
 Field: Computer Sciences
 ---
 
-# Module 3: SQL and Database Fundamentals
+# SQL and Database Fundamentals
 
-This comprehensive module covers advanced SQL concepts, database design principles, and practical implementation using SQLite and PostgreSQL. You'll master query optimization techniques and build real-world data engineering solutions through hands-on projects.
-
-**Prerequisites:** Basic SQL knowledge (SELECT, INSERT, UPDATE, DELETE), understanding of relational database concepts, and familiarity with command-line interfaces.
-**Duration:** 6-8 weeks (40-50 hours of study and practice)
+Advanced SQL concepts, database design principles, and practical implementation using SQLite and PostgreSQL. You'll master query optimization techniques and build real-world data engineering solutions through hands-on projects.
 
 ---
 
-## 3.1 Advanced SQL Concepts
+## Advanced SQL Concepts
 
-### 3.1.1 Complex Joins
+### 1 Complex Joins
 
 Joins are fundamental operations that combine rows from two or more tables based on related columns. Understanding when and how to use different join types is crucial for effective data analysis.
 
@@ -23,7 +20,7 @@ Joins are fundamental operations that combine rows from two or more tables based
 
 An INNER JOIN returns only the rows where there is a match in both tables.
 
-```sql
+```
 -- Basic INNER JOIN
 SELECT 
     customers.customer_name,
@@ -51,7 +48,7 @@ INNER JOIN products p ON oi.product_id = p.product_id;
 
 A LEFT JOIN returns all rows from the left table and matched rows from the right table. If no match exists, NULL values are returned for right table columns.
 
-```sql
+```
 -- Find all customers and their orders (including customers without orders)
 SELECT 
     c.customer_name,
@@ -77,7 +74,7 @@ WHERE o.order_id IS NULL;
 
 A RIGHT JOIN returns all rows from the right table and matched rows from the left table. Less commonly used than LEFT JOIN, as you can rewrite it as a LEFT JOIN by switching table positions.
 
-```sql
+```
 -- All orders with customer information (if available)
 SELECT 
     o.order_id,
@@ -91,7 +88,7 @@ RIGHT JOIN orders o ON c.customer_id = o.customer_id;
 
 A FULL OUTER JOIN returns all rows when there is a match in either table. Rows without matches show NULL values for the non-matching table's columns.
 
-```sql
+```
 -- Find all customers and orders, including unmatched records from both tables
 SELECT 
     COALESCE(c.customer_id, o.customer_id) as customer_id,
@@ -104,7 +101,7 @@ FULL OUTER JOIN orders o ON c.customer_id = o.customer_id;
 
 **Note:** SQLite does not support FULL OUTER JOIN natively. You can simulate it using UNION:
 
-```sql
+```
 SELECT c.customer_id, c.customer_name, o.order_id
 FROM customers c
 LEFT JOIN orders o ON c.customer_id = o.customer_id
@@ -118,7 +115,7 @@ LEFT JOIN customers c ON o.customer_id = c.customer_id;
 
 A CROSS JOIN produces a Cartesian product of two tables, combining each row from the first table with every row from the second table.
 
-```sql
+```
 -- Generate all possible combinations of products and warehouses
 SELECT 
     p.product_name,
@@ -142,7 +139,7 @@ WHERE d.date BETWEEN '2024-01-01' AND '2024-12-31';
 
 A self join is when a table is joined with itself, useful for hierarchical data or comparing rows within the same table.
 
-```sql
+```
 -- Employee hierarchy: Find employees and their managers
 SELECT 
     e.employee_name AS employee,
@@ -169,7 +166,7 @@ Subqueries are queries nested within another query. They can appear in SELECT, F
 
 **Scalar Subqueries** (return a single value):
 
-```sql
+```
 -- Find customers who spent more than the average
 SELECT 
     customer_name,
@@ -190,7 +187,7 @@ WHERE total_spent > (
 
 **Correlated Subqueries** (reference columns from outer query):
 
-```sql
+```
 -- Find products priced higher than their category average
 SELECT 
     product_name,
@@ -206,7 +203,7 @@ WHERE price > (
 
 **EXISTS Subqueries** (check for existence):
 
-```sql
+```
 -- Find customers who have placed orders in the last 30 days
 SELECT customer_name
 FROM customers c
@@ -220,7 +217,7 @@ WHERE EXISTS (
 
 **IN Subqueries**:
 
-```sql
+```
 -- Find products that have never been ordered
 SELECT product_name
 FROM products
@@ -236,7 +233,7 @@ CTEs provide a way to write more readable and maintainable queries by defining t
 
 **Basic CTE:**
 
-```sql
+```
 WITH monthly_sales AS (
     SELECT 
         DATE_TRUNC('month', order_date) as month,
@@ -255,7 +252,7 @@ ORDER BY month;
 
 **Multiple CTEs:**
 
-```sql
+```
 WITH 
 customer_orders AS (
     SELECT 
@@ -291,7 +288,7 @@ ORDER BY co.total_spent DESC;
 
 Recursive CTEs allow you to work with hierarchical or graph-like data structures.
 
-```sql
+```
 -- Generate a date series
 WITH RECURSIVE date_series AS (
     SELECT DATE('2024-01-01') as date
@@ -338,7 +335,7 @@ Window functions perform calculations across a set of rows related to the curren
 
 Assigns a unique sequential integer to rows within a partition.
 
-```sql
+```
 -- Assign row numbers to orders for each customer
 SELECT 
     customer_id,
@@ -372,7 +369,7 @@ WHERE rn = 1;
 
 RANK() assigns ranks with gaps for ties, while DENSE_RANK() assigns ranks without gaps.
 
-```sql
+```
 -- Rank products by sales within each category
 SELECT 
     category,
@@ -402,7 +399,7 @@ ORDER BY category, total_sales DESC;
 
 LAG() accesses data from a previous row, while LEAD() accesses data from a subsequent row.
 
-```sql
+```
 -- Calculate sales growth month over month
 SELECT 
     month,
@@ -442,7 +439,7 @@ FROM orders;
 
 **NTILE()**: Divides rows into a specified number of groups.
 
-```sql
+```
 -- Divide customers into quartiles by total spending
 SELECT 
     customer_id,
@@ -462,7 +459,7 @@ FROM (
 
 **FIRST_VALUE() and LAST_VALUE()**:
 
-```sql
+```
 -- Compare each sale to the first and last sale of the day
 SELECT 
     order_date,
@@ -482,7 +479,7 @@ FROM orders;
 
 **Running totals and moving averages:**
 
-```sql
+```
 -- Calculate running total and 7-day moving average
 SELECT 
     order_date,
@@ -509,7 +506,7 @@ ORDER BY order_date;
 
 #### Common Aggregate Functions
 
-```sql
+```
 -- Basic aggregation
 SELECT 
     category,
@@ -526,7 +523,7 @@ GROUP BY category;
 
 #### GROUP BY with Multiple Columns
 
-```sql
+```
 -- Sales summary by year, quarter, and category
 SELECT 
     EXTRACT(YEAR FROM order_date) as year,
@@ -549,7 +546,7 @@ ORDER BY year, quarter, category;
 
 HAVING filters grouped results, similar to WHERE but applied after aggregation.
 
-```sql
+```
 -- Find categories with average price above $50 and more than 10 products
 SELECT 
     category,
@@ -584,7 +581,7 @@ These extensions provide multiple levels of aggregation in a single query.
 
 **GROUPING SETS:**
 
-```sql
+```
 -- Sales by different grouping combinations
 SELECT 
     EXTRACT(YEAR FROM order_date) as year,
@@ -605,7 +602,7 @@ ORDER BY year, category;
 
 **ROLLUP:**
 
-```sql
+```
 -- Hierarchical aggregation: category -> subcategory -> product
 SELECT 
     category,
@@ -619,7 +616,7 @@ ORDER BY category, subcategory, product_name;
 
 **CUBE:**
 
-```sql
+```
 -- All possible combinations of dimensions
 SELECT 
     region,
@@ -639,7 +636,7 @@ Set operations combine results from multiple queries.
 
 UNION removes duplicates, while UNION ALL keeps all rows.
 
-```sql
+```
 -- Combine current and archived orders
 SELECT order_id, customer_id, order_date, 'current' as source
 FROM orders_current
@@ -660,7 +657,7 @@ SELECT email FROM event_registrations;
 
 Returns only rows that appear in both result sets.
 
-```sql
+```
 -- Find customers who are also employees
 SELECT customer_id, email
 FROM customers
@@ -684,7 +681,7 @@ WHERE EXTRACT(QUARTER FROM o.order_date) = 2;
 
 Returns rows from the first query that don't appear in the second.
 
-```sql
+```
 -- Find products never ordered
 SELECT product_id, product_name
 FROM products
@@ -861,7 +858,7 @@ While normalization optimizes for transactional systems (OLTP), analytical workl
 **Denormalization techniques:**
 
 1. **Adding redundant columns:**
-```sql
+```
 -- Instead of joining to get customer name on every query
 CREATE TABLE orders_denormalized (
     order_id INT PRIMARY KEY,
@@ -874,7 +871,7 @@ CREATE TABLE orders_denormalized (
 ```
 
 2. **Precomputed aggregations:**
-```sql
+```
 -- Materialized summary table
 CREATE TABLE daily_sales_summary (
     sale_date DATE PRIMARY KEY,
@@ -887,7 +884,7 @@ CREATE TABLE daily_sales_summary (
 ```
 
 3. **Flattened hierarchies:**
-```sql
+```
 -- Instead of multiple joins through category hierarchy
 CREATE TABLE products_flat (
     product_id INT PRIMARY KEY,
@@ -910,7 +907,7 @@ The star schema is the simplest data warehouse schema, with a central fact table
 
 **Example: Retail Sales Star Schema**
 
-```sql
+```
 -- Fact table: Sales transactions
 CREATE TABLE fact_sales (
     sale_id BIGSERIAL PRIMARY KEY,
@@ -985,7 +982,7 @@ CREATE TABLE dim_store (
 - Fewer joins required
 
 **Query example:**
-```sql
+```
 -- Monthly sales by category and region
 SELECT 
     d.year,
@@ -1010,7 +1007,7 @@ The snowflake schema is a normalized version of the star schema where dimension 
 
 **Example: Normalized Product Dimension**
 
-```sql
+```
 -- Snowflake schema: Product dimension normalized
 CREATE TABLE dim_product (
     product_key SERIAL PRIMARY KEY,
@@ -1062,7 +1059,7 @@ CREATE TABLE dim_brand (
 **1. Transaction Fact Table**
 Records individual events at the most granular level.
 
-```sql
+```
 CREATE TABLE fact_orders (
     order_key BIGSERIAL PRIMARY KEY,
     order_id VARCHAR(50),
@@ -1078,7 +1075,7 @@ CREATE TABLE fact_orders (
 **2. Periodic Snapshot Fact Table**
 Captures the state at regular intervals (daily, weekly, monthly).
 
-```sql
+```
 CREATE TABLE fact_inventory_snapshot (
     snapshot_key BIGSERIAL PRIMARY KEY,
     date_key INT,
@@ -1095,7 +1092,7 @@ CREATE TABLE fact_inventory_snapshot (
 **3. Accumulating Snapshot Fact Table**
 Tracks the lifecycle of a process with multiple milestones.
 
-```sql
+```
 CREATE TABLE fact_order_fulfillment (
     order_key INT PRIMARY KEY,
     order_date_key INT,
@@ -1114,7 +1111,7 @@ CREATE TABLE fact_order_fulfillment (
 **4. Factless Fact Table**
 Records events without measures, tracking occurrences or relationships.
 
-```sql
+```
 CREATE TABLE fact_student_attendance (
     attendance_key BIGSERIAL PRIMARY KEY,
     date_key INT,
@@ -1130,7 +1127,7 @@ CREATE TABLE fact_student_attendance (
 **Surrogate Keys:**
 Use auto-incrementing integers instead of natural keys.
 
-```sql
+```
 CREATE TABLE dim_customer (
     customer_key SERIAL PRIMARY KEY,  -- Surrogate key
     customer_id VARCHAR(50) UNIQUE,   -- Natural key
@@ -1144,7 +1141,7 @@ CREATE TABLE dim_customer (
 
 **Handling Unknown/Missing Dimensions:**
 
-```sql
+```
 -- Insert default "Unknown" records
 INSERT INTO dim_customer (customer_key, customer_id, customer_name, is_current)
 VALUES (0, 'UNKNOWN', 'Unknown Customer', TRUE);
@@ -1156,7 +1153,7 @@ VALUES (0, 'UNKNOWN', 'Unknown Product');
 **Conformed Dimensions:**
 Dimensions shared across multiple fact tables ensure consistency.
 
-```sql
+```
 -- Same dim_date used by multiple fact tables
 CREATE TABLE fact_sales (..., date_key INT REFERENCES dim_date(date_key));
 CREATE TABLE fact_inventory (..., date_key INT REFERENCES dim_date(date_key));
@@ -1171,7 +1168,7 @@ SCDs handle changes to dimension attributes over time.
 
 Simply update the record, losing historical data.
 
-```sql
+```
 -- Customer changes address
 UPDATE dim_customer
 SET 
@@ -1190,7 +1187,7 @@ WHERE customer_id = 'C12345';
 
 Create a new record with updated values, keeping historical records.
 
-```sql
+```
 CREATE TABLE dim_customer_scd2 (
     customer_key SERIAL PRIMARY KEY,
     customer_id VARCHAR(50),
@@ -1227,7 +1224,7 @@ VALUES
 
 **Querying SCD Type 2:**
 
-```sql
+```
 -- Get current customer information
 SELECT *
 FROM dim_customer_scd2
@@ -1262,7 +1259,7 @@ GROUP BY d.date, c.customer_name, c.segment;
 
 Add columns to track previous values (limited history).
 
-```sql
+```
 CREATE TABLE dim_product_scd3 (
     product_key SERIAL PRIMARY KEY,
     product_id VARCHAR(50) UNIQUE,
@@ -1293,7 +1290,7 @@ WHERE product_id = 'P12345';
 
 Combine approaches for different attributes.
 
-```sql
+```
 CREATE TABLE dim_customer_hybrid (
     customer_key SERIAL PRIMARY KEY,
     customer_id VARCHAR(50),
@@ -1345,12 +1342,12 @@ SQLite is a lightweight, serverless, self-contained database engine ideal for sp
 
 **Installation:**
 SQLite comes pre-installed on most systems. Check with:
-```bash
+```
 sqlite3 --version
 ```
 
 **Creating a database:**
-```bash
+```
 # Create/open a database file
 sqlite3 mydata.db
 
@@ -1359,7 +1356,7 @@ sqlite3 :memory:
 ```
 
 **Basic commands:**
-```sql
+```
 -- In SQLite shell
 .help                    -- Show all commands
 .databases              -- List databases
@@ -1393,7 +1390,7 @@ SELECT * FROM employees WHERE department = 'Engineering';
 ```
 
 **Importing/Exporting data:**
-```bash
+```
 # Import CSV
 .mode csv
 .import data.csv employees
@@ -1419,7 +1416,7 @@ sqlite3 newdb.db < backup.sql
 SQLite is fully ACID compliant (Atomicity, Consistency, Isolation, Durability).
 
 **Transaction basics:**
-```sql
+```
 -- Explicit transaction
 BEGIN TRANSACTION;
 
@@ -1450,7 +1447,7 @@ ROLLBACK;
 4. **Durability:** Committed data persists even after crashes
 
 **Transaction modes:**
-```sql
+```
 -- Deferred (default): Locks acquired when first read/write
 BEGIN DEFERRED TRANSACTION;
 
@@ -1464,7 +1461,7 @@ BEGIN EXCLUSIVE TRANSACTION;
 **WAL mode (Write-Ahead Logging):**
 Improves concurrency by allowing reads while writing.
 
-```sql
+```
 -- Enable WAL mode
 PRAGMA journal_mode = WAL;
 
@@ -1475,7 +1472,7 @@ PRAGMA journal_mode;
 ### 3.3.4 Indexes and Query Optimization
 
 **Creating indexes:**
-```sql
+```
 -- Single column index
 CREATE INDEX idx_employees_email ON employees(email);
 
@@ -1496,7 +1493,7 @@ ON employees(LOWER(email));
 ```
 
 **Viewing indexes:**
-```sql
+```
 -- List all indexes
 .indexes
 
@@ -1509,7 +1506,7 @@ WHERE type = 'index' AND tbl_name = 'employees';
 ```
 
 **Query optimization with EXPLAIN QUERY PLAN:**
-```sql
+```
 -- Analyze query execution
 EXPLAIN QUERY PLAN
 SELECT * FROM employees 
@@ -1521,7 +1518,7 @@ WHERE department = 'Engineering'
 ```
 
 **Optimization tips:**
-```sql
+```
 -- Use ANALYZE to update statistics
 ANALYZE;
 
@@ -1543,7 +1540,7 @@ PRAGMA optimize;
 SQLite provides FTS (Full-Text Search) through virtual tables.
 
 **Creating FTS table:**
-```sql
+```
 -- FTS5 (recommended)
 CREATE VIRTUAL TABLE documents_fts USING fts5(
     title,
@@ -1584,7 +1581,7 @@ ORDER BY rank;
 ```
 
 **Highlighting matches:**
-```sql
+```
 SELECT 
     title,
     snippet(documents_fts, 1, '<b>', '</b>', '...', 30) as snippet
@@ -1597,7 +1594,7 @@ LIMIT 10;
 ### 3.3.6 Common Use Cases in Data Engineering
 
 **1. Local ETL processing:**
-```python
+```
 import sqlite3
 import pandas as pd
 
@@ -1626,7 +1623,7 @@ conn.close()
 ```
 
 **2. Data pipeline intermediate storage:**
-```python
+```
 # Stage 1: Extract and stage
 conn = sqlite3.connect('pipeline.db')
 cursor = conn.cursor()
@@ -1659,7 +1656,7 @@ conn.close()
 ```
 
 **3. Caching query results:**
-```python
+```
 import sqlite3
 import time
 from datetime import datetime, timedelta
@@ -1703,7 +1700,7 @@ def get_cached_data(cache_hours=24):
 ### 3.4.1 Installation and Configuration
 
 **Installation on Ubuntu/Debian:**
-```bash
+```
 # Update package list
 sudo apt update
 
@@ -1719,7 +1716,7 @@ sudo systemctl status postgresql
 ```
 
 **Installation on macOS:**
-```bash
+```
 # Using Homebrew
 brew install postgresql
 
@@ -1731,7 +1728,7 @@ brew services start postgresql
 Download installer from postgresql.org and follow the wizard.
 
 **Initial configuration:**
-```bash
+```
 # Switch to postgres user
 sudo -i -u postgres
 
@@ -1766,7 +1763,7 @@ host    all            all             ::1/128                 md5
 ```
 
 **Reload configuration:**
-```sql
+```
 -- From psql
 SELECT pg_reload_conf();
 ```
@@ -1774,7 +1771,7 @@ SELECT pg_reload_conf();
 ### 3.4.2 User Management and Permissions
 
 **Creating users and roles:**
-```sql
+```
 -- Create a user with password
 CREATE USER data_analyst WITH PASSWORD 'secure_password';
 
@@ -1798,7 +1795,7 @@ DROP USER john_doe;
 ```
 
 **Granting privileges:**
-```sql
+```
 -- Grant database access
 GRANT CONNECT ON DATABASE sales_db TO data_analyst;
 
@@ -1830,7 +1827,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO readwrite;
 ```
 
 **Revoking privileges:**
-```sql
+```
 -- Revoke specific privilege
 REVOKE INSERT ON orders FROM data_analyst;
 
@@ -1842,7 +1839,7 @@ REVOKE readonly FROM john_doe;
 ```
 
 **Row-level security:**
-```sql
+```
 -- Enable RLS on a table
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 
@@ -1861,7 +1858,7 @@ ALTER TABLE orders FORCE ROW LEVEL SECURITY;
 ```
 
 **Viewing permissions:**
-```sql
+```
 -- List users and roles
 \du
 
@@ -1877,7 +1874,7 @@ WHERE table_name = 'orders';
 ### 3.4.3 Data Types and Constraints
 
 **Numeric types:**
-```sql
+```
 CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,        -- Auto-increment integer
     price NUMERIC(10,2),                  -- Exact decimal
@@ -1890,7 +1887,7 @@ CREATE TABLE products (
 ```
 
 **String types:**
-```sql
+```
 CREATE TABLE content (
     id SERIAL PRIMARY KEY,
     title VARCHAR(200),              -- Variable length with limit
@@ -1901,7 +1898,7 @@ CREATE TABLE content (
 ```
 
 **Date and time types:**
-```sql
+```
 CREATE TABLE events (
     event_id SERIAL PRIMARY KEY,
     event_date DATE,                        -- Date only
@@ -1923,7 +1920,7 @@ VALUES (
 ```
 
 **Boolean:**
-```sql
+```
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     is_active BOOLEAN DEFAULT TRUE,
@@ -1932,7 +1929,7 @@ CREATE TABLE users (
 ```
 
 **JSON types:**
-```sql
+```
 CREATE TABLE user_preferences (
     user_id INTEGER PRIMARY KEY,
     preferences JSON,              -- JSON text
@@ -1955,7 +1952,7 @@ FROM user_preferences;
 ```
 
 **Array types:**
-```sql
+```
 CREATE TABLE articles (
     article_id SERIAL PRIMARY KEY,
     title VARCHAR(200),
@@ -1976,7 +1973,7 @@ WHERE tags && ARRAY['sql', 'tutorial'];  -- Overlap operator
 ```
 
 **UUID:**
-```sql
+```
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE sessions (
@@ -1987,7 +1984,7 @@ CREATE TABLE sessions (
 ```
 
 **Constraints:**
-```sql
+```
 CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY,
     customer_id INTEGER NOT NULL,
@@ -2015,7 +2012,7 @@ CREATE TABLE orders (
 **B-tree indexes (default):**
 Best for equality and range queries.
 
-```sql
+```
 -- Single column index
 CREATE INDEX idx_orders_customer ON orders(customer_id);
 
@@ -2039,7 +2036,7 @@ CREATE INDEX idx_orders_date_desc ON orders(order_date DESC);
 **Hash indexes:**
 Good for simple equality comparisons (PostgreSQL 10+).
 
-```sql
+```
 CREATE INDEX idx_products_sku_hash ON products USING HASH (sku);
 
 -- Use for exact matches only
@@ -2049,7 +2046,7 @@ SELECT * FROM products WHERE sku = 'PROD-12345';
 **GiST (Generalized Search Tree):**
 For geometric data, full-text search, and range types.
 
-```sql
+```
 -- For geometric data
 CREATE INDEX idx_locations_point ON locations USING GIST (coordinates);
 
@@ -2070,7 +2067,7 @@ WHERE during && tsrange('2024-10-01', '2024-10-07');
 **GIN (Generalized Inverted Index):**
 For array, JSON, and full-text search.
 
-```sql
+```
 -- For arrays
 CREATE INDEX idx_articles_tags ON articles USING GIN (tags);
 
@@ -2092,7 +2089,7 @@ WHERE to_tsvector('english', content) @@ to_tsquery('english', 'database & desig
 **BRIN (Block Range Index):**
 For very large tables with naturally ordered data.
 
-```sql
+```
 CREATE INDEX idx_logs_timestamp_brin ON logs USING BRIN (timestamp);
 
 -- Excellent for time-series data
@@ -2101,7 +2098,7 @@ WHERE timestamp BETWEEN '2024-01-01' AND '2024-01-31';
 ```
 
 **Index maintenance:**
-```sql
+```
 -- View indexes
 \di
 
@@ -2132,7 +2129,7 @@ DROP INDEX idx_orders_customer;
 Partitioning divides large tables into smaller, more manageable pieces.
 
 **Range partitioning:**
-```sql
+```
 -- Create partitioned table
 CREATE TABLE orders (
     order_id BIGSERIAL,
@@ -2165,7 +2162,7 @@ CREATE INDEX ON orders (customer_id);
 ```
 
 **List partitioning:**
-```sql
+```
 -- Partition by discrete values
 CREATE TABLE sales (
     sale_id BIGSERIAL,
@@ -2184,7 +2181,7 @@ CREATE TABLE sales_other PARTITION OF sales DEFAULT;
 ```
 
 **Hash partitioning:**
-```sql
+```
 -- Distribute data evenly across partitions
 CREATE TABLE user_actions (
     action_id BIGSERIAL,
@@ -2208,7 +2205,7 @@ CREATE TABLE user_actions_p3 PARTITION OF user_actions
 ```
 
 **Sub-partitioning:**
-```sql
+```
 -- Partition by range, then by list
 CREATE TABLE sales_data (
     sale_id BIGSERIAL,
@@ -2229,7 +2226,7 @@ CREATE TABLE sales_2024_south PARTITION OF sales_2024
 ```
 
 **Managing partitions:**
-```sql
+```
 -- Detach partition (useful for archiving)
 ALTER TABLE orders DETACH PARTITION orders_2023;
 
@@ -2257,7 +2254,7 @@ WHERE parent.relname = 'orders';
 **Partition pruning:**
 PostgreSQL automatically excludes irrelevant partitions from queries.
 
-```sql
+```
 -- Only scans orders_2024_q1 partition
 EXPLAIN SELECT * FROM orders 
 WHERE order_date BETWEEN '2024-01-15' AND '2024-02-15';
@@ -2269,7 +2266,7 @@ SET enable_partition_pruning = on;
 ### 3.4.6 Performance Tuning and EXPLAIN Plans
 
 **Understanding EXPLAIN:**
-```sql
+```
 -- Basic EXPLAIN
 EXPLAIN SELECT * FROM orders WHERE customer_id = 101;
 
@@ -2304,7 +2301,7 @@ Key components:
 ```
 
 **Common scan types:**
-```sql
+```
 -- Sequential Scan (full table scan)
 EXPLAIN SELECT * FROM orders;
 -- Use when: No index, small table, retrieving large portion of data
@@ -2324,7 +2321,7 @@ WHERE customer_id IN (1,2,3,4,5) AND status = 'completed';
 ```
 
 **Join strategies:**
-```sql
+```
 -- Nested Loop (good for small tables)
 EXPLAIN SELECT * FROM orders o
 JOIN customers c ON o.customer_id = c.customer_id
@@ -2343,7 +2340,7 @@ ORDER BY o.customer_id;
 **Performance tuning techniques:**
 
 1. **Update statistics:**
-```sql
+```
 -- Analyze specific table
 ANALYZE orders;
 
@@ -2358,7 +2355,7 @@ ALTER TABLE orders ALTER COLUMN customer_id SET STATISTICS 1000;
 ```
 
 2. **Adjust work_mem for sorting/hashing:**
-```sql
+```
 -- View current setting
 SHOW work_mem;
 
@@ -2372,7 +2369,7 @@ RESET work_mem;
 ```
 
 3. **Query hints (using pg_hint_plan extension):**
-```sql
+```
 -- Force index usage
 /*+ IndexScan(orders idx_orders_customer) */
 SELECT * FROM orders WHERE customer_id = 101;
@@ -2383,7 +2380,7 @@ SELECT * FROM customers c JOIN orders o ON c.customer_id = o.customer_id;
 ```
 
 4. **Parallel queries:**
-```sql
+```
 -- Enable parallel query execution
 SET max_parallel_workers_per_gather = 4;
 
@@ -2396,7 +2393,7 @@ EXPLAIN SELECT COUNT(*) FROM large_table;
 ```
 
 **Monitoring query performance:**
-```sql
+```
 -- Enable pg_stat_statements extension
 CREATE EXTENSION pg_stat_statements;
 
@@ -2438,7 +2435,7 @@ SELECT pg_terminate_backend(pid);  -- Forceful
 - **JSONB:** Stores binary format, no whitespace, faster operations, supports indexing
 
 **Basic operations:**
-```sql
+```
 CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
     name VARCHAR(200),
@@ -2465,7 +2462,7 @@ FROM products;
 ```
 
 **JSON operators:**
-```sql
+```
 -- -> returns JSON
 SELECT attributes->'storage' FROM products;
 
@@ -2497,7 +2494,7 @@ WHERE '{"brand": "Dell"}' <@ attributes;
 ```
 
 **JSON functions:**
-```sql
+```
 -- Build JSON
 SELECT jsonb_build_object(
     'name', name,
@@ -2528,7 +2525,7 @@ SELECT jsonb_pretty(attributes) FROM products;
 ```
 
 **Updating JSONB:**
-```sql
+```
 -- Set a value
 UPDATE products
 SET attributes = jsonb_set(
@@ -2554,7 +2551,7 @@ WHERE product_id = 1;
 ```
 
 **Indexing JSONB:**
-```sql
+```
 -- GIN index on entire JSONB column
 CREATE INDEX idx_products_attributes ON products USING GIN (attributes);
 
@@ -2577,7 +2574,7 @@ WHERE attributes->>'brand' = 'Dell';  -- Uses B-tree index
 **pg_stat_statements:**
 Tracks execution statistics for all SQL statements.
 
-```sql
+```
 -- Install extension
 CREATE EXTENSION pg_stat_statements;
 
@@ -2629,7 +2626,7 @@ LIMIT 10;
 **TimescaleDB:**
 Extension for time-series data, providing automatic partitioning and time-based queries.
 
-```sql
+```
 -- Install TimescaleDB
 CREATE EXTENSION timescaledb;
 
@@ -2692,7 +2689,7 @@ SELECT add_compression_policy('sensor_data', INTERVAL '7 days');
 
 **Other useful extensions:**
 
-```sql
+```
 -- PostGIS (geospatial data)
 CREATE EXTENSION postgis;
 
@@ -2736,7 +2733,7 @@ Node Type  (cost=startup..total rows=estimated width=bytes)
 ```
 
 **Example plan analysis:**
-```sql
+```
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 SELECT 
     c.customer_name,
@@ -2778,7 +2775,7 @@ Limit  (cost=3589.45..3589.47 rows=10 width=48)
 ### 3.5.2 Index Selection and Usage
 
 **When to create indexes:**
-```sql
+```
 -- Columns in WHERE clauses
 CREATE INDEX idx_orders_status ON orders(status);
 
@@ -2797,7 +2794,7 @@ INCLUDE (total_amount, status);
 ```
 
 **Index selectivity:**
-```sql
+```
 -- Check column selectivity (closer to 1.0 is better for indexing)
 SELECT 
     COUNT(DISTINCT status)::float / COUNT(*) as selectivity
@@ -2812,7 +2809,7 @@ WHERE status IN ('pending', 'processing');
 ```
 
 **Multi-column index order:**
-```sql
+```
 -- Order matters! Most selective column first
 -- Good for: WHERE customer_id = X AND order_date > Y
 CREATE INDEX idx_orders_cust_date ON orders(customer_id, order_date);
@@ -2826,7 +2823,7 @@ CREATE INDEX idx_orders_date_status ON orders(status, order_date);
 ```
 
 **Monitoring index usage:**
-```sql
+```
 -- Find unused indexes
 SELECT 
     schemaname,
@@ -2870,7 +2867,7 @@ ORDER BY pg_relation_size(indexrelid) DESC;
 **How statistics work:**
 PostgreSQL collects statistics about data distribution to estimate query costs.
 
-```sql
+```
 -- View table statistics
 SELECT 
     schemaname,
@@ -2905,7 +2902,7 @@ ALTER TABLE orders ALTER COLUMN customer_id SET STATISTICS -1;
 ```
 
 **Extended statistics:**
-```sql
+```
 -- Create statistics on correlated columns
 CREATE STATISTICS orders_customer_date_stats (dependencies)
 ON customer_id, order_date FROM orders;
@@ -2921,7 +2918,7 @@ SELECT * FROM pg_statistic_ext WHERE stxname = 'orders_customer_date_stats';
 ```
 
 **Planner configuration:**
-```sql
+```
 -- View planner settings
 SHOW random_page_cost;
 SHOW seq_page_cost;
@@ -2946,7 +2943,7 @@ RESET enable_seqscan;
 ### 3.5.4 Avoiding Common Anti-Patterns
 
 **Anti-pattern 1: SELECT ***
-```sql
+```
 -- Bad: Retrieves unnecessary data
 SELECT * FROM orders WHERE order_id = 12345;
 
@@ -2956,7 +2953,7 @@ FROM orders WHERE order_id = 12345;
 ```
 
 **Anti-pattern 2: N+1 queries**
-```sql
+```
 -- Bad: Multiple queries in application loop
 -- SELECT * FROM customers;
 -- For each customer: SELECT * FROM orders WHERE customer_id = ?
@@ -2986,7 +2983,7 @@ GROUP BY c.customer_id, c.customer_name;
 ```
 
 **Anti-pattern 3: Functions on indexed columns**
-```sql
+```
 -- Bad: Function prevents index usage
 SELECT * FROM customers WHERE LOWER(email) = 'john@example.com';
 
@@ -3000,7 +2997,7 @@ CREATE INDEX idx_customers_email_lower ON customers(email_lower);
 ```
 
 **Anti-pattern 4: NOT IN with nullable columns**
-```sql
+```
 -- Bad: NOT IN with NULL returns unexpected results
 SELECT * FROM products 
 WHERE product_id NOT IN (SELECT product_id FROM discontinued_products);
@@ -3019,7 +3016,7 @@ WHERE dp.product_id IS NULL;
 ```
 
 **Anti-pattern 5: OR conditions on different columns**
-```sql
+```
 -- Bad: OR prevents index usage
 SELECT * FROM orders 
 WHERE customer_id = 123 OR status = 'pending';
@@ -3031,7 +3028,7 @@ SELECT * FROM orders WHERE status = 'pending';
 ```
 
 **Anti-pattern 6: OFFSET for pagination**
-```sql
+```
 -- Bad: OFFSET scans all skipped rows
 SELECT * FROM orders 
 ORDER BY order_date DESC 
@@ -3045,7 +3042,7 @@ LIMIT 20;
 ```
 
 **Anti-pattern 7: Implicit type conversion**
-```sql
+```
 -- Bad: String comparison on integer column
 SELECT * FROM orders WHERE order_id = '12345';
 
@@ -3061,7 +3058,7 @@ SELECT * FROM orders WHERE order_id = 12345;
 Materialized views store query results physically, trading storage for query performance.
 
 **Creating materialized views:**
-```sql
+```
 -- Basic materialized view
 CREATE MATERIALIZED VIEW mv_daily_sales AS
 SELECT 
@@ -3083,7 +3080,7 @@ WHERE sale_date >= CURRENT_DATE - INTERVAL '30 days';
 ```
 
 **Refreshing materialized views:**
-```sql
+```
 -- Full refresh (locks table)
 REFRESH MATERIALIZED VIEW mv_daily_sales;
 
@@ -3102,7 +3099,7 @@ SELECT cron.schedule(
 ```
 
 **Complex example:**
-```sql
+```
 -- Customer lifetime value materialized view
 CREATE MATERIALIZED VIEW mv_customer_lifetime_value AS
 WITH customer_metrics AS (
@@ -3141,7 +3138,7 @@ CREATE INDEX idx_mv_clv_value ON mv_customer_lifetime_value(lifetime_value DESC)
 ```
 
 **Incremental updates (manual pattern):**
-```sql
+```
 -- Track last update time
 CREATE TABLE mv_refresh_log (
     view_name VARCHAR(100) PRIMARY KEY,
