@@ -1,0 +1,154 @@
+{
+  "navigation": {
+    "home": "Home",
+    "courses": "Courses",
+    "tools": "Tools",
+    "games": "Games",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Interactive Learning Platform",
+    "title": "Learn, Code, and",
+    "titleHighlight": "Grow",
+    "subtitle": "Master technology, engineering, and sciences through interactive courses, hands-on coding tools, and educational games designed for modern learners.",
+    "cta": {
+      "explore": "Explore Courses",
+      "tryTools": "Try Tools"
+    },
+    "features": {
+      "coding": "Interactive Coding",
+      "tools": "Study Tools",
+      "courses": "Video Courses"
+    }
+  },
+  "features": {
+    "title": "Everything You Need to",
+    "titleHighlight": "Excel",
+    "subtitle": "Our platform combines the best of interactive learning, practical tools, and community support to create an unparalleled educational experience.",
+    "items": {
+      "courses": {
+        "title": "Interactive Courses",
+        "description": "Comprehensive courses in technology, engineering, and sciences with hands-on projects and real-world applications."
+      },
+      "coding": {
+        "title": "Coding Tools",
+        "description": "Built-in code editors, compilers, and interactive environments to practice programming in multiple languages."
+      },
+      "study": {
+        "title": "Study Tools",
+        "description": "Advanced calculators, formula references, and interactive tools to support your learning journey."
+      },
+      "games": {
+        "title": "Educational Games",
+        "description": "Gamified learning experiences that make complex concepts fun and engaging to master."
+      },
+      "video": {
+        "title": "Video Integration",
+        "description": "Seamless YouTube integration for video lectures and tutorials embedded directly in courses."
+      },
+      "community": {
+        "title": "Community Driven",
+        "description": "Join a community of learners and educators sharing knowledge and collaborating on projects."
+      }
+    },
+    "cta": "Discover all features"
+  },
+  "footer": {
+    "description": "Empowering learners worldwide with interactive courses, coding tools, and educational games. Master technology, engineering, and sciences through hands-on experience.",
+    "sections": {
+      "platform": "Platform",
+      "subjects": "Subjects",
+      "company": "Company"
+    },
+    "links": {
+      "courses": "Courses",
+      "tools": "Tools",
+      "games": "Games",
+      "apiExplorer": "API Explorer",
+      "computerScience": "Computer Science",
+      "engineering": "Engineering",
+      "mathematics": "Mathematics",
+      "physics": "Physics",
+      "documentation": "Documentation",
+      "blog": "Blog",
+      "community": "Community",
+      "support": "Support",
+      "aboutUs": "About Us",
+      "contact": "Contact",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookies"
+    },
+    "newsletter": {
+      "title": "Stay Updated",
+      "description": "Get the latest courses, tools, and learning resources.",
+      "placeholder": "Enter your email",
+      "button": "Subscribe"
+    },
+    "copyright": "NUniversity: Empowering Minds, Shaping Futures.",
+    "rights": "All rights reserved",
+    "madeWith": "Made with",
+    "forLearners": "for learners worldwide"
+  },
+  "metadata": {
+    "home": {
+      "title": "NUniversity - Interactive Learning Platform",
+      "description": "Master technology, engineering, and sciences through interactive courses, coding tools, and educational games. Start your learning journey today."
+    }
+  },
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Explore our courses by area and learn at your own pace",
+    "search_placeholder": "Search courses...",
+    "areas": {
+      "computer_science": "Computer Science",
+      "data_engineering": "Data Engineering",
+      "software_engineering": "Software Engineering",
+      "cloud_computing": "Cloud Computing",
+      "artificial_intelligence": "Artificial Intelligence",
+      "mathematics": "Mathematics and Statistics",
+      "uncategorized": "Sem Categoria"
+    },
+    "no_results": "No courses found.",
+    "explore": "Explore Course",
+    "categories": {
+      "fundamentals": "Fundamentals",
+      "advanced": "Advanced",
+      "tools": "Tools",
+      "projects": "Projects"
+    },
+    "labels": {
+      "level": "Level",
+      "duration": "Duration",
+      "lessons": "Lessons",
+      "updated": "Last Updated"
+    },
+    "messages": {
+      "loading": "Loading courses...",
+      "error": "Failed to load courses. Please try again later.",
+      "empty_search": "Try adjusting your search or explore other areas."
+    },
+    "cta": {
+      "view_all": "View All Courses",
+      "start_learning": "Start Learning",
+      "back_to_areas": "Back to Areas"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "uncategorized": "Uncategorized"
+  }
+}

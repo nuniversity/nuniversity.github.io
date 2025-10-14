@@ -1,9 +1,17 @@
+// components/home/Hero.tsx
 'use client'
 
 import Link from 'next/link'
 import { ArrowRight, Play, Code, BookOpen, Calculator } from 'lucide-react'
+import { type Locale } from '@/lib/i18n/config'
+import { type Dictionary } from '@/lib/i18n/get-dictionary'
 
-export default function Hero() {
+interface HeroProps {
+  lang: Locale
+  dict: Dictionary
+}
+
+export default function Hero({ lang, dict }: HeroProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
@@ -21,40 +29,39 @@ export default function Hero() {
         <div className="max-w-4xl mx-auto">
           {/* Badge */}
           <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-2 mb-8 animate-fade-in">
-            <span className="text-sm font-medium">🚀 Interactive Learning Platform</span>
+            <span className="text-sm font-medium">🚀 {dict.hero.badge}</span>
           </div>
 
           {/* Main Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            Learn, Code, and{' '}
+            {dict.hero.title}{' '}
             <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-              Grow
+              {dict.hero.titleHighlight}
             </span>
           </h1>
 
           {/* Subheading */}
           <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            Master technology, engineering, and sciences through interactive courses, 
-            hands-on coding tools, and educational games designed for modern learners.
+            {dict.hero.subtitle}
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12 animate-fade-in" style={{ animationDelay: '0.6s' }}>
             <Link
-              href="/courses"
+              href={`/${lang}/courses`}
               className="btn-primary flex items-center space-x-2 text-lg px-8 py-4 shadow-xl hover:shadow-2xl"
             >
               <BookOpen className="w-5 h-5" />
-              <span>Explore Courses</span>
+              <span>{dict.hero.cta.explore}</span>
               <ArrowRight className="w-5 h-5" />
             </Link>
             
             {/* <Link
-              href="/tools"
+              href={`/${lang}/tools`}
               className="btn-secondary flex items-center space-x-2 text-lg px-8 py-4 bg-white/20 backdrop-blur-md text-white border-white/30 hover:bg-white/30"
             >
               <Play className="w-5 h-5" />
-              <span>Try Tools</span>
+              <span>{dict.hero.cta.tryTools}</span>
             </Link> */}
           </div>
 
@@ -62,15 +69,15 @@ export default function Hero() {
           <div className="flex flex-wrap items-center justify-center space-x-8 space-y-4 animate-fade-in" style={{ animationDelay: '0.8s' }}>
             <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-2">
               <Code className="w-5 h-5 text-yellow-300" />
-              <span className="text-sm font-medium">Interactive Coding</span>
+              <span className="text-sm font-medium">{dict.hero.features.coding}</span>
             </div>
             <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-2">
               <Calculator className="w-5 h-5 text-green-300" />
-              <span className="text-sm font-medium">Study Tools</span>
+              <span className="text-sm font-medium">{dict.hero.features.tools}</span>
             </div>
             <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-2">
               <BookOpen className="w-5 h-5 text-blue-300" />
-              <span className="text-sm font-medium">Video Courses</span>
+              <span className="text-sm font-medium">{dict.hero.features.courses}</span>
             </div>
           </div>
         </div>

@@ -1,52 +1,61 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
+import { useState } from 'react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
+import LanguageSwitcher from '../language/LanguageSwitcher'
+import { type Locale } from '@/lib/i18n/config'
+import { type Dictionary } from '@/lib/i18n/get-dictionary'
 import { useTheme } from '@/components/providers/Providers'
-import { Menu, X, Sun, Moon, BookOpen, Code, Calculator, GamepadIcon } from 'lucide-react'
 
-export default function Header() {
+interface HeaderProps {
+  lang: Locale
+  dict: Dictionary
+}
+
+export default function Header({ lang, dict }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
 
   const navigation = [
-    { name: 'Home', href: '/', icon: null },
-    { name: 'Courses', href: '/courses', icon: BookOpen },
-    // { name: 'Tools', href: '/tools', icon: Code },
-    // { name: 'Games', href: '/games', icon: GamepadIcon },
-    // { name: 'Contact', href: '/contact', icon: null },
+    { name: dict.navigation.home, href: `/${lang}` },
+    { name: dict.navigation.courses, href: `/${lang}/courses` },
+    // { name: dict.navigation.tools, href: `/${lang}/tools` },
+    // { name: dict.navigation.games, href: `/${lang}/games` },
+    // { name: dict.navigation.about, href: `/${lang}/about` },
+    // { name: dict.navigation.contact, href: `/${lang}/contact` },
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-700">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:bg-gray-900/80">
       <nav className="container-custom">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">NU</span>
-              </div>
-              <span className="text-xl font-bold text-gradient">NUniversity</span>
-            </Link>
-          </div>
+          <Link href={`/${lang}`} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600">
+              <span className="text-white font-bold text-xl">N</span>
+            </div>
+            <span className="font-bold text-xl hidden sm:inline-block text-gray-800 dark:text-gray-100">
+              NUniversity
+            </span>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-1">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="flex items-center space-x-1 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
+                className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-accent hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
-                {item.icon && <item.icon className="w-4 h-4" />}
-                <span>{item.name}</span>
+                {item.name}
               </Link>
             ))}
           </div>
 
-          {/* Theme Toggle & Mobile Menu */}
-          <div className="flex items-center space-x-4">
+          {/* Right Side Actions */}
+          <div className="flex items-center space-x-2">
+            {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
@@ -59,16 +68,19 @@ export default function Header() {
               )}
             </button>
 
-            {/* Mobile menu button */}
+            {/* Language Switcher */}
+            <LanguageSwitcher currentLocale={lang} />
+
+            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? (
-                <X className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                <X className="h-5 w-5 text-gray-600 dark:text-gray-300" />
               ) : (
-                <Menu className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                <Menu className="h-5 w-5 text-gray-600 dark:text-gray-300" />
               )}
             </button>
           </div>
@@ -77,19 +89,16 @@ export default function Header() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700 animate-slide-in">
-            <div className="flex flex-col space-y-4">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.icon && <item.icon className="w-4 h-4" />}
-                  <span>{item.name}</span>
-                </Link>
-              ))}
-            </div>
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-accent hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
         )}
       </nav>
