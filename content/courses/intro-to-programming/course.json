@@ -1,0 +1,18 @@
+{
+  "area": "Computer Science",
+  "difficulty": "beginner",
+  "duration": "4 weeks",
+  "icon": "code",
+  "en": {
+    "title": "Introduction to Programming",
+    "description": "Learn the fundamentals of programming with hands-on exercises and real-world projects"
+  },
+  "pt": {
+    "title": "Introdução à Programação",
+    "description": "Aprenda os fundamentos da programação com exercícios práticos e projetos do mundo real"
+  },
+  "es": {
+    "title": "Introducción a la Programación",
+    "description": "Aprende los fundamentos de la programación con ejercicios prácticos y proyectos del mundo real"
+  }
+}

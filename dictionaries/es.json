@@ -1,0 +1,139 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "courses": "Cursos",
+    "tools": "Herramientas",
+    "games": "Juegos",
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "badge": "Plataforma de Aprendizaje Interactivo",
+    "title": "Aprende, Programa y",
+    "titleHighlight": "Crece",
+    "subtitle": "Domina tecnología, ingeniería y ciencias a través de cursos interactivos, herramientas prácticas de programación y juegos educativos diseñados para estudiantes modernos.",
+    "cta": {
+      "explore": "Explorar Cursos",
+      "tryTools": "Probar Herramientas"
+    },
+    "features": {
+      "coding": "Programación Interactiva",
+      "tools": "Herramientas de Estudio",
+      "courses": "Cursos en Video"
+    }
+  },
+  "features": {
+    "title": "Todo Lo Que Necesitas Para",
+    "titleHighlight": "Sobresalir",
+    "subtitle": "Nuestra plataforma combina lo mejor del aprendizaje interactivo, herramientas prácticas y apoyo comunitario para crear una experiencia educativa sin igual.",
+    "items": {
+      "courses": {
+        "title": "Cursos Interactivos",
+        "description": "Cursos completos en tecnología, ingeniería y ciencias con proyectos prácticos y aplicaciones del mundo real."
+      },
+      "coding": {
+        "title": "Herramientas de Programación",
+        "description": "Editores de código integrados, compiladores y entornos interactivos para practicar programación en múltiples lenguajes."
+      },
+      "study": {
+        "title": "Herramientas de Estudio",
+        "description": "Calculadoras avanzadas, referencias de fórmulas y herramientas interactivas para apoyar tu viaje de aprendizaje."
+      },
+      "games": {
+        "title": "Juegos Educativos",
+        "description": "Experiencias de aprendizaje gamificadas que hacen que los conceptos complejos sean divertidos y atractivos de dominar."
+      },
+      "video": {
+        "title": "Integración de Videos",
+        "description": "Integración perfecta con YouTube para conferencias y tutoriales en video incrustados directamente en los cursos."
+      },
+      "community": {
+        "title": "Impulsado por la Comunidad",
+        "description": "Únete a una comunidad de estudiantes y educadores compartiendo conocimiento y colaborando en proyectos."
+      }
+    },
+    "cta": "Descubre todas las características"
+  },
+  "footer": {
+    "description": "Empoderando estudiantes en todo el mundo con cursos interactivos, herramientas de programación y juegos educativos. Domina tecnología, ingeniería y ciencias a través de experiencia práctica.",
+    "sections": {
+      "platform": "Plataforma",
+      "subjects": "Materias",
+      "company": "Empresa"
+    },
+    "links": {
+      "courses": "Cursos",
+      "tools": "Herramientas",
+      "games": "Juegos",
+      "apiExplorer": "Explorador de API",
+      "computerScience": "Ciencias de la Computación",
+      "engineering": "Ingeniería",
+      "mathematics": "Matemáticas",
+      "physics": "Física",
+      "documentation": "Documentación",
+      "blog": "Blog",
+      "community": "Comunidad",
+      "support": "Soporte",
+      "aboutUs": "Sobre Nosotros",
+      "contact": "Contacto",
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
+      "cookies": "Cookies"
+    },
+    "newsletter": {
+      "title": "Mantente Actualizado",
+      "description": "Recibe los últimos cursos, herramientas y recursos de aprendizaje.",
+      "placeholder": "Ingresa tu email",
+      "button": "Suscribirse"
+    },
+    "copyright": "NUniversity: Empoderando Mentes, Moldeando Futuros.",
+    "rights": "Todos los derechos reservados",
+    "madeWith": "Hecho con",
+    "forLearners": "para estudiantes en todo el mundo"
+  },
+  "metadata": {
+    "home": {
+      "title": "NUniversity - Plataforma de Aprendizaje Interactivo",
+      "description": "Domina tecnología, ingeniería y ciencias a través de cursos interactivos, herramientas de programación y juegos educativos. Comienza tu viaje de aprendizaje hoy."
+    }
+  },
+  "courses": {
+    "title": "Cursos",
+    "subtitle": "Explora nuestros cursos por área y aprende a tu propio ritmo",
+    "search_placeholder": "Buscar cursos...",
+    "areas": {
+      "computer_science": "Ciencias de la Computación",
+      "data_engineering": "Ingeniería de Datos",
+      "software_engineering": "Ingeniería de Software",
+      "cloud_computing": "Computación en la Nube",
+      "artificial_intelligence": "Inteligencia Artificial",
+      "mathematics": "Matemáticas y Estadística",
+      "uncategorized": "Sin Categoría"
+    },
+    "no_results": "No se encontraron cursos.",
+    "no_courses": "No se encontraron cursos",
+    "explore": "Explorar Curso",
+    "lesson": "Lección",
+    "lessons": "Leccións",
+    "progress": "Progreso",
+    "course_content": "Contenido del Curso",
+    "back_to_courses": "Volver a Cursos"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "retry": "Reintentar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "uncategorized": "Sin Categoría",
+    "of": "de"
+  }
+}

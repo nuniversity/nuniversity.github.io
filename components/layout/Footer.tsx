@@ -1,42 +1,49 @@
+// components/layout/Footer.tsx
 import Link from 'next/link'
 import { Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon } from 'lucide-react'
+import { type Locale } from '@/lib/i18n/config'
+import { type Dictionary } from '@/lib/i18n/get-dictionary'
 
-const footerLinks = {
-  platform: [
-    { name: 'Courses', href: '/courses', icon: BookOpen },
-    // { name: 'Tools', href: '/tools', icon: Code },
-    // { name: 'Games', href: '/games', icon: GamepadIcon },
-    // { name: 'API Explorer', href: '/tools/api-explorer', icon: Calculator },
-  ],
-  subjects: [
-    { name: 'Computer Science', href: '/courses/' },
-    { name: 'Engineering', href: '/courses/' },
-    { name: 'Mathematics', href: '/courses/' },
-    { name: 'Physics', href: '/courses/' },
-  ],
-  resources: [
-    { name: 'Documentation', href: '/' },
-    { name: 'Blog', href: '/' },
-    { name: 'Community', href: '/' },
-    { name: 'Support', href: '/' },
-  ],
-  company: [
-    { name: 'About Us', href: '/' },
-    { name: 'Contact', href: '/' },
-    { name: 'Privacy Policy', href: '/' },
-    { name: 'Terms of Service', href: '/' },
-  ],
+interface FooterProps {
+  lang: Locale
+  dict: Dictionary
 }
 
 const socialLinks = [
   { name: 'GitHub', href: 'https://github.com/nuniversity', icon: Github },
-  // { name: 'Twitter', href: '#', icon: Twitter },
   { name: 'LinkedIn', href: 'https://www.linkedin.com/company/nuniversity/', icon: Linkedin },
   { name: 'Email', href: 'mailto:thenuniversitybr@gmail.com', icon: Mail },
 ]
 
-export default function Footer() {
+export default function Footer({ lang, dict }: FooterProps) {
   const currentYear = new Date().getFullYear()
+
+  const footerLinks = {
+    platform: [
+      { name: dict.footer.links.courses, href: `/${lang}/courses`, icon: BookOpen },
+      // { name: dict.footer.links.tools, href: `/${lang}/tools`, icon: Code },
+      // { name: dict.footer.links.games, href: `/${lang}/games`, icon: GamepadIcon },
+      // { name: dict.footer.links.apiExplorer, href: `/${lang}/tools/api-explorer`, icon: Calculator },
+    ],
+    subjects: [
+      { name: dict.footer.links.computerScience, href: `/${lang}/courses/` },
+      { name: dict.footer.links.engineering, href: `/${lang}/courses/` },
+      { name: dict.footer.links.mathematics, href: `/${lang}/courses/` },
+      { name: dict.footer.links.physics, href: `/${lang}/courses/` },
+    ],
+    resources: [
+      { name: dict.footer.links.documentation, href: `/${lang}/` },
+      { name: dict.footer.links.blog, href: `/${lang}/` },
+      { name: dict.footer.links.community, href: `/${lang}/` },
+      { name: dict.footer.links.support, href: `/${lang}/` },
+    ],
+    company: [
+      { name: dict.footer.links.aboutUs, href: `/${lang}/` },
+      { name: dict.footer.links.contact, href: `/${lang}/` },
+      { name: dict.footer.links.privacy, href: `/${lang}/` },
+      { name: dict.footer.links.terms, href: `/${lang}/` },
+    ],
+  }
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -52,8 +59,7 @@ export default function Footer() {
               <span className="text-2xl font-bold">NUniversity</span>
             </div>
             <p className="text-gray-400 mb-6 max-w-md">
-              Empowering learners worldwide with interactive courses, coding tools, and educational games. 
-              Master technology, engineering, and sciences through hands-on experience.
+              {dict.footer.description}
             </p>
             
             {/* Social Links */}
@@ -64,6 +70,8 @@ export default function Footer() {
                   href={social.href}
                   className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
                   aria-label={social.name}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
@@ -73,7 +81,7 @@ export default function Footer() {
 
           {/* Platform Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Platform</h3>
+            <h3 className="text-lg font-semibold mb-4">{dict.footer.sections.platform}</h3>
             <ul className="space-y-3">
               {footerLinks.platform.map((link) => (
                 <li key={link.name}>
@@ -91,7 +99,7 @@ export default function Footer() {
 
           {/* Subjects Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Subjects</h3>
+            <h3 className="text-lg font-semibold mb-4">{dict.footer.sections.subjects}</h3>
             <ul className="space-y-3">
               {footerLinks.subjects.map((link) => (
                 <li key={link.name}>
@@ -108,7 +116,7 @@ export default function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
+            <h3 className="text-lg font-semibold mb-4">{dict.footer.sections.company}</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
@@ -125,22 +133,22 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Newsletter Section */}
+      {/* Newsletter Section - Commented out but keeping structure */}
       {/* <div className="border-t border-gray-800">
         <div className="container-custom py-8">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div>
-              <h3 className="text-lg font-semibold mb-2">Stay Updated</h3>
-              <p className="text-gray-400">Get the latest courses, tools, and learning resources.</p>
+              <h3 className="text-lg font-semibold mb-2">{dict.footer.newsletter.title}</h3>
+              <p className="text-gray-400">{dict.footer.newsletter.description}</p>
             </div>
             <div className="flex space-x-3 w-full md:w-auto">
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={dict.footer.newsletter.placeholder}
                 className="flex-1 md:w-64 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               <button className="btn-primary whitespace-nowrap">
-                Subscribe
+                {dict.footer.newsletter.button}
               </button>
             </div>
           </div>
@@ -152,24 +160,24 @@ export default function Footer() {
         <div className="container-custom py-6">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-400">
-              <p>&copy; {currentYear} NUniversity: Empowering Minds, Shaping Futures.. All rights reserved.</p>
+              <p>&copy; {currentYear} {dict.footer.copyright} {dict.footer.rights}.</p>
               <div className="flex space-x-4">
-                <Link href="/" className="hover:text-white transition-colors">
-                  Privacy
+                <Link href={`/${lang}/`} className="hover:text-white transition-colors">
+                  {dict.footer.links.privacy}
                 </Link>
-                <Link href="/" className="hover:text-white transition-colors">
-                  Terms
+                <Link href={`/${lang}/`} className="hover:text-white transition-colors">
+                  {dict.footer.links.terms}
                 </Link>
-                <Link href="/" className="hover:text-white transition-colors">
-                  Cookies
+                <Link href={`/${lang}/`} className="hover:text-white transition-colors">
+                  {dict.footer.links.cookies}
                 </Link>
               </div>
             </div>
             
             <div className="flex items-center space-x-2 text-sm text-gray-400">
-              <span>Made with</span>
+              <span>{dict.footer.madeWith}</span>
               <span className="text-red-400">❤️</span>
-              <span>for learners worldwide</span>
+              <span>{dict.footer.forLearners}</span>
             </div>
           </div>
         </div>
