@@ -1,5 +1,4 @@
 // app/[lang]/courses/[courseSlug]/[lessonSlug]/page.tsx
-
 import { getCourseContent, getAllLessons, getAllCourses } from '@/lib/courses/get-course-content'
 import { type Locale, i18n } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/get-dictionary'
@@ -8,6 +7,16 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight, BookOpen, Home } from 'lucide-react'
 import { Metadata } from 'next'
+
+
+interface CoursePageProps {
+  params: {
+    lang: Locale
+    courseSlug: string
+    lessonSlug: string
+  }
+}
+
 
 export async function generateStaticParams() {
   const params: {
@@ -35,14 +44,6 @@ export async function generateStaticParams() {
   }
 
   return params
-}
-
-interface CoursePageProps {
-  params: {
-    lang: Locale
-    courseSlug: string
-    lessonSlug: string
-  }
 }
 
 export async function generateMetadata({
@@ -103,16 +104,21 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
       <div className="max-w-4xl mx-auto">
         {/* Breadcrumb */}
         <nav className="mb-8 flex items-center flex-wrap gap-2 text-sm text-muted-foreground">
+
           <Link href={`/${lang}`} className="hover:text-foreground flex items-center gap-1">
             <Home className="w-4 h-4" />
             <span>{dict.navigation.home}</span>
           </Link>
+
           <span>/</span>
+
           <Link href={`/${lang}/courses`} className="hover:text-foreground flex items-center gap-1">
             <BookOpen className="w-4 h-4" />
             <span>{dict.navigation.courses}</span>
           </Link>
+
           <span>/</span>
+
           {courseInfo && (
             <>
               <span className="hover:text-foreground max-w-[200px] truncate">
@@ -121,9 +127,11 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
               <span>/</span>
             </>
           )}
+
           <span className="text-foreground font-medium max-w-[200px] truncate">
             {lesson.metadata.title}
           </span>
+
         </nav>
 
         {/* Lesson Header */}

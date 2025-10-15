@@ -3,14 +3,48 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+// import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { Info, AlertCircle, CheckCircle, AlertTriangle } from 'lucide-react'
 
+// import * as prismStyles from 'react-syntax-highlighter/dist/cjs/styles/prism';
+// const vscDarkPlus = (prismStyles as any).vscDarkPlus;
+
+import SyntaxHighlighterWrapper from './FixWrapper'
+
+// const syntaxTheme = vscDarkPlus as { [key: string]: React.CSSProperties };
 
 interface MarkdownRendererProps {
   content: string
 }
+
+const langMap: Record<string, string> = {
+  // diagram
+  diagram: 'diagram',
+  // sql
+  sql: 'sql',
+  psql: 'sql',
+  postgresql: 'sql',
+  // javascript
+  javascript: 'javascript',
+  typescript: 'typescript',
+  // python
+  python: 'python',
+  py: 'python',
+  // rust
+  rust: 'rust',
+  rs: 'rust',
+  // bash / shell
+  bash: 'bash',
+  sh: 'bash',
+  shell: 'bash',
+  zsh: 'bash',
+  // terraform / hcl
+  terraform: 'terraform',
+  hcl: 'terraform',
+  tf: 'terraform'
+}
+
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
@@ -65,25 +99,66 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         ),
 
         // Code blocks
-        code: ({ node, inline, className, children, ...props }) => {
-          const match = /language-(\w+)/.exec(className || '')
-          const language = match ? match[1] : ''
+        // code: ({ node, inline, className, children, ...props }) => {
+        code: ({ node, className, children, ...props }) => {
+          // const match = /language-(\w+)/.exec(className || '')
+          // const language = match ? match[1] : ''
+
+          const match = /language-([a-z0-9_+-]+)/i.exec(className || '')
+          // normalize common aliases to canonical names used by your highlighter
+          const langRaw = match ? match[1].toLowerCase() : null
+          // const langMap: Record<string, string> = {
+          //   // sql
+          //   sql: 'sql',
+          //   psql: 'sql',
+          //   postgresql: 'sql',
+          //   // javascript
+          //   javascript: 'javascript',
+          //   typescript: 'typescript',
+          //   // python
+          //   python: 'python',
+          //   py: 'python',
+          //   // rust
+          //   rust: 'rust',
+          //   rs: 'rust',
+          //   // bash / shell
+          //   bash: 'bash',
+          //   sh: 'bash',
+          //   shell: 'bash',
+          //   zsh: 'bash',
+          //   // terraform / hcl
+          //   terraform: 'terraform',
+          //   hcl: 'terraform',
+          //   tf: 'terraform'
+          // }
+          // final normalized language (or null if none)
+          const language = langRaw ? (langMap[langRaw] ?? langRaw) : null
           
-          if (!inline && language) {
+          // if (!inline && language) {
+          if (language) {
             return (
               <div className="my-6 rounded-lg overflow-hidden border border-gray-700">
                 <div className="bg-gray-800 px-4 py-2 text-sm text-gray-300 font-mono">
                   {language}
                 </div>
-                <SyntaxHighlighter
-                  style={vscDarkPlus}
-                  language={language}
-                  PreTag="div"
-                  className="!my-0 !rounded-none"
-                  {...props}
-                >
-                  {String(children).replace(/\n$/, '')}
-                </SyntaxHighlighter>
+
+                  <SyntaxHighlighterWrapper
+                    language={language}
+                    PreTag="div"
+                    className="!my-0 !rounded-none"
+                  >
+                    {String(children).replace(/\n$/, '')}
+                  </SyntaxHighlighterWrapper>
+
+                  {/* <SyntaxHighlighter
+                    style={vscDarkPlus as any}
+                    language={language}
+                    PreTag="div"
+                    className="!my-0 !rounded-none"
+                    {...props}
+                  >
+                    {String(children).replace(/\n$/, '')}
+                  </SyntaxHighlighter> */}
               </div>
             )
           }

@@ -33,7 +33,7 @@ export default function Header({ lang, dict }: HeaderProps) {
           {/* Logo */}
           <Link href={`/${lang}`} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600">
-              <span className="text-white font-bold text-xl">N</span>
+              <span className="text-white font-bold text-xl">NU</span>
             </div>
             <span className="font-bold text-xl hidden sm:inline-block text-gray-800 dark:text-gray-100">
               NUniversity

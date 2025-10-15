@@ -42,7 +42,9 @@ export interface CourseWithLessons {
   lessons: CourseContent[]
 }
 
+
 const COURSES_DIR = path.join(process.cwd(), 'content', 'courses')
+
 
 export async function getCourseContent(
   courseSlug: string,

@@ -110,7 +110,13 @@
       "mathematics": "Matemática e Estatística"
     },
     "no_results": "Nenhum curso encontrado.",
-    "explore": "Explorar Curso"
+    "no_courses": "Nenhum curso encontrado.",
+    "explore": "Explorar Curso",
+    "lesson": "Lição",
+    "lessons": "Lições",
+    "progress": "Progreso",
+    "course_content": "Contenido del Curso",
+    "back_to_courses": "Volver a Cursos"
   },
   "common": {
     "loading": "Carregando...",
@@ -126,6 +132,7 @@
     "cancel": "Cancelar",
     "delete": "Excluir",
     "edit": "Editar",
-    "uncategorized": "Não Categorizado"
+    "uncategorized": "Não Categorizado",
+    "of": "de"
   }
 }

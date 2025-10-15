@@ -120,6 +120,17 @@ export default async function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        
+        {/* <Providers>
+          <div className="min-h-screen flex flex-col">
+            <Header lang={params.lang} dict={dict} />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer lang={params.lang} dict={dict} />
+          </div>
+        </Providers> */}
+
         <Providers>
           <div className="min-h-screen flex flex-col">
             <Header lang={params.lang} dict={dict} />
@@ -129,6 +140,7 @@ export default async function RootLayout({
             <Footer lang={params.lang} dict={dict} />
           </div>
         </Providers>
+        
       </body>
     </html>
   )

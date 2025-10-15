@@ -111,7 +111,13 @@
       "uncategorized": "Sin Categoría"
     },
     "no_results": "No se encontraron cursos.",
-    "explore": "Explorar Curso"
+    "no_courses": "No se encontraron cursos",
+    "explore": "Explorar Curso",
+    "lesson": "Lección",
+    "lessons": "Leccións",
+    "progress": "Progreso",
+    "course_content": "Contenido del Curso",
+    "back_to_courses": "Volver a Cursos"
   },
   "common": {
     "loading": "Cargando...",
@@ -127,6 +133,7 @@
     "cancel": "Cancelar",
     "delete": "Eliminar",
     "edit": "Editar",
-    "uncategorized": "Sin Categoría"
+    "uncategorized": "Sin Categoría",
+    "of": "de"
   }
 }

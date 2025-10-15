@@ -111,7 +111,13 @@
       "uncategorized": "Sem Categoria"
     },
     "no_results": "No courses found.",
+    "no_courses": "no_courses",
     "explore": "Explore Course",
+    "lesson": "Lesson",
+    "lessons": "Lessons",
+    "progress": "Progress",
+    "course_content": "Course Content",
+    "back_to_courses": "Back to Courses",
     "categories": {
       "fundamentals": "Fundamentals",
       "advanced": "Advanced",
@@ -149,6 +155,7 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
-    "uncategorized": "Uncategorized"
+    "uncategorized": "Uncategorized",
+    "of": "of"
   }
 }
