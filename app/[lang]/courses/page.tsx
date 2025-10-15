@@ -1,4 +1,6 @@
 // app/[lang]/courses/page.tsx
+export const dynamic = "force-dynamic"
+
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import { type Locale } from '@/lib/i18n/config'
 import { getAllCourses, getAllLessons } from '@/lib/courses/get-course-content'
