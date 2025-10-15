@@ -1,5 +1,8 @@
 // app/[lang]/courses/page.tsx
-export const dynamic = "force-dynamic"
+export const dynamic = 'force-static'
+export const revalidate = false
+
+// 'use client'
 
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import { type Locale } from '@/lib/i18n/config'
