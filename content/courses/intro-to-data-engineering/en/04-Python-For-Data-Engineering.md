@@ -53,7 +53,7 @@ unique_count = len(set(data_sources))
 
 Dictionaries store key-value pairs, providing O(1) lookup time.
 
-```
+```python
 # Database configuration
 db_config = {
     'host': 'localhost',
@@ -87,7 +87,7 @@ full_config = defaults | db_config
 
 Sets are unordered collections of unique elements.
 
-```
+```python
 # Deduplication
 processed_ids = {101, 102, 103, 102, 101}  # {101, 102, 103}
 
@@ -113,7 +113,7 @@ if 'users' in current_tables:
 
 Tuples are immutable sequences, often used for fixed collections.
 
-```
+```python
 # Database connection tuple
 connection = ('localhost', 5432, 'postgres')
 host, port, database = connection  # Unpacking
@@ -141,7 +141,7 @@ pipeline_cache = {
 
 #### Function Fundamentals
 
-```
+```python
 def extract_data(source: str, date: str, limit: int = 1000) -> list:
     """
     Extract data from a specified source.
@@ -164,7 +164,7 @@ result = extract_data(source='api', date='2025-01-01', limit=500)
 
 #### Advanced Function Patterns
 
-```
+```python
 # Functions returning functions
 def create_validator(min_value: float):
     def validate(value: float) -> bool:
@@ -205,7 +205,7 @@ def flexible_pipeline(*steps, **config):
 
 Lambda functions are anonymous, single-expression functions.
 
-```
+```python
 # Basic lambda
 square = lambda x: x ** 2
 square(5)  # 25
@@ -253,7 +253,7 @@ transformed = transformations['uppercase'](text)
 
 List comprehensions provide concise syntax for creating lists.
 
-```
+```python
 # Basic syntax: [expression for item in iterable if condition]
 
 # Traditional approach
@@ -290,7 +290,7 @@ values = [r['value'] for r in records if r['value'] > 15]
 
 #### Dictionary and Set Comprehensions
 
-```
+```python
 # Dictionary comprehension
 config = ['host=localhost', 'port=5432', 'db=analytics']
 config_dict = {
@@ -310,7 +310,7 @@ swapped = {v: k for k, v in original.items()}
 
 Generators produce values lazily, one at a time, making them memory-efficient.
 
-```
+```python
 # Generator expression (similar to list comprehension)
 squares_gen = (x ** 2 for x in range(1000000))  # No memory allocation yet
 
@@ -372,7 +372,7 @@ for batch in batch_generator(range(1000), batch_size=100):
 
 #### Exception Handling Fundamentals
 
-```
+```python
 # Basic try-except
 try:
     result = 10 / 0
@@ -415,7 +415,7 @@ else:
 
 #### Custom Exceptions
 
-```
+```python
 class DataValidationError(Exception):
     """Raised when data validation fails."""
     pass
@@ -443,7 +443,7 @@ def validate_schema(data, required_columns):
 
 #### Exception Handling Patterns for Data Engineering
 
-```
+```python
 # Retry pattern
 import time
 from typing import Callable, Any
@@ -497,7 +497,7 @@ with error_handler("Data Transformation"):
 
 Logging is essential for monitoring production data pipelines.
 
-```
+```python
 import logging
 from pathlib import Path
 
@@ -617,13 +617,13 @@ Polars is a blazingly fast DataFrame library built in Rust with a Python API. It
 
 #### Installation
 
-```
+```bash
 pip install polars
 ```
 
 #### Basic DataFrame Operations
 
-```
+```python
 import polars as pl
 from datetime import datetime, date
 
@@ -687,7 +687,7 @@ sampled = df.sample(n=3)  # Random sample
 
 Expressions are the core of Polars' power and expressiveness.
 
-```
+```python
 # Basic expressions
 df.select([
     pl.col('age').mean().alias('avg_age'),
@@ -734,7 +734,7 @@ df.select([
 
 Eager evaluation executes operations immediately.
 
-```
+```python
 # Eager mode (default)
 df_eager = pl.DataFrame({
     'a': range(1000000),
@@ -754,7 +754,7 @@ result = (
 
 Lazy evaluation builds a query plan and optimizes before execution.
 
-```
+```python
 # Lazy mode
 df_lazy = pl.scan_csv('large_file.csv')  # Doesn't load data yet
 
@@ -799,7 +799,7 @@ for batch in query.collect_streaming():
 
 #### Lazy Evaluation Benefits
 
-```
+```python
 # Lazy evaluation can optimize this
 lazy_query = (
     pl.scan_csv('huge_file.csv')
@@ -821,7 +821,7 @@ result = lazy_query.collect()
 
 #### Reading CSV Files
 
-```
+```python
 # Basic CSV read
 df = pl.read_csv('data.csv')
 
@@ -855,7 +855,7 @@ for batch in reader:
 
 #### Writing CSV Files
 
-```
+```python
 # Basic write
 df.write_csv('output.csv')
 
@@ -871,7 +871,7 @@ df.write_csv(
 
 #### Reading JSON
 
-```
+```python
 # JSON lines format (recommended)
 df = pl.read_ndjson('data.ndjson')
 
@@ -889,7 +889,7 @@ df = pl.read_json(json_str.encode())
 
 #### Writing JSON
 
-```
+```python
 # Write as JSON lines (recommended for large data)
 df.write_ndjson('output.ndjson')
 
@@ -904,7 +904,7 @@ df.write_json('output.json', pretty=True)
 
 Parquet is the recommended format for data engineering.
 
-```
+```python
 # Basic read
 df = pl.read_parquet('data.parquet')
 
@@ -928,7 +928,7 @@ df = pl.scan_parquet('data/year=*/month=*/data.parquet')
 
 #### Writing Parquet
 
-```
+```python
 # Basic write
 df.write_parquet('output.parquet')
 
@@ -955,7 +955,7 @@ df.write_parquet(
 
 #### Other Formats
 
-```
+```python
 # Database connections
 import polars as pl
 
@@ -981,7 +981,7 @@ df.write_delta('output_delta_path')
 
 #### Column Transformations
 
-```
+```python
 # Adding new columns
 df = pl.DataFrame({
     'product': ['A', 'B', 'C'],
@@ -1012,7 +1012,7 @@ df = df.with_columns([
 
 #### Filtering and Selection
 
-```
+```python
 # Simple filtering
 high_value = df.filter(pl.col('price') > 15)
 
@@ -1043,7 +1043,7 @@ numeric_cols = df.select(pl.col(pl.Float64, pl.Int64))
 
 #### Aggregations
 
-```
+```python
 # Basic aggregations
 summary = df.select([
     pl.col('price').mean().alias('avg_price'),
@@ -1076,7 +1076,7 @@ df.select([
 
 #### Window Functions
 
-```
+```python
 df = pl.DataFrame({
     'category': ['A', 'A', 'B', 'B', 'C'],
     'value': [10, 20, 15, 25, 30]
@@ -1112,7 +1112,7 @@ df_with_pct = df.with_columns([
 
 #### String Operations
 
-```
+```python
 df = pl.DataFrame({
     'email': ['alice@example.com', 'bob@test.org', 'charlie@demo.net'],
     'name': ['Alice Smith', 'Bob Jones', 'Charlie Brown']
@@ -1140,7 +1140,7 @@ df = df.with_columns([
 
 #### Date and Time Operations
 
-```
+```python
 df = pl.DataFrame({
     'date': pl.date_range(
         date(2024, 1, 1),
@@ -1176,7 +1176,7 @@ df = df.with_columns([
 
 #### Join Operations
 
-```
+```python
 # Sample DataFrames
 users = pl.DataFrame({
     'user_id': [1, 2, 3, 4],
@@ -1252,7 +1252,7 @@ joined = users.join(
 
 #### Group By Operations
 
-```
+```python
 # Basic group by
 sales = pl.DataFrame({
     'region': ['North', 'South', 'North', 'East', 'South', 'East'],
@@ -1315,7 +1315,7 @@ category_stats = sales_with_category.group_by('amount_category').agg([
 
 #### Advanced Grouping
 
-```
+```python
 # Group by with maintain_order
 ordered_groups = sales.group_by('region', maintain_order=True).agg([
     pl.col('amount').sum().alias('total')
@@ -1370,7 +1370,7 @@ melted = pivoted.melt(
 
 #### Query Optimization
 
-```
+```python
 # Use lazy evaluation for complex queries
 lazy_df = pl.scan_parquet('large_data.parquet')
 
@@ -1393,7 +1393,7 @@ result = optimized_query.collect()
 
 #### Memory Management
 
-```
+```python
 # Streaming for large datasets
 lazy_query = pl.scan_csv('huge_file.csv').filter(
     pl.col('amount') > 1000
@@ -1422,7 +1422,7 @@ print(f"Optimized size: {df_optimized.estimated_size('mb')} MB")
 
 #### Parallel Processing
 
-```
+```python
 # Polars uses all CPU cores by default
 # Control parallelism if needed
 import os
@@ -1439,7 +1439,7 @@ result = df.group_by('category').agg([
 
 #### Efficient Operations
 
-```
+```python
 # Use expressions instead of apply
 # Slow (row-by-row apply)
 def slow_transform(df):
@@ -1479,7 +1479,7 @@ df = df.with_columns([
 
 #### Caching and Persistence
 
-```
+```python
 # Cache intermediate results in lazy queries
 lazy_df = pl.scan_parquet('data.parquet')
 
@@ -1506,7 +1506,7 @@ intermediate.write_parquet('intermediate_result.parquet')
 
 #### Benchmarking
 
-```
+```python
 import time
 
 def benchmark_operation(func, *args, **kwargs):
@@ -1549,7 +1549,7 @@ Apache Arrow is a cross-language development platform for in-memory data. PyArro
 
 #### Arrow Memory Layout
 
-```
+```python
 import pyarrow as pa
 import numpy as np
 
@@ -1568,7 +1568,7 @@ import numpy as np
 
 #### Creating Arrays
 
-```
+```python
 import pyarrow as pa
 
 # From Python list
@@ -1602,7 +1602,7 @@ struct_arr = pa.array([
 
 #### Creating Tables
 
-```
+```python
 # From dictionary
 data = {
     'id': [1, 2, 3, 4, 5],
@@ -1660,7 +1660,7 @@ table = table.remove_column(table.schema.get_field_index('doubled_age'))
 
 RecordBatches are like Tables but represent a single chunk of data.
 
-```
+```python
 # Create RecordBatch
 data = {
     'id': pa.array([1, 2, 3]),
@@ -1684,7 +1684,7 @@ table = pa.Table.from_batches([batch1, batch2])
 
 #### Schema Management
 
-```
+```python
 # Define schema
 schema = pa.schema([
     pa.field('id', pa.int32(), nullable=False),
