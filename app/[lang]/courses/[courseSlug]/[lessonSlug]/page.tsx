@@ -192,7 +192,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
         )}
 
         {/* Navigation */}
-        <div className="flex justify-between items-center gap-4">
+        <div className="max-w-4xl mx-auto flex justify-between items-center gap-4">
           <div className="flex-1">
             {prevLesson ? (
               <Link
@@ -204,7 +204,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
                   <div className="text-xs text-muted-foreground mb-1">
                     {dict.common.previous}
                   </div>
-                  <div className="font-medium truncate">{prevLesson.metadata.title}</div>
+                  <div className="font-medium break-words max-w-[calc(100%-2rem)]">{prevLesson.metadata.title}</div>
                 </div>
               </Link>
             ) : (
@@ -222,7 +222,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
                   <div className="text-xs text-muted-foreground mb-1">
                     {dict.common.next}
                   </div>
-                  <div className="font-medium truncate">{nextLesson.metadata.title}</div>
+                  <div className="font-medium break-words max-w-[calc(100%-2rem)] text-right">{nextLesson.metadata.title}</div>
                 </div>
                 <ChevronRight className="w-5 h-5 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
               </Link>
