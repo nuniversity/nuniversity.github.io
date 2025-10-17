@@ -1750,7 +1750,7 @@ work_mem = 4MB
 ```
 
 **Client authentication (`pg_hba.conf`):**
-```
+```diagram
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
 local   all            postgres                                 peer
 local   all            all                                      md5

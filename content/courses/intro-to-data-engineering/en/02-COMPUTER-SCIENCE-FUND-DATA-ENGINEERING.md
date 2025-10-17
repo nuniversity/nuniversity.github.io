@@ -601,7 +601,7 @@ Business Rules:
 **Example Progression:**
 
 *Unnormalized:*
-```
+```diagram
 Order: OrderID, CustomerName, CustomerEmail, Products, Quantities, Prices
 ```
 
