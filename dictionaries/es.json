@@ -54,6 +54,35 @@
     },
     "cta": "Descubre todas las características"
   },
+  "contact": {
+    "title": "¿Vamos",
+    "titleHighlight": "Colaborar?",
+    "subtitle": "¿Listo para transformar el mundo mediante la democratización de la educación? Colaboremos y fomentemos el desarrollo de las comunidades.",
+    "info": {
+      "heading": "Ponte en Contacto",
+      "description": "Estamos abiertos a discutir nuevas oportunidades, proyectos y formas de usar la tecnología para transformar el mundo empoderando a las personas con conocimiento de impacto."
+    },
+    "email": "Correo electrónico",
+    "location": "Ubicación",
+    "social": "Conéctate en las Redes",
+    "form": {
+      "heading": "Envía un Mensaje",
+      "name": "Nombre Completo *",
+      "namePlaceholder": "Tu nombre completo",
+      "email": "Dirección de Correo *",
+      "emailPlaceholder": "tu.correo@ejemplo.com",
+      "subject": "Asunto *",
+      "subjectPlaceholder": "¿Sobre qué trata el mensaje?",
+      "message": "Mensaje *",
+      "messagePlaceholder": "Cuéntanos cómo quieres colaborar o cómo podemos ayudar...",
+      "button": "Enviar Mensaje"
+    },
+    "success": {
+      "title": "¡Gracias!",
+      "message": "Tu mensaje ha sido enviado con éxito. Me pondré en contacto contigo pronto.",
+      "button": "Enviar Otro Mensaje"
+    }
+  },
   "footer": {
     "description": "Empoderando estudiantes en todo el mundo con cursos interactivos, herramientas de programación y juegos educativos. Domina tecnología, ingeniería y ciencias a través de experiencia práctica.",
     "sections": {

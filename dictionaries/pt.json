@@ -54,6 +54,35 @@
     },
     "cta": "Descubra todos os recursos"
   },
+  "contact": {
+    "title": "Vamos",
+    "titleHighlight": "Colaborar!?",
+    "subtitle": "Pronto para transformar o mundo por meio da democratização da educação? Vamos colaborar e impulsionar o desevolvimento de comunidades.",
+    "info": {
+      "heading": "Entre em Contato",
+      "description": "Estamos abertos para discutir novas oportunidades, projetos e maneiras de usar tecnologia para transformar o mundo ao capacitar as pessoas com conhecimento de impacto."
+    },
+    "email": "E-mail",
+    "location": "Localização",
+    "social": "Conecte-se nas Redes",
+    "form": {
+      "heading": "Envie uma Mensagem",
+      "name": "Nome Completo *",
+      "namePlaceholder": "Seu nome completo",
+      "email": "Endereço de E-mail *",
+      "emailPlaceholder": "seu.email@exemplo.com",
+      "subject": "Assunto *",
+      "subjectPlaceholder": "Sobre o que é a mensagem?",
+      "message": "Mensagem *",
+      "messagePlaceholder": "Fale sobre como você quer colaborar ou como podemos ajudar...",
+      "button": "Enviar Mensagem"
+    },
+    "success": {
+      "title": "Obrigado!",
+      "message": "Sua mensagem foi enviada com sucesso. Em breve entrarei em contato.",
+      "button": "Enviar Outra Mensagem"
+    }
+  },
   "footer": {
     "description": "Capacitando aprendizes em todo o mundo com cursos interativos, ferramentas de programação e jogos educacionais. Domine tecnologia, engenharia e ciências através de experiência prática.",
     "sections": {

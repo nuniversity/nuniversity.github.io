@@ -1,6 +1,6 @@
 # NUNIVERSITY WEBSITE
 
-Nuniversity company [website](nuniversity.github.io) project.
+Nuniversity company [website](https://nuniversity.github.io/en) project.
 
 ## Getting Started
 

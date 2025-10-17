@@ -3,16 +3,10 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
-// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-// import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { useState } from 'react'
 import { Info, AlertCircle, CheckCircle, AlertTriangle } from 'lucide-react'
 
-// import * as prismStyles from 'react-syntax-highlighter/dist/cjs/styles/prism';
-// const vscDarkPlus = (prismStyles as any).vscDarkPlus;
-
 import SyntaxHighlighterWrapper from './FixWrapper'
-
-// const syntaxTheme = vscDarkPlus as { [key: string]: React.CSSProperties };
 
 interface MarkdownRendererProps {
   content: string
@@ -45,6 +39,30 @@ const langMap: Record<string, string> = {
   tf: 'terraform'
 }
 
+function CopyButton({ textToCopy }: { textToCopy: string }) {
+  const [copied, setCopied] = useState(false)
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(textToCopy)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (e) {
+      console.error('Failed to copy text', e)
+    }
+  }
+
+  return (
+    <button
+      onClick={copy}
+      className="absolute top-2 right-2 bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs hover:bg-gray-600 focus:outline-none"
+      aria-label="Copy code"
+      type="button"
+    >
+      {copied ? 'Copied!' : 'Copy'}
+    </button>
+  )
+}
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
@@ -98,71 +116,33 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           </li>
         ),
 
-        // Code blocks
-        // code: ({ node, inline, className, children, ...props }) => {
+        // Code blocks with copy button
         code: ({ node, className, children, ...props }) => {
-          // const match = /language-(\w+)/.exec(className || '')
-          // const language = match ? match[1] : ''
-
           const match = /language-([a-z0-9_+-]+)/i.exec(className || '')
-          // normalize common aliases to canonical names used by your highlighter
           const langRaw = match ? match[1].toLowerCase() : null
-          // const langMap: Record<string, string> = {
-          //   // sql
-          //   sql: 'sql',
-          //   psql: 'sql',
-          //   postgresql: 'sql',
-          //   // javascript
-          //   javascript: 'javascript',
-          //   typescript: 'typescript',
-          //   // python
-          //   python: 'python',
-          //   py: 'python',
-          //   // rust
-          //   rust: 'rust',
-          //   rs: 'rust',
-          //   // bash / shell
-          //   bash: 'bash',
-          //   sh: 'bash',
-          //   shell: 'bash',
-          //   zsh: 'bash',
-          //   // terraform / hcl
-          //   terraform: 'terraform',
-          //   hcl: 'terraform',
-          //   tf: 'terraform'
-          // }
-          // final normalized language (or null if none)
           const language = langRaw ? (langMap[langRaw] ?? langRaw) : null
-          
-          // if (!inline && language) {
+
           if (language) {
+            const codeString = String(children).replace(/\n$/, '')
+
             return (
-              <div className="my-6 rounded-lg overflow-hidden border border-gray-700">
-                <div className="bg-gray-800 px-4 py-2 text-sm text-gray-300 font-mono">
-                  {language}
+              <div className="relative my-6 rounded-lg overflow-hidden border border-gray-700">
+                <div className="bg-gray-800 px-4 py-2 text-sm text-gray-300 font-mono flex justify-between items-center">
+                  <span>{language}</span>
+                  <CopyButton textToCopy={codeString} />
                 </div>
 
-                  <SyntaxHighlighterWrapper
-                    language={language}
-                    PreTag="div"
-                    className="!my-0 !rounded-none"
-                  >
-                    {String(children).replace(/\n$/, '')}
-                  </SyntaxHighlighterWrapper>
-
-                  {/* <SyntaxHighlighter
-                    style={vscDarkPlus as any}
-                    language={language}
-                    PreTag="div"
-                    className="!my-0 !rounded-none"
-                    {...props}
-                  >
-                    {String(children).replace(/\n$/, '')}
-                  </SyntaxHighlighter> */}
+                <SyntaxHighlighterWrapper
+                  language={language}
+                  PreTag="div"
+                  className="!my-0 !rounded-none"
+                >
+                  {codeString}
+                </SyntaxHighlighterWrapper>
               </div>
             )
           }
-          
+
           return (
             <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-foreground">
               {children}
