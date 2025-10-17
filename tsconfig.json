@@ -4,14 +4,12 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
     "noEmit": true,
     "incremental": true,
     "esModuleInterop": true,
@@ -32,8 +30,5 @@
     "**/*.ts",
     "**/*.tsx"
   ],
-  "exclude": [
-    "node_modules",
-    "_backup"
-  ]
+  "exclude": ["node_modules", "_backup"]
 }

@@ -54,6 +54,35 @@
     },
     "cta": "Discover all features"
   },
+  "contact": { 
+    "title": "Let's", 
+    "titleHighlight": "Collaborate!?", 
+    "subtitle": "Ready to transform the world through the democratization of education? Let's collaborate and drive community development.", 
+    "info": { 
+      "heading": "Get in Touch", 
+      "description": "We’re open to discussing new opportunities, projects, and ways to use technology to transform the world by empowering people with impactful knowledge." 
+    }, 
+    "email": "Email", 
+    "location": "Location", 
+    "social": "Connect on Social Media", 
+    "form": { 
+      "heading": "Send a Message", 
+      "name": "Full Name *", 
+      "namePlaceholder": "Your full name", 
+      "email": "Email Address *", 
+      "emailPlaceholder": "your.email@example.com", 
+      "subject": "Subject *", 
+      "subjectPlaceholder": "What is the message about?", 
+      "message": "Message *", 
+      "messagePlaceholder": "Tell us how you’d like to collaborate or how we can help...", 
+      "button": "Send Message" 
+    }, 
+    "success": { 
+      "title": "Thank You!", 
+      "message": "Your message has been sent successfully. I’ll be in touch soon.", 
+      "button": "Send Another Message" 
+    } 
+  },
   "footer": {
     "description": "Empowering learners worldwide with interactive courses, coding tools, and educational games. Master technology, engineering, and sciences through hands-on experience.",
     "sections": {

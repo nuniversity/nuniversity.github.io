@@ -1,6 +1,7 @@
 // components/layout/Footer.tsx
 import Link from 'next/link'
 import { Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon } from 'lucide-react'
+import { MapPin, Youtube, Globe, Instagram, Send, CheckCircle } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
 
@@ -10,6 +11,8 @@ interface FooterProps {
 }
 
 const socialLinks = [
+  { name: "Youtube", href: 'https://www.youtube.com/@nuniversity', icon: Youtube },
+  { name: 'Instagram', href: 'https://www.instagram.com/thenuniversity/', icon: Instagram },
   { name: 'GitHub', href: 'https://github.com/nuniversity', icon: Github },
   { name: 'LinkedIn', href: 'https://www.linkedin.com/company/nuniversity/', icon: Linkedin },
   { name: 'Email', href: 'mailto:thenuniversitybr@gmail.com', icon: Mail },
@@ -27,9 +30,9 @@ export default function Footer({ lang, dict }: FooterProps) {
     ],
     subjects: [
       { name: dict.footer.links.computerScience, href: `/${lang}/courses/` },
-      { name: dict.footer.links.engineering, href: `/${lang}/courses/` },
-      { name: dict.footer.links.mathematics, href: `/${lang}/courses/` },
-      { name: dict.footer.links.physics, href: `/${lang}/courses/` },
+      // { name: dict.footer.links.engineering, href: `/${lang}/courses/` },
+      // { name: dict.footer.links.mathematics, href: `/${lang}/courses/` },
+      // { name: dict.footer.links.physics, href: `/${lang}/courses/` },
     ],
     resources: [
       { name: dict.footer.links.documentation, href: `/${lang}/` },
@@ -39,9 +42,9 @@ export default function Footer({ lang, dict }: FooterProps) {
     ],
     company: [
       { name: dict.footer.links.aboutUs, href: `/${lang}/` },
-      { name: dict.footer.links.contact, href: `/${lang}/` },
-      { name: dict.footer.links.privacy, href: `/${lang}/` },
-      { name: dict.footer.links.terms, href: `/${lang}/` },
+      // { name: dict.footer.links.contact, href: `/${lang}/` },
+      // { name: dict.footer.links.privacy, href: `/${lang}/` },
+      // { name: dict.footer.links.terms, href: `/${lang}/` },
     ],
   }
 

@@ -10,6 +10,7 @@
     "export": "next export"
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
     "@heroui/react": "^2.2.9",
     "@monaco-editor/react": "^4.6.0",
     "@tailwindcss/typography": "^0.5.10",

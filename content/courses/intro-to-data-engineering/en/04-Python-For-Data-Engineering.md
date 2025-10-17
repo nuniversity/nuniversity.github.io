@@ -29,7 +29,7 @@ Python provides four fundamental data structures that are essential for data eng
 
 Lists are ordered, mutable sequences ideal for storing collections of items.
 
-```
+```python
 # Creating and manipulating lists
 data_sources = ['postgres', 'mongodb', 'api']
 data_sources.append('s3')
