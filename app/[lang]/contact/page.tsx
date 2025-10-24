@@ -35,9 +35,7 @@ export default async function HomePage({
 
   return (
     <>
-      <Hero lang={params.lang} dict={dict} />
-      <Features lang={params.lang} dict={dict} />
-      {/* <Contact lang={params.lang} dict={dict} /> */}
+      <Contact lang={params.lang} dict={dict} />
     </>
   )
 }

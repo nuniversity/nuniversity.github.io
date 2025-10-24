@@ -1,4 +1,65 @@
 {
+  "metadata": {
+    "home": {
+      "title": "NUniversity - Plataforma de Aprendizaje Interactivo",
+      "description": "Domina tecnología, ingeniería y ciencias a través de cursos interactivos, herramientas de programación y juegos educativos. Comienza tu viaje de aprendizaje hoy."
+    },
+    "about": {
+      "title": "Sobre Nosotros - Nombre de Tu Empresa",
+      "description": "Conoce nuestra misión, valores y el equipo detrás de nuestro éxito"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Sobre Nosotros",
+      "description": "Nuniversity es una iniciativa educativa sin fines de lucro dedicada a transformar vidas mediante oportunidades de aprendizaje accesibles y de alta calidad para todos."
+    },
+    "mission": {
+      "title": "Nuestra Misión",
+      "description": "Hacer que la educación transformadora sea accesible para todos, brindando conocimiento práctico e impactante que empodere a las personas y fortalezca a las comunidades en todo el mundo."
+    },
+    "vision": {
+      "title": "Nuestra Visión",
+      "description": "Crear un mundo donde todos, sin importar su origen o circunstancia, tengan la oportunidad de aprender, crecer y contribuir a un futuro más equitativo y sostenible."
+    },
+    "values": {
+      "title": "Nuestros Valores",
+      "items": [
+        {
+          "title": "Equidad",
+          "description": "Creemos que la educación es un derecho fundamental y debe ser accesible para todos."
+        },
+        {
+          "title": "Empoderamiento",
+          "description": "Inspiramos a las personas a alcanzar su máximo potencial a través del conocimiento y el aprendizaje."
+        },
+        {
+          "title": "Colaboración",
+          "description": "Construimos puentes entre comunidades, culturas y disciplinas para impulsar el progreso conjunto."
+        },
+        {
+          "title": "Integridad",
+          "description": "Actuamos con honestidad, transparencia y respeto en todo lo que hacemos."
+        },
+        {
+          "title": "Innovación",
+          "description": "Adoptamos la creatividad y la tecnología para ampliar el alcance y el impacto de la educación."
+        }
+      ]
+    },
+    "team": {
+      "title": "Conoce a Nuestro Equipo",
+      "description": "Nuestro equipo global de educadores, tecnólogos y visionarios está comprometido con hacer que la educación de calidad sea accesible para todos.",
+      "members": [
+        {
+          "name": "Leandro Alves",
+          "role": "Co-Fundador",
+          "bio": "Líder en tecnología y datos con más de 8 años de experiencia desarrollando soluciones digitales escalables e impactantes.",
+          "link": "https://leandroalveso.github.io/"
+        }
+      ]
+    }
+  },
   "navigation": {
     "home": "Inicio",
     "courses": "Cursos",
@@ -119,12 +180,6 @@
     "rights": "Todos los derechos reservados",
     "madeWith": "Hecho con",
     "forLearners": "para estudiantes en todo el mundo"
-  },
-  "metadata": {
-    "home": {
-      "title": "NUniversity - Plataforma de Aprendizaje Interactivo",
-      "description": "Domina tecnología, ingeniería y ciencias a través de cursos interactivos, herramientas de programación y juegos educativos. Comienza tu viaje de aprendizaje hoy."
-    }
   },
   "courses": {
     "title": "Cursos",

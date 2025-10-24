@@ -41,8 +41,8 @@ export default function Footer({ lang, dict }: FooterProps) {
       { name: dict.footer.links.support, href: `/${lang}/` },
     ],
     company: [
-      { name: dict.footer.links.aboutUs, href: `/${lang}/` },
-      // { name: dict.footer.links.contact, href: `/${lang}/` },
+      { name: dict.footer.links.aboutUs, href: `/${lang}/about` },
+      { name: dict.footer.links.contact, href: `/${lang}/contact` },
       // { name: dict.footer.links.privacy, href: `/${lang}/` },
       // { name: dict.footer.links.terms, href: `/${lang}/` },
     ],

@@ -22,8 +22,8 @@ export default function Header({ lang, dict }: HeaderProps) {
     { name: dict.navigation.courses, href: `/${lang}/courses` },
     // { name: dict.navigation.tools, href: `/${lang}/tools` },
     // { name: dict.navigation.games, href: `/${lang}/games` },
-    // { name: dict.navigation.about, href: `/${lang}/about` },
-    // { name: dict.navigation.contact, href: `/${lang}/contact` },
+    { name: dict.navigation.about, href: `/${lang}/about` },
+    { name: dict.navigation.contact, href: `/${lang}/contact` },
   ]
 
   return (

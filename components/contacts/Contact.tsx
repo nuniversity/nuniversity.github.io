@@ -152,6 +152,21 @@ export default function Contact({ lang, dict }: ContactProps) {
                 </motion.div>
 
                 <motion.div whileHover={{ x: 10 }} className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-gray-400 to-gray-500 rounded-lg flex items-center justify-center">
+                    <Github className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white">GitHub</p>
+                    <a
+                      href="https://github.com/nuniversity"
+                      className="text-blue-600 dark:text-blue-400 hover:underline"
+                    >
+                      github.com/nuniversity
+                    </a>
+                  </div>
+                </motion.div>
+
+                <motion.div whileHover={{ x: 10 }} className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center">
                     <Mail className="w-6 h-6 text-white" />
                   </div>
@@ -165,6 +180,7 @@ export default function Contact({ lang, dict }: ContactProps) {
                     </a>
                   </div>
                 </motion.div>
+
               </div>
             </motion.div>
 
