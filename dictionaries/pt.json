@@ -1,4 +1,65 @@
 {
+  "metadata": {
+    "home": {
+      "title": "NUniversity - Plataforma de Aprendizado Interativo",
+      "description": "Domine tecnologia, engenharia e ciências através de cursos interativos, ferramentas de programação e jogos educacionais. Comece sua jornada de aprendizado hoje."
+    },
+    "about": {
+      "title": "Sobre Nós - Nome da Sua Empresa",
+      "description": "Conheça nossa missão, valores e a equipe por trás do nosso sucesso"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Sobre Nós",
+      "description": "A Nuniversity é uma iniciativa educacional sem fins lucrativos dedicada a transformar vidas por meio de oportunidades de aprendizado acessíveis e de alta qualidade para todos."
+    },
+    "mission": {
+      "title": "Nossa Missão",
+      "description": "Tornar a educação transformadora acessível a todos, oferecendo conhecimento prático e impactante que empodera pessoas e fortalece comunidades em todo o mundo."
+    },
+    "vision": {
+      "title": "Nossa Visão",
+      "description": "Construir um mundo onde todos, independentemente de sua origem ou condição, tenham a oportunidade de aprender, crescer e contribuir para um futuro mais justo e sustentável."
+    },
+    "values": {
+      "title": "Nossos Valores",
+      "items": [
+        {
+          "title": "Equidade",
+          "description": "Acreditamos que a educação é um direito fundamental e deve ser acessível a todos."
+        },
+        {
+          "title": "Empoderamento",
+          "description": "Inspiramos pessoas a alcançar seu máximo potencial por meio do conhecimento e do aprendizado."
+        },
+        {
+          "title": "Colaboração",
+          "description": "Construímos pontes entre comunidades, culturas e áreas de conhecimento para promover o progresso coletivo."
+        },
+        {
+          "title": "Integridade",
+          "description": "Agimos com honestidade, transparência e respeito em tudo o que fazemos."
+        },
+        {
+          "title": "Inovação",
+          "description": "Abraçamos a criatividade e a tecnologia para expandir o alcance e o impacto da educação."
+        }
+      ]
+    },
+    "team": {
+      "title": "Nosso Time",
+      "description": "Nosso time global de educadores, tecnólogos e visionários é apaixonado por tornar a educação de alta qualidade acessível a todos.",
+      "members": [
+        {
+          "name": "Leandro Alves",
+          "role": "Co-Fundador",
+          "bio": "Líder em tecnologia e dados com mais de 8 anos de experiência desenvolvendo soluções digitais escaláveis e de impacto.",
+          "link": "https://leandroalveso.github.io/"
+        }
+      ]
+    }
+  },
   "navigation": {
     "home": "Início",
     "courses": "Cursos",
@@ -119,12 +180,6 @@
     "rights": "Todos os direitos reservados",
     "madeWith": "Feito com",
     "forLearners": "para aprendizes em todo o mundo"
-  },
-  "metadata": {
-    "home": {
-      "title": "NUniversity - Plataforma de Aprendizado Interativo",
-      "description": "Domine tecnologia, engenharia e ciências através de cursos interativos, ferramentas de programação e jogos educacionais. Comece sua jornada de aprendizado hoje."
-    }
   },
   "courses": {
     "title": "Cursos",
