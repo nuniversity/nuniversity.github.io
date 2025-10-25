@@ -1,0 +1,913 @@
+{
+  "id": "en-to-pt",
+  "title": "English to Portuguese - Basic Vocabulary",
+  "description": "Match English words with their Portuguese translations",
+  "difficulty": "beginner",
+  "category": "vocabulary",
+  "language_pair": {
+    "source": "en",
+    "target": "pt"
+  },
+  "words": [
+    {
+      "id": "1",
+      "source": "Hello",
+      "target": "Olá",
+      "context": "greeting"
+    },
+    {
+      "id": "2",
+      "source": "Goodbye",
+      "target": "Tchau",
+      "context": "greeting"
+    },
+    {
+      "id": "3",
+      "source": "Thank you",
+      "target": "Obrigado",
+      "context": "courtesy"
+    },
+    {
+      "id": "4",
+      "source": "Please",
+      "target": "Por favor",
+      "context": "courtesy"
+    },
+    {
+      "id": "5",
+      "source": "Water",
+      "target": "Água",
+      "context": "food"
+    },
+    {
+      "id": "6",
+      "source": "Food",
+      "target": "Comida",
+      "context": "food"
+    },
+    {
+      "id": "7",
+      "source": "House",
+      "target": "Casa",
+      "context": "places"
+    },
+    {
+      "id": "8",
+      "source": "School",
+      "target": "Escola",
+      "context": "places"
+    },
+    {
+      "id": "9",
+      "source": "Friend",
+      "target": "Amigo",
+      "context": "people"
+    },
+    {
+      "id": "10",
+      "source": "Family",
+      "target": "Família",
+      "context": "people"
+    },
+    {
+      "id": "11",
+      "source": "Book",
+      "target": "Livro",
+      "context": "objects"
+    },
+    {
+      "id": "12",
+      "source": "Computer",
+      "target": "Computador",
+      "context": "objects"
+    },
+    {
+      "id": "13",
+      "source": "Happy",
+      "target": "Feliz",
+      "context": "emotions"
+    },
+    {
+      "id": "14",
+      "source": "Sad",
+      "target": "Triste",
+      "context": "emotions"
+    },
+    {
+      "id": "15",
+      "source": "Big",
+      "target": "Grande",
+      "context": "adjectives"
+    },
+    {
+      "id": "16",
+      "source": "Small",
+      "target": "Pequeno",
+      "context": "adjectives"
+    },
+    {
+      "id": "17",
+      "source": "Day",
+      "target": "Dia",
+      "context": "time"
+    },
+    {
+      "id": "18",
+      "source": "Night",
+      "target": "Noite",
+      "context": "time"
+    },
+    {
+      "id": "19",
+      "source": "Today",
+      "target": "Hoje",
+      "context": "time"
+    },
+    {
+      "id": "20",
+      "source": "Tomorrow",
+      "target": "Amanhã",
+      "context": "time"
+    },
+    {
+      "id": "21",
+      "source": "Week",
+      "target": "Semana",
+      "context": "time"
+    },
+    {
+      "id": "22",
+      "source": "Month",
+      "target": "Mês",
+      "context": "time"
+    },
+    {
+      "id": "23",
+      "source": "Year",
+      "target": "Ano",
+      "context": "time"
+    },
+    {
+      "id": "24",
+      "source": "Morning",
+      "target": "Manhã",
+      "context": "time"
+    },
+    {
+      "id": "25",
+      "source": "Afternoon",
+      "target": "Tarde",
+      "context": "time"
+    },
+    {
+      "id": "26",
+      "source": "Dog",
+      "target": "Cachorro",
+      "context": "animals"
+    },
+    {
+      "id": "27",
+      "source": "Cat",
+      "target": "Gato",
+      "context": "animals"
+    },
+    {
+      "id": "28",
+      "source": "Bird",
+      "target": "Pássaro",
+      "context": "animals"
+    },
+    {
+      "id": "29",
+      "source": "Fish",
+      "target": "Peixe",
+      "context": "animals"
+    },
+    {
+      "id": "30",
+      "source": "Red",
+      "target": "Vermelho",
+      "context": "colors"
+    },
+    {
+      "id": "31",
+      "source": "Blue",
+      "target": "Azul",
+      "context": "colors"
+    },
+    {
+      "id": "32",
+      "source": "Green",
+      "target": "Verde",
+      "context": "colors"
+    },
+    {
+      "id": "33",
+      "source": "Yellow",
+      "target": "Amarelo",
+      "context": "colors"
+    },
+    {
+      "id": "34",
+      "source": "Black",
+      "target": "Preto",
+      "context": "colors"
+    },
+    {
+      "id": "35",
+      "source": "White",
+      "target": "Branco",
+      "context": "colors"
+    },
+    {
+      "id": "36",
+      "source": "Car",
+      "target": "Carro",
+      "context": "transport"
+    },
+    {
+      "id": "37",
+      "source": "Bus",
+      "target": "Ônibus",
+      "context": "transport"
+    },
+    {
+      "id": "38",
+      "source": "Train",
+      "target": "Trem",
+      "context": "transport"
+    },
+    {
+      "id": "39",
+      "source": "Airplane",
+      "target": "Avião",
+      "context": "transport"
+    },
+    {
+      "id": "40",
+      "source": "Doctor",
+      "target": "Médico",
+      "context": "professions"
+    },
+    {
+      "id": "41",
+      "source": "Teacher",
+      "target": "Professor",
+      "context": "professions"
+    },
+    {
+      "id": "42",
+      "source": "Student",
+      "target": "Estudante",
+      "context": "professions"
+    },
+    {
+      "id": "43",
+      "source": "Engineer",
+      "target": "Engenheiro",
+      "context": "professions"
+    },
+    {
+      "id": "44",
+      "source": "Apple",
+      "target": "Maçã",
+      "context": "food"
+    },
+    {
+      "id": "45",
+      "source": "Bread",
+      "target": "Pão",
+      "context": "food"
+    },
+    {
+      "id": "46",
+      "source": "Coffee",
+      "target": "Café",
+      "context": "food"
+    },
+    {
+      "id": "47",
+      "source": "Milk",
+      "target": "Leite",
+      "context": "food"
+    },
+    {
+      "id": "48",
+      "source": "Music",
+      "target": "Música",
+      "context": "arts"
+    },
+    {
+      "id": "49",
+      "source": "Movie",
+      "target": "Filme",
+      "context": "arts"
+    },
+    {
+      "id": "50",
+      "source": "Game",
+      "target": "Jogo",
+      "context": "entertainment"
+    },
+    {
+      "id": "51",
+      "source": "Man",
+      "target": "Homem",
+      "context": "people"
+    },
+    {
+      "id": "52",
+      "source": "Woman",
+      "target": "Mulher",
+      "context": "people"
+    },
+    {
+      "id": "53",
+      "source": "Boy",
+      "target": "Menino",
+      "context": "people"
+    },
+    {
+      "id": "54",
+      "source": "Girl",
+      "target": "Menina",
+      "context": "people"
+    },
+    {
+      "id": "55",
+      "source": "Child",
+      "target": "Criança",
+      "context": "people"
+    },
+    {
+      "id": "56",
+      "source": "Work",
+      "target": "Trabalho",
+      "context": "actions"
+    },
+    {
+      "id": "57",
+      "source": "Play",
+      "target": "Brincar",
+      "context": "actions"
+    },
+    {
+      "id": "58",
+      "source": "Run",
+      "target": "Correr",
+      "context": "actions"
+    },
+    {
+      "id": "59",
+      "source": "Walk",
+      "target": "Andar",
+      "context": "actions"
+    },
+    {
+      "id": "60",
+      "source": "Eat",
+      "target": "Comer",
+      "context": "actions"
+    },
+    {
+      "id": "61",
+      "source": "Drink",
+      "target": "Beber",
+      "context": "actions"
+    },
+    {
+      "id": "62",
+      "source": "Sleep",
+      "target": "Dormir",
+      "context": "actions"
+    },
+    {
+      "id": "63",
+      "source": "Speak",
+      "target": "Falar",
+      "context": "actions"
+    },
+    {
+      "id": "64",
+      "source": "See",
+      "target": "Ver",
+      "context": "actions"
+    },
+    {
+      "id": "65",
+      "source": "Hear",
+      "target": "Ouvir",
+      "context": "actions"
+    },
+    {
+      "id": "66",
+      "source": "Go",
+      "target": "Ir",
+      "context": "actions"
+    },
+    {
+      "id": "67",
+      "source": "Come",
+      "target": "Vir",
+      "context": "actions"
+    },
+    {
+      "id": "68",
+      "source": "Do",
+      "target": "Fazer",
+      "context": "actions"
+    },
+    {
+      "id": "69",
+      "source": "Make",
+      "target": "Fazer",
+      "context": "actions"
+    },
+    {
+      "id": "70",
+      "source": "Think",
+      "target": "Pensar",
+      "context": "actions"
+    },
+    {
+      "id": "71",
+      "source": "Know",
+      "target": "Saber",
+      "context": "actions"
+    },
+    {
+      "id": "72",
+      "source": "Love",
+      "target": "Amar",
+      "context": "emotions"
+    },
+    {
+      "id": "73",
+      "source": "Like",
+      "target": "Gostar",
+      "context": "emotions"
+    },
+    {
+      "id": "74",
+      "source": "Need",
+      "target": "Precisar",
+      "context": "actions"
+    },
+    {
+      "id": "75",
+      "source": "Want",
+      "target": "Querer",
+      "context": "actions"
+    },
+    {
+      "id": "76",
+      "source": "Buy",
+      "target": "Comprar",
+      "context": "actions"
+    },
+    {
+      "id": "77",
+      "source": "Sell",
+      "target": "Vender",
+      "context": "actions"
+    },
+    {
+      "id": "78",
+      "source": "Open",
+      "target": "Abrir",
+      "context": "actions"
+    },
+    {
+      "id": "79",
+      "source": "Close",
+      "target": "Fechar",
+      "context": "actions"
+    },
+    {
+      "id": "80",
+      "source": "Start",
+      "target": "Começar",
+      "context": "actions"
+    },
+    {
+      "id": "81",
+      "source": "Finish",
+      "target": "Terminar",
+      "context": "actions"
+    },
+    {
+      "id": "82",
+      "source": "Hot",
+      "target": "Quente",
+      "context": "adjectives"
+    },
+    {
+      "id": "83",
+      "source": "Cold",
+      "target": "Frio",
+      "context": "adjectives"
+    },
+    {
+      "id": "84",
+      "source": "Old",
+      "target": "Velho",
+      "context": "adjectives"
+    },
+    {
+      "id": "85",
+      "source": "Young",
+      "target": "Jovem",
+      "context": "adjectives"
+    },
+    {
+      "id": "86",
+      "source": "Good",
+      "target": "Bom",
+      "context": "adjectives"
+    },
+    {
+      "id": "87",
+      "source": "Bad",
+      "target": "Ruim",
+      "context": "adjectives"
+    },
+    {
+      "id": "88",
+      "source": "Easy",
+      "target": "Fácil",
+      "context": "adjectives"
+    },
+    {
+      "id": "89",
+      "source": "Hard",
+      "target": "Difícil",
+      "context": "adjectives"
+    },
+    {
+      "id": "90",
+      "source": "Beautiful",
+      "target": "Bonito",
+      "context": "adjectives"
+    },
+    {
+      "id": "91",
+      "source": "Ugly",
+      "target": "Feio",
+      "context": "adjectives"
+    },
+    {
+      "id": "92",
+      "source": "Money",
+      "target": "Dinheiro",
+      "context": "objects"
+    },
+    {
+      "id": "93",
+      "source": "City",
+      "target": "Cidade",
+      "context": "places"
+    },
+    {
+      "id": "94",
+      "source": "Country",
+      "target": "País",
+      "context": "places"
+    },
+    {
+      "id": "95",
+      "source": "Street",
+      "target": "Rua",
+      "context": "places"
+    },
+    {
+      "id": "96",
+      "source": "Workplace",
+      "target": "Local de trabalho",
+      "context": "places"
+    },
+    {
+      "id": "97",
+      "source": "Rain",
+      "target": "Chuva",
+      "context": "nature"
+    },
+    {
+      "id": "98",
+      "source": "Sun",
+      "target": "Sol",
+      "context": "nature"
+    },
+    {
+      "id": "99",
+      "source": "Wind",
+      "target": "Vento",
+      "context": "nature"
+    },
+    {
+      "id": "100",
+      "source": "Snow",
+      "target": "Neve",
+      "context": "nature"
+    },
+    {
+      "id": "101",
+      "source": "Mountain",
+      "target": "Montanha",
+      "context": "nature"
+    },
+    {
+      "id": "102",
+      "source": "River",
+      "target": "Rio",
+      "context": "nature"
+    },
+    {
+      "id": "103",
+      "source": "Ocean",
+      "target": "Oceano",
+      "context": "nature"
+    },
+    {
+      "id": "104",
+      "source": "Beach",
+      "target": "Praia",
+      "context": "places"
+    },
+    {
+      "id": "105",
+      "source": "Chair",
+      "target": "Cadeira",
+      "context": "objects"
+    },
+    {
+      "id": "106",
+      "source": "Table",
+      "target": "Mesa",
+      "context": "objects"
+    },
+    {
+      "id": "107",
+      "source": "Window",
+      "target": "Janela",
+      "context": "objects"
+    },
+    {
+      "id": "108",
+      "source": "Door",
+      "target": "Porta",
+      "context": "objects"
+    },
+    {
+      "id": "109",
+      "source": "Clothes",
+      "target": "Roupas",
+      "context": "objects"
+    },
+    {
+      "id": "110",
+      "source": "Shoes",
+      "target": "Sapatos",
+      "context": "objects"
+    },
+    {
+      "id": "111",
+      "source": "Rainy",
+      "target": "Chuvoso",
+      "context": "adjectives"
+    },
+    {
+      "id": "112",
+      "source": "Sunny",
+      "target": "Ensolarado",
+      "context": "adjectives"
+    },
+    {
+      "id": "113",
+      "source": "Monday",
+      "target": "Segunda-feira",
+      "context": "time"
+    },
+    {
+      "id": "114",
+      "source": "Tuesday",
+      "target": "Terça-feira",
+      "context": "time"
+    },
+    {
+      "id": "115",
+      "source": "Wednesday",
+      "target": "Quarta-feira",
+      "context": "time"
+    },
+    {
+      "id": "116",
+      "source": "Thursday",
+      "target": "Quinta-feira",
+      "context": "time"
+    },
+    {
+      "id": "117",
+      "source": "Friday",
+      "target": "Sexta-feira",
+      "context": "time"
+    },
+    {
+      "id": "118",
+      "source": "Saturday",
+      "target": "Sábado",
+      "context": "time"
+    },
+    {
+      "id": "119",
+      "source": "Sunday",
+      "target": "Domingo",
+      "context": "time"
+    },
+    {
+      "id": "120",
+      "source": "Morning",
+      "target": "Manhã",
+      "context": "time"
+    },
+    {
+      "id": "121",
+      "source": "Evening",
+      "target": "Entardecer",
+      "context": "time"
+    },
+    {
+      "id": "122",
+      "source": "Now",
+      "target": "Agora",
+      "context": "time"
+    },
+    {
+      "id": "123",
+      "source": "Always",
+      "target": "Sempre",
+      "context": "frequency"
+    },
+    {
+      "id": "124",
+      "source": "Never",
+      "target": "Nunca",
+      "context": "frequency"
+    },
+    {
+      "id": "125",
+      "source": "Sometimes",
+      "target": "Às vezes",
+      "context": "frequency"
+    },
+    {
+      "id": "126",
+      "source": "Often",
+      "target": "Frequentemente",
+      "context": "frequency"
+    },
+    {
+      "id": "127",
+      "source": "Time",
+      "target": "Tempo",
+      "context": "time"
+    },
+    {
+      "id": "128",
+      "source": "World",
+      "target": "Mundo",
+      "context": "places"
+    },
+    {
+      "id": "129",
+      "source": "Life",
+      "target": "Vida",
+      "context": "concepts"
+    },
+    {
+      "id": "130",
+      "source": "People",
+      "target": "Pessoas",
+      "context": "people"
+    },
+    {
+      "id": "131",
+      "source": "Way",
+      "target": "Caminho",
+      "context": "concepts"
+    },
+    {
+      "id": "132",
+      "source": "Thing",
+      "target": "Coisa",
+      "context": "objects"
+    },
+    {
+      "id": "133",
+      "source": "Place",
+      "target": "Lugar",
+      "context": "places"
+    },
+    {
+      "id": "134",
+      "source": "Hand",
+      "target": "Mão",
+      "context": "body"
+    },
+    {
+      "id": "135",
+      "source": "Head",
+      "target": "Cabeça",
+      "context": "body"
+    },
+    {
+      "id": "136",
+      "source": "Eye",
+      "target": "Olho",
+      "context": "body"
+    },
+    {
+      "id": "137",
+      "source": "Mouth",
+      "target": "Boca",
+      "context": "body"
+    },
+    {
+      "id": "138",
+      "source": "Foot",
+      "target": "Pé",
+      "context": "body"
+    },
+    {
+      "id": "139",
+      "source": "Heart",
+      "target": "Coração",
+      "context": "body"
+    },
+    {
+      "id": "140",
+      "source": "Home",
+      "target": "Lar",
+      "context": "places"
+    },
+    {
+      "id": "141",
+      "source": "Room",
+      "target": "Quarto",
+      "context": "places"
+    },
+    {
+      "id": "142",
+      "source": "Kitchen",
+      "target": "Cozinha",
+      "context": "places"
+    },
+    {
+      "id": "143",
+      "source": "Bathroom",
+      "target": "Banheiro",
+      "context": "places"
+    },
+    {
+      "id": "144",
+      "source": "Garden",
+      "target": "Jardim",
+      "context": "places"
+    },
+    {
+      "id": "145",
+      "source": "Street",
+      "target": "Rua",
+      "context": "places"
+    },
+    {
+      "id": "146",
+      "source": "Store",
+      "target": "Loja",
+      "context": "places"
+    },
+    {
+      "id": "147",
+      "source": "Market",
+      "target": "Mercado",
+      "context": "places"
+    },
+    {
+      "id": "148",
+      "source": "Hospital",
+      "target": "Hospital",
+      "context": "places"
+    },
+    {
+      "id": "149",
+      "source": "Office",
+      "target": "Escritório",
+      "context": "places"
+    },
+    {
+      "id": "150",
+      "source": "Park",
+      "target": "Parque",
+      "context": "places"
+    }
+  ]
+}

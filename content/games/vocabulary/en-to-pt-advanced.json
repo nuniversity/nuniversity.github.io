@@ -1,0 +1,613 @@
+{
+  "id": "en-to-pt-advanced",
+  "title": "English to Portuguese - Advanced Vocabulary",
+  "description": "Challenge yourself with advanced English-Portuguese vocabulary",
+  "difficulty": "advanced",
+  "category": "vocabulary",
+  "language_pair": {
+    "source": "en",
+    "target": "pt"
+  },
+  "words": [
+    {
+      "id": "51",
+      "source": "Psychology",
+      "target": "Psicologia",
+      "context": "mind"
+    },
+    {
+      "id": "52",
+      "source": "Philosopher",
+      "target": "Filósofo",
+      "context": "thinker"
+    },
+    {
+      "id": "53",
+      "source": "Creativity",
+      "target": "Criatividade",
+      "context": "innovation"
+    },
+    {
+      "id": "54",
+      "source": "Balance",
+      "target": "Equilíbrio",
+      "context": "stability"
+    },
+    {
+      "id": "55",
+      "source": "Precision",
+      "target": "Precisão",
+      "context": "accuracy"
+    },
+    {
+      "id": "56",
+      "source": "Integrity",
+      "target": "Integridade",
+      "context": "honesty"
+    },
+    {
+      "id": "57",
+      "source": "Empathy",
+      "target": "Empatia",
+      "context": "understanding"
+    },
+    {
+      "id": "58",
+      "source": "Confidence",
+      "target": "Confiança",
+      "context": "self-belief"
+    },
+    {
+      "id": "59",
+      "source": "Curiosity",
+      "target": "Curiosidade",
+      "context": "interest"
+    },
+    {
+      "id": "60",
+      "source": "Flexibility",
+      "target": "Flexibilidade",
+      "context": "adaptability"
+    },
+    {
+      "id": "61",
+      "source": "Justice",
+      "target": "Justiça",
+      "context": "fairness"
+    },
+    {
+      "id": "62",
+      "source": "Equality",
+      "target": "Igualdade",
+      "context": "rights"
+    },
+    {
+      "id": "63",
+      "source": "Freedom",
+      "target": "Liberdade",
+      "context": "independence"
+    },
+    {
+      "id": "64",
+      "source": "Confidence",
+      "target": "Confiança",
+      "context": "trust"
+    },
+    {
+      "id": "65",
+      "source": "Productivity",
+      "target": "Produtividade",
+      "context": "efficiency"
+    },
+    {
+      "id": "66",
+      "source": "Creativity",
+      "target": "Criatividade",
+      "context": "originality"
+    },
+    {
+      "id": "67",
+      "source": "Consciousness",
+      "target": "Consciência",
+      "context": "awareness"
+    },
+    {
+      "id": "68",
+      "source": "Emotion",
+      "target": "Emoção",
+      "context": "feeling"
+    },
+    {
+      "id": "69",
+      "source": "Intelligence",
+      "target": "Inteligência",
+      "context": "mind"
+    },
+    {
+      "id": "70",
+      "source": "Perspective",
+      "target": "Perspectiva",
+      "context": "view"
+    },
+    {
+      "id": "71",
+      "source": "Simplicity",
+      "target": "Simplicidade",
+      "context": "clarity"
+    },
+    {
+      "id": "72",
+      "source": "Complexity",
+      "target": "Complexidade",
+      "context": "difficulty"
+    },
+    {
+      "id": "73",
+      "source": "Confidence",
+      "target": "Confiança",
+      "context": "assurance"
+    },
+    {
+      "id": "74",
+      "source": "Achievement",
+      "target": "Conquista",
+      "context": "success"
+    },
+    {
+      "id": "75",
+      "source": "Satisfaction",
+      "target": "Satisfação",
+      "context": "contentment"
+    },
+    {
+      "id": "76",
+      "source": "Impression",
+      "target": "Impressão",
+      "context": "perception"
+    },
+    {
+      "id": "77",
+      "source": "Observation",
+      "target": "Observação",
+      "context": "notice"
+    },
+    {
+      "id": "78",
+      "source": "Confidence",
+      "target": "Confiança",
+      "context": "belief"
+    },
+    {
+      "id": "79",
+      "source": "Responsibility",
+      "target": "Responsabilidade",
+      "context": "obligation"
+    },
+    {
+      "id": "80",
+      "source": "Knowledge",
+      "target": "Conhecimento",
+      "context": "information"
+    },
+    {
+      "id": "81",
+      "source": "Memory",
+      "target": "Memória",
+      "context": "recall"
+    },
+    {
+      "id": "82",
+      "source": "Patience",
+      "target": "Paciência",
+      "context": "calmness"
+    },
+    {
+      "id": "83",
+      "source": "Wisdom",
+      "target": "Sabedoria",
+      "context": "insight"
+    },
+    {
+      "id": "84",
+      "source": "Progress",
+      "target": "Progresso",
+      "context": "advancement"
+    },
+    {
+      "id": "85",
+      "source": "Reputation",
+      "target": "Reputação",
+      "context": "image"
+    },
+    {
+      "id": "86",
+      "source": "Connection",
+      "target": "Conexão",
+      "context": "link"
+    },
+    {
+      "id": "87",
+      "source": "Community",
+      "target": "Comunidade",
+      "context": "society"
+    },
+    {
+      "id": "88",
+      "source": "Improvement",
+      "target": "Melhoria",
+      "context": "development"
+    },
+    {
+      "id": "89",
+      "source": "Decision",
+      "target": "Decisão",
+      "context": "choice"
+    },
+    {
+      "id": "90",
+      "source": "Experience",
+      "target": "Experiência",
+      "context": "practice"
+    },
+    {
+      "id": "91",
+      "source": "Preparation",
+      "target": "Preparação",
+      "context": "readiness"
+    },
+    {
+      "id": "92",
+      "source": "Improvement",
+      "target": "Melhoria",
+      "context": "enhancement"
+    },
+    {
+      "id": "93",
+      "source": "Observation",
+      "target": "Observação",
+      "context": "attention"
+    },
+    {
+      "id": "94",
+      "source": "Recognition",
+      "target": "Reconhecimento",
+      "context": "acknowledge"
+    },
+    {
+      "id": "95",
+      "source": "Intention",
+      "target": "Intenção",
+      "context": "purpose"
+    },
+    {
+      "id": "96",
+      "source": "Reaction",
+      "target": "Reação",
+      "context": "response"
+    },
+    {
+      "id": "97",
+      "source": "Perception",
+      "target": "Percepção",
+      "context": "understanding"
+    },
+    {
+      "id": "98",
+      "source": "Tradition",
+      "target": "Tradição",
+      "context": "custom"
+    },
+    {
+      "id": "99",
+      "source": "Environment",
+      "target": "Ambiente",
+      "context": "surroundings"
+    },
+    {
+      "id": "100",
+      "source": "Opportunity",
+      "target": "Oportunidade",
+      "context": "possibility"
+    },
+    {
+      "id": "101",
+      "source": "Agreement",
+      "target": "Acordo",
+      "context": "consent"
+    },
+    {
+      "id": "102",
+      "source": "Argument",
+      "target": "Discussão",
+      "context": "debate"
+    },
+    {
+      "id": "103",
+      "source": "Protection",
+      "target": "Proteção",
+      "context": "safety"
+    },
+    {
+      "id": "104",
+      "source": "Performance",
+      "target": "Desempenho",
+      "context": "execution"
+    },
+    {
+      "id": "105",
+      "source": "Direction",
+      "target": "Direção",
+      "context": "guidance"
+    },
+    {
+      "id": "106",
+      "source": "Advantage",
+      "target": "Vantagem",
+      "context": "benefit"
+    },
+    {
+      "id": "107",
+      "source": "Preference",
+      "target": "Preferência",
+      "context": "choice"
+    },
+    {
+      "id": "108",
+      "source": "Behavior",
+      "target": "Comportamento",
+      "context": "conduct"
+    },
+    {
+      "id": "109",
+      "source": "Character",
+      "target": "Caráter",
+      "context": "personality"
+    },
+    {
+      "id": "110",
+      "source": "Identity",
+      "target": "Identidade",
+      "context": "self"
+    },
+    {
+      "id": "111",
+      "source": "Population",
+      "target": "População",
+      "context": "people"
+    },
+    {
+      "id": "112",
+      "source": "Government",
+      "target": "Governo",
+      "context": "authority"
+    },
+    {
+      "id": "113",
+      "source": "Industry",
+      "target": "Indústria",
+      "context": "production"
+    },
+    {
+      "id": "114",
+      "source": "Technology",
+      "target": "Tecnologia",
+      "context": "tools"
+    },
+    {
+      "id": "115",
+      "source": "Information",
+      "target": "Informação",
+      "context": "data"
+    },
+    {
+      "id": "116",
+      "source": "Experience",
+      "target": "Experiência",
+      "context": "knowledge"
+    },
+    {
+      "id": "117",
+      "source": "Confidence",
+      "target": "Confiança",
+      "context": "assurance"
+    },
+    {
+      "id": "118",
+      "source": "Community",
+      "target": "Comunidade",
+      "context": "group"
+    },
+    {
+      "id": "119",
+      "source": "Stability",
+      "target": "Estabilidade",
+      "context": "balance"
+    },
+    {
+      "id": "120",
+      "source": "Creativity",
+      "target": "Criatividade",
+      "context": "originality"
+    },
+    {
+      "id": "121",
+      "source": "Possibility",
+      "target": "Possibilidade",
+      "context": "option"
+    },
+    {
+      "id": "122",
+      "source": "Diversity",
+      "target": "Diversidade",
+      "context": "variety"
+    },
+    {
+      "id": "123",
+      "source": "Connection",
+      "target": "Conexão",
+      "context": "relation"
+    },
+    {
+      "id": "124",
+      "source": "Security",
+      "target": "Segurança",
+      "context": "protection"
+    },
+    {
+      "id": "125",
+      "source": "Quality",
+      "target": "Qualidade",
+      "context": "standard"
+    },
+    {
+      "id": "126",
+      "source": "Creativity",
+      "target": "Criatividade",
+      "context": "imagination"
+    },
+    {
+      "id": "127",
+      "source": "Purpose",
+      "target": "Propósito",
+      "context": "goal"
+    },
+    {
+      "id": "128",
+      "source": "Change",
+      "target": "Mudança",
+      "context": "transformation"
+    },
+    {
+      "id": "129",
+      "source": "Action",
+      "target": "Ação",
+      "context": "activity"
+    },
+    {
+      "id": "130",
+      "source": "Result",
+      "target": "Resultado",
+      "context": "outcome"
+    },
+    {
+      "id": "131",
+      "source": "Vision",
+      "target": "Visão",
+      "context": "foresight"
+    },
+    {
+      "id": "132",
+      "source": "Courage",
+      "target": "Coragem",
+      "context": "bravery"
+    },
+    {
+      "id": "133",
+      "source": "Effort",
+      "target": "Esforço",
+      "context": "attempt"
+    },
+    {
+      "id": "134",
+      "source": "Focus",
+      "target": "Foco",
+      "context": "attention"
+    },
+    {
+      "id": "135",
+      "source": "Patience",
+      "target": "Paciência",
+      "context": "tolerance"
+    },
+    {
+      "id": "136",
+      "source": "Belief",
+      "target": "Crença",
+      "context": "faith"
+    },
+    {
+      "id": "137",
+      "source": "Hope",
+      "target": "Esperança",
+      "context": "expectation"
+    },
+    {
+      "id": "138",
+      "source": "Truth",
+      "target": "Verdade",
+      "context": "reality"
+    },
+    {
+      "id": "139",
+      "source": "Dream",
+      "target": "Sonho",
+      "context": "aspiration"
+    },
+    {
+      "id": "140",
+      "source": "Goal",
+      "target": "Meta",
+      "context": "objective"
+    },
+    {
+      "id": "141",
+      "source": "Decision",
+      "target": "Decisão",
+      "context": "judgment"
+    },
+    {
+      "id": "142",
+      "source": "Peace",
+      "target": "Paz",
+      "context": "harmony"
+    },
+    {
+      "id": "143",
+      "source": "Friendship",
+      "target": "Amizade",
+      "context": "relationship"
+    },
+    {
+      "id": "144",
+      "source": "Kindness",
+      "target": "Bondade",
+      "context": "goodness"
+    },
+    {
+      "id": "145",
+      "source": "Honesty",
+      "target": "Honestidade",
+      "context": "truthfulness"
+    },
+    {
+      "id": "146",
+      "source": "Generosity",
+      "target": "Generosidade",
+      "context": "giving"
+    },
+    {
+      "id": "147",
+      "source": "Gratitude",
+      "target": "Gratidão",
+      "context": "thankfulness"
+    },
+    {
+      "id": "148",
+      "source": "Respect",
+      "target": "Respeito",
+      "context": "admiration"
+    },
+    {
+      "id": "149",
+      "source": "Justice",
+      "target": "Justiça",
+      "context": "law"
+    },
+    {
+      "id": "150",
+      "source": "Unity",
+      "target": "Unidade",
+      "context": "togetherness"
+    }
+  ]
+}
