@@ -272,5 +272,115 @@
         "¡Intenta completar con la mayor precisión en el menor tiempo!"
       ]
     }
+  },
+  "tools": {
+    "title": "Herramientas",
+    "subtitle": "Herramientas poderosas para mejorar tu aprendizaje",
+    "search_placeholder": "Buscar herramientas...",
+    "no_results": "No se encontraron herramientas",
+    "no_tools": "Aún no hay herramientas disponibles",
+    "try_tool": "Probar",
+    "total_tools": "herramientas",
+    "categories_count": "categorías",
+    "try_different_search": "Prueba un término de búsqueda diferente",
+    "check_back_soon": "Vuelve pronto para nuevas herramientas",
+    "clear_search": "Limpiar Búsqueda",
+    "categories": {
+      "artificial_intelligence": "Inteligencia Artificial",
+      "mathematics": "Matemáticas",
+      "coding": "Programación",
+      "physics": "Física",
+      "logic": "Lógica y Rompecabezas",
+      "uncategorized": "Sin Categoría"
+    },
+    "promptBuilder": {
+      "title": "Constructor de Prompts LLM",
+      "subtitle": "Crea prompts estructurados y efectivos para Modelos de Lenguaje",
+      "buildYourPrompt": "Construye Tu Prompt",
+      "generatedPrompt": "Prompt Generado",
+      "optional": "(Opcional)",
+      "required": "Requerido",
+      "labels": {
+        "objective": "Objetivo",
+        "context": "Contexto",
+        "targetAudience": "Audiencia Objetivo",
+        "constraints": "Restricciones",
+        "outputFormat": "Formato de Salida",
+        "tone": "Tono",
+        "examples": "Ejemplos"
+      },
+      "fields": {
+        "role": {
+          "label": "Rol del Agente",
+          "placeholder": "ej: un desarrollador Python experto, un escritor creativo"
+        },
+        "objective": {
+          "label": "Objetivo",
+          "placeholder": "¿Qué quieres que haga la IA?"
+        },
+        "context": {
+          "label": "Contexto",
+          "placeholder": "Proporciona información de contexto o situación"
+        },
+        "targetAudience": {
+          "label": "Audiencia Objetivo",
+          "placeholder": "ej: principiantes, expertos, estudiantes"
+        },
+        "tone": {
+          "label": "Tono"
+        },
+        "constraints": {
+          "label": "Restricciones",
+          "placeholder": "ej: Mantenerlo bajo 500 palabras, evitar jerga"
+        },
+        "outputFormat": {
+          "label": "Formato de Salida",
+          "placeholder": "ej: JSON, puntos, guía paso a paso"
+        },
+        "examples": {
+          "label": "Ejemplos",
+          "placeholder": "Proporciona ejemplos de la salida deseada"
+        }
+      },
+      "tones": {
+        "professional": "Profesional",
+        "casual": "Casual",
+        "technical": "Técnico",
+        "creative": "Creativo",
+        "educational": "Educativo"
+      },
+      "buttons": {
+        "generate": "Generar Prompt",
+        "copy": "Copiar al portapapeles",
+        "download": "Descargar como .txt"
+      },
+      "emptyState": {
+        "line1": "Completa el formulario y haz clic en \"Generar Prompt\"",
+        "line2": "para ver tu prompt estructurado aquí"
+      },
+      "tip": {
+        "label": "Consejo",
+        "text": "Copia este prompt y pégalo en tu LLM favorito (ChatGPT, Claude, Gemini, etc.) para obtener mejores resultados."
+      },
+      "promptTemplate": {
+        "rolePrefix": "Eres",
+        "closingText": "Por favor, proporciona una respuesta completa siguiendo las pautas anteriores."
+      },
+      "tipsSection": {
+        "title": "Consejos para Prompts Efectivos",
+        "tip1": {
+          "title": "Sé Específico",
+          "text": "Define claramente lo que quieres. Cuanto más específico sea tu objetivo, mejores serán los resultados."
+        },
+        "tip2": {
+          "title": "Proporciona Contexto",
+          "text": "La información de fondo ayuda a la IA a entender tus necesidades y generar respuestas más relevantes."
+        },
+        "tip3": {
+          "title": "Usa Ejemplos",
+          "text": "Muestra ejemplos del formato de salida deseado para guiar la estructura de respuesta de la IA."
+        }
+      }
+    }
   }
 }

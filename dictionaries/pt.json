@@ -271,5 +271,119 @@
         "Tente completar com a maior precisão no menor tempo!"
       ]
     }
+  },
+  "tools": {
+    "title": "Ferramentas",
+    "subtitle": "Ferramentas poderosas para aprimorar seu aprendizado",
+    "search_placeholder": "Buscar ferramentas...",
+    "no_results": "Nenhuma ferramenta encontrada",
+    "no_tools": "Nenhuma ferramenta disponível ainda",
+    "try_tool": "Experimentar",
+    "total_tools": "ferramentas",
+    "categories_count": "categorias",
+    "try_different_search": "Tente um termo de busca diferente",
+    "check_back_soon": "Volte em breve para novas ferramentas",
+    "clear_search": "Limpar Busca",
+    "categories": {
+      "artificial_intelligence": "Inteligência Artificial",
+      "mathematics": "Matemática",
+      "coding": "Programação",
+      "physics": "Física",
+      "logic": "Lógica e Quebra-cabeças",
+      "uncategorized": "Sem Categoria"
+    },
+    "promptBuilder": {
+      "title": "Construtor de Prompts LLM",
+      "subtitle": "Crie prompts estruturados e eficazes para Modelos de Linguagem",
+      "buildYourPrompt": "Construa Seu Prompt",
+      "generatedPrompt": "Prompt Gerado",
+      "optional": "(Opcional)",
+      "required": "Obrigatório",
+      "labels": {
+        "objective": "Objetivo",
+        "context": "Contexto",
+        "targetAudience": "Público-Alvo",
+        "constraints": "Restrições",
+        "outputFormat": "Formato de Saída",
+        "tone": "Tom",
+        "examples": "Exemplos"
+      },
+      "fields": {
+        "role": {
+          "label": "Função do Agente",
+          "placeholder": "ex: um desenvolvedor Python especialista, um escritor criativo"
+        },
+        "objective": {
+          "label": "Objetivo",
+          "placeholder": "O que você quer que a IA faça?"
+        },
+        "context": {
+          "label": "Contexto",
+          "placeholder": "Forneça informações de contexto ou situação"
+        },
+        "targetAudience": {
+          "label": "Público-Alvo",
+          "placeholder": "ex: iniciantes, especialistas, estudantes"
+        },
+        "tone": {
+          "label": "Tom"
+        },
+        "constraints": {
+          "label": "Restrições",
+          "placeholder": "ex: Mantenha abaixo de 500 palavras, evite jargões"
+        },
+        "outputFormat": {
+          "label": "Formato de Saída",
+          "placeholder": "ex: JSON, marcadores, guia passo a passo"
+        },
+        "examples": {
+          "label": "Exemplos",
+          "placeholder": "Forneça exemplos da saída desejada"
+        }
+      },
+      "tones": {
+        "professional": "Profissional",
+        "casual": "Casual",
+        "technical": "Técnico",
+        "creative": "Criativo",
+        "educational": "Educacional"
+      },
+      "buttons": {
+        "generate": "Gerar Prompt",
+        "copy": "Copiar para área de transferência",
+        "download": "Baixar como .txt"
+      },
+      "emptyState": {
+        "line1": "Preencha o formulário e clique em \"Gerar Prompt\"",
+        "line2": "para ver seu prompt estruturado aqui"
+      },
+      "tip": {
+        "label": "Dica",
+        "text": "Copie este prompt e cole-o em seu LLM favorito (ChatGPT, Claude, Gemini, etc.) para melhores resultados."
+      },
+      "promptTemplate": {
+        "rolePrefix": "Você é",
+        "closingText": "Por favor, forneça uma resposta abrangente seguindo as diretrizes acima."
+      },
+      "tipsSection": {
+        "title": "Dicas para Prompts Eficazes",
+        "tip1": {
+          "title": "Seja Específico",
+          "text": "Defina claramente o que você quer. Quanto mais específico for seu objetivo, melhores serão os resultados."
+        },
+        "tip2": {
+          "title": "Forneça Contexto",
+          "text": "Informações de fundo ajudam a IA a entender suas necessidades e gerar respostas mais relevantes."
+        },
+        "tip3": {
+          "title": "Use Exemplos",
+          "text": "Mostre exemplos do formato de saída desejado para orientar a estrutura de resposta da IA."
+        },
+        "tip4": {
+          "title": "Escolha o LLM Correto",
+          "text": "Use modelos maiores para tarefas complexas ou raciocínio. Claude para codificar, ChatGPT para documentações, Gemini para matemática, lógica e raciocínio."
+        }
+      }
+    }
   }
 }
