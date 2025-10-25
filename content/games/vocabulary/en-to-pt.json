@@ -908,6 +908,906 @@
       "source": "Park",
       "target": "Parque",
       "context": "places"
+    },
+    {
+      "id": "151",
+      "source": "Mountain",
+      "target": "Montanha",
+      "context": "nature"
+    },
+    {
+      "id": "152",
+      "source": "Forest",
+      "target": "Floresta",
+      "context": "nature"
+    },
+    {
+      "id": "153",
+      "source": "Tree",
+      "target": "Árvore",
+      "context": "nature"
+    },
+    {
+      "id": "154",
+      "source": "Flower",
+      "target": "Flor",
+      "context": "nature"
+    },
+    {
+      "id": "155",
+      "source": "Grass",
+      "target": "Grama",
+      "context": "nature"
+    },
+    {
+      "id": "156",
+      "source": "Sky",
+      "target": "Céu",
+      "context": "nature"
+    },
+    {
+      "id": "157",
+      "source": "Cloud",
+      "target": "Nuvem",
+      "context": "nature"
+    },
+    {
+      "id": "158",
+      "source": "Star",
+      "target": "Estrela",
+      "context": "nature"
+    },
+    {
+      "id": "159",
+      "source": "Moon",
+      "target": "Lua",
+      "context": "nature"
+    },
+    {
+      "id": "160",
+      "source": "Fire",
+      "target": "Fogo",
+      "context": "nature"
+    },
+    {
+      "id": "161",
+      "source": "Light",
+      "target": "Luz",
+      "context": "concepts"
+    },
+    {
+      "id": "162",
+      "source": "Dark",
+      "target": "Escuro",
+      "context": "adjectives"
+    },
+    {
+      "id": "163",
+      "source": "Strong",
+      "target": "Forte",
+      "context": "adjectives"
+    },
+    {
+      "id": "164",
+      "source": "Weak",
+      "target": "Fraco",
+      "context": "adjectives"
+    },
+    {
+      "id": "165",
+      "source": "Clean",
+      "target": "Limpo",
+      "context": "adjectives"
+    },
+    {
+      "id": "166",
+      "source": "Dirty",
+      "target": "Sujo",
+      "context": "adjectives"
+    },
+    {
+      "id": "167",
+      "source": "Full",
+      "target": "Cheio",
+      "context": "adjectives"
+    },
+    {
+      "id": "168",
+      "source": "Empty",
+      "target": "Vazio",
+      "context": "adjectives"
+    },
+    {
+      "id": "169",
+      "source": "Right",
+      "target": "Certo",
+      "context": "concepts"
+    },
+    {
+      "id": "170",
+      "source": "Wrong",
+      "target": "Errado",
+      "context": "concepts"
+    },
+    {
+      "id": "171",
+      "source": "High",
+      "target": "Alto",
+      "context": "adjectives"
+    },
+    {
+      "id": "172",
+      "source": "Low",
+      "target": "Baixo",
+      "context": "adjectives"
+    },
+    {
+      "id": "173",
+      "source": "Near",
+      "target": "Perto",
+      "context": "adjectives"
+    },
+    {
+      "id": "174",
+      "source": "Far",
+      "target": "Longe",
+      "context": "adjectives"
+    },
+    {
+      "id": "175",
+      "source": "Early",
+      "target": "Cedo",
+      "context": "time"
+    },
+    {
+      "id": "176",
+      "source": "Late",
+      "target": "Tarde",
+      "context": "time"
+    },
+    {
+      "id": "177",
+      "source": "Before",
+      "target": "Antes",
+      "context": "time"
+    },
+    {
+      "id": "178",
+      "source": "After",
+      "target": "Depois",
+      "context": "time"
+    },
+    {
+      "id": "179",
+      "source": "Begin",
+      "target": "Começar",
+      "context": "actions"
+    },
+    {
+      "id": "180",
+      "source": "End",
+      "target": "Terminar",
+      "context": "actions"
+    },
+    {
+      "id": "181",
+      "source": "Sit",
+      "target": "Sentar",
+      "context": "actions"
+    },
+    {
+      "id": "182",
+      "source": "Stand",
+      "target": "Levantar",
+      "context": "actions"
+    },
+    {
+      "id": "183",
+      "source": "Laugh",
+      "target": "Rir",
+      "context": "emotions"
+    },
+    {
+      "id": "184",
+      "source": "Cry",
+      "target": "Chorar",
+      "context": "emotions"
+    },
+    {
+      "id": "185",
+      "source": "Smile",
+      "target": "Sorrir",
+      "context": "emotions"
+    },
+    {
+      "id": "186",
+      "source": "Angry",
+      "target": "Bravo",
+      "context": "emotions"
+    },
+    {
+      "id": "187",
+      "source": "Afraid",
+      "target": "Assustado",
+      "context": "emotions"
+    },
+    {
+      "id": "188",
+      "source": "Surprised",
+      "target": "Surpreso",
+      "context": "emotions"
+    },
+    {
+      "id": "189",
+      "source": "Bored",
+      "target": "Entediado",
+      "context": "emotions"
+    },
+    {
+      "id": "190",
+      "source": "Tired",
+      "target": "Cansado",
+      "context": "emotions"
+    },
+    {
+      "id": "191",
+      "source": "Hungry",
+      "target": "Com fome",
+      "context": "emotions"
+    },
+    {
+      "id": "192",
+      "source": "Thirsty",
+      "target": "Com sede",
+      "context": "emotions"
+    },
+    {
+      "id": "193",
+      "source": "Busy",
+      "target": "Ocupado",
+      "context": "adjectives"
+    },
+    {
+      "id": "194",
+      "source": "Free",
+      "target": "Livre",
+      "context": "adjectives"
+    },
+    {
+      "id": "195",
+      "source": "Important",
+      "target": "Importante",
+      "context": "adjectives"
+    },
+    {
+      "id": "196",
+      "source": "Different",
+      "target": "Diferente",
+      "context": "adjectives"
+    },
+    {
+      "id": "197",
+      "source": "Same",
+      "target": "Igual",
+      "context": "adjectives"
+    },
+    {
+      "id": "198",
+      "source": "New",
+      "target": "Novo",
+      "context": "adjectives"
+    },
+    {
+      "id": "199",
+      "source": "Old",
+      "target": "Antigo",
+      "context": "adjectives"
+    },
+    {
+      "id": "200",
+      "source": "Beautiful",
+      "target": "Lindo",
+      "context": "adjectives"
+    },
+    {
+      "id": "201",
+      "source": "Cheap",
+      "target": "Barato",
+      "context": "adjectives"
+    },
+    {
+      "id": "202",
+      "source": "Expensive",
+      "target": "Caro",
+      "context": "adjectives"
+    },
+    {
+      "id": "203",
+      "source": "Quick",
+      "target": "Rápido",
+      "context": "adjectives"
+    },
+    {
+      "id": "204",
+      "source": "Slow",
+      "target": "Lento",
+      "context": "adjectives"
+    },
+    {
+      "id": "205",
+      "source": "Short",
+      "target": "Curto",
+      "context": "adjectives"
+    },
+    {
+      "id": "206",
+      "source": "Long",
+      "target": "Longo",
+      "context": "adjectives"
+    },
+    {
+      "id": "207",
+      "source": "Cold",
+      "target": "Gelado",
+      "context": "adjectives"
+    },
+    {
+      "id": "208",
+      "source": "Warm",
+      "target": "Morno",
+      "context": "adjectives"
+    },
+    {
+      "id": "209",
+      "source": "Friendship",
+      "target": "Amizade",
+      "context": "concepts"
+    },
+    {
+      "id": "210",
+      "source": "Peace",
+      "target": "Paz",
+      "context": "concepts"
+    },
+    {
+      "id": "211",
+      "source": "War",
+      "target": "Guerra",
+      "context": "concepts"
+    },
+    {
+      "id": "212",
+      "source": "Freedom",
+      "target": "Liberdade",
+      "context": "concepts"
+    },
+    {
+      "id": "213",
+      "source": "Truth",
+      "target": "Verdade",
+      "context": "concepts"
+    },
+    {
+      "id": "214",
+      "source": "Lie",
+      "target": "Mentira",
+      "context": "concepts"
+    },
+    {
+      "id": "215",
+      "source": "Hope",
+      "target": "Esperança",
+      "context": "emotions"
+    },
+    {
+      "id": "216",
+      "source": "Dream",
+      "target": "Sonho",
+      "context": "concepts"
+    },
+    {
+      "id": "217",
+      "source": "Idea",
+      "target": "Ideia",
+      "context": "concepts"
+    },
+    {
+      "id": "218",
+      "source": "Problem",
+      "target": "Problema",
+      "context": "concepts"
+    },
+    {
+      "id": "219",
+      "source": "Solution",
+      "target": "Solução",
+      "context": "concepts"
+    },
+    {
+      "id": "220",
+      "source": "Question",
+      "target": "Pergunta",
+      "context": "concepts"
+    },
+    {
+      "id": "221",
+      "source": "Answer",
+      "target": "Resposta",
+      "context": "concepts"
+    },
+    {
+      "id": "222",
+      "source": "Story",
+      "target": "História",
+      "context": "concepts"
+    },
+    {
+      "id": "223",
+      "source": "Letter",
+      "target": "Carta",
+      "context": "objects"
+    },
+    {
+      "id": "224",
+      "source": "Paper",
+      "target": "Papel",
+      "context": "objects"
+    },
+    {
+      "id": "225",
+      "source": "Pen",
+      "target": "Caneta",
+      "context": "objects"
+    },
+    {
+      "id": "226",
+      "source": "Phone",
+      "target": "Telefone",
+      "context": "objects"
+    },
+    {
+      "id": "227",
+      "source": "Bag",
+      "target": "Bolsa",
+      "context": "objects"
+    },
+    {
+      "id": "228",
+      "source": "Key",
+      "target": "Chave",
+      "context": "objects"
+    },
+    {
+      "id": "229",
+      "source": "Map",
+      "target": "Mapa",
+      "context": "objects"
+    },
+    {
+      "id": "230",
+      "source": "Clock",
+      "target": "Relógio",
+      "context": "objects"
+    },
+    {
+      "id": "231",
+      "source": "Mirror",
+      "target": "Espelho",
+      "context": "objects"
+    },
+    {
+      "id": "232",
+      "source": "Wall",
+      "target": "Parede",
+      "context": "objects"
+    },
+    {
+      "id": "233",
+      "source": "Floor",
+      "target": "Chão",
+      "context": "objects"
+    },
+    {
+      "id": "234",
+      "source": "Roof",
+      "target": "Telhado",
+      "context": "objects"
+    },
+    {
+      "id": "235",
+      "source": "Bed",
+      "target": "Cama",
+      "context": "objects"
+    },
+    {
+      "id": "236",
+      "source": "Pillow",
+      "target": "Travesseiro",
+      "context": "objects"
+    },
+    {
+      "id": "237",
+      "source": "Blanket",
+      "target": "Cobertor",
+      "context": "objects"
+    },
+    {
+      "id": "238",
+      "source": "Cup",
+      "target": "Copo",
+      "context": "objects"
+    },
+    {
+      "id": "239",
+      "source": "Plate",
+      "target": "Prato",
+      "context": "objects"
+    },
+    {
+      "id": "240",
+      "source": "Fork",
+      "target": "Garfo",
+      "context": "objects"
+    },
+    {
+      "id": "241",
+      "source": "Knife",
+      "target": "Faca",
+      "context": "objects"
+    },
+    {
+      "id": "242",
+      "source": "Spoon",
+      "target": "Colher",
+      "context": "objects"
+    },
+    {
+      "id": "243",
+      "source": "Fruit",
+      "target": "Fruta",
+      "context": "food"
+    },
+    {
+      "id": "244",
+      "source": "Vegetable",
+      "target": "Legume",
+      "context": "food"
+    },
+    {
+      "id": "245",
+      "source": "Meat",
+      "target": "Carne",
+      "context": "food"
+    },
+    {
+      "id": "246",
+      "source": "Rice",
+      "target": "Arroz",
+      "context": "food"
+    },
+    {
+      "id": "247",
+      "source": "Egg",
+      "target": "Ovo",
+      "context": "food"
+    },
+    {
+      "id": "248",
+      "source": "Sugar",
+      "target": "Açúcar",
+      "context": "food"
+    },
+    {
+      "id": "249",
+      "source": "Salt",
+      "target": "Sal",
+      "context": "food"
+    },
+    {
+      "id": "250",
+      "source": "Butter",
+      "target": "Manteiga",
+      "context": "food"
+    },
+    {
+      "id": "251",
+      "source": "Cheese",
+      "target": "Queijo",
+      "context": "food"
+    },
+    {
+      "id": "252",
+      "source": "Soup",
+      "target": "Sopa",
+      "context": "food"
+    },
+    {
+      "id": "253",
+      "source": "Breakfast",
+      "target": "Café da manhã",
+      "context": "food"
+    },
+    {
+      "id": "254",
+      "source": "Lunch",
+      "target": "Almoço",
+      "context": "food"
+    },
+    {
+      "id": "255",
+      "source": "Dinner",
+      "target": "Jantar",
+      "context": "food"
+    },
+    {
+      "id": "256",
+      "source": "Restaurant",
+      "target": "Restaurante",
+      "context": "places"
+    },
+    {
+      "id": "257",
+      "source": "Airport",
+      "target": "Aeroporto",
+      "context": "places"
+    },
+    {
+      "id": "258",
+      "source": "Bank",
+      "target": "Banco",
+      "context": "places"
+    },
+    {
+      "id": "259",
+      "source": "Library",
+      "target": "Biblioteca",
+      "context": "places"
+    },
+    {
+      "id": "260",
+      "source": "Museum",
+      "target": "Museu",
+      "context": "places"
+    },
+    {
+      "id": "261",
+      "source": "Bridge",
+      "target": "Ponte",
+      "context": "places"
+    },
+    {
+      "id": "262",
+      "source": "Farm",
+      "target": "Fazenda",
+      "context": "places"
+    },
+    {
+      "id": "263",
+      "source": "Island",
+      "target": "Ilha",
+      "context": "places"
+    },
+    {
+      "id": "264",
+      "source": "Road",
+      "target": "Estrada",
+      "context": "places"
+    },
+    {
+      "id": "265",
+      "source": "Bridge",
+      "target": "Ponte",
+      "context": "places"
+    },
+    {
+      "id": "266",
+      "source": "Traffic",
+      "target": "Trânsito",
+      "context": "transport"
+    },
+    {
+      "id": "267",
+      "source": "Bicycle",
+      "target": "Bicicleta",
+      "context": "transport"
+    },
+    {
+      "id": "268",
+      "source": "Taxi",
+      "target": "Táxi",
+      "context": "transport"
+    },
+    {
+      "id": "269",
+      "source": "Ship",
+      "target": "Navio",
+      "context": "transport"
+    },
+    {
+      "id": "270",
+      "source": "Boat",
+      "target": "Barco",
+      "context": "transport"
+    },
+    {
+      "id": "271",
+      "source": "Airport",
+      "target": "Aeroporto",
+      "context": "places"
+    },
+    {
+      "id": "272",
+      "source": "Travel",
+      "target": "Viajar",
+      "context": "actions"
+    },
+    {
+      "id": "273",
+      "source": "Visit",
+      "target": "Visitar",
+      "context": "actions"
+    },
+    {
+      "id": "274",
+      "source": "Stay",
+      "target": "Ficar",
+      "context": "actions"
+    },
+    {
+      "id": "275",
+      "source": "Help",
+      "target": "Ajudar",
+      "context": "actions"
+    },
+    {
+      "id": "276",
+      "source": "Wait",
+      "target": "Esperar",
+      "context": "actions"
+    },
+    {
+      "id": "277",
+      "source": "Try",
+      "target": "Tentar",
+      "context": "actions"
+    },
+    {
+      "id": "278",
+      "source": "Use",
+      "target": "Usar",
+      "context": "actions"
+    },
+    {
+      "id": "279",
+      "source": "Find",
+      "target": "Encontrar",
+      "context": "actions"
+    },
+    {
+      "id": "280",
+      "source": "Lose",
+      "target": "Perder",
+      "context": "actions"
+    },
+    {
+      "id": "281",
+      "source": "Read",
+      "target": "Ler",
+      "context": "actions"
+    },
+    {
+      "id": "282",
+      "source": "Write",
+      "target": "Escrever",
+      "context": "actions"
+    },
+    {
+      "id": "283",
+      "source": "Learn",
+      "target": "Aprender",
+      "context": "actions"
+    },
+    {
+      "id": "284",
+      "source": "Teach",
+      "target": "Ensinar",
+      "context": "actions"
+    },
+    {
+      "id": "285",
+      "source": "Remember",
+      "target": "Lembrar",
+      "context": "actions"
+    },
+    {
+      "id": "286",
+      "source": "Forget",
+      "target": "Esquecer",
+      "context": "actions"
+    },
+    {
+      "id": "287",
+      "source": "Listen",
+      "target": "Ouvir",
+      "context": "actions"
+    },
+    {
+      "id": "288",
+      "source": "Talk",
+      "target": "Conversar",
+      "context": "actions"
+    },
+    {
+      "id": "289",
+      "source": "Ask",
+      "target": "Perguntar",
+      "context": "actions"
+    },
+    {
+      "id": "290",
+      "source": "Answer",
+      "target": "Responder",
+      "context": "actions"
+    },
+    {
+      "id": "291",
+      "source": "Show",
+      "target": "Mostrar",
+      "context": "actions"
+    },
+    {
+      "id": "292",
+      "source": "Call",
+      "target": "Chamar",
+      "context": "actions"
+    },
+    {
+      "id": "293",
+      "source": "Change",
+      "target": "Mudar",
+      "context": "actions"
+    },
+    {
+      "id": "294",
+      "source": "Clean",
+      "target": "Limpar",
+      "context": "actions"
+    },
+    {
+      "id": "295",
+      "source": "Cook",
+      "target": "Cozinhar",
+      "context": "actions"
+    },
+    {
+      "id": "296",
+      "source": "Wash",
+      "target": "Lavar",
+      "context": "actions"
+    },
+    {
+      "id": "297",
+      "source": "Draw",
+      "target": "Desenhar",
+      "context": "actions"
+    },
+    {
+      "id": "298",
+      "source": "Build",
+      "target": "Construir",
+      "context": "actions"
+    },
+    {
+      "id": "299",
+      "source": "Cut",
+      "target": "Cortar",
+      "context": "actions"
+    },
+    {
+      "id": "300",
+      "source": "Drive",
+      "target": "Dirigir",
+      "context": "actions"
     }
   ]
 }
