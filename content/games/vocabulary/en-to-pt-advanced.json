@@ -608,6 +608,606 @@
       "source": "Unity",
       "target": "Unidade",
       "context": "togetherness"
+    },
+    {
+      "id": "151",
+      "source": "Innovation",
+      "target": "Inovação",
+      "context": "novelty"
+    },
+    {
+      "id": "152",
+      "source": "Sustainability",
+      "target": "Sustentabilidade",
+      "context": "balance"
+    },
+    {
+      "id": "153",
+      "source": "Adaptation",
+      "target": "Adaptação",
+      "context": "adjustment"
+    },
+    {
+      "id": "154",
+      "source": "Authenticity",
+      "target": "Autenticidade",
+      "context": "genuineness"
+    },
+    {
+      "id": "155",
+      "source": "Awareness",
+      "target": "Consciência",
+      "context": "perception"
+    },
+    {
+      "id": "156",
+      "source": "Collaboration",
+      "target": "Colaboração",
+      "context": "cooperation"
+    },
+    {
+      "id": "157",
+      "source": "Competence",
+      "target": "Competência",
+      "context": "ability"
+    },
+    {
+      "id": "158",
+      "source": "Determination",
+      "target": "Determinação",
+      "context": "resolve"
+    },
+    {
+      "id": "159",
+      "source": "Discipline",
+      "target": "Disciplina",
+      "context": "control"
+    },
+    {
+      "id": "160",
+      "source": "Ethics",
+      "target": "Ética",
+      "context": "morality"
+    },
+    {
+      "id": "161",
+      "source": "Leadership",
+      "target": "Liderança",
+      "context": "guidance"
+    },
+    {
+      "id": "162",
+      "source": "Resilience",
+      "target": "Resiliência",
+      "context": "strength"
+    },
+    {
+      "id": "163",
+      "source": "Accountability",
+      "target": "Responsabilidade",
+      "context": "answerability"
+    },
+    {
+      "id": "164",
+      "source": "Motivation",
+      "target": "Motivação",
+      "context": "drive"
+    },
+    {
+      "id": "165",
+      "source": "Transformation",
+      "target": "Transformação",
+      "context": "change"
+    },
+    {
+      "id": "166",
+      "source": "Skepticism",
+      "target": "Ceticismo",
+      "context": "doubt"
+    },
+    {
+      "id": "167",
+      "source": "Intuition",
+      "target": "Intuição",
+      "context": "insight"
+    },
+    {
+      "id": "168",
+      "source": "Observation",
+      "target": "Observação",
+      "context": "attention"
+    },
+    {
+      "id": "169",
+      "source": "Interpretation",
+      "target": "Interpretação",
+      "context": "understanding"
+    },
+    {
+      "id": "170",
+      "source": "Tolerance",
+      "target": "Tolerância",
+      "context": "acceptance"
+    },
+    {
+      "id": "171",
+      "source": "Integrity",
+      "target": "Integridade",
+      "context": "honesty"
+    },
+    {
+      "id": "172",
+      "source": "Transparency",
+      "target": "Transparência",
+      "context": "openness"
+    },
+    {
+      "id": "173",
+      "source": "Rationality",
+      "target": "Racionalidade",
+      "context": "logic"
+    },
+    {
+      "id": "174",
+      "source": "Diligence",
+      "target": "Diligência",
+      "context": "carefulness"
+    },
+    {
+      "id": "175",
+      "source": "Initiative",
+      "target": "Iniciativa",
+      "context": "action"
+    },
+    {
+      "id": "176",
+      "source": "Innovation",
+      "target": "Inovação",
+      "context": "creativity"
+    },
+    {
+      "id": "177",
+      "source": "Competitiveness",
+      "target": "Competitividade",
+      "context": "rivalry"
+    },
+    {
+      "id": "178",
+      "source": "Ambition",
+      "target": "Ambição",
+      "context": "aspiration"
+    },
+    {
+      "id": "179",
+      "source": "Commitment",
+      "target": "Comprometimento",
+      "context": "dedication"
+    },
+    {
+      "id": "180",
+      "source": "Accountability",
+      "target": "Prestação de contas",
+      "context": "responsibility"
+    },
+    {
+      "id": "181",
+      "source": "Efficiency",
+      "target": "Eficiência",
+      "context": "effectiveness"
+    },
+    {
+      "id": "182",
+      "source": "Collaboration",
+      "target": "Colaboração",
+      "context": "teamwork"
+    },
+    {
+      "id": "183",
+      "source": "Imagination",
+      "target": "Imaginação",
+      "context": "creativity"
+    },
+    {
+      "id": "184",
+      "source": "Skepticism",
+      "target": "Ceticismo",
+      "context": "critical thinking"
+    },
+    {
+      "id": "185",
+      "source": "Perseverance",
+      "target": "Perseverança",
+      "context": "persistence"
+    },
+    {
+      "id": "186",
+      "source": "Cooperation",
+      "target": "Cooperação",
+      "context": "teamwork"
+    },
+    {
+      "id": "187",
+      "source": "Empowerment",
+      "target": "Empoderamento",
+      "context": "strengthening"
+    },
+    {
+      "id": "188",
+      "source": "Authenticity",
+      "target": "Autenticidade",
+      "context": "truthfulness"
+    },
+    {
+      "id": "189",
+      "source": "Strategic",
+      "target": "Estratégico",
+      "context": "planned"
+    },
+    {
+      "id": "190",
+      "source": "Evaluation",
+      "target": "Avaliação",
+      "context": "assessment"
+    },
+    {
+      "id": "191",
+      "source": "Perception",
+      "target": "Percepção",
+      "context": "understanding"
+    },
+    {
+      "id": "192",
+      "source": "Expansion",
+      "target": "Expansão",
+      "context": "growth"
+    },
+    {
+      "id": "193",
+      "source": "Influence",
+      "target": "Influência",
+      "context": "impact"
+    },
+    {
+      "id": "194",
+      "source": "Innovation",
+      "target": "Inovação",
+      "context": "originality"
+    },
+    {
+      "id": "195",
+      "source": "Prosperity",
+      "target": "Prosperidade",
+      "context": "wealth"
+    },
+    {
+      "id": "196",
+      "source": "Consequence",
+      "target": "Consequência",
+      "context": "result"
+    },
+    {
+      "id": "197",
+      "source": "Magnitude",
+      "target": "Magnitude",
+      "context": "extent"
+    },
+    {
+      "id": "198",
+      "source": "Hierarchy",
+      "target": "Hierarquia",
+      "context": "structure"
+    },
+    {
+      "id": "199",
+      "source": "Synthesis",
+      "target": "Síntese",
+      "context": "combination"
+    },
+    {
+      "id": "200",
+      "source": "Hypothesis",
+      "target": "Hipótese",
+      "context": "theory"
+    },
+    {
+      "id": "201",
+      "source": "Framework",
+      "target": "Estrutura",
+      "context": "system"
+    },
+    {
+      "id": "202",
+      "source": "Paradigm",
+      "target": "Paradigma",
+      "context": "model"
+    },
+    {
+      "id": "203",
+      "source": "Renaissance",
+      "target": "Renascimento",
+      "context": "rebirth"
+    },
+    {
+      "id": "204",
+      "source": "Conscience",
+      "target": "Consciência moral",
+      "context": "morality"
+    },
+    {
+      "id": "205",
+      "source": "Perspective",
+      "target": "Perspectiva",
+      "context": "viewpoint"
+    },
+    {
+      "id": "206",
+      "source": "Philosophy",
+      "target": "Filosofia",
+      "context": "thinking"
+    },
+    {
+      "id": "207",
+      "source": "Rhetoric",
+      "target": "Retórica",
+      "context": "persuasion"
+    },
+    {
+      "id": "208",
+      "source": "Metaphor",
+      "target": "Metáfora",
+      "context": "comparison"
+    },
+    {
+      "id": "209",
+      "source": "Irony",
+      "target": "Ironia",
+      "context": "contrast"
+    },
+    {
+      "id": "210",
+      "source": "Symbolism",
+      "target": "Simbolismo",
+      "context": "representation"
+    },
+    {
+      "id": "211",
+      "source": "Contradiction",
+      "target": "Contradição",
+      "context": "inconsistency"
+    },
+    {
+      "id": "212",
+      "source": "Consensus",
+      "target": "Consenso",
+      "context": "agreement"
+    },
+    {
+      "id": "213",
+      "source": "Ambiguity",
+      "target": "Ambiguidade",
+      "context": "uncertainty"
+    },
+    {
+      "id": "214",
+      "source": "Complexity",
+      "target": "Complexidade",
+      "context": "intricacy"
+    },
+    {
+      "id": "215",
+      "source": "Innovation",
+      "target": "Inovação",
+      "context": "improvement"
+    },
+    {
+      "id": "216",
+      "source": "Revolution",
+      "target": "Revolução",
+      "context": "change"
+    },
+    {
+      "id": "217",
+      "source": "Evolution",
+      "target": "Evolução",
+      "context": "progress"
+    },
+    {
+      "id": "218",
+      "source": "Contradiction",
+      "target": "Contradição",
+      "context": "conflict"
+    },
+    {
+      "id": "219",
+      "source": "Definition",
+      "target": "Definição",
+      "context": "meaning"
+    },
+    {
+      "id": "220",
+      "source": "Concept",
+      "target": "Conceito",
+      "context": "idea"
+    },
+    {
+      "id": "221",
+      "source": "Principle",
+      "target": "Princípio",
+      "context": "rule"
+    },
+    {
+      "id": "222",
+      "source": "Variable",
+      "target": "Variável",
+      "context": "element"
+    },
+    {
+      "id": "223",
+      "source": "Correlation",
+      "target": "Correlação",
+      "context": "relation"
+    },
+    {
+      "id": "224",
+      "source": "Experiment",
+      "target": "Experimento",
+      "context": "test"
+    },
+    {
+      "id": "225",
+      "source": "Analysis",
+      "target": "Análise",
+      "context": "examination"
+    },
+    {
+      "id": "226",
+      "source": "Inference",
+      "target": "Inferência",
+      "context": "deduction"
+    },
+    {
+      "id": "227",
+      "source": "Validation",
+      "target": "Validação",
+      "context": "confirmation"
+    },
+    {
+      "id": "228",
+      "source": "Justification",
+      "target": "Justificação",
+      "context": "reasoning"
+    },
+    {
+      "id": "229",
+      "source": "Assumption",
+      "target": "Suposição",
+      "context": "presumption"
+    },
+    {
+      "id": "230",
+      "source": "Deduction",
+      "target": "Dedução",
+      "context": "conclusion"
+    },
+    {
+      "id": "231",
+      "source": "Comprehension",
+      "target": "Compreensão",
+      "context": "understanding"
+    },
+    {
+      "id": "232",
+      "source": "Perspective",
+      "target": "Perspectiva",
+      "context": "viewpoint"
+    },
+    {
+      "id": "233",
+      "source": "Insight",
+      "target": "Percepção profunda",
+      "context": "understanding"
+    },
+    {
+      "id": "234",
+      "source": "Innovation",
+      "target": "Inovação",
+      "context": "newness"
+    },
+    {
+      "id": "235",
+      "source": "Paradigm",
+      "target": "Paradigma",
+      "context": "framework"
+    },
+    {
+      "id": "236",
+      "source": "Phenomenon",
+      "target": "Fenômeno",
+      "context": "occurrence"
+    },
+    {
+      "id": "237",
+      "source": "Significance",
+      "target": "Significado",
+      "context": "importance"
+    },
+    {
+      "id": "238",
+      "source": "Synthesis",
+      "target": "Síntese",
+      "context": "integration"
+    },
+    {
+      "id": "239",
+      "source": "Empirical",
+      "target": "Empírico",
+      "context": "observational"
+    },
+    {
+      "id": "240",
+      "source": "Theoretical",
+      "target": "Teórico",
+      "context": "conceptual"
+    },
+    {
+      "id": "241",
+      "source": "Methodology",
+      "target": "Metodologia",
+      "context": "approach"
+    },
+    {
+      "id": "242",
+      "source": "Hypothesis",
+      "target": "Hipótese",
+      "context": "assumption"
+    },
+    {
+      "id": "243",
+      "source": "Validation",
+      "target": "Validação",
+      "context": "verification"
+    },
+    {
+      "id": "244",
+      "source": "Framework",
+      "target": "Estrutura",
+      "context": "system"
+    },
+    {
+      "id": "245",
+      "source": "Consistency",
+      "target": "Consistência",
+      "context": "coherence"
+    },
+    {
+      "id": "246",
+      "source": "Reliability",
+      "target": "Confiabilidade",
+      "context": "dependability"
+    },
+    {
+      "id": "247",
+      "source": "Objectivity",
+      "target": "Objetividade",
+      "context": "impartiality"
+    },
+    {
+      "id": "248",
+      "source": "Relevance",
+      "target": "Relevância",
+      "context": "importance"
+    },
+    {
+      "id": "249",
+      "source": "Precision",
+      "target": "Precisão",
+      "context": "accuracy"
+    },
+    {
+      "id": "250",
+      "source": "Significance",
+      "target": "Importância",
+      "context": "meaning"
     }
   ]
 }
