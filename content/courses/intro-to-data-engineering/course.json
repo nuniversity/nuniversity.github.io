@@ -1,18 +1,24 @@
 {
   "area": "Computer Science",
-  "difficulty": "beginner",
+  "difficulty": "Advanced",
   "duration": "4 weeks",
   "icon": "code",
   "en": {
     "title": "Introduction to Data Engineering",
-    "description": "Learn the fundamentals of programming with hands-on exercises and real-world projects"
+    "description": "Learn the fundamentals of programming with hands-on exercises and real-world projects",
+    "difficulty": "Advanced",
+    "duration": "4 Weeks"
   },
   "pt": {
     "title": "Introdução à Engenharia de Dados",
-    "description": "Aprenda os fundamentos da programação com exercícios práticos e projetos do mundo real"
+    "description": "Aprenda os fundamentos da programação com exercícios práticos e projetos do mundo real",
+    "difficulty": "Avançado",
+    "duration": "4 Semanas"
   },
   "es": {
-    "title": "Introducción a la Programación",
-    "description": "Aprende los fundamentos de la programación con ejercicios prácticos y proyectos del mundo real"
+    "title": "Introducción a la ingeniería de datos",
+    "description": "Aprende los fundamentos de la programación con ejercicios prácticos y proyectos del mundo real",
+    "difficulty": "Avanzado",
+    "duration": "4 Semanas"
   }
 }

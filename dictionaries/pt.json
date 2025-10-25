@@ -181,6 +181,23 @@
     "madeWith": "Feito com",
     "forLearners": "para aprendizes em todo o mundo"
   },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "retry": "Tentar Novamente",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "uncategorized": "Não Categorizado",
+    "of": "de"
+  },
   "courses": {
     "title": "Cursos",
     "subtitle": "Explore nossos cursos por área e aprenda no seu próprio ritmo",
@@ -200,23 +217,59 @@
     "lessons": "Lições",
     "progress": "Progreso",
     "course_content": "Contenido del Curso",
-    "back_to_courses": "Volver a Cursos"
+    "back_to_courses": "Volver a Cursos",
+    "total_courses": "cursos",
+    "categories": "categorias",
+    "filter_by_difficulty": "Filtrar por dificuldade",
+    "all_levels": "Todos os níveis",
+    "try_different_filters": "Tente ajustar os filtros",
+    "check_back_soon": "Volte em breve para novos conteúdos",
+    "clear_filters": "Limpar filtros",
+    "start_learning": "Começar →"
   },
-  "common": {
-    "loading": "Carregando...",
-    "error": "Erro",
-    "retry": "Tentar Novamente",
-    "back": "Voltar",
-    "next": "Próximo",
-    "previous": "Anterior",
-    "search": "Buscar",
-    "filter": "Filtrar",
-    "sort": "Ordenar",
-    "save": "Salvar",
-    "cancel": "Cancelar",
-    "delete": "Excluir",
-    "edit": "Editar",
-    "uncategorized": "Não Categorizado",
-    "of": "de"
+  "games": {
+    "title": "Jogos Educativos",
+    "subtitle": "Domine novas habilidades através de jogos e desafios interativos",
+    "search_placeholder": "Buscar jogos...",
+    "no_results": "Nenhum jogo encontrado",
+    "no_games": "Nenhum jogo disponível ainda",
+    "play_now": "Jogar Agora",
+    "back_to_games": "Voltar aos Jogos",
+    "restart": "Reiniciar",
+    "how_to_play": "Como Jogar",
+    "congratulations": "Parabéns!",
+    "game_complete": "Você completou o jogo!",
+    "play_again": "Jogar Novamente",
+    "more_games": "Mais Jogos",
+    "categories": {
+      "vocabulary": "Idiomas - Vocabulário",
+      "grammar": "Idiomas - Gramática",
+      "math": "Matemática",
+      "coding": "Programação",
+      "physics": "Física",
+      "logic": "Lógica & Puzzles",
+      "fun": "Diversão"
+    },
+    "stats": {
+      "score": "Pontuação",
+      "time": "Tempo",
+      "matches": "Pares",
+      "accuracy": "Precisão",
+      "attempts": "Tentativas",
+      "final_score": "Pontuação Final"
+    },
+    "difficulty": {
+      "beginner": "Iniciante",
+      "intermediate": "Intermediário",
+      "advanced": "Avançado"
+    },
+    "instructions": {
+      "vocabulary_match": [
+        "Clique nos cartões para selecioná-los",
+        "Combine palavras no idioma de origem com suas traduções",
+        "Encontre todos os pares para completar o jogo",
+        "Tente completar com a maior precisão no menor tempo!"
+      ]
+    }
   }
 }

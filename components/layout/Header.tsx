@@ -2,16 +2,18 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X, Sun, Moon } from 'lucide-react'
+import { Menu, X, Sun, Moon, Gamepad2 } from 'lucide-react'
 import LanguageSwitcher from '../language/LanguageSwitcher'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
 import { useTheme } from '@/components/providers/Providers'
 
+
 interface HeaderProps {
   lang: Locale
   dict: Dictionary
 }
+
 
 export default function Header({ lang, dict }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -21,7 +23,7 @@ export default function Header({ lang, dict }: HeaderProps) {
     { name: dict.navigation.home, href: `/${lang}` },
     { name: dict.navigation.courses, href: `/${lang}/courses` },
     // { name: dict.navigation.tools, href: `/${lang}/tools` },
-    // { name: dict.navigation.games, href: `/${lang}/games` },
+    { name: dict.navigation.games, href: `/${lang}/games`, label: 'Games' },
     { name: dict.navigation.about, href: `/${lang}/about` },
     { name: dict.navigation.contact, href: `/${lang}/contact` },
   ]
@@ -100,6 +102,7 @@ export default function Header({ lang, dict }: HeaderProps) {
               </Link>
             ))}
           </div>
+          
         )}
       </nav>
     </header>

@@ -181,6 +181,23 @@
     "madeWith": "Made with",
     "forLearners": "for learners worldwide"
   },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "uncategorized": "Uncategorized",
+    "of": "of"
+  },
   "courses": {
     "title": "Courses",
     "subtitle": "Explore our courses by area and learn at your own pace",
@@ -202,12 +219,6 @@
     "progress": "Progress",
     "course_content": "Course Content",
     "back_to_courses": "Back to Courses",
-    "categories": {
-      "fundamentals": "Fundamentals",
-      "advanced": "Advanced",
-      "tools": "Tools",
-      "projects": "Projects"
-    },
     "labels": {
       "level": "Level",
       "duration": "Duration",
@@ -223,23 +234,59 @@
       "view_all": "View All Courses",
       "start_learning": "Start Learning",
       "back_to_areas": "Back to Areas"
-    }
+    },
+    "total_courses": "courses",
+    "categories": "categories",
+    "filter_by_difficulty": "Filter by difficulty",
+    "all_levels": "All Levels",
+    "try_different_filters": "Try adjusting your filters",
+    "check_back_soon": "Check back soon for new content",
+    "clear_filters": "Clear Filters",
+    "start_learning": "Start →"
   },
-  "common": {
-    "loading": "Loading...",
-    "error": "Error",
-    "retry": "Retry",
-    "back": "Back",
-    "next": "Next",
-    "previous": "Previous",
-    "search": "Search",
-    "filter": "Filter",
-    "sort": "Sort",
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "uncategorized": "Uncategorized",
-    "of": "of"
+  "games": {
+    "title": "Learning Games",
+    "subtitle": "Master new skills through interactive games and challenges",
+    "search_placeholder": "Search games...",
+    "no_results": "No games found matching your search",
+    "no_games": "No games available yet",
+    "play_now": "Play Now",
+    "back_to_games": "Back to Games",
+    "restart": "Restart",
+    "how_to_play": "How to Play",
+    "congratulations": "Congratulations!",
+    "game_complete": "You've completed the game!",
+    "play_again": "Play Again",
+    "more_games": "More Games",
+    "categories": {
+      "vocabulary": "Language - Vocabulary",
+      "grammar": "Language - Grammar",
+      "math": "Mathematics",
+      "coding": "Coding & Programming",
+      "physics": "Physics",
+      "logic": "Logic & Puzzles",
+      "fun": "Fun & Games"
+    },
+    "stats": {
+      "score": "Score",
+      "time": "Time",
+      "matches": "Matches",
+      "accuracy": "Accuracy",
+      "attempts": "Attempts",
+      "final_score": "Final Score"
+    },
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "instructions": {
+      "vocabulary_match": [
+        "Click on cards to select them",
+        "Match words in the source language with their translations",
+        "Find all matching pairs to complete the game",
+        "Try to complete with the highest accuracy in the shortest time!"
+      ]
+    }
   }
 }
