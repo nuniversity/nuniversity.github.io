@@ -1,7 +1,6 @@
 // app/[lang]/page.tsx
 import Hero from '@/components/home/Hero'
 import Features from '@/components/home/Features'
-import Contact from '@/components/contacts/Contact'
 import { Metadata } from 'next'
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import { type Locale } from '@/lib/i18n/config'

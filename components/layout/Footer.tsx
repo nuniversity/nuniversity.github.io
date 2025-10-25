@@ -24,8 +24,8 @@ export default function Footer({ lang, dict }: FooterProps) {
   const footerLinks = {
     platform: [
       { name: dict.footer.links.courses, href: `/${lang}/courses`, icon: BookOpen },
-      // { name: dict.footer.links.tools, href: `/${lang}/tools`, icon: Code },
-      // { name: dict.footer.links.games, href: `/${lang}/games`, icon: GamepadIcon },
+      { name: dict.footer.links.tools, href: `/${lang}/tools`, icon: Code },
+      { name: dict.footer.links.games, href: `/${lang}/games`, icon: GamepadIcon },
       // { name: dict.footer.links.apiExplorer, href: `/${lang}/tools/api-explorer`, icon: Calculator },
     ],
     subjects: [
