@@ -22,7 +22,7 @@ export default function Header({ lang, dict }: HeaderProps) {
   const navigation = [
     { name: dict.navigation.home, href: `/${lang}` },
     { name: dict.navigation.courses, href: `/${lang}/courses` },
-    // { name: dict.navigation.tools, href: `/${lang}/tools` },
+    { name: dict.navigation.tools, href: `/${lang}/tools` },
     { name: dict.navigation.games, href: `/${lang}/games`, label: 'Games' },
     { name: dict.navigation.about, href: `/${lang}/about` },
     { name: dict.navigation.contact, href: `/${lang}/contact` },
