@@ -288,5 +288,115 @@
         "Try to complete with the highest accuracy in the shortest time!"
       ]
     }
+  },
+  "tools": {
+    "title": "Tools",
+    "subtitle": "Powerful tools to enhance your learning",
+    "search_placeholder": "Search tools...",
+    "no_results": "No tools found matching your search",
+    "no_tools": "No tools available yet",
+    "try_tool": "Try Tool",
+    "total_tools": "tools",
+    "categories_count": "categories",
+    "try_different_search": "Try a different search term",
+    "check_back_soon": "Check back soon for new tools",
+    "clear_search": "Clear Search",
+    "categories": {
+      "artificial_intelligence": "Artificial Intelligence",
+      "mathematics": "Mathematics",
+      "coding": "Coding & Programming",
+      "physics": "Physics",
+      "logic": "Logic & Puzzles",
+      "uncategorized": "Uncategorized"
+    },
+    "promptBuilder": {
+      "title": "LLM Prompt Builder",
+      "subtitle": "Create structured, effective prompts for Large Language Models",
+      "buildYourPrompt": "Build Your Prompt",
+      "generatedPrompt": "Generated Prompt",
+      "optional": "(Optional)",
+      "required": "Required",
+      "labels": {
+        "objective": "Objective",
+        "context": "Context",
+        "targetAudience": "Target Audience",
+        "constraints": "Constraints",
+        "outputFormat": "Output Format",
+        "tone": "Tone",
+        "examples": "Examples"
+      },
+      "fields": {
+        "role": {
+          "label": "Agent Role",
+          "placeholder": "e.g., an expert Python developer, a creative writer"
+        },
+        "objective": {
+          "label": "Objective",
+          "placeholder": "What do you want the AI to do?"
+        },
+        "context": {
+          "label": "Context",
+          "placeholder": "Provide background information or situation"
+        },
+        "targetAudience": {
+          "label": "Target Audience",
+          "placeholder": "e.g., beginners, experts, students"
+        },
+        "tone": {
+          "label": "Tone"
+        },
+        "constraints": {
+          "label": "Constraints",
+          "placeholder": "e.g., Keep it under 500 words, avoid jargon"
+        },
+        "outputFormat": {
+          "label": "Output Format",
+          "placeholder": "e.g., JSON, bullet points, step-by-step guide"
+        },
+        "examples": {
+          "label": "Examples",
+          "placeholder": "Provide examples of desired output"
+        }
+      },
+      "tones": {
+        "professional": "Professional",
+        "casual": "Casual",
+        "technical": "Technical",
+        "creative": "Creative",
+        "educational": "Educational"
+      },
+      "buttons": {
+        "generate": "Generate Prompt",
+        "copy": "Copy to clipboard",
+        "download": "Download as .txt"
+      },
+      "emptyState": {
+        "line1": "Fill in the form and click \"Generate Prompt\"",
+        "line2": "to see your structured prompt here"
+      },
+      "tip": {
+        "label": "Tip",
+        "text": "Copy this prompt and paste it into your favorite LLM (ChatGPT, Claude, Gemini, etc.) for best results."
+      },
+      "promptTemplate": {
+        "rolePrefix": "You are",
+        "closingText": "Please provide a comprehensive response following the guidelines above."
+      },
+      "tipsSection": {
+        "title": "Tips for Effective Prompts",
+        "tip1": {
+          "title": "Be Specific",
+          "text": "Clearly define what you want. The more specific your objective, the better the results."
+        },
+        "tip2": {
+          "title": "Provide Context",
+          "text": "Background information helps the AI understand your needs and generate more relevant responses."
+        },
+        "tip3": {
+          "title": "Use Examples",
+          "text": "Show examples of the desired output format to guide the AI's response structure."
+        }
+      }
+    }
   }
 }

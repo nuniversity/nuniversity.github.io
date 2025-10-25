@@ -1,24 +1,41 @@
-// content/tools/llm-prompt-builder/page.tsx
-import PromptBuilder from "./PromptBuilder"
-import { Metadata } from "next"
+// app/[lang]/tools/page.tsx
+export const dynamic = 'force-static'
+export const revalidate = false
 
-export const metadata: Metadata = {
-  title: "LLM Prompt Builder | NUniversity Tools",
-  description: "Generate professional, structured prompts for any Large Language Model (LLM).",
+import { getDictionary } from '@/lib/i18n/get-dictionary'
+import { type Locale } from '@/lib/i18n/config'
+import { getAllTools } from '@/lib/tools/get-tool-content'
+import { Metadata } from 'next'
+import { ToolsClient } from './tools-client'
+
+interface ToolsPageProps {
+  params: { lang: Locale }
 }
 
-export default function LLMPromptBuilderPage() {
+export async function generateMetadata({
+  params,
+}: {
+  params: { lang: Locale }
+}): Promise<Metadata> {
+  const dict = await getDictionary(params.lang)
+  
+  return {
+    title: dict.tools?.title || 'Tools',
+    description: dict.tools?.subtitle || 'Powerful tools to enhance your learning',
+  }
+}
+
+export default async function ToolsPage({ params }: ToolsPageProps) {
+  const { lang } = params
+  const dict = await getDictionary(lang)
+  
+  const allTools = await getAllTools(lang)
+
   return (
-    <main className="min-h-screen py-20 px-4 bg-gradient-to-b from-base-200 to-base-300">
-      <section className="text-center mb-12">
-        <h1 className="text-4xl font-extrabold mb-3 text-gradient">
-          🧠 LLM Prompt Builder
-        </h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          Design crystal-clear prompts that help AI understand your goals and deliver precise, high-quality results.
-        </p>
-      </section>
-      <PromptBuilder />
-    </main>
+    <ToolsClient 
+      lang={lang}
+      tools={allTools}
+      dict={dict}
+    />
   )
 }
