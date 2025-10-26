@@ -5,7 +5,7 @@ import { getDictionary } from '@/lib/i18n/get-dictionary'
 import MarkdownRenderer from '@/components/markdown/MarkdownRenderer'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ChevronLeft, ChevronRight, BookOpen, Home } from 'lucide-react'
+import { ChevronLeft, ChevronRight, BookOpen, Home, Brain } from 'lucide-react'
 import { Metadata } from 'next'
 
 

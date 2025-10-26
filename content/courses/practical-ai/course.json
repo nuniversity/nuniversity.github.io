@@ -1,0 +1,25 @@
+{
+  "area": "Artificial Intelligence",
+  "author": "Google Gemini",
+  "difficulty": "Beginner",
+  "duration": "2 hours",
+  "icon": "brain",
+  "en": {
+    "title": "Practical AI: AI for Everyday Life",
+    "description": "Master accessible AI tools like ChatGPT and Spreadsheets to boost productivity, creativity, and problem-solving without needing to code.",
+    "difficulty": "Beginner",
+    "duration": "2 Hours"
+  },
+  "pt": {
+    "title": "IA Prática: IA para a Vida Diária",
+    "description": "Domine ferramentas de IA acessíveis como ChatGPT e Planilhas para aumentar a produtividade e criatividade sem precisar programar.",
+    "difficulty": "Iniciante",
+    "duration": "2 Horas"
+  },
+  "es": {
+    "title": "Práctica de la IA: IA para la Vida Cotidiana",
+    "description": "Domina herramientas de IA accesibles como ChatGPT y Hoja Electrónica para aumentar la productividad y la creatividad sin necesidad de programar.",
+    "difficulty": "Principiante",
+    "duration": "2 Horas"
+  }
+}
