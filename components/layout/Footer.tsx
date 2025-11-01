@@ -1,6 +1,6 @@
 // components/layout/Footer.tsx
 import Link from 'next/link'
-import { Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon } from 'lucide-react'
+import { Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon, Library } from 'lucide-react'
 import { MapPin, Youtube, Globe, Instagram, Send, CheckCircle } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
@@ -26,13 +26,10 @@ export default function Footer({ lang, dict }: FooterProps) {
       { name: dict.footer.links.courses, href: `/${lang}/courses`, icon: BookOpen },
       { name: dict.footer.links.tools, href: `/${lang}/tools`, icon: Code },
       { name: dict.footer.links.games, href: `/${lang}/games`, icon: GamepadIcon },
-      // { name: dict.footer.links.apiExplorer, href: `/${lang}/tools/api-explorer`, icon: Calculator },
+      { name: dict.library?.title || 'Library', href: `/${lang}/library`, icon: Library },
     ],
     subjects: [
       { name: dict.footer.links.computerScience, href: `/${lang}/courses/` },
-      // { name: dict.footer.links.engineering, href: `/${lang}/courses/` },
-      // { name: dict.footer.links.mathematics, href: `/${lang}/courses/` },
-      // { name: dict.footer.links.physics, href: `/${lang}/courses/` },
     ],
     resources: [
       { name: dict.footer.links.documentation, href: `/${lang}/` },
@@ -43,8 +40,6 @@ export default function Footer({ lang, dict }: FooterProps) {
     company: [
       { name: dict.footer.links.aboutUs, href: `/${lang}/about` },
       { name: dict.footer.links.contact, href: `/${lang}/contact` },
-      // { name: dict.footer.links.privacy, href: `/${lang}/` },
-      // { name: dict.footer.links.terms, href: `/${lang}/` },
     ],
   }
 
@@ -135,28 +130,6 @@ export default function Footer({ lang, dict }: FooterProps) {
           </div>
         </div>
       </div>
-
-      {/* Newsletter Section - Commented out but keeping structure */}
-      {/* <div className="border-t border-gray-800">
-        <div className="container-custom py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <div>
-              <h3 className="text-lg font-semibold mb-2">{dict.footer.newsletter.title}</h3>
-              <p className="text-gray-400">{dict.footer.newsletter.description}</p>
-            </div>
-            <div className="flex space-x-3 w-full md:w-auto">
-              <input
-                type="email"
-                placeholder={dict.footer.newsletter.placeholder}
-                className="flex-1 md:w-64 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-              <button className="btn-primary whitespace-nowrap">
-                {dict.footer.newsletter.button}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> */}
 
       {/* Bottom Footer */}
       <div className="border-t border-gray-800">

@@ -3,8 +3,8 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
-import { useState } from 'react'
-import { Info, AlertCircle, CheckCircle, AlertTriangle } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Info, AlertCircle, CheckCircle, AlertTriangle, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react'
 
 import SyntaxHighlighterWrapper from './FixWrapper'
 
@@ -15,6 +15,7 @@ interface MarkdownRendererProps {
 const langMap: Record<string, string> = {
   // diagram
   diagram: 'diagram',
+  mermaid: 'mermaid',
   // sql
   sql: 'sql',
   psql: 'sql',
@@ -61,6 +62,187 @@ function CopyButton({ textToCopy }: { textToCopy: string }) {
     >
       {copied ? 'Copied!' : 'Copy'}
     </button>
+  )
+}
+
+interface MermaidDiagramProps {
+  code: string
+}
+
+function MermaidDiagram({ code }: MermaidDiagramProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [zoom, setZoom] = useState(1)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const mermaidRef = useRef<any>(null)
+
+  useEffect(() => {
+    let mounted = true
+
+    const renderDiagram = async () => {
+      if (!containerRef.current) return
+
+      try {
+        // Dynamically import mermaid once
+        if (!mermaidRef.current) {
+          const mermaidModule = await import('mermaid')
+          mermaidRef.current = mermaidModule.default ?? mermaidModule
+          mermaidRef.current.initialize({
+            startOnLoad: false,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'inherit',
+            flowchart: {
+              useMaxWidth: true,
+              htmlLabels: true,
+              curve: 'basis'
+            }
+          })
+        }
+        
+        if (!mounted) return
+
+        // Generate unique ID for this diagram
+        const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`
+        
+        // Render the diagram
+        const { svg } = await mermaidRef.current.render(id, code)
+
+        if (!mounted || !containerRef.current) return
+
+        // Inject SVG
+        containerRef.current.innerHTML = svg
+        
+        const svgEl = containerRef.current.querySelector('svg') as SVGSVGElement | null
+        if (!svgEl) return
+
+        // Make SVG responsive
+        svgEl.style.maxWidth = '100%'
+        svgEl.style.height = 'auto'
+        svgEl.style.display = 'block'
+        svgEl.style.margin = '0 auto'
+        svgEl.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+
+      } catch (err) {
+        console.error('Mermaid rendering error:', err)
+        if (mounted) {
+          setError(err instanceof Error ? err.message : 'Failed to render diagram')
+        }
+      }
+    }
+
+    renderDiagram()
+
+    return () => {
+      mounted = false
+    }
+  }, [code])
+
+  // Handle zoom
+  const handleZoomIn = () => setZoom(prev => Math.min(prev + 0.2, 3))
+  const handleZoomOut = () => setZoom(prev => Math.max(prev - 0.2, 0.5))
+  const handleResetZoom = () => setZoom(1)
+
+  // Handle fullscreen
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen)
+    if (!isFullscreen) {
+      setZoom(1) // Reset zoom when entering fullscreen
+    }
+  }
+
+  // Handle mouse wheel zoom
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault()
+      const delta = e.deltaY > 0 ? -0.1 : 0.1
+      setZoom(prev => Math.max(0.5, Math.min(3, prev + delta)))
+    }
+  }
+
+  if (error) {
+    return (
+      <div className="mermaid-error-container">
+        <div className="flex items-center gap-2 text-red-700 dark:text-red-300 mb-2">
+          <AlertCircle className="w-5 h-5" />
+          <span className="font-semibold">Diagram Error</span>
+        </div>
+        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+        <details className="mt-2">
+          <summary className="text-xs cursor-pointer text-red-700 dark:text-red-300">
+            Show diagram code
+          </summary>
+          <pre className="mt-2 p-2 bg-red-100 dark:bg-red-900/40 rounded text-xs overflow-x-auto">
+            {code}
+          </pre>
+        </details>
+      </div>
+    )
+  }
+
+  return (
+    <div className={`mermaid-wrapper ${isFullscreen ? 'fullscreen' : ''}`}>
+      {/* Zoom Controls */}
+      <div className="zoom-controls-toolbar">
+        <button
+          onClick={handleZoomOut}
+          className="zoom-btn"
+          title="Zoom Out (Ctrl + Mouse Wheel)"
+          aria-label="Zoom out"
+        >
+          <ZoomOut className="w-4 h-4" />
+        </button>
+        <span className="zoom-level">{Math.round(zoom * 100)}%</span>
+        <button
+          onClick={handleZoomIn}
+          className="zoom-btn"
+          title="Zoom In (Ctrl + Mouse Wheel)"
+          aria-label="Zoom in"
+        >
+          <ZoomIn className="w-4 h-4" />
+        </button>
+        <button
+          onClick={handleResetZoom}
+          className="zoom-btn"
+          title="Reset Zoom"
+          aria-label="Reset zoom"
+        >
+          1:1
+        </button>
+        <div className="zoom-divider" />
+        <button
+          onClick={toggleFullscreen}
+          className="zoom-btn"
+          title="Toggle Fullscreen"
+          aria-label="Toggle fullscreen"
+        >
+          <Maximize2 className="w-4 h-4" />
+        </button>
+      </div>
+
+      {/* Diagram Container */}
+      <div 
+        className="mermaid-scroll-container"
+        onWheel={handleWheel}
+      >
+        <div 
+          className="mermaid-diagram-container"
+          style={{ transform: `scale(${zoom})` }}
+        >
+          <div 
+            ref={containerRef}
+            className="mermaid-content"
+          />
+        </div>
+      </div>
+
+      {/* Fullscreen hint */}
+      {!isFullscreen && (
+        <div className="zoom-hint">
+          💡 Tip: Use Ctrl + Mouse Wheel to zoom, or click fullscreen icon
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -116,7 +298,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           </li>
         ),
 
-        // Code blocks with copy button
+        // Code blocks with copy button and Mermaid support
         code: ({ node, className, children, ...props }) => {
           const match = /language-([a-z0-9_+-]+)/i.exec(className || '')
           const langRaw = match ? match[1].toLowerCase() : null
@@ -124,6 +306,11 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
           if (language) {
             const codeString = String(children).replace(/\n$/, '')
+
+            // Handle Mermaid diagrams
+            if (language === 'mermaid') {
+              return <MermaidDiagram code={codeString} />
+            }
 
             return (
               <div className="relative my-6 rounded-lg overflow-hidden border border-gray-700">

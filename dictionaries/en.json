@@ -65,6 +65,7 @@
     "courses": "Courses",
     "tools": "Tools",
     "games": "Games",
+    "library": "Library",
     "about": "About",
     "contact": "Contact"
   },
@@ -155,6 +156,7 @@
       "courses": "Courses",
       "tools": "Tools",
       "games": "Games",
+      "library": "Library",
       "apiExplorer": "API Explorer",
       "computerScience": "Computer Science",
       "engineering": "Engineering",
@@ -196,12 +198,78 @@
     "delete": "Delete",
     "edit": "Edit",
     "uncategorized": "Uncategorized",
-    "of": "of"
+    "of": "of",
+    "author": "Author",
+    "by": "by"
+  },
+  "library": {
+    "title": "Learning Library",
+    "subtitle": "Curated collection of educational resources from across the web",
+    "search_placeholder": "Search resources, authors, topics...",
+    "no_results": "No resources found",
+    "no_resources": "No resources available yet",
+    "try_different_filters": "Try adjusting your filters",
+    "check_back_soon": "Check back soon for new resources",
+    "clear_filters": "Clear Filters",
+    "view_resource": "View Resource",
+    "external_link": "Open External Link",
+    "back_to_library": "Back to Library",
+    "total_resources": "resources",
+    "filter_by": "Filter by",
+    "all_types": "All Types",
+    "all_categories": "All Categories",
+    "all_levels": "All Levels",
+    "free_only": "Free Only",
+    "paid_only": "Paid Only",
+    "sort_by": "Sort by",
+    "resource_types": {
+      "video": "Videos",
+      "ebook": "E-Books",
+      "course": "Online Courses",
+      "blog": "Blog Posts",
+      "repository": "Code Repositories",
+      "podcast": "Podcasts",
+      "article": "Articles",
+      "all": "All Resources"
+    },
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "all": "All Levels"
+    },
+    "labels": {
+      "author": "Author",
+      "category": "Category",
+      "difficulty": "Difficulty",
+      "duration": "Duration",
+      "pages": "Pages",
+      "published": "Published",
+      "updated": "Last Updated",
+      "platform": "Platform",
+      "language": "Language",
+      "type": "Type",
+      "free": "Free",
+      "paid": "Paid",
+      "rating": "Rating"
+    },
+    "stats": {
+      "resources": "Resources",
+      "categories": "Categories",
+      "authors": "Contributors"
+    },
+    "sort_options": {
+      "newest": "Newest First",
+      "oldest": "Oldest First",
+      "title_asc": "Title (A-Z)",
+      "title_desc": "Title (Z-A)",
+      "rating": "Highest Rated"
+    }
   },
   "courses": {
     "title": "Courses",
     "subtitle": "Explore our courses by area and learn at your own pace",
-    "search_placeholder": "Search courses...",
+    "search_placeholder": "Search courses, authors...",
     "areas": {
       "computer_science": "Computer Science",
       "data_engineering": "Data Engineering",
@@ -220,6 +288,7 @@
     "course_content": "Course Content",
     "back_to_courses": "Back to Courses",
     "labels": {
+      "author": "Author",
       "level": "Level",
       "duration": "Duration",
       "lessons": "Lessons",

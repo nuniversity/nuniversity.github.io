@@ -65,6 +65,7 @@
     "courses": "Cursos",
     "tools": "Ferramentas",
     "games": "Jogos",
+    "library": "Biblioteca",
     "about": "Sobre",
     "contact": "Contato"
   },
@@ -155,6 +156,7 @@
       "courses": "Cursos",
       "tools": "Ferramentas",
       "games": "Jogos",
+      "library": "Biblioteca",
       "apiExplorer": "Explorador de API",
       "computerScience": "Ciência da Computação",
       "engineering": "Engenharia",
@@ -196,12 +198,78 @@
     "delete": "Excluir",
     "edit": "Editar",
     "uncategorized": "Não Categorizado",
-    "of": "de"
+    "of": "de",
+    "author": "Autor",
+    "by": "por"
+  },
+  "library": {
+    "title": "Biblioteca de Aprendizado",
+    "subtitle": "Coleção curada de recursos educacionais da web",
+    "search_placeholder": "Buscar recursos, autores, tópicos...",
+    "no_results": "Nenhum recurso encontrado",
+    "no_resources": "Nenhum recurso disponível ainda",
+    "try_different_filters": "Tente ajustar seus filtros",
+    "check_back_soon": "Volte em breve para novos recursos",
+    "clear_filters": "Limpar Filtros",
+    "view_resource": "Ver Recurso",
+    "external_link": "Abrir Link Externo",
+    "back_to_library": "Voltar para Biblioteca",
+    "total_resources": "recursos",
+    "filter_by": "Filtrar por",
+    "all_types": "Todos os Tipos",
+    "all_categories": "Todas as Categorias",
+    "all_levels": "Todos os Níveis",
+    "free_only": "Apenas Grátis",
+    "paid_only": "Apenas Pagos",
+    "sort_by": "Ordenar por",
+    "resource_types": {
+      "video": "Vídeos",
+      "ebook": "E-Books",
+      "course": "Cursos Online",
+      "blog": "Posts de Blog",
+      "repository": "Repositórios de Código",
+      "podcast": "Podcasts",
+      "article": "Artigos",
+      "all": "Todos os Recursos"
+    },
+    "difficulty": {
+      "beginner": "Iniciante",
+      "intermediate": "Intermediário",
+      "advanced": "Avançado",
+      "all": "Todos os Níveis"
+    },
+    "labels": {
+      "author": "Autor",
+      "category": "Categoria",
+      "difficulty": "Dificuldade",
+      "duration": "Duração",
+      "pages": "Páginas",
+      "published": "Publicado",
+      "updated": "Última Atualização",
+      "platform": "Plataforma",
+      "language": "Idioma",
+      "type": "Tipo",
+      "free": "Grátis",
+      "paid": "Pago",
+      "rating": "Avaliação"
+    },
+    "stats": {
+      "resources": "Recursos",
+      "categories": "Categorias",
+      "authors": "Contribuidores"
+    },
+    "sort_options": {
+      "newest": "Mais Recentes",
+      "oldest": "Mais Antigos",
+      "title_asc": "Título (A-Z)",
+      "title_desc": "Título (Z-A)",
+      "rating": "Melhor Avaliados"
+    }
   },
   "courses": {
     "title": "Cursos",
     "subtitle": "Explore nossos cursos por área e aprenda no seu próprio ritmo",
-    "search_placeholder": "Pesquisar cursos...",
+    "search_placeholder": "Buscar cursos, autores...",
     "areas": {
       "computer_science": "Ciência da Computação",
       "data_engineering": "Engenharia de Dados",
@@ -225,7 +293,24 @@
     "try_different_filters": "Tente ajustar os filtros",
     "check_back_soon": "Volte em breve para novos conteúdos",
     "clear_filters": "Limpar filtros",
-    "start_learning": "Começar →"
+    "start_learning": "Começar →",
+    "labels": {
+      "level": "Nível",
+      "duration": "Duração",
+      "lessons": "Lições",
+      "updated": "Última Atualização",
+      "author": "Autor"
+    },
+    "messages": {
+      "loading": "Carregando cursos...",
+      "error": "Falha ao carregar cursos. Tente novamente mais tarde.",
+      "empty_search": "Tente ajustar sua busca ou explorar outras áreas."
+    },
+    "cta": {
+      "view_all": "Ver Todos os Cursos",
+      "start_learning": "Começar a Aprender",
+      "back_to_areas": "Voltar às Áreas"
+    }
   },
   "games": {
     "title": "Jogos Educativos",

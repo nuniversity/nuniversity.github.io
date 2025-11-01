@@ -106,8 +106,7 @@ O LLM é perfeito para lidar com **textos longos** e transformar informação br
 
 #### O LLM como parceiro criativo
 
-Quando faltar inspiração, use a IA como **parceira de brainstorming**.  
-Ela gera ideias, nomes, personagens, soluções e muito mais — basta explicar bem o que você quer.
+Quando faltar inspiração, use a IA como **parceira de brainstorming**. Ela gera ideias, nomes, personagens, soluções e muito mais — basta explicar bem o que você quer.
 
 **Exemplo prático: Consultor de Renda Extra**
 
