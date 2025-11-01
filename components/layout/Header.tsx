@@ -1,8 +1,9 @@
+// components/layout/Header.tsx
 'use client'
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X, Sun, Moon, Gamepad2 } from 'lucide-react'
+import { Menu, X, Sun, Moon, Library, Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon } from 'lucide-react'
 import LanguageSwitcher from '../language/LanguageSwitcher'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
@@ -20,10 +21,11 @@ export default function Header({ lang, dict }: HeaderProps) {
   const { theme, toggleTheme } = useTheme()
 
   const navigation = [
-    { name: dict.navigation.home, href: `/${lang}` },
-    { name: dict.navigation.courses, href: `/${lang}/courses` },
-    { name: dict.navigation.tools, href: `/${lang}/tools` },
-    { name: dict.navigation.games, href: `/${lang}/games`, label: 'Games' },
+    { name: dict.navigation.home, href: `/${lang}`, icon: Library, isNew: false },
+    { name: dict.navigation.courses, href: `/${lang}/courses`, icon: BookOpen, isNew: false },
+    { name: dict.navigation.tools, href: `/${lang}/tools`, icon: Calculator, isNew: true },
+    { name: dict.navigation.games, href: `/${lang}/games`, icon: GamepadIcon, isNew: true },
+    { name: dict.navigation.library || 'Library', href: `/${lang}/library`, icon: Library, isNew: true },
     { name: dict.navigation.about, href: `/${lang}/about` },
     { name: dict.navigation.contact, href: `/${lang}/contact` },
   ]
@@ -48,9 +50,15 @@ export default function Header({ lang, dict }: HeaderProps) {
               <Link
                 key={item.name}
                 href={item.href}
-                className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-accent hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="relative px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-accent hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-1"
               >
+                {item.icon && <item.icon className="w-4 h-4" />}
                 {item.name}
+                {item.isNew && (
+                  <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-xs font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full animate-pulse">
+                    NEW
+                  </span>
+                )}
               </Link>
             ))}
           </div>
@@ -95,10 +103,18 @@ export default function Header({ lang, dict }: HeaderProps) {
               <Link
                 key={item.name}
                 href={item.href}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-accent hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="relative block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-accent hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                {item.name}
+                <span className="flex items-center gap-2">
+                  {item.icon && <item.icon className="w-4 h-4" />}
+                  {item.name}
+                  {item.isNew && (
+                    <span className="px-1.5 py-0.5 text-xs font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full">
+                      NEW
+                    </span>
+                  )}
+                </span>
               </Link>
             ))}
           </div>

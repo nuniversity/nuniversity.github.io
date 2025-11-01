@@ -65,6 +65,7 @@
     "courses": "Cursos",
     "tools": "Herramientas",
     "games": "Juegos",
+    "library": "Biblioteca",
     "about": "Acerca de",
     "contact": "Contacto"
   },
@@ -155,6 +156,7 @@
       "courses": "Cursos",
       "tools": "Herramientas",
       "games": "Juegos",
+      "library": "Biblioteca",
       "apiExplorer": "Explorador de API",
       "computerScience": "Ciencias de la Computación",
       "engineering": "Ingeniería",
@@ -198,6 +200,70 @@
     "uncategorized": "Sin Categoría",
     "of": "de"
   },
+  "library": {
+    "title": "Biblioteca de Aprendizaje",
+    "subtitle": "Colección curada de recursos educativos de la web",
+    "search_placeholder": "Buscar recursos, autores, temas...",
+    "no_results": "No se encontraron recursos",
+    "no_resources": "Aún no hay recursos disponibles",
+    "try_different_filters": "Intenta ajustar tus filtros",
+    "check_back_soon": "Vuelve pronto para nuevos recursos",
+    "clear_filters": "Limpiar Filtros",
+    "view_resource": "Ver Recurso",
+    "external_link": "Abrir Enlace Externo",
+    "back_to_library": "Volver a la Biblioteca",
+    "total_resources": "recursos",
+    "filter_by": "Filtrar por",
+    "all_types": "Todos los Tipos",
+    "all_categories": "Todas las Categorías",
+    "all_levels": "Todos los Niveles",
+    "free_only": "Solo Gratis",
+    "paid_only": "Solo de Pago",
+    "sort_by": "Ordenar por",
+    "resource_types": {
+      "video": "Videos",
+      "ebook": "E-Books",
+      "course": "Cursos en Línea",
+      "blog": "Publicaciones de Blog",
+      "repository": "Repositorios de Código",
+      "podcast": "Podcasts",
+      "article": "Artículos",
+      "all": "Todos los Recursos"
+    },
+    "difficulty": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado",
+      "all": "Todos los Niveles"
+    },
+    "labels": {
+      "author": "Autor",
+      "category": "Categoría",
+      "difficulty": "Dificultad",
+      "duration": "Duración",
+      "pages": "Páginas",
+      "published": "Publicado",
+      "updated": "Última Actualización",
+      "platform": "Plataforma",
+      "language": "Idioma",
+      "type": "Tipo",
+      "free": "Gratis",
+      "paid": "De Pago",
+      "rating": "Calificación"
+    },
+    "stats": {
+      "resources": "Recursos",
+      "categories": "Categorías",
+      "authors": "Contribuidores"
+    },
+    "sort_options": {
+      "newest": "Más Recientes",
+      "oldest": "Más Antiguos",
+      "title_asc": "Título (A-Z)",
+      "title_desc": "Título (Z-A)",
+      "rating": "Mejor Calificados"
+    }
+  },
   "courses": {
     "title": "Cursos",
     "subtitle": "Explora nuestros cursos por área y aprende a tu propio ritmo",
@@ -226,7 +292,24 @@
     "try_different_filters": "Intenta ajustar los filtros",
     "check_back_soon": "Vuelve pronto para ver nuevo contenido",
     "clear_filters": "Borrar filtros",
-    "start_learning": "Comenzar →"
+    "start_learning": "Comenzar →",
+    "labels": {
+      "level": "Nivel",
+      "duration": "Duración",
+      "lessons": "Lecciones",
+      "updated": "Última Actualización",
+      "author": "Autor"
+    },
+    "messages": {
+      "loading": "Cargando cursos...",
+      "error": "Error al cargar cursos. Inténtalo de nuevo más tarde.",
+      "empty_search": "Intenta ajustar tu búsqueda o explorar otras áreas."
+    },
+    "cta": {
+      "view_all": "Ver Todos los Cursos",
+      "start_learning": "Comenzar a Aprender",
+      "back_to_areas": "Volver a Áreas"
+    }
   },
   "games": {
     "title": "Juegos Educativos",

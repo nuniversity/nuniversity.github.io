@@ -3,7 +3,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { BookOpen, Search, Clock, Target, GraduationCap, Sparkles } from 'lucide-react'
+import { BookOpen, Search, Clock, Target, GraduationCap, Sparkles, User } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 
 interface Course {
@@ -11,6 +11,7 @@ interface Course {
   title: string
   description: string
   area: string
+  author?: string
   difficulty?: string
   duration?: string
 }
@@ -39,7 +40,8 @@ export function CoursesClient({ lang, courses, lessonsData, dict }: CoursesClien
       const matchesSearch = !query || 
         c.title.toLowerCase().includes(query) ||
         c.description.toLowerCase().includes(query) ||
-        c.area.toLowerCase().includes(query)
+        c.area.toLowerCase().includes(query) ||
+        (c.author && c.author.toLowerCase().includes(query))
       
       const matchesDifficulty = selectedDifficulty === 'all' || 
         c.difficulty === selectedDifficulty
@@ -131,7 +133,7 @@ export function CoursesClient({ lang, courses, lessonsData, dict }: CoursesClien
             <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground pointer-events-none" />
             <input
               type="text"
-              placeholder={dict.courses?.search_placeholder || 'Search courses...'}
+              placeholder={dict.courses?.search_placeholder || 'Search courses, authors...'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-3 rounded-lg border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
@@ -255,9 +257,17 @@ export function CoursesClient({ lang, courses, lessonsData, dict }: CoursesClien
                         </h3>
 
                         {/* Description */}
-                        <p className="text-muted-foreground line-clamp-3 text-sm leading-relaxed">
+                        <p className="text-muted-foreground line-clamp-3 text-sm leading-relaxed mb-3">
                           {course.description}
                         </p>
+
+                        {/* Author */}
+                        {course.author && (
+                          <div className="flex items-center gap-2 text-xs text-muted-foreground mt-2">
+                            <User className="w-3 h-3" />
+                            <span>{course.author}</span>
+                          </div>
+                        )}
                       </div>
 
                       {/* Card Footer */}

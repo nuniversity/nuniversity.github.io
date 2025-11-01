@@ -47,17 +47,16 @@ Agora pense: qual outra ferramenta de IA você usou hoje? Talvez o filtro de spa
 
 ---
 
-### Aprendendo com Máquinas (Machine Learning)
+### Aprendizado de Máquinas (Machine Learning)
 
 #### O segredo da IA: aprender com exemplos
 
-**Machine Learning (ML)** é o coração da IA moderna.  
-É o jeito de fazer o computador **aprender sem precisar dizer passo a passo o que fazer**.
+**Aprendizado de Máquina** é o coração da IA moderna. É o jeito de fazer o computador **aprender sem precisar dizer passo a passo o que fazer**.
 
 **Exemplo simples: ensinando uma criança o que é um quadrado.**
 
 - **Programação tradicional:** você diria “Se tem 4 lados iguais e 4 cantos retos, então é um quadrado”.  
-- **Com Machine Learning:** você mostra milhares de figuras e diz quais são quadrados e quais não são.  
+- **Com Aprendizado de Máquina:** você mostra milhares de figuras e diz quais são quadrados e quais não são.  
 
 O computador aprende sozinho a reconhecer os padrões. O resultado? A IA vira uma **máquina de prever** — ela analisa o passado para antecipar o que vem a seguir.
 
@@ -89,15 +88,17 @@ A IA aprende com dados — e os dados vêm de **pessoas reais**. Se os dados tiv
 #### Problemas e cuidados
 
 **Viés Algorítmico (ou “lixo entra, lixo sai”):**  
-- A Amazon criou uma IA para analisar currículos.  
+- Uma empresa criou uma IA para analisar currículos.  
 - O modelo acabou **rejeitando mulheres**, porque aprendeu com 10 anos de contratações passadas — que eram, em maioria, homens.  
-- Moral da história: a IA refletiu o passado da empresa.  
+- Moral da história: a IA refletiu o passado da empresa.
+
 👉 Sempre use seu bom senso. IA ajuda, mas você é quem decide.
 
 **Privacidade (para onde vão meus dados?):**  
 - Muitas ferramentas gratuitas de IA **usam suas informações** para melhorar seus modelos.  
 - Regra de ouro: se você não diria algo em voz alta numa cafeteria cheia, **não escreva em um chat público de IA**.  
-Nunca coloque senhas, documentos confidenciais ou dados de saúde.
+
+👉 Nunca coloque senhas, documentos ou dados confidenciais.
 
 **Automação (IA como aliada, não ameaça):**  
 - A boa notícia: a IA não vai roubar seu emprego — mas **quem sabe usá-la bem pode se destacar**.  
