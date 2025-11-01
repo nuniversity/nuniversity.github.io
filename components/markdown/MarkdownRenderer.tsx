@@ -235,11 +235,11 @@ function MermaidDiagram({ code }: MermaidDiagramProps) {
           />
         </div>
       </div>
-
-      {/* Fullscreen hint */}
+      
+      {/* Fullscreen hint - Hides on small screens (smartphone fix) */}
       {!isFullscreen && (
-        <div className="zoom-hint">
-          💡 Tip: Use Ctrl + Mouse Wheel to zoom, or click fullscreen icon
+        <div className="zoom-hint md:block hidden">
+        💡 Tip: Use Ctrl + Mouse Wheel to zoom, or click fullscreen icon
         </div>
       )}
     </div>

@@ -3,7 +3,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X, Sun, Moon, Library, Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon } from 'lucide-react'
+import { Menu, X, Sun, Moon, Library, Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon, Home } from 'lucide-react'
 import LanguageSwitcher from '../language/LanguageSwitcher'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
@@ -21,7 +21,7 @@ export default function Header({ lang, dict }: HeaderProps) {
   const { theme, toggleTheme } = useTheme()
 
   const navigation = [
-    { name: dict.navigation.home, href: `/${lang}`, icon: Library, isNew: false },
+    { name: dict.navigation.home, href: `/${lang}`, icon: Home, isNew: false },
     { name: dict.navigation.courses, href: `/${lang}/courses`, icon: BookOpen, isNew: false },
     { name: dict.navigation.tools, href: `/${lang}/tools`, icon: Calculator, isNew: true },
     { name: dict.navigation.games, href: `/${lang}/games`, icon: GamepadIcon, isNew: true },
