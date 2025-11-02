@@ -374,7 +374,10 @@
       "coding": "Programación",
       "physics": "Física",
       "logic": "Lógica y Rompecabezas",
-      "uncategorized": "Sin Categoría"
+      "uncategorized": "Sin Categoría",
+      "collaboration": "Collaboration & Teamwork (es)",
+      "business_strategy": "Estrategia Empresarial",
+      "productivity": "Productividad y Gestión del Tiempo"
     },
     "promptBuilder": {
       "title": "Constructor de Prompts LLM",

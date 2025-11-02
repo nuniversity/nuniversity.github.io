@@ -21,8 +21,23 @@ const LLMPromptBuilder = dynamicImport(() => import('@/components/tools/LLMPromp
   ssr: false,
 })
 
+const BrainWritingSession = dynamicImport(() => import('@/components/tools/BrainWritingSession'), {
+  ssr: false,
+})
+
+const SWOTMatrix = dynamicImport(() => import('@/components/tools/SWOTMatrix'), {
+  ssr: false,
+})
+
+const EisenhowerMatrix = dynamicImport(() => import('@/components/tools/EisenhowerMatrix'), {
+  ssr: false,
+})
+
 const toolComponents: Record<string, any> = {
   'llm-prompt-builder': LLMPromptBuilder,
+  'brain-writing-session': BrainWritingSession,
+  'swot-matrix': SWOTMatrix,
+  'eisenhower-matrix': EisenhowerMatrix
 }
 
 export async function generateStaticParams() {

@@ -376,7 +376,10 @@
       "coding": "Coding & Programming",
       "physics": "Physics",
       "logic": "Logic & Puzzles",
-      "uncategorized": "Uncategorized"
+      "uncategorized": "Uncategorized",
+      "collaboration": "Collaboration & Teamwork",
+      "business_strategy": "Business Strategy",
+      "productivity": "Productivity & Time Management"
     },
     "promptBuilder": {
       "title": "LLM Prompt Builder",

@@ -3,7 +3,20 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Search, Wrench, Sparkles, Brain, Calculator, Code, Atom, Puzzle } from 'lucide-react'
+import {
+  Search,
+  Wrench,
+  Sparkles,
+  Brain,
+  Calculator,
+  Code,
+  Atom,
+  Puzzle,
+  Users,
+  Briefcase,
+  Clock,
+  Grid3x3
+} from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 
 interface Tool {
@@ -26,6 +39,10 @@ const categoryIcons: Record<string, any> = {
   'coding': Code,
   'physics': Atom,
   'logic': Puzzle,
+  'uncategorized': Wrench,
+  'collaboration': Users,
+  'business_strategy': Briefcase,
+  'productivity': Clock,
 }
 
 const categoryColors: Record<string, string> = {
@@ -34,6 +51,10 @@ const categoryColors: Record<string, string> = {
   'coding': 'from-green-600 to-emerald-600',
   'physics': 'from-orange-600 to-red-600',
   'logic': 'from-indigo-600 to-purple-600',
+  'uncategorized': 'from-gray-500 to-gray-700',
+  'collaboration': 'from-yellow-500 to-amber-600',
+  'business_strategy': 'from-teal-600 to-emerald-700',
+  'productivity': 'from-rose-500 to-red-600',
 }
 
 export function ToolsClient({ lang, tools, dict }: ToolsClientProps) {
