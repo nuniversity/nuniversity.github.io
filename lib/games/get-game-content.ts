@@ -23,13 +23,33 @@ export interface VocabularyGame {
   words: VocabularyWord[]
 }
 
+export interface QuizQuestion {
+  id: string
+  domain: string
+  question: string
+  options: string[]
+  correct: number
+  explanation: string
+}
+
+export interface QuizGame {
+  id: string
+  title: string
+  description: string
+  difficulty: 'beginner' | 'intermediate' | 'advanced'
+  category: string
+  topic: string
+  certification: string
+  questions: QuizQuestion[]
+}
+
 export interface GameMetadata {
   slug: string
   title: string
   description: string
   category: string
   difficulty: string
-  type: 'vocabulary' | 'grammar' | 'math' | 'coding' | 'physics' | 'logic' | 'fun'
+  type: 'vocabulary' | 'grammar' | 'math' | 'coding' | 'physics' | 'logic' | 'fun' | 'quiz'
 }
 
 const gamesDirectory = path.join(process.cwd(), 'content/games')
@@ -46,7 +66,7 @@ export async function getAllGames(): Promise<GameMetadata[]> {
       return games
     }
 
-    // Get all game type directories (vocabulary, grammar, etc.)
+    // Get all game type directories (vocabulary, grammar, quiz, etc.)
     const gameTypes = fs.readdirSync(gamesDirectory, { withFileTypes: true })
       .filter(dirent => dirent.isDirectory())
       .map(dirent => dirent.name)
@@ -93,6 +113,25 @@ export async function getVocabularyGame(slug: string): Promise<VocabularyGame | 
     return JSON.parse(fileContent)
   } catch (error) {
     console.error(`Error reading vocabulary game ${slug}:`, error)
+    return null
+  }
+}
+
+/**
+ * Get quiz game by slug
+ */
+export async function getQuizGame(slug: string): Promise<QuizGame | null> {
+  try {
+    const filePath = path.join(gamesDirectory, 'quiz', `${slug}.json`)
+    
+    if (!fs.existsSync(filePath)) {
+      return null
+    }
+
+    const fileContent = fs.readFileSync(filePath, 'utf-8')
+    return JSON.parse(fileContent)
+  } catch (error) {
+    console.error(`Error reading quiz game ${slug}:`, error)
     return null
   }
 }

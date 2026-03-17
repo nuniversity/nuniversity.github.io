@@ -1,0 +1,1749 @@
+{
+  "id": "snowpro-core-cof-c03",
+  "title": "SnowPro Core Certification (COF-C03)",
+  "description": "Test your Snowflake knowledge with exam-style multiple-choice questions covering all COF-C03 domains: architecture, tools, data sharing, and cloud features.",
+  "difficulty": "intermediate",
+  "category": "quiz",
+  "topic": "Snowflake",
+  "certification": "SnowPro Core COF-C03",
+  "questions": [
+    {
+      "id": "q001",
+      "domain": "1.1 - Cloud Features",
+      "question": "Which Snowflake feature allows you to query data as it existed 48 hours ago?",
+      "options": [
+        "Fail-Safe",
+        "Zero-Copy Clone",
+        "Time Travel",
+        "Data Sharing"
+      ],
+      "correct": 2,
+      "explanation": "Time Travel allows querying historical data. Enterprise edition supports up to 90 days; Standard edition supports up to 1 day."
+    },
+    {
+      "id": "q002",
+      "domain": "1.1 - Cloud Features",
+      "question": "A company wants to ensure that their BI team's long-running reports do not slow down their ETL pipelines. Which Snowflake feature addresses this?",
+      "options": [
+        "Clustering keys",
+        "Materialized views",
+        "Separate virtual warehouses",
+        "Multi-cluster warehouses"
+      ],
+      "correct": 2,
+      "explanation": "Workload isolation is achieved by running separate virtual warehouses. Each team gets their own compute cluster with no contention."
+    },
+    {
+      "id": "q003",
+      "domain": "1.1 - Cloud Features",
+      "question": "After Time Travel expires, how many additional days does Fail-Safe protect data?",
+      "options": [
+        "1 day",
+        "7 days",
+        "14 days",
+        "30 days"
+      ],
+      "correct": 1,
+      "explanation": "Fail-Safe provides a non-configurable 7-day window after Time Travel expires. Data in Fail-Safe can only be recovered by Snowflake Support."
+    },
+    {
+      "id": "q004",
+      "domain": "1.1 - Cloud Features",
+      "question": "Which Snowflake edition is required to use multi-cluster virtual warehouses?",
+      "options": [
+        "Standard",
+        "Enterprise",
+        "Business Critical",
+        "All editions"
+      ],
+      "correct": 1,
+      "explanation": "Multi-cluster virtual warehouses require Enterprise edition or higher. Standard edition only supports single-cluster warehouses."
+    },
+    {
+      "id": "q005",
+      "domain": "1.1 - Cloud Features",
+      "question": "Zero-Copy Cloning uses which mechanism to avoid duplicating data?",
+      "options": [
+        "Replication",
+        "Snapshots",
+        "Copy-on-Write",
+        "Columnar compression"
+      ],
+      "correct": 2,
+      "explanation": "Zero-Copy Cloning uses Copy-on-Write. Clones share the original micro-partitions until a change is made; only changed data creates new partitions."
+    },
+    {
+      "id": "q006",
+      "domain": "1.1 - Cloud Features",
+      "question": "Snowflake is best described as which type of service?",
+      "options": [
+        "Infrastructure-as-a-Service (IaaS)",
+        "Platform-as-a-Service (PaaS)",
+        "Software-as-a-Service (SaaS)",
+        "Database-as-a-Service (DBaaS)"
+      ],
+      "correct": 2,
+      "explanation": "Snowflake is a cloud-native, fully managed data platform delivered as SaaS. Customers manage nothing — no hardware, no OS, no database maintenance."
+    },
+    {
+      "id": "q007",
+      "domain": "1.1 - Cloud Features",
+      "question": "What is the maximum Time Travel retention period for Snowflake Enterprise edition?",
+      "options": [
+        "1 day",
+        "30 days",
+        "60 days",
+        "90 days"
+      ],
+      "correct": 3,
+      "explanation": "Enterprise edition supports up to 90 days of Time Travel. Standard edition is limited to 1 day (24 hours)."
+    },
+    {
+      "id": "q008",
+      "domain": "1.1 - Cloud Features",
+      "question": "Which Snowflake feature enables Tri-Secret Secure (customer-managed encryption keys)?",
+      "options": [
+        "Standard edition",
+        "Enterprise edition",
+        "Business Critical edition",
+        "All editions by default"
+      ],
+      "correct": 2,
+      "explanation": "Tri-Secret Secure, which allows customers to manage their own encryption keys, is only available on Business Critical edition and higher."
+    },
+    {
+      "id": "q009",
+      "domain": "1.1 - Cloud Features",
+      "question": "Which cloud providers does Snowflake support?",
+      "options": [
+        "AWS only",
+        "AWS and Azure only",
+        "AWS, Azure, and GCP",
+        "AWS, Azure, GCP, and Oracle Cloud"
+      ],
+      "correct": 2,
+      "explanation": "Snowflake runs on three major cloud providers: Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP)."
+    },
+    {
+      "id": "q010",
+      "domain": "1.1 - Cloud Features",
+      "question": "What data type does Snowflake use to store semi-structured data like JSON, Avro, and Parquet?",
+      "options": [
+        "BLOB",
+        "TEXT",
+        "VARIANT",
+        "OBJECT"
+      ],
+      "correct": 2,
+      "explanation": "The VARIANT data type holds any semi-structured value. Snowflake natively supports JSON, Avro, ORC, Parquet, and XML without pre-defining schema."
+    },
+    {
+      "id": "q011",
+      "domain": "1.2 - Tools & Interfaces",
+      "question": "Which tool is the ONLY way to use the PUT and GET commands to transfer files to/from internal stages?",
+      "options": [
+        "Snowsight",
+        "Python Connector",
+        "SnowSQL",
+        "Snowpark"
+      ],
+      "correct": 2,
+      "explanation": "PUT and GET commands are exclusively available in SnowSQL CLI. They are not supported in Snowsight, JDBC/ODBC drivers, or the Python Connector."
+    },
+    {
+      "id": "q012",
+      "domain": "1.2 - Tools & Interfaces",
+      "question": "A data engineer wants to process a 10-billion-row dataset using Python without moving data out of Snowflake. Which tool should they use?",
+      "options": [
+        "Python Connector",
+        "Snowpark",
+        "SnowSQL",
+        "ODBC Driver"
+      ],
+      "correct": 1,
+      "explanation": "Snowpark processes data inside Snowflake's virtual warehouse using a DataFrame API. Data never leaves Snowflake — computation is pushed server-side."
+    },
+    {
+      "id": "q013",
+      "domain": "1.2 - Tools & Interfaces",
+      "question": "What is the primary purpose of SnowCD?",
+      "options": [
+        "Running SQL queries from the command line",
+        "Diagnosing network connectivity to Snowflake",
+        "Loading data from CSV files",
+        "Managing Snowflake users and roles"
+      ],
+      "correct": 1,
+      "explanation": "SnowCD (Snowflake Connectivity Diagnostic) is a standalone tool for diagnosing and troubleshooting network connectivity between a client and Snowflake."
+    },
+    {
+      "id": "q014",
+      "domain": "1.2 - Tools & Interfaces",
+      "question": "Which Snowflake connector would a Kafka administrator use to stream real-time events into Snowflake?",
+      "options": [
+        "JDBC Driver",
+        "Snowpark",
+        "Kafka Connector",
+        "Python Connector"
+      ],
+      "correct": 2,
+      "explanation": "The Kafka Connector integrates Apache Kafka with Snowflake, using Snowpipe to automatically ingest streaming data from Kafka topics."
+    },
+    {
+      "id": "q015",
+      "domain": "1.2 - Tools & Interfaces",
+      "question": "Snowpark processes data:",
+      "options": [
+        "On the client machine",
+        "In an external Spark cluster",
+        "Inside Snowflake's virtual warehouse",
+        "In a separate cloud function"
+      ],
+      "correct": 2,
+      "explanation": "Snowpark pushes computation into Snowflake's virtual warehouse. Unlike the Python Connector, which fetches data to the client, Snowpark keeps data inside Snowflake."
+    },
+    {
+      "id": "q016",
+      "domain": "1.2 - Tools & Interfaces",
+      "question": "Which programming languages does Snowpark support?",
+      "options": [
+        "Python only",
+        "Python and Java only",
+        "Python, Java, and Scala",
+        "Python, Java, Scala, and R"
+      ],
+      "correct": 2,
+      "explanation": "Snowpark supports Python, Java, and Scala. Each provides a DataFrame-style API for transforming data inside Snowflake without moving it externally."
+    },
+    {
+      "id": "q017",
+      "domain": "1.2 - Tools & Interfaces",
+      "question": "A developer needs to connect Power BI to Snowflake. Which driver should they use?",
+      "options": [
+        "Snowpark Python",
+        "SnowSQL CLI",
+        "JDBC or ODBC Driver",
+        "Kafka Connector"
+      ],
+      "correct": 2,
+      "explanation": "BI tools like Power BI, Tableau, and Excel connect to Snowflake using the JDBC or ODBC driver — the standard protocol for SQL connectivity."
+    },
+    {
+      "id": "q018",
+      "domain": "1.3 - Data Sharing",
+      "question": "When data is shared using Snowflake Secure Data Sharing, where does the data physically reside?",
+      "options": [
+        "In both the provider and consumer accounts",
+        "In the consumer's account after copying",
+        "In the provider's account only",
+        "In a Snowflake-managed shared storage layer"
+      ],
+      "correct": 2,
+      "explanation": "Data always stays in the provider's account. The consumer reads directly from the provider's micro-partitions — no data is copied or moved."
+    },
+    {
+      "id": "q019",
+      "domain": "1.3 - Data Sharing",
+      "question": "A company wants to share data with a business partner who does not have a Snowflake account. What is the correct approach?",
+      "options": [
+        "Export the data to S3 and give the partner access",
+        "Create a Reader Account for the partner",
+        "Create a Private Data Exchange",
+        "Use database replication"
+      ],
+      "correct": 1,
+      "explanation": "Reader Accounts are free, lightweight Snowflake accounts created by the provider for consumers who lack their own Snowflake account. Compute costs are billed to the provider."
+    },
+    {
+      "id": "q020",
+      "domain": "1.3 - Data Sharing",
+      "question": "Which of the following objects CANNOT be directly included in a Snowflake share?",
+      "options": [
+        "Secure views",
+        "External tables",
+        "Regular (non-secure) views",
+        "Secure UDFs"
+      ],
+      "correct": 2,
+      "explanation": "Only secure views can be shared — not regular views. Secure views hide the view definition from the consumer, protecting proprietary business logic."
+    },
+    {
+      "id": "q021",
+      "domain": "1.3 - Data Sharing",
+      "question": "A provider on AWS US-East-1 wants to share data with a consumer on AWS US-West-2. What must they do first?",
+      "options": [
+        "Create a Reader Account",
+        "Use a Private Data Exchange",
+        "Replicate the database to US-West-2",
+        "Nothing — cross-region sharing is automatic"
+      ],
+      "correct": 2,
+      "explanation": "Cross-region data sharing requires replication first. Direct Secure Data Sharing only works when provider and consumer are on the same cloud provider and region."
+    },
+    {
+      "id": "q022",
+      "domain": "1.3 - Data Sharing",
+      "question": "How is Snowflake Marketplace data delivered to the consumer?",
+      "options": [
+        "Downloaded as Parquet files",
+        "Replicated to the consumer's account nightly",
+        "Accessed via live secure data sharing — no data movement",
+        "Transferred via the Kafka Connector"
+      ],
+      "correct": 2,
+      "explanation": "Marketplace data is delivered via live secure data sharing — the same mechanism as direct account-to-account sharing. No ETL, no download, no copies."
+    },
+    {
+      "id": "q023",
+      "domain": "1.3 - Data Sharing",
+      "question": "Who pays for compute when a consumer queries data from a Reader Account?",
+      "options": [
+        "The consumer",
+        "Snowflake Inc.",
+        "The provider",
+        "Shared equally between provider and consumer"
+      ],
+      "correct": 2,
+      "explanation": "In Reader Accounts, the compute used by the reader is billed to the provider who created the Reader Account, not to the reader themselves."
+    },
+    {
+      "id": "q024",
+      "domain": "1.3 - Data Sharing",
+      "question": "What is a Private Data Exchange used for?",
+      "options": [
+        "Sharing data with the general public on the Snowflake Marketplace",
+        "Sharing data privately with a defined group of partners",
+        "Providing disaster recovery for a Snowflake account",
+        "Encrypting data before sharing"
+      ],
+      "correct": 1,
+      "explanation": "A Private Data Exchange is a Snowflake-hosted hub for sharing data privately within a controlled group — such as industry consortiums, franchises, or multi-subsidiary enterprises."
+    },
+    {
+      "id": "q025",
+      "domain": "1.4 - Architecture",
+      "question": "Which layer of Snowflake's architecture is responsible for query optimization and authorization?",
+      "options": [
+        "Virtual Warehouse layer",
+        "Storage layer",
+        "Cloud Services layer",
+        "Network layer"
+      ],
+      "correct": 2,
+      "explanation": "The Cloud Services layer is the 'brain' of Snowflake. It handles authentication, authorization (RBAC), query compilation, query optimization, metadata management, and transaction management."
+    },
+    {
+      "id": "q026",
+      "domain": "1.4 - Architecture",
+      "question": "A query is re-submitted 2 hours after its first execution. The underlying data has not changed. What happens?",
+      "options": [
+        "The virtual warehouse runs the query again",
+        "The result is served from the local disk cache",
+        "The result is served from the result cache — no compute used",
+        "The query fails because the cache expired"
+      ],
+      "correct": 2,
+      "explanation": "The Result Cache stores exact query results for 24 hours. If the same query is re-submitted and data hasn't changed, the result is returned instantly with zero compute credits used."
+    },
+    {
+      "id": "q027",
+      "domain": "1.4 - Architecture",
+      "question": "What happens to the local disk (SSD) cache when a virtual warehouse is suspended?",
+      "options": [
+        "It is persisted for 24 hours",
+        "It is uploaded to cloud storage",
+        "It is cleared and lost",
+        "It is transferred to the Cloud Services layer"
+      ],
+      "correct": 2,
+      "explanation": "The local disk cache (SSD) on each warehouse node is lost when the warehouse is suspended. This is why the first query after resumption is slower — it must re-read from cloud storage."
+    },
+    {
+      "id": "q028",
+      "domain": "1.4 - Architecture",
+      "question": "A table is created as TRANSIENT. Which of the following is TRUE?",
+      "options": [
+        "It has no Time Travel capability",
+        "It has Time Travel (up to 1 day) but no Fail-Safe",
+        "It has both Time Travel and Fail-Safe",
+        "It is automatically dropped at the end of the session"
+      ],
+      "correct": 1,
+      "explanation": "Transient tables have Time Travel (max 1 day) but NO Fail-Safe. This reduces storage costs for staging/intermediate tables where recovery guarantees are less critical."
+    },
+    {
+      "id": "q029",
+      "domain": "1.4 - Architecture",
+      "question": "Which warehouse scaling policy adds additional clusters as soon as a query queue forms?",
+      "options": [
+        "Economy",
+        "Standard",
+        "Premium",
+        "Burst"
+      ],
+      "correct": 1,
+      "explanation": "Standard scaling policy prioritizes performance by adding clusters immediately when a queue forms. Economy policy waits longer to reduce costs."
+    },
+    {
+      "id": "q030",
+      "domain": "1.4 - Architecture",
+      "question": "What is the maximum size of a Snowflake micro-partition (uncompressed)?",
+      "options": [
+        "50 MB",
+        "100 MB",
+        "500 MB",
+        "1 GB"
+      ],
+      "correct": 2,
+      "explanation": "Snowflake micro-partitions range from 50 MB to 500 MB uncompressed. They are stored in columnar format, compressed (AES-256), and are immutable."
+    },
+    {
+      "id": "q031",
+      "domain": "1.4 - Architecture",
+      "question": "Cloud Services compute usage is free as long as it stays under what percentage of daily virtual warehouse usage?",
+      "options": [
+        "5%",
+        "10%",
+        "15%",
+        "20%"
+      ],
+      "correct": 1,
+      "explanation": "Cloud Services Layer usage is not charged if it remains under 10% of the daily virtual warehouse compute usage. Overage above this threshold is billed."
+    },
+    {
+      "id": "q032",
+      "domain": "1.4 - Architecture",
+      "question": "A secure view is used instead of a regular view in a share. What is the primary reason?",
+      "options": [
+        "Secure views are faster",
+        "Secure views support Time Travel",
+        "Secure views hide the view definition from the consumer",
+        "Regular views cannot query external tables"
+      ],
+      "correct": 2,
+      "explanation": "Secure views hide the view definition from consumers, protecting proprietary business logic. Note: secure views intentionally disable some query optimizations as a security trade-off."
+    },
+    {
+      "id": "q033",
+      "domain": "1.4 - Architecture",
+      "question": "Which table type is automatically dropped at the end of the user session?",
+      "options": [
+        "Permanent",
+        "Transient",
+        "External",
+        "Temporary"
+      ],
+      "correct": 3,
+      "explanation": "Temporary tables exist only for the duration of the session. They are automatically dropped when the session ends. They support Time Travel (max 1 day) but have no Fail-Safe."
+    },
+    {
+      "id": "q034",
+      "domain": "1.4 - Architecture",
+      "question": "How many credits per hour does an X-Large (XL) virtual warehouse consume?",
+      "options": [
+        "8 credits",
+        "16 credits",
+        "32 credits",
+        "64 credits"
+      ],
+      "correct": 1,
+      "explanation": "An X-Large warehouse has 16 servers and consumes 16 credits per hour. Each doubling of warehouse size doubles the credit cost."
+    },
+    {
+      "id": "q035",
+      "domain": "1.4 - Architecture",
+      "question": "What isolation level does Snowflake use for transactions?",
+      "options": [
+        "Read Committed",
+        "Repeatable Read",
+        "Snapshot Isolation",
+        "Serializable"
+      ],
+      "correct": 2,
+      "explanation": "Snowflake uses Snapshot Isolation (Optimistic Concurrency Control). Each transaction sees a consistent snapshot of the data at the start of that transaction."
+    },
+    {
+      "id": "q036",
+      "domain": "1.4 - Architecture",
+      "question": "Which stage type references data stored externally in AWS S3, Azure Blob, or GCS without loading it into Snowflake?",
+      "options": [
+        "User stage (@~)",
+        "Table stage (@%TABLE)",
+        "Named internal stage",
+        "Named external stage"
+      ],
+      "correct": 3,
+      "explanation": "A Named External Stage points to an external cloud bucket (S3/Blob/GCS). It allows querying or loading data that resides in cloud storage without copying it into Snowflake storage."
+    },
+    {
+      "id": "q037",
+      "domain": "1.4 - Architecture",
+      "question": "Multi-cluster warehouses solve which problem?",
+      "options": [
+        "Individual queries running too slowly",
+        "Too many simultaneous concurrent queries causing queuing",
+        "High storage costs for large tables",
+        "Cross-region data access latency"
+      ],
+      "correct": 1,
+      "explanation": "Multi-cluster warehouses solve query concurrency problems by adding additional clusters. To make individual queries run faster, you increase the warehouse size (scale up), not add clusters."
+    },
+    {
+      "id": "q038",
+      "domain": "1.4 - Architecture",
+      "question": "What is the correct Snowflake object hierarchy from top to bottom?",
+      "options": [
+        "Organization → Account → Schema → Database → Table",
+        "Account → Organization → Database → Schema → Table",
+        "Organization → Account → Database → Schema → Table",
+        "Organization → Database → Account → Schema → Table"
+      ],
+      "correct": 2,
+      "explanation": "The correct hierarchy is: Organization → Account(s) → Database(s) → Schema(s) → Tables/Views/Stages/etc. Organization is the top-level container."
+    },
+    {
+      "id": "q039",
+      "domain": "1.4 - Architecture",
+      "question": "What is the Result Cache retention period in Snowflake?",
+      "options": [
+        "1 hour",
+        "12 hours",
+        "24 hours",
+        "7 days"
+      ],
+      "correct": 2,
+      "explanation": "The Result Cache retains query results for 24 hours, provided the underlying data has not changed. It lives in the Cloud Services layer and survives warehouse suspension."
+    },
+    {
+      "id": "q040",
+      "domain": "1.4 - Architecture",
+      "question": "Which of the following is TRUE about Snowflake's storage layer?",
+      "options": [
+        "It is billed the same as compute",
+        "Data is stored in row-based format",
+        "Micro-partitions are mutable and updated in-place",
+        "Data is stored in columnar micro-partitions on cloud object storage"
+      ],
+      "correct": 3,
+      "explanation": "Snowflake stores data as columnar, immutable micro-partitions on cloud object storage (S3/Blob/GCS). DML operations create new micro-partitions rather than updating existing ones."
+    },
+    {
+      "id": "q040",
+      "domain": "1.4 - Architecture",
+      "question": "Which of the following is TRUE about Snowflake's storage layer?",
+      "options": ["It is billed the same as compute", "Data is stored in row-based format", "Micro-partitions are mutable and updated in-place", "Data is stored in columnar micro-partitions on cloud object storage"],
+      "correct": 3,
+      "explanation": "Snowflake stores data as columnar, immutable micro-partitions on cloud object storage (S3/Blob/GCS). DML operations create new micro-partitions rather than updating existing ones."
+    },
+    {
+      "id": "q041",
+      "domain": "2.1 - Data Loading",
+      "question": "Which SQL command is used to load data from a stage into a Snowflake table?",
+      "options": ["INSERT INTO", "LOAD DATA", "COPY INTO", "BULK INSERT"],
+      "correct": 2,
+      "explanation": "COPY INTO is Snowflake's primary bulk data loading command. It reads files from a stage (internal or external) and loads them into a table efficiently using the virtual warehouse."
+    },
+    {
+      "id": "q042",
+      "domain": "2.1 - Data Loading",
+      "question": "What is Snowpipe primarily used for?",
+      "options": ["Batch loading large CSV files manually", "Continuous, automated micro-batch data ingestion", "Replicating data across regions", "Exporting data from Snowflake to S3"],
+      "correct": 1,
+      "explanation": "Snowpipe enables continuous, event-driven data ingestion. It automatically loads data files as they arrive in a stage — eliminating the need for scheduled COPY INTO jobs."
+    },
+    {
+      "id": "q043",
+      "domain": "2.1 - Data Loading",
+      "question": "Which file format is NOT natively supported by Snowflake's COPY INTO command?",
+      "options": ["CSV", "JSON", "Parquet", "Microsoft Excel (.xlsx)"],
+      "correct": 3,
+      "explanation": "Snowflake natively supports CSV, JSON, Avro, ORC, Parquet, and XML. Microsoft Excel (.xlsx) is not a supported file format for COPY INTO."
+    },
+    {
+      "id": "q044",
+      "domain": "2.1 - Data Loading",
+      "question": "By default, what does COPY INTO do with files after successfully loading them?",
+      "options": ["Deletes them from the stage", "Moves them to an archive stage", "Marks them as loaded but keeps them in the stage", "Compresses them to save space"],
+      "correct": 2,
+      "explanation": "By default, COPY INTO marks files as loaded and keeps them in the stage. Files already loaded are skipped on subsequent COPY INTO runs (within 64 days for Snowpipe)."
+    },
+    {
+      "id": "q045",
+      "domain": "2.1 - Data Loading",
+      "question": "What is the PURGE option in COPY INTO used for?",
+      "options": ["Deleting failed rows from the target table", "Removing source files from the stage after successful loading", "Clearing the result cache", "Dropping temporary tables after load"],
+      "correct": 1,
+      "explanation": "COPY INTO ... PURGE = TRUE automatically deletes source files from the stage after they are successfully loaded, keeping the stage clean."
+    },
+    {
+      "id": "q046",
+      "domain": "2.1 - Data Loading",
+      "question": "Which COPY INTO option allows loading data even when some rows contain errors?",
+      "options": ["FORCE = TRUE", "ON_ERROR = CONTINUE", "SKIP_HEADER = 1", "TRUNCATE_COLUMNS = TRUE"],
+      "correct": 1,
+      "explanation": "ON_ERROR = CONTINUE tells Snowflake to skip erroneous rows and continue loading the rest of the file. Other options include ABORT_STATEMENT (default) and SKIP_FILE."
+    },
+    {
+      "id": "q047",
+      "domain": "2.1 - Data Loading",
+      "question": "A data engineer needs to query data that remains in S3 without loading it into Snowflake. Which object type should they use?",
+      "options": ["Materialized view", "External table", "Transient table", "Dynamic table"],
+      "correct": 1,
+      "explanation": "External tables allow querying data in cloud storage (S3/Blob/GCS) without copying it into Snowflake. The data stays in the external location; only the metadata is stored in Snowflake."
+    },
+    {
+      "id": "q048",
+      "domain": "2.1 - Data Loading",
+      "question": "What is the maximum number of days Snowpipe tracks loaded files to prevent duplicate loads?",
+      "options": ["7 days", "14 days", "64 days", "90 days"],
+      "correct": 2,
+      "explanation": "Snowpipe tracks files for 64 days. Files loaded within this window will not be reloaded. After 64 days, the same file could be loaded again."
+    },
+    {
+      "id": "q049",
+      "domain": "2.1 - Data Loading",
+      "question": "Which command exports data FROM a Snowflake table to a stage?",
+      "options": ["COPY INTO @stage FROM table", "PUT table @stage", "EXPORT TABLE", "UNLOAD INTO"],
+      "correct": 0,
+      "explanation": "COPY INTO @stage FROM table is the syntax for unloading (exporting) data from a Snowflake table to a stage. The same COPY INTO command handles both loading and unloading."
+    },
+    {
+      "id": "q050",
+      "domain": "2.1 - Data Loading",
+      "question": "What does the VALIDATE function do in Snowflake?",
+      "options": ["Checks the encryption status of a stage", "Validates query syntax before execution", "Simulates a COPY INTO load and returns errors without loading data", "Verifies user role permissions"],
+      "correct": 2,
+      "explanation": "VALIDATE() simulates a COPY INTO operation and returns a list of errors for the files — without actually loading any data. Useful for pre-checking data quality."
+    },
+    {
+      "id": "q051",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "What is the primary benefit of partition pruning in Snowflake?",
+      "options": ["It compresses micro-partitions to save storage", "It skips micro-partitions that cannot contain relevant data, reducing scan cost", "It automatically sorts data within a partition", "It merges small micro-partitions into larger ones"],
+      "correct": 1,
+      "explanation": "Partition pruning uses the min/max metadata stored per micro-partition to skip partitions that cannot contain rows matching the query filter — drastically reducing I/O."
+    },
+    {
+      "id": "q052",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "A large table is frequently filtered on REGION column but queries are slow. The DBA checks and finds low clustering depth. What is the best solution?",
+      "options": ["Increase warehouse size", "Add a clustering key on REGION", "Create a materialized view", "Enable result cache"],
+      "correct": 1,
+      "explanation": "Defining a clustering key on REGION reorganizes micro-partitions so that data with the same REGION values is co-located, dramatically improving partition pruning efficiency."
+    },
+    {
+      "id": "q053",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "Which view in Snowflake shows the execution plan for a query, including partition pruning statistics?",
+      "options": ["QUERY_HISTORY view", "Query Profile in Snowsight", "INFORMATION_SCHEMA.TABLES", "ACCESS_HISTORY view"],
+      "correct": 1,
+      "explanation": "The Query Profile in Snowsight provides a visual execution plan, showing per-operator statistics including partitions scanned vs. total, helping diagnose performance issues."
+    },
+    {
+      "id": "q054",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "A Materialized View in Snowflake is refreshed:",
+      "options": ["Manually by the user on a schedule", "Automatically by Snowflake in the background", "Only when queried (lazy refresh)", "Never — it is a static snapshot"],
+      "correct": 1,
+      "explanation": "Snowflake automatically maintains and refreshes materialized views in the background when the underlying table data changes — no user intervention required."
+    },
+    {
+      "id": "q055",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "What is a Dynamic Table in Snowflake?",
+      "options": ["A table that changes its schema based on incoming data", "A declarative object that automatically refreshes via incremental computation", "A temporary table refreshed every hour", "A table partitioned dynamically by date"],
+      "correct": 1,
+      "explanation": "Dynamic Tables define a transformation declaratively with a SQL query and a target lag. Snowflake automatically and incrementally refreshes the result as source data changes."
+    },
+    {
+      "id": "q056",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "Increasing a virtual warehouse size from Large to X-Large (doubling) will:",
+      "options": ["Double the cost and roughly halve the query execution time", "Halve the cost and double the query time", "Have no impact on query time", "Eliminate query queuing"],
+      "correct": 0,
+      "explanation": "Doubling warehouse size doubles the credit cost but can roughly halve individual query execution time — the total credit consumption remains similar, but results come faster."
+    },
+    {
+      "id": "q057",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "Which function can you use in a query to check if the result was served from the result cache?",
+      "options": ["RESULT_SCAN()", "QUERY_HISTORY()", "Checking query profile for '0 partitions scanned'", "USE_CACHED_RESULT()"],
+      "correct": 2,
+      "explanation": "In the Query Profile, a result-cache hit shows 0% compilation time and 0 partitions scanned. You can also check QUERY_HISTORY for 'result_cache_hit = true'."
+    },
+    {
+      "id": "q058",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "What is the SEARCH OPTIMIZATION SERVICE used for in Snowflake?",
+      "options": ["Full-text search indexing for large VARCHAR columns and semi-structured data point lookups", "Optimizing multi-table JOINs", "Speeding up GROUP BY aggregations", "Improving COPY INTO load performance"],
+      "correct": 0,
+      "explanation": "Search Optimization Service creates a persistent access path for selective point lookup queries on large tables — especially effective for columns with high cardinality or semi-structured data."
+    },
+    {
+      "id": "q059",
+      "domain": "2.3 - Semi-Structured Data",
+      "question": "Which Snowflake function parses a JSON string into a VARIANT value?",
+      "options": ["TO_VARIANT()", "PARSE_JSON()", "JSON_EXTRACT()", "CAST_JSON()"],
+      "correct": 1,
+      "explanation": "PARSE_JSON() converts a JSON-formatted string into a VARIANT object, enabling dot-notation and bracket-notation access to nested fields."
+    },
+    {
+      "id": "q060",
+      "domain": "2.3 - Semi-Structured Data",
+      "question": "How do you access a nested JSON field 'city' inside an 'address' object in a VARIANT column called 'v'?",
+      "options": ["v.address['city']", "v:address.city::STRING", "GET(v, 'address.city')", "JSON_VALUE(v, '$.address.city')"],
+      "correct": 1,
+      "explanation": "Snowflake uses colon (:) notation for VARIANT path traversal and dot notation for nested objects. The ::STRING cast extracts the value as a typed string."
+    },
+    {
+      "id": "q061",
+      "domain": "2.3 - Semi-Structured Data",
+      "question": "Which Snowflake function is used to flatten a JSON array into individual rows?",
+      "options": ["UNNEST()", "EXPLODE()", "FLATTEN()", "LATERAL VIEW()"],
+      "correct": 2,
+      "explanation": "FLATTEN() is a Snowflake table function that explodes a VARIANT array or object into individual rows, typically used with LATERAL in the FROM clause."
+    },
+    {
+      "id": "q062",
+      "domain": "2.3 - Semi-Structured Data",
+      "question": "What does the STRIP_OUTER_ARRAY option in a JSON file format do?",
+      "options": ["Removes the outermost array brackets, treating each element as a separate row", "Strips whitespace from string values", "Removes null fields from JSON objects", "Converts arrays to comma-separated strings"],
+      "correct": 0,
+      "explanation": "STRIP_OUTER_ARRAY = TRUE removes the outermost array brackets from a JSON file, loading each array element as a separate row. Useful when the top-level JSON structure is an array."
+    },
+    {
+      "id": "q063",
+      "domain": "3.1 - Access Control & Security",
+      "question": "Snowflake's access control model is based on which framework?",
+      "options": ["Mandatory Access Control (MAC)", "Discretionary Access Control (DAC)", "Role-Based Access Control (RBAC)", "Attribute-Based Access Control (ABAC)"],
+      "correct": 2,
+      "explanation": "Snowflake uses Role-Based Access Control (RBAC) combined with Discretionary Access Control (DAC). Privileges are granted to roles, and roles are granted to users."
+    },
+    {
+      "id": "q064",
+      "domain": "3.1 - Access Control & Security",
+      "question": "Which Snowflake system role has the highest level of privileges and should be used sparingly?",
+      "options": ["SYSADMIN", "SECURITYADMIN", "ACCOUNTADMIN", "ORGADMIN"],
+      "correct": 2,
+      "explanation": "ACCOUNTADMIN is the most powerful system role — it can manage all objects, users, and billing. Best practice is to use it sparingly and assign more specific roles for day-to-day work."
+    },
+    {
+      "id": "q065",
+      "domain": "3.1 - Access Control & Security",
+      "question": "What is the purpose of the SYSADMIN role?",
+      "options": ["Managing users and roles", "Creating and managing warehouses and databases", "Managing account-level settings and billing", "Configuring network policies"],
+      "correct": 1,
+      "explanation": "SYSADMIN is responsible for creating and managing Snowflake objects like warehouses, databases, and schemas. User and role management is handled by USERADMIN/SECURITYADMIN."
+    },
+    {
+      "id": "q066",
+      "domain": "3.1 - Access Control & Security",
+      "question": "A column masking policy in Snowflake is used to:",
+      "options": ["Encrypt entire columns at rest", "Dynamically obscure column values based on the querying role", "Delete sensitive columns from query results", "Prevent specific users from running SELECT queries"],
+      "correct": 1,
+      "explanation": "Column-level security (masking policies) dynamically masks or transforms column values at query time based on the role of the user — without physically altering the stored data."
+    },
+    {
+      "id": "q067",
+      "domain": "3.1 - Access Control & Security",
+      "question": "Which Snowflake feature restricts which rows a user can see in a table based on their role?",
+      "options": ["Column masking policy", "Row access policy", "Network policy", "Data classification"],
+      "correct": 1,
+      "explanation": "Row Access Policies apply a filter at query time to restrict which rows are visible based on the user's role, session context, or other attributes — without modifying the underlying data."
+    },
+    {
+      "id": "q068",
+      "domain": "3.1 - Access Control & Security",
+      "question": "Which Snowflake edition is required to use column-level security (masking policies) and row access policies?",
+      "options": ["Standard", "Enterprise", "Business Critical", "Virtual Private Snowflake"],
+      "correct": 1,
+      "explanation": "Column masking policies and row access policies require Enterprise edition or higher. They are not available in Standard edition."
+    },
+    {
+      "id": "q069",
+      "domain": "3.1 - Access Control & Security",
+      "question": "What does a Snowflake network policy control?",
+      "options": ["Which roles can access a database", "Which IP addresses are allowed or blocked from connecting to Snowflake", "Bandwidth throttling for large queries", "VPN tunnel configuration"],
+      "correct": 1,
+      "explanation": "Network policies define IP allowlists and blocklists that restrict Snowflake access to specific IP addresses or CIDR ranges — applied at the account or user level."
+    },
+    {
+      "id": "q070",
+      "domain": "3.1 - Access Control & Security",
+      "question": "Snowflake encrypts data at rest using which encryption standard?",
+      "options": ["AES-128", "AES-256", "RSA-2048", "DES-128"],
+      "correct": 1,
+      "explanation": "Snowflake uses AES-256 encryption for all data at rest in micro-partitions. This is automatic and cannot be disabled. TLS 1.2+ is used for all data in transit."
+    },
+    {
+      "id": "q071",
+      "domain": "3.1 - Access Control & Security",
+      "question": "What is the purpose of the FUTURE GRANTS command in Snowflake?",
+      "options": ["Grants privileges on objects that will be created in the future", "Schedules a grant to run at a specific time", "Grants temporary access that expires automatically", "Propagates grants from parent to child objects"],
+      "correct": 0,
+      "explanation": "FUTURE GRANTS automatically applies specified privileges to new objects created in a schema or database — eliminating the need to manually grant privileges each time a new table is created."
+    },
+    {
+      "id": "q072",
+      "domain": "3.1 - Access Control & Security",
+      "question": "What does the OWNERSHIP privilege allow a role to do?",
+      "options": ["Read data from the object", "Execute stored procedures in the object", "Full control including granting privileges to other roles", "Monitor query history for the object"],
+      "correct": 2,
+      "explanation": "OWNERSHIP is the highest privilege on an object. The owner can modify, drop, and grant any privilege on that object to other roles."
+    },
+    {
+      "id": "q073",
+      "domain": "3.2 - Account & Resource Management",
+      "question": "What is a Resource Monitor in Snowflake used for?",
+      "options": ["Monitoring CPU usage on warehouse nodes", "Tracking and limiting credit consumption by virtual warehouses", "Alerting on query performance degradation", "Managing data storage quotas"],
+      "correct": 1,
+      "explanation": "Resource Monitors track credit usage by virtual warehouses and can trigger alerts or automatically suspend/resume warehouses when credit limits are reached."
+    },
+    {
+      "id": "q074",
+      "domain": "3.2 - Account & Resource Management",
+      "question": "Which Resource Monitor action immediately stops a warehouse when a credit threshold is reached?",
+      "options": ["NOTIFY", "SUSPEND", "SUSPEND_IMMEDIATE", "TERMINATE"],
+      "correct": 2,
+      "explanation": "SUSPEND_IMMEDIATE halts the warehouse immediately when the threshold is hit, cancelling running queries. SUSPEND waits for current queries to finish before suspending."
+    },
+    {
+      "id": "q075",
+      "domain": "3.2 - Account & Resource Management",
+      "question": "What is the purpose of the AUTO_SUSPEND parameter on a virtual warehouse?",
+      "options": ["Suspends the warehouse if it exceeds a credit budget", "Automatically suspends the warehouse after a defined period of inactivity", "Pauses the warehouse during off-peak hours", "Suspends the warehouse when a network policy is violated"],
+      "correct": 1,
+      "explanation": "AUTO_SUSPEND (in seconds) defines how long the warehouse stays idle before automatically suspending. This prevents credits being consumed while the warehouse sits unused."
+    },
+    {
+      "id": "q076",
+      "domain": "3.2 - Account & Resource Management",
+      "question": "What is the STATEMENT_TIMEOUT_IN_SECONDS parameter used for?",
+      "options": ["Sets how long a connection can remain idle", "Cancels a query that has run longer than the specified number of seconds", "Sets the maximum time allowed for a COPY INTO operation", "Controls warehouse auto-suspend timing"],
+      "correct": 1,
+      "explanation": "STATEMENT_TIMEOUT_IN_SECONDS automatically cancels any query that exceeds the specified duration. It can be set at account, warehouse, session, or user level."
+    },
+    {
+      "id": "q077",
+      "domain": "4.1 - Streams & Tasks",
+      "question": "What is a Snowflake Stream used for?",
+      "options": ["Streaming data in real-time from Kafka", "Tracking DML changes (inserts, updates, deletes) made to a table", "Scheduling SQL queries on a time interval", "Replicating databases across regions"],
+      "correct": 1,
+      "explanation": "A Stream (Change Data Capture object) records DML changes to a source table in an append-only staging table. Rows include metadata columns like METADATA$ACTION and METADATA$ISUPDATE."
+    },
+    {
+      "id": "q078",
+      "domain": "4.1 - Streams & Tasks",
+      "question": "What happens to stream records after they are consumed by a DML statement in a transaction?",
+      "options": ["They are permanently deleted from Snowflake", "The stream offset advances — consumed records are no longer visible in the stream", "They are moved to a history table", "They remain indefinitely for replay"],
+      "correct": 1,
+      "explanation": "After a transaction successfully consumes stream records, the stream offset advances past those records. They are no longer returned by subsequent stream queries."
+    },
+    {
+      "id": "q079",
+      "domain": "4.1 - Streams & Tasks",
+      "question": "What is a Snowflake Task?",
+      "options": ["A workflow object for orchestrating multi-step data pipelines", "A scheduled or event-driven execution unit for SQL or Snowpark code", "A background service that monitors data quality", "A connector for third-party ETL tools"],
+      "correct": 1,
+      "explanation": "A Task executes a single SQL statement or a Snowpark procedure on a defined schedule (CRON or interval) or when triggered by a stream having data, enabling lightweight pipeline orchestration."
+    },
+    {
+      "id": "q080",
+      "domain": "4.1 - Streams & Tasks",
+      "question": "Which metadata column in a Stream indicates whether a change was an UPDATE operation?",
+      "options": ["METADATA$ACTION", "METADATA$ISUPDATE", "METADATA$ROW_ID", "METADATA$CHANGE_TYPE"],
+      "correct": 1,
+      "explanation": "METADATA$ISUPDATE is TRUE for rows that are part of an UPDATE. UPDATE operations appear as a DELETE (old row) and INSERT (new row) pair in the stream, both with METADATA$ISUPDATE = TRUE."
+    },
+    {
+      "id": "q081",
+      "domain": "4.1 - Streams & Tasks",
+      "question": "A Task with a SCHEDULE of '5 MINUTE' will run:",
+      "options": ["Every 5 minutes from midnight", "5 minutes after the previous run completes", "At 5-minute intervals based on wall clock time", "Continuously with a 5-minute delay between runs"],
+      "correct": 2,
+      "explanation": "Task schedules using intervals (e.g., '5 MINUTE') run at fixed wall clock intervals. CRON expressions can also be used for more precise scheduling."
+    },
+    {
+      "id": "q082",
+      "domain": "4.1 - Streams & Tasks",
+      "question": "Which type of Snowflake Stream captures only APPEND (INSERT) operations?",
+      "options": ["Standard stream", "Append-only stream", "Insert stream", "Delta stream"],
+      "correct": 1,
+      "explanation": "Append-only streams capture only INSERT operations and are more efficient than standard streams for immutable, append-only tables like event logs."
+    },
+    {
+      "id": "q083",
+      "domain": "4.2 - Stored Procedures & UDFs",
+      "question": "What is the key difference between a Snowflake User-Defined Function (UDF) and a Stored Procedure?",
+      "options": ["UDFs can execute DML; stored procedures cannot", "UDFs return a value and can be used in queries; stored procedures are called with CALL and can execute DML", "Stored procedures are faster than UDFs", "UDFs support JavaScript; stored procedures do not"],
+      "correct": 1,
+      "explanation": "UDFs return a scalar or tabular value and are embedded in SQL queries. Stored Procedures are invoked with CALL, can execute DML (INSERT/UPDATE/DELETE), and can return results or nothing."
+    },
+    {
+      "id": "q084",
+      "domain": "4.2 - Stored Procedures & UDFs",
+      "question": "What does a User-Defined Table Function (UDTF) return compared to a scalar UDF?",
+      "options": ["A single scalar value", "A table (set of rows)", "A VARIANT value", "A boolean"],
+      "correct": 1,
+      "explanation": "A UDTF (User-Defined Table Function) returns a set of rows (a table), enabling it to be used in the FROM clause like a table or subquery. A scalar UDF returns a single value per row."
+    },
+    {
+      "id": "q085",
+      "domain": "4.2 - Stored Procedures & UDFs",
+      "question": "Which languages can be used to write Snowflake stored procedures?",
+      "options": ["SQL only", "SQL and JavaScript only", "SQL, JavaScript, Python, Java, and Scala", "Python and Scala only"],
+      "correct": 2,
+      "explanation": "Snowflake stored procedures can be written in SQL, JavaScript, Python, Java, and Scala. Python, Java, and Scala stored procedures run using Snowpark inside Snowflake."
+    },
+    {
+      "id": "q086",
+      "domain": "4.3 - Billing & Cost Management",
+      "question": "Snowflake charges for compute based on:",
+      "options": ["The number of queries executed", "Credits consumed per second while the warehouse is running", "Data scanned per query in terabytes", "The number of concurrent users connected"],
+      "correct": 1,
+      "explanation": "Snowflake bills compute as credits per second while a virtual warehouse is in a started (running) state — including while idle. Credits are based on warehouse size."
+    },
+    {
+      "id": "q087",
+      "domain": "4.3 - Billing & Cost Management",
+      "question": "Which Snowflake storage type incurs the LOWEST storage cost?",
+      "options": ["Permanent table (with Time Travel and Fail-Safe)", "Transient table (with Time Travel, no Fail-Safe)", "Temporary table (session only)", "External table"],
+      "correct": 3,
+      "explanation": "External tables store no data in Snowflake (data stays in cloud storage). Among tables that do store data, temporary/transient tables cost less than permanent tables by avoiding Fail-Safe overhead."
+    },
+    {
+      "id": "q088",
+      "domain": "4.3 - Billing & Cost Management",
+      "question": "What is the minimum billing interval for a virtual warehouse that starts and then immediately suspends?",
+      "options": ["1 second", "60 seconds", "5 minutes", "1 hour"],
+      "correct": 1,
+      "explanation": "Snowflake bills a minimum of 60 seconds when a warehouse starts. If a warehouse runs for less than 60 seconds, it is still billed for a full 60 seconds."
+    },
+    {
+      "id": "q089",
+      "domain": "4.3 - Billing & Cost Management",
+      "question": "Which Snowflake view can you query to see credit usage broken down by warehouse per day?",
+      "options": ["ACCOUNT_USAGE.QUERY_HISTORY", "ACCOUNT_USAGE.WAREHOUSE_METERING_HISTORY", "INFORMATION_SCHEMA.WAREHOUSES", "ACCOUNT_USAGE.ACCESS_HISTORY"],
+      "correct": 1,
+      "explanation": "ACCOUNT_USAGE.WAREHOUSE_METERING_HISTORY shows detailed credit consumption per warehouse per hour. It has a latency of up to 45 minutes and retains data for 1 year."
+    },
+    {
+      "id": "q090",
+      "domain": "4.3 - Billing & Cost Management",
+      "question": "How long does ACCOUNT_USAGE schema data typically retain query history?",
+      "options": ["7 days", "30 days", "1 year", "5 years"],
+      "correct": 2,
+      "explanation": "The ACCOUNT_USAGE schema retains historical data for 1 year (365 days). In contrast, INFORMATION_SCHEMA only retains data for 7 days to 6 months depending on the view."
+    },
+    {
+      "id": "q091",
+      "domain": "1.4 - Architecture",
+      "question": "Which Snowflake cache layer is shared across ALL virtual warehouses in an account?",
+      "options": ["Local disk (SSD) cache", "Result cache", "Metadata cache", "Both result cache and metadata cache"],
+      "correct": 3,
+      "explanation": "The Result Cache and Metadata Cache both live in the Cloud Services layer and are shared across all warehouses. The local disk (SSD) cache is private to each individual warehouse."
+    },
+    {
+      "id": "q092",
+      "domain": "1.4 - Architecture",
+      "question": "What is the purpose of the INFORMATION_SCHEMA in a Snowflake database?",
+      "options": ["Stores raw table data", "Provides metadata views about objects within that database (tables, columns, views, etc.)", "Stores query execution logs for 1 year", "Contains system-level configuration settings"],
+      "correct": 1,
+      "explanation": "INFORMATION_SCHEMA is a built-in read-only schema in every Snowflake database. It provides views and table functions for metadata about objects within that database, with data retained for up to 6 months."
+    },
+    {
+      "id": "q093",
+      "domain": "1.4 - Architecture",
+      "question": "Which Snowflake object is used to generate sequential unique numbers, often for surrogate keys?",
+      "options": ["AUTO_INCREMENT column", "SEQUENCE", "IDENTITY column", "ROWNUM function"],
+      "correct": 1,
+      "explanation": "A SEQUENCE object generates unique, sequential numeric values. It can be referenced in DML statements. Snowflake also supports AUTOINCREMENT/IDENTITY column properties as a convenience wrapper."
+    },
+    {
+      "id": "q094",
+      "domain": "1.4 - Architecture",
+      "question": "What does UNDROP TABLE do in Snowflake?",
+      "options": ["Restores a table from Fail-Safe storage", "Restores a dropped table using Time Travel, provided the Time Travel period has not expired", "Permanently deletes a table from Fail-Safe", "Creates a clone of a dropped table"],
+      "correct": 1,
+      "explanation": "UNDROP TABLE restores a recently dropped table using Time Travel. It works within the configured Time Travel retention window. Once the window expires, UNDROP is no longer possible."
+    },
+    {
+      "id": "q095",
+      "domain": "1.4 - Architecture",
+      "question": "In Snowflake, what is a 'Pipe' object?",
+      "options": ["A network connection between two Snowflake accounts", "A Snowpipe configuration object that defines the COPY INTO statement used for continuous ingestion", "A stream used for Change Data Capture", "A named internal stage for temporary file storage"],
+      "correct": 1,
+      "explanation": "A Pipe (Snowpipe) object contains the COPY INTO definition used to automatically ingest data files as they arrive in a stage. It is the core object behind Snowpipe's event-driven architecture."
+    },
+    {
+      "id": "q096",
+      "domain": "2.1 - Data Loading",
+      "question": "What is the recommended file size for optimal COPY INTO bulk loading performance in Snowflake?",
+      "options": ["1–5 MB per file", "10–50 MB per file", "100–250 MB per file", "1–5 GB per file"],
+      "correct": 2,
+      "explanation": "Snowflake recommends files of 100–250 MB (compressed) for optimal bulk loading performance. Files that are too small (< 10 MB) create overhead; files that are too large reduce parallelism."
+    },
+    {
+      "id": "q097",
+      "domain": "2.1 - Data Loading",
+      "question": "Which Snowpipe mechanism uses cloud storage event notifications (e.g., AWS S3 Event Notifications) to trigger automatic data loading?",
+      "options": ["Manual REST API call", "Auto-ingest via cloud event notifications", "Scheduled COPY INTO task", "Kafka Connector trigger"],
+      "correct": 1,
+      "explanation": "Snowpipe auto-ingest uses cloud storage event notifications (S3 SQS, Azure Event Grid, GCS Pub/Sub) to automatically trigger a pipe when new files arrive in a stage — no manual API call needed."
+    },
+    {
+      "id": "q098",
+      "domain": "2.1 - Data Loading",
+      "question": "Which COPY INTO option forces files to be reloaded even if they were already loaded previously?",
+      "options": ["ON_ERROR = CONTINUE", "FORCE = TRUE", "RELOAD = TRUE", "PURGE = FALSE"],
+      "correct": 1,
+      "explanation": "FORCE = TRUE bypasses Snowflake's file deduplication tracking and forces the files to be reloaded, even if they have been loaded before. Use carefully to avoid duplicate data."
+    },
+    {
+      "id": "q099",
+      "domain": "2.1 - Data Loading",
+      "question": "What is a File Format object in Snowflake?",
+      "options": ["A named object that stores the parsing options (delimiter, encoding, compression, etc.) for a file type", "A schema for defining the structure of loaded tables", "A stage that stores files in a specific format", "A metadata tag applied to loaded files"],
+      "correct": 0,
+      "explanation": "A File Format object is a named, reusable configuration that specifies how to parse files (CSV delimiter, JSON strip outer array, Parquet compression, etc.) during COPY INTO or external table queries."
+    },
+    {
+      "id": "q100",
+      "domain": "2.1 - Data Loading",
+      "question": "Which SQL command is used to list files currently staged in a Snowflake stage?",
+      "options": ["SHOW FILES IN @stage", "SELECT * FROM @stage", "LIST @stage", "DESCRIBE STAGE @stage"],
+      "correct": 2,
+      "explanation": "LIST @stage_name (or LS @stage_name) returns a list of files in a stage along with their size, checksum, and last modified date."
+    },
+    {
+      "id": "q101",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "What does the SYSTEM$CLUSTERING_INFORMATION function return?",
+      "options": ["The number of active warehouses", "Statistics about the clustering quality of a table, including average overlap depth", "The list of clustering keys defined on a table", "The estimated cost of re-clustering a table"],
+      "correct": 1,
+      "explanation": "SYSTEM$CLUSTERING_INFORMATION returns clustering quality metrics for a table, including average overlap depth (lower is better) and average depth, helping determine if re-clustering is beneficial."
+    },
+    {
+      "id": "q102",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "When would you choose a Materialized View over a Dynamic Table?",
+      "options": ["When you need real-time streaming ingestion", "When you need a pre-aggregated result that is automatically maintained and the source is a single base table", "When the transformation logic involves multiple source tables with complex JOINs", "When you need row-level security applied to the result"],
+      "correct": 1,
+      "explanation": "Materialized Views are ideal for pre-aggregated, single-table transformations that Snowflake maintains automatically. Dynamic Tables are preferred for complex multi-table pipelines and incremental ELT."
+    },
+    {
+      "id": "q103",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "What is 'spillage to disk' in Snowflake query processing?",
+      "options": ["Writing query results to an external S3 bucket", "When a query operation (e.g., sort, join, aggregation) uses more memory than available and writes intermediate data to local disk", "Logging query errors to a system table", "Persisting query results to a Transient table"],
+      "correct": 1,
+      "explanation": "Spilling to disk occurs when an in-memory operation exceeds the available RAM on a warehouse node. This dramatically slows queries. The fix is usually to increase warehouse size or optimize the query."
+    },
+    {
+      "id": "q104",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "Which Snowflake feature allows a table to be automatically re-organized in the background when its clustering depth degrades?",
+      "options": ["Automatic Clustering", "Background Maintenance", "Dynamic Partitioning", "Auto-Reorganize"],
+      "correct": 0,
+      "explanation": "Automatic Clustering (enabled via ALTER TABLE ... CLUSTER BY) triggers background re-clustering jobs that continuously maintain optimal micro-partition organization as new data is ingested."
+    },
+    {
+      "id": "q105",
+      "domain": "2.3 - Semi-Structured Data",
+      "question": "What is the difference between OBJECT and ARRAY data types in Snowflake?",
+      "options": ["OBJECT stores key-value pairs; ARRAY stores ordered indexed values — both are subtypes of VARIANT", "OBJECT is for JSON; ARRAY is for XML", "ARRAY supports Time Travel; OBJECT does not", "They are identical — both are aliases for VARIANT"],
+      "correct": 0,
+      "explanation": "OBJECT is a VARIANT subtype for key-value (JSON object) structures. ARRAY is a VARIANT subtype for ordered lists. Both can also be stored as a generic VARIANT column in practice."
+    },
+    {
+      "id": "q106",
+      "domain": "2.3 - Semi-Structured Data",
+      "question": "Which function converts a Snowflake value to a JSON string representation?",
+      "options": ["TO_JSON()", "STRINGIFY()", "OBJECT_CONSTRUCT()", "TO_VARCHAR()"],
+      "correct": 0,
+      "explanation": "TO_JSON() serializes a VARIANT value back into a JSON-formatted string. It is the inverse of PARSE_JSON()."
+    },
+    {
+      "id": "q107",
+      "domain": "2.3 - Semi-Structured Data",
+      "question": "What does the LATERAL keyword do when used with FLATTEN() in a Snowflake query?",
+      "options": ["Applies a row-level security filter", "Allows the FLATTEN() table function to reference columns from the same FROM clause row", "Performs a cross join across all rows", "Enables parallel execution of the FLATTEN operation"],
+      "correct": 1,
+      "explanation": "LATERAL allows a table function like FLATTEN() to reference columns from the current row of the FROM clause. Without LATERAL, the function cannot access row-specific VARIANT values."
+    },
+    {
+      "id": "q108",
+      "domain": "3.1 - Access Control & Security",
+      "question": "What is the SECURITYADMIN role responsible for in Snowflake?",
+      "options": ["Creating databases and warehouses", "Managing users, roles, and privileges including granting/revoking roles", "Monitoring credit consumption", "Configuring encryption settings"],
+      "correct": 1,
+      "explanation": "SECURITYADMIN can create and manage users and roles, and grant any privilege or role to other roles or users. It inherits USERADMIN privileges."
+    },
+    {
+      "id": "q109",
+      "domain": "3.1 - Access Control & Security",
+      "question": "In Snowflake RBAC, what is the correct way to give a user access to a role's privileges?",
+      "options": ["GRANT PRIVILEGE TO USER", "GRANT ROLE TO USER", "ASSIGN ROLE TO USER", "GRANT USER ACCESS TO ROLE"],
+      "correct": 1,
+      "explanation": "In Snowflake, privileges are granted to roles, and roles are granted to users. The syntax is: GRANT ROLE role_name TO USER user_name."
+    },
+    {
+      "id": "q110",
+      "domain": "3.1 - Access Control & Security",
+      "question": "What is Multi-Factor Authentication (MFA) in Snowflake powered by?",
+      "options": ["Snowflake's built-in SMS verification", "Duo Security", "Google Authenticator only", "Microsoft Authenticator only"],
+      "correct": 1,
+      "explanation": "Snowflake's MFA integration is powered by Duo Security. Users enroll via the Duo mobile app and are prompted for secondary authentication when connecting to Snowflake."
+    },
+    {
+      "id": "q111",
+      "domain": "3.1 - Access Control & Security",
+      "question": "Which Snowflake feature provides an audit trail of all data access, including which columns were read by which queries?",
+      "options": ["QUERY_HISTORY view", "ACCESS_HISTORY view in ACCOUNT_USAGE", "DATA_AUDIT system table", "INFORMATION_SCHEMA.COLUMNS view"],
+      "correct": 1,
+      "explanation": "The ACCESS_HISTORY view in ACCOUNT_USAGE records which users accessed which tables and columns, including the queries that drove the access — enabling fine-grained data governance auditing."
+    },
+    {
+      "id": "q112",
+      "domain": "3.1 - Access Control & Security",
+      "question": "What is a Snowflake Data Classification tag used for?",
+      "options": ["Tagging warehouse resources for cost allocation", "Automatically assigning sensitivity labels (e.g., PII, PHI) to table columns for governance purposes", "Applying row-level filters based on data category", "Encrypting tagged columns with a separate key"],
+      "correct": 1,
+      "explanation": "Data Classification (part of Snowflake Horizon) automatically scans and assigns system-defined or custom sensitivity tags to columns, enabling governance, privacy controls, and masking policy assignment."
+    },
+    {
+      "id": "q113",
+      "domain": "3.2 - Account & Resource Management",
+      "question": "What does the QUERY_TAG parameter do in a Snowflake session?",
+      "options": ["Labels query results for export", "Attaches a string tag to queries in the session, visible in QUERY_HISTORY for cost allocation and auditing", "Speeds up query execution by pre-caching results", "Applies a masking policy to query output"],
+      "correct": 1,
+      "explanation": "QUERY_TAG attaches a custom string to all queries run in a session. The tag appears in QUERY_HISTORY, enabling teams to attribute credit consumption to specific applications or business units."
+    },
+    {
+      "id": "q114",
+      "domain": "3.2 - Account & Resource Management",
+      "question": "What is the difference between ACCOUNT_USAGE and INFORMATION_SCHEMA in terms of data latency and retention?",
+      "options": ["Both have the same latency and retention", "ACCOUNT_USAGE has up to 45-min latency but retains data for 1 year; INFORMATION_SCHEMA is near real-time but retains data for only 7 days to 6 months", "INFORMATION_SCHEMA retains data for 1 year; ACCOUNT_USAGE only for 30 days", "ACCOUNT_USAGE is only available in Enterprise edition"],
+      "correct": 1,
+      "explanation": "ACCOUNT_USAGE has up to 45 minutes of latency but retains historical metadata for 1 year. INFORMATION_SCHEMA is near real-time but retains data for shorter periods (7 days for query history, up to 6 months for others)."
+    },
+    {
+      "id": "q115",
+      "domain": "4.1 - Streams & Tasks",
+      "question": "A Task is configured with WHEN SYSTEM$STREAM_HAS_DATA('@my_stream'). When does this Task execute?",
+      "options": ["On a fixed schedule regardless of stream data", "Only when the referenced stream contains unconsumed change records", "When the stream has more than 1000 records", "Every time a new file is added to a stage"],
+      "correct": 1,
+      "explanation": "SYSTEM$STREAM_HAS_DATA() returns TRUE only when the stream has unconsumed change records. A Task with this condition skips execution when the stream is empty, saving compute credits."
+    },
+    {
+      "id": "q116",
+      "domain": "4.1 - Streams & Tasks",
+      "question": "What is a 'stale' stream in Snowflake?",
+      "options": ["A stream that has not been created yet", "A stream whose offset has fallen outside the Time Travel window of the source table, making it unreadable", "A stream with no records", "A stream on a dropped table"],
+      "correct": 1,
+      "explanation": "A stream becomes stale when its offset falls outside the Time Travel window of the source table. The stream must be recreated, and historical changes within the stale period are lost."
+    },
+    {
+      "id": "q117",
+      "domain": "4.1 - Streams & Tasks",
+      "question": "Which command resumes a suspended Snowflake Task?",
+      "options": ["START TASK task_name", "ALTER TASK task_name RESUME", "ENABLE TASK task_name", "SET TASK task_name ACTIVE"],
+      "correct": 1,
+      "explanation": "ALTER TASK task_name RESUME activates a previously suspended task. New tasks must also be explicitly resumed after creation, as they are created in a suspended state by default."
+    },
+    {
+      "id": "q118",
+      "domain": "4.2 - Stored Procedures & UDFs",
+      "question": "What is a Snowflake UDF with CALLER'S RIGHTS vs OWNER'S RIGHTS?",
+      "options": ["CALLER'S RIGHTS runs with the privileges of the caller; OWNER'S RIGHTS runs with the privileges of the procedure/UDF owner", "OWNER'S RIGHTS is more restrictive than CALLER'S RIGHTS", "They are the same in Snowflake — both use the owner's privileges", "CALLER'S RIGHTS is only available for JavaScript UDFs"],
+      "correct": 0,
+      "explanation": "CALLER'S RIGHTS executes the procedure using the caller's current role and privileges. OWNER'S RIGHTS (default) executes using the owner's privileges — enabling controlled access without granting object privileges directly to users."
+    },
+    {
+      "id": "q119",
+      "domain": "4.2 - Stored Procedures & UDFs",
+      "question": "What is a Snowflake External Function?",
+      "options": ["A UDF that runs Python code outside of Snowflake", "A function that calls an external API (e.g., AWS Lambda, Azure Functions) from within a SQL query", "A JavaScript UDF stored in an external stage", "A Snowpark function deployed to a separate compute cluster"],
+      "correct": 1,
+      "explanation": "External Functions invoke external services (via API Gateway + Lambda/Azure Functions/GCP Cloud Functions) from SQL queries. They enable calling ML models, enrichment APIs, or any HTTP endpoint from within Snowflake."
+    },
+    {
+      "id": "q120",
+      "domain": "4.3 - Billing & Cost Management",
+      "question": "Snowflake's pricing model separates storage and compute. What is the key advantage of this separation?",
+      "options": ["You can run queries without any storage costs", "You pay only for compute while it is active and can scale each independently — idle compute accrues no cost", "Storage is always free in all editions", "Compute scales automatically with no user configuration"],
+      "correct": 1,
+      "explanation": "Separated billing means you only pay for compute while warehouses are running (and can suspend them when idle), and pay for storage based on actual data volume — independently scaling each dimension as needed."
+    },
+    {
+      "id": "q121",
+      "domain": "4.3 - Billing & Cost Management",
+      "question": "What does the ON_ERROR = SKIP_FILE option in COPY INTO do?",
+      "options": ["Skips individual error rows and continues loading the file", "Skips the entire file if any errors are found and moves to the next file", "Logs errors to a separate error table", "Converts error rows to NULL values"],
+      "correct": 1,
+      "explanation": "ON_ERROR = SKIP_FILE skips the entire file if any errors are encountered, rather than aborting the whole statement. Use SKIP_FILE_<num> or SKIP_FILE_<pct>% to skip files only when error count/percentage exceeds a threshold."
+    },
+    {
+      "id": "q122",
+      "domain": "1.3 - Data Sharing",
+      "question": "What is the Snowflake Native App Framework?",
+      "options": ["A framework for building mobile apps that connect to Snowflake", "A platform for building and distributing data applications that run inside consumers' Snowflake accounts", "A tool for creating Snowflake connectors for third-party SaaS platforms", "A CI/CD pipeline framework for Snowflake schema migrations"],
+      "correct": 1,
+      "explanation": "The Native App Framework lets developers build, package, and distribute applications (including Snowpark logic, Streamlit UIs, and shared data) that run natively inside the consumer's Snowflake account — no data movement."
+    },
+    {
+      "id": "q123",
+      "domain": "1.1 - Cloud Features",
+      "question": "What is Snowflake Cortex?",
+      "options": ["Snowflake's virtual warehouse orchestration engine", "A suite of AI/ML functions (LLM-based text processing, ML classification, forecasting) available as SQL functions inside Snowflake", "The query optimizer component of the Cloud Services layer", "Snowflake's data governance and cataloging product"],
+      "correct": 1,
+      "explanation": "Snowflake Cortex is a suite of fully managed AI functions — including LLM-based text summarization, classification, sentiment analysis, translation, and ML forecasting — callable directly from SQL without managing any models."
+    },
+    {
+      "id": "q124",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "What is the purpose of a Query Acceleration Service (QAS) in Snowflake?",
+      "options": ["Automatically scales up warehouse size for slow queries", "Offloads portions of eligible queries to serverless compute to reduce warehouse resource contention", "Caches the most frequently used query results permanently", "Pre-warms warehouse SSD cache before business hours"],
+      "correct": 1,
+      "explanation": "Query Acceleration Service offloads parts of eligible queries (large scans, aggregations) to serverless cloud compute, reducing the load on the virtual warehouse and accelerating unpredictable, spiky workloads."
+    },
+    {
+      "id": "q125",
+      "domain": "3.1 - Access Control & Security",
+      "question": "What is Snowflake's approach to HIPAA and PCI DSS compliance?",
+      "options": ["Available on all editions by default", "Requires Business Critical edition or higher, which provides enhanced security features and compliance controls", "Only available on Virtual Private Snowflake", "Compliance is the customer's sole responsibility on any edition"],
+      "correct": 1,
+      "explanation": "HIPAA, PCI DSS, and SOC 2 Type II compliance-ready features require Business Critical edition or higher. This includes Tri-Secret Secure encryption, PHI data handling agreements, and enhanced security controls."
+    },
+    {
+      "id": "q126",
+      "domain": "1.4 - Architecture",
+      "question": "What is a Snowflake 'Share' object?",
+      "options": ["A copy of a database created for a consumer account", "A named Snowflake object that encapsulates the database, schemas, and objects granted for sharing with other accounts", "A stage used to transfer files between accounts", "A replication group for cross-region failover"],
+      "correct": 1,
+      "explanation": "A Share is a Snowflake object that the provider creates, adds objects to (databases, schemas, tables, views, UDFs), and then adds consumer accounts to. It is the mechanism behind Secure Data Sharing."
+    },
+    {
+      "id": "q127",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "What does 'bytes spilled to remote storage' indicate in a Snowflake Query Profile?",
+      "options": ["Data exported to an external stage", "Intermediate query data that exceeded both memory and local SSD, and spilled to cloud storage — the worst performance scenario", "Query result size written to the result cache", "Parquet files read from an external table"],
+      "correct": 1,
+      "explanation": "Bytes spilled to remote storage is the worst type of spill — intermediate data overflowed both RAM and local SSD and had to write to cloud object storage (S3/Blob/GCS). This causes severe query slowdowns."
+    },
+    {
+      "id": "q128",
+      "domain": "4.1 - Streams & Tasks",
+      "question": "What is a Directed Acyclic Graph (DAG) in the context of Snowflake Tasks?",
+      "options": ["A visualization tool in Snowsight for query execution plans", "A tree of dependent tasks where a root task triggers child tasks in a defined order", "A graph database extension for Snowflake", "A clustering algorithm used for micro-partition organization"],
+      "correct": 1,
+      "explanation": "Snowflake Tasks support DAG-based orchestration: a root task triggers when scheduled, and child tasks execute after their parent tasks succeed — enabling multi-step pipeline orchestration."
+    },
+    {
+      "id": "q129",
+      "domain": "2.1 - Data Loading",
+      "question": "What is 'schema detection' in Snowflake's COPY INTO or external tables?",
+      "options": ["Automatically inferring the column names and types from self-describing file formats like Parquet or Avro", "Detecting SQL injection patterns in loaded data", "Identifying duplicate rows during load", "Auto-generating clustering keys based on column data types"],
+      "correct": 0,
+      "explanation": "Schema detection (via INFER_SCHEMA or DETECT_COLUMN_TYPES) automatically reads file metadata from self-describing formats (Parquet, Avro, ORC) and infers column names and data types — eliminating manual schema definition."
+    },
+    {
+      "id": "q130",
+      "domain": "3.2 - Account & Resource Management",
+      "question": "Which system function returns the name of the currently active role in a Snowflake session?",
+      "options": ["CURRENT_USER()", "CURRENT_ROLE()", "SESSION_ROLE()", "ACTIVE_ROLE()"],
+      "correct": 1,
+      "explanation": "CURRENT_ROLE() returns the name of the role currently active in the session. Similarly, CURRENT_USER() returns the logged-in username, and CURRENT_WAREHOUSE() returns the active warehouse."
+    },
+    {
+      "id": "q131",
+      "domain": "1.4 - Architecture",
+      "question": "What is the minimum retention period you can set for Time Travel on a permanent table?",
+      "options": ["0 days", "1 day", "7 days", "30 days"],
+      "correct": 0,
+      "explanation": "You can set DATA_RETENTION_TIME_IN_DAYS = 0 to completely disable Time Travel on a table, reducing storage overhead. The maximum for Standard is 1 day; Enterprise is 90 days."
+    },
+    {
+      "id": "q132",
+      "domain": "1.4 - Architecture",
+      "question": "Which AT or BEFORE clause syntax lets you query a table as it existed at a specific timestamp using Time Travel?",
+      "options": [
+        "SELECT * FROM my_table AT (OFFSET => -3600)",
+        "SELECT * FROM my_table BEFORE (TIMESTAMP => '2024-01-01 00:00:00'::TIMESTAMP)",
+        "SELECT * FROM my_table AT (TIMESTAMP => '2024-01-01 00:00:00'::TIMESTAMP_TZ)",
+        "All of the above are valid Time Travel syntaxes"
+      ],
+      "correct": 3,
+      "explanation": "Snowflake supports three Time Travel query forms: AT/BEFORE with TIMESTAMP (exact point in time), OFFSET (seconds relative to now), or STATEMENT (query ID of a previous statement)."
+    },
+    {
+      "id": "q133",
+      "domain": "1.4 - Architecture",
+      "question": "A developer clones a production database for testing. Changes made in the clone affect:",
+      "options": [
+        "Both the clone and the original database",
+        "Only the clone — the original is unaffected",
+        "Only the original — clones are read-only",
+        "Both, but only if AUTO_SYNC is enabled"
+      ],
+      "correct": 1,
+      "explanation": "Zero-Copy Clones are fully independent after creation. DML on the clone creates new micro-partitions in the clone only — the original production database is never affected."
+    },
+    {
+      "id": "q134",
+      "domain": "1.4 - Architecture",
+      "question": "Which Snowflake object type CANNOT be cloned?",
+      "options": ["Table", "Schema", "Database", "External stage"],
+      "correct": 3,
+      "explanation": "External stages cannot be cloned because they reference external storage locations, not data managed by Snowflake. Tables, schemas, databases, streams, tasks, and pipes can all be cloned."
+    },
+    {
+      "id": "q135",
+      "domain": "1.4 - Architecture",
+      "question": "What does SHOW TABLES IN SCHEMA return?",
+      "options": [
+        "The DDL definition of each table",
+        "Metadata about all tables in the schema (name, created date, kind, rows, etc.)",
+        "The data stored in each table",
+        "The access privileges on each table"
+      ],
+      "correct": 1,
+      "explanation": "SHOW TABLES (and SHOW VIEWS, SHOW STAGES, etc.) returns metadata rows about objects — not actual data. It is served from the Cloud Services metadata layer and requires no virtual warehouse."
+    },
+    {
+      "id": "q136",
+      "domain": "1.4 - Architecture",
+      "question": "How does Snowflake handle DML conflicts when two concurrent transactions update the same row?",
+      "options": [
+        "Last write wins — no error is raised",
+        "A conflict error is raised and one transaction must be retried",
+        "Both updates are merged automatically",
+        "Snowflake uses a row-level lock to queue one transaction"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake uses Optimistic Concurrency Control (Snapshot Isolation). If two transactions modify the same row concurrently, the second commit raises a conflict error and must be retried by the application."
+    },
+    {
+      "id": "q137",
+      "domain": "1.2 - Tools & Interfaces",
+      "question": "What is Streamlit in Snowflake (SiS)?",
+      "options": [
+        "A real-time data streaming service built into Snowflake",
+        "A framework for building interactive data apps (dashboards, ML demos) that run natively inside Snowflake",
+        "A Snowpipe integration for streaming JSON data",
+        "A Snowsight chart type for real-time metrics"
+      ],
+      "correct": 1,
+      "explanation": "Streamlit in Snowflake allows developers to build and host Python-based interactive web apps directly inside Snowflake. The app runs in Snowflake's infrastructure and accesses data without leaving the platform."
+    },
+    {
+      "id": "q138",
+      "domain": "1.2 - Tools & Interfaces",
+      "question": "A developer uses the Snowflake Python Connector to run a SELECT and fetch 1 million rows. Where is the result processed?",
+      "options": [
+        "Inside the virtual warehouse",
+        "In the Cloud Services layer",
+        "On the client machine after being transferred from Snowflake",
+        "In a Snowpark serverless container"
+      ],
+      "correct": 2,
+      "explanation": "The Python Connector transfers query results from Snowflake to the client machine for processing. This is the key difference from Snowpark, which processes data inside Snowflake's virtual warehouse."
+    },
+    {
+      "id": "q139",
+      "domain": "1.3 - Data Sharing",
+      "question": "In Snowflake Secure Data Sharing, the consumer mounts the shared data as a:",
+      "options": [
+        "Read-only database in their account",
+        "Writable schema in an existing database",
+        "Materialized copy of the shared tables",
+        "Linked external stage"
+      ],
+      "correct": 0,
+      "explanation": "The consumer creates a database FROM SHARE <provider_account>.<share_name>. This database is read-only and provides direct access to the provider's data — no copy is made."
+    },
+    {
+      "id": "q140",
+      "domain": "1.3 - Data Sharing",
+      "question": "Which of the following is TRUE about Database Replication in Snowflake?",
+      "options": [
+        "It copies only metadata, not actual data micro-partitions",
+        "It creates a read-only secondary database in a target account or region",
+        "It requires Business Critical edition",
+        "Replication is bidirectional by default"
+      ],
+      "correct": 1,
+      "explanation": "Database Replication creates a read-only replica of a primary database in another account or region. The secondary database is kept in sync with the primary and can be promoted to primary for failover."
+    },
+    {
+      "id": "q141",
+      "domain": "2.1 - Data Loading",
+      "question": "What is the default compression format used by Snowflake when unloading data with COPY INTO @stage?",
+      "options": ["No compression", "GZIP", "Snappy", "BZIP2"],
+      "correct": 1,
+      "explanation": "By default, Snowflake uses GZIP compression when unloading data to a stage. You can override this with the COMPRESSION option in the file format or COPY INTO statement."
+    },
+    {
+      "id": "q142",
+      "domain": "2.1 - Data Loading",
+      "question": "What does the HEADER = TRUE option do in a COPY INTO unload statement?",
+      "options": [
+        "Adds a checksum header to each file",
+        "Includes column names as the first row in the output file",
+        "Compresses the file header for faster transfer",
+        "Adds metadata tags to the stage file"
+      ],
+      "correct": 1,
+      "explanation": "HEADER = TRUE includes the column names as the first row in the unloaded CSV file — useful when the file will be consumed by tools that need column headers."
+    },
+    {
+      "id": "q143",
+      "domain": "2.1 - Data Loading",
+      "question": "What is the purpose of the MATCH_BY_COLUMN_NAME option in COPY INTO?",
+      "options": [
+        "Matches source file columns to target table columns by name rather than by position",
+        "Verifies that column data types match before loading",
+        "Skips columns that are not present in the target table",
+        "Renames columns during load based on a mapping file"
+      ],
+      "correct": 0,
+      "explanation": "MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE (or CASE_SENSITIVE) maps file columns to table columns by name, allowing loading even when column order differs between source file and target table."
+    },
+    {
+      "id": "q144",
+      "domain": "2.1 - Data Loading",
+      "question": "Which stage is automatically available for every Snowflake table without any CREATE STAGE command?",
+      "options": ["User stage (@~)", "Named internal stage", "Table stage (@%table_name)", "External stage"],
+      "correct": 2,
+      "explanation": "Every table has a built-in table stage (@%table_name) that can be used for staging files specifically for that table. No creation required — it comes with the table automatically."
+    },
+    {
+      "id": "q145",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "A query on a 10TB table scans 100% of micro-partitions despite a WHERE clause on ORDER_DATE. What is the most likely cause?",
+      "options": [
+        "The Result Cache is disabled",
+        "The table has no clustering on ORDER_DATE, so all partitions must be scanned",
+        "The virtual warehouse is too small",
+        "The query was run without a warehouse"
+      ],
+      "correct": 1,
+      "explanation": "If no clustering key exists on ORDER_DATE, Snowflake cannot prune micro-partitions by date. Every partition is scanned. Defining a clustering key on ORDER_DATE enables partition pruning."
+    },
+    {
+      "id": "q146",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "What is the EXPLAIN command used for in Snowflake?",
+      "options": [
+        "Explains the billing breakdown of a query",
+        "Returns the logical or physical execution plan for a query without actually running it",
+        "Shows the columns and data types of a query result",
+        "Displays query profiling statistics after execution"
+      ],
+      "correct": 1,
+      "explanation": "EXPLAIN (or EXPLAIN USING TEXT/JSON/TABULAR) returns the query execution plan without executing the query — useful for understanding operator order, join strategy, and estimating resource usage."
+    },
+    {
+      "id": "q147",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "What does the CLUSTER_BY clause do when added to a CREATE TABLE statement?",
+      "options": [
+        "Physically re-sorts the existing data immediately",
+        "Defines the clustering key columns and enables automatic background clustering for that table",
+        "Creates an index on the specified columns",
+        "Partitions the table into separate storage buckets"
+      ],
+      "correct": 1,
+      "explanation": "CLUSTER BY defines the clustering key. Snowflake then uses Automatic Clustering to re-organize micro-partitions in the background so that rows with similar key values are co-located."
+    },
+    {
+      "id": "q148",
+      "domain": "2.3 - Semi-Structured Data",
+      "question": "What does the GET function do when applied to a VARIANT value in Snowflake?",
+      "options": [
+        "Retrieves a file from a stage",
+        "Extracts a field from a VARIANT by key (case-sensitive) or index, returning a VARIANT",
+        "Downloads VARIANT data to the local file system",
+        "Gets the data type of a VARIANT value"
+      ],
+      "correct": 1,
+      "explanation": "GET(variant_col, 'key') extracts a field from a VARIANT object by key (case-sensitive) or an element from a VARIANT array by integer index. It is equivalent to colon notation but case-sensitive."
+    },
+    {
+      "id": "q149",
+      "domain": "2.3 - Semi-Structured Data",
+      "question": "How do you check the data type of a value stored inside a VARIANT column in Snowflake?",
+      "options": [
+        "TYPEOF(variant_col:field)",
+        "GETTYPE(variant_col:field)",
+        "VARIANT_TYPE(variant_col:field)",
+        "DATA_TYPE(variant_col:field)"
+      ],
+      "correct": 0,
+      "explanation": "TYPEOF() returns the Snowflake SQL data type of a value stored in a VARIANT column as a string (e.g., 'TEXT', 'INTEGER', 'BOOLEAN', 'ARRAY', 'OBJECT'). Very useful for schema exploration."
+    },
+    {
+      "id": "q150",
+      "domain": "2.3 - Semi-Structured Data",
+      "question": "What is 'schema-on-read' as it relates to Snowflake VARIANT columns?",
+      "options": [
+        "Snowflake infers the schema of a table automatically on first read",
+        "Semi-structured data is stored without a fixed schema; the structure is interpreted at query time using path expressions",
+        "Snowflake validates VARIANT data against a JSON Schema before storage",
+        "Column types are locked after the first INSERT"
+      ],
+      "correct": 1,
+      "explanation": "Schema-on-read means semi-structured data (JSON, Parquet, etc.) is loaded into VARIANT without pre-defining columns. Users define the structure at query time using path expressions (e.g., v:address.city)."
+    },
+    {
+      "id": "q151",
+      "domain": "3.1 - Access Control & Security",
+      "question": "What is Snowflake's USERADMIN system role responsible for?",
+      "options": [
+        "Creating databases and schemas",
+        "Creating and managing users and roles (but NOT granting privileges on objects)",
+        "Managing credit consumption",
+        "Accessing the ACCOUNT_USAGE schema"
+      ],
+      "correct": 1,
+      "explanation": "USERADMIN can CREATE USER and CREATE ROLE, and manage user/role assignments. It cannot grant privileges on database objects — that requires SECURITYADMIN or ACCOUNTADMIN."
+    },
+    {
+      "id": "q152",
+      "domain": "3.1 - Access Control & Security",
+      "question": "A user connects to Snowflake but does NOT specify a role. Which role is used?",
+      "options": [
+        "PUBLIC",
+        "The user's DEFAULT_ROLE",
+        "SYSADMIN",
+        "The connection fails"
+      ],
+      "correct": 1,
+      "explanation": "If no role is specified at connection time, Snowflake uses the user's DEFAULT_ROLE property. If no default role is set, the PUBLIC role is used as a fallback."
+    },
+    {
+      "id": "q153",
+      "domain": "3.1 - Access Control & Security",
+      "question": "What does the PUBLIC role in Snowflake represent?",
+      "options": [
+        "The most privileged system role",
+        "A role automatically granted to every user — any privilege granted to PUBLIC is accessible to all users",
+        "A read-only role for external consumers",
+        "A role used exclusively for Snowpipe service accounts"
+      ],
+      "correct": 1,
+      "explanation": "PUBLIC is automatically granted to every Snowflake user. Any privilege granted to PUBLIC becomes accessible to all users in the account. It should be used carefully to avoid unintended access."
+    },
+    {
+      "id": "q154",
+      "domain": "3.1 - Access Control & Security",
+      "question": "What is SSO (Single Sign-On) in Snowflake implemented through?",
+      "options": [
+        "Snowflake-proprietary token exchange",
+        "SAML 2.0 with an external Identity Provider (IdP) such as Okta or Azure AD",
+        "OAuth 1.0 only",
+        "LDAP directory integration"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake supports SSO via SAML 2.0 federation with any compatible Identity Provider (IdP) — including Okta, Azure AD, ADFS, and others. OAuth 2.0 is also supported for programmatic access."
+    },
+    {
+      "id": "q155",
+      "domain": "3.2 - Account & Resource Management",
+      "question": "What is the maximum number of clusters in a Snowflake multi-cluster warehouse?",
+      "options": ["5", "10", "25", "No hard maximum — limited by account configuration"],
+      "correct": 1,
+      "explanation": "The default maximum cluster count is 10, though Snowflake support can increase this limit for accounts with specific needs. The minimum is 1 (single-cluster mode)."
+    },
+    {
+      "id": "q156",
+      "domain": "3.2 - Account & Resource Management",
+      "question": "What does setting MIN_CLUSTER_COUNT = MAX_CLUSTER_COUNT on a multi-cluster warehouse do?",
+      "options": [
+        "Enables Economy scaling policy",
+        "Forces the warehouse to always run a fixed number of clusters — removing auto-scaling",
+        "Prevents the warehouse from being suspended",
+        "Limits the warehouse to one query at a time"
+      ],
+      "correct": 1,
+      "explanation": "When MIN = MAX, the warehouse runs a fixed number of clusters at all times — effectively disabling auto-scaling. This is useful for predictable, always-on concurrency needs."
+    },
+    {
+      "id": "q157",
+      "domain": "3.2 - Account & Resource Management",
+      "question": "What is a Snowflake Organization?",
+      "options": [
+        "A group of databases within a single account",
+        "A top-level container that links and manages multiple Snowflake accounts across cloud providers and regions",
+        "A billing unit for a department within a company",
+        "A Snowflake-internal term for a role hierarchy"
+      ],
+      "correct": 1,
+      "explanation": "An Organization is the top-level entity in Snowflake's hierarchy. It groups multiple accounts (even across different cloud providers/regions), enabling centralized governance, replication, and cost management."
+    },
+    {
+      "id": "q158",
+      "domain": "4.1 - Streams & Tasks",
+      "question": "Which stream type is most efficient for tables that only receive INSERTs (never UPDATEs or DELETEs)?",
+      "options": ["Standard stream", "Append-only stream", "Insert stream", "CDC stream"],
+      "correct": 1,
+      "explanation": "Append-only streams are more efficient for INSERT-only workloads (event logs, IoT data) because they only track insertions, skipping the overhead of tracking update/delete metadata."
+    },
+    {
+      "id": "q159",
+      "domain": "4.1 - Streams & Tasks",
+      "question": "Can a Snowflake Stream be created on a view?",
+      "options": [
+        "No — streams are only supported on tables",
+        "Yes — streams can be created on standard views",
+        "Yes — streams can be created on secure views and standard views, but only if the view queries a single table",
+        "Yes — streams on views are fully supported for any view type"
+      ],
+      "correct": 2,
+      "explanation": "Streams can be created on views, but with restrictions: the view must be a simple view (no joins, aggregations, or DISTINCT) querying a single underlying table. Complex views are not supported."
+    },
+    {
+      "id": "q160",
+      "domain": "4.2 - Stored Procedures & UDFs",
+      "question": "What is the Snowpark Container Services (SPCS) used for?",
+      "options": [
+        "Running Snowpark DataFrame transformations in parallel across multiple warehouses",
+        "Hosting and running containerized applications (Docker images) directly inside Snowflake's infrastructure",
+        "Providing a managed Kubernetes cluster for external data processing",
+        "Auto-scaling virtual warehouses based on container workload signals"
+      ],
+      "correct": 1,
+      "explanation": "Snowpark Container Services allows teams to build, deploy, and run containerized workloads (Docker images) inside Snowflake — including ML model serving, custom APIs, and third-party tools — without leaving the platform."
+    },
+    {
+      "id": "q161",
+      "domain": "4.2 - Stored Procedures & UDFs",
+      "question": "A Snowflake scalar UDF is defined to return FLOAT. If the function returns NULL, what happens?",
+      "options": [
+        "An error is raised",
+        "The row is skipped",
+        "NULL is returned in the result, which is valid for any Snowflake data type",
+        "0.0 is returned instead of NULL"
+      ],
+      "correct": 2,
+      "explanation": "Snowflake UDFs can return NULL for any data type — NULL is a valid return value. The calling query handles NULL the same as any SQL NULL (e.g., IS NULL checks, NVL/COALESCE functions)."
+    },
+    {
+      "id": "q162",
+      "domain": "4.3 - Billing & Cost Management",
+      "question": "Snowpipe compute billing is different from virtual warehouse billing. How is Snowpipe compute billed?",
+      "options": [
+        "Per file loaded, regardless of file size",
+        "Per credit per second, billed to the virtual warehouse used",
+        "Per second of serverless compute used, billed separately from virtual warehouses",
+        "Included free in all Snowflake editions"
+      ],
+      "correct": 2,
+      "explanation": "Snowpipe uses serverless compute (not a user-managed virtual warehouse) and is billed per second of compute consumed. This billing appears separately as 'Snowpipe' in the usage reports."
+    },
+    {
+      "id": "q163",
+      "domain": "4.3 - Billing & Cost Management",
+      "question": "Which Snowflake feature also uses serverless compute (charged separately from virtual warehouses)?",
+      "options": [
+        "COPY INTO from an internal stage",
+        "Automatic Clustering, Materialized View maintenance, and Snowpipe",
+        "All SELECT queries when the warehouse is suspended",
+        "External table queries"
+      ],
+      "correct": 1,
+      "explanation": "Automatic Clustering, Materialized View maintenance, Snowpipe, Search Optimization maintenance, and Database Replication all use serverless compute billed separately from user-managed virtual warehouses."
+    },
+    {
+      "id": "q164",
+      "domain": "4.3 - Billing & Cost Management",
+      "question": "How is Snowflake storage billed?",
+      "options": [
+        "Based on the number of tables and schemas in the account",
+        "Per TB per month, based on the daily average of compressed storage used (data + Time Travel + Fail-Safe)",
+        "Based on the number of rows stored across all tables",
+        "A flat monthly fee per Snowflake account"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake storage is charged per TB per month based on the daily average of compressed storage consumed, which includes active data, Time Travel data, and Fail-Safe data."
+    },
+    {
+      "id": "q165",
+      "domain": "1.1 - Cloud Features",
+      "question": "What is Snowflake's Business Continuity and Disaster Recovery (BCDR) feature called?",
+      "options": [
+        "Multi-cluster warehouse failover",
+        "Fail-Safe rewind",
+        "Business Critical Failover / Failback with database replication",
+        "Time Travel restore"
+      ],
+      "correct": 2,
+      "explanation": "Business Critical edition supports database Failover and Failback: a secondary replicated database in another region can be promoted to primary, providing RPO/RTO capabilities for disaster recovery scenarios."
+    },
+    {
+      "id": "q166",
+      "domain": "1.1 - Cloud Features",
+      "question": "What does 'elastic scalability' mean in the context of Snowflake virtual warehouses?",
+      "options": [
+        "Snowflake automatically picks the optimal warehouse size for each query",
+        "Warehouses can be resized up or down instantly without data migration or downtime",
+        "Storage scales automatically as more data is added",
+        "Queries automatically split across multiple warehouses"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake warehouses can be resized (up or down) instantly. Unlike traditional databases, resizing does not require data redistribution or downtime — the new size takes effect on the next query."
+    },
+    {
+      "id": "q167",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "A query uses SELECT DISTINCT on a 100-billion-row table and takes 10 minutes. What is the BEST first optimization step?",
+      "options": [
+        "Enable result cache",
+        "Add a clustering key on all columns",
+        "Increase warehouse size to reduce spill-to-disk from the large aggregation",
+        "Convert the table to an external table"
+      ],
+      "correct": 2,
+      "explanation": "DISTINCT operations require sorting/hashing all rows, which often causes memory spill. Increasing warehouse size provides more RAM per node, reducing or eliminating disk spill and speeding up the aggregation."
+    },
+    {
+      "id": "q168",
+      "domain": "2.2 - Performance & Query Optimization",
+      "question": "What is a 'cartesian product' warning in the Snowflake Query Profile?",
+      "options": [
+        "A warning that the query scanned more than 1 billion rows",
+        "An indicator that a JOIN is missing a proper ON clause, producing an unintended multiplication of rows",
+        "A sign that two warehouses are running the same query simultaneously",
+        "A notification that partition pruning was not applied"
+      ],
+      "correct": 1,
+      "explanation": "A cartesian product (cross join) occurs when a JOIN lacks an ON condition, multiplying every row of one table by every row of another. The Query Profile flags this as it is almost always a query bug."
+    },
+    {
+      "id": "q169",
+      "domain": "3.1 - Access Control & Security",
+      "question": "What is the purpose of an Object Tag in Snowflake?",
+      "options": [
+        "Applies row-level security to tagged objects",
+        "Attaches a custom key-value label to Snowflake objects for governance, classification, and cost attribution",
+        "Compresses the data in tagged columns",
+        "Enables Time Travel on objects that normally don't support it"
+      ],
+      "correct": 1,
+      "explanation": "Object Tags (schema-level objects) can be applied to databases, schemas, tables, columns, or warehouses. They enable data governance workflows: sensitivity classification, cost attribution, and masking policy binding."
+    },
+    {
+      "id": "q170",
+      "domain": "1.4 - Architecture",
+      "question": "What is the difference between a VIEW and a MATERIALIZED VIEW in Snowflake?",
+      "options": [
+        "A view always queries live data; a materialized view stores pre-computed results that are automatically maintained by Snowflake",
+        "Views are faster because they use columnar storage; materialized views use row storage",
+        "Materialized views require a virtual warehouse to refresh; standard views do not use a warehouse",
+        "Only materialized views can be shared across accounts"
+      ],
+      "correct": 0,
+      "explanation": "A standard VIEW is a saved SQL query that always reads live data from the base tables. A MATERIALIZED VIEW pre-computes and stores the query result, which Snowflake refreshes automatically in the background as base table data changes."
+    }
+  ]
+}
