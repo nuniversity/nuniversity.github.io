@@ -938,7 +938,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
     const rating = getScoreRating(mockAccuracy)
     const timeUsed = MOCK_EXAM_DURATION_SECONDS - mockTimeLeft
     const reviewList = mockReviewMode === 'wrong'
-      ? mockQuestions.map((q, i) => ({ q, i })).filter(({ i }) => mockAnswers[i]?.selectedOption !== q.correct)
+      ? mockQuestions.map((q, i) => ({ q, i })).filter(({ q, i }) => mockAnswers[i]?.selectedOption !== q.correct)
       : mockReviewMode === 'flagged'
       ? mockQuestions.map((q, i) => ({ q, i })).filter(({ i }) => mockFlagged.has(i))
       : mockQuestions.map((q, i) => ({ q, i }))
