@@ -1,0 +1,25 @@
+{
+  "area": "Data Engineering",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "8 weeks",
+  "icon": "snowflake",
+  "en": {
+    "title": "SnowPro Core Certification (COF-C03)",
+    "description": "Comprehensive preparation for the Snowflake SnowPro Core COF-C03 certification exam. Master Snowflake's architecture, data loading, performance tuning, security, and data sharing concepts.",
+    "difficulty": "Intermediate",
+    "duration": "8 Weeks"
+  },
+  "pt": {
+    "title": "Certificação SnowPro Core (COF-C03)",
+    "description": "Preparação completa para o exame de certificação Snowflake SnowPro Core COF-C03. Domine arquitetura, carregamento de dados, tuning, segurança e compartilhamento de dados no Snowflake.",
+    "difficulty": "Intermediário",
+    "duration": "8 Semanas"
+  },
+  "es": {
+    "title": "Certificación SnowPro Core (COF-C03)",
+    "description": "Preparación completa para el examen de certificación Snowflake SnowPro Core COF-C03. Domina la arquitectura, carga de datos, rendimiento, seguridad y uso compartido de datos en Snowflake.",
+    "difficulty": "Intermedio",
+    "duration": "8 Semanas"
+  }
+}
