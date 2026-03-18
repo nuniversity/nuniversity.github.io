@@ -8896,6 +8896,1956 @@
       ],
       "correct": 0,
       "explanation": "Three separate ACCOUNT_USAGE views are needed for complete pipeline cost visibility: WAREHOUSE_METERING_HISTORY or QUERY_HISTORY (warehouse compute for SQL transformations), PIPE_USAGE_HISTORY (Snowpipe serverless loading credits per pipe), and AUTOMATIC_CLUSTERING_HISTORY (background clustering credits per table). Each feature bills independently and appears in its own view."
+    },
+    {
+      "id": "q678",
+      "domain": "1.1 - Snowflake Architecture",
+      "question": "Which Snowflake layer handles authentication, query optimization, and transaction management?",
+      "options": [
+        "Storage layer",
+        "Virtual warehouse layer",
+        "Cloud services layer",
+        "Replication layer"
+      ],
+      "correct": 2,
+      "explanation": "The cloud services layer is the brain of Snowflake. It handles authentication, metadata management, query parsing and optimization, and transaction management."
+    },
+    {
+      "id": "q679",
+      "domain": "1.1 - Snowflake Architecture",
+      "question": "What is the primary benefit of separating storage from compute in Snowflake?",
+      "options": [
+        "Lower network latency between warehouses",
+        "Multiple warehouses can read the same data concurrently without contention",
+        "Automatic cross-region replication",
+        "Reduced cloud provider fees"
+      ],
+      "correct": 1,
+      "explanation": "Because storage is decoupled from compute, any number of virtual warehouses can simultaneously read the same data without locking or resource contention."
+    },
+    {
+      "id": "q680",
+      "domain": "1.1 - Snowflake Architecture",
+      "question": "What format does Snowflake use to store table data internally?",
+      "options": [
+        "Row-oriented CSV files",
+        "Columnar micro-partitions in compressed, encrypted files",
+        "ORC files with Parquet metadata",
+        "Avro files organized by partition key"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake automatically divides table data into columnar micro-partitions — contiguous storage units of 50–500 MB uncompressed, stored compressed and encrypted."
+    },
+    {
+      "id": "q681",
+      "domain": "1.1 - Snowflake Architecture",
+      "question": "What happens to a virtual warehouse's local disk cache when it is suspended?",
+      "options": [
+        "It is persisted to S3 for fast resume",
+        "It is cleared — the cache must be rebuilt from scratch on resume",
+        "It is saved in the cloud services layer",
+        "It remains intact for 24 hours"
+      ],
+      "correct": 1,
+      "explanation": "Suspending a warehouse de-provisions all compute resources including local SSD cache. The cache starts cold on the next resume."
+    },
+    {
+      "id": "q682",
+      "domain": "1.1 - Snowflake Architecture",
+      "question": "Under what condition does Snowflake charge credits for cloud services usage?",
+      "options": [
+        "Always — every query incurs a cloud services fee",
+        "When cloud services consumption exceeds 10% of daily compute credit usage",
+        "When more than 100 queries run per hour",
+        "Only for queries accessing external stages"
+      ],
+      "correct": 1,
+      "explanation": "Cloud services are effectively free. Credits are only billed when daily cloud services usage exceeds 10% of daily warehouse credits — a threshold rarely reached in normal workloads."
+    },
+    {
+      "id": "q683",
+      "domain": "1.1 - Snowflake Architecture",
+      "question": "What does Snowflake's query optimizer use to skip micro-partitions?",
+      "options": [
+        "Row count per partition",
+        "Min and max column values stored as metadata statistics per micro-partition",
+        "A full index of all column values",
+        "The clustering key definition only"
+      ],
+      "correct": 1,
+      "explanation": "The optimizer reads min/max statistics per micro-partition. If a filter predicate cannot match any row in a partition's range, that partition is skipped entirely (data skipping / pruning)."
+    },
+    {
+      "id": "q684",
+      "domain": "1.1 - Snowflake Architecture",
+      "question": "What is the billing model for Snowflake storage costs?",
+      "options": [
+        "Per number of tables and views",
+        "Average daily data stored in TB, billed monthly",
+        "Per micro-partition created",
+        "Per DML operation performed"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake calculates the average daily storage across the month and bills per TB. This includes active data, Time Travel versions, and Fail-Safe data."
+    },
+    {
+      "id": "q685",
+      "domain": "1.1 - Snowflake Architecture",
+      "question": "What is Tri-Secret Secure in Snowflake?",
+      "options": [
+        "Three-factor authentication for admin accounts",
+        "Encryption using both a Snowflake-managed key and a customer-managed key — neither party alone can decrypt data",
+        "A three-region replication topology",
+        "A feature requiring three approvers for data access requests"
+      ],
+      "correct": 1,
+      "explanation": "Tri-Secret Secure combines Snowflake's master key with a customer-managed CMK (in AWS KMS, Azure Key Vault, etc.). Both keys are required to decrypt data, so Snowflake cannot access customer data without the CMK."
+    },
+    {
+      "id": "q686",
+      "domain": "1.1 - Snowflake Architecture",
+      "question": "How does Snowflake handle an UPDATE at the storage level?",
+      "options": [
+        "In-place update of existing micro-partition files",
+        "Old micro-partitions are dereferenced and new partitions with updated rows are written — no in-place mutation occurs",
+        "Changes are appended to a separate delta file",
+        "Rows are locked and column values overwritten"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake's storage is immutable. An UPDATE creates new micro-partitions with updated rows; old partitions are retained for Time Travel and eventually purged."
+    },
+    {
+      "id": "q687",
+      "domain": "1.1 - Snowflake Architecture",
+      "question": "What is the minimum billing period for a Snowflake virtual warehouse?",
+      "options": [
+        "1 second",
+        "10 seconds",
+        "60 seconds",
+        "5 minutes"
+      ],
+      "correct": 2,
+      "explanation": "Warehouses are billed per second with a 60-second minimum. A run of 30 seconds is still billed as 60 seconds; after the first minute each additional second is billed precisely."
+    },
+    {
+      "id": "q688",
+      "domain": "1.1 - Snowflake Architecture",
+      "question": "Which Snowflake edition is required for HIPAA and PCI DSS compliance?",
+      "options": [
+        "Standard",
+        "Enterprise",
+        "Business Critical",
+        "Virtual Private Snowflake"
+      ],
+      "correct": 2,
+      "explanation": "Business Critical edition adds enhanced compliance certifications including HIPAA, PCI DSS, and SOC 1/2 Type II. Standard and Enterprise do not include these."
+    },
+    {
+      "id": "q689",
+      "domain": "1.1 - Snowflake Architecture",
+      "question": "What cloud storage service does Snowflake use for its storage layer on AWS?",
+      "options": [
+        "AWS EBS",
+        "AWS S3",
+        "AWS EFS",
+        "AWS Glacier"
+      ],
+      "correct": 1,
+      "explanation": "On AWS, Snowflake stores all table data in S3 buckets managed by Snowflake. Customers never access these buckets directly; Snowflake abstracts all S3 interactions."
+    },
+    {
+      "id": "q690",
+      "domain": "1.2 - Snowflake Interfaces and Tools",
+      "question": "What is Snowsight?",
+      "options": [
+        "A third-party SQL IDE with a Snowflake plugin",
+        "Snowflake's built-in web UI for querying, dashboards, and account management",
+        "A CLI tool for scripting Snowflake operations",
+        "A monitoring service provided by Snowflake Support"
+      ],
+      "correct": 1,
+      "explanation": "Snowsight is Snowflake's modern web-based interface supporting SQL worksheets, query profiling, result visualization, dashboards, and account administration."
+    },
+    {
+      "id": "q691",
+      "domain": "1.2 - Snowflake Interfaces and Tools",
+      "question": "What does the Snowflake Connector for Python provide?",
+      "options": [
+        "Running Python UDFs inside Snowflake",
+        "A Python DB-API 2.0 compliant interface for connecting Python applications to Snowflake",
+        "Installing Snowflake on a Python server",
+        "Transpiling Python code to SQL"
+      ],
+      "correct": 1,
+      "explanation": "The Snowflake Connector for Python implements the standard Python DB-API 2.0 interface, allowing Python applications to execute queries, load data, and manage Snowflake objects."
+    },
+    {
+      "id": "q692",
+      "domain": "1.2 - Snowflake Interfaces and Tools",
+      "question": "How does a client authenticate to Snowflake using key-pair authentication?",
+      "options": [
+        "By sending username and password in every request",
+        "By presenting a private key; the matching public key is registered on the Snowflake user account",
+        "By using an OAuth token from the cloud provider",
+        "By sending an API key in the Authorization header"
+      ],
+      "correct": 1,
+      "explanation": "Key-pair authentication uses RSA keys. The public key is registered on the user via ALTER USER ... SET RSA_PUBLIC_KEY. The client signs requests with the private key; Snowflake verifies using the registered public key."
+    },
+    {
+      "id": "q693",
+      "domain": "1.2 - Snowflake Interfaces and Tools",
+      "question": "What is the primary function of the Snowflake Connector for Kafka?",
+      "options": [
+        "Exporting Snowflake query results to Kafka topics",
+        "Consuming records from Kafka topics and loading them into Snowflake tables in near-real time",
+        "Monitoring Snowflake query performance via Kafka Streams",
+        "Authenticating Snowflake users via Kafka's SASL mechanism"
+      ],
+      "correct": 1,
+      "explanation": "The Snowflake Connector for Kafka is a Kafka Connect sink connector that reads records from Kafka topics and automatically loads them into Snowflake tables."
+    },
+    {
+      "id": "q694",
+      "domain": "1.3 - Snowflake Object Hierarchy and Types",
+      "question": "What is the correct Snowflake object hierarchy from top to bottom?",
+      "options": [
+        "Organization → Database → Account → Schema → Table",
+        "Organization → Account → Database → Schema → Table",
+        "Account → Database → Schema → Table → Organization",
+        "Account → Organization → Database → Schema → Table"
+      ],
+      "correct": 1,
+      "explanation": "The full hierarchy is Organization → Account → Database → Schema → Table (and other schema-level objects like stages, views, and procedures)."
+    },
+    {
+      "id": "q695",
+      "domain": "1.3 - Snowflake Object Hierarchy and Types",
+      "question": "What is the key difference between a transient and a permanent table?",
+      "options": [
+        "Transient tables do not support DML",
+        "Transient tables have no Fail-Safe period and a maximum 1-day Time Travel — reducing storage cost for staging data",
+        "Transient tables cannot be queried by other users",
+        "Transient tables are stored in memory only"
+      ],
+      "correct": 1,
+      "explanation": "Permanent tables support up to 90 days Time Travel and 7 days Fail-Safe. Transient tables have 0 days Fail-Safe and maximum 1-day Time Travel — ideal for intermediate staging where lower cost matters."
+    },
+    {
+      "id": "q696",
+      "domain": "1.3 - Snowflake Object Hierarchy and Types",
+      "question": "Which Snowflake object records row-level changes (INSERT, UPDATE, DELETE) on a source table for CDC pipelines?",
+      "options": [
+        "Task",
+        "Pipe",
+        "Stream",
+        "Event table"
+      ],
+      "correct": 2,
+      "explanation": "A Stream is a CDC object that records the net changes made to a source table since the stream was last consumed, enabling incremental data pipelines."
+    },
+    {
+      "id": "q697",
+      "domain": "1.3 - Snowflake Object Hierarchy and Types",
+      "question": "What is a Snowflake dynamic table?",
+      "options": [
+        "A table whose schema changes automatically based on incoming data",
+        "A declaratively defined table that Snowflake automatically refreshes incrementally based on a SQL query and a configurable target lag",
+        "A table that switches between row and columnar storage",
+        "A table that auto-partitions by a date column"
+      ],
+      "correct": 1,
+      "explanation": "Dynamic tables let you define a target lag and a SQL query; Snowflake handles incremental refresh automatically — a simpler alternative to stream-task pipelines for many transformation use cases."
+    },
+    {
+      "id": "q698",
+      "domain": "1.3 - Snowflake Object Hierarchy and Types",
+      "question": "What is a Snowflake file format object?",
+      "options": [
+        "A stored procedure that formats query output",
+        "A reusable named object defining the structure of data files (CSV, JSON, Parquet, etc.) used in COPY INTO operations",
+        "A table column type for storing binary files",
+        "A stage configuration that determines upload compression"
+      ],
+      "correct": 1,
+      "explanation": "A file format object stores parsing and formatting options for a specific data type. Referencing a named file format avoids repeating delimiter, compression, and NULL-handling options in every COPY INTO."
+    },
+    {
+      "id": "q699",
+      "domain": "1.3 - Snowflake Object Hierarchy and Types",
+      "question": "What does CREATE TABLE ... CLONE achieve?",
+      "options": [
+        "Creates an independent physical copy of all data immediately",
+        "Creates a logical copy sharing source micro-partitions at no additional storage cost — new storage is charged only as data diverges (copy-on-write)",
+        "Creates a read-only reference to the source table",
+        "Creates a backup inaccessible for 7 days"
+      ],
+      "correct": 1,
+      "explanation": "Zero-Copy Clone uses Snowflake's copy-on-write mechanism. The clone immediately shares source micro-partitions at no storage cost. Storage costs arise only when either copy is modified."
+    },
+    {
+      "id": "q700",
+      "domain": "1.3 - Snowflake Object Hierarchy and Types",
+      "question": "What is a Snowflake SHARE object?",
+      "options": [
+        "A role that can be assigned to external users",
+        "A named object that bundles databases, schemas, tables, or views for read-only access by consumer accounts — without copying data",
+        "A public table accessible to all accounts",
+        "A read replica of a database in another region"
+      ],
+      "correct": 1,
+      "explanation": "A SHARE is the foundation of Snowflake Secure Data Sharing. Providers grant object privileges to the share; consumers access a read-only virtual database backed by the provider's live data."
+    },
+    {
+      "id": "q701",
+      "domain": "1.3 - Snowflake Object Hierarchy and Types",
+      "question": "What is the INFORMATION_SCHEMA in Snowflake?",
+      "options": [
+        "A special role with read access to all tables",
+        "A set of read-only views within each database exposing metadata about tables, columns, stages, and other objects",
+        "A separate paid monitoring service",
+        "A Snowflake-managed schema storing Time Travel history"
+      ],
+      "correct": 1,
+      "explanation": "INFORMATION_SCHEMA is an ANSI-standard set of views in every Snowflake database exposing current-state metadata with near-zero latency."
+    },
+    {
+      "id": "q702",
+      "domain": "1.3 - Snowflake Object Hierarchy and Types",
+      "question": "What is a Snowflake Alert object?",
+      "options": [
+        "A Task that sends periodic emails",
+        "A Snowflake object that evaluates a SQL condition on a schedule and sends a notification if the condition is true",
+        "A resource monitor with email notifications",
+        "A Snowpipe error notification"
+      ],
+      "correct": 1,
+      "explanation": "An Alert evaluates a SQL condition on a schedule. When the condition returns TRUE, it triggers a notification through a configured integration (email, Slack, SNS, etc.)."
+    },
+    {
+      "id": "q703",
+      "domain": "1.4 - Virtual Warehouses",
+      "question": "What is the credit cost per hour of a Large warehouse relative to an X-Small?",
+      "options": [
+        "2x more",
+        "4x more",
+        "8x more",
+        "16x more"
+      ],
+      "correct": 2,
+      "explanation": "Warehouse sizes double in credits per step: XS=1, S=2, M=4, L=8. A Large costs 8 credits/hour — 8x an X-Small."
+    },
+    {
+      "id": "q704",
+      "domain": "1.4 - Virtual Warehouses",
+      "question": "What does AUTO_SUSPEND on a virtual warehouse do?",
+      "options": [
+        "Suspends the warehouse if it runs longer than the specified number of minutes",
+        "Suspends the warehouse after the specified number of seconds of inactivity, preventing idle credit consumption",
+        "Automatically scales down the warehouse size when idle",
+        "Cancels queries running longer than the timeout value"
+      ],
+      "correct": 1,
+      "explanation": "AUTO_SUSPEND specifies inactivity seconds after which Snowflake automatically suspends the warehouse. This is the primary mechanism for controlling idle credit waste."
+    },
+    {
+      "id": "q705",
+      "domain": "1.4 - Virtual Warehouses",
+      "question": "Which Snowflake edition is required to use multi-cluster virtual warehouses?",
+      "options": [
+        "Standard",
+        "Enterprise or higher",
+        "Business Critical",
+        "Virtual Private Snowflake"
+      ],
+      "correct": 1,
+      "explanation": "Multi-cluster warehouses (MAX_CLUSTER_COUNT > 1) require Enterprise edition or higher. Standard edition supports only single-cluster warehouses."
+    },
+    {
+      "id": "q706",
+      "domain": "1.4 - Virtual Warehouses",
+      "question": "What is concurrency scaling in Snowflake?",
+      "options": [
+        "Manually adding warehouses when load increases",
+        "Automatically spinning up additional transient clusters when the primary warehouse queue grows — the first 1 credit per account per day is free",
+        "Increasing warehouse size when CPU utilization exceeds 80%",
+        "Routing queries to the nearest regional cluster for low latency"
+      ],
+      "correct": 1,
+      "explanation": "Concurrency scaling automatically adds cluster capacity when queuing grows. Each account gets 1 free credit per day of concurrency scaling; additional usage is billed at standard rates."
+    },
+    {
+      "id": "q707",
+      "domain": "1.4 - Virtual Warehouses",
+      "question": "Which parameter limits how long a SQL statement can run before it is automatically cancelled?",
+      "options": [
+        "QUERY_TIMEOUT",
+        "STATEMENT_TIMEOUT_IN_SECONDS",
+        "MAX_RUNTIME_SECONDS",
+        "STATEMENT_QUEUED_TIMEOUT_IN_SECONDS"
+      ],
+      "correct": 1,
+      "explanation": "STATEMENT_TIMEOUT_IN_SECONDS limits single statement execution time. It can be set at the warehouse, session, or account level. Exceeded statements are automatically cancelled."
+    },
+    {
+      "id": "q708",
+      "domain": "1.4 - Virtual Warehouses",
+      "question": "What is the purpose of resource monitors in Snowflake?",
+      "options": [
+        "Monitor CPU and memory utilization on virtual warehouses",
+        "Track credit consumption against quotas and take configured actions (notify, suspend) when thresholds are breached, preventing cost overruns",
+        "Monitor data quality metrics on tables",
+        "Alert when Time Travel storage exceeds a threshold"
+      ],
+      "correct": 1,
+      "explanation": "A resource monitor tracks credit usage against a configured quota and can trigger actions — notify, suspend, or suspend immediately — at configured percentage thresholds."
+    },
+    {
+      "id": "q709",
+      "domain": "1.4 - Virtual Warehouses",
+      "question": "When does a virtual warehouse begin consuming credits?",
+      "options": [
+        "Only when actively executing queries",
+        "From the moment it resumes until it is suspended, regardless of whether queries are running",
+        "Only during the first minute of each run",
+        "After the 60-second minimum billing period has elapsed"
+      ],
+      "correct": 1,
+      "explanation": "Once resumed, a warehouse consumes credits continuously until suspended — whether or not queries are running. AUTO_SUSPEND is critical to avoid idle credit drain."
+    },
+    {
+      "id": "q710",
+      "domain": "1.4 - Virtual Warehouses",
+      "question": "What is a Snowpark-optimized warehouse?",
+      "options": [
+        "A warehouse with more nodes for higher concurrency",
+        "A warehouse type with nodes having 16x more memory per node than standard — designed for memory-intensive ML training and large Snowpark workloads",
+        "A warehouse that uses GPUs for accelerated computation",
+        "A warehouse that cannot run standard SQL queries"
+      ],
+      "correct": 1,
+      "explanation": "Snowpark-optimized warehouses (WAREHOUSE_TYPE = SNOWPARK-OPTIMIZED) have dramatically higher memory-to-CPU ratios, designed for memory-intensive Snowpark Python workloads like ML model training."
+    },
+    {
+      "id": "q711",
+      "domain": "1.4 - Virtual Warehouses",
+      "question": "What is the Query Acceleration Service (QAS)?",
+      "options": [
+        "A CDN-like cache layer for query results",
+        "A serverless feature that offloads eligible query portions (large scans, aggregations) to elastic compute, primarily benefiting long-running queries with large data scans",
+        "A query rewrite service that optimizes SQL before execution",
+        "A dedicated result cache for high-cardinality aggregations"
+      ],
+      "correct": 1,
+      "explanation": "QAS automatically offloads portions of eligible queries to Snowflake-managed serverless compute. Enabled per warehouse with ENABLE_QUERY_ACCELERATION = TRUE. Most effective for large scan and aggregation queries."
+    },
+    {
+      "id": "q712",
+      "domain": "1.4 - Virtual Warehouses",
+      "question": "A company wants to prevent BI reports from competing with ETL jobs for compute resources. What is the recommended Snowflake approach?",
+      "options": [
+        "Use resource monitors to throttle one workload",
+        "Create separate virtual warehouses for ETL and BI — both access the same storage layer without contention",
+        "Use a single large warehouse with a prioritized query queue",
+        "Enable multi-cluster warehouses and let Snowflake route queries automatically"
+      ],
+      "correct": 1,
+      "explanation": "Multiple virtual warehouses provide workload isolation. ETL and BI teams each get dedicated compute while sharing the same underlying data, eliminating resource contention."
+    },
+    {
+      "id": "q713",
+      "domain": "1.5 - Storage Concepts",
+      "question": "What is the typical uncompressed size range of a Snowflake micro-partition?",
+      "options": [
+        "1 MB – 10 MB",
+        "50 MB – 500 MB",
+        "1 GB – 5 GB",
+        "100 KB – 1 MB"
+      ],
+      "correct": 1,
+      "explanation": "Micro-partitions are typically 50–500 MB uncompressed, compressing to roughly 16 MB on disk. Snowflake determines boundaries automatically based on ingestion order."
+    },
+    {
+      "id": "q714",
+      "domain": "1.5 - Storage Concepts",
+      "question": "What does a high clustering depth indicate about a table?",
+      "options": [
+        "The table has many clustering keys defined",
+        "Micro-partition value ranges for the clustering key heavily overlap — many partitions must be scanned per filtered query, indicating poor clustering effectiveness",
+        "The table has a large number of micro-partitions",
+        "The table has a high compression ratio"
+      ],
+      "correct": 1,
+      "explanation": "Clustering depth measures value range overlap across micro-partitions. High depth means key values are scattered, so many partitions must be scanned even for selective queries."
+    },
+    {
+      "id": "q715",
+      "domain": "1.5 - Storage Concepts",
+      "question": "What is Automatic Clustering in Snowflake?",
+      "options": [
+        "Snowflake's default behavior of sorting data within each micro-partition",
+        "A serverless background service that continuously re-clusters tables with defined clustering keys to maintain low clustering depth",
+        "A manual SQL command to reorganize a table's micro-partitions",
+        "A feature that automatically selects clustering keys based on query history"
+      ],
+      "correct": 1,
+      "explanation": "Automatic Clustering is a managed service that monitors and re-clusters tables with defined clustering keys. It uses serverless credits and runs transparently in the background."
+    },
+    {
+      "id": "q716",
+      "domain": "1.5 - Storage Concepts",
+      "question": "What is the Search Optimization Service (SOS)?",
+      "options": [
+        "A full-text search engine that automatically indexes all string columns",
+        "A table-level option that builds persistent search access paths to accelerate selective point lookup queries and substring searches",
+        "A query optimizer feature that rewrites queries for faster execution",
+        "A Snowflake-managed cache specifically for lookup tables"
+      ],
+      "correct": 1,
+      "explanation": "SOS builds auxiliary access path structures for tables to speed up point lookups, equality predicates, and substring searches. Enabled with ALTER TABLE ... ADD SEARCH OPTIMIZATION."
+    },
+    {
+      "id": "q717",
+      "domain": "1.5 - Storage Concepts",
+      "question": "What is the Fail-Safe period in Snowflake?",
+      "options": [
+        "The Time Travel window accessible via SQL AT/BEFORE queries",
+        "A non-user-accessible 7-day emergency data recovery window maintained by Snowflake after the Time Travel period expires",
+        "A 30-day archive retention for compliance purposes",
+        "A backup region maintained by Snowflake Support"
+      ],
+      "correct": 1,
+      "explanation": "Fail-Safe is a 7-day non-user-accessible period after Time Travel expires. Snowflake may use it to recover data in catastrophic failures. Users cannot query or restore from Fail-Safe using SQL."
+    },
+    {
+      "id": "q718",
+      "domain": "1.5 - Storage Concepts",
+      "question": "What does 'spilling to remote storage' indicate for a virtual warehouse?",
+      "options": [
+        "The warehouse is saving intermediate results to S3 to free local disk for other operations",
+        "A query's intermediate data has exceeded local SSD capacity, overflowing to remote cloud storage — a major performance degradation indicating the warehouse is undersized",
+        "The warehouse is automatically migrating cold data to archive storage",
+        "Query results larger than 1 GB are being written to a stage instead of returned"
+      ],
+      "correct": 1,
+      "explanation": "Remote spilling occurs when a query's working set exceeds the warehouse's local SSD. Data overflows to cloud storage (S3/Azure/GCS), which is orders of magnitude slower than local SSD."
+    },
+    {
+      "id": "q719",
+      "domain": "1.5 - Storage Concepts",
+      "question": "What is DATA_RETENTION_TIME_IN_DAYS?",
+      "options": [
+        "The number of days Snowflake retains query history",
+        "The Time Travel retention period — how many days historical table versions are accessible via AT/BEFORE queries",
+        "The Fail-Safe retention period",
+        "The result cache retention period"
+      ],
+      "correct": 1,
+      "explanation": "DATA_RETENTION_TIME_IN_DAYS controls Time Travel duration. Maximum is 1 day for Standard edition, up to 90 days for Enterprise+. Setting it to 0 disables Time Travel for the object."
+    },
+    {
+      "id": "q720",
+      "domain": "1.5 - Storage Concepts",
+      "question": "What is the difference between micro-partition pruning and columnar pruning?",
+      "options": [
+        "They are synonyms for the same optimization technique",
+        "Micro-partition pruning skips entire partitions whose column ranges cannot match a filter; columnar pruning reads only the columns referenced by the query within the scanned partitions",
+        "Columnar pruning skips null columns; micro-partition pruning skips empty partitions",
+        "Columnar pruning applies only to external tables; micro-partition pruning applies to internal tables"
+      ],
+      "correct": 1,
+      "explanation": "These are complementary optimizations: micro-partition pruning reduces the number of partitions accessed; columnar pruning within those partitions reads only the referenced column files."
+    },
+    {
+      "id": "q721",
+      "domain": "1.6 - AI/ML and Application Development",
+      "question": "What is Snowflake Cortex?",
+      "options": [
+        "A Snowflake monitoring dashboard",
+        "A suite of serverless AI functions — including LLM text completion, summarization, sentiment analysis, translation, and embedding generation — callable directly from SQL",
+        "A feature for training custom deep learning models",
+        "A Snowflake Marketplace category for AI data products"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake Cortex (SNOWFLAKE.CORTEX.*) provides serverless AI/ML functions: COMPLETE(), SUMMARIZE(), SENTIMENT(), TRANSLATE(), and EMBED_TEXT_768(). No ML infrastructure to manage — callable from SQL."
+    },
+    {
+      "id": "q722",
+      "domain": "1.6 - AI/ML and Application Development",
+      "question": "What is the Snowflake Native App Framework?",
+      "options": [
+        "A mobile SDK for building Snowflake management apps",
+        "A framework for building and distributing data applications (SQL, Snowpark, Streamlit) within Snowflake that can be listed on the Snowflake Marketplace and run inside consumer accounts",
+        "A REST API framework for Snowflake-backed web services",
+        "A CI/CD framework for deploying Snowflake objects"
+      ],
+      "correct": 1,
+      "explanation": "The Native App Framework packages application logic with data and distributes via the Marketplace. Apps run inside the consumer's Snowflake account using consumer compute — data and logic stay in-platform."
+    },
+    {
+      "id": "q723",
+      "domain": "1.6 - AI/ML and Application Development",
+      "question": "What is Snowpark Container Services (SPCS)?",
+      "options": [
+        "A Docker registry for storing Snowpark images",
+        "A managed container runtime within Snowflake for running containerized workloads on Snowflake-managed infrastructure with direct access to Snowflake data",
+        "A service for packaging Snowpark UDFs as containers",
+        "A Kubernetes cluster managed by Snowflake Support"
+      ],
+      "correct": 1,
+      "explanation": "SPCS allows running full containerized applications — ML model serving, custom APIs, long-running jobs — on Snowflake-managed compute with direct access to Snowflake data and controlled networking."
+    },
+    {
+      "id": "q724",
+      "domain": "2.1 - Security Model",
+      "question": "What access control model does Snowflake use?",
+      "options": [
+        "Mandatory Access Control (MAC)",
+        "Attribute-Based Access Control (ABAC)",
+        "Discretionary Access Control (DAC) combined with Role-Based Access Control (RBAC)",
+        "Rule-Based Access Control"
+      ],
+      "correct": 2,
+      "explanation": "Snowflake uses DAC (object owners can grant privileges to roles) combined with RBAC (users are assigned roles, roles are granted privileges). Roles can be hierarchically organized for privilege inheritance."
+    },
+    {
+      "id": "q725",
+      "domain": "2.1 - Security Model",
+      "question": "Which system role manages billing and account-level settings in Snowflake?",
+      "options": [
+        "SYSADMIN",
+        "SECURITYADMIN",
+        "ACCOUNTADMIN",
+        "ORGADMIN"
+      ],
+      "correct": 2,
+      "explanation": "ACCOUNTADMIN is the top-level system role, encompassing SYSADMIN and SECURITYADMIN. It is the only role that can manage billing, account parameters, and resource monitors. It should be tightly restricted."
+    },
+    {
+      "id": "q726",
+      "domain": "2.1 - Security Model",
+      "question": "What is the purpose of the SECURITYADMIN role?",
+      "options": [
+        "Managing all database objects",
+        "Managing users, roles, and grants/revokes across the account",
+        "Creating and managing virtual warehouses",
+        "Configuring network policies and authentication methods"
+      ],
+      "correct": 1,
+      "explanation": "SECURITYADMIN is responsible for user and role management and can grant or revoke any privilege on any object. Business object ownership is SYSADMIN's domain."
+    },
+    {
+      "id": "q727",
+      "domain": "2.1 - Security Model",
+      "question": "What is a network policy in Snowflake?",
+      "options": [
+        "A firewall rule in the cloud provider VPC",
+        "A Snowflake object that restricts account or user access to a list of allowed IP addresses or CIDR blocks",
+        "A policy that limits the number of concurrent connections",
+        "A DNS-level routing configuration"
+      ],
+      "correct": 1,
+      "explanation": "A network policy defines allowed (and optionally blocked) IP ranges. When applied to an account or user, only connections from allowed IPs can authenticate. Created with CREATE NETWORK POLICY."
+    },
+    {
+      "id": "q728",
+      "domain": "2.1 - Security Model",
+      "question": "What is the PUBLIC role in Snowflake?",
+      "options": [
+        "A role with full read access to all public tables",
+        "A default role automatically granted to every user that can hold minimal shared privileges",
+        "A role that represents anonymous (unauthenticated) access",
+        "A role that only ACCOUNTADMIN can assign"
+      ],
+      "correct": 1,
+      "explanation": "Every Snowflake user is automatically granted the PUBLIC role — the lowest-level role in the default hierarchy, used for granting minimal privileges available to all users in the account."
+    },
+    {
+      "id": "q729",
+      "domain": "2.1 - Security Model",
+      "question": "What is a dynamic data masking policy in Snowflake?",
+      "options": [
+        "A policy that encrypts column data at rest",
+        "A schema-level object that returns masked (obfuscated) values when a column is queried by roles without the unmasked privilege",
+        "A column compression algorithm",
+        "A policy that hides entire columns from the schema"
+      ],
+      "correct": 1,
+      "explanation": "A masking policy defines role-based column visibility. Authorized roles see real values; others see masked values (e.g., 'XXXX', NULL, or partial). Real data is never exposed to unauthorized users."
+    },
+    {
+      "id": "q730",
+      "domain": "2.1 - Security Model",
+      "question": "How does Snowflake encrypt data at rest by default?",
+      "options": [
+        "Customers must manually enable encryption",
+        "All data is automatically encrypted at rest using AES-256 with Snowflake-managed keys",
+        "Encryption is optional and incurs additional cost",
+        "Only Business Critical accounts encrypt data at rest"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake encrypts all data at rest with AES-256 automatically and transparently. Customer-managed keys (CMK) are available on Business Critical edition for enhanced control."
+    },
+    {
+      "id": "q731",
+      "domain": "2.1 - Security Model",
+      "question": "What does 'GRANT WITH GRANT OPTION' allow?",
+      "options": [
+        "The receiving role can use the privilege and also grant it to other roles",
+        "The grant automatically propagates to all child roles in the hierarchy",
+        "The grant expires after 24 hours",
+        "The receiving role is elevated to ACCOUNTADMIN for that object"
+      ],
+      "correct": 0,
+      "explanation": "WITH GRANT OPTION allows the grantee role to further delegate that privilege to other roles. Without it, the recipient can use the privilege but cannot pass it on."
+    },
+    {
+      "id": "q732",
+      "domain": "2.1 - Security Model",
+      "question": "What is a managed access schema?",
+      "options": [
+        "A schema where all objects are encrypted with a customer-managed key",
+        "A schema where only the schema owner (or SECURITYADMIN) can grant privileges on objects within it — preventing object owners from managing their own grants",
+        "A schema with automatic row-level security applied to all tables",
+        "A schema that is automatically backed up to a secondary region"
+      ],
+      "correct": 1,
+      "explanation": "In a managed access schema (CREATE SCHEMA ... WITH MANAGED ACCESS), privilege management is centralized. Object owners cannot grant privileges on their own objects — only the schema owner can."
+    },
+    {
+      "id": "q733",
+      "domain": "2.1 - Security Model",
+      "question": "What is SAML 2.0 SSO used for in Snowflake?",
+      "options": [
+        "A data encryption protocol",
+        "Single Sign-On integration allowing users to authenticate to Snowflake using a corporate identity provider (Okta, Azure AD, ADFS, etc.)",
+        "A multi-region replication feature",
+        "A key management protocol for encryption keys"
+      ],
+      "correct": 1,
+      "explanation": "SAML 2.0 SSO allows organizations to use their existing IdP for Snowflake authentication. Users log in via the IdP — with MFA if configured there — and receive a SAML assertion that Snowflake accepts."
+    },
+    {
+      "id": "q734",
+      "domain": "2.1 - Security Model",
+      "question": "What is the purpose of 'future grants' in Snowflake?",
+      "options": [
+        "Granting privileges that automatically expire in the future",
+        "A privilege assignment that automatically applies to all future objects of a specified type created in a schema or database",
+        "A grant that is staged for approval by ACCOUNTADMIN",
+        "A grant valid only during a future time window"
+      ],
+      "correct": 1,
+      "explanation": "GRANT SELECT ON FUTURE TABLES IN SCHEMA <s> TO ROLE <r> ensures all tables created in that schema in the future automatically get the specified privilege for that role — reducing ongoing privilege management."
+    },
+    {
+      "id": "q735",
+      "domain": "2.1 - Security Model",
+      "question": "What is a row access policy in Snowflake?",
+      "options": [
+        "A policy that hides columns based on user role",
+        "A schema-level object applied to a table that filters which rows a querying user or role can see, evaluated at query time",
+        "A policy that enforces NOT NULL constraints on rows",
+        "An encryption policy applied at the row level"
+      ],
+      "correct": 1,
+      "explanation": "A Row Access Policy is a function-based filter. When applied to a table, it evaluates CURRENT_ROLE() or CURRENT_USER() for each row — returning TRUE (visible) or FALSE (filtered). All roles including ACCOUNTADMIN are subject to it unless explicitly allowed."
+    },
+    {
+      "id": "q736",
+      "domain": "2.1 - Security Model",
+      "question": "What is the SNOWFLAKE.ACCOUNT_USAGE.ACCESS_HISTORY view used for?",
+      "options": [
+        "Recording failed login attempts only",
+        "A read-only audit log of all user queries showing which tables and columns were accessed — used for compliance auditing and data lineage investigations",
+        "Logging warehouse startup and shutdown events",
+        "Tracking Data Sharing consumer queries only"
+      ],
+      "correct": 1,
+      "explanation": "ACCESS_HISTORY records all user queries with base object access details (tables and columns read or written). It is the primary tool for compliance auditing and lineage analysis."
+    },
+    {
+      "id": "q737",
+      "domain": "2.1 - Security Model",
+      "question": "What does 'USE SECONDARY ROLES ALL' do in a Snowflake session?",
+      "options": [
+        "Logs out the primary role and switches to all secondary roles",
+        "Activates all roles assigned to the user simultaneously — privileges from all assigned roles are combined in the session",
+        "Grants all secondary roles ACCOUNTADMIN privileges temporarily",
+        "Secondary roles are used only for stored procedure execution"
+      ],
+      "correct": 1,
+      "explanation": "USE SECONDARY ROLES ALL allows the user to access objects owned or accessible under any of their assigned roles simultaneously, without explicitly switching between them."
+    },
+    {
+      "id": "q738",
+      "domain": "2.1 - Security Model",
+      "question": "How often does Snowflake automatically rotate its internal encryption keys?",
+      "options": [
+        "Daily",
+        "Monthly",
+        "Every 30 days",
+        "Annually"
+      ],
+      "correct": 2,
+      "explanation": "Snowflake automatically rotates encryption keys every 30 days. Re-encryption of data under new keys occurs transparently in the background."
+    },
+    {
+      "id": "q739",
+      "domain": "2.2 - Data Governance",
+      "question": "What is a tag in Snowflake data governance?",
+      "options": [
+        "A SQL comment attached to a column",
+        "A schema-level object storing key-value metadata that can be attached to Snowflake objects for classification and governance tracking",
+        "A Snowflake configuration file for object documentation",
+        "A label that can only be applied to sensitive PII columns"
+      ],
+      "correct": 1,
+      "explanation": "Tags are first-class Snowflake objects (CREATE TAG). They can be attached to any Snowflake object via ALTER ... SET TAG, powering data classification, lineage, and governance workflows."
+    },
+    {
+      "id": "q740",
+      "domain": "2.2 - Data Governance",
+      "question": "What is the difference between a column masking policy and a row access policy?",
+      "options": [
+        "Column masking hides entire columns; row access policy hides entire tables",
+        "Column masking obfuscates column values for unauthorized roles; row access policy filters which rows a user can see",
+        "Column masking is applied automatically; row access policy requires manual configuration",
+        "Column masking applies to all roles; row access policy applies only to SECURITYADMIN"
+      ],
+      "correct": 1,
+      "explanation": "Column masking controls what value is returned for a column (real vs. masked). Row access policies control which rows are visible by filtering the result set based on the querying role or user."
+    },
+    {
+      "id": "q741",
+      "domain": "2.2 - Data Governance",
+      "question": "How many masking policies can be applied to a single column at one time?",
+      "options": [
+        "Unlimited",
+        "Up to 5",
+        "Exactly 1",
+        "Up to 3"
+      ],
+      "correct": 2,
+      "explanation": "Only one masking policy can be applied to a column at a time. Applying a second policy without first detaching the existing one results in an error."
+    },
+    {
+      "id": "q742",
+      "domain": "2.2 - Data Governance",
+      "question": "What Snowflake feature automatically classifies columns as PII using built-in ML classifiers?",
+      "options": [
+        "Automatic tagging via a stream object",
+        "Snowflake Data Classification — which suggests system-defined SEMANTIC_CATEGORY and PRIVACY_CATEGORY tags after scanning column names and sample values",
+        "An automatic column masking policy detection system",
+        "An INFORMATION_SCHEMA sensitivity scanner"
+      ],
+      "correct": 1,
+      "explanation": "Data Classification uses ML models to analyze column names and sample values, suggesting system-defined tags (e.g., SEMANTIC_CATEGORY: EMAIL, PRIVACY_CATEGORY: IDENTIFIER). Administrators can accept suggestions or run classification programmatically."
+    },
+    {
+      "id": "q743",
+      "domain": "2.2 - Data Governance",
+      "question": "What is a Data Metric Function (DMF) in Snowflake?",
+      "options": [
+        "A UDF for computing statistical summaries",
+        "A function that measures a data quality metric (e.g., null count, freshness) and can be scheduled on tables to track quality over time",
+        "A stored procedure for ETL data transformations",
+        "A Snowpark function for real-time data validation"
+      ],
+      "correct": 1,
+      "explanation": "DMFs are SQL functions measuring a quality metric for a table. They can be scheduled and publish results to an event table, enabling ongoing automated data quality monitoring."
+    },
+    {
+      "id": "q744",
+      "domain": "2.2 - Data Governance",
+      "question": "How can a governance team efficiently find all columns tagged as 'PII' across the entire account?",
+      "options": [
+        "Query INFORMATION_SCHEMA.COLUMNS and inspect column comments",
+        "Query SNOWFLAKE.ACCOUNT_USAGE.TAG_REFERENCES to find all objects with the PII tag applied",
+        "Ask ACCOUNTADMIN to run a full table scan across all databases",
+        "Use SHOW TAGS in each database individually"
+      ],
+      "correct": 1,
+      "explanation": "TAG_REFERENCES in ACCOUNT_USAGE (or the INFORMATION_SCHEMA function TAG_REFERENCES()) returns all objects and columns with a specific tag applied — the efficient way to audit PII coverage across the account."
+    },
+    {
+      "id": "q745",
+      "domain": "2.2 - Data Governance",
+      "question": "What is the Snowflake 'Horizon' governance framework?",
+      "options": [
+        "A new Snowflake storage format released in 2024",
+        "Snowflake's unified governance product suite encompassing classification, access control, privacy, lineage, and compliance features",
+        "A new region deployment model for Snowflake accounts",
+        "A query optimization feature for analytical workloads"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake Horizon is the branding for Snowflake's end-to-end governance capabilities: data classification, masking policies, row access policies, lineage, data quality metrics, and compliance tooling — all native to the platform."
+    },
+    {
+      "id": "q746",
+      "domain": "2.2 - Data Governance",
+      "question": "What does applying a masking policy with the FORCE option do?",
+      "options": [
+        "Forces the masking policy to apply even to ACCOUNTADMIN",
+        "Atomically replaces any existing masking policy on the column without requiring a prior detach — in a single operation",
+        "Forces immediate re-evaluation of all cached query results under the new policy",
+        "Forces the policy to propagate to all child tables"
+      ],
+      "correct": 1,
+      "explanation": "ALTER TABLE ... MODIFY COLUMN ... SET MASKING POLICY ... FORCE replaces an existing masking policy on the column atomically without needing to detach the current one first."
+    },
+    {
+      "id": "q747",
+      "domain": "2.2 - Data Governance",
+      "question": "Where is a masking policy object stored in Snowflake's object hierarchy?",
+      "options": [
+        "Inside each table it is applied to, as part of the table metadata",
+        "As a schema-level object in the schema where it was created with CREATE MASKING POLICY",
+        "As an account-level object accessible from all databases",
+        "Inside the SNOWFLAKE shared database"
+      ],
+      "correct": 1,
+      "explanation": "Masking policies are schema-level objects. They can be applied to columns in tables and views across schemas with appropriate privileges, but they live in the schema where CREATE MASKING POLICY was executed."
+    },
+    {
+      "id": "q748",
+      "domain": "2.2 - Data Governance",
+      "question": "What is the latency for data appearing in SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY?",
+      "options": [
+        "Real-time (less than 1 second)",
+        "Up to 45 minutes",
+        "24 hours",
+        "7 days"
+      ],
+      "correct": 1,
+      "explanation": "QUERY_HISTORY in ACCOUNT_USAGE has a documented latency of up to 45 minutes. For near-real-time query monitoring, use INFORMATION_SCHEMA.QUERY_HISTORY() or Snowsight's activity view."
+    },
+    {
+      "id": "q749",
+      "domain": "2.3 - Monitoring and Cost Management",
+      "question": "What is a resource monitor in Snowflake?",
+      "options": [
+        "A Snowflake Support tool for diagnosing performance issues",
+        "A Snowflake object that tracks credit usage against a configured quota and can notify administrators or suspend warehouses when thresholds are reached",
+        "A performance monitoring dashboard built into Snowsight",
+        "A cloud provider billing alert configured externally"
+      ],
+      "correct": 1,
+      "explanation": "Resource monitors track credit consumption for warehouses or the whole account and trigger configured actions — notify, suspend, or suspend immediately — when usage reaches threshold percentages."
+    },
+    {
+      "id": "q750",
+      "domain": "2.3 - Monitoring and Cost Management",
+      "question": "What ACCOUNT_USAGE view shows historical virtual warehouse credit consumption per hour?",
+      "options": [
+        "QUERY_HISTORY",
+        "WAREHOUSE_METERING_HISTORY",
+        "STORAGE_USAGE",
+        "CREDIT_USAGE_HISTORY"
+      ],
+      "correct": 1,
+      "explanation": "WAREHOUSE_METERING_HISTORY in ACCOUNT_USAGE records hourly credit consumption per virtual warehouse over the past year — the primary view for compute cost trend analysis and chargebacks."
+    },
+    {
+      "id": "q751",
+      "domain": "2.3 - Monitoring and Cost Management",
+      "question": "What does the ACCOUNT_USAGE.STORAGE_USAGE view contain?",
+      "options": [
+        "Micro-partition file sizes for all tables in the account",
+        "Daily average storage consumption in bytes, broken down by database storage, stage storage, and Fail-Safe storage",
+        "Real-time current storage size for all tables",
+        "Storage I/O metrics per query"
+      ],
+      "correct": 1,
+      "explanation": "STORAGE_USAGE captures daily storage snapshots showing average bytes used per category (table storage, stage storage, Fail-Safe). Used for storage cost analysis and capacity forecasting."
+    },
+    {
+      "id": "q752",
+      "domain": "2.3 - Monitoring and Cost Management",
+      "question": "What does AUTO_SUSPEND primarily help control from a cost perspective?",
+      "options": [
+        "Prevents users from running expensive long-running queries",
+        "Eliminates idle warehouse credit consumption by automatically shutting down warehouses after a period of inactivity",
+        "Reduces storage costs by purging unused tables",
+        "Limits the number of concurrent queries on a warehouse"
+      ],
+      "correct": 1,
+      "explanation": "Idle warehouses are a major source of unnecessary spend. AUTO_SUSPEND ensures warehouses shut down when not actively processing queries, eliminating idle credit drain."
+    },
+    {
+      "id": "q753",
+      "domain": "2.3 - Monitoring and Cost Management",
+      "question": "What is a 'budget' in Snowflake's cost management features?",
+      "options": [
+        "A hard credit cap that automatically suspends all warehouses when reached",
+        "A Snowflake object that tracks credit spending for a group of objects and alerts when projected spending is on track to exceed a configured monthly threshold",
+        "A resource monitor applied at the organization level",
+        "A Snowflake Credit alert configured by Snowflake Sales"
+      ],
+      "correct": 1,
+      "explanation": "Budgets (CREATE BUDGET) define cost-center spending alerts. Unlike resource monitors (which can suspend warehouses), budgets notify administrators when projected monthly spending approaches the configured threshold."
+    },
+    {
+      "id": "q754",
+      "domain": "2.3 - Monitoring and Cost Management",
+      "question": "Which Snowflake view provides a daily history of all credit consumption broken down by service type?",
+      "options": [
+        "ACCOUNT_USAGE.QUERY_HISTORY",
+        "ACCOUNT_USAGE.METERING_DAILY_HISTORY",
+        "ACCOUNT_USAGE.WAREHOUSE_METERING_HISTORY",
+        "ACCOUNT_USAGE.CREDIT_CONSUMPTION"
+      ],
+      "correct": 1,
+      "explanation": "METERING_DAILY_HISTORY provides daily credit totals broken down by service type (virtual warehouse, Snowpipe, Automatic Clustering, etc.) — a complete picture for budgeting and chargeback reporting."
+    },
+    {
+      "id": "q755",
+      "domain": "3.1 - Data Loading and Unloading",
+      "question": "Which SQL command loads data from a stage into a Snowflake table?",
+      "options": [
+        "LOAD INTO",
+        "INSERT FROM STAGE",
+        "COPY INTO <table>",
+        "IMPORT TABLE"
+      ],
+      "correct": 2,
+      "explanation": "COPY INTO <table> is the primary bulk loading command. It reads files from an internal or external stage and inserts rows into the target table, supporting transformation, validation, and error handling."
+    },
+    {
+      "id": "q756",
+      "domain": "3.1 - Data Loading and Unloading",
+      "question": "What is the PUT command used for?",
+      "options": [
+        "Uploading data directly into a Snowflake table",
+        "Uploading local files to a Snowflake internal stage — example: PUT file:///data/orders.csv @my_stage",
+        "Downloading files from an internal stage to a local machine",
+        "Sending files to an external stage on S3 or Azure"
+      ],
+      "correct": 1,
+      "explanation": "PUT uploads local files to internal Snowflake stages. It is available via SnowSQL and Snowflake drivers. Example: PUT file:///data/orders.csv @my_stage."
+    },
+    {
+      "id": "q757",
+      "domain": "3.1 - Data Loading and Unloading",
+      "question": "What does the ON_ERROR = CONTINUE option do in COPY INTO?",
+      "options": [
+        "Continues loading even if the target table does not exist",
+        "Skips malformed rows and continues loading the remainder of the file, recording errors in load metadata",
+        "Retries each errored row 3 times before skipping",
+        "Cancels the load but preserves already-loaded rows"
+      ],
+      "correct": 1,
+      "explanation": "ON_ERROR = CONTINUE causes COPY INTO to skip rows that fail parsing and continue. Errors are recorded in load metadata and retrievable with the VALIDATE() function."
+    },
+    {
+      "id": "q758",
+      "domain": "3.1 - Data Loading and Unloading",
+      "question": "What is COPY INTO's default behavior if the same file is submitted for loading twice?",
+      "options": [
+        "All rows are inserted again, creating duplicates",
+        "The second load is skipped — Snowflake tracks loaded files for 64 days and ignores already-processed files (FORCE = FALSE)",
+        "An error is raised informing the user the file was already loaded",
+        "The target table is truncated and fully reloaded"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake maintains 64 days of file load metadata per stage. By default (FORCE = FALSE), previously processed files are skipped to prevent duplicate loads."
+    },
+    {
+      "id": "q759",
+      "domain": "3.1 - Data Loading and Unloading",
+      "question": "What does VALIDATION_MODE = RETURN_ERRORS in COPY INTO do?",
+      "options": [
+        "Validates the stage connection before starting the load",
+        "Performs a dry run — scans files and returns errors without inserting any data, used to test file format configurations before a production load",
+        "Validates the file format object syntax before creating it",
+        "Checks that the target table schema matches the file's column structure"
+      ],
+      "correct": 1,
+      "explanation": "COPY INTO ... VALIDATION_MODE = RETURN_ERRORS scans files and reports all errors without committing data. The recommended way to verify format configurations before running a production COPY INTO."
+    },
+    {
+      "id": "q760",
+      "domain": "3.1 - Data Loading and Unloading",
+      "question": "What is the maximum recommended file size per file for optimal COPY INTO throughput?",
+      "options": [
+        "1 MB",
+        "10–250 MB per compressed file",
+        "1 GB per compressed file",
+        "There is no recommended limit — Snowflake auto-splits large files"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake recommends 100–250 MB per compressed file for optimal COPY INTO throughput. Files too small create per-file overhead; files too large reduce parallelism."
+    },
+    {
+      "id": "q761",
+      "domain": "3.1 - Data Loading and Unloading",
+      "question": "What does STRIP_OUTER_ARRAY = TRUE do when loading JSON files?",
+      "options": [
+        "Removes the outermost JSON object wrapper from each row",
+        "Strips the outer JSON array, loading each array element as a separate row in the target table",
+        "Removes null values from all JSON arrays in the file",
+        "Flattens all nested arrays into top-level columns"
+      ],
+      "correct": 1,
+      "explanation": "When a JSON file is a top-level array ([{...},{...}]), STRIP_OUTER_ARRAY = TRUE removes the outer brackets and loads each element as a separate row."
+    },
+    {
+      "id": "q762",
+      "domain": "3.1 - Data Loading and Unloading",
+      "question": "What does PURGE = TRUE do in a COPY INTO load statement?",
+      "options": [
+        "Deletes rows from the source table after loading them into the destination",
+        "Automatically removes successfully loaded files from the stage after the COPY INTO completes",
+        "Removes duplicate rows during the load operation",
+        "Purges the Time Travel history for the target table"
+      ],
+      "correct": 1,
+      "explanation": "PURGE = TRUE deletes successfully processed source files from the stage after the load, automating cleanup and preventing accidental re-loading of already-processed files."
+    },
+    {
+      "id": "q763",
+      "domain": "3.1 - Data Loading and Unloading",
+      "question": "What is a storage integration in Snowflake external stage definitions?",
+      "options": [
+        "An object that compresses data as it moves between Snowflake and external storage",
+        "A reusable object that stores cloud provider credentials (IAM role or service principal) for accessing external cloud storage without embedding credentials in each stage definition",
+        "An object that configures network routing for external stage connections",
+        "A connector between Snowflake and a cloud data lake platform"
+      ],
+      "correct": 1,
+      "explanation": "A Storage Integration uses a cloud provider identity (AWS IAM role, Azure service principal, GCP service account) centrally. Multiple external stages reference the same integration, making credential management secure and centralized."
+    },
+    {
+      "id": "q764",
+      "domain": "3.1 - Data Loading and Unloading",
+      "question": "What does SKIP_HEADER = 1 do in a CSV file format object?",
+      "options": [
+        "Ignores the first row of each CSV file during COPY INTO — used to skip column header rows",
+        "Removes HTTP headers from cloud storage download requests",
+        "Skips rows where the first column value is null or empty",
+        "Skips loading files with a .header file extension"
+      ],
+      "correct": 0,
+      "explanation": "SKIP_HEADER = N causes COPY INTO to skip the first N rows of each file — typically used to skip the column header row that should not be loaded as data."
+    },
+    {
+      "id": "q765",
+      "domain": "3.1 - Data Loading and Unloading",
+      "question": "What is the COPY_HISTORY view used for?",
+      "options": [
+        "A Snowsight dashboard showing loading activity trends",
+        "A table function in INFORMATION_SCHEMA and view in ACCOUNT_USAGE that records all COPY INTO operations, including file names, row counts, errors, and timestamps",
+        "A backup log of all COPY INTO SQL statements executed",
+        "A general-purpose log of all stage file operations"
+      ],
+      "correct": 1,
+      "explanation": "COPY_HISTORY is available as INFORMATION_SCHEMA.COPY_HISTORY() (last 14 days, near-real-time) and ACCOUNT_USAGE.COPY_HISTORY (up to 1 year with latency). It records file-level load details for auditing and troubleshooting."
+    },
+    {
+      "id": "q766",
+      "domain": "3.1 - Data Loading and Unloading",
+      "question": "What does SINGLE = TRUE do when unloading data with COPY INTO @stage?",
+      "options": [
+        "Limits the unload to a single row for testing",
+        "Forces all output into a single file instead of Snowflake's default multi-file parallel output",
+        "Enables single-threaded processing for small table unloads",
+        "Produces a single-column output file"
+      ],
+      "correct": 1,
+      "explanation": "By default, COPY INTO unload produces multiple parallel files. SINGLE = TRUE forces a single output file — useful when a downstream system requires a single file, at the cost of losing parallelism for large datasets."
+    },
+    {
+      "id": "q767",
+      "domain": "3.2 - Automated Data Ingestion",
+      "question": "What is Snowpipe and how does it differ from a scheduled COPY INTO Task?",
+      "options": [
+        "Snowpipe is a batch loader; COPY INTO with a Task is for real-time streaming",
+        "Snowpipe is serverless and continuously loads files as they arrive in a stage (typically within minutes); a COPY INTO Task is batch-based and runs on a fixed schedule",
+        "Snowpipe requires a virtual warehouse; COPY INTO does not",
+        "Snowpipe only supports JSON; COPY INTO supports all file formats"
+      ],
+      "correct": 1,
+      "explanation": "Snowpipe uses Snowflake-managed serverless compute to detect new files via event notifications or REST API and runs COPY INTO automatically — providing near-real-time ingestion without managing a warehouse or schedule."
+    },
+    {
+      "id": "q768",
+      "domain": "3.2 - Automated Data Ingestion",
+      "question": "How does Snowpipe auto-ingest detect new files in an AWS S3 external stage?",
+      "options": [
+        "By polling the S3 bucket on a configurable interval",
+        "Via SQS event notifications — S3 publishes ObjectCreated events to a Snowflake-managed SQS queue; Snowpipe listens on the queue and triggers loads for new files",
+        "Via AWS Lambda triggers that call the Snowpipe REST API",
+        "Via S3 bucket versioning events"
+      ],
+      "correct": 1,
+      "explanation": "Snowpipe auto-ingest on AWS uses S3 → SQS event notifications. S3 publishes ObjectCreated events to an SQS queue managed by Snowflake; Snowpipe listens and triggers loads for newly arrived files."
+    },
+    {
+      "id": "q769",
+      "domain": "3.2 - Automated Data Ingestion",
+      "question": "How is Snowpipe compute consumption billed?",
+      "options": [
+        "Per active warehouse hour, the same as virtual warehouses",
+        "Per file loaded at a flat rate per file",
+        "Using serverless credits at 1.25x the standard warehouse credit rate",
+        "Snowpipe is included for free with all Snowflake accounts"
+      ],
+      "correct": 2,
+      "explanation": "Snowpipe uses Snowflake-managed serverless compute, billed at 1.25× the standard warehouse credit rate per credit consumed. Customers pay only for compute used to process files — no idle cost."
+    },
+    {
+      "id": "q770",
+      "domain": "3.2 - Automated Data Ingestion",
+      "question": "What does AUTO_INGEST = TRUE in a CREATE PIPE statement configure?",
+      "options": [
+        "Snowpipe automatically creates the target table if it does not exist",
+        "The pipe is configured for event notification-based triggering — requiring a cloud notification integration (SQS, Azure Event Grid, or GCP Pub/Sub) to trigger loads when new files arrive",
+        "The pipe starts automatically when the Snowflake account is first created",
+        "Auto-ingest enables built-in deduplication of loaded files"
+      ],
+      "correct": 1,
+      "explanation": "AUTO_INGEST = TRUE configures the pipe to use cloud event notifications. When a new file lands in the source stage, the cloud service sends a notification triggering Snowpipe to load it automatically."
+    },
+    {
+      "id": "q771",
+      "domain": "3.2 - Automated Data Ingestion",
+      "question": "What is Snowpipe Streaming (Snowflake Streaming Ingest)?",
+      "options": [
+        "Snowflake's real-time query result streaming to client applications",
+        "An SDK-based API for writing rows directly into Snowflake tables from application code with very low latency, without staging files first",
+        "A streaming analytics engine built into Snowflake",
+        "The Kafka connector's high-throughput operating mode"
+      ],
+      "correct": 1,
+      "explanation": "Snowpipe Streaming (Snowflake Ingest SDK) enables row-level streaming using Java/Python. Applications write rows directly via channels into a table, bypassing the file staging step. Target latency is seconds or sub-second."
+    },
+    {
+      "id": "q772",
+      "domain": "3.2 - Automated Data Ingestion",
+      "question": "What does SYSTEM$PIPE_STATUS() return?",
+      "options": [
+        "The current error log for a specified pipe",
+        "A JSON object describing the pipe's current state: execution status, last ingested file timestamp, pending file count, and notification channel health",
+        "A list of all files currently being processed by the pipe",
+        "The virtual warehouse being used by the pipe"
+      ],
+      "correct": 1,
+      "explanation": "SYSTEM$PIPE_STATUS('<pipe_name>') returns a JSON document with execution_state, pending_file_count, last_ingested_timestamp, and notification_channel_status — essential for monitoring pipe health."
+    },
+    {
+      "id": "q773",
+      "domain": "3.2 - Automated Data Ingestion",
+      "question": "What happens to pre-existing files in a stage when a new Snowpipe pipe with AUTO_INGEST = TRUE is created?",
+      "options": [
+        "They are loaded immediately upon pipe creation",
+        "They are NOT automatically loaded — only files arriving after the event notification is configured trigger auto-ingest; pre-existing files require ALTER PIPE ... REFRESH to queue them",
+        "They are loaded in reverse chronological order as a backfill",
+        "They are permanently ignored — Snowpipe only processes files created after the pipe object"
+      ],
+      "correct": 1,
+      "explanation": "Newly created pipes do not backfill pre-existing stage files. Use ALTER PIPE <n> REFRESH to queue them. Only files arriving after the notification is active will load automatically."
+    },
+    {
+      "id": "q774",
+      "domain": "3.2 - Automated Data Ingestion",
+      "question": "How does Snowpipe handle duplicate files within its 14-day deduplication window?",
+      "options": [
+        "All rows are inserted again, creating duplicate records",
+        "The file is silently skipped — Snowpipe tracks loaded file paths and will not reload the same file path within 14 days",
+        "Snowpipe does not track duplicates — this is the developer's responsibility",
+        "Duplicates are detected by comparing file checksums at load time"
+      ],
+      "correct": 1,
+      "explanation": "Snowpipe maintains a 14-day metadata window tracking loaded file paths. Re-submitting the same file path within that window is a no-op, preventing duplicate loads caused by event delivery retries."
+    },
+    {
+      "id": "q775",
+      "domain": "3.2 - Automated Data Ingestion",
+      "question": "What Snowpipe credit multiplier applies relative to standard virtual warehouse compute?",
+      "options": [
+        "0.5x — Snowpipe is half the cost of warehouse compute",
+        "1.0x — same cost as warehouse compute",
+        "1.25x — Snowpipe serverless credits cost 25% more than warehouse credits",
+        "2.0x — Snowpipe costs double warehouse compute"
+      ],
+      "correct": 2,
+      "explanation": "Snowpipe serverless credits are priced at 1.25× the standard virtual warehouse credit rate. The premium reflects the convenience of fully managed, on-demand serverless compute with zero idle cost."
+    },
+    {
+      "id": "q776",
+      "domain": "3.2 - Automated Data Ingestion",
+      "question": "What does ALTER PIPE <name> REFRESH do?",
+      "options": [
+        "Reloads all files that have ever been loaded through the pipe",
+        "Queues pre-existing files in the stage's source location for loading — used for initial backfill when a pipe is created for a stage that already contains files",
+        "Clears the pipe's error queue and resets the deduplication window",
+        "Regenerates the SQS queue ARN for the auto-ingest configuration"
+      ],
+      "correct": 1,
+      "explanation": "REFRESH scans the pipe's source stage for files not yet loaded and adds them to the ingestion queue. Primarily used for initial backfill at pipe creation or after recovering from a prolonged pause."
+    },
+    {
+      "id": "q777",
+      "domain": "3.3 - Connectors and Integrations",
+      "question": "What is Partner Connect in Snowflake?",
+      "options": [
+        "A marketplace for purchasing Snowflake partner products",
+        "A Snowsight feature that simplifies connecting Snowflake to partner tools (dbt, Fivetran, Tableau, etc.) by pre-configuring a service account, warehouse, and database with a few clicks",
+        "A secure encrypted tunnel between Snowflake and cloud partner services",
+        "A partner support program for Snowflake ISVs and technology partners"
+      ],
+      "correct": 1,
+      "explanation": "Partner Connect is in Snowsight (Admin → Partner Connect). It creates a dedicated service user, role, warehouse, and database for the selected partner tool and provides one-click setup for the integration."
+    },
+    {
+      "id": "q778",
+      "domain": "3.3 - Connectors and Integrations",
+      "question": "What is a Snowflake external function?",
+      "options": [
+        "A UDF written in a programming language not natively supported by Snowflake",
+        "A SQL function that calls an external HTTP endpoint (e.g., AWS Lambda, Azure Functions) and returns the results — enabling SQL queries to invoke external compute and services",
+        "A function stored in a connected external data catalog",
+        "A UDF whose code is stored in an external file format object"
+      ],
+      "correct": 1,
+      "explanation": "External functions allow Snowflake SQL to call external HTTP services via an API Integration. Snowflake sends batched rows to the endpoint and receives results, enabling ML inference, geocoding, or any external service from SQL."
+    },
+    {
+      "id": "q779",
+      "domain": "3.3 - Connectors and Integrations",
+      "question": "How does dbt (data build tool) execute transformations in a Snowflake environment?",
+      "options": [
+        "dbt runs transformations inside its own compute engine, separate from Snowflake",
+        "dbt compiles SQL models and executes them directly on Snowflake virtual warehouses via the dbt-snowflake adapter — all compute happens inside Snowflake",
+        "dbt extracts data from Snowflake and loads it into a separate transformation database",
+        "dbt replaces Snowflake Tasks for scheduled SQL execution and orchestration"
+      ],
+      "correct": 1,
+      "explanation": "dbt is a SQL transformation framework. It compiles Jinja-templated SQL models and runs them on Snowflake using the Snowflake Python connector under the hood. All compute happens on Snowflake warehouses."
+    },
+    {
+      "id": "q780",
+      "domain": "3.3 - Connectors and Integrations",
+      "question": "What is Snowflake's Git Integration feature?",
+      "options": [
+        "A Snowflake connector for receiving GitHub webhook notifications",
+        "A feature that connects Snowflake to a Git repository (GitHub, GitLab, Bitbucket) and syncs SQL files and Snowpark code into Snowflake for version-controlled deployment and direct execution",
+        "A version control system built into the Snowsight worksheet interface",
+        "A GitHub Actions workflow for automated Snowflake object deployments"
+      ],
+      "correct": 1,
+      "explanation": "Git Integration (CREATE GIT REPOSITORY) clones and syncs a Git repo into a Snowflake repository stage. SQL and code files can be executed directly from the repository within Snowflake workflows."
+    },
+    {
+      "id": "q781",
+      "domain": "4.1 - Query Performance",
+      "question": "What is the Query Profile in Snowflake and how is it accessed?",
+      "options": [
+        "A performance report generated by Snowflake Support on request",
+        "A visual execution plan in Snowsight showing each operator node, execution time, bytes processed, and performance insights for a specific query",
+        "A stored configuration of query preferences per user or warehouse",
+        "A summary of query statistics that can be exported as a JSON file"
+      ],
+      "correct": 1,
+      "explanation": "The Query Profile (Snowsight → Activity → Query History → select query → Query Profile tab) shows a DAG of operator nodes with timing, row counts, bytes processed, and automated performance warnings."
+    },
+    {
+      "id": "q782",
+      "domain": "4.1 - Query Performance",
+      "question": "What does 'Bytes Scanned' in the Query Profile indicate?",
+      "options": [
+        "The total bytes returned to the client application",
+        "The total compressed bytes read from micro-partitions during the query — lower values indicate more effective micro-partition pruning",
+        "The total bytes written to a stage during the query",
+        "The total bytes across all tables referenced in the query"
+      ],
+      "correct": 1,
+      "explanation": "Bytes Scanned shows the total data read from storage. High values relative to table size suggest poor micro-partition pruning. Reducing bytes scanned through better clustering or filter predicates is a key optimization target."
+    },
+    {
+      "id": "q783",
+      "domain": "4.1 - Query Performance",
+      "question": "What does 'bytes spilled to remote storage' in the Query Profile indicate?",
+      "options": [
+        "The query read data from an external stage location",
+        "The query's intermediate data exceeded warehouse memory and local disk capacity, overflowing to S3/Azure/GCS — a major performance degradation indicating the warehouse is undersized",
+        "The query result was too large to store in the result cache",
+        "The warehouse auto-resumed during the query, spilling temporary state"
+      ],
+      "correct": 1,
+      "explanation": "Remote spilling means the working set exceeded both warehouse memory and local SSD. Data was written to cloud storage — orders of magnitude slower than local SSD. The warehouse needs to be upsized for this workload."
+    },
+    {
+      "id": "q784",
+      "domain": "4.1 - Query Performance",
+      "question": "What is query queuing in Snowflake and what causes it?",
+      "options": [
+        "Queries are batched and sent together to reduce overhead",
+        "A query waits before execution because all concurrent execution slots on the warehouse are occupied by other queries",
+        "A query is delayed due to a result cache miss",
+        "A Snowflake pricing model where queries are queued to reduce credit consumption"
+      ],
+      "correct": 1,
+      "explanation": "Queuing occurs when all warehouse concurrency slots are busy. Signs: high QUEUED_OVERLOAD_TIME in QUERY_HISTORY. Solutions: increase warehouse size, use multi-cluster warehouses, or enable concurrency scaling."
+    },
+    {
+      "id": "q785",
+      "domain": "4.1 - Query Performance",
+      "question": "How can a developer confirm a query was served from the result cache?",
+      "options": [
+        "Check if EXECUTION_TIME equals 0 milliseconds in QUERY_HISTORY",
+        "QUERY_HISTORY shows BYTES_SCANNED = 0 and near-zero execution time; the Query Profile displays 'Query result was reused'",
+        "Result cache queries have a different format for their QUERY_ID",
+        "Snowsight displays a 'Cached' badge on every row of query history served from cache"
+      ],
+      "correct": 1,
+      "explanation": "Result cache hits appear in QUERY_HISTORY with bytes_scanned = 0 and near-zero execution time. The Query Profile explicitly states 'Query result was reused', confirming no warehouse compute was consumed."
+    },
+    {
+      "id": "q786",
+      "domain": "4.1 - Query Performance",
+      "question": "What does QUEUED_OVERLOAD_TIME in QUERY_HISTORY represent?",
+      "options": [
+        "Total query execution time including all processing steps",
+        "Time spent waiting in the warehouse queue because all concurrent execution slots were occupied — high values indicate the warehouse is oversubscribed",
+        "Time spent waiting for the warehouse to finish provisioning before the query could start",
+        "Time blocked by a concurrent transaction holding a lock"
+      ],
+      "correct": 0,
+      "explanation": "QUEUED_OVERLOAD_TIME records how long a query waited for an available execution slot. High values indicate the warehouse needs more concurrency capacity — a larger size, multi-cluster, or concurrency scaling."
+    },
+    {
+      "id": "q787",
+      "domain": "4.1 - Query Performance",
+      "question": "What is the best first diagnostic step when a previously fast query is now running slowly?",
+      "options": [
+        "Restart the virtual warehouse to clear any stale state",
+        "Compare the slow query's Query Profile against a historical fast run in QUERY_HISTORY — look for changes in bytes_scanned, spilling, pruning efficiency, or compile time to identify the root cause",
+        "Immediately increase the warehouse size and re-run the query",
+        "Rewrite the query from scratch using a different approach"
+      ],
+      "correct": 1,
+      "explanation": "The diagnostic workflow: pull both query IDs from QUERY_HISTORY, compare Query Profiles, look for increased bytes_scanned (more data/less pruning?), spilling (data growth exceeding warehouse?), or long compile time (schema changes?)."
+    },
+    {
+      "id": "q788",
+      "domain": "4.1 - Query Performance",
+      "question": "Which Snowflake feature speeds up highly selective point lookups like WHERE email = 'user@example.com' on large tables?",
+      "options": [
+        "A clustering key defined on the email column",
+        "The Search Optimization Service (SOS) configured with EQUALITY search method on the email column",
+        "A materialized view pre-filtering by email domain",
+        "The result cache, which caches the first lookup for reuse"
+      ],
+      "correct": 1,
+      "explanation": "SOS is optimized for highly selective point lookups on high-cardinality columns. It builds access paths enabling Snowflake to skip nearly all micro-partitions for exact-value lookups — far more effective than clustering for this pattern."
+    },
+    {
+      "id": "q789",
+      "domain": "4.2 - Query Optimization",
+      "question": "What is the primary benefit of defining a clustering key on a large Snowflake table?",
+      "options": [
+        "Enforces uniqueness on the clustered columns",
+        "Improves micro-partition pruning for queries that filter on the clustering key columns, reducing bytes scanned and execution time",
+        "Reduces the number of columns stored per micro-partition",
+        "Enables more aggressive compression for the clustered columns"
+      ],
+      "correct": 1,
+      "explanation": "A clustering key sorts data so micro-partitions contain non-overlapping value ranges for the clustered columns. Queries filtering on those columns can skip most partitions, dramatically reducing scan volume."
+    },
+    {
+      "id": "q790",
+      "domain": "4.2 - Query Optimization",
+      "question": "What is predicate pushdown in Snowflake query optimization?",
+      "options": [
+        "Pushing filter conditions to the client application before sending the query",
+        "The optimizer applying WHERE clause filters as early as possible in the execution plan — ideally at the scan level — to reduce the amount of data processed in subsequent operators",
+        "Storing frequently used filter predicates as named objects for reuse",
+        "Transferring filter logic to a UDF for parallel execution across warehouse nodes"
+      ],
+      "correct": 1,
+      "explanation": "Predicate pushdown applies filter conditions early in the execution plan, preventing Snowflake from reading and processing data that will ultimately be filtered out. This is the foundation of micro-partition pruning."
+    },
+    {
+      "id": "q791",
+      "domain": "4.2 - Query Optimization",
+      "question": "Why is UNION ALL more efficient than UNION in Snowflake when duplicates are known not to exist?",
+      "options": [
+        "UNION ALL is never more efficient — UNION is always the correct choice for safety",
+        "UNION ALL avoids the deduplication sort/hash step that UNION requires, reducing both compute and memory usage — with no correctness impact when duplicates cannot exist",
+        "UNION ALL is only safe when combining STRING columns",
+        "UNION ALL requires all columns to have identical data types; UNION handles type mismatches"
+      ],
+      "correct": 1,
+      "explanation": "UNION performs a deduplication step (sort or hash), consuming extra compute and memory. UNION ALL simply concatenates results. When duplicates are impossible or irrelevant, UNION ALL is always more efficient."
+    },
+    {
+      "id": "q792",
+      "domain": "4.2 - Query Optimization",
+      "question": "What is a lateral join in Snowflake and what is it most commonly used for?",
+      "options": [
+        "A JOIN between tables in different schemas within the same account",
+        "A join allowing a table-valued function on the right side to reference columns from the left-side table — most commonly used with LATERAL FLATTEN() to explode JSON arrays from each row",
+        "A left outer join with a lateral subquery in the WHERE clause",
+        "A join that processes rows left-to-right sequentially rather than in parallel"
+      ],
+      "correct": 1,
+      "explanation": "A LATERAL join allows the right-side expression to reference left-side table columns. LATERAL FLATTEN(src.events) explodes the events array for each row, correlating the explosion with the current row's context data."
+    },
+    {
+      "id": "q793",
+      "domain": "4.2 - Query Optimization",
+      "question": "What is the QUALIFY clause in Snowflake SQL used for?",
+      "options": [
+        "Qualifying column names with table aliases to avoid ambiguity",
+        "Filtering rows based on window function results — equivalent to wrapping a query in a subquery and filtering on the window function output, but more readable and often more efficient",
+        "Applying a data quality validation check to all result rows",
+        "Determining whether a query is eligible to use the result cache"
+      ],
+      "correct": 1,
+      "explanation": "QUALIFY is a Snowflake/BigQuery extension that filters window function output without requiring a subquery. For example: SELECT ..., RANK() OVER (...) AS r FROM t QUALIFY r = 1 is cleaner than an equivalent outer subquery."
+    },
+    {
+      "id": "q794",
+      "domain": "4.2 - Query Optimization",
+      "question": "What is 'transitive predicate closure' optimization in Snowflake?",
+      "options": [
+        "Expanding boolean expressions for faster partial evaluation",
+        "When a filter is applied to a join key, Snowflake infers the same filter should apply to the joined table's matching key — enabling pruning on both sides of the join without explicit filtering",
+        "Closing open transactions before beginning query compilation",
+        "Using transitive metadata to locate partitions through the storage layer"
+      ],
+      "correct": 1,
+      "explanation": "If you write WHERE a.id = b.id AND a.id = 5, Snowflake infers b.id = 5. This enables micro-partition pruning on the b table even without an explicit filter, dramatically reducing the scan on the un-filtered join side."
+    },
+    {
+      "id": "q795",
+      "domain": "4.2 - Query Optimization",
+      "question": "What is 'subquery flattening' (unnesting) performed by Snowflake's optimizer?",
+      "options": [
+        "Removing CTEs and inlining them as subqueries for faster parsing",
+        "Converting correlated subqueries (IN, EXISTS, scalar subqueries) into equivalent JOIN operations that can be parallelized more efficiently across warehouse nodes",
+        "Caching subquery results in the metadata layer for reuse",
+        "Rewriting correlated scalar subqueries as window functions"
+      ],
+      "correct": 1,
+      "explanation": "Subquery unnesting converts correlated subqueries into parallel JOINs. Joins are far more efficiently distributed across MPP nodes than correlated row-by-row subquery evaluation — a high-impact optimizer transformation."
+    },
+    {
+      "id": "q796",
+      "domain": "4.2 - Query Optimization",
+      "question": "What is incremental refresh for dynamic tables and materialized views?",
+      "options": [
+        "Dropping and recreating the entire object on each refresh cycle",
+        "Only recomputing the portions of the result that have changed since the last refresh — based on new or changed source rows — rather than rerunning the full query from scratch",
+        "Refreshing the object in small time windows to spread the compute load",
+        "A feature available only on Enterprise edition and above"
+      ],
+      "correct": 1,
+      "explanation": "Incremental refresh detects changes in source tables and only recomputes affected output rows. This is far more efficient than full re-computation for large tables with a small percentage of row changes per refresh."
+    },
+    {
+      "id": "q797",
+      "domain": "4.2 - Query Optimization",
+      "question": "What is CLUSTER BY (TRUNC(date_col, 'MONTH')) better at than CLUSTER BY (date_col) for month-range filters?",
+      "options": [
+        "TRUNC expressions are not valid in Snowflake clustering key definitions",
+        "TRUNC groups all dates in a month to the same key value, colocating monthly data in the same micro-partitions and improving pruning for month-level range filters; date-level clustering creates finer but more numerous overlapping partition boundaries",
+        "Month-level clustering increases clustering depth, degrading performance",
+        "TRUNC on the clustering key disables Automatic Clustering"
+      ],
+      "correct": 1,
+      "explanation": "Expression clustering keys reduce key cardinality. TRUNC(date, 'MONTH') means all dates in a month share the same clustering value, grouping them into shared partitions. Month-range queries prune far more effectively against month-level clusters."
+    },
+    {
+      "id": "q798",
+      "domain": "4.2 - Query Optimization",
+      "question": "When is it more appropriate to use a dynamic table instead of a stream + task pipeline?",
+      "options": [
+        "When you need sub-second data freshness in the target table",
+        "When the transformation is a SQL query and you want declarative, automatically refreshed materialization with configurable lag — instead of manually managing stream offsets, task schedules, and error handling",
+        "When you need to process data arriving from Kafka directly",
+        "When the source table has more than 1 billion rows"
+      ],
+      "correct": 1,
+      "explanation": "Dynamic tables are the declarative alternative to stream+task. You define the SQL and target lag; Snowflake handles incremental refresh, scheduling, and retries. Stream+task is more flexible but requires explicit orchestration."
+    },
+    {
+      "id": "q799",
+      "domain": "4.3 - Snowflake Caching",
+      "question": "How many distinct cache layers does Snowflake have?",
+      "options": [
+        "1 — the result cache only",
+        "2 — result cache and warehouse local disk cache",
+        "3 — result cache (cloud services), local disk/SSD cache (warehouse nodes), and remote cloud storage as the permanent fallback",
+        "4 — result cache, memory cache, local disk cache, and remote disk cache"
+      ],
+      "correct": 2,
+      "explanation": "Snowflake has three layers: (1) Result cache in cloud services — exact query results for 24 h; (2) Local SSD cache on each warehouse node — recently accessed micro-partitions; (3) Remote cloud storage — the permanent data layer and fallback."
+    },
+    {
+      "id": "q800",
+      "domain": "4.3 - Snowflake Caching",
+      "question": "What conditions must be met for the result cache to serve a query?",
+      "options": [
+        "The exact same SQL text must be submitted by any user",
+        "The exact SQL text must match, the referenced objects must not have changed since the result was cached, and the querying role context must be the same",
+        "The same SQL text must be submitted by the same user within 1 hour",
+        "Any syntactically equivalent query from any user within 24 hours will hit the cache"
+      ],
+      "correct": 1,
+      "explanation": "Result cache conditions: (1) Exact SQL text match, (2) Referenced table data unchanged, (3) Same role context, (4) Same relevant session parameters. Any user meeting these criteria in the same account can benefit."
+    },
+    {
+      "id": "q801",
+      "domain": "4.3 - Snowflake Caching",
+      "question": "Does serving a result cache hit require a virtual warehouse to be running?",
+      "options": [
+        "Yes — the warehouse must be running to retrieve cached results",
+        "No — result cache hits are served entirely by the cloud services layer, consuming zero warehouse compute credits",
+        "Yes — a small X-Small warehouse is used to serve cache retrievals",
+        "No, but the warehouse must be provisioned (not suspended) before the cache can be queried"
+      ],
+      "correct": 1,
+      "explanation": "Result cache is stored and served by cloud services. A cache hit consumes zero warehouse credits — the result is returned directly from cloud services, making it the highest-leverage optimization in Snowflake."
+    },
+    {
+      "id": "q802",
+      "domain": "4.3 - Snowflake Caching",
+      "question": "What session parameter disables the result cache for a session?",
+      "options": [
+        "RESULT_CACHE_ENABLED = FALSE",
+        "USE_CACHED_RESULT = FALSE — disabling result cache for the session while leaving the local disk cache fully active",
+        "DISABLE_RESULT_CACHE at the warehouse level",
+        "Result cache cannot be disabled for individual sessions"
+      ],
+      "correct": 1,
+      "explanation": "USE_CACHED_RESULT = FALSE (session parameter) forces re-execution of every query, useful for benchmarking or testing whether data has changed. The local SSD cache on warehouse nodes remains active."
+    },
+    {
+      "id": "q803",
+      "domain": "4.3 - Snowflake Caching",
+      "question": "What eviction policy does Snowflake use for the local disk (SSD) cache on warehouse nodes?",
+      "options": [
+        "Random eviction — any cached micro-partition may be evicted when space is needed",
+        "Least Recently Used (LRU) — least recently accessed micro-partitions are evicted first to make room for newly read partitions",
+        "First In First Out (FIFO) — the oldest loaded partitions are evicted first",
+        "Most Recently Used (MRU) — recently used partitions are evicted to preserve older cached data"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake uses LRU eviction for the local SSD cache. Partitions not accessed recently are evicted to make room for newly read partitions, keeping frequently accessed (hot) partitions resident longer."
+    },
+    {
+      "id": "q804",
+      "domain": "4.3 - Snowflake Caching",
+      "question": "What is 'cache thrashing' in the context of Snowflake warehouses?",
+      "options": [
+        "The result cache filling up and evicting entries faster than they can be repopulated",
+        "Frequent warehouse suspend and resume cycles that repeatedly clear the local SSD cache, resulting in consistently cold cache performance for workloads that depend on warm local cache",
+        "Multiple warehouses competing for access to the same micro-partitions simultaneously",
+        "A condition where too many small files are cached simultaneously, causing capacity issues"
+      ],
+      "correct": 1,
+      "explanation": "Cache thrashing occurs when a warehouse is suspended and resumed so frequently that the local cache never warms up. Workloads benefiting from local cache should have AUTO_SUSPEND configured to allow cache persistence between related query runs."
+    },
+    {
+      "id": "q805",
+      "domain": "4.4 - Data Transformation",
+      "question": "What is Snowpark and what programming languages does it support?",
+      "options": [
+        "A Snowflake-specific SQL dialect for advanced transformations",
+        "A developer framework for writing data pipelines and ML workloads in Python, Java, or Scala using DataFrame APIs, executed directly on Snowflake warehouse compute",
+        "A low-code drag-and-drop data transformation tool built into Snowsight",
+        "A Snowflake add-on module for running R analytics workloads"
+      ],
+      "correct": 1,
+      "explanation": "Snowpark lets developers write code-first transformations. DataFrames in Python, Java, or Scala are compiled into SQL and executed on Snowflake warehouses, keeping data in-platform without movement."
+    },
+    {
+      "id": "q806",
+      "domain": "4.4 - Data Transformation",
+      "question": "What is MERGE INTO used for in Snowflake data transformation pipelines?",
+      "options": [
+        "Permanently combining two tables into a single merged table",
+        "Performing an upsert (UPDATE existing rows + INSERT new rows) and optional DELETE in a single atomic statement based on a match condition — the core pattern for incremental data loads",
+        "Merging micro-partitions together to improve table clustering depth",
+        "Joining two CDC streams into a single combined change stream"
+      ],
+      "correct": 1,
+      "explanation": "MERGE INTO is the standard upsert command: WHEN MATCHED → UPDATE; WHEN NOT MATCHED → INSERT; WHEN MATCHED AND <condition> → DELETE. It is the primary pattern for incremental pipeline updates."
+    },
+    {
+      "id": "q807",
+      "domain": "4.4 - Data Transformation",
+      "question": "What is the FLATTEN function in Snowflake used for?",
+      "options": [
+        "Collapsing a nested CTE into a single table scan for performance",
+        "Laterally exploding a VARIANT/ARRAY/OBJECT column into individual rows — one row per array element or key-value pair — enabling relational processing of semi-structured data",
+        "Flattening a poorly clustered table to improve micro-partition pruning",
+        "Merging micro-partitions together to reduce the overall partition count"
+      ],
+      "correct": 1,
+      "explanation": "FLATTEN is a Snowflake table function that explodes ARRAY or OBJECT VARIANT values into tabular rows. Used with LATERAL to correlate the explosion with the current row's context."
+    },
+    {
+      "id": "q808",
+      "domain": "4.4 - Data Transformation",
+      "question": "What is the difference between a Snowflake stored procedure and a UDF?",
+      "options": [
+        "Stored procedures run faster than UDFs for all operation types",
+        "Stored procedures support procedural logic (loops, conditionals, error handling) and can execute DDL and DML; UDFs can only return scalar or table values and cannot run DDL",
+        "Stored procedures are compiled code; UDFs are always interpreted",
+        "Stored procedures run in parallel across warehouse nodes; UDFs are always single-threaded"
+      ],
+      "correct": 1,
+      "explanation": "Stored procedures support full procedural code (Python, JavaScript, Java, Scala) including control flow, error handling, and DDL/DML execution. UDFs are pure functions that return values but cannot create tables or run transactions."
+    },
+    {
+      "id": "q809",
+      "domain": "4.4 - Data Transformation",
+      "question": "What is a dynamic table's 'target lag' parameter?",
+      "options": [
+        "The replication lag to a secondary account for disaster recovery",
+        "The configurable maximum age of data in the dynamic table — how stale the output can be before Snowflake triggers an automatic incremental refresh",
+        "The time interval between scheduled Task executions in a DAG",
+        "The delay before a masking policy takes effect after being applied to a column"
+      ],
+      "correct": 1,
+      "explanation": "Target lag defines the maximum acceptable staleness. Snowflake monitors source tables and triggers incremental refresh when the dynamic table's data age approaches the configured lag (e.g., '1 minute', '1 hour')."
+    },
+    {
+      "id": "q810",
+      "domain": "4.4 - Data Transformation",
+      "question": "What is a DAG of Tasks in Snowflake?",
+      "options": [
+        "Multiple independent Tasks that all run in parallel at the same scheduled time",
+        "A hierarchical pipeline of Tasks where child Tasks depend on the completion of parent Tasks — defined using the AFTER <parent_task> clause in CREATE TASK — enabling complex multi-step workflows",
+        "A directed acyclic graph of SQL statements within a single stored procedure",
+        "A Snowflake Streams topology showing the flow of change data through the pipeline"
+      ],
+      "correct": 1,
+      "explanation": "Task DAGs: a root task orchestrates the pipeline; child tasks specify AFTER <parent>. The root task, when started, triggers the chain in dependency order — child tasks execute after their parents complete successfully."
+    },
+    {
+      "id": "q811",
+      "domain": "4.4 - Data Transformation",
+      "question": "What is CREATE TABLE AS SELECT (CTAS) commonly used for in transformation pipelines?",
+      "options": [
+        "Creating a view backed by a SELECT query for repeated use",
+        "Materializing the result of a SELECT query into a new permanent, transient, or temporary table — used to persist expensive intermediate transformations for reuse or downstream consumption",
+        "Creating an external table from a SELECT query that reads external files",
+        "Creating a clone of the SELECT query's source table with the same data"
+      ],
+      "correct": 1,
+      "explanation": "CTAS materializes a query result as a physical table. In transformation pipelines, CTAS persists expensive intermediate results, avoiding recomputation, and creates denormalized analytical tables from complex joins and aggregations."
+    },
+    {
+      "id": "q812",
+      "domain": "4.4 - Data Transformation",
+      "question": "What are Snowflake Notebooks?",
+      "options": [
+        "Jupyter notebooks hosted externally and connected to Snowflake via JDBC",
+        "Interactive cell-based development environments built into Snowsight supporting Python, SQL, and Markdown cells — running on Snowflake compute with direct access to Snowflake data",
+        "Read-only documentation tools embedded in Snowsight for sharing analysis",
+        "Scheduled notebooks that replace Tasks for running data pipeline transformations"
+      ],
+      "correct": 1,
+      "explanation": "Snowflake Notebooks are native interactive notebooks in Snowsight. They support Python, SQL, and Markdown cells with direct access to Snowflake data. Python cells run on Snowpark (warehouse or container services) without data leaving Snowflake."
+    },
+    {
+      "id": "q813",
+      "domain": "5.1 - Data Collaboration and Protection",
+      "question": "What is the maximum Time Travel retention period available on Enterprise edition?",
+      "options": [
+        "1 day",
+        "7 days",
+        "30 days",
+        "90 days"
+      ],
+      "correct": 3,
+      "explanation": "Enterprise edition supports up to 90 days of Time Travel (DATA_RETENTION_TIME_IN_DAYS = 90) for permanent tables. Standard edition supports up to 1 day."
+    },
+    {
+      "id": "q814",
+      "domain": "5.1 - Data Collaboration and Protection",
+      "question": "After the Time Travel retention period expires, where does the data go?",
+      "options": [
+        "It is permanently and immediately deleted from Snowflake storage",
+        "It moves into the 7-day Fail-Safe period before being permanently deleted",
+        "It is archived to Glacier-equivalent cold storage at reduced cost",
+        "It is converted to a read-only snapshot table for historical access"
+      ],
+      "correct": 1,
+      "explanation": "After Time Travel expires, data enters the 7-day Fail-Safe — a non-user-accessible emergency recovery window. After Fail-Safe expires, data is permanently deleted from Snowflake storage."
+    },
+    {
+      "id": "q815",
+      "domain": "5.1 - Data Collaboration and Protection",
+      "question": "Which SQL syntax queries a table as it existed at a specific past timestamp?",
+      "options": [
+        "SELECT * FROM t AT TIMESTAMP '2024-01-01 00:00:00'",
+        "SELECT * FROM t AT(TIMESTAMP => '2024-01-01 00:00:00'::TIMESTAMP_TZ)",
+        "SELECT * FROM t WHERE _LOAD_TIME = '2024-01-01'",
+        "SELECT * FROM t VERSION AS OF '2024-01-01'"
+      ],
+      "correct": 1,
+      "explanation": "Time Travel queries use the AT clause: SELECT * FROM my_table AT(TIMESTAMP => '2024-06-01 12:00:00'::TIMESTAMP_TZ). The BEFORE clause queries the state just before a specific event or statement executed."
+    },
+    {
+      "id": "q816",
+      "domain": "5.1 - Data Collaboration and Protection",
+      "question": "What does UNDROP do in Snowflake?",
+      "options": [
+        "Restores an accidentally deleted row to its original table",
+        "Recovers a dropped table, schema, or database within the Time Travel retention period — restoring both the object definition and all data",
+        "Undoes the last DML statement on a table using Time Travel",
+        "Recovers a file that was deleted from a Snowflake internal stage"
+      ],
+      "correct": 1,
+      "explanation": "UNDROP TABLE <n> (or UNDROP SCHEMA / DATABASE) restores a recently dropped object within its Time Travel window. Both metadata and data micro-partitions are restored as they were at the moment of the DROP."
+    },
+    {
+      "id": "q817",
+      "domain": "5.1 - Data Collaboration and Protection",
+      "question": "What is database replication in Snowflake and what does it protect against?",
+      "options": [
+        "Copying tables to a different schema within the same account for testing",
+        "Replicating databases to secondary Snowflake accounts in different regions or cloud providers, providing business continuity against region-level failures and enabling cross-region analytics",
+        "Replicating Snowflake data to an external S3 bucket for archival",
+        "Creating a Zero-Copy Clone of a database in a different Snowflake account"
+      ],
+      "correct": 1,
+      "explanation": "Database replication continuously replicates database objects to secondary accounts. On failover, a secondary can be promoted to primary, supporting disaster recovery across regions and cloud providers."
+    },
+    {
+      "id": "q818",
+      "domain": "5.1 - Data Collaboration and Protection",
+      "question": "What is Zero-Copy Clone's storage impact immediately after creation?",
+      "options": [
+        "Storage equal to the full source table is charged immediately",
+        "Zero additional storage at creation — the clone shares source micro-partitions via copy-on-write metadata; new storage is only charged as either the source or clone is modified",
+        "50% of source storage is charged as a metadata management fee",
+        "Storage is free for the first 7 days then billed at the full rate"
+      ],
+      "correct": 1,
+      "explanation": "Zero-Copy Clone uses copy-on-write. At creation, the clone shares all source micro-partitions at no additional cost. Storage costs arise only when either the source or clone is modified, creating divergent new micro-partitions."
+    },
+    {
+      "id": "q819",
+      "domain": "5.2 - Data Sharing Capabilities",
+      "question": "What is Snowflake Secure Data Sharing?",
+      "options": [
+        "A feature that copies data to consumer accounts for their own analysis",
+        "A mechanism allowing providers to share live, read-only access to data with consumer Snowflake accounts — without copying data — using metadata pointers to the provider's existing storage",
+        "An encrypted data transfer service between two Snowflake accounts",
+        "A marketplace for purchasing curated datasets from third-party providers"
+      ],
+      "correct": 1,
+      "explanation": "Secure Data Sharing creates metadata share objects pointing consumers to the provider's underlying micro-partitions. No data movement occurs; consumers query the provider's live data through a virtual read-only database in their own account."
+    },
+    {
+      "id": "q820",
+      "domain": "5.2 - Data Sharing Capabilities",
+      "question": "What types of objects can be included in a Snowflake share?",
+      "options": [
+        "Tables only",
+        "Tables, external tables, secure views, secure materialized views, and secure UDFs",
+        "Any object including warehouses and stages",
+        "Only schemas and entire databases"
+      ],
+      "correct": 1,
+      "explanation": "Shares can include tables, external tables, secure views, secure materialized views, dynamic tables, and secure UDFs. Non-secure views cannot be shared as they expose provider SQL logic. Warehouses and stages cannot be shared."
+    },
+    {
+      "id": "q821",
+      "domain": "5.2 - Data Sharing Capabilities",
+      "question": "Does data sharing consume storage in the consumer's account?",
+      "options": [
+        "Yes — data is physically copied to the consumer's storage at the time the share is accessed",
+        "No — consumers query through metadata pointers; no data is copied and no storage is charged to the consumer for the shared data",
+        "Yes — at a discounted rate of 50% of normal storage pricing",
+        "No, unless the consumer runs CREATE TABLE AS SELECT from the shared data"
+      ],
+      "correct": 1,
+      "explanation": "No data is copied during sharing. Consumers access a virtual read-only database backed by the provider's micro-partitions. Only warehouse compute credits are charged to the consumer for running queries against the shared data."
+    },
+    {
+      "id": "q822",
+      "domain": "5.2 - Data Sharing Capabilities",
+      "question": "What is the latency of data changes in a Snowflake share?",
+      "options": [
+        "Data in the share is refreshed on a daily batch schedule",
+        "Near-real-time — consumers see data changes typically within seconds of the provider committing a transaction, since the share uses live metadata pointers",
+        "Data is synchronized hourly between provider and consumer accounts",
+        "45-minute latency, matching the ACCOUNT_USAGE view latency"
+      ],
+      "correct": 1,
+      "explanation": "Secure Data Sharing uses metadata pointers to provider live storage. Data changes committed by the provider are visible to consumers with near-zero latency — typically within seconds."
+    },
+    {
+      "id": "q823",
+      "domain": "5.2 - Data Sharing Capabilities",
+      "question": "Why must views included in a Snowflake share be defined as secure views?",
+      "options": [
+        "For performance reasons — secure views are optimized for cross-account access",
+        "Regular views expose their SQL definition to consumers, potentially revealing provider business logic. Secure views hide the definition, showing only query results — protecting provider intellectual property",
+        "Secure views are required by Snowflake's compliance certifications for all sharing",
+        "Regular views cannot be used across account boundaries for technical reasons"
+      ],
+      "correct": 1,
+      "explanation": "A SECURE VIEW hides its SQL from consumers — SHOW CREATE VIEW returns only column names, not the SELECT logic. This protects sensitive business rules and prevents consumers from inferring data not intended for sharing."
+    },
+    {
+      "id": "q824",
+      "domain": "5.2 - Data Sharing Capabilities",
+      "question": "What is a Snowflake data clean room?",
+      "options": [
+        "A compliance-certified environment where all data is encrypted with customer-managed keys",
+        "A privacy-preserving collaboration environment where two parties can run joint SQL analyses on their combined data without either party seeing the other's raw underlying records — built on Secure Data Sharing and secure views",
+        "A dedicated Snowflake account environment for GDPR compliance workloads",
+        "A staging area where data is cleansed and validated before loading into production"
+      ],
+      "correct": 1,
+      "explanation": "A data clean room uses Secure Data Sharing and carefully designed secure views with aggregation constraints to allow two parties (e.g., advertiser and publisher) to compute joint metrics without exposing individual-level records."
+    },
+    {
+      "id": "q825",
+      "domain": "5.3 - Snowflake Marketplace",
+      "question": "What technology powers the Snowflake Marketplace?",
+      "options": [
+        "A Snowflake-managed data lake with nightly refresh",
+        "Snowflake Secure Data Sharing — each listing is backed by a share giving consumers instant, live, zero-copy access to provider data",
+        "A proprietary Snowflake CDN for global data distribution",
+        "AWS Data Exchange with Snowflake integration"
+      ],
+      "correct": 1,
+      "explanation": "The Marketplace is Secure Data Sharing at scale. Each listing is backed by a share. When consumers get a listing, they receive a share giving instant live access to the provider's data without any data movement or copying."
+    },
+    {
+      "id": "q826",
+      "domain": "5.3 - Snowflake Marketplace",
+      "question": "What are the two main pricing models for Snowflake Marketplace listings?",
+      "options": [
+        "Pay-per-query and annual subscription only",
+        "Free (provider shares at no charge) and commercial (provider charges for data access, billed through Snowflake's commerce platform)",
+        "Free and premium (premium requires Business Critical edition)",
+        "Credits-based and dollar-based billing models"
+      ],
+      "correct": 1,
+      "explanation": "Marketplace listings are either free (public data, marketing datasets) or commercially priced. Commercial listings are billed through Snowflake's commerce platform — consumers pay providers via the Marketplace."
+    },
+    {
+      "id": "q827",
+      "domain": "5.3 - Snowflake Marketplace",
+      "question": "What is a Native App on the Snowflake Marketplace?",
+      "options": [
+        "A mobile application for managing a Snowflake account from a smartphone",
+        "A data application built with the Snowflake Native App Framework (SQL, Snowpark, Streamlit) that runs entirely within the consumer's Snowflake account — combining data and business application logic",
+        "A Snowflake-hosted web application served to users outside Snowflake",
+        "A BI dashboard product published to the Marketplace for purchase"
+      ],
+      "correct": 1,
+      "explanation": "Native Apps package application logic (stored procedures, UDFs, Streamlit UI) and optionally data, distributed via the Marketplace. They run in the consumer's Snowflake account using consumer compute, keeping everything in-platform."
     }
   ]
 }
