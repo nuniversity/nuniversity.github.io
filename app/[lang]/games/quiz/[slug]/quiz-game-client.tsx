@@ -19,60 +19,9 @@ interface QuizGameClientProps {
   dict: any
 }
 
-// ── Exam domain/sub-domain proportions (100-question mock exam) ───────────────
-// Mirrors the official COF-C03 blueprint weightings
-const MOCK_EXAM_ALLOCATIONS: Record<string, number> = {
-  '1.1 - Snowflake Architecture':            8,
-  '1.2 - Snowflake Interfaces and Tools':    3,
-  '1.3 - Snowflake Object Hierarchy and Types': 6,
-  '1.4 - Virtual Warehouses':                7,
-  '1.5 - Storage Concepts':                  5,
-  '1.6 - AI/ML and Application Development': 2,
-  '2.1 - Security Model':                    9,
-  '2.2 - Data Governance':                   7,
-  '2.3 - Monitoring and Cost Management':    4,
-  '3.1 - Data Loading and Unloading':        8,
-  '3.2 - Automated Data Ingestion':          7,
-  '3.3 - Connectors and Integrations':       3,
-  '4.1 - Query Performance':                 5,
-  '4.2 - Query Optimization':                7,
-  '4.3 - Snowflake Caching':                 4,
-  '4.4 - Data Transformation':               5,
-  '5.1 - Data Collaboration and Protection': 4,
-  '5.2 - Data Sharing Capabilities':         4,
-  '5.3 - Snowflake Marketplace':             2,
-}
-
-const MOCK_EXAM_DURATION_SECONDS = 115 * 60 // 115 minutes
-
-// Domain display grouping
-const DOMAIN_GROUPS: Record<string, { label: string; color: string; subdomains: string[] }> = {
-  '1.0': {
-    label: '1.0 Architecture & Features',
-    color: 'blue',
-    subdomains: ['1.1','1.2','1.3','1.4','1.5','1.6'],
-  },
-  '2.0': {
-    label: '2.0 Account Mgmt & Governance',
-    color: 'purple',
-    subdomains: ['2.1','2.2','2.3'],
-  },
-  '3.0': {
-    label: '3.0 Data Loading & Connectivity',
-    color: 'teal',
-    subdomains: ['3.1','3.2','3.3'],
-  },
-  '4.0': {
-    label: '4.0 Performance & Transformation',
-    color: 'orange',
-    subdomains: ['4.1','4.2','4.3','4.4'],
-  },
-  '5.0': {
-    label: '5.0 Data Collaboration',
-    color: 'green',
-    subdomains: ['5.1','5.2','5.3'],
-  },
-}
+// ── Mock exam config is loaded from game.mockExam (content file) ─────────────
+// See content/games/quiz/{slug}.json → "mockExam" for allocations, duration,
+// passingScore, and domainGroups. Nothing is hardcoded here.
 
 type GameMode = 'config' | 'playing' | 'review' | 'complete' | 'mock-config' | 'mock-exam' | 'mock-complete'
 
@@ -111,7 +60,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
   const [mockCurrentIndex, setMockCurrentIndex]     = useState(0)
   const [mockAnswers, setMockAnswers]               = useState<MockAnswer[]>([])
   const [mockFlagged, setMockFlagged]               = useState<Set<number>>(new Set())
-  const [mockTimeLeft, setMockTimeLeft]             = useState(MOCK_EXAM_DURATION_SECONDS)
+  const [mockTimeLeft, setMockTimeLeft]             = useState(game.mockExam?.durationSeconds ?? 6900)
   const [mockStartTime, setMockStartTime]           = useState<number | null>(null)
   const [mockSubmitted, setMockSubmitted]           = useState(false)
   const [showSubmitConfirm, setShowSubmitConfirm]   = useState(false)
@@ -159,7 +108,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
     mockQuestions.length === 0 ? 0 : Math.round((mockScore / mockQuestions.length) * 100),
     [mockScore, mockQuestions])
 
-  const mockPassed = mockAccuracy >= 75
+  const mockPassed = mockAccuracy >= (game.mockExam?.passingScore ?? 75)
 
   const mockAnsweredCount = useMemo(() =>
     mockAnswers.filter(a => a.selectedOption !== null).length,
@@ -178,8 +127,9 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
   }, [mockQuestions, mockAnswers])
 
   const mockMajorDomainResults = useMemo(() => {
+    const domainGroups = game.mockExam?.domainGroups ?? {}
     const map: Record<string, { correct: number; total: number; label: string; color: string }> = {}
-    Object.entries(DOMAIN_GROUPS).forEach(([key, grp]) => {
+    Object.entries(domainGroups).forEach(([key, grp]) => {
       map[key] = { correct: 0, total: 0, label: grp.label, color: grp.color }
     })
     mockQuestions.forEach((q, i) => {
@@ -194,7 +144,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
       }
     })
     return map
-  }, [mockQuestions, mockAnswers])
+  }, [mockQuestions, mockAnswers, game.mockExam])
 
   // ── Initialise domains ───────────────────────────────────────────────────────
   useEffect(() => { setSelectedDomains(allDomains) }, [allDomains])
@@ -276,6 +226,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
 
   // ── Build proportional mock exam question set ─────────────────────────────────
   function buildMockExamQuestions(): QuizQuestion[] {
+    const allocations = game.mockExam?.allocations ?? {}
     const bySubdomain: Record<string, QuizQuestion[]> = {}
     for (const q of game.questions) {
       if (!bySubdomain[q.domain]) bySubdomain[q.domain] = []
@@ -285,7 +236,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
     const result: QuizQuestion[] = []
     const warnings: string[] = []
 
-    for (const [subdomain, target] of Object.entries(MOCK_EXAM_ALLOCATIONS)) {
+    for (const [subdomain, target] of Object.entries(allocations)) {
       const pool = bySubdomain[subdomain] ?? []
       const shuffled = [...pool].sort(() => Math.random() - 0.5)
       const picked = shuffled.slice(0, target)
@@ -357,7 +308,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
     setMockCurrentIndex(0)
     setMockAnswers(questions.map(() => ({ selectedOption: null })))
     setMockFlagged(new Set())
-    setMockTimeLeft(MOCK_EXAM_DURATION_SECONDS)
+    setMockTimeLeft(game.mockExam?.durationSeconds ?? 6900)
     setMockSubmitted(false)
     setMockTimedOut(false)
     setShowSubmitConfirm(false)
@@ -519,75 +470,82 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
               </div>
             </div>
 
-            {/* Mock Exam Card */}
-            <div className="bg-card border-2 border-amber-200 dark:border-amber-800/60 rounded-2xl p-5 relative overflow-hidden">
-              {/* Background accent */}
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-50/60 to-orange-50/40 dark:from-amber-900/10 dark:to-orange-900/10 pointer-events-none" />
-              <div className="relative">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center">
-                    <ClipboardList className="w-6 h-6 text-amber-600 dark:text-amber-400" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-bold text-lg">Mock Exam</h3>
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 uppercase tracking-wider">
-                        Exam Simulation
-                      </span>
-                    </div>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Simulates the real COF-C03 exam: 100 questions, 115-minute countdown, proportional domain sampling. No feedback until you submit — just like the real thing.
-                    </p>
+            {/* Mock Exam Card — only rendered when the content file defines mockExam */}
+            {game.mockExam && (() => {
+              const { durationSeconds, passingScore, allocations, domainGroups } = game.mockExam!
+              const totalQuestions = Object.values(allocations).reduce((s, v) => s + v, 0)
+              const durationMinutes = Math.round(durationSeconds / 60)
+              const domainCount = Object.keys(domainGroups).length
+              return (
+                <div className="bg-card border-2 border-amber-200 dark:border-amber-800/60 rounded-2xl p-5 relative overflow-hidden">
+                  {/* Background accent */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-50/60 to-orange-50/40 dark:from-amber-900/10 dark:to-orange-900/10 pointer-events-none" />
+                  <div className="relative">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center">
+                        <ClipboardList className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="font-bold text-lg">Mock Exam</h3>
+                          <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 uppercase tracking-wider">
+                            Exam Simulation
+                          </span>
+                        </div>
+                        <p className="text-sm text-muted-foreground mb-4">
+                          Simulates the real {game.certification} exam: {totalQuestions} questions, {durationMinutes}-minute countdown, proportional domain sampling. No feedback until you submit — just like the real thing.
+                        </p>
 
-                    {/* Exam specs grid */}
-                    <div className="grid grid-cols-2 gap-2 mb-4">
-                      {[
-                        { icon: ClipboardList, label: '100 questions', sub: 'Fixed exam length' },
-                        { icon: Clock,         label: '115 minutes',   sub: 'Timed countdown' },
-                        { icon: BarChart3,     label: '5 domains',     sub: 'Proportional sampling' },
-                        { icon: Trophy,        label: '75% to pass',   sub: 'Official threshold' },
-                      ].map(({ icon: Icon, label, sub }) => (
-                        <div key={label} className="flex items-center gap-2.5 p-2.5 rounded-lg bg-white/60 dark:bg-white/5 border border-amber-100 dark:border-amber-800/40">
-                          <Icon className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
-                          <div>
-                            <div className="text-xs font-bold">{label}</div>
-                            <div className="text-xs text-muted-foreground">{sub}</div>
+                        {/* Exam specs grid */}
+                        <div className="grid grid-cols-2 gap-2 mb-4">
+                          {[
+                            { icon: ClipboardList, label: `${totalQuestions} questions`, sub: 'Fixed exam length' },
+                            { icon: Clock,         label: `${durationMinutes} minutes`,  sub: 'Timed countdown' },
+                            { icon: BarChart3,     label: `${domainCount} domains`,      sub: 'Proportional sampling' },
+                            { icon: Trophy,        label: `${passingScore}% to pass`,    sub: 'Official threshold' },
+                          ].map(({ icon: Icon, label, sub }) => (
+                            <div key={label} className="flex items-center gap-2.5 p-2.5 rounded-lg bg-white/60 dark:bg-white/5 border border-amber-100 dark:border-amber-800/40">
+                              <Icon className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
+                              <div>
+                                <div className="text-xs font-bold">{label}</div>
+                                <div className="text-xs text-muted-foreground">{sub}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Domain allocation preview */}
+                        <div className="mb-4 p-3 rounded-xl bg-white/60 dark:bg-white/5 border border-amber-100 dark:border-amber-800/40">
+                          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Exam Blueprint</p>
+                          <div className="space-y-1.5">
+                            {Object.entries(domainGroups).map(([key, grp]) => {
+                              const total = Object.entries(allocations)
+                                .filter(([k]) => k.startsWith(key[0]))
+                                .reduce((s, [, v]) => s + v, 0)
+                              return (
+                                <div key={key} className="flex items-center gap-2">
+                                  <div className={`w-2 h-2 rounded-full flex-shrink-0 ${getDomainAccentClass(grp.color)}`} />
+                                  <span className="text-xs text-foreground/70 flex-1 truncate">{grp.label}</span>
+                                  <span className="text-xs font-bold flex-shrink-0 w-16 text-right">{total} Qs ({total}%)</span>
+                                </div>
+                              )
+                            })}
                           </div>
                         </div>
-                      ))}
-                    </div>
 
-                    {/* Domain allocation preview */}
-                    <div className="mb-4 p-3 rounded-xl bg-white/60 dark:bg-white/5 border border-amber-100 dark:border-amber-800/40">
-                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Exam Blueprint</p>
-                      <div className="space-y-1.5">
-                        {Object.entries(DOMAIN_GROUPS).map(([key, grp]) => {
-                          const total = Object.entries(MOCK_EXAM_ALLOCATIONS)
-                            .filter(([k]) => k.startsWith(key[0]))
-                            .reduce((s, [,v]) => s + v, 0)
-                          const pct = total
-                          return (
-                            <div key={key} className="flex items-center gap-2">
-                              <div className={`w-2 h-2 rounded-full flex-shrink-0 ${getDomainAccentClass(grp.color)}`} />
-                              <span className="text-xs text-foreground/70 flex-1 truncate">{grp.label}</span>
-                              <span className="text-xs font-bold flex-shrink-0 w-16 text-right">{total} Qs ({pct}%)</span>
-                            </div>
-                          )
-                        })}
+                        <button
+                          onClick={() => setGameMode('mock-config')}
+                          className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                        >
+                          <ClipboardList className="w-4 h-4" />
+                          Start Mock Exam
+                        </button>
                       </div>
                     </div>
-
-                    <button
-                      onClick={() => setGameMode('mock-config')}
-                      className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-                    >
-                      <ClipboardList className="w-4 h-4" />
-                      Start Mock Exam
-                    </button>
                   </div>
                 </div>
-              </div>
-            </div>
+              )
+            })()}
           </div>
         </div>
       </div>
@@ -598,12 +556,16 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
   // MOCK EXAM CONFIG SCREEN
   // ══════════════════════════════════════════════════════════════════════════════
   if (gameMode === 'mock-config') {
+    const { durationSeconds, passingScore, allocations, domainGroups } = game.mockExam!
+    const totalQuestions = Object.values(allocations).reduce((s, v) => s + v, 0)
+    const durationMinutes = Math.round(durationSeconds / 60)
+
     // Calculate actual available questions per sub-domain
     const bySubdomain: Record<string, number> = {}
     for (const q of game.questions) {
       bySubdomain[q.domain] = (bySubdomain[q.domain] ?? 0) + 1
     }
-    const gaps = Object.entries(MOCK_EXAM_ALLOCATIONS).filter(([sd, need]) => (bySubdomain[sd] ?? 0) < need)
+    const gaps = Object.entries(allocations).filter(([sd, need]) => (bySubdomain[sd] ?? 0) < need)
 
     return (
       <div className="container-custom py-12">
@@ -621,7 +583,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
               <ClipboardList className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-3xl font-bold mb-2">Mock Exam</h1>
-            <p className="text-muted-foreground">COF-C03 Exam Simulation</p>
+            <p className="text-muted-foreground">{game.certification} Exam Simulation</p>
           </div>
 
           {/* Rules */}
@@ -629,12 +591,12 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
             <h3 className="font-bold text-lg">Exam Rules</h3>
             <div className="space-y-3">
               {[
-                { icon: ClipboardList, text: '100 questions drawn proportionally from all 5 exam domains' },
-                { icon: Clock,         text: '115 minutes to complete — the timer counts down from the moment you start' },
+                { icon: ClipboardList, text: `${totalQuestions} questions drawn proportionally from all ${Object.keys(domainGroups).length} exam domains` },
+                { icon: Clock,         text: `${durationMinutes} minutes to complete — the timer counts down from the moment you start` },
                 { icon: AlertTriangle, text: 'No answer feedback during the exam — results are shown only after submission' },
                 { icon: Flag,          text: 'You can flag questions for review and navigate freely between all questions' },
                 { icon: RotateCcw,     text: 'You can change any answer before submitting' },
-                { icon: Trophy,        text: '75% or higher is a passing score, matching the official exam threshold' },
+                { icon: Trophy,        text: `${passingScore}% or higher is a passing score, matching the official exam threshold` },
               ].map(({ icon: Icon, text }, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <Icon className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
@@ -646,11 +608,11 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
 
           {/* Domain allocation table */}
           <div className="bg-card border rounded-2xl p-6 mb-6">
-            <h3 className="font-bold mb-4">Domain Allocation — 100 Questions</h3>
+            <h3 className="font-bold mb-4">Domain Allocation — {totalQuestions} Questions</h3>
             <div className="space-y-4">
-              {Object.entries(DOMAIN_GROUPS).map(([domKey, grp]) => {
-                const subs = Object.entries(MOCK_EXAM_ALLOCATIONS).filter(([k]) => k.startsWith(domKey[0]))
-                const domTotal = subs.reduce((s, [,v]) => s + v, 0)
+              {Object.entries(domainGroups).map(([domKey, grp]) => {
+                const subs = Object.entries(allocations).filter(([k]) => k.startsWith(domKey[0]))
+                const domTotal = subs.reduce((s, [, v]) => s + v, 0)
                 return (
                   <div key={domKey}>
                     <div className="flex items-center justify-between mb-1.5">
@@ -682,7 +644,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
             </div>
             {gaps.length > 0 && (
               <div className="mt-4 p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 text-xs text-amber-700 dark:text-amber-300">
-                <strong>Note:</strong> Some sub-domains have fewer questions than the ideal allocation. Available questions will be used and the exam will have slightly fewer than 100 questions for those sub-domains.
+                <strong>Note:</strong> Some sub-domains have fewer questions than the ideal allocation. Available questions will be used and the exam will have slightly fewer than {totalQuestions} questions for those sub-domains.
               </div>
             )}
           </div>
@@ -692,7 +654,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
             className="w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
           >
             <Clock className="w-5 h-5" />
-            Begin Exam — 115:00
+            Begin Exam — {formatCountdown(durationSeconds)}
           </button>
         </div>
       </div>
@@ -707,7 +669,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
     const ma        = mockAnswers[mockCurrentIndex]
     const isFlagged = mockFlagged.has(mockCurrentIndex)
     const unanswered = mockAnswers.filter(a => a.selectedOption === null).length
-    const timerPct  = (mockTimeLeft / MOCK_EXAM_DURATION_SECONDS) * 100
+    const timerPct  = (mockTimeLeft / (game.mockExam?.durationSeconds ?? 6900)) * 100
 
     return (
       <div className="container-custom py-6">
@@ -936,7 +898,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
   // ══════════════════════════════════════════════════════════════════════════════
   if (gameMode === 'mock-complete') {
     const rating = getScoreRating(mockAccuracy)
-    const timeUsed = MOCK_EXAM_DURATION_SECONDS - mockTimeLeft
+    const timeUsed = (game.mockExam?.durationSeconds ?? 6900) - mockTimeLeft
     const reviewList = mockReviewMode === 'wrong'
       ? mockQuestions.map((q, i) => ({ q, i })).filter(({ q, i }) => mockAnswers[i]?.selectedOption !== q.correct)
       : mockReviewMode === 'flagged'
@@ -976,7 +938,7 @@ export function QuizGameClient({ lang, game, dict }: QuizGameClientProps) {
             }`}>
               {mockPassed ? '✓ PASS' : '✗ FAIL'}
             </div>
-            <p className="text-muted-foreground mt-2 text-sm">Passing score: 75% · Official COF-C03 threshold</p>
+            <p className="text-muted-foreground mt-2 text-sm">Passing score: {game.mockExam?.passingScore ?? 75}% · Official {game.certification} threshold</p>
           </motion.div>
 
           {/* Score card */}

@@ -32,6 +32,19 @@ export interface QuizQuestion {
   explanation: string
 }
 
+export interface MockExamDomainGroup {
+  label: string
+  color: string
+  subdomains: string[]
+}
+
+export interface MockExamConfig {
+  durationSeconds: number
+  passingScore: number
+  allocations: Record<string, number>
+  domainGroups: Record<string, MockExamDomainGroup>
+}
+
 export interface QuizGame {
   id: string
   title: string
@@ -40,6 +53,7 @@ export interface QuizGame {
   category: string
   topic: string
   certification: string
+  mockExam?: MockExamConfig
   questions: QuizQuestion[]
 }
 
