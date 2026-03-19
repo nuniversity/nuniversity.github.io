@@ -10846,6 +10846,71 @@
       ],
       "correct": 1,
       "explanation": "Native Apps package application logic (stored procedures, UDFs, Streamlit UI) and optionally data, distributed via the Marketplace. They run in the consumer's Snowflake account using consumer compute, keeping everything in-platform."
+    },
+    {
+      "id": "q828",
+      "domain": "2.2 - Data Governance",
+      "question": "A compliance analyst wants to automatically detect and label sensitive customer data across databases. Which feature directly enables this?",
+      "options": [
+        "Data classification",
+        "Object tagging",
+        "Dynamic Data Masking",
+        "Row access policy"
+      ],
+      "correct": 0,
+      "explanation": "Data classification automatically detects and labels sensitive data across databases using built-in classification capabilities."
+    },
+    {
+      "id": "q829",
+      "domain": "2.3 - Monitoring and Cost Management",
+      "question": "An Administrator is reviewing credit consumption and notices that several resource monitors have been created recently. How do resource monitors affect credit consumption?",
+      "options": [
+        "Resource monitors consume credits while tracking warehouse usage.",
+        "A fixed monthly charge applies per account when resource monitors are enabled.",
+        "Resource monitors track compute usage associated with warehouses while operating at no additional cost.",
+        "Credits are charged for each alert or suspension action triggered by a resource monitor."
+      ],
+      "correct": 2,
+      "explanation": "Resource monitors do not consume credits. They only track compute usage and can trigger alerts or suspend warehouses based on thresholds."
+    },
+    {
+      "id": "q830",
+      "domain": "2.1 - Security Model",
+      "question": "An Administrator is looking to evaluate their account against security recommendations. Which feature should they use?",
+      "options": [
+        "Trust Center",
+        "The ACCOUNT_USAGE schema",
+        "Access History",
+        "Network Policies"
+      ],
+      "correct": 0,
+      "explanation": "Trust Center provides a centralized view to evaluate security posture and recommendations for a Snowflake account."
+    },
+    {
+      "id": "q831",
+      "domain": "2.1 - Security Model",
+      "question": "Which access control framework should be used if the desired outcome is to allow the role that owns an object to grant access to that object?",
+      "options": [
+        "Discretionary Access Control (DAC)",
+        "Role-Based Access Control (RBAC)",
+        "User-Based Access Control (UBAC)",
+        "Role hierarchy and privilege inheritance"
+      ],
+      "correct": 0,
+      "explanation": "DAC allows object owners to grant privileges on objects they own to other roles."
+    },
+    {
+      "id": "q832",
+      "domain": "1.6 - AI/ML and Application Development",
+      "question": "A team needs to securely host, manage, and execute custom, non-SQL code written in Python and Java for data processing and transformation workflows. Which Snowflake feature will meet these requirements while ensuring performance meets demands?",
+      "options": [
+        "External function",
+        "Snowpark",
+        "Stored procedure",
+        "Cortex Complete"
+      ],
+      "correct": 1,
+      "explanation": "Snowpark enables developers to write and execute code in languages like Python and Java directly within Snowflake, ensuring performance and scalability."
     }
   ]
 }
