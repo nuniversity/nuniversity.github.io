@@ -502,8 +502,3 @@ GRANT SELECT ON ALL TABLES IN CATALOG shared_platform
 | **Data Sharing** | Data Exchange, Redshift Sharing | Data Sharing, Marketplace | Delta Sharing |
 | **CI/CD Integration** | CodePipeline, GitHub Actions | SchemaChange, dbt Cloud | Databricks Asset Bundles |
 | **Monitoring** | CloudWatch | ACCOUNT_USAGE | Databricks Observability |
-
----
-
-*This concludes the Multi-Cloud Data Platform Comparative Documentation.*
-*Return to: [00 — Index](./00_INDEX.md)*

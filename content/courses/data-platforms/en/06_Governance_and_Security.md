@@ -468,7 +468,3 @@ ORDER BY start_time DESC;
 | **File governance** | ⚠️ S3 policies (coarse) | ❌ Only for tables | ✅ Volumes (files governed) |
 | **Multi-cloud governance** | ❌ AWS only | ✅ Multi-cloud account | ✅ Multi-cloud (separate metastores) |
 | **Data quality rules** | ✅ Glue Data Quality | ✅ Constraints + alerts | ✅ DLT expectations |
-
----
-
-*Next: [07 — AI & Machine Learning Capabilities](./07_AI_and_ML.md)*

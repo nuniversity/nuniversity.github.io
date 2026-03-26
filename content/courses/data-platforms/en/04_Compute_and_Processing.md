@@ -449,7 +449,3 @@ response = emr_serverless.start_job_run(
 | **Full table scan (1TB)** | 60-120s | 45-90s | 50-100s |
 | **Python ML feature transform** | ❌ Not applicable | 30-90s (Snowpark) | ⚡ 10-30s (native Spark) |
 | **Streaming aggregation** | ❌ Not native | ❌ Not native | ⚡ Native (Structured Streaming) |
-
----
-
-*Next: [05 — Data Ingestion & Integration](./05_Data_Ingestion.md)*

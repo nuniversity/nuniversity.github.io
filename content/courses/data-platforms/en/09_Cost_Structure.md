@@ -371,7 +371,3 @@ Databricks:
   - Databricks Cluster Policies (enforce cost guardrails)
   - Third-party: Finout, Monte Carlo, Atlan
 ```
-
----
-
-*Next: [10 — Use Case Decision Framework](./10_Decision_Framework.md)*

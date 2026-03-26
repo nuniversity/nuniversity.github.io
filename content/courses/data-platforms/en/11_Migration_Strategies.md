@@ -423,7 +423,3 @@ def validate_sample_rows(source_df, target_df, pk_col, sample_n=1000):
 | ETL dependency chain breaks | High | High | Dependency mapping, staged pipeline migration |
 | Stakeholder BI report breakage | Medium | High | Parallel running, UAT with report owners |
 | Cost overrun during dual-run | High | Medium | Time-box dual-running period (max 90 days) |
-
----
-
-*Next: [12 — Reference Architecture Patterns](./12_Reference_Architectures.md)*

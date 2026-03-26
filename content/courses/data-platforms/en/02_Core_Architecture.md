@@ -338,7 +338,3 @@ Databricks has a unique security model worth understanding deeply:
 ```
 
 This separation means customer data **never leaves the customer's cloud account**, addressing a common enterprise security concern. Snowflake's model is different — the storage layer is managed by Snowflake on their cloud tenant (though customers can use Snowflake on their own cloud account with **Snowflake on AWS PrivateLink** or **Bring Your Own Storage** patterns).
-
----
-
-*Next: [03 — Storage & Data Lake](./03_Storage_and_Data_Lake.md)*

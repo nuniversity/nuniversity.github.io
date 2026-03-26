@@ -153,7 +153,3 @@ Common Pattern: Databricks (transformation/ML) → Snowflake (serving/BI) → AW
 ```
 
 Understanding each platform's *natural role* in a hybrid architecture is as important as understanding each platform in isolation.
-
----
-
-*Next: [02 — Core Architecture Deep Dive](./02_Core_Architecture.md)*

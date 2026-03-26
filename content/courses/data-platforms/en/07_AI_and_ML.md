@@ -483,7 +483,3 @@ print(f"Generated notebook: {summary.best_trial.notebook_url}")
 | **Operational Complexity** | ⚠️ High (many services) | ⚡ Very Low (SQL-native) | Medium |
 | **For SQL teams** | ❌ Not designed | ⚡ Best | ⚠️ Requires code |
 | **For ML engineers** | ✅ Best infra options | ⚠️ Limited | ⚡ Best end-to-end |
-
----
-
-*Next: [08 — Data Sharing & Collaboration](./08_Data_Sharing.md)*

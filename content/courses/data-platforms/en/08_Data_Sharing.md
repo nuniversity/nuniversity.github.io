@@ -392,7 +392,3 @@ display(orders.groupBy("order_date").agg(F.sum("revenue").alias("daily_revenue")
 | **Governance on shared data** | ⚠️ Limited | ✅ Row/column-level filters | ✅ Partition-level filters |
 | **Monetisation support** | ✅ Data Exchange pricing | ✅ Marketplace listings | ✅ Marketplace 🔬 |
 | **Open protocol** | ✅ S3 open format | ❌ Proprietary | ✅ Open Delta Sharing spec |
-
----
-
-*Next: [09 — Cost Structure & Optimization](./09_Cost_Structure.md)*

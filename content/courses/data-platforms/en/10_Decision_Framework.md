@@ -274,7 +274,3 @@ Use this to assign each platform its natural role in a multi-platform architectu
 ```
 
 This pattern — **Kinesis/MSK → S3 → Databricks → Snowflake** — is arguably the most common "best-of-breed" architecture in large enterprises today, combining the streaming depth of AWS, the processing power of Databricks, and the serving elegance of Snowflake.
-
----
-
-*Next: [11 — Migration Strategies](./11_Migration_Strategies.md)*

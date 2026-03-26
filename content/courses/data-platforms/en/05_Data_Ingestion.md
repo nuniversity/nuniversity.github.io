@@ -656,7 +656,3 @@ def apply_cdc_to_delta(microBatch_df, batchId):
 | **Schema inference** | ⚠️ Glue Crawler (slow, imperfect) | ⚠️ Manual or variant | ✅ Auto Loader (cloudFiles.inferColumnTypes) |
 | **Exactly-once delivery** | ⚠️ Complex to achieve | ✅ Via deduplication keys | ✅ Via checkpoint + idempotent writes |
 | **No-code ingestion** | ✅ AppFlow, Glue Visual ETL | ✅ Snowpipe REST API | ⚠️ Limited (DLT helps) |
-
----
-
-*Next: [06 — Governance, Security & Compliance](./06_Governance_and_Security.md)*

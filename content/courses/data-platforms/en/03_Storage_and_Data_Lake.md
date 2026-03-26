@@ -427,7 +427,3 @@ def gold_daily_revenue():
 | **Open Format** | ✅ Parquet/ORC/Iceberg | ❌ Proprietary (internal) | ✅ Parquet + Delta spec |
 | **Storage Cost Model** | Pay per GB + requests | Pay per TB compressed | Pay per GB (your own S3 account) |
 | **Multi-Cloud Storage** | ❌ AWS only | ✅ S3/GCS/ADLS | ✅ S3/GCS/ADLS |
-
----
-
-*Next: [04 — Compute & Processing](./04_Compute_and_Processing.md)*
