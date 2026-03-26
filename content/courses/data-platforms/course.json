@@ -1,0 +1,25 @@
+{
+  "area": "Data Engineering",
+  "author": "NUniversity",
+  "difficulty": "advanced",
+  "duration": "8 weeks",
+  "icon": "cloud-architecture",
+  "en": {
+    "title": "Multi-Cloud Data Platform Architecture",
+    "description": "Comprehensive comparison and reference architectures for enterprise data platforms across AWS, Snowflake, and Databricks. Master ingestion, AI/ML, governance, cost optimization, and migration strategies.",
+    "difficulty": "Advanced",
+    "duration": "8 Weeks"
+  },
+  "pt": {
+    "title": "Arquitetura de Plataformas de Dados Multi-Cloud",
+    "description": "Comparação abrangente e arquiteturas de referência para plataformas de dados corporativas na AWS, Snowflake e Databricks. Domine ingestão, IA/ML, governança, otimização de custos e estratégias de migração.",
+    "difficulty": "Avançado",
+    "duration": "8 Semanas"
+  },
+  "es": {
+    "title": "Arquitectura de Plataformas de Datos Multi-Cloud",
+    "description": "Comparación exhaustiva y arquitecturas de referencia para plataformas de datos empresariales en AWS, Snowflake y Databricks. Domina la ingestión, IA/ML, gobernanza, optimización de costos y estrategias de migración.",
+    "difficulty": "Avanzado",
+    "duration": "8 Semanas"
+  }
+}
