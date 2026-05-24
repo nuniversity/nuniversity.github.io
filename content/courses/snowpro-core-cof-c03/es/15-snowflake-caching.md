@@ -21,26 +21,16 @@ El **Dominio 4.0** representa aproximadamente el **~21%** del examen. La caché 
 
 Snowflake tiene **tres cachés distintas** que operan en diferentes capas:
 
-```
-┌──────────────────────────────────────────────────────┐
-│            CAPA DE CLOUD SERVICES                    │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │     CACHÉ DE RESULTADOS DE CONSULTA             │ │
-│  │  Almacena resultados completos por 24 horas     │ │
-│  └─────────────────────────────────────────────────┘ │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │         CACHÉ DE METADATOS                      │ │
-│  │  Estadísticas de tablas, MIN/MAX, conteos, info │ │
-│  └─────────────────────────────────────────────────┘ │
-└──────────────────────────────────────────────────────┘
-                          │
-┌──────────────────────────────────────────────────────┐
-│          CAPA DE CÓMPUTO (Virtual Warehouse)         │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │    CACHÉ DEL WAREHOUSE (DISCO LOCAL SSD)        │ │
-│  │  Micro-particiones accedidas recientemente      │ │
-│  └─────────────────────────────────────────────────┘ │
-└──────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Cloud["CAPA DE CLOUD SERVICES"]
+        QRC["Caché de Resultados de Consulta<br/>Almacena resultados completos por 24 horas"]
+        MC["Caché de Metadatos<br/>Estadísticas de tablas, MIN/MAX, conteos, info de esquema"]
+    end
+    subgraph Compute["CAPA DE CÓMPUTO (Virtual Warehouse)"]
+        WLC["Caché del Warehouse (Disco Local SSD)<br/>Micro-particiones accedidas recientemente"]
+    end
+    Cloud --> Compute
 ```
 
 ---

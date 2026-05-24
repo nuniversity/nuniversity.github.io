@@ -410,10 +410,10 @@ USE SCHEMA MARTS;
 
 Los parámetros de Snowflake controlan el comportamiento en múltiples niveles. Los parámetros se propagan de los niveles superiores a los inferiores, y los niveles inferiores tienen prioridad sobre los superiores:
 
-```
-Parámetro a nivel de cuenta
-    └── Parámetro a nivel de usuario (tiene prioridad sobre la cuenta)
-        └── Parámetro a nivel de sesión (tiene prioridad sobre el usuario)
+```mermaid
+graph TD
+    AL["Nivel de cuenta"] --> UL["Nivel de usuario"]
+    UL --> SL["Nivel de sesión"]
 ```
 
 ```sql

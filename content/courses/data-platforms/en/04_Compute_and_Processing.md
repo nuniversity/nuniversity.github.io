@@ -16,27 +16,15 @@ duration: "75 min"
 
 Each platform abstracts compute differently. Understanding the abstraction level helps set expectations on what you can — and cannot — control.
 
-```
-High Abstraction (Simple, Less Control)
-│
-│   ┌──────────────────────────────────────────┐
-│   │  Amazon Athena          (Serverless SQL)  │
-│   │  Snowflake VW           (Serverless SQL)  │
-│   │  Databricks SQL Wh.     (Serverless SQL)  │
-│   └──────────────────────────────────────────┘
-│
-│   ┌──────────────────────────────────────────┐
-│   │  Databricks Job Clusters     (Managed)   │
-│   │  Amazon Redshift Serverless  (Managed)   │
-│   └──────────────────────────────────────────┘
-│
-│   ┌──────────────────────────────────────────┐
-│   │  Databricks All-Purpose Clusters (Full)  │
-│   │  Amazon Redshift Provisioned     (Full)  │
-│   │  Amazon EMR (Spark/Trino)        (Full)  │
-│   └──────────────────────────────────────────┘
-│
-Low Abstraction (Complex, Full Control)
+```mermaid
+flowchart TD
+    subgraph Spectrum["Compute Abstraction Levels"]
+        HIGH["High Abstraction (Simple, Less Control)"]
+        HIGH --> L1["Amazon Athena (Serverless SQL)<br/>Snowflake VW (Serverless SQL)<br/>Databricks SQL Wh. (Serverless SQL)"]
+        L1 --> L2["Databricks Job Clusters (Managed)<br/>Amazon Redshift Serverless (Managed)"]
+        L2 --> L3["Databricks All-Purpose Clusters (Full)<br/>Amazon Redshift Provisioned (Full)<br/>Amazon EMR (Spark/Trino) (Full)"]
+        L3 --> LOW["Low Abstraction (Complex, Full Control)"]
+    end
 ```
 
 ---

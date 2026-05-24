@@ -61,20 +61,38 @@ GRANT SELECT ON TABLE analytics.public.customer_data TO ROLE analyst_role;
 
 Every Snowflake object is a **securable object** — privileges can be granted on it. Objects inherit from their parent container:
 
-```
-Organization
-└── Account
-    ├── Warehouse
-    ├── Database
-    │   └── Schema
-    │       ├── Table
-    │       ├── View
-    │       ├── Stage
-    │       ├── Function (UDF)
-    │       ├── Procedure
-    │       └── Stream / Task / Pipe
-    ├── User
-    └── Role
+```mermaid
+graph TD
+    ORG["Organization"]
+    ACCT["Account"]
+    WH["Warehouse"]
+    DB["Database"]
+    SCH["Schema"]
+    TBL["Table"]
+    VW["View"]
+    STG["Stage"]
+    UDF["UDF"]
+    PROC["Procedure"]
+    STR["Stream"]
+    TSK["Task"]
+    PIPE["Pipe"]
+    USR["User"]
+    ROLE["Role"]
+    
+    ORG --> ACCT
+    ACCT --> WH
+    ACCT --> DB
+    ACCT --> USR
+    ACCT --> ROLE
+    DB --> SCH
+    SCH --> TBL
+    SCH --> VW
+    SCH --> STG
+    SCH --> UDF
+    SCH --> PROC
+    SCH --> STR
+    SCH --> TSK
+    SCH --> PIPE
 ```
 
 To access an object, a role typically needs:

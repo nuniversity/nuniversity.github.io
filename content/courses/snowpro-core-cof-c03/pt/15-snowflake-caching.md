@@ -21,26 +21,16 @@ O **Domínio 4.0** representa **~21%** do exame. O cache é um tópico favorito 
 
 O Snowflake possui **três caches distintos** operando em diferentes camadas:
 
-```
-┌──────────────────────────────────────────────────────┐
-│            CAMADA CLOUD SERVICES                     │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │         QUERY RESULT CACHE                      │ │
-│  │  Armazena resultados completos por 24 horas     │ │
-│  └─────────────────────────────────────────────────┘ │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │         METADATA CACHE                          │ │
-│  │  Estatísticas de tabelas, MIN/MAX, contagens    │ │
-│  └─────────────────────────────────────────────────┘ │
-└──────────────────────────────────────────────────────┘
-                          │
-┌──────────────────────────────────────────────────────┐
-│             CAMADA COMPUTE (Virtual WH)              │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │         WAREHOUSE (LOCAL DISK) CACHE            │ │
-│  │  Cache SSD de micro-partições acessadas         │ │
-│  └─────────────────────────────────────────────────┘ │
-└──────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Cloud["CAMADA DE SERVIÇOS EM NUVEM"]
+        QRC["Cache de Resultados de Consulta<br/>Armazena resultados completos por 24 horas"]
+        MC["Cache de Metadados<br/>Estatísticas de tabelas, MIN/MAX, contagens, info de schema"]
+    end
+    subgraph Compute["CAMADA DE COMPUTAÇÃO (Virtual WH)"]
+        WLC["Cache do Warehouse (Disco Local SSD)<br/>Cache SSD de micro-partições acessadas recentemente"]
+    end
+    Cloud --> Compute
 ```
 
 ---

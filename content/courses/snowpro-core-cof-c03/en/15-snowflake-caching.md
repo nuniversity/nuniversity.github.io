@@ -21,26 +21,16 @@ duration: "45 min"
 
 Snowflake has **three distinct caches** operating at different layers:
 
-```
-┌──────────────────────────────────────────────────────┐
-│            CLOUD SERVICES LAYER                      │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │         QUERY RESULT CACHE                      │ │
-│  │  Stores complete query results for 24 hours     │ │
-│  └─────────────────────────────────────────────────┘ │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │         METADATA CACHE                          │ │
-│  │  Table statistics, MIN/MAX, counts, schema info │ │
-│  └─────────────────────────────────────────────────┘ │
-└──────────────────────────────────────────────────────┘
-                          │
-┌──────────────────────────────────────────────────────┐
-│             COMPUTE LAYER (Virtual WH)               │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │         WAREHOUSE (LOCAL DISK) CACHE            │ │
-│  │  SSD cache of recently accessed micro-partitions│ │
-│  └─────────────────────────────────────────────────┘ │
-└──────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Cloud["CLOUD SERVICES LAYER"]
+        QRC["Query Result Cache<br/>Stores complete query results for 24 hours"]
+        MC["Metadata Cache<br/>Table statistics, MIN/MAX, counts, schema info"]
+    end
+    subgraph Compute["COMPUTE LAYER (Virtual WH)"]
+        WLC["Warehouse (Local Disk) Cache<br/>SSD cache of recently accessed micro-partitions"]
+    end
+    Cloud --> Compute
 ```
 
 ---

@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "3 weeks",
+  "icon": "bot",
+  "en": {
+    "title": "OpenCode: Agents and Skills",
+    "description": "Master agentic AI coding assistants by exploring OpenCode's architecture. Covers agent creation and configuration, custom skill development, MCP server and plugin integration, permission systems, and multi-agent collaboration workflows.",
+    "difficulty": "Intermediate",
+    "duration": "3 Weeks"
+  },
+  "pt": {
+    "title": "OpenCode: Agentes e Skills",
+    "description": "Domine assistentes de codificação com IA agentica explorando a arquitetura do OpenCode. Aborda criação e configuração de agentes, desenvolvimento de skills personalizadas, integração de servidores MCP e plugins, sistemas de permissão e fluxos de colaboração multi-agente.",
+    "difficulty": "Intermediário",
+    "duration": "3 Semanas"
+  },
+  "es": {
+    "title": "OpenCode: Agentes y Skills",
+    "description": "Domina asistentes de codificación con IA agentica explorando la arquitectura de OpenCode. Cubre creación y configuración de agentes, desarrollo de skills personalizadas, integración de servidores MCP y plugins, sistemas de permisos y flujos de colaboración multi-agente.",
+    "difficulty": "Intermedio",
+    "duration": "3 Semanas"
+  }
+}

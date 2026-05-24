@@ -1,80 +1,118 @@
 ---
 title: "Understanding Variables"
-description: "Learn how to store and use data in your programs"
+description: "Learn how to store and manipulate data using variables"
 order: 2
-duration: "20 minutes"
+duration: "25 minutes"
 difficulty: "beginner"
 ---
 
 # Understanding Variables
 
-Variables are containers that store data values. They're one of the most fundamental concepts in programming.
+Variables are the fundamental building blocks of any program. They let you store, read, and modify data while your program runs.
 
 ## What is a Variable?
 
-Think of a variable as a labeled box where you can store information:
+A variable is a named container that holds a value. Think of it as a labeled box where you can put information and retrieve it later.
 
-\`\`\`javascript
+```javascript
 let age = 25;
 let name = "Alice";
 let isStudent = true;
-\`\`\`
+```
 
-## Variable Types
+Each variable has a **name**, a **value**, and a **type** that determines what kind of data it can hold.
+
+## Primitive Data Types
 
 ### Numbers
-\`\`\`javascript
+
+Used for all numeric values, both integers and decimals:
+
+```javascript
 let score = 100;
 let price = 19.99;
 let temperature = -5;
-\`\`\`
+```
 
-### Strings (Text)
-\`\`\`javascript
+### Strings
+
+Used for text. Strings are enclosed in quotes:
+
+```javascript
 let greeting = "Hello!";
 let message = 'Welcome to programming';
-\`\`\`
+let template = `The score is ${score}`;
+```
 
-### Booleans (True/False)
-\`\`\`javascript
+### Booleans
+
+Used for true/false values, often in conditions:
+
+```javascript
 let isLoggedIn = true;
 let hasAccess = false;
-\`\`\`
+```
+
+### Null and Undefined
+
+These represent the absence of a value:
+
+```javascript
+let empty = null;        // intentionally nothing
+let notAssigned;         // undefined (declared but not initialized)
+```
 
 > [!WARNING]
-> Variable names cannot start with numbers and should be descriptive!
+> Variable names cannot start with a digit, cannot contain spaces, and should describe the data they hold.
 
 ## Naming Conventions
 
-Good variable names:
-- `userName` ✅
-- `totalScore` ✅
-- `isActive` ✅
+Good variable names are self-documenting:
 
-Bad variable names:
-- `x` ❌ (not descriptive)
-- `123data` ❌ (starts with number)
-- `user name` ❌ (has space)
+| Good | Bad | Why |
+|------|-----|-----|
+| `userName` | `x` | Not descriptive |
+| `totalScore` | `123data` | Starts with a digit |
+| `isActive` | `user name` | Contains a space |
+| `MAX_SIZE` | `max-size` | Hyphen is not allowed |
+
+JavaScript uses **camelCase** by convention: start lowercase, capitalize each subsequent word.
+
+## Constants
+
+Use `const` when the value should never change:
+
+```javascript
+const PI = 3.14159;
+const DAYS_IN_WEEK = 7;
+```
 
 ## Practice Exercise
 
-Create variables for the following:
-1. Your favorite number
-2. Your favorite color
-3. Whether you like pizza (true/false)
+Create variables for your personal profile:
 
-\`\`\`javascript
-let favoriteNumber = // Your code here
-let favoriteColor = // Your code here
-let likesPizza = // Your code here
-\`\`\`
+```javascript
+let favoriteNumber = 42;
+let favoriteColor = "blue";
+let likesPizza = true;
+
+console.log(favoriteNumber);
+console.log(favoriteColor);
+console.log(likesPizza);
+```
+
+Try changing the values and observe how the output changes.
 
 ## Summary
 
-| Type | Example | Description |
-|------|---------|-------------|
-| Number | `42` | Numeric values |
+| Type | Example | Use |
+|------|---------|-----|
+| Number | `42`, `3.14` | Numeric values |
 | String | `"Hello"` | Text values |
-| Boolean | `true` | True or false |
+| Boolean | `true`, `false` | Logical values |
+| Null | `null` | Intentional absence |
+| Undefined | `let x;` | Uninitialized variable |
 
-Next, we'll learn about functions!
+## Next Steps
+
+Now that you can store data, the next lesson will teach you how to package reusable logic into functions.

@@ -61,20 +61,38 @@ GRANT SELECT ON TABLE analytics.public.dados_clientes TO ROLE role_analista;
 
 Todo objeto do Snowflake é um **objeto segurável** — privilégios podem ser concedidos nele. Os objetos herdam do seu contêiner pai:
 
-```
-Organização
-└── Conta
-    ├── Warehouse
-    ├── Banco de Dados
-    │   └── Schema
-    │       ├── Tabela
-    │       ├── View
-    │       ├── Stage
-    │       ├── Função (UDF)
-    │       ├── Procedure
-    │       └── Stream / Task / Pipe
-    ├── Usuário
-    └── Role
+```mermaid
+graph TD
+    ORG["Organization"]
+    ACCT["Account"]
+    WH["Warehouse"]
+    DB["Database"]
+    SCH["Schema"]
+    TBL["Table"]
+    VW["View"]
+    STG["Stage"]
+    UDF["UDF"]
+    PROC["Procedure"]
+    STR["Stream"]
+    TSK["Task"]
+    PIPE["Pipe"]
+    USR["User"]
+    ROLE["Role"]
+    
+    ORG --> ACCT
+    ACCT --> WH
+    ACCT --> DB
+    ACCT --> USR
+    ACCT --> ROLE
+    DB --> SCH
+    SCH --> TBL
+    SCH --> VW
+    SCH --> STG
+    SCH --> UDF
+    SCH --> PROC
+    SCH --> STR
+    SCH --> TSK
+    SCH --> PIPE
 ```
 
 Para acessar um objeto, uma role normalmente precisa de:

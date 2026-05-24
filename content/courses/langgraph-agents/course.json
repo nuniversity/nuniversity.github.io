@@ -1,0 +1,25 @@
+{
+  "area": "Artificial Intelligence",
+  "author": "NUniversity",
+  "difficulty": "advanced",
+  "duration": "4 weeks",
+  "icon": "git-branch",
+  "en": {
+    "title": "Stateful Agentic Solutions with LangGraph",
+    "description": "Build production-grade stateful agent systems using LangGraph. Covers graph-based state management, conditional flows, persistence and checkpointing, human-in-the-loop patterns, and multi-agent orchestration.",
+    "difficulty": "Advanced",
+    "duration": "4 Weeks"
+  },
+  "pt": {
+    "title": "Soluções Agenticas Stateful com LangGraph",
+    "description": "Construa sistemas de agentes stateful de nível de produção usando LangGraph. Aborda gerenciamento de estado baseado em grafos, fluxos condicionais, persistência e checkpointing, padrões humano-no-loop e orquestração multi-agente.",
+    "difficulty": "Avançado",
+    "duration": "4 Semanas"
+  },
+  "es": {
+    "title": "Soluciones Agenticas Stateful con LangGraph",
+    "description": "Construye sistemas de agentes stateful de nivel de producción usando LangGraph. Cubre gestión de estado basada en grafos, flujos condicionales, persistencia y checkpointing, patrones humano-en-el-bucle y orquestación multi-agente.",
+    "difficulty": "Avanzado",
+    "duration": "4 Semanas"
+  }
+}

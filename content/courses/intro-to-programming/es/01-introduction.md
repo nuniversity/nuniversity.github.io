@@ -1,61 +1,64 @@
 ---
-title: "Getting Started with Programming"
-description: "Learn what programming is and why it's important"
+title: "Primeros Pasos con Programación"
+description: "Aprende qué es la programación, por qué es importante y escribe tu primer programa"
 order: 1
-duration: "15 minutes"
+duration: "20 minutes"
 difficulty: "beginner"
 ---
 
-# Getting Started with Programming
+# Primeros Pasos con Programación
 
-Welcome to your first programming lesson! 🎉
+Bienvenido a tu viaje de programación. Este curso te enseñará a pensar como un programador y escribir código en múltiples lenguajes y paradigmas.
 
-## What is Programming?
+## ¿Qué es la Programación?
 
-Programming is the process of creating instructions for computers to follow. Think of it as teaching a computer how to solve problems or perform tasks.
+La programación es el proceso de escribir instrucciones que una computadora puede seguir para resolver problemas. Cada aplicación, sitio web y herramienta digital que usas está construida sobre código escrito por programadores.
 
-## Why Learn Programming?
+## ¿Por qué Aprender Programación?
 
-- **Problem Solving**: Develop logical thinking skills
-- **Career Opportunities**: High demand for programmers
-- **Creativity**: Build your own applications and tools
-- **Automation**: Save time by automating repetitive tasks
+- **Resolución de Problemas**: Divide problemas complejos en pasos pequeños y manejables
+- **Oportunidades Profesionales**: Las habilidades de desarrollo de software son muy demandadas en todos los sectores
+- **Creatividad**: Crea tus propias herramientas, juegos y aplicaciones desde cero
+- **Automatización**: Elimina tareas repetitivas enseñando a una computadora a hacerlas por ti
 
 > [!NOTE]
-> Programming is like learning a new language. It takes practice, but anyone can learn it!
+> Aprender a programar es como aprender un nuevo idioma. Ten paciencia contigo mismo y practica todos los días.
 
-## Key Concepts
+## Cómo las Computadoras Entienden el Código
 
-In this course, you'll learn:
+Las computadoras solo entienden binario — unos y ceros. Los lenguajes de programación como JavaScript, Python y Rust actúan como traductores. Tú escribes código legible para humanos, y un compilador o intérprete lo convierte en instrucciones de máquina.
 
-1. Variables and data types
-2. Functions and methods
-3. Control flow (if/else, loops)
-4. Data structures
-5. Problem-solving strategies
+## Tu Primer Programa
 
-## Your First Program
+El primer programa tradicional muestra un mensaje en la pantalla:
 
-Let's start with the classic "Hello, World!" program:
-
-\`\`\`javascript
-// This is a comment
+```javascript
 console.log("Hello, World!");
-\`\`\`
+```
 
-This simple program displays a message to the screen. Don't worry if you don't understand everything yet!
+Esta única línea instruye a la computadora a mostrar el texto `Hello, World!`. Cada lenguaje tiene su propia forma de hacerlo, pero el concepto es el mismo.
 
-> [!SUCCESS]
-> Congratulations! You've started your programming journey!
+## Lo que Aprenderás en Este Curso
 
-## Practice Exercise
+1. Variables y tipos de datos
+2. Funciones y ámbito
+3. Flujo de control: condicionales y bucles
+4. Estructuras de datos: arrays y objetos
+5. Programación funcional con Python
+6. Lenguajes compilados con Rust
+7. Programación declarativa con SQL y HCL
+8. Estrategias de resolución de problemas
 
-Try modifying the code above to print your own name:
+## Ejercicio Práctico
 
-\`\`\`javascript
-console.log("Hello, [Your Name]!");
-\`\`\`
+Modifica el programa Hello World para imprimir tu propio nombre:
 
-## Next Steps
+```javascript
+console.log("Hello, [Tu Nombre]!");
+```
 
-In the next lesson, we'll dive into variables and learn how to store and manipulate data.
+Reemplaza `[Tu Nombre]` con tu nombre real e imagina la salida.
+
+## Próximos Pasos
+
+En la próxima lección, aprenderás sobre variables — cómo almacenar y manipular datos en tus programas.

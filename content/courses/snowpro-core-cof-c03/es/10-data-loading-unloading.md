@@ -21,17 +21,11 @@ El **Dominio 3.0 — Carga, Descarga y Conectividad de Datos** representa aproxi
 
 El proceso de carga masiva de Snowflake sigue este flujo:
 
-```
-Archivos Fuente (CSV, JSON, Parquet, etc.)
-           │
-           ▼
-      Stage (Interno o Externo)
-           │
-           ▼
-    COPY INTO <tabla>
-           │
-           ▼
-      Tabla Snowflake (micro-particiones)
+```mermaid
+flowchart LR
+    SF["Archivos Fuente"] --> STG["Stage"]
+    STG --> COPY["COPY INTO"]
+    COPY --> SNOW["Tabla Snowflake"]
 ```
 
 ---

@@ -100,31 +100,42 @@ workflow_config = {
 
 **Best For:** SQL-dominant analytics, large analyst teams, cross-org data sharing, minimal engineering overhead.
 
-```
- DATA SOURCES               INGEST                     SNOWFLAKE
- ┌──────────────┐      ┌───────────────────┐     ┌─────────────────────────────┐
- │ ERP/CRM/     │      │   Fivetran        │     │  Raw Layer                  │
- │ Databases    ├─────►│   (300+ sources)  ├────►│  COPY INTO → Raw Tables     │
- │              │      └───────────────────┘     │                             │
- │ Files (S3)   │      ┌───────────────────┐     │  Transform Layer            │
- │              ├─────►│   Snowpipe        ├────►│  dbt models → Silver Tables │
- │ SaaS Events  │      │   (S3 triggers)   │     │                             │
- │              │      └───────────────────┘     │  Analytics Layer            │
- │ APIs         │      ┌───────────────────┐     │  Gold views / tables        │
- │              ├─────►│   Kafka Connector ├────►│  Served to BI tools         │
- └──────────────┘      └───────────────────┘     │                             │
-                                                  │  Governance                 │
-                                                  │  RBAC + Masking + Row ACL   │
-                                                  └────────────┬────────────────┘
-                                                               │
-               ┌───────────────────────────────────────────────┤
-               │                                               │
-    ┌──────────▼──────────┐                    ┌──────────────▼──────────────┐
-    │  BI Tools            │                    │  Data Sharing               │
-    │  Tableau / Power BI  │                    │  → Partner Accounts         │
-    │  Looker / Sigma      │                    │  → Snowflake Marketplace    │
-    │  Streamlit in SF     │                    │  → Data Clean Rooms         │
-    └─────────────────────┘                    └─────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Sources["DATA SOURCES"]
+        ERP["ERP/CRM/Databases"]
+        FILES["Files (S3)"]
+        SAAS["SaaS Events"]
+        APIS["APIs"]
+    end
+    subgraph Ingest["INGEST"]
+        FIV["Fivetran<br/>(300+ sources)"]
+        SP["Snowpipe<br/>(S3 triggers)"]
+        KC["Kafka Connector"]
+    end
+    subgraph Snowflake["SNOWFLAKE"]
+        RAW["Raw Layer<br/>COPY INTO → Raw Tables"]
+        TRANS["Transform Layer<br/>dbt models → Silver Tables"]
+        ANALYTICS["Analytics Layer<br/>Gold views / tables"]
+        GOV["Governance<br/>RBAC + Masking + Row ACL"]
+    end
+    subgraph BI["BI Tools"]
+        TABLEAU["Tableau / Power BI<br/>Looker / Sigma<br/>Streamlit in SF"]
+    end
+    subgraph Sharing["Data Sharing"]
+        SHARE["→ Partner Accounts<br/>→ Snowflake Marketplace<br/>→ Data Clean Rooms"]
+    end
+    
+    ERP --> FIV
+    FILES --> SP
+    SAAS --> KC
+    APIS --> FIV
+    FIV --> RAW
+    SP --> RAW
+    KC --> RAW
+    RAW --> TRANS --> ANALYTICS
+    ANALYTICS --> TABLEAU
+    ANALYTICS --> SHARE
 ```
 
 ### dbt Project Structure for Snowflake
@@ -278,29 +289,13 @@ def run_batch_reprocess(date: str):
 
 **Best For:** When batch and stream processing can be unified (modern preferred approach). Databricks Structured Streaming handles both.
 
-```
-                  ┌────────────────────────────────────────┐
-                  │         KAPPA ARCHITECTURE              │
-                  │  (No separate batch path)               │
-                  └────────────────────────────────────────┘
-
- Data Source → MSK/Kinesis → Databricks Structured Streaming → Delta Lake
-                                       │
-                          ┌────────────▼─────────────┐
-                          │  Single processing path   │
-                          │  handles BOTH:            │
-                          │  - Real-time streaming    │
-                          │  - Historical reprocessing│
-                          │    (replay from offset 0) │
-                          └────────────┬──────────────┘
-                                       │
-                          ┌────────────▼─────────────┐
-                          │  Delta Lake               │
-                          │  (Streaming sink,         │
-                          │   queryable by SQL WH)    │
-                          └──────────────────────────┘
-
-Reprocessing = set Kafka offset to 0 (or desired timestamp) and replay
+```mermaid
+flowchart LR
+    DS["Data Source"] --> MSK["MSK/Kinesis"]
+    MSK --> DSS["Databricks Structured Streaming"]
+    DSS --> DL["Delta Lake"]
+    DSS --> SP["Single processing path<br/>handles BOTH:<br/>- Real-time streaming<br/>- Historical reprocessing"]
+    SP --> DL
 ```
 
 ---
@@ -309,43 +304,48 @@ Reprocessing = set Kafka offset to 0 (or desired timestamp) and replay
 
 **Best For:** Large enterprises, 100+ engineers, complex workload mix, ML + BI + sharing all critical.
 
-```
- ┌─────────────────────────────────────────────────────────────────────────────┐
- │                    HYBRID BEST-OF-BREED ARCHITECTURE                         │
- └─────────────────────────────────────────────────────────────────────────────┘
-
- SOURCE SYSTEMS          STREAMING              LAKE STORAGE
- ┌──────────────┐   ┌─────────────────┐    ┌────────────────────┐
- │ OLTP (RDS)   │   │  Amazon MSK     │    │  Amazon S3         │
- │ SaaS (APIs)  ├──►│  (Event bus)    ├───►│  (Open storage)    │
- │ IoT Sensors  │   │                 │    │  Parquet / Delta   │
- └──────────────┘   └─────────────────┘    └────────┬───────────┘
-                                                     │
-                          ┌──────────────────────────▼──────────────────────┐
-                          │              DATABRICKS (Data Plane)              │
-                          │                                                   │
-                          │  Ingestion: Auto Loader / Structured Streaming    │
-                          │  Transform: DLT (Bronze → Silver → Gold)         │
-                          │  ML: Feature Store → MLflow → Model Serving       │
-                          │  Governance: Unity Catalog (files, tables, models)│
-                          └──────────────────────────┬──────────────────────┘
-                                                     │
-                          ┌──────────────────────────▼──────────────────────┐
-                          │         SNOWFLAKE (Serving Layer)                 │
-                          │                                                   │
-                          │  Ingest: Snowpipe from S3 Gold tables             │
-                          │  Serve: Virtual Warehouses for BI                 │
-                          │  Share: Data Sharing / Marketplace / Clean Rooms  │
-                          │  Apps: Streamlit in Snowflake                     │
-                          └──────────────────────────┬──────────────────────┘
-                                                     │
-          ┌───────────────────────────────────────────┼──────────────────────────┐
-          │                                           │                          │
- ┌────────▼────────┐                     ┌───────────▼────────┐    ┌───────────▼──────┐
- │  BI & Reporting  │                     │  Data Sharing       │    │  ML Predictions  │
- │  Tableau/Looker  │                     │  Partners/Customers │    │  REST API        │
- │  Power BI        │                     │  Marketplace        │    │  (Databricks)    │
- └─────────────────┘                     └────────────────────┘    └──────────────────┘
+```mermaid
+flowchart TD
+    subgraph Sources["SOURCE SYSTEMS"]
+        OLT["OLTP (RDS)"]
+        SAAS2["SaaS (APIs)"]
+        IOT["IoT Sensors"]
+    end
+    subgraph Stream["STREAMING"]
+        MSK2["Amazon MSK<br/>(Event bus)"]
+    end
+    subgraph Lake2["LAKE STORAGE"]
+        S3_2["Amazon S3<br/>(Open storage)<br/>Parquet / Delta"]
+    end
+    subgraph DB["DATABRICKS (Data Plane)"]
+        DB_ING["Ingestion: Auto Loader /<br/>Structured Streaming"]
+        DB_TRANS["Transform: DLT<br/>(Bronze → Silver → Gold)"]
+        DB_ML["ML: Feature Store →<br/>MLflow → Model Serving"]
+        DB_GOV["Governance: Unity Catalog"]
+    end
+    subgraph SF2["SNOWFLAKE (Serving Layer)"]
+        SF_ING["Ingest: Snowpipe from S3"]
+        SF_SERVE["Serve: Virtual Warehouses"]
+        SF_SHARE["Share: Data Sharing / Marketplace"]
+        SF_APPS["Apps: Streamlit in Snowflake"]
+    end
+    subgraph Consumers["Consumers"]
+        BI2["BI & Reporting<br/>Tableau/Looker/Power BI"]
+        DS2["Data Sharing<br/>Partners/Customers/Marketplace"]
+        ML2["ML Predictions<br/>REST API (Databricks)"]
+    end
+    
+    OLT --> MSK2
+    SAAS2 --> MSK2
+    IOT --> MSK2
+    MSK2 --> S3_2
+    S3_2 --> DB
+    DB_ING --> DB_TRANS --> DB_ML
+    DB --> SF2
+    SF_ING --> SF_SERVE --> SF_SHARE
+    SF2 --> BI2
+    SF2 --> DS2
+    DB --> ML2
 ```
 
 ### Data Flow: Databricks → Snowflake (Production Pattern)

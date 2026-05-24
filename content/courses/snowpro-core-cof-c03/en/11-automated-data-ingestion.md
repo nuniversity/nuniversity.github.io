@@ -35,20 +35,12 @@ duration: "70 min"
 
 ### How Snowpipe Works
 
-```
-Files arrive in S3/Azure/GCS
-         │
-         ▼
-Cloud Storage Event (S3 Event, Azure Event Grid, GCS Pub/Sub)
-         │
-         ▼
-Snowpipe receives notification (or REST API call)
-         │
-         ▼
-COPY INTO executes (serverless — no warehouse required)
-         │
-         ▼
-Data available in Snowflake table (seconds to minutes)
+```mermaid
+flowchart LR
+    FILES["Files arrive"] --> EVT["Cloud Storage Event"]
+    EVT --> SP["Snowpipe notification"]
+    SP --> COPY["COPY INTO"]
+    COPY --> AVAIL["Data available"]
 ```
 
 ### Creating a Pipe

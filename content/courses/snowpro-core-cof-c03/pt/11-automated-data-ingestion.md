@@ -35,20 +35,12 @@ O **Snowpipe** é o serviço serverless de ingestão contínua do Snowflake — 
 
 ### Como o Snowpipe Funciona
 
-```
-Arquivos chegam no S3/Azure/GCS
-         │
-         ▼
-Evento de Armazenamento em Nuvem (S3 Event, Azure Event Grid, GCS Pub/Sub)
-         │
-         ▼
-Snowpipe recebe notificação (ou chamada da REST API)
-         │
-         ▼
-COPY INTO é executado (serverless — sem warehouse necessário)
-         │
-         ▼
-Dados disponíveis na tabela Snowflake (segundos a minutos)
+```mermaid
+flowchart LR
+    FILES["Arquivos chegam"] --> EVT["Evento de Armazenamento em Nuvem"]
+    EVT --> SP["Notificação Snowpipe"]
+    SP --> COPY["COPY INTO"]
+    COPY --> AVAIL["Dados disponíveis"]
 ```
 
 ### Criando um Pipe

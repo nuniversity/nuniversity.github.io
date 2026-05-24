@@ -1,0 +1,25 @@
+{
+  "area": "Artificial Intelligence",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "4 weeks",
+  "icon": "users",
+  "en": {
+    "title": "Agentic AI Role-Based with CrewAI",
+    "description": "Build multi-agent systems using role-based orchestration with CrewAI. Covers agent roles and goals, task delegation, sequential and hierarchical processes, custom tool integration, and advanced collaboration patterns.",
+    "difficulty": "Intermediate",
+    "duration": "4 Weeks"
+  },
+  "pt": {
+    "title": "IA Agentica Baseada em Papéis com CrewAI",
+    "description": "Construa sistemas multi-agente usando orquestração baseada em papéis com CrewAI. Aborda papéis e objetivos de agentes, delegação de tarefas, processos sequenciais e hierárquicos, integração de ferramentas personalizadas e padrões avançados de colaboração.",
+    "difficulty": "Intermediário",
+    "duration": "4 Semanas"
+  },
+  "es": {
+    "title": "IA Agentica Basada en Roles con CrewAI",
+    "description": "Construye sistemas multi-agente usando orquestración basada en roles con CrewAI. Cubre roles y objetivos de agentes, delegación de tareas, procesos secuenciales y jerárquicos, integración de herramientas personalizadas y patrones avanzados de colaboración.",
+    "difficulty": "Intermedio",
+    "duration": "4 Semanas"
+  }
+}

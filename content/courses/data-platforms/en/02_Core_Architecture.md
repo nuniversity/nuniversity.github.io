@@ -40,48 +40,43 @@ AWS provides storage (S3) and then offers a **menu of compute engines** that que
 
 ### The Typical AWS Data Lake Architecture
 
-```
- ┌──────────────────────────────────────────────────────────────────┐
- │                         Data Sources                             │
- │  (RDS, DynamoDB, SaaS Apps, IoT, Clickstreams)                  │
- └──────────────────────────┬───────────────────────────────────────┘
-                            │
-              ┌─────────────▼──────────────┐
-              │       Ingestion Layer       │
-              │  Kinesis / MSK / AppFlow /  │
-              │  AWS DMS / S3 Transfer      │
-              └─────────────┬──────────────┘
-                            │
-              ┌─────────────▼──────────────┐
-              │     S3 Data Lake            │
-              │  ┌──────┐ ┌──────┐ ┌──────┐│
-              │  │ Raw  │ │ Cur- │ │ Agg  ││
-              │  │(Land)│ │ated  │ │(Gold)││  ← Medallion zones (optional)
-              │  └──────┘ └──────┘ └──────┘│
-              └─────────────┬──────────────┘
-                            │
-        ┌───────────────────┼───────────────────┐
-        │                   │                   │
-  ┌─────▼──────┐    ┌───────▼──────┐    ┌───────▼──────┐
-  │ AWS Glue   │    │  Amazon EMR   │    │   Redshift   │
-  │ (ETL/ELT)  │    │  (Spark/Hive) │    │   Spectrum   │
-  └─────┬──────┘    └───────┬───────┘    └───────┬──────┘
-        │                   │                    │
-  ┌─────▼──────────────────────────────────────▼──────┐
-  │              AWS Glue Data Catalog                  │
-  │         (Hive Metastore compatible)                 │
-  └────────────────────────────────────────────────────┘
-                            │
-              ┌─────────────▼──────────────┐
-              │      Serving Layer          │
-              │  Athena / Redshift /        │
-              │  QuickSight / SageMaker     │
-              └────────────────────────────┘
-              │
-  ┌───────────▼──────────────┐
-  │   AWS Lake Formation      │
-  │  (Governance & Security)  │
-  └──────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Sources["Data Sources"]
+        SRC["(RDS, DynamoDB, SaaS Apps, IoT, Clickstreams)"]
+    end
+    subgraph Ingestion["Ingestion Layer"]
+        ING["Kinesis / MSK / AppFlow /<br/>AWS DMS / S3 Transfer"]
+    end
+    subgraph Lake["S3 Data Lake"]
+        RAW["Raw (Land)"]
+        CUR["Curated"]
+        GOLD["Agg (Gold)"]
+    end
+    subgraph Processing["Processing"]
+        GLUE["AWS Glue<br/>(ETL/ELT)"]
+        EMR["Amazon EMR<br/>(Spark/Hive)"]
+        RS["Redshift<br/>Spectrum"]
+    end
+    subgraph Catalog["AWS Glue Data Catalog"]
+        CAT["(Hive Metastore compatible)"]
+    end
+    subgraph Serving["Serving Layer"]
+        SERVE["Athena / Redshift /<br/>QuickSight / SageMaker"]
+    end
+    subgraph Governance["AWS Lake Formation"]
+        GOV["(Governance & Security)"]
+    end
+    
+    SRC --> ING
+    ING --> Lake
+    RAW --> CUR --> GOLD
+    Lake --> Processing
+    GLUE --> CAT
+    EMR --> CAT
+    RS --> CAT
+    CAT --> SERVE
+    SERVE --> GOV
 ```
 
 ### AWS Key Architectural Entities

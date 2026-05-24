@@ -410,10 +410,10 @@ USE SCHEMA MARTS;
 
 Snowflake parameters control behavior at multiple levels. Parameters cascade from higher to lower levels, with lower levels overriding higher ones:
 
-```
-Account-level parameter
-    └── User-level parameter (overrides account)
-        └── Session-level parameter (overrides user)
+```mermaid
+graph TD
+    AL["Account-level"] --> UL["User-level"]
+    UL --> SL["Session-level"]
 ```
 
 ```sql

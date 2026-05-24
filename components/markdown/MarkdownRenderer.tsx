@@ -7,6 +7,8 @@ import { useState, useEffect, useRef } from 'react'
 import { AlertCircle, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react'
 
 import SyntaxHighlighterWrapper from './FixWrapper'
+import QuestionBlock from './QuestionBlock'
+import type { LessonQuestion } from './QuestionBlock'
 
 interface MarkdownRendererProps {
   content: string
@@ -15,6 +17,7 @@ interface MarkdownRendererProps {
 const langMap: Record<string, string> = {
   diagram: 'diagram',
   mermaid: 'mermaid',
+  question: 'question',
   sql: 'sql',
   psql: 'sql',
   postgresql: 'sql',
@@ -231,36 +234,50 @@ const ALERT_META: Record<string, { cls: string; icon: string; label: string }> =
   IMPORTANT: { cls: 'callout-important', icon: '📌',  label: 'Important' },
 }
 
+function toCalloutHtml(type: string, title: string, body: string): string {
+  const meta = ALERT_META[type.toUpperCase()]
+  if (!meta) return ''
+  const label = title || meta.label
+  return (
+    `<div class="callout ${meta.cls}">\n` +
+    `<div class="callout-header"><span class="callout-icon">${meta.icon}</span><span class="callout-label">${label}</span></div>\n` +
+    `<div class="callout-body">\n\n${body}\n\n</div>\n` +
+    `</div>\n`
+  )
+}
+
 function preprocessAlerts(md: string): string {
-  // Step 1: normalise line endings
-  const normalised = md.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+  let result = md.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
 
-  // Step 2: replace alert blockquotes with HTML divs
-  // Pattern explanation:
-  //   ^> \[!TYPE\]   — blockquote starting with [!TYPE] at line start
-  //   [ \t]*\n       — optional trailing whitespace then newline
-  //   ((?:...)*)     — capture all following "> ..." lines
-  return normalised.replace(
+  // Pass 1: blockquote format  > [!TYPE]
+  //   > [!WARNING]
+  //   > Body line 1
+  //   > Body line 2
+  result = result.replace(
     /^> \[!(NOTE|INFO|WARNING|DANGER|ERROR|SUCCESS|TIP|IMPORTANT)\][ \t]*\n((?:[ \t]*>[ \t]?[^\n]*\n?)*)/gim,
-    (_match: string, type: string, rest: string) => {
-      const meta = ALERT_META[type.toUpperCase()]
-      if (!meta) return _match
-
-      // Strip the "> " prefix from each body line
+    (match: string, type: string, rest: string) => {
       const body = rest
         .split('\n')
         .map((line: string) => line.replace(/^[ \t]*>[ \t]?/, ''))
         .filter((line: string) => line.trim() !== '')
         .join('\n')
 
-      return (
-        `<div class="callout ${meta.cls}">\n` +
-        `<div class="callout-header"><span class="callout-icon">${meta.icon}</span><span class="callout-label">${meta.label}</span></div>\n` +
-        `<div class="callout-body">\n\n${body}\n\n</div>\n` +
-        `</div>\n`
-      )
+      return toCalloutHtml(type, '', body)
     }
   )
+
+  // Pass 2: plain format  [!TYPE] on its own line
+  //   [!WARNING]
+  //   Body content continues until next alert, heading, or `---`
+  result = result.replace(
+    /^\[!(NOTE|INFO|WARNING|DANGER|ERROR|SUCCESS|TIP|IMPORTANT)\]([^\n]*)\n([\s\S]*?)(?=\n\n|\n\[!|(?![\s\S]))/gm,
+    (match: string, type: string, titleLine: string, rest: string) => {
+      const body = rest.trim()
+      return toCalloutHtml(type, titleLine.trim(), body)
+    }
+  )
+
+  return result
 }
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
@@ -282,6 +299,8 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         ol: ({ children }) => <ol className="list-decimal list-inside mb-4 space-y-2 ml-4">{children}</ol>,
         li: ({ children }) => <li className="leading-7 text-foreground/90">{children}</li>,
 
+        pre: ({ children }) => <div className="not-prose overflow-visible">{children}</div>,
+
         code: ({ node, className, children, ...props }) => {
           const match = /language-([a-z0-9_+-]+)/i.exec(className || '')
           const langRaw = match ? match[1].toLowerCase() : null
@@ -292,6 +311,19 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
             if (language === 'mermaid') {
               return <MermaidDiagram code={codeString} />
+            }
+
+            if (language === 'question') {
+              try {
+                const questionData: LessonQuestion = JSON.parse(codeString)
+                return <QuestionBlock data={questionData} />
+              } catch (e) {
+                return (
+                  <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
+                    Invalid question format: {(e as Error).message}
+                  </div>
+                )
+              }
             }
 
             return (

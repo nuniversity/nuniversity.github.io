@@ -1,80 +1,118 @@
 ---
-title: "Understanding Variables"
-description: "Learn how to store and use data in your programs"
+title: "Entendendo Variáveis"
+description: "Aprenda a armazenar e manipular dados usando variáveis"
 order: 2
-duration: "20 minutes"
+duration: "25 minutes"
 difficulty: "beginner"
 ---
 
-# Understanding Variables
+# Entendendo Variáveis
 
-Variables are containers that store data values. They're one of the most fundamental concepts in programming.
+Variáveis são os blocos fundamentais de qualquer programa. Elas permitem armazenar, ler e modificar dados enquanto seu programa executa.
 
-## What is a Variable?
+## O que é uma Variável?
 
-Think of a variable as a labeled box where you can store information:
+Uma variável é um contêiner nomeado que guarda um valor. Pense nela como uma caixa etiquetada onde você pode colocar informações e recuperá-las depois.
 
-\`\`\`javascript
-let age = 25;
-let name = "Alice";
-let isStudent = true;
-\`\`\`
+```javascript
+let idade = 25;
+let nome = "Alice";
+let ehEstudante = true;
+```
 
-## Variable Types
+Cada variável tem um **nome**, um **valor** e um **tipo** que determina que tipo de dado ela pode armazenar.
 
-### Numbers
-\`\`\`javascript
-let score = 100;
-let price = 19.99;
-let temperature = -5;
-\`\`\`
+## Tipos de Dados Primitivos
 
-### Strings (Text)
-\`\`\`javascript
-let greeting = "Hello!";
-let message = 'Welcome to programming';
-\`\`\`
+### Números
 
-### Booleans (True/False)
-\`\`\`javascript
-let isLoggedIn = true;
-let hasAccess = false;
-\`\`\`
+Usados para todos os valores numéricos, tanto inteiros quanto decimais:
+
+```javascript
+let pontuacao = 100;
+let preco = 19.99;
+let temperatura = -5;
+```
+
+### Strings
+
+Usadas para texto. Strings são delimitadas por aspas:
+
+```javascript
+let saudacao = "Olá!";
+let mensagem = 'Bem-vindo à programação';
+let template = `A pontuação é ${pontuacao}`;
+```
+
+### Booleanos
+
+Usados para valores verdadeiro/falso, geralmente em condições:
+
+```javascript
+let estaLogado = true;
+let temAcesso = false;
+```
+
+### Null e Undefined
+
+Representam a ausência de um valor:
+
+```javascript
+let vazio = null;        // intencionalmente vazio
+let naoAtribuido;        // undefined (declarado mas não inicializado)
+```
 
 > [!WARNING]
-> Variable names cannot start with numbers and should be descriptive!
+> Nomes de variáveis não podem começar com dígito, não podem conter espaços e devem descrever o dado que armazenam.
 
-## Naming Conventions
+## Convenções de Nomenclatura
 
-Good variable names:
-- `userName` ✅
-- `totalScore` ✅
-- `isActive` ✅
+Nomes de variáveis bons são autodocumentáveis:
 
-Bad variable names:
-- `x` ❌ (not descriptive)
-- `123data` ❌ (starts with number)
-- `user name` ❌ (has space)
+| Bom | Ruim | Porquê |
+|-----|------|--------|
+| `nomeUsuario` | `x` | Não descritivo |
+| `pontuacaoTotal` | `123dado` | Começa com dígito |
+| `estaAtivo` | `nome usuario` | Contém espaço |
+| `TAMANHO_MAX` | `tamanho-max` | Hífen não é permitido |
 
-## Practice Exercise
+JavaScript usa **camelCase** por convenção: comece minúsculo, capitalize cada palavra subsequente.
 
-Create variables for the following:
-1. Your favorite number
-2. Your favorite color
-3. Whether you like pizza (true/false)
+## Constantes
 
-\`\`\`javascript
-let favoriteNumber = // Your code here
-let favoriteColor = // Your code here
-let likesPizza = // Your code here
-\`\`\`
+Use `const` quando o valor nunca deve mudar:
 
-## Summary
+```javascript
+const PI = 3.14159;
+const DIAS_NA_SEMANA = 7;
+```
 
-| Type | Example | Description |
-|------|---------|-------------|
-| Number | `42` | Numeric values |
-| String | `"Hello"` | Text values |
-| Boolean | `true` | True or false |
+## Exercício Prático
 
-Next, we'll learn about functions!
+Crie variáveis para seu perfil pessoal:
+
+```javascript
+let numeroFavorito = 42;
+let corFavorita = "azul";
+let gostaDePizza = true;
+
+console.log(numeroFavorito);
+console.log(corFavorita);
+console.log(gostaDePizza);
+```
+
+Tente alterar os valores e observe como a saída muda.
+
+## Resumo
+
+| Tipo | Exemplo | Uso |
+|------|---------|-----|
+| Number | `42`, `3.14` | Valores numéricos |
+| String | `"Olá"` | Valores de texto |
+| Boolean | `true`, `false` | Valores lógicos |
+| Null | `null` | Ausência intencional |
+| Undefined | `let x;` | Variável não inicializada |
+
+## Próximos Passos
+
+Agora que você pode armazenar dados, a próxima lição vai ensinar como empacotar lógica reutilizável em funções.

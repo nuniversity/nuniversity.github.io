@@ -55,13 +55,23 @@ Systems must be dependable and accessible when needed.
 - Graceful Degradation: Partial functionality during failures
 
 *Example Architecture for High Availability:*
-```diagram
-Region 1 (Primary)        Region 2 (Secondary)
-├─ Load Balancer         ├─ Load Balancer
-├─ App Server 1          ├─ App Server 1
-├─ App Server 2          ├─ App Server 2
-├─ Database Primary ────→├─ Database Replica
-└─ Cache Layer           └─ Cache Layer
+```mermaid
+flowchart TD
+    subgraph Primary["Region 1 (Primary)"]
+        LB1["Load Balancer"]
+        AS1_1["App Server 1"]
+        AS1_2["App Server 2"]
+        DB_P["Database Primary"]
+        Cache1["Cache Layer"]
+    end
+    subgraph Secondary["Region 2 (Secondary)"]
+        LB2["Load Balancer"]
+        AS2_1["App Server 1"]
+        AS2_2["App Server 2"]
+        DB_R["Database Replica"]
+        Cache2["Cache Layer"]
+    end
+    DB_P -->|"replication"| DB_R
 ```
 
 **3. Maintainability**
@@ -182,17 +192,21 @@ Lambda Architecture processes both batch and real-time data through parallel pat
 - Potential for inconsistencies between layers
 
 **Technology Stack Example:**
-```diagram
-Data Sources
-    ↓
-Kafka (ingestion)
-    ↓
-├─ Batch Layer: HDFS → Spark → Cassandra
-└─ Speed Layer: Storm/Flink → Redis
-    ↓
-Serving Layer: API merging both results
-    ↓
-BI Tools / Applications
+```mermaid
+flowchart TD
+    DS["Data Sources"]
+    KAFKA["Kafka (ingestion)"]
+    BL["Batch Layer<br/>HDFS → Spark → Cassandra"]
+    SL["Speed Layer<br/>Storm/Flink → Redis"]
+    SERVING["Serving Layer<br/>API merging both results"]
+    BI["BI Tools / Applications"]
+    
+    DS --> KAFKA
+    KAFKA --> BL
+    KAFKA --> SL
+    BL --> SERVING
+    SL --> SERVING
+    SERVING --> BI
 ```
 
 #### Pattern 2: Kappa Architecture
@@ -295,22 +309,31 @@ Data Mesh decentralizes data ownership, treating data as a product owned by doma
 
 **Example Organization:**
 
-```diagram
-Central Data Platform Team
-├─ Self-service infrastructure
-├─ Governance policies
-└─ Shared services
-
-Domain Teams (Data Product Owners):
-├─ Sales Domain
-│   ├─ Customer acquisition data product
-│   └─ Revenue analytics data product
-├─ Marketing Domain
-│   ├─ Campaign performance data product
-│   └─ Attribution data product
-└─ Operations Domain
-    ├─ Supply chain data product
-    └─ Logistics data product
+```mermaid
+flowchart TD
+    CENTRAL["Central Data Platform Team"]
+    SELF["Self-service infrastructure"]
+    GOV["Governance policies"]
+    SHARED["Shared services"]
+    SALES["Sales Domain"]
+    CUST["Customer acquisition data product"]
+    REV["Revenue analytics data product"]
+    MKTG["Marketing Domain"]
+    CAMP["Campaign performance data product"]
+    ATTR["Attribution data product"]
+    OPS["Operations Domain"]
+    SUPPLY["Supply chain data product"]
+    LOG["Logistics data product"]
+    
+    CENTRAL --> SELF
+    CENTRAL --> GOV
+    CENTRAL --> SHARED
+    SALES --> CUST
+    SALES --> REV
+    MKTG --> CAMP
+    MKTG --> ATTR
+    OPS --> SUPPLY
+    OPS --> LOG
 ```
 
 #### Pattern 4: Data Lakehouse
@@ -366,27 +389,20 @@ Data Lakehouse combines benefits of data lakes (flexibility, low cost) with data
 
 **Architecture Example:**
 
-```diagram
-Data Sources
-    ↓
-Ingestion (Streaming + Batch)
-    ↓
-Bronze Layer (Raw Data)
-├─ Files in Delta/Iceberg format
-└─ Metadata and schema registry
-    ↓
-Silver Layer (Cleaned, Conformed)
-├─ Validated and enriched data
-└─ ACID transactions
-    ↓
-Gold Layer (Business-Level Aggregates)
-├─ Dimensional models
-└─ Optimized for BI
-    ↓
-Consumption
-├─ SQL Analytics
-├─ ML/AI
-└─ BI Tools
+```mermaid
+flowchart TD
+    DS2["Data Sources"]
+    ING["Ingestion (Streaming + Batch)"]
+    BRONZE["Bronze Layer (Raw Data)<br/>Files in Delta/Iceberg format<br/>Metadata and schema registry"]
+    SILVER["Silver Layer (Cleaned, Conformed)<br/>Validated and enriched data<br/>ACID transactions"]
+    GOLD["Gold Layer (Business-Level Aggregates)<br/>Dimensional models<br/>Optimized for BI"]
+    CONSUME["Consumption<br/>SQL Analytics / ML/AI / BI Tools"]
+    
+    DS2 --> ING
+    ING --> BRONZE
+    BRONZE --> SILVER
+    SILVER --> GOLD
+    GOLD --> CONSUME
 ```
 
 ### 2.3 Batch vs. Stream Processing

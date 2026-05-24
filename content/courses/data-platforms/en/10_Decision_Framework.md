@@ -14,16 +14,11 @@ duration: "45 min"
 
 ## 10.1 The Decision Tree
 
-```
-START HERE: What is the PRIMARY purpose of this workload?
-                            │
-          ┌─────────────────┼─────────────────┐
-          │                 │                 │
-   SQL Analytics      Data Engineering     ML / AI
-   & BI Serving         & ETL/ELT         Workloads
-          │                 │                 │
-          ▼                 ▼                 ▼
-  [Section 10.2]      [Section 10.3]    [Section 10.4]
+```mermaid
+flowchart TD
+    START["START"] --> SQL["SQL Analytics"]
+    START --> DE["Data Engineering"]
+    START --> ML["ML/AI"]
 ```
 
 ---

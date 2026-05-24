@@ -504,25 +504,20 @@ CDC is critical for keeping the data platform in sync with operational databases
 
 ### AWS CDC Pattern: DMS + Kinesis + S3
 
-```
-Operational DB (RDS/Aurora)
-        │
-        ▼  AWS DMS reads the binary transaction log
-  AWS Database Migration Service (DMS)
-  - Task Type: CDC only (or Full Load + CDC)
-  - Source: MySQL binlog / PostgreSQL WAL / Oracle Redo Logs
-        │
-        ▼
-  Amazon Kinesis Data Streams  (or S3 directly)
-        │
-        ▼
-  AWS Lambda / Kinesis Data Analytics  (optional transformation)
-        │
-        ▼
-  Amazon S3  (Parquet files)
-        │
-        ▼
-  Amazon Redshift / Glue ETL / Athena
+```mermaid
+flowchart TD
+    ODB["Operational DB (RDS/Aurora)"]
+    DMS["AWS Database Migration Service (DMS)<br/>- Task Type: CDC only<br/>- Source: MySQL binlog / PostgreSQL WAL / Oracle Redo Logs"]
+    KDS["Amazon Kinesis Data Streams"]
+    LAMBDA["AWS Lambda / Kinesis Data Analytics<br/>(optional transformation)"]
+    S3["Amazon S3 (Parquet files)"]
+    CONSUME["Amazon Redshift / Glue ETL / Athena"]
+    
+    ODB --> DMS
+    DMS --> KDS
+    KDS --> LAMBDA
+    LAMBDA --> S3
+    S3 --> CONSUME
 ```
 
 ### Snowflake CDC: Streams and Tasks

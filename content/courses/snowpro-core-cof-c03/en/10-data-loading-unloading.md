@@ -21,17 +21,11 @@ duration: "75 min"
 
 Snowflake's bulk loading process follows this flow:
 
-```
-Source Files (CSV, JSON, Parquet, etc.)
-           │
-           ▼
-      Stage (Internal or External)
-           │
-           ▼
-    COPY INTO <table>
-           │
-           ▼
-      Snowflake Table (micro-partitions)
+```mermaid
+flowchart LR
+    SF["Source Files"] --> STG["Stage"]
+    STG --> COPY["COPY INTO"]
+    COPY --> SNOW["Snowflake Table"]
 ```
 
 ---

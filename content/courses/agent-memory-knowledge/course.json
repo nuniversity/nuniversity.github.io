@@ -1,0 +1,25 @@
+{
+  "area": "Artificial Intelligence",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "4 weeks",
+  "icon": "database",
+  "en": {
+    "title": "Agent Knowledge Bases and Memory",
+    "description": "Design persistent memory and knowledge systems for AI agents. Covers short-term and long-term memory, vector stores and embeddings, RAG architectures, knowledge base integration, and advanced retrieval strategies.",
+    "difficulty": "Intermediate",
+    "duration": "4 Weeks"
+  },
+  "pt": {
+    "title": "Bases de Conhecimento e Memória para Agentes",
+    "description": "Projete sistemas de memória persistente e conhecimento para agentes de IA. Aborda memória de curto e longo prazo, vetores e embeddings, arquiteturas RAG, integração de bases de conhecimento e estratégias avançadas de recuperação.",
+    "difficulty": "Intermediário",
+    "duration": "4 Semanas"
+  },
+  "es": {
+    "title": "Bases de Conocimiento y Memoria para Agentes",
+    "description": "Diseña sistemas de memoria persistente y conocimiento para agentes de IA. Cubre memoria a corto y largo plazo, vectores y embeddings, arquitecturas RAG, integración de bases de conocimiento y estrategias avanzadas de recuperación.",
+    "difficulty": "Intermedio",
+    "duration": "4 Semanas"
+  }
+}

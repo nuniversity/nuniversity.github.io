@@ -1,0 +1,25 @@
+{
+  "area": "Artificial Intelligence",
+  "author": "NUniversity",
+  "difficulty": "advanced",
+  "duration": "4 weeks",
+  "icon": "shield",
+  "en": {
+    "title": "Guardrails and Evaluation Framework for Agentic Systems",
+    "description": "Design safety guardrails and evaluation frameworks for production agentic systems. Covers guardrail principles and implementation, LLM evaluation methodologies, automated testing strategies for agents, scoring metrics, and continuous monitoring.",
+    "difficulty": "Advanced",
+    "duration": "4 Weeks"
+  },
+  "pt": {
+    "title": "Guardrails e Framework de Avaliação para Sistemas Agenticos",
+    "description": "Projete guardrails de segurança e frameworks de avaliação para sistemas agenticos em produção. Aborda princípios e implementação de guardrails, metodologias de avaliação LLM, estratégias de teste automatizado para agentes, métricas de pontuação e monitoramento contínuo.",
+    "difficulty": "Avançado",
+    "duration": "4 Semanas"
+  },
+  "es": {
+    "title": "Guardrails y Marco de Evaluación para Sistemas Agenticos",
+    "description": "Diseña guardrails de seguridad y marcos de evaluación para sistemas agenticos en producción. Cubre principios e implementación de guardrails, metodologías de evaluación LLM, estrategias de prueba automatizada para agentes, métricas de puntuación y monitoreo continuo.",
+    "difficulty": "Avanzado",
+    "duration": "4 Semanas"
+  }
+}

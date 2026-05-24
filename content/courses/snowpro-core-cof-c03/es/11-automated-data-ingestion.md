@@ -35,20 +35,12 @@ El **Dominio 3.0** representa aproximadamente el **~18%** del examen. Los patron
 
 ### Cómo Funciona Snowpipe
 
-```
-Archivos llegan a S3/Azure/GCS
-         │
-         ▼
-Evento de Cloud Storage (S3 Event, Azure Event Grid, GCS Pub/Sub)
-         │
-         ▼
-Snowpipe recibe la notificación (o llamada a REST API)
-         │
-         ▼
-COPY INTO se ejecuta (sin servidor — no se requiere warehouse)
-         │
-         ▼
-Datos disponibles en la tabla Snowflake (segundos a minutos)
+```mermaid
+flowchart LR
+    FILES["Archivos llegan"] --> EVT["Evento de Cloud Storage"]
+    EVT --> SP["Notificación Snowpipe"]
+    SP --> COPY["COPY INTO"]
+    COPY --> AVAIL["Datos disponibles"]
 ```
 
 ### Creación de un Pipe

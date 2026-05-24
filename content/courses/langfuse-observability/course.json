@@ -1,0 +1,25 @@
+{
+  "area": "Artificial Intelligence",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "3 weeks",
+  "icon": "activity",
+  "en": {
+    "title": "Observability and Evaluation with LangFuse",
+    "description": "Learn to observe, trace, evaluate, and optimize LLM applications using LangFuse. Covers SDK integration, tracing agent executions, LLM-as-judge evaluations, prompt management, and production monitoring dashboards.",
+    "difficulty": "Intermediate",
+    "duration": "3 Weeks"
+  },
+  "pt": {
+    "title": "Observabilidade e Avaliação com LangFuse",
+    "description": "Aprenda a observar, rastrear, avaliar e otimizar aplicações LLM usando LangFuse. Aborda integração SDK, rastreamento de execuções de agentes, avaliações LLM-como-juiz, gerenciamento de prompts e dashboards de monitoramento em produção.",
+    "difficulty": "Intermediário",
+    "duration": "3 Semanas"
+  },
+  "es": {
+    "title": "Observabilidad y Evaluación con LangFuse",
+    "description": "Aprende a observar, trazar, evaluar y optimizar aplicaciones LLM usando LangFuse. Cubre integración SDK, trazado de ejecuciones de agentes, evaluaciones LLM-como-juez, gestión de prompts y paneles de monitoreo en producción.",
+    "difficulty": "Intermedio",
+    "duration": "3 Semanas"
+  }
+}

@@ -21,17 +21,11 @@ O **Domínio 3.0 — Carregamento, Exportação e Conectividade de Dados** repre
 
 O processo de carregamento em massa do Snowflake segue este fluxo:
 
-```
-Arquivos de Origem (CSV, JSON, Parquet, etc.)
-           │
-           ▼
-      Stage (Interno ou Externo)
-           │
-           ▼
-    COPY INTO <tabela>
-           │
-           ▼
-      Tabela Snowflake (micro-partições)
+```mermaid
+flowchart LR
+    SF["Arquivos de Origem"] --> STG["Stage"]
+    STG --> COPY["COPY INTO"]
+    COPY --> SNOW["Tabela Snowflake"]
 ```
 
 ---
