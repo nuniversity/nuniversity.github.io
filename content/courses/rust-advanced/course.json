@@ -1,0 +1,25 @@
+{
+  "area": "Rust",
+  "author": "NUniversity",
+  "difficulty": "advanced",
+  "duration": "6 weeks",
+  "icon": "terminal",
+  "en": {
+    "title": "Advanced Rust & Systems Programming",
+    "description": "Master concurrency, async/await with Tokio, unsafe Rust, FFI, macros, smart pointers, and build high-performance production systems.",
+    "difficulty": "Advanced",
+    "duration": "6 Weeks"
+  },
+  "pt": {
+    "title": "Rust Avançado e Programação de Sistemas",
+    "description": "Domine concorrência, async/await com Tokio, Rust inseguro, FFI, macros, smart pointers e construa sistemas de produção de alta performance.",
+    "difficulty": "Avançado",
+    "duration": "6 Semanas"
+  },
+  "es": {
+    "title": "Rust Avanzado y Programación de Sistemas",
+    "description": "Domina concurrencia, async/await con Tokio, Rust inseguro, FFI, macros, smart pointers y construye sistemas de producción de alto rendimiento.",
+    "difficulty": "Avanzado",
+    "duration": "6 Semanas"
+  }
+}

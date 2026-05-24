@@ -1,0 +1,25 @@
+{
+  "area": "LangGraph",
+  "author": "NUniversity",
+  "difficulty": "advanced",
+  "duration": "5 weeks",
+  "icon": "git-branch",
+  "en": {
+    "title": "Advanced LangGraph & Production AI Agents",
+    "description": "Master production-grade agent systems: deployment, observability, hierarchical agents, RAG agents, reflection patterns, and large-scale multi-agent orchestration.",
+    "difficulty": "Advanced",
+    "duration": "5 Weeks"
+  },
+  "pt": {
+    "title": "LangGraph Avançado e Agentes de IA em Produção",
+    "description": "Domine sistemas de agentes de nível de produção: deploy, observabilidade, agentes hierárquicos, agentes RAG, padrões de reflexão e orquestração multi-agente em larga escala.",
+    "difficulty": "Avançado",
+    "duration": "5 Semanas"
+  },
+  "es": {
+    "title": "LangGraph Avanzado y Agentes de IA en Producción",
+    "description": "Domina sistemas de agentes de nivel de producción: despliegue, observabilidad, agentes jerárquicos, agentes RAG, patrones de reflexión y orquestación multi-agente a gran escala.",
+    "difficulty": "Avanzado",
+    "duration": "5 Semanas"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "area": "SQL",
+  "author": "NUniversity",
+  "difficulty": "beginner",
+  "duration": "3 weeks",
+  "icon": "database",
+  "en": {
+    "title": "SQL Fundamentals for Beginners",
+    "description": "Learn SQL from the ground up. Master SELECT queries, filtering, data manipulation, table creation, and aggregation functions with hands-on exercises.",
+    "difficulty": "Beginner",
+    "duration": "3 Weeks"
+  },
+  "pt": {
+    "title": "Fundamentos de SQL para Iniciantes",
+    "description": "Aprenda SQL do zero. Domine consultas SELECT, filtros, manipulação de dados, criação de tabelas e funções de agregação com exercícios práticos.",
+    "difficulty": "Iniciante",
+    "duration": "3 Semanas"
+  },
+  "es": {
+    "title": "Fundamentos de SQL para Principiantes",
+    "description": "Aprende SQL desde cero. Domina consultas SELECT, filtros, manipulación de datos, creación de tablas y funciones de agregación con ejercicios prácticos.",
+    "difficulty": "Principiante",
+    "duration": "3 Semanas"
+  }
+}

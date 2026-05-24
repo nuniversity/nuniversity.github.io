@@ -1,0 +1,25 @@
+{
+  "area": "Rust",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "5 weeks",
+  "icon": "terminal",
+  "en": {
+    "title": "Intermediate Rust Programming",
+    "description": "Deepen your Rust expertise with error handling, generics, traits, collections, lifetimes, closures, and iterators for robust systems programming.",
+    "difficulty": "Intermediate",
+    "duration": "5 Weeks"
+  },
+  "pt": {
+    "title": "Programação Intermediária em Rust",
+    "description": "Aprofunde sua expertise em Rust com tratamento de erros, genéricos, traits, coleções, lifetimes, closures e iterators para programação de sistemas robusta.",
+    "difficulty": "Intermediário",
+    "duration": "5 Semanas"
+  },
+  "es": {
+    "title": "Programación Intermedia en Rust",
+    "description": "Profundiza tu experiencia en Rust con manejo de errores, genéricos, traits, colecciones, lifetimes, closures e iterators para programación de sistemas robusta.",
+    "difficulty": "Intermedio",
+    "duration": "5 Semanas"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "area": "Python",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "5 weeks",
+  "icon": "code",
+  "en": {
+    "title": "Intermediate Python Programming",
+    "description": "Deepen your Python skills with OOP, error handling, file I/O, generators, decorators, unit testing, and professional tooling practices.",
+    "difficulty": "Intermediate",
+    "duration": "5 Weeks"
+  },
+  "pt": {
+    "title": "Programação Intermediária em Python",
+    "description": "Aprofunde suas habilidades em Python com POO, tratamento de erros, E/S de arquivos, geradores, decoradores, testes e ferramentas profissionais.",
+    "difficulty": "Intermediário",
+    "duration": "5 Semanas"
+  },
+  "es": {
+    "title": "Programación Intermedia en Python",
+    "description": "Profundiza tus habilidades en Python con POO, manejo de errores, E/S de archivos, generadores, decoradores, pruebas y herramientas profesionales.",
+    "difficulty": "Intermedio",
+    "duration": "5 Semanas"
+  }
+}

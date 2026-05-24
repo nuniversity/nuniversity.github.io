@@ -1,0 +1,25 @@
+{
+  "area": "SQL",
+  "author": "NUniversity",
+  "difficulty": "advanced",
+  "duration": "5 weeks",
+  "icon": "database",
+  "en": {
+    "title": "Advanced SQL & Database Engineering",
+    "description": "Master window functions, recursive CTEs, query tuning, partitioning, stored procedures, JSON operations, and database security at scale.",
+    "difficulty": "Advanced",
+    "duration": "5 Weeks"
+  },
+  "pt": {
+    "title": "SQL Avançado e Engenharia de Bancos de Dados",
+    "description": "Domine funções de janela, CTEs recursivas, otimização de consultas, particionamento, procedures, operações JSON e segurança de banco de dados em escala.",
+    "difficulty": "Avançado",
+    "duration": "5 Semanas"
+  },
+  "es": {
+    "title": "SQL Avanzado e Ingeniería de Bases de Datos",
+    "description": "Domina funciones de ventana, CTEs recursivas, optimización de consultas, particionamiento, procedimientos, operaciones JSON y seguridad de bases de datos a escala.",
+    "difficulty": "Avanzado",
+    "duration": "5 Semanas"
+  }
+}

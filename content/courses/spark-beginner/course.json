@@ -1,0 +1,25 @@
+{
+  "area": "Apache Spark",
+  "author": "NUniversity",
+  "difficulty": "beginner",
+  "duration": "4 weeks",
+  "icon": "zap",
+  "en": {
+    "title": "Apache Spark & PySpark Fundamentals",
+    "description": "Learn big data processing with Spark. Master RDDs, DataFrames, Spark SQL, and build your first distributed data pipelines with PySpark.",
+    "difficulty": "Beginner",
+    "duration": "4 Weeks"
+  },
+  "pt": {
+    "title": "Fundamentos de Apache Spark e PySpark",
+    "description": "Aprenda processamento de big data com Spark. Domine RDDs, DataFrames, Spark SQL e construa seus primeiros pipelines de dados distribuídos com PySpark.",
+    "difficulty": "Iniciante",
+    "duration": "4 Semanas"
+  },
+  "es": {
+    "title": "Fundamentos de Apache Spark y PySpark",
+    "description": "Aprende procesamiento de big data con Spark. Domina RDDs, DataFrames, Spark SQL y construye tus primeros pipelines de datos distribuidos con PySpark.",
+    "difficulty": "Principiante",
+    "duration": "4 Semanas"
+  }
+}

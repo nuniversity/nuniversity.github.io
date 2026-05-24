@@ -1,0 +1,25 @@
+{
+  "area": "LangGraph",
+  "author": "NUniversity",
+  "difficulty": "beginner",
+  "duration": "3 weeks",
+  "icon": "git-branch",
+  "en": {
+    "title": "LangGraph Fundamentals",
+    "description": "Start building AI agents with LangGraph. Learn graphs, nodes, edges, LLM integration, tools, and simple agent workflows from scratch.",
+    "difficulty": "Beginner",
+    "duration": "3 Weeks"
+  },
+  "pt": {
+    "title": "Fundamentos de LangGraph",
+    "description": "Comece a construir agentes de IA com LangGraph. Aprenda grafos, nós, arestas, integração com LLM, ferramentas e fluxos de trabalho simples.",
+    "difficulty": "Iniciante",
+    "duration": "3 Semanas"
+  },
+  "es": {
+    "title": "Fundamentos de LangGraph",
+    "description": "Comienza a construir agentes de IA con LangGraph. Aprende grafos, nodos, aristas, integración con LLM, herramientas y flujos de trabajo simples.",
+    "difficulty": "Principiante",
+    "duration": "3 Semanas"
+  }
+}

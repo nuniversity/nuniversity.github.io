@@ -1,0 +1,25 @@
+{
+  "area": "SQL",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "4 weeks",
+  "icon": "database",
+  "en": {
+    "title": "Intermediate SQL",
+    "description": "Master JOINs, subqueries, CTEs, set operations, indexing, views, transactions, and query optimization for real-world database work.",
+    "difficulty": "Intermediate",
+    "duration": "4 Weeks"
+  },
+  "pt": {
+    "title": "SQL Intermediário",
+    "description": "Domine JOINs, subconsultas, CTEs, operações de conjunto, índices, views, transações e otimização de consultas para trabalho real com bancos de dados.",
+    "difficulty": "Intermediário",
+    "duration": "4 Semanas"
+  },
+  "es": {
+    "title": "SQL Intermedio",
+    "description": "Domina JOINs, subconsultas, CTEs, operaciones de conjunto, índices, vistas, transacciones y optimización de consultas para trabajo real con bases de datos.",
+    "difficulty": "Intermedio",
+    "duration": "4 Semanas"
+  }
+}

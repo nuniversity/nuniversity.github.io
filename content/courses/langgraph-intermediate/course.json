@@ -1,0 +1,25 @@
+{
+  "area": "LangGraph",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "4 weeks",
+  "icon": "git-branch",
+  "en": {
+    "title": "Intermediate LangGraph & Agent Workflows",
+    "description": "Build production-ready AI agents with advanced state management, memory systems, human-in-the-loop, multi-agent collaboration, and real-time streaming.",
+    "difficulty": "Intermediate",
+    "duration": "4 Weeks"
+  },
+  "pt": {
+    "title": "LangGraph Intermediário e Fluxos de Agentes",
+    "description": "Construa agentes de IA prontos para produção com gerenciamento de estado avançado, sistemas de memória, humano-no-loop e colaboração multi-agente.",
+    "difficulty": "Intermediário",
+    "duration": "4 Semanas"
+  },
+  "es": {
+    "title": "LangGraph Intermedio y Flujos de Agentes",
+    "description": "Construye agentes de IA listos para producción con gestión de estado avanzada, sistemas de memoria, humano-en-el-bucle y colaboración multi-agente.",
+    "difficulty": "Intermedio",
+    "duration": "4 Semanas"
+  }
+}

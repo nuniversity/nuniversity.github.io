@@ -1,0 +1,25 @@
+{
+  "area": "Python",
+  "author": "NUniversity",
+  "difficulty": "beginner",
+  "duration": "4 weeks",
+  "icon": "code",
+  "en": {
+    "title": "Python Fundamentals for Beginners",
+    "description": "Start your Python journey from scratch. Learn variables, data types, control flow, functions, and basic data structures through hands-on exercises and real-world examples.",
+    "difficulty": "Beginner",
+    "duration": "4 Weeks"
+  },
+  "pt": {
+    "title": "Fundamentos de Python para Iniciantes",
+    "description": "Comece sua jornada em Python do zero. Aprenda variáveis, tipos de dados, fluxo de controle, funções e estruturas de dados básicas com exercícios práticos.",
+    "difficulty": "Iniciante",
+    "duration": "4 Semanas"
+  },
+  "es": {
+    "title": "Fundamentos de Python para Principiantes",
+    "description": "Comienza tu viaje en Python desde cero. Aprende variables, tipos de datos, flujo de control, funciones y estructuras de datos básicas con ejercicios prácticos.",
+    "difficulty": "Principiante",
+    "duration": "4 Semanas"
+  }
+}

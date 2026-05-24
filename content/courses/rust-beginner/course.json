@@ -1,0 +1,25 @@
+{
+  "area": "Rust",
+  "author": "NUniversity",
+  "difficulty": "beginner",
+  "duration": "5 weeks",
+  "icon": "terminal",
+  "en": {
+    "title": "Rust Fundamentals",
+    "description": "Start your Rust journey. Learn syntax, ownership, borrowing, structs, enums, pattern matching, and build your first Rust programs with Cargo.",
+    "difficulty": "Beginner",
+    "duration": "5 Weeks"
+  },
+  "pt": {
+    "title": "Fundamentos de Rust",
+    "description": "Comece sua jornada em Rust. Aprenda sintaxe, ownership, borrowing, structs, enums, pattern matching e crie seus primeiros programas com Cargo.",
+    "difficulty": "Iniciante",
+    "duration": "5 Semanas"
+  },
+  "es": {
+    "title": "Fundamentos de Rust",
+    "description": "Comienza tu viaje en Rust. Aprende sintaxis, ownership, borrowing, structs, enums, pattern matching y crea tus primeros programas con Cargo.",
+    "difficulty": "Principiante",
+    "duration": "5 Semanas"
+  }
+}

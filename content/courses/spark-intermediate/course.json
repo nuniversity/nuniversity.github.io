@@ -1,0 +1,25 @@
+{
+  "area": "Apache Spark",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "5 weeks",
+  "icon": "zap",
+  "en": {
+    "title": "Intermediate PySpark & Big Data Engineering",
+    "description": "Master advanced DataFrames, UDFs, aggregations, join strategies, optimization, partitioning, ETL pipelines, and advanced Spark SQL.",
+    "difficulty": "Intermediate",
+    "duration": "5 Weeks"
+  },
+  "pt": {
+    "title": "PySpark Intermediário e Engenharia de Big Data",
+    "description": "Domine DataFrames avançados, UDFs, agregações, estratégias de join, otimização, particionamento, pipelines ETL e Spark SQL avançado.",
+    "difficulty": "Intermediário",
+    "duration": "5 Semanas"
+  },
+  "es": {
+    "title": "PySpark Intermedio e Ingeniería de Big Data",
+    "description": "Domina DataFrames avanzados, UDFs, agregaciones, estrategias de join, optimización, particionamiento, pipelines ETL y Spark SQL avanzado.",
+    "difficulty": "Intermedio",
+    "duration": "5 Semanas"
+  }
+}

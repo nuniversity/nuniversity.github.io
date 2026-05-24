@@ -1,0 +1,25 @@
+{
+  "area": "Apache Spark",
+  "author": "NUniversity",
+  "difficulty": "advanced",
+  "duration": "6 weeks",
+  "icon": "zap",
+  "en": {
+    "title": "Advanced Spark & Distributed Systems",
+    "description": "Master Structured Streaming, MLlib, GraphX, cluster tuning, Delta Lake, and build production-grade distributed data systems at scale.",
+    "difficulty": "Advanced",
+    "duration": "6 Weeks"
+  },
+  "pt": {
+    "title": "Spark Avançado e Sistemas Distribuídos",
+    "description": "Domine Structured Streaming, MLlib, GraphX, ajuste de cluster, Delta Lake e construa sistemas de dados distribuídos prontos para produção.",
+    "difficulty": "Avançado",
+    "duration": "6 Semanas"
+  },
+  "es": {
+    "title": "Spark Avanzado y Sistemas Distribuidos",
+    "description": "Domina Structured Streaming, MLlib, GraphX, ajuste de clúster, Delta Lake y construye sistemas de datos distribuidos listos para producción.",
+    "difficulty": "Avanzado",
+    "duration": "6 Semanas"
+  }
+}

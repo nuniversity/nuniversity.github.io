@@ -1,0 +1,25 @@
+{
+  "area": "Python",
+  "author": "NUniversity",
+  "difficulty": "advanced",
+  "duration": "6 weeks",
+  "icon": "code",
+  "en": {
+    "title": "Advanced Python Mastery",
+    "description": "Master concurrency, async programming, metaprogramming, performance optimization, design patterns, and production-ready Python.",
+    "difficulty": "Advanced",
+    "duration": "6 Weeks"
+  },
+  "pt": {
+    "title": "Domínio Avançado de Python",
+    "description": "Domine concorrência, programação assíncrona, metaprogramação, otimização de performance, padrões de projeto e Python pronto para produção.",
+    "difficulty": "Avançado",
+    "duration": "6 Semanas"
+  },
+  "es": {
+    "title": "Dominio Avanzado de Python",
+    "description": "Domina concurrencia, programación asíncrona, metaprogramación, optimización de rendimiento, patrones de diseño y Python listo para producción.",
+    "difficulty": "Avanzado",
+    "duration": "6 Semanas"
+  }
+}
