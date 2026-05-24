@@ -3,7 +3,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Gamepad2, Search, Trophy, Target, Brain, Code, BookOpen, Sparkles, Zap, Award } from 'lucide-react'
+import { Gamepad2, Search, Trophy, Target, Brain, Code, BookOpen, Sparkles, Zap, Award, Atom } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { GameMetadata } from '@/lib/games/get-game-content'
 
@@ -55,7 +55,9 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
       'physics': 'Physics',
       'logic': 'Logic & Puzzles',
       'fun': 'Fun & Games',
-      'quiz': 'Certification Quizzes'
+      'quiz': 'Certification Quizzes',
+      'science': 'Science',
+      'puzzles': 'Word Puzzles'
     }
     return labels[category] || category
   }
@@ -70,7 +72,9 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
       'physics': Zap,
       'logic': Brain,
       'fun': Sparkles,
-      'quiz': Award
+      'quiz': Award,
+      'science': Atom,
+      'puzzles': Search
     }
     return icons[category] || Gamepad2
   }

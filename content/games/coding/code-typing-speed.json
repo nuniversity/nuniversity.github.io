@@ -1,0 +1,35 @@
+{
+  "id": "code-typing-speed",
+  "title": "Code Typing Speed",
+  "description": "Improve your coding speed and accuracy by typing real code snippets against the clock. Supports Python, JavaScript, HTML, and CSS.",
+  "difficulty": "beginner",
+  "category": "coding",
+  "durations": [30, 60, 120],
+  "languages": ["python", "javascript", "html", "css"],
+  "snippets": {
+    "python": [
+      {"code": "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)", "language": "python"},
+      {"code": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n    \n    def greet(self):\n        return f\"Hello, my name is {self.name}\"", "language": "python"},
+      {"code": "import json\n\ndef load_config(path):\n    with open(path, 'r') as f:\n        return json.load(f)\n\nconfig = load_config('config.json')", "language": "python"},
+      {"code": "def quicksort(arr):\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quicksort(left) + middle + quicksort(right)", "language": "python"},
+      {"code": "from functools import lru_cache\n\n@lru_cache(maxsize=None)\ndef factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)", "language": "python"}
+    ],
+    "javascript": [
+      {"code": "function binarySearch(arr, target) {\n    let left = 0;\n    let right = arr.length - 1;\n    while (left <= right) {\n        const mid = Math.floor((left + right) / 2);\n        if (arr[mid] === target) return mid;\n        if (arr[mid] < target) left = mid + 1;\n        else right = mid - 1;\n    }\n    return -1;\n}", "language": "javascript"},
+      {"code": "const fetchUser = async (id) => {\n    try {\n        const response = await fetch(`/api/users/${id}`);\n        if (!response.ok) throw new Error('Network error');\n        return await response.json();\n    } catch (error) {\n        console.error('Failed to fetch user:', error);\n    }\n};", "language": "javascript"},
+      {"code": "class EventEmitter {\n    constructor() {\n        this.events = {};\n    }\n    on(event, listener) {\n        if (!this.events[event]) this.events[event] = [];\n        this.events[event].push(listener);\n    }\n    emit(event, ...args) {\n        if (!this.events[event]) return;\n        this.events[event].forEach(listener => listener(...args));\n    }\n}", "language": "javascript"},
+      {"code": "const debounce = (fn, delay) => {\n    let timeoutId;\n    return (...args) => {\n        clearTimeout(timeoutId);\n        timeoutId = setTimeout(() => fn(...args), delay);\n    };\n};", "language": "javascript"},
+      {"code": "function quickSort(arr) {\n    if (arr.length <= 1) return arr;\n    const pivot = arr[Math.floor(arr.length / 2)];\n    const left = arr.filter(x => x < pivot);\n    const middle = arr.filter(x => x === pivot);\n    const right = arr.filter(x => x > pivot);\n    return [...quickSort(left), ...middle, ...quickSort(right)];\n}", "language": "javascript"}
+    ],
+    "html": [
+      {"code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>My Page</title>\n</head>\n<body>\n    <header>\n        <h1>Welcome</h1>\n    </header>\n</body>\n</html>", "language": "html"},
+      {"code": "<form action=\"/submit\" method=\"POST\">\n    <label for=\"email\">Email:</label>\n    <input type=\"email\" id=\"email\" name=\"email\" required>\n    <label for=\"password\">Password:</label>\n    <input type=\"password\" id=\"password\" name=\"password\" minlength=\"8\">\n    <button type=\"submit\">Sign In</button>\n</form>", "language": "html"},
+      {"code": "<nav aria-label=\"Main navigation\">\n    <ul>\n        <li><a href=\"/\">Home</a></li>\n        <li><a href=\"/about\">About</a></li>\n        <li><a href=\"/services\">Services</a></li>\n        <li><a href=\"/contact\">Contact</a></li>\n    </ul>\n</nav>", "language": "html"}
+    ],
+    "css": [
+      {"code": ".container {\n    max-width: 1200px;\n    margin: 0 auto;\n    padding: 0 1rem;\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n    gap: 2rem;\n}", "language": "css"},
+      {"code": ".card {\n    background: #fff;\n    border-radius: 8px;\n    box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n    transition: transform 0.2s, box-shadow 0.2s;\n}\n.card:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 4px 8px rgba(0,0,0,0.15);\n}", "language": "css"},
+      {"code": "@media (max-width: 768px) {\n    .sidebar {\n        display: none;\n    }\n    .main-content {\n        margin-left: 0;\n        padding: 1rem;\n    }\n}", "language": "css"}
+    ]
+  }
+}

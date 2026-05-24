@@ -1,0 +1,11 @@
+{
+  "id": "number-sequence",
+  "title": "Number Sequence Memory",
+  "description": "Test and improve your short-term memory. Watch number sequences and recall them in order. Difficulty increases automatically as you progress.",
+  "difficulty": "beginner",
+  "category": "logic",
+  "startingLength": 3,
+  "maxLength": 15,
+  "displayTimeMs": 1000,
+  "maxDigits": 9
+}

@@ -1,0 +1,13 @@
+{
+  "id": "binary-hex-game",
+  "title": "Binary Hex Decimal Challenge",
+  "description": "Practice converting between binary, decimal, and hexadecimal number systems. Master the foundations of computer science.",
+  "difficulty": "intermediate",
+  "category": "coding",
+  "modes": ["dec-to-bin", "bin-to-dec", "dec-to-hex", "hex-to-dec", "bin-to-hex", "hex-to-bin"],
+  "difficultyLevels": {
+    "beginner": { "maxBits": 4 },
+    "intermediate": { "maxBits": 8 },
+    "advanced": { "maxBits": 16 }
+  }
+}

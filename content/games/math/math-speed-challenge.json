@@ -1,0 +1,13 @@
+{
+  "id": "math-speed-challenge",
+  "title": "Math Speed Challenge",
+  "description": "Test your arithmetic skills against the clock. Choose from addition, subtraction, multiplication, and division with configurable difficulty.",
+  "difficulty": "beginner",
+  "category": "math",
+  "operations": ["add", "subtract", "multiply", "divide"],
+  "difficultyLevels": {
+    "beginner": { "maxNumber": 10, "timeSeconds": 60 },
+    "intermediate": { "maxNumber": 50, "timeSeconds": 60 },
+    "advanced": { "maxNumber": 100, "timeSeconds": 60 }
+  }
+}

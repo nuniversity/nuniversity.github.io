@@ -1,0 +1,13 @@
+{
+  "id": "word-search",
+  "title": "Word Search",
+  "description": "Find hidden words in a letter grid. Choose from various categories or use vocabulary lists.",
+  "difficulty": "beginner",
+  "category": "puzzles",
+  "categories": {
+    "programming": ["ARRAY", "BINARY", "CACHE", "CLASS", "DEBUG", "QUEUE", "STACK", "LOOP", "SORT", "TREE"],
+    "science": ["ATOM", "CELL", "DNA", "ENERGY", "FORCE", "GRAVITY", "MASS", "MOLECULE", "PROTON", "WAVE"],
+    "geography": ["OCEAN", "RIVER", "MOUNTAIN", "DESERT", "FOREST", "ISLAND", "VALLEY", "PLATEAU", "GLACIER", "CANAL"],
+    "mathematics": ["ALGEBRA", "ANGLE", "CIRCLE", "DIGIT", "FRACTION", "MATRIX", "RADIUS", "SQUARE", "VECTOR", "VOLUME"]
+  }
+}

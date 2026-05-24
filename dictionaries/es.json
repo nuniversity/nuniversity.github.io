@@ -377,7 +377,8 @@
       "uncategorized": "Sin Categoría",
       "collaboration": "Collaboration & Teamwork (es)",
       "business_strategy": "Estrategia Empresarial",
-      "productivity": "Productividad y Gestión del Tiempo"
+      "productivity": "Productividad y Gestión del Tiempo",
+      "study": "Estudio y Aprendizaje"
     },
     "promptBuilder": {
       "title": "Constructor de Prompts LLM",

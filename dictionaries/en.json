@@ -379,7 +379,8 @@
       "uncategorized": "Uncategorized",
       "collaboration": "Collaboration & Teamwork",
       "business_strategy": "Business Strategy",
-      "productivity": "Productivity & Time Management"
+      "productivity": "Productivity & Time Management",
+      "study": "Study & Learning"
     },
     "promptBuilder": {
       "title": "LLM Prompt Builder",

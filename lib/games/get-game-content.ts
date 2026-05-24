@@ -63,7 +63,7 @@ export interface GameMetadata {
   description: string
   category: string
   difficulty: string
-  type: 'vocabulary' | 'grammar' | 'math' | 'coding' | 'physics' | 'logic' | 'fun' | 'quiz'
+  type: 'vocabulary' | 'grammar' | 'math' | 'coding' | 'physics' | 'logic' | 'fun' | 'quiz' | 'science' | 'puzzles'
 }
 
 const gamesDirectory = path.join(process.cwd(), 'content/games')
@@ -146,6 +146,21 @@ export async function getQuizGame(slug: string): Promise<QuizGame | null> {
     return JSON.parse(fileContent)
   } catch (error) {
     console.error(`Error reading quiz game ${slug}:`, error)
+    return null
+  }
+}
+
+/**
+ * Generic getter for any game type
+ */
+export async function getGameFile<T>(type: string, slug: string): Promise<T | null> {
+  try {
+    const filePath = path.join(gamesDirectory, type, `${slug}.json`)
+    if (!fs.existsSync(filePath)) return null
+    const fileContent = fs.readFileSync(filePath, 'utf-8')
+    return JSON.parse(fileContent)
+  } catch (error) {
+    console.error(`Error reading ${type} game ${slug}:`, error)
     return null
   }
 }

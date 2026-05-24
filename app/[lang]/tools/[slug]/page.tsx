@@ -33,11 +33,41 @@ const EisenhowerMatrix = dynamicImport(() => import('@/components/tools/Eisenhow
   ssr: false,
 })
 
+const PomodoroTimer = dynamicImport(() => import('@/components/tools/PomodoroTimer'), {
+  ssr: false,
+})
+
+const UnitConverter = dynamicImport(() => import('@/components/tools/UnitConverter'), {
+  ssr: false,
+})
+
+const DecisionMatrix = dynamicImport(() => import('@/components/tools/DecisionMatrix'), {
+  ssr: false,
+})
+
+const FlashcardMaker = dynamicImport(() => import('@/components/tools/FlashcardMaker'), {
+  ssr: false,
+})
+
+const RegexTester = dynamicImport(() => import('@/components/tools/RegexTester'), {
+  ssr: false,
+})
+
+const HabitTracker = dynamicImport(() => import('@/components/tools/HabitTracker'), {
+  ssr: false,
+})
+
 const toolComponents: Record<string, any> = {
   'llm-prompt-builder': LLMPromptBuilder,
   'brain-writing-session': BrainWritingSession,
   'swot-matrix': SWOTMatrix,
-  'eisenhower-matrix': EisenhowerMatrix
+  'eisenhower-matrix': EisenhowerMatrix,
+  'pomodoro-timer': PomodoroTimer,
+  'unit-converter': UnitConverter,
+  'decision-matrix': DecisionMatrix,
+  'flashcard-maker': FlashcardMaker,
+  'regex-tester': RegexTester,
+  'habit-tracker': HabitTracker,
 }
 
 export async function generateStaticParams() {
