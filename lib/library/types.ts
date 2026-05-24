@@ -63,6 +63,19 @@ export const CATEGORIES = [
   'DevOps',
   'Cybersecurity',
   'Blockchain',
+  'Portuguese Language',
+  'Brazilian History',
+  'Literature',
+  'Education & Pedagogy',
+  'Exam Preparation',
+  'Business & Administration',
+  'Law & Economics',
+  'Biology & Life Sciences',
+  'Humanities & Social Sciences',
+  'Astronomy & Space Science',
+  'Digital Library',
+  'Teacher Training',
+  'Open Access Research',
 ] as const
 
 export type Category = typeof CATEGORIES[number]
