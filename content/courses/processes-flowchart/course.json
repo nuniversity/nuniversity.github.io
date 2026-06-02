@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "beginner",
+  "duration": "4 hours",
+  "icon": "book-open",
+  "en": {
+    "title": "Processes & Flowcharts",
+    "description": "Master the fundamentals of processes, systematic thinking, and flowchart notation. Learn to visualize workflows, identify bottlenecks, and optimize processes before writing code.",
+    "difficulty": "Beginner",
+    "duration": "4 Hours"
+  },
+  "pt": {
+    "title": "Processos e Fluxogramas",
+    "description": "Domine os fundamentos de processos, pensamento sistemático e notação de fluxogramas. Aprenda a visualizar fluxos de trabalho, identificar gargalos e otimizar processos antes de escrever código.",
+    "difficulty": "Iniciante",
+    "duration": "4 Horas"
+  },
+  "es": {
+    "title": "Procesos y Diagramas de Flujo",
+    "description": "Domina los fundamentos de procesos, pensamiento sistemático y notación de diagramas de flujo. Aprende a visualizar flujos de trabajo, identificar cuellos de botella y optimizar procesos antes de escribir código.",
+    "difficulty": "Principiante",
+    "duration": "4 Horas"
+  }
+}

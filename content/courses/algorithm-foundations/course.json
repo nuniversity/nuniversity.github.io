@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "beginner",
+  "duration": "6 hours",
+  "icon": "code",
+  "en": {
+    "title": "Foundation of Algorithms",
+    "description": "Learn algorithmic thinking without code. Master pseudocode, logic structures, quality principles, and design algorithms through conceptual examples and real-world analogies.",
+    "difficulty": "Beginner",
+    "duration": "6 Hours"
+  },
+  "pt": {
+    "title": "Fundamentos de Algoritmos",
+    "description": "Aprenda pensamento algorítmico sem código. Domine pseudocódigo, estruturas lógicas, princípios de qualidade e design de algoritmos através de exemplos conceituais e analogias do mundo real.",
+    "difficulty": "Iniciante",
+    "duration": "6 Horas"
+  },
+  "es": {
+    "title": "Fundamentos de Algoritmos",
+    "description": "Aprende pensamiento algorítmico sin código. Domina pseudocódigo, estructuras lógicas, principios de calidad y diseño de algoritmos a través de ejemplos conceptuales y analogías del mundo real.",
+    "difficulty": "Principiante",
+    "duration": "6 Horas"
+  }
+}

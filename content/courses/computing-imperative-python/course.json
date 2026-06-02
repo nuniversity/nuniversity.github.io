@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "beginner",
+  "duration": "10 hours",
+  "icon": "code",
+  "en": {
+    "title": "Computing & Imperative Algorithms in Python",
+    "description": "Understand how computers work and learn imperative programming with Python. Master variables, control flow, functions, data structures, and build your first algorithms through hands-on coding.",
+    "difficulty": "Beginner",
+    "duration": "10 Hours"
+  },
+  "pt": {
+    "title": "Computação e Algoritmos Imperativos em Python",
+    "description": "Entenda como os computadores funcionam e aprenda programação imperativa com Python. Domine variáveis, fluxo de controle, funções, estruturas de dados e construa seus primeiros algoritmos com prática de codificação.",
+    "difficulty": "Iniciante",
+    "duration": "10 Horas"
+  },
+  "es": {
+    "title": "Computación y Algoritmos Imperativos en Python",
+    "description": "Entiende cómo funcionan las computadoras y aprende programación imperativa con Python. Domina variables, flujo de control, funciones, estructuras de datos y construye tus primeros algoritmos con práctica de codificación.",
+    "difficulty": "Principiante",
+    "duration": "10 Horas"
+  }
+}
