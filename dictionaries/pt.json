@@ -66,6 +66,7 @@
     "tools": "Ferramentas",
     "games": "Jogos",
     "library": "Biblioteca",
+    "roadmaps": "Roadmaps",
     "about": "Sobre",
     "contact": "Contato"
   },
@@ -473,6 +474,44 @@
           "text": "Use modelos maiores para tarefas complexas ou raciocínio. Claude para codificar, ChatGPT para documentações, Gemini para matemática, lógica e raciocínio."
         }
       }
+    }
+  },
+  "roadmaps": {
+    "title": "Roadmaps",
+    "subtitle": "Caminhos de aprendizado estruturados para guiar sua jornada",
+    "searchPlaceholder": "Buscar roadmaps...",
+    "noResults": "Nenhum roadmap encontrado",
+    "noRoadmaps": "Nenhum roadmap disponível ainda",
+    "tryDifferentSearch": "Tente um termo de busca diferente",
+    "checkBackSoon": "Volte em breve para novos roadmaps",
+    "clearSearch": "Limpar Busca",
+    "startLearning": "Começar a Aprender →",
+    "backToRoadmaps": "Voltar para Roadmaps",
+    "totalRoadmaps": "roadmaps",
+    "totalSteps": "total de etapas",
+    "duration": "Duração",
+    "steps": "Etapas",
+    "difficulty": "Dificuldade",
+    "progress": "Progresso",
+    "overallProgress": "Progresso Geral",
+    "of": "de",
+    "stepsCompleted": "etapas concluídas",
+    "reset": "Resetar",
+    "comments": "Comentário",
+    "ideas": "Ideias para Praticar",
+    "prerequisites": "Pré-requisitos",
+    "nextSteps": "Próximos Passos",
+    "optional": "opcional",
+    "markComplete": "Marcar como Concluído",
+    "completed": "Concluído",
+    "congratulations": "Parabéns!",
+    "roadmapComplete": "Você completou este roadmap!",
+    "goToCourse": "Ir para o Curso",
+    "difficultyLevels": {
+      "all": "Todos os Níveis",
+      "beginner": "Iniciante",
+      "intermediate": "Intermediário",
+      "advanced": "Avançado"
     }
   }
 }

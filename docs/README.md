@@ -30,7 +30,7 @@ npm install
 npm run dev
 
 # 3. Open in browser
-open http://localhost:3000
+open http://localhost:3000  # (or :3001 if 3000 is in use)
 ```
 
 ---
@@ -77,4 +77,4 @@ NUniversity is composed of **five main features**, all accessible via a locale-p
 
 ## 📄 License
 
-© 2025 NUniversity. All Rights Reserved.
+© 2026 NUniversity. All Rights Reserved.

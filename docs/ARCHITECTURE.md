@@ -418,3 +418,4 @@ The `useTheme()` hook is exported from `Providers.tsx` and consumed by `Header.t
 | **DaisyUI + Tailwind** | Rapid UI development with pre-built component classes + customizable tokens |
 | **Custom ThemeProvider** | More control than next-themes; avoids flash of incorrect theme |
 | **Mermaid.js lazy-loaded** | Heavy library — dynamically imported only when a mermaid code block is detected |
+| **Server → Client props** | Functions cannot be passed from Server to Client Components — use string identifiers for icons, not component references |

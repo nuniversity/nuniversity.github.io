@@ -244,7 +244,7 @@ The total number of HTML files = `locales × (pages + courses × lessons + tools
 | Environment | Base URL | Base Path |
 |---|---|---|
 | **Production** | `https://nuniversity.github.io/` | `/nuniversity.github.io` |
-| **Development** | `http://localhost:3000/` | *(empty)* |
+| **Development** | `http://localhost:3000/` (or `:3001`) | *(empty)* |
 
 ### Internal Links
 
@@ -351,8 +351,7 @@ If you need to deploy manually (without GitHub Actions):
 ### Build locally
 
 ```bash
-# Set production environment
-NODE_ENV=production npm run build
+npm run build
 ```
 
 ### Deploy using gh-pages CLI

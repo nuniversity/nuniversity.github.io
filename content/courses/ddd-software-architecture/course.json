@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "advanced",
+  "duration": "10 hours",
+  "icon": "code",
+  "en": {
+    "title": "DDD & Software Architecture",
+    "description": "Master Domain-Driven Design and advanced software architecture. Learn ubiquitous language, bounded contexts, entities, value objects, aggregates, and event-driven architecture.",
+    "difficulty": "Advanced",
+    "duration": "10 Hours"
+  },
+  "pt": {
+    "title": "DDD e Arquitetura de Software",
+    "description": "Domine Domain-Driven Design e arquitetura de software avançada. Aprenda linguagem ubíqua, contextos delimitados, entidades, objetos de valor, agregados e arquitetura orientada a eventos.",
+    "difficulty": "Avançado",
+    "duration": "10 Horas"
+  },
+  "es": {
+    "title": "DDD y Arquitectura de Software",
+    "description": "Domina Domain-Driven Design y arquitectura de software avanzada. Aprende lenguaje ubicuo, contextos delimitados, entidades, objetos de valor, agregados y arquitectura orientada a eventos.",
+    "difficulty": "Avanzado",
+    "duration": "10 Horas"
+  }
+}

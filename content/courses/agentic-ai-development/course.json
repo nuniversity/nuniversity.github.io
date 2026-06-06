@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "advanced",
+  "duration": "10 hours",
+  "icon": "brain",
+  "en": {
+    "title": "Agentic AI Software Development",
+    "description": "Learn AI-assisted software development with agents. Master agent architecture, skills, context management, pipelines, OpenCode workflows, and best practices for the future of coding.",
+    "difficulty": "Advanced",
+    "duration": "10 Hours"
+  },
+  "pt": {
+    "title": "Desenvolvimento de Software com IA Agêntica",
+    "description": "Aprenda desenvolvimento de software assistido por IA com agentes. Domine arquitetura de agentes, habilidades, gerenciamento de contexto, pipelines, workflows OpenCode e melhores práticas para o futuro da programação.",
+    "difficulty": "Avançado",
+    "duration": "10 Horas"
+  },
+  "es": {
+    "title": "Desarrollo de Software con IA Agéntica",
+    "description": "Aprende desarrollo de software asistido por IA con agentes. Domina arquitectura de agentes, habilidades, gestión de contexto, pipelines, workflows OpenCode y mejores prácticas para el futuro de la programación.",
+    "difficulty": "Avanzado",
+    "duration": "10 Horas"
+  }
+}

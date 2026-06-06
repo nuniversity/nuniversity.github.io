@@ -1,120 +1,116 @@
-# NUNIVERSITY WEBSITE
+# NUniversity Platform
 
-Nuniversity company [website](https://nuniversity.github.io/en) project.
+Multilingual educational platform built with **Next.js 14** (App Router), deployed as a static site on GitHub Pages.
 
-## Getting Started
+[Website](https://nuniversity.github.io/en)
 
-Project structure:
+## Project Structure
 
 ```
-├── app/                     # Macro components
-│   ├── course/              # Course App
-│   ├── globals.css          # Global styles and custom CSS
-│   ├── layout.tsx           # Root layout with metadata
-│   └── page.tsx             # Home page component
-├── courses/                 # Markdown documents (.md)
-├── components/              # Micro components
-├── .github/workflows/
-│   └── nextjs.yml           # GitHub Actions workflow
-├── next.config.js           # Next.js configuration
-├── tailwind.config.ts       # Tailwind CSS configuration
-├── postcss.config.js        # PostCSS configuration
-└── package.json             # Dependencies and scripts
+nuniversity.github.io/
+├── app/[lang]/              # Locale-based pages (en, pt, es)
+│   ├── layout.tsx           # Root layout — Header, Footer, Providers
+│   ├── page.tsx             # Home page
+│   ├── about/               # About page
+│   ├── contact/             # Contact page (Formspree form)
+│   ├── courses/             # Course listing + lesson viewer
+│   ├── games/               # Vocabulary games
+│   ├── library/             # Curated external resources
+│   └── tools/               # Interactive tools
+├── components/              # Reusable UI components
+│   ├── home/                # Hero, Features, Stats, Newsletter, etc.
+│   ├── layout/              # Header, Footer
+│   ├── markdown/            # Markdown renderer, syntax highlighting
+│   ├── providers/           # Theme provider (light/dark)
+│   ├── language/            # Language switcher
+│   ├── tools/               # Eisenhower Matrix, SWOT, LLMPromptBuilder, etc.
+│   └── contacts/            # Contact form
+├── content/                 # All static content (Markdown + JSON)
+│   ├── courses/             # Course lessons per locale
+│   ├── games/               # Vocabulary game word pairs
+│   ├── library/             # External resource metadata
+│   └── tools/               # Tool metadata per locale
+├── dictionaries/            # UI translation strings (en.json, pt.json, es.json)
+├── lib/                     # Data access / utility functions
+│   ├── courses/
+│   ├── games/
+│   ├── i18n/                # Locale config + dictionary loader
+│   ├── library/
+│   └── tools/
+├── public/                  # Static assets (favicon, robots.txt, team photos)
+├── docs/                    # Full documentation (see below)
+├── middleware.ts            # i18n locale redirect
+├── nextjs.config.js         # Next.js config (static export)
+├── tailwind.config.js       # Tailwind + DaisyUI
+└── package.json
 ```
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Run the compile version:
-
-```bash
-npm run build & npm run start
-# or
-yarn build & yarn start
-# or
-pnpm build & pnpm start
-# or
-bun build & bun start
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-## Developer's Guide
-
-### Install the Fast Node Manager (FNM)
-
-#### Linux-Base System
-
-```bash
-sudo apt-get -y update && apt-get -y install curl unzip && apt-get -y clean && apt-get -y auto-remove
-
-curl -fsSL https://fnm.vercel.app/install | bash
-
-fnm list-remote
-
-fnm install <version>
-
-fnm list
-
-fnm use <version> # used only to update the runtime in the file .node-version
-```
-
-#### Windows System
-
-Before select or use the Node.js runtime, we have install the local environment first:
-
-```powershell
-winget install Schniz.fnm
-
-fnm list-remote
-
-fnm install <version>
-
-fnm list
-
-fnm env --use-on-cd --shell power-shell | Out-String | Invoke-Expression
-
-fnm use <version> # used only to update the runtime in the file .node-version
-```
-
-### Install NPM global dependencies
-
-```bash
-npm install -g update
-npm install -g upgrade
-npm install -g typescript tsx @types/node
-```
-
-### Install NPM local dependencies
+## Quick Start
 
 ```bash
 npm install
+npm run dev
 ```
 
-## Additional Docs
+Open [http://localhost:3000](http://localhost:3000) — the middleware will redirect you to your preferred locale (`/en`, `/pt`, or `/es`).
 
-- [Fast Node Manager (FNM) Docs](https://github.com/Schniz/fnm)
-- [Node.jS Docs](https://nodejs.org/docs/latest/api/)
-- [Node.js Package Manager (NPM) Docs](https://docs.npmjs.com/)
-- [Typescript Docs](https://docs.npmjs.com/)
-- [Next.js Docs](https://nextjs.org/docs)
-- [Tailwind CSS](https://tailwindcss.com/).
-- [Hero UI](https://www.heroui.com/docs/).
-- [Shadcn/ui](https://ui.shadcn.com/docs/).
-- [DaisyUI](https://daisyui.com/).
-- [React-Markdown](https://github.com/remarkjs/react-markdown).
+## Available Scripts
 
-## COPYRIGHTS
+| Script | Command | Description |
+|--------|---------|-------------|
+| dev | `npm run dev` | Start development server with HMR |
+| build | `npm run build` | Build static site to `/out` |
+| start | `npm run start` | Serve the production build |
+| lint | `npm run lint` | Run ESLint |
 
-© 2025 Copyrights Nuniversity. ®All Rights Reserved.
+## Build for Production
+
+```bash
+npm run build && npm run start
+```
+
+The build generates a fully static site in the `out/` directory. The site is deployed to GitHub Pages via GitHub Actions on every push to `main`.
+
+## Features
+
+- **Multi-language**: English, Portuguese, Spanish — with automatic locale detection and redirect
+- **Courses**: Markdown-driven learning paths with enhanced rendering (code highlighting, Mermaid diagrams, alert boxes)
+- **Interactive Tools**: Eisenhower Matrix, SWOT Analysis, LLM Prompt Builder, Brain Writing Session
+- **Vocabulary Games**: Flashcard matching games for language learning
+- **Library**: Curated collection of external educational resources (videos, ebooks, courses, etc.)
+- **Dark Mode**: System-aware theme with manual toggle
+- **Responsive**: Mobile-first design with Tailwind CSS + DaisyUI
+- **Fully Static**: Zero infrastructure cost, served via GitHub Pages CDN
+
+## Documentation
+
+Full documentation is available in the [`docs/`](./docs) directory:
+
+| Document | Description |
+|---|---|
+| [Architecture](./docs/ARCHITECTURE.md) | System design, folder structure, data flow |
+| [Getting Started](./docs/GETTING-STARTED.md) | Local dev setup, environment, scripts |
+| [Internationalization](./docs/INTERNATIONALIZATION.md) | Multi-language support, routing, dictionaries |
+| [Content Management](./docs/CONTENT-MANAGEMENT.md) | Adding courses, tools, library resources, games |
+| [Components Reference](./docs/COMPONENTS.md) | All UI components documented |
+| [Markdown Renderer](./docs/MARKDOWN-RENDERER.md) | Enhanced Markdown features for course authors |
+| [Deployment](./docs/DEPLOYMENT.md) | GitHub Pages static export and CI/CD pipeline |
+| [Contributing](./docs/CONTRIBUTING.md) | How to contribute to the project |
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript 5 |
+| Styling | Tailwind CSS + DaisyUI + HeroUI |
+| Markdown | react-markdown + remark-gfm + rehype-raw |
+| Diagrams | Mermaid.js |
+| Code Highlight | react-syntax-highlighter |
+| Animations | Framer Motion |
+| Forms | React Hook Form + Formspree |
+| Deployment | GitHub Pages (static export) |
+
+## Copyright
+
+© 2026 NUniversity. All Rights Reserved.

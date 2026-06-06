@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "7 hours",
+  "icon": "code",
+  "en": {
+    "title": "Clean Architecture",
+    "description": "Learn architectural patterns and separation of concerns. Master layers, boundaries, dependency rules, and how to structure applications for testability, maintainability, and framework independence.",
+    "difficulty": "Intermediate",
+    "duration": "7 Hours"
+  },
+  "pt": {
+    "title": "Arquitetura Limpa",
+    "description": "Aprenda padrões arquiteturais e separação de preocupações. Domine camadas, limites, regras de dependência e como estruturar aplicações para testabilidade, manutenibilidade e independência de frameworks.",
+    "difficulty": "Intermediário",
+    "duration": "7 Horas"
+  },
+  "es": {
+    "title": "Arquitectura Limpia",
+    "description": "Aprende patrones arquitectónicos y separación de responsabilidades. Domina capas, límites, reglas de dependencia y cómo estructurar aplicaciones para testabilidad, mantenibilidad e independencia de frameworks.",
+    "difficulty": "Intermedio",
+    "duration": "7 Horas"
+  }
+}

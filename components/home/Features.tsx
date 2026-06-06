@@ -1,6 +1,7 @@
 // components/home/Features.tsx
 'use client'
 
+import { motion } from 'framer-motion'
 import { Code, BookOpen, Calculator, GamepadIcon, Video, Users } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
@@ -8,6 +9,22 @@ import { type Dictionary } from '@/lib/i18n/get-dictionary'
 interface FeaturesProps {
   lang: Locale
   dict: Dictionary
+}
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.08 },
+  },
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut' as const },
+  },
 }
 
 export default function Features({ lang, dict }: FeaturesProps) {
@@ -53,8 +70,13 @@ export default function Features({ lang, dict }: FeaturesProps) {
   return (
     <section className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container-custom">
-        {/* Header */}
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {dict.features.title}{' '}
             <span className="text-gradient">{dict.features.titleHighlight}</span>
@@ -62,22 +84,25 @@ export default function Features({ lang, dict }: FeaturesProps) {
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             {dict.features.subtitle}
           </p>
-        </div>
+        </motion.div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={feature.title}
+              variants={cardVariants}
               className="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 card-hover"
-              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Icon */}
               <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${feature.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                 <feature.icon className="w-7 h-7 text-white" />
               </div>
 
-              {/* Content */}
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
                 {feature.title}
               </h3>
@@ -85,23 +110,12 @@ export default function Features({ lang, dict }: FeaturesProps) {
                 {feature.description}
               </p>
 
-              {/* Hover Effect */}
               <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className={`w-full h-1 rounded-full bg-gradient-to-r ${feature.gradient}`}></div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-
-        {/* Bottom CTA */}
-        {/* <div className="text-center mt-16">
-          <div className="inline-flex items-center space-x-2 text-blue-600 dark:text-blue-400 font-medium hover:underline cursor-pointer">
-            <span>{dict.features.cta}</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
-        </div> */}
+        </motion.div>
       </div>
     </section>
   )

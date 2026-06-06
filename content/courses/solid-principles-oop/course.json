@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "9 hours",
+  "icon": "code",
+  "en": {
+    "title": "SOLID Principles & OOP",
+    "description": "Master SOLID principles and Object-Oriented Programming. Learn Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion through practical examples.",
+    "difficulty": "Intermediate",
+    "duration": "9 Hours"
+  },
+  "pt": {
+    "title": "Princípios SOLID e POO",
+    "description": "Domine os princípios SOLID e Programação Orientada a Objetos. Aprenda Responsabilidade Única, Aberto-Fechado, Substituição de Liskov, Segregação de Interfaces e Inversão de Dependência com exemplos práticos.",
+    "difficulty": "Intermediário",
+    "duration": "9 Horas"
+  },
+  "es": {
+    "title": "Principios SOLID y POO",
+    "description": "Domina los principios SOLID y Programación Orientada a Objetos. Aprende Responsabilidad Única, Abierto-Cerrado, Sustitución de Liskov, Segregación de Interfaces e Inversión de Dependencia con ejemplos prácticos.",
+    "difficulty": "Intermedio",
+    "duration": "9 Horas"
+  }
+}

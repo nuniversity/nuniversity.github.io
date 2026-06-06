@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "8 hours",
+  "icon": "code",
+  "en": {
+    "title": "Clean Code & Design Patterns",
+    "description": "Write maintainable, readable code and master common design patterns. Learn naming conventions, refactoring techniques, and classic patterns like Singleton, Factory, Observer, and Strategy.",
+    "difficulty": "Intermediate",
+    "duration": "8 Hours"
+  },
+  "pt": {
+    "title": "Código Limpo e Padrões de Projeto",
+    "description": "Escreva código mantível e legível e domine padrões de projeto comuns. Aprenda convenções de nomenclatura, técnicas de refatoração e padrões clássicos como Singleton, Factory, Observer e Strategy.",
+    "difficulty": "Intermediário",
+    "duration": "8 Horas"
+  },
+  "es": {
+    "title": "Código Limpio y Patrones de Diseño",
+    "description": "Escribe código mantenible y legible y domina patrones de diseño comunes. Aprende convenciones de nomenclatura, técnicas de refactorización y patrones clásicos como Singleton, Factory, Observer y Strategy.",
+    "difficulty": "Intermedio",
+    "duration": "8 Horas"
+  }
+}

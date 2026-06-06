@@ -128,7 +128,7 @@ This installs all dependencies listed in `package.json`, including:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) (or `:3001` if 3000 is in use) in your browser.
 
 The server supports **Hot Module Replacement (HMR)** — changes to source files are reflected immediately without a full page reload.
 
@@ -136,7 +136,7 @@ The server supports **Hot Module Replacement (HMR)** — changes to source files
 
 | URL | Page |
 |---|---|
-| `http://localhost:3000` | Redirects to `/en` (default locale) |
+| `http://localhost:3000` | Redirects to `/:locale` (auto-detected) |
 | `http://localhost:3000/en` | Home (English) |
 | `http://localhost:3000/pt` | Home (Portuguese) |
 | `http://localhost:3000/es` | Home (Spanish) |
@@ -160,10 +160,12 @@ This generates a fully static site in the `/out` directory.
 ### Preview the production build locally
 
 ```bash
-npm run start
+npm run start          # via Next.js
+# or
+npx serve out          # via any static file server
 ```
 
-> **Note:** For the production static export, `npm run start` serves the `/out` directory. The `assetPrefix` and `basePath` are set to empty string in development mode, so local preview may differ slightly from the live GitHub Pages deployment.
+> **Note:** The `assetPrefix` and `basePath` are empty in development mode, so local preview may differ slightly from the live GitHub Pages deployment.
 
 ### Inspect the output
 
@@ -183,7 +185,7 @@ You'll see a directory structure of pre-rendered HTML files for every locale, co
 | **build** | `npm run build` | Build static site to `/out` |
 | **start** | `npm run start` | Serve the production build |
 | **lint** | `npm run lint` | Run ESLint |
-| **export** | `npm run export` | Legacy export command (same as build) |
+| **export** | `npm run export` | Static export (deprecated — use `build`) |
 
 ---
 

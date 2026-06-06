@@ -16,6 +16,10 @@ This document covers every reusable component in the NUniversity platform — it
 4. [Home Page Components](#4-home-page-components)
    - [Hero](#hero)
    - [Features](#features)
+   - [Stats](#stats)
+   - [FeaturedCourses](#featuredcourses)
+   - [Tools Section](#tools-section)
+   - [Newsletter](#newsletter)
 5. [Markdown Components](#5-markdown-components)
    - [MarkdownRenderer](#markdownrenderer)
    - [FixWrapper](#fixwrapper)
@@ -284,6 +288,100 @@ dict.hero.features.courses
 Interactive Courses | Coding Tools | Study Tools
 Educational Games   | Video Integration | Community Driven
 ```
+
+---
+
+### Stats
+
+**File:** `components/home/Stats.tsx`  
+**Type:** Client Component (`'use client'`)  
+**Role:** Animated statistics section on the home page showing platform metrics.
+
+#### Features
+- 4-column grid of animated stat cards (Courses, Tools, Games, Resources)
+- Icon per stat resolved via `iconMap` lookup (string-keyed, not component-passed)
+- Scroll-triggered animation via framer-motion
+
+#### Props
+
+| Prop | Type | Required | Description |
+|---|---|---|---|
+| `dict` | `Dictionary` | Yes | Translation dictionary |
+| `stats` | `StatItem[]` | Yes | Array of stat objects |
+
+#### `StatItem` Interface
+
+```ts
+export type StatIcon = 'BookOpen' | 'Wrench' | 'GamepadIcon' | 'Library'
+
+export interface StatItem {
+  label: string
+  value: string
+  icon: StatIcon   // string key, not a React component
+}
+```
+
+> **Note:** Icons are passed as string identifiers, not React components. The `Stats` client component resolves them internally via `iconMap`. This avoids the "Functions cannot be passed to Client Components" error in Next.js.
+
+#### Usage
+
+```tsx
+// app/[lang]/page.tsx (Server Component)
+const stats: StatItem[] = [
+  { label: 'Courses', value: '27+', icon: 'BookOpen' },
+  { label: 'Tools',   value: '5+',  icon: 'Wrench' },
+  { label: 'Games',   value: '4+',  icon: 'GamepadIcon' },
+  { label: 'Resources', value: '50+', icon: 'Library' },
+]
+
+<Stats dict={dict} stats={stats} />
+```
+
+---
+
+### FeaturedCourses
+
+**File:** `components/home/FeaturedCourses.tsx`  
+**Type:** Client Component (`'use client'`)  
+**Role:** Grid of featured course cards on the home page.
+
+#### Props
+
+| Prop | Type | Required | Description |
+|---|---|---|---|
+| `lang` | `Locale` | Yes | Current locale |
+| `dict` | `Dictionary` | Yes | Translation dictionary |
+| `courses` | `Course[]` | Yes | Array of courses to display |
+
+---
+
+### Tools Section
+
+**File:** `components/home/Tools.tsx`  
+**Type:** Client Component (`'use client'`)  
+**Role:** Highlights available interactive tools on the home page.
+
+#### Props
+
+| Prop | Type | Required | Description |
+|---|---|---|---|
+| `lang` | `Locale` | Yes | Current locale |
+| `dict` | `Dictionary` | Yes | Translation dictionary |
+| `tools` | `Tool[]` | Yes | Array of tools to display |
+
+---
+
+### Newsletter
+
+**File:** `components/home/Newsletter.tsx`  
+**Type:** Client Component (`'use client'`)  
+**Role:** Email signup form section on the home page.
+
+#### Props
+
+| Prop | Type | Required | Description |
+|---|---|---|---|
+| `dict` | `Dictionary` | Yes | Translation dictionary |
 
 ---
 

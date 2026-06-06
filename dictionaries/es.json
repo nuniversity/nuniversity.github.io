@@ -66,6 +66,7 @@
     "tools": "Herramientas",
     "games": "Juegos",
     "library": "Biblioteca",
+    "roadmaps": "Rutas",
     "about": "Acerca de",
     "contact": "Contacto"
   },
@@ -468,6 +469,43 @@
           "text": "Muestra ejemplos del formato de salida deseado para guiar la estructura de respuesta de la IA."
         }
       }
+    }
+  },
+  "roadmaps": {
+    "title": "Rutas de Aprendizaje",
+    "subtitle": "Rutas de aprendizaje estructuradas para guiar tu journey",
+    "searchPlaceholder": "Buscar rutas...",
+    "noResults": "No se encontraron rutas",
+    "noRoadmaps": "No hay rutas disponibles aún",
+    "tryDifferentSearch": "Intenta con un término de búsqueda diferente",
+    "checkBackSoon": "Vuelve pronto para nuevas rutas",
+    "clearSearch": "Limpiar Búsqueda",
+    "startLearning": "Comenzar a Aprender →",
+    "backToRoadmaps": "Volver a Rutas",
+    "totalRoadmaps": "rutas",
+    "totalSteps": "total de pasos",
+    "duration": "Duración",
+    "steps": "Pasos",
+    "difficulty": "Dificultad",
+    "progress": "Progreso",
+    "overallProgress": "Progreso General",
+    "of": "de",
+    "stepsCompleted": "pasos completados",
+    "reset": "Reiniciar",
+    "comments": "Comentario",
+    "ideas": "Ideas para Practicar",
+    "prerequisites": "Prerrequisitos",
+    "nextSteps": "Próximos Pasos",
+    "optional": "opcional",
+    "markComplete": "Marcar como Completado",
+    "completed": "Completado",
+    "congratulations": "¡Felicitaciones!",
+    "roadmapComplete": "¡Has completado esta ruta!",
+    "difficultyLevels": {
+      "all": "Todos los Niveles",
+      "beginner": "Principiante",
+      "intermediate": "Intermediario",
+      "advanced": "Avanzado"
     }
   }
 }

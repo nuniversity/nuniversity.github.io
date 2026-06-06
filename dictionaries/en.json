@@ -66,6 +66,7 @@
     "tools": "Tools",
     "games": "Games",
     "library": "Library",
+    "roadmaps": "Roadmaps",
     "about": "About",
     "contact": "Contact"
   },
@@ -470,6 +471,44 @@
           "text": "Show examples of the desired output format to guide the AI's response structure."
         }
       }
+    }
+  },
+  "roadmaps": {
+    "title": "Roadmaps",
+    "subtitle": "Structured learning paths to guide your journey",
+    "searchPlaceholder": "Search roadmaps...",
+    "noResults": "No roadmaps found",
+    "noRoadmaps": "No roadmaps available yet",
+    "tryDifferentSearch": "Try a different search term",
+    "checkBackSoon": "Check back soon for new roadmaps",
+    "clearSearch": "Clear Search",
+    "startLearning": "Start Learning →",
+    "backToRoadmaps": "Back to Roadmaps",
+    "totalRoadmaps": "roadmaps",
+    "totalSteps": "total steps",
+    "duration": "Duration",
+    "steps": "Steps",
+    "difficulty": "Difficulty",
+    "progress": "Progress",
+    "overallProgress": "Overall Progress",
+    "of": "of",
+    "stepsCompleted": "steps completed",
+    "reset": "Reset",
+    "comments": "Comment",
+    "ideas": "Ideas to Practice",
+    "prerequisites": "Prerequisites",
+    "nextSteps": "Next Steps",
+    "optional": "optional",
+    "markComplete": "Mark as Complete",
+    "completed": "Completed",
+    "congratulations": "Congratulations!",
+    "roadmapComplete": "You have completed this roadmap!",
+    "goToCourse": "Go to Course",
+    "difficultyLevels": {
+      "all": "All Levels",
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
     }
   }
 }

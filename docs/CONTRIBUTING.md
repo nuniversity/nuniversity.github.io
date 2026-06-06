@@ -130,6 +130,7 @@ feat(courses): add intro-to-python course
 fix(markdown): resolve mermaid zoom on mobile
 content(library): add clean-code ebook resource
 i18n(pt): translate tools dictionary
+docs: update architecture and component docs
 ```
 
 ### Examples

@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "6 hours",
+  "icon": "code",
+  "en": {
+    "title": "Functional & Declarative Coding",
+    "description": "Master functional programming concepts and declarative paradigms. Learn immutability, pure functions, higher-order functions, map/filter/reduce, and how to think in transformations.",
+    "difficulty": "Intermediate",
+    "duration": "6 Hours"
+  },
+  "pt": {
+    "title": "Programação Funcional e Declarativa",
+    "description": "Domine conceitos de programação funcional e paradigmas declarativos. Aprenda imutabilidade, funções puras, funções de ordem superior, map/filter/reduce e como pensar em transformações.",
+    "difficulty": "Intermediário",
+    "duration": "6 Horas"
+  },
+  "es": {
+    "title": "Programación Funcional y Declarativa",
+    "description": "Domina conceptos de programación funcional y paradigmas declarativos. Aprende inmutabilidad, funciones puras, funciones de orden superior, map/filter/reduce y cómo pensar en transformaciones.",
+    "difficulty": "Intermedio",
+    "duration": "6 Horas"
+  }
+}

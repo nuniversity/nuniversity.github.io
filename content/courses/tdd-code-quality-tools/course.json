@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "8 hours",
+  "icon": "code",
+  "en": {
+    "title": "TDD & Code Quality Tools",
+    "description": "Master Test-Driven Development and the code quality ecosystem. Learn Red-Green-Refactor, unit testing, pre-commit hooks, linting, formatting, static analysis, and CI/CD pipelines.",
+    "difficulty": "Intermediate",
+    "duration": "8 Hours"
+  },
+  "pt": {
+    "title": "TDD e Ferramentas de Qualidade de Código",
+    "description": "Domine Desenvolvimento Orientado por Testes e o ecossistema de qualidade de código. Aprenda Red-Green-Refactor, testes unitários, ganchos pre-commit, linting, formatação, análise estática e pipelines CI/CD.",
+    "difficulty": "Intermediário",
+    "duration": "8 Horas"
+  },
+  "es": {
+    "title": "TDD y Herramientas de Calidad de Código",
+    "description": "Domina Desarrollo Dirigido por Pruebas y el ecosistema de calidad de código. Aprende Red-Green-Refactor, pruebas unitarias, ganchos pre-commit, linting, formateo, análisis estático y pipelines CI/CD.",
+    "difficulty": "Intermedio",
+    "duration": "8 Horas"
+  }
+}
