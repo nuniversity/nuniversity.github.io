@@ -80,26 +80,29 @@ To use a custom domain (e.g., `nuniversity.com`):
 ## 3. Next.js Static Export Configuration
 
 ```js
-// nextjs.config.js
+// next.config.js
+
+const isProd = process.env.NODE_ENV === 'production'
+
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? ''
+const isOrgSite = repo.endsWith('.github.io')
+const basePath = isProd && !isOrgSite ? `/${repo}` : ''
 
 const nextConfig = {
-  output: 'export',                   // ← Static HTML export
-  trailingSlash: true,                // /en/ not /en (required for static hosts)
+  output: isProd ? 'export' : undefined, // ← Static HTML export
+  trailingSlash: true,                   // /en/ not /en (required for static hosts)
   skipTrailingSlashRedirect: true,
-  distDir: 'out',                     // Output directory
-
-  // GitHub Pages serves from a subdirectory /nuniversity.github.io/
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/nuniversity.github.io' : '',
-  basePath:    process.env.NODE_ENV === 'production' ? '/nuniversity.github.io' : '',
-
+  distDir: 'out',                        // Output directory
+  assetPrefix: basePath ? `${basePath}/` : undefined,
+  basePath,
   images: {
-    unoptimized: true,                // No server-side image optimization
+    unoptimized: true,                   // No server-side image optimization
   },
   typescript: {
-    ignoreBuildErrors: true,          // Skip TS errors during CI build
+    ignoreBuildErrors: true,             // Skip TS errors during CI build
   },
   eslint: {
-    ignoreDuringBuilds: true,         // Skip ESLint during CI build
+    ignoreDuringBuilds: true,            // Skip ESLint during CI build
   },
 }
 ```
@@ -113,17 +116,17 @@ Without it, navigating directly to `/en/courses` on GitHub Pages would return a 
 
 ### Why `assetPrefix` and `basePath`?
 
-The repository is named `nuniversity.github.io`, so GitHub Pages serves it at:
+GitHub Pages serves sites at sub-paths for project repositories:
+```
+https://nuniversity.github.io/repo-name/
+```
+
+But for user/organization sites, the repo must be named `<org>.github.io`, and it's served at the root:
 ```
 https://nuniversity.github.io/
 ```
 
-However, if the repo were named differently (e.g., `platform`), the site would be at:
-```
-https://nuniversity.github.io/platform/
-```
-
-In that case, `basePath` and `assetPrefix` would need to match `/platform`.
+The config dynamically detects which case applies: if the repo name ends with `.github.io`, basePath is empty (root domain); otherwise it matches the repo name (project sub-path).
 
 ---
 
@@ -241,10 +244,11 @@ The total number of HTML files = `locales × (pages + courses × lessons + tools
 
 ## 6. Live URL & Base Path
 
-| Environment | Base URL | Base Path |
-|---|---|---|
-| **Production** | `https://nuniversity.github.io/` | `/nuniversity.github.io` |
-| **Development** | `http://localhost:3000/` (or `:3001`) | *(empty)* |
+| Environment | Base URL | Base Path | Condition |
+|---|---|---|---|
+| **Production** (org/user site) | `https://nuniversity.github.io/` | *(empty)* | Repo name ends with `.github.io` |
+| **Production** (project site) | `https://nuniversity.github.io/repo/` | `/repo` | Any other repo name |
+| **Development** | `http://localhost:3000/` | *(empty)* | Local dev server |
 
 ### Internal Links
 
@@ -252,10 +256,10 @@ All internal `<Link>` components use locale-prefixed paths:
 
 ```tsx
 <Link href={`/${lang}/courses`}>...</Link>
-// Renders as: /en/courses (dev) or /nuniversity.github.io/en/courses (prod)
+// Renders as: /en/courses (dev) or /repo/en/courses (prod project site)
 ```
 
-The `basePath` in `nextjs.config.js` automatically prepends the base path to all internal Next.js links.
+The `basePath` in `next.config.js` automatically prepends the base path to all internal Next.js links. The value is derived from the `GITHUB_REPOSITORY` environment variable available in CI — no manual override needed.
 
 ---
 

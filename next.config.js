@@ -1,11 +1,18 @@
 /** @type {import('next').NextConfig} */
+
+const isProd = process.env.NODE_ENV === 'production'
+
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? ''
+const isOrgSite = repo.endsWith('.github.io')
+const basePath = isProd && !isOrgSite ? `/${repo}` : ''
+
 const nextConfig = {
-  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
+  output: isProd ? 'export' : undefined,
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   distDir: 'out',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/nuniversity.github.io' : '',
-  basePath: process.env.NODE_ENV === 'production' ? '/nuniversity.github.io' : '',
+  assetPrefix: basePath ? `${basePath}/` : undefined,
+  basePath,
   images: {
     unoptimized: true,
   },
