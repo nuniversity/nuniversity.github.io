@@ -282,8 +282,8 @@ export function LibraryClient({ lang, resources, dict }: LibraryClientProps) {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <Icon className="w-12 h-12 text-muted-foreground/30" />
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-muted to-muted/50">
+                      <Icon className="w-12 h-12 text-muted-foreground/60" />
                     </div>
                   )}
                 </div>
