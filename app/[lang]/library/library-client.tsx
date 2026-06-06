@@ -274,15 +274,19 @@ export function LibraryClient({ lang, resources, dict }: LibraryClientProps) {
                 className="group bg-card border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 {/* Thumbnail */}
-                {resource.thumbnail && (
-                  <div className="aspect-video bg-muted overflow-hidden">
+                <div className="aspect-video bg-muted overflow-hidden">
+                  {resource.thumbnail ? (
                     <img 
                       src={resource.thumbnail} 
                       alt={resource.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                  </div>
-                )}
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <Icon className="w-12 h-12 text-muted-foreground/30" />
+                    </div>
+                  )}
+                </div>
 
                 <div className="p-6">
                   {/* Header */}
