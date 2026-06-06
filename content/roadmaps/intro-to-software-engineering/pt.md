@@ -11,7 +11,7 @@ estimatedDuration: "120 horas"
 ## Step: Processos
 - id: processes
 - type: course
-- contentRef: processes-flowchart/01-what-are-processes
+- contentRef: processes-flowchart/01-o-que-sao-processos
 - description: Fundamentos teóricos de processos e fluxogramas. Aprenda a pensar sistematicamente sobre fluxos de trabalho, pontos de decisão e otimização de processos.
 - prerequisites: []
 - conditionals: []
@@ -109,7 +109,7 @@ estimatedDuration: "120 horas"
 ## Step: DDD & Arquitetura de Software
 - id: ddd-software-architecture
 - type: course
-- contentRef: ddd-software-architecture/01-intro-to-ddd
+- contentRef: ddd-software-architecture/01-introducao-ao-ddd
 - description: Domain-Driven Design e arquitetura de software avançada. Aprenda linguagem ubíqua, contextos delimitados, entidades, objetos de valor e agregados.
 - prerequisites: ["functional-declarative-coding"]
 - conditionals: []
