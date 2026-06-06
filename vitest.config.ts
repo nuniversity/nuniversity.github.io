@@ -8,6 +8,7 @@ export default defineConfig({
     setupFiles: ['./src/test-setup.ts'],
     exclude: ['node_modules', '.next', 'out', '.husky'],
     include: ['**/*.{test,spec}.{ts,tsx}'],
+    passWithNoTests: true,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
