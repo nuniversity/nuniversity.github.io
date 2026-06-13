@@ -1,0 +1,25 @@
+{
+  "area": "Data Engineering",
+  "author": "NUniversity",
+  "difficulty": "advanced",
+  "duration": "8 weeks",
+  "icon": "database",
+  "en": {
+    "title": "Advanced Data Engineering with dbt-core and Amazon Redshift",
+    "description": "Master advanced analytics engineering using dbt-core (v1.8–v2.0) and Amazon Redshift. Covers the full dbt-redshift adapter, Redshift-specific performance patterns (sort keys, dist styles, materialized views, late-binding views, Redshift Serverless), advanced incremental strategies including microbatch, model contracts, unit testing, dbt Mesh, Jinja2 macros and custom materializations, CI/CD pipelines, orchestration with AWS MWAA and Cosmos, the dbt Fusion engine, and dbt Wizard AI-assisted development.",
+    "difficulty": "Advanced",
+    "duration": "8 Weeks"
+  },
+  "pt": {
+    "title": "Engenharia de Dados Avançada com dbt-core e Amazon Redshift",
+    "description": "Domine engenharia analítica avançada com dbt-core (v1.8–v2.0) e Amazon Redshift. Aborda o adaptador dbt-redshift completo, padrões de desempenho específicos do Redshift (sort keys, dist styles, views materializadas, late-binding views, Redshift Serverless), estratégias incrementais avançadas incluindo microbatch, contratos de modelos, testes unitários, dbt Mesh, macros Jinja2 e materializações customizadas, pipelines CI/CD, orquestração com AWS MWAA e Cosmos, o motor dbt Fusion e desenvolvimento assistido por IA com dbt Wizard.",
+    "difficulty": "Avançado",
+    "duration": "8 Semanas"
+  },
+  "es": {
+    "title": "Ingeniería de Datos Avanzada con dbt-core y Amazon Redshift",
+    "description": "Domina la ingeniería analítica avanzada con dbt-core (v1.8–v2.0) y Amazon Redshift. Cubre el adaptador dbt-redshift completo, patrones de rendimiento específicos de Redshift (sort keys, dist styles, vistas materializadas, late-binding views, Redshift Serverless), estrategias incrementales avanzadas incluyendo microbatch, contratos de modelos, pruebas unitarias, dbt Mesh, macros Jinja2 y materializaciones personalizadas, pipelines CI/CD, orquestación con AWS MWAA y Cosmos, el motor dbt Fusion y desarrollo asistido por IA con dbt Wizard.",
+    "difficulty": "Avanzado",
+    "duration": "8 Semanas"
+  }
+}
