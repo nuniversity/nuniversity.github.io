@@ -153,7 +153,10 @@ export default function FeaturedCourses({ lang, dict, courses }: FeaturedCourses
                   </div>
 
                   <Link
-                    href={`/${lang}/courses/${course.slug}`}
+                    href={course.firstLessonSlug
+                      ? `/${lang}/courses/${course.slug}/${course.firstLessonSlug}`
+                      : `/${lang}/courses/${course.slug}`
+                    }
                     className="w-full btn-primary flex items-center justify-center space-x-2 group-hover:scale-105 transition-transform duration-300"
                   >
                     <BookOpen className="w-4 h-4" />
