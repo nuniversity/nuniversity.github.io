@@ -1,5 +1,15 @@
 # 🎨 Enhanced Markdown Renderer - Feature Guide
 
+```mermaid
+flowchart LR
+    A["Markdown Input"] --> B["remark-gfm"]
+    B --> C["rehype-raw"]
+    C --> D["Mermaid Detection"]
+    D --> E["Syntax Highlighting"]
+    E --> F["Alert Boxes"]
+    F --> G["HTML Output"]
+```
+
 ## ✨ New Features
 
 Your markdown renderer now includes beautiful, interactive components that make learning more engaging!

@@ -2,6 +2,19 @@
 
 NUniversity is deployed as a **fully static website** on **GitHub Pages**, using a **GitHub Actions** CI/CD pipeline that automatically builds and publishes the site on every push to the `main` branch.
 
+### CI/CD Pipeline Overview
+
+```mermaid
+flowchart LR
+    A[Push to main] --> B[GitHub Actions Trigger]
+    B --> C[Checkout & Setup Node]
+    C --> D[npm ci]
+    D --> E[npm run build]
+    E --> F[Upload /out/ Artifact]
+    F --> G[Deploy to GitHub Pages]
+    G --> H[Live at nuniversity.github.io]
+```
+
 ---
 
 ## Table of Contents
@@ -21,32 +34,24 @@ NUniversity is deployed as a **fully static website** on **GitHub Pages**, using
 
 ## 1. Deployment Overview
 
-```
-Developer pushes to main branch
-           │
-           ▼
-GitHub Actions triggers workflow
-           │
-           ▼
-┌──────────────────────────────────┐
-│  Build Step                      │
-│  1. Checkout repository          │
-│  2. Setup Node.js (from .node-version) │
-│  3. npm ci                       │
-│  4. npm run build                │
-│     └─ Next.js generates /out/   │
-└──────────────────────────────────┘
-           │
-           ▼
-┌──────────────────────────────────┐
-│  Deploy Step                     │
-│  Upload /out/ to GitHub Pages    │
-│  (actions/upload-pages-artifact) │
-│  (actions/deploy-pages)          │
-└──────────────────────────────────┘
-           │
-           ▼
-https://nuniversity.github.io/
+```mermaid
+sequenceDiagram
+    participant D as Developer
+    participant G as GitHub
+    participant GA as GitHub Actions
+    participant B as Build
+    participant DP as Deploy
+    participant GH as GitHub Pages
+    participant U as Users
+
+    D->>G: Push to main branch
+    G->>GA: Triggers workflow
+    GA->>B: Checkout & Setup Node.js
+    B->>B: npm ci
+    B->>B: npm run build
+    B->>DP: Upload /out/ artifact
+    DP->>GH: Deploy to GitHub Pages
+    GH-->>U: Serve static site
 ```
 
 **Zero infrastructure cost** — GitHub Pages hosts static files for free with a global CDN.

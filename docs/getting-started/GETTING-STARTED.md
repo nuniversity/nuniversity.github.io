@@ -4,6 +4,16 @@ This guide walks you through setting up the NUniversity development environment 
 
 ---
 
+```mermaid
+flowchart LR
+    A["Install FNM"] --> B["Install Node"]
+    B --> C["Clone Repo"]
+    C --> D["Install Deps"]
+    D --> E["Run Dev"]
+```
+
+---
+
 ## Table of Contents
 
 1. [Prerequisites](#1-prerequisites)

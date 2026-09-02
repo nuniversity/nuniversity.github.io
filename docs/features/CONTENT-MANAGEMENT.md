@@ -18,6 +18,14 @@ NUniversity uses a **file-system-based content model** — no CMS, no database, 
 
 ## 1. Content Overview
 
+```mermaid
+flowchart LR
+    A["Author"] --> B["Create Files"]
+    B --> C["Build"]
+    C --> D["Validate"]
+    D --> E["Deploy"]
+```
+
 ```
 content/
 ├── courses/       ← Structured learning paths (Markdown lessons)

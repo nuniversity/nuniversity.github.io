@@ -40,6 +40,19 @@ dictionaries/       → i18n translation JSON
 
 ---
 
+## Test Distribution by Phase
+
+```mermaid
+pie title Test Distribution by Phase
+    "Phase 1 Core Data" : 48
+    "Phase 2 Interactive" : 28
+    "Phase 3 Tools" : 104
+    "Phase 4 Integration" : 38
+    "Phase 5 Remaining" : 28
+```
+
+---
+
 ## Phased Implementation
 
 ### Phase 1 — Core Data Pipeline (Unit Tests)
@@ -240,7 +253,30 @@ components/
   home/__tests__/                 ← Phase 5
   markdown/__tests__/             ← Phase 5
 docs/
-  TESTING.md                      ← This file
+  INDEX.md                           # Master documentation index
+  architecture/                      # System design, components
+    ARCHITECTURE.md
+    COMPONENTS.md
+  features/                          # Content, i18n, roadmaps, games
+    CONTENT-MANAGEMENT.md
+    INTERNATIONALIZATION.md
+    ROADMAPS.md
+    GAMES.md
+    MARKDOWN-RENDERER.md
+  operations/                        # Deployment, testing, contributing
+    DEPLOYMENT.md
+    TESTING.md                       # This file
+    CONTRIBUTING.md
+  ai/                                # Agents, OpenCode harness
+    AGENTS.md
+    OPENCODE-HARNESS.md
+  assessment/
+    ASSESSMENT.md
+  getting-started/
+    GETTING-STARTED.md
+  reference/
+    remaining-courses-documentation.md
+    roadmap-implementation-status.md
 ```
 
 ---

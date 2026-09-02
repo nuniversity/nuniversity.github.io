@@ -98,11 +98,15 @@ function getLocale(request: NextRequest): string {
 
 ### Middleware Detection Priority
 
-```
-1. URL already has locale prefix  →  use it as-is
-2. NEXT_LOCALE cookie exists      →  use cookie value
-3. Accept-Language header matches →  use browser preference
-4. None of the above              →  use 'en' (default)
+```mermaid
+flowchart TD
+    A[Incoming Request] --> B{URL has locale prefix?}
+    B -->|Yes| C[Use locale from URL]
+    B -->|No| D{NEXT_LOCALE cookie exists?}
+    D -->|Yes| E[Use cookie value]
+    D -->|No| F{Accept-Language header matches?}
+    F -->|Yes| G[Use browser preference]
+    F -->|No| H[Use default locale: 'en']
 ```
 
 ### Middleware Exclusions
@@ -226,6 +230,24 @@ const switchLanguage = (newLocale: Locale) => {
 ```
 
 **Example:** If the user is on `/en/courses/intro-to-programming/01-introduction` and switches to `pt`, they are navigated to `/pt/courses/intro-to-programming/01-introduction`.
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant Switcher as LanguageSwitcher
+    participant Cookie as NEXT_LOCALE Cookie
+    participant Router as Next.js Router
+    participant Server as Server Component
+
+    User->>Switcher: Clicks new locale (e.g., pt)
+    Switcher->>Switcher: Replace locale segment in URL path
+    Switcher->>Cookie: Set NEXT_LOCALE=pt (1 year)
+    Switcher->>Router: router.push(newPathname)
+    Router->>Server: Request /pt/... page
+    Server->>Server: Middleware reads NEXT_LOCALE cookie
+    Server->>Server: getDictionary('pt') loads pt.json
+    Server-->>User: Rendered page in Portuguese
+```
 
 The switcher displays:
 - The flag emoji for the current locale

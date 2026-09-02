@@ -673,6 +673,14 @@ useEffect(() => {
 
 ## 7. Summary Table
 
+```mermaid
+pie title Bug Severity Distribution
+    "Critical" : 4
+    "High" : 6
+    "Medium" : 8
+    "Low" : 7
+```
+
 | ID | Severity | File | Issue |
 |---|---|---|---|
 | BUG-01 | 🔴 Critical | `contact/page.tsx` | Wrong metadata (uses home metadata) + dead imports |

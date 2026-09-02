@@ -4,6 +4,50 @@ This document covers every reusable component in the NUniversity platform — it
 
 ---
 
+## Component Hierarchy
+
+```mermaid
+flowchart TD
+    A[Providers / ThemeProvider] --> B[Layout]
+    B --> C[Header]
+    B --> D[Footer]
+    B --> E[main]
+    C --> C1[Navigation Links]
+    C --> C2[Theme Toggle]
+    C --> C3[LanguageSwitcher]
+    E --> F[Pages]
+    F --> F1[Home]
+    F --> F2[Courses]
+    F --> F3[Tools]
+    F --> F4[Games]
+    F --> F5[Library]
+    F --> F6[About]
+    F --> F7[Contact]
+    F1 --> G[Components]
+    G --> G1[Home Components]
+    G --> G2[Markdown Components]
+    G --> G3[Tool Components]
+    G --> G4[Contact Components]
+    G1 --> G1a[Hero]
+    G1 --> G1b[Features]
+    G1 --> G1c[Stats]
+    G1 --> G1d[FeaturedCourses]
+    G1 --> G1e[Tools Section]
+    G1 --> G1f[Newsletter]
+    G3 --> G3a[EisenhowerMatrix]
+    G3 --> G3b[LLMPromptBuilder]
+    G3 --> G3c[SWOTMatrix]
+    G3 --> G3d[BrainWritingSession]
+    G3 --> G3e[PomodoroTimer]
+    G3 --> G3f[HabitTracker]
+    G3 --> G3g[FlashcardMaker]
+    G3 --> G3h[RegexTester]
+    G3 --> G3i[UnitConverter]
+    G3 --> G3j[DecisionMatrix]
+```
+
+---
+
 ## Table of Contents
 
 1. [Layout Components](#1-layout-components)
@@ -28,6 +72,12 @@ This document covers every reusable component in the NUniversity platform — it
    - [LLMPromptBuilder](#llmpromptbuilder)
    - [SWOTMatrix](#swotmatrix)
    - [BrainWritingSession](#brainwritingsession)
+   - [PomodoroTimer](#pomodorotimer)
+   - [HabitTracker](#habittracker)
+   - [FlashcardMaker](#flashcardmaker)
+   - [RegexTester](#regextester)
+   - [UnitConverter](#unitconverter)
+   - [DecisionMatrix](#decisionmatrix)
 7. [Contact Components](#7-contact-components)
    - [Contact](#contact)
    - [ContactForm](#contactform)
@@ -626,6 +676,232 @@ Please provide a comprehensive response following the guidelines above.
 - Multiple participant simulation
 - Idea collection and display
 - Export session results
+
+---
+
+### PomodoroTimer
+
+**File:** `components/tools/PomodoroTimer.tsx`  
+**Role:** Productivity timer implementing the Pomodoro Technique with session tracking and streak management.
+
+#### Features
+- Configurable work/break durations (25/5/15 min defaults)
+- Session counter with auto-incrementing streaks
+- **localStorage persistence** — survives page reloads
+- Visual circular progress indicator
+- Start, pause, and reset controls
+- Sound notification on session completion
+- Session history display
+
+#### State Shape
+
+```ts
+{
+  workDuration: number       // minutes
+  shortBreak: number         // minutes
+  longBreak: number          // minutes
+  currentSession: number     // 1–4
+  streak: number             // completed sessions today
+  isRunning: boolean
+  isBreak: boolean
+  timeRemaining: number      // seconds
+}
+```
+
+#### Props
+
+| Prop | Type | Required | Description |
+|---|---|---|---|
+| `lang` | `Locale` | Yes | Current locale |
+| `dict` | `Dictionary` | Yes | Translation dictionary |
+
+---
+
+### HabitTracker
+
+**File:** `components/tools/HabitTracker.tsx`  
+**Role:** Daily habit tracking with CRUD operations, streak counting, and calendar visualization.
+
+#### Features
+- **Create, read, update, delete** habits
+- Daily check-in/logging per habit
+- **Streak counter** per habit (consecutive days)
+- **Calendar view** showing completion history
+- Color-coded habit categories
+- Progress overview with completion stats
+- localStorage persistence for all data
+
+#### State Shape
+
+```ts
+interface Habit {
+  id: string
+  name: string
+  color: string
+  icon: string
+  createdAt: string        // ISO date
+  completions: string[]    // array of ISO dates
+}
+
+interface HabitState {
+  habits: Habit[]
+  selectedDate: string     // ISO date
+}
+```
+
+#### Props
+
+| Prop | Type | Required | Description |
+|---|---|---|---|
+| `lang` | `Locale` | Yes | Current locale |
+| `dict` | `Dictionary` | Yes | Translation dictionary |
+
+---
+
+### FlashcardMaker
+
+**File:** `components/tools/FlashcardMaker.tsx`  
+**Role:** Flashcard deck builder with spaced repetition algorithm and interactive study sessions.
+
+#### Features
+- **Deck CRUD** — create, rename, delete decks
+- **Card CRUD** — add, edit, delete cards within decks
+- **Spaced repetition** (SM-2 variant) — cards shown based on difficulty rating
+- **Study sessions** — flip cards, rate difficulty (1–5)
+- Progress tracking per deck (mastered vs. learning cards)
+- localStorage persistence for decks and ratings
+
+#### State Shape
+
+```ts
+interface Card {
+  id: string
+  front: string
+  back: string
+  easeFactor: number       // SM-2 ease factor (starts at 2.5)
+  interval: number         // days until next review
+  nextReview: string       // ISO date
+  repetitions: number
+}
+
+interface Deck {
+  id: string
+  name: string
+  cards: Card[]
+  createdAt: string
+}
+```
+
+#### Props
+
+| Prop | Type | Required | Description |
+|---|---|---|---|
+| `lang` | `Locale` | Yes | Current locale |
+| `dict` | `Dictionary` | Yes | Translation dictionary |
+
+---
+
+### RegexTester
+
+**File:** `components/tools/RegexTester.tsx`  
+**Role:** Real-time regular expression tester with match highlighting and flag toggling.
+
+#### Features
+- **Pattern input** field with live validation
+- **Test string** textarea for matching
+- **Match highlighting** — highlighted regions in test string
+- Match count and individual match details
+- **Flag toggles** — `g` (global), `i` (case-insensitive), `m` (multiline), `s` (dotAll), `u` (unicode)
+- Regex syntax reference panel
+- Copy regex pattern to clipboard
+- Error display for invalid patterns
+
+#### Props
+
+| Prop | Type | Required | Description |
+|---|---|---|---|
+| `lang` | `Locale` | Yes | Current locale |
+| `dict` | `Dictionary` | Yes | Translation dictionary |
+
+---
+
+### UnitConverter
+
+**File:** `components/tools/UnitConverter.tsx`  
+**Role:** Multi-category unit converter supporting all standard measurement systems.
+
+#### Features
+- **All conversion categories:** Length, Weight, Temperature, Volume, Area, Speed, Time, Digital Storage, Data Transfer
+- Bidirectional conversion — swap source/target units
+- Real-time result as you type
+- **Rounding** control (0–10 decimal places)
+- Favorites/recently used conversions
+- Copy result to clipboard
+
+#### Supported Categories
+
+| Category | Example Units |
+|---|---|
+| Length | mm, cm, m, km, in, ft, yd, mi |
+| Weight | mg, g, kg, lb, oz, ton |
+| Temperature | °C, °F, K |
+| Volume | mL, L, gal, fl oz, cup |
+| Area | mm², cm², m², km², acre, ha |
+| Speed | m/s, km/h, mph, knots |
+| Time | ms, s, min, h, day, week |
+| Digital Storage | B, KB, MB, GB, TB, PB |
+| Data Transfer | bps, Kbps, Mbps, Gbps |
+
+#### Props
+
+| Prop | Type | Required | Description |
+|---|---|---|---|
+| `lang` | `Locale` | Yes | Current locale |
+| `dict` | `Dictionary` | Yes | Translation dictionary |
+
+---
+
+### DecisionMatrix
+
+**File:** `components/tools/DecisionMatrix.tsx`  
+**Role:** Weighted decision matrix for comparing options across multiple criteria.
+
+#### Features
+- **Row/column CRUD** — add, edit, delete options and criteria
+- **Weighted scoring** — assign weight per criterion (1–10)
+- Auto-calculated weighted totals per option
+- Best option highlighted automatically
+- **CSV export** of the full matrix
+- Visual score bar chart
+- localStorage persistence
+
+#### State Shape
+
+```ts
+interface Criterion {
+  id: string
+  name: string
+  weight: number     // 1–10
+}
+
+interface Option {
+  id: string
+  name: string
+  scores: Record<string, number>  // criterionId → score (1–10)
+}
+
+interface DecisionState {
+  criteria: Criterion[]
+  options: Option[]
+}
+```
+
+#### Props
+
+| Prop | Type | Required | Description |
+|---|---|---|---|
+| `lang` | `Locale` | Yes | Current locale |
+| `dict` | `Dictionary` | Yes | Translation dictionary |
 
 ---
 

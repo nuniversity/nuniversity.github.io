@@ -53,7 +53,7 @@ git remote add upstream https://github.com/nuniversity/nuniversity.github.io.git
 
 ### 4. Set up the development environment
 
-Follow the full setup guide: **[GETTING-STARTED.md](./GETTING-STARTED.md)**
+Follow the full setup guide: **[GETTING-STARTED.md](../getting-started/GETTING-STARTED.md)**
 
 ```bash
 npm install
@@ -186,7 +186,7 @@ Quick checklist:
 
 1. Check [open issues](https://github.com/nuniversity/nuniversity.github.io/issues) to avoid duplicate work
 2. For significant features, open an issue first to discuss the approach
-3. Read [ARCHITECTURE.md](./ARCHITECTURE.md) to understand the system design
+3. Read [ARCHITECTURE.md](../architecture/ARCHITECTURE.md) to understand the system design
 
 ### Component Guidelines
 
@@ -310,6 +310,22 @@ cp content/tools/eisenhower-matrix/en.md content/tools/eisenhower-matrix/pt.md
 ---
 
 ## 8. Pull Request Process
+
+```mermaid
+sequenceDiagram
+    participant D as Developer
+    participant G as GitHub
+    participant R as Reviewer
+
+    D->>G: Fork Repository
+    D->>G: Create Branch
+    D->>D: Write Code
+    D->>G: Commit Changes
+    D->>G: Push to Fork
+    D->>G: Open Pull Request
+    R->>G: Review PR
+    R->>G: Merge PR
+```
 
 ### Before Opening a PR
 
