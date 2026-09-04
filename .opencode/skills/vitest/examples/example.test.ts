@@ -49,15 +49,15 @@ describe('mocking', () => {
   });
 });
 
-// Snapshots
-describe('snapshots', () => {
-  it('matches snapshot', () => {
+// Object assertions
+describe('object assertions', () => {
+  it('matches object shape', () => {
     const user = { name: 'Alice', age: 30 };
-    expect(user).toMatchSnapshot();
+    expect(user).toEqual({ name: 'Alice', age: 30 });
   });
 
-  it('matches inline snapshot', () => {
-    expect(new Date('2024-01-01').toISOString().split('T')[0]).toMatchInlineSnapshot('"2024-01-01"');
+  it('matches date value', () => {
+    expect(new Date('2024-01-01').toISOString().split('T')[0]).toBe('2024-01-01');
   });
 });
 

@@ -1,0 +1,15 @@
+╔══════════════════════════════════════════════╗
+║          CI/CD Pipeline Simulator            ║
+╚══════════════════════════════════════════════╝
+
+[1/3] Install dependencies (npm ci)........ ✅ PASS (12.3s)
+[2/3] Run tests (npx vitest run)........... ❌ FAIL (3.2s)
+         FAIL src/components/FlashcardGame.test.ts > should render cards
+         AssertionError: expected 'hello' to be 'world'
+[3/3] Build with Next.js (npx next build).. ❌ FAIL (12.3s)
+         Type error: Cannot find name 'config'
+
+══════════════════════════════════════════════
+  Result: 1 PASSED, 2 FAILED
+  Total time: 27.8s
+══════════════════════════════════════════════

@@ -1,0 +1,21 @@
+{
+  "name": "cicd-pipeline",
+  "version": "1.0.0",
+  "description": "Simulates the CI/CD pipeline locally — runs install, tests, and build before you commit",
+  "type": "skill",
+  "triggers": [
+    "**/*.{ts,tsx,js}",
+    "**/package.json",
+    "**/package-lock.json"
+  ],
+  "dependencies": [],
+  "metadata": {
+    "category": "devops",
+    "audience": "developers",
+    "difficulty": "beginner"
+  },
+  "references": {
+    "documentation": "https://docs.github.com/en/actions",
+    "repository": "https://github.com/nuniversity/nuniversity.github.io"
+  }
+}
