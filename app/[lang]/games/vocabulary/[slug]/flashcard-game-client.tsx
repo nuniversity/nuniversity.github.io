@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence, useMotionValue, useTransform, type PanInfo } from 'framer-motion'
-import { ArrowLeft, RotateCcw, Download, Upload, BarChart3, Sparkles, Eye, EyeOff } from 'lucide-react'
+import { ArrowLeft, RotateCcw, Download, Upload, BarChart3, Sparkles, Eye, EyeOff, Volume2 } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { VocabularyGame, VocabularyWord } from '@/lib/games/get-game-content'
 import Link from 'next/link'
@@ -289,6 +289,16 @@ export function FlashcardGameClient({ lang, game, dict }: FlashcardGameClientPro
   }, [game.words, progress])
 
   const getGoogleImagesUrl = (word: string) => `https://www.google.com/search?q=${encodeURIComponent(`${word} + significado`)}&tbm=isch`
+  const getPronunciationUrl = (word: string, fromLang: string, toLang: string) => {
+    const params = new URLSearchParams({
+      sl: fromLang,
+      tl: toLang,
+      text: word,
+      op: 'translations',
+      hl: lang,
+    })
+    return `https://translate.google.com/?${params.toString()}`
+  }
 
   const boxConfigs = [
     { mode: 'all' as StudyMode, count: stats.total, label: fc.mode_all ?? 'All', color: 'indigo', bgActive: 'bg-indigo-600', borderActive: 'border-indigo-600', textActive: 'text-indigo-600' },
@@ -445,7 +455,10 @@ export function FlashcardGameClient({ lang, game, dict }: FlashcardGameClientPro
 
                   {!isFlipped ? (
                     <>
-                      <div className="absolute top-3 right-3">
+                      <div className="absolute top-3 right-3 flex gap-1">
+                        <a href={getPronunciationUrl(currentWord.source, game.language_pair.source, game.language_pair.target)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-400 hover:text-indigo-600" title={fc.listen_pronunciation ?? 'Listen pronunciation'}>
+                          <Volume2 className="w-5 h-5" />
+                        </a>
                         <a href={getGoogleImagesUrl(currentWord.source)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-400 hover:text-indigo-600" title={fc.view_images ?? 'View images'}>
                           <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
                         </a>
@@ -457,6 +470,11 @@ export function FlashcardGameClient({ lang, game, dict }: FlashcardGameClientPro
                     </>
                   ) : (
                     <>
+                      <div className="absolute top-3 right-3 flex gap-1">
+                        <a href={getPronunciationUrl(currentWord.target, game.language_pair.target, game.language_pair.source)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-400 hover:text-purple-600" title={fc.listen_pronunciation ?? 'Listen pronunciation'}>
+                          <Volume2 className="w-5 h-5" />
+                        </a>
+                      </div>
                       {currentWord.emoji && <span className="text-4xl mb-3">{currentWord.emoji}</span>}
                       <h2 className="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-2">{currentWord.target}</h2>
                       <p className="text-lg text-gray-500 mb-2">{currentWord.source}</p>
