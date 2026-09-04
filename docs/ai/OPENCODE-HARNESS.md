@@ -1,7 +1,423 @@
 # OpenCode Deterministic Agentic Harness — NUniversity
 
-> **Status:** Design Document (Forward-Looking)
-> **Purpose:** Define a deterministic, quality-gated content generation harness using OpenCode's extensibility primitives (skills, agents, plugins) to scale NUniversity's 38 courses, 11 games, and 10 tools.
+> **Status:** Implemented
+> **Purpose:** Define a deterministic, quality-gated content generation harness using OpenCode's extensibility primitives (skills, hooks, plugins) to scale NUniversity's 38 courses, 11 games, and 10 tools.
+
+---
+
+## Core Principle
+
+**Deterministic Agentic Harness**: Build the most deterministic harness possible by creating deterministic AI agentic development pipelines based on deterministic skills, hooks, plugins, and tools. Let the uncertainty and decision-making stay with the LLM models — they call or loop into engineering using deterministic solutions.
+
+The harness is the foundation of reliability. The LLM models are the agents of flexibility.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    LLM LAYER (Flexible)                      │
+│  • Understanding user intent                                │
+│  • Making decisions                                         │
+│  • Orchestrating workflows                                  │
+│  • Handling edge cases                                      │
+└─────────────────────────┬───────────────────────────────────┘
+                          │ calls
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│                 HARNESS LAYER (Deterministic)                │
+│  • Skills: Structured prompts with known outputs            │
+│  • Hooks: Schema validation on every write                  │
+│  • Plugins: Automated quality gates                         │
+│  • Tools: Python/JS/Bash scripts with exit codes            │
+└─────────────────────────┬───────────────────────────────────┘
+                          │ built on
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│                 FOUNDATION LAYER (TDD + Dev Stack)           │
+│  • Test-Driven Development (Red-Green-Refactor)             │
+│  • Dev Tool Stack (linters, formatters, security scanners)  │
+│  • Quality Gates (pre-commit, CI/CD enforcement)            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 1.1 Test-Driven Development as Core Principle
+
+**Test-Driven Development is the foundation of the deterministic harness.** Every script, hook, tool, and skill must be built using the Red-Green-Refactor cycle. TDD provides the feedback loop that makes deterministic execution reliable — tests define objective success criteria that the harness can verify automatically.
+
+### The TDD Cycle (Mandatory for All Harness Components)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    TDD CYCLE (Mandatory)                     │
+│                                                             │
+│   ┌─────────┐    ┌─────────┐    ┌─────────────┐            │
+│   │   RED   │───▶│  GREEN  │───▶│  REFACTOR   │            │
+│   │         │    │         │    │             │             │
+│   │ Write   │    │ Write   │    │ Improve     │            │
+│   │ failing │    │ minimum │    │ code while  │            │
+│   │ test    │    │ code to │    │ keeping     │            │
+│   │ first   │    │ pass    │    │ tests green │            │
+│   └─────────┘    └─────────┘    └─────────────┘            │
+│        │                                        │           │
+│        └────────────────────────────────────────┘           │
+│                    Repeat for each feature                   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Why TDD Is Non-Negotiable
+
+1. **Deterministic verification**: Tests convert subjective "seems right" into objective pass/fail signals
+2. **Regression safety**: Every hook, script, and tool is protected against breaking changes
+3. **Documentation**: Tests serve as executable specifications of expected behavior
+4. **Feedback loop**: LLMs get immediate feedback on whether their output meets requirements
+5. **Quality baseline**: Coverage thresholds enforce minimum quality standards
+
+### TDD Rules for Harness Components
+
+| Rule | Description |
+|------|-------------|
+| **No code without tests** | Every script must have a test file written first |
+| **RED before GREEN** | Verify the test fails before writing implementation |
+| **One test at a time** | Write one test, implement, verify, repeat |
+| **Refactor only when green** | Never refactor while tests are failing |
+| **90% coverage minimum** | All hooks and scripts must meet coverage threshold |
+| **Tests are documentation** | Test names and structure describe expected behavior |
+
+### TDD Quality Gates
+
+```bash
+# Gate 1: Test existence - every script has a test file
+find scripts/ -name "*.py" | while read script; do
+    test_file="tests/test_$(basename $script .py).py"
+    [ ! -f "$test_file" ] && exit 2
+done
+
+# Gate 2: All tests pass
+pytest tests/ --tb=short
+# Exit code must be 0
+
+# Gate 3: Coverage threshold met
+pytest tests/ --cov=scripts --cov-fail-under=90
+
+# Gate 4: No skipped tests (in deterministic components)
+pytest tests/ -v | grep -c "SKIPPED" | grep -q "^0$"
+```
+
+---
+
+## 1.2 Domain-Driven Design (DDD)
+
+**Model the harness around the business domain, not the technology.** DDD ensures that skills, hooks, and tools reflect NUniversity's actual content structure — courses, lessons, games, translations — rather than arbitrary technical abstractions.
+
+### Strategic Design
+
+| Concept | NUniversity Mapping |
+|---------|---------------------|
+| **Bounded Context** | Each skill is a bounded context: `course-writer`, `game-builder`, `i18n-translator` |
+| **Ubiquitous Language** | Domain terms used consistently: "lesson", "course", "domain", "quiz", "vocabulary" |
+| **Context Mapping** | Skills communicate via shared schemas and memory, not direct coupling |
+| **Core Domain** | Content generation (course-writer, game-builder) |
+| **Supporting Domains** | Validation hooks, i18n parity, security guard |
+| **Generic Domains** | File I/O, JSON parsing, YAML parsing |
+
+### Tactical Design
+
+| Building Block | Implementation |
+|----------------|----------------|
+| **Entities** | `lesson.md`, `course.json`, `quiz.json`, `vocabulary.json` |
+| **Value Objects** | Frontmatter (title, description, order, difficulty, duration), exit codes (0, 1, 2) |
+| **Aggregates** | Course = aggregate root containing lessons; Game = aggregate root containing questions |
+| **Repositories** | Filesystem as repository; `content/courses/{slug}/` as course repository |
+| **Domain Events** | `file.edited`, `tool.execute.before`, `session.created` |
+| **Services** | Hook scripts, validation scripts, quality gate scripts |
+
+### DDD Rules for Harness Components
+
+1. **Bounded Contexts**: Each skill operates independently; no cross-skill imports
+2. **Ubiquitous Language**: Use domain terms in code, tests, and documentation — no synonyms
+3. **Aggregates**: Course is the consistency boundary for lessons; game is the consistency boundary for questions
+4. **Domain Events**: All mutations flow through `file.edited` events — no direct file writes outside hooks
+5. **Anti-Corruption Layer**: Hooks act as ACL — validating external (LLM) output before it enters the domain
+
+---
+
+## 1.3 Clean Architecture
+
+**Dependencies point inward.** The harness is organized in concentric layers where inner layers know nothing of outer layers. This makes components independently testable and replaceable.
+
+### Layer Structure
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                  FRAMEWORKS & DRIVERS (Outermost)            │
+│  OpenCode hooks, skills, plugins, CLI                       │
+│  • Hook registration (opencode.json)                        │
+│  • Skill activation (frontmatter triggers)                  │
+│  • Plugin event handlers                                    │
+├─────────────────────────────────────────────────────────────┤
+│                    INTERFACE ADAPTERS                        │
+│  Script I/O, schema parsing, exit code translation          │
+│  • Environment variable reading (OPENCODE_FILE_PATH)        │
+│  • JSON/YAML parsing (json.tool, pyyaml)                    │
+│  • stdout/stderr formatting                                 │
+├─────────────────────────────────────────────────────────────┤
+│                    APPLICATION BUSINESS RULES                │
+│  Validation logic, quality gates, content generation        │
+│  • Frontmatter field validation                             │
+│  • Quiz schema enforcement                                  │
+│  • i18n parity computation                                  │
+│  • Content depth scoring                                    │
+├─────────────────────────────────────────────────────────────┤
+│                    ENTITIES (Innermost)                      │
+│  Domain models: lesson, course, quiz, vocabulary            │
+│  • Frontmatter entity (title, order, difficulty, duration)  │
+│  • Question entity (id, options, correct, explanation)      │
+│  • Word entity (source, target, context)                    │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### The Dependency Rule
+
+**Source code dependencies must point only inward.** Inner layers cannot import from outer layers. Outer layers communicate with inner layers through interfaces.
+
+| Layer | Can Depend On | Cannot Depend On |
+|-------|---------------|------------------|
+| Entities | Nothing | Everything else |
+| Business Rules | Entities | Adapters, Frameworks |
+| Adapters | Entities, Business Rules | Frameworks |
+| Frameworks | Everything | Nothing (it's the entry point) |
+
+### Clean Architecture in Practice
+
+```python
+# ENTITY (innermost) — no imports from outer layers
+@dataclass
+class Frontmatter:
+    title: str
+    description: str
+    order: int
+    difficulty: str  # beginner | intermediate | advanced
+    duration: str    # "N min"
+
+# BUSINESS RULE — depends only on entity
+def validate_frontmatter(fm: Frontmatter) -> list[str]:
+    errors = []
+    if fm.difficulty not in ("beginner", "intermediate", "advanced"):
+        errors.append(f"Invalid difficulty: {fm.difficulty}")
+    if not isinstance(fm.order, int) or fm.order < 1:
+        errors.append(f"Order must be positive integer: {fm.order}")
+    return errors
+
+# ADAPTER — translates framework I/O to entity
+def parse_frontmatter(content: str) -> Frontmatter:
+    # Extract YAML, parse, return Frontmatter entity
+    ...
+
+# FRAMEWORK (outermost) — OpenCode hook
+def main() -> int:
+    content = Path(os.environ["OPENCODE_FILE_PATH"]).read_text()
+    fm = parse_frontmatter(content)           # Adapter
+    errors = validate_frontmatter(fm)         # Business Rule
+    if errors:
+        print("\n".join(errors), file=sys.stderr)
+        return 2
+    return 0
+```
+
+---
+
+## 1.4 SOLID Principles
+
+Five design principles that make the harness maintainable, extensible, and testable.
+
+### Single Responsibility Principle (SRP)
+
+**Each script, hook, and skill does exactly one thing.**
+
+| Component | Single Responsibility |
+|-----------|-----------------------|
+| `validate_frontmatter.py` | Validates Markdown frontmatter only |
+| `validate_game_json.py` | Validates game JSON only |
+| `check_i18n_parity.py` | Checks dictionary key parity only |
+| `guard_env_read.py` | Blocks .env reads only |
+| `course-writer` skill | Generates lesson content only |
+| `game-builder` skill | Generates game JSON only |
+
+### Open/Closed Principle (OCP)
+
+**The harness is open for extension, closed for modification.** New content types are added by creating new hooks and skills, not by modifying existing ones.
+
+```
+# To add a new content type (e.g., flashcards):
+# 1. Create new hook: validate-flashcard-json/
+# 2. Create new skill: flashcard-builder/
+# 3. Register in opencode.json
+# → Existing hooks and skills remain unchanged
+```
+
+### Liskov Substitution Principle (LSP)
+
+**All hooks are interchangeable.** Any hook can be replaced with another hook that has the same exit code contract (0=pass, 1=warn, 2=block) without affecting the harness.
+
+| Hook | Exit 0 | Exit 1 | Exit 2 |
+|------|--------|--------|--------|
+| `validate_frontmatter.py` | Pass | N/A | Fail |
+| `validate_game_json.py` | Pass | N/A | Fail |
+| `check_i18n_parity.py` | Pass | Warn | N/A |
+| `guard_env_read.py` | Pass | N/A | Block |
+
+All hooks follow the same contract → they are substitutable.
+
+### Interface Segregation Principle (ISP)
+
+**Skills have focused interfaces.** Each skill exposes only the triggers and instructions relevant to its domain. No skill forces the agent to depend on methods it doesn't use.
+
+```yaml
+# course-writer — focused interface
+triggers:
+  - content/courses/**        # Only course paths
+  - keyword: "write lesson"   # Only lesson actions
+
+# game-builder — focused interface
+triggers:
+  - content/games/**          # Only game paths
+  - keyword: "build quiz"     # Only quiz actions
+```
+
+### Dependency Inversion Principle (DIP)
+
+**High-level policies depend on abstractions, not concrete implementations.** The quality gate flow doesn't know which specific linter runs — it depends on the exit code abstraction.
+
+```python
+# Abstraction: exit code contract
+# 0 = pass, 1 = warn, 2 = block
+
+# All tools implement this abstraction:
+ruff check ...        # returns 0 or non-zero
+eslint ...            # returns 0 or non-zero
+pytest ...            # returns 0 or non-zero
+bandit ...            # returns 0 or non-zero
+shellcheck ...        # returns 0 or non-zero
+
+# Quality gate depends on the abstraction:
+for tool in [ruff, eslint, bandit, pytest]:
+    exit_code = tool.run()  # abstraction
+    if exit_code != 0:
+        return 2
+```
+
+---
+
+## 1.5 Clean Code
+
+**Code is read more than it is written.** Every script, hook, and test must be immediately understandable by the next developer (or LLM agent).
+
+### Naming
+
+| Rule | Good | Bad |
+|------|------|-----|
+| Descriptive names | `validate_frontmatter` | `vf` |
+| Intent-revealing | `is_valid_difficulty` | `check` |
+| Domain terminology | `lesson`, `course`, `quiz` | `item`, `data`, `obj` |
+| Consistent casing | `snake_case` (Python), `camelCase` (JS) | Mixed styles |
+| No abbreviations | `question_count` | `q_cnt` |
+
+### Functions
+
+| Rule | Description |
+|------|-------------|
+| **Small** | Each function does one thing; 20 lines max |
+| **Single level of abstraction** | Don't mix high-level logic with low-level details |
+| **Descriptive names** | Function name says what it does |
+| **Minimal arguments** | 0–3 parameters; use dataclasses for more |
+| **No side effects** | Pure functions where possible |
+
+### Comments
+
+| Rule | Description |
+|------|-------------|
+| **Don't comment bad code — rewrite it** | Self-documenting code over comments |
+| **Explain why, not what** | `# Exit 2 to block the operation` not `# Check if error` |
+| **Docstrings on all public functions** | Parameters, return type, exit codes |
+| **No dead code comments** | Remove commented-out code |
+
+### Error Handling
+
+| Rule | Description |
+|------|-------------|
+| **Explicit over implicit** | Catch specific exceptions, not bare `except:` |
+| **Errors to stderr** | `print(msg, file=sys.stderr)` |
+| **Exit codes for control flow** | 0=pass, 1=warn, 2=block — never complex return types |
+| **Fail fast** | Validate inputs at the top of the function |
+
+### Formatting
+
+| Tool | Rule |
+|------|------|
+| `ruff format` | 88 chars, double quotes, 4-space indent |
+| `shfmt` | 2-space indent, binary ops next line |
+| `prettier` | 2-space indent, trailing commas |
+
+---
+
+## 1.6 Spec-Driven Design (SDD)
+
+**Specifications are the source of truth, not code.** The harness is built from specifications that define behavior, structure, and quality gates. Code implements the spec; tests verify the spec.
+
+### The Spec Hierarchy
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    SPECIFICATIONS (Source of Truth)          │
+│  • OPENCODE-HARNESS.md (this document)                     │
+│  • AGENTS.md (agent system specification)                   │
+│  • Schema files (JSON Schema, YAML schemas)                 │
+│  • Skill skill.md files (behavior specifications)           │
+├─────────────────────────────────────────────────────────────┤
+│                    TESTS (Executable Specs)                  │
+│  • pytest tests/ (Python validation)                        │
+│  • vitest tests/ (JS/TS validation)                         │
+│  • Hook exit codes (integration tests)                      │
+├─────────────────────────────────────────────────────────────┤
+│                    IMPLEMENTATION (Code)                     │
+│  • Hook scripts (validate_frontmatter.py, etc.)             │
+│  • Skill scripts (generate_*, test_*, etc.)                 │
+│  • Quality gate scripts                                     │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### How Specs Drive Development
+
+1. **Write the spec first** — Define what the hook/skill should do in `skill.md` or `OPENCODE-HARNESS.md`
+2. **Write the schema** — Define the exact structure in JSON Schema or dataclass
+3. **Write the tests** — Convert spec requirements into executable test cases
+4. **Write the implementation** — Make tests pass
+5. **Refactor** — Clean up while keeping tests green
+
+### Spec-to-Code Traceability
+
+Every piece of code traces back to a spec requirement:
+
+| Code | Spec Source |
+|------|-------------|
+| `validate_frontmatter.py` line checking difficulty enum | Section 3.2 flowchart: "difficulty valid?" |
+| `validate_game_json.py` minimum 5 questions | Section 3.3: "Minimum 5 questions required" |
+| `check_i18n_parity.py` missing keys check | Section 3.4: "Keys missing in pt?" |
+| `guard_env_read.py` blocking .env reads | Section 3.5: "BLOCKED: Access to sensitive file" |
+| Exit code 2 for blocking errors | Section 2.3: "Exit code semantics" |
+
+### Spec Compliance Verification
+
+```bash
+# Verify implementation matches spec
+python -m pytest tests/ -v  # All tests pass = spec compliance
+
+# Verify schema matches spec
+python scripts/validate_skill_json.py  # Schema valid = structure compliance
+
+# Verify integration matches spec
+python scripts/test_skill.py --all  # Integration pass = workflow compliance
+```
 
 ---
 
@@ -63,6 +479,7 @@ graph TB
 
 | Principle | Implementation |
 |---|---|
+| **TDD first** | All code is written test-first using Red-Green-Refactor cycle |
 | **Validate on write** | Every file mutation triggers schema validation via `file.edited` hook |
 | **Never trust the agent** | LLM output is always treated as untrusted input — validated before persistence |
 | **Fail fast** | Hook exit code `2` blocks the operation immediately; stderr becomes agent feedback |
@@ -787,27 +1204,55 @@ flowchart TD
     O --> P[Memory: update project-status]
 ```
 
-### 6.3 Quality Gate Flow
+### 6.3 Quality Gate Flow (TDD-Enforced)
 
 ```mermaid
 flowchart TD
-    A[Content file written] --> B[quality-gate.sh hook]
-    B --> C[npm run lint]
-    C --> D{Lint passes?}
-    D -->|No| E[Exit 2: lint errors]
-    E --> F[Agent receives stderr]
-    F --> G[Agent fixes lint issues]
-    G --> A
-    D -->|Yes| H[npm run typecheck]
-    H --> I{Typecheck passes?}
-    I -->|No| J[Exit 2: type errors]
-    J --> F
-    I -->|Yes| K[npm run test]
-    K --> L{Tests pass?}
-    L -->|No| M[Exit 2: test failures]
-    M --> F
-    L -->|Yes| N[Exit 0: all gates pass]
-    N --> O[Git commit allowed]
+    A[Content/code file written] --> B[pre-commit hooks]
+    B --> C{Pre-commit passes?}
+    C -->|No| D[Exit 2: pre-commit errors]
+    D --> E[Agent receives stderr]
+    E --> F[Agent fixes issues]
+    F --> A
+    C -->|Yes| G{Python file?}
+    G -->|Yes| H[ruff check]
+    G -->|No| I{JS/TS file?}
+    H --> H1{ruff passes?}
+    H1 -->|No| D
+    H1 -->|Yes| H2[ruff format --check]
+    H2 --> H2a{Format passes?}
+    H2a -->|No| D
+    H2a -->|Yes| I
+    I -->|Yes| J[eslint]
+    I -->|No| K{Bash file?}
+    J --> J1{eslint passes?}
+    J1 -->|No| D
+    J1 -->|Yes| K
+    K -->|Yes| L[shellcheck + shfmt]
+    K -->|No| M{All linters pass?}
+    L --> L1{shellcheck passes?}
+    L1 -->|No| D
+    L1 -->|Yes| L2{shfmt passes?}
+    L2 -->|No| D
+    L2 -->|Yes| M
+    M -->|No| D
+    M -->|Yes| N[bandit security scan]
+    N --> O{bandit passes?}
+    O -->|No| D
+    O -->|Yes| P{Python file?}
+    P -->|Yes| Q[pytest]
+    P -->|No| R{JS/TS file?}
+    Q --> Q1{pytest passes?}
+    Q1 -->|No| D
+    Q1 -->|Yes| R
+    R -->|Yes| S[vitest]
+    R -->|No| T{All tests pass?}
+    S --> S1{vitest passes?}
+    S1 -->|No| D
+    S1 -->|Yes| T
+    T -->|No| D
+    T -->|Yes| U[Exit 0: all gates pass]
+    U --> V[Git commit allowed]
 ```
 
 ---
@@ -1211,54 +1656,352 @@ gantt
 
 ```
 .opencode/
-├── .gitignore                    # Ignore node_modules, memory temp files
+├── .gitignore
 ├── package.json                  # @opencode-ai/plugin dependency
 ├── package-lock.json
 ├── node_modules/
-├── plugin.ts                     # Main plugin: validators, guards, memory hooks
 │
 ├── hooks/
-│   ├── manifest.json             # Hook registry: event → script mapping
-│   ├── validate-frontmatter.sh   # Markdown frontmatter schema validation
-│   ├── validate-game-json.sh     # Quiz/vocabulary JSON schema validation
-│   ├── validate-course-json.sh   # course.json schema validation
-│   ├── check-i18n-parity.sh      # en/pt/es dictionary key parity
-│   ├── quality-gate.sh           # lint → typecheck → test chain
-│   └── guard-env-read.sh         # Block .env file access
+│   ├── validate-frontmatter/
+│   │   ├── scripts/validate_frontmatter.py
+│   │   ├── assets/hook.json
+│   │   ├── examples/valid_lesson.md, invalid_lesson.md
+│   │   └── references/schema.json
+│   ├── validate-game-json/
+│   │   ├── scripts/validate_game_json.py
+│   │   ├── assets/hook.json
+│   │   ├── examples/valid_quiz.json, valid_vocabulary.json
+│   │   └── references/schema.json
+│   ├── validate-course-json/
+│   │   ├── scripts/validate_course_json.py
+│   │   ├── assets/hook.json
+│   │   ├── examples/valid_course.json
+│   │   └── references/schema.json
+│   ├── check-i18n-parity/
+│   │   ├── scripts/check_i18n_parity.py
+│   │   └── assets/hook.json
+│   └── guard-env-read/
+│       ├── scripts/guard_env_read.py
+│       └── assets/hook.json
 │
 ├── skills/
-│   ├── course-writer.md          # Course lesson generation context
-│   ├── game-builder.md           # Game JSON generation context
-│   ├── i18n-translator.md        # Translation and localization context
-│   └── platform-engineer.md      # TypeScript/platform development context
+│   ├── skill-builder/            # Meta-skill for creating new skills
+│   │   ├── skill.md
+│   │   ├── assets/skill.json
+│   │   ├── examples/skill.md, skill.json
+│   │   └── references/
+│   ├── course-writer/
+│   │   ├── skill.md
+│   │   ├── assets/skill.json
+│   │   ├── examples/valid_lesson.md
+│   │   └── references/guide.md
+│   ├── game-builder/
+│   │   ├── skill.md
+│   │   ├── assets/skill.json
+│   │   └── examples/valid_quiz.json
+│   ├── i18n-translator/
+│   │   └── skill.md
+│   ├── platform-engineer/
+│   │   └── skill.md
+│   ├── mermaid-js/
+│   │   ├── skill.md
+│   │   ├── assets/skill.json
+│   │   ├── examples/diagram_types.md
+│   │   └── scripts/validate_mermaid.py
+│   └── tailwind-css/
+│       ├── skill.md
+│       ├── assets/skill.json
+│       ├── examples/components.tsx
+│       ├── references/cheatsheet.md
+│       └── scripts/validate_tailwind.py
+│
+├── plugins/
+│   └── nuniversity-plugin/
+│       ├── scripts/
+│       ├── assets/
+│       ├── examples/
+│       └── references/
 │
 └── memory/
-    ├── project-status.json       # Platform state: courses, games, tools count
-    ├── known-issues.json         # Catalogued bugs and tech debt
-    ├── sprint.json               # Current sprint tasks and priorities
-    ├── content-audit.json        # Per-course/game completeness tracking
-    └── agent-history.json        # Log of agent invocations and outcomes
+    └── MEMORY.md                 # Project state and context
 ```
 
 ### Hook → Event Mapping
 
 | Hook Script | Listens To | Pattern | Exit Codes |
 |---|---|---|---|
-| `validate-frontmatter.sh` | `file.edited` | `content/**/*.md` | 0=pass, 2=fail |
-| `validate-game-json.sh` | `file.edited` | `content/games/**/*.json` | 0=pass, 2=fail |
-| `validate-course-json.sh` | `file.edited` | `content/**/course.json` | 0=pass, 2=fail |
-| `check-i18n-parity.sh` | `file.edited` | `dictionaries/*.json` | 0=pass, 1=warn |
-| `quality-gate.sh` | `file.edited` | `content/**/*` | 0=pass, 2=fail |
-| `guard-env-read.sh` | `tool.execute.before` | tool=read | 0=pass, 2=block |
+| `validate_frontmatter.py` | `file.write` | `content/courses/**/*.md` | 0=pass, 2=fail |
+| `validate_game_json.py` | `file.write` | `content/games/**/*.json` | 0=pass, 2=fail |
+| `validate_course_json.py` | `file.write` | `content/courses/**/course.json` | 0=pass, 2=fail |
+| `check_i18n_parity.py` | `file.write` | `dictionaries/*.json` | 0=pass, 1=warn |
+| `guard_env_read.py` | `tool.read` | `**` | 0=pass, 2=block |
 
 ### Skill → Path Mapping
 
-| Skill File | Triggers On | Auto-Loads |
+| Skill | Triggers On | Auto-Loads |
 |---|---|---|
-| `course-writer.md` | `content/courses/**` | `COURSE-WRITER-AGENT-PROMPT.md` |
-| `game-builder.md` | `content/games/**` | `GAME-BUILDER-AGENT-PROMPT.md` |
-| `i18n-translator.md` | `dictionaries/**`, `**/pt/**`, `**/es/**` | `en.json`, source locale |
-| `platform-engineer.md` | `lib/**`, `src/**` | `tsconfig.json`, `package.json` |
+| `skill-builder` | `.opencode/skills/**` | Meta-skill for creating skills |
+| `course-writer` | `content/courses/**` | `COURSE-WRITER-AGENT-PROMPT.md` |
+| `game-builder` | `content/games/**` | `GAME-BUILDER-AGENT-PROMPT.md` |
+| `i18n-translator` | `dictionaries/**`, `**/pt/**`, `**/es/**` | `en.json`, source locale |
+| `platform-engineer` | `lib/**`, `src/**` | `tsconfig.json`, `package.json` |
+| `mermaid-js` | `**/*.md`, `content/**`, `docs/**` | Mermaid syntax reference |
+| `tailwind-css` | `**/*.tsx`, `**/*.jsx`, `src/**`, `app/**` | Tailwind utilities reference |
+
+---
+
+## 11. Development Tool Stack
+
+The deterministic harness uses a standardized tool stack for Python, JavaScript/TypeScript, and Bash development. All tools are configured via `pyproject.toml` and `.pre-commit-config.yaml` at the repository root.
+
+### 11.1 Tool Overview
+
+| Category | Tool | Language | Purpose | Install |
+|----------|------|----------|---------|---------|
+| **Package Mgmt** | `uv` | Python | Package management, virtual environments | `curl -LsSf https://astral.sh/uv/install.sh \| sh` |
+| **Package Mgmt** | `fnm` | Node.js | Fast Node Manager | `curl -fsSL https://fnm.vercel.app/install \| bash` |
+| **Linting** | `ruff` | Python | Linter + formatter (replaces flake8, black, isort) | `uv tool install ruff` |
+| **Linting** | `eslint` | JS/TS | JavaScript/TypeScript linting | `npm install -D eslint` |
+| **Linting** | `shellcheck` | Bash | Bash script linting | `apt install shellcheck` |
+| **Linting** | `bandit` | Python | Security linter (AST-based) | `uv tool install bandit` |
+| **Formatting** | `shfmt` | Bash | Bash script formatter | `go install mvdan.cc/sh/v3/cmd/shfmt@latest` |
+| **Testing** | `pytest` | Python | Unit test runner | `uv tool install pytest pytest-mock pytest-cov` |
+| **Testing** | `vitest` | JS/TS | Unit test runner | `npm install -D vitest` |
+| **Testing** | `playwright` | E2E | End-to-end testing | `npm install -D @playwright/test` |
+| **Pre-commit** | `pre-commit` | Any | Git hook framework | `uv tool install pre-commit` |
+
+### 11.2 Tool Configuration
+
+#### Ruff (Python Linting + Formatting)
+
+```toml
+# pyproject.toml
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # Pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "UP",   # pyupgrade
+    "S",    # flake8-bandit (security)
+    "B",    # flake8-bugbear
+    "N",    # pep8-naming
+    "RUF",  # Ruff-specific rules
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]  # Allow assert in tests
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+```
+
+#### Bandit (Python Security)
+
+```toml
+# pyproject.toml
+[tool.bandit]
+exclude_dirs = ["tests", "venv", ".venv"]
+skips = ["B101"]  # Skip assert warnings in tests
+```
+
+#### Pytest (Python Testing)
+
+```toml
+# pyproject.toml
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "slow: marks tests as slow",
+    "integration: marks integration tests",
+]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["scripts", "hooks"]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+```
+
+#### ESLint (JavaScript/TypeScript)
+
+```javascript
+// eslint.config.js
+import js from "@eslint/js";
+export default [
+  js.configs.recommended,
+  {
+    rules: {
+      "no-unused-vars": "error",
+      "no-undef": "error",
+      "prefer-const": "error",
+      "no-var": "error",
+    },
+  },
+];
+```
+
+#### Vitest (JavaScript/TypeScript Testing)
+
+```typescript
+// vitest.config.ts
+import { defineConfig } from "vitest/config";
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: "node",
+    coverage: {
+      provider: "v8",
+      thresholds: {
+        lines: 80,
+        functions: 80,
+      },
+    },
+  },
+});
+```
+
+#### ShellCheck + shfmt (Bash)
+
+```bash
+# .shellcheckrc
+shell=bash
+severity=warning
+
+# shfmt flags: -i=2 (2-space indent), -bn (binary ops next line), -ci (case indent)
+```
+
+### 11.3 Pre-commit Configuration
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.0
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.0
+    hooks:
+      - id: bandit
+        args: [-c, pyproject.toml]
+        additional_dependencies: ["bandit[toml]"]
+
+  - repo: https://github.com/pre-commit/mirrors-shellcheck
+    rev: v0.10.0
+    hooks:
+      - id: shellcheck
+
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.10.0
+    hooks:
+      - id: shfmt
+        args: ["-i", "2", "-bn", "-ci"]
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v9.15.0
+    hooks:
+      - id: eslint
+        files: \.(js|ts|jsx|tsx)$
+
+  - repo: local
+    hooks:
+      - id: pytest-check
+        name: pytest
+        entry: uv run pytest --tb=short -q
+        language: system
+        types: [python]
+        pass_filenames: false
+
+  - repo: local
+    hooks:
+      - id: vitest-check
+        name: vitest
+        entry: npx vitest run
+        language: system
+        files: \.(test|spec)\.(js|ts|jsx|tsx)$
+        pass_filenames: false
+```
+
+### 11.4 Quality Gate Chain
+
+The quality gate chain runs automatically on every commit via pre-commit hooks and in CI:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│              QUALITY GATE CHAIN (Deterministic)              │
+│                                                             │
+│  1. pre-commit ──▶ Run all hooks on staged files            │
+│  2. ruff check ──▶ Python linting (flake8, isort, bugbear)  │
+│  3. ruff format ─▶ Python formatting (Black-compatible)     │
+│  4. eslint ──────▶ JS/TS linting                            │
+│  5. shellcheck ──▶ Bash linting (SC2086, etc.)              │
+│  6. shfmt ───────▶ Bash formatting                          │
+│  7. bandit ──────▶ Python security scan (AST-based)         │
+│  8. pytest ──────▶ Python unit tests (coverage ≥ 90%)       │
+│  9. vitest ──────▶ JS/TS unit tests (coverage ≥ 80%)        │
+│ 10. playwright ──▶ E2E integration tests                    │
+│                                                             │
+│  All gates must pass (exit 0) before commit/push            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 11.5 Language-Specific Workflows
+
+#### Python Scripts
+
+```bash
+# Development
+uv add pytest pytest-mock pytest-cov ruff bandit
+uv run ruff check scripts/
+uv run ruff format scripts/
+uv run pytest tests/ --cov=scripts --cov-report=term-missing
+uv run bandit -r scripts/
+
+# CI
+uv run ruff check . && uv run ruff format --check .
+uv run pytest tests/ --cov=scripts --cov-fail-under=90
+uv run bandit -r scripts/ -f json
+```
+
+#### JavaScript/TypeScript
+
+```bash
+# Development
+npm install -D vitest eslint @playwright/test
+npx vitest run
+npx eslint src/
+npx playwright test
+
+# CI
+npx vitest run --coverage
+npx eslint src/
+npx playwright test
+```
+
+#### Bash Scripts
+
+```bash
+# Development
+shellcheck scripts/*.sh
+shfmt -i 2 -bn -ci scripts/*.sh
+
+# CI
+shellcheck scripts/*.sh
+shfmt -d -i 2 -bn -ci scripts/*.sh
+```
 
 ---
 

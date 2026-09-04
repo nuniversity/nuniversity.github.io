@@ -1,9 +1,8 @@
-// app/[lang]/games/vocabulary/[slug]/vocabulary-game-client.tsx
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft, Trophy, RotateCcw, CheckCircle2, XCircle, Clock, Star } from 'lucide-react'
+import { ArrowLeft, Trophy, RotateCcw, CheckCircle2, Clock, Star } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { VocabularyGame, VocabularyWord } from '@/lib/games/get-game-content'
 import Link from 'next/link'
@@ -35,12 +34,12 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
   const [numPairs, setNumPairs] = useState(8)
   const [gameWords, setGameWords] = useState<VocabularyWord[]>([])
 
-  // Initialize game
+  const g = dict?.games ?? {}
+
   useEffect(() => {
     initializeGame()
   }, [game, numPairs])
 
-  // Timer
   useEffect(() => {
     if (startTime && !isComplete) {
       const interval = setInterval(() => {
@@ -51,12 +50,10 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
   }, [startTime, isComplete])
 
   function initializeGame() {
-    // Shuffle and take random words for the game
     const shuffledWords = [...game.words].sort(() => Math.random() - 0.5)
     const selectedWords = shuffledWords.slice(0, numPairs)
     setGameWords(selectedWords)
     
-    // Create cards for source and target languages
     const sourceCards: Card[] = selectedWords.map(word => ({
       id: `source-${word.id}`,
       wordId: word.id,
@@ -73,7 +70,6 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
       isMatched: false
     }))
 
-    // Shuffle cards
     const allCards = [...sourceCards, ...targetCards].sort(() => Math.random() - 0.5)
     setCards(allCards)
     setSelectedCards([])
@@ -86,52 +82,30 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
   }
 
   function handleCardClick(card: Card) {
-    // Ignore if already matched or already selected
-    if (card.isMatched || selectedCards.some(c => c.id === card.id)) {
-      return
-    }
-
-    // Ignore if two cards already selected
-    if (selectedCards.length >= 2) {
-      return
-    }
+    if (card.isMatched || selectedCards.some(c => c.id === card.id)) return
+    if (selectedCards.length >= 2) return
 
     const newSelectedCards = [...selectedCards, card]
     setSelectedCards(newSelectedCards)
 
-    // Check for match when two cards are selected
     if (newSelectedCards.length === 2) {
       setAttempts(prev => prev + 1)
-      
       const [first, second] = newSelectedCards
       
-      // Check if they match (same wordId, different types)
       if (first.wordId === second.wordId && first.type !== second.type) {
-        // Match found!
         setTimeout(() => {
           setMatchedPairs(prev => {
             const newSet = new Set(prev)
             newSet.add(first.wordId)
             return newSet
           })
-          setCards(prevCards => 
-            prevCards.map(c => 
-              c.wordId === first.wordId ? { ...c, isMatched: true } : c
-            )
-          )
+          setCards(prevCards => prevCards.map(c => c.wordId === first.wordId ? { ...c, isMatched: true } : c))
           setScore(prev => prev + 10)
           setSelectedCards([])
-
-          // Check if game is complete
-          if (matchedPairs.size + 1 === numPairs) {
-            setIsComplete(true)
-          }
+          if (matchedPairs.size + 1 === numPairs) setIsComplete(true)
         }, 600)
       } else {
-        // No match
-        setTimeout(() => {
-          setSelectedCards([])
-        }, 1000)
+        setTimeout(() => setSelectedCards([]), 1000)
       }
     }
   }
@@ -143,20 +117,19 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
   }
 
   const accuracy = attempts > 0 ? Math.round((matchedPairs.size / attempts) * 100) : 0
-  const maxPairs = Math.min(game.words.length, 12) // Maximum 12 pairs (24 cards)
-  const minPairs = 4 // Minimum 4 pairs (8 cards)
+  const maxPairs = Math.min(game.words.length, 12)
+  const minPairs = 4
 
   return (
     <div className="container-custom py-12">
       <div className="max-w-5xl mx-auto">
-        {/* Header */}
         <div className="mb-8">
           <Link 
             href={`/${lang}/games`}
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-4 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Games
+            {g.back_to_games ?? 'Back to Games'}
           </Link>
           
           <div className="flex items-center justify-between flex-wrap gap-4">
@@ -164,7 +137,7 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
               <h1 className="text-3xl font-bold mb-2">{game.title}</h1>
               <p className="text-muted-foreground">{game.description}</p>
               <p className="text-sm text-muted-foreground mt-1">
-                Total words available: {game.words.length}
+                {g.subtitle ?? 'Master new skills through interactive games and challenges'} ({game.words.length})
               </p>
             </div>
             <div className="flex gap-2">
@@ -173,18 +146,17 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
                 className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
               >
                 <RotateCcw className="w-4 h-4" />
-                Restart
+                {g.restart ?? 'Restart'}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Game Settings */}
         <div className="bg-card border rounded-xl p-6 mb-8">
-          <h3 className="font-semibold text-lg mb-4">Game Settings</h3>
+          <h3 className="font-semibold text-lg mb-4">{g.how_to_play ?? 'How to Play'}</h3>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <label className="flex items-center gap-3">
-              <span className="text-muted-foreground">Number of pairs:</span>
+              <span className="text-muted-foreground">{g.instructions?.vocabulary_match?.[0] ?? 'Number of pairs:'}</span>
               <input
                 type="range"
                 min={minPairs}
@@ -196,17 +168,16 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
               <span className="font-semibold text-lg w-8">{numPairs}</span>
             </label>
             <span className="text-sm text-muted-foreground">
-              ({numPairs * 2} cards total)
+              ({numPairs * 2} cards)
             </span>
           </div>
         </div>
 
-        {/* Stats Bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-card border rounded-xl p-4">
             <div className="flex items-center gap-2 text-muted-foreground mb-1">
               <Trophy className="w-4 h-4" />
-              <span className="text-sm">Score</span>
+              <span className="text-sm">{g.stats?.score ?? 'Score'}</span>
             </div>
             <p className="text-2xl font-bold">{score}</p>
           </div>
@@ -214,7 +185,7 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
           <div className="bg-card border rounded-xl p-4">
             <div className="flex items-center gap-2 text-muted-foreground mb-1">
               <Clock className="w-4 h-4" />
-              <span className="text-sm">Time</span>
+              <span className="text-sm">{g.stats?.time ?? 'Time'}</span>
             </div>
             <p className="text-2xl font-bold">{formatTime(elapsedTime)}</p>
           </div>
@@ -222,7 +193,7 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
           <div className="bg-card border rounded-xl p-4">
             <div className="flex items-center gap-2 text-muted-foreground mb-1">
               <CheckCircle2 className="w-4 h-4" />
-              <span className="text-sm">Matches</span>
+              <span className="text-sm">{g.stats?.matches ?? 'Matches'}</span>
             </div>
             <p className="text-2xl font-bold">{matchedPairs.size}/{numPairs}</p>
           </div>
@@ -230,13 +201,12 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
           <div className="bg-card border rounded-xl p-4">
             <div className="flex items-center gap-2 text-muted-foreground mb-1">
               <Star className="w-4 h-4" />
-              <span className="text-sm">Accuracy</span>
+              <span className="text-sm">{g.stats?.accuracy ?? 'Accuracy'}</span>
             </div>
             <p className="text-2xl font-bold">{accuracy}%</p>
           </div>
         </div>
 
-        {/* Game Board */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           <AnimatePresence>
             {cards.map((card) => {
@@ -276,7 +246,6 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
           </AnimatePresence>
         </div>
 
-        {/* Completion Modal */}
         <AnimatePresence>
           {isComplete && (
             <motion.div
@@ -297,41 +266,38 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
                   <Trophy className="w-10 h-10 text-white" />
                 </div>
                 
-                <h2 className="text-3xl font-bold mb-2">Congratulations!</h2>
+                <h2 className="text-3xl font-bold mb-2">{g.congratulations ?? 'Congratulations!'}</h2>
                 <p className="text-muted-foreground mb-6">
-                  You've completed the game!
+                  {g.game_complete ?? "You've completed the game!"}
                 </p>
 
                 <div className="space-y-3 mb-6">
                   <div className="flex justify-between items-center py-2 border-b">
-                    <span className="text-muted-foreground">Final Score</span>
+                    <span className="text-muted-foreground">{g.stats?.final_score ?? 'Final Score'}</span>
                     <span className="font-bold text-xl">{score}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b">
-                    <span className="text-muted-foreground">Time</span>
+                    <span className="text-muted-foreground">{g.stats?.time ?? 'Time'}</span>
                     <span className="font-bold">{formatTime(elapsedTime)}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b">
-                    <span className="text-muted-foreground">Accuracy</span>
+                    <span className="text-muted-foreground">{g.stats?.accuracy ?? 'Accuracy'}</span>
                     <span className="font-bold">{accuracy}%</span>
                   </div>
                 </div>
 
                 <div className="flex gap-3">
                   <button
-                    onClick={() => {
-                      setIsComplete(false)
-                      initializeGame()
-                    }}
+                    onClick={() => { setIsComplete(false); initializeGame() }}
                     className="flex-1 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
                   >
-                    Play Again
+                    {g.play_again ?? 'Play Again'}
                   </button>
                   <Link
                     href={`/${lang}/games`}
                     className="flex-1 px-6 py-3 rounded-lg border font-semibold hover:bg-muted transition-colors text-center"
                   >
-                    More Games
+                    {g.more_games ?? 'More Games'}
                   </Link>
                 </div>
               </motion.div>
@@ -339,26 +305,20 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
           )}
         </AnimatePresence>
 
-        {/* Instructions */}
         <div className="bg-card border rounded-xl p-6">
-          <h3 className="font-semibold text-lg mb-3">How to Play</h3>
+          <h3 className="font-semibold text-lg mb-3">{g.how_to_play ?? 'How to Play'}</h3>
           <ul className="space-y-2 text-muted-foreground">
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>Click on cards to select them</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>Match words in {game.language_pair.source.toUpperCase()} with their {game.language_pair.target.toUpperCase()} translations</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>Find all matching pairs to complete the game</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>Try to complete with the highest accuracy in the shortest time!</span>
-            </li>
+            {(g.instructions?.vocabulary_match ?? [
+              'Click on cards to select them',
+              `Match words in ${game.language_pair.source.toUpperCase()} with their ${game.language_pair.target.toUpperCase()} translations`,
+              'Find all matching pairs to complete the game',
+              'Try to complete with the highest accuracy in the shortest time!'
+            ]).map((instruction: string, i: number) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-primary mt-1">•</span>
+                <span>{instruction}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

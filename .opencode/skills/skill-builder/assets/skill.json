@@ -1,0 +1,9 @@
+{
+  "name": "skill-builder",
+  "version": "1.0.0",
+  "description": "Meta-skill for creating deterministic, production-ready OpenCode skills with proper structure, validation, and integration into the agentic harness",
+  "type": "skill",
+  "triggers": [".opencode/skills/**"],
+  "dependencies": [],
+  "references": {}
+}

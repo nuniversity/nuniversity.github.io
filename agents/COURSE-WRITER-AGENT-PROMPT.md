@@ -146,8 +146,17 @@ Every code block must have a language identifier. Supported identifiers:
 | YAML | `yaml` |
 | JavaScript | `javascript` |
 | TypeScript | `typescript` |
-| Plain text / diagrams | (no identifier — leave blank) |
+| Rust | `rust` |
+| Terraform | `terraform` |
+| Math (KaTeX) | `math` |
+| PhET Simulation | `phet` |
+| Interactive Chart | `plot` |
+| 3D Molecule | `molecule` |
+| Drag-and-Drop Quiz | `dragdrop` |
+| Matching Quiz | `matching` |
+| Fill-in-the-Blank Quiz | `fillblank` |
 | Mermaid diagrams | `mermaid` |
+| Plain text / diagrams | (no identifier — leave blank) |
 
 Always add a comment on the first line of SQL blocks explaining what the query does:
 
@@ -172,6 +181,75 @@ For system architecture, data flows, and layer diagrams, use ASCII art inside fe
 ```
 
 Use Unicode box-drawing characters: `┌ ─ ┐ │ └ ┘ ├ ┤ ┬ ┴ ┼ ▲ ▼ ◀ ▶ → ← ↑ ↓`
+
+### Interactive Components
+
+For STEM courses (Math, Physics, Chemistry, Biology, Engineering), include at least 2 interactive components per lesson. Use these fenced code block types:
+
+**Math Equations (KaTeX):**
+```math
+{ "expression": "E = mc^2", "display": true }
+```
+
+**PhET Simulations:**
+```phet
+{ "slug": "forces-and-motion-basics", "title": "Forces and Motion", "language": "en" }
+```
+
+**Interactive Charts:**
+```plot
+{
+  "type": "line",
+  "title": "Velocity vs Time",
+  "data": [{"time": 0, "velocity": 0}, {"time": 1, "velocity": 9.8}],
+  "xKey": "time",
+  "yKey": "velocity",
+  "xLabel": "Time (s)",
+  "yLabel": "Velocity (m/s)"
+}
+```
+
+**3D Molecules:**
+```molecule
+{ "pdbId": "1CRN", "style": "cartoon", "color": "spectrum" }
+```
+
+**Drag-and-Drop Ordering:**
+```dragdrop
+{
+  "question": "Order these steps:",
+  "items": ["Step 1", "Step 2", "Step 3"],
+  "correctOrder": ["Step 1", "Step 2", "Step 3"],
+  "explanation": "Explanation here."
+}
+```
+
+**Matching Pairs:**
+```matching
+{
+  "question": "Match each concept:",
+  "pairs": [{"left": "A", "right": "B"}],
+  "explanation": "Explanation here."
+}
+```
+
+**Fill-in-the-Blank:**
+```fillblank
+{
+  "question": "Complete the sentence:",
+  "template": "The formula is {{1}} = {{2}} * {{3}}.",
+  "answers": {"1": "F", "2": "m", "3": "a"},
+  "distractors": ["v", "d", "t"],
+  "explanation": "Explanation here."
+}
+```
+
+**Rules for interactive components:**
+- STEM lessons: minimum 2, maximum 3 interactive components
+- Include `explanation` in all quiz configs for feedback
+- Place after explanatory text, not before
+- Vary types across lessons — don't repeat the same type in consecutive lessons
+- Use double backslashes (`\\`) for LaTeX commands in math expressions
 
 ### Alert Boxes
 
@@ -351,20 +429,40 @@ Snowflake stores all table data as **micro-partitions** — immutable, contiguou
 
 ---
 
+## Storage Capacity Visualization
+
+```plot
+{
+  "type": "bar",
+  "title": "Micro-Partition Size Distribution",
+  "data": [
+    {"range": "50-100MB", "count": 45},
+    {"range": "100-200MB", "count": 30},
+    {"range": "200-500MB", "count": 25}
+  ],
+  "xKey": "range",
+  "yKey": "count",
+  "xLabel": "Partition Size",
+  "yLabel": "Percentage of Partitions"
+}
+```
+
+---
+
 ## Practice Questions
 
 **Q1.** Which layer handles query optimization?
 
-- A) Virtual Warehouse layer  
-- B) Storage layer  
-- C) Cloud Services layer ✅  
+- A) Virtual Warehouse layer
+- B) Storage layer
+- C) Cloud Services layer ✅
 - D) Network layer
 
 ---
 
 > [!SUCCESS]
-> **Key Takeaways for Exam Day:**  
-> 1. Three layers: Cloud Services → Virtual Warehouse → Storage  
+> **Key Takeaways for Exam Day:**
+> 1. Three layers: Cloud Services → Virtual Warehouse → Storage
 > 2. Micro-partitions: 50–500 MB, columnar, immutable
 ```
 
@@ -383,6 +481,8 @@ Before producing output, verify:
 - [ ] All code blocks have a language identifier
 - [ ] All SQL examples have a comment explaining what they do
 - [ ] Comparison tables for every feature with multiple variants
+- [ ] STEM lessons include at least 2 interactive components (math, phet, plot, molecule, dragdrop, matching, fillblank)
+- [ ] All interactive blocks have valid JSON configs
 - [ ] Minimum 5 practice questions in correct format with exactly one ✅ per question
 - [ ] Closing `[!SUCCESS]` Key Takeaways with minimum 5 bullet points
 - [ ] `SAVE AS:` path stated after the file

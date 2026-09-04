@@ -1,0 +1,22 @@
+{
+  "id": "python-basics-vocab",
+  "title": "Python Vocabulary",
+  "description": "Learn essential Python programming terms",
+  "difficulty": "beginner",
+  "category": "vocabulary",
+  "language_pair": { "source": "en", "target": "pt" },
+  "words": [
+    {
+      "id": "1",
+      "source": "variable",
+      "target": "variável",
+      "context": "A named storage location in memory"
+    },
+    {
+      "id": "2",
+      "source": "function",
+      "target": "função",
+      "context": "A reusable block of code"
+    }
+  ]
+}

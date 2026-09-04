@@ -500,3 +500,45 @@
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+
+/* ========================================
+   KATEX / MATH STYLES
+   ======================================== */
+
+.katex-display {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+}
+
+.katex-display > .katex {
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .katex-display {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.dark .katex {
+  color: hsl(var(--foreground));
+}
+
+.dark .katex .mord,
+.dark .katex .mbin,
+.dark .katex .mrel,
+.dark .katex .mopen,
+.dark .katex .mclose,
+.dark .katex .mpunct,
+.dark .katex .minner {
+  color: hsl(var(--foreground));
+}
+
+.katex-error {
+  color: #ef4444;
+  font-family: monospace;
+  font-size: 0.875rem;
+}

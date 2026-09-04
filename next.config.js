@@ -10,7 +10,6 @@ const nextConfig = {
   output: isProd ? 'export' : undefined,
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
-  distDir: 'out',
   assetPrefix: basePath ? basePath + '/' : undefined,
   basePath: basePath,
   images: {

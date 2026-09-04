@@ -1,0 +1,19 @@
+{
+  "name": "guard-env-read",
+  "version": "1.0.0",
+  "description": "Blocks reads of .env files and other sensitive credentials",
+  "type": "hook",
+  "event": "tool.read",
+  "pattern": "**",
+  "script": "scripts/guard_env_read.py",
+  "blocking": true,
+  "exit_codes": {
+    "0": "allow",
+    "2": "block"
+  },
+  "dependencies": [],
+  "environment": {
+    "OPENCODE_FILE_PATH": "Direct file path to check",
+    "OPENCODE_TOOL_INPUT_PATH": "Path to JSON file with tool input args"
+  }
+}

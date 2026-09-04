@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Game JSON Schema",
+  "type": "object",
+  "required": ["id", "title", "description", "difficulty", "category"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique game identifier (kebab-case)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Game title"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Brief description"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["beginner", "intermediate", "advanced"],
+      "description": "Difficulty level"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["quiz", "vocabulary"],
+      "description": "Game category"
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/$defs/quiz" },
+    { "$ref": "#/$defs/vocabulary" }
+  ],
+  "$defs": {
+    "quiz": {
+      "type": "object",
+      "required": ["questions"],
+      "properties": {
+        "questions": {
+          "type": "array",
+          "minItems": 10,
+          "items": {
+            "type": "object",
+            "required": ["id", "question", "options", "correct", "explanation"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^q\\d{3}$" },
+              "question": { "type": "string" },
+              "options": { "type": "array", "minItems": 4, "maxItems": 4 },
+              "correct": { "type": "integer", "minimum": 0, "maximum": 3 },
+              "explanation": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "vocabulary": {
+      "type": "object",
+      "required": ["language_pair", "words"],
+      "properties": {
+        "language_pair": {
+          "type": "object",
+          "required": ["source", "target"]
+        },
+        "words": {
+          "type": "array",
+          "minItems": 40,
+          "items": {
+            "type": "object",
+            "required": ["source", "target", "context"],
+            "properties": {
+              "source": { "type": "string" },
+              "target": { "type": "string" },
+              "context": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

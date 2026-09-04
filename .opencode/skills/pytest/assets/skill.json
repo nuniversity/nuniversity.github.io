@@ -1,0 +1,31 @@
+{
+  "name": "pytest",
+  "version": "1.0.0",
+  "description": "Runs and writes Python tests using pytest, pytest-mock, pytest-cov, and related plugins",
+  "type": "skill",
+  "triggers": [
+    "**/*.py",
+    "**/test_*.py",
+    "**/*_test.py",
+    "**/conftest.py",
+    "**/pytest.ini",
+    "**/pyproject.toml",
+    "**/setup.cfg"
+  ],
+  "dependencies": [
+    "pytest",
+    "pytest-mock",
+    "pytest-cov",
+    "pytest-xdist",
+    "pytest-asyncio"
+  ],
+  "metadata": {
+    "category": "testing",
+    "audience": "python-developers",
+    "difficulty": "beginner"
+  },
+  "references": {
+    "documentation": "https://docs.pytest.org/",
+    "repository": "https://github.com/pytest-dev/pytest"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "area": "Computer Science",
-  "author": "Claude",
-  "difficulty": "Intermediate",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
   "duration": "4 weeks",
   "icon": "code",
   "en": {
@@ -19,7 +19,7 @@
   "es": {
     "title": "Introducción a la Programación",
     "description": "Aprende los fundamentos de la programación con ejercicios prácticos y proyectos del mundo real",
-    "difficulty": "Intermedio ",
+    "difficulty": "Intermedio",
     "duration": "4 Semanas"
   }
 }

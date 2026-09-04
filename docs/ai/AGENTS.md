@@ -1,8 +1,43 @@
 # NUniversity AI Agent System
 
+## Core Principle
+
+**Deterministic Agentic Harness**: Build the most deterministic harness possible by creating deterministic AI agentic development pipelines based on deterministic skills, hooks, plugins, and tools. Let the uncertainty and decision-making stay with the LLM models — they call or loop into engineering using deterministic solutions.
+
+### Design Principles (All Mandatory)
+
+| # | Principle | Rule | Full Reference |
+|---|-----------|------|----------------|
+| 1 | **Test-Driven Development (TDD)** | Every script, hook, tool, and skill is built using Red-Green-Refactor. 90% coverage minimum. Tests are written before implementation. | `OPENCODE-HARNESS.md` §1.1 |
+| 2 | **Domain-Driven Design (DDD)** | Model the harness around NUniversity's domain. Each skill is a bounded context. Ubiquitous language in code, tests, docs. | `OPENCODE-HARNESS.md` §1.2 |
+| 3 | **Clean Architecture** | Dependencies point inward. Entities → Business Rules → Adapters → Frameworks. No inner layer imports from outer layers. | `OPENCODE-HARNESS.md` §1.3 |
+| 4 | **SOLID Principles** | SRP (one thing per script), OCP (extend, don't modify), LSP (hooks are interchangeable), ISP (focused skill triggers), DIP (depend on exit codes, not implementations). | `OPENCODE-HARNESS.md` §1.4 |
+| 5 | **Clean Code** | Descriptive naming, small functions (20 lines max), docstrings on public functions, errors to stderr, no dead code. | `OPENCODE-HARNESS.md` §1.5 |
+| 6 | **Spec-Driven Design (SDD)** | Specifications are the source of truth. Spec → Schema → Tests → Implementation. Every code line traces to a spec requirement. | `OPENCODE-HARNESS.md` §1.6 |
+
+### Development Tool Stack
+
+All deterministic components use a standardized tool chain:
+- **Python**: `uv` (packages), `ruff` (lint+format), `pytest` (tests), `bandit` (security)
+- **JavaScript/TypeScript**: `fnm` (Node.js), `eslint` (lint), `vitest` (tests), `playwright` (E2E)
+- **Bash**: `shellcheck` (lint), `shfmt` (format)
+- **All**: `pre-commit` (git hooks), enforced via CI/CD
+
 ## Overview
 
 NUniversity uses specialized AI agents to generate publication-ready course content and interactive quiz data. Each agent is defined by a prompt template and produces validated Markdown or JSON output.
+
+### Available Skills
+
+| Skill | Purpose | Triggers |
+|-------|---------|----------|
+| `skill-builder` | Meta-skill for creating new skills | `.opencode/skills/**` |
+| `course-writer` | Generates lesson files | `content/courses/**` |
+| `game-builder` | Generates game JSON files | `content/games/**` |
+| `i18n-translator` | Handles localization | `dictionaries/**` |
+| `platform-engineer` | TypeScript/Next.js guidance | `lib/**`, `src/**` |
+| `mermaid-js` | Creates and validates diagrams | `**/*.md`, `docs/**` |
+| `tailwind-css` | CSS utility class management | `**/*.tsx`, `src/**` |
 
 ```mermaid
 flowchart TB
@@ -205,31 +240,53 @@ sequenceDiagram
 
 ---
 
-## Quality Assurance Pipeline
+## Quality Assurance Pipeline (TDD-Enforced)
 
 ```mermaid
 flowchart TD
-    Start[Generated Content]
+    Start[Generated Content / Code]
 
-    Start --> Format{Format Valid?}
+    Start --> TDD{Tests written<br/>first?}
+    TDD -->|No| Reject[Reject: TDD required]
+    TDD -->|Yes| PreCommit[Pre-commit hooks]
 
-    Format -->|Markdown| YAML{Frontmatter<br/>valid?}
-    Format -->|JSON| JSON{JSON.parse<br/>passes?}
-    Format -->|No| Reject[Reject & Regenerate]
+    PreCommit --> Lint{Linting passes?}
 
-    YAML -->|No| Reject
-    YAML -->|Yes| H1{H1 matches<br/>title?}
-    JSON -->|No| Reject
-    JSON -->|Yes| IDs{Sequential IDs,<br/>no duplicates?}
+    Lint -->|Python| Ruff[ruff check + format]
+    Lint -->|JS/TS| ESLint[eslint]
+    Lint -->|Bash| ShellCheck[shellcheck + shfmt]
 
-    H1 -->|No| Reject
-    H1 -->|Yes| MinCount{Minimum question<br/>count met?}
+    Ruff --> RuffPass{ruff passes?}
+    ESLint --> ESLintPass{eslint passes?}
+    ShellCheck --> SCPass{shellcheck passes?}
 
-    IDs -->|No| Reject
-    IDs -->|Yes| MinCount
+    RuffPass -->|No| FixLint[Fix lint errors]
+    ESLintPass -->|No| FixLint
+    SCPass -->|No| FixLint
+    FixLint --> Start
 
-    MinCount -->|No| Reject
-    MinCount -->|Yes| Content[Content Review]
+    RuffPass -->|Yes| Security[bandit security scan]
+    ESLintPass -->|Yes| Security
+    SCPass -->|Yes| Security
+
+    Security --> SecPass{bandit passes?}
+    SecPass -->|No| FixSec[Fix security issues]
+    FixSec --> Start
+
+    SecPass -->|Yes| Tests[Run tests]
+
+    Tests -->|Python| Pytest[pytest]
+    Tests -->|JS/TS| Vitest[vitest]
+
+    Pytest --> PyPass{pytest passes?}
+    Vitest --> VPass{vitest passes?}
+
+    PyPass -->|No| FixTest[Fix test failures]
+    VPass -->|No| FixTest
+    FixTest --> Start
+
+    PyPass -->|Yes| Content[Content Review]
+    VPass -->|Yes| Content
 
     Content --> ExamObj{Exam objectives<br/>mapped?}
     ExamObj -->|No| Fix[Add mappings]
@@ -253,6 +310,7 @@ flowchart TD
     Dev --> Deploy[Commit & Deploy]
 
     style Reject fill:#e74c3c,color:#fff
+    style TDD fill:#e74c3c,color:#fff
     style Pass fill:#2ecc71,color:#fff
     style Deploy fill:#27ae60,color:#fff
 ```
@@ -277,42 +335,58 @@ flowchart TD
 
 ---
 
-## Future: OpenCode Integration
+## OpenCode Integration
 
-NUniversity will integrate these agents into OpenCode for automated workflows.
+NUniversity uses OpenCode for automated deterministic workflows.
 
 ### Current State
 
 ```
 .opencode/
-  hooks/       # (empty - future: pre-commit validation hooks)
-  skills/      # (empty - future: agent trigger skills)
-  memory/      # (empty - future: shared context across agents)
+├── hooks/          # 5 Python-based validation hooks
+├── skills/         # 9 skills (skill-builder, course-writer, game-builder, etc.)
+├── plugins/        # nuniversity-plugin
+├── memory/         # MEMORY.md with project state
+└── package.json    # @opencode-ai/plugin dependency
 ```
 
-- `@opencode-ai/plugin` is installed
-- Agent prompts are stored in `agents/` directory
+### Dev Tool Stack
 
-### Planned Integration
+All code uses a standardized tool chain enforced via pre-commit hooks and CI:
+
+| Language | Linter | Formatter | Tester | Security |
+|----------|--------|-----------|--------|----------|
+| Python | `ruff` | `ruff format` | `pytest` | `bandit` |
+| JS/TS | `eslint` | `prettier` | `vitest` | — |
+| Bash | `shellcheck` | `shfmt` | — | — |
+
+### Integration Flow
 
 ```mermaid
 flowchart LR
     Trigger[OpenCode Skill Trigger] --> Agent[Agent Prompt Loaded]
     Agent --> Context[Memory + File Context]
     Context --> Generate[Content Generated]
-    Generate --> Hook[Pre-commit Hook<br/>validates output]
-    Hook --> Commit[Auto-commit if valid]
+    Generate --> TDD[TDD: Tests Written First]
+    TDD --> Hook[Pre-commit Hooks validate]
+    Hook --> Lint[ruff + eslint + shellcheck]
+    Lint --> Security[bandit security scan]
+    Security --> Test[pytest + vitest]
+    Test --> Commit[Auto-commit if valid]
     Hook --> Reject[Reject if invalid]
 
     style Trigger fill:#9b59b6,color:#fff
+    style TDD fill:#e74c3c,color:#fff
     style Hook fill:#e67e22,color:#fff
+    style Security fill:#f39c12,color:#fff
 ```
 
-**Future capabilities:**
-- Skills in `.opencode/skills/` that trigger agents via `/skill` commands
+**Current capabilities:**
+- Skills in `.opencode/skills/` that trigger agents via context matching
 - Pre-commit hooks in `.opencode/hooks/` for automated validation
-- Shared memory in `.opencode/memory/` for cross-agent context (course structure, terminology glossary)
-- Agent-to-agent pipelines: Course Writer generates lesson, Game Builder auto-generates quiz from lesson content
+- Shared memory in `.opencode/memory/` for cross-agent context
+- TDD enforcement: all scripts must have tests written first
+- Quality gates: ruff, eslint, shellcheck, bandit, pytest, vitest
 
 ---
 

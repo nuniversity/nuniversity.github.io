@@ -2,12 +2,21 @@
 
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
 import rehypeRaw from 'rehype-raw'
+import rehypeKatex from 'rehype-katex'
+import 'katex/dist/katex.min.css'
 import { useState, useEffect, useRef } from 'react'
 import { AlertCircle, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react'
 
 import SyntaxHighlighterWrapper from './FixWrapper'
 import QuestionBlock from './QuestionBlock'
+import PhETEmbed from './PhETEmbed'
+import SciencePlot from './SciencePlot'
+import MoleculeViewer from './MoleculeViewer'
+import DragOrderQuestion from './DragOrderQuestion'
+import MatchingQuestion from './MatchingQuestion'
+import FillBlankQuestion from './FillBlankQuestion'
 import type { LessonQuestion } from './QuestionBlock'
 
 interface MarkdownRendererProps {
@@ -18,6 +27,13 @@ const langMap: Record<string, string> = {
   diagram: 'diagram',
   mermaid: 'mermaid',
   question: 'question',
+  math: 'math',
+  phet: 'phet',
+  plot: 'plot',
+  molecule: 'molecule',
+  dragdrop: 'dragdrop',
+  matching: 'matching',
+  fillblank: 'fillblank',
   sql: 'sql',
   psql: 'sql',
   postgresql: 'sql',
@@ -58,6 +74,51 @@ function CopyButton({ textToCopy }: { textToCopy: string }) {
     >
       {copied ? 'Copied!' : 'Copy'}
     </button>
+  )
+}
+
+interface MathBlockProps {
+  tex: string
+}
+
+function MathBlock({ tex }: MathBlockProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let mounted = true
+
+    const renderMath = async () => {
+      try {
+        const katex = await import('katex')
+        if (!mounted || !containerRef.current) return
+        const html = katex.default.renderToString(tex, {
+          displayMode: true,
+          throwOnError: false,
+          trust: true,
+        })
+        containerRef.current.innerHTML = html
+      } catch (err) {
+        if (mounted) {
+          setError(err instanceof Error ? err.message : 'Failed to render math')
+        }
+      }
+    }
+
+    renderMath()
+    return () => { mounted = false }
+  }, [tex])
+
+  if (error) {
+    return (
+      <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
+        Math rendering error: {error}
+      </div>
+    )
+  }
+
+  return (
+    <div ref={containerRef} className="my-6 text-center overflow-x-auto" />
   )
 }
 
@@ -285,8 +346,8 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
   return (
     <ReactMarkdown
-      remarkPlugins={[remarkGfm]}
-      rehypePlugins={[rehypeRaw]}
+      remarkPlugins={[remarkGfm, remarkMath]}
+      rehypePlugins={[rehypeRaw, rehypeKatex]}
       components={{
         h1: ({ children }) => <h1 className="text-4xl font-bold mb-6 mt-8 text-foreground">{children}</h1>,
         h2: ({ children }) => <h2 className="text-3xl font-bold mb-4 mt-6 text-foreground border-b pb-2">{children}</h2>,
@@ -311,6 +372,136 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
             if (language === 'mermaid') {
               return <MermaidDiagram code={codeString} />
+            }
+
+            if (language === 'math') {
+              return <MathBlock tex={codeString} />
+            }
+
+            if (language === 'phet') {
+              try {
+                const config = JSON.parse(codeString)
+                return (
+                  <PhETEmbed
+                    slug={config.slug}
+                    title={config.title}
+                    language={config.language}
+                  />
+                )
+              } catch (e) {
+                return (
+                  <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
+                    Invalid PhET config: {(e as Error).message}
+                  </div>
+                )
+              }
+            }
+
+            if (language === 'plot') {
+              try {
+                const config = JSON.parse(codeString)
+                return (
+                  <SciencePlot
+                    type={config.type}
+                    title={config.title}
+                    xLabel={config.xLabel}
+                    yLabel={config.yLabel}
+                    data={config.data}
+                    dataKeys={config.dataKeys}
+                    colors={config.colors}
+                    height={config.height}
+                    xKey={config.xKey}
+                  />
+                )
+              } catch (e) {
+                return (
+                  <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
+                    Invalid plot config: {(e as Error).message}
+                  </div>
+                )
+              }
+            }
+
+            if (language === 'molecule') {
+              try {
+                const config = JSON.parse(codeString)
+                return (
+                  <MoleculeViewer
+                    pdbId={config.pdbId}
+                    style={config.style}
+                    color={config.color}
+                    height={config.height}
+                    label={config.label}
+                    background={config.background}
+                  />
+                )
+              } catch (e) {
+                return (
+                  <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
+                    Invalid molecule config: {(e as Error).message}
+                  </div>
+                )
+              }
+            }
+
+            if (language === 'dragdrop') {
+              try {
+                const config = JSON.parse(codeString)
+                return (
+                  <DragOrderQuestion
+                    question={config.question}
+                    items={config.items}
+                    correctOrder={config.correctOrder}
+                    explanation={config.explanation}
+                  />
+                )
+              } catch (e) {
+                return (
+                  <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
+                    Invalid dragdrop config: {(e as Error).message}
+                  </div>
+                )
+              }
+            }
+
+            if (language === 'matching') {
+              try {
+                const config = JSON.parse(codeString)
+                return (
+                  <MatchingQuestion
+                    question={config.question}
+                    pairs={config.pairs}
+                    explanation={config.explanation}
+                  />
+                )
+              } catch (e) {
+                return (
+                  <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
+                    Invalid matching config: {(e as Error).message}
+                  </div>
+                )
+              }
+            }
+
+            if (language === 'fillblank') {
+              try {
+                const config = JSON.parse(codeString)
+                return (
+                  <FillBlankQuestion
+                    question={config.question}
+                    template={config.template}
+                    answers={config.answers}
+                    distractors={config.distractors}
+                    explanation={config.explanation}
+                  />
+                )
+              } catch (e) {
+                return (
+                  <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
+                    Invalid fillblank config: {(e as Error).message}
+                  </div>
+                )
+              }
             }
 
             if (language === 'question') {

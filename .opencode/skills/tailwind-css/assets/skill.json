@@ -1,0 +1,13 @@
+{
+  "name": "tailwind-css",
+  "version": "1.0.0",
+  "description": "Creates, validates, and improves Tailwind CSS utility classes for responsive, accessible, and maintainable UI",
+  "type": "skill",
+  "triggers": ["**/*.tsx", "**/*.jsx", "**/*.css", "**/*.html", "src/**", "app/**"],
+  "dependencies": [],
+  "references": {
+    "official_docs": "https://tailwindcss.com/docs",
+    "cheat_sheet": "https://tailwindcss.com/cheat-sheet",
+    "v4_migration": "https://tailwindcss.com/docs/upgrade-guide"
+  }
+}

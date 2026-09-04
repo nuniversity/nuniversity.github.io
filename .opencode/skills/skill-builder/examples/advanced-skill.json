@@ -1,0 +1,17 @@
+{
+  "name": "advanced-skill",
+  "version": "2.0.0",
+  "description": "An advanced skill demonstrating complex features and patterns",
+  "type": "skill",
+  "triggers": ["content/advanced/**"],
+  "dependencies": ["pyyaml", "jsonschema"],
+  "metadata": {
+    "category": "content-creation",
+    "audience": "developers",
+    "difficulty": "advanced"
+  },
+  "references": {
+    "documentation": "https://opencode.ai/docs/skills/",
+    "repository": "https://github.com/example/advanced-skill"
+  }
+}

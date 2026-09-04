@@ -1,0 +1,16 @@
+{
+  "name": "with-hooks-skill",
+  "version": "1.0.0",
+  "description": "A skill demonstrating integration with hooks",
+  "type": "skill",
+  "triggers": ["content/hooks/**"],
+  "dependencies": [],
+  "metadata": {
+    "category": "integration",
+    "audience": "developers",
+    "difficulty": "intermediate"
+  },
+  "references": {
+    "documentation": "https://opencode.ai/docs/hooks/"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Lesson Frontmatter Schema",
+  "type": "object",
+  "required": ["title", "description", "order", "duration", "difficulty"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Lesson title (must match H1 heading)"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Concise description for SEO and course listing"
+    },
+    "order": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Lesson sequence number within the course"
+    },
+    "duration": {
+      "type": "string",
+      "pattern": "^\\d+\\s*(min|minutes|hour|hours)$",
+      "description": "Estimated completion time"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["beginner", "intermediate", "advanced"],
+      "description": "Lesson difficulty level"
+    }
+  },
+  "additionalProperties": false
+}

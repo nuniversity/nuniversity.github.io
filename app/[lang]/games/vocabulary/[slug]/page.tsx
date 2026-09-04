@@ -7,6 +7,7 @@ import { type Locale } from '@/lib/i18n/config'
 import { getVocabularyGame, getAllGames } from '@/lib/games/get-game-content'
 import { Metadata } from 'next'
 import { VocabularyGameClient } from './vocabulary-game-client'
+import { FlashcardGameClient } from './flashcard-game-client'
 import { notFound } from 'next/navigation'
 
 interface VocabularyGamePageProps {
@@ -30,7 +31,7 @@ export async function generateMetadata({
 }: {
   params: { lang: Locale; slug: string }
 }): Promise<Metadata> {
-  const game = await getVocabularyGame(params.slug)
+  const game = await getVocabularyGame(params.slug, params.lang)
   
   if (!game) {
     return {
@@ -48,10 +49,20 @@ export default async function VocabularyGamePage({ params }: VocabularyGamePageP
   const { lang, slug } = params
   const dict = await getDictionary(lang)
   
-  const game = await getVocabularyGame(slug)
+  const game = await getVocabularyGame(slug, lang)
   
   if (!game) {
     notFound()
+  }
+
+  if (game.gameType === 'flashcards') {
+    return (
+      <FlashcardGameClient 
+        lang={lang}
+        game={game}
+        dict={dict}
+      />
+    )
   }
 
   return (

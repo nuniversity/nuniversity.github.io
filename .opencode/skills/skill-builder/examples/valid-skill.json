@@ -1,0 +1,11 @@
+{
+  "name": "valid-skill",
+  "version": "1.0.0",
+  "description": "A valid skill example demonstrating proper structure and conventions",
+  "type": "skill",
+  "triggers": ["content/examples/**"],
+  "dependencies": [],
+  "references": {
+    "documentation": "https://opencode.ai/docs/skills/"
+  }
+}

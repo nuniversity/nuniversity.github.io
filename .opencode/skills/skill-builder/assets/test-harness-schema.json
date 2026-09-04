@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Test Harness Schema",
+  "description": "Schema for test harness configuration",
+  "type": "object",
+  "required": ["tests"],
+  "properties": {
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "input", "expected"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Test name"
+          },
+          "input": {
+            "type": "object",
+            "description": "Test input data"
+          },
+          "expected": {
+            "type": "object",
+            "description": "Expected output"
+          },
+          "description": {
+            "type": "string",
+            "description": "Test description"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "List of test cases"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Test harness version"
+        },
+        "author": {
+          "type": "string",
+          "description": "Test author"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

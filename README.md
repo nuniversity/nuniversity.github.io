@@ -14,8 +14,9 @@ nuniversity.github.io/
 │   ├── about/               # About page
 │   ├── contact/             # Contact page (Formspree form)
 │   ├── courses/             # Course listing + lesson viewer
-│   ├── games/               # Vocabulary games
+│   ├── games/               # Vocabulary, quiz, coding, math, logic, physics, puzzles
 │   ├── library/             # Curated external resources
+│   ├── roadmaps/            # Structured learning paths
 │   └── tools/               # Interactive tools
 ├── components/              # Reusable UI components
 │   ├── home/                # Hero, Features, Stats, Newsletter, etc.
@@ -74,10 +75,12 @@ The build generates a fully static site in the `out/` directory. The site is dep
 ## Features
 
 - **Multi-language**: English, Portuguese, Spanish — with automatic locale detection and redirect
-- **Courses**: Markdown-driven learning paths with enhanced rendering (code highlighting, Mermaid diagrams, alert boxes)
-- **Interactive Tools**: Eisenhower Matrix, SWOT Analysis, LLM Prompt Builder, Brain Writing Session
-- **Vocabulary Games**: Flashcard matching games for language learning
-- **Library**: Curated collection of external educational resources (videos, ebooks, courses, etc.)
+- **Courses**: 38 Markdown-driven learning paths with enhanced rendering (code highlighting, Mermaid diagrams, alert boxes)
+- **Interactive Tools**: 10 tools — Eisenhower Matrix, SWOT, LLM Prompt Builder, Pomodoro Timer, Habit Tracker, Flashcards, Regex Tester, Unit Converter, Decision Matrix, Brain Writing
+- **Games**: 11 games across 7 categories — vocabulary, quiz, coding, math, logic, physics, puzzles
+- **Library**: 59+ curated external educational resources (videos, ebooks, courses, blogs, repositories, podcasts, articles)
+- **Roadmaps**: Structured learning paths with progress tracking
+- **AI Agents**: Course Writer & Game Builder agents for automated content generation
 - **Dark Mode**: System-aware theme with manual toggle
 - **Responsive**: Mobile-first design with Tailwind CSS + DaisyUI
 - **Fully Static**: Zero infrastructure cost, served via GitHub Pages CDN
@@ -86,16 +89,41 @@ The build generates a fully static site in the `out/` directory. The site is dep
 
 Full documentation is available in the [`docs/`](./docs) directory:
 
+### Architecture & Design
 | Document | Description |
 |---|---|
-| [Architecture](./docs/ARCHITECTURE.md) | System design, folder structure, data flow |
-| [Getting Started](./docs/GETTING-STARTED.md) | Local dev setup, environment, scripts |
-| [Internationalization](./docs/INTERNATIONALIZATION.md) | Multi-language support, routing, dictionaries |
-| [Content Management](./docs/CONTENT-MANAGEMENT.md) | Adding courses, tools, library resources, games |
-| [Components Reference](./docs/COMPONENTS.md) | All UI components documented |
-| [Markdown Renderer](./docs/MARKDOWN-RENDERER.md) | Enhanced Markdown features for course authors |
-| [Deployment](./docs/DEPLOYMENT.md) | GitHub Pages static export and CI/CD pipeline |
-| [Contributing](./docs/CONTRIBUTING.md) | How to contribute to the project |
+| [Architecture](./docs/architecture/ARCHITECTURE.md) | System design, C4 diagrams, data flow |
+| [Components](./docs/architecture/COMPONENTS.md) | All UI components documented |
+
+### Features
+| Document | Description |
+|---|---|
+| [Content Management](./docs/features/CONTENT-MANAGEMENT.md) | Adding courses, tools, library resources, games |
+| [Internationalization](./docs/features/INTERNATIONALIZATION.md) | Multi-language support, routing, dictionaries |
+| [Roadmaps](./docs/features/ROADMAPS.md) | Structured learning paths architecture |
+| [Games](./docs/features/GAMES.md) | Game system, quiz/vocabulary schemas |
+| [Markdown Renderer](./docs/features/MARKDOWN-RENDERER.md) | Enhanced Markdown features for course authors |
+
+### Operations
+| Document | Description |
+|---|---|
+| [Deployment](./docs/operations/DEPLOYMENT.md) | GitHub Pages static export and CI/CD pipeline |
+| [Testing](./docs/operations/TESTING.md) | Test plan and strategy |
+| [Contributing](./docs/operations/CONTRIBUTING.md) | How to contribute to the project |
+
+### AI & Agents
+| Document | Description |
+|---|---|
+| [Agents](./docs/ai/AGENTS.md) | Course Writer & Game Builder agent system |
+| [OpenCode Harness](./docs/ai/OPENCODE-HARNESS.md) | Deterministic agentic development plan |
+
+### Reference
+| Document | Description |
+|---|---|
+| [Assessment](./docs/assessment/ASSESSMENT.md) | Codebase audit and improvement analysis |
+| [Getting Started](./docs/getting-started/GETTING-STARTED.md) | Local dev setup, environment, scripts |
+| [Remaining Courses](./docs/reference/remaining-courses-documentation.md) | Plans for courses 4-10 of SE roadmap |
+| [Roadmap Status](./docs/reference/roadmap-implementation-status.md) | Roadmap progress tracker |
 
 ## Tech Stack
 

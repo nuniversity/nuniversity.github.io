@@ -1,0 +1,28 @@
+{
+  "name": "vitest",
+  "version": "1.0.0",
+  "description": "Runs and writes JavaScript/TypeScript tests using Vitest, including mocking, coverage, and snapshot testing",
+  "type": "skill",
+  "triggers": [
+    "**/*.test.{js,ts,jsx,tsx}",
+    "**/*.spec.{js,ts,jsx,tsx}",
+    "**/__tests__/**",
+    "**/vitest.config.*",
+    "**/vite.config.*",
+    "**/package.json"
+  ],
+  "dependencies": [
+    "vitest",
+    "@vitest/coverage-v8",
+    "@vitest/ui"
+  ],
+  "metadata": {
+    "category": "testing",
+    "audience": "javascript-developers",
+    "difficulty": "beginner"
+  },
+  "references": {
+    "documentation": "https://vitest.dev/",
+    "repository": "https://github.com/vitest-dev/vitest"
+  }
+}

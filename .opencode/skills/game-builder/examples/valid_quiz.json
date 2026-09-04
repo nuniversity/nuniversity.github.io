@@ -1,0 +1,25 @@
+{
+  "id": "python-basics-quiz",
+  "title": "Python Basics Quiz",
+  "description": "Test your knowledge of Python fundamentals",
+  "difficulty": "beginner",
+  "category": "quiz",
+  "questions": [
+    {
+      "id": "q001",
+      "domain": "variables",
+      "question": "Which of the following is a valid Python variable name?",
+      "options": ["123var", "my-var", "my_var", "my var"],
+      "correct": 2,
+      "explanation": "Python variable names can contain letters, numbers, and underscores, but cannot start with a number."
+    },
+    {
+      "id": "q002",
+      "domain": "data-types",
+      "question": "What is the type of the value `3.14` in Python?",
+      "options": ["int", "float", "decimal", "number"],
+      "correct": 1,
+      "explanation": "In Python, numbers with decimal points are of type `float`."
+    }
+  ]
+}

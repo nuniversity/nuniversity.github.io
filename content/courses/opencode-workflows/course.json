@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "4 weeks",
+  "icon": "workflow",
+  "en": {
+    "title": "OpenCode Developer Workflows",
+    "description": "Master practical OpenCode workflows for daily development. Learn multi-agent orchestration, custom hooks, debugging techniques, performance optimization, and team collaboration patterns.",
+    "difficulty": "Intermediate",
+    "duration": "4 Weeks"
+  },
+  "pt": {
+    "title": "Fluxos de Trabalho do OpenCode para Desenvolvedores",
+    "description": "Domine fluxos de trabalho práticos do OpenCode para o desenvolvimento diário. Aprenda orquestração multi-agente, hooks personalizados, técnicas de depuração, otimização de desempenho e padrões de colaboração em equipe.",
+    "difficulty": "Intermediário",
+    "duration": "4 Semanas"
+  },
+  "es": {
+    "title": "Flujos de Trabajo de OpenCode para Desarrolladores",
+    "description": "Domina los flujos de trabajo prácticos de OpenCode para el desarrollo diario. Aprende orquestación multi-agente, hooks personalizados, técnicas de depuración, optimización de rendimiento y patrones de colaboración en equipo.",
+    "difficulty": "Intermedio",
+    "duration": "4 Semanas"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "beginner",
+  "duration": "3 weeks",
+  "icon": "terminal",
+  "en": {
+    "title": "OpenCode Fundamentals",
+    "description": "Master the basics of OpenCode, the open-source CLI framework for AI-assisted software engineering. Learn installation, configuration, and essential commands to start coding with AI agents.",
+    "difficulty": "Beginner",
+    "duration": "3 Weeks"
+  },
+  "pt": {
+    "title": "Fundamentos do OpenCode",
+    "description": "Domine os fundamentos do OpenCode, o framework CLI de código aberto para engenharia de software assistida por IA. Aprenda instalação, configuração e comandos essenciais para começar a programar com agentes de IA.",
+    "difficulty": "Iniciante",
+    "duration": "3 Semanas"
+  },
+  "es": {
+    "title": "Fundamentos de OpenCode",
+    "description": "Domina los fundamentos de OpenCode, el framework CLI de código abierto para ingeniería de software asistida por IA. Aprende instalación, configuración y comandos esenciales para empezar a programar con agentes de IA.",
+    "difficulty": "Principiante",
+    "duration": "3 Semanas"
+  }
+}

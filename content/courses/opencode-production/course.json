@@ -1,0 +1,25 @@
+{
+  "area": "Software Engineering",
+  "author": "NUniversity",
+  "difficulty": "advanced",
+  "duration": "5 weeks",
+  "icon": "server",
+  "en": {
+    "title": "OpenCode Production Mastery",
+    "description": "Master advanced OpenCode techniques for production environments. Learn plugin development, CI/CD integration, security hardening, scaling deployments, and custom provider integration.",
+    "difficulty": "Advanced",
+    "duration": "5 Weeks"
+  },
+  "pt": {
+    "title": "Domínio do OpenCode em Produção",
+    "description": "Domine técnicas avançadas do OpenCode para ambientes de produção. Aprenda desenvolvimento de plugins, integração CI/CD, hardening de segurança, escalabilidade de implantações e integração de provedores personalizados.",
+    "difficulty": "Avançado",
+    "duration": "5 Semanas"
+  },
+  "es": {
+    "title": "Dominio de OpenCode en Producción",
+    "description": "Domina técnicas avanzadas de OpenCode para entornos de producción. Aprende desarrollo de plugins, integración CI/CD, hardening de seguridad, escalabilidad de despliegues e integración de proveedores personalizados.",
+    "difficulty": "Avanzado",
+    "duration": "5 Semanas"
+  }
+}

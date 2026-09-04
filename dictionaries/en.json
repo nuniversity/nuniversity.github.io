@@ -117,34 +117,34 @@
     },
     "cta": "Discover all features"
   },
-  "contact": { 
-    "title": "Let's", 
-    "titleHighlight": "Collaborate!?", 
-    "subtitle": "Ready to transform the world through the democratization of education? Let's collaborate and drive community development.", 
-    "info": { 
-      "heading": "Get in Touch", 
-      "description": "We’re open to discussing new opportunities, projects, and ways to use technology to transform the world by empowering people with impactful knowledge." 
-    }, 
-    "email": "Email", 
-    "location": "Location", 
-    "social": "Connect on Social Media", 
-    "form": { 
-      "heading": "Send a Message", 
-      "name": "Full Name *", 
-      "namePlaceholder": "Your full name", 
-      "email": "Email Address *", 
-      "emailPlaceholder": "your.email@example.com", 
-      "subject": "Subject *", 
-      "subjectPlaceholder": "What is the message about?", 
-      "message": "Message *", 
-      "messagePlaceholder": "Tell us how you’d like to collaborate or how we can help...", 
-      "button": "Send Message" 
-    }, 
-    "success": { 
-      "title": "Thank You!", 
-      "message": "Your message has been sent successfully. I’ll be in touch soon.", 
-      "button": "Send Another Message" 
-    } 
+  "contact": {
+    "title": "Let's",
+    "titleHighlight": "Collaborate!?",
+    "subtitle": "Ready to transform the world through the democratization of education? Let's collaborate and drive community development.",
+    "info": {
+      "heading": "Get in Touch",
+      "description": "We’re open to discussing new opportunities, projects, and ways to use technology to transform the world by empowering people with impactful knowledge."
+    },
+    "email": "Email",
+    "location": "Location",
+    "social": "Connect on Social Media",
+    "form": {
+      "heading": "Send a Message",
+      "name": "Full Name *",
+      "namePlaceholder": "Your full name",
+      "email": "Email Address *",
+      "emailPlaceholder": "your.email@example.com",
+      "subject": "Subject *",
+      "subjectPlaceholder": "What is the message about?",
+      "message": "Message *",
+      "messagePlaceholder": "Tell us how you’d like to collaborate or how we can help...",
+      "button": "Send Message"
+    },
+    "success": {
+      "title": "Thank You!",
+      "message": "Your message has been sent successfully. I’ll be in touch soon.",
+      "button": "Send Another Message"
+    }
   },
   "footer": {
     "description": "Empowering learners worldwide with interactive courses, coding tools, and educational games. Master technology, engineering, and sciences through hands-on experience.",
@@ -357,6 +357,44 @@
         "Find all matching pairs to complete the game",
         "Try to complete with the highest accuracy in the shortest time!"
       ]
+    },
+    "flashcards": {
+      "statistics": "Statistics",
+      "total": "Total",
+      "new": "New",
+      "learning": "Learning",
+      "mastered": "Mastered",
+      "current_session": "Current Session",
+      "reviewed": "Reviewed",
+      "correct": "Correct",
+      "errors": "Errors",
+      "mode_all": "All ({n})",
+      "mode_new": "New ({n})",
+      "all_categories": "All categories",
+      "no_cards": "No cards available",
+      "no_cards_hint": "Try another mode or category.",
+      "session_complete": "Session complete!",
+      "reviewed_n_cards": "You reviewed {n} cards this session.",
+      "n_correct_n_errors": "{n} correct · {n} errors",
+      "restart": "Restart",
+      "view_statistics": "View Statistics",
+      "progress_of": "{current} of {total}",
+      "view_images": "View images",
+      "tap_to_translate": "Tap to see translation",
+      "categories_label": "Categories:",
+      "pronunciation": "Pronunciation",
+      "example": "Example",
+      "reset_confirm": "Reset all progress?",
+      "import_success": "Progress imported successfully!",
+      "import_error": "Failed to import: invalid file format",
+      "export_success": "Progress exported!",
+      "reset_success": "Progress reset!",
+      "mode_learning": "Learning ({n})",
+      "mode_learned": "Learned ({n})",
+      "forgot": "Forgot",
+      "remember": "Remember",
+      "swipe_hint": "← Forgot · Remember →",
+      "import_migrated": "Progress imported and updated to new format!"
     }
   },
   "tools": {

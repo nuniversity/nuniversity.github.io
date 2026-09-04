@@ -1,0 +1,27 @@
+{
+  "area": "Mathematics",
+  "author": "NUniversity",
+  "difficulty": "Beginner",
+  "duration": "3 Weeks",
+  "icon": "📐",
+  "en": {
+    "title": "Math & Physics Foundations",
+    "description": "Master essential math and physics concepts with interactive equations and visual explanations.",
+    "difficulty": "Beginner",
+    "duration": "3 Weeks"
+  },
+  "pt": {
+    "title": "Fundamentos de Matemática e Física",
+    "description": "Domine conceitos essenciais de matemática e física com equações interativas e explicações visuais.",
+    "difficulty": "Iniciante",
+    "duration": "3 Semanas"
+  },
+  "es": {
+    "title": "Fundamentos de Matemática y Física",
+    "description": "Domina conceptos esenciales de matemática y física con ecuaciones interactivas y explicaciones visuales.",
+    "difficulty": "Principiante",
+    "duration": "3 Semanas"
+  },
+  "order": 50,
+  "tags": ["math", "physics", "equations", "calculus", "mechanics"]
+}

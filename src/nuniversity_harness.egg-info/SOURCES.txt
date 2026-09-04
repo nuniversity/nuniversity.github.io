@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+src/nuniversity_harness.egg-info/PKG-INFO
+src/nuniversity_harness.egg-info/SOURCES.txt
+src/nuniversity_harness.egg-info/dependency_links.txt
+src/nuniversity_harness.egg-info/requires.txt
+src/nuniversity_harness.egg-info/top_level.txt

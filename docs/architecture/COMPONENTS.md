@@ -67,6 +67,13 @@ flowchart TD
 5. [Markdown Components](#5-markdown-components)
    - [MarkdownRenderer](#markdownrenderer)
    - [FixWrapper](#fixwrapper)
+   - [MathBlock](#mathblock)
+   - [PhETEmbed](#phetembed)
+   - [SciencePlot](#scienceplot)
+   - [MoleculeViewer](#moleculeviewer)
+   - [DragOrderQuestion](#dragorderquestion)
+   - [MatchingQuestion](#matchingquestion)
+   - [FillBlankQuestion](#fillblankquestion)
 6. [Tool Components](#6-tool-components)
    - [EisenhowerMatrix](#eisenhowermatrix)
    - [LLMPromptBuilder](#llmpromptbuilder)
@@ -524,6 +531,172 @@ Passes all props through to `SyntaxHighlighter` from `react-syntax-highlighter`.
 #### Usage
 
 Only used internally by `MarkdownRenderer`. Not intended for direct use.
+
+---
+
+### MathBlock
+
+**File:** `components/markdown/MarkdownRenderer.tsx` (inline)  
+**Type:** Client Component  
+**Role:** Renders KaTeX math equations from ` ```math ` blocks and `$...$` / `$$...$$` syntax.
+
+#### Features
+- Dynamic import of KaTeX library (SSR-safe)
+- Inline and display mode support
+- Dark mode compatible CSS
+- Loading spinner during dynamic import
+
+#### Config Schema
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `expression` | string | Yes | LaTeX math expression |
+| `display` | boolean | No | Display mode (default: true) |
+
+---
+
+### PhETEmbed
+
+**File:** `components/markdown/PhETEmbed.tsx`  
+**Type:** Client Component  
+**Role:** Embeds PhET Interactive Simulations via iframe.
+
+#### Features
+- Responsive iframe with aspect-ratio 834:504
+- Loading spinner while iframe loads
+- Error fallback with simulation link
+- Attribution footer with link to phet.colorado.edu
+
+#### Config Schema
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `slug` | string | Yes | PhET simulation slug |
+| `title` | string | No | Display title |
+| `language` | string | No | Interface language |
+
+---
+
+### SciencePlot
+
+**File:** `components/markdown/SciencePlot.tsx`  
+**Type:** Client Component  
+**Role:** Renders interactive charts using Recharts (line, bar, scatter, pie).
+
+#### Features
+- Dynamic import of Recharts (SSR-safe)
+- Responsive container
+- Dark mode tooltips and grid
+- Animated transitions
+- 4 chart types: line, bar, scatter, pie
+
+#### Config Schema
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `type` | string | Yes | `line`, `bar`, `scatter`, `pie` |
+| `title` | string | No | Chart title |
+| `data` | array | Yes | Data objects |
+| `xKey` | string | Yes | X-axis key |
+| `yKey` | string | Yes | Y-axis key |
+| `xLabel` | string | No | X-axis label |
+| `yLabel` | string | No | Y-axis label |
+
+---
+
+### MoleculeViewer
+
+**File:** `components/markdown/MoleculeViewer.tsx`  
+**Type:** Client Component  
+**Role:** Renders 3D molecular structures from RCSB PDB using 3Dmol.js.
+
+#### Features
+- Dynamic import of 3Dmol (SSR-safe)
+- Fetches PDB data from RCSB
+- 5 display styles: cartoon, sphere, stick, line, surface
+- Drag-to-rotate, scroll-to-zoom
+- Loading spinner and error fallback
+
+#### Config Schema
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `pdbId` | string | Yes | 4-char PDB ID |
+| `style` | string | No | Display style |
+| `color` | string | No | Coloring scheme |
+| `height` | string | No | CSS height |
+
+---
+
+### DragOrderQuestion
+
+**File:** `components/markdown/DragOrderQuestion.tsx`  
+**Type:** Client Component  
+**Role:** Drag-and-drop ordering quiz using @dnd-kit.
+
+#### Features
+- Sortable list with grip handle
+- Per-item correct/incorrect feedback
+- Keyboard accessible (Space/Enter to grab, Arrow keys to move, Escape to cancel)
+- Check answer and Try Again buttons
+- Explanation display
+
+#### Config Schema
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `question` | string | Yes | Question text |
+| `items` | string[] | Yes | Items to order |
+| `correctOrder` | string[] | Yes | Correct order |
+| `explanation` | string | No | Feedback explanation |
+
+---
+
+### MatchingQuestion
+
+**File:** `components/markdown/MatchingQuestion.tsx`  
+**Type:** Client Component  
+**Role:** Matching pairs quiz using @dnd-kit.
+
+#### Features
+- Two-column layout with draggable chips and droppable slots
+- DragOverlay for visual feedback
+- Per-slot correct/incorrect feedback
+- Check Matches and Try Again buttons
+- Shuffled answer options
+
+#### Config Schema
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `question` | string | Yes | Question text |
+| `pairs` | array | Yes | `[{left, right}]` pairs |
+| `explanation` | string | No | Feedback explanation |
+
+---
+
+### FillBlankQuestion
+
+**File:** `components/markdown/FillBlankQuestion.tsx`  
+**Type:** Client Component  
+**Role:** Fill-in-the-blank quiz with word bank using @dnd-kit.
+
+#### Features
+- Template parser with `{{N}}` placeholder syntax
+- Inline blank slots within text
+- Draggable word bank with distractors
+- Per-blank correct/incorrect feedback
+- Check Answers and Try Again buttons
+
+#### Config Schema
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `question` | string | Yes | Question text |
+| `template` | string | Yes | Text with `{{N}}` blanks |
+| `answers` | object | Yes | `{"N": "correct answer"}` |
+| `distractors` | string[] | No | Wrong options |
+| `explanation` | string | No | Feedback explanation |
 
 ---
 

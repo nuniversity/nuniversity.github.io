@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "skills": {
+    "skill-builder": ".opencode/skills/skill-builder/skill.md",
+    "course-writer": ".opencode/skills/course-writer/skill.md",
+    "game-builder": ".opencode/skills/game-builder/skill.md",
+    "i18n-translator": ".opencode/skills/i18n-translator/skill.md",
+    "platform-engineer": ".opencode/skills/platform-engineer/skill.md",
+    "mermaid-js": ".opencode/skills/mermaid-js/skill.md",
+    "tailwind-css": ".opencode/skills/tailwind-css/skill.md",
+    "pytest": ".opencode/skills/pytest/skill.md",
+    "vitest": ".opencode/skills/vitest/skill.md"
+  }
+}

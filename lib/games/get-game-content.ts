@@ -3,11 +3,22 @@ import fs from 'fs'
 import path from 'path'
 import { type Locale } from '@/lib/i18n/config'
 
+export interface LocalizedString {
+  [locale: string]: string
+}
+
 export interface VocabularyWord {
   id: string
   source: string
   target: string
   context: string
+  emoji?: string
+  pronunciation?: string
+  example?: string
+  exampleTranslation?: string
+  imageUrl?: string
+  isExpression?: boolean
+  level?: 'A1' | 'A2' | 'B1'
 }
 
 export interface VocabularyGame {
@@ -16,11 +27,25 @@ export interface VocabularyGame {
   description: string
   difficulty: 'beginner' | 'intermediate' | 'advanced'
   category: string
+  gameType?: 'memory' | 'flashcards'
   language_pair: {
     source: string
     target: string
   }
   words: VocabularyWord[]
+  sourceLanguage?: string
+  targetLanguage?: string
+  locales?: {
+    [locale: string]: {
+      title?: string
+      description?: string
+      sourceLanguage?: string
+      targetLanguage?: string
+    }
+  }
+  contextLabels?: {
+    [context: string]: LocalizedString
+  }
 }
 
 export interface QuizQuestion {
@@ -113,9 +138,9 @@ export async function getAllGames(): Promise<GameMetadata[]> {
 }
 
 /**
- * Get vocabulary game by slug
+ * Get vocabulary game by slug, with locale merging
  */
-export async function getVocabularyGame(slug: string): Promise<VocabularyGame | null> {
+export async function getVocabularyGame(slug: string, locale?: string): Promise<VocabularyGame | null> {
   try {
     const filePath = path.join(gamesDirectory, 'vocabulary', `${slug}.json`)
     
@@ -124,7 +149,17 @@ export async function getVocabularyGame(slug: string): Promise<VocabularyGame | 
     }
 
     const fileContent = fs.readFileSync(filePath, 'utf-8')
-    return JSON.parse(fileContent)
+    const game: VocabularyGame = JSON.parse(fileContent)
+
+    if (locale && game.locales?.[locale]) {
+      const loc = game.locales[locale]
+      if (loc.title) game.title = loc.title
+      if (loc.description) game.description = loc.description
+      if (loc.sourceLanguage) game.sourceLanguage = loc.sourceLanguage
+      if (loc.targetLanguage) game.targetLanguage = loc.targetLanguage
+    }
+
+    return game
   } catch (error) {
     console.error(`Error reading vocabulary game ${slug}:`, error)
     return null

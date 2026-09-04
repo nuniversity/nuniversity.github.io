@@ -1,0 +1,11 @@
+{
+  "name": "mermaid-js",
+  "version": "1.1.0",
+  "description": "Creates and validates Mermaid.js diagrams for documentation, architecture visualization, and educational content",
+  "type": "skill",
+  "triggers": ["**/*.md", "content/**", "docs/**"],
+  "dependencies": ["mermaid>=11.17.0"],
+  "references": {
+    "documentation": "https://mermaid.js.org/intro/syntax-reference.html"
+  }
+}

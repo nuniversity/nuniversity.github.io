@@ -1,0 +1,13 @@
+{
+  "name": "course-writer",
+  "version": "1.0.0",
+  "description": "Generates and validates publication-ready Markdown course lesson files for the NUniversity platform with deterministic quality checks",
+  "type": "skill",
+  "triggers": ["content/courses/**"],
+  "dependencies": ["pyyaml"],
+  "metadata": {
+    "category": "content-creation",
+    "audience": "course-creators",
+    "difficulty": "intermediate"
+  }
+}

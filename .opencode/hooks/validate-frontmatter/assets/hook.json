@@ -1,0 +1,18 @@
+{
+  "name": "validate-frontmatter",
+  "version": "1.0.0",
+  "description": "Validates Markdown frontmatter for NUniversity lesson files",
+  "type": "hook",
+  "event": "file.write",
+  "pattern": "content/courses/**/*.md",
+  "script": "scripts/validate_frontmatter.py",
+  "blocking": true,
+  "exit_codes": {
+    "0": "pass",
+    "2": "blocking error"
+  },
+  "dependencies": ["pyyaml"],
+  "environment": {
+    "OPENCODE_FILE_PATH": "Path to the Markdown file being validated"
+  }
+}
