@@ -55,7 +55,24 @@ difficulty: "beginner" | "intermediate" | "advanced"
 
 - H1 (`#`) must match the frontmatter `title`.
 - Use `##` for major sections, `###` for subsections.
-- All code blocks must include a language identifier (e.g., ` ```python `, ` ```sql `, ` ```bash `).
+- All code blocks must include a language identifier (e.g., ` ```python `, ` ```sql `, ` ```bash `, ` ```text `).
+- **Code blocks with plain text content** (no syntax highlighting needed) must use ` ```text ` identifier.
+
+### 3. Math Formulas
+
+**IMPORTANT:** Use standard LaTeX notation with `$$` and `$` delimiters for math formulas. Do NOT use ` ```math ` JSON format.
+
+```markdown
+# Display math (centered, on its own line):
+$$
+\frac{a}{b} = c
+$$
+
+# Inline math (within text):
+The formula $a^2 + b^2 = c^2$ is the Pythagorean theorem.
+```
+
+**LaTeX escape rules:** Use single backslashes in `$$` notation (not double like in JSON). Common commands: `\frac{a}{b}`, `\sqrt{x}`, `\int`, `\sum`, `\vec{F}`, `\alpha`, `\beta`.
 
 ---
 
@@ -82,13 +99,15 @@ The platform supports 7 interactive component types. When generating STEM lesson
 
 | Tag | Component | Use When |
 |-----|-----------|----------|
-| `math` | KaTeX equations | Teaching formulas, equations, mathematical expressions |
 | `phet` | PhET simulations | Demonstrating physics/chemistry concepts visually |
 | `plot` | Interactive charts | Showing data trends, relationships, comparisons |
 | `molecule` | 3D molecular viewer | Teaching chemistry, biochemistry, molecular structure |
 | `dragdrop` | Ordering quiz | Teaching sequences, steps, procedures |
 | `matching` | Matching pairs | Teaching associations, definitions, classifications |
 | `fillblank` | Fill-in-the-blank | Teaching key terms, formulas, definitions |
+
+> [!NOTE]
+> For math formulas, use `$$` notation (display math) or `$` notation (inline math) instead of interactive components. See "Math Formulas" section above.
 
 ### Rules
 

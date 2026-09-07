@@ -6,6 +6,54 @@
 
 ## Table of Contents
 
+### Wave 2: p5.js Creative Coding - Molecule Orbit (Lesson 6 of 11, Python Fundamentals)
+
+**Root Cause**: p5.js `setup()` and `draw()` must be **global** functions, but the IIFE wrapper `(() => { ... })()` made them local, causing p5.js to fail silently.
+
+**Fixes Applied**:
+
+1. **Remove IIFE wrapper** from `<script>` blocks in markdown files
+   - `function setup()` and `function draw()` must be top-level globals
+   - p5.js auto-detects globals on page load and enters "global mode"
+
+2. **Fix Next.js hydration mismatch**
+   - Server-rendered `'` vs client-rendered `'` in `canvas.parent('molecule-orbit')`
+   - **Solution**: Added `script` component to `MarkdownRenderer.tsx` using `dangerouslySetInnerHTML={{ __html: String(children) }}`
+   - Added null guard: `if (children == null) return null`
+
+3. **Add explicit canvas container styling**
+   - `<div id="molecule-orbit" style="min-height: 400px; background: #f0f0f0;">`
+   - Without explicit height, the 400×400 p5.js canvas is invisible
+
+**p5.js Sketch Structure** (what the markdown should contain):
+```markdown
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+<script>
+    let circles = [];
+    
+    function setup() {
+      const canvas = createCanvas(400, 400);
+      canvas.parent('molecule-orbit');
+      background(240);
+      // initialize variables, create objects
+    }
+    
+    function draw() {
+      background(240, 10); // subtle trail effect
+      // animate, update positions, redraw
+      ellipse(circle.x, circle.y, circle.radius);
+    }
+</script>
+
+**Markdown Syntax**:
+````
+```p5js
+{orbit sketch code here}
+```
+````
+
+**Dependencies**: None (p5.js loaded via CDN)
+
 1. [Architecture Overview](#architecture-overview)
 2. [Phase 1: Math Equations (KaTeX)](#phase-1-math-equations-katex)
 3. [Phase 2: PhET Simulation Embeds](#phase-2-phet-simulation-embeds)
@@ -13,6 +61,37 @@
 5. [Phase 4: Interactive Charts (Plotly.js)](#phase-4-interactive-charts-plotlyjs)
 6. [Phase 5: Advanced Quiz Types](#phase-5-advanced-quiz-types)
 7. [File Change Summary](#file-change-summary)
+### Wave 1: Parabola Explorer - Math Foundations Course (Lesson 4 of 11)
+
+**Visualization Modes**: Two options supported:
+1. **Desmos Interactive** - iframe embed `https://www.desmos.com/calculator`
+2. **Canvas Visualizer** - Pure vanilla JS, no external dependencies
+
+**Key Learning**: Always provide a fallback. The Desmos embed works online but requires internet; the canvas visualizer works offline (100% client-side).
+
+**Markdown Syntax** (in wave-1 lessons):
+- Desmos: `<iframe src="https://www.desmos.com/calculator/...">`
+- Canvas: HTML `<canvas>` with embedded vanilla JS
+- Tabs component to switch between modes: `<tabs><tab>Desmos Interactive</tab><tab>Canvas Visualizer</tab></tabs>`
+
+**Comparison Table** (built into lesson content):
+| Feature | Desmos Embed | Canvas Visualizer |
+|---------|-------------|-------------------|
+| **Login required** | No (public) | No (pure client-side) |
+| **External dependencies** | desmos.com | None (vanilla JS) |
+| **Features** | Full graphing calculator | Basic parabola drawing |
+| **Offline works** | No | Yes |
+| **Bundle size impact** | 0 KB (external) | ~0 KB (inline script) |
+| **Customization** | Extensive (sliders, tables) | Limited (coefficients only) |
+
+**Quality Checklist** (wave-1 specific):
+- [ ] Desmos iframe loads correctly
+- [ ] Canvas visualizer draws parabola with coefficient inputs
+- [ ] Both modes produce identical graph for same coefficients
+- [ ] Mobile: tabs switch properly, iframes responsive
+- [ ] Dark mode: canvas background adapts
+
+
 8. [Testing Strategy](#testing-strategy)
 
 ---
@@ -778,300 +857,3 @@ if (language === 'plot') {
 
 ---
 
-## Phase 5: Advanced Quiz Types
-
-### 5.1 Packages
-
-```bash
-npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
-```
-
-| Package | Purpose | Bundle |
-|---------|---------|--------|
-| `@dnd-kit/core` | DnD primitives | ~15 KB |
-| `@dnd-kit/sortable` | Sortable preset | ~10 KB |
-| `@dnd-kit/utilities` | CSS transform helpers | ~5 KB |
-
-### 5.2 New Components
-
-#### `components/markdown/DragOrderQuestion.tsx`
-
-```tsx
-'use client'
-
-import { useState } from 'react'
-import {
-  DndContext,
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  DragEndEvent,
-} from '@dnd-kit/core'
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-  useSortable,
-} from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
-import { GripVertical, CheckCircle2, XCircle, ListOrdered } from 'lucide-react'
-
-function SortableItem({ id, index, isCorrect, answered }: { 
-  id: string; index: number; isCorrect?: boolean; answered?: boolean 
-}) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
-  
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    opacity: isDragging ? 0.5 : 1,
-  }
-
-  let variant = 'border-border bg-card'
-  if (answered) {
-    variant = isCorrect ? 'border-green-500 bg-green-50 dark:bg-green-950/30' : 'border-red-500 bg-red-50 dark:bg-red-950/30'
-  }
-
-  return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}
-      className={`flex items-center gap-3 p-3 rounded-lg border cursor-grab active:cursor-grabbing ${variant}`}>
-      <GripVertical className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-muted flex items-center justify-center text-xs font-bold">
-        {index + 1}
-      </span>
-      <span className="text-foreground">{id}</span>
-      {answered && (
-        isCorrect ? <CheckCircle2 className="w-4 h-4 text-green-600 ml-auto" /> : <XCircle className="w-4 h-4 text-red-600 ml-auto" />
-      )}
-    </div>
-  )
-}
-
-interface DragOrderData {
-  id: string
-  question: string
-  items: string[]
-  correctOrder: string[]
-  explanation?: string
-}
-
-export default function DragOrderQuestion({ data }: { data: DragOrderData }) {
-  const [items, setItems] = useState(() => [...data.items].sort(() => Math.random() - 0.5))
-  const [answered, setAnswered] = useState(false)
-  const sensors = useSensors(useSensor(PointerSensor), useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }))
-
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event
-    if (!over || active.id === over.id) return
-    setItems(prev => {
-      const oldIndex = prev.indexOf(active.id as string)
-      const newIndex = prev.indexOf(over.id as string)
-      return arrayMove(prev, oldIndex, newIndex)
-    })
-  }
-
-  const isCorrect = answered && JSON.stringify(items) === JSON.stringify(data.correctOrder)
-
-  return (
-    <div className="my-8 rounded-xl border bg-card shadow-sm">
-      <div className="bg-muted/50 px-4 py-2 border-b flex items-center gap-2">
-        <ListOrdered className="w-4 h-4 text-primary" />
-        <span className="text-sm font-semibold">Ordering Question</span>
-      </div>
-      <div className="p-4 sm:p-6">
-        <p className="font-medium mb-4">{data.question}</p>
-        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <SortableContext items={items} strategy={verticalListSortingStrategy}>
-            <div className="space-y-2">
-              {items.map((item, index) => (
-                <SortableItem key={item} id={item} index={index} isCorrect={item === data.correctOrder[index]} answered={answered} />
-              ))}
-            </div>
-          </SortableContext>
-        </DndContext>
-        
-        {answered && (
-          <div className={`mt-4 p-4 rounded-lg ${isCorrect ? 'bg-green-50 dark:bg-green-950/30 border border-green-200' : 'bg-red-50 dark:bg-red-950/30 border border-red-200'}`}>
-            <div className="flex items-center gap-2 mb-1">
-              {isCorrect ? <CheckCircle2 className="w-5 h-5 text-green-600" /> : <XCircle className="w-5 h-5 text-red-600" />}
-              <span className="font-semibold text-sm">{isCorrect ? 'Correct!' : 'Incorrect'}</span>
-            </div>
-            {data.explanation && <p className="text-sm mt-1">{data.explanation}</p>}
-          </div>
-        )}
-        
-        <div className="mt-4 flex gap-2">
-          {!answered ? (
-            <button onClick={() => setAnswered(true)} className="px-6 py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90">
-              Check Order
-            </button>
-          ) : (
-            <button onClick={() => { setItems([...data.items].sort(() => Math.random() - 0.5)); setAnswered(false) }} className="px-6 py-2 text-sm font-medium rounded-lg bg-muted text-foreground hover:bg-accent">
-              Try Again
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
-  )
-}
-```
-
-#### `components/markdown/MatchingQuestion.tsx`
-
-Similar pattern with left/right pairs and drag-to-connect lines.
-
-#### `components/markdown/FillBlankQuestion.tsx`
-
-Similar pattern with word bank and drop targets.
-
-### 5.3 Markdown Syntax
-
-**Drag-and-drop ordering:**
-````
-```dragdrop
-{
-  "id": "order-planets",
-  "question": "Order these planets from closest to farthest from the Sun",
-  "items": ["Venus", "Mercury", "Earth", "Mars"],
-  "correctOrder": ["Mercury", "Venus", "Earth", "Mars"],
-  "explanation": "Mercury is closest, then Venus, Earth, and Mars."
-}
-```
-````
-
-**Matching pairs:**
-````
-```matching
-{
-  "id": "match-elements",
-  "question": "Match each element with its symbol",
-  "pairs": [
-    {"left": "Hydrogen", "right": "H"},
-    {"left": "Oxygen", "right": "O"},
-    {"left": "Carbon", "right": "C"}
-  ],
-  "explanation": "H, O, C are the chemical symbols."
-}
-```
-````
-
-**Fill-in-the-blank:**
-````
-```fillblank
-{
-  "id": "fill-cell",
-  "question": "The ___ is the powerhouse of the cell.",
-  "blanks": ["mitochondria"],
-  "options": ["mitochondria", "nucleus", "ribosome", "membrane"],
-  "explanation": "Mitochondria produce ATP through cellular respiration."
-}
-```
-````
-
-### 5.4 Testing Checklist
-
-- [ ] Drag-and-drop reorders items
-- [ ] Touch drag works on mobile
-- [ ] Check answer validates order
-- [ ] Correct/incorrect feedback displays
-- [ ] Try Again resets
-- [ ] Matching: pairs connect correctly
-- [ ] Fill-blank: word bank works
-
----
-
-## File Change Summary
-
-### New Files (6)
-
-```
-components/markdown/
-├── PhETEmbed.tsx              (NEW - ~80 lines)
-├── MoleculeViewer.tsx         (NEW - ~90 lines)
-├── SciencePlot.tsx            (NEW - ~90 lines)
-├── DragOrderQuestion.tsx      (NEW - ~120 lines)
-├── MatchingQuestion.tsx       (NEW - ~100 lines)
-└── FillBlankQuestion.tsx      (NEW - ~100 lines)
-```
-
-### Modified Files (2)
-
-```
-components/markdown/MarkdownRenderer.tsx  (MODIFY - add imports, plugins, langMap, dispatch)
-app/globals.css                          (MODIFY - add KaTeX dark mode styles)
-```
-
-### New Packages (9)
-
-| Phase | Package | Command |
-|-------|---------|---------|
-| 1 | `remark-math` | `npm install remark-math@6` |
-| 1 | `rehype-katex` | `npm install rehype-katex@7` |
-| 1 | `katex` | `npm install katex@0.16` |
-| 2 | (none) | — |
-| 3 | `molecule-3d-for-react` | `npm install molecule-3d-for-react` |
-| 4 | `react-plotly.js` | `npm install react-plotly.js` |
-| 4 | `plotly.js-basic-dist-min` | `npm install plotly.js-basic-dist-min` |
-| 5 | `@dnd-kit/core` | `npm install @dnd-kit/core` |
-| 5 | `@dnd-kit/sortable` | `npm install @dnd-kit/sortable` |
-| 5 | `@dnd-kit/utilities` | `npm install @dnd-kit/utilities` |
-
----
-
-## Testing Strategy
-
-### Per-Phase Testing
-
-After each phase:
-
-```bash
-# 1. Install new packages
-npm install
-
-# 2. Run dev server
-npm run dev
-
-# 3. Test in browser with sample markdown
-
-# 4. Run build to verify static export works
-npm run build
-
-# 5. Run existing tests
-npm test
-```
-
-### Integration Testing
-
-After all phases:
-
-1. Create a test course `content/courses/test-interactive/` with all component types
-2. Verify all 3 locales (en, pt, es) render correctly
-3. Test dark mode
-4. Test mobile viewport
-5. Test with `npm run build` (static export)
-
-### Regression Testing
-
-- Existing `opencode-*` courses still render correctly
-- Mermaid diagrams still work
-- Question blocks still work
-- Code syntax highlighting still works
-- Alert boxes still work
-
----
-
-## Implementation Order
-
-| Order | Phase | Estimated Time | Dependencies |
-|-------|-------|---------------|--------------|
-| 1 | KaTeX (Math) | 30 min | remark-math, rehype-katex, katex |
-| 2 | PhET (Sims) | 20 min | None |
-| 3 | Plotly (Charts) | 20 min | react-plotly.js, plotly.js-basic-dist-min |
-| 4 | DnD Quizzes | 40 min | @dnd-kit/* |
-| 5 | Molecular Viewer | 20 min | molecule-3d-for-react |
-
-**Total estimated time: ~2 hours**

@@ -544,16 +544,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           </blockquote>
         ),
 
-        a: ({ href, children }) => (
-          <a
-            href={href}
-            className="text-primary hover:underline font-medium"
-            target={href?.startsWith('http') ? '_blank' : undefined}
-            rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
-          >
-            {children}
-          </a>
-        ),
+        
 
         table: ({ children }) => (
           <div className="overflow-x-auto my-6">

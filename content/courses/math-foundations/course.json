@@ -1,0 +1,19 @@
+{
+  "area": "Mathematics",
+  "author": "NUniversity",
+  "difficulty": "beginner",
+  "duration": "3 weeks",
+  "icon": "🔢",
+  "en": {
+    "title": "Math Foundations",
+    "description": "Master essential math concepts with interactive equations and visual explanations.",
+    "difficulty": "Beginner",
+    "duration": "3 Weeks"
+  },
+  "pt": {
+    "title": "Fundamentos de Matemática",
+    "description": "Domine conceitos essenciais de matemática com equações interativas e explicações visuais.",
+    "difficulty": "Iniciante",
+    "duration": "3 Semanas"
+  }
+}

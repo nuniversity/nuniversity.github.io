@@ -40,13 +40,14 @@ content/courses/agent-memory-knowledge/
 1. YAML frontmatter (required fields: title, description, order, duration, difficulty)
 2. H1 heading matching title
 3. Major sections with `##`
-4. Code blocks with language identifiers
-5. Tables for comparisons
-6. Mermaid diagrams where appropriate
-7. Admonition boxes (`> [!WARNING]`, `> [!TIP]`, `> [!NOTE]`, `> [!IMPORTANT]`)
-8. Interactive components (math, phet, plot, molecule, dragdrop, matching, fillblank)
-9. Practice questions (minimum 5)
-10. Key takeaways section
+4. Code blocks with language identifiers (use ` ```text ` for plain text)
+5. Math formulas with `$$` notation (display) or `$` notation (inline)
+6. Tables for comparisons
+7. Mermaid diagrams where appropriate
+8. Admonition boxes (`> [!WARNING]`, `> [!TIP]`, `> [!NOTE]`, `> [!IMPORTANT]`)
+9. Interactive components (phet, plot, molecule, dragdrop, matching, fillblank)
+10. Practice questions (minimum 5)
+11. Key takeaways section
 
 ## Naming Convention
 
@@ -61,33 +62,27 @@ The platform supports 7 interactive component types via fenced code blocks with 
 
 ### Math Equations (KaTeX)
 
-**Tag:** ` ```math `
+**RECOMMENDED:** Use standard LaTeX notation with `$$` and `$` delimiters.
 
-Renders mathematical expressions using KaTeX. Also supports inline `$...$` and display `$$...$$` via remark-math plugin.
-
-**Config:**
-```json
-{
-  "expression": "LaTeX string",
-  "display": true
-}
-```
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `expression` | string | Yes | LaTeX math expression |
-| `display` | boolean | No | Display mode (default: true). false = inline |
+The platform supports math rendering via KaTeX with the remark-math plugin. Use:
+- `$$...$$` for display math (centered, on its own line)
+- `$...$` for inline math (within text)
 
 **Example:**
 ```markdown
 The quadratic formula is:
 
-\```math
-{ "expression": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}", "display": true }
-\```
+$$
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$
+
+For inline math, use $a^2 + b^2 = c^2$.
 ```
 
-**LaTeX escape rules:** Use double backslashes (`\\`) for LaTeX commands in JSON strings. Common commands: `\\frac{a}{b}`, `\\sqrt{x}`, `\\int`, `\\sum`, `\\vec{F}`, `\\alpha`, `\\beta`.
+**LaTeX escape rules:** Use single backslashes in `$$` notation. Common commands: `\frac{a}{b}`, `\sqrt{x}`, `\int`, `\sum`, `\vec{F}`, `\alpha`, `\beta`.
+
+> [!WARNING]
+> Do NOT use ` ```math ` JSON format - it has rendering issues. Always use `$$` notation for math formulas.
 
 ---
 
