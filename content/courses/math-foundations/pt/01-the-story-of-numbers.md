@@ -227,7 +227,7 @@ Por que computadores usam binário?
   ],
   "explanation": "Cada sistema usa uma base diferente. O decimal (base-10) é o mais comum, mas o sexagesimal (base-60) ainda é usado para tempo e ângulos."
 }
-```text
+```
 
 ### Conversão de Bases
 
@@ -239,14 +239,14 @@ $$
 
 **Exemplo passo a passo:** Converter 42 para binário:
 
-```
+```text
 42 ÷ 2 = 21 resto 0
 21 ÷ 2 = 10 resto 1
 10 ÷ 2 = 5 resto 0
 5 ÷ 2 = 2 resto 1
 2 ÷ 2 = 1 resto 0
 1 ÷ 2 = 0 resto 1
-```text
+```
 
 Lendo de baixo para cima: **101010₂**
 
@@ -283,6 +283,139 @@ $$
 255 \times 2^{16} + 0 \times 2^8 + 0 = 16711680_{10} = \text{FF0000}_{16}
 $$
 
+### Exemplo Passo a Passo: Converter Decimal para Binário
+
+**Problema:** Converta o número 156 (decimal) para binário.
+
+**Método:** Divisões sucessivas por 2, anotando os restos.
+
+**Solução:**
+
+$$156 \div 2 = 78 \text{ (resto } 0\text{)}$$
+$$78 \div 2 = 39 \text{ (resto } 0\text{)}$$
+$$39 \div 2 = 19 \text{ (resto } 1\text{)}$$
+$$19 \div 2 = 9 \text{ (resto } 1\text{)}$$
+$$9 \div 2 = 4 \text{ (resto } 1\text{)}$$
+$$4 \div 2 = 2 \text{ (resto } 0\text{)}$$
+$$2 \div 2 = 1 \text{ (resto } 0\text{)}$$
+$$1 \div 2 = 0 \text{ (resto } 1\text{)}$$
+
+Lendo os restos de baixo para cima: **10011100₂**
+
+**Verificação:**
+$$1 \times 2^7 + 0 \times 2^6 + 0 \times 2^5 + 1 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 0 \times 2^0$$
+$$= 128 + 0 + 0 + 16 + 8 + 4 + 0 + 0 = 156_{10} \checkmark$$
+
+### Exemplo Passo a Passo: Converter Binário para Decimal
+
+**Problema:** Converta 11010₂ para decimal.
+
+**Método:** Multiplicar cada dígito pela potência de 2 correspondente.
+
+**Solução:**
+
+$$11010_2 = 1 \times 2^4 + 1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 0 \times 2^0$$
+$$= 16 + 8 + 0 + 2 + 0 = 26_{10}$$
+
+> [!WARNING]
+> **Erro Comum:** Começar a contar potências a partir de 2⁰ no lado esquerdo. Lembre-se: os bits mais à esquerda têm os maiores valores. Em 11010₂, o bit mais à esquerda vale 2⁴ = 16, não 2⁰ = 1.
+
+### hexadecimal e Cores
+
+O sistema hexadecimal (base-16) é amplamente usado em computação para representar cores:
+
+```text
+#FF0000 = Vermelho (255, 0, 0)
+#00FF00 = Verde (0, 255, 0)
+#0000FF = Azul (0, 0, 255)
+#FFFFFF = Branco (255, 255, 255)
+#000000 = Preto (0, 0, 0)
+```
+
+Cada par de dígitos hexadecimais representa um canal de cor (0-255):
+
+$$\text{FF}_{16} = 15 \times 16 + 15 = 255_{10}$$
+
+### Exemplo: Endereço IP
+
+Um endereço IPv4 é um número de 32 bits dividido em 4 octetos:
+
+```text
+192.168.1.1 = 11000000.10101000.00000001.00000001
+```
+
+Cada octeto (8 bits) varia de 0 a 255:
+
+$$192 = 1 \times 2^7 + 1 \times 2^6 + 0 \times 2^5 + 0 \times 2^4 + 0 \times 2^3 + 0 \times 2^2 + 0 \times 2^1 + 0 \times 2^0$$
+
+### Conversão entre Hexadecimal e Binário
+
+Uma vantagem do hexadecimal é que cada dígito hex equivale a exatamente 4 bits:
+
+| Hex | Bin | Hex | Bin |
+|-----|-----|-----|-----|
+| 0 | 0000 | 8 | 1000 |
+| 1 | 0001 | 9 | 1001 |
+| 2 | 0010 | A | 1010 |
+| 3 | 0011 | B | 1011 |
+| 4 | 0100 | C | 1100 |
+| 5 | 0101 | D | 1101 |
+| 6 | 0110 | E | 1110 |
+| 7 | 0111 | F | 1111 |
+
+Exemplo: **A3₁₆** = **10100011₂** = **163₁₀**
+
+---
+
+## Exercícios Interativos Extras
+
+### Pratique a Conversão de Bases
+
+```fillblank
+{
+  "question": "Complete a conversão de 29 (decimal) para binário:",
+  "template": "29 ÷ 2 = {{1}} resto {{2}} → {{3}} ÷ 2 = {{4}} resto 1 → {{5}} ÷ 2 = 3 resto 1 → 3 ÷ 2 = 1 resto 1 → Resultado: 1{{6}}1",
+  "answers": {
+    "1": "14",
+    "2": "1",
+    "3": "14",
+    "4": "7",
+    "5": "7",
+    "6": "1101"
+  },
+  "distractors": [
+    "15",
+    "0",
+    "13",
+    "11101"
+  ],
+  "explanation": "29 ÷ 2 = 14 r1, 14 ÷ 2 = 7 r0, 7 ÷ 2 = 3 r1, 3 ÷ 2 = 1 r1, 1 ÷ 2 = 0 r1. Lendo de baixo: 11101₂. Verificação: 16+8+4+0+1 = 29."
+}
+```
+
+### Ordem dos Sistemas Numéricos
+
+```dragdrop
+{
+  "question": "Ordene os sistemas numéricos cronologicamente, do mais antigo ao mais recente:",
+  "items": [
+    "Marcas de tally (50.000 a.C.)",
+    "Numerais egípcios (3000 a.C.)",
+    "Sistema babilônico (2000 a.C.)",
+    "Zero indiano (628 d.C.)",
+    "Binário moderno (1703)"
+  ],
+  "correctOrder": [
+    "Marcas de tally (50.000 a.C.)",
+    "Numerais egípcios (3000 a.C.)",
+    "Sistema babilônico (2000 a.C.)",
+    "Zero indiano (628 d.C.)",
+    "Binário moderno (1703)"
+  ],
+  "explanation": "A contagem começou com tally marks há ~50.000 anos. Os egípcios criaram símbolos há ~5000 anos. Os babilônios inovaram com valor posicional há ~4000 anos. Brahmagupta formalizou o zero no século VII d.C. Leibniz formalizou o binário em 1703."
+}
+```
+
 ---
 
 ## Practice Questions
@@ -317,7 +450,7 @@ $$
   "correct": 2,
   "explanation": "O sistema posicional permite representar qualquer número usando apenas 10 dígitos (0-9), onde o valor de cada dígito depende de sua posição."
 }
-```text
+```
 
 ```question
 {
@@ -349,7 +482,7 @@ $$
   "correct": 1,
   "explanation": "Circuitos eletrônicos são mais confiáveis operando com dois estados (ligado/desligado) do que com múltiplos níveis de tensão."
 }
-```text
+```
 
 ```question
 {
@@ -381,7 +514,7 @@ $$
   "correct": 1,
   "explanation": "1101₂ = 1×2³ + 1×2² + 0×2¹ + 1×2⁰ = 8 + 4 + 0 + 1 = 13₁₀"
 }
-```text
+```
 
 ```question
 {

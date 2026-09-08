@@ -120,7 +120,7 @@ Campos permitem divisão (exceto por zero). São a base da álgebra linear e geo
   ],
   "explanation": "Cada forma tem um grupo de simetria que descreve todas as transformações que a preservam."
 }
-```text
+```
 
 ### Calculadora de Grupo
 
@@ -148,7 +148,7 @@ Campos permitem divisão (exceto por zero). São a base da álgebra linear e geo
   ],
   "explanation": "Campos são anéis mais restritivos com mais propriedades."
 }
-```text
+```
 
 ---
 
@@ -202,7 +202,7 @@ Campos permitem divisão (exceto por zero). São a base da álgebra linear e geo
   "correct": 1,
   "explanation": "3 rotações + 3 reflexões = 6 simetrias (D₃ ou S₃)."
 }
-```text
+```
 
 ```question
 {
@@ -234,7 +234,7 @@ Campos permitem divisão (exceto por zero). São a base da álgebra linear e geo
   "correct": 1,
   "explanation": "O grupo pontual de uma molécula descreve todas as simetrias que a preservam."
 }
-```text
+```
 
 ```question
 {

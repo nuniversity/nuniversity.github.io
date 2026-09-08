@@ -49,6 +49,15 @@ content/courses/agent-memory-knowledge/
 10. Practice questions (minimum 5)
 11. Key takeaways section
 
+> [!WARNING]
+> **Code Fence Rules:** Opening fences get a language identifier (` ```python `), but closing fences must be BARE ` ``` ` with NO text after them. Never use ` ```text ` as a closing fence — this breaks JSON parsing in interactive blocks.
+
+> [!WARNING]
+> **Jekyll/GitHub Pages Compatibility:** If your content contains Jinja/Liquid syntax (`{{ }}` or `{% %}`), wrap code blocks in `{% raw %}...{% endraw %}` to prevent Jekyll build errors. See "GitHub Pages Deployment" section in skill.md for details.
+
+> [!WARNING]
+> **Course Discovery:** A course must have either an `en/` directory OR a locale-specific directory to appear in the course listing. Without `en/`, the course won't appear for English users.
+
 ## Naming Convention
 
 - Lesson files: `{order}-{slug}.md` (e.g., `01-foundations-of-agent-memory.md`)
@@ -58,7 +67,10 @@ content/courses/agent-memory-knowledge/
 
 ## Interactive Components
 
-The platform supports 7 interactive component types via fenced code blocks with JSON configs. STEM lessons (Math, Physics, Chemistry, Biology, Engineering) must include at least 2 interactive components.
+The platform supports 6 interactive component types via fenced code blocks with JSON configs. STEM lessons (Math, Physics, Chemistry, Biology, Engineering) must include at least 2 interactive components.
+
+> [!CRITICAL]
+> **Closing Fence Rule:** All interactive blocks MUST use bare ` ``` ` as the closing fence. Never ` ```text ` or any other text after the backticks. This is the #1 cause of "Invalid matching config" JSON errors.
 
 ### Math Equations (KaTeX)
 
@@ -363,3 +375,4 @@ Students drag words from a word bank into blank slots within a template text. Su
 6. **JSON validity:** All config JSON must be valid — the validation script checks this
 7. **Data accuracy:** Chart data and molecule PDB IDs must be scientifically accurate
 8. **Accessibility:** All interactive components support keyboard navigation
+9. **Closing fences:** MUST be bare ` ``` ` — never ` ```text ` or any text after backticks

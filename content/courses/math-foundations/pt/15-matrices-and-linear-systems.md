@@ -36,37 +36,65 @@ Ao final desta lição, você será capaz de:
 
 ### Definição e Notação
 
-Uma **matriz** é um arranjo retangular de números entre colchetes.
+Uma **matriz** é um arranjo retangular de números entre colchetes. Pense nela como uma "tabela de números" organizada em linhas e colunas.
 
 **Exemplo:** Matriz 2×2
 $$
 A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}
 $$
 
+Aqui, temos:
+- **a** está na posição (linha 1, coluna 1)
+- **b** está na posição (linha 1, coluna 2)
+- **c** está na posição (linha 2, coluna 1)
+- **d** está na posição (linha 2, coluna 2)
+
 ### Adição e Multiplicação por Escalar
 
-**Soma:** A + B (elemento por elemento)
-**Escalar:** kA (multiplica cada elemento por k)
+**Soma de matrizes:** Somamos elemento por elemento. É como somar duas tabelas célula por célula.
+
+$$
+\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} + \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix} = \begin{pmatrix} 6 & 8 \\ 10 & 12 \end{pmatrix}
+$$
+
+**Multiplicação por escalar:** Multiplicamos cada elemento pelo número. É como "ampliar" todos os valores da tabela.
+
+$$
+2 \times \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} = \begin{pmatrix} 2 & 4 \\ 6 & 8 \end{pmatrix}
+$$
 
 ### Multiplicação de Matrizes
+
+Multiplicação de matrizes é diferente de somar. Para calcular o elemento (i,j) do resultado, multiplicamos a linha i da primeira matriz pela coluna j da segunda matriz e somamos os produtos.
 
 $$
 (AB)_{ij} = \sum_{k} a_{ik} \cdot b_{kj}
 $$
 
-**Exemplo:**
+**Exemplo passo a passo:**
 $$
 \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} \times \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix} = \begin{pmatrix} 19 & 22 \\ 43 & 50 \end{pmatrix}
 $$
 
+Como chegamos nesses números?
+- **Posição (1,1):** 1×5 + 2×7 = 5 + 14 = **19**
+- **Posição (1,2):** 1×6 + 2×8 = 6 + 16 = **22**
+- **Posição (2,1):** 3×5 + 4×7 = 15 + 28 = **43**
+- **Posição (2,2):** 3×6 + 4×8 = 18 + 32 = **50**
+
 > [!WARNING]
-> Multiplicação de matrizes NÃO é comutativa: AB ≠ BA em geral.
+> Multiplicação de matrizes NÃO é comutativa: AB ≠ BA em geral. Isso é diferente da multiplicação de números, onde 3×5 = 5×3.
+
+> [!TIP]
+> **Regra de ouro:** O número de colunas da primeira matriz deve ser igual ao número de linhas da segunda matriz para que a multiplicação seja possível.
 
 ---
 
 ## 2. Resolvendo Sistemas
 
 ### Matrizes Aumentadas
+
+Podemos representar um sistema de equações como uma matriz aumentada, onde os coeficientes ficam à esquerda e os termos independentes à direita.
 
 **Sistema:**
 ```text
@@ -81,17 +109,38 @@ $$
 
 ### Eliminação de Gauss-Jordan
 
-1. Zere abaixo da diagonal principal
-2. Zere acima da diagonal principal
-3. Normalize a diagonal
+A eliminação de Gauss-Jordan é um método sistemático para resolver sistemas de equações:
 
-### Eliminação Gaussiana
+1. **Zere abaixo da diagonal principal** - Use operações de linha para tornar todos os elementos abaixo da diagonal iguais a zero
+2. **Zere acima da diagonal principal** - Continue até ter zeros em ambos os lados da diagonal
+3. **Normalize a diagonal** - Torne todos os elementos da diagonal iguais a 1
+
+### Eliminação Gaussiana - Exemplo Completo
+
+Vamos resolver o sistema passo a passo:
 
 $$
-\begin{pmatrix} 1 & 1 & 5 \\ 2 & -1 & 1 \end{pmatrix} \rightarrow \begin{pmatrix} 1 & 1 & 5 \\ 0 & -3 & -9 \end{pmatrix} \rightarrow \begin{pmatrix} 1 & 1 & 5 \\ 0 & 1 & 3 \end{pmatrix} \rightarrow \begin{pmatrix} 1 & 0 & 2 \\ 0 & 1 & 3 \end{pmatrix}
+\begin{pmatrix} 1 & 1 & 5 \\ 2 & -1 & 1 \end{pmatrix}
+$$
+
+**Passo 1:** R2 = R2 - 2×R1 (para zerar o 2 na segunda linha)
+$$
+\rightarrow \begin{pmatrix} 1 & 1 & 5 \\ 0 & -3 & -9 \end{pmatrix}
+$$
+
+**Passo 2:** R2 = R2 / (-3) (para normalizar a diagonal)
+$$
+\rightarrow \begin{pmatrix} 1 & 1 & 5 \\ 0 & 1 & 3 \end{pmatrix}
+$$
+
+**Passo 3:** R1 = R1 - R2 (para zerar acima da diagonal)
+$$
+\rightarrow \begin{pmatrix} 1 & 0 & 2 \\ 0 & 1 & 3 \end{pmatrix}
 $$
 
 **Solução:** x = 2, y = 3
+
+**Verificação:** 2 + 3 = 5 ✓ e 2(2) - 3 = 1 ✓
 
 ---
 
@@ -99,27 +148,34 @@ $$
 
 ### Transformações 2D e 3D
 
-**Rotação:**
+Matrizes são usadas para transformar pontos e figuras no plano e no espaço. Cada tipo de transformação tem sua própria matriz.
+
+**Rotação:** Gira um ponto ao redor da origem
 $$
 R(\theta) = \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}
 $$
 
-**Escala:**
+**Escala:** Aumenta ou diminui o tamanho
 $$
 S = \begin{pmatrix} s_x & 0 \\ 0 & s_y \end{pmatrix}
 $$
 
+**Reflexão:** Espelha em relação a um eixo
+$$
+\text{Reflexão no eixo x} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}
+$$
+
 ### Computação Gráfica
 
-- Translações, rotações, escalas
-- Projeções 3D para 2D
-- Animações
+- **Translações, rotações, escalas:** Movem, giram e redimensionam objetos em jogos e filmes
+- **Projeções 3D para 2D:** Transformam cenas tridimensionais em imagens planas
+- **Animações:** Criam movimento suave através de transformações sequenciais
 
 ### Análise de Redes
 
-- Matrizes de adjacência
-- Fluxo em redes
-- PageRank do Google
+- **Matrizes de adjacência:** Representam conexões em redes sociais
+- **Fluxo em redes:** Modelam transporte de dados em internet
+- **PageRank do Google:** Usa matrizes para ranquear páginas web por importância
 
 ---
 
@@ -137,7 +193,7 @@ $$
   ],
   "explanation": "Matrizes são somadas elemento por elemento; escalares multiplicam todos os elementos."
 }
-```text
+```
 
 ### Resolvedor de Sistemas
 
@@ -165,7 +221,7 @@ $$
   ],
   "explanation": "Cada matriz de transformação tem um efeito geométrico específico."
 }
-```text
+```
 
 ---
 
@@ -174,19 +230,19 @@ $$
 ### Computação Gráfica, Engenharia e Economia
 
 **Computação Gráfica:**
-- Transformações em jogos
-- Animações de filmes
-- Realidade virtual
+- Transformações em jogos de video game
+- Animações de filmes da Pixar
+- Realidade virtual e aumentada
 
 **Engenharia:**
-- Sistemas de equações em circuitos
-- Análise estrutural
-- Controle de processos
+- Sistemas de equações em circuitos elétricos
+- Análise estrutural de pontes e prédios
+- Controle de processos industriais
 
 **Economia:**
-- Modelos de insumo-produto
-- Análise de mercados
-- Otimização
+- Modelos de insumo-produto (como indústrias se conectam)
+- Análise de mercados financeiros
+- Otimização de cadeias de suprimentos
 
 ---
 
@@ -222,7 +278,7 @@ $$
   "correct": 0,
   "explanation": "1×5+2×7=19, 1×6+2×8=22, 3×5+4×7=43, 3×6+4×8=50."
 }
-```text
+```
 
 ```question
 {
@@ -254,7 +310,7 @@ $$
   "correct": 1,
   "explanation": "O Nove Capítulos usa arranjos retangulares para resolver sistemas, semelhante à eliminação gaussiana."
 }
-```text
+```
 
 ```question
 {

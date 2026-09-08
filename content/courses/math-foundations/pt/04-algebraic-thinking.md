@@ -169,7 +169,7 @@ Para ax² + bx + c = 0.
   ],
   "explanation": "Cuidado com operações em ambos os lados da equação. Sempre verifique sua resposta substituindo."
 }
-```text
+```
 
 ### Explorador Quadrático
 
@@ -197,7 +197,7 @@ Para ax² + bx + c = 0.
   ],
   "explanation": "Sistemas simples podem ser resolvidos por inspeção ou substituição rápida."
 }
-```text
+```
 
 ---
 
@@ -219,7 +219,291 @@ Para ax² + bx + c = 0.
 
 ---
 
+
+
+## 5. Exemplos Trabalhados: Resolução de Equações Lineares
+
+### Exemplo 1: Equação com Parênteses
+
+**Resolva: 3(2x - 4) + 5 = 23**
+
+Passo 1: Distribua o 3 pelos termos dentro dos parênteses
+- 3 × 2x = 6x
+- 3 × (-4) = -12
+- Equação: 6x - 12 + 5 = 23
+
+Passo 2: Combine os termos constantes no lado esquerdo
+- -12 + 5 = -7
+- Equação: 6x - 7 = 23
+
+Passo 3: Isole o termo com x adicionando 7 em ambos os lados
+- 6x = 23 + 7
+- 6x = 30
+
+Passo 4: Divida ambos os lados por 6
+- x = 30/6
+- x = 5
+
+**Verificação:** 3(2(5) - 4) + 5 = 3(10 - 4) + 5 = 3(6) + 5 = 18 + 5 = 23 ✓
+
+### Exemplo 2: Equação com a Variável em Ambos os Lados
+
+**Resolva: 5x + 3 = 2x + 18**
+
+Passo 1: Reúna os termos com x no lado esquerdo subtraindo 2x de ambos os lados
+- 5x - 2x + 3 = 18
+- 3x + 3 = 18
+
+Passo 2: Isole o termo com x subtraindo 3 de ambos os lados
+- 3x = 18 - 3
+- 3x = 15
+
+Passo 3: Divida ambos os lados por 3
+- x = 5
+
+**Verificação:** 5(5) + 3 = 25 + 3 = 28 e 2(5) + 18 = 10 + 18 = 28 ✓
+
+### Exemplo 3: Equação com Frações
+
+**Resolva: x/3 + x/4 = 7**
+
+Passo 1: Encontre o MMC dos denominadores (3 e 4)
+- MMC(3, 4) = 12
+
+Passo 2: Multiplique TODOS os termos por 12
+- 12 × (x/3) + 12 × (x/4) = 12 × 7
+- 4x + 3x = 84
+
+Passo 3: Combine termos semelhantes
+- 7x = 84
+
+Passo 4: Divida por 7
+- x = 12
+
+**Verificação:** 12/3 + 12/4 = 4 + 3 = 7 ✓
+
+> [!WARNING]
+> Erro comum: esquecer de multiplicar TODOS os termos por o MMC, incluindo o lado direito da equação. Se você multiplicar apenas os termos com x, obterá uma resposta incorreta.
+
+### Exemplo 4: Equação com Decimais
+
+**Resolva: 0.5x + 1.2 = 3.7**
+
+Passo 1: Isole o termo com x subtraindo 1.2 de ambos os lados
+- 0.5x = 3.7 - 1.2
+- 0.5x = 2.5
+
+Passo 2: Divida ambos os lados por 0.5
+- x = 2.5/0.5
+- x = 5
+
+**Dica:** Para eliminar decimais, você pode multiplicar todos os termos por 10 (ou pela potência de 10 apropriada) antes de resolver.
+
+---
+
+## 6. Mais Exemplos de Sistemas de Equações
+
+### Método de Eliminação
+
+**Sistema:**
+```
+2x + 3y = 12
+4x - 3y = 6
+```
+
+Passo 1: Some as equações (os termos com y se cancelam)
+- (2x + 4x) + (3y - 3y) = 12 + 6
+- 6x = 18
+- x = 3
+
+Passo 2: Substitua x = 3 na primeira equação
+- 2(3) + 3y = 12
+- 6 + 3y = 12
+- 3y = 6
+- y = 2
+
+**Solução:** x = 3, y = 2
+
+**Verificação:**
+- Eq 1: 2(3) + 3(2) = 6 + 6 = 12 ✓
+- Eq 2: 4(3) - 3(2) = 12 - 6 = 6 ✓
+
+**Dica:** O método de eliminação funciona melhor quando os coeficientes de uma variável já são opostos ou podem ser tornados opostos com uma multiplicação simples.
+
+### Sistemas com Três Variáveis
+
+**Sistema:**
+```
+x + y + z = 6
+x - y + z = 2
+x + y - z = 2
+```
+
+Passo 1: Some as equações 1 e 2 (elimina y):
+- (x + x) + (y - y) + (z + z) = 6 + 2
+- 2x + 2z = 8
+- x + z = 4 ... (A)
+
+Passo 2: Some as equações 1 e 3 (elimina z):
+- (x + x) + (y + y) + (z - z) = 6 + 2
+- 2x + 2y = 8
+- x + y = 4 ... (B)
+
+Passo 3: Some as equações 2 e 3 (elimina y e z):
+- (x + x) + (-y + y) + (z - z) = 2 + 2
+- 2x = 4
+- x = 2 ... (C)
+
+Passo 4: Substitua x = 2 em (A):
+- 2 + z = 4
+- z = 2
+
+Passo 5: Substitua x = 2 em (B):
+- 2 + y = 4
+- y = 2
+
+**Solução:** x = 2, y = 2, z = 2
+
+**Verificação:**
+- Eq 1: 2 + 2 + 2 = 6 ✓
+- Eq 2: 2 - 2 + 2 = 2 ✓
+- Eq 3: 2 + 2 - 2 = 2 ✓
+
+> [!NOTE]
+> Sistemas com três variáveis podem ser resolvidos por **eliminação sucessiva**: reduza de 3 variáveis para 2, depois de 2 para 1. É como resolver um "cascata" de sistemas menores.
+
+---
+
+## 7. Abordagem Geométrica de Al-Khwarizmi para Equações Quadráticas
+
+### Contexto Histórico
+
+Muhammad ibn Musa al-Khwarizmi (780-850 d.C.) escreveu "Al-Kitab al-Mukhtasar fi Hisab al-Jabr wal-Muqabala" (O Livro Conciso sobre o Cálculo por Completação e Redução) em 820 d.C., que deu origem ao nome "álgebra". Sua abordagem para equações quadráticas era puramente **geométrica** — ele resolvia equações desenhando figuras.
+
+### Exemplo Trabalhado: x² + 10x = 39
+
+Al-Khwarizmi classificava equações em tipos. Esta equação tem a forma: **quadrado + vezes = constante**.
+
+**Método algébrico (completamento do quadrado):**
+
+Passo 1: Escreva a equação
+- x² + 10x = 39
+
+Passo 2: Encontre o termo para completar o quadrado
+- O coeficiente de x é 10
+- Divida por 2: 10/2 = 5
+- Eleve ao quadrado: 5² = 25
+
+Passo 3: Adicione 25 a ambos os lados
+- x² + 10x + 25 = 39 + 25
+- (x + 5)² = 64
+
+Passo 4: Tire a raiz quadrada de ambos os lados
+- x + 5 = ±8
+
+Passo 5: Resolva para x
+- x + 5 = 8 → x = 3
+- x + 5 = -8 → x = -13
+
+**Verificação:** 3² + 10(3) = 9 + 30 = 39 ✓
+
+**Construção geométrica de Al-Khwarizmi (só a solução positiva):**
+
+Passo 1: Imagine um quadrado de lado x (área = x²)
+
+Passo 2: Divida o coeficiente de x ao meio: 10/2 = 5. Adicione dois retângulos de dimensões x por 5 aos lados do quadrado. Cada retângulo tem área 5x, totalizando 10x.
+
+Passo 3: Os cantos entre os retângulos formam um quadrado de lado 5, com área 25.
+
+Passo 4: O quadrado maior formado tem lado (x + 5) e área total = x² + 10x + 25.
+
+Passo 5: Como x² + 10x = 39, a área total é 39 + 25 = 64. Logo o lado é √64 = 8.
+
+Passo 6: x + 5 = 8, logo x = 3.
+
+> [!NOTE]
+> Al-Khwarizmi não aceitava números negativos, por isso só considerava a solução x = 3. Hoje sabemos que x = -13 também é válida: (-13)² + 10(-13) = 169 - 130 = 39 ✓
+
+> [!NOTE]
+> Al-Khwarizmi não usava símbolos como x² ou +. Ele descrevia tudo em palavras e resolvia com desenhos. Cada tipo de equação (seis tipos no total) tinha sua própria construção geométrica. Isso tornava o método acessível, mas limitava a generalidade.
+
+---
+
+## 8. Arraste para Ordenar: Passos para Resolver Equações Lineares
+
+```dragdrop
+{
+  "question": "Ordene os passos para resolver a equação 2(x + 3) = 16:",
+  "items": [
+    "Distribua o 2: 2x + 6 = 16",
+    "Subtraia 6 de ambos os lados: 2x = 10",
+    "Divida ambos os lados por 2: x = 5",
+    "Verifique: 2(5 + 3) = 16 ✓"
+  ],
+  "explanation": "Os passos corretos são: (1) distribuir, (2) isolar o termo com x, (3) dividir, (4) verificar. Sempre verifique sua resposta substituindo o valor na equação original.",
+  "correctOrder": [
+    "Distribua o 2: 2x + 6 = 16",
+    "Subtraia 6 de ambos os lados: 2x = 10",
+    "Divida ambos os lados por 2: x = 5",
+    "Verifique: 2(5 + 3) = 16 ✓"
+  ]
+}
+```
+
+```dragdrop
+{
+  "question": "Ordene os passos para resolver o sistema x + y = 10 e x - y = 4 pelo método de substituição:",
+  "items": [
+    "Isole x na segunda equação: x = y + 4",
+    "Substitua na primeira: (y + 4) + y = 10",
+    "Resolva para y: 2y + 4 = 10, y = 3",
+    "Encontre x: x = 3 + 4 = 7"
+  ],
+  "explanation": "No método de substituição: (1) isole uma variável, (2) substitua na outra equação, (3) resolva para a variável restante, (4) volte para encontrar a primeira variável.",
+  "correctOrder": [
+    "Isole x na segunda equação: x = y + 4",
+    "Substitua na primeira: (y + 4) + y = 10",
+    "Resolva para y: 2y + 4 = 10, y = 3",
+    "Encontre x: x = 3 + 4 = 7"
+  ]
+}
+```
+
+---
+
 ## Practice Questions
+
+```question
+{
+  "id": "math-foundations-q26",
+  "type": "multiple-choice",
+  "question": "Resolva: 4(x - 2) + 3 = 19",
+  "options": [
+    "x = 5",
+    "x = 4",
+    "x = 6",
+    "x = 7"
+  ],
+  "correct": 2,
+  "explanation": "4(x - 2) + 3 = 19 → 4x - 8 + 3 = 19 → 4x - 5 = 19 → 4x = 24 → x = 6"
+}
+```
+
+```question
+{
+  "id": "math-foundations-q27",
+  "type": "multiple-choice",
+  "question": "Resolva: x/2 + x/3 = 10",
+  "options": [
+    "x = 8",
+    "x = 10",
+    "x = 12",
+    "x = 15"
+  ],
+  "correct": 2,
+  "explanation": "MMC de 2 e 3 é 6. Multiplicando todos os termos por 6: 3x + 2x = 60 → 5x = 60 → x = 12."
+}
+```
 
 ```question
 {
@@ -251,7 +535,7 @@ Para ax² + bx + c = 0.
   "correct": 1,
   "explanation": "Os babilônios usavam métodos geométricos para completar o quadrado, trabalhando com áreas de figuras."
 }
-```text
+```
 
 ```question
 {
@@ -283,7 +567,7 @@ Para ax² + bx + c = 0.
   "correct": 2,
   "explanation": "Se g = galinhas e v = vacas: g + v = 30 e 2g + 4v = 80. Resolvendo: g = 20, v = 10."
 }
-```text
+```
 
 ```question
 {

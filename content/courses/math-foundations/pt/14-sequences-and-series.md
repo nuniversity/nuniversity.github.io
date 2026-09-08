@@ -130,7 +130,7 @@ Uma série converge se a soma parcial tende a um limite finito.
   ],
   "explanation": "Cada tipo de sequência tem uma regra de formação diferente."
 }
-```text
+```
 
 ### Calculadora de Séries
 
@@ -158,7 +158,7 @@ Uma série converge se a soma parcial tende a um limite finito.
   ],
   "explanation": "Padrões podem ser aritméticos, geométricos ou outros."
 }
-```text
+```
 
 ---
 
@@ -177,6 +177,199 @@ Uma série converge se a soma parcial tende a um limite finito.
 **Natureza:**
 - Fibonacci aparece em flores, conchas, galáxias
 - Proporção áurea em arte e arquitetura
+
+---
+
+## 5. Exemplos Resolvidos — Fórmulas de Soma
+
+### Soma dos Primeiros n Inteiros
+
+$$
+S_n = \frac{n(n+1)}{2}
+$$
+
+**Exemplo 1:** Some os primeiros 50 números naturais.
+- S₅₀ = 50 × 51 / 2
+- S₅₀ = 2550 / 2
+- **S₅₀ = 1275**
+
+**Exemplo 2:** Qual é a soma dos números de 1 a 100? (Problema de Gauss)
+- S₁₀₀ = 100 × 101 / 2
+- S₁₀₀ = 10100 / 2
+- **S₁₀₀ = 5050**
+
+### Soma dos Primeiros n Quadrados
+
+$$
+\sum_{k=1}^{n} k^2 = \frac{n(n+1)(2n+1)}{6}
+$$
+
+**Exemplo:** Some 1² + 2² + 3² + ... + 10²
+- S = 10 × 11 × 21 / 6
+- S = 2310 / 6
+- **S = 385**
+
+Verificação direta: 1 + 4 + 9 + 16 + 25 + 36 + 49 + 64 + 81 + 100 = 385 ✓
+
+### Soma dos Primeiros n Cubos
+
+$$
+\sum_{k=1}^{n} k^3 = \left[\frac{n(n+1)}{2}
+ight]^2
+$$
+
+**Exemplo:** Some 1³ + 2³ + 3³ + ... + 5³
+- S = [5 × 6 / 2]² = 15²
+- **S = 225**
+
+Verificação: 1 + 8 + 27 + 64 + 125 = 225 ✓
+
+> [!NOTE]
+> Surpreendentemente, 1³ + 2³ + ... + n³ = (1 + 2 + ... + n)². A soma dos cubos é o quadrado da soma!
+
+### Série Geométrica Finita
+
+$$
+S_n = a_1 \cdot \frac{q^n - 1}{q - 1} \quad (q 
+eq 1)
+$$
+
+**Exemplo 1:** Some 3 + 6 + 12 + 24 + ... + 384
+- a₁ = 3, q = 2, último termo = 384 = 3 × 2⁸ → n = 9
+- S₉ = 3 × (2⁹ - 1)/(2 - 1) = 3 × 511
+- **S₉ = 1533**
+
+**Exemplo 2:** Some 5 + 15 + 45 + 135 + 405
+- a₁ = 5, q = 3, n = 5
+- S₅ = 5 × (3⁵ - 1)/(3 - 1) = 5 × 242/2
+- **S₅ = 605**
+
+---
+
+## 6. A Proporção Áurea e Fibonacci
+
+### Derivação da Proporção Áurea
+
+A sequência de Fibonacci é: 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
+
+A razão entre termos consecutivos converge para φ (phi):
+- F₂/F₁ = 1/1 = 1.000
+- F₃/F₂ = 2/1 = 2.000
+- F₄/F₃ = 3/2 = 1.500
+- F₅/F₄ = 5/3 = 1.667
+- F₆/F₅ = 8/5 = 1.600
+- F₇/F₆ = 13/8 = 1.625
+- F₈/F₇ = 21/13 = 1.615
+- F₉/F₈ = 34/21 = 1.619
+- F₁₀/F₉ = 55/34 = 1.618
+
+### Cálculo Exato de φ
+
+Se a razão converge para φ, então para termos grandes:
+- Fₙ₊₁/Fₙ → φ
+- Fₙ₊₁ = Fₙ + Fₙ₋₁ (definição de Fibonacci)
+- Dividindo por Fₙ: Fₙ₊₁/Fₙ = 1 + Fₙ₋₁/Fₙ
+- No limite: φ = 1 + 1/φ
+- φ² = φ + 1
+- φ² - φ - 1 = 0
+- φ = (1 + √5)/2 ≈ 1.6180339887...
+
+### Outra Propriedade: Soma de Inversos
+
+$$
+\sum_{k=1}^{\infty} \frac{1}{F_k} pprox 3.3598856...
+$$
+
+Embora esta série não tenha uma forma fechada simples, ela converge rapidamente.
+
+### A Área de Fibonacci e o Retângulo Áureo
+
+Construa um retângulo com lados φ e 1. Ao remover um quadrado de lado 1, sobra um retângulo de dimensões 1 × (φ-1) = 1 × 1/φ. Este processo pode ser repetido indefinidamente, criando uma espiral logarítmica — a "espiral de Fibonacci" que aparece em conchas, galáxias e flores.
+
+---
+
+## 7. Convergência de Séries Geométricas — Exemplos
+
+### Séries que Convergem
+
+Uma série geométrica infinita converge se e somente se |q| < 1.
+
+**Exemplo 1:** 1 + 1/3 + 1/9 + 1/27 + ...
+- a₁ = 1, q = 1/3
+- S = 1/(1 - 1/3) = 1/(2/3) = **3/2 = 1.5**
+
+**Exemplo 2:** 100 + 50 + 25 + 12.5 + ...
+- a₁ = 100, q = 1/2
+- S = 100/(1 - 1/2) = 100/(1/2) = **200**
+
+**Exemplo 3:** 8 - 4 + 2 - 1 + 1/2 - ...
+- a₁ = 8, q = -1/2
+- S = 8/(1-(-1/2)) = 8/(3/2) = **16/3 ≈ 5.33**
+
+### Séries que Divergem
+
+**Exemplo 1:** 1 + 2 + 4 + 8 + ...
+- q = 2 > 1 → **Diverge** (soma = ∞)
+
+**Exemplo 2:** 1 - 1 + 1 - 1 + ...
+- q = -1 → |q| = 1 → **Diverge** (oscila entre 0 e 1)
+
+**Exemplo 3:** 1 + 1 + 1 + 1 + ...
+- q = 1 → **Diverge** (soma = ∞)
+
+### Decisão Rápida
+
+```
+|q| < 1  →  CONVERGE  →  S = a₁/(1 - q)
+|q| ≥ 1  →  DIVERGE   →  Sem soma finita
+```
+
+> [!WARNING]
+> Erro comum: aplicar a fórmula S = a₁/(1-q) quando |q| ≥ 1. Isso produz resultados sem sentido. Sempre verifique |q| < 1 primeiro!
+
+---
+
+## 8. Sequências e Séries — Exercícios Interativos
+
+### Classificador de Sequências
+
+```dragdrop
+{
+  "question": "Arraste cada sequência para o tipo correto:",
+  "items": [
+    "2, 4, 6, 8, 10, ...",
+    "3, 9, 27, 81, ...",
+    "1, 1, 2, 3, 5, 8, ...",
+    "1, 4, 9, 16, 25, ...",
+    "5, 10, 20, 40, ...",
+    "100, 90, 80, 70, ..."
+  ],
+  "explanation": "Aritmética: soma constante entre termos. Geométrica: multiplicação constante. Fibonacci: cada termo é soma dos dois anteriores. Quadrados perfeitos: aₙ = n².",
+  "correctOrder": [
+    "2, 4, 6, 8, 10, ...",
+    "3, 9, 27, 81, ...",
+    "1, 1, 2, 3, 5, 8, ...",
+    "1, 4, 9, 16, 25, ...",
+    "5, 10, 20, 40, ...",
+    "100, 90, 80, 70, ..."
+  ]
+}
+```
+
+### Calculadora de Séries
+
+```matching
+{
+  "question": "Calcule a soma usando a fórmula adequada:",
+  "pairs": [
+    {"left": "1 + 2 + 3 + ... + 20", "right": "210 (fórmula: 20×21/2)"},
+    {"left": "1 + 3 + 9 + 27 + 81", "right": "121 (geométrica: (3⁵-1)/(3-1))"},
+    {"left": "1 + 1/2 + 1/4 + 1/8 + ... (∞)", "right": "2 (infinita: 1/(1-1/2))"},
+    {"left": "2² + 4² + 6² + ... + 10²", "right": "220 (4×(1+4+9+16+25))"}
+  ],
+  "explanation": "Soma de inteiros: n(n+1)/2. Série geométrica finita: a₁(qⁿ-1)/(q-1). Série geométrica infinita: a₁/(1-q) quando |q|<1."
+}
+```
 
 ---
 
@@ -212,7 +405,7 @@ Uma série converge se a soma parcial tende a um limite finito.
   "correct": 1,
   "explanation": "S = (2⁹ - 1)/(2 - 1) = 511."
 }
-```text
+```
 
 ```question
 {
@@ -244,7 +437,7 @@ Uma série converge se a soma parcial tende a um limite finito.
   "correct": 1,
   "explanation": "Madhava descobriu que π/4 = 1 - 1/3 + 1/5 - 1/7 + ... séculos antes de Leibniz."
 }
-```text
+```
 
 ```question
 {

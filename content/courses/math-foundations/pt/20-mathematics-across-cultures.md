@@ -14,7 +14,7 @@ difficulty: "beginner"
 
 ## Uma Jornada Global
 
-Do Osso de Ishango na África (20.000 a.C.) à ciência da computação moderna, a matemática foi um esforço humano compartilhado. Ao estudar contribuições diversas, ganhamos uma compreensão mais rica deste belo assunto.
+Do Osso de Ishángo na África (20.000 a.C.) à ciência da computação moderna, a matemática foi um esforço humano compartilhádo. Ao estudar contribuições diversas, ganhámos uma compreensão mais rica deste belo assunto.
 
 > [!NOTE]
 > A matemática não pertence a uma cultura — é uma conquista da humanidade.
@@ -65,7 +65,7 @@ Ao final desta lição, você será capaz de:
 
 | Contribuição | Cultura | Matemático |
 |--------------|---------|------------|
-| Séries infinitas | Índia | Madhava |
+| Séries infinitas | Índia | Madháva |
 | Cálculo moderno | Europa | Newton, Leibniz |
 | Rigorização | Europa | Weierstrass |
 
@@ -75,7 +75,7 @@ Ao final desta lição, você será capaz de:
 
 ### Contribuições Africanas
 
-- **Osso de Ishango** (20.000 a.C.): Primeira contagem registrada
+- **Osso de Ishángo** (20.000 a.C.): Primeira contagem registrada
 - **Jogos de areia:** Pensamento combinatório
 - **Arquitetura:** Geometria aplicada
 
@@ -83,7 +83,7 @@ Ao final desta lição, você será capaz de:
 
 - **Índia:** Zero, sistema decimal, trigonometria, cálculo
 - **China:** Matrizes, métodos algorítmicos, Pascal triangle
-- **Japão:** Sangi (contagem com hastes),喜多孝平
+- **Japão:** Sangi (contagem com hástes)
 
 ### Contribuições Americanas
 
@@ -93,9 +93,9 @@ Ao final desta lição, você será capaz de:
 
 ### Matemática Global Moderna
 
-- **Terence Tao** (Austrália/China): Análise harmônica
-- **Maryam Mirzakhani** (Irã): Geometria hiperbólica
-- **Akshay Venkatesh** (Índia/Austrália): Teoria dos números
+- **Terence Tao** (Austrália/China): Análise hármônica
+- **Maryam Mirzakháni** (Irã): Geometria hiperbólica
+- **Aksháy Venkatesh** (Índia/Austrália): Teoria dos números
 - **Artur Avila** (Brasil): Teoria dinâmica
 
 ---
@@ -117,7 +117,7 @@ Ao final desta lição, você será capaz de:
 ### Carreiras em Matemática
 
 - **Pesquisa:** Universidades, institutos
-- **Indústria:** Tecnologia, finanças, engenharia
+- **Indústria:** Tecnologia, finanças, engenhária
 - **Educação:** Ensino e divulgação
 - **Consultoria:** Análise de dados, modelagem
 
@@ -138,15 +138,15 @@ Ao final desta lição, você será capaz de:
   ],
   "explanation": "Cada cultura contribuiu de forma única para a matemática global."
 }
-```text
+```
 
 ### Explorador de Carreiras
 
 ```matching
 {
-  "question": "Que habilidades matemáticas são usadas em cada área?",
+  "question": "Que hábilidades matemáticas são usadas em cada área?",
   "pairs": [
-    {"left": "Engenharia", "right": "Cálculo, álgebra linear"},
+    {"left": "Engenhária", "right": "Cálculo, álgebra linear"},
     {"left": "Ciência da Computação", "right": "Lógica, combinatória, grafos"},
     {"left": "Finanças", "right": "Estatística, probabilidade"},
     {"left": "Medicina", "right": "Estatística, modelagem"}
@@ -159,15 +159,15 @@ Ao final desta lição, você será capaz de:
 
 ```matching
 {
-  "question": "Escolha um projeto para sintetizar o curso:",
+  "question": "Escolhá um projeto para sintetizar o curso:",
   "pairs": [
     {"left": "Pesquisar matemático não-ocidental", "right": "Pesquisa e apresentação"},
-    {"left": "Criar linha do tempo de descobertas", "right": "Visualização histórica"},
+    {"left": "Criar linhá do tempo de descobertas", "right": "Visualização histórica"},
     {"left": "Ensinar lição para alunos mais novos", "right": "Divulgação"}
   ],
-  "explanation": "Projetos finais consolidam o aprendizado e desenvolvem habilidades."
+  "explanation": "Projetos finais consolidam o aprendizado e desenvolvem hábilidades."
 }
-```text
+```
 
 ---
 
@@ -186,6 +186,154 @@ Ao final desta lição, você será capaz de:
 - Oportunidades globais
 
 ---
+## 5. Revisão Abrangente do Curso
+
+### Problema 1 — Conversão de Numeração (Aula 1)
+
+**Problema:** Converta o número decimal 245 para binário e para o sistema sexagesimal babilônico.
+
+**Solucao Binaria:**
+- 245 / 2 = 122 resto **1**
+- 122 / 2 = 61 resto **0**
+- 61 / 2 = 30 resto **1**
+- 30 / 2 = 15 resto **0**
+- 15 / 2 = 7 resto **1**
+- 7 / 2 = 3 resto **1**
+- 3 / 2 = 1 resto **1**
+- 1 / 2 = 0 resto **1**
+
+$$245_{10} = 11110101_2$$
+
+**Solucao Sexagesimal:**
+- 245 / 60 = 4 resto **5**
+- 4 / 60 = 0 resto **4**
+
+$$245_{10} = 4 \times 60 + 5 = 4{,}5_{60}$$
+
+---
+
+### Problema 2 — Algebra (Aula 5)
+
+**Problema:** Resolva o sistema:
+$$\begin{cases} 2x + 3y = 12 \\ x - y = 1 \end{cases}$$
+
+**Solução:**
+Da segunda equacao: $x = y + 1$
+
+Substitua na primeira:
+$$2(y+1) + 3y = 12 \Rightarrow 2y + 2 + 3y = 12 \Rightarrow 5y = 10 \Rightarrow y = 2$$
+
+$$x = 2 + 1 = 3$$
+
+**Verificação:** $2(3) + 3(2) = 6 + 6 = 12$ e $3 - 2 = 1$
+
+---
+
+### Problema 3 — Geometria (Aula 9)
+
+**Problema:** Um triangulo retangulo tem catetos de comprimento 5 cm e 12 cm. Encontre a hipotenusa e a area.
+
+**Solução:**
+$$c = \sqrt{a^2 + b^2} = \sqrt{25 + 144} = \sqrt{169} = 13 \text{ cm}$$
+
+$$A = \frac{a \times b}{2} = \frac{5 \times 12}{2} = 30 \text{ cm}^2$$
+
+---
+
+### Problema 4 — Estatistica (Aula 13)
+
+**Problema:** Os pesos (em kg) de 6 alunos sao: 45, 52, 48, 55, 50, 47. Calcule a media, mediana e variancia.
+
+**Solução:**
+- **Media:** $\bar{x} = \frac{45+52+48+55+50+47}{6} = \frac{297}{6} = 49{,}5$ kg
+- **Mediana:** Ordenar: 45, 47, 48, 50, 52, 55. Media dos dois centrais: $\frac{48+50}{2} = 49$ kg
+- **Variância:** $s^2 = \frac{(45-49{,}5)^2 + (52-49{,}5)^2 + \cdots}{6-1} = \frac{20{,}25 + 6{,}25 + 2{,}25 + 30{,}25 + 0{,}25 + 6{,}25}{5} = \frac{65{,}5}{5} = 13{,}1$ kg²
+
+---
+
+### Problema 5 — Probabilidade (Aula 15)
+
+**Problema:** Em um saco há 5 bolas vermelhás, 3 azuis e 2 brancas. Qual é a probabilidade de sortear 2 bolas vermelhás consecutivas **sem reposicao**?
+
+**Solução:**
+$$P(\text{2 vermelhás}) = P(\text{1a vermelhá}) \times P(\text{2a vermelhá | 1a vermelhá})$$
+
+$$= \frac{5}{10} \times \frac{4}{9} = \frac{20}{90} = \frac{2}{9} \approx 0{,}222$$
+
+---
+
+## 6. Perfis de Matemáticos Modernos
+
+### Maryam Mirzakháni (1977–2017) — Iran
+
+Maryam Mirzakháni foi a **primeira mulher** a receber a Medalhá Fields (2014), o premio mais importante da matematica. Nascida em Teera, Iran, ela se formou na Universidade Shárif e fez seu doutorado na Harvard.
+
+**Contribuições principais:**
+- **Geometria hiperbólica:** Estudou superficies de Riemann e seu espaco de moduli
+- **Teoria dos dinamismos:** Provas elegantissimas sobre geodesicas em superficies
+- **Teoria dos grupos:** Trabalho sobre subgrupos de grupos de mapping class
+
+Mirzakháni trabalhou na Universidade Stanford e mostrou que a matematica não tem genero ou fronteiras. Sua pesquisa conectou geometria, topologia e dinamica.
+
+> [!NOTE]
+> Mirzakháni dizia: "A belleza da matematica reside em suas conexoes. Cada campo se alimenta dos outros."
+
+---
+
+### Aksháy Venkatesh (n. 1981) — Índia/Austrália
+
+Aksháy Venkatesh recebeu a **Medalhá Fields** em 2018, tornando-se o segundo indiano a receber este premio (após Manjul Bhárgava).
+
+**Contribuições principais:**
+- **Teoria dos números:** Trabalho sobre equacoes diofantinas e formas algebricas
+- **Representacoes automorfas:** Conexões entre teoria dos números e analise
+- **Homologia aritmetica:** Novas tecnicas para estudar variedades
+
+Nascido em Hyderabad, India, Venkatesh se mudou para a Austrália jovem. Estudou na Universidade de Princeton e lecionou em Stanford e Princeton.
+
+---
+
+### Eduardo Knipling (n. 1987) — Brasil
+
+Eduardo Knipling e um matematico brasileiro que se destacou em **combinatória e teoria dos grafos**. Formado pela Universidade de Sao Paulo, ele pesquisa problemas de otimizacao em grafos.
+
+**Contribuições principais:**
+- **Coloração de grafos:** Algoritmos eficientes para coloracao restrita
+- **Grafos de intersecao:** Modelagem de problemas de cobertura
+- **Aplicações em ciencia da computacao:** Otimizacao em redes e algoritmos
+
+Knipling demonstra que o Brasil tem matematicos de nivel mundial e que a pesquisa matematica brasileira cresce a cada ano.
+
+> [!NOTE]
+> Estes matematicos mostram que a matematica moderna e verdadeiramente global — do Iran a India, do Brasil a todo o mundo.
+
+---
+
+## 7. Exercicio Interativo: Matemáticos e Suas Contribuições
+
+### Arraste os Matemáticos para suas Contribuições
+
+```dragdrop
+{
+  "question": "Arraste cada matematico para a sua contribuicao principal:",
+  "items": [
+    "Maryam Mirzakháni",
+    "Aksháy Venkatesh",
+    "Eduardo Knipling",
+    "Al-Khwarizmi",
+    "Madháva"
+  ],
+  "explanation": "Maryam Mirzakháni: geometria hiperbola, Medalhá Fields 2014. Aksháy Venkatesh: teoria dos números, Medalhá Fields 2018. Eduardo Knipling: combinatória e grafos. Al-Khwarizmi: álgebra formal. Madháva: séries infinitas na India medieval.",
+  "correctOrder": [
+    "Maryam Mirzakháni",
+    "Aksháy Venkatesh",
+    "Eduardo Knipling",
+    "Al-Khwarizmi",
+    "Madháva"
+  ]
+}
+```
+
 
 ## Practice Questions
 
@@ -195,13 +343,13 @@ Ao final desta lição, você será capaz de:
   "type": "multiple-choice",
   "question": "Pesquise um matemático de cultura não-ocidental.",
   "options": [
-    "Aryabhata (Índia)",
-    "Gauss (Alemanha)",
+    "Aryabháta (Índia)",
+    "Gauss (Alemanhá)",
     "Euler (Suíça)",
     "Newton (Inglaterra)"
   ],
   "correct": 0,
-  "explanation": "Aryabhata fez contribuições profundas à astronomia e matemática na Índia do século V."
+  "explanation": "Aryabháta fez contribuições profundas à astronomia e matemática na Índia do século V."
 }
 ```
 
@@ -209,7 +357,7 @@ Ao final desta lição, você será capaz de:
 {
   "id": "math-foundations-q102",
   "type": "multiple-choice",
-  "question": "Crie uma linha do tempo de descobertas matemáticas.",
+  "question": "Crie uma linhá do tempo de descobertas matemáticas.",
   "options": [
     "20.000 a.C. → 2024 d.C.",
     "1000 d.C. → 2000 d.C.",
@@ -219,7 +367,7 @@ Ao final desta lição, você será capaz de:
   "correct": 0,
   "explanation": "A matemática tem pelo menos 20.000 anos de história registrada."
 }
-```text
+```
 
 ```question
 {
@@ -251,7 +399,7 @@ Ao final desta lição, você será capaz de:
   "correct": 2,
   "explanation": "Cada conceito tem sua importância. Juntos, formam a matemática que conhecemos."
 }
-```text
+```
 
 ```question
 {

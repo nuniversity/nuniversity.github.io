@@ -130,7 +130,7 @@ Assume que a negação é verdadeira e chega a uma contradição.
   ],
   "explanation": "A implicação P → Q é equivalente a ¬Q → ¬P (contrapositiva)."
 }
-```text
+```
 
 ### Construtor de Provas
 
@@ -158,7 +158,7 @@ Assume que a negação é verdadeira e chega a uma contradição.
   ],
   "explanation": "Estratégias de resolução de problemas aumentam sua eficácia."
 }
-```text
+```
 
 ---
 
@@ -180,6 +180,231 @@ Assume que a negação é verdadeira e chega a uma contradição.
 - Argumentação lógica
 - Interpretação de leis
 - Construção de casos
+
+---
+
+## 5. Exemplos Resolvidos Detalhados
+
+### Prova por Indução — Exemplo Completo
+
+**Problema:** Prove por indução que para todo n ≥ 1:
+
+$$1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2}$$
+
+**Solução passo a passo:**
+
+**Passo 1 — Caso Base (n = 1):**
+
+Lado esquerdo: 1
+Lado direito: 1(1+1)/2 = 2/2 = 1
+
+$$1 = 1 \quad \checkmark$$
+
+O caso base é verdadeiro.
+
+---
+
+**Passo 2 — Hipótese Indutiva:**
+
+Assuma que a fórmula é verdadeira para n = k:
+
+$$1 + 2 + 3 + \ldots + k = \frac{k(k+1)}{2}$$
+
+---
+
+**Passo 3 — Passo Indutivo (provar para n = k + 1):**
+
+Precisamos mostrar que:
+
+$$1 + 2 + 3 + \ldots + k + (k+1) = \frac{(k+1)(k+2)}{2}$$
+
+**Demonstração:**
+
+Começando pelo lado esquerdo, usamos a hipótese indutiva:
+
+$$\underbrace{1 + 2 + \ldots + k}_{\text{hipótese indutiva}} + (k+1) = \frac{k(k+1)}{2} + (k+1)$$
+
+Fatorando (k+1):
+
+$$= (k+1)\left(\frac{k}{2} + 1\right) = (k+1)\left(\frac{k + 2}{2}\right) = \frac{(k+1)(k+2)}{2}$$
+
+$$\text{Isso é exatamente o que queríamos provar!} \quad \checkmark$$
+
+---
+
+**Conclusão:** Pelo princípio da indução matemática, a fórmula é verdadeira para todo n ≥ 1. □
+
+---
+
+**Problema adicional:** Prove que 2ⁿ > n para todo n ≥ 1.
+
+**Caso base (n = 1):** 2¹ = 2 > 1 ✓
+
+**Hipótese indutiva:** Assuma que 2ᵏ > k.
+
+**Passo indutivo:** Precisamos mostrar que 2ᵏ⁺¹ > k + 1.
+
+$$2^{k+1} = 2 \times 2^k > 2k \quad \text{(pela hipótese indutiva)}$$
+
+Como k ≥ 1, temos 2k ≥ k + 1. Portanto 2ᵏ⁺¹ > k + 1. □
+
+---
+
+### Mais Exemplos de Tabelas Verdade
+
+**Exemplo 1:** Construa a tabela verdade para (P → Q) ∧ (Q → P).
+
+| P | Q | P → Q | Q → P | (P → Q) ∧ (Q → P) |
+|---|---|-------|-------|---------------------|
+| V | V | V | V | V |
+| V | F | F | V | F |
+| F | V | V | F | F |
+| F | F | V | V | V |
+
+> **Observação:** (P → Q) ∧ (Q → P) é equivalente a P ↔ Q (bicondicional — "se e somente se").
+
+---
+
+**Exemplo 2:** Construa a tabela verdade para ¬(P ∧ Q) vs. ¬P ∨ ¬Q.
+
+| P | Q | P ∧ Q | ¬(P ∧ Q) | ¬P | ¬Q | ¬P ∨ ¬Q |
+|---|---|-------|-----------|----|----|----------|
+| V | V | V | F | F | F | F |
+| V | F | F | V | F | V | V |
+| F | V | F | V | V | F | V |
+| F | F | F | V | V | V | V |
+
+> **Observação:** ¬(P ∧ Q) = ¬P ∨ ¬Q. Esta é a **Lei de De Morgan** — uma das leis fundamentais da lógica.
+
+---
+
+**Exemplo 3:** Qual é a negação de "Se chove, então levo guarda-chuva"?
+
+A proposição original é P → Q. Sua negação é:
+
+$$\neg(P \rightarrow Q) = P \wedge \neg Q$$
+
+Em palavras: "Chove E eu NÃO levo guarda-chuva".
+
+| P (Chove) | Q (Levo guarda-chuva) | P → Q | ¬(P → Q) = P ∧ ¬Q |
+|---|---|---|---|
+| V | V | V | F |
+| V | F | F | V ← única linha onde a negação é verdadeira |
+| F | V | V | F |
+| F | F | V | F |
+
+> **Lembre-se:** A negação de "se...então" é "sim...e não". Não é "se não...então não" (isso seria a recíproca).
+
+---
+
+### Método de Pólya Aplicado a um Problema Específico
+
+**Problema:** Um fazendeiro tem 100 metros de cerca para cercar um terreno retangular. Quais dimensões maximizam a área?
+
+**Aplicação do método de Pólya:**
+
+**Passo 1 — Compreender o problema:**
+
+- Dados: perímetro fixo de 100 m
+- Incógnitas: comprimento (c) e largura (l)
+- Condição: 2c + 2l = 100, ou c + l = 50
+- Objetivo: maximizar A = c × l
+
+**Passo 2 — Ideias de plano:**
+
+- Podemos expressar uma variável em função da outra: c = 50 - l
+- Substituir na fórmula da área: A = (50 - l) × l = 50l - l²
+- Isso é uma função quadrática! O vértice dá o máximo.
+
+**Passo 3 — Executar o plano:**
+
+$$A(l) = 50l - l^2 = -l^2 + 50l$$
+
+Encontrar o vértice (a = -1, b = 50):
+
+$$l_v = -\frac{50}{2(-1)} = 25 \text{ m}$$
+
+$$c = 50 - 25 = 25 \text{ m}$$
+
+$$A_{\text{máx}} = 25 \times 25 = 625 \text{ m}^2$$
+
+**Passo 4 — Examinar e verificar:**
+
+- O perímetro é 2(25) + 2(25) = 100 m ✓
+- Se l = 20, c = 30, A = 600 m² < 625 m² ✓
+- Se l = 10, c = 40, A = 400 m² < 625 m² ✓
+
+> **Conclusão:** O retângulo de maior área com perímetro fixo é sempre um quadrado!
+
+---
+
+### Erros Comuns em Raciocínio Matemático
+
+> [!WARNING]
+> **Erro 1: Afirmar o consequente.** De "Se P então Q" e Q ser verdade, NÃO se pode concluir P. Exemplo: "Se chove, o chão fica molhado. O chão está molhado. Logo choveu." — Poderia ser uma mangueira!
+
+> [!WARNING]
+> **Erro 2: Negar o antecedente.** De "Se P então Q" e ¬P, NÃO se pode concluir ¬Q. Exemplo: "Se estudo, passo na prova. Não estudei. Logo não passei." — Poderia ter passado por sorte!
+
+> [!WARNING]
+> **Erro 3: Indução incompleta.** Provar apenas para n = 1, 2, 3 não é suficiente. É obrigatório o passo indutivo: assumir para k e provar para k+1.
+
+> [!WARNING]
+> **Erro 4: Generalização apressada.** Observar um padrão em poucos casos não prova que ele continua para todos. O padrão pode falhar em casos maiores.
+
+---
+
+## Exercício Interativo: Tipos de Prova
+
+```dragdrop
+{
+  "question": "Arraste cada descrição para o tipo de prova correto:",
+  "items": [
+    "Assume P e deriva Q diretamente de axiomas",
+    "Assume ¬P e chega a uma contradição",
+    "Prova para n=1 e assume para k para provar k+1",
+    "Examina todos os casos finitos possíveis",
+    "Constrói um exemplo que satisfaz a condição",
+    "Mostra que P implica Q e Q implica P"
+  ],
+  "explanation": "Cada tipo de prova tem uma estratégia diferente: direta usa dedução, contradição assume o oposto, indução usa base + passo, casos separa em situações, construção mostra existência, bicondicional prova ida e volta.",
+  "correctOrder": [
+    "Assume P e deriva Q diretamente de axiomas",
+    "Assume ¬P e chega a uma contradição",
+    "Prova para n=1 e assume para k para provar k+1",
+    "Examina todos os casos finitos possíveis",
+    "Constrói um exemplo que satisfaz a condição",
+    "Mostra que P implica Q e Q implica P"
+  ]
+}
+```
+
+---
+
+## Aplicações no Mundo Real: Estudos de Caso
+
+**Caso 1: Verificação de Software**
+
+Engenheiros de software usam "prova por indução" para verificar que algoritmos funcionam para todos os casos. Por exemplo, provar que um loop `for` de 1 a n processa todos os elementos corretamente:
+
+- Base: funciona para o primeiro elemento
+- Indutiva: se funciona para k elementos, funciona para k+1
+
+**Caso 2: Argumentação Jurídica**
+
+Advogados usam raciocínio dedutivo para construir argumentos:
+
+- Premissa 1: Todo contrato válido requer consentimento
+- Premissa 2: Este contrato não teve consentimento
+- Conclusão: Este contrato não é válido
+
+Identificar falácias como "afirmar o consequente" é crucial para refutar argumentos adversários.
+
+**Caso 3: Pensamento Crítico no Dia a Dia**
+
+"Se uma pessoa é inteligente, estuda muito. João não estuda muito. Logo João não é inteligente."
+
+Isso é o **erro de negar o antecedente**. Ser inteligente não depende apenas de estudar — há outros fatores. O raciocínio válido seria: "Se uma pessoa estuda muito, é inteligente. João não é inteligente. Logo João não estuda muito." (Isso também seria inválido — afirma o consequente!)
 
 ---
 
@@ -215,7 +440,7 @@ Assume que a negação é verdadeira e chega a uma contradição.
   "correct": 1,
   "explanation": "Se √2 = a/b irreductível, então a² = 2b², logo a é par; mas então b também seria, contradição."
 }
-```text
+```
 
 ```question
 {
@@ -247,7 +472,7 @@ Assume que a negação é verdadeira e chega a uma contradição.
   "correct": 1,
   "explanation": "Se bola = x, raquete = x + 1. x + (x+1) = 1.10 → 2x = 0.10 → x = $0.05."
 }
-```text
+```
 
 ```question
 {

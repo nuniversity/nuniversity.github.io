@@ -55,12 +55,42 @@ difficulty: "beginner" | "intermediate" | "advanced"
 
 - H1 (`#`) must match the frontmatter `title`.
 - Use `##` for major sections, `###` for subsections.
-- All code blocks must include a language identifier (e.g., ` ```python `, ` ```sql `, ` ```bash `, ` ```text `).
-- **Code blocks with plain text content** (no syntax highlighting needed) must use ` ```text ` identifier.
 
-### 3. Math Formulas
+### 3. Code Block Rules
 
-**IMPORTANT:** Use standard LaTeX notation with `$$` and `$` delimiters for math formulas. Do NOT use ` ```math ` JSON format.
+**CRITICAL:** Opening and closing fences have different rules:
+
+- **Opening fences:** Include a language identifier: ` ```python `, ` ```sql `, ` ```text `, ` ```matching `, etc.
+- **Closing fences:** Must be BARE ` ``` ` with NO text after them. Never ` ```text ` as a closing fence.
+
+```markdown
+# Correct — opening has language, closing is bare:
+```text
+Some plain text content here
+```
+
+# Correct — interactive block:
+```matching
+{ "question": "...", "pairs": [...] }
+```
+
+# WRONG — closing fence has "text" (breaks JSON parsing):
+```matching
+{ "question": "...", "pairs": [...] }
+```text
+
+# WRONG — closing fence has "text" (breaks rendering):
+```text
+Some content
+```text
+```
+
+> [!WARNING]
+> Never use ` ```text ` as a closing fence. This is the #1 cause of "Invalid matching config" and "Invalid question format" JSON errors. The closing fence must always be bare ` ``` `.
+
+### 4. Math Formulas
+
+Use standard LaTeX notation with `$$` and `$` delimiters. Do NOT use ` ```math ` JSON format.
 
 ```markdown
 # Display math (centered, on its own line):
@@ -74,6 +104,18 @@ The formula $a^2 + b^2 = c^2$ is the Pythagorean theorem.
 
 **LaTeX escape rules:** Use single backslashes in `$$` notation (not double like in JSON). Common commands: `\frac{a}{b}`, `\sqrt{x}`, `\int`, `\sum`, `\vec{F}`, `\alpha`, `\beta`.
 
+### 5. Plain Text Code Blocks
+
+For code blocks with plain text content (no syntax highlighting), use ` ```text ` for the OPENING fence:
+
+```markdown
+```text
+||| = 3
+⊏ = 10
+⊏ | = 11
+```
+```
+
 ---
 
 ## Quality Rules
@@ -85,7 +127,6 @@ The formula $a^2 + b^2 = c^2$ is the Pythagorean theorem.
   > Content here.
   ```
 - **Key takeaways** section at the end summarizing the 3-5 most important points.
-- **Code blocks** must always carry a language ID — no bare ` ``` ` fences.
 - Content must be accurate, exam-prepared, and technically precise.
 - Write for learners preparing for professional certifications.
 
@@ -93,7 +134,7 @@ The formula $a^2 + b^2 = c^2$ is the Pythagorean theorem.
 
 ## Interactive Components
 
-The platform supports 7 interactive component types. When generating STEM lessons (Math, Physics, Chemistry, Biology, Engineering), include at least 2 interactive components per lesson.
+The platform supports 6 interactive component types. When generating STEM lessons (Math, Physics, Chemistry, Biology, Engineering), include at least 2 interactive components per lesson.
 
 ### Available Types
 
@@ -119,13 +160,34 @@ The platform supports 7 interactive component types. When generating STEM lesson
 
 ### Syntax
 
-Each component uses a fenced code block with a language identifier and JSON config:
+Each component uses a fenced code block with a language identifier and JSON config. The closing fence MUST be bare ` ``` `:
 
-````
-```{language}
-{ "key": "value" }
+````markdown
+```matching
+{
+  "question": "Match the terms with their definitions",
+  "pairs": [
+    {"left": "Term 1", "right": "Definition 1"},
+    {"left": "Term 2", "right": "Definition 2"}
+  ],
+  "explanation": "Explanation of the correct matches."
+}
 ```
 ````
+
+```markdown
+# Question block example:
+```question
+{
+  "id": "unique-id",
+  "type": "multiple-choice",
+  "question": "What is the capital of France?",
+  "options": ["London", "Berlin", "Paris", "Madrid"],
+  "correct": 2,
+  "explanation": "Paris is the capital of France."
+}
+```
+```
 
 See `references/guide.md` for full JSON schemas and examples.
 
@@ -135,8 +197,27 @@ See `references/guide.md` for full JSON schemas and examples.
 
 - Content is stored per locale: `content/courses/{course-slug}/{lang}/`
 - Supported locales: `en`, `pt`, `es`
+- **Course discovery requires:** A course must have either an `en/` directory OR a locale-specific directory to appear in the course listing. Without `en/`, the course won't appear for English users.
 - When translating, translate the prose but keep code, variable names, and technical identifiers in English.
 - Preserve all YAML frontmatter keys; only translate `title` and `description` values.
+
+---
+
+## GitHub Pages Deployment
+
+If deploying to GitHub Pages:
+
+1. **Add `.nojekyll` file** to the repository root to prevent Jekyll from processing markdown files
+2. **Configure Pages source** to "GitHub Actions" (not "Deploy from a branch")
+3. **For Jinja/Liquid syntax** in content (e.g., dbt courses), wrap code blocks in `{% raw %}...{% endraw %}`:
+   ```markdown
+   {% raw %}
+   ```sql
+   {{ config(materialized='table') }}
+   SELECT * FROM {{ ref('stg_orders') }}
+   ```
+   {% endraw %}
+   ```
 
 ---
 
