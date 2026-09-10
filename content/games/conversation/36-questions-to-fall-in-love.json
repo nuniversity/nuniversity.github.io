@@ -1,0 +1,357 @@
+{
+  "id": "36-questions-to-fall-in-love",
+  "title": "36 Questions to Fall in Love",
+  "description": "A digital adaptation of Arthur Aron's famous 1997 study on interpersonal closeness. Take turns answering 36 progressively intimate questions with a partner or reflect on them solo.",
+  "difficulty": "beginner",
+  "category": "conversation",
+  "sets": [
+    {
+      "id": 1,
+      "name": "Set I",
+      "subtitle": "Warming Up",
+      "description": "These 12 questions are designed to help you begin to relate to each other. They start out less personal and gradually become more meaningful.",
+      "color": "blue",
+      "questions": [
+        {
+          "id": "q1",
+          "number": 1,
+          "text": "Given the choice of anyone in the world, whom would you want as a dinner guest?"
+        },
+        {
+          "id": "q2",
+          "number": 2,
+          "text": "Would you like to be famous? In what way?"
+        },
+        {
+          "id": "q3",
+          "number": 3,
+          "text": "Before making a telephone call, do you ever rehearse what you are going to say? Why?"
+        },
+        {
+          "id": "q4",
+          "number": 4,
+          "text": "What would constitute a \"perfect\" day for you?"
+        },
+        {
+          "id": "q5",
+          "number": 5,
+          "text": "When did you last sing to yourself? To someone else?"
+        },
+        {
+          "id": "q6",
+          "number": 6,
+          "text": "If you were able to live to the age of 90 and retain either the mind or body of a 30-year-old for the last 60 years of your life, which would you want?"
+        },
+        {
+          "id": "q7",
+          "number": 7,
+          "text": "Do you have a secret hunch about how you will die?"
+        },
+        {
+          "id": "q8",
+          "number": 8,
+          "text": "Name three things you and your partner appear to have in common."
+        },
+        {
+          "id": "q9",
+          "number": 9,
+          "text": "For what in your life do you feel most grateful?"
+        },
+        {
+          "id": "q10",
+          "number": 10,
+          "text": "If you could change anything about the way you were raised, what would it be?"
+        },
+        {
+          "id": "q11",
+          "number": 11,
+          "text": "Take four minutes and tell your partner your life story in as much detail as possible."
+        },
+        {
+          "id": "q12",
+          "number": 12,
+          "text": "If you could wake up tomorrow having gained any one quality or ability, what would it be?"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Set II",
+      "subtitle": "Going Deeper",
+      "description": "These 12 questions explore inner experiences, feelings, and memories. They require more personal disclosure and vulnerability.",
+      "color": "purple",
+      "questions": [
+        {
+          "id": "q13",
+          "number": 13,
+          "text": "If a crystal ball could tell you the truth about yourself, your life, the future, or anything else, what would you want to know?"
+        },
+        {
+          "id": "q14",
+          "number": 14,
+          "text": "Is there something that you've dreamed of doing for a long time? Why haven't you done it?"
+        },
+        {
+          "id": "q15",
+          "number": 15,
+          "text": "What is the greatest accomplishment of your life?"
+        },
+        {
+          "id": "q16",
+          "number": 16,
+          "text": "What do you value most in a friendship?"
+        },
+        {
+          "id": "q17",
+          "number": 17,
+          "text": "What is your most treasured memory?"
+        },
+        {
+          "id": "q18",
+          "number": 18,
+          "text": "What is your most terrible memory?"
+        },
+        {
+          "id": "q19",
+          "number": 19,
+          "text": "If you knew that in one year you would die suddenly, would you change anything about the way you are now living? Why?"
+        },
+        {
+          "id": "q20",
+          "number": 20,
+          "text": "What does friendship mean to you?"
+        },
+        {
+          "id": "q21",
+          "number": 21,
+          "text": "What roles do love and affection play in your life?"
+        },
+        {
+          "id": "q22",
+          "number": 22,
+          "text": "Alternate sharing something you consider a positive characteristic of your partner. Share a total of five items."
+        },
+        {
+          "id": "q23",
+          "number": 23,
+          "text": "How close and warm is your family? Do you feel your childhood was happier than most other people's?"
+        },
+        {
+          "id": "q24",
+          "number": 24,
+          "text": "How do you feel about your relationship with your mother?"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Set III",
+      "subtitle": "Closest of All",
+      "description": "These final 12 questions require the deepest level of vulnerability. They are designed to create the most profound closeness between two people.",
+      "color": "rose",
+      "questions": [
+        {
+          "id": "q25",
+          "number": 25,
+          "text": "Make three true \"we\" statements each. For instance, \"We are both in this room feeling...\""
+        },
+        {
+          "id": "q26",
+          "number": 26,
+          "text": "Complete this sentence: \"I wish I had someone with whom I could share...\""
+        },
+        {
+          "id": "q27",
+          "number": 27,
+          "text": "If you were going to become a close friend with your partner, please share what would be important for him or her to know."
+        },
+        {
+          "id": "q28",
+          "number": 28,
+          "text": "Tell your partner what you like about them; be very honest this time, saying things that you might not say to someone you've just met."
+        },
+        {
+          "id": "q29",
+          "number": 29,
+          "text": "Share with your partner an embarrassing moment in your life."
+        },
+        {
+          "id": "q30",
+          "number": 30,
+          "text": "When did you last cry in front of another person? By yourself?"
+        },
+        {
+          "id": "q31",
+          "number": 31,
+          "text": "Tell your partner something that you like about them already."
+        },
+        {
+          "id": "q32",
+          "number": 32,
+          "text": "What, if anything, is too serious to be joked about?"
+        },
+        {
+          "id": "q33",
+          "number": 33,
+          "text": "If you were to die this evening with no opportunity to communicate with anyone, what would you most regret not having told someone? Why haven't you told them yet?"
+        },
+        {
+          "id": "q34",
+          "number": 34,
+          "text": "Your house, containing everything you own, catches fire. After saving your loved ones and pets, you have time to safely make a final dash to save any one item. What would it be? Why?"
+        },
+        {
+          "id": "q35",
+          "number": 35,
+          "text": "Of all the people in your family, whose death would you find most disturbing? Why?"
+        },
+        {
+          "id": "q36",
+          "number": 36,
+          "text": "Share a personal problem and ask your partner's advice on how he or she might handle it. Also, ask your partner to reflect back to you how you seem to be feeling about the problem you have chosen."
+        }
+      ]
+    }
+  ],
+  "finalExercise": {
+    "title": "Look Into Each Other's Eyes",
+    "description": "Look into each other's eyes in silence for 4 minutes. This exercise was popularized by Mandy Len Catron and has become a beloved part of the experience.",
+    "durationSeconds": 240
+  },
+  "locales": {
+    "pt": {
+      "title": "36 Perguntas para Se Apaixonar",
+      "description": "Uma adaptação digital do famoso estudo de 1997 de Arthur Aron sobre proximidade interpessoal. Alternem respondendo 36 perguntas intimistas com um parceiro ou reflitam sozinhos.",
+      "sets": [
+        {
+          "name": "Conjunto I",
+          "subtitle": "Aquecendo",
+          "description": "Essas 12 perguntas foram criadas para ajudá-los a começar a se conectar. Elas começam menos pessoais e gradualmente se tornam mais significativas.",
+          "questions": [
+            { "text": "Dada a escolha de qualquer pessoa no mundo, quem você gostaria de ter como convidado para um jantar?" },
+            { "text": "Você gostaria de ser famoso? De que maneira?" },
+            { "text": "Antes de fazer uma ligação telefônica, você já ensaiou o que vai dizer? Por quê?" },
+            { "text": "O que constituiria um dia \"perfeito\" para você?" },
+            { "text": "Quando foi a última vez que você cantou para si mesmo? Para outra pessoa?" },
+            { "text": "Se você soubesse que vai viver até os 90 anos e pudesse escolher entre manter o corpo ou a mente que você tinha aos 30 anos pelos últimos 60 anos da sua vida, qual dos dois você escolheria?" },
+            { "text": "Você tem algum pressentimento secreto sobre como vai morrer?" },
+            { "text": "Name três coisas que você e seu parceiro parecem ter em comum." },
+            { "text": "Por que na sua vida você se sente mais grato?" },
+            { "text": "Se você pudesse mudar qualquer coisa sobre a forma como foi criado, o que seria?" },
+            { "text": "Leve quatro minutos e conte a seu parceiro a história da sua vida com o máximo de detalhes possível." },
+            { "text": "Se você pudesse acordar amanhã tendo ganho qualquer qualidade ou habilidade, o que seria?" }
+          ]
+        },
+        {
+          "name": "Conjunto II",
+          "subtitle": "Profundizando",
+          "description": "Essas 12 perguntas exploram experiências internas, sentimentos e memórias. Elas exigem mais vulnerabilidade e exposição pessoal.",
+          "questions": [
+            { "text": "Se uma bola de cristal pudesse contar a verdade sobre você, sua vida, o futuro ou qualquer outra coisa, o que você queria saber?" },
+            { "text": "Existe algo que você sonha em fazer há muito tempo? Por que não fez ainda?" },
+            { "text": "Qual é a maior conquista da sua vida?" },
+            { "text": "O que você mais valoriza em uma amizade?" },
+            { "text": "Qual é sua memória mais preciosa?" },
+            { "text": "Qual é sua memória mais terrível?" },
+            { "text": "Se você soubesse que no próximo ano morreria repentinamente, mudaria alguma coisa na forma como vive atualmente? Por quê?" },
+            { "text": "O que a amizade significa para você?" },
+            { "text": "Que papéis o amor e o carinho desempenham na sua vida?" },
+            { "text": "Alternem compartilhando algo que consideram uma característica positiva do seu parceiro. Compartilhem um total de cinco itens." },
+            { "text": "Quão próxima e calorosa é sua família? Você sente que sua infância foi mais feliz que a da maioria das pessoas?" },
+            { "text": "Como você se sente sobre seu relacionamento com sua mãe?" }
+          ]
+        },
+        {
+          "name": "Conjunto III",
+          "subtitle": "Mais Próximos do Que Nunca",
+          "description": "Essas últimas 12 perguntas exigem o nível mais profundo de vulnerabilidade. Elas foram projetadas para criar a conexão mais profunda entre duas pessoas.",
+          "questions": [
+            { "text": "Façam três afirmações verdadeiras com \"nós\" cada. Por exemplo, \"Nós dois estamos nesta sala sentindo...\"" },
+            { "text": "Complete esta frase: \"Eu gostaria de ter alguém com quem pudesse compartilhar...\"" },
+            { "text": "Se você fosse se tornar um amigo próximo do seu parceiro, compartilhe o que seria importante que ele ou ela soubesse." },
+            { "text": "Diga ao seu parceiro o que você gosta nele; seja muito honesto desta vez, dizendo coisas que você não diria a alguém que acabou de conhecer." },
+            { "text": "Compartilhe com seu parceiro um momento embaraçoso da sua vida." },
+            { "text": "Quando foi a última vez que você chorou na frente de outra pessoa? Sozinho?" },
+            { "text": "Diga ao seu parceiro algo que você já gosta nele." },
+            { "text": "O que, se algo, é sério demais para ser alvo de piadas?" },
+            { "text": "Se você fosse morrer esta noite sem a oportunidade de se comunicar com qualquer pessoa, o que você mais lamentaria não ter dito a alguém? Por que ainda não disse?" },
+            { "text": "Sua casa, contendo tudo que você possui, pega fogo. Depois de salvar seus entes queridos e animais de estimação, você tem tempo para fazer uma última corrida para salvar um único item. O que seria? Por quê?" },
+            { "text": "De todas as pessoas da sua família, a morte de quem seria a mais perturbadora? Por quê?" },
+            { "text": "Compartilhe um problema pessoal e peça o conselho do seu parceiro sobre como ele ou ela poderia lidar com isso. Além disso, peça ao seu parceiro que reflita como você parece estar se sentindo sobre o problema que escolheu." }
+          ]
+        }
+      ],
+      "finalExercise": {
+        "title": "Olhem nos Olhos um do Outro",
+        "description": "Olhem nos olhos um do outro em silêncio por 4 minutos. Este exercício foi popularizado por Mandy Len Catron e se tornou uma parte querida da experiência."
+      }
+    },
+    "es": {
+      "title": "36 Preguntas para Enamorarse",
+      "description": "Una adaptación digital del famoso estudio de 1997 de Arthur Aron sobre la cercanía interpersonal. Alternen respondiendo 36 preguntas íntimas con una pareja o reflexionen sobre ellas en solitario.",
+      "sets": [
+        {
+          "name": "Conjunto I",
+          "subtitle": "Calentando",
+          "description": "Estas 12 preguntas están diseñadas para ayudarlos a comenzar a conectarse. Comienzan menos personales y gradualmente se vuelven más significativas.",
+          "questions": [
+            { "text": "Dada la elección de cualquier persona en el mundo, ¿a quién te gustaría tener como invitado a cenar?" },
+            { "text": "¿Te gustaría ser famoso? ¿De qué manera?" },
+            { "text": "Antes de hacer una llamada telefónica, ¿alguna vez ensayas lo que vas a decir? ¿Por qué?" },
+            { "text": "¿Qué constituiría un día \"perfecto\" para ti?" },
+            { "text": "¿Cuándo fue la última vez que cantaste para ti mismo? ¿Para otra persona?" },
+            { "text": "Si pudieras vivir hasta los 90 años y conservar ya sea la mente o el cuerpo de un jovencito de 30 años durante los últimos 60 años de tu vida, ¿qué elegirías?" },
+            { "text": "¿Tienes algún presentimiento secreto sobre cómo morirás?" },
+            { "text": "Nombra tres cosas que tú y tu pareja parecen tener en común." },
+            { "text": "¿Por qué en tu vida te sientes más agradecido?" },
+            { "text": "Si pudieras cambiar cualquier cosa sobre la forma en que te criaron, ¿qué sería?" },
+            { "text": "Tómate cuatro minutos y cuéntale a tu pareja la historia de tu vida con el mayor detalle posible." },
+            { "text": "Si pudieras despertar mañana habiendo ganado cualquier cualidad o habilidad, ¿qué sería?" }
+          ]
+        },
+        {
+          "name": "Conjunto II",
+          "subtitle": "Profundizando",
+          "description": "Estas 12 preguntas exploran experiencias internas, sentimientos y recuerdos. Requieren más vulnerabilidad y exposición personal.",
+          "questions": [
+            { "text": "Si una bola de cristal pudiera decirte la verdad sobre ti, tu vida, el futuro o cualquier otra cosa, ¿qué querrías saber?" },
+            { "text": "¿Hay algo que sueñas con hacer desde hace mucho tiempo? ¿Por qué no lo has hecho?" },
+            { "text": "¿Cuál es el mayor logro de tu vida?" },
+            { "text": "¿Qué valoras más en una amistad?" },
+            { "text": "¿Cuál es tu recuerdo más preciado?" },
+            { "text": "¿Cuál es tu recuerdo más terrible?" },
+            { "text": "Si supieras que en un año morirías repentinamente, ¿cambiarías algo sobre la forma en que vives actualmente? ¿Por qué?" },
+            { "text": "¿Qué significa la amistad para ti?" },
+            { "text": "¿Qué papeles juegan el amor y el cariño en tu vida?" },
+            { "text": "Alternen compartiendo algo que consideren una característica positiva de su pareja. Compartan un total de cinco elementos." },
+            { "text": "¿Qué tan cercana y cálida es tu familia? ¿Sientes que tu infancia fue más feliz que la de la mayoría de las personas?" },
+            { "text": "¿Cómo te sientes sobre tu relación con tu madre?" }
+          ]
+        },
+        {
+          "name": "Conjunto III",
+          "subtitle": "Más Cercanos Que Nunca",
+          "description": "Estas últimas 12 preguntas requieren el nivel más profundo de vulnerabilidad. Están diseñadas para crear la conexión más profunda entre dos personas.",
+          "questions": [
+            { "text": "Hagan tres declaraciones verdaderas con \"nosotros\" cada uno. Por ejemplo, \"Los dos estamos en esta sala sintiendo...\"" },
+            { "text": "Completa esta frase: \"Desearía tener a alguien con quien pudiera compartir...\"" },
+            { "text": "Si fueras a ser un amigo cercano de tu pareja, comparte lo que sería importante que él o ella supiera." },
+            { "text": "Dile a tu pareja lo que te gusta de ella; sé muy honesto esta vez, diciendo cosas que no le dirías a alguien que acabas de conocer." },
+            { "text": "Comparte con tu pareja un momento vergonzoso de tu vida." },
+            { "text": "¿Cuándo fue la última vez que lloraste frente a otra persona? ¿A solas?" },
+            { "text": "Dile a tu pareja algo que ya te gusta de ella." },
+            { "text": "¿Qué, si algo, es demasiado serio para que sea motivo de bromas?" },
+            { "text": "Si murieras esta noche sin la oportunidad de comunicarte con nadie, ¿qué lamentarías más no haberle dicho a alguien? ¿Por qué no se lo has dicho aún?" },
+            { "text": "Tu casa, conteniendo todo lo que posees, se incendia. Después de salvar a tus seres queridos y mascotas, tienes tiempo para hacer una última carrera para salvar un solo objeto. ¿Cuál sería? ¿Por qué?" },
+            { "text": "De todas las personas de tu familia, ¿la muerte de quién te resultaría más perturbadora? ¿Por qué?" },
+            { "text": "Comparte un problema personal y pide el consejo de tu pareja sobre cómo él o ella podría manejarlo. Además, pide a tu pareja que reflexione sobre cómo pareces estar sintiéndote respecto al problema que elegiste." }
+          ]
+        }
+      ],
+      "finalExercise": {
+        "title": "Miren a los Ojos del Otro",
+        "description": "Mírense a los ojos en silencio durante 4 minutos. Este ejercicio fue popularizado por Mandy Len Catron y se ha convertido en una parte querida de la experiencia."
+      }
+    }
+  }
+}

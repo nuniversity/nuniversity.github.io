@@ -82,13 +82,60 @@ export interface QuizGame {
   questions: QuizQuestion[]
 }
 
+export interface ConversationQuestion {
+  id: string
+  number: number
+  text: string
+}
+
+export interface ConversationSet {
+  id: number
+  name: string
+  subtitle: string
+  description: string
+  color: string
+  questions: ConversationQuestion[]
+}
+
+export interface FinalExercise {
+  title: string
+  description: string
+  durationSeconds: number
+}
+
+export interface ConversationGame {
+  id: string
+  title: string
+  description: string
+  difficulty: 'beginner' | 'intermediate' | 'advanced'
+  category: string
+  sets: ConversationSet[]
+  finalExercise: FinalExercise
+  locales?: {
+    [locale: string]: {
+      title?: string
+      description?: string
+      sets?: Array<{
+        name?: string
+        subtitle?: string
+        description?: string
+        questions?: Array<{ text?: string }>
+      }>
+      finalExercise?: {
+        title?: string
+        description?: string
+      }
+    }
+  }
+}
+
 export interface GameMetadata {
   slug: string
   title: string
   description: string
   category: string
   difficulty: string
-  type: 'vocabulary' | 'grammar' | 'math' | 'coding' | 'physics' | 'logic' | 'fun' | 'quiz' | 'science' | 'puzzles'
+  type: 'vocabulary' | 'grammar' | 'math' | 'coding' | 'physics' | 'logic' | 'fun' | 'quiz' | 'science' | 'puzzles' | 'conversation'
 }
 
 const gamesDirectory = path.join(process.cwd(), 'content/games')
@@ -196,6 +243,50 @@ export async function getGameFile<T>(type: string, slug: string): Promise<T | nu
     return JSON.parse(fileContent)
   } catch (error) {
     console.error(`Error reading ${type} game ${slug}:`, error)
+    return null
+  }
+}
+
+/**
+ * Get conversation game by slug, with locale merging
+ */
+export async function getConversationGame(slug: string, locale?: string): Promise<ConversationGame | null> {
+  try {
+    const filePath = path.join(gamesDirectory, 'conversation', `${slug}.json`)
+    
+    if (!fs.existsSync(filePath)) {
+      return null
+    }
+
+    const fileContent = fs.readFileSync(filePath, 'utf-8')
+    const game: ConversationGame = JSON.parse(fileContent)
+
+    if (locale && game.locales?.[locale]) {
+      const loc = game.locales[locale]
+      if (loc.title) game.title = loc.title
+      if (loc.description) game.description = loc.description
+      if (loc.sets) {
+        for (let i = 0; i < loc.sets.length && i < game.sets.length; i++) {
+          const locSet = loc.sets[i]
+          if (locSet.name) game.sets[i].name = locSet.name
+          if (locSet.subtitle) game.sets[i].subtitle = locSet.subtitle
+          if (locSet.description) game.sets[i].description = locSet.description
+          if (locSet.questions) {
+            for (let j = 0; j < locSet.questions.length && j < game.sets[i].questions.length; j++) {
+              if (locSet.questions[j].text) game.sets[i].questions[j].text = locSet.questions[j].text!
+            }
+          }
+        }
+      }
+      if (loc.finalExercise) {
+        if (loc.finalExercise.title) game.finalExercise.title = loc.finalExercise.title
+        if (loc.finalExercise.description) game.finalExercise.description = loc.finalExercise.description
+      }
+    }
+
+    return game
+  } catch (error) {
+    console.error(`Error reading conversation game ${slug}:`, error)
     return null
   }
 }
