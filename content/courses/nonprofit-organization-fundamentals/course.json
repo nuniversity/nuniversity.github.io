@@ -1,0 +1,25 @@
+{
+  "area": "Non-Profit Organization Fundamentals",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "8 weeks",
+  "icon": "heart",
+  "en": {
+    "title": "Non-Profit Organization Fundamentals",
+    "description": "Comprehensive course covering non-profit organization management, administration, operations, Brazil's rules, best practices, and applied fundamentals for the third sector. Learn how to effectively govern, operate, and sustain non-profit organizations while understanding legal frameworks, financial management, marketing, and impact measurement.",
+    "difficulty": "Intermediate",
+    "duration": "8 Weeks"
+  },
+  "pt": {
+    "title": "Fundamentos de Organizações Não-Governamentais",
+    "description": "Curso abrangente sobre gestão de organizações não governamentais, administração, operações, regras do Brasil, melhores práticas e fundamentos aplicados ao terceiro setor. Aprenda a governar, operar e sustentar organizações não governamentais enquanto compreende quadros legais, gestão financeira, marketing e medição de impacto.",
+    "difficulty": "Intermediário",
+    "duration": "8 Semanas"
+  },
+  "es": {
+    "title": "Fundamentos de Organizaciones Sin Fin de Lucro",
+    "description": "Curso completo sobre la gestión de organizaciones sin fines de lucro, administración, operaciones, reglas de Brasil, mejores prácticas y fundamentos aplicados al tercer sector. Aprenda a gobernar, operar y sostenir organizaciones sin fines de lucro mientras comprende marcos legales, gestión financiera, marketing y medición de impacto.",
+    "difficulty": "Intermedio",
+    "duration": "8 Semanas"
+  }
+}
