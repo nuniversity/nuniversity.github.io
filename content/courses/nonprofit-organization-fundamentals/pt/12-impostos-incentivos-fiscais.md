@@ -1,6 +1,6 @@
 ---
 title: "Impostos e Incentivos Fiscais para ONGs"
-description: "Regime tributário completo das organizações sem fins lucrativos no Brasil: imunidade de impostos, imunidade previdenciária e CEBAS, incentivos ao doador PF e PJ, retenções na fonte, redução linear de 10% da LC 224/2025, transição do IBS/CBS até 2033, obrigações acessórias de 2026, contabilidade da ITG 2002 e governança fiscal, com doze exemplos numéricos resolvidos, árvores de decisão, calendário de prazos, tabela de alíquotas de teste e questões de prática."
+description: "Regime tributário completo das organizações sem fins lucrativos no Brasil: imunidade de impostos, imunidade previdenciária e CEBAS, incentivos ao doador PF e PJ, retenções na fonte, redução linear de 10% da LC 224/2025, transição do IBS/CBS até 2033, obrigações acessórias de 2026, contabilidade da ITG 2002 e governança fiscal, com status e vigência de cada norma da atualização 2025-2026 (EC 132/2023, LC 214/2025, LC 224/2025, LC 227/2026, LC 235/2026, Decreto 12.955/2026 e IN RFB 2.307/2026), jurisprudência do TCU, STJ e TST de 2023-2026, plano de preparação para a CBS de 2027, treze exemplos numéricos resolvidos, árvores de decisão, calendário de prazos, tabela de alíquotas de teste e questões de prática."
 order: 12
 difficulty: "intermediate"
 duration: "120 min"
@@ -54,6 +54,7 @@ Nesta lição você vai:
 - calcular o **IRRF de aluguéis e salários** com a tabela de 2026 e o **redutor da Lei nº 15.270/2025**;
 - distinguir **doação, subvenção e contraprestação** e conferir os **dois tetos** de cada doação empresarial;
 - montar o **checklist de governança fiscal** e o **plano de 90 dias** que sustenta a imunidade;
+- conferir **status e vigência** de cada norma da atualização 2025-2026 e a **jurisprudência de 2023 a 2026** que muda a prática das OSCs;
 - resolver **questões de exame** com o raciocínio passo a passo.
 
 ---
@@ -369,7 +370,7 @@ A **LC nº 224, de 26/12/2025** determinou **redução linear de 10%** de todos 
 | **XII** | CPRB |
 | **XIII** | TIC |
 
-A redação anterior do inciso V citava as **Leis nº 9.790/1999 (OSCIP) e nº 9.637/1998 (OS)**; a **LC nº 235/2026** passou a citar o **art. 15 da Lei nº 9.532/1997** — leitura que os escritórios de advocacia tributária fazem como **preservação da isenção de IRPJ/CSLL/COFINS das OSCs**. A ementa da LC nº 235/2026 versa sobre renúncias de receita por choque de energia, fertilizantes e Copa 2027, mas alterou especificamente esse § 8º, V.
+A redação anterior do inciso V citava as **Leis nº 9.790/1999 (OSCIP) e nº 9.637/1998 (OS)**; o **art. 11 da LC nº 235/2026** acrescentou ao inciso a referência ao **art. 15 da Lei nº 9.532/1997** e aos **arts. 13, IV, e 14, X, da MP nº 2.158-35/2001** — leitura que os escritórios de advocacia tributária fazem como **preservação da isenção de IRPJ/CSLL/COFINS das OSCs**. Atenção ao ponto ainda **não verificado**: a consolidação oficial do texto da LC nº 224/2025 continua a exibir **tanto a redação antiga quanto a nova**, sem revogação expressa da anterior confirmada nesta pesquisa — confira o texto consolidado vigente antes de afirmar em peça. A ementa da LC nº 235/2026 versa sobre renúncias de receita por choque de energia, fertilizantes e Copa 2027, mas alterou especificamente esse § 8º, V.
 
 **Regulamentação:** Decreto nº 12.808, de 29/12/2025; Portaria MF nº 3.278, de 31/12/2025; IN RFB nº 2.305, de 31/12/2025 (alterada pela **IN RFB nº 2.307, de 20/02/2026**, DOU 23/02/2026, Ed. 35, Seção 1, p. 100).
 
@@ -810,6 +811,185 @@ Empresa com **receita bruta de R$ 5.000.000,00** e **lucro operacional de R$ 1.5
 
 ---
 
+## 13. Atualizações 2025-2026: Status e Vigência de Tudo o que Mudou
+
+Entre janeiro de 2025 e agosto de 2026 o Congresso Nacional aprovou **quatro leis complementares** (LC nº 214/2025, LC nº 224/2025, LC nº 227/2026 e LC nº 235/2026) e, no mesmo intervalo, o Executivo publicou decretos, instruções normativas e ato conjunto de execução que **já alteraram essas próprias leis** — cada um deles mexeu em peça diferente do regime das OSCs. O resultado é que **citar "LC nº 214/2025" sozinha já não basta**: todo artigo precisa ser lido na **redação vigente**, com a data de publicação à vista. Esta seção faz exatamente isso — status, vigência e efeito de cada norma, seguidos da jurisprudência de 2023 a 2026 e do plano de preparação para a CBS de 2027, **sem nada além do que foi verificado nas fontes oficiais**.
+
+### 13.1 Status e vigência, norma por norma
+
+| Norma | Publicação | Status em out/2026 | O que mudou para a OSC |
+|---|---|---|---|
+| **EC nº 132/2023** | dez/2023 | **Promulgada e em vigor** | Institui IBS e CBS, marca o fim do PIS/PASEP e da COFINS para **1º/1/2027** e inclui o art. 149-B (IBS/CBS observam o art. 150, VI, sem aplicação do art. 195, § 7º) |
+| **LC nº 214/2025** | 16/01/2025 | **Vigente, já alterada** | Regras gerais do IBS/CBS/IS, imunidade das OSC no art. 9º e transição 2026-2033; **foi alterada pela LC nº 227/2026** — citar sempre na redação atualizada |
+| **LC nº 224/2025** | 26/12/2025 | **Vigente, sob controle de constitucionalidade** | Redução linear de 10% dos incentivos federais (art. 4º); **ADI 7.920** (CNI) pendente no STF e **PLC nº 11/2026** em tramitação |
+| **LC nº 227/2026** | 13/01/2026 (DOU 14/01/2026) | **Vigente** | Institui o **CGIBS**, disciplina o processo administrativo tributário do IBS, a distribuição da arrecadação e normas gerais de ITCMD; **altera a própria LC nº 214/2025** |
+| **IN RFB nº 2.307/2026** | 20/02/2026 (DOU 23/02/2026) | **Vigente** | Substitui o Anexo da IN RFB nº 2.305/2025: **revoga o item 26** (doações de PF/PJ a OSC) e **mantém o item 34** (isenção do art. 15 da Lei nº 9.532/1997) |
+| **Decreto nº 12.955/2026** | 29/04/2026 (DOU 30/04/2026) | **Vigente**, alterado pelo Decreto nº 13.075/2026 (21/07/2026) | Regulamenta a **CBS** (incidência, base, créditos, documentos fiscais e fiscalização) e fixa, no **art. 582**, a CBS de **0,9%** do ano-teste |
+| **IN RFB nº 2.335/2026** | 13/07/2026 | **Vigente** | Aprovou os modelos das declarações das OSCs (dispensa de retenção) e **revogou a IN SRF nº 87/1996** |
+| **LC nº 235/2026** | 27/08/2026 | **Vigente** | **Art. 11:** reescreve o **inciso V do § 8º do art. 4º da LC nº 224/2025**, passando a ressalvar o **art. 15 da Lei nº 9.532/1997** e os **arts. 13, IV, e 14, X, da MP nº 2.158-35/2001** |
+| **Ato Conjunto RFB/CGIBS nº 1/2025** | 23/12/2025 | **Vigente** | Regras do ano-teste: dispensa da taxa de prova **desde que cumpridas as obrigações acessórias** |
+
+> [!NOTE]
+> **Regra de leitura para 2026:** quanto mais recente a norma, mais provável que ela tenha sido **alterada por outra do mesmo ano**. A LC nº 214/2025 (jan/2025) já foi alterada pela LC nº 227/2026 (jan/2026); a LC nº 224/2025 (dez/2025) já foi alterada pela LC nº 235/2026 (ago/2026); o Decreto nº 12.955/2026 (abr/2026) já foi alterado pelo Decreto nº 13.075/2026 (jul/2026). Antes de citar qualquer artigo em parecer, edital ou contrato, abra o **texto consolidado** — não a publicação original.
+
+**Citações que já não valem em 2026:**
+
+| Citação que ainda circula em material antigo | Por que está desatualizada | O que citar em 2026 |
+|---|---|---|
+| "LC nº 214/2025, art. X" (texto original de jan/2025) | A lei foi **alterada pela LC nº 227/2026** | Texto **consolidado** da LC nº 214/2025 |
+| "Inciso V do § 8º do art. 4º da LC nº 224/2025 cita as Leis nº 9.790/1999 e nº 9.637/1998" | O **art. 11 da LC nº 235/2026** reescreveu o inciso | Redação atual, com o **art. 15 da Lei nº 9.532/1997** e os arts. 13, IV, e 14, X, da MP nº 2.158-35/2001 |
+| "A doação de PF/PJ a OSC consta da lista dos benefícios preservados (item 26)" | A **IN RFB nº 2.307/2026 revogou o item 26** | **Item 34** (isenção da própria OSC) + redução linear de 10% sobre a dedução do doador |
+| "Observar a IN SRF nº 87/1996" nas declarações de OSC | **Revogada** pela IN RFB nº 2.335/2026 | Modelos da **IN RFB nº 2.335/2026** |
+| "O decreto que regulamenta a CBS" sem número e sem data | Publicado em 2026 e **já alterado** | **Decreto nº 12.955/2026**, alterado pelo **Decreto nº 13.075/2026** |
+| "A redução de 10% vale desde 1º/1/2026 para todos os tributos" | IRPJ e II desde **01/01/2026**; demais tributos federais desde **01/04/2026** | Datas do regime de efeitos da **LC nº 224/2025** |
+
+### 13.2 Norma × vigência × impacto: o cronograma em uma tabela só
+
+| Data ou período | Norma / evento | Vigência efetiva | Efeito prático para a OSC |
+|---|---|---|---|
+| **2023** | EC nº 132/2023 | Desde a promulgação | Cria IBS e CBS e prevê o **fim do PIS/COFINS em 1º/1/2027** |
+| **16/01/2025** | LC nº 214/2025 | Em vigor (com alterações) | Imunidade das OSC no **art. 9º** e transição **2026-2033**; compras da entidade imune seguem tributadas (art. 9º, § 4º) |
+| **26/12/2025** | LC nº 224/2025 | **IRPJ e II desde 01/01/2026**; demais tributos federais **desde 01/04/2026** | Corte linear de **10%** nos incentivos federais, com exceções do art. 4º, § 8º |
+| **23/12/2025** | Ato Conjunto RFB/CGIBS nº 1/2025 | Ano-teste de 2026 | Obrigações acessórias em dia = **dispensa da taxa de prova** |
+| **13/01/2026** | LC nº 227/2026 | Vigente | Cria o **CGIBS** e altera a LC nº 214/2025 |
+| **20/02/2026** | IN RFB nº 2.307/2026 | Vigente | **Item 26 revogado** (doação do doador no corte) e **item 34 mantido** (isenção da OSC) |
+| **29/04/2026** | Decreto nº 12.955/2026 | Vigente | **CBS regulamentada**; art. 582: 0,9% no ano-teste |
+| **27/08/2026** | LC nº 235/2026, art. 11 | Vigente | Inciso V do § 8º do art. 4º da LC nº 224/2025 reescrito em favor do art. 15 da Lei nº 9.532/1997 |
+| **2026 (01/01 a 31/12)** | Ano-teste | Todo o ano | **CBS 0,9% + IBS 0,1%** destacados e **compensados com o PIS/COFINS** do mesmo período; manter notas e obrigações |
+| **2027-2028** | Transição inicial | A partir de 1º/1/2027 | **Fim do PIS/COFINS**, IPI a zero (exceto ZFM), Imposto Seletivo e CBS/IBS com alíquota reduzida |
+| **2029-2032** | Transição estadual e municipal | Gradual | Redução de ICMS/ISS e ampliação do IBS: **renegociar reajustes e repasses** |
+| **2033** | Plenitude do IBS | A partir de 2033 | Sistema completo, com **teto de 26,5%**: consolidar regime e encerrar simulações |
+
+### 13.3 O ano-teste de 2026 e o fim do PIS/COFINS
+
+O ano-teste tem três características que a gestão precisa decorar:
+
+1. **Duas alíquotas de teste na NF-e:** CBS de **0,9%** (art. 582 do Decreto nº 12.955/2026) e IBS de **0,1%**, destacadas de 1º/1/2026 a 31/12/2026;
+2. **Compensação com o sistema atual:** o destaque é **compensado com o PIS/COFINS apurado no mesmo período** — os dois sistemas convivem na mesma apuração, e não um após o outro;
+3. **Taxa de prova condicionada:** a dispensa da taxa de prova depende do **cumprimento das obrigações acessórias** (Ato Conjunto RFB/CGIBS nº 1/2025, de 23/12/2025).
+
+| Etapa | Período | O que vale | O que a OSC deve fazer |
+|---|---|---|---|
+| **Ano-teste** | 2026 | CBS 0,9% + IBS 0,1% compensados com PIS/COFINS; PIS/COFINS ainda existem | Manter NF-e, ECD, ECF, DCTFWeb e eSocial em dia |
+| **Transição inicial** | 2027-2028 | **Fim do PIS/COFINS**; IPI a zero (exceto ZFM); Imposto Seletivo; CBS/IBS com alíquota reduzida | Simular contratos com e sem contrapartida de patrocínio; migrar regimes |
+| **Transição intermediária** | 2029-2032 | Transição estadual/municipal (ICMS/ISS) e ampliação do IBS | Renegociar cláusulas de reajuste e repasses estaduais/municipais |
+| **Plenitude** | 2033 | Vigência plena do IBS, com teto de 26,5% | Consolidar o regime e encerrar as simulações |
+
+- **🔢 Você sabia?** Em 2026 **não existe "ano sem tributo"**: a CBS de 0,9% e o IBS de 0,1% destacados na NF-e são **compensados com o PIS/COFINS do mesmo período**, de modo que a apuração de 2026 é a única da década em que os dois sistemas aparecem **na mesma tela**. Quem trata 2026 como ano de férias fiscal descobre a conta em 2027, quando a CBS já está sendo cobrada.
+
+> [!WARNING]
+> **"Ano-teste" não significa "ano sem obrigação".** A dispensa da taxa de prova de 2026 **depende do cumprimento das obrigações acessórias** (Ato Conjunto RFB/CGIBS nº 1/2025, de 23/12/2025). Entidade que entregar ECD (30/06), ECF (31/07), DCTFWeb ou eSocial fora do prazo perde justamente o que o ano-teste oferecia — e descobre a penalidade em 2027, quando a CBS já estiver sendo cobrada e não haverá mais "período de teste" a invocar. Confirme com a assessoria a data exata de entrega de cada obrigação na agenda tributária de 2026.
+
+### 13.4 Jurisprudência de 2023 a 2026 que muda a prática da OSC
+
+As decisões abaixo foram verificadas com **número de processo, de acórdão ou de registro**. Tudo o que não tem número identificável ficou de fora desta seção.
+
+| Tribunal e processo | Decisão | Tese / consequência | Medida prática para a OSC |
+|---|---|---|---|
+| **TCU 1355/2025-Plenário** (TC 009.123/2025-3, 18/06/2025) | Cautelar *inaudita altera pars* suspendendo repasses do MTE (R$ 15,77 mi e R$ 4,22 mi) | Fomento **sem metas cronológicas** (arts. 22, II-IV, da Lei nº 13.019/2014), **sem cronograma** (art. 42, III) e em **parcela única** | Assinar apenas com metas, cronograma de desembolso e aderência ao plano de trabalho |
+| **TCU 2753/2025-1ª Câmara** (representação do MPTCU) | Improcedente por não esgotadas as vias administrativas (IN-TCU 98/2024) | Dano apurado pela CGU de **R$ 15.062.152** em **7 de 10** entidades; monitoramento reputado "incipiente" | Publicar recebimento e aplicação de emendas parlamentares |
+| **TCU 6107/2025-1ª Câmara** | Associação **extinta antes da citação**: citação nula, arquivamento da entidade | Sem destinação do patrimônio (**art. 61 do Código Civil**) não há sucessora; **débito e multa ficam com os dirigentes** | Formalizar dissolução com **ata de destinação dos bens** a entidade idêntica ou semelhante |
+| **TCU 6633/2025-1ª Câmara** | Responsabilização de instituto, empresas e dirigentes | **Fachada** e sub-rogação integral; dano apurado pela **Teoria do Produto Bruto Mitigado** | Vedada a sub-rogação do objeto; prestar contas de patrocínio com rastreio |
+| **STJ, Informativo 893** (Inq 1.913/DF, 17/06/2026, rel. Min. João Otávio de Noronha) | Denúncia recebida por **peculato-desvio** (art. 312 do Código Penal) | Desvio de **R$ 6.090.142** dos **R$ 7 milhões** de acordo MPT×banco; laudos e extratos bastam para a justa causa | Prestação de contas idônea e **segregação entre gestão e contabilidade** |
+| **STJ, REsp 2.008.646** (4ª Turma, 18/11/2025) e **REsps 2.159.844** etc. (16/12/2025) | **Vedada a recuperação judicial** de associação e fundação sem fins lucrativos | Lei nº 11.101/2005 alcança só **empresários** (arts. 1º e 2º); exceção das cooperativas médicas (**ADI 7.442/STF**) | Crise financeira via acordo, reestruturação ou **dissolução limpa** — não via RJ |
+| **STJ, 3ª Turma** (REsps 2.155.284 etc., DJe 04/10/2024) | Mesma tese da vedação; manteve RJ de 5 anos pelo **fato consumado** | Segurança jurídica preserva atos consolidados — **exceção, não modelo a seguir** | Não construir plano de recuperação sobre a exceção |
+| **TST, 7ª Turma** (RR-100039-53.2019.5.01.0206, rel. Min. Evandro Valadão, 2025) | Ex-conselheiros **excluídos** da execução trabalhista | Só responde quem praticou **gestão** ou **aprovou contas** (art. 5º, II, da CF) | Guardar atas, convocações e aprovação de contas de cada mandato |
+| **STJ, REsp 1.812.929/DF** (2023) | Desconsideração da personalidade **limitada a gestores** | Art. 50 do Código Civil exige **abuso do agente**; filiação nominal ≠ gestão | Diretoria e conselho documentam a separação entre sócio nominal e gestor |
+
+Duas leituras transversais desses julgados: (i) o **TCU** tornou-se, em 2025, a principal vara fiscal das OSCs — o que se decide lá é a **forma de contratar e de prestar contas** (metas, cronograma, publicação), não a regularidade tributária em si; (ii) o **STJ e o TST** vêm limitando a responsabilidade **pessoal** de quem não geriu — mas a proteção só existe **se a gestão estiver documentada**. Ata que não existe é ato de gestão que não se prova.
+
+> [!IMPORTANT]
+> **Medida administrativa correlata (2025):** o **acordo INSS-MPF-DPU-OAB-AGU** instituiu, em **14/05/2025**, o **PDMA** (plano de devolução) após a **Recomendação nº 18/2025 do MPF**: **9,42 milhões de benefícios** com **desconto associativo indevido** de março/2020 a março/2025 são contestáveis, e a entidade tem **15 dias úteis** para devolver os valores via GRU ou comprovar autorização na forma da IN PRES/INSS nº 162/2024 (biometria/assinatura). Quem retém mensalidade associativa de aposentados precisa inventariar as adesões **antes** da cobrança automática.
+
+### 13.5 Exemplo 13 — o plano de preparação da ONG para a CBS de 2027
+
+Uma empresa com lucro operacional de **R$ 1.000.000,00** doa **R$ 40.000,00** a uma OSC em 2026, e a diretoria da ONG precisa ajustar a captação e o orçamento até 31/12/2026.
+
+**Passo 1 — recalcular o incentivo do doador com a regra de 2026:**
+
+1. limite nominal: 2% × 1.000.000 = **R$ 20.000,00** (Lei nº 9.249/1995, art. 13, § 2º, III);
+2. economia nominal: 20.000 × 34% = **R$ 6.800,00**;
+3. **redução linear (LC nº 224/2025, art. 4º, § 4º, III):** a redução de base passa a valer por **90%** → 20.000 × 90% = **R$ 18.000,00** dedutíveis;
+4. economia real: 18.000 × 34% = **R$ 6.120,00** → **diferença de R$ 680,00** sobre a conta nominal;
+5. **fundamento do corte:** a IN RFB nº 2.307/2026 **revogou o item 26** do anexo anterior — a dedução de doações de PF/PJ a OSC **entrou no corte**, enquanto o **item 34** (isenção da própria OSC) permaneceu preservado.
+
+**Passo 2 — comunicar o doador com a mensagem certa:** a frase correta não é "sua doação é 100% dedutível", e sim "**até 2% do seu lucro operacional, limitada a 90% desse benefício em 2026**" — com a ressalva de assessoria tributária e a observação de que a **ADI 7.920** e o **PLC nº 11/2026** podem alterar o desenho durante o ano.
+
+**Passo 3 — abrir a linha orçamentária de 2027:** pelo art. 9º, § 4º, da LC nº 214/2025, as compras da entidade imune **continuam sujeitas ao IBS/CBS e sem direito a crédito**. Sobre compras de R$ 1.200.000,00/ano, cada **1 p.p. de alíquota combinada** custa **R$ 12.000,00/ano** (seção 7).
+
+**Passo 4 — revisar contratos de longo prazo:** incluir cláusula tributária e cláusula de reajuste que mencione a transição **2027-2033**, evitando que o tributo novo seja absorvido integralmente pela entidade por omissão contratual.
+
+**Passo 5 — blindar o calendário de obrigações de 2026:** ECD **30/06**, ECF **31/07**, DCTFWeb mensal e eSocial — são elas que sustentam tanto a taxa de prova isenta do ano-teste quanto a defesa da imunidade.
+
+**Passo 6 — manter o acompanhamento normativo mensal:** ADI 7.920 (STF), PLC 11/2026 (Congresso) e eventual regulamentação complementar da LC nº 227/2026.
+
+| Prazo | Ação | Responsável | Prova que deve existir |
+|---|---|---|---|
+| **Até 31/10/2026** | Recalcular incentivos de doação com 90% da base e revisar o material de captação publicado | Diretoria + assessoria tributária | Parecer ou ata de revisão |
+| **Até 30/11/2026** | Abrir a linha "tributos embutidos em compras" no orçamento de 2027 | Coordenação financeira | Orçamento aprovado em assembleia |
+| **Até 31/12/2026** | Fechar o exercício com a escrituração dos créditos de PIS/COFINS que atravessam a transição (arts. 378 e 381 da LC nº 214/2025) | Contabilidade | Balanço e notas explicativas |
+| **Todo mês de 2026** | Conferir destaque de CBS/IBS na NF-e e obrigações acessórias em dia | Responsável nomeado (seção 12) | Recibos de entrega e conciliação |
+| **Semestral** | Acompanhar ADI 7.920 e PLC nº 11/2026 | Direção jurídica | Relatório de monitoramento legislativo |
+
+### 13.6 O dossiê de defesa e o que ainda não está pacificado
+
+**Dossiê mínimo da entidade isenta (guardar em pasta única e citar em eventual auto de infração):**
+
+1. **Item 34 do Anexo da IN RFB nº 2.307/2026** — isenção de IRPJ, CSLL e COFINS do art. 15 da Lei nº 9.532/1997 constando expressamente da lista do que **não** foi reduzido;
+2. **Inciso V do § 8º do art. 4º da LC nº 224/2025**, com a redação dada pelo **art. 11 da LC nº 235/2026**;
+3. **Perguntas e Respostas da RFB** sobre a redução dos incentivos (versão 5) — o Anexo Único **não é exaustivo**.
+
+Essa pasta **não substitui** o parecer e **não se confunde** com a dedução do doador (item 26, revogado): o item 34 protege a **isenção da entidade**; o item 26 protegia a **dedutibilidade de quem doa**. Guardar os dois no mesmo dossiê, mas em abas diferentes.
+
+**O que ficou de fora por falta de confirmação (não verificado):**
+
+- **Dois incisos "V" no § 8º do art. 4º da LC nº 224/2025:** a consolidação oficial exibe a redação antiga (Leis nº 9.790/1999 e nº 9.637/1998) **e** a nova da LC nº 235/2026; **não se confirmou** a revogação da anterior — confirme no texto consolidado;
+- **CEBAS e art. 12 da Lei nº 9.532/1997:** a LC nº 235/2026 ressalvou o art. 15 e a MP nº 2.158-35/2001, mas **não foi localizada ressalva expressa ao art. 12** (IRPJ/CSLL de educação e assistência) — **não verificado**; não afirme em peça sem conferir;
+- **Anexo Único da IN RFB nº 2.305/2025:** os itens 26, 32, 33 e 34 foram lidos, mas a **lista completa** não foi percorrida item a item.
+
+- **🔢 Você sabia?** As **Perguntas e Respostas da RFB** sobre a redução dos incentivos esclarecem que o Anexo Único **não é exaustivo** e que **associações de categoria profissional e econômica não são alcançadas** pela redução linear — resposta oficial que muda o resultado de uma fiscalização e que cabe, junto com o item 34 e o inciso V do § 8º, no dossiê de defesa da entidade.
+
+### 13.7 Onde conferir a vigência antes de citar
+
+| O que precisa ser conferido | Fonte oficial | Por que consultar |
+|---|---|---|
+| Texto vigente das leis complementares da reforma (LC nº 214/2025, LC nº 224/2025, LC nº 227/2026, LC nº 235/2026) | Textos consolidados no portal do Planalto | Mostram as **alterações já incorporadas** por outros diplomas |
+| Artigos da Lei nº 9.532/1997 (arts. 12, 13, 14, 15 e 22) | Texto consolidado da Lei nº 9.532/1997 | A alínea "c" do art. 13 já foi alterada pela Lei nº 13.204/2015 e o art. 15 pela LC nº 187/2021 |
+| Regulamento da CBS (incidência, base, créditos e ano-teste) | Decreto nº 12.955/2026, com as alterações posteriores | O art. 582 é o que fixa a CBS de 0,9% em 2026 |
+| Cronograma oficial da transição 2026-2033 | Página da **Reforma Tributária do Consumo** da Receita Federal | Confirma datas de vigência sem depender de leitura de lei isolada |
+| Alcance da redução linear de 10% | **Perguntas e Respostas da RFB** sobre a redução dos incentivos (v5) | Confirma que o Anexo Único **não é exaustivo** |
+| Situação da **ADI 7.920** contra a LC nº 224/2025 | Portal de notícias do **STF** | A decisão pode alterar o desenho das exceções do art. 4º, § 8º |
+
+> [!NOTE]
+> **Hábito de governança fiscal:** agende uma **revisão mensal de 30 minutos** em 2026 apenas para conferir vigência — texto consolidado, agenda tributária da Receita e situação da ADI 7.920. Custo baixo, e evita a hipótese mais cara de todas: sustentar uma decisão com dispositivo já superado.
+
+```dragdrop
+{
+  "question": "Ordene a cronologia da reforma tributária e das normas que afetam as OSCs, do primeiro marco ao início da cobrança da CBS:",
+  "items": [
+    "EC nº 132/2023 — institui IBS e CBS e prevê o fim do PIS/COFINS",
+    "LC nº 214/2025 (16/01/2025) — regras gerais, imunidade das OSC e transição 2026-2033",
+    "LC nº 224/2025 (26/12/2025) — redução linear de 10% dos incentivos federais",
+    "LC nº 227/2026 (13/01/2026) — cria o CGIBS e altera a LC nº 214/2025",
+    "Decreto nº 12.955/2026 (29/04/2026) — regulamenta a CBS e fixa 0,9% no ano-teste",
+    "LC nº 235/2026 (27/08/2026) — reescreve o inciso V do § 8º do art. 4º da LC nº 224/2025",
+    "1º/1/2027 — fim do PIS/COFINS e início da cobrança da CBS"
+  ],
+  "correctOrder": [
+    "EC nº 132/2023 — institui IBS e CBS e prevê o fim do PIS/COFINS",
+    "LC nº 214/2025 (16/01/2025) — regras gerais, imunidade das OSC e transição 2026-2033",
+    "LC nº 224/2025 (26/12/2025) — redução linear de 10% dos incentivos federais",
+    "LC nº 227/2026 (13/01/2026) — cria o CGIBS e altera a LC nº 214/2025",
+    "Decreto nº 12.955/2026 (29/04/2026) — regulamenta a CBS e fixa 0,9% no ano-teste",
+    "LC nº 235/2026 (27/08/2026) — reescreve o inciso V do § 8º do art. 4º da LC nº 224/2025",
+    "1º/1/2027 — fim do PIS/COFINS e início da cobrança da CBS"
+  ],
+  "explanation": "A ordem importa porque cada norma modifica a anterior: a EC 132/2023 só ganhou regra de execução com a LC 214/2025; o corte de 10% veio da LC 224/2025; o CGIBS e o Decreto da CBS vieram em 2026; e a LC 235/2026 reescreveu a exceção que protege o art. 15 da Lei nº 9.532/1997. Errar a ordem é citar dispositivo ainda não aplicável ou usar a redação já superada."
+}
+```
+
+---
+
 ## Perguntas Práticas (Practice Questions)
 
 Resolva com o raciocínio passo a passo de cada seção — e confira a base legal antes de olhar o gabarito.
@@ -939,6 +1119,38 @@ Resolva com o raciocínio passo a passo de cada seção — e confira a base leg
   ],
   "correct": 0,
   "explanation": "O § 4º afasta as imunidades das aquisições da entidade — materiais, imateriais, inclusive direitos, e serviços. Como a entidade imune não é contribuinte regular do novo sistema, não há crédito a tomar e o tributo das compras vira custo embutido no preço do fornecedor (seção 7)."
+}
+```
+
+```question
+{
+  "id": "npof-12-q9",
+  "type": "multiple-choice",
+  "question": "Qual é o desenho tributário de 2026 (ano-teste) para quem emite e recebe NF-e?",
+  "options": [
+    "CBS e IBS já plenos e PIS/COFINS extintos desde 1º/1/2026",
+    "CBS de 0,9% e IBS de 0,1% destacados e compensados com o PIS/COFINS do mesmo período",
+    "IPI a zero e Imposto Seletivo cobrados desde 1º/1/2026",
+    "Vigência plena do IBS, com teto de 26,5%"
+  ],
+  "correct": 1,
+  "explanation": "Pelo Ato Conjunto RFB/CGIBS nº 1/2025, de 23/12/2025, e pelo art. 582 do Decreto nº 12.955/2026, em 2026 incidem CBS de 0,9% e IBS de 0,1%, compensados com o PIS/COFINS do mesmo período. O fim do PIS/COFINS e o IPI a zero (exceto ZFM) valem de 2027 a 2028, e a plenitude do IBS só ocorre em 2033."
+}
+```
+
+```question
+{
+  "id": "npof-12-q10",
+  "type": "multiple-choice",
+  "question": "Qual irregularidade levou o TCU a suspender, em 2025, repasses do Ministério do Trabalho e Emprego a entidades sem fins lucrativos?",
+  "options": [
+    "Falta de auditoria externa no exercício anterior",
+    "Fomento sem metas cronológicas e sem cronograma, com desembolso em parcela única",
+    "Captação de recursos do exterior sem registro no Banco Central",
+    "Ausência de certificado CEBAS vigente"
+  ],
+  "correct": 1,
+  "explanation": "No Acórdão 1355/2025-Plenário (TC 009.123/2025-3, 18/06/2025), o TCU suspendeu repasses por fomento sem metas cronológicas (arts. 22, II-IV, da Lei nº 13.019/2014), sem cronograma de desembolso (art. 42, III) e em parcela única. A lição prática é assinar apenas com metas, cronograma e aderência ao plano de trabalho — a ausência de CEBAS não estava na decisão."
 }
 ```
 

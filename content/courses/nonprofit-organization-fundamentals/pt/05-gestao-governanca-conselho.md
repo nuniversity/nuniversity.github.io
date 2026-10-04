@@ -1,6 +1,6 @@
 ---
 title: "Gestão de ONGs: Governança e Conselho Diretor"
-description: "Governança de ONGs no Brasil em profundidade: deveres fiduciários dos arts. 153 a 155 da Lei nº 6.404/1976 aplicados por analogia, estrutura de assembleia, conselho, direção e conselho fiscal, composição e matriz de competências, reuniões e comitês pelo Código IBGC de 2023, política de conflitos, remuneração de dirigentes pela Lei nº 9.532/1997, avaliação e sucessão do diretor-presidente, programa de integridade, checklist anual de governança e benchmarks de conselho com fonte e ano."
+description: "Governança de ONGs no Brasil em profundidade: deveres fiduciários dos arts. 153 a 155 da Lei nº 6.404/1976 aplicados por analogia, estrutura de assembleia, conselho, direção e conselho fiscal, composição e matriz de competências, reuniões e comitês pelo Código IBGC de 2023, política de conflitos, remuneração de dirigentes pela Lei nº 9.532/1997, avaliação e sucessão do diretor-presidente, programa de integridade, casos reais de governança (Fundação Itaú, Instituto Sou da Paz, Todos Pela Educação, Gates Foundation e Instituto Ayrton Senna), responsabilidade de conselheiros e compliance 2026 (TST, STJ, TCU e alerta tributário), checklist anual de governança e benchmarks de conselho com fonte e ano."
 order: 5
 difficulty: "intermediate"
 duration: "90 min"
@@ -66,7 +66,9 @@ Nesta lição você vai:
 - conduzir **reuniões** e **comitês** conforme os itens 3.7, 3.16 e 3.17 do Código IBGC;
 - aplicar na prática **política de conflitos**, **política de remuneração de diretoria**, **avaliação do diretor-presidente** e **plano de sucessão**;
 - montar o **checklist de governança anual** que auditoria, Ministério Público e doador cobram;
-- reconhecer os erros reais brasileiros — do **conselho fantasma** à **síndrome do fundador** —, inclusive o caso julgado pelo STJ em 2026.
+- reconhecer os erros reais brasileiros — do **conselho fantasma** à **síndrome do fundador** —, inclusive o caso julgado pelo STJ em 2026;
+- ler **cinco casos reais de governança** (Fundação Itaú, Instituto Sou da Paz, Todos Pela Educação, Gates Foundation e Instituto Ayrton Senna) e extrair de cada um a **lição de governança** com fonte;
+- aplicar a **jurisprudência de 2024 a 2026** sobre responsabilidade de conselheiros (TST, STJ e TCU) e o **checklist de compliance** do conselho em 2026.
 
 ---
 
@@ -543,7 +545,155 @@ Por que **7** e não 15? Porque a recomendação prática é **não menos de 5**
 
 ---
 
-## 14. Checklist de governança anual (o que auditoria, MP e doador pedem)
+## 14. Governança na Prática: Casos Reais
+
+A teoria do conselho só vale quando ela sobrevive ao balanço. Esta seção usa **cinco organizações verificadas** da pesquisa de casos desta lição (**11 casos** no total: **7 brasileiros** e **4 internacionais**, todos com CNPJ, registro estatutário ou demonstração financeira localizada — **nenhuma cifra aqui é estimativa própria**) e lê cada uma em três eixos: **conselho**, **transparência** e **sucessão**. Ao final de cada caso, a **lição de governança** registrada na pesquisa.
+
+### 14.1 Os cinco casos em uma tabela
+
+| Organização | Natureza jurídica (verificada) | Conselho / deliberação | Transparência | Sucessão |
+|---|---|---|---|---|
+| **Fundação Itaú / Itaú Social** (1993–2019) | Fundação privada instituída pelo Itaúsa | **Conselho Curador heterônomo** (membros do Itaúsa e do Itaú), **Diretoria de 6 a 15 membros não remunerados** e **Conselho Fiscal** | Demonstrações publicadas (2024: **R$ 444,2 mi** de receitas, **93% financeiras**, **PL R$ 5,54 bi**) e indicador público que limita custos administrativos a **5% do investido** | Composição ligada ao grupo instituidor; **plano de sucessão não descrito** no material verificado |
+| **Instituto Sou da Paz** (jan/1999) | Associação sem fins lucrativos — os fundadores **recusaram** a forma de fundação | Diretoria-executiva + **conselhos Diretor e Fiscal que fixam e monitoram metas** + **comitê de equidade** (25 pessoas) | **Selo de interesse público do MJ**, **auditoria da KPMG** e página de transparência publicada | Não descrito no material verificado |
+| **Todos Pela Educação** (2007) | Associação de fins não econômicos, suprapartidária e **sem recursos públicos** | **Assembleia Geral + Conselho de Administração** | **Auditoria independente anual**; relatório financeiro 2024 publicado (**R$ 26,08 mi**, superávit **R$ 4,66 mi**, PL **R$ 16,9 mi**) | Não descrito no material verificado |
+| **Gates Foundation** (EUA, 2000) | Fundação privada (*private foundation*) em Seattle que concede + fundo em confiança (*charitable trust*) que detém os ativos | *Board* com administrador-fideicomissário (*trustee*), CEO Mark Suzman e **5 conselheiros independentes** | Relatório anual e demonstrações publicadas (2024: **US$ 8,015 bi** concedidos; ativos do fundo de **US$ 77,2 bi**) | Saída de Melinda French Gates em **2024**, com Bill Gates como *trustee*; percentual de *payout* **não confirmado** |
+| **Instituto Ayrton Senna** (1994) | Associação privada (natureza **399-9** — prevalece o cadastro da Receita) | CEO (**Viviane Senna**) e vice (**Ewerton Fulini**) com **auditor independente** | Relatório anual 2024 publicado (receita **R$ 41,738 mi**; patrimônio líquido **R$ 273,4 mi**) | Não descrito no material verificado |
+
+### 14.2 Caso a caso: a lição de governança
+
+**1. Fundação Itaú — patrimônio rendedor dá autonomia, e autonomia exige freio.** A fundação é administrada por um **Conselho Curador heterônomo** (membros do Itaúsa e do Itaú), uma **Diretoria de 6 a 15 membros não remunerados** e um **Conselho Fiscal** — três freios que explicam por que uma entidade que movimentou **R$ 444,2 milhões** em 2024 (dos quais **93%** foram receitas financeiras do fundo patrimonial criado em 2000) ainda publica um **indicador de custos administrativos limitado a 5% do investido** e distribuiu, pelo FIA 2024, **R$ 18,8 milhões** do **1% do IR** para **40 projetos**. Os valores vêm de demonstração financeira publicada em **R$ mil** — confira o PDF original antes de reproduzi-los.
+
+> **Lição de governança:** "patrimônio rendedor dá autonomia; a doação é complemento de projeto, não sustáculo da operação." Para o conselho, **93% de receita financeira** é liberdade para deliberar sem depender de edital — e, por isso mesmo, exige **política de investimento** e **ata que registre a decisão**: autonomia sem registro é improviso com saldo em conta.
+
+**2. Instituto Sou da Paz — conselho que fixa e monitora metas.** Os fundadores **recusaram a forma de fundação** e escolheram a associação sem fins lucrativos, desenhando um sistema com **diretoria-executiva** (Carolina Ricardo, na fonte consultada), **conselhos Diretor e Fiscal que fixam e monitoram metas** e um **comitê de equidade** com 25 pessoas — com **selo de interesse público do Ministério Público**, **auditoria da KPMG** e página de transparência publicada. O conselho aqui não "recebe relatório": ele **fixa meta e acompanha**, o que é exatamente o item 3.10 do Código IBGC em ação.
+
+> **Lição de governança:** "concentração em doador estrangeiro é risco de mesa; impacto em advocacy se mede por evidência e incidência." Em **2022**, **65%** dos **R$ 12,79 milhões** da receita vieram de fundações do exterior: para o conselho, isso é matéria de **política de riscos** com cenário registrado — não de narrativa de relatório anual.
+
+**3. Todos Pela Educação — independência de financiamento é pré-condição de credibilidade.** A **Assembleia Geral + Conselho de Administração**, com **auditoria independente anual**, sustenta uma associação que declara **não receber recursos públicos** e movimentou **R$ 26,08 milhões** em 2024 (superávit de **R$ 4,66 milhões** e patrimônio líquido de **R$ 16,9 milhões**), com tudo publicado na página de transparência.
+
+> **Lição de governança:** "o produto é política pública melhorada e a independência de financiamento é pré-condição de credibilidade." A tradução de governança é simples: quem financia define a legitimidade da crítica — por isso assembleia e conselho tratam a **composição das fontes de receita** como tratam o propósito.
+
+**4. Gates Foundation — gastar ou sustentar o patrimônio é decisão estrutural.** A estrutura de **duas entidades** — a fundação privada de Seattle que **concede** e o fundo em confiança que **detém os ativos** — é governança em camadas: um *board* com *trustee*, CEO e **5 conselheiros independentes**. A **saída de Melinda French Gates em 2024** mostrou que, nesse modelo, a sucessão de administrador-fideicomissário é decisão estrutural, não evento social.
+
+> **Lição de governança:** "gastar o endowment versus sustentá-lo — decisão estrutural que define a organização" — com a sinalização de que o **percentual de *payout* não foi confirmado** na pesquisa: não cite número de distribuição anual sem fonte que o confirme.
+
+**5. Instituto Ayrton Senna — previsibilidade com concentração.** A associação privada (natureza **399-9**) tem CEO e vice com **auditor independente** e publicou relatório anual com receita de **R$ 41,738 milhões** em 2024, dos quais **R$ 25,971 milhões (62%)** vieram de royalties de marca e imagem; o patrimônio líquido de **R$ 273,4 milhões** está quase todo em títulos (**R$ 265,4 milhões**). O conselho monitora, aqui, um único ativo intangível ligado a uma pessoa.
+
+> **Lição de governança:** "royalty de marca vira receita previsível — e 62% em um único ativo é o risco a monitorar." *Sinalização:* há classificações divergentes na literatura sobre a natureza da entidade (OS/OSCIP, fundação) — **prevalece o cadastro da Receita Federal**.
+
+### 14.3 Os padrões que se repetem — e o que falta
+
+- **Conselho heterônomo só funciona com freios.** Herdar conselheiros do grupo instituidor (Fundação Itaú) é legítimo, mas só se conviver com **direção não remunerada**, **órgão de parecer** e **auditoria publicada** — sem os três, é administração fechada;
+- **Transparência publicada troca pedido por auditoria.** KPMG (Sou da Paz), auditoria anual (Todos Pela Educação) e relatório publicado (Fundação Itaú e Instituto Ayrton Senna) permitem que doador e Ministério Público **verifiquem sem convocar** — é a seção 16 desta lição funcionando como rotina;
+- **Sucessão é a lacuna invisível:** a pesquisa **não descreve plano de sucessão** em nenhum dos cinco casos — o que confirma o item 3.11 do IBGC como matéria que se **documenta**, não que se pressupõe;
+- **Concentração é o risco nº 1 nos balanços:** **93%** (Fundação Itaú, financeiras, 2024), **62%** (Instituto Ayrton Senna, royalties, 2024) e **65%** (Instituto Sou da Paz, fundações do exterior, 2022) em uma origem dominante.
+
+- **🔢 Você sabia?** O **governing body** da BRAC (Bangladesh) registra **5 reuniões** e **assembleia em 19/03/2024** no exercício encerrado em **30/06/2024**, com auditoria da ACNABIN e **reserva estatutária de 10% do superávit** prevista no próprio estatuto — ou seja, a entidade **é obrigada a reter** um décimo do superávit antes de qualquer outra decisão. Governança de superávit também é governança: o conselho fiscal que aprova o balanço lê essa reserva como cláusula, não como detalhe.
+
+Nenhum dos casos serve de gabarito: servem de **espelho**. A pergunta que a seção devolve ao seu conselho é sempre a mesma — *destes cinco desenhos, qual problema ele resolve para nós, e onde está a ata que comprova que resolvemos?*
+
+### 14.4 Sinalizações da pesquisa de casos: o que não afirmar
+
+- **Fundação Itaú:** os números das demonstrações vêm em **R$ mil** — confira o PDF original antes de reproduzi-los em material público;
+- **Instituto Ayrton Senna:** a Receita Federal classifica-a como **associação (natureza 399-9)**; textos que a chamam de OS/OSCIP ou de fundação não conferem com o cadastro — **prevalece a Receita**;
+- **Gerando Falcões:** **sem DRE ou balanço público**, e o aporte do Fundo Dignidade **diverge** — o site informa **R$ 100 mi** da família Lemann; a *Folha* (2025) detalha **R$ 50 mi + R$ 50 mi em 2026 + R$ 25 mi em contratos**;
+- **Gates Foundation:** o percentual mínimo de *payout* **não foi localizado** — **não afirme "5%"**;
+- **BRAC:** a expressão "maior ONG do mundo" tem por critério o número de funcionários (**+100 mil**) e vem de **fonte secundária**; os valores são em taka, e conversão própria seria estimativa.
+
+> [!WARNING]
+> **Concentração de receita não é estratégia, e balanço bonito não substitui ata.** Nos casos acima, **93%** das receitas da Fundação Itaú vieram de aplicações financeiras (2024), **62%** do Instituto Ayrton Senna de royalties de marca (2024) e **65%** do Instituto Sou da Paz de fundações do exterior (2022) — três decisões de mesa que só existem se o conselho deliberar sobre elas: **política de diversificação**, **cenários de queda** e **revisão anual registradas em ata**. Quem confunde **receita disponível** com **governança** descobre a diferença justamente no ano em que a fonte única cai — e não encontra, na ata, nem o diagnóstico nem o responsável.
+
+---
+
+## 15. Responsabilidade de Conselheiros e Compliance 2026
+
+A jurisprudência de 2024 a 2026 firmou uma frase curta e cara: **só responde quem pratica ato de gestão ou aprova contas — e quem não documenta, responde**. Os itens abaixo foram verificados na pesquisa de atualizações desta lição, com **tribunal, processo e data**; o que está pendente ou não confirmado aparece sinalizado no fim da seção.
+
+### 15.1 Jurisprudência 2024–2026 que muda a prática do conselho
+
+O quadro abaixo reúne apenas decisões **verificadas** nesta pesquisa — acórdãos de tribunal, informativo de julgamento, decisão monocrática ou acordo interinstitucional —, com processo e data. Cada linha traz, na última coluna, o **gesto de governança** que a decisão transforma em exigência prática:
+
+| Tribunal / processo | Decisão | Tese aplicada | Medida prática do conselho |
+|---|---|---|---|
+| **TST, 7ª Turma, RR-100039-53.2019.5.01.0206 (2025)** | Ex-conselheiros **excluídos** da execução trabalhista | Só responde quem pratica **gestão** ou **aprova contas** (art. 5º, II, da CF) | Guardar atas, convocações e aprovações de contas: elas são a **defesa** |
+| **STJ, REsp 1.812.929/DF (2023)** | Desconsideração da personalidade **limitada a gestores** | O art. 50 do CC exige **abuso** do agente | Filiação nominal **não é** gestão — não confira poder de quem só consta do estatuto |
+| **TCU, Ac. 6107/2025-1ª Câmara** | Associação **extinta antes da citação**: citação nula | Sem destino do patrimônio (**art. 61 do CC**) não há sucessora — **débito e multa ficam com os dirigentes** | Formalizar dissolução com **ata de destinação dos bens** antes de encerrar o CNPJ |
+| **TCU, Ac. 1355/2025-Plenário (18/06/2025)** | Cautelar *inaudita altera pars* **suspendendo repasses do MTE** (R$ 15,77 mi e R$ 4,22 mi) | Fomento **sem metas cronológicas**, **sem cronograma** e em **parcela única** | Assinar só com metas, cronograma e desembolso fracionado (Lei nº 13.019/2014, arts. 22, II–IV, e 42, III) |
+| **TCU, Ac. 6633/2025-1ª Câmara** | Responsabilização de instituto, empresas e **dirigentes** | **Fachada** e sub-rogação integral; dano pela Teoria do Produto Bruto Mitigado | Vedada a sub-rogação do objeto; prestar contas de patrocínio com prova de execução |
+| **TCU, Ac. 2753/2025-1ª Câmara** | Representação do MPTCU sobre emendas improcedente por **não esgotadas as vias** | Dano apurado pela CGU de **R$ 15.062.152** em **7 de 10** entidades; monitoramento "incipiente" | **Publicar** recebimento e aplicação de emendas, mesmo quando a via é improcedente |
+| **STJ, 3ª e 4ª Turmas (2024–2025; REsp 2.008.646, 18/11/2025, e REsps 2.159.844, 16/12/2025)** | **Vedada a recuperação judicial** de associação e fundação sem fins lucrativos | A Lei nº 11.101/2005 só alcança **empresários** (arts. 1º e 2º); exceção: cooperativas médicas (ADI 7.442/STF) | Crise se planeja por **acordo, reestruturação ou dissolução limpa** — nunca pela RJ |
+| **STJ, Informativo nº 893 (Inq 1.913/DF)** | Denúncia recebida por **peculato-desvio** de **R$ 6.090.142,00** | Laudos e extratos bastam para a justa causa | Prestação de contas idônea e **segregação entre gestão e contabilidade** (caso detalhado na seção 13) |
+| **STF, ADPF 854 + ADI 7688 (decisão do Min. Flávio Dino, 02/12/2024; suspensão em 03/01/2025)** | **13 ONGs** tiveram repasses suspensos (~**R$ 142 mi** em dez/2024), com CEPIM/CEIS e auditoria em 60 dias | Transparência de emendas **2020–2024** em **90 dias** virou condição | Publicar valores recebidos e aplicados: da CGU, só **4 de 26** entidades (**15%**) publicaram adequadamente |
+| **MPF, Recomendação 18/2025 + acordo INSS–MPF–DPU–OAB–AGU (PDMA, 14/05/2025)** | **9,42 milhões** de benefícios com descontos **contestáveis** de **mar/2020 a mar/2025** | Desconto de mensalidade associativa **só com autorização** (art. 115, V, da Lei nº 8.212/1991) | Entidade tem **15 dias úteis** para devolver via GRU ou comprovar autorização (biometria/assinatura) |
+
+Três regras atravessam o quadro inteiro:
+
+1. **A defesa é documental.** O TST afastou ex-conselheiros porque **não havia ato de gestão nem aprovação de contas**; o mesmo silêncio documental que livra quem não governou **condena** quem governou sem registrar — porque aí não existe prova de deliberação, existe assinatura solta;
+2. **A responsabilidade acompanha o poder de gestão.** Filiação nominal não é gestão (STJ, REsp 1.812.929/DF), mas **quem assina, executa e aprova** responde: dirigente de fachada, conselheiro que aprova-cega e sócio que opera sem ata entram no mesmo bloco de risco;
+3. **O controle externo castiga a omissão, não apenas o desvio.** Fomento sem metas (TCU 1355/2025), emenda não publicada (ADPF 854) e desconto sem autorização (PDMA) são irregularidades de **registro e transparência** — a maioria delas existiria mesmo com boa-fé de todo mundo envolvido.
+
+**Caso resolvido 6 — o conselho que se defende com papel.**
+
+Uma associação com parceria federal e mensalidades descontadas por entidade de classe recebe, em 2026, três cobranças em sequência: pedido do TCU sobre emendas, notificação do INSS sobre descontos sem autorização e exigência do órgão concedente sobre meta não cumprida. O conselho reage em cinco passos, todos com base verificada:
+
+1. **Convoca reunião extraordinária com material prévio e sessão exclusiva** (Código IBGC, 3.17.2 e 3.17.3), separando o que se delibera do que se executa;
+2. **Reconstitui a trilha documental** — convocações, atas, aprovações de contas e votos nominais —, exatamente a prova cuja ausência tirou os ex-conselheiros da defesa no TST (RR-100039, 2025) e a cuja falta o TCU prendeu débito e multa aos dirigentes (Ac. 6107/2025);
+3. **Inventaria os descontos associativos**, comprova autorização (biometria ou assinatura) e devolve, via GRU, o que não estiver comprovado **em até 15 dias úteis** (PDMA de 14/05/2025; art. 115, V, da Lei nº 8.212/1991);
+4. **Publica** o que recebeu e aplicou de emendas, antes de qualquer esclarecimento administrativo (ADPF 854 e relatório da CGU);
+5. **Formaliza o ato corretivo da parceria** — meta com prazo, cronograma, desembolso fracionado e apostilamento dentro do limite de 10% —, com responsável e prazo em ata (TCU 1355/2025; Lei nº 13.019/2014, arts. 22 e 42).
+
+Resultado: a informação que o controle externo exigiria já estava **publicada e registrada** — o conselho trocou "explicação" por **evidência**, que é o único bem que resiste a auditoria.
+
+### 15.2 Checklist de compliance do conselho em 2026
+
+O checklist abaixo transforma o quadro anterior em **rotina anual de colegiado**: cada item tem dono, evidência e base — é a seção 16 desta lição, atualizada com o que a jurisprudência de 2024 a 2026 passou a cobrar.
+
+| # | Item que o conselho exige e registra | Base verificada |
+|---|---|---|
+| 1 | Ata com **decisão, presentes, abstenções e aprovação de contas** nominal | TST, RR-100039 (2025); Código IBGC, 3.17 |
+| 2 | Guarda de **convocações, material prévio e atas** como prova de ato de gestão | TST (2025); STJ, REsp 1.812.929/DF |
+| 3 | **Destinação do patrimônio** registrada antes de encerrar a entidade e o CNPJ | TCU, Ac. 6107/2025; Código Civil, art. 61 |
+| 4 | Parceria só com **metas cronológicas, cronograma e desembolso fracionado** | TCU, Ac. 1355/2025; Lei nº 13.019/2014, arts. 22 e 42 |
+| 5 | **Publicação** de recebimento e aplicação de emendas parlamentares | ADPF 854; TCU, Ac. 2753/2025; relatório da CGU |
+| 6 | **Inventário de descontos associativos** e comprovação de autorização em até **15 dias úteis** | MPF, Rec. 18/2025; PDMA (14/05/2025) |
+| 7 | Vedação de **sub-rogação do objeto** e prestação de contas de patrocínio com prova de execução | TCU, Ac. 6633/2025 |
+| 8 | **Plano de crise** sem depender de recuperação judicial | STJ, 3ª e 4ª Turmas (2024–2025) |
+
+```dragdrop
+{
+  "question": "Ordene o fluxo de uma parceria pelo MROSC que resiste a auditoria do TCU:",
+  "items": [
+    "Assinar só com metas cronológicas e cronograma de desembolso (Lei nº 13.019/2014, arts. 22, II–IV, e 42, III)",
+    "Fracionar o desembolso — parcela única exige justificativa documental",
+    "Cumprir o plano de trabalho, com apostilamento limitado a 10%",
+    "Prestar contas no Transferegov em até 90 dias (art. 69)",
+    "Divulgar a execução no Portal da Transparência e no Mapa das OSC"
+  ],
+  "correctOrder": [
+    "Assinar só com metas cronológicas e cronograma de desembolso (Lei nº 13.019/2014, arts. 22, II–IV, e 42, III)",
+    "Fracionar o desembolso — parcela única exige justificativa documental",
+    "Cumprir o plano de trabalho, com apostilamento limitado a 10%",
+    "Prestar contas no Transferegov em até 90 dias (art. 69)",
+    "Divulgar a execução no Portal da Transparência e no Mapa das OSC"
+  ],
+  "explanation": "A ordem é a da prova que o conselho audita: no desenho do instrumento (metas e cronograma), na execução (parcelas justificadas e apostilamento ≤10%), na prestação de contas (Transferegov em até 90 dias) e na divulgação (Portal da Transparência e Mapa das OSC). Foi exatamente a inversão dessa sequência — fomento sem metas e sem cronograma, pago em parcela única — que levou o TCU a suspender repasses no Acórdão 1355/2025-Plenário."
+}
+```
+
+### 15.3 Alerta tributário de 2026: o corte de 10% alcançou o doador
+
+A **LC nº 224/2025 (26/12/2025)** reduziu linearmente **10%** de todos os incentivos federais — **IRPJ e II desde 01/01/2026** e os demais tributos federais desde **01/04/2026**. Pela **IN RFB nº 2.307/2026 (20/02/2026)**, o **item 26 do Anexo Único** foi **revogado**: a dedução de doações de pessoa jurídica a OSCs/OSCIP (2% do lucro operacional) **entrou no corte**, enquanto se mantém o **item 34** (isenção de IRPJ, CSLL e COFINS do art. 15 da Lei nº 9.532/1997). A **LC nº 235/2026 (27/08/2026)** reescreveu o inciso V do § 8º do art. 4º da LC nº 224 para ressalvar, justamente, os benefícios de pessoa jurídica sem fins lucrativos do art. 15 da Lei nº 9.532/1997 e dos arts. 13, IV, e 14, X, da MP nº 2.158-35/2001.
+
+Efeitos práticos que a direção leva ao conselho em 2026: **(i)** comunicar o doador de que a dedutibilidade caiu — em exemplo verificado, doação de **R$ 40.000,00** com limite de 2% do lucro operacional passa de **R$ 20.000,00** dedutíveis para **90%** desse valor em 2026 (**R$ 18.000,00**); **(ii)** guardar no dossiê o item 34 da IN, o inciso V do § 8º do art. 4º com a redação da LC nº 235/2026 e o FAQ da RFB (o Anexo **não é exaustivo**); **(iii)** acompanhar a **ADI 7.920** (CNI vs. LC 224) e o **PLC 11/2026**, ambos pendentes. A **reforma tributária em ano-teste** (2026: **CBS de 0,9%** e **IBS de 0,1%**, compensados com PIS/COFINS — Decreto nº 12.955/2026, art. 582, e Ato Conjunto RFB/CGIBS nº 1/2025) é matéria da [Lição 12 — Impostos e Incentivos Fiscais](./12-impostos-incentivos-fiscais.md); aqui, ela entra só como **pauta de risco** para a reunião anual do conselho.
+
+> [!NOTE]
+> **O que segue pendente e não deve ser afirmado como certo.** A **ADI 7.920** e o **PLC 11/2026** estão em tramitação; o **PL 6047/2023** (Comissão de Inquérito das ONGs) foi aprovado na CTFC em **26/03/2025** e aguarda relator na CCJ — sinal de escrutínio público crescente sobre OSCs. A ressalva do art. 12 da Lei nº 9.532/1997 (CEBAS) **não foi localizada** na LC nº 235/2026, e os **projetos de lei tiveram status verificado por busca, sem URL arquivada** — confirme no texto consolidado antes de usar em parecer.
+
+- **🔢 Você sabia?** A confiança do brasileiro em ONGs caiu de **41% (2020) para 30% (2024)** e a fidelidade do doador saiu de **69% para 49%**, mesmo com a doação individual somando **R$ 24,3 bilhões** em 2024 (**+64%** frente a 2022) — e **83% dos doadores pesquisam a entidade antes de doar** (Doação Brasil 2024). Transparência publicada não é enfeite de site: é o ativo que sustenta a confiança pela qual o conselho responde.
+
+---
+
+## 16. Checklist de governança anual (o que auditoria, MP e doador pedem)
 
 | # | Item | Periodicidade | Resp. | Evidência | Base |
 |---|---|---|---|---|---|
@@ -566,9 +716,9 @@ Por que **7** e não 15? Porque a recomendação prática é **não menos de 5**
 
 ---
 
-## 15. Números do setor e itens não verificados
+## 17. Números do setor e itens não verificados
 
-### 15.1 Dados verificados, com fonte e ano
+### 17.1 Dados verificados, com fonte e ano
 
 - **Tamanho e mandatos de conselho (BoardSource, FAQ de 01/08/2025):** média de **15** e mediana de **13**; organizações com ≥ US$ 10 milhões → **17,5**; com < US$ 1 milhão → **13,1**; mínimo legal usual de **3** membros; mandato comum de **3 anos**, com **66%** limitando a 3 mandatos e **28%** sem limite;
 - **Recomendação de piso (BoardSource, *Board Size: Finding the Sweet Spot*, 2017):** não menos de **5** membros;
@@ -582,7 +732,7 @@ Por que **7** e não 15? Porque a recomendação prática é **não menos de 5**
 
 - **🔢 Você sabia?** A maior parte das entidades se declara **pronta** para a proteção de dados (**52%**) e a menor parte **capacita** a equipe (**31%**) — TIC OSCs 2025 (CGI.br/Cetic.br, jul/2026). A distância entre "estamos prontos" e "treinamos as pessoas" é exatamente a lacuna que o relatório de impacto à proteção de dados (LGPD, art. 38) expõe: prontidão declarada sem capacitação registrada não é controle, é intenção.
 
-### 15.2 Itens sinalizados como não verificados nesta pesquisa
+### 17.2 Itens sinalizados como não verificados nesta pesquisa
 
 Para que você não transforme lacuna de pesquisa em afirmação categórica:
 
@@ -763,6 +913,38 @@ Para que você não transforme lacuna de pesquisa em afirmação categórica:
 }
 ```
 
+```question
+{
+  "id": "npof-05-q11",
+  "type": "multiple-choice",
+  "question": "Em 2024 a Fundação Itaú registrou R$ 444,2 milhões de receitas, 93% financeiras, e patrimônio líquido de R$ 5,54 bilhões. Qual a leitura correta de governança?",
+  "options": [
+    "Opera com prejuízo estrutural, porque só tem renda de aplicação",
+    "O fundo patrimonial sustenta a estrutura e a doação financia projeto específico",
+    "É proibida de receber doações de pessoa física ou jurídica",
+    "Depende de edital público para manter a operação"
+  ],
+  "correct": 1,
+  "explanation": "A receita de 2024 mostra que a renda de ativos cobre a estrutura (93% de receitas financeiras), enquanto doações e o 1% do IR (R$ 18,8 milhões distribuídos pelo FIA 2024 para 40 projetos) pagam projetos específicos. A demonstração é publicada com custos administrativos limitados por indicador público a 5% do investido — autonomia patrimonial com transparência, e não prejuízo nem dependência de edital."
+}
+```
+
+```question
+{
+  "id": "npof-05-q12",
+  "type": "multiple-choice",
+  "question": "Ex-conselheiro que apenas participou da fundação da entidade, sem atos de gestão, responde pelos débitos trabalhistas dela?",
+  "options": [
+    "Sim, de forma solidária com os diretores atuais",
+    "Sim, desde que o estatuto não exclua essa responsabilidade",
+    "Não, se não praticou atos de gestão nem aprovou contas — TST, 7ª Turma, RR-100039-53.2019.5.01.0206 (2025)",
+    "Sim, após o decurso de 10 anos da participação no colegiado"
+  ],
+  "correct": 2,
+  "explanation": "O TST (7ª Turma, 2025) excluiu da execução ex-conselheiros que apenas participaram da fundação em 1969, sem atos de gestão nem aprovação de contas (art. 5º, II, da Constituição). No mesmo eixo, o STJ (REsp 1.812.929/DF) limitou a desconsideração da personalidade jurídica a quem exerceu cargo diretivo, porque o art. 50 do Código Civil exige abuso do agente: filiação nominal não é gestão. A defesa se constrói com atas, convocações e aprovações de contas registradas."
+}
+```
+
 ```matching
 {
   "question": "Associe cada dispositivo à regra de governança que ele estabelece:",
@@ -789,7 +971,7 @@ Para que você não transforme lacuna de pesquisa em afirmação categórica:
 > - **Avaliação é anual e as metas são fixadas no início do exercício** (IBGC 3.10.2) — sucessão é matéria do conselho (IBGC 3.11), não do departamento de pessoas;
 > - **Canal de denúncia sem anonimato e sem não retaliação é fachada**, e a ausência de um programa de integridade **efetivo** retira o único atenuante da Lei nº 12.846/2013;
 > - **Sem evidência documental não há governança**: ata sem decisão, responsável e prazo não protege ninguém — como mostrou o caso Ilix (STJ, Informativo nº 893, 23/06/2026), com **R$ 6.090.142,00** desviados;
-> - **Cite sempre fonte e ano** — e leve os itens da seção 15.2 como **não verificados** até que sejam reabertos.
+> - **Cite sempre fonte e ano** — e leve os itens da seção 17.2 como **não verificados** até que sejam reabertos.
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
@@ -800,4 +982,4 @@ Para que você não transforme lacuna de pesquisa em afirmação categórica:
 > 5. Remuneração segue dois caminhos distintos: **conselheiro** (assembleia, fixa e igual, nunca por reunião) e **dirigente** (conselho, gestão efetiva, teto de mercado regional, ata e comunicação ao MP nas fundações, com vedações de parentesco e de total);
 > 6. Avaliação é **anual**, com **metas fixadas no início do exercício**, síntese divulgada e **plano de sucessão do diretor-presidente** sob responsabilidade do conselho;
 > 7. Integridade é comprovável: **canal de denúncia com anonimato**, **capacitação a cada 12 meses** (Lei nº 14.457/2022), **programa de integridade efetivo** (Lei nº 12.846/2013) e evidências registradas;
-> 8. O **checklist anual da seção 14** é o que auditoria, Ministério Público e doador pedem — e todo número citado deve vir com **fonte e ano**, sendo os itens da seção 15.2 tratados como **não verificados**.
+> 8. O **checklist anual da seção 16** é o que auditoria, Ministério Público e doador pedem — e todo número citado deve vir com **fonte e ano**, sendo os itens da seção 17.2 tratados como **não verificados**.

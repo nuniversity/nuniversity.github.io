@@ -1,6 +1,6 @@
 ---
 title: "Medição de Impacto em ONGs"
-description: "Curso aprofundado sobre medição e gestão de impacto no terceiro setor brasileiro: cadeia de resultados e o vocabulário exato (produto × resultado × impacto), Teoria da Mudança montada do zero, MROSC artigo por artigo (incluído o art. 56 revogado), frameworks internacionais (ToC, IRIS+, GRI, IMP, OCDE-DAC e SROI), estado da prática no país com dados e fontes, linha de base × meta com aritmética, contribuição × atribuição em diferença-em-diferenças, SROI calculado passo a passo com ajustes e sensibilidade, painel de KPIs com fonte, frequência e responsável, matriz de maturidade, tabela de erros comuns × correção e questões práticas comentadas."
+description: "Curso aprofundado sobre medição e gestão de impacto no terceiro setor brasileiro: cadeia de resultados e o vocabulário exato (produto × resultado × impacto), Teoria da Mudança montada do zero, MROSC artigo por artigo (incluído o art. 56 revogado), frameworks internacionais (ToC, IRIS+, GRI, IMP, OCDE-DAC e SROI), estado da prática no país com dados e fontes, linha de base × meta com aritmética, contribuição × atribuição em diferença-em-diferenças, SROI calculado passo a passo com ajustes e sensibilidade, painel de KPIs com fonte, frequência e responsável, matriz de maturidade, tabela de erros comuns × correção, casos reais de medição com dados verificados (Instituto Sou da Paz, Todos Pela Educação, TETO/FGV, Fundação Itaú e Habitat) com a análise do que cada um mede, como mede e o que copiar — incluindo impact washing e dois exemplos calculados — e questões práticas comentadas."
 order: 14
 difficulty: "intermediate"
 duration: "120 min"
@@ -22,7 +22,7 @@ Medir impacto é transformar a promessa da missão em evidência verificável. E
 └───────────────────────────────────────────────────────────────────────┘
 ```
 
-Esta lição percorre, nesta ordem: o vocabulário que evita os erros mais caros do setor; o marco legal brasileiro (MROSC), incluído o dispositivo de remanejamento que **já não existe mais**; os frameworks internacionais e o que cada um **não** resolve; o estado da prática no Brasil com números e fontes; o desenho do sistema de medição do mais barato ao mais caro; a aritmética de linha de base × meta e de contribuição × atribuição; o SROI calculado com números; um painel de KPIs pronto para copiar; a matriz de maturidade; a tabela de erros × correção; e as questões práticas.
+Esta lição percorre, nesta ordem: o vocabulário que evita os erros mais caros do setor; o marco legal brasileiro (MROSC), incluído o dispositivo de remanejamento que **já não existe mais**; os frameworks internacionais e o que cada um **não** resolve; o estado da prática no Brasil com números e fontes; o desenho do sistema de medição do mais barato ao mais caro; a aritmética de linha de base × meta e de contribuição × atribuição; o SROI calculado com números; um painel de KPIs pronto para copiar; a matriz de maturidade; a tabela de erros × correção; os casos reais de medição com dados verificados; e as questões práticas.
 
 > [!NOTE]
 > **A frase que define a disciplina:** só um estudo de impacto — com desenho que permite **atribuição causal** — autoriza a dizer "graças ao nosso programa". Recibo, relatório financeiro e certidão de pagamento comprovam **conformidade**, não **mudança**. O setor brasileiro erra ao tratar recibo como resultado.
@@ -757,6 +757,169 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
 
 ---
 
+## 12. Medição de Impacto na Prática: Casos Reais
+
+As seções anteriores desenharam o sistema; este bloco mostra como ele aparece — e como não aparece — em organizações reais. A pesquisa de casos mapeou **11 organizações verificadas** (7 brasileiras e 4 internacionais), todas com CNPJ, registro estatutário ou demonstração financeira localizada: **nenhuma cifra desta seção é estimativa própria**. O próprio mapeamento aponta, para esta lição, três casos — **Instituto Sou da Paz, Todos Pela Educação e TETO Brasil (avaliação com a FGV)** — aos quais se soma a **Fundação Itaú**, cujos números de alcance são os mais desagregados do recorte.
+
+Toda análise a seguir responde a três perguntas: **o que a organização alega medir** (qual nível da cadeia da Seção 1), **com que dado verificado** (valor, ano e fonte) e **como mede** (indicador, denominador e ciclo). A terceira pergunta é a que decide se o número sustenta prestação de contas, resultado ou impacto.
+
+### 12.1 O que cada caso mede: matriz de resultados verificados
+
+| Caso | O que alega medir (nível da cadeia) | Dado verificado (ano) | Como mede: indicador citado |
+|---|---|---|---|
+| **Instituto Sou da Paz** | Produto de incidência: evidência técnica produzida | 225 mil armas analisadas, 3.300 policiais capacitados, 8 pesquisas e 6 estados (2025); +700 mil armas acumuladas em 20 anos | Arsenal do Crime (armas analisadas), cobertura estadual do DESARMES, nº de pesquisas, metas fixadas e monitoradas pelos conselhos |
+| **Todos Pela Educação** | Produto de monitoramento de política pública | 62% das matrículas cobertas (2024); 13 temas da agenda Educação Já; Anuário da Educação Básica em sua 12ª edição (2025) | % de matrículas do país cobertas pelo monitoramento, nº de temas monitorados e série anual do anuário |
+| **TETO Brasil** | Produto padronizado (moradia) + avaliação externa | 113 moradias, 76 projetos e 8.134 voluntários (2024); 5.000ª moradia em dez/2024; meta 2030 de 1 milhão de pessoas | Contagem de moradias por ciclo, meta com prazo declarado e avaliação de impacto com a **FGV** |
+| **Fundação Itaú (Itaú Social)** | Alcance com denominador declarado por unidade | R$ 297 mi investidos, 5,16 mi de pessoas, 95 mil turmas, 20,8 mil escolas e 3,2 mil municípios (2024) | Pessoas, turmas, escolas e municípios contados em unidades separadas; R$ 19,9 mi mobilizados para OSCs |
+| **Habitat for Humanity** | Alcance direto × indireto com números separados | 3.035.972 pessoas com moradia (FY2024); +5,3 mi por incidência; +62 mi desde 1976 | Duas contagens distintas: pessoas com moradia (diretas) e alcance por incidência (indiretas), com o total acumulado desde 1976 |
+
+> [!NOTE]
+> **Leitura da matriz:** nenhuma das cinco organizações publica um número "de impacto" puro. Todas publicam **produto** com unidade, ano e fonte — e é exatamente isso que as torna auditáveis. O salto para resultado e para impacto depende do que a organização declara em seguida: série histórica, meta com fórmula ou grupo de comparação.
+
+- **🔢 Você sabia?** A própria pesquisa de casos mostra por que comparar escala sem métrica é inválido: o mesmo conceito de "alcance" aparece como **5.000 famílias (TETO)**, **5,16 mi de pessoas (Itaú Social)**, **290 mil voluntários (Atados)**, **1 em cada 7 bengaleses (BRAC)** e **3,03 mi de pessoas diretas mais 5,3 mi indiretas (Habitat)**. São cinco unidades diferentes — nenhuma se converte na outra sem conversão declarada, com denominador e ano.
+
+### 12.2 Instituto Sou da Paz: incidência medida por evidência
+
+**O que alega medir.** Segurança pública **com evidências**: o produto é conhecimento técnico sobre armas, homicídios, investigação e justiça juvenil, e a mudança pretendida é **incidência em política pública** — a lição do caso é que, em trabalho de advocacia, **impacto se mede por evidência produzida e por incidência alcançada**, nunca por beneficiário direto inventado.
+
+**Dados verificados.** Em 2025: **6 estados** com o programa DESARMES, **3.300 policiais capacitados**, **8 pesquisas** e **225 mil armas analisadas** (plataforma Arsenal do Crime); a campanha acumula **+700 mil armas em 20 anos**. Receita de **R$ 12.792.835 em 2022**, dos quais **65% de fundações do exterior**; equipe de **25 pessoas**, **auditoria da KPMG** e selo de interesse público do Ministério Público.
+
+**Como mede.** (i) contagem de produto com **unidade e ano** (armas analisadas, policiais, pesquisas); (ii) **cobertura territorial** (estados alcançados) como denominador de alcance; (iii) **governança de meta**: conselhos Diretor e Fiscal que **fixam e monitoram metas**, com comitê de equidade e página de transparência publicada.
+
+> [!TIP]
+> **O que copiar do sistema de medição do Sou da Paz:** (1) em trabalho de **incidência**, meça o que é seu de fato — **evidência produzida** (pesquisas, dados) e **alcance da incidência** (estados, policiais capacitados) — em vez de inventar "beneficiários diretos" que a própria atividade não gera; (2) publique **metas fixadas por um colegiado**, não pela equipe executiva: a meta deixa de ser opinião de quem executa; (3) mantenha **auditoria e página de transparência independentes do doador** — principalmente quando **65% da receita** vem de fonte externa concentrada.
+
+### 12.3 Todos Pela Educação: o resultado é política pública monitorada
+
+**O que alega medir.** Incidência educacional: o **produto** é conhecimento e monitoramento (agenda, municípios, anuário) e o **resultado** esperado é política pública melhorada. Sem beneficiário direto contável, a organização mede **cobertura do monitoramento**.
+
+**Dados verificados.** Em 2024, receita de **R$ 26.082.377**, **sem recebimento de recursos públicos**, com superávit de **R$ 4,66 mi**, patrimônio líquido de **R$ 16,9 mi** e aplicação a **15,40% a.a.**; a agenda **Educação Já** reúne **13 temas** e o **Educação Já Municípios** cobriu **62% das matrículas** em 2024; o **Anuário da Educação Básica** está em sua **12ª edição (2025)**. Governança com Assembleia Geral, Conselho de Administração e **auditoria independente anual**.
+
+**Como mede.** (i) **denominador externo** — o percentual é calculado sobre **matrículas da Educação Básica**, número que existe independentemente da ONG; (ii) **série anual comparável** — 12 edições seguidas do anuário funcionam como linha de base pública; (iii) **cobertura municipal** — os 62% são alcance do monitoramento, não resultado educacional.
+
+> [!TIP]
+> **O que copiar do sistema do Todos Pela Educação:** (1) quando não houver beneficiário direto, declare o **denominador externo** (matrículas, municípios, populações) — ele dá escala sem inflar a conta; (2) publique **série anual**: um anuário na 12ª edição é, por si só, uma linha de base verificável por terceiros; (3) trate a **independência de financiamento como parte do indicador**: para quem critica política pública, **não receber verba pública** é o que sustenta a credibilidade da crítica.
+
+### 12.4 TETO Brasil: produto padronizado, meta com prazo e avaliação externa
+
+**O que alega medir.** Habitação emergencial com **produto padronizado** — a casa montada em **2 dias** torna a contagem auditável em qualquer território — combinado a avaliação externa de impacto.
+
+**Dados verificados.** Em 2024: **113 moradias**, **76 projetos** e **8.134 voluntários**; a **5.000ª moradia** foi alcançada em **dez/2024, em Diadema**; acumulado de **+90 mil voluntários** e **+327 projetos**; **meta 2030 de 1 milhão de pessoas**; e **avaliação de impacto com a FGV**. A captação do jantar de **dez/2025 (~R$ 1,8 mi)** é **declaração da própria organização, sem balanço auditado localizado**.
+
+**Como mede.** (i) **contagem por ciclo** de um produto idêntico (moradia); (ii) **meta de longo prazo com ano declarado** (2030); (iii) **juízo de impacto terceirizado** na FGV — a organização não se autoatribui a causalidade.
+
+> [!TIP]
+> **O que copiar do sistema do TETO:** (1) **padronize o produto antes de contá-lo**: o que é montado igual em todo lugar pode ser auditado em qualquer lugar; (2) **declare a unidade da meta** — "1 milhão de pessoas" (2030) e "113 moradias" (2024) não são a mesma métrica, e compará-las exige conversão declarada de pessoas por moradia; (3) **separe quem entrega de quem avalia**: a FGV julga resultado e impacto, a ONG responde por produto e execução.
+
+### 12.5 Fundação Itaú: alcance com denominador declarado
+
+**O que alega medir.** Alcance em escala, com **unidades separadas** — pessoas, turmas, escolas e municípios — em vez de um único número agregado.
+
+**Dados verificados.** Em 2024: receitas de **R$ 444,2 mi** (**93% financeiras**), despesas de **R$ 307,3 mi** (das quais **R$ 181,7 mi** em projetos), superávit de **R$ 136,8 mi** e patrimônio líquido de **R$ 5,54 bi**; **R$ 297 mi investidos**, **5,16 mi de pessoas**, **95 mil turmas**, **20,8 mil escolas**, **3,2 mil municípios** e **R$ 19,9 mi mobilizados** para OSCs. O **FIA 2024** distribuiu **R$ 18,8 mi** do 1% do IR para **40 projetos** (2023: R$ 24,5 mi).
+
+**Como mede.** (i) **denominador por unidade**: cada número tem sua própria unidade, o que permite razões auditáveis como o custo por pessoa alcançada (Exemplo 10); (ii) **indicador público com limite**: a organização declara parâmetro que **limita os custos administrativos a 5% do investido**; (iii) **mobilização separada de execução**: os R$ 19,9 mi mobilizados para OSCs são publicados à parte do investido, para não confundir repasse com entrega.
+
+- **🔢 Você sabia?** A BRAC publica, no mesmo relatório, **duas unidades diferentes**: alcance — "**1 em cada 5 bengaleses** atendeu" (2024) e "**~26 milhões, 1 em cada 7**" (2025) — e mudança — "**2,3 milhões saíram da pobreza extrema**" (2024). Declarar denominador populacional **e** resultado na mesma página é o oposto do impact washing (lavagem de impacto): o leitor enxerga o que é cobertura e o que é mudança.
+
+> [!WARNING]
+> **Impact washing: transformar alcance em impacto sem trocar de nível.** O hábito mais exportável do setor é publicar escala como prova de mudança — "chegamos a 5,16 milhões de pessoas", "5.000 famílias atendidas", "225 mil armas analisadas" — e deixar o leitor a concluir o resto. Alcance é **produto**; mudança é **resultado**; atribuição é **estudo de impacto**. Antes de publicar qualquer número de escala, três checagens: (i) **declare a métrica** — famílias, pessoas, turmas, voluntários e indiretos não são comparáveis entre si; (ii) **declare fonte e ano**, inclusive quando forem declaração da própria organização sem balanço; (iii) **declare o que mudou** (linha de base, meta com fórmula ou contragrupo). Sem o item (iii), o número segue sendo alcance — e nem auditoria financeira converte produto em impacto.
+
+### 12.6 Exemplo 9 — taxa de alcance e o teste da definição operacional (Sou da Paz)
+
+Com os dados verificados do caso, as contas são reproduzíveis por qualquer leitor:
+
+```text
+EXEMPLO 9 — TAXAS DE ALCANCE DO DESARMES (Instituto Sou da Paz, 2025)
+════════════════════════════════════════════════════════════════════════
+Dado verificado (2025) .... 225.000 armas analisadas · 3.300 policiais
+                             capacitados · 8 pesquisas · 6 estados
+                             campanha acumula 700.000 armas em 20 anos
+
+(1) ARMAS POR ESTADO ......... 225.000 ÷ 6 = 37.500 armas/estado
+(2) POLICIAIS POR ESTADO .....   3.300 ÷ 6 =    550 policiais/estado
+(3) PESQUISAS POR ESTADO .....       8 ÷ 6 =  1,33 pesquisa/estado
+(4) RITMO HISTÓRICO DA
+    CAMPANHA ................. 700.000 ÷ 20 = 35.000 armas/ano
+(5) RAZÃO 2025 × RITMO ....... 225.000 ÷ 35.000 = 6,43 ≈ 6,4×
+
+TESTE DE DEFINIÇÃO OPERACIONAL (antes de publicar a conta 5):
+ "armas analisadas" (Arsenal do Crime, 2025) e "armas acumuladas da
+  campanha" (20 anos) têm NOMES diferentes — só se dividem se a
+  definição operacional for a mesma (ficha da Seção 5.2). Se não
+  for, publique apenas as taxas (1 a 3), que saem do MESMO recorte.
+```
+
+As taxas (1) a (3) são defensáveis porque saem de um **recorte único** (mesmo ano, mesma fonte, mesmo período). A razão (5) é didática: ela só vira indicador publicável depois da ficha de definição operacional. E nada disso prova mudança na segurança pública — é **alcance**; para resultado, o caso precisaria de série histórica de homicídios nos 6 estados atendidos, com e sem programa.
+
+### 12.7 Exemplo 10 — linha de base de custo por alcançado (Fundação Itaú, 2024)
+
+A linha de base também pode ser **montada a partir de números públicos**, desde que numerador e denominador venham da mesma fonte e do mesmo ano:
+
+```text
+EXEMPLO 10 — LINHA DE BASE A PARTIR DE NÚMEROS PÚBLICOS (2024)
+════════════════════════════════════════════════════════════════════════
+Recorte .... exercício de 2024, dados publicados da Fundação Itaú
+Unidades ... R$ 297 mi investidos · 5,16 mi pessoas · 95 mil turmas ·
+             20,8 mil escolas · 3,2 mil municípios
+
+(1) CUSTO POR PESSOA ALCANÇADA ... 297 ÷ 5,16 = 57,5581...
+                                  ≈ R$ 57,56 por pessoa
+(2) TURMAS POR ESCOLA ............. 95.000 ÷ 20.800 = 4,567 ≈ 4,6
+(3) PESSOAS POR ESCOLA ............ 5.160.000 ÷ 20.800 = 248,08 ≈ 248
+(4) PESSOAS POR MUNICÍPIO ......... 5.160.000 ÷ 3.200 = 1.612,5
+
+LINHA DE BASE declarada ....... custo de R$ 57,56 por pessoa
+                                alcançada (2024, mesma fonte)
+
+META ILUSTRATIVA: redução RELATIVA de 10% em 12 meses
+    57,56 × 0,90 = 51,804 ≈ R$ 51,80 por pessoa
+    Δ por pessoa = 57,56 − 51,80 = R$ 5,76
+    efeito agregado ≈ 5,76 × 5,16 mi = R$ 29,7 mi
+
+Observação: os valores financeiros da fonte vêm EM R$ MIL —
+confira o PDF original antes de reproduzi-los (item não verificado).
+```
+
+Três decisões tornam essa linha de base defensável: (i) a **unidade está declarada** ("por pessoa alcançada", não "por beneficiário" — beneficiário exigiria definição operacional de quem entra e quem não entra); (ii) **fonte e ano são os mesmos** em numerador e denominador; (iii) a meta é **declarada como relativa** sobre a linha de base, evitando a armadilha da Seção 6.1. Repare no limite: o denominador é **alcance** — a conta melhora custo por alcance, não prova mudança; para resultado, o painel da Seção 8.1 precisaria de indicador de aprendizagem ou de permanência das turmas.
+
+### 12.8 Síntese: o que copiar de cada sistema de medição
+
+| Caso | O que copiar já no próximo ciclo | Armadilha que o caso evita |
+|---|---|---|
+| **Sou da Paz** | Evidência e alcance da incidência declarados como produto, com meta fixada por conselho e auditoria publicada | Inventar "beneficiários diretos" em trabalho de advocacia |
+| **Todos Pela Educação** | Denominador externo público (matrículas) e série anual comparável (12ª edição do anuário) | Contar alcance sem base de comparação pública |
+| **TETO Brasil** | Produto padronizado contado por ciclo, meta com ano (2030) e juízo de impacto terceirizado (FGV) | Somar moradias, famílias e pessoas na mesma meta |
+| **Fundação Itaú** | Unidades separadas (pessoas, turmas, escolas, municípios) que se prestam a razões auditáveis | Publicar um número agregado sem denominador declarado |
+| **Habitat** | Diretas e indiretas em números separados, com o total acumulado (desde 1976) declarado | Somar produto e incidência num número só |
+
+Com a síntese à vista, ordene agora o passo a passo que transforma **qualquer um** desses números de alcance em indicador auditável:
+
+```dragdrop
+{
+  "question": "Ordene os passos para transformar um número de alcance de caso real em indicador defensável:",
+  "items": [
+    "Declarar a métrica, o universo, a fonte e o ano (famílias, pessoas, turmas, armas, matrículas)",
+    "Apurar a linha de base do ciclo anterior com exatamente o mesmo recorte",
+    "Calcular a fórmula auditável (razão ou taxa, ex.: custo por pessoa alcançada)",
+    "Fixar a meta com prazo e dizer se ela é relativa ou absoluta",
+    "Comparar ciclo a ciclo, desagregar por marcadores e publicar a correção de rota"
+  ],
+  "correctOrder": [
+    "Declarar a métrica, o universo, a fonte e o ano (famílias, pessoas, turmas, armas, matrículas)",
+    "Apurar a linha de base do ciclo anterior com exatamente o mesmo recorte",
+    "Calcular a fórmula auditável (razão ou taxa, ex.: custo por pessoa alcançada)",
+    "Fixar a meta com prazo e dizer se ela é relativa ou absoluta",
+    "Comparar ciclo a ciclo, desagregar por marcadores e publicar a correção de rota"
+  ],
+  "explanation": "A ordem é a mesma da Sequência 5.1: sem métrica declarada não há como apurar linha de base; sem linha de base e fórmula a meta vira opinião (art. 22, IV); e sem comparação ciclo a ciclo não há aprendizagem nem correção de rota (art. 58, § 2º). É a ordem que separa um número de captação de um indicador auditável."
+}
+```
+
+> [!NOTE]
+> **Transferência para a sua organização:** escolha **um** indicador de um caso desta seção e preencha a ficha de 9 campos (Seção 5.2) com os seus números: unidade, fórmula, linha de base do último ciclo, meta relativa ou absoluta, fonte, ano, frequência, responsável e desagregação. Se você não conseguir preencher a linha de base com um número que **já existe**, o indicador ainda é desejo — e desejo não entra em plano de trabalho (art. 22, IV).
+
+---
+
 ## Perguntas Práticas (Practice Questions)
 
 ```question
@@ -874,6 +1037,33 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
   ],
   "correct": 0,
   "explanation": "O GSSB aprovou os padrões GRI 106/107 (01–02/06/2026) e GRI 104/105 (16/07/2026), com publicação postergada para 2027; Economic Impacts Phase 1 (GRI MF) está em aprovação final, Phases 2–3 estão pausadas, Pollution Phase 1 está em aprovação, o piloto setorial é Food & Beverage e o Work Programme 2026–2028 foi consultado até 27/03/2026. A data de eficácia dos Universal Standards 2021 não foi confirmada em nota oficial."
+}
+```
+
+```question
+{
+  "id": "npof-14-q9",
+  "type": "multiple-choice",
+  "question": "O Instituto Sou da Paz obteve R$ 12,79 milhões em 2022, com 65% de recursos de fundações do exterior. Em gestão de risco, esse dado indica:",
+  "options": [
+    "diversificação efetiva das fontes de recursos",
+    "exposição a cortes e a mudanças de prioridade do financiamento internacional",
+    "contrato de gestão firmado com o MROSC",
+    "dependência de eventos de arrecadação"
+  ],
+  "correct": 1,
+  "explanation": "Concentração regional de doador é risco assimétrico: 65% da receita de 2022 vinha de fundações do exterior, de modo que um corte ou uma mudança de prioridade em poucas mesas atinge a maior parte do orçamento. A resposta é diversificar fontes nacionais — e, na medição, manter auditoria (KPMG), página de transparência e metas fixadas pelo conselho, que são os sinais de credibilidade independentes de quem doa."
+}
+```
+
+```question
+{
+  "id": "npof-14-q10",
+  "type": "multiple-choice",
+  "question": "A BRAC registrou BDT 14,1 bilhões de doações sobre BDT 140,6 bilhões de receita no exercício encerrado em 30/06/2024. O percentual é aproximadamente:",
+  "options": ["50%", "25%", "10%", "75%"],
+  "correct": 2,
+  "explanation": "14,1 ÷ 140,6 = 0,1003 ≈ 10%: microfinanças (67,5%) e empresas sociais (20,1%) somam 87,6% da receita, de modo que a operação se autofinancia e a doação cobre saúde, WASH e incidência. Toda leitura de percentual exige denominador declarado e ano do exercício — a mesma disciplina da ficha de indicador (Seção 5.2) e da linha de base (Seção 5.5)."
 }
 ```
 

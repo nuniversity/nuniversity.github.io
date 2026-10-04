@@ -1,6 +1,6 @@
 ---
 title: "Operações e Sustentabilidade em ONGs"
-description: "O backstage da missão: ciclo do programa e da parceria em 10 etapas com entregáveis, MROSC vigente (plano de trabalho art. 22, custos indiretos sem teto, compras art. 34 VIII, alterações, monitoramento e prestação de contas 90/30/60), qualidade programática com ToC e MEAL, matriz de riscos 5×5 preenchida, plano de continuidade, painel de 13 KPIs, os 4 pilares da sustentabilidade, reserva operacional, retenção de doadores, TIC OSCs 2025 e LGPD — com sete exemplos numéricos resolvidos, três casos brasileiros comentados, erros comuns e questões de prática."
+description: "O backstage da missão: ciclo do programa e da parceria em 10 etapas com entregáveis, MROSC vigente (plano de trabalho art. 22, custos indiretos sem teto, compras art. 34 VIII, alterações, monitoramento e prestação de contas 90/30/60, regras do Decreto nº 11.948/2024 — Transferegov, Mapa das OSC, vigência ≤ 10 anos), qualidade programática com ToC e MEAL, matriz de riscos 5×5 preenchida, plano de continuidade, painel de 13 KPIs, os 4 pilares da sustentabilidade, reserva operacional, retenção de doadores, TIC OSCs 2025 e LGPD — com sete exemplos numéricos resolvidos, quatro casos reais de operação (Habitat, TETO, BRAC e MSF), a armadilha de conformidade de 2026, erros comuns e questões de prática."
 order: 7
 difficulty: "intermediate"
 duration: "90 min"
@@ -12,7 +12,7 @@ A governança decide **para onde** a entidade vai; as operações decidem se ela
 Há um segundo motivo para estudar operações com rigor normativo. Desde a Lei nº 13.019/2014 (MROSC), alterada pela Lei nº 13.204/2015 e regulamentada no âmbito federal pelo Decreto nº 8.726/2016 (redação dada pelos Decretos nº 11.661/2023 e 11.948/2024), **a maior parte do ciclo da parceria é exigência legal expressa**, e não boa prática opcional. Apostila desatualizada — o famoso "teto de 15% de custos indiretos" (art. 47, revogado) — é hoje uma das fontes mais comuns de erro em proposta, em prestação de contas e em prova.
 
 > [!NOTE]
-> **Como ler esta lição.** Todo número estatístico vem com **fonte e ano**. Toda regra jurídica vem com **artigo e dispositivo vigente** (texto compilado conferido em 03/10/2026). Os itens que a pesquisa não conseguiu confirmar estão isolados na seção 11, rotulados como **não verificados** — e não devem ser citados como fato.
+> **Como ler esta lição.** Todo número estatístico vem com **fonte e ano**. Toda regra jurídica vem com **artigo e dispositivo vigente** (texto compilado conferido em 03/10/2026). Os itens que a pesquisa não conseguiu confirmar estão isolados na seção 12, rotulados como **não verificados** — e não devem ser citados como fato.
 
 Nesta lição você vai:
 
@@ -23,6 +23,7 @@ Nesta lição você vai:
 - montar um **painel de 13 KPIs** e um dashboard de uma página;
 - calcular a **reserva operacional mínima**, a **retenção de doadores** e o **custo de captação**;
 - ler os **4 pilares da sustentabilidade** e o retrato brasileiro (CAF/IDIS 2025, ABCR, TIC OSCs 2025);
+- estudar **4 casos reais de operação** (Habitat, TETO, BRAC e MSF) e extrair a lição operacional de cada um;
 - reconhecer os **erros comuns** que derrubam parceria, auditoria e reputação.
 
 ---
@@ -198,6 +199,30 @@ No âmbito federal, o **Decreto nº 8.726/2016, art. 25**, repõe o detalhe oper
 | Prestação de contas | Lei arts. 63 a 66, 69 e 72; Decreto arts. 54, 55, 59 e 65 | Relatórios, prazos, classificação e glosa |
 | Transparência | Lei arts. 10 e 11 | Publicação ativa, **inclui remuneração da equipe** |
 
+### 3.6 O que o Decreto nº 11.948/2024 acrescentou à rotina (e a apostila não conta)
+
+Toda a seção 3 já usa o Decreto nº 8.726/2016 com a redação dos Decretos nº 11.661/2023 e **11.948/2024, de 12/03/2024**. Este é o que **consolidou a execução do MROSC** — e sete pontos dele só entram na rotina da equipe se alguém os escrever no fluxo de trabalho:
+
+- **Prestação de contas no Transferegov.br** (Decreto, art. 55) — a plataforma deixou de ser "canal de envio" e passou a ser **o local da prestação de contas** federal;
+- **Relatório de execução financeira (REF)** disciplinado no regulamento federal, fechando o pacote do art. 66 da Lei;
+- **Divulgação no Portal da Transparência e no Mapa das OSC** (Decreto, red. 2024, § 4º) — a parceria vira **dado público pesquisável**;
+- **Vigência total de até 10 anos** (Decreto, art. 21) — planejamento plurianual lícito, com as alterações disciplinadas no art. 43;
+- **Contrapartida:** só em **bens e serviços**, em parceria **superior a R$ 1.000.000,00**, com justificativa técnica — **contrapartida financeira é vedada** (Decreto, arts. 11-A, 12 e 12-A);
+- **Bens remanescentes:** destinação prevista **à própria OSC**, na forma do regulamento;
+- **O que a tríade 90/30/60 não cobre:** a manifestação da administração sobre a prestação de contas final ocorre em até **150 dias** do recebimento ou do cumprimento da diligência (Lei nº 13.019/2014, art. 71) — e o silêncio não impede apreciação posterior nem medidas saneadoras.
+
+**Tabela — norma × vigência (o que está em vigor e o que a operação deve cumprir):**
+
+| Norma | Vigência (data verificada) | Regra operacional correspondente |
+|---|---|---|
+| **Decreto nº 11.948/2024** | **12/03/2024** | Apostilamento com **dispensa de autorização prévia até 10%** do valor global e comunicação posterior (art. 43, §§ 4º e 5º); prestação de contas no **Transferegov.br** (art. 55); divulgação no **Portal da Transparência** e no **Mapa das OSC** (§ 4º); vigência total ≤ **10 anos** (art. 21); contrapartida financeira **vedada** (arts. 11-A, 12 e 12-A) |
+| **Decreto nº 11.661/2023** | vigente | **Transferegov.br** como plataforma única da parceria federal |
+| **Decreto nº 8.726/2016** | vigente, com redação dos Decretos nº 11.661/2023 e 11.948/2024 | Plano de trabalho detalhado (art. 25, I a VII e § 1º); **REO em 30 dias e REF em 60 dias** da notificação, prorrogáveis por 15 (art. 65) |
+| **Lei nº 13.019/2014** | vigente, com redação da **Lei nº 13.204/2015** | Contas finais em **90 dias** (art. 69); apreciação em até **150 dias** (art. 71); pesquisa de satisfação em vigência > 1 ano (art. 58, § 2º) |
+
+> [!NOTE]
+> **Regra de uso desta tabela:** em 2026, o que muda não é a lei — é o **regulamento, a plataforma e a publicidade**. Antes de protocolar qualquer alteração, confira três caixinhas: o pedido está no **Transferegov** (art. 55), o ajuste cabe em **apostilamento até 10%** (art. 43, §§ 4º e 5º) e a **divulgação** já foi prevista no fluxo (Portal da Transparência + Mapa das OSC). O que não estiver nesses três lugares é pendência, não detalhe.
+
 ---
 
 ## 4. Compras, custos indiretos e a armadilha do "teto de 15%"
@@ -277,6 +302,35 @@ Com o regulamento aprovado (art. 34, VIII), o fluxo operacional padrão é este:
 > O MROSC não aplica à OSC a **Lei nº 14.133/2021** de forma direta — mas o **art. 34, VIII**, exige que o regulamento de compras observe os **princípios do art. 37, *caput*, da Constituição** (legalidade, impessoalidade, moralidade, publicidade e eficiência). Na prática, o regulamento privado é o mecanismo que **traduz** esses princípios para a realidade da entidade.
 
 - **🔢 Você sabia?** **Compras ≠ custos indiretos ≠ taxa de administração.** São três regimes distintos dentro do mesmo MROSC: o **art. 34, VIII**, disciplina *como comprar*; o **art. 46, III**, diz *o que pode ser custo indireto* (sem teto); e a **taxa de administração** é **vedada**. Confundir os três é o caminho mais curto para uma proposta com orçamento rejeitado.
+
+Ordene o fluxo completo de uma compra em parceria pelo MROSC — da necessidade formalizada ao arquivo do processo:
+
+```dragdrop
+{
+  "question": "Ordene o fluxo de compra de uma OSC em parceria pelo MROSC, da necessidade ao arquivo:",
+  "items": [
+    "Necessidade formalizada — requisição com especificação técnica, quantidade, prazo e centro de custo",
+    "Pesquisa de compatibilidade de preços — um dos elementos do Decreto art. 25, § 1º (red. Decreto nº 11.948/2024)",
+    "Cotações internas conforme o regulamento próprio — faixa de valor, número de fornecedores e forma de julgamento",
+    "Julgamento documentado — ata ou comparativo assinado, com justificativa da escolha",
+    "Contratação e pedido — instrumento adequado ao valor, com as cláusulas do regulamento",
+    "Recebimento e conferência — quantidade, qualidade e conformidade, com assinatura de quem recebe",
+    "Pagamento segregado por fonte e por etapa do plano de trabalho",
+    "Arquivamento do processo completo — pronto para a etapa 9 e para a retenção de 10 anos (art. 68)"
+  ],
+  "correctOrder": [
+    "Necessidade formalizada — requisição com especificação técnica, quantidade, prazo e centro de custo",
+    "Pesquisa de compatibilidade de preços — um dos elementos do Decreto art. 25, § 1º (red. Decreto nº 11.948/2024)",
+    "Cotações internas conforme o regulamento próprio — faixa de valor, número de fornecedores e forma de julgamento",
+    "Julgamento documentado — ata ou comparativo assinado, com justificativa da escolha",
+    "Contratação e pedido — instrumento adequado ao valor, com as cláusulas do regulamento",
+    "Recebimento e conferência — quantidade, qualidade e conformidade, com assinatura de quem recebe",
+    "Pagamento segregado por fonte e por etapa do plano de trabalho",
+    "Arquivamento do processo completo — pronto para a etapa 9 e para a retenção de 10 anos (art. 68)"
+  ],
+  "explanation": "Cada passo só vale se deixar prova material: requisição, pesquisa de preços, ata de julgamento, instrumento, recebimento assinado, pagamento por fonte e arquivo. Pular a pesquisa de compatibilidade ou o recebimento assinado é o que transforma uma compra legítima em glosa na etapa 9 — e é o regulamento de compras aprovado pela administração celebrante (art. 34, VIII) que dá legitimidade ao fluxo inteiro."
+}
+```
 
 ---
 
@@ -390,6 +444,8 @@ Uma matriz de riscos só vale se for **viva**. A rotina que funciona em OSC bras
 
 > [!NOTE]
 > A **ISO 31000:2018** e o **COSO ERM (2017)** são **adotados voluntariamente** pelas OSC — não existe norma brasileira que os exija. Ainda assim, usá-los produz duas vantagens concretas: linguagem comum com financiadores e evidência de **controle interno** perante auditoria.
+
+- **🔢 Você sabia?** **Associação e fundação sem fins lucrativos não podem pedir recuperação judicial.** As **3ª e 4ª Turmas do STJ (2024–2025)** assentaram que a Lei nº 11.101/2005 só alcança **empregadores/empresários** (arts. 1º e 2º) — a exceção confirmada é das **cooperativas médicas** (ADI 7.442/STF). Tradução operacional para a seção 6.4: o plano de continuidade **não pode** contar com recuperação judicial como saída de crise; as saídas verificadas são **acordo com credores, reestruturação administrativa ou dissolução limpa** com destinação do patrimônio (art. 61 do Código Civil).
 
 ---
 
@@ -628,7 +684,117 @@ A **LGPD (Lei nº 13.709/2018)** se aplica integralmente às OSC:
 
 ---
 
-## 10. Erros comuns que derrubam a operação
+## 10. Operações e Execução na Prática: Casos Reais
+
+### 10.1 Por que ler casos pela operação
+
+Os números desta seção vêm de uma pesquisa com **11 casos verificados** (7 brasileiros e 4 internacionais), todos com CNPJ, registro estatutário ou demonstração financeira localizada — **nenhuma cifra aqui é estimativa própria**, e o que não foi confirmado em fonte primária aparece sinalizado na seção 12.
+
+O recorte desta aula é o da própria pesquisa: **TETO Brasil** e **Habitat for Humanity** mostram que **produto padronizado + rede federada = escala com custo controlado**; dois casos completam a leitura — **BRAC** (a operação que se autofinancia) e **Médicos Sem Fronteiras** (logística medida em meses de caixa). Três leituras valem antes de copiar qualquer número:
+
+1. **Nenhum dos 11 depende majoritariamente de verba pública:** a MSF tem **97,9%** de receita privada (2024) e o Todos Pela Educação declara não receber recursos públicos — execução em escala com recurso privado existe — e é ela que mantém a entidade fora da dependência de um único repasse;
+2. **Escala só é comparável com a métrica declarada:** TETO reporta **5.000 famílias** acumuladas (dez/2024), Fundação Itaú **5,16 milhões de pessoas** (2024), Atados **290 mil voluntários** (2024), BRAC **1 em cada 7 bengaleses** (2025) e Habitat **3,03 milhões de pessoas** com moradia (FY2024) — "atendidos", "formados" e "cubertos" medem coisas diferentes;
+3. **Concentração é o risco nº 1 dos balanços:** Instituto Ayrton Senna **62%** da receita em royalties de marca (2024), Instituto Sou da Paz **65%** de fundações do exterior (2022) e Fundação Itaú **93%** de receitas financeiras (2024) — operação eficiente com fonte única é operação frágil, exatamente o risco crítico da matriz da seção 6.2.
+
+```text
+  QUATRO CASOS, QUATRO ALAVANCAS OPERACIONAIS
+
+  REDE + VAREJO .................. HABITAT FOR HUMANITY (FY2024)
+      afiliado autônomo com           3,03 mi de pessoas com
+      contabilidade própria;          moradia; sede US$ 362,1 mi
+      a sede consolida, audita        e rede estimada em
+      a marca e opera as              US$ 3,1 bi; lojas ReStore
+      ReStore                          devolvem receita recorrente
+             |
+             v
+  PRODUTO PADRONIZADO ............ TETO BRASIL (2024)
+      casa montada em 2 dias          113 moradias, 76 projetos
+      por voluntariado jovem;         e 8.134 voluntários;
+      métrica auditada pela FGV       5.000ª moradia em dez/2024
+             |
+             v
+  OPERAÇÃO QUE SE AUTOFINANCIA ... BRAC (exercício 2023-24)
+      microfinanças + empresas        a doação cai a 10% da
+      sociais = 87,6% da receita;     receita; +100 mil
+      auditoria e reserva de          funcionários em 15
+      10% do superávit                países
+             |
+             v
+  LOGÍSTICA COM CAIXA ............. MÉDICOS SEM FRONTEIRAS (2024)
+      10 países concentram            79% da receita à
+      58,2% da despesa de             missão; reservas de
+      programas                       4,4 meses (seção francesa)
+
+  REGRA DE USO: copie a alavanca, não o número. Todo número
+  só entra em relatório com métrica, fonte e ano declarados.
+```
+
+### 10.2 Habitat for Humanity (EUA, 1976) — franquia social: execução local, marca consolidada
+
+**O que fizeram.** Organização **501(c)(3)** estruturada como **rede federada de afiliados autônomos em mais de 70 países**, dedicada a moradia simples e acessível com *sweat equity* e hipoteca sem lucro. Cada afiliado **tem contabilidade própria**; a Habitat for Humanity International (HFHI) **consolida, audita a marca e publica o Form 990**.
+
+**Números verificados (FY2024):**
+
+| Item | Valor |
+|---|---|
+| Receita da sede (HFHI) | **US$ 362,1 mi** — contribuições US$ 234,6 mi, itens doados US$ 51,7 mi e grants públicos US$ 28,3 mi |
+| Rede (estimativa, não auditada) | **US$ 3,1 bi** — contribuições 49%, casas 24% e itens 20% |
+| Moradias | **3.035.972 pessoas** com moradia; **+5,3 milhões** por *advocacy*; **+62 milhões** desde 1976 |
+| Varejo e crédito | lojas **ReStore** em operação e **NMTC de US$ 130 mi desde 2008** |
+
+**Cadeia de suprimentos e logística.** O produto é padronizado (casa simples com participação do futuro morador), e o **varejo de itens doados (ReStore)** fecha o ciclo: doação → triagem → venda → recurso recorrente para a próxima obra. O financiamento é deliberadamente misto — contribuição, venda de casa, item doado e grant público — para que a perda de uma linha não pare a produção.
+
+**Tecnologia e controle.** A escala não vem de sistema central, mas de **padrão de marca + prestação de contas local**: cada afiliado presta contas do que é dele, e a sede audita a marca. Por isso a receita da rede é **estimativa não auditada** (seção 12): comparar sede e rede sem aviso metodológico é comparação inválida.
+
+**Lição operacional.** Franquia social combina **padrão global com prestação de contas local**: padronize o objeto, decentralize a execução e audite a marca. Em relatório e em proposta, separe sempre **sede auditada × rede estimada** e declare o exercício (FY2024) — sem isso, o primeiro auditor pergunta qual dos dois números é o seu.
+
+### 10.3 TETO Brasil (Brasil, 2006) — produto padronizado: escala com custo controlado
+
+**O que fizeram.** *Um Teto para Meu País – Brasil* (CNPJ 10.513.214/0001-15), no Brasil desde **2006**, integrante da rede TECHO em **19 países**, dedica-se a habitação emergencial e infraestrutura em favelas, com **voluntariado jovem** e o Mapa de Direitos.
+
+**Números verificados (2024):** **113 moradias**, **76 projetos** e **8.134 voluntários**; acumulado de **+90 mil voluntários** e **+327 projetos**; **5.000ª moradia** entregue em dez/2024 (Diadema); meta de **1 milhão de pessoas** até 2030.
+
+**Cadeia de suprimentos e logística.** O insumo é o **voluntariado** (mais material e transporte), e o produto é a **casa padronizada montada em 2 dias** — a padronização é o que permite escalar com custo controlado sem virar construtora: mesma peça, mesma instrução, qualquer equipe. A **avaliação de impacto com a FGV** terceiriza a prova do que foi entregue.
+
+**Financiamento da operação.** Doações individuais e institucionais, eventos e parcerias (Fundação Tide Setubal, Airbnb e Fuplastic); o jantar de dez/2025 captou **~R$ 1,8 milhão** — *declaração da organização, sem balanço auditado localizado (seção 12)*.
+
+**Lição operacional.** Escala com voluntariado só funciona com **produto padronizado, instrução reproduzível e métrica declarada** — "moradias entregues", não "pessoas impactadas". Sem a métrica escrita no **art. 22, IV**, o comparativo ano a ano (e a renovação da parceria) simplesmente não existem; e sem terceiro independente, o número vira narrativa.
+
+### 10.4 BRAC (Bangladesh, 1972) — a operação que se autofinancia
+
+**O que fizeram.** Criada em **21/03/1972**, por Fazle Hasan Abed, como sociedade registrada sob o *Societies Registration Act 1860* (n. 3695/3), atuando em pobreza, saúde, educação, WASH, microfinanças e resposta humanitária.
+
+**Números verificados (exercício encerrado em 30/06/2024):** receita de **BDT 140,6 bi** — microfinanças **BDT 94,9 bi (67,5%)**, empresas sociais **BDT 28,3 bi (20,1%)** e doações de doadores **BDT 14,1 bi (10,0%)**; no exercício anterior, BDT 125,3 bi.
+
+**Escala e governança da execução:** em 2024, **1 em cada 5 bengaleses** foi atendido e **2,3 milhões** de pessoas saíram da pobreza extrema; em 2025, cerca de **26 milhões de pessoas** (1 em cada 7), **19 milhões de mulheres** e **312 mil famílias graduadas**, com **+100 mil funcionários em 15 países**. O *governing body* se reúne **5 vezes por ano**, a assembleia ocorreu em **19/03/2024**, a auditoria é da ACNABIN e existe **reserva estatutária de 10% do superávit**.
+
+**Lição operacional.** Aqui a "cadeia de suprimentos" é a própria **rede de agências de microcrédito e de empresas sociais**: a operação paga a operação, e a doação (10% do total) cobre saúde, WASH e incidência. A tradução para a sua entidade é a da seção 8.3: **receita própria é o que sustenta o núcleo**, e a **reserva estatutária de 10% do superávit** é o equivalente institucional da reserva operacional de 3 meses. *Valores em taka: conversão em moeda estrangeira seria estimativa própria (seção 12).*
+
+### 10.5 Médicos Sem Fronteiras (França, 1971) — logística humanitária medida em caixa
+
+**O que fizeram.** Fundada em Paris em **22/12/1971** por 13 profissionais, como associação sem fins lucrativos da Lei francesa de 1901; são **24 seções**, **18 filiais** e a MSF International em Genebra, com auditoria sob **Swiss GAAP FER** e contas combinadas auditadas pela **EY**.
+
+**Números verificados (2024):** receita de **€ 2.362 milhões** (€ 2,6 bilhões em 2025) — **97,9% de origem privada**, com **€ 2.015 milhões (85,3%) de pessoas físicas** e apenas **2,1% público**; **+7,1 milhões de doadores** em 2024 e **+7,5 milhões** em 2025.
+
+**Logística e distribuição da despesa:** **+65 mil profissionais**, **+17 milhões de consultas** e **10 países concentram 58,2% da despesa de programas** (2024) — concentração geográfica é decisão logística documentada, não acidente; a MSF **recusa fundos públicos da União Europeia desde 2016**.
+
+- **🔢 Você sabia?** No Médicos Sem Fronteiras, **79% da receita** foi aplicada na missão social em 2024 e, na seção francesa, **€ 90,1 de cada € 100** foram para as missões, com **reservas de 4,4 meses** de caixa. Em operação de campo, dois KPIs explicam todo o resto: **% da receita entregue à missão** e **reserva em meses** — os mesmos guard-rails que o painel da seção 7 cobra da OSC brasileira, aqui auditados em contas combinadas. A diferença é que, em terreno, a reserva não é conforto patrimonial: é **combustível de entrega**.
+
+**Tabela — os quatro casos, a alavanca operacional de cada um:**
+
+| Caso | Alavanca operacional | Número verificado (ano) | Lição operacional |
+|---|---|---|---|
+| **Habitat for Humanity** | Rede federada + varejo de itens doados (ReStore) | 3,03 mi de pessoas com moradia; sede US$ 362,1 mi × rede estimada US$ 3,1 bi (FY2024) | Padrão global com contabilidade local; separe sempre **sede auditada × rede estimada** |
+| **TETO Brasil** | Produto padronizado montado com voluntariado | 113 moradias, 76 projetos e 8.134 voluntários (2024) | Padronizar (casa em 2 dias) é o que permite escalar com custo controlado; audite a métrica com terceiro |
+| **BRAC** | Receita própria financiando a execução | Microfinanças 67,5% + empresas sociais 20,1%; doação 10% (2023-24) | Quem opera em escala financia a operação **com** operação; reserva de 10% do superávit |
+| **Médicos Sem Fronteiras** | Logística + captação individual em escala | 79% à missão; 10 países = 58,2% da despesa; reservas 4,4 meses (2024) | Meça a operação em **meses de caixa** e em **% entregue à missão** |
+
+> [!IMPORTANT]
+> **Copie a alavanca, não o número.** Repetir "3 milhões de atendidos" sem a métrica, a fonte e o ano é a forma mais rápida de transformar um caso bem-feito em pergunta desconfortável na auditoria. Antes de importar um caso para o seu plano: (i) qual é a **alavanca** (padrão, rede, receita própria, caixa)? (ii) qual é a **métrica declarada** no art. 22, IV? (iii) quem **audita** essa métrica — a própria entidade, um terceiro ou ninguém? Se a resposta for "ninguém", o caso ainda não é seu.
+
+---
+
+## 11. Erros comuns que derrubam a operação
 
 > [!WARNING]
 > **Lista de verificação antes de qualquer proposta, auditoria ou prova:**
@@ -648,9 +814,16 @@ A **LGPD (Lei nº 13.709/2018)** se aplica integralmente às OSC:
 
 **Caso resolvido — a entidade que descobriu o teto que não existe.** Em reunião de orçamento, a coordenação propôs "reduzir custos indiretos para 15% por causa do art. 47". O financeiro conferiu a redação vigente: **art. 47 revogado** pela Lei nº 13.204/2015. A decisão correta foi manter o custo indireto necessário (art. 46, III), **detalhá-lo no plano de trabalho** (Decreto art. 25, V) e **demonstrar a compatibilidade com o mercado por um elemento** — no caso, **ata de registro de preços** (Decreto art. 25, § 1º, red. Decreto nº 11.948/2024). A proposta foi aprovada sem glosa de sobreestrutura.
 
+> [!WARNING]
+> **Armadilha de conformidade 2026: prometer benefício fiscal que o doador não tem mais.** Em **2026**, quem escreve proposta para pessoa jurídica precisa conferir três documentos **antes** de digitar "doação dedutível":
+> (i) a **LC nº 224/2025, de 26/12/2025**, reduziu linearmente **10%** de todos os incentivos federais — **IRPJ e II desde 01/01/2026** e os demais tributos federais **desde 01/04/2026**;
+> (ii) a **IN RFB nº 2.307/2026** **revogou o item 26** do Anexo Único: a dedução de doações de PJ a OSCs e OSCIPs (2% do lucro operacional — Lei nº 9.249/1995, art. 13, § 2º, III) **entrou no corte**, enquanto se mantém o **item 34** (isenção de IRPJ, CSLL e COFINS do art. 15 da Lei nº 9.532/1997);
+> (iii) a **LC nº 235/2026, de 27/08/2026**, reescreveu o **inciso V do § 8º do art. 4º da LC nº 224** justamente para ressalvar os benefícios de PJ sem fins lucrativos. Seguem **pendentes a ADI 7.920** (CNI vs. LC nº 224, STF) e o **PLC 11/2026**, que tenta restringir esse inciso.
+> **Ação:** guarde no dossiê o **item 34** + o **inciso V com a redação da LC nº 235/2026** + o **FAQ da RFB** (o Anexo não é exaustivo) e **não prometa percentual de dedução em proposta** sem conferir a norma na data da assinatura. E na mesma janela, **2026 é o ano-teste da reforma tributária**: **CBS de 0,9%** e **IBS de 0,1%**, compensados com PIS/COFINS no período (Decreto nº 12.955/2026, art. 582; Ato Conjunto RFB/CGIBS nº 1/2025) — patrocínio com contrapartida já é fato gerador, negocie-o como **custo**, não como favor.
+
 ---
 
-## 11. Limites desta pesquisa: itens não verificados
+## 12. Limites desta pesquisa: itens não verificados
 
 Para você não transformar lacuna de pesquisa em afirmação categórica:
 
@@ -662,7 +835,10 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
 - **Recursos restritos: 68% (2025)** — há divergência entre edições (72% em 2026): **cite sempre o ano**;
 - **Composição de despesa (captação, administração, programa)** — números de blog, ordem de grandeza apenas;
 - **Google Ad Grants (US$ 10 mil/mês)** — elegibilidade **não reconfirmada** nesta pesquisa; verificar antes de prometer;
-- **"Programa Criança" como franquia social** e casos como "Gerando Falcões" e "CDI" — **sem fonte primária aberta** nesta pesquisa (existe o **Programa Criança Feliz/MDS**); não use como caso comprovado.
+- **"Programa Criança" como franquia social** e casos como "Gerando Falcões" e "CDI" — **sem fonte primária aberta** nesta pesquisa (existe o **Programa Criança Feliz/MDS**); não use como caso comprovado;
+- **Habitat for Humanity (seção 10.2):** a **rede estimada em US$ 3,1 bi (FY2024)** é estimativa **não auditada** — só a sede (US$ 362,1 mi) corresponde a demonstração financeira localizada; sem aviso metodológico, comparar os dois números é inválido;
+- **TETO Brasil (seção 10.3):** a captação de **~R$ 1,8 milhão** no jantar de dez/2025 é **declaração** da organização, **sem balanço auditado localizado**;
+- **BRAC (seção 10.4):** os valores são em **taka (BDT)** e referem-se ao exercício encerrado em **30/06/2024**; conversão para moeda estrangeira seria **estimativa própria** — cite a moeda original e o exercício.
 
 ---
 
@@ -825,6 +1001,38 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
   ],
   "correct": 1,
   "explanation": "Dados sensíveis exigem o art. 11; crianças e adolescentes, o art. 14, com o melhor interesse como referência. O inventário de bases e o mapeamento da base legal por tratamento sustentam o KPI de conformidade do painel."
+}
+```
+
+```question
+{
+  "id": "npof-07-q11",
+  "type": "multiple-choice",
+  "question": "A Habitat for Humanity publicou US$ 362,1 milhões para a sede e estimou US$ 3,1 bilhões para a rede no mesmo exercício (FY2024). A leitura correta é:",
+  "options": [
+    "Há erro aritmético nas demonstrações",
+    "Os afiliados são autônomos e a consolidação da rede é estimativa não auditada — sem aviso metodológico, comparar sede e rede é inválido",
+    "Os US$ 3,1 bilhões são o patrimônio líquido da sede",
+    "A diferença vem de exercícios anteriores acumulados"
+  ],
+  "correct": 1,
+  "explanation": "A Habitat é uma rede federada de afiliados autônomos: cada um tem contabilidade própria e a sede só consolida o que é dela, auditando a marca e publicando o Form 990. Por isso a receita da rede é estimativa. Em relatório e em proposta, declare a origem do número (sede auditada × rede estimada) e o exercício (FY2024) — É a mesma disciplina de métrica exigida pelo art. 22, IV, da Lei nº 13.019/2014."
+}
+```
+
+```question
+{
+  "id": "npof-07-q12",
+  "type": "multiple-choice",
+  "question": "Qual irregularidade levou o TCU a suspender repasses do MTE a duas entidades (Acórdão 1355/2025-Plenário, 18/06/2025)?",
+  "options": [
+    "Falta de auditoria externa na entidade beneficiária",
+    "Fomento sem metas cronológicas e sem cronograma de desembolso, com liberação em parcela única",
+    "Captação de recursos do exterior sem autorização",
+    "Ausência de certificado de entidade beneficente de assistência social (CEBAS)"
+  ],
+  "correct": 1,
+  "explanation": "A cautelar inaudita altera pars suspendeu dois termos (R$ 15,77 milhões e R$ 4,22 milhões) por desenho ruim, não por desvio apurado: faltavam metas com prazo (art. 22, II a IV, da Lei nº 13.019/2014) e cronograma de desembolso (art. 42, III, com os arts. 20 e 33 do Decreto nº 8.726/2016), com pagamento em parcela única. É a prova de que as etapas 3 e 6 da seção 2 não são formalidade: sem meta datada e sem cronograma, o repasse pode ser suspenso mesmo com execução não questionada."
 }
 ```
 

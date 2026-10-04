@@ -1,6 +1,6 @@
 ---
 title: "Contexto de ONGs no Brasil"
-description: "Panorama aprofundado das ONGs e do terceiro setor brasileiro: como medir o setor sem confundir fontes (Ipea, RAIS/MTE, IBGE/Cempre), linha do tempo dos marcos legais — das misericórdias de 1543 à LC 227/2026 —, financiamento (Censo GIFE 2024–2025, R$ 5,8 bi de ISP, e Doação Brasil 2024, R$ 24,3 bi), voluntariado, Pix e digitalização, filantropia de periferia, desafios e oportunidades, com cinco casos brasileiros numerados, tabelas com fonte e ano, curiosidades verificadas, números que NÃO devem ser usados em aula e questões práticas comentadas."
+description: "Panorama aprofundado das ONGs e do terceiro setor brasileiro: como medir o setor sem confundir fontes (Ipea, RAIS/MTE, IBGE/Cempre), linha do tempo dos marcos legais — das misericórdias de 1543 à LC 227/2026 —, financiamento (Censo GIFE 2024–2025, R$ 5,8 bi de ISP, e Doação Brasil 2024, R$ 24,3 bi), voluntariado, Pix e digitalização, filantropia de periferia, desafios e oportunidades, panorama regulatório 2025-2026 (ano-teste da reforma com CBS de 0,9% e IBS de 0,1%, corte de 10% nos incentivos, LC 235/2026 e IN RFB 2.307/2026, com checklist de compliance) e cinco organizações brasileiras reais (Fundação Itaú, Instituto Ayrton Senna, Todos Pela Educação, Instituto Sou da Paz e Gerando Falcões), com cinco casos brasileiros numerados, tabelas com fonte e ano, curiosidades verificadas, números que NÃO devem ser usados em aula e questões práticas comentadas."
 order: 9
 difficulty: "intermediate"
 duration: "90 min"
@@ -17,8 +17,10 @@ Nesta lição você vai:
 - dominar os **três recortes de medição** do setor (Ipea, RAIS e IBGE/Cempre) e saber qual usar em cada situação;
 - percorrer a **linha do tempo dos marcos legais**, de 1543 a 2026, com um diagrama visual e uma tabela completa;
 - entender a **onda tributária de 2021 a 2026** (LC 187/2021, EC 132/2023, LC 214/2025, LC 224/2025 e LC 227/2026) e onde ela trava na prática;
+- operar o **panorama regulatório 2025-2026**: ano-teste da reforma (CBS de 0,9% + IBS de 0,1%), corte de **10%** nos incentivos, LC 235/2026, IN RFB 2.307/2026 e um **checklist de compliance** para o conselho;
 - ler o **Censo GIFE 2024–2025** (ISP de R$ 5,8 bilhões) e a **Pesquisa Doação Brasil 2024** (R$ 24,3 bilhões) como fontes de decisão, não como coleção de números;
 - conhecer **cinco casos brasileiros com números**: Mapa das OSCs, Censo GIFE, Doação Brasil, Periferias e Filantropia e Dia de Doar;
+- analisar **cinco organizações brasileiras reais** (Fundação Itaú, Instituto Ayrton Senna, Todos Pela Educação, Instituto Sou da Paz e Gerando Falcões) e o que cada uma revela sobre **financiamento, governança e escala**;
 - reconhecer os **desafios estruturais** (sustentabilidade é o nº 1 para 66% das lideranças) e as **oportunidades reais** (Pix, IA generativa, filantropia de território);
 - identificar os **números divergentes e não verificados** que circulam no setor e nunca levá-los para a sala de aula ou para a prestação de contas.
 
@@ -251,9 +253,120 @@ Resposta pronta para o conselho: *"Nosso benefício depende da camada: imunidade
 
 ---
 
-## 4. Financiamento I — o Investimento Social Privado (GIFE)
+## 4. Panorama Regulatório 2025-2026
 
-### 4.1 A série de 13 anos
+A onda tributária da seção 3.6 deixou de ser noticiário em 2026: o que era projeto virou vigência, regulamento e cronograma de transição. Este panorama reúne **apenas normas com status verificado nesta pesquisa** — o que está pendente no Congresso ou no STF aparece sinalizado como pendência, e o que não foi confirmado em fonte primária é marcado como tal. Nada aqui substitui o texto consolidado no Planalto antes de um parecer.
+
+### 4.1 Tabela: norma × vigência × impacto na OSC
+
+| Norma | Vigência / data | Impacto prático na OSC | Status verificado |
+|---|---|---|---|
+| **LC 214/2025** | 16/01/2025; transição **2026–2033** | Cria IBS, CBS e Imposto Seletivo; a imunidade vale **na saída, não nas aquisições** (art. 9º, § 4º); **patrocínio com contrapartida sofre IBS/CBS**; nota fiscal obrigatória mesmo em operações imunes | Vigente |
+| **LC 224/2025** | 26/12/2025; corte de **10%** no IRPJ/II desde **01/01/2026** e nos demais tributos federais desde **01/04/2026** | Redução linear de **10%** de todos os incentivos federais; exceções do art. 4º, § 8º (I imunidades; IV investimento aprovado até 31/12/2025; V benefícios de PJ sem fins lucrativos; VII teto quantitativo global; IX Prouni; XII CPRB; XIII TIC) | Vigente; **ADI 7.920** pendente no STF |
+| **Decreto 11.948/2024** | 12/03/2024 | Consolida o MROSC: apostilamento **≤ 10%**, prestação de contas no **Transferegov** (art. 55), relatório de execução financeira (art. 56) e divulgação no Portal da Transparência + Mapa das OSC (§ 4º); vigência dos instrumentos **≤ 10 anos**; vedação de contrapartida financeira; bens remanescentes à OSC; contas finais em **≤ 150 dias** | Vigente |
+| **LC 227/2026** | 13/01/2026 | Cria o **CGIBS** e disciplina o processo administrativo do IBS | Vigente |
+| **IN RFB 2.307/2026** | 20/02/2026 (**data a conferir no DOU**) | **Revoga o item 26** do Anexo Único: a dedução de doações de PJ a OSCs/OSCIP (2% do lucro operacional) **entrou no corte**; mantém os itens 32 (assistência médica), 33 (previdência complementar fechada) e **34 (art. 15 da Lei 9.532/1997)**, além das imunidades beneficentes | Vigente; o **FAQ da RFB** afirma que o Anexo **não é exaustivo** e que associações de categoria profissional/econômica **não são alcançadas** |
+| **LC 235/2026**, art. 11 | 27/08/2026 | Reescreve o **inciso V do § 8º do art. 4º da LC 224**: passa a ressalvar o **art. 15 da Lei 9.532/1997** e os **arts. 13, IV, e 14, X, da MP 2.158-35/2001** — a redação anterior citava as Leis 9.790/1999 e 9.637/1998 | Vigente; **PLC 11/2026** tenta restringir o inciso |
+| **Decreto 12.955/2026** | 29/04/2026 | Art. 582: fixa **CBS de 0,9%** no ano-teste de 2026 | Vigente |
+| **Ato Conjunto RFB/CGIBS nº 1/2025** | 23/12/2025 | Regras do ano-teste; **taxa de prova isenta** se cumpridas as obrigações acessórias | Vigente |
+
+**O que ainda é pendência — não tratar como fato consolidado:** a **ADI 7.920** (CNI contra a LC 224, rel. Min. André Mendonça) segue **pendente** no STF; o **PLC 11/2026** tenta restringir o inciso V do § 8º do art. 4º da LC 224; e a consolidação do texto da LC 224 traz **dois incisos "V"** no § 8º do art. 4º (o antigo, citando as Leis 9.790/1999 e 9.637/1998, e o novo, da LC 235/2026) **sem que a revogação do anterior tenha sido confirmada** — confira a redação vigente antes de citar.
+
+### 4.2 O ano-teste de 2026 e o que muda em 2027
+
+Em **01/01 a 31/12/2026** incidem **CBS de 0,9%** (art. 582 do Decreto 12.955/2026) e **IBS de 0,1%**, **compensados com PIS/COFINS no mesmo período** — 2026 é ano de informação e de adaptação de sistema, não de pagamento novo líquido. Em **2027–2028** vêm o **fim do PIS/COFINS**, o **IPI a zero** (exceto na ZFM) e o **Imposto Seletivo**; a transição segue até **2033**, quando entra a vigência plena do IBS.
+
+| Período | O que acontece | Efeito prático para a OSC |
+|---|---|---|
+| **2026** | Ano-teste: **CBS 0,9% + IBS 0,1%**, compensados com PIS/COFINS; cumprir as obrigações acessórias = **taxa de prova isenta** | Corte de **10%** no IRPJ/II desde 01/01 e nos demais tributos federais desde 01/04; manter notas; revisar doações |
+| **2027–2028** | Fim do **PIS/COFINS**; **IPI a zero** (exceto ZFM); CBS/IBS com alíquota reduzida; Imposto Seletivo | Simular contratos com e sem contrapartida de patrocínio; migrar regimes |
+| **2029–2032** | Transição estadual e municipal (redução de ICMS/ISS, ampliação do IBS) | Renegociar reajustes e repasses estaduais e municipais |
+| **2033** | Vigência plena do IBS | Consolidar regime; encerrar simulações |
+
+- **🔢 Você sabia?** Em **03/01/2025**, o STF (decisão do Min. Flávio Dino na **ADPF 854**, com a **ADI 7688**) **suspendeu repasses a 13 ONGs** — cerca de **R$ 142 milhões** bloqueados em dez/2024, com CEPIM/CEIS e auditoria em 60 dias — depois que o relatório da CGU mostrou que, de **26 entidades** obrigadas a publicar os valores de emendas de 2020–2024, **só 4 (15%)** publicaram adequadamente, **35%** de forma parcial e **50%** de forma inadequada. Transparência deixou de ser boa prática e virou condição de recebimento.
+
+### 4.3 Checklist de compliance 2026
+
+Caixa de checagem montada a partir das obrigações e dos alertas verificados do período — imprima e marque antes da reunião de conselho:
+
+- [ ] Revisar a política de doações da entidade e **comunicar o doador** sobre o corte de **10%** (LC 224/2025) e sobre a revogação do **item 26** pela IN RFB 2.307/2026;
+- [ ] Guardar no dossiê a tripla defesa da isenção: **item 34** do Anexo da IN 2.307/2026 + **inciso V do § 8º do art. 4º da LC 224** (redação da LC 235/2026) + **FAQ da RFB** (Anexo não exaustivo) — sem confundir com a dedução, que é do doador;
+- [ ] Manter **notas fiscais e obrigações acessórias** em dia em 2026, para não perder a **taxa de prova isenta** do ano-teste;
+- [ ] Simular contratos de patrocínio **com e sem contrapartida** antes de 2027 (fim do PIS/COFINS);
+- [ ] Acompanhar a **ADI 7.920** e o **PLC 11/2026** antes de afirmar em parecer que o inciso V está preservado;
+- [ ] Em termo de fomento ou de colaboração: **metas com prazo**, **cronograma de desembolso**, parcela única justificada, publicação no **Transferegov** e apostilamento **≤ 10%**;
+- [ ] **Publicar recebimento e aplicação de emendas parlamentares** (ADPF 854 + ADI 7688);
+- [ ] Fechar **contas finais em até 150 dias** e registrar no estatuto a **destinação dos bens** antes de qualquer dissolução (art. 61 do CC; TCU 6107/2025);
+- [ ] Inventariar **descontos associativos no INSS** e comprovar autorização — o **PDMA (14/05/2025)** cobre **9,42 milhões de benefícios** de mar/2020 a mar/2025 e a entidade tem **15 dias úteis** para devolver via GRU ou comprovar autorização (biometria/assinatura), sob cobrança automática;
+- [ ] Manter **atas de convocação, de gestão e de aprovação de contas**: só quem praticou atos de gestão responde (TST, 7ª Turma, RR-100039-53.2019.5.01.0206, 2025).
+
+Como usar o checklist na prática: quem capta doador responde pelos itens tributários, quem assina termo de fomento responde pelos itens de plano de trabalho e a diretoria responde por todos. Rode a lista a cada trimestre e a cada norma nova publicada — em 2026 o calendário de mudança é **mensal**, não anual, e a defesa que vale é a documentada **antes** do auto de infração, não depois.
+
+### 4.4 Exemplo resolvido — quanto o doador perde em 2026
+
+Empresa com lucro de **R$ 1.000.000** doa **R$ 40.000** a uma OSCIP. O cálculo, em três camadas:
+
+1. **Limite:** 2% do lucro operacional (Lei 9.249/1995, art. 13, § 2º, III) = **R$ 20.000** dedutíveis, economia ≈ **R$ 6.800**;
+2. **Corte de 10%:** pelo art. 4º, § 4º, III, da LC 224, a redução de base vale por **90%** em 2026 → **R$ 18.000** dedutíveis e economia ≈ **R$ 6.120**;
+3. **Onde a entidade se defende:** a IN RFB 2.307/2026 revogou o **item 26**, que preservava o benefício do doador. O que a entidade manteve é o **item 34** (art. 15 da Lei 9.532/1997) — que protege a isenção **dela**, não a dedutibilidade **dele**.
+
+*Ação:* revisar a política de doações, comunicar o doador com números na mão e acompanhar a ADI 7.920 antes de prometer recuperação fiscal a quem doa.
+
+### 4.5 Jurisprudência 2024–2026 que o conselho precisa conhecer
+
+O controle externo virou a principal vara das OSCs no período. Cada linha abaixo já tem medida prática correspondente no checklist da seção 4.3:
+
+| Tribunal / processo | Decisão | Tese | Medida prática |
+|---|---|---|---|
+| **TCU 1355/2025-Plenário** (18/06/2025) | Cautelar *inaudita altera pars* suspendendo repasses do MTE | Fomento **sem metas cronológicas** (art. 22, II–IV, Lei 13.019/2014) e **sem cronograma** (art. 42, III), com parcela única | Assinar só com metas, cronograma e desembolso fracionado |
+| **TCU 2753/2025-1ª Câmara** | Improcedente por não esgotadas as vias (IN-TCU 98/2024), mas apurou **dano de R$ 15.062.152 em 7 de 10 entidades** | Monitoramento "incipiente" de emendas | Publicar recebimento **e** aplicação das emendas |
+| **TCU 6107/2025-1ª Câmara** | Associação **extinta antes da citação**: citação nula e arquivamento | Sem destinação do patrimônio (**art. 61 do CC**) não há sucessora — **débito e multa ficam com os dirigentes** | Formalizar dissolução com destinação dos bens |
+| **TCU 6633/2025-1ª Câmara** | Responsabilização de instituto, empresas e dirigentes | **Fachada + sub-rogação integral**; dano apurado pela "Teoria do Produto Bruto Mitigado" | Vedada sub-rogação do objeto; prestação de contas em patrocínios |
+| **STJ, Informativo 893** (Inq 1.913/DF, 17/06/2026) | Denúncia recebida por **peculato-desvio** (art. 312 do CP) — **R$ 6.090.142** dos **R$ 7 milhões** do acordo MPT×Itaú | Laudos e extratos bastam para justa causa | Prestação de contas idônea e segregação gestão×contabilidade |
+| **STJ, 3ª e 4ª Turmas (2024–2025)** | **Vedada a recuperação judicial** de associação e fundação sem fins lucrativos | Lei 11.101/2005 alcança só empresários (arts. 1º e 2º); exceção das cooperativas médicas (ADI 7.442/STF) | Crise via acordo, reestruturação ou dissolução limpa |
+| **TST, 7ª Turma (RR-100039-53.2019.5.01.0206, 2025)** | Ex-conselheiros **excluídos** da execução trabalhista | Só responde quem pratica **gestão ou aprova contas** | Atas, convocações e aprovação de contas documentam a defesa |
+| **STJ, REsp 1.812.929/DF** | Desconsideração da personalidade limitada a quem **exerceu cargo diretivo** | Art. 50 do CC exige abuso do agente | Filiação nominal não é gestão |
+| **MPF (Rec. 18/2025) + acordo INSS–MPF–DPU–OAB–AGU** | Plano operacional do **PDMA (14/05/2025)** | Desconto de mensalidade associativa no INSS **só com autorização** | **15 dias úteis** para devolver via GRU ou comprovar autorização |
+
+### 4.6 Projetos de lei com impacto nas OSCs — status verificado
+
+| PL | Conteúdo | Status verificado | Leitura |
+|---|---|---|---|
+| **PL 736/2022** | CNO sob gestão do MJSP | Rel. **Dep. Reimont**, CASP, **15/04/2025**; conclusivo | Manter dados, estatuto e relatórios atualizados |
+| **PL 5.198/2023** | Restrições a recursos do exterior | Em tramitação; PL 1.398/2024 desapensado (05/07/2024) | Risco para a captação internacional |
+| **PL 6047/2023** | CPI das ONGs | Aprovado na CTFC em **26/03/2025**; aguarda relator na CCJ | Maior escrutínio e cobrança de transparência |
+| **PLC 11/2026** | Restringir o **inciso V do § 8º do art. 4º da LC 224** | Em tramitação | Põe em risco a defesa construída pela LC 235/2026 |
+
+*Status dos PLs verificado por busca legislativa; as URLs da Câmara e do Senado não foram arquivadas nesta pesquisa — confirme o status no portal oficial antes de citar em parecer.*
+
+> [!WARNING]
+> **Armadilhas de compliance 2025–2026 que já derrubaram parceria, repasse e entidade:**
+> - **Fomento sem metas e sem cronograma:** o **TCU (Ac. 1355/2025-Plenário, 18/06/2025)** suspendeu *inaudita altera pars* repasses do MTE em termos de **R$ 15,77 mi** e **R$ 4,22 mi** pagos em parcela única — assine só com metas cronológicas (art. 22, II–IV, da Lei 13.019/2014), cronograma de desembolso (art. 42, III) e aderência ao plano de trabalho;
+> - **Associação e fundação não pedem recuperação judicial:** o **STJ (3ª e 4ª Turmas, 2024–2025)** firmou que a Lei 11.101/2005 alcança só empresários — exceção das cooperativas médicas (ADI 7.442/STF). A saída é acordo, reestruturação ou dissolução limpa;
+> - **Desconto de mensalidade associativa no INSS sem autorização:** o acordo INSS–MPF–DPU–OAB–AGU criou o **PDMA (14/05/2025)**, com **9,42 milhões de benefícios** contestáveis (mar/2020–mar/2025) e **15 dias úteis** para a entidade devolver via GRU ou comprovar autorização, sob pena de cobrança automática;
+> - **Emenda parlamentar sem publicação:** na ADPF 854, **13 ONGs** tiveram repasses suspensos em **03/01/2025** (R$ 142 mi), com CEPIM/CEIS;
+> - **Ano-teste sem obrigações acessórias:** descumpri-las em 2026 faz a entidade perder a **taxa de prova isenta** do Ato Conjunto RFB/CGIBS nº 1/2025.
+
+```fillblank
+{
+  "question": "Complete o quadro do ano-teste da reforma tributária e da regulamentação de benefícios em 2026:",
+  "template": "Em 2026, o ano-teste incide CBS de {{1}}% e IBS de {{2}}%, compensados com PIS/COFINS no mesmo período. Já a IN RFB 2.307/2026 revogou o {{3}} do Anexo Único — tirando do rol preservado a dedução de doações de PJ a OSCs — e manteve o {{4}}, que preserva a isenção de IRPJ/CSLL/COFINS do art. 15 da Lei 9.532/1997.",
+  "answers": {
+    "1": "0,9",
+    "2": "0,1",
+    "3": "item 26",
+    "4": "item 34"
+  },
+  "distractors": ["1,9", "2,0", "item 27", "item 32"],
+  "explanation": "O ano-teste de 2026 é CBS de 0,9% + IBS de 0,1%, compensados com PIS/COFINS (Decreto 12.955/2026, art. 582; Ato Conjunto RFB/CGIBS nº 1/2025), e não a alíquota plena. A IN RFB 2.307/2026 revogou o item 26 — a dedutibilidade da doação de PJ — e manteve o item 34, que ampara a isenção da própria entidade prevista no art. 15 da Lei 9.532/1997. O item 32 (assistência médica) existe e está mantido, mas não corresponde ao art. 15 da Lei 9.532/1997."
+}
+```
+
+---
+
+## 5. Financiamento I — o Investimento Social Privado (GIFE)
+
+### 5.1 A série de 13 anos
 
 O **Censo GIFE 2024–2025** (12ª edição, divulgado em **08/dez/2025**) mede o **Investimento Social Privado (ISP)** — o total investido por empresas, fundações e institutos. A série histórica:
 
@@ -267,7 +380,7 @@ O **Censo GIFE 2024–2025** (12ª edição, divulgado em **08/dez/2025**) mede 
 
 O GIFE reúne **~170 instituições** (completou 30 anos em 2025); a edição de 2024–2025 teve **138 respondentes, ou 84% das associadas**. Atenção à base: **~170 associadas** (comunicação institucional) e **138 respondentes = 84%** (Censo) são números de bases diferentes — não é contradição, é metodologia.
 
-### 4.2 Do que o ISP é feito
+### 5.2 Do que o ISP é feito
 
 - **Educação** é a principal área de atuação de **67%** das organizações;
 - **agenda climática: R$ 368 milhões = 6%** do ISP, contra **3%** da média global — o Brasil doa o dobro do mundo em clima;
@@ -282,7 +395,7 @@ O achado mais transformador do Censo é a curva dos **repasses a organizações 
 > [!NOTE]
 > **Divergência dentro da mesma edição do Censo.** O apoio emergencial de 2022 aparece como **R$ 122 milhões** (*Folha de S.Paulo*, 09/12/2025) e como **R$ 112 milhões** (Observatório 3º Setor, 13/12/2025) — mesma edição do Censo GIFE, números diferentes divulgados por veículos distintos. Em sala de aula, prefira a formulação "cerca de R$ 120 milhões em 2022, chegando a R$ 786 milhões em 2024" e cite a fonte que você efetivamente leu.
 
-### 4.3 A tabela de financiamento: GIFE e IDIS lado a lado
+### 5.3 A tabela de financiamento: GIFE e IDIS lado a lado
 
 | Indicador | Valor | Ano | Fonte |
 |---|---|---|---|
@@ -298,7 +411,7 @@ O achado mais transformador do Censo é a curva dos **repasses a organizações 
 | Doadores no Brasil | **62% → 59%** | 2024 → 2025 | CAF — World Giving Report |
 | Doação como % da renda | **0,93%** (global: **1,04%**) | 2024 | CAF/IDIS — Giving in Brazil 2025 (n=998) |
 
-### 4.4 Exemplo resolvido — ler a série do ISP sem se enganar
+### 5.4 Exemplo resolvido — ler a série do ISP sem se enganar
 
 Um conselheiro mostra a manchete "ISP caiu desde 2020" e pergunta se o setor está em declínio. A leitura correta é feita em três passos:
 
@@ -310,9 +423,9 @@ Conclusão para o conselho: **não há declínio**; há normalização após o p
 
 ---
 
-## 5. Financiamento II — a doação individual no Brasil
+## 6. Financiamento II — a doação individual no Brasil
 
-### 5.1 O recorde de 2024
+### 6.1 O recorde de 2024
 
 A **Pesquisa Doação Brasil 2024** (IDIS/Ipsos, 4ª edição, divulgada em **06/ago/2025**, com **1.500 entrevistas** e margem de erro de **2,5 pontos percentuais**) registrou **R$ 24,3 bilhões** em doações individuais — o maior valor da série, **+64%** frente a 2022 corrigido pela inflação (R$ 14,8 bilhões em 2022).
 
@@ -327,7 +440,7 @@ Mas os detalhes contam outra história:
 
 A síntese é um paradoxo: **mais dinheiro, de menos gente, com menos repetição.**
 
-### 5.2 As causas mudaram de lugar (2022 × 2024)
+### 6.2 As causas mudaram de lugar (2022 × 2024)
 
 | Causa | 2022 | 2024 | Variação |
 |---|---|---|---|
@@ -346,11 +459,11 @@ Quatro edições (2015–2024) permitem ler a curva completa. O paradoxo — **r
 > [!NOTE]
 > **"A causa religiosa lidera o ranking de doações" é uma premissa não confirmada.** O ranking de causas de 2024 é **infância, saúde, fome e emergências**. O que aparece com 43% é **religião ou comunidade como REDE DE INFLUÊNCIA** — isto é, por onde a decisão de doar circula, não o destino final do dinheiro. Trocar influência por destino é o erro de leitura mais comum desta pesquisa.
 
-### 5.3 Benchmark internacional
+### 6.3 Benchmark internacional
 
 O **World Giving Report** (CAF, jan/2025, 101 países, n=998 no Brasil) mostra **27%** de brasileiros que doaram dinheiro e doação média de **0,93% da renda**, contra **1,04%** da média global. Entre quem quis doar mais: **43%** quer saber o **destino do recurso**, **40%** os **resultados** e **38%** como a organização é **conduzida**. E os doadores no país recuaram de **62% (2024) para 59% (2025)**.
 
-### 5.4 Exemplo resolvido — o paradoxo em três frases para o conselho
+### 6.4 Exemplo resolvido — o paradoxo em três frases para o conselho
 
 Reunindo os dados do Censo GIFE e da Pesquisa Doação Brasil, o diagnóstico do financiamento privado brasileiro em 2024 cabe em três frases — e cada uma delas vira uma decisão:
 
@@ -360,19 +473,19 @@ Reunindo os dados do Censo GIFE e da Pesquisa Doação Brasil, o diagnóstico do
 
 ---
 
-## 6. Pix, plataformas e campanhas: o dinheiro em movimento
+## 7. Pix, plataformas e campanhas: o dinheiro em movimento
 
-### 6.1 A infraestrutura que barateou a doação recorrente
+### 7.1 A infraestrutura que barateou a doação recorrente
 
 O **Pix movimentou R$ 35,36 trilhões em 2025**, em **79,8 bilhões de transações (+33,6%)**. Para o setor, a consequência não é cosmética: a doação recorrente deixou de exigir boleto, débito autorizado ou cartão — caiu a fricção e o custo por transação.
 
 - **🔢 Você sabia?** O Pix superou **79 bilhões de transações em um único ano** (2025) — mais de 2 transações por habitante por mês. Campanhas de doação recorrente que antes morriam na etapa de "cadastro do cartão" hoje se resolvem em dois toques.
 
-### 6.2 Digitalização e IA generativa
+### 7.2 Digitalização e IA generativa
 
 A **TIC OSFIL 2025** (Cetic.br, divulgada em **07/jul/2026**) aponta que **um terço das organizações sem fins lucrativas no Brasil já usa IA generativa**. É adoção precoce para um setor historicamente defasado em tecnologia — e, ao mesmo tempo, um divisor de águas: quem não tem processo, dado e governança para usar IA, multiplica ruído, não produtividade.
 
-### 6.3 Caso 4 — Dia de Doar: a campanha brasileira do GivingTuesday
+### 7.3 Caso 4 — Dia de Doar: a campanha brasileira do GivingTuesday
 
 Criado nos EUA em **2012** pelo 92nd Street Y com a UN Foundation, chega ao Brasil em **2013** como **Dia de Doar**, organizado pela **ABCR**, sempre na primeira terça-feira após a Black Friday (12ª edição: **02/12/2025**). Os números da edição de 2024:
 
@@ -389,9 +502,9 @@ Referência global: **EUA 2025 — US$ 4 bilhões (+13%)**, **38,1 milhões** de
 > [!NOTE]
 > **"Dia Mundial das ONGs com origem brasileira" não existe.** A data internacional é o **World NGO Day, 27 de fevereiro**, de origem não brasileira. A campanha brasileira é o **Dia de Doar**, desde 2013. Confundir as duas é comum em material institucional desatualizado.
 
-### 6.4 O calendário de captação que os números autorizam
+### 7.4 O calendário de captação que os números autorizam
 
-Combinando os dados desta seção com a curva de causas da seção 5, um calendário realista de captação tem três picos e um piso contínuo:
+Combinando os dados desta seção com a curva de causas da seção 6, um calendário realista de captação tem três picos e um piso contínuo:
 
 - **Pico 1 — final de ano / Dia de Doar (dezembro):** maior pico de aquisição do calendário brasileiro; a campanha de 2024 movimentou **R$ 5.035.263,79** em 16 plataformas e mobilizou **62 empresas** e **63 monumentos iluminados**;
 - **Pico 2 — emergências:** as causas emergenciais chegaram a **30%** das doações em 2024 (eram 13% em 2022), com **60%** do recurso indo para fora do estado do doador — mantenha um protocolo de resposta rápido, com página pronta e prestação de contas enxuta;
@@ -400,28 +513,28 @@ Combinando os dados desta seção com a curva de causas da seção 5, um calend�
 
 ---
 
-## 7. Trabalho, emprego e voluntariado no setor
+## 8. Trabalho, emprego e voluntariado no setor
 
-### 7.1 Emprego formal: 3,7 milhões de vínculos
+### 8.1 Emprego formal: 3,7 milhões de vínculos
 
 Segundo a **RAIS/MTE**, as entidades sem fins lucrativos passaram de **3.551.726 vínculos (2022)** para **3.703.881 (2023)**, alta de **+4,3%** — cerca de **6,8%** dos **54.706.385** empregos formais do país. O estoque total de empregos formais no Brasil foi de **57.132.156 (2024)** e **59.970.945 (2025)**, alta de **5,0%**.
 
 O contraste com a seção 1 é o achado central da lição: **3,7 milhões de vínculos convivem com 705.052 OSCs sem nenhum vínculo**. O setor tem bolso ocupacional formal concentrado em poucas instituições e uma maioria absoluta de organizações sem folha.
 
-### 7.2 Voluntariado
+### 8.2 Voluntariado
 
 A PNAD/IBGE registra **6,5 milhões de voluntários em 2016** — **3,9%** da população com 14 anos ou mais. É o último dado nacional consistente da série.
 
 > [!WARNING]
 > **Números de voluntariado que NÃO devem ser usados como fato:** a estimativa de **"7,3 milhões de voluntários (4,2%)"** **não foi confirmada** nesta pesquisa — o dado verificado é **6,5 milhões (3,9%) em 2016**. Se a sua audiência pedir um número mais recente, diga que a série não foi atualizada na fonte consultada; não invente tendência. O mesmo vale para a afirmação de que **"a causa religiosa lidera o ranking de doações"** — não confirmada; em 2024 o ranking é infância, saúde, fome e emergências (religião aparece apenas como rede de influência, 43%).
 
-### 7.3 Sustentabilidade: o desafio nº 1
+### 8.3 Sustentabilidade: o desafio nº 1
 
 O **Panorama das ONGs: capítulo Brasil** (IDIS + Charities Aid Foundation, **jan/2026**, com **170 lideranças**) aponta que **66%** consideram a **sustentabilidade financeira** o desafio mais urgente, com média de **3,9 fontes de receita** por organização — e os **doadores individuais** na liderança das origens de recurso.
 
 - **🔢 Você sabia?** A **fidelidade do doador caiu de 69% (2015) para 49% (2024)** e a doação recorrente mensal de **44% para 39%**, mesmo com a mediana anual subindo de **R$ 300 para R$ 480** (IDIS/Ipsos). O doador brasileiro não ficou mais pobre — ficou mais seletivo.
 
-### 7.4 Diversificação na prática: a regra das 3,9 fontes
+### 8.4 Diversificação na prática: a regra das 3,9 fontes
 
 A média de **3,9 fontes de receita** por organização (Panorama das ONGs: Brasil, jan/2026) não é um número decorativo: é o teste de sobrevivência do setor. Um inventário honesto da sua entidade deve listar, no mínimo, os cinco lugares de onde o dinheiro pode vir:
 
@@ -437,7 +550,7 @@ Se duas linhas desse quadro estão vazias, você não tem 3,9 fontes — tem 2. 
 
 ---
 
-## 8. Filantropia de periferia: potencial imenso, acesso quase nulo
+## 9. Filantropia de periferia: potencial imenso, acesso quase nulo
 
 O estudo **"Periferias e Filantropia"** (Iniciativa PIPA + Instituto Nu, publicado em **30/mar/2023**) cobriu iniciativas de favelas, aldeias, sertões, quilombos e assentamentos — cerca de **90% dos respondentes** — e retratou um setor paralelo, pobre em recurso e rico em operação:
 
@@ -460,7 +573,7 @@ A inadequação entre formato do edital e formato real das organizações gerou 
 > [!IMPORTANT]
 > **Diversidade não é pauta decorativa neste tema.** 74,1% de pessoas negras e 68% de mulheres na coordenação das iniciativas periféricas, contra conselhos com **66% de homens e 89% de pessoas brancas** no ISP (Censo GIFE 2024–2025): quem decide o dinheiro e quem executa o trabalho no território são populações diferentes. Qualquer estratégia de responsabilidade social ou de repasse de recursos que não enxergue essa assimetria perpetua a barreira descrita pelo estudo.
 
-### 8.1 Se a sua organização é coletivo: um roteiro de formalização
+### 9.1 Se a sua organização é coletivo: um roteiro de formalização
 
 Os dados do estudo desenham um roteiro objetivo para quem está dos 41,8% (coletivos) e quer chegar aos 12,2% (OSCs) sem perder a operação de território:
 
@@ -473,7 +586,7 @@ Os dados do estudo desenham um roteiro objetivo para quem está dos 41,8% (colet
 
 ---
 
-## 9. Desafios × oportunidades
+## 10. Desafios × oportunidades
 
 A leitura mais produtiva do contexto brasileiro não é a lista de problemas, e sim o cruzamento problema ↔ evidência ↔ resposta:
 
@@ -496,7 +609,104 @@ Três leituras estratégicas que a tabela autoriza:
 
 ---
 
-## 10. O que não usar em aula: números divergentes e não verificados
+## 11. Panorama de ONGs no Brasil Através de Casos
+
+Toda média desta lição (seções 5 a 8) só ganha sentido quando aplicada a organizações reais. Os cinco casos abaixo foram conferidos em demonstrações financeiras, relatórios anuais, páginas de transparência ou cadastro na Receita Federal — e o que não se confirmou em fonte primária aparece sinalizado ao final da seção. Cada caso ilumina uma faceta do contexto brasileiro: **financiamento, governança e escala**.
+
+Três achados transversais antes dos casos:
+
+- **No recorte brasileiro predomina a associação privada: seis dos sete casos brasileiros são associações e nenhum é OS** — a percepção de que "OS é o terceiro setor" não se confirma (ver a [Lição 4 — Estruturas Legais de ONGs no Brasil](./04-legal-structures-brazil.md));
+- **Nenhuma das onze organizações pesquisadas depende majoritariamente de verba pública** — no recorte brasileiro, o Todos Pela Educação nem sequer a recebe; o recurso público existe e importa, mas não é o sustentáculo;
+- **Concentração de fonte é o risco nº 1 dos balanços:** Fundação Itaú com **93%** de receitas financeiras (2024), Instituto Ayrton Senna com **62%** em royalties de marca (2024) e Instituto Sou da Paz com **65%** vindo de fundações do exterior (2022).
+
+### 11.1 Tabela: natureza jurídica × financiamento × escala
+
+| Caso | Natureza jurídica (verificada) | Fonte dominante (% e ano) | Receita declarada | Escala declarada |
+|---|---|---|---|---|
+| **Fundação Itaú (Itaú Social)** | Fundação privada, com Conselho Curador heterônomo | Receitas financeiras — **93% (2024)** | **R$ 444,2 mi (2024)** | **5,16 mi** de pessoas; **20,8 mil** escolas; **3,2 mil** municípios (2024) |
+| **Instituto Ayrton Senna** | Associação privada (natureza 399-9; CNPJ 00.328.072/0001-62) | Royalties de marca e imagem — **62% (2024)** | **R$ 41,738 mi (2024)** | Investiu **R$ 47,378 mi** em 2024; PL **R$ 273,4 mi** |
+| **Todos Pela Educação** | Associação de fins não econômicos (CNPJ 10.477.478/0001-60) | Doações de PJ e PF — **92% (2024)** | **R$ 26.082.377 (2024)** | Educação Já Municípios cobre **62%** das matrículas (2024) |
+| **Instituto Sou da Paz** | Associação sem fins lucrativos (recusou a forma de fundação) | Fundações do exterior — **65% (2022)** | **R$ 12.792.835 (2022)** | **6 estados**, **3.300** policiais e **225 mil** armas analisadas (2025) |
+| **Gerando Falcões** | Associação privada (CNPJ 18.463.148/0001-28, aberto em 25/06/2013) | Filantropia + negócios sociais (não apurável — sem balanço público) | Receita **não publicada** | **42 mil** qualificados (2025); 23 mil formados (2024) |
+
+### 11.2 Cinco casos brasileiros em detalhe
+
+**Caso 6 — Fundação Itaú / Itaú Social: o patrimônio que sustenta a operação.**
+Fundação privada instituída pelo Itaúsa e administrada por **Conselho Curador heterônomo** (membros do Itaúsa e do Itaú), diretoria de 6 a 15 membros **não remunerados** e Conselho Fiscal. Em **2024**: receitas de **R$ 444,2 mi** (financeiras **R$ 414,4 mi = 93%**, doações R$ 14,6 mi, operacionais R$ 15,1 mi), despesas de **R$ 307,3 mi** (projetos R$ 181,7 mi), **superávit de R$ 136,8 mi** e patrimônio líquido de **R$ 5,54 bi**; indicador público limita custos administrativos a **5%** do investido; o FIA 2024 distribuiu **R$ 18,8 mi** do 1% do IR para **40 projetos**. Escala: **R$ 297 mi investidos**, **5,16 milhões** de pessoas, 95 mil turmas, 20,8 mil escolas, 3,2 mil municípios e **R$ 19,9 mi** mobilizados para OSCs.
+**O que revela no Brasil:** patrimônio rendedor dá autonomia — a doação é **complemento de projeto**, não sustentáculo da operação. É o retrato oposto ao diagnóstico da seção 8.3, em que **66%** das lideranças apontam sustentabilidade como desafio nº 1: quem constrói ativo de longo prazo troca ansiedade de captação por programação.
+
+**Caso 7 — Instituto Ayrton Senna: a fonte previsível que é também o risco.**
+Associação privada (CNPJ aberto em **02/12/1994**), **30 anos** em 2024. Receita operacional de **R$ 41,738 mi em 2024** contra **R$ 64,816 mi em 2023**; a composição é **royalties de marca e imagem de R$ 25,971 mi (62%)**, R$ 11,724 mi de PJ e R$ 4,044 mi de PF. As despesas de **R$ 47,378 mi** geraram déficit de **R$ 5,640 mi**, coberto por receitas financeiras de **R$ 24,060 mi**; o patrimônio líquido é de **R$ 273,4 mi**, com **R$ 265,4 mi em títulos**. Investiu **R$ 47,378 mi** em 2024 (P&D R$ 14,8 mi; advocacy R$ 7,2 mi); em 2025 a receita foi de **R$ 45,879 mi**. Governança com CEO, vice e **auditor independente**; usa exclusivamente a Lei Rouanet.
+**O que revela no Brasil:** a receita única e previsível é o sonho de captação — e, ao mesmo tempo, o risco dominante: **62% da receita amarrada a um ativo intangível ligado a uma pessoa** derruba tudo se o contrato acabar. Confirma em números a regra das **3,9 fontes** da seção 8.4. *Sinalização de fonte:* a Receita classifica a entidade como **associação (399-9)**; textos que a chamam de "OS/OSCIP" ou "fundação" não conferem com o cadastro — **prevalece a Receita**.
+
+**Caso 8 — Todos Pela Educação: advocacy sem um centavo de verba pública.**
+Associação de fins não econômicos fundada em **07/09/2007**, independente, suprapartidária e **não receptora de recursos públicos**. Em **2024** movimentou **R$ 26.082.377** sem restrição (doações **R$ 24,1 mi** e serviços voluntários R$ 1,84 mi), mais R$ 453 mil de receitas financeiras, com **superávit de R$ 4,66 mi**, caixa de R$ 17,5 mi aplicado a **15,40% a.a.** e patrimônio líquido de **R$ 16,9 mi**. Governança: Assembleia Geral, Conselho de Administração e **auditoria independente anual**. Produto: agenda **Educação Já** (13 temas), **Educação Já Municípios** cobrindo **62% das matrículas** (2024) e o **Anuário da Educação Básica** (12ª ed., 2025).
+**O que revela no Brasil:** **advocacy é financiável** — R$ 26,1 milhões de doação privada para influenciar política pública, sem depender de quem é cobrado pela política. A independência de financiamento é **pré-condição de credibilidade** para criticar o governo que se quer influenciar (o mesmo racional da recusa de fundos da UE pela MSF desde 2016).
+
+**Caso 9 — Instituto Sou da Paz: quando o doador estrangeiro vira risco.**
+Associação criada em **jan/1999** a partir da campanha de desarmamento de 1997 — os fundadores **recusaram a forma de fundação**; tem selo de interesse público do Ministério da Justiça (MJ) e auditoria da KPMG. Em **2022** a receita foi de **R$ 12.792.835**: **65% de fundações do exterior**, 14% de fundações nacionais, 12% de fundo institucional e **R$ 482 mil de empresas** (em 2020 eram R$ 6.039.373). Doadores citados: Itaú, Open Society, Fundação Ford e a doação de Mackenzie Scott. Conselhos Diretor e Fiscal **fixam e monitoram metas**, com comitê de equidade e 25 pessoas. Em **2025**: DESARMES em **6 estados**, **3.300** policiais capacitados, 8 pesquisas e **225 mil armas analisadas** (Arsenal do Crime); a campanha acumula mais de **700 mil armas em 20 anos**.
+**O que revela no Brasil:** concentrar **65%** da receita em financiamento internacional é **exposição a cortes e mudanças de prioridade de terceiros** — a resposta é diversificar fontes nacionais. E a recusa da forma de fundação mostra que a escolha da forma jurídica ([Lição 4](./04-legal-structures-brazil.md)) é decisão de governança, não de cartório.
+
+**Caso 10 — Gerando Falcões: fundo de perenidade para sair da dependência do doador.**
+Associação privada com **CNPJ 18.463.148/0001-28** aberto em **25/06/2013** (Poá/SP), ligada ao livro *Jovens Falcões* (2011), atuando em rede federada de ONGs com CNPJ próprio. Financiamento em tripé: **filantropia + negócios sociais** (bazar e ASMARA) **+ escala pública**. Em **mar/2025** criou o **Fundo Dignidade**, com **meta de R$ 250 milhões** e regra de gastar **10% do patrimônio por ano**; o Rouanet liberou **R$ 271.573,83** para a Orquestra Jovem (DOU 2016). Crescimento: captação das aceleradas subiu de **R$ 5,1 mi para R$ 13,7 mi (+266%)** em 28 unidades (2022); **23 mil formados em 2024 (+200%)** e **42 mil qualificados em 2025**. Governança: CEO-fundador no comando; a célula central acelera e padroniza, e a ONG local preserva autonomia.
+**O que revela no Brasil:** é a resposta operacional ao desafio nº 1 das lideranças (seção 8.3): trocar dependência de doador por **receita própria e patrimônio rendedor**. *Sinalização de fonte:* o aporte da família Lemann **diverge** — o site informa **R$ 100 mi**, a *Folha* (2025) detalha **R$ 50 mi + R$ 50 mi em 2026 + R$ 25 mi em contratos**; e a Gerando Falcões **não publica DRE ou balanço**, de modo que a receita anual não é apurável.
+
+### 11.3 O que cada caso revela sobre o contexto brasileiro
+
+| Dimensão | O que os cinco casos mostram | Conexão com esta lição |
+|---|---|---|
+| **Financiamento** | Nenhuma depende majoritariamente de verba pública — mas todas convivem com **concentração**: **93%** (Fundação Itaú), **62%** (Instituto Ayrton Senna), **92%** (Todos Pela Educação) e **65%** (Instituto Sou da Paz) em uma origem dominante | Diversificação é a tradução prática da média de **3,9 fontes** (seção 8.4) |
+| **Governança** | Coexistem **Conselho Curador heterônomo** (Fundação Itaú), **conselhos que fixam e monitoram metas** (Instituto Sou da Paz) e **auditoria independente** (Itaú, Ayrton Senna, Todos Pela Educação) — com teto público de custo administrativo de **5%** no caso do Itaú | Governança é produto de reputação em captação, não burocracia |
+| **Escala** | Cada caso declara uma métrica diferente: **5,16 mi de pessoas** (Fundação Itaú), **42 mil qualificados** (Gerando Falcões), **225 mil armas analisadas** (Instituto Sou da Paz), **62% das matrículas** (Todos Pela Educação) | Sem **métrica declarada**, a comparação entre organizações é inválida |
+| **Forma jurídica** | **Seis dos sete** casos brasileiros são associações; só a Fundação Itaú é fundação de fato; **nenhum é OS** | A escolha da forma é estratégia ([Lição 4](./04-legal-structures-brazil.md)) e "OS" não é sinônimo de terceiro setor |
+
+- **🔢 Você sabia?** **Nenhuma métrica de escala é comparável com a outra:** Fundação Itaú declara **5,16 milhões de pessoas** atendidas (2024), Gerando Falcões **42 mil qualificados** (2025), Instituto Sou da Paz **seis estados** de atuação (2025), Todos Pela Educação **62% das matrículas** da rede pública (2024) e o TETO Brasil **5.000 famílias** acumuladas (dez/2024). "Atendidos", "formados", "cubertos" e "alcançados" medem coisas diferentes — em relatório, indique **o que** foi contado, **quantas pessoas** e **em que ano**, ou o comparativo com o concorrente será invalidado na primeira auditoria.
+
+> [!NOTE]
+> **O que nas fontes dos casos é sinalizado como não verificado — não use como fato:**
+> - **Gerando Falcões:** sem DRE ou balanço público, e o aporte da família Lemann **diverge** entre o site (R$ 100 mi) e a *Folha* (R$ 50 mi + R$ 50 mi em 2026 + R$ 25 mi em contratos);
+> - **Atados:** sem demonstração financeira; os **"+R$ 6 mi"** são fluxo repassado, **não receita** da Atados; o número de funcionários oscila entre **60 (2024)** e 107 (LinkedIn);
+> - **TETO Brasil:** os **~R$ 1,8 mi** vêm de declaração de jantar (dez/2025), **sem balanço auditado** localizado;
+> - **Todos Pela Educação:** a estimativa do LinkedIn (US$ 23,6 mi, 198 pessoas) **não confere** com o balanço auditado (**R$ 26,1 mi**) — use o balanço;
+> - **Fundação Itaú:** os valores são publicados em **R$ mil** — confira o PDF original antes de reproduzi-los;
+> - **Instituto Ayrton Senna:** há classificações divergentes em artigos e enciclopédias (OS/OSCIP, fundação) — **prevalece o cadastro da Receita Federal** (associação, natureza 399-9).
+
+### 11.4 Modelos de captação exemplificados pelos casos brasileiros
+
+| Modelo de captação | Caso brasileiro | Número verificado (ano) |
+|---|---|---|
+| Royalties de marca e imagem | Instituto Ayrton Senna | **R$ 25,971 mi** de R$ 41,738 mi de receita — **62%** (2024) |
+| Fundo patrimonial / endowment | Fundação Itaú | **R$ 414,4 mi** de receitas financeiras; patrimônio líquido de **R$ 5,54 bi** (2024) |
+| Destinação de 1% do IR | Fundação Itaú | **R$ 18,8 mi** para **40 projetos** (2024; R$ 24,5 mi em 2023) |
+| Fundo filantrópico de longo prazo | Gerando Falcões | **Fundo Dignidade**, meta de **R$ 250 mi** e gasto de **10% do patrimônio/ano** (mar/2025) |
+| Lei de incentivo à cultura | Gerando Falcões | **R$ 271.573,83** para a Orquestra Jovem (DOU 2016) |
+| Doações de PJ e PF | Todos Pela Educação | **R$ 24,1 mi** de doações sobre **R$ 26,1 mi** de receita (2024) |
+| Fundações internacionais | Instituto Sou da Paz | **R$ 8,28 mi** do exterior = **65%** da receita (2022) |
+| Serviços B2B de voluntariado | Atados | +100 empresas e **+R$ 6 mi direcionados** (2024 — fluxo repassado, **não** receita da Atados) |
+| Eventos de arrecadação | TETO Brasil | **~R$ 1,8 mi** em jantar (dez/2025 — declaração, **sem balanço** auditado localizado) |
+
+### 11.5 Onde cada caso entra nas outras lições do curso
+
+| Lição do curso | Caso(s) | O que o caso ensina |
+|---|---|---|
+| [01 — Fundamentos](./01-what-is-non-profit-organization.md) | Todos Pela Educação, Gerando Falcões | Sem fins lucrativos não é sem atividade econômica |
+| [02 — ONG × público × empresa](./02-npo-vs-for-profit-vs-government.md) | Fundação Itaú, Gerando Falcões | Instituto empresarial sem perder a missão |
+| [03 — Economia e financiamento](./03-npo-economics-funding-models.md) | Fundação Itaú, Gerando Falcões, Todos Pela Educação | Captação mista, endowment e doação individual |
+| [04 — Estruturas legais](./04-legal-structures-brazil.md) | Instituto Ayrton Senna, Todos Pela Educação, Instituto Sou da Paz | Predomina a associação privada; OS e OSCIP são opcionais |
+| [05 — Gestão e governança](./05-gestao-governanca-conselho.md) | Fundação Itaú, Instituto Sou da Paz | Heteronomia, ativos × concessões e metas monitoradas |
+| [06 — Marketing e captação](./06-marketing-e-comunicacao.md) | Gerando Falcões, Atados | Escala de captação e quem paga é a empresa |
+| [07 — Operações e sustentabilidade](./07-operacoes-e-sustentabilidade.md) | TETO Brasil | Produto padronizado + rede = escala com custo controlado |
+| [08 — Empreendimento social](./08-social-enterprise-and-ngos.md) | Gerando Falcões | Negócios sociais como receita recorrente |
+| [10 — Contabilidade](./10-contabilidade-gestao-financeira.md) | Fundação Itaú, Instituto Ayrton Senna, Todos Pela Educação | Receita financeira × doação, reserva e superávit |
+| [11 — RH e voluntariado](./11-recursos-humanos-voluntariado.md) | TETO Brasil, Atados | Voluntariado como insumo e como canal B2B |
+| [12 — Impostos e incentivos](./12-impostos-incentivos-fiscais.md) | Instituto Ayrton Senna, Gerando Falcões, Fundação Itaú | Rouanet × destinação de 1% do IR: limites próprios |
+| [13 — Parcerias e stakeholders](./13-parcerias-stakeholders.md) | Todos Pela Educação, Fundação Itaú | Doador-chave, coalizão de advocacia e parceria corporativa |
+| [14 — Medição de impacto](./14-medicao-impacto.md) | Instituto Sou da Paz, Todos Pela Educação | Incidência por evidência × impacto por entregável |
+| [15 — Síntese e projeto final](./15-sintese-projeto-final.md) | Fundação Itaú, Gerando Falcões | Gastar o patrimônio versus sustentá-lo |
+
+---
+
+## 12. O que não usar em aula: números divergentes e não verificados
 
 Esta seção existe para que lacuna de pesquisa nunca se transforme em afirmação categórica. Considere os itens abaixo como **não verificados** ou **dependentes da fonte**:
 
@@ -527,10 +737,22 @@ Esta seção existe para que lacuna de pesquisa nunca se transforme em afirmaç�
 | Apoio emergencial 2022 | **R$ 122 mi** (*Folha*, 09/12/2025) | **R$ 112 mi** (Observatório 3º Setor, 13/12/2025) | Mesma edição do Censo GIFE; diga "cerca de R$ 120 mi" |
 | Doadores em 2024 | **78%** (IDIS/Ipsos, renda ≥ 1 SM) | **66%** (recortes distintos) | Prevalece o número do próprio IDIS |
 | GIFE | **138 respondentes = 84%** (Censo) | **~170 associadas** (comunicação) | Bases de cálculo diferentes |
+| Aporte da família Lemann na Gerando Falcões | **R$ 100 mi** (site do Fundo Dignidade) | **R$ 50 mi + R$ 50 mi em 2026 + R$ 25 mi em contratos** (*Folha*, 2025) | Divergência sinalizada; a GF não publica balanço |
+
+**Afirmações sobre 2025-2026 que circulam sem confirmação — não leve para a aula:**
+
+- **"Censo GIFE 2026"** e **"Pesquisa Doação Brasil 2025"** — **não existem/não foram localizados**; use **Censo GIFE 2024–2025** e **Doação Brasil 2024**;
+- **"STF Tema 1113" como tema de OSCs** — não; o Tema 1113 é de **ICMS/energia**;
+- **"PL 3.850/2021" como Marco Regulatório das OSCs** — não; o MROSC é a **Lei 13.019/2014** (aquele PL trata de outro assunto);
+- **"897.054 OSCs" no Mapa das OSCs** — número **desatualizado** (abr/2024); cite a base e a metodologia do Ipea (mapaosc.ipea.gov.br);
+- **"90% dos recursos da Operação Korban redirecionados" e "R$ 53 mi em 2023–2024"** — **não reconfirmados**; use apenas os dados oficiais da PF/CGU (~R$ 15 mi em fomento, bloqueio de até R$ 25 mi e R$ 27,4 mi em emendas 2024–2025);
+- **"Painel Gestão com 186 programas e 160.842 parceiras"** — contagens **não reconfirmadas** (a URL oficial devolveu erro); cite a existência do painel (MGI, 13/06/2025) sem números;
+- **Percentuais anuais de ICMS/ISS de 2029–2032** — **não relidos** nesta pesquisa; use apenas a transição geral **2026–2033**;
+- **Data da IN RFB 2.307/2026 (20/02/2026)** — deve ser **conferida no DOU** antes de citar em peça técnica.
 
 ---
 
-## 11. Síntese: o que os números mandam você fazer
+## 13. Síntese: o que os números mandam você fazer
 
 Contexto só vale se virar decisão. Este é o roteiro mínimo de tradução dos dados desta lição para a gestão da sua organização:
 
@@ -546,7 +768,7 @@ Contexto só vale se virar decisão. Este é o roteiro mínimo de tradução dos
 
 ---
 
-## 12. Glossário do contexto brasileiro
+## 14. Glossário do contexto brasileiro
 
 Termos que aparecem nas fontes desta lição e que costumam gerar dúvida em sala:
 
@@ -570,10 +792,15 @@ Termos que aparecem nas fontes desta lição e que costumam gerar dúvida em sal
 | **TIC OSFIL** | Pesquisa de uso de tecnologia da informação em OSCs | Cetic.br/NIC.br; 1/3 usa IA generativa |
 | **PNAD** | Pesquisa Nacional por Amostra de Domicílios (IBGE) | 6,5 milhões de voluntários (2016) |
 | **CEMPRE** | Cadastro Central de Empresas (IBGE) | Base dos estabelecimentos e da extração ENSFIL |
+| **IBS / CBS** | Imposto sobre Bens e Serviços e Contribuição sobre Bens e Serviços — os dois tributos novos da reforma (EC 132/2023, LC 214/2025) | Ano-teste de 2026: **CBS 0,9% + IBS 0,1%** |
+| **ANO-TESTE** | Período de 01/01 a 31/12/2026, em que CBS/IBS são compensados com PIS/COFINS e as obrigações acessórias garantem taxa de prova isenta | Ato Conjunto RFB/CGIBS nº 1/2025; Decreto 12.955/2026 |
+| **CGIBS** | Comitê Gestor do IBS | Criado pela LC 227/2026 |
+| **TRANSTEREGOV** | Plataforma federal de execução e prestação de contas das parcerias com OSC | Decreto 11.948/2024, art. 55 |
+| **CORTE DE 10%** | Redução linear de **10%** de todos os incentivos federais, com exceções no art. 4º, § 8º | LC 224/2025, com redação do art. 11 da LC 235/2026 |
 
 ---
 
-## 13. Fontes primárias desta lição
+## 15. Fontes primárias desta lição
 
 Toda estatística desta página pode ser auditada nas fontes abaixo — consulta obrigatória antes de reutilizar qualquer número:
 
@@ -583,6 +810,8 @@ Toda estatística desta página pode ser auditada nas fontes abaixo — consulta
 - **Doação individual (IDIS, CAF, ABCR):** Pesquisa Doação Brasil 2024 (pesquisadoacaobrasil.org.br, PDF completo); CAF/IDIS Giving in Brazil 2025; Panorama das ONGs — capítulo Brasil; World Giving Report (Rede Filantropia);
 - **Periferias:** estudo "Periferias e Filantropia" (Iniciativa PIPA + Instituto Nu, 30/03/2023), com divulgação no GIFE e no Ipea;
 - **Legislação:** Lei 13.019/2014; Decreto 8.726/2016 e Decreto 11.948/2024; LC 187/2021; LC 214/2025 (art. 9º); LC 224/2025; LC 227/2026; Lei 9.532/1997; Decreto-Lei 525/1938;
+- **Atualizações 2025–2026:** LC 235/2026 (art. 11); Decreto 12.955/2026 (art. 582); Ato Conjunto RFB/CGIBS nº 1/2025; IN RFB 2.305/2025 e IN RFB 2.307/2026; FAQ da RFB sobre a redução dos incentivos e benefícios tributários; TCU — Acórdãos 1355/2025-Plenário, 2753/2025, 6107/2025 e 6633/2025 (1ª Câmara); STJ — Informativo 893 e a tese sobre vedação de recuperação judicial; TST — RR-100039-53.2019.5.01.0206; STF — ADPF 854 e ADI 7688; MPF/INSS — Recomendação 18/2025 e plano operacional do PDMA;
+- **Casos de organizações:** demonstrações financeiras e relatórios anuais da Fundação Itaú, do Instituto Ayrton Senna, do Todos Pela Educação, do Instituto Sou da Paz e da Gerando Falcões, além do cadastro na Receita Federal (CNPJ) para a conferência da natureza jurídica;
 - **História:** Santa Casa de Santos (artigo SciELO); estudos sobre CNSS, LBA, SENAI e SESI;
 - **Digitais e campanhas:** Cetic.br (TIC OSFIL); release do NIC.br sobre IA generativa (07/07/2026); ABCR/Dia de Doar; G1 sobre Pix (07/02/2026).
 
@@ -591,7 +820,7 @@ Toda estatística desta página pode ser auditada nas fontes abaixo — consulta
 
 ---
 
-## 14. Pontos de Atenção do Tema
+## 16. Pontos de Atenção do Tema
 
 Pontos que costumam gerar dúvida neste tema — e a resposta curta de cada um:
 
@@ -604,7 +833,11 @@ Pontos que costumam gerar dúvida neste tema — e a resposta curta de cada um:
 - **Qual a maior barreira das periferias?** O formato do edital: **41,8%** são coletivos e só **12,2%** se declaram OSCs;
 - **Quanto o Brasil doa em relação à renda?** **0,93%**, contra **1,04%** da média global (CAF, n=998);
 - **Quantos voluntários há?** **6,5 milhões (3,9%)** — dado de 2016; números maiores não foram confirmados;
-- **A causa religiosa lidera?** Não confirmado — o ranking de 2024 é infância, saúde, fome e emergências; religião lidera como **rede de influência (43%)**.
+- **A causa religiosa lidera?** Não confirmado — o ranking de 2024 é infância, saúde, fome e emergências; religião lidera como **rede de influência (43%)**;
+- **O que muda de fato em 2026?** O **ano-teste** (**CBS 0,9% + IBS 0,1%**, compensados com PIS/COFINS) e o **corte de 10%** nos incentivos federais — IRPJ e II desde **01/01**, demais tributos federais desde **01/04** (LC 224/2025 e Decreto 12.955/2026);
+- **A entidade perdeu a isenção em 2026?** Não automaticamente: o **item 34** do Anexo da IN RFB 2.307/2026 mantém o art. 15 da Lei 9.532/1997 e o **inciso V do § 8º do art. 4º da LC 224**, com redação da **LC 235/2026**, ressalva os benefícios de PJ sem fins lucrativos — quem perdeu dedutibilidade foi o **doador** (item 26, revogado);
+- **Posso pedir recuperação judicial?** Não: associações e fundações ficam fora da Lei 11.101/2005 (STJ, 3ª e 4ª Turmas, 2024–2025); exceção das cooperativas médicas (ADI 7.442/STF);
+- **Quem responde pelas dívidas da entidade?** Quem **geriu ou aprovou contas** (TST, RR-100039, 2025); na dissolução sem destinação dos bens (**art. 61 do CC**), débito e multa ficam com os **dirigentes** (TCU 6107/2025).
 
 ---
 
@@ -751,6 +984,38 @@ Pontos que costumam gerar dúvida neste tema — e a resposta curta de cada um:
   ],
   "correct": 1,
   "explanation": "A doação média foi de 0,93% da renda no Brasil contra 1,04% da média global (World Giving Report, CAF, jan/2025, n=998 no país), com 27% dos brasileiros doando dinheiro a uma instituição. A margem da Pesquisa Doação Brasil é de 2,5 p.p., número diverso e não comparável diretamente."
+}
+```
+
+```question
+{
+  "id": "npof-09-q10",
+  "type": "multiple-choice",
+  "question": "Qual é o desenho tributário vigente em 2026 para as organizações sem fins lucrativos?",
+  "options": [
+    "CBS e IBS já em alíquota plena, com PIS/COFINS extintos desde 01/01/2026",
+    "CBS de 0,9% e IBS de 0,1% no ano-teste, compensados com PIS/COFINS no mesmo período",
+    "IPI a zero e Imposto Seletivo em vigor desde 01/01/2026",
+    "Vigência plena do IBS, encerrada a transição tributária"
+  ],
+  "correct": 1,
+  "explanation": "2026 é o ano-teste: incidem CBS de 0,9% (art. 582 do Decreto 12.955/2026) e IBS de 0,1%, compensados com PIS/COFINS no mesmo período, com taxa de prova isenta se cumpridas as obrigações acessórias (Ato Conjunto RFB/CGIBS nº 1/2025, de 23/12/2025). O fim do PIS/COFINS, o IPI a zero (exceto na ZFM) e o Imposto Seletivo vêm em 2027–2028, e a vigência plena do IBS só ocorre em 2033."
+}
+```
+
+```question
+{
+  "id": "npof-09-q11",
+  "type": "multiple-choice",
+  "question": "Em 2024 a Fundação Itaú registrou R$ 444,2 milhões de receitas, das quais 93% financeiras, e patrimônio líquido de R$ 5,54 bilhões. Qual é a leitura correta?",
+  "options": [
+    "Opera com prejuízo estrutural: as despesas de 2024 superaram as receitas",
+    "O fundo patrimonial sustenta a operação e a doação financia projeto específico",
+    "É proibida de receber doações de pessoas físicas e jurídicas",
+    "Depende exclusivamente de edital público para se manter"
+  ],
+  "correct": 1,
+  "explanation": "A renda de ativos cobre a estrutura: em 2024 as receitas foram de R$ 444,2 mi (R$ 414,4 mi financeiras = 93%) contra despesas de R$ 307,3 mi, gerando superávit de R$ 136,8 mi e patrimônio líquido de R$ 5,54 bi. Doações (R$ 14,6 mi) e o 1% do IR (R$ 18,8 mi distribuídos pelo FIA 2024 para 40 projetos) pagam projetos específicos — não há prejuízo, nem vedação de doação, nem dependência de edital."
 }
 ```
 

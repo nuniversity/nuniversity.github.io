@@ -1,6 +1,6 @@
 ---
 title: "Empreendedorismo Social e ONGs"
-description: "Curso verificado de empreendedorismo social para ONGs: tipo ideal da EMES (9 indicadores em 3 grupos), definição da Comissão Europeia, espectro de Dees da filantropia pura ao comércio puro, social business de Yunus e Decreto nº 11.646/2023; os 12 modelos de negócio com prós, contras e risco tributário (atividade própria × não própria, SCIT/Receita de 24/03/2023, ISS, PIS/COFINS, ICMS, NFS-e), venda ao Estado por licitação ou MROSC, ciclo de vendas B2B de 10,1 meses, drift de receita × drift de missão, seis exemplos trabalhados com números, casos brasileiros reais e 10 questões práticas resolvidas."
+description: "Curso verificado de empreendedorismo social para ONGs: tipo ideal da EMES (9 indicadores em 3 grupos), definição da Comissão Europeia, espectro de Dees da filantropia pura ao comércio puro, social business de Yunus e Decreto nº 11.646/2023; os 12 modelos de negócio com prós, contras e risco tributário (atividade própria × não própria, SCIT/Receita de 24/03/2023, ISS, PIS/COFINS, ICMS, NFS-e), venda ao Estado por licitação ou MROSC, ciclo de vendas B2B de 10,1 meses, drift de receita × drift de missão, oito exemplos trabalhados com números, cinco casos reais com modelo de receita de venda (Gerando Falcões, Atados, BRAC, Habitat e Instituto Ayrton Senna) e 12 questões práticas resolvidas."
 order: 8
 difficulty: "intermediate"
 duration: "90 min"
@@ -24,7 +24,8 @@ Nesta lição você vai:
 - precificar com **subsídio cruzado**, **break-even** e **ciclo de vendas B2B**;
 - vender ao Estado sem cair no mito do **art. 4º da Lei nº 14.133/2021**;
 - separar **drift de receita** de **drift de missão** e instalar barreiras contra os dois;
-- responder **10 questões práticas** com gabarito e explicação.
+- auditar **cinco casos reais** de receita de venda (Gerando Falcões, Atados, BRAC, Habitat e Instituto Ayrton Senna) com modelo, números, risco tributário e lição;
+- responder **12 questões práticas** com gabarito e explicação.
 
 ---
 
@@ -495,27 +496,203 @@ No Brasil, o **Sistema B** (B Lab) virou um **argumento comercial**: abre cadeia
 
 ---
 
-## 10. O ecossistema brasileiro de impacto: o que já existe
+## 10. Empreendedorismo Social na Prática: Casos Reais
 
-### 10.1 Marco e mercado
+As seções 3 e 9 trabalharam modelos e amostras brasileiras; esta seção faz o teste inverso: começa de **relatórios anuais e demonstrações financeiras localizadas** e pergunta, em cada caso, **de onde veio o dinheiro**. O recorte pesquisado reúne **11 organizações verificadas** (7 brasileiras e 4 internacionais), todas com CNPJ, registro estatutário ou demonstração financeira localizada — e **5 delas operam um modelo de receita de venda de bem ou serviço**, não de *grant* (subvenção). Três conclusões aparecem antes dos detalhes:
+
+1. **nenhum desses casos vende "caridade"**: todos operam um **produto** com lógica de mercado — bazar, plataforma, microcrédito, casa, loja, marca — e aplicam a receita na missão, que é a definição operacional de Dees (2004);
+2. **nenhum depende majoritariamente de verba pública**: a BRAC teve **10,0%** de doações no exercício de 2023-24, e o contraponto de captação individual é a MSF (97,9% de receita privada em 2024);
+3. **concentração é o risco nº 1 da receita própria**: o Instituto Ayrton Senna depende de **62%** de royalties de um único ativo intangível — receita previsível e, por isso mesmo, perigosa.
+
+### 10.1 Cinco casos, cinco modelos de venda
+
+| Caso | Modelo de receita de venda/serviço | Números verificados (ano) | Risco tributário no Brasil |
+|---|---|---|---|
+| **Gerando Falcões** | Unidade de negócio social (bazar e ASMARA) + filantropia + escala pública | Fundo Dignidade (mar/2025): meta de R$ 250 mi e regra de gastar 10% do patrimônio ao ano; captação das aceleradas de R$ 5,1 mi para R$ 13,7 mi (+266%) em 28 unidades (2022); 42 mil qualificados (2025) | Venda de bem: ICMS ou ISS conforme o item, PIS/COFINS, CFOP e NFS-e; **atividade não própria** se a venda não constar do objeto (SCIT 24/03/2023) |
+| **Atados** | Marketplace de dois lados: ONGs e voluntários gratuitos, empresas pagam por voluntariado corporativo e ESG | Rede de **+100 empresas**, 4 mil ONGs e 290 mil voluntários; em 2024, +70 projetos corporativos, +82 ONGs impactadas, +30 mil novos usuários e +400 ONGs publicadas | Comissão e serviço B2B = prestação de serviço: ISS (LC nº 116/2003) e NFS-e; sem isenção se a atividade for não própria |
+| **BRAC** | Microfinanças e empresas sociais (venda), com doação residual | Exercício 30/06/2024: **BDT 140,6 bi** — microfinanças BDT 94,9 bi (67,5%), empresas sociais BDT 28,3 bi (20,1%), doações BDT 14,1 bi (10,0%) | Operação sob regime local; no Brasil, o mesmo desenho é atividade econômica habitual sujeita ao regime pleno (seção 5.2) |
+| **Habitat for Humanity** | Venda do produto social (casa) e lojas ReStore | HFHI US$ 362,1 mi (FY2024); rede estimada em **US$ 3,1 bi**, com 24% de casas e 20% de itens (US$ 756 mi e US$ 630 mi) | Venda de mercadoria: ICMS (convênio estadual), PIS/COFINS, CFOP e NFS-e |
+| **Instituto Ayrton Senna** | Royalty de marca e imagem (licenciamento) | **R$ 25,971 mi de R$ 41,738 mi** de receita operacional (62%, 2024) | Royalty é receita de venda: IRPJ/CSLL e PIS/COFINS fora do alcance da isenção se a atividade for não própria (seção 3.1) |
+
+### 10.2 Caso 1 — Gerando Falcões: unidade de negócio social e fundo de perenidade
+
+Associação privada (CNPJ 18.463.148/0001-28, aberto em 25/06/2013, CNAE 94.99-5-00) em rede federada de ONGs com CNPJ próprio, com a missão de atacar pobreza e dignidade nas favelas por educação, inclusão produtiva, cultura e renda. O financiamento é um **tripé: filantropia + negócios sociais (bazar e ASMARA) + escala pública** — exatamente a composição mista que a seção 6 descreve, aqui documentada em fonte primária.
+
+Os números que interessam a esta lição:
+
+- captação das aceleradas: de **R$ 5,1 milhões para R$ 13,7 milhões (+266%)** em **28 unidades** (2022);
+- formandos: **23 mil em 2024** (+200%) e **42 mil qualificados em 2025**;
+- **Fundo Dignidade** (mar/2025): meta de **R$ 250 milhões** e regra estatutária de **gastar 10% do patrimônio ao ano**, com a família Lemann aportando **R$ 100 milhões** (a Folha detalha R$ 50 mi + R$ 50 mi + R$ 25 mi — divergência registrada na seção 13.2); a Rouanet liberou **R$ 271.573,83** para a Orquestra Jovem (DOU 2016);
+- **receita não publicada**: não há DRE ou balanço localizado — o que não é apurado **não se estima**.
+
+**Risco tributário:** bazar e unidade de negócio social são **venda de bem** — ICMS ou ISS conforme o item, PIS/COFINS, CFOP e NFS-e. Se a atividade não constar do objeto estatutário, é **atividade não própria** e a isenção do art. 15 da Lei nº 9.532/1997 não a alcança (SCIT/Receita, 24/03/2023).
+
+**Lição:** trocar dependência de doador por **receita própria + fundo de perenidade** — o negócio social paga a operação e o fundo patrimonial com regra de gasto garante continuidade quando a doação oscila.
+
+### 10.3 Caso 2 — Atados: marketplace de dois lados que cobra do pagante
+
+Associação (CNPJ 18.110.558/0001-95, fundada em 2012) que opera uma **plataforma de dois lados** conectando voluntários, ONGs e empresas. O desenho é o mesmo do modelo "marketplace/plataforma" da tabela da seção 3.1 — com a diferença decisiva de **quem paga**:
+
+- **gratuito** para ONGs e voluntários; **pago** no lado corporativo, com clientes como Heineken, Samsung e Coca-Cola e uma base de **+100 empresas**;
+- em 2024: **+70 projetos corporativos**, **+82 ONGs impactadas**, **+30 mil novos usuários**, **+60 mil inscrições** e **+400 ONGs publicadas**;
+- rede consolidada: **4 mil ONGs**, **290 mil voluntários** e +30 mil usuários; ~60 funcionários no mesmo ano;
+- cuidado com a leitura (item não verificado): a receita anual **não é publicada**, e os **+R$ 6 milhões direcionados** são **fluxo repassado, não receita** da Atados.
+
+**Risco tributário:** cobrar de empresa por serviço de voluntariado corporativo/ESG é **prestação de serviço** — ISS pela LC nº 116/2003, NFS-e obrigatória e ausência de isenção quando a atividade é acessória ao objeto; a comissão de plataforma tem o mesmo tratamento.
+
+**Lição:** **monetizar o engajamento cobrando de quem tem disposição de pagar** (a empresa), **nunca do beneficiário** (a ONG ou o voluntário) — o lado gratuito é a missão, o lado pago é o negócio.
+
+### 10.4 Caso 3 — BRAC: empresas sociais e microcrédito financiam a missão
+
+Criada em 21/03/1972 e registrada como sociedade (*Societies Registration Act* 1860, n. 3695/3), a BRAC é o caso do recorte em que a **missão é paga por venda**. No exercício encerrado em **30/06/2024**:
+
+| Fonte de receita | Valor (BDT) | Participação |
+|---|---|---|
+| Microfinanças | 94,9 bi | **67,5%** |
+| Empresas sociais | 28,3 bi | **20,1%** |
+| Doações de doadores | 14,1 bi | **10,0%** |
+| **Total** | **140,6 bi** | **100%** |
+
+O exercício anterior somou BDT 125,3 bi. A escala que a receita própria sustenta: **1 em cada 5 bengaleses atendido em 2024**, **2,3 milhões de pessoas saindo da pobreza extrema** no mesmo ano e **~26 milhões de pessoas (1 em 7)** em 2025, com **+100 mil funcionários em 15 países**. A governança acompanha o tamanho: o órgão de direção (*governing body*) com 5 reuniões, assembleia de 19/03/2024, auditoria da ACNABIN e reserva estatutária de 10% do superávit. **Valores em taka — conversão em real seria estimativa própria.**
+
+**Risco tributário:** no Bangladesh opera sob regime local; no Brasil, microcrédito, venda de produto e venda de serviço seriam **atividade econômica habitual** com regime pleno (Simples, lucro presumido ou lucro real), escrituração, NFS-e e obrigações acessórias — a seção 5 não faz exceção para quem tem escala.
+
+**Lição:** empresas sociais e microcrédito **financiam o que a doação não cobre** — a doação cai para 10% do total e passa a pagar o que o mercado não paga (saúde, WASH — água, saneamento e higiene — e *advocacy*). A proporção é a lição; copiar o produto, não.
+
+### 10.5 Caso 4 — Habitat for Humanity: vender a casa e operar a loja
+
+Fundada em 1976 em Americus (Geórgia), é uma **501(c)(3)** organizada como **rede federada de afiliados autônomos** em +70 países — e é o caso do recorte em que a **venda do produto social** aparece como linha explícita de receita **com percentual publicado**:
+
+- **FY2024 (sede, HFHI):** US$ 362,1 mi — contribuições US$ 234,6 mi, itens doados US$ 51,7 mi e grants públicos US$ 28,3 mi;
+- **rede estimada:** US$ 3,1 bi, com contribuições em 49%, **casas em 24%** e **itens (lojas ReStore) em 20%** — na conta da tabela 3, **US$ 756 milhões de casas** e **US$ 630 milhões de itens**;
+- **NMTC** (*New Markets Tax Credit*) de US$ 130 mi desde 2008;
+- escala: **3.035.972 pessoas com moradia em FY2024**, +5,3 milhões por *advocacy* e +62 milhões desde 1976.
+
+**Aviso de leitura:** a sede só consolida o que é dela; os US$ 3,1 bi da rede são **estimativa não auditada** — comparar sede e rede sem aviso metodológico é erro de base.
+
+**Risco tributário:** loja de itens e venda de casa são **comércio**: ICMS dependente de convênio estadual, PIS/COFINS, CFOP e NFS-e (seção 3.1). No Brasil, uma OSC que opera loja social entra no regime da atividade econômica habitual — imunidade não acompanha a mercadoria.
+
+**Lição:** **produto padronizado + rede federada = escala** (franquia social): cada afiliado tem contabilidade própria, a sede audita a marca e publica o Form 990, e a receita de venda convive com a doação sem substituí-la — 44% da rede vem de venda e 49% de contribuições.
+
+### 10.6 Caso 5 — Instituto Ayrton Senna: o royalty que é receita e risco ao mesmo tempo
+
+Associação privada (natureza 399-9; CNPJ 00.328.072/0001-62, aberto em 02/12/1994), cuja receita operacional de 2024 foi de **R$ 41,738 milhões**, dos quais **R$ 25,971 milhões (62%) vieram de royalties de marca e imagem**, R$ 11,724 milhões de pessoas jurídicas e R$ 4,044 milhões de pessoas físicas. As despesas de **R$ 47,378 milhões** geraram déficit de **R$ 5,640 milhões**, coberto por receitas financeiras de **R$ 24,060 milhões**; o patrimônio líquido somava **R$ 273,4 milhões**, dos quais **R$ 265,4 milhões** em títulos. Em 2025 a receita foi de R$ 45,879 milhões.
+
+**Risco tributário:** licenciamento/royalty é **receita de venda** — a lição da seção 3.1 vale integralmente (IRPJ/CSLL sobre a receita; PIS/COFINS; e o risco de o royalty configurar atividade-fim mercantil). **Lição:** royalty vira receita **previsível** — e 62% em um único ativo intangível (a marca de uma pessoa) é o risco de concentração que a diretoria precisa monitorar todo ano.
+
+- **🔢 Você sabia?** No exercício encerrado em **30/06/2024** a BRAC destinou apenas **10,0%** da receita a doações (**BDT 14,1 bi** de **BDT 140,6 bi**): microfinanças (BDT 94,9 bi = 67,5%) e empresas sociais (BDT 28,3 bi = 20,1%) somam **87,6%** e pagam a operação. Ou seja, essa operação de missão é **autofinanciada por venda** — e a doação sobra para o que o mercado não compra. Detalhe de governança: reserva estatutária de **10% do superávit**, assembleia de 19/03/2024 e auditoria da ACNABIN. (Valores em taka; conversão em real seria estimativa própria.)
+
+> [!WARNING]
+> **Erro comum — copiar a receita dos casos sem copiar as barreiras.**
+> 1. **Regime comercial:** bazar, loja, plataforma, royalty e consultoria são **atividade econômica habitual**; a isenção do art. 15 da Lei nº 9.532/1997 e do art. 14, X, da MP nº 2.158-35/2001 **não acompanha a venda** quando a atividade é **não própria** (SCIT/Receita, 24/03/2023) — a GF, a Atados e a Habitat vendem em regime pleno, não sob imunidade;
+> 2. **Drift de missão:** a linha que cresce mais rápido puxa o calendário para si e corta primeiro o serviço gratuito; barreira mínima = cláusula estatutária de destinação do excedente + métrica de impacto publicada **com a mesma periodicidade** do balanço (seção 9.1);
+> 3. **Transparência como controle:** sem composição de receita publicada, "vivemos de venda" vira achismo — o BRAC publica a divisão por linha e a Habitat separa sede de rede; a GF e a Atados **não têm receita apurada em fonte, e isso não se estima**.
+
+### 10.7 Exemplo trabalhado 7 — unit economics (economia unitária) de um produto social: preço × custo × margem
+
+Uma ONG lança um **kit de oficinas** para venda em bazar próprio e em marketplace. A referência de mercado é a Habitat: na rede dela, **44% da receita vem de venda** (24% de casas + 20% de itens) — produto de missão, conta de varejo.
+
+| Componente (por kit) | Valor | Base |
+|---|---|---|
+| Preço de venda | **R$ 120,00** | pesquisa de preço local |
+| (−) Custo variável (produção, embalagem, envio) | R$ 52,00 | 43,3% do preço |
+| (−) Comissão de canal (marketplace) | R$ 18,00 | 15% do preço |
+| (−) Tributos da venda (ISS 2% + PIS/COFINS 5%) | R$ 8,40 | 7% — atividade não própria (SCIT 24/03/2023) |
+| **= Margem de contribuição** | **R$ 41,60** | **34,7% do preço** |
+
+Custo fixo da linha (montagem, 1 pessoa dedicada, armazenagem e sistema): **R$ 12.480,00/mês**.
+
+```text
+break-even mensal = R$ 12.480,00 / R$ 41,60 = 300 kits/mês
+receita no break-even = 300 × R$ 120,00 = R$ 36.000,00/mês
+```
+
+**Teste de canal:** se a plataforma passar a cobrar **30%** (o mesmo patamar da loja parceira do exemplo 6), a comissão sobe para R$ 36,00 e a margem cai para R$ 120,00 − R$ 52,00 − R$ 36,00 − R$ 8,40 = **R$ 23,60**:
+
+```text
+break-even = R$ 12.480,00 / R$ 23,60 = 529 kits/mês  (+76,3%)
+```
+
+**Lição:** o **canal** derrubou o *break-even* em 229 kits por mês sem mexer em produção nem em preço — a mesma lição do exemplo 6, agora na economia unitária do produto: antes de descontar, negocie comissão e recalcule a margem de contribuição. Comissão de 30% exige **R$ 63.480,00** de receita para cobrir o mesmo custo fixo de R$ 12.480,00.
+
+### 10.8 Exemplo trabalhado 8 — break-even de uma linha de receita B2B
+
+A mesma ONG abre uma **linha de voluntariado corporativo e ESG** — o modelo do Atados, em que a empresa paga e a ONG não paga.
+
+| Memória de cálculo | Valor | Base |
+|---|---|---|
+| Preço do contrato anual por empresa | **R$ 48.000,00** | 1 empresa |
+| (−) Custo direto de entrega (coordenação dedicada, plataforma, relatório de impacto) | R$ 26.400,00 | 55% da receita |
+| (−) Tributos da venda (ISS 2% + PIS/COFINS 5%) | R$ 3.360,00 | 7% |
+| **= Margem de contribuição por contrato** | **R$ 18.240,00** | **38,0% do preço** |
+
+Custo fixo da linha: **R$ 164.160,00/ano** (2 pessoas de coordenação/comercial + sistema).
+
+```text
+break-even = R$ 164.160,00 / R$ 18.240,00 = 9 contratos/ano
+receita no break-even = 9 × R$ 48.000,00 = R$ 432.000,00/ano
+com 10 contratos: 10 × R$ 18.240,00 − R$ 164.160,00 = R$ 18.240,00 de excedente
+```
+
+**O contra-argumento é o tempo:** o ciclo de compra B2B é de **10,1 meses** (6sense, 2025) e 94% dos grupos de compra já têm fornecedor favorito — se a linha começar em janeiro, o primeiro contrato fecha em novembro e **a receita do primeiro ano é quase nula**. O capital de giro mínimo é o custo fixo de ~10 meses: R$ 164.160,00 ÷ 12 = **R$ 13.680,00/mês** × 10 meses = **R$ 136.800,00**.
+
+**Referência real:** a Atados opera esse modelo com **+100 empresas** na rede e **+70 projetos corporativos em 2024** — quase **8 vezes** o ponto de equilíbrio de 9 contratos, e com a receita anual não publicada (o que reforça o aviso: o break-even se calcula **antes** de contratar, não depois).
+
+**Lição:** uma linha de serviço fecha a conta com **9 contratos**, não com 90 — mas só sobrevive se o caixa aguentar 10 meses de ciclo. **Break-even de linha de receita é conta de margem × volume; capital de giro é conta de prazo.** As duas se calculam juntas.
+
+- **🔢 Você sabia?** A rede Habitat estimou **US$ 3,1 bilhões** de receita em FY2024 e a divisão por origem mostra o quanto a venda pesa: **24% de casas (US$ 756 milhões)** e **20% de itens das lojas ReStore (US$ 630 milhões)** — **44% de receita de venda**, contra 49% de contribuições. A sede (HFHI) consolidou **US$ 362,1 milhões** (US$ 234,6 mi de contribuições, US$ 51,7 mi de itens doados, US$ 28,3 mi de grants públicos) e publica o Form 990: em **rede federada** de afiliados autônomos em +70 países, sede e rede não são a mesma conta — a diferença entre US$ 362,1 mi e US$ 3,1 bi é de consolidação, não de erro aritmético.
+
+### 10.9 Checklist: abrir uma linha de venda sem mudar a missão
+
+A ordem dos passos decide o regime e o desfecho. Coloque-os na sequência em que precisam ser respondidos:
+
+```dragdrop
+{
+  "question": "Ordene os passos para abrir uma linha de receita de venda na ONG, na ordem em que precisam ser respondidos:",
+  "items": [
+    "Passo 1 — Conferir no estatuto se a atividade é própria (consta do objeto) ou não própria",
+    "Passo 2 — Precificar com o piso da regra de ouro (seção 7.3): preço ≥ custo total + tributos da venda (ISS 2% + PIS/COFINS 5%)",
+    "Passo 3 — Segregar contabilmente a linha e apurar os tributos dela, preservando a imunidade da atividade-fim",
+    "Passo 4 — Emitir NFS-e e manter escrituração e obrigações acessórias da atividade econômica habitual",
+    "Passo 5 — Publicar a métrica de impacto com a mesma periodicidade do balanço e manter a cláusula de destinação do excedente"
+  ],
+  "correctOrder": [
+    "Passo 1 — Conferir no estatuto se a atividade é própria (consta do objeto) ou não própria",
+    "Passo 2 — Precificar com o piso da regra de ouro (seção 7.3): preço ≥ custo total + tributos da venda (ISS 2% + PIS/COFINS 5%)",
+    "Passo 3 — Segregar contabilmente a linha e apurar os tributos dela, preservando a imunidade da atividade-fim",
+    "Passo 4 — Emitir NFS-e e manter escrituração e obrigações acessórias da atividade econômica habitual",
+    "Passo 5 — Publicar a métrica de impacto com a mesma periodicidade do balanço e manter a cláusula de destinação do excedente"
+  ],
+  "explanation": "A ordem importa porque cada passo só existe depois do anterior: o critério da atividade própria (SCIT/Receita de 24/03/2023; SC Cosit 25/2019) define se há tributo a apurar; o preço só pode ser calculado depois de conhecido o custo total e os tributos da venda; a segregação contábil protege a imunidade da atividade-fim (CF art. 150, VI, § 4º); a NFS-e é obrigatória mesmo para a atividade acessória; e a métrica de impacto publicada na periodicidade do balanço é a barreira que impede o drift de missão descrito na seção 9.1 — sem ela, a linha de venda cresce e a missão encolhe."
+}
+```
+
+> [!IMPORTANT]
+> **O que os cinco casos têm em comum:** (i) um **produto** com preço, custo e margem rastreáveis — bazar, plataforma, microcrédito, casa, royalty; (ii) um **pagante separado do beneficiário** (a empresa, o comprador, o mutuário); (iii) a receita de venda **não substitui** a doação — ela cobre o que a doação não cobre e o risco que ela deixa exposto. Copie a **estrutura da conta**, não o produto do caso.
+
+---
+
+## 11. O ecossistema brasileiro de impacto: o que já existe
+
+### 11.1 Marco e mercado
 
 - **Decreto nº 11.646/2023** — Enimpacto, com **4 conceitos** (art. 3º), **5 eixos** (MDIC) e comitê paritário de **25 órgãos públicos + 25 organizações**; o MDIC posiciona o Brasil entre os **pioneiros** em legislação do tema;
 - **Sebrae/PNUD (2018):** **+800 negócios de impacto social** no país;
 - **ANDE (relatório de 2021, publicado em 2023):** **R$ 18,7 bilhões em ativos sob gestão** de investimento de impacto;
-- **Aliança pelo Impacto** — Carta de Princípios para Negócios de Impacto no Brasil (2015): referência identificada em estudos brasileiros, **com URL oficial não confirmada** nesta pesquisa (ver seção 12.2).
+- **Aliança pelo Impacto** — Carta de Princípios para Negócios de Impacto no Brasil (2015): referência identificada em estudos brasileiros, **com URL oficial não confirmada** nesta pesquisa (ver seção 13.2).
 
-### 10.2 O retrato global (WEF/Schwab)
+### 11.2 O retrato global (WEF/Schwab)
 
 - **🔢 Você sabia?** O relatório **WEF/Schwab, *The State of Social Enterprise*, de 18/04/2024** (dados de mais de 80 países, 2013–2023) contabiliza **~10 milhões de empresas sociais** (>3% dos negócios), **≈US$ 2 trilhões de receita por ano**, **~200 milhões de empregos** (6% do emprego formal), **1 em 2 liderada por mulheres** (contra 1 em 5 nas empresas convencionais) e uma necessidade de financiamento de **US$ 1,1 trilhão**. É o dado que derruba a ideia de que empresa social é nicho.
 
-### 10.3 A decisão estratégica que o ecossistema impõe
+### 11.3 A decisão estratégica que o ecossistema impõe
 
 > [!IMPORTANT]
 > **Brasil tem marco de impacto, mas não tem regime tributário de impacto.** Na prática, a escolha de forma jurídica e de modelo de receita continua sendo feita com as ferramentas antigas: **Código Civil** (associação/fundação), **Lei nº 5.764/1971** (cooperativa), **LC nº 123/2006** (Simples, ME/EPP), **Lei nº 14.133/2021** (licitação) e o **critério da atividade própria** para a imunidade. Planejar "empresa de impacto" como se fosse categoria tributária própria é um dos erros mais caros do setor.
 
 ---
 
-## 11. Erros práticos e armadilhas desta lição
+## 12. Erros práticos e armadilhas desta lição
 
 > [!WARNING]
 > **Erros que mais aparecem em auditoria, em edital e em prova — todos com base verificada:**
@@ -533,9 +710,9 @@ No Brasil, o **Sistema B** (B Lab) virou um **argumento comercial**: abre cadeia
 
 ---
 
-## 12. Números do setor e itens não verificados
+## 13. Números do setor e itens não verificados
 
-### 12.1 Escala, com fonte e ano
+### 13.1 Escala, com fonte e ano
 
 - **WEF/Schwab (18/04/2024):** ~10 milhões de empresas sociais, ≈US$ 2 trilhões de receita/ano, ~200 milhões de empregos, US$ 1,1 trilhão de necessidade de capital, 1 em 2 liderada por mulheres;
 - **IRS SOI (ano-calendário 2019):** 71% de *program services* (US$ 1,7 trilhão) contra US$ 551,3 bilhões de contribuições;
@@ -547,7 +724,7 @@ No Brasil, o **Sistema B** (B Lab) virou um **argumento comercial**: abre cadeia
 - **IBGE/FASFIL 2023 (publ. dez/2025):** 596,3 mil fundações e associações (+4% vs. 2022), 85,6% sem empregado formalizado; **IPEA/Mapa das OSCs (2024):** 897.054 OSCs ativas — **não somar recortes**;
 - **6sense (2025):** ciclo B2B de 10,1 meses, 10+ decisores, 4,5 fornecedores, 94% de favorito prévio.
 
-### 12.2 Itens sinalizados como **não verificados** nesta pesquisa
+### 13.2 Itens sinalizados como **não verificados** nesta pesquisa
 
 Para que lacuna de pesquisa não vire afirmação categórica:
 
@@ -723,6 +900,38 @@ Para que lacuna de pesquisa não vire afirmação categórica:
   ],
   "correct": 3,
   "explanation": "Yunus (2010) define o social business como uma empresa 'non-loss, non-dividend, fully market-based' — sem prejuízo, sem dividendos e inteiramente de mercado. Por isso ele ocupa posição próxima do comércio puro no método, com o excedente 100% reinvestido — e não o meio do espectro, que é onde ficam as posições mistas (fee subsidiado e contrato público social)."
+}
+```
+
+```question
+{
+  "id": "npof-08-q11",
+  "type": "multiple-choice",
+  "question": "O Atados é gratuito para voluntários e ONGs e cobra empresas por voluntariado corporativo e ESG (Heineken, Samsung, Coca-Cola). Qual é o modelo de receita descrito?",
+  "options": [
+    "Captação pública concorrida em pregão",
+    "Marketplace de dois lados em que o lado corporativo paga",
+    "Cooperativa de trabalho com distribuição de resultados aos sócios",
+    "Fundo soberano de investimento de impacto"
+  ],
+  "correct": 1,
+  "explanation": "É um marketplace de dois lados com um único lado pagante: a empresa compra o serviço, enquanto ONGs e voluntários usam a plataforma sem custo. A rede somava +100 empresas, 4 mil ONGs e 290 mil voluntários, com +70 projetos corporativos, +82 ONGs impactadas, +30 mil novos usuários e +400 ONGs publicadas em 2024. A regra é monetizar o engajamento cobrando de quem tem disposição de pagar — nunca do beneficiário. Atenção aos números: a receita anual não é publicada, e os +R$ 6 mi direcionados são fluxo repassado, não receita da Atados."
+}
+```
+
+```question
+{
+  "id": "npof-08-q12",
+  "type": "multiple-choice",
+  "question": "No exercício encerrado em 30/06/2024, a BRAC registrou BDT 14,1 bi de doações sobre BDT 140,6 bi de receita total. Qual o percentual aproximado de doação na receita?",
+  "options": [
+    "50%",
+    "25%",
+    "10%",
+    "75%"
+  ],
+  "correct": 2,
+  "explanation": "10,0%: microfinanças (BDT 94,9 bi = 67,5%) e empresas sociais (BDT 28,3 bi = 20,1%) somam 87,6% da receita e autofinanciam a operação; a doação cobre o que o mercado não paga (saúde, WASH e advocacy). É o exemplo mais forte da lição: receita própria sustenta escala (+100 mil funcionários em 15 países) e a doação vira complemento, não sustáculo. Os valores são em taka — converter em real seria estimativa própria, por isso não se compara com os benchmarks em R$ ou US$ das seções 6.1 e 6.2."
 }
 ```
 

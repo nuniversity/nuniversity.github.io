@@ -1,6 +1,6 @@
 ---
 title: "Economia de ONGs e Modelos de Financiamento"
-description: "Analise os fundamentos econômicos das OSCs — falhas de mercado, de governo e contratuais, a vedação à distribuição de lucros, os 15 modelos de receita, o custo de captação, os indicadores de eficiência e as reservas operacionais — com dados do Giving USA 2024, da Pesquisa Doação Brasil 2024, do Censo GIFE 2024-2025 e do Panorama das ONGs (CAF-IDIS)."
+description: "Analise os fundamentos econômicos das OSCs — falhas de mercado, de governo e contratuais, a vedação à distribuição de lucros, os 15 modelos de receita, o custo de captação, os indicadores de eficiência e as reservas operacionais — com dados do Giving USA 2025/2026, da Pesquisa Doação Brasil 2024, do Censo GIFE 2024-2025, do Panorama das ONGs (CAF-IDIS) e do CAF World Giving Report 2025, aplicados a casos reais de financiamento (Gerando Falcões, Instituto Ayrton Senna, Atados, BRAC, Médicos Sem Fronteiras e Fundação Itaú)."
 order: 3
 difficulty: "intermediate"
 duration: "90 min"
@@ -347,9 +347,9 @@ A Charity Navigator pontua por interpolação: para porte médio, $(0,76 - 0,50)
 
 ---
 
-## 8. Cinco Exemplos Práticos Trabalhados
+## 8. Sete Exemplos Práticos Trabalhados
 
-> As premissas abaixo são **hipotéticas da aula** (*cálculo próprio*), ancoradas nas fórmulas e limites das seções 7 e 9. Não descrevem organizações reais.
+> Os exemplos 1 a 5 têm premissas **hipotéticas da aula** (*cálculo próprio*), ancoradas nas fórmulas e limites das seções 7 e 9, e não descrevem organizações reais. Os exemplos 6 e 7 aplicam a dados **verificados** de doação internacional (Giving USA 2025/2026, CAF *World Giving Report 2025*, Melhores ONGs 2019 e Doação Brasil 2024), declarando a premissa de cada conta.
 
 ### 8.1 Exemplo 1 — Orçamento de R$ 1,2 milhão em três cenários de receita
 
@@ -428,6 +428,63 @@ A Charity Navigator pontua por interpolação: para porte médio, $(0,76 - 0,50)
 4. custo por real da captação ≈ 10,6% (parâmetro brasileiro: 11,8% — ABCR/Criando);
 5. ter **3 a 5 fontes ativas** no mês 12.
 
+### 8.6 Exemplo 6 — Quanto se doa: o mapa mundial da generosidade em números
+
+**Dados verificados (CAF *World Giving Report 2025*, base 2024, 101 países):** **64%** da população doou dinheiro e **26%** voluntariou (média de **9 h**) no ano; a média global de doação é de **1,04%** da renda; Nigéria lidera com **2,83%**, seguida de Egito (2,45%), Gana e China (2,19%) e Quênia (2,13%); a Índia tem **1,92%** (9º); França e Portugal, **0,45%**; Alemanha, **0,39%** (100º); Japão, **0,16%** (101º).
+
+| Pos. | País / região | % da renda doada (2024) | Sobre R$ 60.000/ano (*cálculo próprio*) |
+|---|---|---:|---:|
+| 1 | Nigéria | 2,83% | R$ 1.698 |
+| 2 | Egito | 2,45% | R$ 1.470 |
+| 3 | Gana / China | 2,19% | R$ 1.314 |
+| 5 | Quênia | 2,13% | R$ 1.278 |
+| 9 | Índia | 1,92% | R$ 1.152 |
+| 21 | Indonésia (era 1ª) | 1,55% | R$ 930 |
+| — | **Média da África** | **1,54%** | **R$ 924** |
+| — | **Média global** | **1,04%** | **R$ 624** |
+| — | **Média da Europa** | **0,64%** | **R$ 384** |
+| 97 | França / Portugal | 0,45% | R$ 270 |
+| 100 | Alemanha | 0,39% | R$ 234 |
+| 101 | Japão | 0,16% | R$ 96 |
+
+**Premissa didática** (*cálculo próprio*): renda familiar anual de **R$ 60.000**.
+
+1. **Média global:** 60.000 × 1,04% = **R$ 624/ano** → R$ 52,00/mês.
+2. **Nigéria (1º):** 60.000 × 2,83% = **R$ 1.698/ano** → R$ 141,50/mês.
+3. **Alemanha (100º):** 60.000 × 0,39% = **R$ 234/ano** → R$ 19,50/mês.
+4. **Japão (101º):** 60.000 × 0,16% = **R$ 96/ano** → R$ 8,00/mês.
+5. **Razões:** Nigéria ÷ Japão = 2,83 ÷ 0,16 = **17,7×**; Nigéria ÷ Alemanha = 2,83 ÷ 0,39 = **7,3×**; África (1,54%) ÷ Europa (0,64%) = **2,4×**.
+6. **Contraponto brasileiro:** a média anual por doador no Brasil foi de **R$ 1.180** e a mediana de **R$ 480** em 2024 (Doação Brasil 2024) — R$ 98,33/mês na média e R$ 40,00/mês na mediana. Dividindo a receita total de **R$ 24,3 bilhões** pela média: 24.300.000.000 ÷ 1.180 ≈ **20,6 milhões de doadores** implícitos (*cálculo próprio* — a pesquisa não publica esse total).
+7. **Limite do dado:** a posição do Brasil no CAF *World Giving Report 2025* **não foi localizada** nos recortes consultados (**não verificado**) — não afirme ranking brasileiro sem conferir o anexo do relatório.
+
+> [!NOTE]
+> Percentual de renda doada mede **hábito**, não valor absoluto: a Nigéria doa **7,3×** a Alemanha em *percentual* da renda, e a base de renda dos dois países é outra. Antes de comparar generosidade entre países, meça a base — e lembre que o dado é país, não ONG.
+
+### 8.7 Exemplo 7 — Mix de receitas Brasil × EUA aplicado a um orçamento de R$ 1,2 milhão
+
+**Dados verificados:** EUA (Giving USA 2025, ano-base 2024, US$ 592,50 bi): indivíduos **66,2%**, fundações **18,5%**, legados **7,7%** e empresas **7,5%** (soma de 99,9% por arredondamento). Brasil (amostra Melhores ONGs 2019, Instituto Doar/CEAPG-FGV, R$ 4,4 bi): governo **24%**, empresas e fundações **22%**, indivíduos **18%**, venda de serviços **11%**, internacionais **9%** e outros **16%**.
+
+| Fonte | Mix EUA | R$ sobre R$ 1,2 mi | Mix Brasil (amostra) | R$ sobre R$ 1,2 mi |
+|---|---:|---:|---:|---:|
+| Indivíduos | 66,2% | R$ 794.400 | 18% | R$ 216.000 |
+| Fundações | 18,5% | R$ 222.000 | — | — |
+| Empresas e fundações | — | — | 22% | R$ 264.000 |
+| Legados | 7,7% | R$ 92.400 | — | — |
+| Empresas | 7,5% | R$ 90.000 | — | — |
+| Governo | — | — | 24% | R$ 288.000 |
+| Venda de bens e serviços | — | — | 11% | R$ 132.000 |
+| Internacionais | — | — | 9% | R$ 108.000 |
+| Outros | — | — | 16% | R$ 192.000 |
+| **Total** | **99,9%** | **R$ 1.198.800** | **100%** | **R$ 1.200.000** |
+
+1. **Gap da captação individual:** 66,2% − 18% = **48,2 pontos percentuais** = **R$ 578.400/ano** de diferença só na pessoa física.
+2. **HHI dos dois mixes:** EUA → $0{,}662^2 + 0{,}185^2 + 0{,}077^2 + 0{,}075^2$ = **0,484**; Brasil-amostra → $0{,}24^2 + 0{,}22^2 + 0{,}18^2 + 0{,}11^2 + 0{,}09^2 + 0{,}16^2$ = **0,184**.
+3. **Leitura:** o mercado americano é **concentrado** (> 0,30) na pessoa física — força e fragilidade na mesma conta: base ampla e majoritariamente irrestrita, mas sensível ao humor do doador e à bolsa. A amostra brasileira é mais **difusa**, porém com 24% vindo de governo — fonte 100% restrita e sujeita a ciclo político.
+4. **Cuidado metodológico:** os universos não são equivalentes (Giving USA mede doações a destinatários; Melhores ONGs mede a receita de uma amostra de ONGs), e **HHI de mercado não é HHI de ONG**. Use a comparação para calibrar o próprio mix: a regra prática da Seção 5 permanece — HHI < 0,30 e nenhuma fonte acima de 40%.
+5. **Atualização (Giving USA 2026):** em 2025 os EUA chegaram a **US$ 617,20 bilhões** (+5,7%), com indivíduos em **64%**, fundações em **19%**, legados em **US$ 62,19 bilhões** (+19,7%) e corporações em **7%** — o padrão de concentração no indivíduo se manteve.
+
+**🔢 Você sabia?** O **GivingTuesday** nasceu em **2012**, no *92nd Street Y* de Nova York, e em 2025 movimentou **US$ 4,0 bilhões** só nos EUA, com **38,1 milhões de participantes** e presença em mais de **110 países** (GivingTuesday / AP News, 2025) — a maior coordenação já registrada de captação individual, e a prova de que o item "indivíduos" do mix americano é, acima de tudo, um fenômeno de mobilização.
+
 ---
 
 ## 9. Reservas Operacionais e Gestão de Fluxo de Caixa
@@ -490,21 +547,146 @@ O guia NORI (*Operating Reserves Policy Toolkit*, dados de 2008 a 2023) recomend
 
 ---
 
-## 11. Estudos de Caso e Recomendações Práticas
+## 11. Modelos de Financiamento na Prática: Casos Reais
 
-### 11.1 Caso A — ONG presa ao edital (cenário A do Exemplo 1)
+A Seção 4 lista os modelos e seus riscos; este capítulo mostra o que eles pagam quando se abre o balanço de organizações de verdade. Os seis casos abaixo foram conferidos em demonstrações financeiras, relatórios anuais e páginas oficiais das próprias entidades (pesquisa de casos, out/2026) e atravessam a mesma lente: **quem paga**, **quanto é livre** e **quão concentrado está o caixa**. Tudo que não foi confirmado em fonte primária aparece sinalizado como **não verificado** — lacuna de pesquisa não vira afirmação categórica.
+
+### 11.1 A lente dos quatro modelos
+
+Para ler qualquer receita de ONG, reduza-a a quatro perguntas — as mesmas quatro famílias da matriz da Seção 4:
+
+```text
+ A LENTE DOS QUATRO MODELOS — COMO LER UM BALANÇO DE ONG
+ ───────────────────────────────────────────────────────────
+ 1. CAPTAÇÃO INDIVIDUAL ...... quem paga? a pessoa física, em ticket
+                               baixo (recorrência) ou alto (major gifts)
+ 2. CAPTAÇÃO INSTITUCIONAL ... quem paga? empresa, fundação ou Estado —
+                               via edital, contrato ou proposta
+ 3. RECEITA PRÓPRIA ........... quem paga? o mercado, por bem ou
+                               serviço vendido (earned income)
+ 4. PLATAFORMA / INTERMEDIAÇÃO quem paga? o lado do mercado que quer
+                               acessar o outro lado da plataforma
+ ───────────────────────────────────────────────────────────
+ Em qualquer caso: % da receita · % livre (irrestrito) · HHI por fonte
+```
+
+Aplicada a um balanço real, a lente vira um roteiro de seis perguntas — é o que o conselho deveria fazer antes de aprovar o orçamento:
+
+```text
+ CHECKLIST DE 6 PERGUNTAS AO ABRIR UM BALANÇO DE ONG
+ ───────────────────────────────────────────────────────────
+ 1. Qual foi a receita bruta do exercício — e ela é majoritariamente
+    pública, privada ou de venda de serviços?
+ 2. Qual é a maior categoria de receita e quanto ela pesa em % e em R$?
+ 3. Desse total, quanto é livre (irrestrito) e quanto já tem dono?
+ 4. A despesa de programa cresceu em termos absolutos frente ao ano
+    anterior?
+ 5. Quanto custou captar cada real (despesa de captação ÷ receita
+    de captação) — por canal, não no agregado?
+ 6. Quantos meses de reserva livre restam no pior mês do ano?
+ ───────────────────────────────────────────────────────────
+ Qualquer resposta que não saia do balanço em 10 minutos é uma
+ informação que o conselho ainda não tem.
+```
+
+### 11.2 Gerando Falcões (Brasil, 2013) — grandes doadores + fundo de perenidade
+
+- **Modelo usado:** captação institucional de grande ticket (famílias doadoras), negócios sociais (bazar e ASMARA) e **fundo patrimonial**; projetos culturais com Lei Rouanet.
+- **Números verificados:** o **Fundo Dignidade** (mar/2025) tem meta de **R$ 250 milhões** e regra de gastar **10% do patrimônio por ano**; o aporte das famílias Lemann, Setubal e Marinho soma **R$ 100 milhões** na página do fundo, enquanto a *Folha* (2025) detalha R$ 50 mi + R$ 50 mi em 2026 + R$ 25 mi em contratos (**divergência entre fontes, não reconciliada**); o Rouanet liberou **R$ 271.573,83** para a Orquestra Jovem (DOU, 2016); a captação das unidades aceleradas subiu de **R$ 5,1 mi para R$ 13,7 mi (+266%)** em 28 unidades (2022); **23 mil formados** em 2024 (+200%) e **42 mil qualificados** em 2025. A receita anual **não é publicada** (**não verificado**).
+- **Lição:** a organização trocou a dependência do doador do exercício por **dotação permanente com regra de gasto** — o mesmo desenho do fundo patrimonial da Fundação Itaú (2000). Quando a campanha termina, o fundo custeia a operação.
+
+### 11.3 Instituto Ayrton Senna (Brasil, 1994) — royalty de marca como fonte dominante
+
+- **Modelo usado:** captação institucional (pessoa jurídica e pessoa física) somada a **royalties de marca e imagem** e à renda do patrimônio.
+- **Números verificados:** receita operacional de **R$ 41,738 milhões** em 2024 (R$ 64,816 mi em 2023; R$ 45,879 mi em 2025) — dos quais **R$ 25,971 mi (62%)** vieram de royalties, R$ 11,724 mi de PJ e R$ 4,044 mi de PF; as despesas de R$ 47,378 mi geraram déficit de R$ 5,640 mi, coberto por receitas financeiras de R$ 24,060 mi; patrimônio líquido de R$ 273,4 mi, dos quais **R$ 265,4 mi em títulos**; em 2024 investiu R$ 47,378 mi (P&D R$ 14,8 mi; advocacia R$ 7,2 mi).
+- **Lição:** o royalty converte receita imprevisível em previsível — mas **62% em um único ativo** é exatamente o que a regra dos 40% da Seção 5 proíbe. A diversificação é obrigatória, e o patrimônio em títulos é o colchão que absorve o déficit de um exercício ruim.
+
+### 11.4 Atados (Brasil, 2012) — plataforma digital que cobra o lado corporativo
+
+- **Modelo usado:** **plataforma de dois lados**, gratuita para ONGs e voluntários, com receita vinda do lado que tem disposição de pagar — empresas (voluntariado corporativo e ESG: Heineken, Samsung, Coca-Cola).
+- **Números verificados:** **+100 empresas** na rede; em 2024, **+70 projetos corporativos**, **+82 ONGs impactadas**, **+30 mil novos usuários** e **+60 mil inscrições**; base de **4 mil ONGs** e **290 mil voluntários**; cerca de 60 funcionários (2024). A receita anual **não é publicada** (**não verificado**) e os "R$ 6 milhões direcionados" são **fluxo repassado às ONGs, não receita da plataforma**.
+- **Lição:** monetizar engajamento cobrando **do pagante certo** — a ONG usuária nunca é a cliente. É a versão digital da receita própria: quem compra não é o beneficiário, é a demanda corporativa por impacto.
+
+### 11.5 BRAC (Bangladesh, 1972) — receita própria em escala
+
+- **Modelo usado:** **earned income** (microfinanças + empresas sociais) sobre uma base residual de doações.
+- **Números verificados:** exercício encerrado em 30/06/2024, receita de **BDT 140,6 bilhões** — microfinanças **BDT 94,9 bi (67,5%)**, empresas sociais **BDT 28,3 bi (20,1%)** e doações **BDT 14,1 bi (10,0%)**; no exercício anterior, BDT 125,3 bi. Em 2025, cerca de **26 milhões de pessoas** atendidas (1 em cada 7 bengaleses) e **+100 mil funcionários** em 15 países.
+- **Lição:** a doação virou **minoria (10%)** e passou a financiar justamente o que o mercado não compra (saúde, WASH, advocacia). Escala com receita própria é possível — mas troca gestão de doação por gestão de negócio. Valores em taka: converter em dólar seria estimativa (**não verificado**).
+
+### 11.6 Médicos Sem Fronteiras (França, 1971) — captação individual em escala global
+
+- **Modelo usado:** **captação individual massiva**, com recusa deliberada de dependência de fonte pública.
+- **Números verificados:** receita de **€ 2.362 milhões** em 2024 (€ 2,6 bi em 2025); **97,9%** de fontes privadas, das quais pessoas físicas **€ 2.015 mi = 85,3%**; fontes públicas **2,1%**; **79%** aplicados na missão social; na seção francesa, **€ 90,1 de cada € 100** vão às missões, com reservas de **4,4 meses**; **+7,1 milhões de doadores** em 2024 (+7,5 mi em 2025); recusa de fundos públicos da União Europeia desde 2016.
+- **Lição:** 85,3% da receita vinda de pessoas físicas **estouraria** a regra dos 40% se fosse um único doador — mas são milhões de decisões independentes. **Concentração de categoria não é concentração de fonte**, e o efeito prático é o inverso do risco: ninguém dita a pauta de quem paga a maioria do caixa. É a captação individual comprando independência política.
+
+**🔢 Você sabia?** Das 11 organizações verificadas no levantamento de casos, **nenhuma depende majoritariamente de verba pública**: a Médicos Sem Fronteiras tem **97,9%** de receita privada e recusa fundos da União Europeia desde 2016, e o Todos Pela Educação declara não receber recursos públicos — e mesmo assim movimentou **R$ 26,1 milhões** em 2024, com superávit de R$ 4,66 mi e patrimônio líquido de R$ 16,9 mi.
+
+### 11.7 Fundação Itaú (Brasil, 1993–2019) — patrimônio rendedor como base da operação
+
+- **Modelo usado:** **fundo patrimonial** (endowment) como base, com doação e destinação de 1% do IR como complemento de projeto.
+- **Números verificados:** em 2024, receitas de **R$ 444,2 milhões** — financeiras **R$ 414,4 mi (93%)**, doações R$ 14,6 mi e operacionais R$ 15,1 mi —, despesas de R$ 307,3 mi (das quais R$ 181,7 mi em projetos), superávit de R$ 136,8 mi e patrimônio líquido de **R$ 5,54 bilhões**; o FIA 2024 distribuiu **R$ 18,8 milhões** do 1% do IR para 40 projetos; indicador público limita os custos administrativos a 5% do investido.
+- **Lição:** a renda de ativos custeia a estrutura e a doação paga projeto — é o formato em que a captação **não** é o sustáculo da operação. O risco, porém, migra do doador para o mercado: cai a renda financeira, cai a estrutura.
+
+### 11.8 Síntese: modelo dominante, número verificado e risco
+
+| Caso | Modelo dominante | Número verificado (ano) | Risco a monitorar |
+|---|---|---|---|
+| Gerando Falcões | Grandes doadores + fundo patrimonial | Meta de R$ 250 mi no Fundo Dignidade (2025) | Receita anual não publicada |
+| Instituto Ayrton Senna | Royalty de marca + patrimônio | R$ 25,971 mi de R$ 41,738 mi (62%, 2024) | 62% em um único ativo |
+| Atados | Plataforma digital (lado corporativo paga) | +100 empresas; 290 mil voluntários (2024) | Receita anual não publicada |
+| BRAC | Receita própria (microfinanças + empresas sociais) | 87,6% da receita (2023-24) | Gestão de negócio, não de doação |
+| Médicos Sem Fronteiras | Captação individual | € 2.015 mi de indivíduos (85,3%, 2024) | Relacionamento com +7,1 mi de doadores |
+| Fundação Itaú | Fundo patrimonial | R$ 414,4 mi financeiras = 93% de R$ 444,2 mi (2024) | Renda de ativos ligada ao mercado |
+| Instituto Sou da Paz *(referência)* | Captação institucional no exterior | 65% do exterior = R$ 8,28 mi (2022) | Corte de prioridade do financiador estrangeiro |
+
+> [!IMPORTANT]
+> **Leitura cruzada dos casos:** nenhum dos seis se financia majoritariamente com verba pública, e três deles (IAS, BRAC e Fundação Itaú) concentram a receita em **uma categoria só** — sustentável justamente porque essa categoria é uma renda contratada (royalty, patrimônio) ou um mercado atomizado (milhões de doadores). A pergunta de gestão não é "temos muitos doadores?", mas: **se a categoria que responde por mais da metade da receita desaparecer, o que sobra?**
+
+### 11.9 Os casos à prova das regras desta aula
+
+| Regra da aula | Caso que a confirma | Evidência numérica | Decisão prática |
+|---|---|---|---|
+| Nenhuma fonte acima de 40% da receita | Instituto Ayrton Senna | 62% em royalties (2024) | Renovar e multiplicar a fonte **antes** que o contrato de marca termine |
+| Diversificação reduz volatilidade, mas encarece a gestão | BRAC | 3 categorias concentram 87,6% da receita (2023-24) | Orçar a gestão do negócio, não só o custo da captação |
+| Reserva operacional de 3 a 6 meses | Médicos Sem Fronteiras | 4,4 meses na seção francesa (2024) | Medir a reserva no pior mês, em caixa livre |
+| Concentração regional de doador é risco assimétrico | Instituto Sou da Paz | 65% vindo de fundações do exterior (2022) | Diversificar fontes nacionais antes do corte estrangeiro |
+| Receita própria dá autonomia e exige gestão | Gerando Falcões | Fundo Dignidade com meta de R$ 250 mi (2025) | Fixar a regra de gasto (10% ao ano) no próprio instrumento |
+| Base ampla só vale com cadastro | Atados | 290 mil voluntários; receita vem das empresas (2024) | Monetizar o lado que paga, nunca cobrar do beneficiário |
+
+Nenhum caso escapa das contas desta aula: HHI, razão programa, custo por real captado e reserva operacional valem de Poá (SP) a Daca (Bangladesh). O que separa quem sobrevive de quem quebra não é o tamanho da receita — é a **estrutura** do mix e a coragem de olhar o percentual da maior fonte todo trimestre.
+
+```matching
+{
+  "question": "Associe cada organização real ao modelo de financiamento que domina a receita dela:",
+  "pairs": [
+    {"left": "Médicos Sem Fronteiras", "right": "Captação individual: 85,3% da receita de 2024 veio de pessoas físicas (€ 2.015 mi)"},
+    {"left": "BRAC", "right": "Receita própria: microfinanças e empresas sociais somaram 87,6% da receita (2023-24)"},
+    {"left": "Instituto Ayrton Senna", "right": "Royalty de marca: R$ 25,971 mi dos R$ 41,738 mi de receita de 2024 (62%)"},
+    {"left": "Atados", "right": "Plataforma de dois lados: gratuita para ONGs e voluntários, paga pelas empresas"},
+    {"left": "Fundação Itaú", "right": "Fundo patrimonial: 93% da receita de 2024 veio da renda financeira dos ativos (R$ 414,4 mi)"},
+    {"left": "Instituto Sou da Paz", "right": "Captação institucional no exterior: 65% de fundações estrangeiras (2022)"}
+  ],
+  "explanation": "Cada caso ilustra uma das quatro lentes: a MSF escala a captação pessoa física, a BRAC trocou doação por receita própria, o IAS transformou marca em royalty (e concentrou risco), a Atados cobra do lado corporativo da plataforma, a Fundação Itaú vive da renda do patrimônio e a Sou da Paz depende de concentração regional de fundações — o risco típico da captação institucional internacional."
+}
+```
+
+---
+
+## 12. Estudos de Caso e Recomendações Práticas
+
+### 12.1 Caso A — ONG presa ao edital (cenário A do Exemplo 1)
 
 Uma entidade de educação com despesa de R$ 1,2 milhão recebe 70% de editais. Quando a administração municipal muda, dois empenhos não são renovados: **perdem-se R$ 840.000 em um exercício**. A reserva real livre era de apenas 15% (R$ 180.000) — suficiente para **1,8 mês** de folha. Correção executada em 24 meses: campanha de recorrência via Pix (meta de 300 doadores × R$ 50), busca de apoio institucional de fundação (70% restrito, mas previsível) e um contrato de capacitação irrestrito — até HHI de 0,29 e 45% de receita livre.
 
-### 11.2 Caso B — A armadilha do grande doador corporativo (cenário C)
+### 12.2 Caso B — A armadilha do grande doador corporativo (cenário C)
 
 Uma OSC concentra 60% da receita em um contrato de causa-marketing com uma empresa. O contrato é renovado por 4 anos, a equipe dobra, a razão de programa cai porque a administração cresceu junto. No quinto ano, a empresa muda de agência e **não renova**: a OSC perde 60% da receita com custo fixo já inflado. É o padrão descrito por Froelich (1999): dependência gera deriva de missão, e a saída do financiador é sempre mais cara do que a entrada. A lição: **regra dos 40%** e revisão anual de concentração pelo conselho.
 
-### 11.3 Caso C — O desembolso que a empresa fez
+### 12.3 Caso C — O desembolso que a empresa fez
 
 Segundo o Monitor das Doações (2024), a doação monitorada mais expressiva de empresas foi a da **Gerdau, com R$ 74 milhões**. Casos assim resolvem caixa de curto prazo, mas raramente chegam como recurso livre: normalmente vêm atrelados a projeto, comunicação e prestação de contas específica. Pergunta certa ao receber: **"quanto do valor é livre e qual é o custo real de prestação de contas?"**
 
-### 11.4 Recomendações por fase da organização
+### 12.4 Recomendações por fase da organização
 
 **Anos 1 a 3 (construção):**
 
@@ -530,7 +712,7 @@ Segundo o Monitor das Doações (2024), a doação monitorada mais expressiva de
 - alinhe o *mix* de receitas ao plano estratégico, não ao contrário;
 - invista em capacidade de gestão financeira proporcional à complexidade do mix.
 
-### 11.5 Checklist trimestral do conselho
+### 12.5 Checklist trimestral do conselho
 
 | Pergunta | Meta de referência | Fonte |
 |---|---|---|
@@ -670,6 +852,38 @@ Segundo o Monitor das Doações (2024), a doação monitorada mais expressiva de
   "options": ["Eventos", "Telemarketing", "Projetos com incentivo fiscal", "Crowdfunding"],
   "correct": 2,
   "explanation": "O incentivo fiscal captou R$ 12,2 milhões com apenas R$ 611 mil investidos — o melhor retorno. O telemarketing liderou em volume isolado (R$ 3,1 milhões com R$ 1,2 milhão) e os eventos tiveram o pior retorno por real investido."
+}
+```
+
+```question
+{
+  "id": "npof-03-q9",
+  "type": "multiple-choice",
+  "question": "No exercício encerrado em 30/06/2024, a BRAC registrou receita de BDT 140,6 bilhões, assim distribuída: microfinanças BDT 94,9 bi, empresas sociais BDT 28,3 bi e doações de doadores BDT 14,1 bi. Qual a participação das doações na receita total?",
+  "options": [
+    "Aproximadamente 50%",
+    "Aproximadamente 25%",
+    "Aproximadamente 10%",
+    "Aproximadamente 75%"
+  ],
+  "correct": 2,
+  "explanation": "14,1 ÷ 140,6 ≈ 10%. Microfinanças e empresas sociais somam 87,6% da receita: a operação se autofinancia e a doação cobre o que o mercado não compra (saúde, WASH, advocacia). É a receita própria (earned income) da Seção 4 aplicado em escala — atenção: os valores estão em taka, e converter para dólar seria estimativa própria."
+}
+```
+
+```question
+{
+  "id": "npof-03-q10",
+  "type": "multiple-choice",
+  "question": "Em 2024 o Instituto Ayrton Senna registrou receita operacional de R$ 41,738 milhões, dos quais R$ 25,971 milhões (62%) vieram de royalties de marca e imagem. Qual é o risco gerencial dominante nesse mix?",
+  "options": [
+    "Impossibilidade de prever qualquer receita do exercício seguinte",
+    "Concentração em um único ativo de marca, acima do limite de 40% da receita por fonte",
+    "Vedação estatutária de captar recursos de pessoas jurídicas",
+    "Vínculo obrigatório com verba pública pelo MROSC"
+  ],
+  "correct": 1,
+  "explanation": "O contrato de marca responde por 62% da receita — bem acima da regra dos 40% da Seção 5: o fim do contrato derruba mais da metade do caixa em um exercício. Por isso a diversificação é obrigatória e o patrimônio em títulos (R$ 265,4 mi em 2024) atua como colchão. As opções (a), (c) e (d) contradizem os dados: a receita é previsível justamente por ser um royalty, a captação de PJ existiu (R$ 11,724 mi) e não há vínculo obrigatório com verba pública."
 }
 ```
 

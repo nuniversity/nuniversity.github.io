@@ -1,6 +1,6 @@
 ---
 title: "ONG vs. Fins Lucrativos vs. Governo"
-description: "Compare os três regimes organizacionais do Brasil — OSC/terceiro setor, setor público e empresa privada — pela matriz de 15 dimensões e pelo eixo capital → destino do excedente → controle, com contratação pública, tributação, formas híbridas, seis casos brasileiros calculados e dados do IBGE, Ipea, GIFE, CMB e Sebrae com fonte e ano."
+description: "Compare os três regimes organizacionais — OSC/terceiro setor, setor público e empresa privada — pela matriz de 15 dimensões e pelo eixo capital → destino do excedente → controle, com comparação internacional dos regimes (EUA, Reino Unido, Alemanha, França e Índia), contratação pública, tributação, formas híbridas, casos brasileiros calculados, casos reais das fronteiras entre setores e exemplo trabalhado de emprego por setor, com dados do IBGE, Ipea, GIFE, CMB, Sebrae, IRS, Charity Commission, NCVO e Giving USA com fonte e ano."
 order: 2
 difficulty: "intermediate"
 duration: "90 min"
@@ -417,9 +417,118 @@ A EP e a SEM **lucram** (o excedente vai para os cofres), **contratam pela Lei 1
 
 ---
 
-## 10. Seis casos brasileiros calculados
+## 10. Comparação Internacional dos Regimes
 
-### 10.1 Saúde — o mesmo atendimento, três regimes
+Todo país precisa responder às mesmas três perguntas — de onde vem o capital, para onde vai o excedente e quem controla —, mas desenha a fronteira entre os três setores em pontos diferentes. Nos **EUA** a fronteira é política e tributária; no **Reino Unido**, é de finalidade e de prova de benefício público; na **Alemanha**, é de status fiscal; na **França**, é de declaração; na **Índia**, é de captação estrangeira; no **Brasil**, é de imunidade constitucional somada ao instrumento de parceria. A leitura abaixo usa as mesmas linhas da matriz da seção 3, apenas vistas por quem regula.
+
+O terceiro setor é, também, um fenômeno global com medida própria:
+
+- **101 países:** em 2024, **64%** das pessoas doaram dinheiro e **26%** voluntariaram, com média de **9 horas** (CAF World Giving Report 2025);
+- **Renda doada:** a Nigéria lidera com **2,83%** da renda e o Japão fecha com **0,16%**, contra média global de **1,04%** (mesma fonte);
+- **Ambiente econômico:** o *Global Philanthropy Environment Index* 2025 (95 economias, 173 especialistas, Indiana University) aponta os **fluxos transfronteiriços** como o fator mais fraco — **3,40** em 2025, contra 3,58 em 2018;
+- **Base comparativa:** o *Comparative Nonprofit Sector Project* da Johns Hopkins passou de **13 para 46 países** entre 1991 e 2017; a fase de 2003 cobriu 35 países, **US$ 1,3 trilhão** de despesas e ~190 milhões de voluntários, base do *UN Handbook on Nonprofit Institutions* (ONU, 2003).
+
+### 10.1 Como cada país desenha a fronteira
+
+- **EUA — 501(c)(3): a fronteira é política.** Toda entidade qualificada é **"absolutamente proibida"** de intervir em campanha a favor ou contra candidato — a *Johnson Amendment*, proposta pelo senador Lyndon B. Johnson em **1954** (100 Cong. Rec. 9604). A violação pode gerar revogação da isenção e impostos especiais (IRS, 2026). Precedentes: *Association of the Bar v. Commissioner*, 858 F.2d 876 (2d Cir. 1988) — rating "não partidário" de candidatos é intervenção proibida; *Branch Ministries v. Rossotti* (D.C. Cir. 2000) — anúncio anti-candidato justificou a revogação. O *lobby* é disciplinado à parte pelo 501(h) (Form 5768) e pelo imposto do § 4911.
+- **Reino Unido — charity: a fronteira é a prova de benefício público.** Charities Act 2011, ss. 1 a 4: só é *charity* quem tem finalidades caritativas **e** cumpre o *public benefit test* sob controle da High Court — e o **s. 4(2) não presume** o benefício (*R (ISC) v Charity Commission*). O registro na Charity Commission começa em **£ 5.000** e o identificador público é o *charity number*.
+- **Alemanha — *gemeinnützig*: a fronteira é tributária, não societária.** O status dos **§§ 51 a 68 da AO** é conferido pelo *Finanzamt* e independe da forma jurídica: pode ser ostentado por **e.V.** (7 membros, sem capital), **Stiftung** (patrimônio duradouro, na prática ≥ € 300 mil) e **gGmbH** (≥ € 25 mil). O § 51, 2, impõe o *Inlandsbezug*: no exterior só conta o que beneficiar residentes na Alemanha ou melhorar a reputação do país.
+- **França — loi 1901: a fronteira é a declaração.** O art. 2º assegura a liberdade sem autorização prévia; a *déclaration* (Cerfa 13973) confere a **personalidade moral**, com publicação no JOAFE em 1 mês. O *agrément* não é condição de existência, mas dá acesso a subvenções — e só a **ARUP** (decreto no *Conseil d'État*, em regra após 3 anos de vida) habilita a receber **donações e legados**.
+- **Índia — FCRA: a fronteira é a captação estrangeira.** A entidade-base pode ser Societies Act 1860, Trusts Act 1882 ou Companies Act s. 8; receber do exterior exige o certificado **FCRA** (§ 12) — com registro após ≥ 3 anos e ≥ ₹ 10 lakh de gastos, **conta específica no SBI em Nova Delhi** (§ 17), **vedação de repasse** a terceiros (§ 7, redação de 2020), Aadhaar/passaporte dos dirigentes (§ 12A) e renovação quinquenal (FC-3C).
+- **Brasil — imunidade + MROSC: a fronteira é dupla.** O lado fiscal vem do **art. 150, VI, "c"**, e do **art. 195, § 7º**, da CF; o lado civil vem do **CC, art. 53** (associação "para fins não econômicos"); o lado da relação com o Estado vem do **MROSC** — termo de colaboração, termo de fomento e acordo de cooperação (Lei 13.019, arts. 16, 17 e 41), com a vedação de "campanhas de interesse político-partidário ou eleitorais" (art. 84-C, parágrafo único) e, nas OSCIPs, o art. 16 da Lei nº 9.790. A Lei nº 13.204/2015, art. 9º, **revogou a Lei nº 91/1935**, e a Receita reconhece a qualificação de OSC como suficiente para a dedutibilidade das doações (SC Cosit nº 191/2018).
+
+> [!NOTE]
+> **Leitura de regime, não de qualidade.** Nenhum desses desenhos é "mais avançado" que outro: o que muda é **onde o legislador colocou o teste**. E o efeito prático é direto — a mesma conduta pode ser lícita em um país e vedada em outro (o rating de candidatos é vedado nos EUA; na Alemanha a manifestação é livre, ressalvado o apoio anticonstitucional do § 51, 3 AO). Antes de exportar um modelo de governança ou de captação, verifique **qual fronteira** o regime local protege.
+
+### 10.2 O regime comparado de seis países
+
+| Dimensão | **Brasil** | **EUA** | **Reino Unido (E/W)** | **Alemanha** | **França** | **Índia** |
+|---|---|---|---|---|---|---|
+| Conceito central | OSC (Lei 13.019/2014) | 501(c)(3): *public charity* ou fundação privada | *Charity* (Charities Act 2011, ss. 1–4) | Status *gemeinnützig* (AO §§ 51–68) + forma (e.V./Stiftung/gGmbH) | *Association loi 1901*; ARUP | Society/Trust/Companies s. 8 + FCRA |
+| Órgão/controle | Receita Federal (CNPJ), TCU/MP; sem agência única | IRS (*determination* + Form 990) | Charity Commission (E/W) | *Finanzamt* + *Stiftungsaufsicht* | Prefeitura (declaração); Interior/*Conseil d'État* (ARUP) | MHA (FCRA) + registro estadual |
+| Teste de benefício público | Sem teste único; qualificação por finalidade (art. 84-C) | *Operational test* + proibição de *inurement* | **Obrigatório e não presumido** (s. 4) | Generalidade *selbstlos* (§ 52); fim exclusivo e direto | Associação livre; ARUP só por decreto (≥ 3 anos) | Sem teste análogo; filtro = **FCRA** |
+| Registro/identificação | CNPJ + estatuto | EIN + *determination letter* (Form 1023) | **Charity number** público | *Vereinsregister* (e.V.); tutela (Stiftung) | RNA/SIREN após declaração | Certificado FCRA + registro-base |
+| Transparência anual | Balanço e prestação de contas por instrumento | **Form 990 público** (990-N/EZ/completo) | *Trustees' annual report* + contas; **SORP 2026** | Demonstrações anuais; *Freistellungsbescheid* | Relatório + contas (revisor se > € 150 mil/ano) | **Form FC-4** + contas certificadas por CA |
+| Imunidade e doador | Imunidade (CF 150 VI b/c; 195 § 7º; CEBAS) + isenções | Isenção federal; dedução doador (§ 170) | Isenção de CT; **Gift Aid** | KStG § 5(1) nº 9; Grundsteuer § 3; doador § 10b | −66% IR; até −75% IFI em fundações | Isenções condicionadas; exterior **só** com FCRA |
+| Intervenção política | **Vedada** (art. 84-C, parágrafo único; Lei 9.790, art. 16) | **Absoluta** (Johnson Amendment); lobby via 501(h) | Advocacy ampla; sem equivalente da Johnson Amendment | Livre; vedado apoio anticonstitucional (§ 51, 3) | Livre manifestação; *congrégations* sob autorização | Restrições do FCRA em atividades sensíveis |
+| Receber do exterior | Sem vedação geral; cambial só para crédito (BCB) | *Equivalency determination* ou *expenditure responsibility* + OFAC | Internação admitida pelo *public benefit test* | *Inlandsbezug* (§ 51, 2 AO) | Opera fora; ARUP facilita legados | **Só com FCRA**: SBI/Nova Delhi, sem repasse, 5 anos |
+
+Três leituras da tabela, direto da cadeia da seção 1:
+
+1. **A Alemanha e o Brasil são os dois casos em que a qualificação é separada da forma.** Lá, *gemeinnützig* é status tributário alcançável por três formas societárias; aqui, OSCIP e OS são qualificações de uma associação ou fundação (CC, arts. 53 e 62). Trocar forma por qualificação é o mesmo erro nos dois países.
+2. **Só o Reino Unido tem teste de benefício público expresso e não presumido** (s. 4(2)). Nos EUA o teste é operacional (Reg. 1.501(c)(3)-1); no Brasil, a pergunta é de **finalidade e de destino do excedente** (CTN, art. 14; Lei 13.019, art. 2º, I) — que é, em outra roupagem, a mesma verificação.
+3. **A intervenção política é o único ponto em que os seis discordam frontalmente:** dos EUA (vedação absoluta, com precedentes de revogação de isenção) ao Reino Unido (*advocacy* ampla), passando pelo Brasil (art. 84-C do MROSC e art. 16 da Lei nº 9.790), pela França (livre manifestação), pela Alemanha (livre, ressalvado o apoio anticonstitucional do § 51, 3 AO) e pela Índia (restrições do FCRA em atividades sensíveis).
+
+### 10.3 Transparência: o que cada país obriga a publicar
+
+| País | Documento anual | Acesso | Limiar | Sanção típica |
+|---|---|---|---|---|
+| EUA | Form 990 / 990-EZ / 990-N | Público (IRS, Candid, ProPublica) | 990-N < US$ 50 mil; 990 ≥ US$ 200 mil ou US$ 500 mil de ativos | Revogação da isenção; §§ 4955/4958; multas |
+| Reino Unido | *Trustees' annual report* + contas (SORP) | Público no Register of Charities | Registro ≥ £ 5.000; relatório detalhado > £ 500 mil | *Inquiry*, remoção do registro, responsabilização dos trustees |
+| Alemanha | Balanços + documentação da *gemeinnützigkeit* | Fisco; tutela das fundações | Varia por forma (e.V. não registral: simplificado) | Perda da *gemeinnützigkeit*; revogação do *Freistellungsbescheid* |
+| França | Relatório de atividade + contas | Prefeitura, Interior, público (JOAFE/RNA) | Declaração para personalidade moral; relatório anual na ARUP | Perda da ARUP; dissolução judicial |
+| Índia | Form FC-4 + balanço certificado por CA | MHA (fcraonline.nic.in) | Toda entidade registrada (inclusive "NIL") | Cancelamento do certificado; saldo à autoridade; inabilitação |
+| Brasil | Balanço/DRE e prestação de contas | Público (CNPJ), órgão parceiro, TCU/TCEs | Por instrumento da Lei 13.019 | Inabilitação, Lei 8.429/1992, perda de benefícios |
+
+A tabela confirma a regra da seção 4.3: **transparência é o preço do benefício**. Todo país que concede imunidade, isenção ou acesso a subvenção troca esse benefício por um documento anual com acesso público — e por uma sanção que vai da multa até a perda da qualificação. A diferença está no limiar e no órgão, não no princípio.
+
+**🔢 Você sabia?** Nos EUA, qualquer cidadão pode baixar o balanço de uma entidade sem fins lucrativos: o **Form 990** é público no IRS, no Candid e no ProPublica, e passa a ser obrigatório quando a receita chega a **US$ 200 mil** ou os ativos a **US$ 500 mil** (abaixo disso, o 990-N simplificado, para receita < US$ 50 mil). No mesmo ano-base de 2025, as doações privadas americanas somaram **US$ 617,20 bilhões** (+5,7%), das quais **64%** vieram de indivíduos (Giving USA 2026 — Indiana University). No Reino Unido, em set/2025 havia **171.153 charities**, £ 104 bilhões de renda e 923.536 *trustees* (Charity Commission, 30/07/2026).
+
+> [!NOTE]
+> **O documento muda, o princípio não.** No Reino Unido, exercícios iniciados até 31/12/2025 seguem o **SORP 2019**; a partir de 01/01/2026 passa a valer o **SORP 2026** (GOV.UK) — a mesma obrigação de relatório anual dos *trustees* com nova norma de elaboração. E no Brasil o padrão não vem de uma norma contábil única: vem do **instrumento**, porque é o MROSC (Lei 13.019) que define o que a OSC parceira precisa entregar. Em qualquer país, porém, a dispensa de recolhimento **nunca** afasta a publicidade: Lei nº 9.790, art. 17, e, havendo repasse, CF, art. 70, parágrafo único.
+
+### 10.4 O que o Brasil faz diferente
+
+Comparada com a tabela da seção 10.2, a arquitetura brasileira tem **quatro decisões próprias**:
+
+| # | Decisão brasileira | Base normativa | O contraste no exterior |
+|---|---|---|---|
+| 1 | A imunidade é **constitucional** e nasce da finalidade, limitada às finalidades essenciais | CF, art. 150, VI, **"c"**, e § 3º; CTN, art. 14 | Na Alemanha depende de decisão do *Finanzamt* (AO §§ 51–68); na França, de *agrément*/ARUP por decreto; no Reino Unido, do registro na Charity Commission |
+| 2 | A forma nasce **livre**, sem autorização prévia | CF, art. 5º, XVII; **CC, art. 53** — "união de pessoas que se organizem para fins não econômicos" | Semelhante à *loi 1901* (art. 2º); oposta ao regime indiano, que condiciona a captação estrangeira a certificado (FCRA) |
+| 3 | A relação com o Estado tem **trilho próprio de parceria** — nem *grant*, nem licitação | Lei 13.019, arts. 16, 17 e 41 (termo de colaboração, de fomento e acordo de cooperação), com chamamento público (arts. 24 e 29) | Nos EUA, *grant* com *equivalency determination* ou *expenditure responsibility*; no Reino Unido, financiador sujeito ao *public benefit test* |
+| 4 | A intervenção política é **vedada por lei ordinária do MROSC**, não por cláusula tributária constitucional | MROSC, art. 84-C, parágrafo único; Lei 9.790, art. 16 (OSCIPs) | O Brasil ocupa a posição intermediária entre os EUA (vedação absoluta, Johnson Amendment de 1954) e o Reino Unido (*advocacy* ampla) |
+
+**Somando as quatro decisões:** o Brasil é dos países em que **menos se pede para existir** — liberdade de associação e imunidade constitucional — e **mais se pede para conservar o benefício**: finalidades essenciais (§ 3º do art. 150), vedação de distribuição (Lei 13.019, art. 2º, I), prestação de contas por instrumento e vedação de campanha. Descumprir o art. 14 do CTN não custa apenas uma isenção — custa a **imunidade** e, com ela, o regime de dedutibilidade das doações (SC Cosit nº 191/2018).
+
+Há ainda uma assimetria que costuma surpreender: **no Brasil não existe agência única do terceiro setor**. Não há equivalente da Charity Commission nem do IRS: a qualificação de OSCIP é do Ministério da Justiça, a de OS é do órgão parceiro, o CEBAS é setorial e o CNPJ é meramente cadastral. Quem quiser saber o "estado" de uma ONG brasileira precisa cruzar estatuto, qualificações e prestação de contas do MROSC — o que torna a ***due diligence*** sobre a entidade mais manual do que nos EUA ou no Reino Unido.
+
+> [!NOTE]
+> **Erro comum de comparação:** dizer que "no Brasil a ONG precisa de autorização do governo para existir". Não precisa — a liberdade é constitucional (CF, art. 5º, XVII) e a associação se organiza pelo estatuto registrado (CC, art. 53 e seguintes). O que exige ato público é a **qualificação** (OSCIP, OS, CEBAS) e o **recebimento de repasse** (chamamento público, Lei 13.019, arts. 24 e 29). E a captação no exterior, ao contrário da Índia (FCRA) e da Alemanha (*Inlandsbezug*, § 51, 2 AO), **não é vedada nem condicionada** no Brasil: o Banco Central não impõe restrição geral e o RDE-ROF trata de crédito externo, não de doações.
+
+### 10.5 Exemplo trabalhado — o peso de cada setor em emprego: Brasil, Reino Unido e França
+
+**Dados verificados:** Brasil — 12,8 milhões de empregados no setor público (3º tri. 2024) e 52,9 milhões no privado (2º tri. 2024), ambos PNAD Contínua/IBGE; ~2,5 milhões de vínculos formais em OSC (2024, base RAIS — Ipea/SGPR, 23/05/2025). Reino Unido — 978.000 pessoas no setor voluntário (NCVO Almanac 2024). França — 1,9 milhão de empregos em associações, 1,6 milhão de associações e ~13 milhões de voluntários (2025). EUA — 4,99 bilhões de horas voluntárias equivalentes a US$ 167,2 bilhões (set/2022–set/2023, AmeriCorps + Census, 2024).
+
+1. **Brasil — peso do setor público:** 12,8 ÷ (12,8 + 52,9) = 12,8 ÷ 65,7 = **19,5%** dos empregados formais.
+2. **Brasil — razão OSC / formal:** 2,5 ÷ 65,7 = **3,8%** (*cálculo próprio*). *Atenção às bases: a RAIS mede vínculos formais e a PNAD mede ocupação — a razão serve para ordem de grandeza, não para somar colunas.*
+3. **Reino Unido:** 978.000 empregos ≈ **3%** da força de trabalho (NCVO, 2024). Conferindo a concentração do setor: **80%** das *charities* têm receita inferior a £ 100 mil e geram apenas **3%** da renda total — logo, os 20% restantes concentram cerca de **97%** dos £ 104 bilhões (*cálculo próprio* a partir do dado do Charity Commission).
+4. **França:** **1,9 milhão** de empregos em associações, com ~13 milhões de voluntários — escala de emprego formal do terceiro setor **superior** à do Reino Unido, sob o regime da *loi 1901* (*bases distintas: associações na França, setor voluntário no RU — comparação de ordem de grandeza, não ranking*).
+5. **EUA — valor do voluntariado:** US$ 167,2 bi ÷ 4,99 bi de horas = **≈ US$ 33,5 por hora** (*cálculo próprio* a partir de AmeriCorps + Census, 2024) — o custo oportunidade implícito de quem acha que voluntariado "não custa nada".
+
+**Leitura:** em três regimes jurídicos inteiramente distintos (imunidade + MROSC, *charity law* e *loi 1901*), o terceiro setor formal pesa **ordem de 3% a 4%** da ocupação formal. O que separa os três **não é o porte** — é o regime de transparência, de controle e de destino do excedente. É a prova prática da seção 1: comparar tamanho entre setores é o dado menos útil da lição; comparar **regime** é o que decide classificação.
+
+### 10.6 O mapa internacional em seis pares
+
+```matching
+{
+  "question": "Associe cada país ao traço que desenha a fronteira entre os três setores no seu regime:",
+  "pairs": [
+    {"left": "Estados Unidos", "right": "501(c)(3): proibição absoluta de intervenção em campanha (Johnson Amendment, 1954) e Form 990 público"},
+    {"left": "Reino Unido", "right": "Charity: finalidades caritativas + public benefit test não presumido (Charities Act 2011, ss. 1 a 4)"},
+    {"left": "Alemanha", "right": "Gemeinnützig: status tributário dos §§ 51 a 68 da AO, alcançável por e.V., Stiftung e gGmbH"},
+    {"left": "França", "right": "Loi 1901: liberdade com declaração que confere personalidade moral; ARUP após ~3 anos habilita legados"},
+    {"left": "Índia", "right": "FCRA: conta específica no SBI em Nova Delhi, vedação de repasse e renovação quinquenal"},
+    {"left": "Brasil", "right": "Imunidade (CF 150, VI, \"c\") + MROSC: termo de colaboração, de fomento ou acordo de cooperação"}
+  ],
+  "explanation": "Os seis pares vêm da tabela da seção 10.2. Nenhum país testa a mesma coisa: os EUA testam neutralidade política, o Reino Unido testa benefício público, a Alemanha testa destinação fiscal, a França testa a declaração, a Índia testa a origem do dinheiro exterior e o Brasil testa finalidade + destino do excedente. Mesma pergunta, seis lugares diferentes para o teste."
+}
+```
+
+---
+
+## 11. Seis casos brasileiros calculados
+
+### 11.1 Saúde — o mesmo atendimento, três regimes
 
 Uma pessoa consulta em três lugares diferentes numa mesma semana.
 
@@ -433,7 +542,7 @@ Uma pessoa consulta em três lugares diferentes numa mesma semana.
 
 **Lição:** em saúde, "público × privado" é um **falso dilema**. A fronteira real é **capital privado × receita pública × titularidade**. A filantrópica troca autonomia por repasse e certificação — no caso da saúde, **60%** de atendimento ao SUS ou adesão ao Proadi-SUS (LC 187/2021, arts. 9º e 14).
 
-### 10.2 Educação — três escolas no mesmo bairro
+### 11.2 Educação — três escolas no mesmo bairro
 
 O Censo Escolar 2025 (Inep/MEC, 26/02/2026) registra **46.018.537 matrículas** em **178,76 mil escolas**.
 
@@ -450,7 +559,7 @@ O Censo Escolar 2025 (Inep/MEC, 26/02/2026) registra **46.018.537 matrículas** 
 
 **Lição:** a perda se concentra na rede **titular**, enquanto a rede privada cresce marginalmente — e a totalidade da educação básica caiu **2,29%** (−1,082 milhão de matrículas). Classificar corretamente quem é titular e quem é conveniada é o que permite ler esses números sem transformar queda demográfica em "fuga da rede pública".
 
-### 10.3 Cultura — museu público × OS × instituto empresarial
+### 11.3 Cultura — museu público × OS × instituto empresarial
 
 - **Museu público sob Organização Social:** o poder público é **titular** e financia; a associação **gerencia** por **contrato de gestão** (Lei nº 9.637/1998) com metas e indicadores. Missão pública, execução privada — a forma híbrida mais explícita da administração indireta.
 - **Instituto empresarial:** privado, presta contas ao **conselho e ao público**, não a um órgão de controle. É beneficiário do **Investimento Social Privado de R$ 5,8 bi em 2024** e da lógica de captação do Censo GIFE 2024–2025 (08/12/2025).
@@ -458,7 +567,7 @@ O Censo Escolar 2025 (Inep/MEC, 26/02/2026) registra **46.018.537 matrículas** 
 
 **Lição:** os três podem expor a mesma obra no mesmo fim de semana e empregar o mesmo curador — sob regimes de controle, transparência e responsabilização inteiramente distintos.
 
-### 10.4 Assistência social — três modos de operar o mesmo CRAS
+### 11.4 Assistência social — três modos de operar o mesmo CRAS
 
 - **(a) Público:** servidores estatutários, orçamento municipal, controle do TCE e do MP.
 - **(b) OSC conveniada:** **Termo de Fomento** (plano da própria OSC) ou **Termo de Colaboração** (plano da administração), com **chamamento público** (Lei 13.019, arts. 16, 17, 24 e 29). A equipe é **CLT pela própria OSC**; o dirigente pode ser remunerado, se qualificado e dentro do limite regional (Lei 9.532/1997, art. 12, §2º, "a").
@@ -466,7 +575,7 @@ O Censo Escolar 2025 (Inep/MEC, 26/02/2026) registra **46.018.537 matrículas** 
 
 **Erro clássico:** confundir **(b)** com **(c)**. O (b) é **parceria de missão** — a OSC responde pela finalidade, pela gestão e pela prestação de contas do resultado. O (c) é **contrato de serviços com intermediação de mão de obra** — a prefeitura responde subsidiariamente pelas obrigações trabalhistas. Dizer "a prefeitura terceirizou o CRAS com a ONG" mistura dois regimes que a lei separa.
 
-### 10.5 Trabalho e filantropia — três regimes, três lógicas
+### 11.5 Trabalho e filantropia — três regimes, três lógicas
 
 **Trabalho.** O mesmo agente de saúde municipal pode ser:
 
@@ -484,7 +593,7 @@ O Censo Escolar 2025 (Inep/MEC, 26/02/2026) registra **46.018.537 matrículas** 
 
 **Lição:** "quem trabalha no terceiro setor" e "quem trabalha no governo" não descrevem regimes — descrevem rótulos. O regime depende do **vínculo**, e o vínculo muda a seleção, a segurança, a responsabilização e até o sindicato aplicável.
 
-### 10.6 Cooperativismo — o setor que quase ninguém classifica direito
+### 11.6 Cooperativismo — o setor que quase ninguém classifica direito
 
 O cooperativismo brasileiro tem **4.384 cooperativas** e **25,8 milhões de cooperados**, com **578.035 empregos** e **R$ 757,91 bilhões** de movimentação; a edição seguinte do AnuárioCoop (OCB) já registra **~4,4 mil cooperativas**, **29 milhões de cooperados**, **613,4 mil empregos** e **R$ 848,4 bilhões**.
 
@@ -498,7 +607,104 @@ O cooperativismo brasileiro tem **4.384 cooperativas** e **25,8 milhões de coop
 
 ---
 
-## 11. Erros conceituais: correção e fonte
+## 12. Casos Reais dos Três Setores
+
+Os casos da seção 11 comparam **regimes** aplicados à mesma prestação de serviço. Estes comparam **fronteiras**: organizações reais que operam exatamente na linha entre dois — ou três — setores. Em todos, a resposta à pergunta "isso é ONG, empresa ou governo?" muda o regime de controle, de transparência e de pessoal, e não o nome na fachada.
+
+```text
+     ONDE OS TRÊS CASOS SE LOCALIZAM (MATRIZ DA SEÇÃO 1)
+
+   OSC / terceiro setor            setor público
+   excedente: VEDADO               excedente: VINCULADO
+   ..............................  ..............................
+   [BRAC] ─── 87,6% da receita vem de mercado
+   │          (microfinanças + empresas sociais, 2023-24),
+   │          mas nada é distribuído a sócio
+   │
+   [Habitat] ─ vende casas (24% da receita da rede)
+   │           E recebe grants públicos
+   │           (US$ 28,3 mi, sede, FY2024)
+   │
+   [TPE / MSF] ─ recusam verba pública
+                (TPE: 2024 · MSF: fundos da UE desde 2016)
+   ..............................  ..............................
+   empresa privada
+   excedente: LUCRO e dividendos aos sócios
+
+   Nenhum dos três sai da coluna da OSC — mas cada um
+   encosta em outra coluna, em um eixo diferente.
+```
+
+### 12.1 Caso A — BRAC: a ONG que opera como empresa (fronteira NPO × empresa)
+
+**O que é:** sociedade registrada no Bangladesh sob o **Societies Registration Act 1860** (n. 3695/3), fundada em **21/03/1972** por Fazle Hasan Abed, com **mais de 100 mil funcionários** em 15 países.
+
+**A fronteira:** no exercício encerrado em **30/06/2024**, a receita foi de **BDT 140,6 bilhões**, assim repartida:
+
+| Fonte de receita | Valor | Participação |
+|---|---:|---:|
+| Microfinanças | BDT 94,9 bi | **67,5%** |
+| Empresas sociais | BDT 28,3 bi | **20,1%** |
+| Doações de doadores | BDT 14,1 bi | **10,0%** |
+| Demais receitas (*cálculo próprio*: 140,6 − 137,3) | BDT 3,3 bi | ≈ 2,4% |
+| **Total** | **BDT 140,6 bi** | **100%** |
+
+**Lição ilustrada:** a fronteira entre OSC e empresa **não é a atividade econômica** — a BRAC empresta dinheiro, vende e opera negócios em escala industrial. É o **destino do excedente** (nada é distribuído a sócios: a reserva estatutária de 10% do superávit é retenção, não dividendos) e o **controle** (assembleia de 19/03/2024, conselho diretivo (*governing body*) com 5 reuniões e auditoria da ACNABIN). E a escala mostra o segundo ponto: em 2025 a BRAC atendeu **~26 milhões de pessoas — 1 em cada 7 bengaleses**. Porte de serviço público **não faz do prestador setor público**; quem decide o regime continua sendo a cadeia **capital → destino do excedente → controle** (seção 1).
+
+### 12.2 Caso B — Habitat for Humanity: 501(c)(3) que vende, recebe verba pública e publica Form 990 (fronteira NPO × governo × empresa)
+
+**O que é:** 501(c)(3) fundada em **1976**, em Americus (Geórgia), organizada como **rede federada de afiliados autônomos** em mais de 70 países.
+
+**A fronteira tríplice** (exercício fiscal 2024): a sede (HFHI) somou **US$ 362,1 milhões** — contribuições US$ 234,6 mi, itens doados US$ 51,7 mi e **grants públicos US$ 28,3 mi** —; a rede foi estimada em **US$ 3,1 bilhões**, com contribuições (49%), **venda de casas (24%)** e itens doados (20%). As lojas **ReStore** revendem materiais e o *New Markets Tax Credit* somou US$ 130 milhões desde 2008.
+
+| Fronteira | O que a Habitat faz | O que **não** muda |
+|---|---|---|
+| **NPO × empresa** | vende casas e opera as lojas ReStore | Vender não torna a entidade empresa: sem distribuição de lucro, o regime segue o da 501(c)(3) |
+| **NPO × governo** | recebe US$ 28,3 mi em *grants* públicos | Receber recurso público não torna a OSC setor público: muda a **camada de prestação de contas**, não a cadeia de capital, excedente e controle |
+| **Sede × rede** | cada afiliado tem contabilidade própria; a HFHI consolida, audita a marca e publica o **Form 990** | Em rede federada, sede e rede são bases diferentes — compará-las sem aviso metodológico é erro de leitura |
+
+**Lição ilustrada:** a mesma organização ocupa, ao mesmo tempo, a coluna de OSC e fragmentos das colunas de empresa e de governo — e isso não a torna "híbrida de meio-termo", mas uma **forma híbrida** no sentido da seção 8: capital, excedente e controle respondem a pessoas diferentes (doadores, afiliados autônomos, IRS). O resultado social é medido em **3.035.972 pessoas com moradia** no exercício 2024, mais 5,3 milhões por incidência (*advocacy*) — métrica que nenhum dos três setores sozinho usaria.
+
+### 12.3 Caso C — Todos Pela Educação: advocacy sem verba pública (fronteira NPO × governo)
+
+**O que é:** associação de fins não econômicos (**CNPJ 10.477.478/0001-60**), independente, suprapartidária e **não receptora de recursos públicos**.
+
+**A fronteira:** em 2024 movimentou **R$ 26.082.377** (doações R$ 24,1 mi e serviços voluntários R$ 1,84 mi), mais R$ 453 mil de receitas financeiras, com **superávit de R$ 4,66 milhões**, caixa de R$ 17,5 mi aplicado a **15,40% a.a.** e patrimônio líquido de **R$ 16,9 milhões** — tudo sem receber um real de verba pública. A agenda Educação Já Municípios cobriu **62% das matrículas** do país em 2024.
+
+O mesmo racional aparece na **MSF** (associação da *loi* de 1901): em 2024, **97,9%** da receita foi privada — **85,3%** de indivíduos — e apenas **2,1%** veio do setor público; a organização **recusa fundos públicos da União Europeia desde 2016**.
+
+**Lição ilustrada:** quem financia define a legitimidade da crítica. A TPE recusa verba pública para poder criticar o governo que deseja influenciar; a MSF recusa o financiamento europeu para preservar o dever de testemunhar. A escolha é de **regime de controle** — eixo vertical/diagonal da seção 4.3 —, não de preferência ideológica: é a mesma lógica que leva uma OSC a diversificar fontes para não sofrer **captura pelo financiador** (seção 4.4). Note que a TPE **pode** gerar superávit (R$ 4,66 mi) e aplicar caixa — a vedação da seção 4.2 é de **distribuição**, não de resultado positivo.
+
+### 12.4 Os três casos em uma tabela
+
+| Caso | Fronteira em disputa | Eixo decisivo (seção 1) | Regime que prevalece |
+|---|---|---|---|
+| **BRAC** | OSC × empresa × escala de serviço público | Destino do excedente | OSC: atividade de mercado é lícita, distribuição não é |
+| **Habitat** | OSC × empresa × governo × sede/rede | Capital e controle | 501(c)(3): vender e receber *grant* não alteram a cadeia |
+| **TPE / MSF** | OSC × governo | Quem controla pela bolsa | OSC: financiamento público é opção de regime, não de porte |
+
+> [!IMPORTANT]
+> **O que os três casos têm em comum.** Nenhum deles se resolve perguntando "é ONG ou é empresa?". Todos se resolvem pelas três perguntas da seção 1, nesta ordem: (1) **quem aporta o capital** (microfinanças e vendas na BRAC; doadores e *grants* na Habitat; doações de PJ e PF na TPE); (2) **quem tem direito ao excedente** (ninguém, nos três); (3) **quem controla** (assembleia + auditoria; afiliados + IRS; conselho de administração + auditoria). Se a resposta à segunda pergunta for "ninguém", nenhuma escala de receita transforma a organização em empresa.
+
+**🔢 Você sabia?** A BRAC é registrada como **sociedade** sob o **Societies Registration Act 1860** — a mesma norma colonial usada por entidades britânicas — e mesmo assim só **10%** da sua receita veio de doações no exercício 2023-24 (BDT 14,1 bi de BDT 140,6 bi; *BRAC Annual Report 2024*). Enquanto isso, a **MSF** fez o caminho inverso: recusou verba pública da União Europeia desde 2016 e captou **85,3%** da receita de **7,1 milhões de doadores individuais** em 2024. BRAC: forma jurídica colonial de 1860 e receita de mercado. MSF: forma jurídica de 1901 e captação individual em escala. Nos dois casos, **nenhum centavo é distribuído a sócio** — a fronteira não é a fonte do dinheiro, é o destino do excedente.
+
+### 12.5 Roteiro para ler qualquer caso real
+
+Antes de citar um caso de ONG, de empresa ou de governo como "prova" de alguma tese, responda por escrito:
+
+1. **Qual é a natureza jurídica verificada** — CNPJ, registro societário ou demonstração financeira localizada — e não o nome que a organização usa na fachada?
+2. **Qual é a fonte dominante da receita**, com percentual e ano: pública, privada ou de mercado?
+3. **Para onde vai o excedente**: distribuição, retenção com destinação obrigatória, ou superávit aplicado no objeto?
+4. **Quem controla**: assembleia, conselho heterônomo, órgão de controle público ou acionista?
+5. **Qual é a métrica de escala declarada** — e ela é comparável com a do caso anterior? "5.000 famílias" (TETO), "5,16 milhões de pessoas" (Itaú Social) e "290 mil voluntários" (Atados) não se somam nem se ordenam sem declarar a métrica.
+6. **A fonte está citada com ano?** Se a base divergir — como 1.854 × 1.846 hospitais filantrópicos, na seção 11.1 —, diga **qual base** você usou.
+
+> [!TIP]
+> **O que o recorte de 11 casos verificados mostra.** No Brasil, **6 dos 7** casos pesquisados são **associações privadas** e apenas um é fundação; **nenhum é Organização Social** — a percepção "OS = terceiro setor" não sobrevive aos dados. E **nenhuma** das organizações examinadas depende majoritariamente de verba pública: a MSF tem **97,9%** de receita privada (85,3% de indivíduos, 2024) e o Todos Pela Educação **não recebe** recurso público. Dependência de um único financiador — público ou privado — é **risco de governança**, não marca de setor (seção 4.4).
+
+---
+
+## 13. Erros conceituais: correção e fonte
 
 Esta tabela é o coração da prova e da prática. Cada linha é um erro que já circulou em editais, pareceres e relatórios.
 
@@ -526,13 +732,13 @@ Esta tabela é o coração da prova e da prática. Cada linha é um erro que já
 
 ---
 
-## 12. Cinco frameworks para analisar qualquer organização
+## 14. Cinco frameworks para analisar qualquer organização
 
-### 12.1 Matriz de regimes (15 dimensões)
+### 14.1 Matriz de regimes (15 dimensões)
 
 **Como usar:** escolha a dimensão **e** as três colunas sempre juntas. A pergunta proibida é "qual setor é mais eficiente?"; a pergunta correta é "qual regime de controle e de incentivo produz eficiência **para qual finalidade**?".
 
-### 12.2 Conta tridimensional: vertical × horizontal × diagonal
+### 14.2 Conta tridimensional: vertical × horizontal × diagonal
 
 Faça sempre **três perguntas** (Goetz & Jenkins, 2001 e 2002; Schedler, 1999; Lührmann, Mechkova e Lindberg, APSR 2020):
 
@@ -546,15 +752,15 @@ Faça sempre **três perguntas** (Goetz & Jenkins, 2001 e 2002; Schedler, 1999; 
 | OSC com repasse | **Diagonal + contratual** | Órgão parceiro, MP, assembleia, doadores |
 | Empresa | **Vertical de mercado e societária** | Cliente, acionista, agência, CVM |
 
-### 12.3 Critérios de Hansmann: capital, excedente, controle
+### 14.3 Critérios de Hansmann: capital, excedente, controle
 
 Aplicação direta: quando **quem aporta**, **quem tem direito ao excedente** e **quem controla** são **os mesmos**, você tem empresa. Quando os três são **diferentes** e a lei **veda** a distribuição, você tem OSC. Quando **quem aporta é o público** mas **quem opera é privado**, você tem forma híbrida (OS, por exemplo).
 
-### 12.4 Modos de falhar
+### 14.4 Modos de falhar
 
 Use a seção 4.4 como teste de diagnóstico: se a entidade está sendo cobrada pelo modo de falha **de outro setor** (por exemplo, uma OSC cobrada por retorno financeiro trimestral), o problema é de **governança e de linguagem de controle**, não de desempenho.
 
-### 12.5 Governança: três arquiteturas
+### 14.5 Governança: três arquiteturas
 
 | Regime | Arquitetura de governança | Quem é o "dono residual" |
 |---|---|---|
@@ -562,7 +768,7 @@ Use a seção 4.4 como teste de diagnóstico: se a entidade está sendo cobrada 
 | **OSC** | Assembleia de associados, diretoria, conselho fiscal (CC 54 e 59), financiadores | Ninguém — o residual é **destinado**, não distribuído (CC 61) |
 | **Empresa** | Assembleia de acionistas, conselho de administração, auditoria | O acionista |
 
-### 12.6 Oito perguntas de diagnóstico
+### 14.6 Oito perguntas de diagnóstico
 
 Antes de classificar qualquer organização — inclusive a sua — responda por escrito:
 
@@ -577,7 +783,7 @@ Antes de classificar qualquer organização — inclusive a sua — responda por
 
 ---
 
-## 13. Síntese prática: o que fazer na segunda-feira
+## 15. Síntese prática: o que fazer na segunda-feira
 
 1. **Antes de classificar, responda aos três eixos:** capital, destino do excedente, controle. Se emperrar em qualquer um, procure a forma híbrida da seção 8.
 2. **Antes de assinar com o poder público, identifique o trilho:** repasse de missão (MROSC, chamamento público) ou compra de bem/serviço (Lei 14.133, licitação) — nunca os dois.
@@ -666,6 +872,38 @@ Antes de classificar qualquer organização — inclusive a sua — responda por
   ],
   "correct": 0,
   "explanation": "O framework de Goetz e Jenkins (Public Management Review, 2001; PNUD/HDRO, 2002) identifica eixos vertical, horizontal e diagonal. No setor público predomina a horizontalidade: um ator estatal cobrando outro (TCU, TCE, Ministério Público, legislativo, judiciário). A vertical é marcante no mercado e nas eleições; a diagonal é o canal em que a sociedade civil e a mídia se infiltram nos controles horizontais."
+}
+```
+
+```question
+{
+  "id": "npof-02-q6",
+  "type": "multiple-choice",
+  "question": "Sobre o regime das entidades sem fins lucrativos na Alemanha, qual afirmação está correta?",
+  "options": [
+    "Gemeinnützig é uma forma jurídica autônoma, criada pelo direito alemão para ONGs",
+    "Somente a associação registrada (e.V.) pode obter a qualificação de interesse público",
+    "Gemeinnützig é um status tributário dos §§ 51 a 68 da AO, alcançável por e.V., Stiftung e gGmbH",
+    "Não há isenção de imposto predial (Grundsteuer) para as entidades de interesse público"
+  ],
+  "correct": 2,
+  "explanation": "O gemeinnützig é um status tributário conferido pelo Finanzamt com base nos §§ 51 a 68 da AO e independe da forma jurídica: pode ser ostentado por e.V. (7 membros, sem capital), Stiftung (patrimônio duradouro) e gGmbH. O § 3 da GrStG assegura a isenção predial e o § 51, 2, impõe o Inlandsbezug — no exterior só conta o que beneficiar residentes alemães ou melhorar a reputação do país. É o inverso do erro brasileiro de confundir forma com qualificação: aqui OSCIP e OS são qualificações de uma associação ou fundação (CC, arts. 53 e 62), e na Alemanha o status independe da forma escolhida (seção 10.1)."
+}
+```
+
+```question
+{
+  "id": "npof-02-q7",
+  "type": "multiple-choice",
+  "question": "A BRAC registrou BDT 14,1 bilhões de doações sobre uma receita total de BDT 140,6 bilhões no exercício encerrado em 30/06/2024. O percentual é aproximadamente:",
+  "options": [
+    "50%",
+    "25%",
+    "10%",
+    "75%"
+  ],
+  "correct": 2,
+  "explanation": "14,1 ÷ 140,6 = 10,0%. Microfinanças (67,5%) e empresas sociais (20,1%) somam 87,6% da receita: a operação se autofinancia e a doação cobre saúde, WASH e advocacy. Para esta lição, o caso demonstra que a fronteira entre OSC e empresa não é a atividade econômica — a BRAC opera negócios em escala sem distribuir excedente —, mas o destino do excedente (Lei 13.019, art. 2º, I) e o controle (assembleia, conselho de gestão e auditoria da ACNABIN). Ver seção 12.1; BRAC Annual Report 2024."
 }
 ```
 

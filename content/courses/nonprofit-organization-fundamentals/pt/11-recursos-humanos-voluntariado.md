@@ -1,6 +1,6 @@
 ---
 title: "Recursos Humanos e Voluntariado em ONGs"
-description: "Gestão de pessoas em OSCs brasileiras: classificação de vínculos (CLT, estatutário e voluntário), Lei nº 9.608/1998 artigo por artigo, encargos e custo real da folha, eSocial Grupo 3, LGPD e RIPD de voluntários, CIPA+A e Lei nº 14.457/2022, ciclo de vida e KPIs do voluntariado, remuneração de dirigentes pela Lei nº 9.532/1997 e competências 2025-2026 — com casos resolvidos, procedimentos passo a passo, tabelas comparativas e as armadilhas de compliance mais comuns."
+description: "Gestão de pessoas em OSCs brasileiras: classificação de vínculos (CLT, estatutário e voluntário), Lei nº 9.608/1998 artigo por artigo, encargos e custo real da folha, eSocial Grupo 3, LGPD e RIPD de voluntários, CIPA+A e Lei nº 14.457/2022, ciclo de vida e KPIs do voluntariado, remuneração de dirigentes pela Lei nº 9.532/1997 e competências 2025-2026, casos reais de modelos de pessoas (Atados, TETO, BRAC e MSF) e alertas de compliance 2026 — com casos resolvidos, procedimentos passo a passo, tabelas comparativas e as armadilhas de compliance mais comuns."
 order: 11
 difficulty: "intermediate"
 duration: "120 min"
@@ -57,7 +57,8 @@ Nesta lição você vai:
 - ler os dados de **IBGE, IDIS/Datafolha e CBVE** sem cometê-los à comparação indevida;
 - rodar o **ciclo de vida do voluntário** com **política, termo de adesão e KPIs**;
 - aplicar a régua de **remuneração de dirigentes** (Lei nº 9.532/1997, art. 12);
-- montar um **plano de treinamento anual** e um modelo de competências para 2025-2026.
+- montar um **plano de treinamento anual** e um modelo de competências para 2025-2026;
+- ler **casos reais** de modelo de pessoas (Atados, TETO, BRAC e Médicos Sem Fronteiras) e fechar o **checklist de compliance de 2026**.
 
 ---
 
@@ -682,7 +683,151 @@ Uma OSC de 48 pessoas fecha o plano do exercício. Estrutura em **quatro eixos**
 
 ---
 
-## 12. Erros frequentes e armadilhas
+## 12. Gestão de Pessoas e Voluntariado na Prática: Casos Reais
+
+As seções 1 a 11 deram as réguas; este trecho mostra como organizações **reais — com CNPJ, registro estatutário ou demonstração financeira localizada** — aplicaram essas réguas. O recorte pesquisado reúne **11 organizações verificadas** (7 brasileiras e 4 internacionais), e quatro delas falam diretamente de pessoas e voluntariado: **Atados** e **TETO Brasil** (os casos indicados para esta aula), mais **BRAC** e **Médicos Sem Fronteiras**, que dimensionam a fronteira entre folha, voluntariado e missão.
+
+Dois erros comuns caem logo no primeiro olhar:
+
+1. **copiar o tamanho sem copiar a base que o paga** — a BRAC tem mais de 100 mil funcionários e a MSF mais de 65 mil, ambas sustentadas por receita recorrente, não por esperança de doação;
+2. **tratar voluntariado como atalho de folha** — a TETO operou **8.134 voluntários** em um ano, mas só porque a operação é **padronizada e supervisionada**; sem desenho de função, o "insumo" vira vínculo empregatício (seção 2.4).
+
+### 12.1 Quadro comparativo: modelo de pessoas, números e lição
+
+| Caso | Modelo de pessoas | Números verificados (ano) | Lição para a sua OSC |
+|---|---|---|---|
+| **Atados** (Brasil, 2012) | Estoque pequeno + rede grande: ~60 funcionários operando uma plataforma de voluntariado | 4 mil ONGs, 290 mil voluntários e +100 empresas na rede (2024) | Cobrar de quem tem disposição de pagar (lado corporativo), nunca do beneficiário |
+| **TETO Brasil** (Brasil, 2006) | Direção executiva profissional + voluntariado jovem supervisionado | 8.134 voluntários, 113 moradias e 76 projetos (2024) | Voluntariado vira insumo só com produto padronizado e supervisão nomeada |
+| **BRAC** (Bangladesh, 1972) | Equipe própria massiva, em 15 países | +100 mil funcionários; doações = 10,0% da receita (exercício 2023-24) | Escala de pessoas se paga com receita recorrente, não com entusiasmo |
+| **MSF** (França, 1971) | Equipes de missão distribuídas, com autonomia estatutária das seções | +65 mil profissionais; 85,3% da receita de indivíduos (2024) | Independência se compra com captação individual em escala — e com RH padronizado |
+
+### 12.2 Caso real 1 — Atados: a plataforma que cobra o lado que pode pagar
+
+A **Associação Atados** (CNPJ 18.110.558/0001-95), fundada em **2012** por Daniel Morais e sócios, conecta **voluntários, ONGs e empresas**. O modelo de pessoas é o oposto do organograma clássico: em 2024 eram cerca de **60 funcionários** (Época Negócios) administrando uma rede de **4 mil ONGs** e **290 mil voluntários** — pessoas que não são da Atados, mas das causas que a plataforma encaminha.
+
+A operação de 2024 registrou **+70 projetos corporativos, +82 ONGs impactadas, +30 mil novos usuários, +60 mil inscrições e +400 ONGs publicadas**. A receita segue o modelo de **dois lados gratuitos e um pagante**: ONGs e voluntários não pagam nada; pagam as empresas, por **voluntariado corporativo e ESG** — a rede reúne mais de 100 empresas, entre elas Heineken, Samsung e Coca-Cola. Os mais de **R$ 6 milhões direcionados** a ONGs são **fluxo repassado, não receita** da plataforma, e a receita anual da entidade **não é publicada** (ambos os pontos sinalizados como não verificados na pesquisa).
+
+**Lição:** monetizar engajamento cobrando de quem pode pagar, nunca do beneficiário. **Cruzamento com a lição:** quem assume o vínculo com o voluntário é a **ONG que o aloca**, não a plataforma — termo de adesão, supervisor nomeado e a fronteira do art. 3º da CLT (seção 2) são deveres de quem escala o trabalho, não de quem opera o cadastro.
+
+### 12.3 Caso real 2 — TETO Brasil: voluntariado como insumo, nunca como substituto
+
+A TETO Brasil ("Um Teto para Meu País – Brasil", CNPJ 10.513.214/0001-15) está no país desde **2006** e integra a rede TECHO, presente em **19 países**. O modelo de pessoas combina **direção executiva profissional** (Camila Jordan em 2023, Layanne Paixão em 2025) com **voluntariado jovem** em massa, avaliado externamente com a **FGV**.
+
+Números de 2024: **113 moradias, 76 projetos e 8.134 voluntários**, com a 5.000ª moradia entregue em dez/2024 (Diadema); o acumulado supera **90 mil voluntários** e **327 projetos**, com meta de 1 milhão de pessoas até 2030. O segredo operacional é o produto: a **casa padronizada é montada em 2 dias**, o que permite escala com custo controlado. A captação do jantar de dez/2025 (~R$ 1,8 milhão) é **declaração sem balanço auditado localizado** — não a trate como receita apurada.
+
+**Lição:** voluntariado só vira insumo quando o trabalho é **desenhado** — função, prazo, escala e supervisão. Sem isso, 8.134 voluntários seriam 8.134 ocasiões de subordinação fática.
+
+- **🔢 Você sabia?** A TETO Brasil entregou a **5.000ª moradia** em dez/2024 (Diadema) operando com **8.134 voluntários** no ano — e a casa padronizada é montada em **2 dias**. Escala com voluntariado não nasce de gente disposta: nasce de **processo padronizado e supervisor nomeado**. Sem os dois, a boa intenção vira passivo trabalhista.
+
+### 12.4 Caso real 3 — BRAC: quando a própria equipe é a escala
+
+Criada em **21/03/1972** por Fazle Hasan Abed, a BRAC é uma **sociedade registrada** (Societies Registration Act 1860, n. 3695/3) e opera em Bangladesh e outros países nas áreas de pobreza, saúde, educação, WASH, microfinanças e resposta humanitária. O modelo de pessoas aqui é o contraponto didático dos casos anteriores: **equipe própria massiva** — **mais de 100 mil funcionários em 15 países** (2024), com governança formal (órgão de decisão com 5 reuniões, assembleia de 19/03/2024, auditoria da ACNABIN e reserva estatutária de 10% do superávit).
+
+A conta do exercício encerrado em **30/06/2024** explica como essa folha se sustenta: receita de **BDT 140,6 bilhões**, sendo **microfinanças 67,5%**, **empresas sociais 20,1%** e **doações apenas 10,0%**. O alcance é a consequência: em 2024, **1 em cada 5 bengaleses** foi atendido e **2,3 milhões** saíram da pobreza extrema; em 2025, cerca de **26 milhões de pessoas** (1 em cada 7), sendo 19 milhões de mulheres e 312 mil famílias graduadas.
+
+**Lição:** folha grande em OSC é problema de **fonte de receita**, não de generosidade — no Brasil, a régua continua sendo a seção 4 (salário × 1,36 + provisões, com segregação por projeto) e a régua de dirigentes do art. 12 da Lei nº 9.532/1997 (seção 10.3).
+
+- **🔢 Você sabia?** A BRAC mantém **mais de 100 mil funcionários em 15 países** e, ainda assim, **doações respondem por só 10%** da receita (BDT 140,6 bi no exercício encerrado em 30/06/2024), porque microfinanças e empresas sociais somam **87,6%**. Quando alguém na sua OSC argumenta que "não há dinheiro para contratar", a pergunta certa é: qual **fonte recorrente** paga essa vaga?
+
+### 12.5 Caso real 4 — Médicos Sem Fronteiras: equipes de missão com captação individual em escala
+
+A MSF nasceu em Paris em **22/12/1971**, com 13 profissionais, e é uma **associação sem fins lucrativos da Lei francesa de 1901**, organizada em **24 seções, 18 filiais** e uma MSF International em Genebra, com auditoria das contas combinadas sob Swiss GAAP FER. O modelo de pessoas é **equipe de missão distribuída**: autonomia estatutária das seções, **conselho internacional eleito em 2011** (6 membros) e **+65 mil profissionais** (2024) executando **+17 milhões de consultas**, com 10 países concentrando 58,2% da despesa de programas.
+
+O dinheiro que sustenta esse RH é privado: receita de **€ 2.362 milhões** em 2024 (€ 2,6 bilhões em 2025), sendo **97,9% de fontes privadas** e **85,3% de indivíduos** (**+7,1 milhões de doadores** em 2024; +7,5 milhões em 2025), com **79% destinados à missão**; na seção francesa, **€ 90,1 de cada € 100** foram para as missões, com **reservas de 4,4 meses** de operação. A organização **recusa fundos públicos da União Europeia desde 2016**.
+
+**Lição:** independência política se compra com captação individual em escala — e o preço é uma máquina de gente de 65 mil profissionais, que só funciona com **processos de pessoas padronizados por seção** e prestação de contas auditada. O mesmo desenho, em tamanho menor, é o que a seção 10.3 da lição exige da OSC brasileira quando remunera dirigente.
+
+### 12.6 Três arquiteturas de pessoas — o que cada uma cobra em troca
+
+```text
+=====================================================================
+  ARQUITETURAS DE PESSOAS NA OSC — O QUE CADA UMA EXIGE DE VOLTA
+=====================================================================
+ REDE (Atados, TETO)       EQUIPE (BRAC, MSF)         MISTA (a maioria)
+ pouca folha + muita       folha grande com           núcleo contratado +
+ gente alocada             processos padronizados     rede supervisionada
+ |                         |                          |
+ quem paga: o projeto      quem paga: receita própria quem paga: projeto +
+ ou a empresa parceira     (87,6%) e doação           orçamento de escala
+                           individual (85,3%)         de voluntariado
+ |                         |                          |
+ risco: art. 3º da CLT     risco: custo fixo          risco: misturar bolsa
+ se houver horário, meta   em ano de captação         mensal com reembolso
+ e reporte fixo            fraca                      (art. 3º, Lei 9.608)
+ |                         |                          |
+ exige: termo de adesão,   exige: arquitetura de      exige: cadastros
+ supervisor, LGPD e        cargos, eSocial e          separados, supervisão
+ reembolso comprovado      provisões em dia           e integração de todos
+=====================================================================
+```
+
+**Leitura cruzada:** nenhum dos quatro casos usa voluntariado para **encobrir folha**; dois deles (BRAC e MSF) nem usam voluntariado como base — a base é gente contratada e receita recorrente. A OSC brasileira deve copiar a **lógica**, nunca o tamanho: primeiro o desenho da função e a fonte que a paga, depois o número de pessoas.
+
+**O indicador de cada caso — e como ele chega à prática:**
+
+| Caso | Indicador que o caso monitora | Como adaptar na OSC pequena |
+|---|---|---|
+| Atados | Volume de inscrições que viram alocação (**+60 mil inscrições** e **+70 projetos corporativos** em 2024) | Conversão da triagem e *time-to-first-shift* (seção 9.4) |
+| TETO | Entregas por ano com mobilização de voluntariado (**113 moradias** e **76 projetos** com **8.134 voluntários** em 2024) | Horas-voluntário por projeto entregue, com supervisor nomeado |
+| BRAC | Partida da receita que custeia a folha: **microfinanças + empresas sociais = 87,6%** (2023-24) | % do custo de pessoal já coberto por contrato ou receita recorrente |
+| MSF | Partida da receita vinda de **indivíduos (85,3%)** e parte aplicada à **missão (79%)** em 2024 | Custo de captação × custo de estrutura, por projeto |
+
+### 12.7 Caso resolvido 10 — decidir, demanda por demanda: contratar ou mobilizar
+
+Uma OSC de cultura, com 12 pessoas, recebe cinco demandas novas no planejamento 2026 e precisa classificar cada uma **antes** de abrir vaga:
+
+| # | Demanda | O que ela exige | Decisão | Régua aplicável |
+|---|---|---|---|---|
+| 1 | Recepção e bilheteria, 44 h/semana, sem data fim | Continuidade, ponto e reporte fixo | **Contratar (CLT)** | Custo salário × 1,36 + provisões (seção 4.2); **S-2200** até o dia anterior |
+| 2 | Inventário de acervo com prazo de 4 meses | Prazo determinado, com supervisão | **Estágio ou contrato a termo** | Regime próprio informado no eSocial (**S-2300**) |
+| 3 | Dois mutirões de montagem por ano | Esforço eventual, escala aberta | **Serviço voluntário** | Lei nº 9.608: termo de adesão (art. 2º) e reembolso só de despesa comprovada e autorizada (art. 3º) |
+| 4 | Presidência do conselho, com direção estratégica | Eleição, sem subordinação típica | **Estatutário (com ou sem pró-labore)** | Estatuto + ata; havendo remuneração, régua do art. 12 da Lei nº 9.532/1997 |
+| 5 | Programa de voluntariado corporativo com parceira | Empresa define escala e comunicação; a OSC executa | **Parceria com a empresa + termo de adesão por participante** | Contrato com a empresa; a **ONG mantém** integração, supervisão e LGPD |
+
+**Como a diretoria decidiu (seis passos):** (1) separar **continuidade × eventualidade** — o que não pode parar é folha; (2) checar a **subordinação real** de cada demanda (quem diz a hora, quem avalia a entrega); (3) orçar a opção CLT pelo custo real da seção 4, junto com a fonte que a paga; (4) na eventualidade, redigir o **termo de adesão** com objeto, condições, supervisor e canal de denúncia; (5) na parceria corporativa, lembrar que o **contrato é com a empresa**, mas o **dever de cuidado é da OSC**; (6) revisar o quadro no fechamento do exercício, comparando documento × realidade (seção 3.3).
+
+**Leitura do caso:** nenhuma das cinco demandas foi decidida "por entidade" — todas foram decididas **por vínculo**, como manda a seção 1.2. E a demanda 5 é a mais traiçoeira: voluntariado corporativo traz muita gente nova por poucos dias, exatamente o formato em que integração, LGPD e canal de denúncia costumam ser pulados.
+
+> [!WARNING]
+> **Escala e plataforma não mudam a lei.** O voluntário recrutado por portal, aplicativo ou parceria que chega a **escala fixa, horário coordenado, meta e reporte a um supervisor** preenche os quatro elementos do **art. 3º da CLT** — o risco nasce da relação real, não do canal de recrutamento. Em paralelo, os **dados de saúde** desses voluntários (vacinação, aptidão para mutirão, restrição de atividade) seguem o **art. 11 da LGPD**, com consentimento específico e destacado ou hipótese legal própria: cadastro atrelado a plataforma, planilha de escala ou grupo de mensagens de acesso amplo é exposição de dado sensível à vista de todos.
+
+### 12.8 Alerta de compliance 2026 — o que a gestão de pessoas precisa ter em dia
+
+> [!IMPORTANT]
+> **Status verificado das obrigações de gestão de pessoas em 2026:**
+>
+> 1. **Lei nº 14.457/2022, art. 23 — o que está de pé:** o dispositivo alcança **empregadores com mais de 20 trabalhadores**, que precisam de canal de denúncia, de prevenção ao assédio e de treinamentos periódicos; nas OSCs que empregam, a aplicação do art. 23 é **interpretação prática** registrada nesta pesquisa (a URL do texto não foi reconfirmada) — trate o dever como real e **documente a leitura** no dossiê de compliance;
+> 2. **Checklist 2026 (seis checagens):** (i) o quadro passa de **20 trabalhadores**?; (ii) regras de conduta publicadas e divulgadas; (iii) canal de denúncia **anonimizado**, citado na integração; (iv) assédio em **pauta fixa** da CIPA+A; (v) evidência da capacitação de **12 meses** (violência, assédio, igualdade e diversidade); (vi) **voluntários** cobertos pelo mesmo pacote de integração;
+> 3. **Conselho também é gestão de pessoas:** o **TST (7ª Turma, RR-100039-53.2019.5.01.0206, 2025)** afastou da execução ex-conselheiros que **apenas participaram da fundação**, sem atos de gestão nem aprovação de contas, e o STJ limitou a desconsideração da personalidade jurídica a quem **exerceu cargo diretivo** (REsp 1.812.929/DF) — convocações, presenças e aprovação de contas **em ata** são a defesa;
+> 4. **Diversidade no topo como indicador de RH:** o **Censo GIFE 2024-2025** registra conselhos com **66% de homens e 89% de pessoas brancas** — ligar o número ao modelo de competências e na política de sucessão (seção 11.2), e não em campanha isolada.
+
+### 12.9 Do caso à sua OSC: roteiro de importação em sete passos
+
+Nenhum dos quatro casos se aplica por cópia literal — eles se aplicam por **tradução de lógica**. O roteiro abaixo leva o que foi verificado nas seções 12.2 a 12.5 para o desenho do quadro de uma OSC brasileira:
+
+1. **Escolha o caso pelo problema, não pelo tamanho:** porta de entrada e engajamento → **Atados**; execução com produto padronizado → **TETO**; folha grande e fonte de receita → **BRAC**; equipes distribuídas e captação individual → **MSF**;
+2. **Traduza a arquitetura para o seu regime:** rede, equipe única ou modelo misto (seção 12.6) — e classifique **pessoa por pessoa**, conforme o fluxo da seção 1.3, sem decidir "o regime da entidade";
+3. **Localize a fonte que paga antes de abrir vaga:** aplique a régua **salário × 1,36 + provisões** (seção 4.2), com segregação por projeto — nenhum dos casos escala sem receita recorrente ou contrato que cubra a estrutura;
+4. **Desenhe a função antes de nomear a pessoa:** escopo, frequência prevista e **supervisor nomeado** — é a etapa que separa voluntariado insumo (TETO) de "voluntário-substituto" (seção 2.4);
+5. **Formalize o vínculo escolhido, sem "combinado":** contrato + **S-2200** até o dia anterior, **termo de adesão** da Lei nº 9.608 com cláusulas completas, ou estatuto + ata, conforme o caso;
+6. **Feche o pacote de compliance na mesma jogada:** checklist da seção 12.8, LGPD com base legal por finalidade (**art. 11** para saúde de voluntário), canal de denúncia citado na integração e capacitação de assédio **a cada 12 meses**;
+7. **Meça como os casos medem:** KPIs do ciclo (seção 9.4) mais um indicador financeiro de pessoas — custo por entrega e % da folha já coberta por receita do projeto —, revisando no fechamento do quadro a comparação **documento × realidade × eSocial** (seção 3.3).
+
+**Sinais de que a importação falhou:**
+
+| Sinal observado na OSC | O que ele revela | Correção |
+|---|---|---|
+| Voluntário com escala fixa, horário e meta | Art. 3º da CLT formando-se na prática | Converter para emprego ou redimensionar a função (seção 2.4) |
+| Vaga aprovada sem fonte no orçamento do projeto | Custo real ignorado (≈ 35,8% acima do salário-base) | Rever o desenho com a régua da seção 4.2 |
+| Cadastro único com dados de empregado e de voluntário | Base legal indistinta e dado sensível exposto | Separar finalidades e usar o **art. 11** para saúde (seção 6.2) |
+| Programa de voluntariado sem KPI e sem entrevista de saída | Ciclo incompleto: sem retenção nem aprendizado | Rodar as dez etapas da seção 9.2 e medir da seção 9.4 |
+
+> [!NOTE]
+> **O caso real funciona como régua, não como receita.** Atados, TETO, BRAC e MSF mostram **arquiteturas possíveis** de pessoas; a escolha pela sua OSC continua sendo a da seção 1 — regime por vínculo, custo por vaga e compliance pelo porte. Copie a pergunta que cada caso respondeu (quem paga, quem supervisiona, o que é medido), nunca a resposta em tamanho deles.
+
+---
+
+## 13. Erros frequentes e armadilhas
 
 > [!WARNING]
 > **Armadilhas desta lição — todas com base em dispositivo ou dado verificado:**
@@ -702,9 +847,9 @@ Uma OSC de 48 pessoas fecha o plano do exercício. Estrutura em **quatro eixos**
 
 ---
 
-## 13. Roteiro prático e itens não verificados
+## 14. Roteiro prático e itens não verificados
 
-### 13.1 Montar (ou auditar) o RH da OSC em doze passos
+### 14.1 Montar (ou auditar) o RH da OSC em doze passos
 
 ```text
   1. Inventariar os VÍNCULOS existentes (quem é CLT, quem é
@@ -740,7 +885,7 @@ Uma OSC de 48 pessoas fecha o plano do exercício. Estrutura em **quatro eixos**
      liderança + digital/IA, com evidência e revisão trimestral
 ```
 
-### 13.2 Itens sinalizados como não verificados nesta pesquisa
+### 14.2 Itens sinalizados como não verificados nesta pesquisa
 
 Para você não transformar lacuna de pesquisa em afirmação categórica:
 
@@ -881,6 +1026,38 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
 }
 ```
 
+```question
+{
+  "id": "npof-11-q9",
+  "type": "multiple-choice",
+  "question": "A Atados é gratuita para voluntários e ONGs e cobra empresas por voluntariado corporativo e ESG; em 2024 sua rede reunia 4 mil ONGs, 290 mil voluntários e mais de 100 empresas, operando com cerca de 60 funcionários. Como classificar o modelo de pessoas dessa plataforma?",
+  "options": [
+    "Captação pública concorrida, com repasse de recurso público às ONGs cadastradas",
+    "Plataforma de dois lados em que o lado corporativo é quem paga — a monetização nunca cobra do beneficiário",
+    "Cooperativa de trabalho, com distribuição de eventual sobra financeira aos voluntários",
+    "Fundo soberano de voluntariado, com dotação de capital própria e renda permanente"
+  ],
+  "correct": 1,
+  "explanation": "São dois lados não pagantes (ONGs e voluntários) e um pagante com disposição de pagar (as empresas, por voluntariado corporativo e ESG): a receita vem do lado corporativo, nunca do beneficiário. Atenção aos dois limites do caso: os mais de R$ 6 milhões direcionados a ONGs são fluxo repassado, não receita, e a receita anual da entidade não é publicada — além disso, quem assume o vínculo de trabalho com o voluntário é a ONG que o aloca, com termo de adesão e supervisão (Lei nº 9.608/1998, art. 2º)."
+}
+```
+
+```question
+{
+  "id": "npof-11-q10",
+  "type": "multiple-choice",
+  "question": "Ex-conselheiros que apenas participaram da fundação de uma entidade sem fins lucrativos, sem atos de gestão nem aprovação de contas, respondem pelos débitos trabalhistas em execução?",
+  "options": [
+    "Sim, solidariamente, por integrarem o colegiado em qualquer época",
+    "Sim, sempre que o estatuto não prever renúncia expressa de responsabilidade",
+    "Não, se não praticaram gestão nem aprovaram contas — TST, 7ª Turma (RR-100039-53.2019.5.01.0206, 2025) —, e o STJ limitou a desconsideração da personalidade jurídica a quem exerceu cargo diretivo (REsp 1.812.929/DF)",
+    "Não, após o decurso de dez anos da data da assembleia de eleição"
+  ],
+  "correct": 2,
+  "explanation": "A responsabilidade de conselheiro exige ato de gestão ou aprovação de contas: o TST excluiu da execução quem só participou da fundação em 1969, e o STJ limitou a desconsideração da personalidade jurídica a quem exerceu cargo diretivo. Na prática de gestão de pessoas, a defesa é documental — convocações, presenças e aprovação de contas registradas em ata. Filiação nominal ou mandato apenas formal não transferem débito trabalhista para a pessoa do conselheiro."
+}
+```
+
 ```matching
 {
   "question": "Associe cada exigência prática à sua base legal ou número correto:",
@@ -916,6 +1093,26 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
     "Reconhecimento e entrevista de desligamento"
   ],
   "explanation": "A ordem importa: o termo de adesão antecede a integração porque é ele que define objeto e condições; a capacitação só vem depois do desenho de função com supervisor nomeado; e o ciclo só se fecha com reconhecimento e entrevista de desligamento, que alimentam a rede de egressos e os KPIs de retenção."
+}
+```
+
+```fillblank
+{
+  "question": "Complete o quadro de números que sustenta a decisão por vínculo:",
+  "template": "A carga patronal estimada varia de {{1}} e o custo total de um posto CLT fica cerca de {{2}} acima do salário-base; a capacitação do art. 23 da Lei nº 14.457/2022 é {{3}}; e o S-2200 precisa ser transmitido {{4}}.",
+  "answers": {
+    "1": "26,8% a 28,8%",
+    "2": "35,8%",
+    "3": "a cada 12 meses",
+    "4": "até o dia anterior ao início do trabalho"
+  },
+  "distractors": [
+    "de 10% a 15%",
+    "7,5%",
+    "a cada 6 meses",
+    "até o dia 15 do mês seguinte"
+  ],
+  "explanation": "A carga patronal estimada é de 26,8% a 28,8% (20% + RAT × FAP + terceiros estimados em ~5,8%), aos quais se soma o FGTS de 8%, levando o custo a cerca de 35,8% acima do salário-base. O art. 23 da Lei nº 14.457/2022 marca a capacitação sobre violência, assédio, igualdade e diversidade a cada 12 meses quando há CIPA, e o evento S-2200 da admissão deve ser transmitido até o dia anterior ao início do trabalho — nunca no dia do início e nunca no dia 15."
 }
 ```
 

@@ -21,6 +21,8 @@ Nesta lição você vai:
 - entender por que essas entidades existem (Weisbrod, Hansmann, Andreoni, Buchanan);
 - ler a tipologia multidimensional do ICNPO e seus cinco eixos;
 - interpretar a escala real do setor com dados do IBGE (ano-base 2023), do IPEA (set/2025) e do IRS (ano fiscal 2024);
+- comparar os regimes internacionais — EUA (501(c)(3)), Reino Unido (*charity*), Alemanha (*gemeinnützig*), França (*loi* de 1901) e Índia (FCRA) — e identificar o que cada um exige que o art. 53 do Código Civil não exige;
+- aplicar a definição a casos reais — BRAC, Gerando Falcões e Atados — verificando missão, não-distribuição e prestação de contas em balanço;
 - separar "sem fins lucrativos" de "sem atividade econômica" — e evitar as armadilhas clássicas de prova.
 
 > [!NOTE]
@@ -69,7 +71,7 @@ Convém fixar quatro negativas, porque elas explicam a maior parte das confusõe
 - **ONG não é forma jurídica** — não existe no cartório;
 - **ONG não é sinônimo de OSC** — OSC é categoria do MROSC (Lei nº 13.019/2014); ONG é uso informal;
 - **ONG não é sinônimo de "entidade com isenção fiscal"** — isenção é consequência de requisitos, nunca pressuposto da natureza;
-- **ONG não é sinônimo de "entidade sem atividade econômica"** — pode auferir receita, inclusive contraprestacional, nos limites da seção 10.
+- **ONG não é sinônimo de "entidade sem atividade econômica"** — pode auferir receita, inclusive contraprestacional, nos limites da seção 11.
 
 > [!NOTE]
 > **Erro comum:** tratar a sigla como definição. Dizer "isso não é ONG porque não tem CNPJ de ONG" é um não-sense jurídico — toda ONG tem CNPJ de associação, fundação ou cooperativa. A pergunta correta é: "essa entidade cumpre os critérios da norma que eu estou aplicando (edital, isenção, parceria)?"
@@ -559,9 +561,126 @@ E a comparação internacional mais repetida — e mais mal feita:
 
 ---
 
-## 10. Sem fins lucrativos ≠ sem atividade econômica
+## 10. ONG no Mundo: Regimes Internacionais em Síntese
 
-### 10.1 A regra das "atividades próprias"
+O núcleo duro da seção 1.3 é internacional; **a forma de prová-lo, não**. Enquanto o Brasil ancora a definição na **natureza civil** — Código Civil, art. 53: "fins não econômicos" — e a complementa no regime de parcerias (MROSC, art. 2º, I), outros países escolheram âncoras diferentes: um **status tributário** (EUA e Alemanha), um **teste de benefício público** somado ao registro (Reino Unido), uma **declaração que constitui a personalidade** (França) ou um **regime de controle dos recursos do exterior** (Índia). Ler uma entidade estrangeira com as lentes do art. 53 é o erro mais comum da comparação internacional — e a pergunta da lição inteira volta a valer: **definição para quê?**
+
+### 10.1 Estados Unidos — IRC § 501(c)(3): benefício público e neutralidade política
+
+- **Enquadramento:** o IRC § 501(c)(3) alcança fins religiosos, caritativos, científicos ou educacionais, **sem *inurement*** (nenhum indivíduo pode se apropriar do excedente), sem *lobbying* "substantial" e **sem intervenção em campanha**.
+- **Testes:** *organizational*, *operational* e de benefício público (Treas. Reg. 1.501(c)(3)-1); para ser *public charity*, ainda é exigido suporte público (IRC § 170(b)(1)(A)). A isenção pressupõe interesse público (Reg. 1.501(c)(3)-1(d)(1)(ii)); benefício excessivo a partes relacionadas é punido pelo IRC § 4958.
+- **Johnson Amendment (1954):** todo 501(c)(3) é **absolutamente proibido** de intervir em campanha a favor ou contra candidato — cláusula proposta pelo senador Lyndon B. Johnson (100 Cong. Rec. 9604 (1954)). Violação pode gerar **revogação da isenção e impostos especiais**. Precedentes: *Association of the Bar v. Commissioner*, 858 F.2d 876 (2d Cir. 1988) — rating de candidatos, mesmo "não partidário", é intervenção proibida; *Branch Ministries v. Rossotti* (D.C. Cir. 2000) — anúncio anti-candidato justificou a revogação. O *lobby* por eleição é disciplinado à parte pelo **501(h)** (Form 5768) sob o imposto § 4911, e a educação eleitoral não partidária é permitida.
+- **Transparência:** **Form 990 público** (990-N, 990-EZ, 990), obrigatório quando a receita é de **US$ 200 mil ou mais** ou os ativos de **US$ 500 mil ou mais**; prazo no 15º dia do 5º mês, com prorrogação de 6 meses (Form 8868); anexos L (partes relacionadas), R e C (política/*lobbying*).
+- **Estruturas coringa:** *community foundation*, DAF (FY2024: **US$ 327,87 bi** em ativos, **3,59 milhões de contas**, *payout* de 25,2%), fundação privada (*payout* de 5%) e *supporting organization* 509(a)(3). A escolha é econômica: manter 501(c)(3) próprio é caro e exige Form 990 público — por isso muita ONG estrangeira capta nos EUA por *fiscal sponsor* ou DAF.
+- **Diferença do Brasil:** o filtro americano é um **teste de elegibilidade fiscal** conduzido pelo IRS (*determination letter* via Form 1023), não um código civil; e a vedação de campanha é **absoluta**. No Brasil a MROSC veda "campanhas de interesse político-partidário ou eleitorais" (art. 84-C, parágrafo único) e a Lei nº 9.790/1999, art. 16, veda o mesmo nas OSCIP — mas *advocacy* de política pública (pesquisa, incidência, monitoramento) segue **lícito** — é o caso do Todos Pela Educação, que declara não receber recursos públicos (seção 15.4).
+
+### 10.2 Reino Unido — Charities Act 2011: *public benefit* não é presumido
+
+- **Definição (ss. 1 a 4):** só é *charity* quem tem **finalidades caritativas** e está sob o controle da **High Court** (s. 1), **e** consta da lista do s. 3 **e** é "*for the public benefit*" (s. 2).
+- **O teste tem duas faces:** *benefit aspect* (o dano não supera o benefício) e *public aspect* (sem benefício pessoal mais que incidental). O **s. 4(2)** é categórico: **não há presunção** de benefício público — tese confirmada em *R (ISC) v Charity Commission*.
+- **Registro:** Charity Commission a partir de **£ 5.000**; entidades *excepted* (abaixo de £ 100 mil: igrejas, fundos militares, Scouts) e *exempt* (universidades, museus); identificador público = ***charity number***. Escócia e Irlanda do Norte têm registos próprios.
+- **Prestação de contas:** *trustees' annual report* + contas + declaração de *public benefit*; relatório detalhado se o bruto ultrapassar **£ 500 mil**; **SORP 2019** para exercícios iniciados até 31/12/2025 e **SORP 2026** a partir de 01/01/2026.
+- **Escala (set/2025):** **171.153 charities**, **£ 104 bilhões** de renda e **923.536 trustees** (Charity Commission, 30/07/2026).
+- **Diferença do Brasil:** no Reino Unido o benefício público é **teste substantivo, obrigatório e não presumido**, aplicado *antes* de tudo; no Brasil **não há teste único de benefício público** — a qualificação é por finalidade (MROSC, art. 84-C) e a natureza vem do art. 53 do Código Civil.
+
+### 10.3 Alemanha — *gemeinnützig*: status tributário, não forma jurídica
+
+- **Natureza do instituto:** a *Gemeinnützigkeit* é **status tributário** dos **§§ 51 a 68 da AO** (*Abgabenordnung*), com verificação da **gestão real** da entidade (BFH, V R 20/5, 05/09/2024) — e **não é forma jurídica**.
+- **Substantivo:** § 51 exige fins **exclusivos e diretos**; § 52 manda promover a generalidade de forma ***selbstlos*** (desinteressada), com mais de 27 finalidades listadas (a de nº 25 é o engajamento cívico); § 53 trata do *mildtätig*; os §§ 65 a 68 disciplinam o *Zweckbetrieb* (operação a serviço do fim).
+- **Limite externo — *Inlandsbezug* (§ 51, 2):** no exterior só conta o que beneficiar **residentes na Alemanha** ou **melhorar a reputação do país**; o § 51, 3 admite presunção refutável para entidades constatadas como "extremist" no *Verfassungsschutz*.
+- **Formas elegíveis:** **e.V.** (associação registrada: 7 membros, sem capital), **Stiftung** (patrimônio duradouro sob tutela estatal; na prática ≥ € 300 mil; *Treuhandstiftung* a partir de € 25 mil) e **gGmbH** (≥ € 25 mil).
+- **Incentivos:** isenção do IR corporativo (KStG § 5(1), nº 9) e do imposto predial (**§ 3 GrStG**); o doador deduz via § 10b EStG, com *Zustiftung* de até **€ 1 milhão** (casados: € 2 milhões).
+- **Diferença do Brasil:** na Alemanha **forma jurídica e status fiscal são camadas separadas** — o mesmo e.V. pode ou não ser *gemeinnützig*. No Brasil a separação equivalente é entre **natureza** (CC, art. 53) e **qualificações** (OSCIP, OS, CEBAS): perder a qualificação não muda a natureza. Tradução prática: *gemeinnützig* ≈ CEBAS/OSCIP, **não** ≈ associação.
+
+### 10.4 França — *loi* de 1901: liberdade com declaração
+
+- **Liberdade (art. 2º):** a *loi* de 01/07/1901 assegura a liberdade de associar-se **sem autorização prévia** — o mesmo espírito do art. 5º, XVIII, da CF/88.
+- **Declaração constitutiva:** a *déclaration* à prefeitura (formulário **Cerfa 13973**), com as menções do art. 5, é o que confere a **personalidade moral**, com publicação no **JOAFE** em 1 mês.
+- **Agrément ≠ existência:** o *agrément* não é condição de existência, mas dá acesso a subvenções; acima de **€ 150 mil/ano** em doações e subvenções é exigido revisor de contas.
+- **ARUP** (*agrément de utilité publique*): decreto em *Conseil d'État*, em regra após **3 anos** de vida; habilita a receber **donações e legados** e pode ser retirada.
+- **Incentivos:** −**66%** no IR; para fundações, até −75% da IFI (teto de € 50 mil) e −60% do IS. **Escala:** cerca de **1,6 milhão de associações**, 1,9 milhão de empregos e ~13 milhões de voluntários (2025).
+- **Diferença do Brasil:** na França **a declaração constitui** a personalidade moral; no Brasil o **registro** (CC, art. 45) *declara* o início da existência legal do ato constitutivo. E o título que habilita a receber legados (ARUP) não tem par direto entre as qualificações brasileiras.
+
+### 10.5 Índia — FCRA: captação do exterior como *status* administrado
+
+- **Formas-base:** *Societies Act* 1860, *Trusts Act* 1882 ou *Companies Act*, s. 8.
+- **FCRA 2010, emendado em 2020** (tutela do Ministério do Interior — MHA): o registro (§ 12) exige **≥ 3 anos** de funcionamento e **≥ ₹ 10 lakh** gastos, ou então *prior permission* (§ 11).
+- **Rota obrigatória dos recursos:** conta em **sucursal específica do SBI, em Nova Delhi** (§ 17) e **vedação de repasse** a terceiros (§ 7, redação de 2020); Aadhaar ou passaporte dos dirigentes (§ 12A).
+- **Ciclo:** renovação quinquenal (FC-3C, ₹ 5.000) e **FC-4 anual** com balanço certificado por contador público (*chartered accountant*) — inclusive quando a declaração é "NIL"; cancelamento transfere o saldo à autoridade.
+- **Diferença do Brasil:** **não há regime equivalente por aqui** — o Banco Central não impõe vedação geral a receber do exterior e o RDE-ROF trata de **crédito externo**, não de doações. Na Índia, "captação internacional" é um **status administrado**, não consequência do CNPJ.
+
+### 10.6 Seis países em uma tabela
+
+| Dimensão | **Brasil** | **EUA** | **Reino Unido (E/W)** | **Alemanha** | **França** | **Índia** |
+|---|---|---|---|---|---|---|
+| Conceito central | OSC (Lei nº 13.019/2014) | 501(c)(3): *public charity* ou fundação privada | *Charity* (Charities Act 2011, ss. 1–4) | Status *gemeinnützig* (AO §§ 51–68) + forma (e.V./Stiftung/gGmbH) | *Association loi 1901*; ARUP | Society/Trust/Companies s. 8 + FCRA |
+| Órgão/controle | Receita Federal (CNPJ), TCU/MP; sem agência única | IRS (*determination* + Form 990) | Charity Commission (E/W) | *Finanzamt* + tutela das fundações | Prefeitura (declaração); Interior/*Conseil d'État* (ARUP) | MHA (FCRA) + registro estadual |
+| Teste de benefício público | Sem teste único; qualificação por finalidade (art. 84-C) | *Operational test* + proibição de *inurement* | **Obrigatório e não presumido** (s. 4) | Generalidade *selbstlos* (§ 52); fim exclusivo e direto | Associação livre; ARUP só por decreto (≥ 3 anos) | Sem teste análogo; filtro = **FCRA** |
+| Registro/identificação | CNPJ + estatuto | EIN + *determination letter* (Form 1023) | **Charity number** público | *Vereinsregister* (e.V.); tutela (Stiftung) | RNA/SIREN após declaração | Certificado FCRA + registro-base |
+| Transparência anual | Balanço e prestação de contas por instrumento | **Form 990 público** (990-N/EZ/completo) | *Trustees' annual report* + contas; **SORP 2026** | Demonstrações anuais; *Freistellungsbescheid* | Relatório + contas (revisor se > € 150 mil/ano) | **Form FC-4** + contas certificadas por contador |
+| Imunidade e doador | Imunidade (CF, art. 150, VI, "b"/"c"; art. 195, § 7º; CEBAS) + isenções | Isenção federal; dedução do doador (§ 170) | Isenção de CT; **Gift Aid** | KStG § 5(1), nº 9; Grundsteuer § 3; doador § 10b | −66% IR; até −75% IFI em fundações | Isenções condicionadas; exterior **só** com FCRA |
+| Intervenção política | **Vedada** (art. 84-C, par. único; Lei nº 9.790, art. 16) | **Absoluta** (Johnson Amendment); lobby via 501(h) | *Advocacy* ampla; sem equivalente da Johnson Amendment | Livre; vedado apoio anticonstitucional (§ 51, 3) | Livre manifestação; *congrégations* sob autorização | Restrições do FCRA em atividades sensíveis |
+| Receber do exterior | Sem vedação geral; câmbio só para crédito (BCB) | *Equivalency determination* ou *expenditure responsibility* + OFAC | Internação admitida pelo *public benefit test* | *Inlandsbezug* (§ 51, 2 da AO) | Opera fora; ARUP facilita legados | **Só com FCRA**: SBI/Nova Delhi, sem repasse, 5 anos |
+
+> [!NOTE]
+> **Como ler a tabela:** a linha "conceito central" mostra **onde** cada país guarda a definição; a linha "teste de benefício público" mostra o que é exigido *antes* do registro; a linha final mostra que receber dinheiro do exterior é **livre no Brasil** e **condição administrada na Índia**. Nenhuma linha, porém, dispensa a não-distribuição — esse é o único critério presente em todos os seis ordenamentos.
+
+### 10.7 O que muda na leitura do art. 53 — cinco diferenças
+
+1. **Onde a definição mora.** Brasil: natureza civil (CC, art. 53) + regime de parcerias (MROSC). EUA e Alemanha: **status tributário** conferido ou verificado pela autoridade fiscal. Reino Unido: **teste de benefício público** + registro. França: **declaração constitutiva**. Índia: **controle dos recursos estrangeiros**.
+2. **Teste de benefício público.** Só o Reino Unido o exige e **não o presume** (s. 4(2)); os EUA exigem o *operational test* e proíbem o *inurement*; o Brasil não tem teste único — tem lista de finalidades (art. 84-C) e requisitos de qualificação.
+3. **Neutralidade política.** EUA: vedação **absoluta** em campanha (Johnson Amendment). Brasil: veda campanhas político-partidárias ou eleitorais (MROSC, art. 84-C, par. único; Lei nº 9.790/1999, art. 16). Reino Unido: *advocacy* ampla, sem equivalente. Alemanha e França: manifestação livre, com limites gerais de constitucionalidade.
+4. **Receber do exterior.** Brasil: sem vedação geral. Alemanha: *Inlandsbezug*. Índia: FCRA. EUA (como doador): *equivalency determination* ou *expenditure responsibility*, mais checagem da OFAC.
+5. **Transparência.** EUA: Form 990 público e buscável. Reino Unido: relatório dos *trustees* + SORP no registro público. Brasil: balanço e prestação de contas exigidos **por instrumento** do MROSC — não há um documento único equivalente ao 990.
+
+### 10.8 Roteiro de cinco perguntas para ler uma ONG estrangeira
+
+O framework em camadas da seção 5 atravessa fronteiras. Em qualquer ordenamento, pergunte **nesta ordem**:
+
+| # | Pergunta | Onde procurar fora do Brasil | Equivalente brasileiro |
+|---|---|---|---|
+| 1 | Qual é a **forma jurídica**? | e.V./Stiftung/gGmbH (Alemanha); associação *loi* 1901 (França); society/trust/s. 8 (Índia) | Associação, fundação, sociedade simples, cooperativa (CC, art. 44) |
+| 2 | Qual é o **título/status** que ela alega? | *gemeinnützig* (Alemanha); 501(c)(3) (EUA); *charity* registrada (RU); ARUP (França); FCRA (Índia) | OSCIP, OS, CEBAS |
+| 3 | Existe **teste de benefício público**? | RU: s. 4, obrigatório e não presumido; EUA: *operational test* + vedação de *inurement* | Sem teste único; qualificação por finalidade (MROSC, art. 84-C) |
+| 4 | O que ela é obrigada a **publicar**? | EUA: Form 990; RU: relatório dos *trustees* + SORP; Índia: FC-4 com balanço certificado | Balanço e prestação de contas **por instrumento** do MROSC |
+| 5 | **De onde pode vir o dinheiro** e para onde ele vai? | Índia: só via FCRA/SBI; Alemanha: *Inlandsbezug*; EUA como doador: *equivalency determination* ou *expenditure responsibility* | Sem vedação geral; não-distribuição (CC, art. 53; MROSC, art. 2º, I, "a") |
+
+**Exemplo resolvido — uma brasileira capta junto a fundação alemã *gemeinnützig*.** A fundação pedirá *Zuwendungsbestätigung* e verificará (i) a destinação exclusiva de interesse público no estatuto brasileiro e (ii) o ***Inlandsbezug* (§ 51, 2 da AO)**: no exterior, só conta o que beneficiar residentes na Alemanha ou melhorar a reputação do país. Na prática, isso significa relatar o componente de intercâmbio ou diálogo e formalizar a parceria por **acordo de cooperação** (Lei nº 13.019/2014). Já o doador americano escolhe entre *equivalency determination* (conclui, pela lei brasileira, a equivalência a *public charity*) ou *expenditure responsibility* (acompanhamento e prestação de contas) — além da checagem de sanções (OFAC). **Lição:** o gargalo raramente é a natureza jurídica brasileira (a associação já serve); o que costuma atrasar é a **documentação de prestação de contas** que cada regime estrangeiro exige — mais uma vez, o critério operacional da seção 3.7.
+
+```fillblank
+{
+  "question": "Complete o mapa dos regimes internacionais:",
+  "template": "Nos Estados Unidos, o regime central das entidades sem fins lucrativos é o {{1}}; no Reino Unido, o registro fica a cargo da {{2}}; na Alemanha, a {{3}} é status tributário dos §§ 51 a 68 da AO e não forma jurídica; na França, a forma clássica é a associação da {{4}}; e na Índia, receber recurso do exterior depende do {{5}}.",
+  "answers": {
+    "1": "501(c)(3)",
+    "2": "Charity Commission",
+    "3": "gemeinnützig",
+    "4": "loi de 1901",
+    "5": "FCRA"
+  },
+  "distractors": ["OSC", "CEBAS", "MROSC", "501(h)"],
+  "explanation": "Cada país escolheu uma âncora própria: elegibilidade fiscal (EUA), teste de benefício público e registro (RU), status tributário (Alemanha), declaração constitutiva (França) e controle de recursos estrangeiros (Índia). No Brasil, a âncora é a natureza civil do art. 53 do Código Civil, somada ao regime do MROSC — por isso 'OSC', 'CEBAS' e 'MROSC' não são respostas válidas para os demais países."
+}
+```
+
+> [!WARNING]
+> **Armadilha: tratar "ONG" — ou o rótulo equivalente — como forma jurídica.** O rótulo engana em toda parte:
+> - no **Brasil** não existe "ONG" no cartório, no CNPJ e na Receita — existem associação, fundação, sociedade simples ou cooperativa (CC, art. 44);
+> - nos **EUA** não há "registro de ONG": há EIN e *determination letter* emitidos pelo IRS;
+> - na **Alemanha** a ***gemeinnützig*** **não é forma jurídica** — é status dos §§ 51 a 68 da AO, que pode ou não recair sobre e.V., Stiftung ou gGmbH;
+> - na **França** a forma é a associação da *loi* de 1901, e o que constitui a personalidade moral é a **declaração**, não o rótulo.
+> Pergunte sempre em duas etapas: **qual é a forma jurídica?** e **qual é o status/título que ela alega?** — a pergunta "isso é uma ONG?" não tem resposta jurídica em nenhum desses ordenamentos.
+
+### 10.9 Curiosidades internacionais em números
+
+- **🔢 Você sabia?** No **CAF World Giving Report 2025** (101 países, dados de 2024), **64% das pessoas doaram dinheiro** e **26% se voluntariaram** (média de 9 horas) — e a liderança em doação como percentual da renda é da **Nigéria, com 2,83%**, enquanto a média global fica em **1,04%** e o Japão fecha a lista com **0,16%**.
+- **🔢 Você sabia?** O **GivingTuesday** nasceu em **2012**, na *92nd Street Y* de Nova York, e em 2025 movimentou **US$ 4,0 bilhões** apenas nos Estados Unidos, com **38,1 milhões de participantes** em mais de **110 países** (GivingTuesday/AP News, 2025).
+
+---
+
+## 11. Sem fins lucrativos ≠ sem atividade econômica
+
+### 11.1 A regra das "atividades próprias"
 
 Uma OSC **pode** auferir receita de atividade econômica, **inclusive contraprestacional** (quem paga, recebe), desde que cumpridas duas condições:
 
@@ -570,7 +689,7 @@ Uma OSC **pode** auferir receita de atividade econômica, **inclusive contrapres
 
 **IN RFB 2.121/2022, art. 23, §§ 1º e 2º** — são "atividades próprias" tanto as receitas sem contraprestação direta (doações, anuidades e mensalidades fixadas por lei, assembleia ou estatuto) **quanto** as da finalidade precípua, ainda que contraprestacionais.
 
-### 10.2 Desvio de finalidade
+### 11.2 Desvio de finalidade
 
 **SC Cosit 278/2024** e **STJ, REsp Repetitivo 1.353.111-RS**: finalidade precípua é a razão de existir da entidade, o núcleo das suas atividades; a previsão estatutária precisa guardar coerência com a receita auferida, **sob pena de desvio de finalidade**.
 
@@ -578,7 +697,7 @@ Uma OSC **pode** auferir receita de atividade econômica, **inclusive contrapres
 
 **Limite fiscal:** a isenção **não pode servir para concorrer em condições privilegiadas** com empresas não isentas.
 
-### 10.3 Exemplo resolvido: o curso pago e as bolsas
+### 11.3 Exemplo resolvido: o curso pago e as bolsas
 
 Uma ONG promove um curso de capacitação cobrado de empresas e aplica todo o valor em bolsas de estudo para o público do seu objeto social. Suponha (hipótese de trabalho) **R$ 150 mil** de receita de cursos em um exercício, integralmente repassados a **60 bolsas** de R$ 2,5 mil.
 
@@ -586,16 +705,16 @@ Uma ONG promove um curso de capacitação cobrado de empresas e aplica todo o va
 - logo, nos termos da IN RFB 2.121/2022, art. 23, §§ 1º e 2º, e da SC Cosit 278/2024, ela pode ser tratada como **"atividade própria"**;
 - se, ao contrário, a entidade de "lazer e cultura" **alugasse equipamentos de festa** para terceiros sem destinação ao objeto, estaríamos diante de **desvio de finalidade**.
 
-### 10.4 Use os termos certos
+### 11.4 Use os termos certos
 
 > [!NOTE]
 > **Cuidado terminológico:** a expressão "princípio da acessoriedade" **não foi localizada** na doutrina brasileira pesquisada — não a utilize como fundamento. As fontes trabalham com três termos precisos: **"atividades próprias"** (IN RFB 2.121/2022), **"finalidade precípua"** (SC Cosit 278/2024; REsp 1.353.111-RS) e **"desvio de finalidade"** (consequência da incoerência). É com isso que se sustenta qualquer defesa de isenção.
 
 ---
 
-## 11. Missão, visão e valores
+## 12. Missão, visão e valores
 
-### 11.1 Os três conceitos operacionais
+### 12.1 Os três conceitos operacionais
 
 Conceitos de **gestão**, não de direito — mas são eles que operacionalizam, na prática, a "finalidade coletiva" dos critérios da seção 3:
 
@@ -603,7 +722,7 @@ Conceitos de **gestão**, não de direito — mas são eles que operacionalizam,
 - **Visão** — o estado futuro que se quer alcançar;
 - **Valores** — os limites de conduta, o que a entidade jamais fará para chegar lá.
 
-### 11.2 O teste da missão cumprida
+### 12.2 O teste da missão cumprida
 
 O teste mais limpo de missão bem escrita é este: **se a missão fosse cumprida, a entidade poderia fechar.** Missão que nunca pode ser cumprida não é missão — é instrumento de captação permanente ("combater a fome no mundo", sem público, sem território e sem horizonte).
 
@@ -613,13 +732,13 @@ O teste mais limpo de missão bem escrita é este: **se a missão fosse cumprida
 ---
 
 
-## 12. Erros comuns e pegadinhas de prova
+## 13. Erros comuns e pegadinhas de prova
 
 1. **Tratar falha de transparência como descaracterização.** O critério 7 é operacional: violação gera **sanção**, não "virar empresa".
 2. **Usar o teste de elegibilidade como se fosse institucional.** "Sem 3 anos não é entidade sem fins lucrativos" é erro de camada (seção 5.2).
 3. **Localizar a definição de OSC no art. 4º, II da Lei nº 13.019.** A definição está no **art. 2º, I**; o art. 4º original foi **revogado pela Lei nº 13.204/2015**.
 4. **Somar ou comparar IBGE e IPEA.** 596.259 FASFIL (ano-base 2023) e 972 mil OSCs (set/2025) medem coisas diferentes — nunca os some.
-5. **Achar que entidade sem fins lucrativos não pode ter receita de atividade econômica.** Pode, desde que coerente com a finalidade precípua e integralmente aplicada no objeto (seção 10).
+5. **Achar que entidade sem fins lucrativos não pode ter receita de atividade econômica.** Pode, desde que coerente com a finalidade precípua e integralmente aplicada no objeto (seção 11).
 6. **Achar que "ONG" é natureza jurídica.** É rótulo social; no CNPJ há associação, fundação, cooperativa ou sociedade simples.
 7. **Invocar o art. 19 da CF/88 para vedar atividade econômica.** Esse artigo trata de estabelecimento de cultos, recusa de fé a documentos públicos e distinções entre brasileiros — **não** é a base dessa matéria.
 8. **Dizer que o ICNPO classifica por tipo de serviço.** Ele classifica por **atividade econômica principal**; quem cruza serviço e atividade usa outro esquema (NTEE).
@@ -628,17 +747,17 @@ O teste mais limpo de missão bem escrita é este: **se a missão fosse cumprida
 
 ---
 
-## 13. Estudos de caso resolvidos
+## 14. Estudos de caso resolvidos
 
-### 13.1 A premissa errada da prova
+### 14.1 A premissa errada da prova
 
 O enunciado afirma que "a definição de OSC está no art. 4º, II da Lei nº 13.019/2014". **Resposta: premissa falsa.** O art. 4º original tratava de OSCIP e foi **revogado pela Lei nº 13.204/2015**, que passou a definir OSC no **art. 2º, I** e acrescentou as alíneas "b" (cooperativas e entidades de combate à pobreza) e "c" (organizações religiosas com atividades de interesse público distintas dos fins exclusivamente religiosos). **Lição de método: sempre conferir a redação vigente** — o Portal do Planalto publica as duas redações lado a lado, e a prova costuma usar a nova sem avisar.
 
-### 13.2 A congregação e a fronteira da OSC
+### 14.2 A congregação e a fronteira da OSC
 
 Um objeto social se resume a "culto e catequese": pela alínea "c" do art. 2º, I da Lei nº 13.019/2014, **não é OSC**, porque as atividades não são distintas dos fins exclusivamente religiosos. Um programa de alfabetização de adultos, com metas, público e orçamento próprios, **pode ser**. Os números mostram por que a fronteira importa: a **Religião** responde por **210.696 das 596.259 FASFIL (35,3%)** — IBGE, ano-base 2023 — e o Mapa do IPEA (set/2025) mantém **mais de 280 mil** religiosas, com a ressalva do próprio instituto de que, **do ponto de vista legal, ainda não há meio de distinguir** as duas atividades na base.
 
-### 13.3 Contando quem conta: duas leituras do mesmo censo
+### 14.3 Contando quem conta: duas leituras do mesmo censo
 
 *Pergunta:* "O setor é feito de pequenas entidades ou de grandes instituições?" *Resposta:* depende da métrica (IBGE/FASFIL, ano-base 2023):
 
@@ -648,21 +767,73 @@ Um objeto social se resume a "culto e catequese": pela alínea "c" do art. 2º, 
 
 Média aritmética aplicada a uma distribuição tão assimétrica produz diagnóstico errado: ninguém descreve o Hospital Albert Sabin nem a catequese da esquina com "5 ocupados".
 
-### 13.4 Por que "o número de OSCs caiu"
+### 14.4 Por que "o número de OSCs caiu"
 
 O Mapa das OSC (IPEA, set/2025) mostra **972 mil OSCs**, mas apenas **644 mil ativas** e **281 mil inaptas** — e as ativas de 2025 são **menos do que em 2017**, embora o total cresça. A mudança está na **situação cadastral**, não em onda de encerramentos. Além disso, os totais variam por data e algoritmo: **917.865** (MOSC, até fev/2025), **972 mil** (metodologia de set/2025) e **879.326 ativas** (nota de 2023). **Lição:** toda comparação temporal precisa citar **data de referência** e **tratamento de "inapta" ou "suspensa"**.
 
-### 13.5 Brasil × Estados Unidos: a comparação que quase sempre erra
+### 14.5 Brasil × Estados Unidos: a comparação que quase sempre erra
 
 596.259 FASFIL (IBGE, ano-base 2023) contra aproximadamente 1,54 milhão de 501(c)(3) (IRS, ano fiscal 2024) dá uma relação de **≈ 2,6×** para uma população apenas **~1,5× maior**. A conta sugere "o Brasil tem menos ONGs". Na verdade: **as séries não são comparáveis** — os EUA **não contam igrejas** (elas não apresentam o Form 990) e o Brasil **conta** as religiosas (35,3% das FASFIL). A diferença metodológica, não a cultura associativa, explica boa parte do intervalo.
 
-### 13.6 O parque tem dois idades
+### 14.6 O parque tem dois idades
 
 IBGE/FASFIL, ano-base 2023: entidades criadas **até 1990** são apenas **16,5%** do total, mas respondem por **49,1% dos ocupados**; as criadas **entre 2011 e 2023** são **42,6%** das entidades e apenas **23,7%** dos ocupados. Conclusão prática: **contar entidades mede vitalidade de criação; contar pessoas mede maturidade institucional.** Políticas de fomento baseadas só em "número de ONGs criadas" subestimam o peso econômico do parque antigo e superestimam o das iniciativas recentes.
 
-### 13.7 Dois eixos, conclusões diferentes (recapitulação)
+### 14.7 Dois eixos, conclusões diferentes (recapitulação)
 
 Fundação que só repassa verba = *repasse* + a serviço do **público** → avaliada por **impacto**. Associação de comerciantes = *operacional* + a serviço dos **membros** → avaliada por **serviço aos sócios**. Ambas são "sem fins lucrativos"; nenhuma das duas métricas serve para a outra. Este é o uso prático da tipologia da seção 8 — e o motivo pelo qual "a entidade presta contas" significa coisas muito diferentes conforme o eixo em que ela se situa.
+
+---
+
+## 15. Casos Reais que Ilustram o Conceito
+
+Definição só se entende quando encosta em balanço. Os três casos abaixo foram escolhidos porque cada um **testa um critério diferente** dos sete da seção 3 e porque nenhum deles é "ONG" no cartório: são **associação** e **sociedade registrada** — como mostra o recorte pesquisado, em que 6 dos 7 casos brasileiros são associação privada e **nenhum dos 11 é Organização Social** ("OS = terceiro setor" é percepção errada; as naturezas jurídicas verificadas estão na tabela da seção 15.4).
+
+### 15.1 BRAC (Bangladesh, 1972) — receita própria sem distribuição
+
+- **Natureza e origem:** sociedade registrada sob o *Societies Registration Act* 1860 (n. 3695/3), criada em **21/03/1972** por Fazle Hasan Abed.
+- **Missão:** pobreza, saúde, educação, WASH, microfinanças e resposta humanitária.
+- **Dinheiro (exercício encerrado em 30/06/2024):** receita de **BDT 140,6 bilhões** — microfinanças **BDT 94,9 bi (67,5%)**, empresas sociais **BDT 28,3 bi (20,1%)** e doações de doadores **BDT 14,1 bi (10,0%)**; no exercício anterior, BDT 125,3 bi.
+- **Escala:** em 2024, **1 em cada 5 bengaleses** atendidos; em 2025, cerca de **26 milhões de pessoas** (1 em 7); mais de **100 mil funcionários** em 15 países.
+- **Prestação de contas e governança:** *governing body* com 5 reuniões, assembleia de 19/03/2024, auditoria da ACNABIN e **reserva estatutária de 10% do superávit**.
+- **Lição ilustrada:** a BRAC responde ao **critério 1 (não-distribuição)** sem se parecer com o senso comum de "ONG que vive de doação": **87,6% da receita vem de operações próprias** e mesmo assim nada é distribuído — o excedente é retido por reserva estatutária e reinvestido no objeto. É a prova em escala gigante da seção 11: *sem fins lucrativos* não é *sem atividade econômica*. **Rigor de fonte:** os valores são em **taka** (conversão em dólares seria estimativa própria) — cite sempre moeda e exercício; a afirmação de que a BRAC é "a maior ONG do mundo" circula em fonte secundária, com critério de número de funcionários, e **não deve ser usada como fato fechado**.
+
+### 15.2 Gerando Falcões (Brasil, 2013) — missão com território e fundo com regra
+
+- **Natureza e origem:** **associação privada** (CNAE 94.99-5-00), CNPJ 18.463.148/0001-28, aberto em **25/06/2013** em Poá/SP, em rede de ONGs com CNPJ próprio.
+- **Missão:** pobreza e dignidade **nas favelas** — educação, inclusão produtiva, cultura e renda: público, território e meio declarados (seção 12.1).
+- **Financiamento:** tripé **filantropia + negócios sociais** (bazar e ASMARA) + escala pública; **Fundo Dignidade** (mar/2025), com meta de **R$ 250 milhões** e regra de gastar **10% do patrimônio ao ano**; a Lei Rouanet liberou **R$ 271.573,83** para a Orquestra Jovem (DOU, 2016).
+- **Resultados:** captação das unidades aceleradas de R$ 5,1 mi para R$ 13,7 mi (**+266%**) em 28 unidades (2022); **23 mil formados** em 2024 (+200%); **42 mil qualificados** em 2025.
+- **Lição ilustrada:** três conceitos da lição num só instrumento — (i) **missão** com público, território e horizonte, que passa no teste da missão cumprida (seção 12.2); (ii) **destinação do patrimônio**: o Fundo Dignidade é dotação permanente com regra de gasto — o patrimônio tem **fim**, não dono (CC, art. 61); (iii) **não-distribuição** operacionalizada: a regra de gastar 10% ao ano é a tradução administrativa da aplicação integral no objeto (MROSC, art. 2º, I, "a"). **Rigor de fonte:** a entidade **não publica DRE ou balanço**, e o valor do aporte da família Lemann **diverge entre as fontes** consultadas (site institucional × reportagem da Folha) — não cite como número fechado nem use em comparação sem a ressalva.
+
+### 15.3 Atados (Brasil, 2012) — quem paga não é quem se beneficia
+
+- **Natureza e origem:** **Associação Atados**, CNPJ 18.110.558/0001-95, fundada em **2012**.
+- **Missão:** plataforma que conecta **voluntários, ONGs e empresas**.
+- **Modelo:** gratuito para ONGs e voluntários; a receita vem do lado corporativo — **voluntariado corporativo e ESG** com mais de **100 empresas** (Heineken, Samsung, Coca-Cola).
+- **Escala (2024):** +70 projetos corporativos, +82 ONGs impactadas, +30 mil novos usuários, +60 mil inscrições e +400 ONGs publicadas; rede com 100+ empresas, **4 mil ONGs** e **290 mil voluntários**.
+- **Lição ilustrada:** (i) **critério 2 (finalidade coletiva)** convive com receita contraprestacional porque a entidade **monetiza cobrando do pagante — a empresa —, nunca do beneficiário**; (ii) o **critério 7 (prestação de contas)** é o elo mais fraco do caso: a receita anual **não é publicada** e o volume de "mais de R$ 6 milhões" é **fluxo repassado, não receita** da entidade. Sem demonstração financeira, a transparência vira promessa — e a lição da seção 3.8 permanece: isso é **infração de conduta**, não descaracterização da natureza.
+
+> [!WARNING]
+> **Armadilha: achar que ONG não pode gerar receita.** Pode — e os exemplos de maior escala do setor dependem justamente dela:
+> - **BRAC:** 87,6% da receita vem de microfinanças e empresas sociais (exercício 2023-24); a doação cai a **10%** do total;
+> - **Atados:** cobra de mais de 100 empresas pelo voluntariado corporativo enquanto é **gratuito** para ONGs e voluntários;
+> - **Médicos Sem Fronteiras:** **97,9%** de receita privada, sendo **85,3%** de indivíduos (2024), e recusa de fundos públicos da UE desde 2016; **Habitat for Humanity** vende casas e opera as lojas ReStore (FY2024).
+> O que a receita **não** pode é (i) **gerar distribuição** a sócios, dirigentes, empregados, doadores ou terceiros (CC, art. 53; MROSC, art. 2º, I, "a") nem (ii) **escapar da finalidade precípua**, sob pena de desvio de finalidade (seção 11). Cobrar de quem pode pagar não viola a não-distribuição; **dividir o que sobra, sim**.
+
+### 15.4 O que os três casos mostram, em uma tabela
+
+| Caso | Natureza jurídica (verificada) | O que o caso ilustra nesta lição | Critério em foco |
+|---|---|---|---|
+| **BRAC** (1972) | Sociedade registrada (*Societies Act* 1860) | Operação própria em escala **sem** distribuir excedente; reserva estatutária de 10% do superávit | 1 — Não-distribuição; 7 — prestação de contas (auditoria ACNABIN) |
+| **Gerando Falcões** (2013) | Associação privada (CNPJ 18.463.148/0001-28) | Missão com público e território; fundo patrimonial com regra de gasto de 10% ao ano | 2 — finalidade coletiva; 6 — destinação do patrimônio (CC, art. 61) |
+| **Atados** (2012) | Associação (CNPJ 18.110.558/0001-95) | Receita do lado corporativo, gratuidade do lado do beneficiário; transparência ausente | 2 — finalidade coletiva; 7 — prestação de contas (conduta, não natureza) |
+| *Referência* — **Todos Pela Educação** (2007) | Associação de fins não econômicos | **R$ 26,1 milhões** em 2024 **sem verba pública**: independência de financiamento como pré-condição de credibilidade | 3 — não-governamentalidade; 4 — autogoverno |
+
+**Leitura cruzada:** nenhum dos quatro recebe maioria de verba pública; nenhum é OS; todos são associações (ou sociedade registrada, no caso da BRAC) — e a diversidade de receita **não** altera a natureza. É o mesmo recado do art. 53 do Código Civil, agora em balanço: o que define a entidade não é de onde vem o dinheiro, é **para onde ele vai**.
+
+> [!NOTE]
+> **Nota de fonte:** os números vêm de relatórios anuais e páginas de transparência das próprias organizações, sempre com o ano de cada dado. O que a pesquisa **não** conseguiu confirmar em fonte primária — balanços não publicados, conversões cambiais, aportes divergentes — está sinalizado em cada caso como **ressalva de fonte** e não deve ser citado como fato fechado nem usado em comparação sem a ressalva.
 
 ---
 
@@ -748,6 +919,38 @@ Fundação que só repassa verba = *repasse* + a serviço do **público** → av
 }
 ```
 
+```question
+{
+  "id": "npof-01-q6",
+  "type": "multiple-choice",
+  "question": "Sobre o regime alemão das entidades sem fins lucrativos, qual afirmação está correta?",
+  "options": [
+    "A gemeinnützig é uma forma jurídica autônoma do direito alemão",
+    "Só a associação registrada (e.V.) pode obter o status de gemeinnützig",
+    "A gemeinnützig é status tributário dos §§ 51 a 68 da AO e pode ser alcançada por e.V., Stiftung e gGmbH",
+    "A Alemanha não prevê isenção do imposto predial (Grundsteuer) para essas entidades"
+  ],
+  "correct": 2,
+  "explanation": "A gemeinnützigkeit é status tributário dos §§ 51 a 68 da AO (Abgabenordnung), verificado pelo Finanzamt com atenção à gestão real (BFH, V R 20/5, 05/09/2024) — não é forma jurídica: as formas são e.V., Stiftung e gGmbH, todas elegíveis. A isenção predial está no § 3 da GrStG e a do imposto de renda corporativo no § 5(1), nº 9, da KStG. É a mesma separação que o Brasil faz entre natureza jurídica (Código Civil, art. 53) e qualificações (OSCIP, OS, CEBAS): perder o status não muda a forma, e a forma não garante o status."
+}
+```
+
+```question
+{
+  "id": "npof-01-q7",
+  "type": "multiple-choice",
+  "question": "No exercício encerrado em 30/06/2024, a BRAC registrou receita de BDT 140,6 bilhões, dos quais BDT 14,1 bilhões vieram de doações. Qual o percentual aproximado de doações sobre a receita total?",
+  "options": [
+    "50%",
+    "25%",
+    "10%",
+    "75%"
+  ],
+  "correct": 2,
+  "explanation": "14,1 ÷ 140,6 ≈ 10%: microfinanças (67,5%) e empresas sociais (20,1%) somam 87,6% da receita e a doação cai para um dígito. O caso é a prova viva de que 'sem fins lucrativos' não é 'sem atividade econômica' (seção 11) — o que a BRAC não faz é distribuir excedente a qualquer pessoa (Código Civil, art. 53; MROSC, art. 2º, I, 'a'), devendo o superávit ser retido, inclusive pela reserva estatutária de 10%, e reinvestido no objeto."
+}
+```
+
 ```matching
 {
   "question": "Associe cada conceito central desta lição à sua definição",
@@ -781,4 +984,6 @@ Fundação que só repassa verba = *repasse* + a serviço do **público** → av
 > 5. Existem por **falhas** — governamental (Weisbrod), voluntária (Weisbrod), contratual (Hansmann, 1980) e de informação na doação (Andreoni, 1990) —, não por bondade dos fundadores;
 > 6. A tipologia do **ICNPO** (12 grupos, 24 subgrupos, cinco eixos) classifica por **atividade econômica principal** e impede comparar o incomparável: repasse × execução, membros × público, serviço × *advocacy*;
 > 7. **Sem fins lucrativos não é sem atividade econômica**: receita contraprestacional é lícita se coerente com a **finalidade precípua** e integralmente aplicada no objeto — o contrário é desvio de finalidade;
-> 8. Números sem data e sem regra de contagem são erro: **596.259 FASFIL (IBGE, ano-base 2023)** e **972 mil OSCs (IPEA, set/2025)** medem coisas diferentes e jamais devem ser somados.
+> 8. Números sem data e sem regra de contagem são erro: **596.259 FASFIL (IBGE, ano-base 2023)** e **972 mil OSCs (IPEA, set/2025)** medem coisas diferentes e jamais devem ser somados;
+9. **O núcleo duro é universal, a prova não:** EUA (501(c)(3) e Johnson Amendment), Reino Unido (*public benefit* não presumido), Alemanha (*gemeinnützig* como status, não como forma), França (*loi* de 1901) e Índia (FCRA) testam coisas diferentes do art. 53 do Código Civil — antes de comparar, pergunte **definição para quê?**;
+10. **A definição se confirma em balanço:** BRAC (87,6% de receita própria sem distribuição), Gerando Falcões (fundo patrimonial com regra de gastar 10% ao ano) e Atados (cobrar da empresa, nunca do beneficiário) mostram que **missão, não-distribuição e prestação de contas** são critérios verificáveis — inclusive quando a transparência falha, que aí é infração de conduta, não perda da natureza.

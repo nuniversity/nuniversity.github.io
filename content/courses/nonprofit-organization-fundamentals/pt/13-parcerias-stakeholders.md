@@ -1,6 +1,6 @@
 ---
 title: "Parcerias e Relacionamento com Stakeholders"
-description: "Curso completo sobre parcerias no terceiro setor brasileiro: regime jurídico do MROSC (Lei nº 13.019/2014) instrumento por instrumento, ciclo completo da parceria do funil de prospecção à renovação, plano de trabalho e prestação de contas com prazos vigentes, armadilhas de dispositivos revogados (art. 47 e art. 56), mapeamento de stakeholders por poder × interesse, proposta de valor por financiador, transparência como ativo de captação, nove casos resolvidos e dez questões comentadas."
+description: "Curso completo sobre parcerias no terceiro setor brasileiro: regime jurídico do MROSC (Lei nº 13.019/2014) instrumento por instrumento, ciclo completo da parceria do funil de prospecção à renovação, plano de trabalho e prestação de contas com prazos vigentes, armadilhas de dispositivos revogados (art. 47 e art. 56), mapeamento de stakeholders por poder × interesse, proposta de valor por financiador, transparência como ativo de captação, atualizações de 2026 (Decreto nº 11.948/2024, ADPF 854, jurisprudência do TCU e ano-teste da reforma tributária), dez casos resolvidos, três casos reais de parceria e doze questões comentadas."
 order: 13
 difficulty: "intermediate"
 duration: "120 min"
@@ -52,7 +52,9 @@ Nesta lição você vai:
 - mapear **stakeholders por poder × interesse** e desenhar a cadência de cada canal;
 - traduzir o mesmo resultado em **quatro moedas** de financiamento;
 - usar **transparência e evidência de impacto** como argumento de venda de parceria;
-- resolver **nove casos reais** e responder a **dez questões comentadas**.
+- resolver **dez casos resolvidos** e analisar **três casos reais** de parceria (TPE, TETO e Fundação Itaú);
+- aplicar as **atualizações de 2026** do MROSC — Decreto nº 11.948/2024, transparência de emendas (ADPF 854), jurisprudência do TCU e alertas do ano-teste da reforma tributária;
+- responder a **doze questões comentadas**.
 
 ---
 
@@ -707,7 +709,157 @@ A Lei nº 13.204/2015 não alterou a MROSC apenas: ela **reconstruiu** boa parte
 
 ---
 
-## 10. Itens não verificados e limites desta pesquisa
+## 10. MROSC em 2026: Atualizações e Execução
+
+A lei continuou a mesma, mas o **regulamento, a transparência exigida e o controle externo** mudaram de temperamento entre 2024 e 2026. Esta seção reúne apenas fatos verificados em fonte primária ou em decisão publicada: (i) as mudanças do **Decreto nº 11.948/2024**; (ii) a **transparência de emendas** transformada em condição de execução (ADPF 854); (iii) a **jurisprudência do TCU** sobre parcerias; e (iv) os **alertas de compliance** que valem para a agenda de 2026. O que não foi confirmado está listado na seção 12 — inclusive números de execução do MROSC: **esta pesquisa não localizou quantitativo de parcerias confirmado com ano**, por isso a lição cita a ferramenta de acompanhamento, não o total.
+
+### 10.1 Decreto nº 11.948/2024: o que mudou na prática
+
+O **Decreto nº 11.948/2024, de 12/03/2024**, alterou o Decreto nº 8.726/2016 e a própria Lei nº 13.019/2014, consolidando as regras de execução que esta lição usa nas seções 2 e 3:
+
+**Tabela 10 — Decreto nº 11.948/2024: mudanças que afetam a execução da parceria**
+
+| Mudança | Onde está | Efeito prático |
+|---|---|---|
+| Apostilamento com **dispensa de autorização prévia até 10%** do valor global e comunicação posterior | Decreto, art. 43, §§ 4º e 5º | Remanejamento sem termo aditivo dentro da faixa (Tabela 3) |
+| Contrapartida em bens e serviços só em parceria **superior a R$ 1.000.000,00**, com justificativa técnica; contrapartida **financeira** vedada e a voluntária não entra como critério de julgamento | Decreto, arts. 11-A, 12 e 12-A | Orçamento sem "moeda falsa" na negociação |
+| Vigência total de até **10 anos**, prorrogável na forma do art. 21 | Decreto, art. 21 | Planejamento plurianual lícito |
+| Prestação de contas no **Transferegov.br** | Decreto, art. 55 | Toda a execução na plataforma única da União |
+| Relatório de execução financeira disciplinado no regulamento | Decreto, art. 56 | Fecha o pacote do art. 66 da lei |
+| Divulgação no **Portal da Transparência** e no **Mapa das OSC** | Decreto, red. 2024 | A parceria vira dado público pesquisável |
+| Veda exigir **certificação ou titulação estatal** como condição de parceria, salvo legislação setorial específica | Decreto, art. 9º, § 5º | Edital com selo sem base legal: impugnação e recurso em 5 dias |
+
+O **Painel Gestão** (MGI, lançado em **13/06/2025**) reúne dados de programas e parcerias federais — PRONON, PRONAS/PCD, FNS e FNAS —, e é a porta de entrada do acompanhamento público da execução. Como as contagens de programas e parceiras do painel **não foram reconfirmadas** nesta pesquisa, cite a **ferramenta**, nunca o quantitativo (seção 12).
+
+- **🔢 Você sabia?** O **Mapa das OSC** (Ipea) mapeava cerca de **972 mil** organizações em set/2025 — das quais **644 mil ativas** e **281 mil inaptas** — e registrava **672.215 ativas** em jan/2026. Tradução prática para a etapa 1 do funil: antes de montar dossiê de prospecção, confirme a situação cadastral do futuro parceiro — CNPJ inapto reprova na habilitação (arts. 33 e 34) antes de qualquer discussão de mérito, e "entidade desativada" é a surpresa mais cara de encontrar na diligência.
+
+### 10.2 ADPF 854: transparência de emendas virou condição de repasse
+
+Quem opera com **emenda parlamentar** (seção 1.4, Caso resolvido 2) ganhou, entre 2024 e 2025, um novo piso de conformidade, fixado pelo STF:
+
+- na **ADPF 854**, cumulada com a **ADI 7688**, a decisão do ministro **Flávio Dino de 02/12/2024** deu **90 dias** às ONGs para publicar os valores de emendas recebidas de **2020 a 2024** e a forma como foram aplicados;
+- o relatório da **CGU** sobre **26 entidades** apontou que apenas **4 (15%)** publicaram adequadamente, **35%** parcialmente e **50%** de forma inadequada;
+- em **03/01/2025**, o mesmo ministro **suspendeu repasses a 13 ONGs** (R$ 142 milhões liberados em dez/2024), com inscrição no **CEPIM/CEIS** e auditoria a realizar em **60 dias**;
+- a escala do tema aparece no **TCU 2753/2025-1ª Câmara**: emendas a ONGs de 2020 a 2024 somaram **R$ 5,69 bilhões** e a auditoria da CGU apurou dano de **R$ 15.062.152** em 7 das 10 entidades.
+
+Leitura de gestão: publicar deixou de ser "boa prática de reputação" e passou a ser **condição de manutenção do repasse**. A rotina mínima é publicar recebimento, aplicação e situação da prestação de contas — exatamente o dado do art. 11, parágrafo único, V, que esta lição trata como argumento de venda (seção 4.1). Transparência virou alavanca de caixa nos dois sentidos: falta dela trava o repasse, sobra dela sustenta a renovação.
+
+### 10.3 Jurisprudência: o TCU como principal vara das parcerias
+
+**Tabela 11 — Jurisprudência verificada (2024–2026) sobre parcerias e OSCs**
+
+| Processo | Decisão | Tese | Medida prática |
+|---|---|---|---|
+| **TCU 1355/2025-Plenário** (18/06/2025) | Cautelar *inaudita altera pars* suspendendo repasses do MTE a duas entidades (R$ 15,77 mi + R$ 4,22 mi) | Fomento **sem metas cronológicas** (art. 22, II–IV) e **sem cronograma** (art. 42, III; Decreto, arts. 20 e 33), com **parcela única** | Assinar só com metas, cronograma e desembolso fracionado |
+| **TCU 2753/2025-1ª Câmara** | Improcedente: vias administrativas não esgotadas | Dano de R$ 15 mi em 7 de 10 ONGs; monitoramento "incipiente" | Publicar recebimento e aplicação de emendas |
+| **TCU 6107/2025-1ª Câmara** | Citação de associação extinta **nula**; arquivamento da entidade | Sem destinação do patrimônio (**art. 61 do Código Civil**) não há sucessora; **débito e multa ficam com os dirigentes** | Formalizar dissolução com destinação dos bens |
+| **TCU 6633/2025-1ª Câmara** | Responsabilização de instituto, empresas e dirigentes | **Fachada** e sub-rogação integral; dano apurado pela Teoria do Produto Bruto Mitigado | Vedada a sub-rogação do objeto; contas idôneas em patrocínios |
+| **STJ, Informativo 893** (17/06/2026, Inq 1.913/DF) | Denúncia recebida por **peculato-desvio** (art. 312 do Código Penal) | Desvio de **R$ 6.090.142** dos R$ 7 milhões de acordo MPT×Itaú para o Instituto Lixo e Cidadania | Prestação de contas idônea e segregação entre gestão e contabilidade |
+| **STJ, 3ª e 4ª Turmas (2024–2025)** | **Vedada a recuperação judicial** de associação e fundação sem fins lucrativos | A Lei nº 11.101/2005 alcança empresários (arts. 1º e 2º); exceção: cooperativas médicas (ADI 7.442/STF) | Crise via acordo, reestruturação ou dissolução limpa |
+| **TST, 7ª Turma (2025)** (RR-100039-53.2019.5.01.0206) | Ex-conselheiros **excluídos** da execução trabalhista | Só responde quem pratica **gestão ou aprova contas** | Atas, convocações e aprovação de contas documentam a defesa |
+
+Quatro consequências diretas para quem gere parceria:
+
+1. **Metas sem prazo e desembolso em parcela única** são, hoje, o caminho mais rápido para suspensão de repasse (TCU 1355/2025) — o plano do art. 22 e o cronograma do art. 42, III, deixaram de ser formalidade e viraram condição de pagamento;
+2. **Transparência de emendas é condição de execução**, não anexo de reputação (ADPF 854 e TCU 2753/2025);
+3. **Encerramento sem destino do patrimônio** transfere o problema para os dirigentes (TCU 6107/2025; art. 61 do Código Civil) — o mesmo art. 61 que a [Lição 04 — Estruturas Legais](./04-legal-structures-brazil.md) trata como cláusula obrigatória de estatuto;
+4. **Documentação de gestão** — atas, convocações e aprovação de contas — é a defesa de conselheiro e dirigente (TST, 7ª Turma, 2025) e o antídoto contra a leitura de "fachada" do TCU 6633/2025.
+
+**Caso resolvido 10 — o fomento "de confiança" que o TCU suspendeu.**
+
+Um órgão federal celebrou dois termos de fomento com entidades de grande porte — **R$ 15,77 milhões** e **R$ 4,22 milhões** — sem metas cronológicas, sem cronograma de desembolso e com liberação em **parcela única**, "por confiança na execução anterior". Resultado: em **18/06/2025**, o TCU (Acórdão 1355/2025-Plenário) aplicou cautelar *inaudita altera pars* e **suspendeu os repasses**. A leitura técnica é impiedosa com a boa intenção: não se apurou desvio (ainda); apurou-se **desenho ruim** — o art. 22, II a IV, pede metas e parâmetros, o art. 42, III, pede cronograma de desembolso e os arts. 20 e 33 do Decreto nº 8.726/2016 completam o pacote. Checklist de leitura prévia do instrumento, aplicável na sua mesa antes de assinar:
+
+1. **cada meta tem prazo e público definidos?** (art. 22, II e IV — sem isso não há parâmetro para aferir);
+2. **o cronograma de desembolso acompanha as metas?** (art. 42, III — desembolso e execução precisam correr na mesma velocidade);
+3. **parcela única é exceção justificada**, e não hábito de repasse "porque a entidade é conhecida"?
+4. **há aderência explícita entre instrumento e plano de trabalho?** (art. 42, parágrafo único — plano indissociável);
+5. **a publicação no Transferegov está no fluxo de entrega?** (Decreto, art. 55);
+6. **os ajustes de percurso cabem em apostilamento até 10%?** (art. 43, §§ 4º e 5º) — acima disso, termo aditivo ou negociação com o órgão (30 dias, art. 43, § 2º).
+
+Lição de gestão: em 2026, **"confiança" não substitui artefato** — controle externo não audita relação, audita documento datado. E note o efeito colateral: enquanto o repasse está suspenso, a entidade executa sem caixa e a administração responde pelo atraso; os dois lados perdem com a mesma omissão de cronograma.
+
+### 10.4 Alertas de compliance para a agenda de 2026
+
+- **Reforma tributária em ano-teste:** a **LC nº 214/2025 (16/01/2025)** criou IBS, CBS e Imposto Seletivo; entre **01/01 e 31/12/2026** incidem **CBS de 0,9%** (art. 582 do **Decreto nº 12.955/2026**, de 29/04) e **IBS de 0,1%**, compensados com PIS/COFINS no mesmo período (Ato Conjunto RFB/CGIBS nº 1/2025, de 23/12/2025), cumpridas as obrigações acessórias; a transição vai até **2033**;
+- **Corte de 10% nos benefícios:** a **LC nº 224/2025 (26/12/2025)** reduziu linearmente **10%** de todos os incentivos federais (IRPJ e II desde 01/01/2026; os demais tributos federais desde 01/04/2026); a **IN RFB nº 2.307/2026 (20/02/2026)** revogou o **item 26** do Anexo Único — a dedução de doações de PJ a OSCs e OSCIPs (2% do lucro operacional) **entrou no corte** —, mantido o **item 34** (isenção de IRPJ, CSLL e COFINS do art. 15 da Lei nº 9.532/1997); a **LC nº 235/2026 (27/08/2026)** reescreveu o inciso V do § 8º do art. 4º da LC nº 224 justamente para preservar esse rol, e seguem **pendentes a ADI 7.920** (STF) e o **PLC 11/2026**;
+- **Descontos associativos no INSS:** o acordo INSS–MPF–DPU–OAB–AGU criou, em **14/05/2025**, o **PDMA** — **9,42 milhões de benefícios** com descontos contestáveis entre mar/2020 e mar/2025; a entidade tem **15 dias úteis** para devolver os valores via GRU ou comprovar autorização (biometria ou assinatura), sob pena de cobrança automática; idosos acima de 80 anos, indígenas e quilombolas têm contestação de ofício;
+- **Operação Korban (29/07/2025):** a Polícia Federal e a CGU apuraram desvio em fomento e emendas — cerca de **R$ 15 milhões** em fomento, bloqueio de até **R$ 25 milhões** e **R$ 27,4 milhões** em emendas de 2024–2025 (dados PF/CGU; percentuais de redirecionamento **não foram reconfirmados** — seção 12).
+
+> [!IMPORTANT]
+> **2026 muda a conversa com o financiador privado.** No ano-teste da reforma tributária: (i) **patrocínio com contrapartida sofre IBS/CBS** (LC nº 214/2025) — negocie a contrapartida sabendo que ela é fato gerador, não favor; (ii) a **dedutibilidade da doação de PJ caiu 10%** (LC nº 224/2025 + IN RFB nº 2.307/2026): numa doação de R$ 40.000 a OSCIP com lucro de R$ 1.000.000, o limite de 2% rendia R$ 20.000 dedutíveis e, com a redução de base de 10%, a dedução efetiva de 2026 cai para **R$ 18.000**; (iii) a base legal da defesa é o **inciso V do § 8º do art. 4º da LC nº 224** com a redação da **LC nº 235/2026**, somado ao **item 34** da IN RFB nº 2.307/2026 e ao **FAQ da RFB** (o Anexo não é exaustivo) — guarde os três documentos no dossiê; (iv) acompanhe a **ADI 7.920** e o **PLC 11/2026** antes de prometer benefício fiscal em proposta. Tradução para a seção 6.3: em 2026, a "moeda" da empresa é **evidência com dado fiscal conferível**.
+
+### 10.5 A ordem dos atos: da execução à manifestação
+
+Fechar parceria é sequência, não simultaneidade — e no âmbito federal os prazos se encadeiam em uma ordem única. Ordene os atos da prestação de contas, do primeiro relatório à manifestação conclusiva:
+
+```dragdrop
+{
+  "question": "Ordene os atos da prestação de contas de uma parceria federal, do relatório à manifestação:",
+  "items": [
+    "Relatório de Execução do Objeto — até 30 dias do término da execução (Decreto, art. 65, I)",
+    "Relatório de Execução Financeira — até 60 dias da notificação (Decreto, art. 65, II)",
+    "Prestação de contas final da OSC — até 90 dias do fim da vigência (Lei nº 13.019/2014, art. 69)",
+    "Diligência da administração para esclarecimentos",
+    "Apreciação em até 150 dias do recebimento ou do cumprimento da diligência (art. 71)",
+    "Saneamento das ressalvas no prazo fixado na notificação (art. 70)"
+  ],
+  "correctOrder": [
+    "Relatório de Execução do Objeto — até 30 dias do término da execução (Decreto, art. 65, I)",
+    "Relatório de Execução Financeira — até 60 dias da notificação (Decreto, art. 65, II)",
+    "Prestação de contas final da OSC — até 90 dias do fim da vigência (Lei nº 13.019/2014, art. 69)",
+    "Diligência da administração para esclarecimentos",
+    "Apreciação em até 150 dias do recebimento ou do cumprimento da diligência (art. 71)",
+    "Saneamento das ressalvas no prazo fixado na notificação (art. 70)"
+  ],
+  "explanation": "No âmbito federal o Decreto nº 8.726/2016 decompõe a entrega em dois relatórios com prazos próprios (30 dias para o objeto e 60 dias da notificação para o financeiro), dentro da janela geral de 90 dias do art. 69 da Lei nº 13.019/2014. A administração aprecia em até 150 dias, contados do recebimento ou do cumprimento da diligência (art. 71) — por isso a diligência vem antes do término da análise —, e havendo irregularidade o saneamento (art. 70) é a última janela antes das sanções do art. 73."
+}
+```
+
+---
+
+## 11. Parcerias Através de Casos Reais
+
+A pesquisa de casos verificou **11 organizações** (7 brasileiras e 4 internacionais), todas com CNPJ, registro estatutário ou demonstração financeira localizada — nenhuma cifra abaixo é estimativa. O recorte desta lição segue o mapeamento da própria pesquisa para a aula de parcerias: **Todos Pela Educação** (coalizão de advocacia), **TETO Brasil** (parceria corporativa e evento) e **Fundação Itaú** (instituto empresarial). Nos três, a pergunta é sempre a mesma desta lição: **quem concebe, quem presta contas e o que prova a renovação?**
+
+**Tabela 12 — Três casos reais lidos pelas três perguntas da parceria**
+
+| Caso | Quem financia (a "moeda") | Governança | Prestação de contas / transparência | O que prova a renovação |
+|---|---|---|---|---|
+| **Todos Pela Educação** | Doações de PJ e PF (**92%** em 2024), **sem verba pública** | Assembleia Geral + Conselho de Administração + auditoria independente anual | Relatório financeiro e página de transparência publicados, ainda sem obrigação MROSC | Independência de fonte é o que sustenta a credibilidade para cobrar política pública |
+| **TETO Brasil** | Individuais, institucionais, eventos e patrocínio (Tide Setubal, Airbnb, Fuplastic) | Diretoria executiva + **avaliação de impacto com a FGV** | 113 moradias, 76 projetos e 8.134 voluntários em 2024, com métrica declarada | Evidência auditada por terceiro + número comparável ano a ano |
+| **Fundação Itaú** | Renda de fundo patrimonial (**93%** financeira em 2024) + doação de projeto | Conselho Curador **heterônomo** + Diretoria não remunerada + Conselho Fiscal | Demonstrações financeiras e relatórios anuais públicos; custos administrativos ≤ **5%** do investido | Autonomia patrimonial e controle heterônomo — a parceria não depende do próximo repasse |
+
+### 11.1 Todos Pela Educação: coalizão de advocacia sem verba pública
+
+- **Contexto:** associação de fins não econômicos fundada em **07/09/2007** (CNPJ 10.477.478/0001-60), independente, suprapartidária e **não receptora de recursos públicos**. Em **2024** movimentou **R$ 26.082.377** sem restrição (doações de PJ e PF: R$ 24,1 mi; serviços voluntários: R$ 1,84 mi), mais R$ 453 mil de receitas financeiras, com superávit de **R$ 4,66 mi** e patrimônio líquido de **R$ 16,9 mi** (balanço auditado);
+- **Parceria e relacionamento:** o produto vendido é **política pública melhorizada** — agenda *Educação Já* com 13 temas, *Educação Já Municípios* cobrindo **62%** das matrículas em 2024 e o *Anuário da Educação Básica* (12ª ed., 2025). A "moeda" comprada é incidência com evidência (Tabela 7) e a fonte dominante é doação de PJ e PF (**92%** em 2024), não o governo;
+- **Governança:** Assembleia Geral, Conselho de Administração e **auditoria independente anual**;
+- **Prestação de contas e transparência:** como não recebe verba pública, **não presta contas pelo MROSC** — e mesmo assim publica relatório financeiro e página de transparência: é a disciplina de quem presta contas sem estar obrigada;
+- **Lição:** **independência de financiamento é pré-condição de credibilidade** — quem quer cobrar o governo não pode depender dele. Para a sua carteira, é o contraponto exato dos **59%** de ONGs que dependem de governo (média de 3,9 fontes): diversificação não é apenas caixa, é liberdade de falar.
+
+### 11.2 TETO Brasil: parceria corporativa, evento e evidência terceirizada
+
+- **Contexto:** *Um Teto para Meu País – Brasil* (CNPJ 10.513.214/0001-15), no Brasil desde **2006**, integrante da rede TECHO em 19 países, dedicada a habitação emergencial e infraestrutura em favelas;
+- **Parcerias:** doações individuais e institucionais, eventos e parcerias com **Fundação Tide Setubal, Airbnb e Fuplastic**; o jantar de dez/2025 captou **~R$ 1,8 milhão** — *declaração da organização sem balanço auditado localizado (sinalizado como não verificado na seção 12)*;
+- **Governança:** direção executiva (Camila Jordan em 2023; Layanne Paixão em 2025) e **avaliação de impacto com a FGV** — terceiro independente medindo o que a parceria prometeu;
+- **Prestação de contas e transparência:** em 2024 foram **113 moradias**, **76 projetos** e **8.134 voluntários**; a **5.000ª moradia** foi entregue em dez/2024 (Diadema), com acumulado de +90 mil voluntários e +327 projetos;
+- **Lição:** parceria de evento e patrocínio só sobrevive a renovação com **artefato auditável** — relatório próprio mais evidência de terceiro (aqui, a FGV) —, e toda escala precisa **declarar a métrica** ("moradias entregues", não "pessoas impactadas"): sem a métrica escrita no art. 22, IV, o comparativo com o ano anterior é impossível.
+
+### 11.3 Fundação Itaú: instituto empresarial com governança heterônoma
+
+- **Contexto:** Programa de Ação Comunitária (1993) → Fundação Itaú Social (2000) → unificação de Itaú Cultural, Itaú Social e Itaú Educação e Trabalho (2019); fundação privada instituída pelo Itaúsa;
+- **Governança:** **Conselho Curador heterônomo** (membros do Itaúsa e do Itaú), Diretoria de 6 a 15 membros **não remunerados**, Conselho Fiscal e auditoria — governança em que a contraparte corporativa está **dentro** da estrutura, sem confundir controle com execução;
+- **Parceria e financiamento:** receita majoritariamente **financeira (93% em 2024)**, fruto do **fundo patrimonial criado em 2000** — a doação de PJ é **complemento de projeto, não sustáculo da operação**; o **FIA 2024** distribuiu **R$ 18,8 milhões** do 1% do IR para 40 projetos (2023: R$ 24,5 milhões), e há indicador público que limita os custos administrativos a **5%** do investido (*valores expressos em R$ mil na fonte consultada: confira o PDF original antes de reproduzi-los — seção 12*);
+- **Prestação de contas e transparência:** publicação de demonstrações financeiras e relatórios anuais, com as previsões de investimento e de remuneração por projeto — o formato que o financiador corporativo consome (Tabela 7);
+- **Lição:** **patrimônio rendedor dá autonomia e governança heterônoma dá credibilidade**. Para quem negocia, o recado é duplo: (i) a empresa parceira compra resultado auditável e comunicável, não caridade; e (ii) se a sua entidade quer esse tipo de parceria, precisa chegar com painel de indicadores, prestação de contas aprovada e um conselho que já tenha discutido o tema — a diligência do Caso 9 (seção 6.3) começa antes da primeira reunião.
+
+- **🔢 Você sabia?** No mesmo recorte de 11 casos verificados, o **Médicos Sem Fronteiras** registrou em 2024 receita de **€ 2.362 milhões**, com **97,9%** de origem privada e **85,3%** de pessoas físicas (€ 2.015 milhões), além de mais de **7,1 milhões de doadores** — e **recusa fundos públicos da União Europeia desde 2016**. Captação individual em escala é o que compra independência de agenda: enquanto a média brasileira é de **3,9 fontes** por entidade, o caso mostra o outro extremo da curva — e por que diversificar fontes não é luxo, é autonomia.
+
+**Síntese dos três casos contra a Tabela 7:** o governo compra aderência e cumprimento (TPE prova que dá para recusá-lo e seguir relevante); a empresa compra ESG com evidência (TETO entrega métrica auditada por terceiro); o instituto empresarial compra governança e continuidade (Itaú separa patrimônio, doação de projeto e controle). Três moedas, um mesmo artefato de defesa: **prestação de contas limpa + indicador declarado + transparência publicada**.
+
+---
+
+## 12. Itens não verificados e limites desta pesquisa
 
 Para você não transformar lacuna de pesquisa em afirmação categórica:
 
@@ -718,7 +870,13 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
 - **Decretos do Fundo Social SP** (nº 61.981/2016 e nº 57.501/2011): **não relidos** na fonte primária nesta rodada;
 - **IN STN nº 549/2024**: **não localizada** (existe a IN STN nº 01/1997); **Resolução BACEN nº 4.983/2022** não é livro-caixa de doações; **Decreto nº 8.727/2016** é sobre nome social, não sobre TSP;
 - **Remessa cruzada art. 66 → art. 22, IX**: observada no texto compilado do Planalto (inciso revogado em 2015); confirme em segunda fonte antes de usá-la em peça oficial;
-- **Percentuais de curiosidade setorial** sem fonte primária relida (por exemplo, composição do ISP por incentivo fiscal) devem vir **rotulados como estimativa**, nunca como dado oficial.
+- **Percentuais de curiosidade setorial** sem fonte primária relida (por exemplo, composição do ISP por incentivo fiscal) devem vir **rotulados como estimativa**, nunca como dado oficial;
+- **Números de execução do MROSC**: esta rodada **não localizou** quantitativo de parcerias (número de instrumentos ou valores executados) confirmado com ano — cite o **Painel Gestão** (MGI, 13/06/2025) como ferramenta, **não** as contagens de programas e parceiras, que **não foram reconfirmadas** e cuja URL oficial não foi localizada;
+- **Fundação Itaú**: os valores do demonstrativo financeiro de 2024 estão expressos em **R$ mil** na fonte consultada — confira o PDF original antes de reproduzi-los em material institucional (seção 11.3);
+- **TETO Brasil**: a captação de **~R$ 1,8 milhão** no jantar de dez/2025 é **declaração** da organização, sem balanço auditado localizado;
+- **Gerando Falcões / Fundo Dignidade**: o site informa aporte de R$ 100 mi da família Lemann e a Folha detalha R$ 50 mi + R$ 50 mi + R$ 25 mi — **divergência de fontes**; não cite o total como fato fechado;
+- **Operação Korban**: os percentuais de redirecionamento de recursos e o total de "R$ 53 mi em 2023–2024" **não foram reconfirmados** — use apenas os dados divulgados pela PF/CGU (seção 10.4);
+- **Reforma tributária**: os percentuais anuais de redução de ICMS/ISS do período 2029–2032 da LC nº 214/2025 **não foram relidos** nesta rodada — vale a transição geral **2026–2033**; a **ADI 7.920** (CNI vs. LC nº 224) e o **PLC 11/2026** seguem **pendentes** e podem alterar o desenho atual.
 
 ---
 
@@ -884,6 +1042,38 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
 }
 ```
 
+```question
+{
+  "id": "npof-13-q11",
+  "type": "multiple-choice",
+  "question": "No Acórdão 1355/2025-Plenário, qual irregularidade levou o TCU a suspender, cautelarmente, repasses do Ministério do Trabalho e Emprego a duas organizações?",
+  "options": [
+    "Ausência de auditoria externa anual na entidade",
+    "Fomento sem metas cronológicas e sem cronograma, com liberação em parcela única",
+    "Captação de recursos do exterior sem autorização prévia",
+    "Ausência do certificado CEBAS na área de atuação"
+  ],
+  "correct": 1,
+  "explanation": "A cautelar inaudita altera pars de 18/06/2025 suspendeu R$ 15,77 milhões e R$ 4,22 milhões porque os instrumentos não tinham metas com prazo (art. 22, II a IV, da Lei nº 13.019/2014) nem cronograma de desembolso (art. 42, III, da lei, c/c arts. 20 e 33 do Decreto nº 8.726/2016), com liberação em parcela única. A lição da execução em 2026 é essa: plano de trabalho sem parâmetro aferível e desembolso sem marcos viram risco direto de suspensão do repasse — não são detalhes de redação."
+}
+```
+
+```question
+{
+  "id": "npof-13-q12",
+  "type": "multiple-choice",
+  "question": "O Instituto Sou da Paz registrou receita de R$ 12.792.835 em 2022, dos quais 65% vieram de fundações do exterior. Em gestão de parcerias, esse dado indica:",
+  "options": [
+    "Diversificação efetiva de fontes, sem risco relevante",
+    "Exposição a cortes e a mudanças de prioridade do financiamento internacional",
+    "Contrato de gestão celebrado nos termos do MROSC",
+    "Dependência de eventos de arrecadação"
+  ],
+  "correct": 1,
+  "explanation": "Concentração regional de doador é risco assimétrico: quando uma única geografia de financiador muda de prioridade, 65% da receita desce junto. A resposta da lição é diversificar a base — a média brasileira é de 3,9 fontes por entidade — mantendo, em paralelo, a governança documentada (conselhos que fixam e monitoram metas) e a transparência auditável, para que a nova fonte encontre prova de resultado na diligência."
+}
+```
+
 ```matching
 {
   "question": "Associe cada regra de prazo ou limite ao dispositivo correto da MROSC e do seu regulamento federal:",
@@ -936,4 +1126,5 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
 > 5. Prazos-chave: OSC **90 dias** (art. 69), administração **150 dias** (art. 71), parceria > 1 ano presta contas **por exercício** (art. 49), relatórios finais federais em **30 e 60 dias** (Decreto, art. 65) e suspensão sancionatória de até **2 anos** com prescrição em **5 anos** (art. 73);
 > 6. **Transparência vende parceria**: 83% dos doadores buscam informação antes de doar, 49% já desistiram por notícia negativa e só 30% consideram as ONGs confiáveis (Pesquisa Doação Brasil 2024) — o art. 11, parágrafo único, inclusive, obriga a divulgar valores e a situação das contas;
 > 7. Gestione stakeholders por **poder × interesse** e traduza o mesmo trabalho em quatro moedas: aderência pública (governo), ESG e evidência (empresa), escala e inovação (fundo), história e transparência (doador individual);
-> 8. Diversifique a base: **68% dos recursos são restritos**, 59% dependem de governo e a média é de **3,9 fontes** — a parceria bem documentada é a que se renova.
+> 8. Diversifique a base: **68% dos recursos são restritos**, 59% dependem de governo e a média é de **3,9 fontes** — a parceria bem documentada é a que se renova;
+> 9. **2026 cobra em dobro:** o Decreto nº 11.948/2024 consolidou apostilamento de até **10%**, contas no **Transferegov.br** e divulgação no Portal da Transparência e no Mapa das OSC; a **ADPF 854** fez da publicação de emendas condição de repasse; o **TCU 1355/2025** suspendeu fomento sem metas, sem cronograma e com parcela única; e o ano-teste da reforma tributária reduziu em **10%** a dedutibilidade da doação de PJ — documentação completa e a tempo deixou de ser formalidade para virar estratégia de caixa.

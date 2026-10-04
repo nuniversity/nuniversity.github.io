@@ -1,6 +1,6 @@
 ---
 title: "Marketing e Comunicação para ONGs"
-description: "Marketing e comunicação no terceiro setor: a promessa de impacto e os 4Ps adaptados, seis personas de doação, funil completo de captação em 5 etapas com métricas e benchmarks, contas de CAC e LTV com o custo das taxas de plataforma, mix de canais com benchmarks de e-mail e redes (fonte e ano), plano de conteúdo de 90 dias, marca institucional e ética da comunicação (pobreza porn e promessa de destino da doação), receita própria e causa-marketing, casos brasileiros reais, protocolo de crise em 3 horas e uso responsável de IA generativa."
+description: "Marketing e comunicação no terceiro setor: a promessa de impacto e os 4Ps adaptados, seis personas de doação, funil completo de captação em 5 etapas com métricas e benchmarks, contas de CAC e LTV com o custo das taxas de plataforma, mix de canais com benchmarks de e-mail e redes (fonte e ano), plano de conteúdo de 90 dias, marca institucional e ética da comunicação (pobreza porn e promessa de destino da doação), receita própria e causa-marketing, casos brasileiros reais, marketing e captação na prática com casos verificados (Atados, Gerando Falcões e Médicos Sem Fronteiras) e ROI de campanha de 60 dias, curiosidades internacionais (GivingTuesday e CAF World Giving Report), protocolo de crise em 3 horas e uso responsável de IA generativa."
 order: 6
 difficulty: "intermediate"
 duration: "90 min"
@@ -17,6 +17,7 @@ Nesta lição você vai:
 - mapear as **seis personas de doação** e a pirâmide de capacidade de doação;
 - dominar o **funil completo de 5 etapas** com métricas, benchmarks e pontos de falha;
 - calcular **CAC, LTV e a régua LTV/CAC ≥ 3**, incluindo o custo escondido das **taxas de plataforma**;
+- fechar o **funil com ROI**: um exemplo trabalhado de **60 dias** com benchmarks de M+R, IDIS/Ipsos e TIC OSCs;
 - escolher canais pelo **mix** (função, custo, KPI e risco) e ler benchmarks de e-mail e redes **com fonte e ano**;
 - montar um **plano de conteúdo de 90 dias** e um calendário sazional (#TerçaPeloBem);
 - construir **marca institucional** e praticar comunicação ética — evitando **pobreza porn** e a **promessa de destino específico da doação**;
@@ -351,6 +352,8 @@ Misturar os pilares é o erro de calendário mais comum: a maior parte das ONGs 
 
 A janela de fim de ano brasileira é corrida: **Black Friday** (fim de novembro) → **Dia de Doar / GivingTuesday** (início de dezembro) → fechamento fiscal → incentivos como Lei do Bem e doações com CNPJ. O GivingTuesday Global Omnibus Survey tem **101 países** e **mais de 50 mil entrevistas** (jan/2025); no Brasil a marca da mobilização é **#TerçaPeloBem** (anteriormente, Dia de Doar).
 
+- **🔢 Você sabia?** O **GivingTuesday** nasceu em **2012**, no **92nd Street Y** de Nova York, e em **2025** movimentou **US$ 4,0 bilhões** nos Estados Unidos, com **38,1 milhões** de participantes em mais de **110 países** (GivingTuesday / AP News, 2025). A arquitetura é a mesma que esta lição ensina: **data fixa, pedido único e contagem pública** — escala não nasce de orçamento, nasce de calendário repetido.
+
 > [!NOTE]
 > **Planeje a sazonalidade como pico, não como sustentação.** A campanha de fim de ano concentra receita, mas não forma recorrência sozinha: quem entra em dezembro **precisa** receber o pedido de migração para mensal já no checkout, senão o cancelamento de janeiro come o ganho.
 
@@ -474,9 +477,184 @@ Vaquinha de **R$ 520 mil** com **taxa de 20% (≈ R$ 104 mil)** gerou críticas 
 
 ---
 
-## 9. Comunicação de crise em 3 horas
+## 9. Marketing e Captação na Prática: Casos Reais
 
-### 9.1 A cadeia de crise
+### 9.1 Por que estudar casos pelo funil
+
+Os números desta seção vêm de uma pesquisa com **11 casos verificados** (7 brasileiros e 4 internacionais), todos com CNPJ, registro estatutário ou demonstração financeira localizada — **nenhuma cifra aqui é estimativa própria**, e o que não foi confirmado em fonte primária aparece sinalizado como tal.
+
+Três leituras de marketing valem antes de qualquer tática:
+
+1. **Nenhum dos 11 depende majoritariamente de verba pública:** a MSF tem **97,9%** de receita privada (2024) e o Todos Pela Educação declara não receber recursos públicos — captação privada em escala existe, e é ela que compra independência de palavra;
+2. **No Brasil predomina a associação privada** (6 dos 7 casos brasileiros): "OS = terceiro setor" é percepção errada, e a forma jurídica não limita a ambição de captação;
+3. **Concentração é o risco nº 1 dos balanços:** Instituto Ayrton Senna **62%** da receita em royalties de marca (2024), Instituto Sou da Paz **65%** de fundações do exterior (2022) e Fundação Itaú **93%** de receitas financeiras (2024). Comunicação que vende "fontes diversificadas" sem ter diversificação é promessa frágil — e promessa frágil custa caro na hora da crise.
+
+- **🔢 Você sabia?** O antigo **World Giving Index** virou o **CAF World Giving Report**: a edição de **2025** cobre **101 países** e mostra que **64%** das pessoas doaram dinheiro em 2024 e **26%** voluntariaram (média de **9 horas**), com média global de **1,04%** da renda. A **Nigéria** liderou com **2,83%**, seguida por Egito (**2,45%**) e Gana e China (**2,19%**); o **Japão** fechou a lista com **0,16%** (CAF World Giving Report 2025). A posição do **Brasil não foi localizada** nos recortes consultados — não afirme ranking nacional sem conferir o anexo.
+
+```text
+  TRÊS CASOS, TRÊS ETAPAS DO FUNIL
+
+  [2] CONVERSÃO ................. GERANDO FALCÕES
+      produto-causa padronizado     R$ 5,1 mi -> R$ 13,7 mi
+      número auditável por unidade  (+266%) em 28 unidades
+             |
+             v
+  [3] RETENÇÃO .................. MÉDICOS SEM FRONTEIRAS
+      transparência como produto    85,3% da receita de
+      +7,1 mi de doadores           indivíduos; 79% à
+      (2024)                        missão (2024)
+             |
+             v
+  [5] CORPORATIVO / MAJOR GIFT .. ATADOS
+      produto B2B com data, escala  +100 empresas pagantes;
+      e relatório                   4 mil ONGs e 290 mil
+                                    voluntários na rede (2024)
+
+  REGRA DE USO: o caso que você copia define a etapa que
+  você vai MEDIR. Copiar um caso da etapa 5 e cobrar
+  alcance (etapa 1) é o erro mais caro da lista.
+```
+
+### 9.2 Atados (Brasil, 2012) — marketplace de dois lados: quem paga é a empresa
+
+**O que fizeram.** A Atados (Associação Atados, CNPJ 18.110.558/0001-95, fundada em 2012 por Daniel Morais e sócios) virou uma **plataforma que conecta voluntários, ONGs e empresas** — gratuita para ONGs e voluntários, com receita no **lado corporativo**: voluntariado corporativo e ESG para clientes como Heineken, Samsung e Coca-Cola. O produto vendido não é "ajuda": é **projeto de voluntariado com data, escala e relatório**, o que transforma engajamento em receita sem cobrar nada de quem recebe.
+
+**Números verificados:**
+
+| Número | Recorte | O que é |
+|---|---|---|
+| 4 mil ONGs, 290 mil voluntários e mais de 100 empresas na rede | 2024 | escala declarada da plataforma |
+| +70 projetos corporativos e +82 ONGs impactadas | 2024 | a operação que **paga** a conta |
+| +30 mil novos usuários, +60 mil inscrições e +400 ONGs publicadas | 2024 | demanda dos dois lados não pagantes |
+| +R$ 6 mi direcionados | sem ano declarado | **fluxo repassado**, não receita (sinalizado como não publicado) |
+
+*Fontes: empresas.atados.com.br/quem-somos; Época Negócios (03/2024). Receita anual não publicada.*
+
+**Tática aplicável.** Monetizar engajamento **cobrando do pagante**: a ONG que quer abrir o canal corporativo (etapa 5 do funil — major gift e patrocínio) deve empacotar o voluntariado como produto com três atributos de venda: **data fixa, número de participantes e relatório de impacto**. A plataforma entra como canal com KPI próprio — projeto entregue e empresa renovando —, nunca como "alcance".
+
+**Lição.** O lado que não paga recebe valor; o lado que paga recebe produto. E há um detalhe de comunicação que decide credibilidade: **+R$ 6 mi direcionados é fluxo repassado, não receita própria** — anunciá-los como "nossa captação" é o tipo de número que o balanço desmente.
+
+### 9.3 Gerando Falcões (Brasil, 2013) — produto-causa padronizado e comunidade de marca
+
+**O que fizeram.** CNPJ 18.463.148/0001-28 aberto em **25/06/2013** (Poá/SP), ligado ao livro *Jovens Falcões* (2011). A organização atua em **rede federada de ONGs com CNPJ próprio**: a célula central acelera e padroniza, e a ONG local preserva autonomia. O tripé de receita é **filantropia + negócios sociais (bazar e ASMARA) + escala pública** — e a marca da rede é o ativo que sustenta a captação de longo prazo.
+
+**Números verificados:**
+
+- captação das unidades aceleradas: **R$ 5,1 mi → R$ 13,7 mi (+266%)** em **28 unidades** (2022);
+- **23 mil formados em 2024 (+200%)** e **42 mil qualificados em 2025**;
+- **Fundo Dignidade** (mar/2025): meta de **R$ 250 milhões** e regra de gastar **10%** do patrimônio ao ano, com aportes das famílias Lemann, Setubal e Marinho — o site cita **R$ 100 mi** da Lemann e a **Folha (2025)** detalha **R$ 50 mi + R$ 50 mi em 2026 + R$ 25 mi em contratos**: **divergência sinalizada na pesquisa**;
+- Rouanet liberou **R$ 271.573,83** para a Orquestra Jovem (**DOU 2016**).
+
+**Tática aplicável.** **Padronizar o produto-causa por unidade** e comunicar escala com número auditável: "R$ 5,1 mi → R$ 13,7 mi em 28 unidades" é uma frase de venda, porque o doador entende a mecânica sem ler estudo nenhum. A mesma lógica vale para conteúdo: a rede publica **resultado por unidade**, não adjetivo de causa — e cada unidade vira prova social da seguinte.
+
+**Lição.** Comunicação de causa com número verificável **replica**; promessa genérica não. E o Fundo Dignidade mostra o fim do funil: a marca bem construída capta um dia e depois **deixa de pedir**, porque o patrimônio rende (regra de 10% ao ano) — captação é meio, perenidade é fim.
+
+### 9.4 Médicos Sem Fronteiras (França, 1971) — captação individual recorrente em escala
+
+**O que fizeram.** Fundada em Paris em **22/12/1971** por 13 profissionais, a MSF é associação sem fins lucrativos da **Lei francesa de 1901**, com 24 seções e 18 filiais. A comunicação é o próprio produto: o **dever de testemunhar** (denunciar o que vê no campo) sustenta a marca, e a captação individual massiva sustenta a independência — daí a **recusa de fundos públicos da União Europeia desde 2016**.
+
+**Números verificados:**
+
+- receita de **€ 2.362 mi em 2024** (**€ 2,6 bi em 2025**): **privada 97,9%**, dos quais **indivíduos € 2.015 mi = 85,3%** e **público 2,1%**;
+- **+7,1 milhões de doadores em 2024** e **+7,5 milhões em 2025**;
+- **79%** da receita foi à missão social; na seção francesa, **€ 90,1 de cada € 100** foram às missões, com reservas de **4,4 meses**;
+- **+65 mil profissionais** e **+17 milhões de consultas** em 2024.
+
+**Tática aplicável.** A base de **7,1 milhões de pequenos doadores** é o produto de marketing mais difícil de copiar: cada doador avulso é candidato a recorrência (etapa 3), e a prestação de contas pública (79% à missão, € 90,1 de cada € 100) é a peça que faz o avulso migrar para mensal. Comunicação de **transparência contínua** é o que transforma volume em previsibilidade.
+
+**Lição.** Diversificação de fonte é um **atributo de comunicação**: a MSF anuncia independência porque a conta fecha. No mesmo recorte de pesquisa, quem não diversificou expõe o oposto — **62%** em royalties de um único ativo (IAS, 2024) e **65%** em fundações de uma única região (Sou da Paz, 2022). Nenhum dos três erros de concentração começa na contabilidade: começa quando a comunicação decide anunciar a fonte em vez de anunciar a causa.
+
+### 9.5 Os três casos no funil: quadro comparativo
+
+| Caso | Etapa dominante | Tática | Número verificado | Erro que a tática evita |
+|---|---|---|---|---|
+| **Atados** | 5 — corporativo / major gift | marketplace de dois lados; paga a empresa | +100 empresas, 4 mil ONGs, 290 mil voluntários (2024) | cobrar do beneficiário; anunciar fluxo repassado como receita |
+| **Gerando Falcões** | 2 — conversão com produto-causa padronizado | benefício repetível em rede + prova de escala | R$ 5,1 mi → R$ 13,7 mi (+266%) em 28 unidades (2022); 42 mil qualificados (2025) | promessa genérica sem número verificável |
+| **MSF** | 3 — retenção e recorrência em escala | captação individual contínua + transparência como produto | 85,3% da receita de indivíduos; +7,1 mi de doadores (2024) | dependência de um único financiador |
+
+> [!WARNING]
+> **Anunciar como receita própria o que é fluxo repassado ou estimativa de rede.** No Atados, os **"+R$ 6 mi direcionados"** são fluxo repassado por parceiros, **não receita** da entidade (sinalizado como não publicado na pesquisa). Na Habitat for Humanity, os **US$ 3,1 bi** da rede são estimativa **não auditada** de afiliados autônomos em +70 países, contra **US$ 362,1 mi** consolidados da sede no FY2024 — em rede federada, cada afiliado tem contabilidade própria. Publicar esses números como "nossa captação" infla a promessa de impacto; quando alguém confere o balanço, o que cai é confiança — e **49%** dos doadores já deixaram de doar depois de uma notícia negativa na mídia (Pesquisa Doação Brasil 2024, IDIS/Ipsos). A régua é simples: **receita, fluxo repassado e estimativa de rede são três linhas diferentes**, e cada uma só entra na comunicação com o rótulo que lhe cabe.
+
+**Antes de copiar um caso para o seu material, cinco perguntas:**
+
+1. O número é **receita própria, fluxo repassado ou estimativa de rede** — e o meu texto diz qual dos três é?
+2. A fonte tem **ano** e é **demonstração financeira**, declaração formal ou documentação de fornecedor? (Só a primeira serve como prova.)
+3. Em **qual etapa do funil** o caso é forte — e essa etapa é o meu gargalo, ou estou copiando a força dos outros?
+4. A **forma jurídica e o país** do caso permitem a mesma tática? (Associação privada no Brasil, 501(c)(3) nos EUA e FCRA na Índia têm regras de captação diferentes.)
+5. O caso depende de **um único doador, marca ou fundação**? Qual é o percentual de concentração — **62%**, **65%** ou **93%** são riscos de mesa, não de campanha.
+
+### 9.6 Exemplo trabalhado 6 — funil completo e ROI de 60 dias
+
+**Contexto:** ONG de saúde comunitária, campanha de **60 dias**. Metas publicadas **antes** do primeiro anúncio: **400 novos doadores**, dos quais **30%** migrando para recorrência no checkout, e **CAC máximo de R$ 25**. A campanha assume público majoritariamente mobile: **70%** das OSCs têm perfil em Instagram/TikTok e **29%** recebem doações online (TIC OSCs 2025), sobre **150,0 milhões** de usuários de redes no Brasil (**70,4%** da população — DataReportal, Digital 2026 — Brazil).
+
+| Etapa | Cálculo | Resultado |
+|---|---|---|
+| Custo do período | mídia R$ 6.000 + equipe 90 h × R$ 55 (R$ 4.950) | **R$ 10.950** |
+| Impressões | R$ 6.000 ÷ CPM de R$ 10,00 por mil | **600.000** |
+| Clique (CTR de 0,9%) | 600.000 × 0,009 | **5.400** visitantes (CPC de **R$ 1,11**) |
+| Conversão ponderada | 80% mobile a 8% + 20% desktop a 11% = **8,6%** (M+R 2025) | **464** doações |
+| E-mail (4 envios × 8.000) | 32.000 envios × **0,59%** de CTR (M+R 2026) = 189 cliques; 40% chegam à página = 76 visitas × 8,6% | **+7** doações |
+| **Total de novos doadores** | 464 + 7 | **471** (meta de 400: **atingida**) |
+| Recorrência | 464 × 30%, com o pedido **dentro** do checkout | **139** mensais (29,5% da coorte) |
+| **CAC real** | R$ 10.950 ÷ 471 | **R$ 23,25** (meta de R$ 25: **atingida**) |
+| CAC por recorrente | R$ 10.950 ÷ 139 | **R$ 78,78** |
+
+*Custo do e-mail, pela mesma tabela de benchmarks: **US$ 54** por 1.000 e-mails enviados (M+R Benchmarks 2026) — 32 mil envios custariam **US$ 1.728**, valor **não convertido** em reais porque a base é dos EUA e não brasileira.*
+
+**Receita e ROI da coorte:**
+
+| Etapa | Cálculo | Resultado |
+|---|---|---|
+| Doadores avulsos | 471 − 139 | **332** |
+| LTV do avulso | retenção anual de **44%** (NextAfter / A Direct Solution, 2025) → 1 ÷ 0,56 ≈ 1,79 doações × R$ 60 | **R$ 107** |
+| LTV do recorrente | churn medido de **6%** → 1 ÷ 0,06 ≈ 17 meses × R$ 45 | **R$ 765** |
+| LTV da coorte | 332 × R$ 107 + 139 × R$ 765 | **R$ 141.859** |
+| **ROI de 60 dias** | (R$ 141.859 − R$ 10.950) ÷ R$ 10.950 | **≈ 1.195%** (R$ 12,95 de LTV por R$ 1 investido) |
+| Payback por recorrente | R$ 78,78 ÷ R$ 45 | **1,8 mês** — só fecha no **2º mês** de recorrência |
+
+**Leitura do resultado em três frases:** (i) o CAC de R$ 23,25 passou na régua, mas o número que decide orçamento é o **CAC por recorrente (R$ 78,78)** — e ele só se paga no segundo mês, ou seja, a campanha de 60 dias é paga pelo caixa de antes; (ii) o e-mail entregou apenas **7 doações** no topo do funil, o que não o torna canal ruim: custa **US$ 54 por 1.000 envios** e o valor dele está na **etapa 3** (retenção), não em volume de captação; (iii) sem separar avulso de recorrente, o ROI pareceria idêntico para uma coorte de avulsos (LTV de R$ 107) e para uma de recorrentes (R$ 765) — **cerca de 7 vezes de diferença**. E o insumo do topo não é anúncio solto: **83%** dos doadores buscam informação antes de doar (**+8 p.p.** em relação a 2022, Pesquisa Doação Brasil 2024), por isso a peça educativa antecede o pedido.
+
+> [!NOTE]
+> **Como usar este ROI sem se enganar.** Todos os benchmarks vêm de fora do Brasil (M+R e NextAfter dos EUA, TIC OSCs brasileira só para presença digital, IDIS/Ipsos para comportamento de doação): trate as taxas como **faixa de trabalho** e reavalie a campanha com a **sua própria base** depois do primeiro ciclo. O ROI de **≈ 1.195%** é o resultado de um funil **completo** — se a etapa 3 (retenção) falhar, o mesmo anúncio gera avulsos de LTV de R$ 107 e o número despenca: por isso o churn mensal é métrica de campanha, não de relatório anual.
+
+**Sensibilidade: o que a etapa 3 faz com o ROI da mesma campanha**
+
+| Cenário | Churn mensal | Permanência | LTV do recorrente | LTV da coorte | ROI |
+|---|---|---|---|---|---|
+| Base medida na campanha | 6% | 1 ÷ 0,06 ≈ 17 meses | R$ 765 | 332 × R$ 107 + 139 × R$ 765 = **R$ 141.859** | **≈ 1.195%** |
+| Retenção falhando | 10% | 1 ÷ 0,10 = 10 meses | R$ 450 | 332 × R$ 107 + 139 × R$ 450 = **R$ 98.074** | **≈ 796%** |
+| Retenção bem gerida | 3% | 1 ÷ 0,03 ≈ 33 meses | R$ 1.485 | 332 × R$ 107 + 139 × R$ 1.485 = **R$ 241.939** | **≈ 2.109%** |
+
+*A mesma mídia, a mesma copy e o mesmo checkout: o que muda o ROI é quase integralmente o churn da base recorrente — de **796%** a **2.109%** sobre o mesmo investimento de R$ 10.950. Por isso a régua de churn (< 3% a < 6% ao mês) é decisão de captação, não de contabilidade.*
+
+**Ordem de cálculo do ROI — coloque na sequência correta:**
+
+```dragdrop
+{
+  "question": "Ordene os passos do cálculo de ROI de uma campanha de captação, do custo ao retorno:",
+  "items": [
+    "Somar mídia, equipe e ferramentas no custo real do período",
+    "Converter alcance em visitas e visitas em doações com os benchmarks de conversão",
+    "Separar a coorte em doadores avulsos e doadores recorrentes",
+    "Aplicar o LTV do avulso (retenção anual medida) e o LTV do recorrente (churn medido)",
+    "Dividir o LTV da coorte pelo custo do período para achar o ROI"
+  ],
+  "correctOrder": [
+    "Somar mídia, equipe e ferramentas no custo real do período",
+    "Converter alcance em visitas e visitas em doações com os benchmarks de conversão",
+    "Separar a coorte em doadores avulsos e doadores recorrentes",
+    "Aplicar o LTV do avulso (retenção anual medida) e o LTV do recorrente (churn medido)",
+    "Dividir o LTV da coorte pelo custo do período para achar o ROI"
+  ],
+  "explanation": "A ordem importa porque cada passo depende do anterior: sem o custo completo (mídia + equipe + ferramentas) não há CAC verdadeiro; sem a conversão medida não há doadores; sem separar avulsos de recorrentes o LTV é uma média que esconde a diferença de 7 vezes entre os dois perfis; e só no fim o ROI fecha. Pular a separação da coorte é o erro que faz campanha ruim parecer rentável e campanha boa parecer cara."
+}
+```
+
+---
+
+## 10. Comunicação de crise em 3 horas
+
+### 10.1 A cadeia de crise
 
 ```text
   CRISE REPUTACIONAL — CADEIA DE 3 HORAS
@@ -499,7 +677,7 @@ Vaquinha de **R$ 520 mil** com **taxa de 20% (≈ R$ 104 mil)** gerou críticas 
   DOIS ciclos negativos em vez de um.
 ```
 
-### 9.2 Exemplo trabalhado 5 — protocolo de crise de 3 horas
+### 10.2 Exemplo trabalhado 5 — protocolo de crise de 3 horas
 
 **Contexto:** post viral às 21h acusando a ONG de usar "só 10%" em programas, com print de uma taxa de plataforma. Porta-voz único, plantão acionado.
 
@@ -519,13 +697,13 @@ Vaquinha de **R$ 520 mil** com **taxa de 20% (≈ R$ 104 mil)** gerou críticas 
 
 ---
 
-## 10. IA generativa na comunicação da ONG
+## 11. IA generativa na comunicação da ONG
 
-### 10.1 O que as OSCs já usam
+### 11.1 O que as OSCs já usam
 
 **1 em cada 3 OSCs (33%)** usa IA generativa no Brasil: **textos 27%**, **imagens e vídeos 20%** e **código 10%**, com liderança de religião (**45%**) e educação (**42%**) — TIC OSCs 2025 (Cetic.br/NIC.br, 07/07/2026). A pesquisa cita uso "no relacionamento com o público ou na captação de recursos".
 
-### 10.2 Uso defensável × uso problemático
+### 11.2 Uso defensável × uso problemático
 
 | Uso defensável | Uso problemático |
 |---|---|
@@ -539,9 +717,9 @@ Vaquinha de **R$ 520 mil** com **taxa de 20% (≈ R$ 104 mil)** gerou críticas 
 
 ---
 
-## 11. Métricas: do alcance ao LTV
+## 12. Métricas: do alcance ao LTV
 
-### 11.1 RFM-lite: recência × frequência × valor
+### 12.1 RFM-lite: recência × frequência × valor
 
 | Perfil (RFM) | Leitura | Ação recomendada |
 |---|---|---|
@@ -550,7 +728,7 @@ Vaquinha de **R$ 520 mil** com **taxa de 20% (≈ R$ 104 mil)** gerou críticas 
 | Frequência alta | engajado além da doação | trilhar para **embaixador** (*peer-to-peer*) |
 | Recência alta + valor alto | major donor | **reunião**, visita técnica, relatório exclusivo |
 
-### 11.2 Do funil linear ao loop: o CAC líquido
+### 12.2 Do funil linear ao loop: o CAC líquido
 
 Retenção e reação **alimentam o alcance**. O KPI que captura isso é:
 
@@ -558,7 +736,7 @@ $$CAC\ \text{líquido} = CAC\ \text{bruto} - \text{tráfego orgânico gerado por
 
 É a razão de existir do *peer-to-peer* e da vaquinha de aniversário: cada doador que traz outro doador **desconta** o custo da mídia. Quando o CAC líquido cai, o funil virou **loop**.
 
-### 11.3 Painel mínimo e CRM
+### 12.3 Painel mínimo e CRM
 
 Seis números bastam para governar a captação: **alcance qualificado** (etapa 1), **custo por clique** (etapa 2a), **conversão da página** (etapa 2b), **churn mensal da base recorrente** (etapa 3), **taxa de recuperação de cobranças** (etapa 3) e **número de reuniões de major gift** (etapa 5). Se alguma métrica mede apenas a etapa 1, ela está incompleta.
 
@@ -566,9 +744,9 @@ Seis números bastam para governar a captação: **alcance qualificado** (etapa 
 
 ---
 
-## 12. Armadilhas, mitos e itens não verificados
+## 13. Armadilhas, mitos e itens não verificados
 
-### 12.1 Armadilhas que mais aparecem na prática
+### 13.1 Armadilhas que mais aparecem na prática
 
 > [!WARNING]
 > **Armadilhas desta lição:**
@@ -581,7 +759,7 @@ Seis números bastam para governar a captação: **alcance qualificado** (etapa 
 > - **Publicar número sem fonte e ano** — inclusive com IA generativa, que acelera a produção e também o erro;
 > - **Não medir o CAC completo:** mídia + agência + ferramenta + **tempo de equipe**.
 
-### 12.2 Itens sinalizados como não verificados
+### 13.2 Itens sinalizados como não verificados
 
 Para você não transformar lacuna de pesquisa em afirmação categórica:
 
@@ -724,6 +902,38 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
 }
 ```
 
+```question
+{
+  "id": "npof-06-q9",
+  "type": "multiple-choice",
+  "question": "O Atados é gratuito para voluntários e ONGs e cobra empresas por voluntariado corporativo e ESG. Como classificar corretamente esse modelo de captação?",
+  "options": [
+    "Captação pública concorrida, baseada em chamamento público",
+    "Marketplace de dois lados em que o lado corporativo é o que paga",
+    "Cooperativa de trabalho com contribuição fixa dos associados",
+    "Fundo patrimonial que só aplica suas reserves financeiras"
+  ],
+  "correct": 1,
+  "explanation": "O Atados é um marketplace de dois lados: voluntários e ONGs não pagam, e o pagante é a empresa (Heineken, Samsung e Coca-Cola entre as mais de 100 parceiras). A monetização cobra de quem tem disposição de pagar e nunca do beneficiário — e em 2024 a rede tinha 4 mil ONGs e 290 mil voluntários, enquanto os '+R$ 6 mi direcionados' eram fluxo repassado, não receita própria."
+}
+```
+
+```question
+{
+  "id": "npof-06-q10",
+  "type": "multiple-choice",
+  "question": "Sobre o CAF World Giving Report 2025 (101 países, dados de 2024), o que é correto afirmar?",
+  "options": [
+    "A Indonésia segue em primeiro lugar porque lidera o ranking desde 2017",
+    "O Brasil ocupou uma das primeiras posições em doação como percentual da renda",
+    "A Nigéria liderou com 2,83% da renda, a média global foi de 1,04% e a posição do Brasil não foi localizada nos recortes consultados",
+    "O relatório mede apenas doação em dinheiro, sem voluntariado nem ajuda"
+  ],
+  "correct": 2,
+  "explanation": "No CAF World Giving Report 2025 (101 países), a Nigéria liderou com 2,83% da renda, seguida por Egito (2,45%) e Gana e China (2,19%), com média global de 1,04%; a Indonésia, que liderava desde 2017, caiu para a 21ª posição (1,55%) e o Japão ficou em último (0,16%). O relatório mede doar, ajudar e voluntariar — e a posição do Brasil não foi localizada, por isso não pode ser afirmada sem conferir o anexo."
+}
+```
+
 ```matching
 {
   "question": "Associe cada canal à sua função principal no funil e ao KPI que deve ser cobrado dele:",
@@ -747,7 +957,8 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
 > - **Prometer destino específico da doação** sem publicar a política de custos antes é o caminho mais curto para uma crise de checkout;
 > - **Pobreza porn** e imagem gerada por IA sem consentimento queimam o ativo mais caro da ONG: confiança;
 > - O funil só funciona completo: **alcance, conversão, retenção, reação e major gift** — pular a etapa 3 derruba o LTV;
-> - **CAC** sem equipe e ferramenta dentro da conta é subnotificação de custo; **LTV** sem base medida é ficção de planilha.
+> - **CAC** sem equipe e ferramenta dentro da conta é subnotificação de custo; **LTV** sem base medida é ficção de planilha;
+> - Ao repetir um caso de terceiros, confirme **fonte, ano e natureza do número**: receita própria, fluxo repassado e estimativa de rede não são a mesma coisa.
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
@@ -759,6 +970,8 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
 > - Conteúdo segue **AIDA com um CTA por peça** e os três pilares: impacto **50–60%**, educativo **20–30%** e apelo **10–20%**;
 > - Confiança é o ativo mais escasso: falta de transparência entre não doadores saltou de **12% (2020) para 38% (2024)**, e **49%** já deixaram de doar após notícia negativa (Pesquisa Doação Brasil 2024);
 > - Crise se resolve com a **cadeia de 3 horas** — fatos, posição, remédio, retomada — **publicando só depois do remédio decidido**; e a **IA generativa** acelera produção, nunca substitui fonte, consentimento e base legal.
+> - **Casos reais ensinam por etapa do funil:** o Atados cobra do lado corporativo (etapa 5, +100 empresas), a Gerando Falcões padroniza o produto-causa com número auditável (etapa 2, +266% em 28 unidades) e a MSF transforma transparência em recorrência (etapa 3, **85,3%** da receita vinda de indivíduos e **+7,1 mi** de doadores em 2024);
+> - **Receita, fluxo repassado e estimativa de rede são três linhas diferentes** — e o ROI de uma campanha só fecha quando a etapa 3 está dentro da conta: com o mesmo investimento de R$ 10.950, o ROI do exemplo 6 vai de **≈ 796%** (churn de 10%) a **≈ 2.109%** (churn de 3%).
 
 
 

@@ -1,6 +1,6 @@
 ---
 title: "Síntese do Curso e Projeto Final"
-description: "Síntese profunda das 14 lições do curso em um mapa único de decisão, modelo integrado de ética × compliance × impacto (teste ECI) aplicado a dois cenários resolvidos, tendências de 2025–2030 (IA generativa, Pix, ESG, reforma tributária e transparência), dilemas éticos com resposta obrigatória e o Projeto Final completo em 6 estágios e 6 a 8 semanas, com entregáveis, checklists por estágio, rubrica de avaliação e dois capstones resolvidos — educação e cultura/ambiente."
+description: "Síntese profunda das 14 lições do curso em um mapa único de decisão, modelo integrado de ética × compliance × impacto (teste ECI) aplicado a dois cenários resolvidos, tendências de 2025–2030 (IA generativa, Pix, ESG, reforma tributária e transparência), atualizações normativas de 2026 (LC 214/2025, LC 224/2025, LC 235/2026, MROSC e jurisprudência) com checklist de compliance, três casos reais de referência (Instituto Ayrton Senna, Fundação Itaú e Médicos Sem Fronteiras), dilemas éticos com resposta obrigatória e o Projeto Final completo em 6 estágios e 6 a 8 semanas, com entregáveis, checklists por estágio, rubrica de avaliação, dois capstones resolvidos — educação e cultura/ambiente — e 9 questões práticas."
 order: 15
 difficulty: "intermediate"
 duration: "120 min"
@@ -9,7 +9,7 @@ duration: "120 min"
 
 Esta lição fecha o percurso em três movimentos. Primeiro, **revisitamos as 14 lições anteriores** e as reconvertemos em um mapa único de decisão para organizações da sociedade civil brasileiras — cada lição com seu conceito-chave, sua aplicação concreta e o erro típico que ela existe para evitar. Depois, **costuramos os temas transversais** — ética, compliance e impacto — em um só modelo de decisão, o **teste ECI**, e o aplicamos a dois cenários resolvidos passo a passo. Por fim, você executa o **Projeto Final (capstone)**: em 6 a 8 semanas, você desenha uma ONG brasileira completa, do estatuto social ao painel de indicadores, com entregáveis pesados, checklist por estágio e rubrica pública de avaliação.
 
-Entre o segundo e o terceiro movimento entra o que ditará a qualidade da sua decisão na próxima década: a Seção 4 reúne as **tendências de 2025 a 2030** — IA generativa sem política, Pix como infraestrutura de captação, crise de confiança, ESG e clima, reforma tributária e transparência ativa —, cada uma traduzida em implicação prática para a sua ONG.
+Entre o segundo e o terceiro movimento entra o que ditará a qualidade da sua decisão na próxima década: a Seção 4 reúne as **tendências de 2025 a 2030** — IA generativa sem política, Pix como infraestrutura de captação, crise de confiança, ESG e clima, reforma tributária e transparência ativa —, cada uma traduzida em implicação prática para a sua ONG; a Seção 5 atualiza o que **já está vigente em 2026** — norma, vigência e impacto — e entrega o checklist de compliance que o dossiê tem que trazer assinado. Antes de executar o capstone, a Seção 7 abre **três casos reais** — Instituto Ayrton Senna, Fundação Itaú e Médicos Sem Fronteiras — como referência de estrutura jurídica, financiamento, governança e resultados, com o que copiar e o que evitar em cada estágio.
 
 ```text
 =====================================================================
@@ -50,9 +50,11 @@ Nesta lição você vai:
 - operar o **modelo ECI** (ética × compliance × impacto) com o teste de 10 perguntas e a escada de decisão ética em 5 passos;
 - resolver **dois cenários trabalhados**: um dilema ético de captação e uma decisão de gestão que integra três lições;
 - ler as **tendências 2025–2030** com dados verificados e traduzi-las em agenda de ação;
+- atualizar o capstone com o que **já está vigente em 2026** — ano-teste da reforma tributária, corte de 10% nos incentivos, MROSC consolidado e jurisprudência do TCU e do STJ — e assinar o **checklist de compliance 2026**;
 - executar o **capstone em 6 estágios**, com entregáveis, checklists, calendário de 6 a 8 semanas e rubrica de 6 critérios;
 - estudar **dois capstones completos e resolvidos** — uma ONG de educação e uma de cultura e ambiente — com missão, estrutura, metas e KPIs;
-- responder **7 questões práticas** com explicação e concluir com os pontos-chave do curso.
+- usar **três casos reais** (Instituto Ayrton Senna, Fundação Itaú e Médicos Sem Fronteiras) como referência de estrutura jurídica, financiamento, governança e resultados — com o que copiar, o que evitar e o mapeamento para cada estágio;
+- responder **9 questões práticas** com explicação e concluir com os pontos-chave do curso.
 
 ---
 
@@ -310,7 +312,7 @@ Registro documentado transforma "boa intenção" em defesa institucional: em con
 
 ## 4. Tendências 2025–2030: o que Muda para a sua ONG
 
-Nesta seção, cada tendência é apresentada com o **dado verificado** que a sustenta e a **implicação prática** que ela impõe à gestão. Nada aqui é palpite: os números vêm de pesquisas com fonte e ano, e os itens sinalizados como não verificados foram separados na Seção 5.3.
+Nesta seção, cada tendência é apresentada com o **dado verificado** que a sustenta e a **implicação prática** que ela impõe à gestão. Nada aqui é palpite: os números vêm de pesquisas com fonte e ano, e os itens sinalizados como não verificados foram separados na Seção 6.3.
 
 ### 4.1 IA generativa institucionalizada, mas sem governança
 
@@ -403,11 +405,94 @@ A filantropia climática global movimentou **US$ 11,7–18,4 bilhões em 2024 = 
 
 ---
 
-## 5. Dilemas Éticos Recorrentes e a Resposta Obrigatória
+## 5. O que Há de Novo em 2026
+
+A Seção 4 mostrou **para onde** o setor caminha até 2030; esta seção responde a outra pergunta, mais imediata: **o que já está vigente em 2026 e o que ainda está em disputa**. Ela existe porque o capstone exige que o Manual de Compliance (Estágio 5) cite **dispositivo e ano** — e porque 2026 é o ano em que quatro movimentos correm ao mesmo tempo: o **ano-teste da reforma tributária**, o **corte linear de 10%** nos incentivos federais, a **consolidação do MROSC** e a **jurisprudência do TCU e do STJ** sobre parcerias, transparência e responsabilidade de dirigentes. Capstone planejado sob regra de 2024 é capstone que já nasce atrasado.
+
+### 5.1 Atualizações normativas e de compliance: norma × vigência × impacto
+
+| Norma, ato ou decisão | Vigência / marco verificado | Impacto na OSC e no capstone |
+|---|---|---|
+| **LC nº 214/2025** (16/01/2025) | Ano-teste **2026**: CBS de **0,9%** (art. 582 do Decreto nº 12.955/2026) + IBS de **0,1%**, compensados com PIS/COFINS no mesmo período; transição até **2033** | Imunidade alcança a **saída, não as aquisições** (art. 9º, § 4º); **patrocínio com contrapartida sofre IBS/CBS**; nota fiscal obrigatória mesmo em operações imunes |
+| **Ato Conjunto RFB/CGIBS nº 1/2025** (23/12/2025) | Exercício de **2026** | Cumprir as obrigações acessórias do ano-teste equivale a **taxa de prova isenta** |
+| **LC nº 224/2025** (26/12/2025) | IRPJ e II desde **01/01/2026**; demais tributos federais desde **01/04/2026** | Corte linear de **10%** de todos os incentivos, preservando imunidades e as qualificações **OSCIP, OS e CEBAS** |
+| **LC nº 227/2026** (13/01/2026) | Vigente | Cria o **CGIBS** e disciplina o processo administrativo do IBS — prever recurso e calendário de defesa |
+| **IN RFB nº 2.307/2026** | Substitui o Anexo Único da IN RFB nº 2.305/2025 (conferir publicação no DOU) | **Revogou o item 26** — a dedutibilidade da doação de PJ a OSC caiu no corte — e **manteve o item 34** (art. 15 da Lei nº 9.532/1997, isenções da entidade) |
+| **LC nº 235/2026, art. 11** (27/08/2026) | Vigente | Reescreveu o **inciso V do § 8º do art. 4º da LC nº 224/2025**: preserva os benefícios do art. 15 da Lei nº 9.532/1997 e dos arts. 13, IV, e 14, X, da MP nº 2.158-35/2001 |
+| **ADI 7.920** (STF) e **PLC 11/2026** | **Pendentes**, em tramitação | Acompanhar: a contestação do corte pela CNI e a tentativa de restringir o inciso V do § 8º |
+| **Decreto nº 11.948/2024** (12/03/2024) | Vigente | MROSC: apostilamento **≤ 10%**, vigência **≤ 10 anos**, contas finais **≤ 150 dias**, prestação de contas no **Transferegov** e divulgação no Portal da Transparência + Mapa das OSC |
+| **ADPF 854 c/c ADI 7688** | Decisão de 02/12/2024; suspensão de repasses em **03/01/2025** | Transparência de emendas de **2020–2024**: **13 ONGs** tiveram repasses suspensos; na auditoria da CGU, só **15%** das 26 entidades publicaram adequadamente |
+| **Acórdão TCU nº 1355/2025-Plenário** (18/06/2025) | Cautelar *inaudita altera pars* vigente | Fomento **sem metas cronológicas e sem cronograma**, com **parcela única**, suspendeu repasses do MTE |
+| **TCU nº 6107/2025-1ª Câmara** | Decidido em 2025 | Associação extinta antes da citação: **citação nula**, mas **débito e multa ficam com os dirigentes** quando falta destinação do patrimônio (art. 61 do Código Civil) |
+| **STJ, 3ª e 4ª Turmas (2024–2025)** | Tese consolidada | **Associação e fundação sem fins lucrativos não podem pedir recuperação judicial** (Lei nº 11.101/2005 só alcança empresários; exceção: cooperativas médicas, ADI 7.442/STF) |
+| **TST, 7ª Turma (2025) e STJ, REsp 1.812.929/DF** | Decidido em 2023–2025 | Ex-conselheiro que **não praticou gestão nem aprovou contas** fica fora da execução; a desconsideração da personalidade (art. 50 do Código Civil) se limita a quem **exerceu cargo diretivo** |
+| **PDMA INSS–MPF–DPU–OAB–AGU** (14/05/2025) | **9,42 milhões** de benefícios contestáveis (mar/2020–mar/2025) | Desconto de mensalidade associativa no INSS **só com autorização**; a entidade tem **15 dias úteis** para devolver via GRU ou comprovar autorização |
+
+**Cronograma da transição — o que muda a cada período:**
+
+| Período | O que acontece | Efeito prático para a OSC |
+|---|---|---|
+| **2026** | Ano-teste: **CBS 0,9% + IBS 0,1%**, compensados com PIS/COFINS; obrigações acessórias = taxa de prova isenta | Corte de **10%** no IRPJ/II desde 01/01 e nos demais federais desde 01/04; manter notas; revisar doações de PJ |
+| **2027–2028** | Fim do **PIS/COFINS**, **IPI a zero** (exceto ZFM) e Imposto Seletivo | Simular contratos com e sem contrapartida de patrocínio; migrar regimes |
+| **2029–2032** | Transição estadual e municipal (redução de ICMS/ISS e ampliação do IBS) | Renegociar reajustes e repasses estaduais e municipais |
+| **2033** | Vigência plena do IBS | Consolidar o regime e encerrar as simulações |
+
+**Trâmite legislativo a acompanhar** (status verificado, sem URL arquivada — cite com cautela): **PL 736/2022** (CNO sob gestão do MJSP, rel. Dep. Reimont, CASP, 15/04/2025), **PL 5.198/2023** (restrições a recursos do exterior) e **PL 6047/2023** (CPI das ONGs, aprovada na CTFC em 26/03/2025). O **PL 3.850/2021 não é o Marco Regulatório das OSCs** — não cite esse número como tal.
+
+- **🔢 Você sabia?** Em **18/06/2025** o TCU suspendeu, por cautelar *inaudita altera pars*, repasses do Ministério do Trabalho às entidades **Unisol** e **CEA** — **R$ 15,77 milhões** e **R$ 4,22 milhões** — porque os termos de fomento **não tinham metas cronológicas nem cronograma** e previam **parcela única**. Em 2025, o TCU consolidou-se como a principal vara das OSCs (Acórdão 1355/2025-Plenário).
+
+### 5.2 Checklist de compliance 2026 — itens verificados
+
+Itens abaixo conferidos na pesquisa de atualizações; nada aqui é estimativa. Marque apenas o que estiver **documentado**:
+
+```text
+[ ] 01. Receitas e despesas mapeadas por natureza (imune / isenta / tributável)
+        no cenário LC 214/2025
+[ ] 02. Nota fiscal prevista mesmo nas operações imunes (LC 214/2025)
+[ ] 03. Simulação do ano-teste 2026: CBS 0,9% + IBS 0,1% compensados com
+        PIS/COFINS no mesmo período (Decreto 12.955/2026 + Ato Conjunto
+        RFB/CGIBS 1/2025)
+[ ] 04. Cláusulas de patrocínio com contrapartida revisadas (sofrem IBS/CBS)
+[ ] 05. Pasta de defesa fiscal montada: item 34 da IN RFB 2.307/2026 + inciso V
+        do § 8º do art. 4º da LC 224 (red. LC 235/2026) + FAQ da RFB
+[ ] 06. Doadores de PJ comunicados: a dedutibilidade da doação caiu no corte de
+        10% (item 26 revogado) — revisar a política de captação institucional
+[ ] 07. ADI 7.920 e PLC 11/2026 registrados no calendário de riscos
+[ ] 08. Toda parceria de fomento com metas cronológicas, cronograma de
+        desembolso e justificativa documentada de parcela única (TCU 1355/2025)
+[ ] 09. Recebimento e aplicação de emendas parlamentares divulgados (ADPF 854)
+[ ] 10. Prestação de contas no Transferegov e publicação no Portal da
+        Transparência + Mapa das OSC (Decreto 11.948/2024)
+[ ] 11. Apostilamento ≤ 10%, vigência ≤ 10 anos e contas finais ≤ 150 dias
+[ ] 12. Autorização expressa/biométrica de todo desconto associativo no INSS;
+        prazo de 15 dias úteis do PDMA no calendário de obrigações
+[ ] 13. Dissolução prevista com destinação do patrimônio (art. 61 do Código
+        Civil) antes de encerrar qualquer contrato público aberto
+[ ] 14. Crise financeira planejada por acordo, reestruturação ou dissolução —
+        nunca por recuperação judicial, vedada a associações e fundações
+[ ] 15. Atas, convocações e aprovação de contas de conselheiros guardadas:
+        só responde quem praticou gestão ou aprovou contas (TST, RR-100039)
+```
+
+### 5.3 Como as atualizações de 2026 entram no capstone
+
+| Estágio | O que entra a partir de 2026 | Verificação de sucesso |
+|---|---|---|
+| **1 — Conceito e estrutura** | Cláusula de destinação do patrimônio remanescente redigida **antes** de qualquer contrato público (art. 61 do Código Civil) | Minuta com o art. 61 citado e sem divisão de bens entre associados |
+| **3 — Sustentabilidade** | Política de doação de PJ revista (corte de 10%) e patrocínio com contrapartida orçado **já com IBS/CBS** | Simulação de 2026 anexada ao plano de 3 a 5 fontes |
+| **5 — Impacto e compliance** | Manual de Compliance com a tabela 5.1 anexada, cronograma do ano-teste e checklist 5.2 assinado | Calendário mês a mês de obrigações acessórias do exercício de 2026 |
+| **6 — Dossiê e defesa** | Resposta pronta para a arguição: qual dispositivo **vigente** sustenta a escolha tributária — e o que está pendente de ADI | Citação com norma, data e status processual, sem imprecisão |
+
+> [!IMPORTANT]
+> **Vigente não é o mesmo que definitivo.** A LC nº 224/2025 está sendo atacada na ADI 7.920 e defendida pelo inciso V do § 8º com a redação da LC nº 235/2026, enquanto o PLC 11/2026 tenta restringir esse inciso. No dossiê, declare a **situação processual** ao lado da norma: é a diferença entre demonstrar que você acompanha a regra e parecer que você copiou um texto de 2024.
+
+---
+
+## 6. Dilemas Éticos Recorrentes e a Resposta Obrigatória
 
 A tabela a seguir é o checklist do gestor: cada dilema que aparece na rotina tem uma **resposta mínima obrigatória** e uma base para justificá-la. Dilema sem resposta mínima é passivo — e passivo também se assume.
 
-### 5.1 Dilema × manifestação × resposta obrigatória
+### 6.1 Dilema × manifestação × resposta obrigatória
 
 | Dilema | Manifestação típica | Resposta obrigatória (mínimo) | Base |
 |---|---|---|---|
@@ -422,7 +507,7 @@ A tabela a seguir é o checklist do gestor: cada dilema que aparece na rotina te
 | **Concentração de receita** | 90% da receita vindo de um financiador | Teto de **≤ 40%** por fonte e reserva de 3 a 6 meses | Lição 03 |
 | **Desigualdade interna** | Conselho pouco diverso; dado autodeclarado ausente | Metas de composição e dados autodeclarados com privacidade | Censo GIFE; IPEA/MOSC |
 
-### 5.2 Sinais de alerta na rotina
+### 6.2 Sinais de alerta na rotina
 
 - Reunião decidida sem ata, sem voto e sem alternativas registradas;
 - Contrapartida financeira exigida de forma verbal em parceria MROSC;
@@ -431,7 +516,7 @@ A tabela a seguir é o checklist do gestor: cada dilema que aparece na rotina te
 - Relatório anual sem limitações, sem meta não atingida e sem correção;
 - Programa mantido por financiador único há mais de três exercícios.
 
-### 5.3 Itens sinalizados como **não verificados** nesta pesquisa
+### 6.3 Itens sinalizados como **não verificados** nesta pesquisa
 
 Os itens abaixo circulam em material de mercado, mas **não foram confirmados em fonte primária nesta pesquisa** — cite-os apenas como "não verificado" ou confirme antes de usá-los em aula, edital ou peça:
 
@@ -449,11 +534,81 @@ Os itens abaixo circulam em material de mercado, mas **não foram confirmados em
 
 ---
 
-## 6. Projeto Final (Capstone)
+## 7. Inspiração para o Projeto Final: Casos Reais
 
-### 6.1 Enunciado e regras
+Os dois capstones resolvidos da Seção 8 são fictícios e propositalmente simples. Os três casos abaixo são **reais** — todos com CNPJ, registro estatutário ou demonstração financeira localizada — e foram escolhidos por cobrir exatamente as três decisões que o seu dossiê terá que defender: **qual forma jurídica**, **de onde vem o dinheiro** e **quem fiscaliza**. Na pesquisa que os originou, **11 casos** foram verificados (7 brasileiros e 4 internacionais) e **nenhum dependia majoritariamente de verba pública**; no recorte brasileiro, **6 dos 7 são associação privada**, só a Fundação Itaú é fundação de fato e **nenhum é OS** — a percepção de que "OS = terceiro setor" não sobrevive aos balanços.
 
-Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasileira** — uma associação sem fins lucrativos fictícia, sede em município de médio porte, atuando em uma área de interesse público (educação, assistência social, meio ambiente, cultura ou direitos humanos) — e entregar um dossiê único no final. O projeto é executado em **6 estágios sequenciais**, em **6 a 8 semanas**, com entregável obrigatório, checklist de conformidade e nota pela rubrica pública da Seção 6.12.
+Cada caso traz **estrutura jurídica, financiamento, governança e resultados**, seguidos do que **copiar**, do que **evitar** e do **mapeamento para os estágios do capstone**.
+
+### 7.1 Instituto Ayrton Senna (Brasil, 1994) — receita previsível e concentração de 62%
+
+| Eixo | O que o caso mostra (fonte e ano) |
+|---|---|
+| **Estrutura jurídica** | **Associação privada** (natureza 399-9, CNPJ 00.328.072/0001-62, aberto em 02/12/1994) — não é OS nem fundação; prevalece o registro da Receita Federal |
+| **Financiamento** | Receita operacional de **R$ 41,738 milhões** em 2024: royalties de marca e imagem **R$ 25,971 milhões (62%)**, pessoas jurídicas R$ 11,724 milhões e pessoas físicas R$ 4,044 milhões; usa exclusivamente a Lei Rouanet |
+| **Governança** | CEO (Viviane Senna) e vice-presidente, com **auditor independente** e relatório anual publicado |
+| **Resultados** | 30 anos em 2024; investiu **R$ 47,378 milhões** (P&D R$ 14,8 milhões; advocacy R$ 7,2 milhões); patrimônio líquido de **R$ 273,4 milhões** com títulos de R$ 265,4 milhões; a despesa acima da receita operacional foi coberta por receitas financeiras de R$ 24,060 milhões |
+
+- **O que copiar:** receita **previsível e contratada** (royalty de longo prazo) como espinha dorsal do orçamento; transparência com demonstração financeira auditada e publicada; separação clara entre o que é **receita operacional** e o que é **receita financeira** do patrimônio.
+- **O que evitar:** **62% da receita amarrada a um único ativo intangível** — a marca de uma pessoa física. Encerrado o contrato, caem quase dois terços da receita e o déficit de 2024 (R$ 5,640 milhões) deixa de ser coberto.
+- **Estágios do capstone:** **1** (a associação já resolve — não é preciso inventar fundação ou qualificação para ter previsibilidade); **3** (aplique o **teto de 40% por fonte**: se você modelar "royalties = 62%", o dossiê é reprovado na rubrica); **5** (receitas por natureza: royalty é receita operacional, não imunidade).
+
+### 7.2 Fundação Itaú / Itaú Social (Brasil, 1993–2019) — o que um fundo patrimonial compra
+
+| Eixo | O que o caso mostra (fonte e ano) |
+|---|---|
+| **Estrutura jurídica** | **Fundação privada** instituída pelo Itaúsa — Programa de Ação Comunitária (1993) → Fundação Itaú Social (2000) → unificação de Itaú Cultural, Itaú Social e Itaú Educação e Trabalho (2019); regime dos arts. 62 a 69 do Código Civil, com tutela do Ministério Público |
+| **Financiamento** | Receitas de **R$ 444,2 milhões** em 2024: financeiras **R$ 414,4 milhões (93%)**, doações R$ 14,6 milhões e operacionais R$ 15,1 milhões; despesas de R$ 307,3 milhões e superávit de R$ 136,8 milhões; patrimônio líquido de **R$ 5,54 bilhões**; o FIA 2024 distribuiu **R$ 18,8 milhões** do 1% do IR para 40 projetos |
+| **Governança** | **Conselho Curador heterônomo** (membros do Itaúsa e do Itaú), Diretoria de 6 a 15 membros **não remunerados**, Conselho Fiscal e auditoria; indicador público limita custos administrativos a **5%** do investido |
+| **Resultados** | Em 2024: **R$ 297 milhões** investidos, **5,16 milhões de pessoas** alcançadas, 20,8 mil escolas e 3,2 mil municípios |
+
+- **O que copiar:** a separação de papéis — a **renda do patrimônio custeia a estrutura** e a **doação financia projeto específico**; conselho com composição **heterônoma** (quem não é do dia a dia fiscaliza melhor); publicar um **limite administrativo** e cumprir.
+- **O que evitar:** montar o orçamento do **Ano 1** supondo fundo patrimonial que não existe (o fundo patrimonial é de 2000) e confundir **endowment** com **reserva de caixa**: o **teto de 40% por fonte** e a **reserva de 3 a 6 meses** do capstone não são um patrimônio líquido de R$ 5,54 bilhões. Também evite escolher **fundação** sem aceitar escritura pública, dotação de bens livres (art. 62) e fiscalização do MP (art. 66).
+- **Estágios do capstone:** **1** (a comparação associação × fundação do art. 8.4 decidida com dados, não com rótulo); **2** (conselho com composição heterônoma e mandatos); **3** (reserva de caixa **hoje**, fundo patrimonial como horizonte de 10 anos); **6** (a defesa deve sustentar por que a forma escolhida é a mais simples que resolve).
+
+### 7.3 Médicos Sem Fronteiras (França, 1971) — captação individual em escala e independência
+
+| Eixo | O que o caso mostra (fonte e ano) |
+|---|---|
+| **Estrutura jurídica** | **Associação sem fins lucrativos** da Lei francesa de 1901; 24 seções, 18 filiais e uma entidade internacional em Genebra, com contas combinadas auditadas sob Swiss GAAP FER |
+| **Financiamento** | Receita de **€ 2.362 milhões** em 2024 (€ 2,6 bilhões em 2025): fonte **privada 97,9%**, dos quais **indivíduos € 2.015 milhões = 85,3%** e público 2,1%; a seção francesa recusa fundos públicos da UE desde 2016 |
+| **Governança** | Board internacional **eleito** (6 membros, eleição de 2011), autonomia estatutária das seções e auditoria externa consolidada |
+| **Resultados** | **+7,1 milhões de doadores** em 2024; **79%** da receita destinada à missão; na seção francesa, **€ 90,1 de cada € 100** às missões, com **reservas de 4,4 meses**; +65 mil profissionais |
+
+- **O que copiar:** **muitos doadores pequenos e recorrentes** em vez de poucos grandes — é exatamente o que o Pix com recorrência e captura de cadastro viabiliza no Brasil; **reserva dentro da faixa de 3 a 6 meses** (4,4 meses), dimensionada em meses de despesa, não em "um valor bonito"; percentual destinado à missão **declarado**.
+- **O que evitar:** tratar a **recusa de verba pública** como regra geral — é uma escolha de independência que só se sustenta com base de doadores equivalente; e **comparar escala sem declarar a métrica**: 7,1 milhões de doadores, 5,16 milhões de pessoas alcançadas (Fundação Itaú) e 1 em cada 7 bengaleses (BRAC) são grandezas incompatíveis.
+- **Estágios do capstone:** **3** (captação individual + recorrência como fonte principal, sem ultrapassar o teto por canal de origem); **5** (indicador com **métrica, fonte e limitação** declaradas — sem isso, a comparação é inválida); **6** (a defesa pergunta "e se a maior fonte sair?": a resposta é a reserva de 3 a 6 meses e uma base de doadores recorrentes suficientemente ampla).
+
+### 7.4 Mapa consolidado: caso × estágio do capstone × lição
+
+| Caso | Estágios que ilumina | Lições | Aplique assim no dossiê |
+|---|---|---|---|
+| **Instituto Ayrton Senna** | 1 · 3 · 5 | 03, 04, 12 | Associação simples resolve a forma; a fonte dominante de 62% vira o seu **caso-espelho do teto de 40%** e o mapeamento de receitas por natureza |
+| **Fundação Itaú** | 1 · 2 · 3 · 6 | 04, 05, 10 | Associação × fundação decidida pelo **custo real** (escritura pública, dotação, tutela do MP); conselho heterônomo; **reserva de caixa ≠ fundo patrimonial** |
+| **Médicos Sem Fronteiras** | 3 · 5 · 6 | 03, 06, 14 | Captação individual recorrente (o Pix do Estágio 3 é o seu canal); **métrica de escala declarada**; percentual à missão e reserva em meses de despesa |
+
+> [!NOTE]
+> **Use o caso como régua, não como molde.** Cada um deles resolveu um problema que o seu capstone ainda não tem: patrimônio acumulado, marca amarrada a um contrato de royalties ou base de 7,1 milhões de doadores. O que se copia é a **lógica da decisão** — independência de financiamento, segregação de receitas, reserva dimensionada em meses e limitação declarada —, nunca o número. Trazer dado de caso real sem fonte e ano é exatamente o erro do dado não verificado tratado na Seção 6.3.
+
+> [!WARNING]
+> **Anti-padrão ao usar casos reais no capstone — copiar sem adaptar:**
+> - **Replicar a concentração do caso**: 62% (Instituto Ayrton Senna) ou 93% (Fundação Itaú) em uma única fonte viola o **teto de 40%** do Estágio 3;
+> - **Planejar fundo patrimonial no Ano 1**: endowment se constrói com patrimônio acumulado; no capstone, o que existe é **reserva de 3 a 6 meses**;
+> - **Importar forma jurídica estrangeira**: "501(c)(3)" e "associação da Lei de 1901" não existem no Brasil — o Estágio 1 decide entre **associação** (arts. 53 a 61) e **fundação** (arts. 62 a 69) do Código Civil;
+> - **Copiar escala sem declarar métrica**: 5.000 famílias (TETO), 5,16 milhões de pessoas (Fundação Itaú) e 1 em cada 7 bengaleses (BRAC) não são comparáveis — o Estágio 5 exige linha de base, fonte e limitação;
+> - **Confundir superávit com receita de projeto**: o superávit de R$ 136,8 milhões da Fundação Itaú vem da renda financeira de um patrimônio de R$ 5,54 bilhões — não de "economia na execução" do seu programa.
+
+- **🔢 Você sabia?** Dos **11 casos verificados** nesta pesquisa, **nenhum é organização social (OS)**: no recorte brasileiro, **6 dos 7 são associação privada** e só a Fundação Itaú é fundação de fato. A ideia de que "OS é a forma padrão do terceiro setor" é percepção errada — na prática, predomina a associação do art. 53 do Código Civil.
+
+- **🔢 Você sabia?** A BRAC registrou **BDT 140,6 bilhões** de receita no exercício encerrado em 30/06/2024, e as **doações representaram apenas 10%** do total: microfinanças (67,5%) e empresas sociais (20,1%) somavam 87,6%. Receita própria em escala pode transformar a doação em complemento — mas só depois de a operação estar montada, auditada e separada da missão.
+
+---
+
+## 8. Projeto Final (Capstone)
+
+### 8.1 Enunciado e regras
+
+Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasileira** — uma associação sem fins lucrativos fictícia, sede em município de médio porte, atuando em uma área de interesse público (educação, assistência social, meio ambiente, cultura ou direitos humanos) — e entregar um dossiê único no final. O projeto é executado em **6 estágios sequenciais**, em **6 a 8 semanas**, com entregável obrigatório, checklist de conformidade e nota pela rubrica pública da Seção 8.12.
 
 **Regras do capstone:**
 
@@ -463,7 +618,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 - **copiar dossiê de outra turma reprova** — a rubrica avalia integração, não volume;
 - o dossiê final é **único**, com as seções na ordem dos estágios.
 
-### 6.2 Roadmap do capstone
+### 8.2 Roadmap do capstone
 
 ```text
  SEMANA   1      2      3      4      5      6      7      8
@@ -488,7 +643,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
                 ética  5 fontes IA + LGPD
 ```
 
-### 6.3 Os 6 estágios — entregáveis, pesos e calendário
+### 8.3 Os 6 estágios — entregáveis, pesos e calendário
 
 | Estágio | Entregável principal | Critérios de excelência | Peso | Semana |
 |---|---|---|---|---|
@@ -503,7 +658,32 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 > [!NOTE]
 > **Soma dos pesos: 20 + 20 + 20 + 15 + 25 = 100%.** Os cinco primeiros estágios são **avaliados**; o 6º é **requisito de aprovação**: sem o dossiê integrado e a defesa de 10 minutos, a nota final é **zero**, independentemente das notas parciais. Essa assimetria reproduz a vida real — entidade que não presta contas não é salva por ter um belo programa.
 
-### 6.4 Estágio 1 — Conceito e estrutura jurídica (20%, semana 1)
+Antes de começar, fixe a sequência — ela é a espinha do dossiê e é a primeira pergunta da arguição:
+
+```dragdrop
+{
+  "question": "Ordene as seis etapas do Projeto Final na sequência correta de execução:",
+  "items": [
+    "Estágio 1 — Conceito e estrutura jurídica: missão, associação ou fundação e minuta de estatuto",
+    "Estágio 2 — Governança: conselho de 5 a 9, código de ética e canal de denúncias",
+    "Estágio 3 — Sustentabilidade: plano de 3 a 5 fontes, teto de 40% e reserva de 3 a 6 meses",
+    "Estágio 4 — Operações: matriz de riscos, política de IA e plano de LGPD",
+    "Estágio 5 — Impacto e compliance: Teoria da Mudança, painel de indicadores e Manual de Compliance",
+    "Estágio 6 — Dossiê integrado e defesa de 10 minutos (requisito de aprovação)"
+  ],
+  "correctOrder": [
+    "Estágio 1 — Conceito e estrutura jurídica: missão, associação ou fundação e minuta de estatuto",
+    "Estágio 2 — Governança: conselho de 5 a 9, código de ética e canal de denúncias",
+    "Estágio 3 — Sustentabilidade: plano de 3 a 5 fontes, teto de 40% e reserva de 3 a 6 meses",
+    "Estágio 4 — Operações: matriz de riscos, política de IA e plano de LGPD",
+    "Estágio 5 — Impacto e compliance: Teoria da Mudança, painel de indicadores e Manual de Compliance",
+    "Estágio 6 — Dossiê integrado e defesa de 10 minutos (requisito de aprovação)"
+  ],
+  "explanation": "A ordem é sequencial porque cada estágio alimenta o próximo: sem forma jurídica não há governança; sem fontes e teto de 40% não há operação paga; sem operação não há dado para indicadores; e o dossiê final só existe se os cinco anteriores estiverem concluídos. Os pesos são 20 + 20 + 20 + 15 + 25 = 100%, e o Estágio 6 é requisito — sem ele, a nota final é zero."
+}
+```
+
+### 8.4 Estágio 1 — Conceito e estrutura jurídica (20%, semana 1)
 
 - **Conteúdo:** declaração de missão em até 30 palavras, público-alvo e território; escolha fundamentada entre **associação** (Código Civil, arts. 53 a 61) e **fundação** (arts. 62 a 69); minuta de estatuto com as cláusulas obrigatórias do art. 54 — inclusive a **vedação de distribuição de sobras** e a **destinação do patrimônio remanescente** (art. 61); planejamento da qualificação **OSCIP** para o horizonte de 3 anos (Lei nº 9.790/1999) — e, se couber, a decisão sobre **CEBAS**.
 - **Entregável:** documento "Identidade Institucional" (1 página) + minuta de estatuto anotada (com notas de rodapé citando dispositivo).
@@ -520,7 +700,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 [ ] Toda citação normativa com dispositivo e ano
 ```
 
-### 6.5 Estágio 2 — Governança (20%, semana 2)
+### 8.5 Estágio 2 — Governança (20%, semana 2)
 
 - **Conteúdo:** composição do conselho (5 a 9 membros), mandatos com **limite de reeleição**, comissões (fiscal, ética e conflito de interesses, monitoramento), calendário anual de reuniões, **política de conflito de interesses** com declaração anual e **canal de denúncias** com prazo de resposta (Lição 05).
 - **Entregável:** "Manual de Governança" com código de ética assinado, formulário de declaração anual de interesses e fluxo do canal de denúncias.
@@ -536,7 +716,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 [ ] Regra de sucessão do diretor-presidente prevista
 ```
 
-### 6.6 Estágio 3 — Sustentabilidade e captação (20%, semana 3)
+### 8.6 Estágio 3 — Sustentabilidade e captação (20%, semana 3)
 
 - **Conteúdo:** mapa de receitas com **3 a 5 fontes** (doações individuais, editais públicos, parcerias empresariais, fundos, receita própria acessória), **nenhuma fonte acima de 40%**, meta de **reserva de 3 a 6 meses** de despesa, política de custos indiretos e plano de captação de 12 meses com **Pix e recorrência** (Lições 03, 06 e 08).
 - **Entregável:** "Plano de Sustentabilidade Financeira" (receitas, despesas, reserva, indicadores de liquidez e metas por fonte).
@@ -552,7 +732,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 [ ] Cronograma de captação de 12 meses com responsáveis e prazos
 ```
 
-### 6.7 Estágio 4 — Operações (15%, semanas 4–5)
+### 8.7 Estágio 4 — Operações (15%, semanas 4–5)
 
 - **Conteúdo:** processos-padrão com responsáveis e prazos, **matriz de riscos 5×5**, **política de IA** (5 cláusulas da Seção 3.6), **plano de LGPD** (inventário de dados, base legal, consentimento de menores, RIPD), voluntariado com **termo de adesão (Lei nº 9.608/1998)** e plano de continuidade (Lições 07, 10 e 11).
 - **Entregável:** "Manual de Operações" com matriz de riscos, política de IA, plano de LGPD e modelo de termo de adesão.
@@ -568,7 +748,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 [ ] eSocial e demais obrigações de pessoas mapeadas no calendário
 ```
 
-### 6.8 Estágio 5 — Impacto e compliance (25%, semanas 6–7)
+### 8.8 Estágio 5 — Impacto e compliance (25%, semanas 6–7)
 
 - **Conteúdo:** **Teoria da Mudança** simplificada (insumo → atividade → produto → resultado → impacto), painel de **4 a 6 indicadores** com linha de base, meta, fonte e periodicidade; e **Manual de Compliance** com regime tributário no cenário pós-LC 214/2025, escrituração pelo **ITG 2002 (R1)**, **divulgação em até 30 dias**, escolha do instrumento MROSC correto (colaboração art. 16 × fomento art. 17 × cooperação art. 5º) e calendário de obrigações acessórias (Lições 09, 10, 12, 13 e 14).
 - **Entregável:** "Painel de Impacto do Ano 1" (com dados simulados e limitações) + "Manual de Compliance" (cronograma + modelo de registro de receitas por natureza).
@@ -585,7 +765,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 [ ] Nota fiscal prevista mesmo nas operações imunes
 ```
 
-### 6.9 Estágio 6 — Dossiê integrado e defesa (requisito, semanas 7–8)
+### 8.9 Estágio 6 — Dossiê integrado e defesa (requisito, semanas 7–8)
 
 - **Conteúdo:** compilação dos cinco entregáveis **na ordem dos estágios**, com seção de coerência final ("onde os estágios se contradizem e como foi resolvido"), **revisão ética por pares com o teste ECI** e **defesa oral de 10 minutos** (3 de apresentação, 7 de arguição).
 - **Entregável:** dossiê único + ata da defesa + relatório de revisão por pares.
@@ -599,7 +779,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 [ ] Todos os dispositivos citados conferidos quanto à vigência
 ```
 
-### 6.10 Calendário consolidado (6 a 8 semanas)
+### 8.10 Calendário consolidado (6 a 8 semanas)
 
 | Semana | Estágio | Marco | Entregável principal |
 |---|---|---|---|
@@ -614,7 +794,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 - **Em 7 semanas:** use o calendário da tabela como está;
 - **Em 8 semanas:** dedique a S8 exclusivamente à revisão ética por pares (teste ECI) e à defesa.
 
-### 6.11 Anti-padrões do capstone
+### 8.11 Anti-padrões do capstone
 
 > [!WARNING]
 > **Anti-padrões que reprovam o Projeto Final — mesmo com entregáveis completos:**
@@ -628,7 +808,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 > - **Transparência "quando possível"** — o prazo é de 30 dias, não opcional;
 > - **Dossiê sem ata** — decisão de governança sem registro não existe para efeito de avaliação.
 
-### 6.12 Rubrica de avaliação do Projeto Final
+### 8.12 Rubrica de avaliação do Projeto Final
 
 | Critério | Peso | Excelente (90–100) | Suficiente (70–89) | Precisa melhorar (abaixo de 70) |
 |---|---|---|---|---|
@@ -645,7 +825,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 > [!NOTE]
 > A rubrica é deliberadamente assimétrica: **corretude jurídica + integração + ética somam 60%**. Um projeto visualmente impecável que escolhe o instrumento errado do MROSC ou esconde a limitação do dado não aprova — porque é exatamente esse erro que destrói parcerias, imunidades e reputação na vida real.
 
-### 6.13 Capstone A — Instituto Ponte Viva (educação)
+### 8.13 Capstone A — Instituto Ponte Viva (educação)
 
 > **Missão (27 palavras):** "Reduzir a exclusão digital de jovens de escolas públicas por meio de formação gratuita, acesso a equipamentos e articulação com a comunidade escolar."
 
@@ -669,7 +849,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 > [!NOTE]
 > **Por que este capstone é forte:** a missão é verificável, a forma jurídica é a mais simples que resolve, a qualificação OSCIP é **plano de 3 anos** (não promessa de 2026), o orçamento tem quatro fontes com teto respeitado, o dado de menor tem base legal e o resultado tem **linha de base herdada do piloto** — é a diferença entre "vamos impactar" e "medimos isto, a partir daquele ponto".
 
-### 6.14 Capstone B — Instituto Raízes da Serra (cultura e ambiente)
+### 8.14 Capstone B — Instituto Raízes da Serra (cultura e ambiente)
 
 > **Missão (29 palavras):** "Proteger a Mata Atlântica urbana e valorizar a cultura popular local por meio de mutirões, formação de guardiões e circulação artística."
 
@@ -693,7 +873,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 > [!IMPORTANT]
 > **Impacto ambiental é o que mais atrai greenwashing.** "8 hectares recuperados" é produto; "mudas com sobrevivência ≥ 70% em 6 meses" é resultado; dizer "recuperamos a Mata Atlântica da serra" é **impacto exigindo estudo de monitoramento** — declare método, linha de base e limitações (SVI/GRI), ou a entidade perde credibilidade no primeiro relatório auditado.
 
-### 6.15 Comparação rápida entre os dois capstones
+### 8.15 Comparação rápida entre os dois capstones
 
 | Eixo | Capstone A — Ponte Viva (educação) | Capstone B — Raízes da Serra (cultura/ambiente) |
 |---|---|---|
@@ -704,7 +884,7 @@ Você deve **simular a criação e a gestão do primeiro ano de uma ONG brasilei
 | Particularidade ética | Sem imagens estigmatizantes | Cachê e autoria de artistas locais |
 | Quórum de cuidado | Consentimento específico de menores | Assento comunitário no conselho |
 
-### 6.16 Como defender o dossiê em 10 minutos
+### 8.16 Como defender o dossiê em 10 minutos
 
 A defesa não é uma segunda versão do dossiê: é a prova de que você **sustenta as escolhas** sob objeção. Roteiro recomendado:
 
@@ -735,9 +915,9 @@ ARGUIÇÃO       conheça as 10 perguntas do teste ECI de cor: elas são
 
 ---
 
-## 7. Checklists Finais
+## 9. Checklists Finais
 
-### 7.1 Checklist de constituição da entidade
+### 9.1 Checklist de constituição da entidade
 
 ```text
 [ ] 01. Missão, finalidades e público-alvo definidos e registrados
@@ -757,7 +937,7 @@ ARGUIÇÃO       conheça as 10 perguntas do teste ECI de cor: elas são
 [ ] 15. Metas de qualificação futura mapeadas (OSCIP em 3 anos / CEBAS)
 ```
 
-### 7.2 Checklist de prestação de contas e transparência
+### 9.2 Checklist de prestação de contas e transparência
 
 ```text
 [ ] 01. Plano de trabalho com metas, orçamento e cronograma arquivado
@@ -776,7 +956,7 @@ ARGUIÇÃO       conheça as 10 perguntas do teste ECI de cor: elas são
 [ ] 14. Ata de aprovação das contas pelo órgão competente registrada
 ```
 
-### 7.3 Autoavaliação ECI — 10 itens antes de qualquer decisão relevante
+### 9.3 Autoavaliação ECI — 10 itens antes de qualquer decisão relevante
 
 ```text
 [ ] 01. MISSÃO ....... a decisão serve à missão ou a um financiador?
@@ -798,11 +978,11 @@ ARGUIÇÃO       conheça as 10 perguntas do teste ECI de cor: elas são
 
 ---
 
-## 8. Perspectivas e Próximos Passos de Aprendizagem
+## 10. Perspectivas e Próximos Passos de Aprendizagem
 
 O terceiro setor brasileiro atravessa uma transição simultânea em quatro frentes: profissionalização da gestão, implementação da reforma tributária (2026–2033), exigência crescente de evidência de impacto e digitalização da captação e da prestação de contas. Os próximos passos recomendados, em ordem de prioridade:
 
-1. **Aplicar a rubrica na sua organização em 90 dias** — execute a autoavaliação ECI da Seção 7.3 em uma decisão real, registre a ata e publique o que for obrigatório em até 30 dias;
+1. **Aplicar a rubrica na sua organização em 90 dias** — execute a autoavaliação ECI da Seção 9.3 em uma decisão real, registre a ata e publique o que for obrigatório em até 30 dias;
 2. **Escrever a política de IA e o plano de LGPD** — os dois documentos que mais faltam nas OSCs que já usam IA (33% usam, 31% se capacitaram);
 3. **Revisar a concentração de receita** — aplique o teto de 40% por fonte e dimensione a reserva de 3 a 6 meses com dados do seu exercício;
 4. **Aprofundar especializações** — captação institucional, governança de conselhos, compliance do MROSC, avaliação de impacto e SROI, empreendedorismo social;
@@ -926,6 +1106,38 @@ O terceiro setor brasileiro atravessa uma transição simultânea em quatro fren
 }
 ```
 
+```question
+{
+  "id": "npof-15-q8",
+  "type": "multiple-choice",
+  "question": "O Instituto Ayrton Senna apurou R$ 41,738 milhões de receita operacional em 2024, dos quais R$ 25,971 milhões (62%) vieram de royalties de marca e imagem. Que leitura esse caso exige do Estágio 3 do seu capstone?",
+  "options": [
+    "Royalty de marca não é fonte de receita e, portanto, fica fora do teto de 40% por fonte",
+    "62% em um único ativo intangível é concentração de risco: aplique o teto de 40% por fonte, diversifique e declare no dossiê qual fonte seria cortada primeiro",
+    "O caso prova que a melhor estratégia é depender de uma única fonte previsível de longo prazo",
+    "Como o instituto tem patrimônio líquido de R$ 273,4 milhões, o teto de 40% deixa de ser necessário"
+  ],
+  "correct": 1,
+  "explanation": "Em 2024 o instituto movimentou R$ 41,738 milhões — royalties de marca e imagem R$ 25,971 milhões (62%), pessoas jurídicas R$ 11,724 milhões e pessoas físicas R$ 4,044 milhões —, com despesa de R$ 47,378 milhões e déficit de R$ 5,640 milhões coberto por receitas financeiras de R$ 24,060 milhões. Depender da marca de uma pessoa física é o oposto de diversificar: o fim do contrato derruba quase dois terços da receita. No capstone vale a regra da Lição 03 — nenhuma fonte acima de 40% e reserva de 3 a 6 meses — e a rubrica penaliza o plano que entrega a agenda ao financiador."
+}
+```
+
+```question
+{
+  "id": "npof-15-q9",
+  "type": "multiple-choice",
+  "question": "Pelo Acórdão 1355/2025-Plenário do TCU, o que levou à suspensão de repasses do Ministério do Trabalho a duas entidades — e qual exigência o Estágio 5 do capstone deve prever para evitar esse erro?",
+  "options": [
+    "Ausência de auditoria externa e de certidão negativa; prever auditoria anual independente",
+    "Recepção de recursos do exterior sem cadastro; prever a declaração da origem dos fundos",
+    "Fomento sem metas cronológicas e sem cronograma, com desembolso em parcela única; prever metas com prazo, cronograma de desembolso fracionado e aderência ao plano de trabalho",
+    "Divulgação da parceria fora do prazo de 30 dias; prever calendário editorial de publicação"
+  ],
+  "correct": 2,
+  "explanation": "A cautelar inaudita altera pars de 18/06/2025 suspendeu R$ 15,77 milhões e R$ 4,22 milhões de fomento porque faltavam metas cronológicas (art. 22, II a IV, da Lei nº 13.019/2014) e cronograma de desembolso (art. 42, III, da mesma lei, c/c arts. 20 e 33 do Decreto nº 8.726/2016), com pagamento em parcela única. No Estágio 5, o Manual de Compliance deve exigir metas com prazo, cronograma fracionado e justificativa documentada de qualquer parcela única; apostilamento ≤ 10%, vigência ≤ 10 anos e contas finais ≤ 150 dias completam o pacote do Decreto nº 11.948/2024."
+}
+```
+
 ```matching
 {
   "question": "Associe cada estágio do Projeto Final ao seu entregável e peso:",
@@ -969,3 +1181,4 @@ O terceiro setor brasileiro atravessa uma transição simultânea em quatro fren
 > 6. A **rubrica tem 6 critérios** e é assimétrica de propósito: corretude jurídica, integração e ética somam **60%** — projeto bonito com instrumento errado não aprova;
 > 7. Estude os dois capstones resolvidos — **Instituto Ponte Viva** (educação: 240 concluintes, 85% de frequência, +30% de resultado com linha de base) e **Instituto Raízes da Serra** (cultura/ambiente: 8 ha, 12 mutirões, sobrevivência de mudas ≥ 70%) — e replique a estrutura: missão curta, forma jurídica justificada, 4 fontes com teto, política de IA, LGPD e indicadores com linha de base;
 > 8. Próximo passo em 90 dias: aplique a autoavaliação ECI a uma decisão real, escreva a política de IA e o plano de LGPD, revise a concentração de receita e publique o que a lei manda publicar — com fonte, ano e limitações declaradas.
+> 9. Em 2026 o dossiê nasce sob outra régua — **LC nº 214/2025** (ano-teste: CBS 0,9% + IBS 0,1%), **LC nº 224/2025** (corte de 10%) defendida pelo inciso V do § 8º com a redação da **LC nº 235/2026**, MROSC do **Decreto nº 11.948/2024** e a jurisprudência do TCU e do STJ — assine o checklist da Seção 5.2 e use os três casos reais da Seção 7 como régua de decisão, nunca como molde.

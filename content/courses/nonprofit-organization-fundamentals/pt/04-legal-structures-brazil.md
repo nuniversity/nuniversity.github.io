@@ -1,6 +1,6 @@
 ---
 title: "Estruturas Legais de ONGs no Brasil"
-description: "Mapa completo das estruturas legais das ONGs no Brasil: as quatro camadas normativas (Constituição, Código Civil, títulos de qualificação e MROSC), o regime da associação e da fundação artigo por artigo, OS (Lei nº 9.637/1998), OSCIP (Lei nº 9.790/1999), CEBAS (LC nº 187/2021) e MROSC (Lei nº 13.019/2014), com casos resolvidos, montagem de estatuto, checklists, prazos, documentos e as armadilhas de vigência mais comuns em prova e na prática."
+description: "Mapa completo das estruturas legais das ONGs no Brasil: as quatro camadas normativas (Constituição, Código Civil, títulos de qualificação e MROSC), o regime da associação e da fundação artigo por artigo, OS (Lei nº 9.637/1998), OSCIP (Lei nº 9.790/1999), CEBAS (LC nº 187/2021) e MROSC (Lei nº 13.019/2014), com casos resolvidos, casos reais de entidades verificadas, comparação internacional das formas jurídicas (Alemanha, França, Reino Unido, EUA e Índia), montagem de estatuto, checklists, prazos, documentos e as armadilhas de vigência mais comuns em prova e na prática."
 order: 4
 difficulty: "intermediate"
 duration: "120 min"
@@ -837,7 +837,175 @@ Também vale prever, desde já, **assembleia por meio eletrônico** (art. 48-A d
 
 ---
 
-## 13. Obrigações contábeis, escrituração e publicidade
+## 13. Escolha da Forma Jurídica na Prática: Casos Reais
+
+O roteiro da seção 12 só ganha peso quando é aplicado a entidades que existem, têm CNPJ e publicam contas. O recorte pesquisado reúne **11 organizações verificadas** (7 brasileiras e 4 internacionais), todas com CNPJ, registro estatutário ou demonstração financeira localizada, e três conclusões já derrubam erros comuns antes do primeiro detalhe:
+
+1. **no recorte brasileiro, 6 dos 7 casos são associações privadas (art. 53)** e só a Fundação Itaú é fundação de fato (arts. 62 a 69) — **nenhum dos 11 é Organização Social**;
+2. **nenhuma depende majoritariamente de verba pública**: a Médicos Sem Fronteiras teve 97,9% de receita privada em 2024 (85,3% vindos de indivíduos) e o Todos Pela Educação declara não receber recursos públicos;
+3. **a forma jurídica antecede o crescimento**: ela fixa custo de constituição, tutela, governança e destino do remanescente — as mesmas linhas da tabela comparativa da seção 10.
+
+### 13.1 Os sete casos brasileiros: forma escolhida, critério e números
+
+| Organização | Forma jurídica verificada | Critério da seção 12.1 que explica a escolha | Números verificados (ano) |
+|---|---|---|---|
+| Gerando Falcões | Associação privada — CNPJ 18.463.148/0001-28, aberto em 25/06/2013 | Grupo ativo sem dotação de entrada: a associação dispensa escritura pública e patrimônio inicial (art. 53) | Fundo Dignidade (mar/2025), meta de R$ 250 mi e regra de gastar 10% do patrimônio ao ano |
+| Instituto Ayrton Senna | Associação privada, natureza 399-9 — CNPJ 00.328.072/0001-62 (02/12/1994) | Patrimônio acumulado depois de constituída não obriga a virar fundação: a dotação é condição de **criação** da fundação (art. 62), não regra de crescimento | Receita de R$ 41,738 mi (2024); PL de R$ 273,4 mi, dos quais R$ 265,4 mi em títulos |
+| Atados | Associação — CNPJ 18.110.558/0001-95 (2012) | Sem serviço público delegado e sem transferência de recursos: nenhuma qualificação é necessária | Rede com mais de 100 empresas, 4 mil ONGs e 290 mil voluntários (2024) |
+| Fundação Itaú (Itaú Social) | Fundação privada (1993/2000/2019), instituída pelo Itaúsa | Patrimônio relevante e continuidade de longo prazo → escritura, dotação e tutela (arts. 62 a 69) | Receita de R$ 444,2 mi (2024), com 93% financeiras; PL de R$ 5,54 bi |
+| Instituto Sou da Paz | Associação sem fins lucrativos (jan/1999) | Objeto **fora da lista** do art. 62, parágrafo único: a associação não tem rol de finalidades | R$ 12.792.835 (2022), dos quais 65% de fundações do exterior |
+| Todos Pela Educação | Associação de fins não econômicos — CNPJ 10.477.478/0001-60 (07/09/2007) | Advocacy sem verba pública: a natureza do art. 53 basta; OS e OSCIP ficam ociosas | R$ 26.082.377 (2024); superávit de R$ 4,66 mi e PL de R$ 16,9 mi |
+| TETO Brasil | Associação — CNPJ 10.513.214/0001-15 (2006) | Produto padronizado e voluntariado, sem execução delegada de serviço público | 113 moradias, 76 projetos e 8.134 voluntários (2024) |
+
+Quando as fontes divergem, **prevalece o cadastro da Receita**: o Instituto Ayrton Senna consta como associação (natureza 399-9), embora outras fontes o descrevam como OS/OSCIP ou fundação — divergência registrada na seção 17.2. E a captação de cerca de R$ 1,8 mi do TETO Brasil no jantar de dez/2025 é **declaração sem balanço auditado localizado**, não receita apurada.
+
+### 13.2 Caso real 1 — Instituto Ayrton Senna: patrimônio grande não obriga a virar fundação
+
+Criado em 1994, com CNPJ aberto em 02/12/1994, o IAS é **associação privada**. A primeira pergunta do roteiro da seção 12.1 — "quanto você tem para começar?" — não foi a que decidiu, porque a dotação de bens livres é exigência do **ato de criação** da fundação (art. 62) e não uma regra de sucessão de patrimônio: uma associação constituída sem qualquer bem pode acumular títulos e reservas ao longo dos anos sem trocar de natureza jurídica.
+
+Os números de 2024 mostram o resultado dessa escolha: receita operacional de **R$ 41,738 milhões**, dos quais **R$ 25,971 milhões (62%)** vêm de royalties de marca e imagem; despesas de **R$ 47,378 milhões** geraram déficit de **R$ 5,640 milhões**, coberto por receitas financeiras de **R$ 24,060 milhões**; o patrimônio líquido somava **R$ 273,4 milhões**, dos quais **R$ 265,4 milhões** em títulos. Em 2025 a receita foi de R$ 45,879 milhões.
+
+O que a forma jurídica **não** resolve: 62% da receita depende de um único ativo intangível — a marca de uma pessoa. Esse é risco de concentração de fontes, e não de natureza jurídica: a resposta é diversificação de receita, não troca de forma. Lição cruzada com a tabela da seção 10: a linha "órgãos obrigatórios" e a linha "remuneração de dirigentes" mudam com a forma; a concentração de doador muda com a **gestão**.
+
+### 13.3 Caso real 2 — Fundação Itaú: quando a dotação é o próprio modelo
+
+Aqui o roteiro da seção 12.1 funciona na direção oposta: patrimônio relevante e continuidade de longo prazo → **fundação** (arts. 62 a 69). Instituída pelo Itaúsa e unificada em 2019 (Programa de Ação Comunitária, 1993 → Fundação Itaú Social, 2000 → Itaú Cultural, Itaú Social e Itaú Educação e Trabalho), ela é administrada por **Conselho Curador heterônomo** (membros do Itaúsa e do Itaú), Diretoria de 6 a 15 membros **não remunerados**, Conselho Fiscal e auditoria — governança compatível com a linha "fundação" da tabela comparativa da seção 10: rigidez alta, tutela, dotação, finalidades fechadas e alteração estatutária com aprovação de 2/3 e do Ministério Público em 45 dias (art. 67).
+
+Contas de 2024: receitas de **R$ 444,2 milhões** (financeiras R$ 414,4 milhões = **93%**; doações R$ 14,6 milhões; operacionais R$ 15,1 milhões), despesas de **R$ 307,3 milhões** (R$ 181,7 milhões em projetos), superávit de **R$ 136,8 milhões** e patrimônio líquido de **R$ 5,54 bilhões**. Foram investidos R$ 297 milhões, alcançando 5,16 milhões de pessoas, 20,8 mil escolas e 3,2 mil municípios; o fundo patrimonial nasceu em 2000 e o FIA 2024 distribuiu R$ 18,8 milhões do 1% do IR para 40 projetos (2023: R$ 24,5 milhões).
+
+O encaixe legal é direto: **cultura** (inciso II) e **educação** (inciso III) constam da lista taxativa do parágrafo único do art. 62. A fundação é a forma certa porque (i) o objeto cabe na lista, (ii) há patrimônio para dotação e (iii) a continuidade de longo prazo justifica a rigidez — exatamente os três testes que a seção 12.1 propõe, aplicados a caso real.
+
+### 13.4 Caso real 3 — Instituto Sou da Paz: recusar a fundação é decisão, não informalidade
+
+Os fundadores do Sou da Paz, criado em janeiro de 1999, **recusaram a forma de fundação** e constituíram associação sem fins lucrativos. A leitura pelo art. 62 explica por que a recusa é juridicamente confortável:
+
+- a fundação exige **escritura pública ou testamento**, **dotação especial de bens livres** e finalidade dentre as **nove hipóteses** do art. 62, parágrafo único;
+- o objeto do instituto é **segurança pública**, que **não consta da lista** — o máximo que se poderia discutir é o inciso VIII (ética, cidadania, democracia e direitos humanos), discussão que a associação nem precisa fazer, porque o art. 53 define a forma por "fins não econômicos" e não por rol fechado;
+- a fundação teria ainda **tutela permanente do Ministério Público** (art. 66) e o custo formal de escritura e de aprovação do estatuto (art. 65).
+
+A conta mostra que associação não é versão simplificada: receita de **R$ 12.792.835** em 2022 (contra R$ 6.039.373 em 2020), com **65% de fundações do exterior**, 14% de fundações nacionais, 12% de fundo institucional e R$ 482 mil de empresas, além de auditoria publicada. O risco que salta daí é de gestão: **65% em um único bloco de financiamento** é exposição a cortes e mudanças de prioridade de terceiros — mais um argumento de que diversificar fonte é decisão de diretoria, não de cartório.
+
+### 13.5 Caso real 4 — Todos Pela Educação: a associação pura, com as camadas 3 e 4 ociosas
+
+O Todos Pela Educação é **associação de fins não econômicos** (CNPJ 10.477.478/0001-60, 07/09/2007), independente, suprapartidária e **não receptora de recursos públicos**. Em 2024 movimentou **R$ 26.082.377** sem restrição de uso (doações R$ 24,1 mi e serviços voluntários R$ 1,84 mi), mais R$ 453 mil de receitas financeiras, com superávit de R$ 4,66 milhões, caixa de R$ 17,5 milhões aplicado a 15,40% ao ano e patrimônio líquido de R$ 16,9 milhões. A governança é a da própria associação: Assembleia Geral, Conselho de Administração e auditoria independente anual.
+
+Sem transferência de recursos públicos, a entidade **não precisa** de parceria MROSC, **não precisa** de OSCIP e **não tem** contrato de gestão — as camadas 3 e 4 da seção 1 ficam inteiramente ociosas sem que a organização perca escala: agenda Educação Já (13 temas), Educação Já Municípios cobrindo 62% das matrículas (2024) e Anuário da Educação Básica (12ª edição, 2025). O seu *advocacy* permanece lícito porque a vedação da norma é a **campanha político-partidária ou eleitoral** (MROSC, art. 84-C, parágrafo único; Lei nº 9.790/1999, art. 16) — pesquisa, mobilização e monitoramento de política pública ficam fora da vedação.
+
+Lição para a síntese operacional da seção 1.6: a linha "só natureza jurídica, sem título" **não** é o estágio de quem ainda não conseguiu qualificação — é um **estado completo** de estrutura, e é exatamente o estado em que o Todos Pela Educação opera, com receita de R$ 26 milhões no exercício de 2024.
+
+### 13.6 Mapa: caso × critério de decisão × tabela comparativa
+
+| Caso | Critério que decidiu (seção 12.1) | Linha da tabela da seção 10 que explica | Erro que o caso evita |
+|---|---|---|---|
+| Instituto Ayrton Senna | Patrimônio posterior à constituição | Ato constitutivo: estatuto registrado (art. 45) × escritura pública + dotação | "quem acumulou patrimônio precisa virar fundação" |
+| Fundação Itaú | Patrimônio relevante + continuidade | Rigidez alta: tutela, dotação e finalidades fechadas | "fundação é a forma nobre para qualquer ONG" |
+| Instituto Sou da Paz | Objeto fora da lista do art. 62 | Finalidades: rol taxativo (fundação) × fins não econômicos (associação) | "recusar a fundação é informalidade" |
+| Todos Pela Educação | Sem serviço público e sem verba pública | Instrumento com o poder público: não aplicável | "para fazer advocacy é preciso ser OSCIP" |
+| Gerando Falcões, Atados e TETO | Sem dotação e sem execução delegada | Tempo mínimo de funcionamento: não exigido (associação) | "OSCIP é obrigatória para captar" |
+| Nenhum dos 11 casos | Execução direta de serviço público | OS: ato discricionário + contrato de gestão | "OS é sinônimo de terceiro setor" |
+
+**Aplicando o roteiro da seção 12.1 a um caso novo:**
+
+```dragdrop
+{
+  "question": "Ordene as perguntas do roteiro de escolha da forma jurídica (seção 12.1), na ordem em que elas precisam ser respondidas:",
+  "items": [
+    "Pergunta 1 — há patrimônio relevante e continuidade de longo prazo? → FUNDAÇÃO (arts. 62 a 69)",
+    "Pergunta 2 — há pouco patrimônio e um grupo ativo? → ASSOCIAÇÃO (arts. 53 a 61)",
+    "Pergunta 3 — a entidade executará serviço público com receita orçamentária, bens públicos e cessão de servidores? → OS (Lei nº 9.637/1998)",
+    "Pergunta 4 — já há 3 anos de funcionamento regular e haverá transferência de recursos? → OSCIP (Lei nº 9.790/1999)",
+    "Pergunta 5 — a entidade presta saúde, educação ou assistência social? → planejar CEBAS (LC nº 187/2021)"
+  ],
+  "correctOrder": [
+    "Pergunta 1 — há patrimônio relevante e continuidade de longo prazo? → FUNDAÇÃO (arts. 62 a 69)",
+    "Pergunta 2 — há pouco patrimônio e um grupo ativo? → ASSOCIAÇÃO (arts. 53 a 61)",
+    "Pergunta 3 — a entidade executará serviço público com receita orçamentária, bens públicos e cessão de servidores? → OS (Lei nº 9.637/1998)",
+    "Pergunta 4 — já há 3 anos de funcionamento regular e haverá transferência de recursos? → OSCIP (Lei nº 9.790/1999)",
+    "Pergunta 5 — a entidade presta saúde, educação ou assistência social? → planejar CEBAS (LC nº 187/2021)"
+  ],
+  "explanation": "A ordem importa porque cada pergunta só faz sentido depois da anterior: a escolha entre associação e fundação (arts. 53 e 62) vem antes de qualquer título, e OS e OSCIP são qualificações mutuamente exclusivas — o art. 18 da Lei nº 9.790/1999 expirou e o art. 2º da mesma lei veda a OS de ser OSCIP. O CEBAS, por fim, é cumulável com as duas e precisa ser planejado desde a escrituração, porque exige registro segregado de gratuidade (LC nº 187/2021, art. 3º, IV)."
+}
+```
+
+- **🔢 Você sabia?** Nos 11 casos pesquisados **nenhuma organização é Organização Social** — e, no Brasil, o IPEA apura **1.114 OS** contra **7.046 OSCIPs** em um parque de **781.921 OSCs** com CNPJ ativas (jul/2020)? "OS é o terceiro setor" é percepção errada: OS é minoritária e específica da execução direta de serviço público com contrato de gestão.
+
+---
+
+## 14. Formas Jurídicas no Mundo: O Brasil em Perspectiva
+
+A arquitetura em quatro camadas é brasileira; a pergunta que ela responde não. Cada ordenamento do recorte escolheu uma **âncora própria** para a mesma questão — e nomeou a sua forma de um jeito que não se traduz, palavra por palavra, para o Código Civil. O que segue é a comparação pela lente da **escolha da forma jurídica**: como a entidade nasce, quem a controla, o que ela publica e de onde pode vir o dinheiro.
+
+### 14.1 Alemanha — o Verein (*eingetragener Verein*, e.V.)
+
+- **A forma:** o e.V. é a associação registrada alemã e dispensa capital — basta **7 membros**; o registro é feito no *Vereinsregister*. Ao lado dele, a **Stiftung** (fundação) exige patrimônio duradouro sob tutela estatal — na prática, **≥ € 300 mil**, com a via da *Treuhandstiftung* a partir de **€ 25 mil** —, e a **gGmbH** exige **≥ € 25 mil**.
+- **O status separado da forma:** a ***gemeinnützig*** **não é forma jurídica** — é status tributário dos **§§ 51 a 68 da AO**, verificado pelo fisco inclusive quanto à **gestão real** da entidade (BFH, V R 20/5, 05/09/2024). O § 51 pede fins **exclusivos e diretos**; o § 52 pede promover a generalidade de forma *selbstlos*, com mais de 27 finalidades listadas; o § 51, 2 traz o ***Inlandsbezug***: no exterior só conta o que beneficiar residentes na Alemanha ou melhorar a reputação do país.
+- **Incentivos:** isenção do IR corporativo (KStG § 5(1), nº 9) e do imposto predial (**§ 3 GrStG**); o doador deduz via § 10b EStG, com *Zustiftung* de até **€ 1 milhão** (casados: € 2 milhões).
+- **Tradução para as camadas brasileiras:** e.V. ≈ associação (art. 53); Stiftung ≈ fundação (art. 62); a ***gemeinnützig*** ≈ **camada 3** (OSCIP/CEBAS) — e nunca ≈ natureza jurídica.
+
+### 14.2 França — a *association* da *loi* de 1901
+
+- **Liberdade constitutiva (art. 2º):** a lei de 01/07/1901 assegura a liberdade de associar-se **sem autorização prévia** — o mesmo espírito do art. 5º, XVIII, da Constituição.
+- **A declaração constitui:** a *déclaration* à prefeitura (formulário **Cerfa 13973**, com as menções do art. 5) é o que confere a **personalidade moral**, com publicação no **JOAFE** em 1 mês.
+- **Títulos depois da existência:** o *agrément* não é condição de existência, mas dá acesso a subvenções; acima de **€ 150 mil/ano** em doações e subvenções é exigido revisor de contas; a **ARUP** (*agrément de utilité publique*) vem por decreto do *Conseil d'État*, em regra após **3 anos** de vida, habilita a receber **donações e legados** e pode ser retirada.
+- **Incentivos e escala:** −**66%** no IR do doador; para fundações, até −75% da IFI (teto de € 50 mil) e −60% do IS; cerca de **1,6 milhão de associações**, 1,9 milhão de empregos e ~13 milhões de voluntários (2025). É sob essa lei que existe a **Médicos Sem Fronteiras** (22/12/1971).
+
+### 14.3 Reino Unido — a *incorporated charity*
+
+- **A definição vem antes da forma:** *Charities Act 2011*, ss. 1 a 4 — só é *charity* quem tem **finalidades caritativas** e está sob controle da **High Court** (s. 1), consta da lista do s. 3 **e** é "*for the public benefit*". O **s. 4(2)** é categórico: **não há presunção** de benefício público (*R (ISC) v Charity Commission*).
+- **A forma incorporada:** a via corporativa é a ***charitable incorporated organisation* (CIO)**, com registro na **Charity Commission** a partir de **£ 5.000** e identificador público (***charity number***); há ainda *excepted* (abaixo de £ 100 mil: igrejas, fundos militares, Scouts) e *exempt* (universidades, museus), e registros próprios na Escócia e na Irlanda do Norte.
+- **Prestação de contas:** *trustees' annual report* + contas + declaração de *public benefit*, com relatório detalhado quando o bruto ultrapassa **£ 500 mil**; **SORP 2019** para exercícios iniciados até 31/12/2025 e **SORP 2026** a partir de 01/01/2026.
+- **Escala (set/2025):** **171.153 charities**, **£ 104 bilhões** de renda e **923.536 trustees** (Charity Commission, 30/07/2026); o setor emprega **978.000 pessoas (~3% da força de trabalho)** (NCVO, 2024), e 80% das organizações têm receita abaixo de £ 100 mil — só 3% da renda do setor.
+
+### 14.4 Estados Unidos — o enquadramento 501(c)(3)
+
+- **O que é:** o **IRC § 501(c)(3)** alcança fins religiosos, caritativos, científicos ou educacionais, **sem *inurement***, sem *lobbying* "substantial" e **sem intervenção em campanha** (a *Johnson Amendment* de 1954 — vale para todas as 501(c)(3), a favor ou contra candidato; proposta do senador Lyndon B. Johnson, 100 Cong. Rec. 9604 (1954)).
+- **Como se obtém:** testes *organizational*, *operational* e de benefício público (Treas. Reg. 1.501(c)(3)-1), com EIN e *determination letter* (Form 1023); para ser *public charity*, suporte público (§ 170(b)(1)(A)).
+- **Transparência:** **Form 990 público** (990-N, 990-EZ, 990) obrigatório com receita ≥ **US$ 200 mil** ou ativos ≥ **US$ 500 mil**, no 15º dia do 5º mês, com prorrogação de 6 meses (Form 8868).
+- **Estruturas vizinhas:** fundação privada (*payout* de 5%), *community foundation*, DAF (FY2024: **US$ 327,87 bi**, **3,59 milhões de contas**, *payout* de 25,2%) e *supporting organization* 509(a)(3). Para doar ao exterior, o doador escolhe ***equivalency determination*** ou ***expenditure responsibility***, além da checagem da OFAC.
+
+### 14.5 Índia — o *trust* e o filtro do FCRA
+
+- **As três formas-base:** *Societies Act* 1860, ***Trusts Act* 1882** e *Companies Act*, s. 8 — o *trust* é uma das três portas de entrada do país, ao lado da sociedade registrada e da empresa de seção 8 (fonte: FAQ do próprio Ministério do Interior).
+- **O filtro é o dinheiro externo:** o **FCRA 2010, emendado em 2020** (tutela do MHA) exige registro (§ 12) com **≥ 3 anos** de funcionamento e **≥ ₹ 10 lakh** gastos, ou *prior permission* (§ 11); a entrada é por **conta em sucursal específica do SBI, em Nova Delhi** (§ 17), com **vedação de repasse** a terceiros (§ 7) e Aadhaar/passaporte dos dirigentes (§ 12A).
+- **Ciclo:** renovação quinquenal (FC-3C, ₹ 5.000), **FC-4 anual** com balanço certificado por contador público — inclusive quando a declaração é "NIL" —, e cancelamento que transfere o saldo à autoridade. O FCRA de 1976 foi revogado.
+- **Tradução para o Brasil:** não existe por aqui regime equivalente — o Banco Central não impõe vedação geral a receber do exterior e o RDE-ROF trata de **crédito externo**, não de doações. Na Índia, captação internacional é **status administrado**; no Brasil, é consequência do CNPJ ativo.
+
+### 14.6 Seis ordenamentos adaptados da tabela D.1
+
+| Dimensão | **Brasil** | **EUA** | **Reino Unido (E/W)** | **Alemanha** | **França** | **Índia** |
+|---|---|---|---|---|---|---|
+| **Forma ou status central** | Associação (CC, art. 53) × fundação (CC, art. 62) + títulos da camada 3 | 501(c)(3): *public charity* ou fundação privada | *Charity* (Charities Act 2011, ss. 1–4), inclusive na forma incorporada (CIO) | Formas e.V./Stiftung/gGmbH **+** status *gemeinnützig* (AO §§ 51–68) | *Association* da *loi* de 1901; ARUP | Society / Trust / Companies s. 8 + FCRA |
+| **Como nasce a pessoa** | Estatuto + registro (art. 45); fundação: escritura ou testamento + dotação (art. 62) | EIN + *determination letter* (Form 1023) | Registro na Charity Commission (**≥ £ 5.000**) | *Vereinsregister* (e.V.); tutela estatal (Stiftung) | *Déclaration* prefetural (Cerfa 13973), publicada no JOAFE em 1 mês | Registro-base + certificado FCRA |
+| **Condição econômica mínima** | Nenhuma para a associação; dotação obrigatória só para a fundação | Sem capital mínimo descrito | Registro a partir de £ 5.000 | e.V.: **7 membros, sem capital**; Stiftung ≥ € 300 mil na prática; gGmbH ≥ € 25 mil | ARUP só após ~3 anos de vida | ≥ 3 anos e ≥ ₹ 10 lakh para o FCRA |
+| **Quem controla** | RCPJ, CNPJ, TCU/MP; **sem agência única** | IRS (*determination* + Form 990) | Charity Commission | *Finanzamt* + tutela das fundações | Prefeitura (declaração); Interior/*Conseil d'État* (ARUP) | MHA (FCRA) + registro estadual |
+| **Transparência anual** | Balanço e prestação de contas **por instrumento** | **Form 990 público** | *Trustees' annual report* + contas (SORP 2026) | Demonstrações anuais + *Freistellungsbescheid* | Relatório + contas (revisor se > € 150 mil/ano) | **FC-4** + contas certificadas por contador |
+| **Receber do exterior** | **Sem vedação geral** (BCB) | *Equivalency determination* ou *expenditure responsibility* + OFAC | Internação admitida pelo *public benefit test* | *Inlandsbezug* (§ 51, 2 da AO) | Sem regime de câmbio próprio descrito; a ARUP facilita legados | **Só com FCRA**: SBI/Nova Delhi, sem repasse, 5 anos |
+| **Intervenção político-partidária** | **Vedada** (MROSC, art. 84-C, par. único; Lei nº 9.790/1999, art. 16) | **Absoluta** (Johnson Amendment); *lobby* via 501(h) | *Advocacy* ampla, sem equivalente da Johnson Amendment | Livre, com limite do § 51, 3 | Livre manifestação; *congrégations* sob autorização | Restrições do FCRA em atividades sensíveis |
+
+### 14.7 O que o art. 53 do Código Civil tem de único nesta comparação
+
+1. **Definição negativa e sem lista de finalidades.** O art. 53 define a associação pela **união de pessoas para fins não econômicos** e não enumera causas — enquanto o **próprio art. 62 brasileiro lista nove** hipóteses de fundação, a Alemanha lista **mais de 27** finalidades no § 52 da AO, o Reino Unido depende da lista do s. 3 do *Charities Act 2011* somada ao teste de benefício público e os EUA listam os fins do § 501(c)(3).
+2. **Nenhuma condição econômica nem autorização prévia para existir.** O art. 53 dispensa a dotação e a escritura pública que o art. 62 exige da fundação, e a Constituição veda autorização prévia (art. 5º, XVIII). No recorte, só o **e.V. alemão** também dispensa capital — e mesmo assim exige 7 membros; a Stiftung alemã, a ARUP francesa, o registro britânico e o FCRA indiano todos cobram alguma condição (patrimônio, tempo, valor ou certificado).
+3. **Sem teste único de benefício público e sem agência única.** O Reino Unido **exige e não presume** o *public benefit* (s. 4(2)); os EUA aplicam o *operational test* com *determination* do IRS; a Alemanha verifica a gestão real; a Índia filtra pelo FCRA. No Brasil, a pergunta é respondida por **finalidade** (MROSC, art. 84-C) e por **título**, não por um único teste de entrada.
+4. **O registro declara; não é a declaração que constitui.** Pelo art. 45, a existência legal começa com a **inscrição do ato constitutivo** no registro. Na França é a *déclaration* à prefeitura que **confere** a personalidade moral; nos EUA, EIN e *determination letter* são **elegibilidade fiscal**; na Alemanha, o *Vereinsregister* é registral e o status é fiscal — camadas que lá se separam e que aqui convivem no mesmo ato.
+5. **Livre recebimento do exterior sem título próprio.** No Brasil, a associação do art. 53 recebe doação de outro país **sem alterar sua forma e sem status adicional**: não há vedação geral do Banco Central e o RDE-ROF trata de crédito externo, não de doações. Na Índia a captação externa é **status administrado** (FCRA: conta no SBI em Nova Delhi, sem repasse, renovação em 5 anos); na Alemanha pesa o *Inlandsbezug* (§ 51, 2 da AO); e o doador dos EUA escolhe *equivalency determination* ou *expenditure responsibility*, além da checagem da OFAC.
+6. **A cláusula de não reciprocidade.** O parágrafo único do art. 53 — *"Não há, entre os associados, direitos e obrigações recíprocos"* — é o traço que a seção 4.1 isolou, e que **não aparece, em texto equivalente, nas tabelas comparadas**: os cinco regimes estrangeiros desta pesquisa são descritos por forma, status, controle, transparência e fluxo de recursos, sem cláusula de conteúdo idêntico.
+
+> [!WARNING]
+> **Não traduza forma jurídica estrangeira para a forma brasileira mais parecida.** Em prova, em contrato e em diligência:
+>
+> - ***charity*** (Reino Unido) **não é** OSCIP, OS nem CEBAS: é uma definição que exige finalidade caritativa **e** teste de benefício público não presumido (Charities Act 2011, ss. 1 a 4);
+> - **501(c)(3)** (EUA) é **enquadramento fiscal do IRS**, com EIN e *determination letter* — **não consta do art. 44 do Código Civil** e não corresponde a nenhuma linha da tabela comparativa da seção 10;
+> - ***gemeinnützig*** (Alemanha) é **status tributário**, não forma jurídica: o equivalente funcional é a **camada 3** (OSCIP, CEBAS), nunca a associação do art. 53;
+> - **trust** (Índia, *Trusts Act* 1882) é uma das três formas-base do país — **não** se traduz pela fundação do art. 62, que exige escritura pública ou testamento e dotação especial de bens livres.
+>
+> Pergunte sempre em duas etapas: **qual é a forma jurídica?** e **qual é o status ou título que ela alega?** — a pergunta "isso é uma ONG equivalente?" não tem resposta em nenhum desses ordenamentos.
+
+- **🔢 Você sabia?** A mesma lei que permite associação **sem autorização prévia** na França — a *loi* de 1901, que abriga a Médicos Sem Fronteiras — convive com um setor de **1,6 milhão de associações**, 1,9 milhão de empregos e ~13 milhões de voluntários (2025); e na seção francesa da MSF **€ 90,1 de cada € 100** foram para as missões em 2024, com reservas de **4,4 meses** de operação.
+
+---
+
+## 15. Obrigações contábeis, escrituração e publicidade
 
 Independente do título, toda OSC é pessoa jurídica e se submete a um núcleo de obrigações:
 
@@ -850,7 +1018,7 @@ Independente do título, toda OSC é pessoa jurídica e se submete a um núcleo 
 
 ---
 
-## 14. Armadilhas de vigência e erros práticos frequentes
+## 16. Armadilhas de vigência e erros práticos frequentes
 
 > [!WARNING]
 > **Erros práticos que mais aparecem em auditoria, em edital e em prova — todos com base em dispositivo verificado:**
@@ -872,9 +1040,9 @@ Uma OS com contrato de gestão vencido em dezembro e sem renovação recebeu dec
 
 ---
 
-## 15. Números do setor e itens não verificados
+## 17. Números do setor e itens não verificados
 
-### 15.1 Escala, com data e fonte
+### 17.1 Escala, com data e fonte
 
 - **IPEA — "Em Questão" nº 2 (mar/2021), com dados de nov/2020:** **815.676 OSCs em atividade** no Brasil; **37.157 novas OSCs** criadas em 2019 e 2020; natureza jurídica predominante: **associação privada (660.010)** e **fundação privada (12.211)**; **2.338.407 vínculos formais de trabalho** até 2019, com **saúde** na liderança (862.141 vínculos);
 - **IPEA — "Perfil das OS e OSCIPs" (jul/2020):** de **781.921 OSCs com CNPJ ativas**, apenas **1.114 são OS** (natureza jurídica 330-1) e **7.046 são OSCIPs**; **mais de 90% das OS** foram criadas entre 2011 e 2018 (1.017) e **70% das OSCIPs** entre 2001 e 2010 (4.982);
@@ -883,7 +1051,7 @@ Uma OS com contrato de gestão vencido em dezembro e sem renovação recebeu dec
 
 - **🔢 Você sabia?** Existem cerca de **100 vezes mais OSCIPs qualificadas do que OSs** no Brasil (7.046 contra 1.114, IPEA, jul/2020) — mas as OS concentram a execução direta de serviços públicos de maior porte. Volume de entidades não é sinônimo de peso na execução pública.
 
-### 15.2 Itens sinalizados como não verificados nesta pesquisa
+### 17.2 Itens sinalizados como não verificados nesta pesquisa
 
 Para você não transformar lacuna de pesquisa em afirmação categórica:
 
@@ -894,7 +1062,9 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
 - **Vigência do MROSC por ente federado:** confirmado o art. 88 (540 dias; Municípios a partir de 01/01/2017), mas as datas específicas para **Estados e União** não foram integralmente lidas;
 - **Quantitativos de OS e OSCIPs em 2026:** os números citados são de **2020 (IPEA)** — não há série atualizada nesta pesquisa;
 - **ITG 2002 e NBCs de OSC:** referências retomadas de módulo próprio e **não revalidadas** nesta rodada;
-- **Alínea "c" do art. 150, VI, da CF:** o texto confere "instituições de educação e de assistência social, sem fins lucrativos, atendidos os requisitos da lei" — inclusão de instituições culturais e científicas **não decorre do texto constitucional**.
+- **Alínea "c" do art. 150, VI, da CF:** o texto confere "instituições de educação e de assistência social, sem fins lucrativos, atendidos os requisitos da lei" — inclusão de instituições culturais e científicas **não decorre do texto constitucional**;
+- **Natureza jurídica de entidades privadas citadas em casos:** quando as fontes divergem, **prevalece o cadastro da Receita** (o Instituto Ayrton Senna consta como associação, natureza 399-9) — não afirmar condição de OS ou OSCIP sem consulta ao cadastro;
+- **Captações anunciadas sem balanço:** valores como a captação do TETO Brasil no jantar de dez/2025 (~R$ 1,8 mi) são **declarações da organização**, não receita auditada — registrar sempre a origem do número.
 
 ---
 
@@ -1009,6 +1179,38 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
   ],
   "correct": 1,
   "explanation": "São os arts. 69 (redação da Lei nº 13.204/2015) e 71 (idem) da Lei nº 13.019/2014. A apresentação é da OSC, em 90 dias; a apreciação é da administração, em 150 dias, prorrogáveis por igual período."
+}
+```
+
+```question
+{
+  "id": "npof-04-q8",
+  "type": "multiple-choice",
+  "question": "Em 2024 a Fundação Itaú registrou receitas de R$ 444,2 milhões — 93% financeiras — e patrimônio líquido de R$ 5,54 bilhões. Qual é a leitura correta desse número à luz da escolha da forma jurídica?",
+  "options": [
+    "A entidade opera com prejuízo estrutural e por isso se constituiu como fundação",
+    "O fundo patrimonial sustenta a operação e a doação financia projeto específico — é o padrão que a dotação da fundação (art. 62) foi desenhado para produzir",
+    "Sendo fundação, a entidade é proibida de receber doações de terceiros",
+    "A receita financeira depende de contrato de gestão com a administração pública"
+  ],
+  "correct": 1,
+  "explanation": "Em 2024 as despesas foram de R$ 307,3 milhões (R$ 181,7 milhões em projetos) e o superávit de R$ 136,8 milhões: a renda do fundo patrimonial (criado em 2000) cobre a estrutura, enquanto doações e o 1% do IR (R$ 18,8 milhões distribuídos pelo FIA 2024 para 40 projetos) pagam projetos particulares. É o que a linha de rigidez da tabela da seção 10 pressupõe para a fundação — dotação, tutela e finalidades fechadas em troca de continuidade. Não há prejuízo, vedação a doações nem dependência de verba pública: nenhuma das três opções descreve o caso."
+}
+```
+
+```question
+{
+  "id": "npof-04-q9",
+  "type": "multiple-choice",
+  "question": "Sobre a gemeinnützig alemã, qual afirmação está correta?",
+  "options": [
+    "A gemeinnützig é forma jurídica autônoma do direito alemão",
+    "Somente o e.V. pode obter a gemeinnützig",
+    "É status tributário dos §§ 51 a 68 da AO e pode alcançar e.V., Stiftung e gGmbH",
+    "A Alemanha não isenta o imposto predial das entidades de interesse público"
+  ],
+  "correct": 2,
+  "explanation": "O status é do código tributário (AO), com verificação da gestão real pela autoridade fiscal (BFH, V R 20/5, 05/09/2024), e a isenção alcança o IR corporativo (KStG § 5(1), nº 9) e o imposto predial (§ 3 GrStG). A forma é camada separada: e.V. (7 membros, sem capital), Stiftung (patrimônio duradouro sob tutela estatal) e gGmbH (≥ € 25 mil) podem ou não ser gemeinnützig. Para o Brasil, a tradução correta é: gemeinnützig ≈ título da camada 3 (OSCIP, CEBAS), nunca natureza jurídica do art. 44 do Código Civil."
 }
 ```
 
