@@ -1,0 +1,19 @@
+{
+  "area": "Business & Hybrid Organizations",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "10 weeks",
+  "icon": "users",
+  "en": {
+    "title": "Hybrid Impact Enterprise: Profit, Partnership & Social Impact",
+    "description": "Comprehensive course on building a profit company that behaves like a partnership, a cooperative and an NGO at the same time: shared value, democratic governance, a comparative approach across all organizational models, and social impact as the central objective. Learn how profit becomes fuel for impact instead of extraction.",
+    "difficulty": "Intermediate",
+    "duration": "10 Weeks"
+  },
+  "pt": {
+    "title": "Empresa Híbrida: Lucro, Parceria e Impacto Social",
+    "description": "Curso completo sobre como construir uma empresa lucrativa que se comporta como parceria, cooperativa e ONG ao mesmo tempo: repartição de valor, governança democrática, abordagem comparativa entre todos os modelos organizacionais e impacto social como objetivo central. Aprenda a fazer do lucro combustível para o impacto, e não extração.",
+    "difficulty": "Intermediário",
+    "duration": "10 Semanas"
+  }
+}
