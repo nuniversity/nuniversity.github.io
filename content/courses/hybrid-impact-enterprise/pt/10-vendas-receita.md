@@ -50,6 +50,8 @@ Nesta lição você vai:
 - comparar **canal direto, cooperativa e ONG** com contas de produtor;
 - medir **dependência e concentração** na receita mista (índice de Herfindahl e teto por fonte);
 - cumprir **CDC, Decreto nº 7.962/2013, Lei nº 13.455/2017 e CONAR** sem queimar a reputação da causa;
+- ler **casos reais** de receita e repartição (MONDRAGON, REI Co-op, Publix, SEMCO, Coopercitrus, COPACOL e LAR) com **contas abertas**;
+- comparar os **modelos de receita no mundo**: CIC, benefit corporation, L3C, ESOP, SCIC, SCOP, eG, società benefit e a cooperativa brasileira;
 - emitir o **veredito comparativo** da venda: híbrida × tradicional × parceria × cooperativa × ONG.
 
 ---
@@ -503,7 +505,142 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 
 ---
 
-## 10. Síntese operacional: a sequência de venda da empresa híbrida
+## 10. Casos Reais: como ganham dinheiro e quanto repartem
+
+Teoria de receita só vale quando bate no balanço de alguém. Os casos abaixo são organizações híbridas reais — federações cooperativas, cooperativa de consumidores, corporação de propriedade dos funcionários e cooperativas agroindustriais brasileiras — e cada um responde às duas perguntas desta lição: **como a organização ganha dinheiro** e **quanto devolve, com qual conta**. Todos os números vêm de relatórios anuais e registros oficiais de 2023 a 2026.
+
+### 10.1 MONDRAGON (Espanha, 1956) — a solidariedade sai do lucro
+
+**Como ganha:** federação de **81 cooperativas** autogovernadas de indústria, retalho e serviços, com **€ 11.056 milhões** de vendas, **EBITDA de € 1.486 milhões** e **lucro recorde de € 593 milhões** em 2023, e cerca de **70.500 pessoas**. Uma pessoa, um voto; capital instrumental e subordinado.
+
+**Quanto reparte:** cada cooperativa destina **mínimo 13% do lucro** ao fundo divisional de solidariedade; em 2023 foram **€ 13,0 milhões** de compensação e **€ 7,05 milhões** de offset de prejuízos, além de **€ 27,8 milhões** da Fundación MONDRAGON em **37 programas** de emprego, formação e habitação.
+
+**Contas:** 1.486 ÷ 11.056 = **13,4% de margem EBITDA**; 593 ÷ 11.056 = **5,4% de margem líquida**; 13,0 + 7,05 = **€ 20,05 milhões** de solidariedade direta no fundo, e 20,05 + 27,8 = **€ 47,85 milhões** somando a ação social. A desigualdade também é calculada: salários entre **80% e 110%** de uma referência e razão mín-máx de **1:6** desde 1988.
+
+### 10.2 REI Co-op (EUA, 1938) — repartir no ano do prejuízo
+
+**Como ganha:** cooperativa de consumidores de lazer; o sócio paga **US$ 30** de anuidade (renovação a partir do 2º ano) e compra em **187 lojas** com cerca de 14 mil funcionários. Receita de **US$ 3,53 bilhões** em 2024 — ano de **prejuízo de US$ 156,4 milhões**.
+
+**Quanto reparte:** **US$ 189 milhões** em Co-op Member Reward (tipicamente **10%** de volta ao membro), **US$ 84,8 milhões** em incentivos e *profit sharing* (**+48,5%** no ano) e **US$ 8,9 milhões** para mais de **300 ONGs**. Foi o 1º varejista nacional dos EUA a alcançar *zero waste*.
+
+**Conta:** 189 + 84,8 + 8,9 = **US$ 282,7 milhões**; 282,7 ÷ 3.530 = **8,0% da receita** devolvida a membros, funcionários e comunidade **no mesmo ano em que houve prejuízo**. A lição: a repartição não é o resíduo do lucro, é regra de cultura — e por isso sobrevive a um exercício negativo.
+
+### 10.3 Publix (EUA, 1930) — o trabalho vira propriedade
+
+**Como ganha:** supermercados próprios, **1.392 lojas** e mais de **255.000 pessoas**; vendas de **US$ 59,7 bilhões** e lucro de **US$ 4,6 bilhões** em 2024 — margem de **7,7%** (4,6 ÷ 59,7).
+
+**Quanto reparte:** ESOP (**Publix PROFIT Plan**) desde **01/10/1974**, com **149.213 participantes** e **US$ 14,3 bilhões** em ativos (Form 5500/2024), PLR de até **12% do salário-base** e *put option* de **US$ 669 milhões**. Maior empresa de propriedade dos funcionários dos EUA.
+
+**Conta:** 14,3 bi ÷ 149.213 = **US$ 95.836** de propriedade por participante, em média. Em 50 anos de plano, o ESOP converteu trabalho em patrimônio **sem mudar a forma jurídica** — mas o empregado é sócio por ação, **não por voto** no dia a dia.
+
+### 10.4 SEMCO (Brasil, 1953) — repartir para decidir junto
+
+**Como ganha:** indústria diversificada que passou de **US$ 4 milhões** (1982) para **US$ 212 milhões** (2003), com o quadro indo de 90 para 3.000 pessoas e rotatividade **abaixo de 2%**; inventário de 136 para 46 dias.
+
+**Quanto reparte:** a SEMCOPAR reparte **23% do lucro após imposto de cada unidade**, **duas vezes por ano**, a **3 eleitos pelos trabalhadores**; na crise de 1990 o percentual subiu para **39%**, com corte de **40%** nos salários da direção.
+
+**Conta:** 212 ÷ 4 = **53 vezes** o faturamento em 21 anos; na crise, 39 − 23 = **+16 pontos percentuais** de repasse justamente quando o caixa apertou. Repartir dinheiro só sustenta se vier com repartição de **informação e decisão** (balanço mensal por unidade; chefes avaliados duas vezes por ano pelos subordinados).
+
+### 10.5 Coopercitrus, COPACOL e LAR (Brasil) — o rateio que o produtor enxerga
+
+- **Coopercitrus (1976):** agroindústria com **39,8 mil cooperados** e **R$ 8,1 bilhões** de faturamento em 2023; sobras líquidas de **R$ 42,8 milhões** rateadas pelo Estatuto art. 60 com ponderação **3,00 / 1,00 / 0,30** por faixa de movimentação (atualização pelo IGP-M). **Conta:** 42,8 ÷ 8.100 = **0,5% do faturamento**.
+- **COPACOL (1964):** frigorífico de **9,6 mil cooperados** com **R$ 10,6 bilhões** de faturamento (+8%) em 2024 e **R$ 270 milhões de sobras** (+64%, maior da história), metade paga em dezembro. **Conta:** 270 ÷ 10.600 = **2,5% do faturamento** voltou aos cooperados, rateado **por unidade processada** — R$ 0,10 por litro de leite, R$ 2 por saca de soja, R$ 15 por saca de café, 3,6% sobre insumos. Ainda **R$ 390 milhões** de tributos.
+- **LAR (1964):** agroindústria com **R$ 23,2 bilhões** de receita (+14,4% em 2025) e **R$ 335,9 milhões** devolvidos = R$ 101,3 milhões de sobras + **R$ 59 milhões de devolução de capital a 225 jubilados** + bonificações, cesta e créditos. **Conta:** 335,9 ÷ 23.200 = **1,4% da receita**; 59 mi ÷ 225 = **R$ 262.222** por jubilado — quem saiu mantém o vínculo patrimonial.
+
+### 10.6 O quadro comparativo dos casos
+
+| Caso (país, ano) | Como ganha dinheiro | Quanto reparte | Conta de repartição |
+|---|---|---|---|
+| **MONDRAGON** (Espanha, 2023) | 81 cooperativas; vendas de **€ 11.056 mi** | € 13,0 mi de compensação + € 7,05 mi de offset + € 27,8 mi em 37 programas | Margem EBITDA **13,4%** e líquida **5,4%**; **€ 47,85 mi** no total da solidariedade |
+| **REI Co-op** (EUA, 2024) | Cooperativa de lazer, anuidade de US$ 30; receita de **US$ 3,53 bi** | US$ 189 mi aos membros + US$ 84,8 mi a funcionários + US$ 8,9 mi a +300 ONGs | 282,7 ÷ 3.530 = **8,0% da receita**, no ano de prejuízo de US$ 156,4 mi |
+| **Publix** (EUA, 2024) | Supermercados; vendas de **US$ 59,7 bi** e lucro de US$ 4,6 bi | ESOP: US$ 14,3 bi a 149.213 participantes; PLR até 12% do salário | 14,3 bi ÷ 149.213 = **US$ 95.836** por participante |
+| **SEMCO** (Brasil, 1982–2003) | Indústria: US$ 4 mi → US$ 212 mi | SEMCOPAR: **23% do lucro** pós-imposto da unidade, 2×/ano, a 3 eleitos | 212 ÷ 4 = **53×** o faturamento; na crise de 1990 subiu para **39%** |
+| **Coopercitrus** (Brasil, 2023) | Agroindústria; faturamento de **R$ 8,1 bi** | Sobras líquidas de **R$ 42,8 mi**, rateadas 3,00/1,00/0,30 | 42,8 ÷ 8.100 = **0,5% do faturamento** |
+| **COPACOL** (Brasil, 2024) | Frigorífico de 9,6 mil cooperados; **R$ 10,6 bi** | **R$ 270 mi** de sobras (+64%), por unidade processada | 270 ÷ 10.600 = **2,5% do faturamento** |
+| **LAR** (Brasil, 2025) | Agroindústria; receita de **R$ 23,2 bi** | **R$ 335,9 mi**: R$ 101,3 mi de sobras + R$ 59 mi a 225 jubilados | 335,9 ÷ 23.200 = **1,4% da receita**; 59 mi ÷ 225 = **R$ 262.222** por jubilado |
+
+**Leitura para a empresa híbrida:** os casos se parecem em uma coisa só — **ninguém reparte por vontade, reparte por regra** (estatuto, plano acionário, *trust* ou cláusula). E a faixa real de reparte sobre a receita vai de **0,5%** (Coopercitrus) a **8,0%** (REI): o "quanto devolver" é uma decisão de regime, não um número universal.
+
+- **🔢 Você sabia?** O John Lewis Partnership (Reino Unido) pagou *Partnership Bonus* de **3% (≈ 1,5 semana) = £ 46 milhões** em 2021/22 e **£ 0** nos três exercícios seguintes — mesmo com o lucro operacional antes do bônus (PBTBE) tendo **triplicado, de £ 42 mi para £ 126 mi**, em 2024/25. O bônus é condicional a **PBTBE ≥ £ 150 milhões e dívida < 4×** (JLP, *Annual Report 2025*). Reparte com condição, não com esperança: ~69.000 *Partners* entenderam que o repasse é governança, não direito adquirido.
+
+---
+
+## 11. Modelos de Receita no Mundo: regimes, tetos e dados internacionais
+
+O Brasil não é o único país a regular quanto do lucro pode sair de uma empresa de propósito. Reino Unido, EUA, Espanha, França, Alemanha e Itália criaram **formas jurídicas híbridas** com regras diferentes de **teto de distribuição, governança e transparência** — e a escolha do regime decide, na prática, **quanto dinheiro fica para a causa e quanto pode ir ao sócio**.
+
+### 11.1 Regime × país × teto de distribuição
+
+| País | Forma híbrida | Base legal verificada | Teto de distribuição ao capital | Transparência exigida |
+|---|---|---|---|---|
+| **Reino Unido** | CIC | CAICE Act 2004 + CIC Regs 2005 | **35% dos lucros distribuíveis**; por ação até 5% acima da taxa do BoE; juros +4 p.p.; capacidade ociosa carrega **5 anos** | *community interest report* anual + registro público |
+| **EUA** | Benefit / PBC | Maryland (**abr/2010**, 1º estado); 8 Del. C. §§ 361–368; D.C. Law 19-305 | **sem teto legal** — muda propósito, deveres e relato | relatório anual/bienal + padrão de terceiros |
+| **EUA** | L3C | Vermont 11 V.S.A. §§ 4161–4163 | **sem teto legal** — a renda não pode ser propósito significativo | registro estatal |
+| **EUA** | ESOP | ERISA / plano previdenciário | fiducária com *vesting*; distribuição ao sair do plano | divulgação em Form 5500 |
+| **França** | SCIC | loi 2001-624 + décret 2002-241 | **≥57,5% do resultado** às reservas impartageáveis (até 100%) | balanço + revisão quinquenal; 3 categorias de sócios, 1 pessoa = 1 voto |
+| **França** | SCOP | loi 47-1775/1947 + loi 78-763 | trabalho **≥25%**, reservas **≥16%**, capital **≤33%** | relato anual |
+| **Espanha** | Cooperativa | Ley 27/1999 + Ley 20/1990 | juros ≤ taxa básica do Banco de España **+3 p.p. (sócios) / +5 p.p. (associados)**; distribuir reservas irrepartíveis perde a proteção fiscal | relatório anual público |
+| **Alemanha** | eG (Genossenschaft) | GenG; mínimo de **3 membros** (§ 4) | conforme a *Satzung*; ingresso exige **parecer prévio de associação de auditoria** | registro + auditoria do Prüfungsverband |
+| **Itália** | Società benefit | L. 208/2015, commi 376–384 (vig. 01/01/2016) | **sem teto legal** e **sem incentivo fiscal** | *relazione di impatto* anual anexada ao balanço |
+| **Brasil** | Cooperativa | Lei nº 5.764/1971 | **nada** às quotas-parte, salvo **juros ≤ 12% a.a.** (art. 24 §3º); **10%** de Fundo de Reserva + **5%** de FATES (art. 28) | balanço + prestação de contas; voto singular |
+
+**Leitura:** repartição com propósito não é declaração de intenção, é **limite escrito em lei ou em regulamento**. A CIC britânica deixa **65%** dos lucros distribuíveis fora do alcance do sócio; a SCOP francesa fatia o resultado em três pedaços fixos; e a cooperativa brasileira não distribui nada às quotas, separando ainda **15%** das sobras líquidas em dois fundos indivisíveis.
+
+### 11.2 A dimensão de cada regime
+
+| País / regime | Nº de entidades | Indicador-chave | Fonte e ano |
+|---|---|---|---|
+| Reino Unido — CIC | **37.081** (mar/2025) | 8.376 aprovações em 2024/25 (recorde) e 3.832 dissoluções | CIC Regulator, 2025 |
+| EUA — ESOP | **6.411 empresas** (6.609 planos) | **15,1 mi** de participantes; **US$ 2,1 tri** em ativos | NCEO, dados 2023 (pub. 2026) |
+| EUA — benefit corporation | **41 estados** + DC | **51 jurisdições** no mundo | CARI/IU, 2024; B Lab, 2024 |
+| França — SCIC | **1.417** | **€ 1,6 bi** de faturamento | Coop FR, 2024 |
+| França — SCOP | **2.723** | **€ 6,7 bi** de faturamento | Coop FR, 2024 |
+| Alemanha — eG | **~7.700** | **22,6 mi** de membros | Springer, 2023 |
+| Itália — società benefit | **5.540 (+20%)** | **241 mil** addetti; faturamento mediano +14,6% (2022–2024) | pesquisa nacional, 2026 |
+| Brasil — cooperativas | **4.384** | **25,8 mi** de cooperados; R$ 757,9 bi de ingressos | Anuário OCB, 2025 |
+| Brasil — empresas B | **342 a +500** | **+74%** desde 2020 | Valor, 2026; Sistema B, 2026 |
+| Mundo — B Corps | **9.500 → 10.700+** | **102 → 104 países**; +1 milhão de trabalhadores | B Lab, 2025–2026 |
+| Mundo — cooperativas | **3 milhões** | **280 mi de empregos (10% dos ocupados)**; Top 300 com US$ 2,79 tri | ACI/ICA e World Cooperative Monitor, 2025 |
+
+### 11.3 Como isso muda a conta da empresa híbrida
+
+**Regra de leitura em três passos:**
+
+1. se a forma tem **teto** (CIC 35%, SCOP 33%, SCIC 57,5% às reservas, Brasil 12% de juros e 15% de fundos), o percentual de impacto precisa caber **dentro** da fatia que sobra depois do capital — é o análogo estrangeiro do "o teto da promessa é a margem";
+2. se a forma **não tem teto** (benefit corporation, L3C, società benefit), a contenção vem da **promessa pública e do relato de impacto** — e aí o pacote do Anexo "U" do CONAR (teto, prazo, critério e valor repassado) é o instrumento que transforma a venda em financiamento verificável;
+3. em qualquer regime, quem decide **quanto sai** é a forma jurídica escolhida **antes** do primeiro preço, não a campanha de marketing lançada depois dele.
+
+**E o que sai como doação, não como repasse:** a filantropia corporativa dos EUA somou **US$ 44,40 bilhões** em 2024 (+9,1%) sobre um total de US$ 592,50 bilhões — **7,5%** de todas as doações americanas — e **US$ 43,67 bilhões** em 2025 (+3,1%) sobre US$ 617,20 bilhões, ou **7,1%** (Giving USA 2025 e 2026). É dinheiro que sai da **margem**, fora do preço. Já na empresa híbrida o impacto verificável sai do **preço**: por isso as duas contas nunca podem ser confundidas no plano de receita.
+
+- **🔢 Você sabia?** O cooperativismo mundial reúne **3 milhões de cooperativas**, cobre **pelo menos 12% da humanidade**, sustenta **280 milhões de empregos (10% dos ocupados do planeta)** e as 300 maiores faturam **US$ 2,79 trilhões** — enquanto as B Corps passaram de **9.368 (2024)** para **9.500 em 102 países (2025)** e **mais de 10.700 em 104 países (2026)**, já com **mais de 1 milhão de trabalhadores**. No Brasil, as empresas com selo B foram de **342** para **mais de 500** entre 2024 e março de 2026 (**+74%** desde 2020) (ACI/ICA; *World Cooperative Monitor 2025*; B Lab, 2024–2026; Sistema B, 2026).
+
+> [!WARNING]
+> **Forma híbrida não é sinônimo de teto de lucro.** As *benefit corporations* e as L3C dos EUA e a *società benefit* italiana **não têm teto legal de distribuição**: elas obrigam **propósito declarado e relato de impacto**, não limitação de dividendos. Quem precisa de limite real de saída precisa escolher a forma certa — **CIC (35% dos lucros distribuíveis)**, **SCOP francesa (capital ≤ 33%)** ou **cooperativa brasileira (Lei nº 5.764/1971: nada às quotas, salvo juros ≤ 12% a.a., com 10% de Fundo de Reserva e 5% de FATES)**. Trocar de regime sem trocar a conta é o caminho mais rápido para prometer impacto que a estrutura não garante.
+
+```dragdrop
+{
+  "question": "Ordene os regimes híbridos pelo limite de distribuição ao capital, do MAIOR para o MENOR:",
+  "items": [
+    "EUA (benefit corporation e L3C) e Itália (società benefit): sem teto legal de distribuição",
+    "França (SCIC): pelo menos 57,5% do resultado às reservas impartageáveis, ou seja, no máximo 42,5% para os sócios",
+    "Reino Unido (CIC): teto agregado de 35% dos lucros distribuíveis",
+    "França (SCOP): dividendos de capital limitados a 33% do resultado",
+    "Brasil (cooperativa, Lei nº 5.764/1971): nada às quotas, salvo juros de até 12% ao ano"
+  ],
+  "correctOrder": [
+    "EUA (benefit corporation e L3C) e Itália (società benefit): sem teto legal de distribuição",
+    "França (SCIC): pelo menos 57,5% do resultado às reservas impartageáveis, ou seja, no máximo 42,5% para os sócios",
+    "Reino Unido (CIC): teto agregado de 35% dos lucros distribuíveis",
+    "França (SCOP): dividendos de capital limitados a 33% do resultado",
+    "Brasil (cooperativa, Lei nº 5.764/1971): nada às quotas, salvo juros de até 12% ao ano"
+  ],
+  "explanation": "A escala vai de 100% (sem teto: benefit corporation e L3C nos EUA e società benefit na Itália, onde a obrigação é de propósito e de relato de impacto) até quase nula para o capital da cooperativa brasileira. No meio ficam a SCIC francesa (máximo de 42,5% distribuível), a CIC britânica (35% dos lucros distribuíveis, com teto por ação de 5% acima da taxa do BoE e juros limitados a 4 p.p. acima da taxa base) e a SCOP francesa (capital ≤ 33%). No Brasil, a Lei nº 5.764/1971 veda distribuir às quotas-parte, salvo juros de até 12% ao ano, e obriga a separar 10% do Fundo de Reserva e 5% do FATES. Repartir é escolha de regime antes de ser escolha de generosidade."
+}
+```
+
+---
+
+## 12. Síntese operacional: a sequência de venda da empresa híbrida
 
 | Passo | Decisão | Ferramenta desta lição | Pergunta de governança |
 |---|---|---|---|
@@ -517,7 +654,7 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 
 ---
 
-## 11. Armadilhas, erros frequentes e o que não foi verificado
+## 13. Armadilhas, erros frequentes e o que não foi verificado
 
 > [!WARNING]
 > **Armadilhas desta lição:**
@@ -691,6 +828,38 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
   ],
   "correct": 1,
   "explanation": "Há diversificação (índice de Herfindahl de 0,292), mas a concentração gera risco de caixa: se 45% desse contrato sair, a perda é de 18,3% da receita total. A regra prática é teto por fonte e por cliente (ex.: ≤30%) com receita recorrente como colchão — coerente com o critério DCMS (2023) e com a leitura do Social Traders (2025). Encerrar a fonte principal não elimina risco: transfere o problema para o funil."
+}
+```
+
+```question
+{
+  "id": "hyb-10-q11",
+  "type": "multiple-choice",
+  "question": "Em 2024 a REI Co-op teve receita de US$ 3,53 bilhões e prejuízo de US$ 156,4 milhões, mas repartiu US$ 189 milhões a seus membros, US$ 84,8 milhões a funcionários e US$ 8,9 milhões a mais de 300 ONGs. Quanto o total repartido representa da receita do ano?",
+  "options": [
+    "4,4%",
+    "8,0%",
+    "12,5%",
+    "16,1%"
+  ],
+  "correct": 1,
+  "explanation": "189 + 84,8 + 8,9 = US$ 282,7 milhões, e 282,7 ÷ 3.530 = 8,0% da receita do exercício. O dado importa porque o repasse ocorreu num ano de prejuízo de US$ 156,4 milhões: na REI Co-op a devolução é regra de cultura (Co-op Member Reward tipicamente de 10% e profit sharing +48,5% no ano), não o resíduo do lucro — o oposto de prometer percentual só quando sobra."
+}
+```
+
+```question
+{
+  "id": "hyb-10-q12",
+  "type": "multiple-choice",
+  "question": "Sobre os regimes internacionais de distribuição de lucro, qual afirmação está correta?",
+  "options": [
+    "A CIC britânica tem teto agregado de 35% dos lucros distribuíveis, enquanto benefit corporation e L3C nos EUA e società benefit na Itália não têm teto legal",
+    "Toda forma híbrida tem teto legal de dividendos, inclusive as benefit corporations dos EUA",
+    "A SCIC francesa exige que apenas 16% do resultado vá às reservas impartageáveis",
+    "A cooperativa brasileira da Lei nº 5.764/1971 pode distribuir dividendos livres às quotas-parte"
+  ],
+  "correct": 0,
+  "explanation": "A CIC limita a distribuição a 35% dos lucros distribuíveis (por ação, até 5% acima da taxa do BoE, e juros limitados a 4 p.p. acima da taxa base), deixando os outros 65% para reinvestimento ou comunidade. Já a benefit corporation, a L3C e a società benefit exigem propósito e relato de impacto, mas não limitam dividendos. A SCIC francesa reserva pelo menos 57,5% do resultado às reservas impartageáveis (o 16% é o mínimo de reservas da SCOP, que também limita o capital a 33%). No Brasil, a Lei nº 5.764/1971 veda distribuir às quotas-parte, salvo juros de até 12% ao ano, e obriga 10% de Fundo de Reserva e 5% de FATES."
 }
 ```
 

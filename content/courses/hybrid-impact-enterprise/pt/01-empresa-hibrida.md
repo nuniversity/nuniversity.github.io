@@ -48,7 +48,9 @@ Nesta lição você vai:
 - comparar **cinco modelos organizacionais** em sete dimensões e emitir o veredito comparativo;
 - ler **cinco casos com números reais** (Mondragon, John Lewis Partnership, Natura, Patagonia e REI);
 - situar o **Brasil** no mapa dos negócios de impacto e das Empresas B;
-- construir a **dupla métrica** que transforma lucro em combustível do impacto.
+- construir a **dupla métrica** que transforma lucro em combustível do impacto;
+- ler **seis casos reais** com forma jurídica, repartição de lucro, impacto e fonte (SEMCO, Publix, Coopercitrus, COPACOL, LAR e Fagor);
+- situar o Brasil no **panorama internacional** de regimes híbridos — CIC, *benefit corporation*, SCOP/SCIC, *società benefit* e ESOP.
 
 ---
 
@@ -551,6 +553,91 @@ Compare com a tabela da seção 5: aqui estão preenchidas, ao mesmo tempo, as c
 
 ---
 
+## 12. Casos reais: seis desenhos que já operam
+
+A seção 7 mostrou os grandes nomes; esta reúne **seis casos verificados** — três brasileiros, um norte-americano, um espanhol e um fracasso — sempre com as mesmas quatro chaves: **forma jurídica, como o lucro é repartido, impacto medido e fonte**. É o material que transforma o conceito em cláusula contratual.
+
+| Caso (país, fundação) | Forma jurídica | Como reparte o lucro | Impacto / escala verificados | Fonte |
+|---|---|---|---|---|
+| **SEMCO** (Brasil, 1953) | Empresa de **capital de tempo** + programa SEMCOPAR | **23% do lucro após imposto da unidade, 2×/ano**, a **3 eleitos pelos trabalhadores**; subiu a **39%** na crise de 1990 | Rotatividade **<2%**; receita de **US$ 4 mi (1982)** a **US$ 212 mi (2003)** | HBR/Semler; Gonçalves (1996) |
+| **Publix** (EUA, 1930) | **C-corp + ESOP** (trust) desde **01/10/1974** | PLR de até **12% do salário-base**; **149.213 participantes** com **US$ 14,3 bi** no plano | Vendas de **US$ 59,7 bi** e lucro de **US$ 4,6 bi** (2024); *put option* de **US$ 669 mi** | SEC 10-K FY2024; DOL Form 5500/2024 |
+| **Coopercitrus** (Brasil, 1976) | Cooperativa agroindustrial singular | Estatuto **art. 60**: sobras com ponderação **3,00 / 1,00 / 0,30** por faixa, atualização **IGP-M** | **R$ 8,1 bi** de faturamento e sobra líquida de **R$ 42,8 mi** (2023) | Revista 450 (abr/2024) |
+| **COPACOL** (Brasil, 1964) | Cooperativa agroindustrial singular | **R$ 270 mi de sobras (+64%)** rateados **por unidade processada** | Faturamento de **R$ 10,6 bi**, **9,6 mil cooperados**, **R$ 390 mi** de tributos (2024) | O Presente Rural, 31/01/2025 |
+| **LAR** (Brasil, 1964) | Cooperativa agroindustrial singular | **R$ 335,9 mi em 2025** = R$ 101,3 mi de sobras + **R$ 59 mi devolvidos a 225 jubilados** | Receita de **R$ 23,2 bi (+14,4%)** | Lar Cooperativa, 10/02/2026 |
+| **Fagor** (Espanha, 1956–2013) | Cooperativa industrial de sócio-trabalhador | Solidariedade intercoop: **~€ 300 mi** aportados pelo grupo Mondragon | **Concurso de acreedores em 13/11/2013**; **5.642** trabalhadores | El País (2013); Noticias de Gipuzkoa (2013) |
+
+### 12.1 SEMCO — repartir lucro é fácil, repartir poder é o teste
+
+A **SEMCOPAR** reparte **23% do lucro após imposto de cada unidade, duas vezes por ano**, entregue a **três eleitos pelos trabalhadores** — e, na crise de **1990**, o percentual foi elevado a **39%** enquanto a direção cortava **40%** dos próprios salários. O resultado de longo prazo: de **US$ 4 milhões** de receita em 1982 para **US$ 212 milhões** em 2003, de 90 para 3.000 pessoas e rotatividade **inferior a 2%**. A lição: o rateio só se sustenta porque vem com **transparência de balanço** — chefes avaliados 2×/ano pelos subordinados e balanço mensal por unidade.
+
+### 12.2 Publix — o ESOP converte trabalho em propriedade sem mudar a forma
+
+A maior empresa de **propriedade dos funcionários** dos EUA é uma **C-corp com ESOP** desde **01/10/1974**: **149.213 participantes** com **US$ 14,3 bilhões** no plano (Form 5500/2024), PLR de até **12% do salário-base** e ações **não negociadas em bolsa**. Em 2024: **US$ 59,7 bilhões** de vendas, **US$ 4,6 bilhões** de lucro, mais de **255.000 pessoas** e *put option* de **US$ 669 milhões**. O empregado é sócio por **ação**, não por **voto** no dia a dia — a governança continua da C-corp.
+
+### 12.3 Três cooperativas brasileiras, três fórmulas de rateio
+
+- **Coopercitrus:** o Estatuto, **art. 60**, rateia as sobras com ponderação **3,00** (até R$ 200 mil), **1,00** (até R$ 2 mi) e **0,30** (acima de R$ 2 mi) de movimentação, corrigida pelo **IGP-M** — em 2023, **R$ 8,1 bilhões** de faturamento e **R$ 42,8 milhões** de sobra líquida, com **321 mil atendimentos** a **28 mil produtores** na assistência técnica;
+- **COPACOL:** **R$ 270 milhões de sobras (+64%)** sobre **R$ 10,6 bilhões** de faturamento, rateadas **por unidade processada** — **R$ 2 por saca de soja**, **R$ 0,10 por litro de leite**, **3,6%** sobre insumos: cada cooperado enxerga o rateio na própria saca;
+- **LAR:** **R$ 335,9 milhões em 2025**, dos quais **R$ 59 milhões** de **devolução de capital a 225 jubilados** — a repartição alcança quem já saiu, sobre receita de **R$ 23,2 bilhões (+14,4%)**.
+
+**Exemplo 9 — o rateio como cláusula, não como discurso.** Ao ler as três fórmulas acima, note que nenhuma delas é "decisão do conselho no fim do ano": a Coopercitrus tem **percentuais e faixas no Estatuto**, a COPACOL tem **fórmula por unidade processada** e o LAR tem **regra de devolução ao jubilado**. É exatamente a arquitetura que a seção 11 exige — destino do excedente **escrito antes** da distribuição — só que operando em escala de bilhões.
+
+> [!WARNING]
+> **Armadilha real: anunciar rateio antes de fechar a conta.** O caso Fagor é o aviso: com **~€ 859 milhões** de dívida, prejuízo de **€ 89 milhões** sobre vendas de **€ 1,167 bilhão** (2012) e pedido de **€ 170 milhões** recusado, a cooperativa foi a **concurso de acreedores em 13/11/2013** — o grupo Mondragon aportou cerca de **€ 300 milhões** e recusou outros € 50 milhões, e mais de **900 ex-cooperados** reivindicavam **€ 47,8 milhões**. Duas regras de retenção evitam repetir o roteiro no Brasil: a Lei nº 5.764/1971 exige **Fundo de Reserva ≥10%** e **FATES ≥5%** antes de qualquer distribuição (art. 28), e a Lei nº 10.101/2000 veda pagar PLR **mais de 2 vezes por ano civil** ou com intervalo inferior a **1 trimestre** (art. 3º, §2º), além de exigir que as regras sejam assinadas **antes do pagamento** ou com **≥90 dias** de antecedência (art. 2º, §7º). Rateio anunciado sem reserva e sem calendário legal é promessa que vira passivo.
+
+- **🔢 Você sabia?** Quando a crise de 1990 bateu, a SEMCO não cortou o rateio: **elevou a SEMCOPAR de 23% para 39%** do lucro após imposto da unidade, enquanto a direção reduzia **40%** dos próprios salários. A receita, que era de **US$ 4 milhões** em 1982, chegou a **US$ 212 milhões** em 2003, com rotatividade **<2%** — repartir dor junto com lucro é o que segura o time no barco. *(HBR/Semler; Gonçalves, 1996.)*
+
+---
+
+## 13. Panorama internacional: quem limita, quem só relata
+
+O Brasil é uma exceção prática: **não tem teto legal de distribuição nem forma dedicada**. No mundo, os regimes híbridos se dividem em três famílias — **teto imposto por lei** (Reino Unido), **repartição tripartida obrigatória** (França) e **propósito com relatório, sem teto** (EUA e Itália). A tabela abaixo é a comparação verificada, país a país.
+
+| País | Forma híbrida | Regra de repartição / teto | Base legal e fonte |
+|---|---|---|---|
+| **Reino Unido** | Community Interest Company (CIC) | **35% dos lucros distribuíveis**; por ação, até **5% acima da taxa básica do BoE**; juros **+4 p.p.**; capacidade ociosa **carrega por 5 anos** | GOV.UK, *CIC Guidance* (09/02/2024); CIC FAQ (2017) |
+| **França** | SCOP | Trabalho **≥25%**, reservas **≥16%**, dividendos de capital **≤33%** | les-scop.coop, *FAQ* (2025); loi 47-1775/1947 |
+| **França** | SCIC | **≥57,5% do resultado** às reservas impartageáveis (até 100%); 3 categorias de sócios; 1 pessoa = 1 voto | loi n° 2001-624 de 17/07/2001; Le Labo de l'ESS |
+| **Espanha** | Cooperativa protegida | Juros ao capital: **taxa básica do Banco de España +3 p.p.** (sócios) e **+5 p.p.** (associados); estourou, perde a proteção fiscal | Ley 20/1990 (BOE, 19/12/1990) |
+| **EUA** | *Benefit corporation* | **Sem teto de dividendos** — a lei exige propósito e relatório, não limita distribuição | Maryland (**abril/2010**, 1º estado); 8 Del. C. §§ 361–368 |
+| **Itália** | *Società benefit* | **Sem teto e sem incentivo fiscal**; *relazione di impatto* anual anexada ao balanço | L. 208/2015, commi 376–384 (vig. 01/01/2016) |
+| **Alemanha** | eG (*Genossenschaft*) | Distribuição conforme a ***Satzung***; registro exige **parecer prévio de associação de auditoria** e **mínimo 3 membros** | GenG; IHK Hannover |
+| **Brasil** | Cooperativa | **Vedado** distribuir às quotas, salvo **juros ≤12% a.a.**; **10%** de Fundo de Reserva e **5%** de FATES | Lei nº 5.764/1971, arts. 24 §3º e 28 |
+
+### 13.1 A dimensão de cada regime
+
+| País / regime | Nº de entidades | Indicador-chave | Fonte / ano |
+|---|---|---|---|
+| Reino Unido — CIC | **37.081** | 8.376 aprovações em 2024/25 (recorde); 3.832 dissoluções = 10% do registro | CIC Regulator, *Annual Report 2024 to 2025* (jul/2025) |
+| EUA — ESOP | **6.411 empresas** (6.609 planos) | **15,1 mi** de participantes (10,9 mi ativos ≈ **8% da força privada**) e **>US$ 2,1 tri** em ativos | NCEO/ESOP.org (dados 2023, pub. 2026) |
+| EUA — *benefit corporation* | **41 estados** com lei | **51 jurisdições** globais | CARI/Indiana University (02/05/2024); B Lab (2024) |
+| França — SCIC / SCOP | **1.417** / **2.723** | **€ 1,6 bi** / **€ 6,7 bi** de faturamento | Coop FR, *Chiffres clés 2024* |
+| Alemanha — eG | **~7.700** cooperativas | **22,6 mi** de membros | Springer, *Handbuch Genossenschaftswesen* (2023) |
+| Itália — *società benefit* | **5.540 (+20%)** | **241 mil** *addetti* (fim de 2025) | Pesquisa Nativa/Intesa Sanpaolo/InfoCamere (mar/2026) |
+| Brasil — cooperativas | **4.384** | **25,8 mi** de cooperados; **R$ 51,4 bi** de sobras (**+32%**) | Sistema OCB, *Anuário 2025* (dados 2024) |
+| Mundo — cooperativas | **3 milhões** | **280 mi de empregos (10% dos ocupados)** e **US$ 2,79 tri** no Top 300 | ACI/ICA; *World Cooperative Monitor 2025* |
+
+Três leituras estratégicas desse mapa: **(1)** onde há teto (CIC: **35%**), a forma é atraente justamente porque o limite dá previsibilidade ao investidor; **(2)** onde há repartição tripartida (SCOP: **25/16/33**), a lei faz o trabalho que no Brasil seria estatuto; **(3)** onde há só relatório (EUA, Itália), o diferencial é o **relato de impacto**, não a trava de lucro — e mesmo lá o ESOP distribui em escala: **US$ 2,1 trilhões** em ativos de **15,1 milhões** de participantes.
+
+- **🔢 Você sabia?** A CIC britânica limita a distribuição a **35% dos lucros distribuíveis** — mas a capacidade de dividendos **não usada num ano carrega por até 5 anos**, guardada para anos melhores, e o registro já soma **37.081 CICs** (março/2025), sendo **3.832** dissolvidas, exatamente **10%** do total: a forma serve tanto para começar quanto para **encerrar projetos com transparência**. *(GOV.UK, CIC FAQ, 31/03/2017; CIC Regulator, 23/07/2025.)*
+
+```matching
+{
+  "question": "Associe cada país à regra que limita (ou não) a distribuição do lucro:",
+  "pairs": [
+    {"left": "Reino Unido (CIC)", "right": "Teto de 35% dos lucros distribuíveis, com capacidade ociosa que carrega por 5 anos (GOV.UK, 2024)"},
+    {"left": "França (SCOP)", "right": "Trabalho ≥25%, reservas ≥16% e dividendos de capital ≤33% do resultado (les-scop.coop, 2025)"},
+    {"left": "França (SCIC)", "right": "Ao menos 57,5% do resultado às reservas impartageáveis, até 100% (loi 2001-624)"},
+    {"left": "Espanha (cooperativa protegida)", "right": "Juros ao capital limitados à taxa básica do Banco de España +3 p.p. e +5 p.p. (Ley 20/1990)"},
+    {"left": "Brasil (cooperativa)", "right": "Nada às quotas, salvo juros de até 12% a.a.; 10% de Fundo de Reserva e 5% de FATES (Lei nº 5.764/1971)"},
+    {"left": "EUA (benefit corporation) e Itália (società benefit)", "right": "Sem teto de dividendos: a lei exige propósito e relatório de impacto, não limita a distribuição"}
+  ],
+  "explanation": "Os regimes se organizam em três famílias: teto legal (CIC britânica, 35%), repartição tripartida obrigatória (SCOP 25/16/33 e SCIC 57,5% às reservas) e propósito sem teto (benefit corporation e società benefit). A Espanha limita os juros, e o Brasil é o mais rígido de todos no cooperativismo: veda distribuir às quotas, salvo juros de até 12% a.a., e obriga reservar 10% + 5% antes de ratear. Por isso a lição inteira insiste: no Brasil, o desenho do excedente é cláusula pactuada, não consequência da lei."
+}
+```
+
+---
+
 ## Perguntas Práticas (Practice Questions)
 
 ```question
@@ -710,6 +797,38 @@ Compare com a tabela da seção 5: aqui estão preenchidas, ao mesmo tempo, as c
   ],
   "correct": 1,
   "explanation": "O PL 3.284/2021 prevê a qualificação de Sociedade de Benefício, relatório de impacto votado e quórum de 3/4 do capital para adotar ou excluir a qualificação — mas estava apenas pronto para pauta na CCJ em 07/04/2025. Projeto de lei não é lei, e a OSC da Lei nº 13.019 veda distribuição, o que a diferencia por completo."
+}
+```
+
+```question
+{
+  "id": "hyb-01-q11",
+  "type": "multiple-choice",
+  "question": "Pelo modelo verificado da SEMCO (Brasil), a SEMCOPAR reparte qual percentual do lucro após imposto de cada unidade?",
+  "options": [
+    "13% do lucro ao fundo divisional de solidariedade, como a Mondragon",
+    "23%, duas vezes por ano, a três eleitos pelos trabalhadores — chegando a 39% na crise de 1990",
+    "33% do resultado em dividendos de capital, como a SCOP francesa",
+    "35% dos lucros distribuíveis, como a CIC britânica"
+  ],
+  "correct": 1,
+  "explanation": "A SEMCOPAR reparte 23% do lucro após imposto da unidade, 2 vezes por ano, a três eleitos pelos trabalhadores, subindo a 39% na crise de 1990, quando a direção cortou 40% dos próprios salários (HBR/Semler; Gonçalves, 1996). As alternativas A, C e D trazem regras de outros regimes: 13% é a Mondragon, 33% é o teto de capital da SCOP francesa e 35% é o teto da CIC britânica."
+}
+```
+
+```question
+{
+  "id": "hyb-01-q12",
+  "type": "multiple-choice",
+  "question": "Na Community Interest Company (CIC) do Reino Unido, qual é o teto agregado de dividendos sobre os lucros distribuíveis?",
+  "options": [
+    "Sem teto — a lei só exige relatório de impacto anual",
+    "57,5% do resultado, que deve ir às reservas impartageáveis",
+    "12% ao ano sobre as quotas-partes do capital",
+    "No máximo 35%, com teto por ação de 5% acima da taxa básica do BoE e capacidade ociosa que carrega por até 5 anos"
+  ],
+  "correct": 3,
+  "explanation": "O capping britânico é de 35% dos lucros distribuíveis, com limite por ação de 5% acima da taxa básica do Banco da Inglaterra, juros limitados a 4 pontos percentuais acima da taxa base e capacidade ociosa que carrega por 5 anos (GOV.UK, Community Interest Companies Guidance, 09/02/2024; CIC FAQ, 31/03/2017). A alternativa A descreve benefit corporation e società benefit; a B, a SCIC francesa; a C, a cooperativa brasileira (Lei nº 5.764/1971, art. 24, §3º)."
 }
 ```
 

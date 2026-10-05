@@ -1,6 +1,6 @@
 ---
 title: "Anatomia Comparativa dos Modelos: Empresa Tradicional, Parceria, Cooperativa, ONG e Híbridos"
-description: "Dissecação lado a lado dos cinco modelos organizacionais — corporação tradicional, parceria/LLP, cooperativa, ONG/OSC e formas híbridas (empresa de impacto, B Corp, benefit corporation, ESOP e utilidade pública) — com tabela mestre de 18 dimensões, exemplos reais com números, base normativa brasileira e internacional e o veredito comparativo sobre onde cada modelo falha."
+description: "Dissecação lado a lado dos cinco modelos organizacionais — corporação tradicional, parceria/LLP, cooperativa, ONG/OSC e formas híbridas (empresa de impacto, B Corp, benefit corporation, ESOP e utilidade pública) — com tabela mestre de 19 dimensões, casos reais com números, regimes internacionais comparados de sete países, base normativa brasileira e internacional e o veredito comparativo sobre onde cada modelo falha."
 order: 2
 difficulty: "intermediate"
 duration: "90 min"
@@ -47,10 +47,12 @@ Toda organização responde, ainda que sem saber, a cinco perguntas: **quem é d
 
 Nesta lição você vai:
 
-- mapear os **cinco modelos** pelas mesmas 18 dimensões, numa tabela mestre única;
+- mapear os **cinco modelos** pelas mesmas 19 dimensões, numa tabela mestre única;
 - entender o **regime de cada um**: base legal, instrumento de registro, forma de voto, destino do excedente e transparência;
 - calcular a **escala real** de cada arquétipo no Brasil e no mundo, com dados de 2024 a 2026;
 - ler **8 exemplos com números** (Petrobras, Mattos Filho, Sicoob, MSF Brasil, B Corps brasileiras, ESOP, benefit corporation e utilidade pública);
+- analisar **8 casos reais** em que cada arquétipo aparece em ação — MONDRAGON, Fagor, John Lewis, REI, Publix, Natura, COPACOL/Coopercitrus e SEMCO — com a repartição medida;
+- comparar **7 regimes internacionais** (EUA, Reino Unido, Espanha, França, Alemanha, Itália e Brasil) pela forma híbrida, pelo teto de distribuição e pela escala verificada;
 - separar **certificação de impacto de forma jurídica** — o erro mais caro desta matéria;
 - montar a **ordem de decisão** para escolher o modelo certo antes de assinar contrato social.
 
@@ -74,7 +76,7 @@ A leitura rápida: **corporação = capital, parceria = alinhamento, cooperativa
 
 ### 1.2 Três eixos de comparação que nunca falham
 
-Para não se perder em 18 dimensões, comece sempre por três eixos:
+Para não se perder em 19 dimensões, comece sempre por três eixos:
 
 1. **Poder** — quem vota e por quanto vale o voto. É aqui que corporação e cooperativa se separam de forma irreversível;
 2. **Valor** — para onde vai o excedente: ao capital, aos sócios, aos cooperados, à causa ou a todos ao mesmo tempo;
@@ -313,9 +315,9 @@ A declaração de utilidade pública, no regime estadual verificado (Decreto-Lei
 
 ---
 
-## 7. Tabela Mestre — 18 dimensões × 5 modelos
+## 7. Tabela Mestre — 19 dimensões × 5 modelos
 
-A tabela a seguir é a peça central da lição: leia uma linha por vez, sempre da esquerda para a direita, e observe como **uma única dimensão** (voto, excedente, transparência) muda de significado entre os cinco modelos.
+A tabela a seguir é a peça central da lição: leia uma linha por vez, sempre da esquerda para a direita, e observe como **uma única dimensão** (voto, excedente, transparência) muda de significado entre os cinco modelos. A linha 19 é o retrato internacional detalhado na seção 10.
 
 | # | Dimensão | (1) Corporação tradicional | (2) Parceria / LLP | (3) Cooperativa | (4) ONG / OSC | (5) Híbridos (impacto, B Corp/benefit corp., ESOP, utilidade pública) |
 |---|---|---|---|---|---|---|
@@ -337,6 +339,7 @@ A tabela a seguir é a peça central da lição: leia uma linha por vez, sempre 
 | 16 | Destinatário do valor | O acionista | Os sócios | Cooperados e comunidade (R$ 61,2 bi de sobras em 2025) | Beneficiários da causa, sem "donos" | Todas as partes interessadas, com compromisso auditado |
 | 17 | Escala observada | Petrobras: R$ 36,6 bi de lucro (2024) | Mattos Filho: R$ 1,7 bi e 138 sócios (2024) | Sicoob: 8,6 mi de cooperados e R$ 359,7 bi de ativos | MSF Brasil: R$ 99,6 mi; IPEA: 897.054 OSCs | ~1.000 negócios (BR, 2024); >500 B Corps (BR, 2026); 6.411 ESOPs (EUA) |
 | 18 | Risco típico | Concentração de poder e curto prazo | Assimetria entre sócios e dependência de pessoas-chave | Baixa escala de capital e engajamento | Dependência de captação e de repasses públicos | Lavagem de imagem e custo de conformidade |
+| 19 | Regime internacional (seção 10) | EUA: benefit corporation e L3C **sem teto** de dividendos; 41 estados + DC | Reino Unido: John Lewis, bônus discricionário de £ 46 mi (2021/22) e £ 0 em seguida; CIC registra como Ltd/plc | Espanha: juros ≤ taxa básica +3/+5 p.p.; França: SCOP capital ≤ 33%; Alemanha: ~7,7 mil eG | Itália: **relação de impacto anual** anexada ao balanço (5.540 em 2025), sem incentivo fiscal | Reino Unido: CIC com teto de **35%** e asset lock (37.081 em mar/2025); Brasil: Lei nº 5.764/1971 — nada às quotas, salvo juros ≤ 12% a.a. |
 
 > [!IMPORTANT]
 > **Veredito Comparativo — a empresa híbrida × empresa tradicional, parceria, cooperativa e ONG.**
@@ -374,9 +377,132 @@ A tabela a seguir é a peça central da lição: leia uma linha por vez, sempre 
 
 ---
 
-## 9. Como escolher: a ordem de decisão
+## 9. Casos Reais — cada arquétipo em ação, com números
 
-### 9.1 O fluxo de decisão
+A seção anterior mostra o modelo **isolado**; os casos abaixo mostram o mesmo esqueleto sob pressão — crise, distribuição, propriedade dos trabalhadores e impacto auditado. Todos os números vêm de relatório anual, formulário oficial ou auditoria, e a última coluna indica qual linha da tabela mestre o caso ilustra.
+
+### 9.1 Oito casos e a linha da tabela mestre que cada um acende
+
+| # | Caso | País | Arquétipo em ação | Repartição verificada | Linha da tabela mestre |
+|---|---|---|---|---|---|
+| 1 | MONDRAGON | Espanha | Cooperativa de trabalhadores em federação | ≥13% do lucro ao fundo de solidariedade; razão salarial 1:6 | 3 e 16 |
+| 2 | Fagor Electrodomésticos | Espanha | Cooperativa em crise | dívida ~€ 859 mi; concurso de acreedores em 13/11/2013 | 15 e 18 |
+| 3 | John Lewis Partnership | Reino Unido | Corporação detida por trust dos empregados | bônus de 3% (£ 46 mi) em 2021/22 e £ 0 nos três anos seguintes | 3 e 8 |
+| 4 | REI Co-op | EUA | Cooperativa de consumidores | US$ 189 mi a membros e US$ 84,8 mi a funcionários | 3 e 16 |
+| 5 | Publix (ESOP) | EUA | Corporação tradicional + camada de propriedade | 149.213 participantes com US$ 14,3 bi no plano | 1, 6 e 10 |
+| 6 | Natura | Brasil | Híbrido por certificação B Corp | iP&L de R$ 2,50 por R$ 1 de receita → R$ 50,5 bi | 7 e 8 |
+| 7 | COPACOL e Coopercitrus | Brasil | Cooperativa agroindustrial | R$ 270 mi de sobras (2024); rateio 3,00/1,00/0,30 | 3 e 16 |
+| 8 | SEMCO | Brasil | Corporação com repartição pactuada | SEMCOPAR: 23% do lucro após imposto (39% na crise) | 3 e 6 |
+
+### 9.2 MONDRAGON e Fagor: a cooperativa no auge e no abismo
+
+**Caso 1 — MONDRAGON (Espanha, 1956).** Federação de **81 cooperativas autogovernadas**, **~70.500 pessoas** e vendas de **€ 11,056 bilhões** em 2023, com EBITDA de **€ 1,486 bilhão** e lucro recorde de **€ 593 milhões**. Cada cooperativa destina **no mínimo 13% do lucro** ao fundo divisional de solidariedade — em 2023 foram **€ 13,0 milhões** de compensação e **€ 7,05 milhões** de offset de prejuízos. Os salários ficam entre **80% e 110%** de uma referência anual, com a razão entre piores e melhores travada em **1:6 desde 1988** (era 1:3 em 1956 e 1:4,5 nos anos 1970), e a Fundación MONDRAGON aplicou **€ 27,8 milhões em 37 programas**. É a linha 16 da tabela mestre virando política: a solidariedade é **autofinanceira**, o "seguro" entre unidades sai do lucro de quem prospera.
+
+**Caso 2 — Fagor Electrodomésticos (Espanha, 1956–2013).** A mesma arquitetura, do outro lado da curva: **5.642 trabalhadores**, dívida de **~€ 859 milhões**, prejuízo de **€ 89 milhões sobre vendas de € 1,167 bilhão** em 2012, pedido de **€ 170 milhões** recusado e **concurso de acreedores em 13/11/2013**. A MONDRAGON aportou cerca de **€ 300 milhões** e recusou mais € 50 milhões; mais de 900 ex-cooperados reivindicavam **€ 47,8 milhões**.
+
+> [!WARNING]
+> **Repartir excedente não é blindagem contra insolvência.** O caso Fagor é a prova de que estrutura cooperativa convive com alavancagem e falência: ~€ 859 mi de dívida, concurso de acreedores em 13/11/2013, 5.642 postos de trabalho e € 47,8 mi reivindicados. As linhas 3 e 16 (repartição) são dimensões diferentes das linhas 15 e 18 (dissolução e risco) — quem lê só a primeira enxerga proteção onde há exposição de capital.
+
+### 9.3 John Lewis e REI: o bônus que não é direito adquirido
+
+**Caso 3 — John Lewis Partnership (Reino Unido, 1906/1929).** Cerca de **69.000 Partners** são detentores indiretos da plc por dois *Settlements in Trust* (**1929 e 1950**). O *Partnership Bonus* é condicional a **PBTBE ≥ £ 150 milhões e dívida < 4x**: foi de **3% (o equivalente a 1,5 semana) = £ 46 milhões em 2021/22** e **£ 0** em 2022/23, 2023/24 e 2024/25 — mesmo com o PBTBE **triplicando de £ 42 mi para £ 126 mi** e **£ 114 milhões** pagos em salários em 2024/25 (vendas de £ 12,8 bi). Lição: a parceria instituciona a repartição, mas a limiarização lucro × dívida protege o capital social na crise — o bônus é política discricionária, não verba devida (linha 3).
+
+**Caso 4 — REI Co-op (EUA, 1938).** Cooperativa de consumidores com **187 lojas**, **~14 mil funcionários** e receita de **US$ 3,53 bilhões** em 2024, ano em que apurou **prejuízo de US$ 156,4 milhões**. Ainda assim destinou **US$ 189 milhões** em *Co-op Member Reward* (**tipicamente 10%**), **US$ 84,8 milhões** em incentivos e *profit sharing* (+48,5%) e **US$ 8,9 milhões** a mais de 300 ONGs. Lição: a repartição está na cultura, não no resultado do exercício — quem aplica a régua da corporação ao balanço da REI lê prejuízo; quem lê a linha 16 lê sobra repartida ao membro.
+
+### 9.4 Publix, Natura, SEMCO e as agroindustriais brasileiras
+
+**Caso 5 — Publix (EUA, 1930).** Maior empresa de **propriedade dos funcionários** dos EUA: **US$ 59,7 bilhões** de vendas e **US$ 4,6 bilhões** de lucro em 2024, **1.392 lojas** e mais de **255.000 pessoas**, com ESOP desde **01/10/1974**. O Form 5500 de 2024 registra **149.213 participantes** com **US$ 14,3 bilhões** no plano, PLR de até **12% do salário-base** e *put option* de **US$ 669 milhões**. É a linha 10 sem troca de forma jurídica: a C-corp continua C-corp e o trabalhador vira co-proprietário por ação — **não por voto** no dia a dia.
+
+**Caso 6 — Natura (Brasil, 1969).** Dez anos como Empresa B: **iP&L de R$ 2,50 por R$ 1 de receita, ou R$ 50,5 bilhões** de impacto líquido em 2024, **46 comunidades** (meta 2030 antecipada), emissões dos escopos 1+2 **−43%** e **18,2%** de plástico reciclado, sobre receita do grupo de R$ 24,1 bilhões. É a linha 7 em prática: o impacto é publicado **como número**, ao lado do resultado financeiro, sem substituí-lo.
+
+**Caso 7 — COPACOL e Coopercitrus (Brasil).** A COPACOL distribuiu **R$ 270 milhões de sobras (+64%)** sobre faturamento de **R$ 10,6 bilhões** em 2024, com **9,6 mil cooperados** e rateio por unidade processada — **R$ 2 por saca de soja, R$ 0,10 por litro de leite e 3,6% sobre insumos**. A Coopercitrus apurou **sobra líquida de R$ 42,8 milhões** sobre **R$ 8,1 bilhões** em 2023, e o **art. 60 do seu estatuto** rateia as sobras em ponderação **3,00 / 1,00 / 0,30** por faixa de movimentação, atualizada pelo **IGP-M**, ao lado de **321 mil atendimentos a 28 mil produtores**. É a linha 3 materializada em contrato: o cooperado enxerga o excedente na própria saca.
+
+**Caso 8 — SEMCO (Brasil, 1953).** A SEMCOPAR reparte **23% do lucro após imposto da unidade, duas vezes por ano**, a **3 eleitos pelos trabalhadores** — percentual que subiu para **39%** na crise de 1990, quando a direção cortou **40%** do próprio salário, enquanto a receita saía de **US$ 4 milhões (1982)** para **US$ 212 milhões (2003)**. É a linha 6 sem certificação, sem ESOP e sem OCB: repartição de valor como acordo de gestão.
+
+- **🔢 Você sabia?** O LAR (Brasil, cooperativa agroindustrial fundada em 19/03/1964) distribuiu **R$ 335,9 milhões em 2025** — R$ 101,3 milhões de sobras mais **R$ 59 milhões de devolução de capital a 225 jubilados** — sobre receita de **R$ 23,2 bilhões (+14,4%)**. Ou seja: quem saiu da cooperativa **mantém vínculo patrimonial** com ela, coisa que nenhum dos outros quatro arquétipos oferece ao ex-acionista, ao ex-sócio ou ao ex-voluntário.
+
+---
+
+## 10. Regimes Internacionais Comparados
+
+"Híbrido" é arranjo, e cada país escolheu **o que travar**: uns limitam o **dinheiro** (teto legal de distribuição), outros limitam o **propósito** (relato obrigatório de impacto). Abaixo, sete países — **EUA, Reino Unido, Espanha, França, Alemanha, Itália e Brasil** — comparados pelas mesmas dimensões da tabela mestre: forma, base legal, repartição e escala.
+
+### 10.1 País × forma híbrida × repartição
+
+| País | Forma híbrida | Base legal verificada | Repartição / teto ao capital | Escala verificada (fonte/ano) |
+|---|---|---|---|---|
+| EUA | benefit corporation | Maryland, **abr/2010** (1º estado); 8 Del. C. §§ 361–368; D.C. Law 19-305 (2013) | **Sem teto legal** de dividendos; dever de propósito e de relato | 41 estados + DC (CARI/IU, 02/05/2024); 51 jurisdições (B Lab, 2024) |
+| EUA | L3C | Vermont 11 V.S.A. §§ 4161–4163 | **Sem teto legal**; produção de renda não pode ser propósito significativo | Autorizada em 8 estados + Porto Rico (Cornell LII, 2022) |
+| EUA | ESOP | ERISA; plano previdenciário com fiduciária | *Vesting* progressivo e distribuição no desligamento | 6.609 planos, 6.411 empresas, 15,1 mi de participantes (NCEO, dados 2023) |
+| Reino Unido | CIC | CAICE Act 2004 + CIC Regulations 2005 | **35% dos lucros distribuíveis** (teto agregado); 5% acima do BoE por ação; juros **+4 p.p.** | **37.081** CICs; 8.376 novas em 2024/25 (CIC Regulator, jul/2025) |
+| Espanha | Cooperativa de trabalho | Ley 27/1999 + **Ley 20/1990** | Juros ≤ **taxa básica do BdE +3 p.p.** (sócios) / **+5 p.p.** (associados) | MONDRAGON: 81 cooperativas e € 11,056 bi (2023) |
+| França | SCIC | **loi n° 2001-624, de 17/07/2001** + décret 2002-241 | **≥57,5%** do resultado às reservas impartageáveis (até 100%) | 1.417 SCIC; 15.720 assalariados; € 1,6 bi (Coop FR, 2024) |
+| França | SCOP | loi 47-1775/1947 e loi 78-763/1978 | Trabalho **≥25%**, reservas **≥16%**, capital **≤33%** | 2.723 SCOP; 62.685 assalariados; € 6,7 bi (Coop FR, 2024) |
+| Alemanha | eG (Genossenschaft) | GenG; **mínimo 3 membros** (§ 4); parecer prévio de associação de auditoria | Conforme a *Satzung*; **cap genérico não localizado** no GenG | ~7.700 cooperativas; ~22,6 mi de membros (Springer, 2023) |
+| Itália | società benefit | **L. 208/2015**, commi 376–384 (vigência 01/01/2016) | **Sem teto**; a *relazione di impatto* anual substitui o cap | 5.540 empresas (+20%); 241 mil *addetti* (fim 2025) |
+| Brasil | Cooperativa | **Lei nº 5.764/1971** | Vedado distribuir às quotas, salvo **juros ≤ 12% a.a.**; fundos de **10% + 5%** | 4.384 cooperativas; 25,8 mi cooperados; R$ 51,4 bi de sobras (2024) |
+
+Duas famílias de regime, uma só fronteira: **Reino Unido, França, Espanha e Brasil limitam a distribuição** por número (35%, 33%, 57,5%, taxa básica + p.p., 12% a.a.), enquanto **EUA e Itália limitam o propósito** por relato — a lei muda o dever e o relatório, não o teto. A Alemanha ficou no meio: a restrição existe, mas na *Satzung* de cada eG, não na lei.
+
+### 10.2 O que efetivamente limita a distribuição
+
+| País / forma | Limite de distribuição ao capital | Natureza | Fonte / ano |
+|---|---|---|---|
+| Reino Unido — CIC | **35% dos lucros distribuíveis**; teto por ação de 5% acima do BoE | Regulamentar | GOV.UK (2024); CIC FAQ (2017) |
+| França — SCOP | Capital **≤33%**; trabalho ≥25%; reservas ≥16% | Legal | les-scop.coop (2025) |
+| França — SCIC | **≥57,5%** às reservas impartageáveis (até 100%) | Legal | loi 2001-624; Le Labo de l'ESS |
+| Espanha — cooperativa | Juros ≤ **taxa básica do BdE +3/+5 p.p.**; distribuir reservas irrepartíveis perde a proteção fiscal | Legal | Ley 20/1990 (BOE) |
+| Brasil — cooperativa | **Nada** às quotas, salvo **juros ≤ 12% a.a.**; **10% + 5%** de fundos | Legal | Lei nº 5.764/1971, arts. 24 §3º e 28 |
+| EUA — benefit corp. e L3C | **Sem teto** — o dever é de propósito, não de distribuição | N/A | 8 Del. C. §§ 361–368; 11 V.S.A. §§ 4161–4163 |
+| Itália — società benefit | **Sem teto** — o relato de impacto substitui o cap | N/A | L. 208/2015, commi 376–384 |
+| Alemanha — eG | Conforme a *Satzung*; cap genérico não localizado | Estatutário | GenG / IHK Hannover |
+
+No Brasil, o comparativo do outro lado do espelho é o **JCP**: a dedutibilidade dos juros sobre o capital social é limitada à **TJLP *pro rata die*** (Lei nº 9.249/1995, art. 9º), enquanto a cooperativa não pode distribuir nada às quotas além dos 12% a.a. — o Estado limita o retorno ao capital **tanto na sociedade quanto na cooperativa**, mas por instrumentos diferentes.
+
+### 10.3 A escala dos regimes no mundo
+
+- **Cooperativismo:** **3 milhões de cooperativas**, **≥12% da humanidade**, **280 milhões de empregos (10% dos ocupados do mundo)** e **US$ 2,79 trilhões** das 300 maiores cooperativas e mutuais (*World Cooperative Monitor 2025*, ICA/Euricse) — leitura mais recente dos US$ 2,4 trilhões da base 2019 da ACI usada na seção 4;
+- **B Corps:** **9.368 certificadas em 31/12/2024**, com **917.090 empregados** (B Lab, relatório de 2024), série que a seção 6 acompanha até os patamares de 2026;
+- **Filantropia corporativa nos EUA:** **US$ 44,40 bilhões em 2024 (+9,1%)** sobre US$ 592,50 bi, e **US$ 43,67 bilhões em 2025 (+3,1%)** sobre US$ 617,20 bi (Giving USA 2025 e 2026) — o termômetro do quanto a corporação devolve à causa **sem** nenhuma camada híbrida;
+- **Brasil:** **4.384 cooperativas**, **25,8 milhões de cooperados** (12,1% da população) e **R$ 51,4 bilhões de sobras (+32%)** em 2024 (Anuário OCB 2025) — o ano anterior aos números de 2025 da seção 4.
+
+- **🔢 Você sabia?** A **CIC** britânica pode **carregar por até 5 anos** a capacidade de dividendos que não usou no ano — teto guardado para anos melhores — e **3.832 CICs**, o equivalente a **10% do registro**, foram dissolvidas em 2024/25, enquanto outras **8.376** foram aprovadas no mesmo período (CIC Regulator, jul/2025; CIC FAQ, 2017). A forma híbrida serve para **nascer e para morrer**: criação recorde e encerramento de projetos no mesmo ano.
+
+### 10.4 Cronologia das bases legais
+
+A ordem em que os países escreveram suas regras explica por que os regimes não se parecem: quem legislou cedo protegeu a cooperativa, quem legislou tarde inventou o relato de impacto.
+
+```dragdrop
+{
+  "question": "Ordene as bases legais abaixo da MAIS ANTIGA para a MAIS RECENTE:",
+  "items": [
+    "Brasil — Lei nº 5.764/1971: Política Nacional de Cooperativismo, voto singular e sobras proporcionais",
+    "Espanha — Ley 20/1990, de 19 de dezembro: cooperativas fiscalmente protegidas, juros limitados à taxa básica do BdE",
+    "França — loi n° 2001-624, de 17 de julho de 2001: SCIC com 3 categorias de sócios e ≥57,5% às reservas",
+    "Reino Unido — CAICE Act 2004 e CIC Regulations 2005: CIC com asset lock e teto de 35% dos lucros distribuíveis",
+    "EUA — Maryland, abril de 2010: primeira lei estadual de benefit corporation",
+    "Itália — L. 208/2015, vigente desde 01/01/2016: società benefit com relazione di impatto anual"
+  ],
+  "correctOrder": [
+    "Brasil — Lei nº 5.764/1971: Política Nacional de Cooperativismo, voto singular e sobras proporcionais",
+    "Espanha — Ley 20/1990, de 19 de dezembro: cooperativas fiscalmente protegidas, juros limitados à taxa básica do BdE",
+    "França — loi n° 2001-624, de 17 de julho de 2001: SCIC com 3 categorias de sócios e ≥57,5% às reservas",
+    "Reino Unido — CAICE Act 2004 e CIC Regulations 2005: CIC com asset lock e teto de 35% dos lucros distribuíveis",
+    "EUA — Maryland, abril de 2010: primeira lei estadual de benefit corporation",
+    "Itália — L. 208/2015, vigente desde 01/01/2016: società benefit com relazione di impatto anual"
+  ],
+  "explanation": "A sequência é cronológica: 1971 (Brasil, cooperativismo), 1990 (Espanha, Ley 20/1990), 2001 (França, SCIC), 2004/2005 (Reino Unido, CIC), abril de 2010 (Maryland, 1ª lei de benefit corporation) e 2015/2016 (Itália, L. 208/2015 em vigor desde 01/01/2016). Perceba o padrão: os regimes de repartição por número são os mais antigos e nascem todos no cooperativismo; o relato de impacto como substituto do teto é a geração mais nova."
+}
+```
+
+> [!WARNING]
+> **"Teto de distribuição" não é conceito universal — nem brasileiro.** O teto de **35% dos lucros distribuíveis** é da **CIC britânica** (GOV.UK, 2024); a **SCOP francesa** limita o capital a **33%**; a **cooperativa brasileira** não distribui nada às quotas salvo **juros de até 12% a.a.** (Lei nº 5.764/1971, art. 24, §3º). Já as **benefit corporations** dos EUA, a **L3C** e a **società benefit** italiana **não têm teto legal**, e na Alemanha o cap não foi localizado no GenG. Seguem **não verificados** e não podem virar fato: incentivos fiscais do ESOP, regime reduzido de tributação das CICs, total de benefit corporations constituídas e total de L3C existentes. Estender o teto britânico ao Brasil, ou afirmar que "empresa híbrida tem teto de lucro", é erro de prova e cláusula incompatível com registro.
+
+---
+
+## 11. Como escolher: a ordem de decisão
+
+### 11.1 O fluxo de decisão
 
 ```text
         VOCÊ QUER DISTRIBUIR RESULTADO A ALGUÉM?
@@ -411,7 +537,7 @@ A tabela a seguir é a peça central da lição: leia uma linha por vez, sempre 
                      `-- não -> mantenha o modelo base
 ```
 
-### 9.2 Sequência de implantação do híbrido
+### 11.2 Sequência de implantação do híbrido
 
 Os passos abaixo são a ordem em que as decisões **precisam** ser tomadas — inverter a ordem obriga a refazer registro societário, assembleia e contrato.
 
@@ -436,7 +562,7 @@ Os passos abaixo são a ordem em que as decisões **precisam** ser tomadas — i
 }
 ```
 
-### 9.3 Regras práticas de aplicação
+### 11.3 Regras práticas de aplicação
 
 | Se a sua prioridade é... | Modelo base | Camada híbrida recomendada | Números que sustentam a escolha |
 |---|---|---|---|
@@ -447,9 +573,9 @@ Os passos abaixo são a ordem em que as decisões **precisam** ser tomadas — i
 | Lucro **e** impacto auditado | Sociedade existente | Forma jurídica de benefício público ou certificação | ~1.000 negócios de impacto e ~R$ 18 bi (BR, 2024) |
 | Dar propriedade aos trabalhadores | Empresa existente | Plano de ações tipo ESOP | 6.411 empresas e >US$ 2 tri (EUA, 2026) |
 
-### 9.4 Caso resolvido — de qual coluna parte uma nova empresa de impacto
+### 11.4 Caso resolvido — de qual coluna parte uma nova empresa de impacto
 
-Uma fundadora de **34 anos** quer montar uma empresa de produtos alimentícios que, além de dar lucro, financie refeitórios escolares. Ela pergunta: "começo pela certificação B Corp?". A ordem de decisão da seção 9.1 responde em quatro passos, todos verificáveis:
+Uma fundadora de **34 anos** quer montar uma empresa de produtos alimentícios que, além de dar lucro, financie refeitórios escolares. Ela pergunta: "começo pela certificação B Corp?". A ordem de decisão da seção 11.1 responde em quatro passos, todos verificáveis:
 
 1. **Distribuir resultado?** Sim, ela quer remunerar sócios e reinvestir — portanto, **não é ONG** (art. 53 do Código Civil exige fins não econômicos e veda distribuição);
 2. **Voto por capital?** Sim, há dois sócios com aportes desiguais — **sociedade limitada** com participação na proporção do capital, registrada na junta comercial;
@@ -460,9 +586,9 @@ Uma fundadora de **34 anos** quer montar uma empresa de produtos alimentícios q
 
 ---
 
-## 10. Armadilhas, confusões e lacunas de pesquisa
+## 12. Armadilhas, confusões e lacunas de pesquisa
 
-### 10.1 As seis confusões que mais cobram
+### 12.1 As seis confusões que mais cobram
 
 1. **"B Corp é tipo societário"** — não. É certificação privada da B Lab, com nota mínima de **80** e mediana de **50,9**;
 2. **"benefit corporation é selo"** — não. É forma jurídica criada por **lei** (Delaware, SB 47, 2013), com benefício público no certificado;
@@ -471,7 +597,7 @@ Uma fundadora de **34 anos** quer montar uma empresa de produtos alimentícios q
 5. **"ESOP é cooperativa americana"** — não. É **plano previdenciário** que detém ações do empregador (NCEO, 2026);
 6. **"impacto dispensa lucro"** — não. A Carta de Princípios da Iniciativa Capitalismo de Impacto admite **empresa que distribui lucros** como formato válido de negócio de impacto.
 
-### 10.2 O que a pesquisa **não** confirmou — e que não pode virar fato
+### 12.2 O que a pesquisa **não** confirmou — e que não pode virar fato
 
 > [!WARNING]
 > **Lacunas declaradas desta lição.** Os itens abaixo foram sinalizados como **não verificados** e, por isso, **não** devem ser usados como afirmação categórica em prova, em contrato ou em parecer:
@@ -486,7 +612,7 @@ Uma fundadora de **34 anos** quer montar uma empresa de produtos alimentícios q
 > - **Decreto federal de utilidade pública** de número conhecido: **não confirmado** — há apenas requisito de decreto-lei estadual (RJ);
 > - **Alegação de reconhecimento da marca B Corp pelo consumidor**: divulgação da B Lab **sem metodologia auditada** nas fontes lidas.
 
-### 10.3 Escala do setor, com data e fonte
+### 12.3 Escala do setor, com data e fonte
 
 | Indicador | Valor | Data de referência | Fonte |
 |---|---|---|---|
@@ -667,6 +793,38 @@ Uma fundadora de **34 anos** quer montar uma empresa de produtos alimentícios q
 }
 ```
 
+```question
+{
+  "id": "hyb-02-q11",
+  "type": "multiple-choice",
+  "question": "Qual é o teto de distribuição de uma CIC (Community Interest Company) no Reino Unido, e como ele se compara aos demais regimes internacionais verificados?",
+  "options": [
+    "35% dos lucros distribuíveis — mais restritivo que a SCOP francesa, que limita o capital a 33%",
+    "Não há teto — como na benefit corporation dos EUA e na società benefit italiana",
+    "35% dos lucros distribuíveis — a SCOP francesa é mais restritiva ao capital (≤33%) e os EUA e a Itália não têm teto algum",
+    "57,5% dos lucros, como na SCIC francesa"
+  ],
+  "correct": 2,
+  "explanation": "A CIC tem teto agregado de 35% dos lucros distribuíveis, com teto por ação de 5% acima da taxa do BoE e juros limitados a +4 p.p. (GOV.UK, 2024). Na SCOP francesa o capital recebe no máximo 33% do resultado (trabalho ≥25%, reservas ≥16%), logo é mais restritiva ao capital; já a benefit corporation dos EUA (8 Del. C. §§ 361–368; Maryland, abr/2010) e a italiana L. 208/2015 não têm teto legal — cobram relato. Os 57,5% da opção d) são das reservas impartageáveis da SCIC, não do teto de lucros da CIC."
+}
+```
+
+```question
+{
+  "id": "hyb-02-q12",
+  "type": "multiple-choice",
+  "question": "Pelo Relatório Anual 2023 da MONDRAGON, qual é o percentual mínimo do lucro de cada cooperativa destinado ao fundo divisional de solidariedade, e quanto ele moveu em 2023?",
+  "options": [
+    "23%, no modelo SEMCOPAR, com R$ 51,4 bilhões de sobras no Brasil",
+    "33%, como o capital na SCOP francesa",
+    "13%, o que resultou em € 13,0 milhões de compensação e € 7,05 milhões de offset de prejuízos",
+    "39%, o pico atingido na crise de 1990"
+  ],
+  "correct": 2,
+  "explanation": "A regra MONDRAGON é de no mínimo 13% do lucro de cada cooperativa ao fundo divisional, com € 13,0 milhões de compensação e € 7,05 milhões de offset em 2023, sobre vendas de € 11,056 bilhões e lucro recorde de € 593 milhões. Os 23% são a fórmula SEMCOPAR da SEMCO (39% na crise de 1990), 33% é o teto de capital da SCOP francesa e os R$ 51,4 bilhões são as sobras do cooperativismo brasileiro em 2024 (Anuário OCB 2025)."
+}
+```
+
 ```matching
 {
   "question": "Associe cada instituto à sua natureza e ao seu dado verificado:",
@@ -711,7 +869,7 @@ Uma fundadora de **34 anos** quer montar uma empresa de produtos alimentícios q
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
-> 1. Os cinco modelos se separam por três eixos — **poder (voto)**, **valor (excedente)** e **prova (transparência)** — e a tabela mestre de 18 dimensões os coloca lado a lado numa leitura única;
+> 1. Os cinco modelos se separam por três eixos — **poder (voto)**, **valor (excedente)** e **prova (transparência)** — e a tabela mestre de 19 dimensões os coloca lado a lado numa leitura única;
 > 2. **Corporação = capital** (1 ação = 1 voto; Petrobras lucrou R$ 36,6 bi em 2024); **parceria = alinhamento** (Mattos Filho: R$ 1,7 bi e 138 sócios); **cooperativa = democracia** (1 cooperado = 1 voto; R$ 61,2 bi de sobras em 2025); **ONG = causa** (MSF Brasil: R$ 99,6 mi captados, sem distribuição);
 > 3. A **benefit corporation** é forma jurídica (Delaware, SB 47 de 2013, quórum de 90% para conversão) e a **B Corp** é certificação privada (mínimo 80, mediana 50,9) — nunca se confundam;
 > 4. As camadas híbridas combinam-se com qualquer forma: **ESOP** (6.411 empresas e mais de US$ 2 trilhões nos EUA), **empresa de impacto** (~1.000 negócios e ~R$ 18 bi no Brasil, 2024) e **utilidade pública** (sem lucro, sem remuneração, sem distribuição);

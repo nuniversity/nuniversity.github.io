@@ -1,6 +1,6 @@
 ---
 title: "Finanças da Empresa Híbrida: Indicadores, Reservas e Fundo de Impacto"
-description: "Finanças da empresa híbrida: economia unitária (CAC, LTV e retorno de aquisição), margem de contribuição, ponto de equilíbrio, respiro de caixa e custo da dívida em 2026; estrutura financeira dos cinco modelos jurídicos, reservas e fundos obrigatórios pela Lei nº 5.764/1971 e pela ITG 2004, fundo de impacto interno, demonstrações de lucro mais impacto, catálogo de indicadores com fórmula e contas resolvidas de rateio, equilíbrio, captação e reinversão."
+description: "Finanças da empresa híbrida: economia unitária (CAC, LTV e retorno de aquisição), margem de contribuição, ponto de equilíbrio, respiro de caixa e custo da dívida em 2026; estrutura financeira dos cinco modelos jurídicos, reservas e fundos obrigatórios pela Lei nº 5.764/1971 e pela ITG 2004, fundo de impacto interno, demonstrações de lucro mais impacto, catálogo de indicadores com fórmula, contas resolvidas de rateio, equilíbrio, captação e reinversão, casos reais com números (MONDRAGON, COPACOL, Coopercitrus, LAR e REI) e atualizações 2025-2026 com vigência confirmada (reforma tributária, PLR e reporte ESG)."
 order: 6
 difficulty: "intermediate"
 duration: "90 min"
@@ -49,7 +49,9 @@ Nesta lição você vai:
 - aplicar a **Lei nº 5.764/1971 e a ITG 2004** ao rateio de sobras, com conta resolvida;
 - montar o **fundo de impacto interno** de uma limitada híbrida, com percentuais e valores;
 - separar o que é **norma contábil** do que é **referencial voluntário** nas demonstrações "lucro mais impacto";
-- usar o **catálogo de indicadores com fórmula** e conferir as **lacunas** que a pesquisa não confirmou.
+- usar o **catálogo de indicadores com fórmula** e conferir as **lacunas** que a pesquisa não confirmou;
+- ler **casos reais** — MONDRAGON, COPACOL, Coopercitrus, LAR e REI — com rateio, reserva e fundo **já calculados** sobre números publicados;
+- aplicar as **atualizações 2025–2026 com vigência confirmada** (reforma tributária, PLR e reporte ESG) às projeções, separando norma em vigor de item ainda em tramitação.
 
 ---
 
@@ -529,6 +531,132 @@ Nada derruba uma decisão financeira tão rápido quanto **um número que ningu�
 
 ---
 
+## 12. Casos Reais: a estrutura financeira na prática
+
+Depois das fórmulas, os números de empresas híbridas, cooperativas e congêneres reais — todos com fonte e ano. A leitura é sempre a mesma: **onde o dinheiro entra, em que ordem sai, quanto é obrigatório e quanto é deliberação da assembleia**.
+
+| Caso | Estrutura de destinação (rateio, reserva ou fundo) | Conta resolvida | Fonte / ano |
+|---|---|---|---|
+| **MONDRAGON** (Espanha, 1956) | Federação de **81 cooperativas**; cada uma destina **≥ 13%** do lucro ao fundo divisional de solidariedade | Lucro de **€ 593 mi** sobre vendas de € 11,056 bi = margem líquida de **5,4%**; EBITDA de € 1,486 bi = margem de **13,4%** | MONDRAGON, Relatório Anual 2023 |
+| **COPACOL** (Brasil, 1964) | Sobras rateadas **por unidade processada**; fundos obrigatórios antes do rateio | Sobras de **R$ 270 mi** sobre faturamento de R$ 10,6 bi = **2,55%**; 15% de fundos = R$ 40,5 mi → saldo de **R$ 229,5 mi** | O Presente Rural, 31/01/2025 |
+| **COOPERCITRUS** (Brasil, 1976) | Estatuto **art. 60**: rateio com ponderação **3,00 / 1,00 / 0,30** por faixa de movimentação, atualizado pelo IGP-M | Sobra líquida de **R$ 42,8 mi** sobre R$ 8,1 bi = **0,53%**; 15% de fundos = R$ 6,42 mi → saldo de **R$ 36,38 mi** | Revista 450, abr/2024 |
+| **LAR** (Brasil, 1964) | Sobras + **devolução de capital a jubilados** — quem sai mantém o vínculo patrimonial | **R$ 335,9 mi** em 2025 = R$ 101,3 mi de sobras + R$ 59 mi a 225 jubilados (**≈ R$ 262,2 mil** cada), sobre receita de R$ 23,2 bi | Lar Cooperativa, 10/02/2026 |
+| **REI Co-op** (EUA, 1938) | Repartição a membros, funcionários e ONGs **mesmo em ano de prejuízo** | US$ 189 mi + US$ 84,8 mi + US$ 8,9 mi = **US$ 282,7 mi** = **8,0%** da receita de US$ 3,53 bi, com prejuízo de US$ 156,4 mi | REI Newsroom, 08/05/2025 |
+| **John Lewis Partnership** (RU, 1929) | Bônus condicional: **PBTBE ≥ £ 150 mi e dívida < 4x** | **3%** (≈ 1,5 semana) = **£ 46 mi** em 2021/22; **£ 0** em 2022/23, 2023/24 e 2024/25 | JLP, Annual Report 2021–2025 |
+
+### 12.1 MONDRAGON — o fundo de solidariedade que se paga sozinho
+
+A federação (**81 cooperativas** autogovernadas, **~70.500 pessoas**) fecha 2023 com **€ 11,056 bi de vendas**, **€ 1,486 bi de EBITDA** e **€ 593 mi de lucro**. Três leituras:
+
+1. **Margem EBITDA** = 1.486 ÷ 11.056 = **13,4%**; **margem líquida** = 593 ÷ 11.056 = **5,4%** — cada ponto de margem sustenta a estrutura inteira;
+2. **Regra do fundo:** cada cooperativa destina **no mínimo 13% do lucro** ao fundo divisional de solidariedade. Aplicação didática do piso ao lucro consolidado: 13% × € 593 mi = **€ 77,1 mi** (o piso incide sobre o lucro de **cada** cooperativa, não sobre o consolidado do grupo). Em 2023, o mecanismo registrou **€ 13,0 mi de compensação** e **€ 7,05 mi de offset de prejuízos**;
+3. A mesma lógica vai para a folha: salários entre **80% e 110%** da referência anual (LagunAro), razão mín-máx de **1:6 desde 1988**, e **€ 27,8 mi** da Fundación MONDRAGON em **37 programas** sociais.
+
+**Lição:** a solidariedade é **autofinanceira** — o "seguro" contra desigualdades entre unidades sai do lucro de quem prospera, **antes** de qualquer distribuição, e não de uma doação posterior.
+
+### 12.2 COPACOL — o rateio que o produtor vê na saca
+
+Faturamento de **R$ 10,6 bi (+8%)** e **R$ 270 mi de sobras** em 2024 (**+64%**, maior da história), com 9,6 mil cooperados e 16,2 mil colaboradores:
+
+1. Sobras ÷ faturamento = 270 ÷ 10.600 = **2,55%** do faturamento devolvido ao quadro social;
+2. Escada obrigatória: 10% = **R$ 27 mi** (Fundo de Reserva) + 5% = **R$ 13,5 mi** (FATES) = **R$ 40,5 mi** de fundos indivisíveis (art. 4º, VIII) → saldo de **R$ 229,5 mi** para deliberação da Assembleia (art. 44, II);
+3. Rateio **por unidade processada**: R$ 2,00 por saca de soja, R$ 0,10 por litro de leite, R$ 0,36 por kg de suíno, 3,6% sobre insumos e 2,7% sobre supermercado e rações. Exemplos: **1.000 sacas de soja → R$ 2.000**; **100.000 litros de leite → R$ 10.000**;
+4. Referência simples: 270 mi ÷ 9.600 cooperados = **R$ 28.125** de sobra média por cooperado (média aritmética — o rateio real é por volume, não por cabeça).
+
+**Lição:** o rateio **por unidade processada** é a forma mais transparente de devolver valor: cada produtor enxerga o rateio na própria saca ou cabeça de animal. Metade do valor foi paga em dezembro, e a cooperativa recolheu **R$ 390 mi** de tributos no mesmo exercício.
+
+### 12.3 COOPERCITRUS — o rateio progressivo por faixa
+
+39,8 mil cooperados, 160 unidades em 65 cidades; **R$ 8,1 bi de faturamento** e **R$ 42,8 mi de sobra líquida** em 2023 (faturamento −14%):
+
+1. Sobra ÷ faturamento = 42,8 ÷ 8.100 = **0,53%**;
+2. Escada do art. 28: 10% = **R$ 4,28 mi** + 5% = **R$ 2,14 mi** = **R$ 6,42 mi** de fundos obrigatórios → saldo de **R$ 36,38 mi** para rateio;
+3. O Estatuto, **art. 60**, rateia com ponderação **3,00** (até R$ 200 mil de movimentação), **1,00** (até R$ 2 mi) e **0,30** (acima de R$ 2 mi), com atualização pelo **IGP-M**: quanto maior a movimentação, menor o peso por real movimentado.
+
+**Lição:** a ponderação decrescente é o instrumento estatutário de justiça distributiva previsto no art. 4º, VII, da Lei nº 5.764/1971 — o rateio proporcional às operações pode ser **progressivo** sem violar a lei. A distribuição monetária, suspensa pela alteração estatutária de 2023, foi retomada por decisão da AGO de 2025, com o faturamento seguindo para R$ 8,5 bi (2024) e mais de R$ 9,2 bi (2025).
+
+### 12.4 LAR e REI — o mesmo cálculo, duas leituras
+
+- **LAR (cooperativa, Paraná):** receita líquida de **R$ 23,2 bi (+14,4%)** em 2025 e **R$ 335,9 mi** devolvidos: **R$ 101,3 mi de sobras** (101,3 ÷ 23.200 = **0,44%** da receita) + **R$ 59 mi de devolução de capital a 225 jubilados** (59.000.000 ÷ 225 = **≈ R$ 262,2 mil** por jubilado) + bonificações, cesta e créditos — no total, **1,45%** da receita. A hibridize aparece na devolução ao jubilado: **quem saiu mantém o vínculo patrimonial**;
+- **REI Co-op (cooperativa de consumidores, EUA):** em 2024 a receita caiu **6,2%** para **US$ 3,53 bi** e o exercício fechou com **prejuízo de US$ 156,4 mi** — e ainda assim foram destinados **US$ 189 mi** em *Co-op Member Reward* (tipicamente **10%**), **US$ 84,8 mi** em incentivos e *profit sharing* (+48,5%) e **US$ 8,9 mi** a mais de 300 ONGs: (189 + 84,8 + 8,9) ÷ 3.530 = **8,0% da receita**.
+
+**Lição:** dá para ter **prejuízo no ano** e ainda repartir — na cooperativa de consumidores a repartição está na cultura, não no resultado do exercício; já na cooperativa produtiva (LAR, COPACOL, Coopercitrus) o rateio é função da **sobra líquida apurada**, ou seja, da escada do art. 28 que você resolveu nas seções 6 e 7.
+
+- **🔢 Você sabia?** A SEMCO reparte **23% do lucro após imposto de cada unidade**, duas vezes por ano, entregue a **três eleitos pelos trabalhadores** — e na crise de 1990 o percentual subiu para **39%**, com corte simultâneo de **40%** nos salários da direção? A receita passou de US$ 4 mi (1982) para US$ 212 mi (2003): repartir dinheiro só se sustenta quando vem junto com repartição de **informação e decisão**.
+
+---
+
+## 13. Atualizações 2025–2026 no impacto financeiro
+
+Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo entra **somente o que tem vigência confirmada** (fonte + data) — o que está em tramitação aparece separado, como **não verificado**, e não entra em simulação de carga, de custo ou de margem.
+
+### 13.1 O que já está vigente e muda a projeção
+
+| Mudança | Base / fonte | Vigência confirmada | Efeito na projeção financeira |
+|---|---|---|---|
+| Criação de IBS, CBS e Imposto Seletivo | LC nº 214/2025 (16/01/2025), alterada pela LC nº 227/2026 | Vigente; transição 2026–2032, regime integral em **2033** | A tributação de consumo passa a ser lida em lei única: o custo por unidade vendida se torna comparável entre limitada, cooperativa e ONG que comercializa |
+| Alíquotas-teste de **0,9% (CBS)** e **0,1% (IBS)** com dispensa de recolhimento | LC nº 214/2025, art. 348 ( §§ incluídos pela LC nº 227/2026) | **01/01/2026 – 31/12/2026** | 2026 é ano de **processo**, não de carga: obrigações acessórias plenas sem pagamento — não use 2026 para simular a carga de 2027 em diante |
+| Janela de regularização de **60 dias** por descumprimento das obrigações acessórias | LC nº 214/2025, art. 348, §§ 1º, 3º e 4º (LC nº 227/2026) | 2026 | Risco orçamentário novo: quem emite fora do padrão é intimado e regulariza em 60 dias |
+| Comitê Gestor do IBS, contencioso administrativo e normas gerais de ITCMD | LC nº 227/2026 (DOU 14/01/2026) | Vigente | Governança única reduz litígio para OSCs e cooperativas, mas exige capacidade técnica — vira custo fixo |
+| Regulamentação operacional da CBS | Decreto nº 12.955, de 29/04/2026 | Vigente | Sistemas fiscais e fluxo de caixa por nota passam a depender do decreto, não só da lei |
+| Escalonamento do destaque fiscal | Ato Conjunto RFB/CGIBS nº 4, de 30/07/2026 | **03/08/2026** (NF-e, NFC-e, CT-e); **01/10/2026** (NFCom e NFS-e de ISS); **01/12/2026** (imóveis, bens imateriais e plataformas); **01/01/2027** (Simples) | Cronograma de TI fiscal por espécie de documento; cada data é uma trava de projeto |
+| Opção do Simples por IBS/CBS no regime regular | LC nº 123/2006, art. 13, § 10 (redação da LC nº 227/2026) | Semestral e **irretratável** (setembro e março) | Decisão comercial: crédito ao cliente (B2B) × simplicidade; erro de opção dura 6 meses |
+| PLR mantida pela Lei nº 10.101/2000 | Planalto (última alteração estrutural: Lei nº 14.020/2020) | Vigente; IR exclusivo na fonte de **0% a 27,5%** | Nenhuma isenção nova confirmada — não projete PLR isenta de IR |
+| Licença-paternidade e salário-paternidade de 10 → 15 → 20 dias | Lei nº 15.371/2026 | Vigente; efeitos em **01/01/2027**, **01/01/2028** e **01/01/2029** | Custo de folha crescente em toda projeção plurianual, em qualquer forma jurídica com empregados |
+| Reporte ISSB/CBPS voluntário ("pratique ou explique") | Resolução CVM nº 244, de 29/05/2026 | A partir de **01/01/2027**; compromisso mínimo de 3 exercícios + asseguração | Cai a obrigatoriedade para companhias abertas; estatais seguem obrigadas (Lei nº 13.303/2016) |
+| Relatório de sustentabilidade na contabilidade | Resolução CFC nº 1.710/2023 (NBC TDS e NBC TAS) | **Ano-calendário 2026**, sempre que houver relatório de sustentabilidade | O relatório de impacto passa a ter contrapartida contábil no mesmo ano |
+| Instituições financeiras parceiras sob padrão ISSB | Res. CMN nº 5.185 e Res. BCB nº 435 | Vigentes desde 01/01/2025; obrigatório em **2026** (segmentos 1 e 2) e **2028** (demais) | Bancos e cooperativas de crédito já cobram dado de sustentabilidade na cadeia |
+| Greenwashing com norma autorregulatória | CBAP–CONAR, arts. 36, 36-A, 36-B e Anexo "U"; CDC, art. 37 | CONAR: aprovado **24/10/2025**, publicado **27/10/2025**, vigor ~**26/11/2025**; CDC vigente | Alegação de impacto em campanha exige veracidade, qualificação, exatidão, pertinência, relevância e concretude — risco reputacional e consumerista |
+| Certificação B Corp com 7 tópicos obrigatórios e auditoria | B Lab, padrões publicados em abril/2025 | Em vigor em **2026**; transição até **2028** | Selo deixa de ser pontuação e vira exigência progressiva: sobem custo e credibilidade |
+| Cadastro oficial de negócios de impacto | Cadimpacto (MDIC) | Desde **19/03/2025** (bronze, prata e ouro) | Visibilidade oficial para captação e prestação de contas |
+
+**Como calibrar a projeção cooperativa:** o Anuário OCB 2026 (dados de 31/12/2025) registra ~4,4 mil cooperativas, **29 milhões de cooperados**, **613,4 mil empregos diretos**, ingressos de **R$ 848,37 bi (+11,94%)**, ativos de **R$ 1,60 trilhão (+14,9%)** e **sobras de R$ 61,28 bi (+14,2%)** — em 2025 as sobras cresceram mais que os ingressos, e é esse piso de referência do sistema que a política de destinação da sua híbrida deve acompanhar.
+
+### 13.2 Linha do tempo do "ano-teste" do IBS/CBS
+
+```dragdrop
+{
+  "question": "Ordene os marcos da reforma tributária que afetam a projeção financeira, do mais antigo ao mais recente:",
+  "items": [
+    "16/01/2025 — sancionada a LC nº 214/2025, que institui IBS, CBS e Imposto Seletivo",
+    "01/01/2026 — início das alíquotas-teste de 0,9% de CBS e 0,1% de IBS, com dispensa de recolhimento",
+    "03/08/2026 — destaque obrigatório em NF-e, NFC-e e CT-e",
+    "01/10/2026 — destaque obrigatório em NFCom e NFS-e de ISS",
+    "01/12/2026 — destaque obrigatório em imóveis, bens imateriais e plataformas",
+    "01/01/2027 — destaque obrigatório para optantes pelo Simples Nacional"
+  ],
+  "correctOrder": [
+    "16/01/2025 — sancionada a LC nº 214/2025, que institui IBS, CBS e Imposto Seletivo",
+    "01/01/2026 — início das alíquotas-teste de 0,9% de CBS e 0,1% de IBS, com dispensa de recolhimento",
+    "03/08/2026 — destaque obrigatório em NF-e, NFC-e e CT-e",
+    "01/10/2026 — destaque obrigatório em NFCom e NFS-e de ISS",
+    "01/12/2026 — destaque obrigatório em imóveis, bens imateriais e plataformas",
+    "01/01/2027 — destaque obrigatório para optantes pelo Simples Nacional"
+  ],
+  "explanation": "A ordem é a do cronograma legal: a LC nº 214/2025 (16/01/2025) cria os tributos; em 2026 valem as alíquotas-teste do art. 348, com dispensa de recolhimento a quem cumprir as obrigações acessórias; o Ato Conjunto RFB/CGIBS nº 4/2026 escalona o destaque fiscal por espécie de documento (03/08, 01/10 e 01/12/2026) e deixa o Simples Nacional para 01/01/2027. Inverter a ordem leva a projetar obrigação antes da norma que a cria — e a simular carga fiscal num ano em que não há recolhimento."
+}
+```
+
+- **🔢 Você sabia?** Em 2026 a alíquota-teste da reforma do consumo é de **0,9% de CBS e 0,1% de IBS**, com **dispensa de recolhimento** para quem cumprir as obrigações acessórias (art. 348 da LC nº 214/2025)? Ou seja: 2026 é o ano em que a empresa híbrida aprende o processo fiscal inteiro **sem pagar o tributo** — mas descumprir as obrigações acessórias gera intimação e uma janela de **60 dias** para regularizar (arts. 348, §§ 1º, 3º e 4º, incluídos pela LC nº 227/2026).
+
+### 13.3 O que **não** está vigente: não entre na projeção
+
+| Item em tramitação ou não confirmado | Situação verificada em 05/10/2026 |
+|---|---|
+| **Isenção da PLR do IR** (PL 581/2019) | Parecer favorável da CFT (30/09/2025) localizado; **sanção e vigência não confirmadas** |
+| **Greenwashing no CDC** (PLs 1.008/2025, 440/2025 e 7.090/2025) | Em tramitação na Câmara; **nenhuma vigência confirmada** — vale o CBAP–CONAR e o CDC, art. 37 |
+| **Fim da escala 6x1** (40h + 2 folgas) | Aprovada na Câmara em 28/05/2026 (472×22 e 461×19); **Senado pendente** — a transição só corre após a promulgação |
+| **Alíquotas definitivas de IBS/CBS por segmento** a partir de 2027 | Dependem de resolução do Senado (arts. 18 e 349–369 da LC nº 214/2025) — **ainda não fixadas** |
+| **Tratamento do ato cooperativo e de OSCs nos anexos** da LC nº 214/2025 | Revisão de anexos **não feita** — não projete crédito, isenção ou imunidade por analogia |
+| **Número de Empresas B no Brasil** | Fontes indicam ~500 (fev/2026), 342 (mai/2026) e 338 (jul/2026): cortes diferentes, **sem número único verificado** |
+| **Obrigatoriedade do reporte em 2028** (proposta do CFC, jun/2026) | **Proposta técnica**, sem norma publicada |
+| **PL 1.838/2026** (duração normal de trabalho) | Localizado no Planalto, mas **tramitação e vigência não confirmadas** |
+
+> [!WARNING]
+> **Vigência não é previsão.** Três erros comuns em projeção de 2026: (i) usar as **alíquotas-teste de 0,9% (CBS) e 0,1% (IBS)** de 2026 para simular a carga de 2027 em diante — as alíquotas definitivas por segmento dependem de resolução do Senado e **ainda não foram fixadas**; (ii) incorporar o **fim da escala 6x1** ao custo de equipe: a PEC foi aprovada na Câmara em 28/05/2026, mas **segue pendente no Senado** e só transiciona após a promulgação; (iii) projetar **PLR isenta do IR** — o PL 581/2019 tem parecer favorável, mas **sanção e vigência não foram confirmadas**. Enquanto não houver vigência confirmada, o item é hipótese de trabalho, não premissa de orçamento — e a premissa errada derruba margem, ponto de equilíbrio e respiro de caixa de uma vez só.
+
+---
+
 ## Perguntas Práticas (Practice Questions)
 
 ```question
@@ -691,6 +819,38 @@ Nada derruba uma decisão financeira tão rápido quanto **um número que ningu�
 }
 ```
 
+```question
+{
+  "id": "hyb-06-q11",
+  "type": "multiple-choice",
+  "question": "A COPACOL apurou, em 2024, sobras líquidas de R$ 270.000.000,00 sobre faturamento de R$ 10.600.000.000,00 (seção 12.2). Aplicada a escada do art. 28 da Lei nº 5.764/1971, quanto vai aos Fundos Obrigatórios e qual o saldo remanescente para deliberação da Assembleia?",
+  "options": [
+    "Fundos R$ 40.500.000,00; saldo R$ 229.500.000,00",
+    "Fundos R$ 27.000.000,00; saldo R$ 243.000.000,00",
+    "Fundos R$ 54.000.000,00; saldo R$ 216.000.000,00",
+    "Fundos R$ 13.500.000,00; saldo R$ 256.500.000,00"
+  ],
+  "correct": 0,
+  "explanation": "O art. 28, I, destina 10% ao Fundo de Reserva: 10% de 270.000.000 = R$ 27.000.000,00. O art. 28, II, destina 5% ao FATES: 5% de 270.000.000 = R$ 13.500.000,00. Total de 15% = R$ 40.500.000,00 de fundos indivisíveis (art. 4º, VIII), e R$ 270.000.000,00 − R$ 40.500.000,00 = R$ 229.500.000,00 de saldo à disposição da Assembleia Geral Ordinária (art. 44, II) para rateio proporcional às operações (art. 4º, VII). Conferência: as sobras equivalem a 2,55% do faturamento (270 ÷ 10.600), e 15% desse montante é a fatia obrigatória — não o rateio em si."
+}
+```
+
+```question
+{
+  "id": "hyb-06-q12",
+  "type": "multiple-choice",
+  "question": "Sobre o ano-teste da reforma tributária em 2026, é correto afirmar:",
+  "options": [
+    "As alíquotas são de 0,1% de CBS e 0,9% de IBS e o recolhimento é obrigatório desde 01/01/2026",
+    "As alíquotas-teste são de 0,9% de CBS e 0,1% de IBS, com dispensa de recolhimento a quem cumprir as obrigações acessórias",
+    "O ICMS e o ISS foram extintos já em 2026, quando o IBS passou a substituí-los integralmente",
+    "Os optantes pelo Simples Nacional são obrigados a destacar os tributos desde 01/01/2026"
+  ],
+  "correct": 1,
+  "explanation": "O art. 348 da LC nº 214/2025 fixa 0,9% de CBS e 0,1% de IBS no período de 01/01/2026 a 31/12/2026 e dispensa o recolhimento a quem cumprir as obrigações acessórias, com janela de regularização de 60 dias (§§ 1º, 3º e 4º, incluídos pela LC nº 227/2026, DOU 14/01/2026). O ICMS e o ISS só desaparecem em 2033, na conclusão da transição, e o destaque do Simples começa em 01/01/2027 (Ato Conjunto RFB/CGIBS nº 4/2026). Em 2026, portanto, há obrigação fiscal sem custo tributário — não é ano de carga, é ano de processo."
+}
+```
+
 > [!WARNING]
 > **Armadilhas desta lição:**
 > - **Não existe piso legal de reinversão para a empresa híbrida** — os únicos pisos verificados são **10% + 5%** para a cooperativa (Lei nº 5.764/1971, art. 28) e **5%** de reserva legal para a S.A. (Lei nº 6.404/1976, art. 193);
@@ -711,4 +871,6 @@ Nada derruba uma decisão financeira tão rápido quanto **um número que ningu�
 > 4. A **estrutura financeira muda com a forma jurídica**: S.A. guarda **5% até 20% do capital** e distribui no mínimo **25%** do lucro ajustado; a cooperativa guarda **15%** das sobras e só remunera o capital em até **12% a.a.**; a ONG **não distribui**; a limitada **não tem piso legal**;
 > 5. O **rateio das sobras** segue escada fixa: fundos indivisíveis (10% + 5%), depois deliberação da Assembleia Geral Ordinária (art. 44, II), depois rateio proporcional às operações (art. 4º, VII) — com registro na conta de trânsito do patrimônio líquido (ITG 2004, item 20) e migração para o passivo se distribuível (item 21);
 > 6. O **fundo de impacto interno é política, não lei**: no exemplo resolvido, 10% do lucro (R$ 80.000) equivalem a **0,67% da receita bruta**, e a reinversão total de **45%** só existe porque está escrita e aprovada;
-> 7. Publique **lucro e impacto em documentos distintos**: demonstração contábil conforme a forma jurídica, relatório de impacto ao lado — o "resultado triplo" é referencial voluntário desde 1994, e não norma contábil brasileira.
+> 7. Publique **lucro e impacto em documentos distintos**: demonstração contábil conforme a forma jurídica, relatório de impacto ao lado — o "resultado triplo" é referencial voluntário desde 1994, e não norma contábil brasileira;
+> 8. Nos **casos reais**, a escada aparece intacta: MONDRAGON retira **≥ 13%** do lucro para o fundo divisional, COPACOL fechou 2024 com **R$ 270 mi de sobras** (15% de fundos = R$ 40,5 mi → R$ 229,5 mi de saldo), Coopercitrus rateia **progressivo por faixa (3,00/1,00/0,30)**, LAR devolveu **R$ 59 mi a 225 jubilados** e a REI repartiu **8,0% da receita mesmo com prejuízo**;
+> 9. Em **2026**, só entre na projeção o que tem **vigência confirmada**: alíquotas-teste de **0,9% (CBS) e 0,1% (IBS)** com dispensa de recolhimento (art. 348 da LC nº 214/2025), destaque escalonado pelo Ato Conjunto RFB/CGIBS nº 4/2026 e PLR **sem isenção nova** — PEC 6x1, isenção de PLR e alíquotas definitivas de 2027 seguem **não verificadas**.

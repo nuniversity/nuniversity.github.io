@@ -1,6 +1,6 @@
 ---
 title: "Marketing e Marca com Propósito"
-description: "Como a marca de uma empresa híbrida comunica lucro e impacto sem cair em lavagem de imagem: confiança e propósito no consumidor, comunicação comparada entre os cinco modelos, matriz de canais, público e comunidade, causa-marketing, moldura normativa do CDC e do CONAR (arts. 36-A e 36-B e Anexo U), checklist anti-washing, sete campanhas reais com números e o veredito comparativo entre tradicional, parceria, cooperativa, ONG e híbrida."
+description: "Como a marca de uma empresa híbrida comunica lucro e impacto sem cair em lavagem de imagem: confiança e propósito no consumidor, comunicação comparada entre os cinco modelos, matriz de canais, público e comunidade, causa-marketing, moldura normativa do CDC e do CONAR (arts. 36-A e 36-B e Anexo U), checklist anti-washing, sete campanhas reais com números, casos reais de repasse publicado (REI, John Lewis, Natura e Coopercitrus), a marca de propósito no mundo (CIC, benefit corporation, ESOP, SCIC, SCOP e società benefit) e o veredito comparativo entre tradicional, parceria, cooperativa, ONG e híbrida."
 order: 9
 difficulty: "intermediate"
 duration: "90 min"
@@ -61,6 +61,8 @@ Nesta lição você vai:
 - aplicar a moldura do **CDC** (arts. 6º, IV; 31 e 37, §§1º e 3º), do **CONAR** (arts. 13, 36, 36-A e 36-B e Anexo "U") e das normas **ISO 26000**, **ISO 14021** e **ISO 14025**;
 - rodar um **checklist anti-washing** de 14 verificações antes de qualquer peça;
 - estudar **sete campanhas reais com números**, das US$ 115 milhões do Ice Bucket Challenge aos R$ 35,7 bilhões do Grupo Boticário;
+- analisar **casos reais de marca** com repasse publicado — REI, John Lewis, Natura e Coopercitrus — e o que cada número **pode e não pode** sustentar numa peça;
+- mapear a **marca de propósito no mundo**: CIC (Reino Unido), benefit corporation e ESOP (EUA), SCIC e SCOP (França), cooperativa protegida (Espanha), società benefit (Itália) e Brasil comparado, sempre com **país, dado e fonte**;
 - emitir o **veredito comparativo** da comunicação de propósito entre os cinco modelos.
 
 ---
@@ -511,6 +513,111 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
 
 ---
 
+## 13. Casos Reais: comunicação de marca com números
+
+As fichas abaixo vêm de relatórios publicados por empresas híbridas reais. O critério de seleção é o mesmo da seção 9: **só entra aqui o que tem número publicado e fonte identificada** — porque alegação de propósito sem número é adjetivo, e adjetivo não sobrevive ao checklist da seção 8 nem a uma pergunta de jornalista.
+
+### 13.1 REI Co-op (EUA, 1938) — repasse público no ano de prejuízo
+
+Em 2024 a cooperativa de consumidores publicou receita de **US$ 3,53 bi** (−6,2%) e **prejuízo de US$ 156,4 mi** — e, no mesmo período, repassou **US$ 189 mi** em *Co-op Member Reward* (tipicamente **10%**), **US$ 84,8 mi** em incentivos e *profit sharing* (+48,5%) e **US$ 8,9 mi** para mais de **300 ONGs**. No mesmo ano tornou-se o 1º varejista nacional dos EUA a alcançar **zero waste**.
+
+**Mecanismo de comunicação:** a marca **não separou** repasse e resultado. Publicar os dois números no mesmo período é o que transforma "devolvemos aos membros" em alegação verificável — é a fórmula da causa (percentual, teto, prazo e total repassado) aplicada ao relacionamento com o membro.
+
+### 13.2 John Lewis Partnership (Reino Unido, 1929) — o bônus que tem condição
+
+O *Partnership Bonus* é marco da comunicação da marca empregatícia, mas ele é **condicional**: exige PBTBE ≥ **£ 150 mi** e dívida < 4x. Resultado: **3% (= 1,5 semana) = £ 46 mi em 2021/22** e **£ 0** em **2022/23, 2023/24 e 2024/25**, para cerca de **69.000 Partners**. Em 2024/25, vendas de **£ 12,8 bi (+3%)**, PBTBE **triplicou de £ 42 mi para £ 126 mi**, o bônus seguiu em **£ 0** e os salários somaram **£ 114 mi**.
+
+**Mecanismo de comunicação:** a lição não é deixar de comunicar o bônus — é **comunicar a condição junto**. Prometer participação incondicional no lucro seria alegação sem qualificação (art. 36-B, II). Há ainda o **veto comunitário**: os Partners podem barrar contribuições a instituições com mais de 25% de receitas privadas.
+
+### 13.3 Natura (Brasil, 1969) — impacto publicado como número auditável
+
+Dez anos como Empresa B e um relatório que expõe o **iP&L**: **R$ 2,50 de impacto por R$ 1 de receita**, o que somou **R$ 50,5 bi** em 2024. No mesmo período: **46 comunidades** beneficiadas (meta de 2030 antecipada), emissões dos escopos 1+2 **−43%** frente à base SBTi e **18,2%** de plástico reciclado no portfólio.
+
+**Mecanismo de comunicação:** a marca publica a razão entre receita e impacto e mantém o resultado financeiro **exposto no mesmo relatório**, sem maquiagem. É o antídoto estrutural do impact-washing: número desfavorável é dado de prestação de contas (ISO 26000, item 7.5) e não omissão de dado essencial (CDC, art. 37, §3º).
+
+### 13.4 Coopercitrus (Brasil, 1976) — serviço e rateio como prova
+
+Faturamento de **R$ 8,1 bi** e sobra líquida de **R$ 42,8 mi** em 2023; **321 mil atendimentos** de assistência técnica a **28 mil produtores** (+28%) e **R$ 174 mi** de crédito ESG. O rateio das sobras segue o art. 60 do Estatuto, com ponderação **3,00 / 1,00 / 0,30** por faixa de movimentação e atualização pelo IGP-M.
+
+**Mecanismo de comunicação:** a prova é o **serviço contado em unidades** (atendimento por produtor) somado ao **rateio declarado** — dois números que o próprio associado confere, sem precisar acreditar no anunciante.
+
+| Caso | Número publicado | O que a peça **pode** afirmar | O que a peça **não pode** afirmar |
+|---|---|---|---|
+| REI Co-op, 2024 | US$ 189 mi aos membros; US$ 84,8 mi aos funcionários; US$ 8,9 mi a +300 ONGs; prejuízo de US$ 156,4 mi | "Repasse efetivado no exercício, com o resultado do mesmo período à vista" | Que a repartição garante lucro ou que o prejuízo não existiu |
+| John Lewis, 2021/22–2024/25 | £ 46 mi (3%) em 2021/22; £ 0 em três exercícios seguidos | "Bônus condicional a PBTBE ≥ £ 150 mi e dívida < 4x" | Que o bônus é garantia anual ou direito adquirido |
+| Natura, 2024 | iP&L de R$ 2,50 por R$ 1 de receita → R$ 50,5 bi; −43% de emissões | "Impacto medido na mesma base do relatório, com escopo declarado" | Usar o iP&L como prova de sustentabilidade geral de todo o portfólio |
+| Coopercitrus, 2023 | 321 mil atendimentos; 28 mil produtores; R$ 42,8 mi de sobras | "Assistência técnica prestada, com contagem de beneficiários" | Transformar rateio de sobras já apurado em promessa de rentabilidade futura |
+
+- **🔢 Você sabia?** A REI Co-op fechou 2024 com **prejuízo de US$ 156,4 mi** sobre receita de **US$ 3,53 bi** e, no mesmo ano, repassou **US$ 189 mi** aos membros, **US$ 84,8 mi** aos funcionários (+48,5%) e **US$ 8,9 mi** a mais de **300 ONGs** — além de se tornar o **1º varejista nacional dos EUA** com **zero waste**. Repartir no ano de prejuízo é possível e é público; **esconder o prejuízo ao comunicar o repasse** é que passaria a ser omissão de dado essencial (CDC, art. 37, §3º).
+
+---
+
+## 14. Marca de Propósito no Mundo
+
+A empresa híbrida brasileira não fala num vácuo: o público que lê o seu relatório também lê relatos de **CICs** britânicas, **benefit corporations** e **ESOPs** norte-americanas, **SCICs** e **SCOPs** francesas e **società benefit** italianas. A tabela abaixo reúne, país por país, a forma híbrida, um dado verificado e a fonte — é o vocabulário mínimo para qualquer peça que cite "modelo internacional" sem cair em alegação sem qualificação.
+
+### 14.1 Formas híbridas e um dado por país
+
+| País | Forma híbrida | Dado verificado | Fonte / ano |
+|---|---|---|---|
+| Reino Unido | *Community Interest Company* (CIC) | **37.081 CICs** (mar/2025) e **8.376** novas em 2024/25 | CIC Regulator, *Annual Report 2024 to 2025* |
+| Reino Unido | CIC — teto de distribuição | **35% dos lucros distribuíveis** no agregado; capacidade ociosa carrega por **5 anos** | GOV.UK, *CIC Guidance* (2024); CIC FAQ (2017) |
+| EUA | *Benefit corporation* | **Maryland**, 1º estado, **abril/2010**; **41 estados** e **51 jurisdições** | CARI/Indiana University (02/05/2024); B Lab (2024) |
+| EUA | ESOP | **6.609 planos**, **15,1 mi** de participantes, **>US$ 2,1 tri** em ativos | NCEO/ESOP.org (dados 2023, pub. 2026) |
+| França | SCIC | **≥57,5%** do resultado às reservas impartageáveis (até 100%) | loi n° 2001-624; Le Labo de l'ESS |
+| França | SCOP | Trabalho **≥25%**, reservas **≥16%**, capital **≤33%** | les-scop.coop (2025); loi 47-1775/1947 |
+| Espanha | Cooperativa protegida (Ley 20/1990) | Juros ≤ **taxa básica do BdE +3 p.p.** (sócios) e **+5 p.p.** (associados) | BOE, Ley 20/1990, art. 18 |
+| Itália | *Società benefit* | **5.540** empresas (+20%) e **241 mil** postos de trabalho (fim 2025) | Pesquisa Nativa/Intesa Sanpaolo/InfoCamere (mar/2026) |
+| Brasil | Cooperativa (Lei nº 5.764/1971) | **4.384 cooperativas**, **25,8 mi** de cooperados, **R$ 51,4 bi** de sobras (+32%) | Anuário OCB 2025 (dados de 2024) |
+| Mundo | Cooperativismo | **3 milhões** de cooperativas e **280 mi** de empregos (10% dos ocupados) | ACI/ICA, *Facts and figures* (2025) |
+| Mundo | B Corps | **9.368** (2024) → **9.500** (2025) → **10.700+** (2026) | B Lab (2024–2026) |
+| EUA | Filantropia corporativa | **US$ 44,40 bi** em 2024 (+9,1%) sobre US$ 592,50 bi doados | Giving USA 2025 |
+
+### 14.2 O que efetivamente limita a distribuição ao capital
+
+| País / forma | Limite ao capital | Natureza | Fonte / ano |
+|---|---|---|---|
+| Brasil — cooperativa | **Nada** às quotas-parte, salvo **juros ≤12% a.a.**; **10% + 5%** obrigatórios a fundos | Legal | Lei nº 5.764/1971, arts. 24, §3º e 28 |
+| Espanha — cooperativa | Juros ≤ **taxa básica do BdE +3/+5 p.p.**; estourou, perde-se a proteção fiscal | Legal | Ley 20/1990, arts. 13 e 18 (BOE) |
+| França — SCOP | Capital **≤33%** do resultado (trabalho ≥25%; reservas ≥16%) | Legal/estatutário | les-scop.coop (2025) |
+| Reino Unido — CIC | **35%** dos lucros distribuíveis + teto por ação de **5% acima da taxa do BoE** | Regulamentar | GOV.UK (2024); CIC FAQ (2017) |
+| EUA — benefit corporation | **Sem teto legal** — o dever é de propósito, não de distribuição | N/A | 8 Del. C. §§ 361–368; D.C. Law 19-305 |
+| Itália — *società benefit* | **Sem teto legal** — o relato de impacto anual substitui o cap | N/A | L. 208/2015, commi 376–384 |
+
+```dragdrop
+{
+  "question": "Ordene os regimes pelo limite imposto ao retorno do capital, do mais restritivo ao menos restritivo:",
+  "items": [
+    "Brasil — cooperativa: vedado distribuir às quotas-parte, salvo juros de até 12% ao ano",
+    "Espanha — cooperativa protegida: juros limitados à taxa básica do Banco de España +3 p.p. (sócios) e +5 p.p. (associados)",
+    "França — SCOP: dividendos de capital limitados a 33% do resultado",
+    "Reino Unido — CIC: 35% dos lucros distribuíveis no agregado, com teto por ação de 5% acima da taxa do BoE",
+    "EUA — benefit corporation: sem teto legal de dividendos"
+  ],
+  "correctOrder": [
+    "Brasil — cooperativa: vedado distribuir às quotas-parte, salvo juros de até 12% ao ano",
+    "Espanha — cooperativa protegida: juros limitados à taxa básica do Banco de España +3 p.p. (sócios) e +5 p.p. (associados)",
+    "França — SCOP: dividendos de capital limitados a 33% do resultado",
+    "Reino Unido — CIC: 35% dos lucros distribuíveis no agregado, com teto por ação de 5% acima da taxa do BoE",
+    "EUA — benefit corporation: sem teto legal de dividendos"
+  ],
+  "explanation": "A ordem é didática e segue o tipo de limitação: Brasil e Espanha limitam o retorno do capital por teto de juros (12% a.a.; taxa básica do Banco de España +3/+5 p.p.); França e Reino Unido limitam por parcela do resultado (33% e 35%); e a benefit corporation norte-americana não tem teto — a lei muda propósito, deveres e relato, não a distribuição. A lição para a peça: anunciar 'lucro repartido' sem dizer qual é o regime aplicável é alegação sem qualificação (art. 36-B, II)."
+}
+```
+
+- **🔢 Você sabia?** A *Community Interest Company* britânica pode **carregar por 5 anos** a capacidade de dividendos não usada no ano (CIC FAQ, 2017) — teto guardado para anos melhores. E o John Lewis Partnership pagou **£ 0** de *Partnership Bonus* em **2022/23, 2023/24 e 2024/25**, mesmo com o PBTBE **triplicando de £ 42 mi para £ 126 mi** (JLP, *Annual Report 2025*). Duas formas híbridas, duas disciplinas de repasse: em ambas, o que a marca comunica com segurança é a **regra**, não a exceção.
+
+> [!WARNING]
+> **Norma estrangeira não se transplanta para a peça brasileira.** O teto de **35%** é regulamento da **CIC britânica**; a *benefit corporation* e a L3C norte-americanas **não têm teto de dividendos**; e a *società benefit* italiana **não tem incentivo fiscal** verificado — cite cada regime com país e fonte. **Sistema B é certificação, não forma jurídica**, e o número de empresas B no Brasil aparece como **342** (Valor, 01/06/2026), **>350** (2025) e **>500** (Sistema B, 05/03/2026) por diferença de recorte: **não some números de fontes diferentes**. Qualquer alegação de "conformidade internacional" aplicada a empresa brasileira precisa apontar o dispositivo brasileiro correspondente — **CDC, CBAP e Anexo "U"** seguem sendo a régua da peça.
+
+### 14.3 Regra de uso da comparação internacional
+
+- **Cite país, dado e fonte juntos:** "35%" sozinho não significa nada sem dizer que é o teto da **CIC britânica** (GOV.UK, 2024);
+- **Traduza para a moldura brasileira:** o dado externo ilustra, mas a peça continua sob **CDC, CBAP e Anexo "U"**;
+- **Nunca use dado internacional como prova de mérito próprio:** a pertinência (art. 36-B, IV) exige vínculo com a atuação do **próprio anunciante**.
+
+---
+
 ## Perguntas Práticas (Practice Questions)
 
 ```question
@@ -670,6 +777,38 @@ Para você não transformar lacuna de pesquisa em afirmação categórica:
   ],
   "correct": 1,
   "explanation": "O princípio da concretude exige plano verificável, o Anexo \"U\" veda alegações absolutas e impede que ação pontual sirva de prova geral, e a ISO 26000 (item 7.5) orienta a comunicação de responsabilidade social de forma periódica e acessível. Comunicar só o positivo é omissão de dado essencial (CDC, art. 37, §3º); \"zero impacto\" é efeito absoluto vedado; e transferir a comunicação à ONG viola a pertinência do art. 36-B, IV."
+}
+```
+
+```question
+{
+  "id": "hyb-09-q11",
+  "type": "multiple-choice",
+  "question": "Sobre a marca de propósito no mundo, qual afirmação está correta?",
+  "options": [
+    "A CIC britânica não tem teto de distribuição, enquanto a benefit corporation norte-americana é limitada a 35%",
+    "A CIC tem teto agregado de 35% dos lucros distribuíveis e o Reino Unido registrava 37.081 CICs em março de 2025",
+    "Maryland foi o último estado norte-americano a adotar lei de benefit corporation, em 2024",
+    "A société benefit italiana oferece incentivo fiscal equivalente ao do ESOP norte-americano"
+  ],
+  "correct": 1,
+  "explanation": "O teto da CIC é de 35% dos lucros distribuíveis, com teto por ação de 5% acima da taxa do BoE (GOV.UK, 2024), e o CIC Regulator registra 37.081 CICs em março/2025, com 8.376 aprovações em 2024/25 (jul/2025). Maryland foi o 1º estado a aprovar a lei de benefit corporation, em abril/2010 (CARI, 2024) — e é a benefit corporation, não a CIC, que não tem teto de dividendos. A società benefit italiana não tem incentivo fiscal verificado; o ESOP tem dados próprios: 6.609 planos e 15,1 mi de participantes (NCEO, dados 2023)."
+}
+```
+
+```question
+{
+  "id": "hyb-09-q12",
+  "type": "multiple-choice",
+  "question": "A REI Co-op publicou, em 2024, prejuízo de US$ 156,4 mi e, no mesmo período, US$ 189 mi de recompensa aos membros. O que o caso ensina para a comunicação de propósito?",
+  "options": [
+    "Repasse e prejuízo jamais podem aparecer na mesma peça",
+    "Basta comunicar o repasse para que a marca seja considerada responsável",
+    "Publicar repasse e resultado no mesmo período torna a alegação verificável; omitir o prejuízo seria omissão de dado essencial",
+    "O caso prova que propósito garante lucro no exercício seguinte"
+  ],
+  "correct": 2,
+  "explanation": "A REI publicou no mesmo ano receita de US$ 3,53 bi (−6,2%), prejuízo de US$ 156,4 mi, US$ 189 mi em Co-op Member Reward (tipicamente 10%), US$ 84,8 mi em incentivos e profit sharing e US$ 8,9 mi a mais de 300 ONGs — além de zero waste. Comunicar os dois números juntos é o que torna a alegação verificável; esconder o resultado do exercício seria omissão de dado essencial (CDC, art. 37, §3º). Não há garantia de lucro nem proibição de mencionar repasse: o caso não fala de garantia, fala de prestação de contas."
 }
 ```
 

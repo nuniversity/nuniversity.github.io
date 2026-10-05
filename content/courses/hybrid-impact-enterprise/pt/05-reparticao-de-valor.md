@@ -1,6 +1,6 @@
 ---
 title: "Repartição de Valor e Lucros: Como a Empresa Divide o Lucro com Quem o Cria"
-description: "Repartição de valor artigo por artigo: PLR pela Lei nº 10.101/2000, tributação pelo Anexo, sobras e fundos obrigatórios da cooperativa (Lei nº 5.764/1971), planos de propriedade dos trabalhadores, repartição obrigatória na França, teto salarial da Mondragon, catálogo de fórmulas, sete simulações de rateio com contas e o veredito comparativo entre os cinco modelos de empresa."
+description: "Repartição de valor artigo por artigo: PLR pela Lei nº 10.101/2000, tributação pelo Anexo, sobras e fundos obrigatórios da cooperativa (Lei nº 5.764/1971), planos de propriedade dos trabalhadores, repartição obrigatória na França, teto salarial da Mondragon, catálogo de fórmulas, sete simulações de rateio com contas, casos reais com percentuais e contas (COPACOL, Coopercitrus, SEMCO, Mondragon, John Lewis, REI, Publix e LAR), atualizações 2025–2026 com vigência confirmada e o veredito comparativo entre os cinco modelos de empresa."
 order: 5
 difficulty: "intermediate"
 duration: "90 min"
@@ -54,7 +54,9 @@ Nesta lição você vai:
 - entender o **plano de propriedade dos trabalhadores** e por que ele **não tem lei no Brasil**;
 - aplicar a **fórmula francesa da participação** e o **teto salarial de 1 a 6** da Mondragon;
 - usar o **catálogo de nove fórmulas** e a **escada de decisão** sobre um lucro de R$ 1 milhão;
-- conferir **sete simulações com contas** antes de negociar qualquer percentual.
+- conferir **sete simulações com contas** antes de negociar qualquer percentual;
+- conferir **casos reais** de repartição — COPACOL, Coopercitrus, SEMCO, Mondragon, John Lewis, REI, Publix e LAR —, **cada um com a sua conta**;
+- revisar as **atualizações de 2025–2026** com **vigência confirmada** e separar o que é lei do que ainda é apenas proposta.
 
 ---
 
@@ -519,7 +521,108 @@ Três efeitos jurídicos que valem mais que o percentual:
 
 ---
 
-## 11. Armadilhas, erros e o que não foi verificado
+## 11. Casos reais: quanto se reparte e como se reparte
+
+As faixas das seções 9 e 10 são **referências de negociação**; os casos desta seção são **números publicados** — oito fichas de pesquisa própria (quatro brasileiras e quatro internacionais), mais dois exemplos de contexto. A pergunta em todos é a mesma: **que fração do excedente sai do caixa, e por qual fórmula?**
+
+### 11.1 Tabela 1 — caso, percentual e mecanismo
+
+| Caso (ano) | Quanto % | Como distribuem | Fonte |
+|---|---|---|---|
+| **COPACOL** (2024) | **R$ 270 mi de sobras** (+64%) sobre **R$ 10,6 bi** de faturamento → **≈ 2,5%** | Rateio **por unidade processada**: R$ 2/saca de soja, R$ 1/milho, R$ 0,50/trigo, R$ 15/café, R$ 0,10/l de leite, R$ 9,13/leitão, R$ 0,36/kg suíno, 3,6% sobre insumos e 2,7% sobre supermercado/rações; **metade em dezembro** | O Presente Rural, 31/01/2025 |
+| **Coopercitrus** (2023) | sobra líquida **R$ 42,8 mi** sobre **R$ 8,1 bi** → **≈ 0,53%** | Estatuto **art. 60**: ponderação **3,00 / 1,00 / 0,30** por faixa de movimentação (até R$ 200 mil / até R$ 2 mi / acima de R$ 2 mi), com atualização pelo **IGP-M** | Revista 450, abr/2024 |
+| **SEMCO — SEMCOPAR** | **23%** do lucro após imposto da unidade (chegou a **39%** na crise de 1990) | **2 vezes por ano**, entregue a **3 eleitos pelos trabalhadores**; na crise, corte de **40%** no salário da direção | HBR/Semler; Gonçalves, 1996 |
+| **Mondragon** (2023) | **≥ 13%** do lucro de cada cooperativa ao fundo divisional de solidariedade | **€ 13,0 mi** de compensação + **€ 7,05 mi** de offset de prejuízos entre unidades; salários em **80%–110%** da referência e razão mín-máx de **1 a 6** | MONDRAGON, Relatório Anual 2023 |
+| **John Lewis Partnership** (2021/22) | **3% ≈ 1,5 semana** de salário = **£ 46 mi** | *Partnership Bonus* condicional a **PBTBE ≥ £ 150 mi** e **dívida < 4x**; **£ 0** em 2022/23, 2023/24 e 2024/25 | JLP, Annual Report 2021/22 a 2024/25 |
+| **REI Co-op** (2024) | **US$ 189 mi** aos membros (recompensa tipicamente **10%**) + **US$ 84,8 mi** de incentivos e *profit sharing* (+48,5%) | Recompensa sobre a compra do sócio-membro; *profit sharing* entre os ~14 mil funcionários; **US$ 8,9 mi** a mais de 300 ONGs — tudo num ano de **prejuízo de US$ 156,4 mi** | REI Newsroom, 08/05/2025 |
+| **Publix** (ESOP desde 01/10/1974) | PLR de **até 12% do salário-base**; **149.213** participantes com **US$ 14,3 bi** | Ações do próprio empregador em *trust*, **sem negociação em bolsa**; *put option* de US$ 669 mi | SEC 10-K FY2024; Form 5500/2024 |
+| **LAR** (2025) | **R$ 335,9 mi** = R$ 101,3 mi de sobras + **R$ 59 mi** de devolução a **225 jubilados** + bonificações, cesta e créditos | Sobras rateadas na forma do art. 4º, VII, mais **devolução de capital a quem já se aposentou** | Lar Cooperativa, 10/02/2026 |
+
+### 11.2 Tabela 2 — as contas dos casos
+
+| Caso | Conta | Resultado |
+|---|---|---|
+| COPACOL | 270.000.000 ÷ 10.600.000.000 | **2,5% do faturamento**; produtor com **1.000 sacas de soja**: 1.000 × R$ 2 = **R$ 2.000** |
+| Coopercitrus | 42.800.000 ÷ 8.100.000.000 | **≈ 0,53%** do faturamento; e 3,00 ÷ 0,30 = o peso da 1ª faixa vale **10 vezes** o da 3ª |
+| SEMCOPAR | 23% × R$ 2.400.000 de lucro após imposto | **R$ 552.000** por unidade no ano, em 2 parcelas; na crise de 1990: 39% × 2.400.000 = **R$ 936.000** |
+| Mondragon | 13% × € 593 mi de lucro consolidado | **€ 77,1 mi** seria o piso se a regra fosse sobre o grupo; o mínimo de 13% é **por cooperativa**, e 2023 registra **€ 13,0 mi** de compensação e **€ 7,05 mi** de offset |
+| John Lewis | 1,5 semana ÷ 52 semanas | **2,88% ≈ 3%** do salário anual = **£ 46 mi** em 2021/22 |
+| REI Co-op | (189 + 84,8) ÷ 3.530 | **US$ 273,8 mi** repartidos = **≈ 7,8% da receita** |
+| Publix | 14.300.000.000 ÷ 149.213 | **≈ US$ 95,8 mil** médios por participante do ESOP |
+| LAR | 59.000.000 ÷ 225 jubilados | **≈ R$ 262,2 mil** devolvidos a cada jubilado |
+| Nossa Terra (PPR 2025) | 2,2 × salário de R$ 3.000,00 | **R$ 6.600,00**, com receita **18% acima da meta** e resultado **1,26% acima** |
+
+**O caso que marca o limite — Fagor (2013):** a cooperativa industrial do grupo Mondragon entrou em **concurso de acreedores em 13/11/2013** com cerca de **€ 859 mi** de dívida e prejuízo de **€ 89 mi** sobre vendas de € 1,167 bi (2012); a federação aportou ~€ 300 mi e recusou outros € 50 mi, o pedido de € 170 mi foi negado e **5.642 trabalhadores** perderam o posto, com mais de 900 ex-cooperados reivindicando **€ 47,8 mi**. A lição é duríssima e cabe na matéria inteira: **repartir lucro não elimina risco de alavancagem** — a solidariedade tem limite institucional, e nenhum percentual de rateio substitui disciplina de caixa.
+
+- **🔢 Você sabia?** O rateio da **COPACOL** é o mais transparente do quadro porque é **visível na própria mercadoria**: **R$ 2,00 por saca de soja**, **R$ 0,10 por litro de leite** e **R$ 9,13 por leitão** significam que um produtor com **1.000 sacas** enxerga **R$ 2.000** de sobra sem abrir nenhum balanço. E mesmo sem abrir a empresa ele sabe que as sobras de 2024 foram **R$ 270 milhões** — a maior da história, **+64%** sobre 2023 —, pagas a **9,6 mil cooperados**, com metade já liquidada em dezembro. (O Presente Rural, 31/01/2025.)
+
+---
+
+## 12. Atualizações 2025–2026: o que mudou nas regras de repartição
+
+**Regra de ouro desta seção:** só entra aqui o que tem **fonte e vigência confirmada**. Tudo o que circula como proposta, projeto ou parecer fica rotulado **não verificado** — e não pode ser afirmado em reunião de conselho nem em prova.
+
+### 12.1 O núcleo da PLR não mudou
+
+A Lei nº 10.101/2000 **segue vigente, sem alteração nova em 2025–2026**: a última alteração estrutural continua sendo a **Lei nº 14.020/2020** (múltiplos programas de PLR e a exigência de assinatura **antes do pagamento** ou com **≥ 90 dias de antecedência** quando há antecipação — art. 2º, §7º). A tabela do Anexo continua com **0% a 27,5%**, exclusivamente na fonte. Duas consequências práticas: (i) **nenhuma isenção nova de PLR foi confirmada**; (ii) toda a matéria das seções 2 e 3 permanece válida para 2026 — a lacuna sobre a tabela republicada (art. 3º, §11) também permanece aberta.
+
+### 12.2 Tabela 3 — mudanças com vigência confirmada
+
+| Mudança (2025–2026) | Efeito na repartição ou no caixa | Vigência confirmada |
+|---|---|---|
+| **PLR mantida pela Lei nº 10.101/2000** | IR na fonte de **0% a 27,5%**; continua sem percentual mínimo e sem isenção nova | Última alteração estrutural: **Lei nº 14.020/2020**; nada novo vigente em 2025–2026 |
+| **LC nº 214/2025** (IBS, CBS e Imposto Seletivo), alterada pela **LC nº 227/2026** | Iguala a tributação de consumo entre lucrativa, cooperativa e OSC que comercializa: o destino do excedente deixa de variar por regime de consumo | Sancionada **16/01/2025**; LC 227 com **DOU 14/01/2026** |
+| **Alíquotas-teste de 2026**: **0,9% (CBS)** e **0,1% (IBS)** com dispensa de recolhimento a quem cumprir as obrigações (art. 348) | Ano de teste: sistemas precisam destacar tributos **mesmo sem custo fiscal**; descumprir gera intimação e **60 dias** de regularização | **01/01/2026 a 31/12/2026** |
+| **Anuário OCB 2026** (base 31/12/2025) | **R$ 61,28 bi de sobras** (+14,2%), **29 milhões** de cooperados, **613,4 mil** empregos diretos e ingressos de **R$ 848,37 bi** (+11,9%) | Dados de **31/12/2025** |
+| **Resolução CVM nº 244/2026** | Revoga a obrigatoriedade da Res. 193/2023 e adota **"pratique ou explique"**: quem divulga, divulga com CBPS/ISSB, 3 exercícios e asseguração — mais transparência da repartição | **29/05/2026**; regime a partir de **01/01/2027** |
+| **CBAP–CONAR, arts. 36, 36-A, 36-B e Anexo "U"** | Comunicar repartição, selos e metas exige **veracidade, qualificação, exatidão, pertinência, relevância e concretude** | Aprovado **24/10/2025**, publicado **27/10/2025**, vigor em 30 dias (**~26/11/2025**) |
+| **Novos padrões B Corp** (7 tópicos + auditoria independente) | Selo deixa de ser pontuação e vira exigência progressiva: custa mais e vale mais | Publicados em **abril/2025**, em vigor em **2026**, transição até **2028** |
+| **Cadimpacto (MDIC)** | Cadastro oficial de negócios de impacto (bronze, prata e ouro) — vitrine pública para quem já reparte | Desde **19/03/2025** |
+| **Lei nº 15.371/2026** (licença e salário-paternidade) | Custo do trabalho cresce para **toda** forma jurídica com empregados — disputa o mesmo caixa da PLR | Vigente; efeitos escalonados: **01/01/2027** (10 dias), **2028** (15 dias), **2029** (20 dias) |
+
+### 12.3 O que não está em vigor — rotulado "não verificado"
+
+- **Isenção da PLR do IR (PL 581/2019)** — parecer favorável da CFT de **30/09/2025** localizado, mas **sanção e vigência não verificadas**: **não é lei**, e a tabela do Anexo segue integral;
+- **Fim da escala 6x1 (PEC)** — aprovada na Câmara em **28/05/2026** (472×22 e 461×19), **pendente no Senado**: **não verificado**, não há jornada nova em vigor;
+- **PLs de greenwashing** (nº 1.008/2025, 440/2025 e 7.090/2025) — em tramitação; **não verificado**;
+- **Alíquotas definitivas de IBS/CBS por segmento de 2027 em diante** — dependem de resolução do Senado: **não verificado**;
+- **Número único de Empresas B no Brasil** — 338, 342 ou ~500, conforme corte e data: **não verificado**;
+- **Percentual nacional de adoção de PLR em 2026** — continua sem série consolidada (mantém-se a ressalva da seção 10).
+
+- **🔢 Você sabia?** Em 2025 as cooperativas brasileiras apuraram **R$ 61,28 bilhões de sobras** (+14,2%) sobre ingressos de **R$ 848,37 bilhões** (+11,9%) — e nenhum desses reais chega à quota antes dos fundos do art. 28: **10%** de Reserva e **5%** de TAES saem primeiro. No mesmo período a Natura comunicou **R$ 86,85 bilhões** de impacto positivo no modelo iP&L, equivalentes a **R$ 4 de benefício por R$ 1 de receita**, com a meta de 2030 adiantada em 5 anos. Repartir valor, em 2026, é também **publicar a conta**. (Sistema OCB, Anuário 2026; Exame, 15/06/2026.)
+
+> [!WARNING]
+> **Três armadilhas das atualizações 2025–2026:**
+> 1. **"PLR isenta" não é regra** — o PL 581/2019 não tem sanção nem vigência confirmada (**não verificado**): continue retendo pela tabela do Anexo, de **0% a 27,5%**;
+> 2. **"Aprovada na Câmara" não é "em vigor"** — a PEC do fim da 6x1 segue **pendente no Senado** (**não verificado**): não replaneje escalas com base nela;
+> 3. **O ano-teste do IBS/CBS não cobra, mas exige** — em 2026 as alíquotas-teste de **0,9%** e **0,1%** vêm com dispensa de recolhimento **só para quem cumprir as obrigações** (art. 348 da LC nº 214/2025): quem descumpre é intimado e tem **60 dias** para regularizar.
+
+```dragdrop
+{
+  "question": "Ordene os acontecimentos de 2025–2026 pela data:",
+  "items": [
+    "16/01/2025 — Sancionada a LC 214/2025 (IBS, CBS e Imposto Seletivo)",
+    "19/03/2025 — O MDIC lança o Cadimpacto, cadastro oficial de negócios de impacto",
+    "24/10/2025 — O CONAR aprova os arts. 36, 36-A, 36-B e o Anexo U do CBAP",
+    "01/01/2026 — Começam as alíquotas-teste de 0,9% (CBS) e 0,1% (IBS)",
+    "13/01/2026 — Publicada a LC 227/2026 (Comitê Gestor do IBS e contencioso)",
+    "29/05/2026 — A Resolução CVM 244/2026 torna facultativo o reporte de sustentabilidade"
+  ],
+  "correctOrder": [
+    "16/01/2025 — Sancionada a LC 214/2025 (IBS, CBS e Imposto Seletivo)",
+    "19/03/2025 — O MDIC lança o Cadimpacto, cadastro oficial de negócios de impacto",
+    "24/10/2025 — O CONAR aprova os arts. 36, 36-A, 36-B e o Anexo U do CBAP",
+    "01/01/2026 — Começam as alíquotas-teste de 0,9% (CBS) e 0,1% (IBS)",
+    "13/01/2026 — Publicada a LC 227/2026 (Comitê Gestor do IBS e contencioso)",
+    "29/05/2026 — A Resolução CVM 244/2026 torna facultativo o reporte de sustentabilidade"
+  ],
+  "explanation": "A ordem é cronológica e tem uma pegadinha: as alíquotas-teste do IBS/CBS começam em 01/01/2026, antes da LC 227/2026, de 13/01/2026 — o ano de teste começou e só depois veio a lei que estruturou o Comitê Gestor e o contencioso. Os dois primeiros marcos são de 2025 (reforma tributária e Cadimpacto) e o último, de 2026, muda apenas a obrigatoriedade de reporte, com regime aplicável só a partir de 01/01/2027."
+}
+```
+
+---
+
+## 13. Armadilhas, erros e o que não foi verificado
 
 | Erro típico | Por que é erro | Correção |
 |---|---|---|
@@ -703,6 +806,38 @@ Três efeitos jurídicos que valem mais que o percentual:
   ],
   "correct": 2,
   "explanation": "A Mondragon mantém escala salarial de 1 a 6 com faixa de 80% a 110% da referência anual comum (Relatório Anual 2023), e a França torna a participação obrigatória a partir de 50 funcionários durante 5 anos consecutivos (art. R3322-1), com nova obrigatoriedade para 11 a 49 desde 01/01/2025. No plano americano só a empresa contribui (CRS, 2025), e no Brasil não há lei de plano de propriedade dos trabalhadores — só prática de contrato societário."
+}
+```
+
+```question
+{
+  "id": "hyb-05-q11",
+  "type": "multiple-choice",
+  "question": "Uma unidade da SEMCO apura lucro após imposto de R$ 2.400.000,00 no exercício. Pela regra da SEMCOPAR — 23% do lucro após imposto da unidade, repartido 2 vezes por ano —, quanto é destinado à repartição com os trabalhadores?",
+  "options": [
+    "R$ 312.000,00",
+    "R$ 552.000,00",
+    "R$ 624.000,00",
+    "R$ 936.000,00"
+  ],
+  "correct": 1,
+  "explanation": "A conta é 23% × 2.400.000 = R$ 552.000,00, entregues em duas parcelas anuais a 3 eleitos pelos trabalhadores (HBR/Semler; Gonçalves, 1996). R$ 312.000,00 é 13% — o mínimo da Mondragon por cooperativa —; R$ 624.000,00 é 26%, erro de dobrar a taxa; R$ 936.000,00 é 39%, o percentual que a SEMCO chegou a aplicar na crise de 1990, junto com corte de 40% no salário da direção."
+}
+```
+
+```question
+{
+  "id": "hyb-05-q12",
+  "type": "multiple-choice",
+  "question": "Sobre as atualizações de 2025–2026 nas regras de repartição, qual afirmação está correta?",
+  "options": [
+    "A PLR passou a ser isenta do IR por lei sancionada em 2025",
+    "A PLR segue pela Lei nº 10.101/2000, cuja última alteração estrutural é a Lei nº 14.020/2020, com tabela do Anexo de 0% a 27,5% — a isenção proposta (PL 581/2019) não tem vigência confirmada",
+    "As cooperativas deixaram de aplicar os fundos do art. 28 a partir de 2026",
+    "A PEC do fim da escala 6x1 já está em vigor desde a aprovação na Câmara em 28/05/2026"
+  ],
+  "correct": 1,
+  "explanation": "A Lei nº 10.101/2000 permanece sem alteração nova vigente em 2025–2026 e a última alteração estrutural é a Lei nº 14.020/2020; a tabela do Anexo segue de 0% a 27,5% e nenhuma isenção foi confirmada (o PL 581/2019 tem apenas parecer da CFT de 30/09/2025 — não verificado). Os fundos do art. 28 continuam obrigatórios, e a PEC do fim da 6x1 foi aprovada na Câmara em 28/05/2026, mas segue pendente no Senado (não verificado)."
 }
 ```
 

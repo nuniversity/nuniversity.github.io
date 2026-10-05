@@ -48,7 +48,9 @@ Nesta lição você vai:
 - usar a **matriz de fornecedor** (impacto, custo e risco) e a triagem socioambiental com números;
 - dimensionar o **custo logístico do Brasil** e o efeito da escala nas compras colaborativas;
 - aplicar os **7 desperdícios do Lean** e os indicadores operacionais com fórmula;
-- comparar **ONG × empresa × híbrida** na mesma operação e decidir onde a eficiência vira valor repartido.
+- comparar **ONG × empresa × híbrida** na mesma operação e decidir onde a eficiência vira valor repartido;
+- reconhecer **casos reais de cadeia de valor com número publicado** (MONDRAGON, SEMCO, COPACOL, Coopercitrus, REI Co-op e o limite do Fagor);
+- aplicar as **atualizações 2025-2026** já vigentes para a operação (reforma tributária, reporte ESG, greenwashing, cooperativismo) e separar o que **ainda não** está em vigor.
 
 ---
 
@@ -488,7 +490,119 @@ São quase meio trilhão de produto interno bruto atravessado por entidades que 
 
 ---
 
-## 11. Veredito comparativo dos cinco modelos em operação e cadeia
+## 11. Casos reais: cadeia de valor com número publicado
+
+### 11.1 Cinco cadeias que se deixam auditar
+
+Os casos abaixo vêm do digesto de casos do curso (12 casos verificados com fonte e ano). Todos iluminam **um elo específico** da cadeia de Porter — é isso que os torna úteis, e não a curiosidade biográfica.
+
+| Caso | Elo da cadeia iluminado | Número publicado | Fonte/ano |
+|---|---|---|---|
+| **MONDRAGON** (Espanha, 1956) | Aquisição (apoio) + repartição | **≥13%** do lucro de cada cooperativa ao fundo divisional: **€ 13,0 mi** em 2023 + **€ 7,05 mi** de offset de prejuízos; **81 cooperativas**, ~**70.500 pessoas**, vendas **€ 11,056 bi** e lucro **€ 593 mi** | MONDRAGON, Relatório Anual 2023 |
+| **SEMCO** (Brasil, 1953) | Operações + gestão de pessoas | SEMCOPAR reparte **23%** do lucro após imposto da unidade, **2x/ano**, a 3 eleitos pelos trabalhadores; na crise de 1990 subiu para **39%**; inventário de **136 → 46 dias**; US$ 4 mi (1982) → **US$ 212 mi** (2003) | HBR/Semler; Gonçalves (1996) |
+| **COPACOL** (Brasil, 1964) | Logística de saída + repartição | **R$ 270 mi de sobras (+64%)** sobre faturamento de **R$ 10,6 bi (+8%)** em 2024, rateadas **por unidade processada**: R$ 2/saca de soja, R$ 1/milho, R$ 0,10/l de leite | O Presente Rural, 31/01/2025 |
+| **Coopercitrus** (Brasil, 1976) | Serviço + fornecedor | **321 mil atendimentos** a **28 mil produtores (+28%)** em 2023; sobras de **R$ 42,8 mi** sobre R$ 8,1 bi, rateadas por faixa **3,00 / 1,00 / 0,30** (IGP-M), art. 60 do Estatuto | Coopercitrus, Revista 450 (2024) |
+| **REI Co-op** (EUA, 1938) | Marketing, serviço e repartição no prejuízo | **US$ 189 mi** em Member Reward (tipicamente **10%**), **US$ 84,8 mi** em incentivos/*profit sharing* (+48,5%) e **US$ 8,9 mi** em +300 ONGs — mesmo com **prejuízo de US$ 156,4 mi** em 2024 | REI Newsroom, 08/05/2025 |
+
+Três leituras operacionais desses números:
+
+1. **Repartir não é improvisar:** MONDRAGON, COPACOL e Coopercitrus têm o rateio escrito em relatório anual ou em estatuto — o percentual é **regra**, não generosidade de ano bom;
+2. **O rateio por unidade processada (COPACOL) é o mais legível da cadeia:** cada produtor enxerga o retorno na própria saca ou cabeça de animal, o que amarra repartição e operação no **mesmo indicador** — exatamente o que a seção 9 chamou de índice de repartição de valor;
+3. **O caso Fagor marca o limite:** dívida de **~€ 859 mi**, prejuízo de **€ 89 mi** sobre vendas de **€ 1,167 bi** (2012) e concurso de acreedores em **13/11/2013**, com **5.642 trabalhadores** — a MONDRAGON aportou ~€ 300 mi e recusou mais € 50 mi. Repartir lucro **não elimina risco de alavancagem**. *(El País; Noticias de Gipuzkoa, 2013.)*
+
+### 11.2 Onde cada caso entra na tabela dos cinco modelos
+
+| Caso | Modelo da seção 3 | O que ele prova na operação | Risco que expõe |
+|---|---|---|---|
+| MONDRAGON | M2 — Cooperativa | Solidariedade **autofinanceira**: o "seguro" entre unidades sai do lucro de quem prospera (≥13%) | Faixa salarial ampliada de 1:3 (1956) para **1:6 (1988)** — a igualdade tem preço negociado |
+| SEMCO | M4 — Híbrida (governança participativa) | Transparência + participação no lucro + autocrítica em crise | Repartir dinheiro só sustenta se vier com repartição de **informação e decisão** |
+| COPACOL | M2 — Cooperativa | Escala industrial com retorno rastreável por produto | Concentração agroindustrial e ciclo de commodity |
+| Coopercitrus | M2 — Cooperativa | Serviço ao fornecedor (321 mil atendimentos) como atividade primária | Sobras caem com a safra: R$ 8,1 bi com **−14%** em 2023 |
+| REI Co-op | M5 — Rede colaborativa (cooperativa de consumidores) | Repartição **cultura, não resultado do exercício** | Prejuízo de US$ 156,4 mi não suspendeu os repasses |
+
+> **🔢 Você sabia?** A SEMCO **dobrou o rateio para 39%** do lucro em 1990 — exatamente no ano em que cortou **40%** dos salários da direção. Repartir *mais* em crise, com transparência e eleição dos três receptores, é o inverso do gesto padrão de encolher o social para "proteger" o caixa: a rotatividade da empresa ficou **abaixo de 2%**. *(HBR/Semler; Gonçalves, 1996.)*
+
+---
+
+## 12. Atualizações 2025-2026: o que já muda a operação
+
+### 12.1 O que está vigente (fonte + data de vigência)
+
+Esta seção só traz item com **vigência confirmada** pelo digesto de atualizações do curso (data de corte **05/10/2026**). O que está em tramitação ou sem sanção fica na seção 12.4, como **não verificado**.
+
+| # | Mudança | Fonte/ano | Vigência confirmada | O que muda na operação |
+|---|---|---|---|---|
+| 1 | IBS, CBS e Imposto Seletivo | **LC 214/2025**, sancionada 16/01/2025 (alterada pela LC 227/2026) | Vigente; transição até **2033** | A tributação de consumo passa a ser lida de modo uniforme entre CNPJ lucrativo, cooperativa e ONG que comercializa |
+| 2 | Alíquotas-teste de **0,9% (CBS)** e **0,1% (IBS)** com dispensa de recolhimento | LC 214/2025, art. 348 | **01/01/2026 – 31/12/2026** | Os sistemas precisam **destacar tributo mesmo sem custo**: ano-teste para mapear processos fiscais da cadeia |
+| 3 | Comitê Gestor do IBS e contencioso administrativo | **LC 227/2026** (DOU 14/01/2026) | Vigente | Governança única reduz litígio para OSCs e cooperativas, mas exige capacidade técnica |
+| 4 | Escalonamento do destaque fiscal | **Ato Conjunto RFB/CGIBS nº 4/2026** (30/07/2026) | 03/08/2026 → 01/10/2026 → 01/12/2026 → 01/01/2027 | Cronograma por espécie de documento; o Simples só entra em **01/01/2027** |
+| 5 | Reporte ESG no regime **"pratique ou explique"** | **Res. CVM 244/2026** (29/05/2026) | Vigente; regime a partir de **01/01/2027** | Cai a obrigatoriedade para companhias abertas; quem divulga adere a CBPS/ISSB, com asseguração e **3 exercícios** |
+| 6 | Greenwashing: arts. 36, 36-A/36-B e **Anexo "U"** do CBAP | **CONAR**, aprovado 24/10/2025, publicado 27/10/2025 | Vigente desde **~26/11/2025** (30 dias após publicação) | Selos, metas e campanhas de impacto exigem veracidade, qualificação, exatidão, pertinência, relevância e concretude |
+| 7 | Novos padrões globais de certificação **B Corp** | **B Lab**, publicados em abril/2025 | Em vigor em **2026**; transição até **2028** | 7 tópicos obrigatórios, auditoria independente e marcos nos anos **0, 3 e 5** — o selo deixa de ser só pontuação |
+| 8 | **Cadimpacto** — cadastro oficial de negócios de impacto | **MDIC**, 19/03/2025 | Em operação | Cadastro nacional em 3 níveis (bronze, prata, ouro) para visibilidade e captação |
+| 9 | **PLR** mantida pela Lei nº 10.101/2000 | Planalto; última alteração estrutural: **Lei nº 14.020/2020** | Vigente, sem alteração nova em 2025–2026 | IR exclusivo na fonte de **0% a 27,5%**; nenhuma isenção nova confirmada |
+| 10 | Licença-paternidade e salário-paternidade | **Lei nº 15.371/2026** | **01/01/2027** (10 dias) → 15 (2028) → 20 (2029) | Custo social crescente para **qualquer** forma jurídica com empregados |
+| 11 | Reporte contábil de sustentabilidade (NBC TDS e NBC TAS) | **Resolução CFC nº 1.710/2023** | **Ano-calendário 2026**, sempre que houver relatório de sustentabilidade | Quem publica relatório de sustentabilidade em 2026 já cai na norma |
+| 12 | Instituições financeiras sob padrão ISSB | **Res. CMN 5.185** e **Res. BCB 435** | Vigentes desde 01/01/2025; obrigatório **2026** (segmentos 1 e 2) e **2028** (demais) | Bancos e cooperativas de crédito parceiras das híbridas já reportam sob ISSB |
+
+### 12.2 Benchmarks atualizados: cooperativismo em 2025
+
+A seção 7.1 continua correta **para a referência de 2024**; o ciclo seguinte já fechou:
+
+| Indicador (31/12/2025) | Valor | Variação |
+|---|---|---|
+| Cooperativas no país | **~4,4 mil** | recorde do Sistema OCB |
+| Cooperados | **29 milhões** | frente a 25,8 mi em 2024 |
+| Empregos diretos | **613,4 mil** | frente a 578.035 em 2024 |
+| Ingressos e serviços prestados | **R$ 848,37 bilhões** | **+11,9%** |
+| Ativos totais | **R$ 1,60 trilhão** | **+14,9%** |
+| Capital social | **R$ 122,67 bilhões** | **+16,7%** |
+| **Sobras distribuíveis** | **R$ 61,28 bilhões** | **+14,2%** |
+| Salários e encargos | **R$ 45,59 bilhões** | **+9,66%** |
+
+*Fonte: Sistema OCB, AnuárioCoop 2026 (dados de 31/12/2025).*
+
+> **🔢 Você sabia?** O *World Cooperative Monitor 2025* (dados FY2023) avaliou o **Top 300** das cooperativas do mundo em **US$ 2,788 trilhões** — e o **Brasil aparece com 13 organizações** no ranking por faturamento (21 quando se usa faturamento por PIB per capita). Somadas aos R$ 848,37 bilhões de ingressos de 2025, a cadeia cooperativa brasileira é uma das maiores do planeta em escala. *(ACI/WCM, 2025.)*
+
+### 12.3 Cronograma do destaque fiscal: ordene os prazos
+
+**Arraste na ordem correta, do primeiro ao último prazo vigente:**
+
+```dragdrop
+{
+  "question": "Ordene o escalonamento do destaque fiscal de IBS/CBS (Ato Conjunto RFB/CGIBS nº 4/2026), do primeiro ao último prazo:",
+  "items": [
+    "03/08/2026 — NF-e, NFC-e e CT-e",
+    "01/10/2026 — NFCom e NFS-e com ISS",
+    "01/12/2026 — imóveis, bens imateriais e plataformas",
+    "01/01/2027 — Simples Nacional"
+  ],
+  "correctOrder": [
+    "03/08/2026 — NF-e, NFC-e e CT-e",
+    "01/10/2026 — NFCom e NFS-e com ISS",
+    "01/12/2026 — imóveis, bens imateriais e plataformas",
+    "01/01/2027 — Simples Nacional"
+  ],
+  "explanation": "O Ato Conjunto RFB/CGIBS nº 4/2026 escalona o destaque fiscal por espécie de documento: primeiro os documentos de transporte e venda ao consumidor (03/08/2026), depois o serviço com ISS (01/10/2026), em seguida imóveis, bens imateriais e plataformas (01/12/2026) e, por último, o Simples Nacional (01/01/2027). Na cadeia, o erro de data não é formalismo: é nota fiscal rejeitada e fluxo parado no recebimento."
+}
+```
+
+### 12.4 O que **não** está vigente (não afirmar como norma)
+
+> [!WARNING]
+> **Vigência é coisa séria — itens NÃO confirmados no digesto de atualizações (corte 05/10/2026):**
+> - **PEC do fim da escala 6x1**: aprovada na Câmara em **28/05/2026** (472×22 e 461×19), mas **pendente no Senado** — não há promulgação, logo não há transição a contar;
+> - **Isenção da PLR no IR (PL 581/2019)**: sanção e vigência **não confirmadas** — a PLR segue com tributação exclusiva na fonte de 0% a 27,5%;
+> - **PLs de greenwashing (nº 1.008, 440 e 7.090/2025)**: em tramitação na Câmara, **nenhuma vigência confirmada** — o que vale é o **CDC, art. 37** e o **Anexo "U" do CBAP**;
+> - **Alíquotas definitivas de IBS/CBS por segmento a partir de 2027**: dependem de resolução do Senado (arts. 18 e 349–369 da LC 214/2025) — **ainda não fixadas**;
+> - **Tratamento do ato cooperativo e de OSCs nos anexos da LC 214/2025**: revisão de anexos **não feita**;
+> - **Número de Empresas B no Brasil**: as fontes dão **~500** (fev/2026), **342** (mai/2026) e **338** (jul/2026) — cortes diferentes, **sem número único verificado**.
+
+**Itens não verificados nesta pesquisa (resumo):** proposta do CFC de retorno à obrigatoriedade do reporte em 2028 é apenas **proposta técnica**, sem norma publicada; estatísticas do IBGE sobre cooperativas para 2025–2026 não foram localizadas (os números desta lição vêm do **Sistema OCB/Sescoop**); e não há estatística oficial de "empresas de propósito" no Brasil com metodologia declarada.
+
+---
+
+## 13. Veredito comparativo dos cinco modelos em operação e cadeia
 
 > [!IMPORTANT]
 > **Veredito Comparativo**
@@ -501,7 +615,7 @@ São quase meio trilhão de produto interno bruto atravessado por entidades que 
 
 ---
 
-## 12. Armadilhas, erros frequentes e o que não foi verificado
+## 14. Armadilhas, erros frequentes e o que não foi verificado
 
 > [!WARNING]
 > **Armadilhas desta lição:**
@@ -679,6 +793,38 @@ São quase meio trilhão de produto interno bruto atravessado por entidades que 
   ],
   "correct": 1,
   "explanation": "Os quatro critérios são dos autores (Ashoka/HBR, 2010), divulgados pelo Banco Mundial (2011) e difundidos no Brasil pela ICE/FGV (2014): valor econômico e social, escala, rentabilidade sustentável e nova base de competição. A rentabilidade não é abandonada — é a condição que torna o modelo sustentável. (HBR, 18/03/2010; ICE/FGV, 2014)"
+}
+```
+
+```question
+{
+  "id": "hyb-11-q11",
+  "type": "multiple-choice",
+  "question": "Sobre o \"ano de teste\" da reforma tributária em 2026 (LC 214/2025, art. 348), o que é correto afirmar?",
+  "options": [
+    "As alíquotas-teste são 1% de IBS e 2% de CBS, com recolhimento obrigatório desde 01/01/2026",
+    "As alíquotas-teste são 0,1% de IBS e 0,9% de CBS, e quem cumprir as obrigações acessórias fica dispensado de recolhimento",
+    "O Simples Nacional é obrigado ao destaque fiscal desde 01/01/2026",
+    "O ICMS foi extinto em 2026, substituído integralmente pelo IBS"
+  ],
+  "correct": 1,
+  "explanation": "O art. 348 da LC 214/2025 fixa 0,9% de CBS e 0,1% de IBS em 2026 e dispensa o recolhimento a quem cumprir as obrigações acessórias, com janela de regularização de 60 dias. O destaque do Simples só começa em 01/01/2027 e a extinção de ICMS/ISS ocorre em 2033. Na operação, o efeito prático é fiscal sem desembolso: o sistema precisa destacar o tributo mesmo quando ninguém o paga. (Planalto/LC 214/2025; Comunicado Conjunto CGIBS/RFB, dez/2025)"
+}
+```
+
+```question
+{
+  "id": "hyb-11-q12",
+  "type": "multiple-choice",
+  "question": "Na COPACOL (2024), o rateio de sobras entre os cooperados foi feito:",
+  "options": [
+    "Proporcionalmente ao capital de cada cooperado, em parcela única anual",
+    "Por unidade processada — por exemplo, R$ 2 por saca de soja, R$ 1 por milho e R$ 0,10 por litro de leite",
+    "Igualitariamente entre os 9,6 mil cooperados, sem critério de produção",
+    "Somente em bonificação em dinheiro, vedada qualquer devolução em produto"
+  ],
+  "correct": 1,
+  "explanation": "A COPACOL distribuiu R$ 270 milhões de sobras (+64%, maior da história) sobre faturamento de R$ 10,6 bilhões em 2024, com rateio por unidade processada: R$ 2/saca de soja, R$ 1/milho, R$ 0,50/trigo, R$ 15/café, 3,6% sobre insumos, R$ 0,10/l de leite e assim por diante — metade em dezembro. É o rateio mais legível da cadeia: o cooperado enxerga o retorno na própria saca, o que liga repartição e operação no mesmo indicador. (O Presente Rural, 31/01/2025)"
 }
 ```
 

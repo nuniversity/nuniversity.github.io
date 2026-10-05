@@ -1,6 +1,6 @@
 ---
 title: "Governança Híbrida: Assembleia, Conselho, Voto e Deveres Fiduciários"
-description: "Como se governa uma empresa híbrida no Brasil: assembleia, conselho e diretoria pela Lei nº 6.404/1976, democracia de pessoas pela Lei nº 5.764/1971, quóruns do Código Civil, codeterminação na estatal e na Alemanha, deveres fiduciários com função social, matriz de governança dos cinco modelos e casos resolvidos com números."
+description: "Como se governa uma empresa híbrida no Brasil: assembleia, conselho e diretoria pela Lei nº 6.404/1976, democracia de pessoas pela Lei nº 5.764/1971, quóruns do Código Civil, codeterminação na estatal e na Alemanha, deveres fiduciários com função social, matriz de governança dos cinco modelos, casos reais com números (Mondragon, SEMCO, Coopercitrus, John Lewis e Fagor), a governança híbrida no mundo (CIC, benefit corporation, SCIC e SCOP) e casos resolvidos com números."
 order: 4
 difficulty: "intermediate"
 duration: "90 min"
@@ -55,7 +55,9 @@ Nesta lição você vai:
 - comparar a **codeterminação** brasileira (art. 140, único; Lei nº 13.303/2016) com a alemã (MitbestG);
 - conferir os **comparados com números**: Mondragon, John Lewis Partnership e a série da OCB;
 - montar a **matriz de governança dos cinco modelos** e o veredito comparativo;
-- resolver **sete casos com números** antes de escrever a primeira cláusula do seu estatuto.
+- resolver **sete casos com números** antes de escrever a primeira cláusula do seu estatuto;
+- ler **cinco casos reais** (Mondragon, SEMCO, Coopercitrus, John Lewis e Fagor) e ver o número que a assembleia, o conselho e os eleitores usaram de fato;
+- comparar a **governança híbrida no mundo**: a CIC britânica com teto de 35%, a benefit corporation norte-americana, a SCIC e a SCOP francesas — com fonte e ano para cada mecanismo.
 
 ---
 
@@ -516,6 +518,111 @@ Toda a governança desta lição cabe numa frase: **escreva no estatuto o que a 
 
 ---
 
+## 13. Casos reais: como decidem voto, conselho e assembleia
+
+### 13.1 Cinco casos, cinco mecanismos — todos com número na mesa
+
+Os casos abaixo não são exercícios: são decisões registradas em relatório anual, estatuto, ata de assembleia ou sentença de concurso. Cada um mostra **um canal de poder diferente** operando sobre a mesma pergunta — quem manda no excedente.
+
+| Caso | Quem decide | Mecanismo escrito | Número que decide | Fonte |
+|---|---|---|---|---|
+| **Mondragon** (Espanha, 1956) | Assembleia de associados | 1 pessoa = 1 voto; Congresso de **650** representantes | **≥13%** do lucro de cada cooperativa ao fundo divisional: **€ 13,0 mi** de compensação + **€ 7,05 mi** de offset de prejuízos (2023) | MONDRAGON, Relatório Anual 2023 |
+| **SEMCO** (Brasil, 1953) | **3 eleitos pelos trabalhadores** | SEMCOPAR, rateio **2x/ano** por unidade | **23%** do lucro após imposto da unidade; **39%** na crise de 1990, com corte de **40%** nos salários da direção | HBR/Semler; Gonçalves (1996) |
+| **Coopercitrus** (Brasil, 1976) | Assembleia (AGO) | Estatuto, **art. 60** | Ponderação **3,00 / 1,00 / 0,30** por faixa de movimentação, com atualização pelo **IGP-M**; sobra líquida de **R$ 42,8 mi** (2023) | Coopercitrus, Revista 450 (abr/2024) e Estatuto |
+| **John Lewis** (Reino Unido, 1929) | **Conselho** da plc | Bônus condicional a PBTBE ≥ **£ 150 mi** e dívida < **4x** | **3% = £ 46 mi** em 2021/22; **£ 0** em 2022/23, 2023/24 e 2024/25 | JLP, Annual Report and Accounts 2022–2025 |
+| **Fagor** (Espanha, 1956–2013) | Credores, em concurso de acreedores | Alavancagem da cooperativa industrial | Dívida de ~**€ 859 mi**; pedido de **€ 170 mi** negado; **concurso em 13/11/2013**; **5.642** trabalhadores | El País (2013); Noticias de Gipuzkoa (2013) |
+
+### 13.2 O que cada caso prova sobre a governança
+
+**Caso 1 — Mondragon: a solidariedade sai do lucro de quem prospera.** Cada cooperativa destina **no mínimo 13% do lucro** ao fundo divisional de solidariedade; em 2023 isso virou **€ 13,0 milhões** de compensação e **€ 7,05 milhões** de offset de prejuízos entre unidades. O salário oscila entre **80% e 110%** de uma referência anual (LagunAro), com razão mín-máx de **1:3 em 1956**, **1:4,5 nos anos 1970** e **1:6 desde 1988**; a Fundación MONDRAGON gastou **€ 27,8 milhões em 37 programas**. Lição: o "seguro" contra desigualdade entre unidades **não é caridade — é cláusula de rateio do lucro**, e quem decide o rateio é a assembleia de uma federação de **81 cooperativas** com ~70.500 pessoas (2023).
+
+**Caso 2 — SEMCO: quem elege também reparte.** O SEMCOPAR entrega **23% do lucro após imposto de cada unidade**, duas vezes por ano, a **3 eleitos pelos trabalhadores** — e na crise de 1990 a fatia subiu para **39%**, enquanto os salários da direção cortavam **40%**. Resultado ao longo do período: receita de **US$ 4 milhões (1982)** para **US$ 212 milhões (2003)**, de 90 para 3.000 pessoas e rotatividade **inferior a 2%**. Lição: repartir dinheiro só se sustenta quando vem com repartição de **informação e decisão** — os chefes são avaliados **2x/ano pelos subordinados** e o balanço é mensal por unidade.
+
+**Caso 3 — Coopercitrus: a justiça distributiva mora no artigo do estatuto.** O **art. 60** do estatuto rateia as sobras com ponderação **3,00** (até R$ 200 mil), **1,00** (até R$ 2 milhões) e **0,30** (acima de R$ 2 milhões) de movimentação, corrigida pelo **IGP-M** — ou seja, o associado que gira menos recebe mais por real movimentado. Em 2023, faturamento de **R$ 8,1 bilhões** (−14%) e **sobra líquida de R$ 42,8 milhões**; a alteração estatutária de 2023 retomou a distribuição monetária, votada na **AGO de 2025**, para **39,8 mil cooperados**. Lição: a ponderação progressiva é o instrumento estatutário de justiça distributiva autorizado pelo art. 4º, VII, da Lei nº 5.764/1971 — e ela só vale porque está **escrita e votada em assembleia**.
+
+**Caso 4 — John Lewis: o conselho decide, e o bônus não é direito adquirido.** A propriedade está em dois *Settlements in Trust* (**1929 e 1950**) e o *Partnership Bonus* de ~**69.000 Partners** depende de duas condições fixadas pelo conselho: lucro antes de juros, impostos e excepcionais (PBTBE) **≥ £ 150 milhões** e dívida **< 4x**. Em 2021/22 o resultado foi **3% (= 1,5 semana) = £ 46 milhões**; nos três exercícios seguintes, **£ 0**. Os Partners ainda exercem **veto comunitário**: podem barrar contribuições a instituições com mais de **25%** de receitas privadas. Lição: governança híbrida madura **protege o capital social na crise** justamente porque a regra de repasse é limiar, não promessa de campanha.
+
+**Caso 5 — Fagor: repartir lucro não elimina risco de alavancagem.** A cooperativa industrial acumulou cerca de **€ 859 milhões** de dívida, teve prejuízo de **€ 89 milhões** sobre vendas de **€ 1,167 bilhão** (2012) e teve o pedido de **€ 170 milhões** negado: o Grupo Mondragon aportou ~**€ 300 milhões** e recusou mais **€ 50 milhões**, e o **concurso de acreedores** foi decretado em **13/11/2013**, com **5.642** trabalhadores afetados e mais de 900 ex-cooperados reivindicando **€ 47,8 milhões**. Lição: o mesmo estatuto que reparte sobras com democracia de pessoas **não contém** uma regra de resgate ilimitado — sem cláusula de capital e de endividamento, a assembleia descobre o limite tarde demais.
+
+- **🔢 Você sabia?** Na crise de 1990 a SEMCO **aumentou** a repartição para **39%** do lucro, ao mesmo tempo em que cortou **40%** dos salários da direção — enquanto a Fagor, com **5.642** trabalhadores e **~€ 859 milhões** de dívida, foi a concurso em **13/11/2013** sem conseguir o aporte de **€ 170 milhões**. Os dois casos são cooperativas de trabalhadores: um usou a assembleia para **socializar a queda**, o outro foi vencido pelo **calendário dos credores**.
+
+---
+
+## 14. Governança híbrida no mundo: o que outros países já escreveram na lei
+
+### 14.1 Reino Unido — a CIC: *capping* de dividendos em regulamento
+
+A *Community Interest Company* nasce do **CAICE Act 2004** e das **CIC Regulations 2005**, e resolve por regulamento a pergunta que no Brasil fica só no estatuto: **quanto pode sair para o capital**. O teto é agregado — **no máximo 35% dos lucros distribuíveis** (os outros 65% se reinvestem ou vão à comunidade); por ação, até **5% acima da taxa básica do Banco da Inglaterra**; juros a taxa variável limitados a **4 pontos percentuais acima da taxa base**; e a capacidade ociosa de dividendos **carrega por 5 anos**. Soma-se o *asset lock*: o **CIC Regulator** pode remover diretores, congelar ativos e pedir liquidação quando a venda ocorrer abaixo do mercado. Transparência: *community interest report* anual e registro público. Escala: **37.081 CICs em março/2025**, **8.376 aprovações** em 2024/25 (recorde), **3.832 dissoluções** (10% do registro) e **3.163 conversões** desde 2005. *Fontes: GOV.UK, Community Interest Companies Guidance (09/02/2024); CIC Regulator, Annual Report 2024 to 2025 (23/07/2025).*
+
+### 14.2 Estados Unidos — benefit corporation e ESOP: propósito com relato, propriedade com *vesting*
+
+A **benefit corporation** começou em **Maryland, 1º estado, abril de 2010**; hoje há **41 estados** com lei (CARI, Indiana University, 02/05/2024) e **51 jurisdições globais** (B Lab, Annual Report 2024). Em Delaware, **8 Del. C. §§ 361–368** exige **declaração bienal** de benefício (§ 366); pode haver *benefit director* e *benefit officer*, e a troca de status exige *minimum status vote* classe a classe. Ponto decisivo para esta lição: **não há teto legal de dividendos** — a lei muda propósito, deveres e relato, não a distribuição. O **ESOP** é o outro caminho: **6.609 planos em 6.411 empresas**, **15,1 milhões de participantes** (10,9 milhões ativos ≈ **8% da força privada**) e **mais de US$ 2,1 trilhões** em ativos (NCEO, dados 2023, pub. 2026), com **US$ 164.946 por empregado** e **71%** recebendo *profit-sharing* contra **34%** (Rutgers, 04/04/2024). Caso-piloto do varejo: a **Publix**, com ESOP desde **01/10/1974**, tem **149.213 participantes** e **US$ 14,3 bilhões** (Form 5500/2024) — o empregado é sócio **por ação**, não por voto no dia a dia.
+
+### 14.3 França — SCIC e SCOP: a repartição escrita em lei, não em estatuto
+
+A **SCIC** (*société coopérative d'intérêt collectif*), pela **loi n° 2001-624 de 17/07/2001** e o décret 2002-241, admite SARL de **3 a 100 sócios**, SAS ou SA; exige **3 categorias obrigatórias de sócios**, vota **1 pessoa = 1 voto** e destina **no mínimo 57,5% do resultado às reservas impartageáveis** (podendo chegar a 100%), com coletividades públicas detendo até **50% do capital**. A **SCOP**, pela **loi 47-1775/1947**, reparte em três chapas: **trabalho ≥ 25%**, **reservas ≥ 16%** e **dividendos de capital ≤ 33%**. Escala (Coop FR, *Chiffres clés* 2024): **1.417 SCICs** com 15.720 assalariados e € 1,6 bilhão; **2.723 SCOPs** com 62.685 assalariados e € 6,7 bilhões. E a Itália completa o quadro: a **società benefit** (L. 208/2015, commi 376–384, vigente desde 01/01/2016) obriga ***relazione di impatto*** anexada ao balanço, **sem teto de dividendos e sem incentivo fiscal** — e já soma **5.540 empresas (+20%)** e 241 mil addetti no fim de 2025 (pesquisa Nativa/Intesa Sanpaolo/InfoCamere/Univ. Pádova/Assobenefit, 18/03/2026).
+
+### 14.4 Os regimes lado a lado — e a escala de cada um
+
+Primeiro, o mecanismo de governança e o limite de repartição de cada forma híbrida:
+
+| País | Forma híbrida | Mecanismo de governança | Repartição / limite | Fonte |
+|---|---|---|---|---|
+| Reino Unido | **CIC** | Ltd ou plc + poderes do *CIC Regulator*; *community interest report* anual | **35%** dos lucros distribuíveis; **5%** acima do BoE por ação; juros **+4 p.p.**; capacidade ociosa por **5 anos** | GOV.UK (2024); CIC Regs 2005 |
+| EUA | **Benefit corporation** | *Benefit director*; *status vote*; relatório anual ou bienal | **Sem teto legal** de dividendos — o dever é de propósito | 8 Del. C. §§ 361–368; CARI (2024) |
+| EUA | **ESOP** | Fiduciário do plano; divulgação em **Form 5500** | *Vesting* progressivo e distribuição ao sair do plano | NCEO (2026); Rutgers (2024) |
+| França | **SCIC** | **3 categorias** de sócios; **1 = 1 voto**; revisão quinquenal | **≥ 57,5%** do resultado às reservas impartageáveis | loi 2001-624; décret 2002-241 |
+| França | **SCOP** | **1 = 1 voto** entre trabalhadores-sócios | Trabalho **≥ 25%**; reservas **≥ 16%**; capital **≤ 33%** | loi 47-1775/1947; les-scop.coop (2025) |
+| Brasil | **Cooperativa** | Voto singular; assembleia **órgão supremo** (art. 38) | **Nada** às quotas salvo juros **≤ 12% a.a.**; fundos indivisíveis de reserva e ATES | Lei nº 5.764/1971, arts. 24, § 3º, e 4º, VIII |
+
+Depois, quantas entidades cada regime realmente move:
+
+| País / regime | Nº de entidades | Indicador-chave | Fonte / ano |
+|---|---:|---|---|
+| Reino Unido — CIC | **37.081** | 8.376 novas em 2024/25 | CIC Regulator (jul/2025) |
+| EUA — ESOP | **6.411 empresas** (6.609 planos) | 15,1 mi de participantes | NCEO (2026) |
+| EUA — benefit corp. | **41 estados** | 51 jurisdições globais | CARI (2024); B Lab (2024) |
+| França — SCIC | **1.417** | € 1,6 bi de faturamento | Coop FR (2024) |
+| França — SCOP | **2.723** | € 6,7 bi de faturamento | Coop FR (2024) |
+| Itália — società benefit | **5.540 (+20%)** | 241 mil addetti | Pesquisa nacional (mar/2026) |
+| Brasil — cooperativas | **4.384** | 25,8 mi de cooperados | Anuário OCB (2025) |
+| Mundo — cooperativas | **3 milhões** | 280 mi de empregos (10% dos ocupados) | ACI; World Cooperative Monitor 2025 |
+
+- **🔢 Você sabia?** Uma CIC pode **carregar por 5 anos** a capacidade de dividendos que não usou no ano — o teto de **35% dos lucros distribuíveis** é anual, não vitalício. Em 2024/25 o registro britânico cresceu com **8.376 aprovações** (recorde) e fechou em **37.081 CICs**, mas também registrou **3.832 dissoluções** — 10% do total: a forma híbrida serve tanto para **começar** quanto para **encerrar** um projeto com o patrimônio travado em benefício da comunidade.
+
+```dragdrop
+{
+  "question": "Ordene as normas de governança híbrida internacional pela data de entrada em vigor, da mais antiga à mais recente:",
+  "items": [
+    "França — SCOP: loi n° 47-1775 de 1947",
+    "França — SCIC: loi n° 2001-624 de 17/07/2001",
+    "Reino Unido — CIC: CAICE Act 2004 e CIC Regulations 2005",
+    "EUA — benefit corporation: Maryland, 1º estado, abril de 2010",
+    "Itália — società benefit: L. 208/2015, com vigência em 01/01/2016"
+  ],
+  "correctOrder": [
+    "França — SCOP: loi n° 47-1775 de 1947",
+    "França — SCIC: loi n° 2001-624 de 17/07/2001",
+    "Reino Unido — CIC: CAICE Act 2004 e CIC Regulations 2005",
+    "EUA — benefit corporation: Maryland, 1º estado, abril de 2010",
+    "Itália — società benefit: L. 208/2015, com vigência em 01/01/2016"
+  ],
+  "explanation": "A ordem cronológica mostra que a repartição legal de resultados nasceu no pós-guerra (SCOP, 1947), ganhou a fórmula de reservas coletivas em 2001 (SCIC), foi seguida pelo capping britânico (2004/2005), pelo propósito com relato nos EUA (Maryland, abril de 2010) e pelo relatório de impacto italiano (L. 208/2015, vigente desde 01/01/2016). Cada marco resolve um problema que o anterior deixou aberto: 1947 reparte entre trabalho e capital, 2001 obriga três categorias de sócios, 2004 trava a distribuição em 35%, 2010 cria o dever de propósito e 2015 obriga a medir o impacto no balanço."
+}
+```
+
+> [!WARNING]
+> **O que os digests não confirmaram — não transforme em fato:**
+> - **Alemanha (eG):** não foi localizado teto legal genérico de dividendos no GenG — em regra, o limite consta da *Satzung* (estatuto); confirmar antes de afirmar;
+> - **EUA (L3C, Vermont):** a liberdade de distribuição veio de fonte de 2008 e **não foi confirmada** no texto de 11 V.S.A. §§ 4161–4163;
+> - **Reino Unido (CIC):** alíquota fiscal específica **não verificada** — afirmar apenas o *asset lock*, o capping de 35% e o relato anual;
+> - **EUA (ESOP):** incentivos fiscais na aquisição de ações **não verificados** — não citar valores de crédito;
+> - **Itália (società benefit):** o texto consultado indica ausência de incentivo fiscal no momento, mas regras transitórias **não confirmadas**;
+> - **Empresas B no Brasil:** 342 (Valor, jun/2026), +350 (jun/2025) e +500 (Sistema B, mar/2026) — critérios divergem e **não foram reconciliados**;
+> - **Ano de fundação do movimento B Corp:** fontes divergem (2006 no B Lab; 2002 em matéria brasileira) — não afirmar ano sem checagem institucional.
+
+---
+
 ## Perguntas Práticas (Practice Questions)
 
 ```question
@@ -678,6 +785,38 @@ Toda a governança desta lição cabe numa frase: **escreva no estatuto o que a 
 }
 ```
 
+```question
+{
+  "id": "hyb-04-q11",
+  "type": "multiple-choice",
+  "question": "Uma Community Interest Company (CIC) no Reino Unido pode distribuir aos sócios, no máximo:",
+  "options": [
+    "57,5% do resultado, como a SCIC francesa",
+    "35% dos lucros distribuíveis, com teto por ação de até 5% acima da taxa básica do BoE e juros limitados a 4 pontos percentuais acima da taxa base",
+    "100% dos lucros, porque a CIC é uma Ltd comum sem restrição",
+    "Não há teto: o regulador apenas pede relatório anual"
+  ],
+  "correct": 1,
+  "explanation": "O teto da CIC é regulamentar e agregado: no máximo 35% dos lucros distribuíveis, por ação até 5% acima da taxa básica do Banco da Inglaterra e juros a taxa variável limitados a 4 pontos percentuais acima da taxa base, com a capacidade ociosa carregando por 5 anos (GOV.UK, Community Interest Companies Guidance, 09/02/2024; CIC Regs 2005). Os 57,5% são da SCIC francesa, e vão às reservas impartageáveis, não aos sócios (loi 2001-624). A CIC tem ainda asset lock: o CIC Regulator pode remover diretores, congelar ativos e pedir liquidação."
+}
+```
+
+```question
+{
+  "id": "hyb-04-q12",
+  "type": "multiple-choice",
+  "question": "Pelo Relatório Anual 2023 da MONDRAGON, o percentual mínimo do lucro de cada cooperativa destinado ao fundo divisional de solidariedade é de:",
+  "options": [
+    "8%",
+    "13%",
+    "23%",
+    "39%"
+  ],
+  "correct": 1,
+  "explanation": "13% é a regra Mondragon: em 2023 viraram € 13,0 milhões de compensação e € 7,05 milhões de offset de prejuízos entre unidades (MONDRAGON, Relatório Anual 2023). 23% é a fórmula do SEMCOPAR da SEMCO — repartição do lucro após imposto da unidade, 2x por ano, a 3 eleitos pelos trabalhadores — e 39% foi o pico dessa mesma repartição na crise de 1990, quando a direção cortou 40% do salário. 8% não corresponde a nenhum dos três mecanismos."
+}
+```
+
 ```matching
 {
   "question": "Associe cada instituto de governança à sua base legal correta:",
@@ -731,4 +870,5 @@ Toda a governança desta lição cabe numa frase: **escreva no estatuto o que a 
 > 5. Na cooperativa, a assembleia é **órgão supremo** (art. 38), o voto é **por pessoa** (art. 42), o quórum vai de **667 a 501 a 10** para 1.000 associados (art. 40) e a administração é **só de associados** (art. 47);
 > 6. A codeterminação é **facultativa na S.A.** (art. 140, único), **obrigatória na estatal** (Lei nº 13.303/2016, art. 19, com 30% de mulheres pelo art. 19-A) e **por disparador de 2.000 trabalhadores** na Alemanha (MitbestG, §§ 1 e 7);
 > 7. Os comparados dão a escala: **Mondragon** com 70.085 pessoas, 650 representantes e € 632 milhões de resultado; **John Lewis** com mais de 70.000 colaboradores e £ 56 milhões de lucro; a **OCB** com 4.400 cooperativas, 29,0 milhões de cooperados e R$ 61,2 bilhões de sobras;
-> 8. Escreva no estatuto o que a lei deixou em aberto, **registre em ata** o que a assembleia decidiu e **meça** o que o estatuto prometeu — e trate cada item não verificado como lacuna, nunca como fato.
+> 8. Escreva no estatuto o que a lei deixou em aberto, **registre em ata** o que a assembleia decidiu e **meça** o que o estatuto prometeu — e trate cada item não verificado como lacuna, nunca como fato;
+> 9. Os **casos reais** confirmam a regra: Mondragon rateia **≥13%** do lucro, SEMCO reparte **23%** (e **39%** na crise) por eleição dos trabalhadores, a Coopercitrus aplica o **art. 60** do estatuto e o John Lewis só paga bônus com PBTBE ≥ **£ 150 mi** e dívida < **4x** — e no mundo a CIC trava a distribuição em **35%**, a SCOP em **33%** e a SCIC obriga **57,5%** às reservas, sempre com fonte e ano.

@@ -56,7 +56,9 @@ Nesta lição você vai:
 - dominar a **matriz de trade-offs** entre preço, margem e impacto, com os números de prêmio de preço reais;
 - aplicar **ERRC e Lâmina de Estratégia** para quebrar o trade-off entre custo e diferenciação;
 - posicionar os **cinco modelos** do curso na mesma arquitetura de vantagem e emitir o **veredito comparativo**;
-- estudar **oito casos com números** — da Mondragon à Natura &Co, do John Lewis Partnership ao plano de propriedade dos trabalhadores.
+- estudar **oito casos com números** — da Mondragon à Natura &Co, do John Lewis Partnership ao plano de propriedade dos trabalhadores;
+- abrir **casos reais em três contas** — vantagem, margem e repartição —, da SEMCO à REI Co-op, da Publix à Fagor, do rateio da COPACOL ao progressivo da Coopercitrus;
+- comparar a **estratégia híbrida no mundo**: o teto da CIC britânica, a repartição tripartida da SCOP francesa e o relato de impacto da *società benefit* italiana.
 
 ---
 
@@ -497,6 +499,126 @@ A maior armadilha de escala é a **cópia sem base cultural**: trocar a forma ju
 
 ---
 
+## 12. Casos Reais
+
+As seções anteriores deram os **frameworks**; aqui os casos são abertos em **três contas**, que é como um conselho lê estratégia: **qual é a vantagem**, **quanto de margem o modelo sustenta** e **como o valor é repartido**. Abaixo estão sete dos doze casos verificados na pesquisa de casos do curso — Brasil e internacional —, todos com fonte e ano. Nada foi estimado.
+
+| Caso | Vantagem que o caso demonstra | Margem / repartição (número) | Fonte / ano |
+|---|---|---|---|
+| **SEMCO** (Brasil, 1953) | Transparência + participação: repartir dinheiro só funciona junto com repartição de informação e decisão | **SEMCOPAR: 23%** do lucro após imposto da unidade, **2×/ano**, a 3 eleitos — **39%** na crise de 1990, com corte de **40%** na direção; receita **US$ 4 mi (1982) → US$ 212 mi (2003)**; rotatividade **<2%** | HBR/Semler; Gonçalves, 1996 |
+| **REI Co-op** (EUA, 1938) | Licença social: a repartição é cultura, não consequência do resultado do exercício | **US$ 282,7 mi** repartidos = **8,0%** da receita de **US$ 3,53 bi**, mesmo com **prejuízo de US$ 156,4 mi (−4,4%)**; membros **US$ 189 mi**, funcionários **US$ 84,8 mi (+48,5%)**, ONGs **US$ 8,9 mi** | REI Newsroom, 08/05/2025 |
+| **Publix** (EUA, 1930) | Propriedade como barreira: o ESOP converte trabalho em capital sem mudar a forma jurídica | Vendas **US$ 59,7 bi** e lucro **US$ 4,6 bi** = margem de **7,7%**; ESOP desde **01/10/1974** com **149.213 participantes** e **US$ 14,3 bi**; PLR de até **12%** do salário-base | SEC 10-K FY2024; Form 5500/2024 |
+| **Fagor** (Espanha, 1956–2013) | O limite da solidariedade: repartir lucro não protege de alavancagem | Prejuízo de **€ 89 mi** sobre vendas de **€ 1,167 bi** = margem de **−7,6%**, com dívida de **~€ 859 mi**; apoio interno de **~€ 300 mi**; **concurso de acreedores em 13/11/2013**; **5.642** trabalhadores | El País, 13/11/2013; Noticias de Gipuzkoa, 2013 |
+| **COPACOL** (Brasil, 1964) | Rateio visível na própria mercadoria — transparência como atividade de valor | Sobras de **R$ 270 mi (+64%)** sobre faturamento de **R$ 10,6 bi (+8%)** = **2,55%**; **R$ 2,00/saca de soja**, **R$ 0,10/l de leite**, **R$ 9,13/leitão**; 9,6 mil cooperados | O Presente Rural, 31/01/2025 |
+| **Coopercitrus** (Brasil, 1976) | Justiça distributiva estatutária: rateio progressivo por faixa | Sobra líquida de **R$ 42,8 mi** sobre **R$ 8,1 bi** = **0,53%**; ponderação **3,00 / 1,00 / 0,30** (IGP-M); 321 mil atendimentos a 28 mil produtores | Revista 450, abr/2024 |
+| **LAR** (Brasil, 1964) | Vínculo patrimonial que sobrevive à saída do associado | **R$ 335,9 mi** em 2025 = **R$ 101,3 mi** de sobras (**0,44%** de R$ 23,2 bi) + **R$ 59 mi** de devolução de capital a **225 jubilados** (**≈ R$ 262,2 mil** cada) | Lar Cooperativa, 10/02/2026 |
+
+### 12.1 SEMCO: repartir dinheiro só sustenta com repartição de informação
+
+A SEMCO reparte **23% do lucro após imposto de cada unidade**, **duas vezes por ano**, entregue a **três eleitos pelos trabalhadores** (SEMCOPAR); na crise de 1990 o percentual subiu para **39%**, enquanto a direção cortava **40%** dos próprios salários. Entre 1982 e 2003 a receita foi de **US$ 4 milhões para US$ 212 milhões**, o quadro de 90 para 3.000 pessoas, a rotatividade ficou **abaixo de 2%**, o inventário caiu de **136 para 46 dias**, chefes passaram a ser avaliados **duas vezes por ano** pelos subordinados e o balanço por unidade virou mensal.
+
+**Leitura estratégica (RBV + cadeia de valor):** o recurso VRIN **não é o percentual** — qualquer empresa pode declarar 23% numa ata. O que é escasso e difícil de imitar é a **combinação repartição + transparência mensal + avaliação de chefes por subordinados**, que aparece nas atividades de gestão de pessoas e de controle interno. Copiar só o rateio produz custo sem produtividade — é copiar a parte, não o todo (Porter, 1996).
+
+### 12.2 REI Co-op: licença social que sobrevive ao prejuízo
+
+Em 2024 a receita da cooperativa de consumidores caiu **6,2%** para **US$ 3,53 bilhões** e o exercício fechou com **prejuízo de US$ 156,4 milhões** — e mesmo assim foram destinados **US$ 189 milhões** em *Co-op Member Reward* (tipicamente **10%**), **US$ 84,8 milhões** em incentivos e *profit sharing* (**+48,5%**) e **US$ 8,9 milhões** a mais de 300 ONGs: **US$ 282,7 milhões = 8,0% da receita**. O sócio paga **US$ 30** de entrada, há **187 lojas** e cerca de 14 mil funcionários, e a REI se tornou o **1º varejista nacional a alcançar *zero waste***.
+
+**Leitura estratégica (licença social + propósito):** a repartição aqui é um ativo de **confiança** — o topo da pirâmide de Thomson & Boutilier — protegido justamente no ano em que doía. É o inverso de tratar propósito como despesa discricionária: com **−4,4%** de margem no exercício, manter **8,0%** da receita em repartição é **decisão de governança documentada**, não automático. O risco também é explícito: prejuízo financiado por caixa consome liquidez até a confiança virar receita.
+
+### 12.3 Publix: propriedade sem mudar a forma jurídica
+
+A maior empresa de **propriedade dos funcionários** dos EUA fechou 2024 com **US$ 59,7 bilhões** de vendas, **US$ 4,6 bilhões** de lucro — **margem de 7,7%** —, **1.392 lojas** e mais de **255.000 pessoas**. O **Publix PROFIT Plan** (ESOP) existe desde **01/10/1974** e, pelo Form 5500 de 2024, soma **149.213 participantes** com **US$ 14,3 bilhões** em ativos; a PLR vai até **12% do salário-base**, há *put option* de **US$ 669 milhões** e a ação subiu de **US$ 18,05 para US$ 19,20** (01/03/2025).
+
+**Leitura estratégica (barreira de imitação):** a Publix prova que a hibridiz por propriedade **não exige forma jurídica especial** — exige plano fiduciário com *vesting* e mercado de saída (a *put*). A contrapartida, imposta pela própria estrutura: o empregado é sócio **por ação, não por voto** no dia a dia. A vantagem é patrimonial e a governança segue hierárquica — quem quer as duas contas precisa dizer isso, e não prometer democracia plena que o desenho não entrega.
+
+### 12.4 Fagor: onde a solidariedade parou
+
+A cooperativa industrial do mesmo grupo da Mondragon encerrou 2012 com **prejuízo de € 89 milhões sobre vendas de € 1,167 bilhão** — **margem de −7,6%** — e dívida de **~€ 859 milhões**. O pedido de **€ 170 milhões** foi recusado; a Mondragon aportou **~€ 300 milhões** e recusou mais **€ 50 milhões**; o **concurso de acreedores foi decretado em 13/11/2013**, com **5.642 trabalhadores** afetados, **13 plantas em 13 países** e mais de **900 ex-cooperados** reivindicando **€ 47,8 milhões**.
+
+**Leitura estratégica (cinco forças + cadeia de capital):** a Fagor é a contraprova necessária desta lição: **repartir lucro não elimina risco de alavancagem**. A solidariedade tem limite institucional — ela cobre choques de resultado, não um balanço estruturalmente alavancado. Quem descreve a vantagem da híbrida apenas pela repartição está lendo a cadeia de valor sem ler o **custo de capital** (seção 10): é aí que a hibridiz cobra a conta.
+
+### 12.5 COPACOL, Coopercitrus e LAR: o rateio como atividade de valor
+
+- **COPACOL (2024):** faturamento de **R$ 10,6 bi (+8%)** com **R$ 270 mi de sobras (+64%)** = **2,55%** devolvidos, rateados **por unidade processada** — **R$ 2,00 por saca de soja**, **R$ 0,10 por litro de leite**, **R$ 9,13 por leitão**, **3,6%** sobre insumos —, com **R$ 390 mi** de tributos no mesmo exercício;
+- **Coopercitrus (2023):** **R$ 8,1 bi** de faturamento e **R$ 42,8 mi** de sobra líquida = **0,53%**, rateados pelo **art. 60** do estatuto, com ponderação **3,00** (até R$ 200 mil), **1,00** (até R$ 2 mi) e **0,30** (acima de R$ 2 mi) de movimentação, atualizada pelo **IGP-M** — e **321 mil atendimentos** a **28 mil produtores (+28%)** na assistência técnica;
+- **LAR (2025):** receita de **R$ 23,2 bi (+14,4%)** e **R$ 335,9 mi** devolvidos, dos quais **R$ 59 mi** de **devolução de capital a 225 jubilados** (**≈ R$ 262,2 mil** cada).
+
+**Leitura estratégica (cadeia de valor + aglomerados):** nas três, o rateio é **atividade primária de marketing, vendas e serviços** — é a prova visível da proposta ao produtor e o que faz a assistência técnica (321 mil atendimentos) virar vínculo de fornecimento exclusivo. Por isso é barreira: o concorrente copia o preço, não copia um estatuto com ponderação decrescente, um rateio impresso na saca e um vínculo que sobrevive à aposentadoria.
+
+- **🔢 Você sabia?** A cooperativa de trabalho **Coopermiti** (SP, 2009) é o extremo da repartição: **100% da renda é revertida aos cooperados** e **850 toneladas** de eletroeletrônicos foram tratadas em **2025**, com apenas **11 a 50 pessoas**. Sem fins lucrativos (Lei nº 5.764/1971), ela elimina a distribuição de lucro para redirecionar **tudo** ao capital de trabalho e ao impacto — e a contrapartida é conhecida: **fraqueza da reserva patrimonial**, exatamente o oposto do erro da Fagor.
+
+> [!WARNING]
+> **Caso real não é receita pronta.** Quatro erros ao importar os casos desta seção para o seu plano: (i) **comparar bases diferentes** — Publix tem margem de **7,7%** sobre US$ 59,7 bi em alimentação, a REI tem **−4,4%** num ano em que a receita caiu **6,2%** e a COPACOL devolve **2,55%** sobre R$ 10,6 bi de agroindústria: são setores, moedas e exercícios distintos; (ii) **achar que repartição protege de dívida** — a Fagor repartia lucro e foi a concurso com **~€ 859 milhões** de endividamento; (iii) **confundir repartição discricionária com direito adquirido** — o *Partnership Bonus* do John Lewis foi de **£ 0** em três exercícios seguidos, mesmo com o PBTBE triplicando para **£ 126 milhões**; (iv) **copiar a forma sem a governança** — no ESOP da Publix o empregado é sócio por ação, não por voto. O que se transplanta é o **princípio**, como ensina a réplica (seção 10.2): atividades, ligações e governança — nunca só o contrato.
+
+---
+
+## 13. Estratégia Híbrida no Mundo
+
+A mesma pergunta desta lição — **como sustentar custo competitivo e propósito verificável sem ser copiada?** — recebeu respostas institucionais diferentes em cada país. Três experiências, com números verificados: o **teto como credibilidade** (Reino Unido), a **repartição como lei** (França) e o **relato como substituto do teto** (Itália).
+
+### 13.1 Reino Unido — a CIC: o teto que dá previsibilidade
+
+A *Community Interest Company* nasceu do **CAICE Act 2004** e das **CIC Regulations 2005** e empacota quatro travas: **teto agregado de 35% dos lucros distribuíveis** (os outros **65%** se reinvestem ou vão à comunidade), **até 5% acima da taxa básica do Banco da Inglaterra por ação**, juros a taxa variável limitados a **4 pontos percentuais** acima da taxa base e o ***asset lock*** — que autoriza o **CIC Regulator** a remover diretores, congelar ativos e pedir liquidação. A capacidade de dividendos não usada **carrega por até 5 anos**.
+
+Escala: **37.081 CICs em março de 2025**, **8.376 aprovações** em 2024/25 (recorde), **3.163 conversões** desde 2005 e **3.832 dissoluções** — exatamente **10%** do registro.
+
+**Leitura estratégica:** a CIC transforma o trade-off preço × margem em **regra pública**: o capital paciente aceita margem menor porque o teto é igual para todos e o regulador faz cumprir. A barreira aqui é **regulatória**, não cultural — a híbrida não precisa inventar a trava, precisa **decidir se quer viver sob ela**, porque a trava também limita a velocidade de retorno.
+
+### 13.2 França — SCOP e SCIC: a lei faz o trabalho do estatuto
+
+Duas formas, duas lógicas. A **SCOP** (*loi* 47-1775/1947) reparte em três: **trabalho ≥ 25%** do resultado (na prática, acima de 40%), **reservas ≥ 16%** e **dividendos de capital ≤ 33%** — sempre com **1 pessoa = 1 voto**. A **SCIC** (*loi* n° 2001-624, de **17/07/2001**, com décret de 2002) exige **três categorias obrigatórias de sócios**, também **1 = 1 voto**, destina **≥ 57,5% do resultado às reservas impartageáveis** (até 100%) e permite que **coletividades públicas detenham até 50% do capital**, sem *agrément* prévio — o registro é no Tribunal de Comércio.
+
+Escala (2024): **2.723 SCOPs**, **62.685 assalariados** e **€ 6,7 bilhões** de faturamento; **1.417 SCICs**, **15.720 assalariados** e **€ 1,6 bilhão**.
+
+**Leitura estratégica:** na França quem constrói a barreira é o **direito societário**, não a cultura da firma — a repartição tripartida é cláusula legal, e a governança multiparte é imposta por lei. Para a híbrida brasileira a lição é de **escopo**: se a sua vantagem depende de repartição, ela precisa estar **no estatuto ou na lei**, e não num comunicado de RH que a assembleia pode revogar no ano seguinte.
+
+### 13.3 Itália — *società benefit*: o relato no lugar do teto
+
+A *società benefit* (**L. 208/2015**, *commi* 376–384, em vigor desde **01/01/2016**) pode usar qualquer forma do livro V do Código Civil, assume **propósito duplo**, nomeia um ***referente interno*** e anexa ao balanço uma ***relazione di impatto*** anual, avaliada em **nove âmbitos**. Não há **teto de dividendos** e **não há incentivo fiscal**.
+
+Escala: **5.540 empresas (+20%)** e **241 mil postos de trabalho** no fim de 2025 — Lombardia **1.721**, Lazio **670**, Vêneto **551** — com faturamento mediano 2022–2024 de **+14,6% contra +5,3%** das empresas comparáveis.
+
+**Leitura estratégica:** a Itália aposta que **relato auditado substitui teto**: o ganho competitivo vem da informação, não da trava. É a hipótese mais parecida com a da empresa híbrida deste curso — e também a mais exposta: sem cap e sem incentivo fiscal, quem **não** publica relação de impacto não difere de uma S.A. comum, e o trade-off preço × margem volta intacto.
+
+| Experiência | Mecanismo que sustenta a vantagem | Números verificados | O que a híbrida pode importar | Fonte / ano |
+|---|---|---|---|---|
+| **Reino Unido — CIC** | Teto de distribuição + *asset lock* + relato anual | **35%** dos lucros distribuíveis; **37.081** CICs (mar/2025); **8.376** novas em 2024/25; **3.832** dissoluções (10%) | Previsibilidade de margem para capital paciente, com fiscalização de terceiros | GOV.UK, 09/02/2024; CIC Regulator, 23/07/2025 |
+| **França — SCOP** | Repartição tripartida obrigatória (**25 / 16 / 33**) | **2.723** SCOPs; **62.685** assalariados; **€ 6,7 bi** de faturamento | Estatuto que já entrega a divisão embutida na forma societária | les-scop.coop, 2025; Coop FR, *Chiffres clés 2024* |
+| **França — SCIC** | **≥57,5%** às reservas impartageáveis; 3 categorias de sócios; 1 = 1 voto | **1.417** SCICs; **15.720** assalariados; **€ 1,6 bi** | Governança multiparte por lei, com coletividades até **50%** do capital | *loi* 2001-624; Le Labo de l'ESS; Coop FR, 2024 |
+| **Itália — *società benefit*** | Relação de impacto anual; **sem teto e sem incentivo** | **5.540 (+20%)**; **241 mil** postos; mediano **+14,6% vs +5,3%** | Relato como substituto do teto — e como alvo de greenwashing | L. 208/2015; pesquisa Nativa/Intesa Sanpaolo (mar/2026) |
+| **EUA — ESOP** | Propriedade pelos trabalhadores via plano fiduciário com *vesting* | **6.609 planos**; **15,1 mi** de participantes; **US$ 2,1 tri** em ativos | Repartição por propriedade **sem** mudar a forma societária | NCEO (dados 2023, pub. 2026); Rutgers, 04/04/2024 |
+
+**Como usar a tabela na decisão:** (a) se a vantagem precisa de **previsibilidade de retorno** → estude o pacote britânico (teto + relato + regulador); (b) se ela precisa de **repartição que ninguém revogue** → estude a SCOP, onde a divisão é lei; (c) se ela precisa de **governança com partes interessadas formalizadas** → estude a SCIC; (d) se ela precisa de **informação como produto** → estude a *società benefit*, sabendo que o relato sem trava também é o regime com **menor proteção** contra a derivada de missão; (e) se ela precisa de **propriedade** → estude o ESOP, que muda o dono e não muda a hierarquia.
+
+```dragdrop
+{
+  "question": "Ordene os marcos legais das experiências internacionais da seção, do mais antigo ao mais recente:",
+  "items": [
+    "1947 — França: a loi 47-1775 cria a SCOP, com repartição tripartida de trabalho, reservas e capital",
+    "1990 — Espanha: a Ley 20/1990 protege fiscalmente as cooperativas e limita os juros ao capital",
+    "2001 — França: a loi n° 2001-624 cria a SCIC, com três categorias de sócios e 1 pessoa = 1 voto",
+    "2004/2005 — Reino Unido: o CAICE Act e as CIC Regulations criam a CIC, com teto de 35% e asset lock",
+    "2010 — Estados Unidos: Maryland aprova em abril a primeira lei de benefit corporation do país",
+    "2015/2016 — Itália: a L. 208/2015 cria a società benefit, com relação de impacto anual e sem teto de dividendos"
+  ],
+  "correctOrder": [
+    "1947 — França: a loi 47-1775 cria a SCOP, com repartição tripartida de trabalho, reservas e capital",
+    "1990 — Espanha: a Ley 20/1990 protege fiscalmente as cooperativas e limita os juros ao capital",
+    "2001 — França: a loi n° 2001-624 cria a SCIC, com três categorias de sócios e 1 pessoa = 1 voto",
+    "2004/2005 — Reino Unido: o CAICE Act e as CIC Regulations criam a CIC, com teto de 35% e asset lock",
+    "2010 — Estados Unidos: Maryland aprova em abril a primeira lei de benefit corporation do país",
+    "2015/2016 — Itália: a L. 208/2015 cria a società benefit, com relação de impacto anual e sem teto de dividendos"
+  ],
+  "explanation": "A ordem cronológica mostra a direção do movimento: em 1947 a preocupação era garantir a participação do trabalho na repartição; em 1990 a Espanha protege a cooperativa com limite de juros; em 2001 a França cria uma forma para múltiplas categorias de sócios; em 2004/2005 o Reino Unido inova com teto de 35% e asset lock, fiscalizados por um regulador; em 2010 os EUA passam a exigir propósito e relato sem limitar dividendos; e em 2015/2016 a Itália completa o arco trocando teto por relação de impacto anual. Do controle da distribuição para o controle da informação — e a empresa híbrida que escolhe o regime escolhe, também, qual das duas alavancas de vantagem vai defender."
+}
+```
+
+- **🔢 Você sabia?** O **ESOP** americano distribui em escala: **6.609 planos** em **6.411 empresas**, **15,1 milhões de participantes** (**10,9 milhões** ativos ≈ **8% da força de trabalho privada**) e mais de **US$ 2,1 trilhões** em ativos — **US$ 164.946 por empregado**. E **71%** deles recebem *profit-sharing*, contra **34%** dos trabalhadores fora do plano (NCEO, dados de 2023; Rutgers, 04/04/2024). Ou seja: a propriedade não é curiosidade de nicho, é **8%** do mercado de trabalho privado americano.
+
+- **🔢 Você sabia?** O sistema cooperativo brasileiro fechou 2024 com **4.384 cooperativas**, **25,8 milhões de cooperados** (≈ **23,3%** da população ocupada), ingressos de **R$ 757,9 bi (+9,5%)** e **R$ 51,4 bi de sobras distribuídas (+32%)**, com **578 mil empregos diretos** — enquanto o cooperativismo mundial soma **3 milhões de cooperativas**, **280 milhões de empregos (10% dos ocupados)** e **US$ 2,79 trilhões** no Top 300 (Sistema OCB, *Anuário 2025*; ACI/ICA; *World Cooperative Monitor 2025*). A vantagem híbrida, em escala, já é **sistema econômico**, não ilha.
+
+---
+
 ## Perguntas Práticas (Practice Questions)
 
 ```question
@@ -688,6 +810,38 @@ A maior armadilha de escala é a **cópia sem base cultural**: trocar a forma ju
   ],
   "correct": 1,
   "explanation": "A ordem integra as duas lentes do curso: a RBV identifica o que é valioso, escasso, sem substituto e difícil de imitar; a cadeia de valor mostra onde isso vira custo ou valor percebido; e as frentes de cooperação mais a licença social sustentam o sistema. As cinco forças são o passo anterior, de leitura da indústria, e parar nelas deixa a análise sem a firma. Declarar missão sem clareza de gestão não se associa a desempenho (Gartenberg, 2019)."
+}
+```
+
+```question
+{
+  "id": "hyb-08-q13",
+  "type": "multiple-choice",
+  "question": "Sobre os casos reais analisados na seção 12, qual afirmação está correta?",
+  "options": [
+    "A Fagor foi a concurso de acreedores em 2013 porque a Mondragon se recusou a repartir lucros com ela",
+    "A REI Co-op destinou US$ 282,7 milhões — 8,0% da sua receita — em 2024, mesmo fechando o ano com prejuízo de US$ 156,4 milhões, enquanto a Fagor registrou prejuízo de € 89 milhões sobre vendas de € 1,167 bilhão e dívida de cerca de € 859 milhões",
+    "A Publix é o caso de menor margem da seção, com 2,55% de lucro sobre US$ 59,7 bilhões de vendas",
+    "O SEMCOPAR reparte 13% do lucro após imposto da unidade, o mesmo piso mínimo da Mondragon"
+  ],
+  "correct": 1,
+  "explanation": "A REI Co-op somou US$ 189 milhões a membros, US$ 84,8 milhões a funcionários e US$ 8,9 milhões a ONGs — US$ 282,7 milhões, ou 8,0% da receita de US$ 3,53 bilhões — num exercício que fechou com prejuízo de US$ 156,4 milhões: a repartição é decisão de governança, não consequência do resultado. A Fagor fechou 2012 com prejuízo de € 89 milhões sobre vendas de € 1,167 bilhão (margem de −7,6%) e dívida de ~€ 859 milhões, indo a concurso em 13/11/2013 — a Mondragon aportou ~€ 300 milhões e ainda assim não evitou a falência, porque repartição não cobre alavancagem. A margem de 2,55% é da COPACOL (sobras de R$ 270 milhões sobre R$ 10,6 bilhões), não da Publix, cuja margem é de 7,7% (US$ 4,6 bilhões sobre US$ 59,7 bilhões). E o SEMCOPAR reparte 23%, chegando a 39% na crise de 1990, enquanto o piso de solidariedade da Mondragon é de 13%."
+}
+```
+
+```question
+{
+  "id": "hyb-08-q14",
+  "type": "multiple-choice",
+  "question": "Sobre as três experiências internacionais da seção 13, qual leitura estratégica está correta?",
+  "options": [
+    "A CIC britânica não tem teto de distribuição, a SCOP francesa não destina nada às reservas e a società benefit italiana é a única com incentivo fiscal",
+    "A benefit corporation dos EUA limita os dividendos a 35% dos lucros distribuíveis e a SCIC francesa obriga 100% do resultado aos dividendos dos sócios",
+    "A CIC britânica limita a distribuição a 35% dos lucros distribuíveis e já soma 37.081 entidades (mar/2025); a SCOP francesa reparte o resultado entre trabalho (≥25%), reservas (≥16%) e capital (≤33%); e a italiana società benefit troca o teto por relação de impacto anual, sem incentivo fiscal",
+    "A SCIC francesa não admite coletividades públicas no capital e a italiana società benefit é obrigada a distribuir no máximo 35% do lucro"
+  ],
+  "correct": 2,
+  "explanation": "A CIC limita a distribuição a 35% dos lucros distribuíveis, com teto por ação de 5% acima da taxa básica do BoE e juros de +4 p.p., e o registro somava 37.081 entidades em março de 2025. A SCOP francesa fixa trabalho ≥25%, reservas ≥16% e dividendos de capital ≤33%. A società benefit italiana (L. 208/2015) exige relação de impacto anual anexada ao balanço, mas não tem teto de dividendos nem incentivo fiscal. A SCIC, por sua vez, destina ao menos 57,5% do resultado às reservas impartageáveis e admite coletividades públicas com até 50% do capital; o teto de 35% é britânico, não italiano."
 }
 ```
 

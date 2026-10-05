@@ -52,7 +52,9 @@ Nesta lição você vai:
 - distinguir **GRI**, **ISO 26000** e **B Impact Assessment** — relato, orientação e certificação, três coisas diferentes;
 - estimar impacto causal com **baseline, contrafactual e diferença-em-diferenças**;
 - ler o **IP&L** e o retorno integrado (dobro e triplo resultado);
-- montar um **painel de KPIs** que cubra os cinco níveis da cadeia, com frequência, método e meta.
+- montar um **painel de KPIs** que cubra os cinco níveis da cadeia, com frequência, método e meta;
+- conferir **casos reais** (Natura, REI Co-op, MONDRAGON, COPACOL) e o que cada um publica como número de impacto;
+- separar, nas **atualizações 2025–2026** de reporte ESG, o que está **vigente** do que apenas foi **anunciado**.
 
 ---
 
@@ -505,7 +507,147 @@ Empresa limitada com **40% do produto dedicado a uma cooperativa de catadores** 
 
 ---
 
-## 11. O mercado do impacto, em números verificados
+## 11. Casos reais: como empresas híbridas medem impacto com números
+
+As seções 3 a 10 deram os instrumentos; esta dá os **resultados publicados**. Os quatro casos abaixo vêm de relatórios, releases e balanços lidos diretamente — e a primeira lição é que **cada um escolheu um instrumento diferente** para responder "qual é o seu resultado?".
+
+### 11.1 Quatro casos, quatro instrumentos
+
+| Caso | Instrumento escolhido | Resultado apurado | Fonte/ano |
+|---|---|---|---|
+| **Natura &Co** (Brasil) | **iP&L** — R$ de impacto ÷ R$ de receita | **R$ 2,50 : R$ 1** → **R$ 50,5 bi** de impacto líquido; emissões escopos 1+2 **−43%** | Relatório Integrado 2024 |
+| **REI Co-op** (EUA) | Repartição a membros/funcionários + selos externos | **US$ 189 mi** a membros (tipicamente **10%**), **US$ 84,8 mi** a funcionários (**+48,5%**), **US$ 8,9 mi** a **+300 ONGs**; CDP **Clima A−** e **Água B** | REI Newsroom, 08/05/2025 |
+| **MONDRAGON** (Espanha) | Repartição estatutária + fundação social | **≥ 13%** do lucro ao fundo de solidariedade (**€ 13,0 mi** de compensação + **€ 7,05 mi** de offset); **€ 27,8 mi** em **37 programas** | Relatório Anual 2023 |
+| **COPACOL** (Brasil) | Rateio por unidade processada | **R$ 270 mi** de sobras (**+64%**) sobre **R$ 10,6 bi** de faturamento (2024) | O Presente Rural, 31/01/2025 |
+
+### 11.2 Natura &Co — o iP&L como razão de impacto por real de receita
+
+A Natura publica no Relatório Integrado 2024 um **iP&L** de **R$ 2,50 de impacto positivo por R$ 1 de receita**, o que se traduz em **R$ 50,5 bilhões** de impacto líquido no exercício — sobre receita de grupo de **R$ 24,1 bi** e resultado subjacente de **R$ 524 mi**. O mesmo relatório registra **−43%** de emissões dos escopos 1 e 2 frente à base SBTi (meta de −42% atingida), **46 comunidades** de fornecedores e parceiros (meta de 2030 antecipada) e **18,2%** de plástico reciclado. A empresa é **Empresa B há 10 anos**.
+
+Como o número se lê: é uma **razão** (moeda de impacto ÷ moeda de receita), da mesma família da razão SROI — só que o denominador é a receita da empresa, não o investimento numa intervenção. Ele **não substitui o SROI**, porque não aplica os quatro ajustes da seção 3.4; ele **sintetiza a cadeia inteira em uma linha**, que é exatamente o que o IP&L (seção 8) propõe.
+
+Ponto de honestidade: a reconciliação entre o **prejuízo contábil de R$ 8,9 bi** e o **resultado subjacente de R$ 524 mi** (2024) não foi reconstruída nesta pesquisa — publicar o iP&L sem essa conciliação ao lado é o mesmo pecado de publicar SROI sem premissas.
+
+### 11.3 REI Co-op — impacto declarado em ano de prejuízo
+
+Em 2024 a REI teve receita de **US$ 3,53 bi (−6,2%)** e **prejuízo de US$ 156,4 mi**, e ainda assim distribuiu **US$ 189 mi** em *Co-op Member Reward* (tipicamente **10%**) aos membros, **US$ 84,8 mi** em incentivos e *profit sharing* (**+48,5%**) aos funcionários e **US$ 8,9 mi** a **mais de 300 ONGs**, além de se tornar o **1º varejista nacional com *zero waste*** e de manter **Clima A−** e **Água B** no CDP.
+
+A lição é de desenho de painel: a **repartição** tem regra própria (ela decorre da condição de cooperativa de consumidores, não do resultado do exercício), enquanto os **selos externos** (CDP, *zero waste*) são verificação por terceiros — os dois KPIs mais baratos de auditar que uma híbrida pode ter. Reportar apenas o prejuízo de US$ 156,4 mi num painel seria, de novo, confundir a linha financeira com o resultado inteiro.
+
+### 11.4 MONDRAGON — solidariedade com número no balanço
+
+A federação fechou 2023 com **€ 11,056 bi** de vendas, **€ 1,486 bi** de EBITDA e **lucro recorde de € 593 mi**, cerca de **70.500 pessoas** em **81 cooperativas**. Os indicadores de impacto são **regras que viram KPI automaticamente**: no mínimo **13%** do lucro de cada cooperativa vai ao fundo divisional de solidariedade (**€ 13,0 mi** de compensação em 2023 mais **€ 7,05 mi** de offset de prejuízos); a faixa salarial fica entre **80% e 110%** da referência LagunAro, com razão mín-máx de **1:6 desde 1988**; e a Fundación MONDRAGON aplicou **€ 27,8 mi em 37 programas** de emprego, formação e habitação.
+
+Repare no mecanismo: **estatuto converte-se em indicador sem esforço de medição** — quando a regra é "no mínimo 13%", o *gap* entre o pago e o mínimo é o que precisa de apuração, não a existência do dado. É o oposto de quem inventa um KPI depois do fato.
+
+### 11.5 COPACOL — o rateio que cabe numa conta de cabeça
+
+Em 2024 a COPACOL distribuiu **R$ 270 milhões de sobras (maior da história, +64%)** sobre faturamento de **R$ 10,6 bilhões**, com **9,6 mil cooperados**, **R$ 390 mi** de tributos e metade do rateio paga em dezembro. A conta de repartição é direta:
+
+$$
+Índice\ de\ repartição = \frac{270}{10.600} = 0{,}0255 \approx 2{,}55\%\ do\ faturamento
+$$
+
+O que torna o caso exemplar é a **granularidade do rateio**: R$ 2 por saca de soja, R$ 1 por milho, R$ 0,50 por trigo, R$ 15 por saca de café, **3,6%** sobre insumos, **2,7%** sobre supermercado e rações, R$ 0,10 por litro de leite, R$ 9,13 por leitão e R$ 0,36 por quilo suíno. Cada cooperado enxerga o impacto na **própria entrega** — é o "output" da cooperativa virando "outcome" financeiro do associado, com unidade de medida declarada.
+
+### 11.6 A leitura pela cadeia: onde cada caso para
+
+| Caso | Nível mais alto medido | KPI publicado | O que falta para virar impacto com contrafactual |
+|---|---|---|---|
+| **Natura** | Resultado integrado | R$ 2,50 de impacto por R$ 1 de receita (→ R$ 50,5 bi) | Não aplica os 4 ajustes: a razão não desconta peso morto nem atribuição |
+| **REI Co-op** | Output + desempenho verificado por terceiro | US$ 8,9 mi a +300 ONGs; CDP A−/B; *zero waste* | Falta base e horizonte: não há grupo de comparação declarado |
+| **MONDRAGON** | Repartição (outcome distributivo) | ≥ 13% do lucro; € 27,8 mi em 37 programas | É regra estatutária cumprida, não efeito medido em beneficiários |
+| **COPACOL** | Repartição (índice) | 2,55% do faturamento devolvido em sobras | Índice de devolução, não mudança de condição no mundo |
+
+> **Leitura da lição:** os quatro publicam **razões e índices auditáveis** — e nenhum deles, nos documentos consultados, declara contrafactual com os quatro ajustes. Pelo critério das seções 1.2 e 3.4, eles são **indicadores de resultado muito acima da média**, mas ainda **não são SROI**: para chegar lá, faltam base, grupo de comparação e horizonte. Caso com SROI declarado é o da seção 3.6 (Inclusion Rugby League, **3,39:1** com faixa de sensibilidade de 3,31 a 3,58).
+
+- **🔢 Você sabia?** A REI fechou 2024 com **prejuízo de US$ 156,4 milhões** e distribuiu **US$ 189 mi** a membros e **US$ 84,8 mi** a funcionários no mesmo ano — porque a repartição é regra de cooperativa, não decisão discricionária de lucro. No extremo oposto, a **Publix** (lucro de **US$ 4,6 bi** em 2024) tem **149.213 participantes** de ESOP com **US$ 14,3 bi** em ativos (Form 5500/2024): dois modelos de hibridize, dois KPIs diferentes — **repartição de caixa** e **propriedade acumulada**.
+
+---
+
+## 12. Atualizações 2025–2026: o que mudou na medição (e o que só foi anunciado)
+
+**Regra desta seção:** só entra aqui o que tem **vigência confirmada**, com fonte e data; o que está em tramitação ou sem sanção confirmada aparece explicitado como **não verificado**. Nada de transformar notícia em norma — e é justamente esse o erro que derruba a credibilidade de um painel.
+
+### 12.1 Padrões e regras com vigência confirmada
+
+| Mudança | Fonte/data | **VIGÊNCIA** confirmada | Efeito na medição de impacto |
+|---|---|---|---|
+| Reporte de sustentabilidade das companhias abertas vira **"pratique ou explique"** | **Res. CVM 244, de 29/05/2026** (revogou o art. 2º da Res. 193/2023) | Vigente; regime a partir de **01/01/2027** | Cai a obrigatoriedade; quem divulga assume compromisso mínimo de **3 exercícios consecutivos** + **asseguração** (verificação externa) |
+| Normas brasileiras de sustentabilidade (NBC TDS e NBC TAS) | **Res. CFC 1.710/2023** | Vigente — **ano-calendário 2026** sempre que houver relatório de sustentabilidade | Quem reporta, reporta sob padrão técnico brasileiro |
+| Instituições financeiras sob padrão ISSB | **Res. CMN 5.185** e **Res. BCB 435** | Vigentes desde **01/01/2025**; obrigatório em **2026** (segmentos 1 e 2) e **2028** (demais) | Bancos e cooperativas de crédito parceiras de híbridos já reportam sob padrão ISSB |
+| Estatais mantêm relato integrado | **Lei 13.303/2016** | Vigente, mantida após a Res. 244/2026 | Relatório integrado/de sustentabilidade **anual e obrigatório** |
+| Greenwashing: critérios de comunicação de impacto | **CBAP–CONAR, arts. 36, 36-A, 36-B e Anexo "U"** | Aprovado **24/10/2025**, publicado **27/10/2025**, vigor em 30 dias (**~26/11/2025**) | Alegações de impacto exigem **veracidade, qualificação, exatidão, pertinência, relevância e concretude**; reforça o **CDC, art. 37** |
+| Certificação B Corp endurece | **Novos padrões globais do B Lab (abril/2025)** | Em vigor em **2026**; transição até **2028** | **7 tópicos obrigatórios**, **auditoria independente** e marcos nos anos **0, 3 e 5** — o selo deixa de ser só pontuação |
+| Cadastro oficial de negócios de impacto | **Cadimpacto (MDIC)** | Em operação desde **19/03/2025** | Reconhecimento oficial em **bronze, prata e ouro** — KPI de visibilidade, não de impacto |
+| PLR permanece como está | **Lei 10.101/2000 + Lei 14.020/2020** | Vigente, **sem alteração nova confirmada** em 2025–2026 | IR exclusivo na fonte de **0% a 27,5%**; no máximo **2 vezes por ano civil**, com intervalo ≥ 1 trimestre |
+
+O que a lição já cobriu segue de pé: o catálogo do **IRIS+** está na versão **5.3c (dez/2025)**, a **ISO 26000** teve a vigência confirmada em **19 de março de 2025** e os **GRI Universal Standards 2021** continuam exigindo 3-1, 3-2 e 3-3 para relatos desde **1º de janeiro de 2023**.
+
+Três leituras para a empresa híbrida: primeiro, **"pratique ou explique" não é liberdade sem método** — quem escolhe divulgar se obriga a três exercícios consecutivos e a asseguração, ou seja, a comparabilidade é contratada, não improvisada. Segundo, o **B Corp deixa de ser jogo de pontos**: os 140 pontos da seção 6 continuam no histórico, mas a nova arquitetura é de requisito obrigatório com auditoria. Terceiro, o **Anexo "U" do CONAR** transforma a comunicação de impacto em matéria de prova: propósito declarado sem evidência deixa de ser erro de marketing e passa a ser risco ético e consumerista.
+
+```dragdrop
+{
+  "question": "Ordene os marcos de 2025–2026 que afetam a medição e o relato de impacto, do mais antigo ao mais recente:",
+  "items": [
+    "19/03/2025 — o MDIC lança o Cadimpacto (bronze, prata e ouro)",
+    "Abril/2025 — o B Lab publica os novos padrões globais de certificação",
+    "24/10/2025 — o CONAR aprova os arts. 36, 36-A, 36-B e o Anexo U do CBAP",
+    "29/05/2026 — a Res. CVM 244/2026 torna voluntário o reporte das companhias abertas",
+    "01/01/2027 — entra em vigor o regime pratique ou explique"
+  ],
+  "correctOrder": [
+    "19/03/2025 — o MDIC lança o Cadimpacto (bronze, prata e ouro)",
+    "Abril/2025 — o B Lab publica os novos padrões globais de certificação",
+    "24/10/2025 — o CONAR aprova os arts. 36, 36-A, 36-B e o Anexo U do CBAP",
+    "29/05/2026 — a Res. CVM 244/2026 torna voluntário o reporte das companhias abertas",
+    "01/01/2027 — entra em vigor o regime pratique ou explique"
+  ],
+  "explanation": "A ordem é a cronologia: cadastro oficial (mar/2025) → padrão de certificação mais rigoroso (abr/2025) → regra de comunicação de impacto (out/2025) → flexibilização do reporte obrigatório (mai/2026) → início do regime pratique ou explique (jan/2027). Repare que a última data é a única do futuro: anunciar o regime em 2026 não é o mesmo que já estar valendo."
+}
+```
+
+### 12.2 Os números de 2025 que sustentam o painel
+
+| Indicador (Sistema OCB / Sescoop) | Dados 2024 (Anuário 2025) | Dados 2025 (Anuário 2026, ref. 31/12/2025) |
+|---|---|---|
+| Cooperativas | **4.384** (recorde) | **~4,4 mil** |
+| Cooperados | **25,8 milhões** (12,14% da população) | **29 milhões** |
+| Empregos diretos | **578.035** | **613,4 mil** |
+| Ingressos / serviços prestados | **R$ 757,9 bi (+9,5%)** | **R$ 848,37 bi (+11,94%)** |
+| Sobras distribuíveis | **R$ 51,4 bi (+32%)** | **R$ 61,28 bi (+14,2%)** |
+| Ativos totais | — | **R$ 1,60 trilhão (+14,9%)** |
+| Salários e encargos | — | **R$ 45,59 bi (+9,66%)** |
+
+| Caso híbrido com número novo (2025–2026) | Medida publicada | Fonte/ano |
+|---|---|---|
+| **Natura** (IP&L) | **R$ 86,85 bi** de impacto positivo em 2025 — **R$ 4 de benefício por R$ 1 de receita** (meta de 2030 adiantada em 5 anos); 2,8 mi de consultoras na AL, ~90% do faturamento | Exame, 15/06/2026 |
+| **Solos** (startup + cooperativas de catadores) | **R$ 10 milhões** de renda gerada em 9 anos; **R$ 1 mi** do Banco do Nordeste em 2025 | Exame, 04/06/2026 |
+| **MOL Impacto** (lucro + doação) | **~R$ 90 milhões** doados a **240+ ONGs** em **18 anos**; 43 mi de exemplares em 5.000+ lojas | Folha, 13/10/2025 |
+| **Fundo Socioambiental CAIXA** | **R$ 440 mi** em **232 projetos**, **50 mi de pessoas** beneficiadas, 3,9 mi de árvores e 721 nascentes desde 2010 | CAIXA Notícias, 26/11/2025 |
+
+Leitura pelo painel: o **iP&L da Natura saltou de R$ 2,50 (2024) para R$ 4,00 (2025)** por real de receita — é a mesma razão com o mesmo método, agora com série temporal. É isso que transforma um KPI em indicador de tendência: **não o valor isolado, e sim a comparação com o próprio histórico usando a mesma régua**.
+
+- **🔢 Você sabia?** As cooperativas brasileiras fecharam 2025 com **R$ 61,28 bilhões de sobras distribuíveis (+14,2%)**, **29 milhões de cooperados**, **613,4 mil empregos diretos** e ingressos de **R$ 848,37 bi (+11,94%)**, num sistema de **~4,4 mil cooperativas** (Anuário OCB 2026, dados de 31/12/2025) — contra **25,8 milhões** de cooperados e **R$ 51,4 bi** de sobras em 2024. Um ano, três recordes: repartição, sócios e faturamento. Para o painel de KPIs, isso significa que finalmente existe **série histórica doméstica** para comparar a sua própria taxa de repartição.
+
+### 12.3 O que NÃO foi verificado — não afirmar como vigente
+
+| Item | Situação verificada |
+|---|---|
+| **PL 581/2019** — isenção da PLR no IR | Parecer favorável da CFT em **30/09/2025** localizado; **sanção e vigência não confirmadas** |
+| **PLs 1008/2025, 440/2025 e 7090/2025** (greenwashing no CDC) | **Em tramitação** na Câmara; **nenhuma vigência confirmada** |
+| **PEC do fim da escala 6x1** | Aprovada na Câmara em **28/05/2026**; **pendente no Senado** — sem promulgação |
+| **Número único de Empresas B no Brasil** | **338 (jul/2026), 342 (mai/2026) e ~500 (fev/2026)** — cortes diferentes, sem número verificado |
+| **Retorno à obrigatoriedade do reporte em 2028** | Ofício do CFC de **jun/2026** é **proposta técnica**, sem norma publicada |
+| **Alíquotas definitivas de IBS/CBS a partir de 2027** | Dependem de resolução do Senado — **ainda não fixadas** |
+| **Mediana brasileira de SROI** | segue sem estudo nacional localizado (seção 14.2) — todos os SROIs citados são internacionais |
+
+> [!WARNING]
+> **Novidade anunciada não é norma vigente.** A **PEC do fim da escala 6x1** foi aprovada na Câmara em 28/05/2026 e segue **pendente no Senado**; o **PL 581/2019** (isenção da PLR no IR) tem parecer favorável de 30/09/2025, mas **sanção e vigência não confirmadas**; e os **PLs de greenwashing** continuam em tramitação. Reportar qualquer um deles como fato consumado viola o mesmo princípio que derruba número inflado no SROI: **não se reivindica mais do que a evidência sustenta**. Do outro lado, o que **já está vigente** e muda a rotina de medição é isto: **Res. CVM 244/2026** (regime "pratique ou explique" a partir de 01/01/2027), **CBAP–CONAR Anexo "U"** (~26/11/2025) e **novos padrões B Corp** (2026, transição até 2028).
+
+---
+
+## 13. O mercado do impacto, em números verificados
 
 | Indicador | Valor | Fonte/ano |
 |---|---|---|
@@ -524,9 +666,9 @@ Duas leituras para a empresa híbrida: primeiro, **70% já usa métrica aceita**
 
 ---
 
-## 12. Armadilhas, erros frequentes e o que não foi verificado
+## 14. Armadilhas, erros frequentes e o que não foi verificado
 
-### 12.1 Os erros que derrubam um painel de impacto
+### 14.1 Os erros que derrubam um painel de impacto
 
 1. **Confundir cadeia de ordens** — a ordem canônica é `insumo → atividade → output → outcome → impacto`;
 2. **Reportar razão bruta de SROI** — 6,67:1 no lugar de 2,40:1 é superestimativa de 2,78 vezes;
@@ -535,9 +677,10 @@ Duas leituras para a empresa híbrida: primeiro, **70% já usa métrica aceita**
 5. **Esquecer o índice de conteúdo da GRI** — sem ele, não há conformidade ("in accordance"), mesmo publicando dados;
 6. **Enviar o BIA com 85 e achar que basta** — a queda de 5 a 10 pontos na verificação pode derrubar para 75 e reprovar;
 7. **Confundir atribuição com contribuição** — reivindicar causalidade direta onde a evidência só sustenta contribuição;
-8. **Tratar triple bottom line como norma contábil** — é conceito de 1994, não padrão de relatório.
+8. **Tratar triple bottom line como norma contábil** — é conceito de 1994, não padrão de relatório;
+9. **Anunciar como vigente o que está em tramitação** — PEC 6x1, PL 581/2019 (isenção de PLR) e PLs de greenwashing não têm vigência confirmada (seção 12.3).
 
-### 12.2 O que a pesquisa desta lição não verificou
+### 14.2 O que a pesquisa desta lição não verificou
 
 - **Mediana brasileira de SROI** — não há estudo nacional localizado; todos os números de SROI citados são internacionais;
 - **"Impact-adjusted P&L" como padrão contábil** — **não existe padrão** com esse nome; usa-se **IP&L / IWAF**, que é framework verificado, e o termo é descritivo;
@@ -712,6 +855,38 @@ Duas leituras para a empresa híbrida: primeiro, **70% já usa métrica aceita**
 }
 ```
 
+```question
+{
+  "id": "hyb-07-q11",
+  "type": "multiple-choice",
+  "question": "Em 2024 a COPACOL distribuiu R$ 270 milhões de sobras sobre um faturamento de R$ 10,6 bilhões. Qual é o índice de repartição (sobras ÷ faturamento)?",
+  "options": [
+    "≈ 0,25%",
+    "≈ 2,5%",
+    "≈ 13%",
+    "≈ 6,4%"
+  ],
+  "correct": 1,
+  "explanation": "270 ÷ 10.600 (ambos em milhões) = 0,0255, ou seja, ≈ 2,5% — cerca de R$ 2,55 devolvidos a cada R$ 100 de faturamento. É um indicador de repartição que qualquer cooperativa calcula com o próprio balanço. A alternativa C (13%) é a regra estatutária da MONDRAGON (mínimo do lucro ao fundo de solidariedade), não da COPACOL; A erra a ordem de grandeza; D confunde a variação das sobras (+64%) com um percentual sobre o faturamento. Como todo índice, ele ainda não é impacto: falta base, grupo de comparação e horizonte. (O Presente Rural, 31/01/2025)"
+}
+```
+
+```question
+{
+  "id": "hyb-07-q12",
+  "type": "multiple-choice",
+  "question": "Sobre o reporte de sustentabilidade das companhias abertas no Brasil a partir de 2026, qual afirmação está correta?",
+  "options": [
+    "A Res. CVM 193/2023 manteve a obrigatoriedade do relatório a partir de 01/01/2026",
+    "A Res. CVM 244/2026 revogou a obrigatoriedade e adotou o regime \"pratique ou explique\" a partir de 01/01/2027, com compromisso mínimo de 3 exercícios consecutivos e asseguração",
+    "A Res. CVM 244/2026 revogou também a Lei 13.303/2016, liberando as estatais do relato anual",
+    "As normas brasileiras NBC TDS e NBC TAS (Res. CFC 1.710/2023) foram revogadas em 2026"
+  ],
+  "correct": 1,
+  "explanation": "A Res. CVM 244, de 29/05/2026, revogou a obrigatoriedade da Res. 193/2023 e instalou o regime \"pratique ou explique\" a partir de 01/01/2027: quem opta por divulgar assume compromisso mínimo de 3 exercícios consecutivos e submete o relato a asseguração (verificação externa). As estatais seguem obrigadas pela Lei 13.303/2016, mantida após a Res. 244/2026, e a Res. CFC 1.710/2023 continua vigente para o ano-calendário 2026 sempre que houver relatório de sustentabilidade. Flexibilizar não é liberar: é trocar obrigatoriedade por compromisso verificado. (Mayer Brown; Ofício CFC, jun/2026)"
+}
+```
+
 ---
 
 > [!WARNING]
@@ -724,7 +899,9 @@ Duas leituras para a empresa híbrida: primeiro, **70% já usa métrica aceita**
 > - **BIA: enviar com 85 pode reprovar** (queda de 5 a 10 pontos); a margem segura é ≥ 90, com o crédito do requisito legal de 7,5 a 10 pontos;
 > - **Sem baseline não há causalidade** — 23 p.p. vira 14 p.p. quando se subtrai o contrafactual, e reportar o primeiro superestima em 64%;
 > - **Triple bottom line não é norma contábil**: é conceito de Elkington (1994/1997), pedido de revisão em 2018;
-> - **Atribuição não é contribuição** — reivindicar causalidade direta onde a evidência só sustenta contribuição é o caminho mais curto para perder credibilidade.
+> - **Atribuição não é contribuição** — reivindicar causalidade direta onde a evidência só sustenta contribuição é o caminho mais curto para perder credibilidade;
+> - **Caso real não é SROI** — Natura, REI, MONDRAGON e COPACOL publicam razões e índices auditáveis, mas nenhum declara contrafactual com os 4 ajustes (seção 11.6);
+> - **Anúncio não é norma** — só vale o que tem vigência confirmada: Res. CVM 244/2026, Anexo "U" do CONAR e novos padrões B Corp valem; PEC 6x1, PL 581/2019 e PLs de greenwashing, não (seção 12.3).
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**

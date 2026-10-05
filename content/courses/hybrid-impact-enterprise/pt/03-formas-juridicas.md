@@ -47,7 +47,9 @@ Nesta lição você vai:
 - separar **associação e OSCIP**, incluindo as vedações do art. 2º da Lei nº 9.790/1999;
 - calcular a **alíquota efetiva do Simples Nacional** com o Fator R e escolher o anexo certo;
 - aplicar a **matriz forma jurídica × modelo híbrido** em oito cenários reais de decisão;
-- comparar o que o Brasil **não tem**: corporação de benefício público de Delaware e empresa de interesse comunitário do Reino Unido.
+- comparar o que o Brasil **não tem**: corporação de benefício público de Delaware e empresa de interesse comunitário do Reino Unido;
+- ler **casos reais** de híbridos e a forma jurídica que cada um usou (cooperativas brasileiras, S.A. com selo e estruturas estrangeiras);
+- conferir as **atualizações de 2025 e 2026** que mexem na escolha da forma, separando o que tem **vigência confirmada** do que continua **não verificado**.
 
 ---
 
@@ -389,9 +391,61 @@ Duas sócias querem uma **sociedade limitada** que pague impostos como empresa, 
 
 ---
 
-## 9. O que o Brasil não tem: os comparados internacionais
+## 9. Casos reais: como híbridos se constituíram juridicamente
 
-### 9.1 Delaware (EUA) e Reino Unido
+As seções 1 a 8 mostraram o que a lei permite. Esta seção mostra **o que foi feito**: os doze casos reais (Brasil e exterior) levantados em pesquisa própria em que a empresa híbrida não ficou no papel — nove deles na tabela da seção 9.1 e dois em ficha ampliada na seção 9.2, cada um com a **forma jurídica** que sustenta a repartição de lucro, de voto e de impacto. A leitura é sempre a mesma: **primeiro a forma, depois o mecanismo estatutário, por último o número**. Todos os dados vêm de relatórios anuais, formulários oficiais e textos legais verificados em pesquisa própria.
+
+### 9.1 Os casos e a forma jurídica que cada um usou
+
+| Caso | Origem | Forma jurídica / governança | Mecanismo que torna o híbrido | Número verificado |
+|---|---|---|---|---|
+| **MONDRAGON** | Espanha, 1956 | Federação de **81 cooperativas autogovernadas** | Uma pessoa, um voto; capital instrumental e subordinado; **≥ 13%** do lucro de cada cooperativa ao fundo divisional de solidariedade | Vendas de **€ 11,056 bi** e lucro de **€ 593 mi** (2023); ~70.500 pessoas |
+| **John Lewis Partnership** | Reino Unido, 1906/1929 | Propriedade em ***trust*** dos Partners (*Settlements in Trust* de 1929 e 1950) | Bônus condicional a **PBTBE ≥ £ 150 mi e dívida < 4x** | **£ 46 mi** (3% ≈ 1,5 semana) em 2021/22 e **£ 0** em 2022/23, 2023/24 e 2024/25; ~69.000 Partners |
+| **REI Co-op** | EUA, 1938 | **Cooperativa de consumidores** (1 voto = 1 membro) | *Member Reward* tipicamente de **10%** + incentivos e *profit sharing* | **US$ 189 mi** a membros, **US$ 84,8 mi** a funcionários e **US$ 8,9 mi** a +300 ONGs (2024), com prejuízo de US$ 156,4 mi |
+| **Publix** | EUA, 1930 | **C-corp + ESOP** (*trust*) desde 01/10/1974 | Empregado vira sócio por ação, sem voto no dia a dia | **149.213 participantes** com **US$ 14,3 bi** (Form 5500/2024); vendas de US$ 59,7 bi (2024) |
+| **NATURA** | Brasil, 1969 | **S.A.** + Empresa B há **10 anos** | Impacto medido como número auditável, sem mudar a forma | **iP&L de R$ 2,50** por R$ 1 de receita → **R$ 50,5 bi** (2024); −43% de emissões dos escopos 1+2 |
+| **Coopercitrus** | Brasil, 14/05/1976 | **Cooperativa agroindustrial singular** | Estatuto, **art. 60**: sobras ponderadas **3,00 / 1,00 / 0,30** por faixa de movimentação, com atualização pelo IGP-M | Faturamento de **R$ 8,1 bi** e sobra líquida de **R$ 42,8 mi** (2023); 39,8 mil cooperados |
+| **COPACOL** | Brasil, 1964 | **Cooperativa agroindustrial singular** | Rateio **por unidade processada**: R$ 2/saca de soja, R$ 1/milho, R$ 0,10/l de leite e assim por diante | **R$ 270 mi de sobras** (+64%) sobre faturamento de **R$ 10,6 bi** (2024); 9,6 mil cooperados |
+| **LAR** | Brasil, 19/03/1964 | **Cooperativa agroindustrial singular** (PR) | Sobras + **devolução de capital a jubilados**: quem sai mantém vínculo patrimonial | **R$ 335,9 mi em 2025** = R$ 101,3 mi de sobras + **R$ 59 mi** devolvidos a **225 jubilados**; receita de R$ 23,2 bi |
+| **Coopermiti** | Brasil, SP, 2009 | **Cooperativa de trabalho sem fins lucrativos** (Lei nº 5.764/1971) | **100% da renda** revertida aos cooperados — o extremo da hibridização | **850 toneladas** de eletroeletrônicos tratadas (2025); 11 a 50 pessoas |
+
+> [!NOTE]
+> **Leia a tabela da esquerda para a direita.** A forma jurídica (coluna 3) é o que existe no registro; o mecanismo (coluna 4) é o que foi escrito no contrato ou no estatuto; o número (coluna 5) é a prova de que as duas primeiras colunas funcionaram. Nenhum desses casos começou pelo selo — e nenhum durou só com o selo.
+
+### 9.2 Duas fichas: o mecanismo estatutário em detalhe
+
+**Caso 1 — Coopercitrus: o rateio progressivo escrito no estatuto.** Uma cooperativa agroindustrial singular fundada em **14/05/1976** em Bebedouro (SP), com **39,8 mil cooperados** e 160 unidades em 65 cidades. O Estatuto, **art. 60**, rateia as sobras com ponderações de **3,00** (até R$ 200 mil), **1,00** (até R$ 2 mi) e **0,30** (acima de R$ 2 mi) de movimentação, atualizadas pelo **IGP-M** — ou seja, quem movimenta menos recebe mais por real movimentado. Combinado com o **art. 4º, VII, da Lei nº 5.764/1971** (sobras líquidas proporcionalmente às operações) e com a **singularidade de voto do art. 42**, o estatuto produz justiça distributiva sem tocar no capital: em 2023, **R$ 8,1 bi** de faturamento e **R$ 42,8 mi** de sobra líquida; em 2024, R$ 8,5 bi; em 2025, mais de R$ 9,2 bi. A assistência técnica — **321 mil atendimentos a 28 mil produtores** (+28%) — é a face operacional do mesmo desenho.
+
+**Caso 2 — Publix: trabalho que vira propriedade sem virar voto.** A maior empresa de **propriedade dos funcionários dos EUA** nasceu como *C-corp* comum em 06/09/1930 e acrescentou, em **01/10/1974**, um **ESOP** (plano qualificado sob ERISA/IRC §4975(e)(7)). Em 2024: **US$ 59,7 bi** de vendas, **US$ 4,6 bi** de lucro, **149.213 participantes** com **US$ 14,3 bi** em ativos (Form 5500/2024) e *put option* de **US$ 669 mi**. A lição para o Brasil é de **tradução**: o ESOP converte trabalho em propriedade, mas o empregado é sócio **por ação, não por voto no dia a dia** — e a tradução brasileira legítima desse arranjo é a **S.A. fechada com classe preferencial sem voto até 50% do capital** (Lei nº 6.404/1976, arts. 15, §2º, e 17), não uma importação simbólica de instrumento estrangeiro.
+
+- **🔢 Você sabia?** A **Natura** é S.A. — ou seja, **vota por ação** (art. 110 da Lei nº 6.404/1976) e **fica de fora do Simples Nacional** (LC nº 123/2006, art. 3º, §4º, X) — e mesmo assim é o caso brasileiro de impacto mais medido da lista: **10 anos** de Empresa B, **iP&L de R$ 2,50 por R$ 1 de receita em 2024** e **R$ 86,85 bilhões** de impacto positivo em 2025, o equivalente a **R$ 4 de benefício por R$ 1 de receita**. Ou seja: **a forma não produz o impacto — a forma só permite que o impacto seja escrito, medido e auditado**.
+
+### 9.3 Exemplo 7 — do caso ao contrato social de uma limitada
+
+Uma cooperativa de reciclagem quer abrir também uma **sociedade limitada** que venda serviço a prefeituras e devolver parte do resultado aos cooperados. O que ela **pode importar** dos casos acima, escrito direto no contrato social:
+
+| Do caso | O que se importa | Onde se escreve na limitada | Base legal |
+|---|---|---|---|
+| Coopercitrus (art. 60 do Estatuto) | Rateio **progressivo por faixa**, não proporcional puro | Participação nos lucros com **ponderações e faixas de movimentação** | CC, art. 997, VII; Lei nº 5.764/1971, art. 4º, VII (como referência de desenho) |
+| LAR | **Devolução a quem sai** do empreendimento | Cláusula de reembolso de quota a sócios que se retiram, escrita **no contrato inicial** | CC, art. 997, III e IV (capital e quotas); alteração posterior só por unanimidade (art. 999) |
+| Publix / John Lewis | **Remuneração variável condicionada a resultado**, não a capital | PLR negociada e limitada no tempo e na métrica | Lei nº 10.101/2000, arts. 1º, 2º, §1º, e 3º, §§ 1º e 2º |
+| Natura | **Medição pública de impacto** como número auditável | Cláusula de relatório anual de impacto aprovado na assembleia de sócios | CC, arts. 997, VI, e 999 |
+
+Os três erros que esse caso evita: (i) copiar **o número** do estrangeiro sem copiar **o mecanismo** — a ponderação de 3,00/1,00/0,30 é da Coopercitrus, não é regra de lei; (ii) tratar a PLR como se fosse salário — o **art. 3º, caput, da Lei nº 10.101/2000** diz que a PLR **não substitui nem complementa a remuneração**, não é base de encargo trabalhista e não gera habitualidade; (iii) pagar PLR mais de **duas vezes por ano** ou com intervalo inferior a **1 trimestre** — vedado pelo **art. 3º, §2º**, da mesma lei (Lei nº 12.832/2013).
+
+> [!WARNING]
+> **Casos reais não viram regra jurídica — e nem tudo é exportável:**
+>
+> 1. **ESOP, *trust* e *partnership* não têm forma correspondente no Brasil.** O que se exporta é a **função** (trabalho vira capital sem voto), e a função brasileira se escreve na **S.A. fechada** (arts. 15, §2º, e 17) ou na **limitada** (art. 997, VII) — nunca em nome de estrutura estrangeira;
+> 2. **Número de caso não é alíquota nem limite legal.** Os 13% da MONDRAGON, os 23% da SEMCO e os 10% da REI são **políticas próprias**, não dispositivos de lei: no Brasil, o rateio é o que o contrato social ou o estatuto mandar, dentro dos arts. 997, VII, do CC e 4º, VII, da Lei nº 5.764/1971;
+> 3. **Cooperativa não é atalho para isenção.** No Simples, a regra é a da LC nº 123/2006, art. 3º, §4º, VI: **só a cooperativa de consumo entra**; e o tratamento do ato cooperativo nos anexos da LC nº 214/2025 segue **não verificado** (seção 12.4);
+> 4. **Caso com prejuízo não é caso falido.** A REI distribuiu **US$ 189 mi** a membros em 2024 com prejuízo de **US$ 156,4 mi**: repartição é cláusula e cultura, não consequência automática do resultado do exercício.
+
+---
+
+## 10. O que o Brasil não tem: os comparados internacionais
+
+### 10.1 Delaware (EUA) e Reino Unido
 
 | Elemento | **Brasil** | **Delaware — corporação de benefício público** | **Reino Unido — empresa de interesse comunitário** |
 |---|---|---|---|
@@ -402,13 +456,13 @@ Duas sócias querem uma **sociedade limitada** que pague impostos como empresa, 
 | Relatório | Conforme a forma escolhida | **§ 365(b):** relatório **bienal** | **Relatório anual** (formulário CIC34) |
 | Distribuição de dividendos | Livre, salvo cláusula restritiva | **Permitida** — é forma com finalidade lucrativa | **Limitada** pelo teto previsto no regime |
 
-### 9.2 A leitura correta para o Brasil
+### 10.2 A leitura correta para o Brasil
 
 A lição prática dos comparados é **inversa** à que a maioria dos fundadores tira: o Brasil **não está atrasado** por não ter uma lei própria de benefício público — ele oferece **mais graus de liberdade**, porque deixa a escolha entre forma, cláusula e qualificação na mão do empreendedor. O que o Brasil **não** oferece é um **atalho único**: não existe um registro que, sozinho, declare "somos híbridos" com efeitos perante terceiros.
 
 - **🔢 Você sabia?** A corporação de benefício público de Delaware **paga dividendos normalmente** — o seu dever é **equilibrar** interesses, não **abrir mão** deles (DGCL, §§ 361(a) e 362(a)) —, e por isso mesmo ela convive com a ideia de retorno financeiro. Já a empresa de interesse comunitário britânica soma **travamento de patrimônio** e **teto de dividendos**. Traduzindo: nos EUA o híbrido é um **dever de governança**; no Reino Unido, é um **limite de distribuição**; no Brasil, **você escolhe qual dos dois modelos quer imitar — e pode combinar os dois por cláusula**.
 
-### 9.3 O que copiar — e o que não copiar — dos comparados
+### 10.3 O que copiar — e o que não copiar — dos comparados
 
 1. **Copiar de Delaware o relatório.** O § 365(b) obriga a **prestação bienal** sobre o benefício público declarado: uma versão brasileira disso é uma **cláusula de relatório anual de impacto** no contrato social, com aprovação na assembleia de sócios;
 2. **Copiar do Reino Unido o travamento.** O **teto de distribuição** e o **travamento de patrimônio** são perfeitamente redigíveis numa limitada, porque o art. 997, VII, do Código Civil deixa a participação nos lucros **livremente pactuada**;
@@ -419,9 +473,9 @@ A lição prática dos comparados é **inversa** à que a maioria dos fundadores
 
 ---
 
-## 10. Custos, prazos e a ordem de constituição
+## 11. Custos, prazos e a ordem de constituição
 
-### 10.1 O que custa registrar em 2026 (JUCESP)
+### 11.1 O que custa registrar em 2026 (JUCESP)
 
 | Ato | Base (UFESP) | 2025 | 2026 | Fonte |
 |---|---:|---:|---:|---|
@@ -431,7 +485,7 @@ A lição prática dos comparados é **inversa** à que a maioria dos fundadores
 | Valor da UFESP | — | R$ 37,02 | **R$ 38,42** | Portarias da JUCESP |
 | Custo total típico de abrir Ltda. em SP (**estimativa de mercado, não ato oficial**) | — | — | **R$ 1.500 a R$ 2.500** | GG Assessoria, 2025 |
 
-### 10.2 A ordem em que as decisões precisam ser tomadas
+### 11.2 A ordem em que as decisões precisam ser tomadas
 
 ```dragdrop
 {
@@ -454,7 +508,7 @@ A lição prática dos comparados é **inversa** à que a maioria dos fundadores
 }
 ```
 
-### 10.3 A sequência mínima de documentos
+### 11.3 A sequência mínima de documentos
 
 | Etapa | Documento | Prazo ou exigência | Base legal |
 |---|---|---|---|
@@ -465,7 +519,7 @@ A lição prática dos comparados é **inversa** à que a maioria dos fundadores
 | 5 | Requerimento de OSCIP | **30 dias** para a decisão + **15 dias** para o certificado | Lei nº 9.790/1999, art. 6º |
 | 6 | Certificação B Corp (Sistema B) | Pontuação **≥ 80** + requisito legal de governança de partes interessadas | Sistema B / B Lab, 2026 |
 
-### 10.4 Onde cada forma é registrada e quem fiscaliza
+### 11.4 Onde cada forma é registrada e quem fiscaliza
 
 A escolha da forma decide também **onde o seu ato constitutivo vai viver** — e isso muda prazo, custo e consequência de cada alteração futura:
 
@@ -483,9 +537,90 @@ A escolha da forma decide também **onde o seu ato constitutivo vai viver** — 
 
 ---
 
-## 11. Armadilhas de vigência e lacunas de pesquisa
+## 12. Atualizações 2025–2026: o que mudou e o que mexe na escolha da forma
 
-### 11.1 As oito confusões que mais aparecem
+Data de corte desta seção: **05/10/2026**. A regra editorial é simples e é a mesma da seção 13: **só entra aqui como fato o que tem vigência confirmada** — norma publicada, com data e com situação verificada. Tudo o que está em tramitação, sem sanção ou com fontes divergentes está isolado na seção 12.4 e marcado como **não verificado**. Escolher forma jurídica em 2026 sem esse filtro é escolher um regime que pode não existir amanhã.
+
+### 12.1 O que já tem vigência confirmada — e onde isso toca a forma
+
+| Mudança (norma ou fato) | Base normativa / fonte | Vigência confirmada | O que muda na escolha da forma |
+|---|---|---|---|
+| Criação de **IBS, CBS e Imposto Seletivo** | **LC nº 214/2025**, de 16/01/2025, alterada pela **LC nº 227/2026** (DOU 14/01/2026) | Vigente; transição até **2033** | A escolha deixa de ser só "Simples × Presumido" e passa a incluir **crédito de IBS/CBS** em qualquer forma |
+| **Alíquotas-teste** de **0,9% (CBS)** e **0,1% (IBS)**, com **dispensa de recolhimento** a quem cumprir as obrigações acessórias | LC nº 214/2025, **art. 348** | **01/01/2026 a 31/12/2026** | Ano-teste: dá para **testar processos fiscais sem custo** antes (ou depois) de constituir o híbrido |
+| **Comitê Gestor do IBS** e contencioso administrativo | **LC nº 227/2026**, de 13/01/2026 | Vigente (DOU 14/01/2026) | Governança única: menos litígio para cooperativa e OSC, mais exigência de capacidade técnica |
+| **Escalonamento do destaque fiscal** | **Ato Conjunto RFB/CGIBS nº 4**, de 30/07/2026 | 03/08/2026; 01/10/2026; 01/12/2026; e **01/01/2027 no Simples** | Calendário por espécie de documento — o Simples só passa a destacar em **01/01/2027** |
+| **Opção do Simples por IBS/CBS no regime regular**: semestral e **irretratável** | **LC nº 123/2006, art. 13, §10** (redação da LC nº 227/2026) | Vigente; janelas em **setembro e março** | Decisão comercial da limitada híbrida: **crédito ao cliente (B2B) ou simplicidade** — errar dura 6 meses |
+| **PLR mantida** pela Lei nº 10.101/2000 | Última alteração estrutural: **Lei nº 14.020/2020** | Vigente, **sem alteração nova em 2025–2026** | Repasse de lucros com IR **exclusivo na fonte de 0% a 27,5%**; nenhuma isenção nova confirmada |
+| Licença e salário-paternidade de **10 → 15 → 20 dias** | **Lei nº 15.371/2026** | Efeitos em **01/01/2027, 01/01/2028 e 01/01/2029** | Custo social crescente para **qualquer** forma que tenha empregados |
+| Reporte ESG no modelo **"pratique ou explique"** | **Resolução CVM nº 244, de 29/05/2026** | Vigente; regime a partir de **01/01/2027** | Cai a obrigatoriedade da Res. CVM nº 193/2023 para companhias abertas; quem divulga assume compromisso de **3 exercícios + asseguração**; **estatais seguem obrigadas** (Lei nº 13.303/2016) |
+| **Greenwashing**: arts. 36, 36-A, 36-B e **Anexo "U"** do CBAP | **CONAR**, aprovado em 24/10/2025 e publicado em 27/10/2025 | Vigente desde cerca de **26/11/2025** (30 dias após a publicação) | Propósito, selos e metas exigem **veracidade, qualificação, exatidão, pertinência, relevância e concretude** — e o **CDC, art. 37**, continua de pé |
+| **Novos padrões da certificação B Corp** | **B Lab**, publicados em **abril/2025** | Em vigor em **2026**; transição até **2028** | O selo deixa de ser só pontuação e vira **7 tópicos obrigatórios + auditoria independente + marcos nos anos 0, 3 e 5** |
+| **Cadimpacto** — cadastro nacional de negócios de impacto (bronze, prata, ouro) | **MDIC**, lançado em **19/03/2025** | Em operação | Reconhecimento oficial **fora da camada societária**: não substitui forma, cláusula nem qualificação |
+
+### 12.2 O que muda, forma por forma
+
+| Dimensão | **Ltda. e S.A.** | **Cooperativa** | **Associação / OSC** |
+|---|---|---|---|
+| **Tributação do consumo** | CBS/IBS com crédito; o Simples pode optar pelo regime regular, de forma semestral e irretratável | Mesmo modelo — e o tratamento do **ato cooperativo** nos anexos da LC nº 214/2025 **não foi verificado** | Imunidades e regimes específicos seguem; operações onerosas entram no novo modelo |
+| **Compartilhamento de valor** | PLR pela Lei nº 10.101/2000 (0% a 27,5%); isenção proposta, **não confirmada** | Sobras por quota-partes: **R$ 61,28 bilhões em 2025 (+14,2%)** | **Vedada** a distribuição de resultados (arts. 53 e 61 do CC; art. 1º, §1º, da Lei nº 9.790/1999) |
+| **Reporte ESG** | Obrigatório só nas **estatais** (Lei nº 13.303/2016); "pratique ou explique" nas companhias abertas a partir de 2027 | Aplicável se houver reporte; instituições financeiras parceiras sob **Res. CMN nº 5.185** e **Res. BCB nº 435** (2026 e 2028) | Sem obrigação ISSB específica **confirmada**; relatório depende de estatuto e de financiadores |
+| **Comunicação de impacto** | **Anexo "U"** do CBAP + **CDC, art. 37** | Mesma exigência de comprovação para selos e campanhas | Mesma exigência — e **risco alto** em campanhas de captação |
+| **Trabalho** | **Lei nº 15.371/2026** vale para toda forma com empregados; PEC da escala 6x1 **não verificada** | Idem; **613,4 mil** empregados diretos no sistema (2025) | Idem; regras próprias apenas para domésticas (LC nº 150/2015) |
+| **Reconhecimento oficial** | **Cadimpacto** (MDIC) | **Anuário OCB/Sescoop** | Ver a lista de lacunas da seção 13.2 |
+
+### 12.3 A linha do tempo dos eventos confirmados
+
+```dragdrop
+{
+  "question": "Ordene os eventos de 2025–2026 que mexem na escolha da forma jurídica, do mais antigo para o mais recente:",
+  "items": [
+    "16/01/2025 — Sancionada a LC nº 214/2025, que institui IBS, CBS e Imposto Seletivo",
+    "19/03/2025 — O MDIC lança o Cadimpacto, cadastro nacional de negócios de impacto",
+    "24/10/2025 — O CONAR aprova os arts. 36, 36-A, 36-B e o Anexo U do CBAP contra o greenwashing",
+    "01/01/2026 — Começa o ano-teste do IBS/CBS: 0,9% de CBS e 0,1% de IBS, com dispensa de recolhimento",
+    "13/01/2026 — Publicada a LC nº 227/2026, que estrutura o Comitê Gestor do IBS e o contencioso administrativo",
+    "29/05/2026 — A Resolução CVM nº 244/2026 torna voluntário o reporte de sustentabilidade"
+  ],
+  "correctOrder": [
+    "16/01/2025 — Sancionada a LC nº 214/2025, que institui IBS, CBS e Imposto Seletivo",
+    "19/03/2025 — O MDIC lança o Cadimpacto, cadastro nacional de negócios de impacto",
+    "24/10/2025 — O CONAR aprova os arts. 36, 36-A, 36-B e o Anexo U do CBAP contra o greenwashing",
+    "01/01/2026 — Começa o ano-teste do IBS/CBS: 0,9% de CBS e 0,1% de IBS, com dispensa de recolhimento",
+    "13/01/2026 — Publicada a LC nº 227/2026, que estrutura o Comitê Gestor do IBS e o contencioso administrativo",
+    "29/05/2026 — A Resolução CVM nº 244/2026 torna voluntário o reporte de sustentabilidade"
+  ],
+  "explanation": "A ordem importa porque cada evento condiciona o anterior: a LC 214/2025 cria o tributo, o Cadimpacto dá visibilidade ao negócio de impacto, o Anexo U do CBAP limita como o propósito pode ser comunicado, o ano-teste do art. 348 só existe porque a lei já está em vigor, a LC 227/2026 reorganiza a governança do IBS e a Resolução CVM 244/2026 muda o reporte de sustentabilidade. Usar um evento antes da data dele é confundir vigência com projeto de lei."
+}
+```
+
+- **🔢 Você sabia?** Em 2026 o Simples Nacional pode optar pelo regime regular de IBS/CBS de forma **semestral e irretratável** (LC nº 123/2006, art. 13, §10, com a redação da LC nº 227/2026), nas janelas de **setembro e março** — ou seja, a decisão de gerar crédito ao cliente B2B ou de manter a simplicidade **não pode ser desfeita por seis meses**. E o destaque fiscal do Simples só começa em **01/01/2027** (Ato Conjunto RFB/CGIBS nº 4, de 30/07/2026), enquanto em 2026 valem as alíquotas-teste de **0,9% de CBS** e **0,1% de IBS** com dispensa de recolhimento (LC nº 214/2025, art. 348).
+
+### 12.4 O que **não** tem vigência confirmada — marcado como "não verificado"
+
+Para nenhum destes itens existe, nesta data de corte, sanção, promulgação ou número único confirmado — e nenhum deles pode entrar em contrato social, em estatuto ou em argumento de venda:
+
+1. **PEC do fim da escala 6x1** (40 horas + 2 folgas): aprovada na Câmara em **28/05/2026** (472×22 e 461×19), **pendente no Senado** — promulgação e vigência **não verificadas**;
+2. **PL 581/2019** (isenção da PLR no imposto de renda): parecer favorável da CFT em 30/09/2025 localizado, mas **sanção e vigência não confirmadas**;
+3. **PLs 1008/2025, 440/2025 e 7090/2025** (greenwashing no Código de Defesa do Consumidor): em tramitação, **nenhuma vigência confirmada**;
+4. **Alíquotas definitivas de IBS/CBS por segmento de 2027 em diante**: dependem de resolução do Senado (arts. 18 e 349–369 da LC nº 214/2025) — **ainda não fixadas**;
+5. **Tratamento do ato cooperativo e das OSCs nos anexos da LC nº 214/2025**: revisão de anexos **não feita**;
+6. **Número de Empresas B no Brasil**: ~500 (fev/2026), 342 (mai/2026) e 338 (jul/2026) — cortes diferentes, **sem número único verificado**;
+7. **PL 1838/2026** (duração normal de trabalho e dois repousos): localizado no Planalto, mas **tramitação e vigência não confirmadas**;
+8. **Ano de fundação e porte da cooperativa Nossa Terra**: **não confirmados** (diferente do PPR de 2,2 salários de 2025, anunciado em 03/02/2026, que está confirmado).
+
+> [!WARNING]
+> **Vigência é filtro, não detalhe:**
+>
+> 1. **Item em tramitação não vira cláusula.** PEC da escala 6x1 e isenção de PLR podem mudar o custo de qualquer forma com empregados — mas, até a promulgação, quem escreve "escala 40 horas" no contrato está escrevendo uma expectativa, não uma norma;
+> 2. **Alíquota-teste não é alíquota.** Os 0,9% de CBS e 0,1% de IBS valem **só em 2026** (art. 348 da LC nº 214/2025): nenhum plano de negócios híbrido deve projetar carga com esses números;
+> 3. **Selo endurecido não é forma mais forte.** Os novos padrões da B Corp (2026, transição até 2028) mudam a **camada 3** das seções 1 e 12 — não alteram art. 1.052, art. 110 nem o art. 3º da LC nº 123/2006;
+> 4. **Fonte divergente não vira número.** Três cortes diferentes de Empresas B em 2026 significa **"não verificado"**, não média aritmética.
+
+---
+
+## 13. Armadilhas de vigência e lacunas de pesquisa
+
+### 13.1 As oito confusões que mais aparecem
 
 1. **"Existe tipo societário de empresa de propósito"** — não existe. O que existe é o acréscimo de **SPE** ao nome de limitada e a sociedade de propósito específico do **art. 56 da LC nº 123/2006**, que é uma modalidade de limitada, não um tipo autônomo;
 2. **"A EIRELI ainda existe"** — não. Foi transformada em **SLU** pela **Lei nº 14.195/2021, art. 41**, com efeitos de **27/08/2021**, e **sem exigência de capital mínimo**;
@@ -496,7 +631,7 @@ A escolha da forma decide também **onde o seu ato constitutivo vai viver** — 
 7. **"Voto distinto pode ser escrito depois"** — pode, mas exige **consentimento de todos os sócios** (art. 999 do Código Civil) e novo registro;
 8. **"B Corp tem efeito perante terceiros"** — a certificação é **privada e voluntária**; sem cláusula no contrato social, ela não altera nenhuma relação societária.
 
-### 11.2 O que a pesquisa **não** confirmou — e que não pode virar fato
+### 13.2 O que a pesquisa **não** confirmou — e que não pode virar fato
 
 Para você não transformar lacuna em afirmação categórica:
 
@@ -670,6 +805,38 @@ Para você não transformar lacuna em afirmação categórica:
   ],
   "correct": 1,
   "explanation": "A DGCL, Subcapítulo XV, §§ 361 a 365, cria um dever de equilíbrio e de relatório, não uma proibição de distribuição: a corporação de benefício público é de finalidade lucrativa e continua distribuindo dividendos. As opções a, c e d são falsas — inclusive a d, porque a qualificação OSCIP exige, entre outros requisitos, 3 anos de funcionamento e é vedada a sociedades comerciais (Lei nº 9.790/1999, arts. 1º e 2º, I)."
+}
+```
+
+```question
+{
+  "id": "hyb-03-q11",
+  "type": "multiple-choice",
+  "question": "Sobre o ano de teste da reforma tributária em 2026, o que está correto?",
+  "options": [
+    "As alíquotas são de 1% (IBS) e 2% (CBS) e o recolhimento é obrigatório desde 01/01/2026",
+    "As alíquotas-teste são de 0,1% (IBS) e 0,9% (CBS) e, entre 01/01/2026 e 31/12/2026, quem cumprir as obrigações acessórias fica dispensado de recolhimento (LC nº 214/2025, art. 348)",
+    "O Simples Nacional já deve destacar IBS e CBS desde 01/01/2026",
+    "A LC nº 214/2025 extinguiu o ICMS e o ISS em 2026"
+  ],
+  "correct": 1,
+  "explanation": "O art. 348 da LC nº 214/2025 fixa as alíquotas-teste de 0,9% de CBS e 0,1% de IBS em 2026 e dispensa o recolhimento a quem cumprir as obrigações acessórias. O destaque do Simples só começa em 01/01/2027 (Ato Conjunto RFB/CGIBS nº 4, de 30/07/2026) e os tributos antigos só são extintos no fim da transição, em 2033. Consequência prática para a forma: 2026 é o ano de testar processos fiscais sem custo — antes de constituir ou reestruturar o híbrido."
+}
+```
+
+```question
+{
+  "id": "hyb-03-q12",
+  "type": "multiple-choice",
+  "question": "A Coopercitrus (cooperativa agroindustrial singular, fundada em 14/05/1976) rateia as sobras pelo art. 60 do seu Estatuto, com ponderações de 3,00 / 1,00 / 0,30 por faixa de movimentação. Por que esse desenho é juridicamente possível?",
+  "options": [
+    "Porque o art. 997, VII, do Código Civil autoriza rateio desigual entre cooperados por ata da diretoria",
+    "Porque a Lei nº 5.764/1971, art. 4º, VII, admite o rateio das sobras líquidas proporcionalmente às operações do associado (salvo deliberação em contrário da Assembleia), convivendo com a singularidade de voto do art. 42",
+    "Porque a LC nº 123/2006, art. 56, permite rateio por faixa nas sociedades de propósito específico",
+    "Porque o art. 24 da Lei nº 5.764/1971 fixa a quota unitária em três salários mínimos"
+  ],
+  "correct": 1,
+  "explanation": "A base é o art. 4º, VII, da Lei nº 5.764/1971 (sobras líquidas proporcionalmente às operações, salvo deliberação em contrário da Assembleia), combinado com a singularidade de voto do art. 42: a ponderação é do estatuto, não da lei. O art. 997, VII, do Código Civil governa a limitada, não a cooperativa; o art. 56 da LC nº 123/2006 trata de SPE (uma limitada por sócio); e o art. 24 limita a quota unitária ao maior salário-mínimo vigente, não a três salários. Em 2023 a Coopercitrus faturou R$ 8,1 bi e apurou sobra líquida de R$ 42,8 mi."
 }
 ```
 
