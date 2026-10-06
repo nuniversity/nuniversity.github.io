@@ -1,0 +1,13 @@
+{
+  "area": "Cloud & AI/ML",
+  "author": "NUniversity",
+  "difficulty": "intermediate",
+  "duration": "12 weeks",
+  "icon": "brain",
+  "en": {
+    "title": "AWS Certified AI Practitioner (AIF-C01) Complete Course",
+    "description": "Comprehensive preparation for the AWS Certified AI Practitioner (AIF-C01) exam covering AI/ML foundations, generative AI on AWS, building and operating solutions with Amazon Bedrock and SageMaker, security, cost optimization, and responsible AI — with architecture diagrams, real case studies, and exam-style practice questions.",
+    "difficulty": "Intermediate",
+    "duration": "12 Weeks"
+  }
+}
