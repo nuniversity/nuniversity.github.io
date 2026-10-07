@@ -645,6 +645,47 @@ AWS also cites, as third-party frameworks it works against, **MITRE ATLAS**, **S
 
 **Incident response** follows the same split: **AWS handles incident response for the Bedrock service itself**, while you own your side — your IAM identities, your data, your guardrail configuration. **Amazon GuardDuty** supplies the abuse-detection angle for Bedrock API activity, and the documented example is instructive: an alert when a user from a **new location removes Bedrock Guardrails** or changes the training-data S3 bucket. Guardrail *tampering* is an identity anomaly, and AWS instruments it as one.
 
+### 11.3 2025–2026 Updates
+
+Three things moved while this exam guide was being revised: the Guardrails feature surface, the EU AI Act's phased calendar, and the exam guide itself. Everything in this subsection is drawn from verified AWS or European Commission material; anything AWS did not publish first-party stays in the flags at the end of the lesson.
+
+**On the AWS side**, the changes that touch this lesson are:
+
+- **Automated Reasoning checks** went from **preview (3 December 2024)** to **GA (6 August 2025)** — the reason older material counts "six policies" and current material counts "six safeguards plus Automated Reasoning checks".
+- **Cross-account safeguards**: the Guardrails page now describes applying one set of safeguards across an **AWS Organization**, the feature-level counterpart of the `bedrock.guardrail_inference` service control policy in section 7.2.
+- **Code safeguards**: harmful-content detection inside **code comments, variable and function names and string literals**, which is part of the Standard tier of 24 June 2025.
+- **`ApplyGuardrail` as a model-agnostic API**: usable against *any* model without invoking a foundation model — the pre-screen pattern in Example 6.
+- **AWS's headline claim on the Guardrails page**: **up to 88%** of harmful content blocked and **up to 99%** accuracy for Automated Reasoning on unambiguous translations.
+
+**The EU AI Act calendar** (Regulation (EU) 2024/1689, as amended by the Digital Omnibus, Regulation (EU) 2026/1744, in force **27 July 2026**) is the other half of the update:
+
+| Date | What applies | Why a Bedrock workload cares |
+|---|---|---|
+| **1 Aug 2024** | Act enters into force | The clock starts; obligations phase in rather than apply at once |
+| **2 Feb 2025** | Prohibited practices + AI-literacy duties | No AWS AI service is designed for prohibited practices |
+| **10 Jul 2025** | GPAI Code of Practice final (voluntary) | Targets general-purpose model providers, not your application directly |
+| **2 Aug 2025** | GPAI obligations, governance and Art. 99 penalties apply | Up to **€35M / 7%** (prohibited practices), **€15M / 3%** (most breaches), **€7.5M / 1%** (misleading information); systemic-risk GPAI at **10²⁵ FLOP** |
+| **27 Jul 2026** | **Digital Omnibus (Reg. (EU) 2026/1744)** in force | Defers the high-risk Annex III date while holding Art. 50 and GPAI timing |
+| **2 Aug 2026** | General application, **Article 50 transparency**, AI Office GPAI fining | Transparency duties become enforceable — watermarking and disclosure move from best practice to obligation |
+| **2 Dec 2026** | Art. 50(2) **marking deadline** for systems already on the market | Machine-readable marking of AI-generated content |
+| **2 Dec 2027** | **Annex III high-risk** systems | Deferred by the Digital Omnibus |
+| **2 Aug 2028** | **Annex I high-risk** (regulated products) | Final phase |
+
+**The exam guide itself changed twice in 2026** — v1.0 on **26 March 2026** and v1.1 on **30 April 2026** — and AWS states that guide updates appear on the exam about **one month after publication**. The objectives that land inside this lesson:
+
+| New or changed objective (v1.1, 30 Apr 2026) | What it covers | Where it lives here |
+|---|---|---|
+| **5.1.5** (new) | Hallucination detection and grounding: RAG grounding, output validation, confidence scoring | Section 6.1 |
+| **5.1.4** (changed) | Data-leakage prevention, output validation, audit trails, toxicity | Sections 5 and 8 |
+| **4.2.2** (changed) | **SageMaker Clarify + Bedrock Model Evaluations** | Section 10 |
+| **2.1.6** (new) | Agentic AI: multi-agent patterns, MCP, memory management, tool usage, orchestration | Sections 4 and 7 |
+| **3.4.5** (new) | Business alignment metrics | Section 10 |
+
+> [!WARNING]
+> **SageMaker Clarify and Model Monitor are in maintenance, not retired and not rebranded.** AWS's SageMaker AI End-of-Support notice lists **SageMaker Clarify**, **SageMaker Model Monitor**, Ground Truth, Augmented AI (A2I), Debugger, Role Manager, Studio Lab, Geospatial, Profiler and Mechanical Turk as **no longer open to new customers from 30 July 2026**. Read that precisely: **maintenance** means existing customers keep using them, no new features are planned — it does **not** mean shutdown, and it does **not** mean they were renamed Amazon Bedrock Model Evaluations. Section 10 still teaches Clarify because the exam guide still tests bias measurement, but the documented route for *new* bias and evaluation work is **Amazon Bedrock Model Evaluations** (paired with Clarify in objective 4.2.2), with SHAP, CloudWatch metrics and anomaly detection covering the monitoring side. An exam option that says "Clarify was switched off" or "Clarify became Bedrock Model Evaluations" is false.
+
+- **📚 Did you know?** The **AIF-C01 exam guide changed twice in 2026** — **v1.0 on 26 March 2026**, then **v1.1 on 30 April 2026** — and AWS says updates show up on the exam roughly **one month after publication**. v1.1 added **seven** objectives, two of which sit directly on top of this lesson: **5.1.5 hallucination detection and grounding** and **4.2.2 Clarify + Bedrock Model Evaluations**. The exam format itself did not move: still **65 questions (50 scored + 15 unscored)**, **90 minutes**, **USD 100**, pass **700/1000**, domains weighted **20 / 24 / 28 / 14 / 14 %**.
+
 ---
 
 ## 12. Operations: versions, limits, logging and cost
@@ -744,6 +785,76 @@ AWS also cites, as third-party frameworks it works against, **MITRE ATLAS**, **S
 | AIF-C01 domain weights | **20 / 24 / 28 / 14 / 14 %** |
 
 **Flagged as not verified in this lesson** (do not assert them in the exam): the **US on-demand prices** for sensitive-information and contextual-grounding filters in the *main* pricing table (October 2026 showed content filters, denied topics, image filters and the `InvokeGuardrailChecks` rates; the PII and grounding rows appeared only on the EU price list); **per-account quotas** other than the 30 denied topics (guardrails per account, custom regex per guardrail, `ApplyGuardrail` text-units per second); whether **PII masking is unsupported in asynchronous streaming** (sourced from a GitHub toolkit reference, not the user guide); the current status of the **`DetectGeneratedContent`** API (console detection reached GA in April 2024); watermarking for **Nova Reel / Nova Sonic** (only Titan Image Generator and Nova Canvas are confirmed); and the **exact Standard-tier language list** behind the "up to 60" wording.
+
+---
+
+## 15. Real-World Case Studies
+
+Everything so far has been configuration. The four cases below — plus Alnylam in the table — are AWS-published customer stories showing what safety, evaluation and responsible-AI decisions look like **after** they move a number. Every figure is customer- or AWS-claimed and unaudited — the source and date are named so you can weigh it — and each case closes with the exam lesson it is really teaching.
+
+### 15.1 Nippon India Mutual Fund — Guardrails plus retrieval engineering against hallucination
+
+- **Services:** Amazon Bedrock Knowledge Bases, **Amazon Bedrock Guardrails**, Claude 3 Sonnet, reranker models, GraphRAG, metadata filtering, citations.
+- **Problem:** an internal financial-services assistant on naive RAG degraded as document volume grew, producing hallucinated answers in front of regulated content.
+- **What changed:** FM-as-parser, query reformulation, multi-query RAG, reranking, GraphRAG and metadata filtering — **plus Guardrails and citations**. The gain came from retrieval engineering, not from a larger model.
+- **Numbers:** accuracy **+>95 %**, hallucination **−90–95 %**, report generation **2 days → ~10 minutes**.
+- **Source:** AWS Machine Learning Blog, 29 July 2025 — `aws.amazon.com/blogs/machine-learning/how-nippon-india-mutual-fund-improved-the-accuracy-of-ai-assistant-responses-using-advanced-rag-methods-on-amazon-bedrock`.
+- **Exam lesson:** grounding checks and Guardrails are a **pair**, not alternatives; AWS explicitly flags these RAG methods as GA product features, not customer-only code.
+
+### 15.2 Sun Finance — the rejected LLM-only prototype
+
+- **Services:** Amazon Bedrock (Claude Sonnet 4), Titan Multimodal Embeddings, **Amazon Textract**, **Amazon Rekognition**, AWS Lambda, Step Functions, S3 Vectors — built with the AWS Generative AI Innovation Center.
+- **Problem:** **60 %** of microloan applications needed manual review taking **10 minutes to 20 hours** each.
+- **The safety-relevant failure:** the first attempt sent ID photos **straight to the LLM** and scored **61.8 %** overall (**43 %** on ID number) on **585 images**. AWS rejected it because **privacy protections block direct PII extraction** — the model would not reliably emit the sensitive fields at all.
+- **What changed:** **Textract for OCR → Rekognition as fallback and face masking → the LLM only for structuring → validation rules**.
+- **Numbers:** accuracy **79.73 % → 90.80 %** (ID number **74.32 % → 89.40 %**, document type **78.43 % → 96.40 %**), cost per document **−91 %**, processing **20 h → <5 s**, fraud detection **81 %**.
+- **Source:** AWS Machine Learning Blog, 30 April 2026 — `aws.amazon.com/blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws`.
+- **Exam lesson:** **separate OCR from reasoning.** PII handling is an architectural constraint, not a prompt instruction — the same reason your sensitive-information filters act per entity with `BLOCK` or `ANONYMIZE` rather than asking the model nicely.
+
+### 15.3 Epilot — evaluate first, keep a human in the loop, choose the Region
+
+- **Services:** Amazon SQS → AWS Lambda → Amazon Bedrock (Claude Sonnet), **Amazon Bedrock Evaluations**, EU Region.
+- **Problem:** long customer email chains across 170+ utility customers were draining staff time.
+- **What changed:** the model was chosen with **Amazon Bedrock Evaluations** (human ratings across prompt versions) *before* production; a later agent writes records **with humans verifying**; processed data stays in an **EU Region** under Bedrock's default zero-retention policy.
+- **Numbers:** email handling time **−87 %**, **55,000 summaries per month** at a negligible failure rate, **80 %** of users say it simplifies their work, MVP shipped in **2 months**.
+- **Source:** AWS customer case study — `aws.amazon.com/solutions/case-studies/epilot-genai-case-study` (indexed July 2026).
+- **Exam lesson:** model selection is an **evaluation phase**, not a guess; **residency and retention are buying criteria you decide up front**; and no agent writes unattended — that is controllability, dimension 5 of the eight responsible-AI dimensions.
+
+### 15.4 Chronomics — the threshold you set decides who reviews the output
+
+- **Services:** Amazon Rekognition Custom Labels (AutoML), `DetectCustomLabels`, human review for the discarded tail.
+- **Problem:** **4 months** of in-house custom computer-vision modelling for COVID test-result reading never reached target.
+- **What changed:** AutoML shipped a model in **3–4 weeks** at **96.5 % accuracy / 97.9 % F1**; then the team tuned the confidence threshold: **0.99 → 99.6 %** accuracy while **discarding 5 %** of predictions, and **0.999 → 99.87 %** while discarding **27 %**.
+- **Source:** AWS Machine Learning Blog, 13 December 2022 — `aws.amazon.com/blogs/machine-learning/chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels`.
+- **Exam lesson:** precision versus coverage is a **safety** trade, not a tuning detail — the discarded **5 %** needs a documented human path (**Amazon A2I**), which is exactly how `action: BLOCK` and detect-only modes divide the same work.
+
+| Case (source, date) | AWS services | Safety or responsible-AI control exercised | Verified outcome |
+|---|---|---|---|
+| **Nippon India** (AWS ML Blog, 29 Jul 2025) | Bedrock Knowledge Bases, **Bedrock Guardrails**, reranker, GraphRAG | Guardrails + citations to stop hallucinated answers in a regulated assistant | accuracy **+>95 %**, hallucination **−90–95 %**, reports **2 d → ~10 min** |
+| **Sun Finance** (AWS ML Blog, 30 Apr 2026) | Bedrock (Claude Sonnet 4), Textract, Rekognition, Lambda, Step Functions, S3 Vectors | Refused LLM-only PII extraction; OCR separated from structuring | LLM-only attempt **61.8 %** rejected → **90.80 %**, cost **−91 %**, **20 h → <5 s** |
+| **Epilot** (AWS case study, Jul 2026) | SQS, Lambda, Bedrock (Claude Sonnet), **Bedrock Evaluations** | Pre-production evaluation, human verification, EU Region residency | **−87 %** handling time, **55,000** summaries/month, MVP in **2 months** |
+| **Chronomics** (AWS ML Blog, 13 Dec 2022) | Rekognition Custom Labels + human review | Confidence threshold traded coverage for precision with a human tail | **96.5 %** in **3–4 weeks** (vs 4 months); 0.99 → **99.6 %** discarding **5 %** |
+| **Alnylam** (AWS case study, 2025) | Bedrock, S3, Amazon Q Business | Source links on every answer for auditability under GxP | triage **3 d → hours**, search **15 min → 30 s**, **3,000** users, **250+** use cases |
+
+Complete the headline numbers before moving on:
+
+```fillblank
+{
+  "question": "Fill in the verified numbers from the case studies above:",
+  "template": "Nippon India cut hallucination by {{1}} while accuracy rose {{2}}; Sun Finance's rejected LLM-only attempt scored {{3}} before the OCR-first pipeline reached {{4}}; Chronomics shipped in 3-4 weeks after {{5}} months of in-house modelling failed.",
+  "answers": {
+    "1": "90-95%",
+    "2": "more than 95%",
+    "3": "61.8%",
+    "4": "90.80%",
+    "5": "4"
+  },
+  "distractors": ["85%", "79.73%", "66%", "96.5%", "2"],
+  "explanation": "Nippon India reported hallucination down 90-95% with accuracy up more than 95%; Sun Finance's first attempt (Claude alone, 585 images) scored 61.8% and was rejected before the Textract+Rekognition+Claude pipeline reached 90.80%; Chronomics spent 4 months on an in-house CV model before Rekognition Custom Labels shipped in 3-4 weeks. The distractors are real numbers from other cases: 85% is Guardrails' claimed extra harmful-content blocking, 79.73% is Sun Finance's baseline before the fix, 66% is Forethought's multi-model-endpoint saving, 96.5% is Chronomics' final accuracy, and 2 months is Epilot's time to MVP."
+}
+```
+
+- **📚 Did you know?** AWS publishes exactly **one** production-rate figure for its Generative AI Innovation Center: **65 %** of projects reached production in 2025 — some in as few as **45 days** — out of more than **1,000** implementations, using the **Five V's** framework (Value → Visualize → Validate → Verify → Venture). The complementary **35 % did not**, and AWS never claims a higher number. Plan for the other 35 %: that is what the safeguards, the evaluation phase and the human-review path in this lesson are for.
 
 ---
 
@@ -915,6 +1026,40 @@ AWS also cites, as third-party frameworks it works against, **MITRE ATLAS**, **S
   ],
   "correct": 2,
   "explanation": "Contextual grounding is a probabilistic scoring layer: it needs a grounding source and a query, runs on the output only, and returns Grounding and Relevance scores against a threshold of 0 to 0.99. Automated Reasoning checks (GA 6 August 2025) are a deterministic verification layer: natural language is mapped to formal logic and the answer is reported as VALID, INVALID, SATISFIABLE, IMPOSSIBLE or TRANSLATION_AMBIGUOUS, with cited rules and flagged unstated assumptions, at up to 99% accuracy on unambiguous translations. AWS recommends using the safeguards together, not choosing between them."
+}
+```
+
+```question
+{
+  "id": "aid-12-q11",
+  "type": "multiple-choice",
+  "question": "A team plans a new bias-measurement project in late 2026 and asks for the documented status of Amazon SageMaker Clarify and SageMaker Model Monitor. Which statement is correct?",
+  "options": [
+    "Both were shut down on 30 July 2026 and their historical reports are unavailable",
+    "Both were rebranded as Amazon Bedrock Model Evaluations",
+    "Both closed to new customers on 30 July 2026 and are in maintenance - existing customers keep using them and no new features are planned - with Amazon Bedrock Model Evaluations, SHAP and CloudWatch monitoring named as the path for new work",
+    "Both remain fully open to new customers with new features planned for 2027",
+    "Both were moved from Amazon SageMaker into Amazon Bedrock Guardrails"
+  ],
+  "correct": 2,
+  "explanation": "AWS's SageMaker AI End-of-Support notice lists SageMaker Clarify, SageMaker Model Monitor, Ground Truth, Augmented AI (A2I), Debugger and others as no longer open to new customers from 30 July 2026. The documented status is maintenance: still supported for existing customers, no new features - not a shutdown and not a rebrand. New bias and evaluation work is directed to Amazon Bedrock Model Evaluations (paired with Clarify in exam-guide objective 4.2.2), while SHAP, CloudWatch metrics and anomaly detection cover monitoring. Clarify remains examinable: it still provides the pre-training metrics, the 11 post-training metrics and SHAP attributions taught in section 10."
+}
+```
+
+```question
+{
+  "id": "aid-12-q12",
+  "type": "multiple-choice",
+  "question": "Under the EU AI Act as amended by the Digital Omnibus (Regulation (EU) 2026/1744, in force 27 July 2026), when do the Article 50 transparency duties apply?",
+  "options": [
+    "2 February 2025, alongside the prohibited-practices ban",
+    "2 August 2025, alongside the GPAI obligations",
+    "2 August 2026, with a 2 December 2026 marking deadline for systems already on the market",
+    "2 December 2027, together with the Annex III high-risk obligations",
+    "2 August 2028, together with the Annex I high-risk obligations"
+  ],
+  "correct": 2,
+  "explanation": "The Act entered into force on 1 August 2024; prohibited practices and AI-literacy duties applied from 2 February 2025; GPAI obligations, governance and Article 99 penalties from 2 August 2025. The Digital Omnibus, in force 27 July 2026, deferred only the high-risk Annex III date (to 2 December 2027) and held Article 50 and GPAI timing: general application, Article 50 transparency and AI Office GPAI fining start 2 August 2026, with a 2 December 2026 marking deadline for systems already on the market. Annex I high-risk follows on 2 August 2028. Penalties reach EUR 35 million or 7% of global turnover for prohibited practices."
 }
 ```
 

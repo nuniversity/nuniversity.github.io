@@ -483,6 +483,30 @@ Everything in this lesson is describable as code, and AWS's guidance points at C
 
 Codify, at minimum: VPC, KMS, the S3 bucket, the pipeline execution role, the **Model Package Group**, CodePipeline + CodeBuild + CodeConnections, EventBridge rules, and the scalable target with its policies. For project templates AWS prefers **S3-hosted templates via `CfnTemplateProvider`** over Service Catalog portfolios, and a custom template must expose **`SageMakerProjectName`** and **`SageMakerProjectId`**. Splitting the stack into `DevStack` and `ProdStack` lets you unit-test the infrastructure before it touches production.
 
+### 11.5 2025–2026 Updates
+
+Three verified 2025–2026 changes touch the material in sections 8 through 13, and AWS now announces them through **lifecycle vocabulary** rather than through silent retirements. All three are documented, dated and examinable.
+
+**1. The product name changed.** AWS documents that "the current Amazon SageMaker has been renamed to **Amazon SageMaker AI**" (3 December 2024), alongside a separate *next-generation SageMaker* generation (Unified Studio, Catalog, Lakehouse, zero-ETL). An exam option saying **SageMaker AI** is current, not exotic — and the identifiers you quote from section 8 did **not** move with the rename: `ServiceNamespace = sagemaker`, `ResourceId = endpoint/…/variant/…`, `SageMakerVariantInvocationsPerInstance` and the role action `SageMaker::StartPipelineExecution` are all still spelled the old way.
+
+**2. Model Monitor and Clarify are in maintenance.** The SageMaker AI End of Support Notice lists **Model Monitor** and **Clarify** — together with Ground Truth, A2I, Studio Lab, Debugger, Role Manager, Geospatial and Mechanical Turk — as **"no longer open to new customers starting 30 July 2026"**. Read that sentence with precision: the status is **maintenance** = no new customers, no new features, **existing customers keep using them**. It is **not** a full shutdown, and it is **not** a rebrand into Bedrock Model Evaluations. The drift flywheel of 11.2 therefore still runs for existing customers; for new work AWS points to **CloudWatch metrics and anomaly detection, CloudWatch Evidently, EventBridge + Lambda, SHAP**, and, on the generative side, **Bedrock Model Evaluations** — which is exactly why the exam guide's example 4.2.2 now reads "Clarify **plus** Bedrock Model Evaluations".
+
+**3. The exam guide moved.** AWS's change history lists **v1.0 published 26 March 2026** and **v1.1 published 30 April 2026**, and states that updates appear on the exam **about one month after publication** (treat **v1.1** as the reliable anchor; the v1.0 date is a documentation re-publication). Changed examples that touch this lesson: **1.1.3 (async and serverless inference)**, **1.3.4 (Bedrock, Amazon Quick, Kiro, SageMaker AI)** and **4.2.2 (Clarify plus Bedrock Model Evaluations)**. Unchanged, and therefore safe to keep quoting: **65 questions (50 scored + 15 unscored)**, **90 minutes**, **pass 700 / 1000**, **3-year validity**, domains **20 / 24 / 28 / 14 / 14 %**.
+
+| Date (verified) | Change | What it means on the exam |
+|---|---|---|
+| 3 Dec 2024 | Amazon SageMaker renamed **Amazon SageMaker AI** | the new name is current; service, metric and API identifiers are unchanged |
+| 26 Mar 2026 | Exam guide **v1.0** listed in the change history | baseline for the 2026 content set |
+| 30 Apr 2026 | Exam guide **v1.1** published | live on the exam from about **late May 2026**; changed examples 1.1.3, 1.3.4, 4.2.2 |
+| 30 Jun 2026 | Ground Truth Plus **end of support**; Amazon Kendra enters **maintenance** | distractor dates, not MLOps answers |
+| **30 Jul 2026** | **Model Monitor, Clarify, Ground Truth, A2I, Studio Lab, Debugger, Role Manager, Geospatial, Mechanical Turk** and **Kendra** closed to new customers | **maintenance ≠ shutdown ≠ rebrand** — quote the state, not a rumour |
+| 30 Sep 2026 | Mechanical Turk **end of support** (the What's New post says 29 Sep — the digest flags the conflict) | do not quote the day |
+| 24 Sep 2026 | AWS Service Lifecycle reference published | use the three-word vocabulary below |
+
+**Lifecycle vocabulary (AWS General Reference):** **Maintenance** = no new customers, no new features, still supported · **Sunset** = planned end of operations, typically about 12 months · **Full Shutdown** = removed from the portfolio.
+
+- **📚 Did you know?** AWS states that exam-guide changes surface on the live exam **about one month after publication** — so **v1.1 (30 April 2026)** material was examinable from roughly **late May 2026**. The corollary runs in both directions: a feature announced *after* your guide version is not automatically testable, while a **changed example** such as **4.2.2 → Clarify plus Bedrock Model Evaluations** is testable long before any retirement date matters. Read the change history, not the release blog.
+
 ---
 
 ## 12. Comparative verdict: managed MLOps vs DIY scripts vs manual
@@ -549,6 +573,73 @@ Codify, at minimum: VPC, KMS, the S3 bucket, the pipeline execution role, the **
 **Flagged as not verified in this lesson** (do not assert them in the exam): the phrase **"requests per target"** as it appears in some study dumps — it maps to the generic `ALBRequestCountPerTarget`, which is **not** documented for SageMaker endpoints, so treat it as `InvocationsPerInstance` unless an ALB is in the architecture; the **exact count of provided project templates** (AWS enumerates families, not a numbered list); the **multi-model endpoint roadmap** (docs live and un-deprecated in October 2026, but no public roadmap page); the **question weight of MLOps specifically** (only domain weights are published); any **end-of-support date for Experiments in Studio Classic**; **MLflow server pricing**; the **memory sizes and maximum concurrency of serverless endpoints**; **endpoint quotas** (instances per variant, variants per endpoint); the **numeric default of `MaxParallelExecutionSteps`** (docs show how to set it, example 50, but publish no default); and **GitHub Actions as an exam answer** — it appears only in a blog and an `aws-samples` custom template, while the safe answers are **CodePipeline / CodeBuild** and **Jenkins**.
 
 - **📚 Did you know?** The SageMaker **Lambda step** defaults to a **2-minute** timeout and permits up to **10 minutes** — a deliberately small ceiling, because the step exists for lightweight orchestration work (flip an approval, call an API, move a file), not for running a training job. If your "step" needs an hour, it is a Processing step wearing a costume.
+
+---
+
+## 14. Real-World Case Studies
+
+AWS publishes customer stories because each one is a documented version of a decision this lesson taught in the abstract. The five below are the **MLOps-, pipeline- and inference-relevant** cases, quoted with the exact AWS services, the exact printed numbers, and the source page — a percentage with no source is marketing, and a percentage with no "before" is worse.
+
+> [!WARNING]
+> **How to quote a case study in an exam answer.** Every figure in this section is **customer- or AWS-claimed and unaudited**; only **Sun Finance** discloses a sample basis (**585 images**) and only **Adobe** discloses its own test set. Read **"up to"** as a **ceiling**, never as an average. AWS publishes exactly **one** project-outcome rate — **65 %** of Generative AI Innovation Center projects reached production in 2025, out of **more than 1,000** implementations — so an option asserting that "all" or "most" AWS AI projects ship is wrong, and the reverse trap (claiming a published failure rate) is wrong too. Do **not** quote the unretrieved figures that circulate: agent-pilot stall rates and third-party "95 % of GenAI pilots fail" claims are not AWS-documented.
+
+### 14.1 Forethought — inference is a pipeline decision with a bill attached
+
+- **Services:** SageMaker **multi-model endpoints**, **Serverless Inference** and Model Deployment, replacing self-managed **Amazon EKS**.
+- **Numbers:** **−66 %** inference cost with multi-model endpoints *and better latency*; **≈ −80 %** on Serverless Inference (headline **up to −80 %**); **more than 80 % of GPU inference** now runs on SageMaker; **30 M interactions/year**; a **3-person** team that could no longer run the models *and* Kubernetes (memory exceptions, outages).
+- **Source:** `aws.amazon.com/solutions/case-studies/forethought-technologies-case-study` (the page carries no year chip — treat the date as unstated).
+- **Exam angle:** this is section 10 with an invoice attached. Shared GPU capacity → **multi-model endpoints**; spiky small classifiers → **serverless**. The cost they deleted was the **DIY serving tax** — the "DIY scripts" column of the Comparative Verdict, applied to inference instead of to CI/CD.
+
+### 14.2 HAYAT HOLDING — managed training and tuning instead of hand-built environments
+
+- **Services:** **AWS IoT Greengrass** (SiteWise Edge Gateway) → SageMaker **Model Training** + **Automatic Model Tuning** + **Model Deployment**, with **SageMaker Edge Manager** serving the model on-device.
+- **Numbers:** **194 sensors** streamed over OPC-UA; self-built ML environments were "time-consuming and cumbersome"; documented outcome **$300,000 per year** saved plus higher panel quality.
+- **Source:** `aws.amazon.com/blogs/machine-learning/hayat-holding-uses-amazon-sagemaker-to-increase-product-quality-and-optimize-manufacturing-output-saving-300000-annually` (2023).
+- **Exam angle:** this is **Level 1 maturity** in a factory — one automated pipeline from sensor to tuned model, with **Automatic Model Tuning** replacing the manual hyperparameter sweep at 194 inputs and **Edge Manager** owning the on-device deployment path.
+
+### 14.3 RareJob — spot training fixed a queueing problem, not a model problem
+
+- **Services:** **SageMaker** training on **managed spot**, fed by **AWS Glue** and **Amazon Athena**, replacing a local PC and then a bottlenecked EC2/ECS setup.
+- **Numbers:** **−25 %** training time, **more than 10×** development efficiency, **100 hours per month** saved, scoring results in **2–3 minutes**; one model per developer was the ceiling before the move.
+- **Source:** `aws.amazon.com/solutions/case-studies/rare-job-case-study` (2020).
+- **Exam angle:** the bottleneck was **throughput of experiments**, not accuracy. Parallel spot jobs are the documented cost lever for training — and the same "pay for interrupted capacity at a discount" logic that makes a Savings Plan or spot strategy a Domain 4 (cost) answer.
+
+### 14.4 Chronomics — four months of DIY versus three weeks of managed AutoML
+
+- **Services:** **Amazon Rekognition Custom Labels** (AutoML), scored with `DetectCustomLabels`.
+- **Numbers:** **4 months** of in-house custom computer vision **never reached target**; Custom Labels shipped in **3–4 weeks** at **96.5 % accuracy / 97.9 % F1**. Raising the confidence threshold to **0.99** gives **99.6 %** precision while **discarding 5 %** of predictions; **0.999** gives **99.87 %** while discarding **27 %**.
+- **Source:** `aws.amazon.com/blogs/machine-learning/chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels` (2022).
+- **Exam angle:** two lessons. First, for a **narrow vision task**, the managed tier beats an in-house build — the documented failure pattern is DIY CV. Second, every threshold you raise creates a **discarded tail** that needs a human path (the reason A2I exists), so a precision question is always also a *coverage* question.
+
+### 14.5 Sun Finance — a multi-step pipeline where the first prototype was rejected
+
+- **Services:** **Amazon Textract** (OCR) → **Amazon Rekognition** (fallback and face checks) → **Claude Sonnet 4** (structuring only) → validation rules → **Amazon Titan Multimodal Embeddings** in **S3 Vectors** for fraud similarity; built with the AWS Generative AI Innovation Center, evaluated on **585 images**.
+- **Numbers:** accuracy **79.73 % → 90.80 %** (ID number **74.32 → 89.40 %**, document type **78.43 → 96.40 %**), **−91 %** cost per document, **20 hours → under 5 seconds**, fraud detection **81 %**. **Attempt 1 — Claude Sonnet 4 alone — scored 61.8 % overall and 43 % on ID number and was rejected.**
+- **Source:** `aws.amazon.com/blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws` (2026).
+- **Exam angle:** this is a **Condition-step mindset in production form**: build the baseline, measure, reject the failing attempt, re-architect (separate **OCR** from **reasoning**), re-measure. Evaluation is a phase, not a checkbox — and LLM-only extraction of PII is the documented failed prototype.
+
+**Table 14-A — Before / after, exactly as AWS printed them**
+
+| Case | Metric | Before | After | Movement |
+|---|---|---|---|---|
+| Sun Finance | overall document accuracy | 79.73 % | **90.80 %** | **+11.07 pp** |
+| Sun Finance | cost per document · handling time | baseline · up to 20 h | **−91 %** · **< 5 s** | ~1000× faster |
+| Sun Finance | *first attempt, LLM-only* | — | *61.8 % (ID number 43 %)* | **rejected** |
+| Chronomics | time to a working model | **4 months** DIY, missed target | **3–4 weeks** | ~4× faster |
+| Chronomics | accuracy / F1 | target never reached | **96.5 % / 97.9 %** | shipped |
+| RareJob | training time · developer efficiency | baseline · 1 model/developer | **−25 %** · **> 10×** | +100 h/month |
+| HAYAT | annual infrastructure cost | self-built ML environments | **$300,000/yr** saved | 194 sensors |
+| Forethought | inference cost | self-managed Amazon EKS | **−66 %** MME · **≈ −80 %** serverless | >80 % of GPU inference |
+
+**Table 14-B — Choosing the tier: prebuilt → managed custom → generative**
+
+| Tier | When AWS says to use it | Cases and numbers | Services |
+|---|---|---|---|
+| **Prebuilt AI service** | narrow, structured task; "no ML experience required" | Anthem **80 %** of the claims workflow automated (target **90 %+**, 20 min/claim before); Chronomics **96.5 %** in **3–4 weeks** | Amazon Textract, Rekognition Custom Labels |
+| **Managed custom ML** | your data and your model, but you refuse to own the infrastructure | HAYAT **$300 k/yr**; RareJob **10×** efficiency; Forethought **−66 % / −80 %** | SageMaker training, managed spot, Automatic Model Tuning, multi-model endpoints, Serverless Inference, Edge Manager |
+| **Generative AI + RAG** | reasoning, summarization and retrieval over documents | Sun Finance **90.8 %**; Nippon India **> 95 %** accuracy with hallucination down **90–95 %**; Adobe **+ 20 %** retrieval accuracy; Bynder **− 75 %** search time | Amazon Bedrock, Knowledge Bases, Guardrails, embeddings in S3 Vectors |
+
+- **📚 Did you know?** AWS publishes exactly one production-rate figure for its own generative AI work: **65 %** of Generative AI Innovation Center projects reached production in **2025**, drawn from **more than 1,000** implementations, with the fastest in **45 days** — and AWS frames the method as the **Five V's**: **Value → Visualize → Validate → Verify → Venture**. The number worth internalizing is the other **35 %**: AWS expects you to plan for projects that stall, which is why *baseline before build* and *evaluation as a phase* appear in every case above.
 
 ---
 
@@ -743,6 +834,53 @@ Codify, at minimum: VPC, KMS, the S3 bucket, the pipeline execution role, the **
   ],
   "correct": 3,
   "explanation": "Serverless endpoints exclude GPUs, Marketplace and private registry images, multi-model endpoints, VPC configuration, data capture, Model Monitor, multiple variants and inference pipelines, and cap the container image at 10 GB. Provisioned Concurrency is an optional feature for mitigating cold starts, and converting an existing real-time endpoint to serverless is rejected."
+}
+```
+
+```question
+{
+  "id": "aid-13-q13",
+  "type": "multiple-choice",
+  "question": "As of 30 July 2026, what is the documented status of SageMaker Model Monitor and SageMaker Clarify?",
+  "options": [
+    "Both are in full shutdown and unavailable to every customer",
+    "Both are closed to new customers and in maintenance: existing customers keep using them, no new features are planned, and neither has been rebranded as Amazon Bedrock Model Evaluations",
+    "Both remain fully open to new customers with new features planned for 2027",
+    "Both were renamed Amazon Bedrock Model Evaluations and their APIs were removed"
+  ],
+  "correct": 1,
+  "explanation": "The SageMaker AI End of Support Notice lists Model Monitor and Clarify, with Ground Truth, A2I, Studio Lab, Debugger, Role Manager, Geospatial and Mechanical Turk, as no longer open to new customers starting 30 July 2026. The state is maintenance, which means no new customers and no new features while existing customers keep using the service. It is neither a full shutdown nor a rebrand, and AWS's documented paths for new work are CloudWatch metrics and anomaly detection, CloudWatch Evidently, EventBridge plus Lambda, SHAP, and Bedrock Model Evaluations on the generative side."
+}
+```
+
+```question
+{
+  "id": "aid-13-q14",
+  "type": "multiple-choice",
+  "question": "A three-person SaaS support team currently self-manages GPU inference on Amazon EKS, with memory exceptions and outages, serving 30 million interactions per year across several models per customer. Which outcome matches the published AWS case study?",
+  "options": [
+    "Multi-model endpoints cut inference cost by 66 percent with better latency and Serverless Inference cut it by about 80 percent, with more than 80 percent of GPU inference moving to SageMaker",
+    "Batch transform cut cost per document by 91 percent and removed all endpoints",
+    "Real-time endpoints with target tracking held at 70 invocations per instance cut search time by 75 percent",
+    "Amazon Bedrock Knowledge Bases cut inference cost by 66 percent while improving retrieval accuracy by 20 percent"
+  ],
+  "correct": 0,
+  "explanation": "The Forethought case study reports a 66 percent saving from SageMaker multi-model endpoints with better latency, about 80 percent on Serverless Inference with a headline of up to 80 percent, and more than 80 percent of GPU inference running on SageMaker, all delivered by a three-person team that abandoned its own EKS infrastructure. The 91 percent figure belongs to Sun Finance's document cost, the 75 percent figure to Bynder's search time, and neither Knowledge Bases nor target tracking at 70 is part of Forethought's published result."
+}
+```
+
+```fillblank
+{
+  "question": "Fill in the verified numbers from this lesson's case studies and 2026 updates:",
+  "template": "Forethought cut inference cost by {{1}} with multi-model endpoints and about {{2}} with Serverless Inference. Chronomics shipped a Rekognition Custom Labels model in {{3}} weeks at 96.5 percent accuracy. SageMaker Model Monitor and SageMaker Clarify were closed to new customers on {{4}} 2026.",
+  "answers": {
+    "1": "66%",
+    "2": "80%",
+    "3": "3-4",
+    "4": "30 July"
+  },
+  "distractors": ["25%", "91%", "8", "30 June", "28 October 2024"],
+  "explanation": "Forethought published 66 percent with multi-model endpoints and about 80 percent with Serverless Inference; RareJob's 25 percent is a training-time figure and Sun Finance's 91 percent is cost per document. Chronomics went from four months of DIY to a model in 3-4 weeks at 96.5 percent accuracy and 97.9 percent F1. Model Monitor and Clarify were listed as no longer open to new customers starting 30 July 2026, which is maintenance rather than shutdown; 30 June 2026 is Ground Truth Plus end of support and 28 October 2024 is the CodeCommit template removal date."
 }
 ```
 

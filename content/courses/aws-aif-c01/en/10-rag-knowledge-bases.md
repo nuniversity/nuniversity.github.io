@@ -508,6 +508,46 @@ flowchart TD
 
 > **📚 Did you know?** Kendra is not merely deprecated — it is **repurposable**: a Kendra GenAI index can still be connected as a **data source for a Bedrock knowledge base**, so an organisation with years of Kendra tuning can keep its index and move only the generation layer. That is the migration path AWS actually documents, and it is why "delete Kendra and re-index everything" is a distractor. Note also that the connector counts come from different places: the **7 managed connectors** are confirmed on `docs.aws.amazon.com`, while the "30+" Kendra figure circulates via AWS migration material rather than a page reproduced here — treat the exact number as approximate.
 
+### 10.3 2025–2026 Updates
+
+Everything in this subsection was read on `docs.aws.amazon.com`, an AWS What's New post, an AWS Machine Learning Blog post or the AIF-C01 exam guide itself — nothing comes from a third-party tracker, and dates AWS does not publish are marked as unpublished instead of being filled in. Two groups of change matter for this lesson: what shipped **inside** Bedrock Knowledge Bases and its vector stores, and what AWS did to **Kendra, to Amazon Q Business and to the exam** around them.
+
+Where AWS publishes no date, the row says so: there is **no published launch date** for the Bedrock Managed Knowledge Base and **no published closure date** for Amazon Q Business, and neither has been invented here.
+
+| Knowledge base / vector store change | Date (AWS-published) | What the exam wants you to know |
+|---|---|---|
+| **Reranking, custom connectors, direct ingestion, RAG evaluation and inference profiles in `RetrieveAndGenerate`** | Bedrock User Guide feature history, 2025 | Reranking is **on by default** on managed knowledge bases; evaluation is `applicationType: "RagEvaluation"` scored by an **LLM-as-a-judge**; an inference profile lets one `RetrieveAndGenerate` call pick the Region |
+| **Amazon S3 Vectors becomes a knowledge base store** | re:Invent 2025 (**30 Nov – 4 Dec 2025**) | The eighth and newest `StorageConfiguration.type` value — cheapest at **up to 90% less**, **2 billion vectors per index**, and the store that rejects `startsWith` / `stringContains` |
+| **Bedrock Managed Knowledge Base (BMKB): Smart Parsing plus the Agentic Retrieval API** | Documented as the Kendra replacement; AWS has **not published a launch date** | AWS runs ingestion, indexing, storage, retrieval and reranking; `AgenticRetrieveStream` is the streaming agentic retrieval API that sits behind the managed tier |
+| **Amazon Kendra enters maintenance, then closes to new customers** | Maintenance **30 Jun 2026**, closed to new customers **30 Jul 2026** | AWS redirects new search applications to the **Bedrock Managed Knowledge Base**; existing Kendra customers keep running under AWS's *maintenance* vocabulary |
+| **Amazon Q Business no longer open to new customers** | Availability page reads *"no longer open to new customers"* — **AWS publishes no date** | Step 1 of AWS's own RAG decision order now carries a caveat; the documented successor is **Amazon Quick** (bring your own identity), and Guardrails and User Store do **not** transfer |
+| **Amazon MemoryDB removed from the AIF-C01 in-scope list** | Exam guide v1.1, **30 Apr 2026** | Prescriptive Guidance still names MemoryDB in the custom-retriever chain of section 10.1, but the service is no longer in scope for this exam |
+
+| Exam-guide change (v1.1, published 30 Apr 2026) | Detail for a RAG candidate |
+|---|---|
+| New objective **5.1.5** | Hallucination detection and grounding: **RAG grounding**, output validation, confidence scoring — the reason Section 9's metrics are examinable at all |
+| New objective **2.1.5** | **Context engineering** — how retrieved context is assembled into the prompt (`$search_results$`, template contracts, top-k sizing) |
+| New objective **2.1.6** | Agentic AI: multi-agent patterns, **MCP**, memory management, tool usage, orchestration — the shape `AgenticRetrieveStream` puts on a retrieval call |
+| Changed example **3.4.2** | **LLM-as-a-judge** — the scoring mechanism behind Bedrock RAG evaluation |
+| Added / removed from the in-scope list | **Amazon Aurora** added (the pgvector `RDS` store); **Amazon MemoryDB** removed |
+| Unchanged | **65 questions (50 scored + 15 unscored)**, **90 minutes**, pass **700/1000**, domains weighted **20 / 24 / 28 / 14 / 14** |
+
+AWS states that exam-guide updates reach the live exam about **one month after publication**, so v1.1's new objectives have been fair game since roughly **late May 2026**. The practical reading order is unchanged: the features in the first table are what you configure, the objectives in the second table are what AWS now asks about them.
+
+**Worked example 11 — what the 2026 changes mean for an existing Kendra customer.** An enterprise has run a Kendra GenAI index for years, with synonym and ranking tuning it does not want to lose, and now wants generative answers with citations. AWS's documented path is **not** to re-index everything: a Kendra GenAI index can still be connected as a **data source for a Bedrock knowledge base**, so the tuning survives and only the generation layer moves — while the Kendra index itself keeps serving its existing users under **maintenance** (mode entered **30 Jun 2026**, closed to new customers after **30 Jul 2026**). For a *new* application the answer is the **Bedrock Managed Knowledge Base**, and the third option in AWS's decision order — Amazon Q Business — now has to be checked against its own *"no longer open to new customers"* status before anyone offers it as the step-one answer.
+
+| 2025–2026 change | Which section of this lesson it updates |
+|---|---|
+| Reranking on by default, custom connectors, direct ingestion | Sections 2 and 3 |
+| RAG evaluation scored by an LLM-as-a-judge | Section 9 |
+| Inference profiles usable inside `RetrieveAndGenerate` | Section 8 |
+| **Amazon S3 Vectors** as the eighth store type | Section 6 |
+| **Bedrock Managed Knowledge Base** + Agentic Retrieval API | Sections 3 and 10 |
+| Kendra maintenance and closure dates | Section 10 |
+| Exam guide v1.1 objectives **5.1.5, 2.1.5, 2.1.6, 3.4.2** | Sections 9, 8 and 1 |
+
+> **📚 Did you know?** The Kendra availability page never uses the word "deprecated" — it redirects new search applications to the **Amazon Bedrock Managed Knowledge Base**, whose Smart Parsing and **Agentic Retrieval API** AWS documents as the replacement, while Kendra itself keeps serving existing customers under AWS's own **maintenance** definition (no new customers, no new features, still supported). That is why *"Kendra was shut down"* and *"existing Kendra customers must migrate immediately"* are both distractors, and why the correct answer pairs **continuity for existing customers** with **a documented replacement for new ones**.
+
 ---
 
 ## 11. Comparative verdict: RAG vs fine-tuning vs prompt-only, and Bedrock KB vs Kendra
@@ -587,6 +627,63 @@ Pick **Bedrock Knowledge Bases** when the ask is *fully managed RAG, internal do
 - **Titan V2 pricing confusion** — one builder-centre page quotes "$0.02 per 1,000 tokens" while the AWS ML Blog says **$0.02 per 1 million tokens**; use the AWS blog figure.
 - **Exam composition claims** ("3–6 RAG questions per sitting") — from exam-prep sites, not AWS.
 - **`Amazon EMR Serverless` as a vector store** — appears in one Prescriptive Guidance guide but **not** in the `StorageConfiguration` enum; never answer with it.
+
+---
+
+## Real-World Case Studies
+
+The tables above tell you what the APIs accept; AWS's published customer stories tell you **which lever actually moved a metric**. Every figure below is quoted from the AWS case study or AWS Machine Learning Blog post named in its Source line. All of them are **customer- or AWS-claimed and unaudited**, and where a source says "up to", read it as a ceiling rather than a plan.
+
+Each entry names the mechanism, the services AWS itself lists, the numbers AWS published and where to read them. The five were chosen because together they cover every half of this lesson:
+
+- **Nippon India** — retrieval engineering plus Guardrails against hallucination (Section 9);
+- **Adobe** — chunking and embedding choice as the accuracy lever (Sections 4 and 5);
+- **Alnylam** — RAG with citations inside a regulated workflow (Sections 1 and 11);
+- **Bynder** — multimodal embeddings behind the same embed → search → augment shape (Section 5);
+- **Sun Finance** — vector-store selection and the stage boundaries around it (Section 6).
+
+### Case 1 — Nippon India: retrieval engineering, not a bigger model
+
+Nippon India Mutual Fund's internal assistant was built on naive RAG, and it degraded as document volume grew — producing exactly the hallucinations Section 9 teaches you to measure. The fix set was entirely on the retrieval side: **FM-as-parser**, **query reformulation**, **multi-query RAG**, **reranker models**, **GraphRAG** and **metadata filtering** on **Amazon Bedrock Knowledge Bases**, plus **Amazon Bedrock Guardrails** and citations. Reported outcomes: **accuracy +>95%**, **hallucination −90–95%**, and report generation falling from **2 days to about 10 minutes**. Exam angle: not one lever in that list touches the generator, and AWS published the post to note that these are **generally available product features**, not code the customer wrote — a hallucination complaint was answered by fixing retrieval first. Source: AWS Machine Learning Blog, 29 Jul 2025, `aws.amazon.com/blogs/machine-learning/how-nippon-india-mutual-fund-improved-the-accuracy-of-ai-assistant-responses-using-advanced-rag-methods-on-amazon-bedrock`.
+
+### Case 2 — Adobe: four chunking configurations, and the simplest one won
+
+Adobe's developer-documentation search was losing accuracy for thousands of developers. The team benchmarked **four chunking configurations** on **Amazon Bedrock Knowledge Bases** — **400 tokens with 20% overlap**, **1,000 tokens**, **hierarchical** and **semantic** — embedded with **Amazon Titan Text Embeddings V2**, stored in **Amazon OpenSearch Service** and read back through the **`Retrieve` API**. Reported outcome: **+20% retrieval accuracy** against Adobe's own test set, with the **400-token / 20%-overlap** configuration both the simplest and the most accurate. Exam angle, in two parts: chunking choice moved the metric while the model stayed the same, and **400 tokens is a customer benchmark, not a change of AWS's documented 300-token default** — a published sample never overrides a published default. Source: AWS Machine Learning Blog, 11 Jun 2025, `aws.amazon.com/blogs/machine-learning/adobe-enhances-developer-productivity-using-amazon-bedrock-knowledge-bases`.
+
+### Case 3 — Alnylam: citations as the compliance feature
+
+Alnylam Pharmaceuticals' complaint triage took **3–4 days**, and finding one internal answer took **15+ minutes**. Using **Amazon Bedrock**, **Amazon S3** and a RAG-style assistant, the team delivered an intake-and-triage prototype in **3 months** under GxP constraints, plus **AskALNY**, a Slack assistant serving **2,000 employees and 1,000 contractors** that returns answers **with source links**. Reported outcomes: triage **3–4 days → hours**, information search **15 minutes → 30 seconds**, with **250+ use cases** following the first two. Exam angle: in a regulated workflow the **citation is the audit trail**, which is precisely why Section 11 files source references under the RAG column and "no citations" under fine-tuning. Source: `aws.amazon.com/solutions/case-studies/alnylam-case-study`.
+
+### Case 4 — Bynder: the embedding model carries the modality
+
+Bynder runs **175 million assets** across **18 petabytes** for **4,000 companies**, and keyword search cannot express "find me something like this image". Images and queries are vectorized with **Amazon Titan Multimodal Embeddings in Amazon Bedrock** for visual and contextual similarity search. Reported outcome: search time **−75%**, with roughly **+50%** more usable results per search. Exam angle: the retrieval pattern is the same pipeline as text RAG — embed, search, augment — but the **embedding model** is the component that decides which modality can be searched at all, which is the row of Section 5's table an exam stem is really asking about. Source: `aws.amazon.com/solutions/case-studies/bynder-bedrock-case-study`.
+
+### Case 5 — Sun Finance: the store choice, and why the first prototype failed
+
+Sun Finance (fintech lending across 9 countries) had **60% of microloan applications** needing manual review, each taking **10 minutes to 20 hours**. Its first attempt — sending ID photos straight to **Claude Sonnet 4** for JSON extraction — scored **61.8% overall** and only **43%** on ID numbers and was **rejected**. The published pipeline separates the stages: **Amazon Textract** for OCR, **Amazon Rekognition** as fallback and face check, the foundation model **only for structuring**, validation rules, and **Titan Multimodal Embeddings** written into **Amazon S3 Vectors** for fraud-similarity lookup, evaluated on **585 images**. Reported outcome: accuracy **79.73% → 90.80%**, cost per document **−91%**, processing **20 hours → under 5 seconds**. Exam angle for this lesson: S3 Vectors appears in the `StorageConfiguration.type` enum as the **cheapest** store, and this case shows it doing real similarity work — while the rejected first attempt shows that a retrieval or extraction pipeline is only as good as the stage boundaries drawn inside it. Source: AWS Machine Learning Blog, 30 Apr 2026, `aws.amazon.com/blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws`.
+
+| Case | Where it lands in this lesson | AWS services named by AWS | Headline numbers | Source |
+|---|---|---|---|---|
+| **Nippon India** (financial services, 2025) | Section 9 — optimize retrieval before generation | Bedrock Knowledge Bases, Bedrock Guardrails, reranker models, GraphRAG | Accuracy **+>95%**, hallucination **−90–95%**, reports **2 days → ~10 minutes** | AWS ML Blog, 29 Jul 2025 |
+| **Adobe** (software, 2025) | Section 4 — chunking decides RAG quality | Bedrock Knowledge Bases, OpenSearch Service, Titan Text Embeddings V2, `Retrieve` | **+20%** retrieval accuracy; **400 tokens / 20% overlap** won the bake-off | AWS ML Blog, 11 Jun 2025 |
+| **Alnylam** (biotech, 2025) | Section 11 — citations are the RAG advantage | Bedrock, Amazon S3, RAG assistant | Triage **3–4 days → hours**, search **15 min → 30 s**, **3,000 users** | AWS case study |
+| **Bynder** (digital assets, 2025) | Section 5 — embeddings carry the modality | Bedrock, Titan Multimodal Embeddings | Search time **−75%**, results **~+50%**, **175M assets / 18 PB** | AWS case study |
+| **Sun Finance** (fintech, 2026) | Section 6 — the cheapest vector store in production | Bedrock (Claude Sonnet 4), Textract, Rekognition, Titan Multimodal Embeddings, **S3 Vectors** | Accuracy **79.73% → 90.80%**, cost **−91%**, **20 h → <5 s**, n = **585** | AWS ML Blog, 30 Apr 2026 |
+
+Three patterns repeat across these five stories, and each one is a section of this lesson in disguise:
+
+1. **Retrieval moved the metric, not the generator** — Nippon India and Adobe both improved answers by re-engineering chunks, reranking and filters while the model stayed put (Sections 4 and 9).
+2. **The citation is the deliverable** — Alnylam's source links and Nippon's citations are what made regulated answers auditable, which is the entire RAG column of Section 11.
+3. **The store and the embedding model are picked by constraint** — modality for Bynder, cost and similarity workload for Sun Finance, hybrid search and metadata filters for the rest (Sections 5, 6 and 7).
+
+> [!WARNING]
+> **How to read customer numbers on this exam.**
+> 1. **They are claimed, not audited.** Every percentage above is customer- or AWS-claimed; only a couple of AWS-published AI case studies disclose a sample basis at all (Sun Finance's OCR pipeline at **n = 585** images, Adobe on its own test set).
+> 2. **"Up to" is a ceiling.** An option that restates a ceiling as a guaranteed outcome is wrong even when the underlying number is real.
+> 3. **A benchmark does not change a default.** Adobe's **400-token** winner does not move AWS's documented **300-token, 20%-overlap** default, exactly as an AWS sample using `numberOfResults: 10` does not move the default of **5**.
+> 4. **The only published project-outcome rate is 65%** — the share of AWS Generative AI Innovation Center projects that reached production in 2025, from more than **1,000** implementations. Any option claiming AWS reports that *all* of its generative AI projects reach production is inventing a figure.
+
+> **📚 Did you know?** Nippon India's fix list — **FM-as-parser, query reformulation, multi-query RAG, reranker models, GraphRAG and metadata filtering** — reads like a roadmap of capabilities AWS ships *inside* Bedrock Knowledge Bases rather than code the customer had to write, and AWS published the case largely to make that point. Two surprises in it: the team added **Bedrock Guardrails** alongside the retrieval changes rather than instead of them, and the reported **2 days → ~10 minutes** gain came from better retrieval while the generator stayed where it was.
 
 ---
 
@@ -759,6 +856,40 @@ Pick **Bedrock Knowledge Bases** when the ask is *fully managed RAG, internal do
   ],
   "correct": 2,
   "explanation": "AWS documents that startsWith and stringContains are unsupported on managed knowledge bases and on S3 Vector indexes. equals is fully supported, as are notEquals, the greaterThan and lessThan families, in, notIn and the andAll and orAll combinators (each needing at least two children). listContains tests membership of a value inside a list field, so it cannot implement a substring match on a string field either."
+}
+```
+
+```question
+{
+  "id": "aid-10-q11",
+  "type": "multiple-choice",
+  "question": "A financial-services assistant built on naive RAG began hallucinating as the document corpus grew. AWS published a customer case in which which set of changes cut hallucination by 90-95% while raising accuracy by more than 95%?",
+  "options": [
+    "Prompt caching, batch inference, provisioned throughput and intelligent prompt routing",
+    "FM-as-parser, query reformulation, multi-query RAG, reranker models, GraphRAG and metadata filtering on Bedrock Knowledge Bases, plus Bedrock Guardrails",
+    "Fine-tune the generator on the corpus and disable retrieval entirely",
+    "Raise numberOfResults to the API maximum of 100 and remove the prompt template",
+    "Switch the store to S3 Vectors and reduce chunk size to 50 tokens so every chunk is retrieved"
+  ],
+  "correct": 1,
+  "explanation": "The Nippon India case on the AWS Machine Learning Blog lists exactly those retrieval-side techniques on Amazon Bedrock Knowledge Bases together with Guardrails and citations, reporting accuracy up to more than 95% and hallucination down 90-95%. The other options fail on mechanism: caching, batch, routing and throughput are cost and latency levers that never touch retrieval; fine-tuning removes grounding and produces no citations; raising top-k to 100 is the documented way to blow the prompt character limit, and removing the template drops $search_results$ entirely; a 50-token chunk destroys sentence boundaries and, on S3 Vectors, still cannot use startsWith or stringContains."
+}
+```
+
+```question
+{
+  "id": "aid-10-q12",
+  "type": "multiple-choice",
+  "question": "A developer-portal team benchmarks chunking on Amazon Bedrock Knowledge Bases with Titan Text Embeddings V2 and finds the simplest configuration is also the most accurate, improving retrieval accuracy by 20% on its own test set. Which configuration won, and what does it mean for the documented default?",
+  "options": [
+    "SEMANTIC chunking at maxTokens 300, bufferSize 1 and breakpointPercentileThreshold 95 - and it becomes the new default",
+    "HIERARCHICAL chunking with 1,500-token parents and 300-token children - and it becomes the new default",
+    "FIXED_SIZE chunking at 400 tokens with 20% overlap - a customer benchmark that leaves the documented 300-token, 20%-overlap default unchanged",
+    "NONE, with one chunk per document page - and it becomes the new default",
+    "The stock 300-token default with no tuning, which AWS reports wins for every customer"
+  ],
+  "correct": 2,
+  "explanation": "Adobe's published case benchmarked four configurations - 400 tokens with 20% overlap, 1,000 tokens, hierarchical and semantic - and the 400-token / 20%-overlap option was both simplest and most accurate, worth about 20% retrieval accuracy on Adobe's own test set. AWS's documented default stays fixed-size at 300 tokens with 20% overlap regardless of what a customer benchmark reports, just as an AWS sample using numberOfResults of 10 does not change the default of 5. Semantic chunking never wins by default (it is unavailable on managed knowledge bases), hierarchical must be configured explicitly, and NONE assumes you pre-split upstream."
 }
 ```
 

@@ -497,6 +497,35 @@ An AWS blog worked a RAG ingestion of a **5M-token document** plus **0.5M query 
 
 Same corpus, same job, **5× difference** — which is why embedding model choice, not just LLM choice, belongs in a cost question.
 
+### 2025–2026 Updates
+
+Sections 6.1–6.3 teach a decision *process* that survives catalog churn; this subsection records what actually churned between late 2025 and October 2026, so a stale model list never becomes a wrong answer. Every row below is verified against an AWS What's New post, an AWS documentation page, the Bedrock pricing page or an AWS blog — nothing here comes from a third-party tracker.
+
+**Catalog changes (verified):**
+
+| Change | Verified date | What AWS published | Source |
+|---|---|---|---|
+| **Amazon Nova 2 family** | re:Invent 2025, **1–4 Dec 2025** | **Nova 2 Lite** (1M context, code interpreter, web grounding, remote MCP), **Nova 2 Sonic** speech-to-speech **GA 2 Dec 2025** (`amazon.nova-2-sonic-v1:0`, 7 languages), **Nova 2 Omni** **preview 2 Dec 2025** (text/image/video/speech in → text and image out, 200+ text languages), **Nova 2 Pro** *early access* (GA not confirmed), **Nova Forge** for custom training; gen-1 Nova models remain listed | AWS What's New and AWS Blog |
+| **Claude Sonnet 4.6** | **17 Feb 2026** | **1M** context window, **64K** maximum output, training cutoff Aug 2025 | Bedrock model card `model-card-anthropic-claude-sonnet-4-6` |
+| **Six open-weight models on Project Mantle** | **1 Feb 2026** | DeepSeek V3.2, MiniMax M2.1, GLM 4.7 / 4.7 Flash, Kimi K2.5 and Qwen3 Coder Next served through the OpenAI-compatible Mantle endpoint, beside the **18** open-weight models added at re:Invent 2025 | AWS What's New |
+| **OpenAI GPT-6 Astra** | **GA 8 Sep 2026** | **1M** context, computer and browser use | AWS What's New |
+| **GLM 5.3 (Z.AI)** | **GA 5 Oct 2026** | **753B** total / **40B** active parameters, **1M** context, **128K** output | AWS What's New |
+| **Bedrock model lifecycle policy** | effective **7 Sep 2026** | **Active → Legacy → EOL**; most models get a **6-month Legacy** window (a **45-day** variant exists); **Legacy blocks new customers and new Provisioned Throughput**, while existing usage continues | Bedrock user guide `model-lifecycle` |
+
+**Capability changes (verified):**
+
+| Capability | Verified date | What it adds |
+|---|---|---|
+| **Guardrails: six policies + `ApplyGuardrail`** | Automated Reasoning checks previewed **3 Dec 2024**; `ApplyGuardrail` and cross-account safeguards since | content moderation, prompt-attack detection, denied topics, PII/sensitive-info filters, contextual grounding and **Automated Reasoning checks** — plus an API that applies safeguards to *any* model **without invoking an FM**, and one guardrail enforced across an AWS Organization. AWS claims **up to 88%** harmful content blocked and **99%** Automated Reasoning accuracy |
+| **Bedrock AgentCore** | preview **16 Jul 2025** → GA **13 Oct 2025** → **Policy GA 3 Mar 2026** → **Evaluations GA 31 Mar 2026** | runtime, gateway, memory and tools for agents; Policy (Cedar or natural language) intercepts Gateway tool calls *outside* the reasoning loop; Evaluations ships **13** evaluators |
+| **Knowledge Bases growth** | 2025–2026 | reranking, custom connectors, direct ingestion, **RAG evaluation with LLM-as-a-judge**, inference profiles inside `RetrieveAndGenerate`, **S3 Vectors**, and **Bedrock Managed Knowledge Base** (Smart Parsing + Agentic Retrieval API) documented as the path after **Amazon Kendra** closed to new customers **30 Jul 2026** |
+| **Pricing levers** | 2025–2026 | **Intelligent Prompt Routing billed at $1 per 1,000 requests** (up to **30%** cheaper); prompt-cache **reads −90%** (Claude/GPT) or **−75%** (Nova) with **writes at 1.25×** on the 5-minute TTL (2× on the 1-hour TTL) — and **caching is never combined with batch** |
+| **Exam guide v1.1** | **30 Apr 2026** | new objectives: token-based pricing (**2.1.4**), context engineering (**2.1.5**), agentic AI with **MCP** (**2.1.6**), prompt versioning via **Bedrock Prompt Management** (**3.2.5**), distillation (**3.1.5**), **LLM-as-a-judge** (**3.4.2**) and hallucination grounding (**5.1.5**); AWS says guide changes reach the exam about a month after publication |
+
+**What did *not* change:** every mechanism in this lesson behaves as written — the single Converse API and its **four** base parameters, batch at **50%** with no tool calling and no structured output, provisioned throughput billed **hourly per model unit**, the **+75% / default / −50% / 1- or 3-month** tier ladder, geographic profiles for residency against global profiles at **~10%**, and the three evaluation modes over a dataset in **S3**. The catalog is the part that moves; the mechanics are the part you are examined on.
+
+> **📚 Did you know?** The lifecycle policy turns this lesson's "do not memorize the model list" advice into a *billing* rule: because a **Legacy** model refuses **new** Provisioned Throughput orders, a team that pins capacity to a model the day before it leaves Active can be locked out of exactly the commitment section 4.5 says fine-tuned and steady-state workloads need — while its existing model units keep running. That is why an exam option naming a specific model as "available" or "unavailable" is nearly always a distractor, and why the durable answers are mechanisms: default-on access, Marketplace permissions on first enablement, the Anthropic FTU form, a valid payment method.
+
 ---
 
 ## 7. Customization: four paths and the provisioned-throughput rule
@@ -615,6 +644,78 @@ flowchart TD
 > 10. **Objective metrics → automatic evaluation; subjective metrics → human evaluation; cheap explained scoring → LLM-as-a-judge** (up to 98% cheaper, GA 2025-03-20).
 >
 > And one "do not memorize" flag: **provisioned-throughput hourly prices for Claude, Nova and most modern models are not published** — AWS says to contact the account team. Likewise **latency-optimized inference** is still labelled *preview, subject to change*, and the **exact model count** is never published ("100+" only). Do not spend recall budget on either.
+
+---
+
+## Real-World Case Studies
+
+Sections 1–10 build the mechanisms; AWS's published customer stories show which mechanism a real team actually reached for, and with what numbers. Everything below is quoted from the AWS case study or AWS Machine Learning Blog post named in the Source column, retrieved 6 October 2026. All of these figures are customer- or AWS-claimed and unaudited, and where a source says "up to", read it as a ceiling rather than an expectation.
+
+### Cases at a glance: services, numbers, sources
+
+| # | Customer (industry, year) | Bedrock services named by AWS | Documented outcome | Source |
+|---|---|---|---|---|
+| 1 | **Epilot** (energy software, 2026) | **Bedrock (Claude Sonnet)**, **Bedrock Evaluations**, Amazon SQS, AWS Lambda, **EU Region** | handling time **−87%**, **55,000** summaries/month, MVP in **2 months**, **80%** of users say it simplifies work | `solutions/case-studies/epilot-genai-case-study` |
+| 2 | **Bynder** (digital asset management, 2025) | **Bedrock** with **Amazon Titan Multimodal Embeddings** | search time **−75%**, about **+50%** results per search; **175 M** assets / **18 PB** / **4,000** customers | `solutions/case-studies/bynder-bedrock-case-study` |
+| 3 | **Nippon India** (financial services, 2025) | **Bedrock Knowledge Bases**, **Bedrock Guardrails**, Claude 3 Sonnet, reranker | accuracy **+>95%**, hallucination **−90–95%**, reports **2 days → ~10 minutes** | ML Blog `how-nippon-india-mutual-fund-improved-the-accuracy-of-ai-assistant-responses-using-advanced-rag-methods-on-amazon-bedrock` |
+| 4 | **Adobe** (software, 2025) | **Bedrock Knowledge Bases**, **Titan Text Embeddings V2**, Amazon OpenSearch Service, **Retrieve API** | retrieval accuracy **+20%** on Adobe's own test set; 400-token / 20%-overlap chunking won | ML Blog `adobe-enhances-developer-productivity-using-amazon-bedrock-knowledge-bases` |
+| 5 | **Prime Focus Technologies** (media, 2025) | **Bedrock** + **AWS Lambda** agents on CLEAR (**14 M+** assets) | cost **−20–30%**, accuracy **+20–30%**, turnaround **−30–40%**; external LLM APIs too slow for live tagging | `solutions/case-studies/prime-focus-case-study` |
+| 6 | **Alnylam** (biotech, 2025) | **Bedrock**, **Amazon S3**, RAG, Amazon Q Business | triage **3–4 days → hours**, search **15 min → 30 s**, **3,000** users, **250+** use cases | `solutions/case-studies/alnylam-case-study` |
+
+**Case file 1 — Epilot: choose the model with Bedrock Evaluations before production.** Energy software from Cologne summarises long customer-email chains across 170+ utility customers. The pipeline is API → **Amazon SQS** → **AWS Lambda** → **Amazon Bedrock (Claude Sonnet)**, and the model itself was selected with **Amazon Bedrock Evaluations** (human ratings across prompt versions) rather than by preference; a later agent writes records **with humans verifying**. Outcomes: handling time **−87%**, **55,000 summaries per month** at a negligible failure rate, **80%** of users saying it simplifies their work, an MVP in **2 months**, and processed data kept in an **EU Region**. Exam angle: this is section 8's evaluation modes used as a *gate*, and section 5's residency question answered up front rather than after launch. Source: `aws.amazon.com/solutions/case-studies/epilot-genai-case-study` (indexed July 2026).
+
+**Case file 2 — Bynder: embeddings are a product feature, not just a cost line.** Bynder runs **175 million assets / 18 petabytes** for **4,000 companies**, and text search cannot express "find me more like this one". Images and queries are vectorised with **Amazon Titan Multimodal Embeddings on Bedrock** for visual plus contextual similarity search. Outcomes: search time **−75%** and roughly **+50%** usable results per search. Exam angle: §6.3's embedding arithmetic is the same price table that makes Titan Text Embeddings V2 **5×** cheaper than Cohere embeddings — and multimodal embeddings add a *visual* search axis that a text-only embedding model cannot price at all. Source: `aws.amazon.com/solutions/case-studies/bynder-bedrock-case-study` (2025).
+
+**Case file 3 — Nippon India: the gain came from retrieval engineering, not a bigger model.** Naive RAG degraded as document volume grew and produced hallucinations. The fix set: **FM-as-parser** parsing, query reformulation, **multi-query RAG**, **reranker** models, **GraphRAG** and metadata filtering on **Bedrock Knowledge Bases**, plus **Bedrock Guardrails** and citations. Outcomes: accuracy **+>95%**, hallucination **−90–95%**, report generation **2 days → ~10 minutes**. Exam angle: §8's **RAG evaluation** exists precisely to separate a retrieval failure from a generation failure — and AWS notes every technique above is a GA product feature, not customer-only code. Source: AWS Machine Learning Blog, 29 Jul 2025, `aws.amazon.com/blogs/machine-learning/how-nippon-india-mutual-fund-improved-the-accuracy-of-ai-assistant-responses-using-advanced-rag-methods-on-amazon-bedrock`.
+
+**Case file 4 — Adobe: chunking and embedding choice decide RAG accuracy.** Thousands of developers were getting weak doc-search results. Adobe benchmarked four chunking strategies on **Bedrock Knowledge Bases** — **400-token / 20%-overlap**, 1,000-token, hierarchical and semantic — with **Amazon Titan Text Embeddings V2** written to **Amazon OpenSearch Service** and read through the **Retrieve API**. Outcome: **+20% retrieval accuracy** on Adobe's own test set, with the *simplest* strategy (400-token / 20% overlap) the most accurate. Exam angle: a knowledge-base question that offers "pick a bigger model" is answering the wrong axis; chunking, embedding choice and retrieval are the knobs, and the benchmark runs on **your** dataset. Source: AWS Machine Learning Blog, 11 Jun 2025, `aws.amazon.com/blogs/machine-learning/adobe-enhances-developer-productivity-using-amazon-bedrock-knowledge-bases`.
+
+**Case file 5 — Prime Focus Technologies: latency decided placement before price did.** CLEAR holds **14 million+ assets** (Disney Star, CBS, Lionsgate) and covers localization plus **live** cricket tagging. **Amazon Bedrock** + **AWS Lambda** agents automated the workflows; outcomes were localization cost **−20–30%**, accuracy **+20–30%** and turnaround **−30–40%**. The documented caution matters more than the percentages: the **first attempt used external LLM APIs whose latency was too high for live tagging**, and latency "dropped dramatically" once the workload ran on Bedrock on AWS. Exam angle: §5's routing questions and §6's decision tree both start with *who is waiting* — placement is settled before pricing is compared. Source: `aws.amazon.com/solutions/case-studies/prime-focus-case-study` (2025).
+
+**Case file 6 — Alnylam: citations are the compliance feature.** Complaint triage took **3–4 days** and finding one internal answer took **15+ minutes**. With **Amazon Bedrock**, **Amazon S3** and a RAG layer, the team shipped an intake-and-triage prototype in **3 months** under GxP constraints, plus the Slack assistant **AskALNY** serving **2,000 employees + 1,000 contractors** that returns answers **with source links**. Outcomes: triage **3–4 days → hours**, search **15 min → 30 s**, then **250+ use cases**. Exam angle: grounding plus citations is exactly exam-guide objective **5.1.5** (hallucination detection and grounding), and a regulated answer without a source link is not an answer. Source: `aws.amazon.com/solutions/case-studies/alnylam-case-study` (2025).
+
+### Before and after, side by side
+
+| Customer | Metric | Before | After | Change |
+|---|---|---|---|---|
+| **Epilot** | customer-email handling time | baseline | **−87%** | **55,000** summaries/month, MVP in 2 months |
+| **Bynder** | visual search time | text search over **175 M** assets | **−75%** | about **+50%** results per search |
+| **Nippon India** | accuracy · hallucination | naive RAG, heavy hallucination | **+>95% · −90–95%** | reports **2 d → ~10 min** |
+| **Adobe** | retrieval accuracy | incumbent doc search | **+20%** | own test set, 400-token/20% chunking |
+| **Prime Focus** | cost · accuracy · turnaround | vendor baseline | **−20–30% · +20–30% · −30–40%** | **14 M+** assets, live-tagging latency fixed |
+| **Alnylam** | triage · answer search | **3–4 d · 15 min** | **hours · 30 s** | **3,000** users, **250+** use cases |
+
+Reconstruct the Epilot architecture and its published numbers:
+
+```fillblank
+{
+  "question": "Complete the verified Epilot case study:",
+  "template": "Epilot's summarization pipeline runs API → {{1}} → {{2}} → Amazon Bedrock (Claude Sonnet); the model was selected with {{3}}; processed data is kept in an {{4}}; and customer-email handling time fell by {{5}}.",
+  "answers": {
+    "1": "Amazon SQS",
+    "2": "AWS Lambda",
+    "3": "Amazon Bedrock Evaluations",
+    "4": "EU Region",
+    "5": "87%"
+  },
+  "distractors": [
+    "Amazon SNS",
+    "AWS Fargate",
+    "SageMaker Clarify",
+    "us-east-1",
+    "50%"
+  ],
+  "explanation": "Epilot's published chain is API to Amazon SQS to AWS Lambda to Amazon Bedrock (Claude Sonnet), with the model chosen using Amazon Bedrock Evaluations and data kept in an EU Region; handling time fell 87% while 55,000 summaries per month were produced. Amazon SNS and AWS Fargate are not in the chain, SageMaker Clarify is a SageMaker bias/quality tool rather than the model-selection gate Epilot used, us-east-1 would defeat the documented EU residency requirement, and 50% is the batch discount rather than this case's result."
+}
+```
+
+> [!WARNING]
+> **Read customer case studies as evidence, not as guarantees.**
+> 1. **Every percentage here is unaudited.** Only Sun Finance (**n = 585 images**) and Adobe (its own test set) disclose a sample basis; the rest are directional. An exam option built on *"AWS guarantees a 90% saving"* is wrong whether the number is 66%, 75% or 87%.
+> 2. **"Up to" is a ceiling, never an average.** Headlines such as *up to −80%* (Forethought), *up to −30%* (Intelligent Prompt Routing) and *500% faster* distillation are best-case claims with a stated methodology gap — reproduce them as AWS claims, exactly as the reading rules at the top of this lesson require.
+> 3. **The documented failures are the real exam answers.** AWS published three: **DIY inference** (Forethought, before it moved off its own Amazon EKS), **LLM-only OCR** (Sun Finance's first attempt scored **61.8%** overall and **43%** on ID numbers and was rejected), and **four months of in-house CV** that never hit target (Chronomics → **3–4 weeks** on Rekognition Custom Labels). An option proposing any of these as the *first* step is wrong by construction: prebuilt or hosted first, evaluate before production, human in the tail.
+
+> **📚 Did you know?** The only production-readiness rate AWS publishes is **65%**: of more than **1,000** Generative AI Innovation Center implementations, **65% reached production in 2025** — some in as little as **45 days** — using the **Five V's** framework (**Value → Visualize → Validate → Verify → Venture**). That number is why Epilot gated its model choice on **Bedrock Evaluations**, why Sun Finance *rejected* attempt 1 instead of shipping it, and why every case file above quotes a "before" alongside the "after": the other **35%** is what you avoid by baselining the metric before you build.
 
 ---
 
@@ -787,6 +888,40 @@ flowchart TD
   ],
   "correct": 0,
   "explanation": "The Flex service tier is documented at 50% off the Standard rate and is intended exactly for non-urgent work such as evaluations, summarization and background or agentic steps, with no term commitment. Priority is 75% more expensive rather than cheaper, provisioned throughput requires a term commitment and bills hourly, a geographic profile is a routing choice at standard rates (the ~10% saving belongs to global profiles), and batch does support plain text summarization - so that last option's reasoning is false even though batch would also have been a candidate."
+}
+```
+
+```question
+{
+  "id": "aid-09-q11",
+  "type": "multiple-choice",
+  "question": "A financial-services assistant built on naive retrieval-augmented generation hallucinated heavily as document volume grew. Which fix set matches the AWS-published customer case?",
+  "options": [
+    "Raise maxTokens and temperature so the model can reason longer over each retrieved passage",
+    "Enable batch inference plus a global cross-Region inference profile to spread retrieval load",
+    "Advanced RAG on Bedrock Knowledge Bases (FM-as-parser, query reformulation, multi-query RAG, reranker models, GraphRAG, metadata filtering) plus Bedrock Guardrails and citations",
+    "Supervised fine-tune the foundation model on the entire document corpus, then serve it on Provisioned Throughput",
+    "Switch to a geographic cross-Region inference profile in a single EU Region"
+  ],
+  "correct": 2,
+  "explanation": "Nippon India's published fix was retrieval engineering on Bedrock Knowledge Bases - FM-as-parser parsing, query reformulation, multi-query RAG, reranker models, GraphRAG and metadata filtering - plus Bedrock Guardrails and citations, delivering over 95% accuracy and a 90-95% hallucination cut with reports falling from 2 days to about 10 minutes. Raising sampling parameters does not fix retrieval, batch inference is an offline discount (and cannot run tools or structured output), fine-tuning is the customization path that comes after prompting and RAG, and an inference profile changes routing and price rather than retrieval quality."
+}
+```
+
+```question
+{
+  "id": "aid-09-q12",
+  "type": "multiple-choice",
+  "question": "Amazon Bedrock's model lifecycle policy took effect on 7 September 2026 and covers models launched on or after that date. Which statement is correct?",
+  "options": [
+    "Legacy models are deleted from the catalog immediately, so every existing invocation fails",
+    "Most models receive a 6-month Legacy period (a 45-day variant exists); Legacy blocks new customers and new Provisioned Throughput orders while existing usage continues",
+    "Legacy models can no longer be invoked through any capacity mechanism, on-demand included",
+    "The policy applies only to custom models; first-party models never leave Active status",
+    "Every model moves straight from Active to end-of-life after 30 days, with no Legacy stage"
+  ],
+  "correct": 1,
+  "explanation": "The documented lifecycle is Active, Legacy, EOL: most models get a 6-month Legacy window (some get 45 days), and Legacy blocks new customers plus new Provisioned Throughput commitments while existing usage keeps working - which is why this lesson tells you to memorize access and pricing mechanisms rather than catalog rows. Immediate deletion, an on-demand invocation ban, a custom-models-only scope and a 30-day straight-to-EOL path all contradict the published policy."
 }
 ```
 

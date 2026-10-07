@@ -351,6 +351,193 @@ The fastest way to lose Set A is to start reading options before you have decide
 
 ---
 
+## 6.5 Trap Patterns & How to Beat Them
+
+Sections 4 and 6 gave you the six distractor families and the stem lookup table. This section compresses the rest of the strategy material into three artefacts you can rehearse in the final week: **a twelve-row trap map**, **a pacing plan keyed to the item ranges you can actually see on screen**, and **a short drill** that punishes the reflexes most candidates bring into the exam hall. The map is deliberately wider than section 4's six families because the live exam *recombines* them — one item can bait you with a pricing unit and an absolute claim at the same time, and only one of the four options will fail on both counts.
+
+### 6.5.1 The twelve trap families and the reflex that beats each one
+
+| # | Trap family | How the distractor baits you | Defensive technique | Spot-check you ask yourself |
+|---|---|---|---|---|
+| T1 | **Service selection** | A plausible service with the wrong core job (`Rekognition` for sentiment, `Textract` for translation) | Map **verb to service** first; prefer the AWS-native answer, then check the current scope list | "What is this service's **core job**?" |
+| T2 | **Pricing units** | One option list mixes per-token, per-hour, per-GB and per-1,000-text-unit rates | Write the **unit** beside every cost option before comparing any of them | "Billed **per what**, per **what period**?" |
+| T3 | **"Serverless" misdirection** | Implies serverless is free, instant, always-on and unlimited in payload | Recall the documented ceilings (serverless inference: **4 MB** payload, **60 s**) and the shape of the traffic | "Is the traffic **bursty or sustained**?" |
+| T4 | **Parameter direction** | Reverses the effect ("raise temperature so answers stay consistent") | **Low temperature = deterministic**; high temperature adds variance. top-k and top-p size the candidate pool | "Which knob, and which **direction**?" |
+| T5 | **RAG vs fine-tuning** | Offers fine-tuning for fresh, cited facts, or retrieval for tone and style | **Facts, citations, freshness → RAG; behaviour, style, task → fine-tune** | "New **knowledge** or new **behaviour**?" |
+| T6 | **Inference-option matrix** | Real-time offered for 1 GB payloads, batch offered for an interactive load | Key off **payload, latency and persistence** (25 MB / 60 s, 4 MB / 60 s, 1 GB / 1 h, offline) | "Payload size? Latency? Scale to zero?" |
+| T7 | **Absolute wording** | "always", "never", "must", "only", "guarantees", "100 %" | Red flag by default — prefer the hedged, evidence-based option, *unless* the rule genuinely is absolute ("never leave an item blank") | "Is this literally true with **no** exceptions?" |
+| T8 | **Near-identical options** | Two options that differ by a single qualifier | Choose the one that satisfies the stem's **exact** constraint — cost, latency, region, least privilege | "Which constraint does only **this** option satisfy?" |
+| T9 | **Responsible-AI term swaps** | Clarify, Model Monitor, Ground Truth and A2I offered interchangeably | Bias **pre-deployment** = Clarify; **drift** = Model Monitor; **labels** = Ground Truth; **human routing** = A2I | "Before, during or after deployment — and **who acts**?" |
+| T10 | **Complexity bait** | A hand-built pipeline where a managed feature already exists | Managed, least operational overhead, not over-engineered | "Can a managed service do the **whole** job?" |
+| T11 | **Metric mismatches** | BLEU for summarisation, R-squared for text, accuracy on imbalanced data | Match the **task type**: n-gram overlap, classification, regression or drift | "What **kind of output** is being scored?" |
+| T12 | **Legacy / out-of-scope service** | An old-guide favourite presented as *the* answer | Confirm against the **current** in-scope appendix; unlisted services are never the key | "Is this on the **2026** scope list?" |
+
+Two rows do most of the damage to a first attempt: **T2** (you know the service but not what it bills for) and **T5** (you know both levers but not which one this stem needs). If you only rehearse two rows of this table before exam day, rehearse those two.
+
+```fillblank
+{
+  "question": "Complete the four trap-defence reflexes from section 6.5:",
+  "template": "1) Write the {{1}} beside every cost option before comparing anything. 2) Map the stem's verb to the service's {{2}} before reading the remaining options. 3) Treat {{3}} words such as 'always' and 'guarantees' as a red flag. 4) When two options survive elimination, take the most {{4}} and least absolute one.",
+  "answers": {
+    "1": "billing unit",
+    "2": "core job",
+    "3": "absolute",
+    "4": "specific"
+  },
+  "distractors": ["domain weight", "logo", "hedged", "vague", "longest", "newest", "cheapest"],
+  "explanation": "The four reflexes are the whole defensive system in one line each: T2 is answered by the billing unit, T1 by the service's core job, T7 by distrusting absolute wording, and the final two-option tie-break by the most specific, AWS-native, least absolute choice from the guess protocol in section 3.3."
+}
+```
+
+### 6.5.2 The pacing plan, keyed to item ranges
+
+Section 3.1 splits the clock into **phases**; the plan below splits the same 90 minutes into **item ranges**, which is what you can actually count on screen. The two are compatible: ranges S1 to S4 are your first pass with ordering and matching handled where they appear, S5 is the flagged review, and both plans reserve the final three minutes exclusively for the no-blank check.
+
+| Segment | Items | Elapsed clock | Cumulative minutes used | Rule you must not break |
+|---|---|---|---|---|
+| **S1 Warm-up** | 1-10 | 0:00 → 0:12 | 12 | Read fully, decide fast; **flag** anything over 90 s |
+| **S2 Core** | 11-30 | 0:12 → 0:37 | 37 | **60 s per item**; eliminate two before you choose |
+| **S3 Slog** | 31-50 | 0:37 → 1:02 | 62 | Matching and ordering live here — do them **whole**, never partially |
+| **S4 Long tail** | 51-65 | 1:02 → 1:17 | 77 | Slower stems and case sets; still flag rather than stall |
+| **S5 Flag sweep** | all flagged | 1:17 → 1:27 | 87 | Re-read the stem, re-run elimination once |
+| **S6 Buffer** | — | 1:27 → 1:30 | 90 | Confirm **zero blanks**, then submit |
+
+*Derived check-points (arithmetic, not an AWS figure):* the ceiling is **83 s per item**; **more than three minutes on one item costs you two items** elsewhere; a sustainable flag budget is about **one flag in every six items (roughly ten in total)**; and if S2 runs five minutes over, you cut time from S5 — never from S6's blank check.
+
+- **📚 Did you know?** Because the average budget is **83 seconds**, three minutes spent re-reading one stem is not three minutes lost — it is **two whole items** pushed into your last ten minutes. Working backwards from that ceiling, the derived flag allowance is about **one flagged item in six, roughly ten flags across the exam**. Flag twenty and you have not identified the hard items; you have quietly scheduled a third of the paper for a review window that cannot hold it.
+
+### 6.5.3 Trap mini-drill: four items that punish the usual reflexes
+
+These four are deliberately short, because the trap usually resolves in the first five seconds — the moment you notice *which* unit, *which* direction or *which* window is in play. Answer all four before reading the explanations.
+
+```question
+{
+  "id": "aid-16-q16",
+  "type": "multiple-choice",
+  "question": "An extraction pipeline must return the same factual answer on every run. Which change is most appropriate?",
+  "options": [
+    "Increase the temperature toward 1",
+    "Decrease the temperature toward 0",
+    "Increase top-p to 1.0",
+    "Increase maxTokens"
+  ],
+  "correct": 1,
+  "explanation": "Low temperature steepens the probability distribution, so the model keeps choosing the highest-probability tokens and output becomes more deterministic. Raising temperature or top-p widens the candidate pool and adds randomness, and maxTokens only lengthens the response - it has no effect on consistency. This is trap T4, parameter direction."
+}
+```
+
+```question
+{
+  "id": "aid-16-q17",
+  "type": "multiple-choice",
+  "question": "Which statement about Amazon Bedrock Guardrails pricing is CORRECT?",
+  "options": [
+    "It is charged per API request, regardless of input length",
+    "It is charged per 1,000 text units, and word and regex filters are charged at no additional cost",
+    "It is charged per output token generated by the underlying model",
+    "It is charged per model attached to the guardrail configuration"
+  ],
+  "correct": 1,
+  "explanation": "Guardrails is billed per 1,000 text units (a text unit covers a fixed block of characters), and AWS documents that the word-filter and regex-filter features add no separate charge. Per-request, per-token and per-model pricing are three different billing models that Guardrails does not use - trap T2, pricing units. Once you write the unit beside each option, three of the four die without any arithmetic."
+}
+```
+
+```question
+{
+  "id": "aid-16-q18",
+  "type": "multiple-choice",
+  "question": "A candidate fails the AIF-C01 on 1 October. What is the earliest they can sit the exam again, and on what terms?",
+  "options": [
+    "After 24 hours, using the standard reschedule window",
+    "After 7 calendar days, with the retake included in the original fee",
+    "After 14 calendar days, paying the full fee again",
+    "After 2 years, when the lock on a passed exam would expire"
+  ],
+  "correct": 2,
+  "explanation": "A fail starts a 14-calendar-day wait with no cap on attempts and the full fee payable every time. The 24-hour figure belongs to rescheduling, not retaking, the 7-day figure is invented, and the 2-year lock applies only after a pass. This is trap T8: two numbers from the same policy page, only one of which answers the asked question."
+}
+```
+
+```question
+{
+  "id": "aid-16-q19",
+  "type": "multiple-choice",
+  "question": "What does compensatory scoring mean on the AIF-C01?",
+  "options": [
+    "Each domain must independently reach a scaled score of 700",
+    "Only the overall scaled score must reach 700; the domains are not individually gated",
+    "Domains scoring below 60 percent are dropped from the calculation",
+    "Domain weights are applied twice to the final total"
+  ],
+  "correct": 1,
+  "explanation": "AWS publishes a compensatory model: you need the overall pass only, with no per-domain threshold, because the published weights already shape the total. A per-domain pass mark, a dropped section and double weighting are all inventions - and believing the first one is what makes a candidate sacrifice a 14 percent domain they assume cannot sink them. Trap T7: the absolute-sounding rule that does not exist."
+}
+```
+
+### 6.5.4 Where each trap already lives in this course
+
+You do not need new material for these traps; you need to reconnect them to the lesson that owns them. Read this as your revision routing table — if a row surprises you, that lesson is your next stop.
+
+| Trap family | Where you already met it | The Set A item it imitates | The reflex to rehearse |
+|---|---|---|---|
+| **T1** Service selection | Lesson 07, prebuilt AI services | 11, 12 | Verb to service, core job first |
+| **T2** Pricing units | Lessons 09 and 15, Bedrock pricing and cost levers | 5, 6, 7 | Write the unit before comparing |
+| **T4** Parameter direction | Lesson 08, tokens, temperature, context | 4 | Low temperature = deterministic |
+| **T5** RAG vs fine-tuning | Lessons 10 and 11, knowledge bases and agents | 8, 9 | Knowledge or behaviour? |
+| **T7** Absolute wording | Lesson 12, safety and guardrails | 4 | Hedged beats absolute |
+| **T9** Responsible-AI swaps | Lesson 12, responsible AI and oversight | 12 | Before, during or after — who acts? |
+| **T10** Complexity bait | Lessons 13 and 15, MLOps and optimization | 8 | Simplest managed option wins |
+| **T11** Metric mismatches | Lesson 04, algorithms and evaluation | 1, 2, 3 | What kind of output is scored? |
+| **Over-scoped IAM** | Lesson 14, security and least privilege | 14 | Narrowest action on the narrowest ARN |
+| **Evidence vs assertion** | Lessons 14 and 15, governance and evidence | 15 | Artifact, Config, CloudTrail, Model Cards |
+
+### 6.5.5 2025–2026 Updates Quiz
+
+The trap map has one more family worth its own check: **material that changed while you were studying**. Guide v1.1 (30 April 2026) added objectives, added services to the in-scope list and removed one, and several services moved into maintenance or closed to new customers during 2025–2026. Both items below come from verified 2025–2026 changes — answer them before you read the explanations.
+
+```question
+{
+  "id": "aid-16-q20",
+  "type": "multiple-choice",
+  "question": "Exam guide v1.1 (published 30 April 2026) added seven objectives to the AIF-C01. Which of these is one of them?",
+  "options": [
+    "Gradient-descent convergence for a transformer architecture",
+    "Foundational agentic AI concepts, including Model Context Protocol, memory management, tool usage and orchestration",
+    "Hyperparameter tuning of a training job on Amazon SageMaker",
+    "Feature-store design on a Kubernetes cluster"
+  ],
+  "correct": 1,
+  "explanation": "Objective 2.1.6 on agentic AI - multi-agent patterns, MCP, memory management, tool usage and orchestration - is one of the seven new v1.1 objectives, alongside token-based pricing, context engineering, prompt versioning, business-alignment metrics, hallucination detection and grounding, and traditional ML versus foundation models. The other three options are classic build-side ML topics, and the exam targets candidates who use AI rather than necessarily build it."
+}
+```
+
+```question
+{
+  "id": "aid-16-q21",
+  "type": "multiple-choice",
+  "question": "Amazon Kendra no longer accepts new customers. An organisation needs managed enterprise search with generative question answering over its S3 content. Which service does AWS direct new workloads to?",
+  "options": [
+    "Amazon Personalize",
+    "Amazon Bedrock Managed Knowledge Base",
+    "Amazon Forecast running on SageMaker Canvas",
+    "Amazon OpenSearch Ingestion on its own"
+  ],
+  "correct": 1,
+  "explanation": "AWS moved Kendra into maintenance on 30 June 2026 and closed it to new customers on 30 July 2026, directing new search and generative question-answering workloads to Bedrock Managed Knowledge Base. Personalize is recommendation, Forecast was closed to new customers back in July 2024 and its documented replacement is SageMaker Canvas, and OpenSearch Ingestion alone is the hand-built path the managed answer exists to replace. This is trap T12, tested against a 2026 date."
+}
+```
+
+- **📚 Did you know?** **Seven objectives** were added when the guide moved from v1.0 (26 March 2026) to v1.1 (30 April 2026): traditional ML vs foundation models, token-based pricing, context engineering, agentic AI, prompt versioning, business-alignment metrics, and hallucination detection with grounding. AWS also states that guide updates reach the live exam about **one month after publication** — so an item that feels "too recent to be examined" is precisely the item v1.1 was written to test.
+
+> [!WARNING]
+> **Exam-day pitfall — stale facts and last-minute second guesses:**
+> - **A distractor can be true and still wrong** because the service behind it moved during 2025–2026. **Kendra** no longer accepts new customers (maintenance 30 June 2026, closed 30 July 2026) and AWS points new search workloads at **Bedrock Managed Knowledge Base**.
+> - **SageMaker Model Monitor** and **SageMaker Clarify** closed to new customers on **30 July 2026**. Their status is **maintenance**, not shutdown and **not** a rebrand into Bedrock Model Evaluations — but if a stem describes a *new* project, check whether the documented successor is the answer the item wants before you commit.
+> - **Amazon MemoryDB** was removed from the in-scope list on **30 April 2026**. Never key an item on a service the current guide does not list (trap T12, section 12).
+> - **Do not "fix" a correct answer during the submit sweep.** Re-read the stem, confirm you answered the *asked* question, and change an option only if you can state the reason in one clause.
+
+---
+
 ## 7. Practice Questions — Set A: 15 single-best-answer items
 
 Set A mirrors the real exam's dominant format: **one correct response, three distractors**. It is deliberately weighted like the published domains — 3 items for D1, 4 for D2, 4 for D3, 2 for D4 and 2 for D5. **Set a 15-minute timer, answer every item, and never leave one blank.** The answer key, organized by domain, follows in section 8.

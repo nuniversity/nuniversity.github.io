@@ -621,6 +621,78 @@ Amazon A2I is in maintenance: *"no longer open to new customers… we do not pla
 
 Flags on facts this lesson deliberately did **not** assert as verified: the **current** per-transition flow price; the **exact GA date** of multi-agent collaboration (aggregators show both 3 Dec 2024 and 10 Mar 2025 items); the **current supported-model list** for multi-agent; the **`executionId` field name** used to resume a multi-turn flow (the `INPUT_REQUIRED` / `SUCCESS` states are documented, the field name was not located); and the preview-vs-GA status of the `InlineCode` node.
 
+### 10.1 2025–2026 Updates
+
+Everything in this subsection was read on `docs.aws.amazon.com`, an AWS What's New post, an AWS News Blog post or the AIF-C01 exam guide itself — nothing here comes from a third-party tracker. Two groups of change matter for this lesson: what shipped **inside Amazon Bedrock AgentCore and Amazon Bedrock Flows**, and what AWS did to the **exam guide and to the services that sit around an agent**.
+
+| Agent / Flows change | Date (AWS-published) | What the exam wants you to know |
+|---|---|---|
+| **AgentCore preview** | 16 Jul 2025 | The documented migration target for Agents Classic arrives as a separate product, not as a rename |
+| Flows **DoWhile node and execution traces** | 26 Sep 2025 | Loop control plus per-step visibility inside the graph — §7.2's node list gains a documented loop construct |
+| **AgentCore GA** — nine Regions, VPC, PrivateLink, **A2A in Runtime**, **MCP in Gateway**, IAM auth | 13 Oct 2025 | A brand-new agent build has a GA target from this date onward |
+| AgentCore **Policy, Evaluations and Memory** announced | 2 Dec 2025 | Governance and evaluation join Runtime, Gateway, Identity and Observability as components |
+| AgentCore **Policy GA** — Cedar or natural language, intercepting Gateway tool calls **outside** the reasoning loop | 3 Mar 2026 | Policy is a gateway control, not a fourth orchestration phase inside the loop |
+| AgentCore **Evaluations GA** — **13 evaluators** | 31 Mar 2026 | Agent quality is checked by a managed service rather than an ad-hoc script |
+| **Amazon Q Developer** signups blocked; IDE/paid end of support 30 Apr 2027 | 15 May 2026 | The documented destination for new users is **Kiro** |
+| **Amazon Kendra** in maintenance, then closed to new customers | 30 Jun → 30 Jul 2026 | The replacement AWS names for new search builds is **Amazon Bedrock Managed Knowledge Base** (Smart Parsing + **Agentic Retrieval API**) |
+| **SageMaker Model Monitor, Clarify, Ground Truth and Amazon A2I** closed to new customers | 30 Jul 2026 | The same maintenance batch as Agents Classic: no new customers, no new features, still supported |
+
+| Exam-guide change (v1.1, published 30 Apr 2026) | Detail for an agentic-AI candidate |
+|---|---|
+| New objective **2.1.6** | Agentic AI: multi-agent patterns, **MCP**, memory management, tool usage, orchestration — the subject matter of §3 to §6 |
+| New objective **3.2.5** | Prompt versioning through **Amazon Bedrock Prompt Management** (GA 7 Nov 2024) |
+| New objectives **2.1.4** / **2.1.5** | Token-based pricing and its effect on cost and performance; **context engineering** |
+| New objective **5.1.5** | Hallucination detection and grounding — RAG grounding, output validation, confidence scoring |
+| Added to the in-scope list | **Amazon Bedrock AgentCore, Kiro, Strands Agents, Amazon Q, SageMaker JumpStart, AWS Transform, Amazon Aurora** |
+| Removed from the in-scope list | **Amazon MemoryDB** |
+| Unchanged | **65 questions (50 scored + 15 unscored)**, **90 minutes**, pass **700/1000**, domains **20 / 24 / 28 / 14 / 14** |
+
+AWS states that exam-guide updates reach the live exam about **one month after publication**, so v1.1's new objectives have been fair game since roughly **late May 2026**. Also inside this window: standalone **Bedrock Studio** was folded into **SageMaker Unified Studio** (workspaces closed 28 Feb 2025, documentation moved 25 Mar 2025), so the Flow builder and the prompt tools are now found there rather than in a separate studio.
+
+> **📚 Did you know?** AgentCore's SDK passed **2 million downloads in its first five months** after GA, and **AgentCore Evaluations** ships with **13 evaluators** — the adoption figure AWS itself published to show where new agent work is expected to land. It also explains the shape of the exam questions: scope items ask about *capabilities* (Runtime, Gateway, Identity, Memory, Observability, Harness — now joined by Policy and Evaluations) instead of about one "agent" object, because AWS decomposed a service into components rather than renaming it.
+
+---
+
+## 11. Real-World Case Studies
+
+AWS publishes few customer stories about *orchestration* as such — an internal loop is rarely photogenic — so these four are chosen because each one names its services, its numbers and its source, and each one maps onto a different branch of the decision tree in §8. Read every percentage as a **customer- or AWS-claimed, unaudited** figure, and read "up to" as a ceiling.
+
+### 11.1 The four stories
+
+**Epilot — a queue, not an agent, owns the sequence (energy software, Cologne, 2026).** Long email chains across **170+ utility customers** were draining staff time. The published pipeline is an API → **Amazon SQS** → **AWS Lambda** → **Amazon Bedrock (Claude Sonnet)**, with the model chosen using **Amazon Bedrock Evaluations** (human ratings across prompt versions) before production, and a later agent that writes records **with humans verifying**. Reported outcome: **−87%** email handling time, **55,000 summaries per month** at a negligible failure rate, **80%** of users saying it simplifies their work, an MVP in **2 months**, and processed data kept in an **EU Region**. This is §8's *"your code owns every step"* branch in production, plus two habits this lesson repeats: evaluate the model before you ship, and keep a human at the end of an automated write. Source: AWS case study, `solutions/case-studies/epilot-genai-case-study` (2026).
+
+**Prime Focus Technologies — agents where the steps differ per asset (media, 2025).** Localization (subtitling, translation, transcripts) across **14 million+ assets** on CLEAR — Disney Star, CBS, Lionsgate — is labour-heavy, and live cricket tagging needed low latency. The published architecture runs **Amazon Bedrock + AWS Lambda** agents that automate and re-review those workflows. Reported outcome: localization cost **−20–30%**, accuracy **+20–30%**, turnaround **−30–40%**. The caution inside the source is the examinable part: the **first attempt used external LLM APIs, whose latency was too high for live tagging**, and latency "dropped dramatically" once the calls ran on AWS. It is §8's *"the model chooses what to do next"* branch, with model placement as a hard requirement. Source: AWS case study, `solutions/case-studies/prime-focus-case-study` (2025).
+
+**Alnylam Pharmaceuticals — citations as the compliance feature (biotech, 2025).** Complaint triage took **3–4 days** and internal information search **15+ minutes**. From June 2023 the team built an intake/triage prototype on **Amazon Bedrock + Amazon S3** with RAG in about **3 months** under GxP constraints, plus **AskALNY**, a Slack assistant on **Amazon Q Business** that returns **source links**. Reported outcome: triage **3 days → hours**, search **15 min → 30 s**, **2,000 employees + 1,000 contractors** served, **250+ use cases** identified. The mechanism is a knowledge base underneath whatever owns the loop — and it is why §3.3 treats KB attributions as first-class: in a regulated answer, the citation *is* the audit trail. Source: AWS case study, `solutions/case-studies/alnylam-case-study` (2025).
+
+**Sun Finance — a state machine, and a rejected LLM-only prototype (fintech lending, 9 countries, 2026).** **60% of microloan applications** needed manual review, taking **10 minutes to 20 hours** each. The shipped pipeline, built with the AWS Generative AI Innovation Center, is **Amazon Textract** OCR → **Amazon Rekognition** fallback and face masking → **Claude Sonnet 4** structuring → validation rules → **Titan Multimodal Embeddings** in **S3 Vectors** for fraud similarity, coordinated with **AWS Step Functions** and **AWS Lambda**. Reported outcome: accuracy **79.73% → 90.80%**, cost per document **−91%**, processing **20 hours → under 5 seconds**, fraud detection **81%**. It is §8's state-machine branch and §4's lesson read backwards: deterministic services extract, the model structures, and every step stays auditable. Source: AWS Machine Learning Blog, `blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws` (2026).
+
+### 11.2 Services, numbers and sources at a glance
+
+| Case (year) | AWS services named in the source | Headline numbers | Source |
+|---|---|---|---|
+| **Epilot** (2026) | **Amazon Bedrock** (Claude Sonnet), **Amazon SQS**, **AWS Lambda**, **Bedrock Evaluations** | **−87%** handling time; **55,000** summaries/month; MVP in **2 months**; **EU Region** | Case study `epilot-genai-case-study` |
+| **Prime Focus** (2025) | **Amazon Bedrock**, **AWS Lambda** | **−20–30%** cost, **+20–30%** accuracy, **−30–40%** turnaround; **14 M+ assets** | Case study `prime-focus-case-study` |
+| **Alnylam** (2025) | **Amazon Bedrock**, **Amazon S3**, **Amazon Q Business** | triage **3 d → hours**; search **15 min → 30 s**; **3,000 users**; **250+ use cases** | Case study `alnylam-case-study` |
+| **Sun Finance** (2026) | **Textract**, **Rekognition**, **Bedrock** (Claude Sonnet 4), **Lambda**, **Step Functions**, **S3 Vectors** | **79.73 → 90.80%**; **−91%** cost/doc; **20 h → <5 s** | ML Blog `sun-finance-automates-id-extraction-…` |
+
+### 11.3 What each case proves against this lesson
+
+| Case | The mechanism from §8/§9 that shipped | Lesson section it proves |
+|---|---|---|
+| Epilot | **Code** — SQS and Lambda own the sequence; the model is called, not in charge | §8 — a queue is the cheapest orchestrator, and evaluation precedes production |
+| Prime Focus | **Agent** — Bedrock + Lambda agents choose the next action per asset | §4/§8 — runtime tool choice, plus latency as a placement requirement |
+| Alnylam | **Knowledge base / RAG** with source links under GxP | §3 — retrieved context and attributions are the compliance artefact |
+| Sun Finance | **Step Functions** — deterministic OCR → validation pipeline | §8 — retries, waits and audit history beat an autonomous loop for regulated extraction |
+
+> [!WARNING]
+> **How to read a customer case study.**
+> - **Every figure above is customer- or AWS-claimed and unaudited.** Only Sun Finance (**n = 585 images**) and Adobe (its own test set) disclose a sample basis, and a year chip on the page is rendered client-side — treat any year as indicative.
+> - **"Up to" is a ceiling, not an average.** Prime Focus's cost and accuracy ranges are vendor-relative and unaudited; never quote a ceiling as an expected result in either direction.
+> - **The only published outcome rate is 65%**: AWS reports that **65%** of Generative AI Innovation Center projects reached production in 2025, from **more than 1,000** implementations, some in as little as **45 days**, using the **Five V's** framework (**Value → Visualize → Validate → Verify → Venture**). AWS never claims 100%, and figures circulating without methodology — "88% of agent pilots stall", "95% of GenAI pilots fail" — are **not** AWS-published and are not examinable.
+
+> **📚 Did you know?** Sun Finance's rejected prototype is the cleanest OCR-versus-reasoning lesson in the course: attempt **1** — **Claude Sonnet 4 alone** — reached only **61.8% overall and 43% on ID numbers** and was discarded, because the model's privacy protections block direct PII extraction. Attempt **2** (Textract + Claude) hit **85%**, and the shipped pipeline with validation rules reached **90.80%** at **−91%** cost per document. The takeaway matches §4 exactly: let a deterministic service do extraction, let the model do structure, and let a state machine keep the receipt.
+
 ---
 
 ## Practice Questions
@@ -792,6 +864,40 @@ Flags on facts this lesson deliberately did **not** assert as verified: the **cu
   ],
   "correct": 0,
   "explanation": "AWS documents a limit of 10 collaborator aliases per supervisor, two modes - Supervisor, which coordinates and synthesizes, and Supervisor with routing, which picks a single collaborator for lower latency - and states that custom orchestration is unsupported alongside multi-agent collaboration. There is no model-mismatch requirement, no EventBridge restriction, and routing mode deliberately does not run collaborators in parallel."
+}
+```
+
+```question
+{
+  "id": "aid-11-q11",
+  "type": "multiple-choice",
+  "question": "Which Amazon Bedrock AgentCore timeline is CORRECT as verified in October 2026?",
+  "options": [
+    "Preview 16 Jul 2025, GA 13 Oct 2025 in nine Regions with A2A in Runtime and MCP in Gateway, Policy GA 3 Mar 2026, Evaluations GA 31 Mar 2026",
+    "GA 22 Nov 2024 alongside Amazon Bedrock Flows, with Policy and Evaluations both GA on 30 Jul 2026",
+    "Preview 3 Dec 2024, GA 16 Jul 2025, Evaluations GA 13 Oct 2025, Policy GA 2 Dec 2025",
+    "GA 13 Oct 2025, then Evaluations GA 3 Mar 2026 and Policy GA 31 Mar 2026",
+    "Preview 16 Jul 2025, GA 30 Apr 2026 with exam guide v1.1, Policy GA 15 May 2026"
+  ],
+  "correct": 0,
+  "explanation": "AWS published AgentCore as a preview on 16 July 2025 and made it generally available on 13 October 2025 in nine Regions with VPC, PrivateLink, A2A in Runtime, MCP in Gateway and IAM auth; Policy, Evaluations and Memory were announced on 2 December 2025, and the two GA dates are Policy on 3 March 2026 (Cedar or natural language, gating Gateway tool calls outside the reasoning loop) and Evaluations on 31 March 2026 with 13 evaluators. 22 November 2024 is the date Amazon Bedrock Flows GA'd, not AgentCore; 3 December 2024 is the multi-agent collaboration and Automated Reasoning preview; and the distractor that swaps the Policy and Evaluations dates is the commonest failure, because both landed a month apart in early 2026."
+}
+```
+
+```question
+{
+  "id": "aid-11-q12",
+  "type": "multiple-choice",
+  "question": "An energy-software company with 170+ utility customers must summarize long customer email threads, select the model through an evaluation step, keep processed data in an EU Region and keep humans approving what the AI writes. Which AWS-published case matches?",
+  "options": [
+    "Alnylam Pharmaceuticals - Bedrock, Amazon S3 and Amazon Q Business, triage cut from 3 days to hours",
+    "Prime Focus Technologies - Bedrock and Lambda agents on CLEAR, turnaround cut by 30-40%",
+    "Epilot - API into Amazon SQS into AWS Lambda into Bedrock (Claude Sonnet), model chosen with Bedrock Evaluations, EU Region, 87% less email handling time and 55,000 summaries per month",
+    "Sun Finance - Textract, Rekognition and Step Functions, 20 hours cut to under 5 seconds",
+    "Bynder - Amazon Titan Multimodal Embeddings in Bedrock, search time cut by 75%"
+  ],
+  "correct": 2,
+  "explanation": "Epilot's published architecture is an API feeding Amazon SQS, which triggers AWS Lambda, which calls Amazon Bedrock with Claude Sonnet; the model was selected with Amazon Bedrock Evaluations before production, a later agent writes records with humans verifying, and the processed data stays in an EU Region, for 87% less handling time across 55,000 summaries per month. Alnylam is a pharma triage and Slack assistant case, Prime Focus is a media localization agent case with a latency caution, Sun Finance is a fintech OCR-plus-validation state machine, and Bynder is a multimodal embedding search case - none of them matches an EU-Region email summarization pipeline with a queue at its centre."
 }
 ```
 

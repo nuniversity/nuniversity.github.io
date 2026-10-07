@@ -648,6 +648,93 @@ To keep a research gap from becoming a wrong answer: **PCI DSS scope for Amazon 
 
 ---
 
+## Real-World Case Studies
+
+Five AWS-published customer stories, retrieved for this course on 06 Oct 2026, exercise Domain 2 controls in production. Read them as **evidence, not marketing**: every percentage below is a **customer/AWS-claimed, unaudited** figure, and only Sun Finance (**n = 585** images) and Adobe (their own test set) disclose a sample basis. The exam will not ask you to recall these numbers — it asks you to recognise which **control** each one proves.
+
+### Case-study evidence for Domain 2
+
+| # | Case (source) | Domain 2 control exercised | AWS services | Documented outcome |
+|---|---|---|---|---|
+| 1 | **Epilot** (energy software, Cologne) — `aws.amazon.com/solutions/case-studies/epilot-genai-case-study` | **data residency** + human approval in the loop | Bedrock (Claude Sonnet), AWS Lambda, Amazon SQS, Bedrock Evaluations | **−87 %** email handling time; **55,000** summaries/month; MVP in **2 months**; processed data kept in an **EU Region** |
+| 2 | **Alnylam Pharmaceuticals** (biotech) — `aws.amazon.com/solutions/case-studies/alnylam-case-study` | **GxP auditability**: every answer carries source links | Bedrock, Amazon S3, Amazon Q Business | triage **3 days → hours**; search **15 min → 30 s**; **2,000 employees + 1,000 contractors**; **250+** use cases |
+| 3 | **Nippon India Mutual Fund** (financial services) — ML Blog `blogs/machine-learning/how-nippon-india-mutual-fund-improved-the-accuracy-of-ai-assistant-responses-using-advanced-rag-methods-on-amazon-bedrock` | **Guardrails + grounding** as hallucination control | Bedrock Knowledge Bases, Bedrock Guardrails, Claude 3 Sonnet, reranker | accuracy **+>95 %**; hallucination **−90–95 %**; reports **2 days → ~10 minutes** |
+| 4 | **Sun Finance** (fintech lending, 9 countries) — ML Blog `blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws` | **PII is not an LLM's job**: OCR and reasoning are separated | Amazon Textract, Amazon Rekognition, Bedrock (Claude Sonnet 4), Lambda, Step Functions, S3 Vectors | accuracy **79.73 → 90.80 %**; **−91 %** cost/document; **20 h → <5 s**; fraud **81 %** |
+| 5 | **Chronomics** (health-tech) — ML Blog `blogs/machine-learning/chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels` | **human path for low-confidence output** (A2I) | Amazon Rekognition Custom Labels | **4 months → 3–4 weeks**; **96.5 %** accuracy / **97.9 %** F1; threshold **0.99** discards **5 %** of predictions |
+
+### What the cases actually prove
+
+| Control question | Case evidence | The number or setting that answers it |
+|---|---|---|
+| **Where does the data live?** | Epilot | an **EU Region**, under Bedrock's default zero-retention posture — residency is an architecture choice, not a compliance afterthought |
+| **Who is allowed to write?** | Epilot | a later agent writes records **only after humans verify** — the "agent acts unattended" option is wrong |
+| **Is the answer auditable?** | Alnylam | **source links on every response**; GxP wants a playbook, not a black box |
+| **Does retrieval + guardrails fix hallucination?** | Nippon India | **−90–95 %** hallucination, from *retrieval engineering* rather than a bigger model |
+| **Can a foundation model read PII directly?** | Sun Finance | **No.** The LLM-only first attempt scored **61.8 %** overall (**43 %** on ID number) and was **rejected**; Textract + Rekognition + Claude reached **90.80 %** |
+| **What happens to low-confidence output?** | Chronomics | **5 %** of predictions are discarded at threshold **0.99** (27 % at 0.999) — someone must own that tail: **Amazon A2I** or an equivalent human path |
+
+The failure patterns are as examinable as the successes: **DIY inference** (Forethought abandoned its own Amazon EKS stack for SageMaker multi-model endpoints at **−66 %** and Serverless Inference at **≈−80 %**), **LLM-only OCR** (Sun Finance, above) and **in-house custom computer vision** (Chronomics, four months versus three-to-four weeks). Each is a question about *choosing the right tier*, which is Domain 1 — but each also has a Domain 2 tail: who owns the credentials, where the data sits, and what evidence you can produce afterwards.
+
+- **📚 Did you know?** AWS publishes exactly **one** project-outcome rate: **65 %** of Generative AI Innovation Center projects reached production in 2025 (some in as little as **45 days**), drawn from **more than 1,000** implementations and organised around the **Five V's** framework — *Value → Visualize → Validate → Verify → Venture*. The other **35 %** did not ship. Any option claiming "all AWS generative AI pilots succeed" contradicts AWS's own blog.
+
+```fillblank
+{
+  "question": "Complete the governance statement that all five cases support:",
+  "template": "Cross-account sharing needs an Allow in the {{1}} policy AND the {{2}} policy; residency is chosen with {{3}} cross-Region inference; and low-confidence model output must be routed to a human path such as {{4}}.",
+  "answers": {
+    "1": "identity",
+    "2": "resource",
+    "3": "Geographic",
+    "4": "Amazon A2I"
+  },
+  "distractors": ["permissions boundary", "SCP", "Global", "AWS Artifact"],
+  "explanation": "The cross-account rule always needs an Allow in both the identity policy and the resource policy; data residency inside the EU, US or APAC geography is the job of Geographic cross-Region inference (Global mode routes worldwide for about 10% less); and the discarded low-confidence tail that Chronomics measured is exactly what Amazon A2I exists to absorb. A permissions boundary and an SCP only cap permissions - they never grant - and AWS Artifact is where audit reports live, not a human-review mechanism."
+}
+```
+
+---
+
+## Regulation and AWS service changes
+
+### 2025–2026 Updates
+
+Everything below was verified for this course on 06 Oct 2026 and comes from first-party sources: the European Commission's regulatory-framework page, AWS's own certification and service-availability notices, and AWS product pages. Dates are **staged**, and collapsing them is the classic way to lose this mark.
+
+| Date | Change (source) | Why Domain 2 cares |
+|---|---|---|
+| **1 Feb 2024 → 1 Aug 2024** | EU AI Act (Reg. (EU) 2024/1689) **enters into force** | the clock starts; obligations phase in over 2025–2028 |
+| **2 Feb 2025** | **Prohibited practices + AI literacy** obligations apply | banned-use screening becomes a live governance duty |
+| **10 Jul 2025** | EU **GPAI Code of Practice** final (voluntary) | the reference good practice for general-purpose models |
+| **2 Aug 2025** | **GPAI obligations + governance structure + penalties** apply; systemic-risk threshold **10²⁵ FLOP** | duties fall on *model providers*, not on every customer |
+| **13 Oct 2025** | **Amazon Bedrock AgentCore GA** (9 Regions, VPC, PrivateLink, IAM authentication) | a new identity and audit surface for agents |
+| **2 Dec 2025** | AgentCore **Policy / Evaluations / Memory** announced | Policy intercepts Gateway tool calls with **Cedar** or natural language, *outside* the reasoning loop |
+| **3 Mar 2026 / 31 Mar 2026** | AgentCore **Policy GA** / **Evaluations GA** (13 evaluators) | enforceable agent policy and measurable quality |
+| **30 Apr 2026** | **AIF-C01 exam guide v1.1** published (v1.0 was 26 Mar 2026); AWS states new content appears on the exam **~1 month later** | adds agentic AI, **MCP**, context engineering, token-based pricing and grounding; adds AgentCore, Kiro, Strands Agents; **removes Amazon MemoryDB** |
+| **27 Jul 2026** | **Digital Omnibus** — Reg. (EU) 2026/1744 — in force (OJ 24 Jul 2026) | amends the AI Act timetable; defers the high-risk Annex III date |
+| **30 Jul 2026** | SageMaker **Model Monitor, Clarify, Ground Truth, A2I, Debugger, Role Manager, Geospatial, Studio Lab** closed to new customers (**maintenance**); **Amazon Kendra** closed, → **Bedrock Managed Knowledge Base** | **Role Manager** is taught in §2.1 of this lesson; Clarify is superseded for new work by **Bedrock Model Evaluations** |
+| **2 Aug 2026** | EU **general application**: Article 50 transparency duties + **AI Office GPAI fining** begins | transparency and enforcement are now live |
+| **2 Dec 2026** | Art. 50(2) **marking** deadline for systems already on the market | AI-generated content must be identifiable |
+| **2 Dec 2027 / 2 Aug 2028** | **Annex III** high-risk / **Annex I** high-risk obligations | deferred by the Digital Omnibus — not 2 Aug 2026 |
+
+**Penalty ceilings under the EU AI Act:**
+
+| Breach | Maximum fine |
+|---|---|
+| Prohibited practices (Art. 5) | **€35 M or 7 %** of global annual turnover, whichever is higher |
+| Most other breaches (incl. GPAI Art. 101) | **€15 M or 3 %** |
+| Supplying misleading information to the AI Office | **€7.5 M or 1 %** |
+
+Two governance frameworks sit behind those dates and are still voluntary: the **NIST AI Risk Management Framework** (AI 100-1, Jan 2023 — **Govern, Map, Measure, Manage**, **19 categories / 72 subcategories**) with its **Generative AI Profile NIST AI 600-1** (Jul 2024, **12 risks**), and **ISO/IEC 42001:2023** (Dec 2023), the **first certifiable AI Management System**. AWS's own position is unchanged by all of this: compliance evidence comes from **AWS Services in Scope** and **AWS Artifact**, and HIPAA still means **BAA + HIPAA-eligible services**.
+
+- **📚 Did you know?** AWS defines a three-word service lifecycle that shows up in exam options: **Maintenance** (no new customers, no new features, still supported), **Sunset** (planned end of operations, typically 12 months) and **Full Shutdown** (removed from the portfolio). On **30 Jul 2026** a large block of SageMaker features — including **Role Manager** — moved to *maintenance*, which is why old study notes describing them as "the current path for a new workload" are already wrong.
+
+> [!WARNING]
+> **Two 2026 changes that invalidate older study notes.**
+> 1. **SageMaker Model Monitor, Clarify, Ground Truth, A2I, Debugger, Role Manager, Geospatial, Studio Lab and Mechanical Turk closed to new customers on 30 July 2026.** The status is **maintenance** — not a shutdown, not a rebrand: existing customers keep them, no new features are planned. An option proposing "enable SageMaker Clarify for a brand-new Bedrock workload" is a dated answer; the current paths are **Bedrock Model Evaluations** and **Bedrock Guardrails**. Likewise **Amazon Kendra** (maintenance 30 Jun 2026, closed to new customers 30 Jul 2026) routes new search workloads to **Bedrock Managed Knowledge Base**. Note the trap in the opposite direction: **Ground Truth Plus** ends support **30 Jun 2026** and Mechanical Turk **30 Sep 2026** — "maintenance" and "end of support" are different words for different things.
+> 2. **EU AI Act dates are staged — do not collapse them.** Prohibitions **2 Feb 2025**; GPAI + penalties **2 Aug 2025**; Article 50 transparency + enforcement **2 Aug 2026**; Annex III high-risk **2 Dec 2027**; Annex I high-risk **2 Aug 2028**. "The AI Act applied in full on 1 August 2024" and "high-risk duties began 2 August 2026" are both wrong — and remember the Digital Omnibus (Reg. (EU) 2026/1744, in force **27 Jul 2026**) is the reason the Annex III date moved.
+
+---
+
 ## Practice Questions
 
 ```question
@@ -807,6 +894,38 @@ To keep a research gap from becoming a wrong answer: **PCI DSS scope for Amazon 
   ],
   "correct": 0,
   "explanation": "Bedrock's published set is ISO, SOC, CSA STAR Level 2, GDPR, HIPAA eligible and FedRAMP High in AWS GovCloud (US-West), supplemented by a per-model FedRAMP matrix published 18 September 2026. No CSP holds a HIPAA certification, PCI DSS is not stated on Bedrock's own pages (so it must not be asserted), and 143 is the count of AWS compliance offerings across all services - not programs listed on any single service page."
+}
+```
+
+```question
+{
+  "id": "aid-14-q11",
+  "type": "multiple-choice",
+  "question": "A team is starting a NEW workload in October 2026 and plans to use SageMaker Clarify for bias and SageMaker Model Monitor for drift, because their study notes from 2024 recommend both. What is the correct 2026 guidance?",
+  "options": [
+    "Both remain fully open to new customers, with new features planned",
+    "Both are in full shutdown and unavailable to everyone",
+    "Both closed to new customers on 30 July 2026 - status is maintenance, not shutdown - so a new workload should use Bedrock Model Evaluations and Bedrock Guardrails instead",
+    "Both were simply rebranded as Bedrock Model Evaluations, so the old names still work"
+  ],
+  "correct": 2,
+  "explanation": "AWS's availability notice lists Model Monitor, Clarify, Ground Truth, A2I, Debugger, Role Manager, Geospatial, Studio Lab and Mechanical Turk as no longer open to new customers from 30 July 2026. Maintenance means existing customers keep them with no new features - it is neither a shutdown nor a rename - so for a new workload AWS points to Bedrock Model Evaluations and Bedrock Guardrails. Related: Amazon Kendra closed to new customers the same day and directs new search workloads to Bedrock Managed Knowledge Base."
+}
+```
+
+```question
+{
+  "id": "aid-14-q12",
+  "type": "multiple-choice",
+  "question": "Under the EU AI Act as amended by the Digital Omnibus (Reg. (EU) 2026/1744), when do Article 50 transparency duties apply, and what is the penalty ceiling for prohibited practices?",
+  "options": [
+    "2 February 2025; €7.5 million or 1% of global annual turnover",
+    "2 August 2026, with a 2 December 2026 marking deadline for systems already on the market; €35 million or 7% of global annual turnover",
+    "2 December 2027; €15 million or 3% of global annual turnover",
+    "2 August 2025; €35 million or 7% of global annual turnover"
+  ],
+  "correct": 1,
+  "explanation": "The Act entered into force on 1 August 2024 and phases in: prohibitions and AI literacy 2 Feb 2025, GPAI obligations and penalties 2 Aug 2025, general application with Article 50 transparency duties and AI Office GPAI fining on 2 Aug 2026 (marking deadline 2 Dec 2026 for systems already on the market), Annex III high-risk 2 Dec 2027 and Annex I high-risk 2 Aug 2028. The Digital Omnibus deferred only the high-risk dates. Prohibited practices carry the top tier - EUR 35 million or 7% of global annual turnover - while most other breaches are EUR 15 million or 3% and misleading information to the AI Office is EUR 7.5 million or 1%."
 }
 ```
 

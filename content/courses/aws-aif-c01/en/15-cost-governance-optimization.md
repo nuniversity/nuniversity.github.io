@@ -649,6 +649,22 @@ COMMITMENT LADDER (what you may quote, all verified 06 Oct 2026)
 ------------------------------------------------------------------
 ```
 
+```fillblank
+{
+  "question": "Fill in the AWS-published discount ceilings (all verified 06 Oct 2026):",
+  "template": "Spot is up to {{1}}% off, Compute Savings Plans up to {{2}}%, SageMaker AI Savings Plans up to {{3}}%, Database Savings Plans up to {{4}}% (1-year term only), and Amazon Bedrock Batch bills {{5}}% of the on-demand token price.",
+  "answers": {
+    "1": "90",
+    "2": "66",
+    "3": "64",
+    "4": "35",
+    "5": "50"
+  },
+  "distractors": ["72", "60", "40", "25", "80"],
+  "explanation": "Spot 90%, Compute Savings Plans 66%, SageMaker AI Savings Plans 64%, Database Savings Plans 35% and Bedrock Batch 50% are the figures AWS publishes (aws.amazon.com and docs.aws.amazon.com, verified 06 Oct 2026). 72% is a real ceiling but belongs to EC2 Instance Savings Plans, not to any of these five levers, and 60/40/25/80 are not AWS-published ceilings at all - they are the folklore percentages this lesson warns against."
+}
+```
+
 ---
 
 ## 9. Governance and cost in one operating rhythm
@@ -683,6 +699,85 @@ The exam rewards **dated, sourced numbers**. This is exactly what this lesson wi
 | Bedrock Guardrails **€0.2587283 / €0.1724855 per 1,000 text units** | Official but **EUR** (aws.eu, 07 Aug 2026); USD equivalent not retrieved → **(G)** |
 | GPT-5.6 Sol promo **$4/$20 per 1M** through 21 Nov 2026 | **Aggregator**, not AWS (22 Aug 2026) |
 | "Right-sizing saves 30–60 %" | **No AWS-published figure exists** |
+
+---
+
+## 11. 2025–2026 Updates
+
+The prices and the tooling behind this domain did not stand still between mid-2025 and late 2026. Every change below carries a date, because an undated number is unusable on this exam — and because several rows retire tools that older study guides still recommend paying for.
+
+**Table A — pricing, cost-tooling and availability changes, each with its date (researched 06 Oct 2026):**
+
+| Date | Change | Cost / governance relevance |
+|---|---|---|
+| **16 Jul 2025** → **13 Oct 2025** | **Amazon Bedrock AgentCore** preview → **GA** (9 Regions, VPC, PrivateLink, MCP in Gateway, IAM) | a metered agent runtime — usage-priced with **no capacity commitment**, the opposite of Provisioned Throughput (aws.amazon.com/about-aws/whats-new/2025/10/amazon-bedrock-agentcore-available/, 13 Oct 2025) |
+| **09 Oct 2025** | **Amazon QuickSight → Amazon Quick Suite** | Author Pro seat price cut from **$50 to $40** (aws.amazon.com/blogs/aws/reimagine-the-way-you-work-with-ai-agents-in-amazon-quick-suite/, 09 Oct 2025) |
+| **02 Dec 2025** | **Nova 2 Sonic GA** (`amazon.nova-2-sonic-v1:0`, 7 languages) and **Nova 2 Omni preview** | new speech and multimodal generation meters enter the model-choice lever (AWS What's New, 02 Dec 2025) |
+| **01 Feb 2026** | Six open-weight models on Bedrock — **DeepSeek V3.2, MiniMax M2.1, GLM 4.7 / 4.7 Flash, Kimi K2.5, Qwen3 Coder Next** — on **Project Mantle** | more low-cost routing and downgrade targets for the "downgrade with evaluations" lever (aws.amazon.com/about-aws/whats-new/2026/02/amazon-bedrock-adds-support-six-open-weights-models/, 01 Feb 2026) |
+| **17 Feb 2026** | **Claude Sonnet 4.6** on Bedrock (1M context, 64K output) | a new token rate to date your arithmetic with — never quote it bare (docs.aws.amazon.com model card, 17 Feb 2026) |
+| **30 Apr 2026** | **Exam guide v1.1** published (v1.0 was 26 Mar 2026) | adds objective **2.1.4 — the token-based pricing model and its effect on inference cost and performance**; AWS says guide updates appear on the exam about **one month** after publication (docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/, 30 Apr 2026) |
+| **15 May 2026** | **Amazon Q Developer signups closed**; IDE and paid tiers **end of support 30 Apr 2027** | a billed tool in sunset — do not build a multi-year cost model on it (aws.amazon.com/blogs/devops/amazon-q-developer-end-of-support-announcement/, 15 May 2026) |
+| **30 Jun 2026** | **Amazon Kendra** enters maintenance mode; **Ground Truth Plus** end of support | enterprise-search and labelling budgets migrate to successors (docs.aws.amazon.com/kendra/latest/dg/kendra-availability-change.html, 30 Jun 2026) |
+| **30 Jul 2026** | **SageMaker Model Monitor, Clarify, Ground Truth, A2I, Debugger, Role Manager, Geospatial, Studio Lab** and **Amazon Kendra** closed to new customers | monitoring and search cost plans must target **CloudWatch metrics and anomaly detection**, **Bedrock Model Evaluations** and **Bedrock Managed Knowledge Base** instead (docs.aws.amazon.com, 30 Jul 2026) |
+| **07 Sep 2026** | Bedrock **model lifecycle policy**: Active → Legacy → EOL, most models get a **6-month Legacy** window | Legacy blocks new customers **and new Provisioned Throughput** — a 1- or 3-year commitment can outlive the model it was bought for (docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle.html, 07 Sep 2026) |
+| **08 Sep 2026** / **05 Oct 2026** | **OpenAI GPT-6 Astra GA** / **Z.ai GLM 5.3 GA** (753B total, 40B active) on Bedrock | new premium-tier token rates — re-check the output-vs-input gap before you route traffic |
+| **15 Oct 2026** | AIF-C01 **Italian and German** languages retired | exam-administration change only; still AIF-C01, **65 questions**, **90 minutes**, pass **700/1000** (aws.amazon.com/certification, 06 Oct 2026) |
+
+**Table B — the Bedrock cost-lever rates you may quote for 2025–2026 (aws.amazon.com/bedrock/pricing and AWS blogs, verified 06 Oct 2026):**
+
+| Lever | Published rate or rule | Date |
+|---|---|---|
+| Prompt cache **read** (Claude / GPT class) | **−90 %** of the input price | 06 Oct 2026 |
+| Prompt cache **read** (Nova class) | **−75 %** | 06 Oct 2026 |
+| Prompt cache **write** | **+25 % (1.25×)** at the 5-minute TTL, **+100 % (2×)** at the 1-hour TTL; TTL refreshes **free per hit** | 06 Oct 2026 |
+| **Batch inference** | **−50 %** of on-demand — and **never combinable with prompt caching** | 06 Oct 2026 |
+| **Intelligent Prompt Routing** | **$1.00 per 1,000 requests** (billed per request, not per token), up to **30 %** cheaper | 06 Oct 2026 |
+| **Simple Prompt Optimizer** | **$0.03 per 1,000 tokens** | 06 Oct 2026 |
+| **Model Distillation** | **75 % cheaper**, "500 % faster", **≤ 2 % accuracy loss** | 06 Oct 2026 |
+| Nova Micro / Nova Lite / Nova Pro | **$0.035 / $0.14**, **$0.06 / $0.24**, **$0.80 / $3.20** per 1M input / output tokens | 06 Oct 2026 |
+| Quick Suite Author Pro seat | **$50 → $40** | 09 Oct 2025 |
+
+> [!WARNING]
+> **"Closed to new customers" is not "shut down", and it is not a rebrand.** AWS's service-lifecycle vocabulary (docs.aws.amazon.com/general/latest/gr/service-lifecycle.html, 24 Sep 2026) is exact: **Maintenance** = no new customers, no new features, still supported; **Sunset** = planned end of operations, typically about 12 months out; **Full Shutdown** = removed from the portfolio. On **30 Jul 2026** SageMaker **Model Monitor** and **Clarify** entered *maintenance* — existing customers keep them and nothing is deleted — while **Amazon Kendra** closed to new customers the same day and points to **Bedrock Managed Knowledge Base**. Exam options claiming those tools were "rebranded as Bedrock Model Evaluations" or "disabled for everyone" are both wrong; the correct answer is *still usable by existing customers, no new features planned*.
+
+- **📚 Did you know?** The **AIF-C01 exam guide v1.1**, published **30 Apr 2026**, added seven objectives — among them **2.1.4 (token-based pricing and its effect on cost and performance)**, **2.1.5 (context engineering)** and **2.1.6 (agentic AI: MCP, memory management, tool usage, orchestration)** — while **Amazon MemoryDB** was removed from scope (docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/, 30 Apr 2026). So the cost arithmetic you have been practising in this lesson is not a legacy topic: AWS wrote it into the exam guide itself, roughly one month before those objectives started appearing on live questions.
+
+---
+
+## Real-World Case Studies
+
+A pricing page is an abstraction; these are the same levers with a customer's name attached. All figures below are **customer- or AWS-claimed and unaudited** — only Sun Finance (n = 585 images) and Adobe (own test set) disclose a sample basis — and "**up to**" is always a **ceiling**, never an average.
+
+| Case (source, year) | AWS services | Cost / efficiency outcome |
+|---|---|---|
+| **Forethought** — SaaS customer support, 30M interactions/yr, 3-person team (aws.amazon.com/solutions/case-studies/forethought-technologies-case-study; **no year on page → (G)**) | **SageMaker multi-model endpoints**, **Serverless Inference**, Model Deployment — migrated **off self-managed Amazon EKS** | **−66 %** with multi-model endpoints, **≈−80 %** with Serverless (headline **up to −80 %**); **>80 %** of GPU inference on SageMaker |
+| **Sun Finance** — fintech lending, 9 countries (aws.amazon.com/blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws, 30 Apr 2026) | **Textract** OCR → **Rekognition** fallback → **Claude Sonnet 4** structuring → **Titan Multimodal Embeddings** in **S3 Vectors** | **−91 %** cost per document; accuracy **79.73 % → 90.80 %**; **20 h → <5 s**; fraud detection **81 %** |
+| **HAYAT HOLDING** — MDF panel manufacturing, 194 sensors (aws.amazon.com/blogs/machine-learning/hayat-holding-uses-amazon-sagemaker-to-increase-product-quality-and-optimize-manufacturing-output-saving-300000-annually, 2023) | **AWS IoT Greengrass** (SiteWise Edge Gateway) + **SageMaker** training, **Automatic Model Tuning**, deployment, **Edge Manager** | **$300,000 per year** saved |
+| **RareJob** — EdTech speaking-test scoring (aws.amazon.com/solutions/case-studies/rare-job-case-study, 2020) | **SageMaker managed spot training** + **AWS Glue** + **Amazon Athena** | **−25 %** training time, **>10×** developer efficiency, **100 hours/month** saved, scores in 2–3 minutes |
+| **Prime Focus Technologies** — media localization, 14M+ assets (aws.amazon.com/solutions/case-studies/prime-focus-case-study, 2025) | **Amazon Bedrock** + **AWS Lambda** agents | localization **cost −20–30 %**, accuracy **+20–30 %**, turnaround **−30–40 %** |
+
+**Forethought — the DIY tax.** A three-person team was running models *and* Kubernetes; moving off its own Amazon EKS to **multi-model endpoints** consolidated GPU capacity (**−66 %** *with better latency*), and **Serverless Inference** took the idle-endpoint bill to roughly **−80 %** for the small classifiers. Those are exactly the two levers from sections 3.4 and 2.1 — consolidation, then scale-to-zero. Note what the case does **not** publish: no Spot figure, no Savings Plan figure. Do not import this lesson's 90 %/64 % ceilings into a case that never claimed them.
+
+**Sun Finance — pay each meter for the job it is best at.** Textract bills **per page** ($0.0015–$0.070 per page, 06 Oct 2026) while Claude bills **per token**; splitting OCR from structuring cut cost per document by **91 %** and lifted accuracy from **79.73 % to 90.80 %** across a **585-image** evaluation set. The documented first attempt — Claude Sonnet 4 alone — scored **61.8 %** overall and **43 %** on ID numbers and was **rejected**, because AWS's privacy protections block direct PII extraction. LLM-only extraction is not the cheap option; it is a failed prototype with a token bill attached.
+
+**HAYAT HOLDING — managed beats self-built.** "Time-consuming and cumbersome" self-built ML environments gave way to **Automatic Model Tuning** over 194 OPC-UA sensor streams with **SageMaker Edge Manager** running models on-device, for a published **$300,000 per year** saving (2023). The lever here is not a discount percentage at all — it is **removing the labour** the TCO table in section 8.2 says dominates for small teams.
+
+**RareJob — right-size and managed-service first, discount second.** The team went local PC → EC2/ECS (still too expensive) → **SageMaker managed spot training** fed by Glue and Athena: **−25 %** training time, **>10×** developer efficiency and **100 hours per month** back (2020). Spot's published ceiling is **up to 90 % off with two minutes' notice** (06 Oct 2026), but the case's own numbers are throughput and labour, not price per hour — quote them that way.
+
+**Table — the AWS-published Bedrock lever figures behind these outcomes (AWS News Blog, 2024; AWS Cloud Financial Management, 2025; all re-verified 06 Oct 2026):**
+
+| Lever | AWS-published figure |
+|---|---|
+| **Prompt caching** | **−90 %** cost, **−85 %** latency |
+| **Intelligent prompt routing** | **−30 %** |
+| **Model distillation** | **−75 %** at **≤ 2 % accuracy loss** |
+| **Batch inference** | **−50 %** |
+| **Provisioned Throughput** (right-sized) | **40–60 %** |
+
+- **📚 Did you know?** AWS publishes exactly **one** production-rate across its entire generative-AI case corpus: **65 %** of Generative AI Innovation Center projects reached production in 2025 — some in as little as **45 days** — out of **more than 1,000** implementations, using the **Five V's** framework (Value → Visualize → Validate → Verify → Venture) (aws.amazon.com/blogs/machine-learning/beyond-pilots-a-proven-framework-for-scaling-ai-to-production, 2025). The implicit other **35 %** is the part customer-story pages leave out, and AWS itself never claims a higher figure.
+
+> [!WARNING]
+> **Three traps inside case-study numbers.** (1) The year chips on `aws.amazon.com/solutions/case-studies/*` are rendered client-side, so several pages (Forethought, Bynder, Prime Focus, Alnylam) show **no year** in the HTML → **(G)** — quote the case, not a year you cannot see. (2) Every percentage is **customer/AWS-claimed and unaudited**; only Sun Finance (n = 585) and Adobe (own test set) disclose a sample basis. (3) "**Up to**" is a ceiling: Forethought's headline is *up to* **−80 %**, not *an average of* **−80 %** — and an exam option that turns a case-study ceiling into a guarantee is wrong even when the number itself is real.
 
 ---
 
@@ -845,6 +940,38 @@ The exam rewards **dated, sourced numbers**. This is exactly what this lesson wi
   ],
   "correct": 1,
   "explanation": "33,000 x 999 = 32.967 MTok of reads x $0.30 = $9.89, plus one write of 41,250 tokens (33,000 x 1.25) x $3.75/MTok = $0.15, giving about $10.05 per day - roughly a 90% reduction from $99 (rates from a 2026 AWS Builder Center post; the official Bedrock caching mechanics of read 0.1x, 5-minute write 1.25x and 1-hour write 2x are documented for 2026). Cached input is discounted, not free, a changed prefix bills the 1.25x write premium on every request, and caching is independent of Batch mode."
+}
+```
+
+```question
+{
+  "id": "aid-15-q11",
+  "type": "multiple-choice",
+  "question": "A weekly offline job sends 100 million input tokens to Amazon Nova Pro at $0.80 per 1M input tokens (aws.amazon.com/bedrock/pricing, verified 06 Oct 2026). The model supports Amazon Bedrock Batch at 50% of the on-demand token price. What is the ANNUAL saving from switching the job to Batch?",
+  "options": [
+    "$2,080",
+    "$1,040",
+    "$80",
+    "$4,160"
+  ],
+  "correct": 0,
+  "explanation": "100M input tokens x $0.80 per 1M = $80.00 per week on-demand; Bedrock Batch bills 50% of the on-demand token price for supported models (aws.amazon.com/bedrock/pricing, verified 06 Oct 2026), so the job costs $40.00 per week. The weekly saving of $40.00 x 52 weeks = $2,080.00 per year. $1,040 is only half of that (a 26-week year), $80 is one week of the on-demand bill with no discount applied, and $4,160 double-counts by discounting the saving again. The price of the discount is async latency, and prompt caching cannot be stacked on top of Batch."
+}
+```
+
+```question
+{
+  "id": "aid-15-q12",
+  "type": "multiple-choice",
+  "question": "Forethought, a three-person SaaS support team processing 30 million interactions per year, migrated off its self-managed Amazon EKS inference stack. Which pair of documented outcomes matches the AWS case study?",
+  "options": [
+    "66% lower cost with SageMaker multi-model endpoints and about 80% lower cost with Serverless Inference",
+    "90% lower cost from Spot training and 64% lower cost from a SageMaker Savings Plan",
+    "50% lower cost from Bedrock Batch and 90% lower cost from prompt caching",
+    "72% lower cost from an EC2 Instance Savings Plan and 66% lower cost from a Compute Savings Plan"
+  ],
+  "correct": 0,
+  "explanation": "The AWS case study reports -66% via SageMaker multi-model endpoints (with better latency) and approximately -80% (headline up to -80%) via Serverless Inference, with more than 80% of GPU inference running on SageMaker (aws.amazon.com/solutions/case-studies/forethought-technologies-case-study). The other options quote real AWS ceilings - Spot 90%, SageMaker SP 64%, Batch 50%, cache reads 90%, EC2 Instance SP 72%, Compute SP 66% (all verified 06 Oct 2026) - but this case publishes none of them: an exam option that attaches a generic discount figure to a customer outcome that never claimed it is wrong."
 }
 ```
 
