@@ -1,0 +1,13 @@
+{
+  "area": "Cloud & AI/ML",
+  "author": "NUniversity",
+  "difficulty": "beginner",
+  "duration": "8 weeks",
+  "icon": "cloud-architecture",
+  "en": {
+    "title": "AWS Certified Cloud Practitioner (CLF-C02) Complete Course",
+    "description": "Comprehensive preparation for the AWS Certified Cloud Practitioner (CLF-C02) exam covering cloud concepts and economics, security and compliance, AWS global infrastructure and core services, and billing, pricing, and support — with architecture diagrams, real AWS customer case studies, and exam-style practice questions including multiple-response drills.",
+    "difficulty": "Beginner",
+    "duration": "8 Weeks"
+  }
+}
