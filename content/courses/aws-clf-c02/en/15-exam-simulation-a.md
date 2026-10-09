@@ -321,6 +321,98 @@ These points are flagged rather than taught, because a digest marked *(G)* is ne
 
 ---
 
+## Real-World Case Drills
+
+AWS never prints a customer's name on a CLF-C02 item, but the *shapes* of its published case studies leak into stems constantly: one sentence from a case study becomes the stem's condition, and the four options become the four ways candidates mis-read it. The two drills below convert real AWS case studies into short scenario analyses to run **before** Set A — each one ends with *which domain this tests* and *what the exam would ask*.
+
+Two rules govern everything in this section:
+
+1. **A customer result is never an AWS guarantee.** "Zendesk reduced costs by up to 42 %" is Zendesk's reported outcome on an AWS page; AWS commits to no percentage. Any option phrased "AWS guarantees…" is wrong on sight.
+2. **The domain is chosen by the qualifier, not by the story.** The same Capital One narrative seeds a Domain 1 stem (agility), a Domain 3 stem (services) or a Domain 4 stem (cost) depending on which clause the exam underlines — exactly the section 1.4 reflex.
+
+### Case Drill 1 — Capital One "all in on AWS": which domain does an agility story test?
+
+**The story as AWS publishes it** (AWS customer case-study pages, accessed Oct 2026):
+
+| Element | What AWS published |
+|---|---|
+| **Challenge** | Eight on-premises data centers plus a hardware-refresh cycle, and the need to scale for machine learning and real-time personalisation |
+| **Services named** | 30+ including Amazon EC2, Amazon S3, Amazon RDS, AWS Lambda, Amazon ECS with AWS Fargate, AWS Step Functions |
+| **Migration outcome** | Exited **8** data centers (the last in 2020); built **80 %** of roughly **2,000** applications in the cloud from the ground up; recycled **103 tons** of copper and steel |
+| **Speed outcome** | Average time to build a development environment: **3 months → minutes** |
+| **Resilience outcome** (a *separate* AWS page) | Critical-severity events **−80 % to −90 %**; recovery time **hours → minutes**; DR test time **−70 %** |
+
+**Which domain does this test?** Primarily **D1 Cloud Concepts (24 %)** — business value, agility, the 6 Rs, economics. Secondary hooks: **D3 Cloud Technology and Services (34 %)** if the stem names the services, **D4 Billing, Pricing and Support (12 %)** if it names the cost lever (weights as of Oct 2026).
+
+**What would the exam ask?** Three stem shapes, all built from the table above:
+
+1. *"…reduced the average time needed to build a development environment from 3 months to only minutes." Which AWS Cloud benefit does this illustrate?* → **Increase speed and agility**. The qualifier is *provisioning lead time*. The losing options are all genuine AWS benefits: *economies of scale* (unit price), *go global in minutes* (Regions and latency), *trade fixed expense for variable expense* (billing shape). That is trap family **T7, true-but-irrelevant** — an option can be true and still answer a different question.
+2. *"The company built 80 % of its applications from the ground up." Which of the 6 Rs?* → **Refactor / re-architect**, decided by the clause *"from the ground up"*. Swap that clause and the key moves: *"copied the virtual-machine images across unchanged"* → **Rehost**; *"moved the database to a managed service, code untouched"* → **Replatform**. One story, three keys, all selected by the qualifier you underlined first.
+3. *"Which statement about the reported savings is correct?"* → they are **customer results** published on an AWS page, never AWS commitments. An option phrased *"AWS guarantees…"* or *"AWS delivers up to X % savings to every customer"* fails before you even check the number.
+
+**The trap to say out loud:** Capital One sits on **two different AWS pages with two different number sets** — the migration page carries *"3 months → minutes"* and **−70 %** DR test time, while the resilience page carries **−80 % to −90 %** critical-severity events and *hours → minutes* recovery. A stem that quotes one page's number inside the other page's story is a distractor by construction.
+
+- **📚 Did you know?** Amazon S3 launched on **14 March 2006** at **15 cents per gigabyte** on roughly **1 petabyte** spread across about 400 storage nodes — and AWS's own 20-year retrospective (AWS News Blog, posted **2026-03-13**) puts the current price at *"slightly over 2 cents per gigabyte"*, roughly an **85 %** reduction, while noting that code written for S3 in 2006 still works unchanged. Date-stamp both points: they are AWS's published figures as of Oct 2026, and current pricing should be verified before you rely on it.
+
+### Case Drill 2 — Box: reading a $2.23 M saving as four exam levers
+
+**The story as AWS publishes it** (AWS customer case study, accessed Oct 2026): Box, an enterprise SaaS provider, applied the **AWS Well-Architected Framework** and Solutions Architect reviews to cut spend without degrading security, reliability or performance, and published **$2.23 million** in savings split across four levers. In the customer's own words: *"Our use of AWS best practices led to savings of over 2 million dollars"* — Box's director of FinOps and SRE, customer voice rather than an AWS claim.
+
+**Worked example 10 — the waterfall adds up.**
+
+$$438{,}000 + 1{,}100{,}000 + 500{,}000 + 192{,}000 = 2{,}230{,}000$$
+
+**$438 K inter-AZ + $1.1 M egress + >$500 K storage + $192 K logging = $2.23 M** — and every bar is an examinable billing concept:
+
+| Box's lever | As published | The examinable concept behind it |
+|---|---|---|
+| **Inter-AZ data transfer** | **$438,000** | Traffic *between Availability Zones inside a Region* is billed; the architectural fix is to keep each tier's chatter inside one AZ |
+| **Internet egress** | **$1.1 M per year** | Data transfer **out** to the internet; the free allowance is **100 GB per month** from Regions (a 2021 change, still current as of Oct 2026) plus 1 TB per month via Amazon CloudFront |
+| **Storage** | **>$500 K per year** | S3 storage classes and tiering — the same reasoning as Set A's Q13 (Glacier Instant Retrieval for quarterly, millisecond reads) |
+| **Logging** | **$192,000** | Log volume and retention — a CloudTrail event-filtering decision, not a new security control |
+
+**Which domain does this test?** **D4 Billing, Pricing and Support (12 %)** first — data-transfer charges, storage economics, the four cost tools — with **D3 (34 %)** hooks (storage classes) and **D1 (24 %)** hooks (total cost of ownership, the cost pillar of Well-Architected).
+
+**What would the exam ask?** Three stem shapes:
+
+1. *"A company's bill is dominated by traffic flowing between Availability Zones. Which change MOST reduces it?"* → fix the **architecture** — keep a tier's components inside a single Availability Zone. The distractors each answer a neighbouring question: Reserved Instances change the *compute* rate, MFA is a security control, and "move to a cheaper Region" leaves the cross-AZ pattern untouched.
+2. *"Which AWS service could estimate this architecture's monthly cost before any resources exist?"* → **AWS Pricing Calculator** — free, and usable with no AWS account. Cost Explorer needs actual usage, AWS Budgets watches a target, and the Cost and Usage Report exports bills already incurred (Set A's Q20 teardown).
+3. *"Which AWS framework produced these recommendations?"* → the **AWS Well-Architected Framework / Well-Architected Review** — free best-practice guidance. It is *not* Trusted Advisor (which checks your account's configuration), *not* an AWS Support plan, and *not* a certification.
+
+**The trap to say out loud:** the **free** lever in this story is *architecture* — a Well-Architected review costs nothing — while every dollar and percentage on the page is **Box's** result. An option that promises you the same $2.23 M, calls the review a "certification", or files it under Trusted Advisor is wrong on wording alone.
+
+```matching
+{
+  "question": "Match each case-study statement to the correction the exam actually rewards - six trap pairs taken from AWS's own customer stories:",
+  "pairs": [
+    {"left": "\"AWS guarantees a 42% cost reduction when you move to Graviton\"", "right": "Customer result - Zendesk reported it; AWS guarantees no percentage"},
+    {"left": "\"Capital One's resilience page proves a 70% DR improvement\"", "right": "Two pages, two number sets: -70% DR test time sits on the MIGRATION page"},
+    {"left": "\"A multi-AZ deployment protects the whole Region\"", "right": "Multi-AZ isolates an AZ failure; multi-Region isolates a Region failure"},
+    {"left": "\"Savings Plans and Spot Instances are the same kind of discount\"", "right": "SP = 1-3 year commitment in USD/hour; Spot = interruptible spare capacity, up to 90% off"},
+    {"left": "\"FedRAMP is an AWS product the customer buys\"", "right": "FedRAMP is a government authorization - AWS supplies GovCloud and inherited controls, the customer receives the ATO"},
+    {"left": "\"The Well-Architected Review is a certification\"", "right": "Free best-practice review - neither a certification nor Trusted Advisor"}
+  ],
+  "explanation": "Every pair turns on one qualifier, exactly as in section 1.4: 'guarantees' converts a customer outcome into an AWS promise (never true); the Capital One pages must not be blended (migration page vs resilience page); AZ-versus-Region is the scope noun; commitment-versus-interruptible is the condition; FedRAMP is an authorization, not a product; and a review is guidance, not a credential. All percentages and dollars are customer results published by AWS, as of Oct 2026 - never commitments."
+}
+```
+
+### 2026 Updates (as of October 2026)
+
+Six 2025-2026 changes decide whether your notes are right or wrong on exam day. Every bullet is sourced to an AWS first-party page retrieved in October 2026; where a claim could not be verified it is labelled as such and must never be memorised as fact.
+
+> [!NOTE]
+> **What moved between 2025 and October 2026:**
+> - **The support-plan names changed inside the exam text itself.** The current guide's Domain 4 Task 4.3 example now reads *"Basic Support, AWS Business Support+, AWS Enterprise Support, AWS Unified Operations"*; the launch-era *Version 1.0* guide read "AWS Developer Support, AWS Business Support, AWS Enterprise On-Ramp Support, AWS Enterprise Support". AWS's announcement of **2025-12-02** closed Developer, classic Business and Enterprise On-Ramp to **new** subscriptions after that date (existing subscriptions run through **2027-01-01**), and Basic stays free. Learn the 2026 names — they are what Set A's Q19 keys on.
+> - **The domain weights have not moved:** 24 % / 30 % / 34 % / 12 %, unchanged since CLF-C02 went live on **2023-09-19**. Material still quoting CLF-C01's 26 / 25 / 33 / 16 is quoting an appendix AWS **deleted** from the current guide.
+> - **The scope lists were rebuilt.** Against the launch-era *Version 1.0* guide, in-scope entries went **128 → 111** and the explicit out-of-scope list went **11 → 55** (diff computed 2026-10). AWS Wavelength, Amazon MSK, AWS Network Firewall and AWS Billing Conductor are now explicitly out of scope, and AWS Local Zones appears on **neither** list. The list describes itself as "non-exhaustive and subject to change" — answer scope questions from the guide you download that week.
+> - **Delivery logistics are unchanged** — 90 minutes, 65 questions, 100 USD, Pearson VUE test centre or online proctored, 12 languages — but **Italian and German are retired after 2026-12-31**. If either is your exam language, book before that cut-off.
+> - **Free Tier changed shape for new accounts.** Accounts created **on or after 2025-07-15** keep the Free Tier for **6 months** or until the credits are used up, whichever comes first, with a **USD 100 sign-up credit plus up to USD 100 earnable** (up to USD 200) and eligible types including `t3.micro`, `t3.small`, `t4g.micro`, `t4g.small`, `c7i-flex.large` and `m7i-flex.large`. Earlier accounts keep the legacy **12-month** tier that included `t2.micro`. "12 months of t2.micro" is therefore only half the answer — the stem's account date is the other half (as of Oct 2026; verify current before use).
+> - **The guide carries no version number.** The current PDF prints only "Copyright © 2026"; the single stamped artefact is the launch-era *"Version 1.0 CLF-C02"*, and the `uiVersion=2024.10` on the docs page is the AWS Docs **site template**, not a guide revision. Numbered-refresh claims (for example "v1.3, March 2026") **could not be verified** and must not be repeated as fact — re-download the guide before you sit.
+
+- **📚 Did you know?** AWS announced the **AWS Well-Architected Agent** (preview, **2026-10-01**) and describes it as *"the next-gen evolution of AWS Trusted Advisor and the AWS Well-Architected Tool"*, while **Database Savings Plans** arrived on **2025-12-02** — yet **neither name appears in the exam guide**, which still lists AWS Well-Architected Tool and AWS Savings Plans. The meta-skill for 2026: a service can be real, recent and still *not examinable*. The guide's in-scope list is the only arbiter.
+
+---
+
 ## 2. Practice Questions — Set A: 20 items in published weight order
 
 Set A mirrors the live exam's **dominant** format — one correct response, three distractors — while also drilling five **multiple-response** items. Items run in domain-weight order: **D1 five, D2 six, D3 seven, D4 two**.
@@ -717,6 +809,46 @@ Set A mirrors the live exam's **dominant** format — one correct response, thre
 **Teardown — Q20 · four tools, four jobs.** **Why it is right:** the calculator estimates *before* anything exists and needs no account; Budgets monitoring and notifications are free (as of Oct 2026 — the first two action-enabled budgets are free, then roughly $0.10 per day each). **Why the traps lose:** **A** is wrong twice — the Cost Explorer **console UI is free** (only API calls are charged, at $0.01 per paginated request), and a Budgets *alert* is a notification, not a cap: stopping spend requires an explicit budget action; **C** is wrong twice — the calculator is free, and Cost Explorer's default history is 13 months, not five years; **D** repeats the notification-equals-cap error, and the Cost and Usage Report is a raw line-item export of bills already incurred, not a forecast. **Trap:** the four-way split is the whole domain in one line — **Calculator = estimate before you build · Cost Explorer = explore and forecast actuals · Budgets = alert and act on a target · Cost and Usage Report = raw line-item export**. **Source:** seed Q39 · pricing digest C12 · billing/organizations digest F.8–F.9 (all figures as of Oct 2026).
 
 - **📚 Did you know?** The **Official Practice Question Set** that AWS offers for CLF-C02 contains exactly **20 questions** — the same count as Set A here — is free, can be retaken, and reshuffles the same items on each attempt. It is the first thing AWS's own four-step prep plan asks you to take, and its per-option feedback cites recommended resources. If Set A felt long, that is useful information about your pacing; if it felt short, take the official 20 next.
+
+### 2.5 Case-drill and 2026-update items · 21–22 (outside the 20-minute clock)
+
+These two items sit **outside** Set A's timed twenty: they test the case drills and the 2026 updates you just read, so time them separately at about 90 seconds each or fold them into your 72-hour re-sit. Your Set A score stays out of 20.
+
+```question
+{
+  "id": "clf-15-q21",
+  "type": "multiple-choice",
+  "question": "AWS's Capital One case study states that the bank reduced the average time needed to build a development environment from 3 months to only minutes after moving to AWS. Which AWS Cloud benefit does that result BEST illustrate?",
+  "options": [
+    "Benefit from massive economies of scale",
+    "Increase speed and agility",
+    "Trade fixed expense for variable expense",
+    "Go global in minutes"
+  ],
+  "correct": 1,
+  "explanation": "Minutes instead of months is provisioning lead time - the speed-and-agility benefit. Economies of scale is unit price, fixed-to-variable is the billing shape, and go global is Regions and latency; all three are genuine AWS benefits that answer a different question."
+}
+```
+
+**Teardown — Q21 · three months to minutes.** **Why it is right:** the qualifier is *provisioning lead time* — a working development environment appearing in minutes instead of months is the agility and time-to-market benefit. **Why the traps lose:** **A** is the aggregation argument that lowers unit price and never mentions build time; **C** is the billing shift (fixed → variable) and the stem says nothing about how the infrastructure is paid for; **D** is Regions, latency and data residency — "minutes" here is a build time, not a deployment geography. **Trap:** every option is a genuine AWS benefit, so this is family **T7, true-but-irrelevant** — test each option against the *stem's* pain, never against general goodness. **Source:** Capital One customer case study (AWS, accessed Oct 2026) · cloud-concepts digest §B (six advantages of cloud computing) · case-studies digest C2. Customer result, not an AWS guarantee.
+
+```question
+{
+  "id": "clf-15-q22",
+  "type": "multiple-choice",
+  "question": "A candidate created an AWS account on 1 August 2025. Which statement about the AWS Free Tier is CORRECT as of October 2026?",
+  "options": [
+    "The Free Tier lasts 12 months from the day the account was created and includes Amazon EC2 t2.micro",
+    "The Free Tier lasts 6 months or until the sign-up credits are used up, whichever happens first, and eligible types include t3.micro and t4g.small, with up to USD 200 in credits available",
+    "Every instance in the t3 family is free of charge for as long as the account exists",
+    "Activating the Free Tier requires at least the Business Support+ plan"
+  ],
+  "correct": 1,
+  "explanation": "The stem's date is the qualifier: accounts created on or after 2025-07-15 get the 6-month, credit-based Free Tier (USD 100 sign-up plus up to USD 100 earnable, as of Oct 2026), while accounts created before that date keep the legacy 12-month tier that included t2.micro. No instance family is always free, and no Support plan is required - Basic Support is free."
+}
+```
+
+**Teardown — Q22 · two Free Tiers, one stem date.** **Why it is right:** the account date — **1 August 2025** — is the qualifier, and it falls on or after the **2025-07-15** change, so the new **6-month, credit-based** shape applies with the new eligible instance list (`t3.micro`, `t3.small`, `t4g.micro`, `t4g.small`, `c7i-flex.large`, `m7i-flex.large`). **Why the traps lose:** **A** is the legacy rule for accounts created *before* 2025-07-15 — true AWS behaviour, wrong stem; **C** confuses the Free Tier with always-free services, since no instance family is unbounded free; **D** has no basis anywhere — Free Tier requires no Support plan at all. **Trap:** candidates memorise one sentence ("Free Tier = 12 months of t2.micro") and never read the stem's date; both rules are correct AWS behaviour and the date decides between them — the same qualifier reflex as Q1–Q20. **Date-stamp:** as of Oct 2026; verify current before use. **Source:** AWS News Blog 2025-07-15 · EC2 User Guide "before and after July 15, 2025" table · aws-updates-2026 digest C14–C16.
 
 ---
 

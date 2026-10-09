@@ -565,6 +565,52 @@ value      two points in time, same questions -> measurable improvement, no audi
 
 **Example E8 — putting the checklist together:** a 12-person team runs a 40-node fleet. The sourced operating model: **Session Manager** replaces the bastion (no inbound ports), **Patch Manager** runs scan-only for a week to read compliance before switching to scan-and-install, **CloudWatch** alarms on CPU and latency publish to an **SNS** topic that pages on-call, **Synthetics canaries** hit the login page every five minutes, **Trusted Advisor**'s free 56 checks are reviewed monthly, a **Well-Architected review** is saved as a **milestone** each quarter, and a **Business Support+** case is the escalation path when all of that says *"not us"*. Nothing on that list needs a human to write a monitoring stack from scratch — which is exactly the Well-Architected preference for **managed, least-operational-overhead** answers.
 
+### 2026 Updates (as of October 2026)
+
+> **Sourced only — every bullet below is date-stamped and traceable to an AWS page accessed 2026-10.** Nothing that could not be verified is stated as fact, and where a headline disagrees with the exam guide, the **guide wins**.
+>
+> - **The support lineup changed on 2 December 2025, and the exam text followed.** AWS's news post *"New and enhanced AWS Support plans add AI capabilities to expert guidance"* introduced **Business Support+** and **AWS Unified Operations**; **Developer, classic Business and Enterprise On-Ramp** took **no new subscriptions after 2 December 2025** with existing subscriptions running **through 1 January 2027**, while **Basic stays free**. Published monthly minimums as of Oct 2026: **$29**, **$5,000** and **$50,000** per account (verify current before use).
+> - **Task 4.3's own example list now reads** *"Basic Support, AWS Business Support+, AWS Enterprise Support, AWS Unified Operations"* — the current guide names **four** plans and the legacy names are gone from the text, so notes built on *"Developer Support is the entry paid plan"* are quoting a deleted list.
+> - **The category that holds support was renamed:** `Customer Engagement` → **Customer Enablement**, which now contains **only AWS Support** — AWS Activate, AWS IQ and AWS Managed Services are **explicitly out of scope**, so none of them can be an in-scope answer anywhere on this exam.
+> - **Well-Architected Agent (preview) landed 1 October 2026**, which AWS describes as *"the next-gen evolution of AWS Trusted Advisor and the AWS Well-Architected Tool"* (AWS Well-Architected release notes: agent released 10-1-2026). It appears **nowhere on the current exam guide's service lists** (checked 2026-10) — the examinable names stay **AWS Well-Architected Tool** and **AWS Trusted Advisor**, so never key an answer to a preview.
+> - **The Domain 3 lists behind this lesson were rebuilt:** in-scope entries fell **128 → 111** while the out-of-scope list grew **11 → 55**, with **Service Quotas** among the added Management and Governance entries — relevant here because **quota increases** are one of the 24×7 channels **every** plan keeps for free, including Basic.
+>
+> Sources: AWS News Blog (2025-12-02); AWS Certified Cloud Practitioner exam guide Task 4.3 plus the in-scope and out-of-scope service lists; AWS Well-Architected release notes and What's New (2026-10-01) — all accessed 2026-10.
+
+```text
+SUPPORT + WELL-ARCHITECTED TIMELINE   (sourced; as of Oct 2026)
+  2025-12-02   Developer, classic Business and Enterprise On-Ramp close
+               to NEW subscriptions (AWS News Blog, 2025-12-02)
+               -> Business Support+ and Unified Operations become the
+                  paid plans the exam guide names
+  2026-10-01   AWS Well-Architected Agent (preview) announced
+               -> NOT on the guide's service lists; the WA Tool and
+                  Trusted Advisor remain the examinable names
+  Oct 2026     current Task 4.3 examples: Basic | Business Support+ |
+               Enterprise | Unified Operations
+  2027-01-01   legacy plans discontinued (legacy plans remain in
+               AWS GovCloud (US))
+  always       prices and limits stamped "as of Oct 2026" - re-check
+               AWS's own pages before exam day
+```
+
+- **📚 Did you know?** The current exam guide **prints no version number at all** — the PDF carries only *"Copyright © 2026"*, and the only stamped artefact AWS has published is the launch-era **`Version 1.0 CLF-C02`** guide. The `uiVersion=2024.10` visible in the docs URL is the **AWS Docs site template version**, not a guide revision (checked 2026-10), which is why claims like *"a March 2026 guide refresh"* circulating in third-party prep material stay unverified — the defensible habit is to download the guide AWS publishes **today** rather than trust a version label somebody else quoted.
+
+```matching
+{
+  "question": "Match each 2026 change to what it means for your CLF-C02 answer (all sources accessed October 2026):",
+  "pairs": [
+    {"left": "The example list inside Task 4.3 of the current exam guide", "right": "Names Basic Support, AWS Business Support+, AWS Enterprise Support and AWS Unified Operations - the four plans this lesson teaches as current"},
+    {"left": "Developer, classic Business and Enterprise On-Ramp", "right": "Closed to new subscriptions on 2 December 2025 and discontinued 1 January 2027 - never key a 2026 answer to them"},
+    {"left": "The Customer Enablement category on the in-scope list", "right": "Contains only AWS Support - AWS Activate, AWS IQ and AWS Managed Services are out of scope"},
+    {"left": "AWS Well-Architected Agent (preview, announced 1 October 2026)", "right": "Not named in the exam guide - the examinable names remain the AWS Well-Architected Tool and AWS Trusted Advisor"},
+    {"left": "The rebuilt service lists behind Domain 3", "right": "111 in-scope entries and 55 out-of-scope entries (checked 2026-10) - the list you download today is the arbiter"},
+    {"left": "Monthly minimums on the three paid plans, as of Oct 2026", "right": "$29 (Business Support+), $5,000 (Enterprise) and $50,000 (Unified Operations) per account per month - verify current before use"}
+  ],
+  "explanation": "Read the source, not the headline: Task 4.3 itself lists Basic, Business Support+, Enterprise and Unified Operations, so legacy plan names are distractors after 2 December 2025; Customer Enablement holds only AWS Support; the Well-Architected Agent is a real preview but not an examinable name, so the exam guide's Well-Architected Tool and Trusted Advisor stay correct; and the rebuilt lists (111 in, 55 out) plus the published $29 / $5,000 / $50,000 minimums are the only figures to quote - all as of Oct 2026."
+}
+```
+
 ---
 
 ## Real-World Case Studies
@@ -596,6 +642,42 @@ AWS publishes what these patterns look like in production. Every figure below is
 
 *Exam lesson:* **80–90% is a customer result, not an AWS guarantee**, and it belongs to the *resilience* case study (the same customer's migration page has a different set of numbers — don't mix them).
 
+### Case C — Box: a Well-Architected review used as an operating routine
+
+| Element | Detail |
+|---|---|
+| **Industry / context** | Box, the enterprise SaaS platform used by **120,000+ enterprises**, chasing spend efficiency **without** hurting security, reliability or performance |
+| **AWS services named** | **Well-Architected Framework** and **Solutions Architect reviews**, Amazon S3 / **S3 Glacier** tiering, EBS volume and snapshot hygiene, **AWS CloudTrail event filtering**, routing traffic around internet gateways |
+| **Headline outcomes (AWS-published, customer-claimed)** | **$2.23 million** unpacked into four levers: inter-AZ transfer **$438,000**, internet egress **$1.1 million per year**, storage tiering **over $500,000 per year**, logging **$192,000 per year** |
+| **Operations lesson** | The review produced a **ranked backlog**, not a certificate — the same *review → high-risk issues → improvement plan → milestone* loop §7 teaches, and the logging line proves **log volume is an operations decision**: retention, metric filters and subscription filters are all configured on the **log group** (§1.6) |
+| **Customer voice** | *"Our use of AWS best practices led to savings of over 2 million dollars, setting a new baseline…"* — Clay Alvord, director of FinOps and SRE (customer quote) |
+| **Source** | aws.amazon.com/solutions/case-studies/box-case-study (accessed Oct 2026) |
+
+```text
+Box's published breakdown (customer-claimed, accessed Oct 2026)
+  inter-AZ data transfer ....... $  438,000
+  internet egress .............. $1,100,000 / year
+  storage tiering .............. $  500,000 / year   (AWS prints ">")
+  logging ...................... $  192,000 / year
+                                 ------------
+  total ....................... $2,230,000  =  "$2.23 million unpacked"
+```
+
+*Exam lesson:* **the four numbers belong to Box, not to Capital One** — mixing customer figures is the classic case-study error. Two examinable patterns sit underneath the marketing: §7's free review doing **cost** work as well as architecture work (Cost Optimization is a pillar of operational readiness, not an afterthought), and one operational fact — **$192,000 a year of logging** is shaped by the retention you choose on a **log group**, which is exactly why §1.6 says the log group, not the stream, owns retention.
+
+### Case D — athenahealth: central visibility run by a team of eight
+
+| Element | Detail |
+|---|---|
+| **Industry / context** | Healthcare software (HIPAA-sensitive) that needed **egress monitoring across a sprawling VPC estate** while inspection costs rose — run by a small engineering team |
+| **AWS services named** | **AWS Network Firewall** (centralised), **AWS Transit Gateway**, **AWS RAM** (policy fan-out to **120 accounts**), CloudFormation rules-as-code, AWS Direct Connect; AWS Shield on the roadmap |
+| **Headline outcomes (AWS-published, customer-claimed)** | Inspection costs cut **95%**; hundreds of VPCs across **120 accounts** onboarded *"within just a few days"*; the new security design was designed and rolled out by **eight people** with **no disruptions**; firewall logs **centralised** into one place |
+| **Operations lesson** | **One central signal beats 120 local consoles** — automate the rollout with policy-as-code instead of hiring operators, which is operational excellence's *automate, don't staff* preference written as a case study |
+| **Scope caveat** | **AWS Network Firewall is now on the out-of-scope list** for CLF-C02 (checked 2026-10) — use the story for the **pattern**, and answer with in-scope names only (CloudWatch, CloudTrail, AWS Health, Trusted Advisor) |
+| **Source** | aws.amazon.com/solutions/case-studies/athenahealth-case-study (accessed Oct 2026) |
+
+*Exam lesson:* read the **shape**, not the product list. *"One central place to look, many accounts, small team, no disruptions"* ⇒ the in-scope answers are **Amazon CloudWatch dashboards** for metrics, **AWS CloudTrail** for API history, **AWS Health** for AWS-side events and **AWS Trusted Advisor** for configuration gaps. The **−95%** is athenahealth's number, unaudited, and *"eight people"* is a reminder that AWS counts **managed services as capacity** — no exam stem asks how many engineers the customer hired.
+
 ### What the two cases share
 
 | Value pattern | Evidence | Underlying principle |
@@ -606,6 +688,17 @@ AWS publishes what these patterns look like in production. Every figure below is
 | The free tools do the first pass | Both: CloudWatch + WA/Trusted Advisor-style review before escalation | Diagnose first, **then** open a case |
 
 - **📚 Did you know?** Capital One's numbers live on **two different AWS pages** and describe **two different projects**: the resilience case study reports **critical-severity events down 80–90%** with recovery **hours → minutes**, while the migration case study reports exiting **8 data centers**, ~**80% of ~2,000 applications** cloud-built and dev environments cut from **3 months to minutes**. On exam day, quote the number **with the project it came from** — mixing them is the classic case-study error (accessed Oct 2026).
+
+### What cases C and D add
+
+| Value pattern | Evidence | Underlying principle |
+|---|---|---|
+| A review is operating work, not paperwork | Box: **Well-Architected + Solutions Architect reviews** → four funded fixes totalling **$2.23 M** | §7's loop (review → high-risk issues → improvement plan → milestone) pays for itself in the **Cost Optimization** pillar too |
+| Logging is designed, not discovered | Box: **$192 K per year** of logging called out as its own lever | Retention, metric filters and subscription filters live on the **log group** — choose them deliberately |
+| Centralise the signal, automate the rollout | athenahealth: hundreds of VPCs, **120 accounts**, policy-as-code, **team of 8**, inspection cost **−95%** | Operational excellence prefers **managed, automated** operations over headcount |
+| A case never licenses an out-of-scope answer | athenahealth's **AWS Network Firewall** is now **out of scope** | Name only the in-scope service the stem asks for (list checked 2026-10) |
+
+- **📚 Did you know?** Box's four published savings lines add up exactly: **$438,000 + $1,100,000 + $500,000 + $192,000 = $2,230,000** — AWS's headline *"$2.23 million"* is the **sum of the four levers**, not a separate figure. Of those four, the **logging** line is the only one an operations team controls week to week, because CloudWatch Logs retention, filters and exports are all configured on the **log group** — which is why an exam stem about *"reducing log spend"* is really a stem about retention policy (case study accessed Oct 2026).
 
 > [!WARNING]
 > **How to read case-study numbers on exam day:** every percentage here is **customer-claimed or AWS-published and unaudited** — never a guarantee, and *"up to"* is a **ceiling**, never an average. Attribute the source and access date (*"Bangkok Flight Services case study, accessed Oct 2026"*), not *"AWS proves"*. A case never licenses an out-of-scope answer: you are asked to **name the in-scope service** (CloudWatch, CloudTrail, Health, Trusted Advisor, WA Tool), never to reproduce the marketing figure.
@@ -771,6 +864,38 @@ AWS publishes what these patterns look like in production. Every figure below is
   ],
   "correct": 1,
   "explanation": "All AWS accounts get 56 Trusted Advisor checks and Business Support+ and above unlock an additional 426 (482 total on AWS's check page, which elsewhere advertises 'more than 500'). Basic gets core checks - including all Service Limits checks and selected Security and Fault tolerance checks - so 'no checks at all' is false. TA Priority is an Enterprise and Unified Operations feature, not a Business Support+ one."
+}
+```
+
+```question
+{
+  "id": "clf-12-q11",
+  "type": "multiple-choice",
+  "question": "A candidate's Domain 4 notes, built from an older CLF-C02 exam guide, answer with 'Developer Support is the entry paid plan'. Which statement about the current exam text and support lineup (checked October 2026) is correct?",
+  "options": [
+    "The current guide still lists Developer Support in Task 4.3, because the example list has not changed since 2023",
+    "Task 4.3 now names Basic Support, AWS Business Support+, AWS Enterprise Support and AWS Unified Operations; Developer, classic Business and Enterprise On-Ramp stopped taking new subscriptions on 2 December 2025 and are discontinued 1 January 2027",
+    "The lineup grew to five current plans - Basic, Developer, Business, Business Support+ and Enterprise - so both notes and the new guide are partly right",
+    "Unified Operations is an AWS service rather than a support plan, so it cannot appear in a support-options task"
+  ],
+  "correct": 1,
+  "explanation": "The current exam guide's Task 4.3 gives exactly these four examples - Basic Support, AWS Business Support+, AWS Enterprise Support and AWS Unified Operations - reflecting the support overhaul AWS announced on 2 December 2025. The legacy plans take no new subscriptions after that date and existing ones run through 1 January 2027, so an answer keyed to Developer Support memorises text AWS deleted. Unified Operations is a support plan with a $50,000 per month minimum and a 5-minute Incident Management Engineer first response, not a service."
+}
+```
+
+```question
+{
+  "id": "clf-12-q12",
+  "type": "multiple-choice",
+  "question": "An AWS announcement dated 1 October 2026 describes the AWS Well-Architected Agent (preview) as 'the next-gen evolution of AWS Trusted Advisor and the AWS Well-Architected Tool'. Which statement should govern your exam answers?",
+  "options": [
+    "Answer with the AWS Well-Architected Agent, because every AWS announcement from 2026 is examinable",
+    "Trusted Advisor was retired on 1 October 2026, so its checks must be attributed to the Well-Architected Agent",
+    "The exam guide's service lists still name the AWS Well-Architected Tool and AWS Trusted Advisor and do not list the Agent, so key your answers to the guide, not to a preview",
+    "The Well-Architected Agent replaces the six pillars, so the pillar names no longer need memorising"
+  ],
+  "correct": 2,
+  "explanation": "The Agent is real and recent - AWS's Well-Architected release notes record it on 10-1-2026 and AWS markets it as the next-gen evolution of Trusted Advisor and the Well-Architected Tool - but it appears on neither the in-scope nor the out-of-scope list of the current exam guide (both checked 2026-10), and the guide still names the AWS Well-Architected Tool. The arbitrar is the guide you download today: previews and announcements are context, never key terms, and Trusted Advisor remains in scope with its 56 free checks."
 }
 ```
 

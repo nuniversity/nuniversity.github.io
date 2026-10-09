@@ -1,6 +1,6 @@
 ---
 title: "AWS Pricing Models and Cost Tools"
-description: "Domain 4's cost core: the four general pricing principles (pay-as-you-go, pay less by using more, volume tiering, Regional price variation), the full compute purchasing comparison — On-Demand vs Reserved Instances vs Savings Plans vs Spot vs Dedicated vs Free Tier — the three Free Tier flavors, the per-service billing dimensions for S3, EBS, RDS, Lambda, data transfer, Route 53 and CloudFront, and the five cost tools (Pricing Calculator, TCO via Migration Evaluator, Billing console, Cost Explorer, Budgets), with nine worked pricing examples, a purchase-option decision tree, ten practice questions and three interactive checks."
+description: "Domain 4's cost core: the four general pricing principles (pay-as-you-go, pay less by using more, volume tiering, Regional price variation), the full compute purchasing comparison — On-Demand vs Reserved Instances vs Savings Plans vs Spot vs Dedicated vs Free Tier — the three Free Tier flavors, the per-service billing dimensions for S3, EBS, RDS, Lambda, data transfer, Route 53 and CloudFront, and the five cost tools (Pricing Calculator, TCO via Migration Evaluator, Billing console, Cost Explorer, Budgets), with nine worked pricing examples, a purchase-option decision tree, four AWS customer cost case studies (Box, Canva, FarEye, NASA JPL), a sourced 2026-updates box, twelve practice questions and four interactive checks."
 order: 13
 difficulty: "beginner"
 duration: "60 minutes"
@@ -41,8 +41,18 @@ duration: "60 minutes"
    migration case ... Migration Evaluator (complimentary)
    what did I spend .. AWS Cost Explorer (UI free)
    am I overspending . AWS Budgets (2 action-enabled free)
-   the bill itself ... Billing and Cost Management console
-   evidence .......... Cost and Usage Report (CUR)
+    the bill itself ... Billing and Cost Management console
+    evidence .......... Cost and Usage Report (CUR)
+  REAL WORLD  (customer results, never AWS guarantees)
+    Box ............... 2.23 M USD = egress + storage +
+                        inter-AZ + logging (architecture)
+    Canva ............. -46% compute <2 yr (SP/RI/Spot mix)
+    FarEye ............ -65% compute ~1 M USD/yr (SP+Spot)
+    NASA JPL .......... Spot up to 90% off, fault-tolerant
+  2026 UPDATES  (as of Oct 2026, sourced)
+    free tier ......... 6 months + up to 200 USD (15 Jul 2025)
+    100 GB egress ..... a 2021 change, still current
+    Database SP ....... up to 35%, launched 2 Dec 2025
 ====================================================================
 ```
 
@@ -61,7 +71,8 @@ In this lesson you will:
 - list the **billing dimensions** of S3, EBS, RDS, Lambda, data transfer, Route 53 and CloudFront;
 - price **requests, egress and hosted zones** in worked numeric examples;
 - choose the right **cost tool**: Pricing Calculator, TCO/Migration Evaluator, Billing console, Cost Explorer, Budgets;
-- practise with **10 exam-style questions** plus three interactive checks.
+- map four **real AWS customer cost stories** (Box, Canva, FarEye, NASA JPL) to the lever that produced each saving, and read the **sourced 2026 updates box**;
+- practise with **12 exam-style questions** plus four interactive checks.
 
 | Exam task | Domain (weight) | What this lesson delivers |
 |---|---|---|
@@ -668,6 +679,118 @@ flowchart LR
 
 - **📚 Did you know?** The Pricing Calculator's **730 hours per month** assumption (720 hours in a 30-day month + 10) is baked into its monthly cost lines — which is why a calculator estimate and a real bill disagree in 31-day months, February, and any month where a resource ran for only part of the time. Multiply any "$/hour × 730" figure you see in study material by 1 before trusting it in a real forecast.
 
+### 2026 Updates (as of October 2026)
+
+> [!IMPORTANT]
+> **Six sourced changes behind this lesson's numbers.** Each bullet is drawn from a primary AWS page retrieved **October 2026**; prices, allowances and tool limits drift without announcement, so **verify current before use** — and never present an old figure as a current one.
+> - **Free Tier was restructured on 15 July 2025.** Accounts created **on or after** that date get a Free plan that lasts **6 months or until the credits are used up, whichever comes first**, with **USD 100 at sign-up plus up to USD 100 earned = up to USD 200**, and an eligible EC2 list of `t3.micro`, `t3.small`, `t4g.micro`, `t4g.small`, `c7i-flex.large`, `m7i-flex.large` — **`t2.micro` is no longer on the list** *(AWS News Blog, 15 July 2025; EC2 User Guide "before and after July 15, 2025" table; as of Oct 2026)*.
+> - **The 100 GB free data-transfer-out allowance is a 2021 change, not a 2025 one.** AWS's Free Tier data-transfer expansion (100 GB/month from the Regions plus 1 TB/month through CloudFront) took effect **1 December 2021** and is still current *(AWS Free Tier data-transfer expansion post; EC2 data-transfer FAQ; as of Oct 2026)* — prep material that calls it "new for 2025" is wrong; the genuinely new mechanism is the next bullet.
+> - **Moving data off AWS has its own egress rule.** Departing customers need **approval first** and then have **90 days** to complete the move, while accounts holding **less than 100 GB** can already move off for free under the existing 100 GB monthly allowance *(EC2 FAQ, "Data transfer fees when moving all data off AWS"; as of Oct 2026)* — same words, two different mechanisms.
+> - **Database Savings Plans launched on 2 December 2025** — a third commitment family paying **up to 35%** for a **1-year, no-upfront** commitment (serverless up to 35%, provisioned up to 20%) *(AWS News Blog, 2 December 2025; as of Oct 2026)*. The CLF-C02 exam guide still names only **"AWS Savings Plans"**, so treat Database SPs as news rather than exam vocabulary.
+> - **Savings Plans have a documented return rule.** Commitments **below $100/hour** may be returned **in the same calendar month**, up to **10 returns per year**; commitments of **$100/hour or more cannot be returned** *(AWS Cloud Financial Management blog, 24 June 2026; as of Oct 2026)*.
+> - **Cost tooling moved while the examinable list did not.** **RI/SP Group Sharing** went generally available **19 November 2025**, **Target Coverage in the Savings Plans Purchase Analyzer** arrived **9 June 2026**, the **Well-Architected Agent** previewed **1 October 2026**, and **Cost Optimization Hub** dates from **26 November 2023** — yet Task 4.2 still tests **Cost Explorer, Budgets, the Pricing Calculator, cost allocation tags and the Cost and Usage Report** *(AWS What's New and AWS blogs; exam guide; as of Oct 2026)*.
+
+---
+
+## Real-World Case Studies
+
+Domain 4 is scored on **judgement**, and AWS's own customer stories are where that judgement was formed. Every figure below is **as AWS published it on case-study pages accessed October 2026**, and every percentage is a **customer result, never an AWS guarantee**. The exam rarely asks for the company name — it asks **which lever produced the saving**: architecture, commitment, interruptible capacity, or price-performance. Four levers cover every cost story AWS publishes.
+
+```mermaid
+flowchart LR
+    L1["Lever 1: architecture - Well-Architected reviews, tiering, egress paths"] --> M1["Section 4 billing dimensions: data transfer out, storage GB-month, log volume"]
+    L2["Lever 2: commitment - Savings Plans and Reserved Instances"] --> M2["Section 2: up to 66% or 72% for a 1 or 3 year term"]
+    L3["Lever 3: interruptible capacity - Spot Instances"] --> M3["Section 2: up to 90% off, reclaimable, fault-tolerant work only"]
+    L4["Lever 4: price-performance - Graviton and right-sizing"] --> M4["Same bill dimensions, fewer units consumed"]
+    L1 --> R1["Box: 2.23 million USD"]
+    L2 --> R2["Canva: compute down 46% in under 2 years"]
+    L3 --> R3["NASA JPL: Spot up to 90% off"]
+    L4 --> R4["Zendesk: cost down up to 42%"]
+```
+
+### Box — $2.23 million from billing dimensions, not from commitments
+
+AWS's case study, headlined *"…Unpacks over $2.23 Million in Savings"*, follows **Box** — an enterprise SaaS platform used by more than 120,000 organizations — through a series of **AWS Well-Architected Framework** reviews with AWS solutions architects. Notice where the money actually came from: **not** from a 1- or 3-year commitment, but from the §4 billing dimensions:
+
+| Saving line AWS published | Amount | Lesson section behind it |
+|---|---|---|
+| Internet **egress** | **over $1.1 million per year** | §4.4 — data transfer out, the third cost driver |
+| **Storage** tiering (S3 / Glacier classes) | **over $500,000 per year** | §4.5 — the storage warmth ladder |
+| **Inter-Availability-Zone** traffic | **$438,000** | §4.4 — same-AZ traffic is free, cross-AZ is not |
+| **Logging** volume (CloudTrail event filtering) | **$192,000 per year** | per-event log charges are a dimension too |
+| **Total** | **$2.23 million** | |
+
+The mechanics were architectural: S3 and Glacier lifecycle tiering, EBS volume and snapshot hygiene, CloudTrail **event filtering** (pay for the events you keep), and routing traffic **around internet gateways** so bytes never became egress. Box's director of FinOps and SRE, speaking for the customer: *"Our use of AWS best practices led to savings of over 2 million dollars, setting a new baseline…"*
+
+*Exam lesson:* the single largest line in this story is **data transfer out** — §4.1's third cost driver — and the fix cost **no commitment term and no interruption risk**. When a stem says *"reduce spend **without** changing the purchase option"*, reach for §4's billing dimensions first; architecture comes before commitment in every cost-optimisation sequence AWS teaches.
+
+### Canva — the purchase-model mix
+
+**Canva**, a SaaS design platform that has run on AWS since day one, needed cost-effective scale with different reliability tiers per user plan. AWS's cost-optimisation case study reports that Canva **reduced compute costs by 46 percent in less than 2 years** by deliberately mixing purchase options instead of picking one:
+
+| Workload slice | Purchase option used | Which §2 row it belongs to |
+|---|---|---|
+| Free-tier / interruptible projects | **Spot Instances** | up to **90% off**, capacity reclaimable |
+| Steady Pro-user capacity | **On-Demand + Savings Plans** | 1- or 3-year commitment at **$/hour** |
+| Commitments that might change | **Reserved Instances as a fallback** | Standard / Convertible ladder |
+| Visibility into the result | **AWS cost tools** | §5 — Cost Explorer and Budgets |
+
+AWS's own page quotes the ceilings Canva leaned on: RIs at *"a discount of up to 72 percent compared to On-Demand"*, Savings Plans at *"up to 72 percent … in exchange for a 1- or 3-year hourly spend commitment"*, and Spot at *"up to 90 percent discount"* (all **as of Oct 2026**).
+
+*Exam lesson:* production estates rarely buy a single option. **"Compare AWS pricing models" (Task 4.1) means applying the §2 decision tree per workload** — the floor of steady capacity on a commitment, the elastic overflow on Spot — and Canva's 46 percent is what that mix produced *for Canva*, not a ceiling AWS promises anyone.
+
+### FarEye — three levers pulled at once
+
+**FarEye**, a SaaS logistics platform fighting thin last-mile margins, needed predictable spend. AWS's case study credits **three levers layered together** across **500+ Spot and On-Demand instances**:
+
+- **Compute Savings Plans** — the committed floor (§2.4, up to 66% ceiling);
+- **EC2 Spot** — the interruptible overflow (§2.5, up to 90% ceiling);
+- **Graviton** — price-performance, the fourth lever (same bill dimensions, fewer units consumed).
+
+AWS published the outcome as **compute costs reduced by 65 percent**, **about $1 million per year** in cloud cost savings, and **+30% performance** on Graviton (case study accessed Oct 2026).
+
+*Exam lesson:* commitment and Spot are **not rivals** — they are stacked: steady baseline on the Savings Plan, elastic and restartable work on Spot. What they never do is reserve capacity; only an AZ-scoped RI or a Capacity Reservation does that (§2.3).
+
+### NASA JPL — Spot where interruption is survivable
+
+For the **Perseverance** mission, NASA's Jet Propulsion Laboratory became the exam's clearest example of a mixed purchasing strategy: EC2 Auto Scaling combining **Spot + On-Demand + Capacity Reservations**, processing **about 4.4 TB of downlinked data per day** into **up to 70 TB of final data products**. AWS quotes the Spot line verbatim: *"up to a 90 percent discount compared to Amazon EC2 On-Demand pricing"* (case study accessed Oct 2026).
+
+*Exam lesson:* all three options appear together **for a reason** — **Spot** carries the restartable processing at up to 90% off, **On-Demand** covers the critical path that cannot be interrupted, and the **Capacity Reservation** guarantees launch room **at the full On-Demand price**. The discount never comes from the reservation, and the reservation is never free.
+
+### More AWS-published results — customer outcomes, not promises
+
+| Customer | Lever pulled | AWS-published result |
+|---|---|---|
+| **Zendesk** | Graviton + right-sizing across 1,200+ Aurora clusters | **up to +30% performance, up to −42% cost** |
+| **Netflix** | Consolidating relational databases on Amazon Aurora | **up to +75% performance, −28% cost** (AWS Database Blog, 27 Nov 2025) |
+| **Shutterfly** | Right-sizing + licence avoidance, 2,000 → 1,200 VMs | **about 25% opex reduction**, migration finished **March 2025** |
+| **Paytm** | Graviton adoption | **−35% compute**, 60% of EC2 on Graviton |
+| **SmartNews** | Spot for the main workload | **−50%** on that workload |
+| **Coinbase** | Migration and modernisation | **−62% cost** since 2022 |
+| **Capital One** | AWS Lambda for one application | **−90% cost on that application** |
+| **NASA** | Early cloud adoption | *"almost a million dollars in cost savings each year"* (**11 June 2012** — always date-stamp it) |
+
+```matching
+{
+  "question": "Match each AWS customer story to the cost lever the CLF-C02 exam expects you to recognise:",
+  "pairs": [
+    {"left": "Box: 2.23 million USD in savings, of which egress alone is worth over 1.1 million per year", "right": "Architecture and billing-dimension hygiene - storage tiering, CloudTrail event filtering and routing around internet gateways, with no commitment purchase"},
+    {"left": "Canva: compute costs down 46 percent in less than two years across mixed workloads", "right": "Purchase-model mix - Spot for interruptible projects, On-Demand plus Savings Plans for steady capacity, Reserved Instances as a fallback"},
+    {"left": "FarEye: compute costs down 65 percent, about 1 million USD per year", "right": "Layered commitment plus spare capacity - Compute Savings Plans for the steady floor, EC2 Spot for the elastic overflow, Graviton for price-performance"},
+    {"left": "NASA JPL: 4.4 TB of downlinked data per day turned into up to 70 TB of data products", "right": "Spot at up to 90 percent off inside Auto Scaling, paired with On-Demand for the critical path and Capacity Reservations for guaranteed launch room"},
+    {"left": "Zendesk: up to 30 percent faster and up to 42 percent cheaper on Aurora", "right": "Price-performance - Graviton processors plus right-sizing, reported as a customer result rather than an AWS guarantee"},
+    {"left": "Shutterfly: 2,000 VMs cut to 1,200 before the March 2025 cutover", "right": "Right-sizing and licence avoidance - about a 25 percent operating-expenditure reduction"}
+  ],
+  "explanation": "Four levers cover every cost story AWS publishes: architecture (Box), commitment pricing (Canva, FarEye), interruptible capacity (NASA JPL) and price-performance (Zendesk). Match the stem to the lever first - the company name and the percentage are decoration. Every figure was published on an AWS case-study page accessed October 2026 and describes that customer's estate, never a guarantee AWS makes to yours."
+}
+```
+
+> ⚠️ **Customer results are not AWS guarantees.** The single most common Domain 4 writing error is turning *"Zendesk reduced costs by up to 42 percent"* into *"AWS guarantees 42 percent savings"*. AWS publishes **outcomes achieved by named customers on their own estates** — never a promised rate. Second error: **numbers lose their dates in prep material**. NASA's *"almost a million dollars"* is from **11 June 2012**, Shutterfly's cut landed in **March 2025**, Netflix/Aurora's −28% is from a **27 November 2025** blog, and every percentage here is **as of Oct 2026** — restate them with the date, say *"customer achieved"*, and **verify current before use**.
+
+- **📚 Did you know?** Amazon S3 launched on **14 March 2006** at **$0.15 per GB per month**, backed by roughly **1 PB across about 400 storage nodes in 15 racks** and **15 Gbps** of total bandwidth, with a **5 GB maximum object size**. AWS's own twenty-year retrospective (AWS News Blog, **13 March 2026**) says S3 now charges *"slightly over 2 cents per gigabyte"* — about **an 85% price reduction since launch** — and that S3 Intelligent-Tiering has saved customers **over $6 billion**. That is what AWS's *economies of scale* (§1.1) produce over twenty years of one service — the pay-as-you-go price itself falls while the meter keeps running: prices as of Oct 2026, **verify current before use**.
+
+- **📚 Did you know?** Box's $2.23 million came from **AWS Well-Architected Framework** reviews — **free** best-practice guidance — which is a different animal from **Trusted Advisor** (checks *your account's* configuration against AWS's recommendations) and from an **AWS Support plan** (paid human help). The three are constantly conflated: **Well-Architected reviews the design, Trusted Advisor checks the account, Support talks to AWS** — and none of them is a purchasing option (as of Oct 2026).
+
 ---
 
 ## Practice Questions
@@ -832,6 +955,38 @@ flowchart LR
 }
 ```
 
+```question
+{
+  "id": "clf-13-q11",
+  "type": "multiple-choice",
+  "question": "AWS's Box case study reports $2.23 million in savings: over $1.1 million per year from egress, over $500,000 per year from storage, $438,000 from inter-Availability-Zone traffic, and $192,000 per year from logging. Which reading of this story matches what the CLF-C02 exam expects?",
+  "options": [
+    "Box's savings came from purchasing options - it committed to Reserved Instances and Savings Plans for every workload in its estate",
+    "Box's savings came from architecture and billing-dimension hygiene - storage tiering, log volume and data-transfer paths - achieved with no commitment purchase",
+    "Box's savings came from migrating to the cheapest AWS Region, because Region selection is always the largest single pricing lever",
+    "Box's savings came from Free Tier allowances applied to its production storage and data transfer"
+  ],
+  "correct": 1,
+  "explanation": "AWS attributes the $2.23 million to Well-Architected Framework reviews, S3/Glacier tiering, EBS volume and snapshot hygiene, CloudTrail event filtering and routing traffic around internet gateways - the section 4 billing dimensions, with data transfer out the largest single line - rather than to the section 2 commitment ladder. Free Tier never answers a production-workload question, Region selection is a tie-breaker rather than a first filter, and the figure is a customer result as of Oct 2026, never an AWS guarantee."
+}
+```
+
+```question
+{
+  "id": "clf-13-q12",
+  "type": "multiple-choice",
+  "question": "Which set of statements about recent AWS pricing, egress and free-tier changes is correct as of Oct 2026?",
+  "options": [
+    "The 100 GB monthly free data-transfer-out allowance began with a change effective 1 December 2021; accounts created on or after 15 July 2025 get a 6-month Free plan worth up to USD 200 in credits with t2.micro no longer on the eligible instance list; and Database Savings Plans launched 2 December 2025 at up to 35% for a 1-year no-upfront commitment",
+    "The 100 GB Regions allowance and CloudFront's 1 TB allowance were both introduced in 2025; every account receives 12 months of t2.micro; and Database Savings Plans are named in the CLF-C02 exam guide as core vocabulary",
+    "New accounts get 12 months of Free Tier plus USD 200 in credits; data transfer OUT to the internet is free below 1 TB per month; and Savings Plans commitments can never be returned",
+    "Database Savings Plans give up to 72% off; the Free Tier restructuring took effect on 1 January 2026; and the 100 GB free egress allowance applies only in us-east-1"
+  ],
+  "correct": 0,
+  "explanation": "AWS's Free Tier data-transfer expansion (100 GB/month from the Regions plus 1 TB/month through CloudFront) took effect 1 December 2021 and is still current as of Oct 2026. The 15 July 2025 restructure gives newer accounts a Free plan lasting 6 months or until credits run out - USD 100 at sign-up plus up to USD 100 earned - with eligible types t3.micro, t3.small, t4g.micro, t4g.small, c7i-flex.large and m7i-flex.large, not t2.micro. Database Savings Plans launched 2 December 2025 at up to 35% (1-year, no upfront), but the exam guide still lists only 'AWS Savings Plans'. And commitments below $100/hour CAN be returned in the same calendar month, up to 10 per year, so 'never returned' is false."
+}
+```
+
 > [!IMPORTANT]
 > **Comparative Verdict — pricing models × on-premises capex × other clouds × AWS commitment options**
 > - **Versus on-premises capex:** on premises the unit of purchase is a **physical server bought once and depreciated**, so the bill is a step function — you over-buy to survive the next spike, and capacity you failed to use is money already spent. AWS converts that capital expenditure into a **variable, metered operating expenditure** where the same three drivers (compute, storage, outbound data transfer) accrue only while in use, where **turning off unused instances can save "70 percent or more"**, and where the *downside* is new: an **unattended meter runs in the wrong direction too**. The exam's on-premises comparison always ends the same way — capex buys hardware you must forecast; cloud pricing buys capacity you must *watch*.
@@ -866,4 +1021,5 @@ flowchart LR
 > 6. **Free Tier has three clocks** — Always Free (e.g. **Lambda 1M requests + 400,000 GB-s/month**, **100 GB data transfer out/month**), 12 Months Free (e.g. **750 h/month of t2.micro/t3.micro**, **S3 5 GB + 20,000 GET + 2,000 PUT**), Trials (from first usage) — plus the post-**15 July 2025** credit plan (**$100 now + up to $100 more = up to $200 over 6 months**), an **85% email alert**, no roll-over, no Free Tier in **GovCloud**, and the 100 GB data-transfer allowance also excludes the **China Regions**;
 > 7. **Billing units decide the bill**: S3 = **GB-month + requests per 1,000 (DELETE free, LIST at PUT rate)**; EBS = **GB-month metered per second with a 60-second minimum, plus provisioned IOPS, throughput and snapshot GB-month (gp3 includes 3,000 IOPS and 125 MB/s)**; RDS = **instance hours (1-second increments, 10-minute minimum) + storage + backup, even when stopped**; Lambda = **$0.20 per 1M requests + $0.0000167 per GB-second**; Route 53 = **$0.50/zone for the first 25 + $0.40 per million queries, private zone queries free**; CloudFront = **per GB out + per 10,000 requests, with 1 TB + 10M requests free monthly**;
 > 8. **Worked arithmetic you should be able to reproduce**: S3 **500,000 writes + 20,000,000 reads = $10.50/month**; **600 GB egress = (600 − 100) × $0.09 = $45.00**; **2 zones + 500k queries = $1.20**; **730 h × $0.0416 = $30.37 vs 730 h × $0.0672 = $49.06**; **750 free hours ÷ 730 = 1.03 instances running 24/7**; **third action-enabled budget = $0.10/day = $3.00 per 30-day month**;
-> 9. **Five tools, five questions** — *what will it cost?* **Pricing Calculator** (free, no account, 730 h/month, excludes Free Tier) · *what does my on-premises estate cost versus AWS?* **Migration Evaluator** (complimentary, formerly TSO Logic) · *what did I spend, what is next?* **Cost Explorer** (UI free, 13-month history, 18-month forecast per the user guide) · *am I about to overspend?* **Budgets** (monitoring free, first two action-enabled free, then $0.10/day) · *where is the line-item proof?* **Billing and Cost Management console + the Cost and Usage Report**, with **AWS Organizations consolidated billing** and **cost allocation tags** for allocation — and **verify current before use** on every rate.
+> 9. **Five tools, five questions** — *what will it cost?* **Pricing Calculator** (free, no account, 730 h/month, excludes Free Tier) · *what does my on-premises estate cost versus AWS?* **Migration Evaluator** (complimentary, formerly TSO Logic) · *what did I spend, what is next?* **Cost Explorer** (UI free, 13-month history, 18-month forecast per the user guide) · *am I about to overspend?* **Budgets** (monitoring free, first two action-enabled free, then $0.10/day) · *where is the line-item proof?* **Billing and Cost Management console + the Cost and Usage Report**, with **AWS Organizations consolidated billing** and **cost allocation tags** for allocation — and **verify current before use** on every rate;
+> 10. **Case studies are the story layer, never the guarantee** — AWS-published customer outcomes (**Box $2.23M** across egress, storage, inter-AZ and logging; **Canva −46% compute** with a Spot + Savings Plans + RI mix; **FarEye −65% ≈ $1M/year**; **NASA JPL Spot up to 90% off**) are results on *those* estates **as of Oct 2026**; the four levers are **architecture, commitment, interruptible capacity, price-performance**, and the **2026 updates box** records the sourced changes — **Free Tier restructured 15 July 2025** (**6 months or credits exhausted**, up to **USD 200**, `t2.micro` dropped), the **100 GB** egress allowance dating from **1 December 2021**, **Database Savings Plans** from **2 December 2025** at **up to 35%**, and the Savings Plans **return rule** (under **$100/hour**, same calendar month, **≤10 per year**).

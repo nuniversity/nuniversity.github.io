@@ -70,8 +70,9 @@ In this lesson you will:
 - price an **Athena** query and a **Glue** job, and explain why partitioning pays;
 - separate **Kinesis Data Streams from Data Firehose**, then place **OpenSearch, QuickSight, EMR and Redshift**;
 - one-line every remaining in-scope service — **ML suite, Connect, SES, DevTools, IoT Core, EUC, Amplify, Marketplace**;
-- study **two AWS-published case studies** (Capital One and Paytm);
-- practise with **10 exam-style questions** plus three interactive checks.
+- study **five AWS-published case studies** (Capital One, Paytm, Amazon Prime Video, NASA JPL and the NFL);
+- check what the **2026 service-list changes** did to the names, categories and distractors this exam tests;
+- practise with **12 exam-style questions** plus four interactive checks.
 
 ---
 
@@ -512,6 +513,21 @@ AWS groups these as **purpose-built AI services** — pre-trained APIs you call 
 
 - **📚 Did you know?** Two services in this lesson were **renamed rather than replaced**: **Amazon Data Firehose** dropped "Kinesis Data" from its name in **February 2024**, and **Amazon OpenSearch Service** was renamed from **Elasticsearch Service** on **8 September 2021**. Older questions, blogs and third-party tutorials still use both old names, so a stem mentioning "Elasticsearch Service" or "Kinesis Data Firehose" is testing the *same* in-scope service (accessed Oct 2026).
 
+### 2026 Updates (as of October 2026)
+
+> **What changed in the guide itself.** Every bullet below comes from the current CLF-C02 **in-scope** and **out-of-scope** service lists and the launch-era `Version 1.0 CLF-C02` guide, all accessed **2026-10**. Prices and limits still drift, so re-check before you sit the exam.
+>
+> - **The service list was rebuilt.** In-scope entries fell **128 → 111** while the explicit negative list grew **11 → 55** out-of-scope entries — for Domain 3 the biggest "what changed" is that AWS now writes down most of the distractors this lesson used to warn you about from memory.
+> - **Three re-spellings make old names wrong:** **Amazon SageMaker → Amazon SageMaker AI**, **Amazon WorkSpaces Web → Amazon WorkSpaces Secure Browser**, and the in-scope list prints the BI service as **"Amazon Quick Sight"** (two words) while the product name is Amazon QuickSight — whether the guide's spacing is intentional could **not** be verified.
+> - **The Machine Learning row moved from "build" to "use":** **Amazon Q was added**, **Amazon Kendra was removed from the in-scope list**, and **Amazon Bedrock appears on neither the in-scope nor the out-of-scope list** (both lists checked 2026-10) — so do not memorise Bedrock as in-scope, and treat whether generative-AI content is examined as unverified.
+> - **Developer Tools collapsed from 11 in-scope entries to 4** — **AWS CLI, AWS CodeBuild, AWS CodePipeline, AWS X-Ray** — exactly the four covered in section 8.2 of this lesson; anything still listing CodeStar, Cloud9 or a longer Developer Tools roster is quoting a superseded guide.
+> - **Formerly in-scope integration and analytics names are now distractors:** **Amazon MSK** and **AWS Data Exchange** moved from the in-scope list to the out-of-scope list, **AWS CodeDeploy, AWS CodeArtifact** and **AWS IoT Greengrass** are out of scope too, and **AWS AppSync** was removed from the in-scope list; **AWS Wavelength** is explicitly out of scope while **AWS Local Zones** appears on **neither** list.
+> - **Category rename:** `Customer Engagement` → **Customer Enablement**, which now contains only **AWS Support** — so AWS Activate, AWS IQ and AWS Managed Services are no longer in-scope answers anywhere on this exam.
+>
+> Sources: AWS Certified Cloud Practitioner (CLF-C02) in-scope services list, out-of-scope services list and exam guide, accessed 2026-10; baseline = launch-era `Version 1.0 CLF-C02` exam guide (accessed 2026-10).
+
+- **📚 Did you know?** The largest 2026 change to this lesson is not a price at all: the in-scope list **shrank from 128 to 111 entries** while the explicit out-of-scope list **grew from 11 to 55**, and the Developer Tools category alone went **11 → 4**. Notes built on the launch-era `Version 1.0` guide are therefore quoting a superseded document, which is why every "never the correct answer" list in this lesson was re-checked against the live lists (accessed 2026-10).
+
 ---
 
 ## Real-World Case Studies
@@ -551,6 +567,57 @@ AWS publishes what these patterns look like in production. Every figure below is
 | Integration services carry the load | Capital One: Step Functions, Lambda, SES, Connect, Glue | Task 3.8's services are production plumbing, not lab exercises |
 | Analytics cost follows compute cost | Paytm: **30–35%** EMR savings via Graviton | EMR = per-second instance time + EMR uplift; right-size the engine |
 | Every percentage is a *customer* result | "−90%", "30–35%", "−70%" | Never write "AWS guarantees X%" |
+
+### Case C — Amazon Prime Video: integration at a global live-sports peak
+
+| Element | Detail |
+|---|---|
+| **Industry / context** | Live sports streaming, where AWS quotes its own delivery team: *"With live sporting events, reliability and low latency are absolutely critical because every lost second negatively impacts viewers"* |
+| **AWS services named** | **six AWS Regions**, Amazon CloudFront, Amazon DynamoDB, Amazon EC2, AWS Elemental MediaTailor, multi-AZ and Regional failover |
+| **Headline outcomes (AWS-published, customer-claimed)** | **11 NFL games** streamed to **18.4 million** fans in **224 countries and territories** during the 2017 NFL regular season; **300,000+ clients polling per ad break**; DynamoDB **partitions doubled from the console** at ad breaks |
+| **Integration lesson** | Hundreds of thousands of *polling* clients per ad break is exactly the traffic this exam's push/pull split exists to remove — SQS **long polling (0–20 s)** and SNS **push** are the in-scope answers to "stop hammering an endpoint" |
+| **Exam caveat** | AWS Elemental / **MediaTailor** sits in the Media Services, which are explicitly **out of scope** — name only the in-scope services the stem asks for |
+| **Source** | aws.amazon.com/solutions/case-studies/amazon-prime-video (accessed Oct 2026) |
+
+*Exam lesson:* the figure to carry into the exam room is not 18.4 million — it is **300,000+ clients polling per ad break**. Any stem about *many clients repeatedly checking for new state* is a push-versus-pull question: **SNS pushes**, **SQS consumers poll** (and long-poll up to **20 seconds** precisely to cut that traffic), and **EventBridge matches events with nobody polling at all**. The second lesson is elasticity: DynamoDB partitions were **doubled from the console during the game**, not after a procurement cycle — that is the Domain 1 agility story told through an integration service.
+
+### Case D — NASA JPL: telemetry at analytics scale
+
+| Element | Detail |
+|---|---|
+| **Industry / context** | NASA's Jet Propulsion Laboratory (JPL) and the Perseverance rover — AWS's Public Sector Blog (2021-02-22) calls it *"the first planetary NASA mission, with mission-critical communication and transfer of telemetry data in the cloud"* |
+| **AWS services named** | EC2 **Auto Scaling** mixing **Spot, On-Demand and Capacity Reservations**; the 2012-era NASA story on AWS also names **SWF**, CloudFront and RDS |
+| **Headline outcomes (AWS-published, customer-claimed)** | **~4.4 TB of downlinked data daily**, generating **up to 70 TB of final data products**; Spot at *"up to a 90 percent discount compared to Amazon EC2 On-Demand pricing"*; NASA separately reported *"almost a million dollars in cost savings each year"* (AWS News Blog, 2012-06-11) |
+| **Analytics lesson** | Ingest → process → data products is the pipeline shape taught here with **Kinesis Data Streams, Data Firehose, Glue and Athena**; the case study answers only the *compute* half of the story |
+| **Scope trap** | **Amazon Simple Workflow Service (SWF)** — the orchestration service in NASA's 2012 story — is now **explicitly out of scope**; on this exam the workflow answer is always **AWS Step Functions** |
+| **Source** | aws.amazon.com/solutions/case-studies/nasa-jpl-spot-case-study; aws.amazon.com/blogs/publicsector (2021-02-22); aws.amazon.com/blogs/aws (2012-06-11) — all accessed Oct 2026 |
+
+*Exam lesson:* two separable questions hide inside this story. **"How do you process terabytes a day?"** → the analytics stack: capture the ordered stream (**Kinesis Data Streams**), land it without consumer code (**Data Firehose**), catalog and clean it (**Glue**), ask questions (**Athena**), warehouse it (**Redshift**), chart it (**Quick Sight**). **"How do you pay for the compute underneath?"** → pricing models: **Spot** for fault-tolerant, interruptible batch (documented up to **90% off** On-Demand) with On-Demand and Capacity Reservations for the rest. Never merge the halves: Spot never answers an analytics-selection stem, and Athena never answers a pricing-model stem.
+
+### Case E — NFL: a fan-facing analytics product
+
+| Element | Detail |
+|---|---|
+| **Industry / context** | The NFL's fan-facing digital product, built on AWS |
+| **Headline outcomes (AWS-published, customer-claimed)** | **1 million+** fans; **updates every 3 minutes**; **500 million+ data points per season** |
+| **Analytics lesson** | A season of 500 M+ data points refreshed every three minutes is a *requirement shape* — ordered capture, near-real-time delivery, then a presentable view |
+| **Source** | aws.amazon.com/solutions/case-studies/nfl-case-study (accessed Oct 2026) |
+
+*Exam lesson:* read the stem's **cadence**, never its marketing. *"Ordered, replayable, updates every few minutes"* ⇒ **Amazon Kinesis Data Streams** (shards, **24 hours default retention up to 365 days**); *"land it in S3 with no consumer code"* ⇒ **Amazon Data Firehose**; *"charts and dashboards for a million fans"* ⇒ **Amazon Quick Sight**; *"SQL questions over what landed in S3"* ⇒ **Amazon Athena**. The case-study page is the source for the *numbers* only — the service selection is yours, and it must come from the in-scope list.
+
+### What cases C–E add
+
+| Value pattern | Evidence | Underlying principle |
+|---|---|---|
+| Push beats polling at scale | Prime Video: **300,000+ clients polling per ad break** | SQS **long polling (0–20 s)** and SNS **push** exist to cut exactly that traffic |
+| The analytics pipeline shape repeats | NASA JPL: **4.4 TB/day → up to 70 TB/day** of data products; NFL: **500 M+ data points per season** | Capture → land → catalog → query → present: Kinesis, Firehose, Glue, Athena, Quick Sight |
+| Elasticity is a console action | Prime Video: DynamoDB **partitions doubled** mid-game | Managed services scale without a procurement cycle (Domain 1 agility) |
+| Pricing model ≠ service choice | NASA JPL: **Spot up to 90% off** On-Demand | Choose the in-scope service first, then the purchase option |
+| Out-of-scope names live inside real stories | AWS Elemental / MediaTailor and **SWF** both appear in AWS's own case studies | A case study never licenses an out-of-scope answer |
+
+- **📚 Did you know?** AWS's own Prime Video case study reports **300,000+ clients polling per ad break** — precisely the behaviour SQS **long polling** (wait up to **20 seconds** instead of re-polling immediately) and SNS's **push** model are documented to remove, so the page doubles as AWS's own justification for this exam's push-versus-pull split (case study accessed Oct 2026; limits as of Oct 2026 — verify current before use).
+
+- **📚 Did you know?** NASA JPL's page quotes **up to a 90 percent discount** for Spot versus On-Demand, while its data pipeline runs **~4.4 TB of downlinks a day** — one story, two exam domains: a **Domain 4** pricing-model answer (Spot for fault-tolerant batch) and a **Domain 3** analytics-selection answer (Kinesis, Firehose, Glue, Athena, Redshift), and the 2012 orchestration service it used, **SWF, is now out of scope** (case study and blogs accessed Oct 2026).
 
 - **📚 Did you know?** Capital One's page contains both halves of this lesson at once: the **integration** half (Step Functions **80% faster** checks, one application **−90%** on Lambda) and the **business-application** half — it is one of AWS's published users of **Amazon Connect** and **Amazon SES**. AWS also documents the migration's physical tail: **103 tons of copper and steel recycled** from the eight data centers it exited (case study accessed Oct 2026).
 
@@ -721,6 +788,38 @@ AWS publishes what these patterns look like in production. Every figure below is
 }
 ```
 
+```question
+{
+  "id": "clf-11-q11",
+  "type": "multiple-choice",
+  "question": "A candidate's notes, built from the launch-era Version 1.0 CLF-C02 guide, list eleven in-scope Developer Tools services and Amazon MSK as an analytics option. Which statement about the current service lists (checked October 2026) is correct?",
+  "options": [
+    "Developer Tools still lists eleven services and Amazon MSK remains in scope for streaming analytics",
+    "Amazon MSK was deleted from both lists, so it can now be selected, and AWS CodeDeploy is still in scope",
+    "Developer Tools now holds exactly four entries - AWS CLI, AWS CodeBuild, AWS CodePipeline and AWS X-Ray - while Amazon MSK is on the out-of-scope list, so MSK can never be the correct answer",
+    "The in-scope list grew back to 128 entries and Amazon Bedrock was added to the Machine Learning category"
+  ],
+  "correct": 2,
+  "explanation": "The current lists were rebuilt: in-scope entries fell 128 to 111, out-of-scope entries grew 11 to 55, and Developer Tools collapsed from 11 entries to AWS CLI, CodeBuild, CodePipeline and X-Ray (accessed 2026-10). Amazon MSK is explicitly out of scope, so it is a distractor rather than an answer; Amazon Bedrock appears on neither list, so option 4 is wrong; AWS CodeDeploy is on the out-of-scope list, so option 2 is wrong."
+}
+```
+
+```question
+{
+  "id": "clf-11-q12",
+  "type": "multiple-choice",
+  "question": "A clickstream emits 4,000 records per second averaging 10 KB each and must be captured as an ordered stream with replay for up to 365 days. Using the documented per-shard write limits, how many shards are required?",
+  "options": [
+    "4 shards, because each shard is documented at 10,000 records per second",
+    "10 shards, because each shard is documented at 400 records per second",
+    "Unlimited - Kinesis Data Streams is serverless and has no shard limit to calculate",
+    "40 shards: bandwidth gives 40,000 KB/s = 40 MB/s divided by the 1 MB/s per-shard write limit, and record rate gives 4,000 / 1,000 = 40, so both limits agree"
+  ],
+  "correct": 3,
+  "explanation": "Amazon Kinesis Data Streams documents 1 MB/s and 1,000 records/s writes per shard (with 2 MB/s reads): 4,000 x 10 KB = 40,000 KB/s = 40 MB/s, so 40 shards on bandwidth, and 4,000 / 1,000 = 40 shards on record rate - both constraints agree on 40. Retention of 24 hours by default, up to 365 days, is what makes replay possible. Amazon Data Firehose would remove the shard arithmetic entirely, but it has no replay window, so the ordered-with-replay requirement forces Data Streams."
+}
+```
+
 ```matching
 {
   "question": "Match each business problem to the single AWS service that the CLF-C02 exam treats as the answer:",
@@ -775,6 +874,21 @@ AWS publishes what these patterns look like in production. Every figure below is
 }
 ```
 
+```matching
+{
+  "question": "Match each service to its status on the current CLF-C02 service lists (in-scope and out-of-scope lists checked October 2026):",
+  "pairs": [
+    {"left": "Amazon SageMaker AI", "right": "IN SCOPE - renamed from Amazon SageMaker, so the \"AI\" suffix is now part of the required name"},
+    {"left": "Amazon Q", "right": "IN SCOPE - added to the Machine Learning category since the launch-era Version 1.0 guide"},
+    {"left": "Amazon MSK (managed Apache Kafka)", "right": "OUT OF SCOPE - moved off the in-scope list, so it can only ever be a distractor"},
+    {"left": "AWS Wavelength", "right": "OUT OF SCOPE - explicitly listed as out of scope in the current guide"},
+    {"left": "AWS Local Zones", "right": "ON NEITHER LIST - absent from both the in-scope and the out-of-scope lists"},
+    {"left": "Amazon Bedrock", "right": "ON NEITHER LIST - absent from both lists, so its exam status stays unverified rather than in scope"}
+  ],
+  "explanation": "The service lists were rebuilt: in-scope entries fell 128 to 111 while out-of-scope entries grew 11 to 55 (accessed 2026-10). SageMaker AI and Amazon Q are in scope (a rename and a genuine addition), Amazon MSK and AWS Wavelength are explicit out-of-scope distractors, and AWS Local Zones plus Amazon Bedrock appear on neither list - never present either as in-scope, and never claim the exam covers generative AI."
+}
+```
+
 > [!IMPORTANT]
 > **Comparative Verdict — integration and analytics × on-premises × point-to-point DIY × other clouds × managed AWS services**
 > - **Versus on-premises / self-managed middleware:** on premises you provision broker and cluster VMs, patch them, capacity-plan queues and clusters in both directions, and a spike becomes a procurement cycle. AWS replaces that with serverless endpoints — SQS queues, SNS topics, EventBridge buses and Step Functions workflows with **no broker fleet to patch**, retention and visibility handled for you, plus Athena and QuickSight where a data warehouse used to mean buying hardware and licences. Capital One's **eight exited data centers** and **3-month → minutes** development environments are the on-premises side of that trade (customer-claimed, accessed Oct 2026). You still own your message schemas, your idempotency logic and the data you put in S3.
@@ -799,8 +913,9 @@ AWS publishes what these patterns look like in production. Every figure below is
 > - **Business applications:** only **Connect and SES** are in scope — **Amazon WorkDocs is out**; "email at scale" ⇒ SES, "cloud contact center" ⇒ Connect; "present the output of VMs on end-user machines" ⇒ **AppStream 2.0 / WorkSpaces / WorkSpaces Secure Browser**;
 > - **Developer tools:** in = **CLI, CodeBuild, CodePipeline, X-Ray**; out = **CodeDeploy, CodeArtifact, CodeGuru, Device Farm, CloudShell, Application Composer** — "compile and run unit tests" ⇒ CodeBuild, "model the release workflow" ⇒ CodePipeline, "trace across microservices" ⇒ X-Ray (30-day retention);
 > - **Out-of-scope lookalikes are never correct:** **Amazon AppFlow**, Amazon MSK, SWF, AppFabric, Personalize, Fraud Detector, Lookout for Metrics, Panorama, all Media Services;
+> - **2026 list changes (checked 2026-10):** in-scope **111** entries vs out-of-scope **55**; Developer Tools = **CLI, CodeBuild, CodePipeline, X-Ray** only; **Amazon SageMaker → Amazon SageMaker AI**, **Amazon Q** added, **Amazon Kendra** removed; **Amazon MSK** and **AWS Wavelength** out, **AWS Local Zones** and **Amazon Bedrock** on neither list — the list you download on exam day, not a pre-2025 PDF, is the arbiter;
 > - **Unverified — do not memorise:** whether generative-AI content is examined (Bedrock absent from the list), **AWS CodeCommit's** status (on neither list), **SNS delivery guarantees beyond HTTP/S, Lambda and SQS**, and **Amazon Connect per-minute rates** (only "pay per usage, no per-seat fee" is sourced);
-> - **Case-study numbers are customer-claimed, unaudited ceilings** — Capital One's **−90%** and Paytm's **30–35%** are reported results, never AWS guarantees.
+> - **Case-study numbers are customer-claimed, unaudited ceilings** — Capital One's **−90%** and Paytm's **30–35%** are reported results, never AWS guarantees; the same rule covers Prime Video's **300,000+ polling clients**, NASA JPL's **4.4 TB/day** and the NFL's **500 M+ data points**.
 
 > [!SUCCESS]
 > **Key Takeaways:**
@@ -814,4 +929,5 @@ AWS publishes what these patterns look like in production. Every figure below is
 > 8. **Glue** = serverless ETL + **Data Catalog** (**$0.44/DPU-hour**, 1 DPU = 4 vCPU + 16 GB, 2-DPU minimum, 10-minute crawler minimum) — **Glue catalogs, Athena queries, Quick Sight visualizes**;
 > 9. **Kinesis Data Streams** = ordered **shards** (**1 MB/s + 1,000 records/s write, 2 MB/s read**) with **24 h → 365 days** retention and replay; **Data Firehose** (renamed **Feb 2024**) = **no shards, no consumer code**, landing into S3/Redshift/OpenSearch/Splunk/Snowflake;
 > 10. BI and big data: **Quick Sight** (Reader **$3/user/month**, 10 GB SPICE per Author), **EMR** (per-second, 1-minute minimum, plus EC2 and EBS), **Redshift** (warehouse, **from $0.543/h** provisioned or **$1.50/h** Serverless, Spectrum **$5/TB**), **OpenSearch Service** (domains for logs and search, renamed from Elasticsearch Service in 2021);
-> 11. Everything else in one line each: **Rekognition** images · **Comprehend** NLP · **Textract** documents · **Transcribe** speech→text · **Polly** text→speech · **Translate** · **Lex** chatbots · **SageMaker AI** build/train/deploy · **Amazon Q** gen-AI assistants · **Connect** contact center · **SES** email · **CodeBuild** compile/test (per build minute) · **CodePipeline** release workflow · **X-Ray** tracing (30 days) · **IoT Core** devices · **Amplify** frontend · **AppStream 2.0 / WorkSpaces / WorkSpaces Secure Browser** VM output · **Marketplace** third-party catalog — and **AppFlow, Amazon MSK, WorkDocs, SWF, CodeDeploy and Personalize are out-of-scope distractors**, never correct answers.
+> 11. Everything else in one line each: **Rekognition** images · **Comprehend** NLP · **Textract** documents · **Transcribe** speech→text · **Polly** text→speech · **Translate** · **Lex** chatbots · **SageMaker AI** build/train/deploy · **Amazon Q** gen-AI assistants · **Connect** contact center · **SES** email · **CodeBuild** compile/test (per build minute) · **CodePipeline** release workflow · **X-Ray** tracing (30 days) · **IoT Core** devices · **Amplify** frontend · **AppStream 2.0 / WorkSpaces / WorkSpaces Secure Browser** VM output · **Marketplace** third-party catalog — and **AppFlow, Amazon MSK, WorkDocs, SWF, CodeDeploy and Personalize are out-of-scope distractors**, never correct answers;
+> 12. **2026 service lists (accessed Oct 2026):** in-scope **111** entries / out-of-scope **55**, **Developer Tools = CLI, CodeBuild, CodePipeline, X-Ray**, **Amazon SageMaker → Amazon SageMaker AI**, **Amazon Q** added, **Amazon Kendra** removed, **MSK** and **Wavelength** out, **Local Zones** and **Bedrock** on neither list — download the current lists, not a pre-2025 PDF.

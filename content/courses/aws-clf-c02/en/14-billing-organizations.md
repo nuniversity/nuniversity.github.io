@@ -1,6 +1,6 @@
 ---
 title: "Billing, AWS Organizations and Cost Governance"
-description: "Read the AWS bill the way an examiner does: the Bills page and billing dashboard cut by service, Region, account and cost allocation tag; AWS Organizations roots, OUs and the management-versus-member split; consolidated billing's single payment, volume-discount pooling, Reserved Instance and Savings Plans sharing, and the blended-versus-unblended trap; the deny-only SCP ceiling that never grants; tag activation, showback and chargeback; AWS Budgets with threshold alerts and budget actions, Cost Explorer filters and forecasts, RI/SP utilization versus coverage, the Cost and Usage Report and cost-anomaly awareness; AWS Marketplace buying, private offers and Private Marketplace; plus invoices, currencies and payment basics — with seven worked numeric examples, five diagrams, three interactive checks and ten practice questions."
+description: "Read the AWS bill the way an examiner does: the Bills page and billing dashboard cut by service, Region, account and cost allocation tag; AWS Organizations roots, OUs and the management-versus-member split; consolidated billing's single payment, volume-discount pooling, Reserved Instance and Savings Plans sharing, and the blended-versus-unblended trap; the deny-only SCP ceiling that never grants; tag activation, showback and chargeback; AWS Budgets with threshold alerts and budget actions, Cost Explorer filters and forecasts, RI/SP utilization versus coverage, the Cost and Usage Report and cost-anomaly awareness; AWS Marketplace buying, private offers and Private Marketplace; plus invoices, currencies and payment basics — with seven worked numeric examples, five diagrams, a real-world case-study section, a sourced 2026-updates box, four interactive checks and twelve practice questions."
 order: 14
 difficulty: "beginner"
 duration: "60 minutes"
@@ -50,7 +50,7 @@ In this lesson you will:
 - read **RI/SP reservation, utilization and coverage** reports and diagnose over-buying vs under-buying;
 - navigate **AWS Marketplace**: consolidated billing of third-party purchases, private offers and Private Marketplace;
 - handle **invoices, currencies and payment basics**, and know that **billing support is free for everyone**;
-- practise with **10 exam-style questions** plus three interactive checks.
+- practise with **12 exam-style questions** plus four interactive checks.
 
 ---
 
@@ -601,6 +601,113 @@ SYMPTOM                                          -> ANSWER
 
 ---
 
+## Real-World Case Studies
+
+Sections 1–10 teach the tools; these five AWS-published stories show the tools against real bills. **Every figure below is a *customer* result that AWS itself published** (official case-study pages accessed **2026-10**) — none of them is an AWS guarantee, and none of them is a memorisable exam number. What transfers to exam day is the **lever**: which charge type, which pricing model, which governance mechanism actually moved.
+
+| Case | Domain hook | What AWS published (accessed Oct 2026) | Lesson section it proves |
+|---|---|---|---|
+| **Box** — enterprise SaaS | D4 cost governance | **$2.23 M** total: inter-AZ **$438 K** + egress **$1.1 M/yr** + storage **>$500 K/yr** + logging **$192 K/yr** | Section 6 tags · Section 7 cost tooling |
+| **Canva** — SaaS design platform | D4 pricing models | compute costs **−46% in under 2 years** | Section 4 RI/SP/Spot |
+| **FarEye** — SaaS logistics | D4 pricing models | compute **−65%**, **$1 M/year**, Graviton **+30%** performance | Section 4 + Section 7.1 budgets |
+| **athenahealth** — healthcare software | D2/D4 multi-account governance | inspection costs **−95%**; hundreds of VPCs across **120 accounts** in days; team of **8** | Section 2 Organizations · Section 5 SCPs |
+| **Shutterfly / SBS** — e-commerce printing | D4 right-sizing and licences | **~25%** opex cut; VMs **2,000 → 1,200** | Section 7.3 utilization/coverage |
+
+### Case 1 — Box: $2.23 M from architecture, not from a discount code
+
+*Challenge:* cut spend without weakening security, reliability or performance. *Services:* Well-Architected Framework with Solutions Architect reviews, S3/S3 Glacier storage tiering, EBS volume-and-snapshot hygiene, CloudTrail event filtering, and routing traffic around internet gateways.
+
+*What AWS published:* **$2.23 million** unpacked into four **charge types**:
+
+| Lever AWS lists | Published figure |
+|---|---|
+| Internet egress (data transfer out) | **over $1.1 million per year** |
+| Storage tiering (S3 / S3 Glacier) | **over $500,000 per year** |
+| Inter-AZ data transfer | **$438,000** |
+| Log volume (CloudTrail event filtering) | **$192,000 per year** |
+| **Total** | **over $2.23 million** |
+
+Customer voice — Clay Alvord, director of FinOps and SRE: *"Our use of AWS best practices led to savings of over 2 million dollars, setting a new baseline…"*
+
+**Exam link:** not one dollar came from a discount code or from Organizations. Three of the four levers are **architecture and hygiene**, which is why AWS frames cost optimisation as the Well-Architected **cost pillar**; the fourth (storage) is a **tiering/purchasing** decision. This lesson connects at both ends: activated cost allocation tags and Cost Explorer/CUR (Sections 6–7) are what *show* you that inter-AZ transfer and log volume are ballooning — but only a redesign *removes* the charge.
+
+```plot
+{
+  "type": "bar",
+  "title": "Box: AWS-published savings by charge type (USD)",
+  "data": [
+    {"chargeType": "Internet egress", "usd": 1100000},
+    {"chargeType": "Storage tiering", "usd": 500000},
+    {"chargeType": "Inter-AZ transfer", "usd": 438000},
+    {"chargeType": "Log volume", "usd": 192000}
+  ],
+  "xKey": "chargeType",
+  "yKey": "usd",
+  "xLabel": "Charge type",
+  "yLabel": "USD saved"
+}
+```
+
+*Figures exactly as AWS publishes them: egress ("over $1.1 million per year") and storage ("over $500,000") are floors; inter-AZ $438,000 and logging $192,000 are exact — as of Oct 2026.*
+
+### Case 2 — Canva: the pricing-model ladder as a business
+
+*Challenge:* cost-effective scale with reliability tiers per user plan. *Services:* **Spot** for free-tier projects, **On-Demand + Savings Plans** for paying Pro users, **Reserved Instances** as a fallback, plus AWS cost tooling.
+
+*What AWS published:* **compute costs reduced by 46 percent in less than 2 years** — and the case study quotes AWS's own list claims alongside it: RIs *"a discount of up to 72 percent compared to On-Demand"*, Savings Plans *"up to 72 percent … in exchange for a 1- or 3-year hourly spend commitment"*, Spot *"up to 90 percent discount"* (as of Oct 2026; verify current before use).
+
+**Exam link:** this is Section 4 turned into a plan — **steady baseline → Savings Plans** (flexible $/hour commitment), **steady family/AZ-pinned work → Reserved Instances**, **interruptible spare capacity → Spot**. Two habits to keep: commitment discounts are always *"up to"* percentages, never guaranteed, and the cheapest tier of an application is exactly what Spot is for.
+
+### Case 3 — FarEye: three levers in one bill
+
+*Challenge:* thin last-mile logistics margins and a need for predictable spend. *Services:* **Compute Savings Plans**, **EC2 Spot**, and **Graviton** across 500+ Spot/On-Demand instances.
+
+*What AWS published:* AWS compute costs **reduced by 65 percent**, **$1 million per year** in cloud cost savings, and **+30 percent** performance from Graviton.
+
+**Exam link:** predictable spend is the Section 7.1 story — a company that must forecast to the dollar runs **thresholds and budget actions**, not month-end surprises; and the discount ladder it climbed (Savings Plans → Spot → Graviton price-performance) is the same ladder Canva climbed in Case 2.
+
+### Case 4 — athenahealth: governance across 120 accounts
+
+*Challenge:* monitor egress across a sprawling VPC estate while inspection costs climbed, with a small team. *Services:* centralized **AWS Network Firewall**, Transit Gateway, **AWS RAM** for policy fan-out, CloudFormation rules-as-code, Direct Connect.
+
+*What AWS published:* inspection costs **reduced by 95 percent**; hundreds of VPCs across **120 accounts** added *"within just a few days"*; **eight people** designed and rolled out the new security design with no disruptions.
+
+**Exam link:** 120 accounts is only operable because of **AWS Organizations** (Section 2: one root, OUs five levels deep, the management account as payer) plus sharing mechanisms such as **AWS RAM**; the **deny-only SCP ceiling** of Section 5 is what keeps member accounts inside the guardrails while one central firewall does the inspection. The cost lesson mirrors Section 6: **centralise once, allocate many** — one inspection layer billed once beats 120 copies, and the money shows up first in the management account's **Charges by account** view.
+
+### Case 5 — Shutterfly: right-sizing and licence avoidance
+
+*Challenge:* on-premises VMware, stand-alone stacks, 2,000+ VMs and a colocation exit. *Services:* VMware Cloud on AWS as a bridge (August 2022), then native migration completed **March 2025 — six months early** — roughly 800 systems and 400 TB, about 80% of workloads on ECS.
+
+*What AWS published:* VM footprint **2,000 → 1,200**, and an **approximately 25% opex cut** from licence avoidance plus right-sizing.
+
+**Exam link:** *right-sizing* is the free lever — it is what Cost Explorer recommendations, Cost Optimization Hub (Section 7.5) and a Well-Architected cost review exist to find, and utilization-vs-coverage (Section 7.3) is how you prove you stopped over-buying; *licence avoidance* is the classic on-premises → cloud TCO argument (Domain 1) landing in a Domain 4 bill.
+
+> [!WARNING]
+> **Customer result ≠ AWS guarantee — the fastest way to lose a Domain 4 mark.** *Zendesk* reduced costs by up to **42%**, *Canva* by **46%**, *FarEye* by **65%**: those are **the customers' published outcomes**, and AWS never promises them to you. The discount numbers that genuinely belong to AWS are the **list** figures — *"up to 72 percent"* for Reserved Instances and Savings Plans, *"up to 90 percent"* for Spot (as of Oct 2026; verify current before use). Any option that reads *"AWS guarantees X% savings"* is wrong on sight.
+
+- **📚 Did you know?** AWS's Box write-up is signed by the **customer's** director of FinOps and SRE, not by AWS — and our 2026-10 research digest found the same pattern across the whole case-study library (roughly **95% of pull-quotes are customer staff**, not AWS executives). Read every saving as *"the customer achieved"*, never as *"AWS guarantees"*. Two of the stories here are also **multi-account** stories by design: athenahealth's **120 accounts** and Shutterfly's separate SBS estate both depend on Organizations-style structure before any cost tool can aggregate a thing.
+
+---
+
+### 2026 Updates (as of October 2026)
+
+Money facts move faster than the exam guide. Everything below comes from our October 2026 research pass — **only what AWS published is stated**; nothing unverifiable is asserted.
+
+> [!NOTE]
+> **Sourced changes since 2025 — billing console, Organizations and commitments:**
+> - **The console moved, the syllabus did not.** AWS shipped **Savings Plans / Reserved Instances group sharing to GA** (AWS What's New, 2025-11-19) and **Target Coverage in the Savings Plans Purchase Analyzer** (AWS Cloud Financial Management blog, 2026-06-09), after **Cost Optimization Hub** (2023-11-26) and alongside the **Well-Architected Agent** preview (2026-10-01) — yet the guide's examinable names remain **AWS Budgets, AWS Cost Explorer, AWS Pricing Calculator**, so Sections 7–8 of this lesson still answer the exam.
+> - **Database Savings Plans launched 2025-12-02**: up to **35%** for a 1-year no-upfront commitment (serverless up to 35%, provisioned up to 20%, DynamoDB 18%, Amazon Keyspaces 12%). Real and recent — but **not named in the CLF-C02 guide**, so never the keyed answer where **AWS Savings Plans** fits.
+> - **Savings Plans now have a published return rule:** commitments priced **below 100 USD/hour** can be returned in the **same calendar month**, **≤10 returns per year**; commitments of **100 USD/hour or more cannot be returned** (AWS Cloud Financial Management blog, 2026-06-24; as of Oct 2026, verify current before use).
+> - **Task 4.2 dropped AWS Billing Conductor** — the live guide reads *"Understanding the appropriate uses and capabilities of AWS Budgets and AWS Cost Explorer"*, and Billing Conductor now sits on the official **out-of-scope** list (55 entries) — which is exactly how Section 7.5 treats it: a distractor, never the answer.
+> - **Task 4.3's support names changed in the exam text itself:** *Basic Support, AWS Business Support+, AWS Enterprise Support, AWS Unified Operations*; Developer, classic Business and Enterprise On-Ramp take **no new subscriptions after 2025-12-02** and existing ones run **through 2027-01-01** — consistent with Section 9.3, and a reminder that plan names are Domain 4's churniest fact.
+> - **The in-scope list now spells the export "AWS Cost and Usage Reports"** (plural) — a rename of the CUR from Section 7.4, not a new service; the same list confirms the exam's own copy of **AWS Cost and Usage Report(s)** alongside Budgets and Cost Explorer.
+>
+> **Marketplace:** our 2026-10 sources contained **no verifiable AWS Marketplace billing change**, so treat every Section 8 fact above as standing unchanged as of Oct 2026 — and never invent a Marketplace "update" from memory.
+
+- **📚 Did you know?** The **Free Tier itself changed on 2025-07-15**: accounts created on or after that date get **6 months** (or until credits run out) plus a **USD 100 sign-up credit and up to USD 100 earnable = up to USD 200**, while older accounts keep the legacy **12-month**, `t2.micro`-based tier — and `t2.micro`/`t3.micro` gave way to `t3.micro`, `t3.small`, `t4g.micro`, `t4g.small`, `c7i-flex.large`, `m7i-flex.large`. Both behaviours are correct AWS behaviour; the trap is assuming one universal rule (as of Oct 2026; verify current before use).
+
+---
+
 ## Practice Questions
 
 ```question
@@ -760,6 +867,38 @@ SYMPTOM                                          -> ANSWER
   ],
   "correct": 1,
   "explanation": "AWS states directly: 'Your bill will not reflect the structure that you have defined in your organization.' Allocation is done with activated cost allocation tags (or rules-based cost categories), and the Charges by account tab exists only in the management account. The feature set controls guardrails (SCPs, tag policies), not bill layout, and RI sharing only spreads discounts - it never creates invoices."
+}
+```
+
+```question
+{
+  "id": "clf-14-q11",
+  "type": "multiple-choice",
+  "question": "During a cost review an engineer writes: 'AWS says we will save $2.23 million, so we should budget for it.' The reference is AWS's Box case study. Which pair of statements is correct?",
+  "options": [
+    "AWS published the $2.23M as a customer result broken into internet egress, storage tiering, inter-AZ transfer and log-volume levers - a customer outcome, never an AWS guarantee",
+    "AWS guarantees $2.23M of savings to any customer that completes a Well-Architected Review",
+    "The $2.23M came from consolidated billing volume discounts pooled across the organization's 120 accounts",
+    "The $2.23M is an AWS Marketplace credit applied automatically to Enterprise Support accounts"
+  ],
+  "correct": 0,
+  "explanation": "AWS's Box case study reports over $2.23 million in savings as four customer levers: over $1.1M/year from internet egress, over $500K/year from storage tiering, $438,000 from inter-AZ data transfer and $192,000/year from log volume - achieved through Well-Architected reviews, S3/S3 Glacier tiering, EBS snapshot hygiene and CloudTrail event filtering. Case-study percentages and totals are customer results AWS publishes, never guarantees (the 42% figure belongs to Zendesk, 46% to Canva). Pooled consolidated-billing discounts are real but are not what produced this figure; the 120-account figure belongs to athenahealth; Marketplace credits do not fund savings."
+}
+```
+
+```question
+{
+  "id": "clf-14-q12",
+  "type": "multiple-choice",
+  "question": "A team regrets a Savings Plans commitment it bought this month. As of Oct 2026, which statement about returns is correct (AWS Cloud Financial Management blog, 2026-06-24)?",
+  "options": [
+    "Commitments priced below 100 USD/hour can be returned within the same calendar month, up to 10 returns per year; commitments of 100 USD/hour or more cannot be returned",
+    "Any Savings Plans commitment can be returned at any time for a full refund, regardless of price",
+    "Commitments below 100 USD/hour can be returned an unlimited number of times, while commitments of 100 USD/hour or more may be returned up to 10 times per year",
+    "Commitments can be returned only after they have run for 30 days, and only through an Enterprise Support case"
+  ],
+  "correct": 0,
+  "explanation": "AWS's published rule is precise: commitments priced under 100 USD/hour are returnable in the same calendar month and are capped at 10 returns per year, while commitments of 100 USD/hour or more cannot be returned at all. Price, calendar month and the annual cap are the three variables the exam can rotate - not Support tiers, not a 30-day waiting period. As of Oct 2026; verify current before use."
 }
 ```
 

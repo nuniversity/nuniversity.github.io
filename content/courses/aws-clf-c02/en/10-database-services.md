@@ -76,8 +76,9 @@ In this lesson you will:
 - place **Neptune and DocumentDB** from two-word stems;
 - split a migration between **AWS SCT (schema) and AWS DMS (data)**;
 - run the **workload → database decision table** end to end;
-- study **two AWS-published case studies** (Netflix and Amazon Prime Video);
-- practise with **12 exam-style questions** plus three interactive checks.
+- check the **2026 updates** that touch databases — scope-list additions and removals, Database Savings Plans and the era-dependent Free Tier;
+- study **four AWS-published case studies** (Netflix, Amazon Prime Video, Zendesk and Philip Morris International);
+- practise with **14 exam-style questions** plus four interactive checks.
 
 ---
 
@@ -489,6 +490,20 @@ AWS defines ElastiCache as *"a distributed in-memory data store or cache environ
 
 > ⚠️ **ElastiCache is never the answer to "where is the data stored durably?"** It is an *ephemeral cache*. If the stem needs a durable primary database, the answer is RDS, Aurora, DynamoDB or DocumentDB — and if it asks for a durable **in-memory** database, the marketing-page option is **Amazon MemoryDB**, which is **out of scope** for CLF-C02 and therefore never correct.
 
+```matching
+{
+  "question": "Match each caching or in-memory requirement to the service the CLF-C02 exam expects you to pick:",
+  "pairs": [
+    {"left": "The simplest possible object cache, multi-threaded, scale nodes in and out, no replication required", "right": "Memcached on Amazon ElastiCache - no replication, no failover, no node-based backups"},
+    {"left": "Sessions with TTLs plus a score-ordered leaderboard that must survive a node failure automatically", "right": "Redis OSS (or Valkey) on Amazon ElastiCache - complex types, sorted sets, replication and automatic failover"},
+    {"left": "Microsecond reads for repeated hotspots on one existing DynamoDB table", "right": "Amazon DynamoDB Accelerator (DAX) - an in-memory cache for DynamoDB only, milliseconds to microseconds"},
+    {"left": "A durable relational primary that must survive an Availability Zone failure with automatic failover", "right": "Amazon RDS or Amazon Aurora with Multi-AZ - the cache is ephemeral and never the system of record"},
+    {"left": "A durable in-memory database quoted from an AWS marketing page", "right": "Amazon MemoryDB - explicitly out of scope for CLF-C02, so it can never be the correct answer"}
+  ],
+  "explanation": "Sort on two questions: is the data durable or ephemeral, and which product family owns the access pattern? Simple horizontal cache scale-out is Memcached; TTLs, sorted sets and automatic failover are Redis OSS/Valkey; microsecond reads over DynamoDB are DAX; anything that must be the system of record leaves ElastiCache entirely for RDS, Aurora, DynamoDB or DocumentDB; and the durable in-memory marketing answer, Amazon MemoryDB, is on the out-of-scope list, so it is a distractor by definition."
+}
+```
+
 ---
 
 ## 6. Amazon Redshift: the warehouse, not the transaction
@@ -710,6 +725,21 @@ the normal shape of a Domain 3 database question.
 
 ---
 
+## 10. Staying current: what changed for databases
+
+### 2026 Updates (as of October 2026)
+
+> [!NOTE]
+> **Four sourced changes that touch this lesson** — each checked against a primary AWS source (the CLF-C02 exam guide, the in-scope/out-of-scope service lists, the AWS News Blog) and accessed **Oct 2026**. The exam tests the guide you download today, not the PDF your prep material was revised from:
+> - **The in-scope database list was reshaped after launch.** The launch-era *Version 1.0* guide listed **128** in-scope entries; the current list has **111**, while the explicit out-of-scope list grew from **11** to **55**. Inside the Database category, **Amazon DocumentDB** and **Amazon ElastiCache** were *added*, and **Amazon MemoryDB for Redis OSS**, **Amazon Keyspaces (for Apache Cassandra)** and **AWS AppConfig** now sit on the negative list — so two of this lesson's six database services are post-launch additions and three familiar database-adjacent names are eliminations you can make on sight *(in-scope and out-of-scope lists, diff computed 2026-10)*.
+> - **Database Savings Plans launched on 2 December 2025.** AWS advertises **up to 35%** savings for a **1-year, no-upfront** commitment across database workloads — serverless up to **35%**, provisioned up to **20%**, **DynamoDB 18%** and **Amazon Keyspaces 12%** *(AWS News Blog and What's New, 2025-12-02)* — but **the CLF-C02 guide does not name it**: Task 4.1 still teaches *AWS Savings Plans*, Reserved Instances, On-Demand and Spot, so Database Savings Plans is recent news, not an examinable answer *(discounts as of Oct 2026; verify current before use)*.
+> - **Free Tier became account-age dependent on 15 July 2025.** Accounts created on or after that date get **6 months** of Free Tier (or until the credits run out) plus a **USD 100** sign-up credit and up to **USD 100** earned more — **up to USD 200** in total — while accounts created earlier keep the legacy **12-month**, usage-limit tier *(AWS News Blog 2025-07-15 and the EC2 User Guide "before and after July 15, 2025" table)*. Any stem quoting a free *database* instance allowance is therefore era-dependent: read the account date, not your memory *(as of Oct 2026; verify current before use)*.
+> - **Pricing vocabulary in the guide was made explicit.** The technologies list now spells out *"Reserved Instances, On-Demand Instances, Spot Instances"*, and the examinable tool names remain **Cost Explorer, AWS Budgets, Pricing Calculator, Trusted Advisor** and the **Well-Architected Tool** — while genuinely new console features (**Cost Optimization Hub**, **RI/SP Group Sharing** GA on 2025-11-19, **Target Coverage** on 2026-06-09, **Well-Architected Agent** preview on 2026-10-01) are real and recent but **not named in the guide**, so they are context, never an answer *(exam guide plus What's New posts, accessed 2026-10)*.
+
+- **📚 Did you know?** The current in-scope list is officially labelled **"non-exhaustive and subject to change"** and carries **no version number at all**: the only stamped artefact AWS ever published for this exam is the launch-era *Version 1.0 CLF-C02* guide, while today's PDF prints nothing but *"Copyright © 2026"* — and the `uiVersion=2024.10` string on the docs page is the AWS Docs **site template** version, not a guide revision. That is precisely why every figure in this lesson is dated **"as of Oct 2026"**: with no changelog to cite, the access date *is* the version (exam guide landing page and PDF, accessed 2026-10; verify current before use).
+
+---
+
 ## Real-World Case Studies
 
 AWS publishes what these patterns look like in production. Every figure below is **customer- or AWS-claimed and unaudited**, quoted with its source so you can check it — the examinable point is the **pattern** (which store was chosen, which limit it removed, which number moved), not the marketing.
@@ -746,6 +776,41 @@ AWS publishes what these patterns look like in production. Every figure below is
 | Right store for the access pattern | Prime Video: control-plane reads on **DynamoDB**, not a relational engine | Key-value, spiky, low-latency ⇒ NoSQL; joins and transactions ⇒ relational |
 | Capacity is a decision, not a hope | Prime Video doubled **partitions** before ad breaks | Know your traffic; provision or burst **on purpose** |
 | Numbers are ceilings | "Up to 75%", "18.4 million fans" | Customer-claimed and unaudited — never an AWS guarantee |
+
+### Case C — Zendesk: better price-performance on the same Aurora engine
+
+| Element | Detail |
+|---|---|
+| **Industry / context** | SaaS customer-service platform, all-in on AWS since 2018, running a relational estate of **1,200+ global Aurora clusters** where cost and performance had to improve together rather than one at a time |
+| **AWS services named** | **Amazon Aurora** upgraded to **Graviton-based** Amazon EC2 instances, combined with **right-sizing** of the existing fleet |
+| **Headline outcomes (AWS-published, customer-claimed, completed May 2023)** | *"improved performance by up to 30 percent, reduced costs by up to 42 percent"* |
+| **Database lesson** | Price-performance on a database is often a **configuration** decision, not a product decision: the same managed engine, on a different processor architecture and a right-sized instance class, moved **both** axes — no rewrite and no new service |
+| **Source** | aws.amazon.com/solutions/case-studies/zendesk-graviton-case-study (accessed Oct 2026) |
+
+*Exam lesson:* **up to 42% is Zendesk's ceiling, not an AWS guarantee** — attribute it as a customer result with its access date. The transferable move is the ordering: before you change database products, exhaust **instance class, processor architecture (Graviton) and right-sizing** — and remember AWS's standing caveat that Graviton requires **code or container-image compatibility** work first.
+
+### Case D — Philip Morris International: Amazon RDS as the landing zone for 400 applications
+
+| Element | Detail |
+|---|---|
+| **Industry / context** | Regulated manufacturing pivoting to smoke-free products under GDPR and PCI obligations, which **sold its own data centers first** and committed to AWS before the migration began (August 2020) |
+| **AWS services named** | **Amazon RDS**, a **data lake**, AWS Professional Services with IBM, and Well-Architected reviews |
+| **Headline outcomes (AWS-published, customer-claimed, over 2 years from August 2020)** | **400 applications** migrated in **2 years** and now *"all in on AWS"*; **+50%** performance; **70%** of applications on automated pipelines, making changes **80%** faster; **up to 50%** savings on **some RDS costs**; **500+** Cloud Practitioner certifications |
+| **Database lesson** | A managed relational service is the **default landing zone at portfolio scale**: RDS absorbs patching, backups, failure detection and HA for hundreds of teams at once, which is exactly the §2.1 responsibility table multiplied across a whole application estate |
+| **Source** | aws.amazon.com/solutions/case-studies/philip-morris-case-study (accessed Oct 2026) |
+
+*Exam lesson:* AWS's own page admits the initial aggressive *"lift and shift"* *"yielded suboptimal results"* — the savings appeared when workloads were **replatformed onto managed services**. That is the 6 Rs in one story (rehost first, replatform after), and the database choice is part of the migration strategy, not a footnote. Keep the qualifiers: *"up to 50% savings on **some** RDS costs"* is scoped and customer-claimed — never restate it as an RDS price cut.
+
+### What Cases C and D add
+
+| Value pattern | Evidence | Underlying principle |
+|---|---|---|
+| Configure before you replace | Zendesk: **+30%** performance and **−42%** cost on the *same* Aurora engine | Instance class, Graviton and right-sizing come first; changing database products is the last move, not the first |
+| Managed scales to program level | PMI: **400** applications on **RDS**, savings **up to 50%** on some RDS costs | The shared-responsibility shift in §2.1 is what makes one platform team safe for hundreds of owners |
+| Migration strategy decides the database outcome | PMI: lift-and-shift *"yielded suboptimal results"*, replatforming onto RDS delivered the gains | Rehost vs replatform (the 6 Rs) is a Domain 1 concept that shows up inside Domain 3 database stems |
+| Every number stays scoped | *"up to 42 percent"*, *"up to 50% … some RDS costs"* | Customer-claimed ceilings with qualifiers — attribute the source and access date, never generalise |
+
+- **📚 Did you know?** Capital One's *"all in on AWS"* estate names **Amazon RDS** among the **30+ AWS services** it runs, and the bank reports building **80% of its nearly 2,000 applications** cloud-native while cutting the time needed to build a development environment **from 3 months to minutes** (aws.amazon.com Capital One case-study pages, accessed Oct 2026). At that scale the managed-database argument in §2.1 stops being a convenience: when AWS owns patching, backups and failure detection, a fresh development environment — including its database — becomes a minutes-long task instead of a hardware-and-licence project.
 
 - **📚 Did you know?** AWS's own *"how to choose a database"* page illustrates the mixed estate with **AWS's e-commerce stack**: **Amazon DocumentDB** for the catalog, **Amazon DynamoDB** for browsing and cart, and **Amazon Aurora** for relational order data (aws.amazon.com/databases, updated 2 June 2026). One retailer, three database engines, each chosen by access pattern — which is the whole argument of this lesson, made by AWS about its own storefront.
 
@@ -945,6 +1010,38 @@ AWS publishes what these patterns look like in production. Every figure below is
   ],
   "correct": 0,
   "explanation": "Neptune is AWS's fully managed graph database, documented for billions of relationships at milliseconds latency with Gremlin and openCypher (property graph) and SPARQL (RDF), up to 15 Neptune Replicas and automatic failover; its documented uses include fraud detection, recommendations and social or knowledge graphs. Redshift is the OLAP warehouse, ElastiCache is an ephemeral cache, and DMS moves data rather than querying relationships."
+}
+```
+
+```question
+{
+  "id": "clf-10-q13",
+  "type": "multiple-choice",
+  "question": "A finance team asks which commitment discount applies to its Amazon RDS and Amazon DynamoDB workloads, and quotes a December 2025 announcement about Database Savings Plans offering up to 35% off a 1-year, no-upfront commitment. Which statement is correct for CLF-C02 as of Oct 2026?",
+  "options": [
+    "Database Savings Plans replaced On-Demand billing for every AWS database, so RDS and DynamoDB are no longer billed hourly",
+    "Database Savings Plans is named in the CLF-C02 exam guide as a fourth commitment option alongside On-Demand, Reserved Instances and Spot",
+    "Database Savings Plans is real and recently launched (up to 35%, 1-year, no upfront), but the guide still names only AWS Savings Plans - so it is news, not an examinable answer",
+    "Database Savings Plans applies only to Amazon Aurora and never to DynamoDB or other database engines"
+  ],
+  "correct": 2,
+  "explanation": "AWS announced Database Savings Plans on 2 December 2025 with savings of up to 35% for a 1-year, no-upfront commitment (serverless up to 35%, provisioned up to 20%, DynamoDB 18%, Amazon Keyspaces 12%) - but the live CLF-C02 guide's task statements still say AWS Savings Plans, and neither Database Savings Plans nor the 2026 Well-Architected Agent appears anywhere in the guide. The exam tests the guide you download today: On-Demand, Reserved Instances, Spot and Savings Plans remain the commitment vocabulary, coverage applies beyond Aurora, and the percentages are dated offers to re-check as of Oct 2026 rather than guarantees."
+}
+```
+
+```question
+{
+  "id": "clf-10-q14",
+  "type": "multiple-choice",
+  "question": "Since the launch-era Version 1.0 guide, the CLF-C02 in-scope list was rebuilt from 128 entries to 111 and the out-of-scope list grew from 11 to 55. Which pair of statements about database services on those lists is correct as of Oct 2026?",
+  "options": [
+    "Amazon MemoryDB and Amazon Keyspaces were added to the in-scope Database category, and Amazon DocumentDB was removed from it",
+    "The Database category did not change at all - only the Analytics and Machine Learning categories were rebuilt",
+    "Amazon DocumentDB and Amazon ElastiCache were added to the in-scope Database category, while Amazon MemoryDB and Amazon MSK moved to the out-of-scope list",
+    "AWS Database Migration Service and AWS Schema Conversion Tool were moved to the out-of-scope list because migration is a Domain 1 topic"
+  ],
+  "correct": 2,
+  "explanation": "Diffing the launch-era guide against the current in-scope and out-of-scope lists (computed 2026-10) shows Amazon DocumentDB and Amazon ElastiCache as two of the nine additions, while 26 names left the in-scope list - including Amazon MemoryDB for Redis OSS and Amazon MSK - and most of them now appear on the explicit out-of-scope list. Amazon Keyspaces and AWS AppConfig were already eliminations for this lesson, and DMS plus AWS SCT remain firmly in scope under Migration and Transfer, because identifying database migration tools is one of Task 3.4's five skill statements."
 }
 ```
 
