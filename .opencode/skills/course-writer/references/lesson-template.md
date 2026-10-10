@@ -94,3 +94,64 @@ Lesson files: `{NN}-{kebab-case}.md`
 Examples:
 - `01-foundations-of-agent-memory.md`
 - `02-vector-stores-embeddings-and-rag-architecture.md`
+
+---
+
+## Publication-Grade Lesson Skeleton (exam-course pattern)
+
+The validator minimum is 5 questions + 1 interactive + Key Takeaways. Publication-grade lessons (see `content/courses/aws-dea-c01/en/`) go further — use this skeleton for full course builds:
+
+````markdown
+---
+title: "<Full lesson title>"
+description: "<crafted, keyword-rich>"
+order: 2
+difficulty: "intermediate"
+duration: "60 minutes"
+---
+# <Full lesson title>
+
+## 1. <Teaching section — concept + table + mermaid diagram>
+
+Prose with inline math where natural ($...$), a ```sql / ```python worked
+example with real numbers, then the interactive block that drills the concept
+(```matching / ```fillblank / ```dragdrop / ```plot).
+
+### 📚 Did you know?
+<3+ curiosity callouts as plain bold paragraphs or TIP boxes across the lesson>
+
+## 2. <Next teaching section>
+
+...
+
+> **Comparative Verdict:** <this-service/platform> vs <alternative-cloud> vs
+> <self-managed/on-prem> — when the exam prefers each.
+
+## Real-World Case Studies
+
+### <Named company> — <one-line outcome>
+<challenge / services / AWS-published metrics with source date / which domain it illustrates>
+
+### 2026 Updates (as of October 2026)
+- <3–6 sourced bullets: rebrands, new limits, exam-guide revisions>
+
+⚠️ WARNING (or IMPORTANT) box with the sharpest trap for this topic.
+
+## Practice Questions
+
+≥10 ```question blocks (ids <prefix>-NN-q1…), scenario-style stems,
+explanation names the top distractor. ≥2 interactive blocks mixed in or
+right after relevant sections.
+
+> [!SUCCESS]
+> ### Key Takeaways
+> 1. ...
+> 2. ...
+> 3. ...
+````
+
+Mandatory closers for publication-grade work:
+
+- Bare ` ``` ` fence closers everywhere (never ` ```text ` as a closer)
+- `> [!SUCCESS]` block containing the literal string `Key Takeaways` as the LAST content
+- Heading matching `^## .*Practice Questions` (e.g. `## Practice Questions`, `## 2. Practice Questions — Set A`)

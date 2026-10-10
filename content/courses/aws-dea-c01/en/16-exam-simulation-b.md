@@ -294,13 +294,13 @@ Two more AWS-published customer stories, run through the same two moves as secti
     { "left": "A · 70 billion records a day, S3 write path, Redshift read path, Object Lock archive", "right": "1 · D2 Data Store Management" },
     { "left": "B · 30 TB of clickstream a day through a stream plus a buffered delivery", "right": "2 · D1 Data Ingestion and Transformation" },
     { "left": "C · Macie discovers PII in S3; EventBridge and Lambda do the responding", "right": "3 · D4 Data Security and Governance" },
-    { "left": "D · RA3 right-sizing that cut Redshift operating cost by 55 % a year", "right": "4 · D3 Data Operations and Support" }
+    { "left": "D · Amazon Customer Service: RA3 right-sizing cut Redshift operating cost by 55 % a year", "right": "4 · D3 Data Operations and Support" }
   ],
   "answer": "A→1, B→2, C→3, D→4"
 }
 ```
 
-- **📚 Did you know?** AWS reports that PayU consolidated roughly **40 production databases** into S3 plus Redshift, cut query latency from **10–15 minutes to under a minute**, saved **$20,000 a month**, and dropped query volume from **150,000 to 35,000 per month (−77 %)** — and those are **two different levers**: the platform consolidation bought the money, the query rationalisation bought the volume. On this exam a stem that asks for *cost* and a stem that asks for *demand* are never answered with the same number, even when both come from the same customer story.
+- **📚 Did you know?** AWS reports that PayU consolidated roughly **40 production databases** into S3 plus Redshift, cut query latency from **10–15 minutes to under a minute**, saved **$20,000 a month**, and dropped query volume from **150,000 to 35,000 per month (−77 %)** — and those are **two different levers**: the platform consolidation delivered the savings, the query rationalisation delivered the volume cut. On this exam a stem that asks for *cost* and a stem that asks for *demand* are never answered with the same number, even when both come from the same customer story.
 
 ---
 

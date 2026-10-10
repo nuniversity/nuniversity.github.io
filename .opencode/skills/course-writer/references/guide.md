@@ -67,10 +67,37 @@ content/courses/agent-memory-knowledge/
 
 ## Interactive Components
 
-The platform supports 6 interactive component types via fenced code blocks with JSON configs. STEM lessons (Math, Physics, Chemistry, Biology, Engineering) must include at least 2 interactive components.
+The platform supports 7 interactive component types via fenced code blocks with JSON configs (`question`, `phet`, `plot`, `molecule`, `dragdrop`, `matching`, `fillblank`). Publication-grade lessons: minimum 2 interactive components, varied types across the course.
 
 > [!CRITICAL]
 > **Closing Fence Rule:** All interactive blocks MUST use bare ` ``` ` as the closing fence. Never ` ```text ` or any other text after the backticks. This is the #1 cause of "Invalid matching config" JSON errors.
+
+### Practice Questions (MCQ / True-False)
+
+**Tag:** ` ```question `
+
+**Config** (verified against `QuestionBlock.tsx`):
+```json
+{
+  "id": "course-01-q1",
+  "type": "multiple-choice",
+  "question": "Which service ingests streaming data at 1 MB/s per shard?",
+  "options": ["Amazon S3", "Kinesis Data Streams", "Amazon MQ", "AWS DataSync"],
+  "correct": 1,
+  "explanation": "Kinesis Data Streams: 1 MB/s writes and 2 MB/s reads per shard (as of Oct 2026). S3 is not a streaming ingest service."
+}
+```
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | string | Yes | Unique across the course (`<prefix>-NN-qN`) |
+| `type` | string | Yes | `multiple-choice` or `true-false` |
+| `question` | string | Yes | Question stem (scenario-style preferred) |
+| `options` | string[] | Yes | 4–5 options (for true-false use `["True","False"]`) |
+| `correct` | int | Yes | 0-based index of the correct option |
+| `explanation` | string | Recommended | Why correct + why the top distractor traps |
+
+---
 
 ### Math Equations (KaTeX)
 
@@ -94,7 +121,9 @@ For inline math, use $a^2 + b^2 = c^2$.
 **LaTeX escape rules:** Use single backslashes in `$$` notation. Common commands: `\frac{a}{b}`, `\sqrt{x}`, `\int`, `\sum`, `\vec{F}`, `\alpha`, `\beta`.
 
 > [!WARNING]
-> Do NOT use ` ```math ` JSON format - it has rendering issues. Always use `$$` notation for math formulas.
+> The ` ```math ` fence takes **raw LaTeX only** (no JSON) — rendered by MathBlock. Prefer `$$`/`$` delimiters for most formulas; use ` ```math ` for standalone display equations.
+
+**Supported callout types** (exactly eight): `NOTE`, `INFO`, `WARNING`, `DANGER`, `ERROR`, `SUCCESS`, `TIP`, `IMPORTANT` — e.g. `> [!TIP]`, `> [!IMPORTANT]`.
 
 ---
 
@@ -136,19 +165,21 @@ Embeds interactive simulations from PhET Interactive Simulations (University of 
 
 Embeds interactive charts using Recharts. Supports line, bar, scatter, and pie chart types. Charts are responsive and have dark-mode compatible tooltips.
 
-**Config:**
+**Config** (verified against `SciencePlot.tsx` — there is **no `yKey` field**; y-series are selected via `dataKeys` or auto-detected):
 ```json
 {
-  "type": "line",
-  "title": "Chart Title",
+  "type": "bar",
+  "title": "Domain weights (%)",
   "data": [
-    {"x": 0, "y": 0},
-    {"x": 1, "y": 9.8}
+    {"Domain": "Ingestion", "Weight": 34},
+    {"Domain": "Stores", "Weight": 26},
+    {"Domain": "Operations", "Weight": 22},
+    {"Domain": "Security", "Weight": 18}
   ],
-  "xKey": "x",
-  "yKey": "y",
-  "xLabel": "Time (s)",
-  "yLabel": "Velocity (m/s)"
+  "xKey": "Domain",
+  "dataKeys": ["Weight"],
+  "xLabel": "Exam domain",
+  "yLabel": "Weight (%)"
 }
 ```
 
@@ -157,12 +188,14 @@ Embeds interactive charts using Recharts. Supports line, bar, scatter, and pie c
 | `type` | string | Yes | `line`, `bar`, `scatter`, or `pie` |
 | `title` | string | No | Chart title |
 | `data` | array | Yes | Array of data objects |
-| `xKey` | string | Yes | Key for x-axis (not needed for pie) |
-| `yKey` | string | Yes | Key for y-axis (not needed for pie) |
+| `xKey` | string | No | Key for x-axis (defaults to first key of first row) |
+| `dataKeys` | string[] | No | Numeric keys to plot as series (auto-detected if omitted) |
 | `xLabel` | string | No | X-axis label |
 | `yLabel` | string | No | Y-axis label |
+| `colors` | string[] | No | Series/pie colors (default blue/red/green/…) |
+| `height` | number | No | Pixel height (default 350) |
 
-**Pie chart config:** For pie charts, use `data` with `name` and `value` keys:
+**Pie chart config:** use a numeric `dataKeys` value and a name key (default `name`):
 ```json
 {
   "type": "pie",
@@ -172,26 +205,25 @@ Embeds interactive charts using Recharts. Supports line, bar, scatter, and pie c
     {"name": "Potential", "value": 35},
     {"name": "Thermal", "value": 25}
   ],
-  "xKey": "name",
-  "yKey": "value"
+  "dataKeys": ["value"]
 }
 ```
 
-**Example (line chart):**
+**Example (multi-series line chart):**
 ```markdown
 \```plot
 {
   "type": "line",
-  "title": "Velocity vs Time",
+  "title": "Throughput vs shard count",
   "data": [
-    {"time": 0, "v": 0},
-    {"time": 1, "v": 9.8},
-    {"time": 2, "v": 19.6}
+    {"shards": 1, "mbps": 1},
+    {"shards": 2, "mbps": 2},
+    {"shards": 4, "mbps": 4}
   ],
-  "xKey": "time",
-  "yKey": "v",
-  "xLabel": "Time (s)",
-  "yLabel": "Velocity (m/s)"
+  "xKey": "shards",
+  "dataKeys": ["mbps"],
+  "xLabel": "Shards",
+  "yLabel": "MB/s (writes)"
 }
 \```
 ```
@@ -217,9 +249,11 @@ Renders 3D molecular structures from RCSB Protein Data Bank using 3Dmol.js. User
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `pdbId` | string | Yes | 4-character PDB identifier (e.g., 1CRN, 4HHB) |
-| `style` | string | No | `cartoon`, `sphere`, `stick`, `line`, or `surface` (default: cartoon) |
+| `style` | string | No | `cartoon`, `sphere`, `stick`, `line`, or `cartoon+stick` (default: cartoon) |
 | `color` | string | No | `spectrum`, `chain`, `element`, or hex color (default: spectrum) |
-| `height` | string | No | CSS height (default: 400px) |
+| `height` | string | No | CSS height (default: 500px) |
+| `label` | string | No | Display title (default: "Protein: {PDBID}") |
+| `background` | string | No | Background color override |
 
 **Example:**
 ```markdown
@@ -367,12 +401,12 @@ Students drag words from a word bank into blank slots within a template text. Su
 
 ## Rules for Interactive Components
 
-1. **STEM lessons:** Minimum 2 interactive components, maximum 3
-2. **Non-STEM lessons:** Interactive components are optional
-3. **Variety:** Don't repeat the same component type in consecutive lessons
-4. **Placement:** Always place interactive components after the text that explains the concept
-5. **Explanations:** Always include an `explanation` field in quiz configs (dragdrop, matching, fillblank)
-6. **JSON validity:** All config JSON must be valid — the validation script checks this
-7. **Data accuracy:** Chart data and molecule PDB IDs must be scientifically accurate
-8. **Accessibility:** All interactive components support keyboard navigation
-9. **Closing fences:** MUST be bare ` ``` ` — never ` ```text ` or any text after backticks
+1. **Minimum 2 interactive components per publication-grade lesson**; vary types across consecutive lessons; use every type at least once across a course
+2. **Variety:** Don't repeat the same component type in consecutive lessons
+3. **Placement:** Always place interactive components after the text that explains the concept
+4. **Explanations:** Always include an `explanation` field in quiz configs (dragdrop, matching, fillblank)
+5. **JSON validity:** All config JSON must be valid — the validation script checks this
+6. **Data accuracy:** Chart data and molecule PDB IDs must be scientifically accurate (never invented)
+7. **Accessibility:** All interactive components support keyboard navigation
+8. **Closing fences:** MUST be bare ` ``` ` — never ` ```text ` or any text after backticks
+9. **Worked examples:** pair interactives with real SQL/CLI/config snippets in highlighted languages (sql, python, bash, terraform, …)
