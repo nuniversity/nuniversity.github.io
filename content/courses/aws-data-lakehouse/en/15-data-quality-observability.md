@@ -240,13 +240,18 @@ AWS's getting-started walkthrough shows the same shape on its sample tickets tab
     "4": "dynamic",
     "5": "IsPrimaryKey"
   },
-  "distractors": {
-    "1": ["Ruleset", "Expectations"],
-    "2": ["having", "filter"],
-    "3": ["max", "median"],
-    "4": ["composite", "anomaly"],
-    "5": ["IsUnique", "DistinctValuesCount"]
-  },
+  "distractors": [
+    "Ruleset",
+    "Expectations",
+    "having",
+    "filter",
+    "max",
+    "median",
+    "composite",
+    "anomaly",
+    "IsUnique",
+    "DistinctValuesCount"
+  ],
   "explanation": "Rules = [ ... ] is the literal ruleset syntax AWS uses in the create_data_quality_ruleset API example. The where clause shipped 2024-06-26 and filters before evaluation, which is how you scope a freshness rule to yesterday's partition. avg(last(10)) is the documented dynamic-rule form - thresholds come from history, not from a constant someone typed once. Dynamic rules went GA 2024-08-07 alongside anomaly detection. IsPrimaryKey is the single rule that expresses not-null plus unique, which is why it replaces two rules in every production ruleset in this course."
 }
 ```

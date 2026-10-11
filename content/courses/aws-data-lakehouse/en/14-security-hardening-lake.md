@@ -465,13 +465,17 @@ The documented trap: "`NotPrincipal`… when you use `NotPrincipal` in a deny st
     "4": "aws:PrincipalIsAWSService",
     "5": "sts:ExternalId"
   },
-  "distractors": {
-    "1": ["s3:ListBucket", "s3:ExistingObjectTag"],
-    "2": ["aws:SourceIp", "aws:SourceAccount"],
-    "3": ["s3:TlsVersion", "aws:ViaAWSService"],
-    "4": ["aws:ViaAWSService", "aws:PrincipalIsAnonymous"],
-    "5": ["aws:ExternalId", "sts:SourceIdentity"]
-  },
+  "distractors": [
+    "s3:ListBucket",
+    "s3:ExistingObjectTag",
+    "aws:SourceIp",
+    "aws:SourceAccount",
+    "s3:TlsVersion",
+    "aws:ViaAWSService",
+    "aws:PrincipalIsAnonymous",
+    "aws:ExternalId",
+    "sts:SourceIdentity"
+  ],
   "explanation": "s3:prefix only ever scopes ListObjectsV2/ListObjects - put it on GetObject and it does nothing, which is why prefix access is a List condition PLUS an object-ARN wildcard. aws:SourceVpce is the network pin and is only present when the call came through a VPC endpoint, which is why AWS says never to wildcard it. aws:SecureTransport=false is the deny, but S3 redacts SecureTransport, TlsVersion, SourceIp and VpcSourceIp when Athena, Glue or Lake Formation call on your behalf, so the documented fix is aws:PrincipalIsAWSService=false on the human-principal statement with a separate allow for service principals. sts:ExternalId belongs in the role trust policy and AWS states it is not a secret - it proves the third party meant THIS customer's role."
 }
 ```

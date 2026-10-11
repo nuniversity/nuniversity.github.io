@@ -542,13 +542,23 @@ flowchart LR
     "4": "query",
     "5": "freezes"
   },
-  "distractors": {
-    "1": ["tag-based", "column-level", "service-role"],
-    "2": ["192000", "100", "1000"],
-    "3": ["registered-user", "console", "IAM Identity Center"],
-    "4": ["ingest", "authoring", "dashboard-publish"],
-    "5": ["replicates", "ignores", "re-applies"]
-  },
+  "distractors": [
+    "tag-based",
+    "column-level",
+    "service-role",
+    "192000",
+    "100",
+    "1000",
+    "registered-user",
+    "console",
+    "IAM Identity Center",
+    "ingest",
+    "authoring",
+    "dashboard-publish",
+    "replicates",
+    "ignores",
+    "re-applies"
+  ],
   "explanation": "Mechanism 1 is the user/group rules dataset: grant-access only since 2020-12-06, text fields only (numeric and date keys must be cast to string first), 999 rule records per user, and 192,000 filter values per restricted field when the dataset lives in SPICE. Mechanism 2 is tag rules, which exist for anonymous embedding only - GenerateEmbedUrlForAnonymousUser plus SessionTags, not registered users and not the console. Mechanism 3 is Lake Formation, enforced by Athena at query time: that is why direct query inherits source-side filters and why a SPICE import freezes the rows its ingest identity could see. Column-level security is a separate control (ColumnLevelPermissionRule, up to 100 principals per rule) and substitutes for none of the three."
 }
 ```

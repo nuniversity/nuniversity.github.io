@@ -833,6 +833,16 @@ Lesson angle: **one Glue-cataloged S3 lake plus a human-readable portal is what 
 
 ---
 
+### Case B — Vanguard FAS 360: from data swamp to catalogued data products
+
+**Vanguard (Financial Advisor Services, "FAS 360").** AWS's Big Data Blog (2026-03-18) opens on the before-state: *"Vanguard's first wave of modernization established FAS 360 as a centralized enterprise data warehouse, migrating from a fragmented 'data swamp' of Parquet files on Amazon Simple Storage Service(Amazon S3) to a structured, unified system."* The catalog is what made the after-state survivable. Two years later the published numbers are: *"20 TB in data volume in Amazon Redshift and another 150 TB in S3 data lake · 600+ AWS Glue ETL jobs (a 30x increase)… · 300+ tables (3x growth)… · 250+ Amazon Redshift materialized views optimizing query performance… 500,000+ user queries/months"* — and the curation layer on top: *"Vanguard is curating data products on the data lake using Apache Iceberg format and leveraging AWS Glue for metrics computation and data lake integration."*
+
+Lesson angle: **a 30× jump in ETL jobs and a 3× jump in tables is only safe when every job reads through the catalog, never through ad-hoc paths.** BMW shows the catalog as the adoption surface for 500 humans; Vanguard shows the catalog as the contract for 600 automated jobs. Same Glue Data Catalog, two different reasons it exists: discovery for people, *stability for pipelines*. The Iceberg-curated data products are the endpoint of that contract — schema evolution becomes metadata-only (Section 9), and Glue computes the metrics that the Redshift multi-warehouse layer then serves.
+
+*AWS-reported figures from the AWS Big Data Blog, published 2026-03-18 (accessed 2026-10-11); customer-reported, not an AWS commitment.*
+
+---
+
 ## Practice Questions
 
 ```question

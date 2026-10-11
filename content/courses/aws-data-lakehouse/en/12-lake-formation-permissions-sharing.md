@@ -500,12 +500,16 @@ THE CARVE-OUT THAT NEVER DISAPPEARS
     "3": "inheritance",
     "4": "per-table"
   },
-  "distractors": {
-    "1": ["department", "classification"],
-    "2": ["team", "tier"],
-    "3": ["propagation", "aliasing"],
-    "4": ["row-filter", "cross-account"]
-  },
+  "distractors": [
+    "department",
+    "classification",
+    "team",
+    "tier",
+    "propagation",
+    "aliasing",
+    "row-filter",
+    "cross-account"
+  ],
   "explanation": "The AWS Big Data Blog account of Integral Ad Science (2021-09-23) states that IAS applied the owner and class tags at the database level and relied on inheritance, and that tag-based access controls reduced hundreds of permission rules to precisely two. Inheritance is database -> table -> column with overridable values, so a tag written once at the database reaches every table underneath it, and the result is that no rule names a table at all."
 }
 ```

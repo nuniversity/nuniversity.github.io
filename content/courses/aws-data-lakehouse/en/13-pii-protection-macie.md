@@ -686,13 +686,23 @@ Assembly
     "4": "1 (Low), 2 (Medium), 3 (High)",
     "5": "-1"
   },
-  "distractors": {
-    "1": ["Macie SensitiveData", "AWS Macie Event", "Macie Policy Finding"],
-    "2": ["aws.macie2", "aws.securityhub", "aws.s3"],
-    "3": ["30", "180", "365"],
-    "4": ["0 (Informational) through 4 (Critical)", "1 (Medium), 2 (High), 3 (Critical)", "LOW, MEDIUM, HIGH, CRITICAL"],
-    "5": ["0", "1", "50"]
-  },
+  "distractors": [
+    "Macie SensitiveData",
+    "AWS Macie Event",
+    "Macie Policy Finding",
+    "aws.macie2",
+    "aws.securityhub",
+    "aws.s3",
+    "30",
+    "180",
+    "365",
+    "0 (Informational) through 4 (Critical)",
+    "1 (Medium), 2 (High), 3 (Critical)",
+    "LOW, MEDIUM, HIGH, CRITICAL",
+    "0",
+    "1",
+    "50"
+  ],
   "explanation": "EventBridge events carry detail-type 'Macie Finding' with source 'aws.macie'. Findings are retained 90 days (raised from 30 on 2021-10-01). Severity is a 1-3 scale labelled Low/Medium/High - there is no Critical and no 0. Sensitivity score runs -1 (classification error) to 100 (manual override only); 50 means 'not yet analyzed'."
 }
 ```

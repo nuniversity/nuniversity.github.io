@@ -701,14 +701,16 @@ NETWORKING - a VPC ETL fleet moving 1 TB/month to S3, ONE AZ
     "5": "0.0025",
     "6": "0.02"
   },
-  "distractors": {
-    "1": ["0.02", "0.05", "0.0004"],
-    "2": ["0.01", "0.05", "0.03"],
-    "3": ["0.01", "0.02", "0.10"],
-    "4": ["0.02", "0.00099", "0.03"],
-    "5": ["0.02", "0.03", "0.01"],
-    "6": ["0.0025", "0.03", "0.01"]
-  },
+  "distractors": [
+    "0.02",
+    "0.05",
+    "0.0004",
+    "0.01",
+    "0.03",
+    "0.10",
+    "0.00099",
+    "0.0025"
+  ],
   "explanation": "Transition requests are $0.01 / $0.02 / $0.05 per 1,000 to Standard-IA, Glacier Instant Retrieval and Glacier Deep Archive respectively - cheap enough that a lifecycle rule pays for itself in the first month on any real lake (worked example E1b: 460,800 objects reclassified for $36.86 total). Intelligent-Tiering's fee is per 1,000 objects per MONTH, which is why it is a monitoring business and a trap on tiny objects (worked example E2). Deep Archive retrieval is $0.0025/GB Bulk and $0.02/GB Standard, with no Expedited option - and both paths then add a temporary restored copy billed at S3 Standard rates for the restore duration you choose."
 }
 ```
