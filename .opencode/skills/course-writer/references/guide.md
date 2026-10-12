@@ -72,6 +72,9 @@ The platform supports 7 interactive component types via fenced code blocks with 
 > [!CRITICAL]
 > **Closing Fence Rule:** All interactive blocks MUST use bare ` ``` ` as the closing fence. Never ` ```text ` or any other text after the backticks. This is the #1 cause of "Invalid matching config" JSON errors.
 
+> [!CRITICAL]
+> **Fence Language Matches Type:** The renderer (`MarkdownRenderer.tsx`) routes interactive blocks by the **fence language**, NOT by the JSON `type` field. ` ```question ` only supports `multiple-choice` / `true-false` (it calls `data.options.map`). `matching`, `dragdrop`, `fillblank`, and `plot` JSON MUST use their own fence language (` ```matching `, ` ```dragdrop `, ` ```fillblank `, ` ```plot `). Putting matching/dragdrop JSON inside a ` ```question ` fence crashes the static-export prerender (`data.options.map` on `undefined`) and the whole `next build` fails. `validate_lesson.py` now errors (rc 2) on this mismatch.
+
 ### Practice Questions (MCQ / True-False)
 
 **Tag:** ` ```question `

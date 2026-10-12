@@ -173,9 +173,24 @@ def validate_interactive_blocks(content: str) -> tuple[list[str], list[str]]:
             code = match.group(2).strip()
             interactive_blocks.append((lang, code))
             try:
-                json.loads(code)
+                parsed = json.loads(code)
             except json.JSONDecodeError as e:
                 errors.append(f"Invalid JSON in ```{lang}`` block: {e}")
+                continue
+            # Fence language must match the component type — the renderer
+            # routes by fence (MarkdownRenderer), NOT by the JSON "type" field.
+            # ```question only supports multiple-choice / true-false; anything
+            # else (matching, dragdrop, fillblank, plot) crashes the prerender
+            # in QuestionBlock (data.options.map on undefined).
+            if lang == "question" and isinstance(parsed, dict):
+                qtype = parsed.get("type")
+                if qtype is not None and qtype not in ("multiple-choice", "true-false"):
+                    qid = parsed.get("id", "unknown-id")
+                    errors.append(
+                        f"Misfenced interactive block: ```question fence with "
+                        f"type '{qtype}' (id {qid}) — use ```{qtype} fence "
+                        f"instead (renderer routes by fence language)"
+                    )
 
     if not interactive_blocks:
         warnings.append(
