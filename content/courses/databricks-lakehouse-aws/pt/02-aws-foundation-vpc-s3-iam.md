@@ -3,7 +3,7 @@ title: "Fundação AWS para Databricks: Design de VPC, Bucket Raiz, PrivateLink,
 description: "Construa o substrato AWS sob um workspace Databricks: os quatro objetos do console de conta (cross-account compute role, network configuration, storage configuration, private access settings), as regras da VPC gerenciada pelo cliente (subnets privadas /17-/26, dois IPs por nó, a fórmula de capacidade (endereços-5)/2), secure cluster connectivity como modo padrão sem IP público, o conjunto obrigatório de egress STS/S3/Kinesis/RDS com a economia de gateway versus interface endpoint, os três formatos de PrivateLink com os limites do NCC, o SSE do bucket raiz e as chaves gerenciadas pelo cliente para STORAGE versus MANAGED_SERVICES, as políticas anotadas do bucket raiz e da chave KMS, e o caminho moderno de IAM (storage credentials e service credentials no lugar dos instance profiles legados) - com sete exemplos resolvidos (dimensionamento real de subnets, uma conta de NAT versus endpoints, custo do inventário de endpoints, matemática de KMS, o JSON da trust policy de IAM), uma matriz de security groups, seis diagramas mermaid, quatro verificações interativas, estudos de caso da Block e da Amgen na AWS, uma caixa de atualizações de 2026 e doze questões de prática, todas as taxas em outubro de 2026."
 order: 2
 difficulty: "intermediate"
-duration: "60 minutes"
+duration: "60 min"
 ---
 # Fundação AWS para Databricks: Design de VPC, Bucket Raiz, PrivateLink, KMS e IAM
 
@@ -642,7 +642,7 @@ Armadilhas operacionais coletadas dos modos de falha documentados (seção de pi
 
 ---
 
-## Estudos de Caso do Mundo Real
+## Casos Reais
 
 As páginas de clientes publicam *resultados* de arquitetura, não diagramas de VPC — "Cloud: AWS" te diz que o substrato é o substrato deste curso, nunca qual CIDR ou layout de KMS uma empresa escolheu. Todo número abaixo é alegado pelo cliente, com a fonte e a sua data nomeadas para você poder conferir.
 

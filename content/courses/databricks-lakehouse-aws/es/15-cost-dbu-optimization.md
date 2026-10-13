@@ -3,7 +3,7 @@ title: "Optimización de costos y economía de los DBU en AWS"
 description: "Domina el modelo de costos de Databricks en AWS: qué es un DBU y cómo se mide, la tarjeta de tarifas completa de oct-2026 por SKU de cómputo (jobs 0.15, all-purpose 0.55, SQL 0.22/0.55/0.70 por DBU), la aritmética del punto de equilibrio entre serverless y classic, los valores por defecto de parada automática y terminación automática, workers spot, pools, límites de las políticas de cluster y la atribución de costos con system.billing.usage y presupuestos; calcula a mano un caso de TCO mensual de DBU que recorta una factura de $3,011 en un 34.1%, compara el modelo de DBU con los créditos de Snowflake y los $5/TB de Athena, estudia casos documentados de clientes de AWS (Addepar, Nubank, Comcast), lee el recuadro de actualizaciones de 2026 y practica con doce preguntas y cinco comprobaciones interactivas."
 order: 15
 difficulty: "intermediate"
-duration: "60 minutes"
+duration: "60 min"
 ---
 # Optimización de costos y economía de los DBU en AWS
 
@@ -28,11 +28,11 @@ En esta lección vas a:
 
 ### 1.1 Qué es un DBU
 
-La propia definición de Databricks: *"Databricks bills based on Databricks units (DBUs), which are units of processing capability per hour based on VM instance type"* (docs.databricks.com/aws/en/getting-started/concepts, fecha del documento 2026-09-25). La página de precios lo dice al revés: *"A Databricks Unit (DBU) is a normalized unit of processing power on the Databricks Lakehouse Platform used for measurement and pricing purposes"* y *"Only pay for the products you use at per second granularity"* (databricks.com/product/pricing, leído 2026-10).
+La propia definición de Databricks: *"Databricks factura según las unidades de Databricks (DBUs), que son unidades de capacidad de procesamiento por hora según el tipo de instancia de VM"* (docs.databricks.com/aws/en/getting-started/concepts, fecha del documento 2026-09-25). La página de precios lo dice al revés: *"Una unidad de Databricks (DBU) es una unidad normalizada de potencia de procesamiento en la plataforma Lakehouse de Databricks, usada con fines de medición y fijación de precios"* y *"Paga solo por los productos que usas, con granularidad de segundo"* (databricks.com/product/pricing, leído 2026-10).
 
 Tres consecuencias deciden todo lo que sigue:
 
-1. **Para el cómputo de clusters, el consumo de DBUs = (nodos) × (DBU/h de ese tipo de nodo) × horas** — el blog de gestión de costos de 2022 lo dice sin rodeos: *"With the exception of a SQL Warehouse, the amount of DBUs consumed is based on the number of nodes and the computational power of the underlying VM instance types"* (databricks.com/blog/best-practices-cost-management-databricks, 2022-10-18; la aritmética sigue vigente con las tarifas de oct-2026).
+1. **Para el cómputo de clusters, el consumo de DBUs = (nodos) × (DBU/h de ese tipo de nodo) × horas** — el blog de gestión de costos de 2022 lo dice sin rodeos: *"Con la excepción de un SQL Warehouse, la cantidad de DBUs consumida se basa en el número de nodos y la potencia de cálculo de los tipos de instancia VM subyacentes"* (databricks.com/blog/best-practices-cost-management-databricks, 2022-10-18; la aritmética sigue vigente con las tarifas de oct-2026).
 2. **Para los warehouses SQL, el consumo de DBUs = (los DBU/h fijos de la talla) × horas que el warehouse está activo** — esté ejecutando o no, el medidor gira mientras el warehouse está activo (documentación de precios, leída 2026-10).
 3. **El medidor es por segundo y no sabe si estás trabajando.** Un cluster all-purpose inactivo y uno a plena carga emiten DBUs a la misma tarifa. Por eso el *tiempo inactivo*, y no la *velocidad de las consultas*, es el problema central de optimización de costos en el cómputo classic.
 
@@ -57,7 +57,7 @@ flowchart LR
 
 **Serverless pliega el costo de la máquina dentro de una tarifa de DBU más alta.** SQL Serverless a **$0.70/DBU** frente a SQL Classic a **$0.22/DBU** (databricks.com/product/pricing/databricks-sql, instantánea de página 2026-10) es una prima de **$0.48 por DBU-hora** que paga la flota, las operaciones y el tiempo inactivo que ya no controlas. Jobs Serverless **$0.35** menos Jobs Classic **$0.15** es el mismo cuadro con **$0.20 por DBU-hora**. Classic no es gratis: solo mueve media factura a AWS, donde puedes atacarla con spot y con el right-sizing.
 
-> ⚠️ **`system.billing.usage` no es tu factura total.** Databricks es explícito: *"The `system.billing.usage` only contains Databricks costs. This means that in any instance where non-serverless compute is being used, cloud infrastructure spend is not included and would need to be reviewed via the relevant cloud console (compute, networking, storage, etc.)"* (databricks.com/blog/top-5-system-table-queries-understanding-your-databricks-costs, 2026-09-22). Un presupuesto que solo mira Databricks subestima la cifra real por toda la columna de AWS.
+> ⚠️ **`system.billing.usage` no es tu factura total.** Databricks es explícito: *"El `system.billing.usage` solo contiene costos de Databricks. Esto significa que, en cualquier caso en que se use cómputo no serverless, el gasto de infraestructura de la nube no está incluido y habría que revisarlo en la consola de nube correspondiente (cómputo, redes, almacenamiento, etc.)"* (databricks.com/blog/top-5-system-table-queries-understanding-your-databricks-costs, 2026-09-22). Un presupuesto que solo mira Databricks subestima la cifra real por toda la columna de AWS.
 
 - **📚 ¿Sabías que…?** Databricks mide los DBUs **por segundo** (FAQ de precios, leída 2026-10), mientras que Snowflake factura créditos *"per second with a 60-second minimum"* (resumen de warehouses de Snowflake + tabla de consumo del servicio, leída 2026-10). En jobs cortos y frecuentes, esa diferencia de 55 segundos es una línea real de la factura: una de las razones silenciosas por las que las cargas de trabajo con picos prefieren los jobs serverless de Databricks a una flotta classic siempre reanudada.
 
@@ -120,7 +120,7 @@ flowchart TD
 
 ### 2.1 Los tres crímenes de la escalera
 
-1. **Una pipeline sobre cómputo all-purpose.** Un job apuntado a un cluster all-purpose *existente* se factura con las tarifas de **All-Purpose** y se marca como carga de trabajo **interactiva** (Jobs API 2.0; digest 06, leído 2026-10). Databricks *"does not recommend this configuration for production jobs."* Solo la diferencia de tarifa es de **$0.55 → $0.15** por DBU.
+1. **Una pipeline sobre cómputo all-purpose.** Un job apuntado a un cluster all-purpose *existente* se factura con las tarifas de **All-Purpose** y se marca como carga de trabajo **interactiva** (Jobs API 2.0; digest 06, leído 2026-10). Databricks *"no recomienda esta configuración para jobs de producción."* Solo la diferencia de tarifa es de **$0.55 → $0.15** por DBU.
 2. **El nivel Standard retirado en tu runbook.** Jobs a $0.10/DBU era Standard; los workspaces Standard de AWS/GCP se actualizaron a Premium el **2025-10-01** (Azure **2026-10-01**) según la página de precios (leída 2026-10). Cualquier tabla de tarifas anterior a 2025 que copies está desactualizada en un 50%.
 3. **Confusión entre Premium y Enterprise entre nubes.** El "Premium" de AWS/GCP es la tarjeta "Enterprise" de Azure: AWS Jobs es **$0.15 Premium / $0.20 Enterprise** (un 33% de diferencia) y cada SKU serverless se mueve con él (registro G-Cloud 2026-09-25; licenseware 2026-10-06). Etiqueta siempre la nube *y* el nivel.
 
@@ -199,7 +199,7 @@ flowchart TD
 Tres lecturas prácticas:
 
 - **Gana classic** cuando el cluster corre caliente y largo con una forma predecible — ventanas de ETL por lotes, backfills nocturnos grandes, entrenamiento de ML con un número de nodos conocido. Ya estás pagando ~$0.192/h por un m5.xlarge (lista de precios de EC2, leída 2026-10-12); classic pliega eso en una licencia de $0.15/DBU en lugar de un paquete de $0.35/DBU.
-- **Gana serverless** en trabajo corto, con picos, interactivo o impredecible — dashboards con huecos entre actualizaciones, notebooks ad-hoc, jobs dirigidos por eventos — porque *"you are not charged while it is idle"* (Databricks Answers, 2026-08-27) y la flota, el parcheo y la planificación de capacidad desaparecen.
+- **Gana serverless** en trabajo corto, con picos, interactivo o impredecible — dashboards con huecos entre actualizaciones, notebooks ad-hoc, jobs dirigidos por eventos — porque *"no se te cobra mientras está inactivo"* (Databricks Answers, 2026-08-27) y la flota, el parcheo y la planificación de capacidad desaparecen.
 - **Las restricciones operativas pesan tanto como el precio.** Los jobs serverless tienen un **máximo de 7 días de ejecución** documentado, no admiten tareas JAR/Spark-Submit, ni notebooks R/Scala, ni APIs RDD, ni perfiles de instancia, y los gatillos de Structured Streaming están limitados a `Trigger.AvailableNow()` (recomendado); mientras que classic existe precisamente donde esas restricciones aprietan (digest 06, docs leídas 2026-10). Migra el *patrón* (volúmenes en lugar de DBFS, la API DataFrame en lugar de RDDs) antes de cambiar de SKU.
 
 ```fillblank
@@ -285,9 +285,9 @@ Las políticas de cluster son conjuntos de reglas JSON administradas por adminis
 }
 ```
 
-La mecánica que convierte esto en un *guardarraíl* y no en una sugerencia: una limitación por atributo; el cómputo creado por API **ignora los valores por defecto de la política salvo que se establezca `apply_policy_default_values: true`**; `spark_version: auto:latest-lts` solo se resuelve cuando el cómputo se *edita*, no de forma continua; y el derecho **Unrestricted** lo salta todo, por lo que *"should be suppressed for non-admin users"* (guía de incorporación de políticas, blog 2025-04-17). Las grafías de las claves de atributo varían entre superficies de API: confírmalas en el editor de políticas de tu workspace antes de fiarte de este JSON literalmente.
+La mecánica que convierte esto en un *guardarraíl* y no en una sugerencia: una limitación por atributo; el cómputo creado por API **ignora los valores por defecto de la política salvo que se establezca `apply_policy_default_values: true`**; `spark_version: auto:latest-lts` solo se resuelve cuando el cómputo se *edita*, no de forma continua; y el derecho **Unrestricted** lo salta todo, por lo que *"debería suprimirse para los usuarios que no son administradores"* (guía de incorporación de políticas, blog 2025-04-17). Las grafías de las claves de atributo varían entre superficies de API: confírmalas en el editor de políticas de tu workspace antes de fiarte de este JSON literalmente.
 
-> ⚠️ **Los presupuestos y las políticas monitorizan y restringen; no detienen a un gastador determinado.** Los presupuestos son *"monitoring and alerts, not a hard cap"* (doc de presupuestos, actualizada 2026-10-07) — un usuario con permisos suficientes todavía puede crear un warehouse que corra demasiado tiempo o se quede escalado más allá de lo esperado. El marco propio de Databricks: *"Good controls via compute policies, job timeout settings, and budgets help Databricks platform administrators keep spend within spending limits but there is always the possibility of a user with sufficient permissions creating a job or warehouse that runs long or stays scaled beyond expectations and causes an unexpected spike in spending"* (blog de las cinco consultas de system tables, 2026-09-22). Los guardarraíles son por capas o son teatro.
+> ⚠️ **Los presupuestos y las políticas monitorizan y restringen; no detienen a un gastador determinado.** Los presupuestos son *"monitoreo y alertas, no un límite duro"* (doc de presupuestos, actualizada 2026-10-07) — un usuario con permisos suficientes todavía puede crear un warehouse que corra demasiado tiempo o se quede escalado más allá de lo esperado. El marco propio de Databricks: *"Buenos controles mediante políticas de cómputo, configuraciones de tiempo de espera de jobs y presupuestos ayudan a los administradores de la plataforma Databricks a mantener el gasto dentro de los límites, pero siempre existe la posibilidad de que un usuario con permisos suficientes cree un job o un warehouse que corra demasiado tiempo o se quede escalado más allá de lo esperado y cause un pico inesperado de gasto"* (blog de las cinco consultas de system tables, 2026-09-22). Los guardarraíles son por capas o son teatro.
 
 ```dragdrop
 {
@@ -332,7 +332,7 @@ Ejemplo resuelto E6 - spot en 5 workers, 200 h/mes (a oct 2026)
   -> spot es una palanca del lado de AWS, punto y aparte
 ```
 
-Cuatro hechos operativos que hay que meter en el diseño: el driver se queda bajo demanda (docs de cómputo 2026-10-06); el desalojo de dos minutos llega a mitad de tarea, así que las pipelines necesitan etapas reiniciables e idempotentes (docs de AWS 2026-10) — el gatillo `AVAILABLE_NOW` y el Structured Streaming con checkpoint de las lecciones 05 y 13 son los patrones compatibles; **los pools son todo spot o todo bajo demanda** (la API añade `SPOT_WITH_FALLBACK`), y la guía de Databricks es *"Do not use a pool with spot instances as your driver type"*; y spot **no ahorra nada en serverless** — serverless va incluido en la tarifa, y ninguna fuente afirma que los descuentos de EC2 spot se trasladen a las tarifas de DBU serverless.
+Cuatro hechos operativos que hay que meter en el diseño: el driver se queda bajo demanda (docs de cómputo 2026-10-06); el desalojo de dos minutos llega a mitad de tarea, así que las pipelines necesitan etapas reiniciables e idempotentes (docs de AWS 2026-10) — el gatillo `AVAILABLE_NOW` y el Structured Streaming con checkpoint de las lecciones 05 y 13 son los patrones compatibles; **los pools son todo spot o todo bajo demanda** (la API añade `SPOT_WITH_FALLBACK`), y la guía de Databricks es *"No uses un pool con instancias spot como tu tipo de driver"*; y spot **no ahorra nada en serverless** — serverless va incluido en la tarifa, y ninguna fuente afirma que los descuentos de EC2 spot se trasladen a las tarifas de DBU serverless.
 
 - **📚 ¿Sabías que…?** Spot puede ahorrar hasta un 90% y *sigue* siendo la decisión equivocada para un job de 20 minutos con SLA estricto: la guía actual de Databricks combina **pools spot para cargas de trabajo que toleran el costo** con **pools bajo demanda para jobs cortos y de SLA estricto**, y recomienda **serverless en lugar de pools** siempre que la carga de trabajo lo permita (docs, leídas 2026-10). Spot es una decisión de *carga de trabajo*, no un interruptor de ahorro de toda la cuenta.
 
@@ -347,7 +347,7 @@ En un warehouse, el costo en DBU es **tarifa por tamaño × tiempo activo**, as�
 ### 6.2 Autoscaling, pools y `AVAILABLE_NOW`
 
 - **El autoscaling encoge el pico.** El autoscaling optimizado (Premium+) va de min a max en **≤2 eventos de redimensionamiento**, y escala a la baja con una ventana de subutilización de **40 segundos** en el cómputo de jobs y **150 segundos** en all-purpose (docs, actualizadas 2026-10-06). Nunca lo combines con `spark.dynamicAllocation.enabled` — la documentación advierte de churn de executors y `NODES_LOST`.
-- **Los pools cuestan cero DBUs mientras están inactivos — y AWS completo mientras están inactivos.** *"Databricks does not charge DBUs while instances are idle in the pool. Instance provider billing does apply"* (mejores prácticas de costos, 2026-09-11). Dimensiona `min_idle_instances` e `idle_instance_autotermination_minutes` con criterio; mantén el tamaño máximo del cluster ≤ `max_capacity` del pool o el escalado fallará con `INSTANCE_POOL_MAX_CAPACITY_FAILURE`.
+- **Los pools cuestan cero DBUs mientras están inactivos — y AWS completo mientras están inactivos.** *"Databricks no cobra DBUs mientras las instancias están inactivas en el pool. La facturación del proveedor de instancias sí se aplica"* (mejores prácticas de costos, 2026-09-11). Dimensiona `min_idle_instances` e `idle_instance_autotermination_minutes` con criterio; mantén el tamaño máximo del cluster ≤ `max_capacity` del pool o el escalado fallará con `INSTANCE_POOL_MAX_CAPACITY_FAILURE`.
 - **`AVAILABLE_NOW` da forma a la pipeline.** Ejecuta una pipeline disparada (`Trigger.AvailableNow()`) en un job cluster que termina al completarse en lugar de un cluster continuo que pasa inactivo entre micro-batches — la lista oficial de palancas lo recomienda (mejores prácticas, 2026-09-11).
 
 ### 6.3 Photon como palanca de costo (con cuidado)
@@ -580,7 +580,7 @@ Las bandas de profesionales alrededor de estas cifras son consistentes: las vict
 
 ---
 
-## Casos de estudio del mundo real
+## Casos Reales
 
 > **📋 Caso A — Addepar (gestión de patrimonios, Nube: AWS): $2 millones menos de infraestructura, entrega 5× más rápida**
 > **Desafío.** Equipos de ingeniería y de datos en silos; entrega de pipelines lenta; costo de infraestructura creciente en una plataforma que modela más de $8 trillion en inversiones.

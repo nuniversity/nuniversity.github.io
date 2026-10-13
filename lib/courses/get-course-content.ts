@@ -35,6 +35,7 @@ export interface CourseInfo {
   difficulty?: 'beginner' | 'intermediate' | 'advanced'
   duration?: string
   icon?: string
+  firstLessonSlug?: string
 }
 
 export interface CourseWithLessons {
@@ -199,6 +200,19 @@ export async function getAllCourses(locale: Locale): Promise<CourseInfo[]> {
           } catch (error) {
             console.error(`Error reading first lesson for ${dir}:`, error)
           }
+        }
+      }
+
+      // First lesson slug for deep links (prefer locale dir, fallback to en —
+      // mirrors getAllLessons so generated params always cover the chosen slug)
+      const lessonDir = fs.existsSync(localeDir) ? localeDir : enDir
+      if (fs.existsSync(lessonDir)) {
+        const lessonFiles = fs
+          .readdirSync(lessonDir)
+          .filter((f) => f.endsWith('.md'))
+          .sort()
+        if (lessonFiles.length > 0) {
+          courseInfo.firstLessonSlug = lessonFiles[0].replace(/\.md$/, '')
         }
       }
 

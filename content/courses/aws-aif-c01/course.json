@@ -9,5 +9,17 @@
     "description": "Comprehensive preparation for the AWS Certified AI Practitioner (AIF-C01) exam covering AI/ML foundations, generative AI on AWS, building and operating solutions with Amazon Bedrock and SageMaker, security, cost optimization, and responsible AI — with architecture diagrams, real case studies, and exam-style practice questions.",
     "difficulty": "Intermediate",
     "duration": "12 Weeks"
+  },
+  "pt": {
+    "title": "AWS Certified AI Practitioner (AIF-C01) Curso Completo",
+    "description": "Curso completo para o exame AWS Certified AI Practitioner (AIF-C01): fundamentos de IA e ML na AWS, serviços de IA generativa (Bedrock e modelos fundacionais), segurança e governança de IA, dados e bancos de dados para IA, aspectos de carreira e responsabilidade para o profissional de IA — com arquiteturas, casos reais, exemplos de precificação datados e questões de prática.",
+    "difficulty": "Intermediário",
+    "duration": "12 Semanas"
+  },
+  "es": {
+    "title": "AWS Certified AI Practitioner (AIF-C01) Curso Completo",
+    "description": "Curso completo para el examen AWS Certified AI Practitioner (AIF-C01): fundamentos de IA y ML en AWS, servicios de IA generativa (Bedrock y modelos fundacionales), seguridad y gobernanza de IA, datos y bases de datos para IA, aspectos de carrera y responsabilidad del profesional de IA — con arquitecturas, casos reales, ejemplos de precios fechados y preguntas de práctica.",
+    "difficulty": "Intermedio",
+    "duration": "12 Semanas"
   }
 }

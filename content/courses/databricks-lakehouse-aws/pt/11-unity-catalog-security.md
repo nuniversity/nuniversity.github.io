@@ -3,7 +3,7 @@ title: "Segurança no Unity Catalog: Controles de Linha e Coluna, Tags, Auditori
 description: "Governance um lakehouse da Databricks na AWS do jeito que a documentação de outubro de 2026 descreve: a cadeia de leitura de três privilégios e a herança para baixo a partir do catálogo; os três mecanismos de linha/coluna (views dinâmicas, row filters nativos de tabela e column masks, políticas ABAC dirigidas por tags) com uma política de dynamic view totalmente resolvida construída sobre session_user() e is_account_group_member(); o DDL nativo SET MASK / SET ROW FILTER com seus pisos de DBR 12.2 LTS e 15.4 LTS e a armadilha do fail-securely; tags governadas, auto-tags class.* do Data Classification e o DDL de tags; o pacote de auditoria das system tables (system.access.audit, system.query.history, system.billing.usage, o par de lineage) com números verificados de retenção e latência; lineage em nível de coluna e suas lacunas nomeadas; as três gerações de segredos, incluindo external secrets suportados pelo AWS Secrets Manager; OAuth M2M versus PATs legados, escopos dos papéis de admin, IP access lists versus ingress baseado em contexto, escopo FedRAMP/HIPAA; um veredito sobre o TACL legado do hive_metastore versus Unity Catalog; as histórias de governança de Block, Amgen e nCino; uma caixa de atualização de outubro de 2026, seis exemplos resolvidos, cinco diagramas, quatro verificações interativas e doze questões de prática."
 order: 11
 difficulty: "intermediate"
-duration: "75 minutes"
+duration: "75 min"
 ---
 # Segurança no Unity Catalog: Controles de Linha e Coluna, Tags, Auditoria, Lineage e Segredos
 
@@ -66,8 +66,8 @@ Nesta lição você vai:
 O Unity Catalog é uma hierarquia de **securables** — metastore → catálogo → schema → tabela/view/volume/function/secret — e o acesso é concedido como **privileges sobre securables** para **principals** (usuários, grupos em nível de conta, service principals). Quatro regras decidem quase todo ticket de suporte:
 
 1. **A herança flui para baixo e para no catálogo.** "Privileges granted on a catalog automatically apply to all current and future schemas, tables, views, volumes, and functions within it" (docs .../securable-objects, 2026-10-08), enquanto "privileges granted at the metastore level do not inherit to child objects in the hierarchy" (mesma página). `READ METADATA` é a única exceção em nível de metastore que herda.
-2. **Privilégios de uso são separados dos privilégios de dados.** "To read from a table, a user needs `SELECT` on the table, `USE CATALOG` on the parent catalog, and `USE SCHEMA` on the parent schema" (referência de privileges, 2026-09-25), e `USE CATALOG` "does not grant access to the catalog itself or any specific objects within it".
-3. **Owners são onipotentes no próprio objeto.** "Object owners have all privileges on that object, including the ability to grant privileges to other principals" (docs .../manage-privileges, acesso em 2026-10) — ownership *não* herda para baixo, e `SHOW GRANTS` renderiza o ownership como uma única linha, não como uma lista de privileges implícitos.
+2. **Privilégios de uso são separados dos privilégios de dados.** "Para ler de uma tabela, um usuário precisa de `SELECT` na tabela, `USE CATALOG` no catálogo pai e `USE SCHEMA` no schema pai" (referência de privileges, 2026-09-25), e `USE CATALOG` "não concede acesso ao próprio catálogo nem a nenhum objeto específico dentro dele".
+3. **Owners são onipotentes no próprio objeto.** "Os owners do objeto têm todos os privilégios sobre ele, incluindo a capacidade de conceder privilégios a outros principals" (docs .../manage-privileges, acesso em 2026-10) — ownership *não* herda para baixo, e `SHOW GRANTS` renderiza o ownership como uma única linha, não como uma lista de privileges implícitos.
 4. **Controles de linha/coluna apenas subtraem.** Filtros, masks, views dinâmicas e políticas ABAC remodelam resultados para principals que já detêm os privilégios; nenhum deles pode ser usado para *conceder* acesso.
 
 ```mermaid
@@ -88,7 +88,7 @@ flowchart TD
 
 O exemplo resolvido **E0** é o diagnóstico que você vai reutilizar a lição inteira: um usuário relata que `SELECT * FROM gov.crm.customer_360` falha, e `SHOW GRANTS ON TABLE gov.crm.customer_360` mostra `SELECT` para o grupo dele. O grant é real e irrelevante — confira a cadeia em ordem: `SHOW GRANTS ON CATALOG gov` e depois `SHOW GRANTS ON SCHEMA gov.crm`. Um `USE CATALOG` ausente aparece como uma falha opaca *antes* mesmo de a tabela ser resolvida, e é por isso que é a primeira armadilha na documentação de permissões da Databricks (docs .../access-control, acesso em 2026-10).
 
-Um controle fica *acima* dos privileges e os vence: **vinculação catálogo-workspace**. "By default, a catalog is accessible from all workspaces attached to the same metastore. You can restrict this by binding the catalog to specific workspaces, optionally as read-only" — e "Workspace binding supersedes individual privilege grants. Even a user with an explicit `SELECT` grant cannot access an object in a catalog that is not bound to their workspace" (docs .../securable-objects, 2026-10-08). A mesma vinculação existe para storage credentials e external locations, e é assim que um workspace de produção é impedido de usar a credential da zona raw. Ordene o seu modelo mental assim: **a vinculação decide *onde* um grant vale, os privileges decidem *o que* ele permite, filtros/masks decidem *quais linhas e valores* voltam.**
+Um controle fica *acima* dos privileges e os vence: **vinculação catálogo-workspace**. "Por padrão, um catálogo é acessível de todos os workspaces anexados ao mesmo metastore. Você pode restringir isso vinculando o catálogo a workspaces específicos, opcionalmente somente leitura" — e "A vinculação de workspace prevalece sobre grants individuais de privilégio. Mesmo um usuário com um grant `SELECT` explícito não consegue acessar um objeto em um catálogo que não esteja vinculado ao workspace dele" (docs .../securable-objects, 2026-10-08). A mesma vinculação existe para storage credentials e external locations, e é assim que um workspace de produção é impedido de usar a credential da zona raw. Ordene o seu modelo mental assim: **a vinculação decide *onde* um grant vale, os privileges decidem *o que* ele permite, filtros/masks decidem *quais linhas e valores* voltam.**
 
 > **📚 Você sabia?** A palavra `USAGE` é uma armadilha para quem vem do AWS Lake Formation ou do Hive: os privileges do Unity Catalog são `USE CATALOG` e `USE SCHEMA`. `GRANT USAGE ON CATALOG gov TO analysts` não é sintaxe do Unity Catalog — pertence ao vocabulário legado, e é o erro de copiar-e-colar mais comum em scripts de migração (docs .../access-control/privileges-reference, 2026-09-25).
 
@@ -104,7 +104,7 @@ Em outubro de 2026 a documentação coloca **três** mecanismos de linha/coluna 
 | **Row filter de tabela + column mask** | A própria tabela/coluna, via SQL UDFs (`ALTER TABLE … SET ROW FILTER`, `ALTER COLUMN … SET MASK`) | Uma tabela, preciso, aplicado pela engine em SQL, notebooks, jobs e ferramentas de BI | Um mask por coluna; **não pode ser aplicado a uma view**; pisos de DBR; gerenciado pelo owner |
 | **Política ABAC** | Governed tags, anexadas em catálogo / schema / tabela (nível de metastore está em Beta) | Consistência em muitas tabelas — "table owners can't override or remove" a política | A gramática exata de `CREATE POLICY` deve ser lida nos docs, nunca inventada (docs .../abac, 2026-09-29) |
 
-A recomendação da própria Databricks é explícita: "Databricks recommends ABAC policies when you need consistent row filtering and column masking across many tables" (docs .../filters-and-masks, 2026-09-24). A página da dynamic view enuncia o corolário igualmente direto: "Databricks recommends that you not grant users the ability to read the tables and views referenced in the view" (docs .../views/dynamic, 2025-02-14).
+A recomendação da própria Databricks é explícita: "Databricks recommends ABAC policies when you need consistent row filtering and column masking across many tables" (docs .../filters-and-masks, 2026-09-24). A página da dynamic view enuncia o corolário igualmente direto: "A Databricks recomenda que você não conceda aos usuários a capacidade de ler as tabelas e views referenciadas na view" (docs .../views/dynamic, 2025-02-14).
 
 ```mermaid
 flowchart LR
@@ -187,7 +187,7 @@ SHOW GRANTS ON VIEW gov.crm.customer_360_safe;
 Três fatos de identidade para ensinar junto com esse SQL:
 
 - `session_user()` "Returns the current user's email address" — a função a usar em políticas novas (docs .../views/dynamic, 2025-02-14).
-- `current_user()` é um alias **desatualizado**: "This function is deprecated. The SQL standard reserves `CURRENT_USER` for the authorized user, but in Databricks it returns the session user, which can be misleading. Use `session_user` instead." (docs .../functions/current_user, 2026-09-11.) Notebooks antigos ainda rodam com ela.
+- `current_user()` é um alias **desatualizado**: "Esta função está obsoleta. O padrão SQL reserva `CURRENT_USER` para o usuário autorizado, mas no Databricks ela retorna o usuário da sessão, o que pode induzir a erro. Use `session_user` no lugar dela." (docs .../functions/current_user, 2026-09-11.) Notebooks antigos ainda rodam com ela.
 - `is_account_group_member('<group>')` retorna true quando o usuário da sessão é "a direct or indirect member of the specified group at the account level" e está marcada na página como "Unity Catalog only" (docs .../functions/is_account_group_member, 2026-09-11). A irmã dela, `is_member()`, tem escopo de workspace e é da era do Hive metastore: "Avoid using it with views against Unity Catalog data, because it does not evaluate account-level group membership" (docs .../views/dynamic, 2025-02-14).
 
 > ⚠️ **AVISO — três jeitos de essa política voltar a abrir acesso completo sem ninguém perceber.** (1) Alguém roda `GRANT SELECT ON TABLE gov.crm.customer_360 TO analysts` "só para destravar um prazo": a view vira decoração. (2) Chega uma tabela base nova e ninguém cria a view, então o time concede grant na tabela no lugar disso — o padrão de view não escala sozinho, e é exatamente a lacuna que o ABAC preenche. (3) Lógica `CASE` escrita contra `is_member()` em vez de `is_account_group_member()` avalia grupos em nível de workspace, então grupos de conta sincronizados pelo IdP caem silenciosamente no ramo `ELSE` — ou pior, no ramo permissivo.
@@ -223,13 +223,13 @@ ALTER TABLE gov.crm.customer_360 DROP ROW FILTER;
 Você também pode declarar o filtro na criação: `CREATE TABLE sales (region STRING, id INT) WITH ROW FILTER us_filter ON (region);`. Para atribuir uma função você precisa de `EXECUTE` na função mais `USE SCHEMA` e `USE CATALOG` nos pais dela (docs .../manually-apply, acesso em 2026-10). Duas regras estruturais: **cada coluna pode ter um mask** — um segundo mask sobreposto falha com `COLUMN_MASKS_FEATURE_NOT_SUPPORTED.MULTIPLE_MASKS` — e "You cannot apply row-level security or column masks to a view"; mascara a view *dentro* da definição dela no lugar disso (docs .../filters-and-masks, 2026-09-24).
 
 > [!IMPORTANT]
-> ⚠️ **Runtimes antigos falham em silêncio, não aos berros.** "Databricks Runtime versions below 12.2 LTS do not support row filters or column masks. These runtimes fail securely" — o que na prática significa zero linhas, sem erro (docs .../filters-and-masks, 2026-09-24). Os pisos de compute documentados: access mode padrão e SQL warehouses em **DBR 12.2 LTS+**, access mode dedicado em **DBR 15.4 LTS+** — e compute dedicado em 15.3 LTS ou abaixo não lê filters/masks de forma alguma. Para piorar, "With ANSI mode disabled, values that can't be cast are silently converted to NULL, which can cause the filter to produce incorrect results without raising an error" (mesma página). Quando uma tabela filtrada não retorna nada, confira o access mode e a versão do DBR *antes* de depurar o SQL.
+> ⚠️ **Runtimes antigos falham em silêncio, não aos berros.** "Databricks Runtime versions below 12.2 LTS do not support row filters or column masks. These runtimes fail securely" — o que na prática significa zero linhas, sem erro (docs .../filters-and-masks, 2026-09-24). Os pisos de compute documentados: access mode padrão e SQL warehouses em **DBR 12.2 LTS+**, access mode dedicado em **DBR 15.4 LTS+** — e compute dedicado em 15.3 LTS ou abaixo não lê filters/masks de forma alguma. Para piorar, "Com o modo ANSI desabilitado, valores que não podem ser convertidos são silenciosamente transformados em NULL, o que pode fazer o filtro produzir resultados incorretos sem gerar erro" (mesma página). Quando uma tabela filtrada não retorna nada, confira o access mode e a versão do DBR *antes* de depurar o SQL.
 
 ---
 
 ## 5. Tags, Data Classification e o loop ABAC
 
-Tags são a camada de atributos que as políticas ABAC avaliam. Duas populações importam: **governed tags** — "account-level tags with built-in rules for consistency and control. When you create a governed tag, you also define a tag policy" (docs .../admin/governed-tags, 2026-09-11) — e as tags comuns. Aplicá-las é DDL puro (DBR 13.3 LTS+ para `SET TAGS`, DBR 16.1+ para `SET TAG`), e exige `APPLY TAG` no objeto mais `USE SCHEMA` e `USE CATALOG`; governed tags exigem ainda `ASSIGN` na tag (docs .../database-objects/tags, 2026-10-08).
+Tags são a camada de atributos que as políticas ABAC avaliam. Duas populações importam: **governed tags** — "tags de nível de conta com regras incorporadas de consistência e controle. Quando você cria uma governed tag, você também define uma tag policy" (docs .../admin/governed-tags, 2026-09-11) — e as tags comuns. Aplicá-las é DDL puro (DBR 13.3 LTS+ para `SET TAGS`, DBR 16.1+ para `SET TAG`), e exige `APPLY TAG` no objeto mais `USE SCHEMA` e `USE CATALOG`; governed tags exigem ainda `ASSIGN` na tag (docs .../database-objects/tags, 2026-10-08).
 
 ```sql
 -- Worked example E3 - tag DDL, then the classify -> tag -> policy loop
@@ -273,7 +273,7 @@ System tables ficam no catálogo `system` e são "a Databricks-hosted analytical
 | `system.billing.usage` | Gasto por `billing_origin_product`, `usage_type`, por domínio governado | 365 dias | `record_type = 'ORIGINAL'` tipicamente dentro de **12 horas** |
 | `system.access.table_lineage` + `column_lineage` | Raio de explosão: o que leu ou escreveu esta tabela/coluna | 365 dias (janela móvel de 1 ano) | com capacidade de streaming; DBR 16.4+ para stream |
 
-O acesso em si é governado: admins o têm por padrão, todos os demás precisam de `USE CATALOG` em `system` mais `USE SCHEMA` e `SELECT` nos system schemas relevantes. E "System tables are free to use. You are only charged for the compute used to query them" (mesma página, 2026-10-08).
+O acesso em si é governado: admins o têm por padrão, todos os demás precisam de `USE CATALOG` em `system` mais `USE SCHEMA` e `SELECT` nos system schemas relevantes. E "As system tables são de uso gratuito. Você só é cobrado pelo compute usado para consultá-las" (mesma página, 2026-10-08).
 
 ```mermaid
 flowchart TD
@@ -345,7 +345,7 @@ A versão honesta de "nível de coluna" inclui as suas lacunas documentadas:
 - **Colunas sem origem nunca aparecem:** um `INSERT` com valores literais explícitos não é registrado na tabela de colunas — leituras são capturadas quer você escreva a saída ou não.
 - **Renames perdem lineage**, e nada existe para eventos capturados antes de **2024-09-01**.
 - **Dois relógios diferentes:** lineage em system table é uma janela móvel de **1 ano**, enquanto o Catalog Explorer e a API de lineage "indefinitely retain lineage captured after September 1, 2024".
-- `statement_id` em `table_lineage` faz join com `system.query.history`, mas "is only set when the query is run from a SQL warehouse".
+- `statement_id` em `table_lineage` faz join com `system.query.history`, mas "só é preenchido quando a query é executada em um SQL warehouse".
 
 Ler isso é um exercício de duas tabelas — primeiro o raio de explosão em nível de tabela, depois o detalhe em nível de coluna e, opcionalmente, o statement por trás:
 
@@ -406,7 +406,7 @@ WHERE event_date = DATE '2026-10-20'
   AND action_name LIKE '%Secret%';
 ```
 
-A ressalva honesta, direto dos docs: administradores, criadores de secret e usuários com permissão *podem* ler valores de secret — "it is not possible to prevent such users from reading secrets" — então os controles reais são privileges estreitos, rotação e a query de auditoria acima. `REFERENCE SECRET` existe justamente para que um pipeline referencie um secret sem deter acesso ao valor dele (referência de privileges, 2026-09-25).
+A ressalva honesta, direto dos docs: administradores, criadores de secret e usuários com permissão *podem* ler valores de secret — "não é possível impedir que esses usuários leiam secrets" — então os controles reais são privileges estreitos, rotação e a query de auditoria acima. `REFERENCE SECRET` existe justamente para que um pipeline referencie um secret sem deter acesso ao valor dele (referência de privileges, 2026-09-25).
 
 ```mermaid
 flowchart LR
@@ -462,7 +462,7 @@ Qualquer outra coisa significa que os *grants* estão errados (mesma saída para
 
 ### 9.3 Escopos de admin
 
-"From a Unity Catalog permissions perspective, the three most important are **account admins, workspace admins, and metastore admins**. Account admins and workspace admins are required for all deployments, and the metastore admin role is optional" (docs .../admin-privileges, acesso em 2026-10). Account admin cria e vincula metastores e workspaces; workspace admin atua dentro de um único workspace pelo grupo reservado `admins` (atribuível a usuários e service principals, **não** a um grupo); metastore admin governa catálogos, connections e external locations de um metastore por região da nuvem. Admins de recurso — Marketplace admin, billing admin — completam o quadro. A forma recomendada: **account admin nas mãos de duas ou três pessoas, metastore admin nas mãos de um grupo.**
+"Do ponto de vista das permissões do Unity Catalog, os três mais importantes são **account admins, workspace admins e metastore admins**. Account admins e workspace admins são obrigatórios em todos os deploys, e o papel de metastore admin é opcional" (docs .../admin-privileges, acesso em 2026-10). Account admin cria e vincula metastores e workspaces; workspace admin atua dentro de um único workspace pelo grupo reservado `admins` (atribuível a usuários e service principals, **não** a um grupo); metastore admin governa catálogos, connections e external locations de um metastore por região da nuvem. Admins de recurso — Marketplace admin, billing admin — completam o quadro. A forma recomendada: **account admin nas mãos de duas ou três pessoas, metastore admin nas mãos de um grupo.**
 
 ```mermaid
 flowchart TD
@@ -482,8 +482,8 @@ flowchart TD
 
 Controles de perímetro na AWS se empilham em vez de se substituir:
 
-- **IP access lists** (tier Enterprise, block list avaliada antes da allow list, ≤**1,000** valores IP/CIDR somados) controlam o web app e os endpoints REST — mas "If you use PrivateLink, IP access lists apply only to requests over the internet"; tráfego privado precisa ser controlado com o **AWS Network Firewall** (docs .../ip-access-list, acesso em 2026-10).
-- **Controles de ingress baseados em contexto** são o mecanismo mais novo, em nível de conta, que combina identidade, tipo de requisição e origem de rede em regras de allow/deny: "Databricks recommends using context-based ingress controls as your primary method for managing access", e "A request must be allowed by both controls to succeed" (mesma fonte).
+- **IP access lists** (tier Enterprise, block list avaliada antes da allow list, ≤**1,000** valores IP/CIDR somados) controlam o web app e os endpoints REST — mas "Se você usar PrivateLink, as IP access lists se aplicam apenas a requisições pela internet"; tráfego privado precisa ser controlado com o **AWS Network Firewall** (docs .../ip-access-list, acesso em 2026-10).
+- **Controles de ingress baseados em contexto** são o mecanismo mais novo, em nível de conta, que combina identidade, tipo de requisição e origem de rede em regras de allow/deny: "A Databricks recomenda o uso de context-based ingress controls como seu método principal de gerenciamento de acesso", e "Uma requisição só é bem-sucedida se ambos os controles a permitirem" (mesma fonte).
 - **Negações de inbound são observáveis** em `system.access.inbound_network` (retenção gratuita de 30 dias).
 - **Escopo de conformidade, enunciado do jeito que as trust pages enunciam:** FedRAMP **Moderate** nas regiões comerciais da AWS us-east-1, us-east-2, us-west-1, us-west-2; FedRAMP **High** na AWS GovCloud us-gov-west-1; opções de HIPAA na AWS multi-tenant "Available in all regions", com o relatório SOC 2 Type II + HIPAA da sua equipe de conta (páginas databricks.com/trust, acesso em 2026-10). Certificações são atestações de plataforma — o seu BAA, as suas políticas IAM e de KMS e o seu desenho de rede continuam sendo escolhas suas.
 
@@ -528,11 +528,11 @@ Criptografia é o último perímetro, e na AWS ela tem três pontos de contato q
 > - **2026-10-06 — página de secrets do Unity Catalog:** securables `catalog.schema.secret` com `CREATE/READ/WRITE/REFERENCE SECRET`, cotas de 100 por schema e 1.000 por metastore, e **external secrets suportados pelo AWS Secrets Manager** na AWS (docs .../security/secrets/unity-catalog-secrets).
 > - **2026-09-29 — página de ABAC:** políticas de row filter, column mask, GRANT e DENY (Beta) dirigidas por tag, anexadas em metastore (Beta), catálogo, schema ou tabela — a resposta recomendada para controles consistentes em muitas tabelas (docs .../unity-catalog/abac).
 > - **2026-09-24 / 2026-09-11 — filters, masks e identidade:** row filters e column masks documentados como controles de nível de tabela, com um mask por coluna e pisos de DBR 12.2 LTS / 15.4 LTS; `current_user` formalmente desatualizada em favor de `session_user` (docs .../filters-and-masks; .../functions/current_user).
-> - **2025-10-27 — Data Classification em Public Preview na AWS, Azure e GCP:** "up to 60% higher accuracy than regex-only tools" e custos de scan reduzidos "up to 75%" desde o Beta, com resultados completos armazenados em system tables (blog da Databricks, 2025-10-27).
+> - **2025-10-27 — Data Classification em Public Preview na AWS, Azure e GCP:** "até 60% mais precisão do que ferramentas baseadas apenas em regex" e custos de scan reduzidos "up to 75%" desde o Beta, com resultados completos armazenados em system tables (blog da Databricks, 2025-10-27).
 
 ---
 
-## Estudos de Caso do Mundo Real
+## Casos Reais
 
 > **📋 Caso A — Block (Square, Cash App, TIDAL) (serviços financeiros, Cloud: AWS)**
 > **Desafio.** 12PB de dados de grafo e analytics fragmentados entre unidades de negócio, obrigações de PII GDPR/CCPA, e um fluxo doloroso de dois passos para anexar policies de IAM a roles e depois a buckets S3.
@@ -545,7 +545,7 @@ Criptografia é o último perímetro, e na AWS ela tem três pontos de contato q
 > **📋 Caso B — Amgen (biofarmacêutica, estate na AWS)**
 > **Desafio.** AWS Glue como catálogo corporativo mais AWS IAM de role por caso de uso em proliferação — auditar significava fazer parse de policies de IAM.
 > **Stack na AWS.** Unity Catalog sobre um estate da AWS: a história nomeia **AWS Glue** como o catálogo anterior e **AWS IAM** como a camada RBAC anterior (blog da Databricks, **maio de 2023**, https://www.databricks.com/blog/how-databricks-unity-catalog-helped-amgen-enable-data-governance-enterprise-scale).
-> **Resultado relatado.** "we didn't have to create or manage at least 120+ IAM roles … we went from hundreds of IAM roles to just one or two principal IAM role"; "This reduces the audit effort for the function by 50%"; "around ~500 objects mapped in Unity Catalog"; "90 percent of our use cases are on Databricks" (mesma URL, maio de 2023).
+> **Resultado relatado.** "we didn't have to create or manage at least 120+ IAM roles … we went from hundreds of IAM roles to just one or two principal IAM role"; "Isso reduz em 50% o esforço de auditoria da função"; "around ~500 objects mapped in Unity Catalog"; "90% dos nossos casos de uso estão no Databricks" (mesma URL, maio de 2023).
 > **Mapeia para esta lição.** Seções 1, 6 e 9 — a contagem de roles *é* a métrica que auditores entendem, e o pacote de auditoria em E4 é o que substitui a arqueologia de policy documents.
 > ⏳ *Nota temporal: números de maio de 2023 de um blog datado — o que a Amgen relatou então, não uma afirmação atual da plataforma.*
 

@@ -3,7 +3,7 @@ title: "Structured Streaming no Lakehouse da AWS: Triggers, Checkpoints, foreach
 description: "Opere Structured Streaming em produção na Databricks on AWS: o menu completo de triggers (processingTime padrão de 3-5 s, intervalos fixos, availableNow com seus mínimos de DBR por fonte, modo realTime abaixo de um segundo e o trigger contínuo da OSS não suportado, com a desambiguação dos três 'continuous'), anatomia de checkpoint em volumes do Unity Catalog apoiados no S3 (offsets, commits, state, metadata) e a matriz de reinicialização, foreachBatch MERGE com idempotência via txnAppId/txnVersion, fan-out de change data feed com readChangeFeed e table_changes, state limitado por watermark com dropDuplicatesWithinWatermark, changelog checkpointing no RocksDB, locks de schema evolution em streams, controles de taxa Kafka/MSK e métricas de backlog, observabilidade de streaming, streaming tables do DBSQL e a realidade do cache de dashboards, um job resolvido de MSK para silver e gold, cinco exemplos resolvidos em PySpark, um mermaid do estado de checkpoint, um veredito comparativo de notebooks puros versus Lakeflow pipelines, casos de estudo Burberry/Shell/Asurion na AWS, uma caixa de atualização de outubro de 2026 e catorze questões de prática."
 order: 13
 difficulty: "intermediate"
-duration: "80 minutes"
+duration: "80 min"
 ---
 # Structured Streaming no Lakehouse da AWS: Triggers, Checkpoints, foreachBatch e Exactly-Once
 
@@ -505,7 +505,7 @@ Mais duas incompatibilidades das mesmas páginas: o async progress tracking "nã
 
 ---
 
-## Estudos de Caso do Mundo Real
+## Casos Reais
 
 > **📋 Caso A — Burberry (varejo de luxo, Cloud: AWS)**
 > **Desafio.** Lotes diários de clickstream chegando "entre **2:00 e 7:00 PM GMT**" e um data warehouse de nuvem que pré-agregava o detalhe necessário para o Customer 360.

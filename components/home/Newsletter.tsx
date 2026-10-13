@@ -37,10 +37,10 @@ export default function Newsletter({ dict }: NewsletterProps) {
           >
             <CheckCircle className="w-16 h-16 mx-auto mb-6 text-green-300" />
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              You're subscribed!
+              {dict.footer?.newsletter?.successTitle || "You're subscribed!"}
             </h2>
             <p className="text-xl text-blue-100">
-              Thanks for signing up. We'll keep you posted on new courses and tools.
+              {dict.footer?.newsletter?.successMessage || "Thanks for signing up. We'll keep you posted on new courses and tools."}
             </p>
           </motion.div>
         </div>

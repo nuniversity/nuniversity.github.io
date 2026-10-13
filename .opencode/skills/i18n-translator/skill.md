@@ -19,12 +19,12 @@ This skill supersedes the old dictionary-only guidance below the "Platform chrom
 
 | Path | Contents |
 |---|---|
-| `scripts/` | Deterministic tools: `verify_translation.py` (per-file invariant comparator), `check_locale_course.py` (per-course locale parity + gates aggregator). Both exit 0/1/2. |
+| `scripts/` | Deterministic tools: `verify_translation.py` (per-file invariant comparator), `quality_lint.py` (per-file quality gate: English leftovers, locked headings, register, duration), `check_locale_course.py` (per-course locale parity + gates aggregator). All exit 0/1/2. |
 | `assets/` | Templates & schemas: `lesson-template.pt.md`, `lesson-template.es.md` (complete skeletons with all 5 interactive types), `interactive-types.schema.md` (authoritative JSON shapes with [INV]/[TR] legend), `course-locale.schema.json` (course.json locale-block contract). |
-| `references/` | Documentation: `glossary.md` (locked terminology EN→PT/ES — binding). |
+| `references/` | Documentation: `glossary.md` (locked terminology EN→PT/ES + locked heading formulas — binding). |
 | `examples/` | `paired-excerpt.md` (annotated EN/PT/ES passage), `troubleshooting.md` (real failure catalog), `README.md` (when to use what). |
 
-Every translation task: read the contract here, the glossary, the relevant template + paired excerpt; after writing, run the two scripts. Troubleshooting errors → the catalog first.
+Every translation task: read the contract here, the glossary, the relevant template + paired excerpt; after writing, run **all three** scripts (see Workflow). Troubleshooting errors → the catalog first.
 
 ## Active scope (as of 2026-10-12)
 
@@ -43,7 +43,7 @@ For every lesson file `content/courses/<slug>/en/NN-name.md` there is exactly on
 | Item | Rule |
 |---|---|
 | Filename | byte-identical |
-| Frontmatter `order`, `difficulty`, `duration` | byte-identical (`difficulty` stays lowercase English enum: beginner/intermediate/advanced — the renderer and validator require it) |
+| Frontmatter `order`, `difficulty`, `duration` | `order` and `difficulty` byte-identical (`difficulty` stays lowercase English enum: beginner/intermediate/advanced — the renderer and validator require it). `duration` compares **number-only**: target must be localized to `"N min"` (EN `"75 minutes"` → `"75 min"`) — it is a rendered UI string |
 | All question ids (`dbl-01-q1`, `npof-03-q7`, …) | identical, same order of appearance |
 | Interactive JSON **keys** and structure | identical; only user-facing string **values** translate |
 | `plot` blocks: `data`, `dataKeys`, `xKey`, `type` | byte-identical (only `title`, `xLabel`, `yLabel` translate) |
@@ -66,6 +66,7 @@ For every lesson file `content/courses/<slug>/en/NN-name.md` there is exactly on
 | Interactive JSON user-facing strings | `question`, `options`, `explanation`, `pairs[].left/right`, `template` words around `{{N}}`, `answers` values, `distractors`, `items`, `correctOrder` strings, plot labels |
 | Case-study narratives, "Did you know?" boxes, Comparative Verdict boxes, Key Takeaways bullets | translate; keep company/product names untranslated |
 | Date/price stamps | keep numbers identical, translate the stamp words: "as of October 2026" → "em outubro de 2026" (pt) / "en octubre de 2026" (es) |
+| **Quoted documentation excerpts inside prose** (`"…"`, `«…»`, `“…”` spans ≥ ~6 English words outside code) | **translate the span**; keep citation tails `(docs …/path, 2026-09-11)`, product names and `**bold**` markers inside the span. A verbatim English quote mid-paragraph is a defect (`quality_lint.py` errors on it). Very short locked phrases (`"exactly once"`, `"unlimited concurrency"`) may stay English when the English term IS the professional term |
 
 ### NEVER translate
 
@@ -73,6 +74,27 @@ For every lesson file `content/courses/<slug>/en/NN-name.md` there is exactly on
 - Industry terms where the English term IS the professional term in pt/es engineering usage: data lakehouse, bronze/silver/gold (gloss on first use: "camada bronze (raw)" is fine), checkpoint, cluster, notebook, pipeline, dashboard, job, repo, commit, pull request, workload, token, endpoint.
 - Identifiers inside code, paths, CLI commands, API names,ARNs,ARN-like strings, filenames.
 - The validator literals inside headings (see Dual-Heading Pattern).
+
+---
+
+## Locked heading formulas (exact strings — `quality_lint.py` errors on variants)
+
+| Context | PT | ES |
+|---|---|---|
+| Case-studies H2 | `## Casos Reais` | `## Casos Reales` |
+| Updates box H3 | `### Atualizações de 2026 (em outubro de 2026)` | `### Actualizaciones de 2026 (en octubre de 2026)` |
+| Did-you-know | `📚 Você sabia?` | `📚 ¿Sabías que…?` |
+| Comparative verdict box | `> **Veredito Comparativo — ` | `> **Veredicto comparativo — ` |
+| Dual practice heading | `## Perguntas de Prática (Practice Questions)` | `## Preguntas de Práctica (Practice Questions)` |
+| Dual takeaways | `**Pontos Principais (Key Takeaways):**` | `**Conclusiones Clave (Key Takeaways):**` |
+
+Casing matters (`Veredito Comparativo` in PT with capital C; `Veredicto comparativo` lowercase in ES). Real shipped defects this caught: `Casos de la vida real` / `Casos de estudio del mundo real` (4 ES variants), `Actualizaciones 2026 (a octubre de 2026)`, PT `Veredito comparativo` lowercase in 7 files.
+
+## Register rules (locale voice)
+
+- **PT-BR**: second person is **você** (never `tu`-forms, never pt-PT choices where pt-BR is natural: `cobrar` not `facturar`, `apagar` not `eliminar`). Bookish calques → idiomatic rewrite ("forma de produção" → "em formato de produção").
+- **ES**: neutral international **tú**; never vosotros forms (`acabaréis`, `vosotros`, `-áis`) — `quality_lint.py` flags `-éis/-áis` verb endings (it whitelists `dieciséis`). Use `¿…?`/`¡…!`. Never mix stamp variants inside one file (`a octubre` vs `en octubre` — locked form uses `en octubre`).
+- Both: never soften a WARNING/DANGER callout; keep its severity. Never leave an English sentence (or quoted doc excerpt) mid-paragraph.
 
 ---
 
@@ -94,17 +116,31 @@ Every other `## ` section heading translates fully (no English parentheses neede
 
 ---
 
+## Legacy/parity mode (courses that predate the validator)
+
+Some shipped EN sources predate this skill: they fail `validate_lesson` themselves (no Practice Questions, fewer than 5 questions) and predate the dual-heading/duration rules (e.g. `processes-flowchart`, the 10 `intro-to-software-engineering` roadmap courses). Translate them **as-is, structure mirrored**, with parity gates:
+
+- **`validate_lesson`**: target `LESSON ERROR:` messages must be a **subset of the EN source's** (no new errors; identical messages like `Insufficient practice questions: 0 found…` are fine). `check_locale_course.py --legacy` enforces this; per-file, diff the error lines between source and target.
+- **`verify_translation.py`**: dual-heading / `> [!SUCCESS]` presence checks are **source-aware** — enforced only when the EN source has them. Everything else (frontmatter, fences, URLs, question ids, placeholders, register) stays fully enforced.
+- **`quality_lint.py`**: automatically derives the EN source (same filename, else same order prefix) and gates *presence* checks (Practice Questions / Key Takeaways / SUCCESS / verdict box) on the source having them. Quote, register, duration, locked-formula, and stamp checks always run in full.
+- **Structure**: mirror EN section-by-section — add no sections the EN lacks, remove none.
+- **Key Takeaways**: when EN has `## Key Takeaways`, the target heading must still contain the `Key Takeaways` literal: `## Conclusiones Clave (Key Takeaways)` (es) / `## Pontos Principais (Key Takeaways)` (pt). The shipped PT of `processes-flowchart` used `## Principais Conclusões` + `duration: "30 minutos"` — it predates these gates; do **not** copy it.
+- **duration**: `"N min"` exactly (`"30 min"`, never `"30 minutos"` / `"30 minutes"`).
+
+---
+
 ## Workflow (per lesson — the loop)
 
 1. **Read the source fully** (`en/NN-name.md`), plus this skill and `references/glossary.md`.
 2. **Translate in one pass** to `<locale>/NN-name.md`, honoring every invariant above. Translate meaning, not words: this is a technical audience; prefer the established pt-BR / es technical register over literal calques. Keep the didactic voice of the source (direct, second person where the source uses it, explicit about failure modes).
-3. **Self-check** before reporting done:
-   - `OPENCODE_FILE_PATH=<target> python3 .opencode/skills/course-writer/scripts/validate_lesson.py` → **must be exit 0**
-   - `python3 .opencode/skills/i18n-translator/scripts/verify_translation.py --source <en-file> --target <target-file>` → **must be exit 0**
-   - fix everything both tools report; re-run until clean
-4. **Report one line**: path, lines, verify rc, validator rc.
+3. **Self-check** before reporting done — all three tools, in this order:
+   - `OPENCODE_FILE_PATH=<target> python3 .opencode/skills/course-writer/scripts/validate_lesson.py` → **must be exit 0** (legacy courses: error set must equal/be-subset of the EN source's — see Legacy/parity mode)
+   - `python3 .opencode/skills/i18n-translator/scripts/verify_translation.py --source <en-file> --target <target-file>` → **must be exit 0** (1 acceptable only for documented warnings; 2 forbidden)
+   - `python3 .opencode/skills/i18n-translator/scripts/quality_lint.py --target <target-file>` → **must be exit 0**
+   - fix everything any tool reports; re-run until all are clean
+4. **Report one line**: path, lines, validate rc, verify rc, lint rc.
 
-Agents doing translation work: write the file directly, run both tools yourself, fix, then reply with the single status line. Never report success with a non-zero rc.
+Agents doing translation work: write the file directly, run all three tools yourself, fix, then reply with the single status line. Never report success with a non-zero rc.
 
 ---
 
@@ -112,10 +148,10 @@ Agents doing translation work: write the file directly, run both tools yourself,
 
 1. Ensure `course.json` has a full `<locale>` block (title, description, difficulty capitalized, duration) — see `references/guide.md` §course.json.
 2. Translate lesson files in waves of ≤2 agents (rate-limit rule inherited from course-writer ops: 3 parallel agents → task cancellations).
-3. After each wave: run both tools per file yourself; do not trust agent self-reports alone.
-4. When all lessons of a locale are green: `OPENCODE_SKILL_DIR=content/courses/<slug> python3 .opencode/skills/course-writer/scripts/validate_course.py` → expect exit 1 with **zero non-locale warnings**.
+3. After each wave: run all three tools per file yourself; do not trust agent self-reports alone.
+4. When all lessons of a locale are green: `OPENCODE_SKILL_DIR=content/courses/<slug> python3 .opencode/skills/course-writer/scripts/validate_course.py` → expect exit 1 with **zero non-locale warnings**, then `python3 .opencode/skills/i18n-translator/scripts/check_locale_course.py --course content/courses/<slug> --locale <loc>` → `OK` line (it runs parity + validator + all three per-file tools). For legacy courses append `--legacy` (validate parity instead of rc 0; the other two tools are unchanged).
 5. Add the course:locale pair to the CI loop in `.github/workflows/nextjs.yml`, and run the multi-course simulation (see course-writer skill ops section).
-6. A course locale is done only when: every lesson validator rc 0, every verify_translation rc 0, course validator rc 1 with locale warnings gone (for the gated locale), CI simulation exit 0.
+6. A course locale is done only when: every verify_translation rc 0, every quality_lint rc 0, every validate_lesson rc 0 (legacy: no new errors vs EN), course validator rc 1 with locale warnings gone (for the gated locale), check_locale_course `OK`, CI simulation exit 0.
 
 ---
 
@@ -131,6 +167,11 @@ Agents doing translation work: write the file directly, run both tools yourself,
 | H1 ≠ title | translated one but not the other | course validator equality check |
 | `correctOrder`/`items` divergence in dragdrop | translated the two arrays differently | verifier set-compares them |
 | Filename localization | translated `02-aws-foundation…` to `02-fundacion-aws…` | filename comparison in verifier |
+| English doc quotes left mid-paragraph | translator treated quoted spans as "citations" | `quality_lint.py` english-quote check (≥6 EN words, ratio ≥0.33) — translate the span, keep the citation tail |
+| Heading formula drift across files | each lesson translated the recurring headings independently | locked-formula table in `quality_lint.py` + this skill; normalize mechanically when count > 1 variant |
+| `duration: "75 minutes"` shipped in locale | "byte-identical frontmatter" over-applied to a UI string | verifier compares duration **number only**; `quality_lint.py` requires `"N min"` |
+| Vosotros forms in ES (`acabaréis`) | register drift (Spain voseo/tuteo mix) | `quality_lint.py` vosotros-form check; contract: neutral tú |
+| Frontmatter/heading caseload variants (`Actualizaciones 2026` vs `Actualizaciones de 2026`) | no canonical string in prompt | locked-formula table (skill + glossary + lint) |
 
 ---
 

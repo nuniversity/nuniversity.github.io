@@ -127,7 +127,14 @@ def check_pair(src_path: Path, tgt_path: Path) -> tuple[list[str], list[str]]:
     t_fm, t_body = parse_frontmatter(tgt)
 
     # --- frontmatter invariants ---
-    for key in ("order", "difficulty", "duration"):
+    # duration: compare the leading number only — EN "75 minutes" vs locale "75 min"
+    s_dur = re.match(r"(\d+)", str(s_fm.get("duration", "")).strip())
+    t_dur = re.match(r"(\d+)", str(t_fm.get("duration", "")).strip())
+    if not s_dur or not t_dur or s_dur.group(1) != t_dur.group(1):
+        errors.append(
+            f"Frontmatter 'duration' differs: {s_fm.get('duration')!r} vs {t_fm.get('duration')!r}"
+        )
+    for key in ("order", "difficulty"):
         if str(s_fm.get(key, "")).strip() != str(t_fm.get(key, "")).strip():
             errors.append(
                 f"Frontmatter '{key}' differs: {s_fm.get(key)!r} vs {t_fm.get(key)!r}"
@@ -148,13 +155,20 @@ def check_pair(src_path: Path, tgt_path: Path) -> tuple[list[str], list[str]]:
     elif t_h1.group(1).strip() != str(t_fm.get("title", "")).strip():
         errors.append("Target H1 does not equal target frontmatter title")
 
-    # --- validator literals (dual-heading pattern) ---
-    if not re.search(r"^## .*Practice Questions", t_body, re.MULTILINE):
+    # --- validator literals (dual-heading pattern; source-aware so legacy
+    # courses that predate the rule can translate as-is; modern EN sources
+    # have these, so targets must too) ---
+    s_has_pq = bool(re.search(r"^## .*Practice Questions", s_body, re.MULTILINE))
+    t_has_pq = bool(re.search(r"^## .*Practice Questions", t_body, re.MULTILINE))
+    if s_has_pq and not t_has_pq:
         errors.append("Target missing '## … Practice Questions' heading (dual-heading pattern)")
-    if not (re.search(r"^## .*Key Takeaways", t_body, re.MULTILINE) or
-            ("> [!SUCCESS]" in t_body and "Key Takeaways" in t_body)):
+    s_has_kt = bool(re.search(r"^## .*Key Takeaways", s_body, re.MULTILINE) or
+                    ("> [!SUCCESS]" in s_body and "Key Takeaways" in s_body))
+    t_has_kt = bool(re.search(r"^## .*Key Takeaways", t_body, re.MULTILINE) or
+                    ("> [!SUCCESS]" in t_body and "Key Takeaways" in t_body))
+    if s_has_kt and not t_has_kt:
         errors.append("Target missing Key Takeaways / > [!SUCCESS] block")
-    if "> [!SUCCESS]" not in t_body:
+    if "> [!SUCCESS]" in s_body and "> [!SUCCESS]" not in t_body:
         errors.append("Target missing '> [!SUCCESS]' callout")
 
     # --- fences ---

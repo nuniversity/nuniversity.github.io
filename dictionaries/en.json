@@ -117,6 +117,15 @@
     },
     "cta": "Discover all features"
   },
+  "featured": {
+    "title": "Featured",
+    "titleHighlight": "Courses"
+  },
+  "stats": {
+    "title": "Join Our Growing",
+    "titleHighlight": "Community",
+    "subtitle": "Thousands of learners trust NUniversity to advance their careers and knowledge."
+  },
   "contact": {
     "title": "Let's",
     "titleHighlight": "Collaborate!?",
@@ -177,7 +186,9 @@
       "title": "Stay Updated",
       "description": "Get the latest courses, tools, and learning resources.",
       "placeholder": "Enter your email",
-      "button": "Subscribe"
+      "button": "Subscribe",
+      "successTitle": "You're subscribed!",
+      "successMessage": "Thanks for signing up. We'll keep you posted on new courses and tools."
     },
     "copyright": "NUniversity: Empowering Minds, Shaping Futures.",
     "rights": "All rights reserved",
@@ -546,7 +557,9 @@
           "text": "Show examples of the desired output format to guide the AI's response structure."
         }
       }
-    }
+    },
+    "sectionTitle": "Powerful Learning",
+    "sectionTitleHighlight": "Tools"
   },
   "roadmaps": {
     "title": "Roadmaps",

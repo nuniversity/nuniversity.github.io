@@ -12,7 +12,7 @@ title: "Título Traducido de la Lección — Igual al H1"
 description: "Descripción técnica traducida, 1–3 frases, misma información que en."
 order: 1
 difficulty: "intermediate"
-duration: "75 minutes"
+duration: "75 min"
 ---
 # Título Traducido de la Lección — Igual al H1
 
@@ -39,22 +39,22 @@ flowchart TD
     B --> C[Tabla Delta bronze]
 ```
 
-> 📚 **¿Sabías que…?** Caja de curiosidad traducida.
+> 📚 ¿Sabías que…? Caja de curiosidad traducida. (fórmula bloqueada: `📚 ¿Sabías que…?`)
 
 > ⚠️ **ADVERTENCIA:** warning afilado, nunca suavizado a NOTE.
 
-> **Veredicto comparativo:** caja final con el veredicto traducido.
+> **Veredicto comparativo — …** caja final. (fórmula bloqueada: `> **Veredicto comparativo — `)
 
-## Estudios de Caso Reales (Real-World Case Studies)
+## Casos Reales
 
 > **Empresa (nombre sin alterar)** — desafío traducido. Métricas con URL y
 > fecha preservadas: `https://docs.databricks.com/...` (consultado en octubre de 2026).
 
-### 2026 Updates (as of October 2026)
+### Actualizaciones de 2026 (en octubre de 2026)
 
-> - El literal del título de la caja `2026 Updates (as of October 2026)` puede
->   traducirse como `Actualizaciones de 2026 (a octubre de 2026)`; el verifier
->   no exige ese literal, solo la estructura. Bullets con fechas y fuentes.
+> - Título de caja es fórmula bloqueada
+>   `### Actualizaciones de 2026 (en octubre de 2026)` — ninguna variante.
+>   Bullets con fechas y fuentes preservadas.
 
 > [!SUCCESS]
 > **Conclusiones Clave (Key Takeaways):**

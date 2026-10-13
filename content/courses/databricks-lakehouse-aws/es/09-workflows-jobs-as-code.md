@@ -3,7 +3,7 @@ title: "Lakeflow Jobs (antes Databricks Workflows): multi-task jobs como código
 description: "Opera la orquestación de Databricks en producción sobre AWS en octubre de 2026: domina el renombramiento de Workflows -> Lakeflow Jobs y el modelo job/tasks/triggers con sus límites verificados (1,000 tasks por job, 12,000 jobs guardados, 2,000 task runs concurrentes, 12,000 triggers activos); elige tipos de task y cómputo según la matriz serverless-first y la regla de SKU de $0.15 vs $0.40 por DBU; conecta depends_on más las seis condiciones run_if, el control flow de condition/for-each/Run Job y la trampa Excluded cuenta como éxito; configura schedules Quartz con el suelo de 10 segundos y el arreglo DST → UTC, triggers de llegada de archivos (cooldown de 900 s / debounce de 60 s, límites de file events) y triggers de actualización de tabla; separa la cola (tope de 48 horas) del skipping y diagnostica ambos en las system tables; fija reintentos, timeouts, repairs, partial runs y notificaciones por webhook; ejecuta jobs como service principals con OAuth M2M; define todo el estate en YAML de Declarative Automation Bundles con targets dev/prod y fuentes Git; conecta con Amazon MWAA mediante DatabricksRunNowOperator; y elige entre Workflows, Airflow y Step Functions desde una matriz de decisión con precios, con los casos NAB y Asurion, seis ejemplos resueltos, cinco diagramas mermaid, cuatro comprobaciones interactivas, un recuadro de actualización de octubre de 2026 y catorce preguntas de práctica."
 order: 9
 difficulty: "intermediate"
-duration: "80 minutes"
+duration: "80 min"
 ---
 # Lakeflow Jobs (antes Databricks Workflows): multi-task jobs como código, triggers, reintentos y la matriz de decisión del scheduler
 
@@ -94,7 +94,7 @@ flowchart TB
 | `max_concurrent_runs` | defecto **1**, máx **1,000**, **0 = salta todos los runs nuevos** | salta o rechaza | Jobs API 2.0; configure-job (7 jul 2026) |
 | Duración de la cola | **48 horas** | el run muere con `MAX_JOB_QUEUE_SIZE_EXCEEDED` | configure-job |
 
-Dos números causan la mayor parte del daño operativo. Primero, **`max_concurrent_runs` vale 1 por defecto**: «By default, the maximum concurrent runs for all new jobs is 1» y un run que superaría el tope se **salta** salvo que la cola lo atrape (configure-job). Segundo, **el techo del workspace de 2,000 task runs concurrentes** es global — una flota de jobs fan-out se puede privar mutuamente de capacidad, y el error aparece como un 429 o como `WORKSPACE_RUN_LIMIT_EXCEEDED` en las system tables (jobs overview; system-tables/jobs, **21 may 2026**).
+Dos números causan la mayor parte del daño operativo. Primero, **`max_concurrent_runs` vale 1 por defecto**: «Por defecto, el número máximo de runs concurrentes de todos los jobs nuevos es 1» y un run que superaría el tope se **salta** salvo que la cola lo atrape (configure-job). Segundo, **el techo del workspace de 2,000 task runs concurrentes** es global — una flota de jobs fan-out se puede privar mutuamente de capacidad, y el error aparece como un 429 o como `WORKSPACE_RUN_LIMIT_EXCEEDED` en las system tables (jobs overview; system-tables/jobs, **21 may 2026**).
 
 - **📚 ¿Sabías que…?** La referencia heredada de Jobs API 2.0 (última actualización 3 ago 2026) todavía dice «A job can contain up to **100 tasks**», mientras que el overview actual y el blog de 2024-08-22 *«What's new in Workflows?»* dicen **1,000**. La cifra de 1,000 tasks es el límite de producto vigente (los endpoints de escritura lo imponen); el 100 es una página heredada obsoleta — y los endpoints de lectura simplemente devuelven 100 por página con paginación. Pon siempre fecha al límite que cites.
 
@@ -108,13 +108,13 @@ La paleta actual de la UI (página configure-task) dice: **Notebook · Visual da
 
 Tres entradas merecen comentario antes de la matriz de cómputo:
 
-- **dbt es de primera clase**: una task de dbt es «one or more dbt commands» más un `project_directory`, y «The dbt task requires both Databricks SQL and the ability to use a **serverless or a pro SQL warehouse**» — los SQL warehouses classic se limitan a jobs SQL programados de una sola task (Jobs API 2.2). Databricks inyecta `DBT_ACCESS_TOKEN` para la identidad Run as, y por eso el service principal de run as necesita acceso al warehouse *y* grants de UC.
-- **Las tasks Condition (if/else) «do not require a cluster to execute and do not support retries or notifications»** (Jobs API 2.2; docs de bundles, 21 ago 2026). No puedes «reintentar una rama» — reintenta la task de datos que la rama protege.
-- **Las tasks Run Job** disparan «other jobs configured in your Databricks workspace» — solo del mismo workspace — con los parámetros del job empujados hacia abajo, y tienen un tope duro: «Databricks does not support jobs with circular dependencies or that nest more than three Run Job tasks» (docs .../jobs/tasks/run-job, **11 sep 2026**).
+- **dbt es de primera clase**: una task de dbt es «one or more dbt commands» más un `project_directory`, y «La task de dbt requiere tanto Databricks SQL como la capacidad de usar un **SQL warehouse serverless o pro**» — los SQL warehouses classic se limitan a jobs SQL programados de una sola task (Jobs API 2.2). Databricks inyecta `DBT_ACCESS_TOKEN` para la identidad Run as, y por eso el service principal de run as necesita acceso al warehouse *y* grants de UC.
+- **Las tasks Condition (if/else) «no requieren un cluster para ejecutarse ni admiten reintentos ni notificaciones»** (Jobs API 2.2; docs de bundles, 21 ago 2026). No puedes «reintentar una rama» — reintenta la task de datos que la rama protege.
+- **Las tasks Run Job** disparan «otros jobs configurados en tu workspace de Databricks» — solo del mismo workspace — con los parámetros del job empujados hacia abajo, y tienen un tope duro: «Databricks no admite jobs con dependencias circulares ni que aniden más de tres Run Job tasks» (docs .../jobs/tasks/run-job, **11 sep 2026**).
 
 ### 2.2 El árbol de decisión del cómputo
 
-La página de la matriz de cómputo (última actualización **15 sep 2026**) es explícita: «**Serverless compute for workflows… is the default** for all tasks that support it», y «**All-purpose compute | You can optionally configure tasks using classic all-purpose compute. Databricks does not recommend this configuration for production jobs.**»
+La página de la matriz de cómputo (última actualización **15 sep 2026**) es explícita: «**El cómputo serverless para workflows… es el valor por defecto** para todas las tasks que lo admitan», y «**All-purpose compute | Puedes configurar opcionalmente tasks usando cómputo classic all-purpose. Databricks no recomienda esta configuración para jobs de producción.**»
 
 ```mermaid
 flowchart TD
@@ -130,7 +130,7 @@ flowchart TD
     classDef warn fill:#3b1010,stroke:#f66,stroke-width:1px,color:#fff
 ```
 
-La facturación sigue a la elección de cluster, y esta sola regla ancla cada lección de coste del curso: «When you run a job on a new jobs cluster, the job is treated as a **Jobs Compute (automated) workload subject to Jobs Compute pricing**. When you run a job on an existing all-purpose cluster, it is treated as an **All-Purpose Compute (interactive) workload subject to All-Purpose Compute pricing**» (referencia de Jobs API 2.0, 3 ago 2026). Los job clusters también se comportan distinto a la salida: el cómputo «terminates and is unavailable for restarting when the job is complete», mientras que un job programado apuntado a un all-purpose cluster *terminado* lo **autostarta** (docs .../compute/clusters-manage) — así es como un cluster reutilizado «barato» se convierte en silencio en una línea de 24×7.
+La facturación sigue a la elección de cluster, y esta sola regla ancla cada lección de coste del curso: «When you run a job on a new jobs cluster, the job is treated as a **Jobs Compute (automated) workload subject to Jobs Compute pricing**. When you run a job on an existing all-purpose cluster, it is treated as an **All-Purpose Compute (interactive) workload subject to All-Purpose Compute pricing**» (referencia de Jobs API 2.0, 3 ago 2026). Los job clusters también se comportan distinto a la salida: el cómputo «termina y no está disponible para reiniciarse cuando el job termina», mientras que un job programado apuntado a un all-purpose cluster *terminado* lo **autostarta** (docs .../compute/clusters-manage) — así es como un cluster reutilizado «barato» se convierte en silencio en una línea de 24×7.
 
 ### 2.3 Ejemplo resuelto E1 — el mismo job, dos SKUs
 
@@ -171,7 +171,7 @@ Los jobs serverless son la tercera ruta: «bill only when a command or query run
 ```
 
 > [!WARNING]
-> ⚠️ **Dos trampas de cómputo rompen los presupuestos de producción y los jobs paralelos.** (1) **Nunca apuntes tasks de producción a all-purpose clusters existentes** — pagas tarifas de DBU interactivas *y* heredas el autostart, el tiempo en inactividad y la advertencia documentada de que «you may need to manually restart the cluster if it stops responding» (Jobs API 2.0). La hoja de trucos de producción lo dice en una línea: «Use serverless compute for jobs… **Use service principals instead of user accounts**… **For classic compute: use jobs clusters for automated workflows**» (docs .../cheat-sheet/jobs, 4 abr 2026). (2) **Los job clusters compartidos filtran estado**: están ligados a un solo run y recortan la latencia de arranque, pero «Libraries cannot be declared in a shared job cluster configuration» (decláralas por task), el cluster queda inactivo mientras corren otras tasks, y «Scala singletons and companion objects are shared across tasks… If parallel tasks read from or write to the same companion-object variable, one task's value can overwrite another's» (página de cómputo, 15 sep 2026). Tasks paralelas y sensibles al aislamiento necesitan cómputo propio o serverless — punto y final.
+> ⚠️ **Dos trampas de cómputo rompen los presupuestos de producción y los jobs paralelos.** (1) **Nunca apuntes tasks de producción a all-purpose clusters existentes** — pagas tarifas de DBU interactivas *y* heredas el autostart, el tiempo en inactividad y la advertencia documentada de que «puede que necesites reiniciar el cluster manualmente si deja de responder» (Jobs API 2.0). La hoja de trucos de producción lo dice en una línea: «Use serverless compute for jobs… **Use service principals instead of user accounts**… **For classic compute: use jobs clusters for automated workflows**» (docs .../cheat-sheet/jobs, 4 abr 2026). (2) **Los job clusters compartidos filtran estado**: están ligados a un solo run y recortan la latencia de arranque, pero «Libraries cannot be declared in a shared job cluster configuration» (decláralas por task), el cluster queda inactivo mientras corren otras tasks, y «Scala singletons and companion objects are shared across tasks… If parallel tasks read from or write to the same companion-object variable, one task's value can overwrite another's» (página de cómputo, 15 sep 2026). Tasks paralelas y sensibles al aislamiento necesitan cómputo propio o serverless — punto y final.
 
 - **📚 ¿Sabías que…?** Los jobs serverless llevan **rate-limit objects** automatizados que limitan la ejecución a unos **60 / 120 / 240 / 480 / 960 DBU por hora** de Small a 2X-Large, y «Within a single job, the cap is shared across all the job's tasks» (docs .../compute/serverless/manage-serverless-compute, consultadas oct 2026). Los límites de tasa se aplican solo a cargas automatizadas — los notebooks interactivos y Databricks Connect están exentos — y hacerlos cumplir requiere Databricks Runtime **17.3.1 o superior**. Un ticket de «¿por qué se me ha atascado mi fan-out?» suele tener esta respuesta.
 
@@ -185,7 +185,7 @@ Tres semánticas documentadas son de examen y de incidente a la vez:
 
 1. «Upstream tasks with the **Excluded** result state are treated as **successful** when evaluating Run if conditions.»
 2. «Upstream tasks marked **Upstream failed** or **Upstream canceled** are treated as **failed**, not as skipped.»
-3. «If all of a task's dependencies are excluded, the task itself is also excluded… exclusion cascades along a linear dependency chain» — sin importar el propio Run if de esa task. La cancelación igualmente «propagates through downstream tasks, and tasks with a Run if condition that handles failure are run».
+3. «If all of a task's dependencies are excluded, the task itself is also excluded… exclusion cascades along a linear dependency chain» — sin importar el propio Run if de esa task. La cancelación igualmente «se propaga a las tasks aguas abajo, y las tasks con una condición Run if que maneja fallos se ejecutan».
 
 ```mermaid
 flowchart LR
@@ -204,7 +204,7 @@ Lee el diagrama como una política, no como una forma. `dq_gate` usa **NONE_FAIL
 
 ## 4. Triggers: el cron es una conjetura, la llegada de datos es un hecho
 
-Hoy se entregan seis comportamientos de trigger (docs de triggers, **6 oct 2026**): **Scheduled**, **Table update**, **File arrival**, **Model update (Beta)**, **Continuous** («trigger another job run whenever a job run completes or fails») y **None (manual)**. Los triggers múltiples por job están en **Beta** — hasta **cinco**, cada uno pausable de forma independiente, y «A continuous trigger cannot be combined with any other trigger». La API los trae en un array `triggers`; no mezcles ese array con los campos heredados `schedule` / `trigger` / `continuous` en una misma request.
+Hoy se entregan seis comportamientos de trigger (docs de triggers, **6 oct 2026**): **Scheduled**, **Table update**, **File arrival**, **Model update (Beta)**, **Continuous** («trigger another job run whenever a job run completes or fails») y **None (manual)**. Los triggers múltiples por job están en **Beta** — hasta **cinco**, cada uno pausable de forma independiente, y «Un trigger continuo no puede combinarse con ningún otro trigger». La API los trae en un array `triggers`; no mezcles ese array con los campos heredados `schedule` / `trigger` / `continuous` en una misma request.
 
 ### 4.1 Programado: cron de Quartz, el suelo de 10 segundos y el DST
 
@@ -247,11 +247,11 @@ IMPOSIBLE - cron por debajo de 10 segundos:
                     la plataforma sigue imponiendo >= 10 s entre runs)
 ```
 
-Los triggers de llegada de archivos «make a best effort to **check for new files every minute**», monitorizan «the root of a Unity Catalog external location or volume, or a subpath» de forma recursiva, y «**do not incur additional costs other than cloud provider costs associated with listing files**» (docs de file-arrival, 7 oct 2026). Los filos: **solo disparan los archivos nuevos** — «Overwriting an existing file with a file of the same name does not trigger a run»; sin wildcards; y «When the configured directory does not exist or is deleted from Amazon S3…, file arrival triggers continue to be evaluated with **no error**». Sin **file events** habilitados en la external location, el workspace te limita a «**A maximum of 50 jobs**» con triggers de llegada de archivos en tales ubicaciones y «**10,000 files**» en la ruta vigilada. El acoplamiento recomendado es Auto Loader con `cloudFiles.useManagedFileEvents=true` y `trigger(availableNow=True)` — una variante foreachBatch «provides only **at-least-once** processing guarantees» — con el checkpoint guardado *fuera* de la ruta vigilada.
+Los triggers de llegada de archivos «hacen un esfuerzo por **comprobar si hay archivos nuevos cada minuto**», monitorizan «the root of a Unity Catalog external location or volume, or a subpath» de forma recursiva, y «**do not incur additional costs other than cloud provider costs associated with listing files**» (docs de file-arrival, 7 oct 2026). Los filos: **solo disparan los archivos nuevos** — «Sobrescribir un archivo existente con otro del mismo nombre no dispara un run»; sin wildcards; y «Cuando el directorio configurado no existe o se borra de Amazon S3…, los triggers de llegada de archivos siguen evaluándose **sin error**». Sin **file events** habilitados en la external location, el workspace te limita a «**A maximum of 50 jobs**» con triggers de llegada de archivos en tales ubicaciones y «**10,000 files**» en la ruta vigilada. El acoplamiento recomendado es Auto Loader con `cloudFiles.useManagedFileEvents=true` y `trigger(availableNow=True)` — una variante foreachBatch «provides only **at-least-once** processing guarantees» — con el checkpoint guardado *fuera* de la ruta vigilada.
 
 ### 4.3 Triggers de actualización de tabla
 
-Un trigger de actualización de tabla «checks for table updates, and when a table is updated, the job is run», monitorizando hasta **10** tablas gestionadas Delta/Iceberg de Unity Catalog, tablas externas sobre Delta, materialized views, streaming tables y vistas dependientes — detectando «updates, merges, and deletes» (docs de table-update, 26 jun 2026). `wait_after_last_change_seconds` tiene un **suelo de 60 segundos**: es un debounce, no un SLA sub-minuto. Igual que la llegada de archivos, «do[es] not incur additional costs other than cloud provider costs», y «For best performance and scalability, **enable file events** on the external location.»
+Un trigger de actualización de tabla «comprueba si hay actualizaciones de tablas y, cuando se actualiza una tabla, se ejecuta el job», monitorizando hasta **10** tablas gestionadas Delta/Iceberg de Unity Catalog, tablas externas sobre Delta, materialized views, streaming tables y vistas dependientes — detectando «updates, merges, and deletes» (docs de table-update, 26 jun 2026). `wait_after_last_change_seconds` tiene un **suelo de 60 segundos**: es un debounce, no un SLA sub-minuto. Igual que la llegada de archivos, «no genera costes adicionales más allá de los costes del proveedor cloud», y «For best performance and scalability, **enable file events** on the external location.»
 
 ```mermaid
 flowchart TD
@@ -333,7 +333,7 @@ WHERE queue_duration_seconds > 300
 ORDER BY queue_duration_seconds DESC;
 ```
 
-La misma referencia lista los estados de fallo sobre los que conviene alertar: `WORKSPACE_RUN_LIMIT_EXCEEDED` («The workspace has reached the quota for the maximum number of concurrent active runs»), `MAX_CONCURRENT_RUNS_EXCEEDED`, `MAX_JOB_QUEUE_SIZE_EXCEEDED`, `CLUSTER_REQUEST_LIMIT_EXCEEDED` y `REPOSITORY_CHECKOUT_FAILED` — más la nota honesta de que `creator_user_name` y `paused` están «Not populated for rows emitted before **early December 2025**», así que las consultas de higiene histórica necesitan un suelo de fecha.
+La misma referencia lista los estados de fallo sobre los que conviene alertar: `WORKSPACE_RUN_LIMIT_EXCEEDED` («El workspace ha alcanzado la cuota máxima de runs activos concurrentes»), `MAX_CONCURRENT_RUNS_EXCEEDED`, `MAX_JOB_QUEUE_SIZE_EXCEEDED`, `CLUSTER_REQUEST_LIMIT_EXCEEDED` y `REPOSITORY_CHECKOUT_FAILED` — más la nota honesta de que `creator_user_name` y `paused` están «sin rellenar para las filas emitidas antes de **principios de diciembre de 2025**», así que las consultas de higiene histórica necesitan un suelo de fecha.
 
 ```fillblank
 {
@@ -362,7 +362,7 @@ La misma referencia lista los estados de fallo sobre los que conviene alertar: `
 
 ### 6.1 Los reintentos varían según el cómputo — el valor por defecto es el silencio
 
-«The default setting for task retries depends on the job configuration. For most configurations, the default setting **does not retry any tasks** on task failure» (configure-task). Frente a eso: «**Serverless jobs auto-optimize retries by default**» (desactívalo con la casilla «Enable serverless auto-optimization» — y *desactívalo* sí para destinos no idempotentes), y «**Continuous jobs use an exponential backoff retry policy**» (misma página). Los mandos por task: `max_retries`, `min_retry_interval_millis`, `retry_on_timeout`; `timeout_seconds` es por task con «**A value of 0 means no timeout**» (Jobs API 2.2) — y un timeout *no* se reintenta salvo que `retry_on_timeout` esté activo.
+«El ajuste por defecto de los reintentos de task depende de la configuración del job. Para la mayoría de las configuraciones, el ajuste por defecto **no reintenta ninguna task** cuando una task falla» (configure-task). Frente a eso: «**Serverless jobs auto-optimize retries by default**» (desactívalo con la casilla «Enable serverless auto-optimization» — y *desactívalo* sí para destinos no idempotentes), y «**Continuous jobs use an exponential backoff retry policy**» (misma página). Los mandos por task: `max_retries`, `min_retry_interval_millis`, `retry_on_timeout`; `timeout_seconds` es por task con «**A value of 0 means no timeout**» (Jobs API 2.2) — y un timeout *no* se reintenta salvo que `retry_on_timeout` esté activo.
 
 ### 6.2 Ejemplo resuelto E4 — la política de reintentos como documento de diseño
 
@@ -392,10 +392,10 @@ Superficies de recuperación más allá de los reintentos: el **repair** reejecu
 
 ### 6.3 Notificaciones: tres destinos, reintentos silenciosos
 
-Eventos de notificación (docs de notifications, **9 oct 2026**): **Start · Successful completion · Failure · umbral de duración superado · umbral de backlog de streaming superado · inicio/fin de mantenimiento (jobs continuos)**. Los destinos son «email addresses or third-party destinations such as **Slack, Microsoft Teams, PagerDuty, or any webhook-based service**», donde «An administrator must configure **system destinations**», y «For each job or task, you can configure a maximum of **three system destinations** for each notification event type». Los códigos `event_type` del webhook son estables: `jobs.on_start`, `jobs.on_success`, `jobs.on_failure`, `jobs.on_duration_warning_threshold_exceeded`.
+Eventos de notificación (docs de notifications, **9 oct 2026**): **Start · Successful completion · Failure · umbral de duración superado · umbral de backlog de streaming superado · inicio/fin de mantenimiento (jobs continuos)**. Los destinos son «email addresses or third-party destinations such as **Slack, Microsoft Teams, PagerDuty, or any webhook-based service**», donde «An administrator must configure **system destinations**», y «Para cada job o task, puedes configurar un máximo de **tres destinos de sistema** para cada tipo de evento de notificación». Los códigos `event_type` del webhook son estables: `jobs.on_start`, `jobs.on_success`, `jobs.on_failure`, `jobs.on_duration_warning_threshold_exceeded`.
 
 > [!IMPORTANT]
-> 🔔 **«Job-level notifications aren't sent when failed tasks are retried.»** Esa sola línea (docs de notifications, 9 oct 2026) es la razón por la que el guardia sigue perdiendo incidentes en jobs inestables: una task de silver que falla dos veces y luego tiene éxito no dispara *nada* a nivel de job. El patrón documentado es **alertas a nivel de task** más la opción de la UI «Mute notifications until the last retry» — alerta en el fallo *final*, no en el primero. Dos semánticas adyacentes completan el cuadro: «**Succeeded with failures**» cuenta como éxito (selecciona el evento Success si quieres esos), y las alertas de backlog de streaming evalúan «average backlog over a **10-minute period**» con un límite de re-notificación de **30 minutos**. Los runs cancelados y saltados se pueden silenciar por evento.
+> 🔔 **«Job-level notifications aren't sent when failed tasks are retried.»** Esa sola línea (docs de notifications, 9 oct 2026) es la razón por la que el guardia sigue perdiendo incidentes en jobs inestables: una task de silver que falla dos veces y luego tiene éxito no dispara *nada* a nivel de job. El patrón documentado es **alertas a nivel de task** más la opción de la UI «Silenciar notificaciones hasta el último reintento» — alerta en el fallo *final*, no en el primero. Dos semánticas adyacentes completan el cuadro: «**Succeeded with failures**» cuenta como éxito (selecciona el evento Success si quieres esos), y las alertas de backlog de streaming evalúan «average backlog over a **10-minute period**» con un límite de re-notificación de **30 minutos**. Los runs cancelados y saltados se pueden silenciar por evento.
 
 ### 6.4 Ejemplo resuelto E5 — el payload del webhook y la llamada run-now
 
@@ -439,7 +439,7 @@ Usa tokens **OAuth M2M** (client id + secreto OAuth; access tokens válidos **1 
 
 ## 7. Identidad: owner, Run as y la marcha que rompe las 3 a.m.
 
-Un job tiene dos identidades: el **owner** (ACL del job; «Only workspace admins can edit the job owner») y la identidad **Run as** cuyos permisos ejecutan cada task. Run as por defecto = la persona creadora del job — y la recomendación de las docs no deja lugar a dudas: «**Databricks recommends changing the Run as user to a service principal**, so that privileges can be controlled separately from the owner's privileges, and so that jobs do not break when the owner leaves or has changed privileges» (docs .../jobs/privileges, consultadas oct 2026). Cambiar Run as requiere **CAN MANAGE o IS OWNER** en el job, el service principal necesita el entitlement **Service Principal User**, y «Run as a group» está en **Public Preview**.
+Un job tiene dos identidades: el **owner** (ACL del job; «Solo los admins del workspace pueden editar el owner del job») y la identidad **Run as** cuyos permisos ejecutan cada task. Run as por defecto = la persona creadora del job — y la recomendación de las docs no deja lugar a dudas: «**Databricks recomienda cambiar el Run as user a un service principal**, de modo que los privilegios se puedan controlar por separado de los del owner, y de modo que los jobs no se rompan cuando el owner se vaya o cambie de privilegios» (docs .../jobs/privileges, consultadas oct 2026). Cambiar Run as requiere **CAN MANAGE o IS OWNER** en el job, el service principal necesita el entitlement **Service Principal User**, y «Run as a group» está en **Public Preview**.
 
 ```mermaid
 flowchart LR
@@ -532,11 +532,11 @@ Todo en ese archivo mapea a un campo documentado: `run_as.service_principal_name
 
 ### 8.2 Los targets dev/prod son la barra de seguridad
 
-Los presets del modo de desarrollo (docs de deployment-modes de bundles): «**Pauses all schedules and triggers** on deployed resources such as jobs» (anúlalo con `schedule.pause_status: UNPAUSED`), anteponga un prefijo de nombre `[dev ${workspace.current_user.short_name}]`, y «**Enables concurrent runs on all deployed jobs**». El modo de producción no aplica nada de eso — y por eso el mismo YAML es seguro de desplegar desde un portátil y aterrador de desplegar desde un portátil *sin targets*. La promoción es `databricks bundle deploy --target prod` desde CI, con el service principal de run as y los secretos resueltos por target.
+Los presets del modo de desarrollo (docs de deployment-modes de bundles): «**Pausa todos los schedules y triggers** de los recursos desplegados, como jobs» (anúlalo con `schedule.pause_status: UNPAUSED`), anteponga un prefijo de nombre `[dev ${workspace.current_user.short_name}]`, y «**Enables concurrent runs on all deployed jobs**». El modo de producción no aplica nada de eso — y por eso el mismo YAML es seguro de desplegar desde un portátil y aterrador de desplegar desde un portátil *sin targets*. La promoción es `databricks bundle deploy --target prod` desde CI, con el service principal de run as y los secretos resueltos por target.
 
 ### 8.3 Fuentes Git: un repo, un commit, una instantánea
 
-Las tasks de notebook, Python-script, archivo SQL y dbt pueden tomar una **fuente de un repositorio Git remoto** (docs .../jobs/git, 11 sep 2026): «**All tasks in a job must reference the same commit**… Databricks takes a **snapshot** of the specified branch or commit» cuando empieza el run; «**Only one remote Git repository can be used for all tasks in a job**»; y «Tasks configured to use a remote Git repository **cannot write to workspace files**». Los **Git folders** (sync de workspace-repo) funcionan pero hay que sincronizarlos a mano y se recomiendan «only for rapid iteration and testing during development» — las tasks de staging y producción referencian el repo remoto con branch/tag/commit fijado, y el historial de runs muestra el SHA del commit.
+Las tasks de notebook, Python-script, archivo SQL y dbt pueden tomar una **fuente de un repositorio Git remoto** (docs .../jobs/git, 11 sep 2026): «**Todas las tasks de un job deben referenciar el mismo commit**… Databricks toma una **instantánea** de la rama o commit indicado» cuando empieza el run; «**Solo se puede usar un único repositorio Git remoto para todas las tasks de un job**»; y «Tasks configured to use a remote Git repository **cannot write to workspace files**». Los **Git folders** (sync de workspace-repo) funcionan pero hay que sincronizarlos a mano y se recomiendan «solo para iteración rápida y pruebas durante el desarrollo» — las tasks de staging y producción referencian el repo remoto con branch/tag/commit fijado, y el historial de runs muestra el SHA del commit.
 
 ```dragdrop
 {
@@ -565,7 +565,7 @@ Las tasks de notebook, Python-script, archivo SQL y dbt pueden tomar una **fuent
 
 ## 9. La costura externa: Airflow y Amazon MWAA
 
-Hay calendarios que son propiedad de la empresa: ventanas de SAP, mantenimiento de Redshift, SLAs de APIs de terceros. La propia página de Databricks documenta la costura — «you can also schedule your jobs using tools such as Apache Airflow» — con la advertencia de que los paquetes open source «are **not directly supported by Databricks**» (docs .../jobs/how-to/use-airflow-with-jobs, 11 sep 2026). El mapa de operadores:
+Hay calendarios que son propiedad de la empresa: ventanas de SAP, mantenimiento de Redshift, SLAs de APIs de terceros. La propia página de Databricks documenta la costura — «también puedes programar tus jobs usando herramientas como Apache Airflow» — con la advertencia de que los paquetes open source «are **not directly supported by Databricks**» (docs .../jobs/how-to/use-airflow-with-jobs, 11 sep 2026). El mapa de operadores:
 
 | Operador | Llamada a la API | Úsalo cuando |
 |---|---|---|
@@ -634,14 +634,14 @@ Tres orquestadores tocan un estate de Databricks sobre AWS, y cada uno tiene una
 El híbrido en el que acaban la mayoría de las tiendas de AWS: **un único job de «ingest» de Databricks con trigger de llegada de archivos es dueño de la disponibilidad de los datos; MWAA es dueño del calendario empresarial y llama a ese job con `DatabricksRunNowOperator`; Step Functions coordina los pasos del lado de AWS alrededor de la llamada a Databricks.** Las alternativas de la familia Airflow gestionado (Prefect, Astronomer) se integran por la misma costura REST/SDK — misma arquitectura, factura distinta, así que mantén la comparación cualitativa hasta tener sus ofertas en vivo.
 
 > **Veredicto comparativo — Lakeflow Jobs vs Amazon MWAA/Airflow vs AWS Step Functions (AWS, a oct 2026)**
-> - **Lakeflow Jobs — el valor por defecto para DAGs nativos de Databricks.** Sin cargo de scheduler en inactividad (proveedor: «no orchestration surcharge — You pay only for compute used by your tasks», blog 2025-01-12), triggers conscientes de los datos sobre external locations con soporte S3 y tablas de UC, repairs/partial runs, service principals de run as y observabilidad del job en las system tables. Suelo de DBU **$0.15/DBU** (Data Engineering, instantánea de la página de precios 2026-10) en cómputo classic de jobs — o serverless que «bill[s] only when a command or query runs». Debilidad: la orquestación *fuera* de Databricks todavía es joven (el blog de Lakeflow de junio de 2026 anuncia External Orchestration para Snowflake/REST/Slack/PagerDuty sin declarar su madurez), y el encadenamiento con Run Job es solo del mismo workspace, ≤3 niveles, sin ciclos.
+> - **Lakeflow Jobs — el valor por defecto para DAGs nativos de Databricks.** Sin cargo de scheduler en inactividad (proveedor: «sin recargo de orquestación — solo pagas por el cómputo usado por tus tasks», blog 2025-01-12), triggers conscientes de los datos sobre external locations con soporte S3 y tablas de UC, repairs/partial runs, service principals de run as y observabilidad del job en las system tables. Suelo de DBU **$0.15/DBU** (Data Engineering, instantánea de la página de precios 2026-10) en cómputo classic de jobs — o serverless que «solo factura cuando se ejecuta un comando o una consulta». Debilidad: la orquestación *fuera* de Databricks todavía es joven (el blog de Lakeflow de junio de 2026 anuncia External Orchestration para Snowflake/REST/Slack/PagerDuty sin declarar su madurez), y el encadenamiento con Run Job es solo del mismo workspace, ≤3 niveles, sin ciclos.
 > - **Amazon MWAA/Airflow — el dueño del calendario empresarial.** DAGs neutral respecto al proveedor, operadores/sensors personalizados, semántica de backfill madura, y el único hogar cómodo para el fan-out que pasa la mayor parte de sus pasos fuera de Databricks. El coste honesto: un **entorno large de $0.99/h ≈ $736.56/mes** de suelo (ejemplo de la página de precios de AWS) más workers a $0.22/h y metadatos de RDS a $0.10/GB-mes — orquestación con su propia factura *y* su propia guardia. Llama a Databricks con `DatabricksRunNowOperator` (SP OAuth o IAM OIDC, deferrable, durable) para que los runs sigan visibles en la UI de jobs.
 > - **AWS Step Functions — el pegamento de AWS.** Mejor cuando el centro de gravedad del workflow es Lambda/ECS/Batch/Glue y Databricks es una llamada a la API entre muchas; el precio de Standard es por transición de estado (**$0.025 por 1,000**, AWS Compute Blog 2022-08-30 — vuelve a comprobar la tabla en vivo), Express mide GB-segundos ($0.00001667/GB-s, página de precios consultada oct 2026). Renuncias a task values, repairs y la UI de jobs — las funciones conscientes de Databricks viven fuera de la consola.
 > - **Veredicto en una línea:** *Lakeflow Jobs para el DAG interno de Databricks → MWAA donde el calendario o el fan-out no son de Databricks → Step Functions donde los servicios de AWS son el workflow y Databricks es un callee* — y en cada híbrido, exactamente una capa es dueña de los bordes del DAG, run-now es dueño de la costura, y la identidad de run as es un service principal.
 
 ---
 
-### Actualizaciones de 2026 (a octubre de 2026)
+### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
 > **Qué cambió en la capa de orquestación de Databricks de la que depende esta lección — cada línea comprobada contra una fuente primaria:**
@@ -654,13 +654,13 @@ El híbrido en el que acaban la mayoría de las tiendas de AWS: **un único job 
 
 ---
 
-## Casos de la vida real
+## Casos Reales
 
 > **📋 Caso A — NAB (National Australia Bank, banca, Cloud: AWS)**
 > **Desafío.** Un **almacén Teradata de 26 años** con ~1,000 casos de uso y ~140 suites de reporting, más ETL en Spark escrito a mano con DML de 5,000–8,000 líneas y hasta 64 `union-all` por pipeline, mantenido por 300–400 ingenieros con prácticas inconsistentes.
 > **Stack en AWS.** Databricks SQL, Auto Loader, **Spark Declarative Pipelines sobre Lakeflow** (el hermano de pipeline de los Jobs de esta lección), Unity Catalog y **asset bundles para CI/CD** — `Cloud: AWS` en la página de la historia.
 > **Resultado reportado.** «**1,800 Spark Declarative Pipelines running on Databricks Lakeflow · 99.6% Job success rate · 80% Less transformation complexity**»; latencia extremo a extremo «under 15 minutes»; calidad de datos «+38%» (https://www.databricks.com/customers/national-australian-bank-nab, página sin fecha, consultada 2026-10).
-> **Cita.** «The migration wouldn't have been possible without Databricks SQL» — Gurry (https://www.databricks.com/customers/nab/dbsql, página sin fecha, consultada 2026-10).
+> **Cita.** «La migración no habría sido posible sin Databricks SQL» — Gurry (https://www.databricks.com/customers/nab/dbsql, página sin fecha, consultada 2026-10).
 > **Encaja con esta lección.** Secciones 6 y 8 — una **tasa de éxito de jobs del 99.6%** a través de 1,800 pipelines es una métrica de *fiabilidad*: reintentos, repairs, service principals de run as y definiciones desplegadas con bundles son lo que convierte la orquestación de hazañas heroicas en un número que un auditor puede seguir.
 > ⏳ *Nota temporal: página sin fecha, consultada en oct 2026 — un resultado de cliente reportado, no una garantía de 2026.*
 

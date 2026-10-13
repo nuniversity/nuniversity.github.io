@@ -3,7 +3,7 @@ title: "Otimização de Custo e Economia de DBU na AWS"
 description: "Domine o modelo de custo da Databricks na AWS: o que é um DBU e como ele é medido, a tabela completa de preços de out-2026 por SKU de compute (jobs 0.15, all-purpose 0.55, SQL 0.22/0.55/0.70 por DBU), a aritmética de break-even serverless vs classic, os padrões de auto-stop e auto-termination, workers spot, pools, guardrails de cluster policy e a atribuição de custo com system tables, system.billing.usage e budgets; calcule à mão um caso TCO mensal de DBU que corta uma fatura de $3,011 em 34.1%, compare o modelo de DBU com créditos do Snowflake e os $5/TB do Athena, estude histórias nomeadas de custo de clientes na AWS (Addepar, Nubank, Comcast), leia a caixa de atualização de 2026 e pratique com doze questões mais cinco verificações interativas."
 order: 15
 difficulty: "intermediate"
-duration: "60 minutes"
+duration: "60 min"
 ---
 # Otimização de Custo e Economia de DBU na AWS
 
@@ -580,7 +580,7 @@ As faixas de praticantes ao redor desses números são consistentes: vitórias r
 
 ---
 
-## Estudos de Caso do Mundo Real
+## Casos Reais
 
 > **📋 Caso A — Addepar (gestão de wealth, Cloud: AWS): $2 milhões a menos em infraestrutura, entrega 5× mais rápida**
 > **Desafio.** Times de engenharia e de dados em silos; entrega lenta de pipelines; custo de infraestrutura crescente em uma plataforma que modela mais de $8 trilhões em investimentos.

@@ -1,6 +1,6 @@
 import { getRoadmapContent, getAllRoadmaps } from '@/lib/roadmaps/get-roadmap-content'
 import { RoadmapTimeline } from '@/components/roadmaps/RoadmapTimeline'
-import { type Locale } from '@/lib/i18n/config'
+import { i18n, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
@@ -15,10 +15,9 @@ interface RoadmapViewerPageProps {
 }
 
 export async function generateStaticParams() {
-  const locales: Locale[] = ['en', 'pt']
   const allParams: { lang: Locale; roadmapSlug: string }[] = []
 
-  for (const locale of locales) {
+  for (const locale of i18n.locales) {
     const roadmaps = await getAllRoadmaps(locale)
     for (const roadmap of roadmaps) {
       allParams.push({

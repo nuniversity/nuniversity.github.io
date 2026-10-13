@@ -3,7 +3,7 @@ title: "Arquitectura Lakehouse en Databricks: Planos, Pilares y el Sustrato AWS"
 description: "Construye el modelo mental del que dependen las otras dieciséis lecciones - qué es realmente un lakehouse (transacciones ACID, imposición de esquema y Parquet abierto en S3), cómo un workspace de Databricks se divide en un plano de control que nunca ves y un plano de cómputo classic/serverless que corre en tu propia VPC tras secure cluster connectivity, por qué Delta Lake y Unity Catalog son los dos pilares (registro de transacciones más un espacio de nombres securable de tres niveles con un metastore por región de AWS), dónde viven realmente tus datos frente al bucket de almacenamiento del workspace que nunca debes borrar, el mapa completo de cargas de trabajo ingest → curate → serve → ML con su tabla de carga de trabajo a cómputo, la tabla de tarifas DBU y las dos facturas en octubre de 2026, seis ejemplos resueltos a mano (DBU de jobs, mes de warehouse, Athena frente a Databricks SQL, zona de aterrizaje en S3, dimensionamiento de subredes, classic frente a serverless), la comparación con la stack nativa de AWS Glue/Athena/Redshift, con Snowflake y con Hadoop on-prem, un recuadro de actualizaciones de 2026, tres casos de estudio de AWS nombrados y doce preguntas de práctica."
 order: 1
 difficulty: "intermediate"
-duration: "75 minutes"
+duration: "75 min"
 ---
 # Arquitectura Lakehouse en Databricks: Planos, Pilares y el Sustrato AWS
 
@@ -627,7 +627,7 @@ El punto estratégico es del propio Databricks: un lakehouse propietario guarda 
 > - **Las tarifas serverless incluyen el coste de instancia; las tarifas classic no.** Compararlas sin sumar EC2 al lado classic inventa ahorros.
 > - **Delta Live Tables todavía aparece por todas partes en tutoriales antiguos y en historias de clientes** — significa Lakeflow Spark Declarative Pipelines desde 2026-01-23.
 
-### Actualizaciones de 2026 (a octubre de 2026)
+### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
 > **Qué cambió en la plataforma de la que depende esta lección:**
@@ -639,7 +639,7 @@ El punto estratégico es del propio Databricks: un lakehouse propietario guarda 
 
 ---
 
-## Casos de Estudio del Mundo Real
+## Casos Reales
 
 > **📋 Caso A — Biogen (farmacéutica, Cloud: AWS)**
 > **Desafío.** La informática on-premises no podía escalar a petabytes de genómica: “un pipeline que antes requería 2 semanas para procesar 700,000 variantes”.
@@ -652,7 +652,7 @@ El punto estratégico es del propio Databricks: un lakehouse propietario guarda 
 > **Desafío.** AWS MySQL superado, un data warehouse demasiado costoso, herramientas sin ACID, y informes de Tableau pagando un join de 12 tablas en cada actualización.
 > **Stack en AWS.** Databricks SQL sobre Delta Lake bronze/silver/gold, notebooks, Tableau encima — `Cloud: AWS` en la página de la historia.
 > **Resultado reportado.** “10x Faster time-to-insight · 30% Lower operational costs · 12% Increase in customer satisfaction” (https://www.databricks.com/customers/punchh, página sin fecha, consultada 2026-10; origen de la historia 2021-09).
-> **Cita.** “We are able to store raw data as well as refined data in the same lakehouse.” — Jagan Mangalampalli, Punchh (misma URL).
+> **Cita.** “Podemos almacenar datos en bruto así como datos refinados en el mismo lakehouse.” — Jagan Mangalampalli, Punchh (misma URL).
 > **Encaja con esta lección.** L01 secundario — el diseño medallion de la sección 5 como control de *coste*: las tablas gold pre-unidas ganan a los joins de 12 vías en el momento del informe.
 > ⏳ *Nota temporal: reportado en 2021; las proporciones son de Punchh, no de un SLA de plataforma.*
 

@@ -3,7 +3,7 @@ title: "Optimización del rendimiento en Databricks/AWS: liquid clustering, dise
 description: "Ajusta un lakehouse de Databricks en AWS capa por capa: tamaños de archivo objetivo (128 MB con auto-optimize, suelo de 256 MB con autotune, techo manual de 1 GiB en OPTIMIZE) y la escalera de archivos pequeños; la decisión de particionado (<1 TB nunca, 1-100 TB clustering, >=100 TB tal vez) con la guarda de >= 1 GB por partición; liquid clustering en profundidad (CLUSTER BY / CLUSTER BY AUTO, hasta cuatro claves, umbrales de clustering en la escritura, OPTIMIZE incremental frente a OPTIMIZE FULL, idempotencia del bin packing) frente al camino heredado de partición+ZORDER en un ejemplo resuelto de comparación OPTIMIZE frente a CLUSTER BY con una gráfica de latencia antes/después; data skipping y estadísticas por archivo; valores por defecto de AQE (200 particiones de shuffle, broadcast de runtime de 30 MB, factor de skew 5x, advisory de 64 MB), escalera de broadcast/skew/salting con SQL real; Photon por carga de trabajo; dimensionamiento de Databricks SQL warehouse con resize frente a scale y las capas de caché de resultados/disco/Spark cache; profiling con query profile y Spark UI con un cálculo resuelto de particiones de shuffle; siete ejemplos resueltos, siete diagramas mermaid, cinco controles interactivos, casos de Comcast, Rivian y Punchh en AWS, un recuadro de actualización de octubre de 2026 y doce preguntas de práctica."
 order: 14
 difficulty: "intermediate"
-duration: "75 minutes"
+duration: "75 min"
 ---
 # Optimización del rendimiento en Databricks/AWS: liquid clustering, diseño de archivos, skew y ajuste de warehouses
 
@@ -90,7 +90,7 @@ Tres números distintos son todos «oficiales», y enseñarlos como si fueran un
 Dos corolarios que previenen los dos errores de diseño más comunes:
 
 1. **1 GiB es un techo, no una meta para tablas pequeñas.** Compactar una tabla de 300 GB en archivos de 1 GiB deja ~300 archivos y destruye el paralelismo del escaneo podado.
-2. **Subir un objetivo nunca fusiona nada por sí solo.** «When the target file size for a table grows, existing files are not re-optimized into larger files by the `OPTIMIZE` command» (tune-file-size, **2026-09-11**) — tienes que ejecutar `OPTIMIZE` después.
+2. **Subir un objetivo nunca fusiona nada por sí solo.** «Cuando el tamaño de archivo objetivo de una tabla crece, los archivos existentes no se reoptimizan en archivos más grandes mediante el comando `OPTIMIZE`» (tune-file-size, **2026-09-11**) — tienes que ejecutar `OPTIMIZE` después.
 
 ### 2.2 Ejemplo resuelto E1 — a qué se parece la salida de 8 TB de Auto Loader
 
@@ -147,9 +147,9 @@ Auto compaction y las escrituras optimizadas «**no son un sustituto completo** 
 }
 ```
 
-> ⚠️ **ADVERTENCIA — no pelees tú solo con la ruta de escritura.** «If you use optimized writes, Databricks recommends that you **don't run `coalesce(n)` or `repartition(n)` just before a write** to control the number of files written» (tune-file-size, **2026-09-11**) — pagas dos shuffles para un solo trabajo. Del mismo modo: nunca desactives auto compaction a nivel de sesión y te olvides de ella. No se puede desactivar para `MERGE`/`UPDATE`/`DELETE`, pero un `false` a nivel de sesión *sí* la desactiva en silencio para los appends y los CTAS de esa carga de trabajo.
+> ⚠️ **ADVERTENCIA — no pelees tú solo con la ruta de escritura.** «Si usas escrituras optimizadas, Databricks recomienda que **no ejecutes `coalesce(n)` ni `repartition(n)` justo antes de una escritura** para controlar la cantidad de archivos escritos» (tune-file-size, **2026-09-11**) — pagas dos shuffles para un solo trabajo. Del mismo modo: nunca desactives auto compaction a nivel de sesión y te olvides de ella. No se puede desactivar para `MERGE`/`UPDATE`/`DELETE`, pero un `false` a nivel de sesión *sí* la desactiva en silencio para los appends y los CTAS de esa carga de trabajo.
 
-- **📚 ¿Sabías que…?** `OPTIMIZE` es seguro por construcción: «Bin-packing optimization is *idempotent*, meaning that if it is run twice on the same dataset, the second run has no effect», y «Because `OPTIMIZE` makes no data changes to the table, a read before and after an `OPTIMIZE` has the same results. Performing `OPTIMIZE` on a table that is a streaming source does not affect any current or future streams with this table as a source» (docs .../operations/optimize, **2026-03-31**). ZORDER, en cambio, nunca fue idempotente — era incremental y requería re-ejecuciones.
+- **📚 ¿Sabías que…?** `OPTIMIZE` es seguro por construcción: «Bin-packing optimization is *idempotent*, meaning that if it is run twice on the same dataset, the second run has no effect», y «Como `OPTIMIZE` no realiza cambios de datos en la tabla, una lectura antes y después de un `OPTIMIZE` da los mismos resultados. Ejecutar `OPTIMIZE` en una tabla que es fuente de streaming no afecta a ningún stream actual ni futuro que tenga esta tabla como fuente» (docs .../operations/optimize, **2026-03-31**). ZORDER, en cambio, nunca fue idempotente — era incremental y requería re-ejecuciones.
 
 ---
 
@@ -391,7 +391,7 @@ Lee esa gráfica como una *escalera causal*: las escrituras optimizadas y el bin
 
 Delta escribe estadísticas por archivo en el momento del commit: «minimum and maximum values, null counts, and total records» (docs de data-skipping, **2026-06-18**), y en el momento de la consulta el motor omite cualquier archivo cuyas estadísticas demuestren que el predicado no puede casar. El clustering no cambia *qué* se puede omitir — «the engine prunes at file granularity. There is no directory-level shortcut to lose» (blog de Databricks, **2026-01-06**) — cambia *cuánto* se omite, al hacer que los rangos de la clave sean físicamente contiguos.
 
-El skipping falla en silencio cuando: el predicado no es sargable (`WHERE lower(col) = …`, `WHERE date_add(col, 1) = …`); la columna de filtro no tiene estadísticas; los valores están distribuidos de forma uniforme entre todos los archivos; o combinas columnas de un modo que min/max no puede demostrar. Perillas de estadísticas: `delta.dataSkippingNumIndexedCols` (posicional) y `delta.dataSkippingStatsColumns` (DBR 13.3 LTS+, lista explícita, reemplaza a la numérica) — y «Updating these properties does not automatically recompute statistics for existing data». Por último: «Databricks recommends that you don't use `ZORDER BY` on columns that don't have statistics collected because it is ineffective and uses unnecessary compute resources».
+El skipping falla en silencio cuando: el predicado no es sargable (`WHERE lower(col) = …`, `WHERE date_add(col, 1) = …`); la columna de filtro no tiene estadísticas; los valores están distribuidos de forma uniforme entre todos los archivos; o combinas columnas de un modo que min/max no puede demostrar. Perillas de estadísticas: `delta.dataSkippingNumIndexedCols` (posicional) y `delta.dataSkippingStatsColumns` (DBR 13.3 LTS+, lista explícita, reemplaza a la numérica) — y «Updating these properties does not automatically recompute statistics for existing data». Por último: «Databricks recomienda que no uses `ZORDER BY` en columnas que no tengan estadísticas recopiladas, porque es inefectivo y consume recursos de cómputo innecesarios».
 
 ---
 
@@ -413,7 +413,7 @@ AQE está activo por defecto y hace cuatro cosas: convertir el sort-merge join e
 | Umbral de bytes de skew | **256 MB** (por defecto de Spark — verifica en tu DBR) | segunda condición del test de skew |
 | `spark.sql.broadcastTimeout` | **300 s** | tiempo de espera de construcción del broadcast |
 
-Regla práctica para dimensionar el shuffle: «each task should approximately be processing **128MB to 200MB** of data» (guía discover, **2026-05-06**). Y mantén AQE activo — «It is recommended to **keep AQE enabled**» (best-practices, **2026-09-11**).
+Regla práctica para dimensionar el shuffle: «cada tarea debería procesar aproximadamente **de 128 MB a 200 MB** de datos» (guía discover, **2026-05-06**). Y mantén AQE activo — «It is recommended to **keep AQE enabled**» (best-practices, **2026-09-11**).
 
 ### 6.2 Ejemplo resuelto E5 — un join nocturno de 52 minutos, diagnosticado
 
@@ -460,7 +460,7 @@ El **raíl de arreglos equivocados** — estos tres aparecen en código de produ
 
 - `SET spark.sql.shuffle.partitions = 2000` — no divide *nada*; la clave caliente sigue aterrizando en exactamente una partición.
 - `.repartition("cust_id")` — el mismo fallo, más un shuffle extra.
-- Un hint de skew cuando AQE ya se disparó — sobrecarga para un arreglo que ya ocurrió; «Skew join optimization has some overhead so it is better to use it only when needed» (docs retiradas de skew-join, página actualizada el **2024-05-13**).
+- Un hint de skew cuando AQE ya se disparó — sobrecarga para un arreglo que ya ocurrió; «La optimización de skew join tiene cierta sobrecarga, así que conviene usarla solo cuando sea necesaria» (docs retiradas de skew-join, página actualizada el **2024-05-13**).
 
 ```mermaid
 flowchart TD
@@ -549,11 +549,11 @@ Para la mayoría de las cargas de trabajo «Databricks recommends using a **serv
 | **Caché de disco** (antes «Delta cache») | copias de los archivos de datos remotos en el SSD local | gestionada automáticamente, «como máximo la mitad» del SSD de los workers; se invalida cuando los archivos cambian; se pierde al retirar un worker |
 | **Spark cache** (`df.cache()`/`persist()`) | DataFrames arbitrarios | ciclo de vida manual; se desactualiza entre commits |
 
-Reglas que previenen los bugs clásicos de caché: el caché de resultados necesita consultas **deterministas** — un predicado al estilo `NOW()` nunca le da; `SET use_cached_result = false` lo salta (solo para pruebas y benchmarks); la caché de disco «works by default with all instance types that have **local SSDs**», y en cómputo classic eso significa elegir workers con SSD; «In SQL warehouses and Databricks Runtime 14.2 and above, the `CACHE SELECT` command is ignored» — se usa en su lugar la caché de disco mejorada.
+Reglas que previenen los bugs clásicos de caché: el caché de resultados necesita consultas **deterministas** — un predicado al estilo `NOW()` nunca le da; `SET use_cached_result = false` lo salta (solo para pruebas y benchmarks); la caché de disco «funciona de forma predeterminada con todos los tipos de instancia que tienen **SSD locales**», y en cómputo classic eso significa elegir workers con SSD; «En los warehouses de SQL y en Databricks Runtime 14.2 o superior, el comando `CACHE SELECT` se ignora» — se usa en su lugar la caché de disco mejorada.
 
-> ⚠️ **ADVERTENCIA — la Spark cache es la trampa, no el valor por defecto.** «using incorrect locations in a query can consume all available memory and significantly slow down queries. **As a rule of thumb, avoid Spark caching**» (best-practices, **2026-09-11**), y la página de mejores prácticas de Delta dice sin rodeos «**Do not use Spark caching with Delta Lake**» (actualizada **2026-09-11**). Los DataFrames en caché se comen la memoria de los executors que luego hacen shuffle y se desbordan a disco — la firma inconfundible es *un desborde que sube mientras la pestaña Storage muestra grandes bloques en caché*. Los usos legítimos son estrechos: un dataset no-Delta verdaderamente inmutable y escaneado repetidamente dentro de una misma sesión, siempre acompañado de `unpersist()`; más el **precalentamiento** de un cluster frío antes de la mañana punta.
+> ⚠️ **ADVERTENCIA — la Spark cache es la trampa, no el valor por defecto.** «using incorrect locations in a query can consume all available memory and significantly slow down queries. **As a rule of thumb, avoid Spark caching**» (best-practices, **2026-09-11**), y la página de mejores prácticas de Delta dice sin rodeos «**No uses la caché de Spark con Delta Lake**» (actualizada **2026-09-11**). Los DataFrames en caché se comen la memoria de los executors que luego hacen shuffle y se desbordan a disco — la firma inconfundible es *un desborde que sube mientras la pestaña Storage muestra grandes bloques en caché*. Los usos legítimos son estrechos: un dataset no-Delta verdaderamente inmutable y escaneado repetidamente dentro de una misma sesión, siempre acompañado de `unpersist()`; más el **precalentamiento** de un cluster frío antes de la mañana punta.
 
-- **📚 ¿Sabías que…?** La caché de disco es la Delta cache renombrada: «The disk cache (**formerly known as 'Delta cache'**) stores copies of remote data on the local disks (for example, SSD) of the virtual machines… The recommended (and easiest) way to use disk caching is to choose a worker type with SSD volumes» (best-practices, **2026-09-11**). Y como el autoscaling retira workers, «if **autoscaling is enabled, there is some instability with the cache**» — los clusters de job sensibles a la caché quieren un scale-down conservador o pools.
+- **📚 ¿Sabías que…?** La caché de disco es la Delta cache renombrada: «The disk cache (**formerly known as 'Delta cache'**) stores copies of remote data on the local disks (for example, SSD) of the virtual machines… The recommended (and easiest) way to use disk caching is to choose a worker type with SSD volumes» (best-practices, **2026-09-11**). Y como el autoscaling retira workers, «si **el autoscaling está activado, hay cierta inestabilidad en la caché**» — los clusters de job sensibles a la caché quieren un scale-down conservador o pools.
 
 ---
 
@@ -587,7 +587,7 @@ Qué te dice cada señal, y la única respuesta documentada:
 | Peak Queued Queries > 10 | monitoreo del warehouse | 4 | subir `max_num_clusters` |
 | «Query profile is not available» | query profile | — | golpe de caché de resultados, no un bug |
 
-Dos detalles de acceso que te ahorran un ticket de soporte: el acceso al profile requiere ser propietario de la consulta «or at least **CAN MONITOR** permission on the SQL warehouse», y «A query profile is **not available for queries that run from the query cache**. To circumvent the query cache, make a trivial change to the query, such as changing or removing the `LIMIT`.»
+Dos detalles de acceso que te ahorran un ticket de soporte: el acceso al profile requiere ser propietario de la consulta «or at least **CAN MONITOR** permission on the SQL warehouse», y «El query profile **no está disponible para consultas que se ejecutan desde la caché de resultados**. Para saltarte la caché de resultados, haz un cambio trivial en la consulta, como cambiar o quitar el `LIMIT`.»
 
 ### 9.1 Ejemplo resuelto E7 — dimensionar `spark.sql.shuffle.partitions` en papel
 
@@ -606,7 +606,7 @@ Nota de tasa de lectura: Spark lee ~128 MB por task por core desde Parquet/Delta
                     128 MB es el suelo de la banda y no un número arbitrario
 ```
 
-Una salvedad de streaming: `spark.sql.shuffle.partitions` «cannot be changed between query restarts from the same checkpoint location» (docs de AQE) — elígelo antes del primer arranque de una consulta de streaming.
+Una salvedad de streaming: `spark.sql.shuffle.partitions` «no se puede cambiar entre reinicios de la consulta desde la misma ubicación del checkpoint» (docs de AQE) — elígelo antes del primer arranque de una consulta de streaming.
 
 - **📚 ¿Sabías que…?** Una consulta servida desde la caché de resultados **no tiene query profile en absoluto** — «Query profile is not available» en la UI suele significar *tu consulta fue rápida porque estaba en caché*, no que el profiling esté roto. Durante benchmarks, `SET use_cached_result = false` (docs .../query-caching, consultadas **2026-10**), y mantén fuera de las consultas de BI que quieras en caché en producción cualquier no-determinismo al estilo `NOW()`.
 
@@ -618,7 +618,7 @@ Dos funciones de 2026 te quitan trabajo del runbook — pero solo si sabes qué 
 
 **Predictive optimization** «automatically runs `OPTIMIZE`, `VACUUM`, and `ANALYZE` on Unity Catalog managed tables (Delta Lake and Iceberg)», está «enabled by default for accounts created on or after **November 11, 2024**» con el despliegue gradual de las cuentas existentes «expected to complete by **August 2026**», se ejecuta en cómputo **serverless** facturado como un SKU de jobs serverless, y — la trampa — «**`OPTIMIZE` does not run `ZORDER` when executed by predictive optimization. On tables that use Z-order, predictive optimization ignores Z-ordered files.**» Se aplica **solo a tablas gestionadas**; con las tablas externas sigues en la escalera manual de las secciones 2–4. Obsérvalo con `DESCRIBE TABLE EXTENDED … AS JSON` → `predictive_optimization_evaluations`, con el filtro «Automatic runs» del History del Catalog Explorer, o con `system.storage.predictive_optimization_operations_history`.
 
-**Materialized views** son la contraparte de la capa de servicio: «a view where precomputed results are available for query and can be updated to reflect changes in the input. **All materialized views are backed by an ETL pipeline**», creadas «using a **Pro or Serverless SQL warehouse**, or within a pipeline», refrescadas por **pipelines de Lakeflow serverless**, con la salida en caché materializada en almacenamiento en la nube. La elegibilidad para el refresco *incremental* es comprobable antes de comprometerte: `EXPLAIN CREATE MATERIALIZED VIEW …` (DBR 17.3+) informa «The Materialized View can be incrementally refreshed» o no — un filtro, una proyección o una agregación sobre Delta califica; `LIMIT` y las fuentes que no son Delta (`INPUT_NOT_IN_DELTA`) no, y una expectation dentro de la definición fuerza un refresco **completo**. Tanto las materialized views como las streaming tables admiten liquid clustering: «Liquid clustering applies to both streaming tables and materialized views.»
+**Materialized views** son la contraparte de la capa de servicio: «una vista donde los resultados precalculados están disponibles para la consulta y pueden actualizarse para reflejar cambios en la entrada. **Todas las materialized views están respaldadas por una pipeline de ETL**», creadas «using a **Pro or Serverless SQL warehouse**, or within a pipeline», refrescadas por **pipelines de Lakeflow serverless**, con la salida en caché materializada en almacenamiento en la nube. La elegibilidad para el refresco *incremental* es comprobable antes de comprometerte: `EXPLAIN CREATE MATERIALIZED VIEW …` (DBR 17.3+) informa «La materialized view puede refrescarse de forma incremental» o no — un filtro, una proyección o una agregación sobre Delta califica; `LIMIT` y las fuentes que no son Delta (`INPUT_NOT_IN_DELTA`) no, y una expectation dentro de la definición fuerza un refresco **completo**. Tanto las materialized views como las streaming tables admiten liquid clustering: «Liquid clustering applies to both streaming tables and materialized views.»
 
 ---
 
@@ -635,7 +635,7 @@ Dos funciones de 2026 te quitan trabajo del runbook — pero solo si sabes qué 
 9. **Un `autoOptimize.autoCompact = false` a nivel de sesión** del que te olvidaste: obligatorio para `MERGE`/`UPDATE`/`DELETE`, silenciosamente desactivado en tus appends.
 10. **`spark.sql.shuffle.partitions = 2000` «porque el valor por defecto es demasiado bajo».** La regla es 128–200 MB por tarea; con AQE prefiere `auto` o empieza alto y deja que el coalescing fusione.
 11. **Llegar a un hint de skew cuando AQE ya lo gestiona, o hacer salting antes de probar el broadcast.** Si un lado cabe en 10/30 MB, un hint `BROADCAST` elimina el shuffle — estrictamente mejor que dividirlo.
-12. **Abuso de la Spark cache.** «As a rule of thumb, avoid Spark caching»; «Do not use Spark caching with Delta Lake».
+12. **Abuso de la Spark cache.** «As a rule of thumb, avoid Spark caching»; «No uses la caché de Spark con Delta Lake».
 13. **Confusión con la caché de resultados durante la depuración.** Una consulta en caché no tiene profile; la latencia del dashboard puede ser latencia de caché.
 14. **Leer el skew solo con el tiempo de pared.** El test es Max > 1.5× p75 en Summary Metrics, no «el job se sintió lento».
 15. **Dar por sentado que Photon arregla las pipelines de Python UDF.** La serialización manda; reescribe a SQL nativo primero.
@@ -650,13 +650,13 @@ Dos funciones de 2026 te quitan trabajo del runbook — pero solo si sabes qué 
 
 ---
 
-### Actualizaciones de 2026 (a octubre de 2026)
+### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
 > **Qué cambió en la pila de rendimiento de la que depende esta lección — cada línea verificada contra una fuente primaria:**
 > - **2026-09-25 — la página de clustering es el manual de reglas actual.** «Liquid clustering es una técnica de optimización del diseño de datos que reemplaza el particionado de tablas y `ZORDER`»; GA «para tablas Delta Lake con Databricks Runtime **15.4 LTS o superior**»; hasta cuatro claves; `CLUSTER BY AUTO` (15.4 LTS+); clustering jerárquico (17.1+); `OPTIMIZE FULL` (16.4 LTS+) y `OPTIMIZE FULL WHERE` (18.1+); `REPLACE PARTITIONED BY WITH CLUSTER BY` (18.1+); umbrales de clustering en la escritura de 64 MB/256 MB/512 MB/1 GB para tablas gestionadas (docs .../aws/en/tables/clustering, actualizada **2026-09-25**).
 > - **2026-09-11 — las páginas de autotune de tamaño de archivo y de predictive optimization se actualizaron juntas.** Bandas de autotune **< 2.56 TB → 256 MB**, **2.56–10 TB → lineal 256 MB → 1 GB**, **> 10 TB → 1 GB**; auto compaction y escrituras optimizadas «always enabled for `MERGE`, `UPDATE`, and `DELETE`»; predictive optimization activado por defecto para cuentas creadas **el 2024-11-11 o después**, con un despliegue «expected to complete by **August 2026**», facturado como serverless y explícitamente sin ejecutar `ZORDER` (docs .../tables/tune-file-size y .../optimizations/predictive-optimization, actualizadas **2026-09-11**).
-> - **2026-07-01 — la escalera de particionado se volvió explícita.** «Most tables on Databricks with less than **100 TB** … don't need partitioning»; por debajo de 1 TB no particiones, 1–100 TB usa liquid clustering, ≥ 100 TB «partitioning might improve performance, but Databricks recommends using liquid clustering first»; **≥ 1 GB por partición** (docs .../tables/partitions, fechadas **2026-07-01**).
+> - **2026-07-01 — la escalera de particionado se volvió explícita.** «La mayoría de las tablas en Databricks con menos de **100 TB** … no necesitan particionado»; por debajo de 1 TB no particiones, 1–100 TB usa liquid clustering, ≥ 100 TB «partitioning might improve performance, but Databricks recommends using liquid clustering first»; **≥ 1 GB por partición** (docs .../tables/partitions, fechadas **2026-07-01**).
 > - **2026-06-18 — las páginas de data skipping y de hints llevan la redacción actual.** Las estadísticas por archivo son «minimum and maximum values, null counts, and total records»; las tablas gestionadas de UC **no tienen límite de 32 columnas**; `delta.dataSkippingStatsColumns` reemplaza a `dataSkippingNumIndexedCols`; la gramática de hints cubre `BROADCAST`/`MERGE`/`SHUFFLE_HASH`/`SHUFFLE_REPLICATE_NL` más `REBALANCE` (ignorado si AQE está desactivado) (docs .../tables/data-skipping y .../sql-ref-syntax-qry-select-hints, fechadas **2026-06-18**).
 > - **2026-05-06 — la guía de ajuste se re-fechó conservando la regla por tarea.** Tamaño de archivo sano «between 16MB and 1GB»; ajuste de shuffle «each task should approximately be processing **128MB to 200MB**»; «Always run OPTIMIZE command on a separate job cluster»; se recomiendan instancias compute-optimized para `OPTIMIZE` (databricks.com/discover/pages/optimize-data-workloads-guide, fechada **2026-05-06**).
 > - **2026-01-28 — las ganancias del lado del motor llegaron sin ajuste manual.** «In 2025, Databricks SQL delivered **up to 40% faster** performance across production workloads, with improvements applied automatically» — exploratorio ~40%, BI ~20%, ETL ~10%, espacial hasta 17×, gracias a Predictive Query Execution y Photon Vectorized Shuffle (blog, **2026-01-28**; blog complementario del 5×/25%, **2025-06-17**).
@@ -676,11 +676,11 @@ Dos funciones de 2026 te quitan trabajo del runbook — pero solo si sabes qué 
 > **El reto.** Más de 70,000 vehículos en circulación «generating terabytes of data every day», con herramientas heredadas que «struggled to scale pipelines cost-effectively», alimentando el ML de mantenimiento predictivo y de predicción de carga.
 > **Stack en AWS.** Databricks SQL, Delta Lake, Unity Catalog — y, explícitamente, «**Liquid Clustering for data layout**» junto a «Unity Catalog for data governance, Delta Tables for storage» para el ML de predicción de carga en tiempo real (databricks.com/blog, **2025-07-09**); `Cloud: AWS` en la página de la historia.
 > **Resultado informado.** «**50% better runtime performance**» (https://www.databricks.com/your-ai/customers/rivian, **2024-05-30**); «1,000+ platform users, a 75% increase from a year ago» (https://www.databricks.com/customers/rivian, sin fecha, consultada 2026-10).
-> **Qué mapea a esta lección.** Secciones 4 y 5 — Rivian es el ejemplo con nombre en AWS de la palanca exacta que ejercita el ejemplo resuelto E4 de esta lección: la telemetría de vehículos es de alta cardinalidad, crece rápido y se consulta por columnas de filtro, que es la lista de mejor encaje documentada para el clustering («Queries that filter on high cardinality columns», «Fast growing tables», «Tables with varied or changing access patterns»).
+> **Qué mapea a esta lección.** Secciones 4 y 5 — Rivian es el ejemplo con nombre en AWS de la palanca exacta que ejercita el ejemplo resuelto E4 de esta lección: la telemetría de vehículos es de alta cardinalidad, crece rápido y se consulta por columnas de filtro, que es la lista de mejor encaje documentada para el clustering («Consultas que filtran por columnas de alta cardinalidad», «Fast growing tables», «Tables with varied or changing access patterns»).
 > ⏳ *Nota temporal: la cifra del 50% es de 2024-05-30; la mención del stack con liquid clustering es de 2025-07-09.*
 
 > **📋 Caso C — Punchh (fidelización de retail / tecnología de restauración, Cloud: AWS)**
-> **El reto.** Había crecido más allá de su AWS MySQL, un almacén de datos demasiado costoso de mantener, y los informes de Tableau lentos por joins ejecutados de cero en cada informe: «When you're joining 12 tables on the fly every time a report is run by a customer, the cost to generate the report can be high.»
+> **El reto.** Había crecido más allá de su AWS MySQL, un almacén de datos demasiado costoso de mantener, y los informes de Tableau lentos por joins ejecutados de cero en cada informe: «Cuando haces join de 12 tablas sobre la marcha cada vez que un cliente ejecuta un informe, el costo de generar el informe puede ser alto.»
 > **Stack en AWS.** Databricks SQL, Delta Lake bronze/silver/gold, notebooks, Tableau encima — `Cloud: AWS` en la página de la historia.
 > **Resultado informado.** «**10x Faster time-to-insight · 30% Lower operational costs · 12% Increase in customer satisfaction**» (https://www.databricks.com/customers/punchh, página sin fecha, consultada 2026-10; origen de la historia 2021).
 > **Qué mapea a esta lección.** Secciones 8 y 10 — el join más barato es el que no ejecutas: una tabla gold pre-joinada (o una materialized view con refresco incremental) gana tanto a un join de 12 vías en el momento del informe como a cualquier resize de warehouse que lo habría forzado a pulso.

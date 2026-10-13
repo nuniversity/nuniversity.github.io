@@ -3,7 +3,7 @@ title: "Ingestión en AWS: Auto Loader, file events, Kafka/MSK y sinks idempoten
 description: "Construye la capa de ingesta de un lakehouse de Databricks sobre AWS: un notebook bronze de Auto Loader resuelto (cloudFiles.format, schemaLocation, checkpointLocation, useManagedFileEvents, inferColumnTypes, schemaEvolutionMode), la inferencia de esquemas con la muestra de 50 GB / 1.000 archivos y el historial de _schemas, el modo rescue y el bucle de reinicio de UnknownFieldException, los tres modos de detección de archivos (listado de directorios frente a notificaciones de archivos clásicas SNS+SQS frente a file events gestionados en una external location de Unity Catalog) con facturas de LIST de S3 calculadas a mano a $0.005 por cada 1.000 solicitudes, un boceto de rendimiento de 1,8 millones de archivos contra maxFilesPerTrigger y maxBytesPerTrigger, Amazon MSK con AWS_MSK_IAM y clases con shaded, las fuentes JDBC y rate, el soporte de output modes sobre Delta, foreachBatch MERGE idempotente con txnAppId/txnVersion, el contrato de checkpoint exactly-once, la unificación de lote y streaming con Trigger.AvailableNow con un boceto de coste en DBUs, un veredicto comparativo entre listado y file events, los casos de Asurion y Burberry en AWS, un recuadro de actualización de octubre de 2026 y trece preguntas de práctica."
 order: 5
 difficulty: "intermediate"
-duration: "75 minutes"
+duration: "75 min"
 ---
 # Ingestión en AWS: Auto Loader, file events, Kafka/MSK y sinks idempotentes
 
@@ -108,7 +108,7 @@ graph LR
   SP --> BR
 ```
 
-- **📚 ¿Sabías que…?** Auto Loader no es nuevo. Databricks lo anunció el **2020-02-24** como «an optimized cloud file source for Apache Spark that loads data continuously and efficiently from cloud storage as new data arrives», nombrando a Fivetran, Qlik, Infoworks, StreamSets y Syncsort como herramientas de ingesta socias en el lanzamiento (databricks.com/blog/2020/02/24/introducing-databricks-ingest-easy-data-ingestion-into-delta-lake.html, 2020-02-24). El problema que resolvió nunca cambió: «Both cost and latency can add up quickly as more and more files get added to a directory due to repeated listing of files.» Las cifras de escala que verás citadas — «billions of files» para backfills y «millions of files per hour» para ingesta casi en tiempo real — son **afirmaciones de capacidad del proveedor** de la página de docs (2026-09-11), no benchmarks de clientes: trátalas como margen de diseño, nunca como un SLA.
+- **📚 ¿Sabías que…?** Auto Loader no es nuevo. Databricks lo anunció el **2020-02-24** como «an optimized cloud file source for Apache Spark that loads data continuously and efficiently from cloud storage as new data arrives», nombrando a Fivetran, Qlik, Infoworks, StreamSets y Syncsort como herramientas de ingesta socias en el lanzamiento (databricks.com/blog/2020/02/24/introducing-databricks-ingest-easy-data-ingestion-into-delta-lake.html, 2020-02-24). El problema que resolvió nunca cambió: «Tanto el coste como la latencia pueden sumarse rápidamente a medida que se añaden más y más archivos a un directorio debido al listado repetido de archivos.» Las cifras de escala que verás citadas — «billions of files» para backfills y «millions of files per hour» para ingesta casi en tiempo real — son **afirmaciones de capacidad del proveedor** de la página de docs (2026-09-11), no benchmarks de clientes: trátalas como margen de diseño, nunca como un SLA.
 
 ---
 
@@ -160,7 +160,7 @@ query = (df.writeStream
 Lo que significan los números mientras se ejecuta: el primer arranque muestrea **los primeros 50 GB o 1.000 archivos** (lo que se cruce primero, los más recientes por hora de modificación) para inferir el esquema; cada micro-batch posterior está limitado a **1.000 archivos** salvo que el runtime lo auto-ajuste (DBR 18.0+); `Trigger.AvailableNow` procesa solo los archivos que llegaron **antes de la hora de inicio de la consulta** y se apaga solo; y si aparece una columna nueva, la consulta se detiene con `UnknownFieldException` *después* de que `_schemas` ya se haya actualizado — así que el job, y no una persona, la reinicia (sección 3).
 
 > [!IMPORTANT]
-> **Una consulta, un checkpoint, para siempre.** «Give each query its own checkpoint directory in durable cloud storage» (docs .../structured-streaming/production, consultado 2026-10). Dos streams de Auto Loader apuntando a un mismo checkpoint corrompen el estado de archivos el uno al otro; cambiar una consulta a un checkpoint completamente nuevo la hace arrancar de cero — con `includeExistingFiles=true` reprocesará el prefijo entero. Y «When you delete the files in a checkpoint directory or change to a new checkpoint location, the next run of the query begins fresh» (docs .../structured-streaming/checkpoints, fechado 2026-06-30). Nunca borres un checkpoint para «arreglar» el retraso; arregla el trigger y los límites de tasa en su lugar.
+> **Una consulta, un checkpoint, para siempre.** «Give each query its own checkpoint directory in durable cloud storage» (docs .../structured-streaming/production, consultado 2026-10). Dos streams de Auto Loader apuntando a un mismo checkpoint corrompen el estado de archivos el uno al otro; cambiar una consulta a un checkpoint completamente nuevo la hace arrancar de cero — con `includeExistingFiles=true` reprocesará el prefijo entero. Y «Cuando borras los archivos de un directorio de checkpoint o cambias a una ubicación de checkpoint nueva, la siguiente ejecución de la consulta arranca de cero» (docs .../structured-streaming/checkpoints, fechado 2026-06-30). Nunca borres un checkpoint para «arreglar» el retraso; arregla el trigger y los límites de tasa en su lugar.
 
 ---
 
@@ -168,7 +168,7 @@ Lo que significan los números mientras se ejecuta: el primer arranque muestrea 
 
 ### 3.1 Qué muestrea realmente la inferencia
 
-En la primera definición del DataFrame, Auto Loader «lists your source directory and chooses the **most recent (by file modification time) 50 GB of data or 1000 files**, and uses those to infer your data schema» (FAQ de Auto Loader, fechado **2026-06-23**). El resultado se escribe en un directorio `_schemas` bajo `cloudFiles.schemaLocation`, y es el historial de esquema que el stream recarga en cada reinicio — «When the stream restarts, it picks up the evolved schema from the schema location and starts executing **without any overhead from inference**» (misma FAQ).
+En la primera definición del DataFrame, Auto Loader «lists your source directory and chooses the **most recent (by file modification time) 50 GB of data or 1000 files**, and uses those to infer your data schema» (FAQ de Auto Loader, fechado **2026-06-23**). El resultado se escribe en un directorio `_schemas` bajo `cloudFiles.schemaLocation`, y es el historial de esquema que el stream recarga en cada reinicio — «Cuando el stream se reinicia, toma el esquema evolucionado de la ubicación de esquema y comienza a ejecutarse **sin ninguna sobrecarga de la inferencia**» (misma FAQ).
 
 Valores por defecto que muerden:
 
@@ -234,7 +234,7 @@ df = (spark.readStream.format("cloudFiles")
 > 1. **Estar en la ruta de datos significa autodescubrimiento.** Si `_schemas/` o el checkpoint viven bajo `s3://acme-landing/raw/orders/`, Auto Loader terminará listando sus propios archivos de estado como entradas. Mantén el estado en un **prefijo distinto o en un volumen de Unity Catalog** (`/Volumes/<catalog>/<schema>/checkpoints/...`), nunca bajo el directorio de datos de la tabla.
 > 2. **Una regla de ciclo de vida que caduca el estado destruye la consulta.** «Databricks recommends setting the checkpoint location to a location **without a cloud object lifecycle policy**. If files in the checkpoint location are cleaned according to the policy, **the stream state is corrupted**. If this happens, you must restart the stream from scratch» (docs .../auto-loader/production, pie de página **2026-09-18**). La misma frase aplica a `schemaLocation`.
 > 3. **Sepáralos por carga de trabajo.** Cada carga de trabajo de ingesta con Auto Loader requiere un checkpoint de streaming propio. Dos cargas de trabajo compartiendo un checkpoint, o un directorio `_schemas`, lucharán por el estado.
-> 4. **El estado junto a una tabla Delta debe llevar prefijo de guion bajo.** Si debes colocar un checkpoint junto a una tabla, usa `/_checkpoints`: `VACUUM` «skips any directories that begin with `_`» (docs .../structured-streaming/delta-lake, fechado 2026-08-24), así el mantenimiento no se lo comerá.
+> 4. **El estado junto a una tabla Delta debe llevar prefijo de guion bajo.** Si debes colocar un checkpoint junto a una tabla, usa `/_checkpoints`: `VACUUM` «omite cualquier directorio que empiece por `_`» (docs .../structured-streaming/delta-lake, fechado 2026-08-24), así el mantenimiento no se lo comerá.
 > 5. **La igualdad está bien, la contención no.** Las docs permiten explícitamente `schemaLocation == checkpointLocation`; lo que nunca permiten es estado dentro de la ruta de entrada ni bajo una caducidad.
 
 ---
@@ -274,13 +274,13 @@ Dos reservas viajan con él. La entrega de eventos es best-effort — «Cloud pr
 
 La forma moderna se activa **en la external location**, no por stream: una sola cola de notificación de archivos para todos los streams que procesan archivos de una external location dada, activada con `cloudFiles.useManagedFileEvents=true`. Requisitos: un workspace habilitado para Unity Catalog, permiso para crear un storage credential y una external location, y **Databricks Runtime 14.3 LTS o superior** (misma página, 2026-10-07).
 
-Lo que obtienes: menos concesiones IAM (permiso en la nube de una vez, y después ninguna cola por stream), auto-ajuste y limpieza automáticos, backfill automático — «Databricks automatically backfills those external locations with a full listing when file events are first enabled, and then continues to backfill about **every 24 hours**» — y la instrucción explícita de **no** fijar un intervalo de backfill en este modo. Lo que debes respetar: «The file events service optimizes file discovery by **caching** the most recently created files. If Auto Loader runs infrequently, this cache can expire … invoke Auto Loader at least **once every seven days**.» Un job `AvailableNow` nocturno u horario pasa ese listero con holgura; una ejecución manual trimestral, no.
+Lo que obtienes: menos concesiones IAM (permiso en la nube de una vez, y después ninguna cola por stream), auto-ajuste y limpieza automáticos, backfill automático — «Databricks rellena automáticamente esas external locations con un listado completo cuando los file events se activan por primera vez, y después continúa haciéndolo aproximadamente **cada 24 horas**» — y la instrucción explícita de **no** fijar un intervalo de backfill en este modo. Lo que debes respetar: «The file events service optimizes file discovery by **caching** the most recently created files. If Auto Loader runs infrequently, this cache can expire … invoke Auto Loader at least **once every seven days**.» Un job `AvailableNow` nocturno u horario pasa ese listero con holgura; una ejecución manual trimestral, no.
 
-Cambiar de modo es seguro: «you can switch between file notifications and directory listing at any time and still maintain **exactly-once** data processing guarantees» (misma página).
+Cambiar de modo es seguro: «puedes cambiar entre notificaciones de archivos y listado de directorios en cualquier momento y seguir manteniendo las garantías de procesamiento de datos **exactly-once**» (misma página).
 
 ### 4.4 Ejemplo resuelto E3 — la factura de `LIST`, calculada de tres formas
 
-Entradas (todas oficiales): S3 devuelve **1.000 claves por `LIST`**; «LIST requests for any storage class are charged at the same rate as S3 Standard PUT, COPY, and POST requests» — **$0.005 por cada 1.000** en `us-east-1`, mientras que DELETE y CANCEL son gratuitos (aws.amazon.com/s3/pricing, consultado **2026-10**). Prefijo de aterrizaje: **2.000.000 de archivos**. La aritmética de abajo es nuestra; las entradas son de AWS.
+Entradas (todas oficiales): S3 devuelve **1.000 claves por `LIST`**; «Las solicitudes LIST de cualquier clase de almacenamiento se facturan a la misma tarifa que las solicitudes PUT, COPY y POST de S3 Standard» — **$0.005 por cada 1.000** en `us-east-1`, mientras que DELETE y CANCEL son gratuitos (aws.amazon.com/s3/pricing, consultado **2026-10**). Prefijo de aterrizaje: **2.000.000 de archivos**. La aritmética de abajo es nuestra; las entradas son de AWS.
 
 | Política | Ciclos de listado/día | Llamadas `LIST`/ciclo | Llamadas `LIST`/mes (30 d) | Cargo/mes |
 |---|---|---|---|---|
@@ -309,7 +309,7 @@ Lee la forma, no solo los dólares: el mismo prefijo de 2M de archivos cuesta **
 }
 ```
 
-- **📚 ¿Sabías que…?** `LIST` se factura como una escritura, no como una lectura: «LIST requests for any storage class are charged at the same rate as S3 Standard PUT, COPY, and POST requests» — **$0.005 por 1.000** —, mientras que `DELETE` y `CANCEL` son gratuitos (aws.amazon.com/s3/pricing, consultado 2026-10). Y en S3 no existe un rename de propósito general: «S3 Express One Zone is the only storage class that supports the `RenameObject` API», así que un archivo estilo MOVE es un par **copy + delete** facturado a las tarifas de PUT/COPY/LIST — y, en términos de notificaciones clásicas, esa copia aparece como aún otro evento `ObjectCreated`. Esa es una segunda razón por la que los file events gestionados, que no se disparan de nuevo con tus propias copias de contabilidad, son el modo recomendado.
+- **📚 ¿Sabías que…?** `LIST` se factura como una escritura, no como una lectura: «Las solicitudes LIST de cualquier clase de almacenamiento se facturan a la misma tarifa que las solicitudes PUT, COPY y POST de S3 Standard» — **$0.005 por 1.000** —, mientras que `DELETE` y `CANCEL` son gratuitos (aws.amazon.com/s3/pricing, consultado 2026-10). Y en S3 no existe un rename de propósito general: «S3 Express One Zone es la única clase de almacenamiento que soporta la API `RenameObject`», así que un archivo estilo MOVE es un par **copy + delete** facturado a las tarifas de PUT/COPY/LIST — y, en términos de notificaciones clásicas, esa copia aparece como aún otro evento `ObjectCreated`. Esa es una segunda razón por la que los file events gestionados, que no se disparan de nuevo con tus propias copias de contabilidad, son el modo recomendado.
 
 ---
 
@@ -326,7 +326,7 @@ Dimensionado de los micro-batches:
 - Supón que el cluster sostiene **1,0 s por micro-batch** → tasa de servicio **1.000 archivos/s (120 MB/s)**. Utilización ρ = 250 ÷ 1.000 = **0,625** — la cola se vacía.
 - El backlog de 1,8 M de archivos se drena a 1.000 − 250 = 750 archivos/s netos → **2.400 s = 40 minutos**, habiendo procesado 2,4 M de archivos en total (≈288 GB).
 
-Ahora el modo de fallo que crea un ingeniero «cuidadoso»: dejar `maxFilesPerTrigger=100` «para no forzar el cluster», lo que limita el servicio a **100 archivos/s < 250 archivos/s de llegada** — la cola crece a 150 archivos/s sin límite, y ningún tamaño de cluster arregla un mando de control de admisión mal puesto. En **DBR 18.0+** tanto `cloudFiles.maxFilesPerTrigger` como `cloudFiles.maxBytesPerTrigger` se «dynamically configured and do not need to be set manually» (docs .../spark/api-options, 2026-10-05); fijarlos a mano ahí pelea contra el auto-ajuste. Y si el pico es genuinamente enorme y de una sola vez, ejecuta `Trigger.AvailableNow` como tarea de Workflows en lugar de un trigger continuo — limita la tasa entre micro-batches y se apaga cuando se pone al día.
+Ahora el modo de fallo que crea un ingeniero «cuidadoso»: dejar `maxFilesPerTrigger=100` «para no forzar el cluster», lo que limita el servicio a **100 archivos/s < 250 archivos/s de llegada** — la cola crece a 150 archivos/s sin límite, y ningún tamaño de cluster arregla un mando de control de admisión mal puesto. En **DBR 18.0+** tanto `cloudFiles.maxFilesPerTrigger` como `cloudFiles.maxBytesPerTrigger` se «configuran de forma dinámica y no es necesario fijarlos manualmente» (docs .../spark/api-options, 2026-10-05); fijarlos a mano ahí pelea contra el auto-ajuste. Y si el pico es genuinamente enorme y de una sola vez, ejecuta `Trigger.AvailableNow` como tarea de Workflows en lugar de un trigger continuo — limita la tasa entre micro-batches y se apaga cuando se pone al día.
 
 ### 5.2 Retención: `maxFileAge`, `cleanSource`, backfill
 
@@ -338,7 +338,7 @@ Ahora el modo de fallo que crea un ingeniero «cuidadoso»: dejar `maxFilesPerTr
 | Quién puede activarlo | «Do not enable `cloudFiles.cleanSource` if multiple Auto Loader streams or other clients read from the same source directory» (best-practices, **2026-06-29**) |
 | Backfill (modos clásicos) | `cloudFiles.backfillInterval` ejecuta re-listados completos asíncronos que ingieren **solo los archivos perdidos**; con file events gestionados es automático (al activarlos y unas cada 24 h) — no lo fijes ahí (página de producción, 2026-09-18; página file-notification, 2026-10-07) |
 
-La economía de `cleanSource` es el mismo argumento de la sección 4: «Archive processed files with `cloudFiles.cleanSource` … This reduces both storage costs and directory listing costs for long-lived streams» — dejas de pagar por re-listar archivos que nunca más leerás.
+La economía de `cleanSource` es el mismo argumento de la sección 4: «Archiva los archivos procesados con `cloudFiles.cleanSource` … Esto reduce tanto los costes de almacenamiento como los costes de listado de directorios para streams de larga duración» — dejas de pagar por re-listar archivos que nunca más leerás.
 
 ### 5.3 Monitorización de la fuente
 
@@ -444,7 +444,7 @@ graph TD
 
 ### 7.2 Ejemplo resuelto E6 — upserts idempotentes en `foreachBatch`
 
-«You must use `foreachBatch` for Delta Lake merge operations in Structured Streaming» — y `foreachBatch()` «provides only **at-least-once** write guarantees», así que la idempotencia es tu trabajo (docs .../structured-streaming/foreach, fechado **2026-08-24**).
+«Debes usar `foreachBatch` para las operaciones merge de Delta Lake en Structured Streaming» — y `foreachBatch()` «provides only **at-least-once** write guarantees», así que la idempotencia es tu trabajo (docs .../structured-streaming/foreach, fechado **2026-08-24**).
 
 ```python
 from delta.tables import DeltaTable
@@ -514,10 +514,10 @@ El contenido del checkpoint es fijo: **offsets** (lo que se leyó), **commits** 
 
 - un checkpoint por consulta, en almacenamiento duradero, fuera de toda política de ciclo de vida;
 - borrarlo o moverlo hace arrancar de cero — Kafka reproduce según `startingOffsets`, Auto Loader vuelve a listar (y a reprocesar el prefijo si `includeExistingFiles` era true en el arranque original), y las escrituras de Delta se reproducen salvo que `txnAppId` cambie;
-- para destinos que no son Delta (una base de datos OLTP, una cola, una API HTTP), *tú* eres dueño de la idempotencia claveada en `batchId`: «If the `batchId` stays the same, the result of your operation must remain the same»;
+- para destinos que no son Delta (una base de datos OLTP, una cola, una API HTTP), *tú* eres dueño de la idempotencia claveada en `batchId`: «Si el `batchId` se mantiene igual, el resultado de tu operación debe permanecer igual»;
 - `foreachBatch` nunca se ejecuta en modo de procesamiento continuo, y en serverless solo se soportan `Trigger.AvailableNow()` y el obsoleto `Trigger.Once()`.
 
-- **📚 ¿Sabías que…?** Un checkpoint almacenado *junto* a una tabla Delta solo sobrevive al mantenimiento si lo nombras con un guion bajo: `VACUUM` «skips any directories that begin with `_`», y por eso la sugerencia de las propias docs es «a directory structure such as `/_checkpoints`» (docs .../structured-streaming/delta-lake, 2026-08-24). Es una pequeña convención de nombrado la que separa el estado de tu stream de un comando de mantenimiento rutinario.
+- **📚 ¿Sabías que…?** Un checkpoint almacenado *junto* a una tabla Delta solo sobrevive al mantenimiento si lo nombras con un guion bajo: `VACUUM` «omite cualquier directorio que empiece por `_`», y por eso la sugerencia de las propias docs es «a directory structure such as `/_checkpoints`» (docs .../structured-streaming/delta-lake, 2026-08-24). Es una pequeña convención de nombrado la que separa el estado de tu stream de un comando de mantenimiento rutinario.
 
 ---
 
@@ -545,7 +545,7 @@ Una ejecución `AvailableNow` por noche, **25 minutos** por ejecución, **30 eje
 
 La versión all-purpose cuesta **3,7× la línea de DBU** — en línea con la propia regla empírica de Databricks de que los pipelines pertenecen al cómputo de jobs —, y además factura el tiempo ocioso que tendrías que gestionar tú. Los workers en spot recortan la columna de AWS hasta un 90% (el driver se queda on-demand, con aviso de expulsión de dos minutos); la columna de DBU no cambia, porque el spot altera el precio de la instancia, nunca la tarifa de emisión.
 
-- **📚 ¿Sabías que…?** La vieja advertencia de que «el retraso de listado tras la escritura en S3 puede hacer que Auto Loader se salte archivos» es **historia**: desde el **2020-12-01** «all S3 GET, PUT, and LIST operations … are now **strongly consistent**» (AWS News Blog, 2020-12-01), confirmado en la guía de usuario de S3 (consultada 2026-10). El riesgo de salto *actual* es la entrega de eventos — los proveedores de nube «do not guarantee 100% delivery of all file events» —, y para eso existen `cloudFiles.backfillInterval` (modo clásico) y el backfill automático de ~24 horas (file events gestionados). Si un tutorial de 2021 te dice que construyas una solución de compromiso para la consistencia eventual de S3, puedes borrar ese párrafo.
+- **📚 ¿Sabías que…?** La vieja advertencia de que «el retraso de listado tras la escritura en S3 puede hacer que Auto Loader se salte archivos» es **historia**: desde el **2020-12-01** «todas las operaciones GET, PUT y LIST de S3 … ahora son **fuertemente consistentes**» (AWS News Blog, 2020-12-01), confirmado en la guía de usuario de S3 (consultada 2026-10). El riesgo de salto *actual* es la entrega de eventos — los proveedores de nube «no garantizan la entrega del 100 % de todos los eventos de archivos» —, y para eso existen `cloudFiles.backfillInterval` (modo clásico) y el backfill automático de ~24 horas (file events gestionados). Si un tutorial de 2021 te dice que construyas una solución de compromiso para la consistencia eventual de S3, puedes borrar ese párrafo.
 
 ---
 
@@ -572,7 +572,7 @@ La versión all-purpose cuesta **3,7× la línea de DBU** — en línea con la p
 
 ---
 
-## Casos de la vida real
+## Casos Reales
 
 > **📋 Caso A — Asurion (seguros y protección de dispositivos, cloud: AWS)**
 > **El reto.** Un entorno heredado de 8.000 tablas, 10.000 vistas y ~600 data marts, con mapeos ETL por tabla y una capa batch/speed duplicada que no podía absorber nuevas fuentes de forma barata.
@@ -590,14 +590,14 @@ La versión all-purpose cuesta **3,7× la línea de DBU** — en línea con la p
 
 ---
 
-### Actualizaciones de 2026 (a octubre de 2026)
+### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
 > **Qué cambió en la plataforma de ingesta de la que depende esta lección:**
 > - **2026-09-11 — Auto Loader es el valor por defecto documentado.** «Databricks also recommends Auto Loader whenever you use Apache Spark Structured Streaming to ingest data from cloud object storage», y las docs de listado de directorios añaden que Databricks «recommends file notification mode using file events on external locations instead of directory listing mode for most workloads» (docs .../auto-loader y .../auto-loader/directory-listing-mode, última actualización 2026-09-11). Los tutoriales del file source de OSS son material heredado.
 > - **2026-10-07 — los file events se configuran en la external location.** Una cola por external location, exigiendo DBR **14.3 LTS+** y un workspace habilitado para UC; listado completo automático al activarlos y «about every 24 hours»; ejecuta el stream «at least **once every seven days**» o la caché caduca; el modo clásico SNS+SQS está limitado a **100 pipelines por bucket de S3**; cambiar de modo en pleno stream conserva las garantías exactly-once (docs .../auto-loader/file-notification-mode, pie de página 2026-10-07).
 > - **2026-10-08 — página de triggers, redacción actual.** Latencia por defecto ≈ **3–5 s**; `continuous` es «**Not supported** … Use real-time mode instead»; en serverless solo se soportan `AvailableNow`/`Once` y Databricks recomienda `Trigger.AvailableNow()`; `Trigger.Once` está obsoleto (docs .../structured-streaming/triggers, pie de página 2026-10-08).
-> - **2026-10-05 — deja de ajustar a mano los límites de tasa.** En DBR 18.0+ `cloudFiles.maxFilesPerTrigger` y `cloudFiles.maxBytesPerTrigger` se «dynamically configured and do not need to be set manually»; en el resto siguen siendo 1.000 archivos (duro) y sin tope de bytes (blando) (docs .../spark/api-options, fecha de página 2026-10-05).
+> - **2026-10-05 — deja de ajustar a mano los límites de tasa.** En DBR 18.0+ `cloudFiles.maxFilesPerTrigger` y `cloudFiles.maxBytesPerTrigger` se «configuran de forma dinámica y no es necesario fijarlos manualmente»; en el resto siguen siendo 1.000 archivos (duro) y sin tope de bytes (blando) (docs .../spark/api-options, fecha de página 2026-10-05).
 > - **2026-08-21 — la retención de la fuente es una función con nombre.** `cloudFiles.cleanSource` con `OFF` / `MOVE` / `DELETE`, retención por defecto de 30 días, `DELETE` exigiendo **más de 7 días**, `waitForCompletion` en **DBR 19+** (docs .../auto-loader/clean-source, fechado 2026-08-21).
 > - **2026-09-18 — página de higiene en producción.** Los checkpoints deben estar en ubicaciones **sin una política de ciclo de vida de objetos en la nube** (si no, «the stream state is corrupted»); `maxFileAge` mínimo **14 días**, recomendado **90 días**; `Trigger.AvailableNow` procesa los archivos que llegaron antes del inicio de la consulta; inspecciona el estado con `cloud_files_state()` (DBR 11.3 LTS+) (docs .../auto-loader/production, pie de página 2026-09-18).
 
@@ -799,7 +799,7 @@ La versión all-purpose cuesta **3,7× la línea de DBU** — en línea con la p
     "La tasa de llegada se pausa automáticamente mientras la cola no esté vacía, así que un tope más bajo solo añade latencia"
   ],
   "correct": 0,
-  "explanation": "El control de admisión fija la tasa de servicio: 100 archivos por trigger a 1 s/micro-batch = 100 archivos/s frente a 250 archivos/s que llegan significa que la cola diverge (ejemplo resuelto E4). En DBR 18.0+ tanto maxFilesPerTrigger como maxBytesPerTrigger se «dynamically configured and do not need to be set manually» (api-options, 2026-10-05), así que fijarlos a mano pelea contra el auto-ajuste. La opción B recuerda mal el medidor (las DBU son cómputo por hora/por segundo, no por archivo); la opción C la confunde con includeExistingFiles, que SÍ es solo del primer arranque; la opción D describe una limitación inversa que no está documentada."
+  "explanation": "El control de admisión fija la tasa de servicio: 100 archivos por trigger a 1 s/micro-batch = 100 archivos/s frente a 250 archivos/s que llegan significa que la cola diverge (ejemplo resuelto E4). En DBR 18.0+ tanto maxFilesPerTrigger como maxBytesPerTrigger se «configuran de forma dinámica y no es necesario fijarlos manualmente» (api-options, 2026-10-05), así que fijarlos a mano pelea contra el auto-ajuste. La opción B recuerda mal el medidor (las DBU son cómputo por hora/por segundo, no por archivo); la opción C la confunde con includeExistingFiles, que SÍ es solo del primer arranque; la opción D describe una limitación inversa que no está documentada."
 }
 ```
 

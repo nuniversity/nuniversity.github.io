@@ -52,11 +52,11 @@ export default function Stats({ dict, stats }: StatsProps) {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Join Our Growing{' '}
-            <span className="text-gradient">Community</span>
+            {dict.stats?.title || 'Join Our Growing'}{' '}
+            <span className="text-gradient">{dict.stats?.titleHighlight || 'Community'}</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400">
-            {dict.features?.subtitle || 'Thousands of learners trust NUniversity to advance their careers and knowledge.'}
+            {dict.stats?.subtitle || 'Thousands of learners trust NUniversity to advance their careers and knowledge.'}
           </p>
         </motion.div>
 

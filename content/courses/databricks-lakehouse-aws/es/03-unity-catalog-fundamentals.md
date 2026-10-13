@@ -3,7 +3,7 @@ title: "Fundamentos de Unity Catalog: metastore, jerarquía, grants, storage cre
 description: "El núcleo de gobernanza de un lakehouse de Databricks sobre AWS, enseñado como un sistema que funciona: el metastore regional y cómo se le conectan los workspaces, el espacio de nombres de tres niveles y los securables que cuelgan directamente del metastore, la cadena de privilegios (USE CATALOG a USE SCHEMA a SELECT), herencia frente a propiedad, deny-by-default con sus dos excepciones documentadas de apertura por defecto, workspace bindings que vencen a los grants, un storage credential resuelto de extremo a extremo más la configuración de external location en S3 (política de confianza con el external ID obligatorio, CREATE STORAGE CREDENTIAL, CREATE EXTERNAL LOCATION, los cuatro grants, una tabla Delta externa), el cálculo de ubicación gestionada frente a externa con rutas hasheadas __unitystorage, la semántica de DROP y UNDROP, y la escalera de migración desde hive_metastore (federar y luego SET MANAGED, UCX, SYNC, asistente de actualización, CREATE TABLE CLONE) — con siete ejemplos resueltos, seis diagramas, cuatro comprobaciones interactivas, material de casos de Amgen, Rivian y nCino, un recuadro de actualización con fuente de octubre de 2026 y doce preguntas de práctica."
 order: 3
 difficulty: "intermediate"
-duration: "60 minutes"
+duration: "60 min"
 ---
 # Fundamentos de Unity Catalog: metastore, jerarquía, grants, storage credentials y external locations
 
@@ -189,7 +189,7 @@ graph TB
 
 Dos hechos estructurales que el alumnado repite ignorando:
 
-- **Los contenedores son el catálogo y el esquema.** “Todos los objetos de esta jerarquía son objetos securables”, y los privilegios concedidos sobre un padre “se aplican automáticamente a todos los objetos hijos actuales y futuros” — pero ese motor de herencia empieza en el **catálogo**, no en el metastore (permissions-concepts, 23 ago 2026; blog de privilegios: “The highest level object that privileges are inherited from is the catalog”, 2023-05-05).
+- **Los contenedores son el catálogo y el esquema.** “Todos los objetos de esta jerarquía son objetos securables”, y los privilegios concedidos sobre un padre “se aplican automáticamente a todos los objetos hijos actuales y futuros” — pero ese motor de herencia empieza en el **catálogo**, no en el metastore (permissions-concepts, 23 ago 2026; blog de privilegios: “El objeto de nivel más alto del que se heredan los privilegios es el catálogo”, 2023-05-05).
 - **Las storage credentials y las external locations *no* están bajo un catálogo.** Viven a nivel de metastore, y por eso crear una es una operación acotada al metastore y por eso se conceden con la sintaxis `ON STORAGE CREDENTIAL …` / `ON EXTERNAL LOCATION …` en lugar de con un nombre de tres niveles.
 
 El Hive metastore heredado es *aditivo*: “El metastore de Unity Catalog es aditivo, lo que significa que puede usarse junto con el Hive metastore de cada workspace en Databricks. El Hive metastore aparece como un catálogo de nivel superior llamado `hive_metastore` en el espacio de nombres de tres niveles” (documentación, *Work with the legacy Hive metastore*, consultada 2026-10). La sección 8 convierte ese hecho en un plan de migración.
@@ -743,7 +743,7 @@ Lista de corte (página de actualización, 30 jul 2026)
 
 ---
 
-### Actualizaciones de 2026 (a octubre de 2026)
+### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
 > **Qué cambió en la historia de Unity Catalog de la que depende esta lección — cada línea contrastada con una fuente primaria:**
@@ -756,7 +756,7 @@ Lista de corte (página de actualización, 30 jul 2026)
 
 ---
 
-## Casos de Estudio del Mundo Real
+## Casos Reales
 
 Databricks publica resultados de gobernanza, no matrices de grants. Cada cifra de abajo es **afirmación del cliente o de Databricks, no auditada**, con su URL y su fecha para que puedas comprobarla — el punto examinable es el *patrón*, no el marketing.
 
@@ -1007,7 +1007,7 @@ Databricks publica resultados de gobernanza, no matrices de grants. Cada cifra d
 > [!IMPORTANT]
 > **Veredicto comparativo — Unity Catalog frente al stack heredado (ACL de Hive + instance profiles + DBFS) frente a políticas de bucket de S3 en bruto**
 > - **Frente a los ACL heredados del Hive metastore + instance profiles:** la identidad se ata al **recurso de cómputo** en el stack heredado (cualquiera en el clúster hereda el profile) y a los **principals** en Unity Catalog (storage credential + grants), de modo que el mismo `GRANT` funciona en un clúster de jobs, un SQL warehouse y cómputo serverless. La semántica de DROP diverge con fuerza — los drops gestionados de Hive “delete all underlying data files… immediately”, Unity Catalog da una ventana de **`UNDROP` de 7 días** y purga a 30 días —, y los grants son locales al workspace en Hive pero se aplican a **cada workspace conectado al metastore** en UC. El colapso publicado por Amgen de “120+ IAM roles” a “one or two principal IAM role” es la forma operativa de este veredicto (mayo de 2023).
-> - **Frente a las políticas de bucket de S3 en bruto y solo IAM:** las políticas de bucket tienen **forma de bucket o de prefijo** — sin catálogo, esquema, tabla, columna o fila, sin lineage, sin rastro de auditoría de `SHOW GRANTS` —, y hay que reescribirlas por principal y por prefijo (la aritmética de la lección 02: el desorden de políticas crece con cada equipo nuevo). Consérvalas para el **perímetro de red y de cuenta**; pon la autorización en los securables. Recuerda la regla permanente de la documentación: “The only identity that should have access to data managed by Unity Catalog is the identity used by Unity Catalog” (connect-to-cloud-storage, 3 jun 2026).
+> - **Frente a las políticas de bucket de S3 en bruto y solo IAM:** las políticas de bucket tienen **forma de bucket o de prefijo** — sin catálogo, esquema, tabla, columna o fila, sin lineage, sin rastro de auditoría de `SHOW GRANTS` —, y hay que reescribirlas por principal y por prefijo (la aritmética de la lección 02: el desorden de políticas crece con cada equipo nuevo). Consérvalas para el **perímetro de red y de cuenta**; pon la autorización en los securables. Recuerda la regla permanente de la documentación: “La única identidad que debe tener acceso a los datos gestionados por Unity Catalog es la identidad que usa Unity Catalog” (connect-to-cloud-storage, 3 jun 2026).
 > - **Frente a no hacer nada (un instance profile por clúster):** la diferencia es la *revocación*. Con UC, un `REVOKE` sobre un grupo termina el acceso en todas partes; con instance profiles estás parcheando clústeres y editando políticas de bucket, y las rutas de S3 sin gobernar sobreviven al cambio.
 > - **El veredicto en una frase:** en octubre de 2026, **modela cada ruta de S3 como una storage credential más una external location sin solapamiento, concede los derechos de archivo sobre la ubicación y los derechos de datos sobre el espacio de nombres de tres niveles a grupos de cuenta, liga los catálogos y credenciales de producción a workspaces de producción, mantén las tablas gestionadas donde UC pueda gestionar el ciclo de vida, y trata el acceso Hive/instance profile como un backlog de migración — no como una opción de diseño.**
 

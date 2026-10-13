@@ -1,6 +1,6 @@
 import { getAllRoadmaps } from '@/lib/roadmaps/get-roadmap-content'
 import { RoadmapsClient } from './roadmaps-client'
-import { type Locale } from '@/lib/i18n/config'
+import { i18n, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 
 export const dynamic = 'force-static'
@@ -12,8 +12,7 @@ interface RoadmapsPageProps {
 }
 
 export async function generateStaticParams() {
-  const locales: Locale[] = ['en', 'pt']
-  return locales.map(locale => ({ lang: locale }))
+  return i18n.locales.map(locale => ({ lang: locale }))
 }
 
 export default async function RoadmapsPage({ params }: RoadmapsPageProps) {

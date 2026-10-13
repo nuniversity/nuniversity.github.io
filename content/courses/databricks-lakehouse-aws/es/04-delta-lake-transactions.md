@@ -3,7 +3,7 @@ title: "Transacciones Delta Lake en AWS: anatomía del registro, time travel, CD
 description: "Domina el mecanismo de Delta Lake bajo cada tabla de Databricks sobre AWS: el conjunto de acciones de _delta_log (add/remove/metaData/protocol/txn/commitInfo) y la anatomía de los checkpoints, concurrencia optimista con lecturas de instantánea y escrituras WriteSerializable, time travel en SQL (VERSION AS OF, TIMESTAMP AS OF, DESCRIBE HISTORY) frente a la división de retención de 7 días de datos y 30 días de registro, change data feed heredado frente a automático con consultas table_changes y semántica de _change_type, un ejemplo resuelto de MERGE INTO podado hacia silver con CHECK constraints aplicadas, OPTIMIZE/ZORDER frente a liquid clustering (CLUSTER BY, hasta cuatro claves, protocolo 3/7) con veredicto comparativo, la aritmética de retención de VACUUM con bytes reales y el riesgo del retraso de streaming, compatibilidad de protocolo y de funciones de tabla, tablas gestionadas frente a externas en S3, seis ejemplos resueltos, cinco diagramas de mermaid, cuatro comprobaciones interactivas, casos de Rivian y Comcast en AWS, un recuadro de actualización de octubre de 2026 y doce preguntas de práctica."
 order: 4
 difficulty: "intermediate"
-duration: "70 minutes"
+duration: "70 min"
 ---
 # Transacciones Delta Lake en AWS: anatomía del registro, time travel, CDF, clustering y VACUUM
 
@@ -60,7 +60,7 @@ Delta Lake “extiende los archivos de datos Parquet con un registro de transacc
 | **Archivos de datos** | `<table-path>/*.parquet` (o subdirectorios) | Inmutables una vez escritos; se reescriben como archivos *nuevos* en DML | Cualquier motor de consultas |
 | **Registro de transacciones** | `<table-path>/_delta_log/` | JSON **append-only**, más checkpoints de Parquet | Solo los lectores del protocolo Delta |
 
-El registro “tiene un protocolo abierto bien definido que cualquier sistema puede usar para leerlo” (docs .../delta, 2026-07-10), y delta.io enuncia la regla dura: “The Delta transaction log must remain an append-only log” (PROTOCOL.md / delta.io, consultado 2026-10). Cada commit exitoso agrega un archivo JSON con ceros a la izquierda — `00000000000000000000.json`, luego `...0001.json`, `...0002.json` — y cada archivo JSON es una lista de **acciones**. Los lectores “listan el registro, reproducen las acciones” y derivan el conjunto de archivos vivos más el esquema de cualquier versión cuyos archivos aún existan.
+El registro “tiene un protocolo abierto bien definido que cualquier sistema puede usar para leerlo” (docs .../delta, 2026-07-10), y delta.io enuncia la regla dura: “El registro de transacciones de Delta debe permanecer como un registro append-only” (PROTOCOL.md / delta.io, consultado 2026-10). Cada commit exitoso agrega un archivo JSON con ceros a la izquierda — `00000000000000000000.json`, luego `...0001.json`, `...0002.json` — y cada archivo JSON es una lista de **acciones**. Los lectores “listan el registro, reproducen las acciones” y derivan el conjunto de archivos vivos más el esquema de cualquier versión cuyos archivos aún existan.
 
 ### 1.2 Los seis tipos de acción
 
@@ -75,7 +75,7 @@ Del artículo de profundidad de Databricks “Diving Into Delta Lake: Unpacking 
 | **`txn`** (SetTransaction) | Marcador de idempotencia: “registra que un job de structured streaming ya confirmó un micro-batch con el ID dado” (blog, 2019-08-21) | Los sinks de streaming exactly-once dependen de él |
 | **`commitInfo`** | Nombre de la operación, `operationParameters`, usuario, timestamp, id del clúster, métricas | Exactamente lo que `DESCRIBE HISTORY` muestra |
 
-- **📚 ¿Sabías que…?** Los nombres de commit de 20 dígitos con ceros (`00000000000000000000.json`) existen para que el listado lexicográfico de S3 coincida con el orden numérico de versiones — un truco de sistema de archivos que convierte el almacenamiento de objetos en un WAL ordenado. El DML nunca edita Parquet in place: “Delta Lake creates new versions of files rather than modifying them in place” y “The old data file is not deleted, though” (blog “DML Internals”, 2020-09-29). Espera a una acción `remove` más `VACUUM`.
+- **📚 ¿Sabías que…?** Los nombres de commit de 20 dígitos con ceros (`00000000000000000000.json`) existen para que el listado lexicográfico de S3 coincida con el orden numérico de versiones — un truco de sistema de archivos que convierte el almacenamiento de objetos en un WAL ordenado. El DML nunca edita Parquet in place: “Delta Lake creates new versions of files rather than modifying them in place” y “El archivo de datos antiguo, sin embargo, no se elimina” (blog “DML Internals”, 2020-09-29). Espera a una acción `remove` más `VACUUM`.
 
 ### 1.3 Anatomía, dibujada
 
@@ -117,7 +117,7 @@ WHERE operation IN ('OPTIMIZE','WRITE','MERGE','STREAMING UPDATE','VACUUM','REOR
 ORDER BY version DESC;
 ```
 
-La página de historial también declara la retención del propio historial: “Table history retention is determined by the table setting `logRetentionDuration`, which is **30 days** by default”, y advierte: “Don't use table history as a long-term backup solution for data archival. Use only the past **7 days** for time travel operations unless you have set both data and log retention configurations to a larger value” (docs .../tables/history, 2026-09-11). Esa división 7 frente a 30 es la sección 3.
+La página de historial también declara la retención del propio historial: “Table history retention is determined by the table setting `logRetentionDuration`, which is **30 days** by default”, y advierte: “No uses el historial de la tabla como solución de backup a largo plazo para el archivo de datos. Usa solo los últimos **7 días** para operaciones de time travel, a menos que hayas configurado tanto la retención de datos como la del registro a un valor mayor” (docs .../tables/history, 2026-09-11). Esa división 7 frente a 30 es la sección 3.
 
 ---
 
@@ -125,7 +125,7 @@ La página de historial también declara la retención del propio historial: “
 
 ### 2.1 Lo que garantiza Delta
 
-“Databricks uses optimistic concurrency control. This means that there are no locks on reading or writing against a table, and deadlock is not a possibility” (docs .../lakehouse/acid, actualizado 2026-09-11). Por defecto: **aislamiento de instantánea en las lecturas**, **`WriteSerializable` en las escrituras** — “Ensures that only write operations (not reads) are serializable. This is still stronger than Snapshot isolation” (docs .../isolation-levels, 2026-09-11). `Serializable` se activa a demanda:
+“Databricks uses optimistic concurrency control. This means that there are no locks on reading or writing against a table, and deadlock is not a possibility” (docs .../lakehouse/acid, actualizado 2026-09-11). Por defecto: **aislamiento de instantánea en las lecturas**, **`WriteSerializable` en las escrituras** — “Garantiza que solo las operaciones de escritura (no las lecturas) sean serializables. Esto sigue siendo más fuerte que el aislamiento de instantánea” (docs .../isolation-levels, 2026-09-11). `Serializable` se activa a demanda:
 
 ```sql
 ALTER TABLE main.silver.orders
@@ -155,8 +155,8 @@ sequenceDiagram
 Tres fuentes de conflicto, en el orden en que muerden a los equipos en producción (docs .../optimizations/isolation y .../acid, 2026-09-11):
 
 1. **Dos escritores reescribiendo archivos solapados** — dos `MERGE` golpeando las mismas particiones en la misma ventana. Mitigación: estrecha el predicado `ON` a las particiones que tocas (eso también poda, sección 5); prefiere inserciones donde la semántica lo permita.
-2. **Cambios de metadatos** — evolución de esquema, cambios de propiedades de tabla, actualizaciones de protocolo/funciones. Estos “might cause all concurrent write operations to fail”, y “Streaming reads fail when they encounter a commit that changes table metadata. If you want the stream to continue, you must restart it.”
-3. **La regla de alcance propia de S3** — la garantía de commit en S3 está acotada al workspace: “Databricks recommends that you don't modify the same Delta Lake table stored in S3 from different workspaces” (docs .../delta/s3-limitations, 2026-09-11). Una tabla, un workspace; el aislamiento de cuenta por entorno (lección 02) es lo que mantiene cierta esa propiedad.
+2. **Cambios de metadatos** — evolución de esquema, cambios de propiedades de tabla, actualizaciones de protocolo/funciones. Estos “might cause all concurrent write operations to fail”, y “Las lecturas en streaming fallan cuando encuentran un commit que cambia los metadatos de la tabla. Si quieres que el stream continúe, debes reiniciarlo.”
+3. **La regla de alcance propia de S3** — la garantía de commit en S3 está acotada al workspace: “Databricks recomienda que no modifiques la misma tabla Delta Lake almacenada en S3 desde diferentes workspaces” (docs .../delta/s3-limitations, 2026-09-11). Una tabla, un workspace; el aislamiento de cuenta por entorno (lección 02) es lo que mantiene cierta esa propiedad.
 
 - **📚 ¿Sabías que…?** Los escritores fallidos dejan escombros: las escrituras crean archivos de metadatos `_started_<id>` y `_committed_<id>`, y “`VACUUM` operation deletes all untracked data files in a table directory, including remaining uncommitted files from failed transactions” (docs .../acid, 2026-09-11). Eso es una *característica* — y también la razón por la que un `VACUUM` con retención cero compitiendo contra un escritor lento borra datos (sección 7).
 
@@ -210,7 +210,7 @@ timeline
 ```
 
 > [!IMPORTANT]
-> ⚠️ **Time travel no es backup.** “Don't use table history as a long-term backup solution for data archival” (docs .../tables/history, 2026-09-11). Tras un `VACUUM` con valores por defecto, “you can't restore a table to an older version that references those files”. Para durabilidad real en AWS usa el versionado de S3 *solo si el cumplimiento lo obliga* (entonces: tres versiones, ciclo de vida ≤7 días — docs .../delta/s3-limitations), o snapshots/clones explícitos en una ubicación con retención controlada — nunca `VACUUM` + esperanza. La base de conocimiento lo dice sin rodeos: “if you run VACUUM with the default settings, you will only be able to time travel seven days into the past” (kb.databricks.com, mejores prácticas de VACUUM, consultado 2026-10).
+> ⚠️ **Time travel no es backup.** “Don't use table history as a long-term backup solution for data archival” (docs .../tables/history, 2026-09-11). Tras un `VACUUM` con valores por defecto, “you can't restore a table to an older version that references those files”. Para durabilidad real en AWS usa el versionado de S3 *solo si el cumplimiento lo obliga* (entonces: tres versiones, ciclo de vida ≤7 días — docs .../delta/s3-limitations), o snapshots/clones explícitos en una ubicación con retención controlada — nunca `VACUUM` + esperanza. La base de conocimiento lo dice sin rodeos: “si ejecutas VACUUM con los ajustes por defecto, solo podrás hacer time travel siete días hacia el pasado” (kb.databricks.com, mejores prácticas de VACUUM, consultado 2026-10).
 
 ---
 
@@ -299,7 +299,7 @@ WHEN NOT MATCHED THEN INSERT *;
 -- Optimized writes + auto compaction are forced ON for MERGE/UPDATE/DELETE (docs 2026-09-11).
 ```
 
-La razón medida de por qué importa el predicado `ON`, de la base de conocimiento de Databricks (última publicación 2023-06-01): un `MERGE` sin filtros sobre una tabla con `PartitionCount: 1000` tardó **13.16 minutos**; añadir condiciones de poda (`PartitionCount: 2`) tardó **20.54 segundos** — “more than 40X faster”. Añade el **low shuffle merge** (GA y por defecto desde DBR 10.4 LTS): “up to 5x performance improvement on MERGE-based workloads with the average on the order of 2-3x” (blog, 2024-06-20), con un cliente del sector sanitario que redujo su tiempo medio de merge “from 11 minutes to 1.5 minutes” (7×). El low shuffle merge “also reduces the need for users to re-run `OPTIMIZE` after performing a `MERGE`” (docs, 2026-06-11) — aunque las filas recién insertadas en una tabla con clustering pueden seguir necesitando un reclustering.
+La razón medida de por qué importa el predicado `ON`, de la base de conocimiento de Databricks (última publicación 2023-06-01): un `MERGE` sin filtros sobre una tabla con `PartitionCount: 1000` tardó **13.16 minutos**; añadir condiciones de poda (`PartitionCount: 2`) tardó **20.54 segundos** — “more than 40X faster”. Añade el **low shuffle merge** (GA y por defecto desde DBR 10.4 LTS): “up to 5x performance improvement on MERGE-based workloads with the average on the order of 2-3x” (blog, 2024-06-20), con un cliente del sector sanitario que redujo su tiempo medio de merge “from 11 minutes to 1.5 minutes” (7×). El low shuffle merge “también reduce la necesidad de que los usuarios vuelvan a ejecutar `OPTIMIZE` después de realizar un `MERGE`” (docs, 2026-06-11) — aunque las filas recién insertadas en una tabla con clustering pueden seguir necesitando un reclustering.
 
 ---
 
@@ -317,9 +317,9 @@ Datos de liquid clustering que tienes que saber enunciar con precisión (todos d
 
 - Sintaxis: `CREATE TABLE t (...) CLUSTER BY (col1, col2)`; `ALTER TABLE t CLUSTER BY (cols)`; `ALTER TABLE t CLUSTER BY NONE`. “Clustering is not compatible with partitioning or `ZORDER`.”
 - **Hasta cuatro claves de clustering**; más claves degradan los filtros de una sola columna en tablas de menos de 10 TB. Las estadísticas sostienen el data skipping de las **primeras 32 columnas**.
-- Historia de versiones, con fecha: activación/escritura desde **DBR 13.3 LTS+**; anunciado **GA en DBR 15.2** (blog, 2024-05-22); documentación actual: “generally available for Delta Lake tables with **Databricks Runtime 15.4 LTS and above**”. Protocolo: **reader 3 / writer 7** (particionamiento oculto).
+- Historia de versiones, con fecha: activación/escritura desde **DBR 13.3 LTS+**; anunciado **GA en DBR 15.2** (blog, 2024-05-22); documentación actual: “disponible generalmente para tablas Delta Lake con **Databricks Runtime 15.4 LTS o superior**”. Protocolo: **reader 3 / writer 7** (particionamiento oculto).
 - `ALTER TABLE ... CLUSTER BY` **no** reescribe datos; el primer reclustering es `OPTIMIZE t FULL` (**DBR 16.4 LTS+**). `CLUSTER BY AUTO` (clustering automático, gestionada por UC + optimización predictiva) es **DBR 15.4 LTS+**. `REPLACE PARTITIONED BY WITH CLUSTER BY` es **DBR 18.1+**.
-- Cadencia: `OPTIMIZE` es idempotente, no cambia ningún dato y “does not affect any current or future streams with this table as a source” (docs .../optimize, 2026-09-11) — tablas calientes cada **1–2 horas**, en otro caso **cada noche** (amigable con spot); las tablas de **más de 1 TB** deben ejecutar `OPTIMIZE` con un calendario (docs .../tune-file-size, 2026-09-11). Auto-optimize = `autoOptimize.optimizeWrite` + `autoOptimize.autoCompact`, archivos objetivo de **128 MB**; siempre activo para DML; las tablas gestionadas por UC reciben en su lugar un ajuste automático del tamaño de archivo (autotune de 256 MB–1 GB según el tamaño de la tabla).
+- Cadencia: `OPTIMIZE` es idempotente, no cambia ningún dato y “no afecta a ningún stream actual o futuro que tenga esta tabla como fuente” (docs .../optimize, 2026-09-11) — tablas calientes cada **1–2 horas**, en otro caso **cada noche** (amigable con spot); las tablas de **más de 1 TB** deben ejecutar `OPTIMIZE` con un calendario (docs .../tune-file-size, 2026-09-11). Auto-optimize = `autoOptimize.optimizeWrite` + `autoOptimize.autoCompact`, archivos objetivo de **128 MB**; siempre activo para DML; las tablas gestionadas por UC reciben en su lugar un ajuste automático del tamaño de archivo (autotune de 256 MB–1 GB según el tamaño de la tabla).
 
 ### 6.3 Ejemplo resuelto E5 — migración con CLUSTER BY y OPTIMIZE programado
 
@@ -398,7 +398,7 @@ La forma de esa curva es todo el argumento: el bin packing (archivos menos numer
 
 ### 7.1 Qué hace VACUUM — y qué no hace
 
-“`VACUUM` removes all files from the table directory that are not managed by Delta, as well as data files that are no longer in the latest state of the transaction log” — y “will skip all directories that begin with an underscore (`_`), which includes the `_delta_log`” (docs .../delta-vacuum, 2026-09-11). La eliminación sigue el **tiempo desde la eliminación lógica del registro**, no el mtime del archivo, más las horas de retención; umbral por defecto de **7 días** vía `delta.deletedFileRetentionDuration`. `VACUUM` es también lo que destruye el time travel hacia versiones antiguas y lo que borra los archivos CDF de `_change_data` (docs .../operations/vacuum, fechado 2026-04-21). El podado del JSON del registro *no* lo gobierna `VACUUM` — lo impulsan los checkpoints, con el `logRetentionDuration` de 30 días.
+“`VACUUM` elimina todos los archivos del directorio de la tabla que no están gestionados por Delta, así como los archivos de datos que ya no están en el estado más reciente del registro de transacciones” — y “omitirá todos los directorios que empiecen por un guion bajo (`_`), lo que incluye el `_delta_log`” (docs .../delta-vacuum, 2026-09-11). La eliminación sigue el **tiempo desde la eliminación lógica del registro**, no el mtime del archivo, más las horas de retención; umbral por defecto de **7 días** vía `delta.deletedFileRetentionDuration`. `VACUUM` es también lo que destruye el time travel hacia versiones antiguas y lo que borra los archivos CDF de `_change_data` (docs .../operations/vacuum, fechado 2026-04-21). El podado del JSON del registro *no* lo gobierna `VACUUM` — lo impulsan los checkpoints, con el `logRetentionDuration` de 30 días.
 
 Modos: `DRY RUN` (lista hasta **1000** archivos candidatos — ejecuta siempre esto primero); `FULL` (por defecto) frente a `LITE` (dirigido por el registro, **DBR 16.1+**). La eliminación de archivos es una operación que solo ocurre en el driver.
 
@@ -429,7 +429,7 @@ Lee la regla del multiplicador: subir la retención aumenta linealmente los byte
 
 ### 7.3 La línea temporal documentada de pérdida de datos
 
-El caso de la base de conocimiento (última publicación 2025-07-14): `VACUUM` arranca sobre la versión 100 a las 01:17 UTC; la versión 101 confirma un archivo de datos nuevo a las 01:19; `VACUUM` borra ese archivo aún no referenciado a las 01:20 — “VACUUM executed on version 100 and deleted everything that was added to version 101”. La barrera de protección es `spark.databricks.delta.retentionDurationCheck.enabled`; la instrucción de la KB: “Do not disable ... and run vacuum with retention zero to avoid data loss.” Y con las fuentes de streaming: “If the Delta table is the source for a streaming query, and if the streaming query falls behind by more than seven days, then the streaming query will not be able to correctly read the table” (KB, mejores prácticas de VACUUM, consultado 2026-10).
+El caso de la base de conocimiento (última publicación 2025-07-14): `VACUUM` arranca sobre la versión 100 a las 01:17 UTC; la versión 101 confirma un archivo de datos nuevo a las 01:19; `VACUUM` borra ese archivo aún no referenciado a las 01:20 — “VACUUM executed on version 100 and deleted everything that was added to version 101”. La barrera de protección es `spark.databricks.delta.retentionDurationCheck.enabled`; la instrucción de la KB: “Do not disable ... and run vacuum with retention zero to avoid data loss.” Y con las fuentes de streaming: “Si la tabla Delta es la fuente de una consulta de streaming, y si la consulta de streaming se retrasa más de siete días, entonces la consulta de streaming no podrá leer la tabla correctamente” (KB, mejores prácticas de VACUUM, consultado 2026-10).
 
 ```sql
 -- Safe drill, then a deliberate retention raise
@@ -491,7 +491,7 @@ Toda tabla Delta lleva `minReaderVersion` ∈ {1, 2, 3} y `minWriterVersion` ∈
 Reglas que importan específicamente en AWS:
 
 1. **Las funciones solo de escritor (CHECK, CDF, identity, row tracking) no rompen a los lectores** — “only upgrade the write protocol”, así que los clientes heredados de solo lectura sobreviven. Las funciones de lector (column mapping, deletion vectors, type widening, el particionamiento oculto del liquid clustering) rompen a los lectores que no las implementan.
-2. **“Most protocol version upgrades are irreversible.”** Nunca hagas un “downgrade” editando el JSON. `DROP FEATURE` (DBR 15.4+) es la única reversión parcial, y no toda función se puede eliminar. Las escrituras en DBR bajo siempre son legibles en DBR alto; el peligro es la dirección contraria — una herramienta de BI o un cliente ETL anclado a un Spark antiguo puede simplemente dejar de leer tu tabla después de que actives el clustering.
+2. **“La mayoría de las actualizaciones de versión de protocolo son irreversibles.”** Nunca hagas un “downgrade” editando el JSON. `DROP FEATURE` (DBR 15.4+) es la única reversión parcial, y no toda función se puede eliminar. Las escrituras en DBR bajo siempre son legibles en DBR alto; el peligro es la dirección contraria — una herramienta de BI o un cliente ETL anclado a un Spark antiguo puede simplemente dejar de leer tu tabla después de que actives el clustering.
 3. **En S3:** no actives el versionado de buckets en los buckets de Delta (pelea con el GC de Delta); si es obligatorio, tres versiones con ciclo de vida ≤7 días. No escribas la misma tabla desde dos workspaces. No edites a mano Parquet ni el registro (docs .../delta/s3-limitations, 2026-09-11).
 4. **Gestionada frente a externa:** las tablas gestionadas (por defecto, recomendadas) viven bajo el `MANAGED LOCATION` del esquema/catálogo en tu S3 (subdirectorios hasheados `__unitystorage`), el `DROP` elimina los datos (recuperación con `UNDROP` de 7 días), y reciben optimización predictiva + ajuste automático de archivos. Las tablas externas conservan tu ruta; el `DROP` conserva los archivos; el mantenimiento es tuyo. El `_delta_log` está dentro del directorio de la tabla en **ambos** casos. Las tablas gestionadas deben accederse por nombre — “Path-based access to Unity Catalog managed tables is not supported” (docs .../tables/managed, actualizado 2026-10-08).
 
@@ -512,25 +512,25 @@ Reglas que importan específicamente en AWS:
 11. **PK/FK/unicidad aplican integridad.** No lo hacen; solo `NOT NULL` y `CHECK`.
 12. **`MERGE` sin predicados de poda.** Medido: 13.16 min frente a 20.54 s (KB, 2023-06-01) — pon los predicados de partición/clustering en la cláusula `ON`.
 
-### Actualizaciones de 2026 (a octubre de 2026)
+### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
 > **Qué cambió en la plataforma Delta de la que depende esta lección:**
 > - **2026-01-06 — liquid clustering opera a escala de producción documentada.** “Liquid Clustering became Generally available in 2024 ... customers running it at scale, including dozens with **petabyte scale tables** in production” (databricks.com/blog/debunking-8-data-layout-myths-why-liquid-clustering-outperforms-partitioning, 2026-01-06). Los debates particionamiento frente a clustering de los tutoriales antiguos quedan superados para las tablas nuevas.
-> - **2026-09-25 — redacción actual de la documentación de clustering.** “Liquid clustering is a data layout optimization technique that replaces table partitioning and `ZORDER`”; GA “with Databricks Runtime 15.4 LTS and above”; hasta cuatro claves; estadísticas en las primeras 32 columnas (docs .../aws/en/tables/clustering, actualizado 2026-09-25).
-> - **2026-10-09 — el change data feed automático es la historia actual del CDF.** “Automatic change data feed: Computes changes during table reads using row lineage metadata. This doesn't require individual table configuration” frente a la materialización heredada — exige **Databricks Runtime 19 o superior** más row tracking en una tabla registrada en UC; “You can't use both legacy and automatic change data feeds together” (docs .../change-data-feed, actualizado 2026-10-09).
+> - **2026-09-25 — redacción actual de la documentación de clustering.** “Liquid clustering is a data layout optimization technique that replaces table partitioning and `ZORDER`”; GA “con Databricks Runtime 15.4 LTS o superior”; hasta cuatro claves; estadísticas en las primeras 32 columnas (docs .../aws/en/tables/clustering, actualizado 2026-09-25).
+> - **2026-10-09 — el change data feed automático es la historia actual del CDF.** “Automatic change data feed: Computes changes during table reads using row lineage metadata. This doesn't require individual table configuration” frente a la materialización heredada — exige **Databricks Runtime 19 o superior** más row tracking en una tabla registrada en UC; “No puedes usar a la vez los feeds de datos de cambio heredados y automáticos” (docs .../change-data-feed, actualizado 2026-10-09).
 > - **2026-10-08 — ciclo de vida de las tablas gestionadas y optimización predictiva.** Las tablas gestionadas eliminadas son recuperables **7 días** por defecto (`RETAIN DROPPED TO` lo ajusta); la resolución del almacenamiento gestionado es esquema → catálogo → metastore; el acceso por ruta sigue sin soportarse (docs .../tables/managed, actualizado 2026-10-08). La optimización predictiva está activada por defecto en las cuentas creadas a partir del 2024-11-11 (docs, consultado 2026-10).
 > - **2026-06-11 / 2026-06-18 — páginas de low shuffle merge y de evolución de MERGE renovadas.** LSM “GA in Databricks Runtime 10.4 LTS and above” con “up to 5x ... average on the order of 2-3x”; `MERGE WITH SCHEMA EVOLUTION` documentado en DBR 15.2+ (docs .../low-shuffle-merge y .../delta-merge-into, 2026).
 > - **2026-08-24 — la guía de streaming prefiere los feeds CDC.** “Databricks recommends streaming from the CDC feed of a Delta Lake table rather than directly from the table whenever possible” (docs .../structured-streaming/delta-lake, página fechada 2026-08-24).
 
 ---
 
-## Casos de la vida real
+## Casos Reales
 
 > **📋 Caso A — Rivian (vehículos eléctricos, cloud: AWS)**
 > **El reto.** Terabytes de datos de vehículos y de campo al día desde más de 70.000 vehículos, con herramientas heredadas que “struggled to scale pipelines cost-effectively and spent significant resources on maintenance”.
 > **Stack en AWS.** Databricks SQL, tablas Delta Lake, Unity Catalog — y **liquid clustering** nombrado explícitamente: “Unity Catalog for data governance, Delta Tables for storage, and Liquid Clustering for data layout” para ML de predicción de carga en tiempo real (https://www.databricks.com/blog/data-intelligence-action-100-data-and-ai-use-cases-databricks-customers, 2025-07-09). La página del caso lleva la propia etiqueta `Cloud: AWS` de Databricks (https://www.databricks.com/customers/rivian, página sin fecha, consultada 2026-10).
-> **Resultado reportado.** “1,000+ platform users, a 75% increase from a year ago” (customers/rivian, consultado 2026-10); “50% better runtime performance” y “More than 70,000 Rivians on the road, generating terabytes of data every day” (https://www.databricks.com/your-ai/customers/rivian, 2024-05-30).
+> **Resultado reportado.** “1,000+ platform users, a 75% increase from a year ago” (customers/rivian, consultado 2026-10); “50% better runtime performance” y “Más de 70.000 Rivians en circulación, generando terabytes de datos cada día” (https://www.databricks.com/your-ai/customers/rivian, 2024-05-30).
 > **Cómo encaja en esta lección.** Sección 6 — el liquid clustering no es una diapositiva de benchmark: es la técnica de layout nombrada en un lakehouse de AWS en producción que alimenta ML, exactamente el patrón de acceso de ID de vehículo de alta cardinalidad / series temporales donde el particionamiento estático falla.
 > ⏳ *Nota temporal: las métricas proceden de páginas de 2024–2025; datea las cifras cuando las cites.*
 

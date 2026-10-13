@@ -3,7 +3,7 @@ title: "Compartilhamento de Dados na Databricks on AWS: OpenSharing, Marketplace
 description: "Domine, de ponta a ponta, as três superfícies de colaboração de outubro de 2026 de um lakehouse da Databricks na AWS: OpenSharing (a evolução de junho de 2026 do Delta Sharing, protocolo agora hospedado pela Linux Foundation) com seus três modelos de compartilhamento - Databricks-to-Databricks via sharing identifiers, sem arquivo de credencial; Databricks-to-Open via bearer tokens com o penhasco de expiração automática de 2026-12-08 ou federação OIDC, em que a Databricks não emite nenhum segredo; e Open-to-Databricks; shares como securables do Unity Catalog com a lista verificada de assets, defaults de WITH HISTORY condicionados a DBR 16.2+, shares multi-tenant parametrizados por partição via CURRENT_RECIPIENT(); caminhos de bytes de URL pré-assinada versus cloud tokens baseados em diretório e o que cada um expõe no Delta log; a armadilha do ponteiro ao vivo, em que o VACUUM do provider quebra o time travel do recipient; listagens do Databricks Marketplace (instant vs request, público vs private exchange), o modelo sem taxa e sem corte de receita e o Universal Commit Drawdown de 10%; Lakehouse Federation com suas listas verificadas de fontes de query federation e de catalog federation, connection e foreign catalog DDL com credenciais secret(), join pushdown GA para Redshift/Snowflake/BigQuery; SecureConnect e PrivateLink como dois problemas de rede diferentes; clean rooms; um veredito comparativo de Delta Sharing vs S3 cross-account com Lake Formation vs cópias de ETL; material de caso Block, nCino e Atlassian; uma caixa de atualização de outubro de 2026; oito exemplos resolvidos com SQL e configs reais, cinco diagramas mermaid, quatro verificações interativas e doze questões de prática."
 order: 12
 difficulty: "intermediate"
-duration: "80 minutes"
+duration: "80 min"
 ---
 # Compartilhamento de Dados na Databricks on AWS: OpenSharing, Marketplace e Lakehouse Federation
 
@@ -504,7 +504,7 @@ ORDER BY last_read DESC;
 
 ### 7.1 Anatomia de uma listagem
 
-Uma **listing** aponta para um **share**. Duas escolhas de acesso, **fixadas na criação**: "Data assets are instantly accessible" versus "Consumers must request access to the listing". Dois alvos de publicação: **Marketplace público** ou um **private exchange**. Tipos de asset: **tabelas · arquivos (Volumes) · modelos · notebooks · servidores MCP** — mais **apps** desde junho de 2026 (Public Preview). O wizard permite anexar até **10 notebooks de exemplo** por listagem.
+Uma **listing** aponta para um **share**. Duas escolhas de acesso, **fixadas na criação**: "Data assets are instantly accessible" versus "Os consumidores devem solicitar acesso à listagem". Dois alvos de publicação: **Marketplace público** ou um **private exchange**. Tipos de asset: **tabelas · arquivos (Volumes) · modelos · notebooks · servidores MCP** — mais **apps** desde junho de 2026 (Public Preview). O wizard permite anexar até **10 notebooks de exemplo** por listagem.
 
 | Tipo de listagem | Exigência de share | Forma comercial | Quem pode vê-la |
 |---|---|---|---|
@@ -731,7 +731,7 @@ O ponto de ensino honesto: a garantia de privacidade repousa sobre **aprovação
 
 ---
 
-> **Veredito comparativo — OpenSharing (Delta Sharing) vs S3 cross-account com Lake Formation vs cópias de ETL (AWS, em out de 2026)**
+> **Veredito Comparativo — OpenSharing (Delta Sharing) vs S3 cross-account com Lake Formation vs cópias de ETL (AWS, em out de 2026)**
 > - **OpenSharing / Delta Sharing — o ponteiro aberto, zero-copy e revogável.** A única opção aqui que é um **protocolo aberto** (Linux Foundation desde 2026-06-10) com clientes que funcionam fora da plataforma: 33% dos shares já fluem entre plataformas (blog, 2026-06-16). Zero copy, revogação imediata (o recipient nunca guardou os dados, apenas o direito de ler), o conjunto de assets mais rico no Databricks-to-Databricks (views, volumes, modelos, notebooks) e custo de egress zero para leituras na mesma região. O preço desse poder é o contrato de ponteiro ao vivo da Seção 6: a sua política de VACUUM, os seus deletes e as suas mudanças de schema agora são o incidente de outra pessoa. Escolha quando o recipient não pode estar na sua plataforma, quando a revogabilidade vence um snapshot offline garantido, e quando "um grant, nenhum job de entrega para falhar" vence uma landing zone.
 > - **S3 cross-account + AWS Lake Formation — o grant nativo da AWS, dentro da bolha da AWS.** O Lake Formation "usa o AWS Resource Access Manager (AWS RAM) para compartilhar o recurso"; shares na mesma organização valem imediatamente, shares fora da organização precisam de convite; **LF-TBAC é o método de grant recomendado**; e "serviços integrados como Athena e Amazon Redshift Spectrum exigem resource links" (docs da AWS, acesso em outubro de 2026). Você ganha granularidade de linha/coluna/célula, escala por atributos com LF-Tag e permissões a US$ 0 — mas o consumidor precisa de uma **conta AWS**, o catálogo é o **Glue**, e nada disso alcança uma shop de Power BI que nunca ouviu falar de IAM. Escolha dentro do perímetro da AWS, quando os consumidor são as suas próprias contas ou parceiros que já vivem na AWS.
 > - **Cópias de ETL — a coisa que você possui, e a coisa de que você perde o controle.** Extracts funcionam com absolutamente todo mundo (inclusive o regulador air-gapped do E1-5), dão ao consumidor um snapshot estável e próprio, e sobrevivem às suas indisponibilidades. Mas o extract não pode ser revogado, ninguém sabe quem ainda o guarda, você paga duas vezes (construir + reconciliar) e a desatualização está embutida. Escolha de forma deliberada, com data de expiração e um dono — nunca por padrão.
@@ -753,7 +753,7 @@ O ponto de ensino honesto: a garantia de privacidade repousa sobre **aprovação
 
 ---
 
-## Estudos de Caso do Mundo Real
+## Casos Reais
 
 > **📋 Caso A — Block (Square, Cash App, TIDAL) (serviços financeiros, Cloud: AWS)**
 > **Desafio.** 12PB de dados de grafo e analíticos fragmentados entre unidades de negócio, mais um fluxo IAM doloroso de dois passos — anexar políticas IAM a roles, depois a buckets S3 — que transformava o acesso entre times em uma fila de tickets.

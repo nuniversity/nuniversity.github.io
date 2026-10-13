@@ -3,7 +3,7 @@ title: "Intercambio de datos en Databricks sobre AWS: OpenSharing, Marketplace y
 description: "Domina de principio a fin las tres superficies de colaboración de octubre de 2026 de un lakehouse de Databricks en AWS: OpenSharing (la evolución de junio de 2026 de Delta Sharing, protocolo alojado ahora por la Linux Foundation) con sus tres modelos de intercambio - Databricks-to-Databricks mediante identificadores de intercambio sin archivo de credenciales, Databricks-to-Open mediante tokens bearer con el corte de expiración automática de 2026-12-08 u federación OIDC donde Databricks no emite ningún secreto, y Open-to-Databricks; shares como securables de Unity Catalog con la lista verificada de activos, los valores predeterminados WITH HISTORY condicionados a DBR 16.2+, shares multitenant parametrizados por partición mediante CURRENT_RECIPIENT(); las rutas de bytes de URL prefirmadas frente a cloud tokens basados en directorio y lo que cada una expone en el Delta log; la trampa del puntero vivo donde el VACUUM del proveedor rompe el time travel del destinatario; los listados de Databricks Marketplace (instantáneo frente a solicitud, público frente a intercambio privado), el modelo de ingresos sin comisión y el 10% de Universal Commit Drawdown; Lakehouse Federation con sus listas verificadas de fuentes de query federation y catalog federation, connection y foreign catalog DDL con credenciales secret(), join pushdown GA para Redshift/Snowflake/BigQuery; SecureConnect y PrivateLink como dos problemas de red distintos; clean rooms; un veredicto comparativo de Delta Sharing frente a Lake Formation entre cuentas sobre S3 frente a copias ETL; material de casos de Block, nCino y Atlassian; un recuadro de actualización de octubre de 2026; ocho ejemplos resueltos con SQL y configuraciones reales, cinco diagramas mermaid, cuatro comprobaciones interactivas y doce preguntas de práctica."
 order: 12
 difficulty: "intermediate"
-duration: "80 minutes"
+duration: "80 min"
 ---
 # Intercambio de datos en Databricks sobre AWS: OpenSharing, Marketplace y Lakehouse Federation
 
@@ -675,11 +675,11 @@ GROUP BY 1;
 
 ### 8.4 Semántica del pushdown — qué le pasa de verdad a tu SQL
 
-Las consultas se ejecutan en cómputo de Databricks (SQL warehouse o cluster). Los predicados, las proyecciones, los joins y las agregaciones se empujan hacia la fuente foránea cuando el conector lo admite, y solo vuelven las filas necesarias. El **join pushdown** lo admiten «Oracle, PostgreSQL, MySQL, SQL Server, Teradata, Redshift, Snowflake, BigQuery», y «This feature is **Generally Available and enabled by default for Redshift, Snowflake, and BigQuery**» (docs, 2026-03-26). La catalog federation no empuja nada de ese tipo — el escaneo ocurre en Databricks contra S3. Consecuencias: la latencia de la federación = latencia de la consulta en la fuente + transferencia; una fuente lenta o caída significa consultas lentas o caídas en Databricks; y un catálogo federado es una **dependencia viva**, no un snapshot.
+Las consultas se ejecutan en cómputo de Databricks (SQL warehouse o cluster). Los predicados, las proyecciones, los joins y las agregaciones se empujan hacia la fuente foránea cuando el conector lo admite, y solo vuelven las filas necesarias. El **join pushdown** lo admiten «Oracle, PostgreSQL, MySQL, SQL Server, Teradata, Redshift, Snowflake, BigQuery», y «Esta función está **disponible en GA y habilitada de forma predeterminada para Redshift, Snowflake y BigQuery**» (docs, 2026-03-26). La catalog federation no empuja nada de ese tipo — el escaneo ocurre en Databricks contra S3. Consecuencias: la latencia de la federación = latencia de la consulta en la fuente + transferencia; una fuente lenta o caída significa consultas lentas o caídas en Databricks; y un catálogo federado es una **dependencia viva**, no un snapshot.
 
 ### 8.5 Red: dos problemas que se parecen y no lo son
 
-> «**Private Link (only when the external database is on the same cloud as Databricks compute)**» (docs, *Networking recommendations for Lakehouse Federation*, consultado 2026-10).
+> «**Private Link (solo cuando la base de datos externa está en la misma nube que el cómputo de Databricks)**» (docs, *Networking recommendations for Lakehouse Federation*, consultado 2026-10).
 
 | | **Entrante: federación** | **Saliente: intercambio** |
 |---|---|---|
@@ -710,7 +710,7 @@ flowchart TD
     FC["Foreign catálogo - solo lectura,<br/>espejo vivo de metadatos"] --- WH
 ```
 
-- **📚 ¿Sabías que…?** Las credenciales de la federación tienen exactamente tres hogares documentados, y solo uno de ellos es idiomático en AWS: la función `secret('<scope>','<key>')` dentro de `CREATE CONNECTION` («We recommend that you use Databricks secrets instead of plaintext strings for sensitive values»); una **service credential de Unity Catalog** apuntando a un rol de AWS IAM para la autenticación IAM de RDS PostgreSQL (DBR **18 LTS+**, Standard/Dedicated, solo AWS); y — para Snowflake — **OAuth** con `client_id` / `client_secret`. Nunca una contraseña literal en un notebook, en una entrada del historial de consultas, en `system.access.audit.request_params` ni en el estado de Terraform. También conviene saber: `CREATE CONNECTION` es la API de Lakehouse Federation; **las ingestion connections son otra API** (`databricks connections create`, la familia Lakeflow Connect) — misma palabra, producto distinto.
+- **📚 ¿Sabías que…?** Las credenciales de la federación tienen exactamente tres hogares documentados, y solo uno de ellos es idiomático en AWS: la función `secret('<scope>','<key>')` dentro de `CREATE CONNECTION` («Te recomendamos que uses los secretos de Databricks en lugar de cadenas de texto en claro para los valores sensibles»); una **service credential de Unity Catalog** apuntando a un rol de AWS IAM para la autenticación IAM de RDS PostgreSQL (DBR **18 LTS+**, Standard/Dedicated, solo AWS); y — para Snowflake — **OAuth** con `client_id` / `client_secret`. Nunca una contraseña literal en un notebook, en una entrada del historial de consultas, en `system.access.audit.request_params` ni en el estado de Terraform. También conviene saber: `CREATE CONNECTION` es la API de Lakehouse Federation; **las ingestion connections son otra API** (`databricks connections create`, la familia Lakeflow Connect) — misma palabra, producto distinto.
 
 ---
 
@@ -761,7 +761,7 @@ El punto de enseñanza honesto: la garantía de privacidad descansa sobre la **a
 
 ---
 
-### Actualizaciones 2026 (a octubre de 2026)
+### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
 > **Qué ha cambiado en la pila de intercambio / Marketplace / federación de la que depende esta lección — cada línea comprobada contra una fuente primaria:**
@@ -774,7 +774,7 @@ El punto de enseñanza honesto: la garantía de privacidad descansa sobre la **a
 
 ---
 
-## Casos del mundo real
+## Casos Reales
 
 > **📋 Caso A — Block (Square, Cash App, TIDAL) (servicios financieros, nube: AWS)**
 > **Reto.** 12PB de datos de grafo y analítica fragmentados entre unidades de negocio, más un doloroso flujo IAM de dos pasos — adjuntar políticas IAM a roles y después a buckets de S3 — que convertía el acceso entre equipos en una cola de tickets.

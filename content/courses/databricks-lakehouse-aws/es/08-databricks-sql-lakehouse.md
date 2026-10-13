@@ -3,7 +3,7 @@ title: "SQL warehouses de Databricks y la capa de servicio: serverless, escalado
 description: "Ejecuta la capa de servicio de un lakehouse de Databricks sobre AWS: elige entre los SQL warehouses serverless, pro y classic de la línea de oct 2026 (Photon en los tres, Predictive IO en serverless+pro, Intelligent Workload Management solo en serverless; arranques en frío de 2-6 segundos frente a ~4 minutos); dimensiona una flota con la regla de 1 cluster por 10 consultas concurrentes, el tope de cola de 1,000 consultas y el techo de la API de 40 clusters; configura el auto-stop (45/10 pro-classic, 10/5/1 serverless) contra la regla documentada de cargo por inactividad; construye dashboards AI/BI, alertas y consultas guardadas tras el fin de soporte de los dashboards heredados el 2025-04-10; conecta herramientas de Tableau, Power BI, Excel y Partner Connect mediante los drivers ODBC/JDBC de Databricks; y consulta sistemas remotos a través de foreign catalogs de Lakehouse Federation. Siete ejemplos resueltos con cálculos reales de dimensionado, un boceto de coste a dos columnas DBU + EC2 con tarifas de oct 2026 y configuración de conexión BI; cinco diagramas mermaid, cuatro comprobaciones interactivas, doce preguntas de práctica, los casos NAB, Punchh y nCino en AWS, un recuadro de actualización de octubre de 2026 y un veredicto classic frente a pro frente a serverless."
 order: 8
 difficulty: "intermediate"
-duration: "75 minutes"
+duration: "75 min"
 ---
 # SQL warehouses de Databricks y la capa de servicio: serverless, escalado, dashboards, BI y federación
 
@@ -59,7 +59,7 @@ Databricks SQL es "a cloud data warehouse built on lakehouse architecture. It ru
 
 La regla de cómputo que vale la pena memorizar: "Databricks uses SQL warehouses for compute in the following interfaces: **SQL editor · Databricks SQL queries · Dashboards · SQL alerts**" y, opcionalmente, notebooks, el file editor y Lakeflow Jobs (docs .../query, última actualización **11 sep 2026**). La misma página añade dos restricciones que dan forma a todo lo que sigue:
 
-- "When you query data with SQL warehouses, you can use **only SQL syntax**." — al consultar datos con SQL warehouses solo puedes usar **sintaxis SQL**.
+- "Cuando consultas datos con SQL warehouses, solo puedes usar **sintaxis SQL**." — al consultar datos con SQL warehouses solo puedes usar **sintaxis SQL**.
 - "For workspaces that are enabled for Unity Catalog, **SQL warehouses always use Unity Catalog** to manage access to data sources." — en los workspaces con Unity Catalog habilitado, **los SQL warehouses usan siempre Unity Catalog** para gestionar el acceso a las fuentes de datos.
 
 Y desde la página warehouse-types: "SQL warehouses do not support credential passthrough. Databricks recommends using Unity Catalog for data governance." No existe en un warehouse la vía de credencial por usuario: la gobernanza son grants de Unity Catalog, punto y final.
@@ -115,7 +115,7 @@ De la fila del medio se siguen tres consecuencias:
 
 ### 2.2 Requisitos de serverless en AWS (léelos antes de prometerlo)
 
-Desde docs .../sql/admin/serverless (última actualización **10 jun 2026**): la cuenta "must not be on a free trial"; el workspace "must be on the **Premium plan or above**"; "Serverless SQL warehouses are supported in **all AWS regions**"; el workspace "must not use S3 access policies" ni usar "an **external Hive legacy metastore**" (warehouse-types repite la cláusula del metastore: "If your workspace uses a legacy external Hive metastore, serverless SQL warehouses are not supported"). La identidad es Unity Catalog y la conectividad es privada: serverless "use[s] private connectivity between the Databricks control plane and the serverless compute plane in nearly all cases."
+Desde docs .../sql/admin/serverless (última actualización **10 jun 2026**): la cuenta "must not be on a free trial"; el workspace "must be on the **Premium plan or above**"; "Serverless SQL warehouses are supported in **all AWS regions**"; el workspace "must not use S3 access policies" ni usar "an **external Hive legacy metastore**" (warehouse-types repite la cláusula del metastore: "If your workspace uses a legacy external Hive metastore, serverless SQL warehouses are not supported"). La identidad es Unity Catalog y la conectividad es privada: serverless "usa conectividad privada entre el plano de control de Databricks y el plano de cómputo serverless en casi todos los casos."
 
 - **📚 ¿Sabías que…?** El egress de serverless hacia *tus* recursos es un problema distinto de la propia falta de IPs públicas de serverless. Para cualquier cosa fuera de Amazon S3 o DynamoDB de la misma región, "serverless compute uses **public IP addresses** to reach your resources", y desde **mediados de febrero de 2026** Databricks "publishes outbound IPs in JSON format on a public endpoint" — tras el **25 may 2026** las listas IP heredadas quedaron retiradas (docs .../serverless-firewall, consultadas 2026-10). Para conectividad dedicada usas **PrivateLink saliente a través de una network connectivity configuration**: cada cuenta recibe hasta **10 NCC por región**, cada región **30 private endpoints** y cada NCC adjunta hasta **50 workspaces** — y esa vía necesita el **Enterprise plan** (docs .../pl-to-internal-network, consultadas 2026-10).
 
@@ -145,7 +145,7 @@ flowchart TB
     PW --> S3
 ```
 
-El borde derecho es el que los estudiantes se pierden: **la federación desde un warehouse serverless hacia una base de datos privada aún tiene que recorrer una ruta de red**, y serverless trae consigo sus propias reglas de egress. Pro es la elección documentada cuando "you have custom-defined networking and want to connect to databases in your network" (warehouse-types, 11 sep 2026).
+El borde derecho es el que los estudiantes se pierden: **la federación desde un warehouse serverless hacia una base de datos privada aún tiene que recorrer una ruta de red**, y serverless trae consigo sus propias reglas de egress. Pro es la elección documentada cuando "tienes una red definida de forma personalizada y quieres conectarte a bases de datos de tu red" (warehouse-types, 11 sep 2026).
 
 ### 2.4 Ejemplo resuelto E1 — la tabla de decisión de tipo de warehouse y la invocación de la API
 
@@ -211,10 +211,10 @@ El valor por defecto al crear un warehouse en la UI es **X-Large**. La caché de
 Reglas documentadas (warehouse-behavior 8 oct 2026; create 11 sep 2026):
 
 - **"a cluster for every 10 concurrent queries"** — la regla de dimensionado, enunciada en ambas páginas.
-- **"The maximum number of queries in a queue for all warehouse types is 1,000."**
+- **"El número máximo de consultas en cola para todos los tipos de warehouse es 1,000."**
 - Límites de la API: `max_num_clusters` **≤ 40**; `min_num_clusters` ≤ min(máx, **30**); mínimo por defecto **1**. Subir `min_num_clusters` "will ensure that a larger number of clusters are always running and therefore may **reduce the cold start time**" — a un coste de facturación continua.
 - Tope del workspace: **1,000 SQL warehouses** en total, fijo (docs .../resources/limits, **9 oct 2026**).
-- **"Databricks recycles clusters that have been running for more than 24 hours"** y puede terminarlos a la fuerza — así que ninguna consulta ni ninguna sesión de notebook adjunto debe dar por sentados clusters inmortales.
+- **"Databricks recicla los clusters que llevan más de 24 horas en ejecución"** y puede terminarlos a la fuerza — así que ninguna consulta ni ninguna sesión de notebook adjunto debe dar por sentados clusters inmortales.
 
 La regla de los dos mandos que arregla la mayoría de los dashboards: **la talla (tamaño del cluster) compra potencia por consulta; `max_num_clusters` compra concurrencia.** Vuelco a disco significa el primer mando; cola significa el segundo.
 
@@ -354,7 +354,7 @@ A la forma ilustrativa de 2X-Small (4 DBU/h, 2 x i3.2xlarge):
 
 Tarifas: SQL Classic **$0.22/DBU** (instantánea de página **2026-10**) y AWS us-east-1 bajo demanda **i3.2xlarge $0.624/h** (lista de precios de AWS EC2, leída el **2026-10-12**). La emisión de **4 DBU/h** es una cifra *ilustrativa* por talla: la página de precios publica **$/DBU únicamente**, así que lee tu propia DBU/hora por talla desde `system.billing.list_prices` (sección 10). El argumento sobrevive a la sustitución: **veinte minutos de auto-stop innecesario en veinte warehouses eclipsan cualquier cambio de nivel de talla.**
 
-- **📚 ¿Sabías que…?** El auto-stop es solo la mitad de la historia de la inactividad. Subir `min_num_clusters` "reduce[s] the cold start time for new queries" (Warehouses API, consultadas 2026-10) pero mantiene clusters facturables calientes las 24 horas — mientras que en serverless el arranque en frío ya es de **2–6 segundos**, así que `min_num_clusters > 1` rara vez compensa pagarlo. Y porque "Databricks recycles clusters that have been running for more than 24 hours", un warehouse que nunca se queda inactivo aún ve reciclados sus clusters, con posible terminación forzada de trabajos largos (docs .../sql-warehouse/create, 11 sep 2026).
+- **📚 ¿Sabías que…?** El auto-stop es solo la mitad de la historia de la inactividad. Subir `min_num_clusters` "reduce el tiempo de arranque en frío de consultas nuevas" (Warehouses API, consultadas 2026-10) pero mantiene clusters facturables calientes las 24 horas — mientras que en serverless el arranque en frío ya es de **2–6 segundos**, así que `min_num_clusters > 1` rara vez compensa pagarlo. Y porque "Databricks recicla los clusters que llevan más de 24 horas en ejecución", un warehouse que nunca se queda inactivo aún ve reciclados sus clusters, con posible terminación forzada de trabajos largos (docs .../sql-warehouse/create, 11 sep 2026).
 
 ---
 
@@ -365,14 +365,14 @@ Tarifas: SQL Classic **$0.22/DBU** (instantánea de página **2026-10**) y AWS u
 El SQL editor se entrega con asistencia de IA, comentarios de código e historial de versiones (docs .../sql/, 11 sep 2026). Las consultas guardadas son securables en su propio derecho (docs .../sql/user/queries, última actualización **29 abr 2026**):
 
 - compartir una consulta requiere **`CAN MANAGE`** sobre esa consulta;
-- dos modos de credencial: **"Run as viewer"** — "The viewer's credential is used to run the query. The viewer must also have at least **CAN USE** permissions on the warehouse" — frente a **"Run as owner"**;
+- dos modos de credencial: **"Run as viewer"** — "La credencial del visor se usa para ejecutar la consulta; el visor también debe tener al menos permisos **CAN USE** sobre el warehouse" — frente a **"Run as owner"**;
 - "A Databricks workspace admin user has view access to all queries in the workspace."
 
 La UI del historial de consultas conserva **30 días** de historial; ves tus propias consultas como owner, o las de otros si tienes al menos `CAN VIEW` sobre el warehouse que las ejecutó. Cualquier cosa de vida más larga va a `system.query.history` (sección 6).
 
 ### 5.2 Dashboards AI/BI: la generación Lakeview, hoy la única generación
 
-"AI/BI dashboards feature AI-assisted authoring, an enhanced visualization library, and a streamlined configuration experience" (docs .../dashboards, última actualización **11 sep 2026**). El conjunto de capacidades documentado: datasets y visualizaciones; filtros a nivel global/página/widget con **cross-filtering** y **drill-through**; cálculos personalizados; borrador/publicación; **"When published, your dashboards can be shared with anyone registered to your Databricks account, even if they don't have access to the workspace"**; **incrustación por iframe**; programación y suscripción por correo o Slack; **integración Git / source control**; **Declarative Automation Bundles**; APIs REST; programación como **Lakeflow Job**; agentes Genie; monitoreo de uso mediante audit logs y system tables; y lineage de Unity Catalog incorporado.
+"AI/BI dashboards feature AI-assisted authoring, an enhanced visualization library, and a streamlined configuration experience" (docs .../dashboards, última actualización **11 sep 2026**). El conjunto de capacidades documentado: datasets y visualizaciones; filtros a nivel global/página/widget con **cross-filtering** y **drill-through**; cálculos personalizados; borrador/publicación; **"Una vez publicados, tus dashboards pueden compartirse con cualquier persona registrada en tu cuenta de Databricks, aunque no tenga acceso al workspace"**; **incrustación por iframe**; programación y suscripción por correo o Slack; **integración Git / source control**; **Declarative Automation Bundles**; APIs REST; programación como **Lakeflow Job**; agentes Genie; monitoreo de uso mediante audit logs y system tables; y lineage de Unity Catalog incorporado.
 
 **Los dashboards heredados ya no existen.** "End of support for legacy dashboards — **April 10, 2025**. You can no longer create or clone legacy dashboards using the UI or API" (docs .../ai-bi/release-notes/2025); la documentación heredada está retirada, y el endpoint de migración `POST /api/2.0/lakeview/dashboards/migrate` está marcado como **Deprecated** con la nota "Use Lakeview (AI/BI) dashboards instead" (referencia de la API Lakeview, consultadas 2026-10).
 
@@ -390,7 +390,7 @@ timeline
       2026-09 : Genie Code GA para autoría de dashboards : importar informes de Power BI y Tableau, Public Preview
 ```
 
-- **📚 ¿Sabías que…?** El nombre que ves en la API es un fósil. Los dashboards AI/BI "were previously known as Lakeview dashboards. The Lakeview API still retains that name" — así que toda llamada create/list/publish sigue siendo `/api/2.0/lakeview/dashboards/*` aunque la UI diga AI/BI (docs .../dashboards, 11 sep 2026; referencia de la REST API, consultadas 2026-10). Cualquier script, resource de Terraform o tutorial que hable de "migrating to Lakeview" está escribiendo historia de 2023–2024: el endpoint de migración está obsoleto y los dashboards heredados no pueden crearse en absoluto desde el **2025-04-10**.
+- **📚 ¿Sabías que…?** El nombre que ves en la API es un fósil. Los dashboards AI/BI "antes se llamaban dashboards Lakeview. La API de Lakeview aún conserva ese nombre" — así que toda llamada create/list/publish sigue siendo `/api/2.0/lakeview/dashboards/*` aunque la UI diga AI/BI (docs .../dashboards, 11 sep 2026; referencia de la REST API, consultadas 2026-10). Cualquier script, resource de Terraform o tutorial que hable de "migrating to Lakeview" está escribiendo historia de 2023–2024: el endpoint de migración está obsoleto y los dashboards heredados no pueden crearse en absoluto desde el **2025-04-10**.
 
 ### 5.3 Alertas
 
@@ -413,7 +413,7 @@ timeline
 
 ### 6.2 El profile, los insights y sus significados
 
-- **Query profile** — debes ser el **owner de la consulta** o tener al menos **`CAN MONITOR`** en el warehouse; "A query profile is **not available for queries that run from the query cache**. To circumvent the query cache, make a trivial change to the query, such as changing or removing the LIMIT" (docs .../query-profile, 10 jun 2026).
+- **Query profile** — debes ser el **owner de la consulta** o tener al menos **`CAN MONITOR`** en el warehouse; "El profile de consulta **no está disponible para las consultas que se ejecutan desde la caché de consultas**. Para rodear la caché de consultas, haz un cambio trivial en la consulta, como modificar o quitar el LIMIT" (docs .../query-profile, 10 jun 2026).
 - **Query performance insights** — recomendaciones con código (docs .../performance-insights, 11 sep 2026): `DATA_SPILL` → "Increase the warehouse size to add memory"; `EXCESSIVE_QUEUE_TIME` → "Increase the **maximum number of clusters**"; `IO_THROTTLING` → solicita límites de peticiones de almacenamiento más altos; más `DATA_SKEW`, `MANUAL_DATA_LAYOUT` y las aceleraciones aplicadas `AUTO_LIQUID_CLUSTERING`, `HISTORY_BASED_JOIN_STRATEGY`, `SHORT_QUERY_PRIORITIZATION`.
 - **System tables** — la misma historia que los datos: `system.query.history` (Public Preview, **365 días**, regional, registros "typically available **within one hour**"), `system.compute.warehouses` (instantáneas de configuración), `system.compute.warehouse_events` (eventos de arranque/parada/escalado), `system.billing.usage` y `system.billing.list_prices` (el registro de precios, retención indefinida, global).
 
@@ -464,7 +464,7 @@ Fuentes: página de monitoring-queries (docs .../sql-warehouse/monitor/queries, 
 | **Databricks ODBC Driver** | **2.12.1** (2026-08-06) | actual |
 | Simba Spark ODBC | última entrada 2.10.0 (2026-02-26) | **"The Simba Spark ODBC Driver is deprecated."** |
 
-(docs .../integrations/odbc/download, espejo de página fechado el **11 sep 2026**; páginas de descarga y de archivo de drivers, consultadas 2026-10). El renombramiento de febrero de 2026 importa operativamente: "As of February 2026, new versions of the ODBC driver are being released by Databricks and the driver has been renamed to Databricks ODBC Driver." Rutas de instalación: Windows `C:\Program Files\Databricks ODBC Driver`, macOS `/Library/databricks/databricksodbc`, Linux `/opt/databricks/databricksodbc`. Algunas herramientas empaquetan el driver (versiones recientes de Power BI Desktop); Tableau Desktop no.
+(docs .../integrations/odbc/download, espejo de página fechado el **11 sep 2026**; páginas de descarga y de archivo de drivers, consultadas 2026-10). El renombramiento de febrero de 2026 importa operativamente: "A partir de febrero de 2026, Databricks publica nuevas versiones del driver ODBC y el driver pasó a llamarse Databricks ODBC Driver." Rutas de instalación: Windows `C:\Program Files\Databricks ODBC Driver`, macOS `/Library/databricks/databricksodbc`, Linux `/opt/databricks/databricksodbc`. Algunas herramientas empaquetan el driver (versiones recientes de Power BI Desktop); Tableau Desktop no.
 
 El denominador común en todas las herramientas: conexión = **Server Hostname + HTTP Path de un SQL warehouse**; autenticación = OAuth / acceso de Databricks / personal access token / service principal. **La autenticación por usuario y contraseña está muerta** — la propia ayuda de Tableau registra que "Basic authentication using a Databricks user name and password reached end of life as of **July 2024**."
 
@@ -517,14 +517,14 @@ Ambas fichas asumen las dos puertas de la sección 1: `CAN USE` en el warehouse 
 
 "**Lakehouse Federation** is the Databricks query federation platform. It provides governed, **read-only** access to external data through Unity Catalog foreign catalogs, with automatic query pushdown and fine-grained access controls at the table level" (docs .../query-federation, última actualización **29 sep 2026**). Dos sabores:
 
-- **query federation** — con pushdown hacia la base de datos externa por **JDBC**; "The query runs on both Databricks and remote compute… **Not supported (read-only)**" para escrituras;
+- **query federation** — con pushdown hacia la base de datos externa por **JDBC**; "La consulta se ejecuta en Databricks y en el cómputo remoto… **No soportado (solo lectura)**" para escrituras;
 - **catalog federation** — "Runs directly against object storage on Databricks compute only. More cost-effective and performance-optimized."
 
 **Listas de fuentes verificadas (oct 2026).** Query federation: MySQL, PostgreSQL, Teradata, Oracle, Amazon Redshift, Salesforce Data 360, Snowflake, Microsoft SQL Server, Azure Synapse, Google BigQuery, Databricks. Catalog federation: metastore Hive heredado de Databricks, external Hive metastore, **AWS Glue metastore**, Salesforce Data 360, Snowflake, Palantir Foundry, Workday Data Connect, Google Cloud Lakehouse.
 
 ### 8.2 El requisito que excluye a los warehouses classic
 
-Desde las páginas de federación de MySQL y SQL Server (**19 ago / 11 sep 2026**): "Databricks compute must use Databricks Runtime **13.3 LTS or above** and **Standard or Dedicated access mode**"; "**SQL warehouses must be pro or serverless and must use 2023.40 or above**"; el workspace debe tener Unity Catalog habilitado (los workspaces creados después del **8 nov 2023** lo tienen). MySQL además requiere **SSL**. El pushdown es desigual por diseño: agregaciones, aritmética, booleanos/bit a bit y orden con límite hacen pushdown en 13.3 LTS+; **los joins necesitan DBR 17.2+** (en MySQL: un toggle en Public Preview); **las funciones de ventana no están soportadas en MySQL**. Y cuando existen las dos vías, "When your source supports both Lakehouse Federation and Lakeflow Connect, Databricks recommends **Lakeflow Connect** if performance on higher data volumes and lower latency are priorities."
+Desde las páginas de federación de MySQL y SQL Server (**19 ago / 11 sep 2026**): "Databricks compute must use Databricks Runtime **13.3 LTS or above** and **Standard or Dedicated access mode**"; "**los SQL warehouses deben ser pro o serverless y usar 2023.40 o superior**"; el workspace debe tener Unity Catalog habilitado (los workspaces creados después del **8 nov 2023** lo tienen). MySQL además requiere **SSL**. El pushdown es desigual por diseño: agregaciones, aritmética, booleanos/bit a bit y orden con límite hacen pushdown en 13.3 LTS+; **los joins necesitan DBR 17.2+** (en MySQL: un toggle en Public Preview); **las funciones de ventana no están soportadas en MySQL**. Y cuando existen las dos vías, "When your source supports both Lakehouse Federation and Lakeflow Connect, Databricks recommends **Lakeflow Connect** if performance on higher data volumes and lower latency are priorities."
 
 > [!IMPORTANT]
 > **Los warehouses classic no pueden federar.** La federación necesita warehouses "pro or serverless" en build **2023.40+** — y las mismas tres carencias se repiten: classic no puede federar, no puede crear materialized views / streaming tables desde SQL y no puede ejecutar AI Functions. Porque **la API de SQL warehouses usa classic por defecto**, cada módulo de Terraform o script que olvida `enable_serverless_compute: true` (o `warehouse_type: PRO` para un warehouse pro) crea exactamente el tipo de warehouse que falla en las tres. Audita la flota con `SELECT warehouse_name, warehouse_type FROM system.compute.warehouses WHERE warehouse_type = 'CLASSIC'`.
@@ -580,7 +580,7 @@ Permisos de warehouse, desde la matriz de ACLs (docs .../access-control, última
 | **IS OWNER** | se aplica automáticamente al creador del warehouse; lleva los derechos de parar, borrar y modificar permisos (los mismos derechos de parar/borrar que `CAN MANAGE`) más la propiedad del objeto |
 | **CAN MANAGE** | parar, borrar, editar configuración, modificar permisos; **los admins del workspace lo tienen en todos los objetos** |
 
-Por encima de todo eso hay dos entitlements: el entitlement **`databricks-sql-access`** decide quién puede usar Databricks SQL en absoluto, y crear warehouses necesita admin del workspace **o** el entitlement **`Allow unrestricted cluster creation`** — "Most users cannot create SQL warehouses, but can restart any SQL warehouse they can connect to." Los warehouses borrados pueden restaurarlos desde soporte **dentro de 14 días**.
+Por encima de todo eso hay dos entitlements: el entitlement **`databricks-sql-access`** decide quién puede usar Databricks SQL en absoluto, y crear warehouses necesita admin del workspace **o** el entitlement **`Allow unrestricted cluster creation`** — "La mayoría de los usuarios no pueden crear SQL warehouses, pero pueden reiniciar cualquier SQL warehouse al que puedan conectarse." Los warehouses borrados pueden restaurarlos desde soporte **dentro de 14 días**.
 
 El patrón de delegación que hay que enseñar: `data-analysts` → `CAN USE` en el warehouse de BI más `SELECT` en los schemas gold; `bi-viewers` → `CAN VIEW`; `data-engineers` → `CAN MANAGE` en el warehouse de plataforma y su auto-stop; service principals para Power BI/Tableau → `CAN USE` más `SELECT`. Grupos, no individuos — de lo contrario el `CAN MANAGE` generalizado de los admins del workspace se convierte en el único modelo que funciona, y con él llega la dispersión de administración.
 
@@ -626,7 +626,7 @@ Léelo como tres lecciones, no como una clasificación. **(A) solo es la más ba
 
 ## 11. Las trampas: catorce confusiones que esta lección no te deja conservar
 
-1. **"Serverless corre en mi VPC."** Corre en la cuenta de Databricks — "Customer-managed VPCs are not applicable", sin cluster policies, sin IPs públicas.
+1. **"Serverless corre en mi VPC."** Corre en la cuenta de Databricks — "las VPCs gestionadas por el cliente no son aplicables", sin cluster policies, sin IPs públicas.
 2. **"La API crea el mismo warehouse que la UI."** Defecto de la UI = **serverless**; defecto de la API = **classic** salvo que `enable_serverless_compute` sea true y `warehouse_type` sea `PRO`.
 3. **"Classic es la opción económica."** También es la opción que **no puede federar, no puede crear MVs/STs y no puede ejecutar AI Functions**.
 4. **"Un tamaño más grande significa más consultas concurrentes."** La concurrencia es `max_num_clusters` × 10; la talla es potencia por consulta. Vuelco → talla; cola → clusters.
@@ -645,13 +645,13 @@ Léelo como tres lecciones, no como una clasificación. **(A) solo es la más ba
 
 > **Veredicto comparativo — SQL warehouse classic frente a pro frente a serverless (AWS, a oct 2026)**
 > - **Classic — $0.22/DBU más cargos de instancia en la nube, arranque de ~4 minutos.** El valor por defecto de la API y el suelo de la línea: solo Photon, sin Predictive IO, sin IWM. **No puede federar, no puede crear materialized views ni streaming tables desde SQL, no puede ejecutar AI Functions.** Corre en tu VPC con cluster policies, ajustes de spot y la caché de disco en el SSD local i3. Elígelo cuando la carga sea SQL simple con una forma estable, el coste por DBU sea la restricción que aprieta y ninguna de las tres funciones ausentes aplique — y pon el auto-stop a **10 minutos**, no a 45.
-> - **Pro — $0.55/DBU más cargos de instancia en la nube, arranque de ~4 minutos.** Todo lo que tiene classic **más Predictive IO**, y la elección documentada cuando "you have custom-defined networking and want to connect to databases in your network" — es decir, federación desde dentro de tu VPC. Siguen siendo tus instancias, tu Auto-AZ, tus políticas, tu columna de EC2. Elígelo cuando el alcance de la red privada importe más que la latencia del arranque en frío.
+> - **Pro — $0.55/DBU más cargos de instancia en la nube, arranque de ~4 minutos.** Todo lo que tiene classic **más Predictive IO**, y la elección documentada cuando "tienes una red definida de forma personalizada y quieres conectarte a bases de datos de tu red" — es decir, federación desde dentro de tu VPC. Siguen siendo tus instancias, tu Auto-AZ, tus políticas, tu columna de EC2. Elígelo cuando el alcance de la red privada importe más que la latencia del arranque en frío.
 > - **Serverless — $0.70/DBU, máquina incluida, arranque de 2–6 segundos.** El valor por defecto documentado para la mayoría de las cargas: **Photon + Predictive IO + IWM**, sin cluster policies (así que tampoco guardrails basados en políticas), sin VPC gestionada por el cliente, sin IPs públicas, auto-stop por defecto de **10 minutos**, facturación por segundo sin cargo por inactividad más allá de la ventana de auto-stop. Elígelo salvo que una bifurcación de E1 diga lo contrario.
 > - **Veredicto en una línea:** *serverless por defecto → pro cuando necesites el cómputo dentro de tu cuenta de AWS para federación o red personalizada → classic solo para SQL estrecho, estable y sin funciones donde $0.22 gana la aritmética.* Todas las tarifas son lista US, AWS, instantánea de página **2026-10**; la emisión de DBU por hora y por talla debe venir de `system.billing.list_prices`, no de un tutorial.
 
 ---
 
-### Actualizaciones de 2026 (a octubre de 2026)
+### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
 > **Qué cambió en la capa de servicio de Databricks SQL de la que depende esta lección — cada línea contrastada con una fuente primaria:**
@@ -659,18 +659,18 @@ Léelo como tres lecciones, no como una clasificación. **(A) solo es la más ba
 > - **2026-10-08 — la página de dimensionado/escalado es el reglamento vigente**: "one cluster per 10 concurrent queries", tope de cola **1,000**, escalado hacia arriba tras **5 minutos** de espera en cola, escalado hacia abajo tras **15 minutos seguidos** de carga baja, **Auto-AZ**, y **5X-Large en Public Preview** para pro y serverless (docs .../compute/sql-warehouse/warehouse-behavior, última actualización **2026-10-08**).
 > - **2026-09-29 — la documentación de Lakehouse Federation consolidó** la división query-federation frente a catalog-federation y las listas de fuentes verificadas que usa la sección 8 (docs .../query-federation, última actualización **2026-09-29**); las páginas de requisitos de federación están fechadas **2026-08-19 / 2026-09-11**.
 > - **2026-06-09 → 2026-09 — la superficie de dashboards se renombró y se rearmó**: "**Genie renamed to Genie One** — June 9, 2026"; "**Genie Code for dashboard authoring … is now generally available**" (septiembre de 2026); "**Import BI files (Public Preview)**: Importing **Power BI and Tableau reports as AI/BI dashboards with Genie Code**" (docs .../ai-bi/release-notes/2026, última actualización **2026-09-17**).
-> - **Febrero de 2026 → 2026-08-06 — el driver ODBC fue renombrado.** "As of February 2026 … the driver has been renamed to Databricks ODBC Driver", "**The Simba Spark ODBC Driver is deprecated**", release actual **2.12.1 (2026-08-06)** (docs .../integrations/odbc/download, espejo fechado **2026-09-11**; archivo de drivers, consultado 2026-10).
+> - **Febrero de 2026 → 2026-08-06 — el driver ODBC fue renombrado.** "A partir de febrero de 2026 … el driver pasó a llamarse Databricks ODBC Driver", "**The Simba Spark ODBC Driver is deprecated**", release actual **2.12.1 (2026-08-06)** (docs .../integrations/odbc/download, espejo fechado **2026-09-11**; archivo de drivers, consultado 2026-10).
 > - **2026-05-25 — las listas de egress de serverless cambiaron de forma.** Las IPs salientes se publican en **JSON** desde mediados de febrero de 2026 y "legacy IP lists will be decommissioned" después del **25 may 2026**; la conectividad dedicada es PrivateLink saliente vía NCC (Enterprise plan) (docs .../serverless-firewall y .../pl-to-internal-network, consultadas 2026-10).
 
 ---
 
-## Casos de la vida real
+## Casos Reales
 
 > **📋 Caso A — NAB (National Australia Bank, banca, Cloud: AWS)**
 > **Reto.** Un **almacén Teradata de 26 años** con ~1,000 casos de uso y ~140 suites de informes, con ETL escrito a mano y prácticas inconsistentes entre 300–400 ingenieros.
 > **Stack en AWS.** Databricks SQL como reemplazo del almacén, más Auto Loader, Spark Declarative Pipelines (Lakeflow), Unity Catalog y asset bundles — `Cloud: AWS` en la página de la historia.
 > **Resultado comunicado.** "**26-year-old Teradata warehouse decommissioned · 456 Use cases migrated to Databricks SQL · 1,200+ Users enabled**"; "95% of critical workloads migrated"; ~140 suites de informes retiradas (https://www.databricks.com/customers/nab/dbsql, página sin fecha, consultada 2026-10).
-> **Cita.** "The migration wouldn't have been possible without Databricks SQL" — Gurry, misma URL.
+> **Cita.** "La migración no habría sido posible sin Databricks SQL" — Gurry, misma URL.
 > **Encaje con esta lección.** Secciones 3, 7 y 9 — reemplazar un almacén es una *racionalización de informes* más un ejercicio de dimensionado y ACLs: 1,200 usuarios necesitan `CAN USE` por grupo, y 456 casos de uso necesitan un presupuesto de concurrencia para toda la flota, no un almacén gigante.
 > ⏳ *Nota temporal: página sin fecha, consultada en oct 2026 — un resultado de cliente comunicado, no una garantía de 2026.*
 
@@ -678,7 +678,7 @@ Léelo como tres lecciones, no como una clasificación. **(A) solo es la más ba
 > **Reto.** Había superado a AWS MySQL, un almacén demasiado caro para mantener, y los informes de Tableau lentos por joins de 12 tablas ejecutados de cero en cada informe.
 > **Stack en AWS.** Databricks SQL sobre tablas Delta bronze/silver/gold, notebooks y **Tableau encima** — `Cloud: AWS` en la página de la historia.
 > **Resultado comunicado.** "**10x Faster time-to-insight · 30% Lower operational costs · 12% Increase in customer satisfaction**" (https://www.databricks.com/customers/punchh, página sin fecha, consultada 2026-10; historia de origen 2021).
-> **Cita.** "When you're joining 12 tables on the fly every time a report is run by a customer, the cost to generate the report can be high. Databricks not only increased ETL performance but lowered overall costs" — Phylis Savari, misma URL.
+> **Cita.** "Cuando unes 12 tablas sobre la marcha cada vez que un cliente ejecuta un informe, el coste de generar el informe puede ser alto. Databricks no solo mejoró el rendimiento del ETL, sino que redujo los costes generales" — Phylis Savari, misma URL.
 > **Encaje con esta lección.** Secciones 7 y 10 — el patrón de BI externo en su forma más pura: Tableau por ODBC contra un SQL warehouse, con tablas gold preunidas haciendo lo que de otro modo un warehouse más grande tendría que hacer a la fuerza.
 > ⏳ *Nota temporal: una historia de origen 2021 que aún se muestra en 2026 — enseña el mecanismo, data las métricas.*
 

@@ -29,7 +29,10 @@ export default function Footer({ lang, dict }: FooterProps) {
       { name: dict.library?.title || 'Library', href: `/${lang}/library`, icon: Library },
     ],
     subjects: [
-      { name: dict.footer.links.computerScience, href: `/${lang}/courses/` },
+      { name: dict.footer.links.computerScience, href: `/${lang}/courses` },
+      { name: dict.footer.links.engineering, href: `/${lang}/courses` },
+      { name: dict.footer.links.mathematics, href: `/${lang}/courses` },
+      { name: dict.footer.links.physics, href: `/${lang}/courses` },
     ],
     resources: [
       { name: dict.footer.links.documentation, href: `/${lang}/` },

@@ -6,6 +6,8 @@ Checks, for one course + one target locale:
   2. course.json carries a <locale> block with title + description
   3. every pair passes verify_translation.py (errors aggregated)
   4. every target lesson passes course-writer validate_lesson.py
+     (with --legacy: target error messages must be a subset of the EN
+      source's — legacy courses predate the validator and fail it themselves)
 
 Usage:
     python3 .opencode/skills/i18n-translator/scripts/check_locale_course.py \
@@ -19,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -33,10 +36,26 @@ def run(cmd: list[str]) -> int:
     return subprocess.run(cmd, cwd=REPO_ROOT, capture_output=True).returncode
 
 
+def validate_errors(path: Path) -> list[str]:
+    p = subprocess.run(
+        [sys.executable, str(VALIDATE_LESSON)],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        env={**os.environ, "OPENCODE_FILE_PATH": str(path)},
+    )
+    out = p.stdout + p.stderr
+    return [ln.split("LESSON ERROR: ", 1)[1]
+            for ln in out.splitlines() if "LESSON ERROR: " in ln]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--course", required=True, help="course dir, e.g. content/courses/aws-dea-c01")
     ap.add_argument("--locale", required=True, choices=("pt", "es"))
+    ap.add_argument("--legacy", action="store_true",
+                    help="parity mode: validate_lesson errors allowed if the EN "
+                    "source has the same errors (course predates the validator)")
     args = ap.parse_args()
 
     course = REPO_ROOT / args.course
@@ -64,7 +83,9 @@ def main() -> int:
     if not block.get("description"):
         errors.append(f"course.json missing {args.locale}.description")
 
-    # 3+4. per-pair verify + validator
+    # 3+4+5. per-pair verify + validator + quality_lint
+    QUALITY = Path(__file__).resolve().parent / "quality_lint.py"
+    import os
     warn_pairs = 0
     for name in sorted(set(en_names) & set(loc_names)):
         src = en_dir / name
@@ -74,17 +95,26 @@ def main() -> int:
             errors.append(f"verify FAILED: {args.locale}/{name}")
         elif rc_v == 1:
             warn_pairs += 1
-        rc_l = run([sys.executable, str(VALIDATE_LESSON), ], )
-        # validate_lesson reads OPENCODE_FILE_PATH
-        import os
-        env_rc = subprocess.run(
-            [sys.executable, str(VALIDATE_LESSON)],
-            cwd=REPO_ROOT,
-            capture_output=True,
-            env={**os.environ, "OPENCODE_FILE_PATH": str(tgt)},
-        ).returncode
-        if env_rc != 0:
-            errors.append(f"validate_lesson rc={env_rc}: {args.locale}/{name}")
+        if args.legacy:
+            t_errs = validate_errors(tgt)
+            s_errs = validate_errors(src)
+            for e in t_errs:
+                if e not in s_errs:
+                    errors.append(f"validate_lesson NEW error vs EN: {args.locale}/{name}: {e}")
+        else:
+            env_rc = subprocess.run(
+                [sys.executable, str(VALIDATE_LESSON)],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                env={**os.environ, "OPENCODE_FILE_PATH": str(tgt)},
+            ).returncode
+            if env_rc != 0:
+                errors.append(f"validate_lesson rc={env_rc}: {args.locale}/{name}")
+        rc_q = run([sys.executable, str(QUALITY), "--target", str(tgt)])
+        if rc_q == 2:
+            errors.append(f"quality_lint FAILED: {args.locale}/{name}")
+        elif rc_q == 1:
+            warn_pairs += 1
 
     if warn_pairs:
         warnings.append(f"{warn_pairs} pair(s) with verify warnings only")

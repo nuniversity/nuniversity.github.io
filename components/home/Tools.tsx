@@ -73,8 +73,8 @@ export default function Tools({ lang, dict, tools }: ToolsProps) {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Powerful Learning{' '}
-            <span className="text-gradient">Tools</span>
+            {dict.tools?.sectionTitle || 'Powerful Learning'}{' '}
+            <span className="text-gradient">{dict.tools?.sectionTitleHighlight || 'Tools'}</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             {dict.tools?.subtitle || 'Access professional-grade tools right in your browser. No downloads, no setup required.'}

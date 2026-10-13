@@ -3,7 +3,7 @@ title: "CI/CD para o Lakehouse Databricks na AWS: Declarative Automation Bundles
 description: "Entregue o lakehouse Databricks na AWS como software, em outubro de 2026: domine a pilha de quatro camadas (substrato Terraform, configuração de workloads com Declarative Automation Bundles, orquestração com GitHub Actions, identidade de service principal); domine o único databricks.yml com suas chaves de nível superior, globs de include, mapa de resources e targets dev/prod; aplique a semântica de development mode vs production mode (prefixos de nome em dev, schedules pausados, guardrails de branch e de caminho), presets e a precedência exata de resolução de variáveis (--var > BUNDLE_VAR_* > variable-overrides.json > variáveis do target > default); separe a identidade de deploy da identidade de execução com service principals em run_as; provisione o substrato AWS com o alias do provider Terraform databricks.mws em um módulo separado (mws credentials/networks/storage configurations/VPC endpoints/private access settings/workspaces) e o módulo do workspace (storage credentials, external locations, databricks_grants autoritativo); monte um pipeline de PR com databricks/setup-cli, bundle validate/deploy/run e workload identity federation OIDC para que nenhum personal access token entre no CI; teste com pytest, Databricks Connect, fixtures do pytester, o framework de testes de pipeline do DBR 18.1+ e dbt SlimCI; projete um metastore, catalogs com binding ISOLATED e 2–3 workspaces; com estudos de caso da NAB, Addepar e Mastercard, sete exemplos resolvidos, seis diagramas mermaid, quatro verificações interativas, uma caixa de atualização de outubro de 2026 e doze questões de prática."
 order: 16
 difficulty: "intermediate"
-duration: "75 minutes"
+duration: "75 min"
 ---
 # CI/CD para o Lakehouse Databricks na AWS: Declarative Automation Bundles, Terraform e GitHub Actions
 
@@ -711,7 +711,7 @@ Se qualquer elo estiver faltando — um job sem tag de bundle, um run cuja ident
 
 ---
 
-## Estudos de Caso do Mundo Real
+## Casos Reais
 
 > **📋 Caso A — National Australia Bank (bancário, Nuvem: AWS)**
 > **Desafio.** Um **warehouse Teradata de 26 anos** com ~1.000 casos de uso e 140 suítes de relatórios, mais ETL escrito à mão em Spark/SQL legado com "DML de 5.000–8.000 linhas e até 64 `union-all` por pipeline", mantido de forma inconsistente por 300–400 engenheiros.
@@ -729,7 +729,7 @@ Se qualquer elo estiver faltando — um job sem tag de bundle, um run cuja ident
 
 > **📋 Caso C — Mastercard (serviços financeiros, Nuvem: AWS)**
 > **Desafio.** Uma framework de governança que precisa provar confiança, acessibilidade e compliance em sistemas de dados enquanto aplicações de IA generativa vão para produção.
-> **Stack na AWS.** Databricks Data + AI Platform na AWS com governança do Unity Catalog; dois breakouts do AWS re:Invent 2024 — "Unified and Open Governance for Data and AI" e "Build and Deploy Production-Ready Generative AI Applications".
+> **Stack na AWS.** Databricks Data + AI Platform na AWS com governança do Unity Catalog; dois breakouts do AWS re:Invent 2024 — "Governança Unificada e Aberta para Dados e IA" e "Build and Deploy Production-Ready Generative AI Applications".
 > **Resultado relatado.** "**A Databricks foi destacada em 4 das 5 keynotes**" no re:Invent 2024 (https://www.databricks.com/blog/databricks-and-aws-partnership-took-reinvent-2024-storm, **2024-12-11**). **Nenhuma métrica numérica de cliente é publicada naquela página — cite as sessões, não números inventados.**
 > **Mapeia para esta lição.** Seções 4 e 9 — IA governada na AWS precisa da mesma cadeia de identidades que esta lição constrói: um SP em `run_as`, CI autenticado por OIDC e uma trilha de auditoria através das system tables. É também o caso de literacia de evidência: títulos de sessão são evidência qualitativa, e uma lição pode dizer o que as sessões *cobriram*, nunca o que *mediram*.
 > ⏳ *Nota temporal: recap da conferência datado de 2024-12-11 — evidência de sessão, não uma página de métricas.*

@@ -3,7 +3,7 @@ title: "Transações Delta Lake na AWS: Anatomia do Log, Time Travel, CDF, Clust
 description: "Domine o mecanismo do Delta Lake sob cada tabela Databricks-on-AWS: o conjunto de ações do _delta_log (add/remove/metaData/protocol/txn/commitInfo) e a anatomia do checkpoint, concorrência otimista com leituras de snapshot e escritas WriteSerializable, time travel SQL (VERSION AS OF, TIMESTAMP AS OF, DESCRIBE HISTORY) contra a divisão de retenção de 7 dias de dados versus 30 dias de log, change data feed legado versus automático com consultas table_changes e semântica de _change_type, um exemplo resolvido de MERGE INTO podado para a camada silver com restrições CHECK aplicadas, OPTIMIZE/ZORDER versus liquid clustering (CLUSTER BY, até quatro chaves, protocolo 3/7) com veredito comparativo, a matemática de retenção do VACUUM sobre contagens reais de bytes e o risco de atraso de streaming, compatibilidade de protocolo e de table features, tabelas gerenciadas versus externas no S3, seis exemplos resolvidos, cinco diagramas mermaid, quatro verificações interativas, estudos de caso da Rivian e da Comcast na AWS, uma caixa de atualização de outubro de 2026 e doze questões de prática."
 order: 4
 difficulty: "intermediate"
-duration: "70 minutes"
+duration: "70 min"
 ---
 # Transações Delta Lake na AWS: Anatomia do Log, Time Travel, CDF, Clustering e VACUUM
 
@@ -384,7 +384,7 @@ Nota de custo:
 
 O formato dessa curva é o argumento inteiro: bin packing (menores arquivos e mais poucos) remove o imposto de listagem; o clustering (arquivos ordenados pelas chaves de filtro) então deixa o data skipping cortar o scan. Os segundos exatos são um cenário ilustrativo de compactação — os *mecanismos* são os documentados: data skipping baseado em estatísticas sobre as primeiras 32 colunas, alvos de compactação de 128 MB e poda em granularidade de arquivo sobre as chaves com clustering.
 
-> **Veredito comparativo — particionamento / ZORDER versus liquid clustering (em outubro de 2026)**
+> **Veredito Comparativo — particionamento / ZORDER versus liquid clustering (em outubro de 2026)**
 > - **Escolha liquid clustering (`CLUSTER BY`)** para todas as tabelas novas, conforme a documentação atual: chaves de filtro de alta cardinalidade (customer_id, event_id), chaves que precisam mudar sem uma reescrita da tabela inteira, tabelas orientadas a streaming e tudo que for gerenciado no UC com predictive optimization. Ele substitui tanto o particionamento quanto o ZORDER, mantém o protocolo em reader 3 / writer 7 e marca 2.5x de clustering mais rápido que o ZORDER em um workload de DW de 1 TB (2023-06-29) com adoção em produção "incluindo dezenas com tabelas na escala de petabyte" (2026-01-06).
 > - **O particionamento ainda tem um nicho legítimo**: tabelas ≥ 1 TB com um filtro *estável e de baixa cardinalidade* (uma data que você sempre poda, uma região na qual você sempre restringe) em que a ferramenta em nível de diretório fora da Databricks (compactação externa, leitores de terceiros) precisa do layout — e apenas se cada partição tiver ≥ 1 GB (docs, 2026-09-11). Abaixo de 1 TB, não particione.
 > - **ZORDER é legado.** Mantenha-o apenas em tabelas pré-existentes que você ainda não migrou; a documentação recomenda liquid clustering; nunca combine `ZORDER` com `CLUSTER BY` ("não compatíveis"). Migre as chaves via `ALTER TABLE ... CLUSTER BY` + `OPTIMIZE FULL`, ou `REPLACE PARTITIONED BY WITH CLUSTER BY` no DBR 18.1+.
@@ -525,7 +525,7 @@ Regras que importam especificamente na AWS:
 
 ---
 
-## Estudos de Caso do Mundo Real
+## Casos Reais
 
 > **📋 Caso A — Rivian (veículos elétricos, Cloud: AWS)**
 > **Desafio.** Terabytes de dados de veículos e de campo por dia de mais de 70,000 veículos, com ferramentas legadas que "lutavam para escalar pipelines de forma econômica e gastavam recursos significativos em manutenção".

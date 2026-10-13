@@ -3,7 +3,7 @@ title: "Otimização de Desempenho na Databricks/AWS: Liquid Clustering, Layout 
 description: "Otimize um lakehouse Databricks na AWS camada por camada: tamanhos de arquivo alvo (auto-optimize de 128 MB, piso de autotune de 256 MB, teto manual do OPTIMIZE de 1 GiB) e a escada dos arquivos pequenos; a decisão de particionamento (<1 TB nunca, 1-100 TB clustering, >=100 TB talvez) com a proteção de >=1 GB por partição; liquid clustering a fundo (CLUSTER BY / CLUSTER BY AUTO, até quatro chaves, limiares de clustering na escrita, OPTIMIZE incremental vs OPTIMIZE FULL, idempotência do bin packing) contra o caminho legado partição+ZORDER em uma comparação resolvida de OPTIMIZE vs CLUSTER BY com um gráfico de latência antes/depois; data skipping e estatísticas por arquivo; padrões do AQE (200 partições de shuffle, broadcast de 30 MB em runtime, fator de skew 5x, advisory de 64 MB), escada de broadcast/skew/salting com SQL real; Photon por carga de trabalho; dimensionamento resize-vs-scale do Databricks SQL warehouse e os níveis de cache de resultado/disco/Spark; profile de query e profiling na Spark UI com um cálculo resolvido de partições de shuffle; sete exemplos resolvidos, sete diagramas mermaid, cinco verificações interativas, estudos de caso de Comcast, Rivian e Punchh na AWS, uma caixa de atualização de outubro de 2026 e doze questões de prática."
 order: 14
 difficulty: "intermediate"
-duration: "75 minutes"
+duration: "75 min"
 ---
 # Otimização de Desempenho na Databricks/AWS: Liquid Clustering, Layout de Arquivos, Skew e Ajuste de Warehouse
 
@@ -617,7 +617,7 @@ Dois recursos de 2026 tiram trabalho do seu runbook — mas só se você souber 
 
 **Predictive optimization** "roda automaticamente `OPTIMIZE`, `VACUUM` e `ANALYZE` em tabelas gerenciadas do Unity Catalog (Delta Lake e Iceberg)", está "habilitado por padrão para contas criadas em ou depois de **11 de novembro de 2024**" com o rollout gradual das contas existentes "esperado para ser concluído até **agosto de 2026**", roda em compute **serverless** cobrado como um SKU de jobs serverless, e — a pegadinha — "**o `OPTIMIZE` não roda `ZORDER` quando executado pelo predictive optimization. Em tabelas que usam Z-order, o predictive optimization ignora arquivos Z-ordered.**" Ele se aplica **apenas a tabelas gerenciadas**; tabelas externas continuam com a escada manual das seções 2–4. Observe-o com `DESCRIBE TABLE EXTENDED … AS JSON` → `predictive_optimization_evaluations`, o filtro "Automatic runs" do Catalog Explorer History, ou `system.storage.predictive_optimization_operations_history`.
 
-**Materialized views** são a contraparte da camada de serving: "uma view onde resultados pré-computados ficam disponíveis para consulta e podem ser atualizados para refletir mudanças na entrada. **Todas as materialized views são suportadas por um pipeline de ETL**", criadas "usando um **SQL warehouse Pro ou Serverless**, ou dentro de um pipeline", atualizadas por **pipelines serverless do Lakeflow**, com a saída cacheada materializada em armazenamento de nuvem. A elegibilidade para refresh *incremental* é verificável antes de você commitar: `EXPLAIN CREATE MATERIALIZED VIEW …` (DBR 17.3+) relata "The Materialized View can be incrementally refreshed" ou não — um filtro/projeção/agregação sobre Delta se qualifica, `LIMIT` e fontes não-Delta (`INPUT_NOT_IN_DELTA`) não se qualificam, e uma expectation dentro da definição força um refresh **completo**. Tanto materialized views quanto streaming tables aceitam liquid clustering: "O liquid clustering se aplica a streaming tables e materialized views."
+**Materialized views** são a contraparte da camada de serving: "uma view onde resultados pré-computados ficam disponíveis para consulta e podem ser atualizados para refletir mudanças na entrada. **Todas as materialized views são suportadas por um pipeline de ETL**", criadas "usando um **SQL warehouse Pro ou Serverless**, ou dentro de um pipeline", atualizadas por **pipelines serverless do Lakeflow**, com a saída cacheada materializada em armazenamento de nuvem. A elegibilidade para refresh *incremental* é verificável antes de você commitar: `EXPLAIN CREATE MATERIALIZED VIEW …` (DBR 17.3+) relata "a Materialized View pode ser atualizada de forma incremental" ou não — um filtro/projeção/agregação sobre Delta se qualifica, `LIMIT` e fontes não-Delta (`INPUT_NOT_IN_DELTA`) não se qualificam, e uma expectation dentro da definição força um refresh **completo**. Tanto materialized views quanto streaming tables aceitam liquid clustering: "O liquid clustering se aplica a streaming tables e materialized views."
 
 ---
 
@@ -662,7 +662,7 @@ Dois recursos de 2026 tiram trabalho do seu runbook — mas só se você souber 
 
 ---
 
-## Estudos de Caso do Mundo Real
+## Casos Reais
 
 > **📋 Caso A — Comcast (comunicações e mídia, Nuvem: AWS)**
 > **Desafio.** Petabytes de telemetria e bilhões de interações de voz de mais de 20 milhões de remotas de voz, com pipelines frágeis, dor de ingestão de arquivos pequenos e centenas de modelos para implantar em nuvem, on-prem e edge.

@@ -117,6 +117,15 @@
     },
     "cta": "Descubra todos os recursos"
   },
+  "featured": {
+    "title": "Cursos em",
+    "titleHighlight": "Destaque"
+  },
+  "stats": {
+    "title": "Junte-se à Nossa",
+    "titleHighlight": "Comunidade",
+    "subtitle": "Milhares de estudantes confiam na NUniversity para avançar em suas carreiras e conhecimento."
+  },
   "contact": {
     "title": "Vamos",
     "titleHighlight": "Colaborar!?",
@@ -177,7 +186,9 @@
       "title": "Mantenha-se Atualizado",
       "description": "Receba os últimos cursos, ferramentas e recursos de aprendizado.",
       "placeholder": "Digite seu email",
-      "button": "Inscrever-se"
+      "button": "Inscrever-se",
+      "successTitle": "Você está inscrito!",
+      "successMessage": "Obrigado por se inscrever. Manteremos você atualizado sobre novos cursos e ferramentas."
     },
     "copyright": "NUniversity: Capacitando Mentes, Moldando Futuros.",
     "rights": "Todos os direitos reservados",
@@ -277,7 +288,8 @@
       "software_engineering": "Engenharia de Software",
       "cloud_computing": "Computação em Nuvem",
       "artificial_intelligence": "Inteligência Artificial",
-      "mathematics": "Matemática e Estatística"
+      "mathematics": "Matemática e Estatística",
+      "uncategorized": "Sem Categoria"
     },
     "no_results": "Nenhum curso encontrado.",
     "no_courses": "Nenhum curso encontrado.",
@@ -549,7 +561,9 @@
           "text": "Use modelos maiores para tarefas complexas ou raciocínio. Claude para codificar, ChatGPT para documentações, Gemini para matemática, lógica e raciocínio."
         }
       }
-    }
+    },
+    "sectionTitle": "Poderosas Ferramentas de",
+    "sectionTitleHighlight": "Aprendizado"
   },
   "roadmaps": {
     "title": "Roadmaps",

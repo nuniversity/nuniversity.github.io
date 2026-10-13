@@ -80,3 +80,69 @@ python3 .opencode/skills/i18n-translator/scripts/check_locale_course.py \
 ```
 Exit 2 = fix before touching CI. Exit 0/1 = ready to add
 `<course>:pt` to the CI loop in `.github/workflows/nextjs.yml`.
+
+## 12. `quality_lint [english-quote]` — English quote left mid-paragraph
+
+The most common shipped defect (204 pt + 330 es hits on first dbl audit;
+56/89 real doc-quote spans). A translated paragraph still contains a verbatim
+English excerpt: `se persisten «in a scalable key-value store (RocksDB)…»`.
+
+Fix: translate the span, keep the citation tail and product names:
+`se persistem "em um store chave-valor escalável (RocksDB) no checkpoint location"`
+`(docs .../auto-loader, 2026-09-11)`. Never "fix" by deleting the quote.
+The check: quoted span ≥6 English words, stopword ratio ≥0.33, outside code.
+
+## 13. `quality_lint [case-studies-heading|updates-heading|did-you-know|verdict-heading]`
+
+Recurring headings translated freely per lesson → 4 ES variants of the same
+section (`Casos de la vida real`, `Casos de estudio del mundo real`, …) and
+two ES stamp variants (`(a octubre…)` vs `(en octubre…)`). Root cause was the
+template teaching `(a outubro de 2026)` — now locked. Fix mechanically with a
+`str.replace` sweep over the locale dir, then re-run quality_lint until 0.
+Canonical strings: glossary §Locked heading formulas.
+
+## 14. `quality_lint [duration-format]`
+
+Frontmatter `duration: "75 minutes"` is a **rendered UI string** — it must be
+localized to `"75 min"` (both pt and es). The verifier only compares the
+number. Sweep: `re.sub(r'^duration: "(\d+) minutes?"$', r'duration: "\1 min"',
+text, flags=re.M)` across `*/pt/*.md` and `*/es/*.md`.
+
+## 15. `quality_lint [vosotros-form]`
+
+ES file uses Spain-register verbs (`acabaréis`, `vosotros`). Contract is
+neutral tú: `acabarás`. Watch for the false positive `dieciséis` (ends in
+`-éis`; the linter whitelists it).
+
+## 16. Whole-course gate is now three tools per file
+
+```bash
+# per file: validate_lesson (rc 0) + verify_translation (rc 0/1) + quality_lint (rc 0)
+# one command runs all three plus parity:
+python3 .opencode/skills/i18n-translator/scripts/check_locale_course.py \
+  --course content/courses/<slug> --locale es
+```
+`OK: … parity + gates green` (rc 0) is the only acceptable final state;
+rc 1 only for documented verify warnings; rc 2 = fix before CI.
+
+## 17. Legacy course fails every gate even when the translation is perfect
+
+The 10 `intro-to-software-engineering` roadmap courses (and `processes-flowchart`)
+predate the validator: their **EN sources** fail `validate_lesson` (0 practice
+questions) and predate the dual-heading/duration rules. Do not "fix" the target
+by inventing sections EN does not have — use parity mode:
+
+```bash
+# per file: verify (source-aware) + quality_lint (auto EN-parity) are hard gates;
+# validate: diff LESSON ERROR lines vs the EN source — target ⊆ source
+# whole course:
+python3 .opencode/skills/i18n-translator/scripts/check_locale_course.py \
+  --course content/courses/processes-flowchart --locale es --legacy
+```
+
+Symptoms of mode mismatch: `quality_lint [dual-headings]` on a file whose EN
+source has no Practice Questions (source not derived → check the order-prefix
+fallback), or `check_locale_course` failing `validate_lesson rc=2` for errors
+the EN file also has (missing `--legacy`). ES targets use
+`## Conclusiones Clave (Key Takeaways)` and `duration: "N min"` — the shipped
+PT sibling's `## Principais Conclusões` / `"30 minutos"` predates the gates.

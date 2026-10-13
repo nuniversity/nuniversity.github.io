@@ -3,7 +3,7 @@ title: "Qualidade de Dados no Lakehouse da Databricks: Constraints, Expectations
 description: "Domine ponta a ponta a pilha de qualidade de dados de outubro de 2026 na Databricks na AWS: Delta NOT NULL e CHECK constraints aplicados com validação de histórico no momento da adição, bumps de writer protocol e o caminho de remoção via DROP FEATURE; os seis decorators de expectation do Lakeflow verificados e as ações warn/drop/fail, incluindo por que fail não grava métricas; métricas de eventos flow_progress e a tabela system.lakeflow_pipeline_events_preview.pipeline_events (Beta); o padrão de quarentena documentado com sua partição is_quarantined e regras NULL-safe; o runbook alert → replay com SQL de replay via MERGE por chave, gates de qualidade run_if e webhooks jobs.on_failure; Data quality monitoring sob seu par de nomes atual verificado - anomaly detection (frescor, completude, percent null, slicing, health indicators) mais data profiling, o antigo Lakehouse Monitoring - com atribuição de cobrança DATA_QUALITY_MONITORING; suíte DQ resolvida em uma tabela silver, sete exemplos resolvidos, cinco diagramas mermaid, quatro verificações interativas, estudos de caso de NAB e Burberry na AWS, uma caixa de atualização de outubro de 2026 e doze questões de prática."
 order: 10
 difficulty: "intermediate"
-duration: "75 minutes"
+duration: "75 min"
 ---
 # Qualidade de Dados no Lakehouse da Databricks: Constraints, Expectations, Quarentena e Monitoramento
 
@@ -96,7 +96,7 @@ flowchart TD
 - **Constraints** não podem verificar unicidade nem integridade referencial: `CHECK` proíbe "User-defined functions. Aggregate functions. Window functions. Functions returning multiple rows" (docs .../tables/constraints, **2026-09-11**) — e as declarações de primary key, foreign key e `UNIQUE` são "informational only and aren't enforced" (mesma página).
 - **Expectations** não podem chamar Python, serviços externos nem subqueries (docs .../ldp/expectations, **2026-09-11**) — verificações cross-table pertencem a um pipeline de validação ou a um notebook.
 - **Quarentena** não tem automação de plataforma: "nothing in the platform auto-replays or auto-expires quarantine tables" — o seu runbook é dono disso (prática do curso; consistente com o padrão documentado).
-- **Monitoring** não pode aplicar (enforce): ele "does not modify any tables it monitors" (docs, **2026-09-11**).
+- **Monitoring** não pode aplicar (enforce): ele "não modifica nenhuma das tabelas que ele monitora" (docs, **2026-09-11**).
 - **Jobs** não veem linhas: eles veem *estados de task* e *métricas que você publica para eles*.
 
 - **📚 Você sabia?** O plano de detecção inteiro é cobrado sob um único produto nomeado: data quality monitoring "runs on serverless compute and is billed as serverless DBUs under the `DATA_QUALITY_MONITORING` billing product" (docs .../data-quality-monitoring, **2026-09-11**). Para resultados criados **a partir de fevereiro de 2026** você encontra essas linhas com `billing_origin_product = 'DATA_QUALITY_MONITORING'`; linhas de profiling mais antigas ainda estão marcadas com `custom_tags['LakehouseMonitoring'] = 'true'` — o nome antigo do produto sobrevive *dentro dos dados de cobrança*, e é exatamente por isso que esta lição ensina os dois nomes.
@@ -107,11 +107,11 @@ flowchart TD
 
 ### 2.1 Os dois tipos aplicados, e o que "aplicado" custa
 
-"Enforced constraints verify data integrity before adding rows to a table" e "When a constraint is violated, the transaction fails with an error" (docs .../tables/constraints, **2026-09-11**). Apenas dois tipos são aplicados: **`NOT NULL`** e **`CHECK`**. Todo o resto — `PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE` — é metadata para o otimizador ("aren't enforced"; PK/FK disponíveis no DBR **13.3 LTS+** para tabelas Unity Catalog e Delta, **GA no DBR 15.2+**; `UNIQUE` está em **Public Preview** no Databricks SQL e no DBR **18.2+**).
+"Constraints aplicadas verificam a integridade dos dados antes de adicionar linhas a uma tabela" e "Quando uma constraint é violada, a transação falha com um erro" (docs .../tables/constraints, **2026-09-11**). Apenas dois tipos são aplicados: **`NOT NULL`** e **`CHECK`**. Todo o resto — `PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE` — é metadata para o otimizador ("não são aplicadas"; PK/FK disponíveis no DBR **13.3 LTS+** para tabelas Unity Catalog e Delta, **GA no DBR 15.2+**; `UNIQUE` está em **Public Preview** no Databricks SQL e no DBR **18.2+**).
 
 Três fatos operacionais decidem como você faz o rollout das constraints:
 
-1. **A validação no momento da adição é real.** "Databricks verifies that all existing rows satisfy the constraint before adding a `NOT NULL` constraint to a table" — e o `ALTER TABLE ADD CONSTRAINT` "verifies that all existing rows satisfy the constraint before adding the constraint to the table." Você não pode encaixar uma constraint em uma tabela suja: repare ou coloque em quarentena o histórico primeiro.
+1. **A validação no momento da adição é real.** "O Databricks verifica que todas as linhas existentes satisfazem a constraint antes de adicionar uma constraint `NOT NULL` a uma tabela" — e o `ALTER TABLE ADD CONSTRAINT` "verifica que todas as linhas existentes satisfazem a constraint antes de adicionar a constraint à tabela." Você não pode encaixar uma constraint em uma tabela suja: repare ou coloque em quarentena o histórico primeiro.
 2. **O writer protocol se move.** "Adding a constraint upgrades the table writer protocol if the current writer version is less than 3" — clientes Delta externos mais antigos podem quebrar. Verifique seus consumidores antes do rollout de DQ.
 3. **A remoção é deliberada.** No DBR **15.4 LTS+** você remove um check constraint com `DROP FEATURE` — não com um `ALTER` casual.
 
@@ -185,12 +185,12 @@ Se o passo (0) retornar diferente de zero, o `ALTER TABLE` posterior falha com u
 
 Gêmeo SQL para datasets autoralados em SQL: `CONSTRAINT name EXPECT (expr)` com `ON VIOLATION DROP ROW` opcional ou `ON VIOLATION FAIL UPDATE`. Quatro cláusulas decidem o design de produção:
 
-1. "**Because `fail` causes the update to fail when an invalid record is detected, metrics are not recorded.**" Fail é uma placa de parada, não um instrumento de medição.
-2. "An expectation **name must be unique for a given dataset**" (reutilizável entre datasets).
+1. "**Como `fail` faz a atualização falhar quando um registro inválido é detectado, as métricas não são registradas.**" Fail é uma placa de parada, não um instrumento de medição.
+2. "O **nome de uma expectation deve ser único para um dado dataset**" (reutilizável entre datasets).
 3. Constraints são SQL puro: sem "Custom Python functions, External service calls, Subqueries referencing other tables."
 4. Gate de edição: "Core … doesn't require advanced features such as change data capture (CDC) or expectations. Pro … plus … CDC. Advanced … and includes **data quality constraints with expectations**" (docs .../ldp/configure-pipeline, **2026-10-01**).
 
-**Não existe decorator `expect_all_or_quarantine`** — nem sob `dp`, nem sob `dlt`. Existem exatamente seis; a quarentena é construída à mão na seção 5. Expectations se anexam a streaming tables, materialized views e temporary views (métricas de views são pouco confiáveis — "views are only calculated when queried"); sinks e fluxos `AUTO CDC FROM SNAPSHOT` não podem carregá-las.
+**Não existe decorator `expect_all_or_quarantine`** — nem sob `dp`, nem sob `dlt`. Existem exatamente seis; a quarentena é construída à mão na seção 5. Expectations se anexam a streaming tables, materialized views e temporary views (métricas de views são pouco confiáveis — "as views só são calculadas quando consultadas"); sinks e fluxos `AUTO CDC FROM SNAPSHOT` não podem carregá-las.
 
 ```mermaid
 flowchart LR
@@ -274,7 +274,7 @@ As duas estratégias de nomenclatura aparecem nos docs: uma expectation consolid
 
 ### 4.1 O contrato é um payload de evento, não uma coluna
 
-Os docs atuais definem métricas puramente como **payloads de eventos `flow_progress`**: "the metrics for the number of records that passed and failed an expectation are stored in the `details:flow_progress.data_quality.expectations` object. The metric for the number of dropped records is stored in the `details:flow_progress.data_quality` object" (docs .../ldp/monitor-event-logs, **2026-10-09**). O schema do array é publicado: `array<struct<name: string, dataset: string, passed_records: int, failed_records: int>>`, onde `dropped_records` conta as linhas que "failed one or more expectations".
+Os docs atuais definem métricas puramente como **payloads de eventos `flow_progress`**: "as métricas com a contagem de registros que passaram e falharam em uma expectation são armazenadas no objeto `details:flow_progress.data_quality.expectations`. A métrica com a contagem de registros descartados é armazenada no objeto `details:flow_progress.data_quality`" (docs .../ldp/monitor-event-logs, **2026-10-09**). O schema do array é publicado: `array<struct<name: string, dataset: string, passed_records: int, failed_records: int>>`, onde `dropped_records` conta as linhas que "falharam em uma ou mais expectations".
 
 Três superfícies de leitura, um contrato:
 
@@ -440,8 +440,8 @@ Qualquer material de curso dizendo "três tipos de monitor sob Lakehouse Monitor
 ### 6.2 O que cada capacidade entrega
 
 - **Anomaly detection** (docs **2026-10-09**, Public Preview): job em background por schema; resultados em **`system.data_quality_monitoring.table_results`**; health indicators (*Healthy / Unhealthy / Training / Error / Excluded / Not enabled*) no Catalog Explorer e em nós de lineage; "Smart scanning might delay the population of health indicators for some tables by up to **two weeks**"; extras Beta **percent null** e **completeness slicing** (até **3** colunas de slice, apenas onde uma coluna tem **≤ 50 valores distintos**); análise de causa raiz "uses Unity Catalog data lineage"; incidentes suportam "Assign to me" e "Not an issue" com atribuição persistindo por **7 dias**. Limitações: sem views nem foreign tables; **desabilitar apaga o job e todas as tabelas de resultado — irreversível**.
-- **Data profiling** (docs **2026-09-11**): três tipos de perfil — **Time series** (métricas ao longo de janelas de tempo), **Inference** (logs de requisição do modelo), **Snapshot** ("The complete table is processed with every refresh. The maximum table size for a snapshot profile is **4TB**"). Saída: "The profile metric table contains summary statistics … The drift metrics table contains statistics related to the data's drift over time", ambas tabelas Delta UC comuns mais um dashboard automático. Perfis time series e inference "only compute metrics over the last **30 days**". Requisitos: `USE CATALOG`, `USE SCHEMA`, `SELECT`, `MANAGE`; compute serverless para jobs. O blog de GA de 2024 recomenda habilitar **CDF** para profiling incremental em perfis time series/inference.
-- **Read-only por contrato**: monitoring "does not modify any tables it monitors, nor does it add overhead to any jobs that populate these tables" (docs, **2026-09-11**). Detecção não é enforcement.
+- **Data profiling** (docs **2026-09-11**): três tipos de perfil — **Time series** (métricas ao longo de janelas de tempo), **Inference** (logs de requisição do modelo), **Snapshot** ("A tabela completa é processada a cada refresh. O tamanho máximo de tabela de um perfil snapshot é **4TB**"). Saída: "A tabela de métricas do perfil contém estatísticas resumidas … a tabela de métricas de drift contém estatísticas relacionadas ao drift dos dados ao longo do tempo", ambas tabelas Delta UC comuns mais um dashboard automático. Perfis time series e inference "apenas calculam métricas dos últimos **30 dias**". Requisitos: `USE CATALOG`, `USE SCHEMA`, `SELECT`, `MANAGE`; compute serverless para jobs. O blog de GA de 2024 recomenda habilitar **CDF** para profiling incremental em perfis time series/inference.
+- **Read-only por contrato**: monitoring "não modifica nenhuma das tabelas que monitora, nem adiciona overhead a jobs que populam essas tabelas" (docs, **2026-09-11**). Detecção não é enforcement.
 
 ```mermaid
 flowchart LR
@@ -459,7 +459,7 @@ flowchart LR
     SA --> ON
 ```
 
-- **📚 Você sabia?** O tipo de perfil **snapshot** tem um teto duro — "**The maximum table size for a snapshot profile is 4TB**" — enquanto os perfis time series e inference apenas "compute metrics over the last 30 days" (docs .../data-profiling, **2026-09-11**). Auditorias de horizonte longo precisam, portanto, ou de uma tabela baseline exportada para comparação de drift, ou do histórico do event log fora da janela do perfil; a resposta dos docs para "eu preciso de mais de 30 dias" é literalmente "contact your Databricks account team."
+- **📚 Você sabia?** O tipo de perfil **snapshot** tem um teto duro — "**O tamanho máximo de tabela de um perfil snapshot é 4TB**" — enquanto os perfis time series e inference apenas "calculam métricas dos últimos 30 dias" (docs .../data-profiling, **2026-09-11**). Auditorias de horizonte longo precisam, portanto, ou de uma tabela baseline exportada para comparação de drift, ou do histórico do event log fora da janela do perfil; a resposta dos docs para "eu preciso de mais de 30 dias" é literalmente "entre em contato com o seu time de contas da Databricks."
 
 ---
 
@@ -477,7 +477,7 @@ Consumidores de máquina devem usar **webhooks definidos pelo usuário**: "If yo
 
 ### 7.2 Gates de qualidade: `run_if`, seis condições
 
-"Configure task dependencies (Run if)" (docs **2026-06-25**) oferece exatamente seis condições — `ALL_SUCCESS` (padrão), `AT_LEAST_ONE_SUCCESS`, `NONE_FAILED`, `ALL_DONE`, `AT_LEAST_ONE_FAILED`, `ALL_FAILED`. Semântica para ter decorada: com uma condição orientada para sucesso, uma task não atendida é marcada **`Upstream failed`**; com uma condição orientada para falha, ela é marcada **`Excluded`**; e "Upstream tasks with the `Excluded` result state are treated as successful when evaluating `Run if` conditions."
+"Configure task dependencies (Run if)" (docs **2026-06-25**) oferece exatamente seis condições — `ALL_SUCCESS` (padrão), `AT_LEAST_ONE_SUCCESS`, `NONE_FAILED`, `ALL_DONE`, `AT_LEAST_ONE_FAILED`, `ALL_FAILED`. Semântica para ter decorada: com uma condição orientada para sucesso, uma task não atendida é marcada **`Upstream failed`**; com uma condição orientada para falha, ela é marcada **`Excluded`**; e "As tasks upstream com o estado de resultado `Excluded` são tratadas como bem-sucedidas ao avaliar as condições `Run if`."
 
 ### 7.3 Exemplo resolvido E6 — o job alerta → replay (YAML de asset bundle)
 
@@ -530,11 +530,11 @@ flowchart TD
 
 A linha de roadmap do blog de 2026-02-04 — "**Filter and quarantine bad data**: Proactively identify bad data and prevent it from reaching consumers" — é um *item de roadmap*, não uma capacidade de plataforma entregue. Hoje, o loop é seu para rodar.
 
-- **📚 Você sabia?** Incidentes de anomaly detection são um workflow com data de validade: atribuições persistem por **7 dias**, "Recently Resolved Incidents" está em Beta, e o smart scanning "might delay the population of health indicators for some tables by up to **two weeks**" (docs .../anomaly-detection, **2026-10-09**) — então um schema recém-criado sem indicadores está em *Training*, não em *Healthy*. E o outro lado da moeda: "When you disable anomaly detection, the anomaly detection job and all anomaly detection tables and information are deleted. This action cannot be undone."
+- **📚 Você sabia?** Incidentes de anomaly detection são um workflow com data de validade: atribuições persistem por **7 dias**, "Recently Resolved Incidents" está em Beta, e o smart scanning "pode atrasar em até **duas semanas** a população de health indicators de algumas tabelas" (docs .../anomaly-detection, **2026-10-09**) — então um schema recém-criado sem indicadores está em *Training*, não em *Healthy*. E o outro lado da moeda: "Quando você desabilita o anomaly detection, o job de anomaly detection e todas as tabelas e informações de anomaly detection são apagados. Esta ação não pode ser desfeita."
 
 ### 7.5 Exemplo resolvido E7 — verificações de terceiros apenas nos caminhos oficialmente documentados
 
-**Great Expectations** é documentado pela própria GX para Databricks — `%pip install` em um notebook, Data Context / Expectation Suite / Checkpoint / Data Docs, metadata stores em DBFS ou UC Volumes (docs do fornecedor, acessados em 2026-10): não existe página de integração first-party em `docs.databricks.com`, então ensine-o como "instale a biblioteca OSS em um job cluster e rode validações como uma task de job", nunca como um recurso de plataforma. Os **testes de dbt** têm um caminho oficial de Databricks: o adapter mantido pela Databricks **`dbt-databricks`** compila `data_tests: [unique, not_null, accepted_values, relationships]` em SQL de contagem de linhas reprovadas contra o Unity Catalog, e "when you run `dbt test`, dbt iterates through your YAML files … If this number is 0, then the test is successful" (quickstart do dbt, **2026-10-07**) — útil quando a camada de transformação é dbt, redundante com constraints/expectations quando é Lakeflow. **Deequ** não tinha caminho de integração oficial com Databricks documentado em outubro de 2026 — apenas padrão de comunidade.
+**Great Expectations** é documentado pela própria GX para Databricks — `%pip install` em um notebook, Data Context / Expectation Suite / Checkpoint / Data Docs, metadata stores em DBFS ou UC Volumes (docs do fornecedor, acessados em 2026-10): não existe página de integração first-party em `docs.databricks.com`, então ensine-o como "instale a biblioteca OSS em um job cluster e rode validações como uma task de job", nunca como um recurso de plataforma. Os **testes de dbt** têm um caminho oficial de Databricks: o adapter mantido pela Databricks **`dbt-databricks`** compila `data_tests: [unique, not_null, accepted_values, relationships]` em SQL de contagem de linhas reprovadas contra o Unity Catalog, e "quando você roda `dbt test`, o dbt percorre os seus arquivos YAML … se esse número for 0, o teste é bem-sucedido" (quickstart do dbt, **2026-10-07**) — útil quando a camada de transformação é dbt, redundante com constraints/expectations quando é Lakeflow. **Deequ** não tinha caminho de integração oficial com Databricks documentado em outubro de 2026 — apenas padrão de comunidade.
 
 ---
 
@@ -560,7 +560,7 @@ A linha de roadmap do blog de 2026-02-04 — "**Filter and quarantine bad data**
 8. **Regras não-total.** `amount >= 0` não rejeita NULL, e `NOT(...)` sobre um NULL não é um veredito sobre o qual você possa ramificar. Torne as regras total ou ramifique em uma flag explícita.
 9. **Quarentena crescendo silenciosamente.** Sem replay automático, sem expiração automática. Alerta por contagem + idade, lifecycle no prefixo S3, rode o runbook.
 10. **Drift no nome do produto de monitoring.** Lakehouse Monitoring = **data profiling**; checagens de freshness/volume = **anomaly detection** com thresholds aprendidos. O corte de UI de 2025-10-07 e o freeze de config de 2025-07-21 para novos clientes são as pistas.
-11. **Acreditar que monitoring aplica (enforce) qualquer coisa.** Ele "does not modify any tables it monitors" — apenas detecção + alerta.
+11. **Acreditar que monitoring aplica (enforce) qualquer coisa.** Ele "não modifica nenhuma das tabelas que ele monitora" — apenas detecção + alerta.
 12. **Pontos cegos de notificação.** Alertas em nível de job pulam tasks com retry (use notificações de task + mute-until-last-retry); alertas de streaming-backlog não cobrem pipeline tasks; corpos de Slack não têm schema estável — use webhooks definidos pelo usuário.
 
 ### Atualizações de 2026 (em outubro de 2026)
@@ -576,7 +576,7 @@ A linha de roadmap do blog de 2026-02-04 — "**Filter and quarantine bad data**
 
 ---
 
-## Estudos de Caso do Mundo Real
+## Casos Reais
 
 > **📋 Caso A — National Australia Bank (NAB) (banca, Cloud: AWS)**
 > **Desafio.** Um data warehouse Teradata de 26 anos, ETL escrito à mão em Spark/SQL legado com DML de 5.000–8.000 linhas e prática de engenharia inconsistente entre 300–400 engenheiros — qualidade era uma esperança de code review, não uma propriedade mensurável.

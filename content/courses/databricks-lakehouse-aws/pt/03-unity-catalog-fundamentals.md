@@ -3,7 +3,7 @@ title: "Fundamentos do Unity Catalog: Metastore, Hierarquia, Grants, Storage Cre
 description: "O núcleo de governança de uma lakehouse Databricks-on-AWS, ensinado como um sistema em operação: o metastore regional e como workspaces se vinculam a ele, o namespace de três níveis e os securables que ficam diretamente sob o metastore, a cadeia de privilégios (USE CATALOG para USE SCHEMA para SELECT), herança versus propriedade, deny-by-default com as suas duas exceções documentadas de abertura padrão, workspace bindings que vencem grants, um setup completo e resolvido de storage credential e external location no S3 (trust policy com o external ID obrigatório, CREATE STORAGE CREDENTIAL, CREATE EXTERNAL LOCATION, os quatro grants, uma tabela Delta externa), a matemática de colocação gerenciada versus externa com caminhos __unitystorage com hash, a semântica de DROP e UNDROP, e a escada de migração do hive_metastore (federar e depois SET MANAGED, UCX, SYNC, upgrade wizard, CREATE TABLE CLONE) - com sete exemplos resolvidos, seis diagramas, quatro verificações interativas, material de caso da Amgen, da Rivian e da nCino, uma caixa de atualização de outubro de 2026 com fonte e doze questões de prática."
 order: 3
 difficulty: "intermediate"
-duration: "60 minutes"
+duration: "60 min"
 ---
 # Fundamentos do Unity Catalog: Metastore, Hierarquia, Grants, Storage Credentials e External Locations
 
@@ -185,7 +185,7 @@ graph TB
 
 Dois fatos estruturais que os estudantes perdem repetidamente:
 
-- **Os contêineres são o catálogo e o schema.** "Todo objeto nessa hierarquia é um objeto securable", e os privilégios concedidos em um pai "se aplicam automaticamente a todos os objetos filhos atuais e futuros" — mas esse motor de herança começa no **catálogo**, não no metastore (permissions-concepts, 23 de ago de 2026; blog de privilégios: "The highest level object that privileges are inherited from is the catalog", 2023-05-05).
+- **Os contêineres são o catálogo e o schema.** "Todo objeto nessa hierarquia é um objeto securable", e os privilégios concedidos em um pai "se aplicam automaticamente a todos os objetos filhos atuais e futuros" — mas esse motor de herança começa no **catálogo**, não no metastore (permissions-concepts, 23 de ago de 2026; blog de privilégios: "O objeto de nível mais alto do qual os privilégios são herdados é o catálogo", 2023-05-05).
 - **Storage credentials e external locations *não* ficam sob um catálogo.** Eles vivem em nível de metastore, e é por isso que criar um deles é uma operação com escopo de metastore e por isso que você concede neles com a sintaxe `ON STORAGE CREDENTIAL …` / `ON EXTERNAL LOCATION …` em vez de um nome de três níveis.
 
 O Hive metastore legado é *aditivo*: "O metastore do Unity Catalog é aditivo, significando que ele pode ser usado junto com o Hive metastore por workspace no Databricks. O Hive metastore aparece como um catálogo de topo chamado `hive_metastore` no namespace de três níveis" (docs, *Work with the legacy Hive metastore*, acesso em 2026-10). A seção 8 transforma esse fato em um plano de migração.
@@ -746,7 +746,7 @@ Checklist de corte (página de upgrade, 30 de jul de 2026)
 
 ---
 
-## Estudos de Caso do Mundo Real
+## Casos Reais
 
 A Databricks publica resultados de governança, não matrizes de grants. Todo número abaixo é **afirmado pelo cliente ou pela Databricks, não auditado**, com a sua URL e data para você conferir — o ponto examinável é o *padrão*, não o marketing.
 

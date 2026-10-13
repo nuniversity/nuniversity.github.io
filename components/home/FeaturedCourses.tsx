@@ -85,8 +85,8 @@ export default function FeaturedCourses({ lang, dict, courses }: FeaturedCourses
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Featured{' '}
-            <span className="text-gradient">Courses</span>
+            {dict.featured?.title || 'Featured'}{' '}
+            <span className="text-gradient">{dict.featured?.titleHighlight || 'Courses'}</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             {dict.courses?.subtitle || 'Start your learning journey with our most popular courses, designed by industry experts.'}

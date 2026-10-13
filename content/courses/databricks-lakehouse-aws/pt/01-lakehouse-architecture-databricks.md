@@ -3,7 +3,7 @@ title: "Arquitetura Lakehouse no Databricks: Planos, Pilares e o Substrato AWS"
 description: "Construa o modelo mental do qual as outras dezesseis lições dependem - o que um lakehouse realmente é (transações ACID, aplicação de schema e Parquet aberto no S3), como um workspace Databricks se divide em um plano de controle que você nunca vê e um plano de compute clássico/serverless que roda na sua própria VPC atrás de secure cluster connectivity, por que Delta Lake e Unity Catalog são os dois pilares (log de transações mais um namespace securable de três níveis com um metastore por região da AWS), onde seus dados realmente vivem versus o bucket de armazenamento do workspace que você jamais deve apagar, o mapa completo de workloads ingest-curate-serve-ML com sua tabela de workload para compute, a tabela de preços de DBU e as duas faturas em outubro de 2026, seis exemplos resolvidos calculados à mão (DBU de jobs, mês de warehouse, Athena versus Databricks SQL, landing zone no S3, dimensionamento de subnet, clássico versus serverless), a comparação com a stack nativa da AWS Glue/Athena/Redshift, Snowflake e Hadoop on-prem, uma caixa de atualizações de 2026, três estudos de caso nomeados da AWS e doze questões de prática."
 order: 1
 difficulty: "intermediate"
-duration: "75 minutes"
+duration: "75 min"
 ---
 # Arquitetura Lakehouse no Databricks: Planos, Pilares e o Substrato AWS
 
@@ -636,7 +636,7 @@ O ponto estratégico é o da própria Databricks: um lakehouse proprietário arm
 
 ---
 
-## Estudos de Caso do Mundo Real
+## Casos Reais
 
 > **📋 Caso A — Biogen (farmacêutica, Cloud: AWS)**
 > **Desafio.** A informática on-premises não conseguia escalar para petabytes de genômica: "um pipeline que antes levava 2 semanas para processar 700,000 variantes".

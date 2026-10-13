@@ -3,7 +3,7 @@ title: "Databricks SQL Warehouses e a Camada de Serviço: Serverless, Escalabili
 description: "Execute a camada de serviço de um lakehouse de dados Databricks na AWS: escolha entre SQL warehouses serverless, pro e classic na linha de out 2026 (Photon nos três, Predictive IO em serverless+pro, Intelligent Workload Management só em serverless; inícios frios de 2-6 segundos vs ~4 minutos); dimensione uma frota com a regra de 1 cluster por 10 consultas concorrentes, o teto de fila de 1.000 consultas e o teto de API de 40 clusters; configure o auto-stop (45/10 pro-classic, 10/5/1 serverless) contra a regra documentada de cobrança por ociosidade; construa dashboards AI/BI, alertas e consultas salvas depois do fim do suporte aos dashboards legados em 2025-04-10; conecte Tableau, Power BI, Excel e ferramentas do Partner Connect pelos drivers ODBC/JDBC do Databricks; e consulte sistemas remotos por foreign catalogs do Lakehouse Federation. Sete exemplos resolvidos com matemática real de dimensionamento, um rascunho de custo DBU + EC2 em duas colunas com tarifas de out 2026 e configuração de conexão de BI; cinco diagramas mermaid, quatro verificações interativas, doze questões de prática, estudos de caso de NAB, Punchh e nCino na AWS, uma caixa de atualização de outubro de 2026 e um veredito classic vs pro vs serverless."
 order: 8
 difficulty: "intermediate"
-duration: "75 minutes"
+duration: "75 min"
 ---
 # Databricks SQL Warehouses e a Camada de Serviço: Serverless, Escalabilidade, Dashboards, BI e Federação
 
@@ -643,7 +643,7 @@ Leia como três lições, não como um ranking. **(A) só é o mais barato se vo
 
 ---
 
-> **Veredito comparativo — warehouses SQL classic vs pro vs serverless (AWS, em out de 2026)**
+> **Veredito Comparativo — warehouses SQL classic vs pro vs serverless (AWS, em out de 2026)**
 > - **Classic — $0.22/DBU mais cobranças de instância na nuvem, início de ~4 minutos.** O padrão da API e o piso da linha: só Photon, sem Predictive IO, sem IWM. **Não pode federar, não pode criar materialized views nem tabelas streaming a partir do SQL, não pode rodar AI Functions.** Roda na sua VPC com cluster policies, configurações de spot e o cache de disco no SSD local i3. Escolha quando a carga é SQL simples em forma estável, o custo por DBU é a restrição que decide e nenhum dos três recursos faltantes se aplica — e configure o auto-stop para **10 minutos**, não 45.
 > - **Pro — $0.55/DBU mais cobranças de instância na nuvem, início de ~4 minutos.** Tudo que o classic tem **mais Predictive IO**, e a escolha documentada quando "você tem rede definida personalizada e quer se conectar a bancos de dados na sua rede" — isto é, federação de dentro da sua VPC. Ainda são suas instâncias, seu Auto-AZ, suas políticas, sua coluna de EC2. Escolha quando o alcance da rede privada pesa mais que a latência do início frio.
 > - **Serverless — $0.70/DBU, máquina incluída, início de 2–6 segundos.** O padrão documentado para a maioria das cargas: **Photon + Predictive IO + IWM**, sem cluster policies (logo, sem guardrails baseados em política também), sem VPC gerenciada pelo cliente, sem IPs públicos, padrão de auto-stop de **10 minutos**, cobrança por segundo sem cobrança por ociosidade além da janela de auto-stop. Escolha, a menos que alguma bifurcação do E1 diga o contrário.
@@ -664,7 +664,7 @@ Leia como três lições, não como um ranking. **(A) só é o mais barato se vo
 
 ---
 
-## Estudos de Caso do Mundo Real
+## Casos Reais
 
 > **📋 Caso A — NAB (National Australia Bank, bancos, Cloud: AWS)**
 > **Desafio.** Um **data warehouse Teradata de 26 anos** carregando ~1.000 casos de uso e ~140 suítes de relatórios, com ETL escrito à mão e prática inconsistente entre 300–400 engenheiros.

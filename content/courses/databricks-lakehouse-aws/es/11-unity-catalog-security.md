@@ -3,7 +3,7 @@ title: "Seguridad de Unity Catalog: controles de fila y columna, etiquetas, audi
 description: "Gobernanza de un lakehouse de Databricks en AWS tal como la describe la documentación de octubre de 2026: la cadena de lectura de tres privilegios y la herencia descendente desde el catálogo; los tres mecanismos de fila/columna (vistas dinámicas, filtros de fila nativos sobre la tabla y máscaras de columna, políticas ABAC dirigidas por etiquetas) con una política de vista dinámica completa construida sobre session_user() e is_account_group_member(); el DDL nativo SET MASK / SET ROW FILTER con sus suelos de DBR 12.2 LTS y 15.4 LTS y la trampa de fallar de forma segura; etiquetas gestionadas, autoetiquetas class.* de Data Classification y DDL de etiquetas; el pack de auditoría de las system tables (system.access.audit, system.query.history, system.billing.usage y el par de lineage) con cifras verificadas de retención y latencia; el lineage a nivel de columna y sus vacíos con nombre; las tres generaciones de secretos, incluidos los secretos externos respaldados por AWS Secrets Manager; OAuth M2M frente a PAT heredados, ámbitos de los roles de administrador, listas de acceso por IP frente a ingreso basado en contexto, alcance FedRAMP/HIPAA; un veredicto TACL de hive_metastore frente a Unity Catalog; los casos de gobernanza de Block, Amgen y nCino; un recuadro de actualización de octubre de 2026, seis ejemplos resueltos, cinco diagramas, cuatro comprobaciones interactivas y doce preguntas de práctica."
 order: 11
 difficulty: "intermediate"
-duration: "75 minutes"
+duration: "75 min"
 ---
 # Seguridad de Unity Catalog: controles de fila y columna, etiquetas, auditoría, lineage y secretos
 
@@ -530,7 +530,7 @@ El cifrado es el último perímetro y, en AWS, tiene tres puntos de contacto que
 11. **Asumir que el lineage de columna está completo.** Las lecturas por ruta, los inserts literales, los internos de UDF, los renombres y el historial anterior a 2024-09-01 quedan fuera de alcance.
 12. **Tratar las etiquetas como almacén secreto.** Los datos de las etiquetas «se guardan en texto plano y pueden replicarse globalmente».
 
-### Actualizaciones 2026 (a octubre de 2026)
+### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
 > **Qué se movió en la capa de gobernanza de la que depende esta lección:**
@@ -543,7 +543,7 @@ El cifrado es el último perímetro y, en AWS, tiene tres puntos de contacto que
 
 ---
 
-## Casos de estudio del mundo real
+## Casos Reales
 
 > **📋 Caso A — Block (Square, Cash App, TIDAL) (servicios financieros, nube: AWS)**
 > **Reto.** 12PB de datos de grafos y analítica fragmentados entre unidades de negocio, obligaciones de PII GDPR/CCPA, y un doloroso flujo de dos pasos que adjuntaba políticas de IAM a roles y luego a buckets de S3.
