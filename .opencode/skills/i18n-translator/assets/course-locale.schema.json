@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NUniversity course.json locale block",
+  "description": "Shape required for each non-English locale block (pt, es) in content/courses/<slug>/course.json. The course validator warns on a missing block; this schema is the contract for writing one.",
+  "type": "object",
+  "properties": {
+    "pt": {
+      "type": "object",
+      "required": ["title", "description", "difficulty", "duration"],
+      "properties": {
+        "title": { "type": "string", "minLength": 3, "description": "Translated course title. Displayed on course cards and used as the locale <title>." },
+        "description": { "type": "string", "minLength": 20, "description": "Translated full description (course.json en.description style: 1–3 sentences)." },
+        "difficulty": { "type": "string", "enum": ["Iniciante", "Intermediário", "Avançado"], "description": "Capitalized Portuguese difficulty (display). Lesson frontmatter difficulty stays the English enum." },
+        "duration": { "type": "string", "pattern": "^[0-9]+ (Semanas|Semana)$", "description": "e.g. '12 Semanas'." }
+      },
+      "additionalProperties": false
+    },
+    "es": {
+      "type": "object",
+      "required": ["title", "description", "difficulty", "duration"],
+      "properties": {
+        "title": { "type": "string", "minLength": 3 },
+        "description": { "type": "string", "minLength": 20 },
+        "difficulty": { "type": "string", "enum": ["Principiante", "Intermedio", "Avanzado"] },
+        "duration": { "type": "string", "pattern": "^[0-9]+ Semanas?$", "description": "e.g. '12 Semanas'." }
+      },
+      "additionalProperties": false
+    }
+  }
+}
