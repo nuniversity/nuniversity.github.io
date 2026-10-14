@@ -2,7 +2,7 @@
 title: "Raciocínio Matemático"
 description: "Aprenda a pensar logicamente, construir provas matemáticas e resolver problemas de forma criativa."
 order: 10
-duration: "55 minutes"
+duration: "55 min"
 difficulty: "beginner"
 ---
 

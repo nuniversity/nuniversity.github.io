@@ -2,7 +2,7 @@
 title: "Conceitos de Programação Funcional"
 description: "Aprenda os conceitos fundamentais da programação funcional: imutabilidade, funções puras, efeitos colaterais, paradigmas declarativo vs imperativo"
 order: 1
-duration: "55 minutes"
+duration: "55 min"
 difficulty: "intermediate"
 ---
 

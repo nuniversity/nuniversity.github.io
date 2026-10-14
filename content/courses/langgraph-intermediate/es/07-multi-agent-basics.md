@@ -2,7 +2,7 @@
 title: "Fundamentos de Multi-Agente"
 description: "Aprende arquitectura multi-agente en LangGraph — múltiples nodos de agente comunicándose a través de estado compartido, roles especializados y patrones de coordinación."
 order: 7
-duration: "40 minutes"
+duration: "40 min"
 difficulty: "intermediate"
 ---
 

@@ -2,7 +2,7 @@
 title: "Limites e Continuidade"
 description: "Compreenda o conceito de limites, avalie limites algebricamente e entenda continuidade — a base do cálculo."
 order: 17
-duration: "65 minutes"
+duration: "65 min"
 difficulty: "beginner"
 ---
 

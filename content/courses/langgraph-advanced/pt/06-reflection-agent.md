@@ -2,7 +2,7 @@
 title: "Padrão de Agente Reflexivo"
 description: "Implemente o padrão de reflexão em LangGraph — loops de gerar, criticar e refinar para agentes que melhoram iterativamente sua saída."
 order: 6
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "advanced"
 ---
 

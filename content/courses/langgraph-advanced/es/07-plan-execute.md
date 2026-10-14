@@ -2,7 +2,7 @@
 title: "Patrón Planificar y Ejecutar"
 description: "Implementa el patrón planificar-y-ejecutar en LangGraph — un nodo de planificación crea un plan paso a paso, un nodo de ejecución ejecuta pasos y un bucle de replanificación se adapta a los resultados."
 order: 7
-duration: "40 minutes"
+duration: "40 min"
 difficulty: "advanced"
 ---
 

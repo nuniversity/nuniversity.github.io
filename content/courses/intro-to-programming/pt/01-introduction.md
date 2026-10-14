@@ -2,7 +2,7 @@
 title: "Primeiros Passos com Programação"
 description: "Aprenda o que é programação, por que ela é importante e escreva seu primeiro programa"
 order: 1
-duration: "20 minutes"
+duration: "20 min"
 difficulty: "beginner"
 ---
 

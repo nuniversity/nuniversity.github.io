@@ -2,7 +2,7 @@
 title: "Sequências e Séries"
 description: "Compreenda padrões numéricos, somas finitas e infinitas, e a contribuição indiana para séries infinitas."
 order: 14
-duration: "60 minutes"
+duration: "60 min"
 difficulty: "beginner"
 ---
 

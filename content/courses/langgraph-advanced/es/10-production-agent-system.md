@@ -2,7 +2,7 @@
 title: "Proyecto Final: Agente de Soporte al Cliente de Producción"
 description: "Construye un agente de soporte al cliente de nivel de producción con enrutamiento multi-agente, RAG, transferencia a humano y monitoreo — integrando todo del curso Avanzado."
 order: 10
-duration: "50 minutes"
+duration: "50 min"
 difficulty: "advanced"
 ---
 

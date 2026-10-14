@@ -2,7 +2,7 @@
 title: "Introdução ao Cálculo"
 description: "Compreenda derivadas como taxas de variação, integrais como acumulação e o Teorema Fundamental que os conecta."
 order: 18
-duration: "70 minutes"
+duration: "70 min"
 difficulty: "beginner"
 ---
 

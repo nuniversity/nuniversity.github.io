@@ -2,7 +2,7 @@
 title: "Agentes Jerárquicos"
 description: "Implementa arquitecturas multi-agente jerárquicas con agentes gerentes, sub-agentes, subgrafos y paso de estado entre niveles jerárquicos."
 order: 3
-duration: "40 minutes"
+duration: "40 min"
 difficulty: "advanced"
 ---
 

@@ -2,7 +2,7 @@
 title: "Matemática Discreta"
 description: "Compreenda conjuntos, lógica, combinatória e teoria dos grafos — a matemática da ciência da computação."
 order: 19
-duration: "60 minutes"
+duration: "60 min"
 difficulty: "beginner"
 ---
 

@@ -2,7 +2,7 @@
 title: "Patrón de Agente Reflexivo"
 description: "Implementa el patrón de reflexión en LangGraph — bucles de generar, criticar y refinar para agentes que mejoran iterativamente su salida."
 order: 6
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "advanced"
 ---
 

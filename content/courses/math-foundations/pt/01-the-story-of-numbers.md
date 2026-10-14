@@ -2,7 +2,7 @@
 title: "A História dos Números"
 description: "Descubra como civilizações antigas criaram sistemas numéricos e como essas invenções moldaram a matemática moderna."
 order: 1
-duration: "50 minutes"
+duration: "50 min"
 difficulty: "beginner"
 ---
 

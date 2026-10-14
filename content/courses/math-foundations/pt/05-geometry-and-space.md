@@ -2,7 +2,7 @@
 title: "Geometria e Espaço"
 description: "Explore as formas, propriedades geométricas e a fascinante história da geometria desde o Egito Antigo até a geometria analítica."
 order: 5
-duration: "60 minutes"
+duration: "60 min"
 difficulty: "beginner"
 ---
 

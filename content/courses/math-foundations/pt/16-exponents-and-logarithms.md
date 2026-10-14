@@ -2,7 +2,7 @@
 title: "Expoentes e Logaritmos"
 description: "Compreenda expoentes, logaritmos e notação científica, e modele crescimento e decaimento exponencial."
 order: 16
-duration: "60 minutes"
+duration: "60 min"
 difficulty: "beginner"
 ---
 

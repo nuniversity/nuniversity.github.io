@@ -2,7 +2,7 @@
 title: "Observabilidad con LangSmith"
 description: "Domina la observabilidad para aplicaciones LangGraph usando trazado LangSmith, registro, depuración, evaluación de ejecuciones y monitoreo de rendimiento."
 order: 2
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "advanced"
 ---
 

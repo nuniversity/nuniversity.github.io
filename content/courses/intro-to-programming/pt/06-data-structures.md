@@ -2,7 +2,7 @@
 title: "Estruturas de Dados: Arrays e Objetos"
 description: "Aprenda a organizar dados usando arrays e objetos"
 order: 6
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "beginner"
 ---
 

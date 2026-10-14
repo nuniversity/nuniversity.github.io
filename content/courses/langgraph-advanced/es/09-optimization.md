@@ -2,7 +2,7 @@
 title: "Optimización"
 description: "Optimiza aplicaciones LangGraph — reduce llamadas de nodos, estrategias de caché, agrupación de solicitudes LLM, gestión de tokens y ajuste de rendimiento del grafo."
 order: 9
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "advanced"
 ---
 

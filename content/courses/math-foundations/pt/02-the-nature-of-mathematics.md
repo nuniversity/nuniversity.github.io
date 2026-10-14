@@ -2,7 +2,7 @@
 title: "A Natureza da Matemática"
 description: "Explore as diferentes filosofias da matemática e descubra como diferentes culturas entenderam a natureza do pensamento matemático."
 order: 2
-duration: "50 minutes"
+duration: "50 min"
 difficulty: "beginner"
 ---
 

@@ -2,7 +2,7 @@
 title: "Proyecto Intermedio: Sistema de Investigación Multi-Agente"
 description: "Construye un sistema de investigación multi-agente listo para producción con un agente supervisor coordinando agentes de investigación especializados para generación de informes completos."
 order: 10
-duration: "45 minutes"
+duration: "45 min"
 difficulty: "intermediate"
 ---
 

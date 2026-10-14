@@ -2,7 +2,7 @@
 title: "Medição e Proporção"
 description: "Aprenda sobre sistemas de medição históricos, razões, proporções e o sistema métrico moderno."
 order: 6
-duration: "55 minutes"
+duration: "55 min"
 difficulty: "beginner"
 ---
 

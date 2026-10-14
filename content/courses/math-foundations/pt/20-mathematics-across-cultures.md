@@ -2,7 +2,7 @@
 title: "Matemática nas Culturas"
 description: "Sintetize todos os conceitos do curso e aprecie o patrimônio matemático global de todas as culturas."
 order: 20
-duration: "60 minutes"
+duration: "60 min"
 difficulty: "beginner"
 ---
 

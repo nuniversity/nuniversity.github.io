@@ -2,7 +2,7 @@
 title: "Memória de Conversação"
 description: "Implemente memória de conversação em LangGraph usando o reducer add_messages, armazenando e gerenciando histórico de conversação entre turnos."
 order: 3
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "intermediate"
 ---
 

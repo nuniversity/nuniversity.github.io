@@ -2,7 +2,7 @@
 title: "Funções e Relações"
 description: "Compreenda funções, suas representações e aplicações no mundo real, desde crescimento populacional até modelagem financeira."
 order: 7
-duration: "60 minutes"
+duration: "60 min"
 difficulty: "beginner"
 ---
 

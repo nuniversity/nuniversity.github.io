@@ -2,7 +2,7 @@
 title: "Memória de Resumo"
 description: "Implemente sumarização de conversação para agentes de longa duração, nós de memória de resumo e estratégias de truncamento para gerenciar janelas de contexto."
 order: 4
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "intermediate"
 ---
 

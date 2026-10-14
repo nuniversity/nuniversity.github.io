@@ -2,7 +2,7 @@
 title: "Gerenciamento Avançado de Estado"
 description: "Domine schemas de estado com TypedDict, reducers de estado (add, replace, merge) e funções reducer personalizadas para lógica de estado sofisticada."
 order: 1
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "intermediate"
 ---
 

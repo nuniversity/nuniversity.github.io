@@ -111,7 +111,7 @@ def lint_file(path, locale, source_text=None):
 
         if not in_fence:
             star_count += raw.count("**")
-            if raw.startswith(L["dual_practice"]):
+            if raw.startswith("## ") and L["dual_practice"][3:] in raw:
                 has_practice = True
             if L["dual_takeaways"] in raw or (raw.startswith("## ") and "Key Takeaways" in raw):
                 has_takeaways = True

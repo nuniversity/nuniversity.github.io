@@ -2,7 +2,7 @@
 title: "Estatística e Dados"
 description: "Aprenda a pensar estatisticamente, calcular medidas de centro e dispersão, e visualizar dados de forma eficaz."
 order: 8
-duration: "60 minutes"
+duration: "60 min"
 difficulty: "beginner"
 ---
 

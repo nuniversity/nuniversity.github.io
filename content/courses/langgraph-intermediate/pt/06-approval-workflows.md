@@ -2,7 +2,7 @@
 title: "Fluxos de Aprovação"
 description: "Implemente fluxos de aprovação estruturados com interrupções condicionais, interrupções antes/depois de nós e roteamento dinâmico humano-no-circuito."
 order: 6
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "intermediate"
 ---
 

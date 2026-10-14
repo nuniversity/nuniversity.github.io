@@ -2,7 +2,7 @@
 title: "Funções Lambda e Closures"
 description: "Domine funções anônimas com lambda, entenda escopo léxico e closures, e aplique-os em padrões funcionais"
 order: 3
-duration: "55 minutes"
+duration: "55 min"
 difficulty: "intermediate"
 ---
 

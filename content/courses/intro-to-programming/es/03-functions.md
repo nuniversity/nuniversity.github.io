@@ -2,7 +2,7 @@
 title: "Funciones: Bloques de Código Reutilizables"
 description: "Aprende a definir, llamar y organizar código con funciones"
 order: 3
-duration: "30 minutes"
+duration: "30 min"
 difficulty: "beginner"
 ---
 

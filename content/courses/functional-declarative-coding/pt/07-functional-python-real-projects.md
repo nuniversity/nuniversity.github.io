@@ -2,7 +2,7 @@
 title: "Python Funcional em Projetos Reais"
 description: "Combine programação funcional com POO em projetos Python reais, com padrões práticos para código de produção"
 order: 7
-duration: "60 minutes"
+duration: "60 min"
 difficulty: "intermediate"
 ---
 

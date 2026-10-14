@@ -2,7 +2,7 @@
 title: "Pensamento Algébrico"
 description: "Aprenda a linguagem das relações matemáticas e como resolver equações lineares e quadráticas."
 order: 4
-duration: "60 minutes"
+duration: "60 min"
 difficulty: "beginner"
 ---
 

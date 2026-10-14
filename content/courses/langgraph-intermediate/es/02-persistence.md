@@ -2,7 +2,7 @@
 title: "Persistencia y Puntos de Control"
 description: "Aprende a persistir el estado del grafo con MemorySaver, guardar y cargar puntos de control, y usar gestión de estado basada en hilos."
 order: 2
-duration: "30 minutes"
+duration: "30 min"
 difficulty: "intermediate"
 ---
 

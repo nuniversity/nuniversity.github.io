@@ -2,7 +2,7 @@
 title: "Despliegue"
 description: "Despliega aplicaciones LangGraph con LangGraph Cloud/Platform, configura APIs del grafo, gestiona opciones de despliegue y escala para producción."
 order: 1
-duration: "40 minutes"
+duration: "40 min"
 difficulty: "advanced"
 ---
 

@@ -9,5 +9,17 @@
     "description": "Comprehensive preparation for the AWS Certified Cloud Practitioner (CLF-C02) exam covering cloud concepts and economics, security and compliance, AWS global infrastructure and core services, and billing, pricing, and support — with architecture diagrams, real AWS customer case studies, and exam-style practice questions including multiple-response drills.",
     "difficulty": "Beginner",
     "duration": "8 Weeks"
+  },
+  "pt": {
+    "title": "AWS Certified Cloud Practitioner (CLF-C02) Curso Completo",
+    "description": "Curso completo para o exame AWS Certified Cloud Practitioner (CLF-C02): conceitos de nuvem, arquitetura da AWS, segurança e conformidade, faturamento e suporte, preços e modelos de custo, migração e inovação na nuvem — com arquiteturas, casos reais, tabelas de serviços datadas e questões de prática para quem está começando na AWS.",
+    "difficulty": "Iniciante",
+    "duration": "8 Semanas"
+  },
+  "es": {
+    "title": "AWS Certified Cloud Practitioner (CLF-C02) Curso Completo",
+    "description": "Curso completo para el examen AWS Certified Cloud Practitioner (CLF-C02): conceptos de nube, arquitectura de AWS, seguridad y cumplimiento, facturación y soporte, precios y modelos de costos, migración e innovación en la nube — con arquitecturas, casos reales, tablas de servicios fechadas y preguntas de práctica para quien empieza en AWS.",
+    "difficulty": "Principiante",
+    "duration": "8 Semanas"
   }
 }

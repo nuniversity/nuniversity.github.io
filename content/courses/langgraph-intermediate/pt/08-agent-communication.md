@@ -2,7 +2,7 @@
 title: "Comunicação e Supervisão entre Agentes"
 description: "Implemente mensagens estruturadas agente-para-agente, nós supervisores, coordenação de estado compartilhado e padrões de orquestração multi-agente."
 order: 8
-duration: "40 minutes"
+duration: "40 min"
 difficulty: "intermediate"
 ---
 

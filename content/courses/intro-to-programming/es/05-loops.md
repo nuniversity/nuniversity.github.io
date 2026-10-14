@@ -2,7 +2,7 @@
 title: "Flujo de Control: Repitiendo con Bucles"
 description: "Aprende a repetir acciones usando bucles for, while y do...while"
 order: 5
-duration: "30 minutes"
+duration: "30 min"
 difficulty: "beginner"
 ---
 

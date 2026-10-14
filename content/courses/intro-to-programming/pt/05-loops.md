@@ -2,7 +2,7 @@
 title: "Fluxo de Controle: Repetindo com Laços"
 description: "Aprenda a repetir ações usando laços for, while e do...while"
 order: 5
-duration: "30 minutes"
+duration: "30 min"
 difficulty: "beginner"
 ---
 

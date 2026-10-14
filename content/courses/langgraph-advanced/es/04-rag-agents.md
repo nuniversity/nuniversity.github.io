@@ -2,7 +2,7 @@
 title: "RAG Agentic"
 description: "Construye sistemas RAG (Generación Aumentada por Recuperación) Agentic con LangGraph — nodos de recuperación, integración con almacén de documentos, planificación de consultas y recuperación en múltiples pasos."
 order: 4
-duration: "40 minutes"
+duration: "40 min"
 difficulty: "advanced"
 ---
 

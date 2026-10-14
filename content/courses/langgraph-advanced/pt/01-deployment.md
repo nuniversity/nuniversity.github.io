@@ -2,7 +2,7 @@
 title: "Implantação"
 description: "Implante aplicações LangGraph com LangGraph Cloud/Platform, configure APIs do grafo, gerencie opções de implantação e escale para produção."
 order: 1
-duration: "40 minutes"
+duration: "40 min"
 difficulty: "advanced"
 ---
 

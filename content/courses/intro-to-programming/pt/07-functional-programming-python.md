@@ -2,7 +2,7 @@
 title: "Introdução à Programação Funcional com Python"
 description: "Explore o paradigma funcional usando Python: funções puras, map/filter/reduce e compreensões de lista"
 order: 7
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "intermediate"
 ---
 

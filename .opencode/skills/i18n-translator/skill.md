@@ -112,6 +112,8 @@ The course validator regexes require the English literals **`Practice Questions`
 
 Spanish: `## Preguntas de Práctica (Practice Questions)`, `**Conclusiones Clave (Key Takeaways):**`.
 
+When the EN source numbers its Practice Questions section (`## 4. Practice Questions — Set B: …`), keep the number and the dual literal together in one heading (`## 4. Perguntas de Prática (Practice Questions) — Conjunto B: …`) — do not split into a separate unnumbered dual heading.
+
 Every other `## ` section heading translates fully (no English parentheses needed) **except** that section numbering must be preserved (`## 3. …` stays `## 3. …`).
 
 ---

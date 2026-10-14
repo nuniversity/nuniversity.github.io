@@ -2,7 +2,7 @@
 title: "Padrões Declarativos"
 description: "Explore padrões de programação declarativa: comprehensions, geradores, expressando intenção sobre mecânica"
 order: 6
-duration: "55 minutes"
+duration: "55 min"
 difficulty: "intermediate"
 ---
 

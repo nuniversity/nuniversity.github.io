@@ -2,7 +2,7 @@
 title: "Números e Operações"
 description: "Domine os tipos de números, operações básicas e a fascinante história das frações egípcias."
 order: 3
-duration: "55 minutes"
+duration: "55 min"
 difficulty: "beginner"
 ---
 

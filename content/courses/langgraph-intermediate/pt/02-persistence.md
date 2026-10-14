@@ -2,7 +2,7 @@
 title: "Persistência e Checkpointing"
 description: "Aprenda a persistir estado do grafo com MemorySaver, salvar e carregar checkpoints, e usar gerenciamento de estado baseado em thread."
 order: 2
-duration: "30 minutes"
+duration: "30 min"
 difficulty: "intermediate"
 ---
 

@@ -2,7 +2,7 @@
 title: "Composição de Funções"
 description: "Aprenda a compor funções em pipelines, aplicar estilo point-free e construir transformações complexas a partir de blocos simples"
 order: 4
-duration: "55 minutes"
+duration: "55 min"
 difficulty: "intermediate"
 ---
 

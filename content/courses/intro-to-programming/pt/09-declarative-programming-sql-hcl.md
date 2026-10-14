@@ -2,7 +2,7 @@
 title: "Programação Declarativa: SQL e HCL"
 description: "Aprenda o paradigma declarativo: descreva o que quer, não como obter — usando SQL e HCL"
 order: 9
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "intermediate"
 ---
 

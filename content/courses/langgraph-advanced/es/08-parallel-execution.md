@@ -2,7 +2,7 @@
 title: "Ejecución Paralela"
 description: "Domina la ejecución paralela de nodos en LangGraph — patrones de fan-out/fan-in, coordinación de ramas, seguridad de hilos y sincronización de resultados paralelos."
 order: 8
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "advanced"
 ---
 

@@ -2,7 +2,7 @@
 title: "Funções de Primeira Classe e Ordem Superior"
 description: "Aprenda como funções como cidadãos de primeira classe permitem padrões de ordem superior: map, filter, reduce e fábricas de funções em Python"
 order: 2
-duration: "55 minutes"
+duration: "55 min"
 difficulty: "intermediate"
 ---
 

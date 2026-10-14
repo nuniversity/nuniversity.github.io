@@ -2,7 +2,7 @@
 title: "Matrizes e Sistemas Lineares"
 description: "Compreenda matrizes, operações matriciais e resolução de sistemas de equações lineares."
 order: 15
-duration: "60 minutes"
+duration: "60 min"
 difficulty: "beginner"
 ---
 

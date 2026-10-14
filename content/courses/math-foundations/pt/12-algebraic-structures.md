@@ -2,7 +2,7 @@
 title: "Estruturas Algébricas"
 description: "Compreenda grupos, anéis e campos — estruturas abstratas que revelam padrões profundos na matemática."
 order: 12
-duration: "65 minutes"
+duration: "65 min"
 difficulty: "beginner"
 ---
 

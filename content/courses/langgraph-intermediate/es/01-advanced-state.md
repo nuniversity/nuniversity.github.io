@@ -2,7 +2,7 @@
 title: "Gestión Avanzada de Estado"
 description: "Domina esquemas de estado con TypedDict, reductores de estado (add, replace, merge) y funciones reductoras personalizadas para lógica de estado sofisticada."
 order: 1
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "intermediate"
 ---
 

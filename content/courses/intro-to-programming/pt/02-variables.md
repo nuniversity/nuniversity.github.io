@@ -2,7 +2,7 @@
 title: "Entendendo Variáveis"
 description: "Aprenda a armazenar e manipular dados usando variáveis"
 order: 2
-duration: "25 minutes"
+duration: "25 min"
 difficulty: "beginner"
 ---
 

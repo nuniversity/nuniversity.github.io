@@ -2,7 +2,7 @@
 title: "Teoria dos Números"
 description: "Explore números primos, divisibilidade e aritmética modular — a rainha da matemática."
 order: 11
-duration: "60 minutes"
+duration: "60 min"
 difficulty: "beginner"
 ---
 

@@ -2,7 +2,7 @@
 title: "Humano-no-circuito com Interrupções"
 description: "Implemente fluxos de trabalho humano-no-circuito usando interrupções, pause a execução para entrada do usuário e retome a execução do grafo."
 order: 5
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "intermediate"
 ---
 

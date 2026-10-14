@@ -2,7 +2,7 @@
 title: "Flujo de Control: Tomando Decisiones con Condicionales"
 description: "Aprende a tomar decisiones en tu código usando if, else y switch"
 order: 4
-duration: "30 minutes"
+duration: "30 min"
 difficulty: "beginner"
 ---
 

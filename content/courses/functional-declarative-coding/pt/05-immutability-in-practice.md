@@ -2,7 +2,7 @@
 title: "Imutabilidade na Prática"
 description: "Domine estruturas de dados imutáveis, coleções persistentes e técnicas para evitar mutação em Python real"
 order: 5
-duration: "55 minutes"
+duration: "55 min"
 difficulty: "intermediate"
 ---
 

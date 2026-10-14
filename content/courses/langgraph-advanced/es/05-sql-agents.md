@@ -2,7 +2,7 @@
 title: "Agentes SQL"
 description: "Construye agentes de consulta SQL con LangGraph — vinculación de herramientas de base de datos, generación texto-a-SQL, validación y ejecución de consultas e interpretación de resultados."
 order: 5
-duration: "40 minutes"
+duration: "40 min"
 difficulty: "advanced"
 ---
 

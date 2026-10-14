@@ -2,7 +2,7 @@
 title: "Execução Paralela"
 description: "Domine a execução paralela de nós em LangGraph — padrões de fan-out/fan-in, coordenação de ramos, segurança de thread e sincronização de resultados paralelos."
 order: 8
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "advanced"
 ---
 

@@ -2,7 +2,7 @@
 title: "Probabilidade"
 description: "Compreenda a matemática da incerteza e como tomar decisões quando não podemos ter certeza dos resultados."
 order: 9
-duration: "55 minutes"
+duration: "55 min"
 difficulty: "beginner"
 ---
 

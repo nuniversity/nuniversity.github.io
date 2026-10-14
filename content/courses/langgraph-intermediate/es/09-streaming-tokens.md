@@ -2,7 +2,7 @@
 title: "Streaming de Tokens"
 description: "Domina los modos de streaming de LangGraph — values, updates y streaming personalizado. Aprende a transmitir tokens LLM desde nodos del grafo en tiempo real."
 order: 9
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "intermediate"
 ---
 

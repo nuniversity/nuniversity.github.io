@@ -2,7 +2,7 @@
 title: "Padrão Planejar e Executar"
 description: "Implemente o padrão planejar-e-executar em LangGraph — um nó de planejamento cria um plano passo a passo, um nó de execução executa etapas e um loop de replanejamento se adapta aos resultados."
 order: 7
-duration: "40 minutes"
+duration: "40 min"
 difficulty: "advanced"
 ---
 

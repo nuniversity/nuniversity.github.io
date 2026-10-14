@@ -2,7 +2,7 @@
 title: "Humano-en-el-bucle con Interrupciones"
 description: "Implementa flujos de trabajo humano-en-el-bucle usando interrupciones, pausa la ejecución para entrada del usuario y reanuda la ejecución del grafo."
 order: 5
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "intermediate"
 ---
 

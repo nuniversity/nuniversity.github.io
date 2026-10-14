@@ -2,7 +2,7 @@
 title: "Lenguajes de Programación Compilados con Rust"
 description: "Aprende sobre lenguajes compilados, seguridad de memoria y programación de sistemas usando Rust"
 order: 8
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "intermediate"
 ---
 

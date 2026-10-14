@@ -2,7 +2,7 @@
 title: "Trigonometria"
 description: "Compreenda as razões trigonométricas, o círculo unitário e aplicações na navegação, arquitetura e fenômenos ondulatórios."
 order: 13
-duration: "60 minutes"
+duration: "60 min"
 difficulty: "beginner"
 ---
 

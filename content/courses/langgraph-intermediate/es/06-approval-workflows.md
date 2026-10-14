@@ -2,7 +2,7 @@
 title: "Flujos de Aprobación"
 description: "Implementa flujos de aprobación estructurados con interrupciones condicionales, interrupciones antes/después de nodos y enrutamiento dinámico humano-en-el-bucle."
 order: 6
-duration: "35 minutes"
+duration: "35 min"
 difficulty: "intermediate"
 ---
 

@@ -9,5 +9,17 @@
     "description": "Comprehensive preparation for the AWS Certified Data Engineer – Associate (DEA-C01) exam covering data ingestion and transformation, data store management, data operations and support, and data security and governance — with architecture diagrams, real AWS customer case studies, worked pipeline examples, and exam-style practice questions including multiple-response drills.",
     "difficulty": "Intermediate",
     "duration": "12 Weeks"
+  },
+  "pt": {
+    "title": "AWS Certified Data Engineer – Associate (DEA-C01) Curso Completo",
+    "description": "Curso completo para o exame AWS Certified Data Engineer – Associate (DEA-C01): ingestão e transformação de dados na AWS (Kinesis, MSK, Glue, EMR), armazenamento e governança (S3, Lake Formation, IAM), orquestration (Step Functions, MWAA), análise e servação (Athena, Redshift, QuickSight), segurança, resiliência e otimização de custos — com arquiteturas, casos reais, exemplos de SQL/PySpark e questões de prática.",
+    "difficulty": "Intermediário",
+    "duration": "12 Semanas"
+  },
+  "es": {
+    "title": "AWS Certified Data Engineer – Associate (DEA-C01) Curso Completo",
+    "description": "Curso completo para el examen AWS Certified Data Engineer – Associate (DEA-C01): ingesta y transformación de datos en AWS (Kinesis, MSK, Glue, EMR), almacenamiento y gobernanza (S3, Lake Formation, IAM), orquestación (Step Functions, MWAA), análisis y servicio de datos (Athena, Redshift, QuickSight), seguridad, resiliencia y optimización de costos — con arquitecturas, casos reales, ejemplos de SQL/PySpark y preguntas de práctica.",
+    "difficulty": "Intermedio",
+    "duration": "12 Semanas"
   }
 }
