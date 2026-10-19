@@ -136,7 +136,10 @@ def lint_file(path, locale, source_text=None):
             # locked formulas (H2 only for case studies — "### Caso A" subheads are fine)
             if re.match(r"^## ", raw):
                 if re.search(r"Case Studies|Casos|Caso", raw):
-                    if not raw.startswith(L["case_studies"]):
+                    # allow a numbered prefix (verify requires ## N. parity):
+                    # "## 12. Casos Reais" == locked formula "## Casos Reais"
+                    if not (raw.startswith(L["case_studies"]) or
+                            re.match(r"^## \d+\. " + re.escape(L["case_studies"][3:]) + r"\b", raw)):
                         errors.append((i, "case-studies-heading",
                                        f'expected "{L["case_studies"]}", found: {raw.strip()[:70]}'))
             if re.match(r"^### (2026 Updates|Atualiza|Actualiz)", raw):

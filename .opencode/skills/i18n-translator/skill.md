@@ -112,7 +112,7 @@ The course validator regexes require the English literals **`Practice Questions`
 
 Spanish: `## Preguntas de Práctica (Practice Questions)`, `**Conclusiones Clave (Key Takeaways):**`.
 
-When the EN source numbers its Practice Questions section (`## 4. Practice Questions — Set B: …`), keep the number and the dual literal together in one heading (`## 4. Perguntas de Prática (Practice Questions) — Conjunto B: …`) — do not split into a separate unnumbered dual heading.
+When the EN source numbers its Practice Questions section (`## 4. Practice Questions — Set B: …`), keep the number and the dual literal together in one heading (`## 4. Perguntas de Prática (Practice Questions) — Conjunto B: …`) — do not split into a separate unnumbered dual heading. The same applies to locked formulas generally: a numbered EN case-studies heading (`## 12. Real-World Case Studies`) becomes `## 12. Casos Reais` (pt) / `## 12. Casos Reales` (es) — number kept, name locked, never a re-translated phrase.
 
 Every other `## ` section heading translates fully (no English parentheses needed) **except** that section numbering must be preserved (`## 3. …` stays `## 3. …`).
 
