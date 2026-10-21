@@ -151,12 +151,12 @@ unique = list(set(items))  # [1, 2, 3, 4]
 ```
 
 > [!SUCCESS]
-| Structure | Ordered | Mutable | Unique Keys | Use Case |
-|-----------|---------|---------|-------------|----------|
-| List | Yes | Yes | No | Ordered collection |
-| Tuple | Yes | No | No | Fixed data |
-| Dict | Yes* | Yes | Yes | Key-value lookups |
-| Set | No | Yes | Yes* | Membership, uniqueness |
+> | Structure | Ordered | Mutable | Unique Keys | Use Case |
+> |-----------|---------|---------|-------------|----------|
+> | List | Yes | Yes | No | Ordered collection |
+> | Tuple | Yes | No | No | Fixed data |
+> | Dict | Yes* | Yes | Yes | Key-value lookups |
+> | Set | No | Yes | Yes* | Membership, uniqueness |
 
 *Python 3.7+ dicts maintain insertion order. Sets store unique values.
 

@@ -140,9 +140,9 @@ La tecnología puede dramaticamente mejorar eficiencia operativa, pero las ONGs 
 |---|---|---|
 | **Gestión de Finanzas** | **Conta Azul**, **GestãoClick**, **Odoo** (community edition), **Excel** (inicial) | Demonstraciones financieras, control de flujo de caja, pago de contas |
 | **Gestión de Proyectos** | **Trello**, **Asana**, **Monday.com**, **Google Workspace** | Planificación de tareas, cronogramas, asignación de responsabilidades |
-| **CRM/Doador** | **Gestão de Doadores**, **Salesforce Nonprofit Success Pack**, **Bloomerang**, **Little Green Light** | Gerenciar relacionamento com doadores, histórico de doações, comunicação segmentada |
-| **Gestão de Voluntários** | **VolunteerHub**, **Golden**, **ILP**, **Planilhas** | Agendar voluntarios, registrar horas, comunicação, reconhecimento |
-| **Comunicação Interno** | **Slack**, **Microsoft Teams**, **WhatsApp Business**, **Google Workspace** | Comunicação diária, compartilhamento de arquivos, reuniões |
+| **CRM/Donante** | **Gestión de Donantes**, **Salesforce Nonprofit Success Pack**, **Bloomerang**, **Little Green Light** | Gestionar la relación con los donantes, el historial de donaciones, la comunicación segmentada |
+| **Gestión de Voluntarios** | **VolunteerHub**, **Golden**, **ILP**, **Hojas de cálculo** | Agendar voluntarios, registrar horas, comunicación, reconocimiento |
+| **Comunicación Interna** | **Slack**, **Microsoft Teams**, **WhatsApp Business**, **Google Workspace** | Comunicación diaria, compartición de archivos, reuniones |
 | **Armazenamento** | **Google Drive**, **Dropbox**, **OneDrive**, **Amazon S3** | Documentos, fotos, backups, compartilhamento colaborativo |
 | **Email Marketing** | **Mailchimp**, **SendGrid**, **Splash** | Newsletters, campanhas de doação, comunicação segmentada |
 | **Website/landing pages** | **WordPress**, **Wix**, **Squarespace**, **GitHub Pages** | Presença online, captação, divulgação de informações |
@@ -174,19 +174,19 @@ Sostenibilidad organizacional va más allá de finanzas — incluye capacidad de
 
 | Pilar | Descripción | Indicadores Clave |
 |---|---|---|
-| **Financiera** | Capacidad de generar y gestionar recursos financieros | Reserva operacional, diversificación de ingresos, razón de despesas |
+| **Financiera** | Capacidad de generar y gestionar recursos financieros | Reserva operacional, diversificación de ingresos, razón de gastos |
 | **Operacional** | Eficiencia en la entrega de programas y servicios | Indicadores de programa, tasas de éxito, eficiencia de costos |
-| **Política/Institucional** | Reconocimiento legal, apoyo gubernamental, posición setorial | Status legal, parcerias gubernamentales, influencia política |
-| **Social/Comunitario** | Relevancia, apoyo de la comunidad, demanda de servicios | Satisfacción de beneficiarios, engajamiento comunitario, advocacy |
+| **Política/Institucional** | Reconocimiento legal, apoyo gubernamental, posición setorial | Status legal, asociaciones gubernamentales, influencia política |
+| **Social/Comunitario** | Relevancia, apoyo de la comunidad, demanda de servicios | Satisfacción de beneficiarios, compromiso comunitario, advocacy |
 
 #### Evaluación de Sostenibilidad
 
 ##### Matriz de Sostenibilidad 2x2
 
-| | **Alto Suporte Financeiro** | **Baixo Suporte Financeiro** |
+| | **Alto Apoyo Financiero** | **Bajo Apoyo Financiero** |
 |---|---|---|
-| **Alto Engajamento Social** | Quadrante A: Organização bem-sucedida, mas pode depender de financiamento | Quadrante B: Risco alto; engajamento forte mas recursos insuficientes |
-| **Baixo Engajamento Social** | Quadrante C: Recursos disponíveis mas baixa relevância/impacto | Quadrante D: Crítico; poucos recursos e pouco engajamento |
+| **Alto Compromiso Social** | Cuadrante A: Organización exitosa, pero puede depender del financiamiento | Cuadrante B: Riesgo alto; compromiso fuerte pero recursos insuficientes |
+| **Bajo Compromiso Social** | Cuadrante C: Recursos disponibles pero baja relevancia/impacto | Cuadrante D: Crítico; pocos recursos y poco compromiso |
 
 ##### Herramientas de Evaluación
 
@@ -208,8 +208,8 @@ Sostenibilidad organizacional va más allá de finanzas — incluye capacidad de
 #### Estrategias de Sostenibilidad Financiera
 
 ##### 1. Fondo de Reserva (Operating Reserve)
-- **Objetivo**: Buffer para despesas imprevistas, brechas de financiamiento, crisis
-- **Meta**: 3-6 meses de despesas operativas en fondos no restringidos
+- **Objetivo**: Colchón para gastos imprevistos, brechas de financiamiento, crisis
+- **Meta**: 3-6 meses de gastos operativos en fondos no restringidos
 - **Construcción**: Reservar % de los ingresos mensuales/trimestrales hasta alcanzar meta
 - **Uso**: Solo para emergencias definidas, no para expansión o estilo de vida
 
@@ -227,7 +227,7 @@ Sostenibilidad organizacional va más allá de finanzas — incluye capacidad de
 
 ##### 4. Fondo Endowado (Endowment Fund)
 - **Objetivo**: Financiamiento perpetuo; solo el gasto anual financia operaciones
-- **Requisito**: Capital inicial significativo (geralmente 3-5 años de despesas operativas)
+- **Requisito**: Capital inicial significativo (generalmente 3-5 años de gastos operativos)
 - **Tasa de gasto**: Regla del 4-5% al año (para preservar el principal inflation-adjusted)
 - **Benefits**: Ingreso estable, independencia parcial de donantes variables
 
@@ -329,9 +329,9 @@ Preguntas sobre este tópico frecuentemente testan:
 
 **Q3.** ¿Cuál es el período recomendado de reserva operacional para ONGs?
 
-- A) 1-2 meses de despesas
-- B) 3-6 meses de despesas
-- C) 6-12 meses de despesas
+- A) 1-2 meses de gastos
+- B) 3-6 meses de gastos
+- C) 6-12 meses de gastos
 - D) No es necesario tener reserva si diversificado financiamiento
 
 **Q4.** ¿Cuál de las siguientes NO es uno de los cuatro pilares de la sostenibilidad organizacional?
@@ -346,6 +346,6 @@ Preguntas sobre este tópico frecuentemente testan:
 - A) Taxa de abertura de e-mail
 - B) Taxa de conversión de sitio
 - C) Custo por aquisição de doador
-- D) Engajamento em redes sociais
+- D) Compromiso en redes sociales
 
 ---

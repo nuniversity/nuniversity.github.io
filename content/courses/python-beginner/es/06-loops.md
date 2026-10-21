@@ -137,11 +137,11 @@ for name, score in zip(names, scores):
 ```
 
 > [!SUCCESS]
-| Bucle | Cuándo Usarlo | Ejemplo |
-|---|---|---|
-| `for` | Iterar sobre una secuencia conocida | `for item in list:` |
-| `while` | Repetir hasta que una condición cambie | `while running:` |
-| `for` + `range()` | Número conocido de iteraciones | `for i in range(10):` |
+> | Bucle | Cuándo Usarlo | Ejemplo |
+> |---|---|---|
+> | `for` | Iterar sobre una secuencia conocida | `for item in list:` |
+> | `while` | Repetir hasta que una condición cambie | `while running:` |
+> | `for` + `range()` | Número conocido de iteraciones | `for i in range(10):` |
 
 ## Preguntas de Práctica
 

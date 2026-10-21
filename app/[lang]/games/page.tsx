@@ -17,8 +17,6 @@ export async function generateMetadata({
 }: {
   params: { lang: Locale }
 }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang)
-  
   return {
     title: 'Games - Learn While Playing',
     description: 'Interactive learning games for vocabulary, math, coding, and more',

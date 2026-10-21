@@ -45,11 +45,11 @@ while i < 100 {
 ```
 
 > [!NOTE]
-| Concept | Meaning |
-|---------|---------|
-| Zero-cost | Abstractions have no runtime overhead |
-| Compile-time | The cost is paid during compilation, not execution |
-| Predictable | No hidden allocations, no garbage collection pauses |
+> | Concept | Meaning |
+> |---------|---------|
+> | Zero-cost | Abstractions have no runtime overhead |
+> | Compile-time | The cost is paid during compilation, not execution |
+> | Predictable | No hidden allocations, no garbage collection pauses |
 
 ## Comparison with C/C++
 

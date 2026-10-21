@@ -104,11 +104,11 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Scenario | Pattern | Code |
-|----------|---------|------|
-| Single producer | Direct `tx` | `let (tx, rx) = channel()` |
-| Multiple producers | `tx.clone()` | Clone sender for each thread |
-| Multiple consumers | Not supported | Use `Mutex` or `broadcast` crate |
+> | Scenario | Pattern | Code |
+> |----------|---------|------|
+> | Single producer | Direct `tx` | `let (tx, rx) = channel()` |
+> | Multiple producers | `tx.clone()` | Clone sender for each thread |
+> | Multiple consumers | Not supported | Use `Mutex` or `broadcast` crate |
 
 ## Sending Multiple Messages
 

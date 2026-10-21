@@ -126,7 +126,7 @@ flowchart TD
     D -->|Sim| F[Gerar token de redefinição]
     E --> G([Processo encerrado])
     F --> H[Enviar e-mail de redefinição]
-    H --> I[[(Armazenar token)]]
+    H --> I[["(Armazenar token)"]]
     I --> J([Aguardar ação do usuário])
     
     J --> K[Usuário clica no link de redefinição]

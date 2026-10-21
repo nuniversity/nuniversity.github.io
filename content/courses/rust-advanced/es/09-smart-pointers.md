@@ -45,12 +45,12 @@ fn main() {
 ```
 
 > [!NOTE]
-| Caso de Uso | Por qué Box |
-|----------|---------|
-| Tipos recursivos | Requisito de tamaño |
-| Trait objects | Dispatch dinámico |
-| Movimientos de datos grandes | Barato (copia de puntero) |
-| Asignación en heap necesaria | Control manual de lifetime |
+> | Caso de Uso | Por qué Box |
+> |----------|---------|
+> | Tipos recursivos | Requisito de tamaño |
+> | Trait objects | Dispatch dinámico |
+> | Movimientos de datos grandes | Barato (copia de puntero) |
+> | Asignación en heap necesaria | Control manual de lifetime |
 
 ### Rendimiento de Box
 
@@ -138,12 +138,12 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Tipo | Borrow Verificado | Caso de Uso |
-|------|---------------|----------|
-| `<code>Box&lt;T&gt;</code>` | Tiempo de compilación | Propiedad única, heap |
-| `<code>Rc&lt;T&gt;</code>` | Tiempo de compilación | Propiedad compartida solo lectura |
-| `<code>RefCell&lt;T&gt;</code>` | Tiempo de ejecución | Mutabilidad interior |
-| `<code>Rc&lt;RefCell&lt;T&gt;&gt;</code>` | Tiempo de ejecución | Propiedad compartida mutable |
+> | Tipo | Borrow Verificado | Caso de Uso |
+> |------|---------------|----------|
+> | `<code>Box&lt;T&gt;</code>` | Tiempo de compilación | Propiedad única, heap |
+> | `<code>Rc&lt;T&gt;</code>` | Tiempo de compilación | Propiedad compartida solo lectura |
+> | `<code>RefCell&lt;T&gt;</code>` | Tiempo de ejecución | Mutabilidad interior |
+> | `<code>Rc&lt;RefCell&lt;T&gt;&gt;</code>` | Tiempo de ejecución | Propiedad compartida mutable |
 
 ### Verificación de Borrow en Tiempo de Ejecución
 

@@ -184,9 +184,9 @@ Coordenadas:
 
 ```mermaid
 flowchart LR
-    A[range(fim)] --> B["range(5) → 0,1,2,3,4"]
-    C[range(inicio, fim)] --> D["range(2, 6) → 2,3,4,5"]
-    E[range(inicio, fim, passo)] --> F["range(0, 10, 2) → 0,2,4,6,8"]
+    A["range(fim)"] --> B["range(5) → 0,1,2,3,4"]
+    C["range(inicio, fim)"] --> D["range(2, 6) → 2,3,4,5"]
+    E["range(inicio, fim, passo)"] --> F["range(0, 10, 2) → 0,2,4,6,8"]
     
     style B fill:#e1f5fe
     style D fill:#e8f5e9

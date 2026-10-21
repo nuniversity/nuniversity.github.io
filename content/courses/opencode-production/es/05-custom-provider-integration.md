@@ -357,7 +357,7 @@ npm test
 
 ---
 
-## Practice Questions
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {

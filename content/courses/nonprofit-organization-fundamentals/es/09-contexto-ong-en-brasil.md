@@ -116,7 +116,7 @@ El contexto de las organizaciones no gubernamentales en Brasil está moldeado po
 - **Desafíos**: Dependencia excesiva de editales municipales (70% de ingreso), infraestructura envejecida, falta de profesionalización en gestión financiera.
 - **Transformación**: 
   - Diversificación de ingresos: Implementación de tarifa moderada por servicios de psicología y asistencia familiar (ahora 15% de ingreso)
-  - Capacitación: Parceria con universidad local para programa de estágios en gestión
+  - Capacitación: Asociación con la universidad local para un programa de pasantías en gestión
   - Tecnología: Implementación de CRM de doadores y sistema de gestión integrada
   - Resultado en 3 años: Reducción de 40% en dependencia de recursos gubernamentales, aumento de 25% en captación individual, mejora en prestação de contas y satisfação de beneficiários.
 
@@ -127,7 +127,7 @@ El contexto de las organizaciones no gubernamentales en Brasil está moldeado po
 - **Transformación**: 
   - Modelo híbrido: Implementación de servicio de consultoría ambiental para empresas (ahora 20% de ingreso)
   - Crowdfunding: Campañas exitosas para proyectos específicos de restauración (arrecadaron R$ 500.000 en 3 campañas)
-  - Parcerias corporativas: Acuerdos de parceria con empresas del sector agro para compensación ambiental
+  - Asociaciones corporativas: Acuerdos de asociación con empresas del sector agropecuario para compensación ambiental
   - Resultado en 3 años: Diversificación de 3 fuentes principales de ingreso, expansión de atuação a más 2 estados, mejora en capacidad técnica mediante contratación de equipo especializado.
 
 ### Estudio de Caso 3: Red de ONGs Juveniles en el Nordeste
@@ -167,7 +167,7 @@ El contexto de las organizaciones no gubernamentales en Brasil está moldeado po
 | **Tamaño medio de ONG** | 3-5 empleados formales | Gran mayoría son organizaciones "micro" |
 | **Tasa de sobrevida 5 años** | Aproximadamente 50% | Tasa similar a otros países; emprendedurismo social desafiante |
 | **Diversificación de ingresos** | Promedio de 2,5 fuentes por organización | Abajo del ideal de 3-5 fuentes para sostenibilidad |
-| **Porcentaje de despesas con programa** | 65-75% (variado por sector) | Dentro de benchmarks internacionales, pero requiere monitorización |
+| **Porcentaje de gastos con programa** | 65-75% (variado por sector) | Dentro de benchmarks internacionales, pero requiere monitorización |
 | **Tasa de retención de doadores** | Aproximadamente 45% | Abajo del ideal de 60%+, indica necesidad de mejora en relacionamiento |
 
 ## Perspectivas Futuras

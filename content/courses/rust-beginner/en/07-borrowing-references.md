@@ -112,12 +112,12 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Scenario | Allowed? | Why |
-|----------|----------|-----|
-| Multiple `&T` | Yes | Read-only, no conflict |
-| One `&mut T` | Yes | Exclusive write access |
-| `&T` + `&mut T` simultaneously | No | Could read while writing |
-| Two `&mut T` simultaneously | No | Two writers = data race |
+> | Scenario | Allowed? | Why |
+> |----------|----------|-----|
+> | Multiple `&T` | Yes | Read-only, no conflict |
+> | One `&mut T` | Yes | Exclusive write access |
+> | `&T` + `&mut T` simultaneously | No | Could read while writing |
+> | Two `&mut T` simultaneously | No | Two writers = data race |
 
 ## Dangling References
 

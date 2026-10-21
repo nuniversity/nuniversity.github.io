@@ -8,22 +8,22 @@ difficulty: "advanced"
 
 # Despliegue
 
-Deploying LangGraph applications to production requires understanding LangGraph Cloud (Platform), API configuration, authentication, scaling, and operational considerations.
+Desplegar aplicaciones LangGraph en producción requiere comprender LangGraph Cloud (Platform), la configuración de la API, la autenticación, el escalado y las consideraciones operativas.
 
 ---
 
 ## Visión General de LangGraph Cloud/Platform
 
-LangGraph Platform provides a managed deployment infrastructure for LangGraph applications:
+LangGraph Platform ofrece una infraestructura de despliegue gestionada para aplicaciones LangGraph:
 
 | Característica | Descripción |
 | :--- | :--- |
-| **Managed API** | Automatic REST API generation from your graph |
-| **Scaling** | Auto-scaling based on demand |
-| **Persistence** | Managed PostgreSQL for checkpointing |
-| **Autenticación** | API key and OAuth support |
-| **Monitoring** | Built-in LangSmith integration |
-| **Streaming** | Server-Sent Eventos (SSE) for real-time output |
+| **API gestionada** | Generación automática de API REST a partir de tu grafo |
+| **Escalado** | Autoescalado según la demanda |
+| **Persistencia** | PostgreSQL gestionado para checkpointing |
+| **Autenticación** | Compatibilidad con clave de API y OAuth |
+| **Monitoreo** | Integración con LangSmith integrada |
+| **Streaming** | Server-Sent Events (SSE) para salida en tiempo real |
 
 ---
 
@@ -46,7 +46,7 @@ LangGraph Platform provides a managed deployment infrastructure for LangGraph ap
 
 ## Configuración de la API del Grafo
 
-Create a `langgraph.json` configuration file at your project root:
+Crea un archivo de configuración `langgraph.json` en la raíz de tu proyecto:
 
 ```json
 {
@@ -70,14 +70,14 @@ Create a `langgraph.json` configuration file at your project root:
 }
 ```
 
-[!IMPORTANTE]
-The `graphs` field maps endpoint names to Python import paths. The value `"./src/agent.py:graph"` means "import `graph` from `src/agent.py`".
+[!IMPORTANT]
+El campo `graphs` asigna nombres de endpoints a rutas de importación de Python. El valor `"./src/agent.py:graph"` significa "importar `graph` desde `src/agent.py`".
 
 ---
 
 ## Despliegue con Dockerfile
 
-For custom deployments, use the official LangGraph Docker image:
+Para despliegues personalizados, usa la imagen oficial de LangGraph para Docker:
 
 ```dockerfile
 FROM langchain/langgraph:latest
@@ -97,7 +97,7 @@ CMD ["langgraph", "serve"]
 
 ## Opciones de Despliegue
 
-### Option 1: LangGraph Cloud (Managed)
+### Opción 1: LangGraph Cloud (gestionado)
 
 ```bash
 # Install CLI
@@ -110,7 +110,7 @@ langgraph deploy --project my-agent
 langgraph secrets set OPENAI_API_KEY sk-...
 ```
 
-### Option 2: Self-Hosted Docker
+### Opción 2: Docker autoalojado
 
 ```bash
 # Build the Docker image
@@ -123,7 +123,7 @@ docker run -p 8080:8080 \
   my-agent
 ```
 
-### Option 3: Kubernetes
+### Opción 3: Kubernetes
 
 ```yaml
 apiVersion: apps/v1
@@ -158,24 +158,24 @@ spec:
               key: url
 ```
 
-[!NOTA]
-For production, use Kubernetes secrets or a vault service for API keys. Never hardcode secrets in your code or config files.
+[!NOTE]
+En producción, usa secretos de Kubernetes o un servicio de vault para las claves de API. Nunca dejes secretos fijos en el código ni en los archivos de configuración.
 
 ---
 
 ## Endpoints de la API
 
-LangGraph Platform generates these REST endpoints:
+LangGraph Platform genera estos endpoints REST:
 
 | Endpoint | Method | Descripción |
 | :--- | :--- | :--- |
-| `/threads` | POST | Create a new conversation thread |
-| `/threads/{id}/runs` | POST | Invoke the graph on a thread |
-| `/threads/{id}/state` | GET | Get thread state |
-| `/threads/{id}/state` | PATCH | Update thread state |
-| `/threads/{id}/runs/{run_id}/stream` | GET | Stream execution events |
+| `/threads` | POST | Crea un nuevo hilo de conversación |
+| `/threads/{id}/runs` | POST | Invoca el grafo en un hilo |
+| `/threads/{id}/state` | GET | Obtiene el estado del hilo |
+| `/threads/{id}/state` | PATCH | Actualiza el estado del hilo |
+| `/threads/{id}/runs/{run_id}/stream` | GET | Transmite los eventos de ejecución |
 
-### Client Example
+### Ejemplo de Cliente
 
 ```python
 import requests
@@ -236,8 +236,8 @@ resp = requests.post(
 )
 ```
 
-[!ADVERTENCIA]
-Rotate API keys regularly. Use short-lived keys for production and revoke compromised keys immediately.
+[!WARNING]
+Rota las claves de API regularmente. Usa claves de corta duración en producción y revoca de inmediato las claves comprometidas.
 
 ---
 
@@ -245,12 +245,12 @@ Rotate API keys regularly. Use short-lived keys for production and revoke compro
 
 | Dimension | Estrategia |
 | :--- | :--- |
-| **Concurrent users** | Horizontal scaling (more replicas) |
-| **Long-running graphs** | Async execution with webhook callbacks |
-| **Database** | PostgreSQL connection pooling (PgBouncer) |
-| **LLM rate limits** | Queue requests, implement retry with backoff |
-| **Memory** | Monitor checkpoint size, trim old checkpoints |
-| **Cold starts** | Keep minimum replicas warm |
+| **Usuarios concurrentes** | Escalado horizontal (más réplicas) |
+| **Grafos de larga duración** | Ejecución asíncrona con callbacks de webhook |
+| **Base de datos** | Agrupación de conexiones PostgreSQL (PgBouncer) |
+| **Límites de tasa del LLM** | Encola solicitudes e implementa reintentos con backoff |
+| **Memoria** | Monitorea el tamaño de los checkpoints y poda los antiguos |
+| **Cold starts** | Mantén las réplicas mínimas activas |
 
 ### Conexión con Base de Datos Pooling
 
@@ -288,7 +288,7 @@ def invoke(input: dict):
 
 ---
 
-## Preguntas Prácticas
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {
@@ -432,13 +432,13 @@ def invoke(input: dict):
 
 ---
 
-[!ÉXITO]
+[!SUCCESS]
 ### Conclusiones Clave
-- langgraph.json configures LangGraph Platform deployment
-- Three deployment options: LangGraph Cloud, self-hosted Docker, Kubernetes
-- REST API: POST /threads → POST /threads/{id}/runs → GET /threads/{id}/state
-- PostgreSQL for production checkpointing; connection pooling for scale
-- API key authentication with regular rotation
-- Horizontal scaling for concurrent users; retry with backoff for rate limits
-- SSE for real-time streaming of execution events and tokens
-- Health checks for monitoring and orchestration
+- langgraph.json configura el despliegue en LangGraph Platform
+- Tres opciones de despliegue: LangGraph Cloud, Docker autoalojado y Kubernetes
+- API REST: POST /threads → POST /threads/{id}/runs → GET /threads/{id}/state
+- PostgreSQL para checkpointing en producción; agrupación de conexiones para escala
+- Autenticación por clave de API con rotação regular
+- Escalado horizontal para usuarios concurrentes; reintentos con backoff para límites de tasa
+- SSE para transmisión en tiempo real de los eventos de ejecución y tokens
+- Health checks para monitoreo y orquestación

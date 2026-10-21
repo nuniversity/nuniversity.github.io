@@ -3,7 +3,6 @@ id: usp-apolo
 title: "USP Apolo - Todos os Cursos de Extensão Gratuitos da USP"
 description: "Sistema Apolo é a porta de entrada para TODOS os cursos gratuitos de extensão, difusão cultural e extensão universitária da USP. 7.000+ vagas por semestre (verão/inverno), centenas de cursos online e presenciais, certificado USP oficial com 75% de frequência. Todas as áreas do conhecimento."
 url: "https://uspdigital.usp.br/apolo"
-thumbnail: "https://www5.usp.br/wp-content/uploads/sites/947/2019/09/logo-marca-usp.jpg"
 author: "Universidade de São Paulo (USP)"
 category: "Open Access Research"
 difficulty: "all"

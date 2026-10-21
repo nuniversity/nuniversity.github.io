@@ -8,18 +8,18 @@ difficulty: "intermediate"
 
 # Memória de Resumo
 
-When conversations grow too long for the LLM's context window, simple trimming discards valuable context. **Sumarização** preserves key information in a compressed form while keeping the conversation manageable.
+Quando as conversas crescem além da janela de contexto do LLM, o truncamento simples descarta contexto valioso. A **Sumarização** preserva as informações-chave em uma forma comprimida, mantendo a conversa gerenciável.
 
 ---
 
 ## O Problema com Conversas Longas
 
-LLMs have token limits. Once a conversation exceeds the limit:
+LLMs têm limites de tokens. Quando uma conversa excede o limite:
 
-1. **Truncamento**: Discards early messages — loses context
-2. **Error**: Context window exceeded — request fails
+1. **Truncamento**: Descarta as mensagens iniciais — perde contexto
+2. **Erro**: Janela de contexto excedida — a solicitação falha
 
-Sumarização solves this by compressing history into a summary while retaining important details.
+A sumarização resolve isso comprimindo o histórico em um resumo e mantendo os detalhes importantes.
 
 ---
 
@@ -34,7 +34,7 @@ Conversation Flow:
 [Updated Summary] ← ...
 ```
 
-A summary node is triggered periodically to condense the conversation.
+Um nó de resumo é acionado periodicamente para condensar a conversa.
 
 ---
 
@@ -78,8 +78,8 @@ def summarize_conversation(state: State) -> dict:
     return {"summary": new_summary}
 ```
 
-[!NOTA]
-The summary node reads the current summary and recent messages, then produces an **updated** summary. This incremental approach is more efficient than re-summarizing the entire conversation.
+[!NOTE]
+O nó de resumo lê o resumo atual e as mensagens recentes e produz um resumo **atualizado**. Essa abordagem incremental é mais eficiente do que resumir a conversa inteira novamente.
 
 ---
 
@@ -128,8 +128,8 @@ def should_summarize_periodic(state: State) -> str:
     return "respond"
 ```
 
-[!SUCESSO]
-Choose your triggering strategy based on the expected conversation length and message size. Token-based is most accurate; count-based is simplest.
+[!SUCCESS]
+Escolha sua estratégia de acionamento com base no tamanho esperado da conversa e das mensagens. A baseada em tokens é a mais precisa; a baseada em contagem é a mais simples.
 
 ---
 
@@ -201,14 +201,14 @@ state = app.get_state(session)
 print(state.values.get("summary"))
 ```
 
-[!DICA]
-In the full agent, the summary is injected into the system prompt on every turn. This means the LLM always has access to compressed context from earlier in the conversation.
+[!TIP]
+No agente completo, o resumo é injetado no prompt de sistema a cada turno. Isso significa que o LLM sempre tem acesso ao contexto comprimido das partes iniciais da conversa.
 
 ---
 
 ## Truncando Após a Sumarização
 
-After summarizing, you can **truncate** the message list to save tokens:
+Depois de resumir, você pode **truncar** a lista de mensagens para economizar tokens:
 
 ```python
 def summarize_and_truncate(state: AgentState) -> dict:
@@ -231,14 +231,14 @@ def summarize_and_truncate(state: AgentState) -> dict:
     }
 ```
 
-[!AVISO]
-When you replace `messages` with a truncated list, the old messages are **permanently gone** (except what the summary captured). Ensure your summary is comprehensive enough.
+[!WARNING]
+Quando você substitui `messages` por uma lista truncada, as mensagens antigas desaparecem **permanentemente** (exceto o que o resumo capturou). Garanta que seu resumo seja suficientemente abrangente.
 
 ---
 
 ## Resumo Contínuo (Incremental)
 
-Rather than summarizing everything at once, maintain a running summary:
+Em vez de resumir tudo de uma vez, mantenha um resumo contínuo:
 
 ```python
 def update_running_summary(state: AgentState) -> dict:
@@ -263,7 +263,7 @@ def update_running_summary(state: AgentState) -> dict:
 
 ## Resumo com Extração de Entidades
 
-Go beyond simple summarization — extract structured entities:
+Vá além do resumo simples — extraia entidades estruturadas:
 
 ```python
 from pydantic import BaseModel, Field
@@ -295,16 +295,16 @@ def extract_memory(state: AgentState) -> dict:
 
 | Aspecto | Truncamento | Sumarização |
 | :--- | :--- | :--- |
-| O que faz | Drops old messages | Compresses history into text |
-| Retenção de informação | Loses everything dropped | Retains key info in summary |
-| Eficiência de tokens | Excellent | Good (summary takes some tokens) |
-| Conhecimento do LLM | Sees only recent history | Sees compressed full history |
-| Implementação | Simple (slicing) | Modorate (LLM call needed) |
-| Custo | Free | LLM call per summarization |
+| O que faz | Descarta mensagens antigas | Comprime o histórico em texto |
+| Retenção de informação | Perde tudo o que foi descartado | Retém as informações-chave no resumo |
+| Eficiência de tokens | Excelente | Boa (o resumo consome alguns tokens) |
+| Conhecimento do LLM | Vê apenas o histórico recente | Vê o histórico completo comprimido |
+| Implementação | Simples (slicing) | Moderada (chamada de LLM necessária) |
+| Custo | Gratuita | Chamada de LLM por sumarização |
 
 ---
 
-## Perguntas Práticas
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {
@@ -468,13 +468,13 @@ def extract_memory(state: AgentState) -> dict:
 
 ---
 
-[!SUCESSO]
+[!SUCCESS]
 ### Principais Conclusões
-- Sumarização preserves key context when conversations exceed token limits
-- Incremental summarization updates an existing summary with new messages
-- Trigger summarization by token count or message count thresholds
-- Inject the summary into the system prompt for every LLM call
-- Truncate messages after summarization to stay within context windows
-- Entity extraction adds structured memory alongside free-text summaries
-- Running summaries trade perfect recall for token efficiency
-- Sumarização costs LLM calls — balance frequency with the cost
+- A sumarização preserva o contexto-chave quando as conversas excedem os limites de tokens
+- O resumo incremental atualiza um resumo existente com novas mensagens
+- Acione o resumo por limiares de contagem de tokens ou de mensagens
+- Injete o resumo no prompt de sistema para cada chamada de LLM
+- Truncate as mensagens após o resumo para permanecer dentro das janelas de contexto
+- A extração de entidades adiciona memória estruturada ao lado dos resumos em texto livre
+- Os resumos contínuos trocam a perfeita lembrança pela eficiência de tokens
+- A sumarização custa chamadas de LLM — equilibre a frequência com o custo

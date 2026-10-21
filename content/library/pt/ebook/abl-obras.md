@@ -3,7 +3,6 @@ id: abl-obras
 title: "Academia Brasileira de Letras (ABL) - Obras Digitalizadas"
 description: "Acesso gratuito às obras dos membros da Academia Brasileira de Letras - os 40 'Imortais' da literatura brasileira. Machado de Assis (primeiro ocupante da Cadeira 23), Carlos Drummond de Andrade, Vinicius de Moraes, Cecília Meireles, Manuel Bandeira, entre outros."
 url: "https://www.academia.org.br"
-thumbnail: "https://www.academia.org.br/sites/all/themes/abl/logo.png"
 author: "Academia Brasileira de Letras (ABL)"
 category: "Literature"
 difficulty: "all"

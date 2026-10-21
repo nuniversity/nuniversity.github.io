@@ -138,7 +138,7 @@ flowchart TD
     B --> C{¿Válido?}
     C -->|Sí| D[Guardar en la base de datos]
     C -->|No| E[Mostrar error]
-    D --> F[[(Base de datos de usuarios)]]
+    D --> F[["(Base de datos de usuarios)"]]
     F --> G[Enviar confirmación]
     
     style F fill:#F3E5F5
@@ -217,7 +217,7 @@ flowchart TD
     G -->|Sí| I[Crear cuenta]
     H --> B
     I --> J[Enviar correo de verificación]
-    J --> K[[(Base de datos de usuarios)]]
+    J --> K[["(Base de datos de usuarios)"]]
     K --> L[[Correo de bienvenida]]
     L --> M([Registro completado])
     
@@ -283,9 +283,9 @@ flowchart TD
     J -->|No| K[/Pago fallido - reintento/]
     J -->|Sí| L[Crear pedido]
     K --> H
-    L --> M[[(Base de datos de pedidos)]]
+    L --> M[["(Base de datos de pedidos)"]]
     M --> N[Actualizar inventario]
-    N --> O[[(Base de datos de inventario)]]
+    N --> O[["(Base de datos de inventario)"]]
     O --> P[Enviar confirmación]
     P --> Q[[Correo de confirmación del pedido]]
     Q --> R([Compra completada])

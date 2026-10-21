@@ -121,9 +121,12 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
 
           {courseInfo && (
             <>
-              <span className="hover:text-foreground max-w-[200px] truncate">
+              <Link
+                href={`/${lang}/courses/${courseSlug}/`}
+                className="hover:text-foreground max-w-[200px] truncate"
+              >
                 {courseInfo.title}
-              </span>
+              </Link>
               <span>/</span>
             </>
           )}
@@ -172,7 +175,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
 
         {/* Lesson Content */}
         <div className="bg-card rounded-lg border p-8 mb-8 shadow-sm">
-          <MarkdownRenderer content={lesson.content} />
+          <MarkdownRenderer content={lesson.content} lang={lang} />
         </div>
 
         {/* Progress Bar */}

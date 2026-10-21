@@ -471,7 +471,7 @@ Passo 6: x + 5 = 8, logo x = 3.
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

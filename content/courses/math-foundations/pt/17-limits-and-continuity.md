@@ -610,7 +610,7 @@ Os limites laterais sao diferentes, entao $\lim_{x \to 2} f(x)$ **nao existe**.
 ---
 
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

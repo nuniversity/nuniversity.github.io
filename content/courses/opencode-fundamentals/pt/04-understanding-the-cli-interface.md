@@ -156,7 +156,7 @@ O OpenCode suporta autocomplete por tab para:
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

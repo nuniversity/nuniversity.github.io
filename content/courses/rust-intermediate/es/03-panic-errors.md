@@ -43,13 +43,13 @@ fn main() {
 ```
 
 > [!WARNING]
-| Situación | ¿Debe Usar panic? | Mejor Alternativa |
-|-----------|-------------------|--------------------|
-| Índice de array fuera de límites | Sí (bug) | Use `.get()` para acceso seguro |
-| Entrada de usuario inválida | No | Retorne `Result` |
-| Archivo de configuración faltante | Tal vez | Retorne `Result` o use `expect` |
-| Timeout de red | No | Retorne `Result` |
-| División por cero | Sí | Verifique antes de dividir |
+> | Situación | ¿Debe Usar panic? | Mejor Alternativa |
+> |-----------|-------------------|--------------------|
+> | Índice de array fuera de límites | Sí (bug) | Use `.get()` para acceso seguro |
+> | Entrada de usuario inválida | No | Retorne `Result` |
+> | Archivo de configuración faltante | Tal vez | Retorne `Result` o use `expect` |
+> | Timeout de red | No | Retorne `Result` |
+> | División por cero | Sí | Verifique antes de dividir |
 
 ### Mensajes de Panic Personalizados
 
@@ -95,11 +95,11 @@ fn main() {
 ```
 
 > [!NOTE]
-| Método | Mensaje | Caso de Uso |
-|--------|---------|-------------|
-| `unwrap()` | Genérica (muestra el valor) | Prototipos rápidos |
-| `expect(msg)` | Personalizada + valor | Documentar suposiciones |
-| `unwrap_or(default)` | Ninguna | Valor predeterminado seguro |
+> | Método | Mensaje | Caso de Uso |
+> |--------|---------|-------------|
+> | `unwrap()` | Genérica (muestra el valor) | Prototipos rápidos |
+> | `expect(msg)` | Personalizada + valor | Documentar suposiciones |
+> | `unwrap_or(default)` | Ninguna | Valor predeterminado seguro |
 
 ## Propagación de Errores con ?
 
@@ -208,13 +208,13 @@ fn main() -> Result<()> {
 ```
 
 > [!NOTE]
-| Característica | `Box<dyn Error>` | `anyhow` |
-|---------|-------------------|----------|
-| Borrado de tipo | Sí | Sí |
-| Adjuntar contexto | Manual | `.with_context()` |
-| Downcasting | Posible | Posible |
-| Popularidad | Stdlib | Estándar de la comunidad |
-| Cuándo usar | Bibliotecas | Aplicaciones |
+> | Característica | `Box<dyn Error>` | `anyhow` |
+> |---------|-------------------|----------|
+> | Borrado de tipo | Sí | Sí |
+> | Adjuntar contexto | Manual | `.with_context()` |
+> | Downcasting | Posible | Posible |
+> | Popularidad | Stdlib | Estándar de la comunidad |
+> | Cuándo usar | Bibliotecas | Aplicaciones |
 
 ## thiserror — Tipos de Error para Bibliotecas
 
@@ -251,11 +251,11 @@ fn process_data() -> Result<(), DataError> {
 ```
 
 > [!SUCCESS]
-| Crate | Propósito | Cuándo Usar |
-|-------|---------|-------------|
-| `anyhow` | Manejo de errores en aplicaciones | Proyectos binarios, CLIs |
-| `thiserror` | Tipos de error para bibliotecas | Crates de biblioteca |
-| Ambos | Definir tipos con thiserror, usar anyhow en apps | Proyectos grandes |
+> | Crate | Propósito | Cuándo Usar |
+> |-------|---------|-------------|
+> | `anyhow` | Manejo de errores en aplicaciones | Proyectos binarios, CLIs |
+> | `thiserror` | Tipos de error para bibliotecas | Crates de biblioteca |
+> | Ambos | Definir tipos con thiserror, usar anyhow en apps | Proyectos grandes |
 
 ## ¿Panic o No?
 

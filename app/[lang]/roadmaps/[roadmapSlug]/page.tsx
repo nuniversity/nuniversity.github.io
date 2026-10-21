@@ -3,7 +3,9 @@ import { RoadmapTimeline } from '@/components/roadmaps/RoadmapTimeline'
 import { i18n, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
+import { Metadata } from 'next'
 
 export const dynamic = 'force-static'
 
@@ -30,27 +32,30 @@ export async function generateStaticParams() {
   return allParams
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { lang: Locale; roadmapSlug: string }
+}): Promise<Metadata> {
+  const roadmap = await getRoadmapContent(params.roadmapSlug, params.lang)
+
+  if (!roadmap) {
+    return { title: 'Roadmap Not Found' }
+  }
+
+  return {
+    title: roadmap.title,
+    description: roadmap.description || undefined,
+  }
+}
+
 export default async function RoadmapViewerPage({ params }: RoadmapViewerPageProps) {
   const { lang, roadmapSlug } = params
   const roadmap = await getRoadmapContent(roadmapSlug, lang)
   const dict = await getDictionary(lang)
 
   if (!roadmap) {
-    return (
-      <div className="container-custom py-12">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl font-bold mb-4">Roadmap Not Found</h1>
-          <p className="text-muted-foreground mb-6">The roadmap you're looking for doesn't exist.</p>
-          <Link
-            href={`/${lang}/roadmaps`}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Roadmaps
-          </Link>
-        </div>
-      </div>
-    )
+    notFound()
   }
 
   return (

@@ -12,7 +12,7 @@ interface FooterProps {
 
 const socialLinks = [
   { name: "Youtube", href: 'https://www.youtube.com/@nuniversity', icon: Youtube },
-  { name: 'Instagram', href: 'https://www.instagram.com/thenuniversity/', icon: Instagram },
+  { name: 'Instagram', href: 'https://www.instagram.com/nuniversityedu/', icon: Instagram },
   { name: 'GitHub', href: 'https://github.com/nuniversity', icon: Github },
   { name: 'LinkedIn', href: 'https://www.linkedin.com/company/nuniversity/', icon: Linkedin },
   { name: 'Email', href: 'mailto:thenuniversitybr@gmail.com', icon: Mail },
@@ -33,12 +33,6 @@ export default function Footer({ lang, dict }: FooterProps) {
       { name: dict.footer.links.engineering, href: `/${lang}/courses` },
       { name: dict.footer.links.mathematics, href: `/${lang}/courses` },
       { name: dict.footer.links.physics, href: `/${lang}/courses` },
-    ],
-    resources: [
-      { name: dict.footer.links.documentation, href: `/${lang}/` },
-      { name: dict.footer.links.blog, href: `/${lang}/` },
-      { name: dict.footer.links.community, href: `/${lang}/` },
-      { name: dict.footer.links.support, href: `/${lang}/` },
     ],
     company: [
       { name: dict.footer.links.aboutUs, href: `/${lang}/about` },
@@ -140,17 +134,6 @@ export default function Footer({ lang, dict }: FooterProps) {
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-400">
               <p>&copy; {currentYear} {dict.footer.copyright} {dict.footer.rights}.</p>
-              <div className="flex space-x-4">
-                <Link href={`/${lang}/`} className="hover:text-white transition-colors">
-                  {dict.footer.links.privacy}
-                </Link>
-                <Link href={`/${lang}/`} className="hover:text-white transition-colors">
-                  {dict.footer.links.terms}
-                </Link>
-                <Link href={`/${lang}/`} className="hover:text-white transition-colors">
-                  {dict.footer.links.cookies}
-                </Link>
-              </div>
             </div>
             
             <div className="flex items-center space-x-2 text-sm text-gray-400">

@@ -8,19 +8,19 @@ difficulty: "intermediate"
 
 # Fundamentos de Multi-Agente
 
-Multi-agent systems use multiple specialized agents that collaborate to solve complex tasks. LangGraph's graph structure is ideal for orchestrating multi-agent workflows.
+Los sistemas multiagente usan múltiples agentes especializados que colaboran para resolver tareas complejas. La estructura de grafo de LangGraph es ideal para orquestar flujos de trabajo multiagente.
 
 ---
 
 ## ¿Por qué Multi-Agente?
 
-Single agents have limitations:
+Los agentes individuales tienen limitaciones:
 
-1. **Context overload**: One agent handling everything exceeds context windows
-2. **Role confusion**: A single agent can't be expert at everything
-3. **Modularity**: Hard to swap or upgrade parts of a monolithic agent
+1. **Sobrecarga de contexto**: Un solo agente que se encarga de todo supera las ventanas de contexto
+2. **Confusión de roles**: Un agente individual no puede ser experto en todo
+3. **Modularidad**: Es difícil sustituir o actualizar partes de un agente monolítico
 
-Multi-agent architecture solves this by **dividing and conquering** — each agent has a focused role and communicates with others through shared state.
+La arquitectura multiagente lo resuelve **dividiendo y conquistando**: cada agente tiene un rol centrado y se comunica con los demás mediante el estado compartido.
 
 ---
 
@@ -76,14 +76,14 @@ builder.add_edge("reviewer", "assembler")
 builder.add_edge("assembler", END)
 ```
 
-[!NOTA]
-Each agent is a separate node with a specialized function. They communicate by reading and writing to the shared state. This keeps each agent simple and focused.
+[!NOTE]
+Cada agente es un nodo separado con una función especializada. Se comunican leyendo y escribiendo en el estado compartido. Esto mantiene a cada agente simple y centrado.
 
 ---
 
 ## Ejecución Multi-Agente Paralela
 
-When agents can work independently, run them in parallel:
+Cuando los agentes pueden trabajar de forma independiente, ejecútalos en paralelo:
 
 ```python
 def agent_a(state: State) -> dict:
@@ -117,14 +117,14 @@ builder.add_edge("agent_c", "merger")
 builder.add_edge("merger", END)
 ```
 
-[!ÉXITO]
-Parallel execution is a key advantage of multi-agent systems. Independent specialists work simultaneously, and a merger node combines their results.
+[!SUCCESS]
+La ejecución paralela es una ventaja clave de los sistemas multiagente. Especialistas independientes trabajan simultáneamente y un nodo de fusión combina sus resultados.
 
 ---
 
 ## Agentes Especializados con LLM
 
-Each agent can have its own LLM with a specialized system prompt:
+Cada agente puede tener su propio LLM con un prompt de sistema especializado:
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -162,14 +162,14 @@ def review_agent(state: TeamState) -> dict:
     return {"review_comments": chain.invoke({"code": state["code_output"]})}
 ```
 
-[!CONSEJO]
-Each agent can use a different model. Use cheaper models (gpt-4o-mini) for simpler tasks and reserve powerful models (gpt-4o) for complex reasoning.
+[!TIP]
+Cada agente puede usar un modelo distinto. Usa modelos más baratos (gpt-4o-mini) para tareas más simples y reserva los modelos potentes (gpt-4o) para el razonamiento complejo.
 
 ---
 
 ## Comunicación entre Agentes vía Estado Estructurado
 
-Define structured fields for inter-agent communication:
+Define campos estructurados para la comunicación entre agentes:
 
 ```python
 class AgentMessage(TypedDict):
@@ -216,7 +216,7 @@ def writer_v2(state: MultiAgentState) -> dict:
 
 ## Agente con Acceso a Herramientas
 
-Each agent can have its own set of tools:
+Cada agente puede tener su propio conjunto de herramientas:
 
 ```python
 from langchain_core.tools import tool
@@ -254,7 +254,7 @@ email_llm = ChatOpenAI(model="gpt-4o").bind_tools(email_tools)
 
 ## Manejo de Errores en Sistemas Multi-Agente
 
-One agent's failure shouldn't crash the team:
+El fallo de un agente no debería tumbar al equipo:
 
 ```python
 def safe_agent(state: MultiAgentState, agent_name: str, agent_func) -> dict:
@@ -348,7 +348,7 @@ print(result["final"])
 
 ---
 
-## Preguntas Prácticas
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {
@@ -512,13 +512,13 @@ print(result["final"])
 
 ---
 
-[!ÉXITO]
+[!SUCCESS]
 ### Conclusiones Clave
-- Multi-agent systems use specialized agents communicating through shared state
-- Fan-out enables parallel agent execution; fan-in merges results
-- Each agent can have its own LLM, tools, and system prompt
-- Structured state fields enable clear agent-to-agent communication
-- Error handling per agent prevents cascade failures
-- Sequential execution for dependent tasks; parallel for independent ones
-- Modular design allows independent development and testing of agents
-- Multi-agent architecture solves context overload and role confusion
+- Los sistemas multiagente usan agentes especializados que se comunican mediante el estado compartido
+- El fan-out permite la ejecución paralela de agentes; el fan-in fusiona los resultados
+- Cada agente puede tener su propio LLM, herramientas y prompt de sistema
+- Los campos de estado estructurados permiten una comunicación clara entre agentes
+- El manejo de errores por agente evita fallos en cascada
+- Ejecución secuencial para tareas dependientes; paralela para las independientes
+- El diseño modular permite el desarrollo y las pruebas independientes de los agentes
+- La arquitectura multiagente resuelve la sobrecarga de contexto y la confusión de roles

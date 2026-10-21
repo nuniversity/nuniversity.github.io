@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex"/>
+<title>NUniversity</title>
+<script>
+(function () {
+  var m = document.cookie.match(/NEXT_LOCALE=(en|pt|es)/)
+  var n = (navigator.language || 'en').slice(0, 2)
+  var locale = (m && m[1]) || (n === 'pt' ? 'pt' : n === 'es' ? 'es' : 'en')
+  location.replace('/' + locale + '/')
+})()
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=/en/"/></noscript>
+</head>
+<body>
+<noscript><p><a href="/en/">English</a> · <a href="/pt/">Português</a> · <a href="/es/">Español</a></p></noscript>
+</body>
+</html>

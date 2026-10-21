@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # RAG Agentic
 
-RAG Agentic combines retrieval-augmented generation with agentic decision-making. Instead of a single retrieve-then-generate pipeline, the agent decides **when** and **what** to retrieve, plans queries, and iteratively refines results.
+El Agentic RAG combina la generación aumentada por recuperación con la toma de decisiones agéntica. En lugar de un único pipeline de recuperar y luego generar, el agente decide **cuándo** y **qué** recuperar, planifica consultas y refina los resultados de forma iterativa.
 
 ---
 
@@ -28,7 +28,7 @@ Query → Analyze → Plan queries → Retrieve → Evaluate → Need more? → 
                                                                     Generate answer
 ```
 
-The agent has **tools** for retrieval and makes decisions about how to use them.
+El agente tiene **herramientas** de recuperación y decide cómo usarlas.
 
 ---
 
@@ -80,8 +80,8 @@ def web_search(query: str) -> str:
     return f"Web results for: {query}"
 ```
 
-[!NOTA]
-Different retrieval tools serve different needs. `search_documents` for semantic search, `search_by_metadata` for filtered access, and `web_search` as a fallback for current info.
+[!NOTE]
+Las herramientas de recuperación distintas atienden a necesidades distintas: `search_documents` para búsqueda semántica, `search_by_metadata` para acceso filtrado y `web_search` como alternativa para información actual.
 
 ---
 
@@ -141,7 +141,7 @@ app = builder.compile()
 
 ## Planificación de Consultas
 
-Instead of a single retrieval, plan multiple sub-queries:
+En lugar de una sola recuperación, planifica varias subconsultas:
 
 ```python
 def plan_queries(state: RAGState) -> dict:
@@ -156,8 +156,8 @@ def plan_queries(state: RAGState) -> dict:
     return {"query_plan": queries}
 ```
 
-[!ÉXITO]
-Query planning ensures comprehensive coverage by breaking a broad question into focused sub-queries, each targeting different aspects of the topic.
+[!SUCCESS]
+La planificación de consultas garantiza una cobertura integral al dividir una pregunta amplia en subconsultas enfocadas, cada una orientada a un aspecto distinto del tema.
 
 ---
 
@@ -198,7 +198,7 @@ def multi_query_search(main_question: str) -> str:
 
 ## Puntuación de Relevancia
 
-Evaluate if retrieved documents are actually relevant:
+Evalúa si los documentos recuperados son realmente relevantes:
 
 ```python
 def score_relevance(query: str, doc: str) -> float:
@@ -223,8 +223,8 @@ def filter_relevant_docs(state: RAGState) -> dict:
     return {"context": relevant}
 ```
 
-[!ADVERTENCIA]
-Relevance scoring adds an LLM call per document. For large result sets, consider embedding similarity scores as a cheaper proxy.
+[!WARNING]
+La puntuación de relevancia añade una llamada a LLM por documento. Para conjuntos grandes de resultados, considera la similitud de embeddings como un sustituto más barato.
 
 ---
 
@@ -288,7 +288,7 @@ app = builder.compile(checkpointer=MemorySaver())
 
 ---
 
-## Preguntas Prácticas
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {
@@ -447,12 +447,12 @@ app = builder.compile(checkpointer=MemorySaver())
 
 ---
 
-[!ÉXITO]
+[!SUCCESS]
 ### Conclusiones Clave
-- RAG Agentic gives the agent control over retrieval decisions
-- ReAct loop: agent → tool (retrieve) → agent → ... → final answer
-- Multiple retrieval tools serve different needs (semantic, metadata, web)
-- Query planning decomposes questions into comprehensive sub-queries
-- Relevance scoring filters irrelevant retrieved documents
-- Tool-based retrieval enables the agent to decide when to search vs. answer
-- Multi-query search ensures broad coverage of complex topics
+- El Agentic RAG da al agente control sobre las decisiones de recuperación
+- Bucle ReAct: agente → herramienta (recuperar) → agente → ... → respuesta final
+- Varias herramientas de recuperación atienden a necesidades distintas (semántica, metadatos, web)
+- La planificación de consultas descompone las preguntas en subconsultas integrales
+- La puntuación de relevancia filtra los documentos recuperados irrelevantes
+- La recuperación basada en herramientas permite al agente decidir cuándo buscar y cuándo responder
+- La búsqueda con múltiples consultas asegura una cobertura amplia de temas complejos

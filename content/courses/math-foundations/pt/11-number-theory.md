@@ -372,7 +372,7 @@ Para primos de 2048 bits (617 dígitos), fatorar n levaria bilhões de anos com 
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

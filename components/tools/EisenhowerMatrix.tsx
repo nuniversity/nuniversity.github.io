@@ -9,26 +9,42 @@ interface EisenhowerMatrixProps {
   dict: any;
 }
 
+type QuadrantKey = 'doFirst' | 'schedule' | 'delegate' | 'eliminate';
+
+interface Task {
+  id: number;
+  text: string;
+  completed: boolean;
+  createdAt: string;
+}
+
+interface ImportedTask {
+  quadrant?: string;
+  task: string;
+  completed?: boolean;
+  createdAt?: string;
+}
+
 const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => {
-  const [tasks, setTasks] = useState({
+  const [tasks, setTasks] = useState<Record<QuadrantKey, Task[]>>({
     doFirst: [],
     schedule: [],
     delegate: [],
     eliminate: []
   });
-  const [newTask, setNewTask] = useState({
+  const [newTask, setNewTask] = useState<Record<QuadrantKey, string>>({
     doFirst: '',
     schedule: '',
     delegate: '',
     eliminate: ''
   });
-  const [editingTask, setEditingTask] = useState(null);
+  const [editingTask, setEditingTask] = useState<{ quadrant: QuadrantKey; id: number } | null>(null);
   const [editingText, setEditingText] = useState('');
   const [view, setView] = useState('matrix');
   const [showCompleted, setShowCompleted] = useState(true);
   const [showImportModal, setShowImportModal] = useState(false);
   const [importError, setImportError] = useState('');
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const translations = {
     en: {
@@ -158,7 +174,7 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
 
   const t = translations[lang] || translations.en;
 
-  const addTask = (quadrant) => {
+  const addTask = (quadrant: QuadrantKey) => {
     if (newTask[quadrant].trim()) {
       setTasks({
         ...tasks,
@@ -173,14 +189,14 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
     }
   };
 
-  const removeTask = (quadrant, id) => {
+  const removeTask = (quadrant: QuadrantKey, id: number) => {
     setTasks({
       ...tasks,
       [quadrant]: tasks[quadrant].filter(task => task.id !== id)
     });
   };
 
-  const toggleComplete = (quadrant, id) => {
+  const toggleComplete = (quadrant: QuadrantKey, id: number) => {
     setTasks({
       ...tasks,
       [quadrant]: tasks[quadrant].map(task => 
@@ -189,7 +205,7 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
     });
   };
 
-  const startEditing = (quadrant, task) => {
+  const startEditing = (quadrant: QuadrantKey, task: Task) => {
     setEditingTask({ quadrant, id: task.id });
     setEditingText(task.text);
   };
@@ -213,8 +229,8 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
     setEditingText('');
   };
 
-  const exportData = (format) => {
-    const allTasks = [];
+  const exportData = (format: string) => {
+    const allTasks: { quadrant: string; task: string; completed: boolean; createdAt: string }[] = [];
     Object.entries(tasks).forEach(([quadrant, taskList]) => {
       taskList.forEach(task => {
         allTasks.push({
@@ -260,7 +276,7 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
     }
   };
 
-  const handleFileUpload = (event) => {
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -268,7 +284,7 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
     reader.onload = (e) => {
       try {
         const content = e.target?.result;
-        importData(content, file.name);
+        importData(content as string, file.name);
       } catch (error) {
         setImportError(t.importError);
       }
@@ -276,21 +292,21 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
     reader.readAsText(file);
   };
 
-  const importData = (content, filename) => {
+  const importData = (content: string, filename: string) => {
     setImportError('');
     try {
       if (filename.endsWith('.json')) {
         const data = JSON.parse(content);
         
         if (data.tasks && Array.isArray(data.tasks)) {
-          const imported = {
+          const imported: Record<string, Task[]> = {
             doFirst: [],
             schedule: [],
             delegate: [],
             eliminate: []
           };
           
-          data.tasks.forEach((item) => {
+          data.tasks.forEach((item: ImportedTask) => {
             const quadrant = item.quadrant;
             if (quadrant && imported[quadrant]) {
               imported[quadrant].push({
@@ -310,7 +326,7 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
         }
       } else if (filename.endsWith('.csv')) {
         const lines = content.split('\n').filter(line => line.trim());
-        const imported = {
+        const imported: Record<string, Task[]> = {
           doFirst: [],
           schedule: [],
           delegate: [],
@@ -352,7 +368,7 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
 
   const quadrants = [
     {
-      key: 'doFirst',
+      key: 'doFirst' as const,
       title: t.doFirst,
       desc: t.doFirstDesc,
       explain: t.doFirstExplain,
@@ -364,7 +380,7 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
       badgeColor: 'bg-red-500'
     },
     {
-      key: 'schedule',
+      key: 'schedule' as const,
       title: t.schedule,
       desc: t.scheduleDesc,
       explain: t.scheduleExplain,
@@ -376,7 +392,7 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
       badgeColor: 'bg-blue-500'
     },
     {
-      key: 'delegate',
+      key: 'delegate' as const,
       title: t.delegate,
       desc: t.delegateDesc,
       explain: t.delegateExplain,
@@ -388,7 +404,7 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
       badgeColor: 'bg-yellow-500'
     },
     {
-      key: 'eliminate',
+      key: 'eliminate' as const,
       title: t.eliminate,
       desc: t.eliminateDesc,
       explain: t.eliminateExplain,
@@ -401,7 +417,7 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
     }
   ];
 
-  const getFilteredTasks = (taskList) => {
+  const getFilteredTasks = (taskList: Task[]) => {
     return showCompleted ? taskList : taskList.filter(task => !task.completed);
   };
 

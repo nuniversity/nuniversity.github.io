@@ -48,11 +48,11 @@ fn retorno_explicito(x: i32) -> i32 {
 ```
 
 > [!NOTE]
-| Sintaxe | Comportamento | Exemplo |
-|---------|---------------|---------|
-| `expr;` (ponto e vírgula) | Statement, retorna `()` | `let x = 5;` |
-| `expr` (sem ponto e vírgula) | Expressão, retorna valor | `x + 1` |
-| `return expr;` | Retorno antecipado | `return Err(e);` |
+> | Sintaxe | Comportamento | Exemplo |
+> |---------|---------------|---------|
+> | `expr;` (ponto e vírgula) | Statement, retorna `()` | `let x = 5;` |
+> | `expr` (sem ponto e vírgula) | Expressão, retorna valor | `x + 1` |
+> | `return expr;` | Retorno antecipado | `return Err(e);` |
 
 ### Funções com Múltiplos Retornos
 
@@ -108,11 +108,11 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Forma de `self` | Acesso | Caso de Uso |
-|-----------------|--------|-------------|
-| `&self` | Somente leitura | Maioria dos métodos |
-| `&mut self` | Leitura + Escrita | Métodos que modificam |
-| `self` | Ownership | Consumindo o valor |
+> | Forma de `self` | Acesso | Caso de Uso |
+> |-----------------|--------|-------------|
+> | `&self` | Somente leitura | Maioria dos métodos |
+> | `&mut self` | Leitura + Escrita | Métodos que modificam |
+> | `self` | Ownership | Consumindo o valor |
 
 ## Funções Associadas
 

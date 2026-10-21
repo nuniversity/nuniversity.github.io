@@ -228,7 +228,7 @@ Se a IA pedir esclarecimentos, forneça mais detalhes:
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

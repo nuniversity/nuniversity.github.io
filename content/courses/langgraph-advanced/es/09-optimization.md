@@ -8,25 +8,25 @@ difficulty: "advanced"
 
 # Optimización
 
-As LangGraph applications scale, performance and cost optimization become critical. This lesson covers strategies to reduce latency, minimize token usage, cache results, batch operations, and tune graph execution.
+A medida que las aplicaciones LangGraph crecen, la optimización de rendimiento y de coste se vuelve crítica. Esta lección cubre estrategias para reducir la latencia, minimizar el consumo de tokens, cachear resultados, agrupar operaciones y ajustar la ejecución del grafo.
 
 ---
 
 ## Dónde Importa la Optimización
 
-| Area | Impacto | Optimización |
+| Área | Impacto | Optimización |
 | :--- | :--- | :--- |
-| LLM calls | Costo + latency | Caching, batching, model selection |
-| Node count | Latency | Merge trivial nodes, reduce unnecessary nodes |
-| State size | Memory + serialization | Trim state, use efficient data structures |
-| Checkpointing | Latency | Reduce checkpoint frequency |
-| Paralelismo | Throughput | Smart fan-out, avoid contention |
+| Llamadas a LLM | Coste + latencia | Caché, agrupación y selección de modelo |
+| Número de nodos | Latencia | Fusiona nodos triviales, reduce los nodos innecesarios |
+| Tamaño del estado | Memoria + serialización | Reduce el estado, usa estructuras de datos eficientes |
+| Checkpointing | Latencia | Reduce la frecuencia de checkpointing |
+| Paralelismo | Throughput | Fan-out inteligente, evita la contención |
 
 ---
 
 ## Caché de Llamadas LLM
 
-Cache LLM responses for identical inputs:
+Cachea las respuestas de LLM para entradas idénticas:
 
 ```python
 from langchain.globals import set_llm_cache
@@ -47,8 +47,8 @@ from langchain.cache import SQLiteCache
 set_llm_cache(SQLiteCache(database_path=".llm_cache.db"))
 ```
 
-[!NOTA]
-LLM caching is most effective when users ask similar questions repeatedly. Cache invalidation should be based on time or manual refresh triggers.
+[!NOTE]
+La caché de LLM es más eficaz cuando los usuarios hacen preguntas similares repetidamente. La invalidación de la caché debe basarse en el tiempo o en disparadores de actualización manual.
 
 ---
 
@@ -157,14 +157,14 @@ class TokenCounter:
         return self.completion_tokens
 ```
 
-[!CONSEJO]
-Track token usage per-graph-invocation. It helps identify which nodes are most expensive and where to focus optimization efforts.
+[!TIP]
+Lleva la cuenta del consumo de tokens por invocación de grafo. Ayuda a identificar qué nodos son más caros y dónde concentrar los esfuerzos de optimización.
 
 ---
 
 ## Agrupación de Llamadas LLM
 
-When multiple independent LLM calls are needed, batch them:
+Cuando se necesiten múltiples llamadas independientes a LLM, agrúpalas:
 
 ```python
 from langchain_core.runnables import RunnableParallel
@@ -247,7 +247,7 @@ app = builder.compile(
 
 ## Estrategia de Selección de Modelo
 
-Use the right model for each node:
+Usa el modelo adecuado para cada nodo:
 
 ```python
 # Expensive model for complex reasoning
@@ -275,8 +275,8 @@ def format_node(state: State) -> dict:
     return {"formatted": formatted.content}
 ```
 
-[!ÉXITO]
-Using different models for different nodes can reduce costs by 5-10x while maintaining quality — use cheap models for routing/simple tasks and expensive models only for complex reasoning.
+[!SUCCESS]
+Usar modelos distintos para nodos distintos puede reducir los costes en un 5-10x manteniendo la calidad: usa modelos baratos para enrutamiento/tareas simples y modelos carosos solo para razonamiento complejo.
 
 ---
 
@@ -284,18 +284,18 @@ Using different models for different nodes can reduce costs by 5-10x while maint
 
 | Estrategia | Esfuerzo | Impacto |
 | :--- | :--- | :--- |
-| LLM response caching | Low | High (repeated queries) |
-| Modelo selection per node | Low | High (cost) |
-| Token trimming | Medium | High (context management) |
-| Merge trivial nodes | Low | Medium (latency) |
-| Reduce checkpoint frequency | Low | Medium (latency) |
-| Parallel independent work | Medium | High (latency) |
-| Batch multiple LLM calls | Medium | Medium (throughput) |
-| Stream instead of wait | High | High (user experience) |
+| Caché de respuestas de LLM | Bajo | Alto (consultas repetidas) |
+| Selección de modelo por nodo | Bajo | Alto (coste) |
+| Truncado de tokens | Medio | Alto (gestión de contexto) |
+| Fusionar nodos triviales | Bajo | Medio (latencia) |
+| Reducir la frecuencia de checkpointing | Bajo | Medio (latencia) |
+| Trabajo independiente en paralelo | Medio | Alto (latencia) |
+| Agrupar múltiples llamadas a LLM | Medio | Medio (throughput) |
+| Transmisión en vez de espera | Alto | Alto (experiencia de usuario) |
 
 ---
 
-## Preguntas Prácticas
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {
@@ -461,13 +461,13 @@ Using different models for different nodes can reduce costs by 5-10x while maint
 
 ---
 
-[!ÉXITO]
+[!SUCCESS]
 ### Conclusiones Clave
-- Cache LLM responses for repeated queries to reduce cost and latency
-- Use appropriate model per node: cheap for simple, expensive for complex
-- Track token usage with tiktoken to manage context windows and budgets
-- Merge trivial nodes to reduce overhead, but keep meaningful nodes separate
-- Reduce checkpoint frequency for high-throughput graphs
-- Parallelize independent work with fan-out for latency improvements
-- Batch multiple independent LLM calls with RunnableParallel
-- Streaming improves perceived performance even if total latency is the same
+- Cachea las respuestas de LLM para consultas repetidas y reduce coste y latencia
+- Usa el modelo adecuado por nodo: barato para lo simple, caro para lo complejo
+- Lleva la cuenta del consumo de tokens con tiktoken para gestionar ventanas de contexto y presupuestos
+- Fusiona nodos triviales para reducir la sobrecarga, pero mantén separados los nodos significativos
+- Reduce la frecuencia de checkpointing para grafos de alto rendimiento
+- Paraleliza el trabajo independiente con fan-out para mejorar la latencia
+- Agrupa múltiples llamadas independientes a LLM con RunnableParallel
+- La transmisión mejora el rendimiento percibido aunque la latencia total sea la misma

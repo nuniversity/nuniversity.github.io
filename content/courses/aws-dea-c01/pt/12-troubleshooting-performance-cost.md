@@ -86,7 +86,7 @@ Esta tabela é o núcleo examinável da Habilidade 3.3.4. Cada linha é um modo 
 flowchart TD
     F["Execução do pipeline falha ou está lenta"] --> L["Etapa 1: leia o log de erro do CloudWatch"]
     L --> S{"Assinatura na mensagem"}
-    S -->|OOM| M["Qual métrica de heap estoura?"}
+    S -->|OOM| M["Qual métrica de heap estoura?"]
     M -->|driver| D["Driver: índice de small files ou collect - groupFiles, pushdown, useS3ListImplementation"]
     M -->|executor| X["Executor: partição gorda ou join grande - worker maior, repartition, fetchsize"]
     S -->|AccessDenied| I["IAM: conserte a política do papel do job - GetObject, ListBucket, GetBucketLocation"]

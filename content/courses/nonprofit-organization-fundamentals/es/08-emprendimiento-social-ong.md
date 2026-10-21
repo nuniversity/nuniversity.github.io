@@ -138,9 +138,9 @@ La organización exitosa replica su modelo en nuevas localidades através de fra
 
 #### Desafíos
 - **Control de calidad**: Mantener consistencia en múltiples localidades
-- **Complejidad operativa**: Systems, entrenamiento, apoyo para franquiciados
+- **Complejidad operativa**: Sistemas, capacitación y apoyo para los franquiciados
 - **Dilución de marca**: Riesgo de inconsistencia afectar la reputación de la organización-matriz
-- **Conflictos de interés**: Desalinhamientos entre franquiciado y organización-matriz
+- **Conflictos de interés**: Desalineaciones entre el franquiciado y la organización matriz
 
 #### Ejemplos Comunes
 - Redes de clínicas de salud en áreas carentes
@@ -158,44 +158,44 @@ Antes de incorporar modelos de negocio, las ONGs deben evaluar:
 
 | Área | Preguntas clave | Nivel de Preparación |
 |---|---|---|
-| **Alinhamento da missão** | O modelo de negocio apoia ou contradiz a missão? | Alta: claramente apoiador; Média: algum alinhamento necessário; Baixa: evite |
-| **Expertise interna** | A organização tem skills/team necessários? | Alta: equipe experiente; Média: development needed; Baixa: parceria recomendada |
-| **Demanda de mercado** | Há demanda real pelos serviços/productos? | Alta: pesquisa validada; Média: interesse preliminar; Baixa: research recomendada |
-| **Capacidade financeira** | Pode arcar com custos iniciais até se tornar viável? | Alta: reserve funds; Média: fundraising needed; Baixa: avoid until stable |
-| **Risco reputacional** | Há riscos que possam danificar a reputação da marca? | Alta: riscos gerenciáveis; Média: mitigação needed; Baixa: evitar modelo arriscado |
+| **Alineación de la misión** | ¿El modelo de negocio apoya o contradice la misión? | Alta: claramente favorable; Media: requiere algo de alineación; Baja: evítelo |
+| **Experiencia interna** | ¿Tiene la organización las habilidades/el equipo necesarios? | Alta: equipo experimentado; Media: se necesita desarrollo; Baja: se recomienda asociación |
+| **Demanda de mercado** | ¿Hay demanda real de los servicios/productos? | Alta: investigación validada; Media: interés preliminar; Baja: se recomienda investigación |
+| **Capacidad financiera** | ¿Puede asumir los costos iniciales hasta ser viable? | Alta: fondos de reserva; Media: se necesita recaudación; Baja: evítelo hasta estar estable |
+| **Riesgo reputacional** | ¿Hay riesgos que puedan dañar la reputación de la marca? | Alta: riesgos gestionables; Media: se requiere mitigación; Baja: evite el modelo arriesgado |
 
-### Passos de Implementação
+### Pasos de Implementación
 
-1. **Identificação de oportunidades**: Mapear áreas onde um modelo de negócio poderia apoiar a missão
-2. **Pesquisa de mercado**: Validar demanda, concorrência, preços potenciais
-3. **Piloto**: Testar o modelo em pequena escala antes de escalar
-4. **Desenvolvimento de plano de negócios**: Estratégia detalhada incluindo receitas, custos, projeções
-5. **Capacitação de equipe**: Training staff/voluntários necessários para novas atividades
-6. **Lançamento e monitoramento**: Implementar e monitorar KPIs regularmente, ajustando conforme necessário
+1. **Identificación de oportunidades**: Mapear áreas donde un modelo de negocio podría apoyar la misión
+2. **Investigación de mercado**: Validar demanda, competencia, precios potenciales
+3. **Piloto**: Probar el modelo a pequeña escala antes de escalar
+4. **Desarrollo del plan de negocios**: Estrategia detallada incluyendo ingresos, costos, proyecciones
+5. **Capacitación del equipo**: Capacitación del personal/voluntarios necesaria para las nuevas actividades
+6. **Lanzamiento y monitoreo**: Implementar y monitorear los KPIs regularmente, ajustando según sea necesario
 
-### Considerações Legais e Tributárias
+### Consideraciones Legales y Tributarias
 
-#### Manter Status de Isenção Tributária
-- **Separação clara**: Finanças de atividades de negócio vs. missão não-lucrativa devem ser claras
-- **Reporting adequado**: Demonstrativos financeiros devem separar receitas de operações de missão
-- **Limites de atividade**: Algumas jurisdições limitam o percentual de receita que pode vir de atividades geradoras de renda
-- **Consultoria jurídica**: Consultar com especialistas em direito sem fins lucrativos antes de iniciar novos modelos
+#### Mantener el Status de Exención Tributaria
+- **Separación clara**: Las finanzas de las actividades de negocio vs. la misión sin fines de lucro deben ser claras
+- **Informes adecuados**: Los estados financieros deben separar los ingresos de las operaciones de misión
+- **Límites de actividad**: Algunas jurisdicciones limitan el porcentaje de ingresos que puede provenir de actividades generadoras de renta
+- **Asesoría jurídica**: Consultar con especialistas en derecho sin fines de lucro antes de iniciar nuevos modelos
 
-#### Estruturas Híbridas
-- **Subsidiárias**: Criar subsidiárias de fins lucrativos para atividades geradoras de renda, mantendo a organização-mãe sem fins lucrativos
-- **Fideicomisso**: Estrutura que permite distribuição controlada de sobras para fins sociais
-- **Parcerias estratégicas**: Alianças com empresas de fins lucrativos para atividades conjuntas
+#### Estructuras Híbridas
+- **Subsidiarias**: Crear subsidiarias con fines de lucro para actividades generadoras de renta, manteniendo la organización matriz sin fines de lucro
+- **Fideicomiso**: Estructura que permite la distribución controlada de excedentes para fines sociales
+- **Asociaciones estratégicas**: Alianzas con empresas con fines de lucro para actividades conjuntas
 
 ---
 
-## Estudos de Caso
+## Estudios de Caso
 
 ### Caso 1: Universidad Comunitaria sin Fins Lucrativos
 
 - **Organización**: Universidad comunitaria que ofrece educación superior accesible
 - **Modelo híbrido**: Mensualidad estudiantil (tarifas moderadas) + subvenciones gubernamentales + donaciones de fundaciones + eventos de recaudación
 - **Desafío**: Mantener accesibilidad mientras sustenta operaciones
-- **Solución**: Escalas móviles de mensualidad, parcerías con empleadores para reembolso de tarifa, fondo endowment para estudiantes carentes
+- **Solución**: Escalas móviles de mensualidad, asociaciones con empleadores para reembolso de la tarifa, fondo endowment para estudiantes necesitados
 - **Resultado**: 80% estudiantes reciben algún tipo de auxilio financiero; universidad opera con superávit anual reinvertido en becas
 
 ### Caso 2: ONG Ambiental con Productos Sustentables
@@ -203,8 +203,8 @@ Antes de incorporar modelos de negocio, las ONGs deben evaluar:
 - **Organización**: ONG focalizada en conservación ambiental
 - **Modelo**: Venta de productos sostenibles (semillas orgánicas, productos de artesanía ecológica, libros educativos)
 - **Desafío**: Cobrir costos de producción mientras avanzan en la misión de conservación
-- **Solución**: Parceria con retailers existentes, ferias de productores locales, modelo de "compre uno, doe uno" (compra de producto apoya proyecto de plantación)
-- **Resultado**: 30% de la receita operacional vem de vendas de productos; compromiso de clientes aumentó 40%
+- **Solución**: Asociación con minoristas existentes, ferias de productores locales, modelo de "compra uno, dona uno" (la compra de un producto apoya un proyecto de plantación)
+- **Resultado**: 30% de los ingresos operativos provienen de la venta de productos; el compromiso de los clientes aumentó 40%
 
 ### Caso 3: Organización de Salud con Modelos de Consultoría
 
@@ -220,23 +220,23 @@ Antes de incorporar modelos de negocio, las ONGs deben evaluar:
 
 ### Beneficios Potenciales
 
-1. **Sostenibilidad financiera**: Reduce dependência de fontes de financiamento voláteis
-2. **Aumento de impacto**: Mais recursos disponíveis para programas e serviços
-3. **Credibilidade aprimorada**: Modelos exitosos demonstram competência e inovação
-4. **Compromisso fortalecido**: Novas formas de apoyar atraem diferentes tipos de stakeholders
-5. **Resiliência**: Organizaciones más preparadas para desafios econômicos ou mudanças políticas
+1. **Sostenibilidad financiera**: Reduce la dependencia de fuentes de financiación volátiles
+2. **Aumento de impacto**: Más recursos disponibles para programas y servicios
+3. **Credibilidad mejorada**: Los modelos exitosos demuestran competencia e innovación
+4. **Compromiso fortalecido**: Nuevas formas de apoyar atraen a diferentes tipos de interesados
+5. **Resiliencia**: Organizaciones más preparadas para desafíos económicos o cambios políticos
 
-### Riscos Potenciales
+### Riesgos Potenciales
 
-1. **Mission drift**: Foco desviado da missão principal em direção ao lucro
-2. **Resource diversion**: Tempo e atenção desviados das atividades core da organização
-3. **Reputational risk**: Percepção de "vender out" a causa ou explorar beneficiários
-4. **Legal/Compliance issues**: Non-compliance with regulations governing non-profit activities
-5. **Staff burnout**: Expectativas aumentadas sem recursos ou suporte proporcional
+1. **Mission drift**: El foco se desvía de la misión principal hacia el lucro
+2. **Resource diversion**: Tiempo y atención desviados de las actividades principales de la organización
+3. **Reputational risk**: Percepción de "vender" la causa o explotar a los beneficiarios
+4. **Legal/Compliance issues**: Incumplimiento de las regulaciones que rigen las actividades sin fines de lucro
+5. **Staff burnout**: Expectativas aumentadas sin los recursos o el apoyo proporcionales
 
 ---
 
-## Contexto de Prova
+## Contexto de Examen
 
 Preguntas sobre este tópico frecuentemente testan:
 - Diferencia entre emprendimiento social y negocios tradicionales

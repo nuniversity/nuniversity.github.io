@@ -1,0 +1,32 @@
+file	url	reason
+content/library/en/podcast/software-engineering-daily.md	https://softwareengineeringdaily.com/2019/01/28/kubernetes-with-craig-mcluckie/	episode removed
+content/library/pt/article/hemeroteca-digital.md	https://bndigital.bn.gov.br/hemeroteca-digital	403 bot-blocked at check; retained pending live check
+content/library/pt/course/aprenda-mais-mec.md	https://aprendamais.mec.gov.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/course/astrofisica-ufsc.md	https://astrofisica.ufsc.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/course/avamec-mec.md	https://avamec.mec.gov.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/course/centro-paula-souza.md	https://www.cps.sp.gov.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/course/efisica-usp.md	http://efisica.if.usp.br/	http:// scheme + fetch error at check; retained pending live check
+content/library/pt/course/estudos-indigenas-afrobrasileiros.md	https://unilab.edu.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/course/explora-unicamp.md	https://explora.ft.unicamp.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/course/fflch-usp-extensao.md	https://sce.fflch.usp.br/	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/course/fgv-cursos-gratuitos.md	https://educacao-executiva.fgv.br/cursos/gratuitos	shared FGV free-courses hub; distinct offerings
+content/library/pt/course/fgv-direito.md	https://educacao-executiva.fgv.br/cursos/gratuitos	shared FGV free-courses hub; distinct offerings
+content/library/pt/course/fgv-economia.md	https://educacao-executiva.fgv.br/cursos/gratuitos	shared FGV free-courses hub; distinct offerings
+content/library/pt/course/fundacao-bradesco-ev.md	https://www.ev.org.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/course/fundacao-telefonica-ec.md	https://www.fundacaotelefonicavivo.org.br/escolas-conectadas	403 bot-blocked at check; retained pending live check
+content/library/pt/course/instituto-claro.md	https://www.institutoclaro.org.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/course/sesc-digital-ead.md	https://ead.sesc.digital	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/course/ufrgs-lumina.md	https://lumina.ufrgs.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/course/unicamp-moocs.md	https://moocs.ggte.unicamp.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/course/univesp.md	https://univesp.br	403 bot-blocked at check; retained pending live check
+content/library/pt/course/veduca.md	https://veduca.org	veduca.org bot-blocked 403
+content/library/pt/ebook/abl-obras.md	https://www.academia.org.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/ebook/biblioteca-nacional-digital.md	https://bndigital.bn.gov.br	403 bot-blocked at check; retained pending live check
+content/library/pt/ebook/biblioteca-paulo-freire.md	https://www.paulofreire.ufpb.br	fetch timeout at check; retained pending live check
+content/library/pt/ebook/casa-do-codigo.md	https://www.casadocodigo.com.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/ebook/dominio-publico-mec.md	https://dominiopublico.mec.gov.br	403 bot-blocked at check; retained pending live check
+content/library/pt/ebook/gutenberg-brasil.md	https://www.gutenberg.com.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/repository/bdtd.md	https://bdtd.ibict.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/repository/capes-periodicos.md	https://www.periodicos.capes.gov.br	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)
+content/library/pt/repository/ibge-geociencias.md	https://ibge.gov.br/geociencias	fetch error at check; retained pending live check
+content/library/pt/repository/redalyc.md	https://www.redalyc.org	bare-host root URL; verified 200, deeper path not pinned (D6 no-guess)

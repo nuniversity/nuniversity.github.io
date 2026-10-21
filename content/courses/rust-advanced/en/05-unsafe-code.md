@@ -253,12 +253,12 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Principle | Example |
-|-----------|---------|
-| Unsafe internally | Use unsafe for implementation |
-| Safe externally | Expose only safe API |
-| Document invariants | Safety contract in comments |
-| Minimize scope | Keep unsafe blocks small |
+> | Principle | Example |
+> |-----------|---------|
+> | Unsafe internally | Use unsafe for implementation |
+> | Safe externally | Expose only safe API |
+> | Document invariants | Safety contract in comments |
+> | Minimize scope | Keep unsafe blocks small |
 
 ## Common Unsafe Patterns
 

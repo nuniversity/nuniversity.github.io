@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 sys.path.insert(0, str(Path(__file__).parent))
+sys.modules.pop("skill_tester", None)
 from skill_tester import (
     check_skill_discovery,
     check_frontmatter_valid,

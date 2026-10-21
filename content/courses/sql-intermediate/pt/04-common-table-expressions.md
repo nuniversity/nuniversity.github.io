@@ -1,12 +1,12 @@
 ---
-title: "Common Table Expressions (CTEs)"
+title: "Expressões de Tabela Comuns (Common Table Expressions, CTEs)"
 description: "Domine a sintaxe WITH/CTE, CTEs múltiplas, CTEs recursivas e quando usar CTEs vs subconsultas"
 order: 4
 duration: "50 minutos"
 difficulty: "intermediário"
 ---
 
-# Common Table Expressions (CTEs)
+# Expressões de Tabela Comuns (Common Table Expressions, CTEs)
 
 Uma Common Table Expression (CTE) é um conjunto de resultados temporário nomeado que existe dentro do escopo de uma única consulta. CTEs tornam consultas complexas mais legíveis, reutilizáveis e fáceis de manter.
 

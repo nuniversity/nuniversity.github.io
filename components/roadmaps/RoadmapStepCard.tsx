@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle, Circle, Lock, ChevronDown, ChevronUp, ExternalLink, Lightbulb, MessageCircle, GitBranch, BookOpen } from 'lucide-react'
 import { type RoadmapStep, type RoadmapRelationship, STEP_TYPE_CONFIG } from '@/lib/roadmaps/types'
+import { resolveContentUrl } from '@/lib/roadmaps/resolve-content-url'
 import { type Locale } from '@/lib/i18n/config'
 
 interface RoadmapStepProps {
@@ -189,10 +190,10 @@ export function RoadmapStepCard({ step, index, isCompleted, isLocked, isCurrent,
               )}
 
               {/* Go to Course button */}
-              {step.contentRef && (
+              {resolveContentUrl(step, lang) && (
                 <div className="mb-4">
                   <Link
-                    href={`/${lang}/courses/${step.contentRef}`}
+                    href={resolveContentUrl(step, lang) as string}
                     className="w-full flex items-center justify-center gap-2 py-3 rounded-lg font-medium bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700 transition-all"
                   >
                     <BookOpen className="w-5 h-5" />

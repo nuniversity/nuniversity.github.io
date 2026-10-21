@@ -152,11 +152,11 @@ impl KvStore {
 ```
 
 > [!SUCCESS]
-| Operación | Lock | Concurrencia |
-|-----------|------|-------------|
-| `get` / `exists` / `keys` | Lock de lectura | Lectores ilimitados |
-| `set` / `delete` / `flush` | Lock de escritura | Acceso exclusivo |
-| Expiración TTL | Upgrade a escritura | Limpieza en segundo plano |
+> | Operación | Lock | Concurrencia |
+> |-----------|------|-------------|
+> | `get` / `exists` / `keys` | Lock de lectura | Lectores ilimitados |
+> | `set` / `delete` / `flush` | Lock de escritura | Acceso exclusivo |
+> | Expiración TTL | Upgrade a escritura | Limpieza en segundo plano |
 
 ## Paso 3: Manejador de Protocolo de Red
 

@@ -170,7 +170,7 @@ Campos permitem divisão (exceto por zero). São a base da álgebra linear e geo
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

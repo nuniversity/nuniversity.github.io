@@ -130,13 +130,13 @@ print(f"{number} is {'even' if is_even else 'odd'}")
 ```
 
 > [!SUCCESS]
-| Operador | Categoría | Ejemplo |
-|---|---|---|
-| `+ - * /` | Aritmética | `5 + 3` |
-| `% // **` | Aritmética | `10 % 3` |
-| `== != < > <= >=` | Comparación | `age >= 18` |
-| `and or not` | Lógica | `a and b` |
-| `= += -=` | Asignación | `x += 1` |
+> | Operador | Categoría | Ejemplo |
+> |---|---|---|
+> | `+ - * /` | Aritmética | `5 + 3` |
+> | `% // **` | Aritmética | `10 % 3` |
+> | `== != < > <= >=` | Comparación | `age >= 18` |
+> | `and or not` | Lógica | `a and b` |
+> | `= += -=` | Asignación | `x += 1` |
 
 ## Preguntas de Práctica
 

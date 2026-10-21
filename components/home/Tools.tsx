@@ -132,7 +132,7 @@ export default function Tools({ lang, dict, tools }: ToolsProps) {
             href={`/${lang}/tools`}
             className="inline-flex items-center space-x-2 text-blue-600 dark:text-blue-400 font-medium hover:underline"
           >
-            <span>{dict.tools?.title ? `View all ${dict.tools?.total_tools || 'tools'}` : 'View all tools'}</span>
+            <span>{dict.tools?.view_all || 'View All Tools'}</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>

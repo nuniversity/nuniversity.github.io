@@ -4,7 +4,7 @@ export const revalidate = false
 
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import { type Locale } from '@/lib/i18n/config'
-import { getAllCourses, getAllLessons } from '@/lib/courses/get-course-content'
+import { getAllCourses } from '@/lib/courses/get-course-content'
 import { Metadata } from 'next'
 import { CoursesClient } from './courses-client'
 
@@ -29,15 +29,13 @@ export default async function CoursesPage({ params }: CoursesPageProps) {
   const { lang } = params
   const dict = await getDictionary(lang)
   
-  // Get all courses and lessons at build time
+  // Get all courses at build time
   const allCourses = await getAllCourses(lang)
-  const allLessonsData = await getAllLessons(null, lang)
 
   return (
     <CoursesClient 
       lang={lang}
       courses={allCourses}
-      lessonsData={allLessonsData}
       dict={dict}
     />
   )

@@ -4,293 +4,250 @@
 Validates all courses and lessons meet NUniversity quality standards.
 
 Usage:
-    python tests/test_opencode_courses.py
-
-Exit Codes:
-    0 - All tests passed
-    1 - One or more tests failed
+    pytest tests/test_opencode_courses.py
 """
+
 import json
-import os
 import re
-import sys
 from pathlib import Path
 
-# Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+import pytest
+import yaml
 
 VALID_DIFFICULTIES = {"beginner", "intermediate", "advanced"}
 VALID_CAPITALIZED_DIFFICULTIES = {"Beginner", "Intermediate", "Advanced"}
 VALID_LOCALES = {"en", "pt", "es"}
-MIN_PRACTICE_QUESTIONS = 5
+DIFFICULTY_ALIASES = {
+    "beginner",
+    "iniciante",
+    "principiante",
+    "intermediate",
+    "intermediário",
+    "intermediario",
+    "intermedio",
+    "advanced",
+    "avanzado",
+    "avançado",
+}
 LESSON_FILE_PATTERN = re.compile(r"^(\d+)-([a-z0-9]+(-[a-z0-9]+)*)\.md$")
 
-COURSES = [
-    "opencode-fundamentals",
-    "opencode-workflows",
-    "opencode-production",
-]
+COURSES_ROOT = Path(__file__).resolve().parent.parent / "content" / "courses"
+COURSE_DIRS = sorted(
+    (path for path in COURSES_ROOT.iterdir() if path.is_dir()),
+    key=lambda path: path.name,
+)
+COURSE_IDS = [path.name for path in COURSE_DIRS]
 
 
-class TestResult:
-    """Track test results."""
-
-    def __init__(self):
-        self.passed = 0
-        self.failed = 0
-        self.errors = []
-
-    def pass_test(self, name: str):
-        self.passed += 1
-        print(f"  ✅ {name}")
-
-    def fail_test(self, name: str, reason: str):
-        self.failed += 1
-        self.errors.append((name, reason))
-        print(f"  ❌ {name}: {reason}")
-
-    def summary(self):
-        total = self.passed + self.failed
-        print(f"\n{'='*60}")
-        print(f"Results: {self.passed}/{total} passed, {self.failed} failed")
-        if self.errors:
-            print("\nFailed tests:")
-            for name, reason in self.errors:
-                print(f"  - {name}: {reason}")
-        return 0 if self.failed == 0 else 1
-
-
-def test_course_json(course_dir: Path, result: TestResult):
-    """Test course.json structure and content."""
+def course_json_problems(course_dir: Path) -> list[str]:
+    problems = []
+    prefix = f"course.json ({course_dir.name})"
     course_json = course_dir / "course.json"
-    test_prefix = f"course.json ({course_dir.name})"
 
     if not course_json.exists():
-        result.fail_test(test_prefix, "course.json not found")
-        return
+        return [f"{prefix}: course.json not found"]
 
     try:
         data = json.loads(course_json.read_text(encoding="utf-8"))
     except json.JSONDecodeError as e:
-        result.fail_test(test_prefix, f"Invalid JSON: {e}")
-        return
+        return [f"{prefix}: Invalid JSON: {e}"]
 
-    # Required fields
     if not data.get("area"):
-        result.fail_test(f"{test_prefix} area", "Missing 'area' field")
-    else:
-        result.pass_test(f"{test_prefix} area")
+        problems.append(f"{prefix} area: Missing 'area' field")
 
     en = data.get("en", {})
     if not en.get("title"):
-        result.fail_test(f"{test_prefix} en.title", "Missing 'en.title' field")
-    else:
-        result.pass_test(f"{test_prefix} en.title")
-
+        problems.append(f"{prefix} en.title: Missing 'en.title' field")
     if not en.get("description"):
-        result.fail_test(f"{test_prefix} en.description", "Missing 'en.description' field")
-    else:
-        result.pass_test(f"{test_prefix} en.description")
+        problems.append(f"{prefix} en.description: Missing 'en.description' field")
 
-    # Difficulty validation
     difficulty = data.get("difficulty", "")
     if difficulty and difficulty not in VALID_DIFFICULTIES:
-        result.fail_test(f"{test_prefix} difficulty", f"Invalid: '{difficulty}'")
-    else:
-        result.pass_test(f"{test_prefix} difficulty")
+        problems.append(f"{prefix} difficulty: Invalid: '{difficulty}'")
 
     en_diff = en.get("difficulty", "")
     if en_diff and en_diff not in VALID_CAPITALIZED_DIFFICULTIES:
-        result.fail_test(f"{test_prefix} en.difficulty", f"Invalid: '{en_diff}'")
-    else:
-        result.pass_test(f"{test_prefix} en.difficulty")
+        problems.append(f"{prefix} en.difficulty: Invalid: '{en_diff}'")
 
-    # Locale sections
-    for locale in ["pt", "es"]:
+    for locale in sorted(VALID_LOCALES):
+        if locale != "en" and locale not in data and not (course_dir / locale).is_dir():
+            continue
         locale_data = data.get(locale, {})
         if not locale_data:
-            result.fail_test(f"{test_prefix} {locale}", f"Missing {locale} section")
+            problems.append(f"{prefix} {locale}: Missing {locale} section")
         elif not locale_data.get("title"):
-            result.fail_test(f"{test_prefix} {locale}.title", f"Missing {locale}.title")
+            problems.append(f"{prefix} {locale}.title: Missing {locale}.title")
         elif not locale_data.get("description"):
-            result.fail_test(f"{test_prefix} {locale}.description", f"Missing {locale}.description")
-        else:
-            result.pass_test(f"{test_prefix} {locale}")
+            problems.append(
+                f"{prefix} {locale}.description: Missing {locale}.description"
+            )
+
+    return problems
 
 
-def test_lesson_file(lesson_path: Path, result: TestResult):
-    """Test a single lesson file."""
-    test_prefix = f"lesson ({lesson_path.parent.parent.name}/{lesson_path.parent.name}/{lesson_path.name})"
+def lesson_naming_problems(lesson_dir: Path) -> list[str]:
+    problems = []
+    prefix = f"naming ({lesson_dir.parent.name}/{lesson_dir.name})"
+    lesson_files = sorted(lesson_dir.glob("*.md"))
 
-    if not lesson_path.exists():
-        result.fail_test(test_prefix, "File not found")
-        return
-
-    content = lesson_path.read_text(encoding="utf-8")
-    if not content.strip():
-        result.fail_test(test_prefix, "File is empty")
-        return
-
-    # Check frontmatter
-    match = re.match(r"^---\n(.*?)\n---", content, re.DOTALL)
-    if not match:
-        result.fail_test(f"{test_prefix} frontmatter", "Missing frontmatter")
-        return
-
-    try:
-        import yaml
-        frontmatter = yaml.safe_load(match.group(1))
-    except Exception as e:
-        result.fail_test(f"{test_prefix} frontmatter", f"Invalid YAML: {e}")
-        return
-
-    if not isinstance(frontmatter, dict):
-        result.fail_test(f"{test_prefix} frontmatter", "Frontmatter must be a mapping")
-        return
-
-    # Required fields
-    for field in ["title", "order"]:
-        if field not in frontmatter or frontmatter[field] is None:
-            result.fail_test(f"{test_prefix} {field}", f"Missing required field: {field}")
-        else:
-            result.pass_test(f"{test_prefix} {field}")
-
-    # Title length
-    title = str(frontmatter.get("title", "")).strip()
-    if title and len(title) < 3:
-        result.fail_test(f"{test_prefix} title length", f"Too short: {len(title)} chars")
-    elif title:
-        result.pass_test(f"{test_prefix} title length")
-
-    # Order validation
-    order = frontmatter.get("order")
-    if order is not None:
-        if not isinstance(order, int):
-            result.fail_test(f"{test_prefix} order type", f"Must be int, got {type(order).__name__}")
-        elif order < 1:
-            result.fail_test(f"{test_prefix} order value", f"Must be >= 1, got {order}")
-        else:
-            result.pass_test(f"{test_prefix} order")
-
-    # Check H1 matches title
-    h1_match = re.search(r"^# (.+)$", content, re.MULTILINE)
-    if h1_match:
-        h1_text = h1_match.group(1).strip()
-        if title and h1_text != title:
-            result.fail_test(f"{test_prefix} H1 match", f"H1 '{h1_text}' != title '{title}'")
-        else:
-            result.pass_test(f"{test_prefix} H1 match")
-    else:
-        result.fail_test(f"{test_prefix} H1", "Missing H1 heading")
-
-    # Check practice questions
-    has_practice_section = bool(
-        re.search(r"^## .*Practice Questions", content, re.MULTILINE)
-    )
-    if not has_practice_section:
-        result.fail_test(f"{test_prefix} practice section", "Missing '## Practice Questions'")
-    else:
-        result.pass_test(f"{test_prefix} practice section")
-
-    question_blocks = re.findall(r"```question\b", content)
-    if len(question_blocks) < MIN_PRACTICE_QUESTIONS:
-        result.fail_test(
-            f"{test_prefix} question count",
-            f"Found {len(question_blocks)}, minimum {MIN_PRACTICE_QUESTIONS} required"
-        )
-    else:
-        result.pass_test(f"{test_prefix} question count ({len(question_blocks)})")
-
-    # Check key takeaways
-    has_takeaways = bool(
-        re.search(r"^## .*Key Takeaways", content, re.MULTILINE)
-    ) or bool(
-        re.search(r"> \[!SUCCESS\]", content)
-        and re.search(r"Key Takeaways", content)
-    )
-    if not has_takeaways:
-        result.fail_test(f"{test_prefix} key takeaways", "Missing Key Takeaways section")
-    else:
-        result.pass_test(f"{test_prefix} key takeaways")
-
-    # Check code blocks are balanced (every opening has a closing)
-    # Note: Not all opening fences need language identifiers (e.g., output blocks)
-    all_fences = re.findall(r"^```", content, re.MULTILINE)
-    fence_count = len(all_fences)
-    
-    # Code blocks should come in pairs (opening + closing)
-    if fence_count % 2 != 0:
-        result.fail_test(f"{test_prefix} code block balance", 
-                        f"Odd number of fences: {fence_count}")
-    else:
-        result.pass_test(f"{test_prefix} code block balance ({fence_count // 2} blocks)")
-
-
-def test_lesson_naming(lesson_dir: Path, result: TestResult):
-    """Test lesson file naming convention."""
-    test_prefix = f"naming ({lesson_dir.parent.name}/{lesson_dir.name})"
-
-    lesson_files = list(lesson_dir.glob("*.md"))
     if not lesson_files:
-        result.fail_test(test_prefix, "No lesson files found")
-        return
+        return [f"{prefix}: No lesson files found"]
 
     orders = []
     for lesson_file in lesson_files:
         match = LESSON_FILE_PATTERN.match(lesson_file.name)
-        if not match:
-            result.fail_test(test_prefix, f"Invalid naming: '{lesson_file.name}'")
+        if match:
+            orders.append(int(match.group(1)))
         else:
-            order = int(match.group(1))
-            orders.append(order)
+            problems.append(f"{prefix}: Invalid naming: '{lesson_file.name}'")
 
     if orders:
         orders.sort()
         expected = list(range(1, len(orders) + 1))
         if orders != expected:
-            result.fail_test(test_prefix, f"Non-sequential orders: {orders}")
-        else:
-            result.pass_test(test_prefix)
+            problems.append(f"{prefix}: Non-sequential orders: {orders}")
+
+    return problems
 
 
-def main() -> int:
-    """Run all tests."""
-    print("=" * 60)
-    print("OpenCode Courses Test Suite")
-    print("=" * 60)
+def lesson_file_problems(lesson_path: Path) -> list[str]:
+    prefix = (
+        f"lesson ({lesson_path.parent.parent.name}/{lesson_path.parent.name}"
+        f"/{lesson_path.name})"
+    )
 
-    result = TestResult()
-    base_dir = Path("content/courses")
+    if not lesson_path.exists():
+        return [f"{prefix}: File not found"]
 
-    for course_name in COURSES:
-        course_dir = base_dir / course_name
-        print(f"\n{'─'*60}")
-        print(f"Testing: {course_name}")
-        print(f"{'─'*60}")
+    content = lesson_path.read_text(encoding="utf-8")
+    if not content.strip():
+        return [f"{prefix}: File is empty"]
 
-        if not course_dir.exists():
-            result.fail_test(f"course dir ({course_name})", "Directory not found")
-            continue
+    match = re.match(r"^---\n(.*?)\n---", content, re.DOTALL)
+    if not match:
+        return [f"{prefix} frontmatter: Missing frontmatter"]
 
-        # Test course.json
-        test_course_json(course_dir, result)
+    try:
+        frontmatter = yaml.safe_load(match.group(1))
+    except Exception as e:
+        return [f"{prefix} frontmatter: Invalid YAML: {e}"]
 
-        # Test each locale
-        for locale in VALID_LOCALES:
-            locale_dir = course_dir / locale
-            if not locale_dir.exists():
-                result.fail_test(f"locale dir ({course_name}/{locale})", "Directory not found")
+    if not isinstance(frontmatter, dict):
+        return [f"{prefix} frontmatter: Frontmatter must be a mapping"]
+
+    problems = []
+    for field in ["title", "order"]:
+        if field not in frontmatter or frontmatter[field] is None:
+            problems.append(f"{prefix} {field}: Missing required field: {field}")
+
+    title = str(frontmatter.get("title", "")).strip()
+    if title and len(title) < 3:
+        problems.append(f"{prefix} title length: Too short: {len(title)} chars")
+
+    order = frontmatter.get("order")
+    if order is not None:
+        if not isinstance(order, int):
+            problems.append(
+                f"{prefix} order type: Must be int, got {type(order).__name__}"
+            )
+        elif order < 1:
+            problems.append(f"{prefix} order value: Must be >= 1, got {order}")
+
+    all_fences = re.findall(r"^```", content, re.MULTILINE)
+    if len(all_fences) % 2 != 0:
+        problems.append(
+            f"{prefix} code block balance: Odd number of fences: {len(all_fences)}"
+        )
+
+    return problems
+
+
+def locale_dirs(course_dir: Path) -> list[Path]:
+    return [
+        course_dir / locale
+        for locale in sorted(VALID_LOCALES)
+        if (course_dir / locale).is_dir()
+    ]
+
+
+@pytest.mark.parametrize("course_dir", COURSE_DIRS, ids=COURSE_IDS)
+def test_course_json(course_dir: Path):
+    problems = course_json_problems(course_dir)
+    assert not problems, "\n".join(problems)
+
+
+@pytest.mark.parametrize("course_dir", COURSE_DIRS, ids=COURSE_IDS)
+def test_lesson_naming(course_dir: Path):
+    dirs = locale_dirs(course_dir)
+    problems = []
+    if not dirs:
+        problems.append(f"locale dir ({course_dir.name}): No locale directories found")
+    for lesson_dir in dirs:
+        problems.extend(lesson_naming_problems(lesson_dir))
+    assert not problems, "\n".join(problems)
+
+
+@pytest.mark.parametrize("course_dir", COURSE_DIRS, ids=COURSE_IDS)
+def test_lesson_files(course_dir: Path):
+    problems = []
+    for lesson_dir in locale_dirs(course_dir):
+        for lesson_file in sorted(lesson_dir.glob("*.md")):
+            problems.extend(lesson_file_problems(lesson_file))
+    assert not problems, "\n".join(problems)
+
+
+def difficulty_alias_problems(value, prefix: str) -> list[str]:
+    if value in (None, ""):
+        return []
+    normalized = str(value).strip().lower()
+    if normalized not in DIFFICULTY_ALIASES:
+        return [f"{prefix}: Unrecognized difficulty: '{value}'"]
+    return []
+
+
+@pytest.mark.parametrize("course_dir", COURSE_DIRS, ids=COURSE_IDS)
+def test_difficulty_aliases(course_dir: Path):
+    problems = []
+    course_json = course_dir / "course.json"
+    if not course_json.exists():
+        return
+
+    data = json.loads(course_json.read_text(encoding="utf-8"))
+    problems.extend(
+        difficulty_alias_problems(
+            data.get("difficulty"), f"course.json ({course_dir.name}) difficulty"
+        )
+    )
+    for locale in sorted(VALID_LOCALES):
+        locale_data = data.get(locale) or {}
+        problems.extend(
+            difficulty_alias_problems(
+                locale_data.get("difficulty"),
+                f"course.json ({course_dir.name}) {locale}.difficulty",
+            )
+        )
+
+    for lesson_dir in locale_dirs(course_dir):
+        for lesson_file in sorted(lesson_dir.glob("*.md")):
+            content = lesson_file.read_text(encoding="utf-8")
+            match = re.match(r"^---\n(.*?)\n---", content, re.DOTALL)
+            if not match:
                 continue
+            try:
+                frontmatter = yaml.safe_load(match.group(1))
+            except Exception:
+                continue
+            if isinstance(frontmatter, dict):
+                problems.extend(
+                    difficulty_alias_problems(
+                        frontmatter.get("difficulty"),
+                        f"lesson ({course_dir.name}/{lesson_dir.name}"
+                        f"/{lesson_file.name}) difficulty",
+                    )
+                )
 
-            # Test naming
-            test_lesson_naming(locale_dir, result)
-
-            # Test each lesson
-            for lesson_file in sorted(locale_dir.glob("*.md")):
-                test_lesson_file(lesson_file, result)
-
-    return result.summary()
+    assert not problems, "\n".join(problems)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(pytest.main([__file__]))

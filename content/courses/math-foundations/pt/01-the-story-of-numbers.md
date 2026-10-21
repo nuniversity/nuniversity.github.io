@@ -418,7 +418,7 @@ Exemplo: **A3₁₆** = **10100011₂** = **163₁₀**
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

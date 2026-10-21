@@ -8,11 +8,11 @@ difficulty: "advanced"
 
 # Padrão Planejar e Executar
 
-The plan-and-execute pattern separates **planning** (thinking what to do) from **execution** (doing it). The agent creates a plan, executes steps, observes results, and re-plans as needed.
+O padrão plan-and-execute separa o **planejamento** (pensar o que fazer) da **execução** (fazer). O agente cria um plano, executa os passos, observa os resultados e replaneja conforme necessário.
 
 ---
 
-## Architecture
+## Arquitetura
 
 ```
 Task Input
@@ -63,8 +63,8 @@ Return as a numbered list. Each step should be specific and concrete."""
     return {"plan": steps, "current_step_index": 0, "observations": []}
 ```
 
-[!NOTA]
-The planner decomposes the task into discrete, actionable steps. Each step should be specific enough that the executor knows exactly what to do.
+[!NOTE]
+O planejador decompõe a tarefa em passos discretos e acionáveis. Cada passo deve ser específico o bastante para que o executor saiba exatamente o que fazer.
 
 ---
 
@@ -142,8 +142,8 @@ def router(state: PlanState) -> str:
         return "continue"
 ```
 
-[!SUCESSO]
-The checker evaluates progress after each step. If results indicate a better approach exists, it triggers re-planning. Otherwise, execution continues.
+[!SUCCESS]
+O verificador avalia o progresso após cada passo. Se os resultados indicarem que existe uma abordagem melhor, ele dispara o replanejamento. Caso contrário, a execução continua.
 
 ---
 
@@ -208,8 +208,8 @@ builder.add_edge("finalizer", END)
 app = builder.compile()
 ```
 
-[!AVISO]
-Without a maximum number of re-plans, the agent could re-plan indefinitely. Track re-plan count and force completion after N re-plans.
+[!WARNING]
+Sem um número máximo de replanejamentos, o agente poderia replanejar indefinidamente. Acompanhe a contagem de replanejamentos e force a conclusão após N replanejamentos.
 
 ---
 
@@ -264,16 +264,16 @@ print(result["final_answer"])
 
 | Aspecto | Plan-and-Execute | ReAct |
 | :--- | :--- | :--- |
-| **Planning** | Explicit upfront plan | No explicit plan |
-| **Execution** | Follows plan step by step | Reacts to each observation |
-| **Adaptability** | Re-plans when needed | Naturally adaptive |
-| **Best for** | Complex multi-step tasks | Interactive, tool-heavy tasks |
-| **Predictability** | High (plan is visible) | Low (emergent behavior) |
-| **Token usage** | Higher (plan + execution) | Lower |
+| **Planejamento** | Plano explícito e antecipado | Sem plano explícito |
+| **Execução** | Segue o plano passo a passo | Reage a cada observação |
+| **Adaptabilidade** | Replaneja quando necessário | Naturalmente adaptativo |
+| **Ideal para** | Tarefas complexas com múltiplos passos | Tarefas interativas com muitas ferramentas |
+| **Previsibilidade** | Alta (o plano é visível) | Baixa (comportamento emergente) |
+| **Consumo de tokens** | Maior (plano + execução) | Menor |
 
 ---
 
-## Perguntas Práticas
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {
@@ -432,13 +432,13 @@ print(result["final_answer"])
 
 ---
 
-[!SUCESSO]
+[!SUCCESS]
 ### Principais Conclusões
-- Plan-and-execute separates strategic planning from tactical execution
-- Planner creates an explicit step-by-step plan before execution begins
-- Executor runs one step at a time and records results
-- Checker evaluates progress and decides to continue, re-plan, or complete
-- Re-planner creates updated plans based on intermediate results
-- Track re-plan count to prevent infinite re-planning loops
-- The explicit plan provides predictability and visibility
-- Best for complex multi-step tasks that benefit from upfront strategy
+- O plan-and-execute separa o planejamento estratégico da execução tática
+- O planejador cria um plano explícito passo a passo antes de a execução começar
+- O executor executa um passo por vez e registra os resultados
+- O verificador avalia o progresso e decide continuar, replanejar ou concluir
+- O replanejador cria planos atualizados com base nos resultados intermediários
+- Acompanhe a contagem de replanejamentos para evitar laços infinitos de replanejamento
+- O plano explícito oferece previsibilidade e visibilidade
+- Ideal para tarefas complexas de múltiplos passos que se beneficiam de uma estratégia antecipada

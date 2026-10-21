@@ -52,11 +52,11 @@ print(sys.executable)  # Shows which Python is being used
 ```
 
 > [!WARNING]
-| Pitfall | Solution |
-|---------|----------|
-| Forgetting to activate venv | Check `which python` or `sys.executable` |
-| Committing `.venv` to git | Add `.venv/` to `.gitignore` |
-| Using `sudo pip install` | Never do this — breaks system packages! |
+> | Pitfall | Solution |
+> |---------|----------|
+> | Forgetting to activate venv | Check `which python` or `sys.executable` |
+> | Committing `.venv` to git | Add `.venv/` to `.gitignore` |
+> | Using `sudo pip install` | Never do this — breaks system packages! |
 
 ## `pip` — Installing Packages
 
@@ -171,12 +171,12 @@ pip install -e ".[dev,test]"
 ```
 
 > [!SUCCESS]
-| File | Purpose | Status |
-|------|---------|--------|
-| `requirements.txt` | Pin exact versions for deployment | Still common |
-| `setup.py` | Package metadata & install | Legacy |
-| `setup.cfg` | Declarative config | Transitional |
-| `pyproject.toml` | Modern standard (PEP 518/621) | **Current best practice** |
+> | File | Purpose | Status |
+> |------|---------|--------|
+> | `requirements.txt` | Pin exact versions for deployment | Still common |
+> | `setup.py` | Package metadata & install | Legacy |
+> | `setup.cfg` | Declarative config | Transitional |
+> | `pyproject.toml` | Modern standard (PEP 518/621) | **Current best practice** |
 
 ## Lock Files and Reproducible Builds
 

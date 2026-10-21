@@ -112,12 +112,12 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Escenario | ¿Permitido? | Por qué |
-|----------|----------|--------|
-| Múltiples `&T` | Sí | Solo lectura, sin conflicto |
-| Un `&mut T` | Sí | Acceso exclusivo de escritura |
-| `&T` + `&mut T` simultáneamente | No | Podría leer mientras escribe |
-| Dos `&mut T` simultáneamente | No | Dos escritores = data race |
+> | Escenario | ¿Permitido? | Por qué |
+> |----------|----------|--------|
+> | Múltiples `&T` | Sí | Solo lectura, sin conflicto |
+> | Un `&mut T` | Sí | Acceso exclusivo de escritura |
+> | `&T` + `&mut T` simultáneamente | No | Podría leer mientras escribe |
+> | Dos `&mut T` simultáneamente | No | Dos escritores = data race |
 
 ## Referencias Colgantes
 

@@ -126,7 +126,7 @@ flowchart TD
     D -->|Yes| F[Generate reset token]
     E --> G([Process ends])
     F --> H[Send reset email]
-    H --> I[[(Store token)]]
+    H --> I[["(Store token)"]]
     I --> J([Wait for user action])
     
     J --> K[User clicks reset link]

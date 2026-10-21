@@ -157,10 +157,10 @@ with open("output.csv", "w", newline="", encoding="utf-8") as f:
 ```
 
 > [!NOTE]
-| Construct | When to Use |
-|-----------|-------------|
-| `csv.reader` / `csv.writer` | Simple lists, no headers |
-| `csv.DictReader` / `csv.DictWriter` | Named columns, headers present |
+> | Construct | When to Use |
+> |-----------|-------------|
+> | `csv.reader` / `csv.writer` | Simple lists, no headers |
+> | `csv.DictReader` / `csv.DictWriter` | Named columns, headers present |
 
 ### CSV Dialects and Custom Delimiters
 

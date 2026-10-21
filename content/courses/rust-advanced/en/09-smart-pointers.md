@@ -45,12 +45,12 @@ fn main() {
 ```
 
 > [!NOTE]
-| Use Case | Why Box |
-|----------|---------|
-| Recursive types | Sized requirement |
-| Trait objects | Dynamic dispatch |
-| Large data moves | Cheap (pointer copy) |
-| Heap-allocation needed | Manual lifetime control |
+> | Use Case | Why Box |
+> |----------|---------|
+> | Recursive types | Sized requirement |
+> | Trait objects | Dynamic dispatch |
+> | Large data moves | Cheap (pointer copy) |
+> | Heap-allocation needed | Manual lifetime control |
 
 ### Box Performance
 
@@ -138,12 +138,12 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Type | Borrow Checked | Use Case |
-|------|---------------|----------|
-| `<code>Box&lt;T&gt;</code>` | Compile time | Single ownership, heap |
-| `<code>Rc&lt;T&gt;</code>` | Compile time | Shared read-only ownership |
-| `<code>RefCell&lt;T&gt;</code>` | Runtime | Interior mutability |
-| `<code>Rc&lt;RefCell&lt;T&gt;&gt;</code>` | Runtime | Shared mutable ownership |
+> | Type | Borrow Checked | Use Case |
+> |------|---------------|----------|
+> | `<code>Box&lt;T&gt;</code>` | Compile time | Single ownership, heap |
+> | `<code>Rc&lt;T&gt;</code>` | Compile time | Shared read-only ownership |
+> | `<code>RefCell&lt;T&gt;</code>` | Runtime | Interior mutability |
+> | `<code>Rc&lt;RefCell&lt;T&gt;&gt;</code>` | Runtime | Shared mutable ownership |
 
 ### Runtime Borrow Checking
 

@@ -115,10 +115,10 @@ CROSS JOIN colors c;
 Si sizes tiene 3 filas y colors tiene 2 filas: 6 filas en el resultado.
 
 > [!WARNING]
-| CROSS JOIN Implícito | CROSS JOIN Explícito |
-|---------------------|---------------------|
-| `SELECT * FROM a, b` | `SELECT * FROM a CROSS JOIN b` |
-| Fácil de olvidar WHERE | Intencional y claro |
+> | CROSS JOIN Implícito | CROSS JOIN Explícito |
+> |---------------------|---------------------|
+> | `SELECT * FROM a, b` | `SELECT * FROM a CROSS JOIN b` |
+> | Fácil de olvidar WHERE | Intencional y claro |
 
 Prefiere siempre `CROSS JOIN` explícito para evitar productos cartesianos accidentales.
 
@@ -197,11 +197,11 @@ WHERE NOT EXISTS (
 ```
 
 > [!SUCCESS]
-| Método Anti-Join | Rendimiento | Legibilidad |
-|------------------|-------------|-------------|
-| LEFT JOIN + IS NULL | Rápido con índices | Claro para veteranos SQL |
-| NOT EXISTS | Más eficiente para subconsultas correlacionadas | Revela intención |
-| NOT IN | Riesgoso con NULLs | Simple pero peligroso |
+> | Método Anti-Join | Rendimiento | Legibilidad |
+> |------------------|-------------|-------------|
+> | LEFT JOIN + IS NULL | Rápido con índices | Claro para veteranos SQL |
+> | NOT EXISTS | Más eficiente para subconsultas correlacionadas | Revela intención |
+> | NOT IN | Riesgoso con NULLs | Simple pero peligroso |
 
 NOT IN es peligroso porque devuelve cero filas si la subconsulta contiene algún NULL:
 

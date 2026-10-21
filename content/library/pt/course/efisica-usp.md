@@ -3,7 +3,6 @@ id: efisica-usp
 title: "e-Física USP - Física do Básico ao Avançado"
 description: "Portal completo de ensino de física do Instituto de Física da USP. Conteúdos estruturados: Termodinâmica, Física Quântica, Mecânica Quântica, Física Moderna, Ondas e Fluidos, Eletromagnetismo, Ótica. Material didático completo, simulações e exercícios."
 url: "http://efisica.if.usp.br/"
-thumbnail: "https://www5.usp.br/wp-content/uploads/sites/947/2019/09/logo-marca-usp.jpg"
 author: "Instituto de Física - Universidade de São Paulo (USP)"
 category: "Physics"
 difficulty: "all"

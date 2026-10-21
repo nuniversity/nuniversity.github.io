@@ -23,14 +23,15 @@ This document describes the overall system architecture, folder structure, key d
 
 ```mermaid
 architecture-beta
-    group github(GitHub Pages)[GitHub Pages CDN]
-    group nextjs(Next.js 14 Static Export)
+    group github(internet)[GitHub Pages CDN]
+    group nextjs(cloud)[Next.js 14 Static Export]
 
-    service approuter(APPR)[App Router\n/app/[lang]] in nextjs
-    service middleware(MW)[Middleware\ni18n] in nextjs
-    service content(CONTENT)[Content\n/MD/JSON] in nextjs
-    service datalayer(DL)[Data Layer\n/courses/ library/ tools/ games/ i18n/] in nextjs
-    service uicomponents(UI)[UI Components\n/layout/ home/ tools/ markdown/ language/] in nextjs
+    service pages(PAGES)[GitHub Pages CDN] in github
+    service approuter(APPR)["App Router\n/app/[lang]"] in nextjs
+    service middleware(MW)["Middleware\ni18n"] in nextjs
+    service content(CONTENT)["Content\n/MD/JSON"] in nextjs
+    service datalayer(DL)["Data Layer\n/courses/ library/ tools/ games/ i18n/"] in nextjs
+    service uicomponents(UI)["UI Components\n/layout/ home/ tools/ markdown/ language/"] in nextjs
 
     approuter:R --> B:middleware
     middleware:R --> B:content
@@ -38,7 +39,7 @@ architecture-beta
     datalayer:B --> T:uicomponents
     approuter:B --> T:uicomponents
 
-    github:R --> L:nextjs
+    pages:R --> L:approuter
 ```
 
 ---
@@ -395,7 +396,7 @@ The theme system is a **custom Context-based implementation** (not next-themes):
 ```mermaid
 flowchart TD
     A[Providers.tsx] --> B[ThemeProvider]
-    B --> C[State: 'light' | 'dark']
+    B --> C["State: 'light' | 'dark'"]
     B --> D[Reads from localStorage\non mount]
     B --> E[Respects\nprefers-color-scheme]
     B --> F[Persists to localStorage\non change]

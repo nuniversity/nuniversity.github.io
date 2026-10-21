@@ -204,7 +204,7 @@ opencode run "Check if staged files follow coding standards" || exit 1
 
 ---
 
-## Practice Questions
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {

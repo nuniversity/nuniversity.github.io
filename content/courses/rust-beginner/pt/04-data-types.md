@@ -237,12 +237,12 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Situação | Exemplo |
-|-----------|---------|
-| `parse()` precisa de anotação | `"42".parse::<i32>()` ou `let x: i32 = "42".parse()?` |
-| Inteiro padrão | `let x = 42` → `i32` |
-| Float padrão | `let x = 3.14` → `f64` |
-| Genérico de coleção | `Vec::new()` precisa de contexto de tipo |
+> | Situação | Exemplo |
+> |-----------|---------|
+> | `parse()` precisa de anotação | `"42".parse::<i32>()` ou `let x: i32 = "42".parse()?` |
+> | Inteiro padrão | `let x = 42` → `i32` |
+> | Float padrão | `let x = 3.14` → `f64` |
+> | Genérico de coleção | `Vec::new()` precisa de contexto de tipo |
 
 ## Aliases de Tipo
 

@@ -8,13 +8,13 @@ difficulty: "advanced"
 
 # Execução Paralela
 
-LangGraph supports parallel execution of nodes via fan-out edges. This lesson covers when and how to parallelize, coordinating parallel branches, merging results, and handling thread safety.
+LangGraph suporta execução paralela de nós por meio de arestas de fan-out. Esta lição cobre quando e como paralelizar, coordenar ramos paralelos, mesclar resultados e tratar a segurança de threads.
 
 ---
 
 ## Como Funciona a Execução Paralela
 
-When a node has multiple outgoing edges, all target nodes execute **simultaneously** in separate threads:
+Quando um nó tem múltiplas arestas de saída, todos os nós de destino são executados **simultaneamente** em threads separados:
 
 ```python
 # Fan-out: B and C run in parallel after A
@@ -30,7 +30,7 @@ flowchart LR
     C --> D
 ```
 
-Each branch receives a **copy** of the state at the point of fan-out. When all branches complete, their updates are **merged** before the fan-in node runs.
+Cada ramo recebe uma **cópia** do estado no ponto de fan-out. Quando todos os ramos terminam, as atualizações deles são **mescladas** antes da execução do nó de fan-in.
 
 ---
 
@@ -83,14 +83,14 @@ builder.add_edge("merger", END)
 app = builder.compile()
 ```
 
-[!NOTA]
-All three process nodes (A, B, C) run in parallel. The merger node waits for all three to complete before executing.
+[!NOTE]
+Os três nós de processamento (A, B, C) rodam em paralelo. O nó de mesclagem espera os três terminarem antes de executar.
 
 ---
 
 ## Paralelismo Dinâmico
 
-Fan-out dynamically based on the number of items to process:
+Faça fan-out dinamicamente com base no número de itens a processar:
 
 ```python
 def dispatch(state: State) -> dict:
@@ -102,7 +102,7 @@ def dispatch(state: State) -> dict:
 # process different chunks simultaneously
 ```
 
-For truly dynamic fan-out, use a **map** pattern:
+Para um fan-out verdadeiramente dinâmico, use um padrão **map**:
 
 ```python
 def map_node(state: State) -> dict:
@@ -121,7 +121,7 @@ def map_node(state: State) -> dict:
 
 ## Segurança de Thread
 
-Parallel branches share the state but execute in separate threads. Each branch receives a **snapshot** of state at the fan-out point:
+Ramos paralelos compartilham o estado, mas são executados em threads separados. Cada ramo recebe um **snapshot** do estado no ponto de fan-out:
 
 ```python
 import threading
@@ -140,8 +140,8 @@ def parallel_worker(state: State) -> dict:
 # Their updates are merged when all complete
 ```
 
-[!IMPORTANTE]
-Parallel branches should not depend on each other's results. Each branch works from the same state snapshot. Use fan-in nodes for coordination after parallel work completes.
+[!IMPORTANT]
+Ramos paralelos não devem depender dos resultados uns dos outros. Cada ramo trabalha a partir do mesmo snapshot de estado. Use nós de fan-in para coordenação após a conclusão do trabalho paralelo.
 
 ---
 
@@ -187,7 +187,7 @@ def voting_merger(state: State) -> dict:
 
 ## Execução Paralela de Ferramentas
 
-Execute multiple tools in parallel:
+Execute várias ferramentas em paralelo:
 
 ```python
 from langgraph.prebuilt import ToolExecutor
@@ -233,7 +233,7 @@ def aggregate_results(state: State) -> dict:
 
 ## Chamadas LLM Paralelas
 
-Use parallel fan-out to get multiple LLM perspectives:
+Use fan-out paralelo para obter múltiplas perspectivas de LLM:
 
 ```python
 def perspective_a(state: State) -> dict:
@@ -251,8 +251,8 @@ def perspective_c(state: State) -> dict:
 # All three run in parallel → merger synthesizes
 ```
 
-[!DICA]
-Parallel LLM calls with different system prompts let you gather diverse perspectives simultaneously, then synthesize them into a comprehensive answer.
+[!TIP]
+Chamadas paralelas de LLM com prompts de sistema diferentes permitem reunir perspectivas diversas simultaneamente e depois sintetizá-las em uma resposta abrangente.
 
 ---
 
@@ -279,8 +279,8 @@ def error_aware_merger(state: State) -> dict:
     return {"merged": "\n".join(results)}
 ```
 
-[!AVISO]
-An exception in one parallel branch does not cancel other branches. All branches complete; their results are merged including any error fields.
+[!WARNING]
+Uma exceção em um ramo paralelo não cancela os demais ramos. Todos os ramos terminam; os resultados deles são mesclados, incluindo quaisquer campos de erro.
 
 ---
 
@@ -288,11 +288,11 @@ An exception in one parallel branch does not cancel other branches. All branches
 
 | Factor | Impacto | Mitigation |
 | :--- | :--- | :--- |
-| Thread overhead | Starting threads has cost | Only parallelize work > 100ms |
-| Shared state lock | Writes need synchronization | Use add reducer for writes |
-| Fan-out width | Too many branches = contention | Limit to 5-10 parallel branches |
-| Memory | Each branch has its own context | Keep state small |
-| LLM rate limits | Parallel calls hit limits faster | Add throttling |
+| Sobrecarga de threads | Iniciar threads tem custo | Paralelize apenas trabalho > 100ms |
+| Lock de estado compartilhado | Escritas precisam de sincronização | Use o reducer add para escritas |
+| Largura do fan-out | Muitos ramos = contenção | Limite a 5-10 ramos paralelos |
+| Memória | Cada ramo tem seu próprio contexto | Mantenha o estado pequeno |
+| Limites de taxa do LLM | Chamadas paralelas atingem os limites mais rápido | Adicione throttling |
 
 ---
 
@@ -353,7 +353,7 @@ app = builder.compile()
 
 ---
 
-## Perguntas Práticas
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {
@@ -502,14 +502,14 @@ app = builder.compile()
 
 ---
 
-[!SUCESSO]
+[!SUCCESS]
 ### Principais Conclusões
-- Fan-out edges create parallel execution branches
-- Each branch sees the same state snapshot at fan-out
-- Fan-in nodes wait for all branches to complete before executing
-- Annotated[list, add] cleanly accumulates parallel results
-- Handle errors per-branch using try/except
-- 5-10 parallel branches is a good maximum for most systems
-- Parallel LLM calls with different prompts gather diverse perspectives
-- Map-Reduce pattern: split → parallel process → merge
-- Short tasks (< 100ms) may not benefit from parallelization
+- Arestas de fan-out criam ramos de execução paralela
+- Cada ramo vê o mesmo snapshot de estado no fan-out
+- Nós de fan-in esperam todos os ramos terminarem antes de executar
+- Annotated[list, add] acumula resultados paralelos de forma limpa
+- Trate erros por ramo usando try/except
+- 5-10 ramos paralelos é um bom máximo para a maioria dos sistemas
+- Chamadas paralelas de LLM com prompts diferentes reúnem perspectivas diversas
+- Padrão Map-Reduce: dividir → processar em paralelo → mesclar
+- Tarefas curtas (< 100ms) podem não se beneficiar da paralelização

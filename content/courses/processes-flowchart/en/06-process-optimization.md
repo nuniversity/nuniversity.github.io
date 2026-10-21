@@ -155,13 +155,13 @@ Steps that don't depend on each other can run simultaneously.
 
 ```mermaid
 flowchart TD
-    subgraph Sequential (Before)
+    subgraph Sequential["Sequential (Before)"]
         A1[Write code] --> B1[Write tests]
         B1 --> C1[Write docs]
         C1 --> D1[Submit PR]
     end
     
-    subgraph Parallel (After)
+    subgraph Parallel["Parallel (After)"]
         A2[Write code] --> D2[Submit PR]
         B2[Write tests] -.-> D2
         C2[Write docs] -.-> D2
@@ -221,7 +221,7 @@ Complex decisions slow down processes. Simplify by:
 
 ```mermaid
 flowchart TD
-    subgraph Complex Decision (Before)
+    subgraph Complex Decision["Complex Decision (Before)"]
         A1[Receive request] --> B1{Analyze type}
         B1 -->|Type A| C1{Check priority}
         B1 -->|Type B| D1{Check urgency}
@@ -234,7 +234,7 @@ flowchart TD
         E1 -->|Denied| H1[Reject]
     end
     
-    subgraph Simplified Decision (After)
+    subgraph Simplified Decision["Simplified Decision (After)"]
         A2[Receive request] --> B2{Priority score}
         B2 -->|Score > 7| C2[Fast track]
         B2 -->|Score ≤ 7| D2[Standard track]

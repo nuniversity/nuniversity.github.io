@@ -9,16 +9,18 @@ const LIBRARY_DIR = path.join(process.cwd(), 'content', 'library')
 
 export async function getAllResources(lang: Locale): Promise<LibraryResource[]> {
   const langDir = path.join(LIBRARY_DIR, lang)
-  
-  if (!fs.existsSync(langDir)) {
+  const fallbackDir = path.join(LIBRARY_DIR, 'en')
+  const actualDir = fs.existsSync(langDir) ? langDir : fallbackDir
+
+  if (!fs.existsSync(actualDir)) {
     return []
   }
 
   const resources: LibraryResource[] = []
-  const typesFolders = fs.readdirSync(langDir)
+  const typesFolders = fs.readdirSync(actualDir)
 
   for (const typeFolder of typesFolders) {
-    const typePath = path.join(langDir, typeFolder)
+    const typePath = path.join(actualDir, typeFolder)
     
     if (!fs.statSync(typePath).isDirectory()) continue
 
@@ -66,12 +68,14 @@ export async function getResourceById(
   lang: Locale
 ): Promise<LibraryResource | null> {
   const filePath = path.join(LIBRARY_DIR, lang, type, `${id}.md`)
-  
-  if (!fs.existsSync(filePath)) {
+  const fallbackPath = path.join(LIBRARY_DIR, 'en', type, `${id}.md`)
+  const actualPath = fs.existsSync(filePath) ? filePath : fallbackPath
+
+  if (!fs.existsSync(actualPath)) {
     return null
   }
 
-  const fileContent = fs.readFileSync(filePath, 'utf8')
+  const fileContent = fs.readFileSync(actualPath, 'utf8')
   const { data, content } = matter(fileContent)
 
   return {

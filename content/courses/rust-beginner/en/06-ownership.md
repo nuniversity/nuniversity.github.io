@@ -165,11 +165,11 @@ fn main() {
 ```
 
 > [!NOTE]
-| Operation | Stack Data | Heap Data | Cost |
-|-----------|------------|-----------|------|
-| Move | Copied | Not copied (owner changes) | Pointer size |
-| Clone | Copied | Deep copied | Heap allocation + copy |
-| Copy | Copied | N/A (no heap data) | Trivial |
+> | Operation | Stack Data | Heap Data | Cost |
+> |-----------|------------|-----------|------|
+> | Move | Copied | Not copied (owner changes) | Pointer size |
+> | Clone | Copied | Deep copied | Heap allocation + copy |
+> | Copy | Copied | N/A (no heap data) | Trivial |
 
 ## Ownership and Scope
 

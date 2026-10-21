@@ -2,7 +2,7 @@
 id: unicamp-coursera
 title: "UNICAMP no Coursera - Cursos de Engenharia"
 description: "Cursos da Universidade Estadual de Campinas (UNICAMP) na plataforma Coursera. Destaque para áreas de engenharia, computação e tecnologia. Uma das melhores universidades públicas do Brasil."
-url: "https://www.coursera.org/unicamp"
+url: "https://www.coursera.org/partners/unicamp"
 thumbnail: "https://d3njjcbhbojbot.cloudfront.net/web/images/favicons/apple-icon-120x120.png"
 author: "Universidade Estadual de Campinas (UNICAMP)"
 category: "Computer Science"

@@ -92,12 +92,12 @@ Uma view é atualizável quando:
 - Não usa funções de agregação
 
 > [!WARNING]
-| Padrão Não Atualizável | Motivo |
-|-----------------------|--------|
-| `CREATE VIEW v AS SELECT ... FROM a JOIN b` | Múltiplas tabelas base |
-| `CREATE VIEW v AS SELECT DISTINCT ...` | Não pode mapear de volta para uma única linha |
-| `CREATE VIEW v AS SELECT SUM(...)` | Agregação — sem identidade de linha |
-| `CREATE VIEW v AS SELECT ... UNION ...` | Múltiplas fontes |
+> | Padrão Não Atualizável | Motivo |
+> |-----------------------|--------|
+> | `CREATE VIEW v AS SELECT ... FROM a JOIN b` | Múltiplas tabelas base |
+> | `CREATE VIEW v AS SELECT DISTINCT ...` | Não pode mapear de volta para uma única linha |
+> | `CREATE VIEW v AS SELECT SUM(...)` | Agregação — sem identidade de linha |
+> | `CREATE VIEW v AS SELECT ... UNION ...` | Múltiplas fontes |
 
 ## WITH CHECK OPTION
 

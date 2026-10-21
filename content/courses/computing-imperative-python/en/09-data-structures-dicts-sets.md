@@ -222,7 +222,7 @@ print(f"Squares: {squares}")  # {1, 4, 9, 16, 25}
 
 ```mermaid
 flowchart LR
-    A[Set Operations] --> B[Union |]
+    A[Set Operations] --> B["Union |"]
     A --> C[Intersection &]
     A --> D[Difference -]
     A --> E[Symmetric Difference ^]

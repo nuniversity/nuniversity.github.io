@@ -153,11 +153,11 @@ flowchart TD
     B --> C{n <= 0?}
     C -->|Yes| D[Return empty list]
     C -->|No| E{n == 1?}
-    E -->|Yes| F[Return [0]]
-    E -->|No| G[fib = [0, 1]]
+    E -->|Yes| F["Return [0]"]
+    E -->|No| G["fib = [0, 1]"]
     G --> H[i = 2]
     H --> I{i < n?}
-    I -->|Yes| J[next = fib[i-1] + fib[i-2]]
+    I -->|Yes| J["next = fib[i-1] + fib[i-2]"]
     J --> K[Append next to fib]
     K --> L[i = i + 1]
     L --> I
@@ -294,7 +294,7 @@ flowchart TD
     G -->|Yes| D
     G -->|No| H[i = 5]
     H --> I{i * i <= n?}
-    I -->|Yes| J{n % i == 0 or n % (i+2) == 0?}
+    I -->|Yes| J{"n % i == 0 or n % (i+2) == 0?"}
     J -->|Yes| D
     J -->|No| K[i = i + 6]
     K --> I
@@ -433,10 +433,10 @@ flowchart TD
     J -->|No| F
     J -->|Yes| K[i = i + 1]
     K --> E
-    I -->|Yes| L{arr[j] > arr[j+1]?}
+    I -->|Yes| L{"arr[j] > arr[j+1]?"}
     L -->|No| M[j = j + 1]
     M --> I
-    L -->|Yes| N[Swap arr[j], arr[j+1]]
+    L -->|Yes| N["Swap arr[j], arr[j+1]"]
     N --> O[swapped = True]
     O --> M
     

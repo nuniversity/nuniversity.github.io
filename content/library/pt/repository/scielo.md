@@ -2,8 +2,7 @@
 id: scielo
 title: "SciELO - Scientific Electronic Library Online - 1.200+ Revistas"
 description: "Biblioteca eletrônica científica online criada pela FAPESP, um dos programas de acesso aberto mais importantes do mundo. 1.200+ revistas científicas, 50 MIL artigos/ano, 70% indexados no Scopus/Web of Science. Plataforma pioneira na América Latina para publicação científica open access."
-url: "https://scielo.org"
-thumbnail: "https://www.scielo.org/img/logos/scielo-logotipo-color-vetor.svg"
+url: "https://www.scielo.org/pt-br/"
 author: "FAPESP + BIREME/OPAS + CNPq"
 category: "Open Access Research"
 difficulty: "advanced"

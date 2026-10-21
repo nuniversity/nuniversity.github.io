@@ -8,25 +8,25 @@ difficulty: "intermediate"
 
 # Streaming de Tokens
 
-Streaming lets you observe graph execution in real-time. LangGraph supports multiple streaming modes that give you fine-grained visibility into both state changes and LLM token output.
+O streaming permite observar a execução do grafo em tempo real. O LangGraph suporta múltiplos modos de streaming que dão visibilidade detalhada tanto das mudanças de estado quanto da saída de tokens do LLM.
 
 ---
 
 ## Visão Geral dos Modos de Streaming
 
-LangGraph provides three streaming modes:
+O LangGraph fornece três modos de streaming:
 
 | Modo | Descrição | Eventos |
 | :--- | :--- | :--- |
-| `"values"` | Full state after each node | `{"key": value, ...}` |
-| `"updates"` | Only the changes from each node | `{"node": {"key": new_value}}` |
-| Custom | Stream specific data from within nodes | Any data you yield |
+| `"values"` | Estado completo após cada nó | `{"key": value, ...}` |
+| `"updates"` | Apenas as mudanças de cada nó | `{"node": {"key": new_value}}` |
+| Personalizado | Faz streaming de dados específicos de dentro dos nós | Quaisquer dados que você produza |
 
 ---
 
 ## Modo Values
 
-Emits the **complete state** after each node execution:
+Emite o **estado completo** após cada execução de nó:
 
 ```python
 config = {"configurable": {"thread_id": "stream-test"}}
@@ -49,14 +49,14 @@ Output:
 {'messages': [HumanMessage('Hello'), AIMessage('Hi!')], 'output': 'Hi!'}
 ```
 
-[!NOTA]
-"values" mode is the most comprehensive — you see the full state at every step. It's ideal for debugging and understanding state evolution.
+[!NOTE]
+O modo "values" é o mais abrangente — você vê o estado completo em cada passo. É ideal para depurar e entender a evolução do estado.
 
 ---
 
 ## Modo Updates
 
-Emits **only the changes** from each node, keyed by node name:
+Emite **apenas as mudanças** de cada nó, indexadas pelo nome do nó:
 
 ```python
 for event in app.stream(
@@ -75,16 +75,16 @@ Output:
 [node_b] → {'output': 'Done!', 'messages': [AIMessage('Done!')]}
 ```
 
-[!DICA]
-"updates" mode is more efficient than "values" mode. Use it in production where you only care about what changed, not the full state.
+[!TIP]
+O modo "updates" é mais eficiente que o modo "values". Use-o em produção, quando você só se interessa pelo que mudou, e não pelo estado completo.
 
 ---
 
 ## Streaming de Tokens LLM
 
-For real-time token-by-token output from an LLM inside a node, use LangGraph's **callbacks** or LangChain's .astream_events():
+Para saída em tempo real, token a token, de um LLM dentro de um nó, use os **callbacks** do LangGraph ou o .astream_events() do LangChain:
 
-### Using astream_events (Legacy)
+### Usando astream_events (legado)
 
 ```python
 from langchain_core.messages import HumanMessage
@@ -103,7 +103,7 @@ async def streaming_node(state: State) -> dict:
     return {"output": full}
 ```
 
-### Using .astream() (Modorn)
+### Usando .astream() (moderno)
 
 ```python
 async def streaming_node(state: State) -> dict:
@@ -116,14 +116,14 @@ async def streaming_node(state: State) -> dict:
     return {"output": full}
 ```
 
-[!IMPORTANTE]
-Token streaming requires async (`async for`). You can use `async def` nodes in LangGraph, but the graph must be invoked with `ainvoke()` or `astream()`.
+[!IMPORTANT]
+O streaming de tokens exige async (`async for`). Você pode usar nós `async def` no LangGraph, mas o grafo deve ser invocado com `ainvoke()` ou `astream()`.
 
 ---
 
 ## Streaming Personalizado com Callbacks
 
-Define custom callbacks to capture streaming data:
+Defina callbacks personalizados para capturar os dados do streaming:
 
 ```python
 from langchain_core.callbacks import BaseCallbackHandler
@@ -153,7 +153,7 @@ def node_with_callback(state: State) -> dict:
 
 ## Streaming de Nós Específicos
 
-Filter streaming to focus on specific nodes:
+Filtre o streaming para focar em nós específicos:
 
 ```python
 # Stream only updates from specific nodes
@@ -206,7 +206,7 @@ asyncio.run(main())
 
 ## Streaming com o Sistema de Eventos do LangGraph
 
-LangGraph provides its own event system for custom streaming:
+O LangGraph fornece seu próprio sistema de eventos para streaming personalizado:
 
 ```python
 from langgraph.graph import StateGraph
@@ -232,12 +232,12 @@ builder.add_node("streaming_node", node_with_yield)
 
 ## Comparação de Modos de Streaming
 
-| Modo | Token Level | State Level | Latency | Use Case |
+| Modo | Nível de token | Nível de estado | Latência | Caso de uso |
 | :--- | :--- | :--- | :--- | :--- |
-| `"values"` | No | Full state | After each node | Debugging, full visibility |
-| `"updates"` | No | Partial changes | After each node | Production, minimal data |
-| Callback | Yes | No | Real-time | Token-by-token display |
-| astream | Yes | No | Real-time | Async token streaming |
+| `"values"` | Não | Estado completo | Após cada nó | Depuração, visibilidade total |
+| `"updates"` | Não | Mudanças parciais | Após cada nó | Produção, dados mínimos |
+| Callback | Sim | Não | Tempo real | Exibição token a token |
+| astream | Sim | Não | Tempo real | Streaming assíncrono de tokens |
 
 ---
 
@@ -304,12 +304,12 @@ async def main():
 asyncio.run(main())
 ```
 
-[!SUCESSO]
-Async streaming provides real-time token output, making your agent feel responsive and interactive to end users.
+[!SUCCESS]
+O streaming assíncrono fornece saída de tokens em tempo real, fazendo com que seu agente pareça responsivo e interativo para os usuários finais.
 
 ---
 
-## Perguntas Práticas
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {
@@ -438,13 +438,13 @@ Async streaming provides real-time token output, making your agent feel responsi
 
 ---
 
-[!SUCESSO]
+[!SUCCESS]
 ### Principais Conclusões
-- "values" mode: full state after each node (debugging)
-- "updates" mode: only changes, keyed by node name (production)
-- Token streaming via llm.stream() or llm.astream() with streaming=True
-- BaseCallbackHandler on_llm_new_token captures individual tokens
-- Async execution with astream() for non-blocking streaming
-- yield in nodes allows multiple emissions per node
-- Token streaming makes agents feel responsive to end users
-- Choose the streaming mode based on your visibility vs efficiency needs
+- Modo "values": estado completo após cada nó (depuração)
+- Modo "updates": apenas as mudanças, indexadas pelo nome do nó (produção)
+- Streaming de tokens via llm.stream() ou llm.astream() com streaming=True
+- O on_llm_new_token do BaseCallbackHandler captura tokens individuais
+- Execução assíncrona com astream() para streaming sem bloqueio
+- O yield nos nós permite múltiplas emissões por nó
+- O streaming de tokens faz os agentes parecerem responsivos para os usuários finais
+- Escolha o modo de streaming com base nas suas necessidades de visibilidade versus eficiência

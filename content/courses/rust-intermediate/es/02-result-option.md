@@ -128,11 +128,11 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Combinador | Entrada → Salida | Caso de Uso |
-|------------|-----------------|-------------|
-| `map(f)` | `Option<T>` → `Option<U>` | Transformar interior |
-| `and_then(f)` | `Option<T>` → `Option<U>` | Encadenar pasos fallibles |
-| `or_else(f)` | `Option<T>` → `Option<T>` | Alternativa en None/Err |
+> | Combinador | Entrada → Salida | Caso de Uso |
+> |------------|-----------------|-------------|
+> | `map(f)` | `Option<T>` → `Option<U>` | Transformar interior |
+> | `and_then(f)` | `Option<T>` → `Option<U>` | Encadenar pasos fallibles |
+> | `or_else(f)` | `Option<T>` → `Option<T>` | Alternativa en None/Err |
 
 ## Convirtiendo Entre Option y Result
 

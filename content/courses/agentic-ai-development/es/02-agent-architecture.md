@@ -525,7 +525,7 @@ class ToolManager:
 | **Ejemplo** | Asistente personal | Codificación multi-agente | Agente de monitoreo | Chatbot |
 
 > [!SUCCESS]
-| El ciclo del agente (percibir → razonar → planificar → actuar → observar) es el patrón universal que subyace a todas las arquitecturas de agentes. Domina este ciclo y podrás implementar cualquier framework de agentes.
+> El ciclo del agente (percibir → razonar → planificar → actuar → observar) es el patrón universal que subyace a todas las arquitecturas de agentes. Domina este ciclo y podrás implementar cualquier framework de agentes.
 
 ---
 

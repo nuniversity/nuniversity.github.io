@@ -122,12 +122,12 @@ EXPLAIN SELECT name, email FROM employees WHERE department_id = 5;
 ```
 
 > [!SUCCESS]
-| Cenário | Índice Regular | Índice de Cobertura |
-|----------|--------------|----------------|
-| `SELECT *` | Deve buscar heap | Deve buscar heap |
-| `SELECT colunas_indexadas` | Busca heap | Index-only |
-| Desempenho de escrita | Leve overhead | Mais overhead |
-| Espaço em disco | Menos | Mais |
+> | Cenário | Índice Regular | Índice de Cobertura |
+> |----------|--------------|----------------|
+> | `SELECT *` | Deve buscar heap | Deve buscar heap |
+> | `SELECT colunas_indexadas` | Busca heap | Index-only |
+> | Desempenho de escrita | Leve overhead | Mais overhead |
+> | Espaço em disco | Menos | Mais |
 
 Use `INCLUDE` para colunas que são retornadas mas não usadas em condições de busca/filtro.
 

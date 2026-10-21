@@ -58,23 +58,6 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
     localStorage.setItem('pomodoro_tasks', JSON.stringify(tasks));
   }, [tasks]);
 
-  useEffect(() => {
-    if (isActive) {
-      intervalRef.current = setInterval(() => {
-        setSeconds(prev => {
-          if (prev <= 0) {
-            handleSessionEnd();
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    }
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [isActive]);
-
   const handleSessionEnd = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     setIsActive(false);
@@ -90,6 +73,23 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
     setIsBreak(prev => !prev);
     setSeconds(isBreak ? workMinutes * 60 : (sessionCount > 0 && sessionCount % 4 === 0 ? longBreakMinutes : breakMinutes) * 60);
   }, [isBreak, workMinutes, breakMinutes, longBreakMinutes, sessionCount, tasks]);
+
+  useEffect(() => {
+    if (isActive) {
+      intervalRef.current = setInterval(() => {
+        setSeconds(prev => {
+          if (prev <= 0) {
+            handleSessionEnd();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [isActive, handleSessionEnd]);
 
   const startTimer = () => {
     if (seconds === 0) {

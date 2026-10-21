@@ -236,7 +236,7 @@ Monitorea el uso de tokens en la salida de depuración:
 
 ---
 
-## Practice Questions
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {

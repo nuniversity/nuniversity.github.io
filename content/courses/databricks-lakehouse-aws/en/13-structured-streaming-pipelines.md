@@ -148,8 +148,8 @@ sequenceDiagram
   Q->>D: write batch N (append or foreachBatch MERGE)
   D-->>Q: commit (Delta txn N)
   Q->>CP: write commit entry N + new offsets (+ state changelog)
-  Note over Q,D: failure AFTER sink commit, BEFORE commit-log write?<br/>restart replays batch N; Delta txnAppId/txnVersion makes it a no-op
-  Note over Q,D: failure BEFORE sink commit?<br/>restart replays batch N; MERGE re-runs (idempotent by key)
+  Note over Q,D: failure AFTER sink commit, BEFORE commit-log write?<br/>restart replays batch N, Delta txnAppId/txnVersion makes it a no-op
+  Note over Q,D: failure BEFORE sink commit?<br/>restart replays batch N, MERGE re-runs (idempotent by key)
   Q-->>LB: query terminated / crashed
   LB->>Q: auto-restart with backoff (same checkpoint)
   Note over CP: delete or lifecycle-expire this directory<br/>= query begins FRESH (full reprocess, state rebuilt)

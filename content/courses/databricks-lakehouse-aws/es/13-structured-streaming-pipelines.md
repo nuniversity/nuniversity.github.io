@@ -150,8 +150,8 @@ sequenceDiagram
   Q->>D: escribe el batch N (append o MERGE de foreachBatch)
   D-->>Q: commit (txn N de Delta)
   Q->>CP: escribe la entrada de commit N + offsets nuevos (+ changelog del estado)
-  Note over Q,D: ¿falla DESPUÉS del commit del sink, ANTES de escribir el commit log?<br/>el reinicio reproduce el batch N; txnAppId/txnVersion de Delta lo convierte en no-op
-  Note over Q,D: ¿falla ANTES del commit del sink?<br/>el reinicio reproduce el batch N; el MERGE se vuelve a ejecutar (idempotente por clave)
+  Note over Q,D: ¿falla DESPUÉS del commit del sink, ANTES de escribir el commit log?<br/>el reinicio reproduce el batch N, txnAppId/txnVersion de Delta lo convierte en no-op
+  Note over Q,D: ¿falla ANTES del commit del sink?<br/>el reinicio reproduce el batch N, el MERGE se vuelve a ejecutar (idempotente por clave)
   Q-->>LB: consulta terminada / caída
   LB->>Q: reinicio automático con backoff (mismo checkpoint)
   Note over CP: borra o caduca por ciclo de vida este directorio<br/>= la consulta empieza DESDE CERO (reproceso total, estado reconstruido)

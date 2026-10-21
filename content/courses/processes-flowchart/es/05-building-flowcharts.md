@@ -126,7 +126,7 @@ flowchart TD
     D -->|Sí| F[Generar token de restablecimiento]
     E --> G([Fin del proceso])
     F --> H[Enviar el correo de restablecimiento]
-    H --> I[[(Almacenar el token)]]
+    H --> I[["(Almacenar el token)"]]
     I --> J([Esperar la acción del usuario])
     
     J --> K[El usuario hace clic en el enlace de restablecimiento]

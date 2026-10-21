@@ -45,12 +45,12 @@ fn main() {
 ```
 
 > [!NOTE]
-| Caso de Uso | Por que Box |
-|----------|---------|
-| Tipos recursivos | Requisito de tamanho |
-| Trait objects | Dispatch dinâmico |
-| Movimentos de dados grandes | Barato (cópia de ponteiro) |
-| Alocação em heap necessária | Controle manual de lifetime |
+> | Caso de Uso | Por que Box |
+> |----------|---------|
+> | Tipos recursivos | Requisito de tamanho |
+> | Trait objects | Dispatch dinâmico |
+> | Movimentos de dados grandes | Barato (cópia de ponteiro) |
+> | Alocação em heap necessária | Controle manual de lifetime |
 
 ### Performance do Box
 
@@ -138,12 +138,12 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Tipo | Borrow Verificado | Caso de Uso |
-|------|---------------|----------|
-| `<code>Box&lt;T&gt;</code>` | Tempo de compilação | Ownership único, heap |
-| `<code>Rc&lt;T&gt;</code>` | Tempo de compilação | Ownership compartilhado somente leitura |
-| `<code>RefCell&lt;T&gt;</code>` | Tempo de execução | Mutabilidade interior |
-| `<code>Rc&lt;RefCell&lt;T&gt;&gt;</code>` | Tempo de execução | Ownership compartilhado mutável |
+> | Tipo | Borrow Verificado | Caso de Uso |
+> |------|---------------|----------|
+> | `<code>Box&lt;T&gt;</code>` | Tempo de compilação | Ownership único, heap |
+> | `<code>Rc&lt;T&gt;</code>` | Tempo de compilação | Ownership compartilhado somente leitura |
+> | `<code>RefCell&lt;T&gt;</code>` | Tempo de execução | Mutabilidade interior |
+> | `<code>Rc&lt;RefCell&lt;T&gt;&gt;</code>` | Tempo de execução | Ownership compartilhado mutável |
 
 ### Verificação de Borrow em Tempo de Execução
 

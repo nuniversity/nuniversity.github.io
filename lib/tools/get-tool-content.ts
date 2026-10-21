@@ -29,8 +29,10 @@ export async function getAllTools(lang: Locale): Promise<ToolMetadata[]> {
       const stat = fs.statSync(toolPath)
 
       if (stat.isDirectory()) {
-        const metadataPath = path.join(toolPath, `${lang}.md`)
-        
+        const localePath = path.join(toolPath, `${lang}.md`)
+        const fallbackPath = path.join(toolPath, 'en.md')
+        const metadataPath = fs.existsSync(localePath) ? localePath : fallbackPath
+
         if (fs.existsSync(metadataPath)) {
           const fileContents = fs.readFileSync(metadataPath, 'utf8')
           const { data } = matter(fileContents)
@@ -59,7 +61,9 @@ export async function getToolMetadata(
   lang: Locale
 ): Promise<ToolMetadata | null> {
   try {
-    const toolPath = path.join(toolsDirectory, slug, `${lang}.md`)
+    const localePath = path.join(toolsDirectory, slug, `${lang}.md`)
+    const fallbackPath = path.join(toolsDirectory, slug, 'en.md')
+    const toolPath = fs.existsSync(localePath) ? localePath : fallbackPath
 
     if (!fs.existsSync(toolPath)) {
       return null

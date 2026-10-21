@@ -23,6 +23,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
   const [completedRounds, setCompletedRounds] = useState<Array<{ round: number; ideas: Record<string, string[]> }>>([]);
   const [view, setView] = useState<'grid' | 'list'>('grid');
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const handleRoundCompleteRef = useRef<() => void>(() => {});
 
   const methods = {
     '6-3-5': {
@@ -54,7 +55,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
         setTimeLeft(timeLeft - 1);
       }, 1000);
     } else if (timeLeft === 0 && isActive) {
-      handleRoundComplete();
+      handleRoundCompleteRef.current();
     }
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -101,6 +102,8 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
       setIdeas(rotatedIdeas);
     }
   };
+
+  handleRoundCompleteRef.current = handleRoundComplete;
 
   const nextRound = () => {
     if (currentRound < rounds) {

@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Projeto Final: Agente de Suporte ao Cliente de Produção
 
-This capstone project integrates everything from the Advanced course: hierarchical agents, RAG, SQL agents, interrupts, streaming, LangSmith monitoring, and deployment. The result is a production-ready customer support system.
+Este projeto de integração reúne tudo do curso Avançado: agentes hierárquicos, RAG, agentes SQL, interrupts, streaming, monitoramento com LangSmith e implantação. O resultado é um sistema de suporte ao cliente pronto para produção.
 
 ---
 
@@ -303,8 +303,8 @@ Errors: {state.get('errors', [])}
     }
 ```
 
-[!NOTA]
-The human handoff uses interrupt() to pause and wait for a human agent to take over. The human's response (resolved + notes) is captured in state.
+[!NOTE]
+O repasse para humano usa interrupt() para pausar e esperar que um agente humano assuma. A resposta do humano (resolvido + observações) é capturada no estado.
 
 ---
 
@@ -508,12 +508,12 @@ result = support.handle_query(
 # Routes to SQL agent → queries database → returns data
 ```
 
-[!SUCESSO]
-This production-grade system combines routing, RAG, SQL queries, human handoff, quality review, and comprehensive monitoring — all the patterns from the Advanced course working together.
+[!SUCCESS]
+Este sistema de nível de produção combina roteamento, RAG, consultas SQL, repasse para humano, revisão de qualidade e monitoramento abrangente — todos os padrões do curso Avançado trabalhando juntos.
 
 ---
 
-## Perguntas Práticas
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {
@@ -667,13 +667,13 @@ This production-grade system combines routing, RAG, SQL queries, human handoff, 
 
 ---
 
-[!SUCESSO]
+[!SUCCESS]
 ### Principais Conclusões
-- Production support system integrates: routing, RAG, SQL, human handoff, quality review
-- Router classifies intent and dispatches to specialist agents
-- Escalation check triggers human handoff for low-confidence or complex queries
-- Human handoff uses interrupt() for pause/resume workflow
-- Quality review evaluates each interaction before returning to customer
-- LangSmith monitors error rates, latency, and other production metrics
-- PostgreSQL for production state persistence
-- All Advanced course patterns combined into a single cohesive system
+- O sistema de suporte em produção integra: roteamento, RAG, SQL, repasse para humano e revisão de qualidade
+- O roteador classifica a intenção e despacha para agentes especialistas
+- A verificação de escalação dispara o repasse para humano em consultas de baixa confiança ou complexas
+- O repasse para humano usa interrupt() para o fluxo de pausar/retomar
+- A revisão de qualidade avalia cada interação antes de responder ao cliente
+- O LangSmith monitora taxas de erro, latência e outras métricas de produção
+- PostgreSQL para persistência de estado em produção
+- Todos os padrões do curso Avançado combinados em um único sistema coeso

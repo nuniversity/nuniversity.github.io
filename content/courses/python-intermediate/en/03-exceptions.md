@@ -202,12 +202,12 @@ except BankError as e:
 ```
 
 > [!SUCCESS]
-| Rule | Why |
-|------|-----|
-| Inherit from `Exception`, not `BaseException` | Avoids catching system-level events |
-| Name custom exceptions with `Error` suffix | Clear naming convention (e.g., `ValidationError`) |
-| Store relevant context as attributes | Enables programmatic error handling |
-| Keep exception hierarchy shallow | Easy to catch broad or specific as needed |
+> | Rule | Why |
+> |------|-----|
+> | Inherit from `Exception`, not `BaseException` | Avoids catching system-level events |
+> | Name custom exceptions with `Error` suffix | Clear naming convention (e.g., `ValidationError`) |
+> | Store relevant context as attributes | Enables programmatic error handling |
+> | Keep exception hierarchy shallow | Easy to catch broad or specific as needed |
 
 ## Common Exception Types
 

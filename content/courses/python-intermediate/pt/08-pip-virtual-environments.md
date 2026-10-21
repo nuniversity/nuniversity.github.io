@@ -52,11 +52,11 @@ print(sys.executable)  # Mostra qual Python está sendo usado
 ```
 
 > [!WARNING]
-| Armadilha | Solução |
-|-----------|---------|
-| Esquecer de ativar o venv | Verifique `which python` ou `sys.executable` |
-| Commitar `.venv` no git | Adicione `.venv/` ao `.gitignore` |
-| Usar `sudo pip install` | Nunca faça isso — quebra pacotes do sistema! |
+> | Armadilha | Solução |
+> |-----------|---------|
+> | Esquecer de ativar o venv | Verifique `which python` ou `sys.executable` |
+> | Commitar `.venv` no git | Adicione `.venv/` ao `.gitignore` |
+> | Usar `sudo pip install` | Nunca faça isso — quebra pacotes do sistema! |
 
 ## `pip` — Instalando Pacotes
 
@@ -171,12 +171,12 @@ pip install -e ".[dev,test]"
 ```
 
 > [!SUCCESS]
-| Arquivo | Propósito | Status |
-|---------|-----------|--------|
-| `requirements.txt` | Fixar versões exatas para deploy | Ainda comum |
-| `setup.py` | Metadados do pacote e instalação | Legado |
-| `setup.cfg` | Configuração declarativa | Transicional |
-| `pyproject.toml` | Padrão moderno (PEP 518/621) | **Melhor prática atual** |
+> | Arquivo | Propósito | Status |
+> |---------|-----------|--------|
+> | `requirements.txt` | Fixar versões exatas para deploy | Ainda comum |
+> | `setup.py` | Metadados do pacote e instalação | Legado |
+> | `setup.cfg` | Configuração declarativa | Transicional |
+> | `pyproject.toml` | Padrão moderno (PEP 518/621) | **Melhor prática atual** |
 
 ## Arquivos de Lock e Builds Reproduzíveis
 

@@ -468,7 +468,7 @@ Essa questão tem implicações profundas para a ciência: se a matemática é o
 ```
 
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

@@ -470,7 +470,7 @@ class OrderProcessingSaga:
 | Verbo + participio | `PaymentReceived` | Alternativa común |
 
 > [!TIP]
-| > Elige una convención de nombrado y manténla de forma consistente. El Lenguaje Ubicuo también se aplica a los eventos: usa las palabras que usan los expertos en dominio cuando describen lo que sucedió.
+> Elige una convención de nombrado y manténla de forma consistente. El Lenguaje Ubicuo también se aplica a los eventos: usa las palabras que usan los expertos en dominio cuando describen lo que sucedió.
 
 ## Versionado de eventos
 

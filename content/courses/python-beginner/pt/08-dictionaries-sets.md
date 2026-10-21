@@ -151,12 +151,12 @@ unique = list(set(items))  # [1, 2, 3, 4]
 ```
 
 > [!SUCCESS]
-| Estrutura | Ordenada | Mutável | Chaves Únicas | Caso de Uso |
-|-----------|---------|---------|-------------|----------|
-| Lista | Sim | Sim | Não | Coleção ordenada |
-| Tupla | Sim | Não | Não | Dados fixos |
-| Dict | Sim* | Sim | Sim | Buscas chave-valor |
-| Set | Não | Sim | Sim* | Pertinência, unicidade |
+> | Estrutura | Ordenada | Mutável | Chaves Únicas | Caso de Uso |
+> |-----------|---------|---------|-------------|----------|
+> | Lista | Sim | Sim | Não | Coleção ordenada |
+> | Tupla | Sim | Não | Não | Dados fixos |
+> | Dict | Sim* | Sim | Sim | Buscas chave-valor |
+> | Set | Não | Sim | Sim* | Pertinência, unicidade |
 
 *Python 3.7+ dicionários mantêm ordem de inserção. Conjuntos armazenam valores únicos.
 

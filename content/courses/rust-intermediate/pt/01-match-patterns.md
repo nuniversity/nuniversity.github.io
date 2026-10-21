@@ -63,11 +63,11 @@ fn corresponder_char(c: char) -> &'static str {
 ```
 
 > [!NOTE]
-| Padrão de Intervalo | Sintaxe | Exemplo |
-|---------------------|---------|---------|
-| Inclusivo | `..=` | `1..=5` corresponde a 1,2,3,4,5 |
-| Semi-aberto | `..` | `1..5` corresponde a 1,2,3,4 (não válido em match, apenas em for) |
-| Aberto | `..` | `..=5` ou `5..` (em match, use guards) |
+> | Padrão de Intervalo | Sintaxe | Exemplo |
+> |---------------------|---------|---------|
+> | Inclusivo | `..=` | `1..=5` corresponde a 1,2,3,4,5 |
+> | Semi-aberto | `..` | `1..5` corresponde a 1,2,3,4 (não válido em match, apenas em for) |
+> | Aberto | `..` | `..=5` ou `5..` (em match, use guards) |
 
 ### Padrões de Desestruturação
 

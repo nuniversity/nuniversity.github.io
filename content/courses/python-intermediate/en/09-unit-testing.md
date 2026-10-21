@@ -113,12 +113,12 @@ class TestFileProcessor(unittest.TestCase):
 ```
 
 > [!NOTE]
-| Method | When | Frequency |
-|--------|------|-----------|
-| `setUp` | Before each test method | Per test |
-| `tearDown` | After each test method | Per test |
-| `setUpClass` | Before all tests in class | Once per class |
-| `tearDownClass` | After all tests in class | Once per class |
+> | Method | When | Frequency |
+> |--------|------|-----------|
+> | `setUp` | Before each test method | Per test |
+> | `tearDown` | After each test method | Per test |
+> | `setUpClass` | Before all tests in class | Once per class |
+> | `tearDownClass` | After all tests in class | Once per class |
 
 ```python
 class TestDatabase(unittest.TestCase):
@@ -397,13 +397,13 @@ flowchart LR
 ```
 
 > [!SUCCESS]
-| Principle | Why |
-|-----------|-----|
-| Test one thing per test | Simple debugging, clear failure messages |
-| Use descriptive test names | `test_withdraw_reduces_balance` not `test_1` |
-| Isolate tests | Each test should set up and tear down its own state |
-| Test edge cases | Empty input, boundary values, error conditions |
-| Make tests fast | Slow tests don't get run often |
+> | Principle | Why |
+> |-----------|-----|
+> | Test one thing per test | Simple debugging, clear failure messages |
+> | Use descriptive test names | `test_withdraw_reduces_balance` not `test_1` |
+> | Isolate tests | Each test should set up and tear down its own state |
+> | Test edge cases | Empty input, boundary values, error conditions |
+> | Make tests fast | Slow tests don't get run often |
 
 ## Practice Questions
 

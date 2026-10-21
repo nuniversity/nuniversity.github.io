@@ -96,7 +96,7 @@ errorRecovery:
 ```
 
 > [!TIP]
-| Usa `matchPattern` para la auto-carga y haz que las skills se sientan mágicas. Cuando un usuario dice "revisa el módulo de autenticación", la skill se activa automáticamente sin que el usuario tenga que saber nada sobre la gestión de skills.
+> Usa `matchPattern` para la auto-carga y haz que las skills se sientan mágicas. Cuando un usuario dice "revisa el módulo de autenticación", la skill se activa automáticamente sin que el usuario tenga que saber nada sobre la gestión de skills.
 
 ---
 

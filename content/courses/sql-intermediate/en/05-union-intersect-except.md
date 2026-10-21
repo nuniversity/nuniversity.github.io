@@ -68,12 +68,12 @@ ORDER BY event_time;
 ```
 
 > [!NOTE]
-| UNION | UNION ALL |
-|-------|-----------|
-| Removes duplicates | Preserves duplicates |
-| Sorts internally (dedup) | Appends only |
-| Slower on large sets | Faster — no sorting overhead |
-| Use when you want distinct rows | Use when duplicates are acceptable or desired |
+> | UNION | UNION ALL |
+> |-------|-----------|
+> | Removes duplicates | Preserves duplicates |
+> | Sorts internally (dedup) | Appends only |
+> | Slower on large sets | Faster — no sorting overhead |
+> | Use when you want distinct rows | Use when duplicates are acceptable or desired |
 
 ### UNION vs UNION ALL: Performance
 

@@ -643,7 +643,7 @@ flowchart TD
     Q["Nova consulta"] --> S{"Aceleração de consultas curtas: tempo previsto <= 20 s (ou dinâmico)? CTAS ou somente leitura?"}
     S -->|Sim| S1["Service class 14 - pula a fila"]
     S -->|Não| W{"Modo do WLM"}
-    W -->|Automático (padrão)| W1["Service classes 100-107 - AWS atribui slots e memória; query priority + QMR se aplicam"]
+    W -->|"Automático (padrão)"| W1["Service classes 100-107 - AWS atribui slots e memória; query priority + QMR se aplicam"]
     W -->|Manual| W2["Suas filas: % de memória + concorrência 1-50, 50 slots no total, recomenda-se <= 15"]
     W1 --> QM{"QMR a cada 10 s: log / hop / abort / change priority"}
     W2 --> QM

@@ -275,12 +275,12 @@ y.load(Ordering::SeqCst);
 ```
 
 > [!WARNING]
-| Ordering | Garantia | Custo |
-|----------|-----------|------|
-| `Relaxed` | Sem ordenamento | Zero |
-| `Acquire`/`Release` | happens-before | Moderado |
-| `AcqRel` | Acquire + Release | Moderado |
-| `SeqCst` | Consistência sequencial | Maior (mas geralmente ok) |
+> | Ordering | Garantia | Custo |
+> |----------|-----------|------|
+> | `Relaxed` | Sem ordenamento | Zero |
+> | `Acquire`/`Release` | happens-before | Moderado |
+> | `AcqRel` | Acquire + Release | Moderado |
+> | `SeqCst` | Consistência sequencial | Maior (mas geralmente ok) |
 
 ### Operações Atômicas
 

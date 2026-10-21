@@ -236,7 +236,7 @@ grep "total_tokens" opencode.log | awk '{sum+=$NF} END {print sum/NR}'
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

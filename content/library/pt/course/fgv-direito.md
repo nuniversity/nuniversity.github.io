@@ -3,7 +3,6 @@ id: fgv-direito
 title: "FGV Direito - Cursos Gratuitos de Direito"
 description: "Cursos gratuitos de Direito da Fundação Getúlio Vargas (FGV Direito SP e RJ). Destaques: Direito Penal e Econômico (5h, 43.358 avaliações), Aspectos Gerais das Licitações e Contratações (8h), Direito Administrativo, Direito Constitucional, Direito do Trabalho, Direito do Consumidor, Ética Jurídica, Compliance, e muito mais. Certificado FGV gratuito."
 url: "https://educacao-executiva.fgv.br/cursos/gratuitos"
-thumbnail: "https://educacao-executiva.fgv.br/assets/images/fgv-logo.svg"
 author: "Fundação Getulio Vargas (FGV Direito)"
 category: "Law & Economics"
 difficulty: "all"

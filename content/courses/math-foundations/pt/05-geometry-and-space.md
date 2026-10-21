@@ -574,7 +574,7 @@ O caminho direto sempre é mais curto (ou igual, se A, B e C forem colineares). 
 ```
 
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

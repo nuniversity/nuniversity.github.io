@@ -14,21 +14,16 @@ interface Course {
   author?: string
   difficulty?: string
   duration?: string
-}
-
-interface LessonData {
-  slug: string
-  lessons?: { slug: string }[]
+  lessonCount?: number
 }
 
 interface CoursesClientProps {
   lang: Locale
   courses: Course[]
-  lessonsData: LessonData[]
   dict: any
 }
 
-export function CoursesClient({ lang, courses, lessonsData, dict }: CoursesClientProps) {
+export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all')
 
@@ -216,26 +211,22 @@ export function CoursesClient({ lang, courses, lessonsData, dict }: CoursesClien
                 <div>
                   <h2 className="text-2xl font-semibold">{area}</h2>
                   <p className="text-sm text-muted-foreground">
-                    {areaCourses.length} {areaCourses.length === 1 ? 'course' : 'courses'}
+                    {(areaCourses.length === 1
+                      ? dict.courses?.count?.course || '{n} course'
+                      : dict.courses?.count?.courses || '{n} courses'
+                    ).replace('{n}', String(areaCourses.length))}
                   </p>
                 </div>
               </div>
               
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {areaCourses.map((course) => {
-                  // Find first lesson for this course
-                  const courseData = lessonsData.find(c => c.slug === course.slug)
-                  const firstLessonSlug = courseData?.lessons?.[0]?.slug
-                  const lessonCount = courseData?.lessons?.length || 0
+                  const lessonCount = course.lessonCount || 0
 
                   return (
                     <Link
                       key={course.slug}
-                      href={
-                        firstLessonSlug
-                          ? `/${lang}/courses/${course.slug}/${firstLessonSlug}`
-                          : `/${lang}/courses/${course.slug}`
-                      }
+                      href={`/${lang}/courses/${course.slug}/`}
                       className="group block bg-card border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                     >
                       {/* Card Header */}

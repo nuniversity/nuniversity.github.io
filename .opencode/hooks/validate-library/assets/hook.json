@@ -1,0 +1,19 @@
+{
+  "name": "validate-library",
+  "version": "1.0.0",
+  "description": "Validates library resource Markdown frontmatter",
+  "type": "hook",
+  "event": "file.write",
+  "pattern": "content/library/**/*.md",
+  "script": "scripts/validate_library.py",
+  "blocking": true,
+  "exit_codes": {
+    "0": "pass",
+    "1": "non-blocking warning",
+    "2": "blocking error"
+  },
+  "dependencies": [],
+  "environment": {
+    "OPENCODE_FILE_PATH": "Path to the library Markdown file being validated"
+  }
+}

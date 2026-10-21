@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Clock, Star, ArrowRight, BookOpen, Code, GitBranch, Beaker, Calculator, Database, Cpu, Globe, Sparkles, Brain, type LucideIcon } from 'lucide-react'
+import { Clock, ArrowRight, BookOpen, Code, GitBranch, Beaker, Calculator, Database, Cpu, Globe, Sparkles, Brain, type LucideIcon } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
 import type { CourseInfo } from '@/lib/courses/get-course-content'
@@ -56,15 +56,6 @@ function capitalize(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
-function pseudoRating(slug: string): number {
-  let hash = 0
-  for (let i = 0; i < slug.length; i++) {
-    hash = ((hash << 5) - hash) + slug.charCodeAt(i)
-    hash |= 0
-  }
-  return 4.0 + Math.abs(hash % 10) / 10
-}
-
 interface FeaturedCoursesProps {
   lang: Locale
   dict: Dictionary
@@ -115,7 +106,7 @@ export default function FeaturedCourses({ lang, dict, courses }: FeaturedCourses
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
                   <div className="absolute top-4 left-4">
                     <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
-                      {course.area}
+                      {(dict.courses?.areas as Record<string, string> | undefined)?.[course.area] || course.area}
                     </span>
                   </div>
                 </div>
@@ -123,14 +114,8 @@ export default function FeaturedCourses({ lang, dict, courses }: FeaturedCourses
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
-                      {course.difficulty ? capitalize(course.difficulty) : 'All Levels'}
+                      {course.difficulty ? capitalize(course.difficulty) : dict.courses?.all_levels || 'All Levels'}
                     </span>
-                    <div className="flex items-center space-x-1">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                        {pseudoRating(course.slug)}
-                      </span>
-                    </div>
                   </div>
 
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -148,15 +133,17 @@ export default function FeaturedCourses({ lang, dict, courses }: FeaturedCourses
                     </div>
                     <div className="flex items-center space-x-1">
                       <BookOpen className="w-4 h-4" />
-                      <span>Course</span>
+                      <span>
+                        {course.lessonCount ?? 0}{' '}
+                        {(course.lessonCount ?? 0) === 1
+                          ? dict.courses?.lesson || 'Lesson'
+                          : dict.courses?.lessons || 'Lessons'}
+                      </span>
                     </div>
                   </div>
 
                   <Link
-                    href={course.firstLessonSlug
-                      ? `/${lang}/courses/${course.slug}/${course.firstLessonSlug}`
-                      : `/${lang}/courses/${course.slug}`
-                    }
+                    href={`/${lang}/courses/${course.slug}/`}
                     className="w-full btn-primary flex items-center justify-center space-x-2 group-hover:scale-105 transition-transform duration-300"
                   >
                     <BookOpen className="w-4 h-4" />

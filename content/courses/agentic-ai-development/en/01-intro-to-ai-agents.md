@@ -337,7 +337,7 @@ sequenceDiagram
 ```
 
 > [!TIP]
-| Design agents to communicate their reasoning process, not just results. This transparency builds trust and makes debugging easier when agents make mistakes.
+> Design agents to communicate their reasoning process, not just results. This transparency builds trust and makes debugging easier when agents make mistakes.
 
 ---
 

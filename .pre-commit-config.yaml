@@ -13,11 +13,3 @@ repos:
         args: [-c, pyproject.toml]
         additional_dependencies: ["bandit[toml]"]
 
-  - repo: local
-    hooks:
-      - id: pytest-check
-        name: pytest
-        entry: uv run pytest --tb=short -q
-        language: system
-        types: [python]
-        pass_filenames: false

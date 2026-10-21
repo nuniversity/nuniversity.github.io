@@ -3,7 +3,6 @@ id: nerdologia
 title: "Nerdologia - Ciência + Cultura Pop"
 description: "Canal com 3,5 milhões de inscritos que analisa a cultura pop (filmes, séries, games, quadrinhos) sob a ótica da ciência real. Uma forma divertida de aprender ciências enquanto discute conteúdo que você já consome."
 url: "https://youtube.com/@Nerdologia"
-thumbnail: "https://i.ytimg.com/vi/NERD0123456/maxresdefault.jpg"
 author: "Nerdologia (Atila Iamarino)"
 category: "Biology & Life Sciences"
 difficulty: "all"

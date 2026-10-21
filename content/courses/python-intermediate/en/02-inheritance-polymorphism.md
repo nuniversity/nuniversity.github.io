@@ -399,11 +399,11 @@ print(duck.speed()) # Fast in air, Moderate in water
 ```
 
 > [!WARNING]
-| Pitfall | Solution |
-|---------|----------|
-| Diamond problem (same method on multiple paths) | MRO handles this; use `super()` carefully |
-| Unclear initialization order | Each `__init__` should call `super().__init__()` |
-| Tight coupling | Prefer composition over inheritance |
+> | Pitfall | Solution |
+> |---------|----------|
+> | Diamond problem (same method on multiple paths) | MRO handles this; use `super()` carefully |
+> | Unclear initialization order | Each `__init__` should call `super().__init__()` |
+> | Tight coupling | Prefer composition over inheritance |
 
 ## Composition Over Inheritance
 

@@ -43,13 +43,13 @@ fn main() {
 ```
 
 > [!WARNING]
-| Situation | Should You Panic? | Better Alternative |
-|-----------|-------------------|--------------------|
-| Array index out of bounds | Yes (bug) | Use `.get()` for safe access |
-| User input invalid | No | Return `Result` |
-| Config file missing | Maybe | Return `Result` or use `expect` |
-| Network timeout | No | Return `Result` |
-| Division by zero | Yes | Check before dividing |
+> | Situation | Should You Panic? | Better Alternative |
+> |-----------|-------------------|--------------------|
+> | Array index out of bounds | Yes (bug) | Use `.get()` for safe access |
+> | User input invalid | No | Return `Result` |
+> | Config file missing | Maybe | Return `Result` or use `expect` |
+> | Network timeout | No | Return `Result` |
+> | Division by zero | Yes | Check before dividing |
 
 ### Custom Panic Messages
 
@@ -95,11 +95,11 @@ fn main() {
 ```
 
 > [!NOTE]
-| Method | Message | Use Case |
-|--------|---------|----------|
-| `unwrap()` | Generic (shows value) | Quick prototypes |
-| `expect(msg)` | Custom + value | Documenting assumptions |
-| `unwrap_or(default)` | None | Safe default |
+> | Method | Message | Use Case |
+> |--------|---------|----------|
+> | `unwrap()` | Generic (shows value) | Quick prototypes |
+> | `expect(msg)` | Custom + value | Documenting assumptions |
+> | `unwrap_or(default)` | None | Safe default |
 
 ## Error Propagation with ?
 
@@ -208,13 +208,13 @@ fn main() -> Result<()> {
 ```
 
 > [!NOTE]
-| Feature | `Box<dyn Error>` | `anyhow` |
-|---------|-------------------|----------|
-| Type erased | Yes | Yes |
-| Context attachment | Manual | `.with_context()` |
-| Downcasting | Possible | Possible |
-| Popularity | Stdlib | Community standard |
-| When to use | Libraries | Applications |
+> | Feature | `Box<dyn Error>` | `anyhow` |
+> |---------|-------------------|----------|
+> | Type erased | Yes | Yes |
+> | Context attachment | Manual | `.with_context()` |
+> | Downcasting | Possible | Possible |
+> | Popularity | Stdlib | Community standard |
+> | When to use | Libraries | Applications |
 
 ## thiserror — Library Error Types
 
@@ -251,11 +251,11 @@ fn process_data() -> Result<(), DataError> {
 ```
 
 > [!SUCCESS]
-| Crate | Purpose | When to Use |
-|-------|---------|-------------|
-| `anyhow` | Application error handling | Binary projects, CLIs |
-| `thiserror` | Library error types | Library crates |
-| Both | Define types with thiserror, use anyhow in apps | Large projects |
+> | Crate | Purpose | When to Use |
+> |-------|---------|-------------|
+> | `anyhow` | Application error handling | Binary projects, CLIs |
+> | `thiserror` | Library error types | Library crates |
+> | Both | Define types with thiserror, use anyhow in apps | Large projects |
 
 ## Panic or Not?
 

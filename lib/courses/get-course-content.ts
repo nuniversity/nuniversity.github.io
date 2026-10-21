@@ -32,10 +32,12 @@ export interface CourseInfo {
   title: string
   description: string
   area: string
+  author?: string
   difficulty?: 'beginner' | 'intermediate' | 'advanced'
   duration?: string
   icon?: string
   firstLessonSlug?: string
+  lessonCount?: number
 }
 
 export interface CourseWithLessons {
@@ -45,6 +47,26 @@ export interface CourseWithLessons {
 
 
 const COURSES_DIR = path.join(process.cwd(), 'content', 'courses')
+
+const DIFFICULTY_ALIASES: Record<string, 'beginner' | 'intermediate' | 'advanced'> = {
+  beginner: 'beginner',
+  iniciante: 'beginner',
+  principiante: 'beginner',
+  intermediate: 'intermediate',
+  'intermediário': 'intermediate',
+  intermediario: 'intermediate',
+  intermedio: 'intermediate',
+  advanced: 'advanced',
+  avanzado: 'advanced',
+  'avançado': 'advanced',
+}
+
+function normalizeDifficulty(
+  value?: string
+): 'beginner' | 'intermediate' | 'advanced' | undefined {
+  if (!value || typeof value !== 'string') return undefined
+  return DIFFICULTY_ALIASES[value.trim().toLowerCase()] ?? 'beginner'
+}
 
 
 export async function getCourseContent(
@@ -70,9 +92,14 @@ export async function getCourseContent(
     
     const fileContents = fs.readFileSync(filePath, 'utf8')
     const { data, content } = matter(fileContents)
-    
+
+    const metadata = data as CourseMetadata
+    if (metadata.difficulty) {
+      metadata.difficulty = normalizeDifficulty(String(metadata.difficulty))
+    }
+
     return {
-      metadata: data as CourseMetadata,
+      metadata,
       content,
       slug: lessonSlug,
     }
@@ -115,9 +142,14 @@ export async function getAllLessons(
           const filePath = path.join(actualPath, file)
           const fileContents = fs.readFileSync(filePath, 'utf8')
           const { data, content } = matter(fileContents)
-          
+
+          const metadata = data as CourseMetadata
+          if (metadata.difficulty) {
+            metadata.difficulty = normalizeDifficulty(String(metadata.difficulty))
+          }
+
           return {
-            metadata: data as CourseMetadata,
+            metadata,
             content,
             slug: lessonSlug,
           }
@@ -175,7 +207,8 @@ export async function getAllCourses(locale: Locale): Promise<CourseInfo[]> {
             title: localizedInfo.title || courseInfo.title,
             description: localizedInfo.description || courseInfo.description,
             area: localizedInfo.area || courseJson.area || courseInfo.area,
-            difficulty: localizedInfo.difficulty || courseJson.difficulty,
+            author: courseJson.author,
+            difficulty: normalizeDifficulty(localizedInfo.difficulty || courseJson.difficulty),
             duration: localizedInfo.duration || courseJson.duration,
             icon: courseJson.icon,
           }
@@ -195,7 +228,7 @@ export async function getAllCourses(locale: Locale): Promise<CourseInfo[]> {
             
             courseInfo.title = data.courseTitle || courseInfo.title
             courseInfo.description = data.courseDescription || data.description || courseInfo.description
-            courseInfo.difficulty = data.difficulty
+            courseInfo.difficulty = normalizeDifficulty(data.difficulty)
             courseInfo.duration = data.courseDuration || data.duration
           } catch (error) {
             console.error(`Error reading first lesson for ${dir}:`, error)
@@ -214,6 +247,7 @@ export async function getAllCourses(locale: Locale): Promise<CourseInfo[]> {
         if (lessonFiles.length > 0) {
           courseInfo.firstLessonSlug = lessonFiles[0].replace(/\.md$/, '')
         }
+        courseInfo.lessonCount = lessonFiles.length
       }
 
       courses.push(courseInfo)

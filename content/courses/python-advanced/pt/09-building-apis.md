@@ -316,8 +316,8 @@ async def delete_todo(todo_id: UUID):
 flowchart TD
     Client["Cliente"] -->|GET /todos| FastAPI["FastAPI"]
     Client -->|POST /todos| FastAPI
-    Client -->|PUT /todos/{id}| FastAPI
-    Client -->|DELETE /todos/{id}| FastAPI
+    Client -->|"PUT /todos/{id}"| FastAPI
+    Client -->|"DELETE /todos/{id}"| FastAPI
     FastAPI -->|Validar| Pydantic["Modelo Pydantic"]
     FastAPI -->|Docs Automáticos| Swagger["/docs"]
     FastAPI -->|Retornar JSON| Client

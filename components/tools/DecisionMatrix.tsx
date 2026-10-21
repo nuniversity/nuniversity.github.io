@@ -68,7 +68,7 @@ const DecisionMatrix = ({ lang = 'en' }: DecisionMatrixProps) => {
       let totalWeight = 0;
       let count = 0;
       for (const criterion of criteria) {
-        const score = getScore(option.id, criterion.id);
+        const score = scores[`${option.id}-${criterion.id}`] ?? null;
         if (score !== null) {
           totalWeighted += score * criterion.weight;
           totalWeight += criterion.weight;

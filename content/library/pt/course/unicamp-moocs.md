@@ -3,7 +3,6 @@ id: unicamp-moocs
 title: "UNICAMP GGTE MOOCs - Química, Biologia e Mais"
 description: "Cursos MOOCs gratuitos da UNICAMP pelo GGTE (Grupo Gestor de Tecnologias Educacionais). Destaques: Segurança em Laboratórios Químicos, Biologia Investigativa, Probióticos/Prebióticos, Biorrefinaria, Microbiologia de Alimentos, Processamento Digital de Sinais, Android, Pensamento Crítico."
 url: "https://moocs.ggte.unicamp.br"
-thumbnail: "https://www.unicamp.br/sites/default/files/images/Logomarca/unicamp_logo_vertical_rgb.png"
 author: "UNICAMP - GGTE"
 category: "Biology & Life Sciences"
 difficulty: "all"

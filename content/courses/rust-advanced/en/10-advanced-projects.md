@@ -152,11 +152,11 @@ impl KvStore {
 ```
 
 > [!SUCCESS]
-| Operation | Lock | Concurrency |
-|-----------|------|-------------|
-| `get` / `exists` / `keys` | Read lock | Unlimited readers |
-| `set` / `delete` / `flush` | Write lock | Exclusive access |
-| TTL expiration | Upgrade to write | Background cleanup |
+> | Operation | Lock | Concurrency |
+> |-----------|------|-------------|
+> | `get` / `exists` / `keys` | Read lock | Unlimited readers |
+> | `set` / `delete` / `flush` | Write lock | Exclusive access |
+> | TTL expiration | Upgrade to write | Background cleanup |
 
 ## Step 3: Network Protocol Handler
 

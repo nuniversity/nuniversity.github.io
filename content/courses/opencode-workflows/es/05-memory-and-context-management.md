@@ -235,7 +235,7 @@ Context: 15234 tokens (47% of 32k limit)
 
 ---
 
-## Practice Questions
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {

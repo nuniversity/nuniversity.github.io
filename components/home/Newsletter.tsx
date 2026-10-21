@@ -93,7 +93,7 @@ export default function Newsletter({ dict }: NewsletterProps) {
           </form>
 
           <p className="text-sm text-blue-200">
-            No spam, unsubscribe at any time.
+            {dict.footer?.newsletter?.noSpam || 'No spam. Unsubscribe anytime.'}
           </p>
         </motion.div>
       </div>

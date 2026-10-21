@@ -30,12 +30,12 @@ fn main() {
 ```
 
 > [!NOTE]
-| ABI | When to Use |
-|-----|-------------|
-| `"C"` | C interop (most common) |
-| `"stdcall"` | Windows API (32-bit) |
-| `"rust"` | Default Rust ABI (unstable) |
-| `"system"` | Platform default (C on Unix, stdcall on Win32) |
+> | ABI | When to Use |
+> |-----|-------------|
+> | `"C"` | C interop (most common) |
+> | `"stdcall"` | Windows API (32-bit) |
+> | `"rust"` | Default Rust ABI (unstable) |
+> | `"system"` | Platform default (C on Unix, stdcall on Win32) |
 
 ## Safe Wrapper Pattern
 
@@ -154,11 +154,11 @@ fn safe_get_message() -> String {
 ```
 
 > [!SUCCESS]
-| Source | Allocator | Must Free With |
-|--------|-----------|----------------|
-| Rust code | Rust allocator | Rust `drop` / dealloc |
-| C library | `malloc` | `free` |
-| Your C code | Must match | Free with matching allocator |
+> | Source | Allocator | Must Free With |
+> |--------|-----------|----------------|
+> | Rust code | Rust allocator | Rust `drop` / dealloc |
+> | C library | `malloc` | `free` |
+> | Your C code | Must match | Free with matching allocator |
 
 ### Passing Rust Allocations to C
 

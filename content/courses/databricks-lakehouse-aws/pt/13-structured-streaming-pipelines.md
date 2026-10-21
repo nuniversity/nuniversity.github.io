@@ -149,8 +149,8 @@ sequenceDiagram
   Q->>D: grava batch N (append ou foreachBatch MERGE)
   D-->>Q: commit (Delta txn N)
   Q->>CP: grava entrada de commit N + novos offsets (+ changelog do state)
-  Note over Q,D: falha DEPOIS do commit no sink, ANTES de gravar o commit-log?<br/>o reinício reproduz o batch N; txnAppId/txnVersion do Delta tornam isso um no-op
-  Note over Q,D: falha ANTES do commit no sink?<br/>o reinício reproduz o batch N; o MERGE roda de novo (idempotente por chave)
+  Note over Q,D: falha DEPOIS do commit no sink, ANTES de gravar o commit-log?<br/>o reinício reproduz o batch N, txnAppId/txnVersion do Delta tornam isso um no-op
+  Note over Q,D: falha ANTES do commit no sink?<br/>o reinício reproduz o batch N, o MERGE roda de novo (idempotente por chave)
   Q-->>LB: query terminada / crash
   LB->>Q: auto-restart com backoff (mesmo checkpoint)
   Note over CP: apagar ou expirar este diretório por lifecycle<br/>= query começa do ZERO (reprocesso completo, state reconstruído)

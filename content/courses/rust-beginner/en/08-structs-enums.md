@@ -183,11 +183,11 @@ impl Message {
 ```
 
 > [!SUCCESS]
-| Struct vs Enum | Use When |
-|----------------|----------|
-| Struct | Data always has all fields |
-| Enum | Data can be one of several shapes |
-| Enum with data | Each variant carries different data |
+> | Struct vs Enum | Use When |
+> |----------------|----------|
+> | Struct | Data always has all fields |
+> | Enum | Data can be one of several shapes |
+> | Enum with data | Each variant carries different data |
 
 ## Option — Safe Null Handling
 

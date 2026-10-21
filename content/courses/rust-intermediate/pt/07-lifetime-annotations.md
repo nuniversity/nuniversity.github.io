@@ -75,11 +75,11 @@ fn longest_with_announcement<'a, 'b>(
 ```
 
 > [!SUCCESS]
-| Padrão | Significado |
-|---------|---------|
-| `<'a>(x: &'a str) -> &'a str` | Saída vive tanto quanto a entrada |
-| `<'a, 'b>(x: &'a str, _: &'b str) -> &'a str` | Saída vinculada à primeira entrada |
-| `<'a>(_: &str, y: &'a str) -> &'a str` | Saída vinculada à segunda entrada |
+> | Padrão | Significado |
+> |---------|---------|
+> | `<'a>(x: &'a str) -> &'a str` | Saída vive tanto quanto a entrada |
+> | `<'a, 'b>(x: &'a str, _: &'b str) -> &'a str` | Saída vinculada à primeira entrada |
+> | `<'a>(_: &str, y: &'a str) -> &'a str` | Saída vinculada à segunda entrada |
 
 ## Anotações de Lifetime em Structs
 

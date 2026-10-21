@@ -115,10 +115,10 @@ CROSS JOIN colors c;
 If sizes has 3 rows and colors has 2 rows: 6 rows in result.
 
 > [!WARNING]
-| Implicit CROSS JOIN | Explicit CROSS JOIN |
-|---------------------|---------------------|
-| `SELECT * FROM a, b` | `SELECT * FROM a CROSS JOIN b` |
-| Easy to forget WHERE | Intentional and clear |
+> | Implicit CROSS JOIN | Explicit CROSS JOIN |
+> |---------------------|---------------------|
+> | `SELECT * FROM a, b` | `SELECT * FROM a CROSS JOIN b` |
+> | Easy to forget WHERE | Intentional and clear |
 
 Always prefer explicit `CROSS JOIN` to avoid accidental Cartesian products.
 
@@ -197,11 +197,11 @@ WHERE NOT EXISTS (
 ```
 
 > [!SUCCESS]
-| Anti-Join Method | Performance | Readability |
-|------------------|-------------|-------------|
-| LEFT JOIN + IS NULL | Fast with indexes | Clear to SQL veterans |
-| NOT EXISTS | Most efficient for correlated subqueries | Intent-revealing |
-| NOT IN | Risky with NULLs | Simple but dangerous |
+> | Anti-Join Method | Performance | Readability |
+> |------------------|-------------|-------------|
+> | LEFT JOIN + IS NULL | Fast with indexes | Clear to SQL veterans |
+> | NOT EXISTS | Most efficient for correlated subqueries | Intent-revealing |
+> | NOT IN | Risky with NULLs | Simple but dangerous |
 
 NOT IN is dangerous because it returns zero rows if the subquery contains any NULL:
 

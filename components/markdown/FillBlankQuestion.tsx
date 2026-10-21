@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useCallback, useMemo, Fragment } from 'react'
 import {
   DndContext,
   DragOverlay,
@@ -16,6 +16,7 @@ import {
 } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
 import { CheckCircle2, XCircle, PenLine } from 'lucide-react'
+import { splitAnswer } from '@/lib/markdown/split-answer'
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
@@ -86,13 +87,137 @@ function InlineBlank({ blankId, placedWord, isCorrect, feedback, isOver, setNode
 
 interface FillBlankQuestionProps {
   question: string
+  template?: string
+  answers?: Record<string, string>
+  distractors?: string[]
+  explanation?: string
+  instructions?: string
+  items?: Array<{ prompt: string; answer: string }>
+}
+
+function countBlanks(prompt: string): number {
+  return (prompt.match(/______/g) ?? []).length
+}
+
+function ItemsMode({ question, instructions, items, explanation }: {
+  question: string
+  instructions?: string
+  items: Array<{ prompt: string; answer: string }>
+  explanation?: string
+}) {
+  const [values, setValues] = useState<string[][]>(() => items.map(item => Array.from({ length: countBlanks(item.prompt) }, () => '')))
+  const [results, setResults] = useState<boolean[] | null>(null)
+
+  const setBlank = (itemIndex: number, blankIndex: number, value: string) => {
+    setValues(prev => prev.map((row, i) => (i === itemIndex ? row.map((cell, j) => (j === blankIndex ? value : cell)) : row)))
+  }
+
+  const handleCheck = () => {
+    const next = items.map((item, i) => {
+      const expected = splitAnswer(countBlanks(item.prompt), item.answer)
+      const entered = values[i] ?? []
+      return expected.every((answer, j) => (entered[j] ?? '').trim().toLowerCase() === answer.trim().toLowerCase())
+    })
+    setResults(next)
+  }
+
+  const handleTryAgain = () => {
+    setValues(items.map(item => Array.from({ length: countBlanks(item.prompt) }, () => '')))
+    setResults(null)
+  }
+
+  const correctCount = results ? results.filter(Boolean).length : 0
+
+  return (
+    <div className="my-8 rounded-xl border bg-card shadow-sm overflow-hidden">
+      <div className="bg-muted/50 px-4 py-2 border-b flex items-center gap-2">
+        <PenLine className="w-4 h-4 text-primary" />
+        <span className="text-sm font-semibold text-foreground">Fill in the Blanks</span>
+      </div>
+      <div className="p-4 sm:p-6 space-y-4">
+        <div>
+          <p className="font-medium text-foreground">{question}</p>
+          {instructions && <p className="text-sm text-muted-foreground mt-1">{instructions}</p>}
+        </div>
+
+        <div className="space-y-3">
+          {items.map((item, itemIndex) => {
+            const segments = item.prompt.split(/______/)
+            const rowState = results === null ? null : results[itemIndex]
+            return (
+              <div
+                key={itemIndex}
+                className={`rounded-lg border px-4 py-3 text-sm leading-relaxed transition-colors ${
+                  rowState === null
+                    ? 'border-border bg-muted/20'
+                    : rowState
+                      ? 'border-green-500 bg-green-50 dark:bg-green-950/30'
+                      : 'border-red-500 bg-red-50 dark:bg-red-950/30'
+                }`}
+              >
+                {segments.map((segment, blankIndex) => (
+                  <Fragment key={blankIndex}>
+                    {segment}
+                    {blankIndex < segments.length - 1 && (
+                      <input
+                        type="text"
+                        value={values[itemIndex]?.[blankIndex] ?? ''}
+                        onChange={event => setBlank(itemIndex, blankIndex, event.target.value)}
+                        disabled={results !== null}
+                        aria-label={`Item ${itemIndex + 1}, blank ${blankIndex + 1}`}
+                        className="mx-1 w-28 rounded-md border-2 border-dashed border-muted-foreground/50 bg-transparent px-2 py-1 text-sm font-medium text-foreground focus:outline-none focus:border-solid focus:border-primary disabled:opacity-70"
+                      />
+                    )}
+                  </Fragment>
+                ))}
+              </div>
+            )
+          })}
+        </div>
+
+        {results !== null && (
+          <div
+            role="status"
+            aria-live="polite"
+            className={`p-4 rounded-lg ${results.every(Boolean) ? 'bg-green-50 dark:bg-green-950/30 border border-green-200' : 'bg-red-50 dark:bg-red-950/30 border border-red-200'}`}
+          >
+            <div className="flex items-center gap-2 mb-1">
+              {results.every(Boolean)
+                ? <CheckCircle2 className="w-5 h-5 text-green-600" />
+                : <XCircle className="w-5 h-5 text-red-600" />
+              }
+              <span className="font-semibold text-sm text-foreground">
+                {results.every(Boolean)
+                  ? 'Perfect — all blanks filled correctly!'
+                  : `Some blanks are wrong — ${correctCount} of ${items.length} items correct.`}
+              </span>
+            </div>
+            {explanation && <p className="text-sm text-muted-foreground mt-1">{explanation}</p>}
+          </div>
+        )}
+
+        <div className="flex gap-2 pt-2">
+          {results === null && (
+            <button onClick={handleCheck} className="px-6 py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
+              Check Answers
+            </button>
+          )}
+          <button onClick={handleTryAgain} className="px-6 py-2 text-sm font-medium rounded-lg bg-muted text-foreground hover:bg-accent transition-colors">
+            Try Again
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function TemplateMode({ question, template, answers, distractors = [], explanation }: {
+  question: string
   template: string
   answers: Record<string, string>
   distractors?: string[]
   explanation?: string
-}
-
-export default function FillBlankQuestion({ question, template, answers, distractors = [], explanation }: FillBlankQuestionProps) {
+}) {
   const parts = useMemo(() => parseTemplate(template), [template])
   const blankIds = useMemo(() => parts.filter(p => p.type === 'blank').map(p => p.value), [parts])
   const allWords = useMemo(() => [...Object.values(answers), ...distractors], [answers, distractors])
@@ -227,4 +352,19 @@ function InlineBlankWrapper({ blankId, placedWord, isCorrect, feedback }: {
 }) {
   const { isOver, setNodeRef } = useDroppable({ id: `blank-${blankId}` })
   return <InlineBlank blankId={blankId} placedWord={placedWord} isCorrect={isCorrect} feedback={feedback} isOver={isOver} setNodeRef={setNodeRef} />
+}
+
+export default function FillBlankQuestion({ question, template, answers, distractors, explanation, instructions, items }: FillBlankQuestionProps) {
+  if (items) {
+    return <ItemsMode question={question} instructions={instructions} items={items} explanation={explanation} />
+  }
+  return (
+    <TemplateMode
+      question={question}
+      template={template as string}
+      answers={answers as Record<string, string>}
+      distractors={distractors}
+      explanation={explanation}
+    />
+  )
 }

@@ -3,7 +3,6 @@ id: spacetoday
 title: "SpaceToday - Astronomia e Exploração Espacial"
 description: "Canal do astrônomo e divulgador científico Sérgio Sacani com 1,5 milhão de inscritos. Cobertura diária de exploração espacial (NASA, SpaceX, ESA, CNSA, AEB), astronomia, astrofísica, cosmologia e notícias do espaço."
 url: "https://youtube.com/@SpaceToday"
-thumbnail: "https://i.ytimg.com/vi/SPAC1234567/maxresdefault.jpg"
 author: "Sérgio Sacani"
 category: "Astronomy & Space Science"
 difficulty: "all"

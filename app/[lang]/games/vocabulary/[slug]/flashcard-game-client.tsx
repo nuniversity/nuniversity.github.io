@@ -104,7 +104,7 @@ export function FlashcardGameClient({ lang, game, dict }: FlashcardGameClientPro
       } catch {}
     }
     hasMountedRef.current = true
-  }, [storageKey])
+  }, [storageKey, fc.import_migrated])
 
   useEffect(() => {
     if (!hasMountedRef.current) return
@@ -137,7 +137,7 @@ export function FlashcardGameClient({ lang, game, dict }: FlashcardGameClientPro
     setCurrentIndex(0)
     setIsFlipped(false)
     setIsComplete(false)
-  }, [studyMode, selectedCategory, game.words])
+  }, [studyMode, selectedCategory, game.words, shuffledIds.length])
 
   const filteredWords = useMemo(() => {
     const wordMap = new Map(game.words.map(w => [w.id, w]))

@@ -1,0 +1,18 @@
+{
+  "name": "validate-tools",
+  "version": "1.0.0",
+  "description": "Validates tool Markdown frontmatter",
+  "type": "hook",
+  "event": "file.write",
+  "pattern": "content/tools/**/*.md",
+  "script": "scripts/validate_tools.py",
+  "blocking": true,
+  "exit_codes": {
+    "0": "pass",
+    "2": "blocking error"
+  },
+  "dependencies": [],
+  "environment": {
+    "OPENCODE_FILE_PATH": "Path to the tool Markdown file being validated"
+  }
+}

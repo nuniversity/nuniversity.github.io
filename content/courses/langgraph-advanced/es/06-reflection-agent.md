@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Patrón de Agente Reflexivo
 
-The reflection pattern enables agents to **self-improve** by generating output, critiquing it, and refining it based on the critique. This creates a quality loop that produces better results than single-pass generation.
+El patrón de reflexión permite que los agentes se **automejoren** generando una salida, criticándola y refinándola a partir de la crítica. Esto crea un ciclo de calidad que produce mejores resultados que la generación en una sola pasada.
 
 ---
 
@@ -19,10 +19,10 @@ Generate → Critique → Refine → Critique → Refine → ... → Accept
 ```
 
 Each iteration:
-1. **Generate**: Produce initial output (or refine from previous)
-2. **Critique**: Analyze the output for issues, gaps, or improvements
-3. **Refine**: Improve based on critique
-4. **Repeat**: Until quality threshold is met or max iterations reached
+1. **Generar**: Produce la salida inicial (o refina la anterior)
+2. **Criticar**: Analiza la salida en busca de problemas, lagunas o mejoras
+3. **Refinar**: Mejora a partir de la crítica
+4. **Repetir**: Hasta que se alcance el umbral de calidad o el número máximo de iteraciones
 
 ---
 
@@ -113,8 +113,8 @@ result = app.invoke({
 print(result["final"])
 ```
 
-[!NOTA]
-The critique is fed back into the next generate call as context. The generator addresses the critique points, creating an improving cycle.
+[!NOTE]
+La crítica se retroalimenta en la siguiente llamada de generación como contexto. El generador aborda los puntos de la crítica, creando un ciclo de mejora continua.
 
 ---
 
@@ -152,8 +152,8 @@ def structured_critique(state: ReflectionState) -> dict:
     }
 ```
 
-[!ÉXITO]
-Structured critiques with scores let you track improvement over iterations and set quality thresholds for early termination.
+[!SUCCESS]
+Las críticas estructuradas con puntuaciones te permiten seguir la mejora a lo largo de las iteraciones y definir umbrales de calidad para la terminación anticipada.
 
 ---
 
@@ -183,7 +183,7 @@ def quality_router(state: ReflectionState) -> str:
 
 ## Crítica de Múltiples Perspectivas
 
-Use multiple critique angles for thorough feedback:
+Usa varios ángulos de crítica para un comentario completo:
 
 ```python
 def critic_expert(state: ReflectionState) -> dict:
@@ -202,14 +202,14 @@ def critic_fact_checker(state: ReflectionState) -> dict:
     return {"critiques": [f"[Facts] {llm.invoke(prompt).content}"]}
 ```
 
-[!CONSEJO]
-Multiple critics provide different perspectives. The generator receives all critiques and must address all of them in the next iteration.
+[!TIP]
+Varios críticos aportan perspectivas distintas. El generador recibe todas las críticas y debe abordarlas todas en la siguiente iteración.
 
 ---
 
 ## Mejora de Código con Reflexión
 
-The reflection pattern works for code generation too:
+El patrón de reflexión también funciona para la generación de código:
 
 ```python
 def generate_code(state: ReflectionState) -> dict:
@@ -280,7 +280,7 @@ app = builder.compile()
 
 ---
 
-## Preguntas Prácticas
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {
@@ -444,13 +444,13 @@ app = builder.compile()
 
 ---
 
-[!ÉXITO]
+[!SUCCESS]
 ### Conclusiones Clave
-- Reflection pattern: generate → critique → refine — iteratively improving output
-- Critique feedback is passed as context to the next generation prompt
-- Structured scoring enables quantitative quality tracking and early termination
-- Multi-perspective critiques catch different types of issues
-- The pattern works for text, code, and agent decisions
-- Balance iteration count against token costs
-- The 'add' reducer preserves improvement history
-- Quality thresholds prevent unnecessary iterations when output is already good
+- Patrón de reflexión: generar → criticar → refinar, mejorando la salida de forma iterativa
+- El comentario de la crítica se pasa como contexto al siguiente prompt de generación
+- La puntuación estructurada permite un seguimiento cuantitativo de la calidad y la terminación anticipada
+- Las críticas con múltiples perspectivas detectan distintos tipos de problemas
+- El patrón funciona para texto, código y decisiones de agentes
+- Equilibra el número de iteraciones con el costo de los tokens
+- El reducer 'add' conserva el historial de mejoras
+- Los umbrales de calidad evitan iteraciones innecesarias cuando la salida ya es buena

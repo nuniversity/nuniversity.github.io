@@ -415,7 +415,7 @@ Altura máxima em t = 20/9,8 ≈ 2,04 s, com h ≈ 21,9 m.
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

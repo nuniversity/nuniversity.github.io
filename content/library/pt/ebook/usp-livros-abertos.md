@@ -2,8 +2,7 @@
 id: usp-livros-abertos
 title: "USP Livros Abertos - 900+ Ebooks Acadêmicos Gratuitos"
 description: "Portal de livros abertos da USP com mais de 900 ebooks acadêmicos gratuitos em PDF da Editora da USP (EdUSP). Engenharia, saúde, educação, arquitetura, turismo, ciências exatas, humanas e biológicas. Conteúdo de professores da USP, completamente gratuito para download."
-url: "https://www.livrosabertos.abcd.usp.br"
-thumbnail: "https://www5.usp.br/wp-content/uploads/sites/947/2019/09/logo-marca-usp.jpg"
+url: "https://www.livrosabertos.abcd.usp.br/portaldelivrosUSP"
 author: "Editora USP (EdUSP)"
 category: "Open Access Research"
 difficulty: "intermediate"

@@ -383,7 +383,7 @@ Uma pesquisa com 1.000 pessoas mostra que 60% apoiam uma política, com margem d
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

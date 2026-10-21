@@ -137,11 +137,11 @@ for name, score in zip(names, scores):
 ```
 
 > [!SUCCESS]
-| Loop | When to Use | Example |
-|------|-------------|---------|
-| `for` | Iterating over a known sequence | `for item in list:` |
-| `while` | Repeating until a condition changes | `while running:` |
-| `for` + `range()` | Known number of iterations | `for i in range(10):` |
+> | Loop | When to Use | Example |
+> |------|-------------|---------|
+> | `for` | Iterating over a known sequence | `for item in list:` |
+> | `while` | Repeating until a condition changes | `while running:` |
+> | `for` + `range()` | Known number of iterations | `for i in range(10):` |
 
 ## Practice Questions
 

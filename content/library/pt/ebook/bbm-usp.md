@@ -2,8 +2,7 @@
 id: bbm-usp
 title: "Biblioteca Brasiliana Guita e José Mindlin (USP) - 3.500+ Itens Raros"
 description: "Uma das mais importantes coleções brasilianas do mundo, digitalizada pela USP. 3.500+ itens incluindo livros raros, manuscritos, mapas e imagens dos séculos XVI ao início do XX sobre o Brasil. Nomes como Pero Vaz de Caminha, Padre Anchieta, e obras fundamentais da história brasileira."
-url: "https://www.bbm.usp.br"
-thumbnail: "https://www5.usp.br/wp-content/uploads/sites/947/2019/09/logo-marca-usp.jpg"
+url: "https://www.bbm.usp.br/pt-br/"
 author: "Universidade de São Paulo (USP)"
 category: "Digital Library"
 difficulty: "all"

@@ -88,7 +88,7 @@ flowchart TD
     SNAP --> R1["Lectores por lotes<br/>snapshot más reciente"]
     SNAP --> R2["Lectores de streaming<br/>idempotencia de txn + CDF"]
     SNAP --> R3["Time travel<br/>VERSION AS OF 12"]
-    CKPT["Checkpoint de Parquet<br/>(agregado, cada N commits -<br/>frecuencia sujeta a cambio)] -.-> SNAP
+    CKPT["Checkpoint de Parquet<br/>(agregado, cada N commits -<br/>frecuencia sujeta a cambio)"] -.-> SNAP
     ACT -. "remove = solo tombstone" .-> TOMB["Parquet antiguo sigue en S3"]
     TOMB --> V["VACUUM después de<br/>deletedFileRetentionDuration<br/>(por defecto 7 días)"] --> GONE["Eliminado físicamente de S3"]
 ```

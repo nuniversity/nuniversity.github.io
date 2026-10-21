@@ -10,6 +10,10 @@ import { Metadata } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const viewport = {
+  themeColor: '#3b82f6',
+}
+
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }))
 }
@@ -40,9 +44,10 @@ export async function generateMetadata({
     alternates: {
       canonical: `/${params.lang}`,
       languages: {
-        'en': '/en',
-        'pt': '/pt',
-        'es': '/es',
+        'en': '/en/',
+        'pt': '/pt/',
+        'es': '/es/',
+        'x-default': '/en/',
       },
     },
     openGraph: {
@@ -93,13 +98,6 @@ export default async function RootLayout({
   return (
     <html lang={params.lang} suppressHydrationWarning>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#3b82f6" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="alternate" hrefLang="en" href="https://nuniversity.github.io/en" />
-        <link rel="alternate" hrefLang="pt" href="https://nuniversity.github.io/pt" />
-        <link rel="alternate" hrefLang="es" href="https://nuniversity.github.io/es" />
-        <link rel="alternate" hrefLang="x-default" href="https://nuniversity.github.io/en" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -120,17 +118,6 @@ export default async function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        
-        {/* <Providers>
-          <div className="min-h-screen flex flex-col">
-            <Header lang={params.lang} dict={dict} />
-            <main className="flex-grow">
-              {children}
-            </main>
-            <Footer lang={params.lang} dict={dict} />
-          </div>
-        </Providers> */}
-
         <Providers>
           <div className="min-h-screen flex flex-col">
             <Header lang={params.lang} dict={dict} />

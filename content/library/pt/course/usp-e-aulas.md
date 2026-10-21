@@ -2,8 +2,7 @@
 id: usp-e-aulas
 title: "USP e-Aulas - Vídeo Aulas Gratuitas"
 description: "Plataforma de vídeo da USP com mais de 1.400 horas de aulas gratuitas de professores da universidade. Abrange ciências exatas, humanas e biológicas. Qualquer professor da USP pode disponibilizar conteúdo."
-url: "https://eaulas.usp.br"
-thumbnail: "https://eaulas.usp.br/assets/images/logo_usp.png"
+url: "https://eaulas.usp.br/portal/home"
 author: "Universidade de São Paulo (USP)"
 category: "Computer Science"
 difficulty: "all"

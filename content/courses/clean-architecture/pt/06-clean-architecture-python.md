@@ -165,7 +165,7 @@ def create_test_place_order_use_case() -> "PlaceOrderUseCase":
 ```mermaid
 flowchart TD
     subgraph Composicao["Raiz de Composição"]
-        CR[create_app()]
+        CR["create_app()"]
     end
     subgraph Instancia["Instancia"]
         ORepo[PostgresOrderRepository]

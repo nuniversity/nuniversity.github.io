@@ -643,7 +643,7 @@ flowchart TD
     Q["New query"] --> S{"Short query acceleration: predicted runtime <= 20 s (or dynamic)? CTAS or read-only?"}
     S -->|Yes| S1["Service class 14 - skips the queue"]
     S -->|No| W{"WLM mode"}
-    W -->|Automatic (default)| W1["Service classes 100-107 - AWS assigns slots and memory; query priority + QMR apply"]
+    W -->|"Automatic (default)"| W1["Service classes 100-107 - AWS assigns slots and memory; query priority + QMR apply"]
     W -->|Manual| W2["Your queues: memory % + concurrency 1-50, 50 slots total, recommend <= 15"]
     W1 --> QM{"QMR every 10 s: log / hop / abort / change priority"}
     W2 --> QM

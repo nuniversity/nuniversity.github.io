@@ -3,7 +3,6 @@ id: ifrs-idiomas
 title: "IFRS - Cursos Online Gratuitos de Idiomas"
 description: "Instituto Federal do Rio Grande do Sul oferece mais de 30 cursos gratuitos de idiomas no Moodle: Inglês (14 níveis), Espanhol (10 níveis), e Português como Língua de Acolhimento. Todos com certificado gratuito ao concluir."
 url: "https://ifrs.edu.br/cursos-online-gratuitos-de-idiomas/"
-thumbnail: "https://ifrs.edu.br/templates/ifrs/imagens/ifrs-logo.svg"
 author: "Instituto Federal do Rio Grande do Sul (IFRS)"
 category: "Portuguese Language"
 difficulty: "all"

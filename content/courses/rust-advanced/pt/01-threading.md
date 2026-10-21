@@ -158,11 +158,11 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Funcionalidade | `thread::spawn` | `thread::scope` |
-|---------|-----------------|-----------------|
-| Captura | Deve ser `'static` | Pode emprestar localmente |
-| Auto-join | Não | Sim (no fim do escopo) |
-| Valores de retorno | Via JoinHandle | Via handle criado |
+> | Funcionalidade | `thread::spawn` | `thread::scope` |
+> |---------|-----------------|-----------------|
+> | Captura | Deve ser `'static` | Pode emprestar localmente |
+> | Auto-join | Não | Sim (no fim do escopo) |
+> | Valores de retorno | Via JoinHandle | Via handle criado |
 
 ## Comunicação entre Threads — Padrões Básicos
 
@@ -241,14 +241,14 @@ fn main() {
 ```
 
 > [!WARNING]
-| Tipo | Send? | Sync? | Motivo |
-|------|-------|-------|--------|
-| <code>Rc&lt;T&gt;</code> | Não | Não | Contagem de ref não-atômica |
-| <code>Arc&lt;T&gt;</code> | Sim | Sim | Contagem de ref atômica |
-| <code>Cell&lt;T&gt;</code> | Sim | Não | Mutabilidade interior, sem sync |
-| <code>RefCell&lt;T&gt;</code> | Sim | Não | Mutabilidade interior, sem sync |
-| <code>Mutex&lt;T&gt;</code> | Sim | Sim | Fornece Sync |
-| `AtomicBool` | Sim | Sim | Operações atômicas |
+> | Tipo | Send? | Sync? | Motivo |
+> |------|-------|-------|--------|
+> | <code>Rc&lt;T&gt;</code> | Não | Não | Contagem de ref não-atômica |
+> | <code>Arc&lt;T&gt;</code> | Sim | Sim | Contagem de ref atômica |
+> | <code>Cell&lt;T&gt;</code> | Sim | Não | Mutabilidade interior, sem sync |
+> | <code>RefCell&lt;T&gt;</code> | Sim | Não | Mutabilidade interior, sem sync |
+> | <code>Mutex&lt;T&gt;</code> | Sim | Sim | Fornece Sync |
+> | `AtomicBool` | Sim | Sim | Operações atômicas |
 
 ## Armazenamento Local de Thread
 

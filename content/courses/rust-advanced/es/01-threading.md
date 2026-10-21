@@ -158,11 +158,11 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Característica | `thread::spawn` | `thread::scope` |
-|---------|-----------------|-----------------|
-| Captura | Debe ser `'static` | Puede tomar prestado localmente |
-| Auto-join | No | Sí (al final del ámbito) |
-| Valores de retorno | Via JoinHandle | Via handle creado |
+> | Característica | `thread::spawn` | `thread::scope` |
+> |---------|-----------------|-----------------|
+> | Captura | Debe ser `'static` | Puede tomar prestado localmente |
+> | Auto-join | No | Sí (al final del ámbito) |
+> | Valores de retorno | Via JoinHandle | Via handle creado |
 
 ## Comunicación entre Hilos — Patrones Básicos
 
@@ -241,14 +241,14 @@ fn main() {
 ```
 
 > [!WARNING]
-| Tipo | ¿Send? | ¿Sync? | Motivo |
-|------|-------|-------|--------|
-| <code>Rc&lt;T&gt;</code> | No | No | Conteo de ref no-atómico |
-| <code>Arc&lt;T&gt;</code> | Sí | Sí | Conteo de ref atómico |
-| <code>Cell&lt;T&gt;</code> | Sí | No | Mutabilidad interior, sin sync |
-| <code>RefCell&lt;T&gt;</code> | Sí | No | Mutabilidad interior, sin sync |
-| <code>Mutex&lt;T&gt;</code> | Sí | Sí | Proporciona Sync |
-| `AtomicBool` | Sí | Sí | Operaciones atómicas |
+> | Tipo | ¿Send? | ¿Sync? | Motivo |
+> |------|-------|-------|--------|
+> | <code>Rc&lt;T&gt;</code> | No | No | Conteo de ref no-atómico |
+> | <code>Arc&lt;T&gt;</code> | Sí | Sí | Conteo de ref atómico |
+> | <code>Cell&lt;T&gt;</code> | Sí | No | Mutabilidad interior, sin sync |
+> | <code>RefCell&lt;T&gt;</code> | Sí | No | Mutabilidad interior, sin sync |
+> | <code>Mutex&lt;T&gt;</code> | Sí | Sí | Proporciona Sync |
+> | `AtomicBool` | Sí | Sí | Operaciones atómicas |
 
 ## Almacenamiento Local de Hilo
 

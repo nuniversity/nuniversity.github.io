@@ -35,11 +35,11 @@ upper_words = [w.upper() for w in words]
 ```
 
 > [!NOTE]
-| Bucle `for` Equivalente | Comprensión de Lista |
-|------------------------|----------------------|
-| 5 líneas | 1 línea |
-| Acumulador mutable | Expresión funcional |
-| Más lento (sobrecarga `.append`) | Más rápido (backend C optimizado) |
+> | Bucle `for` Equivalente | Comprensión de Lista |
+> |------------------------|----------------------|
+> | 5 líneas | 1 línea |
+> | Acumulador mutable | Expresión funcional |
+> | Más lento (sobrecarga `.append`) | Más rápido (backend C optimizado) |
 
 ```python
 # Transformaciones complejas
@@ -94,12 +94,12 @@ print(unique_chars)  # {"h", "e", "l", "o", "w", "r", "d"}
 ```
 
 > [!SUCCESS]
-| Tipo de Comprensión | Sintaxis | Tipo de Salida |
-|--------------------|----------|----------------|
-| Lista | `[expr for x in iter]` | `list` |
-| Diccionario | `{k: v for x in iter}` | `dict` |
-| Conjunto | `{expr for x in iter}` | `set` |
-| Generador | `(expr for x in iter)` | `generator` |
+> | Tipo de Comprensión | Sintaxis | Tipo de Salida |
+> |--------------------|----------|----------------|
+> | Lista | `[expr for x in iter]` | `list` |
+> | Diccionario | `{k: v for x in iter}` | `dict` |
+> | Conjunto | `{expr for x in iter}` | `set` |
+> | Generador | `(expr for x in iter)` | `generator` |
 
 ## Funciones Generadoras con `yield`
 
@@ -312,12 +312,12 @@ for user in paginate("https://api.example.com/users"):
 ```
 
 > [!SUCCESS]
-| Característica | Comprensión | Generador |
-|---------------|-------------|-----------|
-| ¿Crea todos los elementos inmediatamente? | Sí | No (perezoso) |
-| Uso de memoria | O(n) | O(1) |
-| ¿Reutilizable? | Sí | No (un solo uso) |
-| Mejor para | Conjuntos pequeño-medianos, acceso aleatorio | Datos grandes/streaming, una sola pasada |
+> | Característica | Comprensión | Generador |
+> |---------------|-------------|-----------|
+> | ¿Crea todos los elementos inmediatamente? | Sí | No (perezoso) |
+> | Uso de memoria | O(n) | O(1) |
+> | ¿Reutilizable? | Sí | No (un solo uso) |
+> | Mejor para | Conjuntos pequeño-medianos, acceso aleatorio | Datos grandes/streaming, una sola pasada |
 
 ## Preguntas de Práctica
 

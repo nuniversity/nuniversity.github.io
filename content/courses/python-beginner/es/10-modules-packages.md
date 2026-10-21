@@ -48,11 +48,11 @@ from math import sqrt as s     # Alias específico
 ```
 
 > [!NOTE]
-| Forma | Cuándo Usarla |
-|---|---|
-| `import module` | Usar muchos elementos de un módulo |
-| `from module import item` | Usar uno o dos elementos |
-| `import module as alias` | Nombre del módulo es largo o conflictivo |
+> | Forma | Cuándo Usarla |
+> |---|---|
+> | `import module` | Usar muchos elementos de un módulo |
+> | `from module import item` | Usar uno o dos elementos |
+> | `import module as alias` | Nombre del módulo es largo o conflictivo |
 
 ## Paquetes
 
@@ -195,12 +195,12 @@ if __name__ == "__main__":
 ```
 
 > [!SUCCESS]
-| Concepto | Qué Es | Archivo |
-|---|---|---|
-| Módulo | Archivo `.py` individual | `utils.py` |
-| Paquete | Directorio de módulos | `shapes/` |
-| Librería Estándar | Módulos incorporados | `import math` |
-| Terceros | Paquetes externos | `pip install requests` |
+> | Concepto | Qué Es | Archivo |
+> |---|---|---|
+> | Módulo | Archivo `.py` individual | `utils.py` |
+> | Paquete | Directorio de módulos | `shapes/` |
+> | Librería Estándar | Módulos incorporados | `import math` |
+> | Terceros | Paquetes externos | `pip install requests` |
 
 ## Preguntas de Práctica
 

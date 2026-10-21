@@ -98,7 +98,7 @@ Comprender las diferencias fundamentales entre estos tres tipos de organizacione
 1. **Captación de recursos**: Enfoques diferentes necesarios para cada sector
 2. **Voluntario vs. Empleado**: Implications legales y tributarias diferencian
 3. **Conformidad regulatoria**: Diferentes requisitos de reporte y obligaciones
-4. **Parcerias entre sectores**: Parcerias entre sectores requieren comprensión de diferentes reglas
+4. **Asociaciones entre sectores**: Las asociaciones entre sectores requieren comprensión de diferentes reglas
 5. **Caminos profesionales**: Diferentes habilidades y motivaciones adecuadas a sectores diferentes
 6. **Riesgo Legal**: Diferente exposición y protecciones para líderes
 

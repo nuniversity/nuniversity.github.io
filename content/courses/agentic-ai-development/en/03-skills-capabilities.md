@@ -96,7 +96,7 @@ errorRecovery:
 ```
 
 > [!TIP]
-| Use `matchPattern` for auto-loading to make skills feel magical. When a user says "review the auth module," the skill automatically activates without requiring the user to know about skill management.
+> Use `matchPattern` for auto-loading to make skills feel magical. When a user says "review the auth module," the skill automatically activates without requiring the user to know about skill management.
 
 ---
 

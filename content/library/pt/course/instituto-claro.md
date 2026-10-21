@@ -3,7 +3,6 @@ id: instituto-claro
 title: "Instituto Claro - Portal Educacional"
 description: "Portal de conteúdo educacional gratuito do Instituto Claro com planos de aula, recursos para professores e alunos. Foco em conexão de escolas, inclusão digital e educação empreendedora. Inclui canal do YouTube com vídeos educativos."
 url: "https://www.institutoclaro.org.br"
-thumbnail: "https://www.institutoclaro.org.br/images/logotipo-instituto-claro.svg"
 author: "Instituto Claro"
 category: "Education & Pedagogy"
 difficulty: "all"

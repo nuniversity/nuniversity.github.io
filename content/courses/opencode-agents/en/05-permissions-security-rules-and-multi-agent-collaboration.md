@@ -308,7 +308,7 @@ grep "permission.approved\|permission.denied" .opencode/audit.log | \
 | Audit event filter| Logging-level  | `"events": ["tool.call", "permission.denied"]` | Selective audit log capture |
 
 > [!TIP]
-| Follow the principle of least privilege: start with no permissions and grant only what each agent needs. Use agent-level constraints for broad capability limits, tool-level allow/deny for specific command control, and MCP server rules for external service access. Layer these for defense in depth.
+> Follow the principle of least privilege: start with no permissions and grant only what each agent needs. Use agent-level constraints for broad capability limits, tool-level allow/deny for specific command control, and MCP server rules for external service access. Layer these for defense in depth.
 
 ---
 

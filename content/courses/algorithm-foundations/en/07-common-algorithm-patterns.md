@@ -332,8 +332,8 @@ END ALGORITHM
 ```mermaid
 flowchart LR
     A[Input:\n1, 2, 3, 4, 5] --> B{Transform\nor Filter?}
-    B -->|Transform\n(x2)| C[Output:\n2, 4, 6, 8, 10]
-    B -->|Filter\n(even)| D[Output:\n2, 4]
+    B -->|"Transform\n(x2)"| C[Output:\n2, 4, 6, 8, 10]
+    B -->|"Filter\n(even)"| D[Output:\n2, 4]
     
     style A fill:#e1f5fe
     style C fill:#c8e6c9

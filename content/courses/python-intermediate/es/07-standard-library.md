@@ -293,14 +293,14 @@ print(product)  # 120
 ```
 
 > [!SUCCESS]
-| Módulo | Mejor Para |
-|--------|------------|
-| `os` | Interacción con SO (variables de entorno, proceso, sistema de archivos) |
-| `sys` | Runtime de Python (versión, path, argv, salida) |
-| `re` | Coincidencia y extracción de patrones de texto |
-| `collections` | Tipos especializados de dict/list/tuple |
-| `itertools` | Álgebra de iteradores (herramientas combinatorias perezosas) |
-| `functools` | Manipulación de funciones (cache, partial, reduce) |
+> | Módulo | Mejor Para |
+> |--------|------------|
+> | `os` | Interacción con SO (variables de entorno, proceso, sistema de archivos) |
+> | `sys` | Runtime de Python (versión, path, argv, salida) |
+> | `re` | Coincidencia y extracción de patrones de texto |
+> | `collections` | Tipos especializados de dict/list/tuple |
+> | `itertools` | Álgebra de iteradores (herramientas combinatorias perezosas) |
+> | `functools` | Manipulación de funciones (cache, partial, reduce) |
 
 ## Mundo Real: Analizador de Archivos de Registro
 

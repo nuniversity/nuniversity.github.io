@@ -144,3 +144,8 @@ __*/
 
 # research scratch (never commit)
 .scratch/
+
+# Python build artifacts
+*.egg-info/
+*.pyc
+.venv/

@@ -48,11 +48,11 @@ from math import sqrt as s     # Alias specific
 ```
 
 > [!NOTE]
-| Form | When to Use |
-|------|-------------|
-| `import module` | Using many items from a module |
-| `from module import item` | Using one or two items |
-| `import module as alias` | Module name is long or conflicts |
+> | Form | When to Use |
+> |------|-------------|
+> | `import module` | Using many items from a module |
+> | `from module import item` | Using one or two items |
+> | `import module as alias` | Module name is long or conflicts |
 
 ## Packages
 
@@ -195,12 +195,12 @@ if __name__ == "__main__":
 ```
 
 > [!SUCCESS]
-| Concept | What It Is | File |
-|---------|------------|------|
-| Module | Single `.py` file | `utils.py` |
-| Package | Directory of modules | `shapes/` |
-| Standard Library | Built-in modules | `import math` |
-| Third-Party | External packages | `pip install requests` |
+> | Concept | What It Is | File |
+> |---------|------------|------|
+> | Module | Single `.py` file | `utils.py` |
+> | Package | Directory of modules | `shapes/` |
+> | Standard Library | Built-in modules | `import math` |
+> | Third-Party | External packages | `pip install requests` |
 
 ## Practice Questions
 

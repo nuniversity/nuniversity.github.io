@@ -318,7 +318,7 @@ Esto mantiene los datos sensibles fuera de sus archivos de configuración.
 
 ---
 
-## Practice Questions
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {

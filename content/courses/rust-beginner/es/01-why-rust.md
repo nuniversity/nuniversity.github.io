@@ -45,11 +45,11 @@ while i < 100 {
 ```
 
 > [!NOTE]
-| Concepto | Significado |
-|----------|-------------|
-| Costo cero | Las abstracciones no tienen sobrecarga en ejecución |
-| Tiempo de compilación | El costo se paga durante la compilación, no en la ejecución |
-| Predecible | Sin asignaciones ocultas, sin pausas de recolector de basura |
+> | Concepto | Significado |
+> |----------|-------------|
+> | Costo cero | Las abstracciones no tienen sobrecarga en ejecución |
+> | Tiempo de compilación | El costo se paga durante la compilación, no en la ejecución |
+> | Predecible | Sin asignaciones ocultas, sin pausas de recolector de basura |
 
 ## Comparación con C/C++
 

@@ -76,11 +76,11 @@ logger.warning("Shows in both")           # WARNING level → both
 ```
 
 > [!NOTE]
-| Pattern | Best Practice |
-|---------|---------------|
-| `logger = logging.getLogger(__name__)` | Per-module loggers with hierarchical names |
-| `logging.exception("...")` | Logs at ERROR level AND includes traceback |
-| `logger.debug(f"x = {x}")` | Avoid f-strings in debug — use `%s` formatting for lazy evaluation |
+> | Pattern | Best Practice |
+> |---------|---------------|
+> | `logger = logging.getLogger(__name__)` | Per-module loggers with hierarchical names |
+> | `logging.exception("...")` | Logs at ERROR level AND includes traceback |
+> | `logger.debug(f"x = {x}")` | Avoid f-strings in debug — use `%s` formatting for lazy evaluation |
 
 ### Structured Logging
 
@@ -298,12 +298,12 @@ print(f"Best: {min(results):.4f}s, Worst: {max(results):.4f}s")
 ```
 
 > [!WARNING]
-| Pitfall | Why | Fix |
-|---------|-----|-----|
-| Including setup in timing | Skews results | Use `setup` parameter |
-| Single run measurement | High variance | Run many times, take min |
-| Optimizing early | Wastes effort | Profile first, optimize bottlenecks |
-| Micro-benchmarking != real perf | CPU cache, I/O, GC matter | Test with realistic data sizes |
+> | Pitfall | Why | Fix |
+> |---------|-----|-----|
+> | Including setup in timing | Skews results | Use `setup` parameter |
+> | Single run measurement | High variance | Run many times, take min |
+> | Optimizing early | Wastes effort | Profile first, optimize bottlenecks |
+> | Micro-benchmarking != real perf | CPU cache, I/O, GC matter | Test with realistic data sizes |
 
 ## Common Debugging Patterns
 

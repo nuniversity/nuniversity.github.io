@@ -8,13 +8,13 @@ difficulty: "intermediate"
 
 # Humano-en-el-bucle con Interrupciones
 
-LangGraph's `interrupt()` function pauses graph execution and waits for human input. This enables approval workflows, clarification requests, and any scenario where a human needs to review or contribute before the agent continues.
+La función `interrupt()` de LangGraph pausa la ejecución del grafo y espera la entrada humana. Esto permite flujos de aprobación, solicitudes de aclaración y cualquier escenario en que una persona deba revisar o aportar antes de que el agente continúe.
 
 ---
 
 ## ¿Qué es una Interrupción?
 
-An interrupt **pauses** graph execution at a specific node, surfaces state information to the user, and waits for the user to provide input before resuming.
+Un interrupt **pausa** la ejecución del grafo en un nodo específico, muestra información del estado al usuario y espera a que el usuario proporcione la entrada antes de reanudar.
 
 ```mermaid
 flowchart LR
@@ -49,14 +49,14 @@ def approval_node(state: State) -> dict:
         return {"approved": False, "feedback": human_response.get("feedback")}
 ```
 
-[!IMPORTANTE]
-`interrupt()` raises a special exception that pauses the graph. The function does **not** continue executing until the graph is resumed with `invoke()` or `update_state()`.
+[!IMPORTANT]
+`interrupt()` lanza una excepción especial que pausa el grafo. La función **no** sigue ejecutándose hasta que el grafo se reanude con `invoke()` o `update_state()`.
 
 ---
 
 ## Configurando Interrupciones
 
-Interrupts require a **checkpointer** (persistence):
+Los interrupts requieren un **checkpointer** (persistencia):
 
 ```python
 from langgraph.graph import StateGraph, START, END
@@ -139,14 +139,14 @@ result = app.invoke(
 print(result["result"])  # "Executed: Search for: latest AI news"
 ```
 
-[!NOTA]
-When resuming, pass `None` as the input (not a new state) and provide the interrupt response through the config or via `Command`. The graph continues from where it paused.
+[!NOTE]
+Al reanudar, pasa `None` como entrada (no un estado nuevo) y proporciona la respuesta del interrupt mediante el config o a través de `Command`. El grafo continúa desde donde se pausó.
 
 ---
 
 ## Usando Command para Reanudar
 
-The `Command` class provides a cleaner way to resume:
+La clase `Command` ofrece una forma más limpia de reanudar:
 
 ```python
 from langgraph.types import Command
@@ -161,14 +161,14 @@ result = app.invoke(
 )
 ```
 
-[!CONSEJO]
-`Command` lets you both provide the interrupt response and update state simultaneously. Use `update` to add metadata about the human review.
+[!TIP]
+`Command` te permite proporcionar la respuesta del interrupt y actualizar el estado al mismo tiempo. Usa `update` para añadir metadatos sobre la revisión humana.
 
 ---
 
 ## Múltiples Puntos de Interrupción
 
-A graph can have multiple interrupt points:
+Un grafo puede tener múltiples puntos de interrupt:
 
 ```python
 def first_approval(state: State) -> dict:
@@ -182,13 +182,13 @@ def second_approval(state: State) -> dict:
 # Graph: START → plan → first_approval → execute → second_approval → END
 ```
 
-Each interrupt is resumed independently. The graph knows which interrupt it's paused at.
+Cada interrupt se reanuda de forma independiente. El grafo sabe en qué interrupt está pausado.
 
 ---
 
 ## Mensajes de Interrupción Dinámicos
 
-The value passed to `interrupt()` can be any JSON-serializable data:
+El valor que se pasa a `interrupt()` puede ser cualquier dato serializable en JSON:
 
 ```python
 def review_node(state: State) -> dict:
@@ -211,7 +211,7 @@ def review_node(state: State) -> dict:
 
 ## Interrupción con Validación
 
-Validate human input before proceeding:
+Valida la entrada humana antes de continuar:
 
 ```python
 def validated_review(state: State) -> dict:
@@ -229,8 +229,8 @@ def validated_review(state: State) -> dict:
         # The human will be prompted again
 ```
 
-[!ADVERTENCIA]
-Be careful with validation loops. Each invalid attempt creates a new checkpoint. Consider limiting retry attempts to prevent frustration.
+[!WARNING]
+Ten cuidado con los bucles de validación. Cada intento no válido crea un nuevo checkpoint. Considera limitar los reintentos para evitar frustración.
 
 ---
 
@@ -318,7 +318,7 @@ if is_paused:
 
 ---
 
-## Preguntas Prácticas
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {
@@ -472,12 +472,12 @@ if is_paused:
 
 ---
 
-[!ÉXITO]
+[!SUCCESS]
 ### Conclusiones Clave
-- `interrupt()` pauses graph execution and returns human input when resumed
-- Interrupts require a checkpointer for saving/restoring state
-- Resume with `invoke(None, config)` or `Command(resume=..., update=...)`
-- Multiple interrupt points are supported in a single graph
-- Pass any JSON-serializable data to interrupt() for the human to review
-- Check `state.next` to determine if a graph is paused
-- Interrupts enable approval workflows, clarification loops, and human oversight
+- `interrupt()` pausa la ejecución del grafo y devuelve la entrada humana al reanudarse
+- Los interrupts requieren un checkpointer para guardar/restaurar el estado
+- Reanuda con `invoke(None, config)` o `Command(resume=..., update=...)`
+- Se admiten múltiples puntos de interrupt en un solo grafo
+- Pasa cualquier dato serializable en JSON a interrupt() para que la persona lo revise
+- Comprueba `state.next` para determinar si un grafo está pausado
+- Los interrupts permiten flujos de aprobación, bucles de aclaración y supervisión humana

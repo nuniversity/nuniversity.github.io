@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Padrão de Agente Reflexivo
 
-The reflection pattern enables agents to **self-improve** by generating output, critiquing it, and refining it based on the critique. This creates a quality loop that produces better results than single-pass generation.
+O padrão de reflexão permite que os agentes se **autoaprimorem** gerando uma saída, criticando-a e refinando-a com base na crítica. Isso cria um ciclo de qualidade que produz resultados melhores do que a geração em uma única passagem.
 
 ---
 
@@ -19,10 +19,10 @@ Generate → Critique → Refine → Critique → Refine → ... → Accept
 ```
 
 Each iteration:
-1. **Generate**: Produce initial output (or refine from previous)
-2. **Critique**: Analyze the output for issues, gaps, or improvements
-3. **Refine**: Improve based on critique
-4. **Repeat**: Until quality threshold is met or max iterations reached
+1. **Gerar**: Produza a saída inicial (ou refine a anterior)
+2. **Criticar**: Analise a saída em busca de problemas, lacunas ou melhorias
+3. **Refinar**: Melhore com base na crítica
+4. **Repetir**: Até que o limite de qualidade seja atingido ou o número máximo de iterações seja alcançado
 
 ---
 
@@ -113,8 +113,8 @@ result = app.invoke({
 print(result["final"])
 ```
 
-[!NOTA]
-The critique is fed back into the next generate call as context. The generator addresses the critique points, creating an improving cycle.
+[!NOTE]
+A crítica é alimentada de volta na próxima chamada de geração como contexto. O gerador aborda os pontos da crítica, criando um ciclo de melhoria contínua.
 
 ---
 
@@ -152,8 +152,8 @@ def structured_critique(state: ReflectionState) -> dict:
     }
 ```
 
-[!SUCESSO]
-Structured critiques with scores let you track improvement over iterations and set quality thresholds for early termination.
+[!SUCCESS]
+Críticas estruturadas com pontuações permitem acompanhar a melhoria ao longo das iterações e definir limites de qualidade para encerramento antecipado.
 
 ---
 
@@ -183,7 +183,7 @@ def quality_router(state: ReflectionState) -> str:
 
 ## Crítica de Múltiplas Perspectivas
 
-Use multiple critique angles for thorough feedback:
+Use múltiplos ângulos de crítica para um feedback completo:
 
 ```python
 def critic_expert(state: ReflectionState) -> dict:
@@ -202,14 +202,14 @@ def critic_fact_checker(state: ReflectionState) -> dict:
     return {"critiques": [f"[Facts] {llm.invoke(prompt).content}"]}
 ```
 
-[!DICA]
-Multiple critics provide different perspectives. The generator receives all critiques and must address all of them in the next iteration.
+[!TIP]
+Múltiplos críticos fornecem perspectivas diferentes. O gerador recebe todas as críticas e deve abordá-las todas na próxima iteração.
 
 ---
 
 ## Melhoria de Código com Reflexão
 
-The reflection pattern works for code generation too:
+O padrão de reflexão também funciona para geração de código:
 
 ```python
 def generate_code(state: ReflectionState) -> dict:
@@ -280,7 +280,7 @@ app = builder.compile()
 
 ---
 
-## Perguntas Práticas
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {
@@ -444,13 +444,13 @@ app = builder.compile()
 
 ---
 
-[!SUCESSO]
+[!SUCCESS]
 ### Principais Conclusões
-- Reflection pattern: generate → critique → refine — iteratively improving output
-- Critique feedback is passed as context to the next generation prompt
-- Structured scoring enables quantitative quality tracking and early termination
-- Multi-perspective critiques catch different types of issues
-- The pattern works for text, code, and agent decisions
-- Balance iteration count against token costs
-- The 'add' reducer preserves improvement history
-- Quality thresholds prevent unnecessary iterations when output is already good
+- Padrão de reflexão: gerar → criticar → refinar — melhorando a saída de forma iterativa
+- O feedback da crítica é passado como contexto para o próximo prompt de geração
+- A pontuação estruturada permite acompanhamento quantitativo da qualidade e encerramento antecipado
+- Críticas com múltiplas perspectivas capturam diferentes tipos de problemas
+- O padrão funciona para texto, código e decisões de agentes
+- Equilibre o número de iterações com o custo dos tokens
+- O reducer 'add' preserva o histórico de melhorias
+- Os limites de qualidade evitam iterações desnecessárias quando a saída já está boa

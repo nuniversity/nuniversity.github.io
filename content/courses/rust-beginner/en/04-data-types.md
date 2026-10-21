@@ -237,12 +237,12 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Situation | Example |
-|-----------|---------|
-| `parse()` needs annotation | `"42".parse::<i32>()` or `let x: i32 = "42".parse()?` |
-| Integer default | `let x = 42` → `i32` |
-| Float default | `let x = 3.14` → `f64` |
-| Collection generic | `Vec::new()` needs type context |
+> | Situation | Example |
+> |-----------|---------|
+> | `parse()` needs annotation | `"42".parse::<i32>()` or `let x: i32 = "42".parse()?` |
+> | Integer default | `let x = 42` → `i32` |
+> | Float default | `let x = 3.14` → `f64` |
+> | Collection generic | `Vec::new()` needs type context |
 
 ## Type Aliases
 

@@ -595,7 +595,7 @@ $$= (2^3 - 2^2) - (1^3 - 1^2) = (8 - 4) - (1 - 1) = 4 - 0 = 4$$
 ```
 
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

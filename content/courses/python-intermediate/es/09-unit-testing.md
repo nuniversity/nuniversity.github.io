@@ -113,12 +113,12 @@ class TestFileProcessor(unittest.TestCase):
 ```
 
 > [!NOTE]
-| Método | Cuándo | Frecuencia |
-|--------|--------|------------|
-| `setUp` | Antes de cada método de prueba | Por prueba |
-| `tearDown` | Después de cada método de prueba | Por prueba |
-| `setUpClass` | Antes de todas las pruebas en la clase | Una vez por clase |
-| `tearDownClass` | Después de todas las pruebas en la clase | Una vez por clase |
+> | Método | Cuándo | Frecuencia |
+> |--------|--------|------------|
+> | `setUp` | Antes de cada método de prueba | Por prueba |
+> | `tearDown` | Después de cada método de prueba | Por prueba |
+> | `setUpClass` | Antes de todas las pruebas en la clase | Una vez por clase |
+> | `tearDownClass` | Después de todas las pruebas en la clase | Una vez por clase |
 
 ```python
 class TestDatabase(unittest.TestCase):
@@ -397,13 +397,13 @@ flowchart LR
 ```
 
 > [!SUCCESS]
-| Principio | Por qué |
-|-----------|--------|
-| Prueba una cosa por prueba | Depuración simple, mensajes de fallo claros |
-| Usa nombres de prueba descriptivos | `test_withdraw_reduces_balance` no `test_1` |
-| Aísla pruebas | Cada prueba debe configurar y limpiar su propio estado |
-| Prueba casos extremos | Entrada vacía, valores límite, condiciones de error |
-| Haz pruebas rápidas | Las pruebas lentas no se ejecutan con frecuencia |
+> | Principio | Por qué |
+> |-----------|--------|
+> | Prueba una cosa por prueba | Depuración simple, mensajes de fallo claros |
+> | Usa nombres de prueba descriptivos | `test_withdraw_reduces_balance` no `test_1` |
+> | Aísla pruebas | Cada prueba debe configurar y limpiar su propio estado |
+> | Prueba casos extremos | Entrada vacía, valores límite, condiciones de error |
+> | Haz pruebas rápidas | Las pruebas lentas no se ejecutan con frecuencia |
 
 ## Preguntas de Práctica
 

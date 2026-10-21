@@ -145,7 +145,8 @@ Assessment, setup, and implementation tracking.
 
 | Document | Lines | What You'll Learn |
 |---|---|---|
-| [ASSESSMENT.md](./assessment/ASSESSMENT.md) | 730 | Full codebase audit — 4 critical bugs, 6 high, 8 medium, 7 low |
+| [2026-app-review/](./assessment/2026-app-review/README.md) | 8 files | **Current** — deep application + harness assessment, FIXES inventory, IMPROVEMENTS, quizzes/languages app designs, 9-phase PLAN |
+| [ASSESSMENT.md](./assessment/ASSESSMENT.md) | 730 | Legacy codebase audit (Sep 6) — 4 critical bugs, 6 high, 8 medium, 7 low; cross-referenced in 2026-app-review/FIXES.md |
 | [GETTING-STARTED.md](./getting-started/GETTING-STARTED.md) | 284 | Dev setup via FNM, environment, scripts, troubleshooting |
 | [remaining-courses-documentation.md](./reference/remaining-courses-documentation.md) | 481 | Detailed plans for SE roadmap courses 4-10 |
 | [roadmap-implementation-status.md](./reference/roadmap-implementation-status.md) | 228 | Progress tracker — 3 of 10 courses created |

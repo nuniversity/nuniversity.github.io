@@ -17,10 +17,10 @@ Una función es un bloque de código con nombre al que puedes llamar (invocar) p
 
 ```mermaid
 flowchart LR
-    A[Definición de función] --> B[def greet(name):]
-    B --> C[    return f'Hello, {name}!']
+    A[Definición de función] --> B["def greet(name):"]
+    B --> C["    return f'Hello, {name}!"]
     
-    D[Llamada a la función] --> E[greet('Alice')]
+    D[Llamada a la función] --> E["greet('Alice')"]
     E --> F[Resultado: 'Hello, Alice!']
     
     style A fill:#e1f5fe

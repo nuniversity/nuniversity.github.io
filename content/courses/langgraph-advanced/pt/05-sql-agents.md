@@ -8,11 +8,11 @@ difficulty: "advanced"
 
 # Agentes SQL
 
-SQL agents let users query databases using natural language. The agent converts the question to SQL, validates it, executes it, and interprets the results. This lesson covers safe and reliable text-to-SQL patterns.
+Agentes SQL permitem que os usuários consultem bancos de dados em linguagem natural. O agente converte a pergunta em SQL, valida, executa e interpreta os resultados. Esta lição cobre padrões de text-to-SQL seguros e confiáveis.
 
 ---
 
-## Architecture
+## Arquitetura
 
 ```
 Natural Language Query
@@ -41,8 +41,8 @@ DATABASE_URL = "postgresql://user:pass@localhost:5432/mydb"
 engine = create_engine(DATABASE_URL)
 ```
 
-[!AVISO]
-Never expose your database directly to users. Use a read-only database user and whitelist allowed queries. Always validate SQL before execution.
+[!WARNING]
+Nunca exponha seu banco de dados diretamente aos usuários. Use um usuário de banco de dados somente leitura e uma lista branca de consultas permitidas. Sempre valide o SQL antes da execução.
 
 ---
 
@@ -134,8 +134,8 @@ def validate_sql(sql: str) -> Tuple[bool, str]:
     return True, "Valid"
 ```
 
-[!NOTA]
-The `EXPLAIN` command tests syntax without executing the query, making it a safe validation step before running the actual query.
+[!NOTE]
+O comando `EXPLAIN` testa a sintaxe sem executar a consulta, o que o torna uma etapa de validação segura antes de rodar a consulta real.
 
 ---
 
@@ -237,8 +237,8 @@ result = app.invoke({
 print(result["messages"][-1].content)
 ```
 
-[!SUCESSO]
-The agent autonomously discovers the schema, generates SQL, validates and executes it, then explains the results — all in a loop until the user's question is answered.
+[!SUCCESS]
+O agente descobre o schema de forma autônoma, gera o SQL, valida e executa, e depois explica os resultados — tudo em um laço até que a pergunta do usuário seja respondida.
 
 ---
 
@@ -278,12 +278,12 @@ def resilient_agent(state: SQLState) -> dict:
     return agent_node(state)
 ```
 
-[!DICA]
-Track error attempts in state. After N failures, try a different approach (simpler query, ask clarifying question) instead of retrying indefinitely.
+[!TIP]
+Acompanhe as tentativas de erro no estado. Após N falhas, tente uma abordagem diferente (consulta mais simples, faça uma pergunta de esclarecimento) em vez de repetir indefinidamente.
 
 ---
 
-## Perguntas Práticas
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {
@@ -442,12 +442,12 @@ Track error attempts in state. After N failures, try a different approach (simpl
 
 ---
 
-[!SUCESSO]
+[!SUCCESS]
 ### Principais Conclusões
-- SQL agents follow: schema discovery → SQL generation → validation → execution → interpretation
-- Use a read-only database user and validate SQL before execution
-- EXPLAIN provides safe syntax validation without running the query
-- Error recovery: analyze the error, fix the SQL, and retry (up to a limit)
-- Multi-turn conversations maintain context about the database and prior queries
-- Format results as text tables for LLM interpretation
-- Proper schema discovery is essential for accurate text-to-SQL
+- Agentes SQL seguem: descoberta do schema → geração de SQL → validação → execução → interpretação
+- Use um usuário de banco de dados somente leitura e valide o SQL antes da execução
+- O EXPLAIN oferece validação segura de sintaxe sem executar a consulta
+- Recuperação de erros: analise o erro, corrija o SQL e tente novamente (até um limite)
+- Conversas com múltiplos turnos mantêm o contexto sobre o banco de dados e consultas anteriores
+- Formate os resultados como tabelas de texto para interpretação do LLM
+- A descoberta correta do schema é essencial para um text-to-SQL preciso

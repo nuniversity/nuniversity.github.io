@@ -3,7 +3,6 @@ id: bdtd
 title: "BDTD - Biblioteca Digital de Teses e Dissertações - IBICT"
 description: "Banco de dados nacional de teses e dissertações dos programas de pós-graduação brasileiros. Mantido pelo IBICT (Instituto Brasileiro de Informação em Ciência e Tecnologia). Acesso aberto a texto completo de milhares de trabalhos acadêmicos de todas as áreas do conhecimento."
 url: "https://bdtd.ibict.br"
-thumbnail: "https://bdtd.ibict.br/images/logo-ibict.png"
 author: "IBICT - Instituto Brasileiro de Informação em Ciência e Tecnologia"
 category: "Open Access Research"
 difficulty: "advanced"

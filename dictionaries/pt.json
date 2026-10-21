@@ -5,9 +5,25 @@
       "description": "Domine tecnologia, engenharia e ciências através de cursos interativos, ferramentas de programação e jogos educacionais. Comece sua jornada de aprendizado hoje."
     },
     "about": {
-      "title": "Sobre Nós - Nome da Sua Empresa",
+      "title": "Sobre Nós",
       "description": "Conheça nossa missão, valores e a equipe por trás do nosso sucesso"
+    },
+    "contact": {
+      "title": "Fale Conosco",
+      "description": "Entre em contato com a equipe NUniversity — dúvidas, parcerias e suporte da comunidade."
+    },
+    "notFound": {
+      "title": "Página Não Encontrada",
+      "description": "A página que você procura não existe ou foi movida."
     }
+  },
+  "notFound": {
+    "title": "Página Não Encontrada",
+    "description": "A página que você procura não existe ou foi movida.",
+    "missing": "Caminho solicitado",
+    "go_home": "Ir para a Página Inicial",
+    "go_courses": "Explorar Cursos",
+    "more_links": "Você também pode explorar nossas ferramentas e jogos."
   },
   "about": {
     "hero": {
@@ -124,7 +140,13 @@
   "stats": {
     "title": "Junte-se à Nossa",
     "titleHighlight": "Comunidade",
-    "subtitle": "Milhares de estudantes confiam na NUniversity para avançar em suas carreiras e conhecimento."
+    "subtitle": "Milhares de estudantes confiam na NUniversity para avançar em suas carreiras e conhecimento.",
+    "labels": {
+      "courses": "Cursos",
+      "tools": "Ferramentas",
+      "games": "Jogos",
+      "resources": "Recursos"
+    }
   },
   "contact": {
     "title": "Vamos",
@@ -188,7 +210,8 @@
       "placeholder": "Digite seu email",
       "button": "Inscrever-se",
       "successTitle": "Você está inscrito!",
-      "successMessage": "Obrigado por se inscrever. Manteremos você atualizado sobre novos cursos e ferramentas."
+      "successMessage": "Obrigado por se inscrever. Manteremos você atualizado sobre novos cursos e ferramentas.",
+      "noSpam": "Sem spam. Cancele a inscrição a qualquer momento."
     },
     "copyright": "NUniversity: Capacitando Mentes, Moldando Futuros.",
     "rights": "Todos os direitos reservados",
@@ -227,6 +250,7 @@
     "external_link": "Abrir Link Externo",
     "back_to_library": "Voltar para Biblioteca",
     "total_resources": "recursos",
+    "showing": "Exibindo {shown} de {total} recursos",
     "filter_by": "Filtrar por",
     "all_types": "Todos os Tipos",
     "all_categories": "Todas as Categorias",
@@ -300,9 +324,18 @@
     "course_content": "Contéudo do Curso",
     "back_to_courses": "Voltar aos Cursos",
     "total_courses": "cursos",
+    "count": {
+      "course": "{n} curso",
+      "courses": "{n} cursos"
+    },
     "categories": "categorias",
     "filter_by_difficulty": "Filtrar por dificuldade",
     "all_levels": "Todos os níveis",
+    "difficulty_labels": {
+      "beginner": "Iniciante",
+      "intermediate": "Intermediário",
+      "advanced": "Avançado"
+    },
     "try_different_filters": "Tente ajustar os filtros",
     "check_back_soon": "Volte em breve para novos conteúdos",
     "clear_filters": "Limpar filtros",
@@ -454,6 +487,7 @@
     "try_tool": "Experimentar",
     "total_tools": "ferramentas",
     "categories_count": "categorias",
+    "view_all": "Ver Todas as Ferramentas",
     "try_different_search": "Tente um termo de busca diferente",
     "check_back_soon": "Volte em breve para novas ferramentas",
     "clear_search": "Limpar Busca",
@@ -555,10 +589,6 @@
         "tip3": {
           "title": "Use Exemplos",
           "text": "Mostre exemplos do formato de saída desejado para orientar a estrutura de resposta da IA."
-        },
-        "tip4": {
-          "title": "Escolha o LLM Correto",
-          "text": "Use modelos maiores para tarefas complexas ou raciocínio. Claude para codificar, ChatGPT para documentações, Gemini para matemática, lógica e raciocínio."
         }
       }
     },

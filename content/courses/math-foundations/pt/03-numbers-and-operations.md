@@ -457,7 +457,7 @@ MMC de 2, 3 e 4 = 12
 ```
 
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

@@ -23,7 +23,7 @@ flowchart LR
     B -->|"Requirements Doc\n(ambiguous)"| C[Technical Lead]
     C -->|"Technical Spec\n(lossy)"| D[Developer]
     D -->|"Code\n(does it match?)"| E[Software]
-    A -.->|"Feedback loop\n(expensive)" E
+    A -.->|"Feedback loop\n(expensive)"| E
 
     style A fill:#c8e6c9
     style D fill:#ffccbc

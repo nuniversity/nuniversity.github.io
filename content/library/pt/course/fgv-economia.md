@@ -3,7 +3,6 @@ id: fgv-economia
 title: "FGV Economia, Finanças e Administração"
 description: "Cursos gratuitos da FGV nas áreas de Economia, Finanças, Administração, Gestão Pública, Relações Internacionais e Data Science. 200+ cursos com certificado gratuito. Destaques: Macroeconomia, Microeconomia, Finanças Pessoais, Investimentos, Gestão de Projetos, Data Science para Negócios."
 url: "https://educacao-executiva.fgv.br/cursos/gratuitos"
-thumbnail: "https://educacao-executiva.fgv.br/assets/images/fgv-logo.svg"
 author: "Fundação Getulio Vargas (EPGE, EESP, EAESP)"
 category: "Business & Administration"
 difficulty: "all"

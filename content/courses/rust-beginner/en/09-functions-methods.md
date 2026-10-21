@@ -48,11 +48,11 @@ fn explicit_return(x: i32) -> i32 {
 ```
 
 > [!NOTE]
-| Syntax | Behavior | Example |
-|--------|----------|---------|
-| `expr;` (semicolon) | Statement, returns `()` | `let x = 5;` |
-| `expr` (no semicolon) | Expression, returns value | `x + 1` |
-| `return expr;` | Early return | `return Err(e);` |
+> | Syntax | Behavior | Example |
+> |--------|----------|---------|
+> | `expr;` (semicolon) | Statement, returns `()` | `let x = 5;` |
+> | `expr` (no semicolon) | Expression, returns value | `x + 1` |
+> | `return expr;` | Early return | `return Err(e);` |
 
 ### Functions with Multiple Returns
 
@@ -108,11 +108,11 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| `self` Form | Access | Use Case |
-|-------------|--------|----------|
-| `&self` | Read-only | Most methods |
-| `&mut self` | Read + Write | Methods that modify |
-| `self` | Ownership | Consuming the value |
+> | `self` Form | Access | Use Case |
+> |-------------|--------|----------|
+> | `&self` | Read-only | Most methods |
+> | `&mut self` | Read + Write | Methods that modify |
+> | `self` | Ownership | Consuming the value |
 
 ## Associated Functions
 

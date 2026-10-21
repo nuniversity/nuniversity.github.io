@@ -44,11 +44,11 @@ fn main() {
 ```
 
 > [!NOTE]
-| Característica | Rust | C/Java |
-|----------------|------|--------|
-| Paréntesis | Opcionales | Obligatorios |
-| Expresión | Sí (devuelve valor) | Solo sentencia |
-| Verificación de tipo | Todos los brazos deben coincidir | Sin tal exigencia |
+> | Característica | Rust | C/Java |
+> |----------------|------|--------|
+> | Paréntesis | Opcionales | Obligatorios |
+> | Expresión | Sí (devuelve valor) | Solo sentencia |
+> | Verificación de tipo | Todos los brazos deben coincidir | Sin tal exigencia |
 
 ```rust
 fn main() {

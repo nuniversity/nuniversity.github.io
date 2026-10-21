@@ -50,6 +50,12 @@ export function LibraryClient({ lang, resources, dict }: LibraryClientProps) {
     return Array.from(cats).sort()
   }, [resources])
 
+  const availableTypes = useMemo(() => {
+    const present = Array.from(new Set(resources.map(r => r.type)))
+    const canonical: ResourceType[] = ['video', 'course', 'ebook', 'podcast', 'blog', 'article', 'repository']
+    return canonical.filter(type => present.includes(type))
+  }, [resources])
+
   const filteredResources = useMemo(() => {
     let filtered = resources.filter((resource) => {
       const query = searchQuery.toLowerCase().trim()
@@ -171,7 +177,7 @@ export function LibraryClient({ lang, resources, dict }: LibraryClientProps) {
             </span>
             
             {/* Type Filters */}
-            {(['video', 'ebook', 'course', 'blog', 'repository'] as ResourceType[]).map(type => {
+            {availableTypes.map(type => {
               const Icon = typeIcons[type]
               const isSelected = selectedTypes.includes(type)
               return (
@@ -236,7 +242,9 @@ export function LibraryClient({ lang, resources, dict }: LibraryClientProps) {
 
         {/* Results Count */}
         <div className="mb-6 text-sm text-muted-foreground">
-          Showing {filteredResources.length} of {resources.length} resources
+          {(dict.library?.showing ?? 'Showing {shown} of {total} resources')
+            .replace('{shown}', String(filteredResources.length))
+            .replace('{total}', String(resources.length))}
         </div>
 
         {/* Empty State */}
@@ -274,17 +282,21 @@ export function LibraryClient({ lang, resources, dict }: LibraryClientProps) {
                 className="group bg-card border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 {/* Thumbnail */}
-                <div className="aspect-video bg-muted overflow-hidden">
-                  {resource.thumbnail ? (
+                <div className="aspect-video relative bg-muted overflow-hidden">
+                  <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-muted to-muted/50">
+                    <Icon className="w-12 h-12 text-muted-foreground/60" />
+                  </div>
+                  {resource.thumbnail && (
                     <img 
                       src={resource.thumbnail} 
                       alt={resource.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      width={640}
+                      height={360}
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => { e.currentTarget.style.display = 'none' }}
+                      className="relative w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-muted to-muted/50">
-                      <Icon className="w-12 h-12 text-muted-foreground/60" />
-                    </div>
                   )}
                 </div>
 

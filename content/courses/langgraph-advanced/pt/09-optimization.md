@@ -8,25 +8,25 @@ difficulty: "advanced"
 
 # Otimização
 
-As LangGraph applications scale, performance and cost optimization become critical. This lesson covers strategies to reduce latency, minimize token usage, cache results, batch operations, and tune graph execution.
+À medida que as aplicações LangGraph crescem, a otimização de desempenho e de custo torna-se crítica. Esta lição cobre estratégias para reduzir latência, minimizar o consumo de tokens, armazenar resultados em cache, agrupar operações e ajustar a execução do grafo.
 
 ---
 
 ## Onde a Otimização é Importante
 
-| Area | Impacto | Otimização |
+| Área | Impacto | Otimização |
 | :--- | :--- | :--- |
-| LLM calls | Custo + latency | Caching, batching, model selection |
-| Node count | Latency | Merge trivial nodes, reduce unnecessary nodes |
-| State size | Memory + serialization | Trim state, use efficient data structures |
-| Checkpointing | Latency | Reduce checkpoint frequency |
-| Paralelismo | Throughput | Smart fan-out, avoid contention |
+| Chamadas de LLM | Custo + latência | Cache, agrupamento e seleção de modelo |
+| Número de nós | Latência | Mescle nós triviais, reduza nós desnecessários |
+| Tamanho do estado | Memória + serialização | Reduza o estado, use estruturas de dados eficientes |
+| Checkpointing | Latência | Reduza a frequência de checkpointing |
+| Paralelismo | Throughput | Fan-out inteligente, evite contenção |
 
 ---
 
 ## Cache de Chamadas LLM
 
-Cache LLM responses for identical inputs:
+Armazene em cache as respostas de LLM para entradas idênticas:
 
 ```python
 from langchain.globals import set_llm_cache
@@ -47,8 +47,8 @@ from langchain.cache import SQLiteCache
 set_llm_cache(SQLiteCache(database_path=".llm_cache.db"))
 ```
 
-[!NOTA]
-LLM caching is most effective when users ask similar questions repeatedly. Cache invalidation should be based on time or manual refresh triggers.
+[!NOTE]
+O cache de LLM é mais eficaz quando os usuários fazem perguntas semelhantes repetidamente. A invalidação de cache deve ser baseada em tempo ou em gatilhos de atualização manual.
 
 ---
 
@@ -157,14 +157,14 @@ class TokenCounter:
         return self.completion_tokens
 ```
 
-[!DICA]
-Track token usage per-graph-invocation. It helps identify which nodes are most expensive and where to focus optimization efforts.
+[!TIP]
+Acompanhe o consumo de tokens por invocação de grafo. Isso ajuda a identificar quais nós são mais caros e onde concentrar os esforços de otimização.
 
 ---
 
 ## Agrupamento de Chamadas LLM
 
-When multiple independent LLM calls are needed, batch them:
+Quando forem necessárias múltiplas chamadas independentes de LLM, agrupe-as:
 
 ```python
 from langchain_core.runnables import RunnableParallel
@@ -247,7 +247,7 @@ app = builder.compile(
 
 ## Estratégia de Seleção de Modelo
 
-Use the right model for each node:
+Use o modelo certo para cada nó:
 
 ```python
 # Expensive model for complex reasoning
@@ -275,8 +275,8 @@ def format_node(state: State) -> dict:
     return {"formatted": formatted.content}
 ```
 
-[!SUCESSO]
-Using different models for different nodes can reduce costs by 5-10x while maintaining quality — use cheap models for routing/simple tasks and expensive models only for complex reasoning.
+[!SUCCESS]
+Usar modelos diferentes para nós diferentes pode reduzir os custos em 5-10x mantendo a qualidade — use modelos baratos para roteamento/tarefas simples e modelos caros apenas para raciocínio complexo.
 
 ---
 
@@ -284,18 +284,18 @@ Using different models for different nodes can reduce costs by 5-10x while maint
 
 | Estratégia | Esforço | Impacto |
 | :--- | :--- | :--- |
-| LLM response caching | Low | High (repeated queries) |
-| Modol selection per node | Low | High (cost) |
-| Token trimming | Medium | High (context management) |
-| Merge trivial nodes | Low | Medium (latency) |
-| Reduce checkpoint frequency | Low | Medium (latency) |
-| Parallel independent work | Medium | High (latency) |
-| Batch multiple LLM calls | Medium | Medium (throughput) |
-| Stream instead of wait | High | High (user experience) |
+| Cache de respostas de LLM | Baixo | Alto (consultas repetidas) |
+| Seleção de modelo por nó | Baixo | Alto (custo) |
+| Truncamento de tokens | Médio | Alto (gerenciamento de contexto) |
+| Mesclar nós triviais | Baixo | Médio (latência) |
+| Reduzir frequência de checkpointing | Baixo | Médio (latência) |
+| Trabalho independente em paralelo | Médio | Alto (latência) |
+| Agrupar múltiplas chamadas de LLM | Médio | Médio (throughput) |
+| Streaming em vez de espera | Alto | Alto (experiência do usuário) |
 
 ---
 
-## Perguntas Práticas
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {
@@ -461,13 +461,13 @@ Using different models for different nodes can reduce costs by 5-10x while maint
 
 ---
 
-[!SUCESSO]
+[!SUCCESS]
 ### Principais Conclusões
-- Cache LLM responses for repeated queries to reduce cost and latency
-- Use appropriate model per node: cheap for simple, expensive for complex
-- Track token usage with tiktoken to manage context windows and budgets
-- Merge trivial nodes to reduce overhead, but keep meaningful nodes separate
-- Reduce checkpoint frequency for high-throughput graphs
-- Parallelize independent work with fan-out for latency improvements
-- Batch multiple independent LLM calls with RunnableParallel
-- Streaming improves perceived performance even if total latency is the same
+- Cacheie respostas de LLM para consultas repetidas e reduza custo e latência
+- Use o modelo apropriado por nó: barato para o simples, caro para o complexo
+- Acompanhe o consumo de tokens com tiktoken para gerenciar janelas de contexto e orçamentos
+- Mescle nós triviais para reduzir a sobrecarga, mas mantenha nós significativos separados
+- Reduza a frequência de checkpointing para grafos de alto throughput
+- Paralelize trabalho independente com fan-out para melhorar a latência
+- Agrupe múltiplas chamadas independentes de LLM com RunnableParallel
+- O streaming melhora o desempenho percebido mesmo quando a latência total é a mesma

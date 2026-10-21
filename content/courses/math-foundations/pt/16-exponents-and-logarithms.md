@@ -789,7 +789,7 @@ $$M = \log_{10}(10^3) = 3$$
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

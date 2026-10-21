@@ -3,7 +3,6 @@ id: ufrgs-lumina
 title: "UFRGS Lúmina - 111+ Cursos Gratuitos com Certificado"
 description: "Plataforma de extensão aberta da Universidade Federal do Rio Grande do Sul com 111+ cursos gratuitos em 5 áreas: Saúde, Exatas, Humanas, Letras/Artes, Tecnológicas. Todos autoinstrucionais com CERTIFICADO GRATUITO ao concluir. Destaques: Genética, Neurofisiologia, Racismo, Gênero, Python, Arduino, Blender, 3D, Química, Epidemiologia."
 url: "https://lumina.ufrgs.br"
-thumbnail: "https://ufrgs.br/++theme++padrao/img/logomarca.png"
 author: "Universidade Federal do Rio Grande do Sul (UFRGS)"
 category: "Open Access Research"
 difficulty: "all"

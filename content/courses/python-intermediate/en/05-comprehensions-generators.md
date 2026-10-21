@@ -35,11 +35,11 @@ upper_words = [w.upper() for w in words]
 ```
 
 > [!NOTE]
-| Equivalent `for` Loop | List Comprehension |
-|----------------------|-------------------|
-| 5 lines | 1 line |
-| Mutable accumulator | Functional expression |
-| Slower (`.append` overhead) | Faster (optimized C backend) |
+> | Equivalent `for` Loop | List Comprehension |
+> |----------------------|-------------------|
+> | 5 lines | 1 line |
+> | Mutable accumulator | Functional expression |
+> | Slower (`.append` overhead) | Faster (optimized C backend) |
 
 ```python
 # Complex transformations
@@ -94,12 +94,12 @@ print(unique_chars)  # {"h", "e", "l", "o", "w", "r", "d"}
 ```
 
 > [!SUCCESS]
-| Comprehension Type | Syntax | Output Type |
-|-------------------|--------|-------------|
-| List | `[expr for x in iter]` | `list` |
-| Dict | `{k: v for x in iter}` | `dict` |
-| Set | `{expr for x in iter}` | `set` |
-| Generator | `(expr for x in iter)` | `generator` |
+> | Comprehension Type | Syntax | Output Type |
+> |-------------------|--------|-------------|
+> | List | `[expr for x in iter]` | `list` |
+> | Dict | `{k: v for x in iter}` | `dict` |
+> | Set | `{expr for x in iter}` | `set` |
+> | Generator | `(expr for x in iter)` | `generator` |
 
 ## Generator Functions with `yield`
 
@@ -312,12 +312,12 @@ for user in paginate("https://api.example.com/users"):
 ```
 
 > [!SUCCESS]
-| Feature | Comprehension | Generator |
-|---------|--------------|-----------|
-| Creates all items immediately? | Yes | No (lazy) |
-| Memory usage | O(n) | O(1) |
-| Reusable? | Yes | No (single-use) |
-| Best for | Small-medium datasets, need random access | Large/streaming data, single pass |
+> | Feature | Comprehension | Generator |
+> |---------|--------------|-----------|
+> | Creates all items immediately? | Yes | No (lazy) |
+> | Memory usage | O(n) | O(1) |
+> | Reusable? | Yes | No (single-use) |
+> | Best for | Small-medium datasets, need random access | Large/streaming data, single pass |
 
 ## Practice Questions
 

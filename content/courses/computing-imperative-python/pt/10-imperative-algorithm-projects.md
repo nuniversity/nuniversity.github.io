@@ -153,11 +153,11 @@ flowchart TD
     B --> C{n <= 0?}
     C -->|Sim| D[Retorna lista vazia]
     C -->|Não| E{n == 1?}
-    E -->|Sim| F[Retorna [0]]
-    E -->|Não| G[fib = [0, 1]]
+    E -->|Sim| F["Retorna [0]"]
+    E -->|Não| G["fib = [0, 1]"]
     G --> H[i = 2]
     H --> I{i < n?}
-    I -->|Sim| J[proximo = fib[i-1] + fib[i-2]]
+    I -->|Sim| J["proximo = fib[i-1] + fib[i-2]"]
     J --> K[Adiciona proximo a fib]
     K --> L[i = i + 1]
     L --> I
@@ -294,7 +294,7 @@ flowchart TD
     G -->|Sim| D
     G -->|Não| H[i = 5]
     H --> I{i * i <= n?}
-    I -->|Sim| J{n % i == 0 ou n % (i+2) == 0?}
+    I -->|Sim| J{"n % i == 0 ou n % (i+2) == 0?"}
     J -->|Sim| D
     J -->|Não| K[i = i + 6]
     K --> I
@@ -433,10 +433,10 @@ flowchart TD
     J -->|Não| F
     J -->|Sim| K[i = i + 1]
     K --> E
-    I -->|Sim| L{arr[j] > arr[j+1]?}
+    I -->|Sim| L{"arr[j] > arr[j+1]?"}
     L -->|Não| M[j = j + 1]
     M --> I
-    L -->|Sim| N[Troca arr[j], arr[j+1]]
+    L -->|Sim| N["Troca arr[j], arr[j+1]"]
     N --> O[trocado = True]
     O --> M
     

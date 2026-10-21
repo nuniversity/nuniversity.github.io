@@ -373,7 +373,7 @@ Uma série geométrica infinita converge se e somente se |q| < 1.
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

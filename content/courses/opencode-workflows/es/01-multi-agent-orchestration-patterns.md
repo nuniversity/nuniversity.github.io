@@ -221,7 +221,7 @@ El agente principal pasa contexto a los subagentes:
 
 ---
 
-## Practice Questions
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {

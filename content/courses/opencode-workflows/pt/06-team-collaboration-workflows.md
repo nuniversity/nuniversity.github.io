@@ -250,7 +250,7 @@ Crie `docs/opencode-setup.md`:
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

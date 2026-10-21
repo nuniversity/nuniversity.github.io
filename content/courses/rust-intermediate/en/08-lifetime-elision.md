@@ -152,11 +152,11 @@ where
 ```
 
 > [!SUCCESS]
-| Bound | Meaning |
-|-------|---------|
-| `T: 'a` | T outlives 'a |
-| `T: 'static` | T has no non-'static references |
-| `for<'a> F: Fn(&'a str)` | F works for any lifetime |
+> | Bound | Meaning |
+> |-------|---------|
+> | `T: 'a` | T outlives 'a |
+> | `T: 'static` | T has no non-'static references |
+> | `for<'a> F: Fn(&'a str)` | F works for any lifetime |
 
 ## Lifetime Subtyping (Variance)
 

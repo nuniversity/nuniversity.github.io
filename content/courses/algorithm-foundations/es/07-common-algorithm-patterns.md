@@ -332,8 +332,8 @@ END ALGORITHM
 ```mermaid
 flowchart LR
     A[Entrada:\n1, 2, 3, 4, 5] --> B{¿Transformar\no filtrar?}
-    B -->|Transformar\n(x2)| C[Salida:\n2, 4, 6, 8, 10]
-    B -->|Filtrar\n(pares)| D[Salida:\n2, 4]
+    B -->|"Transformar\n(x2)"| C[Salida:\n2, 4, 6, 8, 10]
+    B -->|"Filtrar\n(pares)"| D[Salida:\n2, 4]
     
     style A fill:#e1f5fe
     style C fill:#c8e6c9

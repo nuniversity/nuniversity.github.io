@@ -364,7 +364,7 @@ END ALGORITHM
 ```mermaid
 flowchart TD
     A[Selection Sort\nQuality Assessment] --> B[Correctness:\nAlways correct]
-    A --> C[Efficiency:\nO(n squared)\nSlow for large lists]
+    A --> C["Efficiency:\nO(n squared)\nSlow for large lists"]
     A --> D[Readability:\nSimple concept\neasy to follow]
     A --> E[Maintainability:\nEasy to modify\nfor different orders]
     

@@ -5,9 +5,25 @@
       "description": "Domina tecnología, ingeniería y ciencias a través de cursos interactivos, herramientas de programación y juegos educativos. Comienza tu viaje de aprendizaje hoy."
     },
     "about": {
-      "title": "Sobre Nosotros - Nombre de Tu Empresa",
+      "title": "Sobre Nosotros",
       "description": "Conoce nuestra misión, valores y el equipo detrás de nuestro éxito"
+    },
+    "contact": {
+      "title": "Contáctanos",
+      "description": "Pónos en contacto con el equipo de NUniversity — dudas, colaboraciones y soporte de la comunidad."
+    },
+    "notFound": {
+      "title": "Página No Encontrada",
+      "description": "La página que buscas no existe o se ha movido."
     }
+  },
+  "notFound": {
+    "title": "Página No Encontrada",
+    "description": "La página que buscas no existe o se ha movido.",
+    "missing": "Ruta solicitada",
+    "go_home": "Ir a la Página Principal",
+    "go_courses": "Explorar Cursos",
+    "more_links": "También puedes explorar nuestras herramientas y juegos."
   },
   "about": {
     "hero": {
@@ -124,7 +140,13 @@
   "stats": {
     "title": "Únete a Nuestra",
     "titleHighlight": "Comunidad",
-    "subtitle": "Miles de estudiantes confían en NUniversity para impulsar sus carreras y conocimientos."
+    "subtitle": "Miles de estudiantes confían en NUniversity para impulsar sus carreras y conocimientos.",
+    "labels": {
+      "courses": "Cursos",
+      "tools": "Herramientas",
+      "games": "Juegos",
+      "resources": "Recursos"
+    }
   },
   "contact": {
     "title": "¿Vamos",
@@ -188,7 +210,8 @@
       "placeholder": "Ingresa tu email",
       "button": "Suscribirse",
       "successTitle": "¡Ya estás suscrito!",
-      "successMessage": "Gracias por registrarte. Te mantendremos al tanto de nuevos cursos y herramientas."
+      "successMessage": "Gracias por registrarte. Te mantendremos al tanto de nuevos cursos y herramientas.",
+      "noSpam": "Sin spam. Cancela la suscripción en cualquier momento."
     },
     "copyright": "NUniversity: Empoderando Mentes, Moldeando Futuros.",
     "rights": "Todos los derechos reservados",
@@ -227,6 +250,7 @@
     "external_link": "Abrir Enlace Externo",
     "back_to_library": "Volver a la Biblioteca",
     "total_resources": "recursos",
+    "showing": "Mostrando {shown} de {total} recursos",
     "filter_by": "Filtrar por",
     "all_types": "Todos los Tipos",
     "all_categories": "Todas las Categorías",
@@ -300,9 +324,18 @@
     "course_content": "Contenido del Curso",
     "back_to_courses": "Volver a Cursos",
     "total_courses": "cursos",
+    "count": {
+      "course": "{n} curso",
+      "courses": "{n} cursos"
+    },
     "categories": "categorías",
     "filter_by_difficulty": "Filtrar por dificultad",
     "all_levels": "Todos los niveles",
+    "difficulty_labels": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    },
     "try_different_filters": "Intenta ajustar los filtros",
     "check_back_soon": "Vuelve pronto para ver nuevo contenido",
     "clear_filters": "Borrar filtros",
@@ -454,6 +487,7 @@
     "try_tool": "Probar",
     "total_tools": "herramientas",
     "categories_count": "categorías",
+    "view_all": "Ver Todas las Herramientas",
     "try_different_search": "Prueba un término de búsqueda diferente",
     "check_back_soon": "Vuelve pronto para nuevas herramientas",
     "clear_search": "Limpiar Búsqueda",

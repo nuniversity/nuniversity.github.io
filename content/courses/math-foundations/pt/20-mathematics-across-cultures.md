@@ -335,7 +335,7 @@ Knipling demonstra que o Brasil tem matematicos de nivel mundial e que a pesquis
 ```
 
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

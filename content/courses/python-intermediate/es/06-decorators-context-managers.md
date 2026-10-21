@@ -433,12 +433,12 @@ flowchart TD
 ```
 
 > [!SUCCESS]
-| Decoradores | Administradores de Contexto |
-|-------------|-----------------------------|
-| Modifican/envuelven funciones | Gestionan recursos |
-| Usados con sintaxis `@` | Usados con sintaxis `with` |
-| Comúnmente preocupaciones transversales (logging, auth, timing) | Ciclo de vida de recursos (archivos, locks, conexiones) |
-| Pueden ser basados en clase o función | Pueden ser basados en clase o generador |
+> | Decoradores | Administradores de Contexto |
+> |-------------|-----------------------------|
+> | Modifican/envuelven funciones | Gestionan recursos |
+> | Usados con sintaxis `@` | Usados con sintaxis `with` |
+> | Comúnmente preocupaciones transversales (logging, auth, timing) | Ciclo de vida de recursos (archivos, locks, conexiones) |
+> | Pueden ser basados en clase o función | Pueden ser basados en clase o generador |
 
 ## Preguntas de Práctica
 

@@ -257,7 +257,7 @@ The tool registry manages all available tools and their capabilities:
 | `question`   | Ask user for input         | No                  | Interaction     |
 
 > [!WARNING]
-| Tools marked as "Optional" for permissions can be used without rules but their behavior may be restricted. For example, `webfetch` without allow rules may be limited to certain domains.
+> Tools marked as "Optional" for permissions can be used without rules but their behavior may be restricted. For example, `webfetch` without allow rules may be limited to certain domains.
 
 ```typescript
 // Tools are registered programmatically in the OpenCode SDK
@@ -324,7 +324,7 @@ Permissions control what actions agents can perform. Rules are defined in `openc
 | **Dependencies**| None                     | None (self-contained)      | Runtime (Node, Python, etc.)|
 
 > [!TIP]
-| Choose an agent when you need a persistent conversational partner with a specific expertise. Choose a skill when you want to teach any agent a repeatable procedure. Choose a plugin when you need to connect to an external system or API.
+> Choose an agent when you need a persistent conversational partner with a specific expertise. Choose a skill when you want to teach any agent a repeatable procedure. Choose a plugin when you need to connect to an external system or API.
 
 ---
 

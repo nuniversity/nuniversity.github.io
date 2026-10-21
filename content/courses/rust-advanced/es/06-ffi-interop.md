@@ -30,12 +30,12 @@ fn main() {
 ```
 
 > [!NOTE]
-| ABI | Cuándo Usar |
-|-----|-------------|
-| `"C"` | Interoperabilidad con C (más común) |
-| `"stdcall"` | API de Windows (32-bit) |
-| `"rust"` | ABI por defecto de Rust (inestable) |
-| `"system"` | Por defecto de la plataforma (C en Unix, stdcall en Win32) |
+> | ABI | Cuándo Usar |
+> |-----|-------------|
+> | `"C"` | Interoperabilidad con C (más común) |
+> | `"stdcall"` | API de Windows (32-bit) |
+> | `"rust"` | ABI por defecto de Rust (inestable) |
+> | `"system"` | Por defecto de la plataforma (C en Unix, stdcall en Win32) |
 
 ## Patrón de Wrapper Seguro
 
@@ -154,11 +154,11 @@ fn safe_get_message() -> String {
 ```
 
 > [!SUCCESS]
-| Origen | Asignador | Debe Liberar Con |
-|--------|-----------|----------------|
-| Código Rust | Asignador Rust | `drop` / dealloc de Rust |
-| Biblioteca C | `malloc` | `free` |
-| Tu código C | Debe coincidir | Libera con el asignador correspondiente |
+> | Origen | Asignador | Debe Liberar Con |
+> |--------|-----------|----------------|
+> | Código Rust | Asignador Rust | `drop` / dealloc de Rust |
+> | Biblioteca C | `malloc` | `free` |
+> | Tu código C | Debe coincidir | Libera con el asignador correspondiente |
 
 ### Pasando Asignaciones Rust a C
 

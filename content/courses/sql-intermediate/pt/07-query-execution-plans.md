@@ -113,11 +113,11 @@ Combina múltiplas varreduras de índice em um bitmap na memória, então busca 
 - Obtendo 5-20% das linhas (meio-termo entre Index Scan e Seq Scan)
 
 > [!SUCCESS]
-| Tipo de Varredura | % Acesso a Linhas | Uso Típico |
-|-----------|-------------|-------------|
-| Index Scan | < 5% | Buscas pontuais, alta seletividade |
-| Bitmap Scan | 5-20% | Múltiplos filtros, seletividade moderada |
-| Seq Scan | > 20% | Grandes porções da tabela, sem índice |
+> | Tipo de Varredura | % Acesso a Linhas | Uso Típico |
+> |-----------|-------------|-------------|
+> | Index Scan | < 5% | Buscas pontuais, alta seletividade |
+> | Bitmap Scan | 5-20% | Múltiplos filtros, seletividade moderada |
+> | Seq Scan | > 20% | Grandes porções da tabela, sem índice |
 
 ## Algoritmos de Junção
 
@@ -261,13 +261,13 @@ LIMIT 10;
 ```
 
 > [!SUCCESS]
-| Prioridade de Otimização | Impacto | Esforço |
-|----------------------|--------|--------|
-| Seq → Index scan em tabelas grandes | Alto | Baixo |
-| Remover ordenações desnecessárias | Médio | Médio |
-| Nested Loop → Hash Join | Alto | Baixo (adicionar índice) |
-| Reescrever subconsultas complexas | Médio | Médio |
-| Adicionar índices de cobertura | Alto | Médio |
+> | Prioridade de Otimização | Impacto | Esforço |
+> |----------------------|--------|--------|
+> | Seq → Index scan em tabelas grandes | Alto | Baixo |
+> | Remover ordenações desnecessárias | Médio | Médio |
+> | Nested Loop → Hash Join | Alto | Baixo (adicionar índice) |
+> | Reescrever subconsultas complexas | Médio | Médio |
+> | Adicionar índices de cobertura | Alto | Médio |
 
 Comece com as consultas que sua aplicação executa com mais frequência e otimize-as. Uma consulta que executa uma vez por noite é menos importante que uma que executa 1000 vezes por segundo.
 

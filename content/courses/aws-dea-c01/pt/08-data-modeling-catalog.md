@@ -245,7 +245,7 @@ flowchart TD
     D -->|"programático"| F["GetTableVersions + diff de conjunto de colunas -> alarme no CloudWatch + e-mail do SNS"]
     E --> G{"A mudança é desejada?"}
     G -->|Sim| H["Atualizar consumidores ANTES de lerem v4"]
-    G -->|Não|"Rollback = publicar uma NOVA versão idêntica à v3 (a versão atual não pode ser apagada)"]
+    G -->|Não| RB["Rollback = publicar uma NOVA versão idêntica à v3 (a versão atual não pode ser apagada)"]
     H --> I["Podar histórico com DeleteTableVersion / SkipArchive=true"]
     F --> I
 ```

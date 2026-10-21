@@ -44,14 +44,15 @@ export default function MoleculeViewer({
     if (!containerRef.current || initializedRef.current) return
     initializedRef.current = true
 
+    const container = containerRef.current
     let cancelled = false
 
     const load = async () => {
       try {
         const $3Dmol = await import('3dmol/build/3Dmol.js')
-        if (cancelled || !containerRef.current) return
+        if (cancelled || !container) return
 
-        const viewer = $3Dmol.createViewer(containerRef.current, {
+        const viewer = $3Dmol.createViewer(container, {
           backgroundColor: background || 'white',
           backgroundAlpha: background === 'transparent' ? 0.0 : 1.0,
           antialias: true,
@@ -86,7 +87,7 @@ export default function MoleculeViewer({
     return () => {
       cancelled = true
       if (viewerRef.current?.spin) viewerRef.current.spin(false)
-      if (containerRef.current) containerRef.current.innerHTML = ''
+      if (container) container.innerHTML = ''
       viewerRef.current = null
       initializedRef.current = false
     }

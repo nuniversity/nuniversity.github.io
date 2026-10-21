@@ -2,7 +2,7 @@
 id: usp-coursera
 title: "USP no Coursera - Cursos MOOCs"
 description: "Cursos da USP publicados na plataforma Coursera. Destaques: Ciência da Computação com Python, Marketing, Econometria, Teste de Software, entre outros. Acesso gratuito para auditagem (vídeos e materiais), certificado pago (opcional)."
-url: "https://pt.coursera.org/usp"
+url: "https://www.coursera.org/partners/usp"
 thumbnail: "https://d3njjcbhbojbot.cloudfront.net/web/images/favicons/apple-icon-120x120.png"
 author: "Universidade de São Paulo (USP)"
 category: "Computer Science"

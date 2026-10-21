@@ -406,7 +406,7 @@ Dois navios partem do mesmo porto. Navio A viaja 50 km a leste, Navio B viaja 30
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

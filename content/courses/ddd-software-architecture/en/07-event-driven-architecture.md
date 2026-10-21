@@ -470,7 +470,7 @@ class OrderProcessingSaga:
 | Verb + past participle | `PaymentReceived` | Common alternative |
 
 > [!TIP]
-| > Choose one naming convention and stick to it consistently. The Ubiquitous Language applies to events too — use the words domain experts use when they describe what happened.
+> Choose one naming convention and stick to it consistently. The Ubiquitous Language applies to events too — use the words domain experts use when they describe what happened.
 
 ## Event Versioning
 

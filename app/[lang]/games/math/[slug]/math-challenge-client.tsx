@@ -219,7 +219,7 @@ export function MathChallengeClient({ lang, game, dict }: MathChallengeClientPro
 
             {/* Question Card */}
             <motion.div
-              key={question?.display + feedback}
+              key={`${question?.display ?? ''}${feedback ?? ''}`}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               className="bg-card border rounded-2xl p-10 text-center mb-6"

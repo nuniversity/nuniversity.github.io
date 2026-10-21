@@ -30,12 +30,12 @@ fn main() {
 ```
 
 > [!NOTE]
-| ABI | Quando Usar |
-|-----|-------------|
-| `"C"` | Interoperabilidade com C (mais comum) |
-| `"stdcall"` | API do Windows (32-bit) |
-| `"rust"` | ABI padrão do Rust (instável) |
-| `"system"` | Padrão da plataforma (C no Unix, stdcall no Win32) |
+> | ABI | Quando Usar |
+> |-----|-------------|
+> | `"C"` | Interoperabilidade com C (mais comum) |
+> | `"stdcall"` | API do Windows (32-bit) |
+> | `"rust"` | ABI padrão do Rust (instável) |
+> | `"system"` | Padrão da plataforma (C no Unix, stdcall no Win32) |
 
 ## Padrão de Wrapper Seguro
 
@@ -154,11 +154,11 @@ fn safe_get_message() -> String {
 ```
 
 > [!SUCCESS]
-| Origem | Alocador | Deve Liberar Com |
-|--------|-----------|----------------|
-| Código Rust | Alocador Rust | `drop` / dealloc do Rust |
-| Biblioteca C | `malloc` | `free` |
-| Seu código C | Deve corresponder | Libere com o alocador correspondente |
+> | Origem | Alocador | Deve Liberar Com |
+> |--------|-----------|----------------|
+> | Código Rust | Alocador Rust | `drop` / dealloc do Rust |
+> | Biblioteca C | `malloc` | `free` |
+> | Seu código C | Deve corresponder | Libere com o alocador correspondente |
 
 ### Passando Alocações Rust para C
 

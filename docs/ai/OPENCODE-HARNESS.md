@@ -1160,7 +1160,7 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    A[Author: "Write Domain 2 lessons"] --> B[Agent loads skill: course-writer]
+    A["Author: Write Domain 2 lessons"] --> B[Agent loads skill: course-writer]
     B --> C[Agent reads project-status.json]
     C --> D[Agent reads existing lessons in domain]
     D --> E[Agent generates lessons sequentially]
@@ -1184,7 +1184,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[Author: "Build Snowflake quiz"] --> B[Agent loads skill: game-builder]
+    A["Author: Build Snowflake quiz"] --> B[Agent loads skill: game-builder]
     B --> C[Agent reads existing quiz files]
     C --> D[Agent generates quiz JSON]
     D --> E[file.edited hook fires]

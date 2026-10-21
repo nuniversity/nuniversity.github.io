@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Projeto Intermediário: Sistema de Pesquisa Multi-Agente
 
-Build a multi-agent research system that coordinates specialized agents to research topics, analyze findings, and generate comprehensive reports. This project brings together advanced state, persistence, multi-agent patterns, and streaming.
+Construa um sistema de pesquisa multi-agente que coordena agentes especializados para pesquisar temas, analisar descobertas e gerar relatórios abrangentes. Este projeto reúne estado avançado, persistência, padrões multi-agente e streaming.
 
 ---
 
@@ -82,8 +82,8 @@ reviewer_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.0)
 supervisor_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.0)
 ```
 
-[!NOTA]
-Different models optimize for cost. Simple tasks (research, review) use gpt-4o-mini. Complex reasoning (planning, analysis) uses gpt-4o.
+[!NOTE]
+Modelos diferentes otimizam o custo. Tarefas simples (pesquisa, revisão) usam gpt-4o-mini. Raciocínio complexo (planejamento, análise) usa gpt-4o.
 
 ---
 
@@ -349,8 +349,8 @@ builder.add_edge("finalizer", END)
 app = builder.compile(checkpointer=MemorySaver())
 ```
 
-[!SUCESSO]
-The supervisor loop pattern: START → supervisor → agent → supervisor → agent → ... → finalizer → END. Each agent returns control to the supervisor after completing its work.
+[!SUCCESS]
+O padrão de laço do supervisor: START → supervisor → agente → supervisor → agente → ... → finalizador → END. Cada agente devolve o controle ao supervisor depois de concluir seu trabalho.
 
 ---
 
@@ -401,7 +401,7 @@ print(report)
 
 ## Passo 6: Adicionando Revisão Humana
 
-Add an optional human review step:
+Adicione uma etapa opcional de revisão humana:
 
 ```python
 def human_review_node(state: ResearchState) -> dict:
@@ -429,8 +429,8 @@ builder.add_conditional_edges("human_review", review_router, {
 })
 ```
 
-[!DICA]
-Adding human review at strategic points (before finalization) catches errors while keeping most of the workflow autonomous.
+[!TIP]
+Adicionar revisão humana em pontos estratégicos (antes da finalização) pega erros enquanto mantém a maior parte do fluxo de trabalho autônoma.
 
 ---
 
@@ -455,7 +455,7 @@ flowchart LR
 
 ---
 
-## Perguntas Práticas
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {
@@ -619,13 +619,13 @@ flowchart LR
 
 ---
 
-[!SUCESSO]
+[!SUCCESS]
 ### Principais Conclusões
-- Multi-agent research system with supervisor loop pattern
-- Each agent specializes in one task (planning, research, analysis, writing, review)
-- Structured AgentMessage enables full communication traceability
-- Different LLM models for different agents optimizes cost vs. quality
-- Streaming provides real-time visibility into agent progress
-- Human review can be added with interrupt() for quality control
-- The supervisor decides when the work is complete, breaking the loop
-- Checkpointing enables pause/resume for long-running research tasks
+- Sistema de pesquisa multi-agente com padrão de laço de supervisor
+- Cada agente se especializa em uma tarefa (planejamento, pesquisa, análise, escrita, revisión)
+- O AgentMessage estruturado viabiliza a rastreabilidade completa da comunicação
+- Modelos de LLM diferentes para agentes diferentes otimizam custo versus qualidade
+- O streaming oferece visibilidade em tempo real do progresso do agente
+- A revisão humana pode ser adicionada com interrupt() para controle de qualidade
+- O supervisor decide quando o trabalho está completo, quebrando o laço
+- O checkpointing permite pausar/retomar tarefas de pesquisa de longa duração

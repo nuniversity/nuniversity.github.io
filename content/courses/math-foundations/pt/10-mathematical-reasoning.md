@@ -408,7 +408,7 @@ Isso é o **erro de negar o antecedente**. Ser inteligente não depende apenas d
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

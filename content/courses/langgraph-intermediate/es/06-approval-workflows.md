@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Flujos de Aprobación
 
-Approval workflows combine interrupts with conditional routing to create structured human-in-the-loop processes. This lesson covers before-node interrupts, after-node interrupts, and dynamic approval patterns.
+Los flujos de aprobación combinan interrupts con enrutamiento condicional para crear procesos estructurados con humano en el bucle. Esta lección cubre interrupts antes del nodo, interrupts después del nodo y patrones dinámicos de aprobación.
 
 ---
 
@@ -20,13 +20,13 @@ Agent proposes action → Human reviews → Approve? → Yes → Execute
                                          Reject → Provide feedback → Revise or Stop
 ```
 
-The agent presents a proposal, the human decides, and execution follows accordingly.
+El agente presenta una propuesta, la persona decide y la ejecución sigue en consecuencia.
 
 ---
 
 ## Interrupción Antes del Nodo
 
-Interrupt **before** a node executes — the human decides whether the node should run:
+Interrumpe **antes** de que se ejecute un nodo: la persona decide si el nodo debe ejecutarse:
 
 ```python
 from langgraph.graph import StateGraph, START, END
@@ -82,14 +82,14 @@ builder.add_edge("execute", END)
 app = builder.compile(checkpointer=MemorySaver())
 ```
 
-[!NOTA]
-A **before-node** interrupt prevents an action from happening until approved. This is the most common approval pattern — it prevents unauthorized or risky actions.
+[!NOTE]
+Un interrupt **antes del nodo** impide que una acción se produzca hasta que se apruebe. Es el patrón de aprobación más común: evita acciones no autorizadas o arriesgadas.
 
 ---
 
 ## Interrupción Después del Nodo
 
-Interrupt **after** a node executes — the human reviews the result:
+Interrumpe **después** de que se ejecute un nodo: la persona revisa el resultado:
 
 ```python
 def draft_email(state: EmailState) -> dict:
@@ -114,14 +114,14 @@ def finalize_or_revise(state: EmailState) -> dict:
     return {"draft": state["revision"], "approved": False}
 ```
 
-[!CONSEJO]
-After-node interrupts are useful for content review, result validation, and any workflow where the human should verify output before it's used.
+[!TIP]
+Los interrupts después del nodo son útiles para la revisión de contenido, la validación de resultados y cualquier flujo de trabajo en que la persona deba verificar la salida antes de usarla.
 
 ---
 
 ## Enrutamiento Condicional de Aprobación
 
-Route based on whether the human approved or rejected:
+Enruta según lo que la persona haya aprobado o rechazado:
 
 ```python
 def approval_router(state: ApprovalState) -> str:
@@ -189,14 +189,14 @@ builder.add_conditional_edges(
 builder.add_edge("revise_draft", "human_review")  # Loop back for another review
 ```
 
-[!ADVERTENCIA]
-Always cap revision loops. Without a maximum, an unsatisfied reviewer could loop forever.
+[!WARNING]
+Limita siempre los bucles de revisión. Sin un máximo, un revisor insatisfecho podría quedar en bucle para siempre.
 
 ---
 
 ## Flujo de Escalada
 
-Route to a senior reviewer if junior rejects or if the request is high-risk:
+Enruta a un revisor sénior si el junior rechaza o si la solicitud es de alto riesgo:
 
 ```python
 class EscalationState(TypedDict):
@@ -237,7 +237,7 @@ builder.add_conditional_edges(
 
 ## Aprobación con Datos Dinámicos
 
-Include relevant data in the approval request:
+Incluye los datos relevantes en la solicitud de aprobación:
 
 ```python
 def approval_with_context(state: State) -> dict:
@@ -259,7 +259,7 @@ def approval_with_context(state: State) -> dict:
 
 ## Timeout para Aprobaciones
 
-Handle the case where the human never responds:
+Maneja el caso en que la persona nunca responde:
 
 ```python
 def approval_with_timeout(state: State) -> dict:
@@ -277,8 +277,8 @@ def approval_with_timeout(state: State) -> dict:
     return {"human_response": response}
 ```
 
-[!NOTA]
-LangGraph does not have built-in timeout for interrupts. Implement timeout logic at the application layer by checking how long a thread has been paused.
+[!NOTE]
+LangGraph no tiene un timeout integrado para los interrupts. Implementa la lógica de timeout en la capa de la aplicación comprobando cuánto tiempo lleva pausado un hilo.
 
 ---
 
@@ -340,7 +340,7 @@ app = builder.compile(checkpointer=MemorySaver())
 
 ---
 
-## Preguntas Prácticas
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {
@@ -504,13 +504,13 @@ app = builder.compile(checkpointer=MemorySaver())
 
 ---
 
-[!ÉXITO]
+[!SUCCESS]
 ### Conclusiones Clave
-- Before-node interrupts prevent actions until human approval
-- After-node interrupts let humans review results before proceeding
-- Conditional edges route based on approval/rejection decisions
-- Revision loops cycle until approval or max revisions reached
-- Escalation workflows route to senior reviewers when needed
-- Pass rich context in interrupt() to help humans make informed decisions
-- Always cap revision and escalation loops with maximum counts
-- Multiple sequential approvals can be chained in a single graph
+- Los interrupts antes del nodo impiden acciones hasta la aprobación humana
+- Los interrupts después del nodo permiten que las personas revisen los resultados antes de continuar
+- Las aristas condicionales enrutan según las decisiones de aprobación/rechazo
+- Los bucles de revisión se repiten hasta la aprobación o hasta alcanzar el máximo de revisiones
+- Los flujos de escalamiento enrutan a revisores sénior cuando es necesario
+- Pasa un contexto rico en interrupt() para ayudar a las personas a tomar decisiones informadas
+- Limita siempre los bucles de revisión y escalamiento con recuentos máximos
+- Se pueden encadenar múltiples aprobaciones secuenciales en un solo grafo

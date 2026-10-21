@@ -8,20 +8,20 @@ difficulty: "advanced"
 
 # Agentes Hierárquicos
 
-Hierarchical agents organize work into levels — a **manager agent** delegates tasks to **sub-agents**, which can themselves be graphs with internal nodes. This enables scalable, maintainable, and encapsulated agent systems.
+Agentes hierárquicos organizam o trabalho em níveis — um **agente gestor** delega tarefas a **subagentes**, que podem ser eles próprios grafos com nós internos. Isso permite sistemas de agentes escalonáveis, mantíveis e encapsulados.
 
 ---
 
 ## Por que Hierárquico?
 
-Flat multi-agent systems have limitations:
+Sistemas multi-agente achatados têm limitações:
 
-1. **State complexity**: All agents share one state dict, which grows unmanageable
-2. **Coordination cost**: Every agent sees all messages, even irrelevant ones
-3. **Encapsulamento**: Agent internals leak into the shared state
-4. **Scalability**: Adding agents increases complexity linearly
+1. **Complexidade de estado**: Todos os agentes compartilham um único dicionário de estado, que cresce de forma ingovernável
+2. **Custo de coordenação**: Cada agente vê todas as mensagens, mesmo as irrelevantes
+3. **Encapsulamento**: Os detalhes internos dos agentes vazam para o estado compartilhado
+4. **Escalabilidade**: Adicionar agentes aumenta a complexidade linearmente
 
-Hierarchical architectures solve these with **encapsulation and delegation**:
+Arquiteturas hierárquicas resolvem isso com **encapsulamento e delegação**:
 
 ```
 Manager Agent
@@ -42,7 +42,7 @@ Manager Agent
 
 ## Subgrafos
 
-Subgrafos are graphs used as nodes within a parent graph. They have their own state, nodes, and edges — fully encapsulated.
+Subgrafos são grafos usados como nós dentro de um grafo pai. Eles têm seu próprio estado, nós e arestas — totalmente encapsulados.
 
 ```python
 from langgraph.graph import StateGraph, START, END
@@ -71,8 +71,8 @@ research_builder.add_edge("execute", END)
 research_subgraph = research_builder.compile()
 ```
 
-[!NOTA]
-The research subgraph has its own state (`ResearchState`). It doesn't know about the parent graph's state, and the parent doesn't know about internal research details.
+[!NOTE]
+O subgrafo de pesquisa tem seu próprio estado (`ResearchState`). Ele não conhece o estado do grafo pai, e o pai não conhece os detalhes internos da pesquisa.
 
 ---
 
@@ -106,14 +106,14 @@ builder.add_edge("finalize", END)
 app = builder.compile()
 ```
 
-[!SUCESSO]
-A subgraph is added as a node just like a regular function. LangGraph handles state mapping between parent and subgraph automatically.
+[!SUCCESS]
+Um subgrafo é adicionado como um nó, exatamente como uma função comum. O LangGraph trata o mapeamento de estado entre pai e subgrafo automaticamente.
 
 ---
 
 ## Mapeamento de Estado entre Pai e Subgrafo
 
-The parent passes a subset of its state to the subgraph. The subgraph returns its state, which is merged back.
+O pai passa um subconjunto do seu estado para o subgrafo. O subgrafo retorna o seu estado, que é mesclado de volta.
 
 ```python
 class ParentState(TypedDict):
@@ -190,14 +190,14 @@ builder.add_edge("research", END)
 app = builder.compile()
 ```
 
-[!IMPORTANTE]
-Subgrafos at any level can contain their own subgraphs. This nesting enables arbitrarily complex agent hierarchies while maintaining encapsulation at each level.
+[!IMPORTANT]
+Subgrafos em qualquer nível podem conter seus próprios subgrafos. Esse aninhamento permite hierarquias de agentes arbitrariamente complexas, mantendo o encapsulamento em cada nível.
 
 ---
 
 ## Contexto Compartilhado entre Níveis
 
-Use a **context object** that flows through all hierarchy levels:
+Use um **objeto de contexto** que percorra todos os níveis da hierarquia:
 
 ```python
 class GlobalContext(TypedDict):
@@ -218,14 +218,14 @@ def research_subgraph_node(state: TaskState) -> dict:
     return {"result": result}  # Context flows through automatically?
 ```
 
-[!AVISO]
-State mapping between parent and subgraph must be explicit. The parent decides which fields to pass to the subgraph and which subgraph outputs to read.
+[!WARNING]
+O mapeamento de estado entre pai e subgrafo deve ser explícito. O pai decide quais campos passar ao subgrafo e quais saídas do subgrafo ler.
 
 ---
 
 ## Execução Paralela de Subgrafos
 
-Run multiple subgraphs in parallel:
+Execute vários subgrafos em paralelo:
 
 ```python
 def run_parallel_research(state: ManagerState) -> dict:
@@ -243,7 +243,7 @@ def run_parallel_research(state: ManagerState) -> dict:
     return {"research_findings": "\n\n".join(results)}
 ```
 
-For true parallelism, use fan-out:
+Para paralelismo real, use fan-out:
 
 ```python
 builder.add_edge(START, "research_topic_1")
@@ -336,16 +336,16 @@ print(result["final"])
 
 | Benefício | Descrição |
 | :--- | :--- |
-| **Encapsulamento** | Subgraph internals don't leak to parent level |
-| **Reusabilidade** | Subgrafos can be used in multiple parent graphs |
-| **Testabilidade** | Each subgraph is tested independently |
-| **Gerenciamento de complexidade** | Each level only deals with its own concerns |
-| **Paralelismo** | Multiple subgraphs can run in parallel |
-| **Interfaces claras** | Explicit input/output contracts between levels |
+| **Encapsulamento** | Os detalhes internos do subgrafo não vazam para o nível pai |
+| **Reutilização** | Subgrafos podem ser usados em múltiplos grafos pai |
+| **Testabilidade** | Cada subgrafo é testado de forma independente |
+| **Gestão de complexidade** | Cada nível lida apenas com suas próprias preocupações |
+| **Paralelismo** | Múltiplos subgrafos podem rodar em paralelo |
+| **Interfaces claras** | Contratos explícitos de entrada/saída entre níveis |
 
 ---
 
-## Perguntas Práticas
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {
@@ -509,13 +509,13 @@ print(result["final"])
 
 ---
 
-[!SUCESSO]
+[!SUCCESS]
 ### Principais Conclusões
-- Subgrafos are compiled graphs used as nodes in parent graphs
-- Each subgraph has its own encapsulated state
-- State mapping between levels is explicit (manual)
-- Subgrafos can be nested to any depth
-- Reusabilidade: same subgraph can be used in multiple parents
-- Testabilidade: each subgraph is independently testable
-- Parallel subgraph execution via fan-out edges
-- Hierarchical design manages complexity in large agent systems
+- Subgrafos são grafos compilados usados como nós em grafos pai
+- Cada subgrafo tem seu próprio estado encapsulado
+- O mapeamento de estado entre níveis é explícito (manual)
+- Subgrafos podem ser aninhados em qualquer profundidade
+- Reutilização: o mesmo subgrafo pode ser usado em múltiplos pais
+- Testabilidade: cada subgrafo pode ser testado de forma independente
+- Execução paralela de subgrafos por meio de arestas de fan-out
+- O design hierárquico gerencia a complexidade em grandes sistemas de agentes

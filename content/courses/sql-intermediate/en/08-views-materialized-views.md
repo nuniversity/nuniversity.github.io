@@ -92,12 +92,12 @@ A view is updatable when:
 - It doesn't use aggregate functions
 
 > [!WARNING]
-| Non-Updatable Pattern | Reason |
-|-----------------------|--------|
-| `CREATE VIEW v AS SELECT ... FROM a JOIN b` | Multiple base tables |
-| `CREATE VIEW v AS SELECT DISTINCT ...` | Cannot map back to single row |
-| `CREATE VIEW v AS SELECT SUM(...)` | Aggregate — no row identity |
-| `CREATE VIEW v AS SELECT ... UNION ...` | Multiple sources |
+> | Non-Updatable Pattern | Reason |
+> |-----------------------|--------|
+> | `CREATE VIEW v AS SELECT ... FROM a JOIN b` | Multiple base tables |
+> | `CREATE VIEW v AS SELECT DISTINCT ...` | Cannot map back to single row |
+> | `CREATE VIEW v AS SELECT SUM(...)` | Aggregate — no row identity |
+> | `CREATE VIEW v AS SELECT ... UNION ...` | Multiple sources |
 
 ## WITH CHECK OPTION
 

@@ -38,12 +38,12 @@ fn main() {
 ```
 
 > [!NOTE]
-| Padrão | Sintaxe | Exemplo |
-|---------|--------|---------|
-| Sem params | `|| expr` | `|| 42` |
-| Um param | `|x| expr` | `|x| x + 1` |
-| Params tipados | `|x: i32| -> i32` | `|x: i32| -> i32 { x + 1 }` |
-| Corpo com bloco | `\|x\| { stmt; expr }` | `|x| { let y = x; y }` |
+> | Padrão | Sintaxe | Exemplo |
+> |---------|--------|---------|
+> | Sem params | `|| expr` | `|| 42` |
+> | Um param | `|x| expr` | `|x| x + 1` |
+> | Params tipados | `|x: i32| -> i32` | `|x: i32| -> i32 { x + 1 }` |
+> | Corpo com bloco | `\|x\| { stmt; expr }` | `|x| { let y = x; y }` |
 
 ## Modos de Captura
 

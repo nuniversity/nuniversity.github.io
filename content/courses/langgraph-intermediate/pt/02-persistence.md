@@ -8,24 +8,24 @@ difficulty: "intermediate"
 
 # Persistência e Checkpointing
 
-One of LangGraph's most powerful features is persistence — the ability to save and restore graph state at any point during execution. This enables long-running agents, human-in-the-loop workflows, and fault-tolerant systems.
+Uma das funções mais poderosas do LangGraph é a persistência — a capacidade de salvar e restaurar o estado do grafo em qualquer momento da execução. Isso viabiliza agentes de longa duração, fluxos de trabalho com humano no loop e sistemas tolerantes a falhas.
 
 ---
 
 ## Por que a Persistência é Importante
 
-Without persistence, every graph invocation starts from scratch. With persistence:
+Sem persistência, toda invocação de grafo começa do zero. Com persistência:
 
-- **State survives across invocations**: Resume where you left off
-- **Human-in-the-loop**: Pause execution, inspect state, provide input, resume
-- **Fault tolerance**: Recover from crashes without losing progress
-- **Multi-turn conversations**: Maintain context across multiple interactions
+- **O estado sobrevive às invocações**: Retome de onde parou
+- **Humano no loop**: Pause a execução, inspecione o estado, forneça entrada e retome
+- **Tolerância a falhas**: Recupere-se de travamentos sem perder o progresso
+- **Conversas com múltiplos turnos**: Mantenha o contexto entre múltiplas interações
 
 ---
 
 ## MemorySaver: Persistência em Memória
 
-`MemorySaver` stores checkpoints in memory. It's simple and fast, but state is lost when the process exits.
+`MemorySaver` armazena checkpoints em memória. É simples e rápido, mas o estado é perdido quando o processo termina.
 
 ```python
 from langgraph.checkpoint.memory import MemorySaver
@@ -54,14 +54,14 @@ builder.add_edge("a", END)
 app = builder.compile(checkpointer=checkpointer)
 ```
 
-[!NOTA]
-The `checkpointer` parameter is passed to `.compile()`. Once set, every node execution creates a checkpoint that can be retrieved later.
+[!NOTE]
+O parâmetro `checkpointer` é passado para `.compile()`. Uma vez definido, cada execução de nó cria um checkpoint que pode ser recuperado depois.
 
 ---
 
 ## IDs de Thread
 
-Checkpoints are organized by **thread ID**. A thread represents a single conversation or workflow session:
+Os checkpoints são organizados por **thread ID**. Um thread representa uma única conversa ou sessão de fluxo de trabalho:
 
 ```python
 # First invocation — creates a new thread
@@ -86,8 +86,8 @@ result3 = app.invoke(
 )
 ```
 
-[!IMPORTANTE]
-When using a checkpointer, the initial state you pass to `invoke()` is merged with the existing thread state. Keys that already exist in the thread keep their values; new keys are added.
+[!IMPORTANT]
+Ao usar um checkpointer, o estado inicial que você passa para `invoke()` é mesclado com o estado existente do thread. Chaves que já existem no thread mantêm seus valores; chaves novas são adicionadas.
 
 ---
 
@@ -111,7 +111,7 @@ for checkpoint in app.get_state_history(config1):
 
 ## Atualizando Estado Durante a Execução
 
-You can manually update state for a thread:
+Você pode atualizar manualmente o estado de um thread:
 
 ```python
 config = {"configurable": {"thread_id": "thread-1"}}
@@ -126,14 +126,14 @@ app.update_state(
 result = app.invoke({"messages": ["New message"]}, config)
 ```
 
-[!SUCESSO]
-`update_state()` lets you intervene in an agent's state — useful for human feedback, error correction, or testing.
+[!SUCCESS]
+`update_state()` permite intervir no estado de um agente — útil para feedback humano, correção de erros ou testes.
 
 ---
 
 ## Retomando de um Checkpoint Específico
 
-You can resume execution from a specific checkpoint:
+Você pode retomar a execução a partir de um checkpoint específico:
 
 ```python
 # Get a specific checkpoint from history
@@ -152,9 +152,9 @@ if len(history) > 1:
 
 ## Checkpointers SQLite e PostgreSQL
 
-For production, use database-backed checkpointers that persist across restarts:
+Para produção, use checkpointers baseados em banco de dados que persistam entre reinicializações:
 
-### SQLite (Local Development)
+### SQLite (desenvolvimento local)
 
 ```python
 from langgraph.checkpoint.sqlite import SqliteSaver
@@ -166,7 +166,7 @@ checkpointer = SqliteSaver.from_conn_string("checkpoints.db")
 checkpointer = SqliteSaver.from_conn_string(":memory:")
 ```
 
-### PostgreSQL (Production)
+### PostgreSQL (produção)
 
 ```python
 from langgraph.checkpoint.postgres import PostgresSaver
@@ -180,14 +180,14 @@ checkpointer = PostgresSaver.from_conn_string(
 checkpointer.setup()
 ```
 
-[!AVISO]
-Always call `checkpointer.setup()` for SQLite/PostgreSQL checkpointers to ensure database tables exist. This is a one-time initialization.
+[!WARNING]
+Sempre chame `checkpointer.setup()` para checkpointers SQLite/PostgreSQL, para garantir que as tabelas do banco existam. É uma inicialização única.
 
 ---
 
 ## Conteúdo do Checkpoint
 
-Each checkpoint stores:
+Cada checkpoint armazena:
 
 ```python
 checkpoint = app.get_state(config)
@@ -210,7 +210,7 @@ parent = checkpoint.parent_config
 
 ## Ramificando a partir de Checkpoints
 
-Create alternative execution paths from any checkpoint:
+Crie caminhos alternativos de execução a partir de qualquer checkpoint:
 
 ```python
 # Get the state at a specific checkpoint
@@ -230,7 +230,7 @@ result = app.invoke({"messages": ["Alternative path"]}, branch_config)
 
 ## Configurando Frequência de Checkpoint
 
-By default, a checkpoint is saved after **every node execution**. You can control this:
+Por padrão, um checkpoint é salvo após **cada execução de nó**. Você pode controlar isso:
 
 ```python
 from langgraph.checkpoint.memory import MemorySaver
@@ -250,8 +250,8 @@ config = {
 }
 ```
 
-[!DICA]
-For high-throughput graphs, checkpointing after every node can be expensive. Consider batching or reducing checkpoint frequency in production.
+[!TIP]
+Para grafos de alto throughput, fazer checkpoint após cada nó pode ser caro. Considere agrupar ou reduzir a frequência de checkpointing em produção.
 
 ---
 
@@ -298,7 +298,7 @@ app.invoke({"messages": [("human", "What's my name?")]}, session2)
 
 ---
 
-## Perguntas Práticas
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {
@@ -432,13 +432,13 @@ app.invoke({"messages": [("human", "What's my name?")]}, session2)
 
 ---
 
-[!SUCESSO]
+[!SUCCESS]
 ### Principais Conclusões
-- MemorySaver provides in-memory persistence; SqliteSaver and PostgresSaver for production
-- IDs de Thread organize checkpoints into sessions
-- Checkpoints are saved after every node execution by default
-- get_state() retrieves current state; get_state_history() lists all checkpoints
-- update_state() manually injects state into a thread
-- Different threads have isolated state — they don't share context
-- Database-backed checkpointers require checkpointer.setup() before first use
-- Checkpointing enables multi-turn conversations, human-in-the-loop, and fault tolerance
+- MemorySaver oferece persistência em memória; SqliteSaver e PostgresSaver para produção
+- Os IDs de thread organizam os checkpoints em sessões
+- Os checkpoints são salvos após cada execução de nó por padrão
+- get_state() recupera o estado atual; get_state_history() lista todos os checkpoints
+- update_state() injeta estado manualmente em um thread
+- Threads diferentes têm estados isolados — eles não compartilham contexto
+- Checkpointers baseados em banco de dados exigem checkpointer.setup() antes do primeiro uso
+- O checkpointing viabiliza conversas com múltiplos turnos, humano no loop e tolerância a falhas

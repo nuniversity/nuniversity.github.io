@@ -53,10 +53,10 @@ export default async function HomePage({
   ])
 
   const stats: StatItem[] = [
-    { label: 'Courses', value: formatCount(courses.length), icon: 'BookOpen' },
-    { label: 'Tools', value: formatCount(tools.length), icon: 'Wrench' },
-    { label: 'Games', value: formatCount(games.length), icon: 'GamepadIcon' },
-    { label: 'Resources', value: formatCount(resources.length), icon: 'Library' },
+    { label: dict.stats?.labels?.courses || 'Courses', value: formatCount(courses.length), icon: 'BookOpen' },
+    { label: dict.stats?.labels?.tools || 'Tools', value: formatCount(tools.length), icon: 'Wrench' },
+    { label: dict.stats?.labels?.games || 'Games', value: formatCount(games.length), icon: 'GamepadIcon' },
+    { label: dict.stats?.labels?.resources || 'Resources', value: formatCount(resources.length), icon: 'Library' },
   ]
 
   return (

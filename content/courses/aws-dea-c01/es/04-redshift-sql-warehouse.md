@@ -638,7 +638,7 @@ flowchart TD
     Q["Consulta nueva"] --> S{"Short query acceleration: duración predicha <= 20 s (o dinámica)? ¿CTAS o solo lectura?"}
     S -->|Sí| S1["Service class 14 - se salta la cola"]
     S -->|No| W{"Modo de WLM"}
-    W -->|Automático (por defecto)| W1["Service classes 100-107 - AWS asigna ranuras y memoria; query priority + QMR aplican"]
+    W -->|"Automático (por defecto)"| W1["Service classes 100-107 - AWS asigna ranuras y memoria; query priority + QMR aplican"]
     W -->|Manual| W2["Tus colas: % de memoria + concurrencia 1-50, 50 ranuras en total, se recomienda <= 15"]
     W1 --> QM{"QMR cada 10 s: log / hop / abort / change priority"}
     W2 --> QM

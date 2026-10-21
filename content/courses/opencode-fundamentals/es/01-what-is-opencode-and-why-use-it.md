@@ -131,7 +131,7 @@ OpenCode es ideal para:
 
 ---
 
-## Practice Questions
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {

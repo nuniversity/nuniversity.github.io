@@ -141,7 +141,7 @@ sequenceDiagram
     C->>T: GetObject on the restored copy (an ordinary GET)
     Note over T: Temp copy bills at ~$0.023/GB-mo for the ENTIRE<br/>duration you chose, whether or not you read it
     T-->>C: Object bytes
-    Note over T: Temp copy expires; the archived original stays<br/>GLACIER / DEEP_ARCHIVE forever - HeadObject never changes class
+    Note over T: Temp copy expires, the archived original stays<br/>GLACIER / DEEP_ARCHIVE forever - HeadObject never changes class
 ```
 
 AWS's own pricing page states the consequence: "When you restore an archive, you are paying for both the archive… and a copy… restored temporarily (charged at the S3 Standard storage rate for a duration of time you choose)" (accessed Oct 2026). So the full restore bill has **four components**: archive storage (still accruing) + the tier's per-GB retrieval fee + the per-1,000 restore-request fee + **Standard storage on the temporary copy for the whole chosen duration**. The archived original never changes class — `HeadObject` keeps reporting `GLACIER` or `DEEP_ARCHIVE` after a successful restore.

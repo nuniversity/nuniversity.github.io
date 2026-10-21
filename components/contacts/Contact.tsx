@@ -142,11 +142,11 @@ export default function Contact({ lang, dict }: ContactProps) {
                   <div>
                     <p className="font-semibold text-gray-900 dark:text-white">Instagram</p>
                     <a
-                      href="https://www.instagram.com/thenuniversity/"
+                      href="https://www.instagram.com/nuniversityedu/"
                       target="_blank"
                       className="text-blue-600 dark:text-blue-400 hover:underline"
                     >
-                      @thenuniversity
+                      @nuniversityedu
                     </a>
                   </div>
                 </motion.div>

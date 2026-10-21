@@ -8,18 +8,18 @@ difficulty: "advanced"
 
 # Observabilidad con LangSmith
 
-LangSmith is LangChain's observability platform for LLM applications. It provides tracing, debugging, evaluation, and monitoring for LangGraph applications in production.
+LangSmith es la plataforma de observabilidad de LangChain para aplicaciones con LLM. Ofrece trazas, depuración, evaluación y monitoreo para aplicaciones LangGraph en producción.
 
 ---
 
 ## Por qué Importa la Observabilidad
 
-LangGraph agents are complex systems with multiple LLM calls, tool executions, and conditional routing. Without proper observability:
+Los agentes LangGraph son sistemas complejos con múltiples llamadas a LLM, ejecuciones de herramientas y enrutamiento condicional. Sin observabilidad adecuada:
 
-- You can't debug why an agent made a wrong decision
-- You can't measure token usage or latency
-- You can't identify failing patterns
-- You can't improve performance systematically
+- No puedes depurar por qué un agente tomó una decisión incorrecta
+- No puedes medir el consumo de tokens ni la latencia
+- No puedes identificar patrones que fallan
+- No puedes mejorar el rendimiento de forma sistemática
 
 ---
 
@@ -34,7 +34,7 @@ os.environ["LANGCHAIN_API_KEY"] = "ls_..."
 os.environ["LANGCHAIN_PROJECT"] = "my-agent-production"
 ```
 
-Or via `.env` file:
+O a través del archivo `.env`:
 
 ```bash
 LANGCHAIN_TRACING_V2=true
@@ -43,14 +43,14 @@ LANGCHAIN_PROJECT=my-agent-production
 LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 ```
 
-[!NOTA]
-Once tracing is enabled, all LangChain and LangGraph calls are automatically traced. Each graph invocation creates a **run tree** showing every node, LLM call, and tool execution.
+[!NOTE]
+Una vez activado el rastreo, todas las llamadas de LangChain y LangGraph se rastrean automáticamente. Cada invocación de grafo crea un **árbol de ejecución (run tree)** que muestra cada nodo, cada llamada a LLM y cada ejecución de herramienta.
 
 ---
 
 ## Estructura del Árbol de Ejecución
 
-A LangGraph invocation creates a hierarchical trace:
+Una invocación de LangGraph crea una traza jerárquica:
 
 ```
 Root Run (graph invocation)
@@ -63,9 +63,9 @@ Root Run (graph invocation)
 └── [END]
 ```
 
-Each node and internal call is a separate **run** with its own:
-- Input/output values
-- Start/end timestamps
+Cada nodo y cada llamada interna son una **ejecución (run)** separada, con su propio:
+- Valores de entrada/salida
+- Marcas de tiempo de inicio/fin
 - Token counts
 - Error information
 - Metadata
@@ -89,13 +89,13 @@ def node_with_metadata(state: State) -> dict:
     return {"response": response.content}
 ```
 
-Custom metadata makes filtering and searching traces much more powerful.
+Los metadatos personalizados hacen que filtrar y buscar en las trazas sea mucho más potente.
 
 ---
 
 ## Etiquetado y Enmascaramiento
 
-Add tags to runs for filtering:
+Añade etiquetas a las ejecuciones para filtrar:
 
 ```python
 from langchain_core.tracers.context import tracing_v2_enabled
@@ -108,7 +108,7 @@ with tracing_v2_enabled(
     result = app.invoke(input_data)
 ```
 
-Mask sensitive data:
+Enmascara datos sensibles:
 
 ```python
 from langchain_core.tracers import LangChainTracer
@@ -121,14 +121,14 @@ tracer = LangChainTracer(
 )
 ```
 
-[!ADVERTENCIA]
-Be careful with sensitive data. Use `hide_inputs=True` for PII-heavy applications, or implement a custom masking function.
+[!WARNING]
+Ten cuidado con los datos sensibles. Usa `hide_inputs=True` en aplicaciones con muchos PII, o implementa una función de enmascaramiento personalizada.
 
 ---
 
 ## Depuración con LangSmith
 
-### Viewing Traces
+### Visualizando trazas
 
 ```
 LangSmith Dashboard
@@ -142,7 +142,7 @@ LangSmith Dashboard
 │       └── Feedback / Annotations
 ```
 
-### Finding Problematic Runs
+### Encontrando ejecuciones problemáticas
 
 ```python
 from langsmith import Client
@@ -164,7 +164,7 @@ for run in runs:
 
 ## Feedback y Anotación
 
-Collect feedback from users or annotate runs for evaluation:
+Recopila comentarios de los usuarios o anota ejecuciones para evaluar:
 
 ```python
 from langsmith import Client
@@ -192,7 +192,7 @@ client.create_feedback(
 
 ## Evaluación
 
-Define evaluators to automatically score runs:
+Define evaluadores para puntuar ejecuciones automáticamente:
 
 ```python
 from langsmith.evaluation import evaluate, StringEvaluator
@@ -214,25 +214,25 @@ results = evaluate(
 )
 ```
 
-[!ÉXITO]
-Automated evaluation lets you track performance over time, catch regressions, and compare different agent versions.
+[!SUCCESS]
+La evaluación automatizada te permite seguir el rendimiento a lo largo del tiempo, detectar regresiones y comparar distintas versiones del agente.
 
 ---
 
 ## Monitoreo de Rendimiento
 
-### Key Métricas
+### Métricas clave
 
 | Métrica | Qué mide | Objetivo |
 | :--- | :--- | :--- |
-| **Latency P50** | Median response time | < 5s |
-| **Latency P95** | Slowest 5% of responses | < 15s |
-| **Token Usage** | Tokens consumed per run | Varies |
-| **Error Rate** | Percentage of failed runs | < 1% |
-| **Costo Per Run** | API cost per invocation | Budget-dependent |
-| **User Rating** | Average feedback score | > 4.0 / 5.0 |
+| **Latencia P50** | Tiempo medio de respuesta | < 5s |
+| **Latencia P95** | 5% más lentas de las respuestas | < 15s |
+| **Consumo de tokens** | Tokens consumidos por ejecución | Varía |
+| **Tasa de error** | Porcentaje de ejecuciones fallidas | < 1% |
+| **Coste por ejecución** | Coste de la API por invocación | Dependiente del presupuesto |
+| **Calificación del usuario** | Puntuación media de comentarios | > 4.0 / 5.0 |
 
-### Setting Up Monitors
+### Configurando Monitores
 
 ```python
 from langsmith import Client
@@ -299,7 +299,7 @@ def monitored_node(state: State, config: dict) -> dict:
 
 ---
 
-## Preguntas Prácticas
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {
@@ -448,13 +448,13 @@ def monitored_node(state: State, config: dict) -> dict:
 
 ---
 
-[!ÉXITO]
+[!SUCCESS]
 ### Conclusiones Clave
-- LangSmith provides automatic tracing of all LangGraph executions
-- Run trees show hierarchical execution: graph → nodes → LLM/tool calls
-- Custom metadata and tags enable powerful filtering and search
-- Feedback and annotation collect user ratings for evaluation
-- Automated evaluation scores outputs against test datasets
-- Monitors alert on error rate, latency, and other metrics
-- A/B compare experiments to validate improvements
-- Mask sensitive data with hide_inputs or custom callbacks
+- LangSmith ofrece trazado automático de todas las ejecuciones de LangGraph
+- Los árboles de ejecución muestran la ejecución jerárquica: grafo → nodos → llamadas a LLM/herramientas
+- Los metadatos y etiquetas personalizados permiten filtrado y búsqueda potentes
+- Los comentarios y la anotación recogen valoraciones de los usuarios para evaluar
+- La evaluación automatizada puntuó las salidas frente a conjuntos de datos de prueba
+- Los monitores alertan sobre la tasa de error, la latencia y otras métricas
+- Compara experimentos A/B para validar mejoras
+- Enmascara datos sensibles con hide_inputs o callbacks personalizados

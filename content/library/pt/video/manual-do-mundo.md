@@ -3,7 +3,6 @@ id: manual-do-mundo
 title: "Manual do Mundo - Maior Canal de Ciências em Português"
 description: "O maior canal de ciências e engenharia em língua portuguesa do mundo com 20,2 MILHÕES de inscritos. Experiências científicas, engenharia, curiosidades, física, química, tecnologia e muito mais. Inclui recorde mundial do Guinness para maior demonstração científica do mundo."
 url: "https://youtube.com/@manualdomundo"
-thumbnail: "https://i.ytimg.com/vi/w7PYV1Ff18A/maxresdefault.jpg"
 author: "Iberê Thenório & Mari Fulfaro"
 category: "Physics"
 difficulty: "all"

@@ -3,7 +3,6 @@ id: redalyc
 title: "Redalyc - 500+ Revistas Científicas da América Latina"
 description: "Rede de Revistas Científicas da América Latina e Caribe, Espanha e Portugal. Mais de 500 revistas acadêmicas de qualidade em língua portuguesa e espanhola. Especialmente forte em ciências sociais, humanidades e áreas aplicadas."
 url: "https://www.redalyc.org"
-thumbnail: "https://www.redalyc.org/redalyc/images/redalyc_32.png"
 author: "Universidade Autónoma do Estado do México (UAEM)"
 category: "Open Access Research"
 difficulty: "advanced"

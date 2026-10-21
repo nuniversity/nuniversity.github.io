@@ -197,7 +197,7 @@ Hello, World!
 ```mermaid
 flowchart TD
     A[hello.py file] --> B[Python Interpreter]
-    B --> C[Reads: print"Hello, World!"]
+    B --> C["Reads: print#quot;Hello, World!#quot;"]
     C --> D[Executes print function]
     D --> E[Displays: Hello, World!]
     E --> F[Program ends]

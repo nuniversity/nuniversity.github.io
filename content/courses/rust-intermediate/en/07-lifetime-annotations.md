@@ -75,11 +75,11 @@ fn longest_with_announcement<'a, 'b>(
 ```
 
 > [!SUCCESS]
-| Pattern | Meaning |
-|---------|---------|
-| `<'a>(x: &'a str) -> &'a str` | Output lives as long as input |
-| `<'a, 'b>(x: &'a str, _: &'b str) -> &'a str` | Output tied to first input |
-| `<'a>(_: &str, y: &'a str) -> &'a str` | Output tied to second input |
+> | Pattern | Meaning |
+> |---------|---------|
+> | `<'a>(x: &'a str) -> &'a str` | Output lives as long as input |
+> | `<'a, 'b>(x: &'a str, _: &'b str) -> &'a str` | Output tied to first input |
+> | `<'a>(_: &str, y: &'a str) -> &'a str` | Output tied to second input |
 
 ## Lifetime Annotations in Structs
 

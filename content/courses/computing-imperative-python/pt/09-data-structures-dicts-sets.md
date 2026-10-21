@@ -195,7 +195,7 @@ print(f"Quadrados: {quadrados}")  # {1, 4, 9, 16, 25}
 
 ```mermaid
 flowchart LR
-    A[Operações com Conjuntos] --> B[União |]
+    A[Operações com Conjuntos] --> B["União |"]
     A --> C[Interseção &]
     A --> D[Diferença -]
     A --> E[Diferença Simétrica ^]

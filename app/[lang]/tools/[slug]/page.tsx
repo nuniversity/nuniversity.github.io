@@ -74,13 +74,16 @@ export async function generateStaticParams() {
   const langs: Locale[] = ['en', 'pt', 'es']
   const params = []
 
+  const slugs = new Set<string>()
   for (const lang of langs) {
-    const tools = await getAllTools(lang)
-    for (const tool of tools) {
-      params.push({
-        lang,
-        slug: tool.slug,
-      })
+    for (const tool of await getAllTools(lang)) {
+      slugs.add(tool.slug)
+    }
+  }
+
+  for (const lang of langs) {
+    for (const slug of Array.from(slugs)) {
+      params.push({ lang, slug })
     }
   }
 

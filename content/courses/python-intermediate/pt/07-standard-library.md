@@ -293,14 +293,14 @@ print(product)  # 120
 ```
 
 > [!SUCCESS]
-| Módulo | Melhor Para |
-|--------|-------------|
-| `os` | Interação com SO (variáveis de ambiente, processo, sistema de arquivos) |
-| `sys` | Runtime Python (versão, path, argv, saída) |
-| `re` | Correspondência e extração de padrões de texto |
-| `collections` | Tipos especializados de dict/list/tuple |
-| `itertools` | Álgebra de iteradores (ferramentas combinatórias preguiçosas) |
-| `functools` | Manipulação de funções (cache, partial, reduce) |
+> | Módulo | Melhor Para |
+> |--------|-------------|
+> | `os` | Interação com SO (variáveis de ambiente, processo, sistema de arquivos) |
+> | `sys` | Runtime Python (versão, path, argv, saída) |
+> | `re` | Correspondência e extração de padrões de texto |
+> | `collections` | Tipos especializados de dict/list/tuple |
+> | `itertools` | Álgebra de iteradores (ferramentas combinatórias preguiçosas) |
+> | `functools` | Manipulação de funções (cache, partial, reduce) |
 
 ## Mundo Real: Analisador de Arquivos de Log
 

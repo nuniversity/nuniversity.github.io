@@ -1,0 +1,19 @@
+{
+  "name": "validate-roadmap",
+  "version": "1.0.0",
+  "description": "Validates roadmap Markdown files",
+  "type": "hook",
+  "event": "file.write",
+  "pattern": "content/roadmaps/**/*.md",
+  "script": "scripts/validate_roadmap.py",
+  "blocking": true,
+  "exit_codes": {
+    "0": "pass",
+    "1": "non-blocking warning",
+    "2": "blocking error"
+  },
+  "dependencies": [],
+  "environment": {
+    "OPENCODE_FILE_PATH": "Path to the roadmap Markdown file being validated"
+  }
+}

@@ -42,14 +42,14 @@ fn main() {
 ```
 
 > [!NOTE]
-| Operation | Returns | Panics? | Cost |
-|-----------|---------|---------|------|
-| `vec[i]` | `&T` | Yes (OOB) | O(1) |
-| `vec.get(i)` | `Option<&T>` | No | O(1) |
-| `vec.push(x)` | `()` | No (may realloc) | O(1) amortized |
-| `vec.pop()` | `Option<T>` | No | O(1) |
-| `vec.insert(i, x)` | `()` | Yes (OOB) | O(n) |
-| `vec.remove(i)` | `T` | Yes (OOB) | O(n) |
+> | Operation | Returns | Panics? | Cost |
+> |-----------|---------|---------|------|
+> | `vec[i]` | `&T` | Yes (OOB) | O(1) |
+> | `vec.get(i)` | `Option<&T>` | No | O(1) |
+> | `vec.push(x)` | `()` | No (may realloc) | O(1) amortized |
+> | `vec.pop()` | `Option<T>` | No | O(1) |
+> | `vec.insert(i, x)` | `()` | Yes (OOB) | O(n) |
+> | `vec.remove(i)` | `T` | Yes (OOB) | O(n) |
 
 ### Iterating
 

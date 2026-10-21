@@ -25,6 +25,10 @@ When activated, follow these steps:
    ```bash
    OPENCODE_FILE_PATH=<path-to-file> python scripts/validate_mermaid.py
    ```
+   `validate_mermaid.py` delegates to `scripts/parse_check.mjs` (real `mermaid.parse` via the installed mermaid + jsdom) when Node is available, and falls back to static heuristics otherwise. For a repo-wide sweep (used by CI):
+   ```bash
+   node scripts/parse_check.mjs --quiet "content/courses/**/*.md" "docs/**/*.md"
+   ```
 4. **Apply best practices** — Ensure meaningful labels, appropriate direction (`TD`/`LR`), subgraphs for grouping, and accessible styling.
 5. **Troubleshoot broken diagrams** — If a diagram fails to render, check Common Pitfalls below and fix syntax errors.
 6. **Reference examples** — See `examples/diagram_types.md` for working examples of each diagram type.

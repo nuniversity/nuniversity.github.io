@@ -3,7 +3,6 @@ id: casa-do-codigo
 title: "Casa do Código - Livros Técnicos em Português"
 description: "Principal editora brasileira especializada em livros de programação e tecnologia. Alguns títulos gratuitos, muitos com excelentes preços. Conteúdo em português de alta qualidade sobre Python, JavaScript, Ruby, PHP, Java, C#, Android, iOS, DevOps, Cloud, Data Science, Machine Learning e mais."
 url: "https://www.casadocodigo.com.br"
-thumbnail: "https://www.casadocodigo.com.br/assets/images/casacodigo.svg"
 author: "Casa do Código (Alura)"
 category: "Software Engineering"
 difficulty: "all"

@@ -68,12 +68,12 @@ ORDER BY event_time;
 ```
 
 > [!NOTE]
-| UNION | UNION ALL |
-|-------|-----------|
-| Remove duplicatas | Preserva duplicatas |
-| Ordena internamente (dedup) | Apenas anexa |
-| Mais lento em conjuntos grandes | Mais rápido — sem overhead de ordenação |
-| Use quando quiser linhas distintas | Use quando duplicatas são aceitáveis ou desejadas |
+> | UNION | UNION ALL |
+> |-------|-----------|
+> | Remove duplicatas | Preserva duplicatas |
+> | Ordena internamente (dedup) | Apenas anexa |
+> | Mais lento em conjuntos grandes | Mais rápido — sem overhead de ordenação |
+> | Use quando quiser linhas distintas | Use quando duplicatas são aceitáveis ou desejadas |
 
 ### UNION vs UNION ALL: Desempenho
 

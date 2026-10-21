@@ -158,11 +158,11 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Feature | `thread::spawn` | `thread::scope` |
-|---------|-----------------|-----------------|
-| Captures | Must be `'static` | Can borrow locally |
-| Auto-join | No | Yes (at scope end) |
-| Return values | Via JoinHandle | Via spawned handle |
+> | Feature | `thread::spawn` | `thread::scope` |
+> |---------|-----------------|-----------------|
+> | Captures | Must be `'static` | Can borrow locally |
+> | Auto-join | No | Yes (at scope end) |
+> | Return values | Via JoinHandle | Via spawned handle |
 
 ## Thread Communication — Basic Patterns
 
@@ -241,14 +241,14 @@ fn main() {
 ```
 
 > [!WARNING]
-| Type | Send? | Sync? | Reason |
-|------|-------|-------|--------|
-| <code>Rc&lt;T&gt;</code> | No | No | Non-atomic ref counting |
-| <code>Arc&lt;T&gt;</code> | Yes | Yes | Atomic ref counting |
-| <code>Cell&lt;T&gt;</code> | Yes | No | Interior mutability, no sync |
-| <code>RefCell&lt;T&gt;</code> | Yes | No | Interior mutability, no sync |
-| <code>Mutex&lt;T&gt;</code> | Yes | Yes | Provides Sync |
-| `AtomicBool` | Yes | Yes | Atomic operations |
+> | Type | Send? | Sync? | Reason |
+> |------|-------|-------|--------|
+> | <code>Rc&lt;T&gt;</code> | No | No | Non-atomic ref counting |
+> | <code>Arc&lt;T&gt;</code> | Yes | Yes | Atomic ref counting |
+> | <code>Cell&lt;T&gt;</code> | Yes | No | Interior mutability, no sync |
+> | <code>RefCell&lt;T&gt;</code> | Yes | No | Interior mutability, no sync |
+> | <code>Mutex&lt;T&gt;</code> | Yes | Yes | Provides Sync |
+> | `AtomicBool` | Yes | Yes | Atomic operations |
 
 ## Thread-Local Storage
 

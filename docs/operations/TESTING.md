@@ -6,11 +6,13 @@ Add a complete suite of unit tests and integration tests using **Vitest**, **@te
 
 ## Current State
 
-- **Vitest** configured with jsdom environment, `@/` path alias, v8 coverage
-- **src/test-setup.ts** imports `@testing-library/jest-dom/vitest`
+- **Vitest** configured with jsdom environment, `@/` path alias, v8 coverage; `passWithNoTests` removed (a run with zero suites now fails)
 - **Husky v9** pre-commit hook runs `lint-staged`
 - **lint-staged** runs `vitest related --run` then `eslint --fix` on staged `.ts/.tsx`
-- **13 initial tests** covering `lib/i18n/config.ts` and `lib/i18n/get-dictionary.ts` — all passing
+- **683 vitest tests** in 5 suites (Phase 1, 2026-10-20): `tests/i18n/dict-parity.test.ts` (419 dict keys × en/pt/es), `tests/courses/data-integrity.test.ts` (49 courses / 138 locale dirs / 1,298 lessons), `tests/library/link-check.test.ts` (59 resources), `tests/components/question-block.test.tsx`, `tests/components/language-switcher.test.tsx` — all passing via `npm test`
+- **436 pytest tests** (Python harness, Phase 1): `tests/` + `.opencode/skills` suites incl. `validate_course` parametrized over all 49 courses — all passing via `uv run --no-sync pytest` (1 skipped, 1 xfailed; coverage `--cov=.opencode` = 81.49% ≥ `fail_under = 80`)
+- **CI blocks on both**: `.github/workflows/nextjs.yml` runs ESLint → pytest → vitest → build, plus content gates (all-49 course structure, 28 lesson-gate pairs, games/library/roadmap/tools validators, dict parity, mermaid, callouts)
+- Component-test note: with `jsx: "preserve"`, `.tsx` tests need `vi.stubGlobal('React', React)` (esbuild classic runtime) — see the two component suites for the pattern
 
 ---
 
@@ -212,14 +214,16 @@ git commit
 
 ## CI Integration
 
-Add a test step to `.github/workflows/nextjs.yml`:
+Shipped in Phase 1 — `.github/workflows/nextjs.yml` runs, in order (after `npm ci`):
 
 ```yaml
-- name: Run tests
-  run: npx vitest run
+- name: Lint (ESLint)          # npm run lint — 0 warnings, CI-blocking
+- name: Python tests (pytest harness)   # uv run --no-sync pytest
+- name: Run tests              # vitest run (683)
+- name: Build with Next.js     # next build — type-checks, ignoreBuildErrors removed
 ```
 
-Position: between `npm ci` and the build step.
+All three are blocking; content-validation gates run before them (see workflow for the full list).
 
 ---
 
@@ -233,12 +237,14 @@ src/
     next-navigation.ts
   test-setup.ts                   ← Already exists
 lib/
-  i18n/__tests__/                 ← Already exists
-  roadmaps/__tests__/             ← Phase 1
-  courses/__tests__/              ← Phase 1
-  tools/__tests__/                ← Phase 1
-  games/__tests__/                ← Phase 1
-  library/__tests__/              ← Phase 1
+  i18n/__tests__/                 ← (stale; i18n suites live in tests/i18n/ as of Phase 1)
+tests/                            ← Phase 1 (root-level suites)
+  courses/data-integrity.test.ts
+  i18n/dict-parity.test.ts
+  library/link-check.test.ts
+  components/question-block.test.tsx
+  components/language-switcher.test.tsx
+  test_opencode_courses.py        ← pytest (49-course parametrized)
 components/
   roadmaps/__tests__/             ← Phase 2
   tools/__tests__/                ← Phase 3

@@ -379,7 +379,7 @@ class TransferService:
 ```
 
 > [!TIP]
-| > Los Servicios de Dominio deben ser **sin estado**. No mantienen estado mutable propio. Sus dependencias (repositorios, otros servicios) se inyectan a través del constructor. Las operaciones que realizan son la razón de su existencia.
+> Los Servicios de Dominio deben ser **sin estado**. No mantienen estado mutable propio. Sus dependencias (repositorios, otros servicios) se inyectan a través del constructor. Las operaciones que realizan son la razón de su existencia.
 
 ### Ejemplo de Servicio de Dominio: detección de fraude
 
@@ -555,7 +555,7 @@ graph TD
     AUS --> AGG
     AUS --> REP
     AUS --> DS
-    REP <|-- REPI
+    REPI -->|implementa| REP
     REPI --> DB
     DS --> AGG
     DS --> REP

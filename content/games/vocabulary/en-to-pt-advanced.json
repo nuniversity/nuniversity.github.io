@@ -406,12 +406,6 @@
       "context": "knowledge"
     },
     {
-      "id": "117",
-      "source": "Confidence",
-      "target": "Confiança",
-      "context": "assurance"
-    },
-    {
       "id": "118",
       "source": "Community",
       "target": "Comunidade",
@@ -422,12 +416,6 @@
       "source": "Stability",
       "target": "Estabilidade",
       "context": "balance"
-    },
-    {
-      "id": "120",
-      "source": "Creativity",
-      "target": "Criatividade",
-      "context": "originality"
     },
     {
       "id": "121",
@@ -712,12 +700,6 @@
       "context": "insight"
     },
     {
-      "id": "168",
-      "source": "Observation",
-      "target": "Observação",
-      "context": "attention"
-    },
-    {
       "id": "169",
       "source": "Interpretation",
       "target": "Interpretação",
@@ -728,12 +710,6 @@
       "source": "Tolerance",
       "target": "Tolerância",
       "context": "acceptance"
-    },
-    {
-      "id": "171",
-      "source": "Integrity",
-      "target": "Integridade",
-      "context": "honesty"
     },
     {
       "id": "172",
@@ -848,12 +824,6 @@
       "source": "Evaluation",
       "target": "Avaliação",
       "context": "assessment"
-    },
-    {
-      "id": "191",
-      "source": "Perception",
-      "target": "Percepção",
-      "context": "understanding"
     },
     {
       "id": "192",
@@ -1096,12 +1066,6 @@
       "context": "understanding"
     },
     {
-      "id": "232",
-      "source": "Perspective",
-      "target": "Perspectiva",
-      "context": "viewpoint"
-    },
-    {
       "id": "233",
       "source": "Insight",
       "target": "Percepção profunda",
@@ -1168,12 +1132,6 @@
       "context": "verification"
     },
     {
-      "id": "244",
-      "source": "Framework",
-      "target": "Estrutura",
-      "context": "system"
-    },
-    {
       "id": "245",
       "source": "Consistency",
       "target": "Consistência",
@@ -1196,12 +1154,6 @@
       "source": "Relevance",
       "target": "Relevância",
       "context": "importance"
-    },
-    {
-      "id": "249",
-      "source": "Precision",
-      "target": "Precisão",
-      "context": "accuracy"
     },
     {
       "id": "250",

@@ -1,5 +1,5 @@
 ---
-title: "Gobernanza y Mejores Prácticas"
+title: "Gobernanza y Mejores Prácticas para ONGs"
 description: "Explore los principios de gobernanza de organizaciones no gubernamentales, funciones del consejo director, responsabilidades fiduciarias, composición ideal y mejores prácticas para una gobernanza eficaz."
 order: 11
 difficulty: "intermediario"
@@ -148,12 +148,12 @@ Una composición saludable de consejo tipicamente incluye:
   6. Nuevos negocios / decisiones
   7. Asuntos pendientes
 
-### Quórum y Voting
+### Quórum y Votación
 - **Quórum**: Número mínimo de miembros necesario para validar decisiones (común: mayoría simple o 1/3 del consejo)
-- **Voting**: Decisiones generalmente por mayoría de votos de los presentes; estatuto puede exigir supermayoría para ciertas decisiones
-- **Voting por escrito**: Permitido en algunas jurisdicciones entre reuniones, si estatuto permite
+- **Votación**: Decisiones generalmente por mayoría de votos de los presentes; el estatuto puede exigir supermayoría para ciertas decisiones
+- **Votación por escrito**: Permitido en algunas jurisdicciones entre reuniones, si el estatuto lo permite
 
-### Minutes (Ata de las Reuniones)
+### Minutas (Acta de las Reuniones)
 - **Registrar decisiones**, no transcripción de conversaciones
 - **Incluir**: Pauta, votantes, resultados de votación, principales discusiones, action items con responsables y plazos
 - **Almacenamiento**: Al menos 7 años (recomendado para protección legal y cumplimiento)
@@ -165,19 +165,19 @@ Una composición saludable de consejo tipicamente incluye:
 
 ### Comités Comunes
 
-| Comitê | Função Principal | Membros Tipicamente |
+| Comité | Función Principal | Miembros Típicos |
 |---|---|---|
-| **Financeiro e de Auditoria** | Supervisão financeira, revisão de relatórios, seleção de auditora externa | Membro financeiro (tesoureiro), especialista independente, diretor executivo (frequentemente sem voto) |
-| **Nominating/ Governança** | Desenvolvimento de composição do conselho, avaliação de desempenho, planejamento de sucessão | Presidente do conselho, membros experientes |
-| **Captação de Recursos e Relações com Doadores** | Desenvolver estratégia de captação, identificar potenciais doadores, eventos de relacionamento | Membros com redes fortes, experiencia em vendas/Marketing |
-| **Programas e Impacto** | Avaliar eficácia dos programas, métricas de impacto, qualidade de entrega | Membros com expertise setorial, representantes de beneficiários |
-| **Risco e Conformidade** | Monitorar riscos legais/operacionais, garantir conformidade regulatória | Membros com expertise em direito/risk management |
+| **Financiero y de Auditoría** | Supervisión financiera, revisión de informes, selección de la auditora externa | Miembro financiero (tesorero), especialista independiente, director ejecutivo (frecuentemente sin voto) |
+| **Nominación/Gobernanza** | Desarrollo de la composición del consejo, evaluación del desempeño, planificación de la sucesión | Presidente del consejo, miembros experimentados |
+| **Captación de Recursos y Relación con Donantes** | Desarrollar la estrategia de captación, identificar donantes potenciales, eventos de relacionamiento | Miembros con redes sólidas, experiencia en ventas/marketing |
+| **Programas e Impacto** | Evaluar la eficacia de los programas, métricas de impacto, calidad de la entrega | Miembros con experiencia sectorial, representantes de los beneficiarios |
+| **Riesgo y Cumplimiento** | Monitorear riesgos legales/operativos, garantizar el cumplimiento regulatorio | Miembros con experiencia en derecho/gestión de riesgos |
 
-### Buenas Práticas de Comitês
-- **Relatar ao conselho completo**: Cada comitê apresenta recomendações/relatórios nas reuniões do conselho
-- **Membros designados**: Membros del consejo sirven en comitês (no funcionarios, a menos designados)
-- **Charter escrito**: Cada comitê tiene carta (charter) definendo propósito, composición, poderes, frecuencia de reunión
-- **Limite de comitês**: Miembros no deben servir en tantos comitès que comprometan su eficacia en el consejo general
+### Buenas Prácticas de Comités
+- **Reportar al consejo completo**: Cada comité presenta recomendaciones/informes en las reuniones del consejo
+- **Miembros designados**: Los miembros del consejo sirven en comités (no funcionarios, a menos que sean designados)
+- **Carta (charter) escrita**: Cada comité tiene una carta (charter) que define propósito, composición, poderes y frecuencia de reunión
+- **Límite de comités**: Los miembros no deben servir en tantos comités que comprometan su eficacia en el consejo general
 
 ---
 
@@ -335,7 +335,7 @@ Preguntas sobre este tópico frecuentemente testan:
 **Q5.** ¿Cuál de los siguientes NO es un comité común del consejo de ONG?
 
 - A) Financiero y de Auditoría
-- B) Captación de Recursos y Relaciones con Doadores
+- B) Captación de Recursos y Relación con Donantes
 - C) Programas e Impacto
 - D) Marketing y Ventas
 

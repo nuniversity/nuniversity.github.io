@@ -379,7 +379,7 @@ class TransferService:
 ```
 
 > [!TIP]
-| > Domain Services should be **stateless**. They hold no mutable state of their own. Their dependencies (repositories, other services) are injected through the constructor. The operations they perform are the reason they exist.
+> Domain Services should be **stateless**. They hold no mutable state of their own. Their dependencies (repositories, other services) are injected through the constructor. The operations they perform are the reason they exist.
 
 ### Domain Service Example: Fraud Detection
 
@@ -555,7 +555,7 @@ graph TD
     AUS --> AGG
     AUS --> REP
     AUS --> DS
-    REP <|-- REPI
+    REPI -->|implements| REP
     REPI --> DB
     DS --> AGG
     DS --> REP

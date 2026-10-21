@@ -1,20 +1,29 @@
 #!/usr/bin/env python3
 """Validate Mermaid.js diagram syntax in Markdown files.
 
-Non-blocking hook: exit 0 = pass, exit 1 = warning.
+Prefers ground-truth `mermaid.parse` (Node + installed mermaid/jsdom) via the
+companion script `parse_check.mjs`; falls back to static heuristics when the
+Node toolchain is unavailable. Heuristic warnings are suppressed when the real
+parser succeeds (the parser is authoritative), which eliminates the old
+false-positive `end`/bracket noise.
 
 Environment Variables:
     OPENCODE_FILE_PATH: Path to the Markdown file being validated
 
 Exit Codes:
     0 - Validation passed or no diagrams found
-    1 - Non-blocking warning (syntax issues detected)
+    1 - Non-blocking warning (real parser failed, or heuristics in fallback mode)
 """
 
 import os
 import re
+import shutil
+import subprocess
 import sys
 from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[4]
+PARSE_CHECK = Path(__file__).resolve().parent / "parse_check.mjs"
 
 DIAGRAM_TYPES = {
     "flowchart",
@@ -86,7 +95,7 @@ def extract_mermaid_blocks(content: str) -> list[dict]:
 
 
 def validate_block(block: dict) -> list[str]:
-    """Validate a single Mermaid block for common issues."""
+    """Validate a single Mermaid block for common issues (static heuristics)."""
     errors = []
     content = block["content"]
     lines = content.split("\n")
@@ -127,6 +136,41 @@ def validate_block(block: dict) -> list[str]:
     return errors
 
 
+def real_parse(file_path: Path) -> tuple[bool, list[str]]:
+    """Run the ground-truth parser.
+
+    Returns (ran, errors). ran=False means the toolchain is unavailable
+    (caller should fall back to heuristics). ran=True with empty errors means
+    every block parsed.
+    """
+    node = shutil.which("node")
+    if not node or not PARSE_CHECK.exists():
+        return False, []
+    if not (REPO_ROOT / "node_modules" / "mermaid").exists():
+        return False, []
+    try:
+        proc = subprocess.run(
+            [node, str(PARSE_CHECK), "--quiet", str(file_path)],
+            capture_output=True,
+            text=True,
+            timeout=180,
+            cwd=str(REPO_ROOT),
+        )
+    except Exception:
+        return False, []
+    if proc.returncode == 0:
+        return True, []
+    if proc.returncode == 1:
+        details = [
+            line.strip()
+            for line in (proc.stdout + proc.stderr).splitlines()
+            if line.strip() and not line.startswith("---")
+        ]
+        return True, details
+    # rc=2: tooling error (jsdom/mermaid import failed, no files matched, ...)
+    return False, []
+
+
 def main() -> int:
     file_path = os.environ.get("OPENCODE_FILE_PATH", "")
     if not file_path:
@@ -145,6 +189,17 @@ def main() -> int:
     if not blocks:
         return 0
 
+    ran, parse_errors = real_parse(path)
+    if ran:
+        if parse_errors:
+            for err in parse_errors:
+                print(f"MERMAID WARNING: {err}", file=sys.stderr)
+            return 1
+        # Real parser is authoritative: suppress heuristic noise (e.g. the
+        # "end" rule fired on ~150 blocks that parse fine).
+        return 0
+
+    # Fallback: static heuristics (no Node/mermaid toolchain available).
     all_errors = []
     for block in blocks:
         errors = validate_block(block)

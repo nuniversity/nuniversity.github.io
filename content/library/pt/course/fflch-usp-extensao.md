@@ -3,7 +3,6 @@ id: fflch-usp-extensao
 title: "FFLCH-USP Cursos de Extensão - Humanas Completo"
 description: "Cursos gratuitos de extensão da Faculdade de Filosofia, Letras e Ciências Humanas da USP. Centenas de cursos por semestre em História, Sociologia, Antropologia, Psicologia/Psicanálise, Filosofia, Ciência Política, Geografia, Letras, Artes. 7.000+ vagas, 87 cursos online semestrais, certificado USP com 75% de frequência."
 url: "https://sce.fflch.usp.br/"
-thumbnail: "https://www5.usp.br/wp-content/uploads/sites/947/2019/09/logo-marca-usp.jpg"
 author: "USP - Faculdade de Filosofia, Letras e Ciências Humanas (FFLCH)"
 category: "Humanities & Social Sciences"
 difficulty: "all"

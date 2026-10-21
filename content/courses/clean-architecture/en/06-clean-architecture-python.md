@@ -298,7 +298,7 @@ if __name__ == "__main__":
 ```mermaid
 flowchart TD
     subgraph Composition["Composition Root"]
-        CR[create_app()]
+        CR["create_app()"]
     end
     subgraph Instantiates["Creates"]
         ORepo[PostgresOrderRepository]

@@ -197,7 +197,7 @@ Olá, Mundo!
 ```mermaid
 flowchart TD
     A[Arquivo ola.py] --> B[Interpretador Python]
-    B --> C[Lê: print"Olá, Mundo!"]
+    B --> C["Lê: print#quot;Olá, Mundo!#quot;"]
     C --> D[Executa a função print]
     D --> E[Exibe: Olá, Mundo!]
     E --> F[Programa termina]

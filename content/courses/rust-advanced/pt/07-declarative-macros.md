@@ -242,11 +242,11 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Característica | Benefício | Problema |
-|---------|---------|---------|
-| Higiene | Sem captura acidental | Não pode acessar escopo do chamador |
-| `$crate` | Refere-se à crate definidora | Verboso |
-| Concatenação de `ident` | `concat_idents!` necessário | Instável |
+> | Característica | Benefício | Problema |
+> |---------|---------|---------|
+> | Higiene | Sem captura acidental | Não pode acessar escopo do chamador |
+> | `$crate` | Refere-se à crate definidora | Verboso |
+> | Concatenação de `ident` | `concat_idents!` necessário | Instável |
 
 ## Padrões Comuns de Macro
 

@@ -336,7 +336,7 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
                       alt={member.name}
                       width={200}
                       height={200}
-                      className="rounded-full object-cover"
+                      className="w-full h-full rounded-full object-cover"
                     />
                   </motion.div>
 

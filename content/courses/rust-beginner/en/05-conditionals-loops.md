@@ -44,11 +44,11 @@ fn main() {
 ```
 
 > [!NOTE]
-| Feature | Rust | C/Java |
-|---------|------|--------|
-| Parentheses | Optional | Required |
-| Expression | Yes (returns value) | Statement only |
-| Type checking | All arms must match | No such requirement |
+> | Feature | Rust | C/Java |
+> |---------|------|--------|
+> | Parentheses | Optional | Required |
+> | Expression | Yes (returns value) | Statement only |
+> | Type checking | All arms must match | No such requirement |
 
 ```rust
 fn main() {

@@ -366,7 +366,7 @@ flowchart TB
     subgraph AWS["Conta da AWS do cliente - substrato (L02)"]
         VPC["VPC: >=2 subnets privados /17-/26, AZs separadas<br/>conectabilidade segura de cluster - sem IPs públicos"]
         NAT["NAT gateway + VPC endpoints / PrivateLink"]
-        KB["Chaves KMS gerenciadas pelo cliente<br/>(bucket raiz, storage gerenciado, external locations)]
+        KB["Chaves KMS gerenciadas pelo cliente<br/>(bucket raiz, storage gerenciado, external locations)"]
         SL["Bucket de chegada do S3"]
         SD["Buckets de dados do S3: bronze / silver / gold<br/>(S3 Standard $0.023/GB-mo, lista us-east-1 de 2026-09-28)"]
         SR["Bucket workspace/raiz do S3 - apenas dados do sistema"]

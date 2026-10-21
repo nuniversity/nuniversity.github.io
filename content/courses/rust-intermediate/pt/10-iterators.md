@@ -146,18 +146,18 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Adaptador | Propósito | Exemplo |
-|---------|---------|---------|
-| `map` | Transformar | `iter.map(\|x\| x * 2)` |
-| `filter` | Manter correspondências | `iter.filter(\|x\| x > 0)` |
-| `filter_map` | Filtrar + transformar | `iter.filter_map(\|x\| x.parse().ok())` |
-| `flat_map` | Achatar aninhados | `iter.flat_map(\|x\| x.split())` |
-| `take` | Limitar | `iter.take(5)` |
-| `skip` | Pular primeiros N | `iter.skip(5)` |
-| `zip` | Parear | `a.iter().zip(b.iter())` |
-| `chain` | Concatenar | `a.iter().chain(b.iter())` |
-| `enumerate` | Adicionar índice | `iter.enumerate()` |
-| `step_by` | Pular passos | `iter.step_by(2)` |
+> | Adaptador | Propósito | Exemplo |
+> |---------|---------|---------|
+> | `map` | Transformar | `iter.map(\|x\| x * 2)` |
+> | `filter` | Manter correspondências | `iter.filter(\|x\| x > 0)` |
+> | `filter_map` | Filtrar + transformar | `iter.filter_map(\|x\| x.parse().ok())` |
+> | `flat_map` | Achatar aninhados | `iter.flat_map(\|x\| x.split())` |
+> | `take` | Limitar | `iter.take(5)` |
+> | `skip` | Pular primeiros N | `iter.skip(5)` |
+> | `zip` | Parear | `a.iter().zip(b.iter())` |
+> | `chain` | Concatenar | `a.iter().chain(b.iter())` |
+> | `enumerate` | Adicionar índice | `iter.enumerate()` |
+> | `step_by` | Pular passos | `iter.step_by(2)` |
 
 ## Trait IntoIterator
 

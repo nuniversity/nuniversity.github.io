@@ -155,13 +155,13 @@ Etapas que não dependem umas das outras podem rodar simultaneamente.
 
 ```mermaid
 flowchart TD
-    subgraph Sequencial (Antes)
+    subgraph Sequencial["Sequencial (Antes)"]
         A1[Escrever código] --> B1[Escrever testes]
         B1 --> C1[Escrever docs]
         C1 --> D1[Enviar PR]
     end
     
-    subgraph Paralelo (Depois)
+    subgraph Paralelo["Paralelo (Depois)"]
         A2[Escrever código] --> D2[Enviar PR]
         B2[Escrever testes] -.-> D2
         C2[Escrever docs] -.-> D2
@@ -221,7 +221,7 @@ Decisões complexas retardam processos. Simplifique:
 
 ```mermaid
 flowchart TD
-    subgraph Decisão Complexa (Antes)
+    subgraph Decisão Complexa["Decisão Complexa (Antes)"]
         A1[Receber solicitação] --> B1{Analisar tipo}
         B1 -->|Tipo A| C1{Verificar prioridade}
         B1 -->|Tipo B| D1{Verificar urgência}
@@ -234,7 +234,7 @@ flowchart TD
         E1 -->|Negado| H1[Rejeitar]
     end
     
-    subgraph Decisão Simplificada (Depois)
+    subgraph Decisão Simplificada["Decisão Simplificada (Depois)"]
         A2[Receber solicitação] --> B2{Pontuação de prioridade}
         B2 -->|Pontuação > 7| C2[Via rápida]
         B2 -->|Pontuação ≤ 7| D2[Via padrão]

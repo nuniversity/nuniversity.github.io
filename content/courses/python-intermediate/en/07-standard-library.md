@@ -293,14 +293,14 @@ print(product)  # 120
 ```
 
 > [!SUCCESS]
-| Module | Best For |
-|--------|----------|
-| `os` | OS interaction (env vars, process, filesystem) |
-| `sys` | Python runtime (version, path, argv, exit) |
-| `re` | Text pattern matching and extraction |
-| `collections` | Specialized dict/list/tuple types |
-| `itertools` | Iterator algebra (lazy combinatorial tools) |
-| `functools` | Function manipulation (cache, partial, reduce) |
+> | Module | Best For |
+> |--------|----------|
+> | `os` | OS interaction (env vars, process, filesystem) |
+> | `sys` | Python runtime (version, path, argv, exit) |
+> | `re` | Text pattern matching and extraction |
+> | `collections` | Specialized dict/list/tuple types |
+> | `itertools` | Iterator algebra (lazy combinatorial tools) |
+> | `functools` | Function manipulation (cache, partial, reduce) |
 
 ## Real-World: Log File Analyzer
 

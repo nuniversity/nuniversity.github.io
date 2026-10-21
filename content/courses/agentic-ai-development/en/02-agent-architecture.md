@@ -525,7 +525,7 @@ class ToolManager:
 | **Example** | Personal assistant | Multi-agent coding | Monitoring agent | Chatbot |
 
 > [!SUCCESS]
-| The agent loop (perceive → reason → plan → act → observe) is the universal pattern underlying all agent architectures. Master this loop, and you can implement any agent framework.
+> The agent loop (perceive → reason → plan → act → observe) is the universal pattern underlying all agent architectures. Master this loop, and you can implement any agent framework.
 
 ---
 

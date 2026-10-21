@@ -332,8 +332,8 @@ FIM ALGORITMO
 ```mermaid
 flowchart LR
     A[Entrada:\n1, 2, 3, 4, 5] --> B{Transformação\nou Filtro?}
-    B -->|Transformação\n(x2)| C[Saída:\n2, 4, 6, 8, 10]
-    B -->|Filtro\n(pares)| D[Saída:\n2, 4]
+    B -->|"Transformação\n(x2)"| C[Saída:\n2, 4, 6, 8, 10]
+    B -->|"Filtro\n(pares)"| D[Saída:\n2, 4]
     
     style A fill:#e1f5fe
     style C fill:#c8e6c9

@@ -480,7 +480,7 @@ Transparência cumprida com estrutura é argumento de venda; transparência impr
 
 ### 5.1 A diligência do financiador: o que eles abrem da sua entidade
 
-A seção 6.4 trata de você avaliar o parceiro. O movimento contrário é igualmente rotineiro — e costuma acontecer **sem aviso**, entre a reunião de alinhamento e a minuta. Uma empresa ou fundação tipicamente abre quatro gavetas:
+A seção 6.4 trata de você avaliar o parceiro. O movimento contrário é igualmente rotineiro — e costuma acontecer **sem aviso**, entre a reunião de alinhamento e a minuta. Uma empresa ou fundação tipicamente abre quatro pastas:
 
 1. **governança:** estatuto e alterações, composição do conselho e do conselho fiscal, ata de eleição, política de conflito de interesses e, quando existe, registro em cadastro público correspondente;
 2. **reputação e conformidade:** certidões, prestações de contas aprovadas (sem ressalva pendente), existência de sanção (art. 73), histórico de impugnação ou recurso, e — cada vez mais — a situação divulgada no **art. 11, parágrafo único, V** (situação da prestação de contas);
@@ -490,7 +490,7 @@ A seção 6.4 trata de você avaliar o parceiro. O movimento contrário é igual
 **Sinalizadores de risco que derrubam proposta boa:** metas sem parâmetro verificável; relatório de transparência desatualizado; prestações de contas com ressalva em aberto; dependência de uma única fonte acima do razoável; cláusula de uso de imagem sem base; e **ausência de plano para o pior cenário** (o que acontece com o serviço se o repasse atrasar ou a parceria terminar).
 
 > [!WARNING]
-> **Quem não tem evidência paga com desconto.** A Pesquisa Doação Brasil 2024 mostra **83%** dos doadores buscando informação antes de doar, **49%** já tendo desistido após notícia negativa e apenas **30%** considerando as ONGs confiáveis; o mesmo padrão aparece no financiamento institucional: quem chega sem painel de indicadores e sem prestação de contas aprovada entra na negociação **cede o preço**. Antecipe a diligência: mantenha a gaveta 1 a 4 sempre fechada e datada — é mais barato do que reconstruí-la sob prazo.
+> **Quem não tem evidência paga com desconto.** A Pesquisa Doação Brasil 2024 mostra **83%** dos doadores buscando informação antes de doar, **49%** já tendo desistido após notícia negativa e apenas **30%** considerando as ONGs confiáveis; o mesmo padrão aparece no financiamento institucional: quem chega sem painel de indicadores e sem prestação de contas aprovada entra na negociação **cede o preço**. Antecipe a diligência: mantenha as pastas 1 a 4 sempre fechadas e datadas — é mais barato do que reconstruí-las sob prazo.
 
 ---
 

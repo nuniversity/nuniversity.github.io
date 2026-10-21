@@ -5,9 +5,25 @@
       "description": "Master technology, engineering, and sciences through interactive courses, coding tools, and educational games. Start your learning journey today."
     },
     "about": {
-      "title": "About Us - Your Company Name",
+      "title": "About Us",
       "description": "Learn about our mission, values, and the team behind our success"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Get in touch with the NUniversity team — questions, partnerships, and community support."
+    },
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "The page you are looking for doesn't exist or has been moved."
     }
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "missing": "Requested path",
+    "go_home": "Go to Home",
+    "go_courses": "Browse Courses",
+    "more_links": "You can also explore our tools and games."
   },
   "about": {
     "hero": {
@@ -124,7 +140,13 @@
   "stats": {
     "title": "Join Our Growing",
     "titleHighlight": "Community",
-    "subtitle": "Thousands of learners trust NUniversity to advance their careers and knowledge."
+    "subtitle": "Thousands of learners trust NUniversity to advance their careers and knowledge.",
+    "labels": {
+      "courses": "Courses",
+      "tools": "Tools",
+      "games": "Games",
+      "resources": "Resources"
+    }
   },
   "contact": {
     "title": "Let's",
@@ -188,7 +210,8 @@
       "placeholder": "Enter your email",
       "button": "Subscribe",
       "successTitle": "You're subscribed!",
-      "successMessage": "Thanks for signing up. We'll keep you posted on new courses and tools."
+      "successMessage": "Thanks for signing up. We'll keep you posted on new courses and tools.",
+      "noSpam": "No spam. Unsubscribe anytime."
     },
     "copyright": "NUniversity: Empowering Minds, Shaping Futures.",
     "rights": "All rights reserved",
@@ -227,6 +250,7 @@
     "external_link": "Open External Link",
     "back_to_library": "Back to Library",
     "total_resources": "resources",
+    "showing": "Showing {shown} of {total} resources",
     "filter_by": "Filter by",
     "all_types": "All Types",
     "all_categories": "All Categories",
@@ -289,10 +313,10 @@
       "cloud_computing": "Cloud Computing",
       "artificial_intelligence": "Artificial Intelligence",
       "mathematics": "Mathematics and Statistics",
-      "uncategorized": "Sem Categoria"
+      "uncategorized": "Uncategorized"
     },
     "no_results": "No courses found.",
-    "no_courses": "no_courses",
+    "no_courses": "No courses found.",
     "explore": "Explore Course",
     "lesson": "Lesson",
     "lessons": "Lessons",
@@ -317,9 +341,18 @@
       "back_to_areas": "Back to Areas"
     },
     "total_courses": "courses",
+    "count": {
+      "course": "{n} course",
+      "courses": "{n} courses"
+    },
     "categories": "categories",
     "filter_by_difficulty": "Filter by difficulty",
     "all_levels": "All Levels",
+    "difficulty_labels": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
     "try_different_filters": "Try adjusting your filters",
     "check_back_soon": "Check back soon for new content",
     "clear_filters": "Clear Filters",
@@ -454,6 +487,7 @@
     "try_tool": "Try Tool",
     "total_tools": "tools",
     "categories_count": "categories",
+    "view_all": "View All Tools",
     "try_different_search": "Try a different search term",
     "check_back_soon": "Check back soon for new tools",
     "clear_search": "Clear Search",

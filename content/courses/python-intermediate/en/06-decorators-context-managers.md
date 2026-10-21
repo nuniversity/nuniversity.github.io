@@ -433,12 +433,12 @@ flowchart TD
 ```
 
 > [!SUCCESS]
-| Decorators | Context Managers |
-|------------|-----------------|
-| Modify/wrap functions | Manage resources |
-| Used with `@` syntax | Used with `with` syntax |
-| Commonly cross-cutting concerns (logging, auth, timing) | Resource lifecycle (files, locks, connections) |
-| Can be class-based or function-based | Can be class-based or generator-based |
+> | Decorators | Context Managers |
+> |------------|-----------------|
+> | Modify/wrap functions | Manage resources |
+> | Used with `@` syntax | Used with `with` syntax |
+> | Commonly cross-cutting concerns (logging, auth, timing) | Resource lifecycle (files, locks, connections) |
+> | Can be class-based or function-based | Can be class-based or generator-based |
 
 ## Practice Questions
 

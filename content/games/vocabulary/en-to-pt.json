@@ -724,12 +724,6 @@
       "context": "time"
     },
     {
-      "id": "120",
-      "source": "Morning",
-      "target": "Manhã",
-      "context": "time"
-    },
-    {
       "id": "121",
       "source": "Evening",
       "target": "Entardecer",
@@ -874,12 +868,6 @@
       "context": "places"
     },
     {
-      "id": "145",
-      "source": "Street",
-      "target": "Rua",
-      "context": "places"
-    },
-    {
       "id": "146",
       "source": "Store",
       "target": "Loja",
@@ -908,12 +896,6 @@
       "source": "Park",
       "target": "Parque",
       "context": "places"
-    },
-    {
-      "id": "151",
-      "source": "Mountain",
-      "target": "Montanha",
-      "context": "nature"
     },
     {
       "id": "152",
@@ -1594,12 +1576,6 @@
       "context": "places"
     },
     {
-      "id": "265",
-      "source": "Bridge",
-      "target": "Ponte",
-      "context": "places"
-    },
-    {
       "id": "266",
       "source": "Traffic",
       "target": "Trânsito",
@@ -1628,12 +1604,6 @@
       "source": "Boat",
       "target": "Barco",
       "context": "transport"
-    },
-    {
-      "id": "271",
-      "source": "Airport",
-      "target": "Aeroporto",
-      "context": "places"
     },
     {
       "id": "272",

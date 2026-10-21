@@ -399,11 +399,11 @@ print(duck.speed()) # Fast in air, Moderate in water
 ```
 
 > [!WARNING]
-| Armadilha | Solução |
-|-----------|---------|
-| Problema do diamante (mesmo método em múltiplos caminhos) | MRO lida com isso; use `super()` com cuidado |
-| Ordem de inicialização incerta | Cada `__init__` deve chamar `super().__init__()` |
-| Acoplamento forte | Prefira composição em vez de herança |
+> | Armadilha | Solução |
+> |-----------|---------|
+> | Problema do diamante (mesmo método em múltiplos caminhos) | MRO lida com isso; use `super()` com cuidado |
+> | Ordem de inicialização incerta | Cada `__init__` deve chamar `super().__init__()` |
+> | Acoplamento forte | Prefira composição em vez de herança |
 
 ## Composição em Vez de Herança
 

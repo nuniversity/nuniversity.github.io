@@ -112,12 +112,12 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Cenário | Permitido? | Porquê |
-|----------|----------|--------|
-| Múltiplos `&T` | Sim | Somente leitura, sem conflito |
-| Um `&mut T` | Sim | Acesso exclusivo de escrita |
-| `&T` + `&mut T` simultaneamente | Não | Poderia ler enquanto escreve |
-| Dois `&mut T` simultaneamente | Não | Dois escritores = data race |
+> | Cenário | Permitido? | Porquê |
+> |----------|----------|--------|
+> | Múltiplos `&T` | Sim | Somente leitura, sem conflito |
+> | Um `&mut T` | Sim | Acesso exclusivo de escrita |
+> | `&T` + `&mut T` simultaneamente | Não | Poderia ler enquanto escreve |
+> | Dois `&mut T` simultaneamente | Não | Dois escritores = data race |
 
 ## Referências Soltas
 

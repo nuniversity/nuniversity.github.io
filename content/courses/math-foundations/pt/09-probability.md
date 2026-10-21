@@ -388,7 +388,7 @@ E(X) = 0,005 × 300.000 = R$ 1.500. O prêmio de R$ 2.500 é maior que o valor e
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

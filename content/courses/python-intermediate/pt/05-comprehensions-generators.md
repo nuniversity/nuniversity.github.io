@@ -35,11 +35,11 @@ upper_words = [w.upper() for w in words]
 ```
 
 > [!NOTE]
-| Loop `for` Equivalente | Compreensão de Lista |
-|-----------------------|----------------------|
-| 5 linhas | 1 linha |
-| Acumulador mutável | Expressão funcional |
-| Mais lento (sobrecarga `.append`) | Mais rápido (backend C otimizado) |
+> | Loop `for` Equivalente | Compreensão de Lista |
+> |-----------------------|----------------------|
+> | 5 linhas | 1 linha |
+> | Acumulador mutável | Expressão funcional |
+> | Mais lento (sobrecarga `.append`) | Mais rápido (backend C otimizado) |
 
 ```python
 # Transformações complexas
@@ -94,12 +94,12 @@ print(unique_chars)  # {"h", "e", "l", "o", "w", "r", "d"}
 ```
 
 > [!SUCCESS]
-| Tipo de Compreensão | Sintaxe | Tipo de Saída |
-|--------------------|---------|--------------|
-| Lista | `[expr for x in iter]` | `list` |
-| Dicionário | `{k: v for x in iter}` | `dict` |
-| Conjunto | `{expr for x in iter}` | `set` |
-| Gerador | `(expr for x in iter)` | `generator` |
+> | Tipo de Compreensão | Sintaxe | Tipo de Saída |
+> |--------------------|---------|--------------|
+> | Lista | `[expr for x in iter]` | `list` |
+> | Dicionário | `{k: v for x in iter}` | `dict` |
+> | Conjunto | `{expr for x in iter}` | `set` |
+> | Gerador | `(expr for x in iter)` | `generator` |
 
 ## Funções Geradoras com `yield`
 
@@ -312,12 +312,12 @@ for user in paginate("https://api.example.com/users"):
 ```
 
 > [!SUCCESS]
-| Característica | Compreensão | Gerador |
-|---------------|-------------|---------|
-| Cria todos os itens imediatamente? | Sim | Não (preguiçoso) |
-| Uso de memória | O(n) | O(1) |
-| Reutilizável? | Sim | Não (uso único) |
-| Melhor para | Conjuntos pequeno-médios, acesso aleatório | Dados grandes/streaming, passagem única |
+> | Característica | Compreensão | Gerador |
+> |---------------|-------------|---------|
+> | Cria todos os itens imediatamente? | Sim | Não (preguiçoso) |
+> | Uso de memória | O(n) | O(1) |
+> | Reutilizável? | Sim | Não (uso único) |
+> | Melhor para | Conjuntos pequeno-médios, acesso aleatório | Dados grandes/streaming, passagem única |
 
 ## Perguntas de Prática
 

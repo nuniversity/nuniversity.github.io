@@ -17,10 +17,10 @@ A function is a named block of code that can be called (invoked) to perform a ta
 
 ```mermaid
 flowchart LR
-    A[Function Definition] --> B[def greet(name):]
-    B --> C[    return f'Hello, {name}!']
+    A[Function Definition] --> B["def greet(name):"]
+    B --> C["    return f'Hello, {name}!"]
     
-    D[Function Call] --> E[greet('Alice')]
+    D[Function Call] --> E["greet('Alice')"]
     E --> F[Result: 'Hello, Alice!']
     
     style A fill:#e1f5fe

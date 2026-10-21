@@ -257,11 +257,11 @@ strip = true           # Remover símbolos de debug (binário menor)
 ```
 
 > [!NOTE]
-| Configuração | Efeito |
-|--------------|--------|
-| `opt-level = "z"` | Otimizar para tamanho |
-| `lto = true` | Melhor otimização, linkedição mais lenta |
-| `strip = true` | Binários significativamente menores |
+> | Configuração | Efeito |
+> |--------------|--------|
+> | `opt-level = "z"` | Otimizar para tamanho |
+> | `lto = true` | Melhor otimização, linkedição mais lenta |
+> | `strip = true` | Binários significativamente menores |
 
 ## Perguntas de Prática
 

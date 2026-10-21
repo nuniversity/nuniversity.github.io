@@ -202,12 +202,12 @@ except BankError as e:
 ```
 
 > [!SUCCESS]
-| Regla | Por qué |
-|------|--------|
-| Hereda de `Exception`, no de `BaseException` | Evita capturar eventos de nivel de sistema |
-| Nombra excepciones personalizadas con sufijo `Error` | Convención de nomenclatura clara (ej.: `ValidationError`) |
-| Almacena contexto relevante como atributos | Permite manejo programático de errores |
-| Mantén la jerarquía de excepciones superficial | Fácil de capturar amplia o específicamente según sea necesario |
+> | Regla | Por qué |
+> |------|--------|
+> | Hereda de `Exception`, no de `BaseException` | Evita capturar eventos de nivel de sistema |
+> | Nombra excepciones personalizadas con sufijo `Error` | Convención de nomenclatura clara (ej.: `ValidationError`) |
+> | Almacena contexto relevante como atributos | Permite manejo programático de errores |
+> | Mantén la jerarquía de excepciones superficial | Fácil de capturar amplia o específicamente según sea necesario |
 
 ## Tipos Comunes de Excepción
 

@@ -101,12 +101,12 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Atributo | O Que Faz |
-|-----------|-------------|
-| `#[tokio::main]` | Envolve main com runtime Tokio |
-| `#[tokio::test]` | Executa teste no runtime Tokio |
-| `#[tokio::main(flavor = "current_thread")]` | Runtime single-threaded |
-| `#[tokio::main(worker_threads = 4)]` | Multi-threaded, 4 workers |
+> | Atributo | O Que Faz |
+> |-----------|-------------|
+> | `#[tokio::main]` | Envolve main com runtime Tokio |
+> | `#[tokio::test]` | Executa teste no runtime Tokio |
+> | `#[tokio::main(flavor = "current_thread")]` | Runtime single-threaded |
+> | `#[tokio::main(worker_threads = 4)]` | Multi-threaded, 4 workers |
 
 ## tokio::spawn — Tarefas Concorrentes
 
@@ -255,10 +255,10 @@ async fn main() {
 ```
 
 > [!WARNING]
-| Mutex | Segurado através de `.await`? | Motivo |
-|-------|----------------------|--------|
-| `std::sync::Mutex` | Não | Pode deadlock ou bloquear worker thread |
-| `tokio::sync::Mutex` | Sim | Consciente de async, libera tarefa enquanto espera |
+> | Mutex | Segurado através de `.await`? | Motivo |
+> |-------|----------------------|--------|
+> | `std::sync::Mutex` | Não | Pode deadlock ou bloquear worker thread |
+> | `tokio::sync::Mutex` | Sim | Consciente de async, libera tarefa enquanto espera |
 
 ## Cancelamento e Timeouts
 

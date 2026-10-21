@@ -122,12 +122,12 @@ EXPLAIN SELECT name, email FROM employees WHERE department_id = 5;
 ```
 
 > [!SUCCESS]
-| Scenario | Regular Index | Covering Index |
-|----------|--------------|----------------|
-| `SELECT *` | Must fetch heap | Must fetch heap |
-| `SELECT indexed_cols` | Heap fetch | Index-only |
-| Write performance | Slight overhead | More overhead |
-| Disk space | Less | More |
+> | Scenario | Regular Index | Covering Index |
+> |----------|--------------|----------------|
+> | `SELECT *` | Must fetch heap | Must fetch heap |
+> | `SELECT indexed_cols` | Heap fetch | Index-only |
+> | Write performance | Slight overhead | More overhead |
+> | Disk space | Less | More |
 
 Use `INCLUDE` for columns that are returned but not used in search/filter conditions.
 

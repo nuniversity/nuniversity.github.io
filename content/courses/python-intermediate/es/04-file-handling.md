@@ -157,10 +157,10 @@ with open("output.csv", "w", newline="", encoding="utf-8") as f:
 ```
 
 > [!NOTE]
-| Constructor | Cuándo Usar |
-|------------|-------------|
-| `csv.reader` / `csv.writer` | Listas simples, sin cabeceras |
-| `csv.DictReader` / `csv.DictWriter` | Columnas con nombre, cabeceras presentes |
+> | Constructor | Cuándo Usar |
+> |------------|-------------|
+> | `csv.reader` / `csv.writer` | Listas simples, sin cabeceras |
+> | `csv.DictReader` / `csv.DictWriter` | Columnas con nombre, cabeceras presentes |
 
 ### Dialectos CSV y Delimitadores Personalizados
 

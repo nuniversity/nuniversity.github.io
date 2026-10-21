@@ -243,7 +243,7 @@ flowchart TD
     D -->|"programmatic"| F["GetTableVersions + column-set diff -> CloudWatch alarm + SNS email"]
     E --> G{"Is the change wanted?"}
     G -->|Yes| H["Update consumers BEFORE they read v4"]
-    G -->|No|"Rollback = publish a NEW version identical to v3 (the current version cannot be deleted)"]
+    G -->|No| RB["Rollback = publish a NEW version identical to v3 (the current version cannot be deleted)"]
     H --> I["Prune history with DeleteTableVersion / SkipArchive=true"]
     F --> I
 ```

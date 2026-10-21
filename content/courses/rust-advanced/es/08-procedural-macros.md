@@ -254,11 +254,11 @@ let query = sql!("SELECT * FROM users WHERE id = 1");
 ```
 
 > [!SUCCESS]
-| Tipo de Macro | Úsalo Cuando |
-|------------|----------|
-| Derive | Necesites auto-implementar un trait |
-| Attribute | Necesites crear anotaciones personalizadas |
-| Function-like | Necesites procesar sintaxis arbitraria |
+> | Tipo de Macro | Úsalo Cuando |
+> |------------|----------|
+> | Derive | Necesites auto-implementar un trait |
+> | Attribute | Necesites crear anotaciones personalizadas |
+> | Function-like | Necesites procesar sintaxis arbitraria |
 
 ## El Ecosistema proc_macro, proc_macro2 y quote
 

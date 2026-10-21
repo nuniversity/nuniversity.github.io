@@ -156,6 +156,7 @@ const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
       if (fromUnit === 'celsius') celsius = input;
       else if (fromUnit === 'fahrenheit') celsius = (input - 32) * 5 / 9;
       else if (fromUnit === 'kelvin') celsius = input - 273.15;
+      else return '';
 
       if (toUnit === 'celsius') return celsius.toFixed(4);
       if (toUnit === 'fahrenheit') return (celsius * 9 / 5 + 32).toFixed(4);

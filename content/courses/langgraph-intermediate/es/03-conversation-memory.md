@@ -8,13 +8,13 @@ difficulty: "intermediate"
 
 # Memoria de Conversación
 
-Conversation memory is what enables a chatbot to remember what was said earlier in the conversation. LangGraph handles this naturally through persistent state and the `add_messages` reducer.
+La memoria de conversación es lo que permite al chatbot recordar lo que se dijo antes en la conversa. LangGraph lo maneja de forma natural mediante el estado persistente y el reductor `add_messages`.
 
 ---
 
 ## El Reductor add_messages
 
-LangGraph provides a built-in `add_messages` reducer specifically designed for conversation message lists:
+LangGraph proporciona un reductor `add_messages` integrado, diseñado específicamente para listas de mensajes de conversación:
 
 ```python
 from langgraph.graph import add_messages
@@ -26,11 +26,11 @@ class ConversationState(TypedDict):
     context: str
 ```
 
-Unlike `operator.add` (which blindly concatenates), `add_messages` is **smart**:
+A diferencia de `operator.add` (que simplemente concatena), `add_messages` es **inteligente**:
 
-1. Appends new messages to the list
-2. **Updates** existing messages if a message with the same ID is added
-3. Preserves message ordering
+1. Añade mensajes nuevos a la lista
+2. **Actualiza** los mensajes existentes si se añade un mensaje con el mismo ID
+3. Conserva el orden de los mensajes
 
 ```python
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
@@ -44,14 +44,14 @@ updates = [
 ]
 ```
 
-[!NOTA]
-The `add_messages` reducer is preferred over `operator.add` for message lists because it handles deduplication and in-place updates correctly.
+[!NOTE]
+El reductor `add_messages` se prefiere a `operator.add` para las listas de mensajes porque gestiona correctamente la deduplicación y las actualizaciones in situ.
 
 ---
 
 ## Agregando Mensajes al Estado
 
-There are two patterns for updating messages in state:
+Hay dos patrones para actualizar mensajes en el estado:
 
 ### Patrón 1: Anexar a la lista existente
 
@@ -72,8 +72,8 @@ def chat_node(state: ConversationState) -> dict:
     # Both patterns produce the same result with add_messages
 ```
 
-[!CONSEJO]
-Pattern 1 is more efficient — you only return the new messages rather than the entire list. The reducer handles the concatenation.
+[!TIP]
+El Patrón 1 es más eficiente: solo devuelves los mensajes nuevos en lugar de la lista completa. El reductor se encarga de la concatenación.
 
 ---
 
@@ -113,14 +113,14 @@ app.invoke({"messages": [HumanMessage("What's my name?")]}, session)
 # The bot remembers: "Your name is Alice"
 ```
 
-[!ÉXITO]
-With persistence + add_messages, the conversation history grows across invocations. The LLM receives the full history and maintains context.
+[!SUCCESS]
+Con persistencia + add_messages, el historial de conversación crece entre invocaciones. El LLM recibe el historial completo y mantiene el contexto.
 
 ---
 
 ## Recortando Historial de Conversación
 
-Conversation history can grow beyond the LLM's context window. Trim messages before sending to the LLM:
+El historial de conversación puede crecer más allá de la ventana de contexto del LLM. Trunca los mensajes antes de enviarlos al LLM:
 
 ```python
 from langchain_core.messages import trim_messages
@@ -165,14 +165,14 @@ def trim_to_token_limit(messages: list, max_tokens: int = 4000) -> list:
     return keep
 ```
 
-[!ADVERTENCIA]
-Trimming removes old context. The LLM will forget about early parts of the conversation. For very long conversations, use summary-based memory (Lesson 4).
+[!WARNING]
+El truncado elimina el contexto antiguo. El LLM olvidará las partes iniciales de la conversa. Para conversaciones muy largas, usa la memoria basada en resúmenes (Lección 4).
 
 ---
 
 ## Persistencia de Mensaje del Sistema
 
-Keep a system message at the start of the conversation:
+Mantén un mensaje de sistema al inicio de la conversación:
 
 ```python
 class ChatState(TypedDict):
@@ -195,7 +195,7 @@ def ensure_system_message(state: ChatState) -> dict:
 
 ## Extracción Estructurada de Memoria
 
-Extract and store structured information from conversations:
+Extrae y guarda información estructurada de las conversaciones:
 
 ```python
 from pydantic import BaseModel, Field
@@ -270,7 +270,7 @@ app.invoke({"messages": [HumanMessage("What do I love?")]}, session)
 
 ---
 
-## Preguntas Prácticas
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {
@@ -424,13 +424,13 @@ app.invoke({"messages": [HumanMessage("What do I love?")]}, session)
 
 ---
 
-[!ÉXITO]
+[!SUCCESS]
 ### Conclusiones Clave
-- `add_messages` is the smart reducer for conversation history — append, dedupe, update
-- Persistence + add_messages enables multi-turn conversation memory
-- Trim messages to stay within LLM context windows
-- Use `trim_messages()` with strategy "last" for simple truncation
-- Efficient pattern: return only new messages, let the reducer append
-- Message IDs enable in-place updates via add_messages
-- System message preservation requires explicit logic
-- For very long conversations, consider summary-based memory (Lesson 4)
+- `add_messages` es el reductor inteligente para el historial de conversación: añadir, deduplicar, actualizar
+- Persistencia + add_messages permite la memoria de conversación con varios turnos
+- Trunca los mensajes para mantenerte dentro de las ventanas de contexto del LLM
+- Usa `trim_messages()` con la estrategia "last" para un truncado sencillo
+- Patrón eficiente: devuelve solo los mensajes nuevos y deja que el reductor los añada
+- Los IDs de mensaje permiten actualizaciones in situ mediante add_messages
+- La conservación del mensaje de sistema requiere lógica explícita
+- Para conversaciones muy largas, considera la memoria basada en resúmenes (Lección 4)

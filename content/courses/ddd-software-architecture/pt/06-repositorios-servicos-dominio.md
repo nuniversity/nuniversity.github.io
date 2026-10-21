@@ -149,7 +149,7 @@ class RepositorioPedidoMemoria:
 ```
 
 > [!WARNING]
-| > Um Repositório não deve ser usado para consultas arbitrárias. Se você se pegar adicionando métodos de consulta para cada padrão de acesso a dados, está usando o Repositório de forma errada. O Repositório é para **recuperação de agregados**, não para relatórios ou exploração de dados.
+> Um Repositório não deve ser usado para consultas arbitrárias. Se você se pegar adicionando métodos de consulta para cada padrão de acesso a dados, está usando o Repositório de forma errada. O Repositório é para **recuperação de agregados**, não para relatórios ou exploração de dados.
 
 ## Serviços de Domínio
 
@@ -264,7 +264,7 @@ graph TD
     AUS --> AGG
     AUS --> REP
     AUS --> DS
-    REP <|-- REPI
+    REPI -->|implementa| REP
     REPI --> DB
     DS --> AGG
     DS --> REP

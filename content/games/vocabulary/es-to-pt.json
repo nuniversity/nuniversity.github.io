@@ -1285,15 +1285,6 @@
       "context": "objects"
     },
     {
-      "id": "155",
-      "source": "Río",
-      "target": "Rio",
-      "context": "nature",
-      "pronunciation": "RI-o",
-      "emoji": "🏞️",
-      "example": "El río es caudaloso."
-    },
-    {
       "id": "156",
       "source": "Lago",
       "target": "Lago",
@@ -2221,15 +2212,6 @@
       "context": "time"
     },
     {
-      "id": "282",
-      "source": "Reloj",
-      "target": "Relógio",
-      "context": "objects",
-      "pronunciation": "re-LOH",
-      "emoji": "🕰️",
-      "example": "Un reloj de pared."
-    },
-    {
       "id": "283",
       "source": "Computadora portátil",
       "target": "Computador portátil",
@@ -2857,15 +2839,6 @@
       "example": "El lago es cristalino."
     },
     {
-      "id": "361",
-      "source": "Río",
-      "target": "Rio",
-      "context": "nature",
-      "pronunciation": "RI-o",
-      "emoji": "🏞️",
-      "example": "El río es caudaloso."
-    },
-    {
       "id": "362",
       "source": "Océano",
       "target": "Oceano",
@@ -3145,15 +3118,6 @@
       "example": "La distancia es corta."
     },
     {
-      "id": "393",
-      "source": "Camino",
-      "target": "Caminho",
-      "context": "places",
-      "pronunciation": "ka-MI-no",
-      "emoji": "🛤️",
-      "example": "El camino es de tierra."
-    },
-    {
       "id": "394",
       "source": "Ruta",
       "target": "Rota",
@@ -3361,78 +3325,6 @@
       "example": "Está en el medio."
     },
     {
-      "id": "417",
-      "source": "Bueno",
-      "target": "Bom",
-      "context": "adjectives",
-      "pronunciation": "BWE-no",
-      "emoji": "👍",
-      "example": "El restaurante es bueno."
-    },
-    {
-      "id": "418",
-      "source": "Malo",
-      "target": "Mau",
-      "context": "adjectives",
-      "pronunciation": "MA-lo",
-      "emoji": "👎",
-      "example": "El tiempo está malo."
-    },
-    {
-      "id": "419",
-      "source": "Bonito",
-      "target": "Bonito",
-      "context": "adjectives",
-      "pronunciation": "bo-NI-to",
-      "emoji": "😍",
-      "example": "Qué bonito día."
-    },
-    {
-      "id": "420",
-      "source": "Feo",
-      "target": "Feio",
-      "context": "adjectives",
-      "pronunciation": "FE-o",
-      "emoji": "🤢",
-      "example": "Ese edificio es feo."
-    },
-    {
-      "id": "421",
-      "source": "Nuevo",
-      "target": "Novo",
-      "context": "adjectives",
-      "pronunciation": "NWE-vo",
-      "emoji": "✨",
-      "example": "Tengo un coche nuevo."
-    },
-    {
-      "id": "422",
-      "source": "Viejo",
-      "target": "Velho",
-      "context": "adjectives",
-      "pronunciation": "VIE-ho",
-      "emoji": "👴",
-      "example": "El edificio es viejo."
-    },
-    {
-      "id": "423",
-      "source": "Rápido",
-      "target": "Rápido",
-      "context": "adjectives",
-      "pronunciation": "RA-pi-do",
-      "emoji": "⚡",
-      "example": "El tren es rápido."
-    },
-    {
-      "id": "424",
-      "source": "Lento",
-      "target": "Lento",
-      "context": "adjectives",
-      "pronunciation": "LEN-to",
-      "emoji": "🐌",
-      "example": "La tortuga es lenta."
-    },
-    {
       "id": "425",
       "source": "Alto",
       "target": "Alto",
@@ -3458,33 +3350,6 @@
       "pronunciation": "LAR-go",
       "emoji": "📏",
       "example": "La película es larga."
-    },
-    {
-      "id": "428",
-      "source": "Corto",
-      "target": "Curto",
-      "context": "adjectives",
-      "pronunciation": "KOR-to",
-      "emoji": "✂️",
-      "example": "El pelo es corto."
-    },
-    {
-      "id": "429",
-      "source": "Grande",
-      "target": "Grande",
-      "context": "adjectives",
-      "pronunciation": "GRAN-de",
-      "emoji": "📏",
-      "example": "La casa es grande."
-    },
-    {
-      "id": "430",
-      "source": "Pequeño",
-      "target": "Pequeno",
-      "context": "adjectives",
-      "pronunciation": "pe-KE-ño",
-      "emoji": "📐",
-      "example": "El gato es pequeño."
     },
     {
       "id": "431",
@@ -3521,24 +3386,6 @@
       "pronunciation": "su-per-fisial",
       "emoji": "📐",
       "example": "Es una persona superficial."
-    },
-    {
-      "id": "435",
-      "source": "Fácil",
-      "target": "Fácil",
-      "context": "adjectives",
-      "pronunciation": "FA-sil",
-      "emoji": "✅",
-      "example": "El examen es fácil."
-    },
-    {
-      "id": "436",
-      "source": "Difícil",
-      "target": "Difícil",
-      "context": "adjectives",
-      "pronunciation": "di-FI-sil",
-      "emoji": "❌",
-      "example": "La tarea es difícil."
     },
     {
       "id": "437",
@@ -3629,24 +3476,6 @@
       "pronunciation": "LIM-pio",
       "emoji": "✨",
       "example": "La cocina está limpia."
-    },
-    {
-      "id": "447",
-      "source": "Caliente",
-      "target": "Quente",
-      "context": "adjectives",
-      "pronunciation": "ka-LIEN-te",
-      "emoji": "🔥",
-      "example": "El café está caliente."
-    },
-    {
-      "id": "448",
-      "source": "Frío",
-      "target": "Frio",
-      "context": "adjectives",
-      "pronunciation": "FRI-o",
-      "emoji": "❄️",
-      "example": "Hace mucho frío."
     },
     {
       "id": "449",
@@ -4117,24 +3946,6 @@
       "example": "Son iguales."
     },
     {
-      "id": "501",
-      "source": "Nunca",
-      "target": "Nunca",
-      "context": "adverbs",
-      "pronunciation": "NUN-ka",
-      "emoji": "🚫",
-      "example": "Nunca como carne."
-    },
-    {
-      "id": "502",
-      "source": "Siempre",
-      "target": "Sempre",
-      "context": "adverbs",
-      "pronunciation": "SIEM-pre",
-      "emoji": "🔄",
-      "example": "Siempre llego tarde."
-    },
-    {
       "id": "503",
       "source": "A veces",
       "target": "Às vezes",
@@ -4360,24 +4171,6 @@
       "example": "Solamente necesito esto."
     },
     {
-      "id": "528",
-      "source": "Aquí",
-      "target": "Aqui",
-      "context": "adverbs",
-      "pronunciation": "a-KI",
-      "emoji": "📍",
-      "example": "Estoy aquí."
-    },
-    {
-      "id": "529",
-      "source": "Allí",
-      "target": "Lá",
-      "context": "adverbs",
-      "pronunciation": "a-YI",
-      "emoji": "📍",
-      "example": "El baño está allí."
-    },
-    {
       "id": "530",
       "source": "Allá",
       "target": "Lá",
@@ -4394,42 +4187,6 @@
       "pronunciation": "a-KA",
       "emoji": "📍",
       "example": "Ven acá."
-    },
-    {
-      "id": "532",
-      "source": "Lejos",
-      "target": "Longe",
-      "context": "adverbs",
-      "pronunciation": "LE-hos",
-      "emoji": "📏",
-      "example": "El aeropuerto está lejos."
-    },
-    {
-      "id": "533",
-      "source": "Cerca",
-      "target": "Perto",
-      "context": "adverbs",
-      "pronunciation": "SER-ka",
-      "emoji": "📏",
-      "example": "La tienda está cerca."
-    },
-    {
-      "id": "534",
-      "source": "Arriba",
-      "target": "Cima",
-      "context": "adverbs",
-      "pronunciation": "a-RRI-ba",
-      "emoji": "⬆️",
-      "example": "Mira arriba."
-    },
-    {
-      "id": "535",
-      "source": "Abajo",
-      "target": "Baixo",
-      "context": "adverbs",
-      "pronunciation": "a-BA-ho",
-      "emoji": "⬇️",
-      "example": "El libro está abajo."
     },
     {
       "id": "536",
@@ -5890,15 +5647,6 @@
       "example": "La biblioteca tiene muchos libros."
     },
     {
-      "id": "698",
-      "source": "Parque",
-      "target": "Parque",
-      "context": "places",
-      "pronunciation": "PAR-ke",
-      "emoji": "🌳",
-      "example": "El parque es grande."
-    },
-    {
       "id": "699",
       "source": "Plaza de toros",
       "target": "Praça de touros",
@@ -6133,24 +5881,6 @@
       "example": "Voy a pagar con tarjeta."
     },
     {
-      "id": "725",
-      "source": "Comprar",
-      "target": "Comprar",
-      "context": "verbs",
-      "pronunciation": "kom-PRAR",
-      "emoji": "🛒",
-      "example": "Voy a comprar frutas."
-    },
-    {
-      "id": "726",
-      "source": "Vender",
-      "target": "Vender",
-      "context": "verbs",
-      "pronunciation": "ben-DER",
-      "emoji": "💰",
-      "example": "Vendo mi coche."
-    },
-    {
       "id": "727",
       "source": "Buscar",
       "target": "Procurar",
@@ -6158,15 +5888,6 @@
       "pronunciation": "bus-KAR",
       "emoji": "🔍",
       "example": "Busco mis llaves."
-    },
-    {
-      "id": "728",
-      "source": "Encontrar",
-      "target": "Encontrar",
-      "context": "verbs",
-      "pronunciation": "en-kon-TRAR",
-      "emoji": "✅",
-      "example": "Encontré lo que buscaba."
     },
     {
       "id": "729",

@@ -146,18 +146,18 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Adapter | Purpose | Example |
-|---------|---------|---------|
-| `map` | Transform | `iter.map(\|x\| x * 2)` |
-| `filter` | Keep matches | `iter.filter(\|x\| x > 0)` |
-| `filter_map` | Filter + transform | `iter.filter_map(\|x\| x.parse().ok())` |
-| `flat_map` | Flatten nested | `iter.flat_map(\|x\| x.split())` |
-| `take` | Limit | `iter.take(5)` |
-| `skip` | Skip first N | `iter.skip(5)` |
-| `zip` | Pair up | `a.iter().zip(b.iter())` |
-| `chain` | Concatenate | `a.iter().chain(b.iter())` |
-| `enumerate` | Add index | `iter.enumerate()` |
-| `step_by` | Skip steps | `iter.step_by(2)` |
+> | Adapter | Purpose | Example |
+> |---------|---------|---------|
+> | `map` | Transform | `iter.map(\|x\| x * 2)` |
+> | `filter` | Keep matches | `iter.filter(\|x\| x > 0)` |
+> | `filter_map` | Filter + transform | `iter.filter_map(\|x\| x.parse().ok())` |
+> | `flat_map` | Flatten nested | `iter.flat_map(\|x\| x.split())` |
+> | `take` | Limit | `iter.take(5)` |
+> | `skip` | Skip first N | `iter.skip(5)` |
+> | `zip` | Pair up | `a.iter().zip(b.iter())` |
+> | `chain` | Concatenate | `a.iter().chain(b.iter())` |
+> | `enumerate` | Add index | `iter.enumerate()` |
+> | `step_by` | Skip steps | `iter.step_by(2)` |
 
 ## IntoIterator Trait
 

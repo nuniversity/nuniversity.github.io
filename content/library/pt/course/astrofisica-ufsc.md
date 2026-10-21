@@ -3,7 +3,6 @@ id: astrofisica-ufsc
 title: "Astrofísica para Todos (UFSC) - Cosmologia, Quântica"
 description: "Cursos gratuitos de astrofísica e cosmologia da Universidade Federal de Santa Catarina. Astrofísica I (30h, nível médio), Física Quântica conceitual (sem matemática), Cosmologia I (nível graduação) com equações de Friedmann e Big Bang. Material gratuito; certificado opcional com isenção para baixa renda."
 url: "https://astrofisica.ufsc.br"
-thumbnail: "https://ufsc.br/wp-content/uploads/2020/04/logotipo-ufsc-colorido-300x184.png"
 author: "Universidade Federal de Santa Catarina (UFSC)"
 category: "Astronomy & Space Science"
 difficulty: "all"

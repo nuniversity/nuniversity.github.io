@@ -23,7 +23,7 @@ flowchart LR
     B -->|"Documento de requisitos\n(ambiguo)"| C[Líder técnico]
     C -->|"Especificación técnica\n(con pérdidas)"| D[Desarrollador]
     D -->|"Código\n(¿coincide?)"| E[Software]
-    A -.->|"Retroalimentación\n(costoso)" E
+    A -.->|"Retroalimentación\n(costoso)"| E
 
     style A fill:#c8e6c9
     style D fill:#ffccbc

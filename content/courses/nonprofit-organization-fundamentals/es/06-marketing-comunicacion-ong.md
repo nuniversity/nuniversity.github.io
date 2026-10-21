@@ -36,7 +36,7 @@ Las ONGs generalmente atienden a múltiples públicos-alvo, cada uno requiriendo
 | **Donantes** | Quieren impacto, transparencia, reconocimiento | Storytelling, reportes de impacto, eventos de agradecimiento |
 | **Voluntarios** | Quieren propósito, desarrollo de habilidades, conexión | Mensajes de misión, oportunidades de compromiso, programas de reconocimiento |
 | **Beneficiarios** | Quieren servicios, respeto, resultados medibles | Comunicación directa, bucles de retroalimentación, historias de cambio |
-| **Pares/Empresas** | Quieren visibilidad, responsabilidad social, compromiso de empleados | Parcerias corporativas, marketing related cause, oportunidades de voluntariado corporativo |
+| **Pares/Empresas** | Quieren visibilidad, responsabilidad social, compromiso de empleados | Asociaciones corporativas, marketing de causa relacionada, oportunidades de voluntariado corporativo |
 | **Formadores de Opinión/Media** | Quieren noticias interesantes, ángulos humanos, impacto social | Comunicados de prensa, eventos de media, historias humanizadas |
 | **Formadores de Políticas/Gobierno** | Quieren datos, evidencias, alineación con políticas | Datos de investigación, reportes de política, reuniones técnicas |
 
@@ -71,9 +71,9 @@ El **posicionamiento de marca** define cómo la organización quiere que su púb
 
 | Modelo | Descripción | Estrategias Clave |
 |---|---|---|
-| **Mes a Mes (Monthly giving)** | Doadores se comprometen a valores fijos mensuales | Débito automático, historias mensuales de impacto, "ser parte del equipo" |
+| **Mes a Mes (Monthly giving)** | Los donantes se comprometen a valores fijos mensuales | Débito automático, historias mensuales de impacto, "ser parte del equipo" |
 | **Campañas Pontuales** | Arrecadação para projetos/tempos definidos | Plazos, metas visuales, actualizaciones de progreso |
-| **Grandes Doaciones (Major Gifts)** | Doadores contribuyen valores substanciales | Relación personalizada, visitas, reportes de impacto personalizados |
+| **Grandes Donaciones (Major Gifts)** | Los donantes aportan valores sustanciales | Relación personalizada, visitas, reportes de impacto personalizados |
 | **Testamentos y Planificación Hereditaria** | Donaciones incluidas en testamentos | Información legal, conversaciones sensibles, alianzas con abogados |
 
 #### Funil de Capitación de Donantes Individuales
@@ -128,25 +128,25 @@ El **posicionamiento de marca** define cómo la organización quiere que su púb
 
 | Modelo | Descripción | Exemplos |
 |---|---|---|
-| **Cause-Related Marketing** | Empresa dona % de ventas a ONG | "10% deste produto beneficia X organização" |
-| **Employee Volunteering** | Funcionários voluntarian horas/skills | Dias de voluntariado corporativo, days de voluntariado com skills |
-| **Corporate Philanthropy** | Empresa faz doações independentes | Programas de matching gifts, fundações corporativas |
+| **Cause-Related Marketing** | La empresa dona un % de ventas a la ONG | "El 10% de este producto beneficia a X organización" |
+| **Employee Volunteering** | Los empleados voluntorean horas/habilidades | Jornadas de voluntariado corporativo, jornadas de voluntariado con habilidades |
+| **Corporate Philanthropy** | La empresa realiza donaciones independientes | Programas de matching gifts, fundaciones corporativas |
 | **Social Enterprise** | ONG y empresa crean negocio conjunto | Productos vendidos, lucros revertidos para misión |
 | **Co-branding Campaigns** | Marca y ONG crean campaña conjunta | Productos edición limitada, eventos conjuntos |
 
-#### Estrategia de Parceria Corporativa
+#### Estrategia de Asociación Corporativa
 
 1. **Identificar potenciales**: Empresas alineadas con causa/misión, historial de apoyo social
-2. **Pesquisar necessidades da empresa**: Qué buscan? Visibilidad? Compromiso de empleados? Impacto social?
+2. **Investigar las necesidades de la empresa**: ¿Qué buscan? ¿Visibilidad? ¿Compromiso de los empleados? ¿Impacto social?
 3. **Apresentar proposta de valor mútua**: Qué gana la ONG? Qué gana la empresa?
 4. **Desenvolver níveis de patrocínio**: Bronze, prata, ouro, platina com diferentes beneficios
 5. **Criar ativações**: Eventos, contenido, experiencias que engajem ambos os públicos
-6. **Medir e reportar**: Impacto tanto para ONG quanto para empresa (ROI, menções de mídia, engajamento)
+6. **Medir e reportar**: Impacto tanto para la ONG como para la empresa (ROI, menciones en medios, compromiso)
 
 #### Beneficios para Empresas (para proposition de valor)
 
 - **Responsabilidad Social Corporativa (RSC/CSR)**: Mejorar imagen, satisfacer expectativas de stakeholders
-- **Engajamento de Empleados**: Empleados orgullosos, retención, atracción de talentos
+- **Compromiso de los Empleados**: Empleados orgullosos, retención, atracción de talentos
 - **Relaciones Públicas**: Cobertura de mídia, eventos, conexión con comunidades
 - **Fidelización de Clientes**: Clientes prefieren marcas que apoyan causas
 - **Beneficios Fiscales**: Deductibilidad de contribuciones (en Brasil, hasta 2% del IR debido para persona jurídica)
@@ -173,11 +173,11 @@ El sitio web de la ONG es el **hub** de todas las actividades digitales. Element
 
 | Plataforma | Mejor Para | Frecuencia | Tipo de Contenido |
 |---|---|---|---|
-| **Facebook** | Doadores mais velhos, engajamento comunitario | 3-5x/semana | Historias, eventos, arrecadações, vídeos curtos |
-| **Instagram** | Público jovem, storytelling visual | 1-2x/día | Fotos, Reels, Stories, destaques de impacto |
-| **Twitter/X** | Jornalistas, formadores de opinião, atualizações em tempo real | 1-3x/día | Notícias, links, engajamento em tempo real |
-| **LinkedIn** | Parcerias corporativas, voluntários profissionais, recrutamento | 2-3x/semana | Notícias da organização, vagas, liderança de pensamento |
-| **YouTube** | Storytelling profundo, conteúdo de vídeo longo, tutoriais | 1-2x/mês | Documentários de projetos, testimonios, cobertura de eventos |
+| **Facebook** | Donantes de mayor edad, compromiso comunitario | 3-5x/semana | Historias, eventos, recaudaciones, videos cortos |
+| **Instagram** | Público joven, storytelling visual | 1-2x/día | Fotos, Reels, Stories, destacados de impacto |
+| **Twitter/X** | Periodistas, formadores de opinión, actualizaciones en tiempo real | 1-3x/día | Noticias, enlaces, compromiso en tiempo real |
+| **LinkedIn** | Asociaciones corporativas, voluntarios profesionales, reclutamiento | 2-3x/semana | Noticias de la organización, vacantes, liderazgo de pensamiento |
+| **YouTube** | Storytelling profundo, contenido de video largo, tutoriales | 1-2x/mes | Documentales de proyectos, testimonios, cobertura de eventos |
 
 #### Estrategia de Contenido
 
@@ -216,7 +216,7 @@ El sitio web de la ONG es el **hub** de todas las actividades digitales. Element
 |---|---|---|
 | **Taxa de conversión de site** | % de visitantes que donan o se inscrevem | 2-5% |
 | **Taxa de abertura de e-mail** | % que abrem newsletters | 20-25% |
-| **Engajamento em redes sociais** | Likes, shares, comments relative to followers | 1-3% engajamento |
+| **Compromiso en redes sociales** | Likes, compartidos, comentarios en relación con los seguidores | 1-3% de compromiso |
 | **Custo por aquisição de doador** | Quanto custa para conseguir um novo doador mensal | <$15-20 (varía por canal) |
 | **Valor de vida do doador (LTV)** | Total que um doador contribui ao longo do tempo | Varies widely |
 | **Crescimento de e-mail list** | Novos assinantes por mês | 100-500 dependiendo del tamaño |
@@ -388,6 +388,6 @@ Preguntas sobre este tópico frecuentemente testan:
 - A) Taxa de abertura de e-mail
 - B) Taxa de conversão de site
 - C) Custo por aquisição de doador
-- D) Engajamento em redes sociais
+- D) Compromiso en redes sociales
 
 ---

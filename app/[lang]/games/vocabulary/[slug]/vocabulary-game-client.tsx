@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, Trophy, RotateCcw, CheckCircle2, Clock, Star } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
@@ -36,20 +36,7 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
 
   const g = dict?.games ?? {}
 
-  useEffect(() => {
-    initializeGame()
-  }, [game, numPairs])
-
-  useEffect(() => {
-    if (startTime && !isComplete) {
-      const interval = setInterval(() => {
-        setElapsedTime(Math.floor((Date.now() - startTime) / 1000))
-      }, 1000)
-      return () => clearInterval(interval)
-    }
-  }, [startTime, isComplete])
-
-  function initializeGame() {
+  const initializeGame = useCallback(() => {
     const shuffledWords = [...game.words].sort(() => Math.random() - 0.5)
     const selectedWords = shuffledWords.slice(0, numPairs)
     setGameWords(selectedWords)
@@ -79,7 +66,26 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
     setStartTime(Date.now())
     setElapsedTime(0)
     setIsComplete(false)
-  }
+  }, [game, numPairs])
+
+  useEffect(() => {
+    initializeGame()
+  }, [initializeGame])
+
+  useEffect(() => {
+    if (startTime && !isComplete) {
+      const interval = setInterval(() => {
+        setElapsedTime(Math.floor((Date.now() - startTime) / 1000))
+      }, 1000)
+      return () => clearInterval(interval)
+    }
+  }, [startTime, isComplete])
+
+  useEffect(() => {
+    if (gameWords.length > 0 && matchedPairs.size >= gameWords.length) {
+      setIsComplete(true)
+    }
+  }, [matchedPairs, gameWords.length])
 
   function handleCardClick(card: Card) {
     if (card.isMatched || selectedCards.some(c => c.id === card.id)) return
@@ -102,7 +108,6 @@ export function VocabularyGameClient({ lang, game, dict }: VocabularyGameClientP
           setCards(prevCards => prevCards.map(c => c.wordId === first.wordId ? { ...c, isMatched: true } : c))
           setScore(prev => prev + 10)
           setSelectedCards([])
-          if (matchedPairs.size + 1 === numPairs) setIsComplete(true)
         }, 600)
       } else {
         setTimeout(() => setSelectedCards([]), 1000)

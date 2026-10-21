@@ -43,13 +43,13 @@ fn main() {
 ```
 
 > [!WARNING]
-| Situação | Deve Usar panic? | Alternativa Melhor |
-|-----------|-------------------|--------------------|
-| Índice de array fora dos limites | Sim (bug) | Use `.get()` para acesso seguro |
-| Entrada do usuário inválida | Não | Retorne `Result` |
-| Arquivo de configuração ausente | Talvez | Retorne `Result` ou use `expect` |
-| Timeout de rede | Não | Retorne `Result` |
-| Divisão por zero | Sim | Verifique antes de dividir |
+> | Situação | Deve Usar panic? | Alternativa Melhor |
+> |-----------|-------------------|--------------------|
+> | Índice de array fora dos limites | Sim (bug) | Use `.get()` para acesso seguro |
+> | Entrada do usuário inválida | Não | Retorne `Result` |
+> | Arquivo de configuração ausente | Talvez | Retorne `Result` ou use `expect` |
+> | Timeout de rede | Não | Retorne `Result` |
+> | Divisão por zero | Sim | Verifique antes de dividir |
 
 ### Mensagens de Panic Personalizadas
 
@@ -95,11 +95,11 @@ fn main() {
 ```
 
 > [!NOTE]
-| Método | Mensagem | Caso de Uso |
-|--------|---------|-------------|
-| `unwrap()` | Genérica (mostra o valor) | Protótipos rápidos |
-| `expect(msg)` | Personalizada + valor | Documentar suposições |
-| `unwrap_or(default)` | Nenhuma | Valor padrão seguro |
+> | Método | Mensagem | Caso de Uso |
+> |--------|---------|-------------|
+> | `unwrap()` | Genérica (mostra o valor) | Protótipos rápidos |
+> | `expect(msg)` | Personalizada + valor | Documentar suposições |
+> | `unwrap_or(default)` | Nenhuma | Valor padrão seguro |
 
 ## Propagação de Erros com ?
 
@@ -208,13 +208,13 @@ fn main() -> Result<()> {
 ```
 
 > [!NOTE]
-| Funcionalidade | `Box<dyn Error>` | `anyhow` |
-|---------|-------------------|----------|
-| Apagamento de tipo | Sim | Sim |
-| Anexar contexto | Manual | `.with_context()` |
-| Downcasting | Possível | Possível |
-| Popularidade | Stdlib | Padrão da comunidade |
-| Quando usar | Bibliotecas | Aplicações |
+> | Funcionalidade | `Box<dyn Error>` | `anyhow` |
+> |---------|-------------------|----------|
+> | Apagamento de tipo | Sim | Sim |
+> | Anexar contexto | Manual | `.with_context()` |
+> | Downcasting | Possível | Possível |
+> | Popularidade | Stdlib | Padrão da comunidade |
+> | Quando usar | Bibliotecas | Aplicações |
 
 ## thiserror — Tipos de Erro para Bibliotecas
 
@@ -251,11 +251,11 @@ fn process_data() -> Result<(), DataError> {
 ```
 
 > [!SUCCESS]
-| Crate | Propósito | Quando Usar |
-|-------|---------|-------------|
-| `anyhow` | Tratamento de erros em aplicações | Projetos binários, CLIs |
-| `thiserror` | Tipos de erro para bibliotecas | Crates de biblioteca |
-| Ambos | Definir tipos com thiserror, usar anyhow em apps | Projetos grandes |
+> | Crate | Propósito | Quando Usar |
+> |-------|---------|-------------|
+> | `anyhow` | Tratamento de erros em aplicações | Projetos binários, CLIs |
+> | `thiserror` | Tipos de erro para bibliotecas | Crates de biblioteca |
+> | Ambos | Definir tipos com thiserror, usar anyhow em apps | Projetos grandes |
 
 ## Panicar ou Não?
 

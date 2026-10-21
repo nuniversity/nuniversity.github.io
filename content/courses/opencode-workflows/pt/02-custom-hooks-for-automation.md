@@ -290,7 +290,7 @@ OPENCODE_FILE_PATH=test.md python .opencode/hooks/validate-frontmatter/scripts/h
 
 ---
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

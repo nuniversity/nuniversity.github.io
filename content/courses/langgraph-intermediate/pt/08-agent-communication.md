@@ -8,13 +8,13 @@ difficulty: "intermediate"
 
 # Comunicação e Supervisão entre Agentes
 
-In production multi-agent systems, agents need structured communication and a **supervisor** that coordinates their work. This lesson covers message protocols, supervisor patterns, and shared state coordination.
+Em sistemas multi-agente de produção, os agentes precisam de comunicação estruturada e de um **supervisor** que coordene o trabalho deles. Esta lição cobre protocolos de mensagens, padrões de supervisor e coordenação por estado compartilhado.
 
 ---
 
 ## Mensagens Estruturadas de Agente
 
-Use typed dictionaries for agent-to-agent messages:
+Use dicionários tipados para mensagens entre agentes:
 
 ```python
 from typing_extensions import TypedDict, Annotated
@@ -38,14 +38,14 @@ class SupervisorState(TypedDict):
     final_output: str
 ```
 
-[!NOTA]
-Structured messages with sender, recipient, and type fields enable sophisticated routing. Agents can target messages to specific recipients or broadcast to all.
+[!NOTE]
+Mensagens estruturadas com campos de remetente, destinatário e tipo permitem roteamento sofisticado. Os agentes podem enviar mensagens a destinatários específicos ou fazer broadcast para todos.
 
 ---
 
 ## O Padrão Supervisor
 
-A supervisor is a coordinator agent that decides which agent should work next:
+Um supervisor é um agente coordenador que decide qual agente deve trabalhar a seguir:
 
 ```python
 from langgraph.graph import StateGraph, START, END
@@ -114,8 +114,8 @@ def writer_agent(state: SupervisorState) -> dict:
     }]}
 ```
 
-[!SUCESSO]
-The supervisor acts as a **router** — it reads the conversation, decides the next step, and the graph routes execution accordingly.
+[!SUCCESS]
+O supervisor atua como um **roteador** — ele lê a conversa, decide o próximo passo e o grafo roteia a execução de acordo.
 
 ---
 
@@ -159,7 +159,7 @@ START → Supervisor → (researcher → Supervisor → writer → Supervisor �
 
 ## Mensagens de Transmissão e Direcionadas
 
-### Broadcast (to all agents)
+### Broadcast (para todos os agentes)
 
 ```python
 def supervisor_broadcast(state: SupervisorState) -> dict:
@@ -173,7 +173,7 @@ def supervisor_broadcast(state: SupervisorState) -> dict:
     }]}
 ```
 
-### Alvoed (to specific agent)
+### Direcionado (para agente específico)
 
 ```python
 def researcher_requests_clarification(state: SupervisorState) -> dict:
@@ -191,7 +191,7 @@ def researcher_requests_clarification(state: SupervisorState) -> dict:
 
 ## Seleção Dinâmica de Agentes
 
-Let the supervisor pick the right agent based on the task:
+Deixe o supervisor escolher o agente certo com base na tarefa:
 
 ```python
 def dynamic_supervisor(state: SupervisorState) -> dict:
@@ -224,7 +224,7 @@ Respond with: agent_name or 'complete'."""
 
 ## Multi-Agente Sequencial com Transferência
 
-Agents can hand off to each other explicitly:
+Os agentes podem se passar a tarefa explicitamente:
 
 ```python
 def analyst_agent(state: SupervisorState) -> dict:
@@ -312,13 +312,13 @@ app = builder.compile(checkpointer=MemorySaver())
 
 | Pattern | Descrição | Use Case |
 | :--- | :--- | :--- |
-| **Shared state** | All agents read/write the same state dict | Simple coordination, few agents |
-| **Structured messages** | Agents write to a shared message list | Complex multi-agent, history tracking |
-| **Subgraph state** | Each agent has its own internal state, communicates via messages (next lesson) | Hierarchical agents, encapsulation |
+| **Estado compartilhado** | Todos os agentes leem/escrevem no mesmo dicionário de estado | Coordenação simples, poucos agentes |
+| **Mensagens estruturadas** | Os agentes escrevem em uma lista de mensagens compartilhada | Multi-agente complexo, acompanhamento do histórico |
+| **Estado de subgrafo** | Cada agente tem seu próprio estado interno e se comunica por meio de mensagens (próxima lição) | Agentes hierárquicos, encapsulamento |
 
 ---
 
-## Perguntas Práticas
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {
@@ -482,12 +482,12 @@ app = builder.compile(checkpointer=MemorySaver())
 
 ---
 
-[!SUCESSO]
+[!SUCCESS]
 ### Principais Conclusões
-- Supervisor nodes coordinate multi-agent work by deciding the next step
-- Structured messages (sender, recipient, content, type) enable sophisticated communication
-- The supervisor loop pattern: Supervisor → Agent → Supervisor → Agent → ... → END
-- Conditional edges route based on the supervisor's decision
-- Broadcast messages go to all agents; targeted messages go to specific recipients
-- Messages accumulate in state for full conversation history
-- Dynamic agent selection lets the supervisor choose the right agent for each step
+- Nós de supervisor coordenam o trabalho multi-agente decidindo o próximo passo
+- Mensagens estruturadas (remetente, destinatário, conteúdo, tipo) permitem comunicação sofisticada
+- O padrão de laço do supervisor: Supervisor → Agente → Supervisor → Agente → ... → END
+- Arestas condicionais roteiam com base na decisão do supervisor
+- Mensagens de broadcast vão para todos os agentes; mensagens direcionadas vão para destinatários específicos
+- As mensagens se acumulam no estado para o histórico completo da conversação
+- A seleção dinâmica de agentes permite ao supervisor escolher o agente certo em cada passo

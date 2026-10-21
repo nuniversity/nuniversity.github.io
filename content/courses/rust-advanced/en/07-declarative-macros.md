@@ -242,11 +242,11 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Feature | Benefit | Pitfall |
-|---------|---------|---------|
-| Hygiene | No accidental capture | Can't access caller's scope |
-| `$crate` | Refers to defining crate | Verbose |
-| `ident` concatenation | `concat_idents!` needed | Unstable |
+> | Feature | Benefit | Pitfall |
+> |---------|---------|---------|
+> | Hygiene | No accidental capture | Can't access caller's scope |
+> | `$crate` | Refers to defining crate | Verbose |
+> | `ident` concatenation | `concat_idents!` needed | Unstable |
 
 ## Common Macro Patterns
 

@@ -63,11 +63,11 @@ fn coincidir_char(c: char) -> &'static str {
 ```
 
 > [!NOTE]
-| Patrón de Rango | Sintaxis | Ejemplo |
-|-----------------|---------|---------|
-| Inclusivo | `..=` | `1..=5` coincide con 1,2,3,4,5 |
-| Semi-abierto | `..` | `1..5` coincide con 1,2,3,4 (no válido en match, solo en for) |
-| Abierto | `..` | `..=5` o `5..` (en match, usa guardias) |
+> | Patrón de Rango | Sintaxis | Ejemplo |
+> |-----------------|---------|---------|
+> | Inclusivo | `..=` | `1..=5` coincide con 1,2,3,4,5 |
+> | Semi-abierto | `..` | `1..5` coincide con 1,2,3,4 (no válido en match, solo en for) |
+> | Abierto | `..` | `..=5` o `5..` (en match, usa guardias) |
 
 ### Patrones de Desestructuración
 

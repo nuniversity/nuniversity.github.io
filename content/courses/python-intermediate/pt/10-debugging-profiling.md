@@ -76,11 +76,11 @@ logger.warning("Shows in both")           # Nível WARNING → ambos
 ```
 
 > [!NOTE]
-| Padrão | Melhor Prática |
-|--------|----------------|
-| `logger = logging.getLogger(__name__)` | Loggers por módulo com nomes hierárquicos |
-| `logging.exception("...")` | Registra no nível ERROR E inclui traceback |
-| `logger.debug(f"x = {x}")` | Evite f-strings em debug — use formatação `%s` para avaliação preguiçosa |
+> | Padrão | Melhor Prática |
+> |--------|----------------|
+> | `logger = logging.getLogger(__name__)` | Loggers por módulo com nomes hierárquicos |
+> | `logging.exception("...")` | Registra no nível ERROR E inclui traceback |
+> | `logger.debug(f"x = {x}")` | Evite f-strings em debug — use formatação `%s` para avaliação preguiçosa |
 
 ### Logging Estruturado
 
@@ -298,12 +298,12 @@ print(f"Best: {min(results):.4f}s, Worst: {max(results):.4f}s")
 ```
 
 > [!WARNING]
-| Armadilha | Porquê | Correção |
-|-----------|--------|----------|
-| Incluir setup na medição | Distorce resultados | Use parâmetro `setup` |
-| Medição de execução única | Alta variância | Execute muitas vezes, pegue o mínimo |
-| Otimizar cedo | Desperdiça esforço | Perfile primeiro, otimize gargalos |
-| Micro-benchmark != perf real | Cache de CPU, E/S, GC importam | Teste com tamanhos de dados realistas |
+> | Armadilha | Porquê | Correção |
+> |-----------|--------|----------|
+> | Incluir setup na medição | Distorce resultados | Use parâmetro `setup` |
+> | Medição de execução única | Alta variância | Execute muitas vezes, pegue o mínimo |
+> | Otimizar cedo | Desperdiça esforço | Perfile primeiro, otimize gargalos |
+> | Micro-benchmark != perf real | Cache de CPU, E/S, GC importam | Teste com tamanhos de dados realistas |
 
 ## Padrões Comuns de Depuração
 

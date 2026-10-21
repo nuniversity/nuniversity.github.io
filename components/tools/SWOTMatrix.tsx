@@ -8,11 +8,13 @@ import {
 } from 'lucide-react';
 import { type Locale } from '@/lib/i18n/config';
 
+type QuadrantKey = 'strengths' | 'weaknesses' | 'opportunities' | 'threats';
+type StrategyKey = 'SO' | 'WO' | 'ST' | 'WT';
 
 const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
   const [projectName, setProjectName] = useState('');
   const [description, setDescription] = useState('');
-  const [swotData, setSWOTData] = useState({
+  const [swotData, setSWOTData] = useState<Record<QuadrantKey, string[]>>({
     strengths: [],
     weaknesses: [],
     opportunities: [],
@@ -24,13 +26,13 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
     opportunities: '',
     threats: ''
   });
-  const [editingItem, setEditingItem] = useState(null);
+  const [editingItem, setEditingItem] = useState<{ quadrant: QuadrantKey; index: number } | null>(null);
   const [editingText, setEditingText] = useState('');
   const [view, setView] = useState('matrix');
   const [showStrategy, setShowStrategy] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false);
   const [importError, setImportError] = useState('');
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const translations = {
     en: {
@@ -173,9 +175,9 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
     }
   };
 
-  const t = translations[lang] || translations.en;
+  const t = translations[lang as keyof typeof translations] || translations.en;
 
-  const addItemToQuadrant = (quadrant) => {
+  const addItemToQuadrant = (quadrant: QuadrantKey) => {
     if (newItem[quadrant].trim()) {
       setSWOTData({
         ...swotData,
@@ -185,14 +187,14 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
     }
   };
 
-  const removeItem = (quadrant, index) => {
+  const removeItem = (quadrant: QuadrantKey, index: number) => {
     setSWOTData({
       ...swotData,
       [quadrant]: swotData[quadrant].filter((_, i) => i !== index)
     });
   };
 
-  const startEditing = (quadrant, index, text) => {
+  const startEditing = (quadrant: QuadrantKey, index: number, text: string) => {
     setEditingItem({ quadrant, index });
     setEditingText(text);
   };
@@ -217,7 +219,7 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
   };
 
   const generateStrategies = () => {
-    const strategies = {
+    const strategies: Record<StrategyKey, string[]> = {
       SO: [],
       WO: [],
       ST: [],
@@ -247,7 +249,7 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
     return strategies;
   };
 
-  const exportData = (format) => {
+  const exportData = (format: string) => {
     const data = {
       projectName,
       description,
@@ -314,7 +316,7 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
     }
   };
 
-  const handleFileUpload = (event) => {
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -322,7 +324,7 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
     reader.onload = (e) => {
       try {
         const content = e.target?.result;
-        importData(content, file.name);
+        importData(content as string, file.name);
       } catch (error) {
         setImportError(t.importError);
       }
@@ -408,7 +410,7 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
   //   }
   // };
 
-  const importData = (content, filename) => {
+  const importData = (content: string, filename: string) => {
     setImportError('');
     try {
       if (filename.endsWith('.json')) {
@@ -429,7 +431,7 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
         }
       } else if (filename.endsWith('.csv')) {
         const lines = content.split('\n').filter(line => line.trim());
-        const imported = {
+        const imported: Record<QuadrantKey, string[]> = {
           strengths: [],
           weaknesses: [],
           opportunities: [],
@@ -442,8 +444,8 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
           if (matches && matches.length >= 2) {
             const quadrant = matches[0].replace(/"/g, '');
             const item = matches[1].replace(/"/g, '');
-            if (imported[quadrant]) {
-              imported[quadrant].push(item);
+            if (imported[quadrant as QuadrantKey]) {
+              imported[quadrant as QuadrantKey].push(item);
             }
           }
         }
@@ -474,7 +476,16 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
     }
   };
 
-  const quadrants = [
+  const quadrants: {
+    key: QuadrantKey;
+    title: string;
+    desc: string;
+    icon: React.ElementType;
+    color: string;
+    bgColor: string;
+    borderColor: string;
+    textColor: string;
+  }[] = [
     { 
       key: 'strengths', 
       title: t.strengths, 
@@ -746,7 +757,7 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
                 { type: 'ST', title: t.stStrategies, desc: t.stDesc, color: 'from-green-500 to-orange-500' },
                 { type: 'WT', title: t.wtStrategies, desc: t.wtDesc, color: 'from-red-500 to-orange-500' }
               ].map(({ type, title, desc, color }) => {
-                const strategies = generateStrategies()[type];
+                const strategies = generateStrategies()[type as StrategyKey];
                 return (
                   <div key={type} className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-600">
                     <div className={`inline-block bg-gradient-to-r ${color} text-white px-3 py-1 rounded-full text-xs font-bold mb-2`}>

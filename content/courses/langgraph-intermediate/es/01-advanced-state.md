@@ -8,13 +8,13 @@ difficulty: "intermediate"
 
 # Gestión Avanzada de Estado
 
-State management is the heart of LangGraph. This lesson covers advanced state schemas, built-in reducers, and custom reducer functions that give you fine-grained control over how state updates are applied.
+La gestión del estado es el corazón de LangGraph. Esta lección cubre esquemas de estado avanzados, reductores integrados y funciones reductoras personalizadas que te dan control detallado sobre cómo se aplican las actualizaciones de estado.
 
 ---
 
 ## Enfoques de Esquema de Estado
 
-LangGraph supports three schema definition approaches. Choose based on your needs:
+LangGraph admite tres enfoques de definición de esquema. Elige según tus necesidades:
 
 ```python
 from typing_extensions import TypedDict
@@ -41,21 +41,21 @@ class AgentState(BaseModel):
 
 | Característica | TypedDict | dataclass | BaseModel |
 | :--- | :--- | :--- | :--- |
-| Type hints only | Yes | Yes | Yes |
-| Default values | No | Yes | Yes |
-| Runtime validation | No | No | Yes |
-| Serialization | Manual | Manual | Built-in |
-| Performance | Fastest | Fast | Slightly slower |
-| IDE support | Good | Excellent | Excellent |
+| Solo type hints | Sí | Sí | Sí |
+| Valores predeterminados | No | Sí | Sí |
+| Validación en tiempo de ejecución | No | No | Sí |
+| Serialización | Manual | Manual | Integrada |
+| Rendimiento | Más rápido | Rápido | Un poco más lento |
+| Compatibilidad con IDE | Buena | Excelente | Excelente |
 
-[!CONSEJO]
-Use `TypedDict` for simple agents, `dataclass` for agents needing defaults, and `BaseModel` for production systems requiring validation and serialization.
+[!TIP]
+Usa `TypedDict` para agentes simples, `dataclass` para agentes que necesitan valores predeterminados y `BaseModel` para sistemas de producción que requieren validación y serialización.
 
 ---
 
 ## Reductores de Estado
 
-Reducers control how multiple writes to the same state key are combined. Without a reducer, the **last write wins**.
+Los reductores controlan cómo se combinan múltiples escrituras en la misma clave de estado. Sin un reductor, **gana la última escritura**.
 
 ### El Predeterminado: Replace
 
@@ -74,7 +74,7 @@ def node_b(state: DefaultState) -> dict:
 
 ### El Reductor Add
 
-`Annotated[type, add]` uses `operator.add` to combine values:
+`Annotated[type, add]` usa `operator.add` para combinar valores:
 
 ```python
 from typing import Annotated
@@ -92,8 +92,8 @@ def node_b(state: AppendState) -> dict:
 # Result: items = ["a", "b"]
 ```
 
-[!NOTA]
-The `add` reducer requires **both values to be of the same type** that supports `+`. For lists, both must be lists; for ints, both must be ints.
+[!NOTE]
+El reductor `add` exige que **ambos valores sean del mismo tipo** y que admitan `+`. Para listas, ambos deben ser listas; para enteros, ambos deben ser enteros.
 
 ---
 
@@ -101,7 +101,7 @@ The `add` reducer requires **both values to be of the same type** that supports 
 
 ### operator.add
 
-Works on lists (concatenation), numbers (addition), and strings:
+Funciona con listas (concatenación), números (suma) y cadenas:
 
 ```python
 from operator import add
@@ -123,7 +123,7 @@ def add_text(state: CounterState) -> dict:
 
 ### replace (predeterminado)
 
-The default behavior — no annotation needed:
+El comportamiento predeterminado: no hace falta anotación:
 
 ```python
 class NoReducerState(TypedDict):
@@ -142,7 +142,7 @@ def second(state: NoReducerState) -> dict:
 
 ## Reductores Personalizados
 
-For complex merge logic, define a custom function:
+Para una lógica de fusión compleja, define una función personalizada:
 
 ```python
 from typing import Annotated
@@ -171,7 +171,7 @@ def node_b(state: CustomState) -> dict:
 
 ### Firma de Reductor Personalizado
 
-A reducer function receives `(current_value, new_update)` and returns the merged value:
+Una función reductora recibe `(current_value, new_update)` y devuelve el valor fusionado:
 
 ```python
 def my_reducer(current: ValueType, update: ValueType) -> ValueType:
@@ -179,8 +179,8 @@ def my_reducer(current: ValueType, update: ValueType) -> ValueType:
     return merged_value
 ```
 
-[!IMPORTANTE]
-The reducer receives the **existing state value** and the **new update** from the node. It must return the new value for that key. Reducers run every time a node writes to that key.
+[!IMPORTANT]
+El reductor recibe el **valor existente del estado** y la **nueva actualización** que llega del nodo. Debe devolver el nuevo valor de esa clave. Los reductores se ejecutan cada vez que un nodo escribe en esa clave.
 
 ---
 
@@ -248,7 +248,7 @@ def node_b(state: MetadataState) -> dict:
 
 ## Composición de Reductores
 
-Combine multiple reducers across different fields:
+Combina varios reductores en campos distintos:
 
 ```python
 from typing import Annotated
@@ -271,7 +271,7 @@ class CompositeState(TypedDict):
 
 ## Validación de Estado con Pydantic
 
-Add runtime validation to state fields:
+Añade validación en tiempo de ejecución a los campos de estado:
 
 ```python
 from pydantic import BaseModel, Field, field_validator
@@ -290,14 +290,14 @@ class ValidatedState(BaseModel):
         return v
 ```
 
-[!ADVERTENCIA]
-Pydantic validation runs on every state update. For high-throughput graphs, this adds overhead. Use it judiciously in production.
+[!WARNING]
+La validación de Pydantic se ejecuta en cada actualización de estado. Para grafos de alto rendimiento, esto añade sobrecarga. Úsala con moderación en producción.
 
 ---
 
 ## Persistencia de Estado entre Ejecuciones
 
-Without persistence, state is ephemeral. To persist state:
+Sin persistencia, el estado es efímero. Para persistir el estado:
 
 ```python
 from langgraph.checkpoint.memory import MemorySaver
@@ -314,11 +314,11 @@ saved_state = app.get_state(config)
 print(saved_state.values)
 ```
 
-Persistence is covered in depth in Lesson 2. It's mentioned here because it interacts with state reducers — persisted state is restored and reducers continue from where they left off.
+La persistencia se trata en profundidad en la Lección 2. Se menciona aquí porque interactúa con los reductores de estado: el estado persistido se restaura y los reductores continúan donde lo dejaron.
 
 ---
 
-## Preguntas Prácticas
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {
@@ -457,12 +457,12 @@ Persistence is covered in depth in Lesson 2. It's mentioned here because it inte
 
 ---
 
-[!ÉXITO]
+[!SUCCESS]
 ### Conclusiones Clave
-- Three state approaches: TypedDict (lightweight), dataclass (defaults), BaseModel (validation)
-- Default reducer is "last write wins" (replace)
-- `Annotated[type, add]` appends with operator.add
-- Custom reducers: `def reducer(current, update) -> new_value`
-- Different fields can have different reducers via Annotated
-- Pydantic BaseModel adds runtime validation at the cost of performance
-- Custom reducers enable patterns like max, dedup, and deep merge
+- Tres enfoques de estado: TypedDict (ligero), dataclass (valores predeterminados), BaseModel (validación)
+- El reductor predeterminado es "gana la última escritura" (reemplazo)
+- `Annotated[type, add]` añade con operator.add
+- Reductores personalizados: `def reducer(current, update) -> new_value`
+- Campos distintos pueden tener reductores distintos mediante Annotated
+- El BaseModel de Pydantic añade validación en tiempo de ejecución a costa del rendimiento
+- Los reductores personalizados permiten patrones como max, dedup y fusión profunda

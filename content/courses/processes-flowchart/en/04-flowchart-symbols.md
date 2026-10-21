@@ -138,7 +138,7 @@ flowchart TD
     B --> C{Valid?}
     C -->|Yes| D[Save to database]
     C -->|No| E[Show error]
-    D --> F[[(User database)]]
+    D --> F[["(User database)"]]
     F --> G[Send confirmation]
     
     style F fill:#F3E5F5
@@ -217,7 +217,7 @@ flowchart TD
     G -->|Yes| I[Create account]
     H --> B
     I --> J[Send verification email]
-    J --> K[[(Users database)]]
+    J --> K[["(Users database)"]]
     K --> L[[Welcome email]]
     L --> M([Registration complete])
     
@@ -283,9 +283,9 @@ flowchart TD
     J -->|No| K[/Payment failed - retry/]
     J -->|Yes| L[Create order]
     K --> H
-    L --> M[[(Orders database)]]
+    L --> M[["(Orders database)"]]
     M --> N[Update inventory]
-    N --> O[[(Inventory database)]]
+    N --> O[["(Inventory database)"]]
     O --> P[Send confirmation]
     P --> Q[[Order confirmation email]]
     Q --> R([Checkout complete])

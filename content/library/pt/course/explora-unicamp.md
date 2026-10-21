@@ -3,7 +3,6 @@ id: explora-unicamp
 title: "Expl0Ra UNICAMP - Cursos de Física e Tecnologia"
 description: "Plataforma de MOOCs da Faculdade de Tecnologia da UNICAMP. Destaque para 'Física Moderna: história, aplicações e vestibular' com 38 horas de conteúdo. Explicações acessíveis sobre física moderna para estudantes de ensino médio e vestibulandos."
 url: "https://explora.ft.unicamp.br"
-thumbnail: "https://www.unicamp.br/sites/default/files/images/Logomarca/unicamp_logo_vertical_rgb.png"
 author: "UNICAMP - Faculdade de Tecnologia (FT)"
 category: "Physics"
 difficulty: "beginner"

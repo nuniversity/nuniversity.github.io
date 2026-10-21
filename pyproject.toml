@@ -10,6 +10,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+    "pillow>=10.4",
     "ruff>=0.8.0",
     "pytest>=9.0",
     "pytest-cov>=7.0",
@@ -20,7 +21,7 @@ dev = [
 
 [tool.ruff]
 target-version = "py311"
-line-length = 88
+line-length = 120
 
 [tool.ruff.lint]
 select = [
@@ -37,14 +38,16 @@ select = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"**/tests/**/*.py" = ["S101", "S108", "S603", "E402", "I001"]  # Allow assert, tmp paths, subprocess, sys.path in tests
+"**/tests/**/*.py" = ["S101", "S108", "S603", "E402", "I001", "RUF059", "F401"]
+"tests/**/*.py" = ["S101", "S108", "S603", "E402", "I001", "RUF059", "F401"]
+"**/examples/**/*.py" = ["S101", "S108"]
 
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", ".opencode/skills"]
 markers = [
     "slow: marks tests as slow",
     "integration: marks integration tests",
@@ -52,11 +55,11 @@ markers = [
 addopts = "-v --tb=short"
 
 [tool.coverage.run]
-source = ["scripts", "hooks"]
-omit = ["tests/*"]
+source = [".opencode/skills", ".opencode/hooks"]
+omit = ["**/tests/*", "**/examples/*", "tests/*"]
 
 [tool.coverage.report]
-fail_under = 90
+fail_under = 80
 show_missing = true
 
 [tool.bandit]

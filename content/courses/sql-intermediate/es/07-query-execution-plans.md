@@ -113,11 +113,11 @@ Combina múltiples escaneos de índice en un bitmap en memoria, luego busca fila
 - Obteniendo 5-20% de las filas (término medio entre Index Scan y Seq Scan)
 
 > [!SUCCESS]
-| Tipo de Escaneo | % Acceso a Filas | Uso Típico |
-|-----------|-------------|-------------|
-| Index Scan | < 5% | Búsquedas puntuales, alta selectividad |
-| Bitmap Scan | 5-20% | Múltiples filtros, selectividad moderada |
-| Seq Scan | > 20% | Grandes porciones de la tabla, sin índice |
+> | Tipo de Escaneo | % Acceso a Filas | Uso Típico |
+> |-----------|-------------|-------------|
+> | Index Scan | < 5% | Búsquedas puntuales, alta selectividad |
+> | Bitmap Scan | 5-20% | Múltiples filtros, selectividad moderada |
+> | Seq Scan | > 20% | Grandes porciones de la tabla, sin índice |
 
 ## Algoritmos de Unión
 
@@ -261,13 +261,13 @@ LIMIT 10;
 ```
 
 > [!SUCCESS]
-| Prioridad de Optimización | Impacto | Esfuerzo |
-|----------------------|--------|--------|
-| Seq → Index scan en tablas grandes | Alto | Bajo |
-| Eliminar ordenaciones innecesarias | Medio | Medio |
-| Nested Loop → Hash Join | Alto | Bajo (añadir índice) |
-| Reescribir subconsultas complejas | Medio | Medio |
-| Añadir índices de cobertura | Alto | Medio |
+> | Prioridad de Optimización | Impacto | Esfuerzo |
+> |----------------------|--------|--------|
+> | Seq → Index scan en tablas grandes | Alto | Bajo |
+> | Eliminar ordenaciones innecesarias | Medio | Medio |
+> | Nested Loop → Hash Join | Alto | Bajo (añadir índice) |
+> | Reescribir subconsultas complejas | Medio | Medio |
+> | Añadir índices de cobertura | Alto | Medio |
 
 Comienza con las consultas que tu aplicación ejecuta más a menudo y optimízalas. Una consulta que se ejecuta una vez por noche importa menos que una que se ejecuta 1000 veces por segundo.
 

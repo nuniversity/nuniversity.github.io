@@ -337,7 +337,7 @@ sequenceDiagram
 ```
 
 > [!TIP]
-| Diseña a los agentes para que comuniquen su proceso de razonamiento, no solo los resultados. Esta transparencia genera confianza y facilita la depuración cuando los agentes cometen errores.
+> Diseña a los agentes para que comuniquen su proceso de razonamiento, no solo los resultados. Esta transparencia genera confianza y facilita la depuración cuando los agentes cometen errores.
 
 ---
 

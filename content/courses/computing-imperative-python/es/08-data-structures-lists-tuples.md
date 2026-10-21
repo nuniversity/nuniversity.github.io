@@ -123,20 +123,20 @@ flowchart LR
     A --> D[Buscar elementos]
     A --> E[Otros]
     
-    B --> B1[append(x)]
-    B --> B2[insert(i, x)]
-    B --> B3[extend(iterable)]
+    B --> B1["append(x)"]
+    B --> B2["insert(i, x)"]
+    B --> B3["extend(iterable)"]
     
-    C --> C1[remove(x)]
-    C --> C2[pop(i)]
-    C --> C3[clear()]
+    C --> C1["remove(x)"]
+    C --> C2["pop(i)"]
+    C --> C3["clear()"]
     
-    D --> D1[index(x)]
-    D --> D2[count(x)]
+    D --> D1["index(x)"]
+    D --> D2["count(x)"]
     
-    E --> E1[sort()]
-    E --> E2[reverse()]
-    E --> E3[copy()]
+    E --> E1["sort()"]
+    E --> E2["reverse()"]
+    E --> E3["copy()"]
     
     style B fill:#e1f5fe
     style C fill:#fce4ec

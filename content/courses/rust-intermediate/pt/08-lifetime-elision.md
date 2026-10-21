@@ -152,11 +152,11 @@ where
 ```
 
 > [!SUCCESS]
-| Bound | Significado |
-|-------|---------|
-| `T: 'a` | T sobrevive a 'a |
-| `T: 'static` | T não tem referências não-'static |
-| `for<'a> F: Fn(&'a str)` | F funciona para qualquer lifetime |
+> | Bound | Significado |
+> |-------|---------|
+> | `T: 'a` | T sobrevive a 'a |
+> | `T: 'static` | T não tem referências não-'static |
+> | `for<'a> F: Fn(&'a str)` | F funciona para qualquer lifetime |
 
 ## Subtipagem de Lifetime (Variância)
 

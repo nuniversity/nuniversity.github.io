@@ -253,12 +253,12 @@ fn main() {
 ```
 
 > [!SUCCESS]
-| Princípio | Exemplo |
-|-----------|---------|
-| Unsafe internamente | Use unsafe para implementação |
-| Seguro externamente | Exponha apenas API segura |
-| Documente invariantes | Contrato de segurança em comentários |
-| Minimize escopo | Mantenha blocos unsafe pequenos |
+> | Princípio | Exemplo |
+> |-----------|---------|
+> | Unsafe internamente | Use unsafe para implementação |
+> | Seguro externamente | Exponha apenas API segura |
+> | Documente invariantes | Contrato de segurança em comentários |
+> | Minimize escopo | Mantenha blocos unsafe pequenos |
 
 ## Padrões Unsafe Comuns
 

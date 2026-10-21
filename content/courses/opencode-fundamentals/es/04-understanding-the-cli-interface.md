@@ -156,7 +156,7 @@ OpenCode soporta completado con tabulador para:
 
 ---
 
-## Practice Questions
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {

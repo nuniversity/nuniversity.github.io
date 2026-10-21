@@ -9,18 +9,18 @@
 
 | # | File | Topics Covered |
 |---|------|----------------|
-| 01 | [Platform Overview & Philosophy](./01_Platform_Overview.md) | Origins, design philosophies, market positioning |
-| 02 | [Core Architecture Deep Dive](./02_Core_Architecture.md) | Storage/compute separation, scaling models, query engines |
-| 03 | [Storage & Data Lake](./03_Storage_and_Data_Lake.md) | S3 + Lake Formation, Snowflake Storage, Delta Lake |
-| 04 | [Compute & Processing](./04_Compute_and_Processing.md) | Redshift, Virtual Warehouses, Spark/Photon |
-| 05 | [Data Ingestion & Integration](./05_Data_Ingestion.md) | Kinesis/MSK, Snowpipe, Auto Loader, ETL tooling |
-| 06 | [Governance, Security & Compliance](./06_Governance_and_Security.md) | Lake Formation, RBAC/ABAC, Unity Catalog |
-| 07 | [AI & Machine Learning Capabilities](./07_AI_and_ML.md) | Bedrock, Cortex, Mosaic AI, MLflow |
-| 08 | [Data Sharing & Collaboration](./08_Data_Sharing.md) | Clean Rooms, Marketplace, Delta Sharing |
-| 09 | [Cost Structure & Optimization](./09_Cost_Structure.md) | Credits, DBUs, pay-per-query, cost gotchas |
-| 10 | [Use Case Decision Framework](./10_Decision_Framework.md) | Scenario-based platform selection guide |
-| 11 | [Migration Strategies](./11_Migration_Strategies.md) | Lift-and-shift, re-platforming, hybrid patterns |
-| 12 | [Reference Architecture Patterns](./12_Reference_Architectures.md) | Medallion, Lambda, Kappa, real-time patterns |
+| 01 | [Platform Overview & Philosophy](./01-platform-overview.md) | Origins, design philosophies, market positioning |
+| 02 | [Core Architecture Deep Dive](./02-core-architecture.md) | Storage/compute separation, scaling models, query engines |
+| 03 | [Storage & Data Lake](./03-storage-and-data-lake.md) | S3 + Lake Formation, Snowflake Storage, Delta Lake |
+| 04 | [Compute & Processing](./04-compute-and-processing.md) | Redshift, Virtual Warehouses, Spark/Photon |
+| 05 | [Data Ingestion & Integration](./05-data-ingestion.md) | Kinesis/MSK, Snowpipe, Auto Loader, ETL tooling |
+| 06 | [Governance, Security & Compliance](./06-governance-and-security.md) | Lake Formation, RBAC/ABAC, Unity Catalog |
+| 07 | [AI & Machine Learning Capabilities](./07-ai-and-ml.md) | Bedrock, Cortex, Mosaic AI, MLflow |
+| 08 | [Data Sharing & Collaboration](./08-data-sharing.md) | Clean Rooms, Marketplace, Delta Sharing |
+| 09 | [Cost Structure & Optimization](./09-cost-structure.md) | Credits, DBUs, pay-per-query, cost gotchas |
+| 10 | [Use Case Decision Framework](./10-decision-framework.md) | Scenario-based platform selection guide |
+| 11 | [Migration Strategies](./11-migration-strategies.md) | Lift-and-shift, re-platforming, hybrid patterns |
+| 12 | [Reference Architecture Patterns](./12-reference-architectures.md) | Medallion, Lambda, Kappa, real-time patterns |
 
 ---
 

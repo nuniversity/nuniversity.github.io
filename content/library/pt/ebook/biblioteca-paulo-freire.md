@@ -3,7 +3,6 @@ id: biblioteca-paulo-freire
 title: "Biblioteca Digital Paulo Freire (UFPB)"
 description: "Coleção digital especializada nas obras de Paulo Freire e temáticas relacionadas à pedagogia, filosofia da educação e educação popular. Mantida pela Universidade Federal da Paraíba (UFPB), é referência mundial no estudo do patrono da educação brasileira."
 url: "https://www.paulofreire.ufpb.br"
-thumbnail: "https://www.ufpb.br/ufpb/contents/imagens/imagens-portal/logotipo-ufpb.jpg"
 author: "Universidade Federal da Paraíba (UFPB)"
 category: "Education & Pedagogy"
 difficulty: "all"

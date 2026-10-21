@@ -141,7 +141,7 @@ sequenceDiagram
     C->>T: GetObject sobre la copia restaurada (un GET ordinario)
     Note over T: La copia temporal factura ~$0.023/GB-mes durante TODA<br/>la duración que elegiste, leas o no
     T-->>C: Bytes del objeto
-    Note over T: La copia temporal caduca; el original archivado permanece<br/>GLACIER / DEEP_ARCHIVE para siempre - HeadObject nunca cambia de clase
+    Note over T: La copia temporal caduca, el original archivado permanece<br/>GLACIER / DEEP_ARCHIVE para siempre - HeadObject nunca cambia de clase
 ```
 
 La propia página de precios de AWS enuncia la consecuencia: «Cuando restauras un archivo, estás pagando tanto el archivo… como una copia… restaurada temporalmente (cobrada a la tarifa de almacenamiento de S3 Standard durante un tiempo que elijas» (consultada en oct 2026). Así que la factura completa de restore tiene **cuatro componentes**: almacenamiento del archivo (que sigue devengando) + la tarifa de recuperación por GB del nivel + la cuota de petición de restore por 1,000 + **almacenamiento Standard en la copia temporal durante toda la duración elegida**. El original archivado nunca cambia de clase — `HeadObject` sigue informando `GLACIER` o `DEEP_ARCHIVE` después de un restore exitoso.

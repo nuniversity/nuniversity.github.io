@@ -171,7 +171,7 @@ Uses `useTheme()` from `Providers.tsx`. Renders a Moon icon in light mode and a 
 ```ts
 const socialLinks = [
   { name: "Youtube",   href: 'https://www.youtube.com/@nuniversity',          icon: Youtube },
-  { name: "Instagram", href: 'https://www.instagram.com/thenuniversity/',      icon: Instagram },
+  { name: "Instagram", href: 'https://www.instagram.com/nuniversityedu/',      icon: Instagram },
   { name: "GitHub",    href: 'https://github.com/nuniversity',                 icon: Github },
   { name: "LinkedIn",  href: 'https://www.linkedin.com/company/nuniversity/',  icon: Linkedin },
   { name: "Email",     href: 'mailto:thenuniversitybr@gmail.com',              icon: Mail },

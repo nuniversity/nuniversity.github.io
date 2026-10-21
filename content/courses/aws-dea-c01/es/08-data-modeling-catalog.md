@@ -243,7 +243,7 @@ flowchart TD
     D -->|"mediante programa"| F["GetTableVersions + diff del conjunto de columnas -> alarma de CloudWatch + correo de SNS"]
     E --> G{"¿Se quiere el cambio?"}
     G -->|Sí| H["Actualizar los consumidores ANTES de que lean v4"]
-    G -->|No|"Reversión = publicar una versión NUEVA idéntica a v3 (la versión actual no se puede borrar)"]
+    G -->|No| RB["Reversión = publicar una versión NUEVA idéntica a v3 (la versión actual no se puede borrar)"]
     H --> I["Podar el historial con DeleteTableVersion / SkipArchive=true"]
     F --> I
 ```

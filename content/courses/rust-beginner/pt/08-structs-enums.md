@@ -183,11 +183,11 @@ impl Mensagem {
 ```
 
 > [!SUCCESS]
-| Struct vs Enum | Use Quando |
-|----------------|-----------|
-| Struct | Dados sempre têm todos os campos |
-| Enum | Dados podem ser uma de várias formas |
-| Enum com dados | Cada variante carrega dados diferentes |
+> | Struct vs Enum | Use Quando |
+> |----------------|-----------|
+> | Struct | Dados sempre têm todos os campos |
+> | Enum | Dados podem ser uma de várias formas |
+> | Enum com dados | Cada variante carrega dados diferentes |
 
 ## Option — Tratamento Seguro de Null
 

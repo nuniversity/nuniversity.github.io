@@ -63,11 +63,11 @@ fn match_char(c: char) -> &'static str {
 ```
 
 > [!NOTE]
-| Range Pattern | Syntax | Example |
-|---------------|--------|---------|
-| Inclusive | `..=` | `1..=5` matches 1,2,3,4,5 |
-| Half-open | `..` | `1..5` matches 1,2,3,4 (not valid in match, only in for) |
-| Open-ended | `..` | `..=5` or `5..` (in match, use guards) |
+> | Range Pattern | Syntax | Example |
+> |---------------|--------|---------|
+> | Inclusive | `..=` | `1..=5` matches 1,2,3,4,5 |
+> | Half-open | `..` | `1..5` matches 1,2,3,4 (not valid in match, only in for) |
+> | Open-ended | `..` | `..=5` or `5..` (in match, use guards) |
 
 ### Destructuring Patterns
 

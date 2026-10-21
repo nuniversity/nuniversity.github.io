@@ -613,7 +613,7 @@ $$= x^3 + 6x^2 + 12x + 8$$
 ```
 
 
-## Practice Questions
+## Perguntas de Prática (Practice Questions)
 
 ```question
 {

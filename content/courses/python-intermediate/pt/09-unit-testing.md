@@ -113,12 +113,12 @@ class TestFileProcessor(unittest.TestCase):
 ```
 
 > [!NOTE]
-| Método | Quando | Frequência |
-|--------|--------|------------|
-| `setUp` | Antes de cada método de teste | Por teste |
-| `tearDown` | Após cada método de teste | Por teste |
-| `setUpClass` | Antes de todos os testes na classe | Uma vez por classe |
-| `tearDownClass` | Após todos os testes na classe | Uma vez por classe |
+> | Método | Quando | Frequência |
+> |--------|--------|------------|
+> | `setUp` | Antes de cada método de teste | Por teste |
+> | `tearDown` | Após cada método de teste | Por teste |
+> | `setUpClass` | Antes de todos os testes na classe | Uma vez por classe |
+> | `tearDownClass` | Após todos os testes na classe | Uma vez por classe |
 
 ```python
 class TestDatabase(unittest.TestCase):
@@ -397,13 +397,13 @@ flowchart LR
 ```
 
 > [!SUCCESS]
-| Princípio | Porquê |
-|-----------|--------|
-| Teste uma coisa por teste | Depuração simples, mensagens de falha claras |
-| Use nomes de teste descritivos | `test_withdraw_reduces_balance` não `test_1` |
-| Isole testes | Cada teste deve configurar e limpar seu próprio estado |
-| Teste casos extremos | Entrada vazia, valores limite, condições de erro |
-| Faça testes rápidos | Testes lentos não são executados com frequência |
+> | Princípio | Porquê |
+> |-----------|--------|
+> | Teste uma coisa por teste | Depuração simples, mensagens de falha claras |
+> | Use nomes de teste descritivos | `test_withdraw_reduces_balance` não `test_1` |
+> | Isole testes | Cada teste deve configurar e limpar seu próprio estado |
+> | Teste casos extremos | Entrada vazia, valores limite, condições de erro |
+> | Faça testes rápidos | Testes lentos não são executados com frequência |
 
 ## Perguntas de Prática
 

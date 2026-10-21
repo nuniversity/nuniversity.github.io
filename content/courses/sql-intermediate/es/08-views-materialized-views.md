@@ -92,12 +92,12 @@ Una vista es actualizable cuando:
 - No usa funciones de agregación
 
 > [!WARNING]
-| Patrón No Actualizable | Motivo |
-|-----------------------|--------|
-| `CREATE VIEW v AS SELECT ... FROM a JOIN b` | Múltiples tablas base |
-| `CREATE VIEW v AS SELECT DISTINCT ...` | No puede mapear de vuelta a una sola fila |
-| `CREATE VIEW v AS SELECT SUM(...)` | Agregación — sin identidad de fila |
-| `CREATE VIEW v AS SELECT ... UNION ...` | Múltiples fuentes |
+> | Patrón No Actualizable | Motivo |
+> |-----------------------|--------|
+> | `CREATE VIEW v AS SELECT ... FROM a JOIN b` | Múltiples tablas base |
+> | `CREATE VIEW v AS SELECT DISTINCT ...` | No puede mapear de vuelta a una sola fila |
+> | `CREATE VIEW v AS SELECT SUM(...)` | Agregación — sin identidad de fila |
+> | `CREATE VIEW v AS SELECT ... UNION ...` | Múltiples fuentes |
 
 ## WITH CHECK OPTION
 

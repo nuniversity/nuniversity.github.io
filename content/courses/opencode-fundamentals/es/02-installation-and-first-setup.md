@@ -214,7 +214,7 @@ OpenCode busca la configuración en este orden:
 
 ---
 
-## Practice Questions
+## Preguntas de Práctica (Practice Questions)
 
 ```question
 {

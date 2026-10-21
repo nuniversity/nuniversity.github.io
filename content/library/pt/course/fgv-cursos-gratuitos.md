@@ -3,7 +3,6 @@ id: fgv-cursos-gratuitos
 title: "FGV - Cursos Gratuitos Online com Certificado"
 description: "Mais de 200 cursos gratuitos da Fundação Getúlio Vargas, a melhor escola de negócios do Brasil com tripla acreditação internacional (AACSB, EQUIS, AMBA). Áreas: administração pública, direito, economia, finanças, educação, estratégia, tecnologia, ciência de dados, IA e sustentabilidade."
 url: "https://educacao-executiva.fgv.br/cursos/gratuitos"
-thumbnail: "https://educacao-executiva.fgv.br/assets/images/fgv-logo.svg"
 author: "Fundação Getúlio Vargas (FGV)"
 category: "Business & Administration"
 difficulty: "all"

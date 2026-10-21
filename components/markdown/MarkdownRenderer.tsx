@@ -17,14 +17,17 @@ import MoleculeViewer from './MoleculeViewer'
 import DragOrderQuestion from './DragOrderQuestion'
 import MatchingQuestion from './MatchingQuestion'
 import FillBlankQuestion from './FillBlankQuestion'
+import BucketDropQuestion from './BucketDropQuestion'
 import type { LessonQuestion } from './QuestionBlock'
 
 interface MarkdownRendererProps {
   content: string
+  /** Site locale ('en' | 'pt' | 'es') — drives callout header labels. Defaults to 'en'. */
+  lang?: string
 }
 
 const langMap: Record<string, string> = {
-  diagram: 'diagram',
+  diagram: 'text',
   mermaid: 'mermaid',
   question: 'question',
   math: 'math',
@@ -34,6 +37,7 @@ const langMap: Record<string, string> = {
   dragdrop: 'dragdrop',
   matching: 'matching',
   fillblank: 'fillblank',
+  interactive: 'interactive',
   sql: 'sql',
   psql: 'sql',
   postgresql: 'sql',
@@ -284,21 +288,58 @@ function MermaidDiagram({ code }: MermaidDiagramProps) {
 //  2. Regex allows optional trailing spaces/tabs after [!TYPE]
 //  3. Continuation line prefix pattern allows optional leading spaces before ">"
 
-const ALERT_META: Record<string, { cls: string; icon: string; label: string }> = {
-  NOTE:      { cls: 'callout-note',      icon: 'ℹ️',  label: 'Note' },
-  INFO:      { cls: 'callout-note',      icon: 'ℹ️',  label: 'Info' },
-  WARNING:   { cls: 'callout-warning',   icon: '⚠️',  label: 'Warning' },
-  DANGER:    { cls: 'callout-danger',    icon: '🚨',  label: 'Danger' },
-  ERROR:     { cls: 'callout-danger',    icon: '🚨',  label: 'Error' },
-  SUCCESS:   { cls: 'callout-success',   icon: '✅',  label: 'Success' },
-  TIP:       { cls: 'callout-tip',       icon: '💡',  label: 'Tip' },
-  IMPORTANT: { cls: 'callout-important', icon: '📌',  label: 'Important' },
+const ALERT_META: Record<string, { cls: string; icon: string }> = {
+  NOTE:      { cls: 'callout-note',      icon: 'ℹ️' },
+  INFO:      { cls: 'callout-note',      icon: 'ℹ️' },
+  WARNING:   { cls: 'callout-warning',   icon: '⚠️' },
+  DANGER:    { cls: 'callout-danger',    icon: '🚨' },
+  ERROR:     { cls: 'callout-danger',    icon: '🚨' },
+  SUCCESS:   { cls: 'callout-success',   icon: '✅' },
+  TIP:       { cls: 'callout-tip',       icon: '💡' },
+  IMPORTANT: { cls: 'callout-important', icon: '📌' },
 }
 
-function toCalloutHtml(type: string, title: string, body: string): string {
-  const meta = ALERT_META[type.toUpperCase()]
+// Localised callout header labels per site locale (keyed by canonical type above).
+const ALERT_LABELS: Record<string, Record<string, string>> = {
+  en: { NOTE: 'Note', INFO: 'Info', WARNING: 'Warning', DANGER: 'Danger', ERROR: 'Error', SUCCESS: 'Success', TIP: 'Tip', IMPORTANT: 'Important' },
+  pt: { NOTE: 'Nota', INFO: 'Info', WARNING: 'Aviso', DANGER: 'Perigo', ERROR: 'Erro', SUCCESS: 'Sucesso', TIP: 'Dica', IMPORTANT: 'Importante' },
+  es: { NOTE: 'Nota', INFO: 'Info', WARNING: 'Advertencia', DANGER: 'Peligro', ERROR: 'Error', SUCCESS: 'Éxito', TIP: 'Consejo', IMPORTANT: 'Importante' },
+}
+
+// Locale variants used in translated content → canonical type.
+const ALERT_ALIASES: Record<string, string> = {
+  NOTA: 'NOTE', DICA: 'TIP', CONSEJO: 'TIP',
+  AVISO: 'WARNING', ADVERTENCIA: 'WARNING',
+  SUCESSO: 'SUCCESS', 'ÉXITO': 'SUCCESS', EXITO: 'SUCCESS',
+  IMPORTANTE: 'IMPORTANT', ATENCAO: 'WARNING', ATENCION: 'WARNING',
+}
+
+// Every accepted marker (canonical + locale aliases) for the two regex passes.
+const ALERT_MARKER = 'NOTE|INFO|WARNING|DANGER|ERROR|SUCCESS|TIP|IMPORTANT|NOTA|DICA|CONSEJO|AVISO|ADVERTENCIA|SUCESSO|ÉXITO|EXITO|IMPORTANTE|ATENCAO|ATENCION'
+
+function canonicalAlertType(type: string): string {
+  const t = type.toUpperCase()
+  return ALERT_ALIASES[t] ?? t
+}
+
+// Label text comes from lesson markdown (e.g. "**Key Takeaways**") and lands in
+// raw HTML, where markdown would render literally — convert emphasis inline.
+function renderAlertLabel(raw: string): string {
+  return raw
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+}
+
+function toCalloutHtml(type: string, title: string, body: string, lang: string): string {
+  const canonical = canonicalAlertType(type)
+  const meta = ALERT_META[canonical]
   if (!meta) return ''
-  const label = title || meta.label
+  const labels = ALERT_LABELS[lang] ?? ALERT_LABELS.en
+  const label = title ? renderAlertLabel(title) : labels[canonical] || canonical
   return (
     `<div class="callout ${meta.cls}">\n` +
     `<div class="callout-header"><span class="callout-icon">${meta.icon}</span><span class="callout-label">${label}</span></div>\n` +
@@ -307,7 +348,7 @@ function toCalloutHtml(type: string, title: string, body: string): string {
   )
 }
 
-function preprocessAlerts(md: string): string {
+function preprocessAlerts(md: string, lang: string): string {
   let result = md.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
 
   // Pass 1: blockquote format  > [!TYPE]
@@ -315,7 +356,7 @@ function preprocessAlerts(md: string): string {
   //   > Body line 1
   //   > Body line 2
   result = result.replace(
-    /^> \[!(NOTE|INFO|WARNING|DANGER|ERROR|SUCCESS|TIP|IMPORTANT)\][ \t]*\n((?:[ \t]*>[ \t]?[^\n]*\n?)*)/gim,
+    new RegExp(`^> \\[!(${ALERT_MARKER})\\][ \\t]*\\n((?:[ \\t]*>[ \\t]?[^\\n]*\\n?)*)`, 'gim'),
     (match: string, type: string, rest: string) => {
       const body = rest
         .split('\n')
@@ -323,7 +364,7 @@ function preprocessAlerts(md: string): string {
         .filter((line: string) => line.trim() !== '')
         .join('\n')
 
-      return toCalloutHtml(type, '', body)
+      return toCalloutHtml(type, '', body, lang)
     }
   )
 
@@ -331,18 +372,18 @@ function preprocessAlerts(md: string): string {
   //   [!WARNING]
   //   Body content continues until next alert, heading, or `---`
   result = result.replace(
-    /^\[!(NOTE|INFO|WARNING|DANGER|ERROR|SUCCESS|TIP|IMPORTANT)\]([^\n]*)\n([\s\S]*?)(?=\n\n|\n\[!|(?![\s\S]))/gm,
+    new RegExp(`^\\[!(${ALERT_MARKER})\\]([^\\n]*)\\n([\\s\\S]*?)(?=\\n\\n|\\n\\[!|(?![\\s\\S]))`, 'gm'),
     (match: string, type: string, titleLine: string, rest: string) => {
       const body = rest.trim()
-      return toCalloutHtml(type, titleLine.trim(), body)
+      return toCalloutHtml(type, titleLine.trim(), body, lang)
     }
   )
 
   return result
 }
 
-export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
-  const processedContent = preprocessAlerts(content)
+export default function MarkdownRenderer({ content, lang = 'en' }: MarkdownRendererProps) {
+  const processedContent = preprocessAlerts(content, lang)
 
   return (
     <ReactMarkdown
@@ -512,6 +553,51 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                 return (
                   <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
                     Invalid question format: {(e as Error).message}
+                  </div>
+                )
+              }
+            }
+
+            if (language === 'interactive') {
+              try {
+                const config = JSON.parse(codeString)
+                if (!config.type) {
+                  throw new Error('Missing interactive type')
+                }
+                if (config.type === 'matching') {
+                  return (
+                    <MatchingQuestion
+                      question={config.title}
+                      pairs={config.pairs}
+                      explanation={[config.instructions, config.answer].filter(Boolean).join('\n\n')}
+                    />
+                  )
+                }
+                if (config.type === 'fillblank') {
+                  return (
+                    <FillBlankQuestion
+                      question={config.title}
+                      instructions={config.instructions}
+                      items={config.items}
+                      explanation={[config.explanation, config.answer].filter(Boolean).join('\n\n') || undefined}
+                    />
+                  )
+                }
+                if (config.type === 'dragdrop') {
+                  return (
+                    <BucketDropQuestion
+                      question={config.title}
+                      instructions={config.instructions}
+                      buckets={config.buckets}
+                      explanation={config.explanation}
+                    />
+                  )
+                }
+                throw new Error(`Unknown interactive type: ${config.type}`)
+              } catch (e) {
+                return (
+                  <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
+                    Invalid interactive config: {(e as Error).message}
                   </div>
                 )
               }

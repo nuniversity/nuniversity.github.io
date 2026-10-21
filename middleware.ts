@@ -1,4 +1,6 @@
 // middleware.ts
+// Dev-only: static export (output: 'export') never runs middleware in production.
+// Prod locale redirect lives in public/index.html (root) + the postbuild 404.html stub.
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { i18n } from './lib/i18n/config'

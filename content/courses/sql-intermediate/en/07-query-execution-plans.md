@@ -113,11 +113,11 @@ Combines multiple index scans into a bitmap in memory, then fetches heap rows in
 - Getting 5-20% of rows (middle ground between Index Scan and Seq Scan)
 
 > [!SUCCESS]
-| Scan Type | Row Access % | Typical Use |
-|-----------|-------------|-------------|
-| Index Scan | < 5% | Point lookups, high selectivity |
-| Bitmap Scan | 5-20% | Multiple filters, moderate selectivity |
-| Seq Scan | > 20% | Large portions of table, no index |
+> | Scan Type | Row Access % | Typical Use |
+> |-----------|-------------|-------------|
+> | Index Scan | < 5% | Point lookups, high selectivity |
+> | Bitmap Scan | 5-20% | Multiple filters, moderate selectivity |
+> | Seq Scan | > 20% | Large portions of table, no index |
 
 ## Join Algorithms
 
@@ -261,13 +261,13 @@ LIMIT 10;
 ```
 
 > [!SUCCESS]
-| Optimization Priority | Impact | Effort |
-|----------------------|--------|--------|
-| Seq → Index scan on large tables | High | Low |
-| Remove unnecessary sorts | Medium | Medium |
-| Nested Loop → Hash Join | High | Low (add index) |
-| Rewrite complex subqueries | Medium | Medium |
-| Add covering indexes | High | Medium |
+> | Optimization Priority | Impact | Effort |
+> |----------------------|--------|--------|
+> | Seq → Index scan on large tables | High | Low |
+> | Remove unnecessary sorts | Medium | Medium |
+> | Nested Loop → Hash Join | High | Low (add index) |
+> | Rewrite complex subqueries | Medium | Medium |
+> | Add covering indexes | High | Medium |
 
 Start with the queries your application runs most often and optimize those. A query that runs once per night matters less than one that runs 1000 times per second.
 
