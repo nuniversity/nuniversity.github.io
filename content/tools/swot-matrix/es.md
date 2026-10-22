@@ -1,7 +1,7 @@
 ---
 title: Análisis Matriz FODA
 description: Herramienta de planificación estratégica para análisis integral de negocios. Identifique Fortalezas, Debilidades, Oportunidades y Amenazas, luego genere recomendaciones estratégicas.
-category: Estrategia Empresarial
+category: business_strategy
 icon: bar-chart
 order: 3
 ---

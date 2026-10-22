@@ -1,7 +1,7 @@
 ---
 title: Temporizador Pomodoro de Estudio
 description: Aumenta tu productividad con la Técnica Pomodoro. Estudia en intervalos enfocados con sesiones personalizables de trabajo/descanso y estadísticas de progreso.
-category: Productivity
+category: productivity
 icon: clock
 order: 5
 ---

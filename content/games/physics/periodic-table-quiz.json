@@ -34,5 +34,15 @@
     {"symbol": "Hg", "name": "Mercury", "number": 80, "group": 12, "period": 6, "category": "transition metal"},
     {"symbol": "Pb", "name": "Lead", "number": 82, "group": 14, "period": 6, "category": "post-transition metal"},
     {"symbol": "U", "name": "Uranium", "number": 92, "group": 3, "period": 7, "category": "actinide"}
-  ]
+  ],
+  "locales": {
+    "pt": {
+      "title": "Quiz da Tabela Periódica",
+      "description": "Teste seus conhecimentos sobre a tabela periódica. Associe os símbolos dos elementos a nomes, números atômicos e muito mais."
+    },
+    "es": {
+      "title": "Quiz de la Tabla Periódica",
+      "description": "Pon a prueba tus conocimientos sobre la tabla periódica. Relaciona los símbolos de los elementos con sus nombres, números atómicos y mucho más."
+    }
+  }
 }

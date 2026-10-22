@@ -1,6 +1,8 @@
 ---
 title: "Exam Simulation B: Second Set, Traps and Exam Day"
 order: 16
+exam: true
+examMinutes: 90
 difficulty: "intermediate"
 description: "Sit Set B — 20 DEA-C01 exam-style items in published weight order (7 / 5 / 4 / 4) with a per-option teardown after every block, then drill the twenty trap pairs that decide most losses, walk the official exam-day checklist (IDs, check-in, score timing), grade Set B against explicit ready-versus-not-ready thresholds, and finish with a dip-driven 7-day study plan for the week you actually sit the exam."
 duration: "90 minutes"

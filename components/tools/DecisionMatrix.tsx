@@ -25,17 +25,26 @@ interface DecisionMatrixProps {
   dict: any;
 }
 
-const DecisionMatrix = ({ lang = 'en' }: DecisionMatrixProps) => {
-  const [title, setTitle] = useState('Project Decision');
+function tpl(template: string, vars?: Record<string, string | number>): string {
+  if (!vars) return template
+  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
+}
+
+const DecisionMatrix = ({ lang = 'en', dict = {} }: DecisionMatrixProps) => {
+  const t = dict.tools?.decision_matrix || {};
+  const tc = dict.tools?.common || {};
+  const c = dict.common || {};
+
+  const [title, setTitle] = useState(t.default_title || 'Project Decision');
   const [options, setOptions] = useState<Option[]>([
-    { id: 1, name: 'Option A' },
-    { id: 2, name: 'Option B' },
-    { id: 3, name: 'Option C' },
+    { id: 1, name: t.option_a || 'Option A' },
+    { id: 2, name: t.option_b || 'Option B' },
+    { id: 3, name: t.option_c || 'Option C' },
   ]);
   const [criteria, setCriteria] = useState<Criterion[]>([
-    { id: 1, name: 'Cost', weight: 3 },
-    { id: 2, name: 'Impact', weight: 5 },
-    { id: 3, name: 'Effort', weight: 2 },
+    { id: 1, name: t.criterion_cost || 'Cost', weight: 3 },
+    { id: 2, name: t.criterion_impact || 'Impact', weight: 5 },
+    { id: 3, name: t.criterion_effort || 'Effort', weight: 2 },
   ]);
   const [scores, setScores] = useState<Record<string, number>>({});
   const [newOptionName, setNewOptionName] = useState('');
@@ -150,9 +159,9 @@ const DecisionMatrix = ({ lang = 'en' }: DecisionMatrixProps) => {
 
   const resetAll = () => {
     setScores({});
-    setOptions([{ id: 1, name: 'Option A' }, { id: 2, name: 'Option B' }, { id: 3, name: 'Option C' }]);
-    setCriteria([{ id: 1, name: 'Cost', weight: 3 }, { id: 2, name: 'Impact', weight: 5 }, { id: 3, name: 'Effort', weight: 2 }]);
-    setTitle('Project Decision');
+    setOptions([{ id: 1, name: t.option_a || 'Option A' }, { id: 2, name: t.option_b || 'Option B' }, { id: 3, name: t.option_c || 'Option C' }]);
+    setCriteria([{ id: 1, name: t.criterion_cost || 'Cost', weight: 3 }, { id: 2, name: t.criterion_impact || 'Impact', weight: 5 }, { id: 3, name: t.criterion_effort || 'Effort', weight: 2 }]);
+    setTitle(t.default_title || 'Project Decision');
   };
 
   const allScored = options.every(o => criteria.every(c => getScore(o.id, c.id) !== null));
@@ -166,10 +175,10 @@ const DecisionMatrix = ({ lang = 'en' }: DecisionMatrixProps) => {
             <BarChart3 className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent">
-            Decision Matrix
+            {t.title || 'Decision Matrix'}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Evaluate options against weighted criteria to make better decisions
+            {t.subtitle || 'Evaluate options against weighted criteria to make better decisions'}
           </p>
         </div>
 
@@ -177,7 +186,7 @@ const DecisionMatrix = ({ lang = 'en' }: DecisionMatrixProps) => {
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-6">
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex-1 min-w-[200px]">
-              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Decision Title</label>
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">{t.decision_title || 'Decision Title'}</label>
               <input
                 type="text"
                 value={title}
@@ -186,7 +195,7 @@ const DecisionMatrix = ({ lang = 'en' }: DecisionMatrixProps) => {
               />
             </div>
             <div className="w-32">
-              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Scale (1–{scale})</label>
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">{tpl(t.scale || 'Scale (1–{n})', { n: scale })}</label>
               <select value={scale} onChange={(e) => setScale(Number(e.target.value))} className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-emerald-500 outline-none">
                 <option value={3}>1–3</option>
                 <option value={5}>1–5</option>
@@ -194,9 +203,9 @@ const DecisionMatrix = ({ lang = 'en' }: DecisionMatrixProps) => {
               </select>
             </div>
             <div className="flex gap-2 ml-auto">
-              <button onClick={exportJSON} className="px-4 py-2 rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-colors text-sm flex items-center gap-1"><Download className="w-4 h-4" /> JSON</button>
-              <button onClick={exportCSV} className="px-4 py-2 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors text-sm flex items-center gap-1"><Download className="w-4 h-4" /> CSV</button>
-              <button onClick={resetAll} className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors text-sm flex items-center gap-1"><RotateCcw className="w-4 h-4" /> Reset</button>
+              <button onClick={exportJSON} className="px-4 py-2 rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-colors text-sm flex items-center gap-1"><Download className="w-4 h-4" /> {tc.json || 'JSON'}</button>
+              <button onClick={exportCSV} className="px-4 py-2 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors text-sm flex items-center gap-1"><Download className="w-4 h-4" /> {tc.csv || 'CSV'}</button>
+              <button onClick={resetAll} className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors text-sm flex items-center gap-1"><RotateCcw className="w-4 h-4" /> {tc.reset || 'Reset'}</button>
             </div>
           </div>
         </div>
@@ -208,7 +217,7 @@ const DecisionMatrix = ({ lang = 'en' }: DecisionMatrixProps) => {
               <table className="w-full">
                 <thead>
                   <tr className="bg-gradient-to-r from-teal-500 to-emerald-600 text-white">
-                    <th className="p-4 text-left font-semibold min-w-[160px]">Options</th>
+                    <th className="p-4 text-left font-semibold min-w-[160px]">{t.options || 'Options'}</th>
                     {criteria.map(c => (
                       <th key={c.id} className="p-4 text-center font-semibold min-w-[120px]">
                         <div className="flex items-center justify-center gap-2">
@@ -218,8 +227,8 @@ const DecisionMatrix = ({ lang = 'en' }: DecisionMatrixProps) => {
                         </div>
                       </th>
                     ))}
-                    <th className="p-4 text-center font-semibold min-w-[100px] bg-teal-700">Score</th>
-                    <th className="p-4 text-center font-semibold min-w-[80px] bg-teal-800">Rank</th>
+                    <th className="p-4 text-center font-semibold min-w-[100px] bg-teal-700">{t.score || 'Score'}</th>
+                    <th className="p-4 text-center font-semibold min-w-[80px] bg-teal-800">{t.rank || 'Rank'}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -287,17 +296,17 @@ const DecisionMatrix = ({ lang = 'en' }: DecisionMatrixProps) => {
                   value={newOptionName}
                   onChange={(e) => setNewOptionName(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && addOption()}
-                  placeholder="Add new option..."
+                  placeholder={t.add_option_placeholder || 'Add new option...'}
                   className="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
                 />
-                <button onClick={addOption} className="px-4 py-2 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors text-sm flex items-center gap-1"><Plus className="w-4 h-4" /> Add</button>
+                <button onClick={addOption} className="px-4 py-2 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors text-sm flex items-center gap-1"><Plus className="w-4 h-4" /> {tc.add || 'Add'}</button>
               </div>
             </div>
           </div>
 
           {/* Sidebar: Criteria Management */}
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Criteria</h3>
+            <h3 className="text-lg font-semibold mb-4">{t.criteria || 'Criteria'}</h3>
             <div className="space-y-3 mb-4">
               {criteria.map(c => (
                 <div key={c.id} className="flex items-center gap-2 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-700">
@@ -322,7 +331,7 @@ const DecisionMatrix = ({ lang = 'en' }: DecisionMatrixProps) => {
                 value={newCriterionName}
                 onChange={(e) => setNewCriterionName(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && addCriterion()}
-                placeholder="New criterion..."
+                placeholder={t.new_criterion_placeholder || 'New criterion...'}
                 className="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
               />
               <button onClick={addCriterion} className="px-3 py-2 rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-colors text-sm"><Plus className="w-4 h-4" /></button>
@@ -333,7 +342,7 @@ const DecisionMatrix = ({ lang = 'en' }: DecisionMatrixProps) => {
         {/* Results Summary */}
         {allScored && (
           <div className="mt-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Results Summary</h3>
+            <h3 className="text-lg font-semibold mb-4">{t.results_summary || 'Results Summary'}</h3>
             <div className="space-y-3">
               {results.map((r, i) => (
                 <div key={r.id} className="flex items-center gap-4">

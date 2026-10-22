@@ -1,27 +1,31 @@
-// app/[lang]/games/quiz/[slug]/page.tsx
 export const dynamic = 'force-static'
 export const revalidate = false
 
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import { type Locale } from '@/lib/i18n/config'
-import { getQuizGame, getAllGames } from '@/lib/games/get-game-content'
+import { getAllQuizzes } from '@/lib/quizzes/get-quiz-content'
 import { Metadata } from 'next'
-import { QuizGameClient } from './quiz-game-client'
-import { notFound } from 'next/navigation'
+import { RedirectToQuizzes } from '@/components/quizzes/RedirectToQuizzes'
 
-interface QuizGamePageProps {
+interface QuizRedirectPageProps {
   params: {
     lang: Locale
     slug: string
   }
 }
 
-export async function generateStaticParams() {
-  const allGames = await getAllGames()
-  const quizGames = allGames.filter(game => game.category === 'quiz')
+interface MetadataQuizzesTexts {
+  quizzes?: {
+    title?: string
+  }
+}
 
-  return quizGames.map(game => ({
-    slug: game.slug
+export async function generateStaticParams() {
+  const quizzes = await getAllQuizzes()
+  const slugs = Array.from(new Set(quizzes.map(quiz => quiz.slug)))
+
+  return slugs.map(slug => ({
+    slug
   }))
 }
 
@@ -30,32 +34,23 @@ export async function generateMetadata({
 }: {
   params: { lang: Locale; slug: string }
 }): Promise<Metadata> {
-  const game = await getQuizGame(params.slug)
-
-  if (!game) {
-    return { title: 'Game Not Found' }
-  }
+  const dict = await getDictionary(params.lang)
+  const metadata = dict.metadata as unknown as MetadataQuizzesTexts | undefined
 
   return {
-    title: `${game.title} — Quiz`,
-    description: game.description,
+    title: metadata?.quizzes?.title || 'Quizzes',
+    robots: { index: false, follow: false },
   }
 }
 
-export default async function QuizGamePage({ params }: QuizGamePageProps) {
+export default async function QuizRedirectPage({ params }: QuizRedirectPageProps) {
   const { lang, slug } = params
   const dict = await getDictionary(lang)
 
-  const game = await getQuizGame(slug)
-
-  if (!game) {
-    notFound()
-  }
-
   return (
-    <QuizGameClient
+    <RedirectToQuizzes
       lang={lang}
-      game={game}
+      slug={slug}
       dict={dict}
     />
   )

@@ -1,7 +1,7 @@
 ---
 title: Rastreador de Hábitos
 description: Construye mejores hábitos con seguimiento diario, conteo de rachas y mapas de calor visuales. Haz seguimiento de múltiples hábitos.
-category: Productivity
+category: productivity
 icon: calendar-check
 order: 10
 ---

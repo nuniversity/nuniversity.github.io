@@ -14,20 +14,33 @@ export interface LessonQuestion {
 
 interface QuestionBlockProps {
   data: LessonQuestion
+  dict?: any
+  reveal?: boolean
+  onAnswer?: (id: string, selectedIndex: number) => void
 }
 
-export default function QuestionBlock({ data }: QuestionBlockProps) {
+export default function QuestionBlock({ data, dict, reveal = true, onAnswer }: QuestionBlockProps) {
+  const w = dict?.widgets
   const [selected, setSelected] = useState<number | null>(null)
   const [answered, setAnswered] = useState(false)
 
+  const showFeedback = reveal && answered
+
   const handleSelect = (index: number) => {
     if (answered) return
+    if (!reveal) {
+      setSelected(index)
+      setAnswered(true)
+      onAnswer?.(data.id, index)
+      return
+    }
     setSelected(index)
   }
 
   const handleCheck = () => {
     if (selected === null) return
     setAnswered(true)
+    onAnswer?.(data.id, selected)
   }
 
   const handleReset = () => {
@@ -41,7 +54,7 @@ export default function QuestionBlock({ data }: QuestionBlockProps) {
     <div className="my-8 rounded-xl border bg-card shadow-sm w-full max-w-full">
       <div className="bg-muted/50 px-4 sm:px-5 py-3 border-b flex items-center gap-2">
         <AlertCircle className="w-4 h-4 text-primary flex-shrink-0" />
-        <span className="text-sm font-semibold text-foreground">Practice Question</span>
+        <span className="text-sm font-semibold text-foreground">{w?.multiple_choice?.title || 'Practice Question'}</span>
       </div>
 
       <div className="p-4 sm:p-6 [&_*]:break-words">
@@ -51,7 +64,7 @@ export default function QuestionBlock({ data }: QuestionBlockProps) {
           {data.options.map((option, index) => {
             let variant = 'border-border hover:border-primary/50 hover:bg-accent/50 cursor-pointer'
 
-            if (answered) {
+            if (showFeedback) {
               if (index === data.correct) {
                 variant = 'border-green-500 bg-green-50 dark:bg-green-950/30 cursor-default'
               } else if (index === selected && !isCorrect) {
@@ -59,6 +72,10 @@ export default function QuestionBlock({ data }: QuestionBlockProps) {
               } else {
                 variant = 'border-border opacity-60 cursor-default'
               }
+            } else if (answered) {
+              variant = index === selected
+                ? 'border-primary bg-primary/5 cursor-default'
+                : 'border-border cursor-default'
             } else if (selected === index) {
               variant = 'border-primary bg-primary/5 cursor-pointer'
             }
@@ -70,7 +87,7 @@ export default function QuestionBlock({ data }: QuestionBlockProps) {
                 className={`w-full text-left flex items-start gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg border transition-colors min-w-0 ${variant}`}
               >
                 <span className={`flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-full border-2 flex items-center justify-center text-xs sm:text-sm font-bold mt-0.5 ${
-                  answered
+                  showFeedback
                     ? index === data.correct
                       ? 'border-green-500 text-green-600 bg-green-100 dark:bg-green-900'
                       : index === selected && !isCorrect
@@ -80,18 +97,18 @@ export default function QuestionBlock({ data }: QuestionBlockProps) {
                     ? 'border-primary text-primary bg-primary/10'
                     : 'border-gray-300 text-gray-500'
                 }`}>
-                  {answered && index === data.correct ? (
+                  {showFeedback && index === data.correct ? (
                     <CheckCircle2 className="w-4 h-4" />
-                  ) : answered && index === selected && !isCorrect ? (
+                  ) : showFeedback && index === selected && !isCorrect ? (
                     <XCircle className="w-4 h-4" />
                   ) : (
                     String.fromCharCode(65 + index)
                   )}
                 </span>
                 <span className={`text-sm sm:text-base leading-relaxed break-words hyphens-auto min-w-0 ${
-                  answered && index === data.correct
+                  showFeedback && index === data.correct
                     ? 'font-medium text-green-800 dark:text-green-200'
-                    : answered && index === selected && !isCorrect
+                    : showFeedback && index === selected && !isCorrect
                     ? 'text-red-800 dark:text-red-200'
                     : 'text-foreground/90'
                 }`}>
@@ -102,7 +119,7 @@ export default function QuestionBlock({ data }: QuestionBlockProps) {
           })}
         </div>
 
-        {answered && (
+        {showFeedback && (
           <div className={`mt-4 p-4 rounded-lg ${
             isCorrect
               ? 'bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-900'
@@ -117,7 +134,7 @@ export default function QuestionBlock({ data }: QuestionBlockProps) {
               <span className={`font-semibold text-sm ${
                 isCorrect ? 'text-green-800 dark:text-green-200' : 'text-red-800 dark:text-red-200'
               }`}>
-                {isCorrect ? 'Correct!' : 'Incorrect'}
+                {isCorrect ? (w?.correct || 'Correct!') : (w?.incorrect || 'Incorrect')}
               </span>
             </div>
             {data.explanation && (
@@ -126,24 +143,26 @@ export default function QuestionBlock({ data }: QuestionBlockProps) {
           </div>
         )}
 
-        <div className="mt-4 flex gap-2">
-          {!answered ? (
-            <button
-              onClick={handleCheck}
-              disabled={selected === null}
-              className="px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed transition-colors w-full sm:w-auto"
-            >
-              Check Answer
-            </button>
-          ) : (
-            <button
-              onClick={handleReset}
-              className="px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium rounded-lg bg-muted text-foreground hover:bg-accent transition-colors w-full sm:w-auto"
-            >
-              Try Again
-            </button>
-          )}
-        </div>
+        {reveal && (
+          <div className="mt-4 flex gap-2">
+            {!answered ? (
+              <button
+                onClick={handleCheck}
+                disabled={selected === null}
+                className="px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed transition-colors w-full sm:w-auto"
+              >
+                {w?.check_answer || 'Check Answer'}
+              </button>
+            ) : (
+              <button
+                onClick={handleReset}
+                className="px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium rounded-lg bg-muted text-foreground hover:bg-accent transition-colors w-full sm:w-auto"
+              >
+                {w?.try_again || 'Try Again'}
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )

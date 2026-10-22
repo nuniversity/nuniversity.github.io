@@ -1,6 +1,8 @@
 ---
 title: "Simulado de Exame B: Segundo Conjunto de Prática, Drills de Armadilha e o Dia do Exame"
 order: 16
+exam: true
+examMinutes: 90
 difficulty: "beginner"
 description: "Faça o Conjunto B — 20 itens no estilo do exame CLF-C02 na ordem de peso publicada (5 / 6 / 7 / 2) com desmembramento de cada opção após cada bloco — então faça os dez pares de armadilha que decidem a maioria das derrotas, ensaie a lista oficial de logística do dia do exame (documentos, check-in, pausas, timing dos resultados), corrija o Conjunto B contra limiares de pronto × não pronto, e termine com um plano de estudo de 7 dias orientado por peso para a semana em que você realmente faz o exame."
 duration: "90 min"

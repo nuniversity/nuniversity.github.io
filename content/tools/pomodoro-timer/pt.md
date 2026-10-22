@@ -1,7 +1,7 @@
 ---
 title: Timer Pomodoro de Estudo
 description: Aumente sua produtividade com a Técnica Pomodoro. Estude em intervalos focados com sessões personalizáveis de trabalho/descanso e estatísticas de progresso.
-category: Productivity
+category: productivity
 icon: clock
 order: 5
 ---

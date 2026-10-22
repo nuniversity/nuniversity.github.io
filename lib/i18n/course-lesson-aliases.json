@@ -1,0 +1,155 @@
+{
+  "ddd-software-architecture": {
+    "en": {
+      "01": "01-intro-to-ddd",
+      "02": "02-ubiquitous-language",
+      "03": "03-bounded-contexts",
+      "04": "04-entities-value-objects",
+      "05": "05-aggregates-roots",
+      "06": "06-repositories-domain-services",
+      "07": "07-event-driven-architecture",
+      "08": "08-ddd-implementation-python"
+    },
+    "pt": {
+      "01": "01-introducao-ao-ddd",
+      "02": "02-linguagem-ubiqua",
+      "03": "03-contextos-delimitados",
+      "04": "04-entidades-objetos-valor",
+      "05": "05-agregados-raizes",
+      "06": "06-repositorios-servicos-dominio",
+      "07": "07-arquitetura-orientada-eventos",
+      "08": "08-implementacao-ddd-python"
+    },
+    "es": {
+      "01": "01-intro-to-ddd",
+      "02": "02-ubiquitous-language",
+      "03": "03-bounded-contexts",
+      "04": "04-entities-value-objects",
+      "05": "05-aggregates-roots",
+      "06": "06-repositories-domain-services",
+      "07": "07-event-driven-architecture",
+      "08": "08-ddd-implementation-python"
+    }
+  },
+  "nonprofit-organization-fundamentals": {
+    "en": {
+      "10": "10-npo-taxes-and-incentives",
+      "11": "11-npo-governance-and-best-practices",
+      "12": "12-measuring-non-profit-impact",
+      "13": "13-course-synthesis-and-capstone",
+      "01": "01-what-is-non-profit-organization",
+      "02": "02-npo-vs-for-profit-vs-government",
+      "03": "03-npo-economics-funding-models",
+      "04": "04-npo-accounting-financial-management",
+      "05": "05-npo-marketing-and-fundraising",
+      "06": "06-npo-operations-management",
+      "07": "07-npo-human-resources-volunteers",
+      "08": "08-social-enterprise-and-ngos",
+      "09": "09-npo-brazil-context"
+    },
+    "pt": {
+      "10": "10-contabilidade-gestao-financeira",
+      "11": "11-recursos-humanos-voluntariado",
+      "12": "12-impostos-incentivos-fiscais",
+      "13": "13-parcerias-stakeholders",
+      "14": "14-medicao-impacto",
+      "15": "15-sintese-projeto-final",
+      "01": "01-what-is-non-profit-organization",
+      "02": "02-npo-vs-for-profit-vs-government",
+      "03": "03-npo-economics-funding-models",
+      "04": "04-legal-structures-brazil",
+      "05": "05-gestao-governanca-conselho",
+      "06": "06-marketing-e-comunicacao",
+      "07": "07-operacoes-e-sustentabilidade",
+      "08": "08-social-enterprise-and-ngos",
+      "09": "09-contexto-ong-no-brasil"
+    },
+    "es": {
+      "10": "10-impuestos-e-incentivos-fiscales",
+      "11": "11-gobernancia-y-mejores-practicas",
+      "01": "01-what-is-non-profit-organization",
+      "02": "02-npo-vs-for-profit-vs-government",
+      "03": "03-economia-ong-modelos-financiacion",
+      "04": "04-estructuras-legales-brasil",
+      "05": "05-gestion-gobernancia-consejo",
+      "06": "06-marketing-comunicacion-ong",
+      "07": "07-operaciones-sostenibilidad-ong",
+      "08": "08-emprendimiento-social-ong",
+      "09": "09-contexto-ong-en-brasil"
+    }
+  },
+  "practical-ai": {
+    "en": {
+      "01": "01-introduction",
+      "02": "02-llm-prompt",
+      "03": "03-learning-ai-journey"
+    },
+    "pt": {
+      "01": "01-introducao",
+      "02": "02-llm-prompt",
+      "03": "03-jornada-aprendizado-ai"
+    },
+    "es": {
+      "01": "01-introduction",
+      "02": "02-llm-prompt",
+      "03": "03-viaje-de-aprendizaje-ai"
+    }
+  },
+  "processes-flowchart": {
+    "en": {
+      "01": "01-what-are-processes",
+      "02": "02-process-components",
+      "03": "03-intro-to-flowcharts",
+      "04": "04-flowchart-symbols",
+      "05": "05-building-flowcharts",
+      "06": "06-process-optimization"
+    },
+    "pt": {
+      "01": "01-o-que-sao-processos",
+      "02": "02-componentes-de-processos",
+      "03": "03-introducao-aos-fluxogramas",
+      "04": "04-simbolos-de-fluxogramas",
+      "05": "05-construindo-fluxogramas",
+      "06": "06-otimizacao-de-processos"
+    },
+    "es": {
+      "01": "01-what-are-processes",
+      "02": "02-process-components",
+      "03": "03-intro-to-flowcharts",
+      "04": "04-flowchart-symbols",
+      "05": "05-building-flowcharts",
+      "06": "06-process-optimization"
+    }
+  },
+  "solid-principles-oop": {
+    "en": {
+      "01": "01-oop-fundamentals-review",
+      "02": "02-single-responsibility-principle",
+      "03": "03-open-closed-principle",
+      "04": "04-liskov-substitution-principle",
+      "05": "05-interface-segregation-principle",
+      "06": "06-dependency-inversion-principle",
+      "07": "07-solid-in-practice",
+      "08": "08-oop-design-best-practices"
+    },
+    "pt": {
+      "01": "01-oop-fundamentals-review",
+      "02": "02-single-responsibility-principle",
+      "03": "03-open-closed-principle",
+      "04": "04-liskov-substitution-principle",
+      "05": "05-interface-segregation-principle",
+      "06": "06-dependency-inversion-principle",
+      "07": "07-solid-in-practice"
+    },
+    "es": {
+      "01": "01-oop-fundamentals-review",
+      "02": "02-single-responsibility-principle",
+      "03": "03-open-closed-principle",
+      "04": "04-liskov-substitution-principle",
+      "05": "05-interface-segregation-principle",
+      "06": "06-dependency-inversion-principle",
+      "07": "07-solid-in-practice",
+      "08": "08-oop-design-best-practices"
+    }
+  }
+}

@@ -9,5 +9,15 @@
     "beginner": { "maxBits": 4 },
     "intermediate": { "maxBits": 8 },
     "advanced": { "maxBits": 16 }
+  },
+  "locales": {
+    "pt": {
+      "title": "Desafio Binário, Hexadecimal e Decimal",
+      "description": "Pratique conversões entre os sistemas de numeração binário, decimal e hexadecimal. Domine os fundamentos da ciência da computação."
+    },
+    "es": {
+      "title": "Desafío Binario, Hexadecimal y Decimal",
+      "description": "Practica conversiones entre los sistemas de numeración binario, decimal y hexadecimal. Domina los fundamentos de la informática."
+    }
   }
 }

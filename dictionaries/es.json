@@ -15,6 +15,37 @@
     "notFound": {
       "title": "Página No Encontrada",
       "description": "La página que buscas no existe o se ha movido."
+    },
+    "site": {
+      "title": "NUniversity - Aprende, Programa y Crece",
+      "description": "Una plataforma educativa integral que ofrece cursos interactivos, herramientas de programación y juegos de estudio en tecnología, ingeniería y ciencias.",
+      "og_description": "Una plataforma educativa integral con cursos interactivos, herramientas de programación y juegos de estudio.",
+      "og_alt": "NUniversity - Plataforma Educativa",
+      "customer_service": "servicio al cliente",
+      "keywords": [
+        "educación",
+        "cursos en línea",
+        "programación",
+        "ingeniería",
+        "ciencia",
+        "aprendizaje interactivo",
+        "herramientas de programación"
+      ],
+      "available_languages": [
+        "Inglés",
+        "Portugués",
+        "Español"
+      ]
+    },
+    "games": {
+      "title": "Juegos - Aprende Jugando",
+      "description": "Juegos educativos interactivos de vocabulario, matemáticas, programación y más",
+      "notFound": "Juego no encontrado"
+    },
+    "quizzes": {
+      "title": "Cuestionarios — Exámenes y Práctica de Certificación",
+      "description": "Cuestionarios de certificación, exámenes de práctica y simulaciones cronometradas con puntuación, historial de intentos e certificados imprimibles.",
+      "notFound": "Cuestionario no encontrado"
     }
   },
   "notFound": {
@@ -74,13 +105,15 @@
           "link": "https://leandroalveso.github.io/"
         }
       ]
-    }
+    },
+    "learn_more": "Más información"
   },
   "navigation": {
     "home": "Inicio",
     "courses": "Cursos",
     "tools": "Herramientas",
     "games": "Juegos",
+    "quizzes": "Cuestionarios",
     "library": "Biblioteca",
     "roadmaps": "Rutas",
     "about": "Acerca de",
@@ -188,6 +221,7 @@
       "courses": "Cursos",
       "tools": "Herramientas",
       "games": "Juegos",
+      "quizzes": "Cuestionarios",
       "library": "Biblioteca",
       "apiExplorer": "Explorador de API",
       "computerScience": "Ciencias de la Computación",
@@ -379,7 +413,10 @@
       "coding": "Programación",
       "physics": "Física",
       "logic": "Lógica & Puzzles",
-      "fun": "Diversión"
+      "fun": "Diversión",
+      "science": "Ciencia",
+      "puzzles": "Puzzles de Palabras",
+      "conversation": "Relaciones & Intimidad"
     },
     "stats": {
       "score": "Puntuación",
@@ -387,7 +424,16 @@
       "matches": "Pares",
       "accuracy": "Precisión",
       "attempts": "Intentos",
-      "final_score": "Puntuación Final"
+      "final_score": "Puntuación Final",
+      "correct": "Correctas",
+      "wrong": "Incorrectas",
+      "streak": "Racha",
+      "best_streak": "Mejor Racha",
+      "wpm": "PPM",
+      "chars": "Caracteres",
+      "snippets": "Fragmentos",
+      "done": "Hecho",
+      "found": "Encontradas"
     },
     "difficulty": {
       "beginner": "Principiante",
@@ -419,7 +465,7 @@
       "no_cards_hint": "Intenta otro modo o categoría.",
       "session_complete": "¡Sesión completa!",
       "reviewed_n_cards": "Revisaste {n} tarjetas en esta sesión.",
-      "n_correct_n_errors": "{n} correctas · {n} errores",
+      "n_correct_n_errors": "{n} correctas · {n2} errores",
       "restart": "Reiniciar",
       "view_statistics": "Ver estadísticas",
       "progress_of": "{current} de {total}",
@@ -439,7 +485,8 @@
       "forgot": "Olvidé",
       "remember": "Recuerdo",
       "swipe_hint": "← Olvidé · Recuerdo →",
-      "import_migrated": "¡Progreso importado y actualizado al nuevo formato!"
+      "import_migrated": "¡Progreso importado y actualizado al nuevo formato!",
+      "learned": "Aprendidas"
     },
     "conversation": {
       "back_to_games": "Volver a Juegos",
@@ -476,6 +523,271 @@
       "export_answers": "Descargar Respuestas",
       "play_again": "Jugar de Nuevo",
       "more_games": "Más Juegos"
+    },
+    "suffixes": {
+      "conversation": "Conversación"
+    },
+    "game_setup": "Configuración del Juego",
+    "difficulty_label": "Dificultad",
+    "start_challenge": "¡Iniciar Desafío!",
+    "start_challenge_n": "Iniciar Desafío ({n} preguntas)",
+    "question_of": "Pregunta {current} de {total}",
+    "score_value": "Puntuación: {score}",
+    "ok": "OK",
+    "correct_exclamation": "¡Correcto!",
+    "answer_with_value": "Respuesta: {answer}",
+    "answer_was": "La respuesta era {answer}",
+    "challenge_complete": "¡Desafío Completado!",
+    "quiz_complete": "¡Cuestionario Completado!",
+    "game_over": "¡Fin del Juego!",
+    "time_s_up": "¡Se Acabó el Tiempo!",
+    "start_game": "Iniciar Juego",
+    "start_typing": "¡Comenzar a Escribir!",
+    "start_quiz": "Iniciar Cuestionario",
+    "quit": "Salir",
+    "hereshow": "Así te fue:",
+    "high_score": "🏆 Récord: {score}",
+    "new_high_score": "🏆 ¡Nuevo Récord!",
+    "binary_hex": {
+      "conversion_modes": "Modos de Conversión",
+      "mode_dec_bin": "Decimal → Binario",
+      "mode_bin_dec": "Binario → Decimal",
+      "mode_dec_hex": "Decimal → Hex",
+      "mode_hex_dec": "Hex → Decimal",
+      "mode_bin_hex": "Binario → Hex",
+      "mode_hex_bin": "Hex → Binario",
+      "convert_label": "Convertir:",
+      "answer_placeholder": "Respuesta..."
+    },
+    "typing_speed": {
+      "language": "Idioma",
+      "duration": "Duración",
+      "get_ready": "Prepárate para escribir...",
+      "type_placeholder": "Escribe el código de arriba aquí..."
+    },
+    "number_sequence": {
+      "enter_sequence": "Escribe la secuencia",
+      "type_digits": "Escribe los dígitos...",
+      "digits_count": "{n} dígitos",
+      "level_with_n": "Nivel {n}",
+      "reached_level": "Alcanzaste el nivel {n}",
+      "correct_sequences": "Secuencias correctas: {n}",
+      "instructions": [
+        "Observa la secuencia de números",
+        "¡Recuerda el orden!",
+        "Escribe la secuencia correctamente",
+        "Cada nivel añade un dígito más",
+        "Tienes {lives} vidas — ¡úselas con sabiduría!"
+      ]
+    },
+    "math_challenge": {
+      "operations": "Operaciones"
+    },
+    "periodic_table": {
+      "quiz_modes": "Modos de Cuestionario",
+      "mode_symbol_name": "Símbolo → Nombre",
+      "mode_name_symbol": "Nombre → Símbolo",
+      "mode_number_element": "Número → Elemento",
+      "mode_element_number": "Elemento → Número",
+      "questions_with_n": "Preguntas: {n}",
+      "prompt_symbol_name": "¿Qué elemento tiene el símbolo \"{symbol}\"?",
+      "prompt_name_symbol": "¿Cuál es el símbolo de \"{name}\"?",
+      "prompt_number_element": "¿Qué elemento tiene el número atómico {number}?",
+      "prompt_element_number": "¿Cuál es el número atómico de \"{name}\"?"
+    },
+    "word_search": {
+      "choose_category": "Elige una Categoría",
+      "drag_hint": "Haz clic y arrastra sobre la cuadrícula para seleccionar letras. Suelta para comprobar si es una palabra.",
+      "puzzle_complete": "¡Rompecabezas Completado!",
+      "found_all": "¡Encontraste todas las {n} palabras!",
+      "time_with_n": "Tiempo: {time}",
+      "words_count": "{n} palabras"
+    }
+  },
+  "quizzes": {
+    "title": "Cuestionarios, Exámenes y Práctica de Certificación",
+    "subtitle": "Cuestionarios de certificación, exámenes de práctica y simulaciones cronometradas con puntuación y comentarios instantáneos.",
+    "redirect_fallback": "Este cuestionario se ha movido — continúa a la sección de Cuestionarios",
+    "back_to_quizzes": "Volver a los Cuestionarios",
+    "back_to_results": "Volver a los Resultados",
+    "play_again": "Jugar de Nuevo",
+    "more_quizzes": "Más Cuestionarios",
+    "exit": "Salir",
+    "open": "Abrir",
+    "explanation": "💡 Explicación",
+    "count": {
+      "one": "1 cuestionario",
+      "other": "{n} cuestionarios"
+    },
+    "search_placeholder": "Buscar cuestionarios...",
+    "no_results": "No se encontraron cuestionarios para tu búsqueda",
+    "empty": "Aún no hay cuestionarios disponibles",
+    "filters": {
+      "kind": "Tipo",
+      "category": "Categoría",
+      "all": "Todos",
+      "category_all": "Todas las categorías",
+      "clear": "Limpiar filtros"
+    },
+    "kind": {
+      "certification": "Certificación",
+      "practice": "Práctica",
+      "course-exam": "Examen del Curso"
+    },
+    "card": {
+      "questions": "{n} preguntas",
+      "duration": "{n} min",
+      "passing": "Aprobación {score}%",
+      "best": "Mejor {score}%",
+      "not_attempted": "Sin intentos",
+      "languages": "Idiomas",
+      "domains": "Dominios"
+    },
+    "difficulty": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    },
+    "home": {
+      "practice_title": "Cuestionario de Práctica",
+      "practice_description": "Elige tus dominios, la cantidad de preguntas y recibe comentarios instantáneos tras cada respuesta. Perfecto para sesiones de estudio enfocadas.",
+      "questions_total": "{n} preguntas en total",
+      "domains": "Dominios",
+      "select_all": "Seleccionar todo",
+      "deselect_all": "Deseleccionar todo",
+      "available": "{n} preguntas disponibles",
+      "question_count": "Preguntas",
+      "shuffle": "Barajar",
+      "start_practice": "Iniciar Práctica — {n} Preguntas",
+      "best_score": "Mejor puntuación",
+      "mock_title": "Examen de Prueba",
+      "exam_simulation": "Simulacro de Examen",
+      "mock_description": "Simula el examen real de {cert}: {count} preguntas, cuenta regresiva de {minutes} minutos, muestreo proporcional de dominios. Sin comentarios hasta enviar — igual que el examen real.",
+      "spec_questions": "{n} preguntas",
+      "spec_fixed": "Duración fija del examen",
+      "spec_minutes": "{n} minutos",
+      "spec_countdown": "Cuenta regresiva",
+      "spec_domains": "{n} dominios",
+      "spec_sampling": "Muestreo proporcional",
+      "spec_pass": "{score}% para aprobar",
+      "spec_threshold": "Umbral oficial",
+      "exam_blueprint": "Plan del Examen",
+      "qs_pct": "{count} preguntas ({count}%)",
+      "start_mock": "Iniciar Examen de Prueba"
+    },
+    "exam": {
+      "simulation_for": "Simulacro de Examen — {cert}",
+      "rules_title": "Reglas del Examen",
+      "rule_drawn": "{count} preguntas extraídas proporcionalmente de los {domains} dominios del examen",
+      "rule_timer": "{minutes} minutos para completar — el cronómetro cuenta regresiva desde que empiezas",
+      "rule_no_feedback": "Sin comentarios de respuestas durante el examen — los resultados se muestran solo tras enviar",
+      "rule_flag": "Puedes marcar preguntas para revisar y navegar libremente entre todas",
+      "rule_change": "Puedes cambiar cualquier respuesta antes de enviar",
+      "rule_pass": "{score}% o más es la nota de aprobación, igual al umbral oficial del examen",
+      "allocation_title": "Distribución por Dominio — {count} Preguntas",
+      "qs": "{n} preg.",
+      "needed_available": "{needed} necesarias · {available} disponibles",
+      "gap_note_label": "Nota:",
+      "gap_note": "Algunos subdominios tienen menos preguntas que la asignación ideal. Se usarán las preguntas disponibles y el examen tendrá algo menos de {count} preguntas en esos subdominios.",
+      "begin": "Iniciar Examen — {time}",
+      "status": "{answered} respondidas · {remaining} restantes · {flagged} marcadas",
+      "submit": "Enviar",
+      "flag": "Marcar para revisión",
+      "flagged": "Marcada",
+      "no_reveal": "Las respuestas no se revelan durante el examen — envía para ver los resultados.",
+      "navigator": "Navegador de Preguntas",
+      "answered": "Respondidas",
+      "unanswered": "Sin respuesta",
+      "flagged_legend": "Marcadas",
+      "tile": "Q{n}",
+      "tile_flagged": "Q{n} (marcada)",
+      "tile_unanswered": "Q{n} (sin respuesta)",
+      "tile_flagged_unanswered": "Q{n} (marcada) (sin respuesta)",
+      "submit_title": "¿Enviar el Examen?",
+      "submit_unanswered_one": "Tienes 1 pregunta sin respuesta. Las preguntas sin respuesta se consideran incorrectas.",
+      "submit_unanswered_many": "Tienes {n} preguntas sin respuesta. Las preguntas sin respuesta se consideran incorrectas.",
+      "submit_all_answered": "Las {n} preguntas están respondidas. ¿Listo para enviar?",
+      "submit_flagged_one": "1 pregunta aún marcada para revisión.",
+      "submit_flagged_many": "{n} preguntas aún marcadas para revisión.",
+      "review_more": "Revisar Más",
+      "submit_now": "Enviar Ahora",
+      "pass": "APROBADO",
+      "fail": "REPROBADO",
+      "time_expired": "Tiempo agotado — enviado automáticamente",
+      "passing_line": "Nota de aprobación: {score}% · Umbral oficial de {cert}",
+      "review_all": "Revisar Todas las Respuestas",
+      "retake": "Repetir el Examen",
+      "review_incorrect": "Revisar Incorrectas ({n})",
+      "review_flagged": "Revisar Marcadas ({n})",
+      "filter_all": "Todas ({n})",
+      "filter_wrong": "Incorrectas ({n})",
+      "filter_flagged": "Marcadas ({n})",
+      "not_answered": "La pregunta no fue respondida"
+    },
+    "practice": {
+      "question_of": "Pregunta {current} de {total}",
+      "percent_complete": "{n}% completado",
+      "select_answer": "Selecciona una respuesta para continuar",
+      "correct": "¡Correcto!",
+      "incorrect": "Incorrecto",
+      "next_question": "Siguiente Pregunta",
+      "see_results": "Ver Resultados"
+    },
+    "score": {
+      "complete_title": "¡Cuestionario Completado!",
+      "correct_out_of": "{score} correctas de {total} preguntas",
+      "correct": "Correctas",
+      "incorrect": "Incorrectas",
+      "skipped": "Omitidas",
+      "time": "Tiempo",
+      "time_used": "Tiempo usado",
+      "domain_breakdown": "Desglose por Dominio",
+      "review_answers": "Revisar Respuestas",
+      "rating_excellent": "¡Excelente! Listo para certificarte 🚀",
+      "rating_great": "¡Buen trabajo! Sigue así 💪",
+      "rating_good": "Buen esfuerzo — revisa tus puntos débiles",
+      "rating_keep": "Sigue estudiando — ¡lo lograrás!"
+    },
+    "certificate": {
+      "cta": "Obtener certificado",
+      "title": "Certificado de Logro",
+      "awarded": "Se certifica que",
+      "completed": "ha completado con éxito",
+      "score_line": "Puntuación: {score}% · Aprobación: {pass}%",
+      "date": "Fecha",
+      "code": "ID del Certificado",
+      "name_placeholder": "Escribe tu nombre para el certificado",
+      "required_name": "Escribe tu nombre para emitir el certificado",
+      "print": "Imprimir certificado"
+    },
+    "history": {
+      "title": "Historial de Intentos",
+      "empty": "Aún sin intentos — completa un cuestionario para crear tu historial.",
+      "attempts_one": "1 intento",
+      "attempts_other": "{n} intentos",
+      "best": "Mejor",
+      "mode_practice": "Práctica",
+      "mode_exam": "Examen",
+      "mode_course_exam": "Examen del Curso",
+      "passed": "Aprobado",
+      "failed": "Reprobado",
+      "clear": "Limpiar historial",
+      "date_label": "Fecha",
+      "score_label": "Puntuación"
+    },
+    "lesson": {
+      "start": "Iniciar Examen",
+      "start_hint": "Responde todas las preguntas — puedes navegar libremente y el cronómetro cuenta regresiva.",
+      "time_remaining": "Tiempo restante",
+      "submit": "Enviar Examen",
+      "confirm_title": "¿Enviar el examen?",
+      "confirm_body": "Las preguntas sin respuesta cuentan como incorrectas.",
+      "complete_title": "Examen Completado",
+      "saved": "Intento guardado en tu historial",
+      "review": "Revisar respuestas",
+      "breakdown": "Desglose por tipo",
+      "exit": "Volver a la lección",
+      "unanswered": "Sin respuesta"
     }
   },
   "tools": {
@@ -593,7 +905,543 @@
       }
     },
     "sectionTitle": "Potentes Herramientas de",
-    "sectionTitleHighlight": "Aprendizaje"
+    "sectionTitleHighlight": "Aprendizaje",
+    "eisenhower_matrix": {
+      "addTask": "Agregar tarea",
+      "cancel": "Cancelar",
+      "clear": "Borrar Todo",
+      "clickToAdd": "Haz clic en \"Agregar tarea\" para comenzar",
+      "completed": "Completadas",
+      "completionRate": "Tasa de Finalización",
+      "delegate": "Delegar",
+      "delegateDesc": "Urgente pero No Importante",
+      "delegateExplain": "Tareas que otros pueden realizar",
+      "doFirst": "Haz Primero",
+      "doFirstDesc": "Urgente e Importante",
+      "doFirstExplain": "Tareas críticas que requieren atención inmediata",
+      "dragDrop": "Arrastra y suelta o haz clic para seleccionar",
+      "eliminate": "Eliminar",
+      "eliminateDesc": "No Urgente y No Importante",
+      "eliminateExplain": "Pérdidas de tiempo que se deben minimizar o eliminar",
+      "hideCompleted": "Ocultar Completadas",
+      "import": "Importar",
+      "importData": "Importar Datos",
+      "importDesc": "Sube un archivo JSON o CSV para importar tareas",
+      "importError": "Error al importar datos. Verifica el formato del archivo.",
+      "importSuccess": "¡Datos importados con éxito!",
+      "important": "IMPORTANTE",
+      "listView": "Vista de Lista",
+      "matrixView": "Vista de Matriz",
+      "noTasks": "Aún no hay tareas",
+      "notImportant": "NO IMPORTANTE",
+      "notUrgent": "NO URGENTE",
+      "pending": "Pendientes",
+      "schedule": "Programar",
+      "scheduleDesc": "No Urgente pero Importante",
+      "scheduleExplain": "Tareas estratégicas para planificar y programar",
+      "selectFile": "Seleccionar Archivo",
+      "showCompleted": "Mostrar Completadas",
+      "subtitle": "Prioriza las tareas por urgencia e importancia",
+      "supportedFormats": "Formatos admitidos: JSON, CSV",
+      "title": "Matriz de Eisenhower",
+      "totalTasks": "Tareas Totales",
+      "urgent": "URGENTE",
+      "confirmClear": "¿Estás seguro de que quieres limpiar todas las tareas?"
+    },
+    "swot_matrix": {
+      "addItem": "Agregar ítem",
+      "cancel": "Cancelar",
+      "clear": "Limpiar Todo",
+      "clickToAdd": "Haga clic en \"Agregar ítem\" para comenzar",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Breve descripción del proyecto o contexto del análisis...",
+      "dragDrop": "Arrastra y suelta o haz clic para seleccionar",
+      "exportCsv": "Exportar CSV",
+      "exportJson": "Exportar JSON",
+      "exportPdf": "Exportar Informe",
+      "generateStrategies": "Generar Recomendaciones Estratégicas",
+      "hideStrategies": "Ocultar Estrategias",
+      "import": "Importar",
+      "importData": "Importar Datos",
+      "importDesc": "Sube un archivo JSON o CSV para importar tareas",
+      "importError": "Error al importar los datos. Por favor, verifica el formato del archivo.",
+      "importSuccess": "¡Datos importados con éxito!",
+      "itemsCount": "ítems",
+      "listView": "Vista Lista",
+      "matrixView": "Vista Matriz",
+      "noItems": "No hay ítems agregados",
+      "opportunities": "Oportunidades",
+      "opportunitiesDesc": "Factores externos positivos",
+      "projectName": "Nombre del Proyecto",
+      "projectNamePlaceholder": "ej: Lanzamiento de Nuevo Producto",
+      "selectFile": "Seleccionar Archivo",
+      "soDesc": "Usar Fortalezas para aprovechar Oportunidades",
+      "soStrategies": "Estrategias FO",
+      "stDesc": "Usar Fortalezas para evitar Amenazas",
+      "stStrategies": "Estrategias FA",
+      "strategies": "Estrategias",
+      "strengths": "Fortalezas",
+      "strengthsDesc": "Atributos internos positivos",
+      "subtitle": "Herramienta de planificación estratégica para análisis de negocios",
+      "supportedFormats": "Formatos admitidos: JSON, CSV",
+      "threats": "Amenazas",
+      "threatsDesc": "Desafíos externos",
+      "title": "Análisis Matriz FODA",
+      "weaknesses": "Debilidades",
+      "weaknessesDesc": "Áreas internas de mejora",
+      "woDesc": "Superar Debilidades persiguiendo Oportunidades",
+      "woStrategies": "Estrategias DO",
+      "wtDesc": "Minimizar Debilidades y evitar Amenazas",
+      "wtStrategies": "Estrategias DA",
+      "confirmClear": "¿Estás seguro de que quieres limpiar todos los datos?",
+      "strategyTemplates": {
+        "so": "Aprovecha \"{strength}\" para capitalizar \"{opportunity}\"",
+        "wo": "Mejora \"{weakness}\" para aprovechar \"{opportunity}\"",
+        "st": "Usa \"{strength}\" para mitigar \"{threat}\"",
+        "wt": "Aborda \"{weakness}\" para evitar la exposición a \"{threat}\""
+      },
+      "totalLabel": "Total:",
+      "addItemsHint": "Añade elementos para generar estrategias",
+      "report": {
+        "title": "INFORME DE ANÁLISIS SWOT",
+        "project": "Proyecto:",
+        "description": "Descripción:",
+        "date": "Fecha:",
+        "recommendations": "RECOMENDACIONES ESTRATÉGICAS",
+        "strategy_line": "{type} Estrategia:"
+      }
+    },
+    "common": {
+      "add": "Añadir",
+      "reset": "Restablecer",
+      "start": "Iniciar",
+      "pause": "Pausa",
+      "resume": "Reanudar",
+      "stats": "Estadísticas",
+      "json": "JSON",
+      "csv": "CSV",
+      "export_json": "Exportar JSON",
+      "export_csv": "Exportar CSV",
+      "grid_view": "Vista de Cuadrícula",
+      "list_view": "Vista de Lista",
+      "today": "Hoy",
+      "copy": "Copiar",
+      "copied": "¡Copiado!"
+    },
+    "brain_writing": {
+      "method_635_name": "Brain-Writing 6-3-5",
+      "method_635_desc": "6 participantes, 3 ideas cada, 5 minutos por ronda",
+      "method_constrained_name": "Brain-Writing Restringido",
+      "method_constrained_desc": "Las ideas deben construirse sobre o relacionarse con ideas anteriores",
+      "method_free_name": "Brain-Writing Libre",
+      "method_free_desc": "Formato abierto con generación flexible de ideas",
+      "title": "Sesión de Brain-Writing",
+      "subtitle": "Ideación colaborativa simple y estructurada",
+      "session_name": "Nombre de la Sesión *",
+      "session_name_placeholder": "ej.: Taller de Innovación de Productos",
+      "method_label": "Método de Brain-Writing",
+      "rounds": "Número de Rondas",
+      "time_per_round": "Tiempo por Ronda (minutos)",
+      "participants": "Participantes *",
+      "participant_placeholder": "Escribe el nombre del participante",
+      "recommended_participants": "Recomendado: {n} participantes",
+      "start_session": "Iniciar Sesión de Brain-Writing",
+      "round_counter": "Ronda {current} / {total}",
+      "idea_label": "Idea {n}",
+      "idea_placeholder": "Escribe tu idea...",
+      "round_complete": "¡Ronda {n} Completada!",
+      "ready_next_round": "¿Listo para pasar a la siguiente ronda?",
+      "start_round": "Iniciar Ronda {n}",
+      "session_complete": "¡Sesión Completada! 🎉",
+      "session_complete_text": "¡Gran trabajo! Has completado las {rounds} rondas con {participants} participantes.",
+      "new_session": "Nueva Sesión"
+    },
+    "decision_matrix": {
+      "default_title": "Decisión del Proyecto",
+      "option_a": "Opción A",
+      "option_b": "Opción B",
+      "option_c": "Opción C",
+      "criterion_cost": "Costo",
+      "criterion_impact": "Impacto",
+      "criterion_effort": "Esfuerzo",
+      "title": "Matriz de Decisión",
+      "subtitle": "Evalúa opciones según criterios ponderados para tomar mejores decisiones",
+      "decision_title": "Título de la Decisión",
+      "scale": "Escala (1–{n})",
+      "options": "Opciones",
+      "score": "Puntuación",
+      "rank": "Rango",
+      "add_option_placeholder": "Añadir nueva opción...",
+      "criteria": "Criterios",
+      "new_criterion_placeholder": "Nuevo criterio...",
+      "results_summary": "Resumen de Resultados"
+    },
+    "flashcards": {
+      "confirm_delete_deck": "¿Eliminar este mazo y todas sus cartas?",
+      "title": "Creador de Flashcards",
+      "subtitle": "Crea, estudia y domina con repetición espaciada",
+      "back_to_decks": "← Mazos",
+      "study": "Estudiar",
+      "your_decks": "Tus Mazos",
+      "cards_to_review": "{n} cartas · {m} para revisar",
+      "open": "Abrir",
+      "new_deck": "Nuevo Mazo",
+      "deck_name_placeholder": "Nombre del mazo...",
+      "description_placeholder": "Descripción...",
+      "create": "Crear",
+      "cards_count": "Cartas ({n})",
+      "no_cards": "Aún no hay cartas. ¡Añade tu primera carta abajo!",
+      "front": "Anverso",
+      "back": "Reverso",
+      "hint": "Pista (opcional)",
+      "front_question": "Anverso (pregunta)",
+      "back_answer": "Reverso (respuesta)",
+      "add_card": "Añadir Carta",
+      "card_progress": "Carta {i} de {n} · Estudiadas: {s}",
+      "tap_to_reveal": "Toca para revelar la respuesta",
+      "rating_again": "Otra vez",
+      "rating_again_sub": "Olvidé",
+      "rating_hard": "Difícil",
+      "rating_hard_sub": "Difícil",
+      "rating_good": "Bien",
+      "rating_good_sub": "Recordé",
+      "rating_easy": "Fácil",
+      "rating_easy_sub": "Perfecto",
+      "deck_statistics": "Estadísticas del Mazo",
+      "total_cards": "Total de Cartas",
+      "stat_new": "Nuevas (sin estudiar)",
+      "learning": "Aprendiendo",
+      "to_review": "Por Revisar",
+      "recently_studied": "Estudiadas Recientemente",
+      "ease": "Facilidad: {e}",
+      "back_to_deck": "Volver al Mazo",
+      "study_complete": "¡Estudio Completado!",
+      "study_complete_text": "Revisaste {n} cartas en esta sesión.",
+      "demo_name": "Mazo de Ejemplo",
+      "demo_description": "Un mazo de demo para empezar",
+      "demo_cards": [
+        {
+          "front": "¿Qué es una variable?",
+          "back": "Un lugar de almacenamiento con nombre en la memoria que guarda un valor",
+          "hint": "Almacenamiento"
+        },
+        {
+          "front": "¿Qué es una función?",
+          "back": "Un bloque de código reutilizable que realiza una tarea específica",
+          "hint": "Código reutilizable"
+        },
+        {
+          "front": "¿Qué es un array?",
+          "back": "Una colección ordenada de elementos almacenada en memoria contigua",
+          "hint": "Colección"
+        }
+      ]
+    },
+    "habit_tracker": {
+      "confirm_delete": "¿Eliminar este hábito y todos sus registros?",
+      "title": "Rastreador de Hábitos",
+      "subtitle": "Construye mejores hábitos, un día a la vez",
+      "habits_done": "{done}/{total} hábitos completados",
+      "total_days": "días en total",
+      "new_habit_placeholder": "Nombre del nuevo hábito...",
+      "frequency_daily": "Diario",
+      "frequency_weekdays": "Días Laborables",
+      "frequency_weekly": "Semanal",
+      "habits_column": "Hábitos",
+      "no_habits": "Aún no hay hábitos. ¡Añade tu primer hábito para empezar a registrar!",
+      "monthly_overview": "Vista Mensual",
+      "prev": "Anterior",
+      "next": "Siguiente",
+      "statistics": "Estadísticas de Hábitos",
+      "total": "Total",
+      "streak": "Racha",
+      "rate": "Tasa"
+    },
+    "pomodoro": {
+      "title": "Temporizador de Estudio Pomodoro",
+      "subtitle": "Concéntrate en lo que importa, un intervalo a la vez",
+      "tab_timer": "Temporizador",
+      "tab_tasks": "Tareas",
+      "status_long_break": "Descanso Largo",
+      "status_break": "Tiempo de Descanso",
+      "status_focus": "Tiempo de Enfoque",
+      "session_number": "Sesión #{n}",
+      "mode_break": "Descanso",
+      "mode_work": "Trabajo",
+      "work_min": "Trabajo (min)",
+      "break_min": "Descanso (min)",
+      "long_min": "Largo (min)",
+      "sessions_count": "({n} sesiones)",
+      "session_tasks": "Tareas de la Sesión",
+      "task_placeholder": "Añade una tarea para esta sesión...",
+      "no_tasks": "Aún no hay tareas. ¡Añade tareas para tu sesión de estudio!",
+      "tasks_completed": "{done}/{total} tareas completadas",
+      "statistics": "Estadísticas",
+      "clear_history": "Borrar Historial",
+      "total_sessions": "Total de Sesiones",
+      "sessions_short": "{n} ses",
+      "day_streak": "Días Seguidos",
+      "days": "{n} días",
+      "recent_sessions": "Sesiones Recientes",
+      "minutes_short": "{n} min",
+      "tasks_short": "{n} tareas",
+      "no_sessions": "Aún no hay sesiones completadas",
+      "no_sessions_hint": "¡Inicia el temporizador para crear tu historial de estudio!"
+    },
+    "regex": {
+      "title": "Probador de Regex",
+      "subtitle": "Prueba y depura expresiones regulares en tiempo real",
+      "pattern_label": "Expresión Regular",
+      "pattern_placeholder": "Escribe el patrón regex...",
+      "flags": "Banderas",
+      "flag_desc_g": "Global - encuentra todas las coincidencias",
+      "flag_desc_i": "Ignorar mayúsculas/minúsculas",
+      "flag_desc_m": "Multilínea - ^ y $ coinciden con el inicio/final de la línea",
+      "flag_desc_s": "Dotall - . coincide con saltos de línea",
+      "flag_desc_u": "Unicode - activa funciones Unicode",
+      "flag_desc_y": "Sticky - coincide desde lastIndex",
+      "replace": "Reemplazar",
+      "hide_replace": "Ocultar Reemplazo",
+      "cheat_sheet": "Hoja de Trucos",
+      "hide_cheat_sheet": "Ocultar Hoja de Trucos",
+      "replacement_label": "Reemplazo",
+      "replacement_placeholder": "Texto de reemplazo (usa $1, $2 para grupos)",
+      "test_string": "Texto de Prueba",
+      "test_string_placeholder": "Escribe el texto para probar...",
+      "match_results": "Resultados de Coincidencias",
+      "matches_count": "{n} coincidencias",
+      "chars_count": "({n} caracteres)",
+      "no_matches": "No se encontraron coincidencias",
+      "invalid_pattern": "Patrón regex no válido",
+      "more_matches": "...y {n} coincidencias más",
+      "captured_groups": "Grupos Capturados",
+      "replaced": "Reemplazado",
+      "cheat_title": "Hoja de Referencia de Regex",
+      "quick_examples": "Ejemplos Rápidos",
+      "cheat_categories": [
+        {
+          "name": "Anclajes",
+          "items": [
+            {
+              "pattern": "^",
+              "desc": "Inicio de cadena/línea"
+            },
+            {
+              "pattern": "$",
+              "desc": "Fin de cadena/línea"
+            },
+            {
+              "pattern": "\\b",
+              "desc": "Límite de palabra"
+            },
+            {
+              "pattern": "\\B",
+              "desc": "Límite no-palabra"
+            }
+          ]
+        },
+        {
+          "name": "Clases de Caracteres",
+          "items": [
+            {
+              "pattern": "\\d",
+              "desc": "Dígito [0-9]"
+            },
+            {
+              "pattern": "\\w",
+              "desc": "Carácter de palabra [a-zA-Z0-9_]"
+            },
+            {
+              "pattern": "\\s",
+              "desc": "Espacio en Blanco"
+            },
+            {
+              "pattern": ".",
+              "desc": "Cualquier carácter salvo salto de línea"
+            }
+          ]
+        },
+        {
+          "name": "Cuantificadores",
+          "items": [
+            {
+              "pattern": "*",
+              "desc": "0 o más"
+            },
+            {
+              "pattern": "+",
+              "desc": "1 o más"
+            },
+            {
+              "pattern": "?",
+              "desc": "0 o 1"
+            },
+            {
+              "pattern": "{n,m}",
+              "desc": "n a m repeticiones"
+            }
+          ]
+        },
+        {
+          "name": "Grupos",
+          "items": [
+            {
+              "pattern": "(abc)",
+              "desc": "Grupo de captura"
+            },
+            {
+              "pattern": "(?:abc)",
+              "desc": "Grupo sin captura"
+            },
+            {
+              "pattern": "(?=abc)",
+              "desc": "Lookahead"
+            },
+            {
+              "pattern": "(?!abc)",
+              "desc": "Lookahead negativo"
+            }
+          ]
+        },
+        {
+          "name": "Escapes",
+          "items": [
+            {
+              "pattern": "\\\\",
+              "desc": "Barra invertida literal"
+            },
+            {
+              "pattern": "\\.",
+              "desc": "Punto literal"
+            },
+            {
+              "pattern": "\\*",
+              "desc": "Asterisco literal"
+            },
+            {
+              "pattern": "\\n",
+              "desc": "Salto de línea"
+            }
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "label": "Dígitos",
+          "pattern": "\\d+"
+        },
+        {
+          "label": "Palabras con Mayúscula",
+          "pattern": "[A-Z][a-z]+"
+        },
+        {
+          "label": "URLs",
+          "pattern": "https?://\\S+"
+        },
+        {
+          "label": "Correos",
+          "pattern": "[\\w._%+-]+@[\\w.-]+\\.\\w{2,}"
+        },
+        {
+          "label": "Palabras ≥4 caracteres",
+          "pattern": "\\b\\w{4,}\\b"
+        },
+        {
+          "label": "Etiquetas HTML",
+          "pattern": "<[^>]+>"
+        }
+      ]
+    },
+    "unit_converter": {
+      "title": "Conversor de Unidades",
+      "subtitle": "Convierte entre cientos de unidades en tiempo real",
+      "from": "De",
+      "to": "Para",
+      "common_conversions": "Conversiones Comunes",
+      "categories": {
+        "length": "Longitud",
+        "mass": "Masa",
+        "temperature": "Temperatura",
+        "volume": "Volumen",
+        "speed": "Velocidad",
+        "area": "Área",
+        "time": "Tiempo",
+        "data": "Almacenamiento de Datos",
+        "angle": "Ángulo"
+      },
+      "units": {
+        "meters": "Metros (m)",
+        "kilometers": "Kilómetros (km)",
+        "centimeters": "Centímetros (cm)",
+        "millimeters": "Milímetros (mm)",
+        "miles": "Millas (mi)",
+        "yards": "Yardas (yd)",
+        "feet": "Pies (ft)",
+        "inches": "Pulgadas (in)",
+        "nautical_miles": "Millas Náuticas (nmi)",
+        "kilograms": "Kilogramos (kg)",
+        "grams": "Gramos (g)",
+        "milligrams": "Miligramos (mg)",
+        "metric_tons": "Toneladas Métricas (t)",
+        "pounds": "Libras (lb)",
+        "ounces": "Onzas (oz)",
+        "stones": "Piedras (st)",
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)",
+        "kelvin": "Kelvin (K)",
+        "liters": "Litros (L)",
+        "milliliters": "Mililitros (mL)",
+        "cubic_meters": "Metros Cúbicos (m³)",
+        "gallons_us": "Galones (EE. UU.)",
+        "gallons_uk": "Galones (R.U.)",
+        "quarts": "Cuartas (qt)",
+        "pints": "Pintas (pt)",
+        "cups": "Tazas",
+        "fluid_ounces": "Onzas Líquidas (fl oz)",
+        "tablespoons": "Cucharas Soperas (tbsp)",
+        "teaspoons": "Cucharaditas (tsp)",
+        "meters_per_second": "Metros/segundo (m/s)",
+        "kilometers_per_hour": "Kilómetros/hora (km/h)",
+        "miles_per_hour": "Millas/hora (mph)",
+        "knots": "Nudos (kn)",
+        "feet_per_second": "Pies/segundo (ft/s)",
+        "mach": "Mach (a nivel del mar)",
+        "square_meters": "Metros Cuadrados (m²)",
+        "square_kilometers": "Kilómetros Cuadrados (km²)",
+        "square_miles": "Millas Cuadradas (mi²)",
+        "square_yards": "Yardas Cuadradas (yd²)",
+        "square_feet": "Pies Cuadrados (ft²)",
+        "square_inches": "Pulgadas Cuadradas (in²)",
+        "hectares": "Hectáreas (ha)",
+        "acres": "Acres",
+        "seconds": "Segundos (s)",
+        "milliseconds": "Milisegundos (ms)",
+        "microseconds": "Microsegundos (µs)",
+        "minutes": "Minutos (min)",
+        "hours": "Horas (h)",
+        "days": "Días (d)",
+        "weeks": "Semanas",
+        "months": "Meses (30 días)",
+        "years": "Años (365 días)",
+        "bytes": "Bytes (B)",
+        "kilobytes": "Kilobytes (KB)",
+        "megabytes": "Megabytes (MB)",
+        "gigabytes": "Gigabytes (GB)",
+        "terabytes": "Terabytes (TB)",
+        "petabytes": "Petabytes (PB)",
+        "bits": "Bits (b)",
+        "kilobits": "Kilobits (Kb)",
+        "megabits": "Megabits (Mb)",
+        "gigabits": "Gigabits (Gb)",
+        "degrees": "Grados (°)",
+        "radians": "Radianes (rad)",
+        "gradians": "Gradianes (grad)",
+        "arcminutes": "Minutos de Arco (')",
+        "arcseconds": "Segundos de Arco (\")"
+      }
+    },
+    "tool_count": "herramientas",
+    "tool_singular": "herramienta"
   },
   "roadmaps": {
     "title": "Rutas de Aprendizaje",
@@ -631,6 +1479,48 @@
       "intermediate": "Intermediario",
       "advanced": "Avanzado"
     },
-    "goToCourse": "Ir al Curso"
+    "goToCourse": "Ir al Curso",
+    "notFound": "Hoja de ruta no encontrada"
+  },
+  "widgets": {
+    "multiple_choice": {
+      "title": "Pregunta de Práctica"
+    },
+    "try_again": "Intentar de Nuevo",
+    "check_answers": "Comprobar Respuestas",
+    "correct": "¡Correcto!",
+    "all_correct": "¡Todas correctas!",
+    "incorrect": "Incorrecto",
+    "correct_label": "Correcto: {label}",
+    "check_answer": "Comprobar Respuesta",
+    "check_matches": "Comprobar Coincidencias",
+    "check_order": "Comprobar Orden",
+    "matching": {
+      "title": "Pregunta de Correspondencia",
+      "drop_here": "Suelta aquí",
+      "drag_from_here": "Arrastra las respuestas desde aquí:",
+      "incorrect_feedback": "Algunas coincidencias son incorrectas — los espacios rojos tienen respuestas incorrectas."
+    },
+    "fill_blank": {
+      "title": "Completa los Espacios",
+      "blank_placeholder": "espacio",
+      "blank_aria": "Elemento {i}, espacio {j}",
+      "word_bank_hint": "Banco de Palabras — arrastra las palabras a los espacios de arriba:",
+      "feedback_perfect": "Perfecto — ¡todos los espacios completados correctamente!",
+      "feedback_incorrect_items": "Algunos espacios son incorrectos — {count} de {total} elementos correctos.",
+      "feedback_incorrect_blanks": "Algunos espacios son incorrectos — los espacios rojos tienen respuestas incorrectas."
+    },
+    "drag_order": {
+      "title": "Pregunta de Orden",
+      "incorrect_feedback": "Casi — los elementos rojos están en la posición incorrecta."
+    },
+    "bucket_drop": {
+      "title": "Clasificar en Categorías",
+      "instruction": "Elementos — haz clic en un elemento y luego en una categoría para colocarlo:",
+      "empty_pool": "Todos los elementos colocados.",
+      "empty_bucket": "Vacío — haz clic para colocar el elemento seleccionado",
+      "bucket_aria": "Categoría: {label}",
+      "score_feedback": "{count} / {total} correctos — los elementos rojos están en la categoría incorrecta o sin colocar."
+    }
   }
 }

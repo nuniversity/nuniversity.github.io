@@ -1,7 +1,7 @@
 ---
 title: Regex Tester
 description: Test and debug regular expressions in real-time. Features match highlighting, flags configuration, and a built-in regex cheat sheet.
-category: Coding & Programming
+category: coding
 icon: code
 order: 9
 ---

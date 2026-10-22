@@ -45,8 +45,8 @@ function DraggableChip({ id, label, isPlaced }: { id: string; label: string; isP
   )
 }
 
-function DroppableSlot({ id, leftLabel, matchedAnswer, isCorrect, feedback, isOver }: {
-  id: string; leftLabel: string; matchedAnswer: string | null; isCorrect?: boolean; feedback: 'idle' | 'correct' | 'incorrect'; isOver: boolean
+function DroppableSlot({ id, leftLabel, matchedAnswer, isCorrect, feedback, isOver, dropLabel }: {
+  id: string; leftLabel: string; matchedAnswer: string | null; isCorrect?: boolean; feedback: 'idle' | 'correct' | 'incorrect'; isOver: boolean; dropLabel?: string
 }) {
   const { setNodeRef } = useDroppable({ id })
   let border = 'border-dashed border-border'
@@ -73,7 +73,7 @@ function DroppableSlot({ id, leftLabel, matchedAnswer, isCorrect, feedback, isOv
         ref={setNodeRef}
         className={`flex flex-1 items-center justify-center rounded-lg border-2 px-4 py-3 text-sm transition-all ${border} bg ${isOver ? 'scale-[1.02]' : ''}`}
       >
-        {matchedAnswer ?? <span className="text-xs text-muted-foreground">Drop here</span>}
+        {matchedAnswer ?? <span className="text-xs text-muted-foreground">{dropLabel || 'Drop here'}</span>}
       </div>
     </div>
   )
@@ -83,9 +83,12 @@ interface MatchingQuestionProps {
   question: string
   pairs: Array<{ left: string; right: string }>
   explanation?: string
+  dict?: any
 }
 
-export default function MatchingQuestion({ question, pairs, explanation }: MatchingQuestionProps) {
+export default function MatchingQuestion({ question, pairs, explanation, dict }: MatchingQuestionProps) {
+  const w = dict?.widgets
+  const m = w?.matching
   const [rightOrder, setRightOrder] = useState<string[]>(() => shuffle(pairs.map(p => p.right)))
   const [placements, setPlacements] = useState<Record<string, string>>({})
   const [feedback, setFeedback] = useState<'idle' | 'correct' | 'incorrect'>('idle')
@@ -144,7 +147,7 @@ export default function MatchingQuestion({ question, pairs, explanation }: Match
     <div className="my-8 rounded-xl border bg-card shadow-sm overflow-hidden">
       <div className="bg-muted/50 px-4 py-2 border-b flex items-center gap-2">
         <ArrowRightLeft className="w-4 h-4 text-primary" />
-        <span className="text-sm font-semibold text-foreground">Matching Question</span>
+        <span className="text-sm font-semibold text-foreground">{m?.title || 'Matching Question'}</span>
       </div>
       <div className="p-4 sm:p-6 space-y-4">
         <p className="font-medium text-foreground">{question}</p>
@@ -162,13 +165,14 @@ export default function MatchingQuestion({ question, pairs, explanation }: Match
                   isCorrect={feedback !== 'idle' ? placements[slotId] === pair.right : undefined}
                   feedback={feedback}
                   isOver={overId === slotId}
+                  dropLabel={m?.drop_here || 'Drop here'}
                 />
               )
             })}
           </div>
 
           <div className="mt-6">
-            <p className="mb-3 text-sm font-semibold text-muted-foreground">Drag answers from here:</p>
+            <p className="mb-3 text-sm font-semibold text-muted-foreground">{m?.drag_from_here || 'Drag answers from here:'}</p>
             <div className="flex flex-wrap gap-3">
               {rightOrder.map(answer => (
                 <DraggableChip key={answer} id={answer} label={answer} isPlaced={placedAnswers.has(answer)} />
@@ -197,7 +201,7 @@ export default function MatchingQuestion({ question, pairs, explanation }: Match
                 : <XCircle className="w-5 h-5 text-red-600" />
               }
               <span className="font-semibold text-sm text-foreground">
-                {feedback === 'correct' ? 'All correct!' : 'Some matches are wrong — red slots have incorrect answers.'}
+                {feedback === 'correct' ? (w?.all_correct || 'All correct!') : (m?.incorrect_feedback || 'Some matches are wrong — red slots have incorrect answers.')}
               </span>
             </div>
             {explanation && <p className="text-sm text-muted-foreground mt-1">{explanation}</p>}
@@ -207,11 +211,11 @@ export default function MatchingQuestion({ question, pairs, explanation }: Match
         <div className="flex gap-2 pt-2">
           {feedback !== 'correct' && (
             <button onClick={handleCheck} className="px-6 py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
-              Check Matches
+              {w?.check_matches || 'Check Matches'}
             </button>
           )}
           <button onClick={handleTryAgain} className="px-6 py-2 text-sm font-medium rounded-lg bg-muted text-foreground hover:bg-accent transition-colors">
-            Try Again
+            {w?.try_again || 'Try Again'}
           </button>
         </div>
       </div>

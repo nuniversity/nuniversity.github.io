@@ -24,14 +24,18 @@ export async function generateMetadata({
   params: { lang: Locale }
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
-  
+  const site = dict.metadata?.site
+  const siteTitle = site?.title || 'NUniversity - Learn, Code, and Grow'
+  const siteDescription = site?.description || 'A comprehensive educational platform offering interactive courses, coding tools, and study games across technology, engineering, and sciences.'
+  const siteOgDescription = site?.og_description || 'A comprehensive educational platform offering interactive courses, coding tools, and study games.'
+
   return {
     title: {
-      default: 'NUniversity - Learn, Code, and Grow',
+      default: siteTitle,
       template: '%s | NUniversity'
     },
-    description: 'A comprehensive educational platform offering interactive courses, coding tools, and study games across technology, engineering, and sciences.',
-    keywords: ['education', 'online courses', 'programming', 'engineering', 'science', 'interactive learning', 'coding tools'],
+    description: siteDescription,
+    keywords: site?.keywords || ['education', 'online courses', 'programming', 'engineering', 'science', 'interactive learning', 'coding tools'],
     authors: [{ name: 'NUniversity Team' }],
     creator: 'NUniversity',
     publisher: 'NUniversity',
@@ -54,22 +58,22 @@ export async function generateMetadata({
       type: 'website',
       locale: params.lang === 'en' ? 'en_US' : params.lang === 'pt' ? 'pt_BR' : 'es_ES',
       url: `https://nuniversity.github.io/${params.lang}`,
-      title: 'NUniversity - Learn, Code, and Grow',
-      description: 'A comprehensive educational platform offering interactive courses, coding tools, and study games.',
+      title: siteTitle,
+      description: siteOgDescription,
       siteName: 'NUniversity',
       images: [
         {
           url: '/og-image.png',
           width: 1200,
           height: 630,
-          alt: 'NUniversity - Educational Platform',
+          alt: site?.og_alt || 'NUniversity - Educational Platform',
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'NUniversity - Learn, Code, and Grow',
-      description: 'A comprehensive educational platform offering interactive courses, coding tools, and study games.',
+      title: siteTitle,
+      description: siteOgDescription,
       images: ['/og-image.png'],
     },
     robots: {
@@ -106,12 +110,12 @@ export default async function RootLayout({
               "@type": "EducationalOrganization",
               "name": "NUniversity",
               "url": "https://nuniversity.github.io",
-              "description": "A comprehensive educational platform offering interactive courses, coding tools, and study games across technology, engineering, and sciences.",
+              "description": dict.metadata?.site?.description || "A comprehensive educational platform offering interactive courses, coding tools, and study games across technology, engineering, and sciences.",
               "sameAs": [],
               "contactPoint": {
                 "@type": "ContactPoint",
-                "contactType": "customer service",
-                "availableLanguage": ["English", "Português", "Español"]
+                "contactType": dict.metadata?.site?.customer_service || "customer service",
+                "availableLanguage": dict.metadata?.site?.available_languages || ["English", "Português", "Español"]
               }
             })
           }}

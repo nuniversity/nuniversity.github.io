@@ -48,7 +48,7 @@ export default async function HomePage({
   const [courses, tools, games, resources] = await Promise.all([
     getAllCourses(params.lang),
     getAllTools(params.lang),
-    getAllGames(),
+    getAllGames(params.lang),
     getAllResources(params.lang),
   ])
 

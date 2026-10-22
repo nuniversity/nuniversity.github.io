@@ -9,6 +9,11 @@ interface BrainWritingSessionProps {
   dict: any;
 }
 
+function tpl(template: string, vars?: Record<string, string | number>): string {
+  if (!vars) return template
+  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
+}
+
 const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProps) => {
   const [sessionName, setSessionName] = useState('');
   const [method, setMethod] = useState('6-3-5');
@@ -25,24 +30,27 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const handleRoundCompleteRef = useRef<() => void>(() => {});
 
+  const t = dict.tools?.brain_writing || {};
+  const tc = dict.tools?.common || {};
+
   const methods = {
     '6-3-5': {
-      name: 'Brain-Writing 6-3-5',
-      description: '6 participants, 3 ideas each, 5 minutes per round',
+      name: t.method_635_name || 'Brain-Writing 6-3-5',
+      description: t.method_635_desc || '6 participants, 3 ideas each, 5 minutes per round',
       defaultParticipants: 6,
       ideasPerRound: 3,
       defaultTime: 5,
     },
     'constrained': {
-      name: 'Constrained Brain-Writing',
-      description: 'Ideas must build on or relate to previous ideas',
+      name: t.method_constrained_name || 'Constrained Brain-Writing',
+      description: t.method_constrained_desc || 'Ideas must build on or relate to previous ideas',
       defaultParticipants: 4,
       ideasPerRound: 2,
       defaultTime: 7,
     },
     'free': {
-      name: 'Free Brain-Writing',
-      description: 'Open format with flexible idea generation',
+      name: t.method_free_name || 'Free Brain-Writing',
+      description: t.method_free_desc || 'Open format with flexible idea generation',
       defaultParticipants: 5,
       ideasPerRound: 3,
       defaultTime: 5,
@@ -188,27 +196,27 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
               <Lightbulb className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Brain-Writing Session
+              {t.title || 'Brain-Writing Session'}
             </h1>
             <p className="text-muted-foreground text-lg">
-              Collaborative ideation made simple and structured
+              {t.subtitle || 'Collaborative ideation made simple and structured'}
             </p>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 space-y-8">
             <div>
-              <label className="block text-sm font-semibold mb-2">Session Name *</label>
+              <label className="block text-sm font-semibold mb-2">{t.session_name || 'Session Name *'}</label>
               <input
                 type="text"
                 value={sessionName}
                 onChange={(e) => setSessionName(e.target.value)}
-                placeholder="e.g., Product Innovation Workshop"
+                placeholder={t.session_name_placeholder || 'e.g., Product Innovation Workshop'}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2">Brain-Writing Method</label>
+              <label className="block text-sm font-semibold mb-2">{t.method_label || 'Brain-Writing Method'}</label>
               <div className="grid gap-3">
                 {Object.entries(methods).map(([key, m]) => (
                   <label
@@ -238,7 +246,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
 
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold mb-2">Number of Rounds</label>
+                <label className="block text-sm font-semibold mb-2">{t.rounds || 'Number of Rounds'}</label>
                 <input
                   type="number"
                   min="1"
@@ -249,7 +257,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold mb-2">Time per Round (minutes)</label>
+                <label className="block text-sm font-semibold mb-2">{t.time_per_round || 'Time per Round (minutes)'}</label>
                 <input
                   type="number"
                   min="1"
@@ -262,14 +270,14 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2">Participants *</label>
+              <label className="block text-sm font-semibold mb-2">{t.participants || 'Participants *'}</label>
               <div className="flex gap-2 mb-3">
                 <input
                   type="text"
                   value={newParticipant}
                   onChange={(e) => setNewParticipant(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && addParticipant()}
-                  placeholder="Enter participant name"
+                  placeholder={t.participant_placeholder || 'Enter participant name'}
                   className="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 outline-none"
                 />
                 <button
@@ -277,7 +285,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                   className="px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors flex items-center gap-2"
                 >
                   <Plus className="w-4 h-4" />
-                  Add
+                  {tc.add || 'Add'}
                 </button>
               </div>
               
@@ -302,7 +310,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
               )}
               
               <p className="text-sm text-muted-foreground mt-2">
-                Recommended: {methods[method as keyof typeof methods].defaultParticipants} participants
+                {tpl(t.recommended_participants || 'Recommended: {n} participants', { n: methods[method as keyof typeof methods].defaultParticipants })}
               </p>
             </div>
 
@@ -311,7 +319,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
               disabled={participants.length === 0 || !sessionName}
               className="w-full py-4 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Start Brain-Writing Session
+              {t.start_session || 'Start Brain-Writing Session'}
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
@@ -337,7 +345,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
               </div>
               
               <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
-                <span className="text-sm font-semibold">Round {currentRound} / {rounds}</span>
+                <span className="text-sm font-semibold">{tpl(t.round_counter || 'Round {current} / {total}', { current: currentRound, total: rounds })}</span>
               </div>
             </div>
           </div>
@@ -351,7 +359,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                   : 'bg-green-500 text-white hover:bg-green-600'
               }`}
             >
-              {isActive ? 'Pause' : 'Resume'}
+              {isActive ? (tc.pause || 'Pause') : (tc.resume || 'Resume')}
             </button>
             
             <button
@@ -359,7 +367,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
               className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors flex items-center gap-2"
             >
               {view === 'grid' ? <List className="w-4 h-4" /> : <Grid className="w-4 h-4" />}
-              {view === 'grid' ? 'List View' : 'Grid View'}
+              {view === 'grid' ? (tc.list_view || 'List View') : (tc.grid_view || 'Grid View')}
             </button>
             
             {completedRounds.length > 0 && (
@@ -369,14 +377,14 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                   className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
-                  JSON
+                  {tc.json || 'JSON'}
                 </button>
                 <button
                   onClick={() => exportData('csv')}
                   className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
-                  CSV
+                  {tc.csv || 'CSV'}
                 </button>
               </>
             )}
@@ -386,7 +394,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
               className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors flex items-center gap-2"
             >
               <RefreshCw className="w-4 h-4" />
-              Reset
+              {tc.reset || 'Reset'}
             </button>
           </div>
         </div>
@@ -408,12 +416,12 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                 {participantIdeas.map((idea, index) => (
                   <div key={index}>
                     <label className="block text-xs font-semibold text-muted-foreground mb-1">
-                      Idea {index + 1}
+                      {tpl(t.idea_label || 'Idea {n}', { n: index + 1 })}
                     </label>
                     <textarea
                       value={idea}
                       onChange={(e) => updateIdea(participant, index, e.target.value)}
-                      placeholder="Enter your idea..."
+                      placeholder={t.idea_placeholder || 'Enter your idea...'}
                       className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 outline-none resize-none"
                       rows={3}
                     />
@@ -427,13 +435,13 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
         {!isActive && currentRound < rounds && (
           <div className="mt-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center">
             <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-3" />
-            <h3 className="text-xl font-bold mb-2">Round {currentRound} Complete!</h3>
-            <p className="text-muted-foreground mb-4">Ready to move to the next round?</p>
+            <h3 className="text-xl font-bold mb-2">{tpl(t.round_complete || 'Round {n} Complete!', { n: currentRound })}</h3>
+            <p className="text-muted-foreground mb-4">{t.ready_next_round || 'Ready to move to the next round?'}</p>
             <button
               onClick={nextRound}
               className="px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition-all flex items-center gap-2 mx-auto"
             >
-              Start Round {currentRound + 1}
+              {tpl(t.start_round || 'Start Round {n}', { n: currentRound + 1 })}
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
@@ -444,9 +452,9 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
             <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center mx-auto mb-4">
               <CheckCircle2 className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-2xl font-bold mb-2">Session Complete! 🎉</h3>
+            <h3 className="text-2xl font-bold mb-2">{t.session_complete || 'Session Complete! 🎉'}</h3>
             <p className="text-muted-foreground mb-6">
-              Great work! You've completed all {rounds} rounds with {participants.length} participants.
+              {tpl(t.session_complete_text || "Great work! You've completed all {rounds} rounds with {participants} participants.", { rounds, participants: participants.length })}
             </p>
             <div className="flex justify-center gap-3">
               <button
@@ -454,21 +462,21 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                 className="px-6 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors flex items-center gap-2"
               >
                 <Download className="w-5 h-5" />
-                Export JSON
+                {tc.export_json || 'Export JSON'}
               </button>
               <button
                 onClick={() => exportData('csv')}
                 className="px-6 py-3 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors flex items-center gap-2"
               >
                 <Download className="w-5 h-5" />
-                Export CSV
+                {tc.export_csv || 'Export CSV'}
               </button>
               <button
                 onClick={resetSession}
                 className="px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors flex items-center gap-2"
               >
                 <RefreshCw className="w-5 h-5" />
-                New Session
+                {t.new_session || 'New Session'}
               </button>
             </div>
           </div>

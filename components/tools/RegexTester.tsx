@@ -10,14 +10,10 @@ interface RegexTesterProps {
 
 type FlagKey = 'g' | 'i' | 'm' | 's' | 'u' | 'y';
 
-const allFlags: { key: FlagKey; label: string; desc: string }[] = [
-  { key: 'g', label: 'g', desc: 'Global - find all matches' },
-  { key: 'i', label: 'i', desc: 'Case-insensitive' },
-  { key: 'm', label: 'm', desc: 'Multiline - ^ and $ match line start/end' },
-  { key: 's', label: 's', desc: 'Dotall - . matches newlines' },
-  { key: 'u', label: 'u', desc: 'Unicode - enable Unicode features' },
-  { key: 'y', label: 'y', desc: 'Sticky - match from lastIndex' },
-];
+function tpl(template: string, vars?: Record<string, string | number>): string {
+  if (!vars) return template
+  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
+}
 
 const cheatSheet = [
   { category: 'Anchors', items: [
@@ -52,7 +48,34 @@ const cheatSheet = [
   ]},
 ];
 
-const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
+const quickExamples = [
+  { pattern: '\\d+', label: 'Digits' },
+  { pattern: '[A-Z][a-z]+', label: 'Capitalized Words' },
+  { pattern: 'https?://\\S+', label: 'URLs' },
+  { pattern: '[\\w._%+-]+@[\\w.-]+\\.\\w{2,}', label: 'Emails' },
+  { pattern: '\\b\\w{4,}\\b', label: 'Words ≥4 chars' },
+  { pattern: '<[^>]+>', label: 'HTML Tags' },
+];
+
+const RegexTester = ({ lang = 'en', dict = {} }: RegexTesterProps) => {
+  const t = dict.tools?.regex || {};
+  const tc = dict.tools?.common || {};
+
+  const allFlags: { key: FlagKey; label: string; desc: string }[] = [
+    { key: 'g', label: 'g', desc: t.flag_desc_g || 'Global - find all matches' },
+    { key: 'i', label: 'i', desc: t.flag_desc_i || 'Case-insensitive' },
+    { key: 'm', label: 'm', desc: t.flag_desc_m || 'Multiline - ^ and $ match line start/end' },
+    { key: 's', label: 's', desc: t.flag_desc_s || 'Dotall - . matches newlines' },
+    { key: 'u', label: 'u', desc: t.flag_desc_u || 'Unicode - enable Unicode features' },
+    { key: 'y', label: 'y', desc: t.flag_desc_y || 'Sticky - match from lastIndex' },
+  ];
+
+  const cheatSections: { name: string; items: { pattern: string; desc: string }[] }[] = (t.cheat_categories ?? cheatSheet).map(
+    (section: any) => ({ name: section.name ?? section.category, items: section.items })
+  );
+
+  const examples: { label: string; pattern: string }[] = t.examples ?? quickExamples;
+
   const [pattern, setPattern] = useState('(\\w+)@(\\w+)\\.(\\w+)');
   const [testString, setTestString] = useState('john@example.com\njane@test.org\nhello world');
   const [flags, setFlags] = useState<Set<FlagKey>>(new Set<FlagKey>(['g']));
@@ -134,10 +157,10 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
             <HelpCircle className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-            Regex Tester
+            {t.title || 'Regex Tester'}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Test and debug regular expressions in real-time
+            {t.subtitle || 'Test and debug regular expressions in real-time'}
           </p>
         </div>
 
@@ -146,7 +169,7 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
               <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-                Regular Expression {regexResult.valid ? <CheckCircle2 className="w-4 h-4 inline text-green-500" /> : null}
+                {t.pattern_label || 'Regular Expression'} {regexResult.valid ? <CheckCircle2 className="w-4 h-4 inline text-green-500" /> : null}
               </label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-mono text-lg">/</span>
@@ -154,7 +177,7 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
                   type="text"
                   value={pattern}
                   onChange={(e) => setPattern(e.target.value)}
-                  placeholder="Enter regex pattern..."
+                  placeholder={t.pattern_placeholder || 'Enter regex pattern...'}
                   className="w-full pl-8 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 font-mono text-lg focus:ring-2 focus:ring-emerald-500 outline-none"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-mono text-lg">/{Array.from(flags).join('')}</span>
@@ -167,7 +190,7 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Flags</label>
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">{t.flags || 'Flags'}</label>
               <div className="flex flex-wrap gap-2">
                 {allFlags.map(f => (
                   <button
@@ -182,13 +205,13 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
               </div>
               <div className="flex gap-2 mt-3">
                 <button onClick={() => setShowReplace(!showReplace)} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${showReplace ? 'bg-emerald-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-600'}`}>
-                  {showReplace ? 'Hide Replace' : 'Replace'}
+                  {showReplace ? (t.hide_replace || 'Hide Replace') : (t.replace || 'Replace')}
                 </button>
                 <button onClick={() => setShowCheat(!showCheat)} className="px-3 py-1.5 rounded-lg text-xs font-medium bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all">
-                  {showCheat ? 'Hide Cheat Sheet' : 'Cheat Sheet'}
+                  {showCheat ? (t.hide_cheat_sheet || 'Hide Cheat Sheet') : (t.cheat_sheet || 'Cheat Sheet')}
                 </button>
                 <button onClick={reset} className="px-3 py-1.5 rounded-lg text-xs font-medium bg-red-100 dark:bg-red-900/30 text-red-600 hover:bg-red-200 dark:hover:bg-red-900 transition-all flex items-center gap-1">
-                  <RotateCcw className="w-3 h-3" /> Reset
+                  <RotateCcw className="w-3 h-3" /> {tc.reset || 'Reset'}
                 </button>
               </div>
             </div>
@@ -196,12 +219,12 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
 
           {showReplace && (
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Replacement</label>
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">{t.replacement_label || 'Replacement'}</label>
               <input
                 type="text"
                 value={replacement}
                 onChange={(e) => setReplacement(e.target.value)}
-                placeholder="Replacement text (use $1, $2 for groups)"
+                placeholder={t.replacement_placeholder || 'Replacement text (use $1, $2 for groups)'}
                 className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 font-mono text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
               />
             </div>
@@ -211,11 +234,11 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           {/* Test String */}
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-            <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Test String</label>
+            <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">{t.test_string || 'Test String'}</label>
             <textarea
               value={testString}
               onChange={(e) => setTestString(e.target.value)}
-              placeholder="Enter text to test against..."
+              placeholder={t.test_string_placeholder || 'Enter text to test against...'}
               rows={10}
               className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 font-mono text-sm focus:ring-2 focus:ring-emerald-500 outline-none resize-none"
             />
@@ -224,11 +247,11 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
           {/* Results */}
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
             <div className="flex items-center justify-between mb-3">
-              <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Match Results</label>
+              <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t.match_results || 'Match Results'}</label>
               {regexResult.valid && (
                 <div className="flex gap-3 text-sm">
-                  <span className="text-emerald-600 font-medium">{regexResult.matchCount} matches</span>
-                  <span className="text-gray-500">({regexResult.totalLength} chars)</span>
+                  <span className="text-emerald-600 font-medium">{tpl(t.matches_count || '{n} matches', { n: regexResult.matchCount })}</span>
+                  <span className="text-gray-500">{tpl(t.chars_count || '({n} chars)', { n: regexResult.totalLength })}</span>
                 </div>
               )}
             </div>
@@ -243,12 +266,12 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
                       </span>
                     ))
                   ) : (
-                    <span className="text-gray-400">No matches found</span>
+                    <span className="text-gray-400">{t.no_matches || 'No matches found'}</span>
                   )}
                 </div>
               ) : (
                 <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4 text-red-600 text-sm min-h-[200px]">
-                  Invalid regex pattern
+                  {t.invalid_pattern || 'Invalid regex pattern'}
                 </div>
               )}
             </div>
@@ -264,7 +287,7 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
                   </div>
                 ))}
                 {regexResult.matchCount > 50 && (
-                  <p className="text-xs text-gray-400 text-center">...and {regexResult.matchCount - 50} more matches</p>
+                  <p className="text-xs text-gray-400 text-center">{tpl(t.more_matches || '...and {n} more matches', { n: regexResult.matchCount - 50 })}</p>
                 )}
               </div>
             )}
@@ -272,7 +295,7 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
             {/* Groups */}
             {regexResult.groups.length > 0 && (
               <div className="mt-3">
-                <p className="text-xs font-medium text-gray-500 mb-1">Captured Groups</p>
+                <p className="text-xs font-medium text-gray-500 mb-1">{t.captured_groups || 'Captured Groups'}</p>
                 {regexResult.groups.slice(0, 10).map((g, i) => (
                   <div key={i} className="flex gap-2 text-xs font-mono mb-1">
                     <span className="text-gray-400">#{i + 1}:</span>
@@ -288,9 +311,9 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
             {showReplace && regexResult.replaced !== null && (
               <div className="mt-3">
                 <div className="flex items-center justify-between mb-1">
-                  <p className="text-xs font-medium text-gray-500">Replaced</p>
+                  <p className="text-xs font-medium text-gray-500">{t.replaced || 'Replaced'}</p>
                   <button onClick={() => handleCopy(regexResult.replaced!)} className="text-xs text-gray-400 hover:text-gray-600 flex items-center gap-1">
-                    <Copy className="w-3 h-3" /> {copied ? 'Copied!' : 'Copy'}
+                    <Copy className="w-3 h-3" /> {copied ? (tc.copied || 'Copied!') : (tc.copy || 'Copy')}
                   </button>
                 </div>
                 <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 text-sm font-mono whitespace-pre-wrap border border-green-200 dark:border-green-800 max-h-24 overflow-y-auto">
@@ -304,11 +327,11 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
         {/* Cheat Sheet */}
         {showCheat && (
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-6">
-            <h3 className="text-lg font-semibold mb-4">Regex Cheat Sheet</h3>
+            <h3 className="text-lg font-semibold mb-4">{t.cheat_title || 'Regex Cheat Sheet'}</h3>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {cheatSheet.map(section => (
-                <div key={section.category}>
-                  <h4 className="font-medium text-emerald-600 mb-3 text-sm uppercase tracking-wide">{section.category}</h4>
+              {cheatSections.map(section => (
+                <div key={section.name}>
+                  <h4 className="font-medium text-emerald-600 mb-3 text-sm uppercase tracking-wide">{section.name}</h4>
                   <div className="space-y-2">
                     {section.items.map(item => (
                       <div key={item.pattern} className="flex items-center gap-2 text-sm">
@@ -325,16 +348,9 @@ const RegexTester = ({ lang = 'en' }: RegexTesterProps) => {
 
         {/* Quick Examples */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-          <h3 className="text-lg font-semibold mb-3">Quick Examples</h3>
+          <h3 className="text-lg font-semibold mb-3">{t.quick_examples || 'Quick Examples'}</h3>
           <div className="flex flex-wrap gap-2">
-            {[
-              { pattern: '\\d+', label: 'Digits' },
-              { pattern: '[A-Z][a-z]+', label: 'Capitalized Words' },
-              { pattern: 'https?://\\S+', label: 'URLs' },
-              { pattern: '[\\w._%+-]+@[\\w.-]+\\.\\w{2,}', label: 'Emails' },
-              { pattern: '\\b\\w{4,}\\b', label: 'Words ≥4 chars' },
-              { pattern: '<[^>]+>', label: 'HTML Tags' },
-            ].map(ex => (
+            {examples.map(ex => (
               <button key={ex.pattern} onClick={() => setPattern(ex.pattern)} className="px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 text-sm font-mono transition-colors">
                 {ex.label}: <span className="text-emerald-600">/{ex.pattern}/</span>
               </button>

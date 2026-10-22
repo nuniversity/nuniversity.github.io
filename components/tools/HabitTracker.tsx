@@ -24,7 +24,16 @@ interface HabitTrackerProps {
 
 const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316'];
 
-const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
+function tpl(template: string, vars?: Record<string, string | number>): string {
+  if (!vars) return template
+  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
+}
+
+const HabitTracker = ({ lang = 'en', dict = {} }: HabitTrackerProps) => {
+  const t = dict.tools?.habit_tracker || {};
+  const tc = dict.tools?.common || {};
+  const c = dict.common || {};
+
   const [habits, setHabits] = useState<Habit[]>([]);
   const [logs, setLogs] = useState<HabitLog[]>([]);
   const [newHabitName, setNewHabitName] = useState('');
@@ -56,7 +65,7 @@ const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
   };
 
   const removeHabit = (id: number) => {
-    if (confirm('Delete this habit and all its logs?')) {
+    if (confirm(t.confirm_delete || 'Delete this habit and all its logs?')) {
       setHabits(prev => prev.filter(h => h.id !== id));
       setLogs(prev => prev.filter(l => l.habitId !== id));
     }
@@ -135,10 +144,10 @@ const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
             <Target className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">
-            Habit Tracker
+            {t.title || 'Habit Tracker'}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Build better habits, one day at a time
+            {t.subtitle || 'Build better habits, one day at a time'}
           </p>
         </div>
 
@@ -150,8 +159,8 @@ const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
                 <Check className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Today</p>
-                <p className="text-2xl font-bold">{totalToday}/{habits.length} habits done</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{tc.today || 'Today'}</p>
+                <p className="text-2xl font-bold">{tpl(t.habits_done || '{done}/{total} habits done', { done: totalToday, total: habits.length })}</p>
               </div>
             </div>
             <div className="flex gap-2">
@@ -159,7 +168,7 @@ const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
                 <div className="flex items-center gap-1 px-4 py-2 rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">
                   <Flame className="w-5 h-5" />
                   <span className="font-bold">{stats.reduce((sum, s) => sum + s.currentStreak, 0)}</span>
-                  <span className="text-sm">total days</span>
+                  <span className="text-sm">{t.total_days || 'total days'}</span>
                 </div>
               )}
             </div>
@@ -174,7 +183,7 @@ const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
               value={newHabitName}
               onChange={(e) => setNewHabitName(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && addHabit()}
-              placeholder="New habit name..."
+              placeholder={t.new_habit_placeholder || 'New habit name...'}
               className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-pink-500 outline-none"
             />
             <select
@@ -182,12 +191,12 @@ const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
               onChange={(e) => setNewHabitFreq(e.target.value as Habit['frequency'])}
               className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-pink-500 outline-none"
             >
-              <option value="daily">Daily</option>
-              <option value="weekdays">Weekdays</option>
-              <option value="weekly">Weekly</option>
+              <option value="daily">{t.frequency_daily || 'Daily'}</option>
+              <option value="weekdays">{t.frequency_weekdays || 'Weekdays'}</option>
+              <option value="weekly">{t.frequency_weekly || 'Weekly'}</option>
             </select>
             <button onClick={addHabit} className="px-6 py-2 rounded-lg bg-gradient-to-r from-rose-600 to-pink-600 text-white hover:shadow-lg transition-all flex items-center gap-2">
-              <Plus className="w-5 h-5" /> Add
+              <Plus className="w-5 h-5" /> {tc.add || 'Add'}
             </button>
           </div>
         </div>
@@ -196,12 +205,12 @@ const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden mb-6">
           {/* Week Header */}
           <div className="grid grid-cols-[200px,repeat(7,1fr)] border-b border-gray-200 dark:border-gray-700">
-            <div className="p-3 font-medium text-sm text-gray-500 border-r border-gray-200 dark:border-gray-700">Habits</div>
+            <div className="p-3 font-medium text-sm text-gray-500 border-r border-gray-200 dark:border-gray-700">{t.habits_column || 'Habits'}</div>
             {weekDays.map((day, i) => {
               const isToday = formatDate(day) === today;
               return (
                 <div key={i} className={`p-3 text-center text-sm font-medium ${isToday ? 'text-rose-600' : 'text-gray-500'}`}>
-                  <div className="text-xs uppercase">{day.toLocaleDateString('en', { weekday: 'short' })}</div>
+                  <div className="text-xs uppercase">{day.toLocaleDateString(lang, { weekday: 'short' })}</div>
                   <div className={`text-lg font-bold ${isToday ? 'text-rose-600' : ''}`}>{day.getDate()}</div>
                 </div>
               );
@@ -212,7 +221,7 @@ const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
           {habits.length === 0 ? (
             <div className="p-12 text-center text-gray-400">
               <Target className="w-12 h-12 mx-auto mb-3 opacity-50" />
-              <p>No habits yet. Add your first habit to start tracking!</p>
+              <p>{t.no_habits || 'No habits yet. Add your first habit to start tracking!'}</p>
             </div>
           ) : (
             habits.map(habit => (
@@ -220,7 +229,7 @@ const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
                 <div className="p-3 flex items-center gap-2 border-r border-gray-100 dark:border-gray-700">
                   <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: habit.color }} />
                   <span className="font-medium text-sm truncate">{habit.name}</span>
-                  <span className="text-xs text-gray-400 ml-auto">{habit.frequency}</span>
+                  <span className="text-xs text-gray-400 ml-auto">{habit.frequency === 'daily' ? (t.frequency_daily || 'Daily') : habit.frequency === 'weekdays' ? (t.frequency_weekdays || 'Weekdays') : (t.frequency_weekly || 'Weekly')}</span>
                   <button onClick={() => removeHabit(habit.id)} className="p-1 rounded hover:bg-red-100 dark:hover:bg-red-900 opacity-0 hover:opacity-100 transition-all flex-shrink-0">
                     <Trash2 className="w-3 h-3 text-red-500" />
                   </button>
@@ -253,17 +262,17 @@ const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-6">
           <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
             <Calendar className="w-5 h-5 text-pink-600" />
-            Monthly Overview
+            {t.monthly_overview || 'Monthly Overview'}
           </h3>
           <div className="flex items-center justify-between mb-4">
-            <button onClick={() => { const d = new Date(viewDate); d.setMonth(d.getMonth() - 1); setViewDate(d); }} className="px-3 py-1 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-sm">← Prev</button>
-            <span className="font-semibold">{viewDate.toLocaleDateString('en', { month: 'long', year: 'numeric' })}</span>
-            <button onClick={() => { const d = new Date(viewDate); d.setMonth(d.getMonth() + 1); setViewDate(d); }} className="px-3 py-1 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-sm">Next →</button>
+            <button onClick={() => { const d = new Date(viewDate); d.setMonth(d.getMonth() - 1); setViewDate(d); }} className="px-3 py-1 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-sm">← {t.prev || 'Prev'}</button>
+            <span className="font-semibold">{viewDate.toLocaleDateString(lang, { month: 'long', year: 'numeric' })}</span>
+            <button onClick={() => { const d = new Date(viewDate); d.setMonth(d.getMonth() + 1); setViewDate(d); }} className="px-3 py-1 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-sm">{t.next || 'Next'} →</button>
           </div>
 
           <div className="grid grid-cols-7 gap-1">
-            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-              <div key={d} className="text-center text-xs text-gray-500 font-medium py-1">{d}</div>
+            {weekDays.map((day, i) => (
+              <div key={i} className="text-center text-xs text-gray-500 font-medium py-1">{day.toLocaleDateString(lang, { weekday: 'short' })}</div>
             ))}
             {monthDays.map((day, i) => {
               const key = formatDate(day);
@@ -292,7 +301,7 @@ const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
           <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
             <BarChart3 className="w-5 h-5 text-pink-600" />
-            Habit Statistics
+            {t.statistics || 'Habit Statistics'}
           </h3>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
             {stats.map(habit => (
@@ -304,15 +313,15 @@ const HabitTracker = ({ lang = 'en' }: HabitTrackerProps) => {
                 <div className="grid grid-cols-3 gap-2 text-center">
                   <div>
                     <div className="text-lg font-bold text-rose-600">{habit.total}</div>
-                    <div className="text-xs text-gray-500">Total</div>
+                    <div className="text-xs text-gray-500">{t.total || 'Total'}</div>
                   </div>
                   <div>
                     <div className="text-lg font-bold text-amber-600">{habit.currentStreak}</div>
-                    <div className="text-xs text-gray-500">Streak</div>
+                    <div className="text-xs text-gray-500">{t.streak || 'Streak'}</div>
                   </div>
                   <div>
                     <div className="text-lg font-bold text-green-600">{habit.frequency === 'daily' ? Math.round((habit.total / Math.max(1, daysSince(habit.created))) * 100) : habit.total}%</div>
-                    <div className="text-xs text-gray-500">Rate</div>
+                    <div className="text-xs text-gray-500">{t.rate || 'Rate'}</div>
                   </div>
                 </div>
               </div>

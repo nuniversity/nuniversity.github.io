@@ -9,5 +9,15 @@
     "beginner": { "maxNumber": 10, "timeSeconds": 60 },
     "intermediate": { "maxNumber": 50, "timeSeconds": 60 },
     "advanced": { "maxNumber": 100, "timeSeconds": 60 }
+  },
+  "locales": {
+    "pt": {
+      "title": "Desafio Rápido de Matemática",
+      "description": "Teste suas habilidades aritméticas contra o tempo. Escolha entre adição, subtração, multiplicação e divisão com dificuldade configurável."
+    },
+    "es": {
+      "title": "Desafío Rápido de Matemáticas",
+      "description": "Pon a prueba tus habilidades aritméticas contra el reloj. Elige entre suma, resta, multiplicación y división con dificultad configurable."
+    }
   }
 }

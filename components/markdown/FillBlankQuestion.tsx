@@ -60,8 +60,8 @@ function WordChip({ id, label, isPlaced }: { id: string; label: string; isPlaced
   )
 }
 
-function InlineBlank({ blankId, placedWord, isCorrect, feedback, isOver, setNodeRef }: {
-  blankId: string; placedWord: string | null; isCorrect?: boolean; feedback: 'idle' | 'correct' | 'incorrect'; isOver: boolean; setNodeRef: (node: HTMLElement | null) => void
+function InlineBlank({ blankId, placedWord, isCorrect, feedback, isOver, setNodeRef, blankLabel }: {
+  blankId: string; placedWord: string | null; isCorrect?: boolean; feedback: 'idle' | 'correct' | 'incorrect'; isOver: boolean; setNodeRef: (node: HTMLElement | null) => void; blankLabel?: string
 }) {
   let border = 'border-dashed border-muted-foreground/40'
   let bg = 'bg-muted/20'
@@ -80,7 +80,7 @@ function InlineBlank({ blankId, placedWord, isCorrect, feedback, isOver, setNode
       ref={setNodeRef}
       className={`inline-flex min-w-[5rem] items-center justify-center rounded-md border-2 px-3 py-1 mx-0.5 text-sm font-medium transition-all align-bottom ${border} ${bg} ${isOver ? 'scale-105' : ''}`}
     >
-      {placedWord ?? <span className="text-xs text-muted-foreground">blank</span>}
+      {placedWord ?? <span className="text-xs text-muted-foreground">{blankLabel || 'blank'}</span>}
     </span>
   )
 }
@@ -93,18 +93,22 @@ interface FillBlankQuestionProps {
   explanation?: string
   instructions?: string
   items?: Array<{ prompt: string; answer: string }>
+  dict?: any
 }
 
 function countBlanks(prompt: string): number {
   return (prompt.match(/______/g) ?? []).length
 }
 
-function ItemsMode({ question, instructions, items, explanation }: {
+function ItemsMode({ question, instructions, items, explanation, dict }: {
   question: string
   instructions?: string
   items: Array<{ prompt: string; answer: string }>
   explanation?: string
+  dict?: any
 }) {
+  const w = dict?.widgets
+  const fb = w?.fill_blank
   const [values, setValues] = useState<string[][]>(() => items.map(item => Array.from({ length: countBlanks(item.prompt) }, () => '')))
   const [results, setResults] = useState<boolean[] | null>(null)
 
@@ -132,7 +136,7 @@ function ItemsMode({ question, instructions, items, explanation }: {
     <div className="my-8 rounded-xl border bg-card shadow-sm overflow-hidden">
       <div className="bg-muted/50 px-4 py-2 border-b flex items-center gap-2">
         <PenLine className="w-4 h-4 text-primary" />
-        <span className="text-sm font-semibold text-foreground">Fill in the Blanks</span>
+        <span className="text-sm font-semibold text-foreground">{fb?.title || 'Fill in the Blanks'}</span>
       </div>
       <div className="p-4 sm:p-6 space-y-4">
         <div>
@@ -164,7 +168,7 @@ function ItemsMode({ question, instructions, items, explanation }: {
                         value={values[itemIndex]?.[blankIndex] ?? ''}
                         onChange={event => setBlank(itemIndex, blankIndex, event.target.value)}
                         disabled={results !== null}
-                        aria-label={`Item ${itemIndex + 1}, blank ${blankIndex + 1}`}
+                        aria-label={(fb?.blank_aria || 'Item {i}, blank {j}').replace('{i}', String(itemIndex + 1)).replace('{j}', String(blankIndex + 1))}
                         className="mx-1 w-28 rounded-md border-2 border-dashed border-muted-foreground/50 bg-transparent px-2 py-1 text-sm font-medium text-foreground focus:outline-none focus:border-solid focus:border-primary disabled:opacity-70"
                       />
                     )}
@@ -188,8 +192,8 @@ function ItemsMode({ question, instructions, items, explanation }: {
               }
               <span className="font-semibold text-sm text-foreground">
                 {results.every(Boolean)
-                  ? 'Perfect — all blanks filled correctly!'
-                  : `Some blanks are wrong — ${correctCount} of ${items.length} items correct.`}
+                  ? (fb?.feedback_perfect || 'Perfect — all blanks filled correctly!')
+                  : (fb?.feedback_incorrect_items || 'Some blanks are wrong — {count} of {total} items correct.').replace('{count}', String(correctCount)).replace('{total}', String(items.length))}
               </span>
             </div>
             {explanation && <p className="text-sm text-muted-foreground mt-1">{explanation}</p>}
@@ -199,11 +203,11 @@ function ItemsMode({ question, instructions, items, explanation }: {
         <div className="flex gap-2 pt-2">
           {results === null && (
             <button onClick={handleCheck} className="px-6 py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
-              Check Answers
+              {w?.check_answers || 'Check Answers'}
             </button>
           )}
           <button onClick={handleTryAgain} className="px-6 py-2 text-sm font-medium rounded-lg bg-muted text-foreground hover:bg-accent transition-colors">
-            Try Again
+            {w?.try_again || 'Try Again'}
           </button>
         </div>
       </div>
@@ -211,13 +215,16 @@ function ItemsMode({ question, instructions, items, explanation }: {
   )
 }
 
-function TemplateMode({ question, template, answers, distractors = [], explanation }: {
+function TemplateMode({ question, template, answers, distractors = [], explanation, dict }: {
   question: string
   template: string
   answers: Record<string, string>
   distractors?: string[]
   explanation?: string
+  dict?: any
 }) {
+  const w = dict?.widgets
+  const fb = w?.fill_blank
   const parts = useMemo(() => parseTemplate(template), [template])
   const blankIds = useMemo(() => parts.filter(p => p.type === 'blank').map(p => p.value), [parts])
   const allWords = useMemo(() => [...Object.values(answers), ...distractors], [answers, distractors])
@@ -278,14 +285,14 @@ function TemplateMode({ question, template, answers, distractors = [], explanati
   const renderedTemplate = parts.map((part, i) => {
     if (part.type === 'text') return <span key={`t-${i}`} className="text-foreground">{part.value}</span>
     const blankId = part.value
-    return <InlineBlankWrapper key={`b-${blankId}`} blankId={blankId} placedWord={slots[blankId] ?? null} isCorrect={feedback !== 'idle' ? slots[blankId] === answers[blankId] : undefined} feedback={feedback} />
+    return <InlineBlankWrapper key={`b-${blankId}`} blankId={blankId} placedWord={slots[blankId] ?? null} isCorrect={feedback !== 'idle' ? slots[blankId] === answers[blankId] : undefined} feedback={feedback} blankLabel={fb?.blank_placeholder || 'blank'} />
   })
 
   return (
     <div className="my-8 rounded-xl border bg-card shadow-sm overflow-hidden">
       <div className="bg-muted/50 px-4 py-2 border-b flex items-center gap-2">
         <PenLine className="w-4 h-4 text-primary" />
-        <span className="text-sm font-semibold text-foreground">Fill in the Blanks</span>
+        <span className="text-sm font-semibold text-foreground">{fb?.title || 'Fill in the Blanks'}</span>
       </div>
       <div className="p-4 sm:p-6 space-y-4">
         <p className="font-medium text-foreground">{question}</p>
@@ -296,7 +303,7 @@ function TemplateMode({ question, template, answers, distractors = [], explanati
           </div>
 
           <div className="mt-4">
-            <p className="mb-3 text-sm font-semibold text-muted-foreground">Word Bank — drag words into the blanks above:</p>
+            <p className="mb-3 text-sm font-semibold text-muted-foreground">{fb?.word_bank_hint || 'Word Bank — drag words into the blanks above:'}</p>
             <div className="flex flex-wrap gap-2">
               {bankWords.map(word => (
                 <WordChip key={word} id={word} label={word} isPlaced={placedWords.has(word)} />
@@ -325,7 +332,7 @@ function TemplateMode({ question, template, answers, distractors = [], explanati
                 : <XCircle className="w-5 h-5 text-red-600" />
               }
               <span className="font-semibold text-sm text-foreground">
-                {feedback === 'correct' ? 'Perfect — all blanks filled correctly!' : 'Some blanks are wrong — red blanks have incorrect answers.'}
+                {feedback === 'correct' ? (fb?.feedback_perfect || 'Perfect — all blanks filled correctly!') : (fb?.feedback_incorrect_blanks || 'Some blanks are wrong — red blanks have incorrect answers.')}
               </span>
             </div>
             {explanation && <p className="text-sm text-muted-foreground mt-1">{explanation}</p>}
@@ -335,11 +342,11 @@ function TemplateMode({ question, template, answers, distractors = [], explanati
         <div className="flex gap-2 pt-2">
           {feedback !== 'correct' && (
             <button onClick={handleCheck} className="px-6 py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
-              Check Answers
+              {w?.check_answers || 'Check Answers'}
             </button>
           )}
           <button onClick={handleTryAgain} className="px-6 py-2 text-sm font-medium rounded-lg bg-muted text-foreground hover:bg-accent transition-colors">
-            Try Again
+            {w?.try_again || 'Try Again'}
           </button>
         </div>
       </div>
@@ -347,16 +354,16 @@ function TemplateMode({ question, template, answers, distractors = [], explanati
   )
 }
 
-function InlineBlankWrapper({ blankId, placedWord, isCorrect, feedback }: {
-  blankId: string; placedWord: string | null; isCorrect?: boolean; feedback: 'idle' | 'correct' | 'incorrect'
+function InlineBlankWrapper({ blankId, placedWord, isCorrect, feedback, blankLabel }: {
+  blankId: string; placedWord: string | null; isCorrect?: boolean; feedback: 'idle' | 'correct' | 'incorrect'; blankLabel?: string
 }) {
   const { isOver, setNodeRef } = useDroppable({ id: `blank-${blankId}` })
-  return <InlineBlank blankId={blankId} placedWord={placedWord} isCorrect={isCorrect} feedback={feedback} isOver={isOver} setNodeRef={setNodeRef} />
+  return <InlineBlank blankId={blankId} placedWord={placedWord} isCorrect={isCorrect} feedback={feedback} isOver={isOver} setNodeRef={setNodeRef} blankLabel={blankLabel} />
 }
 
-export default function FillBlankQuestion({ question, template, answers, distractors, explanation, instructions, items }: FillBlankQuestionProps) {
+export default function FillBlankQuestion({ question, template, answers, distractors, explanation, instructions, items, dict }: FillBlankQuestionProps) {
   if (items) {
-    return <ItemsMode question={question} instructions={instructions} items={items} explanation={explanation} />
+    return <ItemsMode question={question} instructions={instructions} items={items} explanation={explanation} dict={dict} />
   }
   return (
     <TemplateMode
@@ -365,6 +372,7 @@ export default function FillBlankQuestion({ question, template, answers, distrac
       answers={answers as Record<string, string>}
       distractors={distractors}
       explanation={explanation}
+      dict={dict}
     />
   )
 }

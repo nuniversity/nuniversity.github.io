@@ -1,6 +1,8 @@
 ---
 title: "Simulado de Exame A: Conjunto de Prática Completo + Estratégia"
 order: 15
+exam: true
+examMinutes: 90
 difficulty: "beginner"
 description: "Faça o Conjunto A — 20 itens no estilo do exame CLF-C02 arranjados na ordem de peso publicada dos domínios, com o desmembramento de cada opção após cada bloco — e então aprenda a técnica de prova que decide o 65 real: a aritmética de ritmo de 83 segundos, o protocolo de marcar-e-varrer, como ler enunciados 'most cost-effective', 'least operationally intensive' e 'first MUST', uma rubrica que corrige o Conjunto A por domínio em vez de por total, e um veredito comparativo sobre estudo individual × bootcamp × treinamento AWS."
 duration: "90 min"

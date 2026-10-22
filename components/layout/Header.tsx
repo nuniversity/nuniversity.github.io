@@ -3,7 +3,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X, Sun, Moon, Library, Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon, Home, Map } from 'lucide-react'
+import { Menu, X, Sun, Moon, Library, Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon, Home, Map, Award } from 'lucide-react'
 import LanguageSwitcher from '../language/LanguageSwitcher'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
@@ -25,6 +25,7 @@ export default function Header({ lang, dict }: HeaderProps) {
     { name: dict.navigation.courses, href: `/${lang}/courses`, icon: BookOpen, isNew: false },
     { name: dict.navigation.tools, href: `/${lang}/tools`, icon: Calculator, isNew: true },
     { name: dict.navigation.games, href: `/${lang}/games`, icon: GamepadIcon, isNew: true },
+    { name: dict.navigation.quizzes, href: `/${lang}/quizzes`, icon: Award, isNew: true },
     { name: dict.navigation.library || 'Library', href: `/${lang}/library`, icon: Library, isNew: true },
     { name: dict.navigation.roadmaps || 'Roadmaps', href: `/${lang}/roadmaps`, icon: Map, isNew: true },
     { name: dict.navigation.about, href: `/${lang}/about` },
@@ -46,7 +47,7 @@ export default function Header({ lang, dict }: HeaderProps) {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden lg:flex items-center space-x-1">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -85,7 +86,7 @@ export default function Header({ lang, dict }: HeaderProps) {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="lg:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? (
@@ -99,7 +100,7 @@ export default function Header({ lang, dict }: HeaderProps) {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700 animate-slide-in">
+          <div className="lg:hidden py-4 border-t border-gray-200 dark:border-gray-700 animate-slide-in">
             {navigation.map((item) => (
               <Link
                 key={item.name}

@@ -2,6 +2,8 @@
 title: "Capstone Exam Simulation (AIF-C01)"
 description: "Simulate the real AWS Certified AI Practitioner exam: official logistics and question formats, a 90-minute clock strategy, distractor decoding, a 15-item Set A with a domain-organized answer key, a scoring rubric, a weight-driven 40-hour study plan, and a synthesis of lessons 01-15."
 order: 16
+exam: true
+examMinutes: 100
 difficulty: "intermediate"
 duration: "100 minutes"
 ---

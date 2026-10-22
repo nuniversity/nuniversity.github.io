@@ -1,7 +1,7 @@
 ---
 title: Matriz de Decisão
 description: Tome melhores decisões com uma matriz de pontuação ponderada. Avalie opções contra critérios personalizados com pontuação e classificação automáticas.
-category: Business Strategy
+category: business_strategy
 icon: bar-chart
 order: 7
 ---

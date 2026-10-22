@@ -21,38 +21,36 @@ interface PeriodicTableClientProps {
   dict: any
 }
 
-const modeLabels: Record<Mode, string> = {
-  'symbol-to-name': 'Symbol → Name',
-  'name-to-symbol': 'Name → Symbol',
-  'number-to-element': 'Number → Element',
-  'element-to-number': 'Element → Number',
+function t(template: string, vars?: Record<string, string | number>): string {
+  if (!vars) return template
+  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
 }
 
-function generateQuestion(elements: any[], mode: Mode): Question {
+function generateQuestion(elements: any[], mode: Mode, prompts: Record<Mode, string>): Question {
   const element = elements[Math.floor(Math.random() * elements.length)]
   let prompt: string, correct: string, options: string[], allOptions: string[]
 
   switch (mode) {
     case 'symbol-to-name':
-      prompt = `What element has the symbol "${element.symbol}"?`
+      prompt = t(prompts['symbol-to-name'], { symbol: element.symbol })
       correct = element.name
       allOptions = elements.map((e: any) => e.name)
       options = generateOptions(correct, allOptions)
       break
     case 'name-to-symbol':
-      prompt = `What is the symbol for "${element.name}"?`
+      prompt = t(prompts['name-to-symbol'], { name: element.name })
       correct = element.symbol
       allOptions = elements.map((e: any) => e.symbol)
       options = generateOptions(correct, allOptions)
       break
     case 'number-to-element':
-      prompt = `Which element has atomic number ${element.number}?`
+      prompt = t(prompts['number-to-element'], { number: element.number })
       correct = element.name
       allOptions = elements.map((e: any) => e.name)
       options = generateOptions(correct, allOptions)
       break
     case 'element-to-number':
-      prompt = `What is the atomic number of "${element.name}"?`
+      prompt = t(prompts['element-to-number'], { name: element.name })
       correct = element.number.toString()
       options = generateNumberOptions(element.number, elements.length)
       break
@@ -91,6 +89,23 @@ export function PeriodicTableClient({ lang, game, dict }: PeriodicTableClientPro
 
   const elements = game.elements
 
+  const g = dict?.games ?? {}
+  const pt = g?.periodic_table ?? {}
+
+  const modeLabels: Record<Mode, string> = {
+    'symbol-to-name': pt.mode_symbol_name || 'Symbol → Name',
+    'name-to-symbol': pt.mode_name_symbol || 'Name → Symbol',
+    'number-to-element': pt.mode_number_element || 'Number → Element',
+    'element-to-number': pt.mode_element_number || 'Element → Number',
+  }
+
+  const prompts: Record<Mode, string> = {
+    'symbol-to-name': pt.prompt_symbol_name || 'What element has the symbol "{symbol}"?',
+    'name-to-symbol': pt.prompt_name_symbol || 'What is the symbol for "{name}"?',
+    'number-to-element': pt.prompt_number_element || 'Which element has atomic number {number}?',
+    'element-to-number': pt.prompt_element_number || 'What is the atomic number of "{name}"?',
+  }
+
   const startGame = () => {
     setGameMode('playing')
     setScore(0)
@@ -104,7 +119,7 @@ export function PeriodicTableClient({ lang, game, dict }: PeriodicTableClientPro
 
   const nextQuestion = () => {
     const mode = selectedModes[Math.floor(Math.random() * selectedModes.length)]
-    setQuestion(generateQuestion(elements, mode))
+    setQuestion(generateQuestion(elements, mode, prompts))
     setSelectedAnswer(null)
     setShowResult(false)
   }
@@ -136,7 +151,7 @@ export function PeriodicTableClient({ lang, game, dict }: PeriodicTableClientPro
     <div className="container-custom py-12">
       <div className="max-w-2xl mx-auto">
         <Link href={`/${lang}/games`} className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-6 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Back to Games
+          <ArrowLeft className="w-4 h-4" /> {g.back_to_games || 'Back to Games'}
         </Link>
 
         <div className="text-center mb-8">
@@ -149,9 +164,9 @@ export function PeriodicTableClient({ lang, game, dict }: PeriodicTableClientPro
 
         {gameMode === 'config' && (
           <div className="bg-card border rounded-2xl p-8">
-            <h2 className="text-2xl font-semibold mb-6">Game Setup</h2>
+            <h2 className="text-2xl font-semibold mb-6">{g.game_setup || 'Game Setup'}</h2>
             <div className="mb-6">
-              <label className="block font-medium mb-3">Quiz Modes</label>
+              <label className="block font-medium mb-3">{pt.quiz_modes || 'Quiz Modes'}</label>
               <div className="flex flex-wrap gap-2">
                 {game.modes.map((mode: Mode) => (
                   <button
@@ -165,11 +180,11 @@ export function PeriodicTableClient({ lang, game, dict }: PeriodicTableClientPro
               </div>
             </div>
             <div className="mb-8">
-              <label className="block font-medium mb-3">Questions: {questionCount}</label>
+              <label className="block font-medium mb-3">{t(pt.questions_with_n || 'Questions: {n}', { n: questionCount })}</label>
               <input type="range" min={5} max={20} value={questionCount} onChange={(e) => setQuestionCount(Number(e.target.value))} className="w-full accent-primary" />
             </div>
             <button onClick={startGame} disabled={selectedModes.length === 0} className="w-full py-4 rounded-xl bg-gradient-to-r from-orange-600 to-red-600 text-white text-lg font-bold hover:shadow-lg transition-all disabled:opacity-50">
-              Start Quiz
+              {g.start_quiz || 'Start Quiz'}
             </button>
           </div>
         )}
@@ -177,8 +192,8 @@ export function PeriodicTableClient({ lang, game, dict }: PeriodicTableClientPro
         {gameMode === 'playing' && question && (
           <div>
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm text-muted-foreground">Question {answered + 1} of {questionCount}</span>
-              <span className="text-sm font-semibold">Score: {score}</span>
+              <span className="text-sm text-muted-foreground">{t(g.question_of || 'Question {current} of {total}', { current: answered + 1, total: questionCount })}</span>
+              <span className="text-sm font-semibold">{t(g.score_value || 'Score: {score}', { score })}</span>
             </div>
             <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full mb-8 overflow-hidden">
               <div className="h-full bg-gradient-to-r from-orange-500 to-red-500 rounded-full transition-all" style={{ width: `${(answered / questionCount) * 100}%` }} />
@@ -213,7 +228,7 @@ export function PeriodicTableClient({ lang, game, dict }: PeriodicTableClientPro
 
               {showResult && (
                 <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className={`mt-6 text-lg font-semibold flex items-center justify-center gap-2 ${selectedAnswer === question.correct ? 'text-green-600' : 'text-red-600'}`}>
-                  {selectedAnswer === question.correct ? <><CheckCircle2 className="w-6 h-6" /> Correct!</> : <><XCircle className="w-6 h-6" /> {question.correct}</>}
+                  {selectedAnswer === question.correct ? <><CheckCircle2 className="w-6 h-6" /> {g.correct_exclamation || 'Correct!'}</> : <><XCircle className="w-6 h-6" /> {question.correct}</>}
                 </motion.div>
               )}
             </motion.div>
@@ -225,25 +240,25 @@ export function PeriodicTableClient({ lang, game, dict }: PeriodicTableClientPro
             <div className="w-20 h-20 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mx-auto mb-6">
               <Trophy className="w-10 h-10 text-white" />
             </div>
-            <h2 className="text-3xl font-bold mb-2">Quiz Complete!</h2>
+            <h2 className="text-3xl font-bold mb-2">{g.quiz_complete || 'Quiz Complete!'}</h2>
             <div className="grid grid-cols-3 gap-4 max-w-sm mx-auto my-6">
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 rounded-xl p-4 border border-green-200">
                 <div className="text-3xl font-bold text-green-600">{correct}</div>
-                <div className="text-sm text-muted-foreground">Correct</div>
+                <div className="text-sm text-muted-foreground">{g.stats?.correct || 'Correct'}</div>
               </div>
               <div className="bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/20 rounded-xl p-4 border border-red-200">
                 <div className="text-3xl font-bold text-red-600">{total - correct}</div>
-                <div className="text-sm text-muted-foreground">Wrong</div>
+                <div className="text-sm text-muted-foreground">{g.stats?.wrong || 'Wrong'}</div>
               </div>
               <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 rounded-xl p-4 border border-blue-200">
                 <div className="text-3xl font-bold text-blue-600">{accuracy}%</div>
-                <div className="text-sm text-muted-foreground">Accuracy</div>
+                <div className="text-sm text-muted-foreground">{g.stats?.accuracy || 'Accuracy'}</div>
               </div>
             </div>
-            <div className="text-2xl font-bold mb-6">Score: {score}</div>
+            <div className="text-2xl font-bold mb-6">{t(g.score_value || 'Score: {score}', { score })}</div>
             <div className="flex gap-3">
-              <button onClick={startGame} className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all">Play Again</button>
-              <Link href={`/${lang}/games`} className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors text-center">More Games</Link>
+              <button onClick={startGame} className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all">{g.play_again || 'Play Again'}</button>
+              <Link href={`/${lang}/games`} className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors text-center">{g.more_games || 'More Games'}</Link>
             </div>
           </div>
         )}

@@ -30,6 +30,9 @@ export function TypingSpeedClient({ lang, game, dict }: TypingSpeedClientProps) 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const startTimeRef = useRef<number>(0)
 
+  const g = dict?.games ?? {}
+  const ts = g?.typing_speed ?? {}
+
   const startGame = () => {
     setGameMode('playing')
     setIsReady(false)
@@ -139,7 +142,7 @@ export function TypingSpeedClient({ lang, game, dict }: TypingSpeedClientProps) 
     <div className="container-custom py-12">
       <div className="max-w-3xl mx-auto">
         <Link href={`/${lang}/games`} className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-6 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Back to Games
+          <ArrowLeft className="w-4 h-4" /> {g.back_to_games || 'Back to Games'}
         </Link>
 
         <div className="text-center mb-8">
@@ -152,9 +155,9 @@ export function TypingSpeedClient({ lang, game, dict }: TypingSpeedClientProps) 
 
         {gameMode === 'config' && (
           <div className="bg-card border rounded-2xl p-8">
-            <h2 className="text-2xl font-semibold mb-6">Game Setup</h2>
+            <h2 className="text-2xl font-semibold mb-6">{g.game_setup || 'Game Setup'}</h2>
             <div className="mb-6">
-              <label className="block font-medium mb-3">Language</label>
+              <label className="block font-medium mb-3">{ts.language || 'Language'}</label>
               <div className="flex flex-wrap gap-2">
                 {allLanguages.map((lang: string) => (
                   <button
@@ -168,7 +171,7 @@ export function TypingSpeedClient({ lang, game, dict }: TypingSpeedClientProps) 
               </div>
             </div>
             <div className="mb-8">
-              <label className="block font-medium mb-3">Duration</label>
+              <label className="block font-medium mb-3">{ts.duration || 'Duration'}</label>
               <div className="flex gap-2">
                 {game.durations.map((d: number) => (
                   <button
@@ -182,7 +185,7 @@ export function TypingSpeedClient({ lang, game, dict }: TypingSpeedClientProps) 
               </div>
             </div>
             <button onClick={startGame} className="w-full py-4 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 text-white text-lg font-bold hover:shadow-lg transition-all">
-              Start Typing!
+              {g.start_typing || 'Start Typing!'}
             </button>
           </div>
         )}
@@ -192,19 +195,19 @@ export function TypingSpeedClient({ lang, game, dict }: TypingSpeedClientProps) 
             {/* Stats */}
             <div className="grid grid-cols-4 gap-3 mb-6">
               <div className="bg-card border rounded-xl p-3 text-center">
-                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><Clock className="w-3 h-3" /> Time</div>
+                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><Clock className="w-3 h-3" /> {g.stats?.time || 'Time'}</div>
                 <div className="text-xl font-bold">{timeLeft}s</div>
               </div>
               <div className="bg-card border rounded-xl p-3 text-center">
-                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><Keyboard className="w-3 h-3" /> WPM</div>
+                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><Keyboard className="w-3 h-3" /> {g.stats?.wpm || 'WPM'}</div>
                 <div className="text-xl font-bold">{wpm}</div>
               </div>
               <div className="bg-card border rounded-xl p-3 text-center">
-                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><CheckCircle2 className="w-3 h-3" /> Accuracy</div>
+                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><CheckCircle2 className="w-3 h-3" /> {g.stats?.accuracy || 'Accuracy'}</div>
                 <div className="text-xl font-bold">{accuracy}%</div>
               </div>
               <div className="bg-card border rounded-xl p-3 text-center">
-                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><Code className="w-3 h-3" /> Done</div>
+                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><Code className="w-3 h-3" /> {g.stats?.done || 'Done'}</div>
                 <div className="text-xl font-bold">{snippetsDone}</div>
               </div>
             </div>
@@ -216,13 +219,13 @@ export function TypingSpeedClient({ lang, game, dict }: TypingSpeedClientProps) 
             {!isReady && countdown > 0 ? (
               <div className="bg-card border rounded-2xl p-20 text-center">
                 <div className="text-8xl font-bold text-primary animate-pulse">{countdown}</div>
-                <p className="text-muted-foreground mt-4">Get ready to type...</p>
+                <p className="text-muted-foreground mt-4">{ts.get_ready || 'Get ready to type...'}</p>
               </div>
             ) : (
               <div className="bg-card border rounded-2xl overflow-hidden">
                 {/* Code Display */}
                 <div className="bg-gray-900 text-green-400 p-6 font-mono text-sm leading-relaxed overflow-x-auto min-h-[200px] whitespace-pre">
-                  {currentSnippet ? renderHighlightedCode() : 'Loading...'}
+                  {currentSnippet ? renderHighlightedCode() : (dict?.common?.loading || 'Loading...')}
                 </div>
 
                 {/* Input */}
@@ -231,7 +234,7 @@ export function TypingSpeedClient({ lang, game, dict }: TypingSpeedClientProps) 
                     ref={textareaRef}
                     value={userInput}
                     onChange={handleInput}
-                    placeholder="Type the code above here..."
+                    placeholder={ts.type_placeholder || 'Type the code above here...'}
                     className="w-full h-32 px-4 py-3 rounded-lg border border-border bg-muted/30 font-mono text-sm focus:ring-2 focus:ring-primary outline-none resize-none"
                   />
                 </div>
@@ -245,28 +248,28 @@ export function TypingSpeedClient({ lang, game, dict }: TypingSpeedClientProps) 
             <div className="w-20 h-20 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mx-auto mb-6">
               <Trophy className="w-10 h-10 text-white" />
             </div>
-            <h2 className="text-3xl font-bold mb-2">Time's Up!</h2>
+            <h2 className="text-3xl font-bold mb-2">{g.time_s_up || "Time's Up!"}</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-lg mx-auto my-6">
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 rounded-xl p-4 border border-green-200">
                 <div className="text-3xl font-bold text-green-600">{wpm}</div>
-                <div className="text-sm text-muted-foreground">WPM</div>
+                <div className="text-sm text-muted-foreground">{g.stats?.wpm || 'WPM'}</div>
               </div>
               <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 rounded-xl p-4 border border-blue-200">
                 <div className="text-3xl font-bold text-blue-600">{accuracy}%</div>
-                <div className="text-sm text-muted-foreground">Accuracy</div>
+                <div className="text-sm text-muted-foreground">{g.stats?.accuracy || 'Accuracy'}</div>
               </div>
               <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 rounded-xl p-4 border border-purple-200">
                 <div className="text-3xl font-bold text-purple-600">{charTyped}</div>
-                <div className="text-sm text-muted-foreground">Chars</div>
+                <div className="text-sm text-muted-foreground">{g.stats?.chars || 'Chars'}</div>
               </div>
               <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 rounded-xl p-4 border border-amber-200">
                 <div className="text-3xl font-bold text-amber-600">{snippetsDone}</div>
-                <div className="text-sm text-muted-foreground">Snippets</div>
+                <div className="text-sm text-muted-foreground">{g.stats?.snippets || 'Snippets'}</div>
               </div>
             </div>
             <div className="flex gap-3">
-              <button onClick={startGame} className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all">Play Again</button>
-              <Link href={`/${lang}/games`} className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors text-center">More Games</Link>
+              <button onClick={startGame} className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all">{g.play_again || 'Play Again'}</button>
+              <Link href={`/${lang}/games`} className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors text-center">{g.more_games || 'More Games'}</Link>
             </div>
           </div>
         )}

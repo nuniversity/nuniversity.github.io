@@ -4,7 +4,15 @@ import { usePathname, useRouter } from 'next/navigation'
 import { i18n, type Locale, localeNames, localeFlags } from '@/lib/i18n/config'
 import { Languages } from 'lucide-react'
 import { useState } from 'react'
+import courseLessonAliases from '@/lib/i18n/course-lesson-aliases.json'
 
+function resolveLessonSlug(courseSlug: string, lessonSlug: string, newLocale: string): string | undefined | null {
+  const course = (courseLessonAliases as Record<string, Record<string, Record<string, string>>>)[courseSlug]
+  if (!course) return undefined
+  const prefix = lessonSlug.slice(0, 2)
+  const target = course[newLocale]?.[prefix]
+  return target ?? null
+}
 
 export default function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
   const pathname = usePathname()
@@ -14,10 +22,19 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: Loc
   const switchLanguage = (newLocale: Locale) => {
     if (!pathname) return
     
-    // Remove current locale from pathname
-    const segments = pathname.split('/')
-    segments[1] = newLocale
-    const newPathname = segments.join('/')
+    const parts = pathname.split('/').filter(Boolean)
+    const segments = (i18n.locales as readonly string[]).includes(parts[0]) ? parts.slice(1) : parts
+    if (segments[0] === 'courses' && segments[1] && segments[2]) {
+      const courseSlug = segments[1]
+      const lessonSlug = segments[2]
+      const resolved = resolveLessonSlug(courseSlug, lessonSlug, newLocale)
+      if (resolved === null) {
+        segments.splice(2)
+      } else if (resolved) {
+        segments[2] = resolved
+      }
+    }
+    const newPathname = '/' + [newLocale, ...segments].join('/')
     
     // Set cookie and navigate
     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`

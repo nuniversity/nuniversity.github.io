@@ -3,7 +3,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Gamepad2, Search, Trophy, Target, Brain, Code, BookOpen, Sparkles, Zap, Award, Atom, Heart } from 'lucide-react'
+import { Gamepad2, Search, Trophy, Target, Brain, Code, BookOpen, Sparkles, Zap, Atom, Heart } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { GameMetadata } from '@/lib/games/get-game-content'
 
@@ -34,7 +34,7 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
     const grouped: Record<string, GameMetadata[]> = {}
     
     for (const game of filteredGames) {
-      const categoryLabel = getCategoryLabel(game.category)
+      const categoryLabel = dict.games?.categories?.[game.category] || game.category
       
       if (!grouped[categoryLabel]) {
         grouped[categoryLabel] = []
@@ -43,25 +43,7 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
     }
     
     return grouped
-  }, [filteredGames])
-
-  // Category labels
-  function getCategoryLabel(category: string): string {
-    const labels: Record<string, string> = {
-      'vocabulary': 'Language - Vocabulary',
-      'grammar': 'Language - Grammar',
-      'math': 'Mathematics',
-      'coding': 'Coding & Programming',
-      'physics': 'Physics',
-      'logic': 'Logic & Puzzles',
-      'fun': 'Fun & Games',
-      'quiz': 'Certification Quizzes',
-      'science': 'Science',
-      'puzzles': 'Word Puzzles',
-      'conversation': 'Relationships & Intimacy'
-    }
-    return labels[category] || category
-  }
+  }, [filteredGames, dict])
 
   // Category icons
   function getCategoryIcon(category: string) {
@@ -73,7 +55,6 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
       'physics': Zap,
       'logic': Brain,
       'fun': Sparkles,
-      'quiz': Award,
       'science': Atom,
       'puzzles': Search,
       'conversation': Heart
@@ -129,8 +110,8 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
             <Gamepad2 className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
             <p className="text-muted-foreground text-lg">
               {searchQuery 
-                ? 'No games found matching your search'
-                : 'No games available yet'}
+                ? (dict.games?.no_results || 'No games found matching your search')
+                : (dict.games?.no_games || 'No games available yet')}
             </p>
           </div>
         )}
@@ -162,7 +143,7 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
                         </div>
                         {game.difficulty && (
                           <span className={`text-xs font-medium px-3 py-1 rounded-full ${getDifficultyColor(game.difficulty)}`}>
-                            {game.difficulty}
+                            {dict.games?.difficulty?.[game.difficulty as 'beginner' | 'intermediate' | 'advanced'] || game.difficulty}
                           </span>
                         )}
                       </div>

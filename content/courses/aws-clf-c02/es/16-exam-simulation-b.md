@@ -1,6 +1,8 @@
 ---
 title: "Simulacro de examen B: segundo conjunto de práctica, ejercicios de trampa y día del examen"
 order: 16
+exam: true
+examMinutes: 90
 difficulty: "beginner"
 description: "Pasa el conjunto B: 20 ítems tipo CLF-C02 en el orden publicado de ponderación (5 / 6 / 7 / 2) con un desglose opción a opción tras cada bloque; después entrena los diez pares de trampa que deciden la mayoría de las derrotas, ensaya la lista oficial de logística del día del examen (identificaciones, registro, descansos, momento de los resultados), corrige el conjunto B frente a los umbrales de listo frente a no listo y termina con un plan de estudio de 7 días impulsado por ponderación para la semana en la que realmente te presentas."
 duration: "90 min"

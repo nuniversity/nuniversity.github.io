@@ -8,10 +8,20 @@ import {
 } from 'lucide-react';
 import { type Locale } from '@/lib/i18n/config';
 
+interface SWOTMatrixProps {
+  lang: Locale;
+  dict: any;
+}
+
 type QuadrantKey = 'strengths' | 'weaknesses' | 'opportunities' | 'threats';
 type StrategyKey = 'SO' | 'WO' | 'ST' | 'WT';
 
-const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
+function interpolate(template: string, vars?: Record<string, string | number>): string {
+  if (!vars) return template
+  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
+}
+
+const SWOTMatrix = ({ dict = {} }: SWOTMatrixProps) => {
   const [projectName, setProjectName] = useState('');
   const [description, setDescription] = useState('');
   const [swotData, setSWOTData] = useState<Record<QuadrantKey, string[]>>({
@@ -34,148 +44,7 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
   const [importError, setImportError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const translations = {
-    en: {
-      title: 'SWOT Matrix Analysis',
-      subtitle: 'Strategic planning tool for business analysis',
-      projectName: 'Project Name',
-      projectNamePlaceholder: 'e.g., New Product Launch',
-      description: 'Description',
-      descriptionPlaceholder: 'Brief description of the project or analysis context...',
-      strengths: 'Strengths',
-      weaknesses: 'Weaknesses',
-      opportunities: 'Opportunities',
-      threats: 'Threats',
-      strengthsDesc: 'Internal positive attributes',
-      weaknessesDesc: 'Internal areas for improvement',
-      opportunitiesDesc: 'External positive factors',
-      threatsDesc: 'External challenges',
-      addItem: 'Add item',
-      noItems: 'No items added yet',
-      clickToAdd: 'Click "Add item" to start',
-      matrixView: 'Matrix View',
-      listView: 'List View',
-      strategies: 'Strategies',
-      exportJson: 'Export JSON',
-      exportCsv: 'Export CSV',
-      exportPdf: 'Export Report',
-      clear: 'Clear All',
-      soStrategies: 'SO Strategies',
-      soDesc: 'Use Strengths to leverage Opportunities',
-      woStrategies: 'WO Strategies',
-      woDesc: 'Overcome Weaknesses by pursuing Opportunities',
-      stStrategies: 'ST Strategies',
-      stDesc: 'Use Strengths to avoid Threats',
-      wtStrategies: 'WT Strategies',
-      wtDesc: 'Minimize Weaknesses and avoid Threats',
-      generateStrategies: 'Generate Strategic Recommendations',
-      hideStrategies: 'Hide Strategies',
-      itemsCount: 'items',
-      import: 'Import',
-      importData: 'Import Data',
-      importDesc: 'Upload JSON or CSV file to import tasks',
-      selectFile: 'Select File',
-      importSuccess: 'Data imported successfully!',
-      importError: 'Error importing data. Please check file format.',
-      cancel: 'Cancel',
-      dragDrop: 'Drag and drop or click to select',
-      supportedFormats: 'Supported: JSON, CSV'
-    },
-    pt: {
-      title: 'Análise Matriz SWOT',
-      subtitle: 'Ferramenta de planejamento estratégico para análise de negócios',
-      projectName: 'Nome do Projeto',
-      projectNamePlaceholder: 'ex: Lançamento de Novo Produto',
-      description: 'Descrição',
-      descriptionPlaceholder: 'Breve descrição do projeto ou contexto da análise...',
-      strengths: 'Forças',
-      weaknesses: 'Fraquezas',
-      opportunities: 'Oportunidades',
-      threats: 'Ameaças',
-      strengthsDesc: 'Atributos internos positivos',
-      weaknessesDesc: 'Áreas internas para melhoria',
-      opportunitiesDesc: 'Fatores externos positivos',
-      threatsDesc: 'Desafios externos',
-      addItem: 'Adicionar item',
-      noItems: 'Nenhum item adicionado',
-      clickToAdd: 'Clique em "Adicionar item" para começar',
-      matrixView: 'Visão Matriz',
-      listView: 'Visão Lista',
-      strategies: 'Estratégias',
-      exportJson: 'Exportar JSON',
-      exportCsv: 'Exportar CSV',
-      exportPdf: 'Exportar Relatório',
-      clear: 'Limpar Tudo',
-      soStrategies: 'Estratégias FO',
-      soDesc: 'Use Forças para aproveitar Oportunidades',
-      woStrategies: 'Estratégias fO',
-      woDesc: 'Supere Fraquezas perseguindo Oportunidades',
-      stStrategies: 'Estratégias FA',
-      stDesc: 'Use Forças para evitar Ameaças',
-      wtStrategies: 'Estratégias fA',
-      wtDesc: 'Minimize Fraquezas e evite Ameaças',
-      generateStrategies: 'Gerar Recomendações Estratégicas',
-      hideStrategies: 'Ocultar Estratégias',
-      itemsCount: 'itens',
-      import: "Importar",
-      importData: "Importar Dados",
-      importDesc: "Envie um arquivo JSON ou CSV para importar tarefas",
-      selectFile: "Selecionar Arquivo",
-      importSuccess: "Dados importados com sucesso!",
-      importError: "Erro ao importar dados. Verifique o formato do arquivo.",
-      cancel: "Cancelar",
-      dragDrop: "Arraste e solte ou clique para selecionar",
-      supportedFormats: "Formatos suportados: JSON, CSV"
-    },
-    es: {
-      title: 'Análisis Matriz FODA',
-      subtitle: 'Herramienta de planificación estratégica para análisis de negocios',
-      projectName: 'Nombre del Proyecto',
-      projectNamePlaceholder: 'ej: Lanzamiento de Nuevo Producto',
-      description: 'Descripción',
-      descriptionPlaceholder: 'Breve descripción del proyecto o contexto del análisis...',
-      strengths: 'Fortalezas',
-      weaknesses: 'Debilidades',
-      opportunities: 'Oportunidades',
-      threats: 'Amenazas',
-      strengthsDesc: 'Atributos internos positivos',
-      weaknessesDesc: 'Áreas internas de mejora',
-      opportunitiesDesc: 'Factores externos positivos',
-      threatsDesc: 'Desafíos externos',
-      addItem: 'Agregar ítem',
-      noItems: 'No hay ítems agregados',
-      clickToAdd: 'Haga clic en "Agregar ítem" para comenzar',
-      matrixView: 'Vista Matriz',
-      listView: 'Vista Lista',
-      strategies: 'Estrategias',
-      exportJson: 'Exportar JSON',
-      exportCsv: 'Exportar CSV',
-      exportPdf: 'Exportar Informe',
-      clear: 'Limpiar Todo',
-      soStrategies: 'Estrategias FO',
-      soDesc: 'Usar Fortalezas para aprovechar Oportunidades',
-      woStrategies: 'Estrategias DO',
-      woDesc: 'Superar Debilidades persiguiendo Oportunidades',
-      stStrategies: 'Estrategias FA',
-      stDesc: 'Usar Fortalezas para evitar Amenazas',
-      wtStrategies: 'Estrategias DA',
-      wtDesc: 'Minimizar Debilidades y evitar Amenazas',
-      generateStrategies: 'Generar Recomendaciones Estratégicas',
-      hideStrategies: 'Ocultar Estrategias',
-      itemsCount: 'ítems',
-      import: "Importar",
-      importData: "Importar Datos",
-      importDesc: "Sube un archivo JSON o CSV para importar tareas",
-      selectFile: "Seleccionar Archivo",
-      importSuccess: "¡Datos importados con éxito!",
-      importError: "Error al importar los datos. Por favor, verifica el formato del archivo.",
-      cancel: "Cancelar",
-      dragDrop: "Arrastra y suelta o haz clic para seleccionar",
-      supportedFormats: "Formatos admitidos: JSON, CSV"
-    }
-  };
-
-  const t = translations[lang as keyof typeof translations] || translations.en;
+  const t = dict.tools?.swot_matrix || {};
 
   const addItemToQuadrant = (quadrant: QuadrantKey) => {
     if (newItem[quadrant].trim()) {
@@ -226,24 +95,32 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
       WT: []
     };
 
-    // SO: Strengths + Opportunities
     if (swotData.strengths.length > 0 && swotData.opportunities.length > 0) {
-      strategies.SO.push(`Leverage "${swotData.strengths[0]}" to capitalize on "${swotData.opportunities[0]}"`);
+      strategies.SO.push(interpolate(t.strategyTemplates.so, {
+        strength: swotData.strengths[0],
+        opportunity: swotData.opportunities[0]
+      }));
     }
 
-    // WO: Weaknesses + Opportunities
     if (swotData.weaknesses.length > 0 && swotData.opportunities.length > 0) {
-      strategies.WO.push(`Improve "${swotData.weaknesses[0]}" to take advantage of "${swotData.opportunities[0]}"`);
+      strategies.WO.push(interpolate(t.strategyTemplates.wo, {
+        weakness: swotData.weaknesses[0],
+        opportunity: swotData.opportunities[0]
+      }));
     }
 
-    // ST: Strengths + Threats
     if (swotData.strengths.length > 0 && swotData.threats.length > 0) {
-      strategies.ST.push(`Use "${swotData.strengths[0]}" to mitigate "${swotData.threats[0]}"`);
+      strategies.ST.push(interpolate(t.strategyTemplates.st, {
+        strength: swotData.strengths[0],
+        threat: swotData.threats[0]
+      }));
     }
 
-    // WT: Weaknesses + Threats
     if (swotData.weaknesses.length > 0 && swotData.threats.length > 0) {
-      strategies.WT.push(`Address "${swotData.weaknesses[0]}" to avoid exposure to "${swotData.threats[0]}"`);
+      strategies.WT.push(interpolate(t.strategyTemplates.wt, {
+        weakness: swotData.weaknesses[0],
+        threat: swotData.threats[0]
+      }));
     }
 
     return strategies;
@@ -282,12 +159,12 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
       URL.revokeObjectURL(url);
     } else if (format === 'report') {
       const strategies = generateStrategies();
-      let report = `SWOT ANALYSIS REPORT\n`;
+      let report = `${t.report.title}\n`;
       report += `========================\n\n`;
-      report += `Project: ${projectName}\n`;
-      report += `Description: ${description}\n`;
-      report += `Date: ${new Date().toLocaleDateString()}\n\n`;
-      
+      report += `${t.report.project} ${projectName}\n`;
+      report += `${t.report.description} ${description}\n`;
+      report += `${t.report.date} ${new Date().toLocaleDateString()}\n\n`;
+
       Object.entries(swotData).forEach(([quadrant, items]) => {
         report += `\n${quadrant.toUpperCase()}\n`;
         report += `${'-'.repeat(quadrant.length)}\n`;
@@ -296,11 +173,11 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
         });
       });
 
-      report += `\n\nSTRATEGIC RECOMMENDATIONS\n`;
+      report += `\n\n${t.report.recommendations}\n`;
       report += `=========================\n\n`;
       Object.entries(strategies).forEach(([type, strats]) => {
         if (strats.length > 0) {
-          report += `${type} Strategy:\n`;
+          report += `${interpolate(t.report.strategy_line, { type })}\n`;
           strats.forEach(s => report += `- ${s}\n`);
           report += `\n`;
         }
@@ -331,84 +208,6 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
     };
     reader.readAsText(file);
   };
-
-  // const importData = (content, filename) => {
-  //   setImportError('');
-  //   try {
-  //     if (filename.endsWith('.json')) {
-  //       const data = JSON.parse(content);
-        
-  //       if (data.tasks && Array.isArray(data.tasks)) {
-  //         const imported = {
-  //           doFirst: [],
-  //           schedule: [],
-  //           delegate: [],
-  //           eliminate: []
-  //         };
-          
-  //         data.tasks.forEach((item) => {
-  //           const quadrant = item.quadrant;
-  //           if (quadrant && imported[quadrant]) {
-  //             imported[quadrant].push({
-  //               id: Date.now() + Math.random(),
-  //               text: item.task,
-  //               completed: item.completed || false,
-  //               createdAt: item.createdAt || new Date().toISOString()
-  //             });
-  //           }
-  //         });
-          
-  //         // setTasks(imported);
-  //         setSWOTData(imported);
-
-  //         setShowImportModal(false);
-  //         alert(t.importSuccess);
-  //       } else {
-  //         setImportError(t.importError);
-  //       }
-  //     } else if (filename.endsWith('.csv')) {
-  //       const lines = content.split('\n').filter(line => line.trim());
-  //       const imported = {
-  //         doFirst: [],
-  //         schedule: [],
-  //         delegate: [],
-  //         eliminate: []
-  //       };
-        
-  //       for (let i = 1; i < lines.length; i++) {
-  //         const line = lines[i];
-  //         const matches = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
-          
-  //         if (matches && matches.length >= 2) {
-  //           const quadrant = matches[0].replace(/"/g, '');
-  //           const taskText = matches[1].replace(/"/g, '');
-  //           const completed = matches[2]?.replace(/"/g, '') === 'true';
-  //           const createdAt = matches[3]?.replace(/"/g, '') || new Date().toISOString();
-            
-  //           if (imported[quadrant]) {
-  //             imported[quadrant].push({
-  //               id: Date.now() + Math.random(),
-  //               text: taskText,
-  //               completed: completed,
-  //               createdAt: createdAt
-  //             });
-  //           }
-  //         }
-  //       }
-        
-  //       // setTasks(imported);
-  //       setSWOTData(imported);
-
-  //       setShowImportModal(false);
-  //       alert(t.importSuccess);
-  //     } else {
-  //       setImportError(t.importError);
-  //     }
-  //   } catch (error) {
-  //     console.error('Import error:', error);
-  //     setImportError(t.importError);
-  //   }
-  // };
 
   const importData = (content: string, filename: string) => {
     setImportError('');
@@ -463,7 +262,7 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
   };
 
   const clearAll = () => {
-    if (confirm('Are you sure you want to clear all data?')) {
+    if (confirm(t.confirmClear || 'Are you sure you want to clear all data?')) {
       setProjectName('');
       setDescription('');
       setSWOTData({
@@ -608,14 +407,14 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
                   className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
-                  JSON
+                  {dict.tools?.common?.json || 'JSON'}
                 </button>
                 <button
                   onClick={() => exportData('csv')}
                   className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
-                  CSV
+                  {dict.tools?.common?.csv || 'CSV'}
                 </button>
                 <button
                   onClick={() => exportData('report')}
@@ -639,7 +438,7 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
           {totalItems > 0 && (
             <div className="mt-4 px-4 py-2 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 text-center">
               <span className="text-sm font-semibold text-blue-700 dark:text-blue-300">
-                Total: {totalItems} {t.itemsCount}
+                {t.totalLabel} {totalItems} {t.itemsCount}
               </span>
             </div>
           )}
@@ -773,7 +572,7 @@ const SWOTMatrix = ({ lang = 'en', dict = {} }) => {
                           </div>
                         ))
                       ) : (
-                        <p className="text-xs text-muted-foreground italic">Add items to generate strategies</p>
+                        <p className="text-xs text-muted-foreground italic">{t.addItemsHint || 'Add items to generate strategies'}</p>
                       )}
                     </div>
                   </div>

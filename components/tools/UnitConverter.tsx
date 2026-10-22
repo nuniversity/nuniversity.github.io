@@ -135,7 +135,9 @@ interface UnitConverterProps {
 
 type CategoryKey = keyof typeof categories;
 
-const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
+const UnitConverter = ({ lang = 'en', dict = {} }: UnitConverterProps) => {
+  const t = dict.tools?.unit_converter || {};
+
   const [category, setCategory] = useState<CategoryKey>('length');
   const [fromUnit, setFromUnit] = useState('meters');
   const [toUnit, setToUnit] = useState('kilometers');
@@ -144,7 +146,10 @@ const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
 
   const cat = categories[category];
 
+  const shortUnitLabel = (unitKey: string) => (t.units?.[unitKey] || cat.units[unitKey]?.label || '').split(' (')[0];
+
   const result = useMemo(() => {
+    const numberLocale = lang === 'pt' ? 'pt-BR' : lang === 'es' ? 'es-ES' : 'en-US';
     const input = parseFloat(value);
     if (isNaN(input)) return '';
     const from = cat.units[fromUnit];
@@ -167,8 +172,8 @@ const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
     const converted = baseValue / to.toBase;
     if (Math.abs(converted) < 0.0001) return converted.toExponential(6);
     if (Math.abs(converted) >= 1000000) return converted.toExponential(4);
-    return converted.toLocaleString('en-US', { maximumSignificantDigits: 10 });
-  }, [category, fromUnit, toUnit, value, cat]);
+    return converted.toLocaleString(numberLocale, { maximumSignificantDigits: 10 });
+  }, [category, fromUnit, toUnit, value, cat, lang]);
 
   const copyResult = () => {
     navigator.clipboard.writeText(result);
@@ -190,10 +195,10 @@ const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
             <ArrowLeftRight className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-            Unit Converter
+            {t.title || 'Unit Converter'}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Convert between hundreds of units in real-time
+            {t.subtitle || 'Convert between hundreds of units in real-time'}
           </p>
         </div>
 
@@ -206,7 +211,7 @@ const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
               className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${category === key ? 'bg-blue-600 text-white shadow-lg' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'}`}
             >
               <span className="mr-1.5">{categories[key].icon}</span>
-              {categories[key].label}
+              {t.categories?.[key] || categories[key].label}
             </button>
           ))}
         </div>
@@ -216,7 +221,7 @@ const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
           <div className="grid grid-cols-[1fr,auto,1fr] gap-4 items-end">
             {/* From */}
             <div>
-              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">From</label>
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">{t.from || 'From'}</label>
               <input
                 type="number"
                 value={value}
@@ -230,7 +235,7 @@ const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
                 className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
               >
                 {Object.entries(cat.units).map(([key, u]) => (
-                  <option key={key} value={key}>{u.label}</option>
+                  <option key={key} value={key}>{t.units?.[key] || u.label}</option>
                 ))}
               </select>
             </div>
@@ -244,7 +249,7 @@ const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
 
             {/* To */}
             <div>
-              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">To</label>
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">{t.to || 'To'}</label>
               <div className="w-full px-4 py-3 rounded-lg border border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-900/20 text-lg font-bold text-blue-700 dark:text-blue-300 mb-2 flex items-center justify-between">
                 <span>{result || '—'}</span>
                 {result && (
@@ -259,7 +264,7 @@ const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
                 className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
               >
                 {Object.entries(cat.units).map(([key, u]) => (
-                  <option key={key} value={key}>{u.label}</option>
+                  <option key={key} value={key}>{t.units?.[key] || u.label}</option>
                 ))}
               </select>
             </div>
@@ -269,8 +274,8 @@ const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
           {result && fromUnit !== toUnit && (
             <div className="mt-6 p-4 rounded-xl bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-700">
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                <span className="font-medium">{value}</span> {cat.units[fromUnit]?.label.split(' (')[0]} ={' '}
-                <span className="font-bold text-blue-600">{result}</span> {cat.units[toUnit]?.label.split(' (')[0]}
+                <span className="font-medium">{value}</span> {shortUnitLabel(fromUnit)} ={' '}
+                <span className="font-bold text-blue-600">{result}</span> {shortUnitLabel(toUnit)}
               </p>
             </div>
           )}
@@ -278,7 +283,7 @@ const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
 
         {/* Common Conversions */}
         <div className="mt-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-          <h3 className="text-lg font-semibold mb-4">Common Conversions</h3>
+          <h3 className="text-lg font-semibold mb-4">{t.common_conversions || 'Common Conversions'}</h3>
           <div className="grid grid-cols-2 gap-2">
             {getCommonConversions(category).slice(0, 8).map((conv, i) => (
               <button
@@ -286,9 +291,9 @@ const UnitConverter = ({ lang = 'en' }: UnitConverterProps) => {
                 onClick={() => { setFromUnit(conv.from); setToUnit(conv.to); setValue(conv.value.toString()); }}
                 className="p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 text-left text-sm transition-colors"
               >
-                <span className="text-gray-500 dark:text-gray-400">{conv.value} {cat.units[conv.from]?.label.split(' (')[0]}</span>
+                <span className="text-gray-500 dark:text-gray-400">{conv.value} {shortUnitLabel(conv.from)}</span>
                 <br />
-                <span className="font-medium">= {conv.result} {cat.units[conv.to]?.label.split(' (')[0]}</span>
+                <span className="font-medium">= {conv.result} {shortUnitLabel(conv.to)}</span>
               </button>
             ))}
           </div>

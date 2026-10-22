@@ -1,7 +1,7 @@
 ---
 title: Habit Tracker
 description: Build better habits with daily tracking, streak counting, and visual progress heatmaps. Track multiple habits and monitor your consistency.
-category: Productivity
+category: productivity
 icon: calendar-check
 order: 10
 ---

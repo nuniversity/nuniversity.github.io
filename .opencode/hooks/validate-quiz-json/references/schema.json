@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Quiz JSON Schema",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "kind",
+    "category",
+    "title",
+    "description",
+    "durationSeconds",
+    "passingScore",
+    "domains",
+    "allocations",
+    "questions"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Quiz identifier, must equal slug and filename stem"
+    },
+    "slug": {
+      "type": "string",
+      "minLength": 1,
+      "description": "URL slug (equals id)"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["certification", "practice", "course-exam"],
+      "description": "Quiz kind"
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Content category (e.g. data-platforms)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Quiz title"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Brief description"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["beginner", "intermediate", "advanced"],
+      "description": "Optional difficulty level"
+    },
+    "topic": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional topic label"
+    },
+    "certification": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional certification label"
+    },
+    "durationSeconds": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Exam duration in seconds"
+    },
+    "passingScore": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 100,
+      "description": "Passing score percentage"
+    },
+    "domains": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/domain" }
+    },
+    "allocations": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "Exam blueprint weights per subdomain, must sum to 100",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/question" }
+    },
+    "locales": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/locale" }
+    }
+  },
+  "$defs": {
+    "domain": {
+      "type": "object",
+      "required": ["id", "name", "color", "subdomains"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "color": { "type": "string", "minLength": 1 },
+        "subdomains": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "question": {
+      "type": "object",
+      "required": ["id", "subdomain", "type", "question", "options", "correct", "explanation"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^q\\d{3}$" },
+        "subdomain": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "enum": ["mcq", "multi", "tf"] },
+        "question": { "type": "string", "minLength": 1 },
+        "options": { "type": "array", "minItems": 4, "maxItems": 4 },
+        "correct": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "explanation": { "type": "string", "minLength": 1 }
+      }
+    },
+    "locale": {
+      "type": "object",
+      "required": ["title", "description"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "questions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "question": { "type": "string", "minLength": 1 },
+              "options": { "type": "array", "minItems": 4, "maxItems": 4 },
+              "explanation": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

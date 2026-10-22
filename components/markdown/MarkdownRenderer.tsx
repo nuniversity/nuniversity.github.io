@@ -24,6 +24,7 @@ interface MarkdownRendererProps {
   content: string
   /** Site locale ('en' | 'pt' | 'es') — drives callout header labels. Defaults to 'en'. */
   lang?: string
+  dict?: any
 }
 
 const langMap: Record<string, string> = {
@@ -382,7 +383,7 @@ function preprocessAlerts(md: string, lang: string): string {
   return result
 }
 
-export default function MarkdownRenderer({ content, lang = 'en' }: MarkdownRendererProps) {
+export default function MarkdownRenderer({ content, lang = 'en', dict }: MarkdownRendererProps) {
   const processedContent = preprocessAlerts(content, lang)
 
   return (
@@ -494,6 +495,7 @@ export default function MarkdownRenderer({ content, lang = 'en' }: MarkdownRende
                     items={config.items}
                     correctOrder={config.correctOrder}
                     explanation={config.explanation}
+                    dict={dict}
                   />
                 )
               } catch (e) {
@@ -513,6 +515,7 @@ export default function MarkdownRenderer({ content, lang = 'en' }: MarkdownRende
                     question={config.question}
                     pairs={config.pairs}
                     explanation={config.explanation}
+                    dict={dict}
                   />
                 )
               } catch (e) {
@@ -534,6 +537,7 @@ export default function MarkdownRenderer({ content, lang = 'en' }: MarkdownRende
                     answers={config.answers}
                     distractors={config.distractors}
                     explanation={config.explanation}
+                    dict={dict}
                   />
                 )
               } catch (e) {
@@ -548,7 +552,7 @@ export default function MarkdownRenderer({ content, lang = 'en' }: MarkdownRende
             if (language === 'question') {
               try {
                 const questionData: LessonQuestion = JSON.parse(codeString)
-                return <QuestionBlock data={questionData} />
+                return <QuestionBlock data={questionData} dict={dict} />
               } catch (e) {
                 return (
                   <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
@@ -570,6 +574,7 @@ export default function MarkdownRenderer({ content, lang = 'en' }: MarkdownRende
                       question={config.title}
                       pairs={config.pairs}
                       explanation={[config.instructions, config.answer].filter(Boolean).join('\n\n')}
+                      dict={dict}
                     />
                   )
                 }
@@ -580,6 +585,7 @@ export default function MarkdownRenderer({ content, lang = 'en' }: MarkdownRende
                       instructions={config.instructions}
                       items={config.items}
                       explanation={[config.explanation, config.answer].filter(Boolean).join('\n\n') || undefined}
+                      dict={dict}
                     />
                   )
                 }
@@ -590,6 +596,7 @@ export default function MarkdownRenderer({ content, lang = 'en' }: MarkdownRende
                       instructions={config.instructions}
                       buckets={config.buckets}
                       explanation={config.explanation}
+                      dict={dict}
                     />
                   )
                 }

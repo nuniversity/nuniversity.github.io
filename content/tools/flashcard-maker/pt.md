@@ -1,7 +1,7 @@
 ---
 title: Criador de Flashcards
 description: Crie e estude flashcards digitais com repetição espaçada. Construa baralhos personalizados e acompanhe seu progresso.
-category: Study & Learning
+category: study
 icon: book-open
 order: 8
 ---

@@ -118,7 +118,7 @@ export function RoadmapTimeline({ roadmap, lang, dict }: RoadmapTimelineProps) {
               <Map className="w-4 h-4 text-muted-foreground" />
               <span className="text-sm text-muted-foreground">{dict.roadmaps?.difficulty || 'Difficulty'}</span>
             </div>
-            <p className="font-semibold capitalize">{roadmap.difficulty}</p>
+            <p className="font-semibold capitalize">{dict.roadmaps?.difficultyLevels?.[String(roadmap.difficulty).toLowerCase()] || roadmap.difficulty}</p>
           </div>
           <div className="bg-card border rounded-lg p-4">
             <div className="flex items-center gap-2 mb-1">

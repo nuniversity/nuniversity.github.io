@@ -20,7 +20,16 @@ interface SessionLog {
   tasksCompleted: number;
 }
 
-const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
+function tpl(template: string, vars?: Record<string, string | number>): string {
+  if (!vars) return template
+  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
+}
+
+const PomodoroTimer = ({ lang = 'en', dict = {} }: PomodoroTimerProps) => {
+  const t = dict.tools?.pomodoro || {};
+  const tc = dict.tools?.common || {};
+  const c = dict.common || {};
+
   const [workMinutes, setWorkMinutes] = useState(25);
   const [breakMinutes, setBreakMinutes] = useState(5);
   const [longBreakMinutes, setLongBreakMinutes] = useState(15);
@@ -153,10 +162,10 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
             <Timer className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-            Pomodoro Study Timer
+            {t.title || 'Pomodoro Study Timer'}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Focus on what matters, one interval at a time
+            {t.subtitle || 'Focus on what matters, one interval at a time'}
           </p>
         </div>
 
@@ -167,21 +176,21 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
             className={`px-6 py-2 rounded-lg font-medium transition-all ${activeTab === 'timer' ? 'bg-blue-600 text-white shadow-lg' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
           >
             <Timer className="w-4 h-4 inline mr-2" />
-            Timer
+            {t.tab_timer || 'Timer'}
           </button>
           <button
             onClick={() => setActiveTab('tasks')}
             className={`px-6 py-2 rounded-lg font-medium transition-all ${activeTab === 'tasks' ? 'bg-blue-600 text-white shadow-lg' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
           >
             <ListChecks className="w-4 h-4 inline mr-2" />
-            Tasks
+            {t.tab_tasks || 'Tasks'}
           </button>
           <button
             onClick={() => setActiveTab('stats')}
             className={`px-6 py-2 rounded-lg font-medium transition-all ${activeTab === 'stats' ? 'bg-blue-600 text-white shadow-lg' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
           >
             <BarChart3 className="w-4 h-4 inline mr-2" />
-            Stats
+            {tc.stats || 'Stats'}
           </button>
         </div>
 
@@ -190,10 +199,10 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
             {/* Status */}
             <div className="text-center mb-6">
               <span className={`inline-block px-4 py-1 rounded-full text-sm font-medium ${isBreak ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' : 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'}`}>
-                {isBreak ? (sessionCount > 0 && sessionCount % 4 === 0 ? 'Long Break' : 'Break Time') : 'Focus Time'}
+                {isBreak ? (sessionCount > 0 && sessionCount % 4 === 0 ? (t.status_long_break || 'Long Break') : (t.status_break || 'Break Time')) : (t.status_focus || 'Focus Time')}
               </span>
               {!isBreak && sessionCount > 0 && (
-                <span className="ml-2 text-sm text-gray-500">Session #{sessionCount + 1}</span>
+                <span className="ml-2 text-sm text-gray-500">{tpl(t.session_number || 'Session #{n}', { n: sessionCount + 1 })}</span>
               )}
             </div>
 
@@ -205,7 +214,7 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-5xl font-bold tabular-nums">{formatTime(seconds)}</span>
-                <span className="text-sm text-gray-500 mt-2">{isBreak ? 'Break' : 'Work'}</span>
+                <span className="text-sm text-gray-500 mt-2">{isBreak ? (t.mode_break || 'Break') : (t.mode_work || 'Work')}</span>
               </div>
             </div>
 
@@ -213,22 +222,22 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
             <div className="flex justify-center gap-4 mb-6">
               {!isActive ? (
                 <button onClick={startTimer} className="px-8 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold hover:shadow-lg transition-all flex items-center gap-2">
-                  <Play className="w-5 h-5" /> Start
+                  <Play className="w-5 h-5" /> {tc.start || 'Start'}
                 </button>
               ) : (
                 <button onClick={pauseTimer} className="px-8 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold hover:shadow-lg transition-all flex items-center gap-2">
-                  <Pause className="w-5 h-5" /> Pause
+                  <Pause className="w-5 h-5" /> {tc.pause || 'Pause'}
                 </button>
               )}
               <button onClick={resetTimer} className="px-6 py-3 rounded-xl bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all flex items-center gap-2">
-                <RotateCcw className="w-5 h-5" /> Reset
+                <RotateCcw className="w-5 h-5" /> {tc.reset || 'Reset'}
               </button>
             </div>
 
             {/* Timer Settings */}
             <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 text-center">Work (min)</label>
+                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 text-center">{t.work_min || 'Work (min)'}</label>
                 <input
                   type="number"
                   min={1}
@@ -240,7 +249,7 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 text-center">Break (min)</label>
+                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 text-center">{t.break_min || 'Break (min)'}</label>
                 <input
                   type="number"
                   min={1}
@@ -252,7 +261,7 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 text-center">Long (min)</label>
+                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 text-center">{t.long_min || 'Long (min)'}</label>
                 <input
                   type="number"
                   min={1}
@@ -273,7 +282,7 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
               {Array.from({ length: 4 - Math.min(sessionCount % 4, 4) }).map((_, i) => (
                 <div key={i + 4} className="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600" />
               ))}
-              <span className="text-xs text-gray-500 ml-2">({sessionCount} sessions)</span>
+              <span className="text-xs text-gray-500 ml-2">{tpl(t.sessions_count || '({n} sessions)', { n: sessionCount })}</span>
             </div>
           </div>
         )}
@@ -282,7 +291,7 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-6">
             <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
               <ListChecks className="w-5 h-5 text-blue-600" />
-              Session Tasks
+              {t.session_tasks || 'Session Tasks'}
             </h2>
 
             <div className="flex gap-2 mb-4">
@@ -291,7 +300,7 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
                 value={newTask}
                 onChange={(e) => setNewTask(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && addTask()}
-                placeholder="Add a task for this session..."
+                placeholder={t.task_placeholder || 'Add a task for this session...'}
                 className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
               />
               <button onClick={addTask} className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors">
@@ -301,7 +310,7 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
 
             <div className="space-y-2">
               {tasks.length === 0 ? (
-                <p className="text-center text-gray-500 py-8">No tasks yet. Add tasks for your study session!</p>
+                <p className="text-center text-gray-500 py-8">{t.no_tasks || 'No tasks yet. Add tasks for your study session!'}</p>
               ) : (
                 tasks.map(task => (
                   <div key={task.id} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 group hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
@@ -322,7 +331,7 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
 
             {tasks.filter(t => t.completed).length > 0 && (
               <div className="mt-4 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 text-sm text-center">
-                {tasks.filter(t => t.completed).length} of {tasks.length} tasks completed
+                {tpl(t.tasks_completed || '{done}/{total} tasks completed', { done: tasks.filter(task => task.completed).length, total: tasks.length })}
               </div>
             )}
           </div>
@@ -333,42 +342,42 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-semibold flex items-center gap-2">
                 <BarChart3 className="w-5 h-5 text-blue-600" />
-                Statistics
+                {t.statistics || 'Statistics'}
               </h2>
               {sessionLogs.length > 0 && (
-                <button onClick={clearLogs} className="text-sm text-red-500 hover:text-red-700 transition-colors">Clear History</button>
+                <button onClick={clearLogs} className="text-sm text-red-500 hover:text-red-700 transition-colors">{t.clear_history || 'Clear History'}</button>
               )}
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
               <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800">
-                <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Sessions</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t.total_sessions || 'Total Sessions'}</div>
                 <div className="text-2xl font-bold text-blue-600">{sessionLogs.length}</div>
               </div>
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-4 border border-green-200 dark:border-green-800">
-                <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Focus Time</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t.status_focus || 'Focus Time'}</div>
                 <div className="text-2xl font-bold text-green-600">{Math.floor(totalFocusMinutes / 60)}h {totalFocusMinutes % 60}m</div>
               </div>
               <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-4 border border-purple-200 dark:border-purple-800">
-                <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Today</div>
-                <div className="text-2xl font-bold text-purple-600">{todaySessions} sess</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">{tc.today || 'Today'}</div>
+                <div className="text-2xl font-bold text-purple-600">{tpl(t.sessions_short || '{n} sess', { n: todaySessions })}</div>
               </div>
               <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl p-4 border border-amber-200 dark:border-amber-800">
-                <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Day Streak</div>
-                <div className="text-2xl font-bold text-amber-600">{streak} days</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t.day_streak || 'Day Streak'}</div>
+                <div className="text-2xl font-bold text-amber-600">{tpl(t.days || '{n} days', { n: streak })}</div>
               </div>
             </div>
 
             {sessionLogs.length > 0 ? (
               <div className="max-h-60 overflow-y-auto">
-                <h3 className="text-sm font-medium text-gray-500 mb-3">Recent Sessions</h3>
+                <h3 className="text-sm font-medium text-gray-500 mb-3">{t.recent_sessions || 'Recent Sessions'}</h3>
                 <div className="space-y-2">
                   {[...sessionLogs].reverse().slice(0, 20).map((log, i) => (
                     <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-gray-50 dark:bg-gray-700/50 text-sm">
-                      <span className="text-gray-600 dark:text-gray-400">{new Date(log.date).toLocaleDateString()} {new Date(log.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                      <span className="text-gray-600 dark:text-gray-400">{new Date(log.date).toLocaleDateString(lang)} {new Date(log.date).toLocaleTimeString(lang, { hour: '2-digit', minute: '2-digit' })}</span>
                       <span className="flex gap-4">
-                        <span className="text-blue-600 font-medium">{log.workDuration}m</span>
-                        <span className="text-green-600 font-medium">{log.tasksCompleted} tasks</span>
+                        <span className="text-blue-600 font-medium">{tpl(t.minutes_short || '{n}m', { n: log.workDuration })}</span>
+                        <span className="text-green-600 font-medium">{tpl(t.tasks_short || '{n} tasks', { n: log.tasksCompleted })}</span>
                       </span>
                     </div>
                   ))}
@@ -377,8 +386,8 @@ const PomodoroTimer = ({ lang = 'en' }: PomodoroTimerProps) => {
             ) : (
               <div className="text-center py-12 text-gray-400">
                 <Clock className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                <p>No sessions completed yet</p>
-                <p className="text-sm">Start the timer to build your study history!</p>
+                <p>{t.no_sessions || 'No sessions completed yet'}</p>
+                <p className="text-sm">{t.no_sessions_hint || 'Start the timer to build your study history!'}</p>
               </div>
             )}
           </div>

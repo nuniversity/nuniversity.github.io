@@ -80,6 +80,12 @@ export interface QuizGame {
   certification: string
   mockExam?: MockExamConfig
   questions: QuizQuestion[]
+  locales?: {
+    [locale: string]: {
+      title?: string
+      description?: string
+    }
+  }
 }
 
 export interface ConversationQuestion {
@@ -138,12 +144,28 @@ export interface GameMetadata {
   type: 'vocabulary' | 'grammar' | 'math' | 'coding' | 'physics' | 'logic' | 'fun' | 'quiz' | 'science' | 'puzzles' | 'conversation'
 }
 
+export interface GameFileData {
+  title: string
+  description: string
+  locales?: {
+    [locale: string]: {
+      title?: string
+      description?: string
+    }
+  }
+}
+
+interface GameListItem extends GameFileData {
+  id: string
+  difficulty: string
+}
+
 const gamesDirectory = path.join(process.cwd(), 'content/games')
 
 /**
  * Get all available games metadata
  */
-export async function getAllGames(): Promise<GameMetadata[]> {
+export async function getAllGames(locale?: string): Promise<GameMetadata[]> {
   const games: GameMetadata[] = []
   
   try {
@@ -165,7 +187,13 @@ export async function getAllGames(): Promise<GameMetadata[]> {
       for (const file of gameFiles) {
         const filePath = path.join(gameTypePath, file)
         const fileContent = fs.readFileSync(filePath, 'utf-8')
-        const gameData = JSON.parse(fileContent)
+        const gameData: GameListItem = JSON.parse(fileContent)
+
+        if (locale && gameData.locales?.[locale]) {
+          const loc = gameData.locales[locale]
+          if (loc.title) gameData.title = loc.title
+          if (loc.description) gameData.description = loc.description
+        }
 
         games.push({
           slug: gameData.id,
@@ -216,7 +244,7 @@ export async function getVocabularyGame(slug: string, locale?: string): Promise<
 /**
  * Get quiz game by slug
  */
-export async function getQuizGame(slug: string): Promise<QuizGame | null> {
+export async function getQuizGame(slug: string, locale?: string): Promise<QuizGame | null> {
   try {
     const filePath = path.join(gamesDirectory, 'quiz', `${slug}.json`)
     
@@ -225,7 +253,15 @@ export async function getQuizGame(slug: string): Promise<QuizGame | null> {
     }
 
     const fileContent = fs.readFileSync(filePath, 'utf-8')
-    return JSON.parse(fileContent)
+    const game: QuizGame = JSON.parse(fileContent)
+
+    if (locale && game.locales?.[locale]) {
+      const loc = game.locales[locale]
+      if (loc.title) game.title = loc.title
+      if (loc.description) game.description = loc.description
+    }
+
+    return game
   } catch (error) {
     console.error(`Error reading quiz game ${slug}:`, error)
     return null
@@ -235,12 +271,20 @@ export async function getQuizGame(slug: string): Promise<QuizGame | null> {
 /**
  * Generic getter for any game type
  */
-export async function getGameFile<T>(type: string, slug: string): Promise<T | null> {
+export async function getGameFile<T extends GameFileData>(type: string, slug: string, locale?: string): Promise<T | null> {
   try {
     const filePath = path.join(gamesDirectory, type, `${slug}.json`)
     if (!fs.existsSync(filePath)) return null
     const fileContent = fs.readFileSync(filePath, 'utf-8')
-    return JSON.parse(fileContent)
+    const game: T = JSON.parse(fileContent)
+
+    if (locale && game.locales?.[locale]) {
+      const loc = game.locales[locale]
+      if (loc.title) game.title = loc.title
+      if (loc.description) game.description = loc.description
+    }
+
+    return game
   } catch (error) {
     console.error(`Error reading ${type} game ${slug}:`, error)
     return null
@@ -294,7 +338,7 @@ export async function getConversationGame(slug: string, locale?: string): Promis
 /**
  * Get all games by category
  */
-export async function getGamesByCategory(category: string): Promise<GameMetadata[]> {
-  const allGames = await getAllGames()
+export async function getGamesByCategory(category: string, locale?: string): Promise<GameMetadata[]> {
+  const allGames = await getAllGames(locale)
   return allGames.filter(game => game.category === category)
 }

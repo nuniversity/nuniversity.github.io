@@ -1,7 +1,7 @@
 ---
 title: SWOT Matrix Analysis
 description: Strategic planning tool for comprehensive business analysis. Identify Strengths, Weaknesses, Opportunities, and Threats, then generate strategic recommendations.
-category: Business Strategy
+category: business_strategy
 icon: bar-chart
 order: 3
 ---

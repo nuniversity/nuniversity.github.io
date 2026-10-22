@@ -238,4 +238,26 @@ Also landed in Phase 1 (harness scope): `passWithNoTests` removed (vitest 683 te
 
 Legacy cross-reference flips: BUG-01, BUG-02, BUG-03, BUG-04, ISSUE-07, ISSUE-08, ISSUE-09, SEC-03, IMPROVE-14, IMPROVE-17, IMPROVE-20, IMPROVE-22, PERF-01 → **CLOSED**. IMPROVE-16 → **partial** (404 shipped; error boundaries deferred Phase 7). F-049 accepted as-is (build-frozen year).
 
-**Totals:** 15 P0 · 38 P1 · 30+ P2 (incl. legacy mapping) + 8 content-quality defects (F-104–F-111) — sequenced across Phases 1–7 in [PLAN.md](./PLAN.md); F-104–F-111 closed ahead of Phase 9; Phase 1 harness items closed 2026-10-20; Phase 2 critical-bug items closed 2026-10-21 (residual: error.tsx boundaries → Phase 7).
+## Phase 3 closeout — i18n completeness (2026-10-22)
+
+Deep plan: [PLAN-PHASE3.md](./PLAN-PHASE3.md) (W0–W10), decisions **D31–D35**.
+
+| ID | Status | Evidence |
+|---|---|---|
+| F-020 | **Fixed** | games hub: categories/empty states/search/difficulty → `dict.games.*` (+`quiz/puzzles/conversation` category keys ×3) |
+| F-021 | **Fixed** | all 11 game clients read `dict` (binary-hex, typing-speed, number-sequence, math-challenge, periodic-table, word-search wired in Phase 3; conversation/flashcards/vocabulary pre-wired; quiz per D32) |
+| F-022 | **Fixed** | all tool components wired; Eisenhower (39 keys) + SWOT (44 keys) inline maps absorbed verbatim into `dict.tools.*` ×3 with report/templates/confirmClear; Regex/UnitConverter/Pomodoro/Habit/BrainWriting/DecisionMatrix/FlashcardMaker wired |
+| F-023 | **Fixed** | 30 frontmatter files → 10 canonical slugs (identical ×locales); shared `lib/tools/tool-icons.ts` (10 icons); cards render `tool.icon`; `study` group icon/color; home `iconBgMap` re-keyed to slugs; tools validator `VALID_CATEGORIES` updated (D35 — same batch) |
+| F-030 | **Fixed** | `AboutContent.learn_more` ×3 + `{content.learn_more \|\| 'Learn more'}` render |
+| F-031 | **Fixed** | roadmap detail `generateMetadata` → `dict.roadmaps.notFound` |
+| F-032 | **Fixed** | QuestionBlock, Matching, FillBlank (Items+Template), DragOrder, BucketDrop all read `dict` (EN-fallback reads); MarkdownRenderer forwards `dict` at 7 dispatch sites; lesson page passes `dict={dict}` |
+| F-033 | **Fixed** | Pomodoro + HabitTracker date rendering → lang (`toLocaleDateString`), weekday array localized; UnitConverter 68 units ×3 via `t.units` with locale-aware `toLocaleString` |
+| F-034 | **Fixed** | games index + 8 detail `notFound` metadata; suffixes via `dict.games.suffixes.*`; 12 game JSONs gained `locales.title/description`, loaders locale-aware — pt/es titles verified on export (D31) |
+| F-035 | **Fixed** | layout `metadata.site` per-locale (title/description/og/keywords/JSON-LD contactType/availableLanguage) |
+| F-052 | **Fixed** | `NN-` lesson-prefix alias map, 5 divergent courses (`lib/i18n/course-lesson-aliases.json` + `scripts/generate-lesson-aliases.mjs`, en↔pt↔es coverage verified) + course-landing fallback; switcher strips/rewrites locale segment; 3 switcher vitest tests green (D34) |
+| F-006 | **Fixed (content)** | `content/library/es/` 58 items (ids `-es`, global id-uniqueness test), `link-exceptions.tsv` +28 rows; pytest 491 (D33) — replaces the Phase 2 fallback |
+| F-053 | **Deferred → 9** | per-lesson en-fallback retained (no policy change: 143 landings + all lessons export); missing pt/es lesson translations stay a Phase 9 content item |
+
+Also landed: difficulty badge localization sweep found by the leak audit (home `FeaturedCourses`, courses list cards + filter, course landing lesson badges, roadmaps list + timeline incl. wrong `roadmaps.difficulty` string-index nesting, library resources → `difficulty_labels`/`difficultyLevels`/`library.difficulty` dict lookups); `tools.tool_count`/`tool_singular` keys ×3; leak audit as a blocking `verify_out` extended invariant (27 chrome strings + raw difficulty-slug text-node probe over `out/pt`+`out/es`, `/games/quiz/` waived per D32, lesson bodies excluded from the slug probe as Phase-4 content).
+
+**Totals:** 15 P0 · 38 P1 · 30+ P2 (incl. legacy mapping) + 8 content-quality defects (F-104–F-111) — sequenced across Phases 1–7 in [PLAN.md](./PLAN.md); F-104–F-111 closed ahead of Phase 9; Phase 1 harness items closed 2026-10-20; Phase 2 critical-bug items closed 2026-10-21 (residual: error.tsx boundaries → Phase 7); Phase 3 i18n items closed 2026-10-22 (residuals: full quiz i18n + question banks → Phase 4 per D32/F-046, F-053 missing translations → Phase 9, F-021 beyond-existing vocab wording → Phase 5).

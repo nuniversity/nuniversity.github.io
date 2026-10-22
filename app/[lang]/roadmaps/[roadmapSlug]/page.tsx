@@ -40,7 +40,8 @@ export async function generateMetadata({
   const roadmap = await getRoadmapContent(params.roadmapSlug, params.lang)
 
   if (!roadmap) {
-    return { title: 'Roadmap Not Found' }
+    const dict = await getDictionary(params.lang)
+    return { title: dict.roadmaps?.notFound || 'Roadmap Not Found' }
   }
 
   return {

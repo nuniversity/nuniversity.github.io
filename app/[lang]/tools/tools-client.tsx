@@ -15,9 +15,11 @@ import {
   Users,
   Briefcase,
   Clock,
-  Grid3x3
+  Grid3x3,
+  BookOpen
 } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
+import { getToolIcon } from '@/lib/tools/tool-icons'
 
 interface Tool {
   slug: string
@@ -43,6 +45,7 @@ const categoryIcons: Record<string, any> = {
   'collaboration': Users,
   'business_strategy': Briefcase,
   'productivity': Clock,
+  'study': BookOpen,
 }
 
 const categoryColors: Record<string, string> = {
@@ -55,6 +58,7 @@ const categoryColors: Record<string, string> = {
   'collaboration': 'from-yellow-500 to-amber-600',
   'business_strategy': 'from-teal-600 to-emerald-700',
   'productivity': 'from-rose-500 to-red-600',
+  'study': 'from-blue-500 to-indigo-600',
 }
 
 export function ToolsClient({ lang, tools, dict }: ToolsClientProps) {
@@ -72,16 +76,16 @@ export function ToolsClient({ lang, tools, dict }: ToolsClientProps) {
   }, [tools, searchQuery])
 
   const groupedByCategory = useMemo(() => {
-    const grouped: Record<string, Tool[]> = {}
+    const grouped: Record<string, { label: string; tools: Tool[] }> = {}
     
     for (const tool of filteredTools) {
-      const categoryKey = tool.category?.toLowerCase().replace(/\s+/g, '_') ?? 'uncategorized'
+      const categoryKey = tool.category?.toLowerCase().replace(/\s+/g, '_') || 'uncategorized'
       const categoryLabel = dict.tools?.categories?.[categoryKey] ?? tool.category ?? 'Uncategorized'
       
-      if (!grouped[categoryLabel]) {
-        grouped[categoryLabel] = []
+      if (!grouped[categoryKey]) {
+        grouped[categoryKey] = { label: categoryLabel, tools: [] }
       }
-      grouped[categoryLabel].push(tool)
+      grouped[categoryKey].tools.push(tool)
     }
     
     return grouped
@@ -166,28 +170,28 @@ export function ToolsClient({ lang, tools, dict }: ToolsClientProps) {
 
         {/* Grouped Tools */}
         <div className="space-y-12">
-          {Object.entries(groupedByCategory).map(([category, categoryTools]) => {
-            const IconComponent = getCategoryIcon(category)
-            const colorClass = getCategoryColor(category)
+          {Object.entries(groupedByCategory).map(([categoryKey, group]) => {
+            const IconComponent = getCategoryIcon(categoryKey)
+            const colorClass = getCategoryColor(categoryKey)
 
             return (
-              <div key={category}>
+              <div key={categoryKey}>
                 <div className="flex items-center gap-3 mb-6">
                   <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${colorClass} flex items-center justify-center`}>
                     <IconComponent className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-semibold">{category}</h2>
+                    <h2 className="text-2xl font-semibold">{group.label}</h2>
                     <p className="text-sm text-muted-foreground">
-                      {categoryTools.length} {categoryTools.length === 1 ? 'tool' : 'tools'}
+                      {group.tools.length} {group.tools.length === 1 ? (dict.tools?.tool_singular || 'tool') : (dict.tools?.tool_count || 'tools')}
                     </p>
                   </div>
                 </div>
                 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {categoryTools.map((tool) => {
-                    const IconComponent = getCategoryIcon(category)
-                    const colorClass = getCategoryColor(category)
+                  {group.tools.map((tool) => {
+                    const ToolIconComponent = getToolIcon(tool.icon, IconComponent)
+                    const colorClass = getCategoryColor(categoryKey)
 
                     return (
                       <Link
@@ -198,7 +202,7 @@ export function ToolsClient({ lang, tools, dict }: ToolsClientProps) {
                         <div className="p-6">
                           <div className="flex items-center justify-between mb-4">
                             <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${colorClass} flex items-center justify-center`}>
-                              <IconComponent className="w-6 h-6 text-white" />
+                              <ToolIconComponent className="w-6 h-6 text-white" />
                             </div>
                           </div>
 

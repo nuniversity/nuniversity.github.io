@@ -1,6 +1,6 @@
 // components/layout/Footer.tsx
 import Link from 'next/link'
-import { Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon, Library } from 'lucide-react'
+import { Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon, Library, Award } from 'lucide-react'
 import { MapPin, Youtube, Globe, Instagram, Send, CheckCircle } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
@@ -26,6 +26,7 @@ export default function Footer({ lang, dict }: FooterProps) {
       { name: dict.footer.links.courses, href: `/${lang}/courses`, icon: BookOpen },
       { name: dict.footer.links.tools, href: `/${lang}/tools`, icon: Code },
       { name: dict.footer.links.games, href: `/${lang}/games`, icon: GamepadIcon },
+      { name: dict.footer.links.quizzes, href: `/${lang}/quizzes`, icon: Award },
       { name: dict.library?.title || 'Library', href: `/${lang}/library`, icon: Library },
     ],
     subjects: [

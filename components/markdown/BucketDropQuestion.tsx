@@ -8,6 +8,7 @@ interface BucketDropQuestionProps {
   instructions?: string
   buckets: Array<{ label: string; items: string[] }>
   explanation?: string
+  dict?: any
 }
 
 function shuffle<T>(arr: T[]): T[] {
@@ -19,7 +20,9 @@ function shuffle<T>(arr: T[]): T[] {
   return a
 }
 
-export default function BucketDropQuestion({ question, instructions, buckets, explanation }: BucketDropQuestionProps) {
+export default function BucketDropQuestion({ question, instructions, buckets, explanation, dict }: BucketDropQuestionProps) {
+  const w = dict?.widgets
+  const b = w?.bucket_drop
   const allItems = useMemo(() => buckets.flatMap(bucket => bucket.items), [buckets])
   const [order, setOrder] = useState<string[]>(() => shuffle(allItems))
   const [placements, setPlacements] = useState<Record<string, string>>({})
@@ -84,7 +87,7 @@ export default function BucketDropQuestion({ question, instructions, buckets, ex
     <div className="my-8 rounded-xl border bg-card shadow-sm overflow-hidden">
       <div className="bg-muted/50 px-4 py-2 border-b flex items-center gap-2">
         <Layers className="w-4 h-4 text-primary" />
-        <span className="text-sm font-semibold text-foreground">Sort into Buckets</span>
+        <span className="text-sm font-semibold text-foreground">{b?.title || 'Sort into Buckets'}</span>
       </div>
       <div className="p-4 sm:p-6 space-y-4">
         <div>
@@ -93,7 +96,7 @@ export default function BucketDropQuestion({ question, instructions, buckets, ex
         </div>
 
         <div>
-          <p className="mb-3 text-sm font-semibold text-muted-foreground">Items — click an item, then click a bucket to place it:</p>
+          <p className="mb-3 text-sm font-semibold text-muted-foreground">{b?.instruction || 'Items — click an item, then click a bucket to place it:'}</p>
           <div className="flex flex-wrap gap-2">
             {pool.map(item => (
               <button
@@ -109,11 +112,11 @@ export default function BucketDropQuestion({ question, instructions, buckets, ex
               >
                 {item}
                 {checked && (
-                  <span className="block text-xs font-normal text-muted-foreground">Correct: {correctLabelOf(item)}</span>
+                  <span className="block text-xs font-normal text-muted-foreground">{(w?.correct_label || 'Correct: {label}').replace('{label}', '')}{correctLabelOf(item)}</span>
                 )}
               </button>
             ))}
-            {pool.length === 0 && <p className="text-sm text-muted-foreground">All items placed.</p>}
+            {pool.length === 0 && <p className="text-sm text-muted-foreground">{b?.empty_pool || 'All items placed.'}</p>}
           </div>
         </div>
 
@@ -126,7 +129,7 @@ export default function BucketDropQuestion({ question, instructions, buckets, ex
                 key={bucket.label}
                 role="button"
                 tabIndex={0}
-                aria-label={`Bucket: ${bucket.label}`}
+                aria-label={(b?.bucket_aria || 'Bucket: {label}').replace('{label}', bucket.label)}
                 onClick={() => handleBucketClick(bucket.label)}
                 onKeyDown={event => {
                   if (event.key === 'Enter' || event.key === ' ') {
@@ -156,12 +159,12 @@ export default function BucketDropQuestion({ question, instructions, buckets, ex
                     >
                       {item}
                       {checked && !isItemCorrect(item) && (
-                        <span className="block text-xs font-normal text-red-600">Correct: {correctLabelOf(item)}</span>
+                        <span className="block text-xs font-normal text-red-600">{(w?.correct_label || 'Correct: {label}').replace('{label}', '')}{correctLabelOf(item)}</span>
                       )}
                     </button>
                   ))}
                 </div>
-                {placed.length === 0 && <p className="text-xs text-muted-foreground mt-1">Empty — click to place the selected item</p>}
+                {placed.length === 0 && <p className="text-xs text-muted-foreground mt-1">{b?.empty_bucket || 'Empty — click to place the selected item'}</p>}
               </div>
             )
           })}
@@ -180,8 +183,8 @@ export default function BucketDropQuestion({ question, instructions, buckets, ex
               }
               <span className="font-semibold text-sm text-foreground">
                 {allCorrect
-                  ? 'All correct!'
-                  : `${correctCount} / ${allItems.length} correct — red items are in the wrong bucket or still unplaced.`}
+                  ? (w?.all_correct || 'All correct!')
+                  : (b?.score_feedback || '{count} / {total} correct — red items are in the wrong bucket or still unplaced.').replace('{count}', String(correctCount)).replace('{total}', String(allItems.length))}
               </span>
             </div>
             {explanation && <p className="text-sm text-muted-foreground mt-1">{explanation}</p>}
@@ -191,11 +194,11 @@ export default function BucketDropQuestion({ question, instructions, buckets, ex
         <div className="flex gap-2 pt-2">
           {!checked && (
             <button onClick={handleCheck} className="px-6 py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
-              Check Answers
+              {w?.check_answers || 'Check Answers'}
             </button>
           )}
           <button onClick={handleTryAgain} className="px-6 py-2 text-sm font-medium rounded-lg bg-muted text-foreground hover:bg-accent transition-colors">
-            Try Again
+            {w?.try_again || 'Try Again'}
           </button>
         </div>
       </div>

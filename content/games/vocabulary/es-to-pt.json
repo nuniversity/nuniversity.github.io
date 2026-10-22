@@ -8553,6 +8553,10 @@
       "description": "Aprende español con flashcards inteligentes usando repetición espaciada SM-2",
       "sourceLanguage": "Español",
       "targetLanguage": "Portugués"
+    },
+    "pt": {
+      "title": "Espanhol para Português - Vocabulário Básico",
+      "description": "Associe palavras em espanhol com suas traduções em português"
     }
   }
 }

@@ -2,6 +2,8 @@
 title: "Simulação de Exame Final (AIF-C01)"
 description: "Simule o exame real AWS Certified AI Practitioner: logística oficial e formatos de questão, estratégia de relógio de 90 minutos, decodificação de distratores, um Conjunto A de 15 itens com gabarito organizado por domínio, uma rubrica de pontuação, um plano de estudo de 40 horas orientado por pesos e uma síntese das lições 01-15."
 order: 16
+exam: true
+examMinutes: 100
 difficulty: "intermediate"
 duration: "100 min"
 ---

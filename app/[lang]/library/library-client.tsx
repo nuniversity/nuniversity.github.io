@@ -346,7 +346,7 @@ export function LibraryClient({ lang, resources, dict }: LibraryClientProps) {
                     )}
                     {resource.difficulty && (
                       <span className="px-2 py-0.5 rounded-md bg-muted">
-                        {resource.difficulty}
+                        {dict.library?.difficulty?.[String(resource.difficulty).toLowerCase()] || resource.difficulty}
                       </span>
                     )}
                     <span className="px-2 py-0.5 rounded-md bg-muted">

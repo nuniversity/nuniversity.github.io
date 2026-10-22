@@ -12,6 +12,11 @@ interface NumberSequenceClientProps {
   dict: any
 }
 
+function t(template: string, vars?: Record<string, string | number>): string {
+  if (!vars) return template
+  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
+}
+
 export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientProps) {
   const [gameMode, setGameMode] = useState<'config' | 'memorize' | 'recall' | 'complete' | 'gameover'>('config')
   const [sequence, setSequence] = useState<number[]>([])
@@ -25,6 +30,16 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
   const [correctCount, setCorrectCount] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const g = dict?.games ?? {}
+  const gn = g?.number_sequence ?? {}
+  const instr = gn.instructions ?? [
+    'Watch the sequence of numbers',
+    'Remember the order!',
+    'Type the sequence back correctly',
+    'Each level adds one more digit',
+    'You have {lives} lives — use them wisely!',
+  ]
 
   useEffect(() => {
     const saved = localStorage.getItem('number_sequence_highscore')
@@ -114,7 +129,7 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
     <div className="container-custom py-12">
       <div className="max-w-lg mx-auto">
         <Link href={`/${lang}/games`} className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-6 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Back to Games
+          <ArrowLeft className="w-4 h-4" /> {g.back_to_games || 'Back to Games'}
         </Link>
 
         <div className="text-center mb-8">
@@ -130,17 +145,15 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
             <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 flex items-center justify-center mx-auto mb-6">
               <Brain className="w-12 h-12 text-purple-600" />
             </div>
-            <h2 className="text-2xl font-bold mb-4">How to Play</h2>
+            <h2 className="text-2xl font-bold mb-4">{g.how_to_play || 'How to Play'}</h2>
             <ul className="text-left space-y-2 mb-8 text-muted-foreground">
-              <li className="flex items-start gap-2"><span className="text-purple-600 mt-1">•</span> Watch the sequence of numbers</li>
-              <li className="flex items-start gap-2"><span className="text-purple-600 mt-1">•</span> Remember the order!</li>
-              <li className="flex items-start gap-2"><span className="text-purple-600 mt-1">•</span> Type the sequence back correctly</li>
-              <li className="flex items-start gap-2"><span className="text-purple-600 mt-1">•</span> Each level adds one more digit</li>
-              <li className="flex items-start gap-2"><span className="text-purple-600 mt-1">•</span> You have {lives} lives — use them wisely!</li>
+              {instr.map((item: string, i: number) => (
+                <li key={i} className="flex items-start gap-2"><span className="text-purple-600 mt-1">•</span> {t(item, { lives })}</li>
+              ))}
             </ul>
-            {highScore > 0 && <p className="text-lg font-semibold mb-6">🏆 High Score: {highScore}</p>}
+            {highScore > 0 && <p className="text-lg font-semibold mb-6">{t(g.high_score || '🏆 High Score: {score}', { score: highScore })}</p>}
             <button onClick={startGame} className="w-full py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold hover:shadow-lg transition-all">
-              Start Game
+              {g.start_game || 'Start Game'}
             </button>
           </div>
         )}
@@ -155,8 +168,8 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
                 ))}
               </div>
               <div className="text-right">
-                <div className="text-sm text-muted-foreground">Level {level - (game.startingLength || 3) + 1}</div>
-                <div className="font-bold">Score: {score}</div>
+                <div className="text-sm text-muted-foreground">{t(gn.level_with_n || 'Level {n}', { n: level - (game.startingLength || 3) + 1 })}</div>
+                <div className="font-bold">{t(g.score_value || 'Score: {score}', { score })}</div>
               </div>
             </div>
 
@@ -178,7 +191,7 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
                 <div className="w-full">
                   <div className="flex items-center justify-center gap-2 mb-4">
                     <EyeOff className="w-5 h-5 text-muted-foreground" />
-                    <span className="text-muted-foreground">Enter the sequence</span>
+                    <span className="text-muted-foreground">{gn.enter_sequence || 'Enter the sequence'}</span>
                   </div>
                   <form onSubmit={handleSubmit} className="flex gap-3">
                     <input
@@ -187,14 +200,14 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
                       value={userInput}
                       onChange={(e) => setUserInput(e.target.value.replace(/\D/g, ''))}
                       onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit() }}
-                      placeholder="Type digits..."
+                      placeholder={gn.type_digits || 'Type digits...'}
                       className="flex-1 px-4 py-3 rounded-xl border-2 border-border text-2xl font-mono font-bold text-center outline-none focus:border-primary"
                       autoFocus
                       inputMode="numeric"
                     />
-                    <button type="submit" className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-all">OK</button>
+                    <button type="submit" className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-all">{g.ok || 'OK'}</button>
                   </form>
-                  <p className="text-xs text-muted-foreground mt-3">{sequence.length} digits</p>
+                  <p className="text-xs text-muted-foreground mt-3">{t(gn.digits_count || '{n} digits', { n: sequence.length })}</p>
                 </div>
               )}
             </div>
@@ -215,14 +228,14 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
             <div className="w-20 h-20 rounded-full bg-gradient-to-br from-red-400 to-orange-500 flex items-center justify-center mx-auto mb-6">
               <Trophy className="w-10 h-10 text-white" />
             </div>
-            <h2 className="text-3xl font-bold mb-2">Game Over!</h2>
-            <p className="text-muted-foreground mb-2">You reached level {level - (game.startingLength || 3)}</p>
-            <p className="text-lg mb-2">Correct sequences: {correctCount}</p>
+            <h2 className="text-3xl font-bold mb-2">{g.game_over || 'Game Over!'}</h2>
+            <p className="text-muted-foreground mb-2">{t(gn.reached_level || 'You reached level {n}', { n: level - (game.startingLength || 3) })}</p>
+            <p className="text-lg mb-2">{t(gn.correct_sequences || 'Correct sequences: {n}', { n: correctCount })}</p>
             <div className="text-4xl font-bold text-primary mb-6">{score}</div>
-            {score >= highScore && score > 0 && <p className="text-amber-600 font-semibold mb-4">🏆 New High Score!</p>}
+            {score >= highScore && score > 0 && <p className="text-amber-600 font-semibold mb-4">{g.new_high_score || '🏆 New High Score!'}</p>}
             <div className="flex gap-3">
-              <button onClick={startGame} className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all">Play Again</button>
-              <Link href={`/${lang}/games`} className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors text-center">More Games</Link>
+              <button onClick={startGame} className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all">{g.play_again || 'Play Again'}</button>
+              <Link href={`/${lang}/games`} className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors text-center">{g.more_games || 'More Games'}</Link>
             </div>
           </div>
         )}

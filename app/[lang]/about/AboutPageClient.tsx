@@ -42,6 +42,7 @@ interface AboutContent {
     description: string;
     members: TeamMember[];
   };
+  learn_more?: string;
 }
 
 interface AboutPageClientProps {
@@ -356,7 +357,7 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
                     className="mt-6 flex items-center gap-2 text-blue-600 dark:text-blue-400 font-medium"
                     whileHover={{ x: 5 }}
                   >
-                    Learn more <Link href={member.link} className="hover:text-white transition-colors"><ArrowRight className="w-4 h-4" /> </Link>
+                    {content.learn_more || 'Learn more'} <Link href={member.link} className="hover:text-white transition-colors"><ArrowRight className="w-4 h-4" /> </Link>
                   </motion.div>
                 </div>
               </div>

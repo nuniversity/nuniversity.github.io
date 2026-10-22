@@ -1,7 +1,7 @@
 ---
 title: Testador de Regex
 description: Teste e depure expressões regulares em tempo real. Destaque de correspondências, configuração de flags e folha de dicas.
-category: Coding & Programming
+category: coding
 icon: code
 order: 9
 ---

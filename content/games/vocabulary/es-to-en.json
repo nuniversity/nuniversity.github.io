@@ -307,5 +307,15 @@
     { "id": "298", "source": "Buscar", "target": "Search", "context": "actions" },
     { "id": "299", "source": "Encontrar", "target": "Find", "context": "actions" },
     { "id": "300", "source": "Usar", "target": "Use", "context": "actions" }
-  ]
+  ],
+  "locales": {
+    "pt": {
+      "title": "Espanhol para Inglês - Vocabulário Básico",
+      "description": "Associe palavras em espanhol com suas traduções em inglês"
+    },
+    "es": {
+      "title": "Del español al inglés - Vocabulario básico",
+      "description": "Relaciona palabras en español con sus traducciones al inglés"
+    }
+  }
 }

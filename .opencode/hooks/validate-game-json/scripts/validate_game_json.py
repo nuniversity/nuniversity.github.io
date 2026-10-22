@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate game JSON files for NUniversity.
 
-Covers every game category under content/games: quiz, vocabulary, coding,
+Covers every game category under content/games: vocabulary, coding,
 conversation, logic, math, physics, and puzzles. Shared rules (JSON shape,
 title, category, difficulty) run first, then category-specific structural
 checks derived from lib/games/get-game-content.ts and the game client
@@ -21,12 +21,11 @@ Exit Codes:
 """
 import json
 import os
-import re
 import sys
 from pathlib import Path
 
 
-VALID_CATEGORIES = {"quiz", "vocabulary", "coding", "conversation", "logic", "math", "physics", "puzzles"}
+VALID_CATEGORIES = {"vocabulary", "coding", "conversation", "logic", "math", "physics", "puzzles"}
 VALID_DIFFICULTIES = {"beginner", "intermediate", "advanced"}
 VALID_LEVELS = {"A1", "A2", "B1"}
 VALID_GAME_TYPES = {"memory", "flashcards"}
@@ -65,102 +64,6 @@ def validate_difficulty_levels(levels, numeric_fields: tuple) -> list[str]:
             value = entry.get(field)
             if not isinstance(value, int) or value <= 0:
                 errors.append(f"difficultyLevels.{level}.{field} must be a positive integer")
-    return errors
-
-
-def validate_quiz(data: dict) -> list[str]:
-    errors = []
-    required = ["questions"]
-    for field in required:
-        if field not in data or data[field] is None:
-            errors.append(f"Missing required field: {field}")
-
-    for field in ("topic", "certification"):
-        value = data.get(field)
-        if value is not None and (not isinstance(value, str) or not value.strip()):
-            errors.append(f"Invalid {field}: must be a non-empty string")
-
-    questions = data.get("questions", [])
-    if not isinstance(questions, list) or len(questions) == 0:
-        errors.append("questions must be a non-empty array")
-        return errors
-
-    for i, q in enumerate(questions):
-        if not isinstance(q, dict):
-            errors.append(f"Question {i}: must be an object")
-            continue
-        qid = q.get("id", "")
-        if not isinstance(qid, str) or not re.match(r"^q\d{3}$", qid):
-            errors.append(f"Question {i}: id '{qid}' must be q followed by 3 digits (e.g. q001)")
-
-        for field in ("domain", "question", "explanation"):
-            value = q.get(field)
-            if not isinstance(value, str) or not value.strip():
-                errors.append(f"Question {i} ({qid}): missing '{field}' field")
-
-        options = q.get("options", [])
-        if not isinstance(options, list):
-            errors.append(f"Question {i} ({qid}): options must be an array")
-        elif len(options) != 4:
-            errors.append(f"Question {i} ({qid}): must have exactly 4 options, found {len(options)}")
-        elif any(not isinstance(o, str) or not o.strip() for o in options):
-            errors.append(f"Question {i} ({qid}): options must be non-empty strings")
-
-        correct = q.get("correct", -1)
-        if not isinstance(correct, int) or correct < 0 or correct > 3:
-            errors.append(f"Question {i} ({qid}): correct must be 0-3, got {correct}")
-
-    for i, q in enumerate(questions):
-        if not isinstance(q, dict):
-            continue
-        expected = f"q{i + 1:03d}"
-        actual = q.get("id", "")
-        if actual != expected:
-            errors.append(f"Question {i}: expected id '{expected}', got '{actual}'")
-
-    mock = data.get("mockExam")
-    if mock is not None:
-        if not isinstance(mock, dict):
-            errors.append("mockExam must be an object")
-        else:
-            for field in ("durationSeconds", "passingScore"):
-                value = mock.get(field)
-                if not isinstance(value, int) or value <= 0:
-                    errors.append(f"mockExam.{field} must be a positive integer")
-            if isinstance(mock.get("passingScore"), int) and mock["passingScore"] > 100:
-                errors.append("mockExam.passingScore must be at most 100")
-
-            domains = {q.get("domain") for q in questions if isinstance(q, dict)}
-            allocations = mock.get("allocations")
-            if not isinstance(allocations, dict) or len(allocations) == 0:
-                errors.append("mockExam.allocations must be a non-empty object")
-            else:
-                for key, value in allocations.items():
-                    if not isinstance(value, int) or value <= 0:
-                        errors.append(f"mockExam.allocations['{key}'] must be a positive integer")
-                for domain in sorted(domains):
-                    if domain not in allocations:
-                        errors.append(f"mockExam.allocations missing question domain '{domain}'")
-                for key in sorted(allocations):
-                    if key not in domains:
-                        errors.append(f"mockExam.allocations references unknown domain '{key}'")
-
-            groups = mock.get("domainGroups")
-            if not isinstance(groups, dict) or len(groups) == 0:
-                errors.append("mockExam.domainGroups must be a non-empty object")
-            else:
-                for gkey, group in groups.items():
-                    if not isinstance(group, dict):
-                        errors.append(f"mockExam.domainGroups['{gkey}'] must be an object")
-                        continue
-                    for field in ("label", "color"):
-                        value = group.get(field)
-                        if not isinstance(value, str) or not value.strip():
-                            errors.append(f"mockExam.domainGroups['{gkey}']: missing '{field}' field")
-                    subdomains = group.get("subdomains")
-                    if not isinstance(subdomains, list) or len(subdomains) == 0:
-                        errors.append(f"mockExam.domainGroups['{gkey}']: subdomains must be a non-empty array")
-
     return errors
 
 
@@ -536,7 +439,6 @@ def validate_puzzles(data: dict) -> list[str]:
 
 
 VALIDATORS = {
-    "quiz": validate_quiz,
     "vocabulary": validate_vocabulary,
     "coding": validate_coding,
     "conversation": validate_conversation,

@@ -1,7 +1,7 @@
 ---
 title: Brain-Writing Session
 description: Collaborative ideation tool for structured brainstorming sessions with teams. Supports multiple methods including 6-3-5, constrained, and free brain-writing formats.
-category: Collaboration
+category: collaboration
 icon: lightbulb
 order: 2
 ---

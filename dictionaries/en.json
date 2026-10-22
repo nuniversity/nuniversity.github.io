@@ -15,6 +15,37 @@
     "notFound": {
       "title": "Page Not Found",
       "description": "The page you are looking for doesn't exist or has been moved."
+    },
+    "site": {
+      "title": "NUniversity - Learn, Code, and Grow",
+      "description": "A comprehensive educational platform offering interactive courses, coding tools, and study games across technology, engineering, and sciences.",
+      "og_description": "A comprehensive educational platform offering interactive courses, coding tools, and study games.",
+      "og_alt": "NUniversity - Educational Platform",
+      "customer_service": "customer service",
+      "keywords": [
+        "education",
+        "online courses",
+        "programming",
+        "engineering",
+        "science",
+        "interactive learning",
+        "coding tools"
+      ],
+      "available_languages": [
+        "English",
+        "Português",
+        "Español"
+      ]
+    },
+    "games": {
+      "title": "Games - Learn While Playing",
+      "description": "Interactive learning games for vocabulary, math, coding, and more",
+      "notFound": "Game Not Found"
+    },
+    "quizzes": {
+      "title": "Quizzes — Tests & Certification Practice",
+      "description": "Certification quizzes, practice tests and timed exam simulations with scoring, attempt history and printable certificates.",
+      "notFound": "Quiz not found"
     }
   },
   "notFound": {
@@ -74,13 +105,15 @@
           "link": "https://leandroalveso.github.io/"
         }
       ]
-    }
+    },
+    "learn_more": "Learn more"
   },
   "navigation": {
     "home": "Home",
     "courses": "Courses",
     "tools": "Tools",
     "games": "Games",
+    "quizzes": "Quizzes",
     "library": "Library",
     "roadmaps": "Roadmaps",
     "about": "About",
@@ -188,6 +221,7 @@
       "courses": "Courses",
       "tools": "Tools",
       "games": "Games",
+      "quizzes": "Quizzes",
       "library": "Library",
       "apiExplorer": "API Explorer",
       "computerScience": "Computer Science",
@@ -379,7 +413,10 @@
       "coding": "Coding & Programming",
       "physics": "Physics",
       "logic": "Logic & Puzzles",
-      "fun": "Fun & Games"
+      "fun": "Fun & Games",
+      "science": "Science",
+      "puzzles": "Word Puzzles",
+      "conversation": "Relationships & Intimacy"
     },
     "stats": {
       "score": "Score",
@@ -387,7 +424,16 @@
       "matches": "Matches",
       "accuracy": "Accuracy",
       "attempts": "Attempts",
-      "final_score": "Final Score"
+      "final_score": "Final Score",
+      "correct": "Correct",
+      "wrong": "Wrong",
+      "streak": "Streak",
+      "best_streak": "Best Streak",
+      "wpm": "WPM",
+      "chars": "Chars",
+      "snippets": "Snippets",
+      "done": "Done",
+      "found": "Found"
     },
     "difficulty": {
       "beginner": "Beginner",
@@ -419,7 +465,7 @@
       "no_cards_hint": "Try another mode or category.",
       "session_complete": "Session complete!",
       "reviewed_n_cards": "You reviewed {n} cards this session.",
-      "n_correct_n_errors": "{n} correct · {n} errors",
+      "n_correct_n_errors": "{n} correct · {n2} errors",
       "restart": "Restart",
       "view_statistics": "View Statistics",
       "progress_of": "{current} of {total}",
@@ -439,7 +485,8 @@
       "forgot": "Forgot",
       "remember": "Remember",
       "swipe_hint": "← Forgot · Remember →",
-      "import_migrated": "Progress imported and updated to new format!"
+      "import_migrated": "Progress imported and updated to new format!",
+      "learned": "Learned"
     },
     "conversation": {
       "back_to_games": "Back to Games",
@@ -476,6 +523,271 @@
       "export_answers": "Download Answers",
       "play_again": "Play Again",
       "more_games": "More Games"
+    },
+    "suffixes": {
+      "conversation": "Conversation"
+    },
+    "game_setup": "Game Setup",
+    "difficulty_label": "Difficulty",
+    "start_challenge": "Start Challenge!",
+    "start_challenge_n": "Start Challenge ({n} questions)",
+    "question_of": "Question {current} of {total}",
+    "score_value": "Score: {score}",
+    "ok": "OK",
+    "correct_exclamation": "Correct!",
+    "answer_with_value": "Answer: {answer}",
+    "answer_was": "Answer was {answer}",
+    "challenge_complete": "Challenge Complete!",
+    "quiz_complete": "Quiz Complete!",
+    "game_over": "Game Over!",
+    "time_s_up": "Time's Up!",
+    "start_game": "Start Game",
+    "start_typing": "Start Typing!",
+    "start_quiz": "Start Quiz",
+    "quit": "Quit",
+    "hereshow": "Here's how you did:",
+    "high_score": "🏆 High Score: {score}",
+    "new_high_score": "🏆 New High Score!",
+    "binary_hex": {
+      "conversion_modes": "Conversion Modes",
+      "mode_dec_bin": "Decimal → Binary",
+      "mode_bin_dec": "Binary → Decimal",
+      "mode_dec_hex": "Decimal → Hex",
+      "mode_hex_dec": "Hex → Decimal",
+      "mode_bin_hex": "Binary → Hex",
+      "mode_hex_bin": "Hex → Binary",
+      "convert_label": "Convert:",
+      "answer_placeholder": "Answer..."
+    },
+    "typing_speed": {
+      "language": "Language",
+      "duration": "Duration",
+      "get_ready": "Get ready to type...",
+      "type_placeholder": "Type the code above here..."
+    },
+    "number_sequence": {
+      "enter_sequence": "Enter the sequence",
+      "type_digits": "Type digits...",
+      "digits_count": "{n} digits",
+      "level_with_n": "Level {n}",
+      "reached_level": "You reached level {n}",
+      "correct_sequences": "Correct sequences: {n}",
+      "instructions": [
+        "Watch the sequence of numbers",
+        "Remember the order!",
+        "Type the sequence back correctly",
+        "Each level adds one more digit",
+        "You have {lives} lives — use them wisely!"
+      ]
+    },
+    "math_challenge": {
+      "operations": "Operations"
+    },
+    "periodic_table": {
+      "quiz_modes": "Quiz Modes",
+      "mode_symbol_name": "Symbol → Name",
+      "mode_name_symbol": "Name → Symbol",
+      "mode_number_element": "Number → Element",
+      "mode_element_number": "Element → Number",
+      "questions_with_n": "Questions: {n}",
+      "prompt_symbol_name": "What element has the symbol \"{symbol}\"?",
+      "prompt_name_symbol": "What is the symbol for \"{name}\"?",
+      "prompt_number_element": "Which element has atomic number {number}?",
+      "prompt_element_number": "What is the atomic number of \"{name}\"?"
+    },
+    "word_search": {
+      "choose_category": "Choose a Category",
+      "drag_hint": "Click and drag across the grid to select letters. Release to check if it's a word.",
+      "puzzle_complete": "Puzzle Complete!",
+      "found_all": "You found all {n} words!",
+      "time_with_n": "Time: {time}",
+      "words_count": "{n} words"
+    }
+  },
+  "quizzes": {
+    "title": "Quizzes, Tests & Certification Practice",
+    "subtitle": "Certification quizzes, practice tests and timed exam simulations with scoring and instant feedback.",
+    "redirect_fallback": "This quiz has moved — continue to the Quizzes section",
+    "back_to_quizzes": "Back to Quizzes",
+    "back_to_results": "Back to Results",
+    "play_again": "Play Again",
+    "more_quizzes": "More Quizzes",
+    "exit": "Exit",
+    "open": "Open",
+    "explanation": "💡 Explanation",
+    "count": {
+      "one": "1 quiz",
+      "other": "{n} quizzes"
+    },
+    "search_placeholder": "Search quizzes...",
+    "no_results": "No quizzes found matching your search",
+    "empty": "No quizzes available yet",
+    "filters": {
+      "kind": "Type",
+      "category": "Category",
+      "all": "All",
+      "category_all": "All categories",
+      "clear": "Clear filters"
+    },
+    "kind": {
+      "certification": "Certification",
+      "practice": "Practice",
+      "course-exam": "Course Exam"
+    },
+    "card": {
+      "questions": "{n} questions",
+      "duration": "{n} min",
+      "passing": "Pass {score}%",
+      "best": "Best {score}%",
+      "not_attempted": "Not attempted",
+      "languages": "Languages",
+      "domains": "Domains"
+    },
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "home": {
+      "practice_title": "Practice Quiz",
+      "practice_description": "Choose your domains, question count, and get instant feedback after each answer. Perfect for focused study sessions.",
+      "questions_total": "{n} questions total",
+      "domains": "Domains",
+      "select_all": "Select all",
+      "deselect_all": "Deselect all",
+      "available": "{n} questions available",
+      "question_count": "Questions",
+      "shuffle": "Shuffle",
+      "start_practice": "Start Practice — {n} Questions",
+      "best_score": "Best score",
+      "mock_title": "Mock Exam",
+      "exam_simulation": "Exam Simulation",
+      "mock_description": "Simulates the real {cert} exam: {count} questions, {minutes}-minute countdown, proportional domain sampling. No feedback until you submit — just like the real thing.",
+      "spec_questions": "{n} questions",
+      "spec_fixed": "Fixed exam length",
+      "spec_minutes": "{n} minutes",
+      "spec_countdown": "Timed countdown",
+      "spec_domains": "{n} domains",
+      "spec_sampling": "Proportional sampling",
+      "spec_pass": "{score}% to pass",
+      "spec_threshold": "Official threshold",
+      "exam_blueprint": "Exam Blueprint",
+      "qs_pct": "{count} Qs ({count}%)",
+      "start_mock": "Start Mock Exam"
+    },
+    "exam": {
+      "simulation_for": "{cert} Exam Simulation",
+      "rules_title": "Exam Rules",
+      "rule_drawn": "{count} questions drawn proportionally from all {domains} exam domains",
+      "rule_timer": "{minutes} minutes to complete — the timer counts down from the moment you start",
+      "rule_no_feedback": "No answer feedback during the exam — results are shown only after submission",
+      "rule_flag": "You can flag questions for review and navigate freely between all questions",
+      "rule_change": "You can change any answer before submitting",
+      "rule_pass": "{score}% or higher is a passing score, matching the official exam threshold",
+      "allocation_title": "Domain Allocation — {count} Questions",
+      "qs": "{n} Qs",
+      "needed_available": "{needed} needed · {available} available",
+      "gap_note_label": "Note:",
+      "gap_note": "Some sub-domains have fewer questions than the ideal allocation. Available questions will be used and the exam will have slightly fewer than {count} questions for those sub-domains.",
+      "begin": "Begin Exam — {time}",
+      "status": "{answered} answered · {remaining} remaining · {flagged} flagged",
+      "submit": "Submit",
+      "flag": "Flag for review",
+      "flagged": "Flagged",
+      "no_reveal": "Answers are not revealed during the exam — submit to see results.",
+      "navigator": "Question Navigator",
+      "answered": "Answered",
+      "unanswered": "Unanswered",
+      "flagged_legend": "Flagged",
+      "tile": "Q{n}",
+      "tile_flagged": "Q{n} (flagged)",
+      "tile_unanswered": "Q{n} (unanswered)",
+      "tile_flagged_unanswered": "Q{n} (flagged) (unanswered)",
+      "submit_title": "Submit Exam?",
+      "submit_unanswered_one": "You have 1 unanswered question. Unanswered questions are marked incorrect.",
+      "submit_unanswered_many": "You have {n} unanswered questions. Unanswered questions are marked incorrect.",
+      "submit_all_answered": "All {n} questions answered. Ready to submit?",
+      "submit_flagged_one": "1 question still flagged for review.",
+      "submit_flagged_many": "{n} questions still flagged for review.",
+      "review_more": "Review More",
+      "submit_now": "Submit Now",
+      "pass": "PASS",
+      "fail": "FAIL",
+      "time_expired": "Time expired — auto-submitted",
+      "passing_line": "Passing score: {score}% · Official {cert} threshold",
+      "review_all": "Review All Answers",
+      "retake": "Retake Exam",
+      "review_incorrect": "Review Incorrect ({n})",
+      "review_flagged": "Review Flagged ({n})",
+      "filter_all": "All ({n})",
+      "filter_wrong": "Wrong ({n})",
+      "filter_flagged": "Flagged ({n})",
+      "not_answered": "Question was not answered"
+    },
+    "practice": {
+      "question_of": "Question {current} of {total}",
+      "percent_complete": "{n}% complete",
+      "select_answer": "Select an answer to continue",
+      "correct": "Correct!",
+      "incorrect": "Incorrect",
+      "next_question": "Next Question",
+      "see_results": "See Results"
+    },
+    "score": {
+      "complete_title": "Quiz Complete!",
+      "correct_out_of": "{score} correct out of {total} questions",
+      "correct": "Correct",
+      "incorrect": "Incorrect",
+      "skipped": "Skipped",
+      "time": "Time",
+      "time_used": "Time used",
+      "domain_breakdown": "Domain Breakdown",
+      "review_answers": "Review Answers",
+      "rating_excellent": "Excellent! Ready to certify 🚀",
+      "rating_great": "Great job! Keep it up 💪",
+      "rating_good": "Good effort — review weak areas",
+      "rating_keep": "Keep studying — you'll get there!"
+    },
+    "certificate": {
+      "cta": "Get certificate",
+      "title": "Certificate of Achievement",
+      "awarded": "This certifies that",
+      "completed": "has successfully completed",
+      "score_line": "Score: {score}% · Passing: {pass}%",
+      "date": "Date",
+      "code": "Certificate ID",
+      "name_placeholder": "Enter your name for the certificate",
+      "required_name": "Enter your name to issue the certificate",
+      "print": "Print certificate"
+    },
+    "history": {
+      "title": "Attempt History",
+      "empty": "No attempts yet — complete a quiz to build your history.",
+      "attempts_one": "1 attempt",
+      "attempts_other": "{n} attempts",
+      "best": "Best",
+      "mode_practice": "Practice",
+      "mode_exam": "Exam",
+      "mode_course_exam": "Course Exam",
+      "passed": "Passed",
+      "failed": "Failed",
+      "clear": "Clear history",
+      "date_label": "Date",
+      "score_label": "Score"
+    },
+    "lesson": {
+      "start": "Start Exam",
+      "start_hint": "Answer every question — you can navigate freely and the timer counts down.",
+      "time_remaining": "Time remaining",
+      "submit": "Submit Exam",
+      "confirm_title": "Submit exam?",
+      "confirm_body": "Unanswered questions count as incorrect.",
+      "complete_title": "Exam Complete",
+      "saved": "Attempt saved to your history",
+      "review": "Review answers",
+      "breakdown": "Breakdown by type",
+      "exit": "Back to lesson",
+      "unanswered": "Unanswered"
     }
   },
   "tools": {
@@ -593,7 +905,543 @@
       }
     },
     "sectionTitle": "Powerful Learning",
-    "sectionTitleHighlight": "Tools"
+    "sectionTitleHighlight": "Tools",
+    "eisenhower_matrix": {
+      "addTask": "Add task",
+      "cancel": "Cancel",
+      "clear": "Clear All",
+      "clickToAdd": "Click \"Add task\" to start",
+      "completed": "Completed",
+      "completionRate": "Completion Rate",
+      "delegate": "Delegate",
+      "delegateDesc": "Urgent but Not Important",
+      "delegateExplain": "Tasks others can handle",
+      "doFirst": "Do First",
+      "doFirstDesc": "Urgent & Important",
+      "doFirstExplain": "Critical tasks requiring immediate attention",
+      "dragDrop": "Drag and drop or click to select",
+      "eliminate": "Eliminate",
+      "eliminateDesc": "Not Urgent & Not Important",
+      "eliminateExplain": "Time-wasters to minimize or remove",
+      "hideCompleted": "Hide Completed",
+      "import": "Import",
+      "importData": "Import Data",
+      "importDesc": "Upload JSON or CSV file to import tasks",
+      "importError": "Error importing data. Please check file format.",
+      "importSuccess": "Data imported successfully!",
+      "important": "IMPORTANT",
+      "listView": "List View",
+      "matrixView": "Matrix View",
+      "noTasks": "No tasks yet",
+      "notImportant": "NOT IMPORTANT",
+      "notUrgent": "NOT URGENT",
+      "pending": "Pending",
+      "schedule": "Schedule",
+      "scheduleDesc": "Not Urgent but Important",
+      "scheduleExplain": "Strategic tasks to plan and schedule",
+      "selectFile": "Select File",
+      "showCompleted": "Show Completed",
+      "subtitle": "Prioritize tasks by urgency and importance",
+      "supportedFormats": "Supported: JSON, CSV",
+      "title": "Eisenhower Matrix",
+      "totalTasks": "Total Tasks",
+      "urgent": "URGENT",
+      "confirmClear": "Are you sure you want to clear all tasks?"
+    },
+    "swot_matrix": {
+      "addItem": "Add item",
+      "cancel": "Cancel",
+      "clear": "Clear All",
+      "clickToAdd": "Click \"Add item\" to start",
+      "description": "Description",
+      "descriptionPlaceholder": "Brief description of the project or analysis context...",
+      "dragDrop": "Drag and drop or click to select",
+      "exportCsv": "Export CSV",
+      "exportJson": "Export JSON",
+      "exportPdf": "Export Report",
+      "generateStrategies": "Generate Strategic Recommendations",
+      "hideStrategies": "Hide Strategies",
+      "import": "Import",
+      "importData": "Import Data",
+      "importDesc": "Upload JSON or CSV file to import tasks",
+      "importError": "Error importing data. Please check file format.",
+      "importSuccess": "Data imported successfully!",
+      "itemsCount": "items",
+      "listView": "List View",
+      "matrixView": "Matrix View",
+      "noItems": "No items added yet",
+      "opportunities": "Opportunities",
+      "opportunitiesDesc": "External positive factors",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "e.g., New Product Launch",
+      "selectFile": "Select File",
+      "soDesc": "Use Strengths to leverage Opportunities",
+      "soStrategies": "SO Strategies",
+      "stDesc": "Use Strengths to avoid Threats",
+      "stStrategies": "ST Strategies",
+      "strategies": "Strategies",
+      "strengths": "Strengths",
+      "strengthsDesc": "Internal positive attributes",
+      "subtitle": "Strategic planning tool for business analysis",
+      "supportedFormats": "Supported: JSON, CSV",
+      "threats": "Threats",
+      "threatsDesc": "External challenges",
+      "title": "SWOT Matrix Analysis",
+      "weaknesses": "Weaknesses",
+      "weaknessesDesc": "Internal areas for improvement",
+      "woDesc": "Overcome Weaknesses by pursuing Opportunities",
+      "woStrategies": "WO Strategies",
+      "wtDesc": "Minimize Weaknesses and avoid Threats",
+      "wtStrategies": "WT Strategies",
+      "confirmClear": "Are you sure you want to clear all data?",
+      "strategyTemplates": {
+        "so": "Leverage \"{strength}\" to capitalize on \"{opportunity}\"",
+        "wo": "Improve \"{weakness}\" to take advantage of \"{opportunity}\"",
+        "st": "Use \"{strength}\" to mitigate \"{threat}\"",
+        "wt": "Address \"{weakness}\" to avoid exposure to \"{threat}\""
+      },
+      "totalLabel": "Total:",
+      "addItemsHint": "Add items to generate strategies",
+      "report": {
+        "title": "SWOT ANALYSIS REPORT",
+        "project": "Project:",
+        "description": "Description:",
+        "date": "Date:",
+        "recommendations": "STRATEGIC RECOMMENDATIONS",
+        "strategy_line": "{type} Strategy:"
+      }
+    },
+    "common": {
+      "add": "Add",
+      "reset": "Reset",
+      "start": "Start",
+      "pause": "Pause",
+      "resume": "Resume",
+      "stats": "Stats",
+      "json": "JSON",
+      "csv": "CSV",
+      "export_json": "Export JSON",
+      "export_csv": "Export CSV",
+      "grid_view": "Grid View",
+      "list_view": "List View",
+      "today": "Today",
+      "copy": "Copy",
+      "copied": "Copied!"
+    },
+    "brain_writing": {
+      "method_635_name": "Brain-Writing 6-3-5",
+      "method_635_desc": "6 participants, 3 ideas each, 5 minutes per round",
+      "method_constrained_name": "Constrained Brain-Writing",
+      "method_constrained_desc": "Ideas must build on or relate to previous ideas",
+      "method_free_name": "Free Brain-Writing",
+      "method_free_desc": "Open format with flexible idea generation",
+      "title": "Brain-Writing Session",
+      "subtitle": "Collaborative ideation made simple and structured",
+      "session_name": "Session Name *",
+      "session_name_placeholder": "e.g., Product Innovation Workshop",
+      "method_label": "Brain-Writing Method",
+      "rounds": "Number of Rounds",
+      "time_per_round": "Time per Round (minutes)",
+      "participants": "Participants *",
+      "participant_placeholder": "Enter participant name",
+      "recommended_participants": "Recommended: {n} participants",
+      "start_session": "Start Brain-Writing Session",
+      "round_counter": "Round {current} / {total}",
+      "idea_label": "Idea {n}",
+      "idea_placeholder": "Enter your idea...",
+      "round_complete": "Round {n} Complete!",
+      "ready_next_round": "Ready to move to the next round?",
+      "start_round": "Start Round {n}",
+      "session_complete": "Session Complete! 🎉",
+      "session_complete_text": "Great work! You've completed all {rounds} rounds with {participants} participants.",
+      "new_session": "New Session"
+    },
+    "decision_matrix": {
+      "default_title": "Project Decision",
+      "option_a": "Option A",
+      "option_b": "Option B",
+      "option_c": "Option C",
+      "criterion_cost": "Cost",
+      "criterion_impact": "Impact",
+      "criterion_effort": "Effort",
+      "title": "Decision Matrix",
+      "subtitle": "Evaluate options against weighted criteria to make better decisions",
+      "decision_title": "Decision Title",
+      "scale": "Scale (1–{n})",
+      "options": "Options",
+      "score": "Score",
+      "rank": "Rank",
+      "add_option_placeholder": "Add new option...",
+      "criteria": "Criteria",
+      "new_criterion_placeholder": "New criterion...",
+      "results_summary": "Results Summary"
+    },
+    "flashcards": {
+      "confirm_delete_deck": "Delete this deck and all its cards?",
+      "title": "Flashcard Maker",
+      "subtitle": "Create, study, and master with spaced repetition",
+      "back_to_decks": "← Decks",
+      "study": "Study",
+      "your_decks": "Your Decks",
+      "cards_to_review": "{n} cards · {m} to review",
+      "open": "Open",
+      "new_deck": "New Deck",
+      "deck_name_placeholder": "Deck name...",
+      "description_placeholder": "Description...",
+      "create": "Create",
+      "cards_count": "Cards ({n})",
+      "no_cards": "No cards yet. Add your first card below!",
+      "front": "Front",
+      "back": "Back",
+      "hint": "Hint (optional)",
+      "front_question": "Front (question)",
+      "back_answer": "Back (answer)",
+      "add_card": "Add Card",
+      "card_progress": "Card {i} of {n} · Studied: {s}",
+      "tap_to_reveal": "Tap to reveal answer",
+      "rating_again": "Again",
+      "rating_again_sub": "Forgot",
+      "rating_hard": "Hard",
+      "rating_hard_sub": "Difficult",
+      "rating_good": "Good",
+      "rating_good_sub": "Recalled",
+      "rating_easy": "Easy",
+      "rating_easy_sub": "Perfect",
+      "deck_statistics": "Deck Statistics",
+      "total_cards": "Total Cards",
+      "stat_new": "New (unstudied)",
+      "learning": "Learning",
+      "to_review": "To Review",
+      "recently_studied": "Recently Studied",
+      "ease": "Ease: {e}",
+      "back_to_deck": "Back to Deck",
+      "study_complete": "Study Complete!",
+      "study_complete_text": "You reviewed {n} cards in this session.",
+      "demo_name": "Sample Deck",
+      "demo_description": "A demo deck to get started",
+      "demo_cards": [
+        {
+          "front": "What is a variable?",
+          "back": "A named storage location in memory that holds a value",
+          "hint": "Storage"
+        },
+        {
+          "front": "What is a function?",
+          "back": "A reusable block of code that performs a specific task",
+          "hint": "Reusable code"
+        },
+        {
+          "front": "What is an array?",
+          "back": "An ordered collection of elements stored in contiguous memory",
+          "hint": "Collection"
+        }
+      ]
+    },
+    "habit_tracker": {
+      "confirm_delete": "Delete this habit and all its logs?",
+      "title": "Habit Tracker",
+      "subtitle": "Build better habits, one day at a time",
+      "habits_done": "{done}/{total} habits done",
+      "total_days": "total days",
+      "new_habit_placeholder": "New habit name...",
+      "frequency_daily": "Daily",
+      "frequency_weekdays": "Weekdays",
+      "frequency_weekly": "Weekly",
+      "habits_column": "Habits",
+      "no_habits": "No habits yet. Add your first habit to start tracking!",
+      "monthly_overview": "Monthly Overview",
+      "prev": "Prev",
+      "next": "Next",
+      "statistics": "Habit Statistics",
+      "total": "Total",
+      "streak": "Streak",
+      "rate": "Rate"
+    },
+    "pomodoro": {
+      "title": "Pomodoro Study Timer",
+      "subtitle": "Focus on what matters, one interval at a time",
+      "tab_timer": "Timer",
+      "tab_tasks": "Tasks",
+      "status_long_break": "Long Break",
+      "status_break": "Break Time",
+      "status_focus": "Focus Time",
+      "session_number": "Session #{n}",
+      "mode_break": "Break",
+      "mode_work": "Work",
+      "work_min": "Work (min)",
+      "break_min": "Break (min)",
+      "long_min": "Long (min)",
+      "sessions_count": "({n} sessions)",
+      "session_tasks": "Session Tasks",
+      "task_placeholder": "Add a task for this session...",
+      "no_tasks": "No tasks yet. Add tasks for your study session!",
+      "tasks_completed": "{done}/{total} tasks completed",
+      "statistics": "Statistics",
+      "clear_history": "Clear History",
+      "total_sessions": "Total Sessions",
+      "sessions_short": "{n} sess",
+      "day_streak": "Day Streak",
+      "days": "{n} days",
+      "recent_sessions": "Recent Sessions",
+      "minutes_short": "{n}m",
+      "tasks_short": "{n} tasks",
+      "no_sessions": "No sessions completed yet",
+      "no_sessions_hint": "Start the timer to build your study history!"
+    },
+    "regex": {
+      "title": "Regex Tester",
+      "subtitle": "Test and debug regular expressions in real-time",
+      "pattern_label": "Regular Expression",
+      "pattern_placeholder": "Enter regex pattern...",
+      "flags": "Flags",
+      "flag_desc_g": "Global - find all matches",
+      "flag_desc_i": "Case-insensitive",
+      "flag_desc_m": "Multiline - ^ and $ match line start/end",
+      "flag_desc_s": "Dotall - . matches newlines",
+      "flag_desc_u": "Unicode - enable Unicode features",
+      "flag_desc_y": "Sticky - match from lastIndex",
+      "replace": "Replace",
+      "hide_replace": "Hide Replace",
+      "cheat_sheet": "Cheat Sheet",
+      "hide_cheat_sheet": "Hide Cheat Sheet",
+      "replacement_label": "Replacement",
+      "replacement_placeholder": "Replacement text (use $1, $2 for groups)",
+      "test_string": "Test String",
+      "test_string_placeholder": "Enter text to test against...",
+      "match_results": "Match Results",
+      "matches_count": "{n} matches",
+      "chars_count": "({n} chars)",
+      "no_matches": "No matches found",
+      "invalid_pattern": "Invalid regex pattern",
+      "more_matches": "...and {n} more matches",
+      "captured_groups": "Captured Groups",
+      "replaced": "Replaced",
+      "cheat_title": "Regex Cheat Sheet",
+      "quick_examples": "Quick Examples",
+      "cheat_categories": [
+        {
+          "name": "Anchors",
+          "items": [
+            {
+              "pattern": "^",
+              "desc": "Start of string/line"
+            },
+            {
+              "pattern": "$",
+              "desc": "End of string/line"
+            },
+            {
+              "pattern": "\\b",
+              "desc": "Word boundary"
+            },
+            {
+              "pattern": "\\B",
+              "desc": "Non-word boundary"
+            }
+          ]
+        },
+        {
+          "name": "Character Classes",
+          "items": [
+            {
+              "pattern": "\\d",
+              "desc": "Digit [0-9]"
+            },
+            {
+              "pattern": "\\w",
+              "desc": "Word character [a-zA-Z0-9_]"
+            },
+            {
+              "pattern": "\\s",
+              "desc": "Whitespace"
+            },
+            {
+              "pattern": ".",
+              "desc": "Any character except newline"
+            }
+          ]
+        },
+        {
+          "name": "Quantifiers",
+          "items": [
+            {
+              "pattern": "*",
+              "desc": "0 or more"
+            },
+            {
+              "pattern": "+",
+              "desc": "1 or more"
+            },
+            {
+              "pattern": "?",
+              "desc": "0 or 1"
+            },
+            {
+              "pattern": "{n,m}",
+              "desc": "n to m repetitions"
+            }
+          ]
+        },
+        {
+          "name": "Groups",
+          "items": [
+            {
+              "pattern": "(abc)",
+              "desc": "Capturing group"
+            },
+            {
+              "pattern": "(?:abc)",
+              "desc": "Non-capturing group"
+            },
+            {
+              "pattern": "(?=abc)",
+              "desc": "Lookahead"
+            },
+            {
+              "pattern": "(?!abc)",
+              "desc": "Negative lookahead"
+            }
+          ]
+        },
+        {
+          "name": "Escapes",
+          "items": [
+            {
+              "pattern": "\\\\",
+              "desc": "Literal backslash"
+            },
+            {
+              "pattern": "\\.",
+              "desc": "Literal dot"
+            },
+            {
+              "pattern": "\\*",
+              "desc": "Literal asterisk"
+            },
+            {
+              "pattern": "\\n",
+              "desc": "Newline"
+            }
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "label": "Digits",
+          "pattern": "\\d+"
+        },
+        {
+          "label": "Capitalized Words",
+          "pattern": "[A-Z][a-z]+"
+        },
+        {
+          "label": "URLs",
+          "pattern": "https?://\\S+"
+        },
+        {
+          "label": "Emails",
+          "pattern": "[\\w._%+-]+@[\\w.-]+\\.\\w{2,}"
+        },
+        {
+          "label": "Words ≥4 chars",
+          "pattern": "\\b\\w{4,}\\b"
+        },
+        {
+          "label": "HTML Tags",
+          "pattern": "<[^>]+>"
+        }
+      ]
+    },
+    "unit_converter": {
+      "title": "Unit Converter",
+      "subtitle": "Convert between hundreds of units in real-time",
+      "from": "From",
+      "to": "To",
+      "common_conversions": "Common Conversions",
+      "categories": {
+        "length": "Length",
+        "mass": "Mass",
+        "temperature": "Temperature",
+        "volume": "Volume",
+        "speed": "Speed",
+        "area": "Area",
+        "time": "Time",
+        "data": "Data Storage",
+        "angle": "Angle"
+      },
+      "units": {
+        "meters": "Meters (m)",
+        "kilometers": "Kilometers (km)",
+        "centimeters": "Centimeters (cm)",
+        "millimeters": "Millimeters (mm)",
+        "miles": "Miles (mi)",
+        "yards": "Yards (yd)",
+        "feet": "Feet (ft)",
+        "inches": "Inches (in)",
+        "nautical_miles": "Nautical Miles (nmi)",
+        "kilograms": "Kilograms (kg)",
+        "grams": "Grams (g)",
+        "milligrams": "Milligrams (mg)",
+        "metric_tons": "Metric Tons (t)",
+        "pounds": "Pounds (lb)",
+        "ounces": "Ounces (oz)",
+        "stones": "Stones (st)",
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)",
+        "kelvin": "Kelvin (K)",
+        "liters": "Liters (L)",
+        "milliliters": "Milliliters (mL)",
+        "cubic_meters": "Cubic Meters (m³)",
+        "gallons_us": "Gallons (US)",
+        "gallons_uk": "Gallons (UK)",
+        "quarts": "Quarts (qt)",
+        "pints": "Pints (pt)",
+        "cups": "Cups",
+        "fluid_ounces": "Fluid Ounces (fl oz)",
+        "tablespoons": "Tablespoons (tbsp)",
+        "teaspoons": "Teaspoons (tsp)",
+        "meters_per_second": "Meters/second (m/s)",
+        "kilometers_per_hour": "Kilometers/hour (km/h)",
+        "miles_per_hour": "Miles/hour (mph)",
+        "knots": "Knots (kn)",
+        "feet_per_second": "Feet/second (ft/s)",
+        "mach": "Mach (at sea level)",
+        "square_meters": "Square Meters (m²)",
+        "square_kilometers": "Square Kilometers (km²)",
+        "square_miles": "Square Miles (mi²)",
+        "square_yards": "Square Yards (yd²)",
+        "square_feet": "Square Feet (ft²)",
+        "square_inches": "Square Inches (in²)",
+        "hectares": "Hectares (ha)",
+        "acres": "Acres",
+        "seconds": "Seconds (s)",
+        "milliseconds": "Milliseconds (ms)",
+        "microseconds": "Microseconds (µs)",
+        "minutes": "Minutes (min)",
+        "hours": "Hours (h)",
+        "days": "Days (d)",
+        "weeks": "Weeks",
+        "months": "Months (30 days)",
+        "years": "Years (365 days)",
+        "bytes": "Bytes (B)",
+        "kilobytes": "Kilobytes (KB)",
+        "megabytes": "Megabytes (MB)",
+        "gigabytes": "Gigabytes (GB)",
+        "terabytes": "Terabytes (TB)",
+        "petabytes": "Petabytes (PB)",
+        "bits": "Bits (b)",
+        "kilobits": "Kilobits (Kb)",
+        "megabits": "Megabits (Mb)",
+        "gigabits": "Gigabits (Gb)",
+        "degrees": "Degrees (°)",
+        "radians": "Radians (rad)",
+        "gradians": "Gradians (grad)",
+        "arcminutes": "Arcminutes (')",
+        "arcseconds": "Arcseconds (\")"
+      }
+    },
+    "tool_count": "tools",
+    "tool_singular": "tool"
   },
   "roadmaps": {
     "title": "Roadmaps",
@@ -631,6 +1479,48 @@
       "beginner": "Beginner",
       "intermediate": "Intermediate",
       "advanced": "Advanced"
+    },
+    "notFound": "Roadmap Not Found"
+  },
+  "widgets": {
+    "multiple_choice": {
+      "title": "Practice Question"
+    },
+    "try_again": "Try Again",
+    "check_answers": "Check Answers",
+    "correct": "Correct!",
+    "all_correct": "All correct!",
+    "incorrect": "Incorrect",
+    "correct_label": "Correct: {label}",
+    "check_answer": "Check Answer",
+    "check_matches": "Check Matches",
+    "check_order": "Check Order",
+    "matching": {
+      "title": "Matching Question",
+      "drop_here": "Drop here",
+      "drag_from_here": "Drag answers from here:",
+      "incorrect_feedback": "Some matches are wrong — red slots have incorrect answers."
+    },
+    "fill_blank": {
+      "title": "Fill in the Blanks",
+      "blank_placeholder": "blank",
+      "blank_aria": "Item {i}, blank {j}",
+      "word_bank_hint": "Word Bank — drag words into the blanks above:",
+      "feedback_perfect": "Perfect — all blanks filled correctly!",
+      "feedback_incorrect_items": "Some blanks are wrong — {count} of {total} items correct.",
+      "feedback_incorrect_blanks": "Some blanks are wrong — red blanks have incorrect answers."
+    },
+    "drag_order": {
+      "title": "Ordering Question",
+      "incorrect_feedback": "Not quite — red items are in the wrong position."
+    },
+    "bucket_drop": {
+      "title": "Sort into Buckets",
+      "instruction": "Items — click an item, then click a bucket to place it:",
+      "empty_pool": "All items placed.",
+      "empty_bucket": "Empty — click to place the selected item",
+      "bucket_aria": "Bucket: {label}",
+      "score_feedback": "{count} / {total} correct — red items are in the wrong bucket or still unplaced."
     }
   }
 }

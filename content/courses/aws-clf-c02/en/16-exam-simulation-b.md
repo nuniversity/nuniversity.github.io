@@ -1,6 +1,8 @@
 ---
 title: "Exam Simulation B: Second Practice Set, Trap Drills and Exam Day"
 order: 16
+exam: true
+examMinutes: 90
 difficulty: "beginner"
 description: "Sit Set B — 20 exam-style CLF-C02 items in published weight order (5 / 6 / 7 / 2) with a per-option teardown after every block — then drill the ten trap pairs that decide most losses, rehearse the official exam-day logistics checklist (IDs, check-in, breaks, score timing), grade Set B against ready-versus-not-ready thresholds, and finish with a weight-driven 7-day study plan for the week you actually sit the exam."
 duration: "90 minutes"

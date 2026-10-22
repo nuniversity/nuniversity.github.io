@@ -30,21 +30,16 @@ except ImportError:
 
 REQUIRED_FIELDS = ("title", "description", "category", "icon", "order")
 VALID_CATEGORIES = {
-    "Artificial Intelligence",
-    "Business Strategy",
-    "Coding & Programming",
-    "Collaboration",
-    "Colaboración",
-    "Colaboração",
-    "Estrategia Empresarial",
-    "Estratégia de Negócios",
-    "Inteligencia Artificial",
-    "Inteligência Artificial",
-    "Mathematics",
-    "Productivity",
-    "Productividad",
-    "Produtividade",
-    "Study & Learning",
+    "artificial_intelligence",
+    "business_strategy",
+    "coding",
+    "collaboration",
+    "mathematics",
+    "physics",
+    "logic",
+    "productivity",
+    "study",
+    "uncategorized",
 }
 
 

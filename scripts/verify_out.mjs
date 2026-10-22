@@ -90,6 +90,8 @@ if (exists('sitemap.xml')) {
   const sm = read('sitemap.xml')
   ok(sm.includes(`${ORIGIN}/en/tools/`), 'sitemap contains en/tools')
   ok(sm.includes(`${ORIGIN}/pt/`), 'sitemap contains pt root')
+  ok(sm.includes(`${ORIGIN}/en/quizzes/`), 'sitemap contains en/quizzes hub')
+  ok(sm.includes(`${ORIGIN}/en/quizzes/snowpro-core-cof-c03/`), 'sitemap contains quiz detail')
 }
 
 ok(exists('ads.txt'), 'ads.txt exists (lowercase)')
@@ -134,6 +136,115 @@ if (!coreOnly) {
   } else {
     ok(false, 'exam-b lesson page exists')
   }
+
+  console.log('  -- quizzes app --')
+  const QUIZ_SLUG = 'snowpro-core-cof-c03'
+  for (const loc of locales) {
+    ok(exists(`${loc}/quizzes/index.html`), `${loc}/quizzes hub exported`)
+    ok(exists(`${loc}/quizzes/${QUIZ_SLUG}/index.html`), `${loc}/quizzes detail exported`)
+    const stubRel = `${loc}/games/quiz/${QUIZ_SLUG}/index.html`
+    ok(exists(stubRel), `${loc}/games/quiz stub exported`)
+    if (exists(stubRel)) {
+      const stubHtml = read(stubRel)
+      ok(stubHtml.includes('noindex'), `${loc} quiz stub has noindex`)
+      ok(stubHtml.includes(`href="/${loc}/quizzes/${QUIZ_SLUG}/"`), `${loc} quiz stub links to new URL`)
+    }
+  }
+  if (exists('en/games/index.html')) {
+    const gamesHub = read('en/games/index.html')
+    ok(!gamesHub.includes('/en/games/quiz/'), 'games hub has no quiz card links')
+    ok(!gamesHub.toLowerCase().includes('snowpro'), 'games hub has no snowpro card')
+  } else {
+    ok(false, 'games hub exists')
+  }
+  const examLessonEn = 'en/courses/aws-clf-c02/15-exam-simulation-a/index.html'
+  const examLessonPt = 'pt/courses/aws-clf-c02/15-exam-simulation-a/index.html'
+  if (exists(examLessonEn)) {
+    ok(read(examLessonEn).includes('Start Exam'), 'exam lesson EN renders Start Exam callout')
+  } else {
+    ok(false, 'exam lesson EN page exists')
+  }
+  if (exists(examLessonPt)) {
+    ok(read(examLessonPt).includes('Iniciar Exame'), 'exam lesson PT renders localized callout')
+  } else {
+    ok(false, 'exam lesson PT page exists')
+  }
+
+  console.log('  -- i18n leak audit (pt/es chrome strings) --')
+  const LEAK_STRINGS = [
+    'NUniversity - Learn, Code, and Grow',
+    'Games - Learn While Playing',
+    'Search games...',
+    'No games found matching your search',
+    'No games available yet',
+    'Back to Games',
+    "You've completed the game!",
+    'Master new skills through interactive games and challenges',
+    'Try another mode or category.',
+    'Reset all progress?',
+    'Type your answer here...',
+    'Download Answers',
+    'Powerful tools to enhance your learning',
+    'Search tools...',
+    'No tools found matching your search',
+    'No tools available yet',
+    'View All Tools',
+    'Try a different search term',
+    'Check back soon for new tools',
+    'Clear Search',
+    'Check Answers',
+    'All correct!',
+    'Sort into Buckets',
+    'Items — click an item, then click a bucket to place it:',
+    'Ordering Question',
+    'red items are in the wrong position',
+    'Word Bank',
+    'Search quizzes...',
+    'Start Exam',
+    'Back to Quizzes',
+    'This quiz has moved — continue to the Quizzes section',
+    'Quizzes — Tests & Certification Practice',
+  ]
+  const LEAK_WAIVERS = []
+  const LESSON_BODY_RE = /^\/(pt|es)\/courses\/[^/]+\/[^/]+\/index\.html$/
+  const LEAK_SLUG_RE = />\s*(beginner|intermediate|advanced)\s*</i
+  const stripForSlugProbe = (html) =>
+    html
+      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+      .replace(/<pre[\s\S]*?<\/pre>/gi, ' ')
+      .replace(/<code[\s\S]*?<\/code>/gi, ' ')
+      .replace(/<span class="token[^"]*"[\s\S]*?<\/span>/gi, ' ')
+  const leakHits = []
+  for (const loc of ['pt', 'es']) {
+    const root = path.join(OUT, loc)
+    if (!fs.existsSync(root)) {
+      ok(false, `${loc}/ output exists for leak audit`)
+      continue
+    }
+    const walk = (dir) => {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const full = path.join(dir, entry.name)
+        if (entry.isDirectory()) walk(full)
+        else if (entry.name.endsWith('.html')) {
+          const rel = '/' + path.relative(OUT, full).split(path.sep).join('/')
+          if (LEAK_WAIVERS.some((w) => rel.includes(w))) continue
+          const raw = fs.readFileSync(full, 'utf8').replace(/\\u0027/g, "'")
+          for (const s of LEAK_STRINGS) {
+            const needle = s.replace(' →', '')
+            if (raw.includes(needle)) leakHits.push(`${loc} ${rel} :: ${s}`)
+          }
+          if (!LESSON_BODY_RE.test(rel)) {
+            const slugProbe = stripForSlugProbe(raw)
+            const m = slugProbe.match(LEAK_SLUG_RE)
+            if (m) leakHits.push(`${loc} ${rel} :: raw difficulty slug >${m[1]}<`)
+          }
+        }
+      }
+    }
+    walk(root)
+  }
+  ok(leakHits.length === 0, `no EN chrome leaks in pt/es (${LEAK_STRINGS.length + 1} probes${leakHits.length ? ', hits: ' + leakHits.slice(0, 8).join(' | ') : ''})`)
 }
 
 console.log('')

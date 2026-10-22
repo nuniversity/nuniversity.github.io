@@ -1,6 +1,8 @@
 ---
 title: "Simulacro de examen A: conjunto de prácticas y estrategia"
 order: 15
+exam: true
+examMinutes: 90
 difficulty: "intermediate"
 description: "Resuelve el Conjunto A: veinte ítems al estilo del examen DEA-C01 ordenados por el peso publicado de dominios (D1 7 / D2 5 / D3 4 / D4 4) con un desglose opción a opción tras cada bloque; después aprende el oficio del examen que decide los 130 minutos reales: la aritmética de ritmo de 120 segundos, el protocolo de dos pasadas de marcar y barrer, cómo leer los enunciados «MÁS apropiado», «MENOS costoso» y «PRIMER paso», el procedimiento de cinco movimientos para respuesta múltiple que sobrevive a la puntuación de todo o nada, una rúbrica que puntúa el Conjunto A por dominio y no por total, un recuadro de actualizaciones de octubre de 2026 sobre la guía del examen v1.1 y un veredicto comparativo entre la preparación oficial gratuita, los cursos de pago y la experiencia multi-nube u on-premises."
 duration: "90 min"

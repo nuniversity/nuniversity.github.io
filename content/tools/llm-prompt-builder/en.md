@@ -1,7 +1,7 @@
 ---
 title: LLM Prompt Builder
 description: Create structured, effective prompts for Large Language Models with our interactive builder. Define roles, objectives, context, and constraints to get the best AI responses.
-category: Artificial Intelligence
+category: artificial_intelligence
 icon: brain
 order: 1
 ---

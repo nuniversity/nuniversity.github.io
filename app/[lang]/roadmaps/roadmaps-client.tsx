@@ -95,7 +95,7 @@ export function RoadmapsClient({ lang, roadmaps, dict }: RoadmapsClientProps) {
                       : 'bg-muted text-muted-foreground hover:bg-muted/80'
                   }`}
                 >
-                  {dict.roadmaps?.difficulty?.[level] || level.charAt(0).toUpperCase() + level.slice(1)}
+                  {dict.roadmaps?.difficultyLevels?.[level] || level.charAt(0).toUpperCase() + level.slice(1)}
                 </button>
               ))}
             </div>
@@ -143,7 +143,7 @@ export function RoadmapsClient({ lang, roadmaps, dict }: RoadmapsClientProps) {
                     <Map className="w-6 h-6 text-white" />
                   </div>
                   <span className={`px-3 py-1 text-xs font-semibold rounded-full ${difficultyColors[roadmap.difficulty] || ''}`}>
-                    {dict.roadmaps?.difficulty?.[roadmap.difficulty] || roadmap.difficulty}
+                    {dict.roadmaps?.difficultyLevels?.[String(roadmap.difficulty).toLowerCase()] || roadmap.difficulty}
                   </span>
                 </div>
 

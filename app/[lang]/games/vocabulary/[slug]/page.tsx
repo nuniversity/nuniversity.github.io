@@ -31,11 +31,12 @@ export async function generateMetadata({
 }: {
   params: { lang: Locale; slug: string }
 }): Promise<Metadata> {
+  const dict = await getDictionary(params.lang)
   const game = await getVocabularyGame(params.slug, params.lang)
   
   if (!game) {
     return {
-      title: 'Game Not Found',
+      title: dict.metadata?.games?.notFound || 'Game Not Found',
     }
   }
   

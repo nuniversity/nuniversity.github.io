@@ -1,7 +1,7 @@
 ---
 title: Creador de Flashcards
 description: Crea y estudia flashcards digitales con repetición espaciada. Construye mazos personalizados y sigue tu progreso.
-category: Study & Learning
+category: study
 icon: book-open
 order: 8
 ---

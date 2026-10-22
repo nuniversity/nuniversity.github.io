@@ -65,7 +65,7 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
   // Get unique difficulties
   const difficulties = useMemo(() => {
     const uniqueDifficulties = new Set(courses.map(c => c.difficulty).filter(Boolean))
-    return Array.from(uniqueDifficulties)
+    return Array.from(uniqueDifficulties).filter((d): d is string => Boolean(d))
   }, [courses])
 
   // Difficulty badge colors
@@ -162,7 +162,7 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
                         : 'bg-muted text-muted-foreground hover:bg-muted/80'
                     }`}
                   >
-                    {difficulty}
+                    {dict.courses?.difficulty_labels?.[difficulty] || difficulty}
                   </button>
                 ))}
               </div>
@@ -237,7 +237,7 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
                           </div>
                           {course.difficulty && (
                             <span className={`text-xs font-medium px-3 py-1 rounded-full ${getDifficultyColor(course.difficulty)}`}>
-                              {course.difficulty}
+                              {dict.courses?.difficulty_labels?.[course.difficulty] || course.difficulty}
                             </span>
                           )}
                         </div>

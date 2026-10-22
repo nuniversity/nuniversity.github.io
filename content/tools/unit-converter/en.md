@@ -1,7 +1,7 @@
 ---
 title: Unit Converter
 description: Convert between hundreds of units across multiple categories including length, mass, temperature, volume, speed, area, time, and data storage.
-category: Mathematics
+category: mathematics
 icon: calculator
 order: 6
 ---

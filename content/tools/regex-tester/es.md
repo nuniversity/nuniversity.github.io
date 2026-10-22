@@ -1,7 +1,7 @@
 ---
 title: Probador de Regex
 description: Prueba y depura expresiones regulares en tiempo real. Resaltado de coincidencias, configuración de flags y hoja de referencia.
-category: Coding & Programming
+category: coding
 icon: code
 order: 9
 ---

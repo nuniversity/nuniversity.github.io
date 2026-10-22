@@ -1,7 +1,7 @@
 ---
 title: Matriz de Eisenhower
 description: Priorize tarefas de forma eficaz usando o método da Matriz de Eisenhower. Organize as tarefas por urgência e importância para aumentar a produtividade e focar no que realmente importa.
-category: Produtividade
+category: productivity
 icon: grid-3x3
 order: 4
 --------

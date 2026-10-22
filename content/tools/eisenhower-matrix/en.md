@@ -1,7 +1,7 @@
 ---
 title: Eisenhower Matrix
 description: Prioritize tasks effectively using the Eisenhower Matrix method. Organize tasks by urgency and importance to boost productivity and focus on what matters most.
-category: Productivity
+category: productivity
 icon: grid-3x3
 order: 4
 ---

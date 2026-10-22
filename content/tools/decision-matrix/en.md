@@ -1,7 +1,7 @@
 ---
 title: Decision Matrix
 description: Make better decisions with a weighted scoring matrix. Evaluate options against custom criteria with automatic scoring and ranking.
-category: Business Strategy
+category: business_strategy
 icon: bar-chart
 order: 7
 ---

@@ -1161,5 +1161,15 @@
       "target": "Importância",
       "context": "meaning"
     }
-  ]
+  ],
+  "locales": {
+    "pt": {
+      "title": "Inglês para Português - Vocabulário Avançado",
+      "description": "Desafie-se com vocabulário avançado de inglês para português"
+    },
+    "es": {
+      "title": "Del inglés al portugués - Vocabulario avanzado",
+      "description": "Desafíate con vocabulario avanzado de inglés a portugués"
+    }
+  }
 }

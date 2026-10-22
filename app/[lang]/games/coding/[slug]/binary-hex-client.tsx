@@ -21,13 +21,9 @@ interface BinaryHexClientProps {
   dict: any
 }
 
-const modeLabels: Record<Mode, string> = {
-  'dec-to-bin': 'Decimal → Binary',
-  'bin-to-dec': 'Binary → Decimal',
-  'dec-to-hex': 'Decimal → Hex',
-  'hex-to-dec': 'Hex → Decimal',
-  'bin-to-hex': 'Binary → Hex',
-  'hex-to-bin': 'Hex → Binary',
+function t(template: string, vars?: Record<string, string | number>): string {
+  if (!vars) return template
+  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
 }
 
 const modeColors: Record<Mode, string> = {
@@ -72,6 +68,17 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
   const [questionsAnswered, setQuestionsAnswered] = useState(0)
   const totalQuestions = 15
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const g = dict?.games ?? {}
+  const bh = g?.binary_hex ?? {}
+  const modeLabels: Record<Mode, string> = {
+    'dec-to-bin': bh.mode_dec_bin || 'Decimal → Binary',
+    'bin-to-dec': bh.mode_bin_dec || 'Binary → Decimal',
+    'dec-to-hex': bh.mode_dec_hex || 'Decimal → Hex',
+    'hex-to-dec': bh.mode_hex_dec || 'Hex → Decimal',
+    'bin-to-hex': bh.mode_bin_hex || 'Binary → Hex',
+    'hex-to-bin': bh.mode_hex_bin || 'Hex → Binary',
+  }
 
   const maxBits = game.difficultyLevels[difficulty]?.maxBits || 4
 
@@ -126,7 +133,7 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
     <div className="container-custom py-12">
       <div className="max-w-2xl mx-auto">
         <Link href={`/${lang}/games`} className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-6 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Back to Games
+          <ArrowLeft className="w-4 h-4" /> {g.back_to_games || 'Back to Games'}
         </Link>
 
         <div className="text-center mb-8">
@@ -139,9 +146,9 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
 
         {gameMode === 'config' && (
           <div className="bg-card border rounded-2xl p-8">
-            <h2 className="text-2xl font-semibold mb-6">Game Setup</h2>
+            <h2 className="text-2xl font-semibold mb-6">{g.game_setup || 'Game Setup'}</h2>
             <div className="mb-6">
-              <label className="block font-medium mb-3">Conversion Modes</label>
+              <label className="block font-medium mb-3">{bh.conversion_modes || 'Conversion Modes'}</label>
               <div className="flex flex-wrap gap-2">
                 {game.modes.map((mode: Mode) => (
                   <button
@@ -155,7 +162,7 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
               </div>
             </div>
             <div className="mb-8">
-              <label className="block font-medium mb-3">Difficulty</label>
+              <label className="block font-medium mb-3">{g.difficulty_label || 'Difficulty'}</label>
               <div className="flex gap-2">
                 {['beginner', 'intermediate', 'advanced'].map(d => (
                   <button
@@ -163,14 +170,14 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
                     onClick={() => setDifficulty(d)}
                     className={`flex-1 py-3 rounded-xl font-medium transition-all ${difficulty === d ? 'bg-indigo-600 text-white shadow-lg' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
                   >
-                    <div className="capitalize">{d}</div>
+                    <div className="capitalize">{g.difficulty?.[d] || d}</div>
                     <div className="text-xs opacity-70 mt-1">{game.difficultyLevels[d].maxBits} bits</div>
                   </button>
                 ))}
               </div>
             </div>
             <button onClick={startGame} disabled={selectedModes.length === 0} className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-lg font-bold hover:shadow-lg transition-all disabled:opacity-50">
-              Start Challenge ({totalQuestions} questions)
+              {t(g.start_challenge_n || 'Start Challenge ({n} questions)', { n: totalQuestions })}
             </button>
           </div>
         )}
@@ -179,8 +186,8 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
           <div>
             {/* Progress */}
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm text-muted-foreground">Question {questionsAnswered + 1} of {totalQuestions}</span>
-              <span className="text-sm font-semibold">Score: {score}</span>
+              <span className="text-sm text-muted-foreground">{t(g.question_of || 'Question {current} of {total}', { current: questionsAnswered + 1, total: totalQuestions })}</span>
+              <span className="text-sm font-semibold">{t(g.score_value || 'Score: {score}', { score })}</span>
             </div>
             <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full mb-8 overflow-hidden">
               <div className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all" style={{ width: `${((questionsAnswered) / totalQuestions) * 100}%` }} />
@@ -200,7 +207,7 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
               animate={{ scale: 1, opacity: 1 }}
               className="bg-card border rounded-2xl p-10 text-center mb-6"
             >
-              <div className="text-sm text-muted-foreground mb-2">Convert:</div>
+              <div className="text-sm text-muted-foreground mb-2">{bh.convert_label || 'Convert:'}</div>
               <div className="text-5xl font-mono font-bold mb-6 tracking-wider">{question.display}</div>
 
               <form onSubmit={handleSubmit} className="flex gap-3 max-w-sm mx-auto">
@@ -210,7 +217,7 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit() }}
-                  placeholder="Answer..."
+                  placeholder={bh.answer_placeholder || 'Answer...'}
                   className={`flex-1 px-4 py-3 rounded-xl border-2 text-2xl font-mono font-bold text-center outline-none transition-all ${
                     feedback === 'correct' ? 'border-green-500 bg-green-50 dark:bg-green-900/20' :
                     feedback === 'wrong' ? 'border-red-500 bg-red-50 dark:bg-red-900/20' :
@@ -218,12 +225,12 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
                   }`}
                   autoFocus
                 />
-                <button type="submit" className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-all">OK</button>
+                <button type="submit" className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-all">{g.ok || 'OK'}</button>
               </form>
 
               {feedback && (
                 <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className={`mt-4 font-semibold flex items-center justify-center gap-2 ${feedback === 'correct' ? 'text-green-600' : 'text-red-600'}`}>
-                  {feedback === 'correct' ? <><CheckCircle2 className="w-5 h-5" /> Correct!</> : <><XCircle className="w-5 h-5" /> Answer: {question.answer}</>}
+                  {feedback === 'correct' ? <><CheckCircle2 className="w-5 h-5" /> {g.correct_exclamation || 'Correct!'}</> : <><XCircle className="w-5 h-5" /> {t(g.answer_with_value || 'Answer: {answer}', { answer: question.answer })}</>}
                 </motion.div>
               )}
             </motion.div>
@@ -235,25 +242,25 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
             <div className="w-20 h-20 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mx-auto mb-6">
               <Trophy className="w-10 h-10 text-white" />
             </div>
-            <h2 className="text-3xl font-bold mb-2">Challenge Complete!</h2>
+            <h2 className="text-3xl font-bold mb-2">{g.challenge_complete || 'Challenge Complete!'}</h2>
             <div className="grid grid-cols-3 gap-4 max-w-sm mx-auto my-6">
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 rounded-xl p-4 border border-green-200">
                 <div className="text-3xl font-bold text-green-600">{correct}</div>
-                <div className="text-sm text-muted-foreground">Correct</div>
+                <div className="text-sm text-muted-foreground">{g.stats?.correct || 'Correct'}</div>
               </div>
               <div className="bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/20 rounded-xl p-4 border border-red-200">
                 <div className="text-3xl font-bold text-red-600">{total - correct}</div>
-                <div className="text-sm text-muted-foreground">Wrong</div>
+                <div className="text-sm text-muted-foreground">{g.stats?.wrong || 'Wrong'}</div>
               </div>
               <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 rounded-xl p-4 border border-blue-200">
                 <div className="text-3xl font-bold text-blue-600">{accuracy}%</div>
-                <div className="text-sm text-muted-foreground">Accuracy</div>
+                <div className="text-sm text-muted-foreground">{g.stats?.accuracy || 'Accuracy'}</div>
               </div>
             </div>
-            <div className="text-2xl font-bold mb-6">Score: {score}</div>
+            <div className="text-2xl font-bold mb-6">{t(g.score_value || 'Score: {score}', { score })}</div>
             <div className="flex gap-3">
-              <button onClick={startGame} className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all">Play Again</button>
-              <Link href={`/${lang}/games`} className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors text-center">More Games</Link>
+              <button onClick={startGame} className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all">{g.play_again || 'Play Again'}</button>
+              <Link href={`/${lang}/games`} className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors text-center">{g.more_games || 'More Games'}</Link>
             </div>
           </div>
         )}

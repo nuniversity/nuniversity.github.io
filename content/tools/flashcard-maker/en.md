@@ -1,7 +1,7 @@
 ---
 title: Flashcard Maker
 description: Create and study digital flashcards with spaced repetition. Build custom decks, flip cards, and track your mastery over time.
-category: Study & Learning
+category: study
 icon: book-open
 order: 8
 ---

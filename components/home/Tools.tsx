@@ -2,39 +2,32 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight, Code, Clock, Brain, BookOpen, CalendarCheck, type LucideIcon } from 'lucide-react'
+import { ArrowRight, Code, type LucideIcon } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
 import type { ToolMetadata } from '@/lib/tools/get-tool-content'
-
-const iconMap: Record<string, LucideIcon> = {
-  code: Code,
-  clock: Clock,
-  brain: Brain,
-  'book-open': BookOpen,
-  'calendar-check': CalendarCheck,
-}
+import { getToolIcon } from '@/lib/tools/tool-icons'
 
 const iconBgMap: Record<string, string> = {
-  'Productivity': 'bg-green-500',
-  'Study & Learning': 'bg-blue-500',
-  'Artificial Intelligence': 'bg-purple-500',
-  'Mathematics': 'bg-orange-500',
-  'Coding & Programming': 'bg-indigo-500',
-  'Logic & Puzzles': 'bg-pink-500',
-  'Physics': 'bg-teal-500',
-  'Collaboration & Teamwork': 'bg-cyan-500',
-  'Business Strategy': 'bg-yellow-600',
+  'productivity': 'bg-green-500',
+  'study': 'bg-blue-500',
+  'artificial_intelligence': 'bg-purple-500',
+  'mathematics': 'bg-orange-500',
+  'coding': 'bg-indigo-500',
+  'logic': 'bg-pink-500',
+  'physics': 'bg-teal-500',
+  'collaboration': 'bg-cyan-500',
+  'business_strategy': 'bg-yellow-600',
   'uncategorized': 'bg-gray-500',
 }
 
 function getIcon(icon?: string): LucideIcon {
-  if (icon && iconMap[icon]) return iconMap[icon]
-  return Code
+  return getToolIcon(icon, Code)
 }
 
 function getIconBg(category: string): string {
-  return iconBgMap[category] || iconBgMap['uncategorized']
+  const key = category?.toLowerCase().replace(/\s+/g, '_') || 'uncategorized'
+  return iconBgMap[key] || iconBgMap['uncategorized']
 }
 
 const containerVariants = {

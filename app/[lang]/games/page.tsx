@@ -17,9 +17,10 @@ export async function generateMetadata({
 }: {
   params: { lang: Locale }
 }): Promise<Metadata> {
+  const dict = await getDictionary(params.lang)
   return {
-    title: 'Games - Learn While Playing',
-    description: 'Interactive learning games for vocabulary, math, coding, and more',
+    title: dict.metadata?.games?.title || 'Games - Learn While Playing',
+    description: dict.metadata?.games?.description || 'Interactive learning games for vocabulary, math, coding, and more',
   }
 }
 
@@ -28,7 +29,7 @@ export default async function GamesPage({ params }: GamesPageProps) {
   const dict = await getDictionary(lang)
   
   // Get all games at build time
-  const allGames = await getAllGames()
+  const allGames = await getAllGames(lang)
 
   return (
     <GamesClient 

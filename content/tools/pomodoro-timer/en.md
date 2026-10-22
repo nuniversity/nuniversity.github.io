@@ -1,7 +1,7 @@
 ---
 title: Pomodoro Study Timer
 description: Boost your productivity with the Pomodoro Technique. Study in focused intervals with customizable work/break sessions, task tracking, and progress stats.
-category: Productivity
+category: productivity
 icon: clock
 order: 5
 ---

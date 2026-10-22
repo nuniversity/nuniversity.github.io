@@ -1,7 +1,7 @@
 ---
 title: Constructor de Prompts LLM
 description: Crea prompts estructurados y efectivos para Modelos de Lenguaje con nuestro constructor interactivo. Define roles, objetivos, contexto y restricciones para obtener las mejores respuestas de IA.
-category: Inteligencia Artificial
+category: artificial_intelligence
 icon: brain
 order: 1
 ---

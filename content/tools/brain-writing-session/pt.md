@@ -1,7 +1,7 @@
 ---
 title: Sessão de Brain-Writing
 description: Ferramenta de ideação colaborativa para sessões estruturadas de brainstorming com equipes. Suporta múltiplos métodos incluindo 6-3-5, restrito e formatos livres.
-category: Colaboração
+category: collaboration
 icon: lightbulb
 order: 2
 ---

@@ -1779,5 +1779,15 @@
       "target": "Dirigir",
       "context": "actions"
     }
-  ]
+  ],
+  "locales": {
+    "pt": {
+      "title": "Inglês para Português - Vocabulário Básico",
+      "description": "Associe palavras em inglês com suas traduções em português"
+    },
+    "es": {
+      "title": "Del inglés al portugués - Vocabulario básico",
+      "description": "Relaciona palabras en inglés con sus traducciones al portugués"
+    }
+  }
 }

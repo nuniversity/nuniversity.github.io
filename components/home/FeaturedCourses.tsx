@@ -114,7 +114,9 @@ export default function FeaturedCourses({ lang, dict, courses }: FeaturedCourses
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
-                      {course.difficulty ? capitalize(course.difficulty) : dict.courses?.all_levels || 'All Levels'}
+                      {course.difficulty
+                        ? dict.courses?.difficulty_labels?.[course.difficulty] || capitalize(course.difficulty)
+                        : dict.courses?.all_levels || 'All Levels'}
                     </span>
                   </div>
 

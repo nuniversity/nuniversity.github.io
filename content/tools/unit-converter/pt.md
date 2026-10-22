@@ -1,7 +1,7 @@
 ---
 title: Conversor de Unidades
 description: Converta entre centenas de unidades em múltiplas categorias incluindo comprimento, massa, temperatura, volume, velocidade, área, tempo e armazenamento.
-category: Mathematics
+category: mathematics
 icon: calculator
 order: 6
 ---

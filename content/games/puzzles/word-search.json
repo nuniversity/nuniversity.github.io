@@ -9,5 +9,15 @@
     "science": ["ATOM", "CELL", "DNA", "ENERGY", "FORCE", "GRAVITY", "MASS", "MOLECULE", "PROTON", "WAVE"],
     "geography": ["OCEAN", "RIVER", "MOUNTAIN", "DESERT", "FOREST", "ISLAND", "VALLEY", "PLATEAU", "GLACIER", "CANAL"],
     "mathematics": ["ALGEBRA", "ANGLE", "CIRCLE", "DIGIT", "FRACTION", "MATRIX", "RADIUS", "SQUARE", "VECTOR", "VOLUME"]
+  },
+  "locales": {
+    "pt": {
+      "title": "Caça-Palavras",
+      "description": "Encontre palavras escondidas em uma grade de letras. Escolha entre várias categorias ou use listas de vocabulário."
+    },
+    "es": {
+      "title": "Sopa de Letras",
+      "description": "Encuentra palabras ocultas en una cuadrícula de letras. Elige entre varias categorías o usa listas de vocabulario."
+    }
   }
 }

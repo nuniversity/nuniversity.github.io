@@ -3,6 +3,8 @@ import { getCourseContent, getAllLessons, getAllCourses } from '@/lib/courses/ge
 import { type Locale, i18n } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import MarkdownRenderer from '@/components/markdown/MarkdownRenderer'
+import LessonExam from '@/components/quizzes/LessonExam'
+import { extractExamQuestions } from '@/lib/markdown/exam-questions'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight, BookOpen, Home, Brain } from 'lucide-react'
@@ -81,6 +83,8 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
     notFound()
   }
 
+  const lessonQuestions = lesson.metadata.exam ? extractExamQuestions(lesson.content) : []
+
   // Load all lessons in this course
   const coursesWithLessons = await getAllLessons(courseSlug, lang)
   
@@ -150,7 +154,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
                     : 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
                 }`}
               >
-                {lesson.metadata.difficulty}
+                {dict.courses?.difficulty_labels?.[lesson.metadata.difficulty] || lesson.metadata.difficulty}
               </span>
             )}
             {lesson.metadata.duration && (
@@ -175,7 +179,19 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
 
         {/* Lesson Content */}
         <div className="bg-card rounded-lg border p-8 mb-8 shadow-sm">
-          <MarkdownRenderer content={lesson.content} lang={lang} />
+          {lesson.metadata.exam && lessonQuestions.length > 0 ? (
+            <LessonExam
+              lang={lang}
+              lessonId={`${courseSlug}/${lessonSlug}`}
+              questions={lessonQuestions}
+              examMinutes={lesson.metadata.examMinutes ?? 90}
+              dict={dict}
+            >
+              <MarkdownRenderer content={lesson.content} lang={lang} dict={dict} />
+            </LessonExam>
+          ) : (
+            <MarkdownRenderer content={lesson.content} lang={lang} dict={dict} />
+          )}
         </div>
 
         {/* Progress Bar */}

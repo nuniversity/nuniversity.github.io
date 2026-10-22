@@ -25,7 +25,7 @@ interface ImportedTask {
   createdAt?: string;
 }
 
-const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => {
+const EisenhowerMatrix = ({ dict = {} }: EisenhowerMatrixProps) => {
   const [tasks, setTasks] = useState<Record<QuadrantKey, Task[]>>({
     doFirst: [],
     schedule: [],
@@ -46,133 +46,7 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
   const [importError, setImportError] = useState('');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const translations = {
-    en: {
-      title: 'Eisenhower Matrix',
-      subtitle: 'Prioritize tasks by urgency and importance',
-      doFirst: 'Do First',
-      doFirstDesc: 'Urgent & Important',
-      doFirstExplain: 'Critical tasks requiring immediate attention',
-      schedule: 'Schedule',
-      scheduleDesc: 'Not Urgent but Important',
-      scheduleExplain: 'Strategic tasks to plan and schedule',
-      delegate: 'Delegate',
-      delegateDesc: 'Urgent but Not Important',
-      delegateExplain: 'Tasks others can handle',
-      eliminate: 'Eliminate',
-      eliminateDesc: 'Not Urgent & Not Important',
-      eliminateExplain: 'Time-wasters to minimize or remove',
-      addTask: 'Add task',
-      noTasks: 'No tasks yet',
-      clickToAdd: 'Click "Add task" to start',
-      matrixView: 'Matrix View',
-      listView: 'List View',
-      showCompleted: 'Show Completed',
-      hideCompleted: 'Hide Completed',
-      clear: 'Clear All',
-      urgent: 'URGENT',
-      notUrgent: 'NOT URGENT',
-      important: 'IMPORTANT',
-      notImportant: 'NOT IMPORTANT',
-      completed: 'Completed',
-      pending: 'Pending',
-      totalTasks: 'Total Tasks',
-      completionRate: 'Completion Rate',
-      import: 'Import',
-      importData: 'Import Data',
-      importDesc: 'Upload JSON or CSV file to import tasks',
-      selectFile: 'Select File',
-      importSuccess: 'Data imported successfully!',
-      importError: 'Error importing data. Please check file format.',
-      cancel: 'Cancel',
-      dragDrop: 'Drag and drop or click to select',
-      supportedFormats: 'Supported: JSON, CSV'
-    },
-    es: {
-      title: 'Matriz de Eisenhower',
-      subtitle: 'Prioriza las tareas por urgencia e importancia',
-      doFirst: 'Haz Primero',
-      doFirstDesc: 'Urgente e Importante',
-      doFirstExplain: 'Tareas críticas que requieren atención inmediata',
-      schedule: 'Programar',
-      scheduleDesc: 'No Urgente pero Importante',
-      scheduleExplain: 'Tareas estratégicas para planificar y programar',
-      delegate: 'Delegar',
-      delegateDesc: 'Urgente pero No Importante',
-      delegateExplain: 'Tareas que otros pueden realizar',
-      eliminate: 'Eliminar',
-      eliminateDesc: 'No Urgente y No Importante',
-      eliminateExplain: 'Pérdidas de tiempo que se deben minimizar o eliminar',
-      addTask: 'Agregar tarea',
-      noTasks: 'Aún no hay tareas',
-      clickToAdd: 'Haz clic en "Agregar tarea" para comenzar',
-      matrixView: 'Vista de Matriz',
-      listView: 'Vista de Lista',
-      showCompleted: 'Mostrar Completadas',
-      hideCompleted: 'Ocultar Completadas',
-      clear: 'Borrar Todo',
-      urgent: 'URGENTE',
-      notUrgent: 'NO URGENTE',
-      important: 'IMPORTANTE',
-      notImportant: 'NO IMPORTANTE',
-      completed: 'Completadas',
-      pending: 'Pendientes',
-      totalTasks: 'Tareas Totales',
-      completionRate: 'Tasa de Finalización',
-      import: 'Importar',
-      importData: 'Importar Datos',
-      importDesc: 'Sube un archivo JSON o CSV para importar tareas',
-      selectFile: 'Seleccionar Archivo',
-      importSuccess: '¡Datos importados con éxito!',
-      importError: 'Error al importar datos. Verifica el formato del archivo.',
-      cancel: 'Cancelar',
-      dragDrop: 'Arrastra y suelta o haz clic para seleccionar',
-      supportedFormats: 'Formatos admitidos: JSON, CSV'
-    },
-    pt: {
-      title: 'Matriz de Eisenhower',
-      subtitle: 'Priorize tarefas por urgência e importância',
-      doFirst: 'Fazer Primeiro',
-      doFirstDesc: 'Urgente e Importante',
-      doFirstExplain: 'Tarefas críticas que exigem atenção imediata',
-      schedule: 'Agendar',
-      scheduleDesc: 'Não Urgente mas Importante',
-      scheduleExplain: 'Tarefas estratégicas para planejar e agendar',
-      delegate: 'Delegar',
-      delegateDesc: 'Urgente mas Não Importante',
-      delegateExplain: 'Tarefas que outras pessoas podem realizar',
-      eliminate: 'Eliminar',
-      eliminateDesc: 'Não Urgente e Não Importante',
-      eliminateExplain: 'Perdas de tempo que devem ser minimizadas ou removidas',
-      addTask: 'Adicionar tarefa',
-      noTasks: 'Nenhuma tarefa ainda',
-      clickToAdd: 'Clique em "Adicionar tarefa" para começar',
-      matrixView: 'Visualização em Matriz',
-      listView: 'Visualização em Lista',
-      showCompleted: 'Mostrar Concluídas',
-      hideCompleted: 'Ocultar Concluídas',
-      clear: 'Limpar Tudo',
-      urgent: 'URGENTE',
-      notUrgent: 'NÃO URGENTE',
-      important: 'IMPORTANTE',
-      notImportant: 'NÃO IMPORTANTE',
-      completed: 'Concluídas',
-      pending: 'Pendentes',
-      totalTasks: 'Total de Tarefas',
-      completionRate: 'Taxa de Conclusão',
-      import: 'Importar',
-      importData: 'Importar Dados',
-      importDesc: 'Envie um arquivo JSON ou CSV para importar tarefas',
-      selectFile: 'Selecionar Arquivo',
-      importSuccess: 'Dados importados com sucesso!',
-      importError: 'Erro ao importar dados. Verifique o formato do arquivo.',
-      cancel: 'Cancelar',
-      dragDrop: 'Arraste e solte ou clique para selecionar',
-      supportedFormats: 'Formatos suportados: JSON, CSV'
-    }
-  };
-
-  const t = translations[lang] || translations.en;
+  const t = dict.tools?.eisenhower_matrix || {};
 
   const addTask = (quadrant: QuadrantKey) => {
     if (newTask[quadrant].trim()) {
@@ -266,7 +140,7 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
   };
 
   const clearAll = () => {
-    if (confirm('Are you sure you want to clear all tasks?')) {
+    if (confirm(t.confirmClear || 'Are you sure you want to clear all tasks?')) {
       setTasks({
         doFirst: [],
         schedule: [],
@@ -490,14 +364,14 @@ const EisenhowerMatrix = ({ lang = 'en', dict = {} }: EisenhowerMatrixProps) => 
                   className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
-                  JSON
+                  {dict.tools?.common?.json || 'JSON'}
                 </button>
                 <button
                   onClick={() => exportData('csv')}
                   className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
-                  CSV
+                  {dict.tools?.common?.csv || 'CSV'}
                 </button>
               </>
             )}

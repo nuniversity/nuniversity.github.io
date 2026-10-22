@@ -42,6 +42,11 @@ const DIRS = [
 
 const GRID_SIZE = 12
 
+function t(template: string, vars?: Record<string, string | number>): string {
+  if (!vars) return template
+  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
+}
+
 function buildGrid(words: string[]): { grid: string[][]; placements: WordPlacement[] } {
   const grid: string[][] = Array.from({ length: GRID_SIZE }, () => Array(GRID_SIZE).fill(''))
   const placements: WordPlacement[] = []
@@ -109,6 +114,9 @@ export function WordSearchClient({ lang, game, dict }: WordSearchClientProps) {
   const [startTime, setStartTime] = useState<number | null>(null)
   const [elapsedTime, setElapsedTime] = useState(0)
   const [isSelecting, setIsSelecting] = useState(false)
+
+  const g = dict?.games ?? {}
+  const ws = g?.word_search ?? {}
 
   const words = game.categories[category] || []
 
@@ -200,7 +208,7 @@ export function WordSearchClient({ lang, game, dict }: WordSearchClientProps) {
     <div className="container-custom py-12">
       <div className="max-w-4xl mx-auto">
         <Link href={`/${lang}/games`} className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-6 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Back to Games
+          <ArrowLeft className="w-4 h-4" /> {g.back_to_games || 'Back to Games'}
         </Link>
 
         <div className="text-center mb-8">
@@ -213,7 +221,7 @@ export function WordSearchClient({ lang, game, dict }: WordSearchClientProps) {
 
         {gameMode === 'config' && (
           <div className="bg-card border rounded-2xl p-8 max-w-lg mx-auto">
-            <h2 className="text-2xl font-semibold mb-6">Choose a Category</h2>
+            <h2 className="text-2xl font-semibold mb-6">{ws.choose_category || 'Choose a Category'}</h2>
             <div className="space-y-3">
               {Object.keys(game.categories).map((cat) => (
                 <button
@@ -222,7 +230,7 @@ export function WordSearchClient({ lang, game, dict }: WordSearchClientProps) {
                   className={`w-full p-4 rounded-xl text-left font-medium transition-all ${category === cat ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
                 >
                   <div className="capitalize text-lg">{cat}</div>
-                  <div className="text-sm opacity-70">{game.categories[cat].length} words</div>
+                  <div className="text-sm opacity-70">{t(ws.words_count || '{n} words', { n: game.categories[cat].length })}</div>
                 </button>
               ))}
             </div>
@@ -234,15 +242,15 @@ export function WordSearchClient({ lang, game, dict }: WordSearchClientProps) {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-3 mb-6">
               <div className="bg-card border rounded-xl p-3 text-center">
-                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><Search className="w-3 h-3" /> Found</div>
+                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><Search className="w-3 h-3" /> {g.stats?.found || 'Found'}</div>
                 <div className="text-xl font-bold">{foundWords.length}/{words.length}</div>
               </div>
               <div className="bg-card border rounded-xl p-3 text-center">
-                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><Clock className="w-3 h-3" /> Time</div>
+                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><Clock className="w-3 h-3" /> {g.stats?.time || 'Time'}</div>
                 <div className="text-xl font-bold">{formatTime(elapsedTime)}</div>
               </div>
               <div className="bg-card border rounded-xl p-3 text-center">
-                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><Trophy className="w-3 h-3" /> Score</div>
+                <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-1"><Trophy className="w-3 h-3" /> {g.stats?.score || 'Score'}</div>
                 <div className="text-xl font-bold">{score}</div>
               </div>
             </div>
@@ -291,7 +299,7 @@ export function WordSearchClient({ lang, game, dict }: WordSearchClientProps) {
             </div>
 
             <div className="mt-4 text-xs text-muted-foreground text-center">
-              Click and drag across the grid to select letters. Release to check if it&apos;s a word.
+              {ws.drag_hint || "Click and drag across the grid to select letters. Release to check if it's a word."}
             </div>
           </div>
         )}
@@ -301,13 +309,13 @@ export function WordSearchClient({ lang, game, dict }: WordSearchClientProps) {
             <div className="w-20 h-20 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mx-auto mb-6">
               <Trophy className="w-10 h-10 text-white" />
             </div>
-            <h2 className="text-3xl font-bold mb-2">Puzzle Complete!</h2>
-            <p className="text-muted-foreground mb-6">You found all {words.length} words!</p>
-            <div className="text-2xl font-bold mb-6">Score: {score}</div>
-            <div className="text-lg mb-6">Time: {formatTime(elapsedTime)}</div>
+            <h2 className="text-3xl font-bold mb-2">{ws.puzzle_complete || 'Puzzle Complete!'}</h2>
+            <p className="text-muted-foreground mb-6">{t(ws.found_all || 'You found all {n} words!', { n: words.length })}</p>
+            <div className="text-2xl font-bold mb-6">{t(g.score_value || 'Score: {score}', { score })}</div>
+            <div className="text-lg mb-6">{t(ws.time_with_n || 'Time: {time}', { time: formatTime(elapsedTime) })}</div>
             <div className="flex gap-3">
-              <button onClick={startGame} className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all">Play Again</button>
-              <Link href={`/${lang}/games`} className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors text-center">More Games</Link>
+              <button onClick={startGame} className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all">{g.play_again || 'Play Again'}</button>
+              <Link href={`/${lang}/games`} className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors text-center">{g.more_games || 'More Games'}</Link>
             </div>
           </div>
         )}

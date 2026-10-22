@@ -1,0 +1,70 @@
+{
+  "id": "valid_quiz",
+  "slug": "valid_quiz",
+  "kind": "certification",
+  "category": "data-platforms",
+  "title": "Sample Certification Quiz",
+  "description": "Small valid quiz fixture used by the validate-quiz-json hook",
+  "difficulty": "intermediate",
+  "topic": "Data platforms",
+  "certification": "Sample Cloud Cert",
+  "durationSeconds": 1800,
+  "passingScore": 75,
+  "domains": [
+    {
+      "id": "1.0",
+      "name": "Architecture & Design",
+      "color": "#2563eb",
+      "subdomains": ["1.1"]
+    },
+    {
+      "id": "2.0",
+      "name": "Security & Compliance",
+      "color": "#16a34a",
+      "subdomains": ["2.1"]
+    }
+  ],
+  "allocations": {
+    "1.1": 50,
+    "2.1": 50
+  },
+  "questions": [
+    {
+      "id": "q001",
+      "subdomain": "1.1",
+      "type": "mcq",
+      "question": "Which component stores data durably in a columnar cloud data platform?",
+      "options": ["Compute cluster", "Columnar storage", "Orchestrator", "Identity provider"],
+      "correct": 1,
+      "explanation": "Columnar storage keeps data organized by column, which analytical queries scan efficiently."
+    },
+    {
+      "id": "q002",
+      "subdomain": "1.1",
+      "type": "mcq",
+      "question": "Which term describes separating storage from compute?",
+      "options": ["Tight coupling", "Shared-nothing only", "Decoupled architecture", "Monolithic design"],
+      "correct": 2,
+      "explanation": "A decoupled architecture lets storage and compute scale independently."
+    },
+    {
+      "id": "q003",
+      "subdomain": "2.1",
+      "type": "mcq",
+      "question": "Which principle limits user access to only what is required?",
+      "options": ["Least privilege", "Defense in depth", "High availability", "Eventual consistency"],
+      "correct": 0,
+      "explanation": "Least privilege grants only the permissions needed to perform a task."
+    }
+  ],
+  "locales": {
+    "pt": {
+      "title": "Questionário de Certificação de Amostra",
+      "description": "Fixture pequena e válida usada pelo hook validate-quiz-json"
+    },
+    "es": {
+      "title": "Cuestionario de certificación de muestra",
+      "description": "Fixture pequeña y válida usada por el hook validate-quiz-json"
+    }
+  }
+}

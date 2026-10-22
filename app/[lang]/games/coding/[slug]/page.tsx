@@ -3,7 +3,7 @@ export const revalidate = false
 
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import { type Locale } from '@/lib/i18n/config'
-import { getGameFile, getAllGames } from '@/lib/games/get-game-content'
+import { getGameFile, getAllGames, type GameFileData } from '@/lib/games/get-game-content'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { BinaryHexClient } from './binary-hex-client'
@@ -19,8 +19,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { lang: Locale; slug: string } }): Promise<Metadata> {
-  const game = await getGameFile<any>('coding', params.slug)
-  if (!game) return { title: 'Game Not Found' }
+  const dict = await getDictionary(params.lang)
+  const game = await getGameFile<GameFileData>('coding', params.slug, params.lang)
+  if (!game) return { title: dict.metadata?.games?.notFound || 'Game Not Found' }
   return { title: game.title, description: game.description }
 }
 
@@ -32,7 +33,7 @@ const clients: Record<string, any> = {
 export default async function CodingGamePage({ params }: GamePageProps) {
   const { lang, slug } = params
   const dict = await getDictionary(lang)
-  const game = await getGameFile<any>('coding', slug)
+  const game = await getGameFile<GameFileData>('coding', slug, lang)
   if (!game) notFound()
   const Client = clients[slug]
   if (!Client) notFound()

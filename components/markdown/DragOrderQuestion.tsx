@@ -72,9 +72,12 @@ interface DragOrderQuestionProps {
   items: string[]
   correctOrder: string[]
   explanation?: string
+  dict?: any
 }
 
-export default function DragOrderQuestion({ question, items, correctOrder, explanation }: DragOrderQuestionProps) {
+export default function DragOrderQuestion({ question, items, correctOrder, explanation, dict }: DragOrderQuestionProps) {
+  const w = dict?.widgets
+  const d = w?.drag_order
   const [currentItems, setCurrentItems] = useState<string[]>(() => shuffle(items))
   const [feedback, setFeedback] = useState<'idle' | 'correct' | 'incorrect'>('idle')
   const [activeId, setActiveId] = useState<string | null>(null)
@@ -119,7 +122,7 @@ export default function DragOrderQuestion({ question, items, correctOrder, expla
     <div className="my-8 rounded-xl border bg-card shadow-sm overflow-hidden">
       <div className="bg-muted/50 px-4 py-2 border-b flex items-center gap-2">
         <ListOrdered className="w-4 h-4 text-primary" />
-        <span className="text-sm font-semibold text-foreground">Ordering Question</span>
+        <span className="text-sm font-semibold text-foreground">{d?.title || 'Ordering Question'}</span>
       </div>
       <div className="p-4 sm:p-6 space-y-4">
         <p className="font-medium text-foreground">{question}</p>
@@ -152,7 +155,7 @@ export default function DragOrderQuestion({ question, items, correctOrder, expla
                 : <XCircle className="w-5 h-5 text-red-600" />
               }
               <span className="font-semibold text-sm text-foreground">
-                {feedback === 'correct' ? 'Correct!' : 'Not quite — red items are in the wrong position.'}
+                {feedback === 'correct' ? (w?.correct || 'Correct!') : (d?.incorrect_feedback || 'Not quite — red items are in the wrong position.')}
               </span>
             </div>
             {explanation && <p className="text-sm text-muted-foreground mt-1">{explanation}</p>}
@@ -162,11 +165,11 @@ export default function DragOrderQuestion({ question, items, correctOrder, expla
         <div className="flex gap-2 pt-2">
           {feedback !== 'correct' && (
             <button onClick={handleCheck} className="px-6 py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
-              Check Order
+              {w?.check_order || 'Check Order'}
             </button>
           )}
           <button onClick={handleTryAgain} className="px-6 py-2 text-sm font-medium rounded-lg bg-muted text-foreground hover:bg-accent transition-colors">
-            Try Again
+            {w?.try_again || 'Try Again'}
           </button>
         </div>
       </div>

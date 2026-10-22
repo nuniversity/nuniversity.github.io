@@ -31,5 +31,15 @@
       {"code": ".card {\n    background: #fff;\n    border-radius: 8px;\n    box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n    transition: transform 0.2s, box-shadow 0.2s;\n}\n.card:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 4px 8px rgba(0,0,0,0.15);\n}", "language": "css"},
       {"code": "@media (max-width: 768px) {\n    .sidebar {\n        display: none;\n    }\n    .main-content {\n        margin-left: 0;\n        padding: 1rem;\n    }\n}", "language": "css"}
     ]
+  },
+  "locales": {
+    "pt": {
+      "title": "Velocidade de Digitação de Código",
+      "description": "Melhore sua velocidade e precisão ao programar digitando trechos de código reais contra o tempo. Suporta Python, JavaScript, HTML e CSS."
+    },
+    "es": {
+      "title": "Velocidad de Escritura de Código",
+      "description": "Mejora tu velocidad y precisión al programar escribiendo fragmentos de código reales contra el reloj. Compatible con Python, JavaScript, HTML y CSS."
+    }
   }
 }

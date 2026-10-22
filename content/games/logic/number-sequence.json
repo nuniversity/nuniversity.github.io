@@ -7,5 +7,15 @@
   "startingLength": 3,
   "maxLength": 15,
   "displayTimeMs": 1000,
-  "maxDigits": 9
+  "maxDigits": 9,
+  "locales": {
+    "pt": {
+      "title": "Memória de Sequências Numéricas",
+      "description": "Teste e melhore sua memória de curto prazo. Observe sequências de números e as relembre na ordem. A dificuldade aumenta automaticamente conforme você avança."
+    },
+    "es": {
+      "title": "Memoria de Secuencias Numéricas",
+      "description": "Prueba y mejora tu memoria a corto plazo. Observa secuencias de números y recuérdalas en orden. La dificultad aumenta automáticamente a medida que avanzas."
+    }
+  }
 }

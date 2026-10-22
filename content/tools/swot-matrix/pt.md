@@ -1,7 +1,7 @@
 ---
 title: Análise Matriz SWOT
 description: Ferramenta de planejamento estratégico para análise abrangente de negócios. Identifique Forças, Fraquezas, Oportunidades e Ameaças, depois gere recomendações estratégicas.
-category: Estratégia de Negócios
+category: business_strategy
 icon: bar-chart
 order: 3
 ---

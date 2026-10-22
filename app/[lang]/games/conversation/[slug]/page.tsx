@@ -30,14 +30,15 @@ export async function generateMetadata({
 }: {
   params: { lang: Locale; slug: string }
 }): Promise<Metadata> {
-  const game = await getConversationGame(params.slug)
+  const dict = await getDictionary(params.lang)
+  const game = await getConversationGame(params.slug, params.lang)
 
   if (!game) {
-    return { title: 'Game Not Found' }
+    return { title: dict.metadata?.games?.notFound || 'Game Not Found' }
   }
 
   return {
-    title: `${game.title} — Conversation`,
+    title: `${game.title} — ${dict.games?.suffixes?.conversation || 'Conversation'}`,
     description: game.description,
   }
 }

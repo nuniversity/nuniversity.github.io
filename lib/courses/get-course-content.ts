@@ -19,6 +19,8 @@ export interface CourseMetadata {
   order: number
   duration?: string
   difficulty?: 'beginner' | 'intermediate' | 'advanced'
+  exam?: boolean
+  examMinutes?: number
 }
 
 export interface CourseContent {
