@@ -4,24 +4,25 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence, useMotionValue, useTransform, type PanInfo } from 'framer-motion'
 import { ArrowLeft, RotateCcw, Download, Upload, BarChart3, Sparkles, Eye, EyeOff, Volume2 } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
-import { VocabularyGame, VocabularyWord } from '@/lib/games/get-game-content'
+import { VocabularyGame, VocabularyWord } from '@/lib/languages/types'
+import {
+  getFlashcardProgress,
+  setFlashcardProgress,
+  normalizeFlashcardProgress,
+  LEARNED_THRESHOLD,
+  type FlashcardProgressMap,
+} from '@/lib/languages/storage'
 import Link from 'next/link'
 
 interface FlashcardGameClientProps {
   lang: Locale
   game: VocabularyGame
   dict: any
-}
-
-interface FlashcardProgress {
-  streak: number
-  totalReviews: number
-  lastReviewed: number
+  pair?: string
 }
 
 type StudyMode = 'all' | 'new' | 'learning' | 'learned'
 
-const LEARNED_THRESHOLD = 3
 const SWIPE_THRESHOLD = 100
 
 function shuffleArray<T>(arr: T[]): T[] {
@@ -38,34 +39,14 @@ function t(template: string, vars?: Record<string, string | number>): string {
   return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
 }
 
-function migrateOldFormat(data: Record<string, any>): { result: Record<string, FlashcardProgress>; migrated: boolean } {
-  let migrated = false
-  const result: Record<string, FlashcardProgress> = {}
-  for (const [wordId, value] of Object.entries(data)) {
-    if (value && typeof value === 'object' && ('ease' in value || 'repetitions' in value)) {
-      migrated = true
-      const v = value as any
-      const reps = v.repetitions ?? 0
-      result[wordId] = {
-        streak: reps >= LEARNED_THRESHOLD ? LEARNED_THRESHOLD : reps > 0 ? reps : 0,
-        totalReviews: reps,
-        lastReviewed: v.lastReviewed ?? v.nextReview ?? Date.now(),
-      }
-    } else if (value && typeof value === 'object' && 'streak' in value) {
-      result[wordId] = value as FlashcardProgress
-    }
-  }
-  return { result, migrated }
-}
-
 const cardVariants = {
   center: { x: 0, rotate: 0, opacity: 1, scale: 1 },
   exitRight: { x: 600, opacity: 0, rotate: 20, transition: { duration: 0.35, ease: [0.32, 0.72, 0, 1] as const } },
   exitLeft: { x: -600, opacity: 0, rotate: -20, transition: { duration: 0.35, ease: [0.32, 0.72, 0, 1] as const } },
 }
 
-export function FlashcardGameClient({ lang, game, dict }: FlashcardGameClientProps) {
-  const [progress, setProgress] = useState<Record<string, FlashcardProgress>>({})
+export function FlashcardGameClient({ lang, game, dict, pair: pairProp }: FlashcardGameClientProps) {
+  const [progress, setProgress] = useState<FlashcardProgressMap>({})
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isFlipped, setIsFlipped] = useState(false)
   const [showPronunciation, setShowPronunciation] = useState(true)
@@ -79,8 +60,8 @@ export function FlashcardGameClient({ lang, game, dict }: FlashcardGameClientPro
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
   const [swipeDirection, setSwipeDirection] = useState<number | null>(null)
 
-  const fc = dict?.games?.flashcards ?? {}
-  const storageKey = `flashcard_progress_${game.id}`
+  const fc = dict?.languages?.flashcards ?? {}
+  const pair = pairProp ?? (game.language_pair ? `${game.language_pair.source}-${game.language_pair.target}` : game.id)
   const hasMountedRef = useRef(false)
   const isAnimatingRef = useRef(false)
   const didDragRef = useRef(false)
@@ -92,24 +73,18 @@ export function FlashcardGameClient({ lang, game, dict }: FlashcardGameClientPro
   const rememberOpacity = useTransform(x, [50, 200], [0, 1])
 
   useEffect(() => {
-    const saved = localStorage.getItem(storageKey)
-    if (saved) {
-      try {
-        const raw = JSON.parse(saved)
-        const { result, migrated } = migrateOldFormat(raw)
-        setProgress(result)
-        if (migrated) {
-          setFeedback({ type: 'success', message: fc.import_migrated ?? 'Progress updated to new format!' })
-        }
-      } catch {}
+    const { progress: loaded, migrated } = getFlashcardProgress(pair, game.id, game.id)
+    setProgress(loaded)
+    if (migrated) {
+      setFeedback({ type: 'success', message: fc.import_migrated ?? 'Progress updated to new format!' })
     }
     hasMountedRef.current = true
-  }, [storageKey, fc.import_migrated])
+  }, [pair, game.id, fc.import_migrated])
 
   useEffect(() => {
     if (!hasMountedRef.current) return
-    localStorage.setItem(storageKey, JSON.stringify(progress))
-  }, [progress, storageKey])
+    setFlashcardProgress(pair, game.id, progress)
+  }, [progress, pair, game.id])
 
   const categories = useMemo(() => {
     const cats = new Set(game.words.map(w => w.context))
@@ -256,7 +231,7 @@ export function FlashcardGameClient({ lang, game, dict }: FlashcardGameClientPro
         if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) {
           throw new Error('Invalid format')
         }
-        const { result, migrated } = migrateOldFormat(raw)
+        const { progress: result, migrated } = normalizeFlashcardProgress(raw)
         setProgress(result)
         setSessionStats({ reviewed: 0, correct: 0, incorrect: 0 })
         setCurrentIndex(0)
@@ -301,7 +276,7 @@ export function FlashcardGameClient({ lang, game, dict }: FlashcardGameClientPro
   }
 
   const boxConfigs = [
-    { mode: 'all' as StudyMode, count: stats.total, label: fc.mode_all ?? 'All', color: 'indigo', bgActive: 'bg-indigo-600', borderActive: 'border-indigo-600', textActive: 'text-indigo-600' },
+    { mode: 'all' as StudyMode, count: stats.total, label: t(fc.mode_all ?? 'All', { n: stats.total }), color: 'indigo', bgActive: 'bg-indigo-600', borderActive: 'border-indigo-600', textActive: 'text-indigo-600' },
     { mode: 'new' as StudyMode, count: stats.newCount, label: fc.new ?? 'New', color: 'green', bgActive: 'bg-green-600', borderActive: 'border-green-600', textActive: 'text-green-600' },
     { mode: 'learning' as StudyMode, count: stats.learning, label: fc.learning ?? 'Learning', color: 'blue', bgActive: 'bg-blue-600', borderActive: 'border-blue-600', textActive: 'text-blue-600' },
     { mode: 'learned' as StudyMode, count: stats.learned, label: fc.learned ?? 'Learned', color: 'purple', bgActive: 'bg-purple-600', borderActive: 'border-purple-600', textActive: 'text-purple-600' },
@@ -357,7 +332,7 @@ export function FlashcardGameClient({ lang, game, dict }: FlashcardGameClientPro
       )}
       <div className="max-w-2xl mx-auto">
         <div className="flex items-center gap-3 mb-6 flex-wrap">
-          <Link href={`/${lang}/games`} className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"><ArrowLeft className="w-5 h-5" /></Link>
+          <Link href={`/${lang}/languages/`} aria-label={dict?.languages?.back_to_languages ?? 'Back to Languages'} className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"><ArrowLeft className="w-5 h-5" /></Link>
           <h1 className="text-xl font-bold flex-1 truncate">{game.title}</h1>
           <div className="flex gap-1">
             <button onClick={() => setShowStats(true)} className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"><BarChart3 className="w-4 h-4" /></button>

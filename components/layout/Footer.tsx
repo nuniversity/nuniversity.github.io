@@ -42,7 +42,7 @@ export default function Footer({ lang, dict }: FooterProps) {
   }
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="print:hidden bg-gray-900 text-white">
       {/* Main Footer */}
       <div className="container-custom py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">

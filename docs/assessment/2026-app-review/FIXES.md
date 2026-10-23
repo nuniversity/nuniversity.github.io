@@ -132,7 +132,7 @@ The *Phase* column maps to [PLAN.md](./PLAN.md).
 | BUG-03 tools locale fallback | OPEN | F-009 |
 | BUG-04 course link fallback | OPEN | F-002 |
 | ISSUE-05 `dict: any` | OPEN | F-021/F-022 + TS-strict phase |
-| ISSUE-06 vocab hardcoded EN | OPEN | F-021 |
+| ISSUE-06 vocab hardcoded EN | CLOSED (Phase 5) | F-021 remainder → moved clients read `dict.languages.*`; verify_out leak audit 45 probes green |
 | ISSUE-07 library filter types | OPEN | F-044 |
 | ISSUE-08 results count EN | OPEN | F-029 |
 | ISSUE-09 course plural EN | OPEN | F-028 |
@@ -145,7 +145,7 @@ The *Phase* column maps to [PLAN.md](./PLAN.md).
 | IMPROVE-15 container-custom | re-check in F-067 | F-067 |
 | IMPROVE-16 error boundaries | OPEN | F-004 |
 | IMPROVE-17 placeholder about title | OPEN | F-047 |
-| IMPROVE-18 slider reset | OPEN | F-101 |
+| IMPROVE-18 slider reset | CLOSED (Phase 5) | F-101 → clamp effect with functional update + `maxPairs` dep in moved client |
 | SEC-02 mermaid loose | OPEN | F-091 |
 | SEC-03 formspree placeholder | OPEN | F-015 |
 | PERF-01 lazy loading | OPEN | F-045 |
@@ -260,4 +260,32 @@ Deep plan: [PLAN-PHASE3.md](./PLAN-PHASE3.md) (W0–W10), decisions **D31–D35*
 
 Also landed: difficulty badge localization sweep found by the leak audit (home `FeaturedCourses`, courses list cards + filter, course landing lesson badges, roadmaps list + timeline incl. wrong `roadmaps.difficulty` string-index nesting, library resources → `difficulty_labels`/`difficultyLevels`/`library.difficulty` dict lookups); `tools.tool_count`/`tool_singular` keys ×3; leak audit as a blocking `verify_out` extended invariant (27 chrome strings + raw difficulty-slug text-node probe over `out/pt`+`out/es`, `/games/quiz/` waived per D32, lesson bodies excluded from the slug probe as Phase-4 content).
 
-**Totals:** 15 P0 · 38 P1 · 30+ P2 (incl. legacy mapping) + 8 content-quality defects (F-104–F-111) — sequenced across Phases 1–7 in [PLAN.md](./PLAN.md); F-104–F-111 closed ahead of Phase 9; Phase 1 harness items closed 2026-10-20; Phase 2 critical-bug items closed 2026-10-21 (residual: error.tsx boundaries → Phase 7); Phase 3 i18n items closed 2026-10-22 (residuals: full quiz i18n + question banks → Phase 4 per D32/F-046, F-053 missing translations → Phase 9, F-021 beyond-existing vocab wording → Phase 5).
+## Phase 4 closeout — Quizzes app (2026-10-22)
+
+Deep plan: [PLAN-PHASE4.md](./PLAN-PHASE4.md) (W0–W8), decisions **D36–D44**.
+
+| ID | Status | Evidence |
+|---|---|---|
+| F-046 | **Fixed** | Quiz chrome fully localized: `quizzes.*` namespace (160 leaves ×3) + `metadata.quizzes` + `navigation.quizzes`; hub, detail (8-component player), exam session, score/certificate/history, and redirect stubs all dict-driven; leak audit now runs with `LEAK_WAIVERS = []` and 33 curated probes (5 quiz-chrome additions) green over `out/pt` + `out/es`. 833 question texts stay EN by §4 policy → Phase 9. |
+| F-060 | **Partial (temporary)** | D43 landed the minimum header slot: Quizzes nav item (`isNew`) + desktop `md→lg` shift ×3 locales + Footer link; full collapse redesign remains Phase 7. |
+| D32 | **Waiver retired** | Phase 3's `/games/quiz/` leak waiver removed from `verify_out.mjs` — the old path now serves localized noindex stubs (D38), so the probe count reflects real coverage. |
+
+Also landed: legacy `content/games/quiz/` removed from Games (category/icon/`games.categories.quiz`/`games.suffixes.quiz` ×3), games-hub link-through promo card (`quizzes.promo.*` ×3), `validate-quiz-json` CI hook (9 pytest cases), sitemap `quizzes` loop, all 5 exam-simulation lessons (15 files) rendering through `LessonExam` (frontmatter `exam`/`examMinutes` + `lib/markdown/exam-questions.ts` extractor), printable certificate rules in `@media print`, and DESIGN §10 acceptance-7 fixes (keyboard/aria/flex-wrap + print-hidden chrome).
+
+
+## Phase 5 closeout — Languages app (2026-10-23)
+
+Deep plan: [PLAN-PHASE5.md](./PLAN-PHASE5.md) (W0–W9), decisions **D45–D53**.
+
+| ID | Status | Evidence |
+|---|---|---|
+| F-021 (vocab remainder) | **Fixed** | both moved clients read `dict.languages.*` chrome (matching `languages.matching.*`, flashcards `languages.flashcards.*`); hardcoded `({n} cards)` → `languages.card.words`/`languages.matching.cards_count`, bare `Number of pairs:` → `languages.matching.num_pairs` ×3, instruction fallbacks dict-first; difficulty labels keep shared `games.difficulty` |
+| F-074 | **Fixed** | `aspect-square` → `aspect-[4/3]` in the moved matching client (card art no longer overflows); leak audit + grid checks green |
+| F-101 | **Fixed** | slider clamp reworked to a functional update keyed on `maxPairs` (no stale closure, no reset on unrelated changes), `min` guarded for tiny games |
+| F-063 (languages grids) | **Fixed (moved scope)** | hub/pair/card grids `grid-cols-1` first with `min-w-0` cards; 320px-safe by construction (full sweep remains Phase 7 for other pages) |
+| ISSUE-06 / IMPROVE-18 | **Closed** | see rows above — tracked residuals retired |
+
+Also landed: coverage pre-work restoring the **≥80%** gate (80.29%, W0), `v1:lang-*` storage with legacy dual-read + matching best-score (17 tests), `validate-languages` hook (35 pytest + `languages-gate-5`), vocabulary stripped from the game hook (`VALID_CATEGORIES` → 6, example/schema updated), games-hub cross-link promo card, Header `More ▾` dropdown + Languages item (partial F-060 collapse), sitemap languages loops, and 13 new leak probes (45 total) over `out/pt` + `out/es`.
+
+
+**Totals:** 15 P0 · 38 P1 · 30+ P2 (incl. legacy mapping) + 8 content-quality defects (F-104–F-111) — sequenced across Phases 1–7 in [PLAN.md](./PLAN.md); F-104–F-111 closed ahead of Phase 9; Phase 1 harness items closed 2026-10-20; Phase 2 critical-bug items closed 2026-10-21 (residual: error.tsx boundaries → Phase 7); Phase 3 i18n items closed 2026-10-22 (residual: F-053 missing translations → Phase 9); Phase 4 quizzes app closed 2026-10-22 (residuals: question banks → Phase 9, header F-060 full redesign → Phase 7); Phase 5 languages app closed 2026-10-23 (residuals: home Languages rail → Phase 8, language course tracks → Phase 9, full header redesign → Phase 7).

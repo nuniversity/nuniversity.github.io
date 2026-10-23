@@ -275,9 +275,9 @@ export function ExamRunner({
         <AnimatePresence mode="wait">
           <motion.div
             key={question.id + index}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.2 }}
             className="bg-card border rounded-2xl p-6 mb-6"
           >
@@ -397,6 +397,10 @@ export function ExamRunner({
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
+              role="dialog"
+              aria-modal="true"
+              aria-label={dict.quizzes?.exam?.submit_title || 'Submit Exam?'}
+              onKeyDown={(e) => { if (e.key === 'Escape') onCloseSubmit() }}
               className="bg-card border rounded-2xl p-6 max-w-sm w-full shadow-2xl"
             >
               <div className="text-center mb-5">
@@ -441,6 +445,7 @@ export function ExamRunner({
               <div className="flex gap-3">
                 <button
                   type="button"
+                  autoFocus
                   onClick={onCloseSubmit}
                   className="flex-1 py-2.5 rounded-xl border font-semibold hover:bg-muted transition-colors"
                 >

@@ -92,6 +92,9 @@ if (exists('sitemap.xml')) {
   ok(sm.includes(`${ORIGIN}/pt/`), 'sitemap contains pt root')
   ok(sm.includes(`${ORIGIN}/en/quizzes/`), 'sitemap contains en/quizzes hub')
   ok(sm.includes(`${ORIGIN}/en/quizzes/snowpro-core-cof-c03/`), 'sitemap contains quiz detail')
+  ok(sm.includes(`${ORIGIN}/en/languages/`), 'sitemap contains en/languages hub')
+  ok(sm.includes(`${ORIGIN}/en/languages/en-pt/en-to-pt/`), 'sitemap contains language activity')
+  ok(!sm.includes('/games/vocabulary/'), 'sitemap has no legacy vocabulary URLs')
 }
 
 ok(exists('ads.txt'), 'ads.txt exists (lowercase)')
@@ -154,9 +157,42 @@ if (!coreOnly) {
     const gamesHub = read('en/games/index.html')
     ok(!gamesHub.includes('/en/games/quiz/'), 'games hub has no quiz card links')
     ok(!gamesHub.toLowerCase().includes('snowpro'), 'games hub has no snowpro card')
+    ok(!gamesHub.includes('/en/games/vocabulary/'), 'games hub has no vocabulary card links')
+    ok(gamesHub.includes('/en/languages/'), 'games hub cross-links to languages hub')
   } else {
     ok(false, 'games hub exists')
   }
+
+  console.log('  -- languages app --')
+  const LANG_PAIR = 'en-pt'
+  const LANG_SLUG = 'en-to-pt'
+  for (const loc of locales) {
+    ok(exists(`${loc}/languages/index.html`), `${loc}/languages hub exported`)
+    ok(exists(`${loc}/languages/${LANG_PAIR}/index.html`), `${loc}/languages pair exported`)
+    ok(exists(`${loc}/languages/${LANG_PAIR}/${LANG_SLUG}/index.html`), `${loc}/languages player exported`)
+    const stubRel = `${loc}/games/vocabulary/${LANG_SLUG}/index.html`
+    ok(exists(stubRel), `${loc} vocabulary stub exported`)
+    if (exists(stubRel)) {
+      const stubHtml = read(stubRel)
+      ok(stubHtml.includes('noindex'), `${loc} language stub has noindex`)
+      ok(stubHtml.includes(`href="/${loc}/languages/${LANG_PAIR}/${LANG_SLUG}/"`), `${loc} language stub links to new URL`)
+    }
+  }
+  let languageActivityCount = 0
+  if (exists('en/languages')) {
+    const countPlayers = (dir) => {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const full = path.join(dir, entry.name)
+        if (entry.isDirectory()) countPlayers(full)
+        else if (entry.name === 'index.html' && path.dirname(full) !== path.join(OUT, 'en', 'languages')) {
+          const rel = path.relative(path.join(OUT, 'en', 'languages'), full).split(path.sep).join('/')
+          if (rel.split('/').length === 3) languageActivityCount++
+        }
+      }
+    }
+    countPlayers(path.join(OUT, 'en', 'languages'))
+  }
+  ok(languageActivityCount === 5, `5 language players exported under en/languages (found ${languageActivityCount})`)
   const examLessonEn = 'en/courses/aws-clf-c02/15-exam-simulation-a/index.html'
   const examLessonPt = 'pt/courses/aws-clf-c02/15-exam-simulation-a/index.html'
   if (exists(examLessonEn)) {
@@ -204,6 +240,18 @@ if (!coreOnly) {
     'Back to Quizzes',
     'This quiz has moved — continue to the Quizzes section',
     'Quizzes — Tests & Certification Practice',
+    'Language Practice — Flashcards',
+    'Learn languages through flashcards and translation quizzes',
+    'Translation Quiz',
+    'Search language activities...',
+    'No activities match your search',
+    'Back to Languages',
+    'This activity has moved — continue to the Languages section',
+    'Language courses',
+    'Coming soon — new language tracks are on the way.',
+    'Best score:',
+    'Not attempted',
+    'Number of pairs:',
   ]
   const LEAK_WAIVERS = []
   const LESSON_BODY_RE = /^\/(pt|es)\/courses\/[^/]+\/[^/]+\/index\.html$/

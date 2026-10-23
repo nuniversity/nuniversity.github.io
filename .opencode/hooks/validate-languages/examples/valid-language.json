@@ -1,0 +1,259 @@
+{
+  "id": "valid-language",
+  "title": "Everyday English to Portuguese",
+  "description": "Forty essential English to Portuguese vocabulary words",
+  "difficulty": "beginner",
+  "category": "vocabulary",
+  "language_pair": {
+    "source": "en",
+    "target": "pt"
+  },
+  "words": [
+    {
+      "id": "w01",
+      "source": "hello",
+      "target": "olá",
+      "context": "A greeting"
+    },
+    {
+      "id": "w02",
+      "source": "goodbye",
+      "target": "adeus",
+      "context": "A farewell"
+    },
+    {
+      "id": "w03",
+      "source": "please",
+      "target": "por favor",
+      "context": "A polite request"
+    },
+    {
+      "id": "w04",
+      "source": "thank you",
+      "target": "obrigado",
+      "context": "An expression of gratitude"
+    },
+    {
+      "id": "w05",
+      "source": "yes",
+      "target": "sim",
+      "context": "An affirmative answer"
+    },
+    {
+      "id": "w06",
+      "source": "no",
+      "target": "não",
+      "context": "A negative answer"
+    },
+    {
+      "id": "w07",
+      "source": "water",
+      "target": "água",
+      "context": "The liquid we drink"
+    },
+    {
+      "id": "w08",
+      "source": "bread",
+      "target": "pão",
+      "context": "A baked food made from flour"
+    },
+    {
+      "id": "w09",
+      "source": "house",
+      "target": "casa",
+      "context": "A place where people live"
+    },
+    {
+      "id": "w10",
+      "source": "school",
+      "target": "escola",
+      "context": "A place where students learn"
+    },
+    {
+      "id": "w11",
+      "source": "friend",
+      "target": "amigo",
+      "context": "A person you like and trust"
+    },
+    {
+      "id": "w12",
+      "source": "family",
+      "target": "família",
+      "context": "A group of relatives"
+    },
+    {
+      "id": "w13",
+      "source": "day",
+      "target": "dia",
+      "context": "A period of twenty-four hours"
+    },
+    {
+      "id": "w14",
+      "source": "night",
+      "target": "noite",
+      "context": "The dark period when people sleep"
+    },
+    {
+      "id": "w15",
+      "source": "sun",
+      "target": "sol",
+      "context": "The star that gives us light"
+    },
+    {
+      "id": "w16",
+      "source": "moon",
+      "target": "lua",
+      "context": "The body that orbits the earth"
+    },
+    {
+      "id": "w17",
+      "source": "book",
+      "target": "livro",
+      "context": "Pages bound together with words"
+    },
+    {
+      "id": "w18",
+      "source": "work",
+      "target": "trabalho",
+      "context": "Activity done to earn a living"
+    },
+    {
+      "id": "w19",
+      "source": "love",
+      "target": "amor",
+      "context": "A strong feeling of affection"
+    },
+    {
+      "id": "w20",
+      "source": "peace",
+      "target": "paz",
+      "context": "Freedom from war and conflict"
+    },
+    {
+      "id": "w21",
+      "source": "time",
+      "target": "tempo",
+      "context": "The indefinite continued progress of existence"
+    },
+    {
+      "id": "w22",
+      "source": "world",
+      "target": "mundo",
+      "context": "The earth and all its people"
+    },
+    {
+      "id": "w23",
+      "source": "food",
+      "target": "comida",
+      "context": "What people and animals eat"
+    },
+    {
+      "id": "w24",
+      "source": "city",
+      "target": "cidade",
+      "context": "A large town"
+    },
+    {
+      "id": "w25",
+      "source": "money",
+      "target": "dinheiro",
+      "context": "A medium of exchange"
+    },
+    {
+      "id": "w26",
+      "source": "health",
+      "target": "saúde",
+      "context": "The state of being free from illness"
+    },
+    {
+      "id": "w27",
+      "source": "music",
+      "target": "música",
+      "context": "Organized sounds and silence"
+    },
+    {
+      "id": "w28",
+      "source": "happy",
+      "target": "feliz",
+      "context": "Feeling or showing pleasure"
+    },
+    {
+      "id": "w29",
+      "source": "beautiful",
+      "target": "bonito",
+      "context": "Pleasing to the senses"
+    },
+    {
+      "id": "w30",
+      "source": "big",
+      "target": "grande",
+      "context": "Of considerable size"
+    },
+    {
+      "id": "w31",
+      "source": "small",
+      "target": "pequeno",
+      "context": "Of limited size"
+    },
+    {
+      "id": "w32",
+      "source": "fast",
+      "target": "rápido",
+      "context": "Moving at high speed"
+    },
+    {
+      "id": "w33",
+      "source": "slow",
+      "target": "lento",
+      "context": "Moving without haste"
+    },
+    {
+      "id": "w34",
+      "source": "new",
+      "target": "novo",
+      "context": "Recently made or discovered"
+    },
+    {
+      "id": "w35",
+      "source": "old",
+      "target": "velho",
+      "context": "Having lived long"
+    },
+    {
+      "id": "w36",
+      "source": "morning",
+      "target": "manhã",
+      "context": "The early part of the day"
+    },
+    {
+      "id": "w37",
+      "source": "evening",
+      "target": "tarde",
+      "context": "The part of the day between afternoon and night"
+    },
+    {
+      "id": "w38",
+      "source": "week",
+      "target": "semana",
+      "context": "A period of seven days"
+    },
+    {
+      "id": "w39",
+      "source": "year",
+      "target": "ano",
+      "context": "A period of twelve months"
+    },
+    {
+      "id": "w40",
+      "source": "question",
+      "target": "pergunta",
+      "context": "A sentence that asks for information"
+    },
+    {
+      "id": "w41",
+      "source": "answer",
+      "target": "resposta",
+      "context": "A reply to a question"
+    }
+  ]
+}

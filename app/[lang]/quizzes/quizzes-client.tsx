@@ -101,6 +101,7 @@ export function QuizzesClient({ lang, quizzes, dict }: QuizzesClientProps) {
             <input
               type="text"
               placeholder={tpl(dict.quizzes?.search_placeholder || 'Search quizzes...', {})}
+              aria-label={dict.quizzes?.search_placeholder || 'Search quizzes'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-3 rounded-lg border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
@@ -122,6 +123,7 @@ export function QuizzesClient({ lang, quizzes, dict }: QuizzesClientProps) {
                   key={kind}
                   type="button"
                   onClick={() => setKindFilter(kind)}
+                  aria-pressed={isActive}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
                     isActive
                       ? 'bg-primary text-primary-foreground'
@@ -145,7 +147,7 @@ export function QuizzesClient({ lang, quizzes, dict }: QuizzesClientProps) {
               id="quiz-category-filter"
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
-              className="px-3 py-1.5 rounded-lg border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              className="px-3 py-1.5 rounded-lg border bg-background text-foreground text-sm max-w-full focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="all">
                 {dict.quizzes?.filters?.category_all || 'All categories'}

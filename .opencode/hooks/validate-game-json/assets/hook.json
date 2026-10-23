@@ -1,7 +1,7 @@
 {
   "name": "validate-game-json",
   "version": "1.0.0",
-  "description": "Validates vocabulary game JSON files",
+  "description": "Validates game JSON files",
   "type": "hook",
   "event": "file.write",
   "pattern": "content/games/**/*.json",

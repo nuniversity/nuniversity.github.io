@@ -46,6 +46,11 @@
       "title": "Quizzes — Testes e Prática de Certificação",
       "description": "Quizzes de certificação, testes de prática e simulações de exame cronometradas com pontuação, histórico de tentativas e certificados imprimíveis.",
       "notFound": "Quiz não encontrado"
+    },
+    "languages": {
+      "title": "Prática de Idiomas — Flashcards e Quizzes de Tradução",
+      "description": "Flashcards interativos e quizzes de tradução para inglês, português, espanhol e francês com acompanhamento de progresso.",
+      "notFound": "Atividade de idioma não encontrada"
     }
   },
   "notFound": {
@@ -117,7 +122,9 @@
     "library": "Biblioteca",
     "roadmaps": "Roadmaps",
     "about": "Sobre",
-    "contact": "Contato"
+    "contact": "Contato",
+    "languages": "Idiomas",
+    "more": "Mais"
   },
   "hero": {
     "badge": "Plataforma de Aprendizado Interativo",
@@ -407,7 +414,6 @@
     "play_again": "Jogar Novamente",
     "more_games": "Mais Jogos",
     "categories": {
-      "vocabulary": "Idiomas - Vocabulário",
       "grammar": "Idiomas - Gramática",
       "math": "Matemática",
       "coding": "Programação",
@@ -439,54 +445,6 @@
       "beginner": "Iniciante",
       "intermediate": "Intermediário",
       "advanced": "Avançado"
-    },
-    "instructions": {
-      "vocabulary_match": [
-        "Clique nos cartões para selecioná-los",
-        "Combine palavras no idioma de origem com suas traduções",
-        "Encontre todos os pares para completar o jogo",
-        "Tente completar com a maior precisão no menor tempo!"
-      ]
-    },
-    "flashcards": {
-      "statistics": "Estatísticas",
-      "total": "Total",
-      "new": "Novos",
-      "learning": "Aprendendo",
-      "mastered": "Dominados",
-      "current_session": "Sessão Atual",
-      "reviewed": "Revisados",
-      "correct": "Acertos",
-      "errors": "Erros",
-      "mode_all": "Todas ({n})",
-      "mode_new": "Novas ({n})",
-      "all_categories": "Todas categorias",
-      "no_cards": "Nenhuma carta disponível",
-      "no_cards_hint": "Tente outro modo ou categoria.",
-      "session_complete": "Sessão completa!",
-      "reviewed_n_cards": "Revisou {n} cartas nesta sessão.",
-      "n_correct_n_errors": "{n} acertos · {n2} erros",
-      "restart": "Reiniciar",
-      "view_statistics": "Ver estatísticas",
-      "progress_of": "{current} de {total}",
-      "view_images": "Ver imagens",
-      "listen_pronunciation": "Ouvvir pronúncia",
-      "tap_to_translate": "Toque para ver a tradução",
-      "categories_label": "Categorias:",
-      "pronunciation": "Pronúncia",
-      "example": "Exemplo",
-      "reset_confirm": "Resetar todo o progresso?",
-      "import_success": "Progresso importado com sucesso!",
-      "import_error": "Falha ao importar: formato de arquivo inválido",
-      "export_success": "Progresso exportado!",
-      "reset_success": "Progresso resetado!",
-      "mode_learning": "Aprendendo ({n})",
-      "mode_learned": "Aprendidas ({n})",
-      "forgot": "Esqueci",
-      "remember": "Lembrei",
-      "swipe_hint": "← Esqueci · Lembrei →",
-      "import_migrated": "Progresso importado e atualizado para o novo formato!",
-      "learned": "Aprendidas"
     },
     "conversation": {
       "back_to_games": "Voltar aos Jogos",
@@ -612,6 +570,10 @@
     "back_to_results": "Voltar aos Resultados",
     "play_again": "Jogar Novamente",
     "more_quizzes": "Mais Quizzes",
+    "promo": {
+      "title": "Quizzes de Certificação",
+      "text": "Testes de prática e simulações de exame cronometradas com pontuação, feedback instantâneo e certificados imprimíveis."
+    },
     "exit": "Sair",
     "open": "Abrir",
     "explanation": "💡 Explicação",
@@ -640,7 +602,6 @@
       "passing": "Aprovação {score}%",
       "best": "Melhor {score}%",
       "not_attempted": "Não realizado",
-      "languages": "Idiomas",
       "domains": "Domínios"
     },
     "difficulty": {
@@ -1521,6 +1482,105 @@
       "empty_bucket": "Vazio — clique para colocar o item selecionado",
       "bucket_aria": "Categoria: {label}",
       "score_feedback": "{count} / {total} corretos — os itens vermelhos estão na categoria errada ou por posicionar."
+    }
+  },
+  "languages": {
+    "title": "Prática de Idiomas",
+    "subtitle": "Aprenda idiomas com flashcards e quizzes de tradução",
+    "search_placeholder": "Buscar atividades de idiomas...",
+    "no_results": "Nenhuma atividade corresponde à sua busca",
+    "back_to_languages": "Voltar a Idiomas",
+    "open": "Abrir",
+    "promo": {
+      "title": "Prática de Idiomas",
+      "text": "Flashcards e quizzes de tradução para 4 pares de idiomas com acompanhamento de progresso."
+    },
+    "redirect_fallback": "Esta atividade foi movida — continue na seção Idiomas",
+    "filters": {
+      "kind": "Tipo",
+      "all": "Todas",
+      "difficulty": "Dificuldade"
+    },
+    "types": {
+      "flashcards": "Flashcards",
+      "matching": "Quiz de Tradução"
+    },
+    "card": {
+      "words": "{n} palavras",
+      "pair": "{source} → {target}",
+      "best_score": "Melhor {score}%",
+      "not_attempted": "Não tentado",
+      "activities_count": "{n} atividades",
+      "completed_count": "{n} concluídas"
+    },
+    "tracks": {
+      "title": "Cursos de idiomas",
+      "coming_soon": "Em breve — novas trilhas de idiomas estão a caminho."
+    },
+    "matching": {
+      "cards_count": "{n} cartões",
+      "more_activities": "Mais Idiomas",
+      "best_score": "Melhor pontuação: {score}%",
+      "subtitle": "Domine novas habilidades através de jogos e desafios interativos",
+      "restart": "Reiniciar",
+      "how_to_play": "Como Jogar",
+      "congratulations": "Parabéns!",
+      "game_complete": "Você completou o jogo!",
+      "play_again": "Jogar Novamente",
+      "instructions": [
+        "Clique nos cartões para selecioná-los",
+        "Combine palavras no idioma de origem com suas traduções",
+        "Encontre todos os pares para completar o jogo",
+        "Tente completar com a maior precisão no menor tempo!"
+      ],
+      "stats": {
+        "score": "Pontuação",
+        "time": "Tempo",
+        "matches": "Pares",
+        "accuracy": "Precisão",
+        "final_score": "Pontuação Final"
+      },
+      "num_pairs": "Número de pares:"
+    },
+    "flashcards": {
+      "statistics": "Estatísticas",
+      "total": "Total",
+      "new": "Novos",
+      "learning": "Aprendendo",
+      "mastered": "Dominados",
+      "current_session": "Sessão Atual",
+      "reviewed": "Revisados",
+      "correct": "Acertos",
+      "errors": "Erros",
+      "mode_all": "Todas ({n})",
+      "mode_new": "Novas ({n})",
+      "all_categories": "Todas categorias",
+      "no_cards": "Nenhuma carta disponível",
+      "no_cards_hint": "Tente outro modo ou categoria.",
+      "session_complete": "Sessão completa!",
+      "reviewed_n_cards": "Revisou {n} cartas nesta sessão.",
+      "n_correct_n_errors": "{n} acertos · {n2} erros",
+      "restart": "Reiniciar",
+      "view_statistics": "Ver estatísticas",
+      "progress_of": "{current} de {total}",
+      "view_images": "Ver imagens",
+      "listen_pronunciation": "Ouvvir pronúncia",
+      "tap_to_translate": "Toque para ver a tradução",
+      "categories_label": "Categorias:",
+      "pronunciation": "Pronúncia",
+      "example": "Exemplo",
+      "reset_confirm": "Resetar todo o progresso?",
+      "import_success": "Progresso importado com sucesso!",
+      "import_error": "Falha ao importar: formato de arquivo inválido",
+      "export_success": "Progresso exportado!",
+      "reset_success": "Progresso resetado!",
+      "mode_learning": "Aprendendo ({n})",
+      "mode_learned": "Aprendidas ({n})",
+      "forgot": "Esqueci",
+      "remember": "Lembrei",
+      "swipe_hint": "← Esqueci · Lembrei →",
+      "import_migrated": "Progresso importado e atualizado para o novo formato!",
+      "learned": "Aprendidas"
     }
   }
 }

@@ -3,7 +3,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Gamepad2, Search, Trophy, Target, Brain, Code, BookOpen, Sparkles, Zap, Atom, Heart } from 'lucide-react'
+import { Gamepad2, Search, Trophy, Target, Brain, Code, BookOpen, Sparkles, Zap, Atom, Heart, ArrowRight, Languages } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { GameMetadata } from '@/lib/games/get-game-content'
 
@@ -48,7 +48,6 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
   // Category icons
   function getCategoryIcon(category: string) {
     const icons: Record<string, any> = {
-      'vocabulary': BookOpen,
       'grammar': BookOpen,
       'math': Target,
       'coding': Code,
@@ -171,6 +170,53 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
               </div>
             )
           })}
+        </div>
+
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Link
+            href={`/${lang}/quizzes/`}
+            className="group block bg-card border-2 border-dashed border-primary/30 rounded-2xl p-6 hover:border-primary hover:shadow-xl transition-all duration-300"
+          >
+            <div className="flex items-start gap-4 min-w-0">
+              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
+                <Trophy className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg font-bold mb-1 group-hover:text-primary transition-colors line-clamp-2">
+                  {dict.quizzes?.promo?.title || 'Certification Quizzes'}
+                </h3>
+                <p className="text-muted-foreground text-sm line-clamp-3">
+                  {dict.quizzes?.promo?.text || 'Practice tests and timed mock exams with scoring, instant feedback and printable certificates.'}
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 pt-4 border-t flex items-center justify-between">
+              <span className="text-sm font-medium text-primary">{dict.quizzes?.open || 'Open'}</span>
+              <ArrowRight className="w-4 h-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
+            </div>
+          </Link>
+          <Link
+            href={`/${lang}/languages/`}
+            className="group block bg-card border-2 border-dashed border-primary/30 rounded-2xl p-6 hover:border-primary hover:shadow-xl transition-all duration-300"
+          >
+            <div className="flex items-start gap-4 min-w-0">
+              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex items-center justify-center">
+                <Languages className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg font-bold mb-1 group-hover:text-primary transition-colors line-clamp-2">
+                  {dict.languages?.promo?.title || 'Language Practice'}
+                </h3>
+                <p className="text-muted-foreground text-sm line-clamp-3">
+                  {dict.languages?.promo?.text || 'Flashcards and translation quizzes for 4 language pairs with progress tracking.'}
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 pt-4 border-t flex items-center justify-between">
+              <span className="text-sm font-medium text-primary">{dict.languages?.open || 'Open'}</span>
+              <ArrowRight className="w-4 h-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
+            </div>
+          </Link>
         </div>
       </div>
     </div>

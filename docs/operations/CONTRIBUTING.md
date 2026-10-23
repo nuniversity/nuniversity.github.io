@@ -23,7 +23,7 @@ Thank you for your interest in contributing to NUniversity! This document outlin
 
 | Type | Examples |
 |---|---|
-| 📚 **Content** | Add a new course, lesson, library resource, or vocabulary game |
+| 📚 **Content** | Add a new course, lesson, library resource, or language activity |
 | 🌍 **Translations** | Translate courses, tools, or UI strings to Portuguese or Spanish |
 | 🐛 **Bug Fixes** | Fix rendering issues, broken links, typos, or incorrect behavior |
 | ✨ **Features** | Implement new tools, game types, or UI improvements |
@@ -147,7 +147,7 @@ git commit -m "docs: add CONTRIBUTING guide"
 
 ## 5. Contributing Content
 
-Content contributions are the most impactful way to help NUniversity grow. You can add new courses, library resources, or vocabulary games **without writing any code**.
+Content contributions are the most impactful way to help NUniversity grow. You can add new courses, library resources, or language activities **without writing any code**.
 
 ### Adding a New Course
 
@@ -169,14 +169,15 @@ Quick checklist:
 - [ ] `url` is valid and accessible
 - [ ] `lastUpdated` is set (used for sorting)
 
-### Adding a Vocabulary Game
+### Adding a Language Activity
 
-See: **[CONTENT-MANAGEMENT.md — Games](./CONTENT-MANAGEMENT.md#5-vocabulary-games)**
+See: **[CONTENT-MANAGEMENT.md — Language Activities](./CONTENT-MANAGEMENT.md#5-language-activities-languages-app)**
 
 Quick checklist:
-- [ ] Create `content/games/vocabulary/{source}-to-{target}.json`
-- [ ] Minimum 20 word pairs
-- [ ] Each word pair has `id`, `source`, `target`
+- [ ] Create `content/languages/vocabulary/{source}-to-{target}.json`
+- [ ] Minimum 40 word pairs (validator-enforced)
+- [ ] Each word pair has `id`, `source`, `target`, `context`; `id` matches the filename
+- [ ] Validate: `OPENCODE_FILE_PATH=content/languages/vocabulary/{file}.json python .opencode/hooks/validate-languages/scripts/validate_languages.py`
 
 ---
 

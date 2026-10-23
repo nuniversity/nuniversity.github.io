@@ -470,6 +470,17 @@
 
 /* ── Print ──────────────────────────────────────────────────────────────────── */
 @media print {
+  .certificate-print {
+    break-inside: avoid;
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none;
+  }
+
+  .certificate-print * {
+    color: #000 !important;
+  }
+
   .mermaid-wrapper {
     break-inside: avoid;
     box-shadow: none;

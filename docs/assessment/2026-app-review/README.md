@@ -52,7 +52,7 @@ quizzes/simulations, games), and ready to resume content creation.
 | Tools | 10 (3 locales of frontmatter; 1/10 uses dictionaries) |
 | Library resources | 59 (8 EN, 51 PT, 0 ES) |
 | Roadmaps | 1 |
-| Locales | en, pt, es (dictionary key parity complete: 434 keys) |
+| Locales | en, pt, es (dictionary key parity complete — `dict-parity` 5/5, incl. `languages.*`) |
 
 ## Status of this review
 
@@ -62,4 +62,11 @@ Execution happens phase-by-phase per [PLAN.md](./PLAN.md).
 - **Phase 1 (Harness & CI): ✅ complete — 2026-10-20.** Evidence in [PLAN.md](./PLAN.md) Phase 1 status block,
   harness items closed in [FIXES.md](./FIXES.md) (Phase 1 closeout), gating scope in [GATE-WAIVERS.md](./GATE-WAIVERS.md).
   Changes are in the working tree, committed by the maintainer.
-- Phases 2–9: not started.
+- **Phase 2 (Critical bugs): ✅ complete — 2026-10-21** (Phase 2 closeout in [FIXES.md](./FIXES.md)).
+- **Phase 3 (i18n completeness): ✅ complete — 2026-10-22** (deep plan + status in [PLAN.md](./PLAN.md),
+  closeout in [FIXES.md](./FIXES.md)).
+- **Phase 4 (Quizzes app): ✅ complete — 2026-10-22** (deep plan in [PLAN-PHASE4.md](./PLAN-PHASE4.md),
+  status in [PLAN.md](./PLAN.md), closeout in [FIXES.md](./FIXES.md)).
+- **Phase 5 (Languages app): ✅ complete — 2026-10-23** (deep plan in [PLAN-PHASE5.md](./PLAN-PHASE5.md),
+  status in [PLAN.md](./PLAN.md), closeout in [FIXES.md](./FIXES.md)).
+- Phases 6–9: not started.

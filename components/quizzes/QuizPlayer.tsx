@@ -55,7 +55,7 @@ export function QuizPlayer({
   return (
     <div className="container-custom py-12">
       <div className="max-w-2xl mx-auto">
-        <div className="flex items-center justify-between mb-6 gap-4">
+        <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
           <button
             type="button"
             onClick={onExit}
@@ -98,13 +98,13 @@ export function QuizPlayer({
         <AnimatePresence mode="wait">
           <motion.div
             key={question.id}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25 }}
             className="bg-card border rounded-2xl p-6 mb-6"
           >
-            <h2 className="text-xl font-semibold leading-relaxed mb-6">{question.question}</h2>
+            <h2 className="text-xl font-semibold leading-relaxed mb-6 break-words">{question.question}</h2>
             <div className="space-y-3">
               {question.options.map((option, idx) => {
                 const isSelected = selectedOption === idx
@@ -120,7 +120,7 @@ export function QuizPlayer({
                     key={idx}
                     type="button"
                     onClick={() => onSelect(idx)}
-                    disabled={isAnswered}
+                    aria-disabled={isAnswered}
                     className={`w-full text-left flex items-center gap-4 p-4 rounded-xl border-2 transition-all duration-200 ${cls}`}
                   >
                     <span className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm ${

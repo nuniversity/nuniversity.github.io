@@ -195,6 +195,7 @@ export function QuizHome({
                     </div>
 
                     <button
+                      type="button"
                       onClick={onStartExam}
                       className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
                     >

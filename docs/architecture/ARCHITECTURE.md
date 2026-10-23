@@ -179,7 +179,13 @@ app/
     │   ├── page.tsx      ← /en/games
     │   └── vocabulary/
     │       └── [slug]/
-    │           └── page.tsx  ← /en/games/vocabulary/en-to-pt
+    │           └── page.tsx  ← /en/games/vocabulary/en-to-pt (redirect stub → /en/languages/en-pt/en-to-pt)
+    ├── languages/
+    │   ├── page.tsx      ← /en/languages
+    │   └── [pair]/
+    │       ├── page.tsx  ← /en/languages/en-pt
+    │       └── [activitySlug]/
+    │           └── page.tsx  ← /en/languages/en-pt/en-to-pt
     ├── library/page.tsx  ← /en/library
     └── tools/
         ├── page.tsx      ← /en/tools
@@ -244,7 +250,7 @@ sequenceDiagram
         LibT-->>GSP: tool data
 
         GSP->>LibG: get-game-content.ts
-        LibG->>Content: reads /games/vocabulary/*.json
+        LibG->>Content: reads /games/{category}/*.json
         LibG-->>GSP: game data
     end
 
@@ -316,7 +322,14 @@ content/tools/{tool-slug}/{lang}.md
 ### Games
 
 ```
-content/games/vocabulary/{game-id}.json
+content/games/{category}/{game-id}.json
+# JSON with id, title, description, difficulty, category, ...
+```
+
+### Language activities (Languages app)
+
+```
+content/languages/vocabulary/{activity-id}.json
 # JSON with id, title, description, difficulty, language_pair, words[]
 ```
 

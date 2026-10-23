@@ -21,10 +21,10 @@ flowchart TD
     end
 
     subgraph FEAT[Features]
-        F1[CONTENT-MANAGEMENT.md<br/>Courses, tools, library, games]
+        F1[CONTENT-MANAGEMENT.md<br/>Courses, tools, library, games, activities]
         F2[INTERNATIONALIZATION.md<br/>i18n routing, dictionaries, SEO]
         F3[ROADMAPS.md<br/>Learning paths, progress tracking]
-        F4[GAMES.md<br/>Quiz, vocabulary, game schemas]
+        F4[GAMES.md<br/>Game schemas, lifecycle, quality]
         F5[MARKDOWN-RENDERER.md<br/>Enhanced MD features]
     end
 
@@ -72,14 +72,16 @@ open http://localhost:3000  # (or :3001 if 3000 is in use)
 
 ## Platform Overview
 
-NUniversity is composed of **seven main features**, all accessible via a locale-prefixed URL (e.g. `/en/`, `/pt/`, `/es/`):
+NUniversity is composed of **nine main features**, all accessible via a locale-prefixed URL (e.g. `/en/`, `/pt/`, `/es/`):
 
 | Feature | URL Pattern | Description |
 |---|---|---|
 | **Home** | `/{lang}` | Landing page with hero and features |
 | **Courses** | `/{lang}/courses` | 38 Markdown-driven learning paths |
 | **Tools** | `/{lang}/tools` | 10 interactive productivity/study tools |
-| **Games** | `/{lang}/games` | 11 games across 7 categories |
+| **Games** | `/{lang}/games` | 7 games across 6 categories |
+| **Languages** | `/{lang}/languages` | 5 vocabulary activities (matching & flashcards) |
+| **Quizzes** | `/{lang}/quizzes` | Certification quizzes & timed mock exams |
 | **Library** | `/{lang}/library` | 59+ curated external learning resources |
 | **Roadmaps** | `/{lang}/roadmaps` | Structured learning paths with progress |
 | **About** | `/{lang}/about` | Mission, vision, team |
@@ -105,7 +107,7 @@ Understand how the system is built.
 
 | Document | Lines | What You'll Learn |
 |---|---|---|
-| [ARCHITECTURE.md](./architecture/ARCHITECTURE.md) | 421 | C4 system diagrams, folder structure, data flow, theme system, key design decisions |
+| [ARCHITECTURE.md](./architecture/ARCHITECTURE.md) | 438 | C4 system diagrams, folder structure, data flow, theme system, key design decisions |
 | [COMPONENTS.md](./architecture/COMPONENTS.md) | 714 | Every UI component — props, usage patterns, server vs client conventions |
 
 ### Features
@@ -114,10 +116,10 @@ How each feature works and how to extend it.
 
 | Document | Lines | What You'll Learn |
 |---|---|---|
-| [CONTENT-MANAGEMENT.md](./features/CONTENT-MANAGEMENT.md) | 573 | Adding courses, tools, library resources, games — file formats, frontmatter reference |
-| [INTERNATIONALIZATION.md](./features/INTERNATIONALIZATION.md) | 463 | i18n routing, dictionary loading, locale fallback, adding new languages |
+| [CONTENT-MANAGEMENT.md](./features/CONTENT-MANAGEMENT.md) | 580 | Adding courses, tools, library resources, games, language activities — file formats, frontmatter reference |
+| [INTERNATIONALIZATION.md](./features/INTERNATIONALIZATION.md) | 485 | i18n routing, dictionary loading, locale fallback, adding new languages |
 | [ROADMAPS.md](./features/ROADMAPS.md) | 621 | Roadmap architecture, step types, progress tracking, data model |
-| [GAMES.md](./features/GAMES.md) | 565 | Game system, quiz/vocabulary schemas, lifecycle, content quality standards |
+| [GAMES.md](./features/GAMES.md) | 278 | Game system, lifecycle, content quality standards (vocabulary content moved to Languages — see CONTENT-MANAGEMENT.md) |
 | [MARKDOWN-RENDERER.md](./features/MARKDOWN-RENDERER.md) | 216 | Enhanced Markdown: code blocks, alert boxes, Mermaid diagrams, tables |
 
 ### Operations
@@ -126,9 +128,9 @@ How to deploy, test, and contribute.
 
 | Document | Lines | What You'll Learn |
 |---|---|---|
-| [DEPLOYMENT.md](./operations/DEPLOYMENT.md) | 398 | GitHub Pages config, CI/CD pipeline, static export constraints |
-| [TESTING.md](./operations/TESTING.md) | 267 | 5-phase test plan (~246 tests), mocking strategy, Vitest setup |
-| [CONTRIBUTING.md](./operations/CONTRIBUTING.md) | 478 | Branching, commit conventions, PR process, code style |
+| [DEPLOYMENT.md](./operations/DEPLOYMENT.md) | 409 | GitHub Pages config, CI/CD pipeline, static export constraints |
+| [TESTING.md](./operations/TESTING.md) | 309 | Test plan & suites (1,036 vitest / 566 pytest), mocking strategy, Vitest setup |
+| [CONTRIBUTING.md](./operations/CONTRIBUTING.md) | 495 | Branching, commit conventions, PR process, code style |
 
 ### AI & Agents
 
@@ -136,8 +138,8 @@ AI-powered content generation and development workflows.
 
 | Document | Lines | What You'll Learn |
 |---|---|---|
-| [AGENTS.md](./ai/AGENTS.md) | 353 | Course Writer & Game Builder agents, usage templates, LLM config |
-| [OPENCODE-HARNESS.md](./ai/OPENCODE-HARNESS.md) | 1276 | Deterministic agentic harness: hooks, skills, memory, agents |
+| [AGENTS.md](./ai/AGENTS.md) | 397 | Course Writer & Game Builder agents, usage templates, LLM config |
+| [OPENCODE-HARNESS.md](./ai/OPENCODE-HARNESS.md) | 1954 | Deterministic agentic harness: hooks, skills, memory, agents |
 
 ### Reference
 
@@ -145,7 +147,7 @@ Assessment, setup, and implementation tracking.
 
 | Document | Lines | What You'll Learn |
 |---|---|---|
-| [2026-app-review/](./assessment/2026-app-review/README.md) | 8 files | **Current** — deep application + harness assessment, FIXES inventory, IMPROVEMENTS, quizzes/languages app designs, 9-phase PLAN |
+| [2026-app-review/](./assessment/2026-app-review/README.md) | 13 files | **Current** — deep application + harness assessment, FIXES inventory, IMPROVEMENTS, quizzes/languages app designs, 9-phase PLAN + deep plans (Phases 3–5) |
 | [ASSESSMENT.md](./assessment/ASSESSMENT.md) | 730 | Legacy codebase audit (Sep 6) — 4 critical bugs, 6 high, 8 medium, 7 low; cross-referenced in 2026-app-review/FIXES.md |
 | [GETTING-STARTED.md](./getting-started/GETTING-STARTED.md) | 284 | Dev setup via FNM, environment, scripts, troubleshooting |
 | [remaining-courses-documentation.md](./reference/remaining-courses-documentation.md) | 481 | Detailed plans for SE roadmap courses 4-10 |
@@ -179,11 +181,13 @@ Assessment, setup, and implementation tracking.
 | Lessons | 849 |
 | Languages | 3 (EN, PT, ES) |
 | Interactive Tools | 10 |
-| Games | 11 |
+| Games | 7 |
+| Language Activities | 5 (content/languages/vocabulary) |
+| Quizzes | 1 |
 | Library Resources | 59+ |
 | Roadmaps | 1 |
-| Documentation Files | 17 |
-| Documentation Lines | 8,000+ |
+| Documentation Files | 61 |
+| Documentation Lines | 34,900+ |
 
 ---
 

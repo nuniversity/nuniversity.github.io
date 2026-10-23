@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Language Activity JSON Schema",
+  "type": "object",
+  "required": ["id", "title", "description", "difficulty", "language_pair", "words"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique activity identifier (kebab-case, must match filename)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Activity title"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Brief description"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["beginner", "intermediate", "advanced"],
+      "description": "Difficulty level"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["vocabulary"],
+      "description": "Legacy category field (optional, always vocabulary)"
+    },
+    "gameType": {
+      "type": "string",
+      "enum": ["matching", "flashcards"],
+      "description": "Player type (defaults to matching when omitted)"
+    },
+    "language_pair": {
+      "type": "object",
+      "required": ["source", "target"],
+      "properties": {
+        "source": { "type": "string", "minLength": 2 },
+        "target": { "type": "string", "minLength": 2 }
+      }
+    },
+    "words": {
+      "type": "array",
+      "minItems": 40,
+      "items": {
+        "type": "object",
+        "required": ["id", "source", "target", "context"],
+        "properties": {
+          "id": { "type": "string" },
+          "source": { "type": "string" },
+          "target": { "type": "string" },
+          "context": { "type": "string" },
+          "emoji": { "type": "string" },
+          "pronunciation": { "type": "string" },
+          "example": { "type": "string" },
+          "exampleTranslation": { "type": "string" },
+          "isExpression": { "type": "boolean" },
+          "level": { "type": "string", "enum": ["A1", "A2", "B1"] }
+        }
+      }
+    }
+  }
+}

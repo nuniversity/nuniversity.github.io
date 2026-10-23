@@ -1,5 +1,9 @@
 # Design — Languages App
 
+> **Status: ✅ implemented (Phase 5, 2026-10-23).** Execution evidence in
+> [PLAN-PHASE5.md](./PLAN-PHASE5.md) + [PLAN.md](./PLAN.md); acceptance §9 verified
+> (verify_out invariants, 45-probe leak audit, ci_sim 16/16).
+
 New top-level section **`/[lang]/languages/`**: a full hub for language learning,
 launching with the five vocabulary games relocated out of Games.
 

@@ -26,36 +26,8 @@
     },
     "category": {
       "type": "string",
-      "enum": ["vocabulary"],
+      "enum": ["coding", "conversation", "logic", "math", "physics", "puzzles"],
       "description": "Game category"
-    }
-  },
-  "oneOf": [
-    { "$ref": "#/$defs/vocabulary" }
-  ],
-  "$defs": {
-    "vocabulary": {
-      "type": "object",
-      "required": ["language_pair", "words"],
-      "properties": {
-        "language_pair": {
-          "type": "object",
-          "required": ["source", "target"]
-        },
-        "words": {
-          "type": "array",
-          "minItems": 40,
-          "items": {
-            "type": "object",
-            "required": ["source", "target", "context"],
-            "properties": {
-              "source": { "type": "string" },
-              "target": { "type": "string" },
-              "context": { "type": "string" }
-            }
-          }
-        }
-      }
     }
   }
 }

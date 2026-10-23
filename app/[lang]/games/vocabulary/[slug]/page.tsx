@@ -1,28 +1,32 @@
-// app/[lang]/games/vocabulary/[slug]/page.tsx
 export const dynamic = 'force-static'
 export const revalidate = false
 
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import { type Locale } from '@/lib/i18n/config'
-import { getVocabularyGame, getAllGames } from '@/lib/games/get-game-content'
+import { getAllLanguageActivities, getPairForSlug } from '@/lib/languages/get-language-content'
 import { Metadata } from 'next'
-import { VocabularyGameClient } from './vocabulary-game-client'
-import { FlashcardGameClient } from './flashcard-game-client'
-import { notFound } from 'next/navigation'
+import { RedirectToLanguages } from '@/components/languages/RedirectToLanguages'
 
-interface VocabularyGamePageProps {
-  params: { 
+interface LanguageRedirectPageProps {
+  params: {
     lang: Locale
     slug: string
   }
 }
 
+interface MetadataLanguagesTexts {
+  languages?: {
+    title?: string
+    notFound?: string
+  }
+}
+
 export async function generateStaticParams() {
-  const allGames = await getAllGames()
-  const vocabularyGames = allGames.filter(game => game.category === 'vocabulary')
-  
-  return vocabularyGames.map(game => ({
-    slug: game.slug
+  const activities = await getAllLanguageActivities()
+  const slugs = Array.from(new Set(activities.map(activity => activity.slug)))
+
+  return slugs.map(slug => ({
+    slug
   }))
 }
 
@@ -32,44 +36,24 @@ export async function generateMetadata({
   params: { lang: Locale; slug: string }
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
-  const game = await getVocabularyGame(params.slug, params.lang)
-  
-  if (!game) {
-    return {
-      title: dict.metadata?.games?.notFound || 'Game Not Found',
-    }
-  }
-  
+  const metadata = dict.metadata as unknown as MetadataLanguagesTexts | undefined
+
   return {
-    title: game.title,
-    description: game.description,
+    title: metadata?.languages?.title || 'Language Practice',
+    robots: { index: false, follow: false },
   }
 }
 
-export default async function VocabularyGamePage({ params }: VocabularyGamePageProps) {
+export default async function LanguageRedirectPage({ params }: LanguageRedirectPageProps) {
   const { lang, slug } = params
   const dict = await getDictionary(lang)
-  
-  const game = await getVocabularyGame(slug, lang)
-  
-  if (!game) {
-    notFound()
-  }
-
-  if (game.gameType === 'flashcards') {
-    return (
-      <FlashcardGameClient 
-        lang={lang}
-        game={game}
-        dict={dict}
-      />
-    )
-  }
+  const pair = await getPairForSlug(slug)
 
   return (
-    <VocabularyGameClient 
+    <RedirectToLanguages
       lang={lang}
-      game={game}
+      slug={slug}
+      pair={pair}
       dict={dict}
     />
   )

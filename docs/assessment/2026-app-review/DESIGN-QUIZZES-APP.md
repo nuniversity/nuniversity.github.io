@@ -24,9 +24,9 @@ buried in Games.
 /[lang]/quizzes/[quizSlug]/               → quiz home: info, modes, history
 /[lang]/quizzes/[quizSlug]/practice       → practice mode (optional deep-linkable)
 /[lang]/quizzes/[quizSlug]/exam           → timed mock exam
-content/quizzes/{slug}/{en,pt,es}.json    → data (migrated from content/games/quiz/)
-content/quizzes/{slug}.json?              → decision: single schema file w/ locales
-                                             (see §4) — recommended: one JSON per slug
+content/quizzes/{slug}.json            → data (migrated from content/games/quiz/);
+                                          single schema file w/ `locales` slot (see §4) —
+                                          resolved D36, implemented per PLAN-PHASE4.md
 ```
 
 - **Route source:** new dir `app/[lang]/quizzes/` with `page.tsx` (hub),
@@ -116,7 +116,7 @@ Split the 1,448-line client into components with i18n from day one:
   `{date, mode, score, total, passed, perDomain}`; `quizzes-best-<slug>`;
   safe JSON access, versioned keys.
 - **i18n:** `dictionaries/*.json` → new `quizzes.*` namespace (~80 keys); zero
-  hardcoded EN (current client reads `dict` 0×).
+  hardcoded EN (shipped — client reads `dict` everywhere; enforced by leak probes).
 - **Responsive:** navigator/`grid-cols-4` stat rows get breakpoints (F-063 pattern).
 
 ## 7. Hub page design

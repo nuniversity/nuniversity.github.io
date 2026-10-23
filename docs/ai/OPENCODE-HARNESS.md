@@ -1,7 +1,7 @@
 # OpenCode Deterministic Agentic Harness — NUniversity
 
 > **Status:** Implemented
-> **Purpose:** Define a deterministic, quality-gated content generation harness using OpenCode's extensibility primitives (skills, hooks, plugins) to scale NUniversity's 38 courses, 11 games, and 10 tools.
+> **Purpose:** Define a deterministic, quality-gated content generation harness using OpenCode's extensibility primitives (skills, hooks, plugins) to scale NUniversity's 38 courses, 12 games, and 10 tools.
 
 ---
 
@@ -124,7 +124,7 @@ pytest tests/ -v | grep -c "SKIPPED" | grep -q "^0$"
 
 | Building Block | Implementation |
 |----------------|----------------|
-| **Entities** | `lesson.md`, `course.json`, `quiz.json`, `vocabulary.json` |
+| **Entities** | `lesson.md`, `course.json`, `quizzes/{slug}.json`, `vocabulary.json` |
 | **Value Objects** | Frontmatter (title, description, order, difficulty, duration), exit codes (0, 1, 2) |
 | **Aggregates** | Course = aggregate root containing lessons; Game = aggregate root containing questions |
 | **Repositories** | Filesystem as repository; `content/courses/{slug}/` as course repository |
@@ -164,7 +164,7 @@ pytest tests/ -v | grep -c "SKIPPED" | grep -q "^0$"
 │                    APPLICATION BUSINESS RULES                │
 │  Validation logic, quality gates, content generation        │
 │  • Frontmatter field validation                             │
-│  • Quiz schema enforcement                                  │
+│  • Quiz schema enforcement (validate-quiz-json hook)        │
 │  • i18n parity computation                                  │
 │  • Content depth scoring                                    │
 ├─────────────────────────────────────────────────────────────┤
@@ -281,7 +281,7 @@ triggers:
 # game-builder — focused interface
 triggers:
   - content/games/**          # Only game paths
-  - keyword: "build quiz"     # Only quiz actions
+  - keyword: "build vocabulary"  # Only game actions
 ```
 
 ### Dependency Inversion Principle (DIP)
@@ -552,7 +552,14 @@ Hooks live in `.opencode/hooks/` as executable scripts. Each hook declares which
       "event": "file.edited",
       "pattern": "content/games/**/*.json",
       "script": "validate-game-json.sh",
-      "description": "Validate game JSON against quiz/vocabulary schemas"
+      "description": "Validate game JSON against vocabulary and game category schemas"
+    },
+    {
+      "name": "validate-quiz-json",
+      "event": "file.edited",
+      "pattern": "content/quizzes/**/*.json",
+      "script": "validate-quiz-json.sh",
+      "description": "Validate quiz JSON against the quiz schema"
     },
     {
       "name": "validate-course-json",
@@ -679,18 +686,8 @@ flowchart TD
     D --> E{Valid JSON?}
     E -->|No| F[Exit 2: Invalid JSON]
     E -->|Yes| G{category field?}
-    G -->|quiz| H[Validate quiz schema]
     G -->|vocabulary| I[Validate vocabulary schema]
     G -->|Other| J[Skip: unknown category]
-    H --> K{questions array exists?}
-    K -->|No| L[Exit 2: missing questions]
-    K -->|Yes| M{each question has 4 options?}
-    M -->|No| N[Exit 2: wrong option count]
-    M -->|Yes| O{correct is 0-3?}
-    O -->|No| P[Exit 2: invalid correct index]
-    O -->|Yes| Q{sequential IDs?}
-    Q -->|No| R[Exit 2: non-sequential IDs]
-    Q -->|Yes| S[Exit 0]
     I --> T{language_pair valid?}
     T -->|No| U[Exit 2: invalid language_pair]
     T -->|Yes| V[Exit 0]
@@ -715,45 +712,6 @@ if ! echo "$JSON" | python3 -m json.tool > /dev/null 2>&1; then
 fi
 
 CATEGORY=$(echo "$JSON" | python3 -c "import sys,json; print(json.load(sys.stdin).get('category',''))")
-
-if [ "$CATEGORY" = "quiz" ]; then
-  # Validate quiz structure
-  ERRORS=$(echo "$JSON" | python3 -c "
-import sys, json
-data = json.load(sys.stdin)
-errors = []
-
-# Required top-level fields
-for field in ['id', 'title', 'difficulty', 'category', 'questions']:
-    if field not in data:
-        errors.append(f'Missing field: {field}')
-
-if data.get('difficulty') not in ['beginner', 'intermediate', 'advanced']:
-    errors.append(f'Invalid difficulty: {data.get(\"difficulty\")}')
-
-questions = data.get('questions', [])
-if len(questions) < 5:
-    errors.append(f'Minimum 5 questions required, got {len(questions)}')
-
-prev_id = 0
-for i, q in enumerate(questions):
-    if len(q.get('options', [])) != 4:
-        errors.append(f'Question {i}: must have exactly 4 options')
-    if not (0 <= q.get('correct', -1) <= 3):
-        errors.append(f'Question {i}: correct must be 0-3')
-    expected_id = f'q{i+1:03d}'
-    if q.get('id') != expected_id:
-        errors.append(f'Question {i}: ID should be {expected_id}, got {q.get(\"id\")}')
-
-print('\n'.join(errors))
-" 2>&1)
-
-  if [ -n "$ERRORS" ]; then
-    echo "ERROR: Quiz validation failed:" >&2
-    echo "$ERRORS" >&2
-    exit 2
-  fi
-fi
 
 if [ "$CATEGORY" = "vocabulary" ]; then
   ERRORS=$(echo "$JSON" | python3 -c "
@@ -910,7 +868,7 @@ graph TB
     subgraph "Skill Activation"
         A[User Request] --> B{Path contains?}
         B -->|"content/courses/"| C[course-writer skill]
-        B -->|"content/games/"| D[game-builder skill]
+        B -->|"content/languages/"| D[game-builder skill]
         B -->|"content/tools/"| E[tool-builder skill]
         B -->|"dictionaries/"| F[i18n-translator skill]
         B -->|"lib/ or src/"| G[platform-engineer skill]
@@ -973,7 +931,7 @@ name: game-builder
 description: Activate for content/games/** file operations
 triggers:
   - path: "content/games/**"
-  - keyword: "build quiz"
+  - keyword: "build vocabulary"
   - keyword: "create vocabulary"
 ---
 
@@ -988,7 +946,6 @@ When this skill activates, load:
 3. The game content reader from `lib/games/get-game-content.ts` for schema reference
 
 ## Supported Types
-- **Quiz**: JSON with id, title, difficulty, category, topic, questions array
 - **Vocabulary**: JSON with language_pair, words array with source/target/context
 
 ## Output Format
@@ -998,7 +955,6 @@ When this skill activates, load:
 - SAVE AS path stated after JSON
 
 ## Quality Rules
-- Quiz: minimum 5 questions, 4 options each, scenario-based where possible
 - Vocabulary: minimum 40 words, all with context categories
 - Explanations must be educational, not just confirmatory
 - No duplicate questions or source words within a file
@@ -1037,7 +993,7 @@ You are localizing NUniversity content for Portuguese (pt) and Spanish (es).
 | File Path Pattern | Skill | Auto-Load Files |
 |---|---|---|
 | `content/courses/**` | `course-writer` | `agents/COURSE-WRITER-AGENT-PROMPT.md` |
-| `content/games/**` | `game-builder` | `agents/GAME-BUILDER-AGENT-PROMPT.md` |
+| `content/languages/**` | `game-builder` | `agents/GAME-BUILDER-AGENT-PROMPT.md` |
 | `content/tools/**` | `tool-builder` | _(future)_ |
 | `dictionaries/**` | `i18n-translator` | `dictionaries/en.json` |
 | `content/**/pt/**` | `i18n-translator` | source locale lesson |
@@ -1066,7 +1022,7 @@ You are localizing NUniversity content for Portuguese (pt) and Spanish (es).
   "last_updated": "2026-09-01T00:00:00Z",
   "platform": {
     "total_courses": 38,
-    "total_games": 11,
+    "total_games": 12,
     "total_tools": 10,
     "locales": ["en", "pt", "es"],
     "last_deploy": "2026-08-30"
@@ -1080,13 +1036,7 @@ You are localizing NUniversity content for Portuguese (pt) and Spanish (es).
         "priority": "high"
       }
     ],
-    "games_missing": [
-      {
-        "slug": "az-900",
-        "category": "quiz",
-        "status": "planned"
-      }
-    ]
+    "games_missing": []
   },
   "active_generations": [
     {
@@ -1117,12 +1067,10 @@ You are localizing NUniversity content for Portuguese (pt) and Spanish (es).
       "es": { "lessons": [], "total_expected": 12 }
     }
   },
-  "games": {
+  "quizzes": {
     "snowpro-core-cof-c03": {
-      "category": "quiz",
-      "question_count": 90,
-      "domains_covered": 12,
-      "last_updated": "2026-09-01"
+      "questions": 833,
+      "source": "content/quizzes/"
     }
   }
 }
@@ -1184,14 +1132,14 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A["Author: Build Snowflake quiz"] --> B[Agent loads skill: game-builder]
-    B --> C[Agent reads existing quiz files]
-    C --> D[Agent generates quiz JSON]
+    A["Author: Build language activity"] --> B[Agent loads skill: game-builder]
+    B --> C[Agent reads existing game files]
+    C --> D[Agent generates game JSON]
     D --> E[file.edited hook fires]
     E --> F{JSON valid?}
     F -->|No| G[Hook exit 2 → Agent fixes]
     G --> D
-    F -->|Yes| H{Quiz schema valid?}
+    F -->|Yes| H{Game schema valid?}
     H -->|No| I[Hook exit 2 → Agent revises]
     I --> D
     H -->|Yes| J[File written to disk]
@@ -1399,38 +1347,6 @@ async function validateGameJSON(
     return { valid: false, error: `Invalid JSON in ${filePath}: ${e}` };
   }
 
-  if (data.category === "quiz") {
-    const questions = data.questions || [];
-    if (questions.length < 5) {
-      return {
-        valid: false,
-        error: `Quiz needs minimum 5 questions, got ${questions.length}`,
-      };
-    }
-    for (let i = 0; i < questions.length; i++) {
-      const q = questions[i];
-      if (q.options?.length !== 4) {
-        return {
-          valid: false,
-          error: `Question ${i + 1}: must have exactly 4 options`,
-        };
-      }
-      if (typeof q.correct !== "number" || q.correct < 0 || q.correct > 3) {
-        return {
-          valid: false,
-          error: `Question ${i + 1}: correct must be 0-3`,
-        };
-      }
-      const expectedId = `q${String(i + 1).padStart(3, "0")}`;
-      if (q.id !== expectedId) {
-        return {
-          valid: false,
-          error: `Question ${i + 1}: ID should be ${expectedId}, got ${q.id}`,
-        };
-      }
-    }
-  }
-
   if (data.category === "vocabulary") {
     const words = data.words || [];
     if (words.length < 40) {
@@ -1585,12 +1501,13 @@ gantt
 **Deliverables:**
 - [ ] `.opencode/hooks/manifest.json` with all hook registrations
 - [ ] `validate-frontmatter.sh` — validates Markdown frontmatter
-- [ ] `validate-game-json.sh` — validates quiz/vocabulary JSON
+- [ ] `validate-game-json.sh` — validates game JSON (7 categories)
+- [ ] `validate-quiz-json.sh` — validates `content/quizzes/*.json`
 - [ ] `guard-env-read.sh` — blocks .env reads
 - [ ] `.opencode/skills/course-writer.md` — activates course context
 - [ ] `.opencode/skills/game-builder.md` — activates game context
 - [ ] `.opencode/memory/project-status.json` — initial platform state
-- [ ] `.opencode/memory/content-audit.json` — 38 courses, 11 games catalogued
+- [ ] `.opencode/memory/content-audit.json` — 38 courses, 12 games catalogued
 
 ### Phase 2: Quality Gates (Weeks 3–4)
 
@@ -1647,7 +1564,7 @@ gantt
 - [ ] Batch generation: generate entire domains in parallel
 - [ ] Content versioning: track revisions in memory
 - [ ] Quality scoring: automated content depth analysis
-- [ ] Dashboard: visual status of all 38 courses, 11 games
+- [ ] Dashboard: visual status of all 38 courses, 12 games
 - [ ] Agent performance tracking: success rate, fix rate, time per lesson
 
 ---
@@ -1670,13 +1587,31 @@ gantt
 │   ├── validate-game-json/
 │   │   ├── scripts/validate_game_json.py
 │   │   ├── assets/hook.json
-│   │   ├── examples/valid_quiz.json, valid_vocabulary.json
+│   │   └── references/schema.json
+│   ├── validate-languages/
+│   │   ├── scripts/validate_languages.py
+│   │   ├── assets/hook.json
+│   │   ├── examples/valid-language.json
+│   │   └── references/schema.json
+│   ├── validate-quiz-json/
+│   │   ├── scripts/validate_quiz_json.py
+│   │   ├── assets/hook.json
+│   │   ├── examples/valid_quiz.json
 │   │   └── references/schema.json
 │   ├── validate-course-json/
 │   │   ├── scripts/validate_course_json.py
 │   │   ├── assets/hook.json
 │   │   ├── examples/valid_course.json
 │   │   └── references/schema.json
+│   ├── validate-library/
+│   │   ├── scripts/validate_library.py
+│   │   └── assets/hook.json
+│   ├── validate-roadmap/
+│   │   ├── scripts/validate_roadmap.py
+│   │   └── assets/hook.json
+│   ├── validate-tools/
+│   │   ├── scripts/validate_tools.py
+│   │   └── assets/hook.json
 │   ├── check-i18n-parity/
 │   │   ├── scripts/check_i18n_parity.py
 │   │   └── assets/hook.json
@@ -1697,8 +1632,7 @@ gantt
 │   │   └── references/guide.md
 │   ├── game-builder/
 │   │   ├── skill.md
-│   │   ├── assets/skill.json
-│   │   └── examples/valid_quiz.json
+│   │   └── assets/skill.json
 │   ├── i18n-translator/
 │   │   └── skill.md
 │   ├── platform-engineer/
@@ -1732,6 +1666,7 @@ gantt
 |---|---|---|---|
 | `validate_frontmatter.py` | `file.write` | `content/courses/**/*.md` | 0=pass, 2=fail |
 | `validate_game_json.py` | `file.write` | `content/games/**/*.json` | 0=pass, 2=fail |
+| `validate_quiz_json.py` | `file.write` | `content/quizzes/**/*.json` | 0=pass, 2=fail |
 | `validate_course_json.py` | `file.write` | `content/courses/**/course.json` | 0=pass, 2=fail |
 | `check_i18n_parity.py` | `file.write` | `dictionaries/*.json` | 0=pass, 1=warn |
 | `guard_env_read.py` | `tool.read` | `**` | 0=pass, 2=block |
@@ -1742,7 +1677,7 @@ gantt
 |---|---|---|
 | `skill-builder` | `.opencode/skills/**` | Meta-skill for creating skills |
 | `course-writer` | `content/courses/**` | `COURSE-WRITER-AGENT-PROMPT.md` |
-| `game-builder` | `content/games/**` | `GAME-BUILDER-AGENT-PROMPT.md` |
+| `game-builder` | `content/languages/**` | `GAME-BUILDER-AGENT-PROMPT.md` |
 | `i18n-translator` | `dictionaries/**`, `**/pt/**`, `**/es/**` | `en.json`, source locale |
 | `platform-engineer` | `lib/**`, `src/**` | `tsconfig.json`, `package.json` |
 | `mermaid-js` | `**/*.md`, `content/**`, `docs/**` | Mermaid syntax reference |
@@ -2010,9 +1945,9 @@ shfmt -d -i 2 -bn -ci scripts/*.sh
 | Type | Count | Location | Format |
 |---|---|---|---|
 | Courses | 38 | `content/courses/{slug}/` | Markdown + `course.json` |
-| Games (quiz) | 5+ | `content/games/quiz/` | JSON |
-| Games (vocabulary) | 2+ | `content/games/vocabulary/` | JSON |
-| Games (other) | 4 | `content/games/{coding,logic,math,physics,puzzles}/` | JSON |
+| Language activities | 5 | `content/languages/vocabulary/` | JSON |
+| Games (other) | 7 | `content/games/{coding,conversation,logic,math,physics,puzzles}/` | JSON |
+| Quizzes | 1 | `content/quizzes/` | JSON |
 | Tools | 10 | `content/tools/` | Markdown + JSON |
 | Libraries | — | `content/library/` | Markdown |
 | Roadmaps | — | `content/roadmaps/` | Markdown |

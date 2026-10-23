@@ -1,9 +1,11 @@
 {
   "name": "game-builder",
   "version": "1.0.0",
-  "description": "Generates publication-ready JSON game files (quiz and vocabulary) for the NUniversity platform",
+  "description": "Generates publication-ready language activity (vocabulary) JSON files for the NUniversity Languages app",
   "type": "skill",
-  "triggers": ["content/games/**"],
+  "triggers": [
+    "content/languages/**"
+  ],
   "dependencies": [],
   "references": {
     "agent_prompt": "agents/GAME-BUILDER-AGENT-PROMPT.md"

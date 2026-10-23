@@ -224,6 +224,12 @@ out/
 │   │   ├── index.html
 │   │   └── vocabulary/
 │   │       └── en-to-pt/
+│   │           └── index.html      ← redirect stub → /en/languages/en-pt/en-to-pt/
+│   ├── languages/
+│   │   ├── index.html
+│   │   └── en-pt/
+│   │       ├── index.html
+│   │       └── en-to-pt/
 │   │           └── index.html
 │   ├── library/
 │   │   └── index.html

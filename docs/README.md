@@ -13,10 +13,10 @@ docs/
 │   ├── ARCHITECTURE.md                   # C4 diagrams, data flow, design decisions
 │   └── COMPONENTS.md                     # All UI components, props, conventions
 ├── features/
-│   ├── CONTENT-MANAGEMENT.md             # Courses, tools, library, games
+│   ├── CONTENT-MANAGEMENT.md             # Courses, tools, library, games, language activities
 │   ├── INTERNATIONALIZATION.md           # i18n routing, dictionaries, SEO
 │   ├── ROADMAPS.md                       # Learning paths, progress tracking
-│   ├── GAMES.md                          # Quiz, vocabulary, game schemas
+│   ├── GAMES.md                          # Game schemas & quality (vocabulary → Languages app)
 │   └── MARKDOWN-RENDERER.md              # Enhanced MD features
 ├── operations/
 │   ├── DEPLOYMENT.md                     # GitHub Pages, CI/CD pipeline

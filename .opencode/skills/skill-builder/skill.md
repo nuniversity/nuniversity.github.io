@@ -162,7 +162,7 @@ description: "Does various things"                # Not specific
 
 Examples:
 - "Generates publication-ready Markdown course lesson files for the NUniversity platform"
-- "Validates quiz and vocabulary game JSON files for the NUniversity platform"
+- "Validates quiz JSON files for the NUniversity Quizzes app"
 - "Creates and validates Mermaid.js diagrams for documentation and architecture visualization"
 
 ---
@@ -527,7 +527,7 @@ description: "Processes things"
 
 # GOOD
 description: "Validates Markdown frontmatter for NUniversity lesson files"
-description: "Generates publication-ready quiz JSON files"
+description: "Generates publication-ready vocabulary game JSON files"
 ```
 
 ### ❌ Missing Exit Codes

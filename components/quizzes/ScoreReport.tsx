@@ -97,7 +97,7 @@ export function ScoreReport(props: ScoreReportProps) {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-            className="text-center mb-8"
+            className="text-center mb-8 print:hidden"
           >
             <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 mb-4 shadow-lg">
               <Trophy className="w-12 h-12 text-white" />
@@ -108,7 +108,7 @@ export function ScoreReport(props: ScoreReportProps) {
             <p className={`text-lg font-semibold ${rating.color}`}>{rating.label}</p>
           </motion.div>
 
-          <div className="bg-card border rounded-2xl p-6 mb-6">
+          <div className="bg-card border rounded-2xl p-6 mb-6 print:hidden">
             <div className="text-center mb-6 pb-6 border-b">
               <div className="text-7xl font-black mb-1 bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">{accuracy}%</div>
               <p className="text-muted-foreground break-words">
@@ -164,7 +164,7 @@ export function ScoreReport(props: ScoreReportProps) {
             />
           )}
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 print:hidden">
             <button
               type="button"
               onClick={onOpenReview}
@@ -182,7 +182,7 @@ export function ScoreReport(props: ScoreReportProps) {
           </div>
           <Link
             href={`/${lang}/quizzes/`}
-            className="block text-center mt-4 text-sm text-muted-foreground hover:text-primary transition-colors"
+            className="block text-center mt-4 text-sm text-muted-foreground hover:text-primary transition-colors print:hidden"
           >
             ← {dict.quizzes?.back_to_quizzes || 'Back to Quizzes'}
           </Link>
@@ -233,9 +233,9 @@ export function ScoreReport(props: ScoreReportProps) {
           <AnimatePresence mode="wait">
             <motion.div
               key={question.id}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.2 }}
               className="bg-card border rounded-2xl p-6 mb-6"
             >
@@ -323,7 +323,7 @@ export function ScoreReport(props: ScoreReportProps) {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-          className="text-center mb-8"
+          className="text-center mb-8 print:hidden"
         >
           <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full mb-4 shadow-lg ${
             mockPassed
@@ -356,7 +356,7 @@ export function ScoreReport(props: ScoreReportProps) {
           </p>
         </motion.div>
 
-        <div className="bg-card border rounded-2xl p-6 mb-6">
+        <div className="bg-card border rounded-2xl p-6 mb-6 print:hidden">
           <div className="text-center mb-6 pb-6 border-b">
             <div className={`text-7xl font-black mb-1 bg-gradient-to-r bg-clip-text text-transparent ${
               mockPassed ? 'from-green-500 to-emerald-400' : 'from-red-500 to-rose-400'
@@ -430,7 +430,7 @@ export function ScoreReport(props: ScoreReportProps) {
           />
         )}
 
-        <div className="grid grid-cols-2 gap-3 mb-3">
+        <div className="grid grid-cols-2 gap-3 mb-3 print:hidden">
           <button
             type="button"
             onClick={() => onMockReviewModeChange('all')}
@@ -448,7 +448,7 @@ export function ScoreReport(props: ScoreReportProps) {
             {dict.quizzes?.exam?.retake || 'Retake Exam'}
           </button>
         </div>
-        <div className="grid grid-cols-2 gap-3 mb-4">
+        <div className="grid grid-cols-2 gap-3 mb-4 print:hidden">
           <button
             type="button"
             onClick={() => onMockReviewModeChange('wrong')}
@@ -468,7 +468,7 @@ export function ScoreReport(props: ScoreReportProps) {
         </div>
 
         {reviewList.length > 0 && (
-          <div className="bg-card border rounded-2xl overflow-hidden">
+          <div className="bg-card border rounded-2xl overflow-hidden print:hidden">
             <div className="p-4 border-b flex items-center justify-between gap-3 flex-wrap">
               <div className="flex gap-2 flex-wrap">
                 {(['all', 'wrong', 'flagged'] as const).map(mode => (
@@ -584,7 +584,7 @@ export function ScoreReport(props: ScoreReportProps) {
 
         <Link
           href={`/${lang}/quizzes/`}
-          className="block text-center mt-4 text-sm text-muted-foreground hover:text-primary transition-colors"
+          className="block text-center mt-4 text-sm text-muted-foreground hover:text-primary transition-colors print:hidden"
         >
           ← {dict.quizzes?.back_to_quizzes || 'Back to Quizzes'}
         </Link>

@@ -1,8 +1,8 @@
 import React from 'react'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, fireEvent, act } from '@testing-library/react'
-import { VocabularyGameClient } from '@/app/[lang]/games/vocabulary/[slug]/vocabulary-game-client'
-import type { VocabularyGame } from '@/lib/games/get-game-content'
+import { VocabularyGameClient } from '@/components/languages/vocabulary-game-client'
+import type { VocabularyGame } from '@/lib/languages/types'
 
 vi.stubGlobal('React', React)
 
@@ -19,7 +19,46 @@ const game: VocabularyGame = {
   ],
 }
 
-const dict = { games: {} }
+const dict = {
+  languages: {
+    matching: {
+      subtitle: 'Master new skills through interactive games and challenges',
+      restart: 'Restart',
+      how_to_play: 'How to Play',
+      congratulations: 'Congratulations!',
+      game_complete: "You've completed the game!",
+      play_again: 'Play Again',
+      more_activities: 'More Languages',
+      best_score: 'Best score: {score}%',
+      cards_count: '{n} cards',
+      instructions: [
+        'Click on cards to select them',
+        'Match words in the source language with their translations',
+        'Find all matching pairs to complete the game',
+        'Try to complete with the highest accuracy in the shortest time!',
+      ],
+      stats: {
+        score: 'Score',
+        time: 'Time',
+        matches: 'Matches',
+        accuracy: 'Accuracy',
+        final_score: 'Final Score',
+      },
+    },
+    card: {
+      words: '{n} words',
+      not_attempted: 'Not attempted',
+    },
+    back_to_languages: 'Back to Languages',
+  },
+  games: {
+    difficulty: {
+      beginner: 'Beginner',
+      intermediate: 'Intermediate',
+      advanced: 'Advanced',
+    },
+  },
+}
 
 function matchPair(source: string, target: string) {
   fireEvent.click(screen.getByRole('button', { name: source }))
@@ -52,7 +91,7 @@ describe('VocabularyGameClient', () => {
 
     matchPair('hello', 'olá')
 
-    expect(screen.getByText('1/8')).toBeDefined()
+    expect(screen.getByText('1/2')).toBeDefined()
     expect(screen.getByText('10')).toBeDefined()
   })
 

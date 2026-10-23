@@ -9,9 +9,9 @@ Add a complete suite of unit tests and integration tests using **Vitest**, **@te
 - **Vitest** configured with jsdom environment, `@/` path alias, v8 coverage; `passWithNoTests` removed (a run with zero suites now fails)
 - **Husky v9** pre-commit hook runs `lint-staged`
 - **lint-staged** runs `vitest related --run` then `eslint --fix` on staged `.ts/.tsx`
-- **683 vitest tests** in 5 suites (Phase 1, 2026-10-20): `tests/i18n/dict-parity.test.ts` (419 dict keys × en/pt/es), `tests/courses/data-integrity.test.ts` (49 courses / 138 locale dirs / 1,298 lessons), `tests/library/link-check.test.ts` (59 resources), `tests/components/question-block.test.tsx`, `tests/components/language-switcher.test.tsx` — all passing via `npm test`
-- **436 pytest tests** (Python harness, Phase 1): `tests/` + `.opencode/skills` suites incl. `validate_course` parametrized over all 49 courses — all passing via `uv run --no-sync pytest` (1 skipped, 1 xfailed; coverage `--cov=.opencode` = 81.49% ≥ `fail_under = 80`)
-- **CI blocks on both**: `.github/workflows/nextjs.yml` runs ESLint → pytest → vitest → build, plus content gates (all-49 course structure, 28 lesson-gate pairs, games/library/roadmap/tools validators, dict parity, mermaid, callouts)
+- **1,036 vitest tests / 116 skipped in 12 files** (as of Phase 5, 2026-10-23): `tests/i18n/dict-parity.test.ts`, `tests/courses/data-integrity.test.ts` (49 courses / 138 locale dirs / 1,298 lessons), `tests/library/link-check*.test.ts`, `tests/components/*` (question-block, language-switcher, vocabulary-game, interactive-adapter), `tests/quizzes/*` (storage, exam-questions, lesson-exam), `tests/languages/storage.test.ts` — all passing via `npm test`
+- **566 pytest tests** (Python harness, as of Phase 5, 2026-10-23): `tests/` (incl. `test_validate_quiz_json.py`, `test_validate_languages.py` — 35 cases incl. parametrized real content files, `test_validator_coverage.py` — 31 coverage cases) + `.opencode/skills` suites incl. `validate_course` parametrized over all 49 courses — all passing via `uv run --no-sync pytest` (1 skipped, 1 xfailed). Coverage (`pytest --cov=.opencode`, `fail_under = 80`) is **not wired into CI**; the Phase 5 pre-work re-run sits at **80.29–81%** (≥ 80 gate green).
+- **CI blocks on both**: `.github/workflows/nextjs.yml` runs ESLint → pytest → vitest → build, plus content gates (all-49 course structure, 28 lesson-gate pairs, games/languages/library/roadmap/tools/quizzes validators, dict parity, mermaid, callouts)
 - Component-test note: with `jsx: "preserve"`, `.tsx` tests need `vi.stubGlobal('React', React)` (esbuild classic runtime) — see the two component suites for the pattern
 
 ---
@@ -291,7 +291,7 @@ docs/
 
 1. **Static export**: No Next.js server runtime in production. Tests must not depend on `next start`.
 2. **`typescript.ignoreBuildErrors: true`**, **`strict: false`**: The production build is lenient. Tests may surface type issues the build ignores — this is intentional and desirable.
-3. **Content-driven**: 37 courses, 10 tools, 7 game categories, 1 roadmap. Tests can leverage actual content files for realistic data.
+3. **Content-driven**: 37 courses, 10 tools, 7 game categories, 1 roadmap, and 1 quiz JSON (content/quizzes/). Tests can leverage actual content files for realistic data.
 4. **`framer-motion` pervasive**: Every client component wraps content in `motion.*` elements. The central mock is essential for all component tests.
 
 ---

@@ -10,7 +10,7 @@ NUniversity uses a **file-system-based content model** — no CMS, no database, 
 2. [Courses](#2-courses)
 3. [Library Resources](#3-library-resources)
 4. [Tools](#4-tools)
-5. [Vocabulary Games](#5-vocabulary-games)
+5. [Language Activities](#5-language-activities-languages-app)
 6. [Markdown Frontmatter Reference](#6-markdown-frontmatter-reference)
 7. [Content Conventions & Best Practices](#7-content-conventions--best-practices)
 
@@ -29,8 +29,11 @@ flowchart LR
 ```
 content/
 ├── courses/       ← Structured learning paths (Markdown lessons)
-├── games/         ← Vocabulary game word pairs (JSON)
+├── games/         ← Game data files by category (JSON)
+├── languages/     ← Language activity word pairs (JSON)
 ├── library/       ← Curated external resources (Markdown metadata)
+├── quizzes/       ← Certification quizzes (JSON)
+├── roadmaps/      ← Learning roadmaps (Markdown + JSON)
 └── tools/         ← Tool metadata per locale (Markdown)
 ```
 
@@ -420,11 +423,13 @@ export default function MyNewTool({ lang, dict }) {
 
 ---
 
-## 5. Vocabulary Games
+## 5. Language Activities (Languages app)
 
-Games are stored as **JSON files** in `content/games/vocabulary/`.
+Language vocabulary activities are stored as **JSON files** in `content/languages/vocabulary/`
+(moved out of `content/games/vocabulary/` in Phase 5 — served by the Languages app at
+`/{lang}/languages/{pair}/{slug}/`).
 
-### Game JSON Structure
+### Activity JSON Structure
 
 ```json
 {
@@ -454,56 +459,50 @@ Games are stored as **JSON files** in `content/games/vocabulary/`.
 }
 ```
 
-#### Game JSON Fields Reference
+#### Activity JSON Fields Reference
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `id` | `string` | Yes | Unique identifier (matches filename without `.json`) |
+| `id` | `string` | Yes | Unique identifier (must match filename without `.json`) |
 | `title` | `string` | Yes | Display title |
 | `description` | `string` | Yes | Short description |
 | `difficulty` | `string` | Yes | `beginner`, `intermediate`, `advanced` |
-| `category` | `string` | Yes | Game category (currently `vocabulary`) |
+| `category` | `string` | No | Legacy field — always `vocabulary` when present |
+| `gameType` | `string` | No | `matching` (default) or `flashcards` |
 | `language_pair.source` | `string` | Yes | Source language ISO code |
 | `language_pair.target` | `string` | Yes | Target language ISO code |
 | `words[].id` | `string` | Yes | Unique word identifier |
 | `words[].source` | `string` | Yes | Word in the source language |
 | `words[].target` | `string` | Yes | Translation in the target language |
-| `words[].context` | `string` | No | Semantic context (e.g., `"greeting"`, `"food"`) |
+| `words[].context` | `string` | Yes | Semantic context (e.g., `"greeting"`, `"food"`) |
+| `locales` | `object` | No | Localized title/description/sourceLanguage/targetLanguage/contextLabels |
 
-### Available Games
+### Available Activities
 
-| File | Languages | Difficulty |
-|---|---|---|
-| `en-to-pt.json` | English → Portuguese | Beginner |
-| `en-to-pt-advanced.json` | English → Portuguese | Advanced |
-| `es-to-en.json` | Spanish → English | Beginner |
-| `es-to-pt.json` | Spanish → Portuguese | Beginner |
+| File | Languages | gameType | Words |
+|---|---|---|---|
+| `en-to-pt.json` | English → Portuguese | matching | 295 |
+| `en-to-pt-advanced.json` | English → Portuguese | matching | 192 |
+| `es-to-en.json` | Spanish → English | matching | 298 |
+| `es-to-pt.json` | Spanish → Portuguese | flashcards | 969 |
+| `fr-to-pt-flashcards.json` | French → Portuguese | flashcards | 1000 |
 
-### How to Add a New Vocabulary Game
+### How to Add a New Language Activity
 
 ```bash
-touch content/games/vocabulary/fr-to-en.json
+touch content/languages/vocabulary/fr-to-en.json
 ```
 
-```json
-{
-  "id": "fr-to-en",
-  "title": "French to English - Basic Vocabulary",
-  "description": "Match French words with their English translations",
-  "difficulty": "beginner",
-  "category": "vocabulary",
-  "language_pair": {
-    "source": "fr",
-    "target": "en"
-  },
-  "words": [
-    { "id": "1", "source": "Bonjour", "target": "Hello", "context": "greeting" },
-    { "id": "2", "source": "Merci", "target": "Thank you", "context": "courtesy" }
-  ]
-}
+Create the file with **at least 40 words** following the field reference above
+(`id` must equal the filename). Validate it:
+
+```bash
+OPENCODE_FILE_PATH=content/languages/vocabulary/fr-to-en.json python .opencode/hooks/validate-languages/scripts/validate_languages.py
 ```
 
-The game is automatically picked up on the next build — no code changes required.
+The activity is automatically picked up on the next build — no code changes required.
+The authoritative schema lives in `.opencode/hooks/validate-languages/references/schema.json`
+and the full app design in `docs/assessment/2026-app-review/DESIGN-LANGUAGES-APP.md`.
 
 ---
 

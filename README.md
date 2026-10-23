@@ -14,8 +14,10 @@ nuniversity.github.io/
 │   ├── about/               # About page
 │   ├── contact/             # Contact page (Formspree form)
 │   ├── courses/             # Course listing + lesson viewer
-│   ├── games/               # Vocabulary, quiz, coding, math, logic, physics, puzzles
+│   ├── games/               # Coding, conversation, logic, math, physics, puzzles
+│   ├── languages/           # Vocabulary activities hub, pair & player pages
 │   ├── library/             # Curated external resources
+│   ├── quizzes/             # Certification quizzes & mock exams
 │   ├── roadmaps/            # Structured learning paths
 │   └── tools/               # Interactive tools
 ├── components/              # Reusable UI components
@@ -28,15 +30,19 @@ nuniversity.github.io/
 │   └── contacts/            # Contact form
 ├── content/                 # All static content (Markdown + JSON)
 │   ├── courses/             # Course lessons per locale
-│   ├── games/               # Vocabulary game word pairs
+│   ├── games/               # Game JSON (coding, conversation, logic, math, physics, puzzles)
+│   ├── languages/           # Language activity JSON (vocabulary, 5 activities)
 │   ├── library/             # External resource metadata
+│   ├── quizzes/             # Quizzes app JSON
 │   └── tools/               # Tool metadata per locale
 ├── dictionaries/            # UI translation strings (en.json, pt.json, es.json)
 ├── lib/                     # Data access / utility functions
 │   ├── courses/
 │   ├── games/
+│   ├── languages/
 │   ├── i18n/                # Locale config + dictionary loader
 │   ├── library/
+│   ├── quizzes/
 │   └── tools/
 ├── public/                  # Static assets (favicon, robots.txt, team photos)
 ├── docs/                    # Full documentation (see below)
@@ -77,7 +83,9 @@ The build generates a fully static site in the `out/` directory. The site is dep
 - **Multi-language**: English, Portuguese, Spanish — with automatic locale detection and redirect
 - **Courses**: 38 Markdown-driven learning paths with enhanced rendering (code highlighting, Mermaid diagrams, alert boxes)
 - **Interactive Tools**: 10 tools — Eisenhower Matrix, SWOT, LLM Prompt Builder, Pomodoro Timer, Habit Tracker, Flashcards, Regex Tester, Unit Converter, Decision Matrix, Brain Writing
-- **Games**: 11 games across 7 categories — vocabulary, quiz, coding, math, logic, physics, puzzles
+- **Games**: 7 games across 6 categories — coding, conversation, math, logic, physics, puzzles
+- **Languages**: vocabulary activities at /[lang]/languages/ — matching quiz & flashcards with saved progress
+- **Quizzes**: certification quizzes & mock exams at /[lang]/quizzes/
 - **Library**: 59+ curated external educational resources (videos, ebooks, courses, blogs, repositories, podcasts, articles)
 - **Roadmaps**: Structured learning paths with progress tracking
 - **AI Agents**: Course Writer & Game Builder agents for automated content generation
@@ -98,10 +106,12 @@ Full documentation is available in the [`docs/`](./docs) directory:
 ### Features
 | Document | Description |
 |---|---|
-| [Content Management](./docs/features/CONTENT-MANAGEMENT.md) | Adding courses, tools, library resources, games |
+| [Content Management](./docs/features/CONTENT-MANAGEMENT.md) | Adding courses, tools, library resources, games, language activities |
 | [Internationalization](./docs/features/INTERNATIONALIZATION.md) | Multi-language support, routing, dictionaries |
 | [Roadmaps](./docs/features/ROADMAPS.md) | Structured learning paths architecture |
-| [Games](./docs/features/GAMES.md) | Game system, quiz/vocabulary schemas |
+| [Games](./docs/features/GAMES.md) | Game system, lifecycle, content quality |
+| [Languages App](./docs/assessment/2026-app-review/DESIGN-LANGUAGES-APP.md) | Languages app design — activity schema, routes, storage, i18n |
+| [Quizzes Design](./docs/assessment/2026-app-review/DESIGN-QUIZZES-APP.md) | Quizzes app design — schema, routes, migration from games/quiz |
 | [Markdown Renderer](./docs/features/MARKDOWN-RENDERER.md) | Enhanced Markdown features for course authors |
 
 ### Operations

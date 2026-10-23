@@ -3,91 +3,6 @@ import fs from 'fs'
 import path from 'path'
 import { type Locale } from '@/lib/i18n/config'
 
-export interface LocalizedString {
-  [locale: string]: string
-}
-
-export interface VocabularyWord {
-  id: string
-  source: string
-  target: string
-  context: string
-  emoji?: string
-  pronunciation?: string
-  example?: string
-  exampleTranslation?: string
-  imageUrl?: string
-  isExpression?: boolean
-  level?: 'A1' | 'A2' | 'B1'
-}
-
-export interface VocabularyGame {
-  id: string
-  title: string
-  description: string
-  difficulty: 'beginner' | 'intermediate' | 'advanced'
-  category: string
-  gameType?: 'memory' | 'flashcards'
-  language_pair: {
-    source: string
-    target: string
-  }
-  words: VocabularyWord[]
-  sourceLanguage?: string
-  targetLanguage?: string
-  locales?: {
-    [locale: string]: {
-      title?: string
-      description?: string
-      sourceLanguage?: string
-      targetLanguage?: string
-    }
-  }
-  contextLabels?: {
-    [context: string]: LocalizedString
-  }
-}
-
-export interface QuizQuestion {
-  id: string
-  domain: string
-  question: string
-  options: string[]
-  correct: number
-  explanation: string
-}
-
-export interface MockExamDomainGroup {
-  label: string
-  color: string
-  subdomains: string[]
-}
-
-export interface MockExamConfig {
-  durationSeconds: number
-  passingScore: number
-  allocations: Record<string, number>
-  domainGroups: Record<string, MockExamDomainGroup>
-}
-
-export interface QuizGame {
-  id: string
-  title: string
-  description: string
-  difficulty: 'beginner' | 'intermediate' | 'advanced'
-  category: string
-  topic: string
-  certification: string
-  mockExam?: MockExamConfig
-  questions: QuizQuestion[]
-  locales?: {
-    [locale: string]: {
-      title?: string
-      description?: string
-    }
-  }
-}
-
 export interface ConversationQuestion {
   id: string
   number: number
@@ -141,7 +56,7 @@ export interface GameMetadata {
   description: string
   category: string
   difficulty: string
-  type: 'vocabulary' | 'grammar' | 'math' | 'coding' | 'physics' | 'logic' | 'fun' | 'quiz' | 'science' | 'puzzles' | 'conversation'
+  type: 'grammar' | 'math' | 'coding' | 'physics' | 'logic' | 'fun' | 'science' | 'puzzles' | 'conversation'
 }
 
 export interface GameFileData {
@@ -174,7 +89,7 @@ export async function getAllGames(locale?: string): Promise<GameMetadata[]> {
       return games
     }
 
-    // Get all game type directories (vocabulary, grammar, quiz, etc.)
+    // Get all game type directories (coding, conversation, physics, etc.)
     const gameTypes = fs.readdirSync(gamesDirectory, { withFileTypes: true })
       .filter(dirent => dirent.isDirectory())
       .map(dirent => dirent.name)
@@ -210,62 +125,6 @@ export async function getAllGames(locale?: string): Promise<GameMetadata[]> {
   }
 
   return games
-}
-
-/**
- * Get vocabulary game by slug, with locale merging
- */
-export async function getVocabularyGame(slug: string, locale?: string): Promise<VocabularyGame | null> {
-  try {
-    const filePath = path.join(gamesDirectory, 'vocabulary', `${slug}.json`)
-    
-    if (!fs.existsSync(filePath)) {
-      return null
-    }
-
-    const fileContent = fs.readFileSync(filePath, 'utf-8')
-    const game: VocabularyGame = JSON.parse(fileContent)
-
-    if (locale && game.locales?.[locale]) {
-      const loc = game.locales[locale]
-      if (loc.title) game.title = loc.title
-      if (loc.description) game.description = loc.description
-      if (loc.sourceLanguage) game.sourceLanguage = loc.sourceLanguage
-      if (loc.targetLanguage) game.targetLanguage = loc.targetLanguage
-    }
-
-    return game
-  } catch (error) {
-    console.error(`Error reading vocabulary game ${slug}:`, error)
-    return null
-  }
-}
-
-/**
- * Get quiz game by slug
- */
-export async function getQuizGame(slug: string, locale?: string): Promise<QuizGame | null> {
-  try {
-    const filePath = path.join(gamesDirectory, 'quiz', `${slug}.json`)
-    
-    if (!fs.existsSync(filePath)) {
-      return null
-    }
-
-    const fileContent = fs.readFileSync(filePath, 'utf-8')
-    const game: QuizGame = JSON.parse(fileContent)
-
-    if (locale && game.locales?.[locale]) {
-      const loc = game.locales[locale]
-      if (loc.title) game.title = loc.title
-      if (loc.description) game.description = loc.description
-    }
-
-    return game
-  } catch (error) {
-    console.error(`Error reading quiz game ${slug}:`, error)
-    return null
-  }
 }
 
 /**

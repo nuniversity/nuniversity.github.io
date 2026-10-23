@@ -326,7 +326,7 @@ flowchart LR
 | `concept` | A theoretical concept to learn | Fundamentals, theory |
 | `course` | Links to a course lesson | Hands-on learning |
 | `tool` | A tool to learn and use | IDE, CLI, framework |
-| `game` | A learning game | Vocabulary, quizzes |
+| `game` | A learning game | Vocabulary, conversation |
 | `library` | External resource to read | Documentation, articles |
 | `milestone` | Achievement checkpoint | End of a section |
 

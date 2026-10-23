@@ -35,7 +35,7 @@ export function CertificateCard({ dict, slug, score, pass }: CertificateCardProp
   }
 
   return (
-    <div className="bg-card border-2 border-yellow-300 dark:border-yellow-700 rounded-2xl p-6 mb-6 print:border-yellow-600">
+    <div className="certificate-print bg-card border-2 border-yellow-300 dark:border-yellow-700 rounded-2xl p-6 mb-6 print:border-yellow-600">
       <div className="text-center mb-4 print:mb-2">
         <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">
           {dict.quizzes?.certificate?.title || 'Certificate of Achievement'}
@@ -52,6 +52,7 @@ export function CertificateCard({ dict, slug, score, pass }: CertificateCardProp
           value={name}
           onChange={e => handleChange(e.target.value)}
           placeholder={dict.quizzes?.certificate?.name_placeholder || 'Enter your name for the certificate'}
+          aria-label={dict.quizzes?.certificate?.name_placeholder || 'Enter your name for the certificate'}
           className="w-full max-w-md mx-auto text-center text-xl font-bold bg-transparent border-b-2 border-dashed border-muted-foreground/40 focus:outline-none focus:border-primary py-1 print:border-none print:py-0"
         />
         {!name.trim() && (

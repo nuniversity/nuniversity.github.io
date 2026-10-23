@@ -3,7 +3,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X, Sun, Moon, Library, Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon, Home, Map, Award } from 'lucide-react'
+import { Menu, X, Sun, Moon, Library, Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon, Home, Map, Award, Languages, ChevronDown } from 'lucide-react'
 import LanguageSwitcher from '../language/LanguageSwitcher'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
@@ -18,9 +18,10 @@ interface HeaderProps {
 
 export default function Header({ lang, dict }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMoreOpen, setIsMoreOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
 
-  const navigation = [
+  const primaryNavigation = [
     { name: dict.navigation.home, href: `/${lang}`, icon: Home, isNew: false },
     { name: dict.navigation.courses, href: `/${lang}/courses`, icon: BookOpen, isNew: false },
     { name: dict.navigation.tools, href: `/${lang}/tools`, icon: Calculator, isNew: true },
@@ -28,12 +29,16 @@ export default function Header({ lang, dict }: HeaderProps) {
     { name: dict.navigation.quizzes, href: `/${lang}/quizzes`, icon: Award, isNew: true },
     { name: dict.navigation.library || 'Library', href: `/${lang}/library`, icon: Library, isNew: true },
     { name: dict.navigation.roadmaps || 'Roadmaps', href: `/${lang}/roadmaps`, icon: Map, isNew: true },
-    { name: dict.navigation.about, href: `/${lang}/about` },
-    { name: dict.navigation.contact, href: `/${lang}/contact` },
+    { name: dict.navigation.languages || 'Languages', href: `/${lang}/languages`, icon: Languages, isNew: true },
+  ]
+
+  const moreNavigation = [
+    { name: dict.navigation.about, href: `/${lang}/about`, icon: undefined, isNew: false },
+    { name: dict.navigation.contact, href: `/${lang}/contact`, icon: undefined, isNew: false },
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:bg-gray-900/80">
+    <header className="print:hidden sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:bg-gray-900/80">
       <nav className="container-custom">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -48,7 +53,7 @@ export default function Header({ lang, dict }: HeaderProps) {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
-            {navigation.map((item) => (
+            {primaryNavigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
@@ -63,6 +68,39 @@ export default function Header({ lang, dict }: HeaderProps) {
                 )}
               </Link>
             ))}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setIsMoreOpen(!isMoreOpen)}
+                aria-expanded={isMoreOpen}
+                aria-haspopup="true"
+                className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-accent hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-1"
+              >
+                {dict.navigation.more || 'More'}
+                <ChevronDown className={`w-4 h-4 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isMoreOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setIsMoreOpen(false)}
+                    aria-hidden="true"
+                  />
+                  <div className="absolute right-0 top-full mt-1 w-44 z-50 py-1 bg-card border rounded-lg shadow-lg">
+                    {moreNavigation.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setIsMoreOpen(false)}
+                        className="block px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-accent hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           </div>
 
           {/* Right Side Actions */}
@@ -101,7 +139,7 @@ export default function Header({ lang, dict }: HeaderProps) {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="lg:hidden py-4 border-t border-gray-200 dark:border-gray-700 animate-slide-in">
-            {navigation.map((item) => (
+            {[...primaryNavigation, ...moreNavigation].map((item) => (
               <Link
                 key={item.name}
                 href={item.href}

@@ -46,6 +46,11 @@
       "title": "Quizzes — Tests & Certification Practice",
       "description": "Certification quizzes, practice tests and timed exam simulations with scoring, attempt history and printable certificates.",
       "notFound": "Quiz not found"
+    },
+    "languages": {
+      "title": "Language Practice — Flashcards & Translation Quizzes",
+      "description": "Interactive flashcards and translation quizzes for English, Portuguese, Spanish and French with progress tracking.",
+      "notFound": "Language activity not found"
     }
   },
   "notFound": {
@@ -117,7 +122,9 @@
     "library": "Library",
     "roadmaps": "Roadmaps",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "languages": "Languages",
+    "more": "More"
   },
   "hero": {
     "badge": "Interactive Learning Platform",
@@ -407,7 +414,6 @@
     "play_again": "Play Again",
     "more_games": "More Games",
     "categories": {
-      "vocabulary": "Language - Vocabulary",
       "grammar": "Language - Grammar",
       "math": "Mathematics",
       "coding": "Coding & Programming",
@@ -439,54 +445,6 @@
       "beginner": "Beginner",
       "intermediate": "Intermediate",
       "advanced": "Advanced"
-    },
-    "instructions": {
-      "vocabulary_match": [
-        "Click on cards to select them",
-        "Match words in the source language with their translations",
-        "Find all matching pairs to complete the game",
-        "Try to complete with the highest accuracy in the shortest time!"
-      ]
-    },
-    "flashcards": {
-      "statistics": "Statistics",
-      "total": "Total",
-      "new": "New",
-      "learning": "Learning",
-      "mastered": "Mastered",
-      "current_session": "Current Session",
-      "reviewed": "Reviewed",
-      "correct": "Correct",
-      "errors": "Errors",
-      "mode_all": "All ({n})",
-      "mode_new": "New ({n})",
-      "all_categories": "All categories",
-      "no_cards": "No cards available",
-      "no_cards_hint": "Try another mode or category.",
-      "session_complete": "Session complete!",
-      "reviewed_n_cards": "You reviewed {n} cards this session.",
-      "n_correct_n_errors": "{n} correct · {n2} errors",
-      "restart": "Restart",
-      "view_statistics": "View Statistics",
-      "progress_of": "{current} of {total}",
-      "view_images": "View images",
-      "listen_pronunciation": "Listen pronunciation",
-      "tap_to_translate": "Tap to see translation",
-      "categories_label": "Categories:",
-      "pronunciation": "Pronunciation",
-      "example": "Example",
-      "reset_confirm": "Reset all progress?",
-      "import_success": "Progress imported successfully!",
-      "import_error": "Failed to import: invalid file format",
-      "export_success": "Progress exported!",
-      "reset_success": "Progress reset!",
-      "mode_learning": "Learning ({n})",
-      "mode_learned": "Learned ({n})",
-      "forgot": "Forgot",
-      "remember": "Remember",
-      "swipe_hint": "← Forgot · Remember →",
-      "import_migrated": "Progress imported and updated to new format!",
-      "learned": "Learned"
     },
     "conversation": {
       "back_to_games": "Back to Games",
@@ -612,6 +570,10 @@
     "back_to_results": "Back to Results",
     "play_again": "Play Again",
     "more_quizzes": "More Quizzes",
+    "promo": {
+      "title": "Certification Quizzes",
+      "text": "Practice tests and timed mock exams with scoring, instant feedback and printable certificates."
+    },
     "exit": "Exit",
     "open": "Open",
     "explanation": "💡 Explanation",
@@ -640,7 +602,6 @@
       "passing": "Pass {score}%",
       "best": "Best {score}%",
       "not_attempted": "Not attempted",
-      "languages": "Languages",
       "domains": "Domains"
     },
     "difficulty": {
@@ -1521,6 +1482,105 @@
       "empty_bucket": "Empty — click to place the selected item",
       "bucket_aria": "Bucket: {label}",
       "score_feedback": "{count} / {total} correct — red items are in the wrong bucket or still unplaced."
+    }
+  },
+  "languages": {
+    "title": "Language Practice",
+    "subtitle": "Learn languages through flashcards and translation quizzes",
+    "search_placeholder": "Search language activities...",
+    "no_results": "No activities match your search",
+    "back_to_languages": "Back to Languages",
+    "open": "Open",
+    "promo": {
+      "title": "Language Practice",
+      "text": "Flashcards and translation quizzes for 4 language pairs with progress tracking."
+    },
+    "redirect_fallback": "This activity has moved — continue to the Languages section",
+    "filters": {
+      "kind": "Type",
+      "all": "All",
+      "difficulty": "Difficulty"
+    },
+    "types": {
+      "flashcards": "Flashcards",
+      "matching": "Translation Quiz"
+    },
+    "card": {
+      "words": "{n} words",
+      "pair": "{source} → {target}",
+      "best_score": "Best {score}%",
+      "not_attempted": "Not attempted",
+      "activities_count": "{n} activities",
+      "completed_count": "{n} completed"
+    },
+    "tracks": {
+      "title": "Language courses",
+      "coming_soon": "Coming soon — new language tracks are on the way."
+    },
+    "matching": {
+      "cards_count": "{n} cards",
+      "more_activities": "More Languages",
+      "best_score": "Best score: {score}%",
+      "subtitle": "Master new skills through interactive games and challenges",
+      "restart": "Restart",
+      "how_to_play": "How to Play",
+      "congratulations": "Congratulations!",
+      "game_complete": "You've completed the game!",
+      "play_again": "Play Again",
+      "instructions": [
+        "Click on cards to select them",
+        "Match words in the source language with their translations",
+        "Find all matching pairs to complete the game",
+        "Try to complete with the highest accuracy in the shortest time!"
+      ],
+      "stats": {
+        "score": "Score",
+        "time": "Time",
+        "matches": "Matches",
+        "accuracy": "Accuracy",
+        "final_score": "Final Score"
+      },
+      "num_pairs": "Number of pairs:"
+    },
+    "flashcards": {
+      "statistics": "Statistics",
+      "total": "Total",
+      "new": "New",
+      "learning": "Learning",
+      "mastered": "Mastered",
+      "current_session": "Current Session",
+      "reviewed": "Reviewed",
+      "correct": "Correct",
+      "errors": "Errors",
+      "mode_all": "All ({n})",
+      "mode_new": "New ({n})",
+      "all_categories": "All categories",
+      "no_cards": "No cards available",
+      "no_cards_hint": "Try another mode or category.",
+      "session_complete": "Session complete!",
+      "reviewed_n_cards": "You reviewed {n} cards this session.",
+      "n_correct_n_errors": "{n} correct · {n2} errors",
+      "restart": "Restart",
+      "view_statistics": "View Statistics",
+      "progress_of": "{current} of {total}",
+      "view_images": "View images",
+      "listen_pronunciation": "Listen pronunciation",
+      "tap_to_translate": "Tap to see translation",
+      "categories_label": "Categories:",
+      "pronunciation": "Pronunciation",
+      "example": "Example",
+      "reset_confirm": "Reset all progress?",
+      "import_success": "Progress imported successfully!",
+      "import_error": "Failed to import: invalid file format",
+      "export_success": "Progress exported!",
+      "reset_success": "Progress reset!",
+      "mode_learning": "Learning ({n})",
+      "mode_learned": "Learned ({n})",
+      "forgot": "Forgot",
+      "remember": "Remember",
+      "swipe_hint": "← Forgot · Remember →",
+      "import_migrated": "Progress imported and updated to new format!",
+      "learned": "Learned"
     }
   }
 }

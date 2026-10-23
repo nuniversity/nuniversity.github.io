@@ -25,7 +25,7 @@ All deterministic components use a standardized tool chain:
 
 ## Overview
 
-NUniversity uses specialized AI agents to generate publication-ready course content and interactive quiz data. Each agent is defined by a prompt template and produces validated Markdown or JSON output.
+NUniversity uses specialized AI agents to generate publication-ready course content and interactive game data (quizzes live in the Quizzes app; vocabulary activities live in the Languages app under `content/languages/`). Each agent is defined by a prompt template and produces validated Markdown or JSON output.
 
 ### Available Skills
 
@@ -33,7 +33,7 @@ NUniversity uses specialized AI agents to generate publication-ready course cont
 |-------|---------|----------|
 | `skill-builder` | Meta-skill for creating new skills | `.opencode/skills/**` |
 | `course-writer` | Generates lesson files | `content/courses/**` |
-| `game-builder` | Generates game JSON files | `content/games/**` |
+| `game-builder` | Generates language activity JSON | `content/languages/**` |
 | `i18n-translator` | Handles localization | `dictionaries/**` |
 | `platform-engineer` | TypeScript/Next.js guidance | `lib/**`, `src/**` |
 | `mermaid-js` | Creates and validates diagrams | `**/*.md`, `docs/**` |
@@ -139,39 +139,20 @@ flowchart TD
 
 **Location:** `agents/GAME-BUILDER-AGENT-PROMPT.md`
 
-Produces publication-ready JSON game files for quizzes and vocabulary exercises.
+Produces publication-ready language activity (vocabulary) JSON for the Languages app. Files live at `content/languages/vocabulary/{slug}.json`, are validated by `.opencode/hooks/validate-languages/`, and render at `/{lang}/languages/{pair}/{slug}`.
 
 ### Output Format
 
 ```mermaid
 flowchart TD
-    subgraph "Quiz JSON Structure"
-        Meta["Metadata\ncourseId, domainId\ntype, difficulty"]
-        Questions["Questions Array\n- id (sequential)\n- scenario question\n- 4 options\n- correctIndex\n- explanation\n- examObjective"]
-    end
-
-    Meta --> Questions
-
-    subgraph "Vocabulary JSON Structure"
-        VMeta["Metadata\ntype: vocabulary\ndomain, language"]
-        Pairs["Word Pairs Array\n- id (sequential)\n- term / definition\n- category\n- difficulty\n- context sentence"]
+    subgraph "Language Activity JSON Structure"
+        VMeta["Metadata\nid = filename, category: vocabulary\ngameType: matching | flashcards\nlanguage_pair source/target"]
+        Pairs["Words Array\n- id (sequential string)\n- source / target\n- context"]
     end
 
     VMeta --> Pairs
 
-    subgraph "Question Types"
-        Scenario["Scenario-Based\nReal-world context"]
-        Conceptual["Conceptual\nTheory-based"]
-        Applied["Applied\nHands-on scenarios"]
-    end
-
-    Questions -.-> Scenario
-    Questions -.-> Conceptual
-    Questions -.-> Applied
-
-    style Meta fill:#e8daef,color:#000
     style VMeta fill:#d5f5e3,color:#000
-    style Questions fill:#d6eaf8,color:#000
 ```
 
 ### Quality Checklist
@@ -179,24 +160,21 @@ flowchart TD
 | Check | Description |
 |-------|-------------|
 | Valid JSON | Passes `JSON.parse()` without errors |
-| Sequential IDs | `id` fields are sequential starting from 0 |
-| No duplicates | No duplicate questions or word pairs |
-| Minimum counts | 40 questions for certification quizzes, 50 word pairs for vocabulary |
-| 4-option format | Each question has exactly 4 options |
-| Detailed explanations | Every question includes an explanation field |
-| Domain coverage | Questions distributed across sub-topics |
-| Difficulty distribution | Mix of easy, medium, hard questions |
+| Sequential IDs | Word `id` fields are sequential strings from `"1"` |
+| Filename match | Top-level `id` equals the filename without `.json` |
+| No duplicates | No duplicate source words or word rows |
+| Minimum counts | ≥ 40 words (validator-enforced; aim 50–200) |
+| Context labels | Every word has an educational `context` field |
+| Language pair | Valid, differing ISO 639-1 codes in `language_pair` |
+| Validator | `OPENCODE_FILE_PATH=... python .opencode/hooks/validate-languages/scripts/validate_languages.py` exits 0 |
 
 ### Templates
 
 | Template | Purpose |
 |----------|---------|
-| Certification quiz | Full-length practice exam (40+ questions) |
-| Domain drill | Focused quiz on a single domain |
 | General knowledge | Broad topic coverage |
 | Technical skills | Hands-on skill assessment |
 | Vocabulary game | Term-definition matching (50+ pairs) |
-| Expand existing quiz | Add questions to an existing quiz file |
 
 ### Recommended LLM Configuration
 
@@ -343,8 +321,8 @@ NUniversity uses OpenCode for automated deterministic workflows.
 
 ```
 .opencode/
-├── hooks/          # 5 Python-based validation hooks
-├── skills/         # 9 skills (skill-builder, course-writer, game-builder, etc.)
+├── hooks/          # 9 Python-based validation hooks
+├── skills/         # 10 skills (skill-builder, course-writer, game-builder, etc.)
 ├── plugins/        # nuniversity-plugin
 ├── memory/         # MEMORY.md with project state
 └── package.json    # @opencode-ai/plugin dependency
@@ -416,12 +394,4 @@ Use the Course Writer Agent prompt.
 Template: Single lesson
 Context: Course "AZ-900 Azure Fundamentals", Domain "Cloud Concepts",
 Topic "What is Cloud Computing", Difficulty: Beginner
-```
-
-**Game Builder -- Certification Quiz:**
-```
-Use the Game Builder Agent prompt.
-Template: Certification quiz
-Context: Course "AZ-900 Azure Fundamentals", Domain "Cloud Concepts",
-40 questions, difficulty distribution: 30% easy, 50% medium, 20% hard
 ```

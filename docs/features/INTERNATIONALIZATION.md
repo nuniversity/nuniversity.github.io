@@ -144,6 +144,7 @@ dictionaries/
   "features": { ... },
   "courses": { ... },
   "games": { ... },
+  "languages": { ... },
   "tools": { ... },
   "library": { ... },
   "footer": { ... },
@@ -346,25 +347,29 @@ content/library/
 └── (pt/, es/ can be added in the future)
 ```
 
-### Games
+### Language Activities (Languages app)
 
-Vocabulary games are **language-agnostic** JSON files that contain word pairs for any language combination:
+Language activities are **language-agnostic** JSON files under `content/languages/vocabulary/` that contain word pairs for any language combination:
 
 ```json
 {
   "id": "en-to-pt",
   "language_pair": { "source": "en", "target": "pt" },
+  "gameType": "matching",
   "words": [
     { "id": "1", "source": "Hello", "target": "Olá", "context": "greeting" }
   ]
 }
 ```
 
-Available game files:
-- `en-to-pt.json` — English → Portuguese (Basic)
-- `en-to-pt-advanced.json` — English → Portuguese (Advanced)
+Available activity files:
+- `en-to-pt.json` — English → Portuguese (matching)
+- `en-to-pt-advanced.json` — English → Portuguese (advanced)
 - `es-to-en.json` — Spanish → English
 - `es-to-pt.json` — Spanish → Portuguese
+- `fr-to-pt-flashcards.json` — French → Portuguese (flashcards)
+
+Activity chrome (titles, buttons, instructions) lives in the `languages.*` dictionary namespace — the JSON files themselves carry learning content only. UI chrome is localized; word-pair content is never translated.
 
 ---
 

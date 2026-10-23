@@ -4,6 +4,7 @@ import { getAllTools } from '@/lib/tools/get-tool-content'
 import { getAllGames } from '@/lib/games/get-game-content'
 import { getAllQuizzes } from '@/lib/quizzes/get-quiz-content'
 import { getAllRoadmaps } from '@/lib/roadmaps/get-roadmap-content'
+import { getAllLanguageActivities, getAllPairs } from '@/lib/languages/get-language-content'
 import { i18n } from '@/lib/i18n/config'
 
 export const dynamic = 'force-static'
@@ -11,7 +12,7 @@ export const dynamic = 'force-static'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = 'https://nuniversity.github.io'
   const entries: MetadataRoute.Sitemap = []
-  const staticPaths = ['about', 'contact', 'courses', 'games', 'library', 'quizzes', 'roadmaps', 'tools']
+  const staticPaths = ['about', 'contact', 'courses', 'games', 'library', 'languages', 'quizzes', 'roadmaps', 'tools']
 
   for (const lang of i18n.locales) {
     const prefix = `/${lang}`
@@ -59,6 +60,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const roadmap of await getAllRoadmaps(lang)) {
       entries.push({
         url: `${base}${prefix}/roadmaps/${roadmap.id}/`,
+        changeFrequency: 'monthly',
+        priority: 0.6,
+      })
+    }
+    for (const pair of await getAllPairs()) {
+      entries.push({
+        url: `${base}${prefix}/languages/${pair}/`,
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      })
+    }
+    for (const activity of await getAllLanguageActivities(lang)) {
+      entries.push({
+        url: `${base}${prefix}/languages/${activity.languagePair.source}-${activity.languagePair.target}/${activity.slug}/`,
         changeFrequency: 'monthly',
         priority: 0.6,
       })
