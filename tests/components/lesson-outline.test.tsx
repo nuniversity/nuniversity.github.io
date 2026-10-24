@@ -2,6 +2,7 @@ import React from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen, fireEvent, cleanup, act } from '@testing-library/react'
 import LessonOutline from '@/components/lessons/LessonOutline'
+import { markLessonComplete } from '@/lib/progress/storage'
 
 vi.stubGlobal('React', React)
 
@@ -58,6 +59,7 @@ function renderOutline(lessonSlug = 'setup') {
 let contentRoot: HTMLElement
 
 beforeEach(() => {
+  window.localStorage.clear()
   MockIntersectionObserver.instances = []
   vi.stubGlobal('IntersectionObserver', MockIntersectionObserver)
   contentRoot = document.createElement('div')
@@ -94,6 +96,20 @@ describe('LessonOutline syllabus', () => {
 
     expect(screen.getByText('AWS AIF C01')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Back to Courses' })).toHaveAttribute('href', '/en/courses')
+  })
+
+  it('shows a check on completed syllabus lessons', () => {
+    markLessonComplete('aws-aif-c01', 'intro')
+
+    renderOutline()
+
+    expect(screen.getAllByTestId('outline-check')).toHaveLength(1)
+    expect(
+      screen.getByRole('link', { name: /Introduction/ }).querySelector('[data-testid="outline-check"]')
+    ).not.toBeNull()
+    expect(
+      screen.getByRole('link', { name: /Setup Guide/ }).querySelector('[data-testid="outline-check"]')
+    ).toBeNull()
   })
 })
 

@@ -69,4 +69,6 @@ Execution happens phase-by-phase per [PLAN.md](./PLAN.md).
   status in [PLAN.md](./PLAN.md), closeout in [FIXES.md](./FIXES.md)).
 - **Phase 5 (Languages app): ✅ complete — 2026-10-23** (deep plan in [PLAN-PHASE5.md](./PLAN-PHASE5.md),
   status in [PLAN.md](./PLAN.md), closeout in [FIXES.md](./FIXES.md)).
-- Phases 6–9: not started.
+- **Phase 6 (Learning experience): ✅ complete — 2026-10-24** (deep plan in [PLAN-PHASE6.md](./PLAN-PHASE6.md),
+  status in [PLAN.md](./PLAN.md), closeout in [FIXES.md](./FIXES.md)).
+- Phases 7–9: not started.

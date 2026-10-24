@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { type Locale } from '@/lib/i18n/config'
 import type { QuizData, QuizQuestion } from '@/lib/quizzes/types'
 import { addAttempt, getBest, getHistory, type QuizAttempt, type QuizBest } from '@/lib/quizzes/storage'
+import { recordAndEmit } from '@/lib/gamification/bus'
 import { QuizHome } from './QuizHome'
 import { QuizPlayer } from './QuizPlayer'
 import { ExamRunner } from './ExamRunner'
@@ -164,6 +165,8 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
       persistedRef.current = true
       const total = activeQuestions.length
       const correct = userAnswers.filter(a => a.isCorrect).length
+      const percent = total > 0 ? Math.round((correct / total) * 100) : 0
+      const passed = percent >= quiz.passingScore
       const perDomain: Record<string, { correct: number; total: number }> = {}
       Object.entries(domainResults).forEach(([key, value]) => { perDomain[key] = value })
       addAttempt(quiz.slug, {
@@ -171,9 +174,12 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
         mode: 'practice',
         score: correct,
         total,
-        passed: total > 0 && Math.round((correct / total) * 100) >= quiz.passingScore,
+        passed,
         perDomain,
       })
+      if (passed) {
+        recordAndEmit({ type: 'quiz-pass', quizSlug: quiz.slug, percent, mode: 'practice' })
+      }
       setHistory(getHistory(quiz.slug))
       setBest(getBest(quiz.slug))
     }
@@ -191,6 +197,14 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
         passed: mockPassed,
         perDomain,
       })
+      if (mockPassed) {
+        recordAndEmit({
+          type: 'quiz-pass',
+          quizSlug: quiz.slug,
+          percent: mockQuestions.length > 0 ? Math.round((mockScore / mockQuestions.length) * 100) : 0,
+          mode: 'exam',
+        })
+      }
       setHistory(getHistory(quiz.slug))
       setBest(getBest(quiz.slug))
     }

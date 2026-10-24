@@ -35,6 +35,7 @@ Config: `pyproject.toml` (ruff, pytest, bandit), `.pre-commit-config.yaml`
 - 3 language dictionaries (en.json, es.json, pt.json)
 - **Phase 4 (Quizzes app)**: complete 2026-10-22
 - **Phase 5 (Languages app)**: complete 2026-10-23 — 5 vocabulary activities moved to content/languages/vocabulary/, hub/pair/player routes at /[lang]/languages/, languages.* i18n, v1:lang-* storage, validate-languages hook, noindex stubs at /games/vocabulary/*
+- **Phase 6 (Learning experience)**: complete 2026-10-24 — progress + gamification stores (v1:profile XP/badges/streaks, recordAndEmit bus), lesson outline/progress/feedback/score summary + resume surfaces, ⌘K search (prebuild JSON index 515/596/563 + matcher + lazy palette), rehype-sanitize N6 chain + mermaid strict (F-090/F-091, SEC-01/02 closed), ProfileChip/AwardToaster, /[lang]/quizzes/certificates/; vitest 1209/116, pytest 566 @81.04%, verify_out +~25 probes (51-probe leak audit), ci_sim 16/16, build 1624 pages
 
 ## Current Sprint Focus
 - Python-based deterministic agentic harness

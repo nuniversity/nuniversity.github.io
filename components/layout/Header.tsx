@@ -2,12 +2,17 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
-import { Menu, X, Sun, Moon, Library, Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon, Home, Map, Award, Languages, ChevronDown } from 'lucide-react'
+import { useCallback, useEffect, useState } from 'react'
+import dynamicImport from 'next/dynamic'
+import { Menu, X, Sun, Moon, Search, Library, Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon, Home, Map, Award, Languages, ChevronDown } from 'lucide-react'
 import LanguageSwitcher from '../language/LanguageSwitcher'
+import ProfileChip from '../gamification/ProfileChip'
+import AwardToaster from '../gamification/AwardToaster'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
 import { useTheme } from '@/components/providers/Providers'
+
+const CommandPalette = dynamicImport(() => import('../search/CommandPalette'), { ssr: false })
 
 
 interface HeaderProps {
@@ -19,7 +24,16 @@ interface HeaderProps {
 export default function Header({ lang, dict }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isMoreOpen, setIsMoreOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [isMac, setIsMac] = useState(true)
   const { theme, toggleTheme } = useTheme()
+
+  const openSearch = useCallback(() => setSearchOpen(true), [])
+  const closeSearch = useCallback(() => setSearchOpen(false), [])
+
+  useEffect(() => {
+    setIsMac(/Mac|iPhone|iPad|iPod/.test(navigator.userAgent))
+  }, [])
 
   const primaryNavigation = [
     { name: dict.navigation.home, href: `/${lang}`, icon: Home, isNew: false },
@@ -118,7 +132,22 @@ export default function Header({ lang, dict }: HeaderProps) {
               )}
             </button>
 
+            {/* Search */}
+            <button
+              type="button"
+              onClick={openSearch}
+              aria-label={dict.search.trigger}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center gap-2"
+              data-testid="search-trigger"
+            >
+              <Search className="h-4 w-4 text-gray-700 dark:text-gray-300" />
+              <kbd className="hidden md:inline-flex items-center rounded border border-gray-300 dark:border-gray-600 px-1.5 py-0.5 text-xs font-medium text-gray-500 dark:text-gray-400">
+                {isMac ? '⌘K' : 'Ctrl K'}
+              </kbd>
+            </button>
+
             {/* Language Switcher */}
+            <ProfileChip dict={dict} />
             <LanguageSwitcher currentLocale={lang} />
 
             {/* Mobile Menu Button */}
@@ -161,6 +190,8 @@ export default function Header({ lang, dict }: HeaderProps) {
           
         )}
       </nav>
+      <CommandPalette lang={lang} dict={dict} open={searchOpen} onOpen={openSearch} onClose={closeSearch} />
+      <AwardToaster dict={dict} />
     </header>
   )
 }

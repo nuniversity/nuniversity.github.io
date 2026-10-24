@@ -12,7 +12,12 @@ portfolio in [IMPROVEMENTS.md](./IMPROVEMENTS.md) §2–3; closeout evidence lan
 | W1 stores | ✅ done | `lib/progress/storage.ts` + `lib/gamification/{types,profile}.ts`; 41 vitest |
 | W2 score aggregation | ✅ done | `LessonScoreContext` + 5 widgets wired; exam excluded; 9 vitest (suite 1086) |
 | W3 lesson restructure | ✅ done | Grid `[20rem_1fr]`, `LessonOutline` (TOC w/ DOM-query ids + IO scroll-spy + drawer), `LessonProgress` (scroll bar, ←/→ nav, complete CTA, `recordVisit` tracker), `LessonFeedback`; h2/h3 ids via `rehypeHeadingIds`; reading-time chip ×3 locales; 47 vitest (suite **1133 pass / 116 skip**, tsc 0, lint 0/0, build 1621 pages, verify_out all green) |
-| W4–W9 | ⬜ pending | resume surfaces, ⌘K search, security (rehype-sanitize + mermaid), gamification UI + certificates, verification battery, docs closeout |
+| W4 resume surfaces | ✅ done | ResumeCta (landing), CourseProgressBadge (list), ContinueLearning (home), CourseContentList ✓; outline syllabus check; 15 vitest (suite 1148) |
+| W5 ⌘K search | ✅ done | generator + `prebuild` hook (en 515 / pt 596 / es 563 → gitignored), `lib/search/matcher.ts`, lazy `CommandPalette` + header trigger; 27 vitest (suite 1175); build index ×3 probed |
+| W6 security | ✅ done | `rehype-sanitize` dep + schema + N6 chain (raw→sanitize→headingIds→katex), MathBlock trust removed, mermaid `securityLevel: 'strict'` (F-090/F-091); 11 vitest (suite 1186); out/ probes: katex 28, details, cite index, 0 onerror |
+| W7 gamification UI + certificates | ✅ done | `bus.ts` + `recordAndEmit`, ProfileChip + AwardToaster in Header, 4 wiring sites (LessonCompleteButton/QuizDetail practice/exam/LessonExam), certificates route ×3 + hub link + sitemap; 20 vitest (suite **1206 pass / 116 skip**) |
+| W8 verification | ✅ done | verify_out +~28 probes all green (51-probe leak audit); pytest 566 + coverage **81.04%**; ci_sim **16/16 PASS**; build 1,624 pages |
+| W9 docs closeout | ✅ done | PLAN.md Phase 6 status+evidence; FIXES F-090/F-091 **Fixed** + SEC-01/SEC-02 **CLOSED (Phase 6)**; IMPROVEMENTS §2–3 marks; INDEX/TESTING/assessment README/MEMORY updated; plan-gap fixes (D57 top-8 + ⌘K typing guard, acceptance-3 pt/es palette test, W8 heading/callout/title probes) → suite **1209 pass / 116 skip** |
 
 ## Locked decisions (D54–D64)
 

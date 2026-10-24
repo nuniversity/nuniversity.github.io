@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { ArrowLeft, CheckCircle2, Clock, Send, XCircle } from 'lucide-react'
 import QuestionBlock, { type LessonQuestion } from '@/components/markdown/QuestionBlock'
 import { addAttempt } from '@/lib/quizzes/storage'
+import { recordAndEmit } from '@/lib/gamification/bus'
 import type { Locale } from '@/lib/i18n/config'
 
 interface LessonExamProps {
@@ -55,13 +56,17 @@ export default function LessonExam({
       const total = questions.length
       const correct = questions.filter((q) => finalAnswers[q.id] === q.correct).length
       const percent = total > 0 ? Math.round((correct / total) * 100) : 0
+      const passed = percent >= 70
       addAttempt(lessonId, {
         date: new Date().toISOString().slice(0, 10),
         mode: 'course-exam',
         score: correct,
         total,
-        passed: percent >= 70,
+        passed,
       })
+      if (passed) {
+        recordAndEmit({ type: 'quiz-pass', quizSlug: lessonId, percent, mode: 'course-exam' })
+      }
       setResult({ correct, total, percent })
       setConfirmOpen(false)
       setMode('results')

@@ -5,6 +5,7 @@ import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { BookOpen, Search, Clock, Target, GraduationCap, Sparkles, User } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
+import CourseProgressBadge from '@/components/courses/CourseProgressBadge'
 
 interface Course {
   slug: string
@@ -276,6 +277,11 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
                               <span>{lessonCount} {dict.courses?.lessons || 'lessons'}</span>
                             </div>
                           )}
+                          <CourseProgressBadge
+                            courseSlug={course.slug}
+                            lessonCount={lessonCount}
+                            dict={dict}
+                          />
                         </div>
                         <span className="text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
                           {dict.courses?.start_learning || 'Start →'}

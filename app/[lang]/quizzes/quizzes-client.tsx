@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
-import { Search, Trophy, ArrowRight, FileQuestion } from 'lucide-react'
+import { Search, Trophy, ArrowRight, FileQuestion, Award } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type QuizKind, type QuizSummary } from '@/lib/quizzes/types'
 import { getBest, type QuizBest } from '@/lib/quizzes/storage'
@@ -93,6 +93,15 @@ export function QuizzesClient({ lang, quizzes, dict }: QuizzesClientProps) {
             {dict.quizzes?.subtitle || 'Certification quizzes, practice tests and timed exam simulations with scoring and instant feedback.'}
           </p>
           <p className="mt-4 text-sm text-muted-foreground">{countLabel}</p>
+          <Link
+            href={`/${lang}/quizzes/certificates/`}
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+            data-testid="certificates-link"
+          >
+            <Award className="h-4 w-4" />
+            {dict.quizzes?.certificates?.title || 'My certificates'}
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
         </div>
 
         <div className="bg-card border rounded-2xl p-6 mb-8 space-y-4">

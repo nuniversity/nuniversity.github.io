@@ -52,21 +52,21 @@ modes, progress tracking, localized UI, redirects from old `/games/vocabulary/*`
 | Improvement | Description | Phase |
 |---|---|---|
 | **Course landing/syllabus pages** | Fulfills F-002: curriculum accordion, meta (author/difficulty/duration/lessons), start/resume CTA, breadcrumb target, SEO entry point per course | 2 |
-| **Progress tracking** | `localStorage` per course: mark-lesson-complete, completed set, % on course list + landing; drives resume | 6 |
-| **Resume / continue-learning** | “Continue where you left off” card on home + courses list (last visited lesson) | 6 |
-| **Lesson outline & navigation** | Sticky sidebar (desktop) + drawer (mobile) resurrecting the dead `lesson-client.tsx` design; in-page TOC from headings with anchor links; scroll progress bar; keyboard ←/→ | 6 |
-| **Lesson score aggregation** | Collect results from all question/matching/fillblank/dragdrop widgets in a lesson → “8/10 correct” summary + review of missed items; feeds lesson-complete | 6 |
-| **Reading affordances** | Reading-time estimate, font-size control, copy-link on headings | 6 |
-| **Feedback widget** | “Was this helpful?” per lesson (localStorage + optional Formspree payload) | 6 |
+| **Progress tracking** | `localStorage` per course: mark-lesson-complete, completed set, % on course list + landing; drives resume | 6 ✅ |
+| **Resume / continue-learning** | “Continue where you left off” card on home + courses list (last visited lesson) | 6 ✅ |
+| **Lesson outline & navigation** | Sticky sidebar (desktop) + drawer (mobile) resurrecting the dead `lesson-client.tsx` design; in-page TOC from headings with anchor links; scroll progress bar; keyboard ←/→ | 6 ✅ |
+| **Lesson score aggregation** | Collect results from all question/matching/fillblank/dragdrop widgets in a lesson → “8/10 correct” summary + review of missed items; feeds lesson-complete | 6 ✅ |
+| **Reading affordances** | Reading-time estimate, font-size control, copy-link on headings | 6 ⚠ partial (reading time ✅; font-size control + copy-link → Phase 7) |
+| **Feedback widget** | “Was this helpful?” per lesson (localStorage + optional Formspree payload) | 6 ✅ |
 
 ## 3. Search, gamification, engagement
 
 | Improvement | Description | Phase |
 |---|---|---|
-| **Site-wide search (⌘K)** | Command-palette over courses, lessons, tools, games, library, roadmaps, quizzes — build-time JSON index (pagefind/flexsearch); header entry point | 6 |
-| **XP, levels & streaks** | Earn XP for lessons/quizzes; daily streak; visible profile chip (all localStorage — static-export safe) | 6 |
-| **Badges & achievements** | First lesson, course complete, perfect quiz, roadmap 100%, language streak… | 6 |
-| **Certificates** | Printable certificate on passing mock exams (quizzes app) and course completion — PDF/print layout with slug verification code | 4/6 |
+| **Site-wide search (⌘K)** | Command-palette over courses, lessons, tools, games, library, roadmaps, quizzes — build-time JSON index (pagefind/flexsearch); header entry point | 6 ✅ (custom matcher + `prebuild` JSON index) |
+| **XP, levels & streaks** | Earn XP for lessons/quizzes; daily streak; visible profile chip (all localStorage — static-export safe) | 6 ✅ |
+| **Badges & achievements** | First lesson, course complete, perfect quiz, roadmap 100%, language streak… | 6 ✅ (5 badges shipped: first-lesson/quiz-pass/perfect-quiz/course-complete/streak-7; roadmap + language badges → v2) |
+| **Certificates** | Printable certificate on passing mock exams (quizzes app) and course completion — PDF/print layout with slug verification code | 4/6 ✅ (mock-exam certs + `/quizzes/certificates/` hub shipped; course-completion certificate → v2) |
 | **Home upgrades** | Roadmaps section, Games rail, “Continue learning” rail, real stats (fix F-024/F-042), search hero CTA | 8 |
 
 ## 4. Roadmaps

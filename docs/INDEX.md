@@ -129,7 +129,7 @@ How to deploy, test, and contribute.
 | Document | Lines | What You'll Learn |
 |---|---|---|
 | [DEPLOYMENT.md](./operations/DEPLOYMENT.md) | 409 | GitHub Pages config, CI/CD pipeline, static export constraints |
-| [TESTING.md](./operations/TESTING.md) | 309 | Test plan & suites (1,036 vitest / 566 pytest), mocking strategy, Vitest setup |
+| [TESTING.md](./operations/TESTING.md) | 309 | Test plan & suites (1,209 vitest / 566 pytest), mocking strategy, Vitest setup |
 | [CONTRIBUTING.md](./operations/CONTRIBUTING.md) | 495 | Branching, commit conventions, PR process, code style |
 
 ### AI & Agents

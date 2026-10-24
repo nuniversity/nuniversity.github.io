@@ -137,7 +137,7 @@ The *Phase* column maps to [PLAN.md](./PLAN.md).
 | ISSUE-08 results count EN | OPEN | F-029 |
 | ISSUE-09 course plural EN | OPEN | F-028 |
 | ISSUE-10 lesson locale params | OPEN | covered by course-gate expansion (PLAN P1) |
-| SEC-01 rehype-raw | OPEN | F-090 |
+| SEC-01 rehype-raw | CLOSED (Phase 6) | F-090 → `rehype-sanitize` (allowlist over `defaultSchema`) chained after `rehype-raw` (N6); W6 fixture tests + out/ HTML probes |
 | IMPROVE-11 Eisenhower inline maps | OPEN | F-022 |
 | IMPROVE-12 no loading on dynamic imports | OPEN | F-100 (below) |
 | IMPROVE-13 mermaid course | OBSOLETE | — (course removed) |
@@ -146,7 +146,7 @@ The *Phase* column maps to [PLAN.md](./PLAN.md).
 | IMPROVE-16 error boundaries | OPEN | F-004 |
 | IMPROVE-17 placeholder about title | OPEN | F-047 |
 | IMPROVE-18 slider reset | CLOSED (Phase 5) | F-101 → clamp effect with functional update + `maxPairs` dep in moved client |
-| SEC-02 mermaid loose | OPEN | F-091 |
+| SEC-02 mermaid loose | CLOSED (Phase 6) | F-091 → `securityLevel: 'strict'` (D59), `htmlLabels` line removed; `mermaid-security.test.tsx` asserts initialize config |
 | SEC-03 formspree placeholder | OPEN | F-015 |
 | PERF-01 lazy loading | OPEN | F-045 |
 | IMPROVE-19 ts strict | CLOSED (Phase 1) | H-002 → `strict: true` ×3, `ignoreBuildErrors` removed |
@@ -288,4 +288,18 @@ Deep plan: [PLAN-PHASE5.md](./PLAN-PHASE5.md) (W0–W9), decisions **D45–D53**
 Also landed: coverage pre-work restoring the **≥80%** gate (80.29%, W0), `v1:lang-*` storage with legacy dual-read + matching best-score (17 tests), `validate-languages` hook (35 pytest + `languages-gate-5`), vocabulary stripped from the game hook (`VALID_CATEGORIES` → 6, example/schema updated), games-hub cross-link promo card, Header `More ▾` dropdown + Languages item (partial F-060 collapse), sitemap languages loops, and 13 new leak probes (45 total) over `out/pt` + `out/es`.
 
 
-**Totals:** 15 P0 · 38 P1 · 30+ P2 (incl. legacy mapping) + 8 content-quality defects (F-104–F-111) — sequenced across Phases 1–7 in [PLAN.md](./PLAN.md); F-104–F-111 closed ahead of Phase 9; Phase 1 harness items closed 2026-10-20; Phase 2 critical-bug items closed 2026-10-21 (residual: error.tsx boundaries → Phase 7); Phase 3 i18n items closed 2026-10-22 (residual: F-053 missing translations → Phase 9); Phase 4 quizzes app closed 2026-10-22 (residuals: question banks → Phase 9, header F-060 full redesign → Phase 7); Phase 5 languages app closed 2026-10-23 (residuals: home Languages rail → Phase 8, language course tracks → Phase 9, full header redesign → Phase 7).
+## Phase 6 closeout — Learning experience (2026-10-24)
+
+Deep plan: [PLAN-PHASE6.md](./PLAN-PHASE6.md) (W0–W9), decisions **D54–D64** + amendments N1–N8.
+
+| ID | Status | Evidence |
+|---|---|---|
+| F-090 | **Fixed** | `rehype-sanitize` installed and chained after `rehype-raw` per N6 (raw → sanitize → headingIds → katex); `sanitizeSchema` layers `cite[index]`/`a[target]`/`div[className]`/`span[className]` over `defaultSchema` (D58); MathBlock `trust` removed; 9 fixture tests assert script/`onerror`/`javascript:` stripping while callouts, details/summary, cite, kbd, interactive and KaTeX survive; out/ probes: 28 KaTeX nodes, `<details>`, `<cite index=` on sample lessons, 0 XSS-attribute hits |
+| F-091 | **Fixed** | mermaid `securityLevel: 'strict'` set at initialize (D59), `htmlLabels` line removed instead of pinned false; `mermaid-security.test.tsx` (2 tests) locks the config and the flowchart renderer options; build chunks ship `securityLevel:"strict"` |
+| F-103 | **Fixed** | (see Phase 2 closeout) `resolveContentUrl` pure helper + `RoadmapStepCard` wiring — unchanged in Phase 6 |
+| SEC-01 / SEC-02 | **Closed** | legacy cross-reference rows flipped above — the last two open security items from ASSESSMENT.md |
+
+Also landed: progress + gamification stores (`lib/progress/storage.ts`, `lib/gamification/{types,profile,bus}.ts` — 46 tests), lesson restructure (outline/progress/feedback/score summary + heading ids, 56 tests), resume surfaces across landing/list/home/lesson, ⌘K search (generator `prebuild` 515/596/563 docs, matcher, lazy palette, header trigger — 27 tests), ProfileChip + AwardToaster + `recordAndEmit` wiring at 4 sites, certificates route ×3 with hub link + sitemap (+6 leak probes → 51-probe audit), and `verify_out` +~28 probes (heading-id/callout/pt-es-title-sample added in closeout) → **16/16** ci_sim PASS (pytest 566 @ 81.04% coverage, vitest 1209/116, build 1,624 pages).
+
+
+**Totals:** 15 P0 · 38 P1 · 30+ P2 (incl. legacy mapping) + 8 content-quality defects (F-104–F-111) — sequenced across Phases 1–7 in [PLAN.md](./PLAN.md); F-104–F-111 closed ahead of Phase 9; Phase 1 harness items closed 2026-10-20; Phase 2 critical-bug items closed 2026-10-21 (residual: error.tsx boundaries → Phase 7); Phase 3 i18n items closed 2026-10-22 (residual: F-053 missing translations → Phase 9); Phase 4 quizzes app closed 2026-10-22 (residuals: question banks → Phase 9, header F-060 full redesign → Phase 7); Phase 5 languages app closed 2026-10-23 (residuals: home Languages rail → Phase 8, language course tracks → Phase 9, full header redesign → Phase 7); Phase 6 learning experience closed 2026-10-24 (residuals: font-size control + heading copy-link → Phase 7, roadmap/language badges + course-completion certificate → gamification v2, F-060 → Phase 7).

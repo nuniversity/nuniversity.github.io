@@ -4,6 +4,7 @@ import { getDictionary } from '@/lib/i18n/get-dictionary'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
+import ResumeCta from '@/components/courses/ResumeCta'
 import {
   ArrowLeft,
   ArrowRight,
@@ -146,14 +147,13 @@ export default async function CourseLandingPage({
             )}
           </div>
 
-          <Link
-            href={`/${lang}/courses/${course.slug}/${lessons[0].slug}/`}
-            className="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
-          >
-            <BookOpen className="w-4 h-4" />
-            {dict.courses?.start_learning || 'Start Learning'}
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <ResumeCta
+            lang={lang}
+            courseSlug={course.slug}
+            lessonSlugs={lessons.map((l) => l.slug)}
+            lessonCount={lessons.length}
+            dict={dict}
+          />
         </div>
 
         <div>

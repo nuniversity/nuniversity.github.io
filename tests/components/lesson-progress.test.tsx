@@ -13,6 +13,7 @@ import {
   getLastVisited,
   markLessonComplete,
 } from '@/lib/progress/storage'
+import { getProfile } from '@/lib/gamification/profile'
 
 vi.stubGlobal('React', React)
 
@@ -83,6 +84,42 @@ describe('LessonCompleteButton', () => {
 
     expect(screen.getByTestId('lesson-complete-button')).toHaveAttribute('aria-pressed', 'false')
     expect(getCourseProgress('other-course')?.completed).toEqual(['intro'])
+  })
+
+  it('awards lesson and course XP when the final lesson completes', () => {
+    render(
+      <LessonCompleteButton
+        courseSlug="aws-aif-c01"
+        lessonSlug="intro"
+        lessonSlugs={['intro']}
+        dict={dict}
+      />
+    )
+
+    fireEvent.click(screen.getByTestId('lesson-complete-button'))
+
+    const profile = getProfile()
+    expect(profile.xp).toBe(110)
+    expect(Object.keys(profile.badges)).toEqual(
+      expect.arrayContaining(['first-lesson', 'course-complete'])
+    )
+  })
+
+  it('withholds the course award until every lesson is complete', () => {
+    render(
+      <LessonCompleteButton
+        courseSlug="aws-aif-c01"
+        lessonSlug="intro"
+        lessonSlugs={['intro', 'setup']}
+        dict={dict}
+      />
+    )
+
+    fireEvent.click(screen.getByTestId('lesson-complete-button'))
+
+    const profile = getProfile()
+    expect(profile.xp).toBe(10)
+    expect(Object.keys(profile.badges)).toEqual(['first-lesson'])
   })
 })
 

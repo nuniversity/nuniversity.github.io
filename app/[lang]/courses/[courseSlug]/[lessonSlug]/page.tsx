@@ -13,6 +13,7 @@ import {
   LessonVisitTracker,
 } from '@/components/lessons/LessonProgress'
 import LessonFeedback from '@/components/lessons/LessonFeedback'
+import CourseContentList from '@/components/lessons/CourseContentList'
 import { extractExamQuestions } from '@/lib/markdown/exam-questions'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -245,6 +246,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
             <LessonCompleteButton
               courseSlug={courseSlug}
               lessonSlug={lessonSlug}
+              lessonSlugs={allLessons.map(lesson => lesson.slug)}
               dict={dict}
             />
           </div>
@@ -326,23 +328,13 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
                 <BookOpen className="w-5 h-5" />
                 {dict.courses?.course_content || 'Course Content'}
               </h3>
-              <div className="space-y-2">
-                {allLessons.map((l, index) => (
-                  <Link
-                    key={l.slug}
-                    href={`/${lang}/courses/${courseSlug}/${l.slug}`}
-                    className={`block px-3 py-2 rounded-lg transition-colors ${
-                      l.slug === lessonSlug
-                        ? 'bg-primary text-primary-foreground font-medium'
-                        : 'hover:bg-accent text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    <span className="text-sm">
-                      {index + 1}. {l.metadata.title}
-                    </span>
-                  </Link>
-                ))}
-              </div>
+              <CourseContentList
+                lang={lang}
+                courseSlug={courseSlug}
+                lessonSlug={lessonSlug}
+                lessons={allLessons.map(l => ({ slug: l.slug, title: l.metadata.title }))}
+                dict={dict}
+              />
             </div>
           )}
           </div>

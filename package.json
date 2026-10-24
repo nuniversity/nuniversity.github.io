@@ -7,6 +7,7 @@
     "build": "next build && node scripts/postbuild.mjs",
     "start": "npx serve out -l 3000",
     "lint": "next lint",
+    "prebuild": "node scripts/generate-search-index.mjs",
     "prepare": "husky",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -35,6 +36,7 @@
     "recharts": "^3.10.1",
     "rehype-katex": "^7.0.1",
     "rehype-raw": "^7.0.0",
+    "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
     "tailwindcss": "^3.3.0"

@@ -5,6 +5,7 @@ import FeaturedCourses from '@/components/home/FeaturedCourses'
 import Stats from '@/components/home/Stats'
 import Tools from '@/components/home/Tools'
 import Newsletter from '@/components/home/Newsletter'
+import ContinueLearning from '@/components/home/ContinueLearning'
 import { Metadata } from 'next'
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import { type Locale } from '@/lib/i18n/config'
@@ -64,6 +65,7 @@ export default async function HomePage({
       <Hero lang={params.lang} dict={dict} />
       <Features lang={params.lang} dict={dict} />
       <Stats dict={dict} stats={stats} />
+      <ContinueLearning lang={params.lang} dict={dict} courses={courses} />
       <FeaturedCourses lang={params.lang} dict={dict} courses={courses} />
       <Tools lang={params.lang} dict={dict} tools={tools} />
       <Newsletter dict={dict} />

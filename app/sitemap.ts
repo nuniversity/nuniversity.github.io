@@ -20,6 +20,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const p of staticPaths) {
       entries.push({ url: `${base}${prefix}/${p}/`, changeFrequency: 'weekly', priority: 0.8 })
     }
+    entries.push({
+      url: `${base}${prefix}/quizzes/certificates/`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    })
     for (const course of await getAllCourses(lang)) {
       entries.push({
         url: `${base}${prefix}/courses/${course.slug}/`,

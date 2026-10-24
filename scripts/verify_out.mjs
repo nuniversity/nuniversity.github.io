@@ -206,6 +206,142 @@ if (!coreOnly) {
     ok(false, 'exam lesson PT page exists')
   }
 
+  console.log('  -- search --')
+  const searchCounts = {}
+  for (const loc of locales) {
+    const rel = `search-index/${loc}.json`
+    ok(exists(rel), `${loc} search index exported`)
+    if (exists(rel)) {
+      let count = -1
+      try {
+        count = JSON.parse(read(rel)).length
+      } catch {
+        count = -1
+      }
+      ok(count > 400 && count < 900, `${loc} search index size within 400-900 (got ${count})`)
+      searchCounts[loc] = count
+    }
+  }
+  ok(searchCounts.pt !== searchCounts.en, 'pt search index differs from en')
+  if (exists('search-index/en.json') && exists('search-index/pt.json') && exists('search-index/es.json')) {
+    try {
+      const titles = (loc) => JSON.parse(read(`search-index/${loc}.json`)).map((d) => d.title)
+      const enTitles = new Set(titles('en'))
+      const ptOnly = titles('pt').filter((t) => !enTitles.has(t)).length
+      const esOnly = titles('es').filter((t) => !enTitles.has(t)).length
+      ok(ptOnly > 0 && esOnly > 0, `pt/es index titles localized vs en (pt-only ${ptOnly}, es-only ${esOnly})`)
+    } catch {
+      ok(false, 'pt/es index titles localized vs en')
+    }
+  } else {
+    ok(false, 'all 3 search indexes exist for title sample')
+  }
+  if (exists('en/index.html')) {
+    const home = read('en/index.html')
+    ok(
+      home.includes('search-trigger') && home.includes('aria-label="Search"'),
+      'EN header search trigger (data-testid + aria-label)'
+    )
+    ok(home.includes('⌘K'), 'EN header shows ⌘K shortcut')
+  } else {
+    ok(false, 'en home exists')
+  }
+
+  console.log('  -- post-sanitize lesson html (W6) --')
+  const katexPage = 'en/courses/aws-aif-c01/04-ml-algorithms-evaluation/index.html'
+  const detailsPage = 'en/courses/processes-flowchart/01-what-are-processes/index.html'
+  const citePage = 'en/courses/dbt-redshift-advanced/11-dbt-fusion-engine-and-dbt-wizard/index.html'
+  if (exists(katexPage)) {
+    const katexHtml = read(katexPage)
+    const katexCount = (katexHtml.match(/class="katex"/g) || []).length
+    ok(katexCount >= 20, `KaTeX rendered after sanitization (${katexCount} nodes)`)
+    ok(
+      /<h2 id="[^"]+"/.test(katexHtml) && katexHtml.includes('scroll-mt-24'),
+      'heading ids + scroll-mt-24 survive sanitization'
+    )
+  } else {
+    ok(false, 'katex probe lesson exists')
+  }
+  const calloutPage = 'en/courses/agent-memory-knowledge/01-foundations-of-agent-memory/index.html'
+  if (exists(calloutPage)) {
+    ok(read(calloutPage).includes('class="callout callout-'), 'callout classes survive sanitization')
+  } else {
+    ok(false, 'callout probe lesson exists')
+  }
+  if (exists(detailsPage)) {
+    const detailsHtml = read(detailsPage)
+    ok(detailsHtml.includes('<details') && detailsHtml.includes('<summary'), 'details/summary preserved after sanitization')
+  } else {
+    ok(false, 'details probe lesson exists')
+  }
+  if (exists(citePage)) {
+    ok(read(citePage).includes('<cite index='), 'cite index attribute preserved after sanitization')
+  } else {
+    ok(false, 'cite probe lesson exists')
+  }
+  const sanitizePages = [katexPage, detailsPage, citePage, 'en/index.html'].filter((p) => exists(p))
+  const dirtyPages = sanitizePages.filter((p) => {
+    const html = read(p)
+    return /<[a-z][^>]*\sonerror=/i.test(html) || /<a [^>]*href="javascript:/i.test(html)
+  })
+  ok(
+    dirtyPages.length === 0,
+    `no onerror= or javascript: hrefs on probe pages (${sanitizePages.length} checked${dirtyPages.length ? ': ' + dirtyPages.join(', ') : ''})`
+  )
+
+  console.log('  -- certificates + footer (W7/D64) --')
+  for (const loc of locales) {
+    const certRel = `${loc}/quizzes/certificates/index.html`
+    ok(
+      exists(certRel) &&
+        read(certRel).includes(`<link rel="canonical" href="${ORIGIN}/${loc}/quizzes/certificates/"/>`),
+      `${loc} certificates route exported with self canonical`
+    )
+  }
+  if (exists('en/quizzes/index.html')) {
+    const hub = read('en/quizzes/index.html')
+    ok(
+      hub.includes('certificates-link') && hub.includes('href="/en/quizzes/certificates/'),
+      'quizzes hub links to certificates'
+    )
+  } else {
+    ok(false, 'en quizzes hub exists')
+  }
+  if (exists('sitemap.xml')) {
+    const sm = read('sitemap.xml')
+    ok(
+      locales.every((l) => sm.includes(`${ORIGIN}/${l}/quizzes/certificates/`)),
+      'sitemap lists certificates route for all locales'
+    )
+  }
+  const chunkFiles = []
+  const chunksDir = path.join(OUT, '_next', 'static', 'chunks')
+  const scanChunks = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name)
+      if (entry.isDirectory()) scanChunks(full)
+      else if (entry.name.endsWith('.js')) chunkFiles.push(full)
+    }
+  }
+  if (fs.existsSync(chunksDir)) scanChunks(chunksDir)
+  const hasBadgeString = chunkFiles.some((f) => fs.readFileSync(f, 'utf8').includes('Badge earned:'))
+  const hasLevelString = chunkFiles.some((f) =>
+    fs.readFileSync(f, 'utf8').includes('Level up! You reached level')
+  )
+  ok(hasBadgeString, 'Badge earned: template ships in client bundle')
+  ok(hasLevelString, 'level-up template ships in client bundle')
+  if (exists('en/index.html')) {
+    const footerMatch = read('en/index.html').match(/<footer[\s\S]*?<\/footer>/)
+    ok(!!footerMatch, 'en home has a footer element')
+    if (footerMatch) {
+      ok(footerMatch[0].includes('/en/roadmaps'), 'footer links to Roadmaps (D64)')
+      ok(footerMatch[0].includes('/en/languages'), 'footer links to Languages (D64)')
+    } else {
+      ok(false, 'footer links to Roadmaps (D64)')
+      ok(false, 'footer links to Languages (D64)')
+    }
+  }
+
   console.log('  -- i18n leak audit (pt/es chrome strings) --')
   const LEAK_STRINGS = [
     'NUniversity - Learn, Code, and Grow',
@@ -252,6 +388,12 @@ if (!coreOnly) {
     'Best score:',
     'Not attempted',
     'Number of pairs:',
+    'My certificates',
+    'No certificates yet',
+    'Certifications earned by passing mock exams',
+    'Badge earned:',
+    'Level up! You reached level',
+    'Enter your name to issue the certificate',
   ]
   const LEAK_WAIVERS = []
   const LESSON_BODY_RE = /^\/(pt|es)\/courses\/[^/]+\/[^/]+\/index\.html$/

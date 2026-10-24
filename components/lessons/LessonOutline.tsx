@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { ChevronLeft, Menu, X, BookOpen } from 'lucide-react'
+import { ChevronLeft, Menu, X, BookOpen, Check } from 'lucide-react'
+import { getCourseProgress } from '@/lib/progress/storage'
 
 interface OutlineLesson {
   slug: string
@@ -29,6 +30,11 @@ export default function LessonOutline({ lang, courseSlug, lessonSlug, courseTitl
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [headings, setHeadings] = useState<TocHeading[]>([])
   const [activeId, setActiveId] = useState('')
+  const [completed, setCompleted] = useState<Set<string> | null>(null)
+
+  useEffect(() => {
+    setCompleted(new Set(getCourseProgress(courseSlug)?.completed ?? []))
+  }, [courseSlug])
 
   useEffect(() => {
     setDrawerOpen(false)
@@ -129,6 +135,15 @@ export default function LessonOutline({ lang, courseSlug, lessonSlug, courseTitl
               >
                 <span className="shrink-0 tabular-nums opacity-70">{String(index + 1).padStart(2, '0')}</span>
                 <span className="min-w-0 leading-snug break-words">{lesson.title}</span>
+                {completed?.has(lesson.slug) && (
+                  <span
+                    className="ml-auto shrink-0"
+                    title={dict?.lesson?.completed_badge || 'Completed'}
+                    data-testid="outline-check"
+                  >
+                    <Check className="h-3.5 w-3.5 text-green-600 dark:text-green-400" />
+                  </span>
+                )}
               </Link>
             ))}
           </nav>

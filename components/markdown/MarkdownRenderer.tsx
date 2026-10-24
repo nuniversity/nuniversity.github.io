@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import rehypeRaw from 'rehype-raw'
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
 import rehypeKatex from 'rehype-katex'
 import 'katex/dist/katex.min.css'
 import { useState, useEffect, useRef } from 'react'
@@ -20,6 +21,18 @@ import FillBlankQuestion from './FillBlankQuestion'
 import BucketDropQuestion from './BucketDropQuestion'
 import type { LessonQuestion } from './QuestionBlock'
 import { rehypeHeadingIds } from '@/lib/lessons/heading-ids'
+
+const sanitizeSchema = {
+  ...defaultSchema,
+  tagNames: [...(defaultSchema.tagNames ?? []), 'cite'],
+  attributes: {
+    ...defaultSchema.attributes,
+    a: [...(defaultSchema.attributes?.a ?? []), 'target'],
+    cite: ['index'],
+    div: [...(defaultSchema.attributes?.div ?? []), 'className'],
+    span: ['className'],
+  },
+}
 
 interface MarkdownRendererProps {
   content: string
@@ -101,7 +114,6 @@ function MathBlock({ tex }: MathBlockProps) {
         const html = katex.default.renderToString(tex, {
           displayMode: true,
           throwOnError: false,
-          trust: true,
         })
         containerRef.current.innerHTML = html
       } catch (err) {
@@ -154,11 +166,10 @@ function MermaidDiagram({ code }: MermaidDiagramProps) {
           mermaidRef.current.initialize({
             startOnLoad: false,
             theme: 'default',
-            securityLevel: 'loose',
+            securityLevel: 'strict',
             fontFamily: 'inherit',
             flowchart: {
               useMaxWidth: false,
-              htmlLabels: true,
               curve: 'basis',
             },
           })
@@ -390,7 +401,7 @@ export default function MarkdownRenderer({ content, lang = 'en', dict }: Markdow
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm, remarkMath]}
-      rehypePlugins={[rehypeRaw, rehypeHeadingIds, rehypeKatex]}
+      rehypePlugins={[rehypeRaw, [rehypeSanitize, sanitizeSchema], rehypeHeadingIds, rehypeKatex]}
       components={{
         h1: ({ children }) => <h1 className="text-4xl font-bold mb-6 mt-8 text-foreground">{children}</h1>,
         h2: ({ children, id }) => <h2 id={id} className="text-3xl font-bold mb-4 mt-6 text-foreground border-b pb-2 scroll-mt-24">{children}</h2>,

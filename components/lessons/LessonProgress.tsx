@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { motion, useScroll } from 'framer-motion'
 import { Check, CheckCircle2 } from 'lucide-react'
 import { isLessonComplete, markLessonComplete, markLessonIncomplete, recordVisit } from '@/lib/progress/storage'
+import { recordAndEmit } from '@/lib/gamification/bus'
 
 export function LessonScrollProgress() {
   const { scrollYProgress } = useScroll()
@@ -47,9 +48,10 @@ export function LessonKeyboardNav({ prevHref, nextHref }: { prevHref: string | n
   return null
 }
 
-export function LessonCompleteButton({ courseSlug, lessonSlug, dict }: {
+export function LessonCompleteButton({ courseSlug, lessonSlug, lessonSlugs, dict }: {
   courseSlug: string
   lessonSlug: string
+  lessonSlugs?: string[]
   dict: any
 }) {
   const [completed, setCompleted] = useState(false)
@@ -65,8 +67,17 @@ export function LessonCompleteButton({ courseSlug, lessonSlug, dict }: {
       markLessonIncomplete(courseSlug, lessonSlug)
       setCompleted(false)
     } else {
-      markLessonComplete(courseSlug, lessonSlug)
+      const { progress, newlyCompleted } = markLessonComplete(courseSlug, lessonSlug)
       setCompleted(true)
+      if (newlyCompleted) {
+        recordAndEmit({ type: 'lesson-complete', courseSlug, lessonSlug })
+        const completeCourse =
+          (lessonSlugs?.length ?? 0) > 0 &&
+          (lessonSlugs ?? []).every(slug => progress.completed.includes(slug))
+        if (completeCourse) {
+          recordAndEmit({ type: 'course-complete', courseSlug })
+        }
+      }
     }
   }
 
