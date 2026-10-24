@@ -4,6 +4,15 @@ import { type Locale, i18n } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import MarkdownRenderer from '@/components/markdown/MarkdownRenderer'
 import LessonExam from '@/components/quizzes/LessonExam'
+import { LessonScoreProvider, LessonScoreSummary } from '@/components/lessons/LessonScoreContext'
+import LessonOutline from '@/components/lessons/LessonOutline'
+import {
+  LessonScrollProgress,
+  LessonKeyboardNav,
+  LessonCompleteButton,
+  LessonVisitTracker,
+} from '@/components/lessons/LessonProgress'
+import LessonFeedback from '@/components/lessons/LessonFeedback'
 import { extractExamQuestions } from '@/lib/markdown/exam-questions'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -103,186 +112,241 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
   const allCourses = await getAllCourses(lang)
   const courseInfo = allCourses.find(c => c.slug === courseSlug)
 
+  const words = lesson.content
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`[^`]*`/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean).length
+  const readingMinutes = Math.max(1, Math.ceil(words / 200))
+  const prevHref = prevLesson ? `/${lang}/courses/${courseSlug}/${prevLesson.slug}` : null
+  const nextHref = nextLesson ? `/${lang}/courses/${courseSlug}/${nextLesson.slug}` : null
+
   return (
     <div className="container-custom py-12">
-      <div className="max-w-4xl mx-auto">
-        {/* Breadcrumb */}
-        <nav className="mb-8 flex items-center flex-wrap gap-2 text-sm text-muted-foreground">
+      <LessonScrollProgress />
+      <LessonKeyboardNav prevHref={prevHref} nextHref={nextHref} />
+      <LessonVisitTracker
+        courseSlug={courseSlug}
+        lessonSlug={lessonSlug}
+        courseTitle={courseInfo?.title ?? courseSlug}
+        lessonTitle={lesson.metadata.title}
+        lang={lang}
+      />
+      <div className="lg:grid lg:grid-cols-[20rem_1fr] lg:gap-8 lg:items-start">
+        <LessonOutline
+          lang={lang}
+          courseSlug={courseSlug}
+          lessonSlug={lessonSlug}
+          courseTitle={courseInfo?.title ?? courseSlug}
+          lessonTitle={lesson.metadata.title}
+          lessons={allLessons.map(l => ({ slug: l.slug, title: l.metadata.title }))}
+          dict={dict}
+        />
 
-          <Link href={`/${lang}`} className="hover:text-foreground flex items-center gap-1">
-            <Home className="w-4 h-4" />
-            <span>{dict.navigation.home}</span>
-          </Link>
+        <div className="min-w-0">
+          <div className="max-w-4xl mx-auto">
+          {/* Breadcrumb */}
+          <nav className="mb-8 flex items-center flex-wrap gap-2 text-sm text-muted-foreground">
 
-          <span>/</span>
+            <Link href={`/${lang}`} className="hover:text-foreground flex items-center gap-1">
+              <Home className="w-4 h-4" />
+              <span>{dict.navigation.home}</span>
+            </Link>
 
-          <Link href={`/${lang}/courses`} className="hover:text-foreground flex items-center gap-1">
-            <BookOpen className="w-4 h-4" />
-            <span>{dict.navigation.courses}</span>
-          </Link>
+            <span>/</span>
 
-          <span>/</span>
+            <Link href={`/${lang}/courses`} className="hover:text-foreground flex items-center gap-1">
+              <BookOpen className="w-4 h-4" />
+              <span>{dict.navigation.courses}</span>
+            </Link>
 
-          {courseInfo && (
-            <>
-              <Link
-                href={`/${lang}/courses/${courseSlug}/`}
-                className="hover:text-foreground max-w-[200px] truncate"
-              >
-                {courseInfo.title}
-              </Link>
-              <span>/</span>
-            </>
-          )}
+            <span>/</span>
 
-          <span className="text-foreground font-medium max-w-[200px] truncate">
-            {lesson.metadata.title}
-          </span>
-
-        </nav>
-
-        {/* Lesson Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4 flex-wrap">
-            {lesson.metadata.difficulty && (
-              <span
-                className={`px-3 py-1 rounded-full text-xs font-medium ${
-                  lesson.metadata.difficulty === 'beginner'
-                    ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
-                    : lesson.metadata.difficulty === 'intermediate'
-                    ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300'
-                    : 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
-                }`}
-              >
-                {dict.courses?.difficulty_labels?.[lesson.metadata.difficulty] || lesson.metadata.difficulty}
-              </span>
-            )}
-            {lesson.metadata.duration && (
-              <span className="text-sm text-muted-foreground flex items-center gap-1">
-                <span>⏱</span>
-                {lesson.metadata.duration}
-              </span>
-            )}
-            {currentIndex >= 0 && (
-              <span className="text-sm text-muted-foreground">
-                {dict.courses?.lesson || 'Lesson'} {currentIndex + 1} {dict.common?.of || 'of'} {allLessons.length}
-              </span>
-            )}
-          </div>
-          <h1 className="text-4xl font-bold mb-4">{lesson.metadata.title}</h1>
-          {lesson.metadata.description && (
-            <p className="text-xl text-muted-foreground">
-              {lesson.metadata.description}
-            </p>
-          )}
-        </div>
-
-        {/* Lesson Content */}
-        <div className="bg-card rounded-lg border p-8 mb-8 shadow-sm">
-          {lesson.metadata.exam && lessonQuestions.length > 0 ? (
-            <LessonExam
-              lang={lang}
-              lessonId={`${courseSlug}/${lessonSlug}`}
-              questions={lessonQuestions}
-              examMinutes={lesson.metadata.examMinutes ?? 90}
-              dict={dict}
-            >
-              <MarkdownRenderer content={lesson.content} lang={lang} dict={dict} />
-            </LessonExam>
-          ) : (
-            <MarkdownRenderer content={lesson.content} lang={lang} dict={dict} />
-          )}
-        </div>
-
-        {/* Progress Bar */}
-        {allLessons.length > 1 && (
-          <div className="mb-8">
-            <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
-              <span>{dict.courses?.progress || 'Progress'}</span>
-              <span>{Math.round(((currentIndex + 1) / allLessons.length) * 100)}%</span>
-            </div>
-            <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300"
-                style={{ width: `${((currentIndex + 1) / allLessons.length) * 100}%` }}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Navigation */}
-        <div className="max-w-4xl mx-auto flex justify-between items-center gap-4">
-          <div className="flex-1">
-            {prevLesson ? (
-              <Link
-                href={`/${lang}/courses/${courseSlug}/${prevLesson.slug}`}
-                className="group flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors border border-transparent hover:border-border"
-              >
-                <ChevronLeft className="w-5 h-5 flex-shrink-0 group-hover:-translate-x-1 transition-transform" />
-                <div className="text-left min-w-0">
-                  <div className="text-xs text-muted-foreground mb-1">
-                    {dict.common.previous}
-                  </div>
-                  <div className="font-medium break-words max-w-[calc(100%-2rem)]">{prevLesson.metadata.title}</div>
-                </div>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-          </div>
-          
-          <div className="flex-1 flex justify-end">
-            {nextLesson ? (
-              <Link
-                href={`/${lang}/courses/${courseSlug}/${nextLesson.slug}`}
-                className="group flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors border border-transparent hover:border-border"
-              >
-                <div className="text-right min-w-0">
-                  <div className="text-xs text-muted-foreground mb-1">
-                    {dict.common.next}
-                  </div>
-                  <div className="font-medium break-words max-w-[calc(100%-2rem)] text-right">{nextLesson.metadata.title}</div>
-                </div>
-                <ChevronRight className="w-5 h-5 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            ) : (
-              <Link
-                href={`/${lang}/courses`}
-                className="flex items-center gap-2 px-4 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-              >
-                <BookOpen className="w-5 h-5" />
-                <span>{dict.courses?.back_to_courses || 'Back to Courses'}</span>
-              </Link>
-            )}
-          </div>
-        </div>
-
-        {/* Course Overview Sidebar (Optional) */}
-        {allLessons.length > 1 && (
-          <div className="mt-12 p-6 bg-muted/50 rounded-lg border">
-            <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <BookOpen className="w-5 h-5" />
-              {dict.courses?.course_content || 'Course Content'}
-            </h3>
-            <div className="space-y-2">
-              {allLessons.map((l, index) => (
+            {courseInfo && (
+              <>
                 <Link
-                  key={l.slug}
-                  href={`/${lang}/courses/${courseSlug}/${l.slug}`}
-                  className={`block px-3 py-2 rounded-lg transition-colors ${
-                    l.slug === lessonSlug
-                      ? 'bg-primary text-primary-foreground font-medium'
-                      : 'hover:bg-accent text-muted-foreground hover:text-foreground'
+                  href={`/${lang}/courses/${courseSlug}/`}
+                  className="hover:text-foreground max-w-[200px] truncate"
+                >
+                  {courseInfo.title}
+                </Link>
+                <span>/</span>
+              </>
+            )}
+
+            <span className="text-foreground font-medium max-w-[200px] truncate">
+              {lesson.metadata.title}
+            </span>
+
+          </nav>
+
+          {/* Lesson Header */}
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-4 flex-wrap">
+              {lesson.metadata.difficulty && (
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-medium ${
+                    lesson.metadata.difficulty === 'beginner'
+                      ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
+                      : lesson.metadata.difficulty === 'intermediate'
+                      ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300'
+                      : 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
                   }`}
                 >
-                  <span className="text-sm">
-                    {index + 1}. {l.metadata.title}
-                  </span>
+                  {dict.courses?.difficulty_labels?.[lesson.metadata.difficulty] || lesson.metadata.difficulty}
+                </span>
+              )}
+              {lesson.metadata.duration && (
+                <span className="text-sm text-muted-foreground flex items-center gap-1">
+                  <span>⏱</span>
+                  {lesson.metadata.duration}
+                </span>
+              )}
+              <span className="text-sm text-muted-foreground flex items-center gap-1">
+                <span>📖</span>
+                {(dict.lesson?.reading_time || '{n} min read').replace('{n}', String(readingMinutes))}
+              </span>
+              {currentIndex >= 0 && (
+                <span className="text-sm text-muted-foreground">
+                  {dict.courses?.lesson || 'Lesson'} {currentIndex + 1} {dict.common?.of || 'of'} {allLessons.length}
+                </span>
+              )}
+            </div>
+            <h1 className="text-4xl font-bold mb-4">{lesson.metadata.title}</h1>
+            {lesson.metadata.description && (
+              <p className="text-xl text-muted-foreground">
+                {lesson.metadata.description}
+              </p>
+            )}
+          </div>
+
+          {/* Lesson Content */}
+          <div className="bg-card rounded-lg border p-8 mb-8 shadow-sm" data-lesson-content>
+            {lesson.metadata.exam && lessonQuestions.length > 0 ? (
+              <LessonExam
+                lang={lang}
+                lessonId={`${courseSlug}/${lessonSlug}`}
+                questions={lessonQuestions}
+                examMinutes={lesson.metadata.examMinutes ?? 90}
+                dict={dict}
+              >
+                <MarkdownRenderer content={lesson.content} lang={lang} dict={dict} />
+              </LessonExam>
+            ) : (
+              <LessonScoreProvider key={`${courseSlug}/${lessonSlug}`}>
+                <MarkdownRenderer content={lesson.content} lang={lang} dict={dict} />
+                <LessonScoreSummary dict={dict} />
+              </LessonScoreProvider>
+            )}
+          </div>
+
+          {/* Completion CTA */}
+          <div className="mb-8">
+            <LessonCompleteButton
+              courseSlug={courseSlug}
+              lessonSlug={lessonSlug}
+              dict={dict}
+            />
+          </div>
+
+          {/* Feedback */}
+          <LessonFeedback slug={`${courseSlug}/${lessonSlug}`} dict={dict} />
+
+          {/* Progress Bar */}
+          {allLessons.length > 1 && (
+            <div className="mb-8">
+              <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
+                <span>{dict.courses?.progress || 'Progress'}</span>
+                <span>{Math.round(((currentIndex + 1) / allLessons.length) * 100)}%</span>
+              </div>
+              <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300"
+                  style={{ width: `${((currentIndex + 1) / allLessons.length) * 100}%` }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Navigation */}
+          <div className="max-w-4xl mx-auto flex justify-between items-center gap-4">
+            <div className="flex-1">
+              {prevLesson ? (
+                <Link
+                  href={`/${lang}/courses/${courseSlug}/${prevLesson.slug}`}
+                  className="group flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors border border-transparent hover:border-border"
+                >
+                  <ChevronLeft className="w-5 h-5 flex-shrink-0 group-hover:-translate-x-1 transition-transform" />
+                  <div className="text-left min-w-0">
+                    <div className="text-xs text-muted-foreground mb-1">
+                      {dict.common.previous}
+                    </div>
+                    <div className="font-medium break-words max-w-[calc(100%-2rem)]">{prevLesson.metadata.title}</div>
+                  </div>
                 </Link>
-              ))}
+              ) : (
+                <div></div>
+              )}
+            </div>
+          
+            <div className="flex-1 flex justify-end">
+              {nextLesson ? (
+                <Link
+                  href={`/${lang}/courses/${courseSlug}/${nextLesson.slug}`}
+                  className="group flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors border border-transparent hover:border-border"
+                >
+                  <div className="text-right min-w-0">
+                    <div className="text-xs text-muted-foreground mb-1">
+                      {dict.common.next}
+                    </div>
+                    <div className="font-medium break-words max-w-[calc(100%-2rem)] text-right">{nextLesson.metadata.title}</div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              ) : (
+                <Link
+                  href={`/${lang}/courses`}
+                  className="flex items-center gap-2 px-4 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                >
+                  <BookOpen className="w-5 h-5" />
+                  <span>{dict.courses?.back_to_courses || 'Back to Courses'}</span>
+                </Link>
+              )}
             </div>
           </div>
-        )}
+
+          <p className="mt-6 text-center text-xs text-muted-foreground hidden lg:block">
+            {dict.lesson?.keyboard_hint}
+          </p>
+
+          {/* Course Overview Sidebar (Optional) */}
+          {allLessons.length > 1 && (
+            <div className="mt-12 p-6 bg-muted/50 rounded-lg border">
+              <h3 className="font-semibold mb-4 flex items-center gap-2">
+                <BookOpen className="w-5 h-5" />
+                {dict.courses?.course_content || 'Course Content'}
+              </h3>
+              <div className="space-y-2">
+                {allLessons.map((l, index) => (
+                  <Link
+                    key={l.slug}
+                    href={`/${lang}/courses/${courseSlug}/${l.slug}`}
+                    className={`block px-3 py-2 rounded-lg transition-colors ${
+                      l.slug === lessonSlug
+                        ? 'bg-primary text-primary-foreground font-medium'
+                        : 'hover:bg-accent text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    <span className="text-sm">
+                      {index + 1}. {l.metadata.title}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+          </div>
+        </div>
       </div>
     </div>
   )

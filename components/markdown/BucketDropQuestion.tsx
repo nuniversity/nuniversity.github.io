@@ -1,7 +1,8 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { CheckCircle2, XCircle, Layers } from 'lucide-react'
+import { useLessonScoreWidget } from '@/components/lessons/LessonScoreContext'
 
 interface BucketDropQuestionProps {
   question: string
@@ -47,6 +48,30 @@ export default function BucketDropQuestion({ question, instructions, buckets, ex
 
   const correctCount = allItems.filter(isItemCorrect).length
   const allCorrect = correctCount === allItems.length
+  const { scoreId, register, report } = useLessonScoreWidget('bucket-drop')
+
+  useEffect(() => {
+    register({ id: scoreId, label: question, total: allItems.length })
+  }, [scoreId, question, allItems.length, register])
+
+  useEffect(() => {
+    const missed = checked
+      ? allItems.filter(item => {
+          const bucketLabel = placements[item]
+          if (!bucketLabel) return true
+          const bucket = buckets.find(candidate => candidate.label === bucketLabel)
+          return !bucket || !bucket.items.includes(item)
+        })
+      : []
+    report({
+      id: scoreId,
+      label: question,
+      total: allItems.length,
+      correct: checked ? correctCount : 0,
+      missed,
+      answered: checked,
+    })
+  }, [scoreId, question, allItems, buckets, placements, checked, correctCount, report])
 
   const clearFeedback = () => {
     if (checked) setChecked(false)

@@ -20,6 +20,7 @@ import {
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { GripVertical, CheckCircle2, XCircle, ListOrdered } from 'lucide-react'
+import { useLessonScoreWidget } from '@/components/lessons/LessonScoreContext'
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
@@ -81,6 +82,21 @@ export default function DragOrderQuestion({ question, items, correctOrder, expla
   const [currentItems, setCurrentItems] = useState<string[]>(() => shuffle(items))
   const [feedback, setFeedback] = useState<'idle' | 'correct' | 'incorrect'>('idle')
   const [activeId, setActiveId] = useState<string | null>(null)
+  const { scoreId, register, report } = useLessonScoreWidget('drag-order')
+
+  useEffect(() => {
+    register({ id: scoreId, label: question, total: items.length })
+  }, [scoreId, question, items.length, register])
+
+  useEffect(() => {
+    const answered = feedback !== 'idle'
+    const perPosition = currentItems.map((item, i) => item === correctOrder[i])
+    const correct = answered ? perPosition.filter(Boolean).length : 0
+    const missed = answered
+      ? currentItems.filter((_, i) => !perPosition[i])
+      : []
+    report({ id: scoreId, label: question, total: items.length, correct, missed, answered })
+  }, [scoreId, question, items.length, currentItems, correctOrder, feedback, report])
 
   useEffect(() => {
     setCurrentItems(shuffle(items))

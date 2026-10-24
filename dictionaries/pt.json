@@ -243,7 +243,9 @@
       "contact": "Contato",
       "privacy": "Política de Privacidade",
       "terms": "Termos de Serviço",
-      "cookies": "Cookies"
+      "cookies": "Cookies",
+      "languages": "Idiomas",
+      "roadmaps": "Roadmaps"
     },
     "newsletter": {
       "title": "Mantenha-se Atualizado",
@@ -749,6 +751,12 @@
       "breakdown": "Detalhamento por tipo",
       "exit": "Voltar à lição",
       "unanswered": "Sem resposta"
+    },
+    "certificates": {
+      "title": "Minhas certificações",
+      "description": "Certificações obtidas ao aprovar simulados",
+      "empty": "Nenhuma certificação ainda — aprove em um simulado",
+      "count": "{n} certificações"
     }
   },
   "tools": {
@@ -1581,6 +1589,68 @@
       "swipe_hint": "← Esqueci · Lembrei →",
       "import_migrated": "Progresso importado e atualizado para o novo formato!",
       "learned": "Aprendidas"
+    }
+  },
+  "search": {
+    "trigger": "Buscar",
+    "placeholder": "Buscar cursos, lições, ferramentas…",
+    "empty": "Nenhum resultado para \"{query}\"",
+    "loading": "Carregando índice de busca…",
+    "close": "Fechar",
+    "results": "{n} resultados",
+    "hint_navigate": "Navegar",
+    "hint_open": "Abrir",
+    "hint_close": "Fechar"
+  },
+  "lesson": {
+    "outline_title": "Nesta página",
+    "reading_time": "{n} min de leitura",
+    "mark_complete": "Marcar lição como concluída",
+    "mark_incomplete": "Marcar como não concluída",
+    "completed_badge": "Concluída",
+    "keyboard_hint": "Dica: use ← e → para trocar de lições",
+    "progress_of": "{done} de {total} concluídas",
+    "continue": "Continuar",
+    "menu_toggle": "Menu da lição",
+    "toc_empty": "Sem seções nesta lição",
+    "feedback": {
+      "title": "Isso foi útil?",
+      "yes": "Sim",
+      "no": "Não",
+      "thanks": "Obrigado pelo seu feedback!"
+    },
+    "score": {
+      "title": "Verificação de conhecimento",
+      "result": "{correct}/{total} corretas",
+      "missed": "Itens para revisar",
+      "all_done": "Todas as perguntas respondidas",
+      "suggest_complete": "Bom trabalho — marque a lição como concluída",
+      "unanswered": "Faltam {n}"
+    }
+  },
+  "gamification": {
+    "xp": "{n} XP",
+    "level": "Nível {n}",
+    "streak": {
+      "title": "Sequência",
+      "days": "Sequência de {n} dias",
+      "best": "Melhor: {n}"
+    },
+    "level_up": "Subiu de nível! Você alcançou o nível {n}",
+    "badges": {
+      "title": "Conquistas",
+      "empty": "Nenhuma conquista ainda — conclua lições para ganhar",
+      "awarded": "Conquista ganha: {name}",
+      "first_lesson": "Primeiros passos",
+      "first_lesson_desc": "Conclua sua primeira lição",
+      "quiz_pass": "Qualificado em quizzes",
+      "quiz_pass_desc": "Aprove em um quiz de certificação",
+      "perfect_quiz": "Pontuação perfeita",
+      "perfect_quiz_desc": "Tire 100% em um quiz",
+      "course_complete": "Conquistador de cursos",
+      "course_complete_desc": "Conclua todas as lições de um curso",
+      "streak_7": "Em chamas",
+      "streak_7_desc": "Mantenha uma sequência de 7 dias"
     }
   }
 }

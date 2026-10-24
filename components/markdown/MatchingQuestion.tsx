@@ -16,6 +16,7 @@ import {
 } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
 import { CheckCircle2, XCircle, ArrowRightLeft } from 'lucide-react'
+import { useLessonScoreWidget } from '@/components/lessons/LessonScoreContext'
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
@@ -94,6 +95,21 @@ export default function MatchingQuestion({ question, pairs, explanation, dict }:
   const [feedback, setFeedback] = useState<'idle' | 'correct' | 'incorrect'>('idle')
   const [activeId, setActiveId] = useState<string | null>(null)
   const [overId, setOverId] = useState<string | null>(null)
+  const { scoreId, register, report } = useLessonScoreWidget('matching')
+
+  useEffect(() => {
+    register({ id: scoreId, label: question, total: pairs.length })
+  }, [scoreId, question, pairs.length, register])
+
+  useEffect(() => {
+    const answered = feedback !== 'idle'
+    const perPair = pairs.map((pair, idx) => placements[`slot-${idx}`] === pair.right)
+    const correct = answered ? perPair.filter(Boolean).length : 0
+    const missed = answered
+      ? pairs.filter((_, idx) => !perPair[idx]).map(pair => pair.left)
+      : []
+    report({ id: scoreId, label: question, total: pairs.length, correct, missed, answered })
+  }, [scoreId, question, pairs, placements, feedback, report])
 
   useEffect(() => {
     setRightOrder(shuffle(pairs.map(p => p.right)))

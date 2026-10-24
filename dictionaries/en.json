@@ -243,7 +243,9 @@
       "contact": "Contact",
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
-      "cookies": "Cookies"
+      "cookies": "Cookies",
+      "languages": "Languages",
+      "roadmaps": "Roadmaps"
     },
     "newsletter": {
       "title": "Stay Updated",
@@ -749,6 +751,12 @@
       "breakdown": "Breakdown by type",
       "exit": "Back to lesson",
       "unanswered": "Unanswered"
+    },
+    "certificates": {
+      "title": "My certificates",
+      "description": "Certifications earned by passing mock exams",
+      "empty": "No certificates yet — pass a mock exam to earn one",
+      "count": "{n} certificates"
     }
   },
   "tools": {
@@ -1581,6 +1589,68 @@
       "swipe_hint": "← Forgot · Remember →",
       "import_migrated": "Progress imported and updated to new format!",
       "learned": "Learned"
+    }
+  },
+  "search": {
+    "trigger": "Search",
+    "placeholder": "Search courses, lessons, tools…",
+    "empty": "No results for \"{query}\"",
+    "loading": "Loading search index…",
+    "close": "Close",
+    "results": "{n} results",
+    "hint_navigate": "Navigate",
+    "hint_open": "Open",
+    "hint_close": "Close"
+  },
+  "lesson": {
+    "outline_title": "On this page",
+    "reading_time": "{n} min read",
+    "mark_complete": "Mark lesson as complete",
+    "mark_incomplete": "Mark as incomplete",
+    "completed_badge": "Completed",
+    "keyboard_hint": "Tip: use ← and → to switch lessons",
+    "progress_of": "{done} of {total} completed",
+    "continue": "Continue",
+    "menu_toggle": "Lesson menu",
+    "toc_empty": "No sections in this lesson",
+    "feedback": {
+      "title": "Was this helpful?",
+      "yes": "Yes",
+      "no": "No",
+      "thanks": "Thanks for your feedback!"
+    },
+    "score": {
+      "title": "Knowledge check",
+      "result": "{correct}/{total} correct",
+      "missed": "Items to review",
+      "all_done": "All questions answered",
+      "suggest_complete": "Nice work — mark the lesson as complete",
+      "unanswered": "{n} remaining"
+    }
+  },
+  "gamification": {
+    "xp": "{n} XP",
+    "level": "Level {n}",
+    "streak": {
+      "title": "Streak",
+      "days": "{n} day streak",
+      "best": "Best: {n}"
+    },
+    "level_up": "Level up! You reached level {n}",
+    "badges": {
+      "title": "Badges",
+      "empty": "No badges yet — complete lessons to earn some",
+      "awarded": "Badge earned: {name}",
+      "first_lesson": "First steps",
+      "first_lesson_desc": "Complete your first lesson",
+      "quiz_pass": "Quiz qualifier",
+      "quiz_pass_desc": "Pass a certification quiz",
+      "perfect_quiz": "Perfect score",
+      "perfect_quiz_desc": "Score 100% on a quiz",
+      "course_complete": "Course conqueror",
+      "course_complete_desc": "Complete every lesson in a course",
+      "streak_7": "On fire",
+      "streak_7_desc": "Keep a 7-day learning streak"
     }
   }
 }

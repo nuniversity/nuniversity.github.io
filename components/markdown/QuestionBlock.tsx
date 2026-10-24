@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CheckCircle2, XCircle, AlertCircle } from 'lucide-react'
+import { useLessonScoreWidget } from '@/components/lessons/LessonScoreContext'
 
 export interface LessonQuestion {
   id: string
@@ -23,6 +24,25 @@ export default function QuestionBlock({ data, dict, reveal = true, onAnswer }: Q
   const w = dict?.widgets
   const [selected, setSelected] = useState<number | null>(null)
   const [answered, setAnswered] = useState(false)
+  const { scoreId, register, report } = useLessonScoreWidget('question')
+
+  useEffect(() => {
+    if (!reveal) return
+    register({ id: scoreId, label: data.question, total: 1 })
+  }, [reveal, scoreId, data.question, register])
+
+  useEffect(() => {
+    if (!reveal) return
+    const isCorrect = answered && selected !== null && selected === data.correct
+    report({
+      id: scoreId,
+      label: data.question,
+      total: 1,
+      correct: isCorrect ? 1 : 0,
+      missed: answered && !isCorrect ? [data.question] : [],
+      answered,
+    })
+  }, [reveal, scoreId, data.question, data.correct, answered, selected, report])
 
   const showFeedback = reveal && answered
 

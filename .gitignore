@@ -149,3 +149,6 @@ __*/
 *.egg-info/
 *.pyc
 .venv/
+
+# useless folders
+_*/

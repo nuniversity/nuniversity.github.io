@@ -243,7 +243,9 @@
       "contact": "Contacto",
       "privacy": "Política de Privacidad",
       "terms": "Términos de Servicio",
-      "cookies": "Cookies"
+      "cookies": "Cookies",
+      "languages": "Idiomas",
+      "roadmaps": "Rutas"
     },
     "newsletter": {
       "title": "Mantente Actualizado",
@@ -749,6 +751,12 @@
       "breakdown": "Desglose por tipo",
       "exit": "Volver a la lección",
       "unanswered": "Sin respuesta"
+    },
+    "certificates": {
+      "title": "Mis certificados",
+      "description": "Certificaciones obtenidas al aprobar exámenes de prueba",
+      "empty": "Aún sin certificados — aprueba un examen de prueba",
+      "count": "{n} certificados"
     }
   },
   "tools": {
@@ -1581,6 +1589,68 @@
       "swipe_hint": "← Olvidé · Recuerdo →",
       "import_migrated": "¡Progreso importado y actualizado al nuevo formato!",
       "learned": "Aprendidas"
+    }
+  },
+  "search": {
+    "trigger": "Buscar",
+    "placeholder": "Buscar cursos, lecciones, herramientas…",
+    "empty": "Sin resultados para \"{query}\"",
+    "loading": "Cargando índice de búsqueda…",
+    "close": "Cerrar",
+    "results": "{n} resultados",
+    "hint_navigate": "Navegar",
+    "hint_open": "Abrir",
+    "hint_close": "Cerrar"
+  },
+  "lesson": {
+    "outline_title": "En esta página",
+    "reading_time": "{n} min de lectura",
+    "mark_complete": "Marcar lección como completada",
+    "mark_incomplete": "Marcar como incompleta",
+    "completed_badge": "Completada",
+    "keyboard_hint": "Consejo: usa ← y → para cambiar de lecciones",
+    "progress_of": "{done} de {total} completadas",
+    "continue": "Continuar",
+    "menu_toggle": "Menú de lección",
+    "toc_empty": "Sin secciones en esta lección",
+    "feedback": {
+      "title": "¿Fue útil?",
+      "yes": "Sí",
+      "no": "No",
+      "thanks": "¡Gracias por tu comentario!"
+    },
+    "score": {
+      "title": "Comprobación de conocimientos",
+      "result": "{correct}/{total} correctas",
+      "missed": "Elementos para revisar",
+      "all_done": "Todas las preguntas respondidas",
+      "suggest_complete": "Buen trabajo — marca la lección como completada",
+      "unanswered": "Quedan {n}"
+    }
+  },
+  "gamification": {
+    "xp": "{n} XP",
+    "level": "Nivel {n}",
+    "streak": {
+      "title": "Racha",
+      "days": "Racha de {n} días",
+      "best": "Mejor: {n}"
+    },
+    "level_up": "¡Subiste de nivel! Alcanzaste el nivel {n}",
+    "badges": {
+      "title": "Insignias",
+      "empty": "Aún sin insignias — completa lecciones para ganar",
+      "awarded": "Insignia obtenida: {name}",
+      "first_lesson": "Primeros pasos",
+      "first_lesson_desc": "Completa tu primera lección",
+      "quiz_pass": "Clasificado en quizzes",
+      "quiz_pass_desc": "Aprueba un quiz de certificación",
+      "perfect_quiz": "Puntuación perfecta",
+      "perfect_quiz_desc": "Obtén 100% en un quiz",
+      "course_complete": "Conquistador de cursos",
+      "course_complete_desc": "Completa todas las lecciones de un curso",
+      "streak_7": "En llamas",
+      "streak_7_desc": "Mantén una racha de 7 días"
     }
   }
 }

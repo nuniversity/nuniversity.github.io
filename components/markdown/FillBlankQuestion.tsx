@@ -17,6 +17,7 @@ import {
 import { CSS } from '@dnd-kit/utilities'
 import { CheckCircle2, XCircle, PenLine } from 'lucide-react'
 import { splitAnswer } from '@/lib/markdown/split-answer'
+import { useLessonScoreWidget } from '@/components/lessons/LessonScoreContext'
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
@@ -111,6 +112,20 @@ function ItemsMode({ question, instructions, items, explanation, dict }: {
   const fb = w?.fill_blank
   const [values, setValues] = useState<string[][]>(() => items.map(item => Array.from({ length: countBlanks(item.prompt) }, () => '')))
   const [results, setResults] = useState<boolean[] | null>(null)
+  const { scoreId, register, report } = useLessonScoreWidget('fill-blank-items')
+
+  useEffect(() => {
+    register({ id: scoreId, label: question, total: items.length })
+  }, [scoreId, question, items.length, register])
+
+  useEffect(() => {
+    const answered = results !== null
+    const correct = answered ? results.filter(Boolean).length : 0
+    const missed = answered
+      ? items.filter((_, idx) => !results[idx]).map(item => item.prompt)
+      : []
+    report({ id: scoreId, label: question, total: items.length, correct, missed, answered })
+  }, [scoreId, question, items, results, report])
 
   const setBlank = (itemIndex: number, blankIndex: number, value: string) => {
     setValues(prev => prev.map((row, i) => (i === itemIndex ? row.map((cell, j) => (j === blankIndex ? value : cell)) : row)))
@@ -233,6 +248,21 @@ function TemplateMode({ question, template, answers, distractors = [], explanati
   const [slots, setSlots] = useState<Record<string, string>>({})
   const [feedback, setFeedback] = useState<'idle' | 'correct' | 'incorrect'>('idle')
   const [activeId, setActiveId] = useState<string | null>(null)
+  const { scoreId, register, report } = useLessonScoreWidget('fill-blank-template')
+
+  useEffect(() => {
+    register({ id: scoreId, label: question, total: blankIds.length })
+  }, [scoreId, question, blankIds.length, register])
+
+  useEffect(() => {
+    const answered = feedback !== 'idle'
+    const perBlank = blankIds.map(blankId => slots[blankId] === answers[blankId])
+    const correct = answered ? perBlank.filter(Boolean).length : 0
+    const missed = answered
+      ? blankIds.filter((_, idx) => !perBlank[idx]).map(blankId => answers[blankId])
+      : []
+    report({ id: scoreId, label: question, total: blankIds.length, correct, missed, answered })
+  }, [scoreId, question, blankIds, answers, slots, feedback, report])
 
   useEffect(() => {
     setBankWords(shuffle(allWords))
