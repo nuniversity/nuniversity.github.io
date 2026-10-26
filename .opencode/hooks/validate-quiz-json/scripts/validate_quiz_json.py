@@ -27,8 +27,7 @@ from pathlib import Path
 
 VALID_KINDS = {"certification", "practice", "course-exam"}
 VALID_DIFFICULTIES = {"beginner", "intermediate", "advanced"}
-VALID_QUESTION_TYPES = {"mcq", "multi", "tf"}
-PRIMARY_QUESTION_TYPE = "mcq"
+VALID_QUESTION_TYPES = {"mcq", "multi", "tf", "ordering", "matching"}
 VALID_LOCALES = {"en", "pt", "es"}
 REQUIRED_FIELDS = (
     "id",
@@ -87,6 +86,10 @@ def validate_quiz(data: dict, filename_stem: str = "") -> tuple[list[str], list[
     passing_score = data.get("passingScore")
     if passing_score is not None and (not isinstance(passing_score, int) or passing_score <= 0 or passing_score > 100):
         errors.append("passingScore must be an integer in (0, 100]")
+
+    mock_count = data.get("mockQuestionCount")
+    if mock_count is not None and (not isinstance(mock_count, int) or mock_count <= 0):
+        errors.append("mockQuestionCount must be a positive integer")
 
     subdomains: set[str] = set()
     domains = data.get("domains")
@@ -163,20 +166,61 @@ def validate_quiz(data: dict, filename_stem: str = "") -> tuple[list[str], list[
         if not isinstance(qtype, str) or qtype not in VALID_QUESTION_TYPES:
             expected = ", ".join(sorted(VALID_QUESTION_TYPES))
             errors.append(f"Question {i} ({qid}): invalid type '{qtype}'. Must be one of: {expected}.")
-        elif qtype != PRIMARY_QUESTION_TYPE:
-            warnings.append(f"Question {i} ({qid}): type '{qtype}' is reserved; only 'mcq' is supported right now")
+            continue
 
         options = q.get("options", [])
         if not isinstance(options, list):
             errors.append(f"Question {i} ({qid}): options must be an array")
-        elif len(options) != 4:
-            errors.append(f"Question {i} ({qid}): must have exactly 4 options, found {len(options)}")
-        elif any(not isinstance(o, str) or not o.strip() for o in options):
+            continue
+        if any(not isinstance(o, str) or not o.strip() for o in options):
             errors.append(f"Question {i} ({qid}): options must be non-empty strings")
+            continue
 
         correct = q.get("correct", -1)
-        if not isinstance(correct, int) or correct < 0 or correct > 3:
-            errors.append(f"Question {i} ({qid}): correct must be 0-3, got {correct}")
+        if qtype == "mcq":
+            if len(options) != 4:
+                errors.append(f"Question {i} ({qid}): must have exactly 4 options, found {len(options)}")
+            elif not isinstance(correct, int) or correct < 0 or correct >= len(options):
+                errors.append(f"Question {i} ({qid}): correct must be 0-3, got {correct}")
+        elif qtype == "tf":
+            if len(options) not in (2, 4):
+                errors.append(f"Question {i} ({qid}): tf must have 2 or 4 options, found {len(options)}")
+            elif not isinstance(correct, int) or correct < 0 or correct >= len(options):
+                errors.append(f"Question {i} ({qid}): correct must be a valid option index, got {correct}")
+        elif qtype == "multi":
+            if len(options) < 5:
+                errors.append(f"Question {i} ({qid}): multi must have at least 5 options, found {len(options)}")
+            elif not isinstance(correct, list) or len(correct) < 2:
+                errors.append(f"Question {i} ({qid}): multi correct must be an array of at least 2 indexes")
+            elif any(not isinstance(c, int) or c < 0 or c >= len(options) for c in correct):
+                errors.append(f"Question {i} ({qid}): multi correct indexes out of range")
+            elif len(set(correct)) != len(correct):
+                errors.append(f"Question {i} ({qid}): multi correct contains duplicate indexes")
+        elif qtype == "ordering":
+            if len(options) < 3 or len(options) > 6:
+                errors.append(f"Question {i} ({qid}): ordering must present 3-6 items, found {len(options)}")
+            elif not isinstance(correct, list) or len(correct) < 3 or len(correct) > 5:
+                errors.append(f"Question {i} ({qid}): ordering correct must be an ordered subset of 3-5 indexes")
+            elif len(correct) > len(options):
+                errors.append(f"Question {i} ({qid}): ordering correct is longer than options")
+            elif any(not isinstance(c, int) or c < 0 or c >= len(options) for c in correct):
+                errors.append(f"Question {i} ({qid}): ordering correct indexes out of range")
+            elif len(set(correct)) != len(correct):
+                errors.append(f"Question {i} ({qid}): ordering correct contains duplicate indexes")
+        elif qtype == "matching":
+            prompts = q.get("prompts")
+            if not isinstance(prompts, list) or len(prompts) < 3 or len(prompts) > 7:
+                errors.append(f"Question {i} ({qid}): matching must have 3-7 prompts, found {prompts}")
+            elif any(not isinstance(p, str) or not p.strip() for p in prompts):
+                errors.append(f"Question {i} ({qid}): matching prompts must be non-empty strings")
+            elif len(options) != len(prompts):
+                errors.append(f"Question {i} ({qid}): matching must have as many options as prompts")
+            elif not isinstance(correct, list) or len(correct) != len(prompts):
+                errors.append(f"Question {i} ({qid}): matching correct must map every prompt")
+            elif any(not isinstance(c, int) or c < 0 or c >= len(options) for c in correct):
+                errors.append(f"Question {i} ({qid}): matching correct indexes out of range")
+            elif len(set(correct)) != len(correct):
+                errors.append(f"Question {i} ({qid}): matching correct must be one-to-one")
 
     for i, q in enumerate(questions):
         if not isinstance(q, dict):
@@ -189,6 +233,11 @@ def validate_quiz(data: dict, filename_stem: str = "") -> tuple[list[str], list[
     locales = data.get("locales")
     if locales is not None:
         base_ids = {q.get("id") for q in questions if isinstance(q, dict)}
+        base_options_len = {
+            q.get("id"): len(q.get("options", []))
+            for q in questions
+            if isinstance(q, dict) and isinstance(q.get("options"), list)
+        }
         if not isinstance(locales, dict):
             errors.append("locales must be an object")
         else:
@@ -225,8 +274,14 @@ def validate_quiz(data: dict, filename_stem: str = "") -> tuple[list[str], list[
                     options = translation.get("options")
                     if options is None:
                         continue
-                    if not isinstance(options, list) or len(options) != 4:
-                        errors.append(f"locales['{loc}'].questions['{qkey}'].options must be an array of 4 entries")
+                    expected_len = base_options_len.get(qkey)
+                    if not isinstance(options, list) or (
+                        expected_len is not None and len(options) != expected_len
+                    ):
+                        errors.append(
+                            f"locales['{loc}'].questions['{qkey}'].options must be an array of "
+                            f"{expected_len} entries matching the base question"
+                        )
                     elif any(not isinstance(o, str) or not o.strip() for o in options):
                         errors.append(
                             f"locales['{loc}'].questions['{qkey}'].options must be non-empty strings"

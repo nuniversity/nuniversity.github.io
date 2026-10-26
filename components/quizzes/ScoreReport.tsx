@@ -5,8 +5,10 @@ import {
   Trophy, RotateCcw, BookOpen, CheckCircle2, XCircle, ChevronLeft, ChevronRight, Flag, Clock,
 } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
-import type { QuizData, QuizQuestion } from '@/lib/quizzes/types'
+import type { QuizData, QuizQuestion, QuizResponse, UserAnswer } from '@/lib/quizzes/types'
+import { gradeAnswer, isAnswered } from '@/lib/quizzes/grade'
 import { CertificateCard } from './CertificateCard'
+import { QuestionBody } from './QuestionBody'
 import Link from 'next/link'
 
 interface ScoreReportProps {
@@ -19,7 +21,7 @@ interface ScoreReportProps {
   total: number
   totalTime: number
   domainResults: Record<string, { correct: number; total: number }>
-  userAnswers: { questionId: string; selectedOption: number | null; isCorrect: boolean; timeSpent: number }[]
+  userAnswers: UserAnswer[]
   reviewIndex: number
   onReviewIndexChange: (index: number) => void
   activeQuestions: QuizQuestion[]
@@ -29,7 +31,7 @@ interface ScoreReportProps {
   mockTimedOut: boolean
   timeUsed: number
   mockQuestions: QuizQuestion[]
-  mockAnswers: { selectedOption: number | null }[]
+  mockAnswers: QuizResponse[]
   mockFlagged: Set<number>
   mockMajorDomainResults: Record<string, { correct: number; total: number; label: string; color: string }>
   mockReviewMode: 'all' | 'wrong' | 'flagged'
@@ -51,10 +53,6 @@ function formatTime(seconds: number): string {
   const mins = Math.floor(seconds / 60)
   const secs = seconds % 60
   return `${mins}:${secs.toString().padStart(2, '0')}`
-}
-
-function getLetterLabel(index: number): string {
-  return ['A', 'B', 'C', 'D'][index]
 }
 
 function getDomainAccentClass(color: string): string {
@@ -88,7 +86,8 @@ export function ScoreReport(props: ScoreReportProps) {
 
   if (screen === 'complete') {
     const rating = getScoreRating(accuracy, dict)
-    const practicePassed = accuracy >= quiz.passingScore
+    const answeredAll = userAnswers.length === activeQuestions.length
+    const practicePassed = accuracy >= quiz.passingScore && answeredAll
 
     return (
       <div className="container-custom py-12">
@@ -192,9 +191,9 @@ export function ScoreReport(props: ScoreReportProps) {
   }
 
   if (screen === 'review') {
-    const answer = userAnswers[reviewIndex]
     const question = activeQuestions[reviewIndex]
     if (!question) return null
+    const answer = userAnswers.find(a => a.questionId === question.id)
 
     return (
       <div className="container-custom py-12">
@@ -211,17 +210,23 @@ export function ScoreReport(props: ScoreReportProps) {
           </div>
 
           <div className="flex gap-1.5 mb-6 flex-wrap">
-            {activeQuestions.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => onReviewIndexChange(i)}
-                aria-label={tpl(dict.quizzes?.exam?.tile || 'Q{n}', { n: i + 1 })}
-                className={`w-6 h-6 rounded-full text-xs font-bold transition-all ${i === reviewIndex ? 'ring-2 ring-offset-1 ring-primary scale-110' : ''} ${userAnswers[i]?.isCorrect ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}
-              >
-                {i + 1}
-              </button>
-            ))}
+            {activeQuestions.map((q, i) => {
+              const a = userAnswers.find(entry => entry.questionId === q.id)
+              const tileCls = a
+                ? a.isCorrect ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+                : 'bg-muted text-muted-foreground'
+              return (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => onReviewIndexChange(i)}
+                  aria-label={tpl(dict.quizzes?.exam?.tile || 'Q{n}', { n: i + 1 })}
+                  className={`w-6 h-6 rounded-full text-xs font-bold transition-all ${i === reviewIndex ? 'ring-2 ring-offset-1 ring-primary scale-110' : ''} ${tileCls}`}
+                >
+                  {i + 1}
+                </button>
+              )
+            })}
           </div>
 
           <div className="mb-4">
@@ -242,26 +247,20 @@ export function ScoreReport(props: ScoreReportProps) {
               <div className="flex items-start gap-3 mb-5">
                 {answer?.isCorrect
                   ? <CheckCircle2 className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  : <XCircle className="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" />}
+                  : answer
+                  ? <XCircle className="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" />
+                  : <XCircle className="w-6 h-6 text-muted-foreground flex-shrink-0 mt-0.5" />}
                 <h2 className="text-lg font-semibold leading-relaxed break-words">{question.question}</h2>
               </div>
-              <div className="space-y-2">
-                {question.options.map((option, idx) => {
-                  const isCorrect = idx === question.correct
-                  const wasSelected = answer?.selectedOption === idx
-                  let cls = 'border-border bg-background opacity-50'
-                  if (isCorrect) cls = 'border-green-500 bg-green-50 dark:bg-green-900/20'
-                  else if (wasSelected) cls = 'border-red-500 bg-red-50 dark:bg-red-900/20'
-                  return (
-                    <div key={idx} className={`flex items-center gap-4 p-3 rounded-xl border-2 ${cls}`}>
-                      <span className={`flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs ${isCorrect ? 'bg-green-500 text-white' : wasSelected ? 'bg-red-500 text-white' : 'bg-muted text-muted-foreground'}`}>{getLetterLabel(idx)}</span>
-                      <span className="flex-1 text-sm font-medium break-words">{option}</span>
-                      {isCorrect && <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />}
-                      {wasSelected && !isCorrect && <XCircle className="w-4 h-4 text-red-500 flex-shrink-0" />}
-                    </div>
-                  )
-                })}
-              </div>
+
+              <QuestionBody question={question} response={answer?.response ?? null} mode="reveal" dict={dict} />
+
+              {!answer && (
+                <div className="mt-3 text-xs font-medium text-muted-foreground italic">
+                  — {dict.quizzes?.score?.not_scored || 'Not answered — not counted in your score'}
+                </div>
+              )}
+
               <div className="mt-4 rounded-xl p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
                 <p className="text-sm font-semibold text-blue-700 dark:text-blue-300 mb-1">
                   {dict.quizzes?.explanation || '💡 Explanation'}
@@ -310,7 +309,7 @@ export function ScoreReport(props: ScoreReportProps) {
   }
 
   const reviewList = mockReviewMode === 'wrong'
-    ? mockQuestions.map((q, i) => ({ q, i })).filter(({ q, i }) => mockAnswers[i]?.selectedOption !== q.correct)
+    ? mockQuestions.map((q, i) => ({ q, i })).filter(({ q, i }) => !gradeAnswer(q, mockAnswers[i] ?? null))
     : mockReviewMode === 'flagged'
     ? mockQuestions.map((q, i) => ({ q, i })).filter(({ i }) => mockFlagged.has(i))
     : mockQuestions.map((q, i) => ({ q, i }))
@@ -375,7 +374,7 @@ export function ScoreReport(props: ScoreReportProps) {
             {[
               { val: mockScore, label: dict.quizzes?.score?.correct || 'Correct', cls: 'text-green-600 dark:text-green-400' },
               { val: mockQuestions.length - mockScore, label: dict.quizzes?.score?.incorrect || 'Incorrect', cls: 'text-red-500' },
-              { val: mockAnswers.filter(a => a.selectedOption === null).length, label: dict.quizzes?.score?.skipped || 'Skipped', cls: 'text-muted-foreground' },
+              { val: mockQuestions.filter((q, i) => !isAnswered(q, mockAnswers[i] ?? null)).length, label: dict.quizzes?.score?.skipped || 'Skipped', cls: 'text-muted-foreground' },
               { val: formatTime(timeUsed), label: dict.quizzes?.score?.time_used || 'Time used', cls: '' },
             ].map(({ val, label, cls }) => (
               <div key={label} className="text-center min-w-0">
@@ -493,8 +492,8 @@ export function ScoreReport(props: ScoreReportProps) {
 
             {isReviewing && (() => {
               const { q, i } = reviewList[mockReviewIndex]
-              const ans = mockAnswers[i]
-              const wasCorrect = ans?.selectedOption === q.correct
+              const ans = mockAnswers[i] ?? null
+              const wasCorrect = gradeAnswer(q, ans)
               return (
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -522,29 +521,11 @@ export function ScoreReport(props: ScoreReportProps) {
                       </div>
                     </div>
 
-                    <div className="space-y-2 mb-4">
-                      {q.options.map((option, idx) => {
-                        const isCorrect = idx === q.correct
-                        const wasSelected = ans?.selectedOption === idx
-                        let cls = 'border-border bg-background opacity-50'
-                        if (isCorrect) cls = 'border-green-500 bg-green-50 dark:bg-green-900/20'
-                        else if (wasSelected) cls = 'border-red-500 bg-red-50 dark:bg-red-900/20'
-                        return (
-                          <div key={idx} className={`flex items-center gap-3 p-3 rounded-xl border-2 ${cls}`}>
-                            <span className={`flex-shrink-0 w-6 h-6 rounded-md flex items-center justify-center font-bold text-xs ${
-                              isCorrect ? 'bg-green-500 text-white'
-                              : wasSelected ? 'bg-red-500 text-white'
-                              : 'bg-muted text-muted-foreground'
-                            }`}>{getLetterLabel(idx)}</span>
-                            <span className="flex-1 text-sm font-medium break-words">{option}</span>
-                            {isCorrect && <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />}
-                            {wasSelected && !isCorrect && <XCircle className="w-4 h-4 text-red-500 flex-shrink-0" />}
-                          </div>
-                        )
-                      })}
+                    <div className="mb-4">
+                      <QuestionBody question={q} response={ans} mode="reveal" dict={dict} />
                     </div>
 
-                    {ans?.selectedOption === null && (
+                    {!isAnswered(q, ans) && (
                       <div className="mb-3 text-xs font-medium text-muted-foreground italic">
                         — {dict.quizzes?.exam?.not_answered || 'Question was not answered'}
                       </div>

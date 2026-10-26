@@ -55,17 +55,18 @@ Keep compatibility with the existing structure; make it locale-aware and reusabl
 
 ```jsonc
 {
-  "id": "snowpro-core-cof-c03",
-  "slug": "snowpro-core-cof-c03",
+  "id": "aws-aif-c01",
+  "slug": "aws-aif-c01",
   "kind": "certification",              // certification | practice | course-exam
-  "category": "data-platforms",
-  "title": "SnowPro Core Certification (COF-C03)",
+  "category": "ai-ml",
+  "title": "AWS AI Practitioner (AIF-C01)",
   "description": "…",
-  "durationSeconds": 6900,
-  "passingScore": 75,
-  "domains": [ { "id": "1.0", "name": "Architecture & Design", "color": "#…", "subdomains": [...] } ],
-  "allocations": { "1.1": 8, … },        // mock-exam blueprint (sums 100)
-  "questions": [ { "id","subdomain","type":"mcq","question","options","correct","explanation" } ],
+  "durationSeconds": 5400,
+  "passingScore": 70,
+  "mockQuestionCount": 65,              // OPTIONAL simulation size (default: sum of allocations)
+  "domains": [ { "id": "1.0", "name": "1.0 Fundamentals of AI and ML", "color": "blue", "subdomains": [...] } ],
+  "allocations": { "1.1 - …": 7, … },   // mock-exam blueprint (sums 100, percent weights)
+  "questions": [ … ],                   // discriminated union — see types below
   "locales": {                           // OPTIONAL translations
     "pt": { "title","description", "questions": { "<qid>": { "question","options","explanation" } } },
     "es": { … }
@@ -78,8 +79,25 @@ Keep compatibility with the existing structure; make it locale-aware and reusabl
   Phase 4 localizes `title/description/` rules; question translation deferred to
   Phase 9 content work, EN questions shown with localized UI meanwhile). Partial
   `locales.questions` supported per-question fallback to EN.
-- **Types:** start with `mcq` (current data is MCQ); schema reserves `multi`/`tf` for
-  the exam-runner fence extraction.
+- **Types** (`lib/quizzes/types.ts`, discriminated union on `type`):
+
+  | type | shape | grading |
+  |---|---|---|
+  | `mcq` | 4 `options`, `correct: number` | single index |
+  | `multi` | ≥5 `options`, `correct: number[]` (≥2) | set equality — all-or-nothing |
+  | `tf` | 2 or 4 `options`, `correct: number` | single index |
+  | `ordering` | 3–6 presented items, `correct: number[]` ordered 3–5 item subset | exact sequence |
+  | `matching` | `prompts` (3–7) + equal-count `options`, `correct: number[]` one-to-one | every pair |
+
+  Every type maps to a `QuizResponse` carrying the same `type` discriminator
+  (`selected` / `selected[]` / `sequence` / `pairs`); grading lives in
+  `lib/quizzes/grade.ts` (`gradeAnswer`, `isAnswered`, `responseFor`).
+- **Simulation sizing:** `mockExamSize()` = `mockQuestionCount` when present,
+  else `sum(allocations)`. `scaledTargets()` scales allocations hierarchically
+  (domain level → subdomain level, largest-remainder both times) and
+  `drawMockQuestions()` draws per-subdomain pools — SnowPro legacy behavior
+  (alloc sum 100 → targets = allocations) is preserved.
+
 
 ## 5. Exam-simulation lessons → ExamRunner
 
@@ -106,17 +124,33 @@ Split the 1,448-line client into components with i18n from day one:
 |---|---|
 | `QuizHome` | description, blueprint (domains/allocation), best score, mode selection |
 | `PracticeConfig` | domain filter, question count, shuffle (port `:254-257`) |
-| `QuizPlayer` | question flow, per-question flag/review, progress bar |
-| `ExamRunner` | timed full-length mock (port `buildMockExamQuestions` proportional sampling `:228-251`, timer `:63`, pass logic `:111`) |
-| `ScoreReport` | % vs passing, domain breakdown, review list, certificate CTA |
+| `QuizPlayer` | learning-mode flow: stage → **Check answer** → feedback, skip/return, navigator tiles |
+| `QuestionBody` | renders all 4 interactive types (click-select, ▲▼ ordering, native-`<select>` matching); `reveal` mode for review |
+| `ExamRunner` | timed mock (scaled draw via `drawMockQuestions`, timer, flagging, no feedback until submit) |
+| `ScoreReport` | % vs passing, domain breakdown, review list (per `UserAnswer`), certificate CTA |
 | `CertificateCard` | printable pass certificate (name input, date, slug code) |
 | `AttemptHistory` | localStorage list of past attempts w/ trend |
 
+- **Learning mode** (practice): answers are *staged* (blue navigator tile) and only
+  graded when the learner presses **Check answer** — feedback (correct/incorrect +
+  explanation) appears for that question afterwards; **Skip for now** / Previous /
+  Next let learners move freely. The score on finish **excludes blanks**:
+  reported as `scored_of` = correct ÷ *graded* (staged-and-checked + staged-then-
+  checked-later counts; never-checked blanks are listed as skipped, not wrong).
+  Tile states: correct (green) / wrong (red) / staged (blue) / blank (muted), with
+  a legend under the navigator; progress bar shows `% checked`.
+- **Simulation mode** (mock exam): fixed 65-item draw for AIF (`mockQuestionCount`),
+  no per-question feedback, flagging + filters, submit confirm with unanswered
+  counts, blanks = wrong (unchanged exam semantics).
+- **dnd decision:** no dnd-kit in quiz questions — ordering uses click-to-add +
+  Move up/down buttons, matching uses native selects (a11y + jsdom-testable);
+  dnd-kit stays in lesson fence widgets only.
 - **Persistence** (`lib/quizzes/storage.ts`): `quizzes-history-<slug>` — attempts
   `{date, mode, score, total, passed, perDomain}`; `quizzes-best-<slug>`;
   safe JSON access, versioned keys.
-- **i18n:** `dictionaries/*.json` → new `quizzes.*` namespace (~80 keys); zero
-  hardcoded EN (shipped — client reads `dict` everywhere; enforced by leak probes).
+- **i18n:** `dictionaries/*.json` → `quizzes.*` namespace incl. new `quizzes.body.*`
+  (14 renderer keys), `quizzes.practice.*` (staging/tiles/legend), `score.not_scored`;
+  zero hardcoded EN (client reads `dict` everywhere; enforced by leak probes).
 - **Responsive:** navigator/`grid-cols-4` stat rows get breakpoints (F-063 pattern).
 
 ## 7. Hub page design
@@ -131,16 +165,20 @@ Split the 1,448-line client into components with i18n from day one:
 
 ## 8. Validation & harness (CI from day one)
 
-- **New script** `.opencode/skills/game-builder/scripts/validate_quiz.py` (or a new
-  `quiz-writer` skill): schema check (jsonschema — already a harness dep), allocations
-  sum = 100, every question `correct` in range, ids unique, mockExam totals ≥ requested
-  size, locale `questions` ids ⊂ base ids.
-- **Hook:** extend `.opencode/hooks/validate-game-json.py` → stop accepting `quiz`
-  category (moves out) or repurpose for `content/quizzes/`.
-- **CI:** add `quizzes:<slug>` content entry to `.github/workflows/nextjs.yml` (same
-  pattern as course entries).
-- **game-builder skill** updated: `examples/valid_quiz.json` → new schema; skill.md
-  documents the hub vs games split.
+- **Hook** `.opencode/hooks/validate-quiz-json/scripts/validate_quiz_json.py`
+  (stdlib-only, exit 0/2): required fields, id = slug = filename stem, allocations
+  sum = 100 & every subdomain covered, qNNN id sequence, locales ⊂ base ids, and
+  **per-type question rules** — `mcq` exactly 4 options/one index; `multi` ≥5 options
+  with ≥2 unique correct indexes; `tf` 2–4 options; `ordering` 3–6 presented items
+  with a unique 3–5 index subset; `matching` 3–7 prompts, option count = prompt count,
+  one-to-one `correct`; optional `mockQuestionCount` positive int; locale `options`
+  length must match the base question.
+- Reference material: `references/schema.json` (JSON Schema sketch) and
+  `examples/valid_quiz.json` fixture; pytest coverage in
+  `tests/test_validate_quiz_json.py` + `tests/test_validator_coverage.py`.
+- **CI:** `quizzes:<slug>` content entry in `.github/workflows/nextjs.yml` (same
+  pattern as course entries); component behavior covered by `tests/quizzes/*.test.tsx`
+  (learning flow, multi toggle, ordering, matching, blank-excluded scoring, mock draw).
 
 ## 9. Navigation & discoverability
 
@@ -164,6 +202,13 @@ Split the 1,448-line client into components with i18n from day one:
 6. `validate_quiz` script green in CI; page counts in `out/` match generateStaticParams.
 7. Lighthouse-level checks: no horizontal scroll on mobile for hub/player; keyboard
    operable (answer, navigate, submit).
+8. All four question types (mcq/multi/ordering/matching) render and grade in both
+   modes — all-or-nothing for multi/ordering/matching, verified by `tests/quizzes/`.
+9. Learning mode never reveals feedback before **Check answer**; finish excludes
+   blanks from the score and reports them as skipped; simulation hides all results
+   until submit.
+10. `validate-quiz-json` hook green on every `content/quizzes/*.json`, including the
+    per-type question rules and `mockQuestionCount`.
 
 ## 11. Risks & decisions
 
@@ -173,3 +218,9 @@ Split the 1,448-line client into components with i18n from day one:
 | 833-question translation volume | chrome-first, question content deferred to Phase 9 (policy §4) |
 | ExamRunner scope creep | Phase 4 ships wrapper + timer + score; review-by-domain and analytics later |
 | Legacy `quiz-game-client` rewrite vs move | refactor while moving — the file needs i18n anyway (F-021) |
+| **D1** simulation size ≠ blueprint sum | optional `mockQuestionCount` (AIF: 65) + hierarchical largest-remainder scaling; allocations stay percent weights summing 100 — validator rule unchanged |
+| **D2** AIF bank size | phased: 65 questions first (blueprint-exact), then +195 → 260 total; mock draw always 65 |
+| **D3** blanks in learning mode | excluded from score (score = correct ÷ graded; blanks reported as skipped); simulation keeps blank = wrong |
+| **D4** ordering interaction | select-subset + order (presented items may include distractors; correct = 3–5 item ordered subset) |
+| Question-type interactions | no dnd-kit in quiz questions (click + buttons + native select) — see §6 |
+| Content accuracy (AIF-C01) | grounded in official exam-guide task statements + `content/courses/aws-aif-c01/en/*` lessons; validator enforces structure, humans review semantics |

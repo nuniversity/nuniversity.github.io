@@ -1,0 +1,1281 @@
+{
+  "id": "aws-aif-c01",
+  "slug": "aws-aif-c01",
+  "kind": "certification",
+  "category": "ai-ml",
+  "title": "AWS AI Practitioner (AIF-C01)",
+  "description": "Exam-style questions for the AWS Certified AI Practitioner exam covering AI and ML fundamentals, generative AI, foundation model applications, responsible AI, and security, compliance, and governance.",
+  "difficulty": "intermediate",
+  "topic": "AWS",
+  "certification": "AWS Certified AI Practitioner (AIF-C01)",
+  "durationSeconds": 5400,
+  "passingScore": 70,
+  "mockQuestionCount": 65,
+  "domains": [
+    {
+      "id": "1.0",
+      "name": "1.0 Fundamentals of AI and ML",
+      "color": "blue",
+      "subdomains": [
+        "1.1 - Explain basic AI concepts and terminologies",
+        "1.2 - Identify practical use cases for AI",
+        "1.3 - Describe the AI/ML development lifecycle"
+      ]
+    },
+    {
+      "id": "2.0",
+      "name": "2.0 Fundamentals of GenAI",
+      "color": "purple",
+      "subdomains": [
+        "2.1 - Explain the basic concepts of generative AI",
+        "2.2 - Understand the capabilities and limitations of GenAI for solving business problems",
+        "2.3 - Describe AWS infrastructure and technologies for building GenAI applications"
+      ]
+    },
+    {
+      "id": "3.0",
+      "name": "3.0 Applications of Foundation Models",
+      "color": "teal",
+      "subdomains": [
+        "3.1 - Describe design considerations for applications that use foundation models",
+        "3.2 - Choose effective prompt engineering techniques",
+        "3.3 - Describe the training and fine-tuning process for FMs",
+        "3.4 - Describe methods to evaluate FM performance"
+      ]
+    },
+    {
+      "id": "4.0",
+      "name": "4.0 Guidelines for Responsible AI",
+      "color": "orange",
+      "subdomains": [
+        "4.1 - Explain the development of AI systems that are responsible",
+        "4.2 - Recognize the importance of transparent and explainable models"
+      ]
+    },
+    {
+      "id": "5.0",
+      "name": "5.0 Security, Compliance, and Governance for AI Solutions",
+      "color": "green",
+      "subdomains": [
+        "5.1 - Explain methods to secure AI systems",
+        "5.2 - Recognize governance and compliance regulations for AI systems"
+      ]
+    }
+  ],
+  "allocations": {
+    "1.1 - Explain basic AI concepts and terminologies": 7,
+    "1.2 - Identify practical use cases for AI": 6,
+    "1.3 - Describe the AI/ML development lifecycle": 7,
+    "2.1 - Explain the basic concepts of generative AI": 8,
+    "2.2 - Understand the capabilities and limitations of GenAI for solving business problems": 8,
+    "2.3 - Describe AWS infrastructure and technologies for building GenAI applications": 8,
+    "3.1 - Describe design considerations for applications that use foundation models": 7,
+    "3.2 - Choose effective prompt engineering techniques": 8,
+    "3.3 - Describe the training and fine-tuning process for FMs": 6,
+    "3.4 - Describe methods to evaluate FM performance": 7,
+    "4.1 - Explain the development of AI systems that are responsible": 8,
+    "4.2 - Recognize the importance of transparent and explainable models": 6,
+    "5.1 - Explain methods to secure AI systems": 7,
+    "5.2 - Recognize governance and compliance regulations for AI systems": 7
+  },
+  "questions": [
+    {
+      "id": "q001",
+      "subdomain": "1.1 - Explain basic AI concepts and terminologies",
+      "type": "mcq",
+      "question": "A data engineering team scores a 40 GB file of sensor readings that already sits in Amazon S3. The results are needed for the morning batch report, and no user is waiting for an answer. Which type of inferencing fits this workload?",
+      "options": [
+        "Real-time inferencing against a persistent REST endpoint",
+        "Asynchronous inferencing with an SNS notification for each request",
+        "Batch inferencing run as a transform job over data at rest",
+        "Serverless inferencing that scales to zero between calls"
+      ],
+      "correct": 2,
+      "explanation": "Batch inferencing processes large volumes of data that are already at rest when nobody is waiting, so results can be written to S3 for the morning report. Real-time and serverless options target interactive requests, while asynchronous inferencing serves individual long-running requests that need a callback."
+    },
+    {
+      "id": "q002",
+      "subdomain": "1.1 - Explain basic AI concepts and terminologies",
+      "type": "mcq",
+      "question": "Which statement correctly describes how artificial intelligence, machine learning, deep learning and generative AI relate to one another?",
+      "options": [
+        "Generative AI is a subset of deep learning, which is a subset of machine learning, which is a branch of artificial intelligence",
+        "Machine learning is a broader field than artificial intelligence because it includes rule-based expert systems",
+        "Deep learning is a branch of generative AI that trains only on labeled data",
+        "Every artificial intelligence system learns from data through gradient descent"
+      ],
+      "correct": 0,
+      "explanation": "AWS describes these as nested fields: generative AI is a very advanced form of deep learning, deep learning takes machine learning one step further, and machine learning is one branch of AI. Rule-based systems are AI without machine learning, so the options that invert the nesting are wrong."
+    },
+    {
+      "id": "q003",
+      "subdomain": "1.1 - Explain basic AI concepts and terminologies",
+      "type": "mcq",
+      "question": "A churn model reaches 99% accuracy on its training data but only 71% accuracy on the held-out evaluation set. What does this gap indicate?",
+      "options": [
+        "Underfitting, because the model has high bias and is too simple for the data",
+        "A well-fit model, because training performance is high",
+        "A labeling error that always raises evaluation accuracy",
+        "Overfitting, because the model has high variance and memorized the training data"
+      ],
+      "correct": 3,
+      "explanation": "AWS defines overfitting as accurate predictions on training data that do not generalize to new data, which matches a large gap between the two scores. Underfitting instead shows low scores on both the training and the evaluation set."
+    },
+    {
+      "id": "q004",
+      "subdomain": "1.1 - Explain basic AI concepts and terminologies",
+      "type": "multi",
+      "question": "A team is documenting its ML pipeline for a new analyst. Which statements about training, inferencing and model vocabulary are accurate?",
+      "options": [
+        "Training is the process of fitting a model to data so that it captures patterns in those data",
+        "Inferencing is the act of applying a trained model to new data to produce predictions",
+        "An epoch is the number of samples the algorithm uses in each training iteration",
+        "Batch inferencing suits large volumes of data when latency of minutes or hours is acceptable",
+        "An algorithm is the learning procedure that consumes training data and outputs a model",
+        "Real-time inferencing is the best fit for a job that runs once a night over files in S3"
+      ],
+      "correct": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "Training, inferencing, batch inferencing and the definition of an algorithm all match AWS wording, so the first, second, fourth and fifth statements hold. An epoch is one pass through the entire training dataset while batch size is the samples per iteration, and a nightly job over data at rest is batch work rather than real-time work."
+    },
+    {
+      "id": "q005",
+      "subdomain": "1.1 - Explain basic AI concepts and terminologies",
+      "type": "multi",
+      "question": "A company is sorting its datasets before choosing an AWS service for each one. Which of these datasets are classified as unstructured data?",
+      "options": [
+        "Customer support text documents",
+        "Audio recordings of phone calls",
+        "Product photographs uploaded by sellers",
+        "Tabular order records in a relational database",
+        "Daily sales time series stored as timestamps and values"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Text, audio and images are unstructured data that route to services such as Amazon Comprehend, Amazon Transcribe and Amazon Rekognition. Tabular records and ordered time series remain structured data, which is the territory of classical SageMaker jobs."
+    },
+    {
+      "id": "q006",
+      "subdomain": "1.2 - Identify practical use cases for AI",
+      "type": "mcq",
+      "question": "A bank must apply twelve regulatory rules to every loan application and produce exactly the same auditable decision each time the same inputs are submitted. What is the most appropriate solution?",
+      "options": [
+        "Train a supervised classification model on historical loan decisions",
+        "Implement a deterministic rules engine that evaluates the twelve rules in order",
+        "Fine-tune a foundation model on the bank's past lending memos",
+        "Deploy a reinforcement learning agent that learns a policy from customer behavior"
+      ],
+      "correct": 1,
+      "explanation": "When the requirement is a specific, repeatable outcome rather than a prediction, a rules engine gives the same auditable answer every run and costs nothing to train. A model would only approximate the rules and would introduce variation that a reviewer cannot reproduce."
+    },
+    {
+      "id": "q007",
+      "subdomain": "1.2 - Identify practical use cases for AI",
+      "type": "mcq",
+      "question": "A support organization wants a managed service that detects the dominant language, the sentiment, and named entities in incoming customer emails. Which service should it use?",
+      "options": [
+        "Amazon Transcribe",
+        "Amazon Polly",
+        "Amazon Translate",
+        "Amazon Comprehend"
+      ],
+      "correct": 3,
+      "explanation": "Amazon Comprehend performs natural language processing tasks such as language detection, sentiment analysis and entity extraction on text. Transcribe converts speech to text, Polly converts text to speech, and Translate converts text between languages."
+    },
+    {
+      "id": "q008",
+      "subdomain": "1.2 - Identify practical use cases for AI",
+      "type": "multi",
+      "question": "A retail group is prioritizing its AI investments for the next quarter. Which situations are strong candidates for AI or machine learning?",
+      "options": [
+        "Routing millions of incoming support tickets to the right queue automatically",
+        "Scaling a decision that humans cannot apply consistently at current volume",
+        "Applying a fixed set of compliance rules that must return identical output on every run",
+        "Detecting fraudulent transactions from patterns in historical payment data",
+        "A workflow where the cost of collecting and labeling data exceeds the value of the prediction",
+        "Predicting customer churn from labeled historical account activity"
+      ],
+      "correct": [
+        0,
+        1,
+        3,
+        5
+      ],
+      "explanation": "AI and ML add value by assisting decisions, automating repetitive classification and scaling beyond human capacity, which covers the first, second, fourth and sixth statements. A deterministic rules requirement and a case where data and labeling costs outweigh the benefit are both reasons to decline an AI project."
+    },
+    {
+      "id": "q009",
+      "subdomain": "1.2 - Identify practical use cases for AI",
+      "type": "matching",
+      "question": "Match each business requirement to the managed AWS AI service built for it.",
+      "prompts": [
+        "Detect the dominant language and sentiment of support tickets",
+        "Convert recorded call-center audio into time-stamped text transcripts",
+        "Build a text and voice assistant that resolves account inquiries through intents and slots",
+        "Translate product descriptions into several target languages",
+        "Generate natural-sounding narration for an e-learning course"
+      ],
+      "options": [
+        "Amazon Polly",
+        "Amazon Comprehend",
+        "Amazon Lex",
+        "Amazon Translate",
+        "Amazon Transcribe"
+      ],
+      "correct": [
+        1,
+        4,
+        2,
+        3,
+        0
+      ],
+      "explanation": "Comprehend reads language and sentiment from text, Transcribe turns speech into text, Lex builds intent-based conversation, Translate converts between languages, and Polly turns text into speech."
+    },
+    {
+      "id": "q010",
+      "subdomain": "1.3 - Describe the AI/ML development lifecycle",
+      "type": "mcq",
+      "question": "A product manager asks how to judge whether the new recommendation feature was worth building. Which measure is a business metric rather than a model performance metric?",
+      "options": [
+        "Return on investment generated by the deployed feature",
+        "F1 score measured on the held-out test set",
+        "Precision of the classifier on the evaluation split",
+        "Recall of the minority class in the training data"
+      ],
+      "correct": 0,
+      "explanation": "Business metrics such as ROI, cost per user, development cost and customer feedback answer whether the project is worth it, while accuracy, precision, recall and F1 answer whether the model is correct. A model can score well on F1 and still lose money, so ROI is the business-side measure."
+    },
+    {
+      "id": "q011",
+      "subdomain": "1.3 - Describe the AI/ML development lifecycle",
+      "type": "mcq",
+      "question": "Two months after deployment, the distribution of input data shifts and prediction quality degrades. What should the team do next?",
+      "options": [
+        "Nothing, because the model was already evaluated on a held-out set before deployment",
+        "Delete the endpoint, since a deployed model cannot be updated once it serves traffic",
+        "Use monitoring to confirm the drift, then trigger a re-training pipeline on fresh data",
+        "Remove the monitoring alerts so that the production team is not interrupted"
+      ],
+      "correct": 2,
+      "explanation": "Monitoring for drift feeds back into re-training, which is what turns the lifecycle into a loop rather than a line. Pre-deployment evaluation does not protect against data that changes after launch, and endpoints are routinely updated through a re-training and redeployment cycle."
+    },
+    {
+      "id": "q012",
+      "subdomain": "1.3 - Describe the AI/ML development lifecycle",
+      "type": "ordering",
+      "question": "Place these Well-Architected ML lifecycle phases in the order in which a team encounters them.",
+      "options": [
+        "Model deployment for inference and prediction",
+        "ML problem framing",
+        "Business goal identification",
+        "Data processing, including collection and feature engineering",
+        "Model development, including training and evaluation"
+      ],
+      "correct": [
+        2,
+        1,
+        3,
+        4,
+        0
+      ],
+      "explanation": "The ML Lens starts with the business goal, then frames the ML problem, processes data, develops the model and finally deploys it for inference. AWS notes that the phases contain feedback loops, but no team should begin model development before the business goal and problem framing exist."
+    },
+    {
+      "id": "q013",
+      "subdomain": "1.3 - Describe the AI/ML development lifecycle",
+      "type": "ordering",
+      "question": "Place these stages of an AI/ML pipeline in the order they occur in a typical project.",
+      "options": [
+        "Train the model on the prepared data",
+        "Collect raw data from S3 and other sources",
+        "Deploy the model to an inference endpoint",
+        "Perform exploratory data analysis and pre-processing",
+        "Evaluate the model on held-out data"
+      ],
+      "correct": [
+        1,
+        3,
+        0,
+        4,
+        2
+      ],
+      "explanation": "Data is collected first, explored and pre-processed, used to train the model, and then the model is evaluated on held-out data before any endpoint exists. Deployment follows only once evaluation shows the model is production ready."
+    },
+    {
+      "id": "q014",
+      "subdomain": "2.1 - Explain the basic concepts of generative AI",
+      "type": "mcq",
+      "question": "A company runs a high-volume summarization workload on Amazon Bedrock and wants to understand what drives its bill. Which factor has the greatest direct effect on the cost of each request?",
+      "options": [
+        "The number of concurrent applications sharing the account",
+        "The count of input tokens processed and output tokens generated",
+        "The size of the container image used to host the model",
+        "The number of developers with console access to the account"
+      ],
+      "correct": 1,
+      "explanation": "On-demand foundation model pricing is metered per input and output token, so prompt length and generated length are the levers that move cost and latency together. Account activity, container size and developer counts do not change the token meter of a single invocation."
+    },
+    {
+      "id": "q015",
+      "subdomain": "2.1 - Explain the basic concepts of generative AI",
+      "type": "mcq",
+      "question": "During long conversations, a support agent bot gradually stops following its own operating instructions even though every request returns successfully. What best explains this behavior?",
+      "options": [
+        "The tokenizer silently changed, so the same text now produces fewer tokens",
+        "A guardrail is blocking the instructions before they reach the model",
+        "The application is sending the requests to a different AWS Region",
+        "The context window is full, so the oldest tokens including the system prompt are evicted"
+      ],
+      "correct": 3,
+      "explanation": "AWS describes the context window as a FIFO buffer: once it fills, each new token evicts the oldest one, and the system prompt is usually the oldest content. The call still succeeds, so behavior drifts instead of raising an error, a condition AWS calls context window overflow."
+    },
+    {
+      "id": "q016",
+      "subdomain": "2.1 - Explain the basic concepts of generative AI",
+      "type": "mcq",
+      "question": "A developer wants agents built with different frameworks to reach the same external tools and data sources through one common standard. Which technology provides this?",
+      "options": [
+        "Model Context Protocol",
+        "OAuth 2.0 authorization grants",
+        "OpenID Connect token exchange",
+        "Amazon S3 event notifications"
+      ],
+      "correct": 0,
+      "explanation": "Model Context Protocol is the open standard that lets agents and AI applications connect to tools and data sources in a consistent way, and it is an explicit objective under agentic AI. OAuth, OpenID Connect and S3 notifications solve authentication and file events, not tool integration for agents."
+    },
+    {
+      "id": "q017",
+      "subdomain": "2.1 - Explain the basic concepts of generative AI",
+      "type": "multi",
+      "question": "A team is designing an agentic solution on AWS. Which capabilities are part of agentic AI as the exam defines it?",
+      "options": [
+        "A supervisor agent that coordinates collaborator agents on a complex task",
+        "Managed memory that carries context across sessions for the same user",
+        "Runtime tool usage, where the model selects and invokes an API it needs",
+        "A guarantee that the agent will never produce an incorrect statement",
+        "Workflow orchestration in which the model decides the next step at runtime",
+        "Fixed, identical responses for every request without any reasoning steps"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Agentic AI covers multi-agent patterns, memory management, tool usage and workflow orchestration, which are the four capabilities listed here. Agents remain nondeterministic and fallible, so any option promising guaranteed correctness or fixed identical output is wrong."
+    },
+    {
+      "id": "q018",
+      "subdomain": "2.1 - Explain the basic concepts of generative AI",
+      "type": "ordering",
+      "question": "Place these foundation model lifecycle stages in the order they occur.",
+      "options": [
+        "Fine-tuning",
+        "Evaluation",
+        "Data selection",
+        "Pre-training",
+        "Model selection"
+      ],
+      "correct": [
+        2,
+        4,
+        3,
+        0,
+        1
+      ],
+      "explanation": "AWS defines the foundation model lifecycle as data selection, then model selection, then pre-training, fine-tuning and evaluation, with deployment and feedback following. Each stage builds on the previous one, so neither pre-training nor fine-tuning can start before the data and the model family are chosen."
+    },
+    {
+      "id": "q019",
+      "subdomain": "2.1 - Explain the basic concepts of generative AI",
+      "type": "matching",
+      "question": "Match each generative AI term to its definition.",
+      "prompts": [
+        "Token",
+        "Chunking",
+        "Embedding",
+        "Context window",
+        "Prompt engineering",
+        "Diffusion model"
+      ],
+      "options": [
+        "Splitting a long document into smaller segments so each one fits a model's input limit",
+        "Designing and refining the instruction text sent to a model to improve its output",
+        "The unit of text a model reads and writes, produced by splitting input with a tokenizer",
+        "A generative model that creates new content by reversing progressively added noise",
+        "The maximum number of tokens a model can consider at one time",
+        "A dense numeric representation that places semantically similar items near each other"
+      ],
+      "correct": [
+        2,
+        0,
+        5,
+        4,
+        1,
+        3
+      ],
+      "explanation": "A token is the model's unit of text, chunking splits long inputs into fitting segments, an embedding is a dense vector, the context window is the token budget for one call, prompt engineering is instruction design, and a diffusion model generates content by learning to reverse noise."
+    },
+    {
+      "id": "q020",
+      "subdomain": "2.2 - Understand the capabilities and limitations of GenAI for solving business problems",
+      "type": "mcq",
+      "question": "A chatbot answers from an internal knowledge base but occasionally invents policy details that are not in any source document. Which action most directly reduces this failure?",
+      "options": [
+        "Raise the temperature so the model produces more varied wording",
+        "Increase the maximum output token count so the answer is longer",
+        "Add contextual grounding checks that compare the response with the retrieved source",
+        "Remove the knowledge base and rely on the model's built-in knowledge"
+      ],
+      "correct": 2,
+      "explanation": "Contextual grounding checks test whether the generated answer is supported by the retrieved context, which is AWS's documented defense against hallucination. Temperature and output length change style and verbosity rather than factual support, and dropping retrieval makes fabrication more likely."
+    },
+    {
+      "id": "q021",
+      "subdomain": "2.2 - Understand the capabilities and limitations of GenAI for solving business problems",
+      "type": "mcq",
+      "question": "A compliance reviewer submits the same prompt twice and receives two different answers, then asks which property of generative AI explains this. What is the answer?",
+      "options": [
+        "Hallucination",
+        "Nondeterminism",
+        "Underfitting",
+        "Concept drift"
+      ],
+      "correct": 1,
+      "explanation": "AWS states that foundation models are nondeterministic, meaning identical inputs can produce different responses. Hallucination means a confident fabrication rather than run-to-run variation, while underfitting and concept drift are classical machine learning terms."
+    },
+    {
+      "id": "q022",
+      "subdomain": "2.2 - Understand the capabilities and limitations of GenAI for solving business problems",
+      "type": "mcq",
+      "question": "A team must choose a foundation model for a regulated, latency-sensitive customer-facing application. Which set of factors best represents the selection criteria the exam expects?",
+      "options": [
+        "Training data cutoff date, vendor popularity and number of published benchmarks",
+        "Only the lowest per-token price and the largest context window",
+        "Only the open-source license status of the model weights",
+        "Task fit, measured performance, cost, latency, compliance constraints and operational complexity"
+      ],
+      "correct": 3,
+      "explanation": "AWS frames foundation model selection around the type of model, its performance and capabilities, and the constraints of cost, latency, compliance and complexity. Options that reduce the decision to a single dimension ignore the trade-offs this objective is testing."
+    },
+    {
+      "id": "q023",
+      "subdomain": "2.2 - Understand the capabilities and limitations of GenAI for solving business problems",
+      "type": "multi",
+      "question": "A leadership team is reviewing where generative AI helps their business. Which of these are advantages of generative AI that AWS lists?",
+      "options": [
+        "Adaptability, where one model handles many tasks through prompting and fine-tuning",
+        "Responsiveness, where output is conditioned on the full context of the prompt",
+        "Conversational ability, where a system holds multi-turn dialogue over enterprise data",
+        "Interpretability, where every internal step of the model can be read by an auditor",
+        "Content generation, where new text, code, images and audio are produced from an instruction",
+        "Determinism, where the same prompt always returns a byte-identical response"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "AWS lists adaptability, responsiveness, conversational ability and content generation as the four advantages of generative AI. Poor interpretability and nondeterminism appear as disadvantages, so the last two options invert the exam guide's own risk list."
+    },
+    {
+      "id": "q024",
+      "subdomain": "2.2 - Understand the capabilities and limitations of GenAI for solving business problems",
+      "type": "multi",
+      "question": "A product team needs to prove that its generative AI feature delivers value to the business. Which metrics belong in that business case?",
+      "options": [
+        "Return on investment from the feature",
+        "Conversion rate of users who act on the generated output",
+        "F1 score of the underlying classification step",
+        "Average revenue per user",
+        "Customer lifetime value",
+        "Training loss recorded during pre-training"
+      ],
+      "correct": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "ROI, conversion rate, average revenue per user and customer lifetime value are business outcome metrics that tie the feature to revenue and efficiency. F1 and training loss are model metrics that describe the algorithm rather than the value delivered."
+    },
+    {
+      "id": "q025",
+      "subdomain": "2.3 - Describe AWS infrastructure and technologies for building GenAI applications",
+      "type": "mcq",
+      "question": "A development team wants to experiment with foundation models from several providers through one serverless API, without provisioning or managing model endpoints. Which service fits?",
+      "options": [
+        "Amazon Bedrock",
+        "Amazon Textract",
+        "Amazon Rekognition",
+        "Amazon Lex"
+      ],
+      "correct": 0,
+      "explanation": "Amazon Bedrock is a fully managed, serverless service that exposes a single API for foundation models from many providers, so switching models is a change of model ID. Textract, Rekognition and Lex are prebuilt services that answer one narrow task rather than serving general-purpose models."
+    },
+    {
+      "id": "q026",
+      "subdomain": "2.3 - Describe AWS infrastructure and technologies for building GenAI applications",
+      "type": "mcq",
+      "question": "A customer has steady, predictable production traffic on a custom fine-tuned model and needs capacity reserved ahead of demand. Which Amazon Bedrock capacity option should it use?",
+      "options": [
+        "On-demand inference, which bills only for the tokens actually used",
+        "Batch inference, which completes offline jobs within a day",
+        "Provisioned throughput, which reserves model capacity for a term",
+        "Cross-region inference routing, which spreads traffic across Regions"
+      ],
+      "correct": 2,
+      "explanation": "Custom fine-tuned models require provisioned throughput, which commits to reserved capacity billed by time rather than purely by tokens. On-demand suits spiky usage, batch suits offline bulk work, and cross-region routing is about cost and latency placement rather than reservation."
+    },
+    {
+      "id": "q027",
+      "subdomain": "2.3 - Describe AWS infrastructure and technologies for building GenAI applications",
+      "type": "multi",
+      "question": "An enterprise is building a business case for using AWS generative AI services. Which benefits does AWS associate with these services?",
+      "options": [
+        "Access to a broad selection of foundation models through a single managed API",
+        "Lower operational overhead because AWS manages the underlying infrastructure and scaling",
+        "Security and compliance capabilities that work with the shared responsibility model",
+        "Complete transfer of data governance and access control responsibility to AWS",
+        "Faster time to market by starting from pre-trained models instead of building from scratch",
+        "A guarantee of the lowest inference cost across every cloud provider"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "AWS frames its generative AI services around accessibility, a lower barrier to entry, efficiency, cost-effectiveness and speed to market, alongside security and compliance under shared responsibility. Customers retain responsibility for their own data and access control, and no provider can promise the lowest cost for every workload."
+    },
+    {
+      "id": "q028",
+      "subdomain": "2.3 - Describe AWS infrastructure and technologies for building GenAI applications",
+      "type": "ordering",
+      "question": "Place these steps of a generative AI project on AWS in the order a team typically performs them.",
+      "options": [
+        "Monitor the released application for cost, quality and safety",
+        "Select a foundation model and iterate on prompts with sample inputs",
+        "Evaluate the application against a held-out set of test prompts",
+        "Define the business use case and the success criteria",
+        "Ground the application with a knowledge base over internal documents"
+      ],
+      "correct": [
+        3,
+        1,
+        4,
+        2,
+        0
+      ],
+      "explanation": "The project starts from a defined business use case, then moves to model selection and prompting, grounding on internal data, evaluation against held-out prompts, and finally production monitoring. Evaluation must come after the application is built and before release, and monitoring only exists once the application is running."
+    },
+    {
+      "id": "q029",
+      "subdomain": "2.3 - Describe AWS infrastructure and technologies for building GenAI applications",
+      "type": "matching",
+      "question": "Match each AWS generative AI service to the capability it provides.",
+      "prompts": [
+        "Amazon Bedrock",
+        "Amazon SageMaker AI",
+        "Amazon SageMaker JumpStart",
+        "Strands Agents",
+        "Amazon Bedrock AgentCore"
+      ],
+      "options": [
+        "A managed runtime with tool gateway, memory and observability components for production agents",
+        "A serverless API for invoking and customizing foundation models from many providers",
+        "An open-source SDK for building and testing AI agents",
+        "A model hub for discovering, fine-tuning and deploying pre-trained models with minimal code",
+        "An environment for building, training and deploying custom machine learning models with full control"
+      ],
+      "correct": [
+        1,
+        4,
+        3,
+        2,
+        0
+      ],
+      "explanation": "Bedrock serves foundation models through one serverless API, SageMaker AI builds and trains custom machine learning models, JumpStart accelerates use of pre-trained models, Strands Agents is an open-source agent SDK, and AgentCore provides the managed runtime, tools and memory for production agents."
+    },
+    {
+      "id": "q030",
+      "subdomain": "3.1 - Describe design considerations for applications that use foundation models",
+      "type": "mcq",
+      "question": "A data engineering team has an application that extracts fields from invoices and must return the same output every time the same invoice is processed, because downstream audits compare runs. Which inference configuration meets the requirement?",
+      "options": [
+        "Raise temperature to 1.0 and keep top-p at the model default so the model explores many readings",
+        "Set temperature to 0 and lower top-p so sampling concentrates on the highest-probability tokens",
+        "Set temperature to 0 and raise max tokens to the model maximum so the answer is always complete",
+        "Keep temperature high and rely on stop sequences to make the output consistent"
+      ],
+      "correct": 1,
+      "explanation": "Temperature 0 with a lowered top-p steepens the next-token distribution so reruns converge on the same extraction, which is the documented recipe for deterministic workloads. Max tokens only caps output length, and stop sequences halt generation without reducing randomness."
+    },
+    {
+      "id": "q031",
+      "subdomain": "3.1 - Describe design considerations for applications that use foundation models",
+      "type": "mcq",
+      "question": "A retail company wants an assistant that checks live inventory, places an order when stock is available, and then explains what happened, choosing its next action based on what each lookup returns. Which approach best fits this requirement?",
+      "options": [
+        "One model invocation with the current inventory table pasted into the prompt",
+        "A prompt template with a few worked examples of past orders",
+        "Batch inference that processes the previous night's order files",
+        "An AI agent that selects among registered actions at runtime and feeds each result back into its reasoning"
+      ],
+      "correct": 3,
+      "explanation": "Choosing among actions at runtime and reasoning over each result is the role of an AI agent and its action loop, which is what business processes like order handling require. A single prompt or template cannot call a system, and batch inference runs offline over stored data rather than responding interactively."
+    },
+    {
+      "id": "q032",
+      "subdomain": "3.1 - Describe design considerations for applications that use foundation models",
+      "type": "multi",
+      "question": "A company is selecting a foundation model and an architecture for a multilingual customer support assistant. Which of the following are legitimate design considerations for the application?",
+      "options": [
+        "Whether the model accepts the input modalities the assistant must handle, such as text and images",
+        "Whether the model's input and output length limits can hold the longest conversation and document excerpts",
+        "Whether prompt caching can lower the cost of repeatedly sending the same long system prompt and policy context",
+        "Whether the model returns byte-identical answers on every run, which would remove the need for any evaluation",
+        "Whether the model's typical latency fits an interactive chat experience and its language coverage includes every market served",
+        "Whether the model has the highest parameter count available, since scale alone decides response quality"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Modality, input and output length, prompt caching, latency and language coverage are all documented selection criteria for foundation model applications. Determinism never removes the need for evaluation, and parameter count alone does not decide quality for a given task."
+    },
+    {
+      "id": "q033",
+      "subdomain": "3.1 - Describe design considerations for applications that use foundation models",
+      "type": "ordering",
+      "question": "Place the stages of a retrieval-augmented generation request at query time in the order they occur.",
+      "options": [
+        "The retrieved passages are inserted into the prompt alongside the user's question",
+        "The user's question is converted into an embedding vector",
+        "A similarity search returns the passages whose vectors are closest to the question",
+        "The foundation model generates an answer that cites the source passages",
+        "The foundation model is fine-tuned on the organization's document corpus"
+      ],
+      "correct": [
+        1,
+        2,
+        0,
+        3
+      ],
+      "explanation": "The query is embedded first, a similarity search retrieves the nearest passages, those passages are injected into the prompt as grounding context, and only then does the model generate an answer with citations. Fine-tuning is a customization step that moves weights, so it is not part of a retrieval-augmented request."
+    },
+    {
+      "id": "q034",
+      "subdomain": "3.1 - Describe design considerations for applications that use foundation models",
+      "type": "matching",
+      "question": "Match each AWS service used in a knowledge base solution to the role it plays.",
+      "prompts": [
+        "Amazon OpenSearch Service used as the vector store",
+        "Amazon Neptune Analytics used as the vector store",
+        "Amazon Aurora PostgreSQL with the pgvector extension",
+        "Amazon Bedrock Knowledge Bases as the retrieval layer"
+      ],
+      "options": [
+        "Supports GraphRAG by combining vector similarity search with graph traversal queries",
+        "Runs ingestion, chunking, embedding, retrieval, and generation so the application does not manage the store",
+        "Provides hybrid keyword and vector search together with full-text search features",
+        "Keeps vectors beside relational tables so SQL filtering and vector search run in the same database"
+      ],
+      "correct": [
+        2,
+        0,
+        3,
+        1
+      ],
+      "explanation": "OpenSearch brings hybrid keyword and vector search with full-text features, Neptune Analytics adds graph traversal for GraphRAG, Aurora PostgreSQL with pgvector keeps vectors next to relational tables, and Bedrock Knowledge Bases orchestrates the ingestion and retrieval pipeline for you."
+    },
+    {
+      "id": "q035",
+      "subdomain": "3.2 - Choose effective prompt engineering techniques",
+      "type": "mcq",
+      "question": "A developer is assembling a prompt for a ticket summarizer. The prompt contains the full text of a customer ticket, the sentence 'Summarize this ticket in two sentences using plain language', and the rule 'Never include customer names in the summary'. How is the ticket text best classified?",
+      "options": [
+        "Context, the background information the model works from",
+        "Instruction, the task the model is being asked to perform",
+        "Negative prompt, a statement about what the output must exclude",
+        "Few-shot example, a demonstrated input and output pair"
+      ],
+      "correct": 0,
+      "explanation": "Context carries the material the model reasons over, while the instruction states the task and the negative prompt rules content out. The ticket text is the material being summarized, not the task, a prohibition, or a worked example."
+    },
+    {
+      "id": "q036",
+      "subdomain": "3.2 - Choose effective prompt engineering techniques",
+      "type": "mcq",
+      "question": "An analyst needs a model to work through a multi-step discounted cash flow calculation and to show every intermediate step so errors can be reviewed. Which prompt technique is the best fit?",
+      "options": [
+        "Zero-shot prompting with a single instruction that asks for the final number only",
+        "Few-shot prompting with three completed examples of final answers",
+        "Chain-of-thought prompting that asks the model to state each intermediate step in order",
+        "Raising temperature so the model explores more candidate calculations"
+      ],
+      "correct": 2,
+      "explanation": "Chain-of-thought is the technique for multi-step reasoning that exposes intermediate steps for review, at the documented cost of higher latency and more output tokens. Few-shot examples control format rather than reasoning, and raising temperature adds randomness instead of accuracy."
+    },
+    {
+      "id": "q037",
+      "subdomain": "3.2 - Choose effective prompt engineering techniques",
+      "type": "mcq",
+      "question": "A product team revises its support prompt frequently, but the application hard-codes the prompt text, so every edit risks changing production behavior unexpectedly. Which approach best addresses this?",
+      "options": [
+        "Copy the prompt into each service so every team can edit its own copy independently",
+        "Save the prompt in Amazon Bedrock Prompt Management, keep versions, and have the application reference an alias",
+        "Fine-tune the model on each new wording so the prompt no longer needs to be supplied",
+        "Store the prompt only in application logs so past versions can be searched after an incident"
+      ],
+      "correct": 1,
+      "explanation": "Amazon Bedrock Prompt Management stores prompts with versions and aliases, so the application pins a stable alias while new wording is saved and tested as a separate version. Copying the prompt multiplies uncontrolled copies, fine-tuning does not store prompt text, and logs are not a versioning mechanism."
+    },
+    {
+      "id": "q038",
+      "subdomain": "3.2 - Choose effective prompt engineering techniques",
+      "type": "multi",
+      "question": "A team is standardizing how prompts are written and reviewed across its generative AI applications. Which of these practices support response quality, controlled experimentation, and safety?",
+      "options": [
+        "Keep instructions specific and concise so the model receives one unambiguous task",
+        "Test each candidate prompt against a fixed set of representative inputs before release",
+        "Version prompts so a change can be compared with the previous behavior and rolled back",
+        "Set temperature to the maximum on every task, since variety always improves responses",
+        "Treat one successful demonstration as proof that a prompt is ready for production",
+        "Provide worked examples when the expected output format is hard to describe in words alone"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        5
+      ],
+      "explanation": "Specific and concise instructions, a fixed test set, version control, and examples for hard-to-describe formats are the documented best practices for response quality and experimentation. Maximum temperature hurts consistency, and a single demo is not an evaluation."
+    },
+    {
+      "id": "q039",
+      "subdomain": "3.2 - Choose effective prompt engineering techniques",
+      "type": "ordering",
+      "question": "Place the steps a prompt engineer follows when iterating on a prompt in the order they occur.",
+      "options": [
+        "Save the revised prompt as a new version and point the application at the stable alias",
+        "Define the task, the audience, and the criteria that make a response acceptable",
+        "Run a fixed set of representative inputs through the prompt and capture the outputs",
+        "Draft the first prompt with an instruction, the needed context, and any examples",
+        "Compare outputs with the criteria, identify failure modes, and revise the wording"
+      ],
+      "correct": [
+        1,
+        3,
+        2,
+        4,
+        0
+      ],
+      "explanation": "Iteration starts with written criteria, then a draft, then a run over fixed inputs, then comparison against the criteria and revision. Saving a new version and moving the application's alias comes last, so the application only ever points at tested wording."
+    },
+    {
+      "id": "q040",
+      "subdomain": "3.3 - Describe the training and fine-tuning process for FMs",
+      "type": "mcq",
+      "question": "A legal technology company wants a model to absorb the vocabulary, citation style, and conventions of contract language across a large corpus of unlabeled contracts before any task-specific training. Which approach matches this goal?",
+      "options": [
+        "Instruction tuning on a small set of annotated contract questions",
+        "Retrieval-augmented generation over an index of the same contracts",
+        "Reinforcement fine-tuning with a reward model that scores citation quality",
+        "Continuous pre-training on the contract corpus to adapt the model to the domain"
+      ],
+      "correct": 3,
+      "explanation": "Continuous pre-training, also called domain adaptation, feeds unlabeled domain text into the model so it absorbs the field's vocabulary and style. Instruction tuning needs labeled pairs, retrieval-augmented generation injects documents at query time without changing weights, and reinforcement fine-tuning optimizes against a reward signal."
+    },
+    {
+      "id": "q041",
+      "subdomain": "3.3 - Describe the training and fine-tuning process for FMs",
+      "type": "mcq",
+      "question": "An ML engineer is assembling the dataset for a supervised fine-tuning job that will route support tickets to the right team. Which property of the dataset matters most for the job to succeed?",
+      "options": [
+        "Curated, labeled examples that represent the range of real tickets, including difficult cases",
+        "The largest possible volume of unlabeled text, regardless of where it came from",
+        "Examples drawn only from tickets the current system already handles correctly",
+        "Records assembled without licensing or privacy review so the job can start sooner"
+      ],
+      "correct": 0,
+      "explanation": "Fine-tuning quality depends on curated, representative, labeled examples, with governance over licensing and privacy applied before training. Volume alone does not help, a set of easy cases leaves failure modes untrained, and skipping review creates compliance risk rather than speed."
+    },
+    {
+      "id": "q042",
+      "subdomain": "3.3 - Describe the training and fine-tuning process for FMs",
+      "type": "ordering",
+      "question": "Place the steps of preparing a dataset for a fine-tuning job in the order they occur.",
+      "options": [
+        "Format the approved records into the training file schema and upload them to the location the job will read",
+        "Define the target behavior and the examples that count as a correct response",
+        "Curate the collected records: remove duplicates, correct errors, strip personal data, and confirm licensing",
+        "Run the fine-tuning job and compare the result against a held-out validation set",
+        "Sample production inputs so the examples cover real requests, including edge cases"
+      ],
+      "correct": [
+        1,
+        4,
+        2,
+        0,
+        3
+      ],
+      "explanation": "Target behavior is defined first, then representative data is sampled, then curation and data governance are applied, then the curated records are formatted and uploaded, and only then does the job run with evaluation on held-out data."
+    },
+    {
+      "id": "q043",
+      "subdomain": "3.3 - Describe the training and fine-tuning process for FMs",
+      "type": "matching",
+      "question": "Match each fine-tuning approach to the description of what it does.",
+      "prompts": [
+        "Instruction tuning",
+        "Continuous pre-training for domain adaptation",
+        "Transfer learning",
+        "RLHF (reinforcement learning from human feedback)"
+      ],
+      "options": [
+        "Human reviewers rank candidate outputs and a reward model is learned from those rankings",
+        "Training on instruction and response pairs so the model learns to follow directions reliably",
+        "Reusing knowledge the model already has from one task when adapting it to a related task",
+        "Feeding large volumes of unlabeled domain text so the model absorbs the field's vocabulary and style"
+      ],
+      "correct": [
+        1,
+        3,
+        2,
+        0
+      ],
+      "explanation": "Instruction tuning trains on instruction and response pairs, continuous pre-training feeds unlabeled domain text, transfer learning reuses knowledge from a related task, and RLHF learns a reward model from human rankings of candidate outputs."
+    },
+    {
+      "id": "q044",
+      "subdomain": "3.4 - Describe methods to evaluate FM performance",
+      "type": "mcq",
+      "question": "An evaluation engineer holds a set of human-written reference summaries and wants an automatic metric that rewards covering the content those references contain. Which metric fits?",
+      "options": [
+        "BLEU, which scores n-gram precision against human reference translations",
+        "BERTScore, which compares embedding vectors of the candidate and the reference",
+        "ROUGE, which measures n-gram overlap with the reference summaries",
+        "Perplexity, which measures how surprising the model finds the text"
+      ],
+      "correct": 2,
+      "explanation": "ROUGE compares generated summaries with references, and its recall-oriented variants reward covering reference content, which is the stated goal. BLEU is precision-oriented and built for translation, BERTScore measures semantic similarity, and perplexity measures model confidence."
+    },
+    {
+      "id": "q045",
+      "subdomain": "3.4 - Describe methods to evaluate FM performance",
+      "type": "mcq",
+      "question": "A customer support leader is measuring whether a generative AI assistant meets the business objective of resolving customer issues without agent involvement. Which metric best reflects that objective?",
+      "options": [
+        "The fluency score produced by an automatic readability check",
+        "The task completion rate, meaning the share of conversations that reach a resolution",
+        "The average number of tokens consumed per conversation",
+        "The model's score on a general knowledge benchmark"
+      ],
+      "correct": 1,
+      "explanation": "Task completion rate is a business alignment metric that measures whether users actually finish what they came to do, which is the objective stated here. Fluency and benchmark scores describe model behavior, and token count measures cost rather than outcome."
+    },
+    {
+      "id": "q046",
+      "subdomain": "3.4 - Describe methods to evaluate FM performance",
+      "type": "multi",
+      "question": "A team is planning how to evaluate a generative AI application before it goes to production. Which of these are sound elements of the evaluation plan?",
+      "options": [
+        "Include human review for subjective criteria such as tone, brand voice, and style",
+        "Evaluate only on the prompts used during development, since those are already understood",
+        "Use a benchmark dataset of representative prompts that the team has not tuned against",
+        "Rely on a single automated metric as proof that the application is ready to launch",
+        "Track business measures such as task completion rate and cost per interaction alongside model quality metrics",
+        "Skip evaluation when temperature is set to 0, because outputs are then deterministic"
+      ],
+      "correct": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "Human review for subjective criteria, an untuned benchmark set, and business measures alongside quality metrics are all documented evaluation practices. A development-only prompt set, a single metric, and determinism at temperature 0 each leave major failure modes unmeasured."
+    },
+    {
+      "id": "q047",
+      "subdomain": "3.4 - Describe methods to evaluate FM performance",
+      "type": "matching",
+      "question": "Match each evaluation metric to the purpose it serves.",
+      "prompts": [
+        "ROUGE",
+        "BLEU",
+        "BERTScore",
+        "LLM-as-a-judge"
+      ],
+      "options": [
+        "Embeds the candidate and reference text and scores the similarity of their vectors",
+        "Has a second model score outputs against a written rubric for traits such as correctness, completeness, and tone",
+        "Measures n-gram precision against human reference translations and penalizes outputs that are too short",
+        "Measures n-gram overlap with reference summaries, rewarding coverage of the content they contain"
+      ],
+      "correct": [
+        3,
+        2,
+        0,
+        1
+      ],
+      "explanation": "ROUGE measures n-gram overlap against reference summaries, BLEU measures n-gram precision against reference translations with a brevity penalty, BERTScore compares embeddings for semantic similarity, and LLM-as-a-judge has a second model apply a rubric at scale."
+    },
+    {
+      "id": "q048",
+      "subdomain": "4.1 - Explain the development of AI systems that are responsible",
+      "type": "mcq",
+      "question": "A consumer-lending team notices that its approval model rejects applicants from one demographic group at roughly twice the rate of every other group, even though overall accuracy looks acceptable. Which analysis should the team perform first?",
+      "options": [
+        "Compare approval and error rates across demographic subgroups to size the disparity",
+        "Train the model for more epochs so it sees every example more often",
+        "Average the predictions of several models to smooth out individual decisions",
+        "Raise the decision threshold so that fewer applicants are approved overall"
+      ],
+      "correct": 0,
+      "explanation": "Subgroup analysis is the documented way to expose bias that an aggregate metric hides, because it measures how outcomes differ between demographic groups. More epochs, ensembling and threshold changes may move the numbers but neither detect nor explain the disparity."
+    },
+    {
+      "id": "q049",
+      "subdomain": "4.1 - Explain the development of AI systems that are responsible",
+      "type": "mcq",
+      "question": "A marketing group generates product illustrations with a diffusion model and publishes them in advertising campaigns. Which risk should the legal team review before launch?",
+      "options": [
+        "The model may overfit its training data and lose accuracy on unseen inputs",
+        "The generated images may substantially reproduce protected works, creating exposure to intellectual property infringement claims",
+        "The model may suffer from high variance that makes response latency unpredictable",
+        "The inference endpoint may exceed its provisioned throughput and be throttled"
+      ],
+      "correct": 1,
+      "explanation": "Intellectual property infringement claims, alongside biased outputs and loss of customer trust, are the legal risks the responsible-AI objectives attach to generative AI. The other choices describe model quality or capacity issues rather than legal exposure."
+    },
+    {
+      "id": "q050",
+      "subdomain": "4.1 - Explain the development of AI systems that are responsible",
+      "type": "mcq",
+      "question": "A team plans to score how truthful and trustworthy a new assistant is, using a reference dataset that a vendor assembled. What should the team establish first?",
+      "options": [
+        "A larger model that can rewrite the reference answers automatically before scoring",
+        "A plan to drop the reference dataset and rely on unsupervised metrics instead",
+        "A measured audit of a sample of the reference labels performed by human reviewers",
+        "A higher sampling temperature so the assistant produces more varied answers"
+      ],
+      "correct": 2,
+      "explanation": "Label quality analysis through human audits of a sampled set is how a team decides whether reference labels can be trusted as evidence of truthfulness. Rewriting labels with a model, discarding the dataset and changing sampling temperature do not validate the labels themselves."
+    },
+    {
+      "id": "q051",
+      "subdomain": "4.1 - Explain the development of AI systems that are responsible",
+      "type": "multi",
+      "question": "A team is preparing the training and evaluation data for a customer-service model that must serve a global audience. Which practices belong in a responsible dataset plan?",
+      "options": [
+        "Represent the demographic groups the system will serve with inclusive, diverse examples",
+        "Balance the label distribution so that one outcome does not dominate the dataset",
+        "Draw from curated sources whose origin and usage rights are documented for each record",
+        "Duplicate majority-class rows until every class has an identical row count",
+        "Audit a sample of the labels with human reviewers before training begins",
+        "Remove every record belonging to the smallest demographic group to avoid unequal treatment"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Inclusivity, diversity, curated and documented sources, balanced datasets and label quality are the dataset characteristics the responsible-AI objectives name. Duplicating majority rows adds no new coverage, and deleting a small group removes exactly the representation the plan is meant to protect."
+    },
+    {
+      "id": "q052",
+      "subdomain": "4.1 - Explain the development of AI systems that are responsible",
+      "type": "matching",
+      "question": "Match each responsible-AI feature to the definition it describes.",
+      "prompts": [
+        "Fairness",
+        "Robustness",
+        "Veracity",
+        "Safety",
+        "Inclusivity"
+      ],
+      "options": [
+        "The system works for people across different languages, cultures and abilities",
+        "Outputs are truthful and faithful to the source material they are based on",
+        "Outcomes do not differ unfairly between demographic groups",
+        "The system avoids producing content that could cause harm or endanger users",
+        "Performance stays stable when inputs are noisy, adversarial or slightly changed"
+      ],
+      "correct": [
+        2,
+        4,
+        1,
+        3,
+        0
+      ],
+      "explanation": "Fairness concerns equal treatment across groups, robustness concerns stability under perturbation, veracity concerns truthfulness against sources, safety concerns avoiding harm, and inclusivity concerns serving a diverse population. Each definition therefore pairs with exactly one of the five features."
+    },
+    {
+      "id": "q053",
+      "subdomain": "4.2 - Recognize the importance of transparent and explainable models",
+      "type": "mcq",
+      "question": "A regulator asks a bank to show the documented background of the credit model in production, including intended use, training data, evaluation results and approval status. Which artifact should the team produce?",
+      "options": [
+        "The AWS CloudTrail record of the most recent model invocation",
+        "The AWS Artifact page listing the bank's own compliance agreements",
+        "The Amazon Bedrock Model Evaluations report scored by an LLM-as-a-judge",
+        "The SageMaker Model Card registered with the model package"
+      ],
+      "correct": 3,
+      "explanation": "A SageMaker Model Card is the per-model record of dataset, metrics, evaluation results, intended use and approval status. CloudTrail records API calls, AWS Artifact holds AWS's own compliance reports, and an evaluation report scores outputs without documenting the model's background."
+    },
+    {
+      "id": "q054",
+      "subdomain": "4.2 - Recognize the importance of transparent and explainable models",
+      "type": "mcq",
+      "question": "A regulated insurer must give a customer a clear reason whenever an application is declined. One candidate model scores higher on accuracy but produces decisions the team cannot trace, while a simpler model is fully traceable. Which consideration should decide the choice?",
+      "options": [
+        "Whether each decision can be explained to the affected customer, even if that costs some measured accuracy",
+        "Whether the higher-scoring model can ship first and be documented later if a regulator asks",
+        "Whether the model's weights are open source, since published weights make decisions explainable",
+        "Whether the simpler model has lower inference latency, since faster answers appear more credible"
+      ],
+      "correct": 0,
+      "explanation": "The documented trade-off is interpretability against performance, and a duty to explain individual decisions bounds how much accuracy a team may buy. Shipping first and documenting later, open weights and lower latency do not make a specific decision traceable."
+    },
+    {
+      "id": "q055",
+      "subdomain": "4.2 - Recognize the importance of transparent and explainable models",
+      "type": "ordering",
+      "question": "Place the steps of an explainability and documentation review for a model in the order they occur.",
+      "options": [
+        "Publish the approved model card so auditors can retrieve it from the model registry",
+        "Define the intended use, intended users and known limitations of the model",
+        "Run the model against a representative evaluation dataset",
+        "Generate feature attributions and subgroup metrics for the evaluated predictions",
+        "Review the results with human subject-matter experts and record the open questions"
+      ],
+      "correct": [
+        1,
+        2,
+        3,
+        4,
+        0
+      ],
+      "explanation": "A team cannot judge what a model explains until it states what the model is for, and evidence must exist before experts can review it or a card can be published. Intended use, evaluation, attribution, expert review and publication is the only defensible sequence."
+    },
+    {
+      "id": "q056",
+      "subdomain": "4.2 - Recognize the importance of transparent and explainable models",
+      "type": "matching",
+      "question": "Match each transparency tool to the purpose it serves.",
+      "prompts": [
+        "SageMaker Model Card",
+        "Amazon Bedrock Model Evaluations",
+        "AWS AI Service Card",
+        "Published model license and training-data documentation"
+      ],
+      "options": [
+        "Reveals how a third-party model may be used and where its training data came from",
+        "Records the intended use, data, metrics and approval status of a model your team built",
+        "Scores candidate models against a dataset using automatic, human or LLM-as-a-judge criteria",
+        "Describes AWS's own AI services, including intended uses, limitations and design choices"
+      ],
+      "correct": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "explanation": "Model Cards document your own model, Bedrock Model Evaluations scores candidate outputs, AI Service Cards document AWS's services, and third-party license and data documentation shows permitted use and provenance. Each tool answers a different transparency question."
+    },
+    {
+      "id": "q057",
+      "subdomain": "5.1 - Explain methods to secure AI systems",
+      "type": "mcq",
+      "question": "A benefits assistant retrieves the right sections of a policy document but occasionally adds a fee that never appears in the source. Which control most directly detects this at response time?",
+      "options": [
+        "A content filter set to HIGH strength for categories such as violence and hate",
+        "A contextual grounding check that scores the response against the retrieved source and query and blocks below the threshold",
+        "A word filter using a managed list, which matches the invented fee as an exact string",
+        "A denied topic defined in natural language for the subject of fee waivers"
+      ],
+      "correct": 1,
+      "explanation": "Contextual grounding checks evaluate the output against a grounding source and a query and return a grounding score, which is exactly the unfaithful-answer case. Content filters, word filters and denied topics target harmful content, exact strings and off-limits subjects rather than faithfulness to a source."
+    },
+    {
+      "id": "q058",
+      "subdomain": "5.1 - Explain methods to secure AI systems",
+      "type": "mcq",
+      "question": "Before a fine-tuning job starts, a data engineer must find and classify customer PII and credentials sitting in the S3 buckets that feed the pipeline. Which AWS service is designed for that task?",
+      "options": [
+        "Amazon Inspector, which assesses workloads for vulnerabilities and network exposure",
+        "AWS Trusted Advisor, which checks the account against best-practice recommendations",
+        "Amazon Macie, which discovers and classifies sensitive data in S3 using managed and custom identifiers",
+        "AWS Config, which evaluates resource configuration against rules over time"
+      ],
+      "correct": 2,
+      "explanation": "Amazon Macie is the service for discovering and classifying sensitive data such as PII and credentials in S3, which must happen before any decision about how to protect it. Inspector finds software vulnerabilities, Trusted Advisor checks account-level recommendations, and Config evaluates configuration rather than object contents."
+    },
+    {
+      "id": "q059",
+      "subdomain": "5.1 - Explain methods to secure AI systems",
+      "type": "multi",
+      "question": "A team is hardening a generative AI application ahead of a security review. Which controls are part of a defense-in-depth approach to securing it?",
+      "options": [
+        "Encrypt prompts, artifacts and stored data with a KMS customer managed key",
+        "Record model invocations and guardrail interventions so an audit trail exists",
+        "Validate and filter model output before it is shown to the user",
+        "Depend only on the foundation model's own built-in safety training",
+        "Scope the invoking role's IAM policy to the specific models it is allowed to call",
+        "Publish the system prompt inside the client application bundle to make support easier"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Encryption, audit logging, output validation and least-privilege IAM are all named controls for securing AI systems, and no single one of them is sufficient alone. Relying only on the provider's safety tuning and exposing the system prompt are both single points of failure that a layered design rejects."
+    },
+    {
+      "id": "q060",
+      "subdomain": "5.1 - Explain methods to secure AI systems",
+      "type": "ordering",
+      "question": "Place the steps of a response to a suspected data-exposure incident in the order they occur.",
+      "options": [
+        "Run a post-incident review and update the guardrails, runbooks and thresholds",
+        "Detect the anomalous activity through CloudTrail events and GuardDuty findings",
+        "Contain the incident by isolating the workload and revoking exposed credentials",
+        "Remediate the root cause by patching the vulnerability and tightening permissions",
+        "Restore service with enhanced monitoring while watching for recurrence"
+      ],
+      "correct": [
+        1,
+        2,
+        3,
+        4,
+        0
+      ],
+      "explanation": "Detection has to precede containment, containment has to precede eradication of the cause, and recovery follows only once the cause is closed. The post-incident review is deliberately last because it feeds the next round of controls."
+    },
+    {
+      "id": "q061",
+      "subdomain": "5.1 - Explain methods to secure AI systems",
+      "type": "matching",
+      "question": "Match each security capability to the purpose it serves.",
+      "prompts": [
+        "AWS PrivateLink",
+        "Amazon Macie",
+        "IAM permissions boundary",
+        "Amazon Bedrock Guardrails",
+        "AWS KMS customer managed key"
+      ],
+      "options": [
+        "Keeps traffic between your VPC and AWS services off the public internet",
+        "Caps the maximum permissions an IAM identity can ever receive",
+        "Applies content, topic, PII and grounding policies to model inputs and outputs",
+        "Discovers and classifies sensitive data such as PII stored in S3",
+        "Encrypts data at rest with a key you control and can audit in CloudTrail"
+      ],
+      "correct": [
+        0,
+        3,
+        1,
+        2,
+        4
+      ],
+      "explanation": "PrivateLink covers network isolation, Macie covers sensitive-data discovery, a permissions boundary caps IAM permissions, Guardrails applies policy to model traffic, and a customer managed key covers encryption at rest. Each capability sits at a different layer of the security model."
+    },
+    {
+      "id": "q062",
+      "subdomain": "5.2 - Recognize governance and compliance regulations for AI systems",
+      "type": "mcq",
+      "question": "A compliance officer must obtain the independent third-party audit report for an AWS service before approving it for a regulated workload. Where is that report obtained?",
+      "options": [
+        "AWS Config, from the configuration timeline recorded for the service",
+        "Amazon Inspector, from the vulnerability findings collected for the account",
+        "AWS Trusted Advisor, from the security checks in the support console",
+        "AWS Artifact, by downloading the agreement or audit report on demand"
+      ],
+      "correct": 3,
+      "explanation": "AWS Artifact is the self-service repository for AWS compliance agreements and third-party audit reports, which is where an officer proves what AWS itself is in scope for. Config records configuration state, Inspector scans for vulnerabilities, and Trusted Advisor surfaces account recommendations."
+    },
+    {
+      "id": "q063",
+      "subdomain": "5.2 - Recognize governance and compliance regulations for AI systems",
+      "type": "multi",
+      "question": "An organization is standing up a governance program for its AI workloads. Which elements belong in that program?",
+      "options": [
+        "A documented review cadence that schedules periodic reassessment of models and controls",
+        "Data retention and residency rules stating how long data is kept and where it is processed",
+        "A training requirement so builders understand the acceptable-use and safety policies",
+        "A single risk assessment performed at project kickoff with no scheduled follow-up",
+        "Continuous logging and monitoring so configuration and access changes remain observable",
+        "A practice in which each team interprets the shared policies in its own way"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "A review cadence, data lifecycle rules covering retention and residency, team training and continuous monitoring are the governance-process elements the objectives name. A one-time assessment and per-team interpretation of policy both fail the definition of an ongoing governance process."
+    },
+    {
+      "id": "q064",
+      "subdomain": "5.2 - Recognize governance and compliance regulations for AI systems",
+      "type": "ordering",
+      "question": "Place the steps of a governance review for a new AI use case in the order they occur.",
+      "options": [
+        "Approve the use case, assign named owners and set the next review date",
+        "Classify the use case and its data using the Generative AI Security Scoping Matrix",
+        "Identify the applicable policies, regulations and required transparency disclosures",
+        "Collect evidence such as evaluation results, model cards and audit logs",
+        "Assess the risks and define the required controls, guardrails and monitoring"
+      ],
+      "correct": [
+        1,
+        2,
+        4,
+        3,
+        0
+      ],
+      "explanation": "Scoping decides which rules apply, the applicable obligations follow from that scope, and controls can only be designed once the risks are known. Evidence is gathered after the controls exist to show they operate, and approval with a scheduled review date closes the cycle."
+    },
+    {
+      "id": "q065",
+      "subdomain": "5.2 - Recognize governance and compliance regulations for AI systems",
+      "type": "matching",
+      "question": "Match each compliance service to the purpose it serves.",
+      "prompts": [
+        "AWS Artifact",
+        "AWS Config",
+        "AWS CloudTrail",
+        "Amazon Inspector",
+        "AWS Trusted Advisor"
+      ],
+      "options": [
+        "Records who called which API and when, giving the account an audit trail",
+        "Checks the account against AWS best-practice recommendations for security, cost and performance",
+        "Provides downloadable compliance reports and agreements for AWS services",
+        "Continuously scans workloads for software vulnerabilities and unintended network exposure",
+        "Tracks resource configuration over time and evaluates it against rules"
+      ],
+      "correct": [
+        2,
+        4,
+        0,
+        3,
+        1
+      ],
+      "explanation": "Artifact supplies the audit reports, Config tracks configuration state, CloudTrail records API activity, Inspector scans for vulnerabilities, and Trusted Advisor reports account-level best-practice checks. Confusing Config with CloudTrail is the classic mix-up, because one answers what the state was and the other answers who changed it."
+    }
+  ]
+}

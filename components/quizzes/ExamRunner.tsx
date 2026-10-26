@@ -3,23 +3,26 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowLeft, Clock, ChevronRight, ChevronLeft, Flag, CheckSquare,
-  CheckCircle2, AlertTriangle, ClipboardList, RotateCcw, Trophy, AlertCircle,
+  CheckCircle2, AlertTriangle, ClipboardList, RotateCcw, Trophy,
 } from 'lucide-react'
-import type { QuizData, QuizQuestion } from '@/lib/quizzes/types'
+import type { QuizData, QuizQuestion, QuizResponse } from '@/lib/quizzes/types'
+import { isAnswered } from '@/lib/quizzes/grade'
+import { QuestionBody } from './QuestionBody'
 
 interface ExamRunnerProps {
   quiz: QuizData
   dict: any
   screen: 'mock-config' | 'mock-exam'
+  targets: Record<string, number>
   questions: QuizQuestion[]
   index: number
-  answers: { selectedOption: number | null }[]
+  answers: QuizResponse[]
   flagged: Set<number>
   timeLeft: number
   answeredCount: number
   showSubmitConfirm: boolean
   onIndexChange: (index: number) => void
-  onSelect: (optionIndex: number) => void
+  onChange: (response: QuizResponse) => void
   onToggleFlag: (index: number) => void
   onOpenSubmit: () => void
   onCloseSubmit: () => void
@@ -35,14 +38,10 @@ function tpl(template: string, vars?: Record<string, string | number>): string {
 
 function formatCountdown(seconds: number): string {
   const h = Math.floor(seconds / 3600)
-  const m = Math.floor((seconds % 3600) / 60)
+  const m = Math.floor((seconds % 60) / 60)
   const s = seconds % 60
   if (h > 0) return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`
   return `${m}:${s.toString().padStart(2, '0')}`
-}
-
-function getLetterLabel(index: number): string {
-  return ['A', 'B', 'C', 'D'][index]
 }
 
 function getDomainAccentClass(color: string): string {
@@ -66,6 +65,7 @@ export function ExamRunner({
   quiz,
   dict,
   screen,
+  targets,
   questions,
   index,
   answers,
@@ -74,7 +74,7 @@ export function ExamRunner({
   answeredCount,
   showSubmitConfirm,
   onIndexChange,
-  onSelect,
+  onChange,
   onToggleFlag,
   onOpenSubmit,
   onCloseSubmit,
@@ -82,8 +82,7 @@ export function ExamRunner({
   onStart,
   onBack,
 }: ExamRunnerProps) {
-  const allocations = quiz.allocations ?? {}
-  const totalQuestions = Object.values(allocations).reduce((s, v) => s + v, 0)
+  const totalQuestions = Object.values(targets).reduce((s, v) => s + v, 0)
   const durationMinutes = Math.round(quiz.durationSeconds / 60)
 
   if (screen === 'mock-config') {
@@ -91,7 +90,7 @@ export function ExamRunner({
     for (const q of quiz.questions) {
       bySubdomain[q.subdomain] = (bySubdomain[q.subdomain] ?? 0) + 1
     }
-    const gaps = Object.entries(allocations).filter(([sd, need]) => (bySubdomain[sd] ?? 0) < need)
+    const gaps = Object.entries(targets).filter(([sd, need]) => (bySubdomain[sd] ?? 0) < need)
 
     return (
       <div className="container-custom py-12">
@@ -140,8 +139,8 @@ export function ExamRunner({
             </h3>
             <div className="space-y-4">
               {quiz.domains.map(d => {
-                const subs = d.subdomains.filter(sd => sd in allocations)
-                const domTotal = subs.reduce((s, sd) => s + (allocations[sd] ?? 0), 0)
+                const subs = d.subdomains.filter(sd => sd in targets)
+                const domTotal = subs.reduce((s, sd) => s + (targets[sd] ?? 0), 0)
                 return (
                   <div key={d.id}>
                     <div className="flex items-center justify-between mb-1.5">
@@ -156,7 +155,7 @@ export function ExamRunner({
                     <div className="ml-5 space-y-1">
                       {subs.map(sd => {
                         const available = bySubdomain[sd] ?? 0
-                        const target = allocations[sd] ?? 0
+                        const target = targets[sd] ?? 0
                         const hasGap = available < target
                         return (
                           <div key={sd} className="flex items-center justify-between text-xs gap-2">
@@ -204,9 +203,9 @@ export function ExamRunner({
   }
 
   const question = questions[index]
-  const currentAnswer = answers[index]
+  const currentAnswer = answers[index] ?? null
   const isFlagged = flagged.has(index)
-  const unanswered = answers.filter(a => a.selectedOption === null).length
+  const unanswered = questions.reduce((count, q, i) => count + (isAnswered(q, answers[i] ?? null) ? 0 : 1), 0)
   const timerPct = (timeLeft / quiz.durationSeconds) * 100
 
   if (!question) return null
@@ -283,31 +282,13 @@ export function ExamRunner({
           >
             <h2 className="text-xl font-semibold leading-relaxed mb-6 break-words">{question.question}</h2>
 
-            <div className="space-y-3">
-              {question.options.map((option, idx) => {
-                const isSelected = currentAnswer?.selectedOption === idx
-                return (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => onSelect(idx)}
-                    className={`w-full text-left flex items-center gap-4 p-4 rounded-xl border-2 transition-all duration-150 ${
-                      isSelected
-                        ? 'border-amber-500 bg-amber-50 dark:bg-amber-900/20'
-                        : 'border-border bg-background hover:border-amber-400 hover:bg-muted/40 cursor-pointer'
-                    }`}
-                  >
-                    <span className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm ${
-                      isSelected ? 'bg-amber-500 text-white' : 'bg-muted text-muted-foreground'
-                    }`}>
-                      {getLetterLabel(idx)}
-                    </span>
-                    <span className="flex-1 font-medium break-words">{option}</span>
-                    {isSelected && <CheckCircle2 className="w-5 h-5 text-amber-500 flex-shrink-0" />}
-                  </button>
-                )
-              })}
-            </div>
+            <QuestionBody
+              question={question}
+              response={currentAnswer}
+              onChange={onChange}
+              mode="interactive"
+              dict={dict}
+            />
 
             <p className="mt-4 text-xs text-center text-muted-foreground">
               {dict.quizzes?.exam?.no_reveal || 'Answers are not revealed during the exam — submit to see results.'}
@@ -339,8 +320,8 @@ export function ExamRunner({
             {dict.quizzes?.exam?.navigator || 'Question Navigator'}
           </p>
           <div className="flex flex-wrap gap-1.5">
-            {questions.map((_, i) => {
-              const answered = answers[i]?.selectedOption !== null
+            {questions.map((q, i) => {
+              const answered = isAnswered(q, answers[i] ?? null)
               const isFlaggedTile = flagged.has(i)
               const active = i === index
               const tileLabel = isFlaggedTile && !answered
@@ -394,9 +375,9 @@ export function ExamRunner({
             style={{ background: 'rgba(0,0,0,0.55)' }}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              exit={{ scale: 0.95, opacity: 0 }}
               role="dialog"
               aria-modal="true"
               aria-label={dict.quizzes?.exam?.submit_title || 'Submit Exam?'}

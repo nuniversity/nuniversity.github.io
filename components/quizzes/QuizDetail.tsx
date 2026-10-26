@@ -2,26 +2,17 @@
 
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { type Locale } from '@/lib/i18n/config'
-import type { QuizData, QuizQuestion } from '@/lib/quizzes/types'
+import type { QuizData, QuizQuestion, QuizResponse, UserAnswer } from '@/lib/quizzes/types'
+import { emptyResponse, gradeAnswer, isAnswered } from '@/lib/quizzes/grade'
+import { drawMockQuestions, scaledTargets } from '@/lib/quizzes/draw'
 import { addAttempt, getBest, getHistory, type QuizAttempt, type QuizBest } from '@/lib/quizzes/storage'
 import { recordAndEmit } from '@/lib/gamification/bus'
 import { QuizHome } from './QuizHome'
-import { QuizPlayer } from './QuizPlayer'
+import { QuizPlayer, type QuizTileState } from './QuizPlayer'
 import { ExamRunner } from './ExamRunner'
 import { ScoreReport } from './ScoreReport'
 
 export type QuizMode = 'config' | 'playing' | 'review' | 'complete' | 'mock-config' | 'mock-exam' | 'mock-complete'
-
-interface UserAnswer {
-  questionId: string
-  selectedOption: number | null
-  isCorrect: boolean
-  timeSpent: number
-}
-
-interface MockAnswer {
-  selectedOption: number | null
-}
 
 interface QuizDetailProps {
   lang: Locale
@@ -37,18 +28,16 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
 
   const [activeQuestions, setActiveQuestions] = useState<QuizQuestion[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [selectedOption, setSelectedOption] = useState<number | null>(null)
-  const [isAnswered, setIsAnswered] = useState(false)
-  const [showExplanation, setShowExplanation] = useState(false)
+  const [drafts, setDrafts] = useState<Record<string, QuizResponse>>({})
+  const [results, setResults] = useState<Record<string, boolean>>({})
   const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([])
-  const [questionStartTime, setQuestionStartTime] = useState<number>(Date.now())
   const [totalTime, setTotalTime] = useState(0)
   const [elapsedTime, setElapsedTime] = useState(0)
   const [startTime, setStartTime] = useState<number | null>(null)
 
   const [mockQuestions, setMockQuestions] = useState<QuizQuestion[]>([])
   const [mockCurrentIndex, setMockCurrentIndex] = useState(0)
-  const [mockAnswers, setMockAnswers] = useState<MockAnswer[]>([])
+  const [mockAnswers, setMockAnswers] = useState<QuizResponse[]>([])
   const [mockFlagged, setMockFlagged] = useState<Set<number>>(new Set())
   const [mockTimeLeft, setMockTimeLeft] = useState(quiz.durationSeconds)
   const [mockStartTime, setMockStartTime] = useState<number | null>(null)
@@ -81,24 +70,41 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
     return Math.round((score / userAnswers.length) * 100)
   }, [score, userAnswers])
 
+  const gradedCount = useMemo(() => {
+    let count = 0
+    for (const q of activeQuestions) {
+      if (q.id in results || isAnswered(q, drafts[q.id] ?? null)) count++
+    }
+    return count
+  }, [activeQuestions, results, drafts])
+
+  const tileStates = useMemo<QuizTileState[]>(() => {
+    return activeQuestions.map(q => {
+      if (q.id in results) return results[q.id] ? 'correct' : 'wrong'
+      const draft = drafts[q.id]
+      if (draft && isAnswered(q, draft)) return 'staged'
+      return 'blank'
+    })
+  }, [activeQuestions, results, drafts])
+
   const availableCount = useMemo(() =>
     quiz.questions.filter(q => selectedDomains.length === 0 || selectedDomains.includes(q.subdomain)).length,
     [quiz.questions, selectedDomains])
 
   const domainResults = useMemo(() => {
     const map: Record<string, { correct: number; total: number }> = {}
-    activeQuestions.forEach((q, i) => {
-      if (!map[q.subdomain]) map[q.subdomain] = { correct: 0, total: 0 }
-      map[q.subdomain].total++
-      if (userAnswers[i]?.isCorrect) map[q.subdomain].correct++
-    })
+    for (const answer of userAnswers) {
+      if (!map[answer.subdomain]) map[answer.subdomain] = { correct: 0, total: 0 }
+      map[answer.subdomain].total++
+      if (answer.isCorrect) map[answer.subdomain].correct++
+    }
     return map
-  }, [activeQuestions, userAnswers])
+  }, [userAnswers])
 
   const mockScore = useMemo(() => {
-    return mockAnswers.filter((a, i) =>
-      a.selectedOption !== null && a.selectedOption === mockQuestions[i]?.correct
-    ).length
+    return mockQuestions.reduce((count, question, i) => {
+      return count + (gradeAnswer(question, mockAnswers[i] ?? null) ? 1 : 0)
+    }, 0)
   }, [mockAnswers, mockQuestions])
 
   const mockAccuracy = useMemo(() =>
@@ -108,8 +114,10 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
   const mockPassed = mockAccuracy >= quiz.passingScore
 
   const mockAnsweredCount = useMemo(() =>
-    mockAnswers.filter(a => a.selectedOption !== null).length,
-    [mockAnswers])
+    mockQuestions.reduce((count, question, i) => {
+      return count + (isAnswered(question, mockAnswers[i] ?? null) ? 1 : 0)
+    }, 0),
+    [mockAnswers, mockQuestions])
 
   const mockMajorDomainResults = useMemo(() => {
     const subToDomain: Record<string, { label: string; color: string }> = {}
@@ -128,8 +136,7 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
       const entry = Object.entries(map).find(([, v]) => v.label === domain.label)
       if (!entry) return
       entry[1].total++
-      const ans = mockAnswers[i]
-      if (ans?.selectedOption !== null && ans?.selectedOption === q.correct) entry[1].correct++
+      if (gradeAnswer(q, mockAnswers[i] ?? null)) entry[1].correct++
     })
     return map
   }, [mockQuestions, mockAnswers, quiz.domains])
@@ -163,10 +170,11 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
     if (persistedRef.current) return
     if (gameMode === 'complete' && userAnswers.length > 0) {
       persistedRef.current = true
-      const total = activeQuestions.length
+      const total = userAnswers.length
       const correct = userAnswers.filter(a => a.isCorrect).length
       const percent = total > 0 ? Math.round((correct / total) * 100) : 0
-      const passed = percent >= quiz.passingScore
+      const answeredAll = userAnswers.length === activeQuestions.length
+      const passed = percent >= quiz.passingScore && answeredAll
       const perDomain: Record<string, { correct: number; total: number }> = {}
       Object.entries(domainResults).forEach(([key, value]) => { perDomain[key] = value })
       addAttempt(quiz.slug, {
@@ -217,36 +225,64 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
     selected = selected.slice(0, Math.min(questionCount, pool.length))
     setActiveQuestions(selected)
     setCurrentIndex(0)
-    setSelectedOption(null)
-    setIsAnswered(false)
-    setShowExplanation(false)
+    setDrafts({})
+    setResults({})
     setUserAnswers([])
     const now = Date.now()
     setStartTime(now)
-    setQuestionStartTime(now)
     setElapsedTime(0)
     setTotalTime(0)
     persistedRef.current = false
     setGameMode('playing')
   }
 
-  function handleOptionSelect(optionIndex: number) {
-    if (isAnswered) return
-    setSelectedOption(optionIndex)
-    setIsAnswered(true)
-    setShowExplanation(true)
-    const timeSpent = Math.floor((Date.now() - questionStartTime) / 1000)
-    const isCorrect = optionIndex === currentQuestion.correct
-    setUserAnswers(prev => [...prev, { questionId: currentQuestion.id, selectedOption: optionIndex, isCorrect, timeSpent }])
+  function handleBodyChange(response: QuizResponse) {
+    if (!currentQuestion) return
+    setDrafts(prev => ({ ...prev, [currentQuestion.id]: response }))
+  }
+
+  function handleCheck() {
+    if (!currentQuestion) return
+    const draft = drafts[currentQuestion.id] ?? null
+    const response = draft && isAnswered(currentQuestion, draft) ? draft : emptyResponse(currentQuestion)
+    const correct = gradeAnswer(currentQuestion, response)
+    setDrafts(prev => ({ ...prev, [currentQuestion.id]: response }))
+    setResults(prev => ({ ...prev, [currentQuestion.id]: correct }))
   }
 
   function handleNext() {
-    if (isLastQuestion) { setTotalTime(elapsedTime); setGameMode('complete'); return }
+    if (isLastQuestion || activeQuestions.length === 0) {
+      finishGame()
+      return
+    }
     setCurrentIndex(prev => prev + 1)
-    setSelectedOption(null)
-    setIsAnswered(false)
-    setShowExplanation(false)
-    setQuestionStartTime(Date.now())
+  }
+
+  function finishGame() {
+    const answers: UserAnswer[] = []
+    for (const question of activeQuestions) {
+      const draft = drafts[question.id] ?? null
+      if (question.id in results) {
+        answers.push({
+          questionId: question.id,
+          subdomain: question.subdomain,
+          response: draft,
+          isCorrect: results[question.id],
+          timeSpent: 0,
+        })
+      } else if (draft && isAnswered(question, draft)) {
+        answers.push({
+          questionId: question.id,
+          subdomain: question.subdomain,
+          response: draft,
+          isCorrect: gradeAnswer(question, draft),
+          timeSpent: 0,
+        })
+      }
+    }
+    setUserAnswers(answers)
+    setTotalTime(elapsedTime)
+    setGameMode('complete')
   }
 
   function restartGame() {
@@ -254,6 +290,9 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
     setSelectedDomains(allDomains)
     setQuestionCount(10)
     setShuffleQuestions(true)
+    setDrafts({})
+    setResults({})
+    setUserAnswers([])
   }
 
   function toggleDomain(domain: string) {
@@ -261,31 +300,11 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
       prev.includes(domain) ? prev.filter(d => d !== domain) : [...prev, domain])
   }
 
-  function buildMockExamQuestions(): QuizQuestion[] {
-    const allocations = quiz.allocations ?? {}
-    const bySubdomain: Record<string, QuizQuestion[]> = {}
-    for (const q of quiz.questions) {
-      if (!bySubdomain[q.subdomain]) bySubdomain[q.subdomain] = []
-      bySubdomain[q.subdomain].push(q)
-    }
-
-    const result: QuizQuestion[] = []
-
-    for (const [subdomain, target] of Object.entries(allocations)) {
-      const pool = bySubdomain[subdomain] ?? []
-      const shuffled = [...pool].sort(() => Math.random() - 0.5)
-      const picked = shuffled.slice(0, target)
-      result.push(...picked)
-    }
-
-    return result.sort(() => Math.random() - 0.5)
-  }
-
   function startMockExam() {
-    const questions = buildMockExamQuestions()
+    const questions = drawMockQuestions(quiz)
     setMockQuestions(questions)
     setMockCurrentIndex(0)
-    setMockAnswers(questions.map(() => ({ selectedOption: null })))
+    setMockAnswers(questions.map(q => emptyResponse(q)))
     setMockFlagged(new Set())
     setMockTimeLeft(quiz.durationSeconds)
     setMockSubmitted(false)
@@ -297,10 +316,10 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
     setGameMode('mock-exam')
   }
 
-  function handleMockSelect(optionIndex: number) {
+  function handleMockChange(response: QuizResponse) {
     setMockAnswers(prev => {
       const next = [...prev]
-      next[mockCurrentIndex] = { selectedOption: optionIndex }
+      next[mockCurrentIndex] = response
       return next
     })
   }
@@ -350,30 +369,39 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
   }
 
   if (gameMode === 'playing') {
+    const draft = currentQuestion ? drafts[currentQuestion.id] ?? null : null
+    const checked = currentQuestion ? currentQuestion.id in results : false
     return (
       <QuizPlayer
         dict={dict}
         question={currentQuestion}
         index={currentIndex}
         total={activeQuestions.length}
-        selectedOption={selectedOption}
-        isAnswered={isAnswered}
-        showExplanation={showExplanation}
+        response={draft}
+        checked={checked}
+        isCorrect={checked && currentQuestion ? results[currentQuestion.id] : null}
         elapsed={elapsedTime}
         score={score}
-        onSelect={handleOptionSelect}
+        gradedCount={gradedCount}
+        tileStates={tileStates}
+        onChange={handleBodyChange}
+        onCheck={handleCheck}
+        onNavigate={setCurrentIndex}
         onNext={handleNext}
+        onFinish={finishGame}
         onExit={() => setGameMode('config')}
       />
     )
   }
 
   if (gameMode === 'mock-config' || gameMode === 'mock-exam') {
+    const targets = scaledTargets(quiz)
     return (
       <ExamRunner
         quiz={quiz}
         dict={dict}
         screen={gameMode}
+        targets={targets}
         questions={mockQuestions}
         index={mockCurrentIndex}
         answers={mockAnswers}
@@ -382,7 +410,7 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
         answeredCount={mockAnsweredCount}
         showSubmitConfirm={showSubmitConfirm}
         onIndexChange={setMockCurrentIndex}
-        onSelect={handleMockSelect}
+        onChange={handleMockChange}
         onToggleFlag={toggleMockFlag}
         onOpenSubmit={() => setShowSubmitConfirm(true)}
         onCloseSubmit={() => setShowSubmitConfirm(false)}
@@ -402,7 +430,7 @@ export function QuizDetail({ lang, quiz, dict }: QuizDetailProps) {
         screen={gameMode}
         score={score}
         accuracy={accuracy}
-        total={activeQuestions.length}
+        total={userAnswers.length}
         totalTime={totalTime}
         domainResults={domainResults}
         userAnswers={userAnswers}

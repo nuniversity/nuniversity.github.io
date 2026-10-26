@@ -613,7 +613,7 @@
     },
     "home": {
       "practice_title": "Quiz de Prática",
-      "practice_description": "Escolha seus domínios, a quantidade de questões e receba feedback instantâneo após cada resposta. Perfeito para sessões de estudo focadas.",
+      "practice_description": "Prepare sua resposta, verifique para ver o feedback e pule ou volte a qualquer pergunta. Respostas em branco são excluídas da pontuação de aprendizagem.",
       "questions_total": "{n} questões no total",
       "domains": "Domínios",
       "select_all": "Selecionar tudo",
@@ -635,7 +635,7 @@
       "spec_pass": "{score}% para aprovar",
       "spec_threshold": "Limite oficial",
       "exam_blueprint": "Plano do Exame",
-      "qs_pct": "{count} questões ({count}%)",
+      "qs_pct": "{count} questões ({pct}%)",
       "start_mock": "Iniciar Simulado"
     },
     "exam": {
@@ -689,12 +689,40 @@
     },
     "practice": {
       "question_of": "Questão {current} de {total}",
-      "percent_complete": "{n}% concluído",
+      "percent_complete": "{n}% verificadas",
       "select_answer": "Selecione uma resposta para continuar",
       "correct": "Correto!",
       "incorrect": "Incorreto",
       "next_question": "Próxima Questão",
-      "see_results": "Ver Resultados"
+      "see_results": "Ver Resultados",
+      "check_answer": "Verificar resposta",
+      "finish": "Finalizar",
+      "skip": "Pular por enquanto",
+      "scored_of": "{score} corretas de {checked}",
+      "legend_correct": "Verificada · correta",
+      "legend_wrong": "Verificada · incorreta",
+      "legend_staged": "Respondida · não verificada",
+      "legend_blank": "Sem resposta",
+      "tile_correct": "P{n} (verificada, correta)",
+      "tile_wrong": "P{n} (verificada, incorreta)",
+      "tile_staged": "P{n} (respondida, não verificada)",
+      "tile_blank": "P{n} (sem resposta)"
+    },
+    "body": {
+      "q_group": "Opções de resposta",
+      "q_select_all": "Selecione todas as que se aplicam",
+      "q_available": "Respostas disponíveis",
+      "q_all_used": "Todas as respostas colocadas",
+      "q_your_order": "Sua ordem",
+      "q_add_hint": "Selecione uma resposta acima para adicioná-la à sua ordem",
+      "q_up": "Mover para cima {n}",
+      "q_down": "Mover para baixo {n}",
+      "q_remove": "Remover {n}",
+      "q_correct_order": "Ordem correta",
+      "q_match_hint": "Associe cada prompt à resposta correta",
+      "q_match_select": "Correspondência para o prompt {n}",
+      "q_match_placeholder": "Selecione uma correspondência…",
+      "q_correct_pairs": "Correspondências corretas"
     },
     "score": {
       "complete_title": "Quiz Concluído!",
@@ -709,7 +737,8 @@
       "rating_excellent": "Excelente! Pronto para certificar 🚀",
       "rating_great": "Muito bom! Continue assim 💪",
       "rating_good": "Bom esforço — revise os pontos fracos",
-      "rating_keep": "Continue estudando — você consegue!"
+      "rating_keep": "Continue estudando — você consegue!",
+      "not_scored": "Sem resposta — não contabilizada na sua pontuação"
     },
     "certificate": {
       "cta": "Obter certificado",

@@ -20,6 +20,7 @@ quizzes/simulations, games), and ready to resume content creation.
 | 5 | [DESIGN-QUIZZES-APP.md](./DESIGN-QUIZZES-APP.md) | Design for the new `/[lang]/quizzes/` app (moves Snowflake quiz from games; real exam-simulation UI) |
 | 6 | [DESIGN-LANGUAGES-APP.md](./DESIGN-LANGUAGES-APP.md) | Design for the new `/[lang]/languages/` hub (moves the 5 vocabulary games) |
 | 7 | [PLAN.md](./PLAN.md) | The deep high-level plan: 9 phases, acceptance criteria, dependencies, decision log, Definition of Done |
+| 8 | [PLAN-MODERNIZATION.md](./PLAN-MODERNIZATION.md) | Platform modernization on free tiers: 7 epics / 16 sprints — CI gates, PostHog, UptimeRobot, Web3Forms, Cloudflare Worker API, Clerk accounts, Neon progress sync (gates, quota ledger, troubleshooting, DoD) |
 
 > Historical: `docs/assessment/ASSESSMENT.md` (Sep 6) tracked 25 issues; **23 remain open**
 > at review time — each is cross-referenced in FIXES.md so nothing is lost.
@@ -72,3 +73,5 @@ Execution happens phase-by-phase per [PLAN.md](./PLAN.md).
 - **Phase 6 (Learning experience): ✅ complete — 2026-10-24** (deep plan in [PLAN-PHASE6.md](./PLAN-PHASE6.md),
   status in [PLAN.md](./PLAN.md), closeout in [FIXES.md](./FIXES.md)).
 - Phases 7–9: not started.
+- **Platform modernization (free-tier backend stack): 📋 plan ready, execution not started —** deep
+  epics-and-sprints plan in [PLAN-MODERNIZATION.md](./PLAN-MODERNIZATION.md) (gates G0–G4).

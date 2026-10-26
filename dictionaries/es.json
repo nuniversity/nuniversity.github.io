@@ -613,7 +613,7 @@
     },
     "home": {
       "practice_title": "Cuestionario de Práctica",
-      "practice_description": "Elige tus dominios, la cantidad de preguntas y recibe comentarios instantáneos tras cada respuesta. Perfecto para sesiones de estudio enfocadas.",
+      "practice_description": "Prepara tu respuesta, verifícala para ver la retroalimentación y omite o vuelve a cualquier pregunta. Las respuestas en blanco se excluyen de la puntuación de aprendizaje.",
       "questions_total": "{n} preguntas en total",
       "domains": "Dominios",
       "select_all": "Seleccionar todo",
@@ -635,7 +635,7 @@
       "spec_pass": "{score}% para aprobar",
       "spec_threshold": "Umbral oficial",
       "exam_blueprint": "Plan del Examen",
-      "qs_pct": "{count} preguntas ({count}%)",
+      "qs_pct": "{count} preguntas ({pct}%)",
       "start_mock": "Iniciar Examen de Prueba"
     },
     "exam": {
@@ -689,12 +689,40 @@
     },
     "practice": {
       "question_of": "Pregunta {current} de {total}",
-      "percent_complete": "{n}% completado",
+      "percent_complete": "{n}% verificadas",
       "select_answer": "Selecciona una respuesta para continuar",
       "correct": "¡Correcto!",
       "incorrect": "Incorrecto",
       "next_question": "Siguiente Pregunta",
-      "see_results": "Ver Resultados"
+      "see_results": "Ver Resultados",
+      "check_answer": "Verificar respuesta",
+      "finish": "Finalizar",
+      "skip": "Omitir por ahora",
+      "scored_of": "{score} correctas de {checked}",
+      "legend_correct": "Verificada · correcta",
+      "legend_wrong": "Verificada · incorrecta",
+      "legend_staged": "Respondida · sin verificar",
+      "legend_blank": "Sin responder",
+      "tile_correct": "P{n} (verificada, correcta)",
+      "tile_wrong": "P{n} (verificada, incorrecta)",
+      "tile_staged": "P{n} (respondida, sin verificar)",
+      "tile_blank": "P{n} (sin responder)"
+    },
+    "body": {
+      "q_group": "Opciones de respuesta",
+      "q_select_all": "Selecciona todas las que correspondan",
+      "q_available": "Respuestas disponibles",
+      "q_all_used": "Todas las respuestas colocadas",
+      "q_your_order": "Tu orden",
+      "q_add_hint": "Selecciona una respuesta de arriba para añadirla a tu orden",
+      "q_up": "Mover arriba {n}",
+      "q_down": "Mover abajo {n}",
+      "q_remove": "Quitar {n}",
+      "q_correct_order": "Orden correcto",
+      "q_match_hint": "Relaciona cada prompt con la respuesta correcta",
+      "q_match_select": "Coincidencia para el prompt {n}",
+      "q_match_placeholder": "Selecciona una coincidencia…",
+      "q_correct_pairs": "Coincidencias correctas"
     },
     "score": {
       "complete_title": "¡Cuestionario Completado!",
@@ -709,7 +737,8 @@
       "rating_excellent": "¡Excelente! Listo para certificarte 🚀",
       "rating_great": "¡Buen trabajo! Sigue así 💪",
       "rating_good": "Buen esfuerzo — revisa tus puntos débiles",
-      "rating_keep": "Sigue estudiando — ¡lo lograrás!"
+      "rating_keep": "Sigue estudiando — ¡lo lograrás!",
+      "not_scored": "Sin responder — no se contabiliza en tu puntuación"
     },
     "certificate": {
       "cta": "Obtener certificado",

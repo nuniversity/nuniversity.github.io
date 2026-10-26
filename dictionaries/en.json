@@ -613,7 +613,7 @@
     },
     "home": {
       "practice_title": "Practice Quiz",
-      "practice_description": "Choose your domains, question count, and get instant feedback after each answer. Perfect for focused study sessions.",
+      "practice_description": "Stage your answer, check it to reveal feedback, and skip or return to any question. Blank answers are excluded from the learning score.",
       "questions_total": "{n} questions total",
       "domains": "Domains",
       "select_all": "Select all",
@@ -635,7 +635,7 @@
       "spec_pass": "{score}% to pass",
       "spec_threshold": "Official threshold",
       "exam_blueprint": "Exam Blueprint",
-      "qs_pct": "{count} Qs ({count}%)",
+      "qs_pct": "{count} Qs ({pct}%)",
       "start_mock": "Start Mock Exam"
     },
     "exam": {
@@ -689,12 +689,40 @@
     },
     "practice": {
       "question_of": "Question {current} of {total}",
-      "percent_complete": "{n}% complete",
+      "percent_complete": "{n}% checked",
       "select_answer": "Select an answer to continue",
       "correct": "Correct!",
       "incorrect": "Incorrect",
       "next_question": "Next Question",
-      "see_results": "See Results"
+      "see_results": "See Results",
+      "check_answer": "Check answer",
+      "finish": "Finish",
+      "skip": "Skip for now",
+      "scored_of": "{score} correct of {checked}",
+      "legend_correct": "Checked · correct",
+      "legend_wrong": "Checked · incorrect",
+      "legend_staged": "Answered · not checked",
+      "legend_blank": "Not answered",
+      "tile_correct": "Q{n} (checked, correct)",
+      "tile_wrong": "Q{n} (checked, incorrect)",
+      "tile_staged": "Q{n} (answered, not checked)",
+      "tile_blank": "Q{n} (not answered)"
+    },
+    "body": {
+      "q_group": "Answer options",
+      "q_select_all": "Select all that apply",
+      "q_available": "Available responses",
+      "q_all_used": "All responses placed",
+      "q_your_order": "Your order",
+      "q_add_hint": "Select a response above to add it to your order",
+      "q_up": "Move up {n}",
+      "q_down": "Move down {n}",
+      "q_remove": "Remove {n}",
+      "q_correct_order": "Correct order",
+      "q_match_hint": "Match each prompt to the correct response",
+      "q_match_select": "Match for prompt {n}",
+      "q_match_placeholder": "Select a match…",
+      "q_correct_pairs": "Correct matches"
     },
     "score": {
       "complete_title": "Quiz Complete!",
@@ -709,7 +737,8 @@
       "rating_excellent": "Excellent! Ready to certify 🚀",
       "rating_great": "Great job! Keep it up 💪",
       "rating_good": "Good effort — review weak areas",
-      "rating_keep": "Keep studying — you'll get there!"
+      "rating_keep": "Keep studying — you'll get there!",
+      "not_scored": "Not answered — not counted in your score"
     },
     "certificate": {
       "cta": "Get certificate",

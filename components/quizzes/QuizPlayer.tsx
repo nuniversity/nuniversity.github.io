@@ -1,21 +1,33 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft, Clock, Star, ChevronRight, Trophy, CheckCircle2, XCircle, AlertCircle } from 'lucide-react'
-import type { QuizQuestion } from '@/lib/quizzes/types'
+import {
+  ArrowLeft, Clock, Star, ChevronRight, ChevronLeft, CheckCircle2, XCircle,
+  AlertCircle, Trophy, Flag,
+} from 'lucide-react'
+import type { QuizQuestion, QuizResponse } from '@/lib/quizzes/types'
+import { isAnswered } from '@/lib/quizzes/grade'
+import { QuestionBody } from './QuestionBody'
+
+export type QuizTileState = 'blank' | 'staged' | 'correct' | 'wrong'
 
 interface QuizPlayerProps {
   dict: any
   question: QuizQuestion | undefined
   index: number
   total: number
-  selectedOption: number | null
-  isAnswered: boolean
-  showExplanation: boolean
+  response: QuizResponse | null
+  checked: boolean
+  isCorrect: boolean | null
   elapsed: number
   score: number
-  onSelect: (optionIndex: number) => void
+  gradedCount: number
+  tileStates: QuizTileState[]
+  onChange: (response: QuizResponse) => void
+  onCheck: () => void
+  onNavigate: (index: number) => void
   onNext: () => void
+  onFinish: () => void
   onExit: () => void
 }
 
@@ -30,32 +42,54 @@ function formatTime(seconds: number): string {
   return `${mins}:${secs.toString().padStart(2, '0')}`
 }
 
-function getLetterLabel(index: number): string {
-  return ['A', 'B', 'C', 'D'][index]
-}
-
 export function QuizPlayer({
   dict,
   question,
   index,
   total,
-  selectedOption,
-  isAnswered,
-  showExplanation,
+  response,
+  checked,
+  isCorrect,
   elapsed,
   score,
-  onSelect,
+  gradedCount,
+  tileStates,
+  onChange,
+  onCheck,
+  onNavigate,
   onNext,
+  onFinish,
   onExit,
 }: QuizPlayerProps) {
   if (!question) return null
-  const progressPct = (index / total) * 100
   const isLastQuestion = index === total - 1
+  const progressPct = total > 0 ? Math.round((gradedCount / total) * 100) : 0
+  const canCheck = !checked && isAnswered(question, response)
+
+  const tileClass = (state: QuizTileState, active: boolean) => {
+    const base = active ? 'ring-2 ring-offset-1 ring-primary scale-110 z-10 relative ' : ''
+    if (state === 'correct') return `${base}bg-green-500 text-white`
+    if (state === 'wrong') return `${base}bg-red-500 text-white`
+    if (state === 'staged') return `${base}bg-blue-500 text-white`
+    return `${base}bg-muted text-muted-foreground hover:bg-muted/70`
+  }
+
+  const tileLabel = (state: QuizTileState, i: number) => {
+    const key = state === 'correct' ? 'tile_correct'
+      : state === 'wrong' ? 'tile_wrong'
+      : state === 'staged' ? 'tile_staged'
+      : 'tile_blank'
+    const fallback = state === 'correct' ? `Q{n} (checked, correct)`
+      : state === 'wrong' ? `Q{n} (checked, incorrect)`
+      : state === 'staged' ? `Q{n} (answered, not checked)`
+      : `Q{n} (not answered)`
+    return tpl(dict.quizzes?.practice?.[key] || fallback, { n: i + 1 })
+  }
 
   return (
-    <div className="container-custom py-12">
+    <div className="container-custom py-8">
       <div className="max-w-2xl mx-auto">
-        <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
+        <div className="flex items-center justify-between mb-5 gap-3 flex-wrap">
           <button
             type="button"
             onClick={onExit}
@@ -65,7 +99,17 @@ export function QuizPlayer({
           </button>
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <span className="flex items-center gap-1"><Clock className="w-4 h-4" />{formatTime(elapsed)}</span>
-            <span className="flex items-center gap-1"><Star className="w-4 h-4" />{score}/{index}</span>
+            <span className="flex items-center gap-1">
+              <Star className="w-4 h-4" />
+              {tpl(dict.quizzes?.practice?.scored_of || '{score} correct of {checked}', { score, checked: gradedCount })}
+            </span>
+            <button
+              type="button"
+              onClick={onFinish}
+              className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-primary text-primary-foreground font-semibold text-xs hover:opacity-90 transition-opacity"
+            >
+              <Flag className="w-3.5 h-3.5" /> {dict.quizzes?.practice?.finish || 'Finish'}
+            </button>
           </div>
         </div>
 
@@ -77,7 +121,7 @@ export function QuizPlayer({
                 total,
               })}
             </span>
-            <span>{tpl(dict.quizzes?.practice?.percent_complete || '{n}% complete', { n: Math.round(progressPct) })}</span>
+            <span>{tpl(dict.quizzes?.practice?.percent_complete || '{n}% checked', { n: progressPct })}</span>
           </div>
           <div className="h-2 bg-muted rounded-full overflow-hidden">
             <motion.div
@@ -89,9 +133,12 @@ export function QuizPlayer({
           </div>
         </div>
 
-        <div className="mb-4">
+        <div className="flex items-center justify-between mb-4 gap-3 flex-wrap">
           <span className="text-xs font-medium px-3 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 break-words">
             {question.subdomain}
+          </span>
+          <span className="text-xs font-medium px-3 py-1 rounded-full bg-muted text-muted-foreground break-words">
+            {question.type}
           </span>
         </div>
 
@@ -105,39 +152,17 @@ export function QuizPlayer({
             className="bg-card border rounded-2xl p-6 mb-6"
           >
             <h2 className="text-xl font-semibold leading-relaxed mb-6 break-words">{question.question}</h2>
-            <div className="space-y-3">
-              {question.options.map((option, idx) => {
-                const isSelected = selectedOption === idx
-                const isCorrect = idx === question.correct
-                let cls = 'border-border bg-background hover:border-primary hover:bg-muted/50 cursor-pointer'
-                if (isAnswered) {
-                  if (isCorrect) cls = 'border-green-500 bg-green-50 dark:bg-green-900/20 cursor-default'
-                  else if (isSelected) cls = 'border-red-500 bg-red-50 dark:bg-red-900/20 cursor-default'
-                  else cls = 'border-border bg-background opacity-50 cursor-default'
-                }
-                return (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => onSelect(idx)}
-                    aria-disabled={isAnswered}
-                    className={`w-full text-left flex items-center gap-4 p-4 rounded-xl border-2 transition-all duration-200 ${cls}`}
-                  >
-                    <span className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm ${
-                      isAnswered && isCorrect ? 'bg-green-500 text-white'
-                      : isAnswered && isSelected ? 'bg-red-500 text-white'
-                      : 'bg-muted text-muted-foreground'
-                    }`}>{getLetterLabel(idx)}</span>
-                    <span className="flex-1 font-medium break-words">{option}</span>
-                    {isAnswered && isCorrect && <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />}
-                    {isAnswered && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-500 flex-shrink-0" />}
-                  </button>
-                )
-              })}
-            </div>
+
+            <QuestionBody
+              question={question}
+              response={response}
+              onChange={checked ? undefined : onChange}
+              mode={checked ? 'reveal' : 'interactive'}
+              dict={dict}
+            />
 
             <AnimatePresence>
-              {showExplanation && (
+              {checked && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
@@ -146,18 +171,18 @@ export function QuizPlayer({
                   className="mt-5 overflow-hidden"
                 >
                   <div className={`rounded-xl p-4 flex gap-3 ${
-                    selectedOption === question.correct
+                    isCorrect
                       ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800'
                       : 'bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800'
                   }`}>
                     <AlertCircle className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
-                      selectedOption === question.correct ? 'text-green-600 dark:text-green-400' : 'text-amber-600 dark:text-amber-400'
+                      isCorrect ? 'text-green-600 dark:text-green-400' : 'text-amber-600 dark:text-amber-400'
                     }`} />
                     <div>
                       <p className={`text-sm font-semibold mb-1 ${
-                        selectedOption === question.correct ? 'text-green-700 dark:text-green-300' : 'text-amber-700 dark:text-amber-300'
+                        isCorrect ? 'text-green-700 dark:text-green-300' : 'text-amber-700 dark:text-amber-300'
                       }`}>
-                        {selectedOption === question.correct
+                        {isCorrect
                           ? dict.quizzes?.practice?.correct || 'Correct!'
                           : dict.quizzes?.practice?.incorrect || 'Incorrect'}
                       </p>
@@ -170,7 +195,26 @@ export function QuizPlayer({
           </motion.div>
         </AnimatePresence>
 
-        {isAnswered && (
+        {!checked && (
+          <div className="mb-6 space-y-3">
+            <button
+              type="button"
+              onClick={onCheck}
+              disabled={!canCheck}
+              className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <CheckCircle2 className="w-5 h-5" />
+              {dict.quizzes?.practice?.check_answer || 'Check answer'}
+            </button>
+            {!canCheck && (
+              <p className="text-center text-xs text-muted-foreground">
+                {dict.quizzes?.practice?.select_answer || 'Select an answer to continue'}
+              </p>
+            )}
+          </div>
+        )}
+
+        {checked && (
           <motion.button
             type="button"
             initial={{ opacity: 0, y: 10 }}
@@ -189,11 +233,51 @@ export function QuizPlayer({
             )}
           </motion.button>
         )}
-        {!isAnswered && (
-          <p className="text-center text-xs text-muted-foreground mt-4">
-            {dict.quizzes?.practice?.select_answer || 'Select an answer to continue'}
+
+        <div className="flex items-center justify-between gap-3 mb-6 mt-4">
+          <button
+            type="button"
+            onClick={() => onNavigate(Math.max(0, index - 1))}
+            disabled={index === 0}
+            className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          >
+            <ChevronLeft className="w-4 h-4" /> {dict.common?.previous || 'Previous'}
+          </button>
+          <button
+            type="button"
+            onClick={onNext}
+            disabled={isLastQuestion}
+            className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            {checked ? (dict.common?.next || 'Next') : (dict.quizzes?.practice?.skip || 'Skip for now')} <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+
+        <div className="bg-card border rounded-2xl p-4">
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+            {dict.quizzes?.exam?.navigator || 'Question Navigator'}
           </p>
-        )}
+          <div className="flex flex-wrap gap-1.5">
+            {tileStates.map((state, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => onNavigate(i)}
+                title={tileLabel(state, i)}
+                aria-label={tileLabel(state, i)}
+                className={`w-8 h-8 rounded-lg text-xs font-bold transition-all ${tileClass(state, i === index)}`}
+              >
+                {state === 'correct' ? '✓' : state === 'wrong' ? '✗' : state === 'staged' ? '●' : i + 1}
+              </button>
+            ))}
+          </div>
+          <div className="flex gap-4 mt-3 text-xs text-muted-foreground flex-wrap">
+            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-green-500" /> {dict.quizzes?.practice?.legend_correct || 'Checked · correct'}</span>
+            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-red-500" /> {dict.quizzes?.practice?.legend_wrong || 'Checked · incorrect'}</span>
+            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-blue-500" /> {dict.quizzes?.practice?.legend_staged || 'Answered · not checked'}</span>
+            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-muted border" /> {dict.quizzes?.practice?.legend_blank || 'Not answered'}</span>
+          </div>
+        </div>
       </div>
     </div>
   )

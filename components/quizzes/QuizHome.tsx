@@ -2,6 +2,7 @@
 
 import { type Locale } from '@/lib/i18n/config'
 import type { QuizData } from '@/lib/quizzes/types'
+import { mockExamSize, scaledTargets } from '@/lib/quizzes/draw'
 import type { QuizAttempt, QuizBest } from '@/lib/quizzes/storage'
 import { PracticeConfig } from './PracticeConfig'
 import { AttemptHistory } from './AttemptHistory'
@@ -78,7 +79,8 @@ export function QuizHome({
   onClearHistory,
 }: QuizHomeProps) {
   const hasExam = Object.keys(quiz.allocations ?? {}).length > 0
-  const totalQuestions = Object.values(quiz.allocations ?? {}).reduce((s, v) => s + v, 0)
+  const totalQuestions = mockExamSize(quiz)
+  const targets = scaledTargets(quiz)
   const durationMinutes = Math.round(quiz.durationSeconds / 60)
 
   return (
@@ -180,13 +182,14 @@ export function QuizHome({
                       </p>
                       <div className="space-y-1.5">
                         {quiz.domains.map(d => {
-                          const total = d.subdomains.reduce((s, sd) => s + (quiz.allocations?.[sd] ?? 0), 0)
+                          const domQuestions = d.subdomains.reduce((s, sd) => s + (targets[sd] ?? 0), 0)
+                          const domPct = d.subdomains.reduce((s, sd) => s + (quiz.allocations?.[sd] ?? 0), 0)
                           return (
                             <div key={d.id} className="flex items-center gap-2">
                               <div className={`w-2 h-2 rounded-full flex-shrink-0 ${getDomainAccentClass(d.color)}`} />
                               <span className="text-xs text-foreground/70 flex-1 truncate">{d.name}</span>
                               <span className="text-xs font-bold flex-shrink-0 w-24 text-right">
-                                {tpl(dict.quizzes?.home?.qs_pct || '{count} Qs ({count}%)', { count: total })}
+                                {tpl(dict.quizzes?.home?.qs_pct || '{count} Qs ({pct}%)', { count: domQuestions, pct: domPct })}
                               </span>
                             </div>
                           )

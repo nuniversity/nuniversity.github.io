@@ -1,16 +1,50 @@
 export type QuizKind = 'certification' | 'practice' | 'course-exam'
 
-export type QuizQuestionType = 'mcq' | 'multi' | 'tf'
+export type QuizQuestionType = 'mcq' | 'multi' | 'tf' | 'ordering' | 'matching'
 
-export interface QuizQuestion {
+interface QuizQuestionBase {
   id: string
   subdomain: string
-  type: QuizQuestionType
   question: string
-  options: string[]
-  correct: number
   explanation: string
 }
+
+export interface SingleAnswerQuizQuestion extends QuizQuestionBase {
+  type: 'mcq' | 'tf'
+  options: string[]
+  correct: number
+}
+
+export interface MultiAnswerQuizQuestion extends QuizQuestionBase {
+  type: 'multi'
+  options: string[]
+  correct: number[]
+}
+
+export interface OrderingQuizQuestion extends QuizQuestionBase {
+  type: 'ordering'
+  options: string[]
+  correct: number[]
+}
+
+export interface MatchingQuizQuestion extends QuizQuestionBase {
+  type: 'matching'
+  options: string[]
+  prompts: string[]
+  correct: number[]
+}
+
+export type QuizQuestion =
+  | SingleAnswerQuizQuestion
+  | MultiAnswerQuizQuestion
+  | OrderingQuizQuestion
+  | MatchingQuizQuestion
+
+export type QuizResponse =
+  | { type: 'mcq' | 'tf'; selected: number | null }
+  | { type: 'multi'; selected: number[] }
+  | { type: 'ordering'; sequence: number[] }
+  | { type: 'matching'; pairs: (number | null)[] }
 
 export interface QuizDomain {
   id: string
@@ -36,6 +70,7 @@ export interface QuizData {
   certification: string
   durationSeconds: number
   passingScore: number
+  mockQuestionCount?: number
   domains: QuizDomain[]
   allocations: Record<string, number>
   questions: QuizQuestion[]
@@ -46,4 +81,12 @@ export interface QuizData {
 
 export type QuizSummary = Omit<QuizData, 'questions'> & {
   questionCount: number
+}
+
+export interface UserAnswer {
+  questionId: string
+  subdomain: string
+  response: QuizResponse | null
+  isCorrect: boolean
+  timeSpent: number
 }

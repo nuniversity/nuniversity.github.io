@@ -82,3 +82,178 @@ def test_unknown_question_subdomain_fails(tmp_path, monkeypatch):
     data = _valid_quiz()
     data["questions"][0]["subdomain"] = "9.9"
     assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def _multi_question() -> dict:
+    return {
+        "subdomain": "1.1",
+        "type": "multi",
+        "question": "Select the two prime numbers",
+        "options": ["4", "7", "9", "11", "15"],
+        "correct": [1, 3],
+        "explanation": "7 and 11 are prime.",
+    }
+
+
+def _ordering_question() -> dict:
+    return {
+        "subdomain": "1.1",
+        "type": "ordering",
+        "question": "Put the pipeline stages in order",
+        "options": ["Visualize", "Extract", "Transform", "Load", "Archive"],
+        "correct": [1, 2, 3],
+        "explanation": "Extract, transform, then load before visualizing.",
+    }
+
+
+def _matching_question() -> dict:
+    return {
+        "subdomain": "1.1",
+        "type": "matching",
+        "question": "Match each service to its primary role",
+        "prompts": ["Glue", "Athena", "QuickSight"],
+        "options": ["ETL service", "SQL query engine", "BI dashboard"],
+        "correct": [0, 1, 2],
+        "explanation": "Each service maps to its primary role.",
+    }
+
+
+def _set_question(data: dict, index: int, question: dict) -> None:
+    question = dict(question)
+    question["id"] = f"q{index + 1:03d}"
+    question["subdomain"] = data["questions"][index]["subdomain"]
+    data["questions"][index] = question
+
+
+def test_all_supported_question_types_pass(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    _set_question(data, 0, _multi_question())
+    _set_question(data, 1, _ordering_question())
+    _set_question(data, 2, _matching_question())
+    assert _run(tmp_path, monkeypatch, data) == 0
+
+
+def test_multi_with_too_few_options_fails(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    question = _multi_question()
+    question["options"] = ["4", "7", "9"]
+    question["correct"] = [0, 1]
+    _set_question(data, 0, question)
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_multi_correct_not_array_fails(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    question = _multi_question()
+    question["correct"] = 1
+    _set_question(data, 0, question)
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_multi_correct_duplicate_fails(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    question = _multi_question()
+    question["correct"] = [1, 1]
+    _set_question(data, 0, question)
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_multi_correct_out_of_range_fails(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    question = _multi_question()
+    question["correct"] = [1, 5]
+    _set_question(data, 0, question)
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_ordering_correct_too_short_fails(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    question = _ordering_question()
+    question["correct"] = [1, 2]
+    _set_question(data, 0, question)
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_ordering_correct_out_of_range_fails(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    question = _ordering_question()
+    question["correct"] = [1, 2, 9]
+    _set_question(data, 0, question)
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_ordering_too_many_presented_items_fails(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    question = _ordering_question()
+    question["options"] = ["a", "b", "c", "d", "e", "f", "g"]
+    _set_question(data, 0, question)
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_matching_missing_prompts_fails(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    question = _matching_question()
+    del question["prompts"]
+    _set_question(data, 0, question)
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_matching_prompt_option_count_mismatch_fails(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    question = _matching_question()
+    question["options"] = ["ETL service", "SQL query engine"]
+    question["correct"] = [0, 1]
+    _set_question(data, 0, question)
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_matching_duplicate_pairs_fails(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    question = _matching_question()
+    question["correct"] = [0, 0, 2]
+    _set_question(data, 0, question)
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_mock_question_count_valid_passes(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    data["mockQuestionCount"] = 65
+    assert _run(tmp_path, monkeypatch, data) == 0
+
+
+def test_mock_question_count_zero_fails(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    data["mockQuestionCount"] = 0
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_mock_question_count_not_integer_fails(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    data["mockQuestionCount"] = "65"
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_locale_options_length_must_match_base(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    _set_question(data, 0, _multi_question())
+    data["locales"]["pt"]["questions"] = {
+        "q001": {
+            "question": "Números primos",
+            "explanation": "7 e 11 são primos.",
+            "options": ["4", "7", "9"],
+        }
+    }
+    assert _run(tmp_path, monkeypatch, data) == 2
+
+
+def test_locale_options_matching_base_passes(tmp_path, monkeypatch):
+    data = _valid_quiz()
+    _set_question(data, 0, _multi_question())
+    data["locales"]["pt"]["questions"] = {
+        "q001": {
+            "question": "Números primos",
+            "explanation": "7 e 11 são primos.",
+            "options": ["4", "7", "9", "11", "15"],
+        }
+    }
+    assert _run(tmp_path, monkeypatch, data) == 0
