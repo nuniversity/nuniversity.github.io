@@ -332,13 +332,24 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
                     className="w-24 h-24 rounded-full bg-brand flex items-center justify-center mb-6 shadow-lg"
                   >
                     {/* <Users className="w-12 h-12 text-white" /> */}
-                    <Image
-                      src={`/team/${member.name.toLowerCase().replace(/\s+/g, "-")}.png`}
-                      alt={member.name}
-                      width={200}
-                      height={200}
-                      className="w-full h-full rounded-full object-cover"
-                    />
+                    {/* The photograph is served as WebP with a PNG fallback.
+                        The source files were optimised by
+                        `scripts/optimize-images.mjs` — 2.4 MB → 60 KB. */}
+                    <picture>
+                      <source
+                        srcSet={`/team/${member.name.toLowerCase().replace(/\s+/g, '-')}.webp`}
+                        type="image/webp"
+                      />
+                      <img
+                        src={`/team/${member.name.toLowerCase().replace(/\s+/g, '-')}.png`}
+                        alt={member.name}
+                        width={200}
+                        height={200}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full rounded-full object-cover"
+                      />
+                    </picture>
                   </motion.div>
 
                   <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">

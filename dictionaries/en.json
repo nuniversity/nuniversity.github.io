@@ -131,7 +131,9 @@
     "library_hint": "Curated external resources",
     "roadmaps_hint": "Structured learning paths",
     "languages_hint": "Vocabulary and fluency activities",
-    "quizzes_hint": "Certification quizzes and mock exams"
+    "quizzes_hint": "Certification quizzes and mock exams",
+    "tools_hint": "Interactive productivity tools",
+    "games_hint": "Practice games"
   },
   "hero": {
     "badge": "Interactive Learning Platform",
@@ -217,7 +219,8 @@
       "subjectPlaceholder": "What is the message about?",
       "message": "Message *",
       "messagePlaceholder": "Tell us how you’d like to collaborate or how we can help...",
-      "button": "Send Message"
+      "button": "Send Message",
+      "privacyNote": "Your message is sent to Formspree, a third-party delivery service, and is used only to reply to you. Please do not include sensitive information."
     },
     "success": {
       "title": "Thank You!",
@@ -1666,7 +1669,9 @@
       "all_done": "All questions answered",
       "suggest_complete": "Nice work — mark the lesson as complete",
       "unanswered": "{n} remaining"
-    }
+    },
+    "listen": "Listen to this lesson",
+    "listen_hint": "Read the lesson aloud using your browser’s speech engine."
   },
   "gamification": {
     "xp": "{n} XP",

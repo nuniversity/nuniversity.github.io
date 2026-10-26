@@ -1,6 +1,6 @@
 import React from 'react'
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import Header from '@/components/layout/Header'
 import { Providers } from '@/components/providers/Providers'
 
@@ -53,7 +53,9 @@ function renderHeader() {
 
 /** The link for a given nav label. */
 function link(label: string): HTMLElement {
-  return screen.getAllByRole('link', { name: new RegExp(`^${label}$`, 'i') })[0]
+  // Links inside the Explore panel also carry a hint, so the accessible name
+  // is "Tools Interactive productivity tools" rather than just "Tools".
+  return screen.getAllByRole('link', { name: new RegExp(`^${label}\\b`, 'i') })[0]
 }
 
 describe('Header navigation active state', () => {
@@ -93,8 +95,24 @@ describe('Header navigation active state', () => {
   it('marks the section active on its own listing page', () => {
     mocks.pathname = '/en/tools/'
     renderHeader()
+    // Tools lives inside the Explore panel, so it has to be opened first.
+    fireEvent.click(screen.getByRole('button', { name: /Explore/i }))
     expect(link('Tools')).toHaveAttribute('aria-current', 'page')
     expect(link('Home')).not.toHaveAttribute('aria-current')
+  })
+
+  it('keeps the top bar short and moves the rest into Explore', () => {
+    renderHeader()
+    // Only Home and Courses are always visible.
+    expect(link('Home')).toBeInTheDocument()
+    expect(link('Courses')).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /^Tools$/i })).not.toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /^Games$/i })).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: /Explore/i }))
+    for (const label of ['Tools', 'Games', 'Quizzes', 'Library', 'Roadmaps', 'Languages']) {
+      expect(link(label)).toBeInTheDocument()
+    }
   })
 
   it('does not mark About active while on Contact', () => {

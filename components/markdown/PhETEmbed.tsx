@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Play, ExternalLink } from 'lucide-react'
 
 interface PhETEmbedProps {
@@ -11,12 +11,50 @@ interface PhETEmbedProps {
 
 const PHET_BASE = 'https://phet.colorado.edu/sims/html'
 
+/** PhET simulation slugs are lowercase words separated by single hyphens. */
+const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+/** PhET ships localised simulations with these two-letter codes. */
+const LANGUAGE_RE = /^[a-z]{2}(?:-[a-z]{2})?$/
+
+/** How long to wait for the frame before treating it as failed. */
+const LOAD_TIMEOUT_MS = 15000
+
 export default function PhETEmbed({ slug, title, language = 'en' }: PhETEmbedProps) {
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)
 
-  const url = `${PHET_BASE}/${slug}/latest/${slug}_${language}.html`
   const displayName = title || slug.replace(/-/g, ' ')
+
+  // The identifiers come from lesson content, so they are validated before
+  // they are interpolated into the URL. The origin is fixed either way, but
+  // an invalid slug would only ever produce a broken frame.
+  const validSlug = SLUG_RE.test(slug ?? '')
+  const validLanguage = LANGUAGE_RE.test(language ?? '')
+
+  const url =
+    validSlug && validLanguage ? `${PHET_BASE}/${slug}/latest/${slug}_${language}.html` : ''
+
+  // An <iframe> does not fire `error` for HTTP failures, so a load timeout
+  // is used to detect a failed embed.
+  useEffect(() => {
+    if (loaded || !url) return
+    const timer = setTimeout(() => setError(true), LOAD_TIMEOUT_MS)
+    return () => clearTimeout(timer)
+  }, [loaded, url])
+
+  if (!url) {
+    return (
+      <div className="my-8 rounded-xl border bg-card shadow-sm overflow-hidden">
+        <div className="bg-muted/50 px-4 py-2 border-b flex items-center gap-2">
+          <Play className="w-4 h-4 text-primary" />
+          <span className="text-sm font-semibold text-foreground">{displayName}</span>
+        </div>
+        <div className="p-6 text-center">
+          <p className="mb-3 text-danger">This simulation reference is not valid.</p>
+        </div>
+      </div>
+    )
+  }
 
   if (error) {
     return (
@@ -26,7 +64,7 @@ export default function PhETEmbed({ slug, title, language = 'en' }: PhETEmbedPro
           <span className="text-sm font-semibold text-foreground">{displayName}</span>
         </div>
         <div className="p-6 text-center">
-          <p className="text-red-600 dark:text-red-400 mb-3">
+          <p className="text-danger mb-3">
             Failed to load simulation
           </p>
           <a
@@ -73,8 +111,12 @@ export default function PhETEmbed({ slug, title, language = 'en' }: PhETEmbedPro
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer"
-          onLoad={() => setLoaded(true)}
-          onError={() => setError(true)}
+          // The simulation needs scripts and its own origin, but nothing more.
+          sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups allow-popups-to-escape-sandbox"
+          onLoad={() => {
+            setLoaded(true)
+            setError(false)
+          }}
         />
       </div>
       <div className="px-4 py-2 border-t bg-muted/30">

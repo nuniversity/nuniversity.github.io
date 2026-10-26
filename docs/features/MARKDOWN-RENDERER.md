@@ -116,22 +116,83 @@ greet("World");
 ### 4. **Enhanced Images** 🖼️
 
 #### Features:
-- **Click to zoom** functionality
-- **Hover zoom** effect
-- **Rounded corners** and shadows
-- **Caption support** below image
-- **Overlay effect** on hover
+- **Click to zoom** — opens a full-screen lightbox; Escape closes it
+- **Lazy loading** and async decoding
+- **Real `<figure>` / `<figcaption>` semantics**
+- **No duplicated alt text** — the alt text is for assistive technology only
+- Hover scale on the thumbnail
 
 #### Usage:
 ```markdown
-![Description of image](path/to/image.jpg)
+![Description of the ingestion pipeline](/media/aws-lakehouse/ingestion.png)
 ```
 
-The alt text becomes the caption!
+Media lives in `content/media/<course-slug>/` and is published to
+`/media/<course-slug>/` by the build (`scripts/publish-media.mjs`).
+**Always reference it by absolute path** — relative paths would resolve
+against the lesson URL and 404.
+
+A visible caption comes from the image *title*, not the alt text:
+
+```markdown
+![Alt text for screen readers](/media/x.png "A visible caption")
+```
 
 ---
 
-### 5. **Task Lists** ✅
+### 5. **Video Embeds** 🎬
+
+Videos use a `video` fence with a JSON config, or a bare YouTube/Vimeo URL.
+
+```markdown
+```video
+{
+  "provider": "youtube",
+  "id": "dQw4w9WgXcQ",
+  "title": "How the S3 data lake works",
+  "start": 30,
+  "caption": "Official AWS walkthrough"
+}
+```
+```
+
+| Field | Type | Notes |
+|---|---|---|
+| `provider` | string | `youtube` or `vimeo` (inferred from `url` when omitted) |
+| `id` / `url` | string | The video id, or the full URL |
+| `title` | string | Shown on the facade and used as the accessible name |
+| `start` / `end` | number | Seconds |
+| `caption` | string | Optional caption under the player |
+
+#### Privacy
+The player sits behind a **click-to-load facade**. No third-party request is
+made until the learner presses play, so nothing is requested and no cookie is
+set on page view. YouTube is embedded through `youtube-nocookie.com`.
+
+A bare YouTube or Vimeo link in prose is embedded automatically:
+
+```markdown
+Watch the [S3 data lake walkthrough](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
+```
+
+---
+
+### 6. **Text-to-Audio** 🔊
+
+Every lesson has a **Listen** control that reads the lesson aloud using the
+browser's built-in speech engine (`window.speechSynthesis`).
+
+- Nothing is read until the control is pressed.
+- The voice is chosen to match the lesson's locale (`en-US`, `pt-BR`, `es-ES`).
+- Code blocks, tables, diagrams and HTML are stripped out, so the reading is
+  prose rather than a wall of identifiers.
+- Play / pause / stop, with a keyboard-accessible button.
+
+No dependency, no audio files, and no server round-trip.
+
+---
+
+### 7. **Task Lists** ✅
 
 #### Features:
 - **Visual checkboxes** with color coding

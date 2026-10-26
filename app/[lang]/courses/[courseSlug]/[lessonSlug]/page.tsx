@@ -6,6 +6,8 @@ import MarkdownRenderer from '@/components/markdown/MarkdownRenderer'
 import LessonExam from '@/components/quizzes/LessonExam'
 import { LessonScoreProvider, LessonScoreSummary } from '@/components/lessons/LessonScoreContext'
 import LessonOutline from '@/components/lessons/LessonOutline'
+import LessonAudio from '@/components/lessons/LessonAudio'
+import { buildSpokenText } from '@/lib/lessons/spoken-text'
 import {
   LessonScrollProgress,
   LessonKeyboardNav,
@@ -94,6 +96,16 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
   }
 
   const lessonQuestions = lesson.metadata.exam ? extractExamQuestions(lesson.content) : []
+
+  // The text handed to the browser's speech engine: the lesson title and the
+  // prose, with code blocks, tables and diagrams stripped out so the reading
+  // does not turn into a wall of identifiers.
+  const spokenText = buildSpokenText(
+    [lesson.metadata.title, lesson.metadata.description, lesson.content].filter(Boolean).join('\n\n')
+  )
+
+  // BCP-47 tags for the reading voice.
+  const speechLocale = lang === 'pt' ? 'pt-BR' : lang === 'es' ? 'es-ES' : 'en-US'
 
   // Load all lessons in this course
   const coursesWithLessons = await getAllLessons(courseSlug, lang)
@@ -222,8 +234,17 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
           </div>
 
           {/* Lesson Content */}
-          <div className="bg-card rounded-2xl border border-border p-6 sm:p-8 mb-8 shadow-sm" data-lesson-content>
+          <div
+            className="bg-card rounded-2xl border border-border p-6 sm:p-8 mb-8 shadow-sm overflow-x-clip"
+            data-lesson-content
+          >
             <div className="prose-measure">
+            <LessonAudio
+              text={spokenText}
+              lang={speechLocale}
+              label={dict.lesson?.listen || 'Listen to this lesson'}
+              description={dict.lesson?.listen_hint || 'Read the lesson aloud using your browser’s speech engine.'}
+            />
             {lesson.metadata.exam && lessonQuestions.length > 0 ? (
               <LessonExam
                 lang={lang}

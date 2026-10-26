@@ -117,6 +117,16 @@ Prose with inline math where natural ($...$), a ```sql / ```python worked
 example with real numbers, then the interactive block that drills the concept
 (```matching / ```fillblank / ```dragdrop / ```plot).
 
+<!-- Media: reference a file that exists in content/media/<course-slug>/,
+     or embed a video. Pick the diagram type that fits the concept. -->
+![<alt text describing the diagram for a screen reader>](/media/<course-slug>/<file>.png)
+
+````
+```video
+{ "provider": "youtube", "id": "<real-video-id>", "title": "<title>" }
+```
+````
+
 ### 📚 Did you know?
 <3+ curiosity callouts as plain bold paragraphs or TIP boxes across the lesson>
 

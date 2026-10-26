@@ -131,7 +131,9 @@
     "library_hint": "Recursos externos selecionados",
     "roadmaps_hint": "Trilhas estruturadas de aprendizagem",
     "languages_hint": "Atividades de vocabulário e fluência",
-    "quizzes_hint": "Quizzes de certificação e simulados"
+    "quizzes_hint": "Quizzes de certificação e simulados",
+    "tools_hint": "Ferramentas interativas de produtividade",
+    "games_hint": "Jogos de prática"
   },
   "hero": {
     "badge": "Plataforma de Aprendizado Interativo",
@@ -217,7 +219,8 @@
       "subjectPlaceholder": "Sobre o que é a mensagem?",
       "message": "Mensagem *",
       "messagePlaceholder": "Fale sobre como você quer colaborar ou como podemos ajudar...",
-      "button": "Enviar Mensagem"
+      "button": "Enviar Mensagem",
+      "privacyNote": "Sua mensagem é enviada ao Formspree, um serviço de entrega de terceiros, e usada apenas para responder. Não inclua informações sensíveis."
     },
     "success": {
       "title": "Obrigado!",
@@ -1666,7 +1669,9 @@
       "all_done": "Todas as perguntas respondidas",
       "suggest_complete": "Bom trabalho — marque a lição como concluída",
       "unanswered": "Faltam {n}"
-    }
+    },
+    "listen": "Ouvir esta lição",
+    "listen_hint": "Leia a lição em voz alta usando o sintetizador do seu navegador."
   },
   "gamification": {
     "xp": "{n} XP",

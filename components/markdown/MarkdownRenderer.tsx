@@ -15,6 +15,8 @@ import QuestionBlock from './QuestionBlock'
 import PhETEmbed from './PhETEmbed'
 import SciencePlot from './SciencePlot'
 import MoleculeViewer from './MoleculeViewer'
+import LessonImage from './LessonImage'
+import VideoEmbed, { parseVideoUrl, type VideoConfig } from './VideoEmbed'
 import DragOrderQuestion from './DragOrderQuestion'
 import MatchingQuestion from './MatchingQuestion'
 import FillBlankQuestion from './FillBlankQuestion'
@@ -48,6 +50,7 @@ const langMap: Record<string, string> = {
   math: 'math',
   phet: 'phet',
   plot: 'plot',
+  video: 'video',
   molecule: 'molecule',
   dragdrop: 'dragdrop',
   matching: 'matching',
@@ -56,19 +59,49 @@ const langMap: Record<string, string> = {
   sql: 'sql',
   psql: 'sql',
   postgresql: 'sql',
+  plsql: 'sql',
   javascript: 'javascript',
+  js: 'javascript',
+  jsx: 'javascript',
   typescript: 'typescript',
+  ts: 'typescript',
+  tsx: 'typescript',
   python: 'python',
   py: 'python',
+  cpython: 'python',
   rust: 'rust',
   rs: 'rust',
   bash: 'bash',
   sh: 'bash',
   shell: 'bash',
   zsh: 'bash',
-  terraform: 'terraform',
-  hcl: 'terraform',
-  tf: 'terraform',
+  terraform: 'hcl',
+  hcl: 'hcl',
+  tf: 'hcl',
+  json: 'json',
+  yaml: 'yaml',
+  yml: 'yaml',
+  toml: 'toml',
+  ini: 'ini',
+  cfg: 'ini',
+  conf: 'ini',
+  markdown: 'markdown',
+  md: 'markdown',
+  java: 'java',
+  dockerfile: 'docker',
+  docker: 'docker',
+  makefile: 'makefile',
+  make: 'makefile',
+  properties: 'properties',
+  dotenv: 'properties',
+  xml: 'markup',
+  html: 'markup',
+  svg: 'markup',
+  scala: 'scala',
+  gitignore: 'git',
+  text: 'plaintext',
+  txt: 'plaintext',
+  plaintext: 'plaintext',
 }
 
 function CopyButton({ textToCopy }: { textToCopy: string }) {
@@ -144,6 +177,84 @@ interface MermaidDiagramProps {
   code: string
 }
 
+/** Diagram colours for the light theme — mirrors the site tokens. */
+const MERMAID_LIGHT_VARIABLES = {
+  primaryColor: '#eff6ff',
+  primaryTextColor: '#0f172a',
+  primaryBorderColor: '#2563eb',
+  secondaryColor: '#f5f3ff',
+  secondaryTextColor: '#0f172a',
+  secondaryBorderColor: '#7c3aed',
+  tertiaryColor: '#ecfeff',
+  tertiaryTextColor: '#0f172a',
+  tertiaryBorderColor: '#0891b2',
+  lineColor: '#64748b',
+  textColor: '#0f172a',
+  mainBkg: '#eff6ff',
+  nodeBorder: '#2563eb',
+  clusterBkg: '#f8fafc',
+  clusterBorder: '#cbd5e1',
+  edgeLabelBackground: '#ffffff',
+  titleColor: '#0f172a',
+  noteBkgColor: '#fffbeb',
+  noteTextColor: '#78350f',
+  noteBorderColor: '#f59e0b',
+  actorBkg: '#eff6ff',
+  actorBorder: '#2563eb',
+  actorTextColor: '#0f172a',
+  signalColor: '#0f172a',
+  signalTextColor: '#0f172a',
+  labelBoxBkgColor: '#eff6ff',
+  labelBoxBorderColor: '#2563eb',
+  labelTextColor: '#0f172a',
+  loopTextColor: '#0f172a',
+  activationBkgColor: '#eff6ff',
+  attributionBkgColor: '#f8fafc',
+  stateBkg: '#eff6ff',
+  stateBorder: '#2563eb',
+  stateLabelColor: '#0f172a',
+  classText: '#0f172a',
+}
+
+/** Diagram colours for the dark theme. */
+const MERMAID_DARK_VARIABLES = {
+  primaryColor: '#172554',
+  primaryTextColor: '#e2e8f0',
+  primaryBorderColor: '#60a5fa',
+  secondaryColor: '#2e1065',
+  secondaryTextColor: '#e2e8f0',
+  secondaryBorderColor: '#a78bfa',
+  tertiaryColor: '#164e63',
+  tertiaryTextColor: '#e2e8f0',
+  tertiaryBorderColor: '#22d3ee',
+  lineColor: '#94a3b8',
+  textColor: '#e2e8f0',
+  mainBkg: '#172554',
+  nodeBorder: '#60a5fa',
+  clusterBkg: '#0f172a',
+  clusterBorder: '#334155',
+  edgeLabelBackground: '#0f172a',
+  titleColor: '#f1f5f9',
+  noteBkgColor: '#422006',
+  noteTextColor: '#fde68a',
+  noteBorderColor: '#f59e0b',
+  actorBkg: '#172554',
+  actorBorder: '#60a5fa',
+  actorTextColor: '#e2e8f0',
+  signalColor: '#e2e8f0',
+  signalTextColor: '#e2e8f0',
+  labelBoxBkgColor: '#172554',
+  labelBoxBorderColor: '#60a5fa',
+  labelTextColor: '#e2e8f0',
+  loopTextColor: '#e2e8f0',
+  activationBkgColor: '#172554',
+  attributionBkgColor: '#0f172a',
+  stateBkg: '#172554',
+  stateBorder: '#60a5fa',
+  stateLabelColor: '#e2e8f0',
+  classText: '#e2e8f0',
+}
+
 function MermaidDiagram({ code }: MermaidDiagramProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -158,22 +269,27 @@ function MermaidDiagram({ code }: MermaidDiagramProps) {
 
     const renderDiagram = async () => {
       if (!containerRef.current) return
-
       try {
         if (!mermaidRef.current) {
           const mermaidModule = await import('mermaid')
           mermaidRef.current = mermaidModule.default ?? mermaidModule
-          mermaidRef.current.initialize({
-            startOnLoad: false,
-            theme: 'default',
-            securityLevel: 'strict',
-            fontFamily: 'inherit',
-            flowchart: {
-              useMaxWidth: false,
-              curve: 'basis',
-            },
-          })
         }
+
+        // Brand-aligned diagram theme. Colours mirror the site tokens so
+        // diagrams read as part of the product rather than a default render.
+        // The dark set is used when the site is in dark mode.
+        const dark = document.documentElement.classList.contains('dark')
+        mermaidRef.current.initialize({
+          startOnLoad: false,
+          theme: 'base',
+          securityLevel: 'strict',
+          fontFamily: 'inherit',
+          flowchart: {
+            useMaxWidth: false,
+            curve: 'basis',
+          },
+          themeVariables: dark ? MERMAID_DARK_VARIABLES : MERMAID_LIGHT_VARIABLES,
+        })
 
         if (!mounted) return
 
@@ -220,7 +336,24 @@ function MermaidDiagram({ code }: MermaidDiagramProps) {
     }
 
     renderDiagram()
-    return () => { mounted = false }
+
+    // Re-render when the site theme flips — the diagram colours differ
+    // between light and dark.
+    let observer: MutationObserver | null = null
+    if (typeof MutationObserver !== 'undefined') {
+      observer = new MutationObserver(() => {
+        renderDiagram()
+      })
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class'],
+      })
+    }
+
+    return () => {
+      mounted = false
+      observer?.disconnect()
+    }
   }, [code])
 
   const handleZoomIn    = () => setZoom(prev => Math.min(parseFloat((prev + 0.25).toFixed(2)), 4))
@@ -414,7 +547,11 @@ export default function MarkdownRenderer({ content, lang = 'en', dict }: Markdow
         ol: ({ children }) => <ol className="list-decimal list-inside mb-4 space-y-2 ml-4">{children}</ol>,
         li: ({ children }) => <li className="leading-7 text-foreground/90">{children}</li>,
 
-        pre: ({ children }) => <div className="not-prose overflow-visible">{children}</div>,
+        pre: ({ children }) => (
+          // Scrolls within its own block. `overflow-visible` would let a long
+          // code line widen the whole page.
+          <div className="not-prose my-0 overflow-x-auto">{children}</div>
+        ),
 
         code: ({ node, className, children, ...props }) => {
           const match = /language-([a-z0-9_+-]+)/i.exec(className || '')
@@ -430,6 +567,19 @@ export default function MarkdownRenderer({ content, lang = 'en', dict }: Markdow
 
             if (language === 'math') {
               return <MathBlock tex={codeString} />
+            }
+
+            if (language === 'video') {
+              try {
+                const config = JSON.parse(codeString) as VideoConfig
+                return <VideoEmbed config={config} />
+              } catch (e) {
+                return (
+                  <div className="my-6 rounded-xl border border-danger/40 bg-danger-soft p-4 text-sm text-danger-foreground">
+                    Invalid video config: {(e as Error).message}
+                  </div>
+                )
+              }
             }
 
             if (language === 'phet') {
@@ -668,12 +818,32 @@ export default function MarkdownRenderer({ content, lang = 'en', dict }: Markdow
 
         hr: () => <hr className="my-8 border-border" />,
 
-        img: ({ src, alt }) => (
-          <div className="my-6">
-            <img src={src} alt={alt || ''} className="rounded-lg max-w-full h-auto shadow-lg" />
-            {alt && <p className="text-center text-sm text-muted-foreground mt-2">{alt}</p>}
-          </div>
+        img: ({ src, alt, title }) => (
+          <LessonImage src={src ?? ''} alt={alt ?? ''} caption={title} />
         ),
+
+        a: ({ href, children, ...props }) => {
+          const url = typeof href === 'string' ? href : ''
+          // A bare YouTube/Vimeo link in prose becomes a real player.
+          if (parseVideoUrl(url)) {
+            return (
+              <VideoEmbed
+                config={{ url, title: typeof children === 'string' ? children : 'Video' }}
+              />
+            )
+          }
+          const external = /^https?:\/\//i.test(url)
+          return (
+            <a
+              href={url}
+              {...props}
+              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              className="font-medium text-primary underline decoration-primary/30 underline-offset-2 transition-colors hover:text-primary/80"
+            >
+              {children}
+            </a>
+          )
+        },
 
         strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
         em: ({ children }) => <em className="italic">{children}</em>,

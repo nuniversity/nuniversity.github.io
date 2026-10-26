@@ -4,7 +4,7 @@
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import dynamicImport from 'next/dynamic'
-import { Menu, X, Sun, Moon, Search, ChevronDown, Info, Mail } from 'lucide-react'
+import { Menu, X, Sun, Moon, Search, ChevronDown, Info, Mail, Compass } from 'lucide-react'
 import LanguageSwitcher from '../language/LanguageSwitcher'
 import ProfileChip from '../gamification/ProfileChip'
 import AwardToaster from '../gamification/AwardToaster'
@@ -85,13 +85,13 @@ export default function Header({ lang, dict }: HeaderProps) {
   const primaryNavigation: NavItem[] = [
     { id: 'general', name: dict.navigation.home, href: `/${lang}`, exact: true },
     { id: 'courses', name: dict.navigation.courses, href: `/${lang}/courses` },
-    { id: 'tools', name: dict.navigation.tools, href: `/${lang}/tools` },
-    { id: 'games', name: dict.navigation.games, href: `/${lang}/games` },
   ]
 
   // Everything that is discovered rather than browsed lives in one panel,
-  // so the top bar stays at four items plus Explore.
+  // so the top bar stays at two items plus Explore.
   const exploreNavigation: NavItem[] = [
+    { id: 'tools', name: dict.navigation.tools, href: `/${lang}/tools` },
+    { id: 'games', name: dict.navigation.games, href: `/${lang}/games` },
     { id: 'quizzes', name: dict.navigation.quizzes, href: `/${lang}/quizzes` },
     { id: 'library', name: dict.navigation.library || 'Library', href: `/${lang}/library` },
     { id: 'roadmaps', name: dict.navigation.roadmaps || 'Roadmaps', href: `/${lang}/roadmaps` },
@@ -186,16 +186,17 @@ export default function Header({ lang, dict }: HeaderProps) {
                 }`}
               >
                 {dict.navigation.explore || 'Explore'}
+                <Compass className="h-4 w-4" aria-hidden="true" />
                 <ChevronDown
                   className={`h-4 w-4 transition-transform duration-200 ${isMoreOpen ? 'rotate-180' : ''}`}
                   aria-hidden="true"
                 />
               </button>
               {isMoreOpen && (
-                <div className="absolute right-0 top-full mt-3 z-50 w-[26rem] overflow-hidden rounded-2xl border border-border bg-popover shadow-xl animate-slide-down">
+                <div className="absolute right-0 top-full mt-3 z-50 w-[34rem] overflow-hidden rounded-2xl border border-border bg-popover shadow-xl animate-slide-down">
                   {/* Discoverable sections, shown as colour-coded cards so the
                       site's colour map is legible from the navigation. */}
-                  <ul className="grid gap-1 p-2">
+                  <ul className="grid grid-cols-2 gap-1 p-2">
                     {exploreNavigation.map((item) => {
                       const section = sections[item.id]
                       const active = isActive(item)
@@ -206,7 +207,7 @@ export default function Header({ lang, dict }: HeaderProps) {
                             href={item.href}
                             aria-current={active ? 'page' : undefined}
                             onClick={() => setIsMoreOpen(false)}
-                            className={`flex items-start gap-3 rounded-xl p-3 transition-colors duration-150 ${
+                            className={`flex items-center gap-3 rounded-xl p-3 transition-colors duration-150 ${
                               active
                                 ? `${section.text} ${section.soft}`
                                 : 'hover:bg-surface-sunken'
@@ -219,10 +220,10 @@ export default function Header({ lang, dict }: HeaderProps) {
                               <Icon className="h-[18px] w-[18px]" />
                             </span>
                             <span className="min-w-0">
-                              <span className="block text-sm font-semibold text-foreground">
+                              <span className="block truncate text-sm font-semibold text-foreground">
                                 {item.name}
                               </span>
-                              <span className="block text-xs leading-snug text-foreground-muted">
+                              <span className="block truncate text-xs leading-snug text-foreground-muted">
                                 {(dict.navigation as Record<string, string>)[`${item.id}_hint`] ||
                                   dict.navigation.explore_hint ||
                                   'Explore'}

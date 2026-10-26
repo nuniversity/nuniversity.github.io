@@ -4,6 +4,20 @@ import path from 'node:path'
 const OUT = path.join(process.cwd(), 'out')
 const ORIGIN = 'https://nuniversity.github.io'
 const CANONICAL_RE = /<link rel="canonical" href="[^"]*"\s*\/?>/
+// Kept in step with app/[lang]/layout.tsx — verify-csp.mjs checks both.
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self' data:",
+  "media-src 'self' blob:",
+  "connect-src 'self' https://formspree.io https://files.rcsb.org",
+  "frame-src https://phet.colorado.edu",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self' https://formspree.io",
+].join('; ')
 
 function walkHtml(dir, acc = []) {
   for (const name of fs.readdirSync(dir)) {
@@ -53,6 +67,8 @@ function write404() {
 <head>
 <meta charset="utf-8"/>
 <meta name="robots" content="noindex"/>
+<meta http-equiv="Content-Security-Policy" content="${CSP}"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
 <title>404 — NUniversity</title>
 <script>
 (function () {
@@ -94,6 +110,29 @@ function sitemapFallback() {
   console.log(`sitemap: fallback generated with ${urls.length} urls`)
 }
 
+/**
+ * Ensures every emitted HTML file carries the Content-Security-Policy.
+ *
+ * The pages rendered by Next already carry it (it comes from the root
+ * layout), but Next's own root 404 does not — and GitHub Pages can serve
+ * that file. This makes the guarantee universal.
+ */
+function ensureCsp() {
+  let patched = 0
+  for (const file of walkHtml(OUT)) {
+    if (file.endsWith('404.html')) continue // written by write404()
+    const html = fs.readFileSync(file, 'utf8')
+    if (/http-equiv=["']Content-Security-Policy["']/i.test(html)) continue
+    const meta = `<meta http-equiv="Content-Security-Policy" content="${CSP}"/>`
+    const next = html.includes('</head>')
+      ? html.replace('</head>', `  ${meta}\n</head>`)
+      : html.replace(/<meta charset=/, `${meta}\n<meta charset=`)
+    fs.writeFileSync(file, next)
+    patched += 1
+  }
+  console.log(`csp: ${patched} page(s) patched`)
+}
+
 if (!fs.existsSync(OUT)) {
   console.error('postbuild: out/ directory not found — run next build first')
   process.exit(1)
@@ -101,5 +140,6 @@ if (!fs.existsSync(OUT)) {
 
 fixCanonicals()
 write404()
+ensureCsp()
 sitemapFallback()
 console.log('postbuild: done')

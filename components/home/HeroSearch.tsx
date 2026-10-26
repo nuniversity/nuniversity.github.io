@@ -18,7 +18,7 @@ import {
   X,
 } from 'lucide-react'
 import { searchDocs, type SearchDoc, type SearchDocType } from '@/lib/search/matcher'
-import { resultChips, resultContext } from '@/lib/search/result-meta'
+import SearchResultMeta from '@/components/search/SearchResultMeta'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
 
@@ -218,8 +218,6 @@ export default function HeroSearch({
             <ul className="max-h-96 overflow-y-auto p-1.5">
               {results.map((doc, index) => {
                 const Icon = TYPE_ICON[doc.type]
-                const context = resultContext(doc)
-                const chips = resultChips(doc)
                 return (
                   <li key={doc.id}>
                     <button
@@ -247,36 +245,12 @@ export default function HeroSearch({
                         <span className="block truncate text-sm font-medium text-foreground">
                           {doc.title}
                         </span>
-                        {context && (
-                          <span className="block truncate text-xs text-section-courses">
-                            {context}
-                          </span>
-                        )}
                         {doc.description && (
                           <span className="block truncate text-xs text-foreground-muted">
                             {doc.description}
                           </span>
                         )}
-                        {chips.length > 0 && (
-                          <span className="mt-1.5 flex flex-wrap items-center gap-1">
-                            {chips.map(chip => (
-                              <span
-                                key={chip.label}
-                                className={`inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
-                                  chip.tone === 'success'
-                                    ? 'bg-success-soft text-success-foreground'
-                                    : chip.tone === 'warning'
-                                      ? 'bg-warning-soft text-warning-foreground'
-                                      : chip.tone === 'danger'
-                                        ? 'bg-danger-soft text-danger-foreground'
-                                        : 'bg-surface-sunken text-foreground-muted'
-                                }`}
-                              >
-                                {chip.label}
-                              </span>
-                            ))}
-                          </span>
-                        )}
+                        <SearchResultMeta doc={doc} />
                       </span>
                       {index === active && (
                         <CornerDownLeft className="mt-1 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />

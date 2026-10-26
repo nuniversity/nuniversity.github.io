@@ -35,12 +35,156 @@ When activated:
 
 The NUniversity renderer (`components/markdown/MarkdownRenderer.tsx`) is far richer than plain Markdown. **Publication-grade lessons must use these capabilities — a lesson that is "all prose + 5 questions" is too simple for this platform.** Mandate for every non-trivial lesson:
 
-- **≥4 mermaid diagrams** — architecture, data-flow, pipeline topology, state machines. Mermaid is first-class: rendered as SVG with zoom (0.25×–4×), Ctrl+wheel zoom, and fullscreen.
+- **≥4 mermaid diagrams** — architecture, data-flow, pipeline topology, state machines. Mermaid is first-class: rendered as SVG with zoom (0.25×–4×), Ctrl+wheel zoom, and fullscreen. **Use variety** — see the diagram-type table below; four flowcharts in a row is not acceptable.
 - **≥2 interactive blocks** (see schemas below) — quizzes, charts, simulations.
 - **≥5 worked examples** with real numbers, real SQL/CLI/config snippets using highlighted languages.
 - **≥1 KaTeX formula** where the domain has math (cost formulas, probability, rates).
 - **Callout variety** — not just WARNING; use TIP, IMPORTANT, NOTE as appropriate.
 - **Interactive charts (`plot`)** for any quantitative comparison — domain weights, cost curves, latency numbers.
+- **≥1 media asset or video** where it genuinely aids understanding — see "Media and video" below.
+
+### Diagram types — pick the shape that fits the concept
+
+The platform's `mermaid-js` skill documents ~15 diagram types in
+`.opencode/skills/mermaid-js/references/`. **Choose the type by meaning, not by habit:**
+
+| Concept | Diagram type | Reference |
+|---|---|---|
+| A process or pipeline | `flowchart TD` / `flowchart LR` | `flowchart-syntax.md` |
+| A message exchange between actors | `sequenceDiagram` | `sequence-syntax.md` |
+| A lifecycle with branches | `stateDiagram-v2` | `state-syntax.md` |
+| A type/interface model | `classDiagram` | `class-syntax.md` |
+| A data schema | `erDiagram` | `er-syntax.md` |
+| A schedule over time | `gantt` | `gantt-syntax.md` |
+| A deployment topology | `architecture-beta` | `architecture-syntax.md` |
+| A branch/commit history | `gitGraph` | `gitgraph-syntax.md` |
+| A trade-off between two axes | `quadrantChart` | `advanced-diagrams-syntax.md` |
+| A flow between quantities | `sankey-beta` | `advanced-diagrams-syntax.md` |
+| A numeric comparison | `xychart-beta` | `advanced-diagrams-syntax.md` |
+| A taxonomy or mental map | `mindmap` | `mindmap-syntax.md` |
+| A user journey | `journey` | `user-journey-syntax.md` |
+| A modular system layout | `block-beta` | `advanced-diagrams-syntax.md` |
+| A historical timeline | `timeline` | `advanced-diagrams-syntax.md` |
+
+**Rules:** always bare ` ```mermaid ` open + bare ` ``` ` close. Keep diagrams
+≤ ~40 nodes. **A lesson with ≥4 diagrams should use ≥3 different types.**
+
+### Diagrams must be *designed*, not just generated
+
+A bare `flowchart TD; A-->B` is not acceptable. Every diagram must carry
+meaning in its **shape and colour**, the way a good slide would. Use the
+capabilities documented in `.opencode/skills/mermaid-js/references/`:
+
+1. **Group with subgraphs.** A flat graph of 12 nodes is noise. Subgraphs
+   express boundaries — network, account, trust zone, layer, phase.
+
+   ```mermaid
+   flowchart LR
+     subgraph Edge["Edge / CDN"]
+       WAF[WAF] --> CF[CloudFront]
+     end
+     subgraph Core["Core account"]
+       CF --> ALB[ALB] --> APP[App tier]
+     end
+     APP --> DB[(Postgres)]
+   ```
+
+2. **Colour-code with `classDef`.** Define a small palette per lesson — one
+   class for "happy path", one for "failure / risk", one for "external",
+   one for "data store" — and apply it consistently. See
+   `styling-configuration.md` for the syntax.
+
+   ```mermaid
+   flowchart LR
+     A[Request] --> B{Auth?}
+     B -->|yes| C[Serve]
+     B -->|no| D[Deny]
+     classDef ok fill:#dcfce7,stroke:#16a34a,color:#14532d
+     classDef bad fill:#fee2e2,stroke:#dc2626,color:#7f1d1d
+     class C ok
+     class D bad
+   ```
+
+3. **Label the edges.** `-->|writes to|` communicates far more than `-->`.
+   Always say *what flows* — bytes, requests, events, credentials.
+
+4. **Pick the direction for the page.** `LR` for pipelines that read
+   left-to-right; `TD` for hierarchies and decision trees.
+
+5. **Add a title** to a complex diagram with
+   `%%{init: {'themeVariables': {'titleColor': '#0f172a'}}}%%` or a caption
+   line above it.
+
+6. **Sequence diagrams need activations and notes.** Use `activate`/`deactivate`
+   and a `Note over` for the thing a reader would otherwise miss.
+
+7. **Quadrant and xychart for trade-offs and numbers.** A `quadrantChart` is
+   the right shape for "cheap vs fast vs reliable". A `xychart-beta` is the
+   right shape for a small numeric comparison — but prefer the interactive
+   `plot` block when the reader would benefit from tooltips.
+
+**The rule:** if a diagram could be replaced by a bulleted list without loss,
+it is not doing its job. A diagram earns its place by showing **structure,
+flow, or a trade-off** that prose cannot.
+
+### Interactive over static wherever the data is quantitative
+
+When a lesson compares numbers, prefer a **`plot`** block (Recharts, with
+tooltips and hover) over a static Mermaid chart or a table. Use Mermaid for
+*structure* and `plot` for *values*.
+
+### Prose must never break the layout
+
+Course content is read on phones. A single long identifier in a paragraph
+pushes the whole page sideways, so:
+
+- **Never put a long unbroken token in prose.** Anything over ~40 characters
+  without spaces — an ARN, a bucket path, a connection string, a full URL — goes
+  in a code span or a code block, not in a sentence.
+- Prefer `` `s3://bucket/key` `` over writing the raw path as plain text.
+- When you must show a long value in a sentence, shorten it and put the full
+  value in a following code block.
+- Keep table cells short; a cell wider than the column scrolls the table
+  instead of wrapping, which is acceptable but harder to read.
+- Do not use wide ASCII-art banners (`=====`) as separators — they overflow on
+  phones. Use `---` or a heading.
+
+### Media and video
+
+Lesson media lives in `content/media/<course-slug>/` and is published to
+`/media/<course-slug>/` by the build. Reference it by **absolute path**:
+
+```markdown
+![Architecture of the ingestion pipeline](/media/aws-lakehouse/ingestion.png)
+```
+
+Video uses a ` ```video ` fence with a JSON config:
+
+````markdown
+```video
+{
+  "provider": "youtube",
+  "id": "dQw4w9WgXcQ",
+  "title": "How the S3 data lake works",
+  "start": 30,
+  "caption": "Official AWS walkthrough"
+}
+```
+````
+
+Config fields: `provider` (`youtube` | `vimeo`), `id` **or** `url`, `title`,
+`start` (seconds), `end` (seconds), `caption`.
+
+A **bare YouTube or Vimeo URL** in prose is also embedded automatically.
+
+**Rules for media:**
+- Only reference media you can actually provide. A missing file renders as a
+  broken image — worse than no image.
+- Write the image in the language of the lesson (a Portuguese lesson gets a
+  Portuguese diagram).
+- Prefer a diagram or chart over a screenshot: screenshots of a console are
+  fragile and unreadable on mobile.
+- Alt text describes the content for a screen reader, not the file name.
 
 ### Rendered languages (syntax-highlighted with copy button)
 
@@ -64,7 +208,9 @@ The NUniversity renderer (`components/markdown/MarkdownRenderer.tsx`) is far ric
 
 ### Mermaid
 
-Always bare ` ```mermaid ` open + bare ` ``` ` close. Keep diagrams ≤ ~40 nodes; prefer `flowchart TD`, `sequenceDiagram`, `stateDiagram-v2`, `architecture-beta`, `gantt` where natural.
+Always bare ` ```mermaid ` open + bare ` ``` ` close. Keep diagrams ≤ ~40 nodes.
+Choose the **type** by meaning — see the diagram-types table above. The
+`mermaid-js` skill holds the full syntax reference for each type.
 
 ---
 
@@ -109,8 +255,10 @@ Per lesson (minimum; exam-grade courses used higher):
 | Lines | 800 | 800–1,100 |
 | ` ```question ` blocks | 5 (validator) | ≥10 (sim lessons ≥20) |
 | Interactive blocks | 1 (validator warns if 0) | ≥2, varied types |
-| Mermaid diagrams | 0 | ≥4 |
+| Mermaid diagrams | 0 | ≥4, using **≥3 different types**, each with subgraphs and classDef |
 | Worked examples with real numbers | — | ≥5 |
+| Media (image) or video embed | — | ≥1 where it aids understanding |
+| Long unbroken token in prose | 0 | 0 (use a code span instead) |
 | `📚 Did you know?` curiosities | — | ≥3 |
 | ⚠️ WARNING / IMPORTANT box | — | ≥1 |
 | Named real-world cases | — | ≥1 (`## Real-World Case Studies`) |
@@ -135,6 +283,7 @@ Six JSON-configured quiz/sim types + math. Full field schemas live in `reference
 | `plot` | Recharts chart | `type` (`line`\|`bar`\|`scatter`\|`pie`), `data`, `xKey?`, `dataKeys?`, `title?`, `xLabel?`, `yLabel?`, `colors?`, `height?` |
 | `phet` | PhET sim iframe | `slug`, `title?`, `language?` |
 | `molecule` | 3Dmol protein | `pdbId`, `style?` (`cartoon`\|`stick`\|`sphere`\|`line`\|`cartoon+stick`), `color?`, `height?`, `label?`, `background?` |
+| `video` | YouTube / Vimeo player | `provider` (`youtube`\|`vimeo`), `id` **or** `url`, `title?`, `start?`, `end?`, `caption?` |
 
 Rules:
 
@@ -142,6 +291,10 @@ Rules:
 - Vary types across consecutive lessons; across a course use every type at least once.
 - Always include `explanation` on matching/fillblank/dragdrop.
 - Chart data and PDB ids must be real/verifiable — never invented.
+- Video ids must point at a real, publicly available video. Use a bare YouTube
+  or Vimeo URL if you only have the link — it is embedded automatically.
+- Never reference an image that does not exist in `content/media/<course-slug>/`.
+  A broken image is worse than no image.
 
 Example (matching):
 

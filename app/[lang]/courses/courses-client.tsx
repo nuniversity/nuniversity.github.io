@@ -5,6 +5,7 @@ import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { BookOpen, Search, Clock, Target, GraduationCap, Sparkles, User, ArrowRight } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
+import { getAreaGradient } from '@/lib/courses/area-colors'
 import CourseProgressBadge from '@/components/courses/CourseProgressBadge'
 
 interface Course {
@@ -73,27 +74,14 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
   const getDifficultyColor = (difficulty?: string) => {
     switch (difficulty) {
       case 'beginner':
-        return 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
+        return 'bg-success-soft text-success-foreground'
       case 'intermediate':
-        return 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300'
+        return 'bg-warning-soft text-warning-foreground'
       case 'advanced':
-        return 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
+        return 'bg-danger-soft text-danger-foreground'
       default:
-        return 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
+        return 'bg-surface-sunken text-foreground-muted'
     }
-  }
-
-  // Get area icon color
-  const getAreaColor = (index: number) => {
-    const colors = [
-      'from-blue-500 to-cyan-500',
-      'from-cyan-500 to-teal-500',
-      'from-rose-400 to-pink-500',
-      'from-amber-500 to-orange-500',
-      'from-emerald-500 to-green-500',
-      'from-teal-500 to-cyan-500',
-    ]
-    return colors[index % colors.length]
   }
 
   return (
@@ -206,7 +194,7 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
           {Object.entries(groupedByArea).map(([area, areaCourses], areaIndex) => (
             <div key={area}>
               <div className="flex items-center gap-3 mb-6">
-                <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${getAreaColor(areaIndex)} flex items-center justify-center`}>
+                <div className={`w-10 h-10 rounded-lg ${getAreaGradient(areaIndex)} flex items-center justify-center`}>
                   <Sparkles className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -233,7 +221,7 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
                       {/* Card Header */}
                       <div className="p-6 pb-4">
                         <div className="flex items-center justify-between mb-4">
-                          <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${getAreaColor(areaIndex)} flex items-center justify-center`}>
+                          <div className={`w-12 h-12 rounded-lg ${getAreaGradient(areaIndex)} flex items-center justify-center`}>
                             <BookOpen className="w-6 h-6 text-white" />
                           </div>
                           {course.difficulty && (
@@ -260,6 +248,23 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
                             <span>{course.author}</span>
                           </div>
                         )}
+
+                        {/* Metadata — the same chips the search results show. */}
+                        <div className="mt-3 flex flex-wrap items-center gap-1">
+                          <span className="inline-flex items-center whitespace-nowrap rounded-full border border-border-strong bg-surface-sunken px-2 py-0.5 text-xs font-medium leading-tight text-foreground-muted">
+                            {area}
+                          </span>
+                          {course.duration && (
+                            <span className="inline-flex items-center whitespace-nowrap rounded-full border border-border-strong bg-surface-sunken px-2 py-0.5 text-xs font-medium leading-tight text-foreground-muted">
+                              {course.duration}
+                            </span>
+                          )}
+                          {lessonCount > 0 && (
+                            <span className="inline-flex items-center whitespace-nowrap rounded-full border border-border-strong bg-surface-sunken px-2 py-0.5 text-xs font-medium leading-tight text-foreground-muted">
+                              {lessonCount} {dict.courses?.lessons || 'lessons'}
+                            </span>
+                          )}
+                        </div>
                       </div>
 
                       {/* Card Footer */}

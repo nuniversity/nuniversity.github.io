@@ -1,10 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { Clock, ArrowRight, BookOpen, Code, GitBranch, Beaker, Calculator, Database, Cpu, Globe, Sparkles, Brain, type LucideIcon } from 'lucide-react'
+import { Clock, ArrowRight, BookOpen, Code, GitBranch, Beaker, Calculator, Database, Cpu, Globe, Sparkles, Brain, User, type LucideIcon } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
 import type { CourseInfo } from '@/lib/courses/get-course-content'
+import { getAreaGradient } from '@/lib/courses/area-colors'
 
 const iconMap: Record<string, LucideIcon> = {
   code: Code,
@@ -18,17 +19,6 @@ const iconMap: Record<string, LucideIcon> = {
   sparkles: Sparkles,
   'book-open': BookOpen,
 }
-
-const gradients = [
-  'from-blue-500 to-cyan-500',
-  'from-cyan-500 to-teal-500',
-  'from-emerald-500 to-green-500',
-  'from-amber-500 to-orange-500',
-  'from-sky-400 to-blue-500',
-  'from-rose-400 to-pink-500',
-  'from-teal-500 to-cyan-500',
-  'from-yellow-500 to-amber-500',
-]
 
 function getIcon(icon?: string): LucideIcon {
   if (icon && iconMap[icon]) return iconMap[icon]
@@ -65,13 +55,13 @@ export default function FeaturedCourses({ lang, dict, courses }: FeaturedCourses
         <ul className="stagger grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {displayCourses.map((course, index) => {
             const Icon = getIcon(course.icon)
-            const gradient = gradients[index % gradients.length]
+            const gradient = getAreaGradient(index)
 
             return (
               <li key={course.slug} style={{ '--i': index } as React.CSSProperties}>
                 <article className="card card-hover group flex h-full flex-col overflow-hidden">
                   <div
-                    className={`relative flex h-40 items-center justify-center bg-gradient-to-br ${gradient}`}
+                    className={`relative flex h-40 items-center justify-center ${gradient}`}
                   >
                     <Icon
                       className="h-14 w-14 text-white/90 transition-transform duration-300 group-hover:scale-110"
@@ -98,18 +88,33 @@ export default function FeaturedCourses({ lang, dict, courses }: FeaturedCourses
                       {course.description}
                     </p>
 
+                    {/* Metadata chips — the same set the search results show. */}
+                    <div className="mt-3 flex flex-wrap items-center gap-1">
+                      <span className="inline-flex items-center whitespace-nowrap rounded-full border border-border-strong bg-surface-sunken px-2 py-0.5 text-xs font-medium leading-tight text-foreground-muted">
+                        {course.area}
+                      </span>
+                      {course.duration && (
+                        <span className="inline-flex items-center whitespace-nowrap rounded-full border border-border-strong bg-surface-sunken px-2 py-0.5 text-xs font-medium leading-tight text-foreground-muted">
+                          {course.duration}
+                        </span>
+                      )}
+                      {typeof course.lessonCount === 'number' && (
+                        <span className="inline-flex items-center whitespace-nowrap rounded-full border border-border-strong bg-surface-sunken px-2 py-0.5 text-xs font-medium leading-tight text-foreground-muted">
+                          {course.lessonCount}{' '}
+                          {(course.lessonCount ?? 0) === 1
+                            ? dict.courses?.lesson || 'Lesson'
+                            : dict.courses?.lessons || 'Lessons'}
+                        </span>
+                      )}
+                    </div>
+
                     <div className="mt-4 flex items-center gap-4 text-xs text-foreground-muted">
-                      <span className="inline-flex items-center gap-1.5">
-                        <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-                        {course.duration || 'Self-paced'}
-                      </span>
-                      <span className="inline-flex items-center gap-1.5">
-                        <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
-                        {course.lessonCount ?? 0}{' '}
-                        {(course.lessonCount ?? 0) === 1
-                          ? dict.courses?.lesson || 'Lesson'
-                          : dict.courses?.lessons || 'Lessons'}
-                      </span>
+                      {course.author && (
+                        <span className="inline-flex items-center gap-1.5">
+                          <User className="h-3.5 w-3.5" aria-hidden="true" />
+                          {course.author}
+                        </span>
+                      )}
                     </div>
 
                     <Link

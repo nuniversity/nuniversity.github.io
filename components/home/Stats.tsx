@@ -3,6 +3,7 @@
 
 import { BookOpen, Wrench, GamepadIcon, Library, type LucideIcon } from 'lucide-react'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
+import StatCounter from './StatCounter'
 
 const iconMap = {
   BookOpen,
@@ -71,8 +72,8 @@ export default function Stats({ dict, stats }: StatsProps) {
                 >
                   <Icon className="h-6 w-6" />
                 </span>
-                <dd className="tabular text-3xl font-bold tracking-tight text-foreground">
-                  {stat.value}
+                <dd className="text-3xl font-bold tracking-tight text-foreground">
+                  <StatCounter value={stat.value} />
                 </dd>
                 <dt className="text-sm text-foreground-muted">{stat.label}</dt>
               </div>

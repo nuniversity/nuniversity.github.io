@@ -459,6 +459,68 @@
     text-wrap: pretty;
   }
 
+  /* ── Horizontal-overflow guard ───────────────────────────────────────
+     Course content must never widen the page. On a phone a single long
+     identifier, ARN or URL in a paragraph is enough to push the whole
+     layout sideways, so every text-bearing element is allowed to break.
+
+     `anywhere` is used rather than `break-word` because it also breaks
+     *inside* an unbroken token such as a URL or an ARN. */
+  .prose-measure :where(
+      p,
+      li,
+      td,
+      th,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      blockquote,
+      dd,
+      dt,
+      a,
+      figcaption,
+      summary,
+      caption,
+      em,
+      strong
+    ) {
+    overflow-wrap: anywhere;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  /* Inline code wraps — a long identifier in a paragraph must break rather
+     than push the layout. Code *blocks* are handled separately below. */
+  .prose-measure :where(p, li, td, th, h1, h2, h3, h4, h5, h6, blockquote, dd, dt, a, em, strong) code {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: none;
+    white-space: normal;
+  }
+
+  /* Code blocks scroll inside themselves. Never wrap them — that would make
+     code unreadable — but never let them widen the page either. */
+  .prose-measure pre {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-wrap: normal;
+    word-break: normal;
+    white-space: pre;
+  }
+
+  /* Media and embeds are capped to the reading column. */
+  .prose-measure :where(img, svg, video, iframe, canvas, table) {
+    max-width: 100%;
+  }
+
+  .prose-measure :where(figure) {
+    max-width: 100%;
+    min-width: 0;
+  }
+
   .prose-measure h1,
   .prose-measure h2,
   .prose-measure h3,
@@ -586,6 +648,13 @@
     margin-inline: auto;
     width: 100%;
     max-width: var(--measure);
+    /* A flex/grid child defaults to `min-width: auto`, which refuses to
+       shrink below its content. Resetting it lets the column stay inside
+       the viewport even if a child misbehaves. */
+    min-width: 0;
+    /* Last-resort guard: content that still cannot wrap is clipped by the
+       reading column rather than shifting the whole page sideways. */
+    overflow-x: clip;
   }
 
   /* Wide blocks (tables, diagrams, code, plots) may exceed the measure. */

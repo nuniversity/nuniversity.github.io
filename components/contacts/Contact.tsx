@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion'
 import { Mail, MapPin, Linkedin, Github, Youtube, Globe, Instagram, Send, CheckCircle } from 'lucide-react'
 import { useForm, ValidationError } from '@formspree/react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import type { Locale } from '@/lib/i18n/config'
 import type { Dictionary } from '@/lib/i18n/get-dictionary'
 
@@ -13,21 +13,65 @@ interface ContactProps {
   dict: Dictionary
 }
 
+/**
+ * The Formspree endpoint. It is a public identifier, not a credential —
+ * knowing it does not grant access to submissions — but it does mean anyone
+ * can post to it, which is why the honeypot and the submit throttle below
+ * matter.
+ */
+const FORMSPREE_FORM_ID = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || 'xandddko'
+
+/** Field length limits. A contact message has no legitimate use beyond these. */
+const LIMITS = { name: 120, email: 254, subject: 200, message: 5000 } as const
+
+/** Ignore a second submit within this window. */
+const SUBMIT_COOLDOWN_MS = 3000
+
 export default function Contact({ lang, dict }: ContactProps) {
-  const [state, handleSubmit] = useForm("xandddko") // Replace with your Formspree form ID
+  const [state, handleSubmit] = useForm(FORMSPREE_FORM_ID)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: ''
   })
+  /**
+   * Honeypot. Real users never see or fill this field; bots that fill every
+   * input they find do. It is hidden from sight *and* from assistive
+   * technology, so it never affects a genuine submission.
+   */
+  const [website, setWebsite] = useState('')
+  const lastSubmit = useRef(0)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    const limit = LIMITS[name as keyof typeof LIMITS]
+    setFormData(prev => ({
+      ...prev,
+      [name]: limit ? value.slice(0, limit) : value,
+    }))
   }
 
   const resetForm = () => {
     setFormData({ name: '', email: '', subject: '', message: '' })
+    setWebsite('')
+  }
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    // A filled honeypot means a bot: pretend to succeed, send nothing.
+    if (website) {
+      event.preventDefault()
+      event.stopPropagation()
+      return
+    }
+    // Throttle repeat submissions.
+    const now = Date.now()
+    if (now - lastSubmit.current < SUBMIT_COOLDOWN_MS) {
+      event.preventDefault()
+      return
+    }
+    lastSubmit.current = now
+    handleSubmit(event)
   }
 
   if (state.succeeded) {
@@ -196,10 +240,24 @@ export default function Contact({ lang, dict }: ContactProps) {
                 {dict.contact.form.heading}
                 </h3>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                <form onSubmit={onSubmit} className="flex flex-col gap-6">
+                {/* Honeypot — hidden from people, tempting to bots. */}
+                <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
+                    <label htmlFor="contact-website">Website</label>
+                    <input
+                        type="text"
+                        id="contact-website"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={website}
+                        onChange={e => setWebsite(e.target.value)}
+                    />
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                         {dict.contact.form.name}
                     </label>
                     <input
@@ -209,13 +267,15 @@ export default function Contact({ lang, dict }: ContactProps) {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
+                        maxLength={LIMITS.name}
+                        autoComplete="name"
                         placeholder={dict.contact.form.namePlaceholder}
-                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                        className="input"
                     />
                     <ValidationError prefix="Name" field="name" errors={state.errors} />
                     </div>
                     <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                         {dict.contact.form.email}
                     </label>
                     <input
@@ -225,15 +285,17 @@ export default function Contact({ lang, dict }: ContactProps) {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
+                        maxLength={LIMITS.email}
+                        autoComplete="email"
                         placeholder={dict.contact.form.emailPlaceholder}
-                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                        className="input"
                     />
                     <ValidationError prefix="Email" field="email" errors={state.errors} />
                     </div>
                 </div>
 
                 <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
                     {dict.contact.form.subject}
                     </label>
                     <input
@@ -243,14 +305,15 @@ export default function Contact({ lang, dict }: ContactProps) {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
+                    maxLength={LIMITS.subject}
                     placeholder={dict.contact.form.subjectPlaceholder}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                    className="input"
                     />
                     <ValidationError prefix="Subject" field="subject" errors={state.errors} />
                 </div>
 
                 <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                     {dict.contact.form.message}
                     </label>
                     <textarea
@@ -260,21 +323,27 @@ export default function Contact({ lang, dict }: ContactProps) {
                     value={formData.message}
                     onChange={handleInputChange}
                     required
+                    maxLength={LIMITS.message}
                     placeholder={dict.contact.form.messagePlaceholder}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                    className="textarea"
                     />
                     <ValidationError prefix="Message" field="message" errors={state.errors} />
                 </div>
+
+                <p className="text-xs leading-relaxed text-foreground-muted">
+                    {dict.contact.form.privacyNote ||
+                        'Your message is sent to Formspree, a third-party delivery service, and is used only to reply to you. Please do not include sensitive information.'}
+                </p>
 
                 <motion.button
                     type="submit"
                     disabled={state.submitting}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-brand text-white font-semibold py-4 px-6 rounded-lg  transition-all duration-300 shadow-lg flex items-center justify-center"
+                    className="btn btn-primary w-full py-4 text-base"
                 >
                     {state.submitting ? (
-                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-current"></div>
                     ) : (
                     <>
                         <Send className="w-5 h-5 mr-2" />

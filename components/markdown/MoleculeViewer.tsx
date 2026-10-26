@@ -23,6 +23,12 @@ const STYLE_MAP: Record<string, any> = {
   }),
 }
 
+/** A PDB entry ID is exactly four alphanumeric characters. */
+const PDB_ID_RE = /^[0-9A-Z]{4}$/
+
+/** Refuse to load an implausibly large structure file. */
+const MAX_PDB_BYTES = 8 * 1024 * 1024
+
 export default function MoleculeViewer({
   pdbId,
   style = 'cartoon',
@@ -37,15 +43,21 @@ export default function MoleculeViewer({
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const displayName = label || `Protein: ${pdbId.toUpperCase()}`
-  const pdbUrl = `https://www.rcsb.org/structure/${pdbId.toUpperCase()}`
+  // The identifier comes from lesson content, so it is validated before it is
+  // used to build a URL or a fetch against a third-party file store.
+  const pdbIdSafe = typeof pdbId === 'string' ? pdbId.trim().toUpperCase() : ''
+  const validPdbId = PDB_ID_RE.test(pdbIdSafe)
+
+  const displayName = label || (validPdbId ? `Protein: ${pdbIdSafe}` : 'Protein')
+  const pdbUrl = validPdbId ? `https://www.rcsb.org/structure/${pdbIdSafe}` : 'https://www.rcsb.org/'
 
   useEffect(() => {
-    if (!containerRef.current || initializedRef.current) return
+    if (!containerRef.current || initializedRef.current || !validPdbId) return
     initializedRef.current = true
 
     const container = containerRef.current
     let cancelled = false
+    const controller = new AbortController()
 
     const load = async () => {
       try {
@@ -59,26 +71,41 @@ export default function MoleculeViewer({
         })
         viewerRef.current = viewer
 
-        const response = await fetch(`https://files.rcsb.org/download/${pdbId.toUpperCase()}.pdb`)
-        if (!response.ok) throw new Error(`PDB ${pdbId} not found (${response.status})`)
+        const response = await fetch(`https://files.rcsb.org/download/${pdbIdSafe}.pdb`, {
+          signal: controller.signal,
+        })
+        if (!response.ok) throw new Error(`PDB ${pdbIdSafe} not found (${response.status})`)
         if (cancelled) return
+
+        // Guard against an unexpectedly large response.
+        const declaredLength = Number(response.headers.get('content-length') ?? '0')
+        if (declaredLength > MAX_PDB_BYTES) {
+          throw new Error('Structure file is too large to render')
+        }
 
         const pdbData = await response.text()
         if (cancelled) return
+        if (pdbData.length > MAX_PDB_BYTES) {
+          throw new Error('Structure file is too large to render')
+        }
 
         viewer.addModel(pdbData, 'pdb')
 
-        const styleFn = STYLE_MAP[style] || STYLE_MAP.cartoon
+        // Only a known style may be applied — an unknown key must not resolve
+        // to something inherited from Object.prototype.
+        const styleFn = Object.prototype.hasOwnProperty.call(STYLE_MAP, style)
+          ? STYLE_MAP[style]
+          : STYLE_MAP.cartoon
         viewer.setStyle({}, styleFn(color))
         viewer.zoomTo()
         viewer.render()
 
         if (!cancelled) setLoading(false)
       } catch (err) {
-        if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Failed to load molecule')
-          setLoading(false)
-        }
+        if (cancelled) return
+        if (err instanceof DOMException && err.name === 'AbortError') return
+        setError(err instanceof Error ? err.message : 'Failed to load molecule')
+        setLoading(false)
       }
     }
 
@@ -86,12 +113,13 @@ export default function MoleculeViewer({
 
     return () => {
       cancelled = true
+      controller.abort()
       if (viewerRef.current?.spin) viewerRef.current.spin(false)
       if (container) container.innerHTML = ''
       viewerRef.current = null
       initializedRef.current = false
     }
-  }, [pdbId, style, color, background])
+  }, [pdbIdSafe, validPdbId, style, color, background])
 
   return (
     <div className="my-8 rounded-xl border bg-card shadow-sm overflow-hidden">
@@ -119,7 +147,7 @@ export default function MoleculeViewer({
         {error && (
           <div className="absolute inset-0 flex items-center justify-center bg-muted/30 z-10">
             <div className="flex flex-col items-center gap-3 text-center px-4">
-              <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>
+              <p className="text-danger text-sm">{error}</p>
               <a
                 href={pdbUrl}
                 target="_blank"
@@ -135,7 +163,7 @@ export default function MoleculeViewer({
       </div>
       <div className="px-4 py-2 border-t bg-muted/30 flex items-center gap-2">
         <span className="text-xs text-muted-foreground">
-          Structure: <a href={pdbUrl} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors font-mono">{pdbId.toUpperCase()}</a>
+          Structure: <a href={pdbUrl} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors font-mono">{pdbIdSafe}</a>
         </span>
         <span className="text-xs text-muted-foreground ml-auto">
           Drag to rotate · Scroll to zoom · Right-click to pan

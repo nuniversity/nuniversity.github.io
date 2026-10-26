@@ -7,9 +7,10 @@
 
 ## 0. Implementation status (as of 2026-10-26)
 
-Development was paused after the **Phase 1 (security) foundations** landed. The plan below is unchanged and remains the roadmap; this section records what is already in the tree.
+Work is proceeding through the phases below. This section tracks what has
+landed and what is next.
 
-### Landed — Phase 1 (partial)
+### Landed — Phase 1 (security foundations)
 
 | Task | Status | Notes |
 |------|--------|-------|
@@ -18,25 +19,53 @@ Development was paused after the **Phase 1 (security) foundations** landed. The 
 | 1.7 Raw-access component migration | ✅ Done | `Providers.tsx`, `FlashcardMaker.tsx`, `HabitTracker.tsx`, `PomodoroTimer.tsx`, `RoadmapTimeline.tsx`, `number-sequence-client.tsx` now use the shared helper **with shape validation**. |
 | 1.8 Theme value validation | ✅ Done | `readStoredTheme()` accepts only `'light'`/`'dark'`; the unchecked `as` cast is gone. |
 | 1.9 Cookie attributes | ✅ Done | `SameSite=Lax` + conditional `Secure` (HTTPS-only, so local previews still work). |
-| 1.3 Certificate-name hardening | ✅ Done | 400 ms debounce, 120-char cap, trim/collapse on read, "Remove" button, `clearCertName()`. New dictionary keys `saved_locally`, `clear_name`, `privacy_note` in en/pt/es. |
+| 1.3 Certificate-name hardening | ✅ Done | 400 ms debounce, 120-char cap, trim/collapse on read, "Remove" button, `clearCertName()`. New dictionary keys in en/pt/es. |
 
-### Not yet started
+### Landed — Phase 5 (design system + UX/UI), revised
 
-Tasks **1.10–1.15** (contact form hardening, CSP meta, embed allowlists, iframe sandboxing) and **Phases 0, 2–6** remain to be done.
+| Task | Status | Notes |
+|------|--------|-------|
+| 5A.1–5A.3 Three-layer token architecture | ✅ Done | `app/globals.css` rewritten: primitives → semantic → component/section. **53 hardcoded hex → 0.** |
+| 5A.4 daisyUI removed | ✅ Done | Only 2 usages existed. Global CSS **152 KB → ~101 KB**. |
+| 5A.5 Hardcoded greys → tokens | ✅ Done | The Tailwind `gray` ramp is aliased to the slate values behind the tokens, so the 1,000-odd existing `gray-*` utilities sit in the same family as the semantic tokens. |
+| 5A.7 Reading measure | ✅ Done | Lesson prose capped at 68ch via `.prose-measure`. |
+| 5A.10 Colour map | ✅ Done | **New:** one colour per top-level section, in `lib/navigation/sections.ts` + `--section-*` tokens. Applied to the nav indicator, section headers, card tiles and search results. |
+| 5A.11 Brand palette | ✅ Done | Blue → cyan, replacing the blue→violet gradient that read as Nubank. All brand surfaces now use `--brand-gradient`. |
+| 5B.1 "NEW" badges removed | ✅ Done | They were on 7 of 8 nav items. |
+| 5B.2–5B.5 Header/footer redesign | ✅ Done | Sticky header with scroll shadow, condensed to **2 items + Explore**, Explore mega-menu with colour-coded cards, accessible mobile menu. |
+| 5C.1 Hero redesign | ✅ Done | Light editorial surface, ambient brand light, **real type-ahead search**, single primary CTA. |
+| 5C.6 ContinueLearning repositioned | ✅ Done | Now floats over the foot of the hero; redesigned with a progress bar and `role="progressbar"`. |
+| 5C.7 SectionMap | ✅ Done | New — the 8-tile colour map on the home page. |
+| 5C.8 Stats | ✅ Done | Moved to a closing band with animated counters (`useCountUp`). |
+| 5C.9 Search metadata | ✅ Done | The index now carries course title, position, area, difficulty, duration, category, certification, language pair. Rendered in both the hero type-ahead and the ⌘K palette. |
+| 5C.10 Spotlight carousel | ⏸ Parked | `components/home/Spotlight.tsx` is **kept but not rendered** — it may return in a future iteration. |
+| 5C.11 Topic marquee | ❌ Removed | The infinite scrolling subject strip was dropped at the user's request; the component and its CSS were deleted. |
+| — | ✅ Extra | `scripts/verify-css.mjs` added to the build: fails if any Tailwind class used in source is missing from the compiled CSS (currently **373/373** resolve). It has already caught real bugs — see §9. |
 
-### Verification of the landed work
+### Landed — Phase 4 (accessibility), substantially
 
-| Check | Result |
-|-------|--------|
-| `npx tsc --noEmit` | ✅ 0 errors |
-| `npm test` | ✅ **1,253 passed** / 116 skipped (no regression) |
-| `npm run lint` | ✅ 0 errors, 0 warnings |
-| `npm run build` | ✅ static export succeeds |
-| Prerendered routes | ✅ **1,632** (unchanged) |
-| Dynamic routes with a fallback | ✅ **0** (unchanged) |
-| `out/**/*.html` | ✅ **1,633** (unchanged) |
-| `out/sitemap.xml` URLs | ✅ **1,606** (unchanged) |
-| Raw `localStorage` calls outside the shared helper | ✅ **0** |
+| Task | Status | Notes |
+|------|--------|-------|
+| 4.1 Skip link | ✅ Done | `app/[lang]/layout.tsx` + `<main id="main-content">`. |
+| 4.2 Focus system | ✅ Done | Global `:focus-visible` baseline; bare `focus:outline-none` removed. |
+| 4.3 `aria-current` | ✅ Done | On every nav link, with an `exact` flag for the locale root (which otherwise stayed active on every route). |
+| 4.4 Command palette dialog | ✅ Done | Real close button, focus trap, focus restoration, `role="dialog"`, `aria-modal`. |
+| 4.6 Reduced motion | ✅ Done | Global block; the carousel and counters honour it. |
+| 4.11 Motion/stacking regression test | ✅ Done | `tests/ui/motion-stacking.test.ts` — entrance keyframes must end on `transform: none` so they leave no stacking context behind. |
+
+### Next — by plan order
+
+| Priority | Task | Finding | Effort |
+|----------|------|---------|--------|
+| 1 | **PERF-01** — replace the `Prism` bundle with per-language registration | High | 3 h |
+| 2 | **PERF-04** — resize/convert the 2.5 MB team photo | Medium | 0.5 h |
+| 3 | **ARCH-04** — add `not-found.tsx` / `error.tsx` boundaries | High | 2 h |
+| 4 | **SEC-03** — contact form honeypot + limits | Medium | 3 h |
+| 5 | **SEC-01** — CSP `<meta>` + verification script | Medium | 3 h |
+| 6 | **SEC-08/09** — embed allowlists + iframe sandbox | Medium | 2 h |
+| 7 | **PERF-02 / ARCH-08** — split the dictionary per namespace | High | 6 h |
+| 8 | **Phase 0** — CI hardening, coverage thresholds, `middleware.ts` | Medium | 4 h |
+| 9 | **Phase 6** — SEO (hreflang, JSON-LD), dependency upgrades | Medium | 26 h |
 
 ---
 
