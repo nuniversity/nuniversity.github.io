@@ -16,8 +16,10 @@ import {
   CornerDownLeft,
   ArrowUp,
   ArrowDown,
+  X,
 } from 'lucide-react'
 import { searchDocs, groupDocs, type SearchDoc, type SearchDocType } from '@/lib/search/matcher'
+import { resultChips, resultContext } from '@/lib/search/result-meta'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
 
@@ -43,6 +45,8 @@ const TYPE_ICON: Record<SearchDocType, typeof BookOpen> = {
 export default function CommandPalette({ lang, dict, open, onOpen, onClose }: CommandPaletteProps) {
   const router = useRouter()
   const inputRef = useRef<HTMLInputElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const restoreFocusRef = useRef<HTMLElement | null>(null)
   const cacheRef = useRef<Map<string, SearchDoc[]>>(new Map())
   const [query, setQuery] = useState('')
   const [docs, setDocs] = useState<SearchDoc[] | null>(null)
@@ -111,6 +115,50 @@ export default function CommandPalette({ lang, dict, open, onOpen, onClose }: Co
     }
   }, [open])
 
+  // Remember what had focus before opening, and give it back on close.
+  useEffect(() => {
+    if (open) {
+      restoreFocusRef.current = document.activeElement as HTMLElement | null
+      return
+    }
+    const previous = restoreFocusRef.current
+    restoreFocusRef.current = null
+    if (previous && typeof previous.focus === 'function') {
+      previous.focus()
+    }
+  }, [open])
+
+  // Escape closes the dialog from anywhere inside it, and Tab is trapped
+  // inside the dialog so keyboard focus cannot wander into the page behind.
+  useEffect(() => {
+    if (!open) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        onClose()
+        return
+      }
+      if (event.key !== 'Tab') return
+      const dialog = dialogRef.current
+      if (!dialog) return
+      const focusable = dialog.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [open, onClose])
+
   const results = useMemo(
     () => (docs && query.trim() ? searchDocs(docs, query, 8) : []),
     [docs, query]
@@ -171,18 +219,16 @@ export default function CommandPalette({ lang, dict, open, onOpen, onClose }: Co
 
   return (
     <div className="fixed inset-0 z-[60] flex items-start justify-center p-4 pt-[12vh]" data-testid="command-palette">
-      <div className="absolute inset-0 bg-black/50" onClick={onClose} aria-hidden="true" />
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label={dict.search.trigger}
-        onKeyDown={event => {
-          if (event.key === 'Escape') onClose()
-        }}
-        className="relative w-full max-w-xl bg-card border rounded-2xl shadow-2xl overflow-hidden"
+        className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-card shadow-2xl animate-scale-in"
       >
-        <div className="flex items-center gap-3 border-b px-4">
-          <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
+        <div className="flex items-center gap-3 border-b border-border px-4">
+          <Search className="h-4 w-4 shrink-0 text-foreground-subtle" aria-hidden="true" />
           <input
             ref={inputRef}
             autoFocus
@@ -197,14 +243,24 @@ export default function CommandPalette({ lang, dict, open, onOpen, onClose }: Co
             value={query}
             onChange={event => setQuery(event.target.value)}
             onKeyDown={onKeyDown}
-            className="flex-1 bg-transparent py-3.5 text-sm outline-none placeholder:text-muted-foreground"
+            className="flex-1 bg-transparent py-3.5 text-sm text-foreground outline-none placeholder:text-foreground-subtle"
             data-testid="search-input"
           />
           {query.trim() && docs && (
-            <span className="shrink-0 text-xs text-muted-foreground" data-testid="search-count">
+            <span className="shrink-0 text-xs text-foreground-muted" data-testid="search-count">
               {dict.search.results.replace('{n}', String(flat.length))}
             </span>
           )}
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={dict.search.close || 'Close search'}
+            title={dict.search.close || 'Close search'}
+            data-testid="search-close"
+            className="-mr-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-foreground-muted transition-colors duration-150 hover:bg-surface-sunken hover:text-foreground"
+          >
+            <X className="h-4 w-4" aria-hidden="true" />
+          </button>
         </div>
 
         <div className="max-h-[50vh] overflow-y-auto p-2" id="search-results" role="listbox" aria-label={dict.search.trigger}>
@@ -225,7 +281,10 @@ export default function CommandPalette({ lang, dict, open, onOpen, onClose }: Co
                 <CornerDownLeft className="h-3 w-3" />
                 {dict.search.hint_open}
               </span>
-              <span>{dict.search.hint_close}</span>
+              <span className="inline-flex items-center gap-1">
+                <kbd className="rounded border border-border bg-surface-sunken px-1 font-sans text-[10px]">Esc</kbd>
+                {dict.search.hint_close}
+              </span>
             </div>
           )}
           {groups.map(group => (
@@ -237,6 +296,8 @@ export default function CommandPalette({ lang, dict, open, onOpen, onClose }: Co
                 const index = flat.indexOf(doc)
                 const Icon = TYPE_ICON[doc.type]
                 const external = /^https?:\/\//i.test(doc.url)
+                const context = resultContext(doc)
+                const chips = resultChips(doc)
                 return (
                   <button
                     key={doc.id}
@@ -248,18 +309,45 @@ export default function CommandPalette({ lang, dict, open, onOpen, onClose }: Co
                     data-testid="search-result"
                     onMouseEnter={() => setActive(index)}
                     onClick={() => navigate(doc)}
-                    className={`w-full flex items-center gap-3 rounded-lg px-3 py-2 text-left ${
-                      index === active ? 'bg-accent' : ''
+                    className={`w-full flex items-start gap-3 rounded-lg px-3 py-2 text-left transition-colors duration-150 ${
+                      index === active ? 'bg-primary-soft' : 'hover:bg-surface-sunken'
                     }`}
                   >
-                    <Icon className="h-4 w-4 shrink-0 text-muted-foreground" />
+                    <Icon className="mt-0.5 h-4 w-4 shrink-0 text-foreground-subtle" aria-hidden="true" />
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-medium">{doc.title}</span>
+                      <span className="block truncate text-sm font-medium text-foreground">
+                        {doc.title}
+                      </span>
+                      {context && (
+                        <span className="block truncate text-xs text-section-courses">{context}</span>
+                      )}
                       {doc.description && (
-                        <span className="block truncate text-xs text-muted-foreground">{doc.description}</span>
+                        <span className="block truncate text-xs text-foreground-muted">
+                          {doc.description}
+                        </span>
+                      )}
+                      {chips.length > 0 && (
+                        <span className="mt-1 flex flex-wrap items-center gap-1">
+                          {chips.map(chip => (
+                            <span
+                              key={chip.label}
+                              className={`inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
+                                chip.tone === 'success'
+                                  ? 'bg-success-soft text-success-foreground'
+                                  : chip.tone === 'warning'
+                                    ? 'bg-warning-soft text-warning-foreground'
+                                    : chip.tone === 'danger'
+                                      ? 'bg-danger-soft text-danger-foreground'
+                                      : 'bg-surface-sunken text-foreground-muted'
+                              }`}
+                            >
+                              {chip.label}
+                            </span>
+                          ))}
+                        </span>
                       )}
                     </span>
-                    {external && <ExternalLink className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />}
+                    {external && <ExternalLink className="mt-0.5 h-3.5 w-3.5 shrink-0 text-foreground-subtle" />}
                   </button>
                 )
               })}

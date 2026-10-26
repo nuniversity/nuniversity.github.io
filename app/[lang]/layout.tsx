@@ -122,16 +122,18 @@ export default async function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        <a href="#main-content" className="skip-link">
+          {dict.navigation.skip_to_content || 'Skip to content'}
+        </a>
         <Providers>
           <div className="min-h-screen flex flex-col">
             <Header lang={params.lang} dict={dict} />
-            <main className="flex-grow">
+            <main id="main-content" tabIndex={-1} className="flex-grow focus:outline-none">
               {children}
             </main>
             <Footer lang={params.lang} dict={dict} />
           </div>
         </Providers>
-        
       </body>
     </html>
   )

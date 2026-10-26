@@ -23,7 +23,7 @@ function tpl(template: string, vars?: Record<string, string | number>): string {
 }
 
 const KIND_BADGES: Record<QuizKind, string> = {
-  certification: 'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300',
+  certification: 'bg-primary-soft text-primary-soft-foreground dark:bg-primary/15 dark:text-primary',
   practice: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300',
   'course-exam': 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
 }
@@ -83,7 +83,7 @@ export function QuizzesClient({ lang, quizzes, dict }: QuizzesClientProps) {
     <div className="container-custom py-12">
       <div className="max-w-6xl mx-auto">
         <div className="mb-10 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-section-quizzes shadow-lg shadow-black/10 mb-4">
             <Trophy className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2">

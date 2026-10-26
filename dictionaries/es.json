@@ -115,6 +115,7 @@
   },
   "navigation": {
     "home": "Inicio",
+    "skip_to_content": "Ir al contenido",
     "courses": "Cursos",
     "tools": "Herramientas",
     "games": "Juegos",
@@ -124,7 +125,13 @@
     "about": "Acerca de",
     "contact": "Contacto",
     "languages": "Idiomas",
-    "more": "Más"
+    "more": "Más",
+    "explore": "Explorar",
+    "explore_hint": "Descubre material seleccionado",
+    "library_hint": "Recursos externos seleccionados",
+    "roadmaps_hint": "Rutas de aprendizaje estructuradas",
+    "languages_hint": "Actividades de vocabulario y fluidez",
+    "quizzes_hint": "Cuestionarios de certificación y simulacros"
   },
   "hero": {
     "badge": "Plataforma de Aprendizaje Interactivo",
@@ -139,7 +146,8 @@
       "coding": "Programación Interactiva",
       "tools": "Herramientas de Estudio",
       "courses": "Cursos en Video"
-    }
+    },
+    "search_placeholder": "¿Qué quieres aprender?"
   },
   "features": {
     "title": "Todo Lo Que Necesitas Para",
@@ -382,7 +390,7 @@
     "try_different_filters": "Intenta ajustar los filtros",
     "check_back_soon": "Vuelve pronto para ver nuevo contenido",
     "clear_filters": "Borrar filtros",
-    "start_learning": "Comenzar →",
+    "start_learning": "Comenzar",
     "labels": {
       "level": "Nivel",
       "duration": "Duración",
@@ -750,7 +758,10 @@
       "code": "ID del Certificado",
       "name_placeholder": "Escribe tu nombre para el certificado",
       "required_name": "Escribe tu nombre para emitir el certificado",
-      "print": "Imprimir certificado"
+      "print": "Imprimir certificado",
+      "saved_locally": "Guardado solo en este navegador",
+      "clear_name": "Eliminar",
+      "privacy_note": "Tu nombre se guarda solo en este navegador y nunca se envía a un servidor."
     },
     "history": {
       "title": "Historial de Intentos",
@@ -794,7 +805,7 @@
     "search_placeholder": "Buscar herramientas...",
     "no_results": "No se encontraron herramientas",
     "no_tools": "Aún no hay herramientas disponibles",
-    "try_tool": "Probar",
+    "try_tool": "Probar Herramienta",
     "total_tools": "herramientas",
     "categories_count": "categorías",
     "view_all": "Ver Todas las Herramientas",
@@ -1078,7 +1089,7 @@
       "confirm_delete_deck": "¿Eliminar este mazo y todas sus cartas?",
       "title": "Creador de Flashcards",
       "subtitle": "Crea, estudia y domina con repetición espaciada",
-      "back_to_decks": "← Mazos",
+      "back_to_decks": "Mazos",
       "study": "Estudiar",
       "your_decks": "Tus Mazos",
       "cards_to_review": "{n} cartas · {m} para revisar",
@@ -1450,7 +1461,7 @@
     "tryDifferentSearch": "Intenta con un término de búsqueda diferente",
     "checkBackSoon": "Vuelve pronto para nuevas rutas",
     "clearSearch": "Limpiar Búsqueda",
-    "startLearning": "Comenzar a Aprender →",
+    "startLearning": "Comenzar a Aprender",
     "backToRoadmaps": "Volver a Rutas",
     "totalRoadmaps": "rutas",
     "totalSteps": "total de pasos",
@@ -1629,7 +1640,7 @@
     "results": "{n} resultados",
     "hint_navigate": "Navegar",
     "hint_open": "Abrir",
-    "hint_close": "Cerrar"
+    "hint_close": "para cerrar"
   },
   "lesson": {
     "outline_title": "En esta página",

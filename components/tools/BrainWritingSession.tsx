@@ -189,13 +189,13 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
 
   if (currentRound === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 py-12 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 py-12 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-mark mb-4">
               <Lightbulb className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold mb-2 bg-brand bg-clip-text text-transparent">
               {t.title || 'Brain-Writing Session'}
             </h1>
             <p className="text-muted-foreground text-lg">
@@ -211,7 +211,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                 value={sessionName}
                 onChange={(e) => setSessionName(e.target.value)}
                 placeholder={t.session_name_placeholder || 'e.g., Product Innovation Workshop'}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 outline-none"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary outline-none"
               />
             </div>
 
@@ -223,8 +223,8 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                     key={key}
                     className={`flex items-start p-4 rounded-lg border-2 cursor-pointer transition-all ${
                       method === key
-                        ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20'
-                        : 'border-gray-200 dark:border-gray-700 hover:border-purple-300'
+                        ? 'border-primary bg-primary-soft'
+                        : 'border-gray-200 dark:border-gray-700 hover:border-primary/40'
                     }`}
                   >
                     <input
@@ -253,7 +253,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                   max="10"
                   value={rounds}
                   onChange={(e) => setRounds(parseInt(e.target.value) || 1)}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 outline-none"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary outline-none"
                 />
               </div>
               <div>
@@ -264,7 +264,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                   max="30"
                   value={timePerRound}
                   onChange={(e) => setTimePerRound(parseInt(e.target.value) || 1)}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 outline-none"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary outline-none"
                 />
               </div>
             </div>
@@ -278,11 +278,11 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                   onChange={(e) => setNewParticipant(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && addParticipant()}
                   placeholder={t.participant_placeholder || 'Enter participant name'}
-                  className="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 outline-none"
+                  className="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary outline-none"
                 />
                 <button
                   onClick={addParticipant}
-                  className="px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors flex items-center gap-2"
+                  className="px-6 py-3 rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors flex items-center gap-2"
                 >
                   <Plus className="w-4 h-4" />
                   {tc.add || 'Add'}
@@ -294,7 +294,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                   {participants.map((p) => (
                     <div
                       key={p}
-                      className="flex items-center gap-2 px-3 py-2 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300"
+                      className="flex items-center gap-2 px-3 py-2 rounded-full bg-primary-soft text-primary-soft-foreground dark:text-primary"
                     >
                       <Users className="w-4 h-4" />
                       <span>{p}</span>
@@ -317,7 +317,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
             <button
               onClick={startSession}
               disabled={participants.length === 0 || !sessionName}
-              className="w-full py-4 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-4 rounded-lg bg-brand text-white font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {t.start_session || 'Start Brain-Writing Session'}
               <ChevronRight className="w-5 h-5" />
@@ -329,7 +329,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -339,8 +339,8 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
             </div>
             
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-100 dark:bg-purple-900/30">
-                <Clock className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-soft/30">
+                <Clock className="w-5 h-5 text-primary dark:text-primary" />
                 <span className="font-mono text-xl font-bold">{formatTime(timeLeft)}</span>
               </div>
               
@@ -403,10 +403,10 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
           {Object.entries(ideas).map(([participant, participantIdeas]) => (
             <div
               key={participant}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border-2 border-purple-200 dark:border-purple-800"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border-2 border-primary/25 dark:border-primary/30"
             >
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-white font-bold">
+                <div className="w-10 h-10 rounded-full bg-brand-mark flex items-center justify-center text-white font-bold">
                   {participant.charAt(0).toUpperCase()}
                 </div>
                 <h3 className="font-semibold text-lg">{participant}</h3>
@@ -422,7 +422,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
                       value={idea}
                       onChange={(e) => updateIdea(participant, index, e.target.value)}
                       placeholder={t.idea_placeholder || 'Enter your idea...'}
-                      className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 outline-none resize-none"
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary outline-none resize-none"
                       rows={3}
                     />
                   </div>
@@ -439,7 +439,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
             <p className="text-muted-foreground mb-4">{t.ready_next_round || 'Ready to move to the next round?'}</p>
             <button
               onClick={nextRound}
-              className="px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition-all flex items-center gap-2 mx-auto"
+              className="px-8 py-3 rounded-lg bg-brand text-white font-semibold hover:shadow-lg transition-all flex items-center gap-2 mx-auto"
             >
               {tpl(t.start_round || 'Start Round {n}', { n: currentRound + 1 })}
               <ChevronRight className="w-5 h-5" />
@@ -473,7 +473,7 @@ const BrainWritingSession = ({ lang = 'en', dict = {} }: BrainWritingSessionProp
               </button>
               <button
                 onClick={resetSession}
-                className="px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors flex items-center gap-2"
+                className="px-6 py-3 rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors flex items-center gap-2"
               >
                 <RefreshCw className="w-5 h-5" />
                 {t.new_session || 'New Session'}

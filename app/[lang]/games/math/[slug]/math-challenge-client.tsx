@@ -81,7 +81,7 @@ export function MathChallengeClient({ lang, game, dict }: MathChallengeClientPro
   const ops = [
     { key: 'add', label: '+', color: 'bg-green-600' },
     { key: 'subtract', label: '−', color: 'bg-blue-600' },
-    { key: 'multiply', label: '×', color: 'bg-purple-600' },
+    { key: 'multiply', label: '×', color: 'bg-primary' },
     { key: 'divide', label: '÷', color: 'bg-orange-600' },
   ]
 

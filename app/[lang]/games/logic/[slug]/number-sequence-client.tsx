@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Trophy, RotateCcw, ArrowLeft, Brain, Star, Target, Zap, Eye, EyeOff } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
+import { safeGet, safeSet } from '@/lib/storage/safe-storage'
 import Link from 'next/link'
 
 interface NumberSequenceClientProps {
@@ -42,8 +43,11 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
   ]
 
   useEffect(() => {
-    const saved = localStorage.getItem('number_sequence_highscore')
-    if (saved) { try { setHighScore(parseInt(saved)); } catch {} }
+    const saved = safeGet('number_sequence_highscore')
+    if (saved) {
+      const parsed = Number.parseInt(saved, 10)
+      if (Number.isFinite(parsed) && parsed >= 0) setHighScore(parsed)
+    }
   }, [])
 
   const generateSequence = useCallback((length: number) => {
@@ -111,7 +115,7 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
       if (newLives <= 0) {
         if (score > highScore) {
           setHighScore(score)
-          localStorage.setItem('number_sequence_highscore', score.toString())
+          safeSet('number_sequence_highscore', score.toString())
         }
         setGameMode('gameover')
       } else {
@@ -133,7 +137,7 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
         </Link>
 
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-mark mb-4">
             <Brain className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2">{game.title}</h1>
@@ -142,17 +146,17 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
 
         {gameMode === 'config' && (
           <div className="bg-card border rounded-2xl p-8 text-center">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 flex items-center justify-center mx-auto mb-6">
-              <Brain className="w-12 h-12 text-purple-600" />
+            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary-soft to-cyan-100/60 dark:from-primary/15 dark:to-cyan-900/20 flex items-center justify-center mx-auto mb-6">
+              <Brain className="w-12 h-12 text-primary" />
             </div>
             <h2 className="text-2xl font-bold mb-4">{g.how_to_play || 'How to Play'}</h2>
             <ul className="text-left space-y-2 mb-8 text-muted-foreground">
               {instr.map((item: string, i: number) => (
-                <li key={i} className="flex items-start gap-2"><span className="text-purple-600 mt-1">•</span> {t(item, { lives })}</li>
+                <li key={i} className="flex items-start gap-2"><span className="text-primary mt-1">•</span> {t(item, { lives })}</li>
               ))}
             </ul>
             {highScore > 0 && <p className="text-lg font-semibold mb-6">{t(g.high_score || '🏆 High Score: {score}', { score: highScore })}</p>}
-            <button onClick={startGame} className="w-full py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold hover:shadow-lg transition-all">
+            <button onClick={startGame} className="w-full py-4 rounded-xl bg-brand text-white text-lg font-bold hover:shadow-lg transition-all">
               {g.start_game || 'Start Game'}
             </button>
           </div>
@@ -214,9 +218,9 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
 
             {/* Progress */}
             <div className="flex justify-center gap-1 mb-4">
-              <Eye className="w-4 h-4 text-purple-600" />
+              <Eye className="w-4 h-4 text-primary" />
               {sequence.slice(0, 6).map((_, i) => (
-                <div key={i} className={`w-3 h-3 rounded-full ${i <= displayIndex && gameMode === 'memorize' ? 'bg-purple-600' : 'bg-gray-300 dark:bg-gray-600'}`} />
+                <div key={i} className={`w-3 h-3 rounded-full ${i <= displayIndex && gameMode === 'memorize' ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'}`} />
               ))}
               {sequence.length > 6 && <span className="text-xs text-muted-foreground">+{sequence.length - 6}</span>}
             </div>

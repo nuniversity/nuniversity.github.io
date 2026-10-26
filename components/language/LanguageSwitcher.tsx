@@ -35,9 +35,11 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: Loc
       }
     }
     const newPathname = '/' + [newLocale, ...segments].join('/')
-    
-    // Set cookie and navigate
-    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`
+
+    // Persist the locale preference for the root redirect stub.
+    // `Secure` is only added over HTTPS so local http previews keep working.
+    const secure = typeof window !== 'undefined' && window.location.protocol === 'https:' ? '; Secure' : ''
+    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax${secure}`
     router.push(newPathname)
     setIsOpen(false)
   }

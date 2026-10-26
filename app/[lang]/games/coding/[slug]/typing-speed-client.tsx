@@ -258,8 +258,8 @@ export function TypingSpeedClient({ lang, game, dict }: TypingSpeedClientProps) 
                 <div className="text-3xl font-bold text-blue-600">{accuracy}%</div>
                 <div className="text-sm text-muted-foreground">{g.stats?.accuracy || 'Accuracy'}</div>
               </div>
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 rounded-xl p-4 border border-purple-200">
-                <div className="text-3xl font-bold text-purple-600">{charTyped}</div>
+              <div className="bg-gradient-to-br from-primary-soft to-cyan-50 dark:from-primary/10 rounded-xl p-4 border border-primary/25">
+                <div className="text-3xl font-bold text-primary">{charTyped}</div>
                 <div className="text-sm text-muted-foreground">{g.stats?.chars || 'Chars'}</div>
               </div>
               <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 rounded-xl p-4 border border-amber-200">

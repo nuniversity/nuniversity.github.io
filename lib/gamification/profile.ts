@@ -6,45 +6,21 @@ import {
   XP_GAINS,
   XP_PER_LEVEL,
 } from './types'
+import { createSafeMap, isSafeKey, readJson, safeRemove, safeSet } from '@/lib/storage/safe-storage'
 
 export const PROFILE_KEY = 'v1:profile'
 
 const EMPTY_PROFILE: GamificationProfile = { xp: 0, badges: {}, streak: { current: 0, best: 0, lastDay: null } }
 
-function safeGet(key: string): string | null {
-  if (typeof window === 'undefined') return null
-  try {
-    return window.localStorage.getItem(key)
-  } catch {
-    return null
-  }
-}
-
-function safeSet(key: string, value: string): void {
-  if (typeof window === 'undefined') return
-  try {
-    window.localStorage.setItem(key, value)
-  } catch {
-    return
-  }
-}
-
-function safeRemove(key: string): void {
-  if (typeof window === 'undefined') return
-  try {
-    window.localStorage.removeItem(key)
-  } catch {
-    return
-  }
-}
-
 export function sanitizeProfile(raw: unknown): GamificationProfile {
   if (typeof raw !== 'object' || raw === null) return { ...EMPTY_PROFILE, streak: { ...EMPTY_PROFILE.streak } }
   const value = raw as Record<string, unknown>
   const xp = typeof value.xp === 'number' && Number.isFinite(value.xp) && value.xp >= 0 ? Math.floor(value.xp) : 0
-  const badges: Record<string, string> = {}
+  // Prototype-less map: a stored `__proto__` key can never become a prototype.
+  const badges: Record<string, string> = createSafeMap<string>()
   if (typeof value.badges === 'object' && value.badges !== null) {
     for (const [id, at] of Object.entries(value.badges as Record<string, unknown>)) {
+      if (!isSafeKey(id)) continue
       if (typeof at === 'string') badges[id] = at
     }
   }
@@ -63,14 +39,9 @@ export function sanitizeProfile(raw: unknown): GamificationProfile {
 }
 
 export function getProfile(): GamificationProfile {
-  const raw = safeGet(PROFILE_KEY)
-  if (raw === null) return { ...EMPTY_PROFILE, streak: { ...EMPTY_PROFILE.streak } }
-  try {
-    return sanitizeProfile(JSON.parse(raw))
-  } catch {
-    safeRemove(PROFILE_KEY)
-    return { ...EMPTY_PROFILE, streak: { ...EMPTY_PROFILE.streak } }
-  }
+  const parsed = readJson(PROFILE_KEY, sanitizeProfile)
+  if (!parsed) return { ...EMPTY_PROFILE, streak: { ...EMPTY_PROFILE.streak } }
+  return parsed
 }
 
 export function saveProfile(profile: GamificationProfile): void {

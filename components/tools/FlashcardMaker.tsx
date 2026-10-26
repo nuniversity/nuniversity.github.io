@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Trash2, Edit2, Save, X, RotateCcw, BookOpen, ChevronLeft, ChevronRight, Star, Layers, Download, Upload, BarChart3, Sparkles } from 'lucide-react';
+import { Plus, Trash2, Edit2, Save, X, RotateCcw, BookOpen, ChevronLeft, ChevronRight, Star, Layers, Download, Upload, BarChart3, Sparkles, ArrowLeft } from 'lucide-react';
+import { readJson, writeJson } from '@/lib/storage/safe-storage';
 
 interface Flashcard {
   id: number;
@@ -56,9 +57,20 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
   const [studiedCount, setStudiedCount] = useState(0);
 
   useEffect(() => {
-    const saved = localStorage.getItem('flashcard_decks');
-    if (saved) {
-      try { setDecks(JSON.parse(saved)); } catch {}
+    const saved = readJson('flashcard_decks', (raw) => {
+      if (!Array.isArray(raw)) return null;
+      const decks = raw.filter(
+        (d): d is Deck =>
+          typeof d === 'object' &&
+          d !== null &&
+          typeof (d as Deck).id === 'number' &&
+          typeof (d as Deck).name === 'string' &&
+          Array.isArray((d as Deck).cards)
+      );
+      return decks;
+    });
+    if (saved && saved.length > 0) {
+      setDecks(saved);
     } else {
       const demo: Deck = {
         id: 1,
@@ -76,7 +88,7 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
   }, [t.demo_cards, t.demo_description, t.demo_name]);
 
   useEffect(() => {
-    if (decks.length > 0) localStorage.setItem('flashcard_decks', JSON.stringify(decks));
+    if (decks.length > 0) writeJson('flashcard_decks', decks);
   }, [decks]);
 
   const currentDeck = useMemo(() => decks.find(d => d.id === activeDeck), [decks, activeDeck]);
@@ -194,14 +206,14 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
   const totalCards = currentDeck?.cards.length || 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-violet-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 dark:from-slate-950 dark:to-slate-900 p-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-mark mb-4">
             <BookOpen className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-2 bg-brand bg-clip-text text-transparent">
             {t.title || 'Flashcard Maker'}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
@@ -212,14 +224,14 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
         {/* Deck Selection Bar */}
         {view !== 'study' && view !== 'decks' && currentDeck && (
           <div className="flex items-center gap-3 mb-6 flex-wrap">
-            <button onClick={() => setView('decks')} className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm">{t.back_to_decks || '← Decks'}</button>
+            <button onClick={() => setView('decks')} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm"><ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />{t.back_to_decks || 'Decks'}</button>
             <span className="font-semibold text-lg">{currentDeck.name}</span>
             <div className="flex gap-1 ml-auto">
-              <button onClick={() => setView('edit')} className={`px-4 py-2 rounded-lg text-sm font-medium ${view === 'edit' ? 'bg-indigo-600 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'}`}>{c.edit || 'Edit'}</button>
-              <button onClick={startStudy} className={`px-4 py-2 rounded-lg text-sm font-medium ${view === 'study' ? 'bg-indigo-600 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'}`}>
+              <button onClick={() => setView('edit')} className={`px-4 py-2 rounded-lg text-sm font-medium ${view === 'edit' ? 'bg-primary text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'}`}>{c.edit || 'Edit'}</button>
+              <button onClick={startStudy} className={`px-4 py-2 rounded-lg text-sm font-medium ${view === 'study' ? 'bg-primary text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'}`}>
                 {t.study || 'Study'} {cardsToReview > 0 && <span className="ml-1 px-1.5 py-0.5 rounded-full bg-red-500 text-white text-xs">{cardsToReview}</span>}
               </button>
-              <button onClick={() => setView('stats')} className={`px-4 py-2 rounded-lg text-sm font-medium ${view === 'stats' ? 'bg-indigo-600 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'}`}>{tc.stats || 'Stats'}</button>
+              <button onClick={() => setView('stats')} className={`px-4 py-2 rounded-lg text-sm font-medium ${view === 'stats' ? 'bg-primary text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'}`}>{tc.stats || 'Stats'}</button>
             </div>
           </div>
         )}
@@ -228,7 +240,7 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
         {view === 'decks' && (
           <div className="space-y-4">
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2"><Layers className="w-5 h-5 text-indigo-600" /> {t.your_decks || 'Your Decks'}</h2>
+              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2"><Layers className="w-5 h-5 text-primary" /> {t.your_decks || 'Your Decks'}</h2>
               {decks.map(deck => (
                 <div key={deck.id} className="flex items-center justify-between p-4 rounded-xl bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-700 mb-3 hover:shadow-md transition-shadow">
                   <div className="flex-1">
@@ -237,7 +249,7 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
                     <p className="text-xs text-gray-400 mt-1">{tpl(t.cards_to_review || '{n} cards · {m} to review', { n: deck.cards.length, m: deck.cards.filter(c => c.nextReview <= Date.now() || c.repetitions === 0).length })}</p>
                   </div>
                   <div className="flex gap-2">
-                    <button onClick={() => { setActiveDeck(deck.id); setView('edit'); }} className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 text-sm">{t.open || 'Open'}</button>
+                    <button onClick={() => { setActiveDeck(deck.id); setView('edit'); }} className="px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary-hover text-sm">{t.open || 'Open'}</button>
                     <button onClick={() => deleteDeck(deck.id)} className="p-2 rounded-lg hover:bg-red-100 dark:hover:bg-red-900 text-red-500"><Trash2 className="w-4 h-4" /></button>
                   </div>
                 </div>
@@ -246,11 +258,11 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
 
             {/* Create Deck */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2"><Plus className="w-5 h-5 text-indigo-600" /> {t.new_deck || 'New Deck'}</h3>
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2"><Plus className="w-5 h-5 text-primary" /> {t.new_deck || 'New Deck'}</h3>
               <div className="flex gap-3 mb-3">
-                <input type="text" value={newDeckName} onChange={(e) => setNewDeckName(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && createDeck()} placeholder={t.deck_name_placeholder || 'Deck name...'} className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none" />
-                <input type="text" value={newDeckDesc} onChange={(e) => setNewDeckDesc(e.target.value)} placeholder={t.description_placeholder || 'Description...'} className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none" />
-                <button onClick={createDeck} className="px-6 py-2 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:shadow-lg transition-all">{t.create || 'Create'}</button>
+                <input type="text" value={newDeckName} onChange={(e) => setNewDeckName(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && createDeck()} placeholder={t.deck_name_placeholder || 'Deck name...'} className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary outline-none" />
+                <input type="text" value={newDeckDesc} onChange={(e) => setNewDeckDesc(e.target.value)} placeholder={t.description_placeholder || 'Description...'} className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary outline-none" />
+                <button onClick={createDeck} className="px-6 py-2 rounded-lg bg-brand text-white hover:shadow-lg transition-all">{t.create || 'Create'}</button>
               </div>
             </div>
           </div>
@@ -269,9 +281,9 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
                     <div key={card.id} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-700">
                       {editingCardId === card.id ? (
                         <div className="flex-1 space-y-2">
-                          <input type="text" value={editingCard.front} onChange={(e) => setEditingCard(prev => ({ ...prev, front: e.target.value }))} placeholder={t.front || 'Front'} className="w-full px-3 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 outline-none" />
-                          <input type="text" value={editingCard.back} onChange={(e) => setEditingCard(prev => ({ ...prev, back: e.target.value }))} placeholder={t.back || 'Back'} className="w-full px-3 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 outline-none" />
-                          <input type="text" value={editingCard.hint} onChange={(e) => setEditingCard(prev => ({ ...prev, hint: e.target.value }))} placeholder={t.hint || 'Hint (optional)'} className="w-full px-3 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 outline-none" />
+                          <input type="text" value={editingCard.front} onChange={(e) => setEditingCard(prev => ({ ...prev, front: e.target.value }))} placeholder={t.front || 'Front'} className="w-full px-3 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-primary outline-none" />
+                          <input type="text" value={editingCard.back} onChange={(e) => setEditingCard(prev => ({ ...prev, back: e.target.value }))} placeholder={t.back || 'Back'} className="w-full px-3 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-primary outline-none" />
+                          <input type="text" value={editingCard.hint} onChange={(e) => setEditingCard(prev => ({ ...prev, hint: e.target.value }))} placeholder={t.hint || 'Hint (optional)'} className="w-full px-3 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-primary outline-none" />
                           <div className="flex gap-2">
                             <button onClick={() => updateCard(card.id)} className="px-3 py-1 rounded bg-green-600 text-white text-xs flex items-center gap-1"><Save className="w-3 h-3" /> {c.save || 'Save'}</button>
                             <button onClick={() => setEditingCardId(null)} className="px-3 py-1 rounded bg-gray-400 text-white text-xs flex items-center gap-1"><X className="w-3 h-3" /> {c.cancel || 'Cancel'}</button>
@@ -297,12 +309,12 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
 
             {/* Add Card */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2"><Plus className="w-5 h-5 text-indigo-600" /> {t.add_card || 'Add Card'}</h3>
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2"><Plus className="w-5 h-5 text-primary" /> {t.add_card || 'Add Card'}</h3>
               <div className="space-y-3">
-                <input type="text" value={editingCard.front} onChange={(e) => setEditingCard(prev => ({ ...prev, front: e.target.value }))} onKeyDown={(e) => e.key === 'Enter' && addCard()} placeholder={t.front_question || 'Front (question)'} className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none" />
-                <textarea value={editingCard.back} onChange={(e) => setEditingCard(prev => ({ ...prev, back: e.target.value }))} placeholder={t.back_answer || 'Back (answer)'} rows={2} className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none resize-none" />
-                <input type="text" value={editingCard.hint} onChange={(e) => setEditingCard(prev => ({ ...prev, hint: e.target.value }))} placeholder={t.hint || 'Hint (optional)'} className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none" />
-                <button onClick={addCard} className="px-6 py-2 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:shadow-lg transition-all flex items-center gap-2"><Plus className="w-4 h-4" /> {t.add_card || 'Add Card'}</button>
+                <input type="text" value={editingCard.front} onChange={(e) => setEditingCard(prev => ({ ...prev, front: e.target.value }))} onKeyDown={(e) => e.key === 'Enter' && addCard()} placeholder={t.front_question || 'Front (question)'} className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary outline-none" />
+                <textarea value={editingCard.back} onChange={(e) => setEditingCard(prev => ({ ...prev, back: e.target.value }))} placeholder={t.back_answer || 'Back (answer)'} rows={2} className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary outline-none resize-none" />
+                <input type="text" value={editingCard.hint} onChange={(e) => setEditingCard(prev => ({ ...prev, hint: e.target.value }))} placeholder={t.hint || 'Hint (optional)'} className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary outline-none" />
+                <button onClick={addCard} className="px-6 py-2 rounded-lg bg-brand text-white hover:shadow-lg transition-all flex items-center gap-2"><Plus className="w-4 h-4" /> {t.add_card || 'Add Card'}</button>
               </div>
             </div>
           </div>
@@ -314,7 +326,7 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
             <div className="text-center mb-4">
               <span className="text-sm text-gray-500">{tpl(t.card_progress || 'Card {i} of {n} · Studied: {s}', { i: studyIndex + 1, n: studyQueue.length, s: studiedCount })}</span>
               <div className="w-full h-1 bg-gray-200 dark:bg-gray-700 rounded-full mt-2">
-                <div className="h-1 bg-indigo-600 rounded-full transition-all" style={{ width: `${((studyIndex + 1) / studyQueue.length) * 100}%` }} />
+                <div className="h-1 bg-primary rounded-full transition-all" style={{ width: `${((studyIndex + 1) / studyQueue.length) * 100}%` }} />
               </div>
             </div>
 
@@ -326,17 +338,17 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
                   animate={{ rotateY: 0, opacity: 1 }}
                   exit={{ rotateY: -90, opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-10 min-h-[280px] flex flex-col items-center justify-center text-center border-2 border-indigo-200 dark:border-indigo-800"
+                  className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-10 min-h-[280px] flex flex-col items-center justify-center text-center border-2 border-primary/25 dark:border-primary/30"
                 >
                   {!flipped ? (
                     <>
-                      <Sparkles className="w-6 h-6 text-indigo-600 mb-4" />
+                      <Sparkles className="w-6 h-6 text-primary mb-4" />
                       <p className="text-2xl font-semibold mb-4">{studyQueue[studyIndex].front}</p>
                       <p className="text-sm text-gray-400">{t.tap_to_reveal || 'Tap to reveal answer'}</p>
                     </>
                   ) : (
                     <>
-                      <Star className="w-6 h-6 text-purple-600 mb-4" />
+                      <Star className="w-6 h-6 text-primary mb-4" />
                       <p className="text-2xl font-semibold mb-4">{studyQueue[studyIndex].back}</p>
                       {studyQueue[studyIndex].hint && (
                         <p className="text-sm text-gray-500 italic">💡 {studyQueue[studyIndex].hint}</p>
@@ -368,11 +380,11 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
         {/* Stats View */}
         {view === 'stats' && currentDeck && (
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-            <h2 className="text-xl font-semibold mb-6 flex items-center gap-2"><BarChart3 className="w-5 h-5 text-indigo-600" /> {t.deck_statistics || 'Deck Statistics'}</h2>
+            <h2 className="text-xl font-semibold mb-6 flex items-center gap-2"><BarChart3 className="w-5 h-5 text-primary" /> {t.deck_statistics || 'Deck Statistics'}</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-              <div className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 rounded-xl p-4 border border-indigo-200 dark:border-indigo-800">
+              <div className="bg-gradient-to-br from-primary-soft to-cyan-50 dark:from-primary/10 rounded-xl p-4 border border-primary/25 dark:border-primary/30">
                 <div className="text-xs text-gray-500 mb-1">{t.total_cards || 'Total Cards'}</div>
-                <div className="text-2xl font-bold text-indigo-600">{currentDeck.cards.length}</div>
+                <div className="text-2xl font-bold text-primary">{currentDeck.cards.length}</div>
               </div>
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 rounded-xl p-4 border border-green-200 dark:border-green-800">
                 <div className="text-xs text-gray-500 mb-1">{t.stat_new || 'New (unstudied)'}</div>
@@ -405,17 +417,17 @@ const FlashcardMaker = ({ lang = 'en', dict = {} }: FlashcardMakerProps) => {
                 </div>
               </div>
             )}
-            <button onClick={() => setView('decks')} className="mt-6 px-6 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors">{t.back_to_decks || '← Back to Decks'}</button>
+            <button onClick={() => setView('decks')} className="mt-6 px-6 py-2 rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors">{t.back_to_decks || '← Back to Decks'}</button>
           </div>
         )}
 
         {/* Empty study state */}
         {view === 'study' && (studyQueue.length === 0 || studyIndex >= studyQueue.length) && (
           <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-2xl shadow-xl">
-            <Sparkles className="w-16 h-16 mx-auto mb-4 text-indigo-600" />
+            <Sparkles className="w-16 h-16 mx-auto mb-4 text-primary" />
             <h2 className="text-2xl font-bold mb-2">{t.study_complete || 'Study Complete!'}</h2>
             <p className="text-gray-500 mb-6">{tpl(t.study_complete_text || 'You reviewed {n} cards in this session.', { n: studiedCount })}</p>
-            <button onClick={() => setView('edit')} className="px-6 py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors">{t.back_to_deck || 'Back to Deck'}</button>
+            <button onClick={() => setView('edit')} className="px-6 py-3 rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors">{t.back_to_deck || 'Back to Deck'}</button>
           </div>
         )}
       </div>

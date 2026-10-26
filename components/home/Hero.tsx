@@ -2,134 +2,127 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { ArrowRight, Code, BookOpen, Calculator } from 'lucide-react'
+import { ArrowRight, Sparkles, PlayCircle } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
+import HeroSearch from './HeroSearch'
 
 interface HeroProps {
   lang: Locale
   dict: Dictionary
 }
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.15 },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' as const },
-  },
-}
-
+/**
+ * The home hero.
+ *
+ * Deliberately *not* a full-bleed gradient slab: the brand gradient belongs
+ * to the chrome and to a single primary action, so the page reads as a light
+ * editorial surface with depth rather than one big colour block.
+ */
 export default function Hero({ lang, dict }: HeroProps) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 gradient-bg"></div>
-      
-      <motion.div
-        className="absolute inset-0 overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-      >
-        <motion.div
-          className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.7, 0.4] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+    <section className="relative border-b border-border/60 bg-background">
+      {/* Ambient brand light — the section colours bleed in as soft fields.
+          The clipping lives on this inner wrapper so the search dropdown is
+          free to overflow the hero instead of being cut off by it. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -left-48 -top-48 h-[32rem] w-[32rem] rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -right-40 top-10 h-[26rem] w-[26rem] rounded-full bg-section-library/10 blur-3xl" />
+        <div className="absolute bottom-[-14rem] left-1/4 h-[24rem] w-[24rem] rounded-full bg-section-languages/10 blur-3xl" />
+        {/* Fine grid for a sense of structure */}
+        <div
+          className="absolute inset-0 opacity-[0.4]"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, hsl(var(--border) / 0.55) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border) / 0.55) 1px, transparent 1px)',
+            backgroundSize: '56px 56px',
+            maskImage: 'radial-gradient(ellipse 75% 55% at 50% 0%, #000 35%, transparent 100%)',
+            WebkitMaskImage:
+              'radial-gradient(ellipse 75% 55% at 50% 0%, #000 35%, transparent 100%)',
+          }}
         />
-        <motion.div
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/5 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-        />
-      </motion.div>
+      </div>
 
-      <motion.div
-        className="relative z-10 container-custom text-center text-white"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-2 mb-8"
-          >
-            <span className="text-sm font-medium">🚀 {dict.hero.badge}</span>
-          </motion.div>
+      <div className="relative container-custom pb-20 pt-16 md:pb-24 md:pt-24">
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="animate-fade-in-up inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-3.5 py-1.5 text-xs font-semibold text-foreground-muted backdrop-blur">
+            <Sparkles className="h-3.5 w-3.5 text-section-courses" aria-hidden="true" />
+            {dict.hero.badge}
+          </span>
 
-          <motion.h1
-            variants={itemVariants}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
+          <h1
+            className="animate-fade-in-up mt-6 text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl"
+            style={{ animationDelay: '60ms' }}
           >
             {dict.hero.title}{' '}
-            <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-              {dict.hero.titleHighlight}
-            </span>
-          </motion.h1>
+            <span className="text-gradient">{dict.hero.titleHighlight}</span>
+          </h1>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto"
+          <p
+            className="animate-fade-in-up mx-auto mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-foreground-muted sm:text-xl"
+            style={{ animationDelay: '120ms' }}
           >
             {dict.hero.subtitle}
-          </motion.p>
+          </p>
 
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12"
+          {/* Search-first entry point — a real type-ahead, not a shortcut.
+              The animation lives on the field row, not on a wrapper, so the
+              results panel is never trapped behind later content. */}
+          <HeroSearch
+            lang={lang}
+            dict={dict}
+            placeholder={dict.hero.search_placeholder || 'What do you want to learn?'}
+            label={dict.hero.search_placeholder || 'Search courses, lessons and tools'}
+            fieldClassName="animate-fade-in-up"
+            animationDelay="180ms"
+          />
+
+          <div
+            className="animate-fade-in-up mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
+            style={{ animationDelay: '240ms' }}
           >
-            <Link
-              href={`/${lang}/courses`}
-              className="btn-primary flex items-center space-x-2 text-lg px-8 py-4 shadow-xl hover:shadow-2xl"
-            >
-              <BookOpen className="w-5 h-5" />
+            <Link href={`/${lang}/courses`} className="btn btn-primary btn-lg group w-full sm:w-auto">
               <span>{dict.hero.cta.explore}</span>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
             </Link>
-          </motion.div>
+            <Link href={`/${lang}/roadmaps`} className="btn btn-secondary btn-lg group w-full sm:w-auto">
+              <PlayCircle className="h-4 w-4" aria-hidden="true" />
+              <span>{dict.navigation.roadmaps || 'Roadmaps'}</span>
+            </Link>
+          </div>
 
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap items-center justify-center space-x-8 space-y-4"
+          {/* Capability chips */}
+          <ul
+            className="animate-fade-in-up mt-9 flex flex-wrap items-center justify-center gap-2"
+            style={{ animationDelay: '300ms' }}
           >
-            <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-2">
-              <Code className="w-5 h-5 text-yellow-300" />
-              <span className="text-sm font-medium">{dict.hero.features.coding}</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-2">
-              <Calculator className="w-5 h-5 text-green-300" />
-              <span className="text-sm font-medium">{dict.hero.features.tools}</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-2">
-              <BookOpen className="w-5 h-5 text-blue-300" />
-              <span className="text-sm font-medium">{dict.hero.features.courses}</span>
-            </div>
-          </motion.div>
+            {[
+              {
+                label: dict.hero.features.coding,
+                dot: 'bg-section-courses',
+                text: 'text-section-courses',
+              },
+              { label: dict.hero.features.tools, dot: 'bg-section-tools', text: 'text-section-tools' },
+              {
+                label: dict.hero.features.courses,
+                dot: 'bg-section-quizzes',
+                text: 'text-section-quizzes',
+              },
+            ].map(chip => (
+              <li
+                key={chip.label}
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-3 py-1.5 text-xs font-medium text-foreground-muted backdrop-blur"
+              >
+                <span className={`h-1.5 w-1.5 rounded-full ${chip.dot}`} aria-hidden="true" />
+                {chip.label}
+              </li>
+            ))}
+          </ul>
         </div>
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white/70 rounded-full mt-2"></div>
-        </div>
-      </motion.div>
+      </div>
     </section>
   )
 }

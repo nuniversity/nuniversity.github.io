@@ -47,7 +47,7 @@ function formatCountdown(seconds: number): string {
 function getDomainAccentClass(color: string): string {
   const map: Record<string, string> = {
     blue: 'bg-blue-500',
-    purple: 'bg-purple-500',
+    purple: 'bg-cyan-500',
     teal: 'bg-teal-500',
     orange: 'bg-orange-500',
     green: 'bg-green-500',

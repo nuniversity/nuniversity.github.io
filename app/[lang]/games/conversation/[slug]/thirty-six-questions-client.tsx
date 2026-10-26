@@ -240,7 +240,7 @@ export function ThirtySixQuestionsClient({ lang, game, dict }: ThirtySixQuestion
   // --- RENDER: Config ---
   if (gamePhase === 'config') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-cyan-50 dark:from-slate-950 dark:to-slate-900 p-6">
         <div className="max-w-2xl mx-auto">
           <Link href={`/${lang}/games`} className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 mb-6">
             <ArrowLeft className="w-4 h-4" />
@@ -344,7 +344,7 @@ export function ThirtySixQuestionsClient({ lang, game, dict }: ThirtySixQuestion
   // --- RENDER: Set Intro ---
   if (gamePhase === 'set-intro') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-cyan-50 dark:from-slate-950 dark:to-slate-900 p-6">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -353,7 +353,7 @@ export function ThirtySixQuestionsClient({ lang, game, dict }: ThirtySixQuestion
           >
             <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br ${
               currentSet.color === 'blue' ? 'from-blue-500 to-blue-600' :
-              currentSet.color === 'purple' ? 'from-purple-500 to-purple-600' :
+              currentSet.color === 'purple' ? 'from-cyan-500 to-teal-500' :
               'from-rose-500 to-pink-600'
             } mb-6`}>
               <span className="text-3xl font-bold text-white">{currentSetIndex + 1}</span>
@@ -388,7 +388,7 @@ export function ThirtySixQuestionsClient({ lang, game, dict }: ThirtySixQuestion
       : answers[currentQuestion.id]?.player0
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-cyan-50 dark:from-slate-950 dark:to-slate-900 p-6">
         <div className="max-w-2xl mx-auto">
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
@@ -406,7 +406,7 @@ export function ThirtySixQuestionsClient({ lang, game, dict }: ThirtySixQuestion
             <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
               <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
                 currentSet.color === 'blue' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300' :
-                currentSet.color === 'purple' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300' :
+                currentSet.color === 'purple' ? 'bg-primary-soft text-primary-soft-foreground dark:bg-primary/15 dark:text-primary' :
                 'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300'
               }`}>
                 {currentSet.name}
@@ -492,7 +492,7 @@ export function ThirtySixQuestionsClient({ lang, game, dict }: ThirtySixQuestion
   // --- RENDER: Set Complete ---
   if (gamePhase === 'set-complete') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-cyan-50 dark:from-slate-950 dark:to-slate-900 p-6">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -543,7 +543,7 @@ export function ThirtySixQuestionsClient({ lang, game, dict }: ThirtySixQuestion
     const circumference = 2 * Math.PI * 90
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-cyan-50 dark:from-slate-950 dark:to-slate-900 p-6">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -626,7 +626,7 @@ export function ThirtySixQuestionsClient({ lang, game, dict }: ThirtySixQuestion
   // --- RENDER: Complete ---
   if (gamePhase === 'complete') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-cyan-50 dark:from-slate-950 dark:to-slate-900 p-6">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -659,7 +659,7 @@ export function ThirtySixQuestionsClient({ lang, game, dict }: ThirtySixQuestion
                 <div className="text-xs text-gray-500">{conv.skipped ?? 'Skipped'}</div>
               </div>
               <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
-                <div className="text-2xl font-bold text-purple-600">{formatTime(elapsed)}</div>
+                <div className="text-2xl font-bold text-primary">{formatTime(elapsed)}</div>
                 <div className="text-xs text-gray-500">{conv.time ?? 'Time'}</div>
               </div>
             </div>

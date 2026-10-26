@@ -1,3 +1,5 @@
+import { readJson, safeGetString, safeRemove, safeSet } from '@/lib/storage/safe-storage'
+
 export type QuizAttemptMode = 'practice' | 'exam' | 'course-exam'
 
 export interface QuizAttempt {
@@ -36,33 +38,6 @@ export function attemptPercent(attempt: Pick<QuizAttempt, 'score' | 'total'>): n
   return Math.round((attempt.score / attempt.total) * 100)
 }
 
-function safeGet(key: string): string | null {
-  if (typeof window === 'undefined') return null
-  try {
-    return window.localStorage.getItem(key)
-  } catch {
-    return null
-  }
-}
-
-function safeSet(key: string, value: string): void {
-  if (typeof window === 'undefined') return
-  try {
-    window.localStorage.setItem(key, value)
-  } catch {
-    return
-  }
-}
-
-function safeRemove(key: string): void {
-  if (typeof window === 'undefined') return
-  try {
-    window.localStorage.removeItem(key)
-  } catch {
-    return
-  }
-}
-
 function sanitizeAttempt(raw: unknown): QuizAttempt | null {
   if (typeof raw !== 'object' || raw === null) return null
   const value = raw as Record<string, unknown>
@@ -82,19 +57,8 @@ function sanitizeAttempt(raw: unknown): QuizAttempt | null {
   return attempt
 }
 
-function readJson<T>(key: string): T | null {
-  const raw = safeGet(key)
-  if (raw === null) return null
-  try {
-    return JSON.parse(raw) as T
-  } catch {
-    safeRemove(key)
-    return null
-  }
-}
-
 export function getHistory(slug: string): QuizAttempt[] {
-  const parsed = readJson<unknown>(quizHistoryKey(slug))
+  const parsed = readJson<unknown[]>(quizHistoryKey(slug))
   if (!Array.isArray(parsed)) return []
   const attempts: QuizAttempt[] = []
   for (const entry of parsed) {
@@ -143,11 +107,46 @@ export function clearHistory(slug: string): void {
   safeRemove(quizBestKey(slug))
 }
 
-export function getCertName(): string {
-  return safeGet(QUIZ_CERT_NAME_KEY) ?? ''
+/**
+ * Maximum length of a stored certificate name.
+ *
+ * A display name has no legitimate use beyond this, and the bound prevents a
+ * hand-edited storage entry from injecting an unbounded string into the page.
+ */
+export const CERT_NAME_MAX_LENGTH = 120
+
+/**
+ * Normalises a certificate name: trims whitespace, collapses internal runs of
+ * whitespace, and enforces the length bound.
+ */
+export function normalizeCertName(name: string): string {
+  return name.trim().replace(/\s+/g, ' ').slice(0, CERT_NAME_MAX_LENGTH)
 }
 
+/**
+ * Reads the learner's saved certificate name.
+ *
+ * This is the only piece of personal data the platform stores. It never leaves
+ * the browser — it is not transmitted to any server by the site.
+ */
+export function getCertName(): string {
+  const raw = safeGetString(QUIZ_CERT_NAME_KEY, CERT_NAME_MAX_LENGTH)
+  return raw ? normalizeCertName(raw) : ''
+}
+
+/**
+ * Persists the learner's certificate name locally.
+ * An empty value removes the stored entry entirely.
+ */
 export function setCertName(name: string): void {
-  if (name) safeSet(QUIZ_CERT_NAME_KEY, name)
+  const normalized = normalizeCertName(name)
+  if (normalized) safeSet(QUIZ_CERT_NAME_KEY, normalized)
   else safeRemove(QUIZ_CERT_NAME_KEY)
+}
+
+/**
+ * Removes the stored certificate name from the browser.
+ */
+export function clearCertName(): void {
+  safeRemove(QUIZ_CERT_NAME_KEY)
 }

@@ -113,7 +113,7 @@ export default function LessonOutline({ lang, courseSlug, lessonSlug, courseTitl
           </Link>
 
           <div className="flex items-start gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-purple-600">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-mark">
               <BookOpen className="h-5 w-5 text-white" />
             </div>
             <div className="min-w-0">

@@ -275,7 +275,7 @@ export function VocabularyGameClient({ lang, game, dict, pair: pairProp }: Vocab
                       ? 'bg-blue-100 dark:bg-blue-900/30 border-blue-500 text-blue-700 dark:text-blue-300'
                       : 'bg-card border-border hover:border-primary'
                     }
-                    ${card.type === 'source' ? 'bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20' : ''}
+                    ${card.type === 'source' ? 'bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20' : ''}
                   `}
                 >
                   {isMatched && (

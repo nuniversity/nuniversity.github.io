@@ -3,7 +3,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { BookOpen, Search, Clock, Target, GraduationCap, Sparkles, User } from 'lucide-react'
+import { BookOpen, Search, Clock, Target, GraduationCap, Sparkles, User, ArrowRight } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import CourseProgressBadge from '@/components/courses/CourseProgressBadge'
 
@@ -86,12 +86,12 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
   // Get area icon color
   const getAreaColor = (index: number) => {
     const colors = [
-      'from-blue-600 to-purple-600',
-      'from-purple-600 to-pink-600',
-      'from-pink-600 to-rose-600',
-      'from-orange-600 to-red-600',
-      'from-green-600 to-emerald-600',
-      'from-cyan-600 to-blue-600',
+      'from-blue-500 to-cyan-500',
+      'from-cyan-500 to-teal-500',
+      'from-rose-400 to-pink-500',
+      'from-amber-500 to-orange-500',
+      'from-emerald-500 to-green-500',
+      'from-teal-500 to-cyan-500',
     ]
     return colors[index % colors.length]
   }
@@ -101,7 +101,7 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
       <div className="max-w-6xl mx-auto">
         {/* Page Header */}
         <div className="mb-10 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-section-courses shadow-lg shadow-black/10 mb-4">
             <GraduationCap className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2">
@@ -283,8 +283,9 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
                             dict={dict}
                           />
                         </div>
-                        <span className="text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
-                          {dict.courses?.start_learning || 'Start →'}
+                        <span className="inline-flex items-center gap-1 text-primary font-medium text-sm transition-transform group-hover:translate-x-1">
+                          {dict.courses?.start_learning || 'Start'}
+                          <ArrowRight className="w-4 h-4" aria-hidden="true" />
                         </span>
                       </div>
                     </Link>

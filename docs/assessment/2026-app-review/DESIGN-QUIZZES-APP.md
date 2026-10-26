@@ -125,7 +125,7 @@ Split the 1,448-line client into components with i18n from day one:
 | `QuizHome` | description, blueprint (domains/allocation), best score, mode selection |
 | `PracticeConfig` | domain filter, question count, shuffle (port `:254-257`) |
 | `QuizPlayer` | learning-mode flow: stage → **Check answer** → feedback, skip/return, navigator tiles |
-| `QuestionBody` | renders all 4 interactive types (click-select, ▲▼ ordering, native-`<select>` matching); `reveal` mode for review |
+| `QuestionBody` | renders all 4 interactive types (click-select, ▲▼ ordering, lettered response bank + bounded `<select>` matching); `reveal` mode for review |
 | `ExamRunner` | timed mock (scaled draw via `drawMockQuestions`, timer, flagging, no feedback until submit) |
 | `ScoreReport` | % vs passing, domain breakdown, review list (per `UserAnswer`), certificate CTA |
 | `CertificateCard` | printable pass certificate (name input, date, slug code) |
@@ -219,7 +219,7 @@ Split the 1,448-line client into components with i18n from day one:
 | ExamRunner scope creep | Phase 4 ships wrapper + timer + score; review-by-domain and analytics later |
 | Legacy `quiz-game-client` rewrite vs move | refactor while moving — the file needs i18n anyway (F-021) |
 | **D1** simulation size ≠ blueprint sum | optional `mockQuestionCount` (AIF: 65) + hierarchical largest-remainder scaling; allocations stay percent weights summing 100 — validator rule unchanged |
-| **D2** AIF bank size | phased: 65 questions first (blueprint-exact), then +195 → 260 total; mock draw always 65 |
+| **D2** AIF bank size | phased: 65 blueprint-exact → 151 (Domains 1–2 deep dive) → +24 balance batch across Domains 3–5 = **175 total**; mock draw always 65; further expansion toward 260 optional |
 | **D3** blanks in learning mode | excluded from score (score = correct ÷ graded; blanks reported as skipped); simulation keeps blank = wrong |
 | **D4** ordering interaction | select-subset + order (presented items may include distractors; correct = 3–5 item ordered subset) |
 | Question-type interactions | no dnd-kit in quiz questions (click + buttons + native select) — see §6 |

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { Plus, Trash2, Check, Calendar, Flame, BarChart3, RotateCcw, Target } from 'lucide-react';
+import { readJson, writeJson } from '@/lib/storage/safe-storage';
 
 interface Habit {
   id: number;
@@ -41,14 +42,34 @@ const HabitTracker = ({ lang = 'en', dict = {} }: HabitTrackerProps) => {
   const [viewDate, setViewDate] = useState(new Date());
 
   useEffect(() => {
-    const savedHabits = localStorage.getItem('habits');
-    if (savedHabits) { try { setHabits(JSON.parse(savedHabits)); } catch {} }
-    const savedLogs = localStorage.getItem('habit_logs');
-    if (savedLogs) { try { setLogs(JSON.parse(savedLogs)); } catch {} }
+    const savedHabits = readJson('habits', (raw) =>
+      Array.isArray(raw)
+        ? raw.filter(
+            (h): h is Habit =>
+              typeof h === 'object' &&
+              h !== null &&
+              typeof (h as Habit).id === 'number' &&
+              typeof (h as Habit).name === 'string'
+          )
+        : null
+    );
+    if (savedHabits) setHabits(savedHabits);
+    const savedLogs = readJson('habit_logs', (raw) =>
+      Array.isArray(raw)
+        ? raw.filter(
+            (l): l is HabitLog =>
+              typeof l === 'object' &&
+              l !== null &&
+              typeof (l as HabitLog).habitId === 'number' &&
+              typeof (l as HabitLog).date === 'string'
+          )
+        : null
+    );
+    if (savedLogs) setLogs(savedLogs);
   }, []);
 
-  useEffect(() => { localStorage.setItem('habits', JSON.stringify(habits)); }, [habits]);
-  useEffect(() => { localStorage.setItem('habit_logs', JSON.stringify(logs)); }, [logs]);
+  useEffect(() => { writeJson('habits', habits); }, [habits]);
+  useEffect(() => { writeJson('habit_logs', logs); }, [logs]);
 
   const addHabit = () => {
     if (newHabitName.trim()) {
@@ -136,7 +157,7 @@ const HabitTracker = ({ lang = 'en', dict = {} }: HabitTrackerProps) => {
   const totalToday = habits.filter(h => isCompleted(h.id, today)).length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50 dark:from-slate-950 dark:to-slate-900 p-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

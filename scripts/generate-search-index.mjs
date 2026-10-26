@@ -13,7 +13,9 @@ const excerpt = body =>
     .replace(/[^\p{L}\p{N}]+/gu, ' ')
     .replace(/\s+/g, ' ')
     .trim()
-    .slice(0, 160)
+    // Kept short: the excerpt only feeds substring matching, and the
+    // structured metadata on each entry carries the weight of the index.
+    .slice(0, 120)
 
 const readJson = file => {
   try {
@@ -37,10 +39,28 @@ const readMatter = file => {
 
 const indexes = Object.fromEntries(LOCALES.map(lang => [lang, []]))
 
-const push = (lang, type, title, description, url, text, key, courseSlug) => {
+const push = (lang, type, title, description, url, text, key, courseSlug, meta = {}) => {
   const entry = { id: `${lang}:${type}:${key || url}`, type, title, description, url }
   if (text) entry.text = text
   if (courseSlug) entry.courseSlug = courseSlug
+  // Contextual metadata, in a stable order so the index diffs cleanly.
+  for (const field of [
+    'courseTitle',
+    'area',
+    'difficulty',
+    'duration',
+    'author',
+    'category',
+    'certification',
+    'position',
+    'totalLessons',
+    'source',
+    'target',
+  ]) {
+    const value = meta[field]
+    if (value === undefined || value === null || value === '') continue
+    entry[field] = value
+  }
   indexes[lang].push(entry)
 }
 
@@ -77,10 +97,29 @@ for (const slug of listDirs(coursesDir)) {
       .split('-')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ')
-    push(lang, 'course', loc.title || fallbackTitle, loc.description || 'Course description', `/${lang}/courses/${slug}/`, undefined, undefined, slug)
-    for (const file of listFiles(targetDir, '.md')) {
+    const courseTitle = loc.title || fallbackTitle
+    const lessonFiles = listFiles(targetDir, '.md')
+    const courseMeta = {
+      area: meta.area,
+      difficulty: loc.difficulty || meta.difficulty,
+      duration: loc.duration || meta.duration,
+      author: meta.author,
+      totalLessons: lessonFiles.length,
+    }
+    push(
+      lang,
+      'course',
+      courseTitle,
+      loc.description || 'Course description',
+      `/${lang}/courses/${slug}/`,
+      undefined,
+      undefined,
+      slug,
+      courseMeta
+    )
+    lessonFiles.forEach((file, index) => {
       const parsed = readMatter(path.join(targetDir, file))
-      if (!parsed) continue
+      if (!parsed) return
       const stem = file.replace(/\.md$/, '')
       const body = excerpt(parsed.content)
       push(
@@ -91,9 +130,17 @@ for (const slug of listDirs(coursesDir)) {
         `/${lang}/courses/${slug}/${stem}/`,
         body,
         undefined,
-        slug
+        slug,
+        {
+          ...courseMeta,
+          courseTitle,
+          // Lesson-level metadata wins over the course-level default.
+          difficulty: parsed.data.difficulty || courseMeta.difficulty,
+          duration: parsed.data.duration || courseMeta.duration,
+          position: typeof parsed.data.order === 'number' ? parsed.data.order : index + 1,
+        }
       )
-    }
+    })
   }
 }
 
@@ -107,7 +154,11 @@ for (const slug of listDirs(toolsDir)) {
     if (!fs.existsSync(filePath)) continue
     const parsed = readMatter(filePath)
     if (!parsed) continue
-    push(lang, 'tool', parsed.data.title || slug, parsed.data.description || '', `/${lang}/tools/${slug}/`)
+    push(lang, 'tool', parsed.data.title || slug, parsed.data.description || '', `/${lang}/tools/${slug}/`, undefined, undefined, undefined, {
+      category: parsed.data.category,
+      difficulty: parsed.data.difficulty,
+      duration: parsed.data.duration,
+    })
   }
 }
 
@@ -119,7 +170,10 @@ for (const category of listDirs(gamesDir)) {
     const slug = data.id || file.replace(/\.json$/, '')
     for (const lang of LOCALES) {
       const loc = localize(data, lang)
-      push(lang, 'game', loc.title || slug, loc.description || '', `/${lang}/games/${category}/${slug}/`)
+      push(lang, 'game', loc.title || slug, loc.description || '', `/${lang}/games/${category}/${slug}/`, undefined, undefined, undefined, {
+        category: loc.category || category,
+        difficulty: loc.difficulty || data.difficulty,
+      })
     }
   }
 }
@@ -131,7 +185,12 @@ for (const file of listFiles(quizzesDir, '.json')) {
   const slug = data.slug || file.replace(/\.json$/, '')
   for (const lang of LOCALES) {
     const loc = localize(data, lang)
-    push(lang, 'quiz', loc.title || slug, loc.description || '', `/${lang}/quizzes/${slug}/`)
+    push(lang, 'quiz', loc.title || slug, loc.description || '', `/${lang}/quizzes/${slug}/`, undefined, undefined, undefined, {
+      category: loc.category || data.category,
+      certification: loc.certification || data.certification,
+      difficulty: loc.difficulty || data.difficulty,
+      duration: data.durationSeconds ? `${Math.round(data.durationSeconds / 60)} min` : undefined,
+    })
   }
 }
 
@@ -144,7 +203,11 @@ for (const id of listDirs(roadmapsDir)) {
     const parsed = readMatter(filePath)
     if (!parsed) continue
     const roadmapId = parsed.data.id || id
-    push(lang, 'roadmap', parsed.data.title || roadmapId, parsed.data.description || '', `/${lang}/roadmaps/${roadmapId}/`)
+    push(lang, 'roadmap', parsed.data.title || roadmapId, parsed.data.description || '', `/${lang}/roadmaps/${roadmapId}/`, undefined, undefined, undefined, {
+      category: parsed.data.category,
+      difficulty: parsed.data.difficulty,
+      duration: parsed.data.duration,
+    })
   }
 }
 
@@ -166,7 +229,9 @@ for (const lang of LOCALES) {
         parsed.data.description || excerpt(parsed.content),
         url,
         excerpt(parsed.content),
-        id
+        id,
+        undefined,
+        { category: type }
       )
     }
   }
@@ -182,7 +247,10 @@ for (const file of listFiles(vocabDir, '.json')) {
   if (!source || !target) continue
   for (const lang of LOCALES) {
     const loc = localize(data, lang)
-    push(lang, 'language', loc.title || slug, loc.description || '', `/${lang}/languages/${source}-${target}/${slug}/`)
+    push(lang, 'language', loc.title || slug, loc.description || '', `/${lang}/languages/${source}-${target}/${slug}/`, undefined, undefined, undefined, {
+      source,
+      target,
+    })
   }
 }
 

@@ -1,8 +1,9 @@
+// components/home/ContinueLearning.tsx
 'use client'
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Play, ArrowRight, BookOpen } from 'lucide-react'
+import { Play, ArrowRight, BookOpen, CheckCircle2 } from 'lucide-react'
 import { coursePercent, getCourseProgress, getLastVisited } from '@/lib/progress/storage'
 import type { CourseInfo } from '@/lib/courses/get-course-content'
 
@@ -20,6 +21,13 @@ interface ContinueData {
   progressLine: string | null
 }
 
+/**
+ * The "pick up where you left off" card.
+ *
+ * This is a *personal* surface, so it is placed directly beneath the hero:
+ * a returning learner sees it first, and a first-time visitor never sees it
+ * at all (the component renders nothing without saved progress).
+ */
 export default function ContinueLearning({ lang, dict, courses }: ContinueLearningProps) {
   const [data, setData] = useState<ContinueData | null>(null)
 
@@ -51,37 +59,67 @@ export default function ContinueLearning({ lang, dict, courses }: ContinueLearni
   if (!data) return null
 
   return (
-    <section className="pb-10" data-testid="continue-learning">
+    <section className="relative z-10 -mt-12 md:-mt-14" data-testid="continue-learning">
       <div className="container-custom">
-        <div className="max-w-4xl mx-auto flex items-center gap-4 rounded-2xl border bg-card p-5 shadow-sm">
-          <div className="hidden sm:flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600">
-            <Play className="h-5 w-5 text-white" />
-          </div>
+        <div className="card card-hover relative mx-auto flex max-w-4xl flex-col gap-5 overflow-hidden p-0 shadow-lg sm:flex-row sm:items-center sm:gap-6 sm:p-6">
+          {/* Section colour rail — Courses is violet in the colour map. */}
+          <span
+            aria-hidden="true"
+            className="absolute inset-y-0 left-0 w-1 bg-gradient-section-courses"
+          />
 
-          <div className="min-w-0 flex-1">
-            <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              <BookOpen className="h-3 w-3" />
+          <span
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-section-courses text-white sm:ml-2"
+            aria-hidden="true"
+          >
+            <Play className="h-5 w-5" />
+          </span>
+
+          <div className="min-w-0 flex-1 px-5 sm:px-0">
+            <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-section-courses">
+              <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
               {dict.lesson?.continue || 'Continue'}
             </p>
-            <p className="truncate font-semibold text-foreground">{data.heading}</p>
-            <p className="truncate text-sm text-muted-foreground">{data.sub}</p>
-          </div>
+            <p className="mt-1 truncate text-lg font-bold text-foreground">{data.heading}</p>
+            <p className="truncate text-sm text-foreground-muted">{data.sub}</p>
 
-          <div className="flex items-center gap-4">
             {data.pct !== null && (
-              <div className="hidden sm:block text-right">
-                <p className="text-lg font-bold text-primary">{data.pct}%</p>
+              <div className="mt-3">
+                <div
+                  className="h-1.5 w-full overflow-hidden rounded-full bg-surface-sunken"
+                  role="progressbar"
+                  aria-valuenow={data.pct}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-label={data.progressLine || 'Course progress'}
+                >
+                  <div
+                    className="h-full rounded-full bg-gradient-section-courses transition-[width] duration-500 ease-out"
+                    style={{ width: `${Math.max(2, data.pct)}%` }}
+                  />
+                </div>
                 {data.progressLine && (
-                  <p className="text-xs text-muted-foreground">{data.progressLine}</p>
+                  <p className="mt-1.5 flex items-center gap-1.5 text-xs text-foreground-muted">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-success" aria-hidden="true" />
+                    {data.progressLine}
+                  </p>
                 )}
               </div>
             )}
-            <Link
-              href={data.href}
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
-            >
+          </div>
+
+          <div className="flex items-center justify-between gap-4 border-t border-border px-5 pt-4 sm:justify-end sm:border-l sm:border-t-0 sm:px-0 sm:pl-6 sm:pt-0">
+            {data.pct !== null && (
+              <span className="tabular text-2xl font-bold tracking-tight text-foreground">
+                {data.pct}%
+              </span>
+            )}
+            <Link href={data.href} className="btn btn-primary group whitespace-nowrap">
               {dict.lesson?.continue || 'Continue'}
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
             </Link>
           </div>
         </div>

@@ -652,13 +652,19 @@ export default function MarkdownRenderer({ content, lang = 'en', dict }: Markdow
         
 
         table: ({ children }) => (
-          <div className="overflow-x-auto my-6">
-            <table className="table table-zebra w-full">{children}</table>
+          <div className="overflow-x-auto my-6 rounded-xl border border-border">
+            <table className="w-full text-sm">{children}</table>
           </div>
         ),
-        thead: ({ children }) => <thead className="bg-base-200">{children}</thead>,
-        th: ({ children }) => <th className="font-semibold text-left">{children}</th>,
-        td: ({ children }) => <td>{children}</td>,
+        thead: ({ children }) => <thead className="bg-surface-sunken">{children}</thead>,
+        th: ({ children }) => (
+          <th className="border-b border-border px-4 py-2.5 text-left font-semibold text-foreground">
+            {children}
+          </th>
+        ),
+        td: ({ children }) => (
+          <td className="border-b border-border-subtle px-4 py-2.5 text-foreground/90">{children}</td>
+        ),
 
         hr: () => <hr className="my-8 border-border" />,
 

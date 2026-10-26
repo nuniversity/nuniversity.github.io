@@ -39,31 +39,31 @@ export default function Features({ lang, dict }: FeaturesProps) {
       icon: Code,
       title: dict.features.items.coding.title,
       description: dict.features.items.coding.description,
-      gradient: 'from-purple-500 to-pink-500',
+      gradient: 'from-cyan-500 to-teal-500',
     },
     {
       icon: Calculator,
       title: dict.features.items.study.title,
       description: dict.features.items.study.description,
-      gradient: 'from-green-500 to-emerald-500',
+      gradient: 'from-emerald-500 to-green-500',
     },
     {
       icon: GamepadIcon,
       title: dict.features.items.games.title,
       description: dict.features.items.games.description,
-      gradient: 'from-orange-500 to-red-500',
+      gradient: 'from-amber-500 to-orange-500',
     },
     {
       icon: Video,
       title: dict.features.items.video.title,
       description: dict.features.items.video.description,
-      gradient: 'from-indigo-500 to-blue-500',
+      gradient: 'from-sky-400 to-blue-500',
     },
     {
       icon: Users,
       title: dict.features.items.community.title,
       description: dict.features.items.community.description,
-      gradient: 'from-pink-500 to-purple-500',
+      gradient: 'from-rose-400 to-pink-500',
     },
   ]
 

@@ -115,6 +115,7 @@
   },
   "navigation": {
     "home": "Home",
+    "skip_to_content": "Skip to content",
     "courses": "Courses",
     "tools": "Tools",
     "games": "Games",
@@ -124,7 +125,13 @@
     "about": "About",
     "contact": "Contact",
     "languages": "Languages",
-    "more": "More"
+    "more": "More",
+    "explore": "Explore",
+    "explore_hint": "Discover curated material",
+    "library_hint": "Curated external resources",
+    "roadmaps_hint": "Structured learning paths",
+    "languages_hint": "Vocabulary and fluency activities",
+    "quizzes_hint": "Certification quizzes and mock exams"
   },
   "hero": {
     "badge": "Interactive Learning Platform",
@@ -139,7 +146,8 @@
       "coding": "Interactive Coding",
       "tools": "Study Tools",
       "courses": "Video Courses"
-    }
+    },
+    "search_placeholder": "What do you want to learn?"
   },
   "features": {
     "title": "Everything You Need to",
@@ -399,7 +407,7 @@
     "try_different_filters": "Try adjusting your filters",
     "check_back_soon": "Check back soon for new content",
     "clear_filters": "Clear Filters",
-    "start_learning": "Start →"
+    "start_learning": "Start"
   },
   "games": {
     "title": "Learning Games",
@@ -750,7 +758,10 @@
       "code": "Certificate ID",
       "name_placeholder": "Enter your name for the certificate",
       "required_name": "Enter your name to issue the certificate",
-      "print": "Print certificate"
+      "print": "Print certificate",
+      "saved_locally": "Saved in this browser only",
+      "clear_name": "Remove",
+      "privacy_note": "Your name is stored only in this browser and is never sent to a server."
     },
     "history": {
       "title": "Attempt History",
@@ -1078,7 +1089,7 @@
       "confirm_delete_deck": "Delete this deck and all its cards?",
       "title": "Flashcard Maker",
       "subtitle": "Create, study, and master with spaced repetition",
-      "back_to_decks": "← Decks",
+      "back_to_decks": "Decks",
       "study": "Study",
       "your_decks": "Your Decks",
       "cards_to_review": "{n} cards · {m} to review",
@@ -1450,7 +1461,7 @@
     "tryDifferentSearch": "Try a different search term",
     "checkBackSoon": "Check back soon for new roadmaps",
     "clearSearch": "Clear Search",
-    "startLearning": "Start Learning →",
+    "startLearning": "Start Learning",
     "backToRoadmaps": "Back to Roadmaps",
     "totalRoadmaps": "roadmaps",
     "totalSteps": "total steps",
@@ -1629,7 +1640,7 @@
     "results": "{n} results",
     "hint_navigate": "Navigate",
     "hint_open": "Open",
-    "hint_close": "Close"
+    "hint_close": "to close"
   },
   "lesson": {
     "outline_title": "On this page",

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node scripts/postbuild.mjs",
+    "build": "next build && node scripts/postbuild.mjs && node scripts/verify-css.mjs",
     "start": "npx serve out -l 3000",
     "lint": "next lint",
     "prebuild": "node scripts/generate-search-index.mjs",

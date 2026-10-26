@@ -16,7 +16,8 @@ import {
   Briefcase,
   Clock,
   Grid3x3,
-  BookOpen
+  BookOpen,
+  ArrowRight
 } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { getToolIcon } from '@/lib/tools/tool-icons'
@@ -49,16 +50,16 @@ const categoryIcons: Record<string, any> = {
 }
 
 const categoryColors: Record<string, string> = {
-  'artificial_intelligence': 'from-purple-600 to-pink-600',
-  'mathematics': 'from-blue-600 to-cyan-600',
-  'coding': 'from-green-600 to-emerald-600',
-  'physics': 'from-orange-600 to-red-600',
-  'logic': 'from-indigo-600 to-purple-600',
-  'uncategorized': 'from-gray-500 to-gray-700',
-  'collaboration': 'from-yellow-500 to-amber-600',
-  'business_strategy': 'from-teal-600 to-emerald-700',
-  'productivity': 'from-rose-500 to-red-600',
-  'study': 'from-blue-500 to-indigo-600',
+  'artificial_intelligence': 'from-cyan-500 to-teal-500',
+  'mathematics': 'from-blue-500 to-cyan-500',
+  'coding': 'from-emerald-500 to-green-500',
+  'physics': 'from-amber-500 to-orange-500',
+  'logic': 'from-rose-400 to-pink-500',
+  'uncategorized': 'from-slate-500 to-slate-700',
+  'collaboration': 'from-sky-400 to-blue-500',
+  'business_strategy': 'from-yellow-500 to-amber-500',
+  'productivity': 'from-teal-500 to-cyan-500',
+  'study': 'from-lime-500 to-emerald-500',
 }
 
 export function ToolsClient({ lang, tools, dict }: ToolsClientProps) {
@@ -106,7 +107,7 @@ export function ToolsClient({ lang, tools, dict }: ToolsClientProps) {
       <div className="max-w-6xl mx-auto">
         {/* Page Header */}
         <div className="mb-10 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-section-tools shadow-lg shadow-black/10 mb-4">
             <Wrench className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2">
@@ -216,8 +217,9 @@ export function ToolsClient({ lang, tools, dict }: ToolsClientProps) {
                         </div>
 
                         <div className="px-6 py-4 bg-muted/30 border-t flex items-center justify-end">
-                          <span className="text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
-                            {dict.tools?.try_tool || 'Try Tool →'}
+                          <span className="inline-flex items-center gap-1 text-primary font-medium text-sm transition-transform group-hover:translate-x-1">
+                            {dict.tools?.try_tool || 'Try Tool'}
+                            <ArrowRight className="w-4 h-4" aria-hidden="true" />
                           </span>
                         </div>
                       </Link>

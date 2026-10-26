@@ -76,7 +76,7 @@ export default function Contact({ lang, dict }: ContactProps) {
               {dict.contact.title}{' '}
               <span className="text-blue-600">{dict.contact.titleHighlight}</span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
+            <div className="w-24 h-1 bg-brand mx-auto mb-6"></div>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               {dict.contact.subtitle}
             </p>
@@ -104,7 +104,7 @@ export default function Contact({ lang, dict }: ContactProps) {
               <div className="space-y-6">
 
                 <motion.div whileHover={{ x: 10 }} className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-rose-500 to-pink-500 rounded-lg flex items-center justify-center">
                     <Youtube className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -136,7 +136,7 @@ export default function Contact({ lang, dict }: ContactProps) {
                 </motion.div>
 
                 <motion.div whileHover={{ x: 10 }} className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
                     <Instagram className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -271,7 +271,7 @@ export default function Contact({ lang, dict }: ContactProps) {
                     disabled={state.submitting}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg flex items-center justify-center"
+                    className="w-full bg-brand text-white font-semibold py-4 px-6 rounded-lg  transition-all duration-300 shadow-lg flex items-center justify-center"
                 >
                     {state.submitting ? (
                     <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>

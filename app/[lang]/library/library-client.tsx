@@ -28,13 +28,13 @@ const typeIcons: Record<ResourceType, any> = {
 }
 
 const typeColors: Record<ResourceType, string> = {
-  video: 'from-red-600 to-pink-600',
-  ebook: 'from-blue-600 to-cyan-600',
-  course: 'from-purple-600 to-indigo-600',
-  blog: 'from-green-600 to-emerald-600',
-  repository: 'from-gray-700 to-gray-900',
-  podcast: 'from-orange-600 to-amber-600',
-  article: 'from-teal-600 to-cyan-600',
+  video: 'from-rose-500 to-pink-500',
+  ebook: 'from-blue-500 to-cyan-500',
+  course: 'from-cyan-500 to-teal-500',
+  blog: 'from-emerald-500 to-green-500',
+  repository: 'from-slate-700 to-slate-900',
+  podcast: 'from-amber-500 to-orange-500',
+  article: 'from-teal-500 to-cyan-500',
 }
 
 export function LibraryClient({ lang, resources, dict }: LibraryClientProps) {
@@ -129,7 +129,7 @@ export function LibraryClient({ lang, resources, dict }: LibraryClientProps) {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-10 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-section-library shadow-lg shadow-black/10 mb-4">
             <Library className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2">

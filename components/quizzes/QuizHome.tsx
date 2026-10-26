@@ -50,7 +50,7 @@ function difficultyColor(difficulty?: string): string {
 function getDomainAccentClass(color: string): string {
   const map: Record<string, string> = {
     blue: 'bg-blue-500',
-    purple: 'bg-purple-500',
+    purple: 'bg-cyan-500',
     teal: 'bg-teal-500',
     orange: 'bg-orange-500',
     green: 'bg-green-500',
@@ -106,7 +106,7 @@ export function QuizHome({
             <span className="text-xs font-medium px-3 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
               {quiz.certification}
             </span>
-            <span className="text-xs font-medium px-3 py-1 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">
+            <span className="text-xs font-medium px-3 py-1 rounded-full bg-primary-soft text-primary-soft-foreground dark:bg-primary/15 dark:text-primary">
               {tpl(dict.quizzes?.home?.questions_total || '{n} questions total', { n: quiz.questions.length })}
             </span>
             {best && (

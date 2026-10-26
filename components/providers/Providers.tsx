@@ -14,9 +14,14 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
+import { safeGet, safeSet } from '@/lib/storage/safe-storage'
+
+type Theme = 'light' | 'dark'
+
+const THEME_KEY = 'theme'
 
 interface ThemeContextType {
-  theme: 'light' | 'dark'
+  theme: Theme
   toggleTheme: () => void
 }
 
@@ -30,13 +35,19 @@ export function useTheme() {
   return context
 }
 
+/** Reads the persisted theme, validating the value rather than trusting it. */
+function readStoredTheme(): Theme | null {
+  const raw = safeGet(THEME_KEY)
+  return raw === 'dark' || raw === 'light' ? raw : null
+}
+
 function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  const [theme, setTheme] = useState<Theme>('light')
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null
+    const savedTheme = readStoredTheme()
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
+
     if (savedTheme) {
       setTheme(savedTheme)
     } else if (prefersDark) {
@@ -45,7 +56,7 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('theme', theme)
+    safeSet(THEME_KEY, theme)
     document.documentElement.classList.toggle('dark', theme === 'dark')
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])

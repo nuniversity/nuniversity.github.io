@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { ArrowRight, Code, type LucideIcon } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type Dictionary } from '@/lib/i18n/get-dictionary'
@@ -9,16 +8,16 @@ import type { ToolMetadata } from '@/lib/tools/get-tool-content'
 import { getToolIcon } from '@/lib/tools/tool-icons'
 
 const iconBgMap: Record<string, string> = {
-  'productivity': 'bg-green-500',
+  'productivity': 'bg-amber-500',
   'study': 'bg-blue-500',
-  'artificial_intelligence': 'bg-purple-500',
+  'artificial_intelligence': 'bg-cyan-500',
   'mathematics': 'bg-orange-500',
-  'coding': 'bg-indigo-500',
-  'logic': 'bg-pink-500',
+  'coding': 'bg-emerald-500',
+  'logic': 'bg-rose-400',
   'physics': 'bg-teal-500',
-  'collaboration': 'bg-cyan-500',
-  'business_strategy': 'bg-yellow-600',
-  'uncategorized': 'bg-gray-500',
+  'collaboration': 'bg-sky-400',
+  'business_strategy': 'bg-yellow-500',
+  'uncategorized': 'bg-slate-500',
 }
 
 function getIcon(icon?: string): LucideIcon {
@@ -28,22 +27,6 @@ function getIcon(icon?: string): LucideIcon {
 function getIconBg(category: string): string {
   const key = category?.toLowerCase().replace(/\s+/g, '_') || 'uncategorized'
   return iconBgMap[key] || iconBgMap['uncategorized']
-}
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.06 },
-  },
-}
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: 'easeOut' as const },
-  },
 }
 
 interface ToolsProps {
@@ -56,79 +39,63 @@ export default function Tools({ lang, dict, tools }: ToolsProps) {
   const displayTools = tools.slice(0, 8)
 
   return (
-    <section className="py-20 bg-white dark:bg-gray-800">
+    <section className="section bg-background">
       <div className="container-custom">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             {dict.tools?.sectionTitle || 'Powerful Learning'}{' '}
             <span className="text-gradient">{dict.tools?.sectionTitleHighlight || 'Tools'}</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            {dict.tools?.subtitle || 'Access professional-grade tools right in your browser. No downloads, no setup required.'}
+          <p className="mt-4 text-lg text-foreground-muted">
+            {dict.tools?.subtitle ||
+              'Access professional-grade tools right in your browser. No downloads, no setup required.'}
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {displayTools.map((tool) => {
+        <ul className="stagger grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {displayTools.map((tool, index) => {
             const Icon = getIcon(tool.icon)
 
             return (
-              <motion.div
-                key={tool.slug}
-                variants={cardVariants}
-              >
+              <li key={tool.slug} style={{ '--i': index } as React.CSSProperties}>
                 <Link
                   href={`/${lang}/tools/${tool.slug}`}
-                  className="group block bg-gray-50 dark:bg-gray-700 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 card-hover h-full"
+                  className="card card-hover group flex h-full flex-col p-5"
                 >
-                  <div className={`w-12 h-12 rounded-xl ${getIconBg(tool.category)} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
+                  <span
+                    className={`flex h-11 w-11 items-center justify-center rounded-xl text-white transition-transform duration-200 group-hover:scale-110 ${getIconBg(tool.category)}`}
+                    aria-hidden="true"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </span>
 
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                    {tool.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                  <h3 className="mt-4 text-base font-bold text-foreground">{tool.title}</h3>
+                  <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-foreground-muted">
                     {tool.description}
                   </p>
 
-                  <div className="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium group-hover:translate-x-1 transition-transform duration-300">
-                    <span>{dict.tools?.try_tool || 'Try it now'}</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </div>
+                  <span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-section-tools">
+                    {dict.tools?.try_tool || 'Try it now'}
+                    <ArrowRight
+                      className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                      aria-hidden="true"
+                    />
+                  </span>
                 </Link>
-              </motion.div>
+              </li>
             )
           })}
-        </motion.div>
+        </ul>
 
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-        >
-          <Link
-            href={`/${lang}/tools`}
-            className="inline-flex items-center space-x-2 text-blue-600 dark:text-blue-400 font-medium hover:underline"
-          >
+        <div className="mt-12 text-center">
+          <Link href={`/${lang}/tools`} className="btn btn-secondary group">
             <span>{dict.tools?.view_all || 'View All Tools'}</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

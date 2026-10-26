@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Map, Clock, TrendingUp, RotateCcw } from 'lucide-react'
 import { type RoadmapMetadata, type RoadmapProgress } from '@/lib/roadmaps/types'
 import { type Locale } from '@/lib/i18n/config'
+import { readJson, writeJson } from '@/lib/storage/safe-storage'
 import { RoadmapStepCard } from './RoadmapStepCard'
 
 interface RoadmapTimelineProps {
@@ -22,18 +23,24 @@ export function RoadmapTimeline({ roadmap, lang, dict }: RoadmapTimelineProps) {
   })
 
   useEffect(() => {
-    const saved = localStorage.getItem(`roadmap-progress-${roadmap.id}`)
+    const saved = readJson(`roadmap-progress-${roadmap.id}`, (raw) => {
+      if (typeof raw !== 'object' || raw === null) return null;
+      const value = raw as Record<string, unknown>;
+      if (!Array.isArray(value.completedSteps)) return null;
+      return {
+        roadmapId: typeof value.roadmapId === 'string' ? value.roadmapId : roadmap.id,
+        completedSteps: value.completedSteps.filter((s): s is string => typeof s === 'string'),
+        startedAt: typeof value.startedAt === 'string' ? value.startedAt : new Date().toISOString(),
+        lastAccessed: typeof value.lastAccessed === 'string' ? value.lastAccessed : new Date().toISOString(),
+      };
+    });
     if (saved) {
-      try {
-        setProgress({ ...JSON.parse(saved), lastAccessed: new Date().toISOString() })
-      } catch (e) {
-        console.error('Failed to parse saved progress', e)
-      }
+      setProgress({ ...saved, lastAccessed: new Date().toISOString() });
     }
   }, [roadmap.id])
 
   useEffect(() => {
-    localStorage.setItem(`roadmap-progress-${roadmap.id}`, JSON.stringify(progress))
+    writeJson(`roadmap-progress-${roadmap.id}`, progress)
   }, [progress, roadmap.id])
 
   const toggleStepComplete = (stepId: string) => {
@@ -88,7 +95,7 @@ export function RoadmapTimeline({ roadmap, lang, dict }: RoadmapTimelineProps) {
         className="mb-8"
       >
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-xl bg-brand-mark flex items-center justify-center">
             <Map className="w-6 h-6 text-white" />
           </div>
           <div>
@@ -140,7 +147,7 @@ export function RoadmapTimeline({ roadmap, lang, dict }: RoadmapTimelineProps) {
               initial={{ width: 0 }}
               animate={{ width: `${completionPercentage}%` }}
               transition={{ duration: 0.5 }}
-              className="h-full bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"
+              className="h-full bg-brand rounded-full"
             />
           </div>
           <div className="flex items-center justify-between mt-2">
@@ -163,7 +170,7 @@ export function RoadmapTimeline({ roadmap, lang, dict }: RoadmapTimelineProps) {
       {/* Timeline */}
       <div className="relative">
         {/* Vertical line */}
-        <div className="absolute left-4 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-green-500" />
+        <div className="absolute left-4 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-cyan-500 to-emerald-500" />
 
         {/* Steps */}
         <div className="space-y-6">

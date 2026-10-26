@@ -1,3 +1,5 @@
+import { createSafeMap, isSafeKey, readJson, safeRemove, safeSet } from '@/lib/storage/safe-storage'
+
 export interface CardProgress {
   streak: number
   totalReviews: number
@@ -43,41 +45,16 @@ export function legacyFlashcardKey(gameId: string): string {
   return `${LEGACY_FLASHCARD_PREFIX}${gameId}`
 }
 
-function safeGet(key: string): string | null {
-  if (typeof window === 'undefined') return null
-  try {
-    return window.localStorage.getItem(key)
-  } catch {
-    return null
-  }
-}
-
-function safeSet(key: string, value: string): void {
-  if (typeof window === 'undefined') return
-  try {
-    window.localStorage.setItem(key, value)
-  } catch {
-    return
-  }
-}
-
-function readJson<T>(key: string): T | null {
-  const raw = safeGet(key)
-  if (raw === null) return null
-  try {
-    return JSON.parse(raw) as T
-  } catch {
-    return null
-  }
-}
-
 function migrateLegacyFormat(data: Record<string, unknown>): {
   progress: FlashcardProgressMap
   migrated: boolean
 } {
   let migrated = false
-  const progress: FlashcardProgressMap = {}
+  // Prototype-less map plus a reserved-key guard: a stored `__proto__` entry
+  // can never reach an object's prototype chain.
+  const progress: FlashcardProgressMap = createSafeMap<CardProgress>()
   for (const [wordId, value] of Object.entries(data)) {
+    if (!isSafeKey(wordId)) continue
     if (value && typeof value === 'object' && ('ease' in value || 'repetitions' in value)) {
       migrated = true
       const v = value as Record<string, unknown>
@@ -170,10 +147,5 @@ export function recordMatchingBest(pair: string, slug: string, result: MatchingR
 }
 
 export function clearMatchingBest(pair: string, slug: string): void {
-  if (typeof window === 'undefined') return
-  try {
-    window.localStorage.removeItem(langBestKey(pair, slug))
-  } catch {
-    return
-  }
+  safeRemove(langBestKey(pair, slug))
 }

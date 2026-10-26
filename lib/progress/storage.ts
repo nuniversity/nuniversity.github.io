@@ -1,3 +1,5 @@
+import { readJson, safeGet, safeRemove, safeSet } from '@/lib/storage/safe-storage'
+
 export interface CourseProgress {
   courseSlug: string
   completed: string[]
@@ -20,44 +22,6 @@ export const LAST_VISITED_KEY = 'v1:last-visited'
 
 export function courseProgressKey(courseSlug: string): string {
   return `${PROGRESS_PREFIX}${courseSlug}`
-}
-
-function safeGet(key: string): string | null {
-  if (typeof window === 'undefined') return null
-  try {
-    return window.localStorage.getItem(key)
-  } catch {
-    return null
-  }
-}
-
-function safeSet(key: string, value: string): void {
-  if (typeof window === 'undefined') return
-  try {
-    window.localStorage.setItem(key, value)
-  } catch {
-    return
-  }
-}
-
-function readJson(key: string): unknown {
-  const raw = safeGet(key)
-  if (raw === null) return null
-  try {
-    return JSON.parse(raw)
-  } catch {
-    safeRemove(key)
-    return null
-  }
-}
-
-function safeRemove(key: string): void {
-  if (typeof window === 'undefined') return
-  try {
-    window.localStorage.removeItem(key)
-  } catch {
-    return
-  }
 }
 
 function sanitizeProgress(courseSlug: string, raw: unknown): CourseProgress | null {

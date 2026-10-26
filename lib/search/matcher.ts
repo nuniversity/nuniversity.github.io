@@ -17,6 +17,27 @@ export interface SearchDoc {
   lang: string
   text?: string
   courseSlug?: string
+  /**
+   * Contextual metadata. What is useful depends on the entry type:
+   *  - lesson  → courseTitle, area, position, totalLessons, difficulty, duration
+   *  - course  → area, difficulty, duration, author, totalLessons
+   *  - tool    → category
+   *  - quiz    → category, certification, difficulty
+   *  - game    → category, difficulty
+   *  - library → category (the resource type: video, ebook, course …)
+   *  - language→ source, target
+   */
+  courseTitle?: string
+  area?: string
+  difficulty?: string
+  duration?: string
+  author?: string
+  category?: string
+  certification?: string
+  position?: number
+  totalLessons?: number
+  source?: string
+  target?: string
 }
 
 export const SEARCH_TYPES: SearchDocType[] = [

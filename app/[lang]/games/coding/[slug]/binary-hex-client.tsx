@@ -27,10 +27,10 @@ function t(template: string, vars?: Record<string, string | number>): string {
 }
 
 const modeColors: Record<Mode, string> = {
-  'dec-to-bin': 'from-blue-600 to-indigo-600',
-  'bin-to-dec': 'from-indigo-600 to-purple-600',
-  'dec-to-hex': 'from-purple-600 to-pink-600',
-  'hex-to-dec': 'from-pink-600 to-rose-600',
+  'dec-to-bin': 'from-blue-500 to-cyan-500',
+  'bin-to-dec': 'from-cyan-500 to-teal-500',
+  'dec-to-hex': 'from-teal-500 to-emerald-500',
+  'hex-to-dec': 'from-rose-400 to-pink-500',
   'bin-to-hex': 'from-teal-600 to-cyan-600',
   'hex-to-bin': 'from-cyan-600 to-blue-600',
 }
@@ -137,7 +137,7 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
         </Link>
 
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-mark mb-4">
             <Shuffle className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2">{game.title}</h1>
@@ -168,7 +168,7 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
                   <button
                     key={d}
                     onClick={() => setDifficulty(d)}
-                    className={`flex-1 py-3 rounded-xl font-medium transition-all ${difficulty === d ? 'bg-indigo-600 text-white shadow-lg' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+                    className={`flex-1 py-3 rounded-xl font-medium transition-all ${difficulty === d ? 'bg-primary text-white shadow-lg' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
                   >
                     <div className="capitalize">{g.difficulty?.[d] || d}</div>
                     <div className="text-xs opacity-70 mt-1">{game.difficultyLevels[d].maxBits} bits</div>
@@ -176,7 +176,7 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
                 ))}
               </div>
             </div>
-            <button onClick={startGame} disabled={selectedModes.length === 0} className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-lg font-bold hover:shadow-lg transition-all disabled:opacity-50">
+            <button onClick={startGame} disabled={selectedModes.length === 0} className="w-full py-4 rounded-xl bg-brand text-white text-lg font-bold hover:shadow-lg transition-all disabled:opacity-50">
               {t(g.start_challenge_n || 'Start Challenge ({n} questions)', { n: totalQuestions })}
             </button>
           </div>
@@ -190,7 +190,7 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
               <span className="text-sm font-semibold">{t(g.score_value || 'Score: {score}', { score })}</span>
             </div>
             <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full mb-8 overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all" style={{ width: `${((questionsAnswered) / totalQuestions) * 100}%` }} />
+              <div className="h-full bg-brand rounded-full transition-all" style={{ width: `${((questionsAnswered) / totalQuestions) * 100}%` }} />
             </div>
 
             {/* Mode Badge */}

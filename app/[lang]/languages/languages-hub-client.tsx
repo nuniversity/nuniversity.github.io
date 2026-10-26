@@ -59,7 +59,7 @@ export function LanguagesHubClient({ lang, activities, dict }: LanguagesHubClien
     <div className="container-custom py-12">
       <div className="max-w-6xl mx-auto">
         <div className="mb-10 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-emerald-600 to-teal-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-section-languages shadow-lg shadow-black/10 mb-4">
             <LanguagesIcon className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2">

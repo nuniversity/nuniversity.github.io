@@ -222,7 +222,8 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
           </div>
 
           {/* Lesson Content */}
-          <div className="bg-card rounded-lg border p-8 mb-8 shadow-sm" data-lesson-content>
+          <div className="bg-card rounded-2xl border border-border p-6 sm:p-8 mb-8 shadow-sm" data-lesson-content>
+            <div className="prose-measure">
             {lesson.metadata.exam && lessonQuestions.length > 0 ? (
               <LessonExam
                 lang={lang}
@@ -239,6 +240,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
                 <LessonScoreSummary dict={dict} />
               </LessonScoreProvider>
             )}
+            </div>
           </div>
 
           {/* Completion CTA */}
@@ -263,7 +265,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
               </div>
               <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300"
+                  className="h-full bg-brand transition-all duration-300"
                   style={{ width: `${((currentIndex + 1) / allLessons.length) * 100}%` }}
                 />
               </div>

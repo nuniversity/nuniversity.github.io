@@ -113,14 +113,14 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-950 dark:to-slate-900 p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-mark mb-4">
             <Brain className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-2 bg-brand bg-clip-text text-transparent">
             {t.title || 'LLM Prompt Builder'}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
@@ -132,7 +132,7 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
           {/* Input Form */}
           <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl">
             <div className="flex items-center gap-2 mb-6">
-              <Sparkles className="w-5 h-5 text-purple-600" />
+              <Sparkles className="w-5 h-5 text-primary" />
               <h2 className="text-2xl font-semibold">{t.buildYourPrompt || 'Build Your Prompt'}</h2>
             </div>
 
@@ -149,7 +149,7 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
                   value={formData.role}
                   onChange={handleChange}
                   placeholder={t.fields?.role?.placeholder || 'e.g., an expert Python developer, a creative writer'}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
               </div>
 
@@ -165,7 +165,7 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
                   onChange={handleChange}
                   placeholder={t.fields?.objective?.placeholder || 'What do you want the AI to do?'}
                   rows={3}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                 />
               </div>
 
@@ -181,7 +181,7 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
                   onChange={handleChange}
                   placeholder={t.fields?.context?.placeholder || 'Provide background information or situation'}
                   rows={3}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                 />
               </div>
 
@@ -197,7 +197,7 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
                   value={formData.target}
                   onChange={handleChange}
                   placeholder={t.fields?.targetAudience?.placeholder || 'e.g., beginners, experts, students'}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
               </div>
 
@@ -210,7 +210,7 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
                   name="tone"
                   value={formData.tone}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent"
                 >
                   {toneOptions.map(option => (
                     <option key={option.value} value={option.value}>
@@ -232,7 +232,7 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
                   onChange={handleChange}
                   placeholder={t.fields?.constraints?.placeholder || 'e.g., Keep it under 500 words, avoid jargon'}
                   rows={2}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                 />
               </div>
 
@@ -248,7 +248,7 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
                   value={formData.outputFormat}
                   onChange={handleChange}
                   placeholder={t.fields?.outputFormat?.placeholder || 'e.g., JSON, bullet points, step-by-step guide'}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
               </div>
 
@@ -264,7 +264,7 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
                   onChange={handleChange}
                   placeholder={t.fields?.examples?.placeholder || 'Provide examples of desired output'}
                   rows={3}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                 />
               </div>
 
@@ -273,7 +273,7 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
                 <button
                   onClick={buildPrompt}
                   disabled={!formData.objective}
-                  className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-medium hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 bg-brand text-white py-3 rounded-lg font-medium hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {t.buttons?.generate || 'Generate Prompt'}
                 </button>
@@ -330,8 +330,8 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
             )}
 
             {generatedPrompt && (
-              <div className="mt-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
-                <p className="text-sm text-purple-800 dark:text-purple-300">
+              <div className="mt-4 p-4 bg-primary-soft rounded-lg border border-primary/25 dark:border-primary/30">
+                <p className="text-sm text-primary-soft-foreground dark:text-primary">
                   <strong>{t.tip?.label || 'Tip'}:</strong> {t.tip?.text || 'Copy this prompt and paste it into your favorite LLM (ChatGPT, Claude, Gemini, etc.) for best results.'}
                 </p>
               </div>
@@ -344,25 +344,25 @@ const LLMPromptBuilder = ({ lang, dict }: LLMPromptBuilderProps) => {
           <h3 className="text-xl font-semibold mb-4">{t.tipsSection?.title || 'Tips for Effective Prompts'}</h3>
           <div className="grid md:grid-cols-3 gap-6">
             <div>
-              <h4 className="font-medium text-purple-600 mb-2">{t.tipsSection?.tip1?.title || 'Be Specific'}</h4>
+              <h4 className="font-medium text-primary mb-2">{t.tipsSection?.tip1?.title || 'Be Specific'}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 {t.tipsSection?.tip1?.text || 'Clearly define what you want. The more specific your objective, the better the results.'}
               </p>
             </div>
             <div>
-              <h4 className="font-medium text-purple-600 mb-2">{t.tipsSection?.tip2?.title || 'Provide Context'}</h4>
+              <h4 className="font-medium text-primary mb-2">{t.tipsSection?.tip2?.title || 'Provide Context'}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 {t.tipsSection?.tip2?.text || 'Background information helps the AI understand your needs and generate more relevant responses.'}
               </p>
             </div>
             <div>
-              <h4 className="font-medium text-purple-600 mb-2">{t.tipsSection?.tip3?.title || 'Use Examples'}</h4>
+              <h4 className="font-medium text-primary mb-2">{t.tipsSection?.tip3?.title || 'Use Examples'}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 {t.tipsSection?.tip3?.text || 'Show examples of the desired output format to guide the AI response structure.'}
               </p>
             </div>
             {/* <div>
-              <h4 className="font-medium text-purple-600 mb-2">{t.tipsSection?.tip4?.title || 'Use Examples'}</h4>
+              <h4 className="font-medium text-primary mb-2">{t.tipsSection?.tip4?.title || 'Use Examples'}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 {t.tipsSection?.tip4?.text || 'Show examples of the desired output format to guide the AI response structure.'}
               </p>

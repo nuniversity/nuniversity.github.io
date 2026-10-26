@@ -80,7 +80,7 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
       <div className="max-w-6xl mx-auto">
         {/* Page Header */}
         <div className="mb-10 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-section-games shadow-lg shadow-black/10 mb-4">
             <Trophy className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2">
@@ -123,7 +123,7 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
             return (
               <div key={category}>
                 <h2 className="text-2xl font-semibold mb-6 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-section-games flex items-center justify-center">
                     <Icon className="w-5 h-5 text-white" />
                   </div>
                   {category}
@@ -137,7 +137,7 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
                     >
                       {/* Header with icon and difficulty */}
                       <div className="flex items-center justify-between mb-4">
-                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-lg bg-gradient-section-games flex items-center justify-center">
                           <Gamepad2 className="w-6 h-6 text-white" />
                         </div>
                         {game.difficulty && (
@@ -178,7 +178,7 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
             className="group block bg-card border-2 border-dashed border-primary/30 rounded-2xl p-6 hover:border-primary hover:shadow-xl transition-all duration-300"
           >
             <div className="flex items-start gap-4 min-w-0">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
+              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-section-games flex items-center justify-center">
                 <Trophy className="w-6 h-6 text-white" />
               </div>
               <div className="flex-1 min-w-0">
@@ -200,7 +200,7 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
             className="group block bg-card border-2 border-dashed border-primary/30 rounded-2xl p-6 hover:border-primary hover:shadow-xl transition-all duration-300"
           >
             <div className="flex items-start gap-4 min-w-0">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex items-center justify-center">
+              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-section-languages flex items-center justify-center">
                 <Languages className="w-6 h-6 text-white" />
               </div>
               <div className="flex-1 min-w-0">

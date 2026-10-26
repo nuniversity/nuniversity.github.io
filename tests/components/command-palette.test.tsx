@@ -202,6 +202,42 @@ describe('CommandPalette', () => {
     expect(onClose).toHaveBeenCalledTimes(1)
   })
 
+  it('closes via the visible close button', async () => {
+    globalThis.fetch = vi.fn().mockResolvedValue({ ok: true, json: async () => FIXTURE }) as typeof fetch
+
+    const { onClose } = renderPalette(true)
+    await screen.findByText('Navigate')
+
+    const closeButton = screen.getByTestId('search-close')
+    expect(closeButton).toBeInTheDocument()
+    expect(closeButton).toHaveAttribute('aria-label', 'Close')
+
+    fireEvent.click(closeButton)
+    expect(onClose).toHaveBeenCalledTimes(1)
+  })
+
+  it('closes when the backdrop is clicked', async () => {
+    globalThis.fetch = vi.fn().mockResolvedValue({ ok: true, json: async () => FIXTURE }) as typeof fetch
+
+    const { onClose } = renderPalette(true)
+    await screen.findByText('Navigate')
+
+    const backdrop = screen.getByTestId('command-palette').firstElementChild as HTMLElement
+    fireEvent.click(backdrop)
+    expect(onClose).toHaveBeenCalledTimes(1)
+  })
+
+  it('exposes the dialog with an accessible name and modal semantics', async () => {
+    globalThis.fetch = vi.fn().mockResolvedValue({ ok: true, json: async () => FIXTURE }) as typeof fetch
+
+    renderPalette(true)
+    await screen.findByText('Navigate')
+
+    const dialog = screen.getByRole('dialog')
+    expect(dialog).toHaveAttribute('aria-modal', 'true')
+    expect(dialog).toHaveAccessibleName('Search')
+  })
+
   it('finds localized lessons by title in pt and es indexes', async () => {
     const localeFixture: SearchDoc[] = [
       {

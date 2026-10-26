@@ -330,14 +330,14 @@ const SWOTMatrix = ({ dict = {} }: SWOTMatrixProps) => {
   const totalItems = Object.values(swotData).reduce((sum, arr) => sum + arr.length, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-indigo-900 dark:to-gray-900 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 py-12 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-mark mb-4">
             <BarChart3 className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-2 bg-brand bg-clip-text text-transparent">
             {t.title}
           </h1>
           <p className="text-muted-foreground text-lg">
@@ -384,8 +384,8 @@ const SWOTMatrix = ({ dict = {} }: SWOTMatrixProps) => {
               onClick={() => setShowStrategy(!showStrategy)}
               className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${
                 showStrategy 
-                  ? 'bg-purple-600 text-white hover:bg-purple-700' 
-                  : 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-900/50'
+                  ? 'bg-primary text-white hover:bg-primary-hover' 
+                  : 'bg-primary-soft text-primary-soft-foreground dark:bg-primary/15 dark:text-primary hover:bg-primary/15 dark:hover:bg-primary/20'
               }`}
             >
               <Shield className="w-4 h-4" />
@@ -394,7 +394,7 @@ const SWOTMatrix = ({ dict = {} }: SWOTMatrixProps) => {
 
             <button
               onClick={() => setShowImportModal(true)}
-              className="px-4 py-2 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors flex items-center gap-2"
+              className="px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors flex items-center gap-2"
             >
               <Upload className="w-4 h-4" />
               {t.import}
@@ -418,7 +418,7 @@ const SWOTMatrix = ({ dict = {} }: SWOTMatrixProps) => {
                 </button>
                 <button
                   onClick={() => exportData('report')}
-                  className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors flex items-center gap-2"
+                  className="px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors flex items-center gap-2"
                 >
                   <FileText className="w-4 h-4" />
                   {t.exportPdf}
@@ -545,7 +545,7 @@ const SWOTMatrix = ({ dict = {} }: SWOTMatrixProps) => {
         {showStrategy && totalItems > 0 && (
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
             <div className="flex items-center gap-3 mb-6">
-              <Shield className="w-6 h-6 text-purple-600" />
+              <Shield className="w-6 h-6 text-primary" />
               <h2 className="text-2xl font-bold">{t.generateStrategies}</h2>
             </div>
 
@@ -613,11 +613,11 @@ const SWOTMatrix = ({ dict = {} }: SWOTMatrixProps) => {
 
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-purple-500 transition-colors"
+                className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-primary transition-colors"
               >
                 <div className="flex flex-col items-center gap-3">
                   <div className="flex gap-2">
-                    <FileJson className="w-8 h-8 text-purple-500" />
+                    <FileJson className="w-8 h-8 text-primary" />
                     <FileSpreadsheet className="w-8 h-8 text-green-500" />
                   </div>
                   <div>
@@ -646,7 +646,7 @@ const SWOTMatrix = ({ dict = {} }: SWOTMatrixProps) => {
                 </button>
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex-1 px-4 py-2 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors flex items-center justify-center gap-2"
+                  className="flex-1 px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors flex items-center justify-center gap-2"
                 >
                   <Upload className="w-4 h-4" />
                   {t.selectFile}

@@ -1,10 +1,10 @@
 // app/[lang]/page.tsx
 import Hero from '@/components/home/Hero'
-import Features from '@/components/home/Features'
+import SectionMap from '@/components/home/SectionMap'
 import FeaturedCourses from '@/components/home/FeaturedCourses'
 import Stats from '@/components/home/Stats'
 import Tools from '@/components/home/Tools'
-import Newsletter from '@/components/home/Newsletter'
+// import Newsletter from '@/components/home/Newsletter'
 import ContinueLearning from '@/components/home/ContinueLearning'
 import { Metadata } from 'next'
 import { getDictionary } from '@/lib/i18n/get-dictionary'
@@ -63,12 +63,18 @@ export default async function HomePage({
   return (
     <>
       <Hero lang={params.lang} dict={dict} />
-      <Features lang={params.lang} dict={dict} />
-      <Stats dict={dict} stats={stats} />
+      {/* Personalised surface — floats over the foot of the hero so a
+          returning learner can resume immediately. Renders nothing without
+          saved progress. */}
       <ContinueLearning lang={params.lang} dict={dict} courses={courses} />
+      <SectionMap lang={params.lang} dict={dict} />
       <FeaturedCourses lang={params.lang} dict={dict} courses={courses} />
       <Tools lang={params.lang} dict={dict} tools={tools} />
+      <Stats dict={dict} stats={stats} />
+      {/* Newsletter is a mock submission with no backend behind it, so it is
+          parked until a real delivery service is wired up.
       <Newsletter dict={dict} />
+      */}
     </>
   )
 }

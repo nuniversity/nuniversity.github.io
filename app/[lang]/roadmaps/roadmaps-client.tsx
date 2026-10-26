@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Map, Search, Clock, TrendingUp, BookOpen } from 'lucide-react'
+import { Map, Search, Clock, TrendingUp, BookOpen, ArrowRight } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 
 interface RoadmapInfo {
@@ -50,7 +50,7 @@ export function RoadmapsClient({ lang, roadmaps, dict }: RoadmapsClientProps) {
       <div className="max-w-6xl mx-auto">
         {/* Page Header */}
         <div className="mb-10 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-section-roadmaps shadow-lg shadow-black/10 mb-4">
             <Map className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold mb-2">
@@ -105,7 +105,7 @@ export function RoadmapsClient({ lang, roadmaps, dict }: RoadmapsClientProps) {
         {/* Empty State */}
         {filteredRoadmaps.length === 0 && (
           <div className="text-center py-20">
-            <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
+            <div className="w-20 h-20 rounded-2xl bg-section-roadmaps-soft flex items-center justify-center mx-auto mb-4">
               <Map className="w-10 h-10 text-muted-foreground" />
             </div>
             <h3 className="text-xl font-semibold mb-2">
@@ -139,7 +139,7 @@ export function RoadmapsClient({ lang, roadmaps, dict }: RoadmapsClientProps) {
             >
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-section-roadmaps flex items-center justify-center">
                     <Map className="w-6 h-6 text-white" />
                   </div>
                   <span className={`px-3 py-1 text-xs font-semibold rounded-full ${difficultyColors[roadmap.difficulty] || ''}`}>
@@ -168,8 +168,9 @@ export function RoadmapsClient({ lang, roadmaps, dict }: RoadmapsClientProps) {
               </div>
 
               <div className="px-6 py-4 bg-muted/30 border-t flex items-center justify-end">
-                <span className="text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
-                  {dict.roadmaps?.startLearning || 'Start Learning →'}
+                <span className="inline-flex items-center gap-1 text-primary font-medium text-sm transition-transform group-hover:translate-x-1">
+                  {dict.roadmaps?.startLearning || 'Start Learning'}
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </span>
               </div>
             </Link>

@@ -50,13 +50,17 @@ export default function Footer({ lang, dict }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">NU</span>
-              </div>
-              <span className="text-2xl font-bold">NUniversity</span>
+            <div className="flex items-center gap-2.5 mb-6">
+              <span
+                className="w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-lg tracking-tight text-white shadow-sm ring-1 ring-inset ring-white/20"
+                style={{ backgroundImage: 'var(--brand-mark-gradient)' }}
+                aria-hidden="true"
+              >
+                NU
+              </span>
+              <span className="text-2xl font-bold tracking-tight">NUniversity</span>
             </div>
-            <p className="text-gray-400 mb-6 max-w-md">
+            <p className="text-foreground-muted mb-6 max-w-md">
               {dict.footer.description}
             </p>
             

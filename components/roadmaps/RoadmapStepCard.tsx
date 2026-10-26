@@ -178,7 +178,7 @@ export function RoadmapStepCard({ step, index, isCompleted, isLocked, isCurrent,
                         className={`px-3 py-1 text-xs rounded-full ${
                           rel.type === 'required'
                             ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
-                            : 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300'
+                            : 'bg-primary-soft text-primary-soft-foreground dark:text-primary'
                         }`}
                       >
                         {rel.leadsTo.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}

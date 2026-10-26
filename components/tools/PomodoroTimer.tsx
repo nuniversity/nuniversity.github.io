@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Play, Pause, RotateCcw, Clock, Plus, Trash2, ListChecks, BarChart3, Timer } from 'lucide-react';
+import { readJson, writeJson } from '@/lib/storage/safe-storage';
 
 interface PomodoroTimerProps {
   lang: string;
@@ -49,22 +50,38 @@ const PomodoroTimer = ({ lang = 'en', dict = {} }: PomodoroTimerProps) => {
   const progress = seconds > 0 ? (seconds / totalSeconds) * 100 : 100;
 
   useEffect(() => {
-    const saved = localStorage.getItem('pomodoro_logs');
-    if (saved) {
-      try { setSessionLogs(JSON.parse(saved)); } catch {}
-    }
-    const savedTasks = localStorage.getItem('pomodoro_tasks');
-    if (savedTasks) {
-      try { setTasks(JSON.parse(savedTasks)); } catch {}
-    }
+    const saved = readJson('pomodoro_logs', (raw) =>
+      Array.isArray(raw)
+        ? raw.filter(
+            (l): l is SessionLog =>
+              typeof l === 'object' &&
+              l !== null &&
+              typeof (l as SessionLog).date === 'string' &&
+              typeof (l as SessionLog).workDuration === 'number'
+          )
+        : null
+    );
+    if (saved) setSessionLogs(saved);
+    const savedTasks = readJson('pomodoro_tasks', (raw) =>
+      Array.isArray(raw)
+        ? raw.filter(
+            (t): t is Task =>
+              typeof t === 'object' &&
+              t !== null &&
+              typeof (t as Task).id === 'number' &&
+              typeof (t as Task).text === 'string'
+          )
+        : null
+    );
+    if (savedTasks) setTasks(savedTasks);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('pomodoro_logs', JSON.stringify(sessionLogs));
+    writeJson('pomodoro_logs', sessionLogs);
   }, [sessionLogs]);
 
   useEffect(() => {
-    localStorage.setItem('pomodoro_tasks', JSON.stringify(tasks));
+    writeJson('pomodoro_tasks', tasks);
   }, [tasks]);
 
   const handleSessionEnd = useCallback(() => {
@@ -154,7 +171,7 @@ const PomodoroTimer = ({ lang = 'en', dict = {} }: PomodoroTimerProps) => {
   const streak = calculateStreak(sessionLogs);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 dark:from-slate-950 dark:to-slate-900 p-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
@@ -358,9 +375,9 @@ const PomodoroTimer = ({ lang = 'en', dict = {} }: PomodoroTimerProps) => {
                 <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t.status_focus || 'Focus Time'}</div>
                 <div className="text-2xl font-bold text-green-600">{Math.floor(totalFocusMinutes / 60)}h {totalFocusMinutes % 60}m</div>
               </div>
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-4 border border-purple-200 dark:border-purple-800">
+              <div className="bg-gradient-to-br from-primary-soft to-cyan-50 dark:from-primary/10 dark:to-cyan-900/20 rounded-xl p-4 border border-primary/25 dark:border-primary/30">
                 <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">{tc.today || 'Today'}</div>
-                <div className="text-2xl font-bold text-purple-600">{tpl(t.sessions_short || '{n} sess', { n: todaySessions })}</div>
+                <div className="text-2xl font-bold text-primary">{tpl(t.sessions_short || '{n} sess', { n: todaySessions })}</div>
               </div>
               <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl p-4 border border-amber-200 dark:border-amber-800">
                 <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t.day_streak || 'Day Streak'}</div>

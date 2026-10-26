@@ -87,7 +87,7 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-slate-900 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900">
       {/* Hero Section with Animated Background */}
       <section className="relative overflow-hidden py-24 md:py-32">
         {/* Animated Background Elements */}
@@ -102,7 +102,7 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
             transition={{ duration: 8, repeat: Infinity, ease: easeInOut }}
           />
           <motion.div
-            className="absolute bottom-20 right-10 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"
+            className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl"
             animate={{
               scale: [1, 1.3, 1],
               x: [0, -30, 0],
@@ -125,12 +125,12 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
               transition={{ duration: 0.5, type: 'spring' }}
               className="inline-block mb-6"
             >
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 rounded-2xl shadow-lg">
+              <div className="bg-brand p-4 rounded-2xl shadow-lg">
                 <Sparkles className="w-12 h-12 text-white" />
               </div>
             </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-brand bg-clip-text text-transparent">
               {content.hero.title}
             </h1>
             
@@ -180,7 +180,7 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
               className="relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300" />
+              <div className="absolute inset-0 bg-brand-glow rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300" />
               
               <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-10 shadow-xl border border-gray-200 dark:border-gray-700 h-full">
                 <motion.div
@@ -188,7 +188,7 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
                   initial="initial"
                   animate="animate"
                   className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${
-                    item.color === 'blue' ? 'from-blue-500 to-blue-600' : 'from-purple-500 to-purple-600'
+                    item.color === 'blue' ? 'from-blue-500 to-cyan-500' : 'from-teal-500 to-emerald-500'
                   } mb-6`}
                 >
                   <item.icon className="w-8 h-8 text-white" />
@@ -224,7 +224,7 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-brand bg-clip-text text-transparent">
               {content.values.title}
             </span>
           </h2>
@@ -262,7 +262,7 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
                       scale: hoveredValue === idx ? 1.1 : 1
                     }}
                     transition={{ duration: 0.5 }}
-                    className="inline-flex p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 mb-6"
+                    className="inline-flex p-3 rounded-xl bg-brand mb-6"
                   >
                     <IconComponent className="w-7 h-7 text-white" />
                   </motion.div>
@@ -277,7 +277,7 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
 
                   {/* Decorative element */}
                   <motion.div
-                    className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-bl-3xl"
+                    className="absolute top-0 right-0 w-20 h-20 bg-brand-glow rounded-bl-3xl"
                     animate={{
                       opacity: hoveredValue === idx ? 1 : 0,
                       scale: hoveredValue === idx ? 1 : 0.8
@@ -301,7 +301,7 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-brand bg-clip-text text-transparent">
               {content.team.title}
             </span>
           </h2>
@@ -323,13 +323,13 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
               whileHover={{ y: -10 }}
               className="relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
+              <div className="absolute inset-0 bg-brand rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
               
               <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-2xl border border-gray-200 dark:border-gray-700">
                 <div className="flex flex-col items-center text-center">
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-6 shadow-lg"
+                    className="w-24 h-24 rounded-full bg-brand flex items-center justify-center mb-6 shadow-lg"
                   >
                     {/* <Users className="w-12 h-12 text-white" /> */}
                     <Image
@@ -345,7 +345,7 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
                     {member.name}
                   </h3>
                   
-                  <p className="text-lg text-purple-600 dark:text-purple-400 font-semibold mb-4">
+                  <p className="text-lg text-primary dark:text-primary font-semibold mb-4">
                     {member.role}
                   </p>
                   

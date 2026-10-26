@@ -300,14 +300,14 @@ const EisenhowerMatrix = ({ dict = {} }: EisenhowerMatrixProps) => {
   const completionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 py-12 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-mark mb-4">
             <Grid3x3 className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-2 bg-brand bg-clip-text text-transparent">
             {t.title}
           </h1>
           <p className="text-gray-600 text-lg">
@@ -318,9 +318,9 @@ const EisenhowerMatrix = ({ dict = {} }: EisenhowerMatrixProps) => {
         {/* Stats and Controls */}
         <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-            <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-4 border border-indigo-200">
+            <div className="bg-gradient-to-br from-primary-soft to-cyan-50 rounded-xl p-4 border border-primary/25">
               <div className="text-sm text-gray-600 mb-1">{t.totalTasks}</div>
-              <div className="text-2xl font-bold text-indigo-600">{totalTasks}</div>
+              <div className="text-2xl font-bold text-primary">{totalTasks}</div>
             </div>
             <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-4 border border-green-200">
               <div className="text-sm text-gray-600 mb-1">{t.completed}</div>
@@ -378,7 +378,7 @@ const EisenhowerMatrix = ({ dict = {} }: EisenhowerMatrixProps) => {
 
             <button
               onClick={() => setShowImportModal(true)}
-              className="px-4 py-2 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors flex items-center gap-2"
+              className="px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors flex items-center gap-2"
             >
               <Upload className="w-4 h-4" />
               {t.import}
@@ -453,7 +453,7 @@ const EisenhowerMatrix = ({ dict = {} }: EisenhowerMatrixProps) => {
                       onChange={(e) => setNewTask({ ...newTask, [key]: e.target.value })}
                       onKeyPress={(e) => e.key === 'Enter' && addTask(key)}
                       placeholder={`${t.addTask}...`}
-                      className="flex-1 px-3 py-2 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
+                      className="flex-1 px-3 py-2 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-primary outline-none text-sm"
                     />
                     <button
                       onClick={() => addTask(key)}
@@ -484,7 +484,7 @@ const EisenhowerMatrix = ({ dict = {} }: EisenhowerMatrixProps) => {
                                 value={editingText}
                                 onChange={(e) => setEditingText(e.target.value)}
                                 onKeyPress={(e) => e.key === 'Enter' && saveEdit()}
-                                className="flex-1 px-2 py-1 rounded border border-gray-300 bg-white focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
+                                className="flex-1 px-2 py-1 rounded border border-gray-300 bg-white focus:ring-2 focus:ring-primary outline-none text-sm"
                                 autoFocus
                               />
                               <button onClick={saveEdit} className="p-1 rounded bg-green-500 text-white hover:bg-green-600">
@@ -566,11 +566,11 @@ const EisenhowerMatrix = ({ dict = {} }: EisenhowerMatrixProps) => {
 
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-purple-500 transition-colors"
+                className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-primary transition-colors"
               >
                 <div className="flex flex-col items-center gap-3">
                   <div className="flex gap-2">
-                    <FileJson className="w-8 h-8 text-purple-500" />
+                    <FileJson className="w-8 h-8 text-primary" />
                     <FileSpreadsheet className="w-8 h-8 text-green-500" />
                   </div>
                   <div>
@@ -599,7 +599,7 @@ const EisenhowerMatrix = ({ dict = {} }: EisenhowerMatrixProps) => {
                 </button>
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex-1 px-4 py-2 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors flex items-center justify-center gap-2"
+                  className="flex-1 px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors flex items-center justify-center gap-2"
                 >
                   <Upload className="w-4 h-4" />
                   {t.selectFile}
