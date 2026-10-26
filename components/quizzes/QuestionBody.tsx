@@ -270,6 +270,19 @@ function MatchingView({ question, response, onChange, mode, dict }: Required<Pic
       <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
         {dict?.quizzes?.body?.q_match_hint || 'Match each prompt to the correct response'}
       </p>
+      <div className="rounded-xl border-2 border-border bg-muted/30 p-3">
+        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">
+          {dict?.quizzes?.body?.q_available || 'Available responses'}
+        </p>
+        <ul className="space-y-1">
+          {question.type === 'matching' && question.options.map((option, optionIndex) => (
+            <li key={optionIndex} className="flex gap-2 text-sm">
+              <span className="flex-shrink-0 font-bold text-muted-foreground">{letterLabel(optionIndex)}.</span>
+              <span className="min-w-0 break-words">{option}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
       {Array.from({ length: promptCount }, (_, promptIndex) => {
         const assigned = pairs[promptIndex] ?? null
         const state: 'correct' | 'wrong' | 'idle' = revealed
@@ -278,16 +291,16 @@ function MatchingView({ question, response, onChange, mode, dict }: Required<Pic
         return (
           <div
             key={promptIndex}
-            className={`flex flex-col sm:flex-row sm:items-center gap-3 p-3.5 rounded-xl border-2 bg-background ${
+            className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3.5 rounded-xl border-2 bg-background ${
               state === 'correct' ? 'border-green-500 bg-green-50 dark:bg-green-900/20'
               : state === 'wrong' ? 'border-red-500 bg-red-50 dark:bg-red-900/20'
               : 'border-border'
             }`}
           >
-            <span className="flex-1 text-sm font-medium break-words min-w-0">
+            <span className="sm:flex-1 text-sm font-medium break-words min-w-0">
               {question.type === 'matching' ? question.prompts[promptIndex] : ''}
             </span>
-            <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="flex items-center gap-2 w-full sm:w-64 sm:flex-shrink-0">
               <select
                 value={assigned === null ? '' : String(assigned)}
                 disabled={revealed}
@@ -298,11 +311,11 @@ function MatchingView({ question, response, onChange, mode, dict }: Required<Pic
                   next[promptIndex] = value === '' ? null : Number(value)
                   onChange?.({ type: 'matching', pairs: next })
                 }}
-                className="text-sm rounded-lg border-2 border-border bg-background px-3 py-2 min-w-[10rem] focus:outline-none focus:border-primary disabled:opacity-70"
+                className="w-full min-w-0 text-sm rounded-lg border-2 border-border bg-background px-3 py-2 truncate focus:outline-none focus:border-primary disabled:opacity-70"
               >
                 <option value="">{dict?.quizzes?.body?.q_match_placeholder || 'Select a match…'}</option>
-                {question.options.map((option, optionIndex) => (
-                  <option key={optionIndex} value={String(optionIndex)}>{option}</option>
+                {question.type === 'matching' && question.options.map((option, optionIndex) => (
+                  <option key={optionIndex} value={String(optionIndex)}>{letterLabel(optionIndex)}. {option}</option>
                 ))}
               </select>
               {state === 'correct' && <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />}
@@ -319,7 +332,7 @@ function MatchingView({ question, response, onChange, mode, dict }: Required<Pic
           <ul className="space-y-1">
             {question.prompts.map((prompt, promptIndex) => (
               <li key={promptIndex} className="text-sm text-foreground/80 break-words">
-                {prompt} → {question.options[correct[promptIndex]]}
+                {prompt} → {letterLabel(correct[promptIndex])}. {question.options[correct[promptIndex]]}
               </li>
             ))}
           </ul>

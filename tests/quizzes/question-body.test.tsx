@@ -117,6 +117,22 @@ describe('QuestionBody: ordering', () => {
 })
 
 describe('QuestionBody: matching', () => {
+  it('renders a lettered response bank and bounded selects', () => {
+    const { container } = render(
+      <QuestionBody question={matching} response={{ type: 'matching', pairs: [null, null, null] }} onChange={vi.fn()} dict={dict} />
+    )
+    expect(screen.getByText('A.')).toBeInTheDocument()
+    expect(screen.getByText('Red')).toBeInTheDocument()
+    expect(screen.getByText('B.')).toBeInTheDocument()
+    expect(screen.getByText('Green')).toBeInTheDocument()
+    expect(screen.getByText('C.')).toBeInTheDocument()
+    expect(screen.getByText('Blue')).toBeInTheDocument()
+    const selects = container.querySelectorAll('select')
+    expect(selects).toHaveLength(3)
+    const firstOption = selects[0].querySelectorAll('option')[1]
+    expect(firstOption.textContent).toBe('A. Red')
+  })
+
   it('assigns a pair through the prompt select', () => {
     const onChange = vi.fn()
     const { container } = render(
@@ -139,7 +155,7 @@ describe('QuestionBody: matching', () => {
     const selects = container.querySelectorAll('select')
     expect((selects[0] as HTMLSelectElement).disabled).toBe(true)
     expect(screen.getByText('Correct matches')).toBeInTheDocument()
-    expect(screen.getByText(/Sky → Blue/)).toBeInTheDocument()
+    expect(screen.getByText(/Sky → C\. Blue/)).toBeInTheDocument()
   })
 })
 
