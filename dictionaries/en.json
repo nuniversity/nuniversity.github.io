@@ -1671,7 +1671,10 @@
       "unanswered": "{n} remaining"
     },
     "listen": "Listen to this lesson",
-    "listen_hint": "Read the lesson aloud using your browser’s speech engine."
+    "listen_hint": "Read the lesson aloud using your browser’s speech engine.",
+    "hide_outline": "Hide course outline",
+    "show_outline": "Show outline",
+    "resize_outline": "Resize course outline"
   },
   "gamification": {
     "xp": "{n} XP",

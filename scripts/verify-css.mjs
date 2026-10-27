@@ -94,6 +94,7 @@ const IGNORED = new Set([
   'katex-error',
   // Test ids and score-widget ids that live in the same string as class names.
   'outline-check',
+  'outline-resizer',
   'fill-blank-items',
   'fill-blank-template',
 ])

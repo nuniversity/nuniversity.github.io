@@ -1671,7 +1671,10 @@
       "unanswered": "Faltam {n}"
     },
     "listen": "Ouvir esta lição",
-    "listen_hint": "Leia a lição em voz alta usando o sintetizador do seu navegador."
+    "listen_hint": "Leia a lição em voz alta usando o sintetizador do seu navegador.",
+    "hide_outline": "Ocultar sumário do curso",
+    "show_outline": "Mostrar sumário",
+    "resize_outline": "Redimensionar o sumário do curso"
   },
   "gamification": {
     "xp": "{n} XP",

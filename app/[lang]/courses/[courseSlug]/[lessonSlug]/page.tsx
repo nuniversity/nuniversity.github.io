@@ -145,18 +145,17 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
         lessonTitle={lesson.metadata.title}
         lang={lang}
       />
-      <div className="lg:grid lg:grid-cols-[20rem_1fr] lg:gap-8 lg:items-start">
-        <LessonOutline
-          lang={lang}
-          courseSlug={courseSlug}
-          lessonSlug={lessonSlug}
-          courseTitle={courseInfo?.title ?? courseSlug}
-          lessonTitle={lesson.metadata.title}
-          lessons={allLessons.map(l => ({ slug: l.slug, title: l.metadata.title }))}
-          dict={dict}
-        />
-
-        <div className="min-w-0">
+      {/* The outline owns the desktop split: it can be resized by dragging
+          its edge, or hidden entirely for more reading room. */}
+      <LessonOutline
+        lang={lang}
+        courseSlug={courseSlug}
+        lessonSlug={lessonSlug}
+        courseTitle={courseInfo?.title ?? courseSlug}
+        lessonTitle={lesson.metadata.title}
+        lessons={allLessons.map(l => ({ slug: l.slug, title: l.metadata.title }))}
+        dict={dict}
+      >
           <div className="max-w-4xl mx-auto">
           {/* Breadcrumb */}
           <nav className="mb-8 flex items-center flex-wrap gap-2 text-sm text-muted-foreground">
@@ -344,9 +343,10 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
             {dict.lesson?.keyboard_hint}
           </p>
 
-          {/* Course Overview Sidebar (Optional) */}
+          {/* Course Overview — the sidebar already lists the lessons on
+              desktop, so this is a mobile-only fallback. */}
           {allLessons.length > 1 && (
-            <div className="mt-12 p-6 bg-muted/50 rounded-lg border">
+            <div className="mt-12 p-6 bg-muted/50 rounded-lg border lg:hidden">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <BookOpen className="w-5 h-5" />
                 {dict.courses?.course_content || 'Course Content'}
@@ -361,8 +361,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
             </div>
           )}
           </div>
-        </div>
-      </div>
+      </LessonOutline>
     </div>
   )
 }

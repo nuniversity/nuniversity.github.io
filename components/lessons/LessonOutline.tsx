@@ -1,9 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import Link from 'next/link'
-import { ChevronLeft, Menu, X, BookOpen, Check } from 'lucide-react'
+import {
+  ChevronLeft,
+  Menu,
+  X,
+  BookOpen,
+  Check,
+  PanelLeftClose,
+  PanelLeftOpen,
+} from 'lucide-react'
 import { getCourseProgress } from '@/lib/progress/storage'
+import { safeGet, safeSet } from '@/lib/storage/safe-storage'
 
 interface OutlineLesson {
   slug: string
@@ -18,6 +27,8 @@ interface LessonOutlineProps {
   lessonTitle: string
   lessons: OutlineLesson[]
   dict: any
+  /** The lesson body — the outline owns the split so it can resize itself. */
+  children?: ReactNode
 }
 
 interface TocHeading {
@@ -26,12 +37,133 @@ interface TocHeading {
   level: number
 }
 
-export default function LessonOutline({ lang, courseSlug, lessonSlug, courseTitle, lessonTitle, lessons, dict }: LessonOutlineProps) {
+/** Sidebar sizing, in pixels. */
+const MIN_WIDTH = 240
+const DEFAULT_WIDTH = 320
+const MAX_WIDTH = 520
+const KEYBOARD_STEP = 24
+
+const WIDTH_KEY = 'lesson-outline-width'
+const COLLAPSED_KEY = 'lesson-outline-collapsed'
+
+/** Clamps a width to the allowed range. */
+function clampWidth(value: number): number {
+  if (!Number.isFinite(value)) return DEFAULT_WIDTH
+  return Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, Math.round(value)))
+}
+
+export default function LessonOutline({
+  lang,
+  courseSlug,
+  lessonSlug,
+  courseTitle,
+  lessonTitle,
+  lessons,
+  dict,
+  children,
+}: LessonOutlineProps) {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [headings, setHeadings] = useState<TocHeading[]>([])
   const [activeId, setActiveId] = useState('')
   const [completed, setCompleted] = useState<Set<string> | null>(null)
 
+  // Desktop split state, restored from the previous session.
+  const [width, setWidth] = useState(DEFAULT_WIDTH)
+  const [collapsed, setCollapsed] = useState(false)
+  const [hydrated, setHydrated] = useState(false)
+  const [dragging, setDragging] = useState(false)
+  const widthRef = useRef(width)
+  widthRef.current = width
+
+  useEffect(() => {
+    const storedWidth = Number.parseInt(safeGet(WIDTH_KEY) ?? '', 10)
+    if (Number.isFinite(storedWidth)) setWidth(clampWidth(storedWidth))
+    setCollapsed(safeGet(COLLAPSED_KEY) === '1')
+    setHydrated(true)
+  }, [])
+
+  const persist = useCallback((nextWidth: number, nextCollapsed: boolean) => {
+    safeSet(WIDTH_KEY, String(clampWidth(nextWidth)))
+    safeSet(COLLAPSED_KEY, nextCollapsed ? '1' : '0')
+  }, [])
+
+  const changeWidth = useCallback(
+    (next: number) => {
+      const clamped = clampWidth(next)
+      setWidth(clamped)
+      persist(clamped, false)
+    },
+    [persist]
+  )
+
+  const toggleCollapsed = useCallback(() => {
+    setCollapsed(prev => {
+      const next = !prev
+      persist(widthRef.current, next)
+      return next
+    })
+  }, [persist])
+
+  // ── Drag to resize ────────────────────────────────────────────────
+  const onPointerDown = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      if (event.button !== 0) return
+      event.preventDefault()
+      const startX = event.clientX
+      const startWidth = widthRef.current
+      setDragging(true)
+
+      const onMove = (moveEvent: PointerEvent) => {
+        changeWidth(startWidth + (moveEvent.clientX - startX))
+      }
+      const onUp = () => {
+        setDragging(false)
+        window.removeEventListener('pointermove', onMove)
+        window.removeEventListener('pointerup', onUp)
+        document.body.style.userSelect = ''
+        document.body.style.cursor = ''
+      }
+
+      document.body.style.userSelect = 'none'
+      document.body.style.cursor = 'col-resize'
+      window.addEventListener('pointermove', onMove)
+      window.addEventListener('pointerup', onUp)
+    },
+    [changeWidth]
+  )
+
+  /** Keyboard resizing for the separator (WAI-ARIA Window Splitter). */
+  const onSeparatorKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      switch (event.key) {
+        case 'ArrowLeft':
+          event.preventDefault()
+          changeWidth(widthRef.current - (event.shiftKey ? KEYBOARD_STEP * 2 : KEYBOARD_STEP))
+          break
+        case 'ArrowRight':
+          event.preventDefault()
+          changeWidth(widthRef.current + (event.shiftKey ? KEYBOARD_STEP * 2 : KEYBOARD_STEP))
+          break
+        case 'Home':
+          event.preventDefault()
+          changeWidth(MIN_WIDTH)
+          break
+        case 'End':
+          event.preventDefault()
+          changeWidth(MAX_WIDTH)
+          break
+        case 'Enter':
+        case ' ':
+          // The splitter pattern uses Enter to collapse and restore.
+          event.preventDefault()
+          toggleCollapsed()
+          break
+      }
+    },
+    [changeWidth, toggleCollapsed]
+  )
+
+  // ── Outline data ──────────────────────────────────────────────────
   useEffect(() => {
     setCompleted(new Set(getCourseProgress(courseSlug)?.completed ?? []))
   }, [courseSlug])
@@ -74,6 +206,7 @@ export default function LessonOutline({ lang, courseSlug, lessonSlug, courseTitl
 
   return (
     <>
+      {/* Mobile: drawer header */}
       <div className="lg:hidden sticky top-16 z-40 flex items-center gap-2 border-b bg-background/95 px-4 py-2 backdrop-blur">
         <button
           type="button"
@@ -97,90 +230,167 @@ export default function LessonOutline({ lang, courseSlug, lessonSlug, courseTitl
         />
       )}
 
-      <aside
-        aria-label={courseTitle}
-        className={`fixed top-16 left-0 z-30 h-[calc(100vh-4rem)] w-80 shrink-0 overflow-y-auto border-r bg-card transition-transform duration-300 ease-in-out lg:sticky lg:top-16 lg:h-[calc(100vh-4rem)] lg:self-start lg:translate-x-0 ${
-          drawerOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+      <div
+        // The width is published as a custom property so the aside can size
+        // itself without an inline responsive class.
+        style={{ ['--outline-w' as string]: `${width}px` }}
+        className={[
+          'lg:flex lg:items-start lg:gap-0',
+          // While dragging, suppress the sticky element's own transitions.
+          dragging ? 'select-none' : '',
+        ].join(' ')}
       >
-        <div className="space-y-6 p-4 pt-14 lg:pt-4">
-          <Link
-            href={`/${lang}/courses`}
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ChevronLeft className="h-4 w-4" />
-            {dict?.courses?.back_to_courses || 'Back to Courses'}
-          </Link>
-
-          <div className="flex items-start gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-mark">
-              <BookOpen className="h-5 w-5 text-white" />
-            </div>
-            <div className="min-w-0">
-              <p className="text-sm font-semibold leading-snug text-foreground">{courseTitle}</p>
-            </div>
-          </div>
-
-          <nav aria-label={dict?.courses?.course_content || 'Course Content'} className="space-y-1">
-            {lessons.map((lesson, index) => (
+        <aside
+          id="lesson-outline"
+          aria-label={courseTitle}
+          className={`fixed top-16 left-0 z-30 h-[calc(100vh-4rem)] w-80 shrink-0 overflow-y-auto border-r bg-card transition-transform duration-300 ease-in-out lg:sticky lg:top-16 lg:h-[calc(100vh-4rem)] lg:w-[var(--outline-w)] lg:self-start lg:translate-x-0 ${
+            drawerOpen ? 'translate-x-0' : '-translate-x-full'
+          } ${collapsed ? 'lg:hidden' : ''}`}
+        >
+          <div className="space-y-6 p-4 pt-14 lg:pt-4">
+            <div className="flex items-center justify-between gap-2">
               <Link
-                key={lesson.slug}
-                href={`/${lang}/courses/${courseSlug}/${lesson.slug}`}
-                onClick={() => setDrawerOpen(false)}
-                className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm transition-colors ${
-                  lesson.slug === lessonSlug
-                    ? 'bg-primary text-primary-foreground font-medium'
-                    : 'text-muted-foreground hover:bg-accent hover:text-foreground'
-                }`}
+                href={`/${lang}/courses`}
+                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                <span className="shrink-0 tabular-nums opacity-70">{String(index + 1).padStart(2, '0')}</span>
-                <span className="min-w-0 leading-snug break-words">{lesson.title}</span>
-                {completed?.has(lesson.slug) && (
-                  <span
-                    className="ml-auto shrink-0"
-                    title={dict?.lesson?.completed_badge || 'Completed'}
-                    data-testid="outline-check"
-                  >
-                    <Check className="h-3.5 w-3.5 text-green-600 dark:text-green-400" />
-                  </span>
-                )}
+                <ChevronLeft className="h-4 w-4" />
+                {dict?.courses?.back_to_courses || 'Back to Courses'}
               </Link>
-            ))}
-          </nav>
 
-          <div className="border-t pt-4">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              {dict?.lesson?.outline_title || 'On this page'}
+              {/* Desktop: hide the outline for more room. */}
+              <button
+                type="button"
+                onClick={toggleCollapsed}
+                aria-label={dict?.lesson?.hide_outline || 'Hide course outline'}
+                title={dict?.lesson?.hide_outline || 'Hide course outline'}
+                className="hidden h-7 w-7 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:flex"
+              >
+                <PanelLeftClose className="h-4 w-4" aria-hidden="true" />
+              </button>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-mark">
+                <BookOpen className="h-5 w-5 text-white" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold leading-snug text-foreground break-words">{courseTitle}</p>
+              </div>
+            </div>
+
+            <nav aria-label={dict?.courses?.course_content || 'Course Content'} className="space-y-1">
+              {lessons.map((lesson, index) => (
+                <Link
+                  key={lesson.slug}
+                  href={`/${lang}/courses/${courseSlug}/${lesson.slug}`}
+                  onClick={() => setDrawerOpen(false)}
+                  className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm transition-colors ${
+                    lesson.slug === lessonSlug
+                      ? 'bg-primary text-primary-foreground font-medium'
+                      : 'text-muted-foreground hover:bg-accent hover:text-foreground'
+                  }`}
+                >
+                  <span className="shrink-0 tabular-nums opacity-70">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="min-w-0 leading-snug break-words">{lesson.title}</span>
+                  {completed?.has(lesson.slug) && (
+                    <span
+                      className="ml-auto shrink-0"
+                      title={dict?.lesson?.completed_badge || 'Completed'}
+                      data-testid="outline-check"
+                    >
+                      <Check className="h-3.5 w-3.5 text-green-600 dark:text-green-400" />
+                    </span>
+                  )}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="border-t pt-4">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                {dict?.lesson?.outline_title || 'On this page'}
+              </p>
+              {headings.length === 0 ? (
+                <p className="text-sm text-muted-foreground">{dict?.lesson?.toc_empty || 'No sections in this lesson'}</p>
+              ) : (
+                <nav aria-label={dict?.lesson?.outline_title || 'On this page'} className="space-y-0.5">
+                  {headings.map(heading => (
+                    <a
+                      key={heading.id}
+                      href={`#${heading.id}`}
+                      onClick={() => setDrawerOpen(false)}
+                      className={`block rounded-md py-1.5 pr-2 text-sm leading-snug transition-colors break-words ${
+                        heading.level === 3 ? 'pl-8' : 'pl-3'
+                      } ${
+                        activeId === heading.id
+                          ? 'border-l-2 border-primary bg-primary/10 pl-[calc(0.75rem-2px)] font-medium text-primary'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                      }`}
+                    >
+                      {heading.text}
+                    </a>
+                  ))}
+                </nav>
+              )}
+            </div>
+
+            <p className="hidden border-t pt-4 text-xs text-muted-foreground lg:block">
+              {dict?.lesson?.keyboard_hint || 'Tip: use ← and → to switch lessons'}
             </p>
-            {headings.length === 0 ? (
-              <p className="text-sm text-muted-foreground">{dict?.lesson?.toc_empty || 'No sections in this lesson'}</p>
-            ) : (
-              <nav aria-label={dict?.lesson?.outline_title || 'On this page'} className="space-y-0.5">
-                {headings.map(heading => (
-                  <a
-                    key={heading.id}
-                    href={`#${heading.id}`}
-                    onClick={() => setDrawerOpen(false)}
-                    className={`block rounded-md py-1.5 pr-2 text-sm leading-snug transition-colors ${
-                      heading.level === 3 ? 'pl-8' : 'pl-3'
-                    } ${
-                      activeId === heading.id
-                        ? 'border-l-2 border-primary bg-primary/10 pl-[calc(0.75rem-2px)] font-medium text-primary'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-accent'
-                    }`}
-                  >
-                    {heading.text}
-                  </a>
-                ))}
-              </nav>
-            )}
           </div>
+        </aside>
 
-          <p className="hidden border-t pt-4 text-xs text-muted-foreground lg:block">
-            {dict?.lesson?.keyboard_hint || 'Tip: use ← and → to switch lessons'}
-          </p>
+        {/* Resize handle — desktop only, hidden while collapsed.
+            Follows the WAI-ARIA Window Splitter pattern: focusable separator,
+            arrow keys to resize, Home/End for the bounds, Enter to collapse.
+            The hit area is 24 px wide (WCAG 2.5.8) around a 1 px visible line. */}
+        {!collapsed && (
+          <div
+            role="separator"
+            aria-orientation="vertical"
+            aria-label={dict?.lesson?.resize_outline || 'Resize course outline'}
+            aria-controls="lesson-outline"
+            aria-valuenow={width}
+            aria-valuemin={MIN_WIDTH}
+            aria-valuemax={MAX_WIDTH}
+            aria-valuetext={`${width} pixels`}
+            tabIndex={0}
+            onPointerDown={onPointerDown}
+            onKeyDown={onSeparatorKeyDown}
+            onDoubleClick={() => changeWidth(DEFAULT_WIDTH)}
+            data-testid="outline-resizer"
+            className={`group sticky top-16 hidden h-[calc(100vh-4rem)] w-6 shrink-0 cursor-col-resize items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset lg:flex ${
+              dragging ? 'bg-primary/20' : ''
+            }`}
+          >
+            {/* The visible line; widens on hover so the target is easy to hit. */}
+            <span
+              aria-hidden="true"
+              className={`h-full w-px transition-colors duration-150 ${
+                dragging ? 'bg-primary' : 'bg-border group-hover:bg-primary/60'
+              }`}
+            />
+          </div>
+        )}
+
+        <div className="min-w-0 flex-1 lg:pl-6">
+          {/* Desktop: reopen the outline after hiding it. */}
+          {collapsed && (
+            <div className="hidden lg:flex sticky top-16 z-20 justify-start pb-2">
+              <button
+                type="button"
+                onClick={toggleCollapsed}
+                aria-label={dict?.lesson?.show_outline || 'Show course outline'}
+                title={dict?.lesson?.show_outline || 'Show course outline'}
+                className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background/95 px-2.5 py-1.5 text-xs font-medium text-foreground-muted backdrop-blur transition-colors hover:bg-accent hover:text-foreground"
+              >
+                <PanelLeftOpen className="h-3.5 w-3.5" aria-hidden="true" />
+                {dict?.lesson?.show_outline || 'Show outline'}
+              </button>
+            </div>
+          )}
+          {children}
         </div>
-      </aside>
+      </div>
     </>
   )
 }

@@ -1671,7 +1671,10 @@
       "unanswered": "Quedan {n}"
     },
     "listen": "Escuchar esta lección",
-    "listen_hint": "Lee la lección en voz alta con el sintetizador de tu navegador."
+    "listen_hint": "Lee la lección en voz alta con el sintetizador de tu navegador.",
+    "hide_outline": "Ocultar el índice del curso",
+    "show_outline": "Mostrar índice",
+    "resize_outline": "Redimensionar el índice del curso"
   },
   "gamification": {
     "xp": "{n} XP",

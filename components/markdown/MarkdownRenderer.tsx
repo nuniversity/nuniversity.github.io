@@ -802,7 +802,14 @@ export default function MarkdownRenderer({ content, lang = 'en', dict }: Markdow
         
 
         table: ({ children }) => (
-          <div className="overflow-x-auto my-6 rounded-xl border border-border">
+          <div
+            className="my-6 overflow-x-auto overscroll-x-contain rounded-xl border border-border"
+            // Scrollable regions need a name and a tab stop so keyboard users
+            // can reach the horizontal scroll (WCAG 2.1.1).
+            role="region"
+            aria-label="Table — scroll horizontally to see all columns"
+            tabIndex={0}
+          >
             <table className="w-full text-sm">{children}</table>
           </div>
         ),

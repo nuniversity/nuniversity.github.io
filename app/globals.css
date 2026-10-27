@@ -502,13 +502,24 @@
   }
 
   /* Code blocks scroll inside themselves. Never wrap them — that would make
-     code unreadable — but never let them widen the page either. */
+     code unreadable — but never let them widen the page either.
+     `overscroll-behavior-x: contain` stops a horizontal swipe inside the
+     block from triggering the browser's back-navigation gesture on mobile. */
   .prose-measure pre {
     max-width: 100%;
     overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
     overflow-wrap: normal;
     word-break: normal;
     white-space: pre;
+  }
+
+  /* `min-width: max-content` keeps long lines intact and scrollable instead
+     of letting the code element squeeze into the container. */
+  .prose-measure pre code {
+    display: block;
+    min-width: max-content;
   }
 
   /* Media and embeds are capped to the reading column. */
@@ -1062,9 +1073,9 @@
 /* Fullscreen overlay */
 .mermaid-wrapper.fullscreen {
   position: fixed;
+  /* `inset: 0` already fills the viewport. `100vw` would include the
+     scrollbar width and add a few pixels of horizontal overflow. */
   inset: 0;
-  width: 100vw;
-  max-width: 100vw;
   height: 100vh;
   margin: 0;
   padding: 1.5rem;
