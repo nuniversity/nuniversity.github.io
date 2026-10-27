@@ -219,7 +219,7 @@ Split the 1,448-line client into components with i18n from day one:
 | ExamRunner scope creep | Phase 4 ships wrapper + timer + score; review-by-domain and analytics later |
 | Legacy `quiz-game-client` rewrite vs move | refactor while moving — the file needs i18n anyway (F-021) |
 | **D1** simulation size ≠ blueprint sum | optional `mockQuestionCount` (AIF: 65) + hierarchical largest-remainder scaling; allocations stay percent weights summing 100 — validator rule unchanged |
-| **D2** AIF bank size | phased: 65 blueprint-exact → 151 (Domains 1–2 deep dive) → +24 balance batch across Domains 3–5 = **175 total**; mock draw always 65; further expansion toward 260 optional |
+| **D2** AIF bank size | phased: 65 blueprint-exact → 151 (Domains 1–2 deep dive) → +24 balance batch across Domains 3–5 → +175 research-grounded expansion (seven batches B1–B7, dedup-checked) = **350 total**; domain shares exact (70/84/98/49/49 = 20/24/28/14/14%); mock draw always 65 |
 | **D3** blanks in learning mode | excluded from score (score = correct ÷ graded; blanks reported as skipped); simulation keeps blank = wrong |
 | **D4** ordering interaction | select-subset + order (presented items may include distractors; correct = 3–5 item ordered subset) |
 | Question-type interactions | no dnd-kit in quiz questions (click + buttons + native select) — see §6 |
