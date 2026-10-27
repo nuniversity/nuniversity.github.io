@@ -125,7 +125,7 @@ export default function QuestionBlock({ data, dict, reveal = true, onAnswer }: Q
                     String.fromCharCode(65 + index)
                   )}
                 </span>
-                <span className={`text-sm sm:text-base leading-relaxed break-words hyphens-auto min-w-0 ${
+                <span className={`text-sm sm:text-base leading-relaxed break-words min-w-0 ${
                   showFeedback && index === data.correct
                     ? 'font-medium text-green-800 dark:text-green-200'
                     : showFeedback && index === selected && !isCorrect

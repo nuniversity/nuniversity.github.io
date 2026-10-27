@@ -26,5 +26,5 @@ export default async function Localized404Page({
 }) {
   const dict = await getDictionary(params.lang)
 
-  return <NotFoundClient lang={params.lang} dict={dict} />
+  return <NotFoundClient lang={params.lang} dict={{ notFound: dict.notFound }} />
 }

@@ -4,15 +4,18 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { FileQuestion } from 'lucide-react'
 
+interface NotFoundSection {
+  title?: string
+  description?: string
+  missing?: string
+  go_home?: string
+  go_courses?: string
+  more_links?: string
+}
+
 interface NotFoundDict {
-  notFound?: {
-    title?: string
-    description?: string
-    missing?: string
-    go_home?: string
-    go_courses?: string
-    more_links?: string
-  }
+  notFound?: NotFoundSection
+  all?: Record<string, NotFoundSection | undefined>
 }
 
 interface NotFoundClientProps {
@@ -22,13 +25,15 @@ interface NotFoundClientProps {
 
 export default function NotFoundClient({ lang, dict }: NotFoundClientProps) {
   const [missing, setMissing] = useState<string | null>(null)
+  const [pathLang, setPathLang] = useState<string>(lang)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     setMissing(params.get('p') ?? window.location.pathname)
-  }, [])
+    setPathLang(window.location.pathname.split('/')[1] || lang)
+  }, [lang])
 
-  const n = dict?.notFound ?? {}
+  const n = dict?.all?.[pathLang] ?? dict?.notFound ?? {}
 
   return (
     <div className="container-custom py-20">
@@ -49,13 +54,13 @@ export default function NotFoundClient({ lang, dict }: NotFoundClientProps) {
         )}
         <div className="flex flex-wrap gap-4 justify-center">
           <Link
-            href={`/${lang}/`}
+            href={`/${pathLang}/`}
             className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
           >
             {n.go_home ?? 'Go to Home'}
           </Link>
           <Link
-            href={`/${lang}/courses/`}
+            href={`/${pathLang}/courses/`}
             className="inline-flex items-center gap-2 px-6 py-3 bg-muted text-foreground rounded-lg hover:bg-accent transition-colors"
           >
             {n.go_courses ?? 'Browse Courses'}

@@ -15,5 +15,9 @@ export default async function NotFound({ params }: { params?: { lang?: string } 
     ? (requested as Locale)
     : i18n.defaultLocale
   const dict = await getDictionary(lang)
-  return <NotFoundClient lang={lang} dict={dict} />
+  const all: Record<string, ReturnType<typeof getDictionary>['notFound']> = {}
+  for (const locale of i18n.locales) {
+    all[locale] = getDictionary(locale).notFound
+  }
+  return <NotFoundClient lang={lang} dict={{ notFound: dict.notFound, all }} />
 }

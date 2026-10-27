@@ -133,6 +133,8 @@ export function LessonScoreSummary({ dict }: LessonScoreSummaryProps) {
   return (
     <div
       data-testid="lesson-score-summary"
+      /* Status chrome, not lesson prose: the read-aloud feature skips it. */
+      data-audio-skip
       className="mt-8 rounded-xl border bg-muted/30 p-4 sm:p-6 space-y-3"
       aria-live="polite"
     >

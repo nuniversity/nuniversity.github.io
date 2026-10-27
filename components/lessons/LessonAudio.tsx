@@ -2,7 +2,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Volume2, Pause, Square } from 'lucide-react'
+import { Volume2, Pause, Square, RotateCcw } from 'lucide-react'
 
 interface LessonAudioProps {
   /**
@@ -19,9 +19,43 @@ interface LessonAudioProps {
   label?: string
   /** Accessible description of what the control does. */
   description?: string
+  /**
+   * Short sentence spoken before the lesson, so the learner knows the feature
+   * is on and what is about to happen. It is spoken, never displayed.
+   */
+  intro?: string
+  /**
+   * Shown when the browser has no voice for the lesson's language. Speech
+   * synthesis voices come from the operating system, so a machine with only
+   * Portuguese and English voices reads Spanish with the wrong one.
+   */
+  voiceNote?: string
+  /** Visible label for the section picker. */
+  sectionLabel?: string
+  /** Picker option: follow the reader's position. */
+  sectionAutoLabel?: string
+  /** Picker option: read everything. */
+  sectionAllLabel?: string
+  /** Label for the stop control. */
+  stopLabel?: string
+  /** Label for the restart control. */
+  restartLabel?: string
+  /** Status shown while speaking. */
+  readingLabel?: string
+  /** Status shown while paused. */
+  pausedLabel?: string
 }
 
 type Status = 'idle' | 'speaking' | 'paused'
+
+/** `auto` follows the reader, `all` is the whole lesson, anything else is an id. */
+type Selection = 'auto' | 'all' | string
+
+export interface AudioSection {
+  id: string
+  text: string
+  level: number
+}
 
 /**
  * Collects readable prose from a container, skipping code, tables, diagrams
@@ -31,12 +65,26 @@ export function collectSpokenText(root: HTMLElement): string {
   const SKIP = new Set(['PRE', 'CODE', 'TABLE', 'FIGURE', 'SVG', 'SCRIPT', 'STYLE', 'NAV'])
   const KEEP = new Set(['P', 'LI', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'BLOCKQUOTE', 'DD', 'DT'])
 
+  // Callers may hand over a single readable element (a section's paragraph)
+  // rather than a container, so read it directly instead of walking its text
+  // children — those are text nodes and would be skipped.
+  if (KEEP.has(root.tagName) && !root.hasAttribute('data-audio-skip')) {
+    const own = (root.textContent ?? '').replace(/\s+/g, ' ').trim()
+    return own.length > 2 && /[a-zA-ZÀ-ÿ0-9]/.test(own) ? own : ''
+  }
+
   const parts: string[] = []
   const walk = (node: Node) => {
     if (node.nodeType === Node.TEXT_NODE) return
     if (node.nodeType !== Node.ELEMENT_NODE) return
     const el = node as HTMLElement
     if (SKIP.has(el.tagName)) return
+    // The audio control's own labels ("Listen to this lesson", "Reading
+    // aloud…", the hint) are UI chrome. Reading them aloud is what made the
+    // engine start by narrating its own buttons.
+    if (el.hasAttribute('data-lesson-audio')) return
+    // Score widgets and other live regions are status chrome, not lesson text.
+    if (el.hasAttribute('data-audio-skip')) return
     if (el.getAttribute('aria-hidden') === 'true') return
     if (KEEP.has(el.tagName)) {
       const text = (el.textContent ?? '').replace(/\s+/g, ' ').trim()
@@ -53,21 +101,81 @@ export function collectSpokenText(root: HTMLElement): string {
 }
 
 /**
+ * Reads one section: its heading, then every sibling up to the next heading of
+ * the same or a higher level. `h3` subsections are therefore included inside
+ * their `h2`, and start their own reading when picked directly.
+ */
+export function collectSectionText(root: HTMLElement, id: string): string {
+  const heading = root.querySelector<HTMLElement>(`[id="${id}"]`)
+  if (!heading) return ''
+
+  const level = Number(heading.tagName[1])
+  const parts: string[] = []
+  const headingText = (heading.textContent ?? '').replace(/\s+/g, ' ').trim()
+  if (headingText) parts.push(headingText)
+
+  let sibling = heading.nextElementSibling
+  while (sibling) {
+    const isHeading = /^H[1-6]$/.test(sibling.tagName)
+    if (isHeading && Number(sibling.tagName[1]) <= level) break
+    const text = collectSpokenText(sibling as HTMLElement)
+    if (text) parts.push(text)
+    sibling = sibling.nextElementSibling
+  }
+
+  return parts.join('. ')
+}
+
+/** The section whose heading is the last one above the reading position. */
+export function findCurrentSectionId(root: HTMLElement, sections: AudioSection[]): string | null {
+  if (sections.length === 0) return null
+  let current = sections[0].id
+  for (const section of sections) {
+    const heading = root.querySelector<HTMLElement>(`[id="${section.id}"]`)
+    if (!heading) continue
+    if (heading.getBoundingClientRect().top <= 140) {
+      current = section.id
+    } else {
+      break
+    }
+  }
+  return current
+}
+
+/**
  * Reads a lesson aloud using the browser's built-in speech engine.
  *
  * The Web Speech API is available in every current browser and needs no
  * dependency, no audio files, and no server round-trip. The control is
  * opt-in: nothing is read until the learner presses play.
+ *
+ * Audio follows the lesson's sections rather than the whole document: the
+ * picker offers the section currently in view, any specific section, or the
+ * full lesson.
  */
 export default function LessonAudio({
   selector = '[data-lesson-content]',
   lang,
   label = 'Listen',
   description,
+  intro = 'Audio is on. Reading this lesson aloud.',
+  voiceNote = 'No voice for this language is installed in your browser, so another voice is used and the pronunciation may sound wrong. Install one in your system’s speech settings to fix it.',
+  sectionLabel = 'Section',
+  sectionAutoLabel = 'The section I am reading',
+  sectionAllLabel = 'The whole lesson',
+  stopLabel = 'Stop',
+  restartLabel = 'Restart',
+  readingLabel = 'Reading',
+  pausedLabel = 'Paused',
 }: LessonAudioProps) {
   const [status, setStatus] = useState<Status>('idle')
   const [supported, setSupported] = useState(true)
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
+  const [sections, setSections] = useState<AudioSection[]>([])
+  const [selection, setSelection] = useState<Selection>('auto')
+  const [nowReading, setNowReading] = useState<string | null>(null)
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
+  const selectId = useRef(`lesson-audio-section-${Math.random().toString(36).slice(2, 8)}`)
 
   useEffect(() => {
     setSupported(typeof window !== 'undefined' && 'speechSynthesis' in window)
@@ -78,10 +186,33 @@ export default function LessonAudio({
     }
   }, [])
 
+  // The outline and the audio picker offer the same set of headings, so the
+  // two always agree about what a "section" is.
+  useEffect(() => {
+    const root = document.querySelector<HTMLElement>(selector)
+    if (!root) return
+    setSections(
+      Array.from(root.querySelectorAll<HTMLElement>('h2[id], h3[id]')).map(heading => ({
+        id: heading.id,
+        text: (heading.textContent ?? '').replace(/\s+/g, ' ').trim(),
+        level: Number(heading.tagName[1]),
+      }))
+    )
+  }, [selector])
+
+  // Chrome populates the voice list asynchronously and fires `voiceschanged`
+  // once it has. Reading it only at play time missed the first click.
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
+    const synth = window.speechSynthesis
+    const load = () => setVoices(synth.getVoices())
+    load()
+    synth.addEventListener?.('voiceschanged', load)
+    return () => synth.removeEventListener?.('voiceschanged', load)
+  }, [])
+
   /** Picks the best available voice for the lesson language. */
   const pickVoice = useCallback((): SpeechSynthesisVoice | null => {
-    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return null
-    const voices = window.speechSynthesis.getVoices()
     if (voices.length === 0) return null
     const base = lang.split('-')[0].toLowerCase()
     return (
@@ -90,38 +221,87 @@ export default function LessonAudio({
       voices.find(v => v.lang.toLowerCase().includes(base)) ??
       null
     )
-  }, [lang])
+  }, [lang, voices])
+
+  /** True when the browser has voices, but none for the lesson's language. */
+  const languageVoiceMissing =
+    voices.length > 0 &&
+    !voices.some(v => v.lang.toLowerCase().startsWith(lang.split('-')[0].toLowerCase()))
 
   const stop = useCallback(() => {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel()
     }
     utteranceRef.current = null
+    setNowReading(null)
     setStatus('idle')
   }, [])
 
-  const speak = useCallback(() => {
-    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
+  const speak = useCallback(
+    (nextSelection?: Selection) => {
+      if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
 
-    const root = document.querySelector<HTMLElement>(selector)
-    const text = root ? collectSpokenText(root) : ''
-    if (!text) return
+      const root = document.querySelector<HTMLElement>(selector)
+      if (!root) return
 
-    window.speechSynthesis.cancel()
+      const choice = nextSelection ?? selection
+      let text = ''
+      let title: string | null = null
 
-    const utterance = new SpeechSynthesisUtterance(text)
-    utterance.lang = lang
-    utterance.rate = 1
-    const voice = pickVoice()
-    if (voice) utterance.voice = voice
+      if (choice === 'all' || sections.length === 0) {
+        text = collectSpokenText(root)
+      } else {
+        const id = choice === 'auto' ? findCurrentSectionId(root, sections) : choice
+        if (id) {
+          text = collectSectionText(root, id)
+          title = sections.find(section => section.id === id)?.text ?? null
+        }
+        if (!text) text = collectSpokenText(root)
+      }
 
-    utterance.onend = () => setStatus('idle')
-    utterance.onerror = () => setStatus('idle')
+      if (!text) return
 
-    utteranceRef.current = utterance
-    window.speechSynthesis.speak(utterance)
-    setStatus('speaking')
-  }, [selector, lang, pickVoice])
+      window.speechSynthesis.cancel()
+
+      const voice = pickVoice()
+      const configure = (value: string) => {
+        const utterance = new SpeechSynthesisUtterance(value)
+        utterance.lang = lang
+        utterance.rate = 1
+        if (voice) {
+          try {
+            utterance.voice = voice
+          } catch {
+            // Some browsers expose a voice that cannot be assigned. Speaking
+            // with the default voice is better than not speaking at all.
+          }
+        }
+        return utterance
+      }
+
+      // Two utterances, queued: a one-line confirmation, then the section. The
+      // learner hears what is happening immediately, and the confirmation is
+      // never mixed into the lesson text itself.
+      const announcement = configure(intro)
+      const utterance = configure(text)
+
+      utterance.onend = () => {
+        setNowReading(null)
+        setStatus('idle')
+      }
+      utterance.onerror = () => {
+        setNowReading(null)
+        setStatus('idle')
+      }
+
+      utteranceRef.current = utterance
+      setNowReading(title)
+      window.speechSynthesis.speak(announcement)
+      window.speechSynthesis.speak(utterance)
+      setStatus('speaking')
+    },
+    [selector, lang, pickVoice, intro, selection, sections]
+  )
 
   const toggle = useCallback(() => {
     if (status === 'speaking') {
@@ -141,46 +321,107 @@ export default function LessonAudio({
     speak()
   }, [status, speak])
 
+  /** Start the current selection again from its first word. */
+  const restart = useCallback(() => {
+    speak()
+  }, [speak])
+
+  const chooseSection = useCallback(
+    (next: string) => {
+      setSelection(next)
+      // Changing the section while listening restarts with the new choice,
+      // rather than leaving the previous section playing under a new label.
+      if (status !== 'idle') speak(next)
+    },
+    [status, speak]
+  )
+
   if (!supported) return null
 
+  const statusText =
+    status === 'speaking'
+      ? nowReading
+        ? `${readingLabel}: ${nowReading}`
+        : readingLabel
+      : status === 'paused'
+        ? pausedLabel
+        : label
+
   return (
-    <div className="not-prose my-6 flex items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2">
-      <button
-        type="button"
-        onClick={toggle}
-        aria-label={status === 'speaking' ? 'Pause reading aloud' : label}
-        title={description || label}
-        className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-soft text-primary transition-colors hover:bg-primary/20"
-      >
-        {status === 'speaking' ? (
-          <Pause className="h-4 w-4" aria-hidden="true" />
-        ) : (
-          <Volume2 className="h-4 w-4" aria-hidden="true" />
-        )}
-      </button>
+    <div
+      data-lesson-audio
+      className="not-prose my-6 rounded-xl border border-border bg-surface px-3 py-2"
+    >
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label={status === 'speaking' ? 'Pause reading aloud' : label}
+          title={description || label}
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-soft text-primary transition-colors hover:bg-primary/20"
+        >
+          {status === 'speaking' ? (
+            <Pause className="h-4 w-4" aria-hidden="true" />
+          ) : (
+            <Volume2 className="h-4 w-4" aria-hidden="true" />
+          )}
+        </button>
 
-      <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-medium text-foreground">
-          {status === 'speaking'
-            ? 'Reading aloud…'
-            : status === 'paused'
-              ? 'Paused'
-              : label}
-        </p>
-        {description && (
-          <p className="truncate text-xs text-foreground-muted">{description}</p>
-        )}
-      </div>
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-sm font-medium text-foreground">{statusText}</p>
+          {description && (
+            <p className="truncate text-xs text-foreground-muted">{description}</p>
+          )}
+        </div>
 
-      {status !== 'idle' && (
+        {/* Stop and restart stay mounted so they are discoverable, and are
+            disabled while nothing is playing. */}
+        <button
+          type="button"
+          onClick={restart}
+          disabled={status === 'idle'}
+          aria-label={restartLabel}
+          title={restartLabel}
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-foreground-muted transition-colors hover:bg-surface-sunken hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
+        >
+          <RotateCcw className="h-4 w-4" aria-hidden="true" />
+        </button>
         <button
           type="button"
           onClick={stop}
-          aria-label="Stop reading aloud"
-          className="flex h-9 w-9 items-center justify-center rounded-lg text-foreground-muted transition-colors hover:bg-surface-sunken hover:text-foreground"
+          disabled={status === 'idle'}
+          aria-label={stopLabel}
+          title={stopLabel}
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-foreground-muted transition-colors hover:bg-surface-sunken hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
         >
           <Square className="h-4 w-4" aria-hidden="true" />
         </button>
+      </div>
+
+      {sections.length > 0 && (
+        <div className="mt-2 flex items-center gap-2">
+          <label htmlFor={selectId.current} className="shrink-0 text-xs text-foreground-muted">
+            {sectionLabel}
+          </label>
+          <select
+            id={selectId.current}
+            value={selection}
+            onChange={event => chooseSection(event.target.value)}
+            className="min-w-0 flex-1 rounded-md border border-border bg-background px-2 py-1 text-xs text-foreground"
+          >
+            <option value="auto">{sectionAutoLabel}</option>
+            <option value="all">{sectionAllLabel}</option>
+            {sections.map(section => (
+              <option key={section.id} value={section.id}>
+                {section.text}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {languageVoiceMissing && (
+        <p className="mt-2 text-xs leading-snug text-amber-700 dark:text-amber-400">{voiceNote}</p>
       )}
     </div>
   )

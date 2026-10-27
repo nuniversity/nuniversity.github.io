@@ -231,9 +231,15 @@ export default function LessonOutline({
       )}
 
       <div
-        // The width is published as a custom property so the aside can size
-        // itself without an inline responsive class.
-        style={{ ['--outline-w' as string]: `${width}px` }}
+        // The outline width and the content's reading width are published as
+        // custom properties so the content can reclaim the space when the
+        // outline is hidden — a fixed `max-w-4xl` would leave a dead margin.
+        style={{
+          ['--outline-w' as string]: `${width}px`,
+          // Hiding the outline hands its width to the lesson. The card grows
+          // with it, so the freed space is used rather than left as a margin.
+          ['--lesson-content-max' as string]: collapsed ? '62rem' : '56rem',
+        }}
         className={[
           'lg:flex lg:items-start lg:gap-0',
           // While dragging, suppress the sticky element's own transitions.
@@ -373,9 +379,14 @@ export default function LessonOutline({
         )}
 
         <div className="min-w-0 flex-1 lg:pl-6">
-          {/* Desktop: reopen the outline after hiding it. */}
+          {/* Desktop: reopen the outline after hiding it. The row is capped to
+              the same column as the lesson, so the button lines up with the
+              card instead of floating at the far left of the freed space. */}
           {collapsed && (
-            <div className="hidden lg:flex sticky top-16 z-20 justify-start pb-2">
+            <div
+              className="mx-auto hidden w-full lg:flex sticky top-16 z-20 justify-start pb-2"
+              style={{ maxWidth: 'var(--lesson-content-max, 56rem)' }}
+            >
               <button
                 type="button"
                 onClick={toggleCollapsed}

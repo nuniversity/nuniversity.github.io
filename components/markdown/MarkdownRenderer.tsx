@@ -41,6 +41,13 @@ interface MarkdownRendererProps {
   /** Site locale ('en' | 'pt' | 'es') — drives callout header labels. Defaults to 'en'. */
   lang?: string
   dict?: any
+  /**
+   * Title already shown by the page. When the Markdown opens with an `# H1`
+   * carrying the same text, it is dropped: 1,267 of 1,298 lessons repeat the
+   * title inside the body, which rendered the heading twice and gave the page
+   * two `h1` elements.
+   */
+  pageTitle?: string
 }
 
 const langMap: Record<string, string> = {
@@ -303,10 +310,16 @@ function MermaidDiagram({ code }: MermaidDiagramProps) {
         const svgEl = containerRef.current.querySelector('svg') as SVGSVGElement | null
         if (!svgEl) return
 
-        const rawW = svgEl.getAttribute('width')
-        const rawH = svgEl.getAttribute('height')
-        const parsedW = rawW ? parseFloat(rawW) : null
-        const parsedH = rawH ? parseFloat(rawH) : null
+        // Mermaid writes the diagram's intrinsic size as `width`/`height`
+        // attributes, or as a `viewBox`. That size is what the reader gets:
+        // the wrapper below is sized from it and the scroll container pans,
+        // instead of shrinking the diagram until its labels are unreadable.
+        const rawW = svgEl.getAttribute('width') ?? ''
+        const rawH = svgEl.getAttribute('height') ?? ''
+        const numeric = (value: string) => (/^\d+(\.\d+)?$/.test(value) ? parseFloat(value) : null)
+        const viewBox = svgEl.viewBox?.baseVal
+        const parsedW = numeric(rawW) ?? (viewBox && viewBox.width ? viewBox.width : null)
+        const parsedH = numeric(rawH) ?? (viewBox && viewBox.height ? viewBox.height : null)
 
         if (!svgEl.getAttribute('viewBox') && parsedW && parsedH) {
           svgEl.setAttribute('viewBox', `0 0 ${parsedW} ${parsedH}`)
@@ -324,7 +337,7 @@ function MermaidDiagram({ code }: MermaidDiagramProps) {
         } else {
           requestAnimationFrame(() => {
             const rect = containerRef.current?.getBoundingClientRect()
-            if (rect) setNaturalSize({ w: rect.width, h: rect.height })
+            if (rect && rect.width > 0) setNaturalSize({ w: rect.width, h: rect.height })
           })
         }
       } catch (err) {
@@ -355,6 +368,23 @@ function MermaidDiagram({ code }: MermaidDiagramProps) {
       observer?.disconnect()
     }
   }, [code])
+
+  // Default scale: fit the column when the diagram is not much wider, but never
+  // shrink below 75% — past that the labels stop being readable and panning is
+  // the better deal. The zoom buttons still go down to 25%.
+  const [fit, setFit] = useState(1)
+  useEffect(() => {
+    if (!naturalSize) return
+    const scroll = scrollRef.current
+    if (!scroll) return
+    const compute = () => {
+      const available = Math.max(160, scroll.clientWidth)
+      setFit(Math.max(0.75, Math.min(1, available / naturalSize.w)))
+    }
+    compute()
+    window.addEventListener('resize', compute)
+    return () => window.removeEventListener('resize', compute)
+  }, [naturalSize])
 
   const handleZoomIn    = () => setZoom(prev => Math.min(parseFloat((prev + 0.25).toFixed(2)), 4))
   const handleZoomOut   = () => setZoom(prev => Math.max(parseFloat((prev - 0.25).toFixed(2)), 0.25))
@@ -389,10 +419,10 @@ function MermaidDiagram({ code }: MermaidDiagramProps) {
     )
   }
 
-  const scaledStyle: React.CSSProperties =
-    zoom !== 1 && naturalSize
-      ? { width: naturalSize.w * zoom, height: naturalSize.h * zoom, transform: `scale(${zoom})`, transformOrigin: 'top left' }
-      : { width: '100%', transform: zoom !== 1 ? `scale(${zoom})` : undefined, transformOrigin: 'top left' }
+  const scale = fit * zoom
+  const sizedStyle: React.CSSProperties = naturalSize
+    ? { width: naturalSize.w * scale, height: naturalSize.h * scale }
+    : { width: '100%' }
 
   return (
     <div className={`mermaid-wrapper ${isFullscreen ? 'fullscreen' : ''}`}>
@@ -412,7 +442,7 @@ function MermaidDiagram({ code }: MermaidDiagramProps) {
       </div>
 
       <div ref={scrollRef} className="mermaid-scroll-container" onWheel={handleWheel}>
-        <div style={scaledStyle}>
+        <div style={sizedStyle}>
           <div ref={containerRef} className="mermaid-content" />
         </div>
       </div>
@@ -494,6 +524,303 @@ function toCalloutHtml(type: string, title: string, body: string, lang: string):
   )
 }
 
+/**
+ * Turns `A · B · C · …` prose runs into a real bullet list.
+ *
+ * Several courses list 30–40 service names as one paragraph separated by
+ * middle dots. Rendered literally that becomes an unreadable wall of text that
+ * wraps unpredictably. Converting it to a list is both more readable and more
+ * semantically correct.
+ *
+ * Guards:
+ *  - fenced code is skipped entirely;
+ *  - headings, tables, blockquotes and existing lists are left alone;
+ *  - a run needs at least 5 items and every item must be short, so prose that
+ *    happens to contain one or two `·` characters is untouched.
+ */
+const INLINE_LIST_MIN_ITEMS = 5
+const INLINE_LIST_MAX_ITEM_LENGTH = 80
+
+/**
+ * Removes a stray `**` left over when a bold run is split across items
+ * (`**Basic · Business Support+ · … · Unified Operations**`). Without this
+ * the first and last items would render with literal asterisks and could
+ * bold the wrong span.
+ */
+function balanceEmphasis(text: string): string {
+  const markers = text.match(/\*\*/g) ?? []
+  if (markers.length % 2 === 0) return text
+  if (text.startsWith('**')) return text.slice(2)
+  if (text.endsWith('**')) return text.slice(0, -2)
+  return text
+}
+
+/**
+ * Escapes the `$` in currency so remark-math cannot read it as LaTeX.
+ *
+ * The course prose is full of money — `US$ 499.999`, `R$ 1.000`, `$0.015 por
+ * shard-hour`. remark-math treats two `$` on one line as an inline math span,
+ * so amounts were typeset by KaTeX and the bold markers around them leaked out
+ * as literal `*`. A single AWS table row could contain four amounts and render
+ * as four broken formulas.
+ *
+ * The decision is made per *pair*, because that is how remark-math reads them:
+ * dollars are paired left to right on each line, and each pair is classified.
+ * A pair is currency when it contains markdown emphasis (math never does),
+ * ends in a dangling operator (`$0.50-$1.00`), contains words, or is a bare
+ * amount. Genuine formulas keep their `$`: they contain `\`, `^`, `_`, braces
+ * or a comparison, which prose amounts never do.
+ *
+ * Display math (`$$ … $$`) is skipped, fenced code and inline code are
+ * skipped, and an already-escaped `\$` is left alone.
+ */
+const CURRENCY_UNIT_RE = /[A-Za-zÀ-ÖØ-öø-ÿ]{3,}/
+const AMOUNT_RE = /^\d[\d.,\s]*\d$/
+const MATH_SIGNAL_RE = /[\\^_{}=<>]/
+
+function isCurrencySpan(body: string): boolean {
+  const s = body.trim()
+  if (!s) return false
+  // Math never contains markdown emphasis; prose that does was clearly eaten
+  // by a stray pair of dollars.
+  if (s.includes('**') || s.includes('__')) return true
+  // `$0.50-$1.00` pairs as "0.50-", which is not a formula.
+  if (/[-+*/=]$/.test(s)) return true
+  if (MATH_SIGNAL_RE.test(s)) return false
+  const stripped = s
+    .replace(/\\(?:text|mathrm|operatorname)\{[^{}]*\}/g, '')
+    .replace(/\\[a-zA-Z]+/g, '')
+  if (CURRENCY_UNIT_RE.test(stripped)) return true
+  // Bare amounts: 0.015, 499.999, 1,500, 10 000 — but not a lone "3".
+  return AMOUNT_RE.test(s) && (s.length >= 4 || /[.,]/.test(s))
+}
+
+/** Escapes the dollar signs of one currency pair inside a block of text. */
+function escapeCurrencyText(text: string): { text: string; changed: boolean } {
+  // Inline code is literal: `$` inside it is never a math delimiter and must
+  // not gain a backslash.
+  const codeSpans: Array<[number, number]> = []
+  const codeRe = /`[^`]*`/g
+  let codeMatch: RegExpExecArray | null
+  while ((codeMatch = codeRe.exec(text)) !== null) {
+    codeSpans.push([codeMatch.index, codeMatch.index + codeMatch[0].length])
+  }
+  const inCode = (i: number) => codeSpans.some(([a, b]) => i >= a && i < b)
+
+  const positions: number[] = []
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] !== '$') continue
+    if (inCode(i)) continue
+    if (i > 0 && text[i - 1] === '\\') continue
+    if (text[i + 1] === '$' || (i > 0 && text[i - 1] === '$')) {
+      // Display-math delimiter: never a currency sign.
+      i++
+      continue
+    }
+    positions.push(i)
+  }
+  if (positions.length < 2) return { text, changed: false }
+
+  const escape = new Set<number>()
+  for (let k = 0; k + 1 < positions.length; k += 2) {
+    const open = positions[k]
+    const close = positions[k + 1]
+    if (isCurrencySpan(text.slice(open + 1, close))) {
+      escape.add(open)
+      escape.add(close)
+    }
+  }
+  if (escape.size === 0) return { text, changed: false }
+
+  let out = ''
+  for (let i = 0; i < text.length; i++) {
+    if (escape.has(i)) out += '\\'
+    out += text[i]
+  }
+  return { text: out, changed: true }
+}
+
+function escapeCurrency(md: string): string {
+  const lines = md.split('\n')
+  const output = [...lines]
+  let inFence = false
+  let fenceChar = ''
+  // remark-math pairs dollars across a whole paragraph, which may wrap over
+  // several source lines. Pairing line by line missed those, so consecutive
+  // prose lines are collected into one block first.
+  let block: number[] = []
+
+  const flush = () => {
+    if (block.length === 0) return
+    const joined = block.map(i => output[i]).join('\n')
+    const { text, changed } = escapeCurrencyText(joined)
+    if (changed) {
+      const parts = text.split('\n')
+      block.forEach((lineIndex, i) => {
+        output[lineIndex] = parts[i]
+      })
+    }
+    block = []
+  }
+
+  lines.forEach((line, index) => {
+    const fence = /^\s*(`{3,}|~{3,})/.exec(line)
+    if (fence) {
+      flush()
+      if (!inFence) {
+        inFence = true
+        fenceChar = fence[1][0]
+      } else if (line.trim().startsWith(fenceChar.repeat(3))) {
+        inFence = false
+      }
+      return
+    }
+    if (inFence) return
+
+    const trimmed = line.trim()
+    if (trimmed === '') {
+      flush()
+      return
+    }
+    // A list item is its own paragraph: pairing dollars across sibling items
+    // would escape the wrong pair.
+    if (/^([-*+]|\d+[.)])\s/.test(trimmed)) {
+      flush()
+      block.push(index)
+      return
+    }
+    // Blocks that never continue across lines are still processed, but on
+    // their own: a table row is a complete paragraph in GFM.
+    if (/^[|#<]/.test(trimmed)) {
+      flush()
+      block = [index]
+      flush()
+      return
+    }
+
+    block.push(index)
+  })
+  flush()
+
+  return output.join('\n')
+}
+
+function preprocessInlineLists(md: string): string {
+  const lines = md.split('\n')
+  const out: string[] = []
+  let inFence = false
+  let fenceChar = ''
+
+  /**
+   * Splits `**Query federation (11):** MySQL` into its label and first item.
+   * Returns `null` when the line has no usable lead-in.
+   */
+  function splitLeadIn(raw: string): { label: string; rest: string } | null {
+    const colon = raw.indexOf(':')
+    if (colon < 1 || colon > 120) return null
+    let label = raw.slice(0, colon + 1)
+    let rest = raw.slice(colon + 1)
+    // Closing emphasis after the colon belongs to the label.
+    const closing = /^[*_`]+/.exec(rest)
+    if (closing) {
+      label += closing[0]
+      rest = rest.slice(closing[0].length)
+    }
+    // Unbalanced emphasis would corrupt the Markdown, so leave it alone.
+    if (label.startsWith('**') && !label.endsWith('**')) return null
+    rest = rest.replace(/^[\s]+/, '')
+    return rest ? { label: label.trim(), rest } : null
+  }
+
+  for (const line of lines) {
+    const fence = /^\s*(`{3,}|~{3,})/.exec(line)
+    if (fence) {
+      if (!inFence) {
+        inFence = true
+        fenceChar = fence[1][0]
+      } else if (line.trim().startsWith(fenceChar.repeat(3))) {
+        inFence = false
+      }
+      out.push(line)
+      continue
+    }
+    if (inFence) {
+      out.push(line)
+      continue
+    }
+
+    const trimmed = line.trim()
+    // Leave block-level markdown alone.
+    if (/^(#{1,6}\s|>|\||[-*+]\s|\d+[.)]\s|<\/?[a-z])/i.test(trimmed)) {
+      out.push(line)
+      continue
+    }
+
+    const parts = line
+      .split('·')
+      .map(part => part.trim())
+      .filter(Boolean)
+
+    // Some runs are introduced by a label: `**Query federation (11):** a · b · c`.
+    // Keep the label as its own paragraph and list only the items after it.
+    let label: string | null = null
+    let items = parts
+    const leadIn = splitLeadIn(parts[0] ?? '')
+    if (leadIn) {
+      label = leadIn.label
+      items = [leadIn.rest, ...parts.slice(1)]
+    }
+
+    // A run can end with the start of new prose on the same line:
+    // `… · **z** = high CPU frequency. After the dash, …`. Keep that sentence
+    // as a paragraph after the list instead of as a giant list item.
+    let trailing: string | null = null
+    const last = items[items.length - 1] ?? ''
+    if (last.length > INLINE_LIST_MAX_ITEM_LENGTH) {
+      const sentence = new RegExp(
+        `^(.{1,${INLINE_LIST_MAX_ITEM_LENGTH}}?[.!?])\\s+(.{20,})$`
+      ).exec(last)
+      if (sentence) {
+        items = [...items.slice(0, -1), sentence[1]]
+        trailing = sentence[2]
+      }
+    }
+
+    const qualifies =
+      items.length >= INLINE_LIST_MIN_ITEMS - (label ? 1 : 0) &&
+      items.every(part => part.length > 0 && part.length <= INLINE_LIST_MAX_ITEM_LENGTH)
+
+    if (!qualifies) {
+      out.push(line)
+      continue
+    }
+
+    out.push('')
+    if (label) out.push(label, '')
+    for (const part of items) {
+      out.push(`- ${balanceEmphasis(part.replace(/[.;:,]+$/, ''))}`)
+    }
+    if (trailing) out.push('', trailing)
+    out.push('')
+  }
+
+  return out.join('\n')
+}
+
+/**
+ * Drops a leading `# Heading` that repeats the title the page already shows.
+ * Without this the lesson title appeared twice: once as the page `h1` and once
+ * as the first heading inside the content card.
+ */
+function stripDuplicateTitle(md: string, pageTitle?: string): string {
+  if (!pageTitle) return md
+  const match = /^\s*#\s+(.+?)\s*(?:\n|$)/.exec(md)
+  if (!match) return md
+  const normalise = (s: string) => s.replace(/\s+/g, ' ').trim().toLowerCase()
+  if (normalise(match[1]) !== normalise(pageTitle)) return md
+  return md.slice(match[0].length).replace(/^\s*\n/, '')
+}
+
 function preprocessAlerts(md: string, lang: string): string {
   let result = md.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
 
@@ -528,8 +855,16 @@ function preprocessAlerts(md: string, lang: string): string {
   return result
 }
 
-export default function MarkdownRenderer({ content, lang = 'en', dict }: MarkdownRendererProps) {
-  const processedContent = preprocessAlerts(content, lang)
+export default function MarkdownRenderer({
+  content,
+  lang = 'en',
+  dict,
+  pageTitle,
+}: MarkdownRendererProps) {
+  const processedContent = preprocessAlerts(
+    preprocessInlineLists(escapeCurrency(stripDuplicateTitle(content, pageTitle))),
+    lang
+  )
 
   return (
     <ReactMarkdown
@@ -543,8 +878,8 @@ export default function MarkdownRenderer({ content, lang = 'en', dict }: Markdow
 
         p: ({ children }) => <p className="mb-4 leading-7 text-foreground/90">{children}</p>,
 
-        ul: ({ children }) => <ul className="list-disc list-inside mb-4 space-y-2 ml-4">{children}</ul>,
-        ol: ({ children }) => <ol className="list-decimal list-inside mb-4 space-y-2 ml-4">{children}</ol>,
+        ul: ({ children }) => <ul className="list-disc mb-4 space-y-2 pl-6">{children}</ul>,
+        ol: ({ children }) => <ol className="list-decimal mb-4 space-y-2 pl-6">{children}</ol>,
         li: ({ children }) => <li className="leading-7 text-foreground/90">{children}</li>,
 
         pre: ({ children }) => (
@@ -803,24 +1138,31 @@ export default function MarkdownRenderer({ content, lang = 'en', dict }: Markdow
 
         table: ({ children }) => (
           <div
-            className="my-6 overflow-x-auto overscroll-x-contain rounded-xl border border-border"
+            className="table-scroll my-6 overflow-x-auto overscroll-contain rounded-xl border border-border"
             // Scrollable regions need a name and a tab stop so keyboard users
-            // can reach the horizontal scroll (WCAG 2.1.1).
+            // can reach the scrollbars (WCAG 2.1.1).
             role="region"
-            aria-label="Table — scroll horizontally to see all columns"
+            aria-label="Table — scroll inside this box to see all rows and columns"
             tabIndex={0}
           >
-            <table className="w-full text-sm">{children}</table>
+            {/* Width comes from `.prose-measure table` in globals.css: it sizes
+                to its content so columns keep a readable measure, and this box
+                scrolls when the table is wider or taller than the page. */}
+            <table className="text-sm">{children}</table>
           </div>
         ),
         thead: ({ children }) => <thead className="bg-surface-sunken">{children}</thead>,
         th: ({ children }) => (
           <th className="border-b border-border px-4 py-2.5 text-left font-semibold text-foreground">
-            {children}
+            {/* `max-width` is ignored on table cells, so the measure lives on
+                a wrapper element. */}
+            <div className="prose-cell">{children}</div>
           </th>
         ),
         td: ({ children }) => (
-          <td className="border-b border-border-subtle px-4 py-2.5 text-foreground/90">{children}</td>
+          <td className="border-b border-border-subtle px-4 py-2.5 text-foreground/90">
+            <div className="prose-cell">{children}</div>
+          </td>
         ),
 
         hr: () => <hr className="my-8 border-border" />,

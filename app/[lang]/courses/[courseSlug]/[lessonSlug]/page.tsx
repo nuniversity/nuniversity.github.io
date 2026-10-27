@@ -182,7 +182,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
         lessons={allLessons.map(l => ({ slug: l.slug, title: l.metadata.title }))}
         dict={dict}
       >
-          <div className="max-w-4xl mx-auto">
+          <div className="mx-auto w-full" style={{ maxWidth: 'var(--lesson-content-max, 56rem)' }}>
           {/* Breadcrumb */}
           <nav className="mb-8 flex items-center flex-wrap gap-2 text-sm text-muted-foreground">
 
@@ -201,7 +201,9 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
             <span>/</span>
 
             {courseInfo && (
-              <>
+              // Hidden on phones: a truncated course title plus its separator
+              // was wrapping to a line of its own ("…Par… /").
+              <span className="hidden items-center gap-2 sm:inline-flex">
                 <Link
                   href={`/${lang}/courses/${courseSlug}/`}
                   className="hover:text-foreground max-w-[200px] truncate"
@@ -209,7 +211,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
                   {courseInfo.title}
                 </Link>
                 <span>/</span>
-              </>
+              </span>
             )}
 
             <span className="text-foreground font-medium max-w-[200px] truncate">
@@ -268,6 +270,15 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
               lang={speechLocale}
               label={dict.lesson?.listen || 'Listen to this lesson'}
               description={dict.lesson?.listen_hint || 'Read the lesson aloud using your browser’s speech engine.'}
+              intro={dict.lesson?.listen_intro || 'Audio is on. Reading this lesson aloud.'}
+              voiceNote={dict.lesson?.listen_voice_missing}
+              sectionLabel={dict.lesson?.listen_section || 'Section'}
+              sectionAutoLabel={dict.lesson?.listen_section_auto || 'The section I am reading'}
+              sectionAllLabel={dict.lesson?.listen_section_all || 'The whole lesson'}
+              stopLabel={dict.lesson?.listen_stop || 'Stop'}
+              restartLabel={dict.lesson?.listen_restart || 'Restart'}
+              readingLabel={dict.lesson?.listen_reading || 'Reading'}
+              pausedLabel={dict.lesson?.listen_paused || 'Paused'}
             />
             {lesson.metadata.exam && lessonQuestions.length > 0 ? (
               <LessonExam
@@ -277,11 +288,21 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
                 examMinutes={lesson.metadata.examMinutes ?? 90}
                 dict={dict}
               >
-                <MarkdownRenderer content={lesson.content} lang={lang} dict={dict} />
+                <MarkdownRenderer
+                  content={lesson.content}
+                  lang={lang}
+                  dict={dict}
+                  pageTitle={lesson.metadata.title}
+                />
               </LessonExam>
             ) : (
               <LessonScoreProvider key={`${courseSlug}/${lessonSlug}`}>
-                <MarkdownRenderer content={lesson.content} lang={lang} dict={dict} />
+                <MarkdownRenderer
+                  content={lesson.content}
+                  lang={lang}
+                  dict={dict}
+                  pageTitle={lesson.metadata.title}
+                />
                 <LessonScoreSummary dict={dict} />
               </LessonScoreProvider>
             )}
@@ -318,7 +339,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
           )}
 
           {/* Navigation */}
-          <div className="max-w-4xl mx-auto flex justify-between items-center gap-4">
+          <div className="mx-auto flex w-full items-center justify-between gap-4" style={{ maxWidth: 'var(--lesson-content-max, 56rem)' }}>
             <div className="flex-1">
               {prevLesson ? (
                 <Link
