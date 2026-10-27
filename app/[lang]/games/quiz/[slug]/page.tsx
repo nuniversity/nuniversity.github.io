@@ -6,6 +6,7 @@ import { type Locale } from '@/lib/i18n/config'
 import { getAllQuizzes } from '@/lib/quizzes/get-quiz-content'
 import { Metadata } from 'next'
 import { RedirectToQuizzes } from '@/components/quizzes/RedirectToQuizzes'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 interface QuizRedirectPageProps {
   params: {
@@ -30,17 +31,16 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: { lang: Locale; slug: string }
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
   const metadata = dict.metadata as unknown as MetadataQuizzesTexts | undefined
 
   return {
+    alternates: buildAlternates(params.lang, `games/quiz/${params.slug}`),
     title: metadata?.quizzes?.title || 'Quizzes',
-    robots: { index: false, follow: false },
-  }
+    robots: { index: false, follow: false } }
 }
 
 export default async function QuizRedirectPage({ params }: QuizRedirectPageProps) {

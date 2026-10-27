@@ -7,27 +7,26 @@ import { type Locale } from '@/lib/i18n/config'
 import { getAllResources } from '@/lib/library/get-library-resources'
 import { Metadata } from 'next'
 import { LibraryClient } from './library-client'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 interface LibraryPageProps {
   params: { lang: Locale }
 }
 
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: { lang: Locale }
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
   
   return {
+    alternates: buildAlternates(params.lang, 'library'),
     title: dict.library?.title || 'Learning Library',
     description: dict.library?.subtitle || 'Curated collection of educational resources',
     openGraph: {
       title: dict.library?.title || 'Learning Library',
       description: dict.library?.subtitle || 'Curated collection of educational resources',
-      type: 'website',
-    },
-  }
+      type: 'website' } }
 }
 
 export default async function LibraryPage({ params }: LibraryPageProps) {

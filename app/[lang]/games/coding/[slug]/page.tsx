@@ -8,6 +8,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { BinaryHexClient } from './binary-hex-client'
 import { TypingSpeedClient } from './typing-speed-client'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 interface GamePageProps {
   params: { lang: Locale; slug: string }
@@ -21,14 +22,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { lang: Locale; slug: string } }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
   const game = await getGameFile<GameFileData>('coding', params.slug, params.lang)
-  if (!game) return { title: dict.metadata?.games?.notFound || 'Game Not Found' }
-  return { title: game.title, description: game.description }
+  if (!game) return {
+    alternates: buildAlternates(params.lang, `games/coding/${params.slug}`),
+    title: dict.metadata?.games?.notFound || 'Game Not Found' }
+  return {
+    alternates: buildAlternates(params.lang, `games/coding/${params.slug}`),
+    title: game.title, description: game.description }
 }
 
 const clients: Record<string, any> = {
   'binary-hex-game': BinaryHexClient,
-  'code-typing-speed': TypingSpeedClient,
-}
+  'code-typing-speed': TypingSpeedClient }
 
 export default async function CodingGamePage({ params }: GamePageProps) {
   const { lang, slug } = params

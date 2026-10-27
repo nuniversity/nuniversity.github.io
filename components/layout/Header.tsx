@@ -43,7 +43,7 @@ export default function Header({ lang, dict }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
   const moreRef = useRef<HTMLDivElement>(null)
-  const { theme, toggleTheme } = useTheme()
+  const { theme, ready, toggleTheme } = useTheme()
 
   const openSearch = useCallback(() => setSearchOpen(true), [])
   const closeSearch = useCallback(() => setSearchOpen(false), [])
@@ -265,13 +265,13 @@ export default function Header({ lang, dict }: HeaderProps) {
             <button
               onClick={toggleTheme}
               className="flex h-10 w-10 items-center justify-center rounded-lg text-foreground-muted transition-colors duration-150 hover:bg-surface-sunken hover:text-foreground"
-              aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
+              // The icon is swapped by CSS rather than by state, so the server
+              // and client always render the same markup. Swapping on `theme`
+              // caused both a hydration mismatch and a visible icon "pop".
+              aria-label={ready ? (theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme') : 'Toggle theme'}
             >
-              {theme === 'light' ? (
-                <Moon className="h-[18px] w-[18px]" aria-hidden="true" />
-              ) : (
-                <Sun className="h-[18px] w-[18px]" aria-hidden="true" />
-              )}
+              <Moon className="h-[18px] w-[18px] dark:hidden" aria-hidden="true" />
+              <Sun className="hidden h-[18px] w-[18px] dark:block" aria-hidden="true" />
             </button>
 
             <button

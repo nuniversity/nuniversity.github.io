@@ -1,92 +1,115 @@
-# Sample workflow for building and deploying a Next.js site to GitHub Pages
+name: Deploy static site to Pages
+
+# Builds the static export, runs every quality gate, and deploys to GitHub
+# Pages. Also runs the gates on pull requests (without deploying).
 #
-# To get started with Next.js see: https://nextjs.org/docs/getting-started
-#
-name: Deploy Next.js site to Pages
+# Important: the build step runs `npm run build`, not `next build`. `next build`
+# alone skips `prebuild` (media publishing + search index), `postbuild`
+# (404 stub + CSP injection) and the `verify-css` / `verify-csp` gates, so the
+# deployed artifact would differ from a local build.
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "pages"
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Detect package manager
-        id: detect-package-manager
-        run: |
-          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
-            echo "manager=yarn" >> $GITHUB_OUTPUT
-            echo "command=install" >> $GITHUB_OUTPUT
-            echo "runner=yarn" >> $GITHUB_OUTPUT
-            exit 0
-          elif [ -f "${{ github.workspace }}/package.json" ]; then
-            echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=ci" >> $GITHUB_OUTPUT
-            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
-            exit 0
-          else
-            echo "Unable to determine package manager"
-            exit 1
-          fi
+        with:
+          persist-credentials: false
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
+          # Must match `engines` in package.json and .node-version.
+          node-version: "22"
+          cache: npm
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
-          # Automatically inject basePath in your Next.js configuration file and disable
-          # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: next
-      - name: Restore cache
+
+      - name: Restore Next.js cache
         uses: actions/cache@v4
         with:
-          path: |
-            .next/cache
-          # Generate a new cache whenever packages or source files change.
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          # If source files changed but packages didn't, rebuild from a prior cache.
+          path: .next/cache
+          # A correct glob matters: `**.[jt]s` (the previous value) matches
+          # almost nothing, so stale caches were restored across source
+          # changes.
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.[jt]s', '**/*.[jt]sx') }}
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
       - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-      - name: Run tests
-        run: ${{ steps.detect-package-manager.outputs.runner }} vitest run
-      - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        run: npm ci
+
+      - name: Type-check
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Content validators
+        run: |
+          python3 -m pip install --quiet --upgrade pip
+          python3 -m pip install --quiet pytest pyyaml jsonschema
+          python3 -m pytest tests -q --ignore=tests/library/test_link_exceptions.py
+
+      - name: Dependency audit (advisory)
+        # Non-blocking: every current advisory is dev-only, build-only, or
+        # requires a server runtime this static site does not have. The report
+        # is kept visible so new advisories are noticed.
+        continue-on-error: true
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Build static site
+        # `npm run build` = prebuild (media + search index) → next build →
+        # postbuild (404 stub + CSP) → verify-css → verify-csp.
+        run: npm run build
+
+      - name: Check published size
+        # GitHub Pages rejects sites over 1 GB.
+        run: |
+          SIZE=$(du -sb out | cut -f1)
+          echo "Published output: $((SIZE/1024/1024)) MB"
+          if [ "$SIZE" -gt 1000000000 ]; then
+            echo "::error::out/ exceeds the 1 GB GitHub Pages limit"
+            exit 1
+          fi
+          if [ "$SIZE" -gt 900000000 ]; then
+            echo "::warning::out/ is above 900 MB — close to the GitHub Pages limit"
+          fi
+
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
 
-  # Deployment job
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

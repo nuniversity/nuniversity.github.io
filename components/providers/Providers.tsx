@@ -1,27 +1,19 @@
-// 'use client'
-
-// import { ThemeProvider } from 'next-themes'
-// import { ReactNode } from 'react'
-
-// export function Providers({ children }: { children: ReactNode }) {
-//   return (
-//     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-//       {children}
-//     </ThemeProvider>
-//   )
-// }
-
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { safeGet, safeSet } from '@/lib/storage/safe-storage'
-
-type Theme = 'light' | 'dark'
-
-const THEME_KEY = 'theme'
+import {
+  applyTheme,
+  parseStoredTheme,
+  readAppliedTheme,
+  THEME_STORAGE_KEY,
+  type Theme,
+} from '@/lib/theme/theme'
 
 interface ThemeContextType {
   theme: Theme
+  /** False until the browser's real theme has been resolved. */
+  ready: boolean
   toggleTheme: () => void
 }
 
@@ -35,47 +27,40 @@ export function useTheme() {
   return context
 }
 
-/** Reads the persisted theme, validating the value rather than trusting it. */
-function readStoredTheme(): Theme | null {
-  const raw = safeGet(THEME_KEY)
-  return raw === 'dark' || raw === 'light' ? raw : null
-}
-
 function ThemeProvider({ children }: { children: React.ReactNode }) {
+  // `light` is only the server-render default. The real value is read from
+  // the DOM once mounted — the inline script in <head> has already applied it.
   const [theme, setTheme] = useState<Theme>('light')
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const savedTheme = readStoredTheme()
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-    if (savedTheme) {
-      setTheme(savedTheme)
-    } else if (prefersDark) {
-      setTheme('dark')
-    }
+    // The init script already put the correct class on <html>, so trust the
+    // DOM rather than re-deriving and risk a second, contradicting decision.
+    const applied = readAppliedTheme()
+    const stored = parseStoredTheme(safeGet(THEME_STORAGE_KEY))
+    setTheme(stored ?? applied ?? 'light')
+    setReady(true)
   }, [])
 
   useEffect(() => {
-    safeSet(THEME_KEY, theme)
-    document.documentElement.classList.toggle('dark', theme === 'dark')
-    document.documentElement.setAttribute('data-theme', theme)
-  }, [theme])
+    // Writing before the real theme is known would remove the class the init
+    // script applied, which is exactly the flash this provider used to cause.
+    if (!ready) return
+    safeSet(THEME_STORAGE_KEY, theme)
+    applyTheme(theme)
+  }, [theme, ready])
 
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light')
-  }
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'))
+  }, [])
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, ready, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   )
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  return (
-    <ThemeProvider>
-      {children}
-    </ThemeProvider>
-  )
+  return <ThemeProvider>{children}</ThemeProvider>
 }

@@ -15,33 +15,13 @@
  */
 import fs from 'node:fs'
 import path from 'node:path'
+import { CSP_POLICY, CSP_REQUIRED_ORIGINS } from '../lib/security/csp.mjs'
 
 const OUT = path.join(process.cwd(), 'out')
 
 if (!fs.existsSync(OUT)) {
   console.error('verify-csp: out/ not found — run `next build` first')
   process.exit(1)
-}
-
-/** Directives the policy must declare. */
-const REQUIRED = [
-  'default-src',
-  'script-src',
-  'style-src',
-  'img-src',
-  'font-src',
-  'connect-src',
-  'frame-src',
-  'object-src',
-  'base-uri',
-  'form-action',
-]
-
-/** Origins the application genuinely talks to. */
-const REQUIRED_ORIGINS = {
-  'connect-src': ['https://formspree.io', 'https://files.rcsb.org'],
-  'frame-src': ['https://phet.colorado.edu'],
-  'form-action': ['https://formspree.io'],
 }
 
 /** External origins allowed to appear in the built HTML. */
@@ -136,14 +116,18 @@ for (const file of files) {
   const policy = decodeEntities(match[1])
 
   // 2. Required directives.
+  // Every directive in the source policy must survive into the emitted tag.
+  // Some directives carry no value (`upgrade-insecure-requests`), so the
+  // directive may legitimately be followed by `;` or the end of the string.
+  const REQUIRED = CSP_POLICY.split('; ').map(d => d.split(' ')[0])
   for (const directive of REQUIRED) {
-    if (!new RegExp(`(^|;|\\s)${directive}\\s`).test(policy)) {
+    if (!new RegExp(`(^|;|\\s)${directive}(\\s|;|$)`).test(policy)) {
       problems.push(`${rel}: policy is missing "${directive}"`)
     }
   }
 
   // 3. Required origins.
-  for (const [directive, origins] of Object.entries(REQUIRED_ORIGINS)) {
+  for (const [directive, origins] of Object.entries(CSP_REQUIRED_ORIGINS)) {
     const directiveValue = policy.match(new RegExp(`${directive}\\s+([^;]+)`))?.[1] ?? ''
     for (const origin of origins) {
       if (!directiveValue.includes(origin)) {

@@ -108,9 +108,16 @@ const UTILITY_RE =
 
 const used = new Map()
 
+/** Drop comments so prose inside them is not mistaken for a class name. */
+function stripComments(source) {
+  return source
+    .replace(/\/\*[\s\S]*?\*\//g, ' ')
+    .replace(/(^|[^:])\/\/[^\n]*/g, '$1 ')
+}
+
 for (const dir of SCAN_DIRS) {
   for (const file of walk(path.join(ROOT, dir))) {
-    const src = fs.readFileSync(file, 'utf8')
+    const src = stripComments(fs.readFileSync(file, 'utf8'))
     let match
     while ((match = UTILITY_RE.exec(src)) !== null) {
       const cls = match[1]

@@ -8,6 +8,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { VocabularyGameClient } from '@/components/languages/vocabulary-game-client'
 import { FlashcardGameClient } from '@/components/languages/flashcard-game-client'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 interface LanguageActivityPageProps {
   params: {
@@ -27,8 +28,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: { lang: Locale; pair: string; activitySlug: string }
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
@@ -36,14 +36,14 @@ export async function generateMetadata({
 
   if (!game) {
     return {
-      title: dict.metadata?.languages?.notFound || 'Language activity not found',
-    }
+    alternates: buildAlternates(params.lang, `languages/${params.pair}/${params.activitySlug}`),
+    title: dict.metadata?.languages?.notFound || 'Language activity not found' }
   }
 
   return {
+    alternates: buildAlternates(params.lang, `languages/${params.pair}/${params.activitySlug}`),
     title: game.title,
-    description: game.description,
-  }
+    description: game.description }
 }
 
 export default async function LanguageActivityPage({ params }: LanguageActivityPageProps) {

@@ -45,6 +45,7 @@
     --slate-300: 215 25% 84%;
     --slate-400: 215 20% 65%;
     --slate-500: 215 16% 47%;
+    --slate-550: 215 16% 45%;
     --slate-600: 215 19% 35%;
     --slate-700: 215 25% 27%;
     --slate-800: 217 33% 20%;
@@ -104,7 +105,7 @@
 
     /* Content */
     --foreground: var(--slate-900);
-    --foreground-muted: var(--slate-500);
+    --foreground-muted: var(--slate-550);
     --foreground-subtle: var(--slate-400);
     --foreground-inverse: 0 0% 100%;
 
@@ -312,22 +313,22 @@
 
     --section-tools-from: 173 80% 34%;
     --section-tools-to: 173 80% 42%;
-    --section-tools: 173 80% 34%;
+    --section-tools: 173 80% 27%;
     --section-tools-soft: 166 76% 95%;
 
     --section-games-from: 22 92% 50%;
     --section-games-to: 38 92% 50%;
-    --section-games: 22 92% 50%;
+    --section-games: 22 92% 38%;
     --section-games-soft: 24 95% 94%;
 
     --section-quizzes-from: 160 84% 30%;
     --section-quizzes-to: 158 64% 42%;
-    --section-quizzes: 160 84% 30%;
+    --section-quizzes: 160 84% 26%;
     --section-quizzes-soft: 142 79% 94%;
 
     --section-library-from: 199 89% 42%;
     --section-library-to: 198 93% 60%;
-    --section-library: 199 89% 42%;
+    --section-library: 199 89% 34%;
     --section-library-soft: 187 86% 95%;
 
     --section-roadmaps-from: 343 75% 45%;
@@ -337,7 +338,7 @@
 
     --section-languages-from: 84 60% 40%;
     --section-languages-to: 88 72% 48%;
-    --section-languages: 84 60% 40%;
+    --section-languages: 84 60% 29%;
     --section-languages-soft: 80 61% 94%;
 
     --brand-text: 221 83% 53%;
@@ -952,6 +953,12 @@
     border: 1px dashed hsl(var(--border-strong));
     border-radius: var(--radius-lg);
     background-color: hsl(var(--surface-sunken) / 0.5);
+  }
+
+  /* The footer paints a fixed dark surface in both themes; its muted text
+     needs a fixed light value (6.96:1 on #0f172a). */
+  .footer-muted {
+    color: hsl(215 20% 65%);
   }
 
   /* ── Callouts ─────────────────────────────────────────────────────── */

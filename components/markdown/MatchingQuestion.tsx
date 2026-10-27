@@ -17,6 +17,7 @@ import {
 import { CSS } from '@dnd-kit/utilities'
 import { CheckCircle2, XCircle, ArrowRightLeft } from 'lucide-react'
 import { useLessonScoreWidget } from '@/components/lessons/LessonScoreContext'
+import { useMountShuffle } from '@/lib/hooks/use-mount-shuffle'
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
@@ -90,7 +91,7 @@ interface MatchingQuestionProps {
 export default function MatchingQuestion({ question, pairs, explanation, dict }: MatchingQuestionProps) {
   const w = dict?.widgets
   const m = w?.matching
-  const [rightOrder, setRightOrder] = useState<string[]>(() => shuffle(pairs.map(p => p.right)))
+  const [rightOrder, setRightOrder] = useMountShuffle(pairs.map(p => p.right), shuffle)
   const [placements, setPlacements] = useState<Record<string, string>>({})
   const [feedback, setFeedback] = useState<'idle' | 'correct' | 'incorrect'>('idle')
   const [activeId, setActiveId] = useState<string | null>(null)

@@ -2,11 +2,17 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Volume2, Pause, Square, Loader2 } from 'lucide-react'
+import { Volume2, Pause, Square } from 'lucide-react'
 
 interface LessonAudioProps {
-  /** The text to read aloud. */
-  text: string
+  /**
+   * CSS selector for the element whose text should be read.
+   *
+   * The text is extracted in the browser rather than passed as a prop: a prop
+   * would be serialised into the RSC payload, duplicating the whole lesson
+   * body in every page (see R-03 in the 2026-10-27 review).
+   */
+  selector?: string
   /** BCP-47 language tag for the reading voice, e.g. `en-US`. */
   lang: string
   /** Label for the control. */
@@ -18,6 +24,35 @@ interface LessonAudioProps {
 type Status = 'idle' | 'speaking' | 'paused'
 
 /**
+ * Collects readable prose from a container, skipping code, tables, diagrams
+ * and other content that does not make sense spoken aloud.
+ */
+export function collectSpokenText(root: HTMLElement): string {
+  const SKIP = new Set(['PRE', 'CODE', 'TABLE', 'FIGURE', 'SVG', 'SCRIPT', 'STYLE', 'NAV'])
+  const KEEP = new Set(['P', 'LI', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'BLOCKQUOTE', 'DD', 'DT'])
+
+  const parts: string[] = []
+  const walk = (node: Node) => {
+    if (node.nodeType === Node.TEXT_NODE) return
+    if (node.nodeType !== Node.ELEMENT_NODE) return
+    const el = node as HTMLElement
+    if (SKIP.has(el.tagName)) return
+    if (el.getAttribute('aria-hidden') === 'true') return
+    if (KEEP.has(el.tagName)) {
+      const text = (el.textContent ?? '').replace(/\s+/g, ' ').trim()
+      // Skip fragments that are mostly symbols — a text-to-speech engine
+      // reads them as noise.
+      if (text.length > 2 && /[a-zA-ZÀ-ÿ0-9]/.test(text)) parts.push(text)
+      return
+    }
+    for (const child of Array.from(el.childNodes)) walk(child)
+  }
+
+  for (const child of Array.from(root.childNodes)) walk(child)
+  return parts.join('. ').replace(/\.\s*\./g, '.').slice(0, 60000)
+}
+
+/**
  * Reads a lesson aloud using the browser's built-in speech engine.
  *
  * The Web Speech API is available in every current browser and needs no
@@ -25,7 +60,7 @@ type Status = 'idle' | 'speaking' | 'paused'
  * opt-in: nothing is read until the learner presses play.
  */
 export default function LessonAudio({
-  text,
+  selector = '[data-lesson-content]',
   lang,
   label = 'Listen',
   description,
@@ -68,6 +103,10 @@ export default function LessonAudio({
   const speak = useCallback(() => {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
 
+    const root = document.querySelector<HTMLElement>(selector)
+    const text = root ? collectSpokenText(root) : ''
+    if (!text) return
+
     window.speechSynthesis.cancel()
 
     const utterance = new SpeechSynthesisUtterance(text)
@@ -82,7 +121,7 @@ export default function LessonAudio({
     utteranceRef.current = utterance
     window.speechSynthesis.speak(utterance)
     setStatus('speaking')
-  }, [text, lang, pickVoice])
+  }, [selector, lang, pickVoice])
 
   const toggle = useCallback(() => {
     if (status === 'speaking') {
@@ -102,7 +141,7 @@ export default function LessonAudio({
     speak()
   }, [status, speak])
 
-  if (!supported || !text.trim()) return null
+  if (!supported) return null
 
   return (
     <div className="not-prose my-6 flex items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2">

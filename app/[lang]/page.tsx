@@ -16,25 +16,24 @@ import { getAllTools } from '@/lib/tools/get-tool-content'
 import { getAllGames } from '@/lib/games/get-game-content'
 import { getAllResources } from '@/lib/library/get-library-resources'
 import type { StatItem } from '@/components/home/Stats'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: { lang: Locale }
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
   
   return {
+    alternates: buildAlternates(params.lang, ''),
     title: dict.metadata.home.title,
     description: dict.metadata.home.description,
     openGraph: {
       title: dict.metadata.home.title,
       description: dict.metadata.home.description,
       type: 'website',
-      locale: params.lang === 'en' ? 'en_US' : params.lang === 'pt' ? 'pt_BR' : 'es_ES',
-    },
-  }
+      locale: params.lang === 'en' ? 'en_US' : params.lang === 'pt' ? 'pt_BR' : 'es_ES' } }
 }
 
 function formatCount(n: number): string {
@@ -43,8 +42,7 @@ function formatCount(n: number): string {
 }
 
 export default async function HomePage({
-  params,
-}: {
+  params }: {
   params: { lang: Locale }
 }) {
   const dict = await getDictionary(params.lang)

@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import { LanguageActivityCard } from '@/components/languages/language-activity-card'
 import { pairChipLabel, tpl } from '@/lib/languages/format'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 interface LanguagePairPageProps {
   params: {
@@ -27,8 +28,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: { lang: Locale; pair: string }
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
@@ -37,11 +37,11 @@ export async function generateMetadata({
   const chip = source && target ? `${source.toUpperCase()} → ${target.toUpperCase()}` : params.pair
 
   return {
+    alternates: buildAlternates(params.lang, `languages/${params.pair}`),
     title: `${chip} — ${base}`,
     description:
       dict.metadata?.languages?.description ||
-      'Interactive flashcards and translation quizzes with progress tracking.',
-  }
+      'Interactive flashcards and translation quizzes with progress tracking.' }
 }
 
 export default async function LanguagePairPage({ params }: LanguagePairPageProps) {

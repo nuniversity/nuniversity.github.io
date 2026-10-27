@@ -12,8 +12,11 @@ import {
   Clock,
   Home,
   Target,
-  User,
-} from 'lucide-react'
+  User } from 'lucide-react'
+import { buildAlternates } from '@/lib/seo/alternates'
+import { pageMetadata } from '@/lib/seo/metadata'
+import JsonLd from '@/components/seo/JsonLd'
+import { breadcrumbSchema, courseSchema } from '@/lib/seo/json-ld'
 
 interface CourseLandingPageProps {
   params: {
@@ -50,13 +53,19 @@ export async function generateMetadata({
   const course = courses.find((c) => c.slug === courseSlug)
 
   if (!course) {
-    return { title: 'Course' }
+    return {
+      title: 'Course',
+      alternates: buildAlternates(params.lang, `courses/${params.courseSlug}`),
+    }
   }
 
-  return {
+  return pageMetadata({
+    lang,
+    path: `courses/${courseSlug}`,
     title: course.title,
     description: course.description || course.title,
-  }
+    type: 'article',
+  })
 }
 
 function difficultyClasses(difficulty?: string): string {
@@ -73,8 +82,7 @@ function difficultyClasses(difficulty?: string): string {
 }
 
 export default async function CourseLandingPage({
-  params,
-}: CourseLandingPageProps) {
+  params }: CourseLandingPageProps) {
   const { lang, courseSlug } = params
   const dict = await getDictionary(lang)
 
@@ -91,8 +99,30 @@ export default async function CourseLandingPage({
   const lessons = courseLessons.lessons
   const labels = dict.courses?.labels ?? {}
 
+  const courseUrl = `/${lang}/courses/${course.slug}/`
+
   return (
     <div className="container-custom py-12">
+      <JsonLd
+        data={[
+          courseSchema({
+            title: course.title,
+            description: course.description || course.title,
+            url: courseUrl,
+            lang,
+            difficulty: course.difficulty,
+            duration: course.duration,
+            author: course.author,
+            area: course.area,
+            lessonTitles: lessons.map(lesson => lesson.metadata?.title ?? lesson.slug),
+          }),
+          breadcrumbSchema([
+            { name: dict.navigation.home, url: `/${lang}/` },
+            { name: dict.navigation.courses, url: `/${lang}/courses/` },
+            { name: course.title, url: courseUrl },
+          ]),
+        ]}
+      />
       <div className="max-w-4xl mx-auto">
         <nav className="mb-8 flex items-center flex-wrap gap-2 text-sm text-muted-foreground">
           <Link href={`/${lang}/`} className="hover:text-foreground flex items-center gap-1">

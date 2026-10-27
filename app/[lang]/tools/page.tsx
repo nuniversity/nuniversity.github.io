@@ -7,22 +7,22 @@ import { type Locale } from '@/lib/i18n/config'
 import { getAllTools } from '@/lib/tools/get-tool-content'
 import { Metadata } from 'next'
 import { ToolsClient } from './tools-client'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 interface ToolsPageProps {
   params: { lang: Locale }
 }
 
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: { lang: Locale }
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
   
   return {
+    alternates: buildAlternates(params.lang, 'tools'),
     title: dict.tools?.title || 'Tools',
-    description: dict.tools?.subtitle || 'Powerful tools to enhance your learning',
-  }
+    description: dict.tools?.subtitle || 'Powerful tools to enhance your learning' }
 }
 
 export default async function ToolsPage({ params }: ToolsPageProps) {

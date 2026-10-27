@@ -7,13 +7,12 @@ import LessonExam from '@/components/quizzes/LessonExam'
 import { LessonScoreProvider, LessonScoreSummary } from '@/components/lessons/LessonScoreContext'
 import LessonOutline from '@/components/lessons/LessonOutline'
 import LessonAudio from '@/components/lessons/LessonAudio'
-import { buildSpokenText } from '@/lib/lessons/spoken-text'
+import FocusableScrollers from '@/components/lessons/FocusableScrollers'
 import {
   LessonScrollProgress,
   LessonKeyboardNav,
   LessonCompleteButton,
-  LessonVisitTracker,
-} from '@/components/lessons/LessonProgress'
+  LessonVisitTracker } from '@/components/lessons/LessonProgress'
 import LessonFeedback from '@/components/lessons/LessonFeedback'
 import CourseContentList from '@/components/lessons/CourseContentList'
 import { extractExamQuestions } from '@/lib/markdown/exam-questions'
@@ -21,6 +20,10 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight, BookOpen, Home, Brain } from 'lucide-react'
 import { Metadata } from 'next'
+import { buildAlternates } from '@/lib/seo/alternates'
+import { pageMetadata } from '@/lib/seo/metadata'
+import JsonLd from '@/components/seo/JsonLd'
+import { breadcrumbSchema, lessonSchema } from '@/lib/seo/json-ld'
 
 
 interface CoursePageProps {
@@ -48,8 +51,7 @@ export async function generateStaticParams() {
           params.push({
             lang,
             courseSlug: course.slug,
-            lessonSlug: lesson.slug,
-          })
+            lessonSlug: lesson.slug })
         }
       }
     } catch (error) {
@@ -64,23 +66,29 @@ export async function generateMetadata({
   params,
 }: CoursePageProps): Promise<Metadata> {
   const { lang, courseSlug, lessonSlug } = params
-  
+  const path = `courses/${courseSlug}/${lessonSlug}`
+
   try {
     const lesson = await getCourseContent(courseSlug, lessonSlug, lang)
-    
+
     if (!lesson) {
       return {
         title: 'Lesson Not Found',
+        alternates: buildAlternates(params.lang, path),
       }
     }
 
-    return {
+    return pageMetadata({
+      lang,
+      path,
       title: lesson.metadata.title,
       description: lesson.metadata.description || lesson.metadata.title,
-    }
-  } catch (error) {
+      type: 'article',
+    })
+  } catch {
     return {
       title: 'Lesson',
+      alternates: buildAlternates(params.lang, path),
     }
   }
 }
@@ -97,14 +105,8 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
 
   const lessonQuestions = lesson.metadata.exam ? extractExamQuestions(lesson.content) : []
 
-  // The text handed to the browser's speech engine: the lesson title and the
-  // prose, with code blocks, tables and diagrams stripped out so the reading
-  // does not turn into a wall of identifiers.
-  const spokenText = buildSpokenText(
-    [lesson.metadata.title, lesson.metadata.description, lesson.content].filter(Boolean).join('\n\n')
-  )
-
-  // BCP-47 tags for the reading voice.
+  // BCP-47 tag for the reading voice. The spoken text itself is extracted in
+  // the browser so the lesson body is not serialised into the RSC payload.
   const speechLocale = lang === 'pt' ? 'pt-BR' : lang === 'es' ? 'es-ES' : 'en-US'
 
   // Load all lessons in this course
@@ -134,8 +136,32 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
   const prevHref = prevLesson ? `/${lang}/courses/${courseSlug}/${prevLesson.slug}` : null
   const nextHref = nextLesson ? `/${lang}/courses/${courseSlug}/${nextLesson.slug}` : null
 
+  const lessonUrl = `/${lang}/courses/${courseSlug}/${lessonSlug}/`
+  const courseTitle = courseInfo?.title ?? courseSlug
+
   return (
     <div className="container-custom py-12">
+      <JsonLd
+        data={[
+          lessonSchema({
+            title: lesson.metadata.title,
+            description: lesson.metadata.description || lesson.metadata.title,
+            url: lessonUrl,
+            lang,
+            courseTitle,
+            courseUrl: `/${lang}/courses/${courseSlug}/`,
+            position: currentIndex >= 0 ? currentIndex + 1 : undefined,
+            duration: lesson.metadata.duration,
+          }),
+          breadcrumbSchema([
+            { name: dict.navigation.home, url: `/${lang}/` },
+            { name: dict.navigation.courses, url: `/${lang}/courses/` },
+            { name: courseTitle, url: `/${lang}/courses/${courseSlug}/` },
+            { name: lesson.metadata.title, url: lessonUrl },
+          ]),
+        ]}
+      />
+      <FocusableScrollers />
       <LessonScrollProgress />
       <LessonKeyboardNav prevHref={prevHref} nextHref={nextHref} />
       <LessonVisitTracker
@@ -239,7 +265,6 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
           >
             <div className="prose-measure">
             <LessonAudio
-              text={spokenText}
               lang={speechLocale}
               label={dict.lesson?.listen || 'Listen to this lesson'}
               description={dict.lesson?.listen_hint || 'Read the lesson aloud using your browser’s speech engine.'}

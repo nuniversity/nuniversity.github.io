@@ -7,21 +7,21 @@ import { type Locale } from '@/lib/i18n/config'
 import { getAllGames } from '@/lib/games/get-game-content'
 import { Metadata } from 'next'
 import { GamesClient } from './games-client'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 interface GamesPageProps {
   params: { lang: Locale }
 }
 
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: { lang: Locale }
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
   return {
+    alternates: buildAlternates(params.lang, 'games'),
     title: dict.metadata?.games?.title || 'Games - Learn While Playing',
-    description: dict.metadata?.games?.description || 'Interactive learning games for vocabulary, math, coding, and more',
-  }
+    description: dict.metadata?.games?.description || 'Interactive learning games for vocabulary, math, coding, and more' }
 }
 
 export default async function GamesPage({ params }: GamesPageProps) {

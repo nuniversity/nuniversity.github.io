@@ -3,6 +3,7 @@
 import { useMemo, useState, useEffect } from 'react'
 import { CheckCircle2, XCircle, Layers } from 'lucide-react'
 import { useLessonScoreWidget } from '@/components/lessons/LessonScoreContext'
+import { useMountShuffle } from '@/lib/hooks/use-mount-shuffle'
 
 interface BucketDropQuestionProps {
   question: string
@@ -25,7 +26,7 @@ export default function BucketDropQuestion({ question, instructions, buckets, ex
   const w = dict?.widgets
   const b = w?.bucket_drop
   const allItems = useMemo(() => buckets.flatMap(bucket => bucket.items), [buckets])
-  const [order, setOrder] = useState<string[]>(() => shuffle(allItems))
+  const [order, setOrder] = useMountShuffle(allItems, shuffle)
   const [placements, setPlacements] = useState<Record<string, string>>({})
   const [selected, setSelected] = useState<string | null>(null)
   const [checked, setChecked] = useState(false)

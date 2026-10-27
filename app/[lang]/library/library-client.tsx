@@ -229,6 +229,7 @@ export function LibraryClient({ lang, resources, dict }: LibraryClientProps) {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
+              aria-label={dict.library?.sort_by || 'Sort by'}
               className="px-3 py-1.5 rounded-lg border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="newest">{dict.library?.sort_options?.newest || 'Newest'}</option>

@@ -7,22 +7,22 @@ import { type Locale } from '@/lib/i18n/config'
 import { getAllCourses } from '@/lib/courses/get-course-content'
 import { Metadata } from 'next'
 import { CoursesClient } from './courses-client'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 interface CoursesPageProps {
   params: { lang: Locale }
 }
 
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: { lang: Locale }
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
   
   return {
+    alternates: buildAlternates(params.lang, 'courses'),
     title: dict.courses?.title || 'Courses',
-    description: dict.courses?.subtitle || 'Explore all available learning paths',
-  }
+    description: dict.courses?.subtitle || 'Explore all available learning paths' }
 }
 
 export default async function CoursesPage({ params }: CoursesPageProps) {

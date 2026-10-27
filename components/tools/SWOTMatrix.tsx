@@ -502,12 +502,14 @@ const SWOTMatrix = ({ dict = {} }: SWOTMatrixProps) => {
                             />
                             <button
                               onClick={saveEdit}
+                              aria-label={t.save || 'Save'}
                               className="p-1 rounded bg-green-500 text-white hover:bg-green-600"
                             >
                               <Save className="w-4 h-4" />
                             </button>
                             <button
                               onClick={cancelEdit}
+                              aria-label={t.cancel || 'Cancel'}
                               className="p-1 rounded bg-gray-500 text-white hover:bg-gray-600"
                             >
                               <X className="w-4 h-4" />
@@ -519,12 +521,14 @@ const SWOTMatrix = ({ dict = {} }: SWOTMatrixProps) => {
                             <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                               <button
                                 onClick={() => startEditing(key, index, item)}
+                                aria-label={t.edit || 'Edit item'}
                                 className="p-1 rounded hover:bg-white/50 dark:hover:bg-gray-700"
                               >
                                 <Edit2 className="w-3 h-3" />
                               </button>
                               <button
                                 onClick={() => removeItem(key, index)}
+                                aria-label={t.delete || 'Delete item'}
                                 className="p-1 rounded hover:bg-red-100 dark:hover:bg-red-900/30"
                               >
                                 <Trash2 className="w-3 h-3 text-red-600" />

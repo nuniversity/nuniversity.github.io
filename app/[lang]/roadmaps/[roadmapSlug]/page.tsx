@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import { Metadata } from 'next'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 export const dynamic = 'force-static'
 
@@ -24,8 +25,7 @@ export async function generateStaticParams() {
     for (const roadmap of roadmaps) {
       allParams.push({
         lang: locale,
-        roadmapSlug: roadmap.id,
-      })
+        roadmapSlug: roadmap.id })
     }
   }
 
@@ -33,21 +33,22 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: { lang: Locale; roadmapSlug: string }
 }): Promise<Metadata> {
   const roadmap = await getRoadmapContent(params.roadmapSlug, params.lang)
 
   if (!roadmap) {
     const dict = await getDictionary(params.lang)
-    return { title: dict.roadmaps?.notFound || 'Roadmap Not Found' }
+    return {
+    alternates: buildAlternates(params.lang, `roadmaps/${params.roadmapSlug}`),
+    title: dict.roadmaps?.notFound || 'Roadmap Not Found' }
   }
 
   return {
+    alternates: buildAlternates(params.lang, `roadmaps/${params.roadmapSlug}`),
     title: roadmap.title,
-    description: roadmap.description || undefined,
-  }
+    description: roadmap.description || undefined }
 }
 
 export default async function RoadmapViewerPage({ params }: RoadmapViewerPageProps) {

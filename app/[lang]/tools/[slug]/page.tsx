@@ -8,6 +8,7 @@ import { getAllTools, getToolMetadata } from '@/lib/tools/get-tool-content'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import dynamicImport from 'next/dynamic'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 interface ToolPageProps {
   params: { 
@@ -18,44 +19,34 @@ interface ToolPageProps {
 
 // Dynamic imports for tools
 const LLMPromptBuilder = dynamicImport(() => import('@/components/tools/LLMPromptBuilder'), {
-  ssr: false,
-})
+  ssr: false })
 
 const BrainWritingSession = dynamicImport(() => import('@/components/tools/BrainWritingSession'), {
-  ssr: false,
-})
+  ssr: false })
 
 const SWOTMatrix = dynamicImport(() => import('@/components/tools/SWOTMatrix'), {
-  ssr: false,
-})
+  ssr: false })
 
 const EisenhowerMatrix = dynamicImport(() => import('@/components/tools/EisenhowerMatrix'), {
-  ssr: false,
-})
+  ssr: false })
 
 const PomodoroTimer = dynamicImport(() => import('@/components/tools/PomodoroTimer'), {
-  ssr: false,
-})
+  ssr: false })
 
 const UnitConverter = dynamicImport(() => import('@/components/tools/UnitConverter'), {
-  ssr: false,
-})
+  ssr: false })
 
 const DecisionMatrix = dynamicImport(() => import('@/components/tools/DecisionMatrix'), {
-  ssr: false,
-})
+  ssr: false })
 
 const FlashcardMaker = dynamicImport(() => import('@/components/tools/FlashcardMaker'), {
-  ssr: false,
-})
+  ssr: false })
 
 const RegexTester = dynamicImport(() => import('@/components/tools/RegexTester'), {
-  ssr: false,
-})
+  ssr: false })
 
 const HabitTracker = dynamicImport(() => import('@/components/tools/HabitTracker'), {
-  ssr: false,
-})
+  ssr: false })
 
 const toolComponents: Record<string, any> = {
   'llm-prompt-builder': LLMPromptBuilder,
@@ -67,8 +58,7 @@ const toolComponents: Record<string, any> = {
   'decision-matrix': DecisionMatrix,
   'flashcard-maker': FlashcardMaker,
   'regex-tester': RegexTester,
-  'habit-tracker': HabitTracker,
-}
+  'habit-tracker': HabitTracker }
 
 export async function generateStaticParams() {
   const langs: Locale[] = ['en', 'pt', 'es']
@@ -91,22 +81,21 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: { lang: Locale; slug: string }
 }): Promise<Metadata> {
   const toolMetadata = await getToolMetadata(params.slug, params.lang)
   
   if (!toolMetadata) {
     return {
-      title: 'Tool Not Found',
-    }
+    alternates: buildAlternates(params.lang, `tools/${params.slug}`),
+    title: 'Tool Not Found' }
   }
   
   return {
+    alternates: buildAlternates(params.lang, `tools/${params.slug}`),
     title: toolMetadata.title,
-    description: toolMetadata.description,
-  }
+    description: toolMetadata.description }
 }
 
 export default async function ToolPage({ params }: ToolPageProps) {

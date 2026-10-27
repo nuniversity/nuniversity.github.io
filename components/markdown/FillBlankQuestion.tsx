@@ -18,6 +18,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { CheckCircle2, XCircle, PenLine } from 'lucide-react'
 import { splitAnswer } from '@/lib/markdown/split-answer'
 import { useLessonScoreWidget } from '@/components/lessons/LessonScoreContext'
+import { useMountShuffle } from '@/lib/hooks/use-mount-shuffle'
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
@@ -244,7 +245,7 @@ function TemplateMode({ question, template, answers, distractors = [], explanati
   const blankIds = useMemo(() => parts.filter(p => p.type === 'blank').map(p => p.value), [parts])
   const allWords = useMemo(() => [...Object.values(answers), ...distractors], [answers, distractors])
 
-  const [bankWords, setBankWords] = useState<string[]>(() => shuffle(allWords))
+  const [bankWords, setBankWords] = useMountShuffle(allWords, shuffle)
   const [slots, setSlots] = useState<Record<string, string>>({})
   const [feedback, setFeedback] = useState<'idle' | 'correct' | 'incorrect'>('idle')
   const [activeId, setActiveId] = useState<string | null>(null)

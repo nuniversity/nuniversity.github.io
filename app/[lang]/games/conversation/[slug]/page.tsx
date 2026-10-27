@@ -8,6 +8,7 @@ import { getConversationGame, getAllGames } from '@/lib/games/get-game-content'
 import { Metadata } from 'next'
 import { ThirtySixQuestionsClient } from './thirty-six-questions-client'
 import { notFound } from 'next/navigation'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 interface ConversationGamePageProps {
   params: {
@@ -26,21 +27,22 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params,
-}: {
+  params }: {
   params: { lang: Locale; slug: string }
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
   const game = await getConversationGame(params.slug, params.lang)
 
   if (!game) {
-    return { title: dict.metadata?.games?.notFound || 'Game Not Found' }
+    return {
+    alternates: buildAlternates(params.lang, `games/conversation/${params.slug}`),
+    title: dict.metadata?.games?.notFound || 'Game Not Found' }
   }
 
   return {
+    alternates: buildAlternates(params.lang, `games/conversation/${params.slug}`),
     title: `${game.title} — ${dict.games?.suffixes?.conversation || 'Conversation'}`,
-    description: game.description,
-  }
+    description: game.description }
 }
 
 export default async function ConversationGamePage({ params }: ConversationGamePageProps) {

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="NUniversity">
+  <title>NUniversity</title>
+  <defs>
+    <linearGradient id="nu-brand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#0e7490" />
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="22" fill="url(#nu-brand)" />
+  <!-- A subtle inner highlight, matching the logo tile in the header. -->
+  <rect x="1" y="1" width="98" height="98" rx="21" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2" />
+  <text
+    x="50"
+    y="69"
+    text-anchor="middle"
+    font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+    font-size="44"
+    font-weight="800"
+    letter-spacing="-1.5"
+    fill="#ffffff"
+  >NU</text>
+</svg>

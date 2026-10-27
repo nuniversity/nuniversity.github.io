@@ -21,6 +21,7 @@ import {
 import { CSS } from '@dnd-kit/utilities'
 import { GripVertical, CheckCircle2, XCircle, ListOrdered } from 'lucide-react'
 import { useLessonScoreWidget } from '@/components/lessons/LessonScoreContext'
+import { useMountShuffle } from '@/lib/hooks/use-mount-shuffle'
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
@@ -79,7 +80,7 @@ interface DragOrderQuestionProps {
 export default function DragOrderQuestion({ question, items, correctOrder, explanation, dict }: DragOrderQuestionProps) {
   const w = dict?.widgets
   const d = w?.drag_order
-  const [currentItems, setCurrentItems] = useState<string[]>(() => shuffle(items))
+  const [currentItems, setCurrentItems] = useMountShuffle(items, shuffle)
   const [feedback, setFeedback] = useState<'idle' | 'correct' | 'incorrect'>('idle')
   const [activeId, setActiveId] = useState<string | null>(null)
   const { scoreId, register, report } = useLessonScoreWidget('drag-order')

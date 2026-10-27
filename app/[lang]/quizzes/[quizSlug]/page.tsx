@@ -7,6 +7,10 @@ import { getAllQuizzes, getQuiz } from '@/lib/quizzes/get-quiz-content'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { QuizDetail } from '@/components/quizzes/QuizDetail'
+import { buildAlternates } from '@/lib/seo/alternates'
+import { pageMetadata } from '@/lib/seo/metadata'
+import JsonLd from '@/components/seo/JsonLd'
+import { quizSchema } from '@/lib/seo/json-ld'
 
 interface QuizPageProps {
   params: {
@@ -27,18 +31,23 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
   const quiz = await getQuiz(params.quizSlug, params.lang)
+  const path = `quizzes/${params.quizSlug}`
 
   if (!quiz) {
     return {
       title: dict.metadata?.quizzes?.notFound || 'Quiz not found',
+      alternates: buildAlternates(params.lang, path),
       robots: { index: false, follow: false },
     }
   }
 
-  return {
+  return pageMetadata({
+    lang: params.lang,
+    path,
     title: quiz.title,
     description: quiz.description,
-  }
+    type: 'article',
+  })
 }
 
 export default async function QuizPage({ params }: QuizPageProps) {
@@ -48,5 +57,19 @@ export default async function QuizPage({ params }: QuizPageProps) {
 
   if (!quiz) notFound()
 
-  return <QuizDetail lang={lang} quiz={quiz} dict={dict} />
+  return (
+    <>
+      <JsonLd
+        data={quizSchema({
+          title: quiz.title,
+          description: quiz.description,
+          url: `/${lang}/quizzes/${quizSlug}/`,
+          lang,
+          questionCount: quiz.questions?.length,
+          durationSeconds: quiz.durationSeconds,
+        })}
+      />
+      <QuizDetail lang={lang} quiz={quiz} dict={dict} />
+    </>
+  )
 }

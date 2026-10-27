@@ -53,19 +53,53 @@ landed and what is next.
 | 4.6 Reduced motion | ✅ Done | Global block; the carousel and counters honour it. |
 | 4.11 Motion/stacking regression test | ✅ Done | `tests/ui/motion-stacking.test.ts` — entrance keyframes must end on `transform: none` so they leave no stacking context behind. |
 
+### Landed since the plan was written (beyond the phases below)
+
+| Task | Status | Measured result |
+|------|--------|-----------------|
+| **PERF-01** — `PrismLight` + per-language registration | ✅ Done | Lesson route **1,980.6 → 1,294 KB**; highlighter chunk **1,175 → 495 KB** |
+| **PERF-04** — team photo optimisation | ✅ Done | **2,454 KB → 60 KB** PNG / **11 KB** WebP (script: `scripts/optimize-images.mjs`) |
+| **ARCH-04** — error / not-found boundaries | ✅ Done | `app/[lang]/error.tsx`, `app/[lang]/not-found.tsx`. Root `not-found` dropped — it requires a root layout, and the postbuild 404 stub already covers paths outside `[lang]` |
+| **SEC-01** — CSP + verification | ✅ Done | `<meta>` policy on **1,633/1,633** pages via `scripts/verify-csp.mjs` |
+| **SEC-03** — contact form abuse | ✅ Done | Honeypot, `maxLength`, 3 s submit throttle, privacy note, env-var form id |
+| **SEC-08/09** — embed hardening | ✅ Done | PhET slug/language allowlist + `sandbox` + load timeout; PDB-ID allowlist + `AbortController` + 8 MB cap |
+| **CRS-01…12** — Courses media & layout | ✅ Done | Media pipeline, video embeds, image lightbox, text-to-audio, Mermaid brand theme, prose overflow guard — see [06](./06-courses-media-assessment.md) |
+| Sidebar resize/collapse | ✅ Done | WAI-ARIA Window Splitter: drag, arrow keys, Home/End, Enter to collapse, persisted |
+
 ### Next — by plan order
 
-| Priority | Task | Finding | Effort |
-|----------|------|---------|--------|
-| 1 | **PERF-01** — replace the `Prism` bundle with per-language registration | High | 3 h |
-| 2 | **PERF-04** — resize/convert the 2.5 MB team photo | Medium | 0.5 h |
-| 3 | **ARCH-04** — add `not-found.tsx` / `error.tsx` boundaries | High | 2 h |
-| 4 | **SEC-03** — contact form honeypot + limits | Medium | 3 h |
-| 5 | **SEC-01** — CSP `<meta>` + verification script | Medium | 3 h |
-| 6 | **SEC-08/09** — embed allowlists + iframe sandbox | Medium | 2 h |
-| 7 | **PERF-02 / ARCH-08** — split the dictionary per namespace | High | 6 h |
-| 8 | **Phase 0** — CI hardening, coverage thresholds, `middleware.ts` | Medium | 4 h |
-| 9 | **Phase 6** — SEO (hreflang, JSON-LD), dependency upgrades | Medium | 26 h |
+Measured state, 2026-10-27: home page HTML **262 KB**, courses index **363 KB**, lesson route JS **1,294 KB**, 23 npm advisories, per-page hreflang still absent.
+
+| Priority | Task | Finding | Why now | Effort |
+|----------|------|---------|---------|--------|
+| **1** | **Split the dictionary per namespace** | PERF-02 / ARCH-08 | The single biggest remaining win: the full 192.6 KB dictionary is serialised into **every one of 1,633 pages** (96% of `en.json` appears verbatim in `out/en/index.html`). Target: home **262 → <120 KB**. | 6 h |
+| **2** | **CI hardening** | Phase 0 / SEC-12 | Cheap, and it protects every later change: `node-version: 20` contradicts `engines: 22`; the cache glob `**.[jt]s` is malformed; the Python validators never run in CI; no `npm audit` gate; no `pull_request` workflow; no coverage thresholds. | 4 h |
+| **3** | **Delete dead `middleware.ts`** + derive locales from `i18n.locales` | ARCH-06 / ARCH-07 | 77 lines of code that never executes under `output: 'export'`, plus a third divergent copy of the locale list. | 1 h |
+| **4** | ~~SEO: per-page hreflang + JSON-LD~~ | ARCH-05 / ARCH-10 | ✅ **Done** — see the SEO section below | — |
+| **5** | **Dependency upgrades** | SEC-11 | 23 advisories. None exploitable (dev/build-only or need a server), but `katex` and `prismjs` reach the browser. `katex ≥0.19` + `vitest ≥5` are low risk; `next 15/16` needs an export re-verification. | 2 h + 1 day |
+| **6** | **Further bundle work** | PERF-09 | Lesson route is still 1,294 KB; KaTeX alone is ~258 KB and is only needed for lessons that contain maths. Candidate for lazy loading. | 4 h |
+
+**Recommended sequence:** 1 → 2 → 3 → 5. Items 1–2 are the highest value per hour and unblock safe delivery of everything after.
+
+### SEO — completed 2026-10-27
+
+| What | Result |
+|---|---|
+| Canonical URL | **1,630 / 1,633** pages (the 3 excluded are the locale redirect stub and the two 404 stubs, which are `noindex` by design) |
+| `hreflang` set (en / pt / es / x-default) | **1,630** pages — previously only the layout's, pointing at locale *home* pages |
+| `Course` schema | **143 / 143** course pages, with `hasPart` syllabus, `timeRequired`, `educationalLevel` |
+| `LearningResource` schema | **1,343 / 1,343** lesson pages, linked via `isPartOf` to their course |
+| `Quiz` schema | **6 / 6** quiz pages |
+| `BreadcrumbList` | **1,486** course + lesson pages |
+| `EducationalOrganization` + `WebSite` | every page; `sameAs` now populated, logo and contact point added |
+| Per-page `og:url` / `og:title` | course, lesson and quiz pages — previously **every** page advertised the home page URL |
+| `robots.txt` | generated by `app/robots.ts`; disallows the localised 404 routes, declares the sitemap and host |
+| Sitemap | 1,606 URLs |
+| Removed | the `fixCanonicals()` HTML-rewriting hack in `scripts/postbuild.mjs` — canonicals now come from metadata |
+
+**New modules:** `lib/seo/site.ts`, `lib/seo/alternates.ts`, `lib/seo/metadata.ts`, `lib/seo/json-ld.ts`, `components/seo/JsonLd.tsx`. Covered by `tests/seo/seo.test.ts` (18 tests), including an assertion that JSON-LD escapes `<` so a lesson title containing `</script>` cannot break out of the tag.
+
+> **Known cosmetic note:** Next.js emits the attribute as `hrefLang` rather than `hreflang`. HTML attribute names are case-insensitive, so parsers (including Google's) read it identically; only style checkers flag it.
 
 ---
 

@@ -7,6 +7,7 @@ import { getGameFile, getAllGames, type GameFileData } from '@/lib/games/get-gam
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { MathChallengeClient } from './math-challenge-client'
+import { buildAlternates } from '@/lib/seo/alternates'
 
 interface GamePageProps {
   params: { lang: Locale; slug: string }
@@ -20,8 +21,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { lang: Locale; slug: string } }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
   const game = await getGameFile<GameFileData>('math', params.slug, params.lang)
-  if (!game) return { title: dict.metadata?.games?.notFound || 'Game Not Found' }
-  return { title: game.title, description: game.description }
+  if (!game) return {
+    alternates: buildAlternates(params.lang, `games/math/${params.slug}`),
+    title: dict.metadata?.games?.notFound || 'Game Not Found' }
+  return {
+    alternates: buildAlternates(params.lang, `games/math/${params.slug}`),
+    title: game.title, description: game.description }
 }
 
 export default async function GamePage({ params }: GamePageProps) {

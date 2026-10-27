@@ -60,7 +60,7 @@ export default function Footer({ lang, dict }: FooterProps) {
               </span>
               <span className="text-2xl font-bold tracking-tight">NUniversity</span>
             </div>
-            <p className="text-foreground-muted mb-6 max-w-md">
+            <p className="mb-6 max-w-md text-slate-400">
               {dict.footer.description}
             </p>
             
