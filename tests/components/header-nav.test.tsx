@@ -35,6 +35,7 @@ const dict = {
     roadmaps: 'Roadmaps',
     languages: 'Languages',
     about: 'About',
+    partners: 'Partners',
     contact: 'Contact',
     explore: 'Explore',
     explore_hint: 'Discover curated material',
@@ -120,6 +121,14 @@ describe('Header navigation active state', () => {
     renderHeader()
     expect(link('About')).not.toHaveAttribute('aria-current')
     expect(link('Contact')).toHaveAttribute('aria-current', 'page')
+  })
+
+  it('renders the Partners link as a site page', () => {
+    mocks.pathname = '/en/partners/'
+    renderHeader()
+    expect(link('Partners')).toHaveAttribute('href', '/en/partners')
+    expect(link('Partners')).toHaveAttribute('aria-current', 'page')
+    expect(link('About')).not.toHaveAttribute('aria-current')
   })
 
   it('keeps Home active when the path has a trailing slash only', () => {

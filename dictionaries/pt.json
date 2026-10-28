@@ -12,6 +12,10 @@
       "title": "Fale Conosco",
       "description": "Entre em contato com a equipe Nuniversity, dúvidas, parcerias e suporte da comunidade."
     },
+    "partners": {
+      "title": "Parceiros e Parcerias",
+      "description": "Conheça os parceiros da Nuniversity e descubra como a sua organização pode colaborar conosco para tornar uma educação transformadora acessível a todos."
+    },
     "notFound": {
       "title": "Página Não Encontrada",
       "description": "A página que você procura não existe ou foi movida."
@@ -124,6 +128,7 @@
     "roadmaps": "Roadmaps",
     "about": "Sobre",
     "contact": "Contato",
+    "partners": "Parceiros",
     "languages": "Idiomas",
     "more": "Mais",
     "explore": "Explorar",
@@ -228,6 +233,153 @@
       "button": "Enviar Outra Mensagem"
     }
   },
+  "partners": {
+    "hero": {
+      "title": "Nossos Parceiros,",
+      "titleHighlight": "Sua Oportunidade",
+      "subtitle": "Colaboramos com empresas, instituições e educadores que compartilham nossa missão de tornar uma educação transformadora acessível a todos.",
+      "ctaPrimary": "Torne-se um Parceiro",
+      "ctaSecondary": "Conheça Nossos Parceiros"
+    },
+    "directory": {
+      "heading": "Conheça Nossos Parceiros",
+      "description": "Organizações com as quais construímos experiências de aprendizado práticas e de alto impacto.",
+      "badge": "Parceiro Fundador",
+      "servicesLabel": "Especialidades",
+      "connectLabel": "Conecte-se",
+      "visitWebsite": "Visitar site"
+    },
+    "types": {
+      "heading": "Formas de Parceria",
+      "description": "Há mais de uma forma de trabalhar juntos. Escolha o formato que combina com a sua organização — ou proponha um novo.",
+      "items": [
+        {
+          "title": "Conteúdo e Currículo",
+          "description": "Desenvolva cursos, lições, quizzes ou trilhas de aprendizado junto com nossa equipe e alcance milhares de estudantes autônomos."
+        },
+        {
+          "title": "Tecnologia e Ferramentas",
+          "description": "Traga sua plataforma, APIs ou ferramentas de desenvolvimento para o nosso catálogo de ferramentas interativas e materiais de curso."
+        },
+        {
+          "title": "Workshops e Palestras",
+          "description": "Compartilhe sua experiência por meio de aulas convidadas, workshops ao vivo ou entrevistas integradas aos nossos cursos."
+        },
+        {
+          "title": "Treinamento Corporativo e Patrocínio",
+          "description": "Capacite sua equipe com trilhas de aprendizado sob medida, ou patrocine educação gratuita para estudantes sub-representados."
+        }
+      ]
+    },
+    "benefits": {
+      "heading": "Por que ser Nosso Parceiro",
+      "description": "Parcerias fortes são construídas sobre valor mútuo. Veja o que cada lado traz para a mesa.",
+      "forPartners": {
+        "heading": "O que você ganha",
+        "items": [
+          "Alcance um público global e engajado de estudantes motivados",
+          "Mostre sua expertise por meio de conteúdo colaborativo e prático",
+          "Fortaleça sua reputação como apoiador da educação acessível",
+          "Conecte-se com talentos curiosos e bem preparados desde cedo"
+        ]
+      },
+      "forUs": {
+        "heading": "O que ganhamos",
+        "items": [
+          "Conteúdo especializado fundamentado na prática do mundo real",
+          "Ferramentas, conjuntos de dados e infraestrutura que não construiríamos sozinhos",
+          "Apoio que mantém nossos recursos gratuitos e abertos a todos",
+          "Perspectivas novas que mantêm nosso currículo atualizado"
+        ]
+      }
+    },
+    "process": {
+      "heading": "Como Funciona a Parceria",
+      "description": "Um caminho simples e sem compromisso inicial, do primeiro contato ao lançamento. Começamos pequenos e ampliamos o que funciona.",
+      "steps": [
+        {
+          "title": "Entre em contato",
+          "description": "Envie o formulário abaixo ou um e-mail. Conte quem você é e o tipo de colaboração que tem em mente."
+        },
+        {
+          "title": "Reunião de descoberta",
+          "description": "Respondemos em poucos dias úteis e agendamos uma conversa de 30 minutos para explorar objetivos, público e afinidade."
+        },
+        {
+          "title": "Piloto colaborativo",
+          "description": "Definimos um primeiro projeto pequeno — uma lição, uma ferramenta ou um workshop — e entregamos juntos."
+        },
+        {
+          "title": "Formalizar e crescer",
+          "description": "Se o piloto funcionar para os dois lados, formalizamos a parceria e planejamos os próximos passos."
+        }
+      ]
+    },
+    "form": {
+      "heading": "Torne-se um Parceiro",
+      "description": "Conte um pouco sobre a sua organização e o que vocês gostariam de construir juntos. Respondemos a todas as propostas sérias.",
+      "name": "Nome Completo *",
+      "namePlaceholder": "Seu nome completo",
+      "email": "Endereço de E-mail *",
+      "emailPlaceholder": "voce@empresa.com",
+      "organization": "Organização *",
+      "organizationPlaceholder": "Empresa, instituição ou projeto",
+      "website": "Site",
+      "websitePlaceholder": "https://sua-organizacao.com",
+      "type": "Tipo de parceria *",
+      "typeOptions": {
+        "content": "Conteúdo e Currículo",
+        "technology": "Tecnologia e Ferramentas",
+        "workshops": "Workshops e Palestras",
+        "corporate": "Treinamento Corporativo e Patrocínio",
+        "other": "Outro / Ainda não sei"
+      },
+      "message": "Mensagem *",
+      "messagePlaceholder": "O que vocês gostariam de construir juntos? Objetivos, prazos, qualquer informação útil...",
+      "button": "Enviar Proposta de Parceria",
+      "privacyNote": "Sua mensagem é enviada pelo Formspree, um serviço de entrega de terceiros, e é usada apenas para responder a você. Não inclua informações confidenciais."
+    },
+    "success": {
+      "title": "Obrigado!",
+      "message": "Sua proposta de parceria foi enviada. Entraremos em contato em poucos dias úteis.",
+      "button": "Enviar Outra Proposta"
+    },
+    "faq": {
+      "heading": "Perguntas Frequentes sobre Parcerias",
+      "items": [
+        {
+          "question": "Ter uma parceria tem custo?",
+          "answer": "Não. Parcerias de conteúdo e workshops são gratuitas para os dois lados — criamos juntas e divulgamos mutuamente. Patrocínios são opcionais e discutidos caso a caso."
+        },
+        {
+          "question": "Empresas com fins lucrativos podem ser parceiras de uma iniciativa sem fins lucrativos?",
+          "answer": "Sim. A Nuniversity é uma iniciativa educacional sem fins lucrativos, e recebemos empresas que desejam compartilhar conhecimento, ferramentas ou treinamento mantendo a educação aberta."
+        },
+        {
+          "question": "O que vocês esperam dos parceiros?",
+          "answer": "Precisão, respeito à nossa missão de educação aberta e colaboração genuína. Os parceiros mantêm a honestidade editorial — nada de conteúdo pago por posicionamento."
+        },
+        {
+          "question": "Quanto tempo leva para lançar?",
+          "answer": "Um piloto pequeno — como uma aula convidada ou uma única ferramenta — normalmente é publicado em poucas semanas após a primeira conversa."
+        }
+      ]
+    },
+    "list": [
+      {
+        "name": "Mímir Software Factory",
+        "monogram": "MSF",
+        "tagline": "Consultoria em ciência de dados e machine learning com IA",
+        "description": "Nomeada em homenagem ao deus nórdico da sabedoria, a Mímir Software Factory entrega soluções completas de ciência de dados e machine learning — da estratégia de IA ao MLOps em produção. Como nossa parceira fundadora, cocria conteúdo prático e traz a prática real da indústria para os nossos cursos.",
+        "badge": "Parceiro Fundador",
+        "services": ["Machine Learning", "Análise de Dados", "Estratégia de IA", "Engenharia de Dados", "MLOps", "Treinamentos e Workshops"],
+        "website": "https://mimir-software-factory.github.io/",
+        "linkedin": "https://www.linkedin.com/company/mimir-software-factory/",
+        "github": "https://github.com/mimir-software-factory",
+        "email": "mimirsoftwarefactory@gmail.com"
+      }
+    ]
+  },
   "footer": {
     "description": "Capacitando aprendizes em todo o mundo com cursos interativos, ferramentas de programação e jogos educacionais. Domine tecnologia, engenharia e ciências através de experiência prática.",
     "sections": {
@@ -252,6 +404,7 @@
       "support": "Suporte",
       "aboutUs": "Sobre Nós",
       "contact": "Contato",
+      "partners": "Parceiros",
       "privacy": "Política de Privacidade",
       "terms": "Termos de Serviço",
       "cookies": "Cookies",

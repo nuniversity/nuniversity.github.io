@@ -39,6 +39,7 @@ export default function Footer({ lang, dict }: FooterProps) {
     ],
     company: [
       { name: dict.footer.links.aboutUs, href: `/${lang}/about` },
+      { name: dict.footer.links.partners, href: `/${lang}/partners` },
       { name: dict.footer.links.contact, href: `/${lang}/contact` },
     ],
   }

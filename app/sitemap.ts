@@ -12,7 +12,7 @@ export const dynamic = 'force-static'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = 'https://nuniversity.github.io'
   const entries: MetadataRoute.Sitemap = []
-  const staticPaths = ['about', 'contact', 'courses', 'games', 'library', 'languages', 'quizzes', 'roadmaps', 'tools']
+  const staticPaths = ['about', 'partners', 'contact', 'courses', 'games', 'library', 'languages', 'quizzes', 'roadmaps', 'tools']
 
   for (const lang of i18n.locales) {
     const prefix = `/${lang}`

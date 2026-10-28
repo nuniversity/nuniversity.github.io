@@ -1,6 +1,7 @@
 // components/home/Contact.tsx
 'use client'
 
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Mail, MapPin, Linkedin, Github, Youtube, Globe, Instagram, Send, CheckCircle } from 'lucide-react'
 import { useForm, ValidationError } from '@formspree/react'
@@ -141,6 +142,15 @@ export default function Contact({ lang, dict }: ContactProps) {
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
                   {dict.contact.info.description}
+                </p>
+                <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+                  <Link
+                    href={`/${lang}/partners`}
+                    className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+                  >
+                    {dict.navigation.partners}
+                  </Link>{' '}
+                  — {dict.metadata.partners.description}
                 </p>
               </div>
 

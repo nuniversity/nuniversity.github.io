@@ -12,6 +12,10 @@
       "title": "Contáctanos",
       "description": "Pónos en contacto con el equipo de Nuniversity, dudas, colaboraciones y soporte de la comunidad."
     },
+    "partners": {
+      "title": "Socios y Alianzas",
+      "description": "Conoce los socios de Nuniversity y descubre cómo tu organización puede colaborar con nosotros para hacer que una educación transformadora sea accesible para todos."
+    },
     "notFound": {
       "title": "Página No Encontrada",
       "description": "La página que buscas no existe o se ha movido."
@@ -124,6 +128,7 @@
     "roadmaps": "Rutas",
     "about": "Acerca de",
     "contact": "Contacto",
+    "partners": "Alianzas",
     "languages": "Idiomas",
     "more": "Más",
     "explore": "Explorar",
@@ -228,6 +233,153 @@
       "button": "Enviar Otro Mensaje"
     }
   },
+  "partners": {
+    "hero": {
+      "title": "Nuestros Socios,",
+      "titleHighlight": "Tu Oportunidad",
+      "subtitle": "Colaboramos con empresas, instituciones y educadores que comparten nuestra misión de hacer que una educación transformadora sea accesible para todos.",
+      "ctaPrimary": "Conviértete en Socio",
+      "ctaSecondary": "Conoce Nuestros Socios"
+    },
+    "directory": {
+      "heading": "Conoce Nuestros Socios",
+      "description": "Organizaciones con las que construimos experiencias de aprendizaje prácticas y de alto impacto.",
+      "badge": "Socio Fundador",
+      "servicesLabel": "Especialidades",
+      "connectLabel": "Conectar",
+      "visitWebsite": "Visitar sitio"
+    },
+    "types": {
+      "heading": "Formas de Colaborar",
+      "description": "Hay más de una forma de trabajar juntos. Elige el formato que se ajuste a tu organización — o propón uno nuevo.",
+      "items": [
+        {
+          "title": "Contenido y Currículo",
+          "description": "Desarrolla cursos, lecciones, cuestionarios o rutas de aprendizaje junto a nuestro equipo y llega a miles de estudiantes autónomos."
+        },
+        {
+          "title": "Tecnología y Herramientas",
+          "description": "Trae tu plataforma, APIs o herramientas de desarrollo a nuestro catálogo de herramientas interactivas y materiales de curso."
+        },
+        {
+          "title": "Talleres y Ponencias",
+          "description": "Comparte tu experiencia mediante clases invitadas, talleres en vivo o entrevistas integradas en nuestros cursos."
+        },
+        {
+          "title": "Formación Corporativa y Patrocinio",
+          "description": "Capacita a tu equipo con rutas de aprendizaje a medida, o patrocina educación gratuita para estudiantes subrepresentados."
+        }
+      ]
+    },
+    "benefits": {
+      "heading": "Por qué ser Nuestro Socio",
+      "description": "Las alianzas sólidas se construyen sobre valor mutuo. Esto es lo que cada parte aporta.",
+      "forPartners": {
+        "heading": "Lo que ganas",
+        "items": [
+          "Llega a una audiencia global y comprometida de estudiantes motivados",
+          "Muestra tu experiencia con contenido práctico y de marca compartida",
+          "Fortalece tu reputación como impulsor de la educación accesible",
+          "Conecta temprano con talento curioso y bien preparado"
+        ]
+      },
+      "forUs": {
+        "heading": "Lo que ganamos",
+        "items": [
+          "Contenido experto basado en la práctica del mundo real",
+          "Herramientas, datos e infraestructura que no podríamos construir solos",
+          "Apoyo que mantiene nuestros recursos gratuitos y abiertos para todos",
+          "Perspectivas nuevas que mantienen nuestro currículo actualizado"
+        ]
+      }
+    },
+    "process": {
+      "heading": "Cómo Funciona la Alianza",
+      "description": "Un camino sencillo y sin compromiso inicial, desde el primer contacto hasta el lanzamiento. Empezamos con algo pequeño y hacemos crecer lo que funciona.",
+      "steps": [
+        {
+          "title": "Contacta con nosotros",
+          "description": "Envía el formulario de abajo o un correo. Cuéntanos quién eres y el tipo de colaboración que tienes en mente."
+        },
+        {
+          "title": "Reunión de descubrimiento",
+          "description": "Respondemos en pocos días hábiles y agendamos una llamada de 30 minutos para explorar objetivos, público y encaje."
+        },
+        {
+          "title": "Piloto colaborativo",
+          "description": "Definimos un primer proyecto pequeño — una lección, una herramienta o un taller — y lo lanzamos juntos."
+        },
+        {
+          "title": "Formalizar y crecer",
+          "description": "Si el piloto funciona para ambas partes, formalizamos la alianza y planificamos los siguientes pasos."
+        }
+      ]
+    },
+    "form": {
+      "heading": "Conviértete en Socio",
+      "description": "Cuéntanos un poco sobre tu organización y lo que os gustaría construir juntos. Respondemos a todas las propuestas serias.",
+      "name": "Nombre Completo *",
+      "namePlaceholder": "Tu nombre completo",
+      "email": "Correo Electrónico *",
+      "emailPlaceholder": "tu@empresa.com",
+      "organization": "Organización *",
+      "organizationPlaceholder": "Empresa, institución o proyecto",
+      "website": "Sitio web",
+      "websitePlaceholder": "https://tu-organizacion.com",
+      "type": "Tipo de alianza *",
+      "typeOptions": {
+        "content": "Contenido y Currículo",
+        "technology": "Tecnología y Herramientas",
+        "workshops": "Talleres y Ponencias",
+        "corporate": "Formación Corporativa y Patrocinio",
+        "other": "Otro / Aún no lo sé"
+      },
+      "message": "Mensaje *",
+      "messagePlaceholder": "¿Qué os gustaría construir juntos? Objetivos, plazos, cualquier detalle útil...",
+      "button": "Enviar Propuesta de Alianza",
+      "privacyNote": "Tu mensaje se envía a través de Formspree, un servicio de entrega de terceros, y solo se usa para responderte. No incluyas información confidencial."
+    },
+    "success": {
+      "title": "¡Gracias!",
+      "message": "Tu propuesta de alianza ha sido enviada. Nos pondremos en contacto en pocos días hábiles.",
+      "button": "Enviar Otra Propuesta"
+    },
+    "faq": {
+      "heading": "Preguntas Frecuentes sobre Alianzas",
+      "items": [
+        {
+          "question": "¿Tiene costo convertirse en socio?",
+          "answer": "No. Las alianzas de contenido y talleres son gratuitas para ambas partes — creamos y promovemos juntos. Los patrocinios son opcionales y se analizan caso por caso."
+        },
+        {
+          "question": "¿Pueden las empresas con fines de lucro aliarse con una iniciativa sin fines de lucro?",
+          "answer": "Sí. Nuniversity es una iniciativa educativa sin fines de lucro, y damos la bienvenida a empresas que quieran compartir conocimiento, herramientas o formación manteniendo la educación abierta."
+        },
+        {
+          "question": "¿Qué esperan de los socios?",
+          "answer": "Rigor, respeto por nuestra misión de educación abierta y colaboración genuína. Los socios mantienen la honestidad editorial — nada de contenido pago por ubicación."
+        },
+        {
+          "question": "¿Cuánto se tarda en lanzar?",
+          "answer": "Un piloto pequeño — como una clase invitada o una sola herramienta — normalmente se publica en unas pocas semanas tras la primera llamada."
+        }
+      ]
+    },
+    "list": [
+      {
+        "name": "Mímir Software Factory",
+        "monogram": "MSF",
+        "tagline": "Consultoría en ciencia de datos y machine learning con IA",
+        "description": "Nombrada en honor al dios nórdico de la sabiduría, Mímir Software Factory ofrece soluciones integrales de ciencia de datos y machine learning — desde la estrategia de IA hasta el MLOps en producción. Como nuestro socio fundador, cocrea contenido práctico y lleva la práctica real de la industria a nuestros cursos.",
+        "badge": "Socio Fundador",
+        "services": ["Machine Learning", "Análisis de Datos", "Estrategia de IA", "Ingeniería de Datos", "MLOps", "Formación y Talleres"],
+        "website": "https://mimir-software-factory.github.io/",
+        "linkedin": "https://www.linkedin.com/company/mimir-software-factory/",
+        "github": "https://github.com/mimir-software-factory",
+        "email": "mimirsoftwarefactory@gmail.com"
+      }
+    ]
+  },
   "footer": {
     "description": "Empoderando estudiantes en todo el mundo con cursos interactivos, herramientas de programación y juegos educativos. Domina tecnología, ingeniería y ciencias a través de experiencia práctica.",
     "sections": {
@@ -252,6 +404,7 @@
       "support": "Soporte",
       "aboutUs": "Sobre Nosotros",
       "contact": "Contacto",
+      "partners": "Alianzas",
       "privacy": "Política de Privacidad",
       "terms": "Términos de Servicio",
       "cookies": "Cookies",

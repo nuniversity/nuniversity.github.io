@@ -12,6 +12,10 @@
       "title": "Contact Us",
       "description": "Get in touch with the Nuniversity team, questions, partnerships, and community support."
     },
+    "partners": {
+      "title": "Partners & Partnerships",
+      "description": "Meet Nuniversity's partners and learn how your organization can collaborate with us to make transformational education accessible to everyone."
+    },
     "notFound": {
       "title": "Page Not Found",
       "description": "The page you are looking for doesn't exist or has been moved."
@@ -124,6 +128,7 @@
     "roadmaps": "Roadmaps",
     "about": "About",
     "contact": "Contact",
+    "partners": "Partners",
     "languages": "Languages",
     "more": "More",
     "explore": "Explore",
@@ -228,6 +233,153 @@
       "button": "Send Another Message"
     }
   },
+  "partners": {
+    "hero": {
+      "title": "Our Partners,",
+      "titleHighlight": "Your Opportunity",
+      "subtitle": "We collaborate with companies, institutions, and educators who share our mission of making transformational education accessible to everyone.",
+      "ctaPrimary": "Become a Partner",
+      "ctaSecondary": "Meet Our Partners"
+    },
+    "directory": {
+      "heading": "Meet Our Partners",
+      "description": "Organizations we build with to create practical, high-impact learning experiences.",
+      "badge": "Founding Partner",
+      "servicesLabel": "Expertise",
+      "connectLabel": "Connect",
+      "visitWebsite": "Visit website"
+    },
+    "types": {
+      "heading": "Ways to Partner",
+      "description": "There is more than one way to work together. Pick the shape that fits your organization — or propose a new one.",
+      "items": [
+        {
+          "title": "Content & Curriculum",
+          "description": "Co-develop courses, lessons, quizzes, or learning paths with our team and reach thousands of self-directed learners."
+        },
+        {
+          "title": "Technology & Tools",
+          "description": "Bring your platform, APIs, or developer tools to our interactive tools catalog and course materials."
+        },
+        {
+          "title": "Workshops & Guest Lectures",
+          "description": "Share your expertise through guest lessons, live workshops, or interviews woven into our courses."
+        },
+        {
+          "title": "Corporate Training & Sponsorship",
+          "description": "Upskill your team with tailored learning tracks, or sponsor free education for underrepresented learners."
+        }
+      ]
+    },
+    "benefits": {
+      "heading": "Why Partner With Us",
+      "description": "Strong partnerships are built on mutual value. Here is what each side brings to the table.",
+      "forPartners": {
+        "heading": "What you gain",
+        "items": [
+          "Reach an engaged, global audience of motivated learners",
+          "Showcase your expertise through co-branded, hands-on content",
+          "Strengthen your reputation as a contributor to accessible education",
+          "Connect with curious, well-prepared talent early"
+        ]
+      },
+      "forUs": {
+        "heading": "What we gain",
+        "items": [
+          "Expert content grounded in real-world practice",
+          "Tools, datasets, and infrastructure we could not build alone",
+          "Support that keeps our resources free and open to everyone",
+          "Fresh perspectives that keep our curriculum current"
+        ]
+      }
+    },
+    "process": {
+      "heading": "How Partnership Works",
+      "description": "A simple, low-commitment path from first contact to launch. We start small and grow what works.",
+      "steps": [
+        {
+          "title": "Reach out",
+          "description": "Send the form below or email us. Tell us who you are and the kind of collaboration you have in mind."
+        },
+        {
+          "title": "Discovery call",
+          "description": "We reply within a few business days and schedule a 30-minute call to explore goals, audiences, and fit."
+        },
+        {
+          "title": "Pilot collaboration",
+          "description": "We define a small first project — one lesson, one tool, or one workshop — and ship it together."
+        },
+        {
+          "title": "Formalize & grow",
+          "description": "If the pilot works for both sides, we formalize the partnership and plan what comes next."
+        }
+      ]
+    },
+    "form": {
+      "heading": "Become a Partner",
+      "description": "Tell us a little about your organization and what you would like to build together. We reply to every serious inquiry.",
+      "name": "Full Name *",
+      "namePlaceholder": "Your full name",
+      "email": "Email Address *",
+      "emailPlaceholder": "you@company.com",
+      "organization": "Organization *",
+      "organizationPlaceholder": "Company, institution, or project",
+      "website": "Website",
+      "websitePlaceholder": "https://your-organization.com",
+      "type": "Partnership type *",
+      "typeOptions": {
+        "content": "Content & Curriculum",
+        "technology": "Technology & Tools",
+        "workshops": "Workshops & Guest Lectures",
+        "corporate": "Corporate Training & Sponsorship",
+        "other": "Other / Not sure yet"
+      },
+      "message": "Message *",
+      "messagePlaceholder": "What would you like to build together? Goals, timelines, anything helpful...",
+      "button": "Send Partnership Inquiry",
+      "privacyNote": "Your message is sent to Formspree, a third-party delivery service, and is used only to reply to you. Please do not include sensitive information."
+    },
+    "success": {
+      "title": "Thank You!",
+      "message": "Your partnership inquiry has been sent. We’ll be in touch within a few business days.",
+      "button": "Send Another Inquiry"
+    },
+    "faq": {
+      "heading": "Partnership FAQ",
+      "items": [
+        {
+          "question": "Does partnering cost anything?",
+          "answer": "No. Content and workshop partnerships are free for both sides — we co-create and cross-promote. Sponsored partnerships are optional and discussed case by case."
+        },
+        {
+          "question": "Can for-profit companies partner with a non-profit initiative?",
+          "answer": "Yes. Nuniversity is a non-profit educational initiative, and we welcome companies that want to share knowledge, tools, or training while keeping education open."
+        },
+        {
+          "question": "What do you expect from partners?",
+          "answer": "Accuracy, respect for our open-education mission, and genuine collaboration. Partners keep editorial honesty — no pay-for-placement content."
+        },
+        {
+          "question": "How long does it take to launch?",
+          "answer": "A small pilot — like a guest lesson or a single tool — typically ships within a few weeks of the first call."
+        }
+      ]
+    },
+    "list": [
+      {
+        "name": "Mímir Software Factory",
+        "monogram": "MSF",
+        "tagline": "AI-powered data science & machine learning consulting",
+        "description": "Named after the Norse god of wisdom, Mímir Software Factory delivers end-to-end data science and machine learning solutions — from AI strategy to production MLOps. As our founding partner, it co-creates hands-on content and brings real-world industry practice into our courses.",
+        "badge": "Founding Partner",
+        "services": ["Machine Learning", "Data Analytics", "AI Strategy", "Data Engineering", "MLOps", "Training & Workshops"],
+        "website": "https://mimir-software-factory.github.io/",
+        "linkedin": "https://www.linkedin.com/company/mimir-software-factory/",
+        "github": "https://github.com/mimir-software-factory",
+        "email": "mimirsoftwarefactory@gmail.com"
+      }
+    ]
+  },
   "footer": {
     "description": "Empowering learners worldwide with interactive courses, coding tools, and educational games. Master technology, engineering, and sciences through hands-on experience.",
     "sections": {
@@ -252,6 +404,7 @@
       "support": "Support",
       "aboutUs": "About Us",
       "contact": "Contact",
+      "partners": "Partners",
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
       "cookies": "Cookies",

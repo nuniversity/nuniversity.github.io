@@ -4,7 +4,7 @@
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import dynamicImport from 'next/dynamic'
-import { Menu, X, Sun, Moon, Search, ChevronDown, Info, Mail, Compass } from 'lucide-react'
+import { Menu, X, Sun, Moon, Search, ChevronDown, Info, Mail, Compass, HeartHandshake } from 'lucide-react'
 import LanguageSwitcher from '../language/LanguageSwitcher'
 import ProfileChip from '../gamification/ProfileChip'
 import AwardToaster from '../gamification/AwardToaster'
@@ -102,6 +102,7 @@ export default function Header({ lang, dict }: HeaderProps) {
   // section colour.
   const siteNavigation: NavItem[] = [
     { id: 'general', name: dict.navigation.about, href: `/${lang}/about`, icon: Info, exact: true },
+    { id: 'general', name: dict.navigation.partners, href: `/${lang}/partners`, icon: HeartHandshake, exact: true },
     { id: 'general', name: dict.navigation.contact, href: `/${lang}/contact`, icon: Mail, exact: true },
   ]
 
