@@ -12,6 +12,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:artifact": "vitest run --config vitest.artifact.config.ts",
+    "test:e2e": "bash scripts/with-playwright-libs.sh playwright test",
+    "test:e2e:integration": "bash scripts/with-playwright-libs.sh playwright test tests/e2e/integration",
+    "test:e2e:journeys": "bash scripts/with-playwright-libs.sh playwright test tests/e2e/journeys",
+    "test:all": "npm run build && npm run test:artifact && npm run test:e2e",
     "lint:content": "node scripts/lint-prose.mjs",
     "check:prose": "node scripts/normalise-prose.mjs",
     "fix:prose": "node scripts/normalise-prose.mjs --write",
@@ -53,6 +58,7 @@
     "ts-fsrs": "4.5.0"
   },
   "devDependencies": {
+    "@playwright/test": "1.64.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^14.3.1",
     "@testing-library/user-event": "^14.6.1",

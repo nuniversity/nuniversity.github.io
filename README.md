@@ -79,6 +79,14 @@ commit; `SKIP_BANDIT=1 git commit ...` bypasses it once. See
 | Script | Command | Description |
 |--------|---------|-------------|
 | dev | `npm run dev` | Start development server with HMR |
+| test | `npm test` | Run vitest unit/component tests |
+| test:watch | `npm run test:watch` | Vitest watch mode |
+| test:coverage | `npm run test:coverage` | Vitest with v8 coverage |
+| test:artifact | `npm run test:artifact` | Integration tests against the built `out/` (no browser) |
+| test:e2e | `npm run test:e2e` | Playwright integration + E2E against the served build |
+| test:e2e:integration | `npm run test:e2e:integration` | Browser integration specs only |
+| test:e2e:journeys | `npm run test:e2e:journeys` | E2E user journeys only |
+| test:all | `npm run test:all` | Build → artifact tests → E2E (full local gate) |
 | build | `npm run build` | Build static site to `/out` |
 | start | `npm run start` | Serve the production build |
 | lint | `npm run lint` | Run ESLint |

@@ -1,1 +1,24 @@
+# Husky pre-commit hook.
+#
+# 1. lint-staged: vitest related + eslint for staged TS, Bandit for Python.
+# 2. Integration gates (Layer A artifact tests + Playwright E2E) against the
+#    current build in out/. They run ONLY when a build exists — content-only
+#    commits without a build are not blocked (a full `npm run build` takes
+#    minutes and would make every commit painful). The gates give full value
+#    in the common case: you built the site, then commit code/content changes.
+#
+# Bypass once:  SKIP_INTEGRATION=1 git commit ...
+# Bypass all:   git commit --no-verify
 npx lint-staged
+
+if [ "$SKIP_INTEGRATION" = "1" ]; then
+  echo "pre-commit: SKIP_INTEGRATION=1 — integration tests skipped"
+elif [ ! -f out/index.html ]; then
+  echo "pre-commit: no build found in out/ — integration tests skipped"
+  echo "pre-commit: run 'npm run build' once to enable them on every commit"
+else
+  echo "pre-commit: running artifact integration tests (npm run test:artifact)"
+  npm run test:artifact || exit 1
+  echo "pre-commit: running E2E integration tests (npm run test:e2e)"
+  npm run test:e2e || exit 1
+fi

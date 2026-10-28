@@ -4,6 +4,33 @@
 
 Add a complete suite of unit tests and integration tests using **Vitest**, **@testing-library/react**, and **Husky** pre-commit hooks to the Nuniversity Next.js 14 static site.
 
+## Integration & E2E layers (artifact + browser)
+
+Three additional layers test the **built artifact** (`out/`) rather than the source tree. They run in the **pre-commit hook** (not in GitHub CI — CI stays fast; see below).
+
+| Layer | What | Where | Runs when |
+|---|---|---|---|
+| A — Artifact integration | Node-only vitest suites validating the exported `out/`: content-derived routes, internal link graph, shipped search/question indexes, sitemap ↔ export consistency, CSP/security headers, hosting artifacts (`.nojekyll`, 404 stub, robots, og-image), size budgets | `tests/artifact/` via `vitest.artifact.config.ts` | `npm run test:artifact` — skips cleanly if no build exists |
+| B — Browser integration | Real Chromium against the served build: hydration, search (hero + ⌘K palette vs the real index JSON), quiz grading + `v1:*` storage, theme persistence, i18n chrome, lesson rendering (KaTeX/highlighter/Mermaid), tools/games smoke | `tests/e2e/integration/` | `npm run test:e2e` |
+| C — E2E journeys | Multi-page user journeys with zero mocks (one sanctioned exception: the Formspree endpoint is always intercepted — never hit for real): learner journey, quiz persistence across reload, 404/locale-stub contract, contact form, all-route sweep | `tests/e2e/journeys/` | `npm run test:e2e` |
+
+**Serving:** `tests/support/static-server.mjs` mirrors the GitHub Pages hosting contract (directory index, trailing-slash 301s, `404.html` fallback with HTTP 404). Playwright boots it via the `webServer` option.
+
+**State isolation:** every test starts from a wiped `v1:*` + `theme` localStorage (see `tests/e2e/support/storage.ts` and `fixtures.ts`).
+
+**Local without sudo:** `npm run test:e2e` goes through `scripts/with-playwright-libs.sh`, which no-ops when Chromium's system libraries are present and otherwise extracts them into `~/.local/share/playwright-libs` and sets `LD_LIBRARY_PATH`. One-time browser download: `npx playwright install chromium`.
+
+**Pre-commit wiring:** `.husky/pre-commit` runs lint-staged, then (when `out/index.html` exists) `npm run test:artifact` and `npm run test:e2e`. No build in `out/` → the gates skip with a visible message (a full build is too heavy for a hook). Bypass: `SKIP_INTEGRATION=1 git commit …` or `git commit --no-verify`.
+
+**Deliberately not in GitHub CI:** the deploy workflow keeps its existing gates (type-check, lint, vitest, pytest, content validators, build). Integration/E2E run locally at commit time instead — flip-forward if wanted: paste the `npm run test:artifact` / `npm run test:e2e` steps after the build job (the Playwright config's `webServer` boots the static server itself).
+
+### Known issues surfaced by the suites (waived in tests, real findings)
+
+1. **RSC prefetch 404s**: Next 14.2 static export emits RSC payloads as `{route}/index.txt` while the client prefetches `{route}.txt?_rsc=…` — every prefetch 404s in production (navigation still works via full-page fallback).
+2. **Course `/practice/` pages** ship `robots: index,follow`, canonical → locale root, and the EN title in all locales — personalized utility shells should be `noindex` with a localized title.
+3. **`out/` is ~967 MB** — above the 900 MB warning band, 96.7% of the 1 GB Pages hard limit.
+4. `code-sandbox.html` ships its own stricter sandbox CSP (intentional; asserted separately). `en/404` lacks the referrer meta (pt/es have it).
+
 ## Current State
 
 - **Vitest** configured with jsdom environment, `@/` path alias, v8 coverage; `passWithNoTests` removed (a run with zero suites now fails)
