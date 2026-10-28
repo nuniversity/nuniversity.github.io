@@ -59,7 +59,7 @@ El manifiesto define la identidad, propósito y componentes de la skill.
 # skill.yaml
 name: mi-skill-personalizada
 description: Guía al agente en la realización de generación personalizada de scaffolds
-author: NUniversity
+author: Nuniversity
 version: 1.0.0
 instructions: |
   Cuando el usuario pida generar scaffold de un nuevo proyecto Python:

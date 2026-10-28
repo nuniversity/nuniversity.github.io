@@ -1,7 +1,7 @@
 {
   "metadata": {
     "home": {
-      "title": "NUniversity - Interactive Learning Platform",
+      "title": "Nuniversity - Interactive Learning Platform",
       "description": "Master technology, engineering, and sciences through interactive courses, coding tools, and educational games. Start your learning journey today."
     },
     "about": {
@@ -10,17 +10,17 @@
     },
     "contact": {
       "title": "Contact Us",
-      "description": "Get in touch with the NUniversity team — questions, partnerships, and community support."
+      "description": "Get in touch with the Nuniversity team — questions, partnerships, and community support."
     },
     "notFound": {
       "title": "Page Not Found",
       "description": "The page you are looking for doesn't exist or has been moved."
     },
     "site": {
-      "title": "NUniversity - Learn, Code, and Grow",
+      "title": "Nuniversity - Learn, Code, and Grow",
       "description": "A comprehensive educational platform offering interactive courses, coding tools, and study games across technology, engineering, and sciences.",
       "og_description": "A comprehensive educational platform offering interactive courses, coding tools, and study games.",
-      "og_alt": "NUniversity - Educational Platform",
+      "og_alt": "Nuniversity - Educational Platform",
       "customer_service": "customer service",
       "keywords": [
         "education",
@@ -190,7 +190,7 @@
   "stats": {
     "title": "Join Our Growing",
     "titleHighlight": "Community",
-    "subtitle": "Thousands of learners trust NUniversity to advance their careers and knowledge.",
+    "subtitle": "Thousands of learners trust Nuniversity to advance their careers and knowledge.",
     "labels": {
       "courses": "Courses",
       "tools": "Tools",
@@ -267,7 +267,7 @@
       "successMessage": "Thanks for signing up. We'll keep you posted on new courses and tools.",
       "noSpam": "No spam. Unsubscribe anytime."
     },
-    "copyright": "NUniversity: Empowering Minds, Shaping Futures.",
+    "copyright": "Nuniversity: Empowering Minds, Shaping Futures.",
     "rights": "All rights reserved",
     "madeWith": "Made with",
     "forLearners": "for learners worldwide"

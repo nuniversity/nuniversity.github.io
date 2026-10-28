@@ -1,6 +1,6 @@
 # Deep Assessment — Website Application
 
-Evidence-based state of the NUniversity Next.js application. All references are
+Evidence-based state of the Nuniversity Next.js application. All references are
 `file:line` against the working tree (Oct 2026) and cross-checked against the static
 export in `out/`.
 
@@ -281,7 +281,7 @@ Matching+FillBlank; keyboard sensor on DragOrder.
 | Contact page uses **home** metadata; function still named `HomePage` | `contact/page.tsx:18-29` |
 | Games list title/desc EN | `games/page.tsx:23-24` |
 | Roadmaps pages have **no generateMetadata** → layout default | `roadmaps/page.tsx` (file ends `:26`) |
-| Home `<title>` lacks `| NUniversity` suffix | `layout.tsx:26-27` vs `page.tsx:26` |
+| Home `<title>` lacks `| Nuniversity` suffix | `layout.tsx:26-27` vs `page.tsx:26` |
 | `Ads.txt` capital-A (served `/Ads.txt`, ad networks expect `/ads.txt`) | `public/Ads.txt` |
 | Favicon duplicated 4× (root, public, app, app/[lang]) | repo tree |
 

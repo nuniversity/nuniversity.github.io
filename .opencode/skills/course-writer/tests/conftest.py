@@ -15,7 +15,7 @@ def tmp_course_dir() -> Path:
         course_dir.mkdir()
         (course_dir / "course.json").write_text(json.dumps({
             "area": "Computer Science",
-            "author": "NUniversity",
+            "author": "Nuniversity",
             "difficulty": "beginner",
             "duration": "4 weeks",
             "icon": "code",
@@ -265,7 +265,7 @@ def valid_course_json() -> dict:
     """Return valid course.json dict."""
     return {
         "area": "Computer Science",
-        "author": "NUniversity",
+        "author": "Nuniversity",
         "difficulty": "beginner",
         "duration": "4 weeks",
         "icon": "code",

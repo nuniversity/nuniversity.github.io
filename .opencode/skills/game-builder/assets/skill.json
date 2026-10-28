@@ -1,7 +1,7 @@
 {
   "name": "game-builder",
   "version": "1.0.0",
-  "description": "Generates publication-ready language activity (vocabulary) JSON files for the NUniversity Languages app",
+  "description": "Generates publication-ready language activity (vocabulary) JSON files for the Nuniversity Languages app",
   "type": "skill",
   "triggers": [
     "content/languages/**"

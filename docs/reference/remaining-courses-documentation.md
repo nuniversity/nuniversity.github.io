@@ -26,7 +26,7 @@ content/courses/{course-slug}/
 ```json
 {
   "area": "Software Engineering",
-  "author": "NUniversity",
+  "author": "Nuniversity",
   "difficulty": "intermediate|advanced",
   "duration": "X hours",
   "icon": "code",

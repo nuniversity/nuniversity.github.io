@@ -7,7 +7,7 @@
 | **Slug** | `nonprofit-organization-fundamentals` |
 | **Directory** | `content/courses/nonprofit-organization-fundamentals/` |
 | **Area / Category** | Non-Profit Organization Fundamentals (Management & Social Sciences) |
-| **Author** | NUniversity |
+| **Author** | Nuniversity |
 | **Difficulty** | Intermediate |
 | **Duration** | 8 weeks — 15 lessons · **1,560 min of lesson time (26 h)** · frontmatter durations 90–120 min (8 × 90 min, 7 × 120 min) |
 | **Icon** | `heart` |

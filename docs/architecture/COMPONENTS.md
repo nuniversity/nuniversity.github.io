@@ -1,6 +1,6 @@
 # 🧩 Components Reference
 
-This document covers every reusable component in the NUniversity platform — its purpose, props, usage patterns, and where it fits in the application.
+This document covers every reusable component in the Nuniversity platform — its purpose, props, usage patterns, and where it fits in the application.
 
 ---
 
@@ -103,7 +103,7 @@ flowchart TD
 **Role:** Sticky top navigation bar present on all pages.
 
 #### Features
-- NUniversity logo and brand name
+- Nuniversity logo and brand name
 - Desktop navigation links with icons
 - "NEW" badge on recently added sections (Tools, Games, Library)
 - Light/Dark theme toggle button

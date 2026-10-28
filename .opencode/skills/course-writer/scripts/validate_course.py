@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate course directory structure and course.json for NUniversity.
+"""Validate course directory structure and course.json for Nuniversity.
 
 Deterministic script: exit 0 = pass, exit 1 = warning, exit 2 = blocking error.
 

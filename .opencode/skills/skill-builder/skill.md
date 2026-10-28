@@ -141,8 +141,8 @@ The `description` is the trigger. It must be:
 ### Good Descriptions
 
 ```yaml
-description: "Generates publication-ready Markdown course lesson files for the NUniversity platform"
-description: "Validates Markdown frontmatter for NUniversity lesson files"
+description: "Generates publication-ready Markdown course lesson files for the Nuniversity platform"
+description: "Validates Markdown frontmatter for Nuniversity lesson files"
 description: "Creates and validates Mermaid.js diagrams for documentation"
 ```
 
@@ -161,8 +161,8 @@ description: "Does various things"                # Not specific
 ```
 
 Examples:
-- "Generates publication-ready Markdown course lesson files for the NUniversity platform"
-- "Validates quiz JSON files for the NUniversity Quizzes app"
+- "Generates publication-ready Markdown course lesson files for the Nuniversity platform"
+- "Validates quiz JSON files for the Nuniversity Quizzes app"
 - "Creates and validates Mermaid.js diagrams for documentation and architecture visualization"
 
 ---
@@ -526,7 +526,7 @@ description: "A useful tool"
 description: "Processes things"
 
 # GOOD
-description: "Validates Markdown frontmatter for NUniversity lesson files"
+description: "Validates Markdown frontmatter for Nuniversity lesson files"
 description: "Generates publication-ready vocabulary game JSON files"
 ```
 

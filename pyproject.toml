@@ -1,7 +1,7 @@
 [project]
 name = "nuniversity-harness"
 version = "0.1.0"
-description = "Deterministic AI agentic harness for NUniversity"
+description = "Deterministic AI agentic harness for Nuniversity"
 requires-python = ">=3.11"
 dependencies = [
     "pyyaml>=6.0",

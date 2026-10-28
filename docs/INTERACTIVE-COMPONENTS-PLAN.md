@@ -1,6 +1,6 @@
 # Implementation Plan: Interactive Course Components
 
-> Extending NUniversity's course platform to support Math, Science, and Interactive content.
+> Extending Nuniversity's course platform to support Math, Science, and Interactive content.
 
 ---
 

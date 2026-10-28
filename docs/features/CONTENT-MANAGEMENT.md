@@ -1,6 +1,6 @@
 # 📝 Content Management
 
-NUniversity uses a **file-system-based content model** — no CMS, no database, no external API. All content lives as Markdown files (`.md`) and JSON files (`.json`) inside the `content/` directory, co-located with the codebase and version-controlled with Git.
+Nuniversity uses a **file-system-based content model** — no CMS, no database, no external API. All content lives as Markdown files (`.md`) and JSON files (`.json`) inside the `content/` directory, co-located with the codebase and version-controlled with Git.
 
 ---
 

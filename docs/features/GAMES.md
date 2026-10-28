@@ -1,10 +1,10 @@
-# NUniversity Games System
+# Nuniversity Games System
 
 Comprehensive documentation of the interactive learning games platform.
 
 ## 1. Overview
 
-NUniversity provides browser-based learning games that users play directly in the web interface. Games are defined as static JSON content files, rendered by dedicated Next.js page routes, and displayed through client-side React components. All games are statically generated at build time (`force-static`) — there is no server-side game logic at runtime.
+Nuniversity provides browser-based learning games that users play directly in the web interface. Games are defined as static JSON content files, rendered by dedicated Next.js page routes, and displayed through client-side React components. All games are statically generated at build time (`force-static`) — there is no server-side game logic at runtime.
 
 Certification quizzes moved to the Quizzes app (/{lang}/quizzes/, content/quizzes/, see docs/assessment/2026-app-review/DESIGN-QUIZZES-APP.md) — legacy /games/quiz/* URLs redirect.
 
@@ -84,7 +84,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Games["NUniversity Games"]
+    Games["Nuniversity Games"]
     Games --> VL["Language"]
     Games --> STEM["STEM"]
     Games --> PUZ["Puzzles"]

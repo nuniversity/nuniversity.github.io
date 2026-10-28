@@ -52,7 +52,7 @@ description: |
   Performs comprehensive code reviews focusing on security,
   performance, maintainability, and best practices.
 
-author: "NUniversity"
+author: "Nuniversity"
 license: "MIT"
 
 instructions:
@@ -586,7 +586,7 @@ Skills follow semantic versioning and can be distributed as packages.
 name: "@nuniversity/code-reviewer"
 version: "1.2.0"
 description: "AI-powered code review skill"
-author: "NUniversity"
+author: "Nuniversity"
 
 dependencies:
   skills:

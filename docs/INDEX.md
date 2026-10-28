@@ -1,6 +1,6 @@
-# NUniversity Platform — Documentation Index
+# Nuniversity Platform — Documentation Index
 
-> **NUniversity** is an open, multilingual educational platform built with **Next.js 14** and deployed as a static site on GitHub Pages.
+> **Nuniversity** is an open, multilingual educational platform built with **Next.js 14** and deployed as a static site on GitHub Pages.
 > Mission: *Empower learners worldwide through accessible, interactive, and high-quality education.*
 
 ---
@@ -72,7 +72,7 @@ open http://localhost:3000  # (or :3001 if 3000 is in use)
 
 ## Platform Overview
 
-NUniversity is composed of **nine main features**, all accessible via a locale-prefixed URL (e.g. `/en/`, `/pt/`, `/es/`):
+Nuniversity is composed of **nine main features**, all accessible via a locale-prefixed URL (e.g. `/en/`, `/pt/`, `/es/`):
 
 | Feature | URL Pattern | Description |
 |---|---|---|
@@ -193,4 +193,4 @@ Assessment, setup, and implementation tracking.
 
 ## Copyright
 
-© 2026 NUniversity. All Rights Reserved.
+© 2026 Nuniversity. All Rights Reserved.

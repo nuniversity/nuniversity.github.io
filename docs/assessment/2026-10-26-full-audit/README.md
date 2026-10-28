@@ -1,4 +1,4 @@
-# Full Security, Architecture & UX/UI Audit — NUniversity Platform
+# Full Security, Architecture & UX/UI Audit — Nuniversity Platform
 
 **Audit date:** 2026-10-26
 **Audit type:** Full-stack static-site assessment (cybersecurity, architecture, performance, accessibility, UX/UI)

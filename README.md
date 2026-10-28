@@ -1,4 +1,4 @@
-# NUniversity Platform
+# Nuniversity Platform
 
 Multilingual educational platform built with **Next.js 14** (App Router), deployed as a static site on GitHub Pages.
 
@@ -61,6 +61,19 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) — the middleware will redirect you to your preferred locale (`/en`, `/pt`, or `/es`).
 
+Python tooling (content validators, Bandit) lives in a virtualenv:
+
+```bash
+uv sync --extra dev
+# or
+python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
+```
+
+`git commit` runs Husky + lint-staged: `vitest related --run` and `eslint --fix`
+for TypeScript, and Bandit for Python. A MEDIUM or HIGH Bandit finding blocks the
+commit; `SKIP_BANDIT=1 git commit ...` bypasses it once. See
+[docs/operations/CONTRIBUTING.md](docs/operations/CONTRIBUTING.md#pre-commit-checks).
+
 ## Available Scripts
 
 | Script | Command | Description |
@@ -69,6 +82,7 @@ Open [http://localhost:3000](http://localhost:3000) — the middleware will redi
 | build | `npm run build` | Build static site to `/out` |
 | start | `npm run start` | Serve the production build |
 | lint | `npm run lint` | Run ESLint |
+| security:bandit | `npm run security:bandit` | Static security scan of the Python (Bandit) |
 
 ## Build for Production
 
@@ -151,4 +165,4 @@ Full documentation is available in the [`docs/`](./docs) directory:
 
 ## Copyright
 
-© 2026 NUniversity. All Rights Reserved.
+© 2026 Nuniversity. All Rights Reserved.

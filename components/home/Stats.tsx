@@ -53,7 +53,7 @@ export default function Stats({ dict, stats }: StatsProps) {
           </h2>
           <p className="mt-4 text-lg text-foreground-muted">
             {dict.stats?.subtitle ||
-              'Thousands of learners trust NUniversity to advance their careers and knowledge.'}
+              'Thousands of learners trust Nuniversity to advance their careers and knowledge.'}
           </p>
         </div>
 

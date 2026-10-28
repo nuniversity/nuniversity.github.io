@@ -20,7 +20,7 @@ content/courses/agent-memory-knowledge/
 ```json
 {
   "area": "Artificial Intelligence",
-  "author": "NUniversity",
+  "author": "Nuniversity",
   "difficulty": "intermediate",
   "duration": "4 weeks",
   "icon": "database",

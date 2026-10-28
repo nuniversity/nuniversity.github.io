@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate lesson Markdown files for NUniversity.
+"""Validate lesson Markdown files for Nuniversity.
 
 Deterministic script: exit 0 = pass, exit 1 = warning, exit 2 = blocking error.
 

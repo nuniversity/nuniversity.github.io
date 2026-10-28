@@ -59,7 +59,7 @@ O manifesto define a identidade, propósito e componentes da skill.
 # skill.yaml
 name: minha-skill-personalizada
 description: Guia o agente na realização de geração personalizada de scaffolds
-author: NUniversity
+author: Nuniversity
 version: 1.0.0
 instructions: |
   Quando o usuário pedir para gerar scaffold de um novo projeto Python:

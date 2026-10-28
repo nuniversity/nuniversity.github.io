@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate course.json metadata files for NUniversity.
+"""Validate course.json metadata files for Nuniversity.
 
 Deterministic hook: exit 0 = pass, exit 2 = blocking error.
 

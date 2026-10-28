@@ -1,13 +1,13 @@
 # 01 — Executive Summary
 
-**Audit:** NUniversity Platform static educational site (`nuniversity.github.io`)
+**Audit:** Nuniversity Platform static educational site (`nuniversity.github.io`)
 **Date:** 2026-10-26
 
 ---
 
 ## 1. Headline
 
-NUniversity is a **mature, well-engineered static educational platform** with an unusually strong security posture for its class: no secrets, no tracking, no third-party scripts, correctly sanitized Markdown, and disciplined static-export mechanics.
+Nuniversity is a **mature, well-engineered static educational platform** with an unusually strong security posture for its class: no secrets, no tracking, no third-party scripts, correctly sanitized Markdown, and disciplined static-export mechanics.
 
 The weaknesses are **not** in the attack surface. They are in **payload weight**, **design-system coherence**, and **defense-in-depth gaps that a static site can still close from the client side**.
 

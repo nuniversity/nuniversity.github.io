@@ -7,7 +7,7 @@
  */
 
 export const SITE_ORIGIN = 'https://nuniversity.github.io'
-export const SITE_NAME = 'NUniversity'
+export const SITE_NAME = 'Nuniversity'
 export const SITE_TAGLINE = 'Learn, Code, and Grow'
 export const DEFAULT_OG_IMAGE = '/og-image.png'
 export const OG_IMAGE_WIDTH = 1200

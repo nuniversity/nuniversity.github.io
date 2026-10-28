@@ -55,7 +55,7 @@ description: |
   Gera bibliotecas de cliente API type-safe a partir de
   especificacoes OpenAPI/Swagger.
 
-author: "NUniversity"
+author: "Nuniversity"
 license: "MIT"
 
 instructions:

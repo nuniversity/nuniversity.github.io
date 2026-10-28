@@ -46,7 +46,7 @@ description: |
   Realiza revisoes de codigo focando em seguranca,
   desempenho, manutencao e melhores praticas.
 
-author: "NUniversity"
+author: "Nuniversity"
 license: "MIT"
 
 instructions:

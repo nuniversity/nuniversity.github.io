@@ -13,7 +13,8 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "lint:content": "node scripts/lint-prose.mjs",
-    "icons": "node scripts/make-favicons.mjs"
+    "icons": "node scripts/make-favicons.mjs",
+    "security:bandit": "node scripts/security-bandit.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -62,6 +63,9 @@
     "*.{ts,tsx}": [
       "vitest related --run",
       "eslint --fix"
+    ],
+    "*.py": [
+      "node scripts/security-bandit.mjs"
     ]
   },
   "engines": {

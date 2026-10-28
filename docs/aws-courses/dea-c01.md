@@ -11,7 +11,7 @@
 | **Duration** | 12 weeks |
 | **Lessons** | 16 |
 | **Icon** | `database` |
-| **Author** | NUniversity |
+| **Author** | Nuniversity |
 | **Prerequisites** | Not declared in `course.json` |
 | **Languages** | EN only (PT, ES deferred) |
 | **Source directory** | `content/courses/aws-dea-c01/` (`course.json` + `en/`) |

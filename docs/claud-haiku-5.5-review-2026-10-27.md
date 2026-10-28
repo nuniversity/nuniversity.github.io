@@ -1,4 +1,4 @@
-# NUniversity Platform Assessment — 27 Oct 2026 update
+# Nuniversity Platform Assessment — 27 Oct 2026 update
 
 Oct 27, 2026 · @Leo
 

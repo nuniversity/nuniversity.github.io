@@ -1,7 +1,7 @@
-# OpenCode Deterministic Agentic Harness — NUniversity
+# OpenCode Deterministic Agentic Harness — Nuniversity
 
 > **Status:** Implemented
-> **Purpose:** Define a deterministic, quality-gated content generation harness using OpenCode's extensibility primitives (skills, hooks, plugins) to scale NUniversity's 38 courses, 12 games, and 10 tools.
+> **Purpose:** Define a deterministic, quality-gated content generation harness using OpenCode's extensibility primitives (skills, hooks, plugins) to scale Nuniversity's 38 courses, 12 games, and 10 tools.
 
 ---
 
@@ -107,11 +107,11 @@ pytest tests/ -v | grep -c "SKIPPED" | grep -q "^0$"
 
 ## 1.2 Domain-Driven Design (DDD)
 
-**Model the harness around the business domain, not the technology.** DDD ensures that skills, hooks, and tools reflect NUniversity's actual content structure — courses, lessons, games, translations — rather than arbitrary technical abstractions.
+**Model the harness around the business domain, not the technology.** DDD ensures that skills, hooks, and tools reflect Nuniversity's actual content structure — courses, lessons, games, translations — rather than arbitrary technical abstractions.
 
 ### Strategic Design
 
-| Concept | NUniversity Mapping |
+| Concept | Nuniversity Mapping |
 |---------|---------------------|
 | **Bounded Context** | Each skill is a bounded context: `course-writer`, `game-builder`, `i18n-translator` |
 | **Ubiquitous Language** | Domain terms used consistently: "lesson", "course", "domain", "quiz", "vocabulary" |
@@ -619,7 +619,7 @@ flowchart TD
 
 ```bash
 #!/usr/bin/env bash
-# Validates Markdown frontmatter for NUniversity lesson files
+# Validates Markdown frontmatter for Nuniversity lesson files
 # Exit 0 = pass, Exit 2 = blocking error (stderr → agent)
 
 set -euo pipefail
@@ -899,7 +899,7 @@ triggers:
 
 # Course Writer Skill
 
-You are writing content for NUniversity, a Next.js educational platform.
+You are writing content for Nuniversity, a Next.js educational platform.
 
 ## Activation Context
 When this skill activates, load:
@@ -937,7 +937,7 @@ triggers:
 
 # Game Builder Skill
 
-You are building interactive games for NUniversity.
+You are building interactive games for Nuniversity.
 
 ## Activation Context
 When this skill activates, load:
@@ -977,7 +977,7 @@ triggers:
 
 # i18n Translator Skill
 
-You are localizing NUniversity content for Portuguese (pt) and Spanish (es).
+You are localizing Nuniversity content for Portuguese (pt) and Spanish (es).
 
 ## Rules
 - Keep all Markdown formatting, code blocks, and structure identical
@@ -1940,7 +1940,7 @@ shfmt -d -i 2 -bn -ci scripts/*.sh
 
 ---
 
-## Appendix: NUniversity Content Inventory
+## Appendix: Nuniversity Content Inventory
 
 | Type | Count | Location | Format |
 |---|---|---|---|

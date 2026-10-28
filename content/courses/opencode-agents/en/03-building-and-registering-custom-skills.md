@@ -59,7 +59,7 @@ The manifest defines the skill's identity, purpose, and components.
 # skill.yaml
 name: my-custom-skill
 description: Guides the agent in performing custom scaffold generation
-author: NUniversity
+author: Nuniversity
 version: 1.0.0
 instructions: |
   When the user asks to scaffold a new Python project:

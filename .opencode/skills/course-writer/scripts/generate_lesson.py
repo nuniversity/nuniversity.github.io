@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a new lesson file from a template for NUniversity.
+"""Generate a new lesson file from a template for Nuniversity.
 
 Deterministic script: exit 0 = success, exit 2 = error.
 

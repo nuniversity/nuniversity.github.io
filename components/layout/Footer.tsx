@@ -58,7 +58,7 @@ export default function Footer({ lang, dict }: FooterProps) {
               >
                 NU
               </span>
-              <span className="text-2xl font-bold tracking-tight">NUniversity</span>
+              <span className="text-2xl font-bold tracking-tight">Nuniversity</span>
             </div>
             <p className="mb-6 max-w-md text-slate-400">
               {dict.footer.description}

@@ -1,6 +1,6 @@
 # 🏗️ Architecture
 
-This document describes the overall system architecture, folder structure, key design decisions, and data flow of the NUniversity platform.
+This document describes the overall system architecture, folder structure, key design decisions, and data flow of the Nuniversity platform.
 
 ---
 

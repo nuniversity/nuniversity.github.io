@@ -20,7 +20,7 @@
 
 ## 1. Overview
 
-Roadmaps are a core learning feature of NUniversity. They present a visual, step-by-step progression through a topic area — connecting courses, concepts, tools, and milestones into a cohesive journey.
+Roadmaps are a core learning feature of Nuniversity. They present a visual, step-by-step progression through a topic area — connecting courses, concepts, tools, and milestones into a cohesive journey.
 
 ### Key Features
 
@@ -618,4 +618,4 @@ flowchart TD
 
 ## 📄 License
 
-© 2026 NUniversity. All Rights Reserved.
+© 2026 Nuniversity. All Rights Reserved.

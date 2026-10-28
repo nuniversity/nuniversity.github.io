@@ -1,4 +1,4 @@
-# 2026 Application Review — NUniversity
+# 2026 Application Review — Nuniversity
 
 Deep assessment of the **application** (not course content) and the **harness** of the
 solution, plus the complete fix/improvement inventory and the phased plan to make the

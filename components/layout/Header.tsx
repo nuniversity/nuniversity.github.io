@@ -141,7 +141,7 @@ export default function Header({ lang, dict }: HeaderProps) {
               NU
             </span>
             <span className="font-bold text-lg tracking-tight text-foreground hidden sm:inline-block">
-              NUniversity
+              Nuniversity
             </span>
           </Link>
 

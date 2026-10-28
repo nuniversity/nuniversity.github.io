@@ -1,6 +1,6 @@
 # 🔍 Code Assessment — Bugs & Improvement Analysis
 
-> **Scope:** Full codebase audit of the NUniversity platform.  
+> **Scope:** Full codebase audit of the Nuniversity platform.  
 > **Methodology:** Static analysis of all `app/`, `components/`, `lib/`, `content/`, `dictionaries/`, and config files.  
 > **Priority Levels:** 🔴 Critical · 🟠 High · 🟡 Medium · 🟢 Low
 
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }) {
     title: dict.contact?.title
       ? `${dict.contact.title} ${dict.contact.titleHighlight}` 
       : 'Contact',
-    description: dict.contact?.subtitle || 'Get in touch with the NUniversity team',
+    description: dict.contact?.subtitle || 'Get in touch with the Nuniversity team',
   }
 }
 ```
@@ -468,8 +468,8 @@ class MarkdownErrorBoundary extends Component { ... }
 **Fix:**
 ```json
 "about": {
-  "title": "About Us - NUniversity",
-  "description": "Learn about NUniversity's mission, values, and the team building accessible education for everyone."
+  "title": "About Us - Nuniversity",
+  "description": "Learn about Nuniversity's mission, values, and the team building accessible education for everyone."
 }
 ```
 

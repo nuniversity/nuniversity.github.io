@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "NUniversity course.json locale block",
+  "title": "Nuniversity course.json locale block",
   "description": "Shape required for each non-English locale block (pt, es) in content/courses/<slug>/course.json. The course validator warns on a missing block; this schema is the contract for writing one.",
   "type": "object",
   "properties": {

@@ -1,6 +1,6 @@
 # 🤝 Contributing
 
-Thank you for your interest in contributing to NUniversity! This document outlines how you can help improve the platform — whether through content, code, bug fixes, or translations.
+Thank you for your interest in contributing to Nuniversity! This document outlines how you can help improve the platform — whether through content, code, bug fixes, or translations.
 
 ---
 
@@ -98,6 +98,38 @@ git checkout -b feat/my-new-feature
 
 ---
 
+### Pre-commit checks
+
+`git commit` is intercepted by Husky, which runs `lint-staged`:
+
+| Files staged | What runs |
+|---|---|
+| `*.ts`, `*.tsx` | `vitest related --run`, then `eslint --fix` |
+| `*.py` | [Bandit](https://bandit.readthedocs.io/) — MEDIUM and HIGH findings block the commit |
+
+Bandit reads `[tool.bandit]` from `pyproject.toml` — the same section
+`.pre-commit-config.yaml` uses, so the two never drift. Test files are skipped:
+they pass fixture paths such as `/tmp/t.md` as *values*, which Bandit reports as
+insecure temp-file usage (B108) even though nothing is written there.
+
+Run the whole repository, including LOW findings, at any time:
+
+```bash
+npm run security:bandit
+```
+
+If Bandit is not installed the hook stops with setup instructions:
+
+```bash
+uv sync --extra dev
+# or
+python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
+```
+
+To commit once without the Python check: `SKIP_BANDIT=1 git commit ...`.
+
+---
+
 ## 4. Commit Message Convention
 
 We use **Conventional Commits** format:
@@ -147,7 +179,7 @@ git commit -m "docs: add CONTRIBUTING guide"
 
 ## 5. Contributing Content
 
-Content contributions are the most impactful way to help NUniversity grow. You can add new courses, library resources, or language activities **without writing any code**.
+Content contributions are the most impactful way to help Nuniversity grow. You can add new courses, library resources, or language activities **without writing any code**.
 
 ### Adding a New Course
 
@@ -254,7 +286,7 @@ export async function getMyData(locale: Locale) {
 
 ## 7. Contributing Translations
 
-Translations make NUniversity accessible to more people. There are two levels of translation:
+Translations make Nuniversity accessible to more people. There are two levels of translation:
 
 ### Level 1 — UI Strings (Dictionaries)
 
@@ -475,7 +507,7 @@ For content errors (typos, outdated information, broken links in library), you c
 
 ## Code of Conduct
 
-NUniversity is committed to providing a welcoming and inclusive environment for all contributors. We expect all participants to:
+Nuniversity is committed to providing a welcoming and inclusive environment for all contributors. We expect all participants to:
 
 - Be **respectful** and constructive in discussions
 - Be **welcoming** to newcomers and people of all backgrounds
@@ -490,6 +522,6 @@ Contributions that violate these principles will not be accepted.
 
 - Open a [GitHub Discussion](https://github.com/nuniversity/nuniversity.github.io/discussions)
 - Email: thenuniversitybr@gmail.com
-- LinkedIn: [NUniversity](https://www.linkedin.com/company/nuniversity/)
+- LinkedIn: [Nuniversity](https://www.linkedin.com/company/nuniversity/)
 
 Thank you for helping make education more accessible! 🎓

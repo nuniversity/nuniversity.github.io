@@ -11,7 +11,7 @@
 | **Duration** | 12 weeks |
 | **Lessons** | 17 |
 | **Icon** | `database` |
-| **Author** | NUniversity |
+| **Author** | Nuniversity |
 | **Question ID prefix** | `dbl-` (`dbl-NN-qN`) |
 | **Prerequisites** | Not declared in `course.json` |
 | **Languages** | EN only (PT, ES deferred) |

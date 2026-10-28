@@ -72,7 +72,7 @@ describe('resultContext', () => {
   })
 
   it('shows the author for a course', () => {
-    expect(resultContext({ ...base, type: 'course', author: 'NUniversity' })).toBe('NUniversity')
+    expect(resultContext({ ...base, type: 'course', author: 'Nuniversity' })).toBe('Nuniversity')
   })
 
   it('returns null when there is no context', () => {

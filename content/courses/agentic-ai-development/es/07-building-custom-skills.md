@@ -58,7 +58,7 @@ description: |
   Generates type-safe API client libraries from OpenAPI/Swagger
   specifications. Supports Python, TypeScript, and Go targets.
 
-author: "NUniversity"
+author: "Nuniversity"
 license: "MIT"
 
 instructions:

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate game JSON files for NUniversity.
+"""Validate game JSON files for Nuniversity.
 
 Covers every game category under content/games: coding, conversation, logic,
 math, physics, and puzzles. Shared rules (JSON shape, title, category,

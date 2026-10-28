@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Comprehensive test suite for OpenCode courses.
 
-Validates all courses and lessons meet NUniversity quality standards.
+Validates all courses and lessons meet Nuniversity quality standards.
 
 Usage:
     pytest tests/test_opencode_courses.py

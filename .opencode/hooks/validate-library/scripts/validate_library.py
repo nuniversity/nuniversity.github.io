@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate library resource Markdown files for NUniversity.
+"""Validate library resource Markdown files for Nuniversity.
 
 Deterministic hook: exit 0 = pass, exit 1 = warning (non-blocking), exit 2 = blocking error.
 

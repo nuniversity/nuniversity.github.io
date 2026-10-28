@@ -1,6 +1,6 @@
 # 🌍 Internationalization (i18n)
 
-NUniversity supports three languages out of the box: **English (en)**, **Portuguese (pt)**, and **Spanish (es)**. This document explains how locale routing, dictionary loading, language switching, and content fallback all work together.
+Nuniversity supports three languages out of the box: **English (en)**, **Portuguese (pt)**, and **Spanish (es)**. This document explains how locale routing, dictionary loading, language switching, and content fallback all work together.
 
 ---
 
@@ -401,7 +401,7 @@ The Layout also injects **JSON-LD structured data** for search engines:
 {
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
-  "name": "NUniversity",
+  "name": "Nuniversity",
   "contactPoint": {
     "availableLanguage": ["English", "Português", "Español"]
   }

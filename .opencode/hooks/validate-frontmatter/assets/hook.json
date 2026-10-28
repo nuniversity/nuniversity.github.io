@@ -1,7 +1,7 @@
 {
   "name": "validate-frontmatter",
   "version": "1.0.0",
-  "description": "Validates Markdown frontmatter for NUniversity lesson files",
+  "description": "Validates Markdown frontmatter for Nuniversity lesson files",
   "type": "hook",
   "event": "file.write",
   "pattern": "content/courses/**/*.md",

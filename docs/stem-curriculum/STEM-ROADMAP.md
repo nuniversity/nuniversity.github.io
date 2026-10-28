@@ -1,4 +1,4 @@
-# NUniversity STEM Curriculum Roadmap
+# Nuniversity STEM Curriculum Roadmap
 
 ## Version 2.0 - Deep, Complete, and Comprehensive
 
@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-This document presents a **deep, complete, and comprehensive STEM curriculum** for NUniversity covering Mathematics, Physics, Chemistry, Biology, and Engineering. The curriculum is designed following **best practices from MIT OpenCourseWare, PhET Interactive Simulations, and leading STEM education research**. It integrates **real-world examples, storytelling, interactive simulations, and active learning strategies** to create engaging and effective learning experiences.
+This document presents a **deep, complete, and comprehensive STEM curriculum** for Nuniversity covering Mathematics, Physics, Chemistry, Biology, and Engineering. The curriculum is designed following **best practices from MIT OpenCourseWare, PhET Interactive Simulations, and leading STEM education research**. It integrates **real-world examples, storytelling, interactive simulations, and active learning strategies** to create engaging and effective learning experiences.
 
 ### Key Features
 

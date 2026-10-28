@@ -2,7 +2,7 @@
 
 ## Overview
 
-Add a complete suite of unit tests and integration tests using **Vitest**, **@testing-library/react**, and **Husky** pre-commit hooks to the NUniversity Next.js 14 static site.
+Add a complete suite of unit tests and integration tests using **Vitest**, **@testing-library/react**, and **Husky** pre-commit hooks to the Nuniversity Next.js 14 static site.
 
 ## Current State
 
@@ -197,9 +197,31 @@ src/__mocks__/
 git commit
   └─ Husky v9 triggers .husky/pre-commit
        └─ npx lint-staged
-            └─ For each staged *.ts / *.tsx:
-                 1. vitest related --run   (runs tests related to changed files)
-                 2. eslint --fix           (auto-fix lint)
+            ├─ For each staged *.ts / *.tsx:
+            │    1. vitest related --run   (tests related to changed files)
+            │    2. eslint --fix           (auto-fix lint)
+            └─ For each staged *.py:
+                 node scripts/security-bandit.mjs
+                   └─ Bandit, MEDIUM/HIGH findings block the commit
+```
+
+Bandit reads `[tool.bandit]` from `pyproject.toml` (the same section
+`.pre-commit-config.yaml` uses). Test files are skipped: they pass fixture paths
+such as `/tmp/t.md` as values, which Bandit reports as insecure temp-file usage
+(B108) although nothing is written there.
+
+```bash
+npm run security:bandit        # whole repository, tests excluded
+SKIP_BANDIT=1 git commit ...   # bypass once
+```
+
+### Security checks beyond the hook
+
+```bash
+npm audit --omit=dev   # shipped dependencies
+npm audit              # including build/test tooling
+npm run security:bandit
+node scripts/verify-csp.mjs    # CSP present on every exported page
 ```
 
 ### Suggested Improvements

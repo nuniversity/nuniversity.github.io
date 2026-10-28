@@ -1,4 +1,4 @@
-# NUniversity Documentation
+# Nuniversity Documentation
 
 > Full documentation is available in [**INDEX.md**](./INDEX.md) — the master navigation hub for all documentation.
 
@@ -36,4 +36,4 @@ docs/
 
 ---
 
-© 2026 NUniversity. All Rights Reserved.
+© 2026 Nuniversity. All Rights Reserved.

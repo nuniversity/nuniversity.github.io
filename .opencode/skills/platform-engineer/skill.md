@@ -1,6 +1,6 @@
 ---
 name: platform-engineer
-description: Guides TypeScript/Next.js development for the NUniversity platform codebase
+description: Guides TypeScript/Next.js development for the Nuniversity platform codebase
 triggers:
   - lib/**
   - src/**

@@ -1,7 +1,7 @@
 {
   "metadata": {
     "home": {
-      "title": "NUniversity - Plataforma de Aprendizaje Interactivo",
+      "title": "Nuniversity - Plataforma de Aprendizaje Interactivo",
       "description": "Domina tecnología, ingeniería y ciencias a través de cursos interactivos, herramientas de programación y juegos educativos. Comienza tu viaje de aprendizaje hoy."
     },
     "about": {
@@ -10,17 +10,17 @@
     },
     "contact": {
       "title": "Contáctanos",
-      "description": "Pónos en contacto con el equipo de NUniversity — dudas, colaboraciones y soporte de la comunidad."
+      "description": "Pónos en contacto con el equipo de Nuniversity — dudas, colaboraciones y soporte de la comunidad."
     },
     "notFound": {
       "title": "Página No Encontrada",
       "description": "La página que buscas no existe o se ha movido."
     },
     "site": {
-      "title": "NUniversity - Aprende, Programa y Crece",
+      "title": "Nuniversity - Aprende, Programa y Crece",
       "description": "Una plataforma educativa integral que ofrece cursos interactivos, herramientas de programación y juegos de estudio en tecnología, ingeniería y ciencias.",
       "og_description": "Una plataforma educativa integral con cursos interactivos, herramientas de programación y juegos de estudio.",
-      "og_alt": "NUniversity - Plataforma Educativa",
+      "og_alt": "Nuniversity - Plataforma Educativa",
       "customer_service": "servicio al cliente",
       "keywords": [
         "educación",
@@ -190,7 +190,7 @@
   "stats": {
     "title": "Únete a Nuestra",
     "titleHighlight": "Comunidad",
-    "subtitle": "Miles de estudiantes confían en NUniversity para impulsar sus carreras y conocimientos.",
+    "subtitle": "Miles de estudiantes confían en Nuniversity para impulsar sus carreras y conocimientos.",
     "labels": {
       "courses": "Cursos",
       "tools": "Herramientas",
@@ -267,7 +267,7 @@
       "successMessage": "Gracias por registrarte. Te mantendremos al tanto de nuevos cursos y herramientas.",
       "noSpam": "Sin spam. Cancela la suscripción en cualquier momento."
     },
-    "copyright": "NUniversity: Empoderando Mentes, Moldeando Futuros.",
+    "copyright": "Nuniversity: Empoderando Mentes, Moldeando Futuros.",
     "rights": "Todos los derechos reservados",
     "madeWith": "Hecho con",
     "forLearners": "para estudiantes en todo el mundo"

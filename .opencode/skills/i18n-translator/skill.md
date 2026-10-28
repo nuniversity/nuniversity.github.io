@@ -1,6 +1,6 @@
 ---
 name: i18n-translator
-description: Publication-grade technical translation of NUniversity course lessons (EN→PT, EN→ES) with deterministic verification. Activate when translating course content between locales, localizing course.json, or when asked to translate lessons/dictionaries.
+description: Publication-grade technical translation of Nuniversity course lessons (EN→PT, EN→ES) with deterministic verification. Activate when translating course content between locales, localizing course.json, or when asked to translate lessons/dictionaries.
 triggers:
   - content/courses/**
   - dictionaries/**
@@ -11,7 +11,7 @@ triggers:
 
 ## Mission
 
-Produce **publication-grade technical translations** of NUniversity course lessons from English (`en/`, the source of truth) into Portuguese (`pt/`) and Spanish (`es/`). These are engineering courses: a mistranslated identifier, a renamed question id, a mangled JSON payload or an untranslated code fence is a **build break or a silent content bug**, not a style issue. Translation quality here is enforced by **invariants** (things that must stay byte- or set-identical) plus a **deterministic verifier** — never by taste alone.
+Produce **publication-grade technical translations** of Nuniversity course lessons from English (`en/`, the source of truth) into Portuguese (`pt/`) and Spanish (`es/`). These are engineering courses: a mistranslated identifier, a renamed question id, a mangled JSON payload or an untranslated code fence is a **build break or a silent content bug**, not a style issue. Translation quality here is enforced by **invariants** (things that must stay byte- or set-identical) plus a **deterministic verifier** — never by taste alone.
 
 This skill supersedes the old dictionary-only guidance below the "Platform chrome" section. Dictionary rules are unchanged; lesson rules are now first-class and binding.
 

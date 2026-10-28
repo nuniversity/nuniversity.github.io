@@ -1,4 +1,4 @@
-# NUniversity AI Agent System
+# Nuniversity AI Agent System
 
 ## Core Principle
 
@@ -9,7 +9,7 @@
 | # | Principle | Rule | Full Reference |
 |---|-----------|------|----------------|
 | 1 | **Test-Driven Development (TDD)** | Every script, hook, tool, and skill is built using Red-Green-Refactor. 90% coverage minimum. Tests are written before implementation. | `OPENCODE-HARNESS.md` §1.1 |
-| 2 | **Domain-Driven Design (DDD)** | Model the harness around NUniversity's domain. Each skill is a bounded context. Ubiquitous language in code, tests, docs. | `OPENCODE-HARNESS.md` §1.2 |
+| 2 | **Domain-Driven Design (DDD)** | Model the harness around Nuniversity's domain. Each skill is a bounded context. Ubiquitous language in code, tests, docs. | `OPENCODE-HARNESS.md` §1.2 |
 | 3 | **Clean Architecture** | Dependencies point inward. Entities → Business Rules → Adapters → Frameworks. No inner layer imports from outer layers. | `OPENCODE-HARNESS.md` §1.3 |
 | 4 | **SOLID Principles** | SRP (one thing per script), OCP (extend, don't modify), LSP (hooks are interchangeable), ISP (focused skill triggers), DIP (depend on exit codes, not implementations). | `OPENCODE-HARNESS.md` §1.4 |
 | 5 | **Clean Code** | Descriptive naming, small functions (20 lines max), docstrings on public functions, errors to stderr, no dead code. | `OPENCODE-HARNESS.md` §1.5 |
@@ -25,7 +25,7 @@ All deterministic components use a standardized tool chain:
 
 ## Overview
 
-NUniversity uses specialized AI agents to generate publication-ready course content and interactive game data (quizzes live in the Quizzes app; vocabulary activities live in the Languages app under `content/languages/`). Each agent is defined by a prompt template and produces validated Markdown or JSON output.
+Nuniversity uses specialized AI agents to generate publication-ready course content and interactive game data (quizzes live in the Quizzes app; vocabulary activities live in the Languages app under `content/languages/`). Each agent is defined by a prompt template and produces validated Markdown or JSON output.
 
 ### Available Skills
 
@@ -315,7 +315,7 @@ flowchart TD
 
 ## OpenCode Integration
 
-NUniversity uses OpenCode for automated deterministic workflows.
+Nuniversity uses OpenCode for automated deterministic workflows.
 
 ### Current State
 

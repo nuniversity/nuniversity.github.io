@@ -10,7 +10,7 @@
 | **Difficulty** | Beginner (root `course.json`: `beginner`; `en.difficulty`: `Beginner`; all 16 lesson frontmatters: `beginner`) |
 | **Duration** | 8 weeks (`duration`: `8 weeks`, `en.duration`: `8 Weeks`) |
 | **Icon** | `cloud-architecture` |
-| **Author** | NUniversity |
+| **Author** | Nuniversity |
 | **Lessons** | 16 (`order` 1–16, sequential, kebab-case filenames) |
 | **Prerequisites** | Not declared in `course.json` |
 | **Languages** | EN only (`en` block only in `course.json`; a single `en/` locale directory). **PT and ES are deferred**: no `pt/` or `es/` directory exists and the course validator's entire output is the four missing-`pt`/`es` warnings quoted below |

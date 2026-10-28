@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate language activity JSON files for NUniversity.
+"""Validate language activity JSON files for Nuniversity.
 
 Covers vocabulary activities under content/languages/vocabulary. Rules are
 ported from the former game-category vocabulary validator and derived from

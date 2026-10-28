@@ -1,6 +1,6 @@
 ---
 name: game-builder
-description: Generates publication-ready language activity (vocabulary) JSON files for the NUniversity Languages app
+description: Generates publication-ready language activity (vocabulary) JSON files for the Nuniversity Languages app
 triggers:
   - content/languages/**
 ---

@@ -40,20 +40,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
   const site = dict.metadata?.site
-  const siteTitle = site?.title || 'NUniversity - Learn, Code, and Grow'
+  const siteTitle = site?.title || 'Nuniversity - Learn, Code, and Grow'
   const siteDescription = site?.description || 'A comprehensive educational platform offering interactive courses, coding tools, and study games across technology, engineering, and sciences.'
   const siteOgDescription = site?.og_description || 'A comprehensive educational platform offering interactive courses, coding tools, and study games.'
 
   return {
     title: {
       default: siteTitle,
-      template: '%s | NUniversity'
+      template: '%s | Nuniversity'
     },
     description: siteDescription,
     keywords: site?.keywords || ['education', 'online courses', 'programming', 'engineering', 'science', 'interactive learning', 'coding tools'],
-    authors: [{ name: 'NUniversity Team' }],
-    creator: 'NUniversity',
-    publisher: 'NUniversity',
+    authors: [{ name: 'Nuniversity Team' }],
+    creator: 'Nuniversity',
+    publisher: 'Nuniversity',
     formatDetection: {
       email: false,
       address: false,
@@ -71,13 +71,13 @@ export async function generateMetadata({
       // that want a specific `og:url` set it themselves.
       title: siteTitle,
       description: siteOgDescription,
-      siteName: 'NUniversity',
+      siteName: 'Nuniversity',
       images: [
         {
           url: '/og-image.png',
           width: 1200,
           height: 630,
-          alt: site?.og_alt || 'NUniversity - Educational Platform',
+          alt: site?.og_alt || 'Nuniversity - Educational Platform',
         },
       ],
     },

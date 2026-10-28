@@ -26,7 +26,7 @@ function write404() {
 <meta name="robots" content="noindex"/>
 <meta http-equiv="Content-Security-Policy" content="${CSP}"/>
 <meta name="referrer" content="strict-origin-when-cross-origin"/>
-<title>404 — NUniversity</title>
+<title>404 — Nuniversity</title>
 <script>
 (function () {
   var m = location.pathname.match(/^\\/(en|pt|es)(\\/|$)/)

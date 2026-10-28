@@ -344,7 +344,7 @@ if (!coreOnly) {
 
   console.log('  -- i18n leak audit (pt/es chrome strings) --')
   const LEAK_STRINGS = [
-    'NUniversity - Learn, Code, and Grow',
+    'Nuniversity - Learn, Code, and Grow',
     'Games - Learn While Playing',
     'Search games...',
     'No games found matching your search',

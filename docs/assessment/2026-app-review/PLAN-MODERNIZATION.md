@@ -240,7 +240,7 @@ Legend: S ≤ 0.5 day · M ≈ 1 day · L ≈ 2 days. Sprints are sequential (si
 
 | ID | Files | Task |
 |---|---|---|
-| E1-S1-T1 | vendor (external) | create UptimeRobot account (email `thenuniversitybr@gmail.com`); add **4 HTTP monitors**: `https://nuniversity.github.io/`, `/en/`, `/es/`, `/pt/` (**trailing slashes** — site uses `trailingSlash: true`; root monitor keyword-checks `NUniversity` to catch the redirect page rendering) |
+| E1-S1-T1 | vendor (external) | create UptimeRobot account (email `thenuniversitybr@gmail.com`); add **4 HTTP monitors**: `https://nuniversity.github.io/`, `/en/`, `/es/`, `/pt/` (**trailing slashes** — site uses `trailingSlash: true`; root monitor keyword-checks `Nuniversity` to catch the redirect page rendering) |
 | E1-S1-T2 | vendor | alert contact = owner email, threshold 3–5 retries (avoid flapping); note API key location in §12.1 (rate limit free = 10 req/min) |
 | E1-S1-T3 | vendor | create **free status page** (1 allowed, UptimeRobot-branded) selecting the 4 monitors; record public URL |
 | E1-S1-T4 | `docs/operations/DEPLOYMENT.md` | add “Monitoring” section: monitors list, status page URL, alert routing |
@@ -295,8 +295,8 @@ Legend: S ≤ 0.5 day · M ≈ 1 day · L ≈ 2 days. Sprints are sequential (si
 | ID | Files | Task |
 |---|---|---|
 | E2-S1-T1 | probe | submit a test message to Formspree `xandddko` → record liveness (matters for docs, not for the migration decision) |
-| E2-S1-T2 | vendor | create Web3Forms account (verify email) → access key (public-safe); set subject prefix `NUniversity contact`; note in §12.1 |
-| E2-S1-T3 | `components/contacts/Contact.tsx` | replace `useForm("xandddko")` + `ValidationError` with plain state machine (`idle/submitting/succeeded/error`) posting `fetch("https://api.web3forms.com/submit", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ access_key, name, email, subject, message, from_name: "NUniversity", botcheck: "" }) })`; map network/`success:false` → localized error state (new `dict.contact.form.error*` strings ×3) |
+| E2-S1-T2 | vendor | create Web3Forms account (verify email) → access key (public-safe); set subject prefix `Nuniversity contact`; note in §12.1 |
+| E2-S1-T3 | `components/contacts/Contact.tsx` | replace `useForm("xandddko")` + `ValidationError` with plain state machine (`idle/submitting/succeeded/error`) posting `fetch("https://api.web3forms.com/submit", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ access_key, name, email, subject, message, from_name: "Nuniversity", botcheck: "" }) })`; map network/`success:false` → localized error state (new `dict.contact.form.error*` strings ×3) |
 | E2-S1-T4 | `Contact.tsx` | add hidden honeypot checkbox `name="botcheck"` (styled `hidden`); keep existing success UI (uses `state.succeeded` → local `status === 'succeeded'`) |
 | E2-S1-T5 | `package.json` | **remove `@formspree/react`** (+ lockfile via `npm install`) |
 | E2-S1-T6 | tests | update contact tests: drop `vi.mock('@formspree/react')` (see `docs/operations/TESTING.md:174`), mock `global.fetch` (resolve `{success:true}` / reject / `{success:false}`), assert payload contains access key + fields; cover submitting→success and error paths |

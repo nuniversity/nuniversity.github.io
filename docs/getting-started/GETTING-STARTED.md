@@ -1,6 +1,6 @@
 # 🚀 Getting Started
 
-This guide walks you through setting up the NUniversity development environment from scratch on any operating system.
+This guide walks you through setting up the Nuniversity development environment from scratch on any operating system.
 
 ---
 

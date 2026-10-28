@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Markdown frontmatter for NUniversity lesson files.
+"""Validate Markdown frontmatter for Nuniversity lesson files.
 
 Deterministic hook: exit 0 = pass, exit 2 = blocking error.
 

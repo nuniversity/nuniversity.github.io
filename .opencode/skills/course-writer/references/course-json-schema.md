@@ -14,7 +14,7 @@
 |-------|------|------------|---------|
 | `difficulty` | string | Lowercase: `beginner`, `intermediate`, `advanced` | `"beginner"` |
 | `en.difficulty` | string | Capitalized: `Beginner`, `Intermediate`, `Advanced` | `"Beginner"` |
-| `author` | string | Author name | `"NUniversity"` |
+| `author` | string | Author name | `"Nuniversity"` |
 | `duration` | string | Human-readable duration | `"4 weeks"` |
 | `icon` | string | Icon identifier | `"code"` |
 | `pt.*` | object | Portuguese translations | See below |
@@ -39,14 +39,14 @@ Each locale (`en`, `pt`, `es`) contains:
 2. `en.difficulty` must be capitalized (`Beginner`, `Intermediate`, `Advanced`)
 3. `area`, `en.title`, and `en.description` are required
 4. Each locale section should have `title` and `description`
-5. `author` should be `"NUniversity"` for new courses
+5. `author` should be `"Nuniversity"` for new courses
 
 ## Example
 
 ```json
 {
   "area": "Artificial Intelligence",
-  "author": "NUniversity",
+  "author": "Nuniversity",
   "difficulty": "intermediate",
   "duration": "4 weeks",
   "icon": "database",

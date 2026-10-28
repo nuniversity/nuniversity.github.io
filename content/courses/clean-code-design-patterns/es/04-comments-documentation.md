@@ -49,7 +49,7 @@ def apply_discount(total: float) -> float:
 ### 1. Comentarios legales
 
 ```python
-# Copyright (c) 2024 NUniversity. All rights reserved.
+# Copyright (c) 2024 Nuniversity. All rights reserved.
 # Licensed under the MIT License.
 ```
 

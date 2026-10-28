@@ -1,6 +1,6 @@
 ---
 name: course-writer
-description: Generates and validates publication-ready Markdown course lesson files for the NUniversity platform with deterministic quality checks
+description: Generates and validates publication-ready Markdown course lesson files for the Nuniversity platform with deterministic quality checks
 triggers:
   - content/courses/**
 ---
@@ -33,7 +33,7 @@ When activated:
 
 ## Platform Resource Inventory (Richness Mandate)
 
-The NUniversity renderer (`components/markdown/MarkdownRenderer.tsx`) is far richer than plain Markdown. **Publication-grade lessons must use these capabilities — a lesson that is "all prose + 5 questions" is too simple for this platform.** Mandate for every non-trivial lesson:
+The Nuniversity renderer (`components/markdown/MarkdownRenderer.tsx`) is far richer than plain Markdown. **Publication-grade lessons must use these capabilities — a lesson that is "all prose + 5 questions" is too simple for this platform.** Mandate for every non-trivial lesson:
 
 - **≥4 mermaid diagrams** — architecture, data-flow, pipeline topology, state machines. Mermaid is first-class: rendered as SVG with zoom (0.25×–4×), Ctrl+wheel zoom, and fullscreen. **Use variety** — see the diagram-type table below; four flowcharts in a row is not acceptable.
 - **≥2 interactive blocks** (see schemas below) — quizzes, charts, simulations.

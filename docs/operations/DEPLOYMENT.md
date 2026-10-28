@@ -1,6 +1,6 @@
 # 🚀 Deployment
 
-NUniversity is deployed as a **fully static website** on **GitHub Pages**, using a **GitHub Actions** CI/CD pipeline that automatically builds and publishes the site on every push to the `main` branch.
+Nuniversity is deployed as a **fully static website** on **GitHub Pages**, using a **GitHub Actions** CI/CD pipeline that automatically builds and publishes the site on every push to the `main` branch.
 
 ### CI/CD Pipeline Overview
 
@@ -309,7 +309,7 @@ https://nuniversity.github.io/en/
 
 ## 8. Static Export Constraints
 
-Because NUniversity is a static export, the following **Next.js features are NOT available**:
+Because Nuniversity is a static export, the following **Next.js features are NOT available**:
 
 | Feature | Status | Reason |
 |---|---|---|

@@ -38,7 +38,7 @@ def main() -> None:
     draw.text((110, 95), "NU", font=badge_font, fill=(59, 130, 246))
 
     title_font = load_font("DejaVuSans-Bold.ttf", 96)
-    draw.text((80, 280), "NUniversity", font=title_font, fill=(255, 255, 255))
+    draw.text((80, 280), "Nuniversity", font=title_font, fill=(255, 255, 255))
 
     sub_font = load_font("DejaVuSans.ttf", 40)
     draw.text((82, 400), "Learn, Code, and Grow", font=sub_font, fill=(226, 232, 240))

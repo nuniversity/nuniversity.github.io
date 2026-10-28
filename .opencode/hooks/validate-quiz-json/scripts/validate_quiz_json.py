@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate quiz JSON files for NUniversity.
+"""Validate quiz JSON files for Nuniversity.
 
 Covers the generalized quiz schema under content/quizzes: shared structural
 checks (identity, kind, scoring, domains, allocations) run first, then

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate roadmap Markdown files for NUniversity.
+"""Validate roadmap Markdown files for Nuniversity.
 
 Deterministic hook: exit 0 = pass, exit 1 = warning (non-blocking), exit 2 = blocking error.
 
