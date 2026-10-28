@@ -19,7 +19,7 @@ A configuração do Spark segue uma hierarquia:
 | 1 (Mais alta) | `spark-submit --conf` | Tudo abaixo |
 | 2 | `SparkSession.conf.set()` | Padrões do arquivo |
 | 3 | `spark-defaults.conf` | Padrões hardcoded |
-| 4 (Mais baixa) | Padrões hardcoded | — |
+| 4 (Mais baixa) | Padrões hardcoded |: |
 
 ## Configuração Principal de Recursos
 

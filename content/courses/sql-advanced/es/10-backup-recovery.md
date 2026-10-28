@@ -10,7 +10,7 @@ difficulty: advanced
 
 ## Estrategias de Copia de Seguridad
 
-Una estrategia de copia de seguridad equilibra el **Objetivo de Punto de Recuperación (RPO)** — cuántos datos puedes perder — contra el **Objetivo de Tiempo de Recuperación (RTO)** — qué tan rápido te recuperas.
+Una estrategia de copia de seguridad equilibra el **Objetivo de Punto de Recuperación (RPO)**: cuántos datos puedes perder: contra el **Objetivo de Tiempo de Recuperación (RTO)**: qué tan rápido te recuperas.
 
 | Estrategia | RPO | RTO | Almacenamiento | Uso Típico |
 |---|---|---|---|---|
@@ -180,7 +180,7 @@ SELECT * FROM pg_stat_replication;
 
 ### Replicación Lógica
 
-Replica a nivel de fila — puede filtrar, transformar o replicar subconjuntos.
+Replica a nivel de fila: puede filtrar, transformar o replicar subconjuntos.
 
 ```sql
 -- Publicador

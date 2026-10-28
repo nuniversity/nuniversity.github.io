@@ -122,7 +122,7 @@ export default function BucketDropQuestion({ question, instructions, buckets, ex
         </div>
 
         <div>
-          <p className="mb-3 text-sm font-semibold text-muted-foreground">{b?.instruction || 'Items — click an item, then click a bucket to place it:'}</p>
+          <p className="mb-3 text-sm font-semibold text-muted-foreground">{b?.instruction || 'Items: click an item, then click a bucket to place it:'}</p>
           <div className="flex flex-wrap gap-2">
             {pool.map(item => (
               <button
@@ -190,7 +190,7 @@ export default function BucketDropQuestion({ question, instructions, buckets, ex
                     </button>
                   ))}
                 </div>
-                {placed.length === 0 && <p className="text-xs text-muted-foreground mt-1">{b?.empty_bucket || 'Empty — click to place the selected item'}</p>}
+                {placed.length === 0 && <p className="text-xs text-muted-foreground mt-1">{b?.empty_bucket || 'Empty: click to place the selected item'}</p>}
               </div>
             )
           })}
@@ -210,7 +210,7 @@ export default function BucketDropQuestion({ question, instructions, buckets, ex
               <span className="font-semibold text-sm text-foreground">
                 {allCorrect
                   ? (w?.all_correct || 'All correct!')
-                  : (b?.score_feedback || '{count} / {total} correct — red items are in the wrong bucket or still unplaced.').replace('{count}', String(correctCount)).replace('{total}', String(allItems.length))}
+                  : (b?.score_feedback || '{count} / {total} correct, red items are in the wrong bucket or still unplaced.').replace('{count}', String(correctCount)).replace('{total}', String(allItems.length))}
               </span>
             </div>
             {explanation && <p className="text-sm text-muted-foreground mt-1">{explanation}</p>}

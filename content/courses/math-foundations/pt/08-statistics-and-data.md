@@ -17,7 +17,7 @@ difficulty: "beginner"
 A estatística como disciplina formal começou no século XVII, mas a análise de dados é antiga. O censo imperial chinês (2 d.C.) contou 57 milhões de pessoas. Eruditos islâmicos desenvolveram metodologia de levantamento. Astrônomos indianos coletavam e analisavam dados astronômicos.
 
 > [!NOTE]
-> A estatística não é apenas sobre números — é sobre tomada de decisões baseada em evidências.
+> A estatística não é apenas sobre números: é sobre tomada de decisões baseada em evidências.
 
 ---
 
@@ -84,7 +84,7 @@ $$
 
 ### Amplitude, Variância e Desvio Padrão
 
-**Amplitude:** Maior - menor
+**Amplitude:** Maior: menor
 
 **Variância (s²):** Média dos quadrados das diferenças da média
 $$
@@ -249,7 +249,7 @@ $$s = \sqrt{6} \approx 2,45$$
 
 ---
 
-### Cálculo de Variância — Exemplo Adicional
+### Cálculo de Variância: Exemplo Adicional
 
 **Problema:** Calcule a variância populacional dos dados: 10, 12, 14, 16, 18
 
@@ -281,7 +281,7 @@ $$\sigma = \sqrt{8} \approx 2,83$$
 
 ---
 
-### Resumo de Cinco Números — Cálculo de Q1 e Q3
+### Resumo de Cinco Números: Cálculo de Q1 e Q3
 
 **Problema:** Calcule o resumo de cinco números para: 12, 7, 3, 15, 9, 21, 8, 14, 5, 18
 
@@ -343,7 +343,7 @@ $$IIQ = Q3 - Q1 = 15 - 7 = 8$$
 ```fillblank
 {
   "question": "Complete as fórmulas e cálculos estatísticos abaixo:",
-  "template": "A média de 10, 20, 30, 40, 50 é {{1}} A mediana de 3, 7, 9, 12, 15 é {{2}} A amplitude de 4, 8, 15, 22, 30 é {{3}} Se Σ(xi - x̄)² = 48 e n = 9, a variância amostral é {{4}} Se a variância é 25, o desvio padrão é {{5}} Se Q1 = 4 e Q3 = 16, o intervalo interquartil é {{6}}",
+  "template": "A média de 10, 20, 30, 40, 50 é {{1}} A mediana de 3, 7, 9, 12, 15 é {{2}} A amplitude de 4, 8, 15, 22, 30 é {{3}} Se Σ(xi: x̄)² = 48 e n = 9, a variância amostral é {{4}} Se a variância é 25, o desvio padrão é {{5}} Se Q1 = 4 e Q3 = 16, o intervalo interquartil é {{6}}",
   "answers": {
     "1": "30",
     "2": "9",
@@ -365,14 +365,14 @@ $$IIQ = Q3 - Q1 = 15 - 7 = 8$$
 Uma fábrica produz parafusos com diâmetro alvo de 10 mm. Uma amostra de 20 parafusos tem média de 9,97 mm e desvio padrão de 0,05 mm.
 
 - Se o diâmetro ideal é 10 mm ± 0,15 mm, os parafusos estão dentro da especificação?
-- Resposta: 9,97 ± 2(0,05) = [9,87, 10,07] — Sim, 99,7% dos parafusos estão dentro da especificação.
+- Resposta: 9,97 ± 2(0,05) = [9,87, 10,07]: Sim, 99,7% dos parafusos estão dentro da especificação.
 
 **Caso 2: Análise de Notas de Prova**
 
 Notas de 30 alunos: média = 6,5, mediana = 7, desvio padrão = 2,1
 
 - A média ser menor que a mediana sugere que há alunos com notas muito baixas puxando a média para baixo (assimétrica à esquerda).
-- O desvio padrão de 2,1 indica alta variabilidade nas notas — os alunos tiveram desempenhos muito diferentes.
+- O desvio padrão de 2,1 indica alta variabilidade nas notas: os alunos tiveram desempenhos muito diferentes.
 
 **Caso 3: Pesquisa de Opinião**
 
@@ -474,5 +474,5 @@ Uma pesquisa com 1.000 pessoas mostra que 60% apoiam uma política, com margem d
 - Média, mediana e moda descrevem o centro dos dados
 - Desvio padrão mede a dispersão
 - Diferentes gráficos servem para diferentes propósitos
-- Gráficos podem ser enganosos — sempre critique
+- Gráficos podem ser enganosos: sempre critique
 - O pensamento estatístico é essencial para decisões informadas

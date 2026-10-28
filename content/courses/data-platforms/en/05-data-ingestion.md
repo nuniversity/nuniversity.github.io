@@ -38,9 +38,9 @@ Pattern 4: CHANGE DATA CAPTURE (CDC)
 
 ## 5.2 AWS Ingestion Services
 
-### Amazon Kinesis Data Streams — Real-Time Streaming
+### Amazon Kinesis Data Streams: Real-Time Streaming
 
-Kinesis is the AWS native real-time data streaming service — equivalent to Apache Kafka but fully managed:
+Kinesis is the AWS native real-time data streaming service: equivalent to Apache Kafka but fully managed:
 
 ```python
 import boto3
@@ -70,9 +70,9 @@ def publish_order_event(order: dict):
 **Kinesis Shard Capacity:**
 - 1 shard = 1 MB/s write OR 1,000 records/s write
 - 1 shard = 2 MB/s read (shared among all consumers)
-- Auto-scaling via Application Auto Scaling (not instant — takes minutes)
+- Auto-scaling via Application Auto Scaling (not instant: takes minutes)
 
-### Amazon MSK (Managed Kafka) — Enterprise Streaming
+### Amazon MSK (Managed Kafka): Enterprise Streaming
 
 For organisations with existing Kafka expertise or needing Kafka-compatible APIs:
 
@@ -107,7 +107,7 @@ MSKCluster:
 | **Management overhead** | High (broker config, ZooKeeper/Raft) | Low (fully serverless) |
 | **Existing Kafka tools** | ✅ Kafka Connect, Schema Registry | ❌ Not compatible |
 
-### AWS Glue — ETL at Scale
+### AWS Glue: ETL at Scale
 
 ```python
 # AWS Glue ETL Script (runs on serverless Spark)
@@ -163,7 +163,7 @@ glueContext.write_dynamic_frame.from_options(
 job.commit()
 ```
 
-### AWS AppFlow — SaaS Integration
+### AWS AppFlow: SaaS Integration
 
 AppFlow provides no-code/low-code connectors to 50+ SaaS applications:
 
@@ -222,7 +222,7 @@ Flow Types:
 
 ## 5.3 Snowflake Ingestion
 
-### Snowpipe — Continuous Data Loading
+### Snowpipe: Continuous Data Loading
 
 Snowpipe is Snowflake's near-real-time, serverless data loading mechanism. It watches an S3 bucket (via S3 event notifications) and loads new files as they arrive:
 
@@ -287,7 +287,7 @@ aws s3api put-bucket-notification-configuration \
   }'
 ```
 
-### COPY INTO — Bulk Loading
+### COPY INTO: Bulk Loading
 
 For scheduled bulk loads (e.g., nightly files):
 
@@ -339,7 +339,7 @@ value.converter=com.snowflake.kafka.connector.records.SnowflakeJsonConverter
 
 ## 5.4 Databricks Ingestion
 
-### Auto Loader — Incremental File Ingestion
+### Auto Loader: Incremental File Ingestion
 
 Auto Loader is the recommended way to incrementally ingest files from cloud storage into Delta Lake. It is more efficient than Spark's `spark.readStream.format("parquet").load()` because it uses cloud-native file listing optimisations:
 
@@ -386,7 +386,7 @@ query = (
 )
 ```
 
-### Structured Streaming — True Real-Time from Kafka
+### Structured Streaming: True Real-Time from Kafka
 
 ```python
 # Read from Kafka (MSK or Confluent)
@@ -447,7 +447,7 @@ query = (
 query.awaitTermination()
 ```
 
-### Delta Live Tables — Declarative Streaming Pipelines
+### Delta Live Tables: Declarative Streaming Pipelines
 
 DLT abstracts the operational complexity of Structured Streaming:
 

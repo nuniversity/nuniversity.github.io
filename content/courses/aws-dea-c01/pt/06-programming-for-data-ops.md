@@ -1,13 +1,13 @@
 ---
 title: "Conceitos de Programação para Operações de Dados"
-description: "Transforme a Tarefa 1.4 do Domínio 1 do DEA-C01 em decisões que você defende no dia do exame: quais conceitos de programação agnósticos de linguagem são realmente testáveis e onde para a sintaxe específica de linguagem, como o pandas num único nó difere do PySpark entre partições, por que avaliação lazy, contagem de partições e a escada de custo de UDF decidem se um job do Glue é rápido ou ruinoso, os padrões de SQL que o exame insiste em repetir (CTEs, funções de janela, joins, PIVOT e parsing de JSON no Athena e no Redshift), como o AWS Lambda se comporta como primitiva de processamento de dados por meio das suas fontes de eventos, pool de concorrência, teto de 900 segundos e CPU acoplada à memória, como escolher entre Lambda, Glue Python shell, Glue Spark e AWS Batch por tamanho, duração, frequência e limites de runtime, e como idempotência, watermarking, efeitos at-least-once versus exactly-once e tratamento de poison pill impedem que uma reprodução corrompa uma tabela — além de achatamento de dados aninhados, schema-on-read versus schema-on-write, uma caixa de atualizações de outubro de 2026 com fontes, dois casos reais de clientes da AWS e doze questões no estilo de exame."
+description: "Transforme a Tarefa 1.4 do Domínio 1 do DEA-C01 em decisões que você defende no dia do exame: quais conceitos de programação agnósticos de linguagem são realmente testáveis e onde para a sintaxe específica de linguagem, como o pandas num único nó difere do PySpark entre partições, por que avaliação lazy, contagem de partições e a escada de custo de UDF decidem se um job do Glue é rápido ou ruinoso, os padrões de SQL que o exame insiste em repetir (CTEs, funções de janela, joins, PIVOT e parsing de JSON no Athena e no Redshift), como o AWS Lambda se comporta como primitiva de processamento de dados por meio das suas fontes de eventos, pool de concorrência, teto de 900 segundos e CPU acoplada à memória, como escolher entre Lambda, Glue Python shell, Glue Spark e AWS Batch por tamanho, duração, frequência e limites de runtime, e como idempotência, watermarking, efeitos at-least-once versus exactly-once e tratamento de poison pill impedem que uma reprodução corrompa uma tabela, além de achatamento de dados aninhados, schema-on-read versus schema-on-write, uma caixa de atualizações de outubro de 2026 com fontes, dois casos reais de clientes da AWS e doze questões no estilo de exame."
 order: 6
 difficulty: "intermediate"
 duration: "60 min"
 ---
 # Conceitos de Programação para Operações de Dados
 
-Todo pipeline que você estudou até agora move e remodela dados. Esta lição pergunta a pergunta por baixo: **que código roda, e por que ele se comporta daquele jeito?** O DEA-C01 responde isso no Domínio 1, **Tarefa 1.4**, e o enunciado da tarefa é deliberadamente estreito. O guia do exame lista **"conceitos de programação agnósticos de linguagem"** como no escopo e **"sintaxe específica de linguagem de programação"** como fora do escopo — então nenhum item pedirá que você recorde um decorator, uma list comprehension ou um import de pacote. Em vez disso, o enunciado entrega um **problema de pipeline** (ranqueie estas linhas, deduplique esta reprodução, faça o parse deste campo aninhado, escolha um runtime) e espera de volta o **construto ou serviço** certo (guia do exame DEA-C01, acesso em outubro de 2026).
+Todo pipeline que você estudou até agora move e remodela dados. Esta lição pergunta a pergunta por baixo: **que código roda, e por que ele se comporta daquele jeito?** O DEA-C01 responde isso no Domínio 1, **Tarefa 1.4**, e o enunciado da tarefa é deliberadamente estreito. O guia do exame lista **"conceitos de programação agnósticos de linguagem"** como no escopo e **"sintaxe específica de linguagem de programação"** como fora do escopo, então nenhum item pedirá que você recorde um decorator, uma list comprehension ou um import de pacote. Em vez disso, o enunciado entrega um **problema de pipeline** (ranqueie estas linhas, deduplique esta reprodução, faça o parse deste campo aninhado, escolha um runtime) e espera de volta o **construto ou serviço** certo (guia do exame DEA-C01, acesso em outubro de 2026).
 
 ```text
 ====================================================================
@@ -55,7 +55,7 @@ Nesta lição você vai:
 - usar **watermarks** para limitar dados atrasados e subir a **escada de tratamento de poison pill**;
 - achatar **JSON aninhado** e escolher entre **schema-on-read** e **schema-on-write**;
 - ler a **caixa de atualizações de outubro de 2026**, estudar **dois casos reais de clientes da AWS** e treinar com **12 questões no estilo de exame** mais verificações interativas.
-- **escopo expandido desta edição:** a lição agora traz **cinco casos reais de clientes da AWS** (EMX, AppsFlyer, Hearst, Nasdaq e PayU), **catorze questões de prática** (`dea-06-q1` até `dea-06-q14`) e **três verificações interativas** — matching, preenchimento de lacunas e arrastar e soltar.
+- **escopo expandido desta edição:** a lição agora traz **cinco casos reais de clientes da AWS** (EMX, AppsFlyer, Hearst, Nasdaq e PayU), **catorze questões de prática** (`dea-06-q1` até `dea-06-q14`) e **três verificações interativas**: matching, preenchimento de lacunas e arrastar e soltar.
 
 ---
 
@@ -67,9 +67,9 @@ Duas frases fazem todo o trabalho:
 
 > **No escopo:** "conceitos de programação agnósticos de linguagem" · **Fora do escopo:** "sintaxe específica de linguagem de programação"
 
-Tudo nesta seção, portanto, precisa sobreviver a um teste: *eu conseguiria perguntar isso sem nomear uma linguagem?* Se sim, é examinável. "O que `def handler(event, context)` significa como ponto de entrada?" é examinável — a forma é a mesma em Python e o conceito de ponto de entrada é universal. "Qual é a ordem exata de argumentos de `pd.merge()`?" não é — isso é sintaxe.
+Tudo nesta seção, portanto, precisa sobreviver a um teste: *eu conseguiria perguntar isso sem nomear uma linguagem?* Se sim, é examinável. "O que `def handler(event, context)` significa como ponto de entrada?" é examinável, a forma é a mesma em Python e o conceito de ponto de entrada é universal. "Qual é a ordem exata de argumentos de `pd.merge()`?" não é, isso é sintaxe.
 
-A lista de habilidades da Tarefa 1.4 faz o mesmo ponto pelo outro lado. As habilidades nomeadas são **otimizar o desempenho de runtime**, **concorrência e desempenho do Lambda**, **linguagens e frameworks** (Python, SQL, Scala, R, Java, Bash, PowerShell), **controle de versão, testes, logging e monitoramento**, **infraestrutura como código**, **AWS SAM**, **montar volumes de armazenamento no Lambda**, **CloudFormation/CDK**, **CI/CD**, **computação distribuída** e **estruturas de dados e algoritmos** — uma lista de *capacidades*, com as questões de Git mantidas **genéricas** depois que a AWS removeu o CodeCommit da lista no escopo no **v1.1 (2025-12-12)** do guia do exame (página de revisões do guia do exame DEA-C01, acesso em outubro de 2026).
+A lista de habilidades da Tarefa 1.4 faz o mesmo ponto pelo outro lado. As habilidades nomeadas são **otimizar o desempenho de runtime**, **concorrência e desempenho do Lambda**, **linguagens e frameworks** (Python, SQL, Scala, R, Java, Bash, PowerShell), **controle de versão, testes, logging e monitoramento**, **infraestrutura como código**, **AWS SAM**, **montar volumes de armazenamento no Lambda**, **CloudFormation/CDK**, **CI/CD**, **computação distribuída** e **estruturas de dados e algoritmos**: uma lista de *capacidades*, com as questões de Git mantidas **genéricas** depois que a AWS removeu o CodeCommit da lista no escopo no **v1.1 (2025-12-12)** do guia do exame (página de revisões do guia do exame DEA-C01, acesso em outubro de 2026).
 
 ### 1.2 O mapa conceito → construto
 
@@ -87,7 +87,7 @@ Esta tabela é a Seção 1 inteira comprimida no que uma questão realmente pode
 | **Computação distribuída** | Uma partição = uma task; shuffles são fronteiras de stage | Onde o paralelismo começa e onde o custo aterrissa |
 | **Estruturas de dados e algoritmos** | Chaves hash para dedupe, janelas ordenadas para ranqueamento, joins como hash/broadcast | Escolher a estrutura que torna a operação barata |
 
-### 1.3 Exemplo resolvido E1 — ler um handler, não decorar sintaxe
+### 1.3 Exemplo resolvido E1: ler um handler, não decorar sintaxe
 
 O exame dá uma forma como esta e pergunta o que ela faz ou o que mudar. Leia como um **diagrama de fluxo de controle**:
 
@@ -111,7 +111,7 @@ def handler(event, context):
     return {"ok": len(ok), "bad": len(bad)}
 ```
 
-Três fatos examináveis caem daí: o **ponto de entrada** é uma função com assinatura fixa; **condicionais roteiam registros** em vez de reexecutá-los; e a **mudança de estratégia num limiar de tamanho** é exatamente a habilidade "otimizar o desempenho de runtime" — conjuntos pequenos vão por linha, conjuntos grandes vão em bloco.
+Três fatos examináveis caem daí: o **ponto de entrada** é uma função com assinatura fixa; **condicionais roteiam registros** em vez de reexecutá-los; e a **mudança de estratégia num limiar de tamanho** é exatamente a habilidade "otimizar o desempenho de runtime": conjuntos pequenos vão por linha, conjuntos grandes vão em bloco.
 
 ### 1.4 Condicionais e loops preferem SQL baseado em conjuntos
 
@@ -127,7 +127,7 @@ O padrão mais comum do Domínio 1 é um enunciado descrevendo um loop sobre lin
 
 ### 1.5 Orientação a objetos aparece como layers, não como classes
 
-Hierarquias de classes não são examináveis. **Reuso** é. A resposta da AWS para "meu time tem três funções Lambda que todas precisam da mesma biblioteca auxiliar" é um **layer**: um arquivo zip montado sob `/opt`, com um máximo rígido de **5 layers por função** — e, este é o detalhe que as questões alcançam, os layers são **somente zip**, então uma função com **imagem de container** não pode usá-las de forma alguma (a imagem assa suas dependências, até **10 GB**) (documentação de limites e layers do AWS Lambda, acesso em outubro de 2026).
+Hierarquias de classes não são examináveis. **Reuso** é. A resposta da AWS para "meu time tem três funções Lambda que todas precisam da mesma biblioteca auxiliar" é um **layer**: um arquivo zip montado sob `/opt`, com um máximo rígido de **5 layers por função**, e, este é o detalhe que as questões alcançam, os layers são **somente zip**, então uma função com **imagem de container** não pode usá-las de forma alguma (a imagem assa suas dependências, até **10 GB**) (documentação de limites e layers do AWS Lambda, acesso em outubro de 2026).
 
 ### 1.6 APIs aparecem como paginação e throttling
 
@@ -137,23 +137,23 @@ Um enunciado descrevendo "chamar um serviço que devolve 100 registros por vez a
 
 | Formato | Orientação | Schema | Assinatura no exame |
 |---|---|---|---|
-| **CSV** | linha | nenhum | Apenas intercâmbio — sem pruning, sem tipos aninhados |
+| **CSV** | linha | nenhum | Apenas intercâmbio: sem pruning, sem tipos aninhados |
 | **JSON / NDJSON** | linha | inferido na leitura | Aninhamento + schema-on-read; pesado de fazer parse |
-| **Avro** | linha | **no header**, divisível | **Mova-o e evolua-o** — streaming e evolução de schema |
-| **Parquet / ORC** | **colunar** | no footer | **Leia-o** — pruning, pushdown de min/max, compressão |
+| **Avro** | linha | **no header**, divisível | **Mova-o e evolua-o**: streaming e evolução de schema |
+| **Parquet / ORC** | **colunar** | no footer | **Leia-o**: pruning, pushdown de min/max, compressão |
 
-A regra a que a própria orientação da AWS se reduz: **Avro/JSON para movê-lo, Parquet/ORC para lê-lo.** Como o Athena cobra **bytes escaneados**, o formato *é* o custo — um arquivo colunar que deixa o motor pular colunas intocadas é mais barato que um formato de linha que não consegue (documentação do AWS Athena e do AWS Glue, acesso em outubro de 2026).
+A regra a que a própria orientação da AWS se reduz: **Avro/JSON para movê-lo, Parquet/ORC para lê-lo.** Como o Athena cobra **bytes escaneados**, o formato *é* o custo: um arquivo colunar que deixa o motor pular colunas intocadas é mais barato que um formato de linha que não consegue (documentação do AWS Athena e do AWS Glue, acesso em outubro de 2026).
 
 ```matching
 {
   "question": "Associe cada conceito de programação agnóstico de linguagem ao construto que o exame DEA-C01 espera que você nomeie:",
   "pairs": [
-    {"left": "Condicional sobre dados", "right": "CASE WHEN no SQL, ou um estado Choice no Step Functions - fazer branching sobre os DADOS, nunca sobre a infraestrutura"},
-    {"left": "Loop sobre linhas", "right": "GROUP BY, uma função de janela, ou um estado Map - baseado em conjuntos ou paralelo, nunca um loop de linhas escrito à mão"},
-    {"left": "Reuso de código compartilhado", "right": "Layers do Lambda montadas em /opt - máximo 5, somente zip, então funções com imagem de container não podem usá-las"},
-    {"left": "Onde um segredo vive", "right": "Secrets Manager ou SSM Parameter Store com KMS - as variáveis de ambiente do Lambda são limitadas a um agregado de 4 KB"},
-    {"left": "Acesso a API paginado e com throttling", "right": "Paginação com backoff e jitter em 429 - agnóstico de linguagem, então nenhuma biblioteca cliente é nomeada"},
-    {"left": "Escolha do formato de serialização", "right": "Avro/JSON para movê-lo, Parquet/ORC para lê-lo - escolhido pelo PADRÃO DE ACESSO, não por hábito"}
+    {"left": "Condicional sobre dados", "right": "CASE WHEN no SQL, ou um estado Choice no Step Functions: fazer branching sobre os DADOS, nunca sobre a infraestrutura"},
+    {"left": "Loop sobre linhas", "right": "GROUP BY, uma função de janela, ou um estado Map: baseado em conjuntos ou paralelo, nunca um loop de linhas escrito à mão"},
+    {"left": "Reuso de código compartilhado", "right": "Layers do Lambda montadas em /opt: máximo 5, somente zip, então funções com imagem de container não podem usá-las"},
+    {"left": "Onde um segredo vive", "right": "Secrets Manager ou SSM Parameter Store com KMS: as variáveis de ambiente do Lambda são limitadas a um agregado de 4 KB"},
+    {"left": "Acesso a API paginado e com throttling", "right": "Paginação com backoff e jitter em 429: agnóstico de linguagem, então nenhuma biblioteca cliente é nomeada"},
+    {"left": "Escolha do formato de serialização", "right": "Avro/JSON para movê-lo, Parquet/ORC para lê-lo: escolhido pelo PADRÃO DE ACESSO, não por hábito"}
   ],
   "explanation": "A Tarefa 1.4 testa o CONSTRUTO, nunca a sintaxe. Cada par é a resposta agnóstica de linguagem que um enunciado procura: condicionais viram CASE WHEN ou um estado Choice, loops viram GROUP BY / uma função de janela / um estado Map, o reuso vira layers do Lambda em /opt (máx. 5, somente zip), segredos saem do envelope de 4 KB de variáveis de ambiente para o Secrets Manager ou o SSM, o throttling vira paginação mais backoff, e a serialização vira uma decisão ditada por como os dados serão lidos."
 }
@@ -165,27 +165,27 @@ A regra a que a própria orientação da AWS se reduz: **Avro/JSON para movê-lo
 
 ## 2. Padrões de Python e PySpark para operações de dados
 
-### 2.1 Nó único versus distribuido — escolha antes de codificar
+### 2.1 Nó único versus distribuido: escolha antes de codificar
 
 A primeira bifurcação em toda tarefa de dados é **onde o loop roda**. Errar isso é caro nos dois sentidos: um cluster distribuído para um arquivo de 40 MB desperdiça startup e capacidade ociosa, enquanto um único nó para um join de 200 GB fica sem memória.
 
 | | **Nó único** | **Distribuído** |
 |---|---|---|
 | Serviço | **AWS Glue Python shell** · **AWS Lambda** · o driver de um job do Glue | **AWS Glue Spark (ETL)** · **Amazon EMR** · EMR Serverless |
-| Capacidade | PyShell **0,0625 ou 1 DPU**, cerca de **10 GB** de dados · Lambda **128–10,240 MB** e **≤900 s** | Glue Spark **2–100 DPU** (mínimo de **2 DPU**), **1 DPU = 4 vCPU + 16 GB** |
+| Capacidade | PyShell **0,0625 ou 1 DPU**, cerca de **10 GB** de dados · Lambda **128 to 10,240 MB** e **≤900 s** | Glue Spark **2 to 100 DPU** (mínimo de **2 DPU**), **1 DPU = 4 vCPU + 16 GB** |
 | Execução | Um interpretador, um heap | Uma **partição = uma task** entre workers |
-| Startup | Segundos (Lambda), pequeno (PyShell) | Jobs do Glue Spark normalmente pagam **~2–3 minutos** de startup antes da primeira task |
+| Startup | Segundos (Lambda), pequeno (PyShell) | Jobs do Glue Spark normalmente pagam **~2 to 3 minutos** de startup antes da primeira task |
 | Forma do custo | Por requisição + GB-s (Lambda), ou uma fração de um DPU | Uma DPU-hora inteira enquanto o job roda, incluindo workers ociosos |
 | Falha quando | Fica sem memória ou bate no timeout | Skew, arquivos pequenos demais, ou um shuffle ruim |
 
-**Regra prática do ponto de cruzamento:** algo como **10 milhões de linhas / 5–10 GB** é onde as pessoas param de recorrer ao pandas num único nó — e você precisa declarar a proveniência disso com honestidade. É uma **regra prática de terceiros de 2017, nunca um número publicado pela AWS**; os fatos de nível de exame são os *limites de serviço* acima, que são documentados pela AWS (em outubro de 2026).
+**Regra prática do ponto de cruzamento:** algo como **10 milhões de linhas / 5 to 10 GB** é onde as pessoas param de recorrer ao pandas num único nó, e você precisa declarar a proveniência disso com honestidade. É uma **regra prática de terceiros de 2017, nunca um número publicado pela AWS**; os fatos de nível de exame são os *limites de serviço* acima, que são documentados pela AWS (em outubro de 2026).
 
 > [!WARNING]
 > ⚠️ **Pandas não reescrito num job do Glue Spark aumenta sua conta.** A orientação de migração do Glue Python-shell da AWS observa que um job do Glue Spark aloca **pelo menos dois workers do Spark**, então código que ainda roda pandas serialmente no driver deixa os workers **ociosos e cobrados**. A correção é ou mudar para um job **Python shell** (nó único, barato) ou mover a lógica para **pandas-on-Spark / PySpark** (distribuído). Escolher "Glue Spark porque é maior" é um bug de custo, não um padrão.
 
 ### 2.2 Avaliação lazy: planeje primeiro, compute uma vez
 
-As transformações do Apache Spark são **lazy** — ler, filtrar, mapear e juntar constroem um **plano**, e nada roda até que uma **ação** (`write`, `count`, `collect`, `toPandas`) force a execução (AWS Prescriptive Guidance, *Tuning AWS Glue for Apache Spark*, acesso em outubro de 2026).
+As transformações do Apache Spark são **lazy**: ler, filtrar, mapear e juntar constroem um **plano**, e nada roda até que uma **ação** (`write`, `count`, `collect`, `toPandas`) force a execução (AWS Prescriptive Guidance, *Tuning AWS Glue for Apache Spark*, acesso em outubro de 2026).
 
 ```mermaid
 flowchart LR
@@ -201,7 +201,7 @@ flowchart LR
 Duas consequências sobre as quais o exame constrói questões:
 
 1. **Um dataset transformado é recomputado a cada ação** a menos que você o `cache()`/`persist()`. Duas ações na mesma linhagem pagam a linhagem duas vezes.
-2. **Encadeie suas transformações e aja uma única vez.** Dez ações baratas vencem uma ação cara apenas se não compartilharem linhagem recomputada — o que elas geralmente compartilham.
+2. **Encadeie suas transformações e aja uma única vez.** Dez ações baratas vencem uma ação cara apenas se não compartilharem linhagem recomputada, o que elas geralmente compartilham.
 
 ```python
 # PySpark - illustrative shape, not a memorisation exercise
@@ -226,14 +226,14 @@ top.write.mode("overwrite").partitionBy("order_day") \
 | Fato | Valor | Fonte e data |
 |---|---|---|
 | Granularidade | **1 partição = 1 task** | AWS Prescriptive Guidance, out 2026 |
-| Contagem alvo | **2–3× núcleos** para o Glue; **2–4 por CPU** para o Spark | AWS Prescriptive Guidance / guia de RDD do Spark, out 2026 |
+| Contagem alvo | **2 to 3× núcleos** para o Glue; **2 to 4 por CPU** para o Spark | AWS Prescriptive Guidance / guia de RDD do Spark, out 2026 |
 | Partições padrão de shuffle | **200** | AWS Glue, ajuste de desempenho de SQL, out 2026 |
 | Limiar de advisory de skew | **128 MB** por partição (advisory do Spark SQL: **64 MB**) | AWS Glue, ajustes, out 2026 |
 | `maxResultSize` num shuffle grande | **1 GB** | AWS Glue, ajustes, out 2026 |
-| Gzip | **Indivisível** — um arquivo, uma task | AWS Glue, orientação de parallelize-tasks, out 2026 |
+| Gzip | **Indivisível**: um arquivo, uma task | AWS Glue, orientação de parallelize-tasks, out 2026 |
 | Execução adaptativa de consulta | Coalesce de partições pequenas automaticamente no Glue **≥4.0** / Spark **≥3.2** | AWS Glue, out 2026 |
 
-#### Exemplo resolvido E2 — aritmética de partições
+#### Exemplo resolvido E2: aritmética de partições
 
 Você tem **120 GB** de Parquet num job do Glue de **32 núcleos**:
 
@@ -247,7 +247,7 @@ Se a origem tem 120,000 arquivos minúsculos:
 
 As duas funções **não** são intercambiáveis: `coalesce` funde partições **sem um shuffle completo** (use para ir **para baixo**), enquanto `repartition` realiza um **shuffle completo** para chegar a uma contagem exata (use para ir **para cima**, ou para espalhar skew por uma chave).
 
-- **📚 Você sabia?** "Mais partições = mais rápido" é a concepção errada mais cara do Spark. Passado algo como **2–3× núcleos**, partições extras não adicionam paralelismo — adicionam overhead de scheduler, escrita de arquivos pequenos e pressão de GC. O erro oposto é igualmente ruim: uma única partição gzip de 60 GB é **uma task num único núcleo**, e como o gzip é **indivisível** o motor não consegue quebrá-la. O hábito que vale a pena construir é reparticionar **pelas colunas de partição antes da escrita**, para que o layout em que você aterrissa seja o layout que o leitor fará pruning (orientação de parallelize-tasks do AWS Glue, acesso em outubro de 2026).
+- **📚 Você sabia?** "Mais partições = mais rápido" é a concepção errada mais cara do Spark. Passado algo como **2 to 3× núcleos**, partições extras não adicionam paralelismo: adicionam overhead de scheduler, escrita de arquivos pequenos e pressão de GC. O erro oposto é igualmente ruim: uma única partição gzip de 60 GB é **uma task num único núcleo**, e como o gzip é **indivisível** o motor não consegue quebrá-la. O hábito que vale a pena construir é reparticionar **pelas colunas de partição antes da escrita**, para que o layout em que você aterrissa seja o layout que o leitor fará pruning (orientação de parallelize-tasks do AWS Glue, acesso em outubro de 2026).
 
 ### 2.4 A escada de custo de UDF
 
@@ -256,7 +256,7 @@ Uma **função definida pelo usuário** é o escape hatch para parsers de tercei
 | Degrau | Implementação | Por que custa o que custa |
 |---|---|---|
 | ① Mais barato | Funções **embutidas do Spark SQL** | Roda no JVM, permanece visível para o otimizador Catalyst, mantém predicate pushdown |
-| ② | **UDF vectorizada pandas / Arrow** | Lotes Arrow em batch — a AWS mede algo como **5×** uma UDF Python simples |
+| ② | **UDF vectorizada pandas / Arrow** | Lotes Arrow em batch: a AWS mede algo como **5×** uma UDF Python simples |
 | ③ | **UDF Python simples** | **Dá pickle em cada linha** através da fronteira JVM↔Python; o otimizador a trata como caixa-preta |
 | ④ Mais caro | **UDF Scala / Java** | Sem fronteira Python, mas a menos portátil e ainda opaca a algumas otimizações |
 
@@ -273,7 +273,7 @@ clean = df.withColumn("sku", F.upper(F.trim(F.col("raw_sku"))))
 # a pandas UDF batches whole Arrow record batches instead of single rows
 ```
 
-**Regra do exame:** recorra a um UDF apenas quando nenhum embutido consegue fazer o trabalho. Num job de 1 bilhão de linhas, o degrau ③ versus o degrau ① é a diferença entre minutos e horas — e é uma questão de *otimização de desempenho*, que é a habilidade "otimizar o desempenho de runtime" da Tarefa 1.4 (AWS Glue, *Optimize user-defined functions*, acesso em outubro de 2026).
+**Regra do exame:** recorra a um UDF apenas quando nenhum embutido consegue fazer o trabalho. Num job de 1 bilhão de linhas, o degrau ③ versus o degrau ① é a diferença entre minutos e horas, e é uma questão de *otimização de desempenho*, que é a habilidade "otimizar o desempenho de runtime" da Tarefa 1.4 (AWS Glue, *Optimize user-defined functions*, acesso em outubro de 2026).
 
 ### 2.5 Funções de janela: três enunciados, três respostas
 
@@ -296,9 +296,9 @@ FROM orders
 QUALIFY rn <= 3;
 ```
 
-**Pivô de paralelismo (um distrator favorito):** no **Amazon Redshift**, `PARTITION BY` é o que deixa a função de janela rodar **em paralelo entre slices**; sem ele a janela é computada **serialmente num único slice**. E funções de janela só são legais numa lista **SELECT** ou no **ORDER BY final** — não numa cláusula `WHERE` (documentação de funções de janela do Redshift, acesso em outubro de 2026).
+**Pivô de paralelismo (um distrator favorito):** no **Amazon Redshift**, `PARTITION BY` é o que deixa a função de janela rodar **em paralelo entre slices**; sem ele a janela é computada **serialmente num único slice**. E funções de janela só são legais numa lista **SELECT** ou no **ORDER BY final**: não numa cláusula `WHERE` (documentação de funções de janela do Redshift, acesso em outubro de 2026).
 
-Em **pandas**, o mesmo trabalho é `groupby().transform()` ou `groupby().cumcount()` — correto, mas **nó único**. Passado o tamanho do cruzamento, ele coleta tudo em **um** único processo, e é por isso que `df.toPandas()` / `collect()` dentro de um job do Glue Spark é o bug canônico de out-of-memory: ele puxa o frame distribuído inteiro para o **driver**.
+Em **pandas**, o mesmo trabalho é `groupby().transform()` ou `groupby().cumcount()`: correto, mas **nó único**. Passado o tamanho do cruzamento, ele coleta tudo em **um** único processo, e é por isso que `df.toPandas()` / `collect()` dentro de um job do Glue Spark é o bug canônico de out-of-memory: ele puxa o frame distribuído inteiro para o **driver**.
 
 ---
 
@@ -306,7 +306,7 @@ Em **pandas**, o mesmo trabalho é `groupby().transform()` ou `groupby().cumcoun
 
 ### 3.1 CTEs colocam a lógica em estágios para cada passo ficar legível
 
-Uma **common table expression** (`WITH`) é como você expressa "primeiro deduplicar, depois filtrar, depois ranquear" sem três statements separados — e como você torna uma query revisável. Ela também é o lugar natural do passo de dedupe num pipeline idempotente (Seção 6).
+Uma **common table expression** (`WITH`) é como você expressa "primeiro deduplicar, depois filtrar, depois ranquear" sem três statements separados, e como você torna uma query revisável. Ela também é o lugar natural do passo de dedupe num pipeline idempotente (Seção 6).
 
 ```sql
 -- Stage 1: keep one row per (order_id, version) - the replay-safe row
@@ -335,7 +335,7 @@ ORDER BY revenue DESC;
 | **Redshift** | Ordem de join e chaves de distribuição decidem se a query redistribui dados | Prefira alinhamento de **DISTKEY/SORTKEY** e `ANALYZE` antes de joins grandes |
 | Qualquer motor | Um join sem predicado é um **cross join** | Declare sempre as chaves de join explicitamente |
 
-### 3.3 PIVOT — e o fallback portável
+### 3.3 PIVOT, e o fallback portável
 
 O Amazon Redshift suporta `PIVOT`, com limites rígidos que valem a pena decorar:
 
@@ -352,7 +352,7 @@ PIVOT (SUM(amount) FOR region IN ('EMEA', 'AMER', 'APAC')) AS p;
 | Sem `JOIN`, sem CTE recursiva, sem `UNNEST` de SUPER na entrada | Pré-estágio isso numa CTE |
 | A lista `IN` aceita **literais** | Pivô dinâmico precisa de SQL dinâmico ou da forma portável |
 
-A forma portável, independente de motor — que é a resposta sempre que uma questão pede um pivô que o PIVOT não consegue expressar:
+A forma portável, independente de motor: que é a resposta sempre que uma questão pede um pivô que o PIVOT não consegue expressar:
 
 ```sql
 SELECT order_date,
@@ -379,16 +379,16 @@ FROM events e
 CROSS JOIN UNNEST(e.items) AS i (sku, qty);
 ```
 
-**Amazon Redshift** faz o parse de JSON **uma vez** para o tipo `SUPER` e depois o consulta com caminhos no estilo PartiQL — `JSON_PARSE(payload)` → `SUPER`, acesso com ponto e colchete, `UNNEST`, `UNPIVOT`. A AWS é explícita de que **JSON não é uma boa escolha para datasets grandes** porque não é colunar; faça o parse para `SUPER` uma única vez, ou aterre como **colunas Parquet/SUPER** (documentação de JSON e SUPER do Redshift, acesso em outubro de 2026).
+**Amazon Redshift** faz o parse de JSON **uma vez** para o tipo `SUPER` e depois o consulta com caminhos no estilo PartiQL: `JSON_PARSE(payload)` → `SUPER`, acesso com ponto e colchete, `UNNEST`, `UNPIVOT`. A AWS é explícita de que **JSON não é uma boa escolha para datasets grandes** porque não é colunar; faça o parse para `SUPER` uma única vez, ou aterre como **colunas Parquet/SUPER** (documentação de JSON e SUPER do Redshift, acesso em outubro de 2026).
 
 > [!IMPORTANT]
-> **O Athena não tem uma história de paginação profunda sem `OFFSET`.** `ORDER BY … LIMIT … OFFSET` é suportado, mas `ORDER BY` + `LIMIT` tem teto em **2,147,483,647 linhas**, e o Athena cobra **bytes escaneados** — então paginação com OFFSET profundo bate num teto e relê os mesmos bytes. A resposta amigável ao exame é **paginação por keyset** (`WHERE id > :last_id ORDER BY id LIMIT n`) sobre **Parquet particionado**, não offsets grandes sobre CSV.
+> **O Athena não tem uma história de paginação profunda sem `OFFSET`.** `ORDER BY … LIMIT … OFFSET` é suportado, mas `ORDER BY` + `LIMIT` tem teto em **2,147,483,647 linhas**, e o Athena cobra **bytes escaneados**, então paginação com OFFSET profundo bate num teto e relê os mesmos bytes. A resposta amigável ao exame é **paginação por keyset** (`WHERE id >:last_id ORDER BY id LIMIT n`) sobre **Parquet particionado**, não offsets grandes sobre CSV.
 
 ### 3.5 Load em bloco: um `COPY`, não mil `INSERT`s
 
-A própria orientação do Amazon Redshift é inequívoca: **use `COPY` para loads grandes** — `INSERT`s individuais "podem ser lentos a ponto de proibir". Regras de dimensionamento: **um `COPY` por tabela/prefixo** (COPYs concorrentes na mesma tabela **serializam**), arquivos gzip/JSON indivisíveis entre **1 MB e 1 GB**, contagem ≈ número de **slices**, e arquivos CSV/Parquet **≥128 MB** são divididos automaticamente (boas práticas de COPY do Redshift, acesso em outubro de 2026).
+A própria orientação do Amazon Redshift é inequívoca: **use `COPY` para loads grandes**: `INSERT`s individuais "podem ser lentos a ponto de proibir". Regras de dimensionamento: **um `COPY` por tabela/prefixo** (COPYs concorrentes na mesma tabela **serializam**), arquivos gzip/JSON indivisíveis entre **1 MB e 1 GB**, contagem ≈ número de **slices**, e arquivos CSV/Parquet **≥128 MB** são divididos automaticamente (boas práticas de COPY do Redshift, acesso em outubro de 2026).
 
-#### Exemplo resolvido E3 — dimensionamento do COPY
+#### Exemplo resolvido E3: dimensionamento do COPY
 
 ```text
 Source: 640 GB of gzip CSV   Cluster: 128 slices
@@ -435,13 +435,13 @@ flowchart TD
 |---|---|---|
 | `BatchSize` (Kinesis) | padrão **100**, máximo **10,000** | Throughput por invocação vs latência |
 | Janela de batching | **0 s** (Kinesis/DDB/SQS), **500 ms** (MSK/Kafka/MQ), máximo **300 s** | Latência vs eficiência de batching |
-| `ParallelizationFactor` | **1–10** | Mais concorrência por shard vs pressão de ordenação |
+| `ParallelizationFactor` | **1 to 10** | Mais concorrência por shard vs pressão de ordenação |
 | `MaximumRetryAttempts` | **−1 (infinito)** a **10,000** | Retenção de registros venenosos vs tempo de estancamento |
 | `MaximumRecordAgeInSeconds` | **−1** a **604,800 (7 dias)** | Quanto tempo um shard continua tentando |
 | `ReportBatchItemFailures` | ligado/desligado | Sucesso parcial de lote vs retry de lote inteiro |
 
 > [!WARNING]
-> ⚠️ **O modo de falha do ESM é o lote inteiro e o shard inteiro.** Na falha, o Lambda **reprocessa o lote inteiro** e **pausa o shard** — e é por isso que o primeiro sintoma de um registro ruim é um `IteratorAge` subindo, não uma taxa de erro. Os padrões são **infinitos**, então um único registro venenoso pode bloquear um stream do DynamoDB por **até um dia** e um shard do Kinesis por **até uma semana** (documentação de erros do DynamoDB/Kinesis do AWS Lambda, acesso em outubro de 2026).
+> ⚠️ **O modo de falha do ESM é o lote inteiro e o shard inteiro.** Na falha, o Lambda **reprocessa o lote inteiro** e **pausa o shard**, e é por isso que o primeiro sintoma de um registro ruim é um `IteratorAge` subindo, não uma taxa de erro. Os padrões são **infinitos**, então um único registro venenoso pode bloquear um stream do DynamoDB por **até um dia** e um shard do Kinesis por **até uma semana** (documentação de erros do DynamoDB/Kinesis do AWS Lambda, acesso em outubro de 2026).
 
 ### 4.2 Concorrência: reserved versus provisioned
 
@@ -450,13 +450,13 @@ A AWS dá a toda conta um pool de **1,000 execuções concorrentes por região**
 | | **Não reservado** | **Reservado** | **Provisionado** |
 |---|---|---|---|
 | O que é | O que sobra do pool de 1,000 | Um **mínimo *e* máximo** rígido para uma função | Ambientes de execução pré-aquecidos |
-| Preço | — | **Grátis** | **Cobrado** (por GB-s e por hora, cobrança de 1 ms) |
-| Aplica-se a | — | Qualquer função | Apenas **versões e aliases** de função |
-| Uso canônico | Tráfego best-effort | **Garantir a capacidade de um pipeline**, *ou* **limitar uma função para que um pool pequeno de banco de dados não seja sobrecarregado** | **Latência interativa** — reduzindo cold starts |
+| Preço |: | **Grátis** | **Cobrado** (por GB-s e por hora, cobrança de 1 ms) |
+| Aplica-se a |: | Qualquer função | Apenas **versões e aliases** de função |
+| Uso canônico | Tráfego best-effort | **Garantir a capacidade de um pipeline**, *ou* **limitar uma função para que um pool pequeno de banco de dados não seja sobrecarregado** | **Latência interativa**: reduzindo cold starts |
 
-**Aritmética de dimensionamento:** concorrência necessária ≈ `requisições/segundo × duração em segundos`, e a orientação de provisionamento da AWS acrescenta **~10%** de folga. Concorrência provisionada **não** é a resposta para "meu pipeline assíncrono deveria começar rápido" — a AWS afirma que pipelines assíncronos normalmente não precisam dela (documentação de concorrência do AWS Lambda, acesso em outubro de 2026).
+**Aritmética de dimensionamento:** concorrência necessária ≈ `requisições/segundo × duração em segundos`, e a orientação de provisionamento da AWS acrescenta **~10%** de folga. Concorrência provisionada **não** é a resposta para "meu pipeline assíncrono deveria começar rápido": a AWS afirma que pipelines assíncronos normalmente não precisam dela (documentação de concorrência do AWS Lambda, acesso em outubro de 2026).
 
-#### Exemplo resolvido E4 — dimensionamento de concorrência
+#### Exemplo resolvido E4: dimensionamento de concorrência
 
 ```text
 Peak: 200 concurrent invocations, average duration 250 ms
@@ -476,8 +476,8 @@ Requests per second ceiling at 200 concurrency:
 
 | Configuração | Valor (em outubro de 2026) |
 |---|---|
-| Timeout | **1–900 s**, padrão do console de **3 s**, teto rígido de **900 s (15 min)** |
-| Memória | **128–10,240 MB** em incrementos de **1 MB** |
+| Timeout | **1 to 900 s**, padrão do console de **3 s**, teto rígido de **900 s (15 min)** |
+| Memória | **128 to 10,240 MB** em incrementos de **1 MB** |
 | **1,769 MB** | ≈ **1 vCPU** |
 | **10,240 MB** | ≈ **6 vCPUs** |
 | `/tmp` | **512 MB grátis**, depois cobrados, até **10,240 MB** |
@@ -486,7 +486,7 @@ Requests per second ceiling at 200 concurrency:
 | Imagem de container | **10 GB** |
 | Armazenamento de código | **300 GB descompactado**, não elevável |
 
-#### Exemplo resolvido E5 — memória, CPU e custo unitário
+#### Exemplo resolvido E5: memória, CPU e custo unitário
 
 ```text
 Job needs about 1 vCPU. Current setting 1,024 MB (~0.6 vCPU) is too slow.
@@ -509,11 +509,11 @@ Monthly at 10 million invocations:
 ### 4.4 Layers, variáveis de ambiente e `/tmp`
 
 - **Layers** são a história de reuso orientado a objetos (Seção 1.5): **≤5**, **somente zip**, montadas em **`/opt`**. Uma função com imagem de container não pode usar layers.
-- **Variáveis de ambiente** são limitadas a **4 KB no agregado** e são **legíveis através da API** — então são configuração, **não um cofre de segredos**. Segredos pertencem ao **AWS Secrets Manager** ou ao **Systems Manager Parameter Store**, criptografados com **KMS**.
+- **Variáveis de ambiente** são limitadas a **4 KB no agregado** e são **legíveis através da API**, então são configuração, **não um cofre de segredos**. Segredos pertencem ao **AWS Secrets Manager** ou ao **Systems Manager Parameter Store**, criptografados com **KMS**.
 - **`/tmp`** é **transiente e por ambiente de execução**: sobrevive a invocações quentes do *mesmo* ambiente e desaparece quando o ambiente é reciclado. É um **cache**, nunca estado durável, e os primeiros **512 MB** são grátis (em outubro de 2026).
-- **Montagem de armazenamento:** a Tarefa 1.4 nomeia explicitamente *montar volumes de armazenamento no Lambda* — o **Amazon EFS** é a resposta durável e multiambiente; o `/tmp` é a efêmera.
+- **Montagem de armazenamento:** a Tarefa 1.4 nomeia explicitamente *montar volumes de armazenamento no Lambda*, o **Amazon EFS** é a resposta durável e multiambiente; o `/tmp` é a efêmera.
 
-#### Exemplo resolvido E6 — o Lambda é o runtime certo afinal?
+#### Exemplo resolvido E6, o Lambda é o runtime certo afinal?
 
 ```text
 Requirement: a nightly Python merge of three CSV files, single node,
@@ -540,8 +540,8 @@ Esta tabela é o artefato único de maior rendimento da Tarefa 1.4. Cada linha �
 |---|---|---|
 | Transformação de evento, segundos a minutos, escala de GB | **AWS Lambda** | Teto de **900 s**, memória de **10,240 MB**, cobrado por requisição + GB-s, sem capacidade ociosa |
 | pandas em nó único, **mais de 15 min ou cerca de 10 GB** | **AWS Glue Python shell** | **0,0625 / 1 DPU**, cerca de **10 GB**, timeout muito mais longo que os 15 minutos rígidos do Lambda |
-| ETL distribuído, joins, GB–TB, precisa do **Data Catalog** | **AWS Glue Spark (ETL)** | **2–100 DPU** (padrão **10**), **1 DPU = 4 vCPU + 16 GB**; espere **~2–3 min** de startup |
-| Imagem de container, **horas**, fila + capacidade **Spot** | **AWS Batch** | Job Docker numa fila e num ambiente de compute; o overhead de scheduling exige fazer binpack de jobs para **3–5 minutos** ou mais |
+| ETL distribuído, joins, GB: TB, precisa do **Data Catalog** | **AWS Glue Spark (ETL)** | **2 to 100 DPU** (padrão **10**), **1 DPU = 4 vCPU + 16 GB**; espere **~2 to 3 min** de startup |
+| Imagem de container, **horas**, fila + capacidade **Spot** | **AWS Batch** | Job Docker numa fila e num ambiente de compute; o overhead de scheduling exige fazer binpack de jobs para **3 to 5 minutos** ou mais |
 | Estado Spark/Hadoop existente, escala de **petabytes** | **Amazon EMR** / EMR Serverless | Você traz a versão do framework e a configuração do cluster |
 | Transformação só de SQL já no warehouse | **Amazon Redshift** ELT | Funções de janela, PIVOT, SUPER e `COPY` ficam dentro do motor |
 
@@ -561,7 +561,7 @@ flowchart TD
     W -->|Não| O["Aterrissar como Parquet e deixar Athena ou Spectrum ler"]
 ```
 
-### 5.2 Exemplo resolvido E7 — o mesmo job em dois runtimes
+### 5.2 Exemplo resolvido E7, o mesmo job em dois runtimes
 
 ```text
 Job: 1.44 million invocations per month, 300 ms each, 512 MB
@@ -583,9 +583,9 @@ Delta: about 98x cheaper on Lambda - because the work is
 INVOCATION-SHAPED, not JOB-SHAPED.
 ```
 
-A lição não é "Lambda é sempre mais barato" — é que **o preço segue a forma do trabalho**. Um merge noturno de 40 minutos não roda no Lambda a nenhum preço (o teto de **900 s**), e um job de 2 segundos não justifica o **AWS Batch**, onde o overhead de scheduling pode exceder o runtime.
+A lição não é "Lambda é sempre mais barato": é que **o preço segue a forma do trabalho**. Um merge noturno de 40 minutos não roda no Lambda a nenhum preço (o teto de **900 s**), e um job de 2 segundos não justifica o **AWS Batch**, onde o overhead de scheduling pode exceder o runtime.
 
-- **📚 Você sabia?** A própria orientação de Glue da AWS põe o custo de startup por escrito: jobs do Glue Spark normalmente gastam **2–3 minutos** antes da primeira task rodar, o que é *mais* runtime do que o próprio job para payloads abaixo de 100 MB. É por isso que os enunciados "pequenos, frequentes, orientados a eventos" do exame apontam para o Lambda e os enunciados "grandes, agendados, cheios de join" apontam para o Glue — e por que um enunciado que diz *"arquivos pequenos e frequentes chegando a cada poucos segundos"* geralmente está dizendo para você rejeitar tanto o Glue **quanto** o Batch (documentação de boas práticas do AWS Glue e do AWS Batch, acesso em outubro de 2026).
+- **📚 Você sabia?** A própria orientação de Glue da AWS põe o custo de startup por escrito: jobs do Glue Spark normalmente gastam **2 to 3 minutos** antes da primeira task rodar, o que é *mais* runtime do que o próprio job para payloads abaixo de 100 MB. É por isso que os enunciados "pequenos, frequentes, orientados a eventos" do exame apontam para o Lambda e os enunciados "grandes, agendados, cheios de join" apontam para o Glue, e por que um enunciado que diz *"arquivos pequenos e frequentes chegando a cada poucos segundos"* geralmente está dizendo para você rejeitar tanto o Glue **quanto** o Batch (documentação de boas práticas do AWS Glue e do AWS Batch, acesso em outubro de 2026).
 
 ---
 
@@ -593,7 +593,7 @@ A lição não é "Lambda é sempre mais barato" — é que **o preço segue a f
 
 ### 6.1 Entrega at-least-once, *efeito* exactly-once
 
-Streams e filas — Kinesis, SQS, DynamoDB Streams, MSK — entregam **at-least-once** por padrão. Não existe transporte exactly-once de ponta a ponta. O que os pipelines constroem em vez disso é um **efeito exactly-once**: **entrega at-least-once + um efeito colateral idempotente** (AWS Big Data Blog, *Build a fault-tolerant serverless data aggregation pipeline with exactly-once processing*, 2021-11-01).
+Streams e filas, Kinesis, SQS, DynamoDB Streams, MSK, entregam **at-least-once** por padrão. Não existe transporte exactly-once de ponta a ponta. O que os pipelines constroem em vez disso é um **efeito exactly-once**: **entrega at-least-once + um efeito colateral idempotente** (AWS Big Data Blog, *Build a fault-tolerant serverless data aggregation pipeline with exactly-once processing*, 2021-11-01).
 
 | Caixa de ferramentas | Mecanismo | Quando |
 |---|---|---|
@@ -658,7 +658,7 @@ flowchart TD
     K --> R["Cauda atrasada tratada por reconciliação periódica em batch"]
 ```
 
-#### Exemplo resolvido E8 — a janela segura
+#### Exemplo resolvido E8: a janela segura
 
 ```text
 Watermark at 2026-02-01, allowed lateness 2 days.
@@ -692,7 +692,7 @@ Cost of widening the window to 7 days: every run re-reads 7 days
 
 ### 6.3 Tratamento de poison pill: a escada
 
-Um **poison pill** é um registro que sempre lança exceção. Como um ESM reexecuta o **lote inteiro** e **pausa o shard**, um registro ruim pode parar um stream inteiro — e os padrões são infinitos:
+Um **poison pill** é um registro que sempre lança exceção. Como um ESM reexecuta o **lote inteiro** e **pausa o shard**, um registro ruim pode parar um stream inteiro, e os padrões são infinitos:
 
 ```mermaid
 flowchart TD
@@ -718,24 +718,24 @@ flowchart TD
 {
   "question": "Coloque a escada de tratamento de poison pill na ordem em que um engenheiro de dados a aplica, do primeiro controle que não custa nada até a última linha de defesa:",
   "items": [
-    "ReportBatchItemFailures - concluir o lote e reportar apenas o registro que falhou, para que registros bons não sejam reexecutados",
-    "BisectBatchOnFunctionError - dividir ao meio o lote que falha repetidamente até isolar o registro culpado",
+    "ReportBatchItemFailures, concluir o lote e reportar apenas o registro que falhou, para que registros bons não sejam reexecutados",
+    "BisectBatchOnFunctionError: dividir ao meio o lote que falha repetidamente até isolar o registro culpado",
     "Limitar MaximumRetryAttempts (0 a 10,000) e MaximumRecordAgeInSeconds (até 604,800 s) para que o retry infinito se torne um estancamento limitado",
-    "Destino OnFailure ou uma dead-letter queue do SQS - estacionar os registros ruins para inspeção em vez de bloquear o shard",
-    "Reprodução deliberada a partir da DLQ - segura só porque o sink foi tornado idempotente na Seção 6.1"
+    "Destino OnFailure ou uma dead-letter queue do SQS: estacionar os registros ruins para inspeção em vez de bloquear o shard",
+    "Reprodução deliberada a partir da DLQ: segura só porque o sink foi tornado idempotente na Seção 6.1"
   ],
   "correctOrder": [
-    "ReportBatchItemFailures - concluir o lote e reportar apenas o registro que falhou, para que registros bons não sejam reexecutados",
-    "BisectBatchOnFunctionError - dividir ao meio o lote que falha repetidamente até isolar o registro culpado",
+    "ReportBatchItemFailures, concluir o lote e reportar apenas o registro que falhou, para que registros bons não sejam reexecutados",
+    "BisectBatchOnFunctionError: dividir ao meio o lote que falha repetidamente até isolar o registro culpado",
     "Limitar MaximumRetryAttempts (0 a 10,000) e MaximumRecordAgeInSeconds (até 604,800 s) para que o retry infinito se torne um estancamento limitado",
-    "Destino OnFailure ou uma dead-letter queue do SQS - estacionar os registros ruins para inspeção em vez de bloquear o shard",
-    "Reprodução deliberada a partir da DLQ - segura só porque o sink foi tornado idempotente na Seção 6.1"
+    "Destino OnFailure ou uma dead-letter queue do SQS: estacionar os registros ruins para inspeção em vez de bloquear o shard",
+    "Reprodução deliberada a partir da DLQ: segura só porque o sink foi tornado idempotente na Seção 6.1"
   ],
-  "explanation": "A escada vai do mais barato e menos disruptivo para o mais deliberado: primeiro pare de reexecutar registros bem-sucedidos (ReportBatchItemFailures), depois isole o culpado (BisectBatchOnFunctionError), depois limite o orçamento de retry para que um único registro não consiga estancar o shard por um dia ou uma semana (MaximumRetryAttempts e MaximumRecordAgeInSeconds), depois desvie o que resta para um destino OnFailure ou uma DLQ, e só então reproduza. A reprodução é o último passo porque é o único que pode criar duplicatas - e é por isso que as chaves determinísticas e o partition overwrite ou MERGE da Seção 6.1 precisam estar em vigor antes de você puxar a DLQ pela primeira vez. Os padrões sem esta escada são infinitos: até um dia bloqueado num stream do DynamoDB e até uma semana num shard do Kinesis (documentação de event source mapping do AWS Lambda, acesso em outubro de 2026)."
+  "explanation": "A escada vai do mais barato e menos disruptivo para o mais deliberado: primeiro pare de reexecutar registros bem-sucedidos (ReportBatchItemFailures), depois isole o culpado (BisectBatchOnFunctionError), depois limite o orçamento de retry para que um único registro não consiga estancar o shard por um dia ou uma semana (MaximumRetryAttempts e MaximumRecordAgeInSeconds), depois desvie o que resta para um destino OnFailure ou uma DLQ, e só então reproduza. A reprodução é o último passo porque é o único que pode criar duplicatas: e é por isso que as chaves determinísticas e o partition overwrite ou MERGE da Seção 6.1 precisam estar em vigor antes de você puxar a DLQ pela primeira vez. Os padrões sem esta escada são infinitos: até um dia bloqueado num stream do DynamoDB e até uma semana num shard do Kinesis (documentação de event source mapping do AWS Lambda, acesso em outubro de 2026)."
 }
 ```
 
-#### Exemplo resolvido E9 — de um estancamento de uma semana para uma hora
+#### Exemplo resolvido E9: de um estancamento de uma semana para uma hora
 
 ```text
 BEFORE (defaults): one bad Kinesis record
@@ -765,15 +765,15 @@ sink idempotent - otherwise replaying is how you double the table.
 
 | | **Schema-on-write** | **Schema-on-read** |
 |---|---|---|
-| Quando o schema é aplicado | **No load** — defina e imponha antes dos dados aterrissarem | **Na hora da consulta** — aterre cru, aplique o schema quando ler |
+| Quando o schema é aplicado | **No load**, defina e imponha antes dos dados aterrissarem | **Na hora da consulta**, aterre cru, aplique o schema quando ler |
 | Forma típica de serviço | Definições de tabela e constraints do Amazon Redshift | **Amazon S3 + AWS Glue Data Catalog + Amazon Athena** |
-| Desempenho de consulta | Mais rápido — tipos e layouts já estão fixos | Mais lento por consulta — parsing e coação acontecem na leitura |
+| Desempenho de consulta | Mais rápido, tipos e layouts já estão fixos | Mais lento por consulta, parsing e coação acontecem na leitura |
 | Custo de um erro | Rejeitar o load, corrigir a montante | **O drift aparece como erro do consumidor** |
-| Flexibilidade | Baixa — contrato antecipadamente | Alta — novos consumidores, novas formas |
+| Flexibilidade | Baixa, contrato antecipadamente | Alta, novos consumidores, novas formas |
 | Resposta no exame | Warehouses e camadas de serving curadas | Data lakes e zonas raw/bronze |
 
 > [!IMPORTANT]
-> **Schema-on-read não significa "nenhum trabalho de schema".** A própria orientação de arquitetura da AWS é manter uma **camada raw armazenada como está** e colocar uma **camada padronizada com validação de schema e controle de evolução** acima dela — uma camada de contrato. Sem ela, o drift de schema na zona raw se torna uma **indisponibilidade do lado do consumidor**, que é o modo de falha que uma questão vai descrever quando quiser essa resposta (AWS Prescriptive Guidance, *Modern data architecture*, acesso em outubro de 2026).
+> **Schema-on-read não significa "nenhum trabalho de schema".** A própria orientação de arquitetura da AWS é manter uma **camada raw armazenada como está** e colocar uma **camada padronizada com validação de schema e controle de evolução** acima dela: uma camada de contrato. Sem ela, o drift de schema na zona raw se torna uma **indisponibilidade do lado do consumidor**, que é o modo de falha que uma questão vai descrever quando quiser essa resposta (AWS Prescriptive Guidance, *Modern data architecture*, acesso em outubro de 2026).
 
 ### 7.2 Achatando dados aninhados, por motor
 
@@ -796,7 +796,7 @@ CROSS JOIN UNNEST(e.items) AS i (sku, qty, price);
 -- use LEFT JOIN UNNEST (or explode_outer) when you must keep the parent.
 ```
 
-Duas consequências que valem a pena decorar: **um array NULL produz nenhuma linha** sob um cross-unnest (encolhendo seu resultado em silêncio), e um **schema explícito na leitura vence a inferência de schema** — a inferência é conveniente uma vez e imprevisível para sempre.
+Duas consequências que valem a pena decorar: **um array NULL produz nenhuma linha** sob um cross-unnest (encolhendo seu resultado em silêncio), e um **schema explícito na leitura vence a inferência de schema**: a inferência é conveniente uma vez e imprevisível para sempre.
 
 ### 7.3 O formato segue o padrão de acesso, e o formato *é* o custo
 
@@ -813,7 +813,7 @@ serving         : Athena / Redshift Spectrum / QuickSight
                   - Athena bills BYTES SCANNED, so pruning IS the bill
 ```
 
-#### Exemplo resolvido E10 — a decisão de formato, precificada
+#### Exemplo resolvido E10: a decisão de formato, precificada
 
 ```text
 Scenario: 1 TB table, a query touching 3 of 30 columns.
@@ -831,48 +831,48 @@ RECURRING saving - which is why "convert to Parquet" is almost
 always the right answer in an Athena cost stem.
 ```
 
-- **📚 Você sabia?** A questão de linhagem adora o contraste entre os quatro formatos porque é puramente *forma*: **CSV** não tem schema e não tem pruning, **JSON** aninha mas precisa ser parseado inteiro, **Avro** carrega seu **schema no header** e é **divisível** — que é exatamente por que jobs de streaming e de evolução de schema o preferem — e **Parquet/ORC** são **colunares**, que é por que os motores de analítica o preferem. A memória de uma linha é *Avro/JSON para movê-lo, Parquet/ORC para lê-lo* (orientação de formatos do AWS Glue e do Athena, acesso em outubro de 2026).
+- **📚 Você sabia?** A questão de linhagem adora o contraste entre os quatro formatos porque é puramente *forma*: **CSV** não tem schema e não tem pruning, **JSON** aninha mas precisa ser parseado inteiro, **Avro** carrega seu **schema no header** e é **divisível**, que é exatamente por que jobs de streaming e de evolução de schema o preferem, e **Parquet/ORC** são **colunares**, que é por que os motores de analítica o preferem. A memória de uma linha é *Avro/JSON para movê-lo, Parquet/ORC para lê-lo* (orientação de formatos do AWS Glue e do Athena, acesso em outubro de 2026).
 
 ---
 
 ### Atualizações de 2026 (em outubro de 2026)
 
 > [!NOTE]
-> **O que mudou em programação e operações de dados entre 2024 e outubro de 2026** — cada linha foi conferida contra uma fonte primária da AWS em **outubro de 2026**, e cada uma é examinável porque o exame testa o comportamento *atual*:
-> - **O próprio guia do exame foi reconstruído**: o **v1.1 (2025-12-12)** consolidou as listas separadas de "Knowledge of" e "Skills in" em **uma única lista de habilidades por tarefa**, adicionando **8 habilidades e nenhuma removida**; **Cloud9, CodeCommit e AWS Schema Conversion Tool** saíram da lista no escopo, então **as questões de Git permanecem genéricas** (clone, commit, branch, merge) e nunca nomeiam um serviço Git específico da AWS — revisões do guia do exame DEA-C01 e páginas no escopo, acesso em outubro de 2026.
-> - **As gerações de runtime do Glue avançaram**: o **Glue 5.1 virou o padrão para jobs novos em 2025-11-26** (Spark 3.5.6), e o **Glue 6.0 foi para GA em 2026-08-21** com **Spark 4.1.1, Python 3.13, Scala 2.13** e **redução de preço de 30%**; Glue **0.9/1.0/2.0 chegou ao end of life em 2026-04-01**, e o **Python Shell 3.6** não pode mais ser criado depois de **2026-03-31** — notas de versão do AWS Glue, política de suporte a versões e What's New, acesso em outubro de 2026. Um enunciado que fixa uma versão do Glue em EOL é uma resposta errada.
-> - **O Glue 6.0 remove dois caminhos de compatibilidade**: **o EMRFS foi embora** (o S3A é o único filesystem do S3) e o **AWS SDK for Java v1 foi removido** — AWS Glue, *Migrating to version 6.0*, acesso em outubro de 2026. Qualquer alternativa que dependa de `fs.s3.consistent.*` ou de imports `com.amazonaws.*` está obsoleta.
-> - **Os UDFs de Python do Redshift estão sendo aposentados**: **sem novos UDFs escalares de Python depois de 2025-10-30** e **sem suporte depois de 2026-06-30** — página de mudanças de comportamento do Amazon Redshift, acesso em outubro de 2026. Isso remodela diretamente a escada de UDF da Seção 2.4: no Redshift, a resposta amigável ao exame migra para **SQL, stored procedures e ML**, não para novos UDFs de Python.
-> - **O piso de custo do Athena caiu**: os **resultados de consulta gerenciados** (2025-06-03) são criptografados, gerenciados pelo serviço e **não custam nada extra** — nenhum bucket de resultados obrigatório — e as **Capacity Reservations agora começam em 4 DPU por 1 minuto** (eram 24 DPU / 60 min) a partir de **2026-02-11** — AWS What's New e blog de controle de capacidade do Athena, acesso em outubro de 2026.
-> - **O Kinesis Data Streams agora tem três modos de capacidade**: Provisioned, On-demand Standard e **On-demand Advantage (2025-11-04)**, que remove a cobrança horária por stream mas aplica um **piso de 25 MB/s de ingestão + 25 MB/s de recuperação** em toda a conta; a partir de **2026-08-28** um stream pode ser materializado diretamente em **Iceberg em S3 Tables** — AWS What's New, acesso em outubro de 2026. "Kinesis tem dois modos de capacidade" agora é uma afirmação obsoleta.
-> - **Os workers do EMR Serverless cresceram**: **até 32 vCPU / 244 GB por worker** a partir de **2026-07-07**, com armazenamento local de jobs Spark de **200 GiB → 1 TiB** — AWS What's New, acesso em outubro de 2026.
-> - **Aviso de fato obsoleto — fósseis de nome de serviço**: a lista no escopo do guia ainda imprime **"Amazon Kinesis Data Firehose"**, enquanto o produto é **Amazon Data Firehose** desde **2024-02-09** com **nenhuma mudança de API, endpoint, CLI, policy ou métrica**. Qualquer um dos nomes é válido — nunca "corrija" uma alternativa que usa o antigo (AWS What's New, 2024-02-09).
-> - **O Redshift agora grava no lake, não só lê**: as escritas em Iceberg foram para GA em **2025-11-17** (CREATE/SHOW/DROP mais INSERT append-only, catalogadas no **Glue Data Catalog**), **UPDATE / DELETE / MERGE** vieram em **2026-04-23** (incluindo **Amazon S3 Tables** e permissões do Lake Formation), e as **materialized views do Iceberg** chegaram em **2026-10-05** — e as permissões apertaram junto: numa tabela do Lake Formation um **DELETE** em Iceberg precisa de **DELETE**, **UPDATE/MERGE** precisam de **INSERT + DELETE**, e **toda** instrução DML de Iceberg também precisa de **ALTER** — What's New e página de mudanças de comportamento do Amazon Redshift (Patch 202), acesso em outubro de 2026. Qualquer alternativa dizendo que o Redshift só consegue *consultar* Iceberg está obsoleta, e uma grant de laboratório apenas de INSERT não roda mais um `MERGE`.
-> - **Step Functions virou um motor de fan-out de primeira classe para jobs de dados**: o **Distributed Map** ganhou **manifests do Athena e entradas em Parquet** mais **iteração por prefixo do S3** (`LOAD_AND_FLATTEN`) em **2025-09-18**, e em **2026-03-26** a AWS adicionou **28 serviços / 1,100+ integrações de AWS SDK**, levando o total a **mais de 220 serviços da AWS** (incluindo Bedrock AgentCore e S3 Vectors). Decorre os limites divididos: **Distributed Map ≤ 10,000 filhos** com origem no S3 em CSV/JSON/JSONL/Parquet, versus **Inline Map ≤ 40 filhos concorrentes**, somente array JSON, payload de gatilho de 256 KiB — documentação de recent launches e de Map state do AWS Step Functions, acesso em outubro de 2026. Esta é a linha "loops → estado Map" da Seção 1.4 tornada diretamente testável.
-> - **O compartilhamento de dados entre contas virou uma operação de um único share**: **AWS Lake Formation cross-account sharing v5 (2026-02-11)** permite que um único share do **AWS RAM** carregue **centenas de milhares de tabelas** usando **patterns curinga** em vez de associações por recurso, compõe com resource links entre regiões para Athena/EMR/Glue ETL, mantém todo share e API existentes funcionando e é **opt-in** — AWS What's New, acesso em outubro de 2026. Combine com as permissões apertadas do Redshift em Iceberg acima: compartilhar ficou mais fácil enquanto as permissões de escrita ficaram mais rígidas.
+> **O que mudou em programação e operações de dados entre 2024 e outubro de 2026**: cada linha foi conferida contra uma fonte primária da AWS em **outubro de 2026**, e cada uma é examinável porque o exame testa o comportamento *atual*:
+> - **O próprio guia do exame foi reconstruído**: o **v1.1 (2025-12-12)** consolidou as listas separadas de "Knowledge of" e "Skills in" em **uma única lista de habilidades por tarefa**, adicionando **8 habilidades e nenhuma removida**; **Cloud9, CodeCommit e AWS Schema Conversion Tool** saíram da lista no escopo, então **as questões de Git permanecem genéricas** (clone, commit, branch, merge) e nunca nomeiam um serviço Git específico da AWS: revisões do guia do exame DEA-C01 e páginas no escopo, acesso em outubro de 2026.
+> - **As gerações de runtime do Glue avançaram**: o **Glue 5.1 virou o padrão para jobs novos em 2025-11-26** (Spark 3.5.6), e o **Glue 6.0 foi para GA em 2026-08-21** com **Spark 4.1.1, Python 3.13, Scala 2.13** e **redução de preço de 30%**; Glue **0.9/1.0/2.0 chegou ao end of life em 2026-04-01**, e o **Python Shell 3.6** não pode mais ser criado depois de **2026-03-31**: notas de versão do AWS Glue, política de suporte a versões e What's New, acesso em outubro de 2026. Um enunciado que fixa uma versão do Glue em EOL é uma resposta errada.
+> - **O Glue 6.0 remove dois caminhos de compatibilidade**: **o EMRFS foi embora** (o S3A é o único filesystem do S3) e o **AWS SDK for Java v1 foi removido**: AWS Glue, *Migrating to version 6.0*, acesso em outubro de 2026. Qualquer alternativa que dependa de `fs.s3.consistent.*` ou de imports `com.amazonaws.*` está obsoleta.
+> - **Os UDFs de Python do Redshift estão sendo aposentados**: **sem novos UDFs escalares de Python depois de 2025-10-30** e **sem suporte depois de 2026-06-30**: página de mudanças de comportamento do Amazon Redshift, acesso em outubro de 2026. Isso remodela diretamente a escada de UDF da Seção 2.4: no Redshift, a resposta amigável ao exame migra para **SQL, stored procedures e ML**, não para novos UDFs de Python.
+> - **O piso de custo do Athena caiu**: os **resultados de consulta gerenciados** (2025-06-03) são criptografados, gerenciados pelo serviço e **não custam nada extra**: nenhum bucket de resultados obrigatório, e as **Capacity Reservations agora começam em 4 DPU por 1 minuto** (eram 24 DPU / 60 min) a partir de **2026-02-11**: AWS What's New e blog de controle de capacidade do Athena, acesso em outubro de 2026.
+> - **O Kinesis Data Streams agora tem três modos de capacidade**: Provisioned, On-demand Standard e **On-demand Advantage (2025-11-04)**, que remove a cobrança horária por stream mas aplica um **piso de 25 MB/s de ingestão + 25 MB/s de recuperação** em toda a conta; a partir de **2026-08-28** um stream pode ser materializado diretamente em **Iceberg em S3 Tables**: AWS What's New, acesso em outubro de 2026. "Kinesis tem dois modos de capacidade" agora é uma afirmação obsoleta.
+> - **Os workers do EMR Serverless cresceram**: **até 32 vCPU / 244 GB por worker** a partir de **2026-07-07**, com armazenamento local de jobs Spark de **200 GiB → 1 TiB**: AWS What's New, acesso em outubro de 2026.
+> - **Aviso de fato obsoleto, fósseis de nome de serviço**: a lista no escopo do guia ainda imprime **"Amazon Kinesis Data Firehose"**, enquanto o produto é **Amazon Data Firehose** desde **2024-02-09** com **nenhuma mudança de API, endpoint, CLI, policy ou métrica**. Qualquer um dos nomes é válido, nunca "corrija" uma alternativa que usa o antigo (AWS What's New, 2024-02-09).
+> - **O Redshift agora grava no lake, não só lê**: as escritas em Iceberg foram para GA em **2025-11-17** (CREATE/SHOW/DROP mais INSERT append-only, catalogadas no **Glue Data Catalog**), **UPDATE / DELETE / MERGE** vieram em **2026-04-23** (incluindo **Amazon S3 Tables** e permissões do Lake Formation), e as **materialized views do Iceberg** chegaram em **2026-10-05**, e as permissões apertaram junto: numa tabela do Lake Formation um **DELETE** em Iceberg precisa de **DELETE**, **UPDATE/MERGE** precisam de **INSERT + DELETE**, e **toda** instrução DML de Iceberg também precisa de **ALTER**, What's New e página de mudanças de comportamento do Amazon Redshift (Patch 202), acesso em outubro de 2026. Qualquer alternativa dizendo que o Redshift só consegue *consultar* Iceberg está obsoleta, e uma grant de laboratório apenas de INSERT não roda mais um `MERGE`.
+> - **Step Functions virou um motor de fan-out de primeira classe para jobs de dados**: o **Distributed Map** ganhou **manifests do Athena e entradas em Parquet** mais **iteração por prefixo do S3** (`LOAD_AND_FLATTEN`) em **2025-09-18**, e em **2026-03-26** a AWS adicionou **28 serviços / 1,100+ integrações de AWS SDK**, levando o total a **mais de 220 serviços da AWS** (incluindo Bedrock AgentCore e S3 Vectors). Decorre os limites divididos: **Distributed Map ≤ 10,000 filhos** com origem no S3 em CSV/JSON/JSONL/Parquet, versus **Inline Map ≤ 40 filhos concorrentes**, somente array JSON, payload de gatilho de 256 KiB: documentação de recent launches e de Map state do AWS Step Functions, acesso em outubro de 2026. Esta é a linha "loops → estado Map" da Seção 1.4 tornada diretamente testável.
+> - **O compartilhamento de dados entre contas virou uma operação de um único share**: **AWS Lake Formation cross-account sharing v5 (2026-02-11)** permite que um único share do **AWS RAM** carregue **centenas de milhares de tabelas** usando **patterns curinga** em vez de associações por recurso, compõe com resource links entre regiões para Athena/EMR/Glue ETL, mantém todo share e API existentes funcionando e é **opt-in**: AWS What's New, acesso em outubro de 2026. Combine com as permissões apertadas do Redshift em Iceberg acima: compartilhar ficou mais fácil enquanto as permissões de escrita ficaram mais rígidas.
 
-- **📚 Você sabia?** Nada no *ranking* de runtimes mudou entre 2024–2026, mesmo que quase todo número ao redor dele tenha mudado. O Lambda ainda para em **900 s** com CPU amarrada à memória, o Glue Python shell ainda roda em nó único a **0,0625 ou 1 DPU** muito além de 15 minutos, e o Glue Spark ainda começa em **2 DPU** com **~2–3 minutos** de startup — enquanto o que se moveu foi tudo *ao redor* desses tetos (Glue **6.0** em **2026-08-21**, workers do EMR Serverless até **32 vCPU / 244 GB**, Capacity Reservations do Athena até **4 DPU por 1 minuto**). É por isso que a matriz de decisão da Seção 5 sobrevive ao ruído das notas de versão: ela está ancorada na *forma* do trabalho — duração, tamanho, frequência, distribuição — e não em um número de versão (AWS What's New e documentação de serviços, acesso em outubro de 2026).
+- **📚 Você sabia?** Nada no *ranking* de runtimes mudou entre 2024 to 2026, mesmo que quase todo número ao redor dele tenha mudado. O Lambda ainda para em **900 s** com CPU amarrada à memória, o Glue Python shell ainda roda em nó único a **0,0625 ou 1 DPU** muito além de 15 minutos, e o Glue Spark ainda começa em **2 DPU** com **~2 to 3 minutos** de startup: enquanto o que se moveu foi tudo *ao redor* desses tetos (Glue **6.0** em **2026-08-21**, workers do EMR Serverless até **32 vCPU / 244 GB**, Capacity Reservations do Athena até **4 DPU por 1 minuto**). É por isso que a matriz de decisão da Seção 5 sobrevive ao ruído das notas de versão: ela está ancorada na *forma* do trabalho: duração, tamanho, frequência, distribuição, e não em um número de versão (AWS What's New e documentação de serviços, acesso em outubro de 2026).
 
 ---
 
 ## Casos Reais
 
-A AWS publica como essas abstrações aparecem em produção. Todo número abaixo é **afirmação do cliente ou da AWS e não auditado**, com a fonte nomeada para que você possa conferir — o ponto examinável é o **padrão** (qual decisão de programação foi aplicada, qual serviço fez o trabalho, qual número se moveu), não o marketing.
+A AWS publica como essas abstrações aparecem em produção. Todo número abaixo é **afirmação do cliente ou da AWS e não auditado**, com a fonte nomeada para que você possa conferir, o ponto examinável é o **padrão** (qual decisão de programação foi aplicada, qual serviço fez o trabalho, qual número se moveu), não o marketing.
 
-### Caso A — EMX: uma exchange programática reconstruída sobre S3 e Athena
+### Caso A, EMX: uma exchange programática reconstruída sobre S3 e Athena
 
 | Elemento | Detalhe |
 |---|---|
 | Cliente | **EMX**, uma exchange programática de mídia/publicidade que processa mais de **2 TB de dados brutos por hora** |
 | Desafio | Custos de ETL e armazenamento de backend que cresciam linearmente com a ingestão, num workload que era majoritariamente consulta ad hoc |
-| Serviços | **Amazon S3** como armazenamento mais **Amazon Athena** como camada de consulta — nenhum cluster de warehouse no caminho de serving |
+| Serviços | **Amazon S3** como armazenamento mais **Amazon Athena** como camada de consulta: nenhum cluster de warehouse no caminho de serving |
 | Resultados | **85% de economia nos custos de armazenamento de dados**; consultas reportadas como **"pelo menos quatro vezes mais baratas que outras ferramentas de ETL de backend"** (afirmação do cliente, acesso em outubro de 2026) |
 | Domínio do exame | **Domínio 1** Tarefa 1.4 (escolher o runtime e o formato certos) com ganchos de custo do Domínio 3 |
 | Fonte | AWS Big Data Blog, *How EMX reduced data pipeline costs by 85% with Amazon Athena*, 2021-02-02 (acesso em outubro de 2026) |
 
-Leia a EMX como **a Seção 7.3 em produção**: a economia veio de *onde a computação acontece e quanto do arquivo é lido*, não de um desconto. O Athena cobra **bytes escaneados**, então aterrar arquivos colunares e fazer pruning deles com partições é uma **decisão de programação** — a mesma decisão de escolher uma função de janela em vez de um loop em Python.
+Leia a EMX como **a Seção 7.3 em produção**: a economia veio de *onde a computação acontece e quanto do arquivo é lido*, não de um desconto. O Athena cobra **bytes escaneados**, então aterrar arquivos colunares e fazer pruning deles com partições é uma **decisão de programação**: a mesma decisão de escolher uma função de janela em vez de um loop em Python.
 
-### Caso B — AppsFlyer: um workload interativo tirado do HBase para o Athena
+### Caso B, AppsFlyer: um workload interativo tirado do HBase para o Athena
 
 | Elemento | Detalhe |
 |---|---|
@@ -883,9 +883,9 @@ Leia a EMX como **a Seção 7.3 em produção**: a economia veio de *onde a comp
 | Domínio do exame | **Domínio 1** Tarefa 1.4 (seleção de runtime e otimização de consultas) com ganchos de custo do Domínio 3 |
 | Fonte | AWS Big Data Blog, *How AppsFlyer modernized their interactive workload by moving to Amazon Amazon Athena and saved 80% of costs*, 2024-08-08 (acesso em outubro de 2026) |
 
-O ponto examinável é a **lógica de seleção**, não o percentual: uma armazenamento *de baixa latência e orientada a chave* (HBase) era a forma errada para um workload *analítico, de scan e filtro*, e a resposta foi mover o caminho de leitura para um **lake colunar mais um motor SQL serverless**. É a mesma bifurcação da Seção 5 — **escolha o runtime pela forma do trabalho** — e é por que "nós já temos um banco de dados, então consulte ele" é um distrator num enunciado de custo do Domínio 1.
+O ponto examinável é a **lógica de seleção**, não o percentual: uma armazenamento *de baixa latência e orientada a chave* (HBase) era a forma errada para um workload *analítico, de scan e filtro*, e a resposta foi mover o caminho de leitura para um **lake colunar mais um motor SQL serverless**. É a mesma bifurcação da Seção 5, **escolha o runtime pela forma do trabalho**, e é por que "nós já temos um banco de dados, então consulte ele" é um distrator num enunciado de custo do Domínio 1.
 
-### Caso C — Hearst: um pipeline de clickstream de 30 TB/dia construído sobre Kinesis
+### Caso C, Hearst: um pipeline de clickstream de 30 TB/dia construído sobre Kinesis
 
 | Elemento | Detalhe |
 |---|---|
@@ -896,9 +896,9 @@ O ponto examinável é a **lógica de seleção**, não o percentual: uma armaze
 | Domínio do exame | **Domínio 1** Tarefa 1.4 (fontes de eventos, streaming versus batch, serialização) com ingestão do Domínio 2 |
 | Fonte | Página de produto/cliente do Amazon Kinesis Data Streams, aws.amazon.com/kinesis/data-streams, acesso em outubro de 2026 |
 
-Leia a Hearst como **a Seção 4.1 em produção**. Escolher um *stream* em vez de um batch noturno é uma decisão de programação sobre **forma do evento e latência**, e o buffering e a entrega gerenciados do Firehose são precisamente o que remove as "semanas de engenharia" que o cliente descreve. Quando um enunciado diz *"arquivos pequenos e frequentes chegando a cada poucos segundos"*, a Hearst é a forma que ele está descrevendo — e a resposta é um stream mais um consumidor Lambda ou Kinesis (um **event source mapping** que faz polling e agrupa), nunca um job do Glue agendado cujo startup de **2–3 minutos** engole o trabalho.
+Leia a Hearst como **a Seção 4.1 em produção**. Escolher um *stream* em vez de um batch noturno é uma decisão de programação sobre **forma do evento e latência**, e o buffering e a entrega gerenciados do Firehose são precisamente o que remove as "semanas de engenharia" que o cliente descreve. Quando um enunciado diz *"arquivos pequenos e frequentes chegando a cada poucos segundos"*, a Hearst é a forma que ele está descrevendo, e a resposta é um stream mais um consumidor Lambda ou Kinesis (um **event source mapping** que faz polling e agrupa), nunca um job do Glue agendado cujo startup de **2 to 3 minutos** engole o trabalho.
 
-### Caso D — Nasdaq: uma bolsa desacopla seu caminho de escrita do caminho de leitura
+### Caso D, Nasdaq: uma bolsa desacopla seu caminho de escrita do caminho de leitura
 
 | Elemento | Detalhe |
 |---|---|
@@ -909,32 +909,32 @@ Leia a Hearst como **a Seção 4.1 em produção**. Escolher um *stream* em vez 
 | Domínio do exame | **Domínio 1** Tarefa 1.4 (particionamento, formato, armazenamento e computação desacoplados) com design de lake do Domínio 2 |
 | Fonte | Estudo de caso da AWS *Nasdaq*, aws.amazon.com/solutions/case-studies/nasdaq-case-study/, acesso em outubro de 2026 |
 
-A citação de engenharia por trás do caso é sobre **contenção**: com o S3 guardando os bytes e o Redshift guardando a computação, "carregar e consultar dados" para de disputar os mesmos recursos. Essa é a lição de partições da Seção 2.3 em escala — o lake é escrito num layout que o leitor pode fazer pruning, e o motor de consulta escala de forma independente da janela de ingestão. Note também o que o caso *não* é: não é uma afirmação de que o Redshift foi substituído. O Spectrum mantém o warehouse como motor SQL enquanto o S3 se torna a camada de armazenamento, que é exatamente o padrão de **lake house** que o exame testa.
+A citação de engenharia por trás do caso é sobre **contenção**: com o S3 guardando os bytes e o Redshift guardando a computação, "carregar e consultar dados" para de disputar os mesmos recursos. Essa é a lição de partições da Seção 2.3 em escala, o lake é escrito num layout que o leitor pode fazer pruning, e o motor de consulta escala de forma independente da janela de ingestão. Note também o que o caso *não* é: não é uma afirmação de que o Redshift foi substituído. O Spectrum mantém o warehouse como motor SQL enquanto o S3 se torna a camada de armazenamento, que é exatamente o padrão de **lake house** que o exame testa.
 
-### Caso E — PayU: consolidação, compartilhamento de dados, e então racionalização de demanda
+### Caso E, PayU: consolidação, compartilhamento de dados, e então racionalização de demanda
 
 | Elemento | Detalhe |
 |---|---|
 | Cliente | **PayU**, empresa de fintech/pagamentos |
 | Desafio | Consultas lentas e dados siloados em cerca de **40 bancos de dados de produção**, com frescor de dados limitado a uma vez por dia |
 | Serviços | ETL do **AWS Glue** → **Amazon S3** → **Amazon Redshift**, mais **Redshift Data Sharing** entre **5 clusters** (2 de ETL, 3 consumidores) |
-| Resultados | As consultas passaram de **10–15 minutos para menos de 1 minuto**; o frescor passou de **uma vez por dia para menos de 30 minutos**; cerca de **$20,000 por mês** economizados enquanto se escaneava cerca de **200 TB por dia**; o volume mensal de consultas caiu de **150,000 para 35,000 (−77%)** num único mês (afirmação do cliente, acesso em outubro de 2026) |
+| Resultados | As consultas passaram de **10 to 15 minutos para menos de 1 minuto**; o frescor passou de **uma vez por dia para menos de 30 minutos**; cerca de **$20,000 por mês** economizados enquanto se escaneava cerca de **200 TB por dia**; o volume mensal de consultas caiu de **150,000 para 35,000 (−77%)** num único mês (afirmação do cliente, acesso em outubro de 2026) |
 | Domínio do exame | **Domínio 1** Tarefa 1.4 (racionalização de consultas) com **Domínio 3** otimização de custos |
 | Fonte | Estudo de caso da AWS *PayU*, aws.amazon.com/solutions/case-studies/payu-redshift-case-study/, acesso em outubro de 2026 |
 
-Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O movimento de **plataforma** (40 bancos de dados → um warehouse mais S3, com o Data Sharing isolando consumidores sem copiar dados) comprou o frescor e a economia de **$20,000/mês**; o movimento de **demanda** (150,000 → 35,000 consultas por mês) é *menos consultas*, não consultas mais baratas. A AWS cita o cliente: **"Em 1 mês, reduzimos as consultas em 77 por cento, o que teria sido um exercício de 6 meses no ambiente anterior."** A lição para a Tarefa 1.4: **racionalize o workload antes de comprar capacidade** — uma CTE reescrita ou uma agregação em cache remove custo permanentemente, enquanto right-sizing apenas move a conta.
+Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O movimento de **plataforma** (40 bancos de dados → um warehouse mais S3, com o Data Sharing isolando consumidores sem copiar dados) comprou o frescor e a economia de **$20,000/mês**; o movimento de **demanda** (150,000 → 35,000 consultas por mês) é *menos consultas*, não consultas mais baratas. A AWS cita o cliente: **"Em 1 mês, reduzimos as consultas em 77 por cento, o que teria sido um exercício de 6 meses no ambiente anterior."** A lição para a Tarefa 1.4: **racionalize o workload antes de comprar capacidade**: uma CTE reescrita ou uma agregação em cache remove custo permanentemente, enquanto right-sizing apenas move a conta.
 
 | Caso | Decisão de programação que ele demonstra | Domínio |
 |---|---|---|
-| EMX | Formato e motor de consulta *são* o custo — colunar + SQL serverless | D1 Tarefa 1.4 |
+| EMX | Formato e motor de consulta *são* o custo: colunar + SQL serverless | D1 Tarefa 1.4 |
 | AppsFlyer | A seleção de runtime segue a forma do workload | D1 Tarefa 1.4 |
-| Hearst | A forma do evento decide o runtime — um stream mais entrega gerenciada vence um batch noturno a 30 TB/dia | D1 Tarefa 1.4 |
+| Hearst | A forma do evento decide o runtime: um stream mais entrega gerenciada vence um batch noturno a 30 TB/dia | D1 Tarefa 1.4 |
 | Nasdaq | Desacoplar o caminho de escrita do caminho de leitura para load e consulta pararem de disputar | D1 Tarefa 1.4 |
 | PayU | Racionalizar a demanda (150k → 35k consultas/mês) antes de comprar capacidade; Data Sharing isola consumidores sem cópias | D1 Tarefa 1.4 |
 
-- **📚 Você sabia?** Nenhum estudo de caso da AWS nomeia uma única função, classe ou biblioteca — a AWS publica os *resultados* e deixa o código para você. Isso espelha o próprio limite do exame: o DEA-C01 pede que você reconheça que **85% de economia de armazenamento num workload de consulta ad hoc** implica um **formato colunar mais um motor de bytes escaneados**, e que **80% de desconto num workload interativo** implica uma **reseleção de runtime**, nunca que você recorde o código de um cliente (estudos de caso do AWS Big Data Blog, acesso em outubro de 2026).
+- **📚 Você sabia?** Nenhum estudo de caso da AWS nomeia uma única função, classe ou biblioteca: a AWS publica os *resultados* e deixa o código para você. Isso espelha o próprio limite do exame: o DEA-C01 pede que você reconheça que **85% de economia de armazenamento num workload de consulta ad hoc** implica um **formato colunar mais um motor de bytes escaneados**, e que **80% de desconto num workload interativo** implica uma **reseleção de runtime**, nunca que você recorde o código de um cliente (estudos de caso do AWS Big Data Blog, acesso em outubro de 2026).
 
-- **📚 Você sabia?** O **Amazon Kinesis Data Streams foi lançado em 2013** e a AWS o chama de "o primeiro serviço de streaming de dados serverless nativo de nuvem" — é por isso que toda história de cliente escrita antes de 2024 usa nomes de serviço *antigos*. O **Kinesis Data Analytics** virou o **Amazon Managed Service for Apache Flink** em **2023-08-30**, e o **Kinesis Data Firehose** virou **Amazon Data Firehose** em **2024-02-09** com **nenhuma mudança de API** — a action de IAM continua `firehose:*`, e a lista no escopo do DEA-C01 ainda imprime o nome antigo do Firehose. Estudos de caso mais antigos (Hearst, AGCO, Baqend) portanto parecem uma stack diferente da documentação atual: mapeie os nomes, nunca os trate como dois serviços (retrospectiva do AWS Kinesis, AWS What's New e página de serviços no escopo do DEA-C01, acesso em outubro de 2026).
+- **📚 Você sabia?** O **Amazon Kinesis Data Streams foi lançado em 2013** e a AWS o chama de "o primeiro serviço de streaming de dados serverless nativo de nuvem", é por isso que toda história de cliente escrita antes de 2024 usa nomes de serviço *antigos*. O **Kinesis Data Analytics** virou o **Amazon Managed Service for Apache Flink** em **2023-08-30**, e o **Kinesis Data Firehose** virou **Amazon Data Firehose** em **2024-02-09** com **nenhuma mudança de API**, a action de IAM continua `firehose:*`, e a lista no escopo do DEA-C01 ainda imprime o nome antigo do Firehose. Estudos de caso mais antigos (Hearst, AGCO, Baqend) portanto parecem uma stack diferente da documentação atual: mapeie os nomes, nunca os trate como dois serviços (retrospectiva do AWS Kinesis, AWS What's New e página de serviços no escopo do DEA-C01, acesso em outubro de 2026).
 
 ---
 
@@ -952,7 +952,7 @@ Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O
     "Selecionar um formato de serialização a partir do padrão de acesso"
   ],
   "correct": 1,
-  "explanation": "O guia do exame lista 'conceitos de programação agnósticos de linguagem' no escopo e 'sintaxe específica de linguagem' fora do escopo. A ordem de argumentos de uma chamada de biblioteca é sintaxe; as outras três alternativas são conceitos agnósticos de linguagem - lógica em estágios, design de concorrência e seleção de formato."
+  "explanation": "O guia do exame lista 'conceitos de programação agnósticos de linguagem' no escopo e 'sintaxe específica de linguagem' fora do escopo. A ordem de argumentos de uma chamada de biblioteca é sintaxe; as outras três alternativas são conceitos agnósticos de linguagem: lógica em estágios, design de concorrência e seleção de formato."
 }
 ```
 
@@ -979,12 +979,12 @@ Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O
   "question": "Você precisa normalizar uma coluna de string em um bilhão de linhas num job do Glue Spark e nenhuma função embutida faz o trabalho. Qual degrau da escada de custo de UDF você deve escolher, e por quê?",
   "options": [
     "Uma UDF Python simples, porque Python é a linguagem do job e pickle é rápido",
-    "Uma UDF vectorizada pandas/Arrow - a AWS a mede em cerca de 5x uma UDF Python simples, porque lotes cruzam a fronteira JVM em vez de linhas",
+    "Uma UDF vectorizada pandas/Arrow: a AWS a mede em cerca de 5x uma UDF Python simples, porque lotes cruzam a fronteira JVM em vez de linhas",
     "Uma UDF Scala/Java, porque só código JVM pode rodar no Spark",
     "Uma função embutida do Spark SQL, porque funções embutidas estão sempre disponíveis para trabalho de string"
   ],
   "correct": 1,
-  "explanation": "A escada é SQL embutido (mais barato) -> UDF vectorizada pandas/Arrow (~5x a simples) -> UDF Python simples (pickle por linha, caixa-preta do otimizador) -> Scala/Java. Uma UDF Python simples é a PIOR escolha a um bilhão de linhas, funções embutidas estão indisponíveis pela premissa, e Scala/Java não é obrigatório - lotes Arrow vectorizados são o compromisso correto."
+  "explanation": "A escada é SQL embutido (mais barato) -> UDF vectorizada pandas/Arrow (~5x a simples) -> UDF Python simples (pickle por linha, caixa-preta do otimizador) -> Scala/Java. Uma UDF Python simples é a PIOR escolha a um bilhão de linhas, funções embutidas estão indisponíveis pela premissa, e Scala/Java não é obrigatório: lotes Arrow vectorizados são o compromisso correto."
 }
 ```
 
@@ -1000,7 +1000,7 @@ Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O
     "O Redshift exige que a função de janela apareça na cláusula WHERE"
   ],
   "correct": 1,
-  "explanation": "PARTITION BY é o que permite ao Redshift avaliar a janela em paralelo entre slices; sem ele a computação é serial num slice. Funções de janela SÃO legais na lista SELECT (e no ORDER BY final) mas NÃO no WHERE - e o PIVOT resolve uma forma de problema completamente diferente."
+  "explanation": "PARTITION BY é o que permite ao Redshift avaliar a janela em paralelo entre slices; sem ele a computação é serial num slice. Funções de janela SÃO legais na lista SELECT (e no ORDER BY final) mas NÃO no WHERE, e o PIVOT resolve uma forma de problema completamente diferente."
 }
 ```
 
@@ -1013,7 +1013,7 @@ Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O
     "O PIVOT do Redshift aceita MEDIAN desde que a entrada não tenha JOINs",
     "O PIVOT do Redshift é limitado a COUNT, SUM, MIN, MAX e AVG, então você precisa usar a forma portável de agregação MAX(CASE WHEN ...) ou estagiar o MEDIAN numa CTE antes",
     "O PIVOT aceita qualquer agregado, mas a lista IN deve conter expressões em vez de literais",
-    "O PIVOT não pode ser usado de forma alguma se a origem contiver uma CTE recursiva - você precisa reescrever a query inteira como um self-join"
+    "O PIVOT não pode ser usado de forma alguma se a origem contiver uma CTE recursiva: você precisa reescrever a query inteira como um self-join"
   ],
   "correct": 1,
   "explanation": "O PIVOT do Redshift permite apenas COUNT, SUM, MIN, MAX e AVG, proíbe entradas com JOIN e CTE recursiva, e aceita valores literais no IN. MEDIAN portanto precisa da forma portável SUM/MAX(CASE WHEN...) (ou de uma CTE pré-agregada). As outras alternativas afirmam erradamente uma ou mais dessas três regras."
@@ -1042,7 +1042,7 @@ Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O
   "type": "multiple-choice",
   "question": "Uma função Lambda que faz parse de registros está limitada por CPU em 1,024 MB. A equipe propõe definir uma contagem de vCPU. Qual é a ação correta?",
   "options": [
-    "Definir o parâmetro vCPU na configuração da função - o Lambda expõe um controle separado de CPU",
+    "Definir o parâmetro vCPU na configuração da função: o Lambda expõe um controle separado de CPU",
     "Aumentar a memória na direção de 1,769 MB, porque a CPU escala com a memória (cerca de 1 vCPU a 1,769 MB, cerca de 6 vCPUs a 10,240 MB) - não existe configuração de vCPU",
     "Mudar para concorrência provisionada, que aloca vCPUs dedicadas",
     "Dividir a função em 10 slots de concorrência reservada, o que adiciona uma vCPU cada"
@@ -1060,11 +1060,11 @@ Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O
   "options": [
     "AWS Lambda, porque é a opção serverless mais barata",
     "AWS Batch, porque qualquer job acima de 15 minutos precisa ser containerizado",
-    "AWS Glue Python shell - nó único a 0,0625 ou 1 DPU com um timeout muito mais longo que o teto rígido de 900 segundos do Lambda",
+    "AWS Glue Python shell: nó único a 0,0625 ou 1 DPU com um timeout muito mais longo que o teto rígido de 900 segundos do Lambda",
     "AWS Glue Spark, porque todos os jobs do Glue rodam distribuídos"
   ],
   "correct": 2,
-  "explanation": "45 minutos excede o teto absoluto de 900 segundos do Lambda, então o Lambda é impossível a qualquer preço. O job é de nó único, então o mínimo de 2 DPU e o startup de 2-3 minutos do Glue Spark são desperdício - o Glue Python shell é nó único com um timeout muito mais longo. O AWS Batch é para trabalho containerizado e dirigido por fila onde o overhead de scheduling é justificado (binpack de 3-5 minutos ou mais)."
+  "explanation": "45 minutos excede o teto absoluto de 900 segundos do Lambda, então o Lambda é impossível a qualquer preço. O job é de nó único, então o mínimo de 2 DPU e o startup de 2-3 minutos do Glue Spark são desperdício: o Glue Python shell é nó único com um timeout muito mais longo. O AWS Batch é para trabalho containerizado e dirigido por fila onde o overhead de scheduling é justificado (binpack de 3-5 minutos ou mais)."
 }
 ```
 
@@ -1080,7 +1080,7 @@ Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O
     "Habilitar concorrência provisionada em 50 e também definir a idade máxima do evento, porque ambas limitam a concorrência"
   ],
   "correct": 1,
-  "explanation": "A concorrência reservada é um MÍNIMO e MÁXIMO rígidos para uma função e é gratuita - é a forma canônica de cercar a capacidade para que um pool pequeno de banco de dados não seja sobrecarregado. A concorrência provisionada aquece ambientes (e é cobrada); ela não limita concorrência. O pool de 1,000 por região da conta é um teto compartilhado, não um limite por função que você define como 50."
+  "explanation": "A concorrência reservada é um MÍNIMO e MÁXIMO rígidos para uma função e é gratuita: é a forma canônica de cercar a capacidade para que um pool pequeno de banco de dados não seja sobrecarregado. A concorrência provisionada aquece ambientes (e é cobrada); ela não limita concorrência. O pool de 1,000 por região da conta é um teto compartilhado, não um limite por função que você define como 50."
 }
 ```
 
@@ -1112,7 +1112,7 @@ Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O
     "Deletar e recriar o event source mapping, porque mappings nunca pausam um shard"
   ],
   "correct": 1,
-  "explanation": "Um lote que falha faz o Lambda reprocessar o LOTE INTEIRO e PAUSAR o shard, e os padrões são infinitos - até 1 semana bloqueado para o Kinesis (1 dia para o DynamoDB Streams). A escada é reporte de lote parcial, bisect, retries e idade limitados, e então um destino OnFailure/DLQ. Lotes maiores e janelas mais longas pioram o estancamento, e recriar uma mapping descarta o progresso do checkpoint em vez de corrigir o registro venenoso."
+  "explanation": "Um lote que falha faz o Lambda reprocessar o LOTE INTEIRO e PAUSAR o shard, e os padrões são infinitos: até 1 semana bloqueado para o Kinesis (1 dia para o DynamoDB Streams). A escada é reporte de lote parcial, bisect, retries e idade limitados, e então um destino OnFailure/DLQ. Lotes maiores e janelas mais longas pioram o estancamento, e recriar uma mapping descarta o progresso do checkpoint em vez de corrigir o registro venenoso."
 }
 ```
 
@@ -1128,7 +1128,7 @@ Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O
     "Converter todo objeto bruto em CSV, porque CSV não tem schema para violar"
   ],
   "correct": 1,
-  "explanation": "A orientação de arquitetura moderna de dados da AWS é exatamente esta: raw armazenado como está, mais uma camada padronizada com validação de schema e controle de evolução acima dela. Schema-on-write em blocos derrota a flexibilidade do lake, remover o catálogo remove a capacidade de consultar de forma alguma, e o CSV não tem schema precisamente porque não consegue expressar dados aninhados ou tipados - ele não resolve o drift."
+  "explanation": "A orientação de arquitetura moderna de dados da AWS é exatamente esta: raw armazenado como está, mais uma camada padronizada com validação de schema e controle de evolução acima dela. Schema-on-write em blocos derrota a flexibilidade do lake, remover o catálogo remove a capacidade de consultar de forma alguma, e o CSV não tem schema precisamente porque não consegue expressar dados aninhados ou tipados: ele não resolve o drift."
 }
 ```
 
@@ -1144,7 +1144,7 @@ Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O
     "Nenhuma permissão do Lake Formation, porque DML executado dentro do warehouse nunca passa pelo Lake Formation"
   ],
   "correct": 2,
-  "explanation": "A página de mudanças de comportamento do Redshift (Patch 202) declara que numa tabela do Lake Formation um DELETE de Iceberg precisa de permissão de DELETE, UPDATE e MERGE precisam de INSERT + DELETE, e TODO DML de Iceberg precisa de ALTER. Grants de somente INSERT ou somente DELETE portanto falham em runtime, e o Lake Formation se aplica porque a tabela é governada - esta é a forma de permissão por trás da reprodução idempotente com MERGE da Seção 6.1 (documentação de mudanças de comportamento do Amazon Redshift, acesso em outubro de 2026)."
+  "explanation": "A página de mudanças de comportamento do Redshift (Patch 202) declara que numa tabela do Lake Formation um DELETE de Iceberg precisa de permissão de DELETE, UPDATE e MERGE precisam de INSERT + DELETE, e TODO DML de Iceberg precisa de ALTER. Grants de somente INSERT ou somente DELETE portanto falham em runtime, e o Lake Formation se aplica porque a tabela é governada: esta é a forma de permissão por trás da reprodução idempotente com MERGE da Seção 6.1 (documentação de mudanças de comportamento do Amazon Redshift, acesso em outubro de 2026)."
 }
 ```
 
@@ -1157,7 +1157,7 @@ Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O
     "Map inline com a lista de arquivos embutida na entrada do estado, porque maps inline não têm limite de contagem de filhos",
     "Um estado Choice dentro de um loop, reexecutado até o prefixo se esgotar",
     "Um estado Map configurado com BatchSize = 10,000, porque BatchSize controla quantos filhos rodam em paralelo",
-    "Distributed Map - até 10,000 filhos paralelos, com origem no S3 em CSV, JSON, JSONL ou Parquet e iteração por prefixo do S3 adicionada em 2025-09-18"
+    "Distributed Map: até 10,000 filhos paralelos, com origem no S3 em CSV, JSON, JSONL ou Parquet e iteração por prefixo do S3 adicionada em 2025-09-18"
   ],
   "correct": 3,
   "explanation": "O Distributed Map roda até 10,000 filhos e pode ler sua lista de trabalho direto do S3 (CSV/JSON/JSONL/Parquet); em 2025-09-18 a AWS adicionou manifests do Athena, entradas em Parquet, iteração por prefixo do S3 (LOAD_AND_FLATTEN) e observabilidade do Distributed Map, e em 2026-03-26 as integrações cresceram em 28 serviços e 1,100+ APIs. O Map inline é somente array JSON com no máximo 40 filhos concorrentes e payload de gatilho de 256 KiB; um estado Choice nunca faz fan-out; e BatchSize é uma alavanca de batching do Lambda/Kinesis, não do Step Functions (documentação de recent launches e de Map state do AWS Step Functions, acesso em outubro de 2026)."
@@ -1166,39 +1166,39 @@ Dois alavancas precisam ficar separadas aqui, e o exame vai tentar borrá-las. O
 
 > [!WARNING]
 > ⚠️ **Armadilhas de dia de exame desta lição:**
-> - **Agnóstico de linguagem ≠ sem código** — você precisa *ler* handlers, SQL e pipelines; você nunca deve decorar sintaxe de biblioteca. Uma alternativa que gira em torno de uma ordem de argumentos, de um decorator ou de um caminho de import está testando a cláusula fora do escopo.
-> - **Não existe botão de vCPU no Lambda** — a CPU segue a memória: **1,769 MB ≈ 1 vCPU**, **10,240 MB ≈ 6 vCPUs**; timeout é **1–900 s** (padrão **3 s**).
-> - **Concorrência reservada ≠ concorrência provisionada** — reservada é **grátis** e é um **mínimo e máximo** rígidos (limite ou garantia); provisionada é **cobrada**, aplica-se a **versões/aliases** e compra **aquecimento para latência interativa**.
-> - **1,000 é o pool da conta, não o limite da sua função** — é compartilhado por região, com um piso não reservado de **100**, e o throughput roda a cerca de **10 requisições/s por unidade de concorrência**.
-> - **Layers são somente zip e limitadas a 5** — uma função com imagem de container não pode usá-las; `/opt` é o ponto de montagem.
-> - **4 KB de variáveis de ambiente não é um cofre de segredos** — use Secrets Manager ou SSM Parameter Store com KMS.
-> - **At-least-once é o padrão; exactly-once é um *efeito*** construído a partir de at-least-once mais uma **escrita idempotente** — nunca diga que um stream é exactly-once.
-> - **Um UUID novo por linha destrói a idempotência** — chave de negócio determinística + partition overwrite / MERGE / escrita condicional.
+> - **Agnóstico de linguagem ≠ sem código**: você precisa *ler* handlers, SQL e pipelines; você nunca deve decorar sintaxe de biblioteca. Uma alternativa que gira em torno de uma ordem de argumentos, de um decorator ou de um caminho de import está testando a cláusula fora do escopo.
+> - **Não existe botão de vCPU no Lambda**: a CPU segue a memória: **1,769 MB ≈ 1 vCPU**, **10,240 MB ≈ 6 vCPUs**; timeout é **1 to 900 s** (padrão **3 s**).
+> - **Concorrência reservada ≠ concorrência provisionada**: reservada é **grátis** e é um **mínimo e máximo** rígidos (limite ou garantia); provisionada é **cobrada**, aplica-se a **versões/aliases** e compra **aquecimento para latência interativa**.
+> - **1,000 é o pool da conta, não o limite da sua função**: é compartilhado por região, com um piso não reservado de **100**, e o throughput roda a cerca de **10 requisições/s por unidade de concorrência**.
+> - **Layers são somente zip e limitadas a 5**: uma função com imagem de container não pode usá-las; `/opt` é o ponto de montagem.
+> - **4 KB de variáveis de ambiente não é um cofre de segredos**: use Secrets Manager ou SSM Parameter Store com KMS.
+> - **At-least-once é o padrão; exactly-once é um *efeito*** construído a partir de at-least-once mais uma **escrita idempotente**: nunca diga que um stream é exactly-once.
+> - **Um UUID novo por linha destrói a idempotência**: chave de negócio determinística + partition overwrite / MERGE / escrita condicional.
 > - **Uma falha de ESM reexecuta o lote inteiro e pausa o shard**, e os padrões são **infinitos** → **1 dia (DynamoDB Streams) / 1 semana (Kinesis)** bloqueados.
-> - **1 partição = 1 task** — alvo de **2–3× núcleos**, `coalesce` para **baixo**, `repartition` para **cima**, e o gzip é **indivisível**.
-> - **SQL embutido vence a UDF vectorizada que vence a UDF Python simples (~5×)** — e no Redshift, **UDFs escalares de Python não têm suporte depois de 2026-06-30**.
-> - **O ponto de cruzamento do pandas (≈10 M linhas / 5–10 GB) é uma regra prática de terceiros de 2017**, nunca um número da AWS — os fatos com fonte são os limites de serviço.
-> - **Formato é custo** — o Athena cobra **bytes escaneados**, então o pruning de Parquet/ORC é uma decisão de cobrança; **Avro/JSON para movê-lo, Parquet/ORC para lê-lo**.
-> - **Números de estudo de caso são afirmações não auditadas de clientes** — os **85%** da EMX e os **80%** da AppsFlyer são o que esses clientes reportaram, nunca garantias.
+> - **1 partição = 1 task**: alvo de **2 to 3× núcleos**, `coalesce` para **baixo**, `repartition` para **cima**, e o gzip é **indivisível**.
+> - **SQL embutido vence a UDF vectorizada que vence a UDF Python simples (~5×)**, e no Redshift, **UDFs escalares de Python não têm suporte depois de 2026-06-30**.
+> - **O ponto de cruzamento do pandas (≈10 M linhas / 5 to 10 GB) é uma regra prática de terceiros de 2017**, nunca um número da AWS: os fatos com fonte são os limites de serviço.
+> - **Formato é custo**, o Athena cobra **bytes escaneados**, então o pruning de Parquet/ORC é uma decisão de cobrança; **Avro/JSON para movê-lo, Parquet/ORC para lê-lo**.
+> - **Números de estudo de caso são afirmações não auditadas de clientes**: os **85%** da EMX e os **80%** da AppsFlyer são o que esses clientes reportaram, nunca garantias.
 
 > [!IMPORTANT]
-> **Veredito Comparativo — como as escolhas de programação se comparam no dia do exame**
-> - **Verso outras nuvens:** o exame testa **apenas serviços da AWS** — nada no DEA-C01 compara Lambda com Azure Functions ou Glue com outro ETL gerenciado, e a lista no escopo é o universo inteiro de nomes examináveis. Qualquer alternativa que pivote para o produto de um concorrente, ou para um benchmark de terceiros não verificado (incluindo o cruzamento de pandas de 2017), está fora de escopo por construção; responda com um serviço da AWS no escopo ou com um limite publicado pela AWS.
-> - **Verso autogerenciado / on-premises:** rodar Spark, um consumidor de fila ou um scheduler você mesmo significa operar o cluster, o ajuste de shuffle, a semântica de retry e as atualizações. As respostas gerenciadas da AWS — **Lambda** (sem servidores, cobrança por requisição), **Glue** (Spark/Python shell serverless com um Data Catalog), **Batch** (filas + ambientes de compute gerenciados) — trocam esse controle por tetos: **900 s**, **mínimo de 2 DPU** e overhead de scheduling. O exame prefere a opção gerenciada, a menos que o requisito nomeie explicitamente um controle que o serviço gerenciado remove.
-> - **Verso outro serviço da AWS:** os limites honestos são **Lambda** (com forma de evento, ≤900 s, ≤10,240 MB, por requisição + GB-s) vs **Glue Python shell** (nó único, ~10 GB, muito além de 15 min, 0,0625/1 DPU) vs **Glue Spark** (distribuído, 2–100 DPU, nativo de catálogo, ~2–3 min de startup) vs **AWS Batch** (imagens de container, horas, fila + Spot, binpack de **3–5 min**) vs **Amazon Redshift** (ELT só de SQL dentro do warehouse). Escolha pela **forma do requisito** — duração, tamanho, frequência, distribuição — nunca por hábito.
-> - **Verso um processo manual e humano:** todo resultado de cliente publicado aqui — a economia de **85%** em armazenamento da EMX, a redução de **80%** no workload interativo da AppsFlyer — é resultado de *padrões* (formato colunar mais motor de bytes escaneados, runtime reselecionado para se ajustar à forma do workload), não de uma ferramenta. Trate percentuais como "o cliente alcançou", nunca como "a AWS garante".
+> **Veredito Comparativo: como as escolhas de programação se comparam no dia do exame**
+> - **Verso outras nuvens:** o exame testa **apenas serviços da AWS**: nada no DEA-C01 compara Lambda com Azure Functions ou Glue com outro ETL gerenciado, e a lista no escopo é o universo inteiro de nomes examináveis. Qualquer alternativa que pivote para o produto de um concorrente, ou para um benchmark de terceiros não verificado (incluindo o cruzamento de pandas de 2017), está fora de escopo por construção; responda com um serviço da AWS no escopo ou com um limite publicado pela AWS.
+> - **Verso autogerenciado / on-premises:** rodar Spark, um consumidor de fila ou um scheduler você mesmo significa operar o cluster, o ajuste de shuffle, a semântica de retry e as atualizações. As respostas gerenciadas da AWS, **Lambda** (sem servidores, cobrança por requisição), **Glue** (Spark/Python shell serverless com um Data Catalog), **Batch** (filas + ambientes de compute gerenciados), trocam esse controle por tetos: **900 s**, **mínimo de 2 DPU** e overhead de scheduling. O exame prefere a opção gerenciada, a menos que o requisito nomeie explicitamente um controle que o serviço gerenciado remove.
+> - **Verso outro serviço da AWS:** os limites honestos são **Lambda** (com forma de evento, ≤900 s, ≤10,240 MB, por requisição + GB-s) vs **Glue Python shell** (nó único, ~10 GB, muito além de 15 min, 0,0625/1 DPU) vs **Glue Spark** (distribuído, 2 to 100 DPU, nativo de catálogo, ~2 to 3 min de startup) vs **AWS Batch** (imagens de container, horas, fila + Spot, binpack de **3 to 5 min**) vs **Amazon Redshift** (ELT só de SQL dentro do warehouse). Escolha pela **forma do requisito**, duração, tamanho, frequência, distribuição, nunca por hábito.
+> - **Verso um processo manual e humano:** todo resultado de cliente publicado aqui, a economia de **85%** em armazenamento da EMX, a redução de **80%** no workload interativo da AppsFlyer, é resultado de *padrões* (formato colunar mais motor de bytes escaneados, runtime reselecionado para se ajustar à forma do workload), não de uma ferramenta. Trate percentuais como "o cliente alcançou", nunca como "a AWS garante".
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
-> 1. A Tarefa 1.4 desenha uma linha: **conceitos agnósticos de linguagem estão no escopo, sintaxe específica de linguagem está fora** — você lê handlers, SQL e pipelines, e mapeia funções/variáveis/condicionais/loops/POO/APIs/serialização para construtos de pipeline (ponto de entrada do handler, `CASE WHEN`/`Choice`, `Map`, layers em `/opt`, paginação e backoff em 429, escolha de formato).
-> 2. **pandas é de nó único** (Glue Python shell 0,0625/1 DPU ~10 GB; Lambda ≤10,240 MB e ≤900 s); **PySpark é distribuído** (Glue Spark 2–100 DPU, 1 DPU = 4 vCPU + 16 GB, ~2–3 min de startup) — e pandas não reescrito num job do Spark deixa no mínimo **dois workers ociosos e cobrados**.
-> 3. **Avaliação lazy**: transformações constroem um plano, uma **ação** dispara a computação, um dataset é **recomputado a cada ação** a menos que cacheado, e um **shuffle** é a fronteira de stage cara; **1 partição = 1 task**, alvo de **2–3× núcleos**, partições padrão de shuffle **200**, advisory de skew **128 MB**, `maxResultSize` **1 GB**, gzip **indivisível**, `coalesce` para baixo / `repartition` para cima.
-> 4. A **escada de custo de UDF** é SQL embutido → pandas/Arrow vectorizada (**≈5×** a simples) → Python simples (pickle por linha) → Scala/Java; use um UDF apenas para parsers de terceiros, scoring de modelos ou lógica de linha stateful — e note que **UDFs escalares de Python do Redshift não têm suporte depois de 2026-06-30**.
+> 1. A Tarefa 1.4 desenha uma linha: **conceitos agnósticos de linguagem estão no escopo, sintaxe específica de linguagem está fora**: você lê handlers, SQL e pipelines, e mapeia funções/variáveis/condicionais/loops/POO/APIs/serialização para construtos de pipeline (ponto de entrada do handler, `CASE WHEN`/`Choice`, `Map`, layers em `/opt`, paginação e backoff em 429, escolha de formato).
+> 2. **pandas é de nó único** (Glue Python shell 0,0625/1 DPU ~10 GB; Lambda ≤10,240 MB e ≤900 s); **PySpark é distribuído** (Glue Spark 2 to 100 DPU, 1 DPU = 4 vCPU + 16 GB, ~2 to 3 min de startup), e pandas não reescrito num job do Spark deixa no mínimo **dois workers ociosos e cobrados**.
+> 3. **Avaliação lazy**: transformações constroem um plano, uma **ação** dispara a computação, um dataset é **recomputado a cada ação** a menos que cacheado, e um **shuffle** é a fronteira de stage cara; **1 partição = 1 task**, alvo de **2 to 3× núcleos**, partições padrão de shuffle **200**, advisory de skew **128 MB**, `maxResultSize` **1 GB**, gzip **indivisível**, `coalesce` para baixo / `repartition` para cima.
+> 4. A **escada de custo de UDF** é SQL embutido → pandas/Arrow vectorizada (**≈5×** a simples) → Python simples (pickle por linha) → Scala/Java; use um UDF apenas para parsers de terceiros, scoring de modelos ou lógica de linha stateful, e note que **UDFs escalares de Python do Redshift não têm suporte depois de 2026-06-30**.
 > 5. **Funções de janela**: mais recente por chave → `ROW_NUMBER()`; total acumulado/delta → `SUM() OVER`/`LAG`; quota → `RATIO_TO_REPORT`. No **Redshift**, `PARTITION BY` é o que torna a janela **paralela entre slices**, e funções de janela pertencem apenas a **SELECT ou ao ORDER BY final**.
 > 6. **Padrões de SQL**: CTEs com `WITH` estagiam dedupe→filtro→ranqueamento; qualifique colunas de join de mesmo nome na **Athena**; faça **broadcast** do lado pequeno no Spark; o `PIVOT` do Redshift permite apenas **COUNT/SUM/MIN/MAX/AVG** com listas `IN` literais (fallback portável: `MAX(CASE WHEN …)`); **Athena** usa `json_extract_scalar` + `UNNEST`, **Redshift** usa `JSON_PARSE` → `SUPER`; load em bloco com **um `COPY`**, nunca `INSERT`s por linha.
-> 7. **Fontes de eventos do Lambda**: **triggers** = o serviço empurra (S3, EventBridge, API Gateway, Step Functions, SNS); **event source mappings** = o Lambda faz polling (Kinesis, DynamoDB Streams, SQS, MSK, Kafka, MQ, DocumentDB) com `BatchSize`, janela de **0–300 s**, `ParallelizationFactor` **1–10**, retries/idade limitados, `BisectBatchOnFunctionError`, `OnFailure` e `ReportBatchItemFailures`.
-> 8. **Concorrência**: pool da conta de **1.000/região**, piso não reservado de **100**, **~10 rps por unidade de concorrência**; **reservada = mínimo+máximo grátis** (garantia ou throttle); **provisionada = cobrada, só versão/alias**, dimensionada como `req/s × duração s` **+10%** — pipelines assíncronos normalmente **não** precisam dela.
-> 9. **Envelope de runtime do Lambda**: timeout de **1–900 s** (padrão **3 s**), memória **128–10,240 MB** com **1,769 MB ≈ 1 vCPU** e **10,240 MB ≈ 6**, `/tmp` **512 MB grátis** depois cobrados, env vars **4 KB**, pacote **50/250 MB** com **≤5 layers** em `/opt` (somente zip), imagens **10 GB**, armazenamento de código **300 GB** (em outubro de 2026).
-> 10. **Matriz de decisão**: segundos a minutos e forma de evento → **Lambda**; nó único >15 min ou ~10 GB → **Glue Python shell**; distribuído GB–TB com catálogo → **Glue Spark**; imagem de container, horas, fila + Spot → **AWS Batch** (binpack de **3–5 min**); petabyte/Spark existente → **EMR**; só SQL → **Redshift**.
+> 7. **Fontes de eventos do Lambda**: **triggers** = o serviço empurra (S3, EventBridge, API Gateway, Step Functions, SNS); **event source mappings** = o Lambda faz polling (Kinesis, DynamoDB Streams, SQS, MSK, Kafka, MQ, DocumentDB) com `BatchSize`, janela de **0 to 300 s**, `ParallelizationFactor` **1 to 10**, retries/idade limitados, `BisectBatchOnFunctionError`, `OnFailure` e `ReportBatchItemFailures`.
+> 8. **Concorrência**: pool da conta de **1.000/região**, piso não reservado de **100**, **~10 rps por unidade de concorrência**; **reservada = mínimo+máximo grátis** (garantia ou throttle); **provisionada = cobrada, só versão/alias**, dimensionada como `req/s × duração s` **+10%**: pipelines assíncronos normalmente **não** precisam dela.
+> 9. **Envelope de runtime do Lambda**: timeout de **1 to 900 s** (padrão **3 s**), memória **128 to 10,240 MB** com **1,769 MB ≈ 1 vCPU** e **10,240 MB ≈ 6**, `/tmp` **512 MB grátis** depois cobrados, env vars **4 KB**, pacote **50/250 MB** com **≤5 layers** em `/opt` (somente zip), imagens **10 GB**, armazenamento de código **300 GB** (em outubro de 2026).
+> 10. **Matriz de decisão**: segundos a minutos e forma de evento → **Lambda**; nó único >15 min ou ~10 GB → **Glue Python shell**; distribuído GB: TB com catálogo → **Glue Spark**; imagem de container, horas, fila + Spot → **AWS Batch** (binpack de **3 to 5 min**); petabyte/Spark existente → **EMR**; só SQL → **Redshift**.
 > 11. **Confiabilidade**: streams são **at-least-once**; um **efeito exactly-once** = at-least-once + **escrita idempotente** (chaves determinísticas, partition overwrite, MERGE/`ON CONFLICT`, escritas condicionais, hash-do-lote, `ClientRequestToken` ≤10 min, razão de execuções); o **watermark** = `max event time − allowed lateness`, avançado **só para frente** com uma janela segura deslizante e `dropDuplicates`, mais reconciliação em batch para a cauda.
 > 12. **Poison pills**: um ESM reexecuta o **lote inteiro** e **pausa o shard**; os padrões são infinitos → bloqueio de **até 1 dia (DynamoDB Streams)** / **até 1 semana (Kinesis)**. Escada: `ReportBatchItemFailures` → `BisectBatchOnFunctionError` → limitar retries/idade (máx. **10,000** / **604,800 s**) → `OnFailure`/DLQ; **schema-on-read** precisa de uma **camada de contrato padronizada** sobre o raw, e **Parquet/ORC** para leituras com **Avro/JSON** para movimentação.

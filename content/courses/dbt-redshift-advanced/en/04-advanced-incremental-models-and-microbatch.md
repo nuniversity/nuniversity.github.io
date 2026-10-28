@@ -1,6 +1,6 @@
 ---
 title: "Advanced Incremental Models and the Microbatch Strategy"
-description: "Master dbt's incremental materialization strategies on Redshift — append, delete+insert, merge — and learn the new microbatch strategy introduced in dbt-core 1.9 for processing event data in discrete time periods."
+description: "Master dbt's incremental materialization strategies on Redshift, append, delete+insert, merge, and learn the new microbatch strategy introduced in dbt-core 1.9 for processing event data in discrete time periods."
 order: 4
 duration: "65 min"
 difficulty: "advanced"
@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Advanced Incremental Models and the Microbatch Strategy
 
-Incremental models are the core tool for handling datasets that are too large to rebuild from scratch on every run. dbt-core 1.9 introduced the **microbatch strategy**, a first-class pattern for processing event data in isolated time windows — each batch is its own SQL statement, independently retryable. This module covers all incremental strategies available on Redshift and explains when to use each.
+Incremental models are the core tool for handling datasets that are too large to rebuild from scratch on every run. dbt-core 1.9 introduced the **microbatch strategy**, a first-class pattern for processing event data in isolated time windows: each batch is its own SQL statement, independently retryable. This module covers all incremental strategies available on Redshift and explains when to use each.
 
 ---
 
@@ -56,7 +56,7 @@ from {{ ref('stg_raw_events') }}
 {% endif %}
 ```
 
-Use `append` only when source data is truly immutable — each event_id appears exactly once and is never updated.
+Use `append` only when source data is truly immutable: each event_id appears exactly once and is never updated.
 
 ---
 
@@ -137,7 +137,7 @@ from {{ ref('stg_orders') }}
 {% endif %}
 ```
 
-The `merge_update_columns` config limits which columns are updated on match — efficient when only a few columns change frequently.
+The `merge_update_columns` config limits which columns are updated on match: efficient when only a few columns change frequently.
 
 ---
 
@@ -262,7 +262,7 @@ If upstream `ref()` models also declare `event_time`, dbt passes the current bat
 select * from {{ source('raw', 'events') }}
 ```
 
-Now when microbatch processes the 2024-03-15 batch, `stg_raw_events` is automatically filtered to that day — dbt adds the `WHERE event_timestamp >= ... AND event_timestamp < ...` predicate on the source query.
+Now when microbatch processes the 2024-03-15 batch, `stg_raw_events` is automatically filtered to that day: dbt adds the `WHERE event_timestamp >=... AND event_timestamp <...` predicate on the source query.
 
 ---
 
@@ -365,7 +365,7 @@ for r in results['results']:
   "question": "You run `dbt run --full-refresh` on a microbatch model configured with `full_refresh: false`. What happens?",
   "options": [
     "dbt rebuilds the entire table from the begin date",
-    "dbt raises an error — full refresh is blocked by the full_refresh: false config",
+    "dbt raises an error: full refresh is blocked by the full_refresh: false config",
     "dbt rebuilds only the last 3 batches",
     "dbt ignores the flag and runs normally"
   ],
@@ -386,7 +386,7 @@ for r in results['results']:
     "It allows the model to run without a unique_key"
   ],
   "correct": 1,
-  "explanation": "When the distribution key matches the merge join key (unique_key), Redshift can join the target and temp tables without redistributing rows across nodes — a co-located hash join."
+  "explanation": "When the distribution key matches the merge join key (unique_key), Redshift can join the target and temp tables without redistributing rows across nodes: a co-located hash join."
 }
 ```
 
@@ -412,7 +412,7 @@ for r in results['results']:
   "type": "multiple-choice",
   "question": "When does dbt automatically filter an upstream ref() model in a microbatch run?",
   "options": [
-    "Always — all refs are automatically filtered",
+    "Always: all refs are automatically filtered",
     "Only when the upstream model uses the incremental materialization",
     "When the upstream model also declares an event_time configuration",
     "Only when the upstream model is a source (not a ref)"
@@ -444,9 +444,9 @@ for r in results['results']:
 ### Key Takeaways
 
 - dbt-redshift supports four incremental strategies: append, delete+insert, merge, and microbatch (1.9+).
-- Microbatch generates one SQL query per time period — no `is_incremental()` block needed; each batch is independently retryable.
+- Microbatch generates one SQL query per time period: no `is_incremental()` block needed; each batch is independently retryable.
 - Configure `lookback` to re-process recent batches and capture late-arriving data.
 - Protect microbatch models with `full_refresh: false`; use `--event-time-start` / `--event-time-end` for bounded rebuilds.
 - For merge performance on Redshift, align `dist` with `unique_key` to enable co-located joins.
 - Use `coalesce(max(col), 'fallback_date')` in `is_incremental()` filters to handle first-run (empty table) edge cases.
-- Upstream refs with matching `event_time` configs are automatically filtered in microbatch runs — declare it in all your staging views.
+- Upstream refs with matching `event_time` configs are automatically filtered in microbatch runs: declare it in all your staging views.

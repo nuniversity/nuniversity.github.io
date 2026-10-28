@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Otimização de Processos
 
-Fluxogramas não servem apenas para documentar processos — são ferramentas poderosas para melhorá-los. Nesta lição final, aprenderemos como usar fluxogramas para identificar gargalos, eliminar desperdícios e otimizar processos para melhor eficiência e qualidade.
+Fluxogramas não servem apenas para documentar processos: são ferramentas poderosas para melhorá-los. Nesta lição final, aprenderemos como usar fluxogramas para identificar gargalos, eliminar desperdícios e otimizar processos para melhor eficiência e qualidade.
 
 ## Por Que Otimizar Processos?
 
@@ -249,7 +249,7 @@ flowchart TD
 
 ## O Ciclo de Otimização
 
-Otimização de processos não é uma atividade única — é um ciclo contínuo:
+Otimização de processos não é uma atividade única: é um ciclo contínuo:
 
 ```mermaid
 flowchart TD
@@ -351,11 +351,11 @@ flowchart TD
 
 | Métrica | O Que Mede | Como Calcular |
 |---|---|---|
-| **Tempo de Ciclo** | Tempo total do início ao fim | Tempo final - Tempo inicial |
+| **Tempo de Ciclo** | Tempo total do início ao fim | Tempo final: Tempo inicial |
 | **Throughput** | Itens processados por unidade de tempo | Contagem / Período |
 | **Taxa de Erro** | Porcentagem de itens com defeitos | Erros / Total de itens × 100 |
 | **Tempo de Espera** | Tempo gasto esperando entre etapas | Soma de todos os períodos de espera |
-| **Tempo de Toque** | Tempo realmente gasto trabalhando | Tempo total - Tempo de espera |
+| **Tempo de Toque** | Tempo realmente gasto trabalhando | Tempo total: Tempo de espera |
 | **Eficiência** | Razão entre tempo de toque e tempo de ciclo | Tempo de toque / Tempo de ciclo × 100 |
 
 ## Exercícios Práticos
@@ -374,7 +374,7 @@ Qual é o gargalo? O que você faria para melhorá-lo?
 <details>
 <summary>Clique para ver a análise</summary>
 
-**Gargalo:** Aprovação do gerente (4 horas) — todas as outras etapas levam minutos.
+**Gargalo:** Aprovação do gerente (4 horas): todas as outras etapas levam minutos.
 
 **Sugestões de melhoria:**
 - Definir limites de aprovação (exigir aprovação do gerente apenas para pedidos acima de R$X)

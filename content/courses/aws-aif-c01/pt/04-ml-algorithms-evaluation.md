@@ -7,7 +7,7 @@ duration: "80 min"
 ---
 # Algoritmos de ML e Avaliação de Modelos na AWS
 
-Um algoritmo é fácil de nomear e difícil de justificar. O exame AIF-C01 quase nunca pergunta *"qual algoritmo existe"* — ele pergunta *"o negócio precisa de X, os rótulos se parecem com Y, e a AWS dá a você Z; justifique o par e defenda a métrica."* A Tarefa 2.1 pede que você **selecione técnicas de ML apropriadas para casos de uso específicos** (regressão, classificação, clustering), a Tarefa 2.2 pede que você **descreva aprendizado supervisionado, não supervisionado e por recompensa**, e a Tarefa 1.4 pede que você **descreva métricas de desempenho do modelo** (acurácia, AUC, F1) **e métricas de negócio** (custo por usuário, custo de desenvolvimento, retorno do cliente, ROI). Esta lição transforma essas três frases em um sistema de decisão operável.
+Um algoritmo é fácil de nomear e difícil de justificar. O exame AIF-C01 quase nunca pergunta *"qual algoritmo existe"*: ele pergunta *"o negócio precisa de X, os rótulos se parecem com Y, e a AWS dá a você Z; justifique o par e defenda a métrica."* A Tarefa 2.1 pede que você **selecione técnicas de ML apropriadas para casos de uso específicos** (regressão, classificação, clustering), a Tarefa 2.2 pede que você **descreva aprendizado supervisionado, não supervisionado e por recompensa**, e a Tarefa 1.4 pede que você **descreva métricas de desempenho do modelo** (acurácia, AUC, F1) **e métricas de negócio** (custo por usuário, custo de desenvolvimento, retorno do cliente, ROI). Esta lição transforma essas três frases em um sistema de decisão operável.
 
 ```text
 =====================================================================
@@ -39,9 +39,9 @@ Ao final desta lição você será capaz de:
 
 - escolher entre **aprendizado supervisionado, não supervisionado e por recompensa** apenas a partir do formato dos dados;
 - mapear **dezesseis famílias de algoritmos** para seu caso de uso, sua rota AWS e seu hiperparâmetro-chave;
-- afirmar quais algoritmos são **embutidos no SageMaker** — e qual deles famosamente **não** é;
+- afirmar quais algoritmos são **embutidos no SageMaker**, e qual deles famosamente **não** é;
 - computar **acurácia, precisão, revocação, F1, MAE, MSE, RMSE e R²** a partir de uma matriz de confusão ou um conjunto de resíduos sem usar calculadora;
-- escolher a **divisão** certa (70/30, 60/20/20, holdout 20–30%, k-fold 5–10) e defendê-la;
+- escolher a **divisão** certa (70/30, 60/20/20, holdout 20 to 30%, k-fold 5 to 10) e defendê-la;
 - diagnosticar **underfitting vs. overfitting** e aplicar o remédio prescrito pela AWS na direção correta;
 - atacar **desbalanceamento de classes** com as três alavancas documentadas pela AWS (reposicionamento de pesos, reamostragem, troca de métrica);
 - responder **dez perguntas no estilo do exame** escritas na voz oficial.
@@ -58,11 +58,11 @@ O exame decide o paradigma para você com uma pista: **o que os dados de treinam
 |---|---|---|---|
 | Pares rotulados entrada→saída, prever um alvo conhecido? | **Supervisionado** | Classificação / regressão | Linear Learner, XGBoost, k-NN, Image Classification |
 | Apenas features; quer grupos, outliers, forma compacta ou tópicos? | **Não supervisionado** | Sem respostas durante o treinamento | k-means, PCA, Random Cut Forest, LDA / NTM |
-| Decisões sequenciais, sinal de recompensa, loop agente–ambiente? | **Por recompensa** | Política aprendida a partir da recompensa | SageMaker RL (`RLEstimator`), Intel Coach, Ray RLlib |
+| Decisões sequenciais, sinal de recompensa, loop agente: ambiente? | **Por recompensa** | Política aprendida a partir da recompensa | SageMaker RL (`RLEstimator`), Intel Coach, Ray RLlib |
 | Rótulos são escassos mas a tarefa ainda é preditiva? | Supervisionado + **transferência** | Reutilizar um modelo pré-treinado | SageMaker JumpStart, containers Hugging Face |
 | Não tem certeza de qual algoritmo vence? | **AutoML** | Constrói e ajusta candidatos automaticamente | SageMaker Autopilot, AutoGluon-Tabular |
 
-A distinção em que os itens do exame mais se apoiam: **o aprendizado nunca supervisionado não vê um conjunto de validação com rótulos.** A própria documentação do k-means do SageMaker diz que ele *"não usa um conjunto de dados de validação"* porque não há nada contra o que validar — ele aceita um canal de **teste** e reporta apenas métricas baseadas em distância. Uma questão que oferece `validation:f1` para um trabalho de clustering está testando se você percebeu.
+A distinção em que os itens do exame mais se apoiam: **o aprendizado nunca supervisionado não vê um conjunto de validação com rótulos.** A própria documentação do k-means do SageMaker diz que ele *"não usa um conjunto de dados de validação"* porque não há nada contra o que validar: ele aceita um canal de **teste** e reporta apenas métricas baseadas em distância. Uma questão que oferece `validation:f1` para um trabalho de clustering está testando se você percebeu.
 
 ### 1.2 Como cada paradigma se parece como um fluxo de trabalho
 
@@ -83,7 +83,7 @@ flowchart TD
     E1 --> M4["Métrica: recompensa acumulada"]
 ```
 
-### 1.3 Aprendizado por recompensa no SageMaker — os fatos específicos
+### 1.3 Aprendizado por recompensa no SageMaker: os fatos específicos
 
 O aprendizado por recompensa (RL) é o paradigma que o exame testa por *reconhecimento de nome* em vez de por computação. As afirmações verificadas da AWS são:
 
@@ -93,9 +93,9 @@ O aprendizado por recompensa (RL) é o paradigma que o exame testa por *reconhec
 - o repositório de contêineres de RL aberto distribui imagens do **Vowpal Wabbit (VW)**;
 - os trabalhos eram lançados com o **`RLEstimator`**.
 
-Se uma questão descreve um agente aprendendo uma política para maximizar a recompensa acumulada em uma simulação, a resposta é SageMaker RL com Coach ou Ray RLlib — nunca k-means, nunca Autopilot, nunca PCA.
+Se uma questão descreve um agente aprendendo uma política para maximizar a recompensa acumulada em uma simulação, a resposta é SageMaker RL com Coach ou Ray RLlib: nunca k-means, nunca Autopilot, nunca PCA.
 
-- **📚 Você sabia?** O suporte a RL do SageMaker é deliberadamente estreito: **apenas TensorFlow e MXNet** para frameworks. Se uma opção oferece *"SageMaker RL com PyTorch"*, é um distrator — a lista de frameworks documentada não inclui PyTorch, mesmo sendo o PyTorch totalmente suportado para deep learning **supervisionado** através dos contêineres de deep learning pré-construídos.
+- **📚 Você sabia?** O suporte a RL do SageMaker é deliberadamente estreito: **apenas TensorFlow e MXNet** para frameworks. Se uma opção oferece *"SageMaker RL com PyTorch"*, é um distrator: a lista de frameworks documentada não inclui PyTorch, mesmo sendo o PyTorch totalmente suportado para deep learning **supervisionado** através dos contêineres de deep learning pré-construídos.
 
 **Verifique sua seleção de paradigma:**
 
@@ -103,12 +103,12 @@ Se uma questão descreve um agente aprendendo uma política para maximizar a rec
 {
   "question": "Combine cada cenário com o paradigma de aprendizado e a ferramenta da AWS que o implementa:",
   "pairs": [
-    {"left": "Dados rotulados de churn, prever cancelamento sim/não", "right": "Classificação supervisionada — binary_classifier do Linear Learner ou XGBoost"},
-    {"left": "50.000 transações sem rótulo, agrupar clientes em segmentos", "right": "Clustering não supervisionado — K-Means embutido com test:msd e test:ssd"},
-    {"left": "Braço robótico aprende uma política de pick-and-place a partir de recompensas", "right": "Aprendizado por recompensa — SageMaker RL com RLEstimator, Coach ou Ray RLlib"},
-    {"left": "10.000 linhas de sensores, encontrar as 40 leituras que quebram o padrão", "right": "Detecção de anomalia não supervisionada — Random Cut Forest"},
-    {"left": "Prever tempo de entrega em dias a partir de features de rota e clima", "right": "Regressão supervisionada — regressor do Linear Learner ou XGBoost, pontuado com RMSE"},
-    {"left": "10.000 documentos, descobrir temas recorrentes sem rótulos", "right": "Modelagem de tópicos não supervisionada — LDA ou Neural Topic Model"}
+    {"left": "Dados rotulados de churn, prever cancelamento sim/não", "right": "Classificação supervisionada: binary_classifier do Linear Learner ou XGBoost"},
+    {"left": "50.000 transações sem rótulo, agrupar clientes em segmentos", "right": "Clustering não supervisionado: K-Means embutido com test:msd e test:ssd"},
+    {"left": "Braço robótico aprende uma política de pick-and-place a partir de recompensas", "right": "Aprendizado por recompensa: SageMaker RL com RLEstimator, Coach ou Ray RLlib"},
+    {"left": "10.000 linhas de sensores, encontrar as 40 leituras que quebram o padrão", "right": "Detecção de anomalia não supervisionada: Random Cut Forest"},
+    {"left": "Prever tempo de entrega em dias a partir de features de rota e clima", "right": "Regressão supervisionada: regressor do Linear Learner ou XGBoost, pontuado com RMSE"},
+    {"left": "10.000 documentos, descobrir temas recorrentes sem rótulos", "right": "Modelagem de tópicos não supervisionada: LDA ou Neural Topic Model"}
   ],
   "explanation": "O paradigma é decidido pela presença de rótulos, não pela indústria. Alvo rotulado => supervisionado (classificação para alvos discretos, regressão para contínuos). Apenas features => não supervisionado (clustering, anomalia, tópicos, redução de dimensionalidade). Um loop de recompensa => recompensa. A ferramenta da AWS decorre do paradigma: Linear Learner e XGBoost são algoritmos embutidos supervisionados, K-Means/Random Cut Forest/LDA são algoritmos embutidos não supervisionados, e o SageMaker RL é a única rota para políticas movidas a recompensa."
 }
@@ -168,12 +168,12 @@ A AWS organiza seus algoritmos embutidos em grupos **supervisionados**, **não s
 
 **Embutidos tabulares (classificação ou regressão):** AutoGluon-Tabular, CatBoost, Factorization Machines, k-NN, LightGBM, **Linear Learner**, TabTransformer, **XGBoost**.
 
-A documentação do Linear Learner é explícita sobre o que ele é: ele *"aprende uma função linear para regressão ou uma função de limiar linear para classificação"* — o que o torna a resposta embutida sempre que uma questão diz **regressão logística** ou **regressão linear**.
+A documentação do Linear Learner é explícita sobre o que ele é: ele *"aprende uma função linear para regressão ou uma função de limiar linear para classificação"*, o que o torna a resposta embutida sempre que uma questão diz **regressão logística** ou **regressão linear**.
 
 **Embutidos não supervisionados:** PCA (redução de dimensionalidade), K-Means (clustering), Random Cut Forest (detecção de anomalia), IP Insights (anomalia de endereço IP), LDA e Neural Topic Model (modelagem de tópicos).
 
 > [!WARNING]
-> **Não existe random forest pronta para uso no SageMaker.** A própria documentação de script mode da AWS afirma isso textualmente. A rota documentada é o **contêiner scikit-learn + Script Mode**: seu script de treinamento instancia `RandomForestRegressor` ou `RandomForestClassifier` e o SageMaker o executa dentro da imagem scikit-learn pré-construída. Uma questão que oferece *"chamar o algoritmo embutido `RandomForest` com `num_round`"* está oferecendo duas mentiras ao mesmo tempo — o algoritmo não é embutido, e `num_round` é um hiperparâmetro do XGBoost.
+> **Não existe random forest pronta para uso no SageMaker.** A própria documentação de script mode da AWS afirma isso textualmente. A rota documentada é o **contêiner scikit-learn + Script Mode**: seu script de treinamento instancia `RandomForestRegressor` ou `RandomForestClassifier` e o SageMaker o executa dentro da imagem scikit-learn pré-construída. Uma questão que oferece *"chamar o algoritmo embutido `RandomForest` com `num_round`"* está oferecendo duas mentiras ao mesmo tempo, o algoritmo não é embutido, e `num_round` é um hiperparâmetro do XGBoost.
 
 - **📚 Você sabia?** A AWS publica **listas** de algoritmos, nunca uma contagem. Qualquer opção que começa com *"O SageMaker tem exatamente N algoritmos embutidos"* é um número inventado: as listas mudam conforme algoritmos são adicionados (AutoGluon-Tabular e TabTransformer são adições recentes ao conjunto tabular) e removidos. Aprenda a pertinência das listas, não um total.
 
@@ -181,7 +181,7 @@ A documentação do Linear Learner é explícita sobre o que ele é: ele *"apren
 
 ## 3. As famílias supervisionadas: lineares, árvores, boosting e redes neurais
 
-### 3.1 Linear Learner — o cavalo de batalha de regressão e classificação
+### 3.1 Linear Learner, o cavalo de batalha de regressão e classificação
 
 O Linear Learner é a resposta para *"qual embutido faz regressão linear ou logística?"* e carrega três propriedades examináveis:
 
@@ -194,7 +194,7 @@ O Linear Learner é a resposta para *"qual embutido faz regressão linear ou log
 
 Essa regra de ajuste é uma resposta gratuita sempre que uma opção diz *"ajustar contra a métrica de treinamento"*. O remédio documentado é o oposto: **ajuste na métrica de validação.**
 
-### 3.2 Gradient boosting — três embutidos mais um wrapper AutoML
+### 3.2 Gradient boosting: três embutidos mais um wrapper AutoML
 
 O gradient boosting é representado no SageMaker por **três** algoritmos embutidos mais uma opção de ensemble em pilha:
 
@@ -209,11 +209,11 @@ O gradient boosting é representado no SageMaker por **três** algoritmos embuti
 
 - o contêiner cobre XGBoost **1.0, 1.2, 1.3, 1.5, 1.7 e 3.0**;
 - **`num_round` é obrigatório** (mais `num_class` para `multi:softmax` e `multi:softprob`);
-- o objetivo padrão é **`reg:squarederror`** — então um trabalho do XGBoost não configurado é um trabalho de *regressão*;
+- o objetivo padrão é **`reg:squarederror`**, então um trabalho do XGBoost não configurado é um trabalho de *regressão*;
 - o treinamento em GPU é habilitado com **`tree_method=gpu_hist`**;
 - os hiperparâmetros de maior impacto para ajuste são **`alpha`, `min_child_weight`, `subsample`, `eta` e `num_round`**.
 
-### 3.3 O menu de métricas do XGBoost — doze objetivos com direções
+### 3.3 O menu de métricas do XGBoost: doze objetivos com direções
 
 O ajuste automático de modelo precisa de um objetivo **e uma direção**. O XGBoost expõe doze métricas de validação, e a direção é parte da resposta:
 
@@ -224,12 +224,12 @@ O ajuste automático de modelo precisa de um objetivo **e uma direção**. O XGB
 | `validation:f1` | `validation:mae` |
 | `validation:map` | `validation:merror` |
 | `validation:ndcg` | `validation:mlogloss` |
-| — | `validation:mse` |
-| — | `validation:rmse` |
+|: | `validation:mse` |
+|: | `validation:rmse` |
 
-Duas armadilhas vivem nesta tabela. Primeiro, **as métricas de ranking (`map`, `ndcg`) são Maximizar** enquanto toda métrica de erro é **Minimizar** — selecionar `validation:rmse` com direção `Maximizar` ajustaria o modelo para o *pior* resultado. Segundo, **`merror` e `mlogloss` são os irmãos multiclass de `error` e `logloss`**; confundi-los em uma opção é um padrão de distrator comum.
+Duas armadilhas vivem nesta tabela. Primeiro, **as métricas de ranking (`map`, `ndcg`) são Maximizar** enquanto toda métrica de erro é **Minimizar**: selecionar `validation:rmse` com direção `Maximizar` ajustaria o modelo para o *pior* resultado. Segundo, **`merror` e `mlogloss` são os irmãos multiclass de `error` e `logloss`**; confundi-los em uma opção é um padrão de distrator comum.
 
-### 3.4 Árvores, florestas e redes neurais — as rotas que exigem código
+### 3.4 Árvores, florestas e redes neurais: as rotas que exigem código
 
 | Família | Rota no SageMaker | Por quê |
 |---|---|---|
@@ -240,28 +240,28 @@ Duas armadilhas vivem nesta tabela. Primeiro, **as métricas de ranking (`map`, 
 | Embutidos de visão / NLP | Image Classification, Object Detection, Semantic Segmentation, NTM, Object2Vec, TabTransformer, Deep AR Forecasting | Algoritmos de deep learning embutidos |
 | Transformer com fine-tuning | SageMaker JumpStart | Modelo pré-treinado, código mínimo |
 
-O Object2Vec merece um gancho de memória específico: ele usa **entropia cruzada para classificação** e **erro quadrático médio (MSE) para regressão** — o mesmo algoritmo troca sua função de loss com a tarefa, que é exatamente o tipo de detalhe que uma opção pode inverter para produzir uma resposta errada.
+O Object2Vec merece um gancho de memória específico: ele usa **entropia cruzada para classificação** e **erro quadrático médio (MSE) para regressão**, o mesmo algoritmo troca sua função de loss com a tarefa, que é exatamente o tipo de detalhe que uma opção pode inverter para produzir uma resposta errada.
 
 ---
 
 ## 4. As famílias não supervisionadas: clustering, redução, anomalia e tópicos
 
-### 4.1 K-Means — não existe conjunto de validação
+### 4.1 K-Means: não existe conjunto de validação
 
 O K-Means é o favorito do exame para testar se você entende que **o aprendizado não supervisionado não tem conjunto de validação com rótulos**. Os pontos da documentação verificada:
 
 - *"Como é não supervisionado, ele não usa um conjunto de dados de validação… Mas ele aceita um conjunto de dados de teste."*
-- Métricas de objetivo: **`test:msd`** (distâncias quadradas médias) e **`test:ssd`** — **ambas Minimizar**;
+- Métricas de objetivo: **`test:msd`** (distâncias quadradas médias) e **`test:ssd`**: **ambas Minimizar**;
 - a inferência retorna **`closest_cluster`** e **`distance_to_cluster`**;
 - hiperparâmetros: **`k`**, **`init_method`** (`random` ou `k-means++`), **`mini_batch_size`**.
 
 Note a direção: métricas de distância são **minimizadas**, porque uma menor distância quadrada significa clusters mais compactos. Todo objetivo de clustering baseado em distância no SageMaker aponta na mesma direção.
 
-### 4.2 Silhueta — uma métrica real que não é uma métrica do SageMaker
+### 4.2 Silhueta: uma métrica real que não é uma métrica do SageMaker
 
-O coeficiente de silhueta varia de **−1 a 1**; um valor próximo de **1** significa que os pontos estão apertados dentro do próprio cluster *e* longe dos outros clusters. A orientação da AWS é **parear silhueta com inércia** — e deixar claro que **o SageMaker não a emite**: você a computa você mesmo fora do trabalho de treinamento. Uma questão que oferece *"selecionar `validation:silhouette` como objetivo de ajuste"* está testando precisamente esse limite.
+O coeficiente de silhueta varia de **−1 a 1**; um valor próximo de **1** significa que os pontos estão apertados dentro do próprio cluster *e* longe dos outros clusters. A orientação da AWS é **parear silhueta com inércia**, e deixar claro que **o SageMaker não a emite**: você a computa você mesmo fora do trabalho de treinamento. Uma questão que oferece *"selecionar `validation:silhouette` como objetivo de ajuste"* está testando precisamente esse limite.
 
-### 4.3 PCA — três hiperparâmetros obrigatórios
+### 4.3 PCA: três hiperparâmetros obrigatórios
 
 O PCA é embutido, e sua configuração é examinável porque é curta:
 
@@ -274,7 +274,7 @@ O PCA é embutido, e sua configuração é examinável porque é curta:
 | `subtract_mean` | Opcional | Se centralizar os dados |
 | `extra_components` | Opcional | Componentes extras computados além de `num_components` |
 
-O PCA produz a **`mean`**, a matriz de autovetores **`v`** e os valores singulares **`s`** — que é como você depois reconstrói ou projeta dados com os componentes que manteve.
+O PCA produz a **`mean`**, a matriz de autovetores **`v`** e os valores singulares **`s`**: que é como você depois reconstrói ou projeta dados com os componentes que manteve.
 
 ### 4.4 Detecção de anomalia e modelagem de tópicos
 
@@ -285,7 +285,7 @@ O PCA produz a **`mean`**, a matriz de autovetores **`v`** e os valores singular
 | Descoberta de tópicos em documentos | **LDA** (Latent Dirichlet Allocation) | Modelo de tópicos clássico |
 | Descoberta de tópicos em escala | **Neural Topic Model (NTM)** | Variante de deep learning |
 
-- **📚 Você sabia?** `test:msd` e `test:ssd` *não* são sinônimos intercambiáveis: **`msd` é a distância quadrada média** e **`ssd` é a soma** das distâncias quadradas ao centróide. Em um conjunto de teste de *n* linhas, `ssd = msd × n`, então `ssd` cresce com o tamanho do conjunto de dados enquanto `msd` não cresce. Ambas são minimizadas, e ambas são objetivos de clustering válidos — mas apenas `msd` é comparável entre conjuntos de teste de tamanhos diferentes.
+- **📚 Você sabia?** `test:msd` e `test:ssd` *não* são sinônimos intercambiáveis: **`msd` é a distância quadrada média** e **`ssd` é a soma** das distâncias quadradas ao centróide. Em um conjunto de teste de *n* linhas, `ssd = msd × n`, então `ssd` cresce com o tamanho do conjunto de dados enquanto `msd` não cresce. Ambas são minimizadas, e ambas são objetivos de clustering válidos, mas apenas `msd` é comparável entre conjuntos de teste de tamanhos diferentes.
 
 ---
 
@@ -320,13 +320,13 @@ flowchart TD
 Se uma questão empurra você para a Rota 4, três fatos documentados decidem a resposta:
 
 1. o pacote de toolkit **`sagemaker-training`** é **obrigatório**;
-2. **`ENV SAGEMAKER_PROGRAM train.py`** é *a única variável de ambiente obrigatória* — ela nomeia o ponto de entrada que o SageMaker invoca;
+2. **`ENV SAGEMAKER_PROGRAM train.py`** é *a única variável de ambiente obrigatória*: ela nomeia o ponto de entrada que o SageMaker invoca;
 3. **`/opt/ml` e todos os seus subdiretórios são reservados pelo treinamento do SageMaker**, então entradas, artefatos de modelo e saída devem seguir esse layout.
 
 Duas mais regras de contêiner aparecem como distratores:
 
 - o SageMaker **sobrescreve o `CMD` padrão** da sua imagem anexando o argumento `train`;
-- imagens GPU devem ser **compatíveis com `nvidia-docker`**: embale o **CUDA toolkit**, mas **não embale os drivers NVIDIA** — o host os fornece.
+- imagens GPU devem ser **compatíveis com `nvidia-docker`**: embale o **CUDA toolkit**, mas **não embale os drivers NVIDIA**, o host os fornece.
 
 ### 5.3 Janelas de suporte de contêiner são datas examináveis
 
@@ -377,7 +377,7 @@ flowchart TD
     R --> T
 ```
 
-### 6.3 Matriz de confusão trabalhada nº 1 — dados de churn equilibrados
+### 6.3 Matriz de confusão trabalhada nº 1: dados de churn equilibrados
 
 Um modelo de churn é avaliado em **200 clientes**: **VP = 80, FP = 20, FN = 10, VN = 90**.
 
@@ -399,7 +399,7 @@ $$
 
 Leitura: o modelo captura cerca de **89% dos churners**, mas **20 dos seus 100 alertas estão errados**. Uma acurácia de 0.85 é respeitável aqui *porque as classes estão razoavelmente equilibradas* (90 positivas, 110 negativas).
 
-### 6.4 Matriz de confusão trabalhada nº 2 — a armadilha do 1% de fraude
+### 6.4 Matriz de confusão trabalhada nº 2: a armadilha do 1% de fraude
 
 Um modelo de fraude é avaliado em **10.000 transações das quais apenas 100 são fraudulentas**: **VP = 85, FP = 40, FN = 15, VN = 9.860**.
 
@@ -430,7 +430,7 @@ $$
 Leitura: **32% dos alertas de fraude são falsos alarmes**, o modelo perde 15 de 100 fraudes, e a acurácia manchete é quase sem significado. Este é o padrão de avaliação mais repetido no material próprio de detecção de fraude da AWS.
 
 > [!WARNING]
-> **A acurácia é a métrica-armadilha do Domínio 1.** Quando uma classe domina — fraude em **0,173%**, churn em 2%, taxas de defeito abaixo de 1% — um modelo preguiçoso atinge acurácia quase perfeita prevendo a classe majoritária toda vez. Antes de aceitar um número de acurácia, pergunte: *o que um preditor de classe majoritária pontuaria?* Se a resposta estiver a um ponto do seu modelo, mude para **precisão, revocação, F1, ROC-AUC, acurácia balanceada ou Kappa de Cohen**, e varra o limiar de decisão de 0,1 a 0,9.
+> **A acurácia é a métrica-armadilha do Domínio 1.** Quando uma classe domina, fraude em **0,173%**, churn em 2%, taxas de defeito abaixo de 1%, um modelo preguiçoso atinge acurácia quase perfeita prevendo a classe majoritária toda vez. Antes de aceitar um número de acurácia, pergunte: *o que um preditor de classe majoritária pontuaria?* Se a resposta estiver a um ponto do seu modelo, mude para **precisão, revocação, F1, ROC-AUC, acurácia balanceada ou Kappa de Cohen**, e varra o limiar de decisão de 0,1 a 0,9.
 
 ---
 
@@ -442,8 +442,8 @@ Leitura: **32% dos alertas de fraude são falsos alarmes**, o modelo perde 15 de
 |---|---|---|
 | Divisão padrão do Amazon ML | **70% treino / 30% avaliação** | Guia do Desenvolvedor de ML, avaliando modelos |
 | Divisão em três vias recomendada | **60% treino / 20% avaliação / 20% validação** | Guia do Desenvolvedor de ML, avaliando modelos |
-| Proporção de holdout do SageMaker | **20–30%** dos dados de treinamento | GD do SageMaker, validação de modelo |
-| `k` do k-fold do SageMaker | Tipicamente **5–10** | GD do SageMaker, validação de modelo |
+| Proporção de holdout do SageMaker | **20 to 30%** dos dados de treinamento | GD do SageMaker, validação de modelo |
+| `k` do k-fold do SageMaker | Tipicamente **5 to 10** | GD do SageMaker, validação de modelo |
 | Validação cruzada HPO do Autopilot | Automático **k = 5** quando ≤ **50.000** instâncias de treinamento | GD do SageMaker, métricas do autopilot |
 | Divisão de ensemble do Autopilot | **80% treino / 20% validação** | GD do SageMaker, métricas do autopilot |
 | Tráfego de teste A/B online | **10% → depois 100%** | GD do SageMaker, validação de modelo |
@@ -455,11 +455,11 @@ O motivo declarado da AWS para reter dados é uma frase que vale a pena reproduz
 
 | Esquema | Treino | Validação / avaliação | Teste | Notas |
 |---|---|---|---|---|
-| Padrão 70/30 | **70.000** | **30.000** | — | Padrão do Amazon ML |
+| Padrão 70/30 | **70.000** | **30.000** |: | Padrão do Amazon ML |
 | Três vias 60/20/20 | **60.000** | **20.000** | **20.000** | Treino / avaliação / validação |
-| Holdout 20–30% | 70.000–80.000 | — | **20.000–30.000** | Intervalo recomendado pelo SageMaker |
-| k = 5 | 80.000 por fold | 20.000 por fold | — | 5 modelos, métricas médias |
-| k = 10 | 90.000 por fold | 10.000 por fold | — | 10 modelos, métricas médias |
+| Holdout 20 to 30% | 70.000 to 80.000 |: | **20.000 to 30.000** | Intervalo recomendado pelo SageMaker |
+| k = 5 | 80.000 por fold | 20.000 por fold |: | 5 modelos, métricas médias |
+| k = 10 | 90.000 por fold | 10.000 por fold |: | 10 modelos, métricas médias |
 
 ### 7.3 Validação cruzada do Autopilot: o limiar de 50.000 instâncias
 
@@ -470,7 +470,7 @@ Com **40.000 instâncias de treinamento** (≤ 50.000, então o modo HPO aplica 
 3. cada fold valida em **6.400** instâncias;
 4. as cinco pontuações de validação são **mediadas** no objetivo reportado.
 
-Um conjunto de dados de **60.000 instâncias** **excede** o limiar ≤ 50.000, então o k-fold automático no modo HPO não é acionado — enquanto o **modo ensemble** roda validação cruzada independentemente do tamanho ao lado de sua divisão automática 80/20.
+Um conjunto de dados de **60.000 instâncias** **excede** o limiar ≤ 50.000, então o k-fold automático no modo HPO não é acionado: enquanto o **modo ensemble** roda validação cruzada independentemente do tamanho ao lado de sua divisão automática 80/20.
 
 ### 7.4 Como o loop se encaixa
 
@@ -491,7 +491,7 @@ flowchart TD
     O -->|Não| OK["Generalizando: prossiga para implantação"]
 ```
 
-**Verificação interativa — as fórmulas que você não deve precisar procurar:**
+**Verificação interativa: as fórmulas que você não deve precisar procurar:**
 
 ```fillblank
 {
@@ -516,22 +516,22 @@ flowchart TD
 
 | Sinal | Diagnóstico | Remédio prescrito pela AWS |
 |---|---|---|
-| Alto erro **nos dados de treinamento** | **Underfitting** — o modelo simples demais | Adicionar features, mudar processamento, **diminuir** regularização, mais passagens |
-| Baixo erro de treino, **alto erro de avaliação** | **Overfitting** — *"performa bem nos dados de treinamento mas não performa bem nos dados de avaliação… memorizando os dados"* | Seleção de features, **aumentar** regularização, ajustar em uma métrica de **validação**, early stopping ou Hyperband |
+| Alto erro **nos dados de treinamento** | **Underfitting**, o modelo simples demais | Adicionar features, mudar processamento, **diminuir** regularização, mais passagens |
+| Baixo erro de treino, **alto erro de avaliação** | **Overfitting**: *"performa bem nos dados de treinamento mas não performa bem nos dados de avaliação… memorizando os dados"* | Seleção de features, **aumentar** regularização, ajustar em uma métrica de **validação**, early stopping ou Hyperband |
 | Ambas as pontuações ruins | Dados insuficientes | Aumentar exemplos de treinamento; aumentar o número de passagens |
 | Métricas de produção decaem | Deriva de dados / conceito | Model Monitor + viés pós-treino do Clarify; retreinar |
-| Acurácia parece ótima, modelo inútil | Métrica errada | Mudar para AUC / F1 / acurácia balanceada / Kappa de Cohen; varrer limiar 0,1–0,9 |
+| Acurácia parece ótima, modelo inútil | Métrica errada | Mudar para AUC / F1 / acurácia balanceada / Kappa de Cohen; varrer limiar 0,1 to 0,9 |
 
-A assinatura oficial de overfitting da AWS é curta: **alta acurácia de treinamento mais baixa acurácia de teste.** A direção do remédio importa tanto quanto o remédio — *overfitting recebe mais regularização, underfitting recebe menos.* Invertê-los é um distrator clássico.
+A assinatura oficial de overfitting da AWS é curta: **alta acurácia de treinamento mais baixa acurácia de teste.** A direção do remédio importa tanto quanto o remédio: *overfitting recebe mais regularização, underfitting recebe menos.* Invertê-los é um distrator clássico.
 
 ### 8.2 Os controles de ajuste que previnem overfitting mecanicamente
 
 Quatro controles documentados fazem o trabalho que um humano faria a olho:
 
 1. **Ajuste em uma métrica de validação, não em uma métrica de treinamento.** A documentação do Linear Learner afirma isso como recomendação, não como preferência.
-2. **Early stopping.** A cada época, a métrica de objetivo é comparada com a **mediana das médias móveis** de trabalhos anteriores; trabalhos com desempenho pior param cedo — a AWS diz que isso *"ajuda você a evitar overfitting do seu modelo"*. A configuração é `early_stopping_type='Auto'`.
+2. **Early stopping.** A cada época, a métrica de objetivo é comparada com a **mediana das médias móveis** de trabalhos anteriores; trabalhos com desempenho pior param cedo: a AWS diz que isso *"ajuda você a evitar overfitting do seu modelo"*. A configuração é `early_stopping_type='Auto'`.
 3. **Hyperband** também termina cedo trabalhos com desempenho fraco, alocando o orçamento para configurações promissoras.
-4. **Direção da regularização** — aumente-a para overfitting, diminua-a para underfitting.
+4. **Direção da regularização**: aumente-a para overfitting, diminua-a para underfitting.
 
 | Controle | Mecanismo | Formulação / configuração da AWS |
 |---|---|---|
@@ -565,7 +565,7 @@ Quatro controles documentados fazem o trabalho que um humano faria a olho:
 }
 ```
 
-- **📚 Você sabia?** O early stopping no Ajuste Automático de Modelo do SageMaker **não** compara seu trabalho com um alvo fixo — ele compara o valor de objetivo de cada época com a **mediana das médias móveis de todos os trabalhos anteriores**. Isso torna o limiar adaptativo: um trabalho inicial incomumente forte eleva a barra para tudo que segue, e um trabalho inicial fraco a baixa. A lista de suporte do early stopping traz um carimbo de "atual em 13 de dezembro de 2018", então trate qualquer afirmação sobre *quais* algoritmos o suportam como histórica.
+- **📚 Você sabia?** O early stopping no Ajuste Automático de Modelo do SageMaker **não** compara seu trabalho com um alvo fixo: ele compara o valor de objetivo de cada época com a **mediana das médias móveis de todos os trabalhos anteriores**. Isso torna o limiar adaptativo: um trabalho inicial incomumente forte eleva a barra para tudo que segue, e um trabalho inicial fraco a baixa. A lista de suporte do early stopping traz um carimbo de "atual em 13 de dezembro de 2018", então trate qualquer afirmação sobre *quais* algoritmos o suportam como histórica.
 
 ---
 
@@ -583,7 +583,7 @@ A AWS documenta **três alavancas independentes** para desbalanceamento. Uma res
 
 ### 9.2 Aritmética de pesos de classe
 
-**Caso A — uma divisão binária de 98% / 2%.** Para fazer a classe minoritária contar tanto quanto a majoritária:
+**Caso A: uma divisão binária de 98% / 2%.** Para fazer a classe minoritária contar tanto quanto a majoritária:
 
 $$
 0.02 \times w = 0.98 \implies w = \frac{0.98}{0.02} = 49
@@ -591,7 +591,7 @@ $$
 
 Então o `positive_example_weight_mult='balanced'` do Linear Learner em um conjunto 98/2 produz um peso positivo de **49**.
 
-**Caso B — o próprio conjunto de dados de fraude da AWS.** Com **284.807** exemplos dos quais **492** são fraudulentos (**0,173%**), a variante XGBoost da AWS usa a regra da raiz quadrada em vez da razão bruta:
+**Caso B, o próprio conjunto de dados de fraude da AWS.** Com **284.807** exemplos dos quais **492** são fraudulentos (**0,173%**), a variante XGBoost da AWS usa a regra da raiz quadrada em vez da razão bruta:
 
 $$
 \text{scale\_pos\_weight} = \sqrt{\frac{284{,}315}{492}} = \sqrt{577.9} \approx 24
@@ -599,7 +599,7 @@ $$
 
 A razão bruta seria **577,9**; o amortecimento da raiz quadrada mantém o treinamento estável enquanto ainda diz ao modelo que a fraude importa. A AWS reporta adicionalmente que elevar o **Kappa de Cohen acima de 0,8** seria *"geralmente muito favorável"* naquele problema.
 
-### 9.3 O que a ponderação custa — o trade-off documentado
+### 9.3 O que a ponderação custa, o trade-off documentado
 
 Ponderar não é de graça. O próprio exemplo multiclass da AWS mostra os dois lados:
 
@@ -610,7 +610,7 @@ Ponderar não é de graça. O próprio exemplo multiclass da AWS mostra os dois 
 | Revocação da classe dominante (Lodgepole Pine) | **81%** | **52%** |
 | Acurácia geral | **72%** | **59%** |
 
-A lição que o exame quer: **você trocou 13 pontos de acurácia por um modelo que realmente reconhece a classe rara.** Em um problema desbalanceado, essa troca geralmente está correta — mas deve ser uma *decisão*, não um efeito colateral.
+A lição que o exame quer: **você trocou 13 pontos de acurácia por um modelo que realmente reconhece a classe rara.** Em um problema desbalanceado, essa troca geralmente está correta, mas deve ser uma *decisão*, não um efeito colateral.
 
 ### 9.4 A troca de métrica, lado a lado
 
@@ -619,21 +619,21 @@ A lição que o exame quer: **você trocou 13 pontos de acurácia por um modelo 
 | Fraude com prevalência de 0,173% | ROC-AUC (`job_objective='AUC'` no Autopilot) | Linha de base de 99,0% prevendo sempre "não fraude" |
 | Binário, moderadamente desbalanceado | F1 (objetivo binário **padrão** do Autopilot) | A média harmônica se recusa a esconder um lado fraco |
 | Tanto FP quanto FN caros | Acurácia balanceada = (Revocação + TVN)/2, ou Kappa de Cohen | A classe majoritária domina a acurácia simples |
-| Limiar precisa de ajuste | Curva precisão/revocação, varrer 0,1–0,9 | Um único limiar raramente otimiza os dois |
+| Limiar precisa de ajuste | Curva precisão/revocação, varrer 0,1 to 0,9 | Um único limiar raramente otimiza os dois |
 
 > [!NOTE]
 > **O Autopilot faz duas das três alavancas para você.** Seu objetivo binário padrão é **F1** (mude para **AUC** com `job_objective='AUC'` para dados enviesados além de 99%), e ele *"automaticamente aplicou up-weighting à classe minoritária usando `scale_pos_weight`"*. Se uma questão pergunta o que o Autopilot faz automaticamente em dados binários desbalanceados, a resposta é **tanto o padrão de métrica quanto a ponderação**.
 
 ---
 
-## 10. Avaliação por tipo de tarefa — a tabela de consulta
+## 10. Avaliação por tipo de tarefa: a tabela de consulta
 
 | Tipo de tarefa | Configuração | Métricas primárias | Nomes de métricas emitidas pela AWS | Armadilha |
 |---|---|---|---|---|
 | Binário (equilibrado) | treino/val/teste ou 70/30 | Acurácia, F1, ROC-AUC | Linear Learner `validation:precision` / `:recall`; XGBoost `validation:f1` / `:auc` | Confiar apenas na acurácia |
 | Binário (desbalanceado) | Divisão estratificada antes da reamostragem | Precisão, revocação, F1, AUC, acurácia balanceada, Kappa de Cohen | XGBoost `scale_pos_weight` + `validation:auc`; Autopilot `job_objective='AUC'` | 99% de acurácia prevendo a majoritária |
 | Multiclass | Média macro/micro | Revocação por classe, macro-F1, matriz de confusão | Linear Learner `balance_multiclass_weights`; Clarify `multiclass_average_strategy` | Acurácia esconde o colapso da classe rara |
-| Regressão | Holdout 20–30% | RMSE, MAE, R² | XGBoost `validation:rmse` / `:mae` / `:mse`; Linear Learner `validation:rmse`, `validation:absolute_loss` | Citar MSE em unidades ao quadrado |
+| Regressão | Holdout 20 to 30% | RMSE, MAE, R² | XGBoost `validation:rmse` / `:mae` / `:mse`; Linear Learner `validation:rmse`, `validation:absolute_loss` | Citar MSE em unidades ao quadrado |
 | Ranking / recomendador | Divisão ordenada no tempo | mAP, NDCG | XGBoost `validation:map`, `validation:ndcg` | Uma divisão aleatória vaza o futuro |
 | Clustering | Canal de teste, sem rótulos | `test:msd` / `test:ssd`, silhueta, inércia | SageMaker k-means `test:msd`, `test:ssd` (ambas **Minimizar**) | Caçar um conjunto de validação que não existe |
 | Redução de dimensionalidade | Variância retida | Variância explicada | PCA produz `v`, `s`, `mean` | Escolher `num_components` arbitrariamente |
@@ -645,12 +645,12 @@ A lição que o exame quer: **você trocou 13 pontos de acurácia por um modelo 
 |---|---|---|---|
 | Geração aberta | Conhecimento factual, robustez semântica, estereotipagem de prompt, toxicidade | TREX, BOLD, WikiText, CrowS-Pairs, RealToxicityPrompts | Fluência, Coerência, Toxicidade, Acurácia, Consistência, Relevância + personalizada |
 | Resumo de texto | **ROUGE-N**, **BERTScore** | Government Report Dataset, Gigaword | Mesmas dimensões humanas |
-| Resposta a perguntas | Correspondência exata, correspondência quasi exata, **F1 sobre palavras** = (2·P·R)/(P+R) | BoolQ, NaturalQuestions, TriviaQA | — |
-| Classificação de texto | Acurácia de classificação, precisão, revocação, **acurácia de classificação balanceada** = *"a soma da revocação e da taxa de verdadeiro negativo dividida por 2"* | Women's Ecommerce Clothing Reviews | — |
+| Resposta a perguntas | Correspondência exata, correspondência quasi exata, **F1 sobre palavras** = (2·P·R)/(P+R) | BoolQ, NaturalQuestions, TriviaQA |: |
+| Classificação de texto | Acurácia de classificação, precisão, revocação, **acurácia de classificação balanceada** = *"a soma da revocação e da taxa de verdadeiro negativo dividida por 2"* | Women's Ecommerce Clothing Reviews |: |
 
 Dois números de amostragem são examináveis: o Clarify avalia **100 registros por padrão** para a maioria das tarefas e **300 para conhecimento factual**. E um nome de métrica de viés é único do Clarify: **CI (Class Imbalance)**.
 
-- **📚 Você sabia?** A acurácia de classificação balanceada tem um glossário oficial da AWS: *"a soma da revocação e da taxa de verdadeiro negativo dividida por 2."* Para um problema multiclass ela degrada graciosamente na **média da revocação por classe** — que é exatamente por que ela sobrevive ao desbalanceamento de classes enquanto a acurácia simples não sobrevive: cada classe contribui igualmente independentemente de quantas linhas ela possui.
+- **📚 Você sabia?** A acurácia de classificação balanceada tem um glossário oficial da AWS: *"a soma da revocação e da taxa de verdadeiro negativo dividida por 2."* Para um problema multiclass ela degrada graciosamente na **média da revocação por classe**: que é exatamente por que ela sobrevive ao desbalanceamento de classes enquanto a acurácia simples não sobrevive: cada classe contribui igualmente independentemente de quantas linhas ela possui.
 
 ---
 
@@ -659,10 +659,10 @@ Dois números de amostragem são examináveis: o Clarify avalia **100 registros 
 O exame quase sempre força uma escolha sobre **três eixos de uma vez**: a família de algoritmos, o tipo de tarefa, e a ferramenta da AWS que implementa o par. Acertar dois dos três não é suficiente.
 
 > [!IMPORTANT]
-> **Veredito Comparativo — escolha de algoritmo × tipo de tarefa × ferramenta AWS**
+> **Veredito Comparativo: escolha de algoritmo × tipo de tarefa × ferramenta AWS**
 > - **Regressão linear/logística → Linear Learner (embutido).** Escolha-o quando o alvo é contínuo (`regressor`, pontuado com `validation:rmse`) ou binário (`binary_classifier`, pontuado com `validation:precision` / `validation:recall`). É a resposta documentada para *"qual embutido faz regressão linear ou logística"*, e sua regra de ajuste é explícita: ajuste em uma métrica de **validação**. Não alcance o XGBoost primeiro quando o exame nomeia regressão linear ou logística pelo nome.
-> - **Gradient boosting → XGBoost embutido, com LightGBM ou CatBoost para dados tabulares grandes ou categóricos.** Escolha-o para classificação tabular, regressão e ranking. É a única família que oferece métricas de **ranking** (`validation:map`, `validation:ndcg`) como objetivos de primeira classe, e `num_round` é obrigatório. Quando os dados são gigantes e majoritariamente categóricos, os embutidos LightGBM e CatBoost são os irmãos mais rápidos — os três são embutidos, nenhum precisa de Script Mode.
-> - **Árvores e random forests → contêiner scikit-learn + Script Mode.** Este é o substituto documentado para o algoritmo que o SageMaker *não* distribui. Se uma opção afirma uma random forest embutida, está errada; se uma opção diz *"construa sua própria imagem Docker primeiro"*, está superprojetando — a Rota 2 existe precisamente para este caso.
+> - **Gradient boosting → XGBoost embutido, com LightGBM ou CatBoost para dados tabulares grandes ou categóricos.** Escolha-o para classificação tabular, regressão e ranking. É a única família que oferece métricas de **ranking** (`validation:map`, `validation:ndcg`) como objetivos de primeira classe, e `num_round` é obrigatório. Quando os dados são gigantes e majoritariamente categóricos, os embutidos LightGBM e CatBoost são os irmãos mais rápidos: os três são embutidos, nenhum precisa de Script Mode.
+> - **Árvores e random forests → contêiner scikit-learn + Script Mode.** Este é o substituto documentado para o algoritmo que o SageMaker *não* distribui. Se uma opção afirma uma random forest embutida, está errada; se uma opção diz *"construa sua própria imagem Docker primeiro"*, está superprojetando: a Rota 2 existe precisamente para este caso.
 > - **Clustering → K-Means embutido; redução de dimensionalidade → PCA embutido; outliers → Random Cut Forest ou IP Insights.** Todos são não supervisionados, então o design de avaliação muda: **não existe conjunto de validação**, a pontuação acontece em um **canal de teste**, o K-Means minimiza `test:msd` / `test:ssd`, e **a silhueta deve ser computada por você**. Os três hiperparâmetros obrigatórios do PCA (`feature_dim`, `mini_batch_size`, `num_components`) são um detalhe favorito de resposta curta.
 > - **Imagens, texto e sequências → contêineres de deep learning pré-construídos** (TensorFlow, PyTorch, MXNet, Chainer, Hugging Face) para treinar sua própria rede, ou **SageMaker JumpStart** quando um modelo pré-treinado pode receber fine-tuning e ser implantado *"dentro do SageMaker Studio"*. Controle sequencial movido a recompensa → **SageMaker RL** com `RLEstimator`, Coach ou Ray RLlib em TensorFlow ou MXNet. Essas três rotas são respostas mutuamente exclusivas; o tipo de tarefa escolhe uma.
 > - **Quando o algoritmo é genuinamente desconhecido → AutoML.** O SageMaker Autopilot ou o embutido AutoGluon-Tabular construirão e ajustarão candidatos para você, usando por padrão **F1** em problemas binários, rodando **validação cruzada automática k = 5 em ≤ 50.000 instâncias**, e aplicando `scale_pos_weight` à classe minoritária automaticamente. AutoML é a resposta correta apenas quando a questão enfatiza *velocidade até uma linha de base defensível*, não quando enfatiza *controle sobre o algoritmo*.
@@ -671,24 +671,24 @@ O exame quase sempre força uma escolha sobre **três eixos de uma vez**: a fam�
 
 ## 12. Exemplos trabalhados com números
 
-**Exemplo trabalhado 1 — métricas de regressão do zero.** Valores reais $y = [100, 120, 140, 160, 180]$, previsões $\hat{y} = [110, 115, 150, 155, 190]$, então os erros são $[10, -5, 10, -5, 10]$.
+**Exemplo trabalhado 1: métricas de regressão do zero.** Valores reais $y = [100, 120, 140, 160, 180]$, previsões $\hat{y} = [110, 115, 150, 155, 190]$, então os erros são $[10, -5, 10, -5, 10]$.
 
 - $\text{MAE} = (10+5+10+5+10)/5 = 40/5 = \mathbf{8.0}$
 - $\text{MSE} = (100+25+100+25+100)/5 = 350/5 = \mathbf{70}$
-- $\text{RMSE} = \sqrt{70} \approx \mathbf{8.37}$ — de volta às próprias unidades do alvo
+- $\text{RMSE} = \sqrt{70} \approx \mathbf{8.37}$: de volta às próprias unidades do alvo
 - $\bar{y} = 140$, então $SS_{tot} = 1600+400+0+400+1600 = 4000$, e $R^2 = 1 - 350/4000 = \mathbf{0.9125}$
 
 O padrão: **o MSE pune os dois erros de 10 pontos quatro vezes mais duramente que os erros de 5 pontos** (100 vs. 25), e o RMSE desfaz essa elevação ao quadrado para que o número possa ser citado em dólares ou dias.
 
-**Exemplo trabalhado 2 — aritmética de divisão em 100.000 linhas.** O padrão 70/30 dá **70.000 / 30.000**; o recomendado 60/20/20 dá **60.000 / 20.000 / 20.000**; o holdout de 20–30% do SageMaker reserva **20.000–30.000** linhas para teste; k = 10 dá **90.000 treino / 10.000 validação por fold** em 10 modelos cujas métricas você media.
+**Exemplo trabalhado 2: aritmética de divisão em 100.000 linhas.** O padrão 70/30 dá **70.000 / 30.000**; o recomendado 60/20/20 dá **60.000 / 20.000 / 20.000**; o holdout de 20 to 30% do SageMaker reserva **20.000 to 30.000** linhas para teste; k = 10 dá **90.000 treino / 10.000 validação por fold** em 10 modelos cujas métricas você media.
 
-**Exemplo trabalhado 3 — matemática de validação cruzada do Autopilot.** Conjunto de dados de **40.000 instâncias** (≤ 50.000 → k-fold automático, k = 5, no modo HPO): 80/20 dá **32.000 treino / 8.000 validação**; cada um dos 5 folds treina em 4/5 × 32.000 = **25.600** e valida em **6.400**; as cinco pontuações são mediadas. A mesma receita em **60.000 instâncias** **excederia** o limiar e perderia o k-fold automático no modo HPO.
+**Exemplo trabalhado 3: matemática de validação cruzada do Autopilot.** Conjunto de dados de **40.000 instâncias** (≤ 50.000 → k-fold automático, k = 5, no modo HPO): 80/20 dá **32.000 treino / 8.000 validação**; cada um dos 5 folds treina em 4/5 × 32.000 = **25.600** e valida em **6.400**; as cinco pontuações são mediadas. A mesma receita em **60.000 instâncias** **excederia** o limiar e perderia o k-fold automático no modo HPO.
 
-**Exemplo trabalhado 4 — matemática de pesos de classe, ambas as variantes.** 98% negativo / 2% positivo ⇒ $0.02 \times w = 0.98 \Rightarrow w = \mathbf{49}$. A variante de fraude da AWS usa $\text{scale\_pos\_weight} = \sqrt{284{,}315/492} = \sqrt{577.9} \approx \mathbf{24}$. Ambas são legítimas; a razão bruta é mais severa, a raiz quadrada é o amortecimento documentado para enviesamento extremo.
+**Exemplo trabalhado 4: matemática de pesos de classe, ambas as variantes.** 98% negativo / 2% positivo ⇒ $0.02 \times w = 0.98 \Rightarrow w = \mathbf{49}$. A variante de fraude da AWS usa $\text{scale\_pos\_weight} = \sqrt{284{,}315/492} = \sqrt{577.9} \approx \mathbf{24}$. Ambas são legítimas; a razão bruta é mais severa, a raiz quadrada é o amortecimento documentado para enviesamento extremo.
 
-**Exemplo trabalhado 5 — a matriz de confusão desbalanceada completa.** 10.000 transações, 100 fraudes, VP = 85, FP = 40, FN = 15, VN = 9.860 ⇒ acurácia **99,45%**, linha de base majoritária **99,0%**, precisão **0,68**, revocação **0,85**, F1 **0,756**. A decisão que segue: reporte F1 ou AUC, não acurácia, e afirme que **40 de 125 alertas (32%) são falsos alarmes**.
+**Exemplo trabalhado 5: a matriz de confusão desbalanceada completa.** 10.000 transações, 100 fraudes, VP = 85, FP = 40, FN = 15, VN = 9.860 ⇒ acurácia **99,45%**, linha de base majoritária **99,0%**, precisão **0,68**, revocação **0,85**, F1 **0,756**. A decisão que segue: reporte F1 ou AUC, não acurácia, e afirme que **40 de 125 alertas (32%) são falsos alarmes**.
 
-**Exemplo trabalhado 6 — equilibrando um conjunto de avaliação de 600 previsões.** Um modelo produz VP = 480, FP = 60, FN = 20, VN = 40 em 1.000 linhas. Acurácia = $880/1000 = \mathbf{0.88}$; precisão = $480/540 = \mathbf{0.889}$; revocação = $480/500 = \mathbf{0.96}$; F1 = $2(0.889)(0.96)/(0.889+0.96) = 1.707/1.849 = \mathbf{0.923}$. Taxa de verdadeiro negativo = $40/100 = 0.40$, então acurácia balanceada = $(0.96 + 0.40)/2 = \mathbf{0.68}$ — muito abaixo da acurácia de 0.88, porque a classe negativa é onde o modelo falha. **Aquela lacuna entre 0,88 e 0,68 é exatamente o que a acurácia balanceada existe para expor.**
+**Exemplo trabalhado 6, equilibrando um conjunto de avaliação de 600 previsões.** Um modelo produz VP = 480, FP = 60, FN = 20, VN = 40 em 1.000 linhas. Acurácia = $880/1000 = \mathbf{0.88}$; precisão = $480/540 = \mathbf{0.889}$; revocação = $480/500 = \mathbf{0.96}$; F1 = $2(0.889)(0.96)/(0.889+0.96) = 1.707/1.849 = \mathbf{0.923}$. Taxa de verdadeiro negativo = $40/100 = 0.40$, então acurácia balanceada = $(0.96 + 0.40)/2 = \mathbf{0.68}$, muito abaixo da acurácia de 0.88, porque a classe negativa é onde o modelo falha. **Aquela lacuna entre 0,88 e 0,68 é exatamente o que a acurácia balanceada existe para expor.**
 
 ---
 
@@ -698,21 +698,21 @@ O padrão: **o MSE pune os dois erros de 10 pontos quatro vezes mais duramente q
 > **Armadilhas de exame para esta lição:**
 > - **Não existe random forest embutida.** A rota é o **contêiner scikit-learn + Script Mode**. Uma opção inventando um algoritmo `RandomForest` embutido com um parâmetro `num_round` contém dois erros.
 > - **k-means não tem conjunto de validação.** Ele pontua um canal de **teste** com `test:msd` e `test:ssd`, ambas **Minimizar**. Uma opção que oferece `validation:f1` para clustering está errada.
-> - **Silhueta não é uma métrica do SageMaker.** Intervalo −1..1, mais perto de 1 é melhor, pareie-a com inércia — e compute-a você mesmo.
+> - **Silhueta não é uma métrica do SageMaker.** Intervalo −1..1, mais perto de 1 é melhor, pareie-a com inércia, e compute-a você mesmo.
 > - **A direção da regularização inverte com o diagnóstico.** Overfit → **aumente** regularização e faça seleção de features. Underfit → **diminua** regularização e adicione features. Invertê-los é um distrator padrão.
 > - **Ajuste em validação, nunca em treinamento.** A AWS afirma a recomendação explicitamente para o Linear Learner.
 > - **PCA precisa de exatamente três hiperparâmetros obrigatórios:** `feature_dim`, `mini_batch_size`, `num_components`.
-> - **O `num_round` do XGBoost é obrigatório e seu objetivo padrão é `reg:squarederror`** — um trabalho do XGBoost não configurado é um trabalho de regressão.
+> - **O `num_round` do XGBoost é obrigatório e seu objetivo padrão é `reg:squarederror`**: um trabalho do XGBoost não configurado é um trabalho de regressão.
 > - **Reamostragem através do Balance do Data Wrangler (incluindo SMOTE) é apenas para classificação binária.** Para multiclass, use `balance_multiclass_weights` ou trocas de métrica.
 > - **O padrão binário do Autopilot é F1**, ele auto-aplica `scale_pos_weight`, e validação cruzada automática k = 5 aplica em ≤ 50.000 instâncias de treinamento;
 > - **Divisões de ranking devem ser ordenadas no tempo.** Uma divisão aleatória em um problema de recomendador vaza o futuro.
-> - **Nunca invente um limiar de aprovação.** Não existe padrão AWS dizendo *"F1 deve exceder 0,8"* — afirmações assim são não verificáveis.
+> - **Nunca invente um limiar de aprovação.** Não existe padrão AWS dizendo *"F1 deve exceder 0,8"*: afirmações assim são não verificáveis.
 
 ### 13.1 Afirmações conflitantes, não verificadas e não examináveis
 
 | Afirmação | Status | Como lidar |
 |---|---|---|
-| Contagem de "N algoritmos embutidos do SageMaker" | **Sem número oficial** — a AWS publica listas, não contagens | Aprenda a pertinência de listas, nunca um total |
+| Contagem de "N algoritmos embutidos do SageMaker" | **Sem número oficial**: a AWS publica listas, não contagens | Aprenda a pertinência de listas, nunca um total |
 | Lista de suporte do early stopping | Marcada como *"atual em 13 de dezembro de 2018"* | Trate como histórica; não memorize a lista |
 | Strings de versão do contêiner XGBoost | Renderizadas de forma inconsistente entre páginas de doc | Use `xgboost.html`: 1.0, 1.2, 1.3, 1.5, 1.7, 3.0 |
 | Um limiar de aprovação numérico para qualquer métrica | **Não existe tal padrão AWS** | Nunca afirme "F1 deve ser > 0,8" |
@@ -731,31 +731,31 @@ Cada regra das seções 1 a 13 tem uma versão de cliente. Os quatro casos abaix
 
 | Caso (indústria, fonte) | Rota da seção 5 | Serviços AWS nomeados pela AWS | Resultado documentado | Qual regra da lição ele prova |
 |---|---|---|---|---|
-| **Chronomics** (health-tech, ML Blog, 13 de dezembro de 2022) | Rota 1 — AutoML gerenciado pré-construído | **Amazon Rekognition Custom Labels**, `DetectCustomLabels` | **96,5% de acurácia / 97,9% F1 em 3–4 semanas**, depois de 4 meses de CV interno sem atingir a meta | Escolha a rota pelo esforço, e trate o limiar de confiança como uma decisão |
+| **Chronomics** (health-tech, ML Blog, 13 de dezembro de 2022) | Rota 1: AutoML gerenciado pré-construído | **Amazon Rekognition Custom Labels**, `DetectCustomLabels` | **96,5% de acurácia / 97,9% F1 em 3 to 4 semanas**, depois de 4 meses de CV interno sem atingir a meta | Escolha a rota pelo esforço, e trate o limiar de confiança como uma decisão |
 | **Sun Finance** (fintech, ML Blog, 30 de abril de 2026) | Rota 1 composta com cola da Rota 4 | **Amazon Textract**, **Amazon Rekognition**, **Amazon Bedrock** (Claude Sonnet 4), Lambda, Step Functions, **S3 Vectors** | **79,73% → 90,80%** de acurácia, **−91%** de custo por documento, **20 h → <5 s** | Avalie cada tentativa; separe OCR de raciocínio |
 | **HAYAT HOLDING** (manufatura, ML Blog, 2023) | Rota 1 + ajuste gerenciado | **SageMaker** Training, **Automatic Model Tuning**, Model Deployment, **Edge Manager**; **AWS IoT Greengrass** | **US$ 300.000/ano** economizados em **194 sensores** | Ajuste em uma métrica de validação automaticamente, não à mão |
-| **Adobe** (software, ML Blog, 11 de junho de 2025) | Rota 3 — RAG gerenciado, com benchmark | **Bedrock Knowledge Bases**, **OpenSearch Service**, **Amazon Titan Text Embeddings V2** | **+20% de acurácia de recuperação** no próprio conjunto de testes da Adobe | Compare configurações candidatas com benchmark em dados de retenção |
+| **Adobe** (software, ML Blog, 11 de junho de 2025) | Rota 3: RAG gerenciado, com benchmark | **Bedrock Knowledge Bases**, **OpenSearch Service**, **Amazon Titan Text Embeddings V2** | **+20% de acurácia de recuperação** no próprio conjunto de testes da Adobe | Compare configurações candidatas com benchmark em dados de retenção |
 
-### Estudo de caso 1 — Chronomics: o limiar é uma decisão, não um detalhe
+### Estudo de caso 1, Chronomics: o limiar é uma decisão, não um detalhe
 
-Depois de quatro meses de modelagem de visão computacional interno que nunca atingiu a meta, a Chronomics moveu a mesma tarefa de leitura de testes de COVID para o **Amazon Rekognition Custom Labels** (AutoML) e entregou em **3–4 semanas** com **96,5% de acurácia e 97,9% de F1**, pontuado com `DetectCustomLabels`. A parte examinável é o que aconteceu depois: elevar o limiar de confiança comprou precisão e pagou por isso em cobertura.
+Depois de quatro meses de modelagem de visão computacional interno que nunca atingiu a meta, a Chronomics moveu a mesma tarefa de leitura de testes de COVID para o **Amazon Rekognition Custom Labels** (AutoML) e entregou em **3 to 4 semanas** com **96,5% de acurácia e 97,9% de F1**, pontuado com `DetectCustomLabels`. A parte examinável é o que aconteceu depois: elevar o limiar de confiança comprou precisão e pagou por isso em cobertura.
 
 | Limiar de confiança | Resultado reportado | Previsões descartadas | Decisão que o time deve tomar |
 |---|---|---|---|
 | **0,99** | **99,6%** | **5%** | Roteie os 5% descartados para um caminho de revisão humana ou **Amazon A2I** |
-| **0,999** | **99,87%** | **27%** | Um quarto de todas as previsões agora precisa de outra resposta — isso é acessível? |
+| **0,999** | **99,87%** | **27%** | Um quarto de todas as previsões agora precisa de outra resposta; isso é acessível? |
 
 *Fonte:* AWS Machine Learning Blog, `blogs/machine-learning/chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels` (13 de dezembro de 2022).
 
-A lição espelha a seção 6: um único número de acurácia nunca conta quanto uma mudança de limiar custa. A Chronomics não retreinou entre as duas linhas — ela mudou apenas *quais previsões estava disposta a assinar*, e é por isso que "o que acontece com as linhas descartadas?" deve ser respondido antes da implantação.
+A lição espelha a seção 6: um único número de acurácia nunca conta quanto uma mudança de limiar custa. A Chronomics não retreinou entre as duas linhas: ela mudou apenas *quais previsões estava disposta a assinar*, e é por isso que "o que acontece com as linhas descartadas?" deve ser respondido antes da implantação.
 
-### Estudo de caso 2 — Sun Finance: avalie cada tentativa e nunca deixe um modelo fazer dois trabalhos
+### Estudo de caso 2, Sun Finance: avalie cada tentativa e nunca deixe um modelo fazer dois trabalhos
 
 A Sun Finance automatizou a extração de documentos KYC em nove países. A escada de tentativas documentada é a narrativa de avaliação mais limpa do digest:
 
 | Tentativa | Pipeline | Acurácia medida | Veredito |
 |---|---|---|---|
-| 1 | **Claude Sonnet 4 sozinho** (OCR só com LLM) | **61,8%** no geral, **43%** no número de ID | **Rejeitado** — proteções de privacidade bloqueiam extração direta de PII |
+| 1 | **Claude Sonnet 4 sozinho** (OCR só com LLM) | **61,8%** no geral, **43%** no número de ID | **Rejeitado**: proteções de privacidade bloqueiam extração direta de PII |
 | 2 | **OCR Textract + Claude** estruturando | **85%** | Promissor, não produção |
 | 3 | **Textract → fallback Rekognition → Claude → regras de validação** | **90,80%** | Entregue |
 
@@ -769,30 +769,30 @@ A Sun Finance automatizou a extração de documentos KYC em nove países. A esca
 
 *Fonte:* AWS Machine Learning Blog, `blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws` (30 de abril de 2026); avaliado em **585 imagens**.
 
-Dois hábitos de exame vivem aqui. Primeiro, **a tentativa 1 foi medida e rejeitada** — o time não entregou por vibes, entregou em um conjunto de avaliação de retenção. Segundo, **OCR e raciocínio são trabalhos separados**: o serviço de extração pré-construído (Rota 1) fez a leitura, o foundation model apenas estruturou o que já tinha sido lido, e regras de validação pegaram o resto.
+Dois hábitos de exame vivem aqui. Primeiro, **a tentativa 1 foi medida e rejeitada**, o time não entregou por vibes, entregou em um conjunto de avaliação de retenção. Segundo, **OCR e raciocínio são trabalhos separados**: o serviço de extração pré-construído (Rota 1) fez a leitura, o foundation model apenas estruturou o que já tinha sido lido, e regras de validação pegaram o resto.
 
-### Estudo de caso 3 — HAYAT HOLDING: o ajuste automático substitui a varredura manual
+### Estudo de caso 3, HAYAT HOLDING: o ajuste automático substitui a varredura manual
 
 A HAYAT HOLDING transmite **194 sensores** via OPC-UA para um SiteWise Edge Gateway **AWS IoT Greengrass**, depois treina no **SageMaker Model Training** com **SageMaker Automatic Model Tuning**, implanta com **SageMaker Model Deployment**, e roda os modelos no dispositivo através do **SageMaker Edge Manager**. O resultado documentado é **US$ 300.000 por ano** economizados mais qualidade de painel mais alta.
 
 *Fonte:* AWS Machine Learning Blog, `blogs/machine-learning/hayat-holding-uses-amazon-sagemaker-to-increase-product-quality-and-optimize-manufacturing-output-saving-300000-annually` (2023).
 
-Isto é a seção 8.2 rodando sem supervisão: em vez de um humano varrendo hiperparâmetros a olho, o tuner busca o espaço de configuração contra uma métrica de **validação** e para cedo trabalhos fracos. Quando uma questão pergunta como um time escala o ajuste em muitos modelos ou entradas, a resposta documentada é Automatic Model Tuning — não uma planilha maior.
+Isto é a seção 8.2 rodando sem supervisão: em vez de um humano varrendo hiperparâmetros a olho, o tuner busca o espaço de configuração contra uma métrica de **validação** e para cedo trabalhos fracos. Quando uma questão pergunta como um time escala o ajuste em muitos modelos ou entradas, a resposta documentada é Automatic Model Tuning: não uma planilha maior.
 
-### Estudo de caso 4 — Adobe: chunking e embeddings também são hiperparâmetros
+### Estudo de caso 4, Adobe: chunking e embeddings também são hiperparâmetros
 
-A Adobe melhorou a busca na documentação para desenvolvedores com **Amazon Bedrock Knowledge Bases**, testando quatro estratégias de chunking (**400 tokens com 20% de sobreposição**, 1.000 tokens, hierárquica, semântica) pareadas com **Amazon Titan Text Embeddings V2** no **OpenSearch Service**, recuperadas através da **Retrieve API**. O resultado no próprio conjunto de testes da Adobe foi **+20% de acurácia de recuperação**, e a estratégia mais simples — **chunks de 400 tokens com 20% de sobreposição** — também foi a mais precisa.
+A Adobe melhorou a busca na documentação para desenvolvedores com **Amazon Bedrock Knowledge Bases**, testando quatro estratégias de chunking (**400 tokens com 20% de sobreposição**, 1.000 tokens, hierárquica, semântica) pareadas com **Amazon Titan Text Embeddings V2** no **OpenSearch Service**, recuperadas através da **Retrieve API**. O resultado no próprio conjunto de testes da Adobe foi **+20% de acurácia de recuperação**, e a estratégia mais simples, **chunks de 400 tokens com 20% de sobreposição**, também foi a mais precisa.
 
 *Fonte:* AWS Machine Learning Blog, `blogs/machine-learning/adobe-enhances-developer-productivity-using-amazon-bedrock-knowledge-bases` (11 de junho de 2025).
 
-A disciplina de avaliação é idêntica à da seção 7: **candidatos foram comparados em um conjunto de teste fixo de retenção**, não nas consultas usadas para construí-los. A qualidade da recuperação é um problema de seleção de modelo — tamanho do chunk, sobreposição e escolha do embedding são os hiperparâmetros, e a métrica decide.
+A disciplina de avaliação é idêntica à da seção 7: **candidatos foram comparados em um conjunto de teste fixo de retenção**, não nas consultas usadas para construí-los. A qualidade da recuperação é um problema de seleção de modelo: tamanho do chunk, sobreposição e escolha do embedding são os hiperparâmetros, e a métrica decide.
 
-- **📚 Você sabia?** A AWS publica exatamente **uma** taxa de resultado de projeto: **65%** dos projetos do Generative AI Innovation Center chegaram à produção em **2025**, extraídos de **mais de 1.000** implementações, com alguns entregues em apenas **45 dias**. O método por trás disso é o **framework dos Cinco V's — Value → Visualize → Validate → Verify → Venture** — que começa com métricas de linha de base (acurácia *e* resultado de negócio) antes que um único modelo seja treinado. Fonte: AWS Machine Learning Blog, `blogs/machine-learning/beyond-pilots-a-proven-framework-for-scaling-ai-to-production` (2025). O corolário que os examinadores gostam: **35% não chegaram à produção**, então avaliação é uma fase, não uma cerimônia.
+- **📚 Você sabia?** A AWS publica exatamente **uma** taxa de resultado de projeto: **65%** dos projetos do Generative AI Innovation Center chegaram à produção em **2025**, extraídos de **mais de 1.000** implementações, com alguns entregues em apenas **45 dias**. O método por trás disso é o **framework dos Cinco V's, Value → Visualize → Validate → Verify → Venture**, que começa com métricas de linha de base (acurácia *e* resultado de negócio) antes que um único modelo seja treinado. Fonte: AWS Machine Learning Blog, `blogs/machine-learning/beyond-pilots-a-proven-framework-for-scaling-ai-to-production` (2025). O corolário que os examinadores gostam: **35% não chegaram à produção**, então avaliação é uma fase, não uma cerimônia.
 
-- **📚 Você sabia?** O caminho humano para os 5% descartados da Chronomics já tem nome de produto: **Amazon Augmented AI (A2I)**, disponível desde **2020** com **mais de 60 fluxos de trabalho**, existe porque *"clientes ainda dizem que há casos de uso críticos onde julgamento humano é necessário."* O A2I é como um pipeline de visão ou documentos de limiar alto converte abstenções em resultados revisados em vez de linhas descartadas — o mesmo princípio de design do caminho de exceção humana da Anthem para os claims que o Textract não automatizou.
+- **📚 Você sabia?** O caminho humano para os 5% descartados da Chronomics já tem nome de produto: **Amazon Augmented AI (A2I)**, disponível desde **2020** com **mais de 60 fluxos de trabalho**, existe porque *"clientes ainda dizem que há casos de uso críticos onde julgamento humano é necessário."* O A2I é como um pipeline de visão ou documentos de limiar alto converte abstenções em resultados revisados em vez de linhas descartadas, o mesmo princípio de design do caminho de exceção humana da Anthem para os claims que o Textract não automatizou.
 
 > [!WARNING]
-> **Números de estudo de caso são evidência, não limiares.** Cada porcentagem nesta seção é **afirmada pelo cliente ou pela AWS e não auditada**; apenas o Sun Finance (**n = 585**) e a Adobe (seu próprio conjunto de testes) divulgam uma base amostral, e frases como *"até"* marcam um **teto**, não um resultado típico. O exame **não** contém uma regra como *"F1 deve exceder 0,96"* ou *"acurácia deve atingir 90,80%"* — esses vêm do conjunto de dados de um único cliente. Use os casos para lembrar o **formato** de uma decisão (meça uma linha de base, avalie em dados de retenção, escolha uma rota, nomeie a métrica), nunca para inventar um limiar de aprovação.
+> **Números de estudo de caso são evidência, não limiares.** Cada porcentagem nesta seção é **afirmada pelo cliente ou pela AWS e não auditada**; apenas o Sun Finance (**n = 585**) e a Adobe (seu próprio conjunto de testes) divulgam uma base amostral, e frases como *"até"* marcam um **teto**, não um resultado típico. O exame **não** contém uma regra como *"F1 deve exceder 0,96"* ou *"acurácia deve atingir 90,80%"*: esses vêm do conjunto de dados de um único cliente. Use os casos para lembrar o **formato** de uma decisão (meça uma linha de base, avalie em dados de retenção, escolha uma rota, nomeie a métrica), nunca para inventar um limiar de aprovação.
 
 ---
 ## 14. Perguntas de Prática (Practice Questions)
@@ -1008,25 +1008,25 @@ A disciplina de avaliação é idêntica à da seção 7: **candidatos foram com
 ```
 
 > [!WARNING]
-> **Armadilhas desta lição — leia mais uma vez antes do exame:**
-> - **Não existe random forest embutida** — contêiner scikit-learn + Script Mode, sempre;
-> - **Sem conjunto de validação para clustering** — `test:msd` / `test:ssd`, ambas Minimizar, e a silhueta é computada por você;
-> - **Três hiperparâmetros obrigatórios do PCA** — `feature_dim`, `mini_batch_size`, `num_components`;
-> - **Hiperparâmetro obrigatório do XGBoost** — `num_round`, com objetivo padrão `reg:squarederror`;
-> - **Overfitting recebe mais regularização, underfitting recebe menos** — a direção é a questão inteira;
+> **Armadilhas desta lição: leia mais uma vez antes do exame:**
+> - **Não existe random forest embutida**: contêiner scikit-learn + Script Mode, sempre;
+> - **Sem conjunto de validação para clustering**: `test:msd` / `test:ssd`, ambas Minimizar, e a silhueta é computada por você;
+> - **Três hiperparâmetros obrigatórios do PCA**: `feature_dim`, `mini_batch_size`, `num_components`;
+> - **Hiperparâmetro obrigatório do XGBoost**: `num_round`, com objetivo padrão `reg:squarederror`;
+> - **Overfitting recebe mais regularização, underfitting recebe menos**: a direção é a questão inteira;
 > - **O padrão binário do Autopilot é F1**, ele auto-aplica `scale_pos_weight`, e validação cruzada automática k = 5 aplica em ≤ 50.000 instâncias de treinamento;
 > - **Balance / SMOTE no Data Wrangler é apenas para classificação binária**;
-> - **Apenas quatro rotas** — embutido, Script Mode, JumpStart, BYOC (`sagemaker-training` + `SAGEMAKER_PROGRAM` no Amazon ECR);
-> - **Acurácia balanceada = (revocação + taxa de verdadeiro negativo) / 2** — se a acurácia parece perfeita e a balanceada não, as classes estão desbalanceadas.
+> - **Apenas quatro rotas**: embutido, Script Mode, JumpStart, BYOC (`sagemaker-training` + `SAGEMAKER_PROGRAM` no Amazon ECR);
+> - **Acurácia balanceada = (revocação + taxa de verdadeiro negativo) / 2**: se a acurácia parece perfeita e a balanceada não, as classes estão desbalanceadas.
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
 > 1. **O paradigma vem dos dados:** pares rotulados → **supervisionado** (classificação / regressão), apenas features → **não supervisionado** (clustering / PCA / anomalia / tópicos), loop de recompensa → **reinforcement** (SageMaker RL, `RLEstimator`, Coach ou Ray RLlib em TensorFlow ou MXNet);
 > 2. **A rota AWS vem da disponibilidade do algoritmo:** embutido (Linear Learner, XGBoost, LightGBM, CatBoost, AutoGluon-Tabular, k-NN, TabTransformer, K-Means, PCA, Random Cut Forest, IP Insights, LDA, NTM, Deep AR) → Script Mode (random forest e árvores de decisão via contêiner scikit-learn) → JumpStart (fine-tuning de um modelo pré-treinado) → BYOC (`sagemaker-training`, `ENV SAGEMAKER_PROGRAM train.py`, `/opt/ml` reservado, push para o **Amazon ECR**);
-> 3. **As métricas seguem o erro que machuca:** precisão corta **falsos positivos**, revocação corta **falsos negativos**, F1 = 2·P·R/(P+R); na matriz de fraude de 10.000 transações, a acurácia lê **99,45%** enquanto a precisão é **0,68**, a revocação **0,85** e o F1 **0,756** — e um preditor de classe majoritária já pontua **99,0%**;
-> 4. **As métricas de regressão vivem nas unidades do alvo:** com erros `[10, −5, 10, −5, 10]`, MAE = **8,0**, MSE = **70**, RMSE ≈ **8,37**, R² = **0,9125** — o MSE pune erros grandes, o RMSE torna o número reportável;
-> 5. **As divisões são publicadas, não adivinhadas:** 70/30 padrão, 60/20/20 em três vias, holdout **20–30%**, k-fold **k = 5–10**, Autopilot automático **k = 5** em ≤ 50.000 instâncias com divisão 80/20, teste A/B **10% → 100%**;
+> 3. **As métricas seguem o erro que machuca:** precisão corta **falsos positivos**, revocação corta **falsos negativos**, F1 = 2·P·R/(P+R); na matriz de fraude de 10.000 transações, a acurácia lê **99,45%** enquanto a precisão é **0,68**, a revocação **0,85** e o F1 **0,756**, e um preditor de classe majoritária já pontua **99,0%**;
+> 4. **As métricas de regressão vivem nas unidades do alvo:** com erros `[10, −5, 10, −5, 10]`, MAE = **8,0**, MSE = **70**, RMSE ≈ **8,37**, R² = **0,9125**, o MSE pune erros grandes, o RMSE torna o número reportável;
+> 5. **As divisões são publicadas, não adivinhadas:** 70/30 padrão, 60/20/20 em três vias, holdout **20 to 30%**, k-fold **k = 5 to 10**, Autopilot automático **k = 5** em ≤ 50.000 instâncias com divisão 80/20, teste A/B **10% → 100%**;
 > 6. **Overfitting e underfitting têm remédios opostos:** overfit (alto treino, baixo teste) → **seleção de features + aumentar regularização**; underfit (ruim em ambos) → **adicionar features + diminuir regularização**; de qualquer forma, ajuste em uma métrica de **validação** e deixe o early stopping (`early_stopping_type='Auto'`) ou o Hyperband pararem trabalhos fracos;
-> 7. **Desbalanceamento tem três alavancas:** reamostragem (Balance / SMOTE, **apenas binário**), reponderar (`scale_pos_weight`, `positive_example_weight_mult='balanced'` ⇒ **49** em uma divisão 98/2, `balance_multiclass_weights`, o Autopilot auto-up-weights), e trocar a métrica (AUC, F1, acurácia balanceada, Kappa de Cohen — a AWS chama Kappa **acima de 0,8** de muito favorável em seus dados de fraude);
+> 7. **Desbalanceamento tem três alavancas:** reamostragem (Balance / SMOTE, **apenas binário**), reponderar (`scale_pos_weight`, `positive_example_weight_mult='balanced'` ⇒ **49** em uma divisão 98/2, `balance_multiclass_weights`, o Autopilot auto-up-weights), e trocar a métrica (AUC, F1, acurácia balanceada, Kappa de Cohen: a AWS chama Kappa **acima de 0,8** de muito favorável em seus dados de fraude);
 > 8. **Veredito comparativo:** escolha **Linear Learner** quando o exame nomeia regressão linear/logística, **XGBoost** para classificação tabular, regressão ou ranking, **scikit-learn + Script Mode** para árvores e florestas, **K-Means / PCA / Random Cut Forest** para problemas sem rótulos, **DLC ou JumpStart** para imagens, texto e sequências, **SageMaker RL** para controle movido a recompensa, e **Autopilot / AutoGluon** apenas quando a questão valoriza velocidade até uma linha de base sobre controle do algoritmo.
 

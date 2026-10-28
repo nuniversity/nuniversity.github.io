@@ -41,7 +41,7 @@ export async function generateMetadata({
 
   return {
     alternates: buildAlternates(params.lang, `games/conversation/${params.slug}`),
-    title: `${game.title} — ${dict.games?.suffixes?.conversation || 'Conversation'}`,
+    title: `${game.title}: ${dict.games?.suffixes?.conversation || 'Conversation'}`,
     description: game.description }
 }
 

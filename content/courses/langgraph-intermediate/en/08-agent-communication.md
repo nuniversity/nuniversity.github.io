@@ -115,7 +115,7 @@ def writer_agent(state: SupervisorState) -> dict:
 ```
 
 [!SUCCESS]
-The supervisor acts as a **router** — it reads the conversation, decides the next step, and the graph routes execution accordingly.
+The supervisor acts as a **router**; it reads the conversation, decides the next step, and the graph routes execution accordingly.
 
 ---
 

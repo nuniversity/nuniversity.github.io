@@ -137,7 +137,7 @@ La función enrutadora **debe** retornar una clave que exista en el diccionario 
 
 ## Enviando a Nodos Específicos con Send()
 
-Para fan-out dinámico avanzado, LangGraph proporciona `Send()` — una API tipada que permite enviar estados diferentes a nodos de destino diferentes.
+Para fan-out dinámico avanzado, LangGraph proporciona `Send()`: una API tipada que permite enviar estados diferentes a nodos de destino diferentes.
 
 ```python
 from langgraph.graph import Send
@@ -389,7 +389,7 @@ def branch_b(state: State) -> dict:
   "id": "lg-02-es-q4",
   "type": "multiple-choice",
   "question": "¿Qué sucede cuando añades dos aristas desde el nodo a a los nodos b y c?",
-  "options": ["Solo b ejecuta", "b y c ejecutan en paralelo", "Error de tiempo de ejecución — no se permiten múltiples aristas desde un nodo", "c espera a que b termine"],
+  "options": ["Solo b ejecuta", "b y c ejecutan en paralelo", "Error de tiempo de ejecución: no se permiten múltiples aristas desde un nodo", "c espera a que b termine"],
   "correct": 1,
   "explanation": "Múltiples aristas salientes de un nodo ejecutan sus destinos en paralelo."
 }

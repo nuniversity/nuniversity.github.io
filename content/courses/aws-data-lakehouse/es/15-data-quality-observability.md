@@ -7,9 +7,9 @@ duration: "60 min"
 ---
 # Calidad de datos y observabilidad: DQDL, cuarentena, linaje y SLOs
 
-Las lecciones 01–14 construyeron algo que funciona: un prefijo bronze, tablas Iceberg, jobs de Glue, un catálogo, Athena y QuickSight, orquestación, concesiones de Lake Formation, controles de PII y un perímetro endurecido. Nada de eso responde a la pregunta que tus consumidores realmente harán: **¿puedes demostrar que las cifras de oro de hoy son correctas, y puedes decirme qué cambió cuando no lo son?** Un lakehouse sin calidad y sin observabilidad es una forma muy rápida de mover datos incorrectos.
+Las lecciones 01 to 14 construyeron algo que funciona: un prefijo bronze, tablas Iceberg, jobs de Glue, un catálogo, Athena y QuickSight, orquestación, concesiones de Lake Formation, controles de PII y un perímetro endurecido. Nada de eso responde a la pregunta que tus consumidores realmente harán: **¿puedes demostrar que las cifras de oro de hoy son correctas, y puedes decirme qué cambió cuando no lo son?** Un lakehouse sin calidad y sin observabilidad es una forma muy rápida de mover datos incorrectos.
 
-Esta lección construye la capa de prueba en el orden en que la propia guía de AWS la dispone: **motores → reglas → runtimes → resultados y señales → cuarentena → SLOs → observabilidad por capa → auditoría → linaje → remediación**. Dos ideas sostienen todo. Primero, la calidad es un *paso del pipeline con una salida*, no un cuadro de mando: o bien bloquea una escritura, o divide filas, o levanta una señal por la que alguien recibe un aviso. Segundo, la observabilidad tiene tres planos distintos que los equipos confunden sin parar — el **catálogo de Glue** guarda los metadatos técnicos y los permisos, **DataZone** guarda el significado de negocio y el linaje, **CloudTrail** guarda quién llamó a qué. Cada número de abajo está datado en **octubre de 2026**.
+Esta lección construye la capa de prueba en el orden en que la propia guía de AWS la dispone: **motores → reglas → runtimes → resultados y señales → cuarentena → SLOs → observabilidad por capa → auditoría → linaje → remediación**. Dos ideas sostienen todo. Primero, la calidad es un *paso del pipeline con una salida*, no un cuadro de mando: o bien bloquea una escritura, o divide filas, o levanta una señal por la que alguien recibe un aviso. Segundo, la observabilidad tiene tres planos distintos que los equipos confunden sin parar: el **catálogo de Glue** guarda los metadatos técnicos y los permisos, **DataZone** guarda el significado de negocio y el linaje, **CloudTrail** guarda quién llamó a qué. Cada número de abajo está datado en **octubre de 2026**.
 
 ```text
 ====================================================================
@@ -88,15 +88,15 @@ Esta lección construye la capa de prueba en el orden en que la propia guía de 
 
 En esta lección vas a:
 
-- elegir un motor de calidad a partir del propio mapa de Prescriptive Guidance de AWS — **Glue Data Quality, DataBrew, Deequ o código a medida** — y defender la opción por defecto;
+- elegir un motor de calidad a partir del propio mapa de Prescriptive Guidance de AWS, **Glue Data Quality, DataBrew, Deequ o código a medida**, y defender la opción por defecto;
 - redactar **DQDL**: rulesets atados a una tabla, los cuatro modificadores (expresiones, `where`, reglas dinámicas, etiquetas), los 32 tipos de regla y cuáles de ellos pueden producir alguna vez una **fila** fallida;
-- ejecutar la evaluación en **ambos runtimes** — la tarea del Data Catalog y `EvaluateDataQuality` dentro de un job de Glue — y saber exactamente qué puede y qué no puede hacer cada uno;
+- ejecutar la evaluación en **ambos runtimes**, la tarea del Data Catalog y `EvaluateDataQuality` dentro de un job de Glue, y saber exactamente qué puede y qué no puede hacer cada uno;
 - aterrizar los resultados en **tres destinos**: JSON en S3, el almacén del servicio de Glue y **tablas Iceberg en el Data Catalog**, y luego leerlos en Athena;
-- cablear las **señales**: eventos de EventBridge, métricas de CloudWatch en el espacio de nombres `Glue Data Quality`, alarmas, cuadros de mando — incluida la casilla que mata las alertas en silencio;
+- cablear las **señales**: eventos de EventBridge, métricas de CloudWatch en el espacio de nombres `Glue Data Quality`, alarmas, cuadros de mando: incluida la casilla que mata las alertas en silencio;
 - construir el **patrón de cuarentena** de extremo a extremo: dividir filas, escribir el prefijo y la tabla de cuarentena, emitir la métrica, alertar y ejecutar un backfill que se mantiene idempotente;
 - calcular un **SLO de frescura** en tres relojes y defender una cifra P95 con aritmética real;
 - acotar los **eventos de datos de CloudTrail** por prefijo sensible para que la traza de auditoría no se convierta en la línea más grande de la factura;
-- separar los **tres planos** — catálogo de Glue, catálogo de negocio y linaje de DataZone, auditoría de CloudTrail — y nombrar solo las fuentes de linaje que AWS realmente documenta;
+- separar los **tres planos**, catálogo de Glue, catálogo de negocio y linaje de DataZone, auditoría de CloudTrail, y nombrar solo las fuentes de linaje que AWS realmente documenta;
 - cablear una ruta de remediación **EventBridge → SNS → Lambda** que funcione con el IAM que le corresponde;
 - estudiar **dos casos de clientes de AWS**, un **recuadro de actualizaciones de octubre de 2026** con fuentes, **once preguntas de estilo examen** y cuatro comprobaciones interactivas.
 
@@ -115,9 +115,9 @@ AWS Prescriptive Guidance publica una tabla de mapeo de soluciones para los cheq
 | Chequeos a medida en tu propio ETL favorito | **Chequeos a medida** | Lambda, Glue, EMR | Lo que tú escribas |
 | Informe de métricas, validación de restricciones y sugerencias de restricciones | **Deequ** (código abierto) | EMR, SageMaker, Glue con el JAR adecuado | Analyzers al estilo `CompletenessConstraint`, repositorio de métricas, chequeos de anomalías |
 
-(AWS Prescriptive Guidance — *Data quality checks*, consultado 2026-10-11.)
+(AWS Prescriptive Guidance: *Data quality checks*, consultado 2026-10-11.)
 
-Para el lakehouse de este curso la respuesta es **Glue Data Quality por defecto**, DataBrew reservado para el perfilado de analistas de negocio sobre datasets CSV/JSON, y PyDeequ solo cuando la personalización al nivel de Deequ sea genuinamente necesaria. No es una contienda de popularidad: Glue DQ evalúa «tablas y vistas de Amazon Athena admitidas que están almacenadas en el AWS Glue Data Catalog» sobre «Amazon S3, Amazon Redshift, fuentes JDBC compatibles con el Data Catalog y formatos de lago de datos transaccionales como Apache Iceberg, Apache Hudi y Delta Lake» — que es exactamente el sustrato que construiste en las Lecciones 02–08 (Glue Developer Guide, consultado 2026-10-11).
+Para el lakehouse de este curso la respuesta es **Glue Data Quality por defecto**, DataBrew reservado para el perfilado de analistas de negocio sobre datasets CSV/JSON, y PyDeequ solo cuando la personalización al nivel de Deequ sea genuinamente necesaria. No es una contienda de popularidad: Glue DQ evalúa «tablas y vistas de Amazon Athena admitidas que están almacenadas en el AWS Glue Data Catalog» sobre «Amazon S3, Amazon Redshift, fuentes JDBC compatibles con el Data Catalog y formatos de lago de datos transaccionales como Apache Iceberg, Apache Hudi y Delta Lake»: que es exactamente el sustrato que construiste en las Lecciones 02 to 08 (Glue Developer Guide, consultado 2026-10-11).
 
 ```mermaid
 flowchart TD
@@ -130,16 +130,16 @@ flowchart TD
     D --> G["resultados publicados en S3 o en una tabla del catálogo, y después la misma ruta de alertas"]
 ```
 
-- **📚 ¿Sabías que…?** Glue Data Quality no es una reimplementación — AWS afirma que está «construido sobre el framework de código abierto DeeQu» y que hay «sin ataduras (No lock-in)… permitiéndote conservar las reglas que redactas en un lenguaje abierto» (Glue Developer Guide, consultado 2026-10-11). Por eso una regla DQDL se lee como el vocabulario de restricciones de Deequ, y por eso la librería de código abierto sigue siendo una válvula de escape legítima para los analyzers que el producto no expone.
+- **📚 ¿Sabías que…?** Glue Data Quality no es una reimplementación: AWS afirma que está «construido sobre el framework de código abierto DeeQu» y que hay «sin ataduras (No lock-in)… permitiéndote conservar las reglas que redactas en un lenguaje abierto» (Glue Developer Guide, consultado 2026-10-11). Por eso una regla DQDL se lee como el vocabulario de restricciones de Deequ, y por eso la librería de código abierto sigue siendo una válvula de escape legítima para los analyzers que el producto no expone.
 
 ### 1.2 Qué compra lo «gestionado», en una tabla
 
 | | **Glue Data Quality** | **Deequ / PyDeequ** | **Reglas de DataBrew** | **Great Expectations (DIY)** |
 |---|---|---|---|---|
 | Autoría | DQDL, consola, API, nodo de Studio | Restricciones en Scala/Python | Expresiones de chequeo sin código | Suites de expectativas en Python |
-| Ejecución gestionada | Sí — tareas serverless e integración con ETL | No — tú ejecutas Spark | Sí — dentro de los jobs de perfilado | No — tú lo alojas |
+| Ejecución gestionada | Sí, tareas serverless e integración con ETL | No, tú ejecutas Spark | Sí, dentro de los jobs de perfilado | No, tú lo alojas |
 | Recomendaciones de reglas | Sí (BASIC; ADVANCED vía Bedrock, sep 2026) | Sugerencia de restricciones en código | Pestaña de recomendaciones en consola | No |
-| Registros fallidos a nivel de fila | **Sí, solo en la ruta ETL** | Sí, si construyes la división | No — los hallazgos son agregados | Sí, si lo construyes |
+| Registros fallidos a nivel de fila | **Sí, solo en la ruta ETL** | Sí, si construyes la división | No: los hallazgos son agregados | Sí, si lo construyes |
 | Alertas | EventBridge + CloudWatch, integrados | Tú construyes la publicación a SNS | Evento de EventBridge por ruleset validado | Tú lo construyes |
 | Postura de soporte de AWS | Producto propio | Código abierto (comunidad / ejemplos de AWS) | Producto propio | No es una oferta de AWS |
 
@@ -157,7 +157,7 @@ Ruleset = 'Rules = [IsComplete "col1", IsPrimaryKey "col2", RowCount between 200
 TargetTable = {'TableName': 'orders', 'DatabaseName': 'lakehouse_silver'}
 ```
 
-Esa es la forma de `create_data_quality_ruleset` (Glue Developer Guide — *Using APIs to measure and manage data quality*, consultado 2026-10-11). Dos límites definen lo grande que puede volverse un ruleset: **2,000 reglas por ruleset** («si tus rulesets son mayores, te recomendamos dividirlos en varios rulesets») y un **tamaño de ruleset de 65 KB**. Las estadísticas son un presupuesto aparte: **100,000 estadísticas por cuenta**, almacenadas **gratis** durante **2 años** (precios de Glue, consultado 2026-10-11).
+Esa es la forma de `create_data_quality_ruleset` (Glue Developer Guide: *Using APIs to measure and manage data quality*, consultado 2026-10-11). Dos límites definen lo grande que puede volverse un ruleset: **2,000 reglas por ruleset** («si tus rulesets son mayores, te recomendamos dividirlos en varios rulesets») y un **tamaño de ruleset de 65 KB**. Las estadísticas son un presupuesto aparte: **100,000 estadísticas por cuenta**, almacenadas **gratis** durante **2 años** (precios de Glue, consultado 2026-10-11).
 
 Una exclusión a nivel de lenguaje para memorizar: **«DQDL no admite actualmente datos de columna anidados ni de tipo lista»**. Los structs y arrays anidados quedan fuera del alcance de las reglas directas: aplana, o usa `CustomSql` contra una vista preprocesada.
 
@@ -197,9 +197,9 @@ ANALYZERS / ORIENTADOS A FICHERO ................ AllStatistics,
     Distribution, FileFreshness, FileMatch, FileUniqueness, FileSize
 ```
 
-La propia documentación de Studio de AWS es tajante sobre la separación: las reglas a nivel de dataset «no pueden identificar registros de error porque se aplican a nivel de dataset» (Glue Developer Guide — *Evaluating data quality with AWS Glue Studio*, consultado 2026-10-11). Construye una cuarentena sobre `RowCount` y no pondrás en cuarentena absolutamente nada.
+La propia documentación de Studio de AWS es tajante sobre la separación: las reglas a nivel de dataset «no pueden identificar registros de error porque se aplican a nivel de dataset» (Glue Developer Guide: *Evaluating data quality with AWS Glue Studio*, consultado 2026-10-11). Construye una cuarentena sobre `RowCount` y no pondrás en cuarentena absolutamente nada.
 
-### 2.4 Ejemplo resuelto E1 — el ruleset `orders` de silver
+### 2.4 Ejemplo resuelto E1: el ruleset `orders` de silver
 
 Objetivo: `lakehouse_silver.orders`, una tabla Iceberg particionada por `dt`, evaluada dentro del job bronze→silver **y** re-verificada cada día como tarea del catálogo.
 
@@ -234,11 +234,11 @@ SOLO A NIVEL DE DATASET = las dos reglas de RowCount y DataFreshness
 
 Por qué cada línea se gana su sitio: `IsPrimaryKey` colapsa dos reglas en una; las formas con umbral sobre `ColumnValues` toleran suciedad por debajo del 1% sin hundir una ejecución entera; `RowCount <= avg(last(10)) * 1.5` es una guarda de picos **dinámica** que no necesita una constante ajustada a mano; el `CustomSql` a nivel de fila es la única regla de aquí que puede darte una lista de IDs de pedido para poner en cuarentena; y `DataFreshness … where "dt = current_date - 1"` acota la obsolescencia a la partición que *debería* estar fresca en lugar de gritar sobre toda la historia.
 
-El recorrido de introducción de AWS muestra la misma forma sobre su tabla de ejemplo de tickets — `IsComplete "SET_FINE_AMOUNT"`, `Uniqueness "TICKET_NUMBER" > 0.95`, `ColumnValues "PROVINCE" in [...]`, `ColumnLength "INFRACTION_DESCRIPTION" between 15 and 31` — con la advertencia importante de la documentación: las recomendaciones «facilitan empezar… sin escribir código», pero las reglas se generan a partir de las estadísticas *actuales*, así que trátalas como un borrador que apretar (consultado 2026-10-11).
+El recorrido de introducción de AWS muestra la misma forma sobre su tabla de ejemplo de tickets, `IsComplete "SET_FINE_AMOUNT"`, `Uniqueness "TICKET_NUMBER" > 0.95`, `ColumnValues "PROVINCE" in [...]`, `ColumnLength "INFRACTION_DESCRIPTION" between 15 and 31`, con la advertencia importante de la documentación: las recomendaciones «facilitan empezar… sin escribir código», pero las reglas se generan a partir de las estadísticas *actuales*, así que trátalas como un borrador que apretar (consultado 2026-10-11).
 
 ### 2.5 Recomendaciones de reglas: BASIC y ADVANCED vía Bedrock
 
-`start_data_quality_rule_recommendation_run(DataSource={'GlueTable': {...}}, Role=role_arn)` devuelve un `RunId`; recupera `ResultIds` de `get_data_quality_ruleset_evaluation_run` y después cada `get_data_quality_result(ResultId=…)`. Las carreras de recomendación **se borran automáticamente a los 90 días**. Desde el **2026-09-18 / 2026-09-25**, un modo **ADVANCED** usa Amazon Bedrock con los metadatos de la tabla más filas muestreadas para generar DQDL — un asistente de redacción, no una aprobación.
+`start_data_quality_rule_recommendation_run(DataSource={'GlueTable': {...}}, Role=role_arn)` devuelve un `RunId`; recupera `ResultIds` de `get_data_quality_ruleset_evaluation_run` y después cada `get_data_quality_result(ResultId=…)`. Las carreras de recomendación **se borran automáticamente a los 90 días**. Desde el **2026-09-18 / 2026-09-25**, un modo **ADVANCED** usa Amazon Bedrock con los metadatos de la tabla más filas muestreadas para generar DQDL: un asistente de redacción, no una aprobación.
 
 ```fillblank
 {
@@ -275,15 +275,15 @@ Comparten DQDL, EventBridge, métricas de CloudWatch, resultados en S3 y accione
 
 | | **Tarea del Data Catalog** (`StartDataQualityRulesetEvaluationRun`) | **Integrada en el ETL** (`EvaluateDataQuality.apply` / nodo de Studio) |
 |---|---|---|
-| Identificar qué registros fallaron | **«Not supported»** | **«Supported»** — resultados a nivel de fila |
+| Identificar qué registros fallaron | **«Not supported»** | **«Supported»**: resultados a nivel de fila |
 | Evaluación incremental | Pushdown / predicados de partición del catálogo | **Bookmarks de job de AWS Glue** |
 | Autoescalado | No soportado | Soportado |
 | Recomendaciones de reglas | Sí (sin recomendaciones dentro de ejecuciones ETL) | No |
 | Detección de anomalías ML, reglas dinámicas, EventBridge, CloudWatch, resultados a S3 | Soportado | Soportado |
-| Ejecución Flex / DPU con autoescalado | — | Soportado |
+| Ejecución Flex / DPU con autoescalado |: | Soportado |
 | Acción ante fallos | Score + evento | «Fail job after loading target data» → `AssertionError` |
 
-(Glue Developer Guide — matriz de capacidades, consultado 2026-10-11.)
+(Glue Developer Guide: matriz de capacidades, consultado 2026-10-11.)
 
 ### 3.1 Dentro del job
 
@@ -301,15 +301,15 @@ dq = EvaluateDataQuality.apply(
     })
 ```
 
-La opción de salida de la transformación es la decisión que importa: **«Original data»** frente a **«Add new columns to indicate data quality errors»**. La segunda añade cuatro columnas — `DataQualityRulesPass`, `DataQualityRulesFail`, `DataQualityRulesSkip` (arrays de cadena) y `DataQualityEvaluationResult` («Passed» o «Failed» **a nivel de fila**). La nota de AWS que hay que memorizar es esta: *"tus resultados globales pueden ser FAIL, pero un registro en concreto puede pasar."* Las reglas en Studio van «dentro de los corchetes y… separadas por comas»: `Rules = [ Completeness "year" > 0.8, Completeness "month" > 0.8 ]`.
+La opción de salida de la transformación es la decisión que importa: **«Original data»** frente a **«Add new columns to indicate data quality errors»**. La segunda añade cuatro columnas: `DataQualityRulesPass`, `DataQualityRulesFail`, `DataQualityRulesSkip` (arrays de cadena) y `DataQualityEvaluationResult` («Passed» o «Failed» **a nivel de fila**). La nota de AWS que hay que memorizar es esta: *"tus resultados globales pueden ser FAIL, pero un registro en concreto puede pasar."* Las reglas en Studio van «dentro de los corchetes y… separadas por comas»: `Rules = [ Completeness "year" > 0.8, Completeness "month" > 0.8 ]`.
 
 La calidad incremental llega por los **bookmarks de job**: para entradas de S3 la marca de agua es la **hora de última modificación** del objeto, con un `maxBand` por defecto de **900,000 ms (15 minutos)** durante el cual el listado «is likely to be consistent». Los bookmarks exigen `job.init` al principio y `job.commit` al final, y se enganchan a un `transformation_ctx` único: si lo omites, el operador no se rastrea en absoluto (que es exactamente como relees a propósito una tabla de dimensión en cada ejecución).
 
-### 3.2 Tres destinos de resultados — y desde julio de 2026 el catálogo es uno de ellos
+### 3.2 Tres destinos de resultados, y desde julio de 2026 el catálogo es uno de ellos
 
 1. **Resultados JSON en S3** (opt-in mediante `resultsS3Prefix` o la ubicación de resultados de la tarea) → regístralos con un crawler, `CREATE EXTERNAL TABLE` con un JSON SerDe, `MSCK REPAIR TABLE` y después Athena. AWS entrega el DDL completo, particionado por `year/month/day`.
 2. **El almacén del servicio de Glue** → legible mediante `GetDataQualityResult` / `ListDataQualityResults` y representado en la pestaña **Data quality** de la consola; la **Data quality snapshot** muestra por defecto las últimas 10 ejecuciones de cada ruleset.
-3. **Tablas Iceberg en el Data Catalog** (GA 2026-07-27) → cuatro tipos de resultado opt-in — **resultados de regla, de perfilado, a nivel de fila y de observación** — configurados mediante `--additional-run-options` en `StartDataQualityRulesetEvaluationRun` o `additional_options` en un job ETL. **No se escribe nada por defecto**: «debes activar explícitamente cada tipo de resultado.»
+3. **Tablas Iceberg en el Data Catalog** (GA 2026-07-27) → cuatro tipos de resultado opt-in, **resultados de regla, de perfilado, a nivel de fila y de observación**, configurados mediante `--additional-run-options` en `StartDataQualityRulesetEvaluationRun` o `additional_options` en un job ETL. **No se escribe nada por defecto**: «debes activar explícitamente cada tipo de resultado.»
 
 ```text
 aws glue start-data-quality-ruleset-evaluation-run \
@@ -398,10 +398,10 @@ flowchart LR
     E --> B["Regla: state FAILED + tabla nombrada -> Lambda de remediación"]
 ```
 
-- **📚 ¿Sabías que…?** El **score** no es una nota de calidad que se pasa de mano en mano — AWS lo define como «el porcentaje de reglas de calidad de datos que superaron la entrada». Un ruleset con una sola regla débil puntúa 1.0 mientras el 40% de las filas son basura. Por eso existen las columnas a nivel de fila y las tablas de resultados: el score para la alerta, las filas para la arreglo (Glue Developer Guide, consultado 2026-10-11).
+- **📚 ¿Sabías que…?** El **score** no es una nota de calidad que se pasa de mano en mano: AWS lo define como «el porcentaje de reglas de calidad de datos que superaron la entrada». Un ruleset con una sola regla débil puntúa 1.0 mientras el 40% de las filas son basura. Por eso existen las columnas a nivel de fila y las tablas de resultados: el score para la alerta, las filas para la arreglo (Glue Developer Guide, consultado 2026-10-11).
 
 ---
-## 4. Deequ, PyDeequ y DataBrew — las rutas laterales verificadas
+## 4. Deequ, PyDeequ y DataBrew: las rutas laterales verificadas
 
 ### 4.1 Deequ: el motor, y dónde sigue mereciendo la pena
 
@@ -412,9 +412,9 @@ Motivos legítimos que quedan para ejecutar Deequ tú mismo, según los propios 
 | Motivo | Vehículo documentado por AWS | Restricción dura |
 |---|---|---|
 | Analyzers/restricciones a medida que DQDL no puede expresar | PyDeequ en **EMR** | El JAR de Deequ **debe coincidir** con tu versión de Spark: `pydeequ.deequ_maven_coord` → `com.amazon.deequ:deequ:2.0.3-spark-3.3`; «es crítico proporcionar las coordenadas de Apache Maven correctas» |
-| **Validación de migración** — diff de métricas origen vs destino | Un job de EMR escribe resultados en una tabla de Glue (p. ej. `db_deequ.db_migration_validation_result`), auditada en Athena | El mismo anclaje de JAR/Spark |
+| **Validación de migración**: diff de métricas origen vs destino | Un job de EMR escribe resultados en una tabla de Glue (p. ej. `db_deequ.db_migration_validation_result`), auditada en Athena | El mismo anclaje de JAR/Spark |
 | Datasets muy pequeños que necesitan arranque rápido | **Deequ en AWS Lambda** con el Spark Runtime for AWS Lambda (SoAL) | SoAL «es mayor que el límite de 250 MB para el empaquetado de archivo zip» → imagen de contenedor; AWS recomienda Glue Data Quality «para jobs de Spark que corran más de 15 minutos o ficheros mayores (más de 1 GB)» |
-| Chequeos de anomalías sobre un repositorio de métricas | `FileSystemMetricsRepository` + Holt-Winters, resultados a SNS | La receta de Holt-Winters publicada se verificó «in AWS Glue 2.0, pydeequ release/1_1_1, Spark 2.4 and deequ-1.1.0_spark-2.4-scala-2.11.jar (only)» — ancla la versión o no la uses |
+| Chequeos de anomalías sobre un repositorio de métricas | `FileSystemMetricsRepository` + Holt-Winters, resultados a SNS | La receta de Holt-Winters publicada se verificó «in AWS Glue 2.0, pydeequ release/1_1_1, Spark 2.4 and deequ-1.1.0_spark-2.4-scala-2.11.jar (only)»: ancla la versión o no la uses |
 
 PyDeequ «supports Spark up to version 3.3.0» según las notas de PyDeequ 1.1.x a las que AWS enlaza, y «puede funcionar dentro de Amazon EMR y SageMaker». El resumen honesto de 2026: **casi todo el valor de Deequ ya está dentro de Glue Data Quality**; recurre a la librería cuando el runtime sea exótico o la restricción no sea expresable.
 
@@ -422,12 +422,12 @@ PyDeequ «supports Spark up to version 3.3.0» según las notas de PyDeequ 1.1.x
 
 La historia de calidad de DataBrew es un **ruleset de `CheckExpression`s evaluado dentro de un job de perfilado**: «si algún criterio de una regla no se cumple, el ruleset entero falla la validación», y la ejecución «produce un informe de validación además del perfil de datos» en la misma ubicación. Forma de la API: `CheckExpression`, `ColumnSelectors` (Name o Regex), `Disabled`, `SubstitutionMap`, `Threshold` (Type/Unit/Value). Restricciones que respetar: **solo participan columnas de tipos simples** (string, números, boolean), y las reglas viven en la pestaña **Recommendations** de la pantalla del ruleset.
 
-Al terminar, «DataBrew envía un evento de Amazon CloudWatch con los detalles de esa ejecución de job… para cada ruleset validado… y el evento contiene su resultado (`SUCCEEDED`, `FAILED` o `ERROR`)» más un enlace al informe. Ese evento es tu patrón de EventBridge para los chequeos en manos de analistas. Las métricas viven en el espacio de nombres **`AWS/DataBrew`** — el ejemplo documentado es `SessionCount`.
+Al terminar, «DataBrew envía un evento de Amazon CloudWatch con los detalles de esa ejecución de job… para cada ruleset validado… y el evento contiene su resultado (`SUCCEEDED`, `FAILED` o `ERROR`)» más un enlace al informe. Ese evento es tu patrón de EventBridge para los chequeos en manos de analistas. Las métricas viven en el espacio de nombres **`AWS/DataBrew`**: el ejemplo documentado es `SessionCount`.
 
 > [!IMPORTANT]
 > **Las reglas de DataBrew no son DQDL.** La sintaxis de expresión de chequeo, la consola, los eventos, el informe y la semántica de fallo son distintos de los de Glue Data Quality. Copiar `Completeness "col" > 0.95` a un ruleset de DataBrew, o un `CheckExpression` de DataBrew a un ruleset de Glue, falla en ambas direcciones. AWS Prescriptive Guidance los mantiene separados por una razón: DataBrew para chequeos de analista sin código, Glue Data Quality para DQDL embebido en jobs y en el catálogo, Deequ para un informe de métricas/restricciones, código a medida para todo lo demás.
 
-### 4.3 Ejemplo resuelto E2 — lo que cuesta un gate de calidad, y dónde ponerlo
+### 4.3 Ejemplo resuelto E2: lo que cuesta un gate de calidad, y dónde ponerlo
 
 El propio benchmark de AWS: **104 columnas, 1 millón de filas, 10 DPUs** (AWS Big Data Blog, 2024-03-12):
 
@@ -474,7 +474,7 @@ Dos conclusiones sobreviven a la ambigüedad de precio: **presupuesta por tamañ
 
 ### 5.1 Tres acciones, dos puntos de control
 
-La muestra InsuranceLake de la AWS Solutions Library formaliza lo que todo pipeline de producción necesita — tres acciones en dos puntos de control del pipeline:
+La muestra InsuranceLake de la AWS Solutions Library formaliza lo que todo pipeline de producción necesita: tres acciones en dos puntos de control del pipeline:
 
 | Acción | Comportamiento | Cuándo usarla |
 |---|---|---|
@@ -516,9 +516,9 @@ dirty = Filter.apply(frame=rowLevelOutcomes,
 # glue.data.quality.rules.failed metric -> EventBridge -> SNS/Lambda
 ```
 
-La guía de Studio de AWS ofrece además una variante propia: en **Data quality actions**, elige **Fail job after loading target data**, que aparece como `AssertionError: The job failed due to failing DQ rules for node: …` — halt sin cuarentena.
+La guía de Studio de AWS ofrece además una variante propia: en **Data quality actions**, elige **Fail job after loading target data**, que aparece como `AssertionError: The job failed due to failing DQ rules for node: …`: halt sin cuarentena.
 
-### 5.3 Ejemplo resuelto E3 — el bucle de cuarentena con cifras reales
+### 5.3 Ejemplo resuelto E3: el bucle de cuarentena con cifras reales
 
 ```text
 Ejemplo resuelto E3 - un mal día en lakehouse_silver.orders, en oct 2026
@@ -595,11 +595,11 @@ flowchart TD
     "6. El analista corrige las filas de origen y después Step Functions replay-partition limpia la partición de cuarentena de ese dt",
     "7. Reejecutar la partición por el mismo job con el bookmark rebobinado o un transformation_ctx nuevo, escribiendo a un prefijo nuevo o haciendo MERGE, y después refrescar gold"
   ],
-  "explanation": "La división tiene que ocurrir antes de cualquier commit, o las filas malas ya estarán en la tabla de silver. La escritura de cuarentena y la métrica salen de la misma evaluación, de modo que la alerta nunca puede ir por detrás de los datos. La notificación y la remediación son destinos distintos sobre el mismo evento: SNS para la persona, Lambda para los pasos de máquina. El backfill limpia a propósito la partición de cuarentena de ese dt antes de reintentar — InsuranceLake documenta exactamente ese comportamiento —, y el replay escribe a través de un bookmark rebobinado o un transformation_ctx fresco hacia un prefijo nuevo o un MERGE de Iceberg, porque un rebobinado no limpia los destinos y anexar dos veces es la clásica falla de datos duplicados."
+  "explanation": "La división tiene que ocurrir antes de cualquier commit, o las filas malas ya estarán en la tabla de silver. La escritura de cuarentena y la métrica salen de la misma evaluación, de modo que la alerta nunca puede ir por detrás de los datos. La notificación y la remediación son destinos distintos sobre el mismo evento: SNS para la persona, Lambda para los pasos de máquina. El backfill limpia a propósito la partición de cuarentena de ese dt antes de reintentar, InsuranceLake documenta exactamente ese comportamiento, y el replay escribe a través de un bookmark rebobinado o un transformation_ctx fresco hacia un prefijo nuevo o un MERGE de Iceberg, porque un rebobinado no limpia los destinos y anexar dos veces es la clásica falla de datos duplicados."
 }
 ```
 
-- **📚 ¿Sabías que…?** Los bookmarks rastrean **orígenes, no destinos**. La documentación de AWS afirma sin rodeos que «cuando rebobinas o reinicias un bookmark, AWS Glue no limpia los ficheros de destino porque puede haber varios destinos y los destinos no se rastrean con los bookmarks de job.» Por eso el paso de backfill de arriba escribe a un prefijo nuevo o hace MERGE: reintentar en la misma ruta anexa duplicados que tu regla `IsPrimaryKey` se encargará de poner en cuarentena con toda corrección en la siguiente ejecución (Glue Developer Guide — job bookmarks, consultado 2026-10-11).
+- **📚 ¿Sabías que…?** Los bookmarks rastrean **orígenes, no destinos**. La documentación de AWS afirma sin rodeos que «cuando rebobinas o reinicias un bookmark, AWS Glue no limpia los ficheros de destino porque puede haber varios destinos y los destinos no se rastrean con los bookmarks de job.» Por eso el paso de backfill de arriba escribe a un prefijo nuevo o hace MERGE: reintentar en la misma ruta anexa duplicados que tu regla `IsPrimaryKey` se encargará de poner en cuarentena con toda corrección en la siguiente ejecución (Glue Developer Guide: job bookmarks, consultado 2026-10-11).
 
 ---
 ## 6. SLOs de frescura: tres relojes y la aritmética
@@ -608,13 +608,13 @@ flowchart TD
 
 | Reloj | Definición | Dónde lo mides |
 |---|---|---|
-| **Hora del evento** | Cuándo ocurrió el hecho de negocio — viaja *en los datos* | Una columna de timestamp (`order_ts`) |
+| **Hora del evento** | Cuándo ocurrió el hecho de negocio: viaja *en los datos* | Una columna de timestamp (`order_ts`) |
 | **Hora de aterrizaje** | Cuándo el objeto golpeó el prefijo bronze | `LastModified` de S3 |
 | **Hora de disponibilidad** | Cuándo el commit de silver/gold lo hizo consultable en Athena | Commit de la tabla / timestamp de resultados |
 
 **SLO de frescura = P95(disponibilidad − evento) ≤ objetivo.** El pipeline aporta dos tramos: *aterrizaje − evento* (retraso de ingesta) y *disponibilidad − aterrizaje* (retraso de procesamiento + DQ + backfill). DQDL te da dos codificaciones: **`DataFreshness`** contra una columna de timestamp de la tabla («Checks if data is fresh», métrica `Column.[Column].DataFreshness.Compliance`, resultados a nivel de fila: sí) y **`FileFreshness`** contra los timestamps de los ficheros de S3 (ruta de fichero/carpeta + umbral, a nivel de fila: no).
 
-### 6.2 Ejemplo resuelto E4 — un SLO de 3 horas, aritmética P95
+### 6.2 Ejemplo resuelto E4: un SLO de 3 horas, aritmética P95
 
 ```text
 Ejemplo resuelto E4 - matemática del SLO de frescura, 30 lotes diarios, en oct 2026
@@ -643,7 +643,7 @@ ESCALERA DE ALERTAS:
   - Cuadro de mando: tendencia P95 de frescura móvil de 7 días
 ```
 
-Suma los P95 de los componentes en lugar de promediar las medias: el P95 de una suma está acotado por la suma de los P95, así que 162 minutos es la cifra defendible para poner delante de un stakeholder, y los 18 minutos de holgura te dicen qué palanca tirar *antes* de romper el objetivo. La escalera de fallos es deliberadamente redundante: una regla de frescura atrapa datos **obsoletos**, una alarma de `RowCount` en cero atrapa un pipeline **muerto**, y un evento de job FAILED atrapa el **crash** — tres problemas distintos que todos se parecen a «el cuadro de mando está viejo».
+Suma los P95 de los componentes en lugar de promediar las medias: el P95 de una suma está acotado por la suma de los P95, así que 162 minutos es la cifra defendible para poner delante de un stakeholder, y los 18 minutos de holgura te dicen qué palanca tirar *antes* de romper el objetivo. La escalera de fallos es deliberadamente redundante: una regla de frescura atrapa datos **obsoletos**, una alarma de `RowCount` en cero atrapa un pipeline **muerto**, y un evento de job FAILED atrapa el **crash**: tres problemas distintos que todos se parecen a «el cuadro de mando está viejo».
 
 ```plot
 {
@@ -670,9 +670,9 @@ Suma los P95 de los componentes en lugar de promediar las medias: el P95 de una 
 | **Volumen** | `RowCount > 1000`, `RowCount <= avg(last(10)) * 1.5` (dinámica) | La misma métrica, acotada al ruleset de volumen | Derrumbe (0 filas) o una carga de duplicados desbocada |
 | **Deriva de esquema** | `SchemaMatch`, `ColumnExists`, `ColumnDataType`, `ColumnNamesMatchPattern`, `ColumnLength` | EventBridge sobre `state: FAILED` filtrado al ruleset de esquema → Lambda abre un ticket | Una fuente cambió de forma debajo de ti |
 | **Deriva de valores** | `ColumnValues … with threshold`, `DetectAnomalies` sobre la métrica de otra regla | Alarma de score + estadísticas de anomalía (se facturan por estadística) | Se movió la distribución, no solo se rompió |
-| **Crash del pipeline** | n/a — evento de fallo de job | EventBridge sobre job de Glue FAILED | No se ejecutó nada |
+| **Crash del pipeline** | n/a: evento de fallo de job | EventBridge sobre job de Glue FAILED | No se ejecutó nada |
 
-`DetectAnomalies` merece una mención especial: «checks for anomalies in another rule type's reported metrics», lo que convierte las reglas de umbral de ayer en una línea base autoajustable — a **1 DPU por estadística**, por ejecución, y por eso AWS recomienda activarlo de forma selectiva.
+`DetectAnomalies` merece una mención especial: «checks for anomalies in another rule type's reported metrics», lo que convierte las reglas de umbral de ayer en una línea base autoajustable: a **1 DPU por estadística**, por ejecución, y por eso AWS recomienda activarlo de forma selectiva.
 
 ---
 
@@ -685,15 +685,15 @@ Suma los P95 de los componentes en lugar de promediar las medias: el P95 de una 
 | **Jobs de Glue** | `/aws-glue/jobs/output` (stdout/stderr), `/aws-glue/jobs/error` (sistema, daemon, Glue Logger), `/aws-glue/jobs/logs-v2` (logging continuo: driver + executor, en tiempo real) | Redirige con `--continuous-log-logGroup`; Glue 4.0+/5.0 «todos los jobs tienen capacidades de logging en tiempo real»; una configuración de seguridad añade su nombre; los grupos cifrados con KMS necesitan `logs:AssociateKmsKey` |
 | **Fallo de jobs de Glue** | Los streams de job insights en el mismo grupo `/aws-glue/jobs/logs-v2/` | `-job-insights-rca-driver` da la **línea** del script fallido, la última acción de Spark y una lista concisa de eventos; un stream basado en reglas añade análisis de causa raíz |
 | **Coste de los logs** | Un grupo de clase **Logs Infrequent Access**, p. ej. `/aws-glue/jobs/logs-v2-infrequent-access`, al que apunta `--continuous-log-logGroup` | Advertencias: «no puedes cambiar la clase de log de un grupo de log después de crearlo», y Logs IA no se puede ver en la consola estándar de Logs |
-| **Redshift Serverless** | `/aws/redshift/<namespace>/<log_type>` para logs de conexión, de usuario y de actividad | Se crea solo si falta — con retención **Never Expire**. Ponte una política de retención o la factura crece sin ti |
-| **Athena** | Métricas en `AWS/Athena` (opt-in por grupo de trabajo: «publish query metrics to CloudWatch») + eventos de cambio de estado | `EngineExecutionTime`, `ProcessedBytes`, `TotalExecutionTime`; dimensiones `QueryState`, `QueryType`, `WorkGroup`. El historial de consultas detallado es de **30 días** — una auditoría de horizonte largo necesita EventBridge → Lambda → Firehose → S3 |
+| **Redshift Serverless** | `/aws/redshift/<namespace>/<log_type>` para logs de conexión, de usuario y de actividad | Se crea solo si falta: con retención **Never Expire**. Ponte una política de retención o la factura crece sin ti |
+| **Athena** | Métricas en `AWS/Athena` (opt-in por grupo de trabajo: «publish query metrics to CloudWatch») + eventos de cambio de estado | `EngineExecutionTime`, `ProcessedBytes`, `TotalExecutionTime`; dimensiones `QueryState`, `QueryType`, `WorkGroup`. El historial de consultas detallado es de **30 días**: una auditoría de horizonte largo necesita EventBridge → Lambda → Firehose → S3 |
 | **Orquestación** | **X-Ray**: Lambda (modos de traza `Active` frente a `PassThrough`) y Step Functions (mapa de servicio) | Trazas escribibles **7 días**, consultables **30 días**; tamaño mínimo garantizado de traza de Step Functions **100 KiB**. X-Ray **no** traza los executors de Spark dentro de Glue |
 
 Las instalaciones multcuenta se centralizan con filtros de suscripción cross-account, un destino de logs de Firehose/Kinesis, o la **centralización de datos de CloudWatch Logs** a nivel de Organizations (los nombres del grupo de destino admiten `${source.accountId}`, `${source.region}`, `${source.logGroup}`, `${source.org.id}`).
 
 ### 7.2 El mapa de cuadros de mando
 
-La recomendación de AWS Prescriptive Guidance es un cuadro de mando por preocupación — «un cuadro de mando de CloudWatch puede mostrar a los usuarios el estado de las cargas… o qué porcentaje de sus datos se descartó por baja calidad, o qué fuentes tienen el máximo de fallos.» Para este lakehouse eso se convierte en un cuadro de mando por capa medallón más un panel de operaciones de datos a nivel de cuenta:
+La recomendación de AWS Prescriptive Guidance es un cuadro de mando por preocupación: «un cuadro de mando de CloudWatch puede mostrar a los usuarios el estado de las cargas… o qué porcentaje de sus datos se descartó por baja calidad, o qué fuentes tienen el máximo de fallos.» Para este lakehouse eso se convierte en un cuadro de mando por capa medallón más un panel de operaciones de datos a nivel de cuenta:
 
 ```mermaid
 flowchart TB
@@ -722,7 +722,7 @@ flowchart TB
     ING --> SIL --> GOLD --> OPS
 ```
 
-Nivel gratuito en octubre de 2026: **10** métricas personalizadas, **3** cuadros de mando que referencian hasta **50** métricas cada uno, **10** métricas de alarma, **1 millón** de peticiones de API y **5 GB** de ingestión de logs al mes; las métricas personalizadas cuestan **$0.30 por métrica-mes** para las primeras 10,000, y después las escalas de $0.10 y $0.05. Los cuadros de mando y las alarmas se **prorratean por hora desde su creación** — una alarma sin uso no es gratis, y las alarmas de detección de anomalías «incurren costes por cada métrica que enumeres en la expresión de métrica de la alarma, más dos costes adicionales de métrica de alarma.»
+Nivel gratuito en octubre de 2026: **10** métricas personalizadas, **3** cuadros de mando que referencian hasta **50** métricas cada uno, **10** métricas de alarma, **1 millón** de peticiones de API y **5 GB** de ingestión de logs al mes; las métricas personalizadas cuestan **$0.30 por métrica-mes** para las primeras 10,000, y después las escalas de $0.10 y $0.05. Los cuadros de mando y las alarmas se **prorratean por hora desde su creación**: una alarma sin uso no es gratis, y las alarmas de detección de anomalías «incurren costes por cada métrica que enumeres en la expresión de métrica de la alarma, más dos costes adicionales de métrica de alarma.»
 
 ```matching
 {
@@ -730,12 +730,12 @@ Nivel gratuito en octubre de 2026: **10** métricas personalizadas, **3** cuadro
   "pairs": [
     {"left": "glue.data.quality.rules.failed emitido para lakehouse_silver.orders", "right": "alarma de CloudWatch en el espacio de nombres Glue Data Quality, estadística Sum, periodo 1 minuto, umbral >= 1, acción = tema de SNS"},
     {"left": "evento de EventBridge con detail-type Data Quality Evaluation Results Available y state FAILED", "right": "regla de EventBridge que filtra state FAILED más databaseName/tableName/rulesetNames, destino = Lambda de remediación y SNS"},
-    {"left": "la tabla de silver devuelve cero filas para la partición de hoy", "right": "alarma sobre la señal de volumen (RowCount / métrica EMF personalizada) en lugar del score de DQ - un pipeline muerto no es un problema de calidad"},
+    {"left": "la tabla de silver devuelve cero filas para la partición de hoy", "right": "alarma sobre la señal de volumen (RowCount / métrica EMF personalizada) en lugar del score de DQ: un pipeline muerto no es un problema de calidad"},
     {"left": "una regla SchemaMatch o ColumnExists empieza a fallar tras una publicación de la fuente", "right": "regla de EventBridge acotada al ruleset de esquema -> Lambda abre un ticket con el contexto de GetDataQualityResult"},
-    {"left": "una ejecución de job de Glue termina en FAILED sin ningún evento de DQ", "right": "EventBridge sobre el evento de fallo del job de Glue más los streams de log job-insights-rca-driver - el fallo ocurrió antes de que corriera la evaluación"},
-    {"left": "una consulta de Athena escaneó 10 veces su ProcessedBytes habitual", "right": "métrica de CloudWatch AWS/Athena ProcessedBytes por WorkGroup con alarma de umbral - una señal de coste y rendimiento, no de calidad"},
+    {"left": "una ejecución de job de Glue termina en FAILED sin ningún evento de DQ", "right": "EventBridge sobre el evento de fallo del job de Glue más los streams de log job-insights-rca-driver: el fallo ocurrió antes de que corriera la evaluación"},
+    {"left": "una consulta de Athena escaneó 10 veces su ProcessedBytes habitual", "right": "métrica de CloudWatch AWS/Athena ProcessedBytes por WorkGroup con alarma de umbral: una señal de coste y rendimiento, no de calidad"},
     {"left": "grupo de logs de auditoría de Redshift Serverless creciendo con la retención por defecto", "right": "poner una política de retención/IA en /aws/redshift/<namespace>/<log_type> - los grupos creados automáticamente quedan en Never Expire"},
-    {"left": "fallo de un executor de Spark dentro de un job de Glue", "right": "streams de logging continuo de CloudWatch Logs /aws-glue/jobs/logs-v2 - X-Ray no traza los executors de Spark"}
+    {"left": "fallo de un executor de Spark dentro de un job de Glue", "right": "streams de logging continuo de CloudWatch Logs /aws-glue/jobs/logs-v2: X-Ray no traza los executors de Spark"}
   ],
   "explanation": "Cada señal tiene exactamente un hogar: las métricas de DQ se alarman en el espacio de nombres Glue Data Quality, los eventos de DQ se enrutan por EventBridge porque AWS lo llama el enfoque de alertas recomendado, una tabla de cero filas necesita una alarma de volumen y no de score, las reglas de esquema reciben su propia regla acotada para que los tickets lleven el contexto correcto, los crashes previos a la evaluación son eventos de job más job insights, Athena ProcessedBytes es una señal de coste en AWS/Athena, los grupos de log de Redshift creados con Never Expire necesitan una política de retención, y los fallos de Spark viven en el grupo de log /aws-glue/jobs/logs-v2 porque X-Ray solo cubre Lambda y Step Functions."
 }
@@ -744,16 +744,16 @@ Nivel gratuito en octubre de 2026: **10** métricas personalizadas, **3** cuadro
 ---
 ## 8. Eventos de datos de CloudTrail: prefijos acotados y la factura
 
-CloudTrail es la **traza de auditoría del plano de datos** — y, sin acotar, la factura sorpresa. «De forma predeterminada, los trails y los almacenes de eventos de datos no registran eventos de datos. Se aplican cargos adicionales por los eventos de datos.» Activarlos exige selectores de eventos avanzados con `eventCategory` Equals `Data` y `resources.type` Equals `AWS::S3::Object`, acotados con `resources.ARN` `StartsWith` — la barra final forma parte del ARN: `arn:aws:s3:::lakehouse-bronze/`.
+CloudTrail es la **traza de auditoría del plano de datos**, y, sin acotar, la factura sorpresa. «De forma predeterminada, los trails y los almacenes de eventos de datos no registran eventos de datos. Se aplican cargos adicionales por los eventos de datos.» Activarlos exige selectores de eventos avanzados con `eventCategory` Equals `Data` y `resources.type` Equals `AWS:S3:Object`, acotados con `resources.ARN` `StartsWith`, la barra final forma parte del ARN: `arn:aws:s3:lakehouse-bronze/`.
 
 Reglas del camino:
 
-- **«Los selectores no admiten el uso de comodines como `*`»** — enumeras prefijos, no haces glob.
+- **«Los selectores no admiten el uso de comodines como `*`»**: enumeras prefijos, no haces glob.
 - Selectores básicos: hasta **5 selectores de eventos** y **250 recursos de datos** por trail; los selectores avanzados permiten **hasta 500 valores especificados** entre condiciones, y los dos estilos no se pueden mezclar.
 - Las exclusiones son filtros gratis: `{"Field": "eventSource", "NotEquals": ["s3lifecycle.amazonaws.com"]}` elimina el ruido de ciclo de vida; `readOnly = false` da auditoría de solo escritura para una landing zone.
 - Precios: **eventos de datos $0.10 por 100,000** entregados en S3 (agregaciones $0.03 por 100,000 analizados); **eventos de gestión** primera copia gratis, copias adicionales $2.00 por 100,000. Los eventos de gestión responden *quién ejecutó `StartJobRun` / `GrantPermissions` / `StartQueryExecution`*; los eventos de datos responden *quién tocó qué objeto*.
 
-### 8.1 Ejemplo resuelto E5 — tres selectores, una factura
+### 8.1 Ejemplo resuelto E5: tres selectores, una factura
 
 ```text
 Ejemplo resuelto E5 - auditoría de eventos de datos acotada para el lakehouse, en oct 2026
@@ -787,7 +787,7 @@ StartJobRun, GrantPermissions, StartQueryExecution -> cuadro de mando gratis.
 ```
 
 > [!WARNING]
-> **Los eventos de datos de CloudTrail son la factura sorpresa clásica del análisis.** Están desactivados por defecto, se facturan **por evento**, y un prefijo bronze con mucho tráfico y subidas multiparte emite tanto `PutObject` como `CompleteMultipartUpload` por cada objeto. Acota un selector por prefijo *sensible* — aterrizaje bronze, cuarentena, silver con PII — y mantén `readOnly = false` en la landing zone, donde la auditoría de lectura no aporta nada. El hecho de estar desactivados por defecto más la preciosidad por evento es exactamente por lo que AWS construyó los selectores de eventos avanzados: «selectores de grado fino para registrar eventos de datos, que pueden ayudarte a controlar los costes registrando solo los eventos de datos de interés» (CloudTrail User Guide, consultado 2026-10-11).
+> **Los eventos de datos de CloudTrail son la factura sorpresa clásica del análisis.** Están desactivados por defecto, se facturan **por evento**, y un prefijo bronze con mucho tráfico y subidas multiparte emite tanto `PutObject` como `CompleteMultipartUpload` por cada objeto. Acota un selector por prefijo *sensible*, aterrizaje bronze, cuarentena, silver con PII, y mantén `readOnly = false` en la landing zone, donde la auditoría de lectura no aporta nada. El hecho de estar desactivados por defecto más la preciosidad por evento es exactamente por lo que AWS construyó los selectores de eventos avanzados: «selectores de grado fino para registrar eventos de datos, que pueden ayudarte a controlar los costes registrando solo los eventos de datos de interés» (CloudTrail User Guide, consultado 2026-10-11).
 
 ---
 
@@ -798,25 +798,25 @@ StartJobRun, GrantPermissions, StartQueryExecution -> cuadro de mando gratis.
 | Plano | Servicio | Responde | Explícitamente **no** responde |
 |---|---|---|---|
 | **Catálogo técnico + permisos** | **AWS Glue Data Catalog** + **Lake Formation** | ¿Qué tablas/columnas/particiones existen? ¿Quién puede leerlas? | Quién las leyó; de qué se derivó una columna |
-| **Catálogo de negocio + linaje** | **Amazon DataZone** | ¿Qué *significan* estos datos? ¿De dónde salieron y qué los consume? En lenguaje de negocio — «catáloga los datos de toda tu organización con contexto de negocio», más nombres de negocio, descripciones, términos de glosario, formularios de metadatos | Imposición de permisos; auditoría de llamadas a API |
+| **Catálogo de negocio + linaje** | **Amazon DataZone** | ¿Qué *significan* estos datos? ¿De dónde salieron y qué los consume? En lenguaje de negocio: «catáloga los datos de toda tu organización con contexto de negocio», más nombres de negocio, descripciones, términos de glosario, formularios de metadatos | Imposición de permisos; auditoría de llamadas a API |
 | **Auditoría de acceso** | **AWS CloudTrail** | Qué principal llamó a qué API sobre qué recurso, cuándo, desde dónde | Derivación a nivel de columna; significado de negocio |
 
-El registro en Lake Formation autoriza el acceso a una ubicación — es un alcance de permiso, no una arista de linaje. CloudTrail registra actividad — no es un grafo de derivación. Presentar cualquiera de los dos como «linaje» es la confusión más común de todo este espacio.
+El registro en Lake Formation autoriza el acceso a una ubicación, es un alcance de permiso, no una arista de linaje. CloudTrail registra actividad, no es un grafo de derivación. Presentar cualquiera de los dos como «linaje» es la confusión más común de todo este espacio.
 
 ### 9.2 Linaje: las fuentes que puedes nombrar de verdad
 
 | Fuente | Qué obtienes | Estado |
 |---|---|---|
-| **Ejecuciones de fuente de datos de Glue en DataZone** | Los nodos de dataset para **activos de Glue o Redshift publicados en el catálogo de DataZone** se generan automáticamente; la ejecución de la fuente de datos «fetches information from table metadata to build lineage» para **tablas S3, DynamoDB, Catalog, Delta Lake, Iceberg y Hudi almacenadas en Amazon S3** — **JDBC y DocumentDB/MongoDB no están soportados** | Verificado |
+| **Ejecuciones de fuente de datos de Glue en DataZone** | Los nodos de dataset para **activos de Glue o Redshift publicados en el catálogo de DataZone** se generan automáticamente; la ejecución de la fuente de datos «fetches information from table metadata to build lineage» para **tablas S3, DynamoDB, Catalog, Delta Lake, Iceberg y Hudi almacenadas en Amazon S3**: **JDBC y DocumentDB/MongoDB no están soportados** | Verificado |
 | **Historial de consultas de Redshift en DataZone** | «las ejecuciones de linaje capturan las consultas ejecutadas en una base de datos dada y generan eventos de linaje» | Verificado |
-| **Eventos compatibles con OpenLineage vía APIs de DataZone** | El linaje de datos en DataZone es «una función compatible con OpenLineage… procedente de sistemas habilitados para OpenLineage o a través de APIs» — orquestadores, warehouses, motores SQL empujan eventos hacia dentro; **tienes que activarlo** porque algunos jobs/conexiones pueden ser de prueba | Verificado (lado de ingestión) |
+| **Eventos compatibles con OpenLineage vía APIs de DataZone** | El linaje de datos en DataZone es «una función compatible con OpenLineage… procedente de sistemas habilitados para OpenLineage o a través de APIs»: orquestadores, warehouses, motores SQL empujan eventos hacia dentro; **tienes que activarlo** porque algunos jobs/conexiones pueden ser de prueba | Verificado (lado de ingestión) |
 | **Ejecuciones de jobs de Glue** | La API JobRun y los eventos de job de EventBridge dan las aristas S3 → tabla de tus propios pipelines | Verificado como metadatos de ejecución |
-| **QuickSight** | Entra en esta lección como **consumidor** de las tablas de resultados de DQ y de coste en Athena — el rol en el que los propios blogs de AWS lo usan | Solo consumidor |
-| **CloudTrail** | Quién accedió a qué — el plano de auditoría de arriba | Auditoría, no linaje |
+| **QuickSight** | Entra en esta lección como **consumidor** de las tablas de resultados de DQ y de coste en Athena: el rol en el que los propios blogs de AWS lo usan | Solo consumidor |
+| **CloudTrail** | Quién accedió a qué: el plano de auditoría de arriba | Auditoría, no linaje |
 
-DataZone se sitúa **encima** del catálogo de negocio: creas fuentes de datos para Glue y Redshift, importas metadatos técnicos en un inventario de proyecto, los curas con nombres de negocio, términos de glosario y formularios de metadatos, y publicas — «solo la última versión del activo del inventario puede publicarse en el catálogo.» Un consumidor ve después «una vista del linaje de ese activo con 1 nivel aguas arriba y aguas abajo.» Es una capa de gobernanza y descubrimiento, **no** un sustituto del Glue Data Catalog que consultan Athena y Redshift Spectrum.
+DataZone se sitúa **encima** del catálogo de negocio: creas fuentes de datos para Glue y Redshift, importas metadatos técnicos en un inventario de proyecto, los curas con nombres de negocio, términos de glosario y formularios de metadatos, y publicas: «solo la última versión del activo del inventario puede publicarse en el catálogo.» Un consumidor ve después «una vista del linaje de ese activo con 1 nivel aguas arriba y aguas abajo.» Es una capa de gobernanza y descubrimiento, **no** un sustituto del Glue Data Catalog que consultan Athena y Redshift Spectrum.
 
-- **📚 ¿Sabías que…?** El linaje de DataZone llegó a disponibilidad general el **2024-12-03**, y el anuncio es explícito en que la captura es *automática para Glue y Redshift* y *programática para todo lo demás*: los productores «hidratan la información de linaje de forma programática creando nodos de linaje personalizados con APIs que aceptan eventos compatibles con OpenLineage de los componentes de pipeline existentes, como orquestadores, warehouses, herramientas de análisis y motores SQL.» Así que la prueba de integración de tu lakehouse es simple: publica un activo de Glue, ejecuta su fuente de datos y mira si aparece el nodo aguas arriba — antes de prometerle a nadie linaje de extremo a extremo (AWS News Blog, 2024-12-03).
+- **📚 ¿Sabías que…?** El linaje de DataZone llegó a disponibilidad general el **2024-12-03**, y el anuncio es explícito en que la captura es *automática para Glue y Redshift* y *programática para todo lo demás*: los productores «hidratan la información de linaje de forma programática creando nodos de linaje personalizados con APIs que aceptan eventos compatibles con OpenLineage de los componentes de pipeline existentes, como orquestadores, warehouses, herramientas de análisis y motores SQL.» Así que la prueba de integración de tu lakehouse es simple: publica un activo de Glue, ejecuta su fuente de datos y mira si aparece el nodo aguas arriba: antes de prometerle a nadie linaje de extremo a extremo (AWS News Blog, 2024-12-03).
 
 ```mermaid
 flowchart LR
@@ -849,7 +849,7 @@ flowchart LR
 Pie para memorizar: **catálogo = metadatos técnicos y permisos (Glue + Lake Formation); DataZone = catálogo de negocio y linaje; CloudTrail = auditoría de acceso. Tres planos, tres herramientas.**
 
 ---
-## 10. Ejemplo resuelto E6 — EventBridge → SNS → Lambda de remediación, cableado
+## 10. Ejemplo resuelto E6: EventBridge → SNS → Lambda de remediación, cableado
 
 ### 10.1 La regla
 
@@ -871,9 +871,9 @@ Pie para memorizar: **catálogo = metadatos técnicos y permisos (Glue + Lake Fo
 
 ### 10.2 Los destinos, en orden
 
-**Destino 1 — tema de SNS `dq-alerts`** (email / Chatbot para el canal humano). La entrega de SNS a Lambda y SQS está libre de cargo de entrega de SNS — «No charge for deliveries to SQS Queues. Standard SQS pricing applies», e igual para Lambda.
+**Destino 1, tema de SNS `dq-alerts`** (email / Chatbot para el canal humano). La entrega de SNS a Lambda y SQS está libre de cargo de entrega de SNS, «No charge for deliveries to SQS Queues. Standard SQS pricing applies», e igual para Lambda.
 
-**Destino 2 — Lambda `dq-remediate`**:
+**Destino 2: Lambda `dq-remediate`**:
 
 ```python
 import json, os, boto3
@@ -935,52 +935,52 @@ Alarmas de CloudWatch x 3 (prorrateo por hora, resolución estándar) ... verif�
 TOTAL DEL PLANO DE REMEDIACIÓN ......................... ~$1.80 / mes
 ```
 
-La moraleja es la economía: **la ruta de alertas casi no cuesta; la ruta de datos es lo que cuesta dinero.** Que es la forma correcta — un lakehouse que avisa a alguien por $1.80 al mes y gasta $21.90 al mes midiendo de verdad sus datos.
+La moraleja es la economía: **la ruta de alertas casi no cuesta; la ruta de datos es lo que cuesta dinero.** Que es la forma correcta: un lakehouse que avisa a alguien por $1.80 al mes y gasta $21.90 al mes midiendo de verdad sus datos.
 
 ---
 
 ### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
-> **Qué cambió en la historia de calidad, observabilidad y linaje entre 2025 y octubre de 2026** — cada línea verificada contra una fuente primaria de AWS:
-> - **Recomendaciones de reglas ADVANCED a través de Amazon Bedrock (2026-09-18; historial de documentación 2026-09-25).** Glue Data Quality puede usar ahora «table metadata and sampled rows to generate Data Quality Definition Language (DQDL)» en un modo ADVANCED — un asistente de redacción encima del mismo DQDL, no un lenguaje nuevo (notas de versión de Glue DQ e historial de docs, consultado 2026-10-11).
+> **Qué cambió en la historia de calidad, observabilidad y linaje entre 2025 y octubre de 2026**: cada línea verificada contra una fuente primaria de AWS:
+> - **Recomendaciones de reglas ADVANCED a través de Amazon Bedrock (2026-09-18; historial de documentación 2026-09-25).** Glue Data Quality puede usar ahora «table metadata and sampled rows to generate Data Quality Definition Language (DQDL)» en un modo ADVANCED: un asistente de redacción encima del mismo DQDL, no un lenguaje nuevo (notas de versión de Glue DQ e historial de docs, consultado 2026-10-11).
 > - **Las vistas de Athena están ahora en alcance (2026-09-18).** La página de inicio dice ahora que Glue DQ «evalúa tablas y vistas de Amazon Athena admitidas que están almacenadas en el AWS Glue Data Catalog»; el material antiguo que afirmaba que las vistas de Athena no están soportadas está desactualizado; verifica contra la página en vivo antes de enseñar esa exclusión.
-> - **Distribution Analyzer y tablas de resultados Iceberg (2026-07-27).** Puedes «calcular distribuciones de frecuencia para las columnas de tus datos» (histogramas con bins para columnas numéricas) y «write data quality results to Apache Iceberg tables in the AWS Glue Data Catalog» — el historial de calidad se convierte en una tabla de lakehouse de primera clase y con time travel.
-> - **Glue Data Quality sigue siendo el producto de calidad actual (GA 2023-05-24).** El hito de Big Data Blog de 2023 — reglas que se ejecutan en tiempo de ETL o con programa, visualizaciones de score en la consola — sigue siendo el estado del producto en oct de 2026, con las versiones de 2025–2026 (etiquetas, constantes, consultas de preprocesado, reglas de fichero, resultados Iceberg, recomendaciones de Bedrock) superpuestas y no reemplazadas.
-> - **S3 Metadata (2025-01-27) pone los metadatos de objetos detrás de SQL.** «S3 Metadata facilita consultar y filtrar los metadatos de objetos de S3 con SQL… puedes consultar los metadatos de objetos con Amazon Athena», con las tablas de S3 Metadata apareciendo en el Glue Data Catalog — una nueva fuente de hechos *operativos* vecinos al linaje (conteos, tamaños y timestamps de objetos) para los cuadros de mando de frescura.
+> - **Distribution Analyzer y tablas de resultados Iceberg (2026-07-27).** Puedes «calcular distribuciones de frecuencia para las columnas de tus datos» (histogramas con bins para columnas numéricas) y «write data quality results to Apache Iceberg tables in the AWS Glue Data Catalog»: el historial de calidad se convierte en una tabla de lakehouse de primera clase y con time travel.
+> - **Glue Data Quality sigue siendo el producto de calidad actual (GA 2023-05-24).** El hito de Big Data Blog de 2023, reglas que se ejecutan en tiempo de ETL o con programa, visualizaciones de score en la consola, sigue siendo el estado del producto en oct de 2026, con las versiones de 2025 to 2026 (etiquetas, constantes, consultas de preprocesado, reglas de fichero, resultados Iceberg, recomendaciones de Bedrock) superpuestas y no reemplazadas.
+> - **S3 Metadata (2025-01-27) pone los metadatos de objetos detrás de SQL.** «S3 Metadata facilita consultar y filtrar los metadatos de objetos de S3 con SQL… puedes consultar los metadatos de objetos con Amazon Athena», con las tablas de S3 Metadata apareciendo en el Glue Data Catalog: una nueva fuente de hechos *operativos* vecinos al linaje (conteos, tamaños y timestamps de objetos) para los cuadros de mando de frescura.
 > - **Los dominios de DataZone se escalan a SageMaker Unified Studio (2025-09-11), y re:Invent 2025 añadió evaluaciones y controles de política de Bedrock AgentCore junto al «SageMaker Unified Studio one-click onboarding».** DataZone sigue siendo la columna vertebral de gobernanza y metadatos del IDE unificado de datos + ML + analítica, de modo que el plano de catálogo de negocio y linaje que describe esta lección es ahora la capa sobre la que se sienta Unified Studio (AWS Big Data Blog, 2025-09-11; anuncios destacados de AWS re:Invent 2025, 2025-12-01).
 
 ---
 
 ## Casos Reales
 
-AWS publica cómo se ve esto a escala. Cada cifra de abajo es **afirmación del cliente o de AWS y no auditada**, con fuente y fecha indicadas — el punto examinable es el **patrón**.
+AWS publica cómo se ve esto a escala. Cada cifra de abajo es **afirmación del cliente o de AWS y no auditada**, con fuente y fecha indicadas: el punto examinable es el **patrón**.
 
-### Caso A — Siemens: logs centralizados que convirtieron días en 10 minutos
+### Caso A, Siemens: logs centralizados que convirtieron días en 10 minutos
 
 | Elemento | Detalle |
 |---|---|
-| Cliente | **Siemens**, fabricación industrial / tecnología — división de Cloud Security Operations |
+| Cliente | **Siemens**, fabricación industrial / tecnología: división de Cloud Security Operations |
 | Reto | Más de **800 cuentas de AWS** produciendo logs de seguridad y de acceso que no podían almacenarse ni buscarse centralmente; las investigaciones exigían correlación manual |
 | Servicios | **Amazon Security Lake** como almacén central sobre S3, **Amazon S3** server access logs y VPC Flow Logs como fuentes, **Cribl** (AWS Partner) reenviando el subconjunto relevante a **Splunk** |
-| Patrón | **Aterriza todo barato en S3 y proyecta solo los cortes caros en el motor de análisis** — la misma economía que la del lago analítico, aplicada a la telemetría de observabilidad |
-| Resultado publicado | «5–7 TB of security data daily» ingeridos con «only the most relevant 600 GB» reenviados — una **reducción del 90 por ciento**; **$1.3 millones** ahorrados al año mientras se agregaban más logs; incorporación de fuentes nuevas recortada a **1–2 días**; tiempo de identificación de causa raíz bajado un **75%**; en una investigación, «identified what data in Amazon S3 was impacted in an event within 10 minutes as opposed to several days» |
+| Patrón | **Aterriza todo barato en S3 y proyecta solo los cortes caros en el motor de análisis**: la misma economía que la del lago analítico, aplicada a la telemetría de observabilidad |
+| Resultado publicado | «5 to 7 TB of security data daily» ingeridos con «only the most relevant 600 GB» reenviados: una **reducción del 90 por ciento**; **$1.3 millones** ahorrados al año mientras se agregaban más logs; incorporación de fuentes nuevas recortada a **1 to 2 días**; tiempo de identificación de causa raíz bajado un **75%**; en una investigación, «identified what data in Amazon S3 was impacted in an event within 10 minutes as opposed to several days» |
 | Fuente | Caso de AWS, *Siemens Boosts Security Visibility Across 800+ AWS Accounts Using Amazon Security Lake* (sin fecha; consultado 2026-10-11) |
 
-La lección para este curso es la **forma de la respuesta**: los 10 minutos de Siemens frente a varios días es lo que compran los grupos de log por capa, los selectores acotados y un cuadro de mando por capa — no diagnosticas más rápido porque la herramienta sea más lista, diagnosticas más rápido porque la evidencia ya estaba indexada y acotada. Fíjate en lo que el caso *no* afirma: Security Lake es un servicio de agregación de logs de seguridad, **no** AWS Lake Formation, y produce evidencia de auditoría, no linaje a nivel de columna.
+La lección para este curso es la **forma de la respuesta**: los 10 minutos de Siemens frente a varios días es lo que compran los grupos de log por capa, los selectores acotados y un cuadro de mando por capa: no diagnosticas más rápido porque la herramienta sea más lista, diagnosticas más rápido porque la evidencia ya estaba indexada y acotada. Fíjate en lo que el caso *no* afirma: Security Lake es un servicio de agregación de logs de seguridad, **no** AWS Lake Formation, y produce evidencia de auditoría, no linaje a nivel de columna.
 
-### Caso B — Vanguard: un «charco de datos» convertido en productos de datos con dueño
+### Caso B, Vanguard: un «charco de datos» convertido en productos de datos con dueño
 
 | Elemento | Detalle |
 |---|---|
-| Cliente | **Vanguard**, gestión de inversiones — Financial Advisor Services («FAS 360») |
+| Cliente | **Vanguard**, gestión de inversiones: Financial Advisor Services («FAS 360») |
 | Reto | Un «fragmented "data swamp" of Parquet files on Amazon Simple Storage Service (Amazon S3)» que tenía que convertirse en un sistema estructurado y gobernado |
 | Servicios | Arquitectura multiwarehouse de **Amazon Redshift** (productor RA3 + consumidores Serverless, sharing sin copia), productos de datos **Apache Iceberg** sobre S3, **AWS Glue** para ETL y cálculo de métricas |
 | Escala tras dos años | **20 TB** en Redshift más **150 TB** en el lago de datos de S3; **600+ jobs de ETL de AWS Glue (un aumento de 30×)**; **300+ tablas (3×)**; **250+ vistas materializadas**; **500+ cuadros de mando (25×)**; **500,000+ consultas de usuarios al mes** |
-| El enlace con la calidad | «Vanguard está curando productos de datos en el lago de datos con el formato Apache Iceberg y aprovechando AWS Glue para el cálculo de métricas y la integración del lago de datos» — el paso de curación es donde se enganchan las reglas, los SLOs de frescura y la propiedad |
+| El enlace con la calidad | «Vanguard está curando productos de datos en el lago de datos con el formato Apache Iceberg y aprovechando AWS Glue para el cálculo de métricas y la integración del lago de datos»: el paso de curación es donde se enganchan las reglas, los SLOs de frescura y la propiedad |
 | Fuente | AWS Big Data Blog, *How Vanguard transformed analytics with Amazon Redshift multi-warehouse architecture*, publicado el **2026-03-18** (consultado 2026-10-11) |
 
-Lee los 600 jobs y las 500,000 consultas mensuales como una **declaración de presupuesto de calidad**: a ese volumen una partición mala silenciosa no es una molestia, es un mes de decisiones equivocadas. La frase «charco de datos» es la abreviatura de la propia industria para lo que pasa cuando un lago acumula ficheros sin curación, sin dueño y sin chequeos — que es exactamente el modo de falla para el que existen las reglas, la cuarentena y los SLOs de esta lección. (Las cifras de escala las reportan Vanguard/AWS en la publicación de marzo de 2026; son instantáneas, no garantías.)
+Lee los 600 jobs y las 500,000 consultas mensuales como una **declaración de presupuesto de calidad**: a ese volumen una partición mala silenciosa no es una molestia, es un mes de decisiones equivocadas. La frase «charco de datos» es la abreviatura de la propia industria para lo que pasa cuando un lago acumula ficheros sin curación, sin dueño y sin chequeos: que es exactamente el modo de falla para el que existen las reglas, la cuarentena y los SLOs de esta lección. (Las cifras de escala las reportan Vanguard/AWS en la publicación de marzo de 2026; son instantáneas, no garantías.)
 
 ---
 ## Preguntas de Práctica (Practice Questions)
@@ -994,7 +994,7 @@ Lee los 600 jobs y las 500,000 consultas mensuales como una **declaración de pr
     "Añadir un predicado con pushdown a la tarea del catálogo para que acote el escaneo a la partición infractora",
     "Mover EvaluateDataQuality al job de Glue de bronze a silver y usar las columnas DataQuality* a nivel de fila, porque las tareas del catálogo no pueden identificar registros fallidos",
     "Activar la detección de anomalías basada en ML en la tarea del catálogo, que emite fallos a nivel de fila",
-    "Consultar los resultados de la tarea del Data Catalog para las filas fallidas - todos los tipos de resultado escriben salida a nivel de fila por defecto"
+    "Consultar los resultados de la tarea del Data Catalog para las filas fallidas: todos los tipos de resultado escriben salida a nivel de fila por defecto"
   ],
   "correct": 1,
   "explanation": "La matriz de capacidades dice «Identificar registros que fallaron los chequeos de calidad de datos | Not supported» para el punto de entrada del Data Catalog y «Supported» para el punto de entrada ETL. Los predicados con pushdown (y los predicados de partición del catálogo) acotan el escaneo pero no producen filas; la detección de anomalías está disponible en ambas rutas pero no es una fuente de filas; y la escritura de resultados, incluidos los de nivel de fila, es opt-in por tipo, nunca por defecto."
@@ -1008,7 +1008,7 @@ Lee los 600 jobs y las 500,000 consultas mensuales como una **declaración de pr
   "question": "Tu regla de EventBridge sobre «Data Quality Evaluation Results Available» dejó de dispararse aunque el ruleset sigue corriendo y el score sigue bajando. ¿Cuál es la causa documentada más probable?",
   "options": [
     "El ruleset superó las 2,000 reglas, así que AWS dejó de emitir eventos",
-    "La opción «Publish metrics to Amazon CloudWatch» se desseleccionó - AWS documenta que debe seguir seleccionada para que funcione la publicación en EventBridge",
+    "La opción «Publish metrics to Amazon CloudWatch» se desseleccionó: AWS documenta que debe seguir seleccionada para que funcione la publicación en EventBridge",
     "EventBridge no puede igualar sobre la fuente aws.glue-dataquality, solo sobre aws.glue",
     "Hay que activar la escritura de resultados en el Data Catalog antes de que se emitan eventos"
   ],
@@ -1025,7 +1025,7 @@ Lee los 600 jobs y las 500,000 consultas mensuales como una **declaración de pr
   "options": [
     "Las cuatro reglas ponen filas en cuarentena, porque toda regla DQDL devuelve resultados a nivel de fila",
     "Se ponen en cuarentena solo las filas del CustomSql, ya que las demás son analyzers",
-    "No se pone nada en cuarentena - son reglas a nivel de dataset que no pueden identificar registros de error; solo pueden hacer fallar el ruleset y alertar",
+    "No se pone nada en cuarentena: son reglas a nivel de dataset que no pueden identificar registros de error; solo pueden hacer fallar el ruleset y alertar",
     "Se ponen en cuarentena filas solo si a cada regla se le adjuntan etiquetas"
   ],
   "correct": 2,
@@ -1045,7 +1045,7 @@ Lee los 600 jobs y las 500,000 consultas mensuales como una **declaración de pr
     "ColumnValues \"order_ts\" with threshold > 0.99"
   ],
   "correct": 1,
-  "explanation": "DataFreshness comprueba una columna de timestamp de la tabla, devuelve resultados a nivel de fila y acepta una cláusula where (las cláusulas where se entregaron el 2024-06-26), de modo que acotas la regla a la partición que debería estar fresca. FileFreshness comprueba los timestamps de fichero/carpeta de S3 y no admite una cláusula where a nivel de fila; RowCount es una regla de volumen, no de obsolescencia; y «with threshold» solo se aplica a ColumnValues, ColumnDataType y CustomSql - aquí mediría la proporción de filas, no su antigüedad."
+  "explanation": "DataFreshness comprueba una columna de timestamp de la tabla, devuelve resultados a nivel de fila y acepta una cláusula where (las cláusulas where se entregaron el 2024-06-26), de modo que acotas la regla a la partición que debería estar fresca. FileFreshness comprueba los timestamps de fichero/carpeta de S3 y no admite una cláusula where a nivel de fila; RowCount es una regla de volumen, no de obsolescencia; y «with threshold» solo se aplica a ColumnValues, ColumnDataType y CustomSql: aquí mediría la proporción de filas, no su antigüedad."
 }
 ```
 
@@ -1055,13 +1055,13 @@ Lee los 600 jobs y las 500,000 consultas mensuales como una **declaración de pr
   "type": "multiple-choice",
   "question": "El mismo ruleset de silver de 20 reglas evaluado 30 veces al mes. ¿Qué ubicación es la correcta para un diseño de cuarentena, usando la aritmética publicada por AWS?",
   "options": [
-    "Una tarea independiente del Data Catalog con 5 DPUs x 20 min - unos $0.73 por ejecución y $21.90 al mes - porque las tareas del catálogo pueden poner filas en cuarentena",
-    "Dentro del job de silver de Glue existente con EvaluateDataQuality - unos $0.22 por ejecución de coste marginal a $0.44/DPU-hora - porque produce resultados a nivel de fila",
+    "Una tarea independiente del Data Catalog con 5 DPUs x 20 min: unos $0.73 por ejecución y $21.90 al mes: porque las tareas del catálogo pueden poner filas en cuarentena",
+    "Dentro del job de silver de Glue existente con EvaluateDataQuality: unos $0.22 por ejecución de coste marginal a $0.44/DPU-hora: porque produce resultados a nivel de fila",
     "Un job de perfilado de DataBrew, porque las expresiones de chequeo de DataBrew devuelven fallos a nivel de fila",
     "Deequ en Lambda con SoAL, porque AWS lo recomienda para todos los tamaños de dataset por encima de Glue Data Quality"
   ],
   "correct": 1,
-  "explanation": "La cuarentena exige resultados a nivel de fila, que solo la ruta ETL los da - así que la opción de tarea del catálogo es errónea sea cual sea su coste (su propia aritmética, 5 x 1/3 x $0.44 = $0.73/ejecución, es correcta). Los hallazgos de DataBrew son agregados, no a nivel de fila. El post de AWS sobre Lambda+SoAL dice explícitamente que para jobs de Spark de más de 15 minutos o ficheros de más de 1 GB recomienda AWS Glue Data Quality. La opción dentro del job es a la vez más barata (una adición marginal de 5 minutos a 6 DPUs) y la única de las cuatro que puede dividir filas."
+  "explanation": "La cuarentena exige resultados a nivel de fila, que solo la ruta ETL los da: así que la opción de tarea del catálogo es errónea sea cual sea su coste (su propia aritmética, 5 x 1/3 x $0.44 = $0.73/ejecución, es correcta). Los hallazgos de DataBrew son agregados, no a nivel de fila. El post de AWS sobre Lambda+SoAL dice explícitamente que para jobs de Spark de más de 15 minutos o ficheros de más de 1 GB recomienda AWS Glue Data Quality. La opción dentro del job es a la vez más barata (una adición marginal de 5 minutos a 6 DPUs) y la única de las cuatro que puede dividir filas."
 }
 ```
 
@@ -1071,10 +1071,10 @@ Lee los 600 jobs y las 500,000 consultas mensuales como una **declaración de pr
   "type": "multiple-choice",
   "question": "Para tu SLO de frescura los P95 de los componentes son: CDC 55 min, bronze a silver incluyendo DQ 22 min, silver a gold 15 min, espera de orquestación 70 min. ¿Qué reportas?",
   "options": [
-    "94 minutos - la suma de las medias de los componentes, porque las medias son más estables que los percentiles",
-    "162 minutos (2.7 h) - la suma de los P95 de los componentes - dejando 18 minutos de holgura frente a un SLO de 3 horas, con la espera de orquestación de 70 minutos como primera palanca",
-    "70 minutos - el tramo mayor, porque el P95 de una cadena es su peor eslabón",
-    "180 minutos - el propio SLO, ya que el P95 de una suma no puede superar el objetivo"
+    "94 minutos: la suma de las medias de los componentes, porque las medias son más estables que los percentiles",
+    "162 minutos (2.7 h) - la suma de los P95 de los componentes: dejando 18 minutos de holgura frente a un SLO de 3 horas, con la espera de orquestación de 70 minutos como primera palanca",
+    "70 minutos: el tramo mayor, porque el P95 de una cadena es su peor eslabón",
+    "180 minutos: el propio SLO, ya que el P95 de una suma no puede superar el objetivo"
   ],
   "correct": 1,
   "explanation": "El P95 de una suma está acotado por la suma de los P95, así que 55 + 22 + 15 + 70 = 162 minutos = 2.7 horas es el reporte defendible frente a un objetivo de 180 minutos - 18 minutos de holgura. Promediar las medias infravaloría la cola; tomar solo el peor eslabón ignora a los demás; y el SLO es un objetivo, no una medida. Con 18 minutos de margen, la palanca más barata es la espera de orquestación de 70 minutos (desfase de programa), antes de paralelizar gold o afinar el CDC."
@@ -1088,12 +1088,12 @@ Lee los 600 jobs y las 500,000 consultas mensuales como una **declaración de pr
   "question": "Tienes que auditar quién escribió objetos en la landing zone de bronze. ¿Qué configuración es correcta y está acotada en coste en octubre de 2026?",
   "options": [
     "Activar los eventos de datos con un selector para todos los objetos de todos los buckets, ya que los eventos de datos están incluidos en el nivel gratuito",
-    "Un selector de eventos avanzado con eventCategory=Data, resources.type=AWS::S3::Object, resources.ARN StartsWith arn:aws:s3:::lakehouse-bronze/, eventName Equals PutObject/CompleteMultipartUpload y readOnly=false - 20M de eventos/mes cuestan unos $20.00",
+    "Un selector de eventos avanzado con eventCategory=Data, resources.type=AWS:S3:Object, resources.ARN StartsWith arn:aws:s3:lakehouse-bronze/, eventName Equals PutObject/CompleteMultipartUpload y readOnly=false - 20M de eventos/mes cuestan unos $20.00",
     "Selectores de eventos básicos con un comodín sobre resources.ARN, porque los selectores admiten comodines para dejar la configuración corta",
     "Solo eventos de gestión, porque los eventos de gestión cubren el acceso a nivel de objeto"
   ],
   "correct": 1,
-  "explanation": "Los eventos de datos son opt-in y se facturan a $0.10 por 100,000, así que 20,000,000 / 100,000 x $0.10 = $20.00/mes, y acotar por resources.ARN StartsWith sobre el prefijo bronze (con la barra final incluida) con readOnly=false es auditoría de solo escritura. «Los selectores no admiten el uso de comodines como *». Los eventos de gestión responden quién ejecutó StartJobRun/GrantPermissions - no registran el acceso a nivel de objeto."
+  "explanation": "Los eventos de datos son opt-in y se facturan a $0.10 por 100,000, así que 20,000,000 / 100,000 x $0.10 = $20.00/mes, y acotar por resources.ARN StartsWith sobre el prefijo bronze (con la barra final incluida) con readOnly=false es auditoría de solo escritura. «Los selectores no admiten el uso de comodines como *». Los eventos de gestión responden quién ejecutó StartJobRun/GrantPermissions: no registran el acceso a nivel de objeto."
 }
 ```
 
@@ -1109,7 +1109,7 @@ Lee los 600 jobs y las 500,000 consultas mensuales como una **declaración de pr
     "Los metadatos de partición del Glue Data Catalog responden la derivación; los LF-Tags de Lake Formation responden el acceso"
   ],
   "correct": 1,
-  "explanation": "DataZone es el único producto de linaje propio de este escenario: captura automáticamente desde las ejecuciones de fuentes de datos de Glue (S3, DynamoDB, Catalog, Delta, Iceberg, Hudi - no JDBC ni DocumentDB/MongoDB) y desde el historial de consultas de Redshift, e ingiere eventos compatibles con OpenLineage por API cuando lo activas. CloudTrail registra actividad de API - eventos de gestión para quién ejecutó qué, eventos de datos de S3 para quién tocó qué objeto - pero nunca la derivación a nivel de columna. El registro en Lake Formation es un alcance de permiso, y las particiones del catálogo no llevan linaje."
+  "explanation": "DataZone es el único producto de linaje propio de este escenario: captura automáticamente desde las ejecuciones de fuentes de datos de Glue (S3, DynamoDB, Catalog, Delta, Iceberg, Hudi: no JDBC ni DocumentDB/MongoDB) y desde el historial de consultas de Redshift, e ingiere eventos compatibles con OpenLineage por API cuando lo activas. CloudTrail registra actividad de API: eventos de gestión para quién ejecutó qué, eventos de datos de S3 para quién tocó qué objeto: pero nunca la derivación a nivel de columna. El registro en Lake Formation es un alcance de permiso, y las particiones del catálogo no llevan linaje."
 }
 ```
 
@@ -1141,7 +1141,7 @@ Lee los 600 jobs y las 500,000 consultas mensuales como una **declaración de pr
     "PyDeequ sobre Glue 2.0 con la receta de Holt-Winters, ya que está documentado como funcionando en todas las versiones de Glue"
   ],
   "correct": 0,
-  "explanation": "El post de AWS sobre Deequ serverless apunta justo a jobs pequeños y rápidos, y advierte que la librería SoAL «es mayor que el límite de 250 MB para el empaquetado de archivo zip» - así que una imagen de contenedor - mientras recomienda Glue Data Quality más allá de 15 minutos o 1 GB. No existe ninguna oferta gestionada de Great Expectations en AWS (la propia documentación legada de GX fija la integración con Glue en GX 0.15.50). Los hallazgos de DataBrew son agregados. La receta de Holt-Winters que publicó AWS se verificó solo sobre Glue 2.0 con un JAR concreto, así que no debe generalizarse."
+  "explanation": "El post de AWS sobre Deequ serverless apunta justo a jobs pequeños y rápidos, y advierte que la librería SoAL «es mayor que el límite de 250 MB para el empaquetado de archivo zip» - así que una imagen de contenedor: mientras recomienda Glue Data Quality más allá de 15 minutos o 1 GB. No existe ninguna oferta gestionada de Great Expectations en AWS (la propia documentación legada de GX fija la integración con Glue en GX 0.15.50). Los hallazgos de DataBrew son agregados. La receta de Holt-Winters que publicó AWS se verificó solo sobre Glue 2.0 con un JAR concreto, así que no debe generalizarse."
 }
 ```
 
@@ -1154,29 +1154,29 @@ Lee los 600 jobs y las 500,000 consultas mensuales como una **declaración de pr
     "El DIY de Great Expectations es el valor por defecto, porque AWS no ofrece ningún motor de calidad propio",
     "Deequ autogestionado debe ejecutar todos los chequeos, porque Glue Data Quality no puede detectar anomalías ni escribir resultados en el catálogo",
     "Las plataformas de observabilidad de terceros son obligatorias, porque CloudWatch no puede alarmar sobre métricas de calidad",
-    "Glue Data Quality es el valor por defecto (gestionado, DQDL, cuarentena a nivel de fila dentro del job, señales de EventBridge/CloudWatch, tablas de resultados Iceberg), Deequ/PyDeequ para analyzers a medida y runtimes exóticos, DataBrew para chequeos de analista sin código, y una capa de terceros o DIY con GX solo donde ninguno de esos pueda expresar el chequeo - cada capa extra que añadas debe comprar algo que la ruta gestionada no te da"
+    "Glue Data Quality es el valor por defecto (gestionado, DQDL, cuarentena a nivel de fila dentro del job, señales de EventBridge/CloudWatch, tablas de resultados Iceberg), Deequ/PyDeequ para analyzers a medida y runtimes exóticos, DataBrew para chequeos de analista sin código, y una capa de terceros o DIY con GX solo donde ninguno de esos pueda expresar el chequeo: cada capa extra que añadas debe comprar algo que la ruta gestionada no te da"
   ],
   "correct": 3,
-  "explanation": "El propio mapa de Prescriptive Guidance de AWS asigna Glue Data Quality a los chequeos embebidos en jobs y en el catálogo, DataBrew a los chequeos de analista sin código, el código a medida a los chequeos a medida y Deequ a un informe de métricas/restricciones - así que la ruta propia cubre el caso por defecto. Glue DQ sí detecta anomalías (basada en ML, GA 2024-08-07) y sí escribe resultados en tablas Iceberg del catálogo (GA 2026-07-27). Las alarmas de CloudWatch sobre glue.data.quality.rules.failed están documentadas. Great Expectations sigue siendo bring-your-own con una integración con Glue fijada en la legada, y un proveedor de observabilidad de terceros debe reconstruir la misma canalización de eventos/métricas que ya obtienes de EventBridge y del espacio de nombres Glue Data Quality."
+  "explanation": "El propio mapa de Prescriptive Guidance de AWS asigna Glue Data Quality a los chequeos embebidos en jobs y en el catálogo, DataBrew a los chequeos de analista sin código, el código a medida a los chequeos a medida y Deequ a un informe de métricas/restricciones: así que la ruta propia cubre el caso por defecto. Glue DQ sí detecta anomalías (basada en ML, GA 2024-08-07) y sí escribe resultados en tablas Iceberg del catálogo (GA 2026-07-27). Las alarmas de CloudWatch sobre glue.data.quality.rules.failed están documentadas. Great Expectations sigue siendo bring-your-own con una integración con Glue fijada en la legada, y un proveedor de observabilidad de terceros debe reconstruir la misma canalización de eventos/métricas que ya obtienes de EventBridge y del espacio de nombres Glue Data Quality."
 }
 ```
 
 > [!IMPORTANT]
-> **Veredicto comparativo — Glue Data Quality frente a Deequ autogestionado frente a Great Expectations DIY frente a observabilidad de terceros**
-> - **Frente a Deequ autogestionado:** Deequ es el *motor por debajo* de Glue Data Quality, así que ejecutarlo tú mismo reimplementa recomendaciones, scoring, eventos de EventBridge, métricas de CloudWatch, la consola, las tablas de resultados y el IAM — todo lo cual viene gestionado. Deequ autogestionado aún gana en tres lugares documentados: los analyzers que DQDL no expone, los lotes **EMR** sin cabeza, y la **validación de migración** en la que comparas métricas origen-destino en una tabla del catálogo. Sus costes son reales: el JAR debe coincidir con tu versión de Spark («es crítico proporcionar las coordenadas de Apache Maven correctas»), la guía publicada de PyDeequ llega hasta **Spark 3.3**, y la famosa receta de Holt-Winters estaba anclada a **Glue 2.0 + un JAR concreto**. Elígela por el analyzer, no por la plataforma.
-> - **Frente a Great Expectations DIY:** GX es un framework capaz que AWS **no** ofrece como servicio gestionado — su propia documentación fija la integración con Glue en **GX 0.15.50**, y el conector de Glue Catalog es un recorrido escrito por un partner. Sobre esta pila lo alojarías tú, lo versionarías, lo parchearías y reconstruirías las alertas que EventBridge te da gratis. El cálculo solo cambia si necesitas las mismas suites aplicadas en motores que *no* sean de AWS — y aun así, el objetivo declarado de DQDL es «estandarizar las reglas de calidad de datos para que puedas usar las mismas reglas de calidad en distintas bases de datos y motores», así que prueba eso primero.
-> - **Frente a observabilidad de terceros:** CloudWatch ya te da logs por capa (`/aws-glue/jobs/output`, `/error`, `/logs-v2`), métricas por capa (`Glue Data Quality`, `AWS/Athena`, EMF personalizado), alarmas sobre `glue.data.quality.rules.failed`, cuadros de mando por capa medallón y fan-out de EventBridge a **$1.00 por millón** de eventos personalizados con entrega de **$0** en la misma cuenta — todo el plano de remediación de E6 costó unos **$1.80/mes**. Un proveedor gana su cuota con cosas que esta pila no hace de serie: correlación cross-account y cross-cloud, analítica de logs con retención larga, enrutado de alertas ML y analítica de tasa de quemado de SLO entre servicios. Si tu infraestructura es solo AWS y tus SLOs son los cuatro de la Sección 6, no compres nada todavía.
-> - **El veredicto en una frase:** en octubre de 2026, **ejecuta Glue Data Quality como valor por defecto en ambas rutas — tareas del catálogo para el monitoreo con programa y con recomendaciones, `EvaluateDataQuality` dentro del job donde necesites cuarentena a nivel de fila —, hunde los resultados en tablas Iceberg del Data Catalog, alerta por EventBridge con la casilla de publicación a CloudWatch ACTIVADA, alarma sobre `glue.data.quality.rules.failed` por tabla y ruleset, pon en cuarentena hacia un prefijo acotado con un backfill de verdad, codifica la frescura como un SLO P95 de tres relojes, mantén los eventos de datos de CloudTrail acotados a prefijos sensibles y reserva Deequ, DataBrew, GX y la observabilidad de terceros para los huecos concretos que cada uno llena de verdad.**
+> **Veredicto comparativo: Glue Data Quality frente a Deequ autogestionado frente a Great Expectations DIY frente a observabilidad de terceros**
+> - **Frente a Deequ autogestionado:** Deequ es el *motor por debajo* de Glue Data Quality, así que ejecutarlo tú mismo reimplementa recomendaciones, scoring, eventos de EventBridge, métricas de CloudWatch, la consola, las tablas de resultados y el IAM: todo lo cual viene gestionado. Deequ autogestionado aún gana en tres lugares documentados: los analyzers que DQDL no expone, los lotes **EMR** sin cabeza, y la **validación de migración** en la que comparas métricas origen-destino en una tabla del catálogo. Sus costes son reales: el JAR debe coincidir con tu versión de Spark («es crítico proporcionar las coordenadas de Apache Maven correctas»), la guía publicada de PyDeequ llega hasta **Spark 3.3**, y la famosa receta de Holt-Winters estaba anclada a **Glue 2.0 + un JAR concreto**. Elígela por el analyzer, no por la plataforma.
+> - **Frente a Great Expectations DIY:** GX es un framework capaz que AWS **no** ofrece como servicio gestionado, su propia documentación fija la integración con Glue en **GX 0.15.50**, y el conector de Glue Catalog es un recorrido escrito por un partner. Sobre esta pila lo alojarías tú, lo versionarías, lo parchearías y reconstruirías las alertas que EventBridge te da gratis. El cálculo solo cambia si necesitas las mismas suites aplicadas en motores que *no* sean de AWS, y aun así, el objetivo declarado de DQDL es «estandarizar las reglas de calidad de datos para que puedas usar las mismas reglas de calidad en distintas bases de datos y motores», así que prueba eso primero.
+> - **Frente a observabilidad de terceros:** CloudWatch ya te da logs por capa (`/aws-glue/jobs/output`, `/error`, `/logs-v2`), métricas por capa (`Glue Data Quality`, `AWS/Athena`, EMF personalizado), alarmas sobre `glue.data.quality.rules.failed`, cuadros de mando por capa medallón y fan-out de EventBridge a **$1.00 por millón** de eventos personalizados con entrega de **$0** en la misma cuenta: todo el plano de remediación de E6 costó unos **$1.80/mes**. Un proveedor gana su cuota con cosas que esta pila no hace de serie: correlación cross-account y cross-cloud, analítica de logs con retención larga, enrutado de alertas ML y analítica de tasa de quemado de SLO entre servicios. Si tu infraestructura es solo AWS y tus SLOs son los cuatro de la Sección 6, no compres nada todavía.
+> - **El veredicto en una frase:** en octubre de 2026, **ejecuta Glue Data Quality como valor por defecto en ambas rutas, tareas del catálogo para el monitoreo con programa y con recomendaciones, `EvaluateDataQuality` dentro del job donde necesites cuarentena a nivel de fila, hunde los resultados en tablas Iceberg del Data Catalog, alerta por EventBridge con la casilla de publicación a CloudWatch ACTIVADA, alarma sobre `glue.data.quality.rules.failed` por tabla y ruleset, pon en cuarentena hacia un prefijo acotado con un backfill de verdad, codifica la frescura como un SLO P95 de tres relojes, mantén los eventos de datos de CloudTrail acotados a prefijos sensibles y reserva Deequ, DataBrew, GX y la observabilidad de terceros para los huecos concretos que cada uno llena de verdad.**
 
 > [!SUCCESS]
 > **Conclusiones Clave (Key Takeaways):**
 > 1. **Cuatro motores, uno por defecto:** el mapa de AWS Prescriptive Guidance asigna los chequeos de analista sin código a **DataBrew** (su propia sintaxis `CheckExpression`, hallazgos agregados, evento de EventBridge por ruleset validado), los chequeos embebidos en jobs y en el catálogo a **Glue Data Quality** (DQDL, gestionado, «built on top of the open-source DeeQu framework»), la lógica a medida a **código a medida**, y un informe de métricas/restricciones a **Deequ**. Glue DQ evalúa tablas del Glue Catalog y vistas de Athena soportadas sobre S3, Redshift, JDBC compatible con el Catálogo, Iceberg/Hudi/Delta.
-> 2. **Contrato de DQDL:** `Rules = [ ... ]` atado a **una** tabla; **32 tipos de regla**; límites de **2,000 reglas** y **65 KB** por ruleset; **sin columnas anidadas ni de tipo lista**; cuatro modificadores — expresiones (`with threshold` solo en ColumnValues/ColumnDataType/CustomSql), `where` (2024-06-26), reglas dinámicas (`RowCount > avg(last(10))`, GA 2024-08-07), etiquetas (`team=finance`, GA 2025-11-21) — más constantes, SQL de preprocesado y reglas compuestas.
-> 3. **Los resultados a nivel de fila son solo ETL:** la tarea del Data Catalog admite recomendaciones (BASIC; ADVANCED vía Bedrock desde el 2026-09-18), predicados de partición con pushdown y un mínimo de 2 DPUs, pero «**Not supported**» para identificar registros fallidos; solo `EvaluateDataQuality` en un job emite `DataQualityRulesPass/Fail/Skip` y `DataQualityEvaluationResult`. Las reglas a nivel de dataset (**RowCount, Mean, StandardDeviation, ColumnCount, CustomSql general, AggregateMatch** y compañía) nunca producen una fila fallida — así que alertan, no ponen en cuarentena.
-> 4. **Tres destinos de resultados, todos explícitos:** JSON en S3 + crawler + tabla externa de Athena; el almacén del servicio de Glue detrás de `GetDataQualityResult`/`ListDataQualityResults` y la instantánea de las últimas 10 ejecuciones en consola; y **tablas Iceberg en el Data Catalog (GA 2026-07-27)** — resultados de regla, de perfilado, a nivel de fila y de observación, cada uno opt-in mediante `--additional-run-options`, particionados por `catalog_id, database_name, table_name, day(stored_on)`.
-> 5. **El contrato de alertas tiene una casilla que carga la estructura:** EventBridge `detail-type: Data Quality Evaluation Results Available`, `source: aws.glue-dataquality`, con `score`, `state` y `rulesSucceeded/Failed/Skipped` — y solo funciona mientras «**Publish metrics to Amazon CloudWatch**» siga seleccionada. El gemelo de CloudWatch es el espacio de nombres **`Glue Data Quality`**, métricas `glue.data.quality.rules.passed` / `.failed`, por tabla y ruleset; alarma en Sum ≥ 1 en 1 minuto → SNS. IAM necesita `glue:PublishDataQuality` y `cloudwatch:PutMetricData` condicionada a ese espacio de nombres.
+> 2. **Contrato de DQDL:** `Rules = [... ]` atado a **una** tabla; **32 tipos de regla**; límites de **2,000 reglas** y **65 KB** por ruleset; **sin columnas anidadas ni de tipo lista**; cuatro modificadores, expresiones (`with threshold` solo en ColumnValues/ColumnDataType/CustomSql), `where` (2024-06-26), reglas dinámicas (`RowCount > avg(last(10))`, GA 2024-08-07), etiquetas (`team=finance`, GA 2025-11-21), más constantes, SQL de preprocesado y reglas compuestas.
+> 3. **Los resultados a nivel de fila son solo ETL:** la tarea del Data Catalog admite recomendaciones (BASIC; ADVANCED vía Bedrock desde el 2026-09-18), predicados de partición con pushdown y un mínimo de 2 DPUs, pero «**Not supported**» para identificar registros fallidos; solo `EvaluateDataQuality` en un job emite `DataQualityRulesPass/Fail/Skip` y `DataQualityEvaluationResult`. Las reglas a nivel de dataset (**RowCount, Mean, StandardDeviation, ColumnCount, CustomSql general, AggregateMatch** y compañía) nunca producen una fila fallida: así que alertan, no ponen en cuarentena.
+> 4. **Tres destinos de resultados, todos explícitos:** JSON en S3 + crawler + tabla externa de Athena; el almacén del servicio de Glue detrás de `GetDataQualityResult`/`ListDataQualityResults` y la instantánea de las últimas 10 ejecuciones en consola; y **tablas Iceberg en el Data Catalog (GA 2026-07-27)**: resultados de regla, de perfilado, a nivel de fila y de observación, cada uno opt-in mediante `--additional-run-options`, particionados por `catalog_id, database_name, table_name, day(stored_on)`.
+> 5. **El contrato de alertas tiene una casilla que carga la estructura:** EventBridge `detail-type: Data Quality Evaluation Results Available`, `source: aws.glue-dataquality`, con `score`, `state` y `rulesSucceeded/Failed/Skipped`, y solo funciona mientras «**Publish metrics to Amazon CloudWatch**» siga seleccionada. El gemelo de CloudWatch es el espacio de nombres **`Glue Data Quality`**, métricas `glue.data.quality.rules.passed` / `.failed`, por tabla y ruleset; alarma en Sum ≥ 1 en 1 minuto → SNS. IAM necesita `glue:PublishDataQuality` y `cloudwatch:PutMetricData` condicionada a ese espacio de nombres.
 > 6. **La cuarentena es un patrón con tres acciones:** el **warn / quarantine / halt** de InsuranceLake en `before_transform` y `after_transform`; solo las expresiones a nivel de fila pueden poner en cuarentena; las reglas de ratio y de umbral no pueden. Cuarentena = filas filtradas → `s3://lakehouse-quarantine/<table>/dt=…` + tabla del catálogo → métrica → EventBridge → SNS + Lambda → **backfill** que limpia la partición de cuarentena y reintenta a través de un bookmark rebobinado o un `transformation_ctx` nuevo (los rebobinados no limpian destinos). **WAP** es la variante nativa de Iceberg: rama `stg` → audit → `fast_forward` a `main`, cambiando latencia por cero almacenamiento duplicado.
 > 7. **La frescura son tres relojes:** hora del evento → hora de aterrizaje → hora de disponibilidad, con **P95(disponibilidad − evento) ≤ objetivo**. Ejemplo resuelto: 55 + 22 + 15 + 70 = **162 min = 2.7 h** frente a un SLO de 3 horas = 18 minutos de holgura, y la primera palanca es la espera de orquestación de 70 minutos. Codifícala como `DataFreshness` (columna de timestamp) o `FileFreshness` (hora de fichero de S3), y acompáñala de una alarma de volumen (RowCount = 0) y de un ruleset de deriva de esquema (`SchemaMatch`, `ColumnExists`, `ColumnDataType`).
-> 8. **La observabilidad es por capas, y X-Ray se para en Lambda/Step Functions:** grupos de log de Glue `/aws-glue/jobs/output`, `/error` y `/logs-v2` (redirigibles, con clase Logs IA), streams de causa raíz de job insights con la **línea** del fallo, métricas de Athena `AWS/Athena` (`EngineExecutionTime`, `ProcessedBytes`) con historial de consultas de 30 días, `/aws/redshift/<namespace>/<log_type>` de Redshift Serverless (**Never Expire** por defecto — ponte una retención) y un cuadro de mando de CloudWatch por capa medallón más un panel de operaciones de datos a nivel de cuenta.
-> 9. **Los eventos de datos de CloudTrail son opt-in y por evento:** la primera copia de los eventos de gestión es gratis; los eventos de datos de S3 cuestan **$0.10 por 100,000** — selectores acotados (bronze solo escritura $20.00 + cuarentena $0.50 + silver PII $2.00 = **$22.50/mes**) frente a un trail de 300M de eventos sin acotar a **$300**. Solo selectores avanzados, **sin comodines**, `resources.ARN StartsWith` con la barra final, hasta 500 valores; `NotEquals s3lifecycle.amazonaws.com` elimina el ruido. CloudTrail es auditoría, nunca linaje.
-> 10. **Tres planos, tres herramientas:** **Glue Data Catalog + Lake Formation** = metadatos técnicos y permisos (el registro es un alcance de permiso, no una arista de linaje); **Amazon DataZone** = catálogo de negocio (activos, términos de glosario, formularios de metadatos, publicar/suscribirse) *y* el grafo de linaje — captura automática desde ejecuciones de fuentes de datos de Glue (S3, DynamoDB, Catalog, Delta, Iceberg, Hudi; **no** JDBC ni DocumentDB/MongoDB) e historial de consultas de Redshift, más **eventos compatibles con OpenLineage** por API (opt-in), con los consumidores viendo 1 nivel aguas arriba/abajo; **CloudTrail** = quién llamó a qué. **Anclas de casos:** **Siemens** centralizó los logs de **800+ cuentas**, recortó el volumen de logs un **90%** (5–7 TB/día → 600 GB), ahorró **$1.3M/año** e identificó los datos de S3 afectados en **10 minutos frente a varios días** con las causas raíz un **75%** más rápidas (caso de AWS, consultado 2026-10-11); **Vanguard** escapó de un «charco de datos de ficheros Parquet» a **productos de datos Iceberg** con **600+ jobs de Glue (30×)**, **150 TB** en S3 y **500,000+ consultas/mes** — la escala a la que las reglas, los SLOs y la propiedad dejan de ser opcionales (AWS Big Data Blog, 2026-03-18).
+> 8. **La observabilidad es por capas, y X-Ray se para en Lambda/Step Functions:** grupos de log de Glue `/aws-glue/jobs/output`, `/error` y `/logs-v2` (redirigibles, con clase Logs IA), streams de causa raíz de job insights con la **línea** del fallo, métricas de Athena `AWS/Athena` (`EngineExecutionTime`, `ProcessedBytes`) con historial de consultas de 30 días, `/aws/redshift/<namespace>/<log_type>` de Redshift Serverless (**Never Expire** por defecto: ponte una retención) y un cuadro de mando de CloudWatch por capa medallón más un panel de operaciones de datos a nivel de cuenta.
+> 9. **Los eventos de datos de CloudTrail son opt-in y por evento:** la primera copia de los eventos de gestión es gratis; los eventos de datos de S3 cuestan **$0.10 por 100,000**: selectores acotados (bronze solo escritura $20.00 + cuarentena $0.50 + silver PII $2.00 = **$22.50/mes**) frente a un trail de 300M de eventos sin acotar a **$300**. Solo selectores avanzados, **sin comodines**, `resources.ARN StartsWith` con la barra final, hasta 500 valores; `NotEquals s3lifecycle.amazonaws.com` elimina el ruido. CloudTrail es auditoría, nunca linaje.
+> 10. **Tres planos, tres herramientas:** **Glue Data Catalog + Lake Formation** = metadatos técnicos y permisos (el registro es un alcance de permiso, no una arista de linaje); **Amazon DataZone** = catálogo de negocio (activos, términos de glosario, formularios de metadatos, publicar/suscribirse) *y* el grafo de linaje, captura automática desde ejecuciones de fuentes de datos de Glue (S3, DynamoDB, Catalog, Delta, Iceberg, Hudi; **no** JDBC ni DocumentDB/MongoDB) e historial de consultas de Redshift, más **eventos compatibles con OpenLineage** por API (opt-in), con los consumidores viendo 1 nivel aguas arriba/abajo; **CloudTrail** = quién llamó a qué. **Anclas de casos:** **Siemens** centralizó los logs de **800+ cuentas**, recortó el volumen de logs un **90%** (5 to 7 TB/día → 600 GB), ahorró **$1.3M/año** e identificó los datos de S3 afectados en **10 minutos frente a varios días** con las causas raíz un **75%** más rápidas (caso de AWS, consultado 2026-10-11); **Vanguard** escapó de un «charco de datos de ficheros Parquet» a **productos de datos Iceberg** con **600+ jobs de Glue (30×)**, **150 TB** en S3 y **500,000+ consultas/mes**, la escala a la que las reglas, los SLOs y la propiedad dejan de ser opcionales (AWS Big Data Blog, 2026-03-18).

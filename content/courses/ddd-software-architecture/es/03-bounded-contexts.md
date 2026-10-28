@@ -595,7 +595,7 @@ Evita la tentación de meterlo todo en un único contexto delimitado gigante. Lo
 
 3. **Construye una ACL**: Un sistema CRM legacy tiene un modelo `Customer` con los campos `cust_id`, `cust_name`, `cust_email`, `cust_stat` (A=activo, I=inactivo). Construye una capa anticorrupción que traduzca esto a un modelo `Account` moderno del contexto de ventas, con nombres y tipos de campos apropiados.
 
-4. **Contrato de asociación**: Dos equipos — Pagos y Detección de fraude — necesitan integrarse. Define el protocolo compartido (como interfaces de Python) en el que ambos equipos convienen.
+4. **Contrato de asociación**: Dos equipos, Pagos y Detección de fraude, necesitan integrarse. Define el protocolo compartido (como interfaces de Python) en el que ambos equipos convienen.
 
 5. **Decisión de límite de contexto**: Una empresa tiene «Catálogo de productos» y «Estrategia de precios». Actualmente forman un solo contexto. Enumera 3 razones por las que deberían dividirse y describe el patrón de integración que deberían usar.
 

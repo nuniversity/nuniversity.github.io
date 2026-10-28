@@ -1,12 +1,12 @@
 ---
-title: "Domain 1.5 — Snowflake Storage Concepts"
+title: "Domain 1.5, Snowflake Storage Concepts"
 description: "Master micro-partitions, data clustering, Time Travel, Fail-Safe, Zero-Copy Cloning, and all Snowflake table and view types. Understand how Snowflake stores and protects your data."
 order: 5
 difficulty: intermediate
 duration: "75 min"
 ---
 
-# Domain 1.5 — Snowflake Storage Concepts
+# Domain 1.5: Snowflake Storage Concepts
 
 ## Exam Weight
 
@@ -19,17 +19,17 @@ duration: "75 min"
 
 ## Micro-Partitions
 
-**Micro-partitions** are the fundamental storage unit in Snowflake. Every table's data is divided into micro-partitions automatically — no manual partitioning required.
+**Micro-partitions** are the fundamental storage unit in Snowflake. Every table's data is divided into micro-partitions automatically: no manual partitioning required.
 
 ### Key Characteristics
 
 | Property | Value |
 |---|---|
-| **Size** | 50–500 MB (compressed) |
+| **Size** | 50 to 500 MB (compressed) |
 | **Format** | Columnar (column-oriented) |
 | **Compression** | Automatic (Snowflake chooses algorithm) |
 | **Encryption** | AES-256, automatic |
-| **Immutability** | Immutable — DML creates new partitions |
+| **Immutability** | Immutable: DML creates new partitions |
 | **Metadata** | Min/max values, distinct count, NULL count per column per partition |
 
 ### Columnar Storage
@@ -76,7 +76,7 @@ This is called **partition pruning** and is critical for query performance.
 
 ### Natural Clustering
 
-When data is loaded in a consistent order (e.g., chronologically by `created_at`), micro-partitions are naturally well-clustered — queries filtering on that column benefit from pruning.
+When data is loaded in a consistent order (e.g., chronologically by `created_at`), micro-partitions are naturally well-clustered: queries filtering on that column benefit from pruning.
 
 ### Cluster Keys
 
@@ -92,22 +92,22 @@ SELECT SYSTEM$CLUSTERING_INFORMATION('events', '(region, event_type)');
 
 ### Automatic Clustering
 
-When a cluster key is defined, Snowflake's **Automatic Clustering** service runs in the background to **re-organize micro-partitions** — this consumes credits on your behalf.
+When a cluster key is defined, Snowflake's **Automatic Clustering** service runs in the background to **re-organize micro-partitions**; this consumes credits on your behalf.
 
 | Concept | Description |
 |---|---|
-| **Cluster Depth** | Average number of overlapping partitions per value — lower is better |
-| **Clustering Ratio** | Fraction of columns that are sorted within partitions — higher is better |
+| **Cluster Depth** | Average number of overlapping partitions per value: lower is better |
+| **Clustering Ratio** | Fraction of columns that are sorted within partitions: higher is better |
 | **Automatic Clustering** | Background service that maintains clustering; billed separately |
 
 > [!WARNING]
-> Defining a cluster key on a small or infrequently queried table is **wasteful** — Automatic Clustering costs credits. Only cluster large tables (hundreds of GBs+) that are frequently queried on the cluster key column(s).
+> Defining a cluster key on a small or infrequently queried table is **wasteful**: Automatic Clustering costs credits. Only cluster large tables (hundreds of GBs+) that are frequently queried on the cluster key column(s).
 
 ---
 
 ## Time Travel
 
-**Time Travel** allows you to query historical versions of your data — up to 90 days in the past (depending on edition):
+**Time Travel** allows you to query historical versions of your data: up to 90 days in the past (depending on edition):
 
 | Edition | Max Time Travel |
 |---|---|
@@ -173,8 +173,8 @@ timeline
 |---|---|
 | Duration | Always 7 days (non-configurable) |
 | Who can recover data | **Snowflake Support only** (not the customer) |
-| Cost | Included in storage — no extra charge |
-| Self-service? | **No** — contact support |
+| Cost | Included in storage: no extra charge |
+| Self-service? | **No**: contact support |
 | Applies to | Permanent tables only (not Temporary or Transient) |
 
 > [!WARNING]
@@ -216,7 +216,7 @@ Source:       [Partition A]      [Partition B] [Partition C]
 ```
 
 **Benefits:**
-- **Instant** — no data is copied
+- **Instant**: no data is copied
 - **No extra storage cost** initially
 - Storage only increases when data diverges between source and clone
 - Perfect for dev/test environments, pre-migration snapshots, auditing
@@ -227,16 +227,16 @@ Source:       [Partition A]      [Partition B] [Partition C]
 
 | Type | Persistence | Time Travel | Fail-Safe | Use Case |
 |---|---|---|---|---|
-| **Permanent** | Until dropped | 0–90 days | 7 days | Production tables |
-| **Temporary** | Session end | 0–1 day | None | Session-scoped work |
-| **Transient** | Until dropped | 0–1 day | None | Staging, intermediate ETL |
+| **Permanent** | Until dropped | 0 to 90 days | 7 days | Production tables |
+| **Temporary** | Session end | 0 to 1 day | None | Session-scoped work |
+| **Transient** | Until dropped | 0 to 1 day | None | Staging, intermediate ETL |
 | **External** | Never (no data) | None | None | Query files in cloud storage |
 | **Apache Iceberg** | Until dropped | Via Iceberg | Via Iceberg | Open format, multi-engine |
 | **Dynamic** | Until dropped | Configurable | Configurable | Declarative incremental |
 
 ### Apache Iceberg Tables
 
-Snowflake supports **Apache Iceberg** as an open table format — data lives in your own cloud storage and is accessible by multiple engines (Spark, Trino, Snowflake):
+Snowflake supports **Apache Iceberg** as an open table format: data lives in your own cloud storage and is accessible by multiple engines (Spark, Trino, Snowflake):
 
 ```sql
 -- Iceberg table using Snowflake as catalog
@@ -248,7 +248,7 @@ CREATE ICEBERG TABLE icebergtable (id NUMBER, name STRING)
 
 ### Dynamic Tables
 
-**Dynamic Tables** provide **declarative incremental materialization** — define the query result you want, and Snowflake keeps it fresh automatically:
+**Dynamic Tables** provide **declarative incremental materialization**: define the query result you want, and Snowflake keeps it fresh automatically:
 
 ```sql
 CREATE DYNAMIC TABLE customer_summary
@@ -264,8 +264,8 @@ GROUP BY customer_id;
 ```
 
 **Dynamic Tables vs. Streams + Tasks:**
-- Dynamic Tables: **simpler declarative approach** — Snowflake manages the refresh logic
-- Streams + Tasks: **imperative** — you write the merge/insert logic explicitly
+- Dynamic Tables: **simpler declarative approach**: Snowflake manages the refresh logic
+- Streams + Tasks: **imperative**; you write the merge/insert logic explicitly
 
 ---
 
@@ -300,7 +300,7 @@ SELECT * FROM mv_hourly_sales WHERE sale_hour > DATEADD('hour', -24, CURRENT_TIM
 
 ## Encryption at Rest and in Transit
 
-All Snowflake data is encrypted by default — no configuration required:
+All Snowflake data is encrypted by default: no configuration required:
 
 | Protection | Method |
 |---|---|
@@ -315,9 +315,9 @@ All Snowflake data is encrypted by default — no configuration required:
 
 **Q1.** What is the size range of a Snowflake micro-partition?
 
-- A) 1–10 MB uncompressed
-- B) 50–500 MB compressed ✅
-- C) 1–5 GB uncompressed
+- A) 1 to 10 MB uncompressed
+- B) 50 to 500 MB compressed ✅
+- C) 1 to 5 GB uncompressed
 - D) Fixed at 128 MB
 
 **Q2.** After Time Travel expires, who can recover data during the Fail-Safe period?
@@ -325,13 +325,13 @@ All Snowflake data is encrypted by default — no configuration required:
 - A) The customer using UNDROP
 - B) The ACCOUNTADMIN role
 - C) Snowflake Support only ✅
-- D) No one — data is immediately purged
+- D) No one: data is immediately purged
 
 **Q3.** A data engineer clones a production table (`CREATE TABLE dev CLONE prod`). No modifications are made yet. How much additional storage does the clone consume?
 
 - A) 100% of the original table size
 - B) 50% of the original table size
-- C) None — micro-partitions are shared ✅
+- C) None: micro-partitions are shared ✅
 - D) Only metadata storage
 
 **Q4.** Which table type is appropriate for storing intermediate ETL results that do not need Fail-Safe but should persist beyond the current session?
@@ -366,9 +366,9 @@ All Snowflake data is encrypted by default — no configuration required:
 
 > [!SUCCESS]
 > **Key Takeaways for Exam Day:**
-> 1. Micro-partitions: **50–500 MB compressed, columnar, immutable, automatic metadata**
+> 1. Micro-partitions: **50 to 500 MB compressed, columnar, immutable, automatic metadata**
 > 2. Fail-Safe: **7 days, non-configurable, Snowflake Support only**
 > 3. Time Travel: **Standard = 1 day max | Enterprise+ = 90 days max**
 > 4. Zero-Copy Cloning: **instant, no initial storage cost, Copy-on-Write for divergence**
 > 5. Transient vs Temporary: both no Fail-Safe, but Transient **persists** past session end
-> 6. Dynamic Tables: declarative `TARGET_LAG` — simpler than Streams + Tasks
+> 6. Dynamic Tables: declarative `TARGET_LAG`: simpler than Streams + Tasks

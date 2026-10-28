@@ -1,16 +1,16 @@
 ---
-title: "Domain 4.1 — Evaluating Query Performance"
+title: "Domain 4.1, Evaluating Query Performance"
 description: "Learn to diagnose Snowflake query performance issues using Query Profile, Query History, ACCOUNT_USAGE views, and understand the key performance bottlenecks: data spilling, inefficient pruning, exploding joins, and queuing."
 order: 13
 difficulty: intermediate
 duration: "65 min"
 ---
 
-# Domain 4.1 — Evaluating Query Performance
+# Domain 4.1: Evaluating Query Performance
 
 ## Exam Weight
 
-**Domain 4.0 — Performance Optimization, Querying, and Transformation** accounts for **~21%** of the exam — the second-largest domain.
+**Domain 4.0, Performance Optimization, Querying, and Transformation** accounts for **~21%** of the exam, the second-largest domain.
 
 > [!NOTE]
 > This lesson maps to **Exam Objective 4.1**: *Evaluate query performance*, including Query Profile, Query Insights, ACCOUNT_USAGE views, and workload management best practices.
@@ -73,10 +73,10 @@ LIMIT 20;
 
 The Query Profile renders the **query execution plan** as a tree of operator nodes. Each operator node shows:
 
-- **Rows processed** — input and output row counts
-- **Time** — how long the operator ran
-- **Bytes** — data read/processed/written
-- **Step statistics** — per-node resource consumption
+- **Rows processed**: input and output row counts
+- **Time**: how long the operator ran
+- **Bytes**: data read/processed/written
+- **Step statistics**: per-node resource consumption
 
 ### Key Operator Nodes
 
@@ -96,7 +96,7 @@ The Query Profile renders the **query execution plan** as a tree of operator nod
 
 ### 1. Data Spilling to Storage
 
-**What it is:** When query data exceeds the warehouse's memory and local disk, it overflows (spills) to remote storage — massively increasing I/O and latency.
+**What it is:** When query data exceeds the warehouse's memory and local disk, it overflows (spills) to remote storage: massively increasing I/O and latency.
 
 **How to detect:**
 - In Query Profile: `Bytes spilled to local storage` or `Bytes spilled to remote storage` > 0
@@ -130,7 +130,7 @@ ORDER BY bytes_spilled_to_remote_storage DESC;
 
 ### 2. Inefficient Pruning
 
-**What it is:** Snowflake can't skip micro-partitions because the filter column's values are spread across many partitions — the query reads more data than necessary.
+**What it is:** Snowflake can't skip micro-partitions because the filter column's values are spread across many partitions: the query reads more data than necessary.
 
 **How to detect in Query Profile:**
 - `TableScan` node shows `Partitions scanned` close to `Partitions total`
@@ -154,7 +154,7 @@ SELECT sum(amount) FROM orders WHERE status = 'COMPLETED';
 
 ### 3. Exploding Joins
 
-**What it is:** A JOIN that produces **far more rows than expected** — often because join keys are not unique (many-to-many join creating a cartesian product).
+**What it is:** A JOIN that produces **far more rows than expected**: often because join keys are not unique (many-to-many join creating a cartesian product).
 
 **How to detect in Query Profile:**
 - A `Join` node shows output rows >> input rows
@@ -342,7 +342,7 @@ GROUP BY 1;
 
 > [!SUCCESS]
 > **Key Takeaways for Exam Day:**
-> 1. **Query Profile** = primary diagnostic tool — find it in Snowsight Activity → Query History
+> 1. **Query Profile** = primary diagnostic tool: find it in Snowsight Activity → Query History
 > 2. **Spilling** = warehouse too small → scale UP | **Queuing** = too many concurrent queries → scale OUT
 > 3. **Inefficient pruning** = high `partitions_scanned / partitions_total` → add cluster key
 > 4. **Exploding join** = join node output >> input → check for non-unique keys

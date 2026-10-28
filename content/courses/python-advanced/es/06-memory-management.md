@@ -100,7 +100,7 @@ flowchart LR
 
 ## Referencias Débiles
 
-`weakref` permite referenciar un objeto sin aumentar su conteo de referencias — ideal para cachés y observadores.
+`weakref` permite referenciar un objeto sin aumentar su conteo de referencias: ideal para cachés y observadores.
 
 ```python
 import weakref

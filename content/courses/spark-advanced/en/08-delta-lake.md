@@ -59,7 +59,7 @@ df_parquet.write.format("delta").mode("overwrite").save("/data/delta/employees")
 ```
 
 > [!SUCCESS]
-> Delta tables are self-describing — the schema, version history, and transaction log are stored alongside the data. No external metastore is required.
+> Delta tables are self-describing: the schema, version history, and transaction log are stored alongside the data. No external metastore is required.
 
 ## Reading Delta Tables
 

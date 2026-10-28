@@ -1,13 +1,13 @@
 ---
 title: "Serverless Transformation with AWS Glue and DataBrew"
-description: "Build Domain 1 transformation judgment from the ground up: how the AWS Glue serverless job model, Data Catalog, DynamicFrames, job bookmarks and triggers fit together; how to size workers and price DPU-hours on the October 2026 rate card; when AWS Glue DataBrew's recipes and profiling beat hand-written ETL; and how error tables, retries, job insights, partitioned writes and small-file hygiene keep a pipeline correct — with four AWS customer case studies, a sourced 2026 update box, an interactive price chart and fourteen exam-style questions."
+description: "Build Domain 1 transformation judgment from the ground up: how the AWS Glue serverless job model, Data Catalog, DynamicFrames, job bookmarks and triggers fit together; how to size workers and price DPU-hours on the October 2026 rate card; when AWS Glue DataBrew's recipes and profiling beat hand-written ETL; and how error tables, retries, job insights, partitioned writes and small-file hygiene keep a pipeline correct, with four AWS customer case studies, a sourced 2026 update box, an interactive price chart and fourteen exam-style questions."
 order: 3
 difficulty: "intermediate"
 duration: "75 minutes"
 ---
 # Serverless Transformation with AWS Glue and DataBrew
 
-Transformation is where a data engineer's judgment becomes visible. Ingestion can be bought as a managed pipe; storage can be rented by the gigabyte. But deciding **which engine** runs the job, **how much capacity** it holds while it runs, **which records** are processed on the second run, and **where rejected rows** go — that is design work, and it is exactly what DEA-C01 Domain 1 (Data Ingestion and Transformation, **34%** of the exam; weights per the DEA-C01 exam guide, accessed Oct 2026) examines through the task statements *"preparing data for transformation (AWS Glue DataBrew)"*, *"using AWS Glue features to process data"* and *"using Lambda to automate data processing"*.
+Transformation is where a data engineer's judgment becomes visible. Ingestion can be bought as a managed pipe; storage can be rented by the gigabyte. But deciding **which engine** runs the job, **how much capacity** it holds while it runs, **which records** are processed on the second run, and **where rejected rows** go; that is design work, and it is exactly what DEA-C01 Domain 1 (Data Ingestion and Transformation, **34%** of the exam; weights per the DEA-C01 exam guide, accessed Oct 2026) examines through the task statements *"preparing data for transformation (AWS Glue DataBrew)"*, *"using AWS Glue features to process data"* and *"using Lambda to automate data processing"*.
 
 ```text
 ====================================================================
@@ -34,12 +34,12 @@ Transformation is where a data engineer's judgment becomes visible. Ingestion ca
 
 In this lesson you will:
 
-- model the **serverless Glue job** — job types, anatomy, Data Catalog integration, run states and timeouts;
+- model the **serverless Glue job**: job types, anatomy, Data Catalog integration, run states and timeouts;
 - separate **DynamicFrame** from **DataFrame** and drive `resolveChoice` → `apply_mapping` → `toDF()` in the right order;
 - operate **job bookmarks**: Enable / Disable / Pause, `job.init` and `job.commit`, `transformation_ctx` as the state key, and the five ways they break;
 - wire **triggers** into serial, conditional and scheduled topologies, and know the two hard trigger limits;
 - size **workers and DPU-hours** on the October 2026 price list, including the G-versus-R memory trap and the crawler's 10-minute minimum;
-- author with **Glue Studio** visual ETL — nodes, notebooks, the data-preview session and the Recipe node's import limits;
+- author with **Glue Studio** visual ETL: nodes, notebooks, the data-preview session and the Recipe node's import limits;
 - pick **DataBrew** correctly: its six core objects, the 100-step recipe ceiling, recipe versus profile jobs, and its non-DPU metering;
 - design **error handling**: `ErrorsAsDynamicFrame`, `Spigot`, `EvaluateDataQuality`, retries, timeout defaults and where error tables live;
 - tune **performance**: partitioned writes, job run insights, input-file grouping, small-file arithmetic and Glue auto scaling;
@@ -52,13 +52,13 @@ In this lesson you will:
 
 ### 1.1 What "serverless" means here
 
-AWS Glue is a **serverless** ETL service: you define a job, AWS provisions and tears down the Spark (or shell) execution environment, and you **pay only while the job runs**, billed per second (jobs and interactive sessions bill in 1-second increments, rounded up, with a **1-minute minimum** for Spark jobs — AWS Glue pricing, accessed Oct 2026). There is no cluster to keep warm, no AMI to patch, and no node to deprecate. The Data Catalog that crawlers populate is the glue between storage and compute: **schemas live in the catalog, data lives in S3 (or JDBC sources), and jobs read both**.
+AWS Glue is a **serverless** ETL service: you define a job, AWS provisions and tears down the Spark (or shell) execution environment, and you **pay only while the job runs**, billed per second (jobs and interactive sessions bill in 1-second increments, rounded up, with a **1-minute minimum** for Spark jobs: AWS Glue pricing, accessed Oct 2026). There is no cluster to keep warm, no AMI to patch, and no node to deprecate. The Data Catalog that crawlers populate is the glue between storage and compute: **schemas live in the catalog, data lives in S3 (or JDBC sources), and jobs read both**.
 
 ### 1.2 Job types and languages
 
 | Job type | `JobCommand.Name` | Runtime | Priced as | Exam fit |
 |---|---|---|---|---|
-| Spark ETL | `glueetl` | PySpark / Scala on Spark | DPU-hour (1-min min) | Bulk GB–TB transforms, joins, partitioned lake writes |
+| Spark ETL | `glueetl` | PySpark / Scala on Spark | DPU-hour (1-min min) | Bulk GB: TB transforms, joins, partitioned lake writes |
 | Spark streaming | `gluestreaming` | Spark Structured Streaming | DPU-hour (default **2 DPU**) | Continuous micro-batch from Kinesis/Kafka sources |
 | Python shell | `pythonshell` | Single-process Python 3.9 (Glue 3.0+) | DPU-hour at **0.0625 or 1 DPU** | >15-minute non-Spark work: API pulls, file moves, light SQL |
 | Ray | `ray` (worker `Z.2X`) | Ray on Python | **M-DPU-hour** | Parallel Python (for example Pandas-style) workloads |
@@ -73,7 +73,7 @@ Authoring routes: **PySpark/Scala scripts**, **Python (shell or Ray)**, **Glue S
 | Item | Value (AWS Glue API, accessed Oct 2026) |
 |---|---|
 | Run states | `STARTING` `RUNNING` `STOPPING` `STOPPED` `SUCCEEDED` `FAILED` `TIMEOUT` `ERROR` `WAITING` `EXPIRED` |
-| `WAITING` | the run is **queued** — capacity or trigger position, not a failure |
+| `WAITING` | the run is **queued**: capacity or trigger position, not a failure |
 | Timeout default | **2,880 minutes** on Glue 4.0 and earlier · **480 minutes** on Glue 5.0 and later |
 | Timeout ceiling | must be **less than 7 days (10,080 minutes)** |
 | Retries | `MaxRetries`; `NotifyDelayAfter` raises an alert when a run is delayed |
@@ -102,7 +102,7 @@ Two properties of that diagram are examinable:
 1. **The catalog is metadata, not storage.** Crawlers bill separately from jobs (Section 5), and a job can run with or without a crawler in the same trigger chain.
 2. **Bookmark state lives outside the script.** `job.init` reads it, `job.commit` writes it, and neither call is optional if you enabled bookmarks (Section 3).
 
-- **📚 Did you know?** Glue records every run with its state and keeps the **90 days** of history, and `WAITING` simply means *queued*. Combined with `MaxConcurrentRuns` defaulting to **1**, a run that appears "stuck" in `WAITING` is telling you about capacity or trigger position — not about your code (AWS Glue job-runs API, accessed Oct 2026).
+- **📚 Did you know?** Glue records every run with its state and keeps the **90 days** of history, and `WAITING` simply means *queued*. Combined with `MaxConcurrentRuns` defaulting to **1**, a run that appears "stuck" in `WAITING` is telling you about capacity or trigger position: not about your code (AWS Glue job-runs API, accessed Oct 2026).
 
 ---
 
@@ -113,16 +113,16 @@ Two properties of that diagram are examinable:
 | Property | **DataFrame** (Spark) | **DynamicFrame** (Glue) |
 |---|---|---|
 | Schema requirement | Schema **must resolve** before most operations | *"Each record is self-describing, so no schema is required initially"* (AWS Glue developer guide, accessed Oct 2026) |
-| Ambiguous values | Widens to the most general type (usually `string`) or fails | Carries a genuine **`choice` type** — for example `choice<long,string>` — when rows disagree |
+| Ambiguous values | Widens to the most general type (usually `string`) or fails | Carries a genuine **`choice` type**, for example `choice<long,string>`, when rows disagree |
 | Row-level errors | Fails or silently coerces | Preserved as **error rows** (`ErrorsAsDynamicFrame`) |
 | Transformation API | DataFrame methods | Glue transforms: `resolveChoice`, `apply_mapping`, `Relationalize`, `Join`, `Spigot`, `EvaluateDataQuality`, … |
-| Conversion | — | `toDF()` only **after** choices are resolved |
+| Conversion |: | `toDF()` only **after** choices are resolved |
 
 ### 2.2 Why choice types appear: the crawler sampling trap
 
-AWS's own sample (Medicaid provider data) is the canonical illustration: a crawler that inspected only a **2 MB prefix** inferred the provider-id column as `long`. A DataFrame built over the whole dataset met values the sample never saw and forced everything to `string`. A DynamicFrame correctly reported **`choice<long,string>`** — the rows genuinely disagreed. The bug is in the **schema inference sample**, not in the data, and the fix belongs in the script.
+AWS's own sample (Medicaid provider data) is the canonical illustration: a crawler that inspected only a **2 MB prefix** inferred the provider-id column as `long`. A DataFrame built over the whole dataset met values the sample never saw and forced everything to `string`. A DynamicFrame correctly reported **`choice<long,string>`**: the rows genuinely disagreed. The bug is in the **schema inference sample**, not in the data, and the fix belongs in the script.
 
-### 2.3 `resolveChoice` — settle the ambiguity
+### 2.3 `resolveChoice`: settle the ambiguity
 
 `resolveChoice(specs=…, choice=…, database=…, table_name=…)` offers four actions for a `choice` column (AWS API reference, accessed Oct 2026):
 
@@ -141,7 +141,7 @@ choice<long,string>  --cast:long-->     long        (uncastable -> null)
                   --make_struct-->    {c_long, c_string}
 ```
 
-### 2.4 `apply_mapping` — rename, cast, nest, drop
+### 2.4 `apply_mapping`: rename, cast, nest, drop
 
 `apply_mapping(mappings, case_sensitive=False, …)` takes a list of **four-tuples**:
 
@@ -168,7 +168,7 @@ flowchart LR
 > [!IMPORTANT]
 > ⚠️ **`resolveChoice` before `apply_mapping` before `toDF()`.** `apply_mapping` assumes a settled per-column type; converting to a DataFrame with an unresolved `choice` forces the column to a general type (usually `string`) and quietly defeats the cast you were about to perform. Order is the difference between a clean `bigint` key and a table of padded strings.
 
-### 2.6 Worked example E1 — ambiguous provider IDs
+### 2.6 Worked example E1: ambiguous provider IDs
 
 ```text
 Input : 160,000 rows, column "provider id"
@@ -195,16 +195,16 @@ make_cols is additive, make_struct is restructuring.
 {
   "question": "Order the Glue DynamicFrame pipeline the way AWS documents it:",
   "items": [
-    "Read the source as a DynamicFrame - records are self-describing, no schema required",
-    "resolveChoice - settle choice types with cast, project, make_cols or make_struct",
-    "apply_mapping - rename, cast, nest (dotted targets) and drop via four-tuples",
+    "Read the source as a DynamicFrame: records are self-describing, no schema required",
+    "resolveChoice: settle choice types with cast, project, make_cols or make_struct",
+    "apply_mapping: rename, cast, nest (dotted targets) and drop via four-tuples",
     "toDF() - convert only now that every column has one type",
     "Write the sink, for example Parquet with partitionKeys year, month, day"
   ],
   "correctOrder": [
-    "Read the source as a DynamicFrame - records are self-describing, no schema required",
-    "resolveChoice - settle choice types with cast, project, make_cols or make_struct",
-    "apply_mapping - rename, cast, nest (dotted targets) and drop via four-tuples",
+    "Read the source as a DynamicFrame: records are self-describing, no schema required",
+    "resolveChoice: settle choice types with cast, project, make_cols or make_struct",
+    "apply_mapping: rename, cast, nest (dotted targets) and drop via four-tuples",
     "toDF() - convert only now that every column has one type",
     "Write the sink, for example Parquet with partitionKeys year, month, day"
   ],
@@ -248,7 +248,7 @@ flowchart TD
     RST["aws glue reset-job-bookmark --job-name ..."] -.->|resets ALL transformations, deletes no outputs| R1
 ```
 
-### 3.3 Worked example E2 — the delta arithmetic
+### 3.3 Worked example E2: the delta arithmetic
 
 ```text
 Dataset: s3://raw/orders/ with 1,000 files at first enablement.
@@ -277,14 +277,14 @@ state is the only thing that remembers what "already processed" means.
 | You assume **targets** are tracked | Only **source files** are tracked, never destinations |
 | You delete the Glue job | Its **bookmark is deleted with it** |
 | JDBC source with no bookmark key | You must **choose the bookmark key columns** yourself |
-| Streaming job | Bookmarks are the wrong mechanism — streaming uses **`checkpointLocation` + watermarks** |
+| Streaming job | Bookmarks are the wrong mechanism: streaming uses **`checkpointLocation` + watermarks** |
 
-- **📚 Did you know?** AWS's own wording for the guarantee is that bookmarks *"prevent duplicate processing and duplicate data"* — the phrase "exactly-once" is shorthand the exam world uses, but the honest model is **at-least-once processing with de-duplicated outputs**, because only sources are tracked and a failed run between `job.init` and `job.commit` leaves state untouched. Never claim a target-side guarantee you cannot point at in the state structure (AWS Glue developer guide, accessed Oct 2026).
+- **📚 Did you know?** AWS's own wording for the guarantee is that bookmarks *"prevent duplicate processing and duplicate data"*: the phrase "exactly-once" is shorthand the exam world uses, but the honest model is **at-least-once processing with de-duplicated outputs**, because only sources are tracked and a failed run between `job.init` and `job.commit` leaves state untouched. Never claim a target-side guarantee you cannot point at in the state structure (AWS Glue developer guide, accessed Oct 2026).
 
 ```fillblank
 {
   "question": "Complete the job-bookmark statements with the AWS developer guide's own vocabulary:",
-  "template": "Bookmark state is keyed by {{1}} plus a version, and the per-source key inside the state is the {{2}} of the source. The script must call {{3}} at start and {{4}} at completion - AWS states bookmarks will not work without calling them. The three modes are {{5}} (default, whole dataset), Enable (delta, state updated) and Pause (delta, state not updated), and state is reset with the CLI command {{6}}.",
+  "template": "Bookmark state is keyed by {{1}} plus a version, and the per-source key inside the state is the {{2}} of the source. The script must call {{3}} at start and {{4}} at completion: AWS states bookmarks will not work without calling them. The three modes are {{5}} (default, whole dataset), Enable (delta, state updated) and Pause (delta, state not updated), and state is reset with the CLI command {{6}}.",
   "answers": {
     "1": "job_name",
     "2": "transformation_ctx",
@@ -329,7 +329,7 @@ flowchart TD
     NOTE["Limits: max 2 crawlers and max 50 jobs per trigger; every watched job must be trigger-started"]
 ```
 
-**Serial vs parallel in one line each:** serial = `J3` fires when `J1` **AND** `J2` both `SUCCEEDED`; fan-out = `J4` fires when `J1` **OR** `J2` `FAILED`. That is the whole conditional-trigger grammar — plus the root-trigger rule, which is where most candidate mistakes live.
+**Serial vs parallel in one line each:** serial = `J3` fires when `J1` **AND** `J2` both `SUCCEEDED`; fan-out = `J4` fires when `J1` **OR** `J2` `FAILED`. That is the whole conditional-trigger grammar: plus the root-trigger rule, which is where most candidate mistakes live.
 
 ---
 
@@ -337,7 +337,7 @@ flowchart TD
 
 ### 5.1 The unit
 
-**1 DPU = 4 vCPU and 16 GB of memory**, and AWS states that *"a single DPU is also referred to as a worker."* Jobs on Glue 2.0 and later are sized with **`WorkerType` + `NumberOfWorkers`** — never with `MaxCapacity` (that legacy field belongs to Glue 1.0 and earlier; setting both is an error). Defaults: Spark jobs **10 DPU**, streaming **2 DPU**, both with a **2-DPU minimum**.
+**1 DPU = 4 vCPU and 16 GB of memory**, and AWS states that *"a single DPU is also referred to as a worker."* Jobs on Glue 2.0 and later are sized with **`WorkerType` + `NumberOfWorkers`**: never with `MaxCapacity` (that legacy field belongs to Glue 1.0 and earlier; setting both is an error). Defaults: Spark jobs **10 DPU**, streaming **2 DPU**, both with a **2-DPU minimum**.
 
 ### 5.2 Worker catalogue (as of Oct 2026)
 
@@ -356,7 +356,7 @@ flowchart TD
 **M-DPU** means *"double the memory allocation for a given size compared to standard DPUs."*
 
 > [!IMPORTANT]
-> ⚠️ **The G-family does not buy you memory per CPU.** Every G worker keeps the **4 vCPU : 16 GB** ratio; only the **R.** family doubles it (**4 vCPU : 32 GB**). Moving from G.1X to G.4X therefore does **not** fix an out-of-memory failure — it just gives you the same ratio four times faster and four times wider. OOM → **R.**; shuffle/skew → more workers; genuinely slow single-threaded work → bigger worker.
+> ⚠️ **The G-family does not buy you memory per CPU.** Every G worker keeps the **4 vCPU: 16 GB** ratio; only the **R.** family doubles it (**4 vCPU: 32 GB**). Moving from G.1X to G.4X therefore does **not** fix an out-of-memory failure; it just gives you the same ratio four times faster and four times wider. OOM → **R.**; shuffle/skew → more workers; genuinely slow single-threaded work → bigger worker.
 
 ### 5.3 The October 2026 rate card
 
@@ -368,14 +368,14 @@ Baseline **us-east-1 (N. Virginia)**; every figure **as of Oct 2026** (Glue 6.0 
 | Flex execution (G.1X/G.2X, ≥3.0) | **$0.29 / DPU-hour** | see live pricing page | 1 minute; start delay/interruption possible |
 | Memory-optimized **R** workers (≥4.0) | **$0.52 / DPU-hour** | see live pricing page | 1 minute |
 | Interactive session / Studio notebook | **$0.44 / DPU-hour** | **$0.308 / DPU-hour** | 1 minute; default **5 DPU**, minimum **2 DPU** |
-| Python shell (0.0625 or 1 DPU) | **$0.44 / DPU-hour** | — | 1 minute |
-| Ray | **$0.44 / M-DPU-hour** | — | 1 minute |
-| **Data Catalog crawler** | **$0.44 / DPU-hour** | — | **10-minute minimum per run** |
+| Python shell (0.0625 or 1 DPU) | **$0.44 / DPU-hour** |: | 1 minute |
+| Ray | **$0.44 / M-DPU-hour** |: | 1 minute |
+| **Data Catalog crawler** | **$0.44 / DPU-hour** |: | **10-minute minimum per run** |
 | Data Quality evaluated in an ETL job | **$0.44 / DPU-hour** | **$0.308 / DPU-hour** | 1 minute |
-| **DataBrew** recipe/profile job | **$0.48 / node-hour** | — | per node |
-| **DataBrew** interactive session | **$1.00 / 30-minute block** | — | counted from first interaction |
+| **DataBrew** recipe/profile job | **$0.48 / node-hour** |: | per node |
+| **DataBrew** interactive session | **$1.00 / 30-minute block** |: | counted from first interaction |
 
-The four DPU-based meters of that table as an interactive chart (same units, so they are legitimately comparable — DataBrew's node-hour meter is deliberately **not** plotted, because it is a different unit):
+The four DPU-based meters of that table as an interactive chart (same units, so they are legitimately comparable: DataBrew's node-hour meter is deliberately **not** plotted, because it is a different unit):
 
 ```plot
 {
@@ -396,7 +396,7 @@ The four DPU-based meters of that table as an interactive chart (same units, so 
 
 Reading the chart: total cost = DPU × hours × bar height. The 6.0 bar is ~30% shorter than the 5.1 bar (the 2026-08-21 price cut), Flex buys ~34% off in exchange for a possible delayed start or interruption, and the R bar is the premium for double memory per DPU.
 
-### 5.4 Worked example E3 — AWS's own DPU-hour arithmetic
+### 5.4 Worked example E3: AWS's own DPU-hour arithmetic
 
 ```text
 Job: 6 DPU (for example 6 x G.1X) running 15 minutes on Glue <= 5.1
@@ -411,7 +411,7 @@ Source: AWS Glue pricing page's worked example ("6 DPU * 0.25 hour * $0.44,
 or $0.66"), as of Oct 2026; 6.0 rate from the 2026-08-21 announcement.
 ```
 
-### 5.5 Worked example E4 — Flex versus standard
+### 5.5 Worked example E4: Flex versus standard
 
 ```text
 Job: 6 DPU x 1/3 hour (as of Oct 2026)
@@ -422,7 +422,7 @@ Flex buys ~34% off by accepting a possible delayed start and interruption.
 Never use Flex for SLA-bound work; it exists for interruptible, fault-tolerant jobs.
 ```
 
-### 5.6 Worked example E5 — worker choice changes nothing about the price
+### 5.6 Worked example E5: worker choice changes nothing about the price
 
 ```text
 Target capacity: 16 DPU  (as of Oct 2026, $0.44/DPU-h on Glue <= 5.1)
@@ -437,7 +437,7 @@ Identical cost, different shapes: 16 executors on G.1X vs 2 on G.8X,
 never on price - the DPU is the metered unit.
 ```
 
-### 5.7 Worked example E6 — the crawler's 10-minute minimum
+### 5.7 Worked example E6: the crawler's 10-minute minimum
 
 ```text
 Crawler runs hourly, 2 DPU, actual work takes 3 minutes (as of Oct 2026).
@@ -456,7 +456,7 @@ instead of hourly, or batch partition discovery, before you optimise DPU.
 
 For Glue **3.0 and later**, auto scaling is enabled with `--enable-auto-scaling=true` on worker families **G.1X…G.16X** and **R.1X…R.8X** (`G.025X` for streaming); the **Standard** worker does not support it. When auto scaling is on, `NumberOfWorkers` is treated as the **maximum**, and batch jobs on Glue 4.0+ can be reviewed with the **`DPUSeconds`** CloudWatch metric. Data Catalog pricing adds its own meter: the **first 1,000,000 objects and 1,000,000 requests are free each month**, then **$1.00 per 100,000 objects** over the free tier and **$1.00 per million requests** over it (as of Oct 2026).
 
-- **📚 Did you know?** A DataBrew **job** is not priced in DPU-hours at all: it is **$0.48 per node-hour** with a **5-node default**, and an interactive DataBrew session is **$1.00 per 30-minute block** — three separate interactions inside 75 minutes bill as **three blocks = $3.00** (AWS Glue/DataBrew pricing, as of Oct 2026). Mixing the two meters is a classic cost-estimate trap.
+- **📚 Did you know?** A DataBrew **job** is not priced in DPU-hours at all: it is **$0.48 per node-hour** with a **5-node default**, and an interactive DataBrew session is **$1.00 per 30-minute block**: three separate interactions inside 75 minutes bill as **three blocks = $3.00** (AWS Glue/DataBrew pricing, as of Oct 2026). Mixing the two meters is a classic cost-estimate trap.
 
 ---
 
@@ -464,7 +464,7 @@ For Glue **3.0 and later**, auto scaling is enabled with `--enable-auto-scaling=
 
 ### 6.1 What the visual layer actually is
 
-Glue Studio lets you **create, run and monitor** Glue jobs on the serverless Spark engine *"without having to learn Spark or write code."* Each **node** in the canvas is one action — a source, a transform or a target — and Studio **generates a PySpark script** from the source schema plus the target location and schema. The script is real and editable in developer mode; the visual graph and the code are two views of the same job.
+Glue Studio lets you **create, run and monitor** Glue jobs on the serverless Spark engine *"without having to learn Spark or write code."* Each **node** in the canvas is one action, a source, a transform or a target, and Studio **generates a PySpark script** from the source schema plus the target location and schema. The script is real and editable in developer mode; the visual graph and the code are two views of the same job.
 
 | Authoring mode | What you get |
 |---|---|
@@ -478,15 +478,15 @@ Glue Studio lets you **create, run and monitor** Glue jobs on the serverless Spa
 - **Monitoring**: the Jobs page and run details, plus the **job run monitoring dashboard** with tiles for success rate and estimated DPU usage, links into CloudWatch, the Spark History Server and job-run insights.
 - **Logs**: `/aws-glue/jobs/logs-v2` (continuous logging), `/aws-glue/jobs/output`, `/aws-glue/jobs/error`; CloudWatch metrics arrive **every 30 seconds** as deltas.
 
-### 6.3 The Data Preparation Recipe node — DataBrew inside Studio
+### 6.3 The Data Preparation Recipe node: DataBrew inside Studio
 
 You can author a recipe step inline in Studio or **import a published DataBrew recipe** into a **Data Preparation Recipe node**, subject to hard limits (AWS Glue Studio docs, accessed Oct 2026):
 
 | Rule | Value |
 |---|---|
 | Minimum Glue version | **4.0** (Python version auto-set) |
-| **Not importable** | `GROUP_BY`, `PIVOT`, `UNPIVOT`, `TRANSPOSE` — use dedicated Studio nodes |
-| Unsupported if the recipe contains | `UNION` or `JOIN` — use Studio's Join/Union nodes instead |
+| **Not importable** | `GROUP_BY`, `PIVOT`, `UNPIVOT`, `TRANSPOSE`: use dedicated Studio nodes |
+| Unsupported if the recipe contains | `UNION` or `JOIN`: use Studio's Join/Union nodes instead |
 | Region requirement | Commercial DataBrew Regions only |
 
 That bridge is why DataBrew and Glue Studio are on the exam **together**: a recipe authored by an analyst becomes a governed step inside an engineer's scheduled job, which then gains bookmarks, retries and auto scaling it never had as a standalone DataBrew job.
@@ -495,7 +495,7 @@ That bridge is why DataBrew and Glue Studio are on the exam **together**: a reci
 
 ## 7. AWS Glue DataBrew: preparation and profiling without code
 
-### 7.1 Six core objects — and the name that does not exist
+### 7.1 Six core objects, and the name that does not exist
 
 AWS Prescriptive Guidance lists exactly **six** core concepts (accessed Oct 2026):
 
@@ -529,7 +529,7 @@ AWS Prescriptive Guidance lists exactly **six** core concepts (accessed Oct 2026
 | Rulesets | **100 rules per ruleset**, **10 rulesets per dataset**, **100 rulesets per account** |
 | Account quotas | 10 concurrent jobs · **300 nodes per account** · 100 jobs · 100 datasets · 100 projects · 10 open projects · 500 recipes · 10 schedules |
 
-### 7.4 Worked example E7 — pricing a DataBrew pipeline
+### 7.4 Worked example E7: pricing a DataBrew pipeline
 
 ```text
 Recipe job: 5 nodes (the default), runs 10 minutes   (as of Oct 2026)
@@ -560,14 +560,14 @@ flowchart TD
 
 | Dimension | **DataBrew** | **Glue ETL (Spark)** |
 |---|---|---|
-| Code | **None** — point and click | PySpark/Scala (or Studio-generated) |
+| Code | **None**: point and click | PySpark/Scala (or Studio-generated) |
 | Best for | Prep, cleansing, profiling, analyst self-service | Bulk transforms, joins, distributed processing |
 | Meter | **$0.48 / node-hour** + **$1.00 / 30-min session** | **DPU-hour** |
 | Bookmarks / retries / auto scaling | Only after a recipe is **imported into Glue Studio** | Native |
 | Hard ceiling | **100** transformations per recipe | Script length, not steps |
 | Data quality | Rulesets on datasets, run inside jobs | `EvaluateDataQuality` node/transform |
 
-- **📚 Did you know?** AWS claims DataBrew can cut data-preparation time by **up to 80%** versus custom preparation work (AWS Glue DataBrew product page, accessed Oct 2026) — a customer-facing claim, not a guarantee, and the examinable fact is the *mechanism* (project → dataset → recipe → recipe/profile job), not the percentage.
+- **📚 Did you know?** AWS claims DataBrew can cut data-preparation time by **up to 80%** versus custom preparation work (AWS Glue DataBrew product page, accessed Oct 2026): a customer-facing claim, not a guarantee, and the examinable fact is the *mechanism* (project → dataset → recipe → recipe/profile job), not the percentage.
 
 ```matching
 {
@@ -580,7 +580,7 @@ flowchart TD
     {"left": "Profile job", "right": "Computes column statistics and writes a data profile as JSON to S3"},
     {"left": "Data lineage", "right": "The recorded history of what preparation steps did to the data"}
   ],
-  "explanation": "These six objects are AWS's complete core vocabulary for DataBrew - there is no 'data flow' object, which is why that phrasing appears only as a distractor. Note also that DataBrew has no DPU meter: jobs bill $0.48 per node-hour with a 5-node default, sessions bill $1.00 per 30-minute block, a recipe caps at 100 transformations and 100 published versions, and cron schedules cannot run faster than every 5 minutes (all as of Oct 2026)."
+  "explanation": "These six objects are AWS's complete core vocabulary for DataBrew: there is no 'data flow' object, which is why that phrasing appears only as a distractor. Note also that DataBrew has no DPU meter: jobs bill $0.48 per node-hour with a 5-node default, sessions bill $1.00 per 30-minute block, a recipe caps at 100 transformations and 100 published versions, and cron schedules cannot run faster than every 5 minutes (all as of Oct 2026)."
 }
 ```
 
@@ -596,10 +596,10 @@ flowchart TD
 | **Spigot** | Diverts a **sample** of records to a rejects path | You want a canary, not every reject |
 | **EvaluateDataQuality** | Rule evaluation (Studio: "Data quality rules" node) that can **fail or divert** on violation | Rules are declarative and auditable |
 
-The rejected frame is then written to its own prefix — that is the **error table** pattern the exam means: bad rows land in `s3://…/errors/`, good rows land in the partitioned sink, and a downstream conditional trigger or analyst query can read each independently.
+The rejected frame is then written to its own prefix; that is the **error table** pattern the exam means: bad rows land in `s3://…/errors/`, good rows land in the partitioned sink, and a downstream conditional trigger or analyst query can read each independently.
 
 > [!WARNING]
-> ⚠️ **There is no Glue feature called "ErrorCDC."** A search of the Glue developer guide, API reference and release notes (checked Oct 2026) returns nothing under that name. The real mechanisms are `ErrorsAsDynamicFrame`, `errorsFromDF`, `Spigot` and `EvaluateDataQuality` — if an option uses a name you have never seen in the docs, treat it as a distractor and pick the documented mechanism.
+> ⚠️ **There is no Glue feature called "ErrorCDC."** A search of the Glue developer guide, API reference and release notes (checked Oct 2026) returns nothing under that name. The real mechanisms are `ErrorsAsDynamicFrame`, `errorsFromDF`, `Spigot` and `EvaluateDataQuality`: if an option uses a name you have never seen in the docs, treat it as a distractor and pick the documented mechanism.
 
 ### 8.2 Retries, timeouts and run states
 
@@ -614,7 +614,7 @@ Job failure ladder (AWS Glue job-runs API):
   unhandled error  -> state FAILED or ERROR; history retained 90 days
 ```
 
-### 8.3 Worked example E8 — the timeout default trap
+### 8.3 Worked example E8: the timeout default trap
 
 ```text
 A pipeline was designed in 2024 on Glue 4.0, where a blank Timeout
@@ -630,7 +630,7 @@ default as version-dependent, not as a constant. (Defaults as of Oct 2026.)
 
 ### 8.4 Security configuration: four planes, one override rule
 
-A **security configuration** is a named bundle attachable to a **job, crawler or development endpoint**, covering four planes: **S3 data** (SSE-S3 or SSE-KMS), **CloudWatch Logs** (SSE-KMS), **job bookmarks** (**CSE-KMS** — client-side) and **data-quality assets**. Three rules worth memorising:
+A **security configuration** is a named bundle attachable to a **job, crawler or development endpoint**, covering four planes: **S3 data** (SSE-S3 or SSE-KMS), **CloudWatch Logs** (SSE-KMS), **job bookmarks** (**CSE-KMS**: client-side) and **data-quality assets**. Three rules worth memorising:
 
 1. *"Currently, a security configuration overrides any server-side encryption (SSE-S3) setting that is passed as an ETL job parameter."*
 2. Only **symmetric** KMS keys are supported, and security configurations are **not supported for Ray jobs**.
@@ -640,7 +640,7 @@ A **security configuration** is a named bundle attachable to a **job, crawler or
 
 ## 9. Performance: insights, partitions and the small-file tax
 
-### 9.1 Job run insights — the fastest path to a root cause
+### 9.1 Job run insights: the fastest path to a root cause
 
 Available on Glue **2.0 and later**, opt-in via the Studio checkbox **"Generate job insights"** or `--enable-job-insights=true`. When enabled, a failed run reports (AWS Glue docs, accessed Oct 2026):
 
@@ -649,13 +649,13 @@ Available on Glue **2.0 and later**, opt-in via the Studio checkbox **"Generate 
 - the time-ordered **exception stream**, and
 - a **root cause with a recommended action**.
 
-Compare that with the bare failure `An error occurred while calling o111.collectToPython` — one is a diagnosis, the other is a symptom. Insights land under the same `/aws-glue/jobs/logs-v2` log group you already ship to CloudWatch.
+Compare that with the bare failure `An error occurred while calling o111.collectToPython`: one is a diagnosis, the other is a symptom. Insights land under the same `/aws-glue/jobs/logs-v2` log group you already ship to CloudWatch.
 
 ### 9.2 Partitioned writes and pushdown
 
 Write partition keys with the sink (`partitionKeys = ["year","month","day"]`) so downstream readers only touch the partitions a query names. Partitioning is a **write-time decision** you cannot cheaply retrofit on a flat prefix, which is why the sink belongs in the design conversation, not in the cleanup sprint. Partition-aware outputs are also what makes crawlers cheap to run: the crawler registers **partitions**, and a partitioned table is what lets an engine skip files it will never read.
 
-### 9.3 Worked example E9 — small-file arithmetic
+### 9.3 Worked example E9: small-file arithmetic
 
 ```text
 Ingest: 1 TB per year of raw events, partitioned year/month/day,
@@ -707,7 +707,7 @@ Connections are therefore **reusable** across crawlers, jobs and development end
 | **3.0** | 3.1.1 | 3.7 | Supported; **ML transforms unavailable** |
 | **2.0 / 1.0 / 0.9** | 2.4.3 | 3.7 / 2.7-3.6 | **End of life 2026-04-01** |
 
-Glue 6.0 migration deltas that break old scripts: `spark.sql.legacy.timeParserPolicy` default changed; **ANSI mode** can fail implicit string→numeric casts; **`--additional-python-modules` is deprecated** in favour of `--python-virtual-env`; **EMRFS is removed** (S3A is the only S3 filesystem); and the **AWS SDK for Java v1 is removed** (SDK v2 only — boto3 is unaffected).
+Glue 6.0 migration deltas that break old scripts: `spark.sql.legacy.timeParserPolicy` default changed; **ANSI mode** can fail implicit string→numeric casts; **`--additional-python-modules` is deprecated** in favour of `--python-virtual-env`; **EMRFS is removed** (S3A is the only S3 filesystem); and the **AWS SDK for Java v1 is removed** (SDK v2 only: boto3 is unaffected).
 
 ### 10.3 Choosing the engine in one table
 
@@ -717,9 +717,9 @@ Glue 6.0 migration deltas that break old scripts: `spark.sql.legacy.timeParserPo
 | Parallelism | one invocation ≈ one worker | distributed Spark with shuffles | single process |
 | Trigger surface | 220+ service events, SQS/Kinesis/DynamoDB, API Gateway | Glue triggers, EventBridge, Step Functions | same as Glue |
 | Cost meter | GB-second + requests | **DPU-hour** (1-second granularity, 1-minute minimum) | DPU-hour (0.0625 or 1 DPU) |
-| Fit | sub-15-minute event micro-transforms | bulk GB–TB, joins, partitioned lake writes | >15-minute non-Spark Python |
+| Fit | sub-15-minute event micro-transforms | bulk GB: TB, joins, partitioned lake writes | >15-minute non-Spark Python |
 
-### 10.4 Worked example E10 — "the cheapest correct option"
+### 10.4 Worked example E10: "the cheapest correct option"
 
 ```text
 Requirement: every night at 03:00, move one ~90-second file-copy job,
@@ -741,25 +741,25 @@ Reading: "must run on Glue" -> pythonshell. "Cheapest correct" -> Lambda.
 ### 2026 Updates (as of October 2026)
 
 > [!NOTE]
-> **What changed in this topic between 2025 and October 2026** — every line is checked against a primary AWS source and is examinable because the exam tests the current behaviour:
-> - **Glue 6.0 went GA on 2026-08-21** with *"30% lower pricing than previous AWS Glue versions"* and full Apache Iceberg v3 support (Spark **4.1.1**, Python **3.13**, Scala **2.13.17**, Java 17; Iceberg 1.11.0, Hudi 1.1.1, Delta 4.2.0) — AWS What's New, 2026-08-21; Glue release notes, accessed Oct 2026.
-> - **Glue 5.1 is the default** when `GlueVersion` is omitted (announced 2025-11-26 / blog 2025-12-09), and **0.9/1.0/2.0 reached end of life on 2026-04-01**; new Python Shell 3.6 jobs could no longer be created after **2026-03-31** — Glue version support policy, accessed Oct 2026.
-> - **6.0 breaks old code**: EMRFS removed (S3A only), AWS SDK for Java v1 removed, Scala binary 2.12 → 2.13, `--additional-python-modules` deprecated for `--python-virtual-env`, and ANSI mode can fail implicit string→numeric casts — migrating to Glue 6.0, accessed Oct 2026.
-> - **Exam guide v1.1 (2025-12-12)** consolidated knowledge/skills into one list and added **8 new skills, none removed** — including *1.2.10 Integrate Large Language Models (LLM) for data processing* and *2.1.7 Manage open table formats (for example Apache Iceberg)*; the in-scope service list moved **+6 / −3** (Aurora, Amazon Q, Bedrock, Kendra, Data Exchange, S3 Tables added; Cloud9, CodeCommit, AWS SCT removed) — DEA-C01 revisions page, 2025-12-12; in-scope/out-of-scope pages, accessed Oct 2026.
-> - **Stale-fact warning**: a 2024-era pipeline spec saying `GlueVersion=4.0`, target "kinesis-firehose", and "12 months Free Tier" is wrong on all three counts today — the default is 5.1, the console name is **Amazon Data Firehose** (renamed 2024-02-09, APIs unchanged, and the DEA guide still prints "Amazon Kinesis Data Firehose"), and accounts created after **2025-07-15** get a **6-month Free Plan with up to $200 in credits** — AWS Free Tier page, accessed Oct 2026.
-> - **Glue is now one leg of an open-table-format triangle**: Glue 6.0 writes **Apache Iceberg v3** (VARIANT + shredding, deletion vectors, row lineage), while **Redshift gained Iceberg writes** (GA 2025-11-17, tables registered in the **Glue Data Catalog**), **JIT ANALYZE** (2025-11-18), **UPDATE/DELETE/MERGE** on Iceberg including S3 Tables (2026-04-23) and **Iceberg materialized views** (2026-10-05) — a Glue-authored Iceberg table can now be modified in place by Redshift, queried by Athena and shared through Lake Formation — AWS What's New, 2025-11-17 / 2026-04-23 / 2026-10-05; Glue 6.0 announcement, 2026-08-21.
-> - **Not every streaming path needs a Glue job any more**: Kinesis Data Streams can now deliver straight into **Iceberg tables on Amazon S3 Tables** (2026-08-28 — source format converted to Parquet automatically, inline compaction, "no ETL") or into **general-purpose S3 buckets** (2026-08-29), both available only in the on-demand capacity modes and priced per GB delivered — AWS What's New, 2026-08-28 and 2026-08-29. Read that as a *cost* option to evaluate, not as "Glue is obsolete": scheduled, bookmark-driven, quality-checked lake writes are still the Glue pattern this exam tests.
+> **What changed in this topic between 2025 and October 2026**: every line is checked against a primary AWS source and is examinable because the exam tests the current behaviour:
+> - **Glue 6.0 went GA on 2026-08-21** with *"30% lower pricing than previous AWS Glue versions"* and full Apache Iceberg v3 support (Spark **4.1.1**, Python **3.13**, Scala **2.13.17**, Java 17; Iceberg 1.11.0, Hudi 1.1.1, Delta 4.2.0): AWS What's New, 2026-08-21; Glue release notes, accessed Oct 2026.
+> - **Glue 5.1 is the default** when `GlueVersion` is omitted (announced 2025-11-26 / blog 2025-12-09), and **0.9/1.0/2.0 reached end of life on 2026-04-01**; new Python Shell 3.6 jobs could no longer be created after **2026-03-31**: Glue version support policy, accessed Oct 2026.
+> - **6.0 breaks old code**: EMRFS removed (S3A only), AWS SDK for Java v1 removed, Scala binary 2.12 → 2.13, `--additional-python-modules` deprecated for `--python-virtual-env`, and ANSI mode can fail implicit string→numeric casts: migrating to Glue 6.0, accessed Oct 2026.
+> - **Exam guide v1.1 (2025-12-12)** consolidated knowledge/skills into one list and added **8 new skills, none removed**, including *1.2.10 Integrate Large Language Models (LLM) for data processing* and *2.1.7 Manage open table formats (for example Apache Iceberg)*; the in-scope service list moved **+6 / −3** (Aurora, Amazon Q, Bedrock, Kendra, Data Exchange, S3 Tables added; Cloud9, CodeCommit, AWS SCT removed), DEA-C01 revisions page, 2025-12-12; in-scope/out-of-scope pages, accessed Oct 2026.
+> - **Stale-fact warning**: a 2024-era pipeline spec saying `GlueVersion=4.0`, target "kinesis-firehose", and "12 months Free Tier" is wrong on all three counts today, the default is 5.1, the console name is **Amazon Data Firehose** (renamed 2024-02-09, APIs unchanged, and the DEA guide still prints "Amazon Kinesis Data Firehose"), and accounts created after **2025-07-15** get a **6-month Free Plan with up to $200 in credits**, AWS Free Tier page, accessed Oct 2026.
+> - **Glue is now one leg of an open-table-format triangle**: Glue 6.0 writes **Apache Iceberg v3** (VARIANT + shredding, deletion vectors, row lineage), while **Redshift gained Iceberg writes** (GA 2025-11-17, tables registered in the **Glue Data Catalog**), **JIT ANALYZE** (2025-11-18), **UPDATE/DELETE/MERGE** on Iceberg including S3 Tables (2026-04-23) and **Iceberg materialized views** (2026-10-05), a Glue-authored Iceberg table can now be modified in place by Redshift, queried by Athena and shared through Lake Formation, AWS What's New, 2025-11-17 / 2026-04-23 / 2026-10-05; Glue 6.0 announcement, 2026-08-21.
+> - **Not every streaming path needs a Glue job any more**: Kinesis Data Streams can now deliver straight into **Iceberg tables on Amazon S3 Tables** (2026-08-28, source format converted to Parquet automatically, inline compaction, "no ETL") or into **general-purpose S3 buckets** (2026-08-29), both available only in the on-demand capacity modes and priced per GB delivered, AWS What's New, 2026-08-28 and 2026-08-29. Read that as a *cost* option to evaluate, not as "Glue is obsolete": scheduled, bookmark-driven, quality-checked lake writes are still the Glue pattern this exam tests.
 
-- **📚 Did you know?** The exam guide's own removals are as examinable as its additions: **AWS SCT, Cloud9 and CodeCommit** left the in-scope list at v1.1, which is why "use Schema Conversion Tool" is now a distractor where "use Glue or native tooling" is the answer — and **S3 Tables** arriving in-scope is why Glue writing **Iceberg** (including Iceberg v3 features on 6.0) is fair game (DEA-C01 in-scope services page, accessed Oct 2026).
-- **📚 Did you know?** The rename confusion runs both ways in this topic: the DEA in-scope list still prints **"Amazon Kinesis Data Firehose"** while the product has been **Amazon Data Firehose** since 2024-02-09 — *"no other changes, including service endpoints, APIs, the AWS Command Line Interface (AWS CLI), the AWS Identity and Access Management (IAM) access policies, and Amazon CloudWatch metrics"* (AWS What's New, 2024-02-09). IAM actions are still `firehose:*`, so **either name is valid on the exam** — never "correct" an option that uses the older one (AWS Firehose history page, accessed Oct 2026).
+- **📚 Did you know?** The exam guide's own removals are as examinable as its additions: **AWS SCT, Cloud9 and CodeCommit** left the in-scope list at v1.1, which is why "use Schema Conversion Tool" is now a distractor where "use Glue or native tooling" is the answer, and **S3 Tables** arriving in-scope is why Glue writing **Iceberg** (including Iceberg v3 features on 6.0) is fair game (DEA-C01 in-scope services page, accessed Oct 2026).
+- **📚 Did you know?** The rename confusion runs both ways in this topic: the DEA in-scope list still prints **"Amazon Kinesis Data Firehose"** while the product has been **Amazon Data Firehose** since 2024-02-09, *"no other changes, including service endpoints, APIs, the AWS Command Line Interface (AWS CLI), the AWS Identity and Access Management (IAM) access policies, and Amazon CloudWatch metrics"* (AWS What's New, 2024-02-09). IAM actions are still `firehose:*`, so **either name is valid on the exam**, never "correct" an option that uses the older one (AWS Firehose history page, accessed Oct 2026).
 
 ---
 
 ## Real-World Case Studies
 
-AWS publishes what these abstractions look like in production. Every figure below is **customer- or AWS-claimed and unaudited**, with the source named so you can check it — the examinable point is the **pattern**, not the marketing.
+AWS publishes what these abstractions look like in production. Every figure below is **customer- or AWS-claimed and unaudited**, with the source named so you can check it: the examinable point is the **pattern**, not the marketing.
 
-### Case A — BMW Group: an on-premises lake becomes a governed cloud lake (Glue as the schema layer)
+### Case A, BMW Group: an on-premises lake becomes a governed cloud lake (Glue as the schema layer)
 
 | Element | Detail |
 |---|---|
@@ -770,24 +770,24 @@ AWS publishes what these abstractions look like in production. Every figure belo
 | Exam domain | **Domain 1** (transformation and catalog-driven processing) with Domain 4 hooks (multi-tenant cost attribution) |
 | Source | `aws.amazon.com/solutions/case-studies/bmw-group-case-study` (accessed Oct 2026) |
 
-The examinable pattern is the **separation AWS teaches**: data lands in S3, **schemas live in the Glue Data Catalog**, transformation runs in Glue/EMR, and consumption (Athena, SageMaker) reads the same catalog. Producers and consumers are different accounts with different privileges — which is why the catalog, not the bucket, is the contract.
+The examinable pattern is the **separation AWS teaches**: data lands in S3, **schemas live in the Glue Data Catalog**, transformation runs in Glue/EMR, and consumption (Athena, SageMaker) reads the same catalog. Producers and consumers are different accounts with different privileges; which is why the catalog, not the bucket, is the contract.
 
-### Case B — PayU: Glue ETL into a shared warehouse (transformation feeding consolidation)
+### Case B, PayU: Glue ETL into a shared warehouse (transformation feeding consolidation)
 
 | Element | Detail |
 |---|---|
 | Customer | **PayU**, fintech/payments company |
-| Challenge | Data siloed across **~40 production databases**; queries taking 10–15 minutes; freshness only once a day |
+| Challenge | Data siloed across **~40 production databases**; queries taking 10 to 15 minutes; freshness only once a day |
 | Services | **AWS Glue ETL → Amazon S3 → Amazon Redshift**, plus **Redshift Data Sharing** across 5 clusters (2 ETL + 3 consumer) |
-| Outcomes | Queries **10–15 min → under 1 min**; freshness **once/day → under 30 minutes** (ML streaming under 5 s); **$20,000/month** saved; **~200 TB scanned per day**; query volume **150,000 → 35,000 per month (−77%)** |
+| Outcomes | Queries **10 to 15 min → under 1 min**; freshness **once/day → under 30 minutes** (ML streaming under 5 s); **$20,000/month** saved; **~200 TB scanned per day**; query volume **150,000 → 35,000 per month (−77%)** |
 | Exam domain | **Domain 1** (Glue features to process data) feeding Domain 3/4 (cost and performance) |
 | Source | `aws.amazon.com/solutions/case-studies/payu-redshift-case-study` (accessed Oct 2026) |
 
-> "In 1 month, we cut down queries by 77 percent, which would have been a 6-month exercise in the previous environment." — PayU, AWS case study (accessed Oct 2026)
+> "In 1 month, we cut down queries by 77 percent, which would have been a 6-month exercise in the previous environment.": PayU, AWS case study (accessed Oct 2026)
 
 Read PayU as two separate levers: the **platform** move (Glue → S3 → Redshift with data sharing) is an architecture change worth **$20,000/month** (customer-claimed), while the **demand** rationalisation is a **77%** query reduction. Answers that collapse both into "AWS saved 77% on cost" are reading the number wrong.
 
-### Case C — Integral Ad Science: the catalog as the authorization plane (Glue Data Catalog + Lake Formation)
+### Case C, Integral Ad Science: the catalog as the authorization plane (Glue Data Catalog + Lake Formation)
 
 | Element | Detail |
 |---|---|
@@ -798,11 +798,11 @@ Read PayU as two separate levers: the **platform** move (Glue → S3 → Redshif
 | Exam domain | **Domain 1** (catalog-driven processing) with **Domain 4** (governed, self-service access) |
 | Source | `aws.amazon.com/blogs/big-data/integral-ad-science-secures-self-service-data-lake-using-aws-lake-formation` (2021-09-23, accessed Oct 2026) |
 
-> "With Lake Formation tag-based access controls, IAS reduced hundreds of permission rules down to precisely two rules." — AWS Big Data Blog (accessed Oct 2026)
+> "With Lake Formation tag-based access controls, IAS reduced hundreds of permission rules down to precisely two rules.": AWS Big Data Blog (accessed Oct 2026)
 
-Read IAS as the same catalog this lesson describes (§1.4) wearing a second hat: the **Glue Data Catalog holds the schema**, and Lake Formation decides **who may read which table, column or row** of that schema. That is why "just add an S3 bucket policy" is the wrong instinct in an exam answer about a governed, multi-account lake — and why tags, not principals, are the scaling mechanism.
+Read IAS as the same catalog this lesson describes (§1.4) wearing a second hat: the **Glue Data Catalog holds the schema**, and Lake Formation decides **who may read which table, column or row** of that schema. That is why "just add an S3 bucket policy" is the wrong instinct in an exam answer about a governed, multi-account lake, and why tags, not principals, are the scaling mechanism.
 
-### Case D — Nasdaq: an exchange batch load decoupled from query (S3 as the landing zone)
+### Case D, Nasdaq: an exchange batch load decoupled from query (S3 as the landing zone)
 
 | Element | Detail |
 |---|---|
@@ -813,9 +813,9 @@ Read IAS as the same catalog this lesson describes (§1.4) wearing a second hat:
 | Exam domain | **Domain 1** (batch load and transformation cadence) with **Domain 2** (decoupled storage and compute) |
 | Source | `aws.amazon.com/solutions/case-studies/nasdaq-case-study` (accessed Oct 2026) |
 
-> "We were able to easily support the jump from 30 billion records to 70 billion records a day because of the flexibility and scalability of Amazon S3 and Amazon Redshift." — Robert Hunt, VP Software Engineering, Nasdaq (AWS case study, accessed Oct 2026)
+> "We were able to easily support the jump from 30 billion records to 70 billion records a day because of the flexibility and scalability of Amazon S3 and Amazon Redshift.": Robert Hunt, VP Software Engineering, Nasdaq (AWS case study, accessed Oct 2026)
 
-The examinable pattern is **contention removed**: loading writes to S3 while querying reads Redshift/Spectrum over the same storage, so the nightly deadline stops being a shared-capacity argument. It is the same architectural instinct as PayU's Glue → S3 → Redshift path — **land once in the lake, transform with Glue, let each consumer read cheaply** — and the reason partitioned, catalogued output (§9.2) matters more than raw throughput.
+The examinable pattern is **contention removed**: loading writes to S3 while querying reads Redshift/Spectrum over the same storage, so the nightly deadline stops being a shared-capacity argument. It is the same architectural instinct as PayU's Glue → S3 → Redshift path, **land once in the lake, transform with Glue, let each consumer read cheaply**, and the reason partitioned, catalogued output (§9.2) matters more than raw throughput.
 
 | Case | Glue/DataBrew pattern it demonstrates | Domain |
 |---|---|---|
@@ -824,8 +824,8 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
 | Integral Ad Science | Glue Data Catalog metadata governed by Lake Formation tag-based access control | D1 → D4 |
 | Nasdaq | Decoupled S3 landing zone feeding a nightly batch transformation and query path | D1 → D2 |
 
-- **📚 Did you know?** Neither case study mentions a code-free tool as the load path: both put **Glue** in the pipeline and kept humans out of the loop for the scheduled work. That is the shape of the exam's answer too — **DataBrew for preparation and profiling, Glue for the scheduled, governed, incremental run** (AWS case studies, accessed Oct 2026).
-- **📚 Did you know?** Nasdaq's own words describe a *load* deadline, not a query one: **90% of the daily load finished 5 hours sooner** after moving to S3 + Redshift, and the **15 TB** lake is queried where it sits instead of being copied — with **S3 Object Lock** holding the retention side of the exchange's compliance story (AWS Nasdaq case study, accessed Oct 2026). Numbers are AWS/customer-published and specific to Nasdaq's workload; do not generalise them into a universal "32% faster" claim.
+- **📚 Did you know?** Neither case study mentions a code-free tool as the load path: both put **Glue** in the pipeline and kept humans out of the loop for the scheduled work. That is the shape of the exam's answer too: **DataBrew for preparation and profiling, Glue for the scheduled, governed, incremental run** (AWS case studies, accessed Oct 2026).
+- **📚 Did you know?** Nasdaq's own words describe a *load* deadline, not a query one: **90% of the daily load finished 5 hours sooner** after moving to S3 + Redshift, and the **15 TB** lake is queried where it sits instead of being copied: with **S3 Object Lock** holding the retention side of the exchange's compliance story (AWS Nasdaq case study, accessed Oct 2026). Numbers are AWS/customer-published and specific to Nasdaq's workload; do not generalise them into a universal "32% faster" claim.
 
 ---
 
@@ -859,7 +859,7 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
     "Set MaxConcurrentRuns to a value greater than 1 so runs overlap and no data is missed"
   ],
   "correct": 1,
-  "explanation": "Bookmarks are the batch incremental mechanism, keyed by job_name + transformation_ctx, covering JDBC, Relationalize and some S3 sources. Streaming uses checkpointLocation plus watermarks instead. Resetting bookmarks would discard state, and raising MaxConcurrentRuns makes concurrent commits worse - bookmarks are not concurrency-safe."
+  "explanation": "Bookmarks are the batch incremental mechanism, keyed by job_name + transformation_ctx, covering JDBC, Relationalize and some S3 sources. Streaming uses checkpointLocation plus watermarks instead. Resetting bookmarks would discard state, and raising MaxConcurrentRuns makes concurrent commits worse: bookmarks are not concurrency-safe."
 }
 ```
 
@@ -875,7 +875,7 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
     "Conditional triggers fire on ON_DEMAND events only, so a cron schedule must be added to Job 1"
   ],
   "correct": 1,
-  "explanation": "AWS documents both rules: watched jobs must have been started by a trigger, and the chain must hang off a single scheduled or on-demand root. A hand-started job's completion is invisible to the trigger engine. The limits that do exist are 2 crawlers and 50 jobs per trigger - neither explains this failure."
+  "explanation": "AWS documents both rules: watched jobs must have been started by a trigger, and the chain must hang off a single scheduled or on-demand root. A hand-started job's completion is invisible to the trigger engine. The limits that do exist are 2 crawlers and 50 jobs per trigger: neither explains this failure."
 }
 ```
 
@@ -891,7 +891,7 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
     "About $316.80, because the crawler bills 10 DPU by default like a Spark job"
   ],
   "correct": 1,
-  "explanation": "2 DPU x (10/60) h x $0.44 = $0.147 per run; 720 runs per 30-day month x $0.147 = $105.60 (as of Oct 2026). At the true 3-minute duration it would be $31.68, so the minimum costs an extra $73.92/month - which is why event-driven crawling beats a naive hourly schedule."
+  "explanation": "2 DPU x (10/60) h x $0.44 = $0.147 per run; 720 runs per 30-day month x $0.147 = $105.60 (as of Oct 2026). At the true 3-minute duration it would be $31.68, so the minimum costs an extra $73.92/month: which is why event-driven crawling beats a naive hourly schedule."
 }
 ```
 
@@ -907,7 +907,7 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
     "The recipe is accepted, but only the first 100 published versions can be stored"
   ],
   "correct": 1,
-  "explanation": "The cap is 100 transformations per recipe (AWS DataBrew developer guide, accessed Oct 2026). 100 is also the maximum number of PUBLISHED VERSIONS per recipe - a different quota that the option conflates. There is no auto-splitting and no step-based price tier: jobs bill $0.48 per node-hour regardless of step count (as of Oct 2026)."
+  "explanation": "The cap is 100 transformations per recipe (AWS DataBrew developer guide, accessed Oct 2026). 100 is also the maximum number of PUBLISHED VERSIONS per recipe: a different quota that the option conflates. There is no auto-splitting and no step-based price tier: jobs bill $0.48 per node-hour regardless of step count (as of Oct 2026)."
 }
 ```
 
@@ -915,7 +915,7 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
 {
   "id": "dea-03-q6",
   "type": "multiple-choice",
-  "question": "A Glue job on G.2X workers fails repeatedly with out-of-memory errors during a wide join. Sizing DPU is not the issue - the team must stay at 16 DPU. What is the correct change?",
+  "question": "A Glue job on G.2X workers fails repeatedly with out-of-memory errors during a wide join. Sizing DPU is not the issue: the team must stay at 16 DPU. What is the correct change?",
   "options": [
     "Move from 8 x G.2X to 4 x G.4X, because larger G workers double memory per CPU",
     "Move from 8 x G.2X to 8 x R.1X equivalents within the same DPU budget, because only the R family doubles memory per DPU",
@@ -923,7 +923,7 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
     "Increase MaxCapacity to 100 so Spark can spill less"
   ],
   "correct": 1,
-  "explanation": "Every G worker keeps the 4 vCPU : 16 GB ratio, so stepping up the G ladder does not change memory per CPU - only the R (memory-optimized) family doubles it to 4 vCPU : 32 GB per M-DPU. Flex is a pricing mode, not a capacity class, and MaxCapacity is the legacy Glue 1.0 field that must not be combined with WorkerType and NumberOfWorkers."
+  "explanation": "Every G worker keeps the 4 vCPU: 16 GB ratio, so stepping up the G ladder does not change memory per CPU: only the R (memory-optimized) family doubles it to 4 vCPU: 32 GB per M-DPU. Flex is a pricing mode, not a capacity class, and MaxCapacity is the legacy Glue 1.0 field that must not be combined with WorkerType and NumberOfWorkers."
 }
 ```
 
@@ -933,7 +933,7 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
   "type": "multiple-choice",
   "question": "A nightly job copies one small file in about 90 seconds, runs on a loose SLA, needs no shuffling and no Spark. Which option is the most cost-appropriate?",
   "options": [
-    "AWS Lambda - event-driven, GB-second metered, and the 15-minute hard limit is irrelevant here",
+    "AWS Lambda: event-driven, GB-second metered, and the 15-minute hard limit is irrelevant here",
     "A Glue etl job on the default 10 DPU, because Glue is always the cheapest option",
     "A Glue etl job on 2 DPU minimum, because Glue bills only for Spark workloads",
     "An EMR cluster kept warm overnight so the copy never waits for provisioning"
@@ -987,7 +987,7 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
     "A Glue pythonshell job at 0.0625 DPU with the analyst editing the Python directly"
   ],
   "correct": 0,
-  "explanation": "DataBrew's six objects are project, dataset, recipe, job (recipe or profile), data lineage and data profile - there is no 'data flow' object. Recipe jobs write to S3, the Glue Data Catalog or Redshift; profile jobs emit JSON statistics. For scheduled, incremental, retry-capable execution, import the recipe into a Glue Studio Data Preparation Recipe node (Glue 4.0+)."
+  "explanation": "DataBrew's six objects are project, dataset, recipe, job (recipe or profile), data lineage and data profile: there is no 'data flow' object. Recipe jobs write to S3, the Glue Data Catalog or Redshift; profile jobs emit JSON statistics. For scheduled, incremental, retry-capable execution, import the recipe into a Glue Studio Data Preparation Recipe node (Glue 4.0+)."
 }
 ```
 
@@ -997,9 +997,9 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
   "type": "multiple-choice",
   "question": "A Glue 6.0 Spark job runs 6 DPU for 15 minutes. At $0.308 per DPU-hour (us-east-1, as of Oct 2026), what is the cost per run, and how does it compare with the same job on Glue 5.1 at $0.44?",
   "options": [
-    "$0.462 per run - about $0.198 (30%) cheaper than the $0.66 on Glue 5.1",
-    "$0.66 per run - Glue 6.0 keeps the $0.44 rate and only adds features",
-    "$0.44 per run - the 6.0 price is per job, not per DPU-hour",
+    "$0.462 per run: about $0.198 (30%) cheaper than the $0.66 on Glue 5.1",
+    "$0.66 per run: Glue 6.0 keeps the $0.44 rate and only adds features",
+    "$0.44 per run: the 6.0 price is per job, not per DPU-hour",
     "$1.848 per run - 6.0 bills four vCPU and 16 GB separately"
   ],
   "correct": 0,
@@ -1014,12 +1014,12 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
   "question": "Which statement about job bookmark state is correct?",
   "options": [
     "Bookmark state is stored inside the output files, so deleting the S3 prefix resets incremental processing",
-    "Bookmark state is keyed by job_name plus a version, and each source is keyed by its transformation_ctx - which must stay consistent with the source; reset-job-bookmark resets all transformations and deletes already-written outputs",
+    "Bookmark state is keyed by job_name plus a version, and each source is keyed by its transformation_ctx: which must stay consistent with the source; reset-job-bookmark resets all transformations and deletes already-written outputs",
     "Bookmarks track both sources and targets, so a failed write is automatically rolled back on the next run",
     "Bookmarks are per-file and survive job deletion, so re-creating a job with the same script resumes exactly where it stopped"
   ],
   "correct": 1,
-  "explanation": "State lives in the Glue service as job_name + run metadata + a states map keyed by transformation_ctx; AWS tells you to keep source and transformation_ctx consistent, because changing a path without changing the key causes files to be skipped or missed. Only SOURCE files are tracked (never targets), reset resets ALL transformations and does not clean outputs, and deleting the job deletes its bookmark - concurrent runs also break commits, so keep MaxConcurrentRuns at 1."
+  "explanation": "State lives in the Glue service as job_name + run metadata + a states map keyed by transformation_ctx; AWS tells you to keep source and transformation_ctx consistent, because changing a path without changing the key causes files to be skipped or missed. Only SOURCE files are tracked (never targets), reset resets ALL transformations and does not clean outputs, and deleting the job deletes its bookmark: concurrent runs also break commits, so keep MaxConcurrentRuns at 1."
 }
 ```
 
@@ -1029,13 +1029,13 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
   "type": "multiple-choice",
   "question": "A Glue ETL job pinned to GlueVersion=6.0 fails during startup with NoClassDefFoundError for com.amazonaws.services.s3.AmazonS3Client, and the log also reports that fs.s3.consistent.* is not a recognised filesystem setting. What is the correct remediation?",
   "options": [
-    "Migrate the code to AWS SDK for Java v2 (2.44.6 or later) and replace EMRFS paths with S3A, deleting the fs.s3.consistent.* settings - both EMRFS and SDK for Java v1 were removed in Glue 6.0",
+    "Migrate the code to AWS SDK for Java v2 (2.44.6 or later) and replace EMRFS paths with S3A, deleting the fs.s3.consistent.* settings: both EMRFS and SDK for Java v1 were removed in Glue 6.0",
     "Downgrade the job's Scala binary version to 2.12 and re-enable EMRFS behind a compatibility flag, because Glue 6.0 keeps legacy filesystems available on request",
     "Reintroduce the removed jars through --additional-python-modules, which is the supported way to restore EMRFS and SDK v1 on Glue 6.0",
     "Set MaxCapacity alongside WorkerType so Glue provisions a Glue 4.0-compatible runtime next to the 6.0 environment"
   ],
   "correct": 0,
-  "explanation": "Glue 6.0 (GA 2026-08-21) removed EMRFS - S3A is now the only S3 filesystem, so fs.s3.consistent.* keys are obsolete - and removed AWS SDK for Java v1, leaving SDK v2 (2.44.6+) only; boto3 is unaffected. Scala binary compatibility moved 2.12 -> 2.13, so a 2.12 downgrade is not the fix either. --additional-python-modules is itself deprecated in favour of --python-virtual-env and cannot restore a removed class, and MaxCapacity is the legacy Glue 1.0 field that must never be combined with WorkerType and NumberOfWorkers. The alternative accepted answer in real life is pinning GlueVersion to 5.1 (the default for new jobs) until the code is migrated (migrating to Glue 6.0, accessed Oct 2026)."
+  "explanation": "Glue 6.0 (GA 2026-08-21) removed EMRFS - S3A is now the only S3 filesystem, so fs.s3.consistent.* keys are obsolete: and removed AWS SDK for Java v1, leaving SDK v2 (2.44.6+) only; boto3 is unaffected. Scala binary compatibility moved 2.12 -> 2.13, so a 2.12 downgrade is not the fix either. --additional-python-modules is itself deprecated in favour of --python-virtual-env and cannot restore a removed class, and MaxCapacity is the legacy Glue 1.0 field that must never be combined with WorkerType and NumberOfWorkers. The alternative accepted answer in real life is pinning GlueVersion to 5.1 (the default for new jobs) until the code is migrated (migrating to Glue 6.0, accessed Oct 2026)."
 }
 ```
 
@@ -1051,32 +1051,32 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
     "Amazon Macie sensitivity scores used as IAM condition keys on the consumer account roles"
   ],
   "correct": 0,
-  "explanation": "Integral Ad Science used AWS Lake Formation with tag-based access control (LF-TBAC) on a Glue Data Catalog-backed lake: database-level tags are inherited by tables and columns, so a handful of tag grants replaces hundreds of per-principal rules - AWS reports exactly two rules in the end. Okta federated the identities and Athena workgroups per business unit supplied billing tags plus query limits. Bucket policies are the scaling problem being solved, not the solution; a Glue security configuration covers only encryption planes (S3 data, CloudWatch logs, bookmarks, data-quality assets); and Macie discovers sensitive data in S3 - it does not grant permissions (AWS Big Data Blog, 2021-09-23, accessed Oct 2026)."
+  "explanation": "Integral Ad Science used AWS Lake Formation with tag-based access control (LF-TBAC) on a Glue Data Catalog-backed lake: database-level tags are inherited by tables and columns, so a handful of tag grants replaces hundreds of per-principal rules: AWS reports exactly two rules in the end. Okta federated the identities and Athena workgroups per business unit supplied billing tags plus query limits. Bucket policies are the scaling problem being solved, not the solution; a Glue security configuration covers only encryption planes (S3 data, CloudWatch logs, bookmarks, data-quality assets); and Macie discovers sensitive data in S3: it does not grant permissions (AWS Big Data Blog, 2021-09-23, accessed Oct 2026)."
 }
 ```
 
 > [!WARNING]
 > ⚠️ **Exam-day traps for this lesson:**
-> - **DynamicFrame first** — `resolveChoice` → `apply_mapping` → `toDF()`; a choice column converted early silently becomes `string`.
-> - **`cast` vs `project`** — cast makes uncastable values `null`; project **drops** the other type's values.
-> - **Bookmarks are batch** — streaming needs `checkpointLocation` + watermarks; there is no bookmark rewind, and reset touches **all** transformations while cleaning **no** outputs.
-> - **`transformation_ctx` is the state key** — change the source path without changing it and files go missing; bookmarks are not concurrency-safe (`MaxConcurrentRuns` default **1**).
-> - **Conditional triggers need a trigger-started chain from a single scheduled/on-demand root** — a manually started job will never fire one; **max 2 crawlers / 50 jobs** per trigger.
-> - **G workers keep 4 vCPU : 16 GB** — only **R.** doubles memory per DPU; G.4X will not fix an OOM.
-> - **`MaxCapacity` is legacy** — Glue ≥2.0 uses `WorkerType` + `NumberOfWorkers`, never both.
-> - **Crawlers bill a 10-minute minimum**; DataBrew does **not** bill DPU-hours (**$0.48/node-hour**, **$1.00/30-min session**) — and its recipe caps at **100 steps**, schedules at **5-minute** intervals.
+> - **DynamicFrame first**: `resolveChoice` → `apply_mapping` → `toDF()`; a choice column converted early silently becomes `string`.
+> - **`cast` vs `project`**: cast makes uncastable values `null`; project **drops** the other type's values.
+> - **Bookmarks are batch**: streaming needs `checkpointLocation` + watermarks; there is no bookmark rewind, and reset touches **all** transformations while cleaning **no** outputs.
+> - **`transformation_ctx` is the state key**: change the source path without changing it and files go missing; bookmarks are not concurrency-safe (`MaxConcurrentRuns` default **1**).
+> - **Conditional triggers need a trigger-started chain from a single scheduled/on-demand root**: a manually started job will never fire one; **max 2 crawlers / 50 jobs** per trigger.
+> - **G workers keep 4 vCPU: 16 GB**: only **R.** doubles memory per DPU; G.4X will not fix an OOM.
+> - **`MaxCapacity` is legacy**: Glue ≥2.0 uses `WorkerType` + `NumberOfWorkers`, never both.
+> - **Crawlers bill a 10-minute minimum**; DataBrew does **not** bill DPU-hours (**$0.48/node-hour**, **$1.00/30-min session**), and its recipe caps at **100 steps**, schedules at **5-minute** intervals.
 > - **Timeout defaults are version-dependent**: 2,880 min (≤4.0) vs **480 min (≥5.0)**, always < 10,080 min.
-> - **DataBrew has six objects and no "data flow"**; Glue has no "ErrorCDC" — the documented names are `ErrorsAsDynamicFrame`, `Spigot` and `EvaluateDataQuality`.
+> - **DataBrew has six objects and no "data flow"**; Glue has no "ErrorCDC": the documented names are `ErrorsAsDynamicFrame`, `Spigot` and `EvaluateDataQuality`.
 > - **Security configuration overrides** encryption passed as a job parameter; bookmarks use **CSE-KMS**, S3/CloudWatch use **SSE-KMS**, and Ray jobs have **no** security configuration.
 > - **The 30% Glue 6.0 cut only applies on 6.0**; 5.1 is the default, and crawlers/Python shell/Ray show no separate 6.0 rate.
-> - **On Glue 6.0, EMRFS and AWS SDK for Java v1 are gone** — any `fs.s3.consistent.*` setting or `com.amazonaws.*` import is stale (S3A + SDK v2 only, boto3 unaffected), and the Scala binary is **2.13**, not 2.12.
-> - **Governed lakes authorize through Lake Formation, not bucket policies** — the AWS-published IAS pattern cut **hundreds of permission rules to exactly two** with **tag-based access control** on the Glue Data Catalog.
+> - **On Glue 6.0, EMRFS and AWS SDK for Java v1 are gone**: any `fs.s3.consistent.*` setting or `com.amazonaws.*` import is stale (S3A + SDK v2 only, boto3 unaffected), and the Scala binary is **2.13**, not 2.12.
+> - **Governed lakes authorize through Lake Formation, not bucket policies**: the AWS-published IAS pattern cut **hundreds of permission rules to exactly two** with **tag-based access control** on the Glue Data Catalog.
 
-> **Comparative Verdict — how this topic compares on exam day**
-> - **Versus another cloud:** this exam tests **AWS services only** — nothing in DEA-C01 asks you to compare Glue with a competitor's hosted Spark. Answer with an AWS service or an AWS-documented behaviour (DPU, quotas, trigger rules); an option that pivots to an unverified third-party benchmark is out of scope by construction.
-> - **Versus self-managed / on-premises (your own EMR or Hadoop):** Glue removes cluster provisioning, patching and idle capacity — you pay **per second while the job runs** ($0.44/DPU-h ≤5.1, $0.308/DPU-h on 6.0, as of Oct 2026) with a 1-minute minimum. The counter-case the exam respects: self-managed EMR remains defensible when you need fine-grained cluster control or a runtime Glue does not offer — the answer must fit the **stated requirement**, not a slogan.
-> - **Versus another AWS service:** **Lambda** wins for sub-15-minute event micro-transforms (GB-second metering, no DPU floor); **Glue pythonshell** for >15-minute single-process Python at 0.0625 DPU; **Glue Spark** for distributed GB–TB joins and partitioned lake writes; **DataBrew** for code-free preparation, cleansing and profiling; **Amazon EMR** when you need full Spark/Hive/Presto cluster control. Wrong answers almost always size the engine to *habit* instead of to volume, latency and who writes the logic.
-> - **Versus a manual, human process:** DataBrew exists because preparation is often analyst work — but scheduled, incremental, governed production runs belong to Glue with bookmarks, triggers, error tables and job insights. Choose the option with the **least unmanaged manual effort**: hand-edited CSVs and ad-hoc scripts are distractors, not bonus points.
+> **Comparative Verdict: how this topic compares on exam day**
+> - **Versus another cloud:** this exam tests **AWS services only**: nothing in DEA-C01 asks you to compare Glue with a competitor's hosted Spark. Answer with an AWS service or an AWS-documented behaviour (DPU, quotas, trigger rules); an option that pivots to an unverified third-party benchmark is out of scope by construction.
+> - **Versus self-managed / on-premises (your own EMR or Hadoop):** Glue removes cluster provisioning, patching and idle capacity, you pay **per second while the job runs** ($0.44/DPU-h ≤5.1, $0.308/DPU-h on 6.0, as of Oct 2026) with a 1-minute minimum. The counter-case the exam respects: self-managed EMR remains defensible when you need fine-grained cluster control or a runtime Glue does not offer, the answer must fit the **stated requirement**, not a slogan.
+> - **Versus another AWS service:** **Lambda** wins for sub-15-minute event micro-transforms (GB-second metering, no DPU floor); **Glue pythonshell** for >15-minute single-process Python at 0.0625 DPU; **Glue Spark** for distributed GB: TB joins and partitioned lake writes; **DataBrew** for code-free preparation, cleansing and profiling; **Amazon EMR** when you need full Spark/Hive/Presto cluster control. Wrong answers almost always size the engine to *habit* instead of to volume, latency and who writes the logic.
+> - **Versus a manual, human process:** DataBrew exists because preparation is often analyst work, but scheduled, incremental, governed production runs belong to Glue with bookmarks, triggers, error tables and job insights. Choose the option with the **least unmanaged manual effort**: hand-edited CSVs and ad-hoc scripts are distractors, not bonus points.
 
 > [!SUCCESS]
 > **Key Takeaways:**
@@ -1089,6 +1089,6 @@ The examinable pattern is **contention removed**: loading writes to S3 while que
 > 7. **Pricing (us-east-1, as of Oct 2026):** Spark **$0.44/DPU-h** (≤5.1) vs **$0.308/DPU-h** (6.0) · Flex **$0.29** · R workers **$0.52** · crawler **$0.44 with a 10-minute minimum** · DataBrew jobs **$0.48/node-hour** (5-node default) and sessions **$1.00/30 min** · Data Catalog free to **1M objects and 1M requests/month**.
 > 8. **Worked math to remember:** 6 DPU × 15 min = **$0.66** (≤5.1) / **$0.462** (6.0) · Flex 6 DPU × 1/3 h = **$0.58** vs **$0.88** · 16 DPU as 16×G.1X or 2×G.8X = **$7.04/h either way** · hourly 2-DPU crawler = **$105.60/month** at the 10-minute minimum vs **$31.68** at true duration · DataBrew 5 nodes × 10 min = **$0.40**.
 > 9. **Glue Studio** generates real PySpark from a node graph; the **Data Preparation Recipe node** imports DataBrew recipes on **Glue ≥4.0** but **not** `GROUP_BY`/`PIVOT`/`UNPIVOT`/`TRANSPOSE`, and rejects recipes containing `UNION`/`JOIN`; preview sessions are **2 DPU / 30 minutes, auto-stopping**.
-> 10. **DataBrew's six objects** are project, dataset, recipe, job (recipe or profile), data lineage and data profile — **no "data flow"**; recipes cap at **100 steps / 100 published versions**, schedules cannot be faster than **5 minutes**, and account quotas include **300 nodes** and **10 concurrent jobs**.
+> 10. **DataBrew's six objects** are project, dataset, recipe, job (recipe or profile), data lineage and data profile: **no "data flow"**; recipes cap at **100 steps / 100 published versions**, schedules cannot be faster than **5 minutes**, and account quotas include **300 nodes** and **10 concurrent jobs**.
 > 11. **Failure design:** route rejects with **`ErrorsAsDynamicFrame`/`errorsFromDF`**, sample with **`Spigot`**, enforce rules with **`EvaluateDataQuality`**, configure **`MaxRetries`/`NotifyDelayAfter`**, set an explicit **timeout** (defaults 2,880 vs 480 minutes by version, ceiling <10,080), and turn on **job run insights** (`--enable-job-insights=true`) for the failing line, last Spark action and root cause.
-> 12. **Performance** comes from partitioned writes with `partitionKeys`, input **grouping beyond ~50,000 files**, `coalesce`/`repartition` for output counts, **auto scaling** (`--enable-auto-scaling=true`, `NumberOfWorkers` = max, Glue ≥3.0) and picking the right meter — plus the **2026 state**: Glue 6.0 GA **2026-08-21 at −30%**, **5.1 the default**, **0.9/1.0/2.0 EOL 2026-04-01**, and exam guide **v1.1 (2025-12-12)** with +8 skills and in-scope **+6/−3**.
+> 12. **Performance** comes from partitioned writes with `partitionKeys`, input **grouping beyond ~50,000 files**, `coalesce`/`repartition` for output counts, **auto scaling** (`--enable-auto-scaling=true`, `NumberOfWorkers` = max, Glue ≥3.0) and picking the right meter: plus the **2026 state**: Glue 6.0 GA **2026-08-21 at −30%**, **5.1 the default**, **0.9/1.0/2.0 EOL 2026-04-01**, and exam guide **v1.1 (2025-12-12)** with +8 skills and in-scope **+6/−3**.

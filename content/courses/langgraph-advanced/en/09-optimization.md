@@ -1,6 +1,6 @@
 ---
 title: "Optimization"
-description: "Optimize LangGraph applications — reduce node calls, caching strategies, batching LLM requests, token management, and graph-level performance tuning."
+description: "Optimize LangGraph applications, reduce node calls, caching strategies, batching LLM requests, token management, and graph-level performance tuning."
 order: 9
 duration: "35 minutes"
 difficulty: "advanced"
@@ -276,7 +276,7 @@ def format_node(state: State) -> dict:
 ```
 
 [!SUCCESS]
-Using different models for different nodes can reduce costs by 5-10x while maintaining quality — use cheap models for routing/simple tasks and expensive models only for complex reasoning.
+Using different models for different nodes can reduce costs by 5-10x while maintaining quality: use cheap models for routing/simple tasks and expensive models only for complex reasoning.
 
 ---
 
@@ -336,7 +336,7 @@ Using different models for different nodes can reduce costs by 5-10x while maint
   "question": "What is a good cache TTL for LLM responses?",
   "options": [
     "Cache forever",
-    "It depends — shorter for dynamic queries, longer for static knowledge",
+    "It depends: shorter for dynamic queries, longer for static knowledge",
     "Never cache LLM responses",
     "1 second"
   ],
@@ -351,7 +351,7 @@ Using different models for different nodes can reduce costs by 5-10x while maint
   "type": "multiple-choice",
   "question": "When should you merge multiple nodes into one?",
   "options": [
-    "Always — fewer nodes is always better",
+    "Always: fewer nodes is always better",
     "When nodes perform trivial transformations that don't benefit from separate checkpointing",
     "Never merge nodes",
     "Only when the graph doesn't compile"

@@ -1,12 +1,12 @@
 ---
-title: "Domain 1.4 — Configuring Virtual Warehouses"
+title: "Domain 1.4, Configuring Virtual Warehouses"
 description: "Deep dive into Snowflake Virtual Warehouses: types, sizes, scaling policies, auto-suspend/resume, multi-cluster warehouses, and best practices for different workload patterns."
 order: 4
 difficulty: intermediate
 duration: "70 min"
 ---
 
-# Domain 1.4 — Configuring Virtual Warehouses
+# Domain 1.4: Configuring Virtual Warehouses
 
 ## Exam Weight
 
@@ -61,7 +61,7 @@ Snowpark-Optimized warehouses are designed for **memory-intensive Snowpark workl
 
 - Provide **16x more memory** per node compared to standard warehouses
 - Each node has more RAM for large in-memory Snowpark operations
-- **More expensive** per credit — use only when memory is the bottleneck
+- **More expensive** per credit: use only when memory is the bottleneck
 - Ideal for: ML model training, large-scale data science, complex Snowpark transformations
 
 ```sql
@@ -118,13 +118,13 @@ ALTER WAREHOUSE WH_BI SET AUTO_SUSPEND = 0;
 ```
 
 **Best practices:**
-- Set auto-suspend **low** (60–300 seconds) for intermittent or unpredictable workloads
+- Set auto-suspend **low** (60 to 300 seconds) for intermittent or unpredictable workloads
 - Set auto-suspend **higher** for warehouses with frequent, back-to-back queries (avoids the 60-second minimum charge on each restart)
 - **Never disable** auto-suspend for development or testing warehouses
 
 ### Auto-Resume
 
-`AUTO_RESUME = TRUE` means the warehouse **automatically starts** the moment a query is submitted — the user does not need to manually resume it:
+`AUTO_RESUME = TRUE` means the warehouse **automatically starts** the moment a query is submitted: the user does not need to manually resume it:
 
 ```sql
 ALTER WAREHOUSE WH_BI SET AUTO_RESUME = TRUE;
@@ -215,8 +215,8 @@ Multi-cluster mode:      [Cluster 1] [Cluster 2] [Cluster 3]
 
 | Mode | Description | When to Use |
 |---|---|---|
-| **Auto-Scale** | `MIN ≠ MAX` — clusters scale up/down dynamically | Variable concurrency |
-| **Maximized** | `MIN = MAX` — all clusters always running | Predictable high concurrency |
+| **Auto-Scale** | `MIN ≠ MAX`: clusters scale up/down dynamically | Variable concurrency |
+| **Maximized** | `MIN = MAX`: all clusters always running | Predictable high concurrency |
 
 ```sql
 -- Auto-scale: 1 to 5 clusters
@@ -287,7 +287,7 @@ CREATE WAREHOUSE WH_BI
 |---|---|
 | Slow individual queries | **Scale UP** (larger size) |
 | Many concurrent queries queuing | **Scale OUT** (multi-cluster) |
-| Development/testing | Small size, auto-suspend 60–120s |
+| Development/testing | Small size, auto-suspend 60 to 120s |
 | ML model training with Snowpark | Snowpark-Optimized warehouse |
 | Overnight batch ETL | Large size, disable during day |
 | Different teams | Separate dedicated warehouses |

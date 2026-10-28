@@ -9,19 +9,19 @@ author: "Google Gemini"
 
 ## Learning AI Journey
 
-This final module introduces you to AI that creates things—pictures, art, and even new ideas. More importantly, we'll shift your mindset from "learning AI" to **"living with AI"** by building your personalized strategy.
+This final module introduces you to AI that creates things: pictures, art, and even new ideas. More importantly, we'll shift your mindset from "learning AI" to **"living with AI"** by building your personalized strategy.
 
 ---
 
 ### Image & Creation Tools
 
-#### Generative AI—AI That Makes Things Up!
+#### Generative AI: AI That Makes Things Up!
 
 Until now, we've used AI to process and summarize existing data. **Generative AI** is different: it creates something entirely new from scratch based on your instructions. The most popular examples are text-to-image generators like **DALL-E, Midjourney, or Adobe Firefly**.
 
 **The Best Analogy: The Digital Art Director**
 
-You hire an Art Director. You don't need to know how to paint; you just need to describe the final product perfectly. You tell the Art Director exactly what you want—the style, the colors, the lighting, the feeling—and they bring it to life. Generative AI works the same way.
+You hire an Art Director. You don't need to know how to paint; you just need to describe the final product perfectly. You tell the Art Director exactly what you want, the style, the colors, the lighting, the feeling, and they bring it to life. Generative AI works the same way.
 
 #### Talking to the Visual AI
 

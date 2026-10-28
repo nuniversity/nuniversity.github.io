@@ -14,7 +14,7 @@ Rust's lifetime elision rules make most lifetime annotations unnecessary. Unders
 
 The compiler applies these rules automatically:
 
-### Rule 1 — Input Lifetimes
+### Rule 1: Input Lifetimes
 
 Each elided reference in function parameters gets a **distinct** lifetime:
 
@@ -24,7 +24,7 @@ Each elided reference in function parameters gets a **distinct** lifetime:
 fn foo<'a, 'b>(x: &'a i32, y: &'b str) {}
 ```
 
-### Rule 2 — Single Input Lifetime
+### Rule 2: Single Input Lifetime
 
 If there's exactly one input lifetime, it's assigned to all output references:
 
@@ -34,7 +34,7 @@ If there's exactly one input lifetime, it's assigned to all output references:
 fn first_word<'a>(s: &'a str) -> &'a str { unimplemented!() }
 ```
 
-### Rule 3 — Method Receiver
+### Rule 3: Method Receiver
 
 If there's `&self` or `&mut self`, its lifetime is assigned to all output references:
 

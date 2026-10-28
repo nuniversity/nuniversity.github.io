@@ -8,7 +8,7 @@ difficulty: "intermediário"
 
 # Ganchos Pre-Commit
 
-Ganchos pre-commit são verificações automatizadas que executam **antes** de você fazer commit do código. Eles capturam problemas cedo — antes que cheguem ao repositório — economizando tempo de revisão de código e prevenindo que código ruim seja mesclado.
+Ganchos pre-commit são verificações automatizadas que executam **antes** de você fazer commit do código. Eles capturam problemas cedo, antes que cheguem ao repositório, economizando tempo de revisão de código e prevenindo que código ruim seja mesclado.
 
 ## O que São Ganchos Git?
 
@@ -575,7 +575,7 @@ pre-commit install --install-hooks
 
 - **Ganchos pre-commit** capturam problemas antes que cheguem ao repositório
 - **O framework pre-commit** torna os ganchos fáceis de instalar, configurar e compartilhar
-- **Ganchos executam apenas em arquivos staged** — feedback rápido, verificações incrementais
+- **Ganchos executam apenas em arquivos staged**: feedback rápido, verificações incrementais
 - **Ganchos comuns**: Linting (ruff, flake8), formatação (black, isort), segurança (bandit, detect-secrets), verificação de tipo (mypy)
 - **Ganchos locais**: Executam comandos do sistema, scripts personalizados ou suítes de teste
 - **Integração com CI**: pre-commit funciona localmente e em pipelines CI

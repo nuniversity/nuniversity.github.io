@@ -192,7 +192,7 @@ new_service.register_user(2, "Charlie", "charlie@example.com")
 ```
 
 > [!SUCCESS]
-> `UserService` no longer depends on `MySQLUserRepository`. Both depend on the `UserRepository` abstraction. You can swap implementations without changing business logic — perfect for testing, migration, or supporting multiple databases.
+> `UserService` no longer depends on `MySQLUserRepository`. Both depend on the `UserRepository` abstraction. You can swap implementations without changing business logic: perfect for testing, migration, or supporting multiple databases.
 
 ```mermaid
 flowchart TD
@@ -626,15 +626,15 @@ def test_payment_handler():
 | **Change impact** | Cascading changes | Isolated changes |
 
 > [!NOTE]
-> DIP adds some initial complexity (abstract classes, dependency injection), but it pays off dramatically as your application grows. For very small scripts, it may be overkill — use judgment.
+> DIP adds some initial complexity (abstract classes, dependency injection), but it pays off dramatically as your application grows. For very small scripts, it may be overkill: use judgment.
 
 ## Relationship Between DIP and Other SOLID Principles
 
 | Principle | Relationship |
 |-----------|-------------|
 | **SRP** | DIP helps achieve SRP by separating creation (wiring) from business logic |
-| **OCP** | DIP enables OCP — you can add new implementations without modifying clients |
-| **LSP** | DIP relies on LSP — injected implementations must be substitutable |
+| **OCP** | DIP enables OCP; you can add new implementations without modifying clients |
+| **LSP** | DIP relies on LSP: injected implementations must be substitutable |
 | **ISP** | DIP interfaces should be small (ISP) to minimize coupling between clients and implementations |
 
 ```mermaid
@@ -695,7 +695,7 @@ flowchart TD
 ## Summary
 
 - **DIP**: High-level modules should not depend on low-level modules. Both should depend on abstractions
-- **Mechanism**: Dependency Injection — pass dependencies in via constructor, setter, or method parameter
+- **Mechanism**: Dependency Injection: pass dependencies in via constructor, setter, or method parameter
 - **Composition Root**: Single place to wire up the entire dependency graph
 - **Benefits**: Testability, flexibility, swapability, reduced coupling
 - **Testing**: Mock abstractions, not concrete classes
@@ -703,4 +703,4 @@ flowchart TD
 - **Trade-off**: More interfaces, but far more maintainable as the system grows
 
 > [!SUCCESS]
-> DIP is the cornerstone of clean architecture. By inverting dependencies toward abstractions, you create a system where business logic is independent of infrastructure — making it testable, flexible, and resilient to change.
+> DIP is the cornerstone of clean architecture. By inverting dependencies toward abstractions, you create a system where business logic is independent of infrastructure: making it testable, flexible, and resilient to change.

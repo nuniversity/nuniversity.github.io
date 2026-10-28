@@ -1,6 +1,6 @@
 ---
 title: "Definindo Papéis, Objetivos, Históricos e Delegação"
-description: "Domine os atributos de agente — papel, objetivo, histórico, delegação, modo verbose e memória — para colaboração multi-agente especializada."
+description: "Domine os atributos de agente, papel, objetivo, histórico, delegação, modo verbose e memória, para colaboração multi-agente especializada."
 order: 2
 duration: "45 min"
 difficulty: "intermediate"
@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Definindo Papéis, Objetivos, Históricos e Delegação
 
-Um agente bem definido é a base de um sistema CrewAI confiável. Cada atributo — papel, objetivo, histórico, configurações de delegação — molda como o agente se comporta, colabora e delega tarefas. Acertar esses atributos é a diferença entre um sistema que produz texto genérico e um que entrega resultados de nível especialista.
+Um agente bem definido é a base de um sistema CrewAI confiável. Cada atributo, papel, objetivo, histórico, configurações de delegação, molda como o agente se comporta, colabora e delega tarefas. Acertar esses atributos é a diferença entre um sistema que produz texto genérico e um que entrega resultados de nível especialista.
 
 ---
 
@@ -147,8 +147,8 @@ agent = Agent(
 ```
 
 Três níveis de verbosidade:
-- `False` — sem saída (padrão)
-- `True` — logs detalhados passo a passo
+- `False`: sem saída (padrão)
+- `True`: logs detalhados passo a passo
 - Um enum `Verbose` com controle granular (disponível em versões recentes)
 
 ```python
@@ -216,7 +216,7 @@ sequenceDiagram
 
 ---
 
-## Agentes Especializados com Delegação — Exemplo Completo
+## Agentes Especializados com Delegação: Exemplo Completo
 
 ```python
 from crewai import Agent, Task, Crew
@@ -346,8 +346,8 @@ resultado = crew.kickoff()
 
 | Atributo | Tipo | Padrão | Efeito |
 | :--- | :--- | :--- | :--- |
-| `role` | `str` | — (obrigatório) | Define a persona do agente |
-| `goal` | `str` | — (obrigatório) | Define o objetivo |
+| `role` | `str` |: (obrigatório) | Define a persona do agente |
+| `goal` | `str` |: (obrigatório) | Define o objetivo |
 | `backstory` | `str` | `""` | Adiciona contexto narrativo |
 | `allow_delegation` | `bool` | `False` | Ativa delegação entre agentes |
 | `verbose` | `bool` / `Verbose` | `False` | Ativa logging passo a passo |
@@ -391,7 +391,7 @@ resultado = crew.kickoff()
   "question": "Sua equipe de pesquisa tem 4 agentes todos com allow_delegation=True. A tarefa fica sendo passada entre agentes sem ser concluída. Qual é o problema?",
   "options": [
     "O LLM está muito lento",
-    "Muitos agentes podem delegar — apenas gerentes devem delegar",
+    "Muitos agentes podem delegar: apenas gerentes devem delegar",
     "O modo verbose está causando atrasos",
     "As tarefas são muito complexas"
   ],

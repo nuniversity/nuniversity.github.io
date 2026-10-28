@@ -469,4 +469,4 @@ graph TD
 8. **Refactorización de límites**: Toma una función que mezcle el análisis de HTTP, la lógica de negocio y el acceso a la base de datos. Divídela en tres capas: controlador, caso de uso y repositorio. Muestra cada capa.
 
 > [!SUCCESS]
-> Has completado la Lección 1. Recuerda: la arquitectura se trata de las decisiones que importan — y de hacerlas reversibles.
+> Has completado la Lección 1. Recuerda: la arquitectura se trata de las decisiones que importan, y de hacerlas reversibles.

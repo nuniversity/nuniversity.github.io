@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Integración de Base de Conocimiento y Procesamiento de Documentos
 
-Un agente es tan conocedor como los documentos a los que puede acceder. Construir un pipeline robusto de ingesta de documentos — desde archivos brutos hasta una base de conocimiento buscable — es una habilidad fundamental de ingeniería para agentes de producción.
+Un agente es tan conocedor como los documentos a los que puede acceder. Construir un pipeline robusto de ingesta de documentos, desde archivos brutos hasta una base de conocimiento buscable, es una habilidad fundamental de ingeniería para agentes de producción.
 
 ---
 
@@ -495,7 +495,7 @@ def sanitize_document(text: str) -> str:
   "type": "multiple-choice",
   "question": "La base de conocimiento de un agente contiene documentos de RRHH con direcciones de correo electrónico de empleados. ¿Qué hacer antes de indexar?",
   "options": [
-    "Nada — el agente necesita los correos para responder preguntas",
+    "Nada: el agente necesita los correos para responder preguntas",
     "Sanitizar los documentos eliminando o enmascarando PII",
     "Indexar todo y agregar un filtro después",
     "Cambiar a un modelo de embedding diferente"
@@ -512,7 +512,7 @@ def sanitize_document(text: str) -> str:
 
 - Diferentes formatos (PDF, HTML, Markdown) requieren cargadores específicos.
 - Los PDFs escaneados requieren procesamiento OCR antes de la extracción de texto.
-- La estrategia de división de texto — recursiva, basada en tokens o consciente de estructura — impacta directamente la calidad de la recuperación.
+- La estrategia de división de texto, recursiva, basada en tokens o consciente de estructura, impacta directamente la calidad de la recuperación.
 - Los metadatos (fuente, página, timestamp, hash) hacen que los fragmentos sean filtrables y trazables.
 - La indexación incremental usa hashes de contenido para saltar duplicados y evitar reconstrucciones completas.
 - Actualizar un documento requiere eliminar fragmentos antiguos y re-indexar el nuevo contenido.

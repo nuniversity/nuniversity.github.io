@@ -725,7 +725,7 @@ print(f"Top Category: {result.top_category} (${result.top_category_revenue})")
 - La **monad Result** proporciona un manejo de errores explícito sin excepciones
 - La **evaluación perezosa** con propiedades y caché mejora el rendimiento
 - Las pruebas basadas en propiedades y las funciones puras son una combinación poderosa
-- El objetivo no es la pureza sino la **practicalidad** — usa cada paradigma donde brille
+- El objetivo no es la pureza sino la **practicalidad**: usa cada paradigma donde brille
 
 > [!SUCCESS]
-> ¡Has completado el curso de codificación funcional y declarativa! Ya tienes las herramientas para escribir Python más predecible, testeable y expresivo. Recuerda: el mejor código usa el paradigma adecuado para el trabajo adecuado — combina FP y OOP de forma pragmática.
+> ¡Has completado el curso de codificación funcional y declarativa! Ya tienes las herramientas para escribir Python más predecible, testeable y expresivo. Recuerda: el mejor código usa el paradigma adecuado para el trabajo adecuado: combina FP y OOP de forma pragmática.

@@ -1,15 +1,15 @@
 ---
-title: "Domain 4.4 — Data Transformation in Snowflake"
+title: "Domain 4.4, Data Transformation in Snowflake"
 description: "Master structured, semi-structured, and unstructured data processing with SQL functions, window functions, and Snowpark transformations."
 order: 16
 difficulty: intermediate
 duration: 55
 ---
 
-# Domain 4.4 — Data Transformation in Snowflake
+# Domain 4.4: Data Transformation in Snowflake
 
 > [!NOTE]
-> **Exam Domain 4.4** — *Data Transformation* contributes to the **Performance Optimization, Querying, and Transformation** domain, which is **21%** of the COF-C03 exam.
+> **Exam Domain 4.4**: *Data Transformation* contributes to the **Performance Optimization, Querying, and Transformation** domain, which is **21%** of the COF-C03 exam.
 
 ---
 
@@ -34,7 +34,7 @@ mindmap
 
 ---
 
-## 1. Semi-Structured Data — VARIANT
+## 1. Semi-Structured Data: VARIANT
 
 Snowflake stores JSON, Avro, ORC, Parquet, and XML natively in a **VARIANT** column. No schema definition is needed at load time.
 
@@ -60,9 +60,9 @@ FROM events;
 ```
 
 > [!WARNING]
-> Without `::TYPE` casting, expressions return a **VARIANT** — comparisons, sorting, and GROUP BY may behave unexpectedly.
+> Without `:TYPE` casting, expressions return a **VARIANT**: comparisons, sorting, and GROUP BY may behave unexpectedly.
 
-### FLATTEN — Exploding Arrays
+### FLATTEN: Exploding Arrays
 
 ```mermaid
 flowchart LR
@@ -175,7 +175,7 @@ GROUP BY GROUPING SETS ((region), (product), (region, product), ());
 ```
 
 > [!WARNING]
-> `ROLLUP(a, b)` ≠ `ROLLUP(b, a)`. Subtotals are generated **right-to-left** along the list — order matters.
+> `ROLLUP(a, b)` ≠ `ROLLUP(b, a)`. Subtotals are generated **right-to-left** along the list: order matters.
 
 ---
 
@@ -215,7 +215,7 @@ FROM sales;
 
 | Function | Ties get same rank? | Gaps after ties? |
 |---|---|---|
-| `ROW_NUMBER` | No — arbitrary tiebreak | No |
+| `ROW_NUMBER` | No: arbitrary tiebreak | No |
 | `RANK` | **Yes** | **Yes** |
 | `DENSE_RANK` | **Yes** | **No** |
 
@@ -234,7 +234,7 @@ FROM orders;
 ```
 
 > [!WARNING]
-> `LAST_VALUE` default frame is `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` — it returns the **current** row, not the last. Always add `ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`.
+> `LAST_VALUE` default frame is `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`; it returns the **current** row, not the last. Always add `ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`.
 
 ### Running Aggregates
 
@@ -322,7 +322,7 @@ result.write.mode("overwrite").save_as_table("revenue_summary")
 ```
 
 > [!NOTE]
-> Snowpark uses **lazy evaluation** — transformations build a logical plan. Execution only occurs on action calls: `.collect()`, `.show()`, or a write operation.
+> Snowpark uses **lazy evaluation**: transformations build a logical plan. Execution only occurs on action calls: `.collect()`, `.show()`, or a write operation.
 
 ---
 
@@ -344,7 +344,7 @@ flowchart TD
     C --> GOOD4["✅ WITH cte AS (...)\nreuse in main query"]
 ```
 
-### Filter Early — Push Predicates Up
+### Filter Early: Push Predicates Up
 
 ```sql
 -- ❌ Slow: joins all rows, then filters
@@ -386,7 +386,7 @@ FROM orders o
 JOIN customers c ON o.cust_id = c.id;
 ```
 
-### Dynamic Tables — Declarative Incremental Refresh
+### Dynamic Tables: Declarative Incremental Refresh
 
 Dynamic Tables define a transformation result set and let Snowflake determine how to refresh it incrementally.
 
@@ -413,11 +413,11 @@ AS
 
 > [!SUCCESS]
 > **Key Takeaways for the Exam**
-> - `v:key::TYPE` — colon notation for key traversal, `[n]` for array index, `::` to cast VARIANT to SQL type.
+> - `v:key:TYPE`: colon notation for key traversal, `[n]` for array index, `:` to cast VARIANT to SQL type.
 > - `LATERAL FLATTEN` explodes arrays/objects into rows; key output columns: `VALUE`, `KEY`, `INDEX`, `PATH`.
 > - `ROLLUP` generates subtotals right-to-left; `CUBE` generates all combinations; `GROUPING SETS` defines explicit groupings.
 > - `RANK` has gaps after ties; `DENSE_RANK` does not; `ROW_NUMBER` is always unique.
-> - `LAST_VALUE` default frame stops at current row — always add `ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`.
+> - `LAST_VALUE` default frame stops at current row: always add `ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`.
 > - Snowpark = lazy evaluation; computation only triggers on action calls (`.collect()`, `.show()`, write).
 > - Directory Tables expose file metadata from stages; enabled with `DIRECTORY = (ENABLE = TRUE)`.
 > - Filter early and project only needed columns to maximise micro-partition pruning.
@@ -436,7 +436,7 @@ AS
 
 ---
 
-**2.** `LATERAL FLATTEN(INPUT => v:tags)` — which column holds the actual tag value?
+**2.** `LATERAL FLATTEN(INPUT => v:tags)`; which column holds the actual tag value?
 
 - A) `KEY`
 - B) `INDEX`

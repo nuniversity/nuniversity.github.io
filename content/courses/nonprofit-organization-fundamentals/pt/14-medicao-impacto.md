@@ -1,13 +1,13 @@
 ---
 title: "Medição de Impacto em ONGs"
-description: "Curso aprofundado sobre medição e gestão de impacto no terceiro setor brasileiro: cadeia de resultados e o vocabulário exato (produto × resultado × impacto), Teoria da Mudança montada do zero, MROSC artigo por artigo (incluído o art. 56 revogado), frameworks internacionais (ToC, IRIS+, GRI, IMP, OCDE-DAC e SROI), estado da prática no país com dados e fontes, linha de base × meta com aritmética, contribuição × atribuição em diferença-em-diferenças, SROI calculado passo a passo com ajustes e sensibilidade, painel de KPIs com fonte, frequência e responsável, matriz de maturidade, tabela de erros comuns × correção, casos reais de medição com dados verificados (Instituto Sou da Paz, Todos Pela Educação, TETO/FGV, Fundação Itaú e Habitat) com a análise do que cada um mede, como mede e o que copiar — incluindo impact washing e dois exemplos calculados — e questões práticas comentadas."
+description: "Curso aprofundado sobre medição e gestão de impacto no terceiro setor brasileiro: cadeia de resultados e o vocabulário exato (produto × resultado × impacto), Teoria da Mudança montada do zero, MROSC artigo por artigo (incluído o art. 56 revogado), frameworks internacionais (ToC, IRIS+, GRI, IMP, OCDE-DAC e SROI), estado da prática no país com dados e fontes, linha de base × meta com aritmética, contribuição × atribuição em diferença-em-diferenças, SROI calculado passo a passo com ajustes e sensibilidade, painel de KPIs com fonte, frequência e responsável, matriz de maturidade, tabela de erros comuns × correção, casos reais de medição com dados verificados (Instituto Sou da Paz, Todos Pela Educação, TETO/FGV, Fundação Itaú e Habitat) com a análise do que cada um mede, como mede e o que copiar, incluindo impact washing e dois exemplos calculados, e questões práticas comentadas."
 order: 14
 difficulty: "intermediate"
 duration: "120 min"
 ---
 # Medição de Impacto em ONGs
 
-Medir impacto é transformar a promessa da missão em evidência verificável. Enquanto a prestação de contas prova que o dinheiro foi gasto conforme o plano, a evidência de impacto prova que a vida das pessoas mudou **por causa da intervenção** — e é essa segunda prova que financiadores, empresas e doadores individuais estão passando a exigir. A leitura do IDIS publicada em 09/12/2025 resume o movimento: monitoramento e avaliação integrados à gestão deixam de ser exigência burocrática e viram **alicerce de transparência, confiança e sustentabilidade**, em um ciclo virtuoso descrito pela própria pesquisa:
+Medir impacto é transformar a promessa da missão em evidência verificável. Enquanto a prestação de contas prova que o dinheiro foi gasto conforme o plano, a evidência de impacto prova que a vida das pessoas mudou **por causa da intervenção**, e é essa segunda prova que financiadores, empresas e doadores individuais estão passando a exigir. A leitura do IDIS publicada em 09/12/2025 resume o movimento: monitoramento e avaliação integrados à gestão deixam de ser exigência burocrática e viram **alicerce de transparência, confiança e sustentabilidade**, em um ciclo virtuoso descrito pela própria pesquisa:
 
 ```text
 ┌───────────────────────────────────────────────────────────────────────┐
@@ -25,10 +25,10 @@ Medir impacto é transformar a promessa da missão em evidência verificável. E
 Esta lição percorre, nesta ordem: o vocabulário que evita os erros mais caros do setor; o marco legal brasileiro (MROSC), incluído o dispositivo de remanejamento que **já não existe mais**; os frameworks internacionais e o que cada um **não** resolve; o estado da prática no Brasil com números e fontes; o desenho do sistema de medição do mais barato ao mais caro; a aritmética de linha de base × meta e de contribuição × atribuição; o SROI calculado com números; um painel de KPIs pronto para copiar; a matriz de maturidade; a tabela de erros × correção; os casos reais de medição com dados verificados; e as questões práticas.
 
 > [!NOTE]
-> **A frase que define a disciplina:** só um estudo de impacto — com desenho que permite **atribuição causal** — autoriza a dizer "graças ao nosso programa". Recibo, relatório financeiro e certidão de pagamento comprovam **conformidade**, não **mudança**. O setor brasileiro erra ao tratar recibo como resultado.
+> **A frase que define a disciplina:** só um estudo de impacto, com desenho que permite **atribuição causal**, autoriza a dizer "graças ao nosso programa". Recibo, relatório financeiro e certidão de pagamento comprovam **conformidade**, não **mudança**. O setor brasileiro erra ao tratar recibo como resultado.
 
 > [!NOTE]
-> **Como usar esta lição.** Cada seção termina com algo aplicável no mês seguinte: uma fórmula, um parâmetro de plano de trabalho, uma coluna de painel ou uma pergunta de escuta. Se você tiver de escolher um único ponto de partida, comece pela **linha de base** (Seção 5.5) — sem ela, nenhum outro número é defensável.
+> **Como usar esta lição.** Cada seção termina com algo aplicável no mês seguinte: uma fórmula, um parâmetro de plano de trabalho, uma coluna de painel ou uma pergunta de escuta. Se você tiver de escolher um único ponto de partida, comece pela **linha de base** (Seção 5.5): sem ela, nenhum outro número é defensável.
 
 ---
 
@@ -36,7 +36,7 @@ Esta lição percorre, nesta ordem: o vocabulário que evita os erros mais caros
 
 ### 1.1 A cadeia de resultados (modelo lógico)
 
-Toda medição de impacto séria começa por separar os cinco níveis da cadeia. Confundir produto com resultado é o erro mais caro do setor — ele faz a ONG entregar relatórios bonitos que não sustentam nenhuma tese de impacto.
+Toda medição de impacto séria começa por separar os cinco níveis da cadeia. Confundir produto com resultado é o erro mais caro do setor: ele faz a ONG entregar relatórios bonitos que não sustentam nenhuma tese de impacto.
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -71,14 +71,14 @@ No jargão internacional (e em vários editais), os três níveis finais têm no
 
 | Conceito | Nível na cadeia | Pergunta que responde | Exemplo concreto | O que **não** prova | Quem costuma pedir |
 |---|---|---|---|---|---|
-| **Output** (produto) | Produto / resultado imediato | O que entregamos? | 80 sessões apresentadas; 240 alunos concluintes; 92% de frequência; 300 mentorias realizadas | Nenhuma mudança no público | Poder público — MROSC, art. 64 |
+| **Output** (produto) | Produto / resultado imediato | O que entregamos? | 80 sessões apresentadas; 240 alunos concluintes; 92% de frequência; 300 mentorias realizadas | Nenhuma mudança no público | Poder público: MROSC, art. 64 |
 | **Outcome** (resultado) | Resultado de médio prazo | O que mudou em quem participou? | ampliação de repertório; hábito de frequentar; renda de artistas locais; evasão de 12% → 9,6%; autonomia declarada | **Quem** causou a mudança (atribuição) | Doadores, empresas e financiadores |
-| **Impact** (impacto) | Impacto de longo prazo | A mudança é atribuível à nossa intervenção? | +22% de escolarização subsequente **vs contragrupo**; permanência escolar sustentada por 5 anos | — (é o nível máximo) | Estudo, imprensa, decisão de escala |
+| **Impact** (impacto) | Impacto de longo prazo | A mudança é atribuível à nossa intervenção? | +22% de escolarização subsequente **vs contragrupo**; permanência escolar sustentada por 5 anos |: (é o nível máximo) | Estudo, imprensa, decisão de escala |
 
-**Exemplo 1 — o mesmo programa cultural em três frases.** Uma companhia de teatro financiada por edital pode escrever: (i) *"apresentamos 80 sessões para 12 mil pessoas"* → **output**; (ii) *"62% do público relatou ampliação de repertório e 45% voltou a frequentar atividades culturais ao menos uma vez por mês"* → **outcome**; (iii) *"a programação gratuita expandida respondeu por 9 pontos percentuais a mais de frequência cultural no distrito, comparado a um distrito semelhante sem a programação"* → **impacto**, porque só a frase (iii) traz comparação capaz de sustentar atribuição. Apenas a segunda frase sustenta tese de impacto; a primeira, isolada, sustenta apenas execução.
+**Exemplo 1, o mesmo programa cultural em três frases.** Uma companhia de teatro financiada por edital pode escrever: (i) *"apresentamos 80 sessões para 12 mil pessoas"* → **output**; (ii) *"62% do público relatou ampliação de repertório e 45% voltou a frequentar atividades culturais ao menos uma vez por mês"* → **outcome**; (iii) *"a programação gratuita expandida respondeu por 9 pontos percentuais a mais de frequência cultural no distrito, comparado a um distrito semelhante sem a programação"* → **impacto**, porque só a frase (iii) traz comparação capaz de sustentar atribuição. Apenas a segunda frase sustenta tese de impacto; a primeira, isolada, sustenta apenas execução.
 
 > [!WARNING]
-> **Confundir output com impacto é o erro que mais aparece em prestação de contas e em site institucional.** "240 alunos concluintes" é produto; "240 alunos mudaram de vida" é impacto — e a segunda frase, sem desenho de avaliação, é uma afirmação **não demonstrada**. Regra de bolso: se a frase não traz comparação (com meta, com linha de base ou com grupo externo), ela descreve **entrega**, não **mudança**.
+> **Confundir output com impacto é o erro que mais aparece em prestação de contas e em site institucional.** "240 alunos concluintes" é produto; "240 alunos mudaram de vida" é impacto, e a segunda frase, sem desenho de avaliação, é uma afirmação **não demonstrada**. Regra de bolso: se a frase não traz comparação (com meta, com linha de base ou com grupo externo), ela descreve **entrega**, não **mudança**.
 
 ### 1.3 Taxonomia de indicadores com exemplos (programa de educação)
 
@@ -96,11 +96,11 @@ No jargão internacional (e em vários editais), os três níveis finais têm no
 |---|---|---|---|
 | **Monitoramento** | Estamos entregando o que combinamos? | **Eficiência** e cumprimento de metas | Execução e progresso contínuos |
 | **Avaliação** | A mudança aconteceu? | **Efetividade** e impacto | Juízo sobre mérito, relevância, eficiência, impacto e sustentabilidade |
-| **Estudo de impacto** | A mudança é atribuível à nossa intervenção? | **Atribuição causal** | Grupo de comparação ou método equivalente — o único que justifica "graças ao nosso programa" |
+| **Estudo de impacto** | A mudança é atribuível à nossa intervenção? | **Atribuição causal** | Grupo de comparação ou método equivalente, o único que justifica "graças ao nosso programa" |
 
-Os seis critérios da **OCDE-DAC** (relevância, coerência, efetividade, eficiência, impacto e sustentabilidade) são o vocabulário padrão dessas avaliações externas — ver Seção 3.4.
+Os seis critérios da **OCDE-DAC** (relevância, coerência, efetividade, eficiência, impacto e sustentabilidade) são o vocabulário padrão dessas avaliações externas: ver Seção 3.4.
 
-- **🔢 Você sabia?** **90,7% dos profissionais consultados monitoram seus projetos, mas apenas 17,4% declaram fazer avaliação de impacto** (IDIS, 2018, com 86 profissionais de cerca de 80 organizações). Entre as organizações que monitoram *todos* os projetos, só **31,9%** avaliam impacto de todos. A assimetria não é de orçamento: é de desenho — o setor comprova execução, não mudança.
+- **🔢 Você sabia?** **90,7% dos profissionais consultados monitoram seus projetos, mas apenas 17,4% declaram fazer avaliação de impacto** (IDIS, 2018, com 86 profissionais de cerca de 80 organizações). Entre as organizações que monitoram *todos* os projetos, só **31,9%** avaliam impacto de todos. A assimetria não é de orçamento: é de desenho, o setor comprova execução, não mudança.
 
 ### 1.5 Quem pede o quê: a regra prática de negociação
 
@@ -118,11 +118,11 @@ Os seis critérios da **OCDE-DAC** (relevância, coerência, efetividade, efici�
 
 ## 2. Marco Legal Brasileiro: o MROSC Obriga a Pensar em Impacto
 
-A **Lei nº 13.019/2014** (redação da Lei nº 13.204/2015) é a norma de referência de monitoramento e avaliação no terceiro setor brasileiro. Ela não usa a palavra "impacto" por acaso: ela escreve, em cinco pontos distintos, que a parceria precisa ser aferida — e aferição sem indicador não existe.
+A **Lei nº 13.019/2014** (redação da Lei nº 13.204/2015) é a norma de referência de monitoramento e avaliação no terceiro setor brasileiro. Ela não usa a palavra "impacto" por acaso: ela escreve, em cinco pontos distintos, que a parceria precisa ser aferida, e aferição sem indicador não existe.
 
 ### 2.1 Os dispositivos que exigem aferição
 
-> **Art. 22, IV:** o plano de trabalho deve conter a "definição dos parâmetros a serem utilizados para a aferição do cumprimento das metas" — a redação original exigia "indicadores, qualitativos e quantitativos".
+> **Art. 22, IV:** o plano de trabalho deve conter a "definição dos parâmetros a serem utilizados para a aferição do cumprimento das metas": a redação original exigia "indicadores, qualitativos e quantitativos".
 
 > **Art. 58:** "A administração pública promoverá o **monitoramento e a avaliação** do cumprimento do objeto da parceria."
 
@@ -132,13 +132,13 @@ A **Lei nº 13.019/2014** (redação da Lei nº 13.204/2015) é a norma de refer
 
 > **Art. 64:** a prestação de contas deve permitir avaliar o andamento, com "descrição pormenorizada das atividades realizadas e a **comprovação do alcance das metas e dos resultados esperados**".
 
-- **🔢 Você sabia?** O art. 58, § 2º, da Lei nº 13.019/2014 não manda apenas ouvir: manda **usar a escuta para reorientar e ajustar metas e atividades**. Ou seja, o ordenador de despesas tem **dever legal de corrigir rota com base no que os beneficiários dizem**. Parceria de 24 meses sem pesquisa de satisfação não é economia — é descumprimento de um comando expresso, sempre que possível executável.
+- **🔢 Você sabia?** O art. 58, § 2º, da Lei nº 13.019/2014 não manda apenas ouvir: manda **usar a escuta para reorientar e ajustar metas e atividades**. Ou seja, o ordenador de despesas tem **dever legal de corrigir rota com base no que os beneficiários dizem**. Parceria de 24 meses sem pesquisa de satisfação não é economia: é descumprimento de um comando expresso, sempre que possível executável.
 
 ### 2.2 Arts. 66 e 67: quem entrega o quê
 
-- **Art. 66:** a entrega se divide em **Relatório de Execução do Objeto** (comparativo de metas propostas × resultados alcançados) e **Relatório de Execução Financeira** — dois relatórios, com funções distintas;
+- **Art. 66:** a entrega se divide em **Relatório de Execução do Objeto** (comparativo de metas propostas × resultados alcançados) e **Relatório de Execução Financeira**: dois relatórios, com funções distintas;
 - **Art. 67:** o gestor emite **parecer técnico conclusivo** apoiado no monitoramento e avaliação;
-- **Arts. 25 e 35-A:** em atuação em rede, a responsabilidade pelo M&A é **integralmente da OSC celebrante** — o M&A da rede é dela, e não se divide entre parceiros.
+- **Arts. 25 e 35-A:** em atuação em rede, a responsabilidade pelo M&A é **integralmente da OSC celebrante**, o M&A da rede é dela, e não se divide entre parceiros.
 
 ### 2.3 O art. 56 morreu: remanejamento de valores hoje é apostilamento
 
@@ -147,11 +147,11 @@ Este é o ponto em que material desatualizado continua circulando em apostilas e
 | Antes (texto revogado) | Hoje (norma vigente) |
 |---|---|
 | **Art. 56** da Lei nº 13.019/2014 permitia remanejar até **25%** do valor entre itens de despesa | **Revogado** pela Lei nº 13.204/2015 (art. 9º, II) |
-| — | Federalmente vale o **Decreto nº 8.726/2016, art. 43**: ajuste por **apostilamento**, admitido **sem autorização prévia até 10% do valor global** (§ 4º, com redação do Decreto nº 11.948/2024) |
+|: | Federalmente vale o **Decreto nº 8.726/2016, art. 43**: ajuste por **apostilamento**, admitido **sem autorização prévia até 10% do valor global** (§ 4º, com redação do Decreto nº 11.948/2024) |
 | "Posso remanejar 25%" | **Valores** são ajustados na forma do decreto; **metas mudam só por termo aditivo ou apostila** (art. 57) |
 
 > [!IMPORTANT]
-> **Flexibilidade de rubrica não é flexibilidade de meta — e o percentual de 25% não existe mais.** Dois erros distintos se acumulam aqui: (i) citar o art. 56 com 25% como se estivesse vigente (está **revogado**); (ii) tratar ajuste de valor como licença para recalcular entregas pelo caminho. Metas, indicadores e parâmetros de aferição do art. 22, IV mudam **só por termo aditivo ou apostila** (art. 57). Organizações que confundem os dois chegam à prestação de contas com resultado abaixo do parametrizado — e glosa.
+> **Flexibilidade de rubrica não é flexibilidade de meta, e o percentual de 25% não existe mais.** Dois erros distintos se acumulam aqui: (i) citar o art. 56 com 25% como se estivesse vigente (está **revogado**); (ii) tratar ajuste de valor como licença para recalcular entregas pelo caminho. Metas, indicadores e parâmetros de aferição do art. 22, IV mudam **só por termo aditivo ou apostila** (art. 57). Organizações que confundem os dois chegam à prestação de contas com resultado abaixo do parametrizado, e glosa.
 
 ### 2.4 Checklist de M&A em parceria MROSC (o que a fiscalização vai pedir)
 
@@ -165,21 +165,21 @@ Este é o ponto em que material desatualizado continua circulando em apostilas e
 | Análise | Relatório técnico de **M&A** com "impacto do benefício social" | art. 59, § 1º, II |
 | Parecer | Parecer técnico conclusivo do gestor, apoiado no M&A | art. 67 |
 
-### 2.5 Exemplo 2 — um plano de trabalho que sobrevive à fiscalização
+### 2.5 Exemplo 2: um plano de trabalho que sobrevive à fiscalização
 
 Objetivo pactuado com a Secretaria Municipal de Educação: **"reduzir a evasão em 20% em 24 meses"**. O art. 22, IV não aceita essa frase solta: ele exige **parâmetros**. Eis a versão parametrizada, com linha de base apurada **antes** da assinatura:
 
 | Nível | Indicador | Fórmula / parâmetro (art. 22, IV) | Linha de base | Meta | Fonte |
 |---|---|---|---|---|---|
-| Insumo | Educadores dedicados | nº de educadores em dedicação exclusiva | — | 4 | Contratação |
-| Atividade | Mentorias realizadas | nº de mentorias por mês | — | 120/mês | Lista de presença |
-| Produto | Alunos acompanhados | alunos ativos no período | — | 300 | Sistema da OSC |
+| Insumo | Educadores dedicados | nº de educadores em dedicação exclusiva |: | 4 | Contratação |
+| Atividade | Mentorias realizadas | nº de mentorias por mês |: | 120/mês | Lista de presença |
+| Produto | Alunos acompanhados | alunos ativos no período |: | 300 | Sistema da OSC |
 | Produto | Frequência | presenças ÷ inscrições × 100 | **78%** | **≥ 85%** | Diário escolar |
 | **Resultado** | Evasão | evadidos ÷ matriculados × 100 | **12,0%** | **9,6%** em 24 meses | Censo da rede |
-| **Resultado** | Satisfação | média da escala 0–10 | **7,4** | **≥ 8,0** | Pesquisa semestral |
-| Impacto | Retenção escolar sustentada | série histórica da rede × contragrupo | — | avaliação com série histórica | Rede + estudo |
+| **Resultado** | Satisfação | média da escala 0 to 10 | **7,4** | **≥ 8,0** | Pesquisa semestral |
+| Impacto | Retenção escolar sustentada | série histórica da rede × contragrupo |: | avaliação com série histórica | Rede + estudo |
 
-A diferença entre "reduzir em 20%" e a fórmula acima é de **0,4 ponto percentual** — e 0,4 p.p. sobre 1.200 alunos equivale a **5 alunos por ano** (cálculo completo na Seção 6.1). É exatamente essa diferença que decide se a meta foi cumprida ou não.
+A diferença entre "reduzir em 20%" e a fórmula acima é de **0,4 ponto percentual**, e 0,4 p.p. sobre 1.200 alunos equivale a **5 alunos por ano** (cálculo completo na Seção 6.1). É exatamente essa diferença que decide se a meta foi cumprida ou não.
 
 ---
 
@@ -187,9 +187,9 @@ A diferença entre "reduzir em 20%" e a fórmula acima é de **0,4 ponto percent
 
 ### 3.1 Teoria da Mudança (ToC): o mapa de trás para frente
 
-A Teoria da Mudança mapeia **de trás para frente** a mudança pretendida e o **nexo causal** que a produz. É o pré-requisito de qualquer indicador de resultado: sem nexo causal explícito, indicador vira número solto. É também a atividade mais barata do sistema inteiro de medição — uma **oficina de 1 dia** com equipe e beneficiários.
+A Teoria da Mudança mapeia **de trás para frente** a mudança pretendida e o **nexo causal** que a produz. É o pré-requisito de qualquer indicador de resultado: sem nexo causal explícito, indicador vira número solto. É também a atividade mais barata do sistema inteiro de medição: uma **oficina de 1 dia** com equipe e beneficiários.
 
-**Exemplo 3 — Teoria da Mudança completa da ONG fictícia "Rede Semear"** (redução da evasão escolar em dois distritos da rede municipal):
+**Exemplo 3: Teoria da Mudança completa da ONG fictícia "Rede Semear"** (redução da evasão escolar em dois distritos da rede municipal):
 
 ```text
 ┌──────────────────────────────────────────────────────────────────────────┐
@@ -236,12 +236,12 @@ Sem essa tabela, o painel de KPIs vira lista de desejos; com ela, cada número t
 | Teoria da Mudança | Por que deve funcionar? | Mapa de nexo causal | Desenho e negociação | Não mede |
 | Modelo lógico / Cadeia de resultados | O que faremos até onde? | Tabela insumo → impacto | Editais MROSC | Superficial em causalidade |
 | **IRIS+ / Core Metrics (GIIN)** | Qual métrica padronizada? | Catálogo de KPIs | Comparabilidade e investidores | Não explica o porquê |
-| **IMP — 5 dimensões** | Quão bom é o impacto? | Perfil de impacto | Decisão de alocação | Requer dados robustos |
+| **IMP: 5 dimensões** | Quão bom é o impacto? | Perfil de impacto | Decisão de alocação | Requer dados robustos |
 | **GRI 3 + Universal** | O que é material? | Relatório de sustentabilidade | Transparência institucional | Relato, não avaliação |
 | **SROI (SVI)** | Vale a pena? | Índice R$ por R$ + narrativa | Captação e comunicação | Custo alto; risco de superestimativa |
 | **OCDE-DAC** | Foi uma boa avaliação? | Juízo em 6 critérios | Avaliações externas | Pós-fato |
 
-Resumo em uma frase: **ToC desenha, modelo lógico organiza, IRIS+ e GRI padronizam o relato, IMP qualifica, OCDE-DAC julga e SROI traduz em dinheiro** — nenhum deles substitui o outro, e nenhum mede sozinho.
+Resumo em uma frase: **ToC desenha, modelo lógico organiza, IRIS+ e GRI padronizam o relato, IMP qualifica, OCDE-DAC julga e SROI traduz em dinheiro**: nenhum deles substitui o outro, e nenhum mede sozinho.
 
 ### 3.4 Critérios OCDE-DAC
 
@@ -249,14 +249,14 @@ Os seis critérios são o vocabulário padrão de financiadores que encomendam a
 
 ### 3.5 IRIS+ (GIIN)
 
-O **IRIS+** é o catálogo de métricas de desempenho de impacto do GIIN, organizado em **Core Metrics Sets** por tese (educação, clima, trabalho decente, entre outras) — útil quando o financiador pede métricas comparáveis entre investidores de impacto. O IRIS+ responde "qual métrica usar", não "por que essa métrica importa": ele é catálogo, não avaliação.
+O **IRIS+** é o catálogo de métricas de desempenho de impacto do GIIN, organizado em **Core Metrics Sets** por tese (educação, clima, trabalho decente, entre outras): útil quando o financiador pede métricas comparáveis entre investidores de impacto. O IRIS+ responde "qual métrica usar", não "por que essa métrica importa": ele é catálogo, não avaliação.
 
 > [!NOTE]
 > **Item não verificado nesta pesquisa:** a versão **IRIS+ v5.3c com 781 métricas** e a atualização dos Core Metrics Sets em **07/2025** aparecem em material secundário e **não foram confirmados na fonte primária**. Trate os números como **não conferidos** e confira em iris.ifc.org antes de citá-los em relatório ou em edital.
 
 ### 3.6 Impact Frontiers / IMP: as 5 dimensões do impacto
 
-Sob curadoria da **Impact Frontiers**, o arcabouço do Impact Management Project organiza o perfil de impacto em **cinco dimensões** — nenhuma a menos, nenhuma a mais:
+Sob curadoria da **Impact Frontiers**, o arcabouço do Impact Management Project organiza o perfil de impacto em **cinco dimensões**: nenhuma a menos, nenhuma a mais:
 
 | # | Dimensão | Pergunta | Exemplo aplicado à Rede Semear |
 |---|---|---|---|
@@ -267,26 +267,26 @@ Sob curadoria da **Impact Frontiers**, o arcabouço do Impact Management Project
 | 5 | **Risk** (risco) | Qual o risco de a mudança não acontecer (ou não durar)? | risco de interrupção da mentoria no ano letivo seguinte |
 
 > [!WARNING]
-> **São 5 dimensões, não 6.** A armadilha mais comum em provas e em relatórios é somar uma sexta dimensão (como "custo", "qualidade" ou "permanência"). What, Who, How Much, Contribution e Risk — cinco.
+> **São 5 dimensões, não 6.** A armadilha mais comum em provas e em relatórios é somar uma sexta dimensão (como "custo", "qualidade" ou "permanência"). What, Who, How Much, Contribution e Risk: cinco.
 
 ### 3.7 GRI: status verificado em 2026
 
 O relato por **materialidade de impacto** segue o GRI. O **GRI 3: Temas Materiais (2021)** e os Universal Standards revisados em 2021 são a base. Status verificado nesta pesquisa:
 
-- o **GSSB aprovou** os padrões **GRI 106/107** (01–02/06/2026) e **GRI 104/105** (16/07/2026), com **publicação postergada para 2027**;
-- **Economic Impacts Phase 1 (GRI MF)** em aprovação final; **Phases 2–3 pausadas**;
+- o **GSSB aprovou** os padrões **GRI 106/107** (01 to 02/06/2026) e **GRI 104/105** (16/07/2026), com **publicação postergada para 2027**;
+- **Economic Impacts Phase 1 (GRI MF)** em aprovação final; **Phases 2 to 3 pausadas**;
 - **Pollution Phase 1** em aprovação final;
 - piloto setorial = **Food & Beverage**;
-- **Work Programme 2026–2028** consultado até **27/03/2026** (comunidade local, impactos ambientais, digitalização).
+- **Work Programme 2026 to 2028** consultado até **27/03/2026** (comunidade local, impactos ambientais, digitalização).
 
 > [!NOTE]
-> **Dado não conferido:** a data exata de eficácia dos Universal Standards 2021 (01/01/2023) **não foi confirmada em nota oficial** nesta pesquisa — não cite a data sem checar em globalreporting.org. Lembre-se também do que o GRI **não** é: é **relato**, não avaliação — ele não demonstra atribuição causal.
+> **Dado não conferido:** a data exata de eficácia dos Universal Standards 2021 (01/01/2023) **não foi confirmada em nota oficial** nesta pesquisa, não cite a data sem checar em globalreporting.org. Lembre-se também do que o GRI **não** é: é **relato**, não avaliação, ele não demonstra atribuição causal.
 
 ### 3.8 SROI no Brasil: a referência técnica do IDIS
 
 O **SROI (Social Return on Investment)** segue o protocolo da **Social Value International (SVI)**. No Brasil, a referência técnica é o **IDIS**: Paula Fabiani (CEO) foi a **1ª brasileira certificada** pela SVI e Daniel Barretti (M&A Manager do IDIS) tornou-se o **2º brasileiro** com o nível *Social Value Practitioner*, anunciado pela SVI em 22/05/2026.
 
-- **🔢 Você sabia?** O **Impact Management Project** descreve **5 dimensões** de impacto, não 6 — e a governança do arcabouço passou para a **curadoria da Impact Frontiers**. Citações que ainda falam em "6 dimensões do IMP" ou no IMP como instituição permanente estão desatualizadas em duas frentes: no número e na governança.
+- **🔢 Você sabia?** O **Impact Management Project** descreve **5 dimensões** de impacto, não 6, e a governança do arcabouço passou para a **curadoria da Impact Frontiers**. Citações que ainda falam em "6 dimensões do IMP" ou no IMP como instituição permanente estão desatualizadas em duas frentes: no número e na governança.
 
 ---
 
@@ -304,7 +304,7 @@ A pesquisa do IDIS com **86 profissionais de ~80 organizações** (publicada em 
 | Acreditam que M&A atrai recursos | **61,6%** (× 27,9% de opinião contrária) | idem |
 
 > [!NOTE]
-> **Como usar este dado com honestidade:** é uma amostra **pequena e não probabilística** — sirva-se dela como **indicador de assimetria monitoramento × avaliação**, nunca como estatística nacional. A leitura válida é uma só: o setor comprova execução, não mudança.
+> **Como usar este dado com honestidade:** é uma amostra **pequena e não probabilística**: sirva-se dela como **indicador de assimetria monitoramento × avaliação**, nunca como estatística nacional. A leitura válida é uma só: o setor comprova execução, não mudança.
 
 ### 4.2 A demanda real do doador (Pesquisa Doação Brasil 2024)
 
@@ -329,15 +329,15 @@ A pesquisa do IDIS com **86 profissionais de ~80 organizações** (publicada em 
 | Fatia do ISP vinda de incentivos fiscais | **~15%** | Censo GIFE ⚠️ |
 
 > [!NOTE]
-> **Itens marcados com ⚠️ não foram conferidos na fonte primária:** os 68% de recursos restritos vêm da divulgação secundária do *Panorama das ONGs* (CAF + IDIS, Capítulo Brasil, World Giving Report 2025, 170 OSCs, mar–jun/2025) e a publicação original precisa ser localizada; os **41 projetos de SROI** são **divulgados pelo IDIS e não auditados**; o número **95,12%** do CBVE 2025 não foi rastreado à base original; os ~15% do Censo GIFE não foram conferidos. Trate todos como **não verificados** em apresentações externas.
+> **Itens marcados com ⚠️ não foram conferidos na fonte primária:** os 68% de recursos restritos vêm da divulgação secundária do *Panorama das ONGs* (CAF + IDIS, Capítulo Brasil, World Giving Report 2025, 170 OSCs, mar: jun/2025) e a publicação original precisa ser localizada; os **41 projetos de SROI** são **divulgados pelo IDIS e não auditados**; o número **95,12%** do CBVE 2025 não foi rastreado à base original; os ~15% do Censo GIFE não foram conferidos. Trate todos como **não verificados** em apresentações externas.
 
 ### 4.4 Ferramentas e referências brasileiras
 
-- **IDIS** — Hub de Avaliação de Impacto Social, com SROI, custo-benefício, Matriz de Transformação Social e trilhas de M&A (**41 projetos em 2024**, divulgados sem auditoria); já atendeu Instituto Ayrton Senna, Petrobras, Vale, Gerando Falcões, Chamex, Parceiros da Educação e Sesc;
-- **Instituto Baccarelli** — estudo combinou ferramenta do **Insper**, dados secundários e pesquisa com beneficiários;
-- **Fundação Itaú Social, IBGE Educação e IDIS** — indicadores de impacto e evidências do PISA no Brasil;
-- **Gates Foundation** — glosário e taxonomia de indicadores de medição de impacto;
-- **Thinking. Doing. Learning. together** (IDIS) — núcleo de apoio à monitorização e avaliação.
+- **IDIS**: Hub de Avaliação de Impacto Social, com SROI, custo-benefício, Matriz de Transformação Social e trilhas de M&A (**41 projetos em 2024**, divulgados sem auditoria); já atendeu Instituto Ayrton Senna, Petrobras, Vale, Gerando Falcões, Chamex, Parceiros da Educação e Sesc;
+- **Instituto Baccarelli**: estudo combinou ferramenta do **Insper**, dados secundários e pesquisa com beneficiários;
+- **Fundação Itaú Social, IBGE Educação e IDIS**: indicadores de impacto e evidências do PISA no Brasil;
+- **Gates Foundation**: glosário e taxonomia de indicadores de medição de impacto;
+- **Thinking. Doing. Learning. together** (IDIS): núcleo de apoio à monitorização e avaliação.
 
 ---
 
@@ -384,7 +384,7 @@ Um indicador sem definição operacional é fonte eterna de discussão; um indic
 1. É **sensível à mudança** (detecta evolução real)?
 2. É **não manipulável** pela própria equipe?
 3. O **custo de coleta** é proporcional ao valor da informação?
-4. **Não gera distorção de incentivo** — o caso clássico é contar "número de atendimentos", que estimula atendimentos rasos; troque por **taxa de conclusão + satisfação**.
+4. **Não gera distorção de incentivo**, o caso clássico é contar "número de atendimentos", que estimula atendimentos rasos; troque por **taxa de conclusão + satisfação**.
 
 ### 5.4 Desenhos de avaliação, por rigor × custo
 
@@ -397,7 +397,7 @@ Um indicador sem definição operacional é fonte eterna de discussão; um indic
 | Ensaio aleatorizado (RCT) | Máximo | Muito alto | Políticas replicáveis, doadores internacionais |
 | Qualitativo profundo (entrevistas, grupos focais, etnografia) | Complementar | Médio | **Explicar** o porquê dos números; voz do beneficiário |
 
-### 5.5 Exemplo 4 — a linha de base apurada em pesquisa piloto ANTES da assinatura
+### 5.5 Exemplo 4: a linha de base apurada em pesquisa piloto ANTES da assinatura
 
 A Rede Semear contrata uma pesquisa piloto em **setembro**, antes da assinatura do termo de fomento. O recorte é explícito e a conta é auditável:
 
@@ -417,18 +417,18 @@ Observação ... nenhuma intervenção foi iniciada até aqui:
                a linha de base é APURADA, não projetada.
 ```
 
-Três decisões dessa ficha evitam anos de discussão: (i) o **universo é declarado** (1.200 alunos), então a fração é reproduzível; (ii) a **coleta é mista** (dado administrativo + escuta), então a satisfação não é opinião de quem está no evento; (iii) a linha de base foi apurada **antes** de qualquer atividade — depois que a mentoria começa, qualquer número novo é contaminado.
+Três decisões dessa ficha evitam anos de discussão: (i) o **universo é declarado** (1.200 alunos), então a fração é reproduzível; (ii) a **coleta é mista** (dado administrativo + escuta), então a satisfação não é opinião de quem está no evento; (iii) a linha de base foi apurada **antes** de qualquer atividade: depois que a mentoria começa, qualquer número novo é contaminado.
 
 > [!IMPORTANT]
-> **A linha de base é o que separa meta de ambição.** Sem ela, a meta vira opinião: "crescer 20%" não significa nada se não se sabe a partir de quanto. Para o art. 22, IV do MROSC, o parâmetro escrito no plano **precisa incluir a linha de base e a fórmula** — e, sempre que possível, ela deve ser apurada em **pesquisa piloto antes da assinatura**, quando ainda é possível redigir a meta com precisão.
+> **A linha de base é o que separa meta de ambição.** Sem ela, a meta vira opinião: "crescer 20%" não significa nada se não se sabe a partir de quanto. Para o art. 22, IV do MROSC, o parâmetro escrito no plano **precisa incluir a linha de base e a fórmula**, e, sempre que possível, ela deve ser apurada em **pesquisa piloto antes da assinatura**, quando ainda é possível redigir a meta com precisão.
 
 ---
 
 ## 6. Linha de Base × Meta e Contribuição × Atribuição
 
-### 6.1 Exemplo 5 — "reduzir 20%": relativo ou absoluto?
+### 6.1 Exemplo 5, "reduzir 20%": relativo ou absoluto?
 
-O objetivo pactuado é **"reduzir a evasão em 20% em 24 meses"** com linha de base de **12,0%**. A frase, sozinha, admite duas contas — e elas não dão o mesmo resultado:
+O objetivo pactuado é **"reduzir a evasão em 20% em 24 meses"** com linha de base de **12,0%**. A frase, sozinha, admite duas contas, e elas não dão o mesmo resultado:
 
 ```text
 HIPÓTESE A — redução RELATIVA de 20% sobre a linha de base
@@ -443,12 +443,12 @@ DIFERENÇA ENTRE AS DUAS METAS (universo de 1.200 alunos)
     Δ = 4,8 ≈ 5 alunos por ano
 ```
 
-Conclusão operacional: **5 alunos por ano separam o cumprimento da meta de sua violação** — e a escolha entre elas não pode ficar implícita. Por isso o art. 22, IV exige **parâmetros**, não slogans. A fórmula correta no plano de trabalho é: *"redução relativa de 20% sobre a linha de base de 12,0% apurada em pesquisa piloto, resultando em meta de 9,6% em 24 meses, medida semestralmente pelo indicador evadidos ÷ matriculados × 100"*.
+Conclusão operacional: **5 alunos por ano separam o cumprimento da meta de sua violação**, e a escolha entre elas não pode ficar implícita. Por isso o art. 22, IV exige **parâmetros**, não slogans. A fórmula correta no plano de trabalho é: *"redução relativa de 20% sobre a linha de base de 12,0% apurada em pesquisa piloto, resultando em meta de 9,6% em 24 meses, medida semestralmente pelo indicador evadidos ÷ matriculados × 100"*.
 
 > [!NOTE]
 > **Redução relativa × absoluta é a armadilha silenciosa da prestação de contas.** Nenhum dos dois valores é "errado" em si; o que é errado é não escolher. Em relatório, a frase "cumprimos a meta de redução de evasão" sem a fórmula declarada é insustentável diante de uma fiscalização que leia o plano de trabalho.
 
-### 6.2 Exemplo 6 — contribuição × atribuição, com a conta de diferença-em-diferenças
+### 6.2 Exemplo 6: contribuição × atribuição, com a conta de diferença-em-diferenças
 
 A evasão caiu de **12,0% para 9,6%** na escola atendida. Quanto disso é da Rede Semear? Duas linguagens, dois níveis de rigor:
 
@@ -471,7 +471,7 @@ ATRIBUIÇÃO (com grupo de comparação)
     de queda decorrem do programa, frente a escola comparável."
 ```
 
-Atribuição, aqui, continua sendo **estimada** — não é certeza. Mas ela é infinitamente mais defensável do que atribuir 100% da queda ao programa, que é exatamente o que a maioria dos relatórios faz sem dizer.
+Atribuição, aqui, continua sendo **estimada**: não é certeza. Mas ela é infinitamente mais defensável do que atribuir 100% da queda ao programa, que é exatamente o que a maioria dos relatórios faz sem dizer.
 
 | Situação | Linguagem correta | Rigor exigido |
 |---|---|---|
@@ -481,7 +481,7 @@ Atribuição, aqui, continua sendo **estimada** — não é certeza. Mas ela é 
 | Grupo de comparação desenhado (ou método equivalente) | "graças ao nosso programa" | Estudo de impacto |
 
 > [!WARNING]
-> **Medir só satisfação e chamar de impacto é o segundo erro mais comum do setor.** Pesquisa de satisfação é **obrigatória** em parcerias superiores a 1 ano (art. 58, § 2º) e é insumo valioso de correção de rota — mas ela tem **custo baixo, rigor baixo e nenhum grupo de comparação**. Dizer "8,2 de satisfação prova nosso impacto" confunde opinião de quem participou com mudança atribuível. Use satisfação para **aprender**, não para **provar**.
+> **Medir só satisfação e chamar de impacto é o segundo erro mais comum do setor.** Pesquisa de satisfação é **obrigatória** em parcerias superiores a 1 ano (art. 58, § 2º) e é insumo valioso de correção de rota, mas ela tem **custo baixo, rigor baixo e nenhum grupo de comparação**. Dizer "8,2 de satisfação prova nosso impacto" confunde opinião de quem participou com mudança atribuível. Use satisfação para **aprender**, não para **provar**.
 
 ### 6.3 Árvore de decisão: qual desenho de avaliação usar
 
@@ -513,13 +513,13 @@ A árvore tem uma regra: **o nível de rigor é escolhido pela decisão, não pe
 
 ### 7.1 As 7 etapas do protocolo da SVI
 
-1. **Envolver stakeholders** — quem vive a mudança define o que medir;
-2. **Mapear mudanças** — construir a Teoria da Mudança;
-3. **Valorar o que importa** — provações por *willingness-to-pay*, escolha discreta e aproximações (*proxies*);
-4. **Incluir apenas o material** — delimitar fronteiras com evidência de quem recebe;
-5. **Não superestimar** — ajustar atribuição e o que já ocorreria de qualquer forma;
-6. **Ser transparente** — mostrar base, premissas e limitações, e discutir com stakeholders;
-7. **Verificar o resultado** — assessoria **independente** quando houver público externo ou decisão relevante.
+1. **Envolver stakeholders**: quem vive a mudança define o que medir;
+2. **Mapear mudanças**: construir a Teoria da Mudança;
+3. **Valorar o que importa**: provações por *willingness-to-pay*, escolha discreta e aproximações (*proxies*);
+4. **Incluir apenas o material**: delimitar fronteiras com evidência de quem recebe;
+5. **Não superestimar**: ajustar atribuição e o que já ocorreria de qualquer forma;
+6. **Ser transparente**: mostrar base, premissas e limitações, e discutir com stakeholders;
+7. **Verificar o resultado**: assessoria **independente** quando houver público externo ou decisão relevante.
 
 ### 7.2 Os 8 princípios do valor social (Social Value International)
 
@@ -536,9 +536,9 @@ A árvore tem uma regra: **o nível de rigor é escolhido pela decisão, não pe
 
 Os princípios **4, 5 e 7** são os três que sustentam o rigor do estudo: **só o material**, **não superestimar** e **verificar**.
 
-### 7.3 Exemplo 7 — cálculo de SROI passo a passo (dados fictícios)
+### 7.3 Exemplo 7: cálculo de SROI passo a passo (dados fictícios)
 
-O exemplo abaixo é **integralmente fictício** e serve apenas para ilustrar o método — nenhum número deve ser citado como fato real:
+O exemplo abaixo é **integralmente fictício** e serve apenas para ilustrar o método: nenhum número deve ser citado como fato real:
 
 ```text
 SROI — PROGRAMA FICTÍCIO "RAÍZES" (12 meses, dados inventados)
@@ -575,51 +575,51 @@ COMPARAÇÃO COM CASOS REAIS (verificados)
 
 ### 7.4 Sensibilidade: o que muda se a atribuição cair
 
-O ajuste de atribuição é a alavanca mais sensível do cálculo — e é justamente o princípio 5 do SVI ("não superestimar") que manda mexer nele com honestidade:
+O ajuste de atribuição é a alavanca mais sensível do cálculo, e é justamente o princípio 5 do SVI ("não superestimar") que manda mexer nele com honestidade:
 
 | Cenário de atribuição | Cálculo | Benefício ajustado | SROI |
 |---|---|---|---|
 | Base: −20% | 642.000 × 0,80 × 0,90 × 0,85 × 0,95 | R$ 373.258,80 | **R$ 3,11** |
 | Conservador: −30% | 642.000 × 0,70 × 0,90 × 0,85 × 0,95 | R$ 326.601,45 | **R$ 2,72** |
 
-Ler a tabela ao contrário também é útil: **um SROI publicado sem a tabela de ajustes não é auditável** — o leitor não sabe se o número é rigoroso ou otimista. Transparência (princípio 6) é parte do resultado, não enfeite do relatório.
+Ler a tabela ao contrário também é útil: **um SROI publicado sem a tabela de ajustes não é auditável**, o leitor não sabe se o número é rigoroso ou otimista. Transparência (princípio 6) é parte do resultado, não enfeite do relatório.
 
 > [!NOTE]
-> **SROI não é KPI de rotina.** É estudo pontual, caro e comunicacional — serve para captação, prestação de contas especial e decisão de escala. A rotina de gestão é outra: **painel de indicadores de produto e resultado** (Seção 8). Quem publica SROI todo mês não está fazendo SROI.
+> **SROI não é KPI de rotina.** É estudo pontual, caro e comunicacional: serve para captação, prestação de contas especial e decisão de escala. A rotina de gestão é outra: **painel de indicadores de produto e resultado** (Seção 8). Quem publica SROI todo mês não está fazendo SROI.
 
 > [!NOTE]
-> **Ética da escuta:** pesquisa com beneficiários exige **consentimento informado e anonimato**. A diretriz é da Social Value International e **não foi relida nesta rodada de pesquisa** — confirme os detalhes na fonte primária (socialvalueinternational.org) antes de aplicar questionários com marcadores identitários.
+> **Ética da escuta:** pesquisa com beneficiários exige **consentimento informado e anonimato**. A diretriz é da Social Value International e **não foi relida nesta rodada de pesquisa**: confirme os detalhes na fonte primária (socialvalueinternational.org) antes de aplicar questionários com marcadores identitários.
 
 ### 7.5 Cases brasileiros de SROI (verificados)
 
 | Case | SROI (R$ gerado por R$ 1) | Período/observação | Fonte |
 |---|---|---|---|
-| **Fundação Lucia e Pelerson Penido (FLUPP)** — programa VIM, Roseira/SP | **R$ 4,08** | **1º SROI do Brasil**; crianças de 0–5 anos, famílias e professores | IDIS, 2015 |
-| **Amigos do Bem** (sertão nordestino) | **R$ 6,45** | Impacto acumulado de **R$ 2,1 bi** (2012–2021); 150 mil pessoas em 300 povoados; auditoria EY | IDIS, case publicado 2022–2023 |
-| **Instituto Baccarelli** — Núcleo Heliópolis | **R$ 3,49** | Dados de **2023**, estudo publicado em 2024; 4 mudanças qualitativas (cognição, oportunidades, socioemocional, relações) | IDIS/Insper, 2024 |
+| **Fundação Lucia e Pelerson Penido (FLUPP)**: programa VIM, Roseira/SP | **R$ 4,08** | **1º SROI do Brasil**; crianças de 0 to 5 anos, famílias e professores | IDIS, 2015 |
+| **Amigos do Bem** (sertão nordestino) | **R$ 6,45** | Impacto acumulado de **R$ 2,1 bi** (2012 to 2021); 150 mil pessoas em 300 povoados; auditoria EY | IDIS, case publicado 2022 to 2023 |
+| **Instituto Baccarelli**: Núcleo Heliópolis | **R$ 3,49** | Dados de **2023**, estudo publicado em 2024; 4 mudanças qualitativas (cognição, oportunidades, socioemocional, relações) | IDIS/Insper, 2024 |
 
 Leituras de cada case:
 
-- **FLUPP (Roseira/SP):** 3 meses de campo, grupos focais com educadores, crianças e famílias, construção da Teoria da Mudança, indicadores e aproximações (*willingness-to-pay* e escolha discreta). Uma das mudanças valoradas foi a **melhora na sociabilidade** — relatada por **87%** dos participantes, com valor social atribuído de aproximadamente **R$ 227 mil** de um estudo total de **R$ 3,26 milhões**. Lição: o valor social vem da **percepção de quem vive a mudança**, não de planilha interna.
-- **Amigos do Bem:** SROI aplicado pelo IDIS — **R$ 6,45 de benefício social por R$ 1 investido**, com **R$ 2,1 bilhões** de impacto acumulado entre 2012 e 2021 (**trabalho e renda 38,4%; educação 35,7%**), alcançando 150 mil pessoas em 300 povoados. O número foi **auditado pela EY** e virou peça comercial: "para cada R$ 1 doado, geramos R$ 6,45 de impacto real". Lição: **evidência + auditoria + tradução simples = captação**.
+- **FLUPP (Roseira/SP):** 3 meses de campo, grupos focais com educadores, crianças e famílias, construção da Teoria da Mudança, indicadores e aproximações (*willingness-to-pay* e escolha discreta). Uma das mudanças valoradas foi a **melhora na sociabilidade**: relatada por **87%** dos participantes, com valor social atribuído de aproximadamente **R$ 227 mil** de um estudo total de **R$ 3,26 milhões**. Lição: o valor social vem da **percepção de quem vive a mudança**, não de planilha interna.
+- **Amigos do Bem:** SROI aplicado pelo IDIS: **R$ 6,45 de benefício social por R$ 1 investido**, com **R$ 2,1 bilhões** de impacto acumulado entre 2012 e 2021 (**trabalho e renda 38,4%; educação 35,7%**), alcançando 150 mil pessoas em 300 povoados. O número foi **auditado pela EY** e virou peça comercial: "para cada R$ 1 doado, geramos R$ 6,45 de impacto real". Lição: **evidência + auditoria + tradução simples = captação**.
 - **Instituto Baccarelli (Heliópolis):** **R$ 3,49 por R$ 1** com base em dados de 2023, combinando ferramenta do Insper, dados secundários e pesquisa com beneficiários; a avaliação qualitativa apontou 4 mudanças positivas. O relatório saiu em PDF público na área de transparência e foi usado em editorial do Estadão (08/08/2024). Lição: **relato público e imprensa ampliam a captação**.
 
-- **🔢 Você sabia?** No primeiro SROI do Brasil (FLUPP, programa VIM), a mudança **"melhora na sociabilidade"** foi relatada por **87%** dos participantes e valceu cerca de **R$ 227 mil** dos **R$ 3,26 milhões** totais do estudo — quase 7% do benefício veio de uma mudança que nenhuma planilha financeira teria registrado. Valor social é o que **quem vive a mudança** diz que mudou.
+- **🔢 Você sabia?** No primeiro SROI do Brasil (FLUPP, programa VIM), a mudança **"melhora na sociabilidade"** foi relatada por **87%** dos participantes e valceu cerca de **R$ 227 mil** dos **R$ 3,26 milhões** totais do estudo: quase 7% do benefício veio de uma mudança que nenhuma planilha financeira teria registrado. Valor social é o que **quem vive a mudança** diz que mudou.
 
 ---
 
 ## 8. Painel de KPIs: a Rotina que Substitui o Relatório Bonito
 
-### 8.1 Exemplo 8 — painel de 5 indicadores com fonte, frequência e meta
+### 8.1 Exemplo 8: painel de 5 indicadores com fonte, frequência e meta
 
 O painel abaixo é o artefato mínimo de um Nível 3 de maturidade: cinco indicadores, cada um com fórmula, linha de base, meta, **fonte de coleta**, **frequência** e **responsável**:
 
 | # | Indicador | Fórmula | Linha de base | Meta | Fonte / método de coleta | Frequência | Responsável |
 |---|---|---|---|---|---|---|---|
 | 1 | Frequência média | presenças ÷ inscrições × 100 | **78%** | **≥ 85%** | Lista de presença digital + diário escolar | Mensal | Coord. pedagógica |
-| 2 | Conclusão de mentoria | concluintes ÷ inscritos × 100 | — (1º ciclo) | **80%** | Sistema de gestão da mentoria | Semestral | Coord. de mentorias |
+| 2 | Conclusão de mentoria | concluintes ÷ inscritos × 100 |: (1º ciclo) | **80%** | Sistema de gestão da mentoria | Semestral | Coord. de mentorias |
 | 3 | Evasão no território | evadidos ÷ matriculados × 100 | **12,0%** | **9,6%** em 24 meses | Censo da rede municipal + verificação em escola | Semestral | Parcerias |
-| 4 | Satisfação dos beneficiários | média da escala 0–10 | **7,4** | **≥ 8,0** | Pesquisa com 300 responsáveis, consentimento e anonimato | Semestral | M&A |
+| 4 | Satisfação dos beneficiários | média da escala 0 to 10 | **7,4** | **≥ 8,0** | Pesquisa com 300 responsáveis, consentimento e anonimato | Semestral | M&A |
 | 5 | Custo por aluno concluído | custo total ÷ concluintes | **R$ 1.600** | **≤ R$ 1.400** | Razão contábil com contas segregadas por projeto | Anual | Financeiro |
 
 ```text
@@ -641,21 +641,21 @@ publicado trimestralmente no portal de transparência
 
 Como cada número chega até o painel:
 
-- **Frequência:** exportação mensal das listas, consolidada até o dia 10 — coleta barata porque é subproduto de rotina já existente;
+- **Frequência:** exportação mensal das listas, consolidada até o dia 10: coleta barata porque é subproduto de rotina já existente;
 - **Conclusão de mentoria:** extração semestral do sistema, com critério de conclusão escrito na ficha do indicador (definição operacional);
-- **Evasão:** censo da rede, checado em duas escolas por amostra a cada ciclo — a checagem é o que impede a manipulação;
+- **Evasão:** censo da rede, checado em duas escolas por amostra a cada ciclo: a checagem é o que impede a manipulação;
 - **Satisfação:** survey semestral com 300 responsáveis, amostra estratificada por escola, consentimento e anonimato;
-- **Custo por aluno:** razão contábil anual com contas segregadas por projeto — sem segregação, o número é opinião do financeiro.
+- **Custo por aluno:** razão contábil anual com contas segregadas por projeto: sem segregação, o número é opinião do financeiro.
 
 ### 8.2 A rotina de aprendizagem recomendada pelo IDIS (dez/2025)
 
-Os elementos que transformam painel em gestão — e não em decoração de site:
+Os elementos que transformam painel em gestão, e não em decoração de site:
 
-- base estruturada de participantes com **marcadores identitários autodeclarados** — para enxergar **quem está sendo excluído**;
+- base estruturada de participantes com **marcadores identitários autodeclarados**: para enxergar **quem está sendo excluído**;
 - **pesquisa de satisfação semestral** com beneficiários;
 - **grupos focais anuais** com equipes e famílias;
 - **painel público de indicadores**;
-- **ciclo de correção de rota documentado em ata do conselho** — conexão direta com o **art. 58, § 2º** da Lei nº 13.019 e com a exigência de **89%** dos doadores por evidência de diferença.
+- **ciclo de correção de rota documentado em ata do conselho**: conexão direta com o **art. 58, § 2º** da Lei nº 13.019 e com a exigência de **89%** dos doadores por evidência de diferença.
 
 - **🔢 Você sabia?** O art. 58, § 2º, e a rotina de aprendizagem do IDIS são a mesma ideia em dois registros: **escutar, medir e corrigir**. A ata do conselho que registra a decisão de mudar a metodologia depois de um grupo focal é, ao mesmo tempo, prova de conformidade legal e evidência de governança baseada em dados.
 
@@ -663,9 +663,9 @@ Os elementos que transformam painel em gestão — e não em decoração de site
 
 Sem orçamento para estudo de impacto, negocie assim:
 
-1. **Indicadores de resultado** no plano de trabalho (não só produtos) — negociados **antes** da assinatura;
+1. **Indicadores de resultado** no plano de trabalho (não só produtos): negociados **antes** da assinatura;
 2. Registro no termo de que a **avaliação causal é fase 2**;
-3. **Comparação com meta histórica** e **grupo externo disponível** (outra escola, outra rede) como aproximação — com transparência sobre a limitação (**princípios 5 e 6** do SVI: não superestimar e ser transparente).
+3. **Comparação com meta histórica** e **grupo externo disponível** (outra escola, outra rede) como aproximação: com transparência sobre a limitação (**princípios 5 e 6** do SVI: não superestimar e ser transparente).
 
 ### 8.4 Calendário mínimo de coleta (o que acontece em cada mês)
 
@@ -682,7 +682,7 @@ Sem calendário, painel vira enfeite. Este é o ciclo de 12 meses que sustenta o
 | Contínuo | Desagregação por gênero, raça, idade e território | Todos | Base estruturada de participantes |
 
 > [!NOTE]
-> **O item do mês 12 é o que mais se esquece.** Registrar em ata do conselho **o que mudou por causa dos dados** é o que fecha o ciclo do art. 58, § 2º: escuta → painel → decisão → ajuste. Sem essa ata, a organização coleta números; com ela, ela **aprende** — e pode provar que aprendeu.
+> **O item do mês 12 é o que mais se esquece.** Registrar em ata do conselho **o que mudou por causa dos dados** é o que fecha o ciclo do art. 58, § 2º: escuta → painel → decisão → ajuste. Sem essa ata, a organização coleta números; com ela, ela **aprende**, e pode provar que aprendeu.
 
 ---
 
@@ -692,13 +692,13 @@ Diagnóstico rápido para saber onde a sua OSC está:
 
 | Nível | Característica | O que muda na prática |
 |---|---|---|
-| **1 — Contábil** | Só Relatório de Execução Financeira | Presta contas do dinheiro, não da mudança |
-| **2 — Gerencial** | Indicadores de atividade/produto e metas do plano de trabalho | Já prova execução conforme o art. 64 |
-| **3 — Gerencial + aprendizagem** | Resultados, escuta de beneficiários, correção de rota (art. 58, § 2º) | Painel público, baseline, ata de correção |
-| **4 — Estratégico** | Evidência de impacto, avaliação externa, relato (GRI/IRIS+) e uso na captação | Estudo de impacto e SROI pontual |
+| **1: Contábil** | Só Relatório de Execução Financeira | Presta contas do dinheiro, não da mudança |
+| **2: Gerencial** | Indicadores de atividade/produto e metas do plano de trabalho | Já prova execução conforme o art. 64 |
+| **3: Gerencial + aprendizagem** | Resultados, escuta de beneficiários, correção de rota (art. 58, § 2º) | Painel público, baseline, ata de correção |
+| **4: Estratégico** | Evidência de impacto, avaliação externa, relato (GRI/IRIS+) e uso na captação | Estudo de impacto e SROI pontual |
 
 > [!NOTE]
-> **Meta realista para a OSC brasileira:** sair do **Nível 1 para o Nível 3 em 12 meses**. O **Nível 4** é por **projeto prioritário** — não faz sentido estudo causal em todas as frentes simultaneamente. A sequência das Seções 5 a 8 é o roteiro exato dessa subida: ToC (mês 1), matriz de indicadores (mês 2), linha de base (mês 3), coleta (mês 4 em diante), painel (mês 6), escuta semestral e ata de correção (mês 12).
+> **Meta realista para a OSC brasileira:** sair do **Nível 1 para o Nível 3 em 12 meses**. O **Nível 4** é por **projeto prioritário**: não faz sentido estudo causal em todas as frentes simultaneamente. A sequência das Seções 5 a 8 é o roteiro exato dessa subida: ToC (mês 1), matriz de indicadores (mês 2), linha de base (mês 3), coleta (mês 4 em diante), painel (mês 6), escuta semestral e ata de correção (mês 12).
 
 ---
 
@@ -721,14 +721,14 @@ Diagnóstico rápido para saber onde a sua OSC está:
 | 13 | Publicar **número não verificado** como fato | Quebra credibilidade quando alguém confere | Sinalizar como não conferido e citar a fonte |
 
 > [!WARNING]
-> **Erros que mais aparecem em prestação de contas, em edital e em prova — todos decorrentes de material desatualizado ou de leitura apressada:**
+> **Erros que mais aparecem em prestação de contas, em edital e em prova: todos decorrentes de material desatualizado ou de leitura apressada:**
 >
-> 1. **Escrever "remanjamento de até 25% (art. 56)"** — o dispositivo foi **revogado**; no âmbito federal vale o Decreto nº 8.726/2016, art. 43, com ajuste por apostilamento e limite de **10% do valor global** sem autorização prévia (§ 4º, com redação do Decreto nº 11.948/2024);
-> 2. **Dizer que "a OSC faz monitoramento e avaliação"** sem precisar quem faz — o **art. 58** atribui o M&A à **administração pública**; a OSC presta contas (arts. 64 e 66);
-> 3. **Chamar pesquisa de satisfação de estudo de impacto** — rigor baixo, custo baixo, sem comparação;
-> 4. **Citar "6 dimensões do IMP"** — são **5**;
-> 5. **Tratar relatório GRI como avaliação** — GRI é **relato** por materialidade, não juízo de efetividade;
-> 6. **Publicar IRIS+ v5.3c / 781 métricas, CBVE 95,12% ou ~15% do Censo GIFE** como fato consolidado — nenhum desses números foi conferido na fonte primária.
+> 1. **Escrever "remanjamento de até 25% (art. 56)"**, o dispositivo foi **revogado**; no âmbito federal vale o Decreto nº 8.726/2016, art. 43, com ajuste por apostilamento e limite de **10% do valor global** sem autorização prévia (§ 4º, com redação do Decreto nº 11.948/2024);
+> 2. **Dizer que "a OSC faz monitoramento e avaliação"** sem precisar quem faz, o **art. 58** atribui o M&A à **administração pública**; a OSC presta contas (arts. 64 e 66);
+> 3. **Chamar pesquisa de satisfação de estudo de impacto**: rigor baixo, custo baixo, sem comparação;
+> 4. **Citar "6 dimensões do IMP"**: são **5**;
+> 5. **Tratar relatório GRI como avaliação**: GRI é **relato** por materialidade, não juízo de efetividade;
+> 6. **Publicar IRIS+ v5.3c / 781 métricas, CBVE 95,12% ou ~15% do Censo GIFE** como fato consolidado: nenhum desses números foi conferido na fonte primária.
 
 ---
 
@@ -736,30 +736,30 @@ Diagnóstico rápido para saber onde a sua OSC está:
 
 ### 11.1 Curiosidades verificadas desta lição
 
-- **🔢 Você sabia?** A assimetria do setor cabe em uma frase: **90,7% monitoram, 17,4% avaliam impacto** (IDIS, 2018, n=86 / ~80 OSCs) — enquanto **61,6%** acreditam que M&A atrai recursos. O gargalo não é convicção: é desenho de avaliação.
-- **🔢 Você sabia?** **89% dos doadores** querem evidência de que a doação "pode fazer a diferença" e **83% pesquisam antes de doar** (Pesquisa Doação Brasil 2024). Só **33%** acham que as ONGs deixam claro o uso do dinheiro — a lacuna entre 89% e 33% é exatamente o espaço que o painel de indicadores ocupa.
-- **🔢 Você sabia?** O **Amigos do Bem** acumulou **R$ 2,1 bilhões** de impacto entre 2012 e 2021 (trabalho e renda 38,4%; educação 35,7%), com SROI de **R$ 6,45** auditado pela **EY** — evidência com auditoria externa é o que transforma número em peça de captação.
-- **🔢 Você sabia?** O **IDIS** aplicou **41 projetos de SROI em 2024** — número **divulgado pela própria organização e não auditado**; serve para dimensionar a atividade no país, não como estatística oficial.
+- **🔢 Você sabia?** A assimetria do setor cabe em uma frase: **90,7% monitoram, 17,4% avaliam impacto** (IDIS, 2018, n=86 / ~80 OSCs): enquanto **61,6%** acreditam que M&A atrai recursos. O gargalo não é convicção: é desenho de avaliação.
+- **🔢 Você sabia?** **89% dos doadores** querem evidência de que a doação "pode fazer a diferença" e **83% pesquisam antes de doar** (Pesquisa Doação Brasil 2024). Só **33%** acham que as ONGs deixam claro o uso do dinheiro: a lacuna entre 89% e 33% é exatamente o espaço que o painel de indicadores ocupa.
+- **🔢 Você sabia?** O **Amigos do Bem** acumulou **R$ 2,1 bilhões** de impacto entre 2012 e 2021 (trabalho e renda 38,4%; educação 35,7%), com SROI de **R$ 6,45** auditado pela **EY**: evidência com auditoria externa é o que transforma número em peça de captação.
+- **🔢 Você sabia?** O **IDIS** aplicou **41 projetos de SROI em 2024**: número **divulgado pela própria organização e não auditado**; serve para dimensionar a atividade no país, não como estatística oficial.
 
 ### 11.2 Itens sinalizados como não verificados nesta pesquisa
 
 Para você não transformar lacuna de pesquisa em afirmação categórica:
 
-- **IRIS+ v5.3c / 781 métricas / Core Metrics atualizados em 07/2025** — número citado em material secundário; conferir em iris.ifc.org;
-- **GRI:** data exata de eficácia dos Universal Standards 2021 (01/01/2023) — não confirmada em nota oficial;
-- **Censo GIFE:** ~15% do ISP vindo de incentivos fiscais — não conferido;
-- **"41 projetos de SROI do IDIS em 2024"** — divulgado pelo IDIS, não auditado;
-- **Panorama das ONGs (CAF + IDIS):** URL de divulgação secundária — localizar a publicação original;
-- **Cases Liga STEAM / Doutores da Alegria com SROI** — não confirmados; **não citar como fato**;
-- **CBVE 2025, "95,12% de voluntariado empresarial com indicadores quantitativos"** — número não rastreado à base original;
-- **Ética da escuta:** pesquisa com beneficiários exige consentimento e anonimato — diretriz da SVI, não relida nesta rodada;
-- **Amostra do IDIS 2018:** pequena e não probabilística — usar como indicador de assimetria, nunca como estatística nacional.
+- **IRIS+ v5.3c / 781 métricas / Core Metrics atualizados em 07/2025**: número citado em material secundário; conferir em iris.ifc.org;
+- **GRI:** data exata de eficácia dos Universal Standards 2021 (01/01/2023): não confirmada em nota oficial;
+- **Censo GIFE:** ~15% do ISP vindo de incentivos fiscais: não conferido;
+- **"41 projetos de SROI do IDIS em 2024"**: divulgado pelo IDIS, não auditado;
+- **Panorama das ONGs (CAF + IDIS):** URL de divulgação secundária: localizar a publicação original;
+- **Cases Liga STEAM / Doutores da Alegria com SROI**: não confirmados; **não citar como fato**;
+- **CBVE 2025, "95,12% de voluntariado empresarial com indicadores quantitativos"**: número não rastreado à base original;
+- **Ética da escuta:** pesquisa com beneficiários exige consentimento e anonimato: diretriz da SVI, não relida nesta rodada;
+- **Amostra do IDIS 2018:** pequena e não probabilística: usar como indicador de assimetria, nunca como estatística nacional.
 
 ---
 
 ## 12. Medição de Impacto na Prática: Casos Reais
 
-As seções anteriores desenharam o sistema; este bloco mostra como ele aparece — e como não aparece — em organizações reais. A pesquisa de casos mapeou **11 organizações verificadas** (7 brasileiras e 4 internacionais), todas com CNPJ, registro estatutário ou demonstração financeira localizada: **nenhuma cifra desta seção é estimativa própria**. O próprio mapeamento aponta, para esta lição, três casos — **Instituto Sou da Paz, Todos Pela Educação e TETO Brasil (avaliação com a FGV)** — aos quais se soma a **Fundação Itaú**, cujos números de alcance são os mais desagregados do recorte.
+As seções anteriores desenharam o sistema; este bloco mostra como ele aparece, e como não aparece, em organizações reais. A pesquisa de casos mapeou **11 organizações verificadas** (7 brasileiras e 4 internacionais), todas com CNPJ, registro estatutário ou demonstração financeira localizada: **nenhuma cifra desta seção é estimativa própria**. O próprio mapeamento aponta, para esta lição, três casos, **Instituto Sou da Paz, Todos Pela Educação e TETO Brasil (avaliação com a FGV)**, aos quais se soma a **Fundação Itaú**, cujos números de alcance são os mais desagregados do recorte.
 
 Toda análise a seguir responde a três perguntas: **o que a organização alega medir** (qual nível da cadeia da Seção 1), **com que dado verificado** (valor, ano e fonte) e **como mede** (indicador, denominador e ciclo). A terceira pergunta é a que decide se o número sustenta prestação de contas, resultado ou impacto.
 
@@ -774,20 +774,20 @@ Toda análise a seguir responde a três perguntas: **o que a organização alega
 | **Habitat for Humanity** | Alcance direto × indireto com números separados | 3.035.972 pessoas com moradia (FY2024); +5,3 mi por incidência; +62 mi desde 1976 | Duas contagens distintas: pessoas com moradia (diretas) e alcance por incidência (indiretas), com o total acumulado desde 1976 |
 
 > [!NOTE]
-> **Leitura da matriz:** nenhuma das cinco organizações publica um número "de impacto" puro. Todas publicam **produto** com unidade, ano e fonte — e é exatamente isso que as torna auditáveis. O salto para resultado e para impacto depende do que a organização declara em seguida: série histórica, meta com fórmula ou grupo de comparação.
+> **Leitura da matriz:** nenhuma das cinco organizações publica um número "de impacto" puro. Todas publicam **produto** com unidade, ano e fonte, e é exatamente isso que as torna auditáveis. O salto para resultado e para impacto depende do que a organização declara em seguida: série histórica, meta com fórmula ou grupo de comparação.
 
-- **🔢 Você sabia?** A própria pesquisa de casos mostra por que comparar escala sem métrica é inválido: o mesmo conceito de "alcance" aparece como **5.000 famílias (TETO)**, **5,16 mi de pessoas (Itaú Social)**, **290 mil voluntários (Atados)**, **1 em cada 7 bengaleses (BRAC)** e **3,03 mi de pessoas diretas mais 5,3 mi indiretas (Habitat)**. São cinco unidades diferentes — nenhuma se converte na outra sem conversão declarada, com denominador e ano.
+- **🔢 Você sabia?** A própria pesquisa de casos mostra por que comparar escala sem métrica é inválido: o mesmo conceito de "alcance" aparece como **5.000 famílias (TETO)**, **5,16 mi de pessoas (Itaú Social)**, **290 mil voluntários (Atados)**, **1 em cada 7 bengaleses (BRAC)** e **3,03 mi de pessoas diretas mais 5,3 mi indiretas (Habitat)**. São cinco unidades diferentes: nenhuma se converte na outra sem conversão declarada, com denominador e ano.
 
 ### 12.2 Instituto Sou da Paz: incidência medida por evidência
 
-**O que alega medir.** Segurança pública **com evidências**: o produto é conhecimento técnico sobre armas, homicídios, investigação e justiça juvenil, e a mudança pretendida é **incidência em política pública** — a lição do caso é que, em trabalho de advocacia, **impacto se mede por evidência produzida e por incidência alcançada**, nunca por beneficiário direto inventado.
+**O que alega medir.** Segurança pública **com evidências**: o produto é conhecimento técnico sobre armas, homicídios, investigação e justiça juvenil, e a mudança pretendida é **incidência em política pública**: a lição do caso é que, em trabalho de advocacia, **impacto se mede por evidência produzida e por incidência alcançada**, nunca por beneficiário direto inventado.
 
 **Dados verificados.** Em 2025: **6 estados** com o programa DESARMES, **3.300 policiais capacitados**, **8 pesquisas** e **225 mil armas analisadas** (plataforma Arsenal do Crime); a campanha acumula **+700 mil armas em 20 anos**. Receita de **R$ 12.792.835 em 2022**, dos quais **65% de fundações do exterior**; equipe de **25 pessoas**, **auditoria da KPMG** e selo de interesse público do Ministério Público.
 
 **Como mede.** (i) contagem de produto com **unidade e ano** (armas analisadas, policiais, pesquisas); (ii) **cobertura territorial** (estados alcançados) como denominador de alcance; (iii) **governança de meta**: conselhos Diretor e Fiscal que **fixam e monitoram metas**, com comitê de equidade e página de transparência publicada.
 
 > [!TIP]
-> **O que copiar do sistema de medição do Sou da Paz:** (1) em trabalho de **incidência**, meça o que é seu de fato — **evidência produzida** (pesquisas, dados) e **alcance da incidência** (estados, policiais capacitados) — em vez de inventar "beneficiários diretos" que a própria atividade não gera; (2) publique **metas fixadas por um colegiado**, não pela equipe executiva: a meta deixa de ser opinião de quem executa; (3) mantenha **auditoria e página de transparência independentes do doador** — principalmente quando **65% da receita** vem de fonte externa concentrada.
+> **O que copiar do sistema de medição do Sou da Paz:** (1) em trabalho de **incidência**, meça o que é seu de fato: **evidência produzida** (pesquisas, dados) e **alcance da incidência** (estados, policiais capacitados): em vez de inventar "beneficiários diretos" que a própria atividade não gera; (2) publique **metas fixadas por um colegiado**, não pela equipe executiva: a meta deixa de ser opinião de quem executa; (3) mantenha **auditoria e página de transparência independentes do doador**: principalmente quando **65% da receita** vem de fonte externa concentrada.
 
 ### 12.3 Todos Pela Educação: o resultado é política pública monitorada
 
@@ -795,36 +795,36 @@ Toda análise a seguir responde a três perguntas: **o que a organização alega
 
 **Dados verificados.** Em 2024, receita de **R$ 26.082.377**, **sem recebimento de recursos públicos**, com superávit de **R$ 4,66 mi**, patrimônio líquido de **R$ 16,9 mi** e aplicação a **15,40% a.a.**; a agenda **Educação Já** reúne **13 temas** e o **Educação Já Municípios** cobriu **62% das matrículas** em 2024; o **Anuário da Educação Básica** está em sua **12ª edição (2025)**. Governança com Assembleia Geral, Conselho de Administração e **auditoria independente anual**.
 
-**Como mede.** (i) **denominador externo** — o percentual é calculado sobre **matrículas da Educação Básica**, número que existe independentemente da ONG; (ii) **série anual comparável** — 12 edições seguidas do anuário funcionam como linha de base pública; (iii) **cobertura municipal** — os 62% são alcance do monitoramento, não resultado educacional.
+**Como mede.** (i) **denominador externo**, o percentual é calculado sobre **matrículas da Educação Básica**, número que existe independentemente da ONG; (ii) **série anual comparável**: 12 edições seguidas do anuário funcionam como linha de base pública; (iii) **cobertura municipal**: os 62% são alcance do monitoramento, não resultado educacional.
 
 > [!TIP]
-> **O que copiar do sistema do Todos Pela Educação:** (1) quando não houver beneficiário direto, declare o **denominador externo** (matrículas, municípios, populações) — ele dá escala sem inflar a conta; (2) publique **série anual**: um anuário na 12ª edição é, por si só, uma linha de base verificável por terceiros; (3) trate a **independência de financiamento como parte do indicador**: para quem critica política pública, **não receber verba pública** é o que sustenta a credibilidade da crítica.
+> **O que copiar do sistema do Todos Pela Educação:** (1) quando não houver beneficiário direto, declare o **denominador externo** (matrículas, municípios, populações): ele dá escala sem inflar a conta; (2) publique **série anual**: um anuário na 12ª edição é, por si só, uma linha de base verificável por terceiros; (3) trate a **independência de financiamento como parte do indicador**: para quem critica política pública, **não receber verba pública** é o que sustenta a credibilidade da crítica.
 
 ### 12.4 TETO Brasil: produto padronizado, meta com prazo e avaliação externa
 
-**O que alega medir.** Habitação emergencial com **produto padronizado** — a casa montada em **2 dias** torna a contagem auditável em qualquer território — combinado a avaliação externa de impacto.
+**O que alega medir.** Habitação emergencial com **produto padronizado**, a casa montada em **2 dias** torna a contagem auditável em qualquer território, combinado a avaliação externa de impacto.
 
 **Dados verificados.** Em 2024: **113 moradias**, **76 projetos** e **8.134 voluntários**; a **5.000ª moradia** foi alcançada em **dez/2024, em Diadema**; acumulado de **+90 mil voluntários** e **+327 projetos**; **meta 2030 de 1 milhão de pessoas**; e **avaliação de impacto com a FGV**. A captação do jantar de **dez/2025 (~R$ 1,8 mi)** é **declaração da própria organização, sem balanço auditado localizado**.
 
-**Como mede.** (i) **contagem por ciclo** de um produto idêntico (moradia); (ii) **meta de longo prazo com ano declarado** (2030); (iii) **juízo de impacto terceirizado** na FGV — a organização não se autoatribui a causalidade.
+**Como mede.** (i) **contagem por ciclo** de um produto idêntico (moradia); (ii) **meta de longo prazo com ano declarado** (2030); (iii) **juízo de impacto terceirizado** na FGV: a organização não se autoatribui a causalidade.
 
 > [!TIP]
-> **O que copiar do sistema do TETO:** (1) **padronize o produto antes de contá-lo**: o que é montado igual em todo lugar pode ser auditado em qualquer lugar; (2) **declare a unidade da meta** — "1 milhão de pessoas" (2030) e "113 moradias" (2024) não são a mesma métrica, e compará-las exige conversão declarada de pessoas por moradia; (3) **separe quem entrega de quem avalia**: a FGV julga resultado e impacto, a ONG responde por produto e execução.
+> **O que copiar do sistema do TETO:** (1) **padronize o produto antes de contá-lo**: o que é montado igual em todo lugar pode ser auditado em qualquer lugar; (2) **declare a unidade da meta**: "1 milhão de pessoas" (2030) e "113 moradias" (2024) não são a mesma métrica, e compará-las exige conversão declarada de pessoas por moradia; (3) **separe quem entrega de quem avalia**: a FGV julga resultado e impacto, a ONG responde por produto e execução.
 
 ### 12.5 Fundação Itaú: alcance com denominador declarado
 
-**O que alega medir.** Alcance em escala, com **unidades separadas** — pessoas, turmas, escolas e municípios — em vez de um único número agregado.
+**O que alega medir.** Alcance em escala, com **unidades separadas**, pessoas, turmas, escolas e municípios, em vez de um único número agregado.
 
 **Dados verificados.** Em 2024: receitas de **R$ 444,2 mi** (**93% financeiras**), despesas de **R$ 307,3 mi** (das quais **R$ 181,7 mi** em projetos), superávit de **R$ 136,8 mi** e patrimônio líquido de **R$ 5,54 bi**; **R$ 297 mi investidos**, **5,16 mi de pessoas**, **95 mil turmas**, **20,8 mil escolas**, **3,2 mil municípios** e **R$ 19,9 mi mobilizados** para OSCs. O **FIA 2024** distribuiu **R$ 18,8 mi** do 1% do IR para **40 projetos** (2023: R$ 24,5 mi).
 
 **Como mede.** (i) **denominador por unidade**: cada número tem sua própria unidade, o que permite razões auditáveis como o custo por pessoa alcançada (Exemplo 10); (ii) **indicador público com limite**: a organização declara parâmetro que **limita os custos administrativos a 5% do investido**; (iii) **mobilização separada de execução**: os R$ 19,9 mi mobilizados para OSCs são publicados à parte do investido, para não confundir repasse com entrega.
 
-- **🔢 Você sabia?** A BRAC publica, no mesmo relatório, **duas unidades diferentes**: alcance — "**1 em cada 5 bengaleses** atendeu" (2024) e "**~26 milhões, 1 em cada 7**" (2025) — e mudança — "**2,3 milhões saíram da pobreza extrema**" (2024). Declarar denominador populacional **e** resultado na mesma página é o oposto do impact washing (lavagem de impacto): o leitor enxerga o que é cobertura e o que é mudança.
+- **🔢 Você sabia?** A BRAC publica, no mesmo relatório, **duas unidades diferentes**: alcance: "**1 em cada 5 bengaleses** atendeu" (2024) e "**~26 milhões, 1 em cada 7**" (2025), e mudança: "**2,3 milhões saíram da pobreza extrema**" (2024). Declarar denominador populacional **e** resultado na mesma página é o oposto do impact washing (lavagem de impacto): o leitor enxerga o que é cobertura e o que é mudança.
 
 > [!WARNING]
-> **Impact washing: transformar alcance em impacto sem trocar de nível.** O hábito mais exportável do setor é publicar escala como prova de mudança — "chegamos a 5,16 milhões de pessoas", "5.000 famílias atendidas", "225 mil armas analisadas" — e deixar o leitor a concluir o resto. Alcance é **produto**; mudança é **resultado**; atribuição é **estudo de impacto**. Antes de publicar qualquer número de escala, três checagens: (i) **declare a métrica** — famílias, pessoas, turmas, voluntários e indiretos não são comparáveis entre si; (ii) **declare fonte e ano**, inclusive quando forem declaração da própria organização sem balanço; (iii) **declare o que mudou** (linha de base, meta com fórmula ou contragrupo). Sem o item (iii), o número segue sendo alcance — e nem auditoria financeira converte produto em impacto.
+> **Impact washing: transformar alcance em impacto sem trocar de nível.** O hábito mais exportável do setor é publicar escala como prova de mudança, "chegamos a 5,16 milhões de pessoas", "5.000 famílias atendidas", "225 mil armas analisadas", e deixar o leitor a concluir o resto. Alcance é **produto**; mudança é **resultado**; atribuição é **estudo de impacto**. Antes de publicar qualquer número de escala, três checagens: (i) **declare a métrica**, famílias, pessoas, turmas, voluntários e indiretos não são comparáveis entre si; (ii) **declare fonte e ano**, inclusive quando forem declaração da própria organização sem balanço; (iii) **declare o que mudou** (linha de base, meta com fórmula ou contragrupo). Sem o item (iii), o número segue sendo alcance, e nem auditoria financeira converte produto em impacto.
 
-### 12.6 Exemplo 9 — taxa de alcance e o teste da definição operacional (Sou da Paz)
+### 12.6 Exemplo 9: taxa de alcance e o teste da definição operacional (Sou da Paz)
 
 Com os dados verificados do caso, as contas são reproduzíveis por qualquer leitor:
 
@@ -849,9 +849,9 @@ TESTE DE DEFINIÇÃO OPERACIONAL (antes de publicar a conta 5):
   for, publique apenas as taxas (1 a 3), que saem do MESMO recorte.
 ```
 
-As taxas (1) a (3) são defensáveis porque saem de um **recorte único** (mesmo ano, mesma fonte, mesmo período). A razão (5) é didática: ela só vira indicador publicável depois da ficha de definição operacional. E nada disso prova mudança na segurança pública — é **alcance**; para resultado, o caso precisaria de série histórica de homicídios nos 6 estados atendidos, com e sem programa.
+As taxas (1) a (3) são defensáveis porque saem de um **recorte único** (mesmo ano, mesma fonte, mesmo período). A razão (5) é didática: ela só vira indicador publicável depois da ficha de definição operacional. E nada disso prova mudança na segurança pública: é **alcance**; para resultado, o caso precisaria de série histórica de homicídios nos 6 estados atendidos, com e sem programa.
 
-### 12.7 Exemplo 10 — linha de base de custo por alcançado (Fundação Itaú, 2024)
+### 12.7 Exemplo 10: linha de base de custo por alcançado (Fundação Itaú, 2024)
 
 A linha de base também pode ser **montada a partir de números públicos**, desde que numerador e denominador venham da mesma fonte e do mesmo ano:
 
@@ -880,7 +880,7 @@ Observação: os valores financeiros da fonte vêm EM R$ MIL —
 confira o PDF original antes de reproduzi-los (item não verificado).
 ```
 
-Três decisões tornam essa linha de base defensável: (i) a **unidade está declarada** ("por pessoa alcançada", não "por beneficiário" — beneficiário exigiria definição operacional de quem entra e quem não entra); (ii) **fonte e ano são os mesmos** em numerador e denominador; (iii) a meta é **declarada como relativa** sobre a linha de base, evitando a armadilha da Seção 6.1. Repare no limite: o denominador é **alcance** — a conta melhora custo por alcance, não prova mudança; para resultado, o painel da Seção 8.1 precisaria de indicador de aprendizagem ou de permanência das turmas.
+Três decisões tornam essa linha de base defensável: (i) a **unidade está declarada** ("por pessoa alcançada", não "por beneficiário", beneficiário exigiria definição operacional de quem entra e quem não entra); (ii) **fonte e ano são os mesmos** em numerador e denominador; (iii) a meta é **declarada como relativa** sobre a linha de base, evitando a armadilha da Seção 6.1. Repare no limite: o denominador é **alcance**, a conta melhora custo por alcance, não prova mudança; para resultado, o painel da Seção 8.1 precisaria de indicador de aprendizagem ou de permanência das turmas.
 
 ### 12.8 Síntese: o que copiar de cada sistema de medição
 
@@ -916,7 +916,7 @@ Com a síntese à vista, ordene agora o passo a passo que transforma **qualquer 
 ```
 
 > [!NOTE]
-> **Transferência para a sua organização:** escolha **um** indicador de um caso desta seção e preencha a ficha de 9 campos (Seção 5.2) com os seus números: unidade, fórmula, linha de base do último ciclo, meta relativa ou absoluta, fonte, ano, frequência, responsável e desagregação. Se você não conseguir preencher a linha de base com um número que **já existe**, o indicador ainda é desejo — e desejo não entra em plano de trabalho (art. 22, IV).
+> **Transferência para a sua organização:** escolha **um** indicador de um caso desta seção e preencha a ficha de 9 campos (Seção 5.2) com os seus números: unidade, fórmula, linha de base do último ciclo, meta relativa ou absoluta, fonte, ano, frequência, responsável e desagregação. Se você não conseguir preencher a linha de base com um número que **já existe**, o indicador ainda é desejo, e desejo não entra em plano de trabalho (art. 22, IV).
 
 ---
 
@@ -961,7 +961,7 @@ Com a síntese à vista, ordene agora o passo a passo que transforma **qualquer 
     "A opinião do conselho fiscal sobre a conveniência social do programa"
   ],
   "correct": 1,
-  "explanation": "O art. 59, § 1º, II exige a análise das atividades, do cumprimento das metas e do impacto do benefício social obtido, sempre com base nos indicadores aprovados no plano de trabalho (art. 22, IV). A lei não exige ensaio aleatorizado — o rigor do desenho depende da decisão que o estudo vai informar."
+  "explanation": "O art. 59, § 1º, II exige a análise das atividades, do cumprimento das metas e do impacto do benefício social obtido, sempre com base nos indicadores aprovados no plano de trabalho (art. 22, IV). A lei não exige ensaio aleatorizado, o rigor do desenho depende da decisão que o estudo vai informar."
 }
 ```
 
@@ -974,7 +974,7 @@ Com a síntese à vista, ordene agora o passo a passo que transforma **qualquer 
     "Instituto Baccarelli, com R$ 6,45 por R$ 1 investido",
     "Amigos do Bem, com R$ 3,49 por R$ 1 investido",
     "Fundação Itaú Social, com R$ 4,08 por R$ 1 investido",
-    "FLUPP — Fundação Lucia e Pelerson Penido, programa VIM (Roseira/SP), com R$ 4,08 por R$ 1 investido"
+    "FLUPP: Fundação Lucia e Pelerson Penido, programa VIM (Roseira/SP), com R$ 4,08 por R$ 1 investido"
   ],
   "correct": 3,
   "explanation": "O 1º SROI do Brasil foi aplicado pela IDIS na Fundação Lucia e Pelerson Penido (FLUPP), em Roseira/SP, no programa VIM: R$ 4,08 de benefício social por R$ 1 investido. Amigos do Bem alcançou R$ 6,45 (auditado pela EY) e o Instituto Baccarelli R$ 3,49."
@@ -993,7 +993,7 @@ Com a síntese à vista, ordene agora o passo a passo que transforma **qualquer 
     "Apenas 61,6% monitoram projetos, e nenhuma avalia impacto"
   ],
   "correct": 0,
-  "explanation": "O setor comprova execução, não mudança: 90,7% monitoram (65% todos os projetos), mas só 17,4% declaram avaliação de impacto; entre as que monitoram tudo, apenas 31,9% avaliam impacto de todos. A amostra é pequena e não probabilística — use o dado como indicador de assimetria, nunca como estatística nacional."
+  "explanation": "O setor comprova execução, não mudança: 90,7% monitoram (65% todos os projetos), mas só 17,4% declaram avaliação de impacto; entre as que monitoram tudo, apenas 31,9% avaliam impacto de todos. A amostra é pequena e não probabilística: use o dado como indicador de assimetria, nunca como estatística nacional."
 }
 ```
 
@@ -1020,7 +1020,7 @@ Com a síntese à vista, ordene agora o passo a passo que transforma **qualquer 
     "Aplicar ensaio aleatorizado em todo projeto e reduzir custos de coleta"
   ],
   "correct": 1,
-  "explanation": "O rigor vem dos princípios 4 (só incluir o que é material), 5 (não superestimar — ajustar atribuição e o que já ocorreria de qualquer forma) e 7 (verificar o resultado, com assessoria independente quando houver público externo ou decisão relevante). O princípio 6 (transparência) também é aceitável em algumas formulações, mas os três centrais são 4, 5 e 7."
+  "explanation": "O rigor vem dos princípios 4 (só incluir o que é material), 5 (não superestimar: ajustar atribuição e o que já ocorreria de qualquer forma) e 7 (verificar o resultado, com assessoria independente quando houver público externo ou decisão relevante). O princípio 6 (transparência) também é aceitável em algumas formulações, mas os três centrais são 4, 5 e 7."
 }
 ```
 
@@ -1030,13 +1030,13 @@ Com a síntese à vista, ordene agora o passo a passo que transforma **qualquer 
   "type": "multiple-choice",
   "question": "Qual é o status verificado do GRI em 2026?",
   "options": [
-    "O GSSB aprovou GRI 106/107 (jun/2026) e GRI 104/105 (jul/2026), com publicação postergada para 2027; Economic Impacts Phase 1 em aprovação final e Phases 2–3 pausadas; piloto setorial Food & Beverage",
+    "O GSSB aprovou GRI 106/107 (jun/2026) e GRI 104/105 (jul/2026), com publicação postergada para 2027; Economic Impacts Phase 1 em aprovação final e Phases 2 to 3 pausadas; piloto setorial Food & Beverage",
     "Todos os novos padrões GRI já estão formalmente vigentes desde 01/01/2023",
     "O GRI foi substituído pelo IRIS+ como padrão de relato em 2026",
-    "O GSSB cancelou o Work Programme 2026–2028"
+    "O GSSB cancelou o Work Programme 2026 to 2028"
   ],
   "correct": 0,
-  "explanation": "O GSSB aprovou os padrões GRI 106/107 (01–02/06/2026) e GRI 104/105 (16/07/2026), com publicação postergada para 2027; Economic Impacts Phase 1 (GRI MF) está em aprovação final, Phases 2–3 estão pausadas, Pollution Phase 1 está em aprovação, o piloto setorial é Food & Beverage e o Work Programme 2026–2028 foi consultado até 27/03/2026. A data de eficácia dos Universal Standards 2021 não foi confirmada em nota oficial."
+  "explanation": "O GSSB aprovou os padrões GRI 106/107 (01 to 02/06/2026) e GRI 104/105 (16/07/2026), com publicação postergada para 2027; Economic Impacts Phase 1 (GRI MF) está em aprovação final, Phases 2 to 3 estão pausadas, Pollution Phase 1 está em aprovação, o piloto setorial é Food & Beverage e o Work Programme 2026 to 2028 foi consultado até 27/03/2026. A data de eficácia dos Universal Standards 2021 não foi confirmada em nota oficial."
 }
 ```
 
@@ -1052,7 +1052,7 @@ Com a síntese à vista, ordene agora o passo a passo que transforma **qualquer 
     "dependência de eventos de arrecadação"
   ],
   "correct": 1,
-  "explanation": "Concentração regional de doador é risco assimétrico: 65% da receita de 2022 vinha de fundações do exterior, de modo que um corte ou uma mudança de prioridade em poucas mesas atinge a maior parte do orçamento. A resposta é diversificar fontes nacionais — e, na medição, manter auditoria (KPMG), página de transparência e metas fixadas pelo conselho, que são os sinais de credibilidade independentes de quem doa."
+  "explanation": "Concentração regional de doador é risco assimétrico: 65% da receita de 2022 vinha de fundações do exterior, de modo que um corte ou uma mudança de prioridade em poucas mesas atinge a maior parte do orçamento. A resposta é diversificar fontes nacionais, e, na medição, manter auditoria (KPMG), página de transparência e metas fixadas pelo conselho, que são os sinais de credibilidade independentes de quem doa."
 }
 ```
 
@@ -1063,7 +1063,7 @@ Com a síntese à vista, ordene agora o passo a passo que transforma **qualquer 
   "question": "A BRAC registrou BDT 14,1 bilhões de doações sobre BDT 140,6 bilhões de receita no exercício encerrado em 30/06/2024. O percentual é aproximadamente:",
   "options": ["50%", "25%", "10%", "75%"],
   "correct": 2,
-  "explanation": "14,1 ÷ 140,6 = 0,1003 ≈ 10%: microfinanças (67,5%) e empresas sociais (20,1%) somam 87,6% da receita, de modo que a operação se autofinancia e a doação cobre saúde, WASH e incidência. Toda leitura de percentual exige denominador declarado e ano do exercício — a mesma disciplina da ficha de indicador (Seção 5.2) e da linha de base (Seção 5.5)."
+  "explanation": "14,1 ÷ 140,6 = 0,1003 ≈ 10%: microfinanças (67,5%) e empresas sociais (20,1%) somam 87,6% da receita, de modo que a operação se autofinancia e a doação cobre saúde, WASH e incidência. Toda leitura de percentual exige denominador declarado e ano do exercício: a mesma disciplina da ficha de indicador (Seção 5.2) e da linha de base (Seção 5.5)."
 }
 ```
 
@@ -1074,12 +1074,12 @@ Com a síntese à vista, ordene agora o passo a passo que transforma **qualquer 
     {"left": "Monitoramento", "right": "Acompanhamento contínuo de execução e progresso: responde a eficiência e ao cumprimento de metas"},
     {"left": "Avaliação", "right": "Juízo sobre mérito, relevância, efetividade, eficiência, impacto e sustentabilidade"},
     {"left": "Estudo de impacto", "right": "Desenho com grupo de comparação ou método equivalente que permite atribuição causal"},
-    {"left": "Output (produto)", "right": "\"240 alunos concluintes\" — prova entrega, não mudança no público"},
-    {"left": "Outcome (resultado)", "right": "\"Evasão caiu de 12,0% para 9,6%\" — mudança de médio prazo em quem participou"},
+    {"left": "Output (produto)", "right": "\"240 alunos concluintes\": prova entrega, não mudança no público"},
+    {"left": "Outcome (resultado)", "right": "\"Evasão caiu de 12,0% para 9,6%\": mudança de médio prazo em quem participou"},
     {"left": "Art. 22, IV da MROSC", "right": "Plano de trabalho deve conter os parâmetros para a aferição do cumprimento das metas"},
     {"left": "Art. 58, § 2º da MROSC", "right": "Parceria superior a 1 ano: pesquisa de satisfação com beneficiários e ajuste de metas e atividades"}
   ],
-  "explanation": "Monitoramento cuida da execução, avaliação faz juízo de mérito e efetividade, e só o estudo de impacto sustenta a atribuição causal. Na cadeia, o output é a entrega e o outcome é a mudança observada — confundir os dois gera relatório bonito sem tese de impacto. No plano legal, o art. 22, IV traz os parâmetros de aferição das metas e o art. 58, § 2º impõe a escuta dos beneficiários nas parcerias com vigência superior a 1 ano."
+  "explanation": "Monitoramento cuida da execução, avaliação faz juízo de mérito e efetividade, e só o estudo de impacto sustenta a atribuição causal. Na cadeia, o output é a entrega e o outcome é a mudança observada: confundir os dois gera relatório bonito sem tese de impacto. No plano legal, o art. 22, IV traz os parâmetros de aferição das metas e o art. 58, § 2º impõe a escuta dos beneficiários nas parcerias com vigência superior a 1 ano."
 }
 ```
 
@@ -1094,7 +1094,7 @@ Com a síntese à vista, ordene agora o passo a passo que transforma **qualquer 
     "4": "9,6%"
   },
   "distractors": ["6,45", "3,85", "10,0%", "20%"],
-  "explanation": "O SROI divide o benefício social ajustado pelo investimento total: 373.258,80 ÷ 120.000 = R$ 3,11 por R$ 1. Os valores reais do digest são R$ 4,08 (FLUPP, 1º SROI do Brasil) e R$ 3,49 (Instituto Baccarelli) — R$ 6,45 é do Amigos do Bem, usado aqui como distrator. A meta relativa é 12,0% × 0,80 = 9,6%; 10,0% seria a meta absoluta (12,0% − 2,0 p.p.)."
+  "explanation": "O SROI divide o benefício social ajustado pelo investimento total: 373.258,80 ÷ 120.000 = R$ 3,11 por R$ 1. Os valores reais do digest são R$ 4,08 (FLUPP, 1º SROI do Brasil) e R$ 3,49 (Instituto Baccarelli): R$ 6,45 é do Amigos do Bem, usado aqui como distrator. A meta relativa é 12,0% × 0,80 = 9,6%; 10,0% seria a meta absoluta (12,0% − 2,0 p.p.)."
 }
 ```
 
@@ -1103,22 +1103,22 @@ Com a síntese à vista, ordene agora o passo a passo que transforma **qualquer 
 > [!WARNING]
 > **Armadilhas desta lição:**
 > - **Confundir output com impacto**: "240 alunos concluintes" é produto; só comparação com meta, linha de base ou grupo externo sustenta mudança;
-> - **Medir só satisfação e chamar de impacto**: pesquisa de satisfação é insumo de aprendizagem (art. 58, § 2º), não estudo de impacto — não tem grupo de comparação;
+> - **Medir só satisfação e chamar de impacto**: pesquisa de satisfação é insumo de aprendizagem (art. 58, § 2º), não estudo de impacto: não tem grupo de comparação;
 > - **5 dimensões do IMP, não 6**: What, Who, How Much, Contribution, Risk;
 > - **Prestação de contas ≠ evidência de impacto**: recibo prova conformidade, estudo de impacto prova mudança;
-> - **O art. 56 (25%) foi revogado** — no âmbito federal vale o Decreto nº 8.726/2016, art. 43 (apostilamento, ≤10% do valor global); e ajustar valor não é mudar meta (art. 57);
-> - **"Reduzir 20%" sem fórmula** pode significar meta de 9,6% ou de 10,0% — declare se é relativa ou absoluta;
+> - **O art. 56 (25%) foi revogado**: no âmbito federal vale o Decreto nº 8.726/2016, art. 43 (apostilamento, ≤10% do valor global); e ajustar valor não é mudar meta (art. 57);
+> - **"Reduzir 20%" sem fórmula** pode significar meta de 9,6% ou de 10,0%: declare se é relativa ou absoluta;
 > - **SROI é estudo pontual**, não KPI de rotina;
 > - **Dados não conferidos** (IRIS+ v5.3c/781 métricas, 95,12% do CBVE, ~15% do Censo GIFE, 68% de recursos restritos, 41 projetos do IDIS) só podem ser citados como **não verificados**;
-> - A assimetria **90,7% monitoram × 17,4% avaliam** vem de amostra pequena e não probabilística — nunca a apresente como estatística nacional.
+> - A assimetria **90,7% monitoram × 17,4% avaliam** vem de amostra pequena e não probabilística: nunca a apresente como estatística nacional.
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
 > - A cadeia de resultados separa **insumo → atividade → produto → resultado → impacto**; monitoramento responde a eficiência, avaliação a efetividade e impacto, e só o **estudo de impacto** sustenta a frase "graças ao nosso programa";
 > - O **MROSC (Lei nº 13.019/2014)** obriga a pensar em impacto: parâmetros de aferição no plano (art. 22, IV), M&A pela administração (art. 58), **pesquisa de satisfação** em parcerias acima de 1 ano (art. 58, § 2º) e relatório técnico com "impacto do benefício social" (art. 59, § 1º, II);
 > - O **art. 56 (remanjamento de 25%) foi revogado**: federalmente valem apostilamento pelo Decreto nº 8.726/2016 (≤10% do valor global) e a regra de que **metas mudam só por termo aditivo ou apostila** (art. 57);
-> - **Sem linha de base não existe meta defensável** — e "reduzir 20%" significa 9,6% (relativa) ou 10,0% (absoluta), cerca de **5 alunos por ano** de diferença em 1.200;
-> - A assimetria brasileira é clara — **90,7% monitoram, só 17,4% avaliam impacto** (IDIS 2018, amostra não probabilística) — enquanto **89% dos doadores** querem evidência de que a doação faz diferença (Doação Brasil 2024);
+> - **Sem linha de base não existe meta defensável**, e "reduzir 20%" significa 9,6% (relativa) ou 10,0% (absoluta), cerca de **5 alunos por ano** de diferença em 1.200;
+> - A assimetria brasileira é clara, **90,7% monitoram, só 17,4% avaliam impacto** (IDIS 2018, amostra não probabilística), enquanto **89% dos doadores** querem evidência de que a doação faz diferença (Doação Brasil 2024);
 > - Os frameworks se complementam: **Teoria da Mudança** explica o nexo causal, o **modelo lógico** organiza indicadores, **IRIS+/GRI** padronizam o relato, **IMP** qualifica em 5 dimensões e o **SROI** traduz mudanças em R$ por R$ investido;
-> - Cases reais: **FLUPP R$ 4,08** (1º SROI do Brasil), **Amigos do Bem R$ 6,45** (auditado pela EY) e **Baccarelli R$ 3,49** — evidência + auditoria + tradução simples igual a captação;
-> - A rota prática é sair do **Nível 1 (contábil) para o Nível 3 (aprendizagem) em 12 meses** com painel de KPIs (fonte, frequência, meta e responsável), linha de base, escuta semestral e ciclo de correção de rota documentado — o Nível 4 fica para o projeto prioritário.
+> - Cases reais: **FLUPP R$ 4,08** (1º SROI do Brasil), **Amigos do Bem R$ 6,45** (auditado pela EY) e **Baccarelli R$ 3,49**: evidência + auditoria + tradução simples igual a captação;
+> - A rota prática é sair do **Nível 1 (contábil) para o Nível 3 (aprendizagem) em 12 meses** com painel de KPIs (fonte, frequência, meta e responsável), linha de base, escuta semestral e ciclo de correção de rota documentado, o Nível 4 fica para o projeto prioritário.

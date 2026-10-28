@@ -124,7 +124,7 @@ Quadros definem quais linhas são visíveis para a função de janela.
 
 | Tipo de quadro | Base | Tratamento de empates |
 |---|---|---|
-| `ROWS` | Contagem física de linhas | Ignora empates — cada linha é distinta |
+| `ROWS` | Contagem física de linhas | Ignora empates: cada linha é distinta |
 | `RANGE` | Diferença de valor da linha atual | Inclui todos os empates |
 | `GROUPS` | Grupos de valores iguais | Trata valores iguais como um grupo |
 

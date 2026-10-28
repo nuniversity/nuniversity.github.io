@@ -34,7 +34,7 @@ ORDER BY last_name;
 ```
 
 > [!NOTE]
-> A view is just a stored query. It has no data of its own — every query against a view runs the underlying SELECT. Tables referenced in a view are called base tables.
+> A view is just a stored query. It has no data of its own: every query against a view runs the underlying SELECT. Tables referenced in a view are called base tables.
 
 ### Why Use Views?
 
@@ -96,7 +96,7 @@ A view is updatable when:
 > |-----------------------|--------|
 > | `CREATE VIEW v AS SELECT ... FROM a JOIN b` | Multiple base tables |
 > | `CREATE VIEW v AS SELECT DISTINCT ...` | Cannot map back to single row |
-> | `CREATE VIEW v AS SELECT SUM(...)` | Aggregate — no row identity |
+> | `CREATE VIEW v AS SELECT SUM(...)` | Aggregate: no row identity |
 > | `CREATE VIEW v AS SELECT ... UNION ...` | Multiple sources |
 
 ## WITH CHECK OPTION

@@ -419,7 +419,7 @@ flowchart LR
 5. **Monitor production**: Track performance on real data
 
 [!IMPORTANT]
-**Avoiding overfitting is the single most important skill in production prompt engineering.** A prompt that scores 98% on your hand-crafted test set but 60% in production is worse than useless — it gives false confidence. Always maintain a held-out test set that you never optimize against, and continuously monitor production performance.
+**Avoiding overfitting is the single most important skill in production prompt engineering.** A prompt that scores 98% on your hand-crafted test set but 60% in production is worse than useless; it gives false confidence. Always maintain a held-out test set that you never optimize against, and continuously monitor production performance.
 
 ### Overfitting Case Study
 
@@ -497,7 +497,7 @@ flowchart LR
   "id": "pe-04-q6",
   "type": "multiple-choice",
   "question": "A prompt engineer runs an A/B test with only 5 test cases. Version A gets 4/5 correct and version B gets 5/5. What should they conclude?",
-  "options": ["Version B is definitively better — deploy immediately", "The sample size is too small to draw statistically significant conclusions", "Both versions are equally good", "Version A should be discarded permanently"],
+  "options": ["Version B is definitively better: deploy immediately", "The sample size is too small to draw statistically significant conclusions", "Both versions are equally good", "Version A should be discarded permanently"],
   "correct": 1,
   "explanation": "With only 5 test cases, a single result difference doesn't prove superiority. A/B tests need at least 50-100 diverse cases per version for meaningful results."
 }
@@ -541,7 +541,7 @@ flowchart LR
   "id": "pe-04-q10",
   "type": "multiple-choice",
   "question": "A prompt engineer adds a complex instruction to handle a rare edge case, improving accuracy from 94% to 95% on the test set. The prompt is now 3x longer. Should they deploy it?",
-  "options": ["Yes — higher accuracy always wins", "No — the marginal gain likely doesn't justify the added complexity and potential overfitting risk", "Only if they also increase the temperature", "Yes — longer prompts always produce better results"],
+  "options": ["Yes: higher accuracy always wins", "No: the marginal gain likely doesn't justify the added complexity and potential overfitting risk", "Only if they also increase the temperature", "Yes: longer prompts always produce better results"],
   "correct": 1,
   "explanation": "A 1% accuracy gain at 3x complexity likely indicates overfitting to edge cases in the test set. The added complexity may hurt generalization on unseen data. Simpler prompts generalize better."
 }
@@ -556,8 +556,8 @@ flowchart LR
 - A/B testing compares prompt versions systematically using metrics like accuracy, consistency, and latency
 - Version control (Git + SemVer) is critical for production prompts; always document changes
 - Prompt templates separate structure from data, improving maintainability and consistency
-- Overfitting happens when prompts work on test data but fail on real data—use holdout validation
+- Overfitting happens when prompts work on test data but fail on real data: use holdout validation
 - Production systems need monitoring, logging, and rollback capabilities
-- Statistical significance matters in A/B testing — don't declare winners on tiny samples
+- Statistical significance matters in A/B testing: don't declare winners on tiny samples
 - Template libraries like Jinja2 enable complex conditional prompt generation
-- Simpler prompts generalize better — don't over-engineer for marginal gains
+- Simpler prompts generalize better: don't over-engineer for marginal gains

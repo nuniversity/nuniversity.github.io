@@ -20,7 +20,7 @@ Choosing the right materialization is the single most impactful architectural de
 | View | `view` | None (metadata only) | Always current | No (breaks on drop+cascade) | bind config |
 | Late-binding view | `view` + `bind: false` | None | Always current | **Yes** | Redshift-only |
 | Incremental | `incremental` | Partial updates | Updated incrementally | Partial | All incremental strategies |
-| Ephemeral | `ephemeral` | None (CTE) | N/A — inline | N/A | None |
+| Ephemeral | `ephemeral` | None (CTE) | N/A: inline | N/A | None |
 | Materialized view | `materialized_view` | Precomputed | Auto or manual refresh | Yes (DROP CASCADE) | sort/dist/auto_refresh/backup |
 
 ---
@@ -69,13 +69,13 @@ models:
 ```
 
 [!IMPORTANT]
-Always use `bind: false` (late-binding views) in production Redshift deployments. Regular views break when upstream tables are dropped during a full refresh — a very common dbt operation. This is the primary reason to prefer late-binding views for the `view` materialization on Redshift.
+Always use `bind: false` (late-binding views) in production Redshift deployments. Regular views break when upstream tables are dropped during a full refresh: a very common dbt operation. This is the primary reason to prefer late-binding views for the `view` materialization on Redshift.
 
 ---
 
 ## Redshift Materialized Views
 
-Redshift materialized views store precomputed query results on disk and can be refreshed automatically or on demand. They are distinct from dbt's `incremental` strategy — they are a native Redshift feature.
+Redshift materialized views store precomputed query results on disk and can be refreshed automatically or on demand. They are distinct from dbt's `incremental` strategy; they are a native Redshift feature.
 
 ### When to use materialized views
 
@@ -189,7 +189,7 @@ where region = 'EMEA'
 
 ---
 
-## Ephemeral Models — When and When Not
+## Ephemeral Models: When and When Not
 
 Ephemeral models inject their SQL as a CTE into downstream queries. They have **no storage** and are computed inline at query time.
 
@@ -208,7 +208,7 @@ left join {{ ref('stg_customers') }} c using (customer_id)
 Downstream models using `ref('int_orders_enriched')` will inline this CTE automatically.
 
 **Use ephemeral when:**
-- The transformation is a lightweight join or column rename used in only 1–2 downstream models
+- The transformation is a lightweight join or column rename used in only 1 to 2 downstream models
 - You want to avoid materializing intermediate results for cost reasons
 
 **Avoid ephemeral when:**
@@ -323,12 +323,12 @@ models:
   "question": "An ephemeral model is referenced by 8 different downstream models. What is the performance risk?",
   "options": [
     "Ephemeral models cannot be referenced by more than 3 models",
-    "The ephemeral CTE is inlined and re-executed once per downstream model — 8 times total",
+    "The ephemeral CTE is inlined and re-executed once per downstream model: 8 times total",
     "The ephemeral model is cached after the first execution",
     "dbt will automatically convert it to a table if it's referenced more than 5 times"
   ],
   "correct": 1,
-  "explanation": "Ephemeral models are CTEs inlined into each downstream model's compiled SQL. Redshift executes the CTE for each downstream model independently — there is no caching."
+  "explanation": "Ephemeral models are CTEs inlined into each downstream model's compiled SQL. Redshift executes the CTE for each downstream model independently; there is no caching."
 }
 ```
 
@@ -356,7 +356,7 @@ models:
   "options": [
     "bind: true",
     "dist: all",
-    "bind: false — late-binding views are required for Spectrum external table compatibility",
+    "bind: false: late-binding views are required for Spectrum external table compatibility",
     "auto_refresh: true"
   ],
   "correct": 2,
@@ -370,7 +370,7 @@ models:
   "type": "multiple-choice",
   "question": "How long can the auto-refresh lag be for Redshift Serverless materialized views?",
   "options": [
-    "Immediate — no lag",
+    "Immediate: no lag",
     "Up to 5 minutes",
     "Up to 1 hour",
     "Up to 24 hours"
@@ -386,8 +386,8 @@ models:
 ### Key Takeaways
 
 - Always use late-binding views (`bind: false`) in production Redshift deployments to survive upstream DROP CASCADE operations.
-- Redshift materialized views with `auto_refresh=true` are the best choice for BI-facing aggregations — precomputed storage, automatic freshness, no extra dbt runs needed.
+- Redshift materialized views with `auto_refresh=true` are the best choice for BI-facing aggregations: precomputed storage, automatic freshness, no extra dbt runs needed.
 - Use `on_configuration_change: fail` in CI pipelines to detect materialized view config drift early.
-- Ephemeral models are CTEs inlined per downstream model — avoid them when referenced by many models.
+- Ephemeral models are CTEs inlined per downstream model: avoid them when referenced by many models.
 - The `post_hook` pattern with `REFRESH MATERIALIZED VIEW` ensures freshness guarantees stricter than auto-refresh's 5-minute lag.
 - Layer your project: staging → late-binding views, intermediate → ephemeral or views, marts/facts → tables, reporting → materialized views.

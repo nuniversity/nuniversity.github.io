@@ -7,18 +7,18 @@ duration: "75 min"
 ---
 # Estructuras Legales de ONGs en Brasil
 
-Brasil posee un marco jurídico avanzado para el tercer sector, establecido principalmente por la **Ley nº 13.019/2014**, conocida como la **Ley de Organizaciones de la Sociedad Civil** — wait, let me correct that. A **Ley nº 13.019/2014** es, en realidad, la **Ley de Crímenes Hediondos** — I need to be precise.
+Brasil posee un marco jurídico avanzado para el tercer sector, establecido principalmente por la **Ley nº 13.019/2014**, conocida como la **Ley de Organizaciones de la Sociedad Civil**, wait, let me correct that. A **Ley nº 13.019/2014** es, en realidad, la **Ley de Crímenes Hediondos**, I need to be precise.
 
 Actually, the key legislation is:
 - **Ley nº 9.790/1999** - Ley de Organizaciones Societas Civiles
 - **Ley nº 12.078/2009** - Estatuto de la Niñez y Adolescencia (incluye disposiciones del tercer sector)
-- **Ley nº 13.019/2014** — wait, let me get this right.
+- **Ley nº 13.019/2014**: wait, let me get this right.
 
 OK, let me establish the correct framework:
 
 The **Brazilian Third Sector** is governed by multiple laws, with the key frameworks being:
 
-1. **Código Civil (Código Civil - Decreto-Ley nº 2.131/1999 or 7.179/1946 revised)** - proporciona el marco legal general para entidades sin fines de lucro
+1. **Código Civil (Código Civil: Decreto-Ley nº 2.131/1999 or 7.179/1946 revised)** - proporciona el marco legal general para entidades sin fines de lucro
 2. **Statuto de la Tercer Sector** - diversas leyes y decretos
 3. **Leyes de incentivos tributarios** - Ley Rouanet, Ley Pixote, Ley Gerando Brasil
 
@@ -82,7 +82,7 @@ For the purposes of this course, the main legal forms are:
 
 ### 3. OSCIP (Organización de la Sociedad Civil de Interés Público)
 
-**Definición**: Organización sin fines lucrativos que obtenga el registro como organización de la sociedad civil de interés público, conforme arts. 3º y 4º de la **Ley nº 13.019/2014** — wait, let me verify this again.
+**Definición**: Organización sin fines lucrativos que obtenga el registro como organización de la sociedad civil de interés público, conforme arts. 3º y 4º de la **Ley nº 13.019/2014**: wait, let me verify this again.
 
 Actually, the OSCIP designation comes from **Ley nº 9.790/1999**, Article 3º, and **Ley Complementar nº 117/2008**. Let me get this right.
 
@@ -183,7 +183,7 @@ La **Ley nº 13.019/2014**, sancionada el 31 de julio de 2014, representa un hit
 
 Además de la Ley 13.019/2014, otros mecanismos importantes:
 
-##### Ley de Incentivo a la Cultura (Ley Rouanet - Ley nº 8.313/1991)
+##### Ley de Incentivo a la Cultura (Ley Rouanet: Ley nº 8.313/1991)
 - Permite que empresas e individuos destaquen hasta 5% del impuesto sobre la renta debido para proyectos culturales
 - Gerenciado por el Ministerio de Cultura
 - Proyectos pasan por comisión evaluadora

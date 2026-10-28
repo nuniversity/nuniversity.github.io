@@ -34,7 +34,7 @@ FROM payments;
 ## Comportamento de NULL em Agregados
 
 > [!NOTE]
-> Funções agregadas ignoram valores NULL — exceto `COUNT(*)` que conta linhas independentemente. Isso pode dar resultados enganosos se você não levar isso em conta.
+> Funções agregadas ignoram valores NULL: exceto `COUNT(*)` que conta linhas independentemente. Isso pode dar resultados enganosos se você não levar isso em conta.
 
 ```sql
 SELECT
@@ -45,7 +45,7 @@ SELECT
 FROM reviews;
 ```
 
-### COALESCE — Substituir NULLs Antes da Agregação
+### COALESCE: Substituir NULLs Antes da Agregação
 
 ```sql
 SELECT
@@ -55,9 +55,9 @@ FROM reviews;
 ```
 
 > [!WARNING]
-> Escolher entre ignorar NULLs e tratá-los como 0 é uma decisão de negócio. Se uma avaliação não tem nota, isso deve reduzir a média? Geralmente não — é melhor excluí-la.
+> Escolher entre ignorar NULLs e tratá-los como 0 é uma decisão de negócio. Se uma avaliação não tem nota, isso deve reduzir a média? Geralmente não: é melhor excluí-la.
 
-### NULLIF — Prevenir Divisão por Zero
+### NULLIF: Prevenir Divisão por Zero
 
 ```sql
 -- Divisão que poderia dividir por zero
@@ -113,7 +113,7 @@ GROUP BY CUBE (department, status);
 
 Isso produz 2^n linhas de agrupamento (incluindo todas as combinações), não apenas as hierárquicas.
 
-### GROUPING — Identificar Subtotais
+### GROUPING: Identificar Subtotais
 
 `GROUPING(coluna)` retorna 1 se a coluna está agregada na linha atual (usado em linhas de subtotal/total geral):
 

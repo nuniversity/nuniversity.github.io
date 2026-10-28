@@ -9,7 +9,7 @@ duration: "100 min"
 ---
 # Simulación de examen final (AIF-C01)
 
-Quince lecciones te dieron el contenido. Esta te da el **contenedor**: cómo se construye realmente el AIF-C01, cómo se puntúa, cómo se comporta el reloj y cómo se diseñan los distractores al estilo AWS. Todo lo anterior a esta lección fue conocimiento de dominio; todo lo de aquí es *técnica de examen* — y en una escala compensatoria de 100-1.000 con 700 para aprobar, la técnica de examen vale tanto como otra hora de repaso.
+Quince lecciones te dieron el contenido. Esta te da el **contenedor**: cómo se construye realmente el AIF-C01, cómo se puntúa, cómo se comporta el reloj y cómo se diseñan los distractores al estilo AWS. Todo lo anterior a esta lección fue conocimiento de dominio; todo lo de aquí es *técnica de examen*, y en una escala compensatoria de 100-1.000 con 700 para aprobar, la técnica de examen vale tanto como otra hora de repaso.
 
 ```text
 =====================================================================
@@ -30,7 +30,7 @@ Quince lecciones te dieron el contenido. Esta te da el **contenedor**: cómo se 
 ```
 
 > [!NOTE]
-> **Cómo usar esta lección.** Lee las secciones 1 a 6 una vez, luego haz el **Set A (sección 7) con un temporizador de 15 minutos y sin apuntes.** Corrige con la sección 8, convierte la nota bruta con la rúbrica de la sección 9 y deja que la sección 10 te diga qué lecciones reabrir. Todo lo que esta lección no pudo verificar contra una página de AWS de primera parte está listado en la sección 12 — trátalo como *no afirmable*, no como un hecho que memorizar.
+> **Cómo usar esta lección.** Lee las secciones 1 a 6 una vez, luego haz el **Set A (sección 7) con un temporizador de 15 minutos y sin apuntes.** Corrige con la sección 8, convierte la nota bruta con la rúbrica de la sección 9 y deja que la sección 10 te diga qué lecciones reabrir. Todo lo que esta lección no pudo verificar contra una página de AWS de primera parte está listado en la sección 12: trátalo como *no afirmable*, no como un hecho que memorizar.
 
 Al terminar esta lección podrás:
 
@@ -55,7 +55,7 @@ Nada de esta tabla es folclore. Cada fila procede de la guía actual del examen 
 | 1 | **65 preguntas**: **50 puntuadas + 15 sin puntuar** (ítems de pretest) y los ítems sin puntuar **no están identificados** | Guía del examen v1.1 |
 | 2 | **90 minutos** para completar el examen | Página de certificación + guía |
 | 3 | Resultado de aprobado/suspenso en una **escala de 100-1.000**; **puntuación mínima de aprobado 700** | Guía del examen |
-| 4 | La puntuación es **compensatoria** — no hay nota de aprobado por dominio; el informe puede mostrar clasificaciones por sección | Guía del examen |
+| 4 | La puntuación es **compensatoria**: no hay nota de aprobado por dominio; el informe puede mostrar clasificaciones por sección | Guía del examen |
 | 5 | **Los ítems sin responder se puntúan como incorrectos. No hay penalización por adivinar.** | Guía del examen |
 | 6 | Tipos de pregunta: **opción múltiple** (1 correcta, 3 distractores), **respuesta múltiple** (todas las correctas), **ordenación** (el orden importa), **correspondencia** (todos los pares) | Guía del examen |
 | 7 | Pesos de dominio: **D1 20 %, D2 24 %, D3 28 %, D4 14 %, D5 14 %** | Guía del examen |
@@ -71,7 +71,7 @@ Nada de esta tabla es folclore. Cada fila procede de la guía actual del examen 
 | 17 | Examen en inglés más **alojamiento ESL = +30 minutos** (la redacción difiere entre páginas; véase la sección 12) | FAQ |
 | 18 | La lista de servicios en alcance es **no exhaustiva y está sujeta a cambio**; solo se publican los pesos de **dominio** | Página de servicios en alcance + guía |
 
-- **📚 ¿Sabías que…?** Los **15 ítems sin puntuar se parecen exactamente a los 50 puntuados**. AWS no los etiqueta, no los colorea ni los separa de otra forma — lo que significa que la única estrategia racional es tratar **cada** ítem como puntuado. Un ítem de pretest que respondes mal no te cuesta nada, y un ítem puntuado que saltas te cuesta todos sus puntos, así que el incentivo nunca apunta hacia «dejarlo para luego y no volver nunca».
+- **📚 ¿Sabías que…?** Los **15 ítems sin puntuar se parecen exactamente a los 50 puntuados**. AWS no los etiqueta, no los colorea ni los separa de otra forma: lo que significa que la única estrategia racional es tratar **cada** ítem como puntuado. Un ítem de pretest que respondes mal no te cuesta nada, y un ítem puntuado que saltas te cuesta todos sus puntos, así que el incentivo nunca apunta hacia «dejarlo para luego y no volver nunca».
 
 ### 1.2 Los cuatro mecanismos que deciden tu puntuación
 
@@ -80,7 +80,7 @@ Lee estas cuatro frases como el sistema operativo del examen:
 1. **La puntuación compensatoria** significa que un Dominio 3 brillante no puede rescatar un Dominio 4 débil. No necesitas ser excelente en todas partes; no puedes ser *malo* en ninguna.
 2. **Sin penalización por adivinar** significa que un blanco es estrictamente peor que una conjetura: adivinar nunca es un riesgo, es valor esperado gratis.
 3. **Ítems de pretest ocultos** significan que tu recuento bruto de respuestas «obviamente correctas» se mapea a una puntuación escalonada que no puedes ver, así que nunca calcules un aprobar a partir de «X de 50».
-4. **Solo se publican los pesos de dominio** — los pesos por objetivo no existen, así que cualquier plan de estudio construido sobre «este tema vale 8 %» se construye sobre una conjetura.
+4. **Solo se publican los pesos de dominio**: los pesos por objetivo no existen, así que cualquier plan de estudio construido sobre «este tema vale 8 %» se construye sobre una conjetura.
 
 ### 1.3 Reserva, entrega, repetición y resultados
 
@@ -89,7 +89,7 @@ La mitad administrativa del examen es evaluable en el sentido de que cambia *có
 | Situación | La regla | Consecuencia práctica |
 |---|---|---|
 | **Elegir sede** | Centro de exámenes Pearson VUE **o** en línea con vigilancia | La vigilancia en inglés en línea funciona 24x7; un centro necesita hueco y un documento de identidad válido |
-| **Reprogramar** | Hasta **24 h** antes, máximo **2 cambios** | Un tercer cambio implica cancelar y reservar de nuevo — decídete antes del día final |
+| **Reprogramar** | Hasta **24 h** antes, máximo **2 cambios** | Un tercer cambio implica cancelar y reservar de nuevo: decídete antes del día final |
 | **Suspender** | Espera de **14 días**, **sin límite de intentos**, **tarifa completa siempre** | Presupuesta el segundo intento antes de hacer el primero |
 | **Aprobar** | Mismo examen bloqueado **2 años**; obtener **ML Engineer - Associate** renueva | No puedes volver a hacer el mismo examen para «refrescarlo» antes de tiempo |
 | **Resultados** | Publicados en un plazo de **5 días hábiles** | Planifica una semana tranquila; no refresques el panel cada hora |
@@ -113,7 +113,7 @@ La mitad administrativa del examen es evaluable en el sentido de que cambia *có
 | **Ordenación** | 3-5 ítems en la secuencia correcta | Correcta **y** en orden, o crédito cero | 60-100 s | Un intercambio arruina el ítem |
 | **Correspondencia** | 3-7 enunciados, cada uno con su pareja | **Todos los pares** correctos | 90-150 s | El formato más lento; los errores se acumulan |
 
-Los 15 ítems del Set A son todos de **opción múltiple**, el formato que más rápido puedes practicar. El examen real añade los otros tres con recuentos no publicados (véase la sección 12), así que entrénalos como *habilidades* — eliminación, secuenciación, comprobación de pares — y no como una cuota previsible.
+Los 15 ítems del Set A son todos de **opción múltiple**, el formato que más rápido puedes practicar. El examen real añade los otros tres con recuentos no publicados (véase la sección 12), así que entrénalos como *habilidades*, eliminación, secuenciación, comprobación de pares, y no como una cuota previsible.
 
 ### 2.2 La aritmética del reloj
 
@@ -121,9 +121,9 @@ $$
 \text{segundos por ítem} = \frac{90 \times 60}{65} \approx 83\ \text{s}
 $$
 
-Frente a los ítems **puntuados** solos, el presupuesto sería $\frac{5{,}400}{50} = 108$ s — pero no puedes saber cuáles de los 50 están puntuados, así que **83 s es la cifra con la que planificas**. Una primera pasada a 60 s por ítem deja 25 minutos para marcar, ordenación y correspondencia, donde viven los formatos lentos y las dudas.
+Frente a los ítems **puntuados** solos, el presupuesto sería $\frac{5{,}400}{50} = 108$ s, pero no puedes saber cuáles de los 50 están puntuados, así que **83 s es la cifra con la que planificas**. Una primera pasada a 60 s por ítem deja 25 minutos para marcar, ordenación y correspondencia, donde viven los formatos lentos y las dudas.
 
-- **📚 ¿Sabías que…?** Dos paradas de tres minutos cada una borran **seis minutos** — eso son siete preguntas de opción múltiple que tendrás que responder en el último tercio del examen al doble de velocidad. El examen no premia la profundidad en un ítem; premia la **cobertura de los 65**, porque la cobertura es la única forma de garantizar que nunca conviertas un ítem resoluble en un blanco.
+- **📚 ¿Sabías que…?** Dos paradas de tres minutos cada una borran **seis minutos**: eso son siete preguntas de opción múltiple que tendrás que responder en el último tercio del examen al doble de velocidad. El examen no premia la profundidad en un ítem; premia la **cobertura de los 65**, porque la cobertura es la única forma de garantizar que nunca conviertas un ítem resoluble en un blanco.
 
 ### 2.3 Atacar los tres formatos que el Set A no contiene
 
@@ -131,11 +131,11 @@ El Set A entrena el músculo de la única mejor respuesta. El examen real añade
 
 | Formato | El procedimiento que maximiza el crédito | El error que lo deja en cero |
 |---|---|---|
-| **Respuesta múltiple** | Lee cada opción, márcala como *definitivamente sí / definitivamente no / quizás*, y envía solo cuando cada «quizás» esté resuelto — se requieren todas las correctas | Seleccionar dos respuestas obvias y saltarse la quinta correcta; asumir que existe crédito parcial |
+| **Respuesta múltiple** | Lee cada opción, márcala como *definitivamente sí / definitivamente no / quizás*, y envía solo cuando cada «quizás» esté resuelto: se requieren todas las correctas | Seleccionar dos respuestas obvias y saltarse la quinta correcta; asumir que existe crédito parcial |
 | **Ordenación** | Fija primero los **anclajes** (el paso que debe ser primero, el que debe ser último), luego organiza el medio; relee la secuencia como una frase | Reorganizar cuando ya tienes un orden válido «porque se ve mejor» |
-| **Correspondencia** | Elimina primero los pares de los que estás seguro — cada par resuelto reduce todas las listas de opciones restantes | Empezar por el enunciado más difícil, lo que deja todos los distractores en juego |
+| **Correspondencia** | Elimina primero los pares de los que estás seguro: cada par resuelto reduce todas las listas de opciones restantes | Empezar por el enunciado más difícil, lo que deja todos los distractores en juego |
 
-Un hábito útil: en correspondencia, el lado derecho *más largo* suele ser el más específico y por tanto el menos probable que sea un distractor, pero **verifícalo** con el conocimiento de dominio en lugar de adivinar por longitud sola. En ordenación, si dos pasos adyacentes podrían intercambiarse sin cambiar el significado, el enunciado suele estarte diciendo el criterio (por tiempo, por dependencia, por coste) — búscalo y aplícalo de forma coherente.
+Un hábito útil: en correspondencia, el lado derecho *más largo* suele ser el más específico y por tanto el menos probable que sea un distractor, pero **verifícalo** con el conocimiento de dominio en lugar de adivinar por longitud sola. En ordenación, si dos pasos adyacentes podrían intercambiarse sin cambiar el significado, el enunciado suele estarte diciendo el criterio (por tiempo, por dependencia, por coste): búscalo y aplícalo de forma coherente.
 
 ---
 
@@ -148,7 +148,7 @@ Un hábito útil: en correspondencia, el lado derecho *más largo* suele ser el 
 | **Primera pasada** (los 65) | 0:00 - 1:05 | 65 | **~60 s por ítem**; marca todo lo que pase de 90 s; **responde todos los ítems** |
 | **Revisión de marcados** | 1:05 - 1:18 | 13 | Relee el enunciado y confirma que respondiste la pregunta **que se hacía**, no la contigua |
 | **Reserva de ordenación/correspondencia** | 1:18 - 1:27 | 9 | Hazlos **después** de los ítems de respuesta única; son más lentos y de todo o nada |
-| **Barrido de envío** | 1:27 - 1:30 | 3 | Confirma **cero en blanco** — un blanco es un cero garantizado |
+| **Barrido de envío** | 1:27 - 1:30 | 3 | Confirma **cero en blanco**: un blanco es un cero garantizado |
 | **Regla de la conjetura** (cualquier momento) | cualquiera | - | ¿Quedan dos? Elige la opción **más específica, más nativa de AWS y menos absoluta** |
 | **Regla de la trampa** (cualquier momento) | cualquiera | - | «Siempre», «nunca», «garantiza», «elimina las alucinaciones»: los absolutos suelen perder |
 | **Regla del coste** (cualquier momento) | cualquiera | - | Prefiere la respuesta **gestionada más simple** salvo que el enunciado exija control |
@@ -168,30 +168,30 @@ flowchart TD
 {
   "question": "Ordena las cuatro fases cronometradas del reloj de 90 minutos del AIF-C01:",
   "items": [
-    "Barrido de envío: 1:27 a 1:30 - confirmar cero en blanco",
-    "Primera pasada: 0:00 a 1:05 - unos 60 s por ítem, responde todo",
-    "Revisión de marcados: 1:05 a 1:18 - relee el enunciado, comprueba la pregunta que se hacía",
-    "Reserva de ordenación y correspondencia: 1:18 a 1:27 - los formatos de todo o nada al final"
+    "Barrido de envío: 1:27 a 1:30: confirmar cero en blanco",
+    "Primera pasada: 0:00 a 1:05: unos 60 s por ítem, responde todo",
+    "Revisión de marcados: 1:05 a 1:18: relee el enunciado, comprueba la pregunta que se hacía",
+    "Reserva de ordenación y correspondencia: 1:18 a 1:27: los formatos de todo o nada al final"
   ],
   "correctOrder": [
-    "Primera pasada: 0:00 a 1:05 - unos 60 s por ítem, responde todo",
-    "Revisión de marcados: 1:05 a 1:18 - relee el enunciado, comprueba la pregunta que se hacía",
-    "Reserva de ordenación y correspondencia: 1:18 a 1:27 - los formatos de todo o nada al final",
-    "Barrido de envío: 1:27 a 1:30 - confirmar cero en blanco"
+    "Primera pasada: 0:00 a 1:05: unos 60 s por ítem, responde todo",
+    "Revisión de marcados: 1:05 a 1:18: relee el enunciado, comprueba la pregunta que se hacía",
+    "Reserva de ordenación y correspondencia: 1:18 a 1:27: los formatos de todo o nada al final",
+    "Barrido de envío: 1:27 a 1:30: confirmar cero en blanco"
   ],
   "explanation": "El orden lo fija el riesgo: debes ver todos los ítems antes de revisar ninguno (de lo contrario un ítem tardío nunca se responde), los formatos lentos de todo o nada necesitan una reserva dedicada después del trabajo de respuesta única, y los últimos tres minutos existen solo para demostrar que no quedó nada en blanco."
 }
 ```
 
-### 3.2 Ejemplo resuelto 1 — dónde se va el tiempo
+### 3.2 Ejemplo resuelto 1: dónde se va el tiempo
 
-5.400 segundos entre 65 ítems son unos **83 segundos cada uno**. Planifica **60 segundos** para la primera pasada (65 minutos), lo que deja 25 minutos: 13 para los ítems marcados, 9 para ordenación y correspondencia, 3 para el barrido final. Si dos ítems consumen tres minutos cada uno, has gastado seis minutos de tu presupuesto de revisión — así que el movimiento correcto es siempre **marcar, conjeturar, avanzar**, nunca «una lectura más cuidadosa».
+5.400 segundos entre 65 ítems son unos **83 segundos cada uno**. Planifica **60 segundos** para la primera pasada (65 minutos), lo que deja 25 minutos: 13 para los ítems marcados, 9 para ordenación y correspondencia, 3 para el barrido final. Si dos ítems consumen tres minutos cada uno, has gastado seis minutos de tu presupuesto de revisión: así que el movimiento correcto es siempre **marcar, conjeturar, avanzar**, nunca «una lectura más cuidadosa».
 
-### 3.3 Ejemplo resuelto 2 — el protocolo de conjetura
+### 3.3 Ejemplo resuelto 2: el protocolo de conjetura
 
 Nunca hay motivo para dejar un ítem en blanco. El protocolo que mantiene la conjetura disciplinada:
 
-1. **Predice** la respuesta desde el enunciado *antes* de leer las opciones — impide que los distractores te anclen.
+1. **Predice** la respuesta desde el enunciado *antes* de leer las opciones: impide que los distractores te anclen.
 2. **Elimina dos** opciones y escribe una razón de una línea para cada una (capa equivocal, peldaño equivocal, familia equivoca, alcance excesivo, redacción absoluta).
 3. Si quedan dos, elige la que sea **más específica, más nativa de AWS y menos absoluta**.
 4. **Avanza en 60 segundos.** Cuatro minutos en un ítem son cuatro ítems perdidos en otro sitio.
@@ -222,7 +222,7 @@ AWS no escribe respuestas erróneas aleatorias. Escribe **casi-aciertos plausibl
 | **Redacción absoluta** | «garantiza», «100 %», «elimina las alucinaciones» | Prefiere la redacción matizada y basada en evidencias |
 | **Servicio fuera de alcance** | Un servicio heredado presentado como *la* respuesta | Comprueba la lista actual en alcance; nunca construyas una clave sobre él |
 
-### 4.1 Ejemplo resuelto 3 — eliminación que sobrevive al contacto con las opciones
+### 4.1 Ejemplo resuelto 3: eliminación que sobrevive al contacto con las opciones
 
 Los falsos negativos de un modelo de fraude cuestan **50 veces** una alarma falsa. ¿Qué métrica priorizas?
 
@@ -233,27 +233,27 @@ Los falsos negativos de un modelo de fraude cuestan **50 veces** una alarma fals
 
 Pon cada opción a prueba contra el dolor del **enunciado**, no contra la bondad general: cada opción debe responder a lo que concretamente duele.
 
-### 4.2 Ejemplo resuelto 4 — lo que «700» significa realmente
+### 4.2 Ejemplo resuelto 4: lo que «700» significa realmente
 
-Los formularios del examen se ecualizan, así que AWS nunca publica cuántos de los 50 ítems puntuados equivalen a 700 — cualquier afirmación de «35 de 50 = aprobado» no tiene fuente (sección 12). Lo que *sí* puedes usar: la puntuación compensatoria significa que un Dominio 4 flojo todavía te hunde, así que apunta a **>= 80 % en práctica mixta con cero blancos**, y después usa las clasificaciones por sección del informe para elegir qué repasar.
+Los formularios del examen se ecualizan, así que AWS nunca publica cuántos de los 50 ítems puntuados equivalen a 700: cualquier afirmación de «35 de 50 = aprobado» no tiene fuente (sección 12). Lo que *sí* puedes usar: la puntuación compensatoria significa que un Dominio 4 flojo todavía te hunde, así que apunta a **>= 80 % en práctica mixta con cero blancos**, y después usa las clasificaciones por sección del informe para elegir qué repasar.
 
 ### 4.3 Tres preguntas para cada opción
 
 Los candidatos lentos leen opciones; los rápidos las interrogan. Haz las mismas tres preguntas a cada alternativa, en este orden:
 
-1. **¿Qué mide o hace esto?** — nombra el mecanismo en una cláusula. Si no puedes, la opción es un distractor que aún no has reconocido.
-2. **¿Ese mecanismo responde al dolor del *enunciado*?** — el enunciado, no el tema. Una opción puede ser cierta e irrelevante a la vez.
-3. **¿Está acotada, matizada y es nativa de AWS?** — la respuesta cierta más estrecha gana a la respuesta cierta más amplia, y una afirmación matizada gana a una absoluta.
+1. **¿Qué mide o hace esto?**: nombra el mecanismo en una cláusula. Si no puedes, la opción es un distractor que aún no has reconocido.
+2. **¿Ese mecanismo responde al dolor del *enunciado*?**: el enunciado, no el tema. Una opción puede ser cierta e irrelevante a la vez.
+3. **¿Está acotada, matizada y es nativa de AWS?**: la respuesta cierta más estrecha gana a la respuesta cierta más amplia, y una afirmación matizada gana a una absoluta.
 
 ### 4.4 El mapa de trampas, dominio por dominio
 
 | Dominio | La trampa que el examen repite con más frecuencia | El reflejo correcto |
 |---|---|---|
 | **D1** | Ir a una métrica que no coincide con el coste del error (exactitud bajo desequilibrio, R-cuadrado para detección) | Traduce el **coste del error** a una métrica antes de leer las opciones |
-| **D2** | Confundir la unidad de facturación (por llamada, por hora de GPU, por token) o el disparador de personalización | Pregunta «¿qué estoy comprando?» — tokens, horas o capacidad |
+| **D2** | Confundir la unidad de facturación (por llamada, por hora de GPU, por token) o el disparador de personalización | Pregunta «¿qué estoy comprando?»: tokens, horas o capacidad |
 | **D3** | Saltar al fine-tune por hechos o formato | Recorre la escalera: prompt → RAG → fine-tune, y evalúa |
 | **D4** | Tomar la propia documentación de AWS (AI Service Cards) por documentación de *tu* modelo | Model Cards = las tuyas; AI Service Cards = las de AWS |
-| **D5** | Tratar una herramienta detective o de evidencia como control preventivo | Prevenir (Guardrails, IAM) / detectar (Config, CloudTrail) / probar (Artifact) — elige el verbo que usa el enunciado |
+| **D5** | Tratar una herramienta detective o de evidencia como control preventivo | Prevenir (Guardrails, IAM) / detectar (Config, CloudTrail) / probar (Artifact): elige el verbo que usa el enunciado |
 
 ---
 
@@ -266,7 +266,7 @@ Los candidatos lentos leen opciones; los rápidos las interrogan. Haz las mismas
 | **D1** Fundamentos de IA y ML | **20 %** | 10 | **3** (ítems 1-3) | 8,0 h | Métricas, ciclo de vida, correspondencia de servicios |
 | **D2** Fundamentos de IA generativa | **24 %** | 12 | **4** (ítems 4-7) | 9,6 h | Tokens, precios, límites, infraestructura de AWS |
 | **D3** Aplicaciones de modelos fundacionales | **28 %** | 14 | **4** (ítems 8-11) | 11,2 h | Prompting, RAG, agentes, evaluación |
-| **D4** Directrices de IA responsable | **14 %** | 7 | **2** (ítems 12-13) | 5,6 h | Solo **2 enunciados de tarea** — el retorno más denso por hora |
+| **D4** Directrices de IA responsable | **14 %** | 7 | **2** (ítems 12-13) | 5,6 h | Solo **2 enunciados de tarea**: el retorno más denso por hora |
 | **D5** Seguridad, cumplimiento y gobernanza | **14 %** | 7 | **2** (ítems 14-15) | 5,6 h | Inyección, IAM, responsabilidad compartida, Artifact |
 | **Total** | **100 %** | **50** | **15** | **40 h** | La columna «ítems puntuados» es aritmética, no una cifra de AWS |
 
@@ -283,25 +283,25 @@ pie title Pesos de dominio publicados del AIF-C01
 {
   "question": "Relaciona cada dominio del AIF-C01 con su peso publicado y el número de ítems puntuados que debería recibir en un examen de 50 ítems:",
   "pairs": [
-    {"left": "Dominio 1 - Fundamentos de IA y ML", "right": "20 por ciento - unos 10 ítems puntuados"},
-    {"left": "Dominio 2 - Fundamentos de IA generativa", "right": "24 por ciento - unos 12 ítems puntuados"},
-    {"left": "Dominio 3 - Aplicaciones de modelos fundacionales", "right": "28 por ciento - unos 14 ítems puntuados"},
-    {"left": "Dominio 4 - Directrices de IA responsable", "right": "14 por ciento - unos 7 ítems puntuados"},
-    {"left": "Dominio 5 - Seguridad, cumplimiento y gobernanza", "right": "14 por ciento - unos 7 ítems puntuados"}
+    {"left": "Dominio 1: Fundamentos de IA y ML", "right": "20 por ciento: unos 10 ítems puntuados"},
+    {"left": "Dominio 2: Fundamentos de IA generativa", "right": "24 por ciento: unos 12 ítems puntuados"},
+    {"left": "Dominio 3: Aplicaciones de modelos fundacionales", "right": "28 por ciento: unos 14 ítems puntuados"},
+    {"left": "Dominio 4: Directrices de IA responsable", "right": "14 por ciento: unos 7 ítems puntuados"},
+    {"left": "Dominio 5: Seguridad, cumplimiento y gobernanza", "right": "14 por ciento: unos 7 ítems puntuados"}
   ],
   "explanation": "Solo se publican los porcentajes de los cinco dominios. Los recuentos de ítems son aritmética simple sobre 50 ítems puntuados (20 por ciento de 50 = 10, y así sucesivamente), una ayuda de planificación y no una cifra de AWS - AWS afirma que la guía del examen no es una lista exhaustiva de contenido."
 }
 ```
 
 > [!IMPORTANT]
-> **Veredicto comparativo — Dominio 3 (28 %) frente a Dominio 2 (24 %) frente a Dominio 1 (20 %) frente a Dominios 4 y 5 (14 % cada uno)**
-> - **El Dominio 3, Aplicaciones de modelos fundacionales (28 %), es el bloque individual más grande y el que debes preparar en exceso.** Lleva unos 14 ítems puntuados y es el dominio donde el *procedimiento* vence al *recuerdo*: técnica de prompting, la escalera prompt → RAG → fine-tune, action groups de agentes con Lambda, diagnóstico de fallos de recuperación frente a generación, y modos de evaluación. Si solo vas a releer un dominio la noche anterior, relee este — es también donde los ítems de respuesta múltiple y de ordenación del examen real se pierden más barato.
+> **Veredicto comparativo: Dominio 3 (28 %) frente a Dominio 2 (24 %) frente a Dominio 1 (20 %) frente a Dominios 4 y 5 (14 % cada uno)**
+> - **El Dominio 3, Aplicaciones de modelos fundacionales (28 %), es el bloque individual más grande y el que debes preparar en exceso.** Lleva unos 14 ítems puntuados y es el dominio donde el *procedimiento* vence al *recuerdo*: técnica de prompting, la escalera prompt → RAG → fine-tune, action groups de agentes con Lambda, diagnóstico de fallos de recuperación frente a generación, y modos de evaluación. Si solo vas a releer un dominio la noche anterior, relee este: es también donde los ítems de respuesta múltiple y de ordenación del examen real se pierden más barato.
 > - **El Dominio 2, Fundamentos de IA generativa (24 %), es el dominio de los números.** Tokens de entrada frente a salida, bajo demanda frente a batch frente a throughput aprovisionado, ventanas de contexto, temperatura, caché de prompts, enrutamiento de prompts y MCP. Los puntos aquí son rápidos y binarios: o conoces la unidad de facturación o no. Es el mejor dominio para pasar de «tembloroso» a «sólido» en dos sesiones.
-> - **El Dominio 1, Fundamentos de IA y ML (20 %), es el núcleo clásico de ML** — supervisado frente a no supervisado, precisión/recuperación/F1, sobreajuste, deriva, el ciclo de vida de ML y el mapa de servicios preconstruidos (Comprehend frente a Textract frente a Translate frente a Polly). Los candidatos que llegan con un perfil solo de IA generativa le dan menos peso y lo pagan al final.
+> - **El Dominio 1, Fundamentos de IA y ML (20 %), es el núcleo clásico de ML**: supervisado frente a no supervisado, precisión/recuperación/F1, sobreajuste, deriva, el ciclo de vida de ML y el mapa de servicios preconstruidos (Comprehend frente a Textract frente a Translate frente a Polly). Los candidatos que llegan con un perfil solo de IA generativa le dan menos peso y lo pagan al final.
 > - **Los Dominios 4 y 5 (14 % cada uno) parecen pequeños y no lo son.** El Dominio 4 tiene solo **2 enunciados de tarea** y aun así un 14 % de la nota, lo que lo convierte en el **retorno más denso por hora de estudio de todo el examen**: NIST AI RMF, ISO, los niveles del EU AI Act, equidad y explicabilidad (Clarify), transparencia (Model Cards, AI Service Cards) y supervisión humana. El Dominio 5 es igual de concentrado: inyección de prompts, privilegio mínimo, la división de responsabilidad compartida y **AWS Artifact**. Como la puntuación es compensatoria, un dominio del 14 % flojo es la razón clásica por la que un candidato suspende con un informe por lo demás fuerte.
-> - **Regla práctica:** reparte las horas en proporción al peso (**8 / 9,6 / 11,2 / 5,6 / 5,6** para un plan de 40 horas), pero dedica tu *última* semana a D4 y D5 — son los puntos más baratos de recuperar y los más caros de perder.
+> - **Regla práctica:** reparte las horas en proporción al peso (**8 / 9,6 / 11,2 / 5,6 / 5,6** para un plan de 40 horas), pero dedica tu *última* semana a D4 y D5: son los puntos más baratos de recuperar y los más caros de perder.
 
-- **📚 ¿Sabías que…?** **El Dominio 4 vale un 14 % del examen con solo dos enunciados de tarea**, mientras que el Dominio 1 reparte el 20 % en una lista mucho más larga de objetivos. Eso significa que cada objetivo individual del Dominio 4 carga con mucha más nota esperada que el objetivo medio del Dominio 1 — y es la razón por la que un candidato que «conoce bien el ML pero nunca leyó el NIST AI RMF» puede perder un margen de aprobado en apenas un puñado de ítems.
+- **📚 ¿Sabías que…?** **El Dominio 4 vale un 14 % del examen con solo dos enunciados de tarea**, mientras que el Dominio 1 reparte el 20 % en una lista mucho más larga de objetivos. Eso significa que cada objetivo individual del Dominio 4 carga con mucha más nota esperada que el objetivo medio del Dominio 1, y es la razón por la que un candidato que «conoce bien el ML pero nunca leyó el NIST AI RMF» puede perder un margen de aprobado en apenas un puñado de ítems.
 
 ---
 
@@ -328,11 +328,11 @@ flowchart TD
 
 **El RAG cambia lo que el modelo sabe; el fine-tune camb cómo se comporta.** Responde a cada pregunta de «¿qué debemos hacer ahora?» preguntando cuál de esos dos está roto.
 
-### 6.2 Ejemplo resuelto 5 — el arreglo de dos horas frente al arreglo de dos semanas
+### 6.2 Ejemplo resuelto 5: el arreglo de dos horas frente al arreglo de dos semanas
 
-*«Las respuestas deben citar documentos de política interna vigentes que el modelo nunca vio.»* Un prompt mejor no ayudará, porque el modelo no tiene acceso a esos documentos. El paso correcto es **RAG** (Bedrock Knowledge Bases: contexto recuperado más citas). Solo si el *estilo* de las respuestas sigue mal después de la recuperación consideras el fine-tune — y entonces necesitas Provisioned Throughput para poder invocar el modelo personalizado en absoluto. Los candidatos que saltan directo al fine-tune responden una pregunta que nadie hizo.
+*«Las respuestas deben citar documentos de política interna vigentes que el modelo nunca vio.»* Un prompt mejor no ayudará, porque el modelo no tiene acceso a esos documentos. El paso correcto es **RAG** (Bedrock Knowledge Bases: contexto recuperado más citas). Solo si el *estilo* de las respuestas sigue mal después de la recuperación consideras el fine-tune, y entonces necesitas Provisioned Throughput para poder invocar el modelo personalizado en absoluto. Los candidatos que saltan directo al fine-tune responden una pregunta que nadie hizo.
 
-### 6.3 Ejemplo resuelto 6 — asignación de horas dirigida por el peso
+### 6.3 Ejemplo resuelto 6: asignación de horas dirigida por el peso
 
 Multiplica el peso por las horas totales: $0.20 \times 40 = 8.0$ h (D1), $0.24 \times 40 = 9.6$ h (D2), $0.28 \times 40 = 11.2$ h (D3), $0.14 \times 40 = 5.6$ h (D4), $0.14 \times 40 = 5.6$ h (D5). Divide las 5,6 horas del D4 en unas seis sesiones densas (NIST, ISO, EU AI Act, equidad, transparencia, supervisión) y las del D3 en prompting 3 / RAG 3 / agentes 3 / evaluación 2.
 
@@ -343,7 +343,7 @@ La forma más rápida de perder el Set A es empezar a leer las opciones antes de
 | El enunciado dice… | En realidad está preguntando | Tu primer movimiento |
 |---|---|---|
 | «qué métrica / cómo debe evaluarse el rendimiento» | ¿Qué coste de error importa? | Convierte el coste enunciado en precisión, recuperación, F1 o exactitud |
-| «más barato / más rentable / reducir coste» | ¿Qué palanca baja tokens, horas o compromiso? | Caché de prompts, enrutamiento, batch, límites de salida — y después relee |
+| «más barato / más rentable / reducir coste» | ¿Qué palanca baja tokens, horas o compromiso? | Caché de prompts, enrutamiento, batch, límites de salida, y después relee |
 | «datos nuevos / documentos internos / citas» | ¿El modelo lo sabe? | RAG con Knowledge Bases; el fine-tune es el peldaño equivocado |
 | «estilo, tono o formato consistente a escala» | ¿Es comportamiento o conocimiento? | Prompt para formato, fine-tune para comportamiento |
 | «privilegio mínimo / qué política» | Alcance cierto más estrecho | Acción correcta sobre un ARN de recurso, más `iam:PassRole` acotado |
@@ -355,7 +355,7 @@ La forma más rápida de perder el Set A es empezar a leer las opciones antes de
 
 ## 6.5 Patrones de trampa y cómo vencerlos
 
-Las secciones 4 y 6 te dieron las seis familias de distractores y la tabla de consulta de enunciados. Esta sección comprime el resto del material de estrategia en tres artefactos que puedes ensayar en la última semana: **un mapa de trampas de doce filas**, **un plan de ritmo anclado a los rangos de ítems que realmente ves en pantalla** y **un ejercicio corto** que castiga los reflejos que la mayoría de candidatos traen a la sala de examen. El mapa es deliberadamente más ancho que las seis familias de la sección 4 porque el examen real los *recombina* — un ítem puede tentarte con una unidad de precios y una afirmación absoluta a la vez, y solo una de las cuatro opciones fallará en ambos conteos.
+Las secciones 4 y 6 te dieron las seis familias de distractores y la tabla de consulta de enunciados. Esta sección comprime el resto del material de estrategia en tres artefactos que puedes ensayar en la última semana: **un mapa de trampas de doce filas**, **un plan de ritmo anclado a los rangos de ítems que realmente ves en pantalla** y **un ejercicio corto** que castiga los reflejos que la mayoría de candidatos traen a la sala de examen. El mapa es deliberadamente más ancho que las seis familias de la sección 4 porque el examen real los *recombina*: un ítem puede tentarte con una unidad de precios y una afirmación absoluta a la vez, y solo una de las cuatro opciones fallará en ambos conteos.
 
 ### 6.5.1 Las doce familias de trampa y el reflejo que vence a cada una
 
@@ -367,9 +367,9 @@ Las secciones 4 y 6 te dieron las seis familias de distractores y la tabla de co
 | T4 | **Dirección del parámetro** | Invierte el efecto («sube la temperatura para que las respuestas sean consistentes») | **Temperatura baja = determinista**; temperatura alta añade varianza. top-k y top-p dimensionan el conjunto de candidatos | ¿Qué perilla, y en qué **dirección**? |
 | T5 | **RAG frente a fine-tune** | Ofrece fine-tune para hechos nuevos y citados, o recuperación para tono y estilo | **Hechos, citas, novedad → RAG; comportamiento, estilo, tarea → fine-tune** | ¿Nuevo **conocimiento** o nuevo **comportamiento**? |
 | T6 | **Matriz de opciones de inferencia** | Tiempo real ofrecido para cargas de 1 GB, batch ofrecido para una carga interactiva | Clave según **carga útil, latencia y persistencia** (25 MB / 60 s, 4 MB / 60 s, 1 GB / 1 h, sin conexión) | ¿Tamaño de carga útil? ¿Latencia? ¿Escala a cero? |
-| T7 | **Redacción absoluta** | «siempre», «nunca», «debe», «solo», «garantiza», «100 %» | Bandera roja por defecto — prefiere la opción matizada y basada en evidencias, *salvo* que la regla sea genuinamente absoluta («nunca dejes un ítem en blanco») | ¿Es literalmente cierto **sin** excepciones? |
-| T8 | **Opciones casi idénticas** | Dos opciones que difieren en un solo calificador | Elige la que satisface la restricción **exacta** del enunciado — coste, latencia, región, privilegio mínimo | ¿Qué restricción satisface **solo esta** opción? |
-| T9 | **Intercambio de términos de IA responsable** | Clarify, Model Monitor, Ground Truth y A2I ofrecidos indistintamente | Sesgo **antes del despliegue** = Clarify; **deriva** = Model Monitor; **etiquetas** = Ground Truth; **enrutamiento humano** = A2I | ¿Antes, durante o después del despliegue — y **quién actúa**? |
+| T7 | **Redacción absoluta** | «siempre», «nunca», «debe», «solo», «garantiza», «100 %» | Bandera roja por defecto: prefiere la opción matizada y basada en evidencias, *salvo* que la regla sea genuinamente absoluta («nunca dejes un ítem en blanco») | ¿Es literalmente cierto **sin** excepciones? |
+| T8 | **Opciones casi idénticas** | Dos opciones que difieren en un solo calificador | Elige la que satisface la restricción **exacta** del enunciado: coste, latencia, región, privilegio mínimo | ¿Qué restricción satisface **solo esta** opción? |
+| T9 | **Intercambio de términos de IA responsable** | Clarify, Model Monitor, Ground Truth y A2I ofrecidos indistintamente | Sesgo **antes del despliegue** = Clarify; **deriva** = Model Monitor; **etiquetas** = Ground Truth; **enrutamiento humano** = A2I | ¿Antes, durante o después del despliegue, y **quién actúa**? |
 | T10 | **Señuelo de complejidad** | Un pipeline construido a mano donde ya existe una función gestionada | Gestionado, menor sobrecarga operativa, sin sobreingeniería | ¿Puede un servicio gestionado hacer **todo** el trabajo? |
 | T11 | **Desajuste de métricas** | BLEU para resumen, R-cuadrado para texto, exactitud sobre datos desequilibrados | Empareja el **tipo de tarea**: solapamiento de n-gramas, clasificación, regresión o deriva | ¿Qué **tipo de salida** se está puntuando? |
 | T12 | **Servicio heredado / fuera de alcance** | Un favorito de la guía antigua presentado como *la* respuesta | Confirma contra el apéndice de alcance **actual**; los servicios no listados nunca son la clave | ¿Esto está en la lista de alcance de **2026**? |
@@ -399,18 +399,18 @@ La sección 3.1 divide el reloj en **fases**; el plan de abajo divide los mismos
 |---|---|---|---|---|
 | **S1 Calentamiento** | 1-10 | 0:00 → 0:12 | 12 | Lee completo, decide rápido; **marca** lo que pase de 90 s |
 | **S2 Núcleo** | 11-30 | 0:12 → 0:37 | 37 | **60 s por ítem**; elimina dos antes de elegir |
-| **S3 Apechugar** | 31-50 | 0:37 → 1:02 | 62 | Aquí viven la correspondencia y la ordenación — hazlas **enteras**, nunca a medias |
+| **S3 Apechugar** | 31-50 | 0:37 → 1:02 | 62 | Aquí viven la correspondencia y la ordenación: hazlas **enteras**, nunca a medias |
 | **S4 Cola larga** | 51-65 | 1:02 → 1:17 | 77 | Enunciados más lentos y conjuntos de casos; sigue marcando en lugar de atascarte |
 | **S5 Barrido de marcados** | todos los marcados | 1:17 → 1:27 | 87 | Relee el enunciado, reejecuta la eliminación una vez |
-| **S6 Reserva** | — | 1:27 → 1:30 | 90 | Confirma **cero en blanco** y envía |
+| **S6 Reserva** |: | 1:27 → 1:30 | 90 | Confirma **cero en blanco** y envía |
 
-*Puntos de control derivados (aritmética, no una cifra de AWS):* el techo es de **83 s por ítem**; **más de tres minutos en un ítem te cuestan dos ítems** en otro sitio; un presupuesto de marcado sostenible es de **un marcado cada seis ítems (unos diez en total)**; y si S2 se pasa cinco minutos, recortas tiempo de S5 — nunca de la comprobación de blancos de S6.
+*Puntos de control derivados (aritmética, no una cifra de AWS):* el techo es de **83 s por ítem**; **más de tres minutos en un ítem te cuestan dos ítems** en otro sitio; un presupuesto de marcado sostenible es de **un marcado cada seis ítems (unos diez en total)**; y si S2 se pasa cinco minutos, recortas tiempo de S5: nunca de la comprobación de blancos de S6.
 
-- **📚 ¿Sabías que…?** Como el presupuesto medio es de **83 segundos**, tres minutos gastados en releer un enunciado no son tres minutos perdidos — son **dos ítems enteros** empujados a tus últimos diez minutos. Trabajando hacia atrás desde ese techo, la asignación derivada de marcados es de **un ítem marcado cada seis, unos diez marcados en todo el examen**. Marca veinte y no has identificado los ítems difíciles; has programado en silencio un tercio del examen para una ventana de revisión que no puede contenerlos.
+- **📚 ¿Sabías que…?** Como el presupuesto medio es de **83 segundos**, tres minutos gastados en releer un enunciado no son tres minutos perdidos: son **dos ítems enteros** empujados a tus últimos diez minutos. Trabajando hacia atrás desde ese techo, la asignación derivada de marcados es de **un ítem marcado cada seis, unos diez marcados en todo el examen**. Marca veinte y no has identificado los ítems difíciles; has programado en silencio un tercio del examen para una ventana de revisión que no puede contenerlos.
 
 ### 6.5.3 Ejercicio corto de trampas: cuatro ítems que castigan los reflejos habituales
 
-Estos cuatro son deliberadamente breves, porque la trampa suele resolverse en los primeros cinco segundos — en cuanto notas *qué* unidad, *qué* dirección o *qué* ventana está en juego. Responde los cuatro antes de leer las explicaciones.
+Estos cuatro son deliberadamente breves, porque la trampa suele resolverse en los primeros cinco segundos: en cuanto notas *qué* unidad, *qué* dirección o *qué* ventana está en juego. Responde los cuatro antes de leer las explicaciones.
 
 ```question
 {
@@ -424,7 +424,7 @@ Estos cuatro son deliberadamente breves, porque la trampa suele resolverse en lo
     "Aumentar maxTokens"
   ],
   "correct": 1,
-  "explanation": "Una temperatura baja estrecha la distribución de probabilidad, así que el modelo sigue eligiendo los tokens de mayor probabilidad y la salida se vuelve más determinista. Subir la temperatura o top-p amplía el conjunto de candidatos y añade azar, y maxTokens solo alarga la respuesta - no tiene efecto sobre la consistencia. Esta es la trampa T4, dirección del parámetro."
+  "explanation": "Una temperatura baja estrecha la distribución de probabilidad, así que el modelo sigue eligiendo los tokens de mayor probabilidad y la salida se vuelve más determinista. Subir la temperatura o top-p amplía el conjunto de candidatos y añade azar, y maxTokens solo alarga la respuesta: no tiene efecto sobre la consistencia. Esta es la trampa T4, dirección del parámetro."
 }
 ```
 
@@ -440,7 +440,7 @@ Estos cuatro son deliberadamente breves, porque la trampa suele resolverse en lo
     "Se factura por cada modelo adjunto a la configuración del guardrail"
   ],
   "correct": 1,
-  "explanation": "Guardrails se factura por 1.000 unidades de texto (una unidad de texto cubre un bloque fijo de caracteres), y AWS documenta que las funciones de filtro de palabras y filtro de expresiones regulares no añaden cargos separados. El precio por petición, por token y por modelo son tres modelos de facturación distintos que Guardrails no usa - trampa T2, unidades de precios. Una vez que escribes la unidad junto a cada opción, tres de las cuatro mueren sin ninguna aritmética."
+  "explanation": "Guardrails se factura por 1.000 unidades de texto (una unidad de texto cubre un bloque fijo de caracteres), y AWS documenta que las funciones de filtro de palabras y filtro de expresiones regulares no añaden cargos separados. El precio por petición, por token y por modelo son tres modelos de facturación distintos que Guardrails no usa: trampa T2, unidades de precios. Una vez que escribes la unidad junto a cada opción, tres de las cuatro mueren sin ninguna aritmética."
 }
 ```
 
@@ -472,13 +472,13 @@ Estos cuatro son deliberadamente breves, porque la trampa suele resolverse en lo
     "Los pesos de dominio se aplican dos veces al total final"
   ],
   "correct": 1,
-  "explanation": "AWS publica un modelo compensatorio: solo necesitas el aprobado global, sin umbral por dominio, porque los pesos publicados ya dan forma al total. Una nota de aprobado por dominio, una sección descartada y un doble peso son invenciones - y creer la primera es lo que hace que un candidato sacrifique un dominio del 14 % que asume que no puede hundirlo. Trampa T7: la regla de sonido absoluto que no existe."
+  "explanation": "AWS publica un modelo compensatorio: solo necesitas el aprobado global, sin umbral por dominio, porque los pesos publicados ya dan forma al total. Una nota de aprobado por dominio, una sección descartada y un doble peso son invenciones: y creer la primera es lo que hace que un candidato sacrifique un dominio del 14 % que asume que no puede hundirlo. Trampa T7: la regla de sonido absoluto que no existe."
 }
 ```
 
 ### 6.5.4 Dónde ya vive cada trampa en este curso
 
-No necesitas material nuevo para estas trampas; necesitas reconectarlas con la lección que las posee. Lee esto como tu tabla de enrutamiento de repaso — si una fila te sorprende, esa lección es tu siguiente parada.
+No necesitas material nuevo para estas trampas; necesitas reconectarlas con la lección que las posee. Lee esto como tu tabla de enrutamiento de repaso: si una fila te sorprende, esa lección es tu siguiente parada.
 
 | Familia de trampa | Dónde ya la encontraste | El ítem del Set A que imita | El reflejo que ensayar |
 |---|---|---|---|
@@ -487,15 +487,15 @@ No necesitas material nuevo para estas trampas; necesitas reconectarlas con la l
 | **T4** Dirección del parámetro | Lección 08, tokens, temperatura, contexto | 4 | Temperatura baja = determinista |
 | **T5** RAG frente a fine-tune | Lecciones 10 y 11, knowledge bases y agentes | 8, 9 | ¿Conocimiento o comportamiento? |
 | **T7** Redacción absoluta | Lección 12, seguridad y guardrails | 4 | Lo matizado vence a lo absoluto |
-| **T9** Intercambios de IA responsable | Lección 12, IA responsable y supervisión | 12 | ¿Antes, durante o después — quién actúa? |
+| **T9** Intercambios de IA responsable | Lección 12, IA responsable y supervisión | 12 | ¿Antes, durante o después: quién actúa? |
 | **T10** Señuelo de complejidad | Lecciones 13 y 15, MLOps y optimización | 8 | Gana la opción gestionada más simple |
 | **T11** Desajuste de métricas | Lección 04, algoritmos y evaluación | 1, 2, 3 | ¿Qué tipo de salida se puntúa? |
 | **IAM con alcance excesivo** | Lección 14, seguridad y privilegio mínimo | 14 | Acción más estrecha sobre el ARN más estrecho |
 | **Evidencia frente a afirmación** | Lecciones 14 y 15, gobernanza y evidencia | 15 | Artifact, Config, CloudTrail, Model Cards |
 
-### 6.5.5 Cuestionario de actualizaciones de 2025–2026
+### 6.5.5 Cuestionario de actualizaciones de 2025 to 2026
 
-Al mapa de trampas le falta una familia que merece su propia comprobación: **material que cambió mientras estudiabas**. La guía v1.1 (30 de abril de 2026) añadió objetivos, añadió servicios a la lista en alcance y eliminó uno, y varios servicios pasaron a mantenimiento o se cerraron a clientes nuevos durante 2025–2026. Los dos ítems de abajo proceden de cambios verificados de 2025–2026 — respóndelos antes de leer las explicaciones.
+Al mapa de trampas le falta una familia que merece su propia comprobación: **material que cambió mientras estudiabas**. La guía v1.1 (30 de abril de 2026) añadió objetivos, añadió servicios a la lista en alcance y eliminó uno, y varios servicios pasaron a mantenimiento o se cerraron a clientes nuevos durante 2025 to 2026. Los dos ítems de abajo proceden de cambios verificados de 2025 to 2026: respóndelos antes de leer las explicaciones.
 
 ```question
 {
@@ -509,7 +509,7 @@ Al mapa de trampas le falta una familia que merece su propia comprobación: **ma
     "Diseño de feature store en un clúster de Kubernetes"
   ],
   "correct": 1,
-  "explanation": "El objetivo 2.1.6 sobre IA agéntica - patrones multiagente, MCP, gestión de memoria, uso de herramientas y orquestación - es uno de los siete objetivos nuevos de v1.1, junto con precios basados en tokens, ingeniería de contexto, versionado de prompts, métricas de alineación empresarial, detección de alucinaciones con fundamento, y ML tradicional frente a modelos fundacionales. Las otras tres opciones son temas clásicos de ML del lado de la construcción, y el examen apunta a candidatos que usan IA sin necesariamente construirla."
+  "explanation": "El objetivo 2.1.6 sobre IA agéntica: patrones multiagente, MCP, gestión de memoria, uso de herramientas y orquestación: es uno de los siete objetivos nuevos de v1.1, junto con precios basados en tokens, ingeniería de contexto, versionado de prompts, métricas de alineación empresarial, detección de alucinaciones con fundamento, y ML tradicional frente a modelos fundacionales. Las otras tres opciones son temas clásicos de ML del lado de la construcción, y el examen apunta a candidatos que usan IA sin necesariamente construirla."
 }
 ```
 
@@ -529,20 +529,20 @@ Al mapa de trampas le falta una familia que merece su propia comprobación: **ma
 }
 ```
 
-- **📚 ¿Sabías que…?** Se añadieron **siete objetivos** cuando la guía pasó de v1.0 (26 de marzo de 2026) a v1.1 (30 de abril de 2026): ML tradicional frente a modelos fundacionales, precios basados en tokens, ingeniería de contexto, IA agéntica, versionado de prompts, métricas de alineación empresarial y detección de alucinaciones con fundamento. AWS también afirma que las actualizaciones de la guía llegan al examen real sobre **un mes después de publicarse** — así que un ítem que se siente «demasiado reciente para ser examinado» es precisamente el ítem que v1.1 se redactó para evaluar.
+- **📚 ¿Sabías que…?** Se añadieron **siete objetivos** cuando la guía pasó de v1.0 (26 de marzo de 2026) a v1.1 (30 de abril de 2026): ML tradicional frente a modelos fundacionales, precios basados en tokens, ingeniería de contexto, IA agéntica, versionado de prompts, métricas de alineación empresarial y detección de alucinaciones con fundamento. AWS también afirma que las actualizaciones de la guía llegan al examen real sobre **un mes después de publicarse**: así que un ítem que se siente «demasiado reciente para ser examinado» es precisamente el ítem que v1.1 se redactó para evaluar.
 
 > [!WARNING]
-> **Trampa del día del examen — datos obsoletos y dudas de última hora:**
-> - **Un distractor puede ser cierto y seguir siendo erróneo** porque el servicio detrás de él cambió durante 2025–2026. **Kendra** ya no acepta clientes nuevos (mantenimiento el 30 de junio de 2026, cerrada el 30 de julio de 2026) y AWS dirige las nuevas cargas de búsqueda a **Bedrock Managed Knowledge Base**.
-> - **SageMaker Model Monitor** y **SageMaker Clarify** se cerraron a clientes nuevos el **30 de julio de 2026**. Su estado es **mantenimiento**, no cierre y **no** una marca renovada hacia Bedrock Model Evaluations — pero si un enunciado describe un proyecto *nuevo*, comprueba si el sucesor documentado es la respuesta que el ítem busca antes de comprometerte.
+> **Trampa del día del examen: datos obsoletos y dudas de última hora:**
+> - **Un distractor puede ser cierto y seguir siendo erróneo** porque el servicio detrás de él cambió durante 2025 to 2026. **Kendra** ya no acepta clientes nuevos (mantenimiento el 30 de junio de 2026, cerrada el 30 de julio de 2026) y AWS dirige las nuevas cargas de búsqueda a **Bedrock Managed Knowledge Base**.
+> - **SageMaker Model Monitor** y **SageMaker Clarify** se cerraron a clientes nuevos el **30 de julio de 2026**. Su estado es **mantenimiento**, no cierre y **no** una marca renovada hacia Bedrock Model Evaluations, pero si un enunciado describe un proyecto *nuevo*, comprueba si el sucesor documentado es la respuesta que el ítem busca antes de comprometerte.
 > - **Amazon MemoryDB** se eliminó de la lista en alcance el **30 de abril de 2026**. Nunca construyas la clave de un ítem sobre un servicio que la guía actual no lista (trampa T12, sección 12).
 > - **No «arregles» una respuesta correcta durante el barrido de envío.** Relee el enunciado, confirma que respondiste la pregunta *que se hacía* y cambia una opción solo si puedes enunciar la razón en una cláusula.
 
 ---
 
-## 7. Preguntas de Práctica (Practice Questions) — Set A: 15 ítems de única respuesta correcta
+## 7. Preguntas de Práctica (Practice Questions), Set A: 15 ítems de única respuesta correcta
 
-El Set A refleja el formato dominante del examen real: **una respuesta correcta, tres distractores**. Está ponderado deliberadamente como los dominios publicados — 3 ítems para D1, 4 para D2, 4 para D3, 2 para D4 y 2 para D5. **Pon un temporizador de 15 minutos, responde todos los ítems y nunca dejes uno en blanco.** La clave de respuestas, organizada por dominio, sigue en la sección 8.
+El Set A refleja el formato dominante del examen real: **una respuesta correcta, tres distractores**. Está ponderado deliberadamente como los dominios publicados: 3 ítems para D1, 4 para D2, 4 para D3, 2 para D4 y 2 para D5. **Pon un temporizador de 15 minutos, responde todos los ítems y nunca dejes uno en blanco.** La clave de respuestas, organizada por dominio, sigue en la sección 8.
 
 ### 7.1 Cómo hacer el Set A
 
@@ -550,7 +550,7 @@ El Set A refleja el formato dominante del examen real: **una respuesta correcta,
 |---|---|---|
 | **Temporizador** | **15 minutos exactos** (60 s por ítem, el presupuesto de la primera pasada) | Entrena el ritmo que usarás para 65 ítems, no solo para 15 |
 | **Materiales** | Sin apuntes, sin búsqueda, sin ver la sección 8 | Corregir con libros abiertos mide tus apuntes, no a ti |
-| **Ritmo** | Responde todos los ítems; marca lo que pase de 90 segundos y sigue | Un blanco es un cero garantizado — la regla nunca cambia con el tamaño del set |
+| **Ritmo** | Responde todos los ítems; marca lo que pase de 90 segundos y sigue | Un blanco es un cero garantizado: la regla nunca cambia con el tamaño del set |
 | **Segunda pasada** | Solo cuando pare el temporizador, revisa los ítems marcados | Simula la ventana de revisión de 1:05-1:18 |
 | **Corrección** | Por **dominio** primero, total después (sección 8.7) | La puntuación compensatoria castiga el bache, no la media |
 | **Repetición** | 72 horas después, de memoria | Los intervalos cortos miden reconocimiento, no retención |
@@ -583,7 +583,7 @@ El Set A refleja el formato dominante del examen real: **una respuesta correcta,
     "Puntuación de R-cuadrado"
   ],
   "correct": 2,
-  "explanation": "La recuperación es TP/(TP+FN), así que maximizar la recuperación minimiza el fraude detectado - el error caro de este enunciado. La exactitud la infla el desequilibrio de clases en un problema de evento raro, la precisión castiga el error barato (la alarma falsa) y el R-cuadrado es una métrica de regresión que no se aplica a una tarea de detección."
+  "explanation": "La recuperación es TP/(TP+FN), así que maximizar la recuperación minimiza el fraude detectado: el error caro de este enunciado. La exactitud la infla el desequilibrio de clases en un problema de evento raro, la precisión castiga el error barato (la alarma falsa) y el R-cuadrado es una métrica de regresión que no se aplica a una tarea de detección."
 }
 ```
 
@@ -663,7 +663,7 @@ El Set A refleja el formato dominante del examen real: **una respuesta correcta,
     "Aumentar la fuerza de los filtros de guardrail"
   ],
   "correct": 2,
-  "explanation": "El enrutamiento inteligente de prompts envía cada petición al modelo de la familia previsto para manejarla mejor, así que los prompts simples aterrizan en modelos más baratos y el ahorro documentado puede llegar a unos 30 por ciento - sin entrenamiento, sin fine-tune y sin compromiso. La destilación y Provisioned Throughput cambian cómo se construye o se aloja el modelo, y la fuerza de los guardrails no tiene relación con el coste de los tokens."
+  "explanation": "El enrutamiento inteligente de prompts envía cada petición al modelo de la familia previsto para manejarla mejor, así que los prompts simples aterrizan en modelos más baratos y el ahorro documentado puede llegar a unos 30 por ciento: sin entrenamiento, sin fine-tune y sin compromiso. La destilación y Provisioned Throughput cambian cómo se construye o se aloja el modelo, y la fuerza de los guardrails no tiene relación con el coste de los tokens."
 }
 ```
 
@@ -679,7 +679,7 @@ El Set A refleja el formato dominante del examen real: **una respuesta correcta,
     "Comprar Provisioned Throughput para el modelo"
   ],
   "correct": 0,
-  "explanation": "Los ejemplos en contexto más un esquema declarado anclan el formato de salida a cero coste de entrenamiento - esto es un problema de formato, no de conocimiento ni de comportamiento. El fine-tune es prematuro y caro, un almacén vectorial aborda la recuperación y no el formato, y Provisioned Throughput solo cambia cómo pagas la inferencia."
+  "explanation": "Los ejemplos en contexto más un esquema declarado anclan el formato de salida a cero coste de entrenamiento: esto es un problema de formato, no de conocimiento ni de comportamiento. El fine-tune es prematuro y caro, un almacén vectorial aborda la recuperación y no el formato, y Provisioned Throughput solo cambia cómo pagas la inferencia."
 }
 ```
 
@@ -727,7 +727,7 @@ El Set A refleja el formato dominante del examen real: **una respuesta correcta,
     "Amazon Bedrock Model Evaluation"
   ],
   "correct": 3,
-  "explanation": "Bedrock Model Evaluation admite métricas automatizadas, puntuación con un LLM como juez y evaluación humana en el circuito sobre un dataset etiquetado - la combinación que pide el enunciado. CloudWatch RUM es telemetría del navegador, Macie es descubrimiento de datos sensibles en S3 y Cost Explorer informa del gasto; ninguno mide la calidad de la salida del modelo."
+  "explanation": "Bedrock Model Evaluation admite métricas automatizadas, puntuación con un LLM como juez y evaluación humana en el circuito sobre un dataset etiquetado: la combinación que pide el enunciado. CloudWatch RUM es telemetría del navegador, Macie es descubrimiento de datos sensibles en S3 y Cost Explorer informa del gasto; ninguno mide la calidad de la salida del modelo."
 }
 ```
 
@@ -743,7 +743,7 @@ El Set A refleja el formato dominante del examen real: **una respuesta correcta,
     "AWS Artifact"
   ],
   "correct": 0,
-  "explanation": "SageMaker Clarify detecta sesgos antes y después del entrenamiento y genera atribuciones de explicabilidad que muestran cómo influyeron las características en predicciones individuales - exactamente el requisito de equidad más transparencia. Polly sintetiza voz, Transcribe convierte voz en texto y AWS Artifact es el repositorio de los informes de cumplimiento de AWS, no una herramienta de sesgo de modelos."
+  "explanation": "SageMaker Clarify detecta sesgos antes y después del entrenamiento y genera atribuciones de explicabilidad que muestran cómo influyeron las características en predicciones individuales: exactamente el requisito de equidad más transparencia. Polly sintetiza voz, Transcribe convierte voz en texto y AWS Artifact es el repositorio de los informes de cumplimiento de AWS, no una herramienta de sesgo de modelos."
 }
 ```
 
@@ -799,45 +799,45 @@ El Set A refleja el formato dominante del examen real: **una respuesta correcta,
 
 ## 8. Clave de respuestas y explicaciones, organizadas por dominio
 
-### 8.1 Dominio 1 - Fundamentos de IA y ML (ítems 1-3 del Set A)
+### 8.1 Dominio 1: Fundamentos de IA y ML (ítems 1-3 del Set A)
 
-| Ítem | Respuesta | Por qué está bien - y por qué fallan las alternativas |
+| Ítem | Respuesta | Por qué está bien: y por qué fallan las alternativas |
 |---|---|---|
-| **1** | **C - Agrupamiento no supervisado** | La segmentación de datos sin etiquetar es aprendizaje no supervisado de libro. La clasificación supervisada presupone etiquetas que no tienes, el aprendizaje por refuerzo presupone un bucle de recompensa y un motor de reglas no aprende nada. |
-| **2** | **C - Recuperación** | Recuperación = TP/(TP+FN); con falsos negativos 50 veces más caros, minimizarlos es el objetivo. La exactitud la infla el desequilibrio, la precisión optimiza el error barato, el R-cuadrado es solo de regresión. |
-| **3** | **B - Regularización + datos más representativos** | Una brecha de 99 % / 72 % es sobreajuste. Más épocas y regularización más laxa la agrandan; desplegar aplaza un arreglo barato. |
+| **1** | **C: Agrupamiento no supervisado** | La segmentación de datos sin etiquetar es aprendizaje no supervisado de libro. La clasificación supervisada presupone etiquetas que no tienes, el aprendizaje por refuerzo presupone un bucle de recompensa y un motor de reglas no aprende nada. |
+| **2** | **C: Recuperación** | Recuperación = TP/(TP+FN); con falsos negativos 50 veces más caros, minimizarlos es el objetivo. La exactitud la infla el desequilibrio, la precisión optimiza el error barato, el R-cuadrado es solo de regresión. |
+| **3** | **B: Regularización + datos más representativos** | Una brecha de 99 % / 72 % es sobreajuste. Más épocas y regularización más laxa la agrandan; desplegar aplaza un arreglo barato. |
 
-### 8.2 Dominio 2 - Fundamentos de IA generativa (ítems 4-7 del Set A)
+### 8.2 Dominio 2: Fundamentos de IA generativa (ítems 4-7 del Set A)
 
-| Ítem | Respuesta | Por qué está bien - y por qué fallan las alternativas |
+| Ítem | Respuesta | Por qué está bien: y por qué fallan las alternativas |
 |---|---|---|
-| **4** | **B - Salida fluida pero no verificable** | Esa es la definición publicada de alucinación. Inyección, limitación y deriva son tres clases de riesgo distintas con tres controles distintos. |
-| **5** | **D - Tokens de entrada y salida, por modelo** | La facturación bajo demanda de Bedrock es por token y por proveedor de modelo; las otras tres describen modelos de facturación fija por llamada, por hora de GPU y por latencia que Bedrock bajo demanda no usa. |
-| **6** | **A - Provisioned Throughput** | Los modelos personalizados se invocan mediante Provisioned Throughput, facturado por hora. Nada se mueve a EC2 y no se implica ningún reentrenamiento. |
-| **7** | **C - Enrutamiento inteligente de prompts** | El enrutamiento elige el modelo adecuado de la familia por petición, unos un 30 % más barato para prompts simples, sin reentrenamiento. La destilación es entrenamiento, Provisioned Throughput es un compromiso, los guardrails son seguridad. |
+| **4** | **B: Salida fluida pero no verificable** | Esa es la definición publicada de alucinación. Inyección, limitación y deriva son tres clases de riesgo distintas con tres controles distintos. |
+| **5** | **D: Tokens de entrada y salida, por modelo** | La facturación bajo demanda de Bedrock es por token y por proveedor de modelo; las otras tres describen modelos de facturación fija por llamada, por hora de GPU y por latencia que Bedrock bajo demanda no usa. |
+| **6** | **A: Provisioned Throughput** | Los modelos personalizados se invocan mediante Provisioned Throughput, facturado por hora. Nada se mueve a EC2 y no se implica ningún reentrenamiento. |
+| **7** | **C: Enrutamiento inteligente de prompts** | El enrutamiento elige el modelo adecuado de la familia por petición, unos un 30 % más barato para prompts simples, sin reentrenamiento. La destilación es entrenamiento, Provisioned Throughput es un compromiso, los guardrails son seguridad. |
 
-### 8.3 Dominio 3 - Aplicaciones de modelos fundacionales (ítems 8-11 del Set A)
+### 8.3 Dominio 3: Aplicaciones de modelos fundacionales (ítems 8-11 del Set A)
 
-| Ítem | Respuesta | Por qué está bien - y por qué fallan las alternativas |
+| Ítem | Respuesta | Por qué está bien: y por qué fallan las alternativas |
 |---|---|---|
-| **8** | **A - Ejemplos few-shot + esquema explícito** | La inestabilidad de formato se arregla en contexto a cero coste de entrenamiento. Fine-tune, almacenes vectoriales y Provisioned Throughput responden a problemas distintos. |
-| **9** | **B - Bedrock Knowledge Bases (RAG)** | Recuperación en el momento de la consulta sobre un corpus que el modelo nunca vio, con citas. El fine-tune no fundamenta hechos, las instrucciones más largas no pueden inventar contenido, una temperatura más alta reduce la fiabilidad. |
-| **10** | **C - Agente con action groups + Lambda** | Los agentes orquestan el uso de herramientas de varios pasos; las action groups ejecutan acciones reales. Un prompt de una sola vez, una FAQ estática o un lote nocturno no pueden hacer un pedido de forma interactiva. |
-| **11** | **D - Bedrock Model Evaluation** | Métricas automatizadas más valoración humana en paralelo sobre un dataset etiquetado es exactamente lo que ofrece Model Evaluation; RUM, Macie y Cost Explorer miden cosas completamente distintas. |
+| **8** | **A: Ejemplos few-shot + esquema explícito** | La inestabilidad de formato se arregla en contexto a cero coste de entrenamiento. Fine-tune, almacenes vectoriales y Provisioned Throughput responden a problemas distintos. |
+| **9** | **B: Bedrock Knowledge Bases (RAG)** | Recuperación en el momento de la consulta sobre un corpus que el modelo nunca vio, con citas. El fine-tune no fundamenta hechos, las instrucciones más largas no pueden inventar contenido, una temperatura más alta reduce la fiabilidad. |
+| **10** | **C: Agente con action groups + Lambda** | Los agentes orquestan el uso de herramientas de varios pasos; las action groups ejecutan acciones reales. Un prompt de una sola vez, una FAQ estática o un lote nocturno no pueden hacer un pedido de forma interactiva. |
+| **11** | **D: Bedrock Model Evaluation** | Métricas automatizadas más valoración humana en paralelo sobre un dataset etiquetado es exactamente lo que ofrece Model Evaluation; RUM, Macie y Cost Explorer miden cosas completamente distintas. |
 
-### 8.4 Dominio 4 - Directrices de IA responsable (ítems 12-13 del Set A)
+### 8.4 Dominio 4: Directrices de IA responsable (ítems 12-13 del Set A)
 
-| Ítem | Respuesta | Por qué está bien - y por qué fallan las alternativas |
+| Ítem | Respuesta | Por qué está bien: y por qué fallan las alternativas |
 |---|---|---|
-| **12** | **A - SageMaker Clarify** | Detección de sesgo (antes y después del entrenamiento) más atribuciones de características. Polly y Transcribe son servicios de voz; Artifact guarda los informes de cumplimiento de AWS, no la evidencia de sesgo de tu modelo. |
-| **13** | **B - Govern, Map, Measure, Manage** | Las funciones centrales del AI RMF 1.0. A es el NIST CSF, C es PDCA, D es un pipeline RAG. |
+| **12** | **A: SageMaker Clarify** | Detección de sesgo (antes y después del entrenamiento) más atribuciones de características. Polly y Transcribe son servicios de voz; Artifact guarda los informes de cumplimiento de AWS, no la evidencia de sesgo de tu modelo. |
+| **13** | **B: Govern, Map, Measure, Manage** | Las funciones centrales del AI RMF 1.0. A es el NIST CSF, C es PDCA, D es un pipeline RAG. |
 
-### 8.5 Dominio 5 - Seguridad, cumplimiento y gobernanza (ítems 14-15 del Set A)
+### 8.5 Dominio 5: Seguridad, cumplimiento y gobernanza (ítems 14-15 del Set A)
 
-| Ítem | Respuesta | Por qué está bien - y por qué fallan las alternativas |
+| Ítem | Respuesta | Por qué está bien: y por qué fallan las alternativas |
 |---|---|---|
 | **14** | **C - `bedrock:InvokeModel` sobre el ARN del modelo** | Privilegio mínimo = acción estrecha, recurso estrecho, `iam:PassRole` acotado. Los comodines, AdministratorAccess y las claves compartidas lo violan. |
-| **15** | **D - AWS Config** | Config guarda el historial de configuración, evalúa el cumplimiento y prueba la deriva a lo largo del tiempo. CloudTrail prueba *quién actuó*, Budgets prueban *en qué gastaste*, y los prompt flows no hacen ninguna de las dos cosas. |
+| **15** | **D: AWS Config** | Config guarda el historial de configuración, evalúa el cumplimiento y prueba la deriva a lo largo del tiempo. CloudTrail prueba *quién actuó*, Budgets prueban *en qué gastaste*, y los prompt flows no hacen ninguna de las dos cosas. |
 
 ### 8.6 Clave rápida para el resto del banco de 40 ítems (Sets B y C)
 
@@ -879,7 +879,7 @@ El Set A es tu simulación corregida; estos 25 ítems son tu **set de refuerzo s
 | **13-14 / 15** | Banda de estar listo para el examen | Probablemente holgadamente por encima de un equivalente a 700 | Repara solo el dominio fallado y repite tras 72 horas |
 | **11-12 / 15** | Banda limítrofe | Probablemente se esconde un dominio flojo dentro del total | Desglosa la nota por dominio; reabre los dos más bajos |
 | **9-10 / 15** | Brecha de contenido | El recuerdo está incompleto bajo presión de tiempo | Vuelve a las lecciones mapeadas de la sección 11 antes de cronometrar |
-| **<= 8 / 15** | Brecha de base | La escalera, las métricas o los fundamentos de IAM aún no son automáticos | Reinicia en las lecciones 01, 04 y 14 — no repitas todavía |
+| **<= 8 / 15** | Brecha de base | La escalera, las métricas o los fundamentos de IAM aún no son automáticos | Reinicia en las lecciones 01, 04 y 14: no repitas todavía |
 | **Cualquier resultado con blancos** | Señal automática de suspenso | En el examen real un blanco es un cero garantizado | Repara primero el *proceso*: marcar, conjeturar, avanzar |
 
 Una respuesta errónea suelta es información; un patrón de respuestas erróneas en un dominio es un problema de **currículo**, y la rúbrica de la sección 9 existe para distinguir esas dos situaciones.
@@ -900,7 +900,7 @@ Una respuesta errónea suelta es información; un patrón de respuestas errónea
 
 ### 9.1 Cómo corregirte con honestidad
 
-1. **Puntúa primero la nota bruta del Set A** — un punto por ítem, sin crédito parcial, exactamente como la opción múltiple del examen real.
+1. **Puntúa primero la nota bruta del Set A**: un punto por ítem, sin crédito parcial, exactamente como la opción múltiple del examen real.
 2. **Convierte por dominio, no por total.** Un 13/15 que esconde dos fallos del Dominio 4 es más peligroso que un 11/15 repartido por igual, porque la puntuación compensatoria castiga el bache, no la media.
 3. **Categoriza cada fallo** como *brecha de conocimiento* (no lo sabías) o *error de lectura* (lo sabías y elegiste el distractor). Las brechas de conocimiento van al plan de estudio de la sección 10; los errores de lectura van a la tabla de distractores de la sección 4.
 4. **Repite el Set A en 72 horas.** La inflación de puntuación en una repetición inmediata es memoria, no dominio; un intervalo de 48-72 horas es el más corto que es honesto.
@@ -946,19 +946,19 @@ flowchart LR
     W6 -.->|"nota por debajo de 13 de 15"| W5
 ```
 
-- **📚 ¿Sabías que…?** Como las actualizaciones de la guía del examen llegan al examen real aproximadamente **un mes después de publicarse** (la guía v1.1 se publicó el 30 de abril de 2026), un candidato que se examina en el mismo mes que una revisión puede enfrentarse a ítems extraídos de *cualquiera* de las dos versiones. El comportamiento seguro es releer la página de revisiones de tu curso sobre un mes antes de tu fecha — y negarse a construir ninguna respuesta sobre un servicio que solo aparece en guías antiguas (sección 12).
+- **📚 ¿Sabías que…?** Como las actualizaciones de la guía del examen llegan al examen real aproximadamente **un mes después de publicarse** (la guía v1.1 se publicó el 30 de abril de 2026), un candidato que se examina en el mismo mes que una revisión puede enfrentarse a ítems extraídos de *cualquiera* de las dos versiones. El comportamiento seguro es releer la página de revisiones de tu curso sobre un mes antes de tu fecha, y negarse a construir ninguna respuesta sobre un servicio que solo aparece en guías antiguas (sección 12).
 
 ### 10.3 Las últimas 48 horas y la mañana
 
 | Cuándo | Haz | No hagas |
 |---|---|---|
-| **T-48 h** | Repite el Set A con cronómetro; corrige por dominio con la sección 8.7 | Empezar un tema nuevo — nada aprendido en 48 horas sobrevive al estrés |
+| **T-48 h** | Repite el Set A con cronómetro; corrige por dominio con la sección 8.7 | Empezar un tema nuevo: nada aprendido en 48 horas sobrevive al estrés |
 | **T-24 h** | Relee las secciones 3, 4 y 5: el reloj, los distractores, los pesos | Releer algo que nunca has visto; te parecerá familiar y será erróneo |
-| **T-12 h** | Escribe de memoria los cinco pesos, los cuatro tipos de pregunta, las cuatro funciones de NIST y la escalera | Memorizar datos no verificados — si está en la sección 12, no te pertenece para afirmarlo |
+| **T-12 h** | Escribe de memoria los cinco pesos, los cuatro tipos de pregunta, las cuatro funciones de NIST y la escalera | Memorizar datos no verificados: si está en la sección 12, no te pertenece para afirmarlo |
 | **Mañana del examen** | Come, llega pronto o inicia sesión 20 minutos antes, documento de identidad listo, habitación despejada | Fichas nuevas, pánicos de foro ni un examen de práctica «rápido» completo |
 | **Minuto 0** | Lee el primer enunciado dos veces; arranca inmediatamente el ritmo de 60 segundos por ítem | Pasar cinco minutos admirando la interfaz |
 
-El objetivo de las últimas 48 horas no es conocimiento nuevo — es **práctica de recuperación de lo que ya tienes**, para que las cuatro reglas de decisión (protocolo de conjetura, escalera, privilegio mínimo, evidencia sobre afirmación) se disparen solas en el ítem 1.
+El objetivo de las últimas 48 horas no es conocimiento nuevo: es **práctica de recuperación de lo que ya tienes**, para que las cuatro reglas de decisión (protocolo de conjetura, escalera, privilegio mínimo, evidencia sobre afirmación) se disparen solas en el ítem 1.
 
 ---
 
@@ -987,7 +987,7 @@ El objetivo de las últimas 48 horas no es conocimiento nuevo — es **práctica
 
 ### 11.2 Los cinco hilos que recorren cada dominio
 
-1. **Elige la herramienta suficiente más pequeña.** Prompt antes que RAG, RAG antes que fine-tune, gestionado antes que a mano, ARN acotado antes que comodín — el mismo instinto aparece en D1 (prefabricado frente a personalizado), D3 (prompt frente a entrenar), D4 (control documentado frente a aspiración) y D5 (privilegio mínimo).
+1. **Elige la herramienta suficiente más pequeña.** Prompt antes que RAG, RAG antes que fine-tune, gestionado antes que a mano, ARN acotado antes que comodín: el mismo instinto aparece en D1 (prefabricado frente a personalizado), D3 (prompt frente a entrenar), D4 (control documentado frente a aspiración) y D5 (privilegio mínimo).
 2. **Conoce la unidad de facturación.** D2 factura en tokens, el batch está ~50 % por debajo de bajo demanda, Provisioned Throughput es por hora, y la caché de prompts puede recortar drásticamente el coste del prefijo repetido. Las preguntas de coste suelen ser preguntas de unidad.
 3. **La evidencia vence a la afirmación.** La evidencia de cumplimiento vive en **AWS Artifact**, la del modelo en **Model Cards**, la de sesgo en **Clarify**, la de configuración en **Config**, la de acciones en **CloudTrail**. Una opción que promete un resultado sin un artefacto detrás suele ser errónea.
 4. **Los humanos siguen siendo responsables.** La supervisión humana en el circuito, la evaluación humana, los pasos de aprobación en MLOps y la división de responsabilidad compartida dicen lo mismo: la automatización propone, la responsabilidad no se transfiere.
@@ -995,7 +995,7 @@ El objetivo de las últimas 48 horas no es conocimiento nuevo — es **práctica
 
 ### 11.3 Ejercicio final de integración
 
-Toma cualquier enunciado del Set A y nombra la lección que lo posee. Los ítems 1-3 pertenecen a las lecciones 01-05, los ítems 4-7 a las lecciones 08-09 y 15, los ítems 8-11 a las lecciones 10-11 y 13, los ítems 12-13 a la lección 12 (con el encuadre de NIST de la lección 01), los ítems 14-15 a la lección 14. Si no puedes situar un ítem, todavía no tienes un objetivo de repaso — tienes una brecha de *reconocimiento*, que es la más peligrosa, porque se siente como conocimiento.
+Toma cualquier enunciado del Set A y nombra la lección que lo posee. Los ítems 1-3 pertenecen a las lecciones 01-05, los ítems 4-7 a las lecciones 08-09 y 15, los ítems 8-11 a las lecciones 10-11 y 13, los ítems 12-13 a la lección 12 (con el encuadre de NIST de la lección 01), los ítems 14-15 a la lección 14. Si no puedes situar un ítem, todavía no tienes un objetivo de repaso: tienes una brecha de *reconocimiento*, que es la más peligrosa, porque se siente como conocimiento.
 
 ---
 
@@ -1018,24 +1018,24 @@ Para que una afirmación no verificada no se convierta en una respuesta errónea
 ---
 
 > [!WARNING]
-> **Trampas del día del examen — los errores que cuestan puntos justo en este material:**
+> **Trampas del día del examen: los errores que cuestan puntos justo en este material:**
 > - **Dejar un ítem en blanco.** Blanco = incorrecto, y **no hay penalización por adivinar**. Un ítem sin responder es el único cero garantizado del examen.
 > - **Tratar 15 ítems como gratuitos.** Los ítems de pretest sin puntuar están **sin identificar**; no puedes saltártelos, así que cada ítem recibe tu atención completa.
-> - **Calcular un aprobado.** La conversión de bruta a escalonada **no está publicada** — planifica para >= 80 % en la práctica, no para «35 de 50».
+> - **Calcular un aprobado.** La conversión de bruta a escalonada **no está publicada**: planifica para >= 80 % en la práctica, no para «35 de 50».
 > - **Sacrificar un dominio.** La puntuación es **compensatoria**: un Dominio 3 fuerte nunca rescata un Dominio 4 flojo. Repara el bache, no la media.
-> - **Ignorar el Dominio 4 porque «solo es un 14 %».** Es un 14 % con **dos enunciados de tarea** — los puntos más densos del examen, y los más fáciles de perder sin notarlo.
-> - **Caer en los absolutos.** «Garantiza», «siempre», «nunca», «elimina las alucinaciones» — prefiere la opción matizada y respaldada por evidencias.
+> - **Ignorar el Dominio 4 porque «solo es un 14 %».** Es un 14 % con **dos enunciados de tarea**: los puntos más densos del examen, y los más fáciles de perder sin notarlo.
+> - **Caer en los absolutos.** «Garantiza», «siempre», «nunca», «elimina las alucinaciones»: prefiere la opción matizada y respaldada por evidencias.
 > - **Comprar la respuesta cara.** Un prompt más largo, un fine-tune o Provisioned Throughput son erróneos cuando bastarían ejemplos few-shot, RAG o caché de prompts; elige la opción **gestionada más simple** salvo que se exija control explícitamente.
-> - **Invertir el orden del reloj.** La ordenación y la correspondencia son de todo o nada y lentas — hazlas **después** de los ítems de respuesta única, dentro de la reserva de 1:18-1:27.
+> - **Invertir el orden del reloj.** La ordenación y la correspondencia son de todo o nada y lentas: hazlas **después** de los ítems de respuesta única, dentro de la reserva de 1:18-1:27.
 > - **Afirmar lo no verificado.** Si un dato no está en una página actual de AWS (sección 12), no lo enuncies como material de recuerdo el día del examen.
 
 > [!SUCCESS]
 > **Conclusiones Clave (Key Takeaways):**
 > 1. **El contenedor:** 65 ítems (50 puntuados + 15 ocultos), 90 minutos (~83 s cada uno), escala 100-1.000 con **700 para aprobar**, puntuación **compensatoria**, **sin penalización por adivinar**, 100 USD, válida **3 años**, espera de **14 días** tras un fallo, resultados en un plazo de **5 días hábiles**.
-> 2. **Los cuatro formatos** — opción múltiple, respuesta múltiple, ordenación, correspondencia — de todo o nada de formas distintas; planifica el reloj como **65 min de primera pasada + 13 min de revisión + 9 min de ordenación/correspondencia + 3 min de barrido sin blancos**.
+> 2. **Los cuatro formatos**, opción múltiple, respuesta múltiple, ordenación, correspondencia, de todo o nada de formas distintas; planifica el reloj como **65 min de primera pasada + 13 min de revisión + 9 min de ordenación/correspondencia + 3 min de barrido sin blancos**.
 > 3. **Nunca dejes un blanco**, y cuando te atasques aplica el protocolo: predice → elimina dos → más específica, más nativa de AWS, menos absoluta → avanza en 60 segundos.
-> 4. **Los distractores se diseñan**, no son aleatorios: capa equivocada, peldaño equivocal, familia equivocada, alcance excesivo, redacción absoluta, servicio fuera de alcance — lee el dolor del *enunciado* antes que las opciones.
+> 4. **Los distractores se diseñan**, no son aleatorios: capa equivocada, peldaño equivocal, familia equivocada, alcance excesivo, redacción absoluta, servicio fuera de alcance: lee el dolor del *enunciado* antes que las opciones.
 > 5. **Los pesos gobiernan tus horas:** D1 20 %, D2 24 %, D3 28 %, D4 14 %, D5 14 % → **8 / 9,6 / 11,2 / 5,6 / 5,6** horas de un plan de 40 horas, con la última semana dedicada a los densos dominios del 14 %.
 > 6. **Referencia del Set A:** **13-15 de 15** dos veces, con 72 horas de diferencia y **cero blancos**; corrige por dominio, no por total, porque la puntuación compensatoria castiga el bache.
-> 7. **La escalera de personalización nunca cambia:** prompt para formato, RAG para hechos que el modelo nunca vio, fine-tune para comportamiento en los pesos — y evalúa antes y después con Bedrock Model Evaluation.
-> 8. **La evidencia vence a la afirmación:** Artifact para el cumplimiento de AWS, Model Cards para tu modelo, Clarify para sesgo y atribuciones, Config para la configuración a lo largo del tiempo, CloudTrail para quién actuó — y si una afirmación no está en una página actual de AWS, no la afirmes.
+> 7. **La escalera de personalización nunca cambia:** prompt para formato, RAG para hechos que el modelo nunca vio, fine-tune para comportamiento en los pesos, y evalúa antes y después con Bedrock Model Evaluation.
+> 8. **La evidencia vence a la afirmación:** Artifact para el cumplimiento de AWS, Model Cards para tu modelo, Clarify para sesgo y atribuciones, Config para la configuración a lo largo del tiempo, CloudTrail para quién actuó, y si una afirmación no está en una página actual de AWS, no la afirmes.

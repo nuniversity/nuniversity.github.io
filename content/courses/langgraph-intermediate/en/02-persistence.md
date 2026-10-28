@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Persistence and Checkpointing
 
-One of LangGraph's most powerful features is persistence — the ability to save and restore graph state at any point during execution. This enables long-running agents, human-in-the-loop workflows, and fault-tolerant systems.
+One of LangGraph's most powerful features is persistence: the ability to save and restore graph state at any point during execution. This enables long-running agents, human-in-the-loop workflows, and fault-tolerant systems.
 
 ---
 
@@ -127,7 +127,7 @@ result = app.invoke({"messages": ["New message"]}, config)
 ```
 
 [!SUCCESS]
-`update_state()` lets you intervene in an agent's state — useful for human feedback, error correction, or testing.
+`update_state()` lets you intervene in an agent's state: useful for human feedback, error correction, or testing.
 
 ---
 
@@ -439,6 +439,6 @@ app.invoke({"messages": [("human", "What's my name?")]}, session2)
 - Checkpoints are saved after every node execution by default
 - get_state() retrieves current state; get_state_history() lists all checkpoints
 - update_state() manually injects state into a thread
-- Different threads have isolated state — they don't share context
+- Different threads have isolated state; they don't share context
 - Database-backed checkpointers require checkpointer.setup() before first use
 - Checkpointing enables multi-turn conversations, human-in-the-loop, and fault tolerance

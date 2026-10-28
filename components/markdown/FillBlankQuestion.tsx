@@ -208,8 +208,8 @@ function ItemsMode({ question, instructions, items, explanation, dict }: {
               }
               <span className="font-semibold text-sm text-foreground">
                 {results.every(Boolean)
-                  ? (fb?.feedback_perfect || 'Perfect — all blanks filled correctly!')
-                  : (fb?.feedback_incorrect_items || 'Some blanks are wrong — {count} of {total} items correct.').replace('{count}', String(correctCount)).replace('{total}', String(items.length))}
+                  ? (fb?.feedback_perfect || 'Perfect: all blanks filled correctly!')
+                  : (fb?.feedback_incorrect_items || 'Some blanks are wrong: {count} of {total} items correct.').replace('{count}', String(correctCount)).replace('{total}', String(items.length))}
               </span>
             </div>
             {explanation && <p className="text-sm text-muted-foreground mt-1">{explanation}</p>}
@@ -334,7 +334,7 @@ function TemplateMode({ question, template, answers, distractors = [], explanati
           </div>
 
           <div className="mt-4">
-            <p className="mb-3 text-sm font-semibold text-muted-foreground">{fb?.word_bank_hint || 'Word Bank — drag words into the blanks above:'}</p>
+            <p className="mb-3 text-sm font-semibold text-muted-foreground">{fb?.word_bank_hint || 'Word Bank: drag words into the blanks above:'}</p>
             <div className="flex flex-wrap gap-2">
               {bankWords.map(word => (
                 <WordChip key={word} id={word} label={word} isPlaced={placedWords.has(word)} />
@@ -363,7 +363,7 @@ function TemplateMode({ question, template, answers, distractors = [], explanati
                 : <XCircle className="w-5 h-5 text-red-600" />
               }
               <span className="font-semibold text-sm text-foreground">
-                {feedback === 'correct' ? (fb?.feedback_perfect || 'Perfect — all blanks filled correctly!') : (fb?.feedback_incorrect_blanks || 'Some blanks are wrong — red blanks have incorrect answers.')}
+                {feedback === 'correct' ? (fb?.feedback_perfect || 'Perfect: all blanks filled correctly!') : (fb?.feedback_incorrect_blanks || 'Some blanks are wrong: red blanks have incorrect answers.')}
               </span>
             </div>
             {explanation && <p className="text-sm text-muted-foreground mt-1">{explanation}</p>}

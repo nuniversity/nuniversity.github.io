@@ -292,7 +292,7 @@ OpenCode searches for configuration in this order:
     "pip and npm"
   ],
   "correct": 2,
-  "explanation": "OpenCode can be installed using npm, yarn, or pnpm — all three are supported package managers."
+  "explanation": "OpenCode can be installed using npm, yarn, or pnpm: all three are supported package managers."
 }
 ```
 

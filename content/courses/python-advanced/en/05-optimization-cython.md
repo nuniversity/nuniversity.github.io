@@ -207,7 +207,7 @@ def sum_squares(n):
 
 ## Numba JIT Compilation
 
-Numba compiles Python functions to machine code using LLVM—zero C code required.
+Numba compiles Python functions to machine code using LLVM: zero C code required.
 
 ```python
 from numba import njit, prange

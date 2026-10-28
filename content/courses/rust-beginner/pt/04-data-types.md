@@ -8,7 +8,7 @@ difficulty: "iniciante"
 
 # Tipos de Dados
 
-Rust é uma linguagem **estaticamente tipada** — toda variável deve ter um tipo conhecido em tempo de compilação. O compilador é inteligente em inferir tipos, mas você pode sempre anotá-los explicitamente.
+Rust é uma linguagem **estaticamente tipada**: toda variável deve ter um tipo conhecido em tempo de compilação. O compilador é inteligente em inferir tipos, mas você pode sempre anotá-los explicitamente.
 
 ## Duas Categorias de Tipos
 
@@ -74,7 +74,7 @@ fn main() {
 | `checked_add` | Retorna `Option` (None no estouro) |
 
 > [!WARNING]
-> Em modo debug, estouro de inteiro panica. Em modo release, ele envolve silenciosamente. Nunca confie no comportamento de estouro — use métodos explícitos.
+> Em modo debug, estouro de inteiro panica. Em modo release, ele envolve silenciosamente. Nunca confie no comportamento de estouro: use métodos explícitos.
 
 ### Tipos de Ponto Flutuante
 
@@ -96,10 +96,10 @@ fn main() {
 | `f64` | ~15 dígitos decimais | 8 bytes | Computação geral |
 
 > [!WARNING]
-> Floats não implementam `Eq` ou `Ord` — NaN e problemas de precisão tornam a comparação não confiável. Use `f64::EPSILON` para comparação aproximada:
+> Floats não implementam `Eq` ou `Ord`: NaN e problemas de precisão tornam a comparação não confiável. Use `f64:EPSILON` para comparação aproximada:
 > ```rust
 > fn approx_eq(a: f64, b: f64) -> bool {
->     (a - b).abs() < f64::EPSILON
+> (a: b).abs() < f64:EPSILON
 > }
 > ```
 
@@ -139,7 +139,7 @@ fn main() {
 ```
 
 > [!NOTE]
-> `char` tem 4 bytes (não 1 como o char do C). Ele suporta Unicode completo, mas não é ASCII — use `u8` ou `&[u8]` para dados em nível de byte.
+> `char` tem 4 bytes (não 1 como o char do C). Ele suporta Unicode completo, mas não é ASCII: use `u8` ou `&[u8]` para dados em nível de byte.
 
 ## Tipos Compostos
 

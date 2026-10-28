@@ -280,7 +280,7 @@ $$P(F | I) = \frac{P(F \cap I)}{P(I)} = \frac{0,25}{0,60} = \frac{5}{12} \approx
 
 - P(D) = 0,02 (doença)
 - P(+|D) = 0,95 (sensibilidade)
-- P(+|¬D) = 0,10 (falso positivo = 1 - especificidade)
+- P(+|¬D) = 0,10 (falso positivo = 1: especificidade)
 
 $$P(D|+) = \frac{P(+|D) \times P(D)}{P(+|D) \times P(D) + P(+|\neg D) \times P(\neg D)}$$
 
@@ -290,7 +290,7 @@ $$P(D|+) = \frac{0,95 \times 0,02}{0,95 \times 0,02 + 0,10 \times 0,98} = \frac{
 
 ---
 
-### Valor Esperado — Exemplos Detalhados
+### Valor Esperado: Exemplos Detalhados
 
 **Problema 1:** Em um jogo de roleta, você aposta R$ 10 no número 17. Se acertar, ganha R$ 350. Qual o valor esperado?
 
@@ -298,7 +298,7 @@ $$P(D|+) = \frac{0,95 \times 0,02}{0,95 \times 0,02 + 0,10 \times 0,98} = \frac{
 
 **Passo 1:** Identificar os resultados possíveis.
 
-- Acertar (1 em 37): ganho = R$ 350 - R$ 10 = R$ 340
+- Acertar (1 em 37): ganho = R$ 350: R$ 10 = R$ 340
 - Errar (36 em 37): perda = -R$ 10
 
 **Passo 2:** Calcular o valor esperado.

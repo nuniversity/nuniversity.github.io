@@ -8,7 +8,7 @@ difficulty: "iniciante"
 
 # Ferramentas Básicas
 
-Ferramentas dão aos LLMs a capacidade de interagir com o mundo exterior — pesquisar na web, executar cálculos, consultar bancos de dados e mais. Esta lição cobre como definir, vincular e executar ferramentas em LangGraph.
+Ferramentas dão aos LLMs a capacidade de interagir com o mundo exterior: pesquisar na web, executar cálculos, consultar bancos de dados e mais. Esta lição cobre como definir, vincular e executar ferramentas em LangGraph.
 
 ---
 
@@ -496,7 +496,7 @@ Sempre envolva a execução de ferramenta em try/except. Uma ferramenta com falh
 ### Principais Conclusões
 - `@tool` decora uma função com metadados que o LLM usa para decidir quando chamá-la
 - `llm.bind_tools([...])` torna o LLM ciente das ferramentas disponíveis
-- LLMs apenas solicitam chamadas de ferramenta — seu código de nó as executa
+- LLMs apenas solicitam chamadas de ferramenta: seu código de nó as executa
 - Resultados de ferramentas vão em ToolMessages vinculados por tool_call_id
 - ToolExecutor simplifica o roteamento e execução de múltiplas ferramentas
 - O padrão ReAct faz loop: LLM → chamadas de ferramenta → executar → ToolMessages → LLM novamente

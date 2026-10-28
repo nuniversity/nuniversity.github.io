@@ -8,14 +8,14 @@ difficulty: "beginner"
 
 # What Are Processes?
 
-Processes are everywhere. From the moment you wake up to the moment you go to sleep, you interact with processes — both consciously and unconsciously. Understanding what processes are and how they work is a foundational skill for anyone working in technology, business, or any field that requires systematic thinking.
+Processes are everywhere. From the moment you wake up to the moment you go to sleep, you interact with processes: both consciously and unconsciously. Understanding what processes are and how they work is a foundational skill for anyone working in technology, business, or any field that requires systematic thinking.
 
 ## Defining a Process
 
 A **process** is a series of actions or steps taken in a specific order to achieve a particular end. It transforms inputs into outputs through a defined sequence of operations.
 
 > [!NOTE] Key Definition
-> A process is a **repeatable, systematic series of actions** designed to produce a consistent result. The key word is *repeatable* — if something happens once by chance, it's not a process.
+> A process is a **repeatable, systematic series of actions** designed to produce a consistent result. The key word is *repeatable*: if something happens once by chance, it's not a process.
 
 ### Core Characteristics of Processes
 
@@ -223,11 +223,11 @@ Determine which of the following are processes and explain why:
 <details>
 <summary>Click to see answers</summary>
 
-1. **Process** — Repeatable, ordered steps with a clear goal
-2. **Not a process** — Not repeatable or controllable
-3. **Process** — Systematic approach to handling requests
-4. **Not a process** — No transformation or goal, just random output
-5. **Process** — Defined steps to achieve a specific outcome
+1. **Process**: Repeatable, ordered steps with a clear goal
+2. **Not a process**: Not repeatable or controllable
+3. **Process**: Systematic approach to handling requests
+4. **Not a process**: No transformation or goal, just random output
+5. **Process**: Defined steps to achieve a specific outcome
 
 </details>
 

@@ -14,6 +14,7 @@ from validate_lesson import (
     validate_frontmatter,
     validate_body,
     validate_lesson,
+    validate_prose,
 )
 
 
@@ -198,6 +199,51 @@ class TestValidateBody:
         content = self._make_body(takeaways=tk)
         errors, _ = validate_body(content, frontmatter)
         assert not any("takeaway" in e.lower() for e in errors)
+
+
+class TestValidateProse:
+    """Read-aloud punctuation rules."""
+
+    def test_em_dash_warns(self):
+        _, warnings = validate_prose("One thing \u2014 and another.")
+        assert any("em dash" in w.lower() for w in warnings)
+
+    def test_en_dash_warns(self):
+        _, warnings = validate_prose("From 10\u201320 units.")
+        assert any("en dash" in w.lower() for w in warnings)
+
+    def test_double_hyphen_warns(self):
+        _, warnings = validate_prose("One thing -- and another.")
+        assert any("double hyphen" in w.lower() for w in warnings)
+
+    def test_hyphen_as_dash_warns(self):
+        _, warnings = validate_prose("One thing - and another.")
+        assert any("hyphen used as a dash" in w.lower() for w in warnings)
+
+    def test_long_parenthetical_warns(self):
+        _, warnings = validate_prose("A rule (" + "x" * 90 + ") applies.")
+        assert any("parenthetical" in w.lower() for w in warnings)
+
+    def test_comma_and_semicolon_are_clean(self):
+        errors, warnings = validate_prose(
+            "The queue absorbs bursts, and the worker drains it; nothing is lost."
+        )
+        assert errors == []
+        assert warnings == []
+
+    def test_code_is_not_prose(self):
+        content = "```bash\necho 'a \u2014 b'\n```\n\nUse `a \u2014 b` in code."
+        _, warnings = validate_prose(content)
+        assert warnings == []
+
+    def test_table_separators_are_not_prose(self):
+        content = "| A | B |\n| --- | --- |\n| 1 | 2 |"
+        _, warnings = validate_prose(content)
+        assert warnings == []
+
+    def test_compound_hyphen_is_clean(self):
+        _, warnings = validate_prose("This is a real-world, read-only example.")
+        assert warnings == []
 
 
 class TestValidateLesson:

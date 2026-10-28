@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Pipeline de CI/CD completo
 
-Esta lección final reúne todo lo que has aprendido — pruebas, cobertura, linting, formateo, verificación de tipos y análisis de seguridad — en un pipeline de CI/CD completo. Construirás un workflow de GitHub Actions de nivel profesional con puertas de calidad en cada etapa.
+Esta lección final reúne todo lo que has aprendido, pruebas, cobertura, linting, formateo, verificación de tipos y análisis de seguridad, en un pipeline de CI/CD completo. Construirás un workflow de GitHub Actions de nivel profesional con puertas de calidad en cada etapa.
 
 ## Arquitectura del pipeline
 

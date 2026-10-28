@@ -1,16 +1,16 @@
 ---
-title: "Domínio 1.1 — Arquitetura do Snowflake"
+title: "Domínio 1.1, Arquitetura do Snowflake"
 description: "Domine a arquitetura de três camadas do Snowflake: Cloud Services (Serviços de Nuvem), Compute (Computação via Virtual Warehouses) e Database Storage (Armazenamento). Entenda como a separação entre armazenamento e computação impulsiona o valor central do Snowflake."
 order: 1
 difficulty: intermediate
 duration: "75 min"
 ---
 
-# Domínio 1.1 — Arquitetura do Snowflake
+# Domínio 1.1: Arquitetura do Snowflake
 
 ## Peso no Exame
 
-**Domínio 1.0 — Recursos de Arquitetura do Snowflake AI Data Cloud** representa **~31%** do exame SnowPro Core COF-C03 — o maior domínio individual.
+**Domínio 1.0, Recursos de Arquitetura do Snowflake AI Data Cloud** representa **~31%** do exame SnowPro Core COF-C03, o maior domínio individual.
 
 > [!NOTE]
 > Esta lição corresponde ao **Objetivo de Exame 1.1**: *Descrever e utilizar a arquitetura do Snowflake*, incluindo a camada Cloud Services, a camada Compute, a camada Database Storage e a comparação entre as edições do Snowflake.
@@ -19,7 +19,7 @@ duration: "75 min"
 
 ## O que é o Snowflake?
 
-O Snowflake é uma **plataforma de dados nativa em nuvem, totalmente gerenciada**, entregue como Software como Serviço (SaaS — *Software-as-a-Service*). Foi construído do zero para a nuvem — não portado de um produto local (*on-premises*).
+O Snowflake é uma **plataforma de dados nativa em nuvem, totalmente gerenciada**, entregue como Software como Serviço (SaaS, *Software-as-a-Service*). Foi construído do zero para a nuvem, não portado de um produto local (*on-premises*).
 
 Principais diferenças em relação aos data warehouses tradicionais:
 
@@ -36,7 +36,7 @@ Principais diferenças em relação aos data warehouses tradicionais:
 
 ## A Arquitetura de Três Camadas
 
-A arquitetura do Snowflake é composta por três camadas escalonáveis de forma independente. Entender cada camada — e os limites entre elas — é essencial para o exame.
+A arquitetura do Snowflake é composta por três camadas escalonáveis de forma independente. Entender cada camada, e os limites entre elas, é essencial para o exame.
 
 ```mermaid
 flowchart TD
@@ -51,15 +51,15 @@ flowchart TD
 
 ---
 
-### Camada 1 — Database Storage (Armazenamento)
+### Camada 1: Database Storage (Armazenamento)
 
 É onde **todos os dados residem permanentemente**. Características principais:
 
-- Os dados são armazenados no formato proprietário de **micro-partições colunares** do Snowflake — comprimidas e otimizadas automaticamente. Os clientes não têm acesso direto aos arquivos subjacentes.
+- Os dados são armazenados no formato proprietário de **micro-partições colunares** do Snowflake: comprimidas e otimizadas automaticamente. Os clientes não têm acesso direto aos arquivos subjacentes.
 - O armazenamento é construído sobre o blob storage do provedor de nuvem: **Amazon S3** (AWS), **Azure Blob Storage** (Azure) ou **Google Cloud Storage** (GCP).
 - **A cobrança é separada da computação**: você paga pelo armazenamento mesmo quando nenhum warehouse está em execução.
 - O Snowflake gerencia criptografia, redundância e durabilidade automaticamente.
-- Os dados são reorganizados em micro-partições (50–500 MB comprimidos) com metadados ricos por partição (valores mín./máx., contagem distinta, contagem de NULLs) para habilitar o **partition pruning** (poda de partições) durante as queries.
+- Os dados são reorganizados em micro-partições (50 to 500 MB comprimidos) com metadados ricos por partição (valores mín./máx., contagem distinta, contagem de NULLs) para habilitar o **partition pruning** (poda de partições) durante as queries.
 
 **O que a camada de armazenamento contém:**
 - Dados de tabelas (micro-partições)
@@ -70,14 +70,14 @@ flowchart TD
 
 ---
 
-### Camada 2 — Compute Layer (Virtual Warehouses)
+### Camada 2: Compute Layer (Virtual Warehouses)
 
-A camada de computação consiste em **Virtual Warehouses (VWs)** — clusters de recursos de computação nomeados que executam queries SQL e operações DML.
+A camada de computação consiste em **Virtual Warehouses (VWs)**: clusters de recursos de computação nomeados que executam queries SQL e operações DML.
 
 Características principais:
 
-- Cada Virtual Warehouse é um cluster de computação **MPP (Massively Parallel Processing — Processamento Massivamente Paralelo)** composto por um ou mais nós.
-- **Múltiplos warehouses podem ler do mesmo armazenamento simultaneamente** — sem contenção de recursos entre eles.
+- Cada Virtual Warehouse é um cluster de computação **MPP (Massively Parallel Processing: Processamento Massivamente Paralelo)** composto por um ou mais nós.
+- **Múltiplos warehouses podem ler do mesmo armazenamento simultaneamente**: sem contenção de recursos entre eles.
 - Warehouses podem ser **suspensos** (interrompendo a cobrança instantaneamente) e **retomados** (em segundos).
 - O tamanho é expresso em tamanhos de camiseta: **X-Small, Small, Medium, Large, X-Large, 2X-Large, 3X-Large, 4X-Large, 5X-Large, 6X-Large**.
 - Cada aumento de tamanho **dobra** os recursos de computação (e os créditos por hora).
@@ -112,9 +112,9 @@ Características principais:
 
 ---
 
-### Camada 3 — Cloud Services Layer
+### Camada 3: Cloud Services Layer
 
-Esta é o **cérebro do Snowflake** — uma coleção de serviços que coordenam toda a atividade na plataforma. Funciona em infraestrutura gerenciada pelo Snowflake e está **sempre disponível**, mesmo quando nenhum virtual warehouse está em execução.
+Esta é o **cérebro do Snowflake**: uma coleção de serviços que coordenam toda a atividade na plataforma. Funciona em infraestrutura gerenciada pelo Snowflake e está **sempre disponível**, mesmo quando nenhum virtual warehouse está em execução.
 
 **Responsabilidades da Cloud Services:**
 
@@ -137,16 +137,16 @@ SHOW TABLES IN DATABASE MY_DB;
 
 ---
 
-## Separação de Armazenamento e Computação — Por que Isso Importa
+## Separação de Armazenamento e Computação: Por que Isso Importa
 
 Esta é a **característica arquiteturalmente mais significativa** do Snowflake e aparece frequentemente no exame.
 
 **Benefícios da separação:**
 
-1. **Escalabilidade independente** — escale a computação para cima/baixo sem tocar no armazenamento
-2. **Otimização de custos** — suspenda a computação quando ociosa; o armazenamento continua sendo cobrado a taxas baixas
-3. **Isolamento de workload** — várias equipes executam seus próprios warehouses sobre dados compartilhados
-4. **Sem contenção** — uma query analítica grande no WH_ANALYTICS não afeta a ingestão no WH_INGEST
+1. **Escalabilidade independente**: escale a computação para cima/baixo sem tocar no armazenamento
+2. **Otimização de custos**: suspenda a computação quando ociosa; o armazenamento continua sendo cobrado a taxas baixas
+3. **Isolamento de workload**: várias equipes executam seus próprios warehouses sobre dados compartilhados
+4. **Sem contenção**: uma query analítica grande no WH_ANALYTICS não afeta a ingestão no WH_INGEST
 
 ```sql
 -- Engenharia ingere dados em seu warehouse
@@ -209,10 +209,10 @@ As contas do Snowflake são implantadas em uma combinação específica de **nuv
 | Termo | Definição |
 |---|---|
 | **Virtual Warehouse (VW)** | Cluster de computação MPP nomeado que executa queries |
-| **Micro-partição** | Unidade fundamental de armazenamento: 50–500 MB comprimidos, colunar |
+| **Micro-partição** | Unidade fundamental de armazenamento: 50 to 500 MB comprimidos, colunar |
 | **Cloud Services Layer** | Camada de inteligência: autenticação, otimização, metadados, controle de acesso |
-| **SaaS** | Software como Serviço — o Snowflake gerencia toda a infraestrutura |
-| **MPP** | Processamento Massivamente Paralelo — queries distribuídas entre nós |
+| **SaaS** | Software como Serviço, o Snowflake gerencia toda a infraestrutura |
+| **MPP** | Processamento Massivamente Paralelo: queries distribuídas entre nós |
 | **Separação de Armazenamento e Computação** | Armazenamento e computação escalonam de forma independente, cobrados separadamente |
 | **Crédito** | Unidade de consumo de computação do Snowflake |
 
@@ -273,9 +273,9 @@ As contas do Snowflake são implantadas em uma combinação específica de **nuv
 
 > [!SUCCESS]
 > **Pontos-Chave para o Dia do Exame:**
-> 1. Três camadas: **Cloud Services → Compute (VW) → Storage** — cada uma independente e cobrada separadamente
-> 2. Cloud Services = cérebro (autenticação, otimização, metadados) — gratuito até **10%** dos créditos de computação
-> 3. **O armazenamento nunca para de ser cobrado** — mesmo quando os warehouses estão suspensos
+> 1. Três camadas: **Cloud Services → Compute (VW) → Storage**: cada uma independente e cobrada separadamente
+> 2. Cloud Services = cérebro (autenticação, otimização, metadados): gratuito até **10%** dos créditos de computação
+> 3. **O armazenamento nunca para de ser cobrado**: mesmo quando os warehouses estão suspensos
 > 4. Multi-cluster WH, Column Masking, Row Access Policies → **Enterprise+**
 > 5. HIPAA / Tri-Secret Secure → **Business Critical+**
 > 6. VPS = maior isolamento, SLA de 99,99%, implantação privada

@@ -237,7 +237,7 @@ spark.sql("""
 
 1. **Prefira funções integradas** sempre que possível
 2. **Use Pandas UDFs** em vez de UDFs regulares para desempenho
-3. **Minimize chamadas de UDF** — agrupe operações em uma UDF em vez de múltiplas
+3. **Minimize chamadas de UDF**: agrupe operações em uma UDF em vez de múltiplas
 4. **Evite UDFs em limites de shuffle** quando possível
 5. **Teste UDFs localmente** antes de executar em escala
 6. **Defina `spark.sql.execution.arrow.pyspark.enabled=true`** para Pandas UDFs

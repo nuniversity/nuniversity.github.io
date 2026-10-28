@@ -208,7 +208,7 @@ flowchart TD
     style G fill:#bbdefb
 ```
 
-## Paso 1: aplicar SRP — separar las responsabilidades
+## Paso 1: aplicar SRP: separar las responsabilidades
 
 ```python
 from abc import ABC, abstractmethod
@@ -381,7 +381,7 @@ class DiscountEngine:
 > [!SUCCESS]
 > **SRP cumplido**: cada clase tiene una única responsabilidad. **OCP cumplido**: los nuevos descuentos se añaden creando nuevas clases de estrategia, no modificando el código existente.
 
-## Paso 2: aplicar OCP — métodos de pago
+## Paso 2: aplicar OCP: métodos de pago
 
 ```python
 # --- Responsibility 3: Payment (OCP, strategy pattern) ---
@@ -449,7 +449,7 @@ class PaymentGateway:
 > [!SUCCESS]
 > **OCP cumplido**: los nuevos métodos de pago se añaden creando nuevas subclases y registrándolas. No se modifica ningún código existente.
 
-## Paso 3: aplicar ISP — interfaces segregadas
+## Paso 3: aplicar ISP: interfaces segregadas
 
 ```python
 # --- Responsibility 4: Notifications (ISP) ---
@@ -554,7 +554,7 @@ class StandardShippingService(ShippingService):
 > [!SUCCESS]
 > **ISP cumplido**: cada interfaz es pequeña y está enfocada. Los emisores de notificaciones y los exportadores tienen exactamente los métodos que necesitan.
 
-## Paso 4: aplicar DIP — componerlo todo
+## Paso 4: aplicar DIP: componerlo todo
 
 ```python
 # --- Responsibility 7: Business Logic (high-level, depends on abstractions) ---

@@ -46,7 +46,7 @@ flowchart TD
 
 ## Propiedad 1: Entrada
 
-Un algoritmo debe tener **cero o más entradas** -- valores o datos proporcionados al algoritmo antes de que comience su ejecución.
+Un algoritmo debe tener **cero o más entradas**: valores o datos proporcionados al algoritmo antes de que comience su ejecución.
 
 ### Comprendiendo la Entrada
 
@@ -91,7 +91,7 @@ FIN ALGORITMO
 
 ## Propiedad 2: Salida
 
-Un algoritmo debe producir **al menos una salida** -- un resultado que tenga una relación especificada con las entradas.
+Un algoritmo debe producir **al menos una salida**: un resultado que tenga una relación especificada con las entradas.
 
 ### Por Qué Importa la Salida
 
@@ -127,7 +127,7 @@ FIN ALGORITMO
 
 ## Propiedad 3: Definición
 
-Cada paso de un algoritmo debe estar **precisamente definido** -- no debe haber ambigüedad sobre qué hacer en ningún momento.
+Cada paso de un algoritmo debe estar **precisamente definido**: no debe haber ambigüedad sobre qué hacer en ningún momento.
 
 ### El Problema de la Ambigüedad
 
@@ -174,11 +174,11 @@ FIN ALGORITMO
 
 ## Propiedad 4: Finitud
 
-Un algoritmo debe **terminar después de un número finito de pasos** -- no puede ejecutarse para siempre.
+Un algoritmo debe **terminar después de un número finito de pasos**: no puede ejecutarse para siempre.
 
 ### Bucles Infinitos
 
-La violación más común de la finitud es el bucle infinito -- un bucle que nunca termina porque su condición de terminación nunca se cumple.
+La violación más común de la finitud es el bucle infinito: un bucle que nunca termina porque su condición de terminación nunca se cumple.
 
 ```mermaid
 flowchart TD
@@ -235,7 +235,7 @@ PASO 2: MIENTRAS CONTADOR no sea igual a 5 HACER
 
 ## Propiedad 5: Eficacia
 
-Cada paso de un algoritmo debe ser **suficientemente básico para poder realizarse** -- en principio, por una persona que usa solo lápiz y papel en una cantidad finita de tiempo.
+Cada paso de un algoritmo debe ser **suficientemente básico para poder realizarse**: en principio, por una persona que usa solo lápiz y papel en una cantidad finita de tiempo.
 
 ### ¿Qué Hace que un Paso sea Eficaz?
 

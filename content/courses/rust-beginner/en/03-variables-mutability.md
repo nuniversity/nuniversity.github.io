@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Variables and Mutability
 
-Variables in Rust are **immutable by default**. This is one of the language's core design decisions — it pushes you toward safer, more predictable code.
+Variables in Rust are **immutable by default**. This is one of the language's core design decisions; it pushes you toward safer, more predictable code.
 
 ## Immutable Variables
 

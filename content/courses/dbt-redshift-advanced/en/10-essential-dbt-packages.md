@@ -1,6 +1,6 @@
 ---
 title: "Essential dbt Packages for Production Projects"
-description: "Master the must-have dbt packages for every production project: dbt-utils, dbt-expectations, dbt-audit-helper, dbt-codegen, elementary, dbt-project-evaluator, and more — all configured for an Amazon Redshift environment."
+description: "Master the must-have dbt packages for every production project: dbt-utils, dbt-expectations, dbt-audit-helper, dbt-codegen, elementary, dbt-project-evaluator, and more, all configured for an Amazon Redshift environment."
 order: 10
 duration: "55 min"
 difficulty: "advanced"
@@ -63,7 +63,7 @@ Always pin package versions exactly in `packages.yml`. Floating versions (`>=1.0
 
 ## 1. dbt-utils: The Foundation Package
 
-`dbt-labs/dbt_utils` is the most important dbt package — it provides core macros and tests that nearly every other package depends on.
+`dbt-labs/dbt_utils` is the most important dbt package; it provides core macros and tests that nearly every other package depends on.
 
 ### Surrogate Keys
 
@@ -81,7 +81,7 @@ from {{ ref('stg_customers') }}
 
 `generate_surrogate_key` produces a consistent MD5 hash across warehouses. On Redshift it compiles to `md5(cast(coalesce(cast(user_id as varchar), '_dbt_utils_surrogate_key_null_') || '-' || ...) as varchar)`.
 
-### Star — Select All Except
+### Star: Select All Except
 
 ```sql
 -- Select all columns except internal load metadata columns
@@ -165,7 +165,7 @@ models:
 
 ## 2. dbt-expectations: Great Expectations for dbt
 
-`calogica/dbt_expectations` adds 50+ data quality tests inspired by the Great Expectations library — far beyond dbt's built-in generic tests.
+`calogica/dbt_expectations` adds 50+ data quality tests inspired by the Great Expectations library: far beyond dbt's built-in generic tests.
 
 ```yaml
 # packages.yml already includes calogica/dbt_expectations
@@ -285,7 +285,7 @@ dbt run-operation audit_helper.compare_row_counts --args '{...}'
 
 ## 4. dbt-codegen: Eliminate Boilerplate
 
-`dbt-labs/dbt_codegen` generates YAML and SQL from your warehouse schema — eliminating the tedious manual work of writing source configurations and base models.
+`dbt-labs/dbt_codegen` generates YAML and SQL from your warehouse schema: eliminating the tedious manual work of writing source configurations and base models.
 
 ### Generate Source YAML from Redshift
 
@@ -370,7 +370,7 @@ dbt run-operation codegen.generate_model_yaml --args '{
 
 ## 5. Elementary: Data Observability
 
-`elementary-data/elementary` adds anomaly detection as native dbt tests — it monitors your data for volume, freshness, schema, and value distribution anomalies without external tooling.
+`elementary-data/elementary` adds anomaly detection as native dbt tests; it monitors your data for volume, freshness, schema, and value distribution anomalies without external tooling.
 
 ```yaml
 # models/marts/facts/schema.yml
@@ -472,7 +472,7 @@ vars:
 
 ## 7. dbt-artifacts: Run Metadata in Your Warehouse
 
-`brooklyn-data/dbt_artifacts` loads dbt run metadata (model timings, test results, source freshness) into warehouse tables — enabling dashboards over your pipeline health.
+`brooklyn-data/dbt_artifacts` loads dbt run metadata (model timings, test results, source freshness) into warehouse tables: enabling dashboards over your pipeline health.
 
 ```yaml
 # packages.yml
@@ -572,7 +572,7 @@ packages:
   "question": "Why should package versions always be pinned exactly in packages.yml rather than using a range like `>=1.0.0`?",
   "options": [
     "dbt deps does not support version ranges",
-    "Floating versions cause non-reproducible builds — a package release with breaking changes silently breaks your project",
+    "Floating versions cause non-reproducible builds: a package release with breaking changes silently breaks your project",
     "Pinned versions run faster than floating versions",
     "AWS Redshift requires exact version pinning for compliance"
   ],
@@ -625,7 +625,7 @@ packages:
     "Schema changes like dropped or renamed columns"
   ],
   "correct": 1,
-  "explanation": "dbt_utils.recency only checks whether the most recent timestamp is within a fixed interval. elementary.volume_anomalies detects unusual patterns relative to a historical baseline — for example, a 50% drop in daily order volume that recency alone would miss."
+  "explanation": "dbt_utils.recency only checks whether the most recent timestamp is within a fixed interval. elementary.volume_anomalies detects unusual patterns relative to a historical baseline: for example, a 50% drop in daily order volume that recency alone would miss."
 }
 ```
 
@@ -666,11 +666,11 @@ packages:
 [!SUCCESS]
 ### Key Takeaways
 
-- Always pin package versions exactly in `packages.yml` — floating versions cause silent, non-reproducible breakages.
+- Always pin package versions exactly in `packages.yml`: floating versions cause silent, non-reproducible breakages.
 - `dbt-utils` is mandatory: surrogate keys, `star()`, `date_spine`, `union_relations`, and advanced generic tests belong in every project.
 - `dbt-expectations` adds 50+ statistical and structural data tests that go far beyond dbt's built-in suite.
-- `dbt-audit-helper` is your safety net during refactoring — compare column values and row counts between old and new models before cutting over.
+- `dbt-audit-helper` is your safety net during refactoring: compare column values and row counts between old and new models before cutting over.
 - `dbt-codegen` eliminates boilerplate: generate `sources.yml`, base staging models, and schema YAML from your warehouse catalog in seconds.
-- `elementary` adds statistical anomaly detection as native dbt tests — volume spikes, distribution shifts, and freshness anomalies are caught without external observability tools.
+- `elementary` adds statistical anomaly detection as native dbt tests: volume spikes, distribution shifts, and freshness anomalies are caught without external observability tools.
 - `dbt-project-evaluator` enforces DAG quality standards and documentation coverage in CI, preventing architectural debt from accumulating.
 - `dbt-artifacts` loads run metadata into warehouse tables, enabling SQL-based pipeline health dashboards directly in Redshift.

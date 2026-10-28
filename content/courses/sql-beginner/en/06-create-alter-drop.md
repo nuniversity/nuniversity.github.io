@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # CREATE, ALTER, and DROP Tables
 
-These **Data Definition Language (DDL)** commands define and manage the structure of your database. Getting schema design right is critical — it's much easier to plan ahead than to migrate later.
+These **Data Definition Language (DDL)** commands define and manage the structure of your database. Getting schema design right is critical; it's much easier to plan ahead than to migrate later.
 
 ## CREATE TABLE
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 ```
 
-## ALTER TABLE — Changing Table Structure
+## ALTER TABLE: Changing Table Structure
 
 ### ADD COLUMN
 
@@ -119,7 +119,7 @@ DROP COLUMN phone;
 ALTER TABLE users RENAME TO customers;
 ```
 
-## DROP TABLE — Removing Tables
+## DROP TABLE: Removing Tables
 
 ```sql
 -- Permanently removes table and all its data

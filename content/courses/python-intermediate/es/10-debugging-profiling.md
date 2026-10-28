@@ -12,7 +12,7 @@ Incluso los desarrolladores experimentados pasan tiempo significativo depurando 
 
 ## El Módulo `logging`
 
-El módulo `logging` es la alternativa profesional a `print()` para depuración — es configurable, jerárquico y seguro para producción.
+El módulo `logging` es la alternativa profesional a `print()` para depuración: es configurable, jerárquico y seguro para producción.
 
 ```python
 import logging
@@ -80,7 +80,7 @@ logger.warning("Shows in both")           # Nivel WARNING → ambos
 > |--------|----------------|
 > | `logger = logging.getLogger(__name__)` | Loggers por módulo con nombres jerárquicos |
 > | `logging.exception("...")` | Registra en nivel ERROR E incluye traceback |
-> | `logger.debug(f"x = {x}")` | Evita f-strings en debug — usa formato `%s` para evaluación perezosa |
+> | `logger.debug(f"x = {x}")` | Evita f-strings en debug: usa formato `%s` para evaluación perezosa |
 
 ### Logging Estructurado
 
@@ -135,9 +135,9 @@ import pdb; pdb.set_trace()
 | `print expr` | `p` | Evaluar e imprimir expresión |
 | `pp expr` | `pp` | Imprimir expresión formateada |
 | `args` | `a` | Imprimir argumentos de la función |
-| `locals()` | — | Imprimir todas las variables locales |
+| `locals()` |: | Imprimir todas las variables locales |
 | `break lineno` | `b` | Definir breakpoint en número de línea |
-| `disable nb` | — | Deshabilitar breakpoint por número |
+| `disable nb` |: | Deshabilitar breakpoint por número |
 | `where` | `w` | Imprimir rastreo de la pila |
 | `up` | `u` | Subir un marco en la pila |
 | `down` | `d` | Bajar un marco en la pila |
@@ -218,7 +218,7 @@ stats.print_stats(10)        # Mostrar top 10
 ```
 
 > [!NOTE]
-> `cProfile` tiene una sobrecarga muy baja — típicamente < 1% de ralentización. Es seguro usarlo en cargas de trabajo similares a las de producción.
+> `cProfile` tiene una sobrecarga muy baja: típicamente < 1% de ralentización. Es seguro usarlo en cargas de trabajo similares a las de producción.
 
 ### Perfilado desde la Línea de Comandos
 
@@ -404,7 +404,7 @@ flowchart TD
 ```
 
 > [!SUCCESS]
-> "La optimización prematura es la raíz de todos los males" — Donald Knuth. Perfila primero, optimiza después. Usa `logging` para diagnóstico en producción, `pdb` para depuración interactiva y `cProfile` para análisis de rendimiento.
+> "La optimización prematura es la raíz de todos los males": Donald Knuth. Perfila primero, optimiza después. Usa `logging` para diagnóstico en producción, `pdb` para depuración interactiva y `cProfile` para análisis de rendimiento.
 
 ## Preguntas de Práctica
 

@@ -10,7 +10,7 @@ duration: "70 min"
 
 ## O Que Sao Pipelines de Agentes?
 
-Pipelines de agentes sao fluxos de trabalho estruturados que encadeiam multiplas operacoes — chamadas de ferramentas, execucoes de habilidades, delegacoes a subagentes — em sequencias coordenadas.
+Pipelines de agentes sao fluxos de trabalho estruturados que encadeiam multiplas operacoes, chamadas de ferramentas, execucoes de habilidades, delegacoes a subagentes, em sequencias coordenadas.
 
 ```mermaid
 flowchart TD
@@ -259,10 +259,10 @@ class TratadorErros:
   "type": "multiple-choice",
   "question": "Qual estrategia de tratamento de erros deve ser usada para um deploy em producao que falha?",
   "options": [
-    "retry - tentar repetidamente",
-    "pular - continuar para o proximo",
-    "abortar - parar o pipeline imediatamente",
-    "ignorar - fingir que nao aconteceu"
+    "retry: tentar repetidamente",
+    "pular: continuar para o proximo",
+    "abortar, parar o pipeline imediatamente",
+    "ignorar: fingir que nao aconteceu"
   ],
   "correct": 2,
   "explanation": "Um deploy em producao que falha deve abortar o pipeline para evitar estado inconsistente."

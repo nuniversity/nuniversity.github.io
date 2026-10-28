@@ -616,13 +616,13 @@ jobs:
 
 ## Summary
 
-- **mypy** catches type errors at compile time — the earlier the annotation, the more it helps
-- **Strict mode** (`--strict`) is the most valuable — it forces complete annotations
+- **mypy** catches type errors at compile time: the earlier the annotation, the more it helps
+- **Strict mode** (`--strict`) is the most valuable; it forces complete annotations
 - **bandit** finds security issues: hardcoded secrets, injection risks, unsafe APIs
 - **SonarQube** provides comprehensive quality tracking: bugs, vulnerabilities, technical debt
 - **CI integration** makes static analysis a mandatory part of the development process
-- **Fix issues at the source** — don't suppress warnings without understanding them
-- **Static analysis complements testing** — tests verify behavior, static analysis verifies code structure
+- **Fix issues at the source**: don't suppress warnings without understanding them
+- **Static analysis complements testing**: tests verify behavior, static analysis verifies code structure
 
 > [!SUCCESS]
 > Static analysis tools are your automated code reviewers. mypy checks your types, bandit checks your security, and SonarQube tracks your quality over time. Together, they catch what tests miss.

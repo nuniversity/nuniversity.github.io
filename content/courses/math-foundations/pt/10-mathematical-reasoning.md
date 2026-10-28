@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Raciocínio Matemático
 
-**Gancho**: "A matemática não é apenas calcular — é pensar logicamente e provar coisas."
+**Gancho**: "A matemática não é apenas calcular: é pensar logicamente e provar coisas."
 
 ---
 
@@ -17,7 +17,7 @@ difficulty: "beginner"
 Os Elementos de Euclides (300 a.C.) estabeleceram o método axiomático: começar com verdades óbvias e deduzir tudo mais. Esta abordagem influenciou não apenas a matemática, mas toda a ciência ocidental. Matemáticos indianos desenvolveram abordagens rigorosas similares independentemente.
 
 > [!NOTE]
-> O raciocínio matemático é uma habilidade que vai além da matemática — é valioso em filosofia, direito, medicina e qualquer campo que exija pensamento rigoroso.
+> O raciocínio matemático é uma habilidade que vai além da matemática: é valioso em filosofia, direito, medicina e qualquer campo que exija pensamento rigoroso.
 
 ---
 
@@ -185,7 +185,7 @@ Assume que a negação é verdadeira e chega a uma contradição.
 
 ## 5. Exemplos Resolvidos Detalhados
 
-### Prova por Indução — Exemplo Completo
+### Prova por Indução: Exemplo Completo
 
 **Problema:** Prove por indução que para todo n ≥ 1:
 
@@ -193,7 +193,7 @@ $$1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2}$$
 
 **Solução passo a passo:**
 
-**Passo 1 — Caso Base (n = 1):**
+**Passo 1: Caso Base (n = 1):**
 
 Lado esquerdo: 1
 Lado direito: 1(1+1)/2 = 2/2 = 1
@@ -204,7 +204,7 @@ O caso base é verdadeiro.
 
 ---
 
-**Passo 2 — Hipótese Indutiva:**
+**Passo 2: Hipótese Indutiva:**
 
 Assuma que a fórmula é verdadeira para n = k:
 
@@ -212,7 +212,7 @@ $$1 + 2 + 3 + \ldots + k = \frac{k(k+1)}{2}$$
 
 ---
 
-**Passo 3 — Passo Indutivo (provar para n = k + 1):**
+**Passo 3: Passo Indutivo (provar para n = k + 1):**
 
 Precisamos mostrar que:
 
@@ -261,7 +261,7 @@ Como k ≥ 1, temos 2k ≥ k + 1. Portanto 2ᵏ⁺¹ > k + 1. □
 | F | V | V | F | F |
 | F | F | V | V | V |
 
-> **Observação:** (P → Q) ∧ (Q → P) é equivalente a P ↔ Q (bicondicional — "se e somente se").
+> **Observação:** (P → Q) ∧ (Q → P) é equivalente a P ↔ Q (bicondicional: "se e somente se").
 
 ---
 
@@ -274,7 +274,7 @@ Como k ≥ 1, temos 2k ≥ k + 1. Portanto 2ᵏ⁺¹ > k + 1. □
 | F | V | F | V | V | F | V |
 | F | F | F | V | V | V | V |
 
-> **Observação:** ¬(P ∧ Q) = ¬P ∨ ¬Q. Esta é a **Lei de De Morgan** — uma das leis fundamentais da lógica.
+> **Observação:** ¬(P ∧ Q) = ¬P ∨ ¬Q. Esta é a **Lei de De Morgan**: uma das leis fundamentais da lógica.
 
 ---
 
@@ -303,20 +303,20 @@ Em palavras: "Chove E eu NÃO levo guarda-chuva".
 
 **Aplicação do método de Pólya:**
 
-**Passo 1 — Compreender o problema:**
+**Passo 1: Compreender o problema:**
 
 - Dados: perímetro fixo de 100 m
 - Incógnitas: comprimento (c) e largura (l)
 - Condição: 2c + 2l = 100, ou c + l = 50
 - Objetivo: maximizar A = c × l
 
-**Passo 2 — Ideias de plano:**
+**Passo 2: Ideias de plano:**
 
-- Podemos expressar uma variável em função da outra: c = 50 - l
-- Substituir na fórmula da área: A = (50 - l) × l = 50l - l²
+- Podemos expressar uma variável em função da outra: c = 50: l
+- Substituir na fórmula da área: A = (50: l) × l = 50l: l²
 - Isso é uma função quadrática! O vértice dá o máximo.
 
-**Passo 3 — Executar o plano:**
+**Passo 3: Executar o plano:**
 
 $$A(l) = 50l - l^2 = -l^2 + 50l$$
 
@@ -328,7 +328,7 @@ $$c = 50 - 25 = 25 \text{ m}$$
 
 $$A_{\text{máx}} = 25 \times 25 = 625 \text{ m}^2$$
 
-**Passo 4 — Examinar e verificar:**
+**Passo 4: Examinar e verificar:**
 
 - O perímetro é 2(25) + 2(25) = 100 m ✓
 - Se l = 20, c = 30, A = 600 m² < 625 m² ✓
@@ -341,10 +341,10 @@ $$A_{\text{máx}} = 25 \times 25 = 625 \text{ m}^2$$
 ### Erros Comuns em Raciocínio Matemático
 
 > [!WARNING]
-> **Erro 1: Afirmar o consequente.** De "Se P então Q" e Q ser verdade, NÃO se pode concluir P. Exemplo: "Se chove, o chão fica molhado. O chão está molhado. Logo choveu." — Poderia ser uma mangueira!
+> **Erro 1: Afirmar o consequente.** De "Se P então Q" e Q ser verdade, NÃO se pode concluir P. Exemplo: "Se chove, o chão fica molhado. O chão está molhado. Logo choveu.": Poderia ser uma mangueira!
 
 > [!WARNING]
-> **Erro 2: Negar o antecedente.** De "Se P então Q" e ¬P, NÃO se pode concluir ¬Q. Exemplo: "Se estudo, passo na prova. Não estudei. Logo não passei." — Poderia ter passado por sorte!
+> **Erro 2: Negar o antecedente.** De "Se P então Q" e ¬P, NÃO se pode concluir ¬Q. Exemplo: "Se estudo, passo na prova. Não estudei. Logo não passei.": Poderia ter passado por sorte!
 
 > [!WARNING]
 > **Erro 3: Indução incompleta.** Provar apenas para n = 1, 2, 3 não é suficiente. É obrigatório o passo indutivo: assumir para k e provar para k+1.
@@ -404,7 +404,7 @@ Identificar falácias como "afirmar o consequente" é crucial para refutar argum
 
 "Se uma pessoa é inteligente, estuda muito. João não estuda muito. Logo João não é inteligente."
 
-Isso é o **erro de negar o antecedente**. Ser inteligente não depende apenas de estudar — há outros fatores. O raciocínio válido seria: "Se uma pessoa estuda muito, é inteligente. João não é inteligente. Logo João não estuda muito." (Isso também seria inválido — afirma o consequente!)
+Isso é o **erro de negar o antecedente**. Ser inteligente não depende apenas de estudar, há outros fatores. O raciocínio válido seria: "Se uma pessoa estuda muito, é inteligente. João não é inteligente. Logo João não estuda muito." (Isso também seria inválido, afirma o consequente!)
 
 ---
 

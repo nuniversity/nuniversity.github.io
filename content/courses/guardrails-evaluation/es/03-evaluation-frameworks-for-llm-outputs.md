@@ -437,4 +437,4 @@ class EvalPipeline:
 > - BERTScore captura similitud semántica usando embeddings; detecta paráfrasis.
 > - LLM-como-juez captura matices pero introduce costo y sesgo; use temperature=0 para reproducibilidad.
 > - Evaluación humana es el estándar de oro pero escala mal; úsela estratégicamente.
-> - Combine múltiples métodos de evaluación — ninguna métrica aislada cuenta toda la historia.
+> - Combine múltiples métodos de evaluación: ninguna métrica aislada cuenta toda la historia.

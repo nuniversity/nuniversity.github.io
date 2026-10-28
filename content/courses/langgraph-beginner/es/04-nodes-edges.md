@@ -58,7 +58,7 @@ def clasificar(state: State) -> dict:
 ```
 
 [!NOTE]
-Los nodos pueden contener cualquier código de Python — llamadas LLM, APIs, cálculo, E/S de archivos, etc. El grafo no se preocupa por lo que hace el nodo, solo por las actualizaciones de estado que devuelve.
+Los nodos pueden contener cualquier código de Python: llamadas LLM, APIs, cálculo, E/S de archivos, etc. El grafo no se preocupa por lo que hace el nodo, solo por las actualizaciones de estado que devuelve.
 
 ---
 

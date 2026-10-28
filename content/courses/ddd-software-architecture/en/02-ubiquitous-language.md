@@ -1,6 +1,6 @@
 ---
 title: "Ubiquitous Language"
-description: "Master the Ubiquitous Language concept in DDD — how to build a shared language between developers and domain experts, avoid translation overhead, and embed domain vocabulary into code"
+description: "Master the Ubiquitous Language concept in DDD, how to build a shared language between developers and domain experts, avoid translation overhead, and embed domain vocabulary into code"
 order: 2
 duration: "60 minutes"
 difficulty: "advanced"
@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Ubiquitous Language
 
-Ubiquitous Language is the cornerstone of Domain-Driven Design. It is a **shared, structured language** that developers and domain experts use together to describe the domain. Every term in this language has a precise, unambiguous meaning — and that meaning is reflected directly in the code.
+Ubiquitous Language is the cornerstone of Domain-Driven Design. It is a **shared, structured language** that developers and domain experts use together to describe the domain. Every term in this language has a precise, unambiguous meaning, and that meaning is reflected directly in the code.
 
 > [!NOTE]
 > The term "Ubiquitous Language" was coined by Eric Evans in his DDD book. The key insight: most software failures are caused not by technical problems but by **translation errors** between business and technical teams. Ubiquitous Language eliminates that translation.
@@ -384,7 +384,7 @@ class Customer:
 
 ## Ubiquitous Language and Modeling
 
-The language directly shapes the model. If the language changes, the model should change. If the model diverges from the language, the model — not the language — should be corrected.
+The language directly shapes the model. If the language changes, the model should change. If the model diverges from the language, the model, not the language, should be corrected.
 
 ```python
 # Example: evolving language → evolving model
@@ -424,7 +424,7 @@ class PremiumCustomer(Customer):
 | Team silo | Different teams develop different languages | Cross-team context mapping sessions |
 
 > [!WARNING]
-> The worst fate for a Ubiquitous Language is for it to become a **document that nobody reads**. The language must live in the code, in conversations, and in daily work — not in a PDF that was written once and forgotten.
+> The worst fate for a Ubiquitous Language is for it to become a **document that nobody reads**. The language must live in the code, in conversations, and in daily work: not in a PDF that was written once and forgotten.
 
 ## Measuring Ubiquitous Language Quality
 
@@ -507,4 +507,4 @@ class PremiumSubscription:
    ```
 
 > [!SUCCESS]
-> You have completed Lesson 2. Ubiquitous Language is the foundation of DDD — without it, bounded contexts, aggregates, and all other patterns lose their power. Keep the language alive in every conversation and every line of code.
+> You have completed Lesson 2. Ubiquitous Language is the foundation of DDD: without it, bounded contexts, aggregates, and all other patterns lose their power. Keep the language alive in every conversation and every line of code.

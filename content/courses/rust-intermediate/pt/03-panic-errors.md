@@ -10,7 +10,7 @@ difficulty: "intermediário"
 
 Nem todos os erros são recuperáveis. Rust fornece `panic!` para erros irrecuperáveis e `Result` para erros recuperáveis. Escolher a estratégia certa é fundamental para um código robusto.
 
-## panic! — Erros Irrecuperáveis
+## panic!: Erros Irrecuperáveis
 
 `panic!` imprime uma mensagem de erro, desempilha a pilha (por padrão) e encerra:
 
@@ -175,7 +175,7 @@ fn read_and_parse(path: &str) -> Result<i32, AppError> {
 }
 ```
 
-## anyhow — Tratamento Ergonômico de Erros
+## anyhow: Tratamento Ergonômico de Erros
 
 `anyhow` fornece `anyhow::Error` e a trait `Context`:
 
@@ -216,7 +216,7 @@ fn main() -> Result<()> {
 > | Popularidade | Stdlib | Padrão da comunidade |
 > | Quando usar | Bibliotecas | Aplicações |
 
-## thiserror — Tipos de Erro para Bibliotecas
+## thiserror: Tipos de Erro para Bibliotecas
 
 `thiserror` deriva `Display` e `Error` para tipos de erro personalizados:
 

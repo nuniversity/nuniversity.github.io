@@ -29,7 +29,7 @@ Custom agents are defined in the `agents` section of `opencode.json`. Each agent
 ```
 
 > [!TIP]
-> Use descriptive agent names and descriptions — they serve as the primary routing mechanism. A well-named agent like "security-auditor" with a clear description is easier for both humans and the routing system to target.
+> Use descriptive agent names and descriptions; they serve as the primary routing mechanism. A well-named agent like "security-auditor" with a clear description is easier for both humans and the routing system to target.
 
 ---
 
@@ -146,7 +146,7 @@ Descriptions help OpenCode route tasks to the correct agent. They act as metadat
 ```
 
 > [!IMPORTANT]
-> Agent descriptions are not just documentation — they are actively used at runtime for routing. A vague description like "helps with coding" may cause requests to be misrouted. Be specific: "Handles database schema design and SQL optimization."
+> Agent descriptions are not just documentation; they are actively used at runtime for routing. A vague description like "helps with coding" may cause requests to be misrouted. Be specific: "Handles database schema design and SQL optimization."
 
 ---
 
@@ -296,25 +296,25 @@ Constraints limit what an agent can do, preventing misuse or accidental damage.
 ```
 
 > [!TIP]
-> Use `temperature` constraints to control agent creativity. Low values (0.1–0.3) produce deterministic, focused outputs ideal for code review and deployment. Higher values (0.7–1.0) encourage creative solutions for brainstorming and architecture design.
+> Use `temperature` constraints to control agent creativity. Low values (0.1 to 0.3) produce deterministic, focused outputs ideal for code review and deployment. Higher values (0.7 to 1.0) encourage creative solutions for brainstorming and architecture design.
 
 ### Comparison: Agent Configuration Options
 
 | Option          | Type      | Required | Default       | Description                                |
 |-----------------|-----------|:--------:|---------------|--------------------------------------------|
-| `model`         | string    | Yes      | —             | Model identifier (e.g., `gpt-4o`)          |
-| `description`   | string    | Yes      | —             | Task routing description                   |
+| `model` | string | Yes |: | Model identifier (e.g., `gpt-4o`) |
+| `description` | string | Yes |: | Task routing description |
 | `prompt`         | string    | No       | Default agent prompt | System prompt / behavioral instructions    |
 | `subagents`     | object    | No       | `{}`          | Nested specialized agents                  |
 | `constraints`   | object    | No       | `{}`          | Resource and tool usage limits             |
 | `allowedTools`  | string[]  | No       | All tools     | Whitelist of permitted tools               |
 | `deniedTools`   | string[]  | No       | `[]`          | Blacklist of prohibited tools              |
 | `maxTokens`     | integer   | No       | Model default | Maximum response token count               |
-| `temperature`   | float     | No       | Model default | Response randomness (0.0–2.0)              |
+| `temperature` | float | No | Model default | Response randomness (0.0 to 2.0) |
 | `maxFileSize`   | integer   | No       | 10MB          | Maximum file size agent can read           |
 
 > [!IMPORTANT]
-> `allowedTools` and `deniedTools` are mutually exclusive patterns. If you specify `allowedTools`, all other tools are implicitly denied. If you specify `deniedTools`, all tools except those listed are implicitly allowed. Do not use both in the same constraint block — behavior is undefined.
+> `allowedTools` and `deniedTools` are mutually exclusive patterns. If you specify `allowedTools`, all other tools are implicitly denied. If you specify `deniedTools`, all tools except those listed are implicitly allowed. Do not use both in the same constraint block: behavior is undefined.
 
 ---
 
@@ -364,7 +364,7 @@ Constraints limit what an agent can do, preventing misuse or accidental damage.
     "The subagent creates its own permission scope automatically"
   ],
   "correct": 2,
-  "explanation": "Subagents inherit the parent agent's permission scope by default. This means if the primary agent has permission to run bash commands, the subagent can also run them. This is a security consideration — always explicitly scope subagent permissions for sensitive operations."
+  "explanation": "Subagents inherit the parent agent's permission scope by default. This means if the primary agent has permission to run bash commands, the subagent can also run them. This is a security consideration: always explicitly scope subagent permissions for sensitive operations."
 }
 ```
 
@@ -396,7 +396,7 @@ Constraints limit what an agent can do, preventing misuse or accidental damage.
     "The default agent, because the query doesn't exactly match any rule"
   ],
   "correct": 0,
-  "explanation": "Routing rules are evaluated in order. If 'deploy' to deploy-agent is defined before 'deploy production' to prod-deploy-agent, the first matching rule wins. The query 'deploy to production' contains 'deploy', so it matches the first rule. Order matters — place more specific rules before general ones."
+  "explanation": "Routing rules are evaluated in order. If 'deploy' to deploy-agent is defined before 'deploy production' to prod-deploy-agent, the first matching rule wins. The query 'deploy to production' contains 'deploy', so it matches the first rule. Order matters: place more specific rules before general ones."
 }
 ```
 
@@ -411,6 +411,6 @@ Constraints limit what an agent can do, preventing misuse or accidental damage.
 - Constraints limit agent capabilities through tool whitelists, blacklists, resource caps, and temperature
 - The `prompt` field is optional but essential for guiding agent behavior beyond the default
 - Multiple agents can use different models from different providers in the same configuration
-- Routing rules are evaluated in order — place specific patterns before general ones
+- Routing rules are evaluated in order: place specific patterns before general ones
 - Subagents inherit parent permissions by default, requiring careful security review
 - Temperature constraints control creativity vs. determinism in agent responses

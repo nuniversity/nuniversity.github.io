@@ -11,7 +11,7 @@ difficulty: "intermediário"
 Python é uma excelente linguagem para Arquitetura Limpa. Sua tipagem dinâmica, classes Protocol e sintaxe simples facilitam a definição de limites, inversão de dependências e manutenção da lógica de negócio pura.
 
 > [!NOTE]
-> A filosofia do Python se alinha naturalmente com a Arquitetura Limpa: simplicidade, legibilidade e praticidade. Você não precisa de um contêiner DI pesado — duck typing e dataclasses são suficientes.
+> A filosofia do Python se alinha naturalmente com a Arquitetura Limpa: simplicidade, legibilidade e praticidade. Você não precisa de um contêiner DI pesado: duck typing e dataclasses são suficientes.
 
 ## Estrutura de Projeto
 
@@ -74,7 +74,7 @@ class PostgresOrderRepository:
 ```
 
 > [!NOTE]
-> Diferente de ABCs, Protocols usam **subtipagem estrutural** — um objeto é considerado como implementando o protocolo se tiver os métodos certos, independentemente de sua hierarquia de classe.
+> Diferente de ABCs, Protocols usam **subtipagem estrutural**: um objeto é considerado como implementando o protocolo se tiver os métodos certos, independentemente de sua hierarquia de classe.
 
 ## Dataclasses para DTOs e Entidades
 
@@ -369,4 +369,4 @@ class EntityNotFoundError(DomainError):
 8. **Unit of Work**: Implemente um `UnitOfWork` context manager e use-o em um repositório. Escreva um teste que verifica rollback em caso de falha.
 
 > [!SUCCESS]
-> Python e Arquitetura Limpa são uma combinação natural. Os Protocols, dataclasses e simplicidade do Python permitem que você foque no que importa — lógica de negócio limpa e testável.
+> Python e Arquitetura Limpa são uma combinação natural. Os Protocols, dataclasses e simplicidade do Python permitem que você foque no que importa: lógica de negócio limpa e testável.

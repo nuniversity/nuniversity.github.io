@@ -655,9 +655,9 @@ dashboard:
 > [!WARNING]
 > Alert fatigue is a real danger. If every minor metric fluctuation generates a notification, your team will begin ignoring alerts. Follow these rules:
 > 1. Only alert on metrics that have a well-established baseline (at least 100 data points)
-> 2. Use severity levels — only "critical" alerts go to PagerDuty; "warning" goes to Slack
+> 2. Use severity levels: only "critical" alerts go to PagerDuty; "warning" goes to Slack
 > 3. Implement hysteresis: a metric must breach threshold for N consecutive windows before alerting
-> 4. Review alert effectiveness monthly — prune alerts that never fire or always fire
+> 4. Review alert effectiveness monthly: prune alerts that never fire or always fire
 
 ---
 
@@ -824,5 +824,5 @@ jobs:
 > - Define SLIs, SLOs, and SLAs to objectively measure and communicate agent performance.
 > - A continuous evaluation pipeline runs daily or per-release, scoring production sessions, checking for drift, and updating dashboards.
 > - Dashboards provide at-a-glance health monitoring; combine chart types (timeseries, bar, gauge, stat) for clarity and quick decision-making.
-> - Every component — scoring, storage, drift detection, alerting, dashboards — must be defined before production launch.
+> - Every component, scoring, storage, drift detection, alerting, dashboards, must be defined before production launch.
 > - Use severity levels and hysteresis in alerting to prevent alert fatigue and focus your team on genuine issues.

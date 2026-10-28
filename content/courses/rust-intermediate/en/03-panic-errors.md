@@ -10,7 +10,7 @@ difficulty: "intermediate"
 
 Not all errors are recoverable. Rust provides `panic!` for unrecoverable errors and `Result` for recoverable ones. Choosing the right strategy is key to robust code.
 
-## panic! — Unrecoverable Errors
+## panic!: Unrecoverable Errors
 
 `panic!` prints an error message, unwinds the stack (by default), and exits:
 
@@ -175,7 +175,7 @@ fn read_and_parse(path: &str) -> Result<i32, AppError> {
 }
 ```
 
-## anyhow — Ergonomic Error Handling
+## anyhow: Ergonomic Error Handling
 
 `anyhow` provides `anyhow::Error` and the `Context` trait:
 
@@ -216,7 +216,7 @@ fn main() -> Result<()> {
 > | Popularity | Stdlib | Community standard |
 > | When to use | Libraries | Applications |
 
-## thiserror — Library Error Types
+## thiserror: Library Error Types
 
 `thiserror` derives `Display` and `Error` for custom error types:
 

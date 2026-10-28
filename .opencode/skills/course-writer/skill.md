@@ -214,6 +214,186 @@ Choose the **type** by meaning — see the diagram-types table above. The
 
 ---
 
+## Voice-First Writing and Level Design
+
+Every lesson is read aloud by the browser's speech engine (`LessonAudio`, in the
+lesson outline). **The ear, not the page, is the harshest reader.** Write for it
+first, and the page will read better too.
+
+### Punctuation that survives text-to-speech
+
+The engine has no idea what a dash is. It either skips the character, or reads
+it as nothing, so the sentence loses its pause and two ideas collide. Em dashes
+are also the single strongest "AI wrote this" tell in English prose.
+
+| Never write | Write instead | Why |
+|---|---|---|
+| `—`, `–`, `--` | `,` `;` `:` or a full stop | Skipped by the engine; the sentence becomes a run-on |
+| `word - word` (spaced hyphen) | `word, word` or `word; word` | A hyphen is part of a word, not a pause |
+| `(a long aside that runs on)` | a comma clause, a semicolon, or its own sentence | Parentheses are not voiced, so the aside swallows the sentence |
+| `A / B / C` in prose | `A, B and C` | "slash" may be read aloud or dropped |
+| `e.g.`, `i.e.`, `etc.` | `for example`, `that is`, `and so on` | Read as letters, not as words |
+| `10–20`, `3-5` in prose | `10 to 20`, `3 to 5` | The dash between numbers is skipped |
+| `→`, `≥`, `≈`, `×` in prose | `leads to`, `at least`, `about`, `times` | Read as symbol names or skipped |
+| `THE THING` for emphasis | **bold** or *italic* | Some engines spell capitalised words letter by letter |
+
+Rules:
+
+- **Zero em dashes and en dashes.** If you reach for one, the sentence is doing
+  two jobs; split it or use a colon.
+- Hyphens *inside* a compound word are fine (`real-world`, `read-only`,
+  `cost-per-hour`); they are pronounced as part of the word.
+- One idea per sentence. Target 20 to 30 words, hard ceiling 45.
+- Prefer the colon for a reveal (`It does two things: it measures and it warns.`),
+  the semicolon for two equal clauses, and commas for lists.
+- Numbers, units, prices, versions and identifiers stay exact. Never "fix"
+  `v2.1.4`, `us-east-1`, `99.9%` or a formula to make it read better; write the
+  sentence around them instead.
+- Read the paragraph back as if speaking it. If you run out of breath, or you
+  would naturally put a hand up to pause, that is where the punctuation goes.
+
+The repository ships a normaliser for existing content:
+
+```bash
+npm run check:prose   # dry run with samples, grouped by context
+npm run fix:prose     # apply
+```
+
+It covers lesson Markdown, quiz and widget JSON, course metadata and the
+dictionaries. It applies the rules above per context (heading, table cell, list
+label, running prose), keeps inline code, LaTeX, subtraction, CLI flags and
+product names untouched, and never rewrites a dash that is a line-start quote
+marker.
+
+Good:
+
+> A queue absorbs bursts. Requests wait in line instead of failing, and the
+> worker drains them at its own pace. If the queue fills, the producer is told
+> to slow down; that signal is the point of the design.
+
+Bad (dash, aside, abbreviation):
+
+> A queue absorbs bursts — requests wait in line (instead of failing) — and the
+> worker drains them, e.g. at its own pace, i.e. slower than the producer.
+
+### The lesson arc: hook first, depth later
+
+A course that opens with three sections of definitions loses the reader before
+the first useful sentence. Every lesson follows this arc:
+
+1. **Hook (2 to 4 paragraphs).** A real situation, a surprising number, a
+   question the reader has actually asked, or a failure story. No definitions
+   yet. The reader must want the answer before the answer arrives.
+2. **Orientation.** What this lesson answers, and where it sits in the course.
+3. **Core explanation.** Build the concept from the hook, not from the
+   dictionary. Name it after the reader has seen it work.
+4. **Depth.** Mechanics, numbers, edge cases, trade-offs, what breaks.
+5. **Practice and takeaways.** Questions, exercises, the Key Takeaways block.
+
+Anti-pattern to reject on sight: the first screen is `X is defined as ...`, or
+the first diagram appears before the reader knows why it matters. Rewrite the
+opening with a situation from the reader's world.
+
+### Level profiles
+
+The `difficulty` in frontmatter selects the profile. Do not mix them: an
+advanced lesson must not re-teach the basics, and a beginner lesson must not
+open with a formal definition.
+
+#### Beginner: first contact with the subject
+
+The reader has never met the topic and may not know the vocabulary. The job is
+**understanding, not coverage**.
+
+- Open with something from daily life: a queue at a bakery, a library index, a
+  shared shopping list, a postal route, a thermostat.
+- One concept per section. Define every term the first time it appears, in
+  plain language, then use it.
+- Explain the same idea from **at least two perspectives** (what it is, what it
+  replaces, what it costs, when you would notice it). Repetition with a new
+  angle is a feature, not padding.
+- Compare with something the reader already knows (`a bucket is a shared
+  folder with rules`). Use comparisons before formal properties.
+- Show at least one worked example with small, round numbers, and one
+  counter-example ("this is what happens if you skip it").
+- No formulas beyond simple arithmetic; no configuration walls; no jargon
+  without a gloss.
+- Diagrams: one simple `flowchart LR` or `mindmap` per major idea, not a
+  network of fifteen nodes.
+
+#### Intermediate: the complete, practical course
+
+This is the default and the most important profile. It is **wide, researched
+and practical**, not theoretical.
+
+- Cover the subject end to end: definition, mental model, how it works, real
+  use cases, trade-offs, pricing and limits (dated), failure modes, and a
+  hands-on walkthrough in every lesson.
+- Every concept follows the same chain: **what it is → why it exists → how it
+  works → a real example → when not to use it**.
+- Use real numbers, real prices, real limits, real service names, dated to the
+  month. No invented statistics.
+- Prefer an example from a real company or a realistic scenario over an
+  abstract diagram, then use the diagram to explain the example.
+- Questions test judgment (`which design fits this constraint?`), not recall
+  (`what is the acronym?`).
+- Ground the material in primary sources and validated facts; be scientifically
+  honest about what is measured and what is marketing.
+- Avoid heavy theory and academic formalism. Introduce the mechanism, not the
+  proof.
+- Diagrams: architecture, sequence and state diagrams for every non-trivial
+  mechanism; a `plot` or table whenever three or more options are compared.
+
+#### Advanced: depth, precision and evidence
+
+The reader already knows the basics. The job is to go **deeper on the core
+topics**, not to cover more topics.
+
+- Assume vocabulary and fundamentals; skip the introductory re-teach.
+- Go precise: formal definitions where they matter, invariants, complexity,
+  edge cases, failure modes, and the conditions under which the standard advice
+  is wrong.
+- Cite primary sources (papers, specifications, vendor documentation) and say
+  what is measured versus inferred.
+- Include counterexamples, benchmarks or measurements, and design trade-offs
+  with the reasoning made explicit.
+- Fewer, deeper sections. A lesson may spend 1,500 words on one mechanism if
+  that is where the difficulty lives.
+- Diagrams: precise ones, including state machines, sequence diagrams for
+  protocol-level behaviour, and quadrant or xychart for trade-offs.
+
+| | Beginner | Intermediate | Advanced |
+|---|---|---|---|
+| Reader | never seen it | knows the domain a little | works in the field |
+| Goal | understanding | complete practical command | depth and precision |
+| Density | low, one idea per section | high, wide and applied | high, narrow and deep |
+| Examples | daily-life comparisons | real systems, real numbers | measurements, edge cases |
+| Theory | none | mechanism, not proof | formal where it matters |
+| Diagrams | one simple shape per idea | one per mechanism, several types | precise, protocol-level |
+| Length | 600 to 900 lines | 800 to 1,100 lines | 700 to 1,200 lines |
+
+### Diagrams earn their place
+
+A diagram is not decoration; it is the cheapest way to show structure that prose
+has to spell out linearly. The rule:
+
+- **Three or more interacting parts, a sequence over time, a hierarchy, or a
+  trade-off between two axes → it gets a diagram.**
+- A comparison of three or more options → a table (`3+` short attributes) or a
+  `plot` (numbers, trends). Prose comparisons of five services are unreadable.
+- A mechanism with a before/after or a happy/failure path → `flowchart` with
+  `classDef` colours for the two paths.
+- A protocol or request exchange → `sequenceDiagram` with activations.
+- A lifecycle or retry policy → `stateDiagram-v2`.
+- Explain the diagram in one sentence *before* it, then reference it after
+  (`Step 3 in the diagram is where the retry budget is spent.`). A diagram with
+  no caption is a puzzle.
+
+See the diagram-type table and the styling rules above; `mermaid-js` holds the
+syntax reference.
+
+---
+
 ## Output Format Rules
 
 Every lesson is one Markdown file with YAML frontmatter in this order:
@@ -259,6 +439,10 @@ Per lesson (minimum; exam-grade courses used higher):
 | Worked examples with real numbers | — | ≥5 |
 | Media (image) or video embed | — | ≥1 where it aids understanding |
 | Long unbroken token in prose | 0 | 0 (use a code span instead) |
+| Em dash, en dash or `--` in prose | 0 (warning) | 0 |
+| Sentences over 45 words | 0 | 0 |
+| First screen opens with a hook, not a definition | required | required |
+| Diagram for every mechanism with 3+ parts | — | required |
 | `📚 Did you know?` curiosities | — | ≥3 |
 | ⚠️ WARNING / IMPORTANT box | — | ≥1 |
 | Named real-world cases | — | ≥1 (`## Real-World Case Studies`) |

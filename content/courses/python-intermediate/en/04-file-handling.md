@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # File Handling and I/O
 
-File I/O is fundamental to nearly every Python application — from reading configuration files to processing large datasets. Python's file handling is clean, powerful, and supports multiple formats.
+File I/O is fundamental to nearly every Python application: from reading configuration files to processing large datasets. Python's file handling is clean, powerful, and supports multiple formats.
 
 ## The `open()` Function
 
@@ -29,7 +29,7 @@ file = open("example.txt", "x")    # Exclusive creation (fails if exists)
 | `"w+"` | Yes | Yes | Yes | Yes | Start |
 | `"a+"` | Yes | Yes | Yes | No | End |
 | `"x"` | No | Yes | Yes (exclusive) | No | Start |
-| `"b"` | (modifier) | Binary mode | — | — | — |
+| `"b"` | (modifier) | Binary mode |: |: |: |
 
 > [!WARNING]
 > Always close files! The `with` statement handles this automatically (see below).

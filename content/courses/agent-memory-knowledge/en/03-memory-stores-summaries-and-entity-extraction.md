@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Memory Stores, Summaries and Entity Extraction
 
-LangChain provides several built-in memory classes that give agents different ways to remember. Choosing the right memory type — or combining them — determines how well your agent recalls and uses past information.
+LangChain provides several built-in memory classes that give agents different ways to remember. Choosing the right memory type, or combining them, determines how well your agent recalls and uses past information.
 
 ---
 
@@ -113,7 +113,7 @@ print(vars["entities"])
 # Output: {'Alice': 'Alice is the lead engineer. Alice prefers Python over Java.'}
 ```
 
-Entity memory is powerful for personalization — an agent can greet a returning user by name and recall their preferences without re-asking.
+Entity memory is powerful for personalization: an agent can greet a returning user by name and recall their preferences without re-asking.
 
 ### Entity Extraction Pipeline
 
@@ -187,7 +187,7 @@ print(json_str[:100])
 ```
 
 [!TIP]
-JSON is the safest choice for serialization — it is debuggable, language-agnostic, and supported everywhere. For high-throughput systems, MessagePack reduces payload size by ~30% with similar schema flexibility. Avoid Pickle in production as it can execute arbitrary code during deserialization.
+JSON is the safest choice for serialization; it is debuggable, language-agnostic, and supported everywhere. For high-throughput systems, MessagePack reduces payload size by ~30% with similar schema flexibility. Avoid Pickle in production as it can execute arbitrary code during deserialization.
 
 ---
 
@@ -340,10 +340,10 @@ combined = CombinedMemory(
 
 Consolidation moves information from short-term to long-term storage. A typical schedule:
 
-1. **On each turn** — append to buffer memory (short-term)
-2. **Every N turns** — run entity extraction and update entity store
-3. **On summary trigger** — compress buffer into summary memory
-4. **On session end** — persist entity facts to a permanent knowledge base
+1. **On each turn**: append to buffer memory (short-term)
+2. **Every N turns**: run entity extraction and update entity store
+3. **On summary trigger**: compress buffer into summary memory
+4. **On session end**: persist entity facts to a permanent knowledge base
 
 ```mermaid
 stateDiagram-v2

@@ -8,7 +8,7 @@ difficulty: "intermediário"
 
 # Introdução ao TDD
 
-Test-Driven Development (TDD) é uma abordagem de desenvolvimento de software onde você escreve os testes **antes** de escrever o código de produção. Este fluxo de trabalho invertido — teste primeiro, código depois — muda fundamentalmente como você projeta, implementa e verifica software.
+Test-Driven Development (TDD) é uma abordagem de desenvolvimento de software onde você escreve os testes **antes** de escrever o código de produção. Este fluxo de trabalho invertido, teste primeiro, código depois, muda fundamentalmente como você projeta, implementa e verifica software.
 
 ## O Mantra do TDD: Red-Green-Refactor
 
@@ -71,14 +71,14 @@ def dividir(a, b):
 ```
 
 > [!SUCCESS]
-> TDD não é sobre testar — é sobre **design**. Escrever o teste primeiro força você a pensar na interface antes da implementação.
+> TDD não é sobre testar: é sobre **design**. Escrever o teste primeiro força você a pensar na interface antes da implementação.
 
 ## As Três Leis do TDD
 
 Robert C. Martin (Uncle Bob) formalizou o TDD com três leis:
 
 1. **Lei 1**: Você não pode escrever código de produção até ter escrito um **teste unitário que falhe**.
-2. **Lei 2**: Você não pode escrever mais de um teste unitário do que o suficiente para falhar — e **não compilar é falhar**.
+2. **Lei 2**: Você não pode escrever mais de um teste unitário do que o suficiente para falhar, e **não compilar é falhar**.
 3. **Lei 3**: Você não pode escrever mais código de produção do que o suficiente para passar no **teste que está falhando atualmente**.
 
 ```mermaid
@@ -120,7 +120,7 @@ def test_carrinho_vazio():
     assert carrinho.total_itens() == 0
 ```
 
-Execute: **Red** — `CarrinhoDeCompras` não existe ainda.
+Execute: **Red**: `CarrinhoDeCompras` não existe ainda.
 
 ```python
 # carrinho_compras.py
@@ -129,7 +129,7 @@ class CarrinhoDeCompras:
         return 0
 ```
 
-Execute: **Green** — teste passa.
+Execute: **Green**: teste passa.
 
 ### Ciclo 2: Adicionar itens ao carrinho
 
@@ -148,7 +148,7 @@ def test_adicionar_multiplos_itens():
     assert carrinho.total_itens() == 2
 ```
 
-Execute: **Red** — `adicionar_item` não existe.
+Execute: **Red**: `adicionar_item` não existe.
 
 ```python
 class CarrinhoDeCompras:
@@ -162,7 +162,7 @@ class CarrinhoDeCompras:
         return len(self._itens)
 ```
 
-Execute: **Green** — todos os testes passam.
+Execute: **Green**: todos os testes passam.
 
 ### Ciclo 3: Calcular o preço total
 
@@ -180,7 +180,7 @@ def test_carrinho_vazio_total():
     assert carrinho.preco_total() == 0.0
 ```
 
-Execute: **Red** — `preco_total` não existe.
+Execute: **Red**: `preco_total` não existe.
 
 ```python
 class CarrinhoDeCompras:
@@ -197,7 +197,7 @@ class CarrinhoDeCompras:
         return sum(item["preco"] for item in self._itens)
 ```
 
-Execute: **Green** — tudo passa.
+Execute: **Green**: tudo passa.
 
 ### Refatorar: Melhorar o design
 

@@ -480,7 +480,7 @@ jobs:
   "question": "Usar OIDC da AWS em vez de credenciais AWS estaticas no GitHub Actions fornece qual beneficio chave de seguranca?",
   "options": [
     "Autenticacao mais rapida ao Redshift",
-    "Tokens de curta duracao sao trocados por execucao de workflow — nenhuma chave de acesso AWS de longa duracao e armazenada em segredos do GitHub",
+    "Tokens de curta duracao sao trocados por execucao de workflow: nenhuma chave de acesso AWS de longa duracao e armazenada em segredos do GitHub",
     "Ignora os requisitos de security group do Redshift",
     "Habilita acesso a clusters Redshift privados sem VPN"
   ],
@@ -494,10 +494,10 @@ jobs:
 [!SUCCESS]
 ### Principais Conclusoes
 
-- Slim CI usa `--select state:modified+` e `--state ./prod-artifacts` para construir apenas modelos alterados e seus descendentes — drasticamente mais rapido que execucoes de projeto completo.
+- Slim CI usa `--select state:modified+` e `--state./prod-artifacts` para construir apenas modelos alterados e seus descendentes: drasticamente mais rapido que execucoes de projeto completo.
 - `--defer` permite que o CI referencie modelos upstream construidos em producao sem reconstrui-los no ambiente CI.
 - Armazene `manifest.json` no S3 apos cada execucao de producao para que esteja disponivel para a proxima comparacao CI.
-- Use autenticacao OIDC para AWS a partir do GitHub Actions — sem credenciais estaticas armazenadas em segredos.
+- Use autenticacao OIDC para AWS a partir do GitHub Actions: sem credenciais estaticas armazenadas em segredos.
 - ECS Fargate + Step Functions e o padrao idiomatico na AWS para executar dbt em producao: containerizado, serverless e totalmente observavel.
 - Schemas CI numerados por PR fornecem isolamento e permitem limpeza automatizada apos merge.
 - O padrao de notificacao de falha (SNS + Step Functions Catch) e essencial para observabilidade em producao.

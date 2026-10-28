@@ -1,5 +1,5 @@
 ---
-title: "Proyecto Principiante — Conversor de Temperatura CLI"
+title: "Proyecto Principiante, Conversor de Temperatura CLI"
 description: "Construye un conversor de temperatura completo de línea de comandos con validación de entrada, manejo de errores y conversiones de unidad"
 order: 10
 duration: "35 minutos"
@@ -308,12 +308,12 @@ cargo test
 
 Prueba estas mejoras:
 
-1. **Bucle hasta salir** — Sigue convirtiendo hasta que el usuario escriba "q"
-2. **Soporte Kelvin** — Agrega unidad Kelvin
-3. **Salida más bonita** — Usa salida coloreada con crate `colored`
-4. **Conversión por lotes** — Lee múltiples valores de un archivo (`--file entrada.txt`)
-5. **Indicador de precisión** — `--precision 4` controla decimales
-6. **Argumentos CLI** — Usa crate `clap`: `conversor_temp 100 C to F`
+1. **Bucle hasta salir**: Sigue convirtiendo hasta que el usuario escriba "q"
+2. **Soporte Kelvin**: Agrega unidad Kelvin
+3. **Salida más bonita**: Usa salida coloreada con crate `colored`
+4. **Conversión por lotes**: Lee múltiples valores de un archivo (`--file entrada.txt`)
+5. **Indicador de precisión**: `--precision 4` controla decimales
+6. **Argumentos CLI**: Usa crate `clap`: `conversor_temp 100 C to F`
 
 ```rust
 // Extensión: bucle hasta salir

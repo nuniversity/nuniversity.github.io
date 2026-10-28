@@ -66,7 +66,7 @@ graph.set_finish_point("execute")
 ```
 
 [!SUCCESS]
-Graphs give you **loops, branching, persistence, and dynamic routing** — all essential for building autonomous agents.
+Graphs give you **loops, branching, persistence, and dynamic routing**: all essential for building autonomous agents.
 
 ---
 
@@ -172,7 +172,7 @@ Input → [Think] → decide → [Act] → [Observe] → decide → [Think] → 
 This loop is the foundation of every ReAct agent. LangGraph makes it trivial to implement.
 
 [!IMPORTANT]
-The ReAct pattern (Reason + Act) is the most common agent architecture. LangGraph's graph structure is the ideal way to implement it — each turn of the loop is a node execution.
+The ReAct pattern (Reason + Act) is the most common agent architecture. LangGraph's graph structure is the ideal way to implement it: each turn of the loop is a node execution.
 
 ---
 
@@ -229,13 +229,13 @@ print(result["value"])  # Echo: hello
 A graph routes customer queries through intent classification, knowledge base search, ticket creation, and escalation to humans.
 
 ### Code Generation Agent
-An agent that writes code, runs tests, reads error output, and iteratively fixes bugs — all within a single graph with a loop.
+An agent that writes code, runs tests, reads error output, and iteratively fixes bugs: all within a single graph with a loop.
 
 ### Research Assistant
 A multi-step agent that searches the web, summarizes findings, generates reports, and asks clarifying questions when needed.
 
 ### Data Pipeline Orchestrator
-A graph that ingests data, validates it, transforms it, loads it into a database, and sends notifications — with error handling at every step.
+A graph that ingests data, validates it, transforms it, loads it into a database, and sends notifications: with error handling at every step.
 
 [!SUCCESS]
 LangGraph transforms complex agent logic from spaghetti code into a clean, visual, and debuggable graph structure.
@@ -379,7 +379,7 @@ LangGraph transforms complex agent logic from spaghetti code into a clean, visua
     "It replaces the need for an LLM"
   ],
   "correct": 1,
-  "explanation": "Autonomous agents need to loop (think-act-observe), maintain state across iterations, and make decisions — all of which LangGraph supports natively."
+  "explanation": "Autonomous agents need to loop (think-act-observe), maintain state across iterations, and make decisions: all of which LangGraph supports natively."
 }
 ```
 
@@ -404,7 +404,7 @@ LangGraph transforms complex agent logic from spaghetti code into a clean, visua
 [!SUCCESS]
 ### Key Takeaways
 - LangGraph uses directed graphs with shared state for building agents
-- Graphs support loops, conditional branching, and persistence — unlike linear chains
+- Graphs support loops, conditional branching, and persistence: unlike linear chains
 - State flows through all nodes; each node receives full state and returns partial updates
 - StateGraph is the primary class for building LangGraph applications
 - The ReAct pattern (reason → act → observe → loop) is a natural fit for graphs

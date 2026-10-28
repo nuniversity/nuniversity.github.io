@@ -7,9 +7,9 @@ duration: "75 min"
 ---
 # Databricks Runtime, Photon e Clusters: DBR/LTS, Políticas, Pools e a Forma do Custo de Compute
 
-Todo pipeline deste curso roda em alguma coisa. Tabelas Delta não se otimizam sozinhas, o Auto Loader não lista um prefixo de graça, e um pipeline Lakeflow só é tão barato quanto as máquinas que ficam embaixo dele. Esta lição é sobre esse *algo*: qual versão do **Databricks Runtime** você fixa, se o **Photon** está executando o seu plano, em que **tipo de cluster** (ou warehouse, ou sessão serverless) o trabalho roda, quem pode criá-lo (**cluster policies**), quão rápido ele pode subir (**instance pools**), que **família de EC2** ele usa e — a parte que aparece na fatura — qual **taxa de DBU** se aplica a ele.
+Todo pipeline deste curso roda em alguma coisa. Tabelas Delta não se otimizam sozinhas, o Auto Loader não lista um prefixo de graça, e um pipeline Lakeflow só é tão barato quanto as máquinas que ficam embaixo dele. Esta lição é sobre esse *algo*: qual versão do **Databricks Runtime** você fixa, se o **Photon** está executando o seu plano, em que **tipo de cluster** (ou warehouse, ou sessão serverless) o trabalho roda, quem pode criá-lo (**cluster policies**), quão rápido ele pode subir (**instance pools**), que **família de EC2** ele usa e, a parte que aparece na fatura, qual **taxa de DBU** se aplica a ele.
 
-Esse último ponto é a espinha da lição. Na AWS, **a mesma instância EC2 é cobrada em uma taxa de DBU diferente dependendo do tipo de compute ao qual ela foi anexada.** A Jobs API 2.0 diz isso sem rodeios: "Quando você executa um job em um novo jobs cluster, o job é tratado como um workload de Jobs Compute (automático) sujeito à precificação de Jobs Compute" e "Quando você executa um job em um all-purpose cluster existente, ele é tratado como um workload de All-Purpose Compute (interativo) sujeito à precificação de All-Purpose Compute" (docs .../jobs-2.0-api, página datada de 2026-08-03). Mesmos nós, mesmo Spark, mesmos dados — e nos preços de lista dos EUA em out 2026, um SKU de **$0.15/DBU** contra um SKU de **$0.55/DBU**. Todo o resto desta lição é decisão de performance ou decisão de governança; esta aqui é aritmética pura, e é a razão pela qual um ETL noturno de 45 minutos pode custar $1,027 ou $2,947 por mês (exemplo resolvido E5).
+Esse último ponto é a espinha da lição. Na AWS, **a mesma instância EC2 é cobrada em uma taxa de DBU diferente dependendo do tipo de compute ao qual ela foi anexada.** A Jobs API 2.0 diz isso sem rodeios: "Quando você executa um job em um novo jobs cluster, o job é tratado como um workload de Jobs Compute (automático) sujeito à precificação de Jobs Compute" e "Quando você executa um job em um all-purpose cluster existente, ele é tratado como um workload de All-Purpose Compute (interativo) sujeito à precificação de All-Purpose Compute" (docs.../jobs-2.0-api, página datada de 2026-08-03). Mesmos nós, mesmo Spark, mesmos dados, e nos preços de lista dos EUA em out 2026, um SKU de **$0.15/DBU** contra um SKU de **$0.55/DBU**. Todo o resto desta lição é decisão de performance ou decisão de governança; esta aqui é aritmética pura, e é a razão pela qual um ETL noturno de 45 minutos pode custar $1,027 ou $2,947 por mês (exemplo resolvido E5).
 
 ```text
  =============================================================
@@ -61,7 +61,7 @@ Cada versão também vem com uma **variante ML** (mesmo número, MLflow mais bib
 Duas questões de 2026 importam mais que os próprios números:
 
 1. **A numeração mudou no DBR 19.** "Antes do Databricks Runtime 19, a Databricks lançava runtimes como versões menores de features (por exemplo, 18.0, 18.1, 18.2), cada uma com seu próprio Beta e GA" (docs .../release-notes/runtime/databricks-runtime-ver, acesso 2026-10). A partir do 19, a fase de desenvolvimento de features roda como uma única linha major.
-2. **Um minor aposentado e um LTS vivo coexistem.** A página de release-notes do **DBR 18.0** já está rotulada de **(EoS)** — "O suporte a esta versão do Databricks Runtime terminou" — ainda que a mesma página registre "This version incorporates all features … Databricks released this version in January 2026", Spark **4.1.0** e **JDK 21** por padrão (docs .../release-notes/runtime/18.0, acesso 2026-10). Enquanto isso, o **18 LTS** é suportado até **10 de junho de 2029**. Fixe a *linha LTS*, nunca um número de minor aposentado.
+2. **Um minor aposentado e um LTS vivo coexistem.** A página de release-notes do **DBR 18.0** já está rotulada de **(EoS)**, "O suporte a esta versão do Databricks Runtime terminou", ainda que a mesma página registre "This version incorporates all features … Databricks released this version in January 2026", Spark **4.1.0** e **JDK 21** por padrão (docs.../release-notes/runtime/18.0, acesso 2026-10). Enquanto isso, o **18 LTS** é suportado até **10 de junho de 2029**. Fixe a *linha LTS*, nunca um número de minor aposentado.
 
 ### 1.2 O ciclo de vida, desenhado
 
@@ -85,26 +85,26 @@ timeline
       14.3 LTS : EoS 2027-02-01
 ```
 
-As quatro durações vêm direto da página de ciclo de vida de suporte (acesso 2026-10): uma fase de features no GA de **~seis meses**, backports LTS por **três anos**, "The end-of-support date is three years after the GA release date", e "Databricks makes a best effort to set the end-of-life date **six months after the end-of-support date**". No EoS a versão "não é mais selecionável na interface quando você cria ou atualiza um recurso de compute"; no EoL ela "becomes unusable … existing workloads running on these versions fail". Essa é a diferença entre *um job que para de ser agendado* e *um job que quebra* — e é a razão pela qual fixar versão é um controle de produção, não uma preferência.
+As quatro durações vêm direto da página de ciclo de vida de suporte (acesso 2026-10): uma fase de features no GA de **~seis meses**, backports LTS por **três anos**, "The end-of-support date is three years after the GA release date", e "Databricks makes a best effort to set the end-of-life date **six months after the end-of-support date**". No EoS a versão "não é mais selecionável na interface quando você cria ou atualiza um recurso de compute"; no EoL ela "becomes unusable … existing workloads running on these versions fail". Essa é a diferença entre *um job que para de ser agendado* e *um job que quebra*, e é a razão pela qual fixar versão é um controle de produção, não uma preferência.
 
 ### 1.3 Qual linha para qual workload
 
 A página de configuração de compute é explícita (docs .../compute/configure, última atualização em **6 de outubro de 2026**): "Para compute all-purpose, use a versão mais atual … Para compute de job que executa workloads operacionais, considere usar a versão Databricks Runtime de suporte de longo prazo (LTS)." Traduzindo:
 
-- **Interativo/exploratório (all-purpose):** a versão suportada mais nova — você quer as features e, de qualquer forma, reinicia com frequência.
+- **Interativo/exploratório (all-purpose):** a versão suportada mais nova: você quer as features e, de qualquer forma, reinicia com frequência.
 - **Jobs operacionais:** uma linha LTS, fixada pela string exata (`17.3.x-scala2.12`), porque um minor inesperado do Spark no meio de um trimestre é uma indisponibilidade.
 - **Data science / ML:** a variante ML da linha que você escolheu.
-- **Em uma cluster policy:** `spark_version` com um token especial — `auto:latest-lts`, `auto:latest-ml`, `auto:prev-major`, `auto:prev-lts` — que "não faz o compute se atualizar automaticamente quando uma nova versão de runtime é publicada"; ele resolve **quando um usuário edita** o compute (docs .../admin/clusters/policy-definition, última atualização em **1 de outubro de 2026**).
+- **Em uma cluster policy:** `spark_version` com um token especial, `auto:latest-lts`, `auto:latest-ml`, `auto:prev-major`, `auto:prev-lts`, que "não faz o compute se atualizar automaticamente quando uma nova versão de runtime é publicada"; ele resolve **quando um usuário edita** o compute (docs.../admin/clusters/policy-definition, última atualização em **1 de outubro de 2026**).
 
 - **📚 Você sabia?** A Databricks mantém "cluster configuration information for terminated clusters for **30 days**" (intro da Clusters API, acesso 2026-10). É tempo suficiente para responder "que runtime e que tipo de nó aquele job com falha usou na terça passada?" e curto o bastante para você exportar as formas que interessam (via asset bundles ou Terraform) em vez de fazer arqueologia na UI.
 
 ---
 
-## 2. Photon: o que o motor vetorizado faz — e o que ele não faz
+## 2. Photon: o que o motor vetorizado faz, e o que ele não faz
 
 ### 2.1 Um planejador, dois motores de execução
 
-"Photon is the Databricks-native **vectorized query engine** that accelerates your SQL workloads, DataFrame API calls, ETL pipelines, and **stateless streaming** workloads" (docs .../compute/photon, última atualização em **11 de setembro de 2026**). A frase de arquitetura para decorar: "O otimizador de query do Apache Spark (Catalyst) ainda planeja a sua query, mas o Photon assume no **nível de execução**" — e "Quando o Photon encontra uma operação não suportada … ele volta de forma transparente ao runtime Spark para o resto daquela operação."
+"Photon is the Databricks-native **vectorized query engine** that accelerates your SQL workloads, DataFrame API calls, ETL pipelines, and **stateless streaming** workloads" (docs.../compute/photon, última atualização em **11 de setembro de 2026**). A frase de arquitetura para decorar: "O otimizador de query do Apache Spark (Catalyst) ainda planeja a sua query, mas o Photon assume no **nível de execução**", e "Quando o Photon encontra uma operação não suportada … ele volta de forma transparente ao runtime Spark para o resto daquela operação."
 
 ```mermaid
 flowchart TD
@@ -118,10 +118,10 @@ flowchart TD
     PH -. "observe: operadores Photon na Spark UI<br/>em laranja, ou % de task time em Photon<br/>no query profile" .-> OBS["Observação"]
 ```
 
-O Photon processa "data in batches of thousands of rows at a time, enabling modern CPUs to use **SIMD** instructions", e features como predictive I/O e dynamic file pruning em `MERGE`/`UPDATE`/`DELETE` *exigem* Photon (mesma página). Ele é "o **motor padrão para todos os SQL warehouses**", está habilitado em compute serverless e pipelines Lakeflow serverless e — desde o DBR 9.1 LTS — "Photon is enabled by default on compute running Databricks Runtime 9.1 LTS and above" para compute all-purpose e job clássico criado pela UI.
+O Photon processa "data in batches of thousands of rows at a time, enabling modern CPUs to use **SIMD** instructions", e features como predictive I/O e dynamic file pruning em `MERGE`/`UPDATE`/`DELETE` *exigem* Photon (mesma página). Ele é "o **motor padrão para todos os SQL warehouses**", está habilitado em compute serverless e pipelines Lakeflow serverless e, desde o DBR 9.1 LTS, "Photon is enabled by default on compute running Databricks Runtime 9.1 LTS and above" para compute all-purpose e job clássico criado pela UI.
 
 > [!IMPORTANT]
-> ⚠️ **A armadilha da API: clusters criados por API rodam sem Photon, silenciosamente.** A mesma página de docs diz: "If you create these resources using the **Clusters API or Jobs API**, you must explicitly enable Photon by setting `runtime_engine` to `PHOTON`." Times de Terraform, CLI e asset bundle benchmarkam "Photon é lento" todo ano quando na verdade benchmarkaram *sem Photon*. Defina `"runtime_engine": "PHOTON"` nas suas definições de job/cluster (ou deixe uma cluster policy forçar — seção 6) e depois confirme na Spark UI.
+> ⚠️ **A armadilha da API: clusters criados por API rodam sem Photon, silenciosamente.** A mesma página de docs diz: "If you create these resources using the **Clusters API or Jobs API**, you must explicitly enable Photon by setting `runtime_engine` to `PHOTON`." Times de Terraform, CLI e asset bundle benchmarkam "Photon é lento" todo ano quando na verdade benchmarkaram *sem Photon*. Defina `"runtime_engine": "PHOTON"` nas suas definições de job/cluster (ou deixe uma cluster policy forçar: seção 6) e depois confirme na Spark UI.
 
 ### 2.2 Onde o Photon não ajuda
 
@@ -129,12 +129,12 @@ A documentação é incomumente direta, e cada cláusula abaixo é citável:
 
 | Caso | O que a documentação diz (docs .../compute/photon, 11 de setembro de 2026) | O que fazer no lugar |
 |---|---|---|
-| **Queries abaixo de ~2 segundos** | "Queries that normally complete in under two seconds don't see meaningful improvement because execution time is dominated by planning and scheduling overhead." | Conserte o plano, o caching ou o número de queries — não o motor. |
+| **Queries abaixo de ~2 segundos** | "Queries that normally complete in under two seconds don't see meaningful improvement because execution time is dominated by planning and scheduling overhead." | Conserte o plano, o caching ou o número de queries: não o motor. |
 | **UDFs de Python** | "Photon doesn't support **UDFs**, RDD APIs, or Dataset APIs." Corpos de UDF rodam fora do Photon. | Reescreva UDFs quentes como expressões de DataFrame / pandas UDFs / built-ins. |
 | **Streaming stateful** | "**Stateful streaming is not supported.**" Streaming stateless *é* suportado para sinks Delta ou Parquet, a partir de fontes Delta, Parquet, CSV, JSON, Kafka e Kinesis. | Mantenha o operador stateful no Spark, ou remodelle para stateless + `foreachBatch`. |
 | **Um único operador não suportado** | O fallback é por operação: um plano mistura operadores Photon (laranja) e operadores Spark clássicos. | Leia o query profile antes de concluir em qualquer sentido. |
 
-Há também uma cláusula de economia: Photon não é velocidade grátis. "Photon instance types consume DBUs at a **different rate** than the same instance type running the non-Photon runtime" (blog da Databricks, "Announcing Photon Public Preview", **2021-06-17**). A regra operante: **Photon só paga quando é mais do que proporcional em velocidade** — então faça benchmark do *seu* workload e meça a fatia do Photon na Spark UI em vez de adivinhar.
+Há também uma cláusula de economia: Photon não é velocidade grátis. "Photon instance types consume DBUs at a **different rate** than the same instance type running the non-Photon runtime" (blog da Databricks, "Announcing Photon Public Preview", **2021-06-17**). A regra operante: **Photon só paga quando é mais do que proporcional em velocidade**, então faça benchmark do *seu* workload e meça a fatia do Photon na Spark UI em vez de adivinhar.
 
 ### 2.3 As evidências, datadas
 
@@ -150,9 +150,9 @@ Cite-as com as datas; elas não são intercambiáveis:
 | Photon + AWS **i4i** vs i3 sem Photon: **5.3x** de melhoria de latência, **2.5x** de melhoria de custo | blog, *Faster Insights with Databricks Photon using AWS i4i instances* (workloads rodados em **julho de 2022**, página datada de **2024-06-21**) |
 | DBSQL Serverless: ganho de performance de **5x** desde 2022, mais "up to **25% faster**" de Predictive Query Execution e Photon Vectorized Shuffle (**1.5x** de throughput de shuffle) | blog, *Databricks SQL Accelerates Customer Workloads by 5x* (**2025-06-17**) |
 
-- **📚 Você sabia?** O recorde auditado de TPC-DS de 100 TB rodou **neste substrato do curso**: dados em **Amazon S3**, 256 × **i3.2xlarge** (SIGMOD '22). Instâncias storage-optimized mais um motor vetorizado é o datapoint de referência de "lakehouse bate warehouse" — e é a mesma família de instância na qual os warehouses clássicos e pro ainda se padronizam hoje (todos os workers de warehouse classic/pro são **i3.2xlarge**, docs .../warehouse-behavior, acesso 2026-10).
+- **📚 Você sabia?** O recorde auditado de TPC-DS de 100 TB rodou **neste substrato do curso**: dados em **Amazon S3**, 256 × **i3.2xlarge** (SIGMOD '22). Instâncias storage-optimized mais um motor vetorizado é o datapoint de referência de "lakehouse bate warehouse", e é a mesma família de instância na qual os warehouses clássicos e pro ainda se padronizam hoje (todos os workers de warehouse classic/pro são **i3.2xlarge**, docs.../warehouse-behavior, acesso 2026-10).
 
-### 2.4 Exemplo resolvido E1 — Photon ou não? Triagem de dois notebooks
+### 2.4 Exemplo resolvido E1: Photon ou não? Triagem de dois notebooks
 
 **Em outubro de 2026.** Duas equipes afirmam "Photon não ajudou". Faça a triagem antes de mudar qualquer coisa:
 
@@ -226,25 +226,25 @@ flowchart LR
 
 Três fatos específicos da AWS naquela figura: clusters clássicos e warehouses pro/classic rodam em **EC2 na sua VPC** ("With a pro SQL warehouse (unlike a serverless SQL warehouse), the **compute layer exists in your AWS account**", docs .../warehouse-types, última atualização em **12 de fevereiro de 2026**); serverless roda na **conta Databricks sem IPs públicos**; e com o secure cluster connectivity ligado (o modo de implantação padrão), nada no plano de dados precisa de IP público de entrada.
 
-### 3.2 A diferença de ciclo de vida — e a diferença de preço
+### 3.2 A diferença de ciclo de vida, e a diferença de preço
 
 | | All-purpose | Job cluster |
 |---|---|---|
 | Criado por | Você (UI/CLI/REST API) | O **job scheduler**, por execução |
-| Ciclo de vida | "You can manually terminate and restart" — vários usuários o compartilham | "terminates the cluster when the job is complete. **You cannot restart a job cluster**" |
+| Ciclo de vida | "You can manually terminate and restart": vários usuários o compartilham | "terminates the cluster when the job is complete. **You cannot restart a job cluster**" |
 | Classe de workload | interativo | automático |
 | Taxa de DBU (lista US, out 2026) | **All-Purpose Compute $0.55/DBU** | **Jobs Compute $0.15/DBU** |
 | Aderência a produção | exploração, análise ad hoc | todo pipeline agendado |
 
-Citação das docs (página de components, 2026-07-28): "O agendador de jobs da Databricks cria um job cluster quando você executa um job em um novo job cluster e encerra o cluster quando o job termina." E a consequência de precificação, vinda da Jobs API 2.0 (página datada de **2026-08-03**): "When you run a job on a new jobs cluster, the job is treated as a Jobs Compute (automated) workload subject to Jobs Compute pricing" — enquanto apontar um job para um all-purpose cluster existente é **precificação de All-Purpose**, e, segundo a página de components, "running a job on an existing all-purpose cluster is also treated as an **interactive** workload." A mesma API acrescenta: "We suggest running jobs on new clusters for greater reliability."
+Citação das docs (página de components, 2026-07-28): "O agendador de jobs da Databricks cria um job cluster quando você executa um job em um novo job cluster e encerra o cluster quando o job termina." E a consequência de precificação, vinda da Jobs API 2.0 (página datada de **2026-08-03**): "When you run a job on a new jobs cluster, the job is treated as a Jobs Compute (automated) workload subject to Jobs Compute pricing": enquanto apontar um job para um all-purpose cluster existente é **precificação de All-Purpose**, e, segundo a página de components, "running a job on an existing all-purpose cluster is also treated as an **interactive** workload." A mesma API acrescenta: "We suggest running jobs on new clusters for greater reliability."
 
-A orientação da Databricks sobre jobs-compute vai além (docs .../jobs/compute, última atualização em **15 de setembro de 2026**): "**O compute serverless para jobs é o padrão para todas as tarefas que o suportam**", e "Compute all-purpose — você pode configurar tarefas opcionalmente com all-purpose clássico. **A Databricks não recomenda essa configuração para jobs de produção.**"
+A orientação da Databricks sobre jobs-compute vai além (docs.../jobs/compute, última atualização em **15 de setembro de 2026**): "**O compute serverless para jobs é o padrão para todas as tarefas que o suportam**", e "Compute all-purpose: você pode configurar tarefas opcionalmente com all-purpose clássico. **A Databricks não recomenda essa configuração para jobs de produção.**"
 
 Um detalhe que vale levar para a lição 09: um **shared job cluster** é "scoped to a single job run and cannot be used by other jobs or runs of the same job. **Libraries cannot be declared in a shared job cluster configuration.**" Declare dependências por task (ou via job environments), não no objeto do cluster compartilhado.
 
-### 3.3 Exemplo resolvido E2 — a forma de custo: um pipeline, três configurações
+### 3.3 Exemplo resolvido E2, a forma de custo: um pipeline, três configurações
 
-**Em outubro de 2026, lista US, plano Premium, AWS.** Cenário: um ETL noturno de 45 minutos que roda **400 cluster-hours por mês**, 4 nós no total (1 driver + 3 workers). O exemplo resolvido da própria Databricks usa um nó que "runs at 3 DBU/hour" (blog, *Best practices for cost management in Databricks*, **2022-10-18**) — trate esse valor de emissão como **ilustrativo**: a emissão de DBU por nó não é publicada como tabela oficial, então leia a sua em `system.billing.list_prices` ou na calculadora de preços.
+**Em outubro de 2026, lista US, plano Premium, AWS.** Cenário: um ETL noturno de 45 minutos que roda **400 cluster-hours por mês**, 4 nós no total (1 driver + 3 workers). O exemplo resolvido da própria Databricks usa um nó que "runs at 3 DBU/hour" (blog, *Best practices for cost management in Databricks*, **2022-10-18**): trate esse valor de emissão como **ilustrativo**: a emissão de DBU por nó não é publicada como tabela oficial, então leia a sua em `system.billing.list_prices` ou na calculadora de preços.
 
 ```text
 Exemplo resolvido E2 - mesmo pipeline, três tipos de compute (lista US, out 2026)
@@ -262,7 +262,7 @@ Custo AWS = 4 x m5.xlarge x $0.192/h x 400 h = $307.20    (us-east-1, lido em 20
     AWS  $307.20 x 0.40 = $122.88 ; coluna DBU INALTERADA  =  $1,142.88 (A + spot)
 ```
 
-A configuração (B) também carrega horas ociosas: um all-purpose cluster é cobrado enquanto está *ligado*, não enquanto trabalha — e é exatamente por isso que existem auto-termination (seção 8) e policies (seção 6). Repare no que **não** mudou entre (A) e (B): nós, runtime, Spark, dados. Só o **tipo de compute** — e, com ele, o SKU. Essa é a decisão de maior alavancagem desta lição, e é a razão pela qual a Databricks relata que clientes "saved tens of thousands of dollars by simply moving just ten percent of their workloads from all-purpose clusters to jobs clusters" (blog, 2022-10-18).
+A configuração (B) também carrega horas ociosas: um all-purpose cluster é cobrado enquanto está *ligado*, não enquanto trabalha, e é exatamente por isso que existem auto-termination (seção 8) e policies (seção 6). Repare no que **não** mudou entre (A) e (B): nós, runtime, Spark, dados. Só o **tipo de compute**, e, com ele, o SKU. Essa é a decisão de maior alavancagem desta lição, e é a razão pela qual a Databricks relata que clientes "saved tens of thousands of dollars by simply moving just ten percent of their workloads from all-purpose clusters to jobs clusters" (blog, 2022-10-18).
 
 ```plot
 {
@@ -293,13 +293,13 @@ A Databricks publica uma tabela de recomendação por tipo de task (docs .../job
 | Notebook / script Python / Python wheel | **Jobs serverless** | jobs clássicos, all-purpose clássico |
 | SQL | **SQL warehouse serverless** | SQL warehouse pro |
 | Pipeline (declarativo) Lakeflow | **Pipeline serverless** | pipeline clássico |
-| dbt | **SQL warehouse serverless** | — |
-| **Task JAR** | — | **apenas jobs clássicos** |
-| **Spark Submit** | — | **apenas jobs clássicos** |
+| dbt | **SQL warehouse serverless** |: |
+| **Task JAR** |: | **apenas jobs clássicos** |
+| **Spark Submit** |: | **apenas jobs clássicos** |
 
-Elegibilidade de serverless na AWS (docs .../sql/admin/serverless, última atualização em **10 de junho de 2026**): workspace em **plano Premium ou superior**, não um free trial, suportado em **todas as regiões AWS**, sem IPs públicos — e "**Cluster policies, including spot instance policies, are not supported**". Essa última cláusula é a frontira de tudo na seção 6: policies governam compute *clássico*; serverless é governado por controles em nível de conta/workspace no lugar disso.
+Elegibilidade de serverless na AWS (docs.../sql/admin/serverless, última atualização em **10 de junho de 2026**): workspace em **plano Premium ou superior**, não um free trial, suportado em **todas as regiões AWS**, sem IPs públicos, e "**Cluster policies, including spot instance policies, are not supported**". Essa última cláusula é a frontira de tudo na seção 6: policies governam compute *clássico*; serverless é governado por controles em nível de conta/workspace no lugar disso.
 
-### 4.2 Limitações do serverless — leia esta lista antes de migrar um job
+### 4.2 Limitações do serverless: leia esta lista antes de migrar um job
 
 De docs .../compute/serverless/limitations (acesso 2026-10), os bloqueadores que forçam compute clássico:
 
@@ -308,9 +308,9 @@ De docs .../compute/serverless/limitations (acesso 2026-10), os bloqueadores que
 - "**Maven coordinates are not supported.**" · "**JAR libraries are not supported in notebooks** … JAR tasks in jobs are supported." · "Bibliotecas de tarefa não são suportadas para tarefas de notebook."
 - "Você deve usar **Unity Catalog** para se conectar a fontes de dados externas." · "Access to **DBFS** is limited."
 - "**Serverless compute has a maximum runtime of 7 days.**"
-- Gatilhos de streaming: `Trigger.AvailableNow()` (recomendado) e o deprecado `Trigger.Once()` apenas — `Trigger.ProcessingTime` e `Trigger.Continuous` **não** são suportados.
+- Gatilhos de streaming: `Trigger.AvailableNow()` (recomendado) e o deprecado `Trigger.Once()` apenas: `Trigger.ProcessingTime` e `Trigger.Continuous` **não** são suportados.
 
-A página de migração (última atualização em **2026-07-10**) lista os mesmos bloqueadores como coisas a substituir *primeiro*: imagens customizadas, variantes de ML Runtime, DBR < 13, instance profiles, e "dependencies such as **eggs, JARs, and Maven libraries**", com os padrões de substituição — RDD APIs → DataFrame APIs, caminhos DBFS → volumes do UC, IAM instance profiles → external locations do UC, JARs JDBC customizados → Lakehouse Federation.
+A página de migração (última atualização em **2026-07-10**) lista os mesmos bloqueadores como coisas a substituir *primeiro*: imagens customizadas, variantes de ML Runtime, DBR < 13, instance profiles, e "dependencies such as **eggs, JARs, and Maven libraries**", com os padrões de substituição: RDD APIs → DataFrame APIs, caminhos DBFS → volumes do UC, IAM instance profiles → external locations do UC, JARs JDBC customizados → Lakehouse Federation.
 
 ### 4.3 SQL warehouses: três tipos, dois relógios
 
@@ -326,7 +326,7 @@ A página de migração (última atualização em **2026-07-10**) lista os mesmo
 | Workers | vertical + IWM | escada **i3.2xlarge** | escada **i3.2xlarge** |
 | **Padrão de auto-stop** | **10 minutos** (mín 5 UI / 1 API) | **45 minutos** (mín 10) | **45 minutos** (mín 10) |
 
-O dimensionamento de classic/pro é um cluster para 10 queries concorrentes, de 2X-Small (1 driver + 1 worker) por X-Small, Small … X-Large (32 workers), 2X (64), 3X (128), 4X (256), com **5X-Large (512) em Public Preview** (docs .../warehouse-behavior, acesso 2026-10). A orientação permanente da Databricks: "**Databricks recommends using serverless SQL warehouses when available**" — e a frase de cobrança para decorar: "**Idle SQL warehouses continue to accumulate DBU and cloud instance charges until they are stopped.**"
+O dimensionamento de classic/pro é um cluster para 10 queries concorrentes, de 2X-Small (1 driver + 1 worker) por X-Small, Small … X-Large (32 workers), 2X (64), 3X (128), 4X (256), com **5X-Large (512) em Public Preview** (docs.../warehouse-behavior, acesso 2026-10). A orientação permanente da Databricks: "**Databricks recommends using serverless SQL warehouses when available**", e a frase de cobrança para decorar: "**Idle SQL warehouses continue to accumulate DBU and cloud instance charges until they are stopped.**"
 
 ```mermaid
 flowchart TD
@@ -347,11 +347,11 @@ flowchart TD
     PC --> P1
 ```
 
-> **Veredito Comparativo — job cluster versus all-purpose versus SQL warehouse versus serverless (em out 2026)**
-> - **Job cluster (clássico, Jobs Compute $0.15/DBU + seu EC2)** — a **resposta padrão para batch de produção**. Efêmero por execução, sem reinício, auto-termina com a run, aceita spot, governado por policy, o SKU clássico mais barato por DBU. Pague pelas horas em que ele de fato roda; você é dono do EC2, do EBS e do tempo de aquecimento. Use quando as dependências forem só-clássicas (JAR/Spark Submit, RDD, instance profiles, DBFS) ou quando o job roda longo e quente em uma forma previsível.
-> - **All-purpose (All-Purpose Compute $0.55/DBU + seu EC2)** — **apenas interativo**: exploração, notebooks compartilhados, ensino. 3.7× a taxa por DBU de jobs na lista US, é cobrado enquanto *ligado*, e apontar jobs de produção para ele é simultaneamente um anti-padrão de cobrança interativa e de confiabilidade ("a Databricks não recomenda essa configuração para jobs de produção"). Controles obrigatórios: auto-termination, uma policy, nunca um driver em spot.
-> - **SQL warehouse (SQL Classic $0.22 / Pro $0.55 / Serverless $0.70 por DBU)** — o caminho de servir BI, cobrado enquanto **ligado**, dimensionado por camiseta e não pelos workers que você escolhe. Serverless soma Predictive IO + IWM e auto-stop de 10 minutos; pro/classic rodam na sua VPC em i3.2xlarge com auto-stop de 45 minutos e início de ~4 minutos. Escolha por *concorrência de query e SLA de latência*, não só pela taxa de DBU — o gap classic/serverless ($0.48 por DBU-hora) é a máquina+ops que o serverless absorve por você.
-> - **Jobs/notebooks serverless (Jobs Serverless $0.35/DBU, All-Purpose Serverless $0.75/DBU)** — **o padrão da plataforma onde a lista de limitações permite**: sem fatura de EC2, sem pools, sem aquecimento, sem superfície de policy, runtime máximo de 7 dias, cobrança por segundo, custo ocioso zero. Custa por volta de 1,3–2,3× mais por DBU que o clássico, mas apaga as colunas de tempo ocioso e de administração da fatura.
+> **Veredito Comparativo: job cluster versus all-purpose versus SQL warehouse versus serverless (em out 2026)**
+> - **Job cluster (clássico, Jobs Compute $0.15/DBU + seu EC2)**: a **resposta padrão para batch de produção**. Efêmero por execução, sem reinício, auto-termina com a run, aceita spot, governado por policy, o SKU clássico mais barato por DBU. Pague pelas horas em que ele de fato roda; você é dono do EC2, do EBS e do tempo de aquecimento. Use quando as dependências forem só-clássicas (JAR/Spark Submit, RDD, instance profiles, DBFS) ou quando o job roda longo e quente em uma forma previsível.
+> - **All-purpose (All-Purpose Compute $0.55/DBU + seu EC2)**: **apenas interativo**: exploração, notebooks compartilhados, ensino. 3.7× a taxa por DBU de jobs na lista US, é cobrado enquanto *ligado*, e apontar jobs de produção para ele é simultaneamente um anti-padrão de cobrança interativa e de confiabilidade ("a Databricks não recomenda essa configuração para jobs de produção"). Controles obrigatórios: auto-termination, uma policy, nunca um driver em spot.
+> - **SQL warehouse (SQL Classic $0.22 / Pro $0.55 / Serverless $0.70 por DBU)**, o caminho de servir BI, cobrado enquanto **ligado**, dimensionado por camiseta e não pelos workers que você escolhe. Serverless soma Predictive IO + IWM e auto-stop de 10 minutos; pro/classic rodam na sua VPC em i3.2xlarge com auto-stop de 45 minutos e início de ~4 minutos. Escolha por *concorrência de query e SLA de latência*, não só pela taxa de DBU, o gap classic/serverless ($0.48 por DBU-hora) é a máquina+ops que o serverless absorve por você.
+> - **Jobs/notebooks serverless (Jobs Serverless $0.35/DBU, All-Purpose Serverless $0.75/DBU)**, **o padrão da plataforma onde a lista de limitações permite**: sem fatura de EC2, sem pools, sem aquecimento, sem superfície de policy, runtime máximo de 7 dias, cobrança por segundo, custo ocioso zero. Custa por volta de 1,3 to 2,3× mais por DBU que o clássico, mas apaga as colunas de tempo ocioso e de administração da fatura.
 > - **Veredito em uma linha:** *serverless por padrão → job clusters clássicos quando um bloqueador ou uma forma longa e quente exigir → all-purpose para humanos, nunca para pipelines → SQL warehouse para BI com auto-stop obrigatório.* Toda taxa acima é lista US, plano Premium, AWS, em outubro de 2026; confirme contra `system.billing.list_prices` na sua conta antes de comprometer um orçamento com ela.
 
 ---
@@ -362,7 +362,7 @@ Um pool é "A set of idle, ready-to-use instances that reduce cluster start and 
 
 A regra de cobrança é a que os estudantes erram: "**A Databricks não cobra DBUs enquanto as instâncias estão ociosas no pool. A cobrança do provedor de instâncias se aplica**" (docs .../pool-best-practices / pool-index, acesso 2026-10). Pools deslocam custo da coluna de DBU para a coluna da AWS e compram minutos de subida; eles não apagam a fatura. Restrições e regras das mesmas páginas:
 
-- Um pool é "**either all spot instances or all on-demand instances**"; a Instance Pools API acrescenta **`SPOT_WITH_FALLBACK`** — "o pool adquire instâncias spot primeiro e recua para instâncias on-demand quando a capacidade spot está indisponível".
+- Um pool é "**either all spot instances or all on-demand instances**"; a Instance Pools API acrescenta **`SPOT_WITH_FALLBACK`**: "o pool adquire instâncias spot primeiro e recua para instâncias on-demand quando a capacidade spot está indisponível".
 - "By default, Databricks sets the max spot price at **100% of the on-demand price**."
 - Estourar a escala falha de forma barulhenta: "Se um cluster que usa o pool solicitar mais instâncias do que esse número durante o autoscaling, a solicitação falha com um erro **INSTANCE_POOL_MAX_CAPACITY_FAILURE**." Mantenha o tamanho máximo do cluster ≤ pool `max_capacity`.
 - Clusters herdam a **availability zone** do pool; use **pools separados** quando os requisitos de driver e de worker diferem.
@@ -370,7 +370,7 @@ A regra de cobrança é a que os estudantes erram: "**A Databricks não cobra DB
 - Onde o serverless cabe, o conselho da Databricks é direto: "If your workload supports serverless compute, Databricks recommends using serverless compute instead of pools."
 - Orientação de dimensionamento: pools de spot para workers tolerantes a custo; **pools on-demand para "jobs with short execution times and strict execution time requirements"**.
 
-### 5.1 Exemplo resolvido E3 — configuração de pool + a fatura de ociosidade
+### 5.1 Exemplo resolvido E3: configuração de pool + a fatura de ociosidade
 
 **Em outubro de 2026 (lista us-east-1, lida em 2026-10-12).** Uma equipe quer subidas quentes para um job noturno de 45 minutos e para clusters de dev interativos.
 
@@ -408,24 +408,24 @@ O que você compra: nós já rodando -> latência de subida e de autoscale
 Armadilha: cluster de 8 nós contra um pool de 6 nós -> INSTANCE_POOL_MAX_CAPACITY_FAILURE
 ```
 
-- **📚 Você sabia?** O seguro de ociosidade do pool custa cerca de **$136/mês** neste exemplo — enquanto um único *dia* acidental daquele all-purpose cluster de 4 nós deixado ligado (12 DBU/h × 24 h × $0.55 = **$158.40** de DBUs **mais** 4 × $0.192 × 24 ≈ **$18.43** de EC2 ≈ **$177**) já custa mais do que um mês inteiro de subidas quentes. Pools são para **latência de subida e capacidade**, auto-termination é para **custo**; equipes que instalam pools mas pulam o auto-termination costumam terminar com as duas faturas.
+- **📚 Você sabia?** O seguro de ociosidade do pool custa cerca de **$136/mês** neste exemplo: enquanto um único *dia* acidental daquele all-purpose cluster de 4 nós deixado ligado (12 DBU/h × 24 h × $0.55 = **$158.40** de DBUs **mais** 4 × $0.192 × 24 ≈ **$18.43** de EC2 ≈ **$177**) já custa mais do que um mês inteiro de subidas quentes. Pools são para **latência de subida e capacidade**, auto-termination é para **custo**; equipes que instalam pools mas pulam o auto-termination costumam terminar com as duas faturas.
 
 ---
 
 ## 6. Cluster policies: governança e guardrails de custo como JSON
 
-"Uma policy é uma ferramenta que administradores de workspace podem usar para limitar as permissões de criação de compute de um usuário ou grupo com base em um conjunto de regras de policy" (docs .../admin/clusters/policies, página datada de **2026-06-10**). Os benefícios documentados: configurações prescritas, limites de quantos clusters um usuário pode criar, uma UI simplificada, "**Control cost by limiting per-cluster maximum cost**" e "Enforce cluster-scoped library installations". O próprio blog de onboarding de policies da Databricks (2025-04-17) nomeia os dois ganhos — "**Simplification of platform usage and effective cost control are the two main benefits of cluster policies**" — e o conjunto inicial de quatro famílias: **Personal Compute, Power User Compute, Shared Compute, Job Compute**.
+"Uma policy é uma ferramenta que administradores de workspace podem usar para limitar as permissões de criação de compute de um usuário ou grupo com base em um conjunto de regras de policy" (docs.../admin/clusters/policies, página datada de **2026-06-10**). Os benefícios documentados: configurações prescritas, limites de quantos clusters um usuário pode criar, uma UI simplificada, "**Control cost by limiting per-cluster maximum cost**" e "Enforce cluster-scoped library installations". O próprio blog de onboarding de policies da Databricks (2025-04-17) nomeia os dois ganhos, "**Simplification of platform usage and effective cost control are the two main benefits of cluster policies**", e o conjunto inicial de quatro famílias: **Personal Compute, Power User Compute, Shared Compute, Job Compute**.
 
 Mecânica que você precisa saber antes de escrever JSON (docs .../admin/clusters/policy-definition, última atualização em **1 de outubro de 2026**):
 
 - As regras se aplicam a "qualquer um dos atributos controlados pela Clusters API", e "**Pode haver apenas uma limitação por atributo.**"
 - Tipos de limitação: **`fixed`, `forbidden`, `allowlist`, `blocklist`, `regex`, `range`, `unlimited`** (cada um pode carregar `defaultValue`, `isOptional`, `hidden`).
-- **Atributos virtuais:** `dbus_per_hour` — "Atributo calculado que representa o máximo de DBUs que um recurso pode usar em base horária, incluindo o nó do driver … Use com **range**" — e `cluster_type` (`all-purpose` / `job` / `dlt`), que te deixa bloquear uma classe de compute de plano.
+- **Atributos virtuais:** `dbus_per_hour`, "Atributo calculado que representa o máximo de DBUs que um recurso pode usar em base horária, incluindo o nó do driver … Use com **range**", e `cluster_type` (`all-purpose` / `job` / `dlt`), que te deixa bloquear uma classe de compute de plano.
 - `runtime_engine` aceita `PHOTON` ou `STANDARD`; `spark_version` aceita os tokens `auto:*` (seção 1); `workload_type.clients.jobs` / `.notebooks` controlam qual tipo de cliente pode anexar.
 - **Armadilha da API:** "Default values don't automatically get applied to compute created with the Clusters API. To apply default values using the API, add the parameter `apply_policy_default_values` … set it to true."
 - Apagar uma policy não limpa nada: o compute em execução continua, mas "cannot be edited unless the user has unrestricted cluster creation permissions."
 
-### 6.1 Exemplo resolvido E4 — uma policy de guardrail de custo só para jobs
+### 6.1 Exemplo resolvido E4: uma policy de guardrail de custo só para jobs
 
 Construída sobre o próprio exemplo só-para-jobs da documentação (página policy-definition, 1 de outubro de 2026) e estendida com Photon, topologia de spot e tags. Este é o JSON que você colaria em um recurso `databricks_cluster_policy` do Terraform ou na UI de admin:
 
@@ -486,7 +486,7 @@ flowchart TD
 ```
 
 > [!WARNING]
-> ⚠️ **Feche a backdoor Unrestricted antes de escrever uma única regra.** "The 'unrestricted' cluster policy entitlement provides a **backdoor route for bypassing the cluster policies** and should be suppressed for non-admin users" (Cluster Policy Onboarding Primer, databricks.com/blog, **2025-04-17**). E observe a documentação: "By default, workspace admins have permissions on all policies. Non-admin users must be granted permissions on a policy to access it" — então uma policy definida sem nenhuma atribuição ao seu grupo de usuários não protege ninguém. Implante policies assim: escreva o JSON → conceda ao grupo → remova o Unrestricted daquele grupo → verifique tentando provisionar demais.
+> ⚠️ **Feche a backdoor Unrestricted antes de escrever uma única regra.** "The 'unrestricted' cluster policy entitlement provides a **backdoor route for bypassing the cluster policies** and should be suppressed for non-admin users" (Cluster Policy Onboarding Primer, databricks.com/blog, **2025-04-17**). E observe a documentação: "By default, workspace admins have permissions on all policies. Non-admin users must be granted permissions on a policy to access it", então uma policy definida sem nenhuma atribuição ao seu grupo de usuários não protege ninguém. Implante policies assim: escreva o JSON → conceda ao grupo → remova o Unrestricted daquele grupo → verifique tentando provisionar demais.
 
 ---
 
@@ -498,22 +498,22 @@ flowchart TD
 
 | Escopo | Definido em | Persiste? | Observações |
 |---|---|---|---|
-| **Vinculado ao compute** | cluster / warehouse | sim, enquanto o compute vive | "used by all notebooks and jobs running on the compute" — a página de best practices diz para **evitar** onde environments/deps de job bastam |
+| **Vinculado ao compute** | cluster / warehouse | sim, enquanto o compute vive | "used by all notebooks and jobs running on the compute": a página de best practices diz para **evitar** onde environments/deps de job bastam |
 | **Bibliotecas de job/task** | objeto `libraries` da Jobs API | por execução | em serverless só via **job environments**; task libraries não suportadas para tasks de notebook |
-| **Vinculado ao notebook** | magics `%pip` / `%R` | **não** — "do not persist and must be re-installed for each session" | apenas Python/R; "**JARs cannot be installed at the notebook level.**" |
+| **Vinculado ao notebook** | magics `%pip` / `%R` | **não**: "do not persist and must be re-installed for each session" | apenas Python/R; "**JARs cannot be installed at the notebook level.**" |
 | **Environments** | environment base em YAML (Beta, modo de acesso padrão do DBR 19+) | sim | substitui bibliotecas de cluster em setups declarativos |
 
 Origens: **PyPI, Maven, CRAN**, arquivos do workspace, **volumes do Unity Catalog**, armazenamento de objetos da nuvem. As linhas de corte em out 2026:
 
 - O modo de acesso padrão precisa de **DBR 13.3 LTS+** para PyPI, Maven, volumes e arquivos do workspace; "**CRAN: Not supported**" no modo de acesso padrão (dedicated/legacy o mantêm).
 - Python **eggs** apenas em "Databricks Runtime 13.3 LTS and below"; `requirements.txt` precisa de **DBR 15.0+**.
-- "**storing library files in the DBFS root is deprecated and disabled by default in Databricks Runtime 15.1 and above**" — use arquivos do workspace, volumes do UC ou repositórios de pacotes.
-- "**Bibliotecas de workspace foram descontinuadas** e não devem ser usadas" — note que os *arquivos* de workspace continuam totalmente suportados.
+- "**storing library files in the DBFS root is deprecated and disabled by default in Databricks Runtime 15.1 and above**": use arquivos do workspace, volumes do UC ou repositórios de pacotes.
+- "**Bibliotecas de workspace foram descontinuadas** e não devem ser usadas": note que os *arquivos* de workspace continuam totalmente suportados.
 - Precedência de import do Python (maior primeiro): cwd da pasta Git → raiz da pasta Git → vinculado ao notebook (`%pip`) → vinculado ao compute → bibliotecas incluídas no DBR.
 
-Ergonomia de notebook que vale decorar: "`%pip` — Install Python packages (notebook-scoped)" mas "%pip não reinicia automaticamente o processo do Python … você pode precisar `dbutils.library.restartPython()`"; "`%run` — Execute another notebook, importing its functions and variables" e "**%run must be in a cell by itself, because it runs the entire notebook inline.**" Em serverless, `%uv pip` é a alternativa mais rápida (environment na versão 5+).
+Ergonomia de notebook que vale decorar: "`%pip`, Install Python packages (notebook-scoped)" mas "%pip não reinicia automaticamente o processo do Python … você pode precisar `dbutils.library.restartPython()`"; "`%run`, Execute another notebook, importing its functions and variables" e "**%run must be in a cell by itself, because it runs the entire notebook inline.**" Em serverless, `%uv pip` é a alternativa mais rápida (environment na versão 5+).
 
-### 7.2 Exemplo resolvido E5 — a postura do notebook de produção
+### 7.2 Exemplo resolvido E5: a postura do notebook de produção
 
 ```text
 Exemplo resolvido E5 - notebook de produção parametrizado (docs, 11 de set de 2026)
@@ -556,21 +556,21 @@ Clusters all-purpose e job clássicos fazem autoscale **apenas nos workers**, en
 
 - "Scales up from min to max in **at most 2 scaling events**."
 - "On job compute, scales down if the compute resource is underutilized over the last **40 seconds**. On all-purpose compute … **150 seconds**." (`spark.databricks.aggressiveWindowDownS`, até **600 s**, retarda essa queda.)
-- Ele pode reduzir nós não-ociosos usando o estado dos arquivos de shuffle — então um nó quente-mas-esperando não está protegido.
+- Ele pode reduzir nós não-ociosos usando o estado dos arquivos de shuffle, então um nó quente-mas-esperando não está protegido.
 - O autoscaling padrão em vez disso começa com "+8 nodes, then exponential" e "reduz a escala quando 90% dos nós não estão ocupados por 10 minutos".
 
-Scaling vertical não existe no clássico: "Scale vertically by adding or removing resources from a single machine … This typically means **stopping the workload, moving it to a larger machine, and restarting it**" (docs .../performance-efficiency, acesso 2026-10). A seleção vertical de instância é uma feature de **pipelines serverless** — "Vertical autoscaling is used for all serverless pipelines", escolhendo tipos de instância economicamente eficientes com base em evidência de OOM (docs .../ldp/auto-scaling, acesso 2026-10).
+Scaling vertical não existe no clássico: "Scale vertically by adding or removing resources from a single machine … This typically means **stopping the workload, moving it to a larger machine, and restarting it**" (docs.../performance-efficiency, acesso 2026-10). A seleção vertical de instância é uma feature de **pipelines serverless**: "Vertical autoscaling is used for all serverless pipelines", escolhendo tipos de instância economicamente eficientes com base em evidência de OOM (docs.../ldp/auto-scaling, acesso 2026-10).
 
-Duas armadilhas documentadas: "**Do not enable Apache Spark Dynamic Allocation** (`spark.dynamicAllocation.enabled`) **on compute resources that use Databricks autoscaling**" (executores em conflito → `NODES_LOST`), e o autoscaling "has limitations scaling down … for Structured Streaming workloads" — streams longas querem um piso, não um piso que se move.
+Duas armadilhas documentadas: "**Do not enable Apache Spark Dynamic Allocation** (`spark.dynamicAllocation.enabled`) **on compute resources that use Databricks autoscaling**" (executores em conflito → `NODES_LOST`), e o autoscaling "has limitations scaling down … for Structured Streaming workloads": streams longas querem um piso, não um piso que se move.
 
 ### 8.2 Auto-termination e topologia de spot
 
-**Auto-termination** mata um all-purpose cluster ocioso depois de `autotermination_minutes` de inatividade. A API aceita **10–10.000 minutos, com `0` desabilitando-o** (docs de schema de asset bundle/job da Databricks, acesso 2026-10) — e as páginas de docs impressas em outubro de 2026 **não trazem nenhum padrão numérico**, então defina-o explicitamente em vez de confiar em um valor de UI que você não verificou. Os padrões de auto-stop de SQL warehouse *são* documentados (seção 4.3): **45 min** pro/classic, **10 min** serverless.
+**Auto-termination** mata um all-purpose cluster ocioso depois de `autotermination_minutes` de inatividade. A API aceita **10 to 10.000 minutos, com `0` desabilitando-o** (docs de schema de asset bundle/job da Databricks, acesso 2026-10), e as páginas de docs impressas em outubro de 2026 **não trazem nenhum padrão numérico**, então defina-o explicitamente em vez de confiar em um valor de UI que você não verificou. Os padrões de auto-stop de SQL warehouse *são* documentados (seção 4.3): **45 min** pro/classic, **10 min** serverless.
 
-**Spot**, da mesma página de configuração de compute: `aws_attributes.availability` ∈ `SPOT` / `ON_DEMAND` / `SPOT_WITH_FALLBACK`; `aws_attributes.first_on_demand` fixa o driver (e N nós) em on-demand; `aws_attributes.spot_bid_price_percent` tem padrão de **100% do on-demand**. "A primeira instância será sempre on-demand (o nó do driver é sempre on-demand) e as instâncias subsequentes serão instâncias spot." A AWS precifica o Spot em "up to 90% off On-Demand prices" (aws.amazon.com/ec2/spot, acesso 2026-10) com um **aviso de interrupção de dois minutos** — e a economia cai **apenas na coluna da AWS**: as taxas de DBU e as contagens de emissão não mudam com spot.
+**Spot**, da mesma página de configuração de compute: `aws_attributes.availability` ∈ `SPOT` / `ON_DEMAND` / `SPOT_WITH_FALLBACK`; `aws_attributes.first_on_demand` fixa o driver (e N nós) em on-demand; `aws_attributes.spot_bid_price_percent` tem padrão de **100% do on-demand**. "A primeira instância será sempre on-demand (o nó do driver é sempre on-demand) e as instâncias subsequentes serão instâncias spot." A AWS precifica o Spot em "up to 90% off On-Demand prices" (aws.amazon.com/ec2/spot, acesso 2026-10) com um **aviso de interrupção de dois minutos**, e a economia cai **apenas na coluna da AWS**: as taxas de DBU e as contagens de emissão não mudam com spot.
 
 > [!IMPORTANT]
-> ⚠️ **Nunca rode o driver em spot.** "Não use um pool com instâncias spot como o tipo do seu driver. Escolha um tipo de driver on-demand para evitar que o seu driver seja recolhido" (docs .../compute/configure, 2026-10-06); as best practices de pool repetem: "Use pools de spot somente como workers. O seu nó do driver deve usar instâncias on-demand." Um driver recolhido leva o Spark context inteiro junto — no meio da task, depois do aviso de dois minutos da AWS. Defina `first_on_demand >= 1`, use um pool de driver on-demand dedicado e torne todo stage reiniciável (lição 13).
+> ⚠️ **Nunca rode o driver em spot.** "Não use um pool com instâncias spot como o tipo do seu driver. Escolha um tipo de driver on-demand para evitar que o seu driver seja recolhido" (docs.../compute/configure, 2026-10-06); as best practices de pool repetem: "Use pools de spot somente como workers. O seu nó do driver deve usar instâncias on-demand." Um driver recolhido leva o Spark context inteiro junto: no meio da task, depois do aviso de dois minutos da AWS. Defina `first_on_demand >= 1`, use um pool de driver on-demand dedicado e torne todo stage reiniciável (lição 13).
 
 ---
 
@@ -578,11 +578,11 @@ Duas armadilhas documentadas: "**Do not enable Apache Spark Dynamic Allocation**
 
 ### 9.1 As famílias
 
-Da documentação de tipos de instância da EC2 (acesso 2026-10): **M** propósito geral, **C** otimizado para compute, **R** otimizado para memória, e **D/I** otimizado para armazenamento com NVMe local — "Storage optimized instances are designed for workloads that require high, sequential read and write access to very large data sets on local storage" (as classes de família abrangem C5…C9g, R5…R9g, D3/D3en/I3en/I4i/I7i/I8g/Im4gn/Is4gen).
+Da documentação de tipos de instância da EC2 (acesso 2026-10): **M** propósito geral, **C** otimizado para compute, **R** otimizado para memória, e **D/I** otimizado para armazenamento com NVMe local: "Storage optimized instances are designed for workloads that require high, sequential read and write access to very large data sets on local storage" (as classes de família abrangem C5…C9g, R5…R9g, D3/D3en/I3en/I4i/I7i/I8g/Im4gn/Is4gen).
 
 A própria orientação de seleção da Databricks (docs .../cluster-config-best-practices, página datada de **2026-06-11**): ETL batch simples que "don't require wide transformations" → "instâncias com requisitos menores de memória e armazenamento"; workloads analíticos "will likely require reading the same data repeatedly, so recommended node types are **storage optimized with disk cache enabled or instances with local storage**"; e "Para jobs de ETL batch simples … use instâncias spot para workloads com requisitos de latência flexíveis."
 
-### 9.2 Exemplo resolvido E6 — seleção de família de instância para quatro formas de workload
+### 9.2 Exemplo resolvido E6: seleção de família de instância para quatro formas de workload
 
 **Em outubro de 2026; EC2 Linux on-demand, us-east-1, lido da lista de preços da AWS em 2026-10-12.**
 
@@ -621,7 +621,7 @@ Compare com E2(B): mesmas horas em all-purpose = $2,640 + AWS.
 A escolha da família economizou ~11%; o TIPO de compute economizou 65%.
 ```
 
-Dois fatos de hardware mais que vale levar: os **fleet instance types** (`m-fleet.xlarge`, `rd-fleet.4xlarge`, …) são "a variable instance type that automatically resolves to the best available instance type of the same size" usando o Spot Placement Score da AWS — e "Se você atualizar a porcentagem de lance de instância spot pela API ou JSON, isso não tem efeito quando o tipo de nó worker é um tipo de instância fleet." Tipos fleet não trazem GPUs. A **EC2 P2 não é mais suportada** (mesma página). Para janelas garantidas de GPU/instância, os Capacity Blocks se anexam pela tag `X-Databricks-AwsCapacityBlockId` mais uma AZ e apenas on-demand.
+Dois fatos de hardware mais que vale levar: os **fleet instance types** (`m-fleet.xlarge`, `rd-fleet.4xlarge`, …) são "a variable instance type that automatically resolves to the best available instance type of the same size" usando o Spot Placement Score da AWS, e "Se você atualizar a porcentagem de lance de instância spot pela API ou JSON, isso não tem efeito quando o tipo de nó worker é um tipo de instância fleet." Tipos fleet não trazem GPUs. A **EC2 P2 não é mais suportada** (mesma página). Para janelas garantidas de GPU/instância, os Capacity Blocks se anexam pela tag `X-Databricks-AwsCapacityBlockId` mais uma AZ e apenas on-demand.
 
 ---
 
@@ -629,7 +629,7 @@ Dois fatos de hardware mais que vale levar: os **fleet instance types** (`m-flee
 
 ### 10.1 A tabela de taxas na qual você será cobrado
 
-**Lista US, plano Premium, AWS, em outubro de 2026** — fontes documentais (as próprias páginas de preços da Databricks renderizam no cliente; esses números vêm do registro de fornecedor UK G-Cloud 15 capturado em **2026-09-25** mais seis leituras independentes da mesma tabela de taxas datadas entre **2026-06-03 e 2026-10-06**, e são corroborados para SQL por snapshots de página do databricks.com). Confirme na sua conta com `system.billing.list_prices` antes de orçar:
+**Lista US, plano Premium, AWS, em outubro de 2026**: fontes documentais (as próprias páginas de preços da Databricks renderizam no cliente; esses números vêm do registro de fornecedor UK G-Cloud 15 capturado em **2026-09-25** mais seis leituras independentes da mesma tabela de taxas datadas entre **2026-06-03 e 2026-10-06**, e são corroborados para SQL por snapshots de página do databricks.com). Confirme na sua conta com `system.billing.list_prices` antes de orçar:
 
 | SKU de compute | Classic $/DBU | Serverless $/DBU |
 |---|---|---|
@@ -637,64 +637,64 @@ Dois fatos de hardware mais que vale levar: os **fleet instance types** (`m-flee
 | **All-Purpose Compute** | **0.55** (Enterprise 0.65) | **0.75** (Enterprise 0.95) |
 | **SQL Classic / Pro / Serverless** | 0.22 / 0.55 | **0.70** |
 | Lakeflow Pipelines (Standard tier legado) | 0.20 Core / 0.25 Pro / 0.36 Advanced | 0.35 (serverless) |
-| Jobs legados "Light" (Standard tier) | 0.10 — **aposentado** | — |
+| Jobs legados "Light" (Standard tier) | 0.10, **aposentado** |, |
 
 Três regras em torno dessa tabela:
 
-1. **Região:** as taxas clássicas são planas em todas as regiões AWS (de qualquer forma você paga EC2 local); **as taxas serverless não são** — SQL Serverless é **$0.70/DBU em us-east-1 contra $0.91 em eu-central-1** (leitura de page-data, 2026-08-07). Uma cotação dos EUA nunca se transfere para Frankfurt.
-2. **O Standard tier acabou.** "Databricks has announced end-of-life for the Standard tier. All current Standard tier workspaces will be upgraded to the Premium tier effective **October 1, 2025 on AWS and GCP**" — então a velha taxa de jobs de $0.10 é história (databricks.com/product/pricing/lakeflow-jobs, acesso 2026-10).
+1. **Região:** as taxas clássicas são planas em todas as regiões AWS (de qualquer forma você paga EC2 local); **as taxas serverless não são**: SQL Serverless é **$0.70/DBU em us-east-1 contra $0.91 em eu-central-1** (leitura de page-data, 2026-08-07). Uma cotação dos EUA nunca se transfere para Frankfurt.
+2. **O Standard tier acabou.** "Databricks has announced end-of-life for the Standard tier. All current Standard tier workspaces will be upgraded to the Premium tier effective **October 1, 2025 on AWS and GCP**", então a velha taxa de jobs de $0.10 é história (databricks.com/product/pricing/lakeflow-jobs, acesso 2026-10).
 3. **Duas faturas no clássico, uma no serverless.** Clássico = DBUs + EC2/EBS na sua conta; serverless embute a máquina no DBU. `system.billing.usage` contém apenas o lado Databricks: "O `system.billing.usage` contém apenas os custos da Databricks … o gasto de infraestrutura em nuvem não está incluído e precisaria ser revisado pelo console de nuvem correspondente" (blog, **2026-09-22**).
 
 ### 10.2 Atribuição: dê um endereço a cada DBU
 
-`system.billing.usage` (página datada de **2026-07-23**) traz `sku`, `usage_type`, `product_feature`, `workspace_name`, `region`, `tags`, `run_as`, `metered_quantity`, `list_price` e `unblended_cost` — "When a classic compute resource's driver and worker nodes use different instance types, their usage appears as **separate records**". Agrupe por `sku` + `run_as` e você vê exatamente quanto do seu parque está em All-Purpose versus Jobs. Um limite para lembrar quando montar o dashboard: as consultas de atribuição de custo de job "only calculate costs for jobs run on **jobs compute and serverless compute**. Jobs run on SQL warehouses and all-purpose compute are **not billed as jobs**" (docs .../system-tables/jobs-cost, acesso 2026-10). E os budgets (até **1.000** por conta, **4 thresholds** cada, em USD a preço de lista) **monitoram** o gasto — eles não o limitam (doc de budgets, **2026-10-07**).
+`system.billing.usage` (página datada de **2026-07-23**) traz `sku`, `usage_type`, `product_feature`, `workspace_name`, `region`, `tags`, `run_as`, `metered_quantity`, `list_price` e `unblended_cost`, "When a classic compute resource's driver and worker nodes use different instance types, their usage appears as **separate records**". Agrupe por `sku` + `run_as` e você vê exatamente quanto do seu parque está em All-Purpose versus Jobs. Um limite para lembrar quando montar o dashboard: as consultas de atribuição de custo de job "only calculate costs for jobs run on **jobs compute and serverless compute**. Jobs run on SQL warehouses and all-purpose compute are **not billed as jobs**" (docs.../system-tables/jobs-cost, acesso 2026-10). E os budgets (até **1.000** por conta, **4 thresholds** cada, em USD a preço de lista) **monitoram** o gasto, eles não o limitam (doc de budgets, **2026-10-07**).
 
 ---
 
 ## 11. As armadilhas: catorze confusões que esta lição não vai deixar você manter
 
 1. **"LTS é o número com `.x`."** Em outubro de 2026 **o 18 LTS é suportado (até 2029-06-10) enquanto o 18.0 está em EoS.** Fixe `spark_version` na linha LTS.
-2. **"`auto:latest-lts` mantém meus clusters atualizados."** Ele resolve **quando o compute é editado**, não continuamente — clusters em execução não se atualizam sozinhos.
-3. **"Nossos clusters criados por API estão no Photon."** Só se `runtime_engine` for `"PHOTON"` — o padrão da UI não viaja para a Clusters/Jobs API.
+2. **"`auto:latest-lts` mantém meus clusters atualizados."** Ele resolve **quando o compute é editado**, não continuamente: clusters em execução não se atualizam sozinhos.
+3. **"Nossos clusters criados por API estão no Photon."** Só se `runtime_engine` for `"PHOTON"`, o padrão da UI não viaja para a Clusters/Jobs API.
 4. **"O Photon vai consertar meu dashboard de 100 ms."** "Queries that normally complete in under two seconds don't see meaningful improvement."
 5. **"O Photon faz tudo o que o Spark faz."** Sem UDFs, sem APIs RDD/Dataset, sem streaming stateful; o fallback é por operação e silencioso.
-6. **"Um job em um all-purpose cluster existente é a opção barata."** Ele é cobrado na precificação de **All-Purpose (interativo)** e classificado como interativo — 3.7× a taxa por DBU na lista dos EUA.
+6. **"Um job em um all-purpose cluster existente é a opção barata."** Ele é cobrado na precificação de **All-Purpose (interativo)** e classificado como interativo: 3.7× a taxa por DBU na lista dos EUA.
 7. **"Pools são grátis."** 0 DBUs enquanto ocioso, mas **as cobranças de instância da AWS continuam**; defina `min_idle_instances` de propósito.
-8. **"Workers em spot, driver em spot."** Nunca — driver sempre on-demand (`first_on_demand >= 1`), e o spot só abate a coluna da AWS.
+8. **"Workers em spot, driver em spot."** Nunca: driver sempre on-demand (`first_on_demand >= 1`), e o spot só abate a coluna da AWS.
 9. **"Dynamic Allocation + autoscaling da Databricks = mais segurança."** Explicitamente advertido contra: churn de executores e `NODES_LOST`.
 10. **"Memória maior = nó maior, sem reinício."** Clusters clássicos não têm autoscaling vertical; mudar o tipo de nó significa reinício.
-11. **"Os padrões da policy se aplicam automaticamente."** Não via Clusters API — você precisa passar `apply_policy_default_values: true`.
+11. **"Os padrões da policy se aplicam automaticamente."** Não via Clusters API: você precisa passar `apply_policy_default_values: true`.
 12. **"Apagamos a policy, então o gasto parou."** O compute existente continua rodando e fica não-editável (exceto para usuários unrestricted).
-13. **"`%pip install` no notebook significa que o job tem o pacote."** Bibliotecas vinculadas ao notebook "do not persist" — declare deps em nível de task/cluster/environment.
+13. **"`%pip install` no notebook significa que o job tem o pacote."** Bibliotecas vinculadas ao notebook "do not persist": declare deps em nível de task/cluster/environment.
 14. **"A taxa de DBU é meu custo total."** No clássico ela é metade da fatura; a metade do EC2/EBS/NAT/S3 vive só no AWS Cost Explorer.
 
 ### Atualizações de 2026 (em outubro de 2026)
 
 > [!NOTE]
 > **O que mudou na camada de compute/runtime de que esta lição depende:**
-> - **2026-09-11 — a tabela de versões suportadas é a fonte de verdade do DBR.** DBR 19 (Spark 4.2.0, 15 de junho de 2026, "EoS: Determined at LTS transition") e **18 LTS** (Spark 4.1.0, 10 de junho de 2026 → **EoS 10 de junho de 2029**) lideram a lista da AWS, com 17.3/16.4/15.4/14.3 LTS atrás deles; "Prior to Databricks Runtime 19, Databricks released runtimes as minor feature versions (for example, 18.0, 18.1, 18.2)" (docs .../release-notes/runtime, última atualização em **2026-09-11**). A própria página do 18.0 já está marcada como **(EoS)**.
-> - **2026-10-06 — a configuração de compute é o manual de regras atual** para padrões do Photon, topologia de spot ("the driver node is always on-demand"), janelas de autoscaling (40 s job / 150 s all-purpose, ≤2 eventos de redimensionamento) e as raízes de EBS de 30 GB + 150 GB (docs .../compute/configure, última atualização em **2026-10-06**).
-> - **2026-10-01 — a referência de policy agora documenta os atributos virtuais** `dbus_per_hour` (range = teto de DBU por hora) e `cluster_type`, além dos tokens `auto:latest-lts` da família `spark_version` e do `apply_policy_default_values` (docs .../admin/clusters/policy-definition, última atualização em **2026-10-01**).
-> - **2026-09-15 — serverless é o padrão documentado para tasks de job**, com JAR e Spark Submit forçados a jobs clássicos, e all-purpose explicitamente desaconselhado para produção (docs .../jobs/compute, última atualização em **2026-09-15**).
-> - **2026-10-07 — controles de custo migraram para a superfície da plataforma**: padrões de auto-stop reafirmados (45 min Pro/Classic, 10 min Serverless), "custom tags can be enforced via compute policies and serverless usage policies", mais uma página de Governance Hub Cost (Beta) e novos **query tags** (Public Preview) em `system.query.history` (blog, *Set budgets and alerts for cloud data warehouse costs*, **2026-10-07**; consultas de custo de system-tables, **2026-09-22**).
-> - **2026-05-04 — o blueprint de certificação testa o escopo desta lição**: o guia de exame DEA (versão no ar em **2026-05-04**) mapeia "Troubleshooting, Monitoring, and Optimization" para 10% da prova, e o mapeamento curso-blueprint liga "L06 (DBR, Photon, compute, cost models)" ao domínio de plataforma (digest 19, acesso em **2026-10-12**).
+> - **2026-09-11: a tabela de versões suportadas é a fonte de verdade do DBR.** DBR 19 (Spark 4.2.0, 15 de junho de 2026, "EoS: Determined at LTS transition") e **18 LTS** (Spark 4.1.0, 10 de junho de 2026 → **EoS 10 de junho de 2029**) lideram a lista da AWS, com 17.3/16.4/15.4/14.3 LTS atrás deles; "Prior to Databricks Runtime 19, Databricks released runtimes as minor feature versions (for example, 18.0, 18.1, 18.2)" (docs.../release-notes/runtime, última atualização em **2026-09-11**). A própria página do 18.0 já está marcada como **(EoS)**.
+> - **2026-10-06: a configuração de compute é o manual de regras atual** para padrões do Photon, topologia de spot ("the driver node is always on-demand"), janelas de autoscaling (40 s job / 150 s all-purpose, ≤2 eventos de redimensionamento) e as raízes de EBS de 30 GB + 150 GB (docs.../compute/configure, última atualização em **2026-10-06**).
+> - **2026-10-01: a referência de policy agora documenta os atributos virtuais** `dbus_per_hour` (range = teto de DBU por hora) e `cluster_type`, além dos tokens `auto:latest-lts` da família `spark_version` e do `apply_policy_default_values` (docs.../admin/clusters/policy-definition, última atualização em **2026-10-01**).
+> - **2026-09-15: serverless é o padrão documentado para tasks de job**, com JAR e Spark Submit forçados a jobs clássicos, e all-purpose explicitamente desaconselhado para produção (docs.../jobs/compute, última atualização em **2026-09-15**).
+> - **2026-10-07: controles de custo migraram para a superfície da plataforma**: padrões de auto-stop reafirmados (45 min Pro/Classic, 10 min Serverless), "custom tags can be enforced via compute policies and serverless usage policies", mais uma página de Governance Hub Cost (Beta) e novos **query tags** (Public Preview) em `system.query.history` (blog, *Set budgets and alerts for cloud data warehouse costs*, **2026-10-07**; consultas de custo de system-tables, **2026-09-22**).
+> - **2026-05-04, o blueprint de certificação testa o escopo desta lição**: o guia de exame DEA (versão no ar em **2026-05-04**) mapeia "Troubleshooting, Monitoring, and Optimization" para 10% da prova, e o mapeamento curso-blueprint liga "L06 (DBR, Photon, compute, cost models)" ao domínio de plataforma (digest 19, acesso em **2026-10-12**).
 
 ---
 
 ## Casos Reais
 
-> **📋 Caso A — Comcast (comunicações e mídia, Cloud: AWS)**
+> **📋 Caso A: Comcast (comunicações e mídia, Cloud: AWS)**
 > **Desafio.** Petabytes de telemetria e bilhões de interações de voz de mais de 20 milhões de remotes de voz; pipelines frágeis e dor de ingestão de arquivos pequenos, com centenas de modelos implantados em nuvem, on-prem e edge.
-> **Stack na AWS.** Databricks com Delta Lake para ingestão e otimização de arquivos pequenos, MLflow gerenciado e **autoscaling com instâncias spot** — `Cloud: AWS` na página da história (https://www.databricks.com/customers/comcast, página sem data, acesso em 2026-10); também listada entre os clientes "already leveraging Databricks on AWS" (https://www.databricks.com/company/newsroom/press-releases/databricks-strengthens-scope-of-work-with-aws, **2022-05-10**).
+> **Stack na AWS.** Databricks com Delta Lake para ingestão e otimização de arquivos pequenos, MLflow gerenciado e **autoscaling com instâncias spot**: `Cloud: AWS` na página da história (https://www.databricks.com/customers/comcast, página sem data, acesso em 2026-10); também listada entre os clientes "already leveraging Databricks on AWS" (https://www.databricks.com/company/newsroom/press-releases/databricks-strengthens-scope-of-work-with-aws, **2022-05-10**).
 > **Resultado relatado.** "**Redução de 10x nos custos gerais de compute** para processar dados · **Redução de 90% nos recursos de DevOps necessários**"; "Delta Lake has enabled Comcast to optimize data ingestion, **replacing 640 machines with 64** while improving performance" (https://www.databricks.com/customers/comcast, sem data, acesso em 2026-10; origem da história em 2019).
-> **Como mapeia para esta lição.** Seções 8–10 — workers spot mais autoscaling horizontal e right-sizing estrutural são exatamente as alavancas do exemplo resolvido E2: a economia veio de *qual forma de compute rodava o trabalho*, não de um desconto.
-> ⏳ *Nota temporal: uma história de origem de 2019 ainda exibida em 2026 — ensine-a como o que a Comcast relatou na época, não como um 10× garantido.*
+> **Como mapeia para esta lição.** Seções 8 to 10: workers spot mais autoscaling horizontal e right-sizing estrutural são exatamente as alavancas do exemplo resolvido E2: a economia veio de *qual forma de compute rodava o trabalho*, não de um desconto.
+> ⏳ *Nota temporal: uma história de origem de 2019 ainda exibida em 2026: ensine-a como o que a Comcast relatou na época, não como um 10× garantido.*
 
-> **📋 Caso B — Addepar (gestão de patrimônio, Cloud: AWS)**
+> **📋 Caso B: Addepar (gestão de patrimônio, Cloud: AWS)**
 > **Desafio.** Times de engenharia e de dados em silos, entrega de pipeline lenta e custo de infraestrutura crescente em uma plataforma que modela mais de US$ 8 trilhões em investimentos.
-> **Stack na AWS.** Databricks rodando na AWS com Unity Catalog, notebooks compartilhados e Databricks SQL — tag `Cloud: AWS` na página da história.
+> **Stack na AWS.** Databricks rodando na AWS com Unity Catalog, notebooks compartilhados e Databricks SQL: tag `Cloud: AWS` na página da história.
 > **Resultado relatado.** "A Addepar modela mais de **US$ 8 trilhões** em investimentos no Databricks rodando na AWS. Notebooks compartilhados, Unity Catalog e acesso colaborativo a dados juntam os times de engenharia e de dados em um só lugar, **acelerando a entrega de pipelines em 5x e cortando custos de infraestrutura em US$ 2 milhões**" (https://www.databricks.com/customers/addepar/aws, página sem data, acesso em 2026-10).
-> **Como mapeia para esta lição.** Seções 6 e 10 — uma redução de US$ 2 milhões em infraestrutura com velocidade de entrega 5× é o que "governança e padronização de compute" parecem em uma fatura: compute compartilhado e governado por policy vence o sprawl de um-cluster-por-notebook, que é o problema de personal-compute policy da seção 6 resolvido em escala de empresa.
+> **Como mapeia para esta lição.** Seções 6 e 10: uma redução de US$ 2 milhões em infraestrutura com velocidade de entrega 5× é o que "governança e padronização de compute" parecem em uma fatura: compute compartilhado e governado por policy vence o sprawl de um-cluster-por-notebook, que é o problema de personal-compute policy da seção 6 resolvido em escala de empresa.
 > ⏳ *Nota temporal: página sem data, acesso em out 2026; os US$ 2 milhões são custo de infraestrutura, não custo de DBU.*
 
 ---
@@ -702,15 +702,15 @@ Três regras em torno dessa tabela:
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
 > 1. **Duas linhas, um relógio.** DBR 19 é a linha atual (Spark 4.2.0, 15 de junho de 2026); **o 18 LTS vai até 10 de junho de 2029**; EoS = GA + 3 anos, EoL ≈ EoS + 6 meses. All-purpose → mais nova; jobs operacionais → LTS fixado; ML → variante ML. Em outubro de 2026, **o 18.0 está em EoS enquanto o 18 LTS não está**.
-> 2. **Photon é uma troca na camada de execução, não um planejador.** O Catalyst planeja; o Photon executa em lotes columnar SIMD com fallback transparente por operação. Ele não ajuda em queries <2 s, em código UDF/RDD/Dataset nem em streaming stateful — e compute criado por API precisa de `runtime_engine: "PHOTON"` explícito.
-> 3. **O tipo de compute define a taxa; o tuning define só as horas.** Job cluster novo = Jobs Compute (**$0.15/DBU**), all-purpose existente = All-Purpose (**$0.55/DBU**) e classificação interativa — mesmos nós, 3.7× a taxa (lista US, AWS, out 2026).
-> 4. **Serverless é o padrão onde as limitações permitem**: sem tasks JAR/Spark Submit, sem RDD/R/Scala, sem Maven, runtime máximo de 7 dias, só `AvailableNow`, UC obrigatório, policies N/A — plano Premium+, todas as regiões AWS, sem IPs públicos.
+> 2. **Photon é uma troca na camada de execução, não um planejador.** O Catalyst planeja; o Photon executa em lotes columnar SIMD com fallback transparente por operação. Ele não ajuda em queries <2 s, em código UDF/RDD/Dataset nem em streaming stateful, e compute criado por API precisa de `runtime_engine: "PHOTON"` explícito.
+> 3. **O tipo de compute define a taxa; o tuning define só as horas.** Job cluster novo = Jobs Compute (**$0.15/DBU**), all-purpose existente = All-Purpose (**$0.55/DBU**) e classificação interativa: mesmos nós, 3.7× a taxa (lista US, AWS, out 2026).
+> 4. **Serverless é o padrão onde as limitações permitem**: sem tasks JAR/Spark Submit, sem RDD/R/Scala, sem Maven, runtime máximo de 7 dias, só `AvailableNow`, UC obrigatório, policies N/A: plano Premium+, todas as regiões AWS, sem IPs públicos.
 > 5. **Warehouses são cobrados enquanto ligados**: auto-stop de **45 min** pro/classic (mín 10), **10 min** serverless (mín 5 UI / 1 API); todos os workers classic/pro são **i3.2xlarge**; início de ~4 min pro/classic; um cluster por 10 queries concorrentes.
 > 6. **Pools = 0 DBUs enquanto ocioso, a AWS ainda cobra.** Dimensione com `min_idle_instances` / `max_capacity` / `idle_instance_autotermination_minutes`, fique de olho no `INSTANCE_POOL_MAX_CAPACITY_FAILURE`, e mantenha o driver on-demand no seu próprio pool.
 > 7. **Policies são o guardrail mais barato**: uma regra por atributo; o range de `dbus_per_hour` é o teto real por hora; `cluster_type` controla a classe de compute; `apply_policy_default_values` é obrigatório para criações via API; suprima a backdoor **Unrestricted**.
-> 8. **Bibliotecas**: escopos de compute/job/task/notebook, `%pip` é por sessão, JARs não podem ser vinculados ao notebook, CRAN está fora no modo de acesso padrão, armazenamento na raiz do DBFS desligado desde o DBR 15.1 — dependências de produção ficam em task libraries ou environments, e notebooks permanecem finos.
-> 9. **Autoscaling é só horizontal no clássico** (≤2 eventos de redimensionamento; janelas de scale-down de 40 s job / 150 s all-purpose) — nunca o combine com Dynamic Allocation; o spot abate apenas a coluna da AWS, e o driver é sempre on-demand.
-> 10. **Tudo são duas colunas.** `system.billing.usage` guarda a coluna de DBU (agrupe por `sku` + `run_as`); o AWS Cost Explorer guarda a coluna de EC2/EBS/NAT/S3; budgets alertam mas nunca limitam — e jobs em all-purpose ou SQL warehouses "are not billed as jobs".
+> 8. **Bibliotecas**: escopos de compute/job/task/notebook, `%pip` é por sessão, JARs não podem ser vinculados ao notebook, CRAN está fora no modo de acesso padrão, armazenamento na raiz do DBFS desligado desde o DBR 15.1: dependências de produção ficam em task libraries ou environments, e notebooks permanecem finos.
+> 9. **Autoscaling é só horizontal no clássico** (≤2 eventos de redimensionamento; janelas de scale-down de 40 s job / 150 s all-purpose): nunca o combine com Dynamic Allocation; o spot abate apenas a coluna da AWS, e o driver é sempre on-demand.
+> 10. **Tudo são duas colunas.** `system.billing.usage` guarda a coluna de DBU (agrupe por `sku` + `run_as`); o AWS Cost Explorer guarda a coluna de EC2/EBS/NAT/S3; budgets alertam mas nunca limitam, e jobs em all-purpose ou SQL warehouses "are not billed as jobs".
 
 ---
 ## Perguntas de Prática (Practice Questions)
@@ -721,13 +721,13 @@ Três regras em torno dessa tabela:
   "type": "multiple-choice",
   "question": "Segundo a página de versões suportadas com última atualização em 11 de setembro de 2026, qual afirmação sobre as versões do Databricks Runtime na AWS está correta?",
   "options": [
-    "18 LTS é suportado até 10 de junho de 2029, enquanto a página de release-notes do DBR 18.0 já está marcada como EoS - portanto jobs operacionais devem se fixar na linha LTS, não em um minor aposentado",
+    "18 LTS é suportado até 10 de junho de 2029, enquanto a página de release-notes do DBR 18.0 já está marcada como EoS: portanto jobs operacionais devem se fixar na linha LTS, não em um minor aposentado",
     "DBR 18.0 e 18 LTS são a mesma coisa e ambos recebem correções até 10 de junho de 2029",
     "DBR 19 foi removido da tabela de suportados depois que seu período de Beta terminou",
     "O fim de vida acontece antes do fim do suporte, então o EoS é o prazo mais brando"
   ],
   "correct": 0,
-  "explanation": "A página de release-notes (última atualização em 2026-09-11) lista 18 LTS (Spark 4.1.0, 10 de junho de 2026) com EoS em 10 de junho de 2029, enquanto a própria página do 18.0 diz 'Support for this Databricks Runtime version has ended' - e é exatamente por isso que você fixa a linha LTS. A opção B mistura dois artefatos diferentes; o DBR 19 está na tabela de suportados (data de lançamento 15 de junho de 2026, EoS determinado na transição para LTS), então C é falsa; o ciclo de vida é EoS (GA + 3 anos) e depois EoL em melhor esforço (~6 meses depois), então D inverte a ordem."
+  "explanation": "A página de release-notes (última atualização em 2026-09-11) lista 18 LTS (Spark 4.1.0, 10 de junho de 2026) com EoS em 10 de junho de 2029, enquanto a própria página do 18.0 diz 'Support for this Databricks Runtime version has ended': e é exatamente por isso que você fixa a linha LTS. A opção B mistura dois artefatos diferentes; o DBR 19 está na tabela de suportados (data de lançamento 15 de junho de 2026, EoS determinado na transição para LTS), então C é falsa; o ciclo de vida é EoS (GA + 3 anos) e depois EoL em melhor esforço (~6 meses depois), então D inverte a ordem."
 }
 ```
 
@@ -738,7 +738,7 @@ Três regras em torno dessa tabela:
   "question": "Um job cluster criado pelo job scheduler da Databricks pode ser parado e reiniciado depois por um administrador, exatamente como um all-purpose cluster.",
   "options": ["Verdadeiro", "Falso"],
   "correct": 1,
-  "explanation": "Falso. 'The Databricks job scheduler creates a job cluster when you run a job on a new job cluster and terminates the cluster when the job is complete. You cannot restart a job cluster' (docs .../getting-started/concepts, página datada de 2026-07-28). Só all-purpose clusters podem ser iniciados, parados e compartilhados manualmente - que é também o motivo de serem o SKU interativo e os job clusters serem o SKU automático."
+  "explanation": "Falso. 'The Databricks job scheduler creates a job cluster when you run a job on a new job cluster and terminates the cluster when the job is complete. You cannot restart a job cluster' (docs.../getting-started/concepts, página datada de 2026-07-28). Só all-purpose clusters podem ser iniciados, parados e compartilhados manualmente: que é também o motivo de serem o SKU interativo e os job clusters serem o SKU automático."
 }
 ```
 
@@ -748,27 +748,27 @@ Três regras em torno dessa tabela:
   "type": "multiple-choice",
   "question": "Um job noturno é redirecionado de um job cluster novo para um all-purpose cluster compartilhado existente. Segundo a Jobs API 2.0, o que muda?",
   "options": [
-    "A cobrança muda da precificação de Jobs Compute para a precificação de All-Purpose Compute, e a execução é classificada como um workload interativo - mesmo que nada no código tenha mudado",
+    "A cobrança muda da precificação de Jobs Compute para a precificação de All-Purpose Compute, e a execução é classificada como um workload interativo: mesmo que nada no código tenha mudado",
     "Nada muda: a precificação de DBU depende apenas do tipo de instância, não do tipo de compute",
     "A cobrança muda para a precificação de SQL warehouse porque o job roda SQL",
     "O job vai automaticamente para serverless e mantém a taxa de Jobs Compute"
   ],
   "correct": 0,
-  "explanation": "'When you run a job on a new jobs cluster, the job is treated as a Jobs Compute (automated) workload subject to Jobs Compute pricing' versus 'When you run a job on an existing all-purpose cluster, it is treated as an All-Purpose Compute (interactive) workload subject to All-Purpose Compute pricing' (docs .../jobs-2.0-api, página datada de 2026-08-03), e a página de components acrescenta que ele 'is also treated as an interactive workload'. Na lista dos EUA (out 2026) isso é $0.15 contra $0.55 por DBU - cerca de 3.7x. A opção B é a falsa ideia central que esta lição existe para matar; C e D inventam SKUs."
+  "explanation": "'When you run a job on a new jobs cluster, the job is treated as a Jobs Compute (automated) workload subject to Jobs Compute pricing' versus 'When you run a job on an existing all-purpose cluster, it is treated as an All-Purpose Compute (interactive) workload subject to All-Purpose Compute pricing' (docs.../jobs-2.0-api, página datada de 2026-08-03), e a página de components acrescenta que ele 'is also treated as an interactive workload'. Na lista dos EUA (out 2026) isso é $0.15 contra $0.55 por DBU: cerca de 3.7x. A opção B é a falsa ideia central que esta lição existe para matar; C e D inventam SKUs."
 }
 ```
 
 ```fillblank
 {
   "question": "Preencha os fatos do Photon exatamente como a documentação de outubro de 2026 os declara:",
-  "template": "O Photon é o motor de query {{1}} nativo da Databricks, e embora o otimizador de query do Apache Spark, o Catalyst, ainda {{2}} a sua query, o Photon assume na camada de execução; queries que normalmente terminam em menos de {{3}} segundos não ganham melhora significativa, e o Photon não suporta UDFs, APIs RDD nem APIs Dataset - enquanto o streaming stateful não é suportado de modo algum, embora o streaming stateless para um sink Delta ou Parquet seja.",
+  "template": "O Photon é o motor de query {{1}} nativo da Databricks, e embora o otimizador de query do Apache Spark, o Catalyst, ainda {{2}} a sua query, o Photon assume na camada de execução; queries que normalmente terminam em menos de {{3}} segundos não ganham melhora significativa, e o Photon não suporta UDFs, APIs RDD nem APIs Dataset, enquanto o streaming stateful não é suportado de modo algum, embora o streaming stateless para um sink Delta ou Parquet seja.",
   "answers": {
     "1": "vetorizado",
     "2": "planeja",
     "3": "dois"
   },
   "distractors": ["orientado a linhas", "distribuído", "relacional", "executa", "otimiza", "compila", "um", "cinco", "dez", "trinta"],
-  "explanation": "docs .../compute/photon (última atualização em 2026-09-11) chama o Photon de 'the Databricks-native vectorized query engine', diz 'The Apache Spark query optimizer (Catalyst) still plans your query, but Photon takes over at the execution layer' e afirma 'Queries that normally complete in under two seconds don't see meaningful improvement because execution time is dominated by planning and scheduling overhead'. Os distratores são palavras plausíveis de motor e de limiar que não aparecem em lugar nenhum naquela página - o Catalyst planeja em vez de executar, e o piso é de dois segundos, não um ou cinco."
+  "explanation": "docs.../compute/photon (última atualização em 2026-09-11) chama o Photon de 'the Databricks-native vectorized query engine', diz 'The Apache Spark query optimizer (Catalyst) still plans your query, but Photon takes over at the execution layer' e afirma 'Queries that normally complete in under two seconds don't see meaningful improvement because execution time is dominated by planning and scheduling overhead'. Os distratores são palavras plausíveis de motor e de limiar que não aparecem em lugar nenhum naquela página: o Catalyst planeja em vez de executar, e o piso é de dois segundos, não um ou cinco."
 }
 ```
 
@@ -778,13 +778,13 @@ Três regras em torno dessa tabela:
   "type": "multiple-choice",
   "question": "Seu módulo Terraform cria job clusters pela Clusters API. O que ele precisa fazer para o Photon de fato rodar?",
   "options": [
-    "Definir runtime_engine como \"PHOTON\" explicitamente - o padrão da UI não se aplica a criações pela Clusters API ou Jobs API",
+    "Definir runtime_engine como \"PHOTON\" explicitamente: o padrão da UI não se aplica a criações pela Clusters API ou Jobs API",
     "Nada: o Photon está habilitado por padrão em todo recurso de compute desde o DBR 9.1 LTS, com API ou sem API",
     "Instalar a wheel do Photon como biblioteca vinculada ao compute na subida do cluster",
     "Escolher um tipo de instância Graviton, que força o Photon a ligar"
   ],
   "correct": 0,
-  "explanation": "Docs do Photon (última atualização em 2026-09-11): o Photon está habilitado por padrão em serverless, SQL warehouses e (desde o DBR 9.1 LTS) compute clássico criado pela UI, mas 'If you create these resources using the Clusters API or Jobs API, you must explicitly enable Photon by setting runtime_engine to PHOTON'. A opção B é o ponto cego clássico de IaC; C confunde um motor com uma biblioteca; D está errada - o suporte a Graviton (DBR 10.2+ com Photon) é ortogonal e você ainda não pode misturar Graviton e não-Graviton em um mesmo cluster."
+  "explanation": "Docs do Photon (última atualização em 2026-09-11): o Photon está habilitado por padrão em serverless, SQL warehouses e (desde o DBR 9.1 LTS) compute clássico criado pela UI, mas 'If you create these resources using the Clusters API or Jobs API, you must explicitly enable Photon by setting runtime_engine to PHOTON'. A opção B é o ponto cego clássico de IaC; C confunde um motor com uma biblioteca; D está errada: o suporte a Graviton (DBR 10.2+ com Photon) é ortogonal e você ainda não pode misturar Graviton e não-Graviton em um mesmo cluster."
 }
 ```
 
@@ -795,7 +795,7 @@ Três regras em torno dessa tabela:
   "question": "Um job de Structured Streaming com uma agregação em janela vai rodar inteiramente dentro do Photon assim que o Photon for habilitado, porque o Photon acelera todos os workloads de streaming.",
   "options": ["Verdadeiro", "Falso"],
   "correct": 1,
-  "explanation": "Falso. O Photon suporta apenas 'stateless streaming', para um sink Delta ou Parquet, a partir de fontes incluindo Delta, Parquet, CSV, JSON, Kafka e Kinesis - 'Stateful streaming is not supported' (docs .../compute/photon, 2026-09-11). Uma agregação em janela é stateful, então aquele operador cai transparentemente para o runtime Spark - comportamento correto, mas sem aceleração do Photon. O fallback é por operação, então o plano vai misturar operadores Photon e clássicos."
+  "explanation": "Falso. O Photon suporta apenas 'stateless streaming', para um sink Delta ou Parquet, a partir de fontes incluindo Delta, Parquet, CSV, JSON, Kafka e Kinesis - 'Stateful streaming is not supported' (docs.../compute/photon, 2026-09-11). Uma agregação em janela é stateful, então aquele operador cai transparentemente para o runtime Spark: comportamento correto, mas sem aceleração do Photon. O fallback é por operação, então o plano vai misturar operadores Photon e clássicos."
 }
 ```
 
@@ -805,13 +805,13 @@ Três regras em torno dessa tabela:
   "type": "multiple-choice",
   "question": "Duas instâncias on-demand r5.xlarge ficam ociosas em um instance pool por seis horas por dia. O que é cobrado?",
   "options": [
-    "Zero DBUs, mas as cobranças de instância da AWS continuam - pools não cobram DBUs enquanto as instâncias estão ociosas, a cobrança do provedor de instância se aplica",
+    "Zero DBUs, mas as cobranças de instância da AWS continuam: pools não cobram DBUs enquanto as instâncias estão ociosas, a cobrança do provedor de instância se aplica",
     "Custo total zero, porque instâncias em pool são capacidade reservada paga pela Databricks",
     "Cobranças cheias de DBU de All-Purpose, porque os nós estão anexados à capacidade de um cluster",
     "DBUs apenas enquanto as instâncias estão executando ativamente uma task do Spark, e nada além disso"
   ],
   "correct": 0,
-  "explanation": "'Databricks does not charge DBUs while instances are idle in the pool. Instance provider billing does apply' (docs .../pool best-practices, acesso 2026-10). Pools compram latência de subida e capacidade, não compute grátis: 2 x r5.xlarge a $0.252/h (us-east-1, lido em 2026-10-12) x 6 h x 30 dias = $181.44/mês na coluna da AWS com $0 de DBUs (o exemplo resolvido E3 usa uma ilustração de 6 horas da mesma regra). As opções B e D contradizem a frase citada; C confunde capacidade de pool com anexação a cluster - um nó ocioso de pool não é compute de cluster."
+  "explanation": "'Databricks does not charge DBUs while instances are idle in the pool. Instance provider billing does apply' (docs.../pool best-practices, acesso 2026-10). Pools compram latência de subida e capacidade, não compute grátis: 2 x r5.xlarge a $0.252/h (us-east-1, lido em 2026-10-12) x 6 h x 30 dias = $181.44/mês na coluna da AWS com $0 de DBUs (o exemplo resolvido E3 usa uma ilustração de 6 horas da mesma regra). As opções B e D contradizem a frase citada; C confunde capacidade de pool com anexação a cluster: um nó ocioso de pool não é compute de cluster."
 }
 ```
 
@@ -837,13 +837,13 @@ Três regras em torno dessa tabela:
   "type": "multiple-choice",
   "question": "Qual caminho de migração está bloqueado para jobs serverless, forçando job clusters clássicos segundo a página de limitações de outubro de 2026?",
   "options": [
-    "Uma task JAR que precisa de um driver JDBC customizado do Maven - tasks JAR/Spark Submit rodam em jobs clássicos, e coordenadas Maven não são suportadas em serverless",
+    "Uma task JAR que precisa de um driver JDBC customizado do Maven: tasks JAR/Spark Submit rodam em jobs clássicos, e coordenadas Maven não são suportadas em serverless",
     "Um notebook que lê tabelas Delta por external locations do Unity Catalog",
     "Um job Python usando Trigger.AvailableNow() e operações de DataFrame pandas",
     "Um pipeline rodando em SQL warehouses serverless em uma região AWS fora de us-east-1"
   ],
   "correct": 0,
-  "explanation": "A tabela de compute recomendado envia tasks JAR e Spark Submit para jobs clássicos, e a página de limitações de serverless afirma 'Maven coordinates are not supported', 'JAR libraries are not supported in notebooks … JAR tasks in jobs are supported', além de sem R, sem notebooks Scala/R, só Spark Connect (sem APIs RDD), runtime máximo de 7 dias, e SQL warehouses serverless suportados em todas as regiões AWS (docs, 10 de junho de 2026). As opções B, C e D são todos padrões serverless suportados - external locations do UC são de fato obrigatórias em serverless, AvailableNow é o gatilho recomendado, e o SQL serverless é independente de região na AWS."
+  "explanation": "A tabela de compute recomendado envia tasks JAR e Spark Submit para jobs clássicos, e a página de limitações de serverless afirma 'Maven coordinates are not supported', 'JAR libraries are not supported in notebooks … JAR tasks in jobs are supported', além de sem R, sem notebooks Scala/R, só Spark Connect (sem APIs RDD), runtime máximo de 7 dias, e SQL warehouses serverless suportados em todas as regiões AWS (docs, 10 de junho de 2026). As opções B, C e D são todos padrões serverless suportados: external locations do UC são de fato obrigatórias em serverless, AvailableNow é o gatilho recomendado, e o SQL serverless é independente de região na AWS."
 }
 ```
 
@@ -853,7 +853,7 @@ Três regras em torno dessa tabela:
   "type": "multiple-choice",
   "question": "Uma equipe habilita spark.dynamicAllocation.enabled ao lado do autoscaling da Databricks em um job cluster. O que a documentação avisa?",
   "options": [
-    "Não habilite Dynamic Allocation em compute que usa autoscaling da Databricks - os dois brigam pelo número de executores e produzem falhas NODES_LOST",
+    "Não habilite Dynamic Allocation em compute que usa autoscaling da Databricks: os dois brigam pelo número de executores e produzem falhas NODES_LOST",
     "Dynamic Allocation dobra automaticamente a taxa de DBU do cluster",
     "A combinação é exigida para o autoscaling otimizado escalar para baixo em no máximo 2 eventos",
     "É suportado, mas apenas quando o cluster está anexado a um instance pool"
@@ -869,7 +869,7 @@ Três regras em torno dessa tabela:
   "type": "multiple-choice",
   "question": "Você configura um pool de spot para um cluster de ETL. Qual arranjo é documentado como correto?",
   "options": [
-    "Workers do pool de spot (ou SPOT_WITH_FALLBACK), driver em um tipo on-demand - 'Do not use a pool with spot instances as your driver type' - com first_on_demand >= 1",
+    "Workers do pool de spot (ou SPOT_WITH_FALLBACK), driver em um tipo on-demand - 'Do not use a pool with spot instances as your driver type': com first_on_demand >= 1",
     "Driver e workers ambos do pool de spot puro, para maximizar o desconto",
     "Driver de um pool de spot com spot_bid_price_percent definido em 25 para limitar o risco de interrupção",
     "Workers em spot e o driver também em spot, contanto que o pool defina max_capacity alto o bastante"
@@ -885,10 +885,10 @@ Três regras em torno dessa tabela:
   "type": "multiple-choice",
   "question": "Usando a aritmética do exemplo resolvido E2 (12 DBU/h, 400 horas, 4 x m5.xlarge a $0.192/h, lista US out 2026), qual é a diferença mensal entre rodar o pipeline em um job cluster novo ($0.15/DBU) e em um all-purpose cluster existente ($0.55/DBU)?",
   "options": [
-    "$1,920 - cerca de 65% da fatura combinada de $2,947.20 de all-purpose - só pelo tipo de compute, já que a coluna da AWS é idêntica",
-    "$307.20 - a diferença entre as duas colunas da AWS",
-    "$0 - o mesmo tipo de instância sempre é cobrado na mesma taxa de DBU",
-    "$720 - exatamente o custo de DBU do job cluster, que é a economia inteira"
+    "$1,920: cerca de 65% da fatura combinada de $2,947.20 de all-purpose: só pelo tipo de compute, já que a coluna da AWS é idêntica",
+    "$307.20: a diferença entre as duas colunas da AWS",
+    "$0: o mesmo tipo de instância sempre é cobrado na mesma taxa de DBU",
+    "$720, exatamente o custo de DBU do job cluster, que é a economia inteira"
   ],
   "correct": 0,
   "explanation": "4 nós x 3 DBU/h (emissão ilustrativa do próprio exemplo resolvido da Databricks, blog 2022-10-18) = 12 DBU/h; 12 x 400 = 4,800 DBU. Jobs: 4,800 x 0.15 = $720 + AWS $307.20 = $1,027.20. All-purpose: 4,800 x 0.55 = $2,640 + AWS $307.20 = $2,947.20. Diferença = $1,920 (65% do total de all-purpose). A opção B é a coluna da AWS (idêntica nas duas, logo não pode ser a diferença); C é a falsa ideia testada; D confunde um componente de custo com o delta."
@@ -904,7 +904,7 @@ Três regras em torno dessa tabela:
     "Crie pools de driver on-demand e de workers SPOT_WITH_FALLBACK dimensionados para a demanda real, mantendo o tamanho máximo do cluster dentro do max_capacity do pool",
     "Mantenha as tasks de produção em serverless jobs por padrão em vez de all-purpose, recorrendo a job clusters clássicos apenas onde a lista de limitações força",
     "Verifique em system.billing.usage que a mistura sku/run_as migra de All-Purpose para Jobs e serverless, e defina budgets com quatro thresholds",
-    "Ajuste o right-sizing e faça tuning: janelas de autoscale, Photon onde ele ajuda, workers em spot para stages de latência laxa - agora seguro porque os guardrails seguram"
+    "Ajuste o right-sizing e faça tuning: janelas de autoscale, Photon onde ele ajuda, workers em spot para stages de latência laxa: agora seguro porque os guardrails seguram"
   ],
   "correctOrder": [
     "Escreva e revise o JSON da cluster policy: gate de cluster_type, range de dbus_per_hour, allowlist de nós, autotermination, custom_tags impostos",
@@ -912,9 +912,9 @@ Três regras em torno dessa tabela:
     "Crie pools de driver on-demand e de workers SPOT_WITH_FALLBACK dimensionados para a demanda real, mantendo o tamanho máximo do cluster dentro do max_capacity do pool",
     "Mantenha as tasks de produção em serverless jobs por padrão em vez de all-purpose, recorrendo a job clusters clássicos apenas onde a lista de limitações força",
     "Verifique em system.billing.usage que a mistura sku/run_as migra de All-Purpose para Jobs e serverless, e defina budgets com quatro thresholds",
-    "Ajuste o right-sizing e faça tuning: janelas de autoscale, Photon onde ele ajuda, workers em spot para stages de latência laxa - agora seguro porque os guardrails seguram"
+    "Ajuste o right-sizing e faça tuning: janelas de autoscale, Photon onde ele ajuda, workers em spot para stages de latência laxa: agora seguro porque os guardrails seguram"
   ],
-  "explanation": "Governança antes de otimização: uma policy que ninguém consegue contornar (e cuja backdoor Unrestricted está suprimida - blog, 2025-04-17) torna toda economia posterior impositiva e não apenas advisory. Pools vêm em seguida porque definem o envelope de capacidade que a policy precisa respeitar (max_capacity contra max_workers, senão INSTANCE_POOL_MAX_CAPACITY_FAILURE). A escolha de SKU (serverless por padrão, jobs para tasks só-clássicas) é a alavancagem de 65% do exemplo resolvido E2 e deve preceder o micro-tuning; a medição via system.billing.usage com tags comprova a mudança e os budgets (monitoramento, não limites) alertam sobre regressões; o tuning de performance vem por último para que seu efeito seja mensurável contra uma baseline estável."
+  "explanation": "Governança antes de otimização: uma policy que ninguém consegue contornar (e cuja backdoor Unrestricted está suprimida: blog, 2025-04-17) torna toda economia posterior impositiva e não apenas advisory. Pools vêm em seguida porque definem o envelope de capacidade que a policy precisa respeitar (max_capacity contra max_workers, senão INSTANCE_POOL_MAX_CAPACITY_FAILURE). A escolha de SKU (serverless por padrão, jobs para tasks só-clássicas) é a alavancagem de 65% do exemplo resolvido E2 e deve preceder o micro-tuning; a medição via system.billing.usage com tags comprova a mudança e os budgets (monitoramento, não limites) alertam sobre regressões; o tuning de performance vem por último para que seu efeito seja mensurável contra uma baseline estável."
 }
 ```
 
@@ -923,10 +923,10 @@ Três regras em torno dessa tabela:
   "question": "Associe cada tipo de compute à sua regra de cobrança e ao seu controle em outubro de 2026:",
   "pairs": [
     {"left": "Job cluster novo", "right": "Precificação de Jobs Compute (lista US $0.15/DBU) - workload automático, encerrado quando a execução termina, EC2 cobrado separadamente"},
-    {"left": "All-purpose cluster existente", "right": "Precificação de All-Purpose Compute ($0.55/DBU) e classificado como interativo - mesmo quando quem chama é um job agendado"},
+    {"left": "All-purpose cluster existente", "right": "Precificação de All-Purpose Compute ($0.55/DBU) e classificado como interativo: mesmo quando quem chama é um job agendado"},
     {"left": "SQL warehouse (classic/pro)", "right": "Cobrado enquanto ligado a $0.22/$0.55 por DBU com padrão de auto-stop de 45 min, workers são i3.2xlarge, início ~4 minutos"},
     {"left": "Job / notebook serverless", "right": "$0.35 jobs serverless / $0.75 all-purpose serverless por DBU, máquina embutida na taxa, sem fatura de EC2, runtime máximo de 7 dias"},
-    {"left": "Instance pool, ocioso", "right": "Zero DBUs enquanto ocioso - as cobranças de instância da AWS se aplicam, então pools deslocam custo entre as colunas em vez de eliminá-lo"}
+    {"left": "Instance pool, ocioso", "right": "Zero DBUs enquanto ocioso: as cobranças de instância da AWS se aplicam, então pools deslocam custo entre as colunas em vez de eliminá-lo"}
   ],
   "explanation": "Cada linha é um medidor diferente: o tipo de compute define o SKU (Jobs API 2.0, página datada de 2026-08-03), o uptime do warehouse define o relógio ('Idle SQL warehouses continue to accumulate DBU and cloud instance charges until they are stopped'), o serverless embute a máquina em uma taxa por DBU mais alta, e os pools não cobram DBUs enquanto ociosos mas ainda custam dinheiro da AWS. Respostas-armadilha: tratar todos os quatro como 'só DBU x horas', ou assumir que um job herda a taxa de jobs independentemente do cluster para o qual ele aponta."
 }
@@ -939,12 +939,12 @@ Três regras em torno dessa tabela:
   "question": "Um notebook de produção roda %pip install great-expectations==1.1.0 na primeira célula, em um job cluster que é recriado a cada execução. Qual é a estratégia correta de dependência?",
   "options": [
     "Declarar a dependência em nível de task ou de cluster (ou via job environments) para que job clusters novos a tenham; %pip é vinculado ao notebook, não persiste e pode exigir dbutils.library.restartPython() de qualquer forma",
-    "Manter o %pip - bibliotecas vinculadas ao notebook persistem no cluster pela vida útil do workspace",
+    "Manter o %pip: bibliotecas vinculadas ao notebook persistem no cluster pela vida útil do workspace",
     "Enviar o arquivo egg para a raiz do DBFS para que toda execução possa instalar de lá",
     "Instalá-la como biblioteca de workspace, que é o escopo atualmente recomendado"
   ],
   "correct": 0,
-  "explanation": "Bibliotecas vinculadas ao notebook 'do not persist and must be re-installed for each session' e 'JARs cannot be installed at the notebook level' (docs .../libraries, 2026-09-11); um job cluster criado do zero a cada execução significa que a célula %pip é a única coisa entre o job e um ImportError - dependências declarativas de task/cluster/environment são a resposta de produção (best practices: evite instalações vinculadas ao compute onde environments/deps de job bastam). A opção B afirma errado a persistência; C está bloqueado porque 'storing library files in the DBFS root is deprecated and disabled by default in Databricks Runtime 15.1 and above'; D está errada - 'Workspace libraries have been deprecated and should not be used'."
+  "explanation": "Bibliotecas vinculadas ao notebook 'do not persist and must be re-installed for each session' e 'JARs cannot be installed at the notebook level' (docs.../libraries, 2026-09-11); um job cluster criado do zero a cada execução significa que a célula %pip é a única coisa entre o job e um ImportError: dependências declarativas de task/cluster/environment são a resposta de produção (best practices: evite instalações vinculadas ao compute onde environments/deps de job bastam). A opção B afirma errado a persistência; C está bloqueado porque 'storing library files in the DBFS root is deprecated and disabled by default in Databricks Runtime 15.1 and above'; D está errada - 'Workspace libraries have been deprecated and should not be used'."
 }
 ```
 

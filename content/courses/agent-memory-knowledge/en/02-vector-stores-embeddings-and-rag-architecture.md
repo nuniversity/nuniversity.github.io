@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Vector Stores, Embeddings and RAG Architecture
 
-Retrieval-Augmented Generation (RAG) is the dominant pattern for grounding LLM responses in external knowledge. At its core are **embeddings** — numerical representations of meaning — and **vector databases** that index and search them.
+Retrieval-Augmented Generation (RAG) is the dominant pattern for grounding LLM responses in external knowledge. At its core are **embeddings**, numerical representations of meaning, and **vector databases** that index and search them.
 
 ---
 
@@ -32,7 +32,7 @@ An embedding is a dense vector (list of floats) that captures the semantic meani
 Embedding models (e.g., `text-embedding-3-small`, `all-MiniLM-L6-v2`) map text to a fixed-size vector regardless of input length.
 
 [!NOTE]
-Embedding models have a maximum input token limit (typically 512 tokens for open-source models, 8192 for OpenAI's `text-embedding-3-large`). Documents longer than this limit must be split into chunks before embedding — this is why chunking is a critical part of any RAG pipeline.
+Embedding models have a maximum input token limit (typically 512 tokens for open-source models, 8192 for OpenAI's `text-embedding-3-large`). Documents longer than this limit must be split into chunks before embedding; this is why chunking is a critical part of any RAG pipeline.
 
 ### Common Embedding Models
 
@@ -108,7 +108,7 @@ print(f"Full: {len(embeddings_3072.data[0].embedding)} dims")
 | 3072 | ~12 GB | Slowest | ~100% | Maximum accuracy (default for 3-large) |
 
 [!TIP]
-Always test with reduced dimensions before committing to the full vector size. Many applications retain >95% accuracy at 256-512 dimensions, dramatically reducing storage and speeding up search. OpenAI's `text-embedding-3` models support native dimensionality reduction via the `dimensions` parameter — no post-processing needed.
+Always test with reduced dimensions before committing to the full vector size. Many applications retain >95% accuracy at 256-512 dimensions, dramatically reducing storage and speeding up search. OpenAI's `text-embedding-3` models support native dimensionality reduction via the `dimensions` parameter: no post-processing needed.
 
 ---
 
@@ -207,7 +207,7 @@ semantic_splitter = SentenceTransformersTokenTextSplitter(
 
 ## Approximate Nearest Neighbor (ANN) Algorithms
 
-Vector databases do not perform exact nearest-neighbor search at scale — that would be too slow for millions of vectors. Instead, they use **Approximate Nearest Neighbor** algorithms that trade a small amount of accuracy for massive speed gains.
+Vector databases do not perform exact nearest-neighbor search at scale; that would be too slow for millions of vectors. Instead, they use **Approximate Nearest Neighbor** algorithms that trade a small amount of accuracy for massive speed gains.
 
 | Algorithm | Speed | Accuracy | Memory Use | Supported By |
 | :--- | :--- | :--- | :--- | :--- |
@@ -244,7 +244,7 @@ collection = client.create_collection(
 ```
 
 [!NOTE]
-For datasets under 10,000 vectors, brute-force exact search is often fast enough and eliminates the accuracy trade-off. For datasets in the millions, HNSW is the current gold standard — it offers the best speed/accuracy balance. IVF with product quantization (IVFPQ) is preferred when memory is constrained.
+For datasets under 10,000 vectors, brute-force exact search is often fast enough and eliminates the accuracy trade-off. For datasets in the millions, HNSW is the current gold standard; it offers the best speed/accuracy balance. IVF with product quantization (IVFPQ) is preferred when memory is constrained.
 
 ---
 
@@ -263,7 +263,7 @@ Vector databases specialize in storing embedding vectors and performing fast nea
 | Scalability | Single-node | Auto-scaling | Horizontal sharding | Horizontal sharding |
 
 [!TIP]
-For prototyping and local development, Chroma is the best choice — it runs embedded with zero infrastructure. For production at scale, Pinecone or Qdrant offer managed auto-scaling. Qdrant is preferred if you need self-hosting.
+For prototyping and local development, Chroma is the best choice; it runs embedded with zero infrastructure. For production at scale, Pinecone or Qdrant offer managed auto-scaling. Qdrant is preferred if you need self-hosting.
 
 ---
 
@@ -371,7 +371,7 @@ print(rag_answer("What is the return policy?"))
 ```
 
 [!WARNING]
-A common RAG failure mode is context stuffing — putting too many retrieved chunks into the prompt, which dilutes the signal-to-noise ratio. Retrieve only the top-k most relevant chunks (k=3 to 5 is typical), and consider adding a relevance score threshold to filter out low-quality matches.
+A common RAG failure mode is context stuffing: putting too many retrieved chunks into the prompt, which dilutes the signal-to-noise ratio. Retrieve only the top-k most relevant chunks (k=3 to 5 is typical), and consider adding a relevance score threshold to filter out low-quality matches.
 
 ---
 

@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Capstone Project: Library Database
 
-You've learned all the fundamentals. Now it's time to put them together into a complete project — from database design through to analytical queries.
+You've learned all the fundamentals. Now it's time to put them together into a complete project: from database design through to analytical queries.
 
 ## Project Overview
 
@@ -16,7 +16,7 @@ Build a database for a public library that tracks:
 - **Books** in the catalog
 - **Authors** who wrote them
 - **Members** who borrow books
-- **Loans** — who borrowed what and when
+- **Loans**; who borrowed what and when
 
 ## Step 1: Database Design
 
@@ -319,7 +319,7 @@ Here's what Query 1 should return (assuming current date is late June 2024):
 | 1984 | Eve Martinez | 2024-06-15 | 2024-06-29 | 25 |
 
 > [!NOTE]
-> These queries use SQLite functions (`julianday`, `strftime`, `DATE`). In PostgreSQL you'd use `EXTRACT`, `TO_CHAR`, and `INTERVAL`. In MySQL, `DATEDIFF` and `DATE_FORMAT`. The logic is the same — only the syntax differs.
+> These queries use SQLite functions (`julianday`, `strftime`, `DATE`). In PostgreSQL you'd use `EXTRACT`, `TO_CHAR`, and `INTERVAL`. In MySQL, `DATEDIFF` and `DATE_FORMAT`. The logic is the same: only the syntax differs.
 
 ## Extension Challenges
 

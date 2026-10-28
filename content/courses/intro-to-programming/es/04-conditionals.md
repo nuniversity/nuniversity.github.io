@@ -70,7 +70,7 @@ if (puntuacion >= 90) {
 | `>=` | Mayor o igual | `10 >= 10` |
 | `<=` | Menor o igual | `5 <= 10` |
 
-Prefiere siempre `===` sobre `==` — la igualdad estricta verifica valor y tipo.
+Prefiere siempre `===` sobre `==`: la igualdad estricta verifica valor y tipo.
 
 ## Operadores Lógicos
 
@@ -89,9 +89,9 @@ if (edad < 18 || !tieneLicencia) {
 }
 ```
 
-- `&&` — ambos deben ser verdaderos
-- `||` — al menos uno debe ser verdadero
-- `!` — invierte un booleano
+- `&&`: ambos deben ser verdaderos
+- `||`: al menos uno debe ser verdadero
+- `!`: invierte un booleano
 
 ## La Sentencia switch
 

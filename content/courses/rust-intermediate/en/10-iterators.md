@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Iterators
 
-Iterators are Rust's idiomatic way to process sequences of values. They're lazy, composable, and compile down to efficient machine code — often faster than hand-written loops.
+Iterators are Rust's idiomatic way to process sequences of values. They're lazy, composable, and compile down to efficient machine code: often faster than hand-written loops.
 
 ## The Iterator Trait
 
@@ -99,7 +99,7 @@ fn main() {
 
 ## Iterator Adapters (Lazy)
 
-Adapters transform an iterator into another iterator. They're **lazy** — nothing happens until a consuming adapter is called:
+Adapters transform an iterator into another iterator. They're **lazy**: nothing happens until a consuming adapter is called:
 
 ```rust
 fn main() {
@@ -236,7 +236,7 @@ fn main() {
 }
 ```
 
-## Performance — Iterators vs Loops
+## Performance: Iterators vs Loops
 
 Rust's iterators compile to the same machine code as hand-written loops:
 

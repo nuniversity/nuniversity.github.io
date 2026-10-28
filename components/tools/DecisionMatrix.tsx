@@ -272,14 +272,14 @@ const DecisionMatrix = ({ lang = 'en', dict = {} }: DecisionMatrixProps) => {
                           );
                         })}
                         <td className={`p-3 text-center font-bold text-lg ${isBest ? 'text-emerald-600' : ''}`}>
-                          {result.weightedScore > 0 ? result.weightedScore.toFixed(1) : '—'}
+                          {result.weightedScore > 0 ? result.weightedScore.toFixed(1) : ', '}
                         </td>
                         <td className="p-3 text-center">
                           {allScored && result.weightedScore > 0 ? (
                             <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full font-bold text-sm ${isBest ? 'bg-emerald-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'}`}>
                               {idx + 1}
                             </span>
-                          ) : '—'}
+                          ) : ', '}
                         </td>
                       </tr>
                     );

@@ -10,7 +10,7 @@ difficulty: avanzado
 
 ## Todo es un Objeto
 
-En Python, las clases también son objetos — instancias de una metaclase (predeterminado: `type`).
+En Python, las clases también son objetos: instancias de una metaclase (predeterminado: `type`).
 
 ```python
 class MyClass:

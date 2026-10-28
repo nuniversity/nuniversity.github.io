@@ -1,6 +1,6 @@
 ---
 title: "SQL Agents"
-description: "Build SQL query agents with LangGraph — database tool binding, text-to-SQL generation, query validation and execution, and result interpretation."
+description: "Build SQL query agents with LangGraph, database tool binding, text-to-SQL generation, query validation and execution, and result interpretation."
 order: 5
 duration: "40 minutes"
 difficulty: "advanced"
@@ -238,7 +238,7 @@ print(result["messages"][-1].content)
 ```
 
 [!SUCCESS]
-The agent autonomously discovers the schema, generates SQL, validates and executes it, then explains the results — all in a loop until the user's question is answered.
+The agent autonomously discovers the schema, generates SQL, validates and executes it, then explains the results: all in a loop until the user's question is answered.
 
 ---
 
@@ -436,7 +436,7 @@ Track error attempts in state. After N failures, try a different approach (simpl
     "It caches query results"
   ],
   "correct": 1,
-  "explanation": "The LLM cannot generate valid SQL without knowing the database schema — what tables exist, what columns they have, and their data types."
+  "explanation": "The LLM cannot generate valid SQL without knowing the database schema: what tables exist, what columns they have, and their data types."
 }
 ```
 

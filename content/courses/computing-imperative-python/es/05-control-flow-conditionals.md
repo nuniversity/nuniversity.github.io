@@ -229,13 +229,13 @@ Score:  45 → Grade: F
 > [!WARNING]
 > ¡Las condiciones se comprueban en orden! En cuanto se encuentra una condición verdadera, el resto se omite. Esto significa:
 > ```python
-> # WRONG ORDER - always returns "A"
+> # WRONG ORDER: always returns "A"
 > if score >= 60:
 >     return "D"  # 95 >= 60 is True, so this executes!
 > elif score >= 90:
 >     return "A"  # Never reached
 > 
-> # CORRECT ORDER - check highest first
+> # CORRECT ORDER: check highest first
 > if score >= 90:
 >     return "A"
 > elif score >= 60:

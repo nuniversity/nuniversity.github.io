@@ -1,12 +1,12 @@
 ---
-title: "Dominio 4.3 — Caché en Snowflake"
+title: "Dominio 4.3, Caché en Snowflake"
 description: "Domina el sistema de caché de tres capas de Snowflake: Caché de Resultados de Consulta (capa de Cloud Services), Caché de Metadatos y Caché del Warehouse (disco local). Comprende cuándo se usa cada caché y cómo aprovecharlas."
 order: 15
 difficulty: intermediate
 duration: "45 min"
 ---
 
-# Dominio 4.3 — Caché en Snowflake
+# Dominio 4.3: Caché en Snowflake
 
 ## Peso en el Examen
 
@@ -37,7 +37,7 @@ flowchart TD
 
 ## Caché 1: Caché de Resultados de Consulta (*Query Result Cache*)
 
-La **Caché de Resultados de Consulta** almacena el **conjunto de resultados completo** de una consulta y lo devuelve instantáneamente si se vuelve a enviar la misma consulta exacta — **sin ejecutar la consulta en absoluto** y **sin usar el Virtual Warehouse**.
+La **Caché de Resultados de Consulta** almacena el **conjunto de resultados completo** de una consulta y lo devuelve instantáneamente si se vuelve a enviar la misma consulta exacta; **sin ejecutar la consulta en absoluto** y **sin usar el Virtual Warehouse**.
 
 ### Cómo Funciona
 
@@ -113,7 +113,7 @@ La **Caché de Metadatos** almacena **estadísticas de tablas y metadatos de obj
 
 ### Consultas de Solo Metadatos (No Se Necesita Warehouse)
 
-Estas consultas se responden completamente desde la caché de metadatos — no se requiere Virtual Warehouse:
+Estas consultas se responden completamente desde la caché de metadatos: no se requiere Virtual Warehouse:
 
 ```sql
 -- Conteo de filas (solo metadatos)
@@ -132,7 +132,7 @@ WHERE TABLE_NAME = 'ORDERS';
 ```
 
 > [!NOTE]
-> `COUNT(*)` sobre una tabla sin cláusula WHERE se responde desde la caché de metadatos — **sin consumo de créditos del warehouse**. Este es un detalle frecuente en el examen: `COUNT(*)` = gratuito; `COUNT(nombre_columna)` con verificaciones de no-nulo puede requerir cómputo.
+> `COUNT(*)` sobre una tabla sin cláusula WHERE se responde desde la caché de metadatos; **sin consumo de créditos del warehouse**. Este es un detalle frecuente en el examen: `COUNT(*)` = gratuito; `COUNT(nombre_columna)` con verificaciones de no-nulo puede requerir cómputo.
 
 ### Cómo la Caché de Metadatos Potencia la Poda
 
@@ -160,7 +160,7 @@ La **Caché del Warehouse** (también llamada **caché de disco local** o **cach
 
 - Cuando se lee una micro-partición desde el almacenamiento, se almacena en el SSD local del warehouse
 - Las consultas posteriores que necesitan la misma micro-partición leen desde la **caché local** en lugar del cloud storage → mucho más rápido
-- La caché vive en el warehouse — **cuando el warehouse se suspende, la caché se pierde**
+- La caché vive en el warehouse: **cuando el warehouse se suspende, la caché se pierde**
 
 ### Implicaciones
 
@@ -190,7 +190,7 @@ ALTER WAREHOUSE WH_BI SET AUTO_SUSPEND = 600;  -- 10 minutos
 ### Multi-Cluster Warehouses y la Caché
 
 > [!NOTE]
-> Cada clúster en un multi-cluster warehouse mantiene su **propia caché separada**. Los datos en caché en el Clúster 1 no están disponibles para el Clúster 2. Por eso el enrutamiento de consultas en configuraciones multi-cluster es importante — enrutar consultas similares al mismo clúster maximiza los aciertos de caché.
+> Cada clúster en un multi-cluster warehouse mantiene su **propia caché separada**. Los datos en caché en el Clúster 1 no están disponibles para el Clúster 2. Por eso el enrutamiento de consultas en configuraciones multi-cluster es importante: enrutar consultas similares al mismo clúster maximiza los aciertos de caché.
 
 ---
 
@@ -218,7 +218,7 @@ Cuando una consulta se ejecuta, Snowflake verifica las cachés en este orden:
 **P1.** Una consulta ejecutada a las 10:00 AM devuelve resultados y el resultado se almacena en caché. La misma consulta exacta se ejecuta a las 9:00 AM del día siguiente. ¿Qué sucede?
 
 - A) El resultado en caché se devuelve instantáneamente ✅
-- B) La consulta se re-ejecuta porque han pasado más de 24 horas — las 10:00 AM es exactamente 23 horas antes a las 9:00 AM del día siguiente
+- B) La consulta se re-ejecuta porque han pasado más de 24 horas: las 10:00 AM es exactamente 23 horas antes a las 9:00 AM del día siguiente
 - C) La consulta falla porque la caché expiró
 - D) La caché de resultados solo funciona dentro de la misma sesión
 

@@ -60,7 +60,7 @@ Today, flowcharts are used across virtually every industry:
 
 ### 1. Visual Communication
 
-A flowchart can communicate a complex process in seconds — something that might take pages of text to describe.
+A flowchart can communicate a complex process in seconds: something that might take pages of text to describe.
 
 ```
 Text Description:                    Flowchart:
@@ -78,10 +78,10 @@ Text Description:                    Flowchart:
 ### 2. Process Analysis
 
 Flowcharts make it easy to spot:
-- **Redundancies** — Steps that are repeated unnecessarily
-- **Bottlenecks** — Points where work piles up
-- **Missing steps** — Gaps in the process
-- **Unnecessary complexity** — Overly complicated paths
+- **Redundancies**: Steps that are repeated unnecessarily
+- **Bottlenecks**: Points where work piles up
+- **Missing steps**: Gaps in the process
+- **Unnecessary complexity**: Overly complicated paths
 
 ### 3. Team Alignment
 
@@ -300,10 +300,10 @@ For each scenario, determine which type of flowchart would be most appropriate:
 <details>
 <summary>Click to see answers</summary>
 
-1. **Swimlane flowchart** — Multiple departments involved
-2. **Basic flowchart** — Simple sequential process
-3. **Data flow diagram** — Focus on data movement
-4. **Decision flowchart** — Heavy decision logic
+1. **Swimlane flowchart**: Multiple departments involved
+2. **Basic flowchart**: Simple sequential process
+3. **Data flow diagram**: Focus on data movement
+4. **Decision flowchart**: Heavy decision logic
 
 </details>
 
@@ -336,8 +336,8 @@ Start → Step A → Step B → {Condition?} →|Yes| Step C → Step D → End
 - Flowcharts improve **communication**, **analysis**, **alignment**, and **documentation**
 - Use flowcharts for **onboarding**, **debugging**, **designing**, and **improving** processes
 - Choose the right **type of flowchart** for your situation
-- Keep flowcharts **simple** — break complex ones into sub-flowcharts
+- Keep flowcharts **simple**: break complex ones into sub-flowcharts
 - In the next lesson, we'll learn the **standard symbols** used in flowcharts
 
 > [!SUCCESS] You've Completed Lesson 3
-> You now understand what flowcharts are, why they're valuable, and when to use them. In the next lesson, we'll dive deep into **flowchart symbols and notation** — the visual vocabulary that makes flowcharts universal.
+> You now understand what flowcharts are, why they're valuable, and when to use them. In the next lesson, we'll dive deep into **flowchart symbols and notation**: the visual vocabulary that makes flowcharts universal.

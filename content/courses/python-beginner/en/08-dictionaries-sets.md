@@ -123,7 +123,7 @@ print(3 in a)    # Membership test (very fast!)
 ```
 
 > [!NOTE]
-> Sets are optimized for membership testing (`in`) — O(1) average vs O(n) for lists. Use sets when order doesn't matter and duplicates shouldn't exist.
+> Sets are optimized for membership testing (`in`), O(1) average vs O(n) for lists. Use sets when order doesn't matter and duplicates shouldn't exist.
 
 ## Real-World Use Cases
 

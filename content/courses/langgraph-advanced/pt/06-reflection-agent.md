@@ -1,6 +1,6 @@
 ---
 title: "Padrão de Agente Reflexivo"
-description: "Implemente o padrão de reflexão em LangGraph — loops de gerar, criticar e refinar para agentes que melhoram iterativamente sua saída."
+description: "Implemente o padrão de reflexão em LangGraph, loops de gerar, criticar e refinar para agentes que melhoram iterativamente sua saída."
 order: 6
 duration: "35 min"
 difficulty: "advanced"
@@ -384,7 +384,7 @@ app = builder.compile()
   "type": "multiple-choice",
   "question": "What risk should you mitigate in the reflection loop?",
   "options": [
-    "Token overuse — each iteration adds LLM calls",
+    "Token overuse: each iteration adds LLM calls",
     "The loop might converge too fast",
     "Output quality decreases with iterations",
     "The critique is always positive"
@@ -433,7 +433,7 @@ app = builder.compile()
   "question": "Can the reflection pattern be applied to agent decisions, not just text?",
   "options": [
     "No, it only works for text generation",
-    "Yes — the agent can critique its own decisions and choose alternative strategies",
+    "Yes: the agent can critique its own decisions and choose alternative strategies",
     "Only for code",
     "Only for writing"
   ],
@@ -446,7 +446,7 @@ app = builder.compile()
 
 [!SUCCESS]
 ### Principais Conclusões
-- Padrão de reflexão: gerar → criticar → refinar — melhorando a saída de forma iterativa
+- Padrão de reflexão: gerar → criticar → refinar: melhorando a saída de forma iterativa
 - O feedback da crítica é passado como contexto para o próximo prompt de geração
 - A pontuação estruturada permite acompanhamento quantitativo da qualidade e encerramento antecipado
 - Críticas com múltiplas perspectivas capturam diferentes tipos de problemas

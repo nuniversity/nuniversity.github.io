@@ -1,12 +1,12 @@
 ---
-title: "Domain 1.2 — Snowflake Interfaces and Tools"
+title: "Domain 1.2, Snowflake Interfaces and Tools"
 description: "Learn the primary interfaces for interacting with Snowflake: Snowsight (web UI), Snowflake CLI, and IDE integrations. Understand when and why to use each."
 order: 2
 difficulty: intermediate
 duration: "45 min"
 ---
 
-# Domain 1.2 — Snowflake Interfaces and Tools
+# Domain 1.2: Snowflake Interfaces and Tools
 
 ## Exam Weight
 
@@ -19,7 +19,7 @@ duration: "45 min"
 
 ## Overview of Snowflake Interfaces
 
-Snowflake can be accessed through multiple interfaces depending on the use case — interactive analysis, scripting, automation, or development workflows.
+Snowflake can be accessed through multiple interfaces depending on the use case: interactive analysis, scripting, automation, or development workflows.
 
 ```mermaid
 flowchart LR
@@ -54,7 +54,7 @@ flowchart LR
 
 ---
 
-## Snowsight — The Web Interface
+## Snowsight: The Web Interface
 
 **Snowsight** is Snowflake's modern, browser-based SQL development and analytics interface. It replaced the older "Classic Console" and is now the primary web UI.
 
@@ -62,12 +62,12 @@ flowchart LR
 
 **Worksheets**
 - Write and execute SQL with syntax highlighting and auto-complete
-- Multi-statement execution — run individual statements or entire scripts
+- Multi-statement execution: run individual statements or entire scripts
 - Query results rendered as tables, with column statistics inline
 - Share worksheets with teammates
 
 **Dashboards**
-- Build visual dashboards from query results — charts, scorecards, tables
+- Build visual dashboards from query results: charts, scorecards, tables
 - Schedule automatic refresh of dashboard data
 - No external BI tool required for basic visualizations
 
@@ -168,7 +168,7 @@ snow stage copy ./local_file.csv @MY_STAGE/
 
 ---
 
-## SnowSQL — Legacy CLI
+## SnowSQL: Legacy CLI
 
 **SnowSQL** is the original command-line client for Snowflake. While still supported and widely used, the newer Snowflake CLI is preferred for new projects.
 
@@ -198,7 +198,7 @@ The **Snowflake VS Code Extension** provides a rich development experience direc
 - Connect to one or more Snowflake accounts
 - Browse Snowflake objects (databases, schemas, tables) in the sidebar
 - Execute SQL queries and view results inline
-- **Snowpark** development — write Python/Java/Scala Snowpark code with Snowflake context-aware autocomplete
+- **Snowpark** development: write Python/Java/Scala Snowpark code with Snowflake context-aware autocomplete
 - Debug and run Snowpark functions locally before deploying
 
 **Installation:**
@@ -328,8 +328,8 @@ For programmatic access, Snowflake provides official drivers and connectors:
 
 > [!SUCCESS]
 > **Key Takeaways for Exam Day:**
-> 1. **Snowsight** = primary web UI — worksheets, dashboards, query history, notebooks
-> 2. **Snowflake CLI** (`snow`) = modern CLI — best for CI/CD, Snowpark deployment
-> 3. **SnowSQL** = legacy CLI — still valid, file-based execution
+> 1. **Snowsight** = primary web UI: worksheets, dashboards, query history, notebooks
+> 2. **Snowflake CLI** (`snow`) = modern CLI: best for CI/CD, Snowpark deployment
+> 3. **SnowSQL** = legacy CLI: still valid, file-based execution
 > 4. **VS Code Extension** = developer IDE integration with Snowpark support
 > 5. **Query Profile** in Snowsight = go-to tool for diagnosing query performance issues

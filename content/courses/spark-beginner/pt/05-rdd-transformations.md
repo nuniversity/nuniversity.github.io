@@ -8,7 +8,7 @@ difficulty: "iniciante"
 
 # Transformações RDD
 
-Transformações criam novos RDDs a partir de existentes. Elas são **preguiçosas** — Spark registra a operação mas não a executa até que uma ação dispare a computação. Isso permite que o otimizador Catalyst (para DataFrames) e o agendador DAG construam planos de execução eficientes.
+Transformações criam novos RDDs a partir de existentes. Elas são **preguiçosas**: Spark registra a operação mas não a executa até que uma ação dispare a computação. Isso permite que o otimizador Catalyst (para DataFrames) e o agendador DAG construam planos de execução eficientes.
 
 ## Tipos de Transformações
 

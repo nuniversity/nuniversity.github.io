@@ -1,6 +1,6 @@
 ---
 title: "DDD Implementation in Python"
-description: "Complete end-to-end DDD implementation of an e-commerce domain model in Python, integrating all tactical patterns — Entities, Value Objects, Aggregates, Repositories, Domain Services, and Domain Events"
+description: "Complete end-to-end DDD implementation of an e-commerce domain model in Python, integrating all tactical patterns, Entities, Value Objects, Aggregates, Repositories, Domain Services, and Domain Events"
 order: 8
 duration: "75 minutes"
 difficulty: "advanced"
@@ -11,7 +11,7 @@ difficulty: "advanced"
 This final lesson brings together **everything** you have learned in the course: Ubiquitous Language, Bounded Contexts, Entities, Value Objects, Aggregates, Repositories, Domain Services, and Domain Events. We will build a complete e-commerce domain model in Python.
 
 > [!NOTE]
-> This is not a "toy" example. The code is production-quality and follows real-world DDD practices. Every pattern is used where it belongs. The focus is on the domain layer — infrastructure concerns (database, web framework, message broker) are abstracted behind interfaces.
+> This is not a "toy" example. The code is production-quality and follows real-world DDD practices. Every pattern is used where it belongs. The focus is on the domain layer: infrastructure concerns (database, web framework, message broker) are abstracted behind interfaces.
 
 ## Project Structure
 

@@ -8,7 +8,7 @@ duration: "45 min"
 
 # Data Sharing & Collaboration
 
-> **Bottom Line:** Snowflake's data sharing is architecturally superior for sharing governed, live data across organisations — it's a genuine competitive moat. Databricks Delta Sharing is a strong open-standards alternative. AWS requires significant engineering to achieve equivalent cross-account sharing.
+> **Bottom Line:** Snowflake's data sharing is architecturally superior for sharing governed, live data across organisations; it's a genuine competitive moat. Databricks Delta Sharing is a strong open-standards alternative. AWS requires significant engineering to achieve equivalent cross-account sharing.
 
 ---
 
@@ -38,7 +38,7 @@ Paradigm 3: LIVE REFERENCE SHARING (modern)
 
 ## 8.2 Snowflake Data Sharing
 
-Snowflake's sharing model is its strongest competitive differentiator. Data is shared by **granting access to Snowflake's internal storage layer** — no data movement, no ETL, no file exports.
+Snowflake's sharing model is its strongest competitive differentiator. Data is shared by **granting access to Snowflake's internal storage layer**: no data movement, no ETL, no file exports.
 
 ### Direct Sharing Between Snowflake Accounts
 
@@ -150,7 +150,7 @@ How it works:
 
 ## 8.3 Databricks Delta Sharing
 
-Delta Sharing is an open protocol (Linux Foundation) for sharing Delta Lake data across platforms — not just Databricks-to-Databricks:
+Delta Sharing is an open protocol (Linux Foundation) for sharing Delta Lake data across platforms: not just Databricks-to-Databricks:
 
 ```
 Delta Sharing Architecture:
@@ -212,7 +212,7 @@ activate_link = spark.sql(
 ).collect()[0]['activation_link']
 ```
 
-### Consuming Delta Sharing Data (Consumer Side — Any Platform)
+### Consuming Delta Sharing Data (Consumer Side: Any Platform)
 
 ```python
 # Consumer: Pandas (no Databricks required — open protocol!)
@@ -276,7 +276,7 @@ AWS does not have a native "data marketplace" product equivalent to Snowflake's.
 
 ### Pattern 2: AWS Data Exchange
 
-AWS Data Exchange is AWS's equivalent of the Snowflake Marketplace — a data product marketplace:
+AWS Data Exchange is AWS's equivalent of the Snowflake Marketplace: a data product marketplace:
 
 ```
 AWS Data Exchange:

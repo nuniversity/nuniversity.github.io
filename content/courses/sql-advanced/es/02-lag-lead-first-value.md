@@ -124,7 +124,7 @@ Los marcos definen qué filas son visibles para la función de ventana.
 
 | Tipo de marco | Base | Manejo de empates |
 |---|---|---|
-| `ROWS` | Conteo físico de filas | Ignora empates — cada fila es distinta |
+| `ROWS` | Conteo físico de filas | Ignora empates: cada fila es distinta |
 | `RANGE` | Diferencia de valor de la fila actual | Incluye todos los empates |
 | `GROUPS` | Grupos de valores iguales | Trata valores iguales como un grupo |
 

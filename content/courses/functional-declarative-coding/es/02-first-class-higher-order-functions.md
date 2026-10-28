@@ -109,7 +109,7 @@ print(by_grade)
 
 Estas tres funciones forman la columna vertebral del procesamiento de datos funcional en Python.
 
-### map — transforma cada elemento
+### map: transforma cada elemento
 
 ```python
 from typing import List, Callable, Iterable, Any
@@ -148,7 +148,7 @@ cleaned = list(map(clean_name, raw_names))
 print(cleaned)  # ["Alice", "Bob", "Charlie", "Diana"]
 ```
 
-### filter — conserva los elementos coincidentes
+### filter: conserva los elementos coincidentes
 
 ```python
 from typing import List, Callable
@@ -193,7 +193,7 @@ print(truthy)  # [1, "hello", [1, 2]]
 > [!TIP]
 > Prefiere funciones predicado con nombre sobre lambdas en `filter()` cuando la lógica no sea trivial. Las funciones con nombre documentan mejor la intención.
 
-### reduce — acumula en un solo valor
+### reduce: acumula en un solo valor
 
 ```python
 from functools import reduce

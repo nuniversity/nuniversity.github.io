@@ -1,6 +1,6 @@
 ---
 title: "A Regra de Dependência"
-description: "Domine a Regra de Dependência — dependências de código-fonte devem apontar apenas para dentro, em direção ao núcleo"
+description: "Domine a Regra de Dependência, dependências de código-fonte devem apontar apenas para dentro, em direção ao núcleo"
 order: 2
 duration: "60 minutos"
 difficulty: "intermediário"
@@ -12,10 +12,10 @@ A Regra de Dependência é o princípio mais importante na Arquitetura Limpa. El
 
 > **Dependências de código-fonte devem apontar apenas para dentro, em direção ao centro da cebola.**
 
-Nada em um círculo interno pode saber sobre um círculo externo. Isso inclui nomes de funções, classes, variáveis — qualquer coisa declarada em um círculo externo.
+Nada em um círculo interno pode saber sobre um círculo externo. Isso inclui nomes de funções, classes, variáveis: qualquer coisa declarada em um círculo externo.
 
 > [!NOTE]
-> A Regra de Dependência se aplica a dependências de **tempo de compilação** ou **código-fonte**, não à execução em tempo de execução. Seu código interno pode chamar código externo através de inversão de dependência — a interface é definida na camada interna, implementada na externa.
+> A Regra de Dependência se aplica a dependências de **tempo de compilação** ou **código-fonte**, não à execução em tempo de execução. Seu código interno pode chamar código externo através de inversão de dependência: a interface é definida na camada interna, implementada na externa.
 
 ## Visualizando a Regra
 

@@ -1,6 +1,6 @@
 ---
 title: "Ingesta en streaming: Kinesis, Amazon MSK y aterrizaje de streams en el lago"
-description: "Mueve eventos hacia el lakehouse sin perder orden, dinero ni el sueño: un análisis profundo de Amazon Kinesis Data Streams (contrato del shard, On-Demand frente a On-Demand Advantage, claves de partición, rangos de hash MD5, hot keys, enhanced fan-out, retención y replay), Amazon Data Firehose como servicio de entrega y no como procesador (tamaño/intervalo del buffer, transformación con Lambda, JSON a Parquet, dynamic partitioning, destinos S3 e Iceberg), un informe sobre Kinesis Data Video Streams, Amazon MSK provisioned frente a MSK Serverless más MSK Connect y sinks de stream a lago, reglas de AWS IoT Core, y los tres patrones de aterrizaje en streaming (compactación de micro-batch, Iceberg stream sink, tablas de streaming gestionadas) con un libro mayor explícito de at-least-once frente a exactly-once — ocho ejemplos resueltos con precios de octubre de 2026, cuatro comprobaciones interactivas, cinco diagramas, material de casos de Cisco Webex y VMware Carbon Black, un cuadro de actualizaciones de 2026 con fuentes y doce preguntas tipo examen."
+description: "Mueve eventos hacia el lakehouse sin perder orden, dinero ni el sueño: un análisis profundo de Amazon Kinesis Data Streams (contrato del shard, On-Demand frente a On-Demand Advantage, claves de partición, rangos de hash MD5, hot keys, enhanced fan-out, retención y replay), Amazon Data Firehose como servicio de entrega y no como procesador (tamaño/intervalo del buffer, transformación con Lambda, JSON a Parquet, dynamic partitioning, destinos S3 e Iceberg), un informe sobre Kinesis Data Video Streams, Amazon MSK provisioned frente a MSK Serverless más MSK Connect y sinks de stream a lago, reglas de AWS IoT Core, y los tres patrones de aterrizaje en streaming (compactación de micro-batch, Iceberg stream sink, tablas de streaming gestionadas) con un libro mayor explícito de at-least-once frente a exactly-once, ocho ejemplos resueltos con precios de octubre de 2026, cuatro comprobaciones interactivas, cinco diagramas, material de casos de Cisco Webex y VMware Carbon Black, un cuadro de actualizaciones de 2026 con fuentes y doce preguntas tipo examen."
 order: 6
 difficulty: "intermediate"
 duration: "65 min"
@@ -46,7 +46,7 @@ Las lecciones 02 a 05 pusieron ficheros, formatos y tablas en Amazon S3. Hasta a
 
 En esta lección:
 
-- enunciarás el **contrato del shard**: 1 MB/s de escritura y 1,000 registros/s de entrada, 2 MB/s de lectura y 5 transacciones/s de lectura de salida, por shard, en *ambos* modos de capacidad — y sabrás qué **no** cambió cuando los registros subieron a 10 MiB;
+- enunciarás el **contrato del shard**: 1 MB/s de escritura y 1,000 registros/s de entrada, 2 MB/s de lectura y 5 transacciones/s de lectura de salida, por shard, en *ambos* modos de capacidad, y sabrás qué **no** cambió cuando los registros subieron a 10 MiB;
 - elegirás entre **Provisioned, On-demand Standard y On-demand Advantage**, incluido el suelo de 25 MB/s a nivel de cuenta que hace de Advantage la respuesta errónea en volumen bajo;
 - rastrearás una **clave de partición a través de MD5 hasta un rango de hash-clave y un shard**, y explicarás por qué el orden es una promesa por clave y no de todo el stream;
 - detectarás y arreglarás una **hot key** cuando el auto-escalado de on-demand no pueda ayudarte;
@@ -72,7 +72,7 @@ Cada diseño de streaming en AWS es una composición de las mismas cinco piezas.
 | **Amazon Data Firehose** | **Pipeline de entrega** gestionado: buffer, Lambda opcional, conversión de formato opcional, destino | No es un log; no puedes re-ejecutar un stream de Firehose, y no hace windowing |
 | **Amazon MSK** | **Apache Kafka gestionado**: brokers Standard/Express provisionados o MSK Serverless, más Kafka Connect vía MSK Connect | No es serverless en el sentido de «no pensar en capacidad»: sigues razonando sobre particiones, brokers y almacenamiento |
 | **AWS IoT Core** | **Ingesta de dispositivos MQTT** con reglas de AWS IoT SQL que hacen fan-out de mensajes a otros servicios | No es una capa de almacenamiento; la acción de la regla asume un rol IAM y factura el servicio *de destino* |
-| **Amazon Managed Service for Apache Flink** | **Procesamiento con estado** con ventanas de tiempo de evento, checkpoints y semántica de *procesamiento* exactly-once | No es un servicio de ingesta — lee streams y escribe en sinks |
+| **Amazon Managed Service for Apache Flink** | **Procesamiento con estado** con ventanas de tiempo de evento, checkpoints y semántica de *procesamiento* exactly-once | No es un servicio de ingesta: lee streams y escribe en sinks |
 
 ```mermaid
 flowchart TD
@@ -105,7 +105,7 @@ flowchart TD
     {"left": "Amazon Managed Service for Apache Flink", "right": "Procesamiento de streams con estado con ventanas de tiempo de evento y checkpoints; el sustituto del discontinuado Kinesis Data Analytics for SQL"},
     {"left": "Amazon Kinesis Data Video Streams", "right": "Ingesta de medios y binarios serializados en el tiempo desde dispositivos conectados, con reproducción HLS/DASH y WebRTC"}
   ],
-  "explanation": "Cada entrada es un límite de capacidad: Kinesis Data Streams es el log re-ejecutable, Firehose es un pipeline de entrega que acumula lotes y (opcionalmente) transforma, MSK es Kafka gestionado con el ecosistema de Kafka Connect, IoT Core es ingesta MQTT más fan-out por reglas, Managed Service for Apache Flink es donde viven las ventanas, y Kinesis Video Streams transporta medios y no registros. Los errores clásicos son tratar Firehose como un log re-ejecutable, esperar que Firehose haga ventanas de tipo tumbling (no lo hace — eso es Flink), o escribir código de consumidor a medida cuando Firehose solo ya habría entregado los datos."
+  "explanation": "Cada entrada es un límite de capacidad: Kinesis Data Streams es el log re-ejecutable, Firehose es un pipeline de entrega que acumula lotes y (opcionalmente) transforma, MSK es Kafka gestionado con el ecosistema de Kafka Connect, IoT Core es ingesta MQTT más fan-out por reglas, Managed Service for Apache Flink es donde viven las ventanas, y Kinesis Video Streams transporta medios y no registros. Los errores clásicos son tratar Firehose como un log re-ejecutable, esperar que Firehose haga ventanas de tipo tumbling (no lo hace: eso es Flink), o escribir código de consumidor a medida cuando Firehose solo ya habría entregado los datos."
 }
 ```
 
@@ -129,22 +129,22 @@ POR SHARD (ambos modos de capacidad, en oct 2026)
 
 Dos cosas son ciertas a la vez y los estudiantes suelen colapsarlas en una: **los bytes y el recuento de registros son topes independientes.** Un stream de registros de 400 bytes choca contra el muro de 1,000 registros/s con solo 0.38 MB/s, así que los registros por segundo limitan mucho antes que los bytes. A la inversa, registros de 2 KB a 1,000/s usan solo 2 MB/s del presupuesto de *lectura* pero exactamente todo el ritmo de *escritura* en registros.
 
-El cambio de tamaño de registro de 2025 es la trampa de esta sección. El **28 de octubre de 2025** AWS elevó el tamaño máximo de registro *«hasta 10MiB: un aumento por diez respecto al límite anterior»* y duplicó el techo de la petición `PutRecords` a 10 MiB, declarando a la vez con claridad que *«los límites de throughput individuales por shard de 1MiB/s para escrituras y 2MiB/s para lecturas siguen sin cambios»* — los registros grandes *«hacen ráfagas temporalmente hasta 10MiB/s, promediando al final a 1MiB por segundo.»* AWS recomienda mantener los registros grandes en *«1-2% de tu recuento total de registros para un rendimiento óptimo.»* La página de conceptos todavía conserva la frase más antigua de que el *«blob de datos puede ser de hasta 1 MB»* (consultada 2026-10); la página de límites y el anuncio de octubre de 2025 son los hechos actuales.
+El cambio de tamaño de registro de 2025 es la trampa de esta sección. El **28 de octubre de 2025** AWS elevó el tamaño máximo de registro *«hasta 10MiB: un aumento por diez respecto al límite anterior»* y duplicó el techo de la petición `PutRecords` a 10 MiB, declarando a la vez con claridad que *«los límites de throughput individuales por shard de 1MiB/s para escrituras y 2MiB/s para lecturas siguen sin cambios»*: los registros grandes *«hacen ráfagas temporalmente hasta 10MiB/s, promediando al final a 1MiB por segundo.»* AWS recomienda mantener los registros grandes en *«1-2% de tu recuento total de registros para un rendimiento óptimo.»* La página de conceptos todavía conserva la frase más antigua de que el *«blob de datos puede ser de hasta 1 MB»* (consultada 2026-10); la página de límites y el anuncio de octubre de 2025 son los hechos actuales.
 
-- **📚 ¿Sabías que…?** `PutRecords` es deliberadamente **no atómico**: el AWS Big Data Blog registra que *«PutRecords siempre devuelve un resultado 200, aunque algunos registros dentro del lote hayan fallado»* y que *«el fallo de un solo registro no detiene el procesamiento de los registros posteriores.»* Así que un 200 OK de `PutRecords` significa *la petición fue aceptada*, no *tu lote aterrizó* — debes inspeccionar `FailedRecordCount` y los valores de `ErrorCode` por registro. En un solo host, un bucle crudo de `PutRecord` midió unos 5,500 RPS frente a unos **76,000 RPS** con `PutRecords` en lote a través del KPL — *«unas 800 veces mayor»* (AWS Big Data Blog, 2015-08-07).
+- **📚 ¿Sabías que…?** `PutRecords` es deliberadamente **no atómico**: el AWS Big Data Blog registra que *«PutRecords siempre devuelve un resultado 200, aunque algunos registros dentro del lote hayan fallado»* y que *«el fallo de un solo registro no detiene el procesamiento de los registros posteriores.»* Así que un 200 OK de `PutRecords` significa *la petición fue aceptada*, no *tu lote aterrizó*, debes inspeccionar `FailedRecordCount` y los valores de `ErrorCode` por registro. En un solo host, un bucle crudo de `PutRecord` midió unos 5,500 RPS frente a unos **76,000 RPS** con `PutRecords` en lote a través del KPL, *«unas 800 veces mayor»* (AWS Big Data Blog, 2015-08-07).
 
 ### 2.2 Modos de capacidad: tres formas, un contrato
 
 | Modo | Qué eliges | Forma de facturación | Techo (en octubre de 2026) |
 |---|---|---|---|
 | **Provisioned** | Número de shards; `UpdateShardCount` / split / merge | $0.015 por shard-hora (**$0.36/día/shard**) + $0.014 por 1M de unidades de payload PUT | Cuota de shards de la cuenta: **20,000** en `us-east-1`, `us-west-2`, `eu-west-1`; 1,000 o 6,000 en el resto |
-| **On-demand Standard** | Nada — se adapta | Cargo horario por stream (el propio ejemplo de AWS implica **$0.040/stream-hora** en US-East) + **$0.08/GB de entrada**, **$0.040/GB de salida** | Un stream nuevo empieza en **4 MB/s de escritura, 8 MB/s de lectura**; escala hasta **10 GB/s de escritura, 20 GB/s de lectura** en `us-east-1` / `us-west-2` / `eu-west-1`, **200/400 MB/s** en otras Regiones |
+| **On-demand Standard** | Nada: se adapta | Cargo horario por stream (el propio ejemplo de AWS implica **$0.040/stream-hora** en US-East) + **$0.08/GB de entrada**, **$0.040/GB de salida** | Un stream nuevo empieza en **4 MB/s de escritura, 8 MB/s de lectura**; escala hasta **10 GB/s de escritura, 20 GB/s de lectura** en `us-east-1` / `us-west-2` / `eu-west-1`, **200/400 MB/s** en otras Regiones |
 | **On-demand Advantage** | Un compromiso a nivel de cuenta | **$0.032/GB de entrada**, **$0.016/GB de salida**, sin cargo horario por stream, **sin recargo de enhanced fan-out** | Mínimo **25 MB/s de ingesta y 25 MB/s de recuperación** en toda la cuenta; throughput en caliente hasta **10 GiB/s** |
 
 Reglas prácticas que salen de esa tabla:
 
-- **Puedes cambiar de modo dos veces cada 24 horas por stream** — un paramétrico de seguridad, no un interruptor libre. Diseña el cambio como un evento, no como un bucle.
-- **On-demand no es «sin límites».** Un stream on-demand nuevo empieza en 4/8 MB/s, las Regiones no emblemáticas se quedan en 200/400 MB/s, y —lo importante— on-demand *«se adapta automáticamente para manejar patrones de distribución de datos desiguales **salvo que una única clave de partición supere el throughput de 1 MB/s y el límite de 1000 registros por segundo de un shard**.»*
+- **Puedes cambiar de modo dos veces cada 24 horas por stream**: un paramétrico de seguridad, no un interruptor libre. Diseña el cambio como un evento, no como un bucle.
+- **On-demand no es «sin límites».** Un stream on-demand nuevo empieza en 4/8 MB/s, las Regiones no emblemáticas se quedan en 200/400 MB/s, y, lo importante, on-demand *«se adapta automáticamente para manejar patrones de distribución de datos desiguales **salvo que una única clave de partición supere el throughput de 1 MB/s y el límite de 1000 registros por segundo de un shard**.»*
 - **Advantage es más barato por GB pero tiene un suelo.** El anuncio es explícito: la cuenta *«se compromete a streamear con al menos 25 MiB/s de uso de ingesta de datos y 25 MiB/s de uso de recuperación de datos»*, a cambio de datos ingeridos con un precio **60% menor**, recuperación **60% menor**, recuperación de enhanced fan-out **68% menor** y retención extendida **77% menor** (AWS Big Data Blog, 2025-11-03). Un stream de desarrollo de 0.5 MB/s pagará por 25 MB/s que no usa.
 
 ### 2.3 Retención: de la ventana de replay al archivo a largo plazo
@@ -157,7 +157,7 @@ La retención por defecto es **24 horas**, y es el *mínimo*; `IncreaseStreamRet
 | 24 h a 7 días (extendida) | **+$0.020 por shard-hora** |
 | 7 a 365 días (largo plazo) | **$0.023/GB-mes** de almacenamiento + **$0.021/GB** recuperados a través del consumidor por defecto `GetRecords` |
 
-El replay es la razón de ser de la retención: Kinesis *«proporciona el orden de los registros, así como la capacidad de leer y/o re-ejecutar los registros en el mismo orden para múltiples aplicaciones de Amazon Kinesis.»* Una ventana de 24 horas significa que un bug de un consumidor descubierto a las 09:00 puede repararse y re-procesarse desde las 09:00 del día anterior — y nada más. Si tu aterrizaje bronze en S3 es la copia duradera (lección 05), la retención del stream es un presupuesto de *re-procesamiento*, no tu estrategia de copia de seguridad.
+El replay es la razón de ser de la retención: Kinesis *«proporciona el orden de los registros, así como la capacidad de leer y/o re-ejecutar los registros en el mismo orden para múltiples aplicaciones de Amazon Kinesis.»* Una ventana de 24 horas significa que un bug de un consumidor descubierto a las 09:00 puede repararse y re-procesarse desde las 09:00 del día anterior, y nada más. Si tu aterrizaje bronze en S3 es la copia duradera (lección 05), la retención del stream es un presupuesto de *re-procesamiento*, no tu estrategia de copia de seguridad.
 
 ---
 
@@ -184,13 +184,13 @@ flowchart LR
 
 El orden, enunciado con precisión, tiene exactamente tres alcances y ni más ni menos:
 
-1. **Dentro de un shard** — *«los registros que Kinesis Data Streams recibe a través de una llamada `GetRecords` están estrictamente ordenados por número de secuencia.»*
-2. **Dentro de una clave de partición** — la clave siempre se mapea a un shard, así que el orden local a la clave sobrevive.
-3. **Mismo cliente, misma clave, opt-in** — `SequenceNumberForOrdering` *«garantiza números de secuencia estrictamente crecientes, para puts del mismo cliente y hacia la misma clave de partición … Si este parámetro no se fija, los registros se ordenan de forma gruesa según el tiempo de llegada.»*
+1. **Dentro de un shard**: *«los registros que Kinesis Data Streams recibe a través de una llamada `GetRecords` están estrictamente ordenados por número de secuencia.»*
+2. **Dentro de una clave de partición**: la clave siempre se mapea a un shard, así que el orden local a la clave sobrevive.
+3. **Mismo cliente, misma clave, opt-in**: `SequenceNumberForOrdering` *«garantiza números de secuencia estrictamente crecientes, para puts del mismo cliente y hacia la misma clave de partición … Si este parámetro no se fija, los registros se ordenan de forma gruesa según el tiempo de llegada.»*
 
 **No hay orden de todo el stream**, y `PutRecords` ni siquiera ordena dentro de su propio lote. Si tu `MERGE` aguas abajo asume una secuencia global, has diseñado una garantía que el servicio no proporciona.
 
-### 3.2 Ejemplo resuelto E1 — los registros/s limitan primero: dimensionado y coste
+### 3.2 Ejemplo resuelto E1, los registros/s limitan primero: dimensionado y coste
 
 **Escenario (en octubre de 2026):** 2,500 registros/s a 400 bytes de media, constante 24x7, US East (N. Virginia).
 
@@ -221,7 +221,7 @@ de shards para tráfico con picos o desconocido. Elige con la
 varianza, no con la media.
 ```
 
-Fíjate en las dos reglas de redondeo que hacen sorprendentes las facturas de streaming: la entrada de datos de Kinesis redondea **cada registro hacia arriba al KB siguiente** (*«si tus registros de datos son de 4.5 KB cada uno, Kinesis Data Streams contará cada registro como 5 KB»*), mientras el medidor provisioned de PUT factura en **unidades de payload de 25 KB**. Un pipeline de registros de 900 bytes se factura como 1 KB por registro en on-demand y como una unidad por registro en provisioned — y son los registros/s los que dimensionan tus shards de cualquier manera.
+Fíjate en las dos reglas de redondeo que hacen sorprendentes las facturas de streaming: la entrada de datos de Kinesis redondea **cada registro hacia arriba al KB siguiente** (*«si tus registros de datos son de 4.5 KB cada uno, Kinesis Data Streams contará cada registro como 5 KB»*), mientras el medidor provisioned de PUT factura en **unidades de payload de 25 KB**. Un pipeline de registros de 900 bytes se factura como 1 KB por registro en on-demand y como una unidad por registro en provisioned, y son los registros/s los que dimensionan tus shards de cualquier manera.
 
 ```plot
 {
@@ -237,7 +237,7 @@ Fíjate en las dos reglas de redondeo que hacen sorprendentes las facturas de st
 }
 ```
 
-### 3.3 Ejemplo resuelto E2 — la hot key que el auto-escalado no puede arreglar
+### 3.3 Ejemplo resuelto E2: la hot key que el auto-escalado no puede arreglar
 
 **Escenario:** una única clave `tenant_id = acme` envía 1,500 registros/s de 80 bytes.
 
@@ -295,7 +295,7 @@ Un stream solo es útil si varios consumidores pueden leerlo. Kinesis te da dos 
 
 La frase de la FAQ que importa: *«los consumidores de fan-out compartido comparten todos los 2 MB/segundo de throughput de lectura de un shard y los límites de cinco transacciones por segundo … Un consumidor de enhanced fan-out recibe su propia asignación de 2 MB/segundo de throughput de lectura.»* Añade un segundo consumidor por sondeo y la tasa efectiva de lectura de cada uno se reduce a la mitad: el síntoma de producción clásico de que «añadir un consumidor lo ralentizó todo».
 
-### 4.1 Ejemplo resuelto E3 — dimensionado del fan-out y la factura de EFO
+### 4.1 Ejemplo resuelto E3: dimensionado del fan-out y la factura de EFO
 
 **Escenario:** un stream de 4 shards con tres lectores: (a) un sondeador Lambda usando la ruta compartida, (b) una aplicación Flink que necesita baja latencia, (c) Firehose leyendo de Kinesis Data Streams.
 
@@ -338,11 +338,11 @@ flowchart TD
 
 ## 5. Productores y consumidores: KPL, KCL y la tabla de leases
 
-### 5.1 KPL — colección, agregación, limitación de tasa
+### 5.1 KPL: colección, agregación, limitación de tasa
 
 La **Kinesis Producer Library** se ejecuta como *«un proceso separado, y se comunica con tu proceso de usuario padre usando IPC»*, y hace cuatro trabajos: reintentos automáticos, **colección** (agrupar muchos registros en peticiones `PutRecords`), **agregación** (empaquetar muchos registros de usuario en *un* registro de Kinesis) y limitación de tasa por shard con un cubo de tokens *«por defecto … fijado un 50 por ciento por encima del límite real del shard.»* También publica métricas de CloudWatch en tu nombre y añade latencia hasta `RecordMaxBufferedTime`.
 
-**Ejemplo resuelto E4 — la agregación derrota el tope de registros/s.**
+**Ejemplo resuelto E4: la agregación derrota el tope de registros/s.**
 
 ```text
 E4  AGRUPACIÓN DEL KPL vs PutRecords CRUDO (1 shard)
@@ -362,23 +362,23 @@ Ambas rutas ...... los límites de bytes son idénticos; solo se mueve
 
 El propio ejemplo de AWS coincide: *«Con la agregación de KPL, puedes empaquetar 1,000 registros en solo 10 registros de Kinesis Data Streams, reduciendo el RPS a 10 (con 50 KB cada uno)»*, y *«El límite de registros por segundo de Kinesis Data Streams limita a los clientes con registros menores de 1 KB.»*
 
-La portabilidad es el impuesto. Según la matriz de uso de AWS, un productor en cualquier lenguaje distinto de Java **no puede usar el KPL**, y un productor KPL de Java que alimenta a un consumidor no-Java **debe desactivar la agregación** — de lo contrario el consumidor tiene que des-agregar registros que nunca esperó. El `PutRecords` crudo es portable; la gestión de lotes, el manejo de fallos parciales, los reintentos y el backoff son tuyos.
+La portabilidad es el impuesto. Según la matriz de uso de AWS, un productor en cualquier lenguaje distinto de Java **no puede usar el KPL**, y un productor KPL de Java que alimenta a un consumidor no-Java **debe desactivar la agregación**: de lo contrario el consumidor tiene que des-agregar registros que nunca esperó. El `PutRecords` crudo es portable; la gestión de lotes, el manejo de fallos parciales, los reintentos y el backoff son tuyos.
 
-### 5.2 KCL — leases, checkpoints y `parentShardId`
+### 5.2 KCL: leases, checkpoints y `parentShardId`
 
 La **Kinesis Client Library** se compila en tu consumidor y te da:
 
-- **Leases** — *«cada shard está vinculado a un solo worker mediante un lease en cualquier momento dado»*, rastreado en una **tabla de leases** de DynamoDB. KCL 3.x crea tres tablas por defecto (lease, métricas de workers, estado del coordinador); **desde KCL 3.5 el formato de tabla única consolida todos los metadatos en la tabla de leases**.
-- **Checkpointing** — *«el proceso de almacenar de forma persistente la posición del último registro procesado con éxito en un shard»*, guardado en esa tabla de leases. Reinicia desde el checkpoint, no desde «ahora».
-- **`parentShardId`** — *«se usa para asegurar que el shard padre esté procesado por completo antes de que empiece el procesamiento en los shards hijos. Esto asegura que los registros se procesen en el mismo orden en que se pusieron en el stream.»* Este es el único mecanismo que conserva el orden a través de un evento de reshard.
+- **Leases**: *«cada shard está vinculado a un solo worker mediante un lease en cualquier momento dado»*, rastreado en una **tabla de leases** de DynamoDB. KCL 3.x crea tres tablas por defecto (lease, métricas de workers, estado del coordinador); **desde KCL 3.5 el formato de tabla única consolida todos los metadatos en la tabla de leases**.
+- **Checkpointing**: *«el proceso de almacenar de forma persistente la posición del último registro procesado con éxito en un shard»*, guardado en esa tabla de leases. Reinicia desde el checkpoint, no desde «ahora».
+- **`parentShardId`**: *«se usa para asegurar que el shard padre esté procesado por completo antes de que empiece el procesamiento en los shards hijos. Esto asegura que los registros se procesen en el mismo orden en que se pusieron en el stream.»* Este es el único mecanismo que conserva el orden a través de un evento de reshard.
 
 Dos fechas importan aquí. **KCL 1.x llegó a fin de soporte el 30 de enero de 2026**, y la guía de AWS es *«migra tus aplicaciones KCL que usan la versión 1.x a la última versión de KCL»*; para esta lección esa fecha ya pasó, así que cualquier consumidor 1.x está corriendo con tiempo prestado. Y KCL no es infraestructura gratis: las tablas de DynamoDB (se recomienda capacidad on-demand) y las métricas de CloudWatch viajan con él, y que el número de workers sea ≥ al número de shards es un requisito de paralelismo, no una preferencia de ajuste.
 
 > [!WARNING]
 > ⚠️ **Cuatro afirmaciones de streaming que son falsas tal como están escritas:**
-> - **«El modo on-demand arregla las hot keys.»** No lo hace. Una única clave de partición sigue sin poder exceder **1 MB/s ni 1,000 registros/s** — esa es la definición de hot key, y se cumple en cada modo de capacidad.
+> - **«El modo on-demand arregla las hot keys.»** No lo hace. Una única clave de partición sigue sin poder exceder **1 MB/s ni 1,000 registros/s**: esa es la definición de hot key, y se cumple en cada modo de capacidad.
 > - **«El orden es de todo el stream.»** El orden se cumple **por clave de partición, dentro de un shard**. `PutRecords` no ordena su propio lote, y `SequenceNumberForOrdering` solo ordena escrituras de la misma clave desde el mismo cliente.
-> - **«El segundo consumidor reduce a la mitad nuestras lecturas, así que compra más shards.»** Con `GetRecords` compartido el arreglo es **enhanced fan-out** (o un solo consumidor), no shards — y Firehose ya está sondeando el pool compartido una vez por shard por segundo.
+> - **«El segundo consumidor reduce a la mitad nuestras lecturas, así que compra más shards.»** Con `GetRecords` compartido el arreglo es **enhanced fan-out** (o un solo consumidor), no shards, y Firehose ya está sondeando el pool compartido una vez por shard por segundo.
 > - **«Firehose hace ventanas de tipo tumbling.»** Ninguna página de documentación de Firehose describe windowing de ningún tipo; las ventanas tumbling, deslizantes y de tiempo de evento son una característica de **Managed Service for Apache Flink**. El hogar antiguo de `TUMBLE()`, Kinesis Data Analytics for SQL, dejó de aceptar aplicaciones nuevas el **15 de octubre de 2025** y se borró a partir del **27 de enero de 2026**.
 
 ---
@@ -389,12 +389,12 @@ Dos fechas importan aquí. **KCL 1.x llegó a fin de soporte el 30 de enero de 2
 
 Firehose es *«un servicio totalmente gestionado para entregar datos de streaming en tiempo real hacia destinos como Amazon Simple Storage Service (Amazon S3), Amazon Redshift, Amazon OpenSearch Service, Amazon OpenSearch Serverless, Splunk, Apache Iceberg Tables y cualquier endpoint HTTP personalizado.»* Sus etapas, en orden:
 
-1. **Origen** — PUT directo, Kinesis Data Streams, Amazon MSK, CloudWatch Logs, EventBridge, IoT, WAF, Network Firewall, HTTP.
-2. **Buffer** — *«Amazon Data Firehose acumula los datos de streaming entrantes hasta un cierto tamaño o durante un cierto período de tiempo antes de entregarlos a los destinos»*; la condición que se cumpla primero dispara la entrega.
-3. **Transformación con Lambda (opcional)** — invocación por lote, payload limitado a **6 MB** de forma síncrona, invocación de hasta **5 minutos**, **3 reintentos** por defecto (configurable 0–300).
-4. **Conversión de formato de registro (opcional)** — JSON a **Parquet u ORC** usando un esquema en el **AWS Glue Data Catalog** (deserializador, esquema, serializador).
-5. **Dynamic partitioning (opcional)** — claves basadas en JQ hacia prefijos de S3, hasta **500 particiones activas** (ampliable a 2,500).
-6. **Destino** — S3, tablas Iceberg, Redshift (vía S3 + `COPY`), OpenSearch, Splunk, Snowflake, HTTP — más prefijos de error y de backup.
+1. **Origen**: PUT directo, Kinesis Data Streams, Amazon MSK, CloudWatch Logs, EventBridge, IoT, WAF, Network Firewall, HTTP.
+2. **Buffer**: *«Amazon Data Firehose acumula los datos de streaming entrantes hasta un cierto tamaño o durante un cierto período de tiempo antes de entregarlos a los destinos»*; la condición que se cumpla primero dispara la entrega.
+3. **Transformación con Lambda (opcional)**: invocación por lote, payload limitado a **6 MB** de forma síncrona, invocación de hasta **5 minutos**, **3 reintentos** por defecto (configurable 0 to 300).
+4. **Conversión de formato de registro (opcional)**: JSON a **Parquet u ORC** usando un esquema en el **AWS Glue Data Catalog** (deserializador, esquema, serializador).
+5. **Dynamic partitioning (opcional)**: claves basadas en JQ hacia prefijos de S3, hasta **500 particiones activas** (ampliable a 2,500).
+6. **Destino**, S3, tablas Iceberg, Redshift (vía S3 + `COPY`), OpenSearch, Splunk, Snowflake, HTTP, más prefijos de error y de backup.
 
 ```mermaid
 flowchart LR
@@ -407,9 +407,9 @@ flowchart LR
     DST -->|"S3 con intervalo de buffer por debajo de 60 s"| MPU["Upload multiparte: cargos PUT extra de S3"]
 ```
 
-### 6.2 Ejemplo resuelto E5 — qué condición de buffer se dispara primero
+### 6.2 Ejemplo resuelto E5: qué condición de buffer se dispara primero
 
-**Pistas de buffering para un destino S3: tamaño 1–128 MB (por defecto 5), intervalo 0–900 s (por defecto 300).**
+**Pistas de buffering para un destino S3: tamaño 1 to 128 MB (por defecto 5), intervalo 0 to 900 s (por defecto 300).**
 
 ```text
 E5  DIMENSIONADO DEL BUFFER (en oct 2026)
@@ -443,7 +443,7 @@ Tres modificadores cambian la aritmética:
 - **El buffering por debajo de 60 segundos cambia la factura de S3.** *«Firehose usa upload multiparte para el destino S3 cuando configuras un intervalo de tiempo de buffer menor de 60 segundos … verás un cierto aumento en los costes de la API `PUT` de S3.»*
 
 > [!IMPORTANT]
-> ⚠️ **La conversión de formato es una función estrecha con cuatro paredes duras.** La entrada debe ser **JSON** (pre-convierte CSV con Lambda); el destino debe ser **Amazon S3** — *«si habilitas la conversión de formato de registro, no puedes fijar el destino de Amazon Data Firehose como Amazon OpenSearch Service, Amazon Redshift o Splunk. Con la conversión de formato habilitada, Amazon S3 es el único destino»*; el esquema debe existir ya en el **Glue Data Catalog**; y `CompressionFormat` debe fijarse a **`UNCOMPRESSED`** porque *«la compresión Snappy ocurre automáticamente como parte del proceso de conversión.»* El límite práctico de filas es de **32 MB**, y la conversión se factura a **$0.018 por GB convertido.** Cualquier cosa que afirme que «Firehose convierte CSV a Parquet directamente» está describiendo una función que no existe.
+> ⚠️ **La conversión de formato es una función estrecha con cuatro paredes duras.** La entrada debe ser **JSON** (pre-convierte CSV con Lambda); el destino debe ser **Amazon S3**: *«si habilitas la conversión de formato de registro, no puedes fijar el destino de Amazon Data Firehose como Amazon OpenSearch Service, Amazon Redshift o Splunk. Con la conversión de formato habilitada, Amazon S3 es el único destino»*; el esquema debe existir ya en el **Glue Data Catalog**; y `CompressionFormat` debe fijarse a **`UNCOMPRESSED`** porque *«la compresión Snappy ocurre automáticamente como parte del proceso de conversión.»* El límite práctico de filas es de **32 MB**, y la conversión se factura a **$0.018 por GB convertido.** Cualquier cosa que afirme que «Firehose convierte CSV a Parquet directamente» está describiendo una función que no existe.
 
 - **📚 ¿Sabías que…?** La página de cuotas de Firehose contiene calladamente el argumento de escalado para Kinesis como origen: el PUT directo a Firehose está limitado (en `us-east-1`/`us-west-2`/`eu-west-1`) a *«500,000 registros/segundo, 2,000 peticiones/segundo y 5 MiB/segundo»*, pero *«cuando Kinesis Data Streams está configurado como fuente de datos, esta cuota no se aplica, y Amazon Data Firehose escala hacia arriba y hacia abajo sin límite.»* Y como Firehose lee *«una vez cada segundo por cada shard de Kinesis»*, los dos servicios comparten tu dimensionado de shards: más shards significa más lecturas de Firehose en paralelo, no solo más capacidad de escritura.
 
@@ -464,7 +464,7 @@ Las semánticas de entrega difieren por destino, y esta es la zona más mal cita
 
 La consecuencia de diseño: **cualquier cosa que aterrice como ficheros planos en un prefijo bronze es at-least-once.** Los duplicados no son un bug que puedas configurar fuera: son el contrato. Haces que la *tabla* sea correcta aguas abajo (sección 9.3), no que la entrega sea perfecta.
 
-### 7.2 Ejemplo resuelto E6 — una factura de Firehose para un aterrizaje de JSON a Parquet en el lago
+### 7.2 Ejemplo resuelto E6: una factura de Firehose para un aterrizaje de JSON a Parquet en el lago
 
 **Escenario:** 100 registros/s x 3 KB, JSON convertido a Parquet, entregado a S3, US East (N. Virginia), 30 días.
 
@@ -487,7 +487,7 @@ Volumen ................... (100 reg/s x 5 KB) / 1,048,576
 TOTAL .................... = $72.98 / mes
 ```
 
-El punto didáctico es la forma de la factura, no los céntimos: **la ingesta es la palanca más pequeña cuando activas funciones.** La conversión y el dynamic partitioning juntos más que duplican los $35.84 base — y cada uno de ellos es una *función que elegiste* a cambio de Parquet consultable en prefijos particionados en lugar de un montón de JSON. Fíjate también en las tarifas dependientes del origen: un **origen de Kinesis Data Streams** factura **$0.029/GB**, un **origen de Amazon MSK** factura **$0.055/GB** sin el redondeo a 5 KB, los logs cedidos **$0.13/GB**, un **destino Iceberg** (origen Kinesis) **$0.045/GB**, y la entrega por VPC **$0.01/GB más $0.01 por AZ-hora**.
+El punto didáctico es la forma de la factura, no los céntimos: **la ingesta es la palanca más pequeña cuando activas funciones.** La conversión y el dynamic partitioning juntos más que duplican los $35.84 base, y cada uno de ellos es una *función que elegiste* a cambio de Parquet consultable en prefijos particionados en lugar de un montón de JSON. Fíjate también en las tarifas dependientes del origen: un **origen de Kinesis Data Streams** factura **$0.029/GB**, un **origen de Amazon MSK** factura **$0.055/GB** sin el redondeo a 5 KB, los logs cedidos **$0.13/GB**, un **destino Iceberg** (origen Kinesis) **$0.045/GB**, y la entrega por VPC **$0.01/GB más $0.01 por AZ-hora**.
 
 ### 7.3 Data delivery de Kinesis y tablas de streaming (sin necesitar Firehose)
 
@@ -508,13 +508,13 @@ Los resultados declarados por AWS para las tablas de streaming: *«reducir los c
 
 AWS IoT Core es la entrada para la telemetría de dispositivos. Una **regla** evalúa un mensaje MQTT con **AWS IoT SQL** e invoca una o más **acciones**. La lista de acciones documentada incluye `kinesis` (Kinesis Data Streams), `firehose`, `s3`, `timestream`, `lambda`, `sqs`, `sns`, `dynamodb`, `kafka` (Apache Kafka), `stepFunctions`, `openSearch`, `republish`, `cloudWatch`, `location`, `influxDB` e `iotSiteWise`.
 
-La acción de Kinesis toma tres parámetros que debes acertar: el `stream`, el `partitionKey` — *«generalmente compuesto por una expresión (por ejemplo, `${topic()}` o `${timestamp()}`)»* — y el `roleArn`, *«un rol IAM que AWS IoT puede asumir para realizar la operación `kinesis:PutRecord`.»* Elegir `${topic()}` significa que todos los mensajes de un mismo topic MQTT hashean a un shard: elegante para el orden, un generador de hot keys a volumen. Elegir una clave a nivel de dispositivo o de evento reparte la carga y pierde el orden por topic.
+La acción de Kinesis toma tres parámetros que debes acertar: el `stream`, el `partitionKey`, *«generalmente compuesto por una expresión (por ejemplo, `${topic()}` o `${timestamp()}`)»*, y el `roleArn`, *«un rol IAM que AWS IoT puede asumir para realizar la operación `kinesis:PutRecord`.»* Elegir `${topic()}` significa que todos los mensajes de un mismo topic MQTT hashean a un shard: elegante para el orden, un generador de hot keys a volumen. Elegir una clave a nivel de dispositivo o de evento reparte la carga y pierde el orden por topic.
 
 Un control de coste merece memorizarse: *«también puedes usar la función Basic Ingest para enviar de forma segura los datos del dispositivo a los servicios de AWS listados anteriormente, sin incurrir en costes de mensajería. La función Basic Ingest optimiza el flujo de datos eliminando el broker de mensajes publicar/suscribir de la ruta de ingesta.»* Si los datos nunca necesitan fan-out MQTT, no pagues por el salto del broker.
 
-### 8.2 Kinesis Data Video Streams — el carril de medios, brevemente
+### 8.2 Kinesis Data Video Streams: el carril de medios, brevemente
 
-**Amazon Kinesis Video Streams** transporta *«medios desde dispositivos conectados hacia AWS para almacenamiento, analítica, machine learning (ML), reproducción y otro procesamiento»*, con reproducción gestionada **HLS** y **DASH**, **WebRTC** para streaming bidireccional de ultrabaja latencia, e integraciones con Rekognition Video y SageMaker. Es la respuesta correcta para cámaras, audio y binarios serializados en el tiempo — no para registros de eventos JSON.
+**Amazon Kinesis Video Streams** transporta *«medios desde dispositivos conectados hacia AWS para almacenamiento, analítica, machine learning (ML), reproducción y otro procesamiento»*, con reproducción gestionada **HLS** y **DASH**, **WebRTC** para streaming bidireccional de ultrabaja latencia, e integraciones con Rekognition Video y SageMaker. Es la respuesta correcta para cámaras, audio y binarios serializados en el tiempo: no para registros de eventos JSON.
 
 Precios en US East (en octubre de 2026): **$0.0085/GB ingerido**, **$0.0085/GB consumido** (consumo HLS **$0.0119/GB**), almacenamiento **$0.023/GB-mes** en el tramo caliente; WebRTC añade **$0.03 al mes** por canal de señalización activo, **$2.25 por millón** de mensajes de señalización y **$0.12 por mil** minutos de streaming TURN. Un **tramo de almacenamiento en caliente** (función fechada el **26 de noviembre de 2025**) ofrece ingesta a **$0.0100 por 1,000 fragmentos persistidos** y almacenamiento a **$0.0125/GB-mes** con una **retención mínima de 30 días**: el equivalente en vídeo del ajuste de retención del stream de Kinesis.
 
@@ -529,14 +529,14 @@ Precios en US East (en octubre de 2026): **$0.0085/GB ingerido**, **$0.0085/GB c
 | | **MSK Provisioned** | **MSK Serverless** |
 |---|---|---|
 | Unidad de capacidad | Brokers (`kafka.m7g.large` recomendado para producción; M7g usa Graviton) | Clúster + particiones, con auto-escalado |
-| Facturación | Broker-horas + almacenamiento GB-mes — **se paga incluso ocioso** | Clúster-hora + partición-hora + GB de entrada/salida + almacenamiento GB-mes |
+| Facturación | Broker-horas + almacenamiento GB-mes: **se paga incluso ocioso** | Clúster-hora + partición-hora + GB de entrada/salida + almacenamiento GB-mes |
 | Ejemplo publicado (31 días) | 2,232 broker-horas x $0.204 = **$455.33** + 1,516.13 GB-meses x $0.10 = **$151.61** = **$606.94** | 744 h x $0.75 = $558 + 74,400 partición-horas x $0.0015 = $111.60 + 3,100 GB x $0.10 = $310 + 6,200 GB x $0.05 = $310 + $10 de almacenamiento = **$1,299.60** |
 | Cuotas | Tipos de broker Standard y **Express** | **200 MBps de ingreso / 400 MBps de salida** por clúster; **5/10 MBps por partición**; mensaje máximo de **8 MiB**; **2,400** particiones líder (120 compactadas); **500** grupos de consumidores; **10** clústeres por cuenta; **5** VPCs de cliente por clúster |
-| Tablas de streaming | **Solo brokers Express** — *«los brokers Standard y Amazon MSK Serverless no están soportados»* | No soportado |
+| Tablas de streaming | **Solo brokers Express**: *«los brokers Standard y Amazon MSK Serverless no están soportados»* | No soportado |
 
-La propia guía de AWS sobre tamaño de brokers: *«los brokers M7g usan procesadores AWS Graviton … los brokers M7g ofrecen mejor relación precio-rendimiento que instancias M5 comparables»* y *«los brokers M7g y M5 se recomiendan para cargas de trabajo de producción.»* La lógica del punto de equilibrio es el ejercicio: **provisioned tiene un suelo fijo** (las horas correspondientes a tres brokers, más un almacenamiento que pagas llegue o no el tráfico), mientras **serverless mide particiones y bytes**, así que un stream constante de alto volumen puede costar más en Serverless que en brokers provisionados — y el techo de ingreso de 200 MBps es una parada seca, no una advertencia.
+La propia guía de AWS sobre tamaño de brokers: *«los brokers M7g usan procesadores AWS Graviton … los brokers M7g ofrecen mejor relación precio-rendimiento que instancias M5 comparables»* y *«los brokers M7g y M5 se recomiendan para cargas de trabajo de producción.»* La lógica del punto de equilibrio es el ejercicio: **provisioned tiene un suelo fijo** (las horas correspondientes a tres brokers, más un almacenamiento que pagas llegue o no el tráfico), mientras **serverless mide particiones y bytes**, así que un stream constante de alto volumen puede costar más en Serverless que en brokers provisionados, y el techo de ingreso de 200 MBps es una parada seca, no una advertencia.
 
-**Ejemplo resuelto E8 — la forma del punto de equilibrio (ejemplos publicados por AWS, en octubre de 2026).**
+**Ejemplo resuelto E8: la forma del punto de equilibrio (ejemplos publicados por AWS, en octubre de 2026).**
 
 ```text
 E8  MSK PROVISIONED vs SERVERLESS (formas de los ejemplos publicados)
@@ -566,13 +566,13 @@ Lectura ............... $606.94 son 3 brokers x 744 h que pagas incluso
 Los caminos de sink que importan para este curso:
 
 - **Sink S3** (conector de Confluent en MSK Connect): `"connector.class": "io.confluent.connect.s3.S3SinkConnector"`, con `"flush.size": "1"` controlando el tamaño del objeto y la capacidad provisionada expresada como `mcuCount` / `workerCount`.
-- **Sink Iceberg** — la receta real de lago CDC publicada por AWS es *MSK Connect + Iceberg Kafka Connect* (AWS Big Data Blog, 2026-02-03), donde el `iceberg.control.commit.interval-ms` del conector fija cada cuánto los offsets del stream se convierten en instantáneas de tabla.
-- **Firehose con MSK como origen** — ruta de consola: *«como origen, elige Amazon MSK. Como destino, elige Apache Iceberg Tables.»* Fíjate en el precio: la ingesta con origen MSK es **$0.055/GB** frente a **$0.029/GB** con un origen de Kinesis.
-- **Tablas de streaming de MSK** — topics de Kafka materializados como Iceberg en S3 Tables: *«los brokers Express de Amazon MSK escriben tus registros como ficheros de datos Apache Parquet y los hacen commit en la tabla»*, escalando hasta *«10 GBps de throughput de entrega»* a **$10.00 por TB entregado**, con frescura configurada **entre 5 y 15 minutos**, un **bucket de cola de mensajes muertos obligatorio** y la advertencia explícita de que *«un Channel no hace backfill de datos producidos previamente — solo se entregan los datos producidos después de la habilitación.»*
+- **Sink Iceberg**: la receta real de lago CDC publicada por AWS es *MSK Connect + Iceberg Kafka Connect* (AWS Big Data Blog, 2026-02-03), donde el `iceberg.control.commit.interval-ms` del conector fija cada cuánto los offsets del stream se convierten en instantáneas de tabla.
+- **Firehose con MSK como origen**: ruta de consola: *«como origen, elige Amazon MSK. Como destino, elige Apache Iceberg Tables.»* Fíjate en el precio: la ingesta con origen MSK es **$0.055/GB** frente a **$0.029/GB** con un origen de Kinesis.
+- **Tablas de streaming de MSK**, topics de Kafka materializados como Iceberg en S3 Tables: *«los brokers Express de Amazon MSK escriben tus registros como ficheros de datos Apache Parquet y los hacen commit en la tabla»*, escalando hasta *«10 GBps de throughput de entrega»* a **$10.00 por TB entregado**, con frescura configurada **entre 5 y 15 minutos**, un **bucket de cola de mensajes muertos obligatorio** y la advertencia explícita de que *«un Channel no hace backfill de datos producidos previamente, solo se entregan los datos producidos después de la habilitación.»*
 
 Para el trabajo de laboratorio, el **MSK Data Generator** de awslabs es un conector *origen* de Kafka Connect (`genkp.<topic>.with` para la clave de partición, `genv.<field>.with` para los valores) desplegable en MSK Connect o en un contenedor de ECS: el equivalente en streaming de un script de siembra.
 
-### 9.3 Ejemplo resuelto E7 — de bronze at-least-once a silver idempotente
+### 9.3 Ejemplo resuelto E7: de bronze at-least-once a silver idempotente
 
 **Escenario:** Firehose entregó una ventana de 10 minutos de ficheros de JSON a Parquet en `s3://lake/bronze/events/dt=2026-10-11/hr=09/`, y un reintento duplicó 1,412 de ellos. Promueve a una tabla silver de Iceberg.
 
@@ -603,7 +603,7 @@ Paso 4 - demostrar la idempotencia ejecutando LOS PASOS 2-3 OTRA VEZ
   (Un INSERT INTO simple habría duplicado las filas a 2,823,948.)
 ```
 
-Reglas que viajan con este patrón: **el `MERGE` de Iceberg acepta solo un registro de origen por fila de destino** — deduplica primero, siempre; y el control `s.event_ts > t.event_ts` convierte un evento re-entregado más antiguo en un no-op en lugar de un downgrade. La alternativa es saltarse por completo los ficheros planos y usar un destino exactly-once (Firehose hacia Iceberg, o tablas de streaming), donde la coordinación de escritura maneja los duplicados por ti.
+Reglas que viajan con este patrón: **el `MERGE` de Iceberg acepta solo un registro de origen por fila de destino**: deduplica primero, siempre; y el control `s.event_ts > t.event_ts` convierte un evento re-entregado más antiguo en un no-op en lugar de un downgrade. La alternativa es saltarse por completo los ficheros planos y usar un destino exactly-once (Firehose hacia Iceberg, o tablas de streaming), donde la coordinación de escritura maneja los duplicados por ti.
 
 ```mermaid
 flowchart TD
@@ -694,7 +694,7 @@ flowchart TD
 | **Kinesis Data Streams (On-demand)** | Tráfico con picos o desconocido; valoras no hacer aritmética de shards | Precios por GB ($0.08/GB Standard) o el **suelo de cuenta de 25 MB/s** de Advantage |
 | **Amazon Data Firehose** | Quieres entrega sin código de consumidor, transformación opcional y Parquet | Sin replay, sin ventanas, **at-least-once hacia S3**, y latencia de buffering (hasta ~1.5x la pista con dynamic partitioning) |
 | **Amazon MSK** | Clientes de Kafka, Kafka Connect, Debezium, contratos existentes basados en topics | Pensar en capacidad de brokers/particiones, almacenamiento que pagas cuando está ocioso, y un techo de ingreso de 200 MBps en Serverless |
-| **Kafka de terceros o autogestionado** | Ya lo ejecutas y tienes el personal — lo mismo que Cisco y Airties dejaron | Parcheo, instancias de un solo tamaño sobre-dimensionadas, caídas, y la factura de migración (5 meses en Cisco) |
+| **Kafka de terceros o autogestionado** | Ya lo ejecutas y tienes el personal: lo mismo que Cisco y Airties dejaron | Parcheo, instancias de un solo tamaño sobre-dimensionadas, caídas, y la factura de migración (5 meses en Cisco) |
 | **AWS IoT Core más Kinesis** | Telemetría de dispositivos por MQTT que necesita fan-out basado en reglas | Roles IAM por acción y facturación por servicio en cada acción de regla |
 
 ---
@@ -702,40 +702,40 @@ flowchart TD
 ### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
-> **Qué cambió en la capa de streaming entre 2025 y octubre de 2026 — cada línea con fuente y fecha:**
-> - **27 de enero de 2026 — Kinesis Data Analytics for SQL ya no existe.** Sin correcciones de bugs después de **2025-09-01**, sin aplicaciones nuevas después de **2025-10-15**, y *«las aplicaciones se borrarán a partir del 27 de enero de 2026»*; los objetivos de migración son **Amazon Managed Service for Apache Flink** y Flink Studio (aviso de discontinuación de la guía de usuario de AWS Kinesis Analytics, consultado 2026-10-11). Cualquier tutorial que cree una aplicación de KDA SQL ahora falla.
-> - **30 de julio de 2026 — Tablas de streaming de MSK para Apache Iceberg en S3 Tables.** Los brokers Express materializan los topics de Kafka como Iceberg gestionado: *«hasta 10 GB/s de ingesta»*, coste de ingesta reducido *«hasta un 60%»*, compactación integrada, **$10.00/TB entregado**, frescura de 5–15 minutos, DLQ obligatorio, **sin backfill** (AWS News Blog, 2026-07-30; guía de desarrollador de MSK, consultada 2026-10). Los brokers Standard y MSK Serverless no están soportados.
-> - **Agosto de 2026 — Data delivery de Kinesis hacia S3 y S3 Tables.** Las tablas de streaming y la entrega a S3 de propósito general son **solo modos on-demand**, con *«compactación inteligente integrada»* y precios declarados de **$14/TB** hacia S3 Tables y **$11/TB** hacia S3 (AWS Big Data Blog, 2026-08-31) — Firehose ya no es el único camino de stream a lago.
-> - **15 de septiembre de 2025 — CDC hacia Iceberg de Firehose deprecado** (soporte terminado), y **24 de septiembre de 2025 — base de datos como origen (vista previa pública) eliminada**; el destino Firehose hacia S3 Tables llegó a GA el **14 de marzo de 2025** y el soporte multi-catálogo de Glue (escritura en catálogos no predeterminados como S3 Tables) el **14 de mayo de 2025** (historial de documentos de Firehose, consultado 2026-10-11).
-> - **28 de octubre de 2025 — registros de hasta 10 MiB.** *«un aumento por diez respecto al límite anterior»* más un techo de 10 MiB para `PutRecords`, mientras que *«los límites de throughput de shards de 1MiB/s para escrituras y 2MiB/s para lecturas siguen sin cambios»* (AWS Big Data Blog, 2025-10-28).
-> - **3 de noviembre de 2025 — On-demand Advantage.** **$0.032/GB de entrada, $0.016/GB de salida**, sin cargo horario por stream, sin recargo de recuperación de enhanced fan-out, throughput en caliente hasta **10 GiB/s**, a cambio de un compromiso de cuenta de **25 MB/s de ingesta más 25 MB/s de recuperación** (AWS Big Data Blog, 2025-11-03). Más barato por GB, erróneo en volumen bajo.
-> - **26 de noviembre de 2025 — Tramo en caliente de Kinesis Video Streams**: **$0.0100 por 1,000 fragmentos persistidos** ingeridos, almacenamiento a **$0.0125/GB-mes**, retención **mínima de 30 días** (AWS IoT Blog, 2026-01-04).
+> **Qué cambió en la capa de streaming entre 2025 y octubre de 2026: cada línea con fuente y fecha:**
+> - **27 de enero de 2026: Kinesis Data Analytics for SQL ya no existe.** Sin correcciones de bugs después de **2025-09-01**, sin aplicaciones nuevas después de **2025-10-15**, y *«las aplicaciones se borrarán a partir del 27 de enero de 2026»*; los objetivos de migración son **Amazon Managed Service for Apache Flink** y Flink Studio (aviso de discontinuación de la guía de usuario de AWS Kinesis Analytics, consultado 2026-10-11). Cualquier tutorial que cree una aplicación de KDA SQL ahora falla.
+> - **30 de julio de 2026: Tablas de streaming de MSK para Apache Iceberg en S3 Tables.** Los brokers Express materializan los topics de Kafka como Iceberg gestionado: *«hasta 10 GB/s de ingesta»*, coste de ingesta reducido *«hasta un 60%»*, compactación integrada, **$10.00/TB entregado**, frescura de 5 to 15 minutos, DLQ obligatorio, **sin backfill** (AWS News Blog, 2026-07-30; guía de desarrollador de MSK, consultada 2026-10). Los brokers Standard y MSK Serverless no están soportados.
+> - **Agosto de 2026, Data delivery de Kinesis hacia S3 y S3 Tables.** Las tablas de streaming y la entrega a S3 de propósito general son **solo modos on-demand**, con *«compactación inteligente integrada»* y precios declarados de **$14/TB** hacia S3 Tables y **$11/TB** hacia S3 (AWS Big Data Blog, 2026-08-31), Firehose ya no es el único camino de stream a lago.
+> - **15 de septiembre de 2025, CDC hacia Iceberg de Firehose deprecado** (soporte terminado), y **24 de septiembre de 2025, base de datos como origen (vista previa pública) eliminada**; el destino Firehose hacia S3 Tables llegó a GA el **14 de marzo de 2025** y el soporte multi-catálogo de Glue (escritura en catálogos no predeterminados como S3 Tables) el **14 de mayo de 2025** (historial de documentos de Firehose, consultado 2026-10-11).
+> - **28 de octubre de 2025: registros de hasta 10 MiB.** *«un aumento por diez respecto al límite anterior»* más un techo de 10 MiB para `PutRecords`, mientras que *«los límites de throughput de shards de 1MiB/s para escrituras y 2MiB/s para lecturas siguen sin cambios»* (AWS Big Data Blog, 2025-10-28).
+> - **3 de noviembre de 2025: On-demand Advantage.** **$0.032/GB de entrada, $0.016/GB de salida**, sin cargo horario por stream, sin recargo de recuperación de enhanced fan-out, throughput en caliente hasta **10 GiB/s**, a cambio de un compromiso de cuenta de **25 MB/s de ingesta más 25 MB/s de recuperación** (AWS Big Data Blog, 2025-11-03). Más barato por GB, erróneo en volumen bajo.
+> - **26 de noviembre de 2025: Tramo en caliente de Kinesis Video Streams**: **$0.0100 por 1,000 fragmentos persistidos** ingeridos, almacenamiento a **$0.0125/GB-mes**, retención **mínima de 30 días** (AWS IoT Blog, 2026-01-04).
 
 ---
 
 ## Casos Reales
 
-### Caso A — Cisco Webex: 12 clústeres MSK y la guardia que recuperas
+### Caso A, Cisco Webex: 12 clústeres MSK y la guardia que recuperas
 
 **Cisco (plataforma de observabilidad de Webex).** El caso de AWS describe un estate de Kafka autogestionado para el stack de observabilidad/ELK cuya carga operativa recaía en un equipo que sobre-dimensionaba *«instancias de un solo tamaño»* mientras las caídas afectaban a miles de usuarios internos. La propia migración se acotó con honestidad: *«el equipo de observabilidad pasó 5 meses ingenierizando la migración desde Kafka autogestionado hacia Amazon MSK y luego implementó el nuevo stack en 6 semanas.»*
 
 El estado estable publicado es la cifra que vuelve concreta la sección de MSK de esta lección: *«el sistema entero está compuesto por 12 clústeres de Amazon MSK con un total de 66 brokers. El sistema maneja sin problemas una carga de trabajo diaria de 147 TB de datos y más de 100,000 millones de mensajes.»* Efectos aguas abajo: *«más de 4,000 desarrolladores, managers y miembros del equipo de Webex … se han beneficiado»*, y *«se redujo el tiempo de transporte de datos desde el backend hasta el usuario, de modo que los tiempos de recuperación están por debajo de 10 segundos.»* El resumen de AWS del resultado: *«Cisco ha reducido su sobrecarga operativa a prácticamente cero con ahorro de costes y menos caídas del servicio.»* Robert Labrie, manager de observabilidad en Webex: *«Ejecutamos un stack de observabilidad federado globalmente a escala, y simplemente funciona.»*
 
-Ángulo de la lección: **Kafka gestionado convierte un problema de personal en un problema de capacidad.** El protocolo, los clientes y el ecosistema de Connect se quedaron; lo que desapareció fue el cuidado de los brokers — y la línea de los 5 meses de migración es el precio honesto de ese intercambio. 66 brokers en 12 clústeres es también la escala a la cual la aritmética de broker-horas de la sección 9.1 deja de ser una curiosidad de hoja de cálculo.
+Ángulo de la lección: **Kafka gestionado convierte un problema de personal en un problema de capacidad.** El protocolo, los clientes y el ecosistema de Connect se quedaron; lo que desapareció fue el cuidado de los brokers, y la línea de los 5 meses de migración es el precio honesto de ese intercambio. 66 brokers en 12 clústeres es también la escala a la cual la aritmética de broker-horas de la sección 9.1 deja de ser una curiosidad de hoja de cálculo.
 
 *Cifras reportadas por el cliente en una página de caso de AWS (sin fecha, consultada 2026-10-11); no es un compromiso de AWS.*
 
-### Caso B — VMware Carbon Black: 1 PB al día y la elasticidad de shards como palanca de coste
+### Caso B, VMware Carbon Black: 1 PB al día y la elasticidad de shards como palanca de coste
 
 **VMware Carbon Black (seguridad de endpoints).** De la página de clientes de Kinesis Data Streams de AWS: *«VMware Carbon Black analiza más de un billón de eventos cada día … Ahora procesan 1 PB de datos de streaming al día con menores costes operativos y de infraestructura.»* La arquitectura ingiere desde *«millones de dispositivos edge distribuidos»* hacia **Amazon Kinesis Data Streams**, con analítica en tiempo real en milisegundos.
 
 La cita que explica *por qué* Kinesis en lugar de una flota de brokers es de Stoyan Dimkov, Staff Engineer y Software Architect: *«cuando los datos de clientes individuales aumentan o disminuyen, podemos usar la elasticidad de Amazon Kinesis Data Streams para escalar el cómputo hacia arriba o hacia abajo y procesar los datos de forma fiable mientras gestionamos eficazmente nuestro coste.»*
 
-Ángulo de la lección: a 1 PB/día el número interesante no es el número de shards — es que **la elasticidad por carga de trabajo de cada cliente es el modelo de coste.** Dimensionar ese stream es la aritmética de E1 a escala (1 PB/día es aproximadamente 11.6 MB/s de media antes de réplicas, que on-demand absorbe sin una hoja de cálculo de shards), y las oscilaciones de volumen por cliente son exactamente lo que hace dolorosa la planificación de shards provisioned.
+Ángulo de la lección: a 1 PB/día el número interesante no es el número de shards: es que **la elasticidad por carga de trabajo de cada cliente es el modelo de coste.** Dimensionar ese stream es la aritmética de E1 a escala (1 PB/día es aproximadamente 11.6 MB/s de media antes de réplicas, que on-demand absorbe sin una hoja de cálculo de shards), y las oscilaciones de volumen por cliente son exactamente lo que hace dolorosa la planificación de shards provisioned.
 
 *Cifras reportadas por el cliente en una página de cliente del producto de AWS (sin fecha, consultada 2026-10-11); no es un compromiso de AWS.*
 
-### Caso C — TrueCar: programa la eliminación, no el ajuste del motor
+### Caso C, TrueCar: programa la eliminación, no el ajuste del motor
 
 **TrueCar (mercado de automóviles).** En la misma página de clientes de Kinesis de AWS: *«al adoptar una estrategia de datos de streaming con Amazon Kinesis Data Streams, TrueCar ha mejorado la velocidad hasta el insight del analítica de clickstream 48 veces, automatizado su proceso de extracción, transformación y carga (ETL) y mejorado la observabilidad de sus métricas.»* **48x** es una historia de latencia, no de throughput: el horario del ETL por lotes era el cuello de botella, y el stream lo eliminó.
 
@@ -869,7 +869,7 @@ La cita que explica *por qué* Kinesis en lugar de una flota de brokers es de St
     "MSK Provisioned con brokers Standard y tablas de streaming, porque los brokers Express no pueden escribir Parquet"
   ],
   "correct": 1,
-  "explanation": "MSK Connect documenta Kafka Connect 2.7.1/3.7.x con conectores de terceros como Debezium y sin cambios de código. Las tablas de streaming requieren un «clúster de Amazon MSK Provisioned con brokers Express. Los brokers Standard y Amazon MSK Serverless no están soportados», escriben Parquet, cuestan $10.00/TB con frescura de 5-15 minutos y una cola de mensajes muertos obligatoria, y explícitamente «no hace backfill de datos producimientos previamente — solo se entregan los datos producidos después de la habilitación». Eso descarta A, C y D. Fíjate también en la diferencia de precio del origen de Firehose si enrutas MSK a través de Firehose: $0.055/GB para un origen MSK frente a $0.029/GB para un origen de Kinesis."
+  "explanation": "MSK Connect documenta Kafka Connect 2.7.1/3.7.x con conectores de terceros como Debezium y sin cambios de código. Las tablas de streaming requieren un «clúster de Amazon MSK Provisioned con brokers Express. Los brokers Standard y Amazon MSK Serverless no están soportados», escriben Parquet, cuestan $10.00/TB con frescura de 5-15 minutos y una cola de mensajes muertos obligatoria, y explícitamente «no hace backfill de datos producimientos previamente: solo se entregan los datos producidos después de la habilitación». Eso descarta A, C y D. Fíjate también en la diferencia de precio del origen de Firehose si enrutas MSK a través de Firehose: $0.055/GB para un origen MSK frente a $0.029/GB para un origen de Kinesis."
 }
 ```
 
@@ -938,23 +938,23 @@ La cita que explica *por qué* Kinesis en lugar de una flota de brokers es de St
 ```
 
 > [!WARNING]
-> ⚠️ **Trampas de patrón para esta lección — recorre esta lista antes de diseñar cualquier cosa:**
+> ⚠️ **Trampas de patrón para esta lección: recorre esta lista antes de diseñar cualquier cosa:**
 > - **On-demand no arregla las hot keys.** Una clave de partición sigue sin poder exceder **1 MB/s ni 1,000 registros/s** en ningún modo de capacidad; el arreglo es el esquema de clave o `SplitShard`.
 > - **El orden es por clave de partición, por shard.** Nunca diseñes suponiendo una secuencia global, y recuerda que `PutRecords` no ordena su propio lote.
-> - **Las lecturas compartidas son una tubería por shard.** Un segundo consumidor por sondeo reduce la tasa a la mitad; el arreglo es **enhanced fan-out** ($0.015/consumidor-shard-hora + $0.013/GB en Provisioned, sin recargo en Advantage), no más shards — y Firehose ya sondea una vez por shard por segundo.
+> - **Las lecturas compartidas son una tubería por shard.** Un segundo consumidor por sondeo reduce la tasa a la mitad; el arreglo es **enhanced fan-out** ($0.015/consumidor-shard-hora + $0.013/GB en Provisioned, sin recargo en Advantage), no más shards, y Firehose ya sondea una vez por shard por segundo.
 > - **Firehose no es un log ni un motor de ventanas.** Sin replay, sin ventanas tumbling/deslizantes (eso es Managed Service for Apache Flink), buffering de hasta ~5 minutos por defecto y de hasta **1.5x la pista** con dynamic partitioning.
 > - **At-least-once hacia S3 es el contrato.** El exactly-once está documentado solo para el **destino Iceberg** (Glue Data Catalog obligatorio) y para las **tablas de streaming**; bronze necesita dedup o un `MERGE` idempotente (E7).
 > - **Paredes de la conversión de formato:** JSON de entrada, **solo S3**, `SizeInMBs` ≥ **64**, esquema de Glue presente, `CompressionFormat` = **UNCOMPRESSED** (Snappy se aplica durante la serialización), límite práctico de filas de 32 MB, **$0.018/GB**.
-> - **Los registros de 10 MiB no cambiaron el contrato del shard.** Los registros y las peticiones `PutRecords` subieron a 10 MiB el 2025-10-28; **1 MB/s de escritura y 1,000 registros/s por shard siguen sin cambios**, y AWS recomienda mantener los registros grandes en 1–2% del recuento de registros.
-> - **Las tablas de streaming de MSK son solo Express, solo datos nuevos, DLQ obligatorio** — los brokers Standard y MSK Serverless no están soportados, y un Channel no hace backfill.
+> - **Los registros de 10 MiB no cambiaron el contrato del shard.** Los registros y las peticiones `PutRecords` subieron a 10 MiB el 2025-10-28; **1 MB/s de escritura y 1,000 registros/s por shard siguen sin cambios**, y AWS recomienda mantener los registros grandes en 1 to 2% del recuento de registros.
+> - **Las tablas de streaming de MSK son solo Express, solo datos nuevos, DLQ obligatorio**: los brokers Standard y MSK Serverless no están soportados, y un Channel no hace backfill.
 > - **La retención es una factura:** retención extendida **+$0.020/shard-hora**, largo plazo **$0.023/GB-mes + $0.021/GB recuperados**; el data delivery de Kinesis y las tablas de streaming requieren modos de capacidad **on-demand**.
 
 > [!IMPORTANT]
-> **Veredicto comparativo — Kinesis frente a MSK frente a Firehose frente a Kafka autogestionado/de terceros**
+> **Veredicto comparativo: Kinesis frente a MSK frente a Firehose frente a Kafka autogestionado/de terceros**
 > - **Frente a Amazon MSK:** Kinesis es el log serverless, re-ejecutable y basado en shards con orden por clave, enhanced fan-out y ahora **data delivery nativo** hacia S3 ($11/TB) y tablas de streaming de Iceberg en S3 Tables ($14/TB): sin código de consumidor, sin brokers, sin protocolo de Kafka. MSK es lo que eliges cuando **los clientes de Kafka, los conectores de Kafka Connect/Debezium o los contratos basados en topics** son innegociables; pagas con planificación de capacidad de brokers/particiones, un almacenamiento que financias cuando está ocioso, y el techo de **200 MBps de ingreso** de MSK Serverless. Los 12 clústeres / 66 brokers / 147 TB al día de Cisco son la forma de la apuesta por MSK: protocolo preservado, guardia eliminada.
 > - **Frente a Amazon Data Firehose:** Firehose **no es un competidor de los logs: es un consumidor de ellos.** No tiene replay, no tiene ventanas y tiene semántica **at-least-once** hacia S3; lo que compra es cero código de consumidor, una transformación Lambda opcional, **JSON a Parquet** contra un esquema de Glue, dynamic partitioning, y **exactly-once documentado hacia tablas Iceberg**. Elígelo cuando el requisito sea «aterrízalo correctamente y de forma barata», no «procesalo en vuelo». Su tarifa con origen MSK (**$0.055/GB** frente a **$0.029/GB** para Kinesis) es una entrada de diseño real.
 > - **Frente a Managed Service for Apache Flink:** la agregación con ventanas, los joins y el *procesamiento* exactly-once viven aquí, no en Firehose. El discontinuado Kinesis Data Analytics for SQL (borrado desde **2026-01-27**) es la respuesta errónea en cualquier enunciado que lo nombre.
-> - **Frente a Kafka autogestionado / de terceros en tus propias instancias:** sigue siendo legal, sigue siendo exigido por política a veces — pero lee antes la migración de 5 meses de Cisco, y nota que Airties movió decenas de millones de puntos de acceso IoT desde Kafka en EC2 hacia Kinesis Data Streams y reportó un **33% de reducción en los costes mensuales totales de infraestructura** (AWS Big Data Blog, 2025-05-29). El *ecosistema* de Kafka sobrevive al cambio: MSK Connect ejecuta Debezium y el sink S3 de Confluent sin cambios.
+> - **Frente a Kafka autogestionado / de terceros en tus propias instancias:** sigue siendo legal, sigue siendo exigido por política a veces, pero lee antes la migración de 5 meses de Cisco, y nota que Airties movió decenas de millones de puntos de acceso IoT desde Kafka en EC2 hacia Kinesis Data Streams y reportó un **33% de reducción en los costes mensuales totales de infraestructura** (AWS Big Data Blog, 2025-05-29). El *ecosistema* de Kafka sobrevive al cambio: MSK Connect ejecuta Debezium y el sink S3 de Confluent sin cambios.
 > - **El veredicto de una sola frase:** en octubre de 2026, **por defecto Kinesis Data Streams para logs de apps/eventos y Firehose (o data delivery nativo) para el aterrizaje en el lago; elige Amazon MSK cuando la semántica de Kafka y los conectores sean el requisito; recurre a Managed Service for Apache Flink en cuanto aparezcan ventanas o joins con estado; y conserva el Kafka autogestionado solo donde una restricción explícita pesa más que la factura de operaciones y el coste de la migración.**
 
 > [!SUCCESS]
@@ -962,12 +962,12 @@ La cita que explica *por qué* Kinesis en lugar de una flota de brokers es de St
 > 1. **El contrato del shard es todo el modelo de capacidad:** **1 MB/s de escritura + 1,000 registros/s de entrada, 2 MB/s de lectura + 5 TPS de lectura de salida**, por shard, en *ambos* modos provisioned y on-demand. El cambio de 2025 a **registros de 10 MiB / peticiones `PutRecords` de 10 MiB** no lo tocó.
 > 2. **Tres modos de capacidad, tres facturas:** Provisioned (**$0.015/shard-hora** + unidades de payload PUT), On-demand Standard (**$0.08/GB de entrada, $0.040/GB de salida**, con hora de stream en el ejemplo), On-demand Advantage (**$0.032/GB de entrada, $0.016/GB de salida**, sin hora de stream, **suelo de cuenta de 25 MB/s + 25 MB/s**). E1: la misma carga plana de 2,500 reg/s cuesta **$127.22** provisioned frente a **$771.36** on-demand Standard.
 > 3. **El orden tiene solo tres alcances:** dentro de un shard (números de secuencia), dentro de una clave de partición (MD5 a rango de hash-clave a un shard), y orden opt-in del mismo cliente vía `SequenceNumberForOrdering`. No hay orden de todo el stream.
-> 4. **Una hot key es un bug del diseño de la clave, no un bug de capacidad.** E2: 1,500 reg/s de 80 B son 0.114 MB/s (bien) pero exceden 1,000 reg/s en un shard — en *todos* los modos. Arregla con `tenant:event_id`, `SplitShard` o la agregación del KPL.
+> 4. **Una hot key es un bug del diseño de la clave, no un bug de capacidad.** E2: 1,500 reg/s de 80 B son 0.114 MB/s (bien) pero exceden 1,000 reg/s en un shard: en *todos* los modos. Arregla con `tenant:event_id`, `SplitShard` o la agregación del KPL.
 > 5. **Economía del fan-out:** `GetRecords` compartido = **una tubería de 2 MB/s + 5 TPS por shard para todos**; enhanced fan-out = **2 MB/s dedicados por consumidor registrado por shard** vía `SubscribeToShard` (conexiones de 5 minutos, 1 llamada/s), con precio de **$0.015/consumidor-shard-hora + $0.013/GB** en Provisioned y **libre de ese recargo en Advantage**. E3: 4 shards = **$44.64/mes**. Firehose sondea el pool compartido una vez por shard por segundo.
-> 6. **Asimetría KPL/KCL:** KPL (productor solo Java, sidecar IPC) da colección, agregación (1,000 x 512 B → 10 x 50 KB de registros) y limitación de tasa por cubo de tokens al 150% del límite del shard; KCL da leases (un worker por shard), checkpoints en DynamoDB y orden con `parentShardId` a través de resharding — y **el KCL 1.x lleva en fin de soporte desde el 30 de enero de 2026**.
-> 7. **Firehose es un servicio de entrega:** buffer de **1–128 MB (por defecto 5) / 0–900 s (por defecto 300)**, lo que se dispare primero; Lambda opcional (**lotes de 0.2–3 MB, payload de 6 MB, 5 min, 3 reintentos**); **JSON→Parquet/ORC** opcional (solo S3, ≥64 MB, esquema de Glue, `UNCOMPRESSED`, $0.018/GB); dynamic partitioning opcional (**≤500 particiones activas**, 1.5x de retardo, sin zero-buffering). E5: a 6 MB/s un buffer de **64 MB** se llena en **10.7 s**.
+> 6. **Asimetría KPL/KCL:** KPL (productor solo Java, sidecar IPC) da colección, agregación (1,000 x 512 B → 10 x 50 KB de registros) y limitación de tasa por cubo de tokens al 150% del límite del shard; KCL da leases (un worker por shard), checkpoints en DynamoDB y orden con `parentShardId` a través de resharding, y **el KCL 1.x lleva en fin de soporte desde el 30 de enero de 2026**.
+> 7. **Firehose es un servicio de entrega:** buffer de **1 to 128 MB (por defecto 5) / 0 to 900 s (por defecto 300)**, lo que se dispare primero; Lambda opcional (**lotes de 0.2 to 3 MB, payload de 6 MB, 5 min, 3 reintentos**); **JSON→Parquet/ORC** opcional (solo S3, ≥64 MB, esquema de Glue, `UNCOMPRESSED`, $0.018/GB); dynamic partitioning opcional (**≤500 particiones activas**, 1.5x de retardo, sin zero-buffering). E5: a 6 MB/s un buffer de **64 MB** se llena en **10.7 s**.
 > 8. **El libro mayor de semántica:** S3/Redshift/OpenSearch/Splunk = **at-least-once** (duplicados tras timeout + reintento); **destino Iceberg = exactly-once** (Glue Data Catalog obligatorio); **tablas de streaming de Kinesis = exactly-once entre shards**; Flink = *procesamiento* exactly-once. El dedup de E7 más el `MERGE` controlado por tiempo es la respuesta para ficheros planos.
-> 9. **Patrones de aterrizaje:** ficheros de micro-batch más compactación; Iceberg stream sink con un intervalo de commit (Firehose→Iceberg, sink Iceberg de MSK Connect); tablas de streaming gestionadas con compactación integrada (**Kinesis $14/TB hacia S3 Tables, MSK $10/TB vía brokers Express, frescura de 5–15 min, DLQ obligatorio, sin backfill**).
+> 9. **Patrones de aterrizaje:** ficheros de micro-batch más compactación; Iceberg stream sink con un intervalo de commit (Firehose→Iceberg, sink Iceberg de MSK Connect); tablas de streaming gestionadas con compactación integrada (**Kinesis $14/TB hacia S3 Tables, MSK $10/TB vía brokers Express, frescura de 5 to 15 min, DLQ obligatorio, sin backfill**).
 > 10. **MSK es Kafka gestionado, no magia:** provisioned = broker-horas + almacenamiento que pagas cuando está ocioso ($606.94 en el ejemplo de 3 brokers de AWS); Serverless = clúster-hora + partición-hora + GB ($1,299.60 en el ejemplo publicado de Ohio) con un techo de **200 MBps de ingreso**. MSK Connect (Kafka Connect 2.7.1/3.7.x) trae Debezium y el sink S3 de Confluent sin cambios de código.
 > 11. **Carriles de dispositivos y medios:** las reglas de IoT Core enrutan MQTT hacia `kinesis`/`firehose`/`s3`/`timestream`/… con un rol IAM por acción, claves de partición de plantilla de sustitución, y **Basic Ingest** para saltarse las cuotas del broker; Kinesis Video Streams maneja medios a **$0.0085/GB** ingerido y consumido (tramo en caliente desde 2025-11-26).
 > 12. **Estado de la capa en octubre de 2026:** KDA for SQL borrado (**2026-01-27**) → Managed Service for Apache Flink; tablas de streaming de MSK GA (**2026-07-30**, 10 GB/s, −60% en coste de ingesta); data delivery nativo de Kinesis y tablas de streaming (solo on-demand); CDC hacia Iceberg de Firehose deprecado (**2025-09-15**); On-demand Advantage activo (**2025-11-03**); registros de 10 MiB activos (**2025-10-28**).

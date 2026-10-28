@@ -8,13 +8,13 @@ duration: "75 min"
 
 # Compute & Processing
 
-> **Bottom Line:** Snowflake's Virtual Warehouses win on simplicity and SQL concurrency. Databricks' Spark clusters with Photon win on flexibility and ML workloads. AWS gives you both options — and the complexity of maintaining them.
+> **Bottom Line:** Snowflake's Virtual Warehouses win on simplicity and SQL concurrency. Databricks' Spark clusters with Photon win on flexibility and ML workloads. AWS gives you both options, and the complexity of maintaining them.
 
 ---
 
 ## 4.1 Compute Abstraction Levels
 
-Each platform abstracts compute differently. Understanding the abstraction level helps set expectations on what you can — and cannot — control.
+Each platform abstracts compute differently. Understanding the abstraction level helps set expectations on what you can, and cannot, control.
 
 ```mermaid
 flowchart TD
@@ -69,7 +69,7 @@ Redshift is AWS's fully managed MPP (Massively Parallel Processing) columnar SQL
     Each node has local SSD. Data distributed by DISTKEY/DISTSTYLE.
 ```
 
-### Redshift Distribution Styles — Critical for Performance
+### Redshift Distribution Styles: Critical for Performance
 
 ```sql
 -- DISTSTYLE KEY: Distribute rows by a specific column value
@@ -103,7 +103,7 @@ DISTSTYLE EVEN;
 -- ⚠️ GOTCHA: Mismatched DISTKEY between two joined tables = full network shuffle = SLOW
 ```
 
-### Redshift Spectrum — Querying S3 from Redshift
+### Redshift Spectrum: Querying S3 from Redshift
 
 ```sql
 -- Create an external schema pointing to Glue Catalog
@@ -148,7 +148,7 @@ Snowflake VWs are T-shirt sized. Doubling the size roughly doubles the performan
 | **5X-Large** | 256 | 256 | Extreme workloads |
 | **6X-Large** | 512 | 512 | Largest supported size |
 
-**💰 Cost Note:** Snowflake credits cost approximately $2-4 USD each (varies by edition and cloud region). A 4X-Large running for 1 hour ≈ $256–512 USD.
+**💰 Cost Note:** Snowflake credits cost approximately $2-4 USD each (varies by edition and cloud region). A 4X-Large running for 1 hour ≈ $256 to 512 USD.
 
 ### Virtual Warehouse Lifecycle Management
 
@@ -182,7 +182,7 @@ ORDER BY credits_used DESC;
 
 ### Query Acceleration Service (QAS)
 
-Snowflake's Query Acceleration Service offloads portions of eligible queries to serverless compute — particularly useful for large scans that don't benefit from VW size increases:
+Snowflake's Query Acceleration Service offloads portions of eligible queries to serverless compute: particularly useful for large scans that don't benefit from VW size increases:
 
 ```sql
 -- Enable QAS on a warehouse (Enterprise Edition+)
@@ -196,7 +196,7 @@ ALTER WAREHOUSE analytics_wh SET
 -- - Outlier queries (taking much longer than average)
 ```
 
-### Snowpark — Beyond SQL
+### Snowpark: Beyond SQL
 
 Snowpark extends Snowflake's compute to support Python, Java, and Scala directly in the VW:
 
@@ -292,7 +292,7 @@ cluster_config = {
 }
 ```
 
-### Photon Engine — Vectorised Query Execution
+### Photon Engine: Vectorised Query Execution
 
 Photon is Databricks' proprietary C++ query engine that replaces the JVM-based Spark SQL execution for compatible operations:
 
@@ -326,7 +326,7 @@ df.explain(mode="formatted")
 
 ### Databricks SQL Warehouses
 
-SQL Warehouses are purpose-built for SQL analytics — separate from Spark clusters, optimised for concurrency:
+SQL Warehouses are purpose-built for SQL analytics: separate from Spark clusters, optimised for concurrency:
 
 ```sql
 -- Configure via Databricks UI or API
@@ -350,7 +350,7 @@ GROUP BY 1, 2
 ORDER BY 1, 2;
 ```
 
-### Adaptive Query Execution (AQE) — Databricks' Performance Edge
+### Adaptive Query Execution (AQE): Databricks' Performance Edge
 
 Spark's AQE re-optimises query plans *at runtime* based on actual statistics, unlike Snowflake's static planning:
 
@@ -373,7 +373,7 @@ spark.conf.set("spark.sql.adaptive.skewJoin.enabled", "true")
 
 ---
 
-## 4.5 Amazon EMR — Managed Spark/Trino
+## 4.5 Amazon EMR: Managed Spark/Trino
 
 For teams needing full Spark (or Presto/Trino) control on AWS without Databricks:
 
@@ -427,7 +427,7 @@ response = emr_serverless.start_job_run(
 
 ## 4.7 The 1TB Query Benchmark Perspective
 
-*(Illustrative performance benchmarks — actual results vary by query shape, data skew, and configuration)*
+*(Illustrative performance benchmarks: actual results vary by query shape, data skew, and configuration)*
 
 | Workload Type | AWS Redshift (2XL, 2 nodes) | Snowflake (Large VW) | Databricks (Photon, 8-core workers) |
 |---------------|---------------------------|---------------------|-------------------------------------|

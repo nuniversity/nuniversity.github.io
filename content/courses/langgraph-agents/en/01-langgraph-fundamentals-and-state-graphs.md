@@ -160,7 +160,7 @@ builder.set_finish_point("b")
 ```
 
 [!TIP]
-Node functions **must** return a dict (or `None`). The returned values are merged into the shared state via a shallow update. Keys not returned retain their previous value — this is how state persists between nodes.
+Node functions **must** return a dict (or `None`). The returned values are merged into the shared state via a shallow update. Keys not returned retain their previous value; this is how state persists between nodes.
 
 ### Parallel Node Execution
 
@@ -228,7 +228,7 @@ print(result["messages"])
 ```
 
 [!IMPORTANT]
-The `.compile()` method freeze the graph definition. After compilation, you cannot add nodes or edges — you must rebuild the builder. For dynamic topologies, see Lesson 4 on dynamic graph updates.
+The `.compile()` method freeze the graph definition. After compilation, you cannot add nodes or edges; you must rebuild the builder. For dynamic topologies, see Lesson 4 on dynamic graph updates.
 
 ### Streaming Results
 

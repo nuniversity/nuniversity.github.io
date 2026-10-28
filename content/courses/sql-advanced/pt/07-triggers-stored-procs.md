@@ -332,7 +332,7 @@ CREATE TRIGGER trg_transaction_balance
 
 | Prática | Porquê |
 |---|---|
-| Mantenha triggers rápidos | Eles executam na mesma transação — triggers lentos bloqueiam tudo |
+| Mantenha triggers rápidos | Eles executam na mesma transação: triggers lentos bloqueiam tudo |
 | Evite triggers recursivos | Trigger em A → insere em B → trigger em B → insere em A |
 | Documente efeitos colaterais | Triggers são invisíveis para o código da aplicação; documente-os |
 | Teste minuciosamente | Triggers podem quebrar operações em lote e importações |

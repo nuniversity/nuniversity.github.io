@@ -43,10 +43,10 @@ Snowflake was founded in 2012 by former Oracle engineers with a singular vision:
 
 Key architectural decisions that define Snowflake:
 - **Multi-cluster Shared Data Architecture:** All compute nodes share a single, centrally managed storage layer (not HDFS or local disks).
-- **The Cloud Services Layer:** A globally distributed, always-on layer handling query optimisation, metadata, authentication, and transaction management — a single control plane for everything.
+- **The Cloud Services Layer:** A globally distributed, always-on layer handling query optimisation, metadata, authentication, and transaction management: a single control plane for everything.
 - **Time Travel & Zero-Copy Cloning:** First-class features, not afterthoughts, enabling instant snapshots and data sharing without data movement.
 
-**Key Implication:** Snowflake is deliberately opinionated. You cannot (easily) run arbitrary Python, tune buffer pool sizes, or control the physical execution plan. That's the point — operational simplicity at the cost of deep configurability.
+**Key Implication:** Snowflake is deliberately opinionated. You cannot (easily) run arbitrary Python, tune buffer pool sizes, or control the physical execution plan. That's the point: operational simplicity at the cost of deep configurability.
 
 ---
 
@@ -57,7 +57,7 @@ Databricks was founded in 2013 by the original creators of Apache Spark at UC Be
 **Core Philosophy:** *"The data warehouse and the data lake are better together. Code-first, governed, open."*
 
 Key architectural bets:
-- **Delta Lake:** An open-source, ACID-compliant storage layer on top of Parquet files — bringing warehouse reliability to the data lake.
+- **Delta Lake:** An open-source, ACID-compliant storage layer on top of Parquet files: bringing warehouse reliability to the data lake.
 - **Unity Catalog:** A single governance layer spanning tables, files, ML models, dashboards, and notebooks.
 - **Mosaic AI:** The end-to-end ML/AI stack from data prep to model serving, integrated into the same platform.
 - **Openness:** Delta Lake is open source (Linux Foundation). Databricks avoids proprietary formats where possible, reducing lock-in compared to Snowflake.

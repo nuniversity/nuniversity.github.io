@@ -16,8 +16,8 @@ When conversations grow too long for the LLM's context window, simple trimming d
 
 LLMs have token limits. Once a conversation exceeds the limit:
 
-1. **Truncation**: Discards early messages — loses context
-2. **Error**: Context window exceeded — request fails
+1. **Truncation**: Discards early messages: loses context
+2. **Error**: Context window exceeded: request fails
 
 Summarization solves this by compressing history into a summary while retaining important details.
 
@@ -263,7 +263,7 @@ def update_running_summary(state: AgentState) -> dict:
 
 ## Summary with Entity Extraction
 
-Go beyond simple summarization — extract structured entities:
+Go beyond simple summarization: extract structured entities:
 
 ```python
 from pydantic import BaseModel, Field
@@ -443,7 +443,7 @@ def extract_memory(state: AgentState) -> dict:
     "The entire conversation history",
     "Only the summary",
     "The most recent messages (enough for immediate context)",
-    "Nothing — clear the list"
+    "Nothing: clear the list"
   ],
   "correct": 2,
   "explanation": "Keep the most recent messages (e.g., last 2-4 turns) so the LLM has immediate context. The summary provides the longer-term context."
@@ -477,4 +477,4 @@ def extract_memory(state: AgentState) -> dict:
 - Truncate messages after summarization to stay within context windows
 - Entity extraction adds structured memory alongside free-text summaries
 - Running summaries trade perfect recall for token efficiency
-- Summarization costs LLM calls — balance frequency with the cost
+- Summarization costs LLM calls: balance frequency with the cost

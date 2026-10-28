@@ -273,7 +273,7 @@ flowchart TD
 | Aspecto | SequentialProcess | HierarchicalProcess |
 | :--- | :--- | :--- |
 | **Ordem de execução** | Linear fixa | Gerente decide dinamicamente |
-| **Autonomia do agente** | Baixa — tarefas pré-atribuídas | Alta — gerente atribui e revisa |
+| **Autonomia do agente** | Baixa, tarefas pré-atribuídas | Alta, gerente atribui e revisa |
 | **Gerente necessário** | Não | Sim (com `allow_delegation=True`) |
 | **Passagem de contexto** | Automática entre tarefas adjacentes | Gerenciada pelo agente gerente |
 | **Melhor para** | Pipelines simples, etapas bem definidas | Fluxos complexos que exigem coordenação |
@@ -375,9 +375,9 @@ No modo sequencial, os agentes executam em ordem fixa. No modo hierárquico, o g
   "type": "multiple-choice",
   "question": "Você está construindo um pipeline de conteúdo: esboço → rascunho → revisão → publicação. Cada etapa depende da anterior. Qual processo você deve usar?",
   "options": [
-    "HierarchicalProcess — para atribuição dinâmica",
-    "SequentialProcess — para etapas lineares fixas",
-    "Nenhum — isso requer código personalizado",
+    "HierarchicalProcess: para atribuição dinâmica",
+    "SequentialProcess: para etapas lineares fixas",
+    "Nenhum; isso requer código personalizado",
     "Qualquer um funcionaria igualmente bem"
   ],
   "correct": 1,
@@ -439,7 +439,7 @@ No modo sequencial, os agentes executam em ordem fixa. No modo hierárquico, o g
   "type": "multiple-choice",
   "question": "Uma crew hierárquica tem um gerente e 3 trabalhadores. A saída do Trabalhador A é abaixo do padrão. O que o gerente pode fazer?",
   "options": [
-    "Nada — as tarefas são fixas após a atribuição",
+    "Nada: as tarefas são fixas após a atribuição",
     "Reatribuir a tarefa a um trabalhador diferente ou solicitar revisão",
     "Remover o Trabalhador A da crew",
     "Mudar para SequentialProcess automaticamente"

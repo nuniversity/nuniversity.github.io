@@ -1,12 +1,12 @@
 ---
-title: "Domain 3.3 — Snowflake Connectors and Integrations"
+title: "Domain 3.3, Snowflake Connectors and Integrations"
 description: "Understand Snowflake's ecosystem of drivers, connectors, and integrations: JDBC, ODBC, Python connector, Kafka connector, storage integrations, API integrations, and Git integration."
 order: 12
 difficulty: intermediate
 duration: "50 min"
 ---
 
-# Domain 3.3 — Snowflake Connectors and Integrations
+# Domain 3.3: Snowflake Connectors and Integrations
 
 ## Exam Weight
 
@@ -100,7 +100,7 @@ for row in cursor_dict:
 
 ## Snowflake Connectors
 
-**Connectors** are higher-level integrations built on top of drivers — they handle specific data source patterns.
+**Connectors** are higher-level integrations built on top of drivers; they handle specific data source patterns.
 
 ### Snowflake Connector for Apache Kafka
 
@@ -232,7 +232,7 @@ DESC INTEGRATION gcs_integration;
 
 ## API Integrations
 
-An **API integration** allows Snowflake to call **external REST API endpoints** — used for External Functions and notification integrations.
+An **API integration** allows Snowflake to call **external REST API endpoints**: used for External Functions and notification integrations.
 
 ### External Functions
 

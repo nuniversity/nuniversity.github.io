@@ -54,7 +54,7 @@ Non-profits may take various legal forms depending on jurisdiction:
 > 2. Surplus revenues must be reinvested in the mission (non-distribution constraint)
 > 3. Legal structures include trust, association, corporation, or cooperative
 > 4. Key distinction from for-profits: no profit distribution to owners
-> 5. Accountable to donors, beneficiaries, regulators — not shareholders
+> 5. Accountable to donors, beneficiaries, regulators: not shareholders
 
 ---
 
@@ -100,7 +100,7 @@ D) Both A and C
 > [!SUCCESS]
 > **Key Takeaways for Exam Day:**
 > 1. Three layers: Cloud Services → Virtual Warehouse → Storage
-> 2. Micro-partitions: 50–500 MB, columnar, immutable
+> 2. Micro-partitions: 50 to 500 MB, columnar, immutable
 > 3. Micro-Partition Size Distribution
 > 4. Three layers: Cloud Services → Virtual Warehouse → Storage
-> 5. Micro-partitions: 50–500 MB, columnar, immutable
+> 5. Micro-partitions: 50 to 500 MB, columnar, immutable

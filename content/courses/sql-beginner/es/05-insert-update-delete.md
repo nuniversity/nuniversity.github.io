@@ -1,16 +1,16 @@
 ---
-title: "INSERT, UPDATE, DELETE — Manipulación de Datos"
+title: "INSERT, UPDATE, DELETE, Manipulación de Datos"
 description: "Aprende INSERT INTO, UPDATE SET, DELETE FROM, TRUNCATE y una introducción a transacciones"
 order: 5
 duration: "20-30 minutos"
 difficulty: "beginner"
 ---
 
-# INSERT, UPDATE, DELETE — Manipulación de Datos
+# INSERT, UPDATE, DELETE: Manipulación de Datos
 
 Leer datos es útil, pero también necesitas crear, modificar y eliminarlos. Estas operaciones se llaman **lenguaje de manipulación de datos (DML)** y forman la columna vertebral de cualquier aplicación.
 
-## INSERT INTO — Añadiendo Nuevas Filas
+## INSERT INTO: Añadiendo Nuevas Filas
 
 ### Insertar una Sola Fila
 
@@ -51,7 +51,7 @@ WHERE age > 60;
 > [!SUCCESS]
 > `INSERT INTO ... SELECT` es poderoso para copiar, archivar y transformar datos entre tablas. La cantidad y los tipos de columnas deben coincidir.
 
-## UPDATE SET — Modificando Filas Existentes
+## UPDATE SET: Modificando Filas Existentes
 
 ### Actualización Básica
 
@@ -93,7 +93,7 @@ SET
 WHERE category = 'Electronics';
 ```
 
-## DELETE FROM — Eliminando Filas
+## DELETE FROM: Eliminando Filas
 
 ### Eliminación Básica
 

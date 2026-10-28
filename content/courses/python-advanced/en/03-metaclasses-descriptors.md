@@ -10,7 +10,7 @@ difficulty: advanced
 
 ## Everything is an Object
 
-In Python, classes are objects too—instances of a metaclass (default: `type`).
+In Python, classes are objects too: instances of a metaclass (default: `type`).
 
 ```python
 class MyClass:

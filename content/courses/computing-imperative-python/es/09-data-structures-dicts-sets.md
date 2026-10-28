@@ -487,7 +487,7 @@ Dados dos diccionarios, escribe código para fusionarlos. Si una clave existe en
 Dados `A = {1, 2, 3, 4, 5}` y `B = {4, 5, 6, 7, 8}`, encuentra:
 - Unión
 - Intersección
-- Diferencia (A - B)
+- Diferencia (A: B)
 - Diferencia simétrica
 
 ### Ejercicio 5: eliminar duplicados

@@ -28,7 +28,7 @@ ROLLBACK;
 ```
 
 > [!NOTE]
-> Most databases run in auto-commit mode by default — each statement is its own transaction. Use `BEGIN` to group multiple statements into one transaction.
+> Most databases run in auto-commit mode by default: each statement is its own transaction. Use `BEGIN` to group multiple statements into one transaction.
 
 ### Savepoints
 
@@ -269,7 +269,7 @@ SELECT * FROM accounts WHERE id = 1 FOR UPDATE NOWAIT;
 ```
 
 > [!WARNING]
-> Deadlocks are not bugs — they're a normal part of concurrent database access. The key is to minimize them (consistent ordering, short transactions) and handle them gracefully (retry logic).
+> Deadlocks are not bugs; they're a normal part of concurrent database access. The key is to minimize them (consistent ordering, short transactions) and handle them gracefully (retry logic).
 
 ## Real-World Example: Order Processing
 

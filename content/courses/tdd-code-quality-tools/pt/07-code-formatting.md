@@ -8,7 +8,7 @@ difficulty: "intermediário"
 
 # Formatação de Código
 
-Formatação de código é o aspecto mais debatido e menos importante da programação — exatamente por isso deve ser **automatizada**. Formatadores como Black e isort eliminam discussões de formatação inteiramente ao aplicar um estilo consistente e legível por máquina.
+Formatação de código é o aspecto mais debatido e menos importante da programação: exatamente por isso deve ser **automatizada**. Formatadores como Black e isort eliminam discussões de formatação inteiramente ao aplicar um estilo consistente e legível por máquina.
 
 ## Por que Automatizar Formatação?
 
@@ -45,7 +45,7 @@ flowchart TD
 
 ## Black: O Formatador Sem Compromisso
 
-Black é "o formatador de código Python sem compromisso." Tem muito poucas opções de configuração por design — produz saída consistente independente de quem executa.
+Black é "o formatador de código Python sem compromisso." Tem muito poucas opções de configuração por design: produz saída consistente independente de quem executa.
 
 ### Instalação
 
@@ -308,7 +308,7 @@ repos:
 
 ### A Ordem Importa!
 
-Execute isort **antes** do Black — ou configure isort com `profile = "black"`:
+Execute isort **antes** do Black: ou configure isort com `profile = "black"`:
 
 ```bash
 # Ordem correta: isort primeiro, depois black
@@ -429,14 +429,14 @@ jobs:
 
 ## Resumo
 
-- **Black** é o formatador sem compromisso — config mínima, saída consistente
+- **Black** é o formatador sem compromisso: config mínima, saída consistente
 - **isort** organiza imports em seções padrão (stdlib, terceiros, primeiro parte)
-- **Sempre execute isort antes do Black** — ou configure isort com `profile = "black"`
+- **Sempre execute isort antes do Black**: ou configure isort com `profile = "black"`
 - **A vírgula final mágica** controla layout vertical vs horizontal no Black
 - **Ganchos pre-commit** automatizam formatação antes do código ser commitado
 - **Verificações CI** garantem que a formatação nunca seja esquecida
 - **Ruff format** é um substituto mais rápido para Black
-- **Consistência vence perfeição** — qualquer formatação automatizada é melhor que debates de formatação manual
+- **Consistência vence perfeição**: qualquer formatação automatizada é melhor que debates de formatação manual
 
 > [!SUCCESS]
 > Formatação automatizada elimina categorias inteiras de comentários de revisão de código. Com Black e isort, sua equipe gasta zero tempo em debates de formatação e 100% da energia de revisão no que importa: lógica, arquitetura e correção.

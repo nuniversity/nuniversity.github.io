@@ -1,6 +1,6 @@
 ---
 title: "Entidades e Objetos de Valor"
-description: "Mergulho profundo em Entidades e Objetos de Valor — os blocos de construção fundamentais do DDD. Aprenda identidade, igualdade, imutabilidade e quando usar cada padrão"
+description: "Mergulho profundo em Entidades e Objetos de Valor, os blocos de construção fundamentais do DDD. Aprenda identidade, igualdade, imutabilidade e quando usar cada padrão"
 order: 4
 duration: "65 minutos"
 difficulty: "avançado"
@@ -8,7 +8,7 @@ difficulty: "avançado"
 
 # Entidades e Objetos de Valor
 
-Entidades e Objetos de Valor são os **dois blocos de construção fundamentais** de um modelo de domínio em DDD. Juntos, eles formam os átomos a partir dos quais estruturas mais ricas, como Agregados, são construídas. Entender a distinção entre eles — e aplicá-la corretamente — é essencial para um modelo de domínio limpo.
+Entidades e Objetos de Valor são os **dois blocos de construção fundamentais** de um modelo de domínio em DDD. Juntos, eles formam os átomos a partir dos quais estruturas mais ricas, como Agregados, são construídas. Entender a distinção entre eles, e aplicá-la corretamente, é essencial para um modelo de domínio limpo.
 
 > [!NOTE]
 > Eric Evans define uma Entidade como "um objeto que não é definido por seus atributos, mas por uma linha de continuidade e identidade." Um Objeto de Valor é "um objeto que descreve alguma característica ou atributo, mas não carrega nenhum conceito de identidade."
@@ -101,7 +101,7 @@ class Cliente:
 
 ## Objetos de Valor: Objetos com Igualdade por Valor
 
-Um Objeto de Valor **não tem identidade**. Dois Objetos de Valor são iguais se todos os seus atributos forem iguais. Eles são imutáveis — uma vez criados, não podem mudar.
+Um Objeto de Valor **não tem identidade**. Dois Objetos de Valor são iguais se todos os seus atributos forem iguais. Eles são imutáveis: uma vez criados, não podem mudar.
 
 ```python
 from dataclasses import dataclass
@@ -200,7 +200,7 @@ class Cliente:
 
 ## Obsessão por Primitivos
 
-Objetos de Valor ajudam a evitar **obsessão por primitivos** — o antipadrão de usar tipos primitivos (strings, ints, floats) para conceitos do domínio.
+Objetos de Valor ajudam a evitar **obsessão por primitivos**, o antipadrão de usar tipos primitivos (strings, ints, floats) para conceitos do domínio.
 
 ```python
 # Obsessão por primitivos (RUIM)

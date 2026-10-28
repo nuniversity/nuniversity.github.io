@@ -552,7 +552,7 @@ resultado = 1 + 1  # noqa: SIM114 (se aplicável)
 - **Pylint**: Análise profunda, 200+ regras, sistema de pontuação. Melhor para revisão abrangente de código.
 - **Ruff**: Extremamente rápido (Rust), substitui múltiplas ferramentas, suporte a auto-correção. Padrão moderno.
 - **Integração**: Todos os três funcionam com ganchos pre-commit e pipelines CI.
-- **Configuração**: Cada ferramenta tem seu próprio formato de arquivo de config — mantenha-os no controle de versão.
+- **Configuração**: Cada ferramenta tem seu próprio formato de arquivo de config: mantenha-os no controle de versão.
 - **Supressão**: Use `# noqa` com moderação com comentários explicativos.
 - **Estratégia**: Comece com Ruff (feedback rápido), adicione Flake8 (ecossistema de plugins), use Pylint para análise profunda periódica.
 

@@ -8,7 +8,7 @@ difficulty: advanced
 
 # Unsafe Rust
 
-Unsafe Rust permite realizar operações que o compilador não pode verificar. É uma ferramenta de último recurso — use-a com responsabilidade e invariantes cuidadosos.
+Unsafe Rust permite realizar operações que o compilador não pode verificar. É uma ferramenta de último recurso: use-a com responsabilidade e invariantes cuidadosos.
 
 ## Quando Usar Unsafe
 

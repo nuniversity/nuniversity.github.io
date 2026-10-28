@@ -1142,7 +1142,7 @@ export default function MarkdownRenderer({
             // Scrollable regions need a name and a tab stop so keyboard users
             // can reach the scrollbars (WCAG 2.1.1).
             role="region"
-            aria-label="Table — scroll inside this box to see all rows and columns"
+            aria-label="Table: scroll inside this box to see all rows and columns"
             tabIndex={0}
           >
             {/* Width comes from `.prose-measure table` in globals.css: it sizes

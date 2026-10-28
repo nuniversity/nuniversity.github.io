@@ -50,7 +50,7 @@ Project: your-project
 
 ## Sesión de Ejemplo: Corrigiendo un Error
 
-Recorramos un escenario del mundo real — corrigiendo un error en una función de Python.
+Recorramos un escenario del mundo real: corrigiendo un error en una función de Python.
 
 ### Paso 1: Describe el Problema
 
@@ -316,7 +316,7 @@ Si la IA pide clarificación, proporciona más detalles:
 > ### Key Takeaways
 
 - Inicie OpenCode en el directorio de su proyecto para asistencia consciente del contexto
-- Sea específico en sus indicaciones — incluya tipos de errores, nombres de archivos y comportamiento esperado
+- Sea específico en sus indicaciones: incluya tipos de errores, nombres de archivos y comportamiento esperado
 - OpenCode usa herramientas (read, write, edit, grep, glob, bash) para interactuar con su proyecto
 - Puede guardar y cargar sesiones para continuidad
 - Haga preguntas de seguimiento para comprear el razonamiento de la IA

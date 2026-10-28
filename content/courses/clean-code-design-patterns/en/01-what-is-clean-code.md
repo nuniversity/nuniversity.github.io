@@ -8,14 +8,14 @@ difficulty: "intermediate"
 
 # What is Clean Code?
 
-Clean code is code that is easy to read, understand, and maintain. It is not about writing clever one-liners or showing off language tricks — it is about communicating intent clearly to other developers (including your future self).
+Clean code is code that is easy to read, understand, and maintain. It is not about writing clever one-liners or showing off language tricks; it is about communicating intent clearly to other developers (including your future self).
 
 > [!NOTE]
 > Robert C. Martin (Uncle Bob) popularized the term in his book *Clean Code*, but the philosophy has been around since the dawn of software engineering. The core idea: **code is read far more often than it is written.**
 
 ## Why Clean Code Matters
 
-Software spends most of its life in maintenance mode. Studies show that developers spend **70–80% of their time reading code**, not writing it. Every hour you invest in writing clean code saves ten hours of future comprehension.
+Software spends most of its life in maintenance mode. Studies show that developers spend **70 to 80% of their time reading code**, not writing it. Every hour you invest in writing clean code saves ten hours of future comprehension.
 
 | Aspect | Messy Code | Clean Code |
 |--------|-----------|------------|
@@ -28,7 +28,7 @@ Software spends most of its life in maintenance mode. Studies show that develope
 ## The Boy Scout Rule
 
 > [!TIP]
-> **"Leave the campground cleaner than you found it."** — Boy Scouts of America
+> **"Leave the campground cleaner than you found it."**: Boy Scouts of America
 
 Applied to code: every time you touch a module, make it a little better than before. Fix one formatting issue, rename one unclear variable, extract one small function. Small improvements compound into massive gains.
 
@@ -320,7 +320,7 @@ The refactored version reduced bug rates by 60% and cut onboarding time for new 
 
 ## Clean Code Mindset
 
-Clean code is not a destination — it is a continuous practice. Here are the habits to cultivate:
+Clean code is not a destination; it is a continuous practice. Here are the habits to cultivate:
 
 1. **Read before you write**: Spend 10 minutes reading existing code before adding new code
 2. **Name before you type**: Think of the right name before writing the variable
@@ -346,7 +346,7 @@ flowchart TD
 ```
 
 > [!SUCCESS]
-> Clean code is not about perfection — it is about continuous improvement. Every commit should leave the codebase slightly better than you found it.
+> Clean code is not about perfection; it is about continuous improvement. Every commit should leave the codebase slightly better than you found it.
 
 ## Practice Exercises
 

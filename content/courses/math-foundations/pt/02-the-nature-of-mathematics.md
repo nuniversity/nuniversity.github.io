@@ -19,7 +19,7 @@ A matemática está em toda parte: nas estrelas, na natureza, na música, na art
 Platão acreditava que os objetos matemáticos existem em um reino ideal, esperando para serem descobertos. Aristóteles argumentava que são abstrações da experiência física. Ambas as visões têm mérito e continuam a influenciar como pensamos sobre matemática.
 
 > [!NOTE]
-> A filosofia da matemática não é apenas abstrata — ela afeta como ensinamos, aprendemos e aplicamos matemática no mundo real.
+> A filosofia da matemática não é apenas abstrata: ela afeta como ensinamos, aprendemos e aplicamos matemática no mundo real.
 
 ---
 
@@ -84,7 +84,7 @@ Segundo Platão (428-348 a.C.), as verdades matemáticas existem independentemen
 
 ### Formalismo
 
-Hilbert (1862-1943) propôs que a matemática é um jogo de símbolos seguindo regras. Não importa se são "verdadeiros" — importa se são consistentes.
+Hilbert (1862-1943) propôs que a matemática é um jogo de símbolos seguindo regras. Não importa se são "verdadeiros": importa se são consistentes.
 
 > [!WARNING]
 > O formalismo pode parecer frio, mas é poderoso: permite que a matemática avance mesmo quando não entendemos o significado profundo das expressões.
@@ -100,7 +100,7 @@ Brouwer (1881-1966) argumentava que a matemática é uma construção da mente h
 
 ### Perspectivas Pragmáticas
 
-Muitos matemáticos contemporâneos adotam uma visão pragmática: a matemática funciona, então é útil. Não importa se é "descoberta" ou "invenção" — importa se resolve problemas.
+Muitos matemáticos contemporâneos adotam uma visão pragmática: a matemática funciona, então é útil. Não importa se é "descoberta" ou "invenção": importa se resolve problemas.
 
 ---
 
@@ -206,7 +206,7 @@ O pensamento matemático vai além dos números:
 - **Precisão**: Comunicação clara e sem ambiguidade
 - **Resolução de problemas**: Decompor complexidade em partes simples
 
-Essas habilidades são valiosas em filosofia, direito, medicina, negócios — em qualquer área que exija raciocínio rigoroso.
+Essas habilidades são valiosas em filosofia, direito, medicina, negócios: em qualquer área que exija raciocínio rigoroso.
 
 ---
 
@@ -216,45 +216,45 @@ Essas habilidades são valiosas em filosofia, direito, medicina, negócios — e
 
 ### Platonismo (Realismo Matemático)
 
-O platonismo é a mais antiga e influente filosofia da matemática. Platão (428-348 a.C.) propôs que existe um **mundo das Formas** — um reino abstrato, eterno e imutável onde habitam todas as verdades perfeitas. Os objetos matemáticos (números, formas, relações) existem nesse reino independentemente de qualquer mente humana os conceber.
+O platonismo é a mais antiga e influente filosofia da matemática. Platão (428-348 a.C.) propôs que existe um **mundo das Formas**: um reino abstrato, eterno e imutável onde habitam todas as verdades perfeitas. Os objetos matemáticos (números, formas, relações) existem nesse reino independentemente de qualquer mente humana os conceber.
 
 **Princípios fundamentais:**
 - Os números e formas existem **independentemente** dos seres humanos
 - Descobrimos verdades matemáticas, não as inventamos
-- A matemática é **universal** — qualquer civilização, em qualquer época, chegaria às mesmas verdades
+- A matemática é **universal**: qualquer civilização, em qualquer época, chegaria às mesmas verdades
 - O mundo físico **participa** das Formas: um triângulo desenhado na areia é uma cópia imperfeita do "triângulo perfeito"
 
-**Exemplo concreto:** Quando calculamos π = 3.14159..., não estamos inventando esse valor — estamos descobrindo algo que sempre existiu, mesmo que nenhum ser humano jamais tenha existido.
+**Exemplo concreto:** Quando calculamos π = 3.14159..., não estamos inventando esse valor: estamos descobrindo algo que sempre existiu, mesmo que nenhum ser humano jamais tenha existido.
 
 **Críticas ao platonismo:**
 - Como uma mente finita e física pode acessar um reino abstrato e eterno? (Problema do acesso)
 - Se os objetos matemáticos existem em outro "mundo", como é que eles afetam o mundo físico?
-- William James chamou isso de "solução luciferiana" — explicar uma coisa misteriosa (matemática) com outra coisa misteriosa (mundo das Formas)
+- William James chamou isso de "solução luciferiana": explicar uma coisa misteriosa (matemática) com outra coisa misteriosa (mundo das Formas)
 
 ### Formalismo
 
-David Hilbert (1862-1943) propôs o formalismo como resposta às crises filosóficas da matemática no final do século XIX. Segundo o formalismo, a matemática **não é sobre nada** — é pura manipulação de símbolos seguindo regras de consistência.
+David Hilbert (1862-1943) propôs o formalismo como resposta às crises filosóficas da matemática no final do século XIX. Segundo o formalismo, a matemática **não é sobre nada**: é pura manipulação de símbolos seguindo regras de consistência.
 
 **Princípios fundamentais:**
 - A matemática é um **jogo formal**: axiomas são regras, teoremas são jogadas legítimas
-- Não importa se os símbolos "significam" algo — importa que o sistema seja **consistente** (não produz contradições)
-- Números não existem "em algum lugar" — são apenas padrões em um sistema formal
+- Não importa se os símbolos "significam" algo: importa que o sistema seja **consistente** (não produz contradições)
+- Números não existem "em algum lugar": são apenas padrões em um sistema formal
 - A matemática é como xadrez: as peças não precisam "significar" nada para que o jogo funcione
 
 **Força do formalismo:** Permitiu que a matemática avançasse mesmo quando não se entendia o significado intuitivo das expressões. A mecânica quântica, por exemplo, usa espaços de Hilbert que ninguém "visualiza", mas que funcionam perfeitamente como formalismos.
 
 **Críticas ao formalismo:**
-- O Teorema da Incompletude de Gödel (1931) mostrou que todo sistema formal consistente é **incompleto** — existem verdades que não podem ser provadas dentro do sistema
+- O Teorema da Incompletude de Gödel (1931) mostrou que todo sistema formal consistente é **incompleto**: existem verdades que não podem ser provadas dentro do sistema
 - Se a matemática é apenas um jogo de símbolos, por que ela se aplica tão bem ao mundo real?
 
 ### Intuicionismo
 
-L.E.J. Brouwer (1881-1966) fundou o intuicionismo como uma revolução radical na filosofia da matemática. Para Brouwer, a matemática é uma **construção da mente humana** — não existe fora da mente.
+L.E.J. Brouwer (1881-1966) fundou o intuicionismo como uma revolução radical na filosofia da matemática. Para Brouwer, a matemática é uma **construção da mente humana**: não existe fora da mente.
 
 **Princípios fundamentais:**
 - Só existe o que pode ser **construído** mentalmente de forma finita
 - Rejeita o **princípio do meio excluído** (PME): não se pode afirmar que "P ou não P" sem construir uma prova de P ou de não P
-- Infinitos atuais (um "todos os números naturais") são rejeitados — só existem potenciais
+- Infinitos atuais (um "todos os números naturais") são rejeitados: só existem potenciais
 - Um número só existe se pudermos **construí-lo** ou **calculá-lo** explicitamente
 
 **Implicações radicais:**
@@ -271,7 +271,7 @@ L.E.J. Brouwer (1881-1966) fundou o intuicionismo como uma revolução radical n
 
 ### Pragmatismo
 
-O pragmatismo, desenvolvido por filósofos como Charles Sanders Peirce, William James e John Dewey, oferece uma perspectiva mais flexível. Para o pragmatista, **não importa** se a matemática é descoberta ou inventada — importa se ela **funciona**.
+O pragmatismo, desenvolvido por filósofos como Charles Sanders Peirce, William James e John Dewey, oferece uma perspectiva mais flexível. Para o pragmatista, **não importa** se a matemática é descoberta ou inventada: importa se ela **funciona**.
 
 **Princípios fundamentais:**
 - A verdade matemática se define por suas **consequências práticas**
@@ -279,11 +279,11 @@ O pragmatismo, desenvolvido por filósofos como Charles Sanders Peirce, William 
 - Não há necessidade de resolver o debate "descoberta vs. invenção"
 - A eficácia da matemática na ciência é evidência suficiente de seu valor
 
-**Argumento pragmático:** "Dá no mesmo" se π existe em um reino platônico ou se é uma construção humana — o fato é que ele permite construir pontes, lançar satélites e prever eclipses. A utilidade fala por si.
+**Argumento pragmático:** "Dá no mesmo" se π existe em um reino platônico ou se é uma construção humana, o fato é que ele permite construir pontes, lançar satélites e prever eclipses. A utilidade fala por si.
 
 **Vantagem:** Não prende o matemático a compromissos metafísicos. Um engenheiro pode usar a fórmula quadrática sem se importar se ela "existe" em algum mundo abstrato.
 
-**Crítica ao pragmatismo:** Não responde a perguntas fundamentais — por que a matemática é tão eficaz? O pragmatismo "engole o anzol" sem digerir.
+**Crítica ao pragmatismo:** Não responde a perguntas fundamentais: por que a matemática é tão eficaz? O pragmatismo "engole o anzol" sem digerir.
 
 ### Comparação das Filosofias
 
@@ -305,19 +305,19 @@ Considere o Teorema de Pitágoras: em qualquer triângulo retângulo, a² + b² 
 
 ### Visão Platonista
 
-"O Teorema de Pitágoras é uma **verdade eterna e imutável** que existe no mundo das Formas. Antes de Pitágoras, antes de qualquer civilização, a relação a² + b² = c² já era verdadeira em todos os triângulos retângulos. Pitágoras não inventou isso — ele **descobriu** uma relação que sempre existiu. Mesmo que nenhum ser humano jamais existisse, essa relação continuaria verdadeira."
+"O Teorema de Pitágoras é uma **verdade eterna e imutável** que existe no mundo das Formas. Antes de Pitágoras, antes de qualquer civilização, a relação a² + b² = c² já era verdadeira em todos os triângulos retângulos. Pitágoras não inventou isso: ele **descobriu** uma relação que sempre existiu. Mesmo que nenhum ser humano jamais existisse, essa relação continuaria verdadeira."
 
 **Raciocínio:** A geometria euclidiana descreve uma realidade objetiva. O universo obedece a essas leis porque elas são parte de sua estrutura fundamental.
 
 ### Visão Formalista
 
-"O Teorema de Pitágoras é uma **consequência lógica** dos axiomas da geometria euclidiana. Não dizemos que ele é 'verdadeiro' em algum sentido metafísico — dizemos que ele é **provable** dentro do sistema. Se mudarmos os axiomas (como na geometria hiperbólica), a relação muda. Não há 'verdade' absoluta — há apenas coerência formal."
+"O Teorema de Pitágoras é uma **consequência lógica** dos axiomas da geometria euclidiana. Não dizemos que ele é 'verdadeiro' em algum sentido metafísico, dizemos que ele é **provable** dentro do sistema. Se mudarmos os axiomas (como na geometria hiperbólica), a relação muda. Não há 'verdade' absoluta, há apenas coerência formal."
 
 **Raciocínio:** Em geometria euclidiana (com o axioma das paralelas), a² + b² = c². Em geometria hiperbólica, não. Ambas são "verdadeiras" dentro de seus sistemas.
 
 ### Visão Intuicionista
 
-"O Teorema de Pitágoras é **construível**: podemos construir, passo a passo, uma prova que qualquer mente humana pode seguir e verificar. A prova não depende de uma realidade externa — depende de nossa capacidade de **construir** a demonstração. Se não pudermos construir a prova, o teorema não existe."
+"O Teorema de Pitágoras é **construível**: podemos construir, passo a passo, uma prova que qualquer mente humana pode seguir e verificar. A prova não depende de uma realidade externa: depende de nossa capacidade de **construir** a demonstração. Se não pudermos construir a prova, o teorema não existe."
 
 **Raciocínio:** A prova clássica (construção de quadrados sobre os lados) é aceitável porque é construtiva. Mas provas por contradição que não produzem um algoritmo explícito seriam rejeitadas.
 
@@ -328,7 +328,7 @@ Considere o Teorema de Pitágoras: em qualquer triângulo retângulo, a² + b² 
 **Raciocínio:** Não importa se o teorema "existe" em algum reino abstrato. O que importa é que ele resolve problemas reais de forma confiável.
 
 > [!NOTE]
-> Todos os quatro filósofos concordariam em como **aplicar** o Teorema de Pitágoras. A diferença está no que eles pensam sobre o que significa dizer que ele é "verdadeiro". A filosofia não muda a matemática — muda como a entendemos.
+> Todos os quatro filósofos concordariam em como **aplicar** o Teorema de Pitágoras. A diferença está no que eles pensam sobre o que significa dizer que ele é "verdadeiro". A filosofia não muda a matemática: muda como a entendemos.
 
 ---
 
@@ -372,14 +372,14 @@ O pensamento matemático vai muito além de resolver equações. As habilidades 
 
 ### Pensamento Matemático e Epistemologia
 
-A filosofia da matemática influencia diretamente a **epistemologia** — a teoria do conhecimento:
+A filosofia da matemática influencia diretamente a **epistemologia**: a teoria do conhecimento:
 
 - Se o platonismo está certo, o conhecimento matemático é **objetivo e universal**
 - Se o formalismo está certo, o conhecimento matemático é **relativo ao sistema**
 - Se o intuicionismo está certo, o conhecimento matemático é **construído e limitado**
 - Se o pragmatismo está certo, o conhecimento matemático é **instrumental e revisável**
 
-Essa questão tem implicações profundas para a ciência: se a matemática é objetiva, então as leis da física são descobertas. Se é construída, então são modelos úteis — mas não necessariamente "verdadeiros".
+Essa questão tem implicações profundas para a ciência: se a matemática é objetiva, então as leis da física são descobertas. Se é construída, então são modelos úteis, mas não necessariamente "verdadeiros".
 
 ---
 
@@ -403,7 +403,7 @@ Essa questão tem implicações profundas para a ciência: se a matemática é o
   "answers": {
     "1": "formalismo"
   },
-  "explanation": "O formalismo vê a matemática como um jogo de símbolos: os objetos não precisam 'existir' em lugar algum — basta que o sistema seja consistente."
+  "explanation": "O formalismo vê a matemática como um jogo de símbolos: os objetos não precisam 'existir' em lugar algum: basta que o sistema seja consistente."
 }
 ```
 
@@ -420,8 +420,8 @@ Essa questão tem implicações profundas para a ciência: se a matemática é o
 
 ```fillblank
 {
-  "question": "Para o _____, a questão se a matemática é descoberta ou inventada é irrelevante — o que importa é se ela funciona para resolver problemas.",
-  "template": "Para o {{1}}__, a questão se a matemática é descoberta ou inventada é irrelevante — o que importa é se ela funciona para resolver problemas.",
+  "question": "Para o _____, a questão se a matemática é descoberta ou inventada é irrelevante, o que importa é se ela funciona para resolver problemas.",
+  "template": "Para o {{1}}__, a questão se a matemática é descoberta ou inventada é irrelevante, o que importa é se ela funciona para resolver problemas.",
   "answers": {
     "1": "pragmatismo"
   },
@@ -458,8 +458,8 @@ Essa questão tem implicações profundas para a ciência: se a matemática é o
 
 ```fillblank
 {
-  "question": "O _____ de Gödel (1931) mostrou que todo sistema formal consistente é incompleto — existem verdades que não podem ser provadas dentro do sistema.",
-  "template": "O {{1}} de Gödel (1931) mostrou que todo sistema formal consistente é incompleto — existem verdades que não podem ser provadas dentro do sistema.",
+  "question": "O _____ de Gödel (1931) mostrou que todo sistema formal consistente é incompleto: existem verdades que não podem ser provadas dentro do sistema.",
+  "template": "O {{1}} de Gödel (1931) mostrou que todo sistema formal consistente é incompleto: existem verdades que não podem ser provadas dentro do sistema.",
   "answers": {
     "1": "Teorema da Incompletude"
   },

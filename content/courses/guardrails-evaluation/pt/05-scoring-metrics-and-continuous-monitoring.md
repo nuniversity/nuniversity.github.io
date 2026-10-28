@@ -411,4 +411,4 @@ jobs:
 > - Limites de alerta devem ser definidos após estabelecer baseline confiável (mínimo 100 pontos) para evitar fadiga de alerta.
 > - Defina SLIs, SLOs e SLAs para medir e comunicar desempenho do agente objetivamente.
 > - Use níveis de severidade e histerese em alertas para focar sua equipe em problemas genuínos.
-> - Todo componente — pontuação, armazenamento, detecção de drift, alertas, dashboards — deve ser definido antes do lançamento em produção.
+> - Todo componente, pontuação, armazenamento, detecção de drift, alertas, dashboards, deve ser definido antes do lançamento em produção.

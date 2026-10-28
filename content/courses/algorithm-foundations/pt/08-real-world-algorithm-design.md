@@ -119,7 +119,7 @@ flowchart TD
 ```
 
 > [!NOTE]
-> Observe que os passos 5-8 (macarrão) e os passos 9-16 (molho) podem acontecer em paralelo. Isso é chamado de **execução concorrente** -- dois processos rodando ao mesmo tempo. Bons cozinheiros gerenciam ambos simultaneamente para terminar ao mesmo tempo.
+> Observe que os passos 5-8 (macarrão) e os passos 9-16 (molho) podem acontecer em paralelo. Isso é chamado de **execução concorrente**: dois processos rodando ao mesmo tempo. Bons cozinheiros gerenciam ambos simultaneamente para terminar ao mesmo tempo.
 
 ### O que Faz uma Boa Receita Algorítmica?
 
@@ -517,7 +517,7 @@ Nesta lição, você aprendeu:
 - **Framework de design**: Uma abordagem sistemática para projetar algoritmos para qualquer problema
 
 > [!SUCCESS]
-> Agora você tem as ferramentas para reconhecer e projetar algoritmos para problemas do mundo real. Cada sistema complexo que você encontra -- de semáforos a feeds de redes sociais -- é construído a partir dos princípios algorítmicos que você aprendeu neste curso.
+> Agora você tem as ferramentas para reconhecer e projetar algoritmos para problemas do mundo real. Cada sistema complexo que você encontra, de semáforos a feeds de redes sociais, é construído a partir dos princípios algorítmicos que você aprendeu neste curso.
 
 ## Termos-Chave
 

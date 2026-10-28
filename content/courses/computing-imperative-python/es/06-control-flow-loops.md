@@ -66,7 +66,7 @@ Liftoff! 🚀
 > [!WARNING]
 > ¡Asegúrate siempre de que la condición del bucle acabe siendo falsa! Olvidar actualizar la variable del bucle crea un bucle infinito:
 > ```python
-> # INFINITE LOOP - don't do this!
+> # INFINITE LOOP: don't do this!
 > count = 5
 > while count > 0:
 >     print(count)

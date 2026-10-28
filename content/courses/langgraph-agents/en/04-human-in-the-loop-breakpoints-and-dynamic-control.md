@@ -171,7 +171,7 @@ app.update_state(config, {"messages": state.values["messages"]})
 result = app.invoke(None, config)
 ```
 
-This pattern is critical for **human correction** — the operator can fix errors before the agent continues.
+This pattern is critical for **human correction**: the operator can fix errors before the agent continues.
 
 [!IMPORTANT]
 Calling `update_state()` creates a **new checkpoint** with the modified values. The original state is preserved in the prior checkpoint, so you can always roll back if the human correction introduced new errors.
@@ -257,7 +257,7 @@ app2 = builder.compile(checkpointer=memory)
 This enables adaptive agent topologies where the graph shape evolves based on prior execution results.
 
 [!TIP]
-Dynamic updates are useful for **progressive disclosure** — start with a simple graph and add capability nodes as the conversation reveals more complex needs.
+Dynamic updates are useful for **progressive disclosure**: start with a simple graph and add capability nodes as the conversation reveals more complex needs.
 
 ---
 
@@ -441,4 +441,4 @@ The graph pauses at the interrupt node, waits for human input, then routes based
 - Breakpoints can be inserted at specific nodes or at every node for debugging.
 - Implement timeout handling for production HITL to prevent abandoned interrupts.
 - Use `interrupt_before` and `interrupt_after` for step-through debugging.
-- State editing creates new checkpoints — the original state is always recoverable.
+- State editing creates new checkpoints: the original state is always recoverable.

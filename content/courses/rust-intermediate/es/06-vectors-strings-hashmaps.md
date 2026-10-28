@@ -10,7 +10,7 @@ difficulty: "intermedio"
 
 La biblioteca estándar de Rust proporciona colecciones potentes y eficientes. Entender sus internos y APIs es esencial para el desarrollo productivo en Rust.
 
-## Vec\<T\> — Arrays Dinámicos
+## Vec\<T\>: Arrays Dinámicos
 
 Los vectores almacenan elementos del mismo tipo en memoria heap contigua:
 
@@ -103,7 +103,7 @@ fn main() {
 > [!SUCCESS]
 > Pre-asigna con `Vec::with_capacity(n)` cuando sepas el tamaño esperado. Esto evita reasignaciones repetidas.
 
-## String — Texto UTF-8
+## String: Texto UTF-8
 
 `String` es un `Vec<u8>` que garantiza UTF-8 válido:
 
@@ -199,7 +199,7 @@ fn main() {
 }
 ```
 
-## HashMap\<K, V\> — Almacenamiento Clave-Valor
+## HashMap\<K, V\>: Almacenamiento Clave-Valor
 
 ```rust
 use std::collections::HashMap;

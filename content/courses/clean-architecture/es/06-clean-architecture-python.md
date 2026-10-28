@@ -11,7 +11,7 @@ difficulty: "intermediate"
 Python es un lenguaje excelente para la Arquitectura Limpia. Su tipado dinámico, las clases Protocol y su sintaxis sencilla facilitan definir límites, invertir dependencias y mantener pura la lógica de negocio.
 
 > [!NOTE]
-> La filosofía de Python encaja de forma natural con la Arquitectura Limpia: simplicidad, legibilidad y practicidad. No necesitas un contenedor de DI pesado — el duck typing y las dataclasses de Python bastan.
+> La filosofía de Python encaja de forma natural con la Arquitectura Limpia: simplicidad, legibilidad y practicidad. No necesitas un contenedor de DI pesado: el duck typing y las dataclasses de Python bastan.
 
 ## Estructura del proyecto
 
@@ -69,7 +69,7 @@ my_project/
 
 ## Uso de Protocol para los límites
 
-El `typing.Protocol` de Python (PEP 544) ofrece subtipado estructural — no necesitas herencia explícita:
+El `typing.Protocol` de Python (PEP 544) ofrece subtipado estructural: no necesitas herencia explícita:
 
 ```python
 from typing import Protocol, runtime_checkable
@@ -129,7 +129,7 @@ class FakeOrderRepository:
 ```
 
 > [!NOTE]
-> A diferencia de las ABC, los Protocol usan el **subtipado estructural** — un objeto se considera que implementa el protocolo si tiene los métodos adecuados, independientemente de su jerarquía de clases. Es más pythónico y más flexible.
+> A diferencia de las ABC, los Protocol usan el **subtipado estructural**: un objeto se considera que implementa el protocolo si tiene los métodos adecuados, independientemente de su jerarquía de clases. Es más pythónico y más flexible.
 
 ## Dataclasses para DTOs y entidades
 
@@ -243,7 +243,7 @@ class PlaceOrderOutput:
 
 ## Inyección de dependencias sin framework
 
-Python no necesita un framework de DI — la inyección manual es explícita y limpia:
+Python no necesita un framework de DI: la inyección manual es explícita y limpia:
 
 ```python
 # --- composition_root.py ---
@@ -735,7 +735,7 @@ class PlaceOrderOutput(BaseModel):
 
 | Aspecto | Solución en Python | Impacto |
 |---------|---------------|--------|
-| Costo de los límites | Llamadas a Protocol | Mínimo — despacho dinámico de Python |
+| Costo de los límites | Llamadas a Protocol | Mínimo: despacho dinámico de Python |
 | Contenedor de DI | Inyección manual | Cero overhead |
 | Creación de DTOs | Instanciación de dataclasses | Despreciable |
 | Patrón repositorio | SQL frente a ORM | El ORM añade un 10-30% de latencia |

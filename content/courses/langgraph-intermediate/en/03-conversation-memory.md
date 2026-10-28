@@ -73,7 +73,7 @@ def chat_node(state: ConversationState) -> dict:
 ```
 
 [!TIP]
-Pattern 1 is more efficient — you only return the new messages rather than the entire list. The reducer handles the concatenation.
+Pattern 1 is more efficient; you only return the new messages rather than the entire list. The reducer handles the concatenation.
 
 ---
 
@@ -426,7 +426,7 @@ app.invoke({"messages": [HumanMessage("What do I love?")]}, session)
 
 [!SUCCESS]
 ### Key Takeaways
-- `add_messages` is the smart reducer for conversation history — append, dedupe, update
+- `add_messages` is the smart reducer for conversation history: append, dedupe, update
 - Persistence + add_messages enables multi-turn conversation memory
 - Trim messages to stay within LLM context windows
 - Use `trim_messages()` with strategy "last" for simple truncation

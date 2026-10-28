@@ -1,6 +1,6 @@
 ---
 title: "Defining Roles, Goals, Backstories and Delegation"
-description: "Master agent attributes — role, goal, backstory, delegation, verbose mode, and memory — for specialized multi-agent collaboration."
+description: "Master agent attributes, role, goal, backstory, delegation, verbose mode, and memory, for specialized multi-agent collaboration."
 order: 2
 duration: "45 min"
 difficulty: "intermediate"
@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Defining Roles, Goals, Backstories and Delegation
 
-A well-defined agent is the foundation of a reliable CrewAI system. Each attribute — role, goal, backstory, delegation settings — shapes how the agent behaves, collaborates, and delegates tasks to peers. Getting these right is the difference between a system that produces generic text and one that delivers expert-level results.
+A well-defined agent is the foundation of a reliable CrewAI system. Each attribute, role, goal, backstory, delegation settings, shapes how the agent behaves, collaborates, and delegates tasks to peers. Getting these right is the difference between a system that produces generic text and one that delivers expert-level results.
 
 ---
 
@@ -147,8 +147,8 @@ agent = Agent(
 ```
 
 Three verbosity levels:
-- `False` — no output (default)
-- `True` — detailed step-by-step logs
+- `False`: no output (default)
+- `True`: detailed step-by-step logs
 - A `Verbose` enum with granular control (available in newer versions)
 
 ```python
@@ -216,7 +216,7 @@ sequenceDiagram
 
 ---
 
-## Specialized Agents with Delegation — Full Example
+## Specialized Agents with Delegation: Full Example
 
 ```python
 from crewai import Agent, Task, Crew
@@ -346,8 +346,8 @@ result = crew.kickoff()
 
 | Attribute | Type | Default | Effect |
 | :--- | :--- | :--- | :--- |
-| `role` | `str` | — (required) | Sets agent persona |
-| `goal` | `str` | — (required) | Defines objective |
+| `role` | `str` |: (required) | Sets agent persona |
+| `goal` | `str` |: (required) | Defines objective |
 | `backstory` | `str` | `""` | Adds narrative context |
 | `allow_delegation` | `bool` | `False` | Enables cross-agent delegation |
 | `verbose` | `bool` / `Verbose` | `False` | Enables step-by-step logging |
@@ -391,7 +391,7 @@ result = crew.kickoff()
   "question": "Your research team has 4 agents all with allow_delegation=True. The task keeps getting passed between agents without completing. What is the issue?",
   "options": [
     "The LLM is too slow",
-    "Too many agents can delegate — only managers should delegate",
+    "Too many agents can delegate: only managers should delegate",
     "The verbose mode is causing delays",
     "The tasks are too complex"
   ],

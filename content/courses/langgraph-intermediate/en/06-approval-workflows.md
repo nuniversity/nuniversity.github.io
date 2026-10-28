@@ -26,7 +26,7 @@ The agent presents a proposal, the human decides, and execution follows accordin
 
 ## Before-Node Interrupt
 
-Interrupt **before** a node executes — the human decides whether the node should run:
+Interrupt **before** a node executes: the human decides whether the node should run:
 
 ```python
 from langgraph.graph import StateGraph, START, END
@@ -83,13 +83,13 @@ app = builder.compile(checkpointer=MemorySaver())
 ```
 
 [!NOTE]
-A **before-node** interrupt prevents an action from happening until approved. This is the most common approval pattern — it prevents unauthorized or risky actions.
+A **before-node** interrupt prevents an action from happening until approved. This is the most common approval pattern; it prevents unauthorized or risky actions.
 
 ---
 
 ## After-Node Interrupt
 
-Interrupt **after** a node executes — the human reviews the result:
+Interrupt **after** a node executes: the human reviews the result:
 
 ```python
 def draft_email(state: EmailState) -> dict:
@@ -446,7 +446,7 @@ app = builder.compile(checkpointer=MemorySaver())
   "options": [
     "The router function reading state['approved']",
     "The content of the interrupt response",
-    "Both — the node writes the decision to state, then a router reads it",
+    "Both: the node writes the decision to state, then a router reads it",
     "The graph topology is fixed"
   ],
   "correct": 2,

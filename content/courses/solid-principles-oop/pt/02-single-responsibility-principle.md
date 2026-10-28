@@ -10,7 +10,7 @@ difficulty: "intermediário"
 
 > **Uma classe deve ter um, e apenas um, motivo para mudar.**
 
-O Princípio da Responsabilidade Única é o primeiro dos princípios SOLID. Ele afirma que toda classe deve ter exatamente uma responsabilidade — um trabalho para fazer, um motivo para mudar. Quando uma classe assume múltiplas responsabilidades, ela se torna frágil, difícil de testar e difícil de manter.
+O Princípio da Responsabilidade Única é o primeiro dos princípios SOLID. Ele afirma que toda classe deve ter exatamente uma responsabilidade: um trabalho para fazer, um motivo para mudar. Quando uma classe assume múltiplas responsabilidades, ela se torna frágil, difícil de testar e difícil de manter.
 
 ## O Problema: Classes Deus
 

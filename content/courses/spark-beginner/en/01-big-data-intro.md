@@ -45,7 +45,7 @@ Data arrives in structured (database tables), semi-structured (JSON, XML, CSV), 
 1. **Storage**: Traditional storage systems cannot scale economically to petabytes
 2. **Processing**: Single-machine processing takes too long or fails outright
 3. **Data Transfer**: Moving large datasets over networks creates bottlenecks
-4. **Fault Tolerance**: Hardware failures are common at scale — systems must recover automatically
+4. **Fault Tolerance**: Hardware failures are common at scale: systems must recover automatically
 5. **Skill Gap**: Big data tools require specialized knowledge
 
 ## The Hadoop Ecosystem
@@ -151,7 +151,7 @@ BI Dashboard (Tableau, Superset)
 2. Hadoop provided the foundation but MapReduce is too slow for interactive/iterative workloads
 3. Spark processes data in-memory using a DAG engine, achieving 10-100x speedups
 4. Spark unified batch, streaming, SQL, ML, and graph processing in one framework
-5. Spark reads from external storage — it is a processing engine, not a storage system
+5. Spark reads from external storage; it is a processing engine, not a storage system
 
 ## Practice Questions
 

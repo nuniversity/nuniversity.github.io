@@ -33,7 +33,7 @@ LEFT JOIN employees e
 The HR department appears even though it has no employees.
 
 > [!NOTE]
-> Some databases use `LEFT OUTER JOIN`. The `OUTER` keyword is optional — `LEFT JOIN` means the same thing.
+> Some databases use `LEFT OUTER JOIN`. The `OUTER` keyword is optional: `LEFT JOIN` means the same thing.
 
 ## RIGHT JOIN
 
@@ -48,7 +48,7 @@ RIGHT JOIN departments d
     ON e.department_id = d.department_id;
 ```
 
-This is functionally identical to the LEFT JOIN example above — just written from the other direction.
+This is functionally identical to the LEFT JOIN example above: just written from the other direction.
 
 > [!WARNING]
 > Many developers find RIGHT JOIN confusing. When possible, rewrite as LEFT JOIN by swapping table order. Virtually all production SQL uses LEFT JOIN exclusively.
@@ -93,7 +93,7 @@ WHERE e.employee_id IS NULL
 
 ## CROSS JOIN
 
-A CROSS JOIN produces the Cartesian product — every row from table A paired with every row from table B.
+A CROSS JOIN produces the Cartesian product: every row from table A paired with every row from table B.
 
 ```sql
 SELECT

@@ -199,7 +199,7 @@ export function LanguagesHubClient({ lang, activities, dict }: LanguagesHubClien
             {languages.tracks?.title || 'Language courses'}
           </h2>
           <p className="text-muted-foreground">
-            {languages.tracks?.coming_soon || 'Coming soon — new language tracks are on the way.'}
+            {languages.tracks?.coming_soon || 'Coming soon: new language tracks are on the way.'}
           </p>
         </section>
       </div>

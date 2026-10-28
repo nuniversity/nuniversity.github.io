@@ -210,7 +210,7 @@ Brazil possesses one of the world's largest and most diverse third-sector ecosys
 - A) OSCIP
 - B) Associação
 - C) Fundação
-- D) Empresa Social (Social Enterprise - not a formal type yet)
+- D) Empresa Social (Social Enterprise: not a formal type yet)
 
 **Q3.** What is the primary benefit of OSCIP status that differentiates it from Associação?
 

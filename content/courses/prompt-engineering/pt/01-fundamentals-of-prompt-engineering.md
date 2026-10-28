@@ -10,7 +10,7 @@ duration: "30 min"
 
 ## O que é um Prompt?
 
-Um prompt é a entrada que você fornece a um LLM para obter uma resposta específica. É a unidade fundamental de interação com modelos de IA modernos como GPT-4, Claude e Llama. A qualidade do seu prompt determina diretamente a qualidade da saída do modelo — lixo entra, lixo sai continua sendo tão verdadeiro para IA quanto para software tradicional.
+Um prompt é a entrada que você fornece a um LLM para obter uma resposta específica. É a unidade fundamental de interação com modelos de IA modernos como GPT-4, Claude e Llama. A qualidade do seu prompt determina diretamente a qualidade da saída do modelo: lixo entra, lixo sai continua sendo tão verdadeiro para IA quanto para software tradicional.
 
 ### Fluxo de Entrada/Saída do LLM
 
@@ -50,7 +50,7 @@ Cada chamada de API passa por múltiplos estágios: tokenização converte seu t
 
 ## Tokenização
 
-Tokenização é o processo de dividir o texto em unidades menores (tokens) que o modelo consegue entender. Modelos diferentes usam algoritmos de tokenização diferentes — GPT-4 usa Byte-Pair Encoding (BPE), enquanto outros modelos podem usar SentencePiece ou WordPiece.
+Tokenização é o processo de dividir o texto em unidades menores (tokens) que o modelo consegue entender. Modelos diferentes usam algoritmos de tokenização diferentes: GPT-4 usa Byte-Pair Encoding (BPE), enquanto outros modelos podem usar SentencePiece ou WordPiece.
 
 ### Fatos sobre Tokens:
 - 1 token ≈ 4 caracteres em inglês
@@ -101,7 +101,7 @@ flowchart LR
 ```
 
 [!IMPORTANT]
-Cada modelo tem uma **janela de contexto** (GPT-4: 8K-128K, Claude 3: 200K, Gemini: 32K-1M). A soma da sua mensagem de sistema + histórico da conversa + entrada do usuário + saída gerada **deve caber** dentro desta janela. Uma vez excedida, o modelo trunca mensagens mais antigas — potencialmente perdendo contexto importante.
+Cada modelo tem uma **janela de contexto** (GPT-4: 8K-128K, Claude 3: 200K, Gemini: 32K-1M). A soma da sua mensagem de sistema + histórico da conversa + entrada do usuário + saída gerada **deve caber** dentro desta janela. Uma vez excedida, o modelo trunca mensagens mais antigas: potencialmente perdendo contexto importante.
 
 ---
 
@@ -116,10 +116,10 @@ LLMs usam um histórico de conversa com três papéis distintos:
 | **Assistente** | Representa as respostas anteriores da IA no histórico | "Você pode usar a função sorted() ou o método .sort()..." |
 
 [!NOTE]
-A mensagem de sistema é particularmente poderosa—ela persiste durante toda a conversa e guia como o modelo responde a todas as mensagens subsequentes.
+A mensagem de sistema é particularmente poderosa: ela persiste durante toda a conversa e guia como o modelo responde a todas as mensagens subsequentes.
 
 [!IMPORTANT]
-**Melhores práticas de prompt de sistema:** Seja específico sobre a persona do modelo, formato de saída e restrições. Inclua salvaguardas como "Se você não souber a resposta, diga." Evite instruções vagas como "seja útil" — em vez disso, descreva como ser útil parece no seu contexto.
+**Melhores práticas de prompt de sistema:** Seja específico sobre a persona do modelo, formato de saída e restrições. Inclua salvaguardas como "Se você não souber a resposta, diga." Evite instruções vagas como "seja útil": em vez disso, descreva como ser útil parece no seu contexto.
 
 ```python
 from openai import OpenAI
@@ -201,7 +201,7 @@ flowchart LR
 ```
 
 [!TIP]
-**Escolhendo valores de temperature:** Para tarefas factuais (classificação, extração, Q&A), use 0.0-0.3. Para tarefas criativas (escrita de histórias, brainstorming), use 0.7-1.2. Evite temperatures acima de 1.5 a menos que você queira saída quase aleatória — a saída "criativa" rapidamente se torna incoerente.
+**Escolhendo valores de temperature:** Para tarefas factuais (classificação, extração, Q&A), use 0.0-0.3. Para tarefas criativas (escrita de histórias, brainstorming), use 0.7-1.2. Evite temperatures acima de 1.5 a menos que você queira saída quase aleatória: a saída "criativa" rapidamente se torna incoerente.
 
 [!WARNING]
 Definir temperature > 1.0 ou top_p > 0.9 pode levar a respostas incoerentes ou alucinadas. Para tarefas factuais, use temperature 0.0-0.5.
@@ -277,7 +277,7 @@ flowchart LR
 | Formatos novos | Ruim | Modelos precisam de exemplos de novas estruturas |
 
 [!NOTE]
-Zero-shot funciona surpreendentemente bem para tarefas que o modelo encontrou durante o treinamento. Ele luta com casos de borda, domínios altamente especializados ou requisitos precisos de formato — é aí que entram as técnicas few-shot e avançadas.
+Zero-shot funciona surpreendentemente bem para tarefas que o modelo encontrou durante o treinamento. Ele luta com casos de borda, domínios altamente especializados ou requisitos precisos de formato: é aí que entram as técnicas few-shot e avançadas.
 
 ---
 
@@ -387,7 +387,7 @@ Zero-shot funciona surpreendentemente bem para tarefas que o modelo encontrou du
   "id": "pe-01-pt-q10",
   "type": "multiple-choice",
   "question": "Um engenheiro de prompt está comparando um modelo Llama 2 (32K vocabulário) com um GPT-4 (100K vocabulário) para uma tarefa de geração de código. Qual trade-off eles devem considerar?",
-  "options": ["Llama 2 usa menos tokens por palavra de código, reduzindo custos", "O vocabulário menor do Llama 2 pode usar mais tokens para código, mas requer menos memória", "GPT-4 não pode processar código", "Não há diferença — todos os tokenizadores funcionam igualmente em código"],
+  "options": ["Llama 2 usa menos tokens por palavra de código, reduzindo custos", "O vocabulário menor do Llama 2 pode usar mais tokens para código, mas requer menos memória", "GPT-4 não pode processar código", "Não há diferença: todos os tokenizadores funcionam igualmente em código"],
   "correct": 1,
   "explanation": "Um vocabulário menor significa que mais tokens são necessários para representar o mesmo texto, potencialmente aumentando o tempo de inferência. No entanto, vocabulários menores significam tabelas de embedding menores, reduzindo requisitos de memória."
 }

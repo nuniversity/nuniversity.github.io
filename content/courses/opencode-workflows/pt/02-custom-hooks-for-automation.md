@@ -12,10 +12,10 @@ difficulty: "intermediate"
 
 Hooks são scripts que são executados automaticamente em pontos específicos do ciclo de vida do Eles permitem:
 
-- **Validação** — Verificar entradas/saídas antes do processamento
-- **Transformação** — Modificar dados entre etapas
-- **Proteção** — Bloquear operações perigosas
-- **Registro** — Rastrear atividades para auditoria
+- **Validação**: Verificar entradas/saídas antes do processamento
+- **Transformação**: Modificar dados entre etapas
+- **Proteção**: Bloquear operações perigosas
+- **Registro**: Rastrear atividades para auditoria
 
 ---
 

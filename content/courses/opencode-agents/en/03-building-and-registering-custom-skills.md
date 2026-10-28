@@ -78,13 +78,13 @@ resources:
 ```
 
 > [!IMPORTANT]
-> The `instructions` field is the most critical part of a skill. It is injected directly into the agent's context. Keep instructions concise and actionable — every token consumed by the skill is a token not available for the conversation. Aim for no more than 500-1000 words per skill.
+> The `instructions` field is the most critical part of a skill. It is injected directly into the agent's context. Keep instructions concise and actionable: every token consumed by the skill is a token not available for the conversation. Aim for no more than 500-1000 words per skill.
 
 ### Comparison: YAML vs JSON Manifest Formats
 
 | Aspect            | YAML (`skill.yaml`)                | JSON (`skill.json`)                |
 |-------------------|-------------------------------------|-------------------------------------|
-| **Readability**   | Excellent — natural for long text   | Good — familiar to JS/TS devs      |
+| **Readability** | Excellent, natural for long text | Good, familiar to JS/TS devs |
 | **Comments**      | Supported (`# comment`)             | Not supported                       |
 | **Multi-line**    | Native (`|` and `>` block scalars) | Escape `\n` or use arrays          |
 | **Schema validate**| Limited tooling                     | JSON Schema, many validators       |

@@ -16,7 +16,7 @@ O Princípio da Segregação de Interfaces é o quarto princípio SOLID. Ele afi
 
 Quando uma interface tem muitos métodos, as classes implementadoras são forçadas a fornecer corpos para métodos de que não precisam. Isso leva a implementações vazias, stubs `NotImplementedError` e código confuso.
 
-### ANTES: Violação do ISP — Interface Gorda
+### ANTES: Violação do ISP: Interface Gorda
 
 ```python
 from abc import ABC, abstractmethod
@@ -364,4 +364,4 @@ class AdaptadorRobo(Trabalhaveis):
 - **ISP + SRP**: ISP é sobre design de interfaces para clientes; SRP é sobre design de classes para responsabilidades
 
 > [!SUCCESS]
-> ISP mantém suas interfaces enxutas e suas implementações honestas. Cada cliente depende exatamente do que precisa — nada mais, nada menos.
+> ISP mantém suas interfaces enxutas e suas implementações honestas. Cada cliente depende exatamente do que precisa: nada mais, nada menos.

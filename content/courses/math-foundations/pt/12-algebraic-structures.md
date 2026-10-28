@@ -1,6 +1,6 @@
 ---
 title: "Estruturas Algébricas"
-description: "Compreenda grupos, anéis e campos — estruturas abstratas que revelam padrões profundos na matemática."
+description: "Compreenda grupos, anéis e campos, estruturas abstratas que revelam padrões profundos na matemática."
 order: 12
 duration: "65 min"
 difficulty: "beginner"
@@ -43,7 +43,7 @@ Um **grupo** é um conjunto G com uma operação * que satisfaz:
 3. **Elemento identidade:** Existe e tal que a * e = a
 4. **Inverso:** Para cada a, existe a⁻¹ tal que a * a⁻¹ = e
 
-**Exemplo:** (ℤ, +) — inteiros com adição
+**Exemplo:** (ℤ, +): inteiros com adição
 - Fechamento: soma de inteiros é inteiro
 - Associatividade: (a+b)+c = a+(b+c)
 - Identidade: 0

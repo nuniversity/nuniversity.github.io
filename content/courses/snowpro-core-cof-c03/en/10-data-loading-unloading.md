@@ -1,16 +1,16 @@
 ---
-title: "Domain 3.1 — Data Loading and Unloading"
+title: "Domain 3.1, Data Loading and Unloading"
 description: "Master Snowflake's bulk data loading and unloading: file formats, stages (internal and external), the COPY INTO command, error handling options, and best practices for high-throughput ingestion."
 order: 10
 difficulty: intermediate
 duration: "75 min"
 ---
 
-# Domain 3.1 — Data Loading and Unloading
+# Domain 3.1: Data Loading and Unloading
 
 ## Exam Weight
 
-**Domain 3.0 — Data Loading, Unloading, and Connectivity** accounts for **~18%** of the exam.
+**Domain 3.0: Data Loading, Unloading, and Connectivity** accounts for **~18%** of the exam.
 
 > [!NOTE]
 > This lesson maps to **Exam Objective 3.1**: *Perform data loading and unloading*, including file formats, stages, the COPY INTO command, and error handling options.
@@ -131,7 +131,7 @@ CREATE STAGE gcs_stage
 
 ### Storage Integrations
 
-A **storage integration** securely connects Snowflake to cloud storage using an **IAM role / service principal** — no credentials stored in Snowflake:
+A **storage integration** securely connects Snowflake to cloud storage using an **IAM role / service principal**: no credentials stored in Snowflake:
 
 ```sql
 CREATE STORAGE INTEGRATION my_s3_integration
@@ -161,7 +161,7 @@ SELECT * FROM DIRECTORY(@s3_orders_stage);
 
 ---
 
-## COPY INTO — Loading Data
+## COPY INTO: Loading Data
 
 `COPY INTO <table>` is the primary bulk loading command:
 
@@ -328,7 +328,7 @@ FILE_FORMAT = (TYPE = CSV COMPRESSION = GZIP HEADER = TRUE);
 | Setting | Recommendation |
 |---|---|
 | `SINGLE = FALSE` | Use multiple files for large exports (parallel) |
-| `MAX_FILE_SIZE` | Keep files at 100–500 MB for downstream compatibility |
+| `MAX_FILE_SIZE` | Keep files at 100 to 500 MB for downstream compatibility |
 | Compression | Use GZIP or SNAPPY to reduce transfer costs |
 | File naming | Use `INCLUDE_QUERY_ID = TRUE` for unique filenames |
 

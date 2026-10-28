@@ -42,7 +42,7 @@ Search algorithms find a specific item (or determine it doesn't exist) within a 
 
 ### Linear Search
 
-The simplest search -- check every item until you find what you're looking for.
+The simplest search: check every item until you find what you're looking for.
 
 ```
 ALGORITHM: Linear Search
@@ -194,7 +194,7 @@ Starting list: [5, 3, 8, 1, 2]
 
 **Pass 4:**
 - Compare 1 and 2: no swap -> [**1**, **2**, 3, 5, 8]
-- No swaps needed -- list is sorted!
+- No swaps needed: list is sorted!
 
 ## Pattern 3: Filter
 

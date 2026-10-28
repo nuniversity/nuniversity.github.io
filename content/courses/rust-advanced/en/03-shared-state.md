@@ -1,16 +1,16 @@
 ---
-title: "Shared State — Mutex, RwLock, Arc, and Atomics"
+title: "Shared State, Mutex, RwLock, Arc, and Atomics"
 description: "Master shared-state concurrency with Mutex, RwLock, Arc, and atomic types for lock-free programming"
 order: 3
 duration: "90 minutes"
 difficulty: advanced
 ---
 
-# Shared State — Mutex, RwLock, Arc, and Atomics
+# Shared State: Mutex, RwLock, Arc, and Atomics
 
 While message passing is great, shared state is sometimes the right tool. Rust's type system ensures shared state is accessed safely.
 
-## Mutex\<T\> — Mutual Exclusion
+## Mutex\<T\>: Mutual Exclusion
 
 ```rust
 use std::sync::Mutex;
@@ -72,7 +72,7 @@ fn main() {
 > [!WARNING]
 > A poisoned mutex means the protected data may be in an inconsistent state. Use `lock().unwrap_or_else(|e| e.into_inner())` to recover if you're sure it's safe.
 
-### MutexGuard — RAII Lock
+### MutexGuard: RAII Lock
 
 ```rust
 use std::sync::Mutex;
@@ -92,7 +92,7 @@ fn main() {
 }
 ```
 
-## RwLock\<T\> — Read-Write Lock
+## RwLock\<T\>: Read-Write Lock
 
 Multiple readers OR one writer:
 
@@ -148,7 +148,7 @@ fn main() {
 | `write()` | Yes | <code>RwLockWriteGuard&lt;T&gt;</code> |
 | `try_write()` | No | `Result<RwLockWriteGuard<T>, TryLockError>` |
 
-## Arc — Atomic Reference Counting
+## Arc: Atomic Reference Counting
 
 `Arc<T>` enables shared ownership across threads:
 
@@ -188,7 +188,7 @@ ArcInner<T> {
 }
 ```
 
-### Weak — Breaking Cycles
+### Weak: Breaking Cycles
 
 ```rust
 use std::sync::{Arc, Weak};
@@ -208,7 +208,7 @@ fn main() {
 }
 ```
 
-## Atomics — Lock-Free Programming
+## Atomics: Lock-Free Programming
 
 Atomic types provide lock-free, thread-safe operations:
 

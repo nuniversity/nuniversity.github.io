@@ -1,6 +1,6 @@
 ---
 title: "Matemática Discreta"
-description: "Compreenda conjuntos, lógica, combinatória e teoria dos grafos — a matemática da ciência da computação."
+description: "Compreenda conjuntos, lógica, combinatória e teoria dos grafos, a matemática da ciência da computação."
 order: 19
 duration: "60 min"
 difficulty: "beginner"
@@ -99,7 +99,7 @@ $$
 
 ### Pontes de Königsberg
 
-Euler (1736) provou que não é possível cruzar todas as pontes uma única vez — nascimento da teoria dos grafos.
+Euler (1736) provou que não é possível cruzar todas as pontes uma única vez: nascimento da teoria dos grafos.
 
 ---
 
@@ -174,18 +174,18 @@ Euler (1736) provou que não é possível cruzar todas as pontes uma única vez 
 
 ## 5. Exemplos Resolvidos: Permutacoes e Combinacoes
 
-### Exemplo 1 — Arranjos (Permutacoes)
+### Exemplo 1: Arranjos (Permutacoes)
 
 **Problema:** De quantas maneiras 5 pessoas podem se sentar em uma fila de 5 cadeiras?
 
-**Passo 1:** A ordem importa — e uma permutacao:
+**Passo 1:** A ordem importa, e uma permutacao:
 $$P(5,5) = \frac{5!}{(5-5)!} = \frac{5!}{0!} = \frac{120}{1} = 120$$
 
 **Interpretacao:** Existem 120 maneiras de ordenar 5 pessoas.
 
 ---
 
-### Exemplo 2 — Arranjos com Repeticao Proibida
+### Exemplo 2: Arranjos com Repeticao Proibida
 
 **Problema:** Um comite de 3 pessoas deve ser escolhido de 8 candidatos, com cargos distintos (presidente, vice, secretario). Quantas escolhas sao possiveis?
 
@@ -196,11 +196,11 @@ $$P(8,3) = \frac{8!}{(8-3)!} = \frac{8!}{5!} = 8 \times 7 \times 6 = 336$$
 
 ---
 
-### Exemplo 3 — Combinacoes
+### Exemplo 3: Combinacoes
 
 **Problema:** De quantas maneiras podemos escolher 4 frutas de um total de 10?
 
-**Passo 1:** A ordem NAO importa — e uma combinacao:
+**Passo 1:** A ordem NAO importa, e uma combinacao:
 $$C(10,4) = \binom{10}{4} = \frac{10!}{4! \cdot 6!}$$
 
 **Passo 2:** Calcule:
@@ -210,22 +210,22 @@ $$= \frac{10 \times 9 \times 8 \times 7}{4 \times 3 \times 2 \times 1} = \frac{5
 
 ---
 
-### Exemplo 4 — Principio da Adicao vs. Multiplicacao
+### Exemplo 4: Principio da Adicao vs. Multiplicacao
 
 **Problema:** Um aluno tem 3 camisas, 2 calcas e 2 pares de sapatos. Quantos trajes diferentes pode usar?
 
-**Passo 1:** Para cada escolha de camisa, pode combinar com qualquer calca e qualquer sapato — e o principio da **multiplicacao**:
+**Passo 1:** Para cada escolha de camisa, pode combinar com qualquer calca e qualquer sapato, e o principio da **multiplicacao**:
 $$3 \times 2 \times 2 = 12 \text{ trajes}$$
 
 **Passo 2:** Se o aluno pudesse usar camisa **ou** camiseta (3 + 2 = 5 opcoes de topo), ai seria o principio da **adicao**.
 
 > [!NOTE]
-> **Multiplicacao:** "E" — escolhas simultaneas (traje completo)
-> **Adicao:** "OU" — escolhas alternativas (camisa ou camiseta)
+> **Multiplicacao:** "E": escolhas simultaneas (traje completo)
+> **Adicao:** "OU": escolhas alternativas (camisa ou camiseta)
 
 ---
 
-### Exemplo 5 — Permutacoes com Elementos Repetidos
+### Exemplo 5: Permutacoes com Elementos Repetidos
 
 **Problema:** Quantas anagramas tem a palavra "BANANA"?
 
@@ -241,7 +241,7 @@ $$\frac{n!}{n_1! \cdot n_2! \cdot n_3!} = \frac{6!}{1! \cdot 3! \cdot 2!} = \fra
 
 ---
 
-### Exemplo 6 — Teorema Binomial
+### Exemplo 6: Teorema Binomial
 
 **Problema:** Expanda $(x + 2)^4$ usando o Teorema Binomial.
 
@@ -264,7 +264,7 @@ A matriz de adjacencia $A$ de um grafo $G = (V, E)$ e uma matriz $n \times n$ on
 
 $$A_{ij} = \begin{cases} 1 & \text{se existe aresta de } i \text{ para } j \\ 0 & \text{caso contrario} \end{cases}$$
 
-### Exemplo 1 — Grafo Simples
+### Exemplo 1: Grafo Simples
 
 **Problema:** Considere um grafo com 4 vertices (A, B, C, D) e arestas: A-B, A-C, B-C, C-D. Construa a matriz de adjacencia.
 
@@ -284,7 +284,7 @@ $$A_{ij} = \begin{cases} 1 & \text{se existe aresta de } i \text{ para } j \\ 0 
 
 ---
 
-### Exemplo 2 — Matriz de Adjacencia e Caminhos
+### Exemplo 2: Matriz de Adjacencia e Caminhos
 
 **Problema:** Usando a matriz acima, quantos caminhos de comprimento 2 existem de A para C?
 
@@ -309,7 +309,7 @@ Existem **1 caminho** de comprimento 2 de A para C (A -> B -> C). Note que A -> 
 
 Coloracao de vertices e atribuir cores aos vertices de um grafo de modo que **vertices adjacentes tenham cores diferentes**. O menor numero de cores necessario e chamado de **numero cromatico**, $\chi(G)$.
 
-### Exemplo 1 — Coloracao de um Ciclo
+### Exemplo 1: Coloracao de um Ciclo
 
 **Problema:** Qual e o numero cromatico de $C_4$ (ciclo em 4 vertices)?
 
@@ -322,7 +322,7 @@ $\chi(C_4) = 2$ (ciclos pares sao 2-coloriveis)
 
 ---
 
-### Exemplo 2 — Coloracao de $K_4$
+### Exemplo 2: Coloracao de $K_4$
 
 **Problema:** Qual e o numero cromatico de $K_4$ (grafo completo em 4 vertices)?
 
@@ -335,11 +335,11 @@ $\chi(K_4) = 4$
 
 ---
 
-### Exemplo 3 — Aplicacao: Mapas e o Teorema das 4 Cores
+### Exemplo 3, Aplicacao: Mapas e o Teorema das 4 Cores
 
 **Problema:** Por que 4 cores sao suficientes para colorir qualquer mapa plano?
 
-O Teorema das 4 Cores (provado em 1976) afirma que qualquer mapa plano pode ser colorido com no maximo 4 cores. Isto e uma aplicacao direta de coloracao de grafos ao mundo real — cada pais e um vertice e fronteiras sao arestas.
+O Teorema das 4 Cores (provado em 1976) afirma que qualquer mapa plano pode ser colorido com no maximo 4 cores. Isto e uma aplicacao direta de coloracao de grafos ao mundo real: cada pais e um vertice e fronteiras sao arestas.
 
 ---
 
@@ -351,7 +351,7 @@ Um **caminho euleriano** passa por **todas as arestas** exatamente uma vez.
 
 **Teorema de Euler:** Um grafo conexo tem caminho euleriano se e somente se tem exatamente 0 ou 2 vertices de grau impar.
 
-### Exemplo 1 — As Pontes de Konigsberg (Revisitado)
+### Exemplo 1: As Pontes de Konigsberg (Revisitado)
 
 **Problema:** Por que nao existe caminho euleriano em Konigsberg?
 
@@ -363,7 +363,7 @@ Um **caminho euleriano** passa por **todas as arestas** exatamente uma vez.
 
 Um **caminho hamiltoniano** passa por **todos os vertices** exatamente uma vez.
 
-### Exemplo 2 — Problema do Caixeiro Viajante
+### Exemplo 2: Problema do Caixeiro Viajante
 
 **Problema:** Um caixeiro viajante deve visitar 4 cidades (A, B, C, D) retornando a origem. Se as distancias sao: AB=10, AC=15, AD=20, BC=35, BD=25, CD=30. Qual e o menor circuito?
 
@@ -375,11 +375,11 @@ Um **caminho hamiltoniano** passa por **todos os vertices** exatamente uma vez.
 O menor circuito e A->B->D->C->A com comprimento 80.
 
 > [!NOTE]
-> O Problema do Caixeiro Viajante e NP-dificil — nao existe algoritmo eficiente conhecido para resolver instancias grandes. E um dos problemas abertos mais importantes da ciencia da computacao.
+> O Problema do Caixeiro Viajante e NP-dificil: nao existe algoritmo eficiente conhecido para resolver instancias grandes. E um dos problemas abertos mais importantes da ciencia da computacao.
 
 ---
 
-### Exemplo 3 — Diferencas entre Euleriano e Hamiltoniano
+### Exemplo 3: Diferencas entre Euleriano e Hamiltoniano
 
 | Caracteristica | Euleriano | Hamiltoniano |
 |----------------|-----------|--------------|
@@ -462,7 +462,7 @@ O menor circuito e A->B->D->C->A com comprimento 80.
 
 ---
 
-## 11. Permutacoes e Combinacoes — Exemplos Detalhados
+## 11. Permutacoes e Combinacoes: Exemplos Detalhados
 
 ### Permutacao: P(5,3) = 60
 
@@ -507,7 +507,7 @@ $$C(8,3) = \frac{8 \times 7 \times 6}{3 \times 2 \times 1} = \frac{336}{6} = 56$
 
 ---
 
-## 12. Teorema Binomial — Exemplo Paso a Paso
+## 12. Teorema Binomial: Exemplo Paso a Paso
 
 ### Expansao de (x+2)³
 
@@ -534,7 +534,7 @@ $$= x^3 + 6x^2 + 12x + 8$$
 
 ---
 
-## 13. Matriz de Adjacencia — Exemplo Completo
+## 13. Matriz de Adjacencia: Exemplo Completo
 
 ### Construcao para um Grafo Simples
 
@@ -562,7 +562,7 @@ $$= x^3 + 6x^2 + 12x + 8$$
 
 ---
 
-## 14. Coloracao de Grafos — Exemplo Aplicado
+## 14. Coloracao de Grafos: Exemplo Aplicado
 
 ### Coloracao de um Mapa Simples
 
@@ -582,7 +582,7 @@ $$= x^3 + 6x^2 + 12x + 8$$
 - C = azul (adjacente a A, mas nao a B)
 - D = vermelho (adjacente a B e C, mas nao a A)
 
-**Resultado:** $\chi(G) = 2$ — basta 2 cores!
+**Resultado:** $\chi(G) = 2$: basta 2 cores!
 
 **Conexao com o Teorema das 4 Cores:** O Teorema das 4 Cores (1976) garante que **qualquer mapa plano** pode ser colorido com no maximo 4 cores. No nosso exemplo, 2 cores ja bastam, mas grafos mais complexos podem necessitar de 3 ou 4.
 
@@ -670,7 +670,7 @@ $$= x^3 + 6x^2 + 12x + 8$$
   "question": "Resolva as pontes de Königsberg.",
   "options": [
     "É possível cruzar todas as pontes uma vez",
-    "Não é possível — não há caminho euleriano",
+    "Não é possível: não há caminho euleriano",
     "É possível começar em qualquer ponte",
     "Depende do dia"
   ],

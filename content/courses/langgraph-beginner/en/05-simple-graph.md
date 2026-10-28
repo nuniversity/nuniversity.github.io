@@ -558,5 +558,5 @@ builder.add_edge("output", END)  # FIX
 - Always add an edge from the last node to END
 - Nodes can be upgraded from deterministic to LLM-powered without graph changes
 - Loops need termination conditions
-- Never mutate state directly — return a dict of updates
+- Never mutate state directly: return a dict of updates
 - Test nodes individually and the full graph as integration tests

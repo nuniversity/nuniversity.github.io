@@ -608,7 +608,7 @@ changelog:
 ```
 
 > [!SUCCESS]
-> Skills are the fundamental building blocks of agent capabilities. Well-designed skills are modular, testable, versioned, and composable — turning an agent from a general-purpose assistant into a specialized expert.
+> Skills are the fundamental building blocks of agent capabilities. Well-designed skills are modular, testable, versioned, and composable: turning an agent from a general-purpose assistant into a specialized expert.
 
 ---
 

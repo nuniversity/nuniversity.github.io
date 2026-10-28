@@ -12,7 +12,7 @@ Decorators and context managers are powerful Python features that let you modify
 
 ## First-Class Functions
 
-In Python, functions are objects — they can be assigned, passed, and returned:
+In Python, functions are objects; they can be assigned, passed, and returned:
 
 ```python
 def square(x: int) -> int:
@@ -46,9 +46,9 @@ print(op(6))  # 36
 ```
 
 > [!NOTE]
-> Functions can have attributes, be stored in data structures, and be passed as callbacks — just like any other object.
+> Functions can have attributes, be stored in data structures, and be passed as callbacks: just like any other object.
 
-## Closure — Functions Remembering Their Scope
+## Closure: Functions Remembering Their Scope
 
 ```python
 def make_multiplier(factor: float):
@@ -63,7 +63,7 @@ print(double(5))   # 10
 print(triple(5))   # 15
 ```
 
-## Decorators — The Basics
+## Decorators: The Basics
 
 A decorator is a function that takes another function and extends its behavior:
 
@@ -239,7 +239,7 @@ say("Bye")  # Call 2 of say
 print(f"Called {say.count} times")  # Called 2 times
 ```
 
-## Context Managers — The `with` Statement
+## Context Managers: The `with` Statement
 
 Context managers set up and tear down resources automatically:
 

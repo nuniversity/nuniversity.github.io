@@ -430,7 +430,7 @@ langfuse.flush()
 > **Principais Conclusões**
 > - Um trace envolve uma requisição inteira; spans capturam operações individuais em uma estrutura de árvore.
 > - Sempre chame `.end()` nos spans, ou use context managers para fechamento automático.
-> - Metadados e tags tornam spans filtráveis no dashboard — seja consistente com os nomes das chaves.
+> - Metadados e tags tornam spans filtráveis no dashboard: seja consistente com os nomes das chaves.
 > - Callbacks do LangChain e LlamaIndex fornecem instrumentação com esforço zero.
 > - O decorador `@observe()` dá controle refinado sobre código Python personalizado.
 > - Use `session_id` para agrupar conversas de múltiplas interações e trajetórias de agentes.

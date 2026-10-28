@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Process Optimization
 
-Flowcharts aren't just for documenting processes — they're powerful tools for improving them. In this final lesson, we'll learn how to use flowcharts to identify bottlenecks, eliminate waste, and optimize processes for better efficiency and quality.
+Flowcharts aren't just for documenting processes; they're powerful tools for improving them. In this final lesson, we'll learn how to use flowcharts to identify bottlenecks, eliminate waste, and optimize processes for better efficiency and quality.
 
 ## Why Optimize Processes?
 
@@ -249,7 +249,7 @@ flowchart TD
 
 ## The Optimization Cycle
 
-Process optimization is not a one-time activity — it's a continuous cycle:
+Process optimization is not a one-time activity; it's a continuous cycle:
 
 ```mermaid
 flowchart TD
@@ -351,11 +351,11 @@ flowchart TD
 
 | Metric | What It Measures | How to Calculate |
 |---|---|---|
-| **Cycle Time** | Total time from start to finish | End time - Start time |
+| **Cycle Time** | Total time from start to finish | End time: Start time |
 | **Throughput** | Items processed per time unit | Count / Time period |
 | **Error Rate** | Percentage of items with defects | Errors / Total items × 100 |
 | **Wait Time** | Time spent waiting between steps | Sum of all wait periods |
-| **Touch Time** | Time actually spent working | Total time - Wait time |
+| **Touch Time** | Time actually spent working | Total time: Wait time |
 | **Efficiency** | Ratio of touch time to cycle time | Touch time / Cycle time × 100 |
 
 ## Practice Exercises
@@ -374,7 +374,7 @@ What's the bottleneck? What would you do to improve it?
 <details>
 <summary>Click to see the analysis</summary>
 
-**Bottleneck:** Manager approval (4 hours) — all other steps take minutes.
+**Bottleneck:** Manager approval (4 hours): all other steps take minutes.
 
 **Improvement suggestions:**
 - Set approval thresholds (only require manager approval for orders above $X)

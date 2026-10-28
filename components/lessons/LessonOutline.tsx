@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import {
+  ChevronDown,
   ChevronLeft,
   Menu,
   X,
@@ -11,6 +12,7 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
 } from 'lucide-react'
+import LessonAudio from './LessonAudio'
 import { getCourseProgress } from '@/lib/progress/storage'
 import { safeGet, safeSet } from '@/lib/storage/safe-storage'
 
@@ -45,6 +47,7 @@ const KEYBOARD_STEP = 24
 
 const WIDTH_KEY = 'lesson-outline-width'
 const COLLAPSED_KEY = 'lesson-outline-collapsed'
+const LESSONS_OPEN_KEY = 'lesson-outline-lessons-open'
 
 /** Clamps a width to the allowed range. */
 function clampWidth(value: number): number {
@@ -70,6 +73,9 @@ export default function LessonOutline({
   // Desktop split state, restored from the previous session.
   const [width, setWidth] = useState(DEFAULT_WIDTH)
   const [collapsed, setCollapsed] = useState(false)
+  // The syllabus is long; it starts closed so the page outline and the audio
+  // controls are visible without scrolling the sidebar.
+  const [lessonsOpen, setLessonsOpen] = useState(false)
   const [hydrated, setHydrated] = useState(false)
   const [dragging, setDragging] = useState(false)
   const widthRef = useRef(width)
@@ -79,6 +85,7 @@ export default function LessonOutline({
     const storedWidth = Number.parseInt(safeGet(WIDTH_KEY) ?? '', 10)
     if (Number.isFinite(storedWidth)) setWidth(clampWidth(storedWidth))
     setCollapsed(safeGet(COLLAPSED_KEY) === '1')
+    setLessonsOpen(safeGet(LESSONS_OPEN_KEY) === '1')
     setHydrated(true)
   }, [])
 
@@ -103,6 +110,14 @@ export default function LessonOutline({
       return next
     })
   }, [persist])
+
+  const toggleLessons = useCallback(() => {
+    setLessonsOpen(prev => {
+      const next = !prev
+      safeSet(LESSONS_OPEN_KEY, next ? '1' : '0')
+      return next
+    })
+  }, [])
 
   // ── Drag to resize ────────────────────────────────────────────────
   const onPointerDown = useCallback(
@@ -284,7 +299,49 @@ export default function LessonOutline({
               </div>
             </div>
 
-            <nav aria-label={dict?.courses?.course_content || 'Course Content'} className="space-y-1">
+            {/* Read-aloud lives in the outline so it stays reachable while
+                the reader scrolls. It reads the section in view by default. */}
+            <div className="border-t border-border pt-4">
+              <LessonAudio
+                lang={lang === 'pt' ? 'pt-BR' : lang === 'es' ? 'es-ES' : 'en-US'}
+                label={dict?.lesson?.listen || 'Listen to this lesson'}
+                intro={dict?.lesson?.listen_intro || 'Audio is on. Reading this lesson aloud.'}
+                voiceNote={dict?.lesson?.listen_voice_missing}
+                sectionLabel={dict?.lesson?.listen_section || 'Section'}
+                sectionAutoLabel={dict?.lesson?.listen_section_auto || 'The section I am reading'}
+                sectionAllLabel={dict?.lesson?.listen_section_all || 'The whole lesson'}
+                stopLabel={dict?.lesson?.listen_stop || 'Stop'}
+                restartLabel={dict?.lesson?.listen_restart || 'Restart'}
+                readingLabel={dict?.lesson?.listen_reading || 'Reading'}
+                pausedLabel={dict?.lesson?.listen_paused || 'Paused'}
+                sections={headings}
+                activeSectionId={activeId}
+              />
+            </div>
+
+            <div className="border-t border-border pt-4">
+              <button
+                type="button"
+                onClick={toggleLessons}
+                aria-expanded={lessonsOpen}
+                aria-controls="lesson-outline-lessons"
+                className="mb-2 flex w-full items-center justify-between gap-2 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <span>
+                  {dict?.courses?.course_content || 'Course Content'} ({lessons.length})
+                </span>
+                <ChevronDown
+                  className={`h-4 w-4 shrink-0 transition-transform ${lessonsOpen ? 'rotate-180' : ''}`}
+                  aria-hidden="true"
+                />
+              </button>
+
+              <nav
+                id="lesson-outline-lessons"
+                aria-label={dict?.courses?.course_content || 'Course Content'}
+                hidden={!lessonsOpen}
+                className="space-y-1"
+              >
               {lessons.map((lesson, index) => (
                 <Link
                   key={lesson.slug}
@@ -309,7 +366,8 @@ export default function LessonOutline({
                   )}
                 </Link>
               ))}
-            </nav>
+              </nav>
+            </div>
 
             <div className="border-t pt-4">
               <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">

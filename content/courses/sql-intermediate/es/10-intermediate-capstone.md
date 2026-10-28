@@ -138,7 +138,7 @@ ORDER BY lifetime_value DESC;
 
 ## Desafío 2: Informe de Rendimiento de Productos (Múltiples JOINs)
 
-Muestra nombre del producto, categoría, total de unidades vendidas, ingresos totales, beneficio total (ingresos - costo * cantidad) y stock actual. Ordena por beneficio descendente.
+Muestra nombre del producto, categoría, total de unidades vendidas, ingresos totales, beneficio total (ingresos: costo * cantidad) y stock actual. Ordena por beneficio descendente.
 
 ```sql
 WITH product_sales AS (

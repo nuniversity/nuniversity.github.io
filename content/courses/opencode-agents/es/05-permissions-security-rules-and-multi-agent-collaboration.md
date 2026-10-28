@@ -30,7 +30,7 @@ Los permisos definen qué acciones pueden realizar los agentes. Están estructur
 ```
 
 > [!IMPORTANT]
-> Las reglas de permiso se evalúan en tiempo de ejecución para cada invocación de herramienta. Las reglas deny se verifican primero — si un comando coincide con cualquier patrón deny, se rechaza inmediatamente independientemente de si también coincide con un patrón allow. Este diseño a prueba de fallos previene desvíos accidentales.
+> Las reglas de permiso se evalúan en tiempo de ejecución para cada invocación de herramienta. Las reglas deny se verifican primero: si un comando coincide con cualquier patrón deny, se rechaza inmediatamente independientemente de si también coincide con un patrón allow. Este diseño a prueba de fallos previene desvíos accidentales.
 
 ### Lógica de Evaluación de Permisos
 
@@ -72,7 +72,7 @@ Los patrones admiten comodines estilo glob para coincidencia flexible de reglas:
 | `rm -rf *`       | Eliminación recursiva forzada             | `rm -rf node_modules`      |
 
 > [!WARNING]
-> Los patrones glob distinguen entre mayúsculas y minúsculas en Linux y no los distinguen en macOS por defecto. Ten cuidado con las extensiones de archivo — `*.KEY` NO coincidirá con `secret.key` en Linux. Usa patrones en minúsculas para compatibilidad entre plataformas.
+> Los patrones glob distinguen entre mayúsculas y minúsculas en Linux y no los distinguen en macOS por defecto. Ten cuidado con las extensiones de archivo: `*.KEY` NO coincidirá con `secret.key` en Linux. Usa patrones en minúsculas para compatibilidad entre plataformas.
 
 ---
 
@@ -132,7 +132,7 @@ Las restricciones de ruta limitan qué archivos pueden acceder los agentes:
 ```
 
 > [!WARNING]
-> Las restricciones de ruta de archivo solo se aplican cuando la herramienta se invoca a través del registro de herramientas de OpenCode. El acceso directo al shell evita estas restricciones — siempre combínalas con reglas allow/deny de comando bash. Un agente con permiso para ejecutar `bash` pero sin restricciones de ruta podría acceder a cualquier archivo ejecutando comandos shell directamente.
+> Las restricciones de ruta de archivo solo se aplican cuando la herramienta se invoca a través del registro de herramientas de OpenCode. El acceso directo al shell evita estas restricciones: siempre combínalas con reglas allow/deny de comando bash. Un agente con permiso para ejecutar `bash` pero sin restricciones de ruta podría acceder a cualquier archivo ejecutando comandos shell directamente.
 
 ---
 

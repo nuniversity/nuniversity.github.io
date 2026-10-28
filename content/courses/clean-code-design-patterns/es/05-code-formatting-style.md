@@ -11,7 +11,7 @@ difficulty: "intermediate"
 El formato de código es como la puntuación en la escritura: hace que el significado quede claro. Un estilo consistente en toda la base de código reduce la carga cognitiva, evita debates triviales de estilo en las revisiones de código y ayuda a detectar errores con más rapidez.
 
 > [!NOTE]
-> "El formato de código trata de comunicación, no de preferencia personal. Un estilo consistente en un equipo elimina una clase entera de discusiones sin sentido." — Adaptado de *Clean Code*
+> "El formato de código trata de comunicación, no de preferencia personal. Un estilo consistente en un equipo elimina una clase entera de discusiones sin sentido.": Adaptado de *Clean Code*
 
 ## Por qué importa el formato
 
@@ -520,8 +520,8 @@ pre-commit run --all-files
 |-------|-------|-------|--------|
 | Indentación | 4 espacios | 4 espacios | Comprueba |
 | Longitud máxima de línea | 79 | 88 (configurable) | 79 por defecto |
-| Comillas | Se prefieren las simples | Dobles | — |
-| Comas finales | Opcionales | Las añade en varias líneas | — |
+| Comillas | Se prefieren las simples | Dobles |: |
+| Comas finales | Opcionales | Las añade en varias líneas |: |
 | Líneas en blanco | 2 a nivel superior, 1 en métodos | Las exige | Comprueba |
 | Importaciones | Grupos con líneas en blanco | Agrupa | Comprueba el orden |
 

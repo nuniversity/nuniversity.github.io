@@ -160,7 +160,7 @@ print([next(c) for _ in range(4)])  # [10, 15, 20, 25]
 
 ## Generator Expressions
 
-Similar to list comprehensions but with parentheses — lazy and memory-efficient:
+Similar to list comprehensions but with parentheses: lazy and memory-efficient:
 
 ```python
 # List comprehension — creates entire list in memory
@@ -207,7 +207,7 @@ result = (x ** 2 for x in range(10) if x % 2 == 0)
 print(list(result))  # [0, 4, 16, 36, 64]
 ```
 
-## `yield from` — Delegating to Sub-generators
+## `yield from`: Delegating to Sub-generators
 
 ```python
 def chain(*iterables):
@@ -328,6 +328,6 @@ for user in paginate("https://api.example.com/users"):
 5. What happens when you call `next()` on a generator that has no more items to yield?
 6. Write a generator function that yields the first `n` prime numbers.
 7. How does `yield from` differ from manually iterating and yielding each item?
-8. Create a pipeline that reads a CSV file, filters rows where value > 50, and squares the result — all lazily.
+8. Create a pipeline that reads a CSV file, filters rows where value > 50, and squares the result: all lazily.
 9. What does the `send()` method do on a generator? How is it different from `next()`?
 10. When should you use a generator instead of a list? When should you not?

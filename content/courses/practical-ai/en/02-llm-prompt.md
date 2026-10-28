@@ -7,9 +7,9 @@ difficulty: "beginner"
 author: "Google Gemini"
 ---
 
-## Mastering the LLM - Your Digital Assistant
+## Mastering the LLM: Your Digital Assistant
 
-This is where the rubber meets the road. Tools like **ChatGPT, Gemini, and Claude** are your new digital assistants. They can write, summarize, brainstorm, and even code. But just like a human assistant, they need **clear instructions**—and that's what we'll master here.
+This is where the rubber meets the road. Tools like **ChatGPT, Gemini, and Claude** are your new digital assistants. They can write, summarize, brainstorm, and even code. But just like a human assistant, they need **clear instructions**, and that's what we'll master here.
 
 ---
 
@@ -21,7 +21,7 @@ What exactly is an LLM? It's a massive, highly complex program trained on **tril
 
 **The Best Analogy: An LLM is a Smart Autocomplete**
 
-Think about the autocomplete feature on your phone. If you type "I'm going to the grocery...", your phone correctly suggests "store." An LLM does this, but on a massive scale. If you type, "Write a short story about a detective dog...", it predicts a logical next word ("who"), and the next ("loved"), and the next ("bones")—creating a full narrative as it goes!
+Think about the autocomplete feature on your phone. If you type "I'm going to the grocery...", your phone correctly suggests "store." An LLM does this, but on a massive scale. If you type, "Write a short story about a detective dog...", it predicts a logical next word ("who"), and the next ("loved"), and the next ("bones"): creating a full narrative as it goes!
 
 #### The Two Rules of Engagement
 
@@ -64,7 +64,7 @@ Try to write a great tweet selling this course using three different prompts.
 2.  **Better Prompt (A & B):** *Act as a marketing expert. Write a tweet about a new practical AI course. Use a fun, engaging tone and include three relevant emojis.*
 3.  **Best Prompt (A, B, & C):** *Act as a marketing expert specializing in tech trends. Write a tweet about a new practical AI course that uses LLMs and Excel. Use an upbeat, casual tone, limit it to 250 characters, and make sure to mention the course is for beginners who want to save time.*
 
-Compare the outputs—the third one will always be the most useful!
+Compare the outputs: the third one will always be the most useful!
 
 ---
 

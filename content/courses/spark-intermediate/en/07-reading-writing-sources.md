@@ -220,7 +220,7 @@ merged.printSchema()
 ```
 
 > [!WARNING]
-> Schema merging is expensive — it requires reading all files to discover their schemas before processing. Use it only when necessary.
+> Schema merging is expensive; it requires reading all files to discover their schemas before processing. Use it only when necessary.
 
 ## Format Conversion Examples
 

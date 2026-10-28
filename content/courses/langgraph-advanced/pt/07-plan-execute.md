@@ -1,6 +1,6 @@
 ---
 title: "Padrão Planejar e Executar"
-description: "Implemente o padrão planejar-e-executar em LangGraph — um nó de planejamento cria um plano passo a passo, um nó de execução executa etapas e um loop de replanejamento se adapta aos resultados."
+description: "Implemente o padrão planejar-e-executar em LangGraph, um nó de planejamento cria um plano passo a passo, um nó de execução executa etapas e um loop de replanejamento se adapta aos resultados."
 order: 7
 duration: "40 min"
 difficulty: "advanced"
@@ -372,7 +372,7 @@ print(result["final_answer"])
   "type": "multiple-choice",
   "question": "How does the planner receive context from previous results?",
   "options": [
-    "It doesn't — each plan is from scratch",
+    "It doesn't: each plan is from scratch",
     "The results from executed steps are included in the re-plan prompt",
     "Via a separate context field",
     "Results are ignored during planning"

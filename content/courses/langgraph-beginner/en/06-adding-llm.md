@@ -195,7 +195,7 @@ def agent_node(state: ToolState) -> dict:
 ```
 
 [!WARNING]
-When an LLM returns tool calls, you need to execute them in a separate node. The LLM only generates the request — it does not execute the tool. This is covered in detail in Lesson 7.
+When an LLM returns tool calls, you need to execute them in a separate node. The LLM only generates the request; it does not execute the tool. This is covered in detail in Lesson 7.
 
 ---
 
@@ -440,7 +440,7 @@ print(f"Keywords: {', '.join(result['keywords'])}")
   "type": "multiple-choice",
   "question": "In a multi-step LLM chain, how does one node's output become available to the next?",
   "options": [
-    "Through shared state — one node writes to state, another reads it",
+    "Through shared state: one node writes to state, another reads it",
     "Via direct function calls between nodes",
     "Through a message queue",
     "It doesn't; each node starts fresh"

@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Test Coverage & Quality
 
-Coverage tells you what code your tests execute. It's a useful **negative indicator** — low coverage means you're definitely not testing enough — but high coverage doesn't guarantee good tests. This lesson covers how to measure, interpret, and act on coverage data.
+Coverage tells you what code your tests execute. It's a useful **negative indicator**, low coverage means you're definitely not testing enough, but high coverage doesn't guarantee good tests. This lesson covers how to measure, interpret, and act on coverage data.
 
 ## What is Code Coverage?
 
@@ -41,7 +41,7 @@ flowchart TD
 |--------|-----------------|---------|
 | **Line Coverage** | What percentage of lines executed | 80% of lines ran during tests |
 | **Branch Coverage** | What percentage of if/else branches taken | 3 of 4 branches covered (75%) |
-| **Condition Coverage** | Boolean sub-expressions evaluated | `A or B` — tested A=True, A=False |
+| **Condition Coverage** | Boolean sub-expressions evaluated | `A or B`: tested A=True, A=False |
 | **Function Coverage** | Functions that were called | 45 of 50 functions invoked |
 | **Statement Coverage** | Individual statements executed | 120 of 150 statements ran |
 | **Path Coverage** | All possible paths through code | 8 of 16 possible paths tested |
@@ -542,7 +542,7 @@ diff-cover coverage.xml --compare-branch=main --fail-under=90
 
 - **Coverage measures what code runs during tests**, not what code is correct
 - **Line coverage** is the basic metric; **branch coverage** reveals untested paths
-- **100% coverage ≠ 100% correctness** — you can have perfect coverage and still have bugs
+- **100% coverage ≠ 100% correctness**; you can have perfect coverage and still have bugs
 - **Coverage targets**: 80%+ for production code, 90%+ for critical paths
 - **Diff coverage** ensures new code is tested, not just total numbers
 - **Exclusions** should be rare and well-documented

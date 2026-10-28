@@ -124,7 +124,7 @@ Frames define which rows are visible to the window function.
 
 | Frame type | Basis | Tie handling |
 |---|---|---|
-| `ROWS` | Physical row count | Ignores ties — each row is distinct |
+| `ROWS` | Physical row count | Ignores ties: each row is distinct |
 | `RANGE` | Value difference from current row | Includes all ties |
 | `GROUPS` | Groups of equal values | Treats equal values as one group |
 

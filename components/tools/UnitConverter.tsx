@@ -251,7 +251,7 @@ const UnitConverter = ({ lang = 'en', dict = {} }: UnitConverterProps) => {
             <div>
               <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">{t.to || 'To'}</label>
               <div className="w-full px-4 py-3 rounded-lg border border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-900/20 text-lg font-bold text-blue-700 dark:text-blue-300 mb-2 flex items-center justify-between">
-                <span>{result || '—'}</span>
+                <span>{result || ', '}</span>
                 {result && (
                   <button onClick={copyResult} className="p-1 rounded hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors">
                     {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 text-blue-500" />}

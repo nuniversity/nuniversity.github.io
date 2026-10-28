@@ -44,6 +44,14 @@ interface LessonAudioProps {
   readingLabel?: string
   /** Status shown while paused. */
   pausedLabel?: string
+  /**
+   * Sections to offer. The lesson outline already collects the headings and
+   * tracks which one is in view, so it owns the list; when omitted the
+   * component collects them from the DOM itself.
+   */
+  sections?: AudioSection[]
+  /** Heading currently in view, used by the "section I am reading" option. */
+  activeSectionId?: string | null
 }
 
 type Status = 'idle' | 'speaking' | 'paused'
@@ -167,11 +175,13 @@ export default function LessonAudio({
   restartLabel = 'Restart',
   readingLabel = 'Reading',
   pausedLabel = 'Paused',
+  sections: providedSections,
+  activeSectionId = null,
 }: LessonAudioProps) {
   const [status, setStatus] = useState<Status>('idle')
   const [supported, setSupported] = useState(true)
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
-  const [sections, setSections] = useState<AudioSection[]>([])
+  const [domSections, setDomSections] = useState<AudioSection[]>([])
   const [selection, setSelection] = useState<Selection>('auto')
   const [nowReading, setNowReading] = useState<string | null>(null)
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
@@ -189,16 +199,20 @@ export default function LessonAudio({
   // The outline and the audio picker offer the same set of headings, so the
   // two always agree about what a "section" is.
   useEffect(() => {
+    // The outline passes its own list; only scan the DOM when used alone.
+    if (providedSections) return
     const root = document.querySelector<HTMLElement>(selector)
     if (!root) return
-    setSections(
+    setDomSections(
       Array.from(root.querySelectorAll<HTMLElement>('h2[id], h3[id]')).map(heading => ({
         id: heading.id,
         text: (heading.textContent ?? '').replace(/\s+/g, ' ').trim(),
         level: Number(heading.tagName[1]),
       }))
     )
-  }, [selector])
+  }, [selector, providedSections])
+
+  const sections = providedSections ?? domSections
 
   // Chrome populates the voice list asynchronously and fires `voiceschanged`
   // once it has. Reading it only at play time missed the first click.
@@ -251,7 +265,10 @@ export default function LessonAudio({
       if (choice === 'all' || sections.length === 0) {
         text = collectSpokenText(root)
       } else {
-        const id = choice === 'auto' ? findCurrentSectionId(root, sections) : choice
+        const id =
+          choice === 'auto'
+            ? activeSectionId ?? findCurrentSectionId(root, sections)
+            : choice
         if (id) {
           text = collectSectionText(root, id)
           title = sections.find(section => section.id === id)?.text ?? null
@@ -300,7 +317,7 @@ export default function LessonAudio({
       window.speechSynthesis.speak(utterance)
       setStatus('speaking')
     },
-    [selector, lang, pickVoice, intro, selection, sections]
+    [selector, lang, pickVoice, intro, selection, sections, activeSectionId]
   )
 
   const toggle = useCallback(() => {
@@ -350,7 +367,7 @@ export default function LessonAudio({
   return (
     <div
       data-lesson-audio
-      className="not-prose my-6 rounded-xl border border-border bg-surface px-3 py-2"
+      className="not-prose rounded-xl border border-border bg-surface p-3"
     >
       <div className="flex items-center gap-2">
         <button

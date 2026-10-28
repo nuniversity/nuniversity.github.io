@@ -151,7 +151,7 @@ rdd.foreach(write_to_db)
 ```
 
 > [!NOTE]
-> `foreach()` executa nos executores, então a impressão vai para os logs do executor — não seu console driver. Use `foreachPartition()` para gerenciamento de recursos mais eficiente (uma conexão por partição).
+> `foreach()` executa nos executores, então a impressão vai para os logs do executor: não seu console driver. Use `foreachPartition()` para gerenciamento de recursos mais eficiente (uma conexão por partição).
 
 ## foreachPartition()
 

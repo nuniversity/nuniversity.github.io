@@ -8,7 +8,7 @@ difficulty: "iniciante"
 
 # Grafos de Estado
 
-En LangGraph, el **estado** es el ciudadano de primera clase. Todo el flujo de datos — leer, escribir, pasar entre nodos — ocurre a través de un único objeto de estado compartido.
+En LangGraph, el **estado** es el ciudadano de primera clase. Todo el flujo de datos, leer, escribir, pasar entre nodos, ocurre a través de un único objeto de estado compartido.
 
 ---
 
@@ -254,7 +254,7 @@ print(resultado)  # mensajes=[], contador=1, depuracion=False
 ### Puntos Clave
 - El estado se define con TypedDict (o dataclass/Pydantic) y fluye a través de todos los nodos
 - Cada nodo devuelve un diccionario de actualizaciones que se fusionan con el estado actual
-- Las actualizaciones parciales son seguras — los campos no mencionados no cambian
+- Las actualizaciones parciales son seguras: los campos no mencionados no cambian
 - `Annotated[type, add]` permite comportamiento de anexión (concatenación de listas)
 - `StateGraph` es el constructor; compila el grafo en una aplicación ejecutable
 - Invocar el grafo devuelve el estado final después de que todos los nodos se ejecutan

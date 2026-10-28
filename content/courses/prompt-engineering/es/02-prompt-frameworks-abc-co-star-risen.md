@@ -29,9 +29,9 @@ Los frameworks de prompts proporcionan plantillas estructuradas que producen con
 
 | Componente | Propósito | Ejemplo |
 |------------|-----------|---------|
-| **A - Acción** | Lo que el modelo debe hacer | "Escribe una descripción de producto" |
-| **B - Background** | Contexto e información | "Para una bota de senderismo impermeable" |
-| **C - Restricciones** | Reglas y formato | "150 palabras, tono amigable, destaca durabilidad" |
+| **A: Acción** | Lo que el modelo debe hacer | "Escribe una descripción de producto" |
+| **B: Background** | Contexto e información | "Para una bota de senderismo impermeable" |
+| **C: Restricciones** | Reglas y formato | "150 palabras, tono amigable, destaca durabilidad" |
 
 ### Diagrama de Flujo del Framework ABC
 
@@ -63,7 +63,7 @@ Está frustrado pero aún no ha pedido un reembolso. Tu empresa es "QuickShip In
 ```
 
 [!TIP]
-ABC es ideal para tareas que tienen instrucciones claras pero no requieren interpretación de roles compleja. Es el framework más rápido de escribir — perfecto para clasificación rápida, generación simple de contenido o redacción directa de correos.
+ABC es ideal para tareas que tienen instrucciones claras pero no requieren interpretación de roles compleja. Es el framework más rápido de escribir: perfecto para clasificación rápida, generación simple de contenido o redacción directa de correos.
 
 ### ABC en Código
 
@@ -108,12 +108,12 @@ print(response.choices[0].message.content)
 
 | Componente | Propósito | Ejemplo |
 |------------|-----------|---------|
-| **C - Contexto** | Situación de fondo | "Eres un consultor de marketing" |
-| **O - Objetivo** | La meta a alcanzar | "Aumentar el engagement en redes sociales" |
-| **E - Estilo** | Estilo de escritura | "Puntos clave, elementos accionables" |
-| **T - Tono** | Voz/actitud | "Energético, alentador" |
-| **A - Audiencia** | Quién está leyendo | "Pequeños empresarios nuevos en redes sociales" |
-| **R - Respuesta** | Requisito de formato | "5 consejos, cada uno con explicación 'por qué funciona'" |
+| **C: Contexto** | Situación de fondo | "Eres un consultor de marketing" |
+| **O: Objetivo** | La meta a alcanzar | "Aumentar el engagement en redes sociales" |
+| **E: Estilo** | Estilo de escritura | "Puntos clave, elementos accionables" |
+| **T: Tono** | Voz/actitud | "Energético, alentador" |
+| **A: Audiencia** | Quién está leyendo | "Pequeños empresarios nuevos en redes sociales" |
+| **R: Respuesta** | Requisito de formato | "5 consejos, cada uno con explicación 'por qué funciona'" |
 
 ### Diagrama de Flujo del Framework CO-STAR
 
@@ -158,11 +158,11 @@ CO-STAR se destaca cuando **el tono y el estilo importan tanto como el contenido
 
 | Componente | Propósito | Ejemplo |
 |------------|-----------|---------|
-| **R - Rol** | Quién debe ser la IA | "Desarrollador Python senior con 15 años de experiencia" |
-| **I - Instrucción** | Qué hacer | "Revisa y optimiza este código" |
-| **S - Pasos** | Proceso a seguir | "1. Identifica cuellos de botella 2. Sugiere correcciones 3. Muestra antes/después" |
-| **E - Meta final** | Resultado deseado | "Hacerlo funcionar 50% más rápido y ser más legible" |
-| **N - Restricciones** | Filtros/limitaciones | "Sin bibliotecas externas, debe mantener compatibilidad hacia atrás" |
+| **R: Rol** | Quién debe ser la IA | "Desarrollador Python senior con 15 años de experiencia" |
+| **I: Instrucción** | Qué hacer | "Revisa y optimiza este código" |
+| **S: Pasos** | Proceso a seguir | "1. Identifica cuellos de botella 2. Sugiere correcciones 3. Muestra antes/después" |
+| **E: Meta final** | Resultado deseado | "Hacerlo funcionar 50% más rápido y ser más legible" |
+| **N: Restricciones** | Filtros/limitaciones | "Sin bibliotecas externas, debe mantener compatibilidad hacia atrás" |
 
 ### Diagrama de Flujo del Framework RISEN
 
@@ -423,7 +423,7 @@ for nombre, prompt in [("ABC", abc_prompt), ("CO-STAR", costar_prompt), ("RISEN"
   "id": "pe-02-es-q6",
   "type": "multiple-choice",
   "question": "Un ingeniero de prompts necesita generar una respuesta que incluya un proceso de diagnóstico paso a paso específico. Solo un framework tiene un componente dedicado para especificar pasos procesales. ¿Cuál?",
-  "options": ["Componente Acción de ABC", "Componente Respuesta de CO-STAR", "Componente Pasos de RISEN", "Ninguno — los pasos deben incluirse en el texto de instrucción para todos los frameworks"],
+  "options": ["Componente Acción de ABC", "Componente Respuesta de CO-STAR", "Componente Pasos de RISEN", "Ninguno: los pasos deben incluirse en el texto de instrucción para todos los frameworks"],
   "correct": 2,
   "explanation": "RISEN incluye exclusivamente un componente dedicado Pasos (S) para especificar el proceso exacto que la IA debe seguir."
 }
@@ -455,7 +455,7 @@ for nombre, prompt in [("ABC", abc_prompt), ("CO-STAR", costar_prompt), ("RISEN"
 {
   "id": "pe-02-es-q9",
   "type": "multiple-choice",
-  "question": "Un equipo de prompts necesita que sus frameworks de prompts sean probables — cada componente debe poder aislarse para pruebas A/B. ¿Qué estructura de componentes del framework hace esto más fácil?",
+  "question": "Un equipo de prompts necesita que sus frameworks de prompts sean probables: cada componente debe poder aislarse para pruebas A/B. ¿Qué estructura de componentes del framework hace esto más fácil?",
   "options": ["ABC con 3 componentes amplios", "CO-STAR con 6 componentes específicos y separables", "RISEN con 5 componentes fuertemente acoplados", "Todos los frameworks son igualmente probables"],
   "correct": 1,
   "explanation": "Los 6 componentes específicos y separables de CO-STAR (Contexto, Objetivo, Estilo, Tono, Audiencia, Respuesta) hacen más fácil aislar y probar A/B dimensiones individuales."
@@ -483,5 +483,5 @@ for nombre, prompt in [("ABC", abc_prompt), ("CO-STAR", costar_prompt), ("RISEN"
 - **RISEN** (Rol, Instrucción, Pasos, Meta final, Restricciones): Más detallado para tareas complejas y especializadas
 - La elección del framework depende de la complejidad de la tarea y necesidad de especificidad de la salida
 - No sobreingeniería: preguntas simples no necesitan frameworks
-- Los frameworks pueden combinarse para tareas complejas — mezcla y combina componentes
-- Siempre prueba e itera — los frameworks son heurísticas, no garantías
+- Los frameworks pueden combinarse para tareas complejas: mezcla y combina componentes
+- Siempre prueba e itera: los frameworks son heurísticas, no garantías

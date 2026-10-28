@@ -130,7 +130,7 @@ Understanding tax frameworks is critical for non-profit financial sustainability
 - **Reporting**: Quarterly/annual progress reports; final impact report; financial reconciliation; audited accounts for eligible expenses
 - **MCTI oversight**: Ministry of Science and Technology monitors; evaluates; may request technical reviews; has approval/renewal authority
 
-### 3. Gerando Brasil - Social Impact Tax Incentive
+### 3. Gerando Brasil: Social Impact Tax Incentive
 
 #### Law Overview
 - **Full name**: Lei nº 13.019/2014 provisions + specific regulamentation (Decree 10.092/2019 and subsequent)

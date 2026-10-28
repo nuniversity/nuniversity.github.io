@@ -1,6 +1,6 @@
 ---
 title: "Implementación de DDD en Python"
-description: "Implementación completa de extremo a extremo de un modelo de dominio de comercio electrónico en Python, integrando todos los patrones tácticos — Entidades, Objetos de Valor, Agregados, Repositorios, Servicios de Dominio y Eventos de Dominio"
+description: "Implementación completa de extremo a extremo de un modelo de dominio de comercio electrónico en Python, integrando todos los patrones tácticos, Entidades, Objetos de Valor, Agregados, Repositorios, Servicios de Dominio y Eventos de Dominio"
 order: 8
 duration: "75 min"
 difficulty: "advanced"
@@ -11,7 +11,7 @@ difficulty: "advanced"
 Esta lección final reúne **todo** lo que has aprendido en el curso: Lenguaje Ubicuo, Contextos Delimitados, Entidades, Objetos de Valor, Agregados, Repositorios, Servicios de Dominio y Eventos de Dominio. Construiremos un modelo de dominio completo de comercio electrónico en Python.
 
 > [!NOTE]
-> Este no es un ejemplo de "juguete". El código es de calidad de producción y sigue prácticas reales de DDD. Cada patrón se usa donde le corresponde. El foco está en la capa de dominio — las preocupaciones de infraestructura (base de datos, framework web, broker de mensajes) quedan abstraídas detrás de interfaces.
+> Este no es un ejemplo de "juguete". El código es de calidad de producción y sigue prácticas reales de DDD. Cada patrón se usa donde le corresponde. El foco está en la capa de dominio: las preocupaciones de infraestructura (base de datos, framework web, broker de mensajes) quedan abstraídas detrás de interfaces.
 
 ## Estructura del proyecto
 

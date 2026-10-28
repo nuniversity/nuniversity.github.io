@@ -73,7 +73,7 @@ Index Scan using idx_orders_date on orders
   Execution Time: 0.064 ms
 ```
 
-The estimate says 50 rows; actual was 45 — a good estimate. Large discrepancies suggest stale statistics.
+The estimate says 50 rows; actual was 45: a good estimate. Large discrepancies suggest stale statistics.
 
 ## Sequential Scans vs Index Scans
 

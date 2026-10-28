@@ -72,7 +72,7 @@ ORDER BY event_time;
 > |-------|-----------|
 > | Remove duplicatas | Preserva duplicatas |
 > | Ordena internamente (dedup) | Apenas anexa |
-> | Mais lento em conjuntos grandes | Mais rápido — sem overhead de ordenação |
+> | Mais lento em conjuntos grandes | Mais rápido: sem overhead de ordenação |
 > | Use quando quiser linhas distintas | Use quando duplicatas são aceitáveis ou desejadas |
 
 ### UNION vs UNION ALL: Desempenho
@@ -179,11 +179,11 @@ SELECT product_id FROM top_selling_products;
 
 | Expressão | Significado |
 |------------|---------|
-| `A UNION B INTERSECT C` | `A UNION (B INTERSECT C)` — INTERSECT tem precedência |
+| `A UNION B INTERSECT C` | `A UNION (B INTERSECT C)`: INTERSECT tem precedência |
 | `(A UNION B) INTERSECT C` | Union primeiro, depois intersect (sobrescrever com parênteses) |
 
 > [!WARNING]
-> INTERSECT tem precedência sobre UNION no padrão SQL. Sempre use parênteses para tornar sua intenção explícita — esta é uma área onde clareza importa mais que brevidade.
+> INTERSECT tem precedência sobre UNION no padrão SQL. Sempre use parênteses para tornar sua intenção explícita; esta é uma área onde clareza importa mais que brevidade.
 
 ## Padrões Práticos
 

@@ -11,7 +11,7 @@ difficulty: "intermediário"
 Padrões criacionais lidam com mecanismos de criação de objetos, enquanto padrões estruturais compõem classes e objetos em estruturas maiores. Juntos, eles formam a base do design orientado a objetos flexível e reutilizável.
 
 > [!NOTE]
-> Esta lição cobre os padrões mais amplamente usados das categorias Criacional e Estrutural. Dominar estes quatro padrões — Singleton, Factory, Observer e Adapter — resolve a maioria dos desafios comuns de design.
+> Esta lição cobre os padrões mais amplamente usados das categorias Criacional e Estrutural. Dominar estes quatro padrões, Singleton, Factory, Observer e Adapter, resolve a maioria dos desafios comuns de design.
 
 ## Padrão Singleton
 

@@ -10,7 +10,7 @@ difficulty: "beginner"
 
 Raw query results are rarely in the order you need. This lesson teaches you how to sort, paginate, deduplicate, and rename columns for clean output.
 
-## ORDER BY — Sorting Results
+## ORDER BY: Sorting Results
 
 `ORDER BY` sorts the result set by one or more columns.
 
@@ -64,7 +64,7 @@ FROM employees
 ORDER BY projected_raise DESC;
 ```
 
-## LIMIT and OFFSET — Pagination
+## LIMIT and OFFSET: Pagination
 
 `LIMIT` restricts how many rows are returned. `OFFSET` skips a number of rows before returning results.
 
@@ -103,7 +103,7 @@ ORDER BY salary DESC
 LIMIT 5, 10;  -- Skip 5, return 10
 ```
 
-## DISTINCT — Remove Duplicates
+## DISTINCT: Remove Duplicates
 
 `DISTINCT` returns only unique values for the selected columns.
 

@@ -385,7 +385,7 @@ print(resultado)
 - **Estilo point-free** omite argumentos explícitos
 - **Decorators** são uma forma de composição de funções
 - **Encadeamento de métodos** fornece composição de API fluente
-- Cada função composta deve fazer uma coisa bem — a composição cria o comportamento complexo
+- Cada função composta deve fazer uma coisa bem: a composição cria o comportamento complexo
 
 > [!SUCCESS]
 > Composição de funções é o superpoder que transforma funções pequenas e focadas em programas expressivos e sustentáveis.

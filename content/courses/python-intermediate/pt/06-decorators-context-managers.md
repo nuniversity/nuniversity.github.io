@@ -12,7 +12,7 @@ Decoradores e gerenciadores de contexto são recursos poderosos do Python que pe
 
 ## Funções de Primeira Classe
 
-Em Python, funções são objetos — podem ser atribuídas, passadas e retornadas:
+Em Python, funções são objetos: podem ser atribuídas, passadas e retornadas:
 
 ```python
 def square(x: int) -> int:
@@ -46,9 +46,9 @@ print(op(6))  # 36
 ```
 
 > [!NOTE]
-> Funções podem ter atributos, ser armazenadas em estruturas de dados e ser passadas como callbacks — como qualquer outro objeto.
+> Funções podem ter atributos, ser armazenadas em estruturas de dados e ser passadas como callbacks: como qualquer outro objeto.
 
-## Closure — Funções Lembrando Seu Escopo
+## Closure: Funções Lembrando Seu Escopo
 
 ```python
 def make_multiplier(factor: float):
@@ -63,7 +63,7 @@ print(double(5))   # 10
 print(triple(5))   # 15
 ```
 
-## Decoradores — O Básico
+## Decoradores, O Básico
 
 Um decorador é uma função que recebe outra função e estende seu comportamento:
 
@@ -239,7 +239,7 @@ say("Bye")  # Call 2 of say
 print(f"Called {say.count} times")  # Called 2 times
 ```
 
-## Gerenciadores de Contexto — A Instrução `with`
+## Gerenciadores de Contexto: A Instrução `with`
 
 Gerenciadores de contexto configuram e liberam recursos automaticamente:
 

@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Loops & Repetition
 
-Many tasks require doing the same thing multiple times. Instead of writing the same steps over and over, algorithms use **loops** -- structures that repeat a set of instructions until a condition is met. Loops are one of the most powerful tools in algorithmic thinking.
+Many tasks require doing the same thing multiple times. Instead of writing the same steps over and over, algorithms use **loops**: structures that repeat a set of instructions until a condition is met. Loops are one of the most powerful tools in algorithmic thinking.
 
 ## Why Loops Matter
 
@@ -34,8 +34,8 @@ END WHILE
 
 | Approach | Lines of Code | Easy to Change? | Error-Prone? |
 |---|---|---|---|
-| Without loop | 100 | No -- must edit each line | Yes -- easy to skip or duplicate |
-| With loop | 4 | Yes -- change the limit | No -- logic is centralized |
+| Without loop | 100 | No, must edit each line | Yes, easy to skip or duplicate |
+| With loop | 4 | Yes, change the limit | No, logic is centralized |
 
 ```mermaid
 flowchart TD
@@ -368,7 +368,7 @@ PRINT "Goodbye!"
 ```
 
 > [!NOTE]
-> The value -1 is called a "sentinel" -- a special value that signals the end of input. The user must know to enter -1 to stop.
+> The value -1 is called a "sentinel": a special value that signals the end of input. The user must know to enter -1 to stop.
 
 ### Strategy 3: Flag-Based Termination
 

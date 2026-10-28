@@ -1,21 +1,21 @@
 ---
-title: "Domínio 5.2 — Compartilhamento Seguro de Dados e Data Clean Rooms"
-description: "Entenda o modelo de Secure Data Sharing do Snowflake — contas de provedor/consumidor/reader, compartilhamentos diretos e colaboração com preservação de privacidade via data clean rooms."
+title: "Domínio 5.2, Compartilhamento Seguro de Dados e Data Clean Rooms"
+description: "Entenda o modelo de Secure Data Sharing do Snowflake, contas de provedor/consumidor/reader, compartilhamentos diretos e colaboração com preservação de privacidade via data clean rooms."
 order: 18
 difficulty: intermediate
 duration: 50
 ---
 
-# Domínio 5.2 — Compartilhamento Seguro de Dados e Data Clean Rooms
+# Domínio 5.2: Compartilhamento Seguro de Dados e Data Clean Rooms
 
 > [!NOTE]
-> **Domínio de Exame 5.2** — *Secure Data Sharing* contribui para o domínio **Colaboração de Dados**, que representa **10%** do exame COF-C03.
+> **Domínio de Exame 5.2**: *Secure Data Sharing* contribui para o domínio **Colaboração de Dados**, que representa **10%** do exame COF-C03.
 
 ---
 
 ## Visão Geral: Como o Compartilhamento Funciona
 
-O Snowflake Secure Data Sharing permite que um **provedor** compartilhe dados **ao vivo e somente leitura** com um **consumidor** — sem cópia de dados e sem necessidade de ETL.
+O Snowflake Secure Data Sharing permite que um **provedor** compartilhe dados **ao vivo e somente leitura** com um **consumidor**: sem cópia de dados e sem necessidade de ETL.
 
 ```mermaid
 flowchart LR
@@ -35,9 +35,9 @@ flowchart LR
 ```
 
 Características principais:
-- **Zero cópia de dados** — o consumidor lê diretamente do armazenamento do provedor.
-- **Sempre ao vivo** — consumidores veem inserts/updates em tempo real.
-- **Somente leitura** — consumidores não podem modificar os dados compartilhados.
+- **Zero cópia de dados**, o consumidor lê diretamente do armazenamento do provedor.
+- **Sempre ao vivo**: consumidores veem inserts/updates em tempo real.
+- **Somente leitura**: consumidores não podem modificar os dados compartilhados.
 - Compartilhamento **entre nuvens/regiões** requer replicação (abordado na Lição 17).
 
 ---
@@ -248,12 +248,12 @@ flowchart TD
 
 > [!SUCCESS]
 > **Pontos-Chave para o Exame**
-> - O compartilhamento é **zero-cópia e ao vivo** — sem ETL, sem movimentação de dados.
+> - O compartilhamento é **zero-cópia e ao vivo**: sem ETL, sem movimentação de dados.
 > - Consumidores têm acesso **somente leitura**; não podem gravar em objetos compartilhados.
 > - Apenas **secure views** e UDFs seguras podem ser adicionadas a shares.
 > - **Reader Accounts**: para consumidores sem conta Snowflake; provedor paga a computação.
 > - Compartilhamento entre nuvens/regiões requer **replicação** primeiro.
-> - **Data Clean Rooms** habilitam análises conjuntas sem expor registros brutos — os resultados são apenas agregados.
+> - **Data Clean Rooms** habilitam análises conjuntas sem expor registros brutos: os resultados são apenas agregados.
 
 ---
 
@@ -261,8 +261,8 @@ flowchart TD
 
 **1.** Um provedor adiciona uma view regular (não segura) a um share. O que acontece?
 
-- A) Funciona — todas as views podem ser compartilhadas
-- B) **Falha — apenas SECURE views podem ser adicionadas a shares** ✅
+- A) Funciona: todas as views podem ser compartilhadas
+- B) **Falha: apenas SECURE views podem ser adicionadas a shares** ✅
 - C) A view é automaticamente convertida em uma secure view
 - D) Os consumidores veem os dados, mas não a definição
 
@@ -272,7 +272,7 @@ flowchart TD
 
 - A) Após a próxima atualização agendada (diária)
 - B) Após o consumidor reexecutar `CREATE DATABASE FROM SHARE`
-- C) **Imediatamente — o compartilhamento é ao vivo e zero-cópia** ✅
+- C) **Imediatamente, o compartilhamento é ao vivo e zero-cópia** ✅
 - D) Após o provedor executar ALTER SHARE REFRESH
 
 ---
@@ -297,9 +297,9 @@ flowchart TD
 
 **5.** O provedor está no AWS us-east-1. O consumidor está no Azure eastus. O provedor pode compartilhar diretamente?
 
-- A) Sim — o compartilhamento funciona entre todas as nuvens nativamente
-- B) **Não — o compartilhamento entre nuvens requer replicação de banco de dados primeiro** ✅
-- C) Não — o compartilhamento entre nuvens não é suportado
+- A) Sim, o compartilhamento funciona entre todas as nuvens nativamente
+- B) **Não, o compartilhamento entre nuvens requer replicação de banco de dados primeiro** ✅
+- C) Não, o compartilhamento entre nuvens não é suportado
 - D) Sim, mas apenas para provedores na edição Enterprise
 
 ---

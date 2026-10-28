@@ -1,6 +1,6 @@
 ---
 title: "Patrón de Agente Reflexivo"
-description: "Implementa el patrón de reflexión en LangGraph — bucles de generar, criticar y refinar para agentes que mejoran iterativamente su salida."
+description: "Implementa el patrón de reflexión en LangGraph, bucles de generar, criticar y refinar para agentes que mejoran iterativamente su salida."
 order: 6
 duration: "35 min"
 difficulty: "advanced"
@@ -384,7 +384,7 @@ app = builder.compile()
   "type": "multiple-choice",
   "question": "What risk should you mitigate in the reflection loop?",
   "options": [
-    "Token overuse — each iteration adds LLM calls",
+    "Token overuse: each iteration adds LLM calls",
     "The loop might converge too fast",
     "Output quality decreases with iterations",
     "The critique is always positive"
@@ -433,7 +433,7 @@ app = builder.compile()
   "question": "Can the reflection pattern be applied to agent decisions, not just text?",
   "options": [
     "No, it only works for text generation",
-    "Yes — the agent can critique its own decisions and choose alternative strategies",
+    "Yes: the agent can critique its own decisions and choose alternative strategies",
     "Only for code",
     "Only for writing"
   ],

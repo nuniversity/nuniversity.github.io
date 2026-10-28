@@ -66,7 +66,7 @@ graph.set_finish_point("execute")
 ```
 
 [!SUCCESS]
-Grafos oferecem **loops, ramificações, persistência e roteamento dinâmico** — tudo essencial para construir agentes autônomos.
+Grafos oferecem **loops, ramificações, persistência e roteamento dinâmico**: tudo essencial para construir agentes autônomos.
 
 ---
 
@@ -172,7 +172,7 @@ Input → [Pensar] → decidir → [Agir] → [Observar] → decidir → [Pensar
 Este loop é a fundação de todo agente ReAct. LangGraph torna trivial implementá-lo.
 
 [!IMPORTANT]
-O padrão ReAct (Raciocinar + Agir) é a arquitetura de agente mais comum. A estrutura de grafo do LangGraph é a maneira ideal de implementá-lo — cada turno do loop é uma execução de nó.
+O padrão ReAct (Raciocinar + Agir) é a arquitetura de agente mais comum. A estrutura de grafo do LangGraph é a maneira ideal de implementá-lo: cada turno do loop é uma execução de nó.
 
 ---
 
@@ -229,13 +229,13 @@ print(result["value"])  # Echo: hello
 Um grafo roteia consultas de clientes através de classificação de intenção, busca na base de conhecimento, criação de ticket e escalonamento para humanos.
 
 ### Agente de Geração de Código
-Um agente que escreve código, executa testes, lê saídas de erro e corrige bugs iterativamente — tudo dentro de um único grafo com um loop.
+Um agente que escreve código, executa testes, lê saídas de erro e corrige bugs iterativamente: tudo dentro de um único grafo com um loop.
 
 ### Assistente de Pesquisa
 Um agente de múltiplas etapas que pesquisa na web, sumariza descobertas, gera relatórios e faz perguntas esclarecedoras quando necessário.
 
 ### Orquestrador de Pipeline de Dados
-Um grafo que ingere dados, valida, transforma, carrega em um banco de dados e envia notificações — com tratamento de erro em cada etapa.
+Um grafo que ingere dados, valida, transforma, carrega em um banco de dados e envia notificações: com tratamento de erro em cada etapa.
 
 [!SUCCESS]
 LangGraph transforma lógica agentica complexa de código espaguete em uma estrutura de grafo limpa, visual e debugável.
@@ -379,7 +379,7 @@ LangGraph transforma lógica agentica complexa de código espaguete em uma estru
     "Ele substitui a necessidade de um LLM"
   ],
   "correct": 1,
-  "explanation": "Agentes autônomos precisam fazer loop (pensar-agir-observar), manter estado entre iterações e tomar decisões — tudo que LangGraph suporta nativamente."
+  "explanation": "Agentes autônomos precisam fazer loop (pensar-agir-observar), manter estado entre iterações e tomar decisões: tudo que LangGraph suporta nativamente."
 }
 ```
 
@@ -404,7 +404,7 @@ LangGraph transforma lógica agentica complexa de código espaguete em uma estru
 [!SUCCESS]
 ### Principais Conclusões
 - LangGraph usa grafos direcionados com estado compartilhado para construir agentes
-- Grafos suportam loops, ramificação condicional e persistência — ao contrário de cadeias lineares
+- Grafos suportam loops, ramificação condicional e persistência: ao contrário de cadeias lineares
 - O estado flui através de todos os nós; cada nó recebe o estado completo e retorna atualizações parciais
 - StateGraph é a classe principal para construir aplicações LangGraph
 - O padrão ReAct (raciocinar → agir → observar → loop) é uma adaptação natural para grafos

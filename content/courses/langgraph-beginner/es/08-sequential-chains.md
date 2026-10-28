@@ -8,7 +8,7 @@ difficulty: "iniciante"
 
 # Cadenas Secuenciales
 
-Aunque LangGraph soporta topologías de grafo complejas, muchas aplicaciones se construyen sobre **cadenas secuenciales** simples — una secuencia lineal de nodos donde cada paso construye sobre el anterior.
+Aunque LangGraph soporta topologías de grafo complejas, muchas aplicaciones se construyen sobre **cadenas secuenciales** simples: una secuencia lineal de nodos donde cada paso construye sobre el anterior.
 
 ---
 
@@ -155,7 +155,7 @@ Fan-out con ramas paralelas, luego fan-in para fusionar resultados. Este patrón
   "question": "¿Cómo fluye el estado en una cadena secuencial de LangGraph?",
   "options": [
     "Cada nodo tiene su propio estado aislado",
-    "El estado es compartido — cada nodo lee escrituras anteriores y añade las suyas",
+    "El estado es compartido: cada nodo lee escrituras anteriores y añade las suyas",
     "El estado se reinicia entre cada nodo",
     "El estado fluye hacia atrás, del último nodo al primero"
   ],
@@ -176,7 +176,7 @@ Fan-out con ramas paralelas, luego fan-in para fusionar resultados. Este patrón
     "Se lanza un error"
   ],
   "correct": 2,
-  "explanation": "La actualización de estado por defecto es reemplazar — el último nodo que escribe una clave determina su valor final."
+  "explanation": "La actualización de estado por defecto es reemplazar: el último nodo que escribe una clave determina su valor final."
 }
 ```
 

@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Optimización de procesos
 
-Los diagramas de flujo no sirven solo para documentar procesos — son herramientas potentes para mejorarlos. En esta lección final aprenderemos a usar los diagramas de flujo para identificar cuellos de botella, eliminar desperdicios y optimizar procesos para lograr mayor eficiencia y calidad.
+Los diagramas de flujo no sirven solo para documentar procesos: son herramientas potentes para mejorarlos. En esta lección final aprenderemos a usar los diagramas de flujo para identificar cuellos de botella, eliminar desperdicios y optimizar procesos para lograr mayor eficiencia y calidad.
 
 ## ¿Por qué optimizar los procesos?
 
@@ -249,7 +249,7 @@ flowchart TD
 
 ## El ciclo de optimización
 
-La optimización de procesos no es una actividad única — es un ciclo continuo:
+La optimización de procesos no es una actividad única: es un ciclo continuo:
 
 ```mermaid
 flowchart TD
@@ -351,11 +351,11 @@ flowchart TD
 
 | Métrica | Qué mide | Cómo se calcula |
 |---|---|---|
-| **Tiempo de ciclo** | Tiempo total desde el inicio hasta el fin | Tiempo final - Tiempo inicial |
+| **Tiempo de ciclo** | Tiempo total desde el inicio hasta el fin | Tiempo final: Tiempo inicial |
 | **Throughput** | Elementos procesados por unidad de tiempo | Recuento / Período de tiempo |
 | **Tasa de error** | Porcentaje de elementos con defectos | Errores / Total de elementos × 100 |
 | **Tiempo de espera** | Tiempo dedicado a esperar entre pasos | Suma de todos los períodos de espera |
-| **Tiempo de contacto** | Tiempo realmente dedicado a trabajar | Tiempo total - Tiempo de espera |
+| **Tiempo de contacto** | Tiempo realmente dedicado a trabajar | Tiempo total: Tiempo de espera |
 | **Eficiencia** | Proporción entre el tiempo de contacto y el tiempo de ciclo | Tiempo de contacto / Tiempo de ciclo × 100 |
 
 ## Ejercicios prácticos
@@ -374,7 +374,7 @@ Aprobación del gerente (4 horas) → Preparar el pedido (5 min) → Enviar (1 d
 <details>
 <summary>Haz clic para ver el análisis</summary>
 
-**Cuello de botella:** Aprobación del gerente (4 horas) — todos los demás pasos llevan minutos.
+**Cuello de botella:** Aprobación del gerente (4 horas): todos los demás pasos llevan minutos.
 
 **Sugerencias de mejora:**
 - Definir umbrales de aprobación (exigir la aprobación del gerente solo para pedidos superiores a $X)

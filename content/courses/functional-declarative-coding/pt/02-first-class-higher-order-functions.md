@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Funções de Primeira Classe e Ordem Superior
 
-Em Python, funções são **cidadãs de primeira classe** — podem ser atribuídas a variáveis, passadas como argumentos, retornadas de outras funções e armazenadas em estruturas de dados. **Funções de ordem superior** aproveitam isso recebendo funções como argumentos ou retornando funções como resultados.
+Em Python, funções são **cidadãs de primeira classe**: podem ser atribuídas a variáveis, passadas como argumentos, retornadas de outras funções e armazenadas em estruturas de dados. **Funções de ordem superior** aproveitam isso recebendo funções como argumentos ou retornando funções como resultados.
 
 ## Funções São Objetos
 
@@ -91,7 +91,7 @@ print(por_nota)
 
 ## A Trindade: Map, Filter, Reduce
 
-### Map — Transformar Cada Elemento
+### Map: Transformar Cada Elemento
 
 ```python
 from typing import List, Callable
@@ -119,7 +119,7 @@ resultado = list(map(lambda a, b: a + b, [1, 2, 3], [10, 20, 30]))
 print(resultado)  # [11, 22, 33]
 ```
 
-### Filter — Manter Elementos Correspondentes
+### Filter: Manter Elementos Correspondentes
 
 ```python
 # filter() mantém itens onde o predicado retorna True
@@ -151,7 +151,7 @@ disponiveis = list(filter(disponivel, produtos))
 print([p["nome"] for p in disponiveis])  # ["Teclado"]
 ```
 
-### Reduce — Acumular em um Único Valor
+### Reduce: Acumular em um Único Valor
 
 ```python
 from functools import reduce

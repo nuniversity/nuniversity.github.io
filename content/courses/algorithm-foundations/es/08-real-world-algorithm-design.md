@@ -119,7 +119,7 @@ flowchart TD
 ```
 
 > [!NOTE]
-> Observa que los pasos 5-8 (la pasta) y los pasos 9-16 (la salsa) pueden ocurrir en paralelo. Esto se llama **ejecución concurrente** -- dos procesos que corren al mismo tiempo. Los buenos cocineros gestionan ambos simultáneamente para terminar a la vez.
+> Observa que los pasos 5-8 (la pasta) y los pasos 9-16 (la salsa) pueden ocurrir en paralelo. Esto se llama **ejecución concurrente**: dos procesos que corren al mismo tiempo. Los buenos cocineros gestionan ambos simultáneamente para terminar a la vez.
 
 ### ¿Qué hace que una receta algorítmica sea buena?
 
@@ -517,7 +517,7 @@ En esta lección, has aprendido:
 - **Marco de diseño**: Un enfoque sistemático para diseñar algoritmos para cualquier problema
 
 > [!SUCCESS]
-> Ya tienes las herramientas para reconocer y diseñar algoritmos para problemas del mundo real. Cada sistema complejo que encuentres -- desde semáforos hasta feeds de redes sociales -- se construye a partir de los principios algorítmicos que has aprendido en este curso.
+> Ya tienes las herramientas para reconocer y diseñar algoritmos para problemas del mundo real. Cada sistema complejo que encuentres, desde semáforos hasta feeds de redes sociales, se construye a partir de los principios algorítmicos que has aprendido en este curso.
 
 ## Términos clave
 

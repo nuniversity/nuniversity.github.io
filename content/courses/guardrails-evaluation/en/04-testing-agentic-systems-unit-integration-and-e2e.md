@@ -13,15 +13,15 @@ duration: "45 min"
 Agentic systems introduce unique testing difficulties that traditional software testing does not address:
 
 - **Non-determinism**: LLM outputs vary across calls, models, and even the same prompt at different temperatures
-- **Tool side effects**: Agents invoke real APIs, databases, and services — a test run may mutate production state
+- **Tool side effects**: Agents invoke real APIs, databases, and services: a test run may mutate production state
 - **Multi-step flows**: A single query triggers a chain of reasoning, tool calls, and planning that spans multiple LLM invocations
-- **Statefulness**: Agents maintain conversation memory across turns — context from turn 1 affects behavior in turn 5
+- **Statefulness**: Agents maintain conversation memory across turns: context from turn 1 affects behavior in turn 5
 - **Latency variability**: LLM calls can take anywhere from 500ms to 30s, making timeout handling critical
 
 A rigorous testing strategy must address all of these challenges through a layered approach.
 
 > [!WARNING]
-> Never use production API keys or databases in any test — unit, integration, or E2E. A single test run should never mutate production state. Always use dedicated test environments with isolated data, mock LLM responses, and sandboxed tool endpoints.
+> Never use production API keys or databases in any test: unit, integration, or E2E. A single test run should never mutate production state. Always use dedicated test environments with isolated data, mock LLM responses, and sandboxed tool endpoints.
 
 ---
 
@@ -194,7 +194,7 @@ def test_synthesize_response_node():
 
 ## Testing Graph Flow Structure
 
-Validate that the graph topology is correct — nodes connect as expected, edges are properly typed, and no cycles exist outside the intentional agent loop.
+Validate that the graph topology is correct: nodes connect as expected, edges are properly typed, and no cycles exist outside the intentional agent loop.
 
 ```python
 # test_graph_structure.py
@@ -496,7 +496,7 @@ class TestCustomerSupportE2E:
 
 ## CI/CD Integration
 
-Run agent tests in CI/CD to catch regressions before deployment. The pipeline should match the test pyramid — fast tests first, slow tests on selective triggers.
+Run agent tests in CI/CD to catch regressions before deployment. The pipeline should match the test pyramid: fast tests first, slow tests on selective triggers.
 
 ```yaml
 # .github/workflows/test-agent.yml
@@ -618,7 +618,7 @@ jobs:
     "E2E test"
   ],
   "correct": 2,
-  "explanation": "Graph structure tests validate the agent's topology — ensuring all required nodes exist, edges connect correctly, and there are no unintended cycles."
+  "explanation": "Graph structure tests validate the agent's topology: ensuring all required nodes exist, edges connect correctly, and there are no unintended cycles."
 }
 ```
 
@@ -677,7 +677,7 @@ jobs:
 > - Agent testing requires a strategy that addresses non-determinism, tool side effects, multi-step flows, and statefulness.
 > - The test pyramid for agents has five layers: static analysis, unit, graph structure, integration, and E2E.
 > - Unit tests should mock LLM calls and tool responses to test component logic deterministically.
-> - Graph structure tests validate that the agent topology is correct and cycle-free — a unique testing layer for agentic systems.
+> - Graph structure tests validate that the agent topology is correct and cycle-free: a unique testing layer for agentic systems.
 > - Integration tests use sandboxed or test-double environments to verify tool execution against real (but isolated) services.
 > - E2E scenarios simulate full user sessions against a staging environment; they are slow but provide high confidence.
 > - CI/CD pipelines should run static analysis and unit tests on every commit, integration tests on PRs, and E2E on releases.

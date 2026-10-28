@@ -499,7 +499,7 @@ sequenceDiagram
 ```
 
 > [!WARNING]
-> Anti-padrões não são apenas "código ruim" — são soluções comuns para problemas recorrentes que parecem boas inicialmente, mas têm consequências negativas. Reconhecê-los é o primeiro passo para evitá-los.
+> Anti-padrões não são apenas "código ruim": são soluções comuns para problemas recorrentes que parecem boas inicialmente, mas têm consequências negativas. Reconhecê-los é o primeiro passo para evitá-los.
 
 ## Exercícios Práticos
 

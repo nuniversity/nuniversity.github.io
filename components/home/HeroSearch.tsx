@@ -149,7 +149,7 @@ export default function HeroSearch({
   return (
     <div ref={rootRef} className="relative mx-auto mt-9 w-full max-w-xl">
       {/* The field row may be animated, but the results panel is a sibling of
-          it rather than a child — an animated ancestor would create a
+          it rather than a child, an animated ancestor would create a
           stacking context and paint the panel behind later content. */}
       <div
         className={`flex items-center gap-2 rounded-2xl border bg-surface p-2 shadow-sm transition-all duration-200 ${fieldClassName} ${

@@ -8,7 +8,7 @@ duration: "50 min"
 
 # Cost Structure & Optimization
 
-> **Bottom Line:** There is no universally cheapest platform — it depends entirely on workload shape. SQL-heavy, concurrent BI workloads tend to favour Snowflake. Large-scale batch and ML tends to favour Databricks on Spot instances. AWS can win on pure infrastructure cost but loses on engineering time. "The cloud is infinite scale, limited only by your CFO's heart — or budget."
+> **Bottom Line:** There is no universally cheapest platform, it depends entirely on workload shape. SQL-heavy, concurrent BI workloads tend to favour Snowflake. Large-scale batch and ML tends to favour Databricks on Spot instances. AWS can win on pure infrastructure cost but loses on engineering time. "The cloud is infinite scale, limited only by your CFO's heart, or budget."
 
 ---
 

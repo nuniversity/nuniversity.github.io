@@ -355,7 +355,7 @@ $$\text{Imagem: } [3, +\infty)$$
 > **Erro 2: Esquecer de verificar o denominador.** Em f(x) = 1/(x-3), x = 3 não está no domínio. Sempre verifique divisões por zero!
 
 > [!WARNING]
-> **Erro 3: Calcular inclinação invertendo os pontos.** A fórmula é (y₂ - y₁)/(x₂ - x₁). Não inverta a ordem em um dos pares — a inclinação mudará de sinal!
+> **Erro 3: Calcular inclinação invertendo os pontos.** A fórmula é (y₂ - y₁)/(x₂ - x₁). Não inverta a ordem em um dos pares: a inclinação mudará de sinal!
 
 > [!WARNING]
 > **Erro 4: Confundir vértice com interceptação.** O vértice é o ponto extremo da parábola. A interceptação vertical é onde o gráfico cruza o eixo y. São pontos diferentes!

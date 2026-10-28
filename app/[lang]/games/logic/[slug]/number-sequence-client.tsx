@@ -39,7 +39,7 @@ export function NumberSequenceClient({ lang, game, dict }: NumberSequenceClientP
     'Remember the order!',
     'Type the sequence back correctly',
     'Each level adds one more digit',
-    'You have {lives} lives — use them wisely!',
+    'You have {lives} lives, use them wisely!',
   ]
 
   useEffect(() => {

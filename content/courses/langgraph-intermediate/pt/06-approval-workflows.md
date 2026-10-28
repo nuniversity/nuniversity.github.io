@@ -26,7 +26,7 @@ O agente apresenta uma proposta, o humano decide e a execução segue de acordo.
 
 ## Interrupção Antes do Nó
 
-Interrompa **antes** de um nó executar — o humano decide se o nó deve rodar:
+Interrompa **antes** de um nó executar, o humano decide se o nó deve rodar:
 
 ```python
 from langgraph.graph import StateGraph, START, END
@@ -83,13 +83,13 @@ app = builder.compile(checkpointer=MemorySaver())
 ```
 
 [!NOTE]
-Um interrupt **antes do nó** impede que uma ação aconteça até ser aprovada. Este é o padrão de aprovação mais comum — ele evita ações não autorizadas ou arriscadas.
+Um interrupt **antes do nó** impede que uma ação aconteça até ser aprovada. Este é o padrão de aprovação mais comum: ele evita ações não autorizadas ou arriscadas.
 
 ---
 
 ## Interrupção Após o Nó
 
-Interrompa **depois** de um nó executar — o humano revisa o resultado:
+Interrompa **depois** de um nó executar, o humano revisa o resultado:
 
 ```python
 def draft_email(state: EmailState) -> dict:
@@ -446,7 +446,7 @@ app = builder.compile(checkpointer=MemorySaver())
   "options": [
     "The router function reading state['approved']",
     "The content of the interrupt response",
-    "Both — the node writes the decision to state, then a router reads it",
+    "Both: the node writes the decision to state, then a router reads it",
     "The graph topology is fixed"
   ],
   "correct": 2,

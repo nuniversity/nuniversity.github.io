@@ -29,9 +29,9 @@ Frameworks de prompt fornecem modelos estruturados que produzem consistentemente
 
 | Componente | Propósito | Exemplo |
 |------------|-----------|---------|
-| **A - Ação** | O que o modelo deve fazer | "Escreva uma descrição de produto" |
-| **B - Background** | Contexto e informação | "Para uma bota de caminhada impermeável" |
-| **C - Constrangimentos** | Regras e formato | "150 palavras, tom amigável, destaque durabilidade" |
+| **A: Ação** | O que o modelo deve fazer | "Escreva uma descrição de produto" |
+| **B: Background** | Contexto e informação | "Para uma bota de caminhada impermeável" |
+| **C: Constrangimentos** | Regras e formato | "150 palavras, tom amigável, destaque durabilidade" |
 
 ### Fluxograma do Framework ABC
 
@@ -63,7 +63,7 @@ Ele está frustrado mas ainda não pediu reembolso. Sua empresa é "QuickShip In
 ```
 
 [!TIP]
-ABC é ideal para tarefas que têm instruções claras mas não exigem interpretação de papéis complexa. É o framework mais rápido de escrever — perfeito para classificação rápida, geração simples de conteúdo ou rascunho direto de emails.
+ABC é ideal para tarefas que têm instruções claras mas não exigem interpretação de papéis complexa. É o framework mais rápido de escrever: perfeito para classificação rápida, geração simples de conteúdo ou rascunho direto de emails.
 
 ### ABC em Código
 
@@ -108,12 +108,12 @@ print(response.choices[0].message.content)
 
 | Componente | Propósito | Exemplo |
 |------------|-----------|---------|
-| **C - Contexto** | Situação de fundo | "Você é um consultor de marketing" |
-| **O - Objetivo** | A meta a alcançar | "Aumentar o engajamento em redes sociais" |
-| **S - Estilo** | Estilo de escrita | "Marcadores, itens acionáveis" |
-| **T - Tom** | Voz/atitude | "Energético, encorajador" |
-| **A - Audiência** | Quem está lendo | "Pequenos empresários novos em redes sociais" |
-| **R - Resposta** | Requisito de formato | "5 dicas, cada uma com uma explicação 'por que funciona'" |
+| **C: Contexto** | Situação de fundo | "Você é um consultor de marketing" |
+| **O: Objetivo** | A meta a alcançar | "Aumentar o engajamento em redes sociais" |
+| **S: Estilo** | Estilo de escrita | "Marcadores, itens acionáveis" |
+| **T: Tom** | Voz/atitude | "Energético, encorajador" |
+| **A: Audiência** | Quem está lendo | "Pequenos empresários novos em redes sociais" |
+| **R: Resposta** | Requisito de formato | "5 dicas, cada uma com uma explicação 'por que funciona'" |
 
 ### Fluxograma do Framework CO-STAR
 
@@ -158,11 +158,11 @@ CO-STAR se destaca quando **tom e estilo importam tanto quanto o conteúdo em si
 
 | Componente | Propósito | Exemplo |
 |------------|-----------|---------|
-| **R - Papel** | Quem a IA deve ser | "Desenvolvedor Python sênior com 15 anos de experiência" |
-| **I - Instrução** | O que fazer | "Revise e otimize este código" |
-| **S - Passos** | Processo a seguir | "1. Identifique gargalos 2. Sugira correções 3. Mostre antes/depois" |
-| **E - Meta final** | Resultado desejado | "Fazer rodar 50% mais rápido e ser mais legível" |
-| **N - Restrições** | Constrangimentos/filtros | "Sem bibliotecas externas, deve manter compatibilidade retroativa" |
+| **R: Papel** | Quem a IA deve ser | "Desenvolvedor Python sênior com 15 anos de experiência" |
+| **I: Instrução** | O que fazer | "Revise e otimize este código" |
+| **S: Passos** | Processo a seguir | "1. Identifique gargalos 2. Sugira correções 3. Mostre antes/depois" |
+| **E: Meta final** | Resultado desejado | "Fazer rodar 50% mais rápido e ser mais legível" |
+| **N: Restrições** | Constrangimentos/filtros | "Sem bibliotecas externas, deve manter compatibilidade retroativa" |
 
 ### Fluxograma do Framework RISEN
 
@@ -423,7 +423,7 @@ for nome, prompt in [("ABC", abc_prompt), ("CO-STAR", costar_prompt), ("RISEN", 
   "id": "pe-02-pt-q6",
   "type": "multiple-choice",
   "question": "Um engenheiro de prompt precisa gerar uma resposta que inclua um processo de diagnóstico passo a passo específico. Apenas um framework tem um componente dedicado para especificar passos processuais. Qual?",
-  "options": ["Componente Ação do ABC", "Componente Resposta do CO-STAR", "Componente Passos do RISEN", "Nenhum — passos devem ser incluídos no texto da instrução para todos os frameworks"],
+  "options": ["Componente Ação do ABC", "Componente Resposta do CO-STAR", "Componente Passos do RISEN", "Nenhum: passos devem ser incluídos no texto da instrução para todos os frameworks"],
   "correct": 2,
   "explanation": "RISEN exclusivamente inclui um componente dedicado Passos (S) para especificar o processo exato que a IA deve seguir."
 }
@@ -455,7 +455,7 @@ for nome, prompt in [("ABC", abc_prompt), ("CO-STAR", costar_prompt), ("RISEN", 
 {
   "id": "pe-02-pt-q9",
   "type": "multiple-choice",
-  "question": "Uma equipe de prompt precisa que seus frameworks de prompt sejam testáveis — cada componente deve ser isolável para teste A/B. Qual estrutura de componentes do framework torna isso mais fácil?",
+  "question": "Uma equipe de prompt precisa que seus frameworks de prompt sejam testáveis: cada componente deve ser isolável para teste A/B. Qual estrutura de componentes do framework torna isso mais fácil?",
   "options": ["ABC com 3 componentes amplos", "CO-STAR com 6 componentes específicos e separáveis", "RISEN com 5 componentes fortemente acoplados", "Todos os frameworks são igualmente testáveis"],
   "correct": 1,
   "explanation": "Os 6 componentes específicos e separáveis do CO-STAR (Contexto, Objetivo, Estilo, Tom, Audiência, Resposta) tornam mais fácil isolar e testar A/B dimensões individuais."
@@ -483,5 +483,5 @@ for nome, prompt in [("ABC", abc_prompt), ("CO-STAR", costar_prompt), ("RISEN", 
 - **RISEN** (Papel, Instrução, Passos, Meta final, Restrições): Mais detalhado para tarefas complexas e especializadas
 - A escolha do framework depende da complexidade da tarefa e necessidade de especificidade da saída
 - Não sobre-engenharia: perguntas simples não precisam de frameworks
-- Frameworks podem ser combinados para tarefas complexas — misture e combine componentes
-- Sempre teste e itere — frameworks são heurísticas, não garantias
+- Frameworks podem ser combinados para tarefas complexas: misture e combine componentes
+- Sempre teste e itere: frameworks são heurísticas, não garantias

@@ -181,7 +181,7 @@ When using LLMs for routing, add a post-processing step to clean and validate th
 
 ## Conditional Loops
 
-The most common use of conditional edges is **looping** — repeating a node until a condition is met:
+The most common use of conditional edges is **looping**: repeating a node until a condition is met:
 
 ```python
 class LoopState(TypedDict):
@@ -379,17 +379,17 @@ print(result["response"])  # Chat or web search result
 ```
 
 [!SUCCESS]
-This pattern — classify → route → execute specialized handler — is the foundation of all intelligent routing agents.
+This pattern, classify → route → execute specialized handler, is the foundation of all intelligent routing agents.
 
 ---
 
 ## Routing Best Practices
 
-1. **Always handle all possible route values** — missing a mapping raises an error
+1. **Always handle all possible route values**: missing a mapping raises an error
 2. **Add a default/fallback route** for unexpected router outputs
 3. **Validate the router output** when using LLMs for routing
 4. **Use descriptive route names** that match node names for clarity
-5. **Limit routing depth** — deeply nested conditional chains are hard to debug
+5. **Limit routing depth**: deeply nested conditional chains are hard to debug
 6. **Log the route decision** for debugging and observability
 
 ---

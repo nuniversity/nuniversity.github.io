@@ -127,7 +127,7 @@ Each node:
 | `return {}` | No changes to state |
 
 [!WARNING]
-State updates use a **shallow merge**. If state has nested dicts, returning `{"nested": {"inner": 1}}` replaces the entire `nested` key — it does not deep-merge. For deep merges, you need custom reducers (covered in the Intermediate course).
+State updates use a **shallow merge**. If state has nested dicts, returning `{"nested": {"inner": 1}}` replaces the entire `nested` key; it does not deep-merge. For deep merges, you need custom reducers (covered in the Intermediate course).
 
 ---
 
@@ -311,7 +311,7 @@ print(result["step_count"])  # 2
 ```
 
 [!SUCCESS]
-This pattern — define state, add nodes, add edges, compile, invoke — is the foundation of every LangGraph application. Every agent you build will follow these five steps.
+This pattern, define state, add nodes, add edges, compile, invoke, is the foundation of every LangGraph application. Every agent you build will follow these five steps.
 
 ---
 
@@ -461,7 +461,7 @@ Always set a `recursion_limit` for graphs with loops. The default is usually 25 
   "question": "How does LangGraph merge state updates from a node?",
   "options": [
     "Deep merges nested dictionaries",
-    "Shallow merges — replaces top-level keys",
+    "Shallow merges: replaces top-level keys",
     "Appends to all list values",
     "Overwrites the entire state"
   ],
@@ -528,6 +528,6 @@ Always set a `recursion_limit` for graphs with loops. The default is usually 25 
 - Edges (add_edge, START, END) define the execution topology
 - compile() validates and freezes the graph into a runnable object
 - invoke() runs the graph; stream() shows intermediate states
-- State updates use shallow merge — top-level keys are replaced
+- State updates use shallow merge: top-level keys are replaced
 - Always set recursion_limit for graphs with loops
 - Use get_graph().draw_mermaid() to visualize your graph

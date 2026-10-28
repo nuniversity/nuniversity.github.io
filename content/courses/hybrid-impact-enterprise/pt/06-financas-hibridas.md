@@ -37,7 +37,7 @@ Toda empresa híbrida carrega uma tensão contábil que a empresa tradicional n�
 ```
 
 > [!NOTE]
-> **Por que a lista acima tem um piso e um teto.** Só dois itens do diagrama têm **piso de lei**: a reserva legal da S.A. (**5%** do lucro líquido até 20% do capital — Lei nº 6.404/1976, art. 193) e os fundos da cooperativa (**10% + 5%** das sobras líquidas — Lei nº 5.764/1971, art. 28, I e II). O "fundo de impacto interno" **não tem lei brasileira que o crie nem percentual obrigatório**: ele nasce de deliberação dos sócios e só vale se estiver escrito na política interna ou no contrato social.
+> **Por que a lista acima tem um piso e um teto.** Só dois itens do diagrama têm **piso de lei**: a reserva legal da S.A. (**5%** do lucro líquido até 20% do capital, Lei nº 6.404/1976, art. 193) e os fundos da cooperativa (**10% + 5%** das sobras líquidas, Lei nº 5.764/1971, art. 28, I e II). O "fundo de impacto interno" **não tem lei brasileira que o crie nem percentual obrigatório**: ele nasce de deliberação dos sócios e só vale se estiver escrito na política interna ou no contrato social.
 
 Nesta lição você vai:
 
@@ -50,8 +50,8 @@ Nesta lição você vai:
 - montar o **fundo de impacto interno** de uma limitada híbrida, com percentuais e valores;
 - separar o que é **norma contábil** do que é **referencial voluntário** nas demonstrações "lucro mais impacto";
 - usar o **catálogo de indicadores com fórmula** e conferir as **lacunas** que a pesquisa não confirmou;
-- ler **casos reais** — MONDRAGON, COPACOL, Coopercitrus, LAR e REI — com rateio, reserva e fundo **já calculados** sobre números publicados;
-- aplicar as **atualizações 2025–2026 com vigência confirmada** (reforma tributária, PLR e reporte ESG) às projeções, separando norma em vigor de item ainda em tramitação.
+- ler **casos reais**, MONDRAGON, COPACOL, Coopercitrus, LAR e REI, com rateio, reserva e fundo **já calculados** sobre números publicados;
+- aplicar as **atualizações 2025 to 2026 com vigência confirmada** (reforma tributária, PLR e reporte ESG) às projeções, separando norma em vigor de item ainda em tramitação.
 
 ---
 
@@ -59,7 +59,7 @@ Nesta lição você vai:
 
 ### 1.1 Os quatro indicadores da base
 
-Antes de falar de impacto, é preciso saber se a operação se sustenta sozinha. A **economia unitária** responde a pergunta de cada venda, de cada aluno, de cada beneficiário pago — e usa quatro medidas:
+Antes de falar de impacto, é preciso saber se a operação se sustenta sozinha. A **economia unitária** responde a pergunta de cada venda, de cada aluno, de cada beneficiário pago, e usa quatro medidas:
 
 | Indicador | O que é | Como se calcula | Leitura |
 |---|---|---|---|
@@ -69,20 +69,20 @@ Antes de falar de impacto, é preciso saber se a operação se sustenta sozinha.
 | **Margem bruta** | Sobra sobre a venda antes dos fixos | (Receita − custo variável) ÷ receita | Define quanto cada real de venda sobra para pagar os fixos |
 
 > [!IMPORTANT]
-> **A regra dos três.** O padrão de saúde verificado é **LTV : CAC ≥ 3,0**. Abaixo de 1,5 o modelo é insustentável (gasta mais do que devolve); entre 2,0 e 3,0 é aceitável, mas frágil; entre 3,0 e 5,0 é saudável; acima de 5,0 pode significar subinvestimento em crescimento — sobra de dinheiro que deveria estar comprando clientes. A relação não é "quanto maior, melhor": é uma **faixa**.
+> **A regra dos três.** O padrão de saúde verificado é **LTV: CAC ≥ 3,0**. Abaixo de 1,5 o modelo é insustentável (gasta mais do que devolve); entre 2,0 e 3,0 é aceitável, mas frágil; entre 3,0 e 5,0 é saudável; acima de 5,0 pode significar subinvestimento em crescimento: sobra de dinheiro que deveria estar comprando clientes. A relação não é "quanto maior, melhor": é uma **faixa**.
 
 ### 1.2 Os benchmarks verificados
 
 | Indicador | Faixa fraca | Aceitável | Saudável | Excelente |
 |---|---|---|---|---|
-| LTV : CAC | abaixo de 1,5–2,0× | 2,0–3,0× | **3,0–5,0×** | acima de 5,0× |
-| Retorno do CAC (meses) | acima de 24 | 18–24 | 12–18 | **abaixo de 12** |
-| Margem de contribuição por setor | — | — | **serviços 50%–70%; comércio eletrônico 60%–70%; software 70%–85%; manufatura 25%–45%; restaurantes 30%–40%** | — |
-| Respiro de caixa confortável | abaixo de 6 meses: crítico | 9–12: iniciar captação | **18–21 meses** | — |
+| LTV: CAC | abaixo de 1,5 to 2,0× | 2,0 to 3,0× | **3,0 to 5,0×** | acima de 5,0× |
+| Retorno do CAC (meses) | acima de 24 | 18 to 24 | 12 to 18 | **abaixo de 12** |
+| Margem de contribuição por setor |: |: | **serviços 50% to 70%; comércio eletrônico 60% to 70%; software 70% to 85%; manufatura 25% to 45%; restaurantes 30% to 40%** |: |
+| Respiro de caixa confortável | abaixo de 6 meses: crítico | 9 to 12: iniciar captação | **18 to 21 meses** |: |
 
-- **🔢 Você sabia?** A margem de contribuição típica de serviços no Brasil gira em torno de **50% a 70%**, enquanto a manufatura trabalha entre **25% e 45%**. Isso significa que uma fábrica precisa vender **cerca de três vezes mais** que uma consultoria, em reais, para cobrir o mesmo custo fixo — e explica por que o ponto de equilíbrio de indústria é sempre assustadoramente alto.
+- **🔢 Você sabia?** A margem de contribuição típica de serviços no Brasil gira em torno de **50% a 70%**, enquanto a manufatura trabalha entre **25% e 45%**. Isso significa que uma fábrica precisa vender **cerca de três vezes mais** que uma consultoria, em reais, para cobrir o mesmo custo fixo, e explica por que o ponto de equilíbrio de indústria é sempre assustadoramente alto.
 
-### 1.3 Exemplo 1 — a economia unitária de um serviço híbrido
+### 1.3 Exemplo 1: a economia unitária de um serviço híbrido
 
 Serviço por assinatura com componente social: **ticket mensal R$ 900**, **margem bruta 72%**, **perda mensal de clientes 3%**, **CAC R$ 6.480**.
 
@@ -103,7 +103,7 @@ Serviço por assinatura com componente social: **ticket mensal R$ 900**, **marge
     "3": "margem bruta"
   },
   "distractors": ["custo fixo mensal", "5,0", "margem líquida", "1,5"],
-  "explanation": "O LTV só é líquido quando dividido pela taxa de perda mensal de clientes, porque é ela que define quantos meses o cliente permanece. A faixa saudável começa em 3,0, e o retorno do CAC usa a margem bruta — não a margem líquida — porque o que paga o custo de aquisição é a sobra de cada venda antes dos custos fixos."
+  "explanation": "O LTV só é líquido quando dividido pela taxa de perda mensal de clientes, porque é ela que define quantos meses o cliente permanece. A faixa saudável começa em 3,0, e o retorno do CAC usa a margem bruta, não a margem líquida, porque o que paga o custo de aquisição é a sobra de cada venda antes dos custos fixos."
 }
 ```
 
@@ -116,14 +116,14 @@ Serviço por assinatura com componente social: **ticket mensal R$ 900**, **marge
 | Indicador | Fórmula | Leitura | Meta de referência |
 |---|---|---|---|
 | Margem de contribuição por unidade | Preço − custo variável por unidade | Quanto cada venda paga dos fixos | Varia por setor (tabela da seção 1.2) |
-| Índice de margem de contribuição | Margem de contribuição ÷ preço | Fração de cada venda que sobra | — |
-| **Ponto de equilíbrio contábil, em reais** | Custos e despesas fixas ÷ índice de margem de contribuição | Faturamento mínimo sem prejuízo | — |
-| **Ponto de equilíbrio contábil, em unidades** | Fixos ÷ margem de contribuição unitária | Volume mínimo vendido | — |
+| Índice de margem de contribuição | Margem de contribuição ÷ preço | Fração de cada venda que sobra |: |
+| **Ponto de equilíbrio contábil, em reais** | Custos e despesas fixas ÷ índice de margem de contribuição | Faturamento mínimo sem prejuízo |: |
+| **Ponto de equilíbrio contábil, em unidades** | Fixos ÷ margem de contribuição unitária | Volume mínimo vendido |: |
 | **Ponto de equilíbrio econômico** | (Fixos + lucro mínimo ou reinversão desejada) ÷ índice de margem de contribuição | Faturamento para atingir a meta da governança | Definida pela política interna |
 
-A diferença entre os dois pontos de equilíbrio é a diferença entre **sobreviver** e **cumprir a promessa**: o contábil só cobre os custos; o econômico já embute o valor que a empresa decidiu reter para reserva, fundo de impacto e reinversão. Em empresa híbrida, o ponto de equilíbrio correto é **sempre o econômico** — do contrário, a causa só é financiada em ano de sobra.
+A diferença entre os dois pontos de equilíbrio é a diferença entre **sobreviver** e **cumprir a promessa**: o contábil só cobre os custos; o econômico já embute o valor que a empresa decidiu reter para reserva, fundo de impacto e reinversão. Em empresa híbrida, o ponto de equilíbrio correto é **sempre o econômico**: do contrário, a causa só é financiada em ano de sobra.
 
-### 2.2 Exemplo 2 — ponto de equilíbrio de uma cooperativa de serviços
+### 2.2 Exemplo 2: ponto de equilíbrio de uma cooperativa de serviços
 
 Custos e despesas fixos mensais: aluguel R$ 12.000 + pessoal R$ 36.000 + software R$ 3.000 + administrativos R$ 3.000 = **R$ 54.000**. Preço médio do serviço **R$ 240**; custo variável por unidade **R$ 96**.
 
@@ -133,10 +133,10 @@ Custos e despesas fixos mensais: aluguel R$ 12.000 + pessoal R$ 36.000 + softwar
 4. Ponto de equilíbrio em reais = 54.000 ÷ 0,60 = **R$ 90.000** (conferência: 375 × 240 = R$ 90.000)
 5. Ponto de equilíbrio econômico, com meta de acumular **R$ 9.000/mês** para o fundo de impacto: (54.000 + 9.000) ÷ 0,60 = **R$ 105.000**, o que equivale a 437,5 unidades → **438 unidades**
 
-**Leitura da diferença:** são **R$ 15.000** de faturamento e **63 unidades** entre "não ter prejuízo" e "financiar a causa". Uma cooperativa que só monitora o ponto contábil chega ao fim do exercício no azul e descobre que não sobrou nada para o fundo de impacto — o erro mais comum de planejamento híbrido.
+**Leitura da diferença:** são **R$ 15.000** de faturamento e **63 unidades** entre "não ter prejuízo" e "financiar a causa". Uma cooperativa que só monitora o ponto contábil chega ao fim do exercício no azul e descobre que não sobrou nada para o fundo de impacto, o erro mais comum de planejamento híbrido.
 
 > [!WARNING]
-> **Nunca misture períodos no ponto de equilíbrio.** Se os fixos são mensais, a receita precisa ser mensal; se forem anuais, anual. E o custo variável inclui **tudo** que varia com a venda (matéria-prima, comissões, taxas de cartão, embalagem, verba social vinculada a cada atendimento) — deixar de fora apenas uma rubrica variável derruba o índice de margem de contribuição e, com ele, o ponto de equilíbrio inteiro.
+> **Nunca misture períodos no ponto de equilíbrio.** Se os fixos são mensais, a receita precisa ser mensal; se forem anuais, anual. E o custo variável inclui **tudo** que varia com a venda (matéria-prima, comissões, taxas de cartão, embalagem, verba social vinculada a cada atendimento): deixar de fora apenas uma rubrica variável derruba o índice de margem de contribuição e, com ele, o ponto de equilíbrio inteiro.
 
 ---
 
@@ -147,21 +147,21 @@ Custos e despesas fixos mensais: aluguel R$ 12.000 + pessoal R$ 36.000 + softwar
 | Indicador | Fórmula | Leitura | Faixa de referência |
 |---|---|---|---|
 | Queima líquida de caixa | Despesas totais do mês − receitas do mês | Consumo mensal de dinheiro em conta | Tendendo a zero |
-| **Respiro de caixa (meses)** | Caixa disponível ÷ queima líquida de caixa | Meses de operação sem nova captação | **18–21 meses** confortável |
+| **Respiro de caixa (meses)** | Caixa disponível ÷ queima líquida de caixa | Meses de operação sem nova captação | **18 to 21 meses** confortável |
 | Respiro ajustado a cortes | Caixa ÷ (queima − corte de custos) | Efeito de um plano de redução | Calcular antes de cortar |
 
 A faixa prática é simples: abaixo de **6 meses** as opções se estreitam e a empresa negocia de posição fraca; entre **9 e 12 meses** é hora de **iniciar** a captação (ela leva tempo); entre **18 e 21 meses** a empresa decide com calma.
 
-### 3.2 Exemplo 3 — o respiro de caixa e o corte de 10%
+### 3.2 Exemplo 3, o respiro de caixa e o corte de 10%
 
 Caixa em conta **R$ 525.000**; despesas mensais **R$ 95.000**; receitas mensais **R$ 60.000**.
 
 - Queima líquida = 95.000 − 60.000 = **R$ 35.000/mês**
 - Respiro de caixa = 525.000 ÷ 35.000 = **15,0 meses**
 - Cenário de corte: reduzir 10% dos custos fixos (R$ 9.500) → queima de R$ 25.500 → respiro = 525.000 ÷ 25.500 = **20,6 meses** (**+5,6 meses**)
-- Regra de mercado: iniciar captação quando o respiro cair para **9–12 meses**; abaixo disso, a urgência aparece no preço.
+- Regra de mercado: iniciar captação quando o respiro cair para **9 to 12 meses**; abaixo disso, a urgência aparece no preço.
 
-**Leitura híbrida:** se essa empresa tiver um fundo de impacto que consome R$ 5.000/mês, o corte que "não pode" atingir a causa **ainda** produz ganho: 95.000 − 9.500 = 85.500, que menos as receitas de 60.000 dão R$ 25.500 de queima. Já um corte de R$ 9.500 **sobre o fundo de impacto** deixa a queima em R$ 25.500 da mesma forma — mas trai a política de destinação. Por isso a ordem de corte deve ser escrita na política: primeiro custo fixo ocioso, depois despesa variável, **por último** o fundo.
+**Leitura híbrida:** se essa empresa tiver um fundo de impacto que consome R$ 5.000/mês, o corte que "não pode" atingir a causa **ainda** produz ganho: 95.000 − 9.500 = 85.500, que menos as receitas de 60.000 dão R$ 25.500 de queima. Já um corte de R$ 9.500 **sobre o fundo de impacto** deixa a queima em R$ 25.500 da mesma forma, mas trai a política de destinação. Por isso a ordem de corte deve ser escrita na política: primeiro custo fixo ocioso, depois despesa variável, **por último** o fundo.
 
 ### 3.3 Os três sintomas e a leitura combinada
 
@@ -171,10 +171,10 @@ O respiro de caixa não caminha sozinho: ele só diz alguma coisa quando é lido
 |---|---|---|---|
 | **18 a 21 meses** | Conforto | Manter a política de destinação intacta e testar metas maiores | Congelar a reserva de impacto "para crescer mais rápido" |
 | **9 a 12 meses** | Alerta | **Iniciar** a captação e renegociar prazos (a captação não é imediata) | Adiar a decisão para o mês em que o caixa fechar em 6 meses |
-| **Abaixo de 6 meses** | Crise | Cortar custo fixo ocioso, renegociar fornecedores e congelar expansão | **Cortar o fundo de impacto como primeira medida** — é a última |
+| **Abaixo de 6 meses** | Crise | Cortar custo fixo ocioso, renegociar fornecedores e congelar expansão | **Cortar o fundo de impacto como primeira medida**: é a última |
 
 > [!NOTE]
-> **Caixa não é lucro.** Uma empresa pode ter lucro no regime de competência e estar **sem dinheiro na conta** (adiantamentos longos, estoque parado, recebíveis demorados), ou ter prejuízo contábil e **caixa folgado** (antecipação de recebíveis, capital social aportado). O ponto de equilíbrio se calcula com o resultado; o respiro de caixa se calcula com o saldo em conta e a queima do mês. São duas perguntas diferentes, e a empresa híbrida precisa responder **as duas** antes de prometer destinação — promessa de impacto sem caixa é o erro que transforma política em dívida.
+> **Caixa não é lucro.** Uma empresa pode ter lucro no regime de competência e estar **sem dinheiro na conta** (adiantamentos longos, estoque parado, recebíveis demorados), ou ter prejuízo contábil e **caixa folgado** (antecipação de recebíveis, capital social aportado). O ponto de equilíbrio se calcula com o resultado; o respiro de caixa se calcula com o saldo em conta e a queima do mês. São duas perguntas diferentes, e a empresa híbrida precisa responder **as duas** antes de prometer destinação: promessa de impacto sem caixa é o erro que transforma política em dívida.
 
 ---
 
@@ -185,11 +185,11 @@ O respiro de caixa não caminha sozinho: ele só diz alguma coisa quando é lido
 | Indicador | Valor | Fonte / ano |
 |---|---|---|
 | Meta Selic | **13,75% a.a.** (16/09/2026, 281ª reunião); trajetória de 2026: 15,00% → 14,50% (abril) → 14,25% (junho) → 14,00% (agosto) → 13,75% (setembro) | Copom/Banco Central, 2026 |
-| Capital de giro para pessoa jurídica, prefixado, até 365 dias | De **1,12% a.m. (14,34% a.a.)** a **3,06% a.m. (43,62% a.a.)** entre os bancos (18–24/08/2026) | Banco Central, 2026 |
-| Capital de giro, acima de 365 dias | 2,14% a.m. a 2,31% a.m. = **31,50% a.a.** (referência de longo prazo) | Banco Central, 14–18/09/2026 |
-| Debêntures sustentáveis emitidas em 2024 | R$ 94,5 bilhões (recorde) | Mercado de capitais, 2024–2025 |
+| Capital de giro para pessoa jurídica, prefixado, até 365 dias | De **1,12% a.m. (14,34% a.a.)** a **3,06% a.m. (43,62% a.a.)** entre os bancos (18 to 24/08/2026) | Banco Central, 2026 |
+| Capital de giro, acima de 365 dias | 2,14% a.m. a 2,31% a.m. = **31,50% a.a.** (referência de longo prazo) | Banco Central, 14 to 18/09/2026 |
+| Debêntures sustentáveis emitidas em 2024 | R$ 94,5 bilhões (recorde) | Mercado de capitais, 2024 to 2025 |
 
-### 4.2 Exemplo 4 — vale a pena captar R$ 300.000?
+### 4.2 Exemplo 4: vale a pena captar R$ 300.000?
 
 Captação de **R$ 300.000** em capital de giro prefixado a **2,31% a.m. = 31,50% a.a.**:
 
@@ -223,23 +223,23 @@ Captação de **R$ 300.000** em capital de giro prefixado a **2,31% a.m. = 31,50
 | Porta | Instrumento e base legal | Para quem serve | O que ela cobra |
 |---|---|---|---|
 | **Caixa próprio** | Reservas do exercício e fundo de impacto acumulado (política interna) | Qualquer modelo, em qualquer porte | Não cobra juros, mas **consome o respiro de caixa**: só é recomendável com folga acima de 18 meses |
-| **Dívida bancária de capital de giro** | Contrato prefixado de pessoa jurídica, tabelado pelo Banco Central | Necessidade de curto prazo (até 365 dias) | De **14,34% a.a. a 43,62% a.a.** entre os bancos (18–24/08/2026); acima de 365 dias, até **31,50% a.a.** |
-| **Dívida de mercado com lastro** | CRA (Instrução CVM nº 600/2018 e Resolução CMN/BCB nº 3.621/2008); CRI (Lei nº 9.514/1997); certificados de recebíveis (Lei nº 14.430/2022, art. 22) | Operação com crédito ou recebível identificável | Lastro, securitizadora, séries e agente fiduciário — a **elegibilidade para empresa híbrida ou OSC não foi verificada** |
+| **Dívida bancária de capital de giro** | Contrato prefixado de pessoa jurídica, tabelado pelo Banco Central | Necessidade de curto prazo (até 365 dias) | De **14,34% a.a. a 43,62% a.a.** entre os bancos (18 to 24/08/2026); acima de 365 dias, até **31,50% a.a.** |
+| **Dívida de mercado com lastro** | CRA (Instrução CVM nº 600/2018 e Resolução CMN/BCB nº 3.621/2008); CRI (Lei nº 9.514/1997); certificados de recebíveis (Lei nº 14.430/2022, art. 22) | Operação com crédito ou recebível identificável | Lastro, securitizadora, séries e agente fiduciário: a **elegibilidade para empresa híbrida ou OSC não foi verificada** |
 | **Capital paciente de impacto** | Recursos próprios das mantenedoras (**46%** do investimento social privado) e fundos patrimoniais (Lei nº 13.800/2019) | Causa de longo prazo, sem obrigação de retorno financeiro | Resgate limitado aos **rendimentos**, com as exceções legais (até 20% de doação com propósito específico; excepcionalmente 5% do principal ao ano, limitado a 20% do principal) |
 
-**Regra de decisão:** compare sempre o custo da porta com a **margem de contribuição do negócio** e com a **Selic de 13,75% a.a.** (16/09/2026). Se a operação rende menos de 31,50% a.a. e o respiro está abaixo de 12 meses, a porta certa é a **reserva**, não a dívida — e a porta do capital paciente só se abre quando a causa tem horizonte maior que o do negócio.
+**Regra de decisão:** compare sempre o custo da porta com a **margem de contribuição do negócio** e com a **Selic de 13,75% a.a.** (16/09/2026). Se a operação rende menos de 31,50% a.a. e o respiro está abaixo de 12 meses, a porta certa é a **reserva**, não a dívida, e a porta do capital paciente só se abre quando a causa tem horizonte maior que o do negócio.
 
 ---
 
 ## 5. Estrutura financeira dos cinco modelos jurídicos
 
-Esta é a tabela central da lição: ela mostra que **a forma jurídica decide a régua do dinheiro** — quem delibera, quanto é obrigatório guardar, quanto é obrigatório distribuir e qual demonstração sai no fim do exercício.
+Esta é a tabela central da lição: ela mostra que **a forma jurídica decide a régua do dinheiro**: quem delibera, quanto é obrigatório guardar, quanto é obrigatório distribuir e qual demonstração sai no fim do exercício.
 
 | Eixo | Limitada (Código Civil) | S.A. (Lei nº 6.404/1976) | Cooperativa (Lei nº 5.764/1971 + ITG 2004) | ONG / associação ou fundação sem fins lucrativos | Sociedade simples de profissionais |
 |---|---|---|---|---|---|
 | **Objetivo** | Lucro aos sócios | Lucro aos acionistas | Serviço aos associados, **sem fim de lucro** (art. 3º) | Interesse público, **sem distribuição** | Lucro aos sócios |
 | **Quem decide** | Reunião de sócios (Código Civil, art. 1.078) | Assembleia Geral | **Assembleia Geral Ordinária** (art. 44, II) | Conselho ou assembleia do estatuto | Reunião de sócios |
-| **Reserva obrigatória** | **Não há piso legal** — retenção por deliberação dos sócios | **5%** do lucro líquido até **20% do capital** (art. 193) | **10% + 5%** das sobras líquidas (art. 28, I e II) | Patrimônio social indivisível (Resolução CFC nº 1.409/2012) | Não há piso legal |
+| **Reserva obrigatória** | **Não há piso legal**: retenção por deliberação dos sócios | **5%** do lucro líquido até **20% do capital** (art. 193) | **10% + 5%** das sobras líquidas (art. 28, I e II) | Patrimônio social indivisível (Resolução CFC nº 1.409/2012) | Não há piso legal |
 | **Dividendo mínimo** | Não há mínimo legal; vedada cláusula que exclua sócio dos lucros (art. 1.008) | **25%** do lucro ajustado quando o estatuto é omissa (art. 202, §2º) | Retorno **proporcional às operações** (art. 4º, VII); juros de até **12% a.a.** (art. 24, §3º) | **Vedada** qualquer distribuição | Segundo o contrato social |
 | **Demonstração de resultado** | Demonstração do Resultado do Exercício | Demonstração do Resultado + Demonstração do Lucro por Ação | **Demonstração de Sobras ou Perdas**, segregada por ato cooperativo e não cooperativo (ITG 2004, itens 5 e 7) | Demonstração das Variações do Patrimônio Social | Demonstração do Resultado do Exercício |
 | **Tributação do resultado** | IRPJ e CSLL | IRPJ e CSLL | **Atos cooperativos: isentos da CSLL** (Lei nº 10.865/2004, art. 39); atos com não associados: tributados e escriturados em separado (arts. 85, 86 e 87 da Lei nº 5.764/1971) | Regime próprio; o superávit vai ao patrimônio social | IRPJ e CSLL |
@@ -254,13 +254,13 @@ Esta é a tabela central da lição: ela mostra que **a forma jurídica decide a
 - **🔢 Você sabia?** A cooperativa é a **única** forma do quadro em que a demonstração do resultado tem outro nome: a ITG 2004 manda chamar a Demonstração do Resultado do Exercício de **"Demonstração de Sobras ou Perdas"**, com vigência a partir de **1º de janeiro de 2018**. Quem entrega o modelo padrão de uma limitada em uma cooperativa está entregando a demonstração errada.
 
 > [!IMPORTANT]
-> **Veredito Comparativo — finanças da empresa híbrida: a híbrida × tradicional, parceria, cooperativa e ONG.**
+> **Veredito Comparativo: finanças da empresa híbrida: a híbrida × tradicional, parceria, cooperativa e ONG.**
 >
-> - **× Empresa tradicional:** ela tem **uma única régua** — remunerar o capital. Reserva legal de 5% até 20% do capital na S.A. (art. 193), obrigação de distribuir os lucros não destinados (art. 202, §6º) e nenhuma linha no orçamento para a causa. O híbrido **acrescenta uma segunda régua**: mantém a distribuição, mas **trava um percentual de reinversão e de impacto em cláusula**, o que a tradicional enxerga como desperdício de caixa.
+> - **× Empresa tradicional:** ela tem **uma única régua**: remunerar o capital. Reserva legal de 5% até 20% do capital na S.A. (art. 193), obrigação de distribuir os lucros não destinados (art. 202, §6º) e nenhuma linha no orçamento para a causa. O híbrido **acrescenta uma segunda régua**: mantém a distribuição, mas **trava um percentual de reinversão e de impacto em cláusula**, o que a tradicional enxerga como desperdício de caixa.
 > - **× Parceria (sociedade simples entre profissionais):** a parceria resolve o rateio **entre sócios**, na proporção das quotas (Código Civil, art. 1.007), é silente sobre impacto e **não tem piso de reserva**. Ela é financeiramente flexível e institucionalmente cega: nenhum instrumento dela obriga a guardar para a causa. O híbrido usa a mesma flexibilidade, mas **com destino escrito**.
-> - **× Cooperativa:** a cooperativa é a **mais disciplinada** das quatro: **10%** de Fundo de Reserva, **5%** de FATES, fundos **indivisíveis** (art. 4º, VIII), rateio pelas operações (art. 4º, VII) e capital remunerado apenas até **12% a.a.** (art. 24, §3º) — e ainda ganha isenção da CSLL nos atos cooperativos (Lei nº 10.865/2004, art. 39). O híbrido **importa a disciplina sem a conversão**: guarda, rateia e presta contas, mas **não precisa** abrir mão de remunerar o capital acima de 12% nem de escolher entre ato cooperativo e lucro.
-> - **× ONG / OSC:** a ONG tem o **travamento mais alto**: patrimônio social indivisível, vedação de distribuição e destino único dos excedentes ao objeto. É o modelo que **nunca resolve a sobrevivência financeira de quem precisa remunerar capital** — e também o que jamais confunde reserva com repasse. O híbrido é o único arranjo que **paga o sócio e financia a causa no mesmo balanço**, com as duas contas auditáveis.
-> - **Veredito:** a cooperativa vence em **piso de reserva** (15% obrigatórios), a ONG vence em **travamento** (nada sai), a tradicional vence em **simplicidade** (uma conta) e a parceria vence em **flexibilidade** (o contrato manda). A empresa híbrida vence na **única linha que nenhuma delas cobre sozinha**: **guardar para a causa sem deixar de remunerar quem investe** — desde que o percentual esteja escrito, a conta seja calculada todo mês e a demonstração seja publicada.
+> - **× Cooperativa:** a cooperativa é a **mais disciplinada** das quatro: **10%** de Fundo de Reserva, **5%** de FATES, fundos **indivisíveis** (art. 4º, VIII), rateio pelas operações (art. 4º, VII) e capital remunerado apenas até **12% a.a.** (art. 24, §3º), e ainda ganha isenção da CSLL nos atos cooperativos (Lei nº 10.865/2004, art. 39). O híbrido **importa a disciplina sem a conversão**: guarda, rateia e presta contas, mas **não precisa** abrir mão de remunerar o capital acima de 12% nem de escolher entre ato cooperativo e lucro.
+> - **× ONG / OSC:** a ONG tem o **travamento mais alto**: patrimônio social indivisível, vedação de distribuição e destino único dos excedentes ao objeto. É o modelo que **nunca resolve a sobrevivência financeira de quem precisa remunerar capital**, e também o que jamais confunde reserva com repasse. O híbrido é o único arranjo que **paga o sócio e financia a causa no mesmo balanço**, com as duas contas auditáveis.
+> - **Veredito:** a cooperativa vence em **piso de reserva** (15% obrigatórios), a ONG vence em **travamento** (nada sai), a tradicional vence em **simplicidade** (uma conta) e a parceria vence em **flexibilidade** (o contrato manda). A empresa híbrida vence na **única linha que nenhuma delas cobre sozinha**: **guardar para a causa sem deixar de remunerar quem investe**: desde que o percentual esteja escrito, a conta seja calculada todo mês e a demonstração seja publicada.
 
 ---
 
@@ -268,16 +268,16 @@ Esta é a tabela central da lição: ela mostra que **a forma jurídica decide a
 
 ### 6.1 A escada da destinação na cooperativa
 
-| Etapa | S.A. (Lei nº 6.404/1976) | Cooperativa (Lei nº 5.764/1971 + ITG 2004) | Limitada (Código Civil) | Empresa híbrida (política interna — ver exemplo da seção 7) |
+| Etapa | S.A. (Lei nº 6.404/1976) | Cooperativa (Lei nº 5.764/1971 + ITG 2004) | Limitada (Código Civil) | Empresa híbrida (política interna: ver exemplo da seção 7) |
 |---|---|---|---|---|
 | 1 | Reserva legal de 5% do lucro líquido (art. 193) até 20% do capital | **Fundo de Reserva ≥ 10%** das sobras líquidas (art. 28, I) | Sem etapa legal obrigatória | Reserva legal estatutária (ex.: 5%) |
 | 2 | Reservas estatutárias (art. 194) e assembleares (arts. 195 a 197) | **FATES ≥ 5%** das sobras líquidas (art. 28, II) | Deliberação dos sócios | Reserva de reinversão (ex.: 30%) |
-| 3 | Lucros a realizar e contingência | Fundos adicionais criados pela Assembleia (art. 28, §1º) — **aqui se encaixa o fundo de impacto** | — | **Fundo de impacto (ex.: 10%)** |
+| 3 | Lucros a realizar e contingência | Fundos adicionais criados pela Assembleia (art. 28, §1º), **aqui se encaixa o fundo de impacto** |, | **Fundo de impacto (ex.: 10%)** |
 | 4 | Dividendos: saldo remanescente; mínimo de 25% do lucro ajustado (art. 202, §2º) | **Rateio das sobras aos associados**, proporcional às operações (arts. 4º, VII, e 44, II) | Rateio conforme o contrato social (arts. 981 e 1.007) | Distribuição aos sócios (ex.: 55%) |
 | 5 | Lucros não destinados → dividendos (art. 202, §6º) | Conta de trânsito "Sobras à disposição da Assembleia" no patrimônio líquido (ITG 2004, item 20); se distribuíveis, passam ao **passivo** (item 21) | Assembleia anual em até 4 meses do fim do exercício (art. 1.078) | Relatório de lucro e impacto |
-| **Limite** | Reservas não podem exceder o capital social (art. 202, §5º) | Fundos **indivisíveis** (art. 4º, VIII); juros de até 12% a.a. (art. 24, §3º) | Nula a cláusula que exclua sócio dos lucros (art. 1.008) | Ilustrativo — **não há piso legal** |
+| **Limite** | Reservas não podem exceder o capital social (art. 202, §5º) | Fundos **indivisíveis** (art. 4º, VIII); juros de até 12% a.a. (art. 24, §3º) | Nula a cláusula que exclua sócio dos lucros (art. 1.008) | Ilustrativo: **não há piso legal** |
 
-### 6.2 Exemplo 5 — demonstrativo de rateio de sobras
+### 6.2 Exemplo 5: demonstrativo de rateio de sobras
 
 Sobras líquidas do exercício: **R$ 1.200.000**. Operações do exercício: cooperado A, R$ 3.000.000; cooperado B, R$ 1.500.000; cooperado C, R$ 500.000 (total de R$ 5.000.000).
 
@@ -285,7 +285,7 @@ Sobras líquidas do exercício: **R$ 1.200.000**. Operações do exercício: coo
 |---|---|---|---|
 | Fundo de Reserva | Lei nº 5.764/1971, art. 28, I | 10% | 120.000 |
 | FATES | Lei nº 5.764/1971, art. 28, II | 5% | 60.000 |
-| **Subtotal — fundos indivisíveis** | art. 4º, VIII | **15%** | **180.000** |
+| **Subtotal: fundos indivisíveis** | art. 4º, VIII | **15%** | **180.000** |
 | Disponível para rateio | art. 44, II | 85% | 1.020.000 |
 | Rateio do cooperado A (60% das operações) | art. 4º, VII | 60% | 612.000 |
 | Rateio do cooperado B (30%) | art. 4º, VII | 30% | 306.000 |
@@ -313,7 +313,7 @@ Sobras líquidas do exercício: **R$ 1.200.000**. Operações do exercício: coo
 
 ### 6.3 O que a ITG 2004 muda na contabilidade da cooperativa
 
-A **ITG 2004 – Entidade Cooperativa** (Conselho Federal de Contabilidade, 2017, com vigência a partir de 01/01/2018) é a norma que torna a cooperativa contábilmente diferente de qualquer outra forma:
+A **ITG 2004: Entidade Cooperativa** (Conselho Federal de Contabilidade, 2017, com vigência a partir de 01/01/2018) é a norma que torna a cooperativa contábilmente diferente de qualquer outra forma:
 
 | Item da norma | O que obriga | Efeito prático |
 |---|---|---|
@@ -325,19 +325,19 @@ A **ITG 2004 – Entidade Cooperativa** (Conselho Federal de Contabilidade, 2017
 | Item 24, "b" | Notas **discriminam fundos e reservas** por natureza, finalidade e forma de utilização | O fundo de impacto precisa aparecer descrito nas notas |
 
 > [!WARNING]
-> **Três erros que derrubam a prestação de contas de cooperativa:** (i) entregar a **Demonstração do Resultado do Exercício padrão** em vez da **Demonstração de Sobras ou Perdas** com segregação de ato cooperativo e não cooperativo (ITG 2004, itens 5, 6 e 7); (ii) **ratear os fundos obrigatórios** — eles são indivisíveis (Lei nº 5.764/1971, art. 4º, VIII) e o remanescente na liquidação vai ao Banco Nacional de Cooperativas de Crédito (art. 68, VI); (iii) **pagar dividendos ao capital** — o art. 24, §3º, só admite **juros de até 12% ao ano** sobre a parte integralizada. Some a isso a isenção da CSLL que só alcança os **atos cooperativos** (Lei nº 10.865/2004, art. 39), enquanto as operações com não associados (arts. 85 e 86 da Lei nº 5.764/1971) são **tributáveis e escrituradas em separado** (arts. 87 e 111) — e a conta de tributos errada aparece no primeiro exercício.
+> **Três erros que derrubam a prestação de contas de cooperativa:** (i) entregar a **Demonstração do Resultado do Exercício padrão** em vez da **Demonstração de Sobras ou Perdas** com segregação de ato cooperativo e não cooperativo (ITG 2004, itens 5, 6 e 7); (ii) **ratear os fundos obrigatórios**: eles são indivisíveis (Lei nº 5.764/1971, art. 4º, VIII) e o remanescente na liquidação vai ao Banco Nacional de Cooperativas de Crédito (art. 68, VI); (iii) **pagar dividendos ao capital**, o art. 24, §3º, só admite **juros de até 12% ao ano** sobre a parte integralizada. Some a isso a isenção da CSLL que só alcança os **atos cooperativos** (Lei nº 10.865/2004, art. 39), enquanto as operações com não associados (arts. 85 e 86 da Lei nº 5.764/1971) são **tributáveis e escrituradas em separado** (arts. 87 e 111), e a conta de tributos errada aparece no primeiro exercício.
 
 ---
 
 ## 7. O fundo de impacto interno: como montá-lo sem inventar lei
 
-### 7.1 O que é — e o que a lei não diz
+### 7.1 O que é, e o que a lei não diz
 
-"Fundo de impacto interno" é uma **política de destinação aprovada pelos sócios**, não uma figura jurídica. Não há lei brasileira que crie a categoria nem percentual obrigatório — os únicos pisos verificados são os da cooperativa (10% + 5%) e os da S.A. (5% de reserva legal; 25% de dividendo mínimo quando o estatuto é omissa). O instrumento vizinho, regulamentado, é o **fundo patrimonial da Lei nº 13.800/2019**, cujo regime de resgate é limitado aos rendimentos, com exceções: até **20%** de doação com propósito específico; mais de 20% para preservação de obras e patrimônio; e, excepcionalmente, **5% do principal ao ano**, limitado a **20% do principal** na data do primeiro resgate.
+"Fundo de impacto interno" é uma **política de destinação aprovada pelos sócios**, não uma figura jurídica. Não há lei brasileira que crie a categoria nem percentual obrigatório: os únicos pisos verificados são os da cooperativa (10% + 5%) e os da S.A. (5% de reserva legal; 25% de dividendo mínimo quando o estatuto é omissa). O instrumento vizinho, regulamentado, é o **fundo patrimonial da Lei nº 13.800/2019**, cujo regime de resgate é limitado aos rendimentos, com exceções: até **20%** de doação com propósito específico; mais de 20% para preservação de obras e patrimônio; e, excepcionalmente, **5% do principal ao ano**, limitado a **20% do principal** na data do primeiro resgate.
 
 A parte que a empresa híbrida copia do cooperativismo é outra: a **ordem de destinação antes da distribuição** e a **discriminação nas notas** (ITG 2004, item 24, "b").
 
-### 7.2 Exemplo 6 — composição do fundo de impacto de uma limitada híbrida
+### 7.2 Exemplo 6: composição do fundo de impacto de uma limitada híbrida
 
 Lucro líquido do exercício **R$ 800.000**; receita bruta **R$ 12.000.000**. Política de destinação aprovada pelos sócios:
 
@@ -347,38 +347,38 @@ Lucro líquido do exercício **R$ 800.000**; receita bruta **R$ 12.000.000**. Po
 | Reserva de reinversão (lucros a capitalizar) | 30% | 240.000 | Expansão e capital de giro |
 | **Fundo de impacto interno** | **10%** | **80.000** | 40% para capacitação de equipes (32.000); 40% para programa socioambiental (32.000); 20% para contingência (16.000) |
 | Distribuição aos sócios | 55% | 440.000 | Pró-labore e dividendos conforme o contrato |
-| **Total** | **100%** | **800.000** | — |
+| **Total** | **100%** | **800.000** |: |
 
 **Duas leituras obrigatórias dessa conta:**
 
 1. **Percentual de reinversão total** = (40.000 + 240.000 + 80.000) ÷ 800.000 = **45%** do lucro retido no negócio e na causa;
-2. **Fundo de impacto como percentual da receita** = 80.000 ÷ 12.000.000 = **0,67% da receita bruta** — número que só ganha sentido quando comparado a referências de mercado (seção 9).
+2. **Fundo de impacto como percentual da receita** = 80.000 ÷ 12.000.000 = **0,67% da receita bruta**: número que só ganha sentido quando comparado a referências de mercado (seção 9).
 
-**Se a cooperativa do Exemplo 5 tivesse esta política?** O art. 28 já obrigaria 15% antes de qualquer escolha: 180.000 de fundos e 1.020.000 de saldo. Ou seja, na cooperativa o fundo de impacto é **o terceiro degrau**, criado pela Assembleia com fundamento no art. 28, §1º — ele entra **depois** dos obrigatórios e **antes** do rateio.
+**Se a cooperativa do Exemplo 5 tivesse esta política?** O art. 28 já obrigaria 15% antes de qualquer escolha: 180.000 de fundos e 1.020.000 de saldo. Ou seja, na cooperativa o fundo de impacto é **o terceiro degrau**, criado pela Assembleia com fundamento no art. 28, §1º: ele entra **depois** dos obrigatórios e **antes** do rateio.
 
-- **🔢 Você sabia?** Um fundo de impacto de **R$ 80.000** sobre uma receita de R$ 12 milhões parece pouco — mas, no Censo GIFE 2024–2025, os **15%** do investimento social privado brasileiro que vieram de incentivos fiscais representaram, sobre um total de **R$ 5,8 bilhões**, algo equivalente a **R$ 870 milhões**. Em outras palavras: no Brasil, **46%** do investimento social das empresas vem de **recursos próprios** das mantenedoras, e só **15%** vem de incentivo fiscal. O fundo interno é, portanto, a norma — e não a exceção.
+- **🔢 Você sabia?** Um fundo de impacto de **R$ 80.000** sobre uma receita de R$ 12 milhões parece pouco, mas, no Censo GIFE 2024 to 2025, os **15%** do investimento social privado brasileiro que vieram de incentivos fiscais representaram, sobre um total de **R$ 5,8 bilhões**, algo equivalente a **R$ 870 milhões**. Em outras palavras: no Brasil, **46%** do investimento social das empresas vem de **recursos próprios** das mantenedoras, e só **15%** vem de incentivo fiscal. O fundo interno é, portanto, a norma, e não a exceção.
 
 ### 7.3 Como escrever a política de destinação em seis passos
 
 A política não é um parágrafo no contrato social: é um **documento fechado**, com percentual, responsável, prazo e demonstração. Os seis passos, na ordem em que precisam ser decididos:
 
-1. **Reserva de proteção do capital** — fixar o percentual (ex.: 5% do lucro líquido) e o teto de acúmulo;
-2. **Reserva de reinversão** — fixar o percentual (ex.: 30%) e vinculá-lo a itens concretos: capital de giro, equipamento, contratação;
-3. **Fundo de impacto** — fixar o percentual (ex.: 10%) e **subdividi-lo** por finalidade (ex.: 40% capacitação de equipes, 40% programa socioambiental, 20% contingência);
-4. **Distribuição remanescente** — fixar o percentual (ex.: 55%) e o critério de rateio entre os sócios;
-5. **Aprovação e quórum** — definir quem delibera (reunião de sócios ou assembleia), com que quórum e em que período do exercício — na cooperativa, a destinação compete à **Assembleia Geral Ordinária** (art. 44, II), deduzidos os fundos obrigatórios;
-6. **Publicação** — relatório de lucro e impacto, com **fórmula, período e base de cálculo** de cada indicador, e discriminação de fundos e reservas por natureza, finalidade e forma de utilização (ITG 2004, item 24, "b" — como referência de boa prática de notas).
+1. **Reserva de proteção do capital**: fixar o percentual (ex.: 5% do lucro líquido) e o teto de acúmulo;
+2. **Reserva de reinversão**: fixar o percentual (ex.: 30%) e vinculá-lo a itens concretos: capital de giro, equipamento, contratação;
+3. **Fundo de impacto**: fixar o percentual (ex.: 10%) e **subdividi-lo** por finalidade (ex.: 40% capacitação de equipes, 40% programa socioambiental, 20% contingência);
+4. **Distribuição remanescente**: fixar o percentual (ex.: 55%) e o critério de rateio entre os sócios;
+5. **Aprovação e quórum**, definir quem delibera (reunião de sócios ou assembleia), com que quórum e em que período do exercício, na cooperativa, a destinação compete à **Assembleia Geral Ordinária** (art. 44, II), deduzidos os fundos obrigatórios;
+6. **Publicação**, relatório de lucro e impacto, com **fórmula, período e base de cálculo** de cada indicador, e discriminação de fundos e reservas por natureza, finalidade e forma de utilização (ITG 2004, item 24, "b", como referência de boa prática de notas).
 
 | Cláusula mínima da política | O que precisa constar | Erro típico |
 |---|---|---|
 | Percentuais | Reserva, reinversão, fundo de impacto e distribuição, **somando 100% do lucro** | Somar 100% e esquecer que a cooperativa já descontou 15% antes |
-| Base de cálculo | Lucro líquido, sobra líquida ou receita — **uma só**, declarada | Calcular uns sobre o lucro e outros sobre a receita bruta |
+| Base de cálculo | Lucro líquido, sobra líquida ou receita: **uma só**, declarada | Calcular uns sobre o lucro e outros sobre a receita bruta |
 | Ordem de saída | Reservas → fundo → distribuição (e, na crise, corte ao contrário) | Distribuir antes de constituir a reserva |
 | Responsável e prazo | Quem aprova, em qual reunião, em que mês do exercício | Política sem calendário, aplicada só quando sobra caixa |
 | Prestação de contas | Indicador, fórmula, período e destinatário final | Fundo sem prestação de contas: vira verba discricionária |
 
 > [!WARNING]
-> **Percentual sem base é promessa.** A política só vale se declarar **sobre o que** cada percentual incide (lucro líquido, sobra líquida ou receita) e **em que ordem** é aplicado. No Exemplo 6, 10% do lucro líquido deu R$ 80.000; se a base fosse a receita bruta, o mesmo "10%" daria R$ 1.200.000 — quinze vezes mais, e inviável. Escreva a base no documento, na mesma linha do percentual.
+> **Percentual sem base é promessa.** A política só vale se declarar **sobre o que** cada percentual incide (lucro líquido, sobra líquida ou receita) e **em que ordem** é aplicado. No Exemplo 6, 10% do lucro líquido deu R$ 80.000; se a base fosse a receita bruta, o mesmo "10%" daria R$ 1.200.000: quinze vezes mais, e inviável. Escreva a base no documento, na mesma linha do percentual.
 
 ---
 
@@ -392,16 +392,16 @@ Antes de publicar qualquer demonstração dupla, responda estas três perguntas:
 |---|---|---|
 | A entidade é **cooperativa**? | Aplica-se a **ITG 2004**: escrituração segregada e **Demonstração de Sobras ou Perdas** (itens 5, 6 e 7) | Segue-se a demonstração da forma jurídica correspondente |
 | A entidade é **sem fins lucrativos**? | Aplica-se a **ITG 2002 / Resolução CFC nº 1.409/2012**: o superávit vai ao **patrimônio social**, em conta específica | Aplica-se a Lei nº 6.404/1976 ou ao Código Civil |
-| A entidade quer publicar **lucro e impacto lado a lado**? | É **referencial voluntário**, não norma — publique como **relatório gerencial**, sem chamá-lo de demonstração contábil obrigatória | Nada a fazer |
+| A entidade quer publicar **lucro e impacto lado a lado**? | É **referencial voluntário**, não norma: publique como **relatório gerencial**, sem chamá-lo de demonstração contábil obrigatória | Nada a fazer |
 
 ### 8.2 O que não existe (e continua circulando em material desatualizado)
 
 - **Não existe norma contábil brasileira** (CPC, NBC ou ITG) que exija **demonstração dupla ou triplicada de resultado**. O "resultado triplo" é um **referencial voluntário**: a expressão foi cunhada por **John Elkington em 1994**, na *California Management Review*, popularizada no livro de 1997 e **revisada pelo próprio autor em 2018**.
-- **Não existe** a chamada "Demonstração do Valor Social" exigida pela ITG 2004: o texto integral da norma (itens 1 a 24) cita Demonstração de Sobras ou Perdas, segregação e notas de fundos e reservas — **nunca** valor social.
+- **Não existe** a chamada "Demonstração do Valor Social" exigida pela ITG 2004: o texto integral da norma (itens 1 a 24) cita Demonstração de Sobras ou Perdas, segregação e notas de fundos e reservas: **nunca** valor social.
 - **Não existe** percentual mínimo de reinversão obrigatório para "empresa híbrida": a categoria não foi criada por lei.
 
 > [!NOTE]
-> **A forma correta de publicar.** Guarde a **Demonstração de Sobras ou Perdas** (cooperativa), a **Demonstração do Resultado do Exercício** (limitada e S.A.) e a **Demonstração das Variações do Patrimônio Social** (entidade sem fins lucrativos) com os nomes e conteúdos que a norma exige. O relatório de impacto entra **ao lado**, como documento de gestão e de prestação de contas social — com indicadores, base de cálculo e período. Misturar os dois num único documento com nome de demonstração contábil é o erro que a auditoria aponta primeiro.
+> **A forma correta de publicar.** Guarde a **Demonstração de Sobras ou Perdas** (cooperativa), a **Demonstração do Resultado do Exercício** (limitada e S.A.) e a **Demonstração das Variações do Patrimônio Social** (entidade sem fins lucrativos) com os nomes e conteúdos que a norma exige. O relatório de impacto entra **ao lado**, como documento de gestão e de prestação de contas social: com indicadores, base de cálculo e período. Misturar os dois num único documento com nome de demonstração contábil é o erro que a auditoria aponta primeiro.
 
 ---
 
@@ -409,16 +409,16 @@ Antes de publicar qualquer demonstração dupla, responda estas três perguntas:
 
 | Métrica | Valor | Fonte / ano |
 |---|---|---|
-| Investimento social privado no Brasil | **R$ 5,8 bilhões** em 2024 (recorde da série: R$ 6,7 bilhões em 2020) | Censo GIFE 2024–2025, publicado em 2025 |
-| Composição do investimento social privado | Recursos próprios de empresas mantenedoras: **46%**; incentivos fiscais: **15%** (eram 10% em 2022) | Censo GIFE 2024–2025 |
+| Investimento social privado no Brasil | **R$ 5,8 bilhões** em 2024 (recorde da série: R$ 6,7 bilhões em 2020) | Censo GIFE 2024 to 2025, publicado em 2025 |
+| Composição do investimento social privado | Recursos próprios de empresas mantenedoras: **46%**; incentivos fiscais: **15%** (eram 10% em 2022) | Censo GIFE 2024 to 2025 |
 | Investimento social corporativo | **R$ 6,2 bilhões** em 2024 (**+19,4%**); recursos próprios R$ 4,79 bi e incentivados R$ 1,42 bi | Pesquisa BISC/Comunitas, 2025 |
 | Ativos sob gestão de impacto no mundo | **US$ 1,16 trilhão** | GIIN, citado pela ANBIMA (2024) |
 | Valor social por real investido em projetos medidos no Brasil | **R$ 2,16** por R$ 1,00 | ANBIMA/IDIS, 2024 |
 | Dívida sustentável brasileira | **215 títulos** e **R$ 99,8 bilhões** (2016 a junho/2024): 74% verdes, 4% sociais, 22% sustentáveis | FGV Direito SP/ICS, 2026 |
 
-**Como o gestor híbrido lê essa tabela:** (i) o mercado de impacto é **grande e institucionalizado** — não é caridade de ocasião; (ii) a maior fatia (**46%**) vem de **recursos próprios**, ou seja, de orçamento de empresa, não de incentivo fiscal — o que valida o fundo de impacto interno como prática de gestão; (iii) **R$ 2,16 de valor social por real investido** é a régua de retorno que o relatório de impacto deve tentar demonstrar.
+**Como o gestor híbrido lê essa tabela:** (i) o mercado de impacto é **grande e institucionalizado**, não é caridade de ocasião; (ii) a maior fatia (**46%**) vem de **recursos próprios**, ou seja, de orçamento de empresa, não de incentivo fiscal, o que valida o fundo de impacto interno como prática de gestão; (iii) **R$ 2,16 de valor social por real investido** é a régua de retorno que o relatório de impacto deve tentar demonstrar.
 
-- **🔢 Você sabia?** O investimento social corporativo cresceu **19,4%** em um único ano (de R$ 5,2 bilhões para **R$ 6,2 bilhões** entre 2023 e 2024) e, no mesmo período, a parcela de incentivos fiscais subiu de 10% para **15%** do total privado. Traduzindo para a empresa híbrida: o dinheiro de impacto **cresce mais rápido que a receita** de muitas das empresas que o patrocinam — quem não tem política de destinação escrita perde essa corrida por falta de processo, não por falta de caixa.
+- **🔢 Você sabia?** O investimento social corporativo cresceu **19,4%** em um único ano (de R$ 5,2 bilhões para **R$ 6,2 bilhões** entre 2023 e 2024) e, no mesmo período, a parcela de incentivos fiscais subiu de 10% para **15%** do total privado. Traduzindo para a empresa híbrida: o dinheiro de impacto **cresce mais rápido que a receita** de muitas das empresas que o patrocinam: quem não tem política de destinação escrita perde essa corrida por falta de processo, não por falta de caixa.
 
 ---
 
@@ -429,13 +429,13 @@ Use esta tabela como planilha de fechamento de mês. Cada linha tem fórmula, le
 | Indicador | Fórmula | Leitura | Meta de referência |
 |---|---|---|---|
 | Margem de contribuição (unidade) | Preço − variáveis; índice = margem ÷ preço | Quanto cada venda contribui para os fixos | Varia por setor (seção 1.2) |
-| **Ponto de equilíbrio contábil (R$)** | Custos e despesas fixas ÷ índice de margem de contribuição | Faturamento mínimo sem prejuízo | — |
-| **Ponto de equilíbrio (unidades)** | Fixos ÷ margem de contribuição unitária | Volume mínimo vendido | — |
+| **Ponto de equilíbrio contábil (R$)** | Custos e despesas fixas ÷ índice de margem de contribuição | Faturamento mínimo sem prejuízo |: |
+| **Ponto de equilíbrio (unidades)** | Fixos ÷ margem de contribuição unitária | Volume mínimo vendido |: |
 | **Ponto de equilíbrio econômico** | (Fixos + lucro mínimo ou reinversão desejada) ÷ índice de margem de contribuição | Faturamento para atingir a meta | Definida pela governança |
-| **Respiro de caixa (meses)** | Caixa disponível ÷ queima líquida de caixa | Meses de operação sem nova captação | 18–21 meses |
+| **Respiro de caixa (meses)** | Caixa disponível ÷ queima líquida de caixa | Meses de operação sem nova captação | 18 to 21 meses |
 | Queima líquida de caixa | Despesas totais do mês − receitas do mês | Consumo mensal de caixa | Tendendo a zero |
-| **CAC** | Investimento em marketing e vendas ÷ novos clientes | Custo de aquisição | — |
-| **LTV com margem** | Ticket mensal × margem bruta × meses de permanência | Valor líquido gerado pelo cliente | — |
+| **CAC** | Investimento em marketing e vendas ÷ novos clientes | Custo de aquisição |: |
+| **LTV com margem** | Ticket mensal × margem bruta × meses de permanência | Valor líquido gerado pelo cliente |: |
 | **LTV : CAC** | LTV ÷ CAC | Retorno da aquisição | ≥ 3,0× |
 | **Retorno do CAC (meses)** | CAC ÷ (ticket mensal × margem bruta) | Meses para recuperar o CAC | abaixo de 12 |
 | Margem líquida | Lucro líquido ÷ receita líquida | Conversão de receita em lucro | Comparar com o setor |
@@ -443,7 +443,7 @@ Use esta tabela como planilha de fechamento de mês. Cada linha tem fórmula, le
 | Remuneração do capital (cooperativa) | Juros sobre quotas ≤ 12% a.a. | Remuneração limitada do capital | Limite legal: 12% a.a. |
 | Custo da dívida anual | Percentual anual contratado × capital captado | Quanto a operação precisa render para manter a dívida | Comparar com a Selic (13,75% a.a.) e com a margem |
 
-**Leitura combinada:** uma empresa pode estar **no azul** (ponto de equilíbrio contábil vencido), **sem causa** (ponto econômico não vencido) e **sem futuro** (respiro de caixa abaixo de 9 meses). Os três indicadores precisam ser lidos juntos, todo mês — é a única forma de a política de destinação não virar promessa de ano bom.
+**Leitura combinada:** uma empresa pode estar **no azul** (ponto de equilíbrio contábil vencido), **sem causa** (ponto econômico não vencido) e **sem futuro** (respiro de caixa abaixo de 9 meses). Os três indicadores precisam ser lidos juntos, todo mês: é a única forma de a política de destinação não virar promessa de ano bom.
 
 ```dragdrop
 {
@@ -466,7 +466,7 @@ Use esta tabela como planilha de fechamento de mês. Cada linha tem fórmula, le
 }
 ```
 
-### 10.1 Exemplo 7 — quadro de diagnóstico integrado de um mês
+### 10.1 Exemplo 7: quadro de diagnóstico integrado de um mês
 
 Cooperativa de serviços dos Exemplos 2 e 5, fechamento de um mês com **500 unidades vendidas** e caixa de R$ 525.000 (Exemplo 3):
 
@@ -475,13 +475,13 @@ Cooperativa de serviços dos Exemplos 2 e 5, fechamento de um mês com **500 uni
 | 1 | Ponto de equilíbrio econômico | (54.000 + 9.000) ÷ 0,60 | **R$ 105.000** | meta do mês |
 | 2 | Faturamento realizado | 500 × R$ 240 | **R$ 120.000** | acima da meta em **R$ 15.000** |
 | 3 | Margem de contribuição apurada | 500 × R$ 144 | **R$ 72.000** | cobre os fixos de R$ 54.000 e sobram **R$ 18.000** |
-| 4 | Fundos obrigatórios sobre a sobra | 10% + 5% de R$ 18.000 | **R$ 2.700** | R$ 1.800 de Fundo de Reserva e R$ 900 de FATES — **indivisíveis** |
+| 4 | Fundos obrigatórios sobre a sobra | 10% + 5% de R$ 18.000 | **R$ 2.700** | R$ 1.800 de Fundo de Reserva e R$ 900 de FATES: **indivisíveis** |
 | 5 | Saldo à disposição da Assembleia | 18.000 − 2.700 | **R$ 15.300** | base do rateio proporcional (art. 4º, VII) |
-| 6 | Respiro de caixa | 525.000 ÷ 35.000 | **15,0 meses** | faixa de alerta: captação a iniciar em 9–12 meses |
+| 6 | Respiro de caixa | 525.000 ÷ 35.000 | **15,0 meses** | faixa de alerta: captação a iniciar em 9 to 12 meses |
 | 7 | Economia unitária | 21.600 ÷ 6.480 | **3,33×** | saudável (≥ 3,0); retorno do CAC em 10 meses |
 | 8 | Custo de uma dívida de R$ 300.000 | 300.000 × 31,50% a.a. | **R$ 94.500/ano** | só se a margem gerada superar 31,50% a.a. |
 
-**Leitura do quadro:** o mês foi **bom em vendas** (linha 2), **saudável em margem** (linha 3), **correto em destinação** (linhas 4 e 5) e **moderado em sobrevivência** (linha 6). A linha que pode derrubar o plano é a 8: captar a 31,50% a.a. com 15 meses de respiro transforma uma operação saudável numa operação apertada no próximo exercício. Repare ainda que **nenhuma linha dispensa as outras** — é o que torna este o fechamento mínimo de uma empresa híbrida.
+**Leitura do quadro:** o mês foi **bom em vendas** (linha 2), **saudável em margem** (linha 3), **correto em destinação** (linhas 4 e 5) e **moderado em sobrevivência** (linha 6). A linha que pode derrubar o plano é a 8: captar a 31,50% a.a. com 15 meses de respiro transforma uma operação saudável numa operação apertada no próximo exercício. Repare ainda que **nenhuma linha dispensa as outras**: é o que torna este o fechamento mínimo de uma empresa híbrida.
 
 ---
 
@@ -496,7 +496,7 @@ Nada derruba uma decisão financeira tão rápido quanto **um número que ningu�
 | 3 | Reserva legal obrigatória para a **limitada** | **Não localizada**; a retenção decorre de deliberação dos sócios (arts. 1.007 e 1.078 do Código Civil) |
 | 4 | "CRP" como Certificado de Recebíveis | **Não confirmado.** Confirmados: **CRA** (Instrução CVM nº 600/2018 e Resolução CMN/BCB nº 3.621/2008), **CRI** (Lei nº 9.514/1997) e os genéricos da Lei nº 14.430/2022, art. 22 |
 | 5 | "Demonstração do Valor Social" exigida pela ITG 2004 | **Não confirmada** no texto integral da norma |
-| 6 | Demonstração dupla ou triplicada como norma contábil | **Não confirmado** — é referencial voluntário (Elkington, 1994 e 1997; revisão de 2018) |
+| 6 | Demonstração dupla ou triplicada como norma contábil | **Não confirmado**: é referencial voluntário (Elkington, 1994 e 1997; revisão de 2018) |
 | 7 | Isenção de IRPJ sobre atos cooperativos | Confirmada a **isenção de CSLL** (Lei nº 10.865/2004, art. 39); a não incidência de IRPJ aparece **apenas em julgados**, não em dispositivo expresso lido |
 | 8 | Percentual mínimo de rateio de sobras (ex.: 30%) para cooperativas | **Não consta** da Lei nº 5.764/1971 consultada |
 | 9 | Benchmarks brasileiros de margem por setor | Não localizados em fonte primária; os intervalos da seção 1.2 vêm de fontes internacionais de gestão (2026) |
@@ -504,7 +504,7 @@ Nada derruba uma decisão financeira tão rápido quanto **um número que ningu�
 | 11 | Emissão de CRI, CRA ou debêntures por empresa híbrida ou OSC | Elegibilidade e exigências (lastro, securitizadora, rating) **não verificadas** para essa combinação |
 | 12 | "Fundo de impacto interno" com regulamentação própria | **Sem regulamentação localizada**; o mais próximo são os fundos patrimoniais (Lei nº 13.800/2019) e os fundos de investimento de impacto sob regulação do Banco Central e da Comissão de Valores Mobiliários |
 
-- **🔢 Você sabia?** A sigla **CRA** — Certificado de Recebíveis do Agronegócio — é regulada pela **Instrução CVM nº 600/2018** e pela **Resolução CMN/BCB nº 3.621/2008**, com lastro em créditos agrícolas. Já o **CRI** (Certificado de Recebíveis Imobiliário) nasce do regime de securitização da **Lei nº 9.514/1997**. O "CRP" que aparece em alguns materiais não é título nenhum: nas buscas, a sigla devolveu Certificado de Regularidade Previdenciária.
+- **🔢 Você sabia?** A sigla **CRA**, Certificado de Recebíveis do Agronegócio, é regulada pela **Instrução CVM nº 600/2018** e pela **Resolução CMN/BCB nº 3.621/2008**, com lastro em créditos agrícolas. Já o **CRI** (Certificado de Recebíveis Imobiliário) nasce do regime de securitização da **Lei nº 9.514/1997**. O "CRP" que aparece em alguns materiais não é título nenhum: nas buscas, a sigla devolveu Certificado de Regularidade Previdenciária.
 
 ### 11.1 Checklist de fechamento antes de publicar
 
@@ -516,56 +516,56 @@ Nada derruba uma decisão financeira tão rápido quanto **um número que ningu�
 | 4 | As notas **discriminam fundos e reservas** por natureza, finalidade e utilização | ITG 2004, item 24, "b" | Completar as notas antes da auditoria |
 | 5 | Nenhum **fundo indivisível** foi rateado | Lei nº 5.764/1971, art. 4º, VIII | Estornar o rateio e devolver ao fundo |
 | 6 | Retorno do CAC e respiro de caixa **atualizados no mês** | Planilha de fechamento (seção 10) | Reavaliar a decisão de captação |
-| 7 | Relatório de lucro e impacto **publicado**, com fórmula e período | Relatório gerencial (seção 8) | Publicar sem numeração e sem período — não vale como prestação de contas |
+| 7 | Relatório de lucro e impacto **publicado**, com fórmula e período | Relatório gerencial (seção 8) | Publicar sem numeração e sem período: não vale como prestação de contas |
 
-**A regra que fecha a lição:** os doze itens não confirmados da tabela acima **não são lacunas de conteúdo, são lacunas de fonte** — e a diferença importa. Nenhum deles pode ser afirmado em estatuto, em ata, em aula ou em parecer sem que a norma correspondente seja lida antes. O que foi verificado, ao contrário, está com artigo, número e ano à vista — e é sobre essa base que a empresa híbrida constrói a sua política financeira.
+**A regra que fecha a lição:** os doze itens não confirmados da tabela acima **não são lacunas de conteúdo, são lacunas de fonte**, e a diferença importa. Nenhum deles pode ser afirmado em estatuto, em ata, em aula ou em parecer sem que a norma correspondente seja lida antes. O que foi verificado, ao contrário, está com artigo, número e ano à vista, e é sobre essa base que a empresa híbrida constrói a sua política financeira.
 
 ### 11.2 Onde conferir, artigo por artigo
 
 - **Lei nº 5.764/1971** (texto integral): fundos obrigatórios (art. 28), indivisibilidade (art. 4º, VIII), rateio (art. 4º, VII), destinação pela assembleia (art. 44, II), juros de 12% (art. 24, §3º) e operações com não associados (arts. 85 a 87);
-- **ITG 2004 – Entidade Cooperativa** (Conselho Federal de Contabilidade, 2017; vigência 01/01/2018): escrituração segregada, Demonstração de Sobras ou Perdas, conta de trânsito e notas de fundos;
+- **ITG 2004: Entidade Cooperativa** (Conselho Federal de Contabilidade, 2017; vigência 01/01/2018): escrituração segregada, Demonstração de Sobras ou Perdas, conta de trânsito e notas de fundos;
 - **Lei nº 6.404/1976**: reserva legal (art. 193), reservas estatutárias e assembleares (arts. 194 a 197) e dividendos (art. 202, §§ 2º, 5º e 6º);
 - **Código Civil**: participação nos lucros (arts. 1.007 e 1.008) e assembleia anual em 4 meses (art. 1.078);
 - **Lei nº 10.865/2004, art. 39**: isenção da CSLL nos atos cooperativos; **Lei nº 13.800/2019**: regime dos fundos patrimoniais;
-- **Banco Central (Copom e taxas de juros)**: Selic de 13,75% a.a. e taxas de capital de giro de pessoa jurídica — confira a data antes de usá-las em qualquer decisão de captação.
+- **Banco Central (Copom e taxas de juros)**: Selic de 13,75% a.a. e taxas de capital de giro de pessoa jurídica: confira a data antes de usá-las em qualquer decisão de captação.
 
 ---
 
 ## 12. Casos Reais: a estrutura financeira na prática
 
-Depois das fórmulas, os números de empresas híbridas, cooperativas e congêneres reais — todos com fonte e ano. A leitura é sempre a mesma: **onde o dinheiro entra, em que ordem sai, quanto é obrigatório e quanto é deliberação da assembleia**.
+Depois das fórmulas, os números de empresas híbridas, cooperativas e congêneres reais: todos com fonte e ano. A leitura é sempre a mesma: **onde o dinheiro entra, em que ordem sai, quanto é obrigatório e quanto é deliberação da assembleia**.
 
 | Caso | Estrutura de destinação (rateio, reserva ou fundo) | Conta resolvida | Fonte / ano |
 |---|---|---|---|
 | **MONDRAGON** (Espanha, 1956) | Federação de **81 cooperativas**; cada uma destina **≥ 13%** do lucro ao fundo divisional de solidariedade | Lucro de **€ 593 mi** sobre vendas de € 11,056 bi = margem líquida de **5,4%**; EBITDA de € 1,486 bi = margem de **13,4%** | MONDRAGON, Relatório Anual 2023 |
 | **COPACOL** (Brasil, 1964) | Sobras rateadas **por unidade processada**; fundos obrigatórios antes do rateio | Sobras de **R$ 270 mi** sobre faturamento de R$ 10,6 bi = **2,55%**; 15% de fundos = R$ 40,5 mi → saldo de **R$ 229,5 mi** | O Presente Rural, 31/01/2025 |
 | **COOPERCITRUS** (Brasil, 1976) | Estatuto **art. 60**: rateio com ponderação **3,00 / 1,00 / 0,30** por faixa de movimentação, atualizado pelo IGP-M | Sobra líquida de **R$ 42,8 mi** sobre R$ 8,1 bi = **0,53%**; 15% de fundos = R$ 6,42 mi → saldo de **R$ 36,38 mi** | Revista 450, abr/2024 |
-| **LAR** (Brasil, 1964) | Sobras + **devolução de capital a jubilados** — quem sai mantém o vínculo patrimonial | **R$ 335,9 mi** em 2025 = R$ 101,3 mi de sobras + R$ 59 mi a 225 jubilados (**≈ R$ 262,2 mil** cada), sobre receita de R$ 23,2 bi | Lar Cooperativa, 10/02/2026 |
+| **LAR** (Brasil, 1964) | Sobras + **devolução de capital a jubilados**: quem sai mantém o vínculo patrimonial | **R$ 335,9 mi** em 2025 = R$ 101,3 mi de sobras + R$ 59 mi a 225 jubilados (**≈ R$ 262,2 mil** cada), sobre receita de R$ 23,2 bi | Lar Cooperativa, 10/02/2026 |
 | **REI Co-op** (EUA, 1938) | Repartição a membros, funcionários e ONGs **mesmo em ano de prejuízo** | US$ 189 mi + US$ 84,8 mi + US$ 8,9 mi = **US$ 282,7 mi** = **8,0%** da receita de US$ 3,53 bi, com prejuízo de US$ 156,4 mi | REI Newsroom, 08/05/2025 |
-| **John Lewis Partnership** (RU, 1929) | Bônus condicional: **PBTBE ≥ £ 150 mi e dívida < 4x** | **3%** (≈ 1,5 semana) = **£ 46 mi** em 2021/22; **£ 0** em 2022/23, 2023/24 e 2024/25 | JLP, Annual Report 2021–2025 |
+| **John Lewis Partnership** (RU, 1929) | Bônus condicional: **PBTBE ≥ £ 150 mi e dívida < 4x** | **3%** (≈ 1,5 semana) = **£ 46 mi** em 2021/22; **£ 0** em 2022/23, 2023/24 e 2024/25 | JLP, Annual Report 2021 to 2025 |
 
-### 12.1 MONDRAGON — o fundo de solidariedade que se paga sozinho
+### 12.1 MONDRAGON, o fundo de solidariedade que se paga sozinho
 
 A federação (**81 cooperativas** autogovernadas, **~70.500 pessoas**) fecha 2023 com **€ 11,056 bi de vendas**, **€ 1,486 bi de EBITDA** e **€ 593 mi de lucro**. Três leituras:
 
-1. **Margem EBITDA** = 1.486 ÷ 11.056 = **13,4%**; **margem líquida** = 593 ÷ 11.056 = **5,4%** — cada ponto de margem sustenta a estrutura inteira;
+1. **Margem EBITDA** = 1.486 ÷ 11.056 = **13,4%**; **margem líquida** = 593 ÷ 11.056 = **5,4%**: cada ponto de margem sustenta a estrutura inteira;
 2. **Regra do fundo:** cada cooperativa destina **no mínimo 13% do lucro** ao fundo divisional de solidariedade. Aplicação didática do piso ao lucro consolidado: 13% × € 593 mi = **€ 77,1 mi** (o piso incide sobre o lucro de **cada** cooperativa, não sobre o consolidado do grupo). Em 2023, o mecanismo registrou **€ 13,0 mi de compensação** e **€ 7,05 mi de offset de prejuízos**;
 3. A mesma lógica vai para a folha: salários entre **80% e 110%** da referência anual (LagunAro), razão mín-máx de **1:6 desde 1988**, e **€ 27,8 mi** da Fundación MONDRAGON em **37 programas** sociais.
 
-**Lição:** a solidariedade é **autofinanceira** — o "seguro" contra desigualdades entre unidades sai do lucro de quem prospera, **antes** de qualquer distribuição, e não de uma doação posterior.
+**Lição:** a solidariedade é **autofinanceira**, o "seguro" contra desigualdades entre unidades sai do lucro de quem prospera, **antes** de qualquer distribuição, e não de uma doação posterior.
 
-### 12.2 COPACOL — o rateio que o produtor vê na saca
+### 12.2 COPACOL, o rateio que o produtor vê na saca
 
 Faturamento de **R$ 10,6 bi (+8%)** e **R$ 270 mi de sobras** em 2024 (**+64%**, maior da história), com 9,6 mil cooperados e 16,2 mil colaboradores:
 
 1. Sobras ÷ faturamento = 270 ÷ 10.600 = **2,55%** do faturamento devolvido ao quadro social;
 2. Escada obrigatória: 10% = **R$ 27 mi** (Fundo de Reserva) + 5% = **R$ 13,5 mi** (FATES) = **R$ 40,5 mi** de fundos indivisíveis (art. 4º, VIII) → saldo de **R$ 229,5 mi** para deliberação da Assembleia (art. 44, II);
 3. Rateio **por unidade processada**: R$ 2,00 por saca de soja, R$ 0,10 por litro de leite, R$ 0,36 por kg de suíno, 3,6% sobre insumos e 2,7% sobre supermercado e rações. Exemplos: **1.000 sacas de soja → R$ 2.000**; **100.000 litros de leite → R$ 10.000**;
-4. Referência simples: 270 mi ÷ 9.600 cooperados = **R$ 28.125** de sobra média por cooperado (média aritmética — o rateio real é por volume, não por cabeça).
+4. Referência simples: 270 mi ÷ 9.600 cooperados = **R$ 28.125** de sobra média por cooperado (média aritmética, o rateio real é por volume, não por cabeça).
 
 **Lição:** o rateio **por unidade processada** é a forma mais transparente de devolver valor: cada produtor enxerga o rateio na própria saca ou cabeça de animal. Metade do valor foi paga em dezembro, e a cooperativa recolheu **R$ 390 mi** de tributos no mesmo exercício.
 
-### 12.3 COOPERCITRUS — o rateio progressivo por faixa
+### 12.3 COOPERCITRUS, o rateio progressivo por faixa
 
 39,8 mil cooperados, 160 unidades em 65 cidades; **R$ 8,1 bi de faturamento** e **R$ 42,8 mi de sobra líquida** em 2023 (faturamento −14%):
 
@@ -573,44 +573,44 @@ Faturamento de **R$ 10,6 bi (+8%)** e **R$ 270 mi de sobras** em 2024 (**+64%**,
 2. Escada do art. 28: 10% = **R$ 4,28 mi** + 5% = **R$ 2,14 mi** = **R$ 6,42 mi** de fundos obrigatórios → saldo de **R$ 36,38 mi** para rateio;
 3. O Estatuto, **art. 60**, rateia com ponderação **3,00** (até R$ 200 mil de movimentação), **1,00** (até R$ 2 mi) e **0,30** (acima de R$ 2 mi), com atualização pelo **IGP-M**: quanto maior a movimentação, menor o peso por real movimentado.
 
-**Lição:** a ponderação decrescente é o instrumento estatutário de justiça distributiva previsto no art. 4º, VII, da Lei nº 5.764/1971 — o rateio proporcional às operações pode ser **progressivo** sem violar a lei. A distribuição monetária, suspensa pela alteração estatutária de 2023, foi retomada por decisão da AGO de 2025, com o faturamento seguindo para R$ 8,5 bi (2024) e mais de R$ 9,2 bi (2025).
+**Lição:** a ponderação decrescente é o instrumento estatutário de justiça distributiva previsto no art. 4º, VII, da Lei nº 5.764/1971, o rateio proporcional às operações pode ser **progressivo** sem violar a lei. A distribuição monetária, suspensa pela alteração estatutária de 2023, foi retomada por decisão da AGO de 2025, com o faturamento seguindo para R$ 8,5 bi (2024) e mais de R$ 9,2 bi (2025).
 
-### 12.4 LAR e REI — o mesmo cálculo, duas leituras
+### 12.4 LAR e REI, o mesmo cálculo, duas leituras
 
-- **LAR (cooperativa, Paraná):** receita líquida de **R$ 23,2 bi (+14,4%)** em 2025 e **R$ 335,9 mi** devolvidos: **R$ 101,3 mi de sobras** (101,3 ÷ 23.200 = **0,44%** da receita) + **R$ 59 mi de devolução de capital a 225 jubilados** (59.000.000 ÷ 225 = **≈ R$ 262,2 mil** por jubilado) + bonificações, cesta e créditos — no total, **1,45%** da receita. A hibridize aparece na devolução ao jubilado: **quem saiu mantém o vínculo patrimonial**;
-- **REI Co-op (cooperativa de consumidores, EUA):** em 2024 a receita caiu **6,2%** para **US$ 3,53 bi** e o exercício fechou com **prejuízo de US$ 156,4 mi** — e ainda assim foram destinados **US$ 189 mi** em *Co-op Member Reward* (tipicamente **10%**), **US$ 84,8 mi** em incentivos e *profit sharing* (+48,5%) e **US$ 8,9 mi** a mais de 300 ONGs: (189 + 84,8 + 8,9) ÷ 3.530 = **8,0% da receita**.
+- **LAR (cooperativa, Paraná):** receita líquida de **R$ 23,2 bi (+14,4%)** em 2025 e **R$ 335,9 mi** devolvidos: **R$ 101,3 mi de sobras** (101,3 ÷ 23.200 = **0,44%** da receita) + **R$ 59 mi de devolução de capital a 225 jubilados** (59.000.000 ÷ 225 = **≈ R$ 262,2 mil** por jubilado) + bonificações, cesta e créditos: no total, **1,45%** da receita. A hibridize aparece na devolução ao jubilado: **quem saiu mantém o vínculo patrimonial**;
+- **REI Co-op (cooperativa de consumidores, EUA):** em 2024 a receita caiu **6,2%** para **US$ 3,53 bi** e o exercício fechou com **prejuízo de US$ 156,4 mi**, e ainda assim foram destinados **US$ 189 mi** em *Co-op Member Reward* (tipicamente **10%**), **US$ 84,8 mi** em incentivos e *profit sharing* (+48,5%) e **US$ 8,9 mi** a mais de 300 ONGs: (189 + 84,8 + 8,9) ÷ 3.530 = **8,0% da receita**.
 
-**Lição:** dá para ter **prejuízo no ano** e ainda repartir — na cooperativa de consumidores a repartição está na cultura, não no resultado do exercício; já na cooperativa produtiva (LAR, COPACOL, Coopercitrus) o rateio é função da **sobra líquida apurada**, ou seja, da escada do art. 28 que você resolveu nas seções 6 e 7.
+**Lição:** dá para ter **prejuízo no ano** e ainda repartir: na cooperativa de consumidores a repartição está na cultura, não no resultado do exercício; já na cooperativa produtiva (LAR, COPACOL, Coopercitrus) o rateio é função da **sobra líquida apurada**, ou seja, da escada do art. 28 que você resolveu nas seções 6 e 7.
 
-- **🔢 Você sabia?** A SEMCO reparte **23% do lucro após imposto de cada unidade**, duas vezes por ano, entregue a **três eleitos pelos trabalhadores** — e na crise de 1990 o percentual subiu para **39%**, com corte simultâneo de **40%** nos salários da direção? A receita passou de US$ 4 mi (1982) para US$ 212 mi (2003): repartir dinheiro só se sustenta quando vem junto com repartição de **informação e decisão**.
+- **🔢 Você sabia?** A SEMCO reparte **23% do lucro após imposto de cada unidade**, duas vezes por ano, entregue a **três eleitos pelos trabalhadores**, e na crise de 1990 o percentual subiu para **39%**, com corte simultâneo de **40%** nos salários da direção? A receita passou de US$ 4 mi (1982) para US$ 212 mi (2003): repartir dinheiro só se sustenta quando vem junto com repartição de **informação e decisão**.
 
 ---
 
-## 13. Atualizações 2025–2026 no impacto financeiro
+## 13. Atualizações 2025 to 2026 no impacto financeiro
 
-Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo entra **somente o que tem vigência confirmada** (fonte + data) — o que está em tramitação aparece separado, como **não verificado**, e não entra em simulação de carga, de custo ou de margem.
+Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo entra **somente o que tem vigência confirmada** (fonte + data), o que está em tramitação aparece separado, como **não verificado**, e não entra em simulação de carga, de custo ou de margem.
 
 ### 13.1 O que já está vigente e muda a projeção
 
 | Mudança | Base / fonte | Vigência confirmada | Efeito na projeção financeira |
 |---|---|---|---|
-| Criação de IBS, CBS e Imposto Seletivo | LC nº 214/2025 (16/01/2025), alterada pela LC nº 227/2026 | Vigente; transição 2026–2032, regime integral em **2033** | A tributação de consumo passa a ser lida em lei única: o custo por unidade vendida se torna comparável entre limitada, cooperativa e ONG que comercializa |
-| Alíquotas-teste de **0,9% (CBS)** e **0,1% (IBS)** com dispensa de recolhimento | LC nº 214/2025, art. 348 ( §§ incluídos pela LC nº 227/2026) | **01/01/2026 – 31/12/2026** | 2026 é ano de **processo**, não de carga: obrigações acessórias plenas sem pagamento — não use 2026 para simular a carga de 2027 em diante |
+| Criação de IBS, CBS e Imposto Seletivo | LC nº 214/2025 (16/01/2025), alterada pela LC nº 227/2026 | Vigente; transição 2026 to 2032, regime integral em **2033** | A tributação de consumo passa a ser lida em lei única: o custo por unidade vendida se torna comparável entre limitada, cooperativa e ONG que comercializa |
+| Alíquotas-teste de **0,9% (CBS)** e **0,1% (IBS)** com dispensa de recolhimento | LC nº 214/2025, art. 348 ( §§ incluídos pela LC nº 227/2026) | **01/01/2026 to 31/12/2026** | 2026 é ano de **processo**, não de carga: obrigações acessórias plenas sem pagamento: não use 2026 para simular a carga de 2027 em diante |
 | Janela de regularização de **60 dias** por descumprimento das obrigações acessórias | LC nº 214/2025, art. 348, §§ 1º, 3º e 4º (LC nº 227/2026) | 2026 | Risco orçamentário novo: quem emite fora do padrão é intimado e regulariza em 60 dias |
-| Comitê Gestor do IBS, contencioso administrativo e normas gerais de ITCMD | LC nº 227/2026 (DOU 14/01/2026) | Vigente | Governança única reduz litígio para OSCs e cooperativas, mas exige capacidade técnica — vira custo fixo |
+| Comitê Gestor do IBS, contencioso administrativo e normas gerais de ITCMD | LC nº 227/2026 (DOU 14/01/2026) | Vigente | Governança única reduz litígio para OSCs e cooperativas, mas exige capacidade técnica: vira custo fixo |
 | Regulamentação operacional da CBS | Decreto nº 12.955, de 29/04/2026 | Vigente | Sistemas fiscais e fluxo de caixa por nota passam a depender do decreto, não só da lei |
 | Escalonamento do destaque fiscal | Ato Conjunto RFB/CGIBS nº 4, de 30/07/2026 | **03/08/2026** (NF-e, NFC-e, CT-e); **01/10/2026** (NFCom e NFS-e de ISS); **01/12/2026** (imóveis, bens imateriais e plataformas); **01/01/2027** (Simples) | Cronograma de TI fiscal por espécie de documento; cada data é uma trava de projeto |
 | Opção do Simples por IBS/CBS no regime regular | LC nº 123/2006, art. 13, § 10 (redação da LC nº 227/2026) | Semestral e **irretratável** (setembro e março) | Decisão comercial: crédito ao cliente (B2B) × simplicidade; erro de opção dura 6 meses |
-| PLR mantida pela Lei nº 10.101/2000 | Planalto (última alteração estrutural: Lei nº 14.020/2020) | Vigente; IR exclusivo na fonte de **0% a 27,5%** | Nenhuma isenção nova confirmada — não projete PLR isenta de IR |
+| PLR mantida pela Lei nº 10.101/2000 | Planalto (última alteração estrutural: Lei nº 14.020/2020) | Vigente; IR exclusivo na fonte de **0% a 27,5%** | Nenhuma isenção nova confirmada: não projete PLR isenta de IR |
 | Licença-paternidade e salário-paternidade de 10 → 15 → 20 dias | Lei nº 15.371/2026 | Vigente; efeitos em **01/01/2027**, **01/01/2028** e **01/01/2029** | Custo de folha crescente em toda projeção plurianual, em qualquer forma jurídica com empregados |
 | Reporte ISSB/CBPS voluntário ("pratique ou explique") | Resolução CVM nº 244, de 29/05/2026 | A partir de **01/01/2027**; compromisso mínimo de 3 exercícios + asseguração | Cai a obrigatoriedade para companhias abertas; estatais seguem obrigadas (Lei nº 13.303/2016) |
 | Relatório de sustentabilidade na contabilidade | Resolução CFC nº 1.710/2023 (NBC TDS e NBC TAS) | **Ano-calendário 2026**, sempre que houver relatório de sustentabilidade | O relatório de impacto passa a ter contrapartida contábil no mesmo ano |
 | Instituições financeiras parceiras sob padrão ISSB | Res. CMN nº 5.185 e Res. BCB nº 435 | Vigentes desde 01/01/2025; obrigatório em **2026** (segmentos 1 e 2) e **2028** (demais) | Bancos e cooperativas de crédito já cobram dado de sustentabilidade na cadeia |
-| Greenwashing com norma autorregulatória | CBAP–CONAR, arts. 36, 36-A, 36-B e Anexo "U"; CDC, art. 37 | CONAR: aprovado **24/10/2025**, publicado **27/10/2025**, vigor ~**26/11/2025**; CDC vigente | Alegação de impacto em campanha exige veracidade, qualificação, exatidão, pertinência, relevância e concretude — risco reputacional e consumerista |
+| Greenwashing com norma autorregulatória | CBAP, CONAR, arts. 36, 36-A, 36-B e Anexo "U"; CDC, art. 37 | CONAR: aprovado **24/10/2025**, publicado **27/10/2025**, vigor ~**26/11/2025**; CDC vigente | Alegação de impacto em campanha exige veracidade, qualificação, exatidão, pertinência, relevância e concretude, risco reputacional e consumerista |
 | Certificação B Corp com 7 tópicos obrigatórios e auditoria | B Lab, padrões publicados em abril/2025 | Em vigor em **2026**; transição até **2028** | Selo deixa de ser pontuação e vira exigência progressiva: sobem custo e credibilidade |
 | Cadastro oficial de negócios de impacto | Cadimpacto (MDIC) | Desde **19/03/2025** (bronze, prata e ouro) | Visibilidade oficial para captação e prestação de contas |
 
-**Como calibrar a projeção cooperativa:** o Anuário OCB 2026 (dados de 31/12/2025) registra ~4,4 mil cooperativas, **29 milhões de cooperados**, **613,4 mil empregos diretos**, ingressos de **R$ 848,37 bi (+11,94%)**, ativos de **R$ 1,60 trilhão (+14,9%)** e **sobras de R$ 61,28 bi (+14,2%)** — em 2025 as sobras cresceram mais que os ingressos, e é esse piso de referência do sistema que a política de destinação da sua híbrida deve acompanhar.
+**Como calibrar a projeção cooperativa:** o Anuário OCB 2026 (dados de 31/12/2025) registra ~4,4 mil cooperativas, **29 milhões de cooperados**, **613,4 mil empregos diretos**, ingressos de **R$ 848,37 bi (+11,94%)**, ativos de **R$ 1,60 trilhão (+14,9%)** e **sobras de R$ 61,28 bi (+14,2%)**: em 2025 as sobras cresceram mais que os ingressos, e é esse piso de referência do sistema que a política de destinação da sua híbrida deve acompanhar.
 
 ### 13.2 Linha do tempo do "ano-teste" do IBS/CBS
 
@@ -618,42 +618,42 @@ Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo 
 {
   "question": "Ordene os marcos da reforma tributária que afetam a projeção financeira, do mais antigo ao mais recente:",
   "items": [
-    "16/01/2025 — sancionada a LC nº 214/2025, que institui IBS, CBS e Imposto Seletivo",
-    "01/01/2026 — início das alíquotas-teste de 0,9% de CBS e 0,1% de IBS, com dispensa de recolhimento",
-    "03/08/2026 — destaque obrigatório em NF-e, NFC-e e CT-e",
-    "01/10/2026 — destaque obrigatório em NFCom e NFS-e de ISS",
-    "01/12/2026 — destaque obrigatório em imóveis, bens imateriais e plataformas",
-    "01/01/2027 — destaque obrigatório para optantes pelo Simples Nacional"
+    "16/01/2025: sancionada a LC nº 214/2025, que institui IBS, CBS e Imposto Seletivo",
+    "01/01/2026: início das alíquotas-teste de 0,9% de CBS e 0,1% de IBS, com dispensa de recolhimento",
+    "03/08/2026: destaque obrigatório em NF-e, NFC-e e CT-e",
+    "01/10/2026: destaque obrigatório em NFCom e NFS-e de ISS",
+    "01/12/2026: destaque obrigatório em imóveis, bens imateriais e plataformas",
+    "01/01/2027: destaque obrigatório para optantes pelo Simples Nacional"
   ],
   "correctOrder": [
-    "16/01/2025 — sancionada a LC nº 214/2025, que institui IBS, CBS e Imposto Seletivo",
-    "01/01/2026 — início das alíquotas-teste de 0,9% de CBS e 0,1% de IBS, com dispensa de recolhimento",
-    "03/08/2026 — destaque obrigatório em NF-e, NFC-e e CT-e",
-    "01/10/2026 — destaque obrigatório em NFCom e NFS-e de ISS",
-    "01/12/2026 — destaque obrigatório em imóveis, bens imateriais e plataformas",
-    "01/01/2027 — destaque obrigatório para optantes pelo Simples Nacional"
+    "16/01/2025: sancionada a LC nº 214/2025, que institui IBS, CBS e Imposto Seletivo",
+    "01/01/2026: início das alíquotas-teste de 0,9% de CBS e 0,1% de IBS, com dispensa de recolhimento",
+    "03/08/2026: destaque obrigatório em NF-e, NFC-e e CT-e",
+    "01/10/2026: destaque obrigatório em NFCom e NFS-e de ISS",
+    "01/12/2026: destaque obrigatório em imóveis, bens imateriais e plataformas",
+    "01/01/2027: destaque obrigatório para optantes pelo Simples Nacional"
   ],
-  "explanation": "A ordem é a do cronograma legal: a LC nº 214/2025 (16/01/2025) cria os tributos; em 2026 valem as alíquotas-teste do art. 348, com dispensa de recolhimento a quem cumprir as obrigações acessórias; o Ato Conjunto RFB/CGIBS nº 4/2026 escalona o destaque fiscal por espécie de documento (03/08, 01/10 e 01/12/2026) e deixa o Simples Nacional para 01/01/2027. Inverter a ordem leva a projetar obrigação antes da norma que a cria — e a simular carga fiscal num ano em que não há recolhimento."
+  "explanation": "A ordem é a do cronograma legal: a LC nº 214/2025 (16/01/2025) cria os tributos; em 2026 valem as alíquotas-teste do art. 348, com dispensa de recolhimento a quem cumprir as obrigações acessórias; o Ato Conjunto RFB/CGIBS nº 4/2026 escalona o destaque fiscal por espécie de documento (03/08, 01/10 e 01/12/2026) e deixa o Simples Nacional para 01/01/2027. Inverter a ordem leva a projetar obrigação antes da norma que a cria, e a simular carga fiscal num ano em que não há recolhimento."
 }
 ```
 
-- **🔢 Você sabia?** Em 2026 a alíquota-teste da reforma do consumo é de **0,9% de CBS e 0,1% de IBS**, com **dispensa de recolhimento** para quem cumprir as obrigações acessórias (art. 348 da LC nº 214/2025)? Ou seja: 2026 é o ano em que a empresa híbrida aprende o processo fiscal inteiro **sem pagar o tributo** — mas descumprir as obrigações acessórias gera intimação e uma janela de **60 dias** para regularizar (arts. 348, §§ 1º, 3º e 4º, incluídos pela LC nº 227/2026).
+- **🔢 Você sabia?** Em 2026 a alíquota-teste da reforma do consumo é de **0,9% de CBS e 0,1% de IBS**, com **dispensa de recolhimento** para quem cumprir as obrigações acessórias (art. 348 da LC nº 214/2025)? Ou seja: 2026 é o ano em que a empresa híbrida aprende o processo fiscal inteiro **sem pagar o tributo**, mas descumprir as obrigações acessórias gera intimação e uma janela de **60 dias** para regularizar (arts. 348, §§ 1º, 3º e 4º, incluídos pela LC nº 227/2026).
 
 ### 13.3 O que **não** está vigente: não entre na projeção
 
 | Item em tramitação ou não confirmado | Situação verificada em 05/10/2026 |
 |---|---|
 | **Isenção da PLR do IR** (PL 581/2019) | Parecer favorável da CFT (30/09/2025) localizado; **sanção e vigência não confirmadas** |
-| **Greenwashing no CDC** (PLs 1.008/2025, 440/2025 e 7.090/2025) | Em tramitação na Câmara; **nenhuma vigência confirmada** — vale o CBAP–CONAR e o CDC, art. 37 |
-| **Fim da escala 6x1** (40h + 2 folgas) | Aprovada na Câmara em 28/05/2026 (472×22 e 461×19); **Senado pendente** — a transição só corre após a promulgação |
-| **Alíquotas definitivas de IBS/CBS por segmento** a partir de 2027 | Dependem de resolução do Senado (arts. 18 e 349–369 da LC nº 214/2025) — **ainda não fixadas** |
-| **Tratamento do ato cooperativo e de OSCs nos anexos** da LC nº 214/2025 | Revisão de anexos **não feita** — não projete crédito, isenção ou imunidade por analogia |
+| **Greenwashing no CDC** (PLs 1.008/2025, 440/2025 e 7.090/2025) | Em tramitação na Câmara; **nenhuma vigência confirmada**, vale o CBAP, CONAR e o CDC, art. 37 |
+| **Fim da escala 6x1** (40h + 2 folgas) | Aprovada na Câmara em 28/05/2026 (472×22 e 461×19); **Senado pendente**: a transição só corre após a promulgação |
+| **Alíquotas definitivas de IBS/CBS por segmento** a partir de 2027 | Dependem de resolução do Senado (arts. 18 e 349 to 369 da LC nº 214/2025): **ainda não fixadas** |
+| **Tratamento do ato cooperativo e de OSCs nos anexos** da LC nº 214/2025 | Revisão de anexos **não feita**: não projete crédito, isenção ou imunidade por analogia |
 | **Número de Empresas B no Brasil** | Fontes indicam ~500 (fev/2026), 342 (mai/2026) e 338 (jul/2026): cortes diferentes, **sem número único verificado** |
 | **Obrigatoriedade do reporte em 2028** (proposta do CFC, jun/2026) | **Proposta técnica**, sem norma publicada |
 | **PL 1.838/2026** (duração normal de trabalho) | Localizado no Planalto, mas **tramitação e vigência não confirmadas** |
 
 > [!WARNING]
-> **Vigência não é previsão.** Três erros comuns em projeção de 2026: (i) usar as **alíquotas-teste de 0,9% (CBS) e 0,1% (IBS)** de 2026 para simular a carga de 2027 em diante — as alíquotas definitivas por segmento dependem de resolução do Senado e **ainda não foram fixadas**; (ii) incorporar o **fim da escala 6x1** ao custo de equipe: a PEC foi aprovada na Câmara em 28/05/2026, mas **segue pendente no Senado** e só transiciona após a promulgação; (iii) projetar **PLR isenta do IR** — o PL 581/2019 tem parecer favorável, mas **sanção e vigência não foram confirmadas**. Enquanto não houver vigência confirmada, o item é hipótese de trabalho, não premissa de orçamento — e a premissa errada derruba margem, ponto de equilíbrio e respiro de caixa de uma vez só.
+> **Vigência não é previsão.** Três erros comuns em projeção de 2026: (i) usar as **alíquotas-teste de 0,9% (CBS) e 0,1% (IBS)** de 2026 para simular a carga de 2027 em diante: as alíquotas definitivas por segmento dependem de resolução do Senado e **ainda não foram fixadas**; (ii) incorporar o **fim da escala 6x1** ao custo de equipe: a PEC foi aprovada na Câmara em 28/05/2026, mas **segue pendente no Senado** e só transiciona após a promulgação; (iii) projetar **PLR isenta do IR**, o PL 581/2019 tem parecer favorável, mas **sanção e vigência não foram confirmadas**. Enquanto não houver vigência confirmada, o item é hipótese de trabalho, não premissa de orçamento, e a premissa errada derruba margem, ponto de equilíbrio e respiro de caixa de uma vez só.
 
 ---
 
@@ -679,7 +679,7 @@ Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo 
 {
   "id": "hyb-06-q2",
   "type": "multiple-choice",
-  "question": "O FATES — Fundo de Assistência Técnica, Educacional e Social — corresponde, no mínimo, a:",
+  "question": "O FATES, Fundo de Assistência Técnica, Educacional e Social, corresponde, no mínimo, a:",
   "options": [
     "3% das sobras líquidas",
     "5% das sobras líquidas apuradas no exercício",
@@ -687,7 +687,7 @@ Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo 
     "5% da receita bruta"
   ],
   "correct": 1,
-  "explanation": "O art. 28, II, da Lei nº 5.764/1971 fixa, no mínimo, 5% das sobras líquidas apuradas no exercício para o FATES. A base de cálculo é sempre a sobra líquida — não o capital social nem a receita bruta —, e pela ITG 2004 (item 12) os dispêndios de assistência técnica, educacional e social vão para o resultado e podem ser absorvidos pela RATES."
+  "explanation": "O art. 28, II, da Lei nº 5.764/1971 fixa, no mínimo, 5% das sobras líquidas apuradas no exercício para o FATES. A base de cálculo é sempre a sobra líquida, não o capital social nem a receita bruta, e pela ITG 2004 (item 12) os dispêndios de assistência técnica, educacional e social vão para o resultado e podem ser absorvidos pela RATES."
 }
 ```
 
@@ -719,7 +719,7 @@ Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo 
     "R$ 135.000,00"
   ],
   "correct": 1,
-  "explanation": "O ponto de equilíbrio em reais é a divisão dos fixos pelo índice de margem de contribuição: R$ 45.000,00 ÷ 0,40 = R$ 112.500,00 — 2,5 vezes o valor dos fixos. Atenção: R$ 90.000,00 seria o resultado se o índice fosse 50%, e R$ 180.000,00 se fosse 25%. No ponto econômico, soma-se ao dividendo a meta de reserva ou de fundo de impacto antes de dividir pelo índice."
+  "explanation": "O ponto de equilíbrio em reais é a divisão dos fixos pelo índice de margem de contribuição: R$ 45.000,00 ÷ 0,40 = R$ 112.500,00: 2,5 vezes o valor dos fixos. Atenção: R$ 90.000,00 seria o resultado se o índice fosse 50%, e R$ 180.000,00 se fosse 25%. No ponto econômico, soma-se ao dividendo a meta de reserva ou de fundo de impacto antes de dividir pelo índice."
 }
 ```
 
@@ -751,7 +751,7 @@ Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo 
     "Os administradores, por simples ata"
   ],
   "correct": 2,
-  "explanation": "O art. 44, II, da Lei nº 5.764/1971 compete à Assembleia Geral Ordinária a destinação das sobras, deduzindo-se as parcelas para os Fundos Obrigatórios. A ordem importa: primeiro saem os 10% de Fundo de Reserva e os 5% de FATES (art. 28), depois a assembleia decide sobre o saldo — e o rateio é proporcional às operações (art. 4º, VII), salvo deliberação em contrário."
+  "explanation": "O art. 44, II, da Lei nº 5.764/1971 compete à Assembleia Geral Ordinária a destinação das sobras, deduzindo-se as parcelas para os Fundos Obrigatórios. A ordem importa: primeiro saem os 10% de Fundo de Reserva e os 5% de FATES (art. 28), depois a assembleia decide sobre o saldo, e o rateio é proporcional às operações (art. 4º, VII), salvo deliberação em contrário."
 }
 ```
 
@@ -767,7 +767,7 @@ Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo 
     "Balanço Patrimonial, por categoria de fundo"
   ],
   "correct": 1,
-  "explanation": "Os itens 5 e 7 da ITG 2004 – Entidade Cooperativa (Conselho Federal de Contabilidade, 2017; vigência a partir de 01/01/2018) determinam que a demonstração do resultado seja denominada \"Demonstração de Sobras ou Perdas\", evidenciando a segregação entre ato cooperativo e ato não cooperativo e as atividades. O item 6 impõe a escrituração segregada, e o item 24, \"b\", exige que as notas discriminem os fundos e reservas por natureza, finalidade e forma de utilização."
+  "explanation": "Os itens 5 e 7 da ITG 2004: Entidade Cooperativa (Conselho Federal de Contabilidade, 2017; vigência a partir de 01/01/2018) determinam que a demonstração do resultado seja denominada \"Demonstração de Sobras ou Perdas\", evidenciando a segregação entre ato cooperativo e ato não cooperativo e as atividades. O item 6 impõe a escrituração segregada, e o item 24, \"b\", exige que as notas discriminem os fundos e reservas por natureza, finalidade e forma de utilização."
 }
 ```
 
@@ -799,7 +799,7 @@ Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo 
     "17,1 meses"
   ],
   "correct": 2,
-  "explanation": "O retorno do CAC é o CAC dividido pelo resultado do ticket pela margem bruta: R$ 2.400,00 ÷ (R$ 400,00 × 0,70) = R$ 2.400,00 ÷ R$ 280,00 = 8,57, ou seja, cerca de 8,6 meses — dentro da meta de menos de 12 meses. Usar a margem líquida no lugar da bruta inflaria o prazo e levaria a conclusões erradas sobre a viabilidade de escalar a aquisição."
+  "explanation": "O retorno do CAC é o CAC dividido pelo resultado do ticket pela margem bruta: R$ 2.400,00 ÷ (R$ 400,00 × 0,70) = R$ 2.400,00 ÷ R$ 280,00 = 8,57, ou seja, cerca de 8,6 meses: dentro da meta de menos de 12 meses. Usar a margem líquida no lugar da bruta inflaria o prazo e levaria a conclusões erradas sobre a viabilidade de escalar a aquisição."
 }
 ```
 
@@ -815,7 +815,7 @@ Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo 
     "Tanto faz, basta que o LTV seja maior que o CAC"
   ],
   "correct": 2,
-  "explanation": "A faixa saudável verificada é de 3,0 a 5,0 — logo, 3,5× está dentro dela. Abaixo de 1,5 o modelo é insustentável; entre 1,5 e 3,0 é arriscado; acima de 5,0 pode indicar subinvestimento em crescimento, ou seja, dinheiro que deveria estar comprando clientes. Meramente ter LTV maior que o CAC não basta: a relação mínima recomendada é 3,0."
+  "explanation": "A faixa saudável verificada é de 3,0 a 5,0: logo, 3,5× está dentro dela. Abaixo de 1,5 o modelo é insustentável; entre 1,5 e 3,0 é arriscado; acima de 5,0 pode indicar subinvestimento em crescimento, ou seja, dinheiro que deveria estar comprando clientes. Meramente ter LTV maior que o CAC não basta: a relação mínima recomendada é 3,0."
 }
 ```
 
@@ -831,7 +831,7 @@ Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo 
     "Fundos R$ 13.500.000,00; saldo R$ 256.500.000,00"
   ],
   "correct": 0,
-  "explanation": "O art. 28, I, destina 10% ao Fundo de Reserva: 10% de 270.000.000 = R$ 27.000.000,00. O art. 28, II, destina 5% ao FATES: 5% de 270.000.000 = R$ 13.500.000,00. Total de 15% = R$ 40.500.000,00 de fundos indivisíveis (art. 4º, VIII), e R$ 270.000.000,00 − R$ 40.500.000,00 = R$ 229.500.000,00 de saldo à disposição da Assembleia Geral Ordinária (art. 44, II) para rateio proporcional às operações (art. 4º, VII). Conferência: as sobras equivalem a 2,55% do faturamento (270 ÷ 10.600), e 15% desse montante é a fatia obrigatória — não o rateio em si."
+  "explanation": "O art. 28, I, destina 10% ao Fundo de Reserva: 10% de 270.000.000 = R$ 27.000.000,00. O art. 28, II, destina 5% ao FATES: 5% de 270.000.000 = R$ 13.500.000,00. Total de 15% = R$ 40.500.000,00 de fundos indivisíveis (art. 4º, VIII), e R$ 270.000.000,00 − R$ 40.500.000,00 = R$ 229.500.000,00 de saldo à disposição da Assembleia Geral Ordinária (art. 44, II) para rateio proporcional às operações (art. 4º, VII). Conferência: as sobras equivalem a 2,55% do faturamento (270 ÷ 10.600), e 15% desse montante é a fatia obrigatória: não o rateio em si."
 }
 ```
 
@@ -847,30 +847,30 @@ Toda projeção financeira tem data de validade: as normas **em vigor**. Abaixo 
     "Os optantes pelo Simples Nacional são obrigados a destacar os tributos desde 01/01/2026"
   ],
   "correct": 1,
-  "explanation": "O art. 348 da LC nº 214/2025 fixa 0,9% de CBS e 0,1% de IBS no período de 01/01/2026 a 31/12/2026 e dispensa o recolhimento a quem cumprir as obrigações acessórias, com janela de regularização de 60 dias (§§ 1º, 3º e 4º, incluídos pela LC nº 227/2026, DOU 14/01/2026). O ICMS e o ISS só desaparecem em 2033, na conclusão da transição, e o destaque do Simples começa em 01/01/2027 (Ato Conjunto RFB/CGIBS nº 4/2026). Em 2026, portanto, há obrigação fiscal sem custo tributário — não é ano de carga, é ano de processo."
+  "explanation": "O art. 348 da LC nº 214/2025 fixa 0,9% de CBS e 0,1% de IBS no período de 01/01/2026 a 31/12/2026 e dispensa o recolhimento a quem cumprir as obrigações acessórias, com janela de regularização de 60 dias (§§ 1º, 3º e 4º, incluídos pela LC nº 227/2026, DOU 14/01/2026). O ICMS e o ISS só desaparecem em 2033, na conclusão da transição, e o destaque do Simples começa em 01/01/2027 (Ato Conjunto RFB/CGIBS nº 4/2026). Em 2026, portanto, há obrigação fiscal sem custo tributário: não é ano de carga, é ano de processo."
 }
 ```
 
 > [!WARNING]
 > **Armadilhas desta lição:**
-> - **Não existe piso legal de reinversão para a empresa híbrida** — os únicos pisos verificados são **10% + 5%** para a cooperativa (Lei nº 5.764/1971, art. 28) e **5%** de reserva legal para a S.A. (Lei nº 6.404/1976, art. 193);
-> - **A reserva legal de 3% e a reserva legal obrigatória da limitada não foram confirmadas** em nenhuma norma — não as afirme em estatuto, ata ou aula;
+> - **Não existe piso legal de reinversão para a empresa híbrida**: os únicos pisos verificados são **10% + 5%** para a cooperativa (Lei nº 5.764/1971, art. 28) e **5%** de reserva legal para a S.A. (Lei nº 6.404/1976, art. 193);
+> - **A reserva legal de 3% e a reserva legal obrigatória da limitada não foram confirmadas** em nenhuma norma: não as afirme em estatuto, ata ou aula;
 > - **Fundos da cooperativa são indivisíveis** (art. 4º, VIII): rateá-los entre associados é irregularidade, e o remanescente na liquidação vai ao Banco Nacional de Cooperativas de Crédito (art. 68, VI);
-> - **A cooperativa não distribui dividendos** — só **juros de até 12% ao ano** sobre a parte integralizada (art. 24, §3º);
+> - **A cooperativa não distribui dividendos**: só **juros de até 12% ao ano** sobre a parte integralizada (art. 24, §3º);
 > - **A demonstração dupla de resultado não é norma brasileira**: é referencial voluntário (Elkington, 1994/1997). O que a norma exige é a **Demonstração de Sobras ou Perdas** (ITG 2004) e as notas que discriminem fundos e reservas (item 24, "b");
 > - **A isenção confirmada é a de CSLL** sobre atos cooperativos (Lei nº 10.865/2004, art. 39): a não incidência de IRPJ não foi lida em dispositivo expresso;
 > - **Não existe "Certificado de Recebíveis (CRP)"**: existem **CRA** (Instrução CVM nº 600/2018 e Resolução CMN/BCB nº 3.621/2008), **CRI** (Lei nº 9.514/1997) e os certificados genéricos da Lei nº 14.430/2022, art. 22;
-> - **Não há vantagem fiscal própria ao título verde** no Brasil (IFC, 2023) — não prometa retorno tributário em captação sustentável;
+> - **Não há vantagem fiscal própria ao título verde** no Brasil (IFC, 2023): não prometa retorno tributário em captação sustentável;
 > - **A isenção do resgate de fundo patrimonial tem limite** (Lei nº 13.800/2019): rendimentos, até 20% de doação com propósito específico e, excepcionalmente, **5% do principal ao ano**, limitado a 20% do principal na data do primeiro resgate.
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
-> 1. A economia unitária se mede com **LTV : CAC ≥ 3,0** e **retorno do CAC abaixo de 12 meses**, sempre com margem bruta — sem elas, o cliente parece valer mais do que ele de fato devolve ao caixa;
-> 2. O **ponto de equilíbrio contábil** (fixos ÷ índice de margem de contribuição) evita prejuízo; o **ponto econômico** já embute a meta de reserva e de fundo de impacto — em empresa híbrida, só o segundo é a referência de planejamento;
-> 3. O **respiro de caixa** (caixa ÷ queima líquida) é o relógio da sobrevivência: **18 a 21 meses** é confortável, **9 a 12 meses** é a hora de iniciar a captação, e o custo da dívida em 2026 está em **31,50% a.a.** contra **13,75% a.a.** de Selic — spread de **17,75 pontos percentuais**;
+> 1. A economia unitária se mede com **LTV: CAC ≥ 3,0** e **retorno do CAC abaixo de 12 meses**, sempre com margem bruta: sem elas, o cliente parece valer mais do que ele de fato devolve ao caixa;
+> 2. O **ponto de equilíbrio contábil** (fixos ÷ índice de margem de contribuição) evita prejuízo; o **ponto econômico** já embute a meta de reserva e de fundo de impacto: em empresa híbrida, só o segundo é a referência de planejamento;
+> 3. O **respiro de caixa** (caixa ÷ queima líquida) é o relógio da sobrevivência: **18 a 21 meses** é confortável, **9 a 12 meses** é a hora de iniciar a captação, e o custo da dívida em 2026 está em **31,50% a.a.** contra **13,75% a.a.** de Selic: spread de **17,75 pontos percentuais**;
 > 4. A **estrutura financeira muda com a forma jurídica**: S.A. guarda **5% até 20% do capital** e distribui no mínimo **25%** do lucro ajustado; a cooperativa guarda **15%** das sobras e só remunera o capital em até **12% a.a.**; a ONG **não distribui**; a limitada **não tem piso legal**;
-> 5. O **rateio das sobras** segue escada fixa: fundos indivisíveis (10% + 5%), depois deliberação da Assembleia Geral Ordinária (art. 44, II), depois rateio proporcional às operações (art. 4º, VII) — com registro na conta de trânsito do patrimônio líquido (ITG 2004, item 20) e migração para o passivo se distribuível (item 21);
+> 5. O **rateio das sobras** segue escada fixa: fundos indivisíveis (10% + 5%), depois deliberação da Assembleia Geral Ordinária (art. 44, II), depois rateio proporcional às operações (art. 4º, VII): com registro na conta de trânsito do patrimônio líquido (ITG 2004, item 20) e migração para o passivo se distribuível (item 21);
 > 6. O **fundo de impacto interno é política, não lei**: no exemplo resolvido, 10% do lucro (R$ 80.000) equivalem a **0,67% da receita bruta**, e a reinversão total de **45%** só existe porque está escrita e aprovada;
-> 7. Publique **lucro e impacto em documentos distintos**: demonstração contábil conforme a forma jurídica, relatório de impacto ao lado — o "resultado triplo" é referencial voluntário desde 1994, e não norma contábil brasileira;
+> 7. Publique **lucro e impacto em documentos distintos**: demonstração contábil conforme a forma jurídica, relatório de impacto ao lado, o "resultado triplo" é referencial voluntário desde 1994, e não norma contábil brasileira;
 > 8. Nos **casos reais**, a escada aparece intacta: MONDRAGON retira **≥ 13%** do lucro para o fundo divisional, COPACOL fechou 2024 com **R$ 270 mi de sobras** (15% de fundos = R$ 40,5 mi → R$ 229,5 mi de saldo), Coopercitrus rateia **progressivo por faixa (3,00/1,00/0,30)**, LAR devolveu **R$ 59 mi a 225 jubilados** e a REI repartiu **8,0% da receita mesmo com prejuízo**;
-> 9. Em **2026**, só entre na projeção o que tem **vigência confirmada**: alíquotas-teste de **0,9% (CBS) e 0,1% (IBS)** com dispensa de recolhimento (art. 348 da LC nº 214/2025), destaque escalonado pelo Ato Conjunto RFB/CGIBS nº 4/2026 e PLR **sem isenção nova** — PEC 6x1, isenção de PLR e alíquotas definitivas de 2027 seguem **não verificadas**.
+> 9. Em **2026**, só entre na projeção o que tem **vigência confirmada**: alíquotas-teste de **0,9% (CBS) e 0,1% (IBS)** com dispensa de recolhimento (art. 348 da LC nº 214/2025), destaque escalonado pelo Ato Conjunto RFB/CGIBS nº 4/2026 e PLR **sem isenção nova**: PEC 6x1, isenção de PLR e alíquotas definitivas de 2027 seguem **não verificadas**.

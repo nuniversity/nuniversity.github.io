@@ -134,7 +134,7 @@ my-project/
 ```
 
 > [!SUCCESS]
-> A good editor with the Python extension gives you: syntax highlighting, auto-completion, error checking, and debugging — all essential for productive coding.
+> A good editor with the Python extension gives you: syntax highlighting, auto-completion, error checking, and debugging: all essential for productive coding.
 
 ## Practice Questions
 

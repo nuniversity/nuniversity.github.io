@@ -318,7 +318,7 @@ flowchart TD
 | Use color purposefully | Use random colors without meaning |
 
 > [!WARNING] Common Mistake
-> Don't use a rectangle for decisions just because it's easier to type. The diamond shape is universally recognized as a decision point — using the wrong shape confuses readers.
+> Don't use a rectangle for decisions just because it's easier to type. The diamond shape is universally recognized as a decision point: using the wrong shape confuses readers.
 
 ### Color Coding Conventions
 
@@ -349,12 +349,12 @@ For each description, identify the correct symbol shape:
 <details>
 <summary>Click to see answers</summary>
 
-1. **Diamond** `{}` — Decision point
-2. **Wavy rectangle** `[[]]` — Document
-3. **Rounded rectangle** `([ ])` — Terminal (Start)
-4. **Parallelogram** `[/ /]` — Input
-5. **Cylinder** `[[( )]]` — Database
-6. **Circle** `(( ))` — Connector (or double-lined rectangle for predefined process)
+1. **Diamond** `{}`: Decision point
+2. **Wavy rectangle** `[[]]`: Document
+3. **Rounded rectangle** `([ ])`: Terminal (Start)
+4. **Parallelogram** `[/ /]`: Input
+5. **Cylinder** `[[( )]]`: Database
+6. **Circle** `(( ))`: Connector (or double-lined rectangle for predefined process)
 
 </details>
 
@@ -397,9 +397,9 @@ Create a flowchart for "Making a phone call" using at least:
 - Flowcharts use **standardized symbols** that are universally understood
 - The **core symbol set** includes: terminals, processes, decisions, I/O, documents, databases, and connectors
 - Always **label decision branches** clearly
-- Use **consistent shapes** — don't mix symbols for the same purpose
+- Use **consistent shapes**: don't mix symbols for the same purpose
 - **Color coding** can enhance readability but isn't required
-- Keep symbol text **concise** — use descriptions outside the diagram if needed
+- Keep symbol text **concise**: use descriptions outside the diagram if needed
 - In the next lesson, we'll apply these symbols to **build your first flowcharts** step by step
 
 > [!SUCCESS] You've Completed Lesson 4

@@ -19,10 +19,10 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 This installs:
-- **rustup** — The toolchain manager
-- **rustc** — The Rust compiler
-- **cargo** — The build system and package manager
-- **rustdoc** — The documentation generator
+- **rustup**: The toolchain manager
+- **rustc**: The Rust compiler
+- **cargo**: The build system and package manager
+- **rustdoc**: The documentation generator
 
 ### Windows (Standalone)
 
@@ -89,7 +89,7 @@ hello_rust/
 └── .git/         # Auto-initialized git repo
 ```
 
-### Cargo.toml — The Package Manifest
+### Cargo.toml: The Package Manifest
 
 ```toml
 [package]
@@ -107,7 +107,7 @@ edition = "2021"
 | `edition` | Rust edition (2015, 2018, 2021, 2024) |
 | `[dependencies]` | External crate dependencies |
 
-### src/main.rs — Hello World
+### src/main.rs: Hello World
 
 ```rust
 fn main() {
@@ -158,7 +158,7 @@ Hello, world!
 cargo check
 ```
 
-Checks code for errors **without producing a binary**. Much faster than `cargo build` — use it frequently during development.
+Checks code for errors **without producing a binary**. Much faster than `cargo build`: use it frequently during development.
 
 > [!SUCCESS]
 > Use `cargo check` to quickly verify your code compiles. Only use `cargo build` or `cargo run` when you actually need the binary. This saves significant time on larger projects.

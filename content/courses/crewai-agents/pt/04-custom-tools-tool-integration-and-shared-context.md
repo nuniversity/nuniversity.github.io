@@ -36,7 +36,7 @@ class CalculadoraTool(BaseTool):
 ```
 
 [!IMPORTANT]
-Os campos `name` e `description` são críticos — eles são o que o LLM do agente lê para decidir quando usar uma ferramenta. Um nome claro e descritivo e uma descrição detalhada de quando e como usar a ferramenta melhoram dramaticamente a seleção correta de ferramentas pelo agente.
+Os campos `name` e `description` são críticos: eles são o que o LLM do agente lê para decidir quando usar uma ferramenta. Um nome claro e descritivo e uma descrição detalhada de quando e como usar a ferramenta melhoram dramaticamente a seleção correta de ferramentas pelo agente.
 
 ---
 
@@ -463,7 +463,7 @@ crew.kickoff()
   "question": "Você implanta um sistema CrewAI em produção. O cache de ferramentas não funciona mais entre sessões de usuário. Por quê?",
   "options": [
     "O cache só funciona em modo de desenvolvimento",
-    "O cache de ferramentas é em memória por chamada kickoff() — não persiste entre execuções",
+    "O cache de ferramentas é em memória por chamada kickoff(): não persiste entre execuções",
     "A cache_function foi removida em produção",
     "Produção requer verbose=True para cache"
   ],
@@ -478,13 +478,13 @@ crew.kickoff()
   "type": "multiple-choice",
   "question": "Um agente tem SerperDevTool (busca web) e CalculadoraTool. A tarefa é 'Calcular 15% de 340'. Qual ferramenta o agente deve usar?",
   "options": [
-    "SerperDevTool — para pesquisar a resposta",
-    "CalculadoraTool — para computar a porcentagem",
-    "Ambas — pesquisar primeiro, depois calcular",
-    "Nenhuma — o agente computa internamente"
+    "SerperDevTool: para pesquisar a resposta",
+    "CalculadoraTool: para computar a porcentagem",
+    "Ambas: pesquisar primeiro, depois calcular",
+    "Nenhuma, o agente computa internamente"
   ],
   "correct": 1,
-  "explanation": "CalculadoraTool é a escolha correta para operações aritméticas. O agente deve usar as descrições das ferramentas para corresponder a tarefa à ferramenta certa — a descrição da CalculadoraTool menciona aritmética."
+  "explanation": "CalculadoraTool é a escolha correta para operações aritméticas. O agente deve usar as descrições das ferramentas para corresponder a tarefa à ferramenta certa: a descrição da CalculadoraTool menciona aritmética."
 }
 ```
 
@@ -538,5 +538,5 @@ crew.kickoff()
 - O parâmetro `context` em uma `Task` permite fluxo de dados explícito entre tarefas.
 - Ferramentas personalizadas podem encapsular qualquer API externa ou computação.
 - Sempre forneça `name` e `description` claros para cada ferramenta.
-- As descrições das ferramentas são o que os LLMs usam para decidir a seleção — invista nelas.
+- As descrições das ferramentas são o que os LLMs usam para decidir a seleção: invista nelas.
 - Ferramentas em nível de agente podem ser substituídas por ferramentas em nível de tarefa para necessidades específicas.

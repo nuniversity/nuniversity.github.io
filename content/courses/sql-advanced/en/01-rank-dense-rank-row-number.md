@@ -10,7 +10,7 @@ difficulty: advanced
 
 ## Window Functions Overview
 
-Window functions perform calculations across a set of rows related to the current row. Unlike aggregate functions with `GROUP BY`, window functions **do not collapse rows** — every input row retains its identity.
+Window functions perform calculations across a set of rows related to the current row. Unlike aggregate functions with `GROUP BY`, window functions **do not collapse rows**: every input row retains its identity.
 
 ```sql
 -- Aggregate: collapses
@@ -85,8 +85,8 @@ FROM employees;
 
 ### Use Cases for RANK/DENSE_RANK
 
-- **RANK**: "Give me the top 5 salaries" — if 3 people tie at #1, the next is #4.
-- **DENSE_RANK**: "Give me the top 5 salary tiers" — everyone in the top 5 distinct values.
+- **RANK**: "Give me the top 5 salaries": if 3 people tie at #1, the next is #4.
+- **DENSE_RANK**: "Give me the top 5 salary tiers": everyone in the top 5 distinct values.
 
 ```sql
 -- Top 5 distinct salary tiers
@@ -115,7 +115,7 @@ FROM employees;
 | Buckets | Name | Meaning |
 |---|---|---|
 | 2 | Median split | Upper/lower half |
-| 4 | Quartiles | Q1–Q4 |
+| 4 | Quartiles | Q1: Q4 |
 | 10 | Deciles | Top 10%, bottom 10% |
 | 100 | Percentiles | Per-percentile ranking |
 
@@ -257,7 +257,7 @@ ORDER BY product_id, range_start;
 | `RANK()` | Low | Same sort as ROW_NUMBER |
 | `DENSE_RANK()` | Low | Same sort as ROW_NUMBER |
 | `NTILE()` | Medium | Requires row count + distribution |
-| Large partition counts | High | Sort dominates — index on partition + order columns |
+| Large partition counts | High | Sort dominates: index on partition + order columns |
 
 [!TIP]
 Create a composite index on `(partition_column, order_column)` to make window function sorts use an index scan instead of a full sort.

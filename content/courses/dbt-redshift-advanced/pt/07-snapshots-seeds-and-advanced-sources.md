@@ -19,7 +19,7 @@ Entender esses três recursos é essencial porque:
 
 ## Snapshots: Rastreando Dimensões de Mudança Lenta
 
-Snapshots implementam **Dimensões de Mudança Lenta Tipo 2 (SCD2)** — eles rastreiam como uma linha muda ao longo do tempo mantendo todas as versões históricas com timestamps de validade.
+Snapshots implementam **Dimensões de Mudança Lenta Tipo 2 (SCD2)**: eles rastreiam como uma linha muda ao longo do tempo mantendo todas as versões históricas com timestamps de validade.
 
 ### A Nova Especificação YAML de Snapshot (dbt-core 1.9+)
 
@@ -418,7 +418,7 @@ Views que referenciam tabelas externas do Redshift Spectrum **devem** usar `bind
   "question": "Por que views sobre tabelas externas do Redshift Spectrum devem usar `bind: false`?",
   "options": [
     "Tabelas Spectrum sao read-only e bind: true tentaria uma escrita",
-    "Views padrao (vinculadas) nao podem referenciar tabelas externas -- Redshift requer late-binding views para compatibilidade com Spectrum",
+    "Views padrao (vinculadas) nao podem referenciar tabelas externas: Redshift requer late-binding views para compatibilidade com Spectrum",
     "bind: false melhora a performance de consultas Spectrum",
     "Redshift Serverless requer bind: false para todas as views"
   ],
@@ -447,7 +447,7 @@ Views que referenciam tabelas externas do Redshift Spectrum **devem** usar `bind
 {
   "id": "dbt-rs-07-q5",
   "type": "multiple-choice",
-  "question": "Uma tabela fonte tem uma configuracao `freshness.filter` definida como `"event_date >= current_date - 2"`. O que isso faz?",
+  "question": "Uma tabela fonte tem uma configuracao `freshness.filter` definida como `\"event_date >= current_date - 2\"`. O que isso faz?",
   "options": [
     "Deleta dados mais antigos que 2 dias da fonte",
     "Limita a verificacao de frescor a linhas dos ultimos 2 dias, evitando varreduras completas em tabelas particionadas grandes",
@@ -465,10 +465,10 @@ Views que referenciam tabelas externas do Redshift Spectrum **devem** usar `bind
   "type": "multiple-choice",
   "question": "Você tem um arquivo seed com 800 linhas de codigos de paises que raramente mudam. Deve definir dist: all ou dist: even?",
   "options": [
-    "dist: even -- distribuicao uniforme e sempre o padrao seguro",
-    "dist: all -- copiar a tabela pequena completa para cada no de computacao para joins co-localizados",
-    "dist: key -- sempre usar uma chave para tabelas de consulta",
-    "Nenhuma config dist -- seeds usam distribuicao automatica automaticamente"
+    "dist: even: distribuicao uniforme e sempre o padrao seguro",
+    "dist: all: copiar a tabela pequena completa para cada no de computacao para joins co-localizados",
+    "dist: key: sempre usar uma chave para tabelas de consulta",
+    "Nenhuma config dist: seeds usam distribuicao automatica automaticamente"
   ],
   "correct": 1,
   "explanation": "Tabelas de referencia pequenas como codigos de paises (800 linhas) se beneficiam de dist: all. Cada no recebe uma copia completa, permitindo joins co-localizados com qualquer tabela fato ou dimensao independentemente da chave de distribuicao dessa tabela."
@@ -484,5 +484,5 @@ Views que referenciam tabelas externas do Redshift Spectrum **devem** usar `bind
 - Use `strategy: timestamp` quando uma coluna `updated_at` confiavel existe; use `strategy: check` quando voce precisa de deteccao de mudanca baseada em hash.
 - Defina `invalidate_hard_deletes: true` para fechar registros historicos quando linhas desaparecem da fonte.
 - Seeds sao ideais para dados de referencia pequenos e que mudam raramente (<1.000 linhas). Use `dist: all` para que todo join com o seed seja co-localizado.
-- Filtros de frescor de source (`freshness.filter`) limitam consultas de verificacao de frescor a particoes recentes -- essencial para tabelas brutas grandes particionadas por tempo.
-- Views sobre tabelas externas do Redshift Spectrum requerem `bind: false` -- views padrao nao podem referenciar tabelas externas.
+- Filtros de frescor de source (`freshness.filter`) limitam consultas de verificacao de frescor a particoes recentes: essencial para tabelas brutas grandes particionadas por tempo.
+- Views sobre tabelas externas do Redshift Spectrum requerem `bind: false`: views padrao nao podem referenciar tabelas externas.

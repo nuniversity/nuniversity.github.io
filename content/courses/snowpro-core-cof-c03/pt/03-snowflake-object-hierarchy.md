@@ -1,12 +1,12 @@
 ---
-title: "Domínio 1.3 — Hierarquia e Tipos de Objetos do Snowflake"
+title: "Domínio 1.3, Hierarquia e Tipos de Objetos do Snowflake"
 description: "Entenda como o Snowflake organiza seus objetos: organizações, contas, bancos de dados, schemas e todos os objetos de banco de dados, incluindo tabelas, views, stages, pipes, streams, tasks e mais."
 order: 3
 difficulty: intermediate
 duration: "60 min"
 ---
 
-# Domínio 1.3 — Hierarquia e Tipos de Objetos do Snowflake
+# Domínio 1.3: Hierarquia e Tipos de Objetos do Snowflake
 
 ## Peso no Exame
 
@@ -46,7 +46,7 @@ flowchart TD
 
 ## Organização
 
-Uma **Organização** é a entidade de nível mais alto do Snowflake — ela agrupa múltiplas contas Snowflake sob um único guarda-chuva:
+Uma **Organização** é a entidade de nível mais alto do Snowflake: ela agrupa múltiplas contas Snowflake sob um único guarda-chuva:
 
 - Habilita **recursos entre contas**: replicação, publicação no Snowflake Marketplace, relatórios de uso
 - Gerenciada pela role de sistema `ORGADMIN`
@@ -62,7 +62,7 @@ SHOW ORGANIZATION ACCOUNTS;
 
 ## Objetos de Nível de Conta
 
-Esses objetos existem no **nível de conta** — não estão contidos dentro de um banco de dados.
+Esses objetos existem no **nível de conta**: não estão contidos dentro de um banco de dados.
 
 | Objeto | Descrição |
 |---|---|
@@ -130,13 +130,13 @@ CREATE SCHEMA ANALYTICS.MARTS;
 
 ### Tabelas (Tables)
 
-O Snowflake possui múltiplos tipos de tabelas — compreender as diferenças é amplamente testado:
+O Snowflake possui múltiplos tipos de tabelas: compreender as diferenças é amplamente testado:
 
 | Tipo de Tabela | Persistência | Time Travel | Fail-Safe | Custo de Armazenamento |
 |---|---|---|---|---|
-| **Permanente (Permanent)** | Até ser descartada | 0–90 dias | 7 dias | Completo |
-| **Temporária (Temporary)** | Apenas na sessão | 0–1 dia | Nenhum | Completo (enquanto a sessão estiver ativa) |
-| **Transitória (Transient)** | Até ser descartada | 0–1 dia | Nenhum | Reduzido |
+| **Permanente (Permanent)** | Até ser descartada | 0 to 90 dias | 7 dias | Completo |
+| **Temporária (Temporary)** | Apenas na sessão | 0 to 1 dia | Nenhum | Completo (enquanto a sessão estiver ativa) |
+| **Transitória (Transient)** | Até ser descartada | 0 to 1 dia | Nenhum | Reduzido |
 | **Externa (External)** | Nunca (somente metadados) | Nenhum | Nenhum | Mínimo (apenas metadados) |
 | **Apache Iceberg** | Até ser descartada | Configurável | Configurável | Via catálogo Iceberg |
 | **Dinâmica (Dynamic)** | Até ser descartada | Configurável | Configurável | Completo |
@@ -196,7 +196,7 @@ SELECT id, nome FROM clientes;
 ```
 
 > [!NOTE]
-> **Views Materializadas** são mantidas automaticamente pelos serviços em segundo plano do Snowflake — nenhum warehouse é necessário para a atualização. São usadas para acelerar queries caras e repetidas.
+> **Views Materializadas** são mantidas automaticamente pelos serviços em segundo plano do Snowflake: nenhum warehouse é necessário para a atualização. São usadas para acelerar queries caras e repetidas.
 
 ### Stages
 
@@ -204,10 +204,10 @@ Um **stage** é uma localização nomeada onde os arquivos de dados são armazen
 
 | Tipo de Stage | Localização | Autenticação Gerenciada Por |
 |---|---|---|
-| **Interno — Usuário** | Armazenamento gerenciado pelo Snowflake, por usuário | Snowflake |
-| **Interno — Tabela** | Armazenamento gerenciado pelo Snowflake, por tabela | Snowflake |
-| **Interno — Nomeado** | Armazenamento gerenciado pelo Snowflake | Snowflake |
-| **Externo — Nomeado** | Bucket S3 / Azure Blob / GCS | Cliente |
+| **Interno: Usuário** | Armazenamento gerenciado pelo Snowflake, por usuário | Snowflake |
+| **Interno: Tabela** | Armazenamento gerenciado pelo Snowflake, por tabela | Snowflake |
+| **Interno: Nomeado** | Armazenamento gerenciado pelo Snowflake | Snowflake |
+| **Externo: Nomeado** | Bucket S3 / Azure Blob / GCS | Cliente |
 
 ```sql
 -- Stage interno nomeado
@@ -263,7 +263,7 @@ FILE_FORMAT = (FORMAT_NAME = meu_formato_csv);
 
 ### Streams
 
-Um **Stream** é um objeto de **CDC (Change Data Capture — Captura de Alterações de Dados)** que rastreia alterações DML (INSERT, UPDATE, DELETE) feitas em uma tabela de origem:
+Um **Stream** é um objeto de **CDC (Change Data Capture: Captura de Alterações de Dados)** que rastreia alterações DML (INSERT, UPDATE, DELETE) feitas em uma tabela de origem:
 
 ```sql
 -- Criar um stream em uma tabela
@@ -278,7 +278,7 @@ FROM stream_pedidos;
 ```
 
 > [!NOTE]
-> Streams possuem um **offset** (posição de leitura) — uma vez consumido o stream (ex.: em uma Task ou DML), o offset avança. Streams rastreiam alterações usando internamente o **Time Travel** do Snowflake.
+> Streams possuem um **offset** (posição de leitura): uma vez consumido o stream (ex.: em uma Task ou DML), o offset avança. Streams rastreiam alterações usando internamente o **Time Travel** do Snowflake.
 
 ### Tasks (Tarefas Agendadas)
 
@@ -315,7 +315,7 @@ INSERT INTO pedidos (id, valor)
 VALUES (seq_id_pedido.NEXTVAL, 99.99);
 ```
 
-### UDFs — User-Defined Functions (Funções Definidas pelo Usuário)
+### UDFs: User-Defined Functions (Funções Definidas pelo Usuário)
 
 UDFs estendem o SQL com lógica personalizada:
 
@@ -373,7 +373,7 @@ CALL carregar_dados_diarios('2025-01-15');
 
 ### Shares (Compartilhamentos)
 
-Um **Share** é um objeto que habilita o **Compartilhamento Seguro de Dados (Secure Data Sharing)** — concedendo acesso somente leitura aos dados da sua conta para outra conta Snowflake sem copiar os dados:
+Um **Share** é um objeto que habilita o **Compartilhamento Seguro de Dados (Secure Data Sharing)**: concedendo acesso somente leitura aos dados da sua conta para outra conta Snowflake sem copiar os dados:
 
 ```sql
 -- Lado do provedor: criar e popular um share
@@ -392,7 +392,7 @@ ALTER SHARE compartilhamento_vendas ADD ACCOUNTS = id_conta_consumidor;
 
 ### Contexto de Sessão
 
-O Snowflake mantém o contexto de cada sessão — a conta, role, warehouse, banco de dados e schema ativos:
+O Snowflake mantém o contexto de cada sessão: a conta, role, warehouse, banco de dados e schema ativos:
 
 ```sql
 -- Ver o contexto atual

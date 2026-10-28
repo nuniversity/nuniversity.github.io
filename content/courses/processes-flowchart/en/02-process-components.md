@@ -14,11 +14,11 @@ Every process, no matter how simple or complex, is built from a set of fundament
 
 All processes consist of five fundamental elements:
 
-1. **Inputs** — Resources that enter the process
-2. **Transformations** — Actions that change the inputs
-3. **Outputs** — Results that exit the process
-4. **Decision Points** — Places where the process branches
-5. **Actors** — Entities that perform the actions
+1. **Inputs**: Resources that enter the process
+2. **Transformations**: Actions that change the inputs
+3. **Outputs**: Results that exit the process
+4. **Decision Points**: Places where the process branches
+5. **Actors**: Entities that perform the actions
 
 ```mermaid
 flowchart LR
@@ -348,10 +348,10 @@ Identify what's missing:
 
 - Every process has **five core components**: inputs, transformations, outputs, decision points, and actors
 - **Input quality** directly determines output quality
-- **Transformations** should be atomic — one thing per step
+- **Transformations** should be atomic: one thing per step
 - **Decision points** should have clear, documented criteria
 - **Actors** need clearly defined responsibilities (use RACI)
 - Understanding components makes it easier to **analyze** and **improve** any process
 
 > [!SUCCESS] You've Completed Lesson 2
-> You now understand the building blocks of every process. In the next lesson, we'll explore **flowcharts** — the visual language used to document and communicate processes.
+> You now understand the building blocks of every process. In the next lesson, we'll explore **flowcharts**: the visual language used to document and communicate processes.

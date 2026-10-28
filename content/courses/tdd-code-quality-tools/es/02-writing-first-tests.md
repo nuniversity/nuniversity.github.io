@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Escribir tus primeras pruebas
 
-Ahora que entiendes la mentalidad TDD, es hora de escribir pruebas reales. Usaremos **pytest** — el framework de pruebas más popular de Python — para construir una base sólida de pruebas.
+Ahora que entiendes la mentalidad TDD, es hora de escribir pruebas reales. Usaremos **pytest**, el framework de pruebas más popular de Python, para construir una base sólida de pruebas.
 
 ## ¿Por qué pytest?
 
@@ -97,7 +97,7 @@ markers =
 
 ## Aserciones básicas en pytest
 
-pytest usa el `assert` integrado de Python con una **introspección detallada** — cuando una aserción falla, pytest te muestra los valores de todas las expresiones implicadas.
+pytest usa el `assert` integrado de Python con una **introspección detallada**: cuando una aserción falla, pytest te muestra los valores de todas las expresiones implicadas.
 
 ```python
 # test_assertions.py

@@ -1,13 +1,13 @@
 ---
 title: "Operações e Cadeia de Valor com Impacto"
-description: "Cadeia de valor de Porter aplicada aos cinco modelos de empresa, SCOR, normas de cadeia responsável (ISO 26000, ISO 20400, GRI 308 e 414), compras públicas e colaborativas, Lean, matriz de fornecedor e indicadores operacionais — com contas resolvidas, benchmarks verificados e o veredito comparativo entre tradicional, parceria, cooperativa, ONG e empresa híbrida."
+description: "Cadeia de valor de Porter aplicada aos cinco modelos de empresa, SCOR, normas de cadeia responsável (ISO 26000, ISO 20400, GRI 308 e 414), compras públicas e colaborativas, Lean, matriz de fornecedor e indicadores operacionais, com contas resolvidas, benchmarks verificados e o veredito comparativo entre tradicional, parceria, cooperativa, ONG e empresa híbrida."
 order: 11
 difficulty: "intermediate"
 duration: "90 min"
 ---
 # Operações e Cadeia de Valor com Impacto
 
-Toda empresa híbrida descobre cedo uma verdade desconfortável: **a missão não entrega sozinha**. O que chega ao beneficiário depende de compra, estoque, transporte, prazo e qualidade — isto é, depende de **operação**. E a operação é justamente onde o discurso de impacto costuma vazar: fala-se em renda localizada enquanto o comprador continua escolhendo pelo menor preço, e fala-se em eficiência enquanto o indicador reportado é apenas "atendimentos realizados". Esta lição trata do outro lado do livro-caixa: **como a cadeia de valor se desenha em cada um dos cinco modelos de empresa**, que normas existem para cadeia responsável, como se compra de forma ética e colaborativa, e como os indicadores operacionais — prazo, giro, capacidade, desperdício — se ligam a impacto auditável.
+Toda empresa híbrida descobre cedo uma verdade desconfortável: **a missão não entrega sozinha**. O que chega ao beneficiário depende de compra, estoque, transporte, prazo e qualidade; isto é, depende de **operação**. E a operação é justamente onde o discurso de impacto costuma vazar: fala-se em renda localizada enquanto o comprador continua escolhendo pelo menor preço, e fala-se em eficiência enquanto o indicador reportado é apenas "atendimentos realizados". Esta lição trata do outro lado do livro-caixa: **como a cadeia de valor se desenha em cada um dos cinco modelos de empresa**, que normas existem para cadeia responsável, como se compra de forma ética e colaborativa, e como os indicadores operacionais: prazo, giro, capacidade, desperdício: se ligam a impacto auditável.
 
 ```text
 ====================================================================
@@ -36,7 +36,7 @@ Toda empresa híbrida descobre cedo uma verdade desconfortável: **a missão nã
 ```
 
 > [!NOTE]
-> **Por que operação é assunto de empresa híbrida e não de departamento técnico.** No modelo tradicional, a cadeia existe para maximizar margem. Na ONG, ela existe para cumprir o objeto social com verba escassa. Na empresa híbrida, ela precisa fazer as duas coisas **ao mesmo tempo**: entregar resultado social **e** sustentar economicamente a operação. Por isso a cadeia deixa de ser assunto de logística e vira assunto de **repartição de valor** — ver a Lição 5.
+> **Por que operação é assunto de empresa híbrida e não de departamento técnico.** No modelo tradicional, a cadeia existe para maximizar margem. Na ONG, ela existe para cumprir o objeto social com verba escassa. Na empresa híbrida, ela precisa fazer as duas coisas **ao mesmo tempo**: entregar resultado social **e** sustentar economicamente a operação. Por isso a cadeia deixa de ser assunto de logística e vira assunto de **repartição de valor**: ver a Lição 5.
 
 Nesta lição você vai:
 
@@ -74,10 +74,10 @@ A cadeia de valor foi proposta por **Michael Porter em 1985**, na obra sobre van
 
 Duas precisões metodológicas evitam os dois erros clássicos de prova e de diagnóstico:
 
-1. **As atividades de apoio são quatro**: infraestrutura, gestão de pessoas, tecnologia e aquisição — nenhuma delas é primária;
+1. **As atividades de apoio são quatro**: infraestrutura, gestão de pessoas, tecnologia e aquisição: nenhuma delas é primária;
 2. **O nível correto de análise é a unidade de negócio**, e não a corporação: uma holding com três linhas de produto precisa de três cadeias, não de uma média.
 
-> **🔢 Você sabia?** A cadeia de valor nasceu como ferramenta de **estratégia competitiva**, não de responsabilidade social. Foi o trabalho sobre **valor compartilhado** (CSV) — e, depois, a proposta de **cadeia de valor híbrida** — que puseram o impacto dentro das atividades, em vez de ao lado delas. A mesma planta, a mesma lista de atividades, uma pergunta diferente em cada casa.
+> **🔢 Você sabia?** A cadeia de valor nasceu como ferramenta de **estratégia competitiva**, não de responsabilidade social. Foi o trabalho sobre **valor compartilhado** (CSV), e, depois, a proposta de **cadeia de valor híbrida**, que puseram o impacto dentro das atividades, em vez de ao lado delas. A mesma planta, a mesma lista de atividades, uma pergunta diferente em cada casa.
 
 ### 1.2 Margem: a conta que liga operação a resultado
 
@@ -85,7 +85,7 @@ $$
 \text{Margem} = \text{valor pago pelo cliente} - \sum \text{custo das atividades}
 $$
 
-Em empresa híbrida, a margem tem **duas leituras simultâneas**: a financeira (sobra de caixa após os custos) e a social (benefício entregue por real gasto). A Lição 7 mostrou como medir a segunda; aqui interessa o mecanismo: **toda atividade que reduz custo sem reduzir entrega aumenta as duas margens ao mesmo tempo**. É por isso que eficiência operacional, nesta lição, não é tema de engenharia — é **fonte de valor a repartir** (Exemplo 4).
+Em empresa híbrida, a margem tem **duas leituras simultâneas**: a financeira (sobra de caixa após os custos) e a social (benefício entregue por real gasto). A Lição 7 mostrou como medir a segunda; aqui interessa o mecanismo: **toda atividade que reduz custo sem reduzir entrega aumenta as duas margens ao mesmo tempo**. É por isso que eficiência operacional, nesta lição, não é tema de engenharia: é **fonte de valor a repartir** (Exemplo 4).
 
 ---
 
@@ -103,7 +103,7 @@ A cadeia de fornecimento evoluiu de dentro para fora da firma. Primeiro foi **lo
 
 ### 2.2 SCOR: os cinco processos de referência
 
-O **SCOR** é o modelo de referência *de facto* da cadeia de fornecimento, criado pelo Supply-Chain Council e hoje sob a ASCM/APICS. Ele organiza a operação em **cinco processos** que se repetem em qualquer modelo de empresa — e é exatamente essa regularidade que permite comparar uma ONG, uma cooperativa e uma indústria com a mesma régua.
+O **SCOR** é o modelo de referência *de facto* da cadeia de fornecimento, criado pelo Supply-Chain Council e hoje sob a ASCM/APICS. Ele organiza a operação em **cinco processos** que se repetem em qualquer modelo de empresa, e é exatamente essa regularidade que permite comparar uma ONG, uma cooperativa e uma indústria com a mesma régua.
 
 **Ordem dos processos no SCOR:**
 
@@ -111,25 +111,25 @@ O **SCOR** é o modelo de referência *de facto* da cadeia de fornecimento, cria
 {
   "question": "Ordene os cinco processos do SCOR, na sequência em que eles descrevem o fluxo da cadeia:",
   "items": [
-    "Planejar — equilibrar recursos, capacidade e demanda",
-    "Abastecer — adquirir bens e serviços de fornecedores",
-    "Fabricar — produzir o produto ou preparar o serviço",
-    "Entregar — gerar pedidos, transportar e entregar ao cliente",
-    "Devolver — receber devoluções de produto ou material"
+    "Planejar: equilibrar recursos, capacidade e demanda",
+    "Abastecer: adquirir bens e serviços de fornecedores",
+    "Fabricar: produzir o produto ou preparar o serviço",
+    "Entregar: gerar pedidos, transportar e entregar ao cliente",
+    "Devolver: receber devoluções de produto ou material"
   ],
   "correctOrder": [
-    "Planejar — equilibrar recursos, capacidade e demanda",
-    "Abastecer — adquirir bens e serviços de fornecedores",
-    "Fabricar — produzir o produto ou preparar o serviço",
-    "Entregar — gerar pedidos, transportar e entregar ao cliente",
-    "Devolver — receber devoluções de produto ou material"
+    "Planejar: equilibrar recursos, capacidade e demanda",
+    "Abastecer: adquirir bens e serviços de fornecedores",
+    "Fabricar: produzir o produto ou preparar o serviço",
+    "Entregar: gerar pedidos, transportar e entregar ao cliente",
+    "Devolver: receber devoluções de produto ou material"
   ],
   "explanation": "O SCOR começa pelo planejamento, que precede a execução; depois vêm abastecer (entrada), fabricar (transformação), entregar (saída) e devolver (retorno). A ordem espelha a cadeia de valor de Porter: logística de entrada, operações, logística de saída e serviço, com o retorno acrescentado pela lógica de ciclo fechado."
 }
 ```
 
 > [!WARNING]
-> **Existe um "SCFO"? Não.** Nenhuma fonte consultada sobre cadeia de fornecimento ou responsabilidade social corporativa localizou um framework com essa sigla. O que existe e está verificado é o **SCOR**. Repetir "SCFO" em prova, em projeto ou em relatório é sinal de material inventado — substitua por SCOR e cite o Supply-Chain Council/ASCM.
+> **Existe um "SCFO"? Não.** Nenhuma fonte consultada sobre cadeia de fornecimento ou responsabilidade social corporativa localizou um framework com essa sigla. O que existe e está verificado é o **SCOR**. Repetir "SCFO" em prova, em projeto ou em relatório é sinal de material inventado: substitua por SCOR e cite o Supply-Chain Council/ASCM.
 
 ### 2.3 O diagrama do fluxo completo
 
@@ -165,17 +165,17 @@ O **SCOR** é o modelo de referência *de facto* da cadeia de fornecimento, cria
 
 ## 3. A cadeia de valor comparada nos cinco modelos de empresa
 
-Este é o núcleo da lição. A mesma cadeia — compras, operações, distribuição, marketing, serviço, apoio — se desenha de **cinco maneiras diferentes** conforme o modelo, e a diferença não é de estilo: é de **quem decide, para quem se entrega e para onde vai o excedente**.
+Este é o núcleo da lição. A mesma cadeia, compras, operações, distribuição, marketing, serviço, apoio, se desenha de **cinco maneiras diferentes** conforme o modelo, e a diferença não é de estilo: é de **quem decide, para quem se entrega e para onde vai o excedente**.
 
 **Modelos comparados:**
 
-- **M1 — Tradicional:** empresa privada lucrativa;
-- **M2 — Cooperativa de economia solidária** (Lei nº 5.764/1971 e Lei nº 12.690/2012);
-- **M3 — ONG/OSCIP** (Lei nº 13.019/2014);
-- **M4 — Empresa híbrida de impacto** (negócio social / empresa de impacto);
-- **M5 — Consórcio e rede de compras colaborativas** (cadeia solidária).
+- **M1: Tradicional:** empresa privada lucrativa;
+- **M2: Cooperativa de economia solidária** (Lei nº 5.764/1971 e Lei nº 12.690/2012);
+- **M3: ONG/OSCIP** (Lei nº 13.019/2014);
+- **M4: Empresa híbrida de impacto** (negócio social / empresa de impacto);
+- **M5: Consórcio e rede de compras colaborativas** (cadeia solidária).
 
-| Atividade | M1 — Tradicional | M2 — Cooperativa | M3 — ONG/OSCIP | M4 — Híbrida de impacto | M5 — Compras colaborativas |
+| Atividade | M1: Tradicional | M2: Cooperativa | M3: ONG/OSCIP | M4: Híbrida de impacto | M5: Compras colaborativas |
 |---|---|---|---|---|---|
 | **Logística de entrada / compras** | Menor preço, fornecedores globais, lote grande | Compras entre cooperadas; poder de compra coletivo | Cotação mínima, volume pequeno, dependência de doações | Fornecedor social triado (GRI 414-1 e 308-1) | Pedidos consolidados; menos frete e estoque |
 | **Operações** | Escala, automatização, custo unitário | Autogestão; remuneração limitada ao trabalho | Atividade-fim não comercial; equipe enxuta | Custo unitário + impacto por unidade | Processos padronizados; especialização por elo |
@@ -190,11 +190,11 @@ Este é o núcleo da lição. A mesma cadeia — compras, operações, distribui
 
 Três leituras tiram mais proveito da tabela do que a decoreba:
 
-1. **A linha "compras" é onde os cinco modelos mais divergem** — e é ali que o impacto é decidido, porque 2/3 do impacto positivo total de uma organização estão na sua cadeia de fornecimento (GSEA, divulgado pelo SSIR Brasil, 2025);
+1. **A linha "compras" é onde os cinco modelos mais divergem**, e é ali que o impacto é decidido, porque 2/3 do impacto positivo total de uma organização estão na sua cadeia de fornecimento (GSEA, divulgado pelo SSIR Brasil, 2025);
 2. **A cooperativa e a rede colaborativa ganham escala sem perder governança**: o poder de compra coletivo é a forma mais barata de comprar bem **e** de pagar melhor o fornecedor local;
-3. **A híbrida é a única que precisa assinar as duas colunas**: relatório de impacto para a comunidade **e** retorno auditável para o capital — a mesma tensão que a Lição 4 chamou de governança dupla.
+3. **A híbrida é a única que precisa assinar as duas colunas**: relatório de impacto para a comunidade **e** retorno auditável para o capital: a mesma tensão que a Lição 4 chamou de governança dupla.
 
-> **🔢 Você sabia?** O estudo *Ecoa Cenários* (Yunus Negócios Sociais, ANDE e SAP Business Network, 2025) apontou que **90%** dos executivos ouvidos acreditam que comprar de fornecedores diversos deixa a empresa **mais eficiente** — mas apenas **6%** conhecem a própria base de fornecedores diversos e só **1%** identificam uma base **liderada por mulheres** (ONU Mulheres/FGV, 2021). A crença no ganho de eficiência anda muito à frente do dado operacional.
+> **🔢 Você sabia?** O estudo *Ecoa Cenários* (Yunus Negócios Sociais, ANDE e SAP Business Network, 2025) apontou que **90%** dos executivos ouvidos acreditam que comprar de fornecedores diversos deixa a empresa **mais eficiente**, mas apenas **6%** conhecem a própria base de fornecedores diversos e só **1%** identificam uma base **liderada por mulheres** (ONU Mulheres/FGV, 2021). A crença no ganho de eficiência anda muito à frente do dado operacional.
 
 ---
 
@@ -202,28 +202,28 @@ Três leituras tiram mais proveito da tabela do que a decoreba:
 
 ### 4.1 O inventário que pode ser citado
 
-A cadeia responsável se apoia em normas e frameworks **com fonte e ano**. A tabela abaixo é o inventário verificado desta lição — nada além dele deve ser citado como norma.
+A cadeia responsável se apoia em normas e frameworks **com fonte e ano**. A tabela abaixo é o inventário verificado desta lição: nada além dele deve ser citado como norma.
 
 | # | Instrumento | O que é, de fato | Fonte/ano |
 |---|---|---|---|
 | 1 | **ISO 26000:2010 / ABNT NBR ISO 26000** | Diretrizes de responsabilidade social; **não é sistema de gestão e não é certificável**; reconfirmada em 2025; 7 temas; a esfera de influência alcança a cadeia | ISO (2010/2025); Inmetro (2010) |
-| 2 | **ISO 20400 — Compras Sustentáveis** | Base declarada do guia federal de critérios de sustentabilidade nas compras públicas | Ministério da Gestão e da Inovação/Compras.gov.br (2025) |
+| 2 | **ISO 20400: Compras Sustentáveis** | Base declarada do guia federal de critérios de sustentabilidade nas compras públicas | Ministério da Gestão e da Inovação/Compras.gov.br (2025) |
 | 3 | **GRI 308-1/308-2 e GRI 414-1/414-2** | Triagem de fornecedores por critérios ambientais (308) e sociais (414) e ações sobre impactos; efetivos desde 01/07/2018 | Global Reporting Initiative (2016) |
 | 4 | **SCOR** | Processos da cadeia: planejar, abastecer, fabricar, entregar, devolver | Supply-Chain Council/ASCM; Stephens (2001) |
 | 5 | **IN SLTI/MP nº 1/2010 + Decreto nº 7.746/2012** | Institui e consolida as compras públicas sustentáveis na administração federal | Guia MGI (2025); TCU (s/d) |
 | 6 | **Lei nº 14.133/2021** | Art. 34, §1º: admite critérios de sustentabilidade nas especificações; disciplina a habilitação de cooperativas | Planalto (2021) |
 | 7 | **Lei nº 14.628/2023 + Decreto nº 11.802/2023** | PAA e Cozinha Solidária: **mínimo de 30%** das compras públicas de alimentos da agricultura familiar | Planalto; MDA (2024); MDS (2025) |
-| 8 | **Lei nº 12.690/2012 (PNES), Lei nº 5.764/1971, LC nº 130/2009** | Marcos da economia solidária, do cooperativismo e das OSCIP — base das compras cooperativas e solidárias | Via Lei nº 14.133/2021 |
+| 8 | **Lei nº 12.690/2012 (PNES), Lei nº 5.764/1971, LC nº 130/2009** | Marcos da economia solidária, do cooperativismo e das OSCIP: base das compras cooperativas e solidárias | Via Lei nº 14.133/2021 |
 | 9 | **Lei nº 12.305/2010 (PNRS) e ODS 12.7** | Política nacional de resíduos sólidos e meta de compras públicas sustentáveis | TCU (s/d) |
 | 10 | **Lean / manufatura enxuta** | Abordagem gerencial, **não norma**: 7 desperdícios, mapeamento de fluxo de valor, kanban, SMED, TPM, 5S, controle estatístico | NIST TN 1890 (2015) |
 | 11 | **Porter (1985), valor compartilhado e cadeia de valor híbrida** | Ferramentas analíticas: atividades, valor compartilhado e a parceria empresa + empreendimento social | Porter (1985); Harvard (s/d); HBR (2010); ICE/FGV (2014) |
 
 ### 4.2 ISO 26000: diretriz, não certificado
 
-A **ISO 26000:2010** fornece **diretrizes, não requisitos**, e **não é certificável** — a própria ISO classifica a oferta de certificação como **uso indevido** da norma. A versão brasileira é a **ABNT NBR ISO 26000**, publicada em 08/12/2010 e **reconfirmada em 2025**. Ela organiza a responsabilidade social em **7 temas** — governança, direitos humanos, práticas de trabalho, meio ambiente, operações justas com consumidor, questões do consumidor e comunidade — e se aplica aos impactos **dentro da esfera de influência** da organização, o que alcança explicitamente a cadeia de fornecimento.
+A **ISO 26000:2010** fornece **diretrizes, não requisitos**, e **não é certificável**: a própria ISO classifica a oferta de certificação como **uso indevido** da norma. A versão brasileira é a **ABNT NBR ISO 26000**, publicada em 08/12/2010 e **reconfirmada em 2025**. Ela organiza a responsabilidade social em **7 temas**: governança, direitos humanos, práticas de trabalho, meio ambiente, operações justas com consumidor, questões do consumidor e comunidade, e se aplica aos impactos **dentro da esfera de influência** da organização, o que alcança explicitamente a cadeia de fornecimento.
 
 > [!WARNING]
-> **Armadilha de norma:** "certificação ISO 26000" **não existe**. Se um fornecedor ou um consultor oferecer selo ISO 26000, trata-se de uso indevido declarado pela própria ISO. O que se pode fazer com a norma é **usá-la como guia de diligência na cadeia**: mapear impactos, definir políticas e prestar contas — não comprar um selo.
+> **Armadilha de norma:** "certificação ISO 26000" **não existe**. Se um fornecedor ou um consultor oferecer selo ISO 26000, trata-se de uso indevido declarado pela própria ISO. O que se pode fazer com a norma é **usá-la como guia de diligência na cadeia**: mapear impactos, definir políticas e prestar contas: não comprar um selo.
 
 ### 4.3 GRI 308 e 414: o que a triagem de fornecedor exige revelar
 
@@ -247,7 +247,7 @@ As normas **GRI 308 (ambiental)** e **GRI 414 (social)** de fornecedores, de 201
 }
 ```
 
-- **🔢 Você sabia?** A **ABNT NBR ISO 26000** foi **reconfirmada em 2025**, quinze anos após a publicação original de 2010. Reconfirmar significa que um comitê técnico revisou a norma e decidiu mantê-la vigente — indício de que a diretriz de responsabilidade social continua sendo a referência da ISO para a matéria, mesmo sem poder virar certificado.
+- **🔢 Você sabia?** A **ABNT NBR ISO 26000** foi **reconfirmada em 2025**, quinze anos após a publicação original de 2010. Reconfirmar significa que um comitê técnico revisou a norma e decidiu mantê-la vigente: indício de que a diretriz de responsabilidade social continua sendo a referência da ISO para a matéria, mesmo sem poder virar certificado.
 
 ---
 
@@ -269,17 +269,17 @@ O Brasil tem um arcabouço específico para compras com impacto, e ele é **usá
 
 Os números explicam por que essa agenda não é nicho:
 
-- **Compras governamentais ≈ 9,4% do PIB** (Banco Mundial/TCU); a AGU afirmou, na COP 30 (2025), que as contratações públicas equivalem a **≈ 12% do PIB** — divergência de base e de ano que precisa ser registrada, não escondida;
+- **Compras governamentais ≈ 9,4% do PIB** (Banco Mundial/TCU); a AGU afirmou, na COP 30 (2025), que as contratações públicas equivalem a **≈ 12% do PIB**: divergência de base e de ano que precisa ser registrada, não escondida;
 - **Só a esfera federal em 2022: R$ 163 bilhões em 148 mil processos**;
 - **Compras corporativas brasileiras: R$ 1,6 trilhão em 2025** (varejo 47,7% + indústria 32,6% = 80,3% do total), e **95% dos CNPJs compram de até 80 fornecedores** (Qive, 2025).
 
-Ou seja: entre o Estado e as empresas privadas, o dinheiro que atravessa a cadeia é medido em **trilhões** — e cada critério de sustentabilidade colocado numa especificação move impacto em escala nacional.
+Ou seja: entre o Estado e as empresas privadas, o dinheiro que atravessa a cadeia é medido em **trilhões**, e cada critério de sustentabilidade colocado numa especificação move impacto em escala nacional.
 
-### 5.3 Exemplo 3 — PAA: compras sociais em escala pública
+### 5.3 Exemplo 3, PAA: compras sociais em escala pública
 
-**[CASO REAL]** A Lei nº 14.628/2023 instituiu no Programa de Aquisição de Alimentos (PAA) o **mínimo de 30%** das compras públicas de gêneros alimentícios da agricultura familiar; o Decreto nº 11.802/2023 regulamenta. Em **29/08/2025** o Ministério do Desenvolvimento Social publicou portarias de **R$ 152 milhões**, com **1.843 adesões**; o orçamento do PAA passou de **R$ 553 milhões (2022)** para **R$ 716 milhões (2023)**; o teto é de **R$ 1,5 milhão por ano por fornecedor**; e o Contrata+Brasil alcança **1.091 órgãos**, com adesão obrigatória desde **01º/07/2026**. (MDS/MDA, 2023–2025)
+**[CASO REAL]** A Lei nº 14.628/2023 instituiu no Programa de Aquisição de Alimentos (PAA) o **mínimo de 30%** das compras públicas de gêneros alimentícios da agricultura familiar; o Decreto nº 11.802/2023 regulamenta. Em **29/08/2025** o Ministério do Desenvolvimento Social publicou portarias de **R$ 152 milhões**, com **1.843 adesões**; o orçamento do PAA passou de **R$ 553 milhões (2022)** para **R$ 716 milhões (2023)**; o teto é de **R$ 1,5 milhão por ano por fornecedor**; e o Contrata+Brasil alcança **1.091 órgãos**, com adesão obrigatória desde **01º/07/2026**. (MDS/MDA, 2023 to 2025)
 
-**[SIMULAÇÃO derivada]** Com o teto de R$ 1,5 milhão: **R$ 152 mi ÷ R$ 1,5 mi ≈ 101 organizações** no limite máximo; já a R$ 300 mil/ano de renda média por fornecedor, o mesmo dinheiro alcança **≈ 507 organizações**. A escolha entre teto alto e capilaridade é, portanto, uma **decisão de política de compra** — e vale para a empresa híbrida que define o tamanho do lote social.
+**[SIMULAÇÃO derivada]** Com o teto de R$ 1,5 milhão: **R$ 152 mi ÷ R$ 1,5 mi ≈ 101 organizações** no limite máximo; já a R$ 300 mil/ano de renda média por fornecedor, o mesmo dinheiro alcança **≈ 507 organizações**. A escolha entre teto alto e capilaridade é, portanto, uma **decisão de política de compra**, e vale para a empresa híbrida que define o tamanho do lote social.
 
 > **🔢 Você sabia?** O PAA é anterior à Lei nº 14.628/2023: o programa nasceu em **2003** (Lei nº 10.696) e integra a linha do tempo que inclui a LC nº 130/2009 (OSCIP), a PNES de 2012, a Lei nº 13.019/2014 (MROSC) e a Lei nº 14.133/2021. Compras de impacto, no Brasil, têm duas décadas de trilha normativa.
 
@@ -289,7 +289,7 @@ Ou seja: entre o Estado e as empresas privadas, o dinheiro que atravessa a cadei
 
 ### 6.1 A matriz fornecedor × critérios
 
-Escolher fornecedor é o momento em que a política de impacto deixa de ser declaração. A matriz abaixo ordena **impacto, custo e risco** com pesos e escores de 1 (fraco) a 5 (excelente). Os pesos e notas são **elaboração didática ancorada** nas GRI 308/414 (2016), na ISO 26000 (2010) e no guia federal de 2025 — **não são dados de fonte**.
+Escolher fornecedor é o momento em que a política de impacto deixa de ser declaração. A matriz abaixo ordena **impacto, custo e risco** com pesos e escores de 1 (fraco) a 5 (excelente). Os pesos e notas são **elaboração didática ancorada** nas GRI 308/414 (2016), na ISO 26000 (2010) e no guia federal de 2025: **não são dados de fonte**.
 
 | Critério | Peso | Tradicional (grande) | Cooperativa local | Empresa de impacto/OSCIP | Rede colaborativa |
 |---|---|---|---|---|---|
@@ -300,15 +300,15 @@ Escolher fornecedor é o momento em que a política de impacto deixa de ser decl
 | Risco socioambiental e reputacional | 10% | 3 | 4 | 4 | 4 |
 | Prontidão documental (GRI 414-1, cadastros) | 10% | 5 | 2 | 3 | 3 |
 | **Nota ponderada** | **100%** | **3,75** | **3,65** | **3,60** | **3,90** |
-| Leitura | — | Ganha em custo e risco | Ganha impacto, perde prontidão | Melhor impacto, maior risco de escala | **Melhor equilíbrio** |
+| Leitura |: | Ganha em custo e risco | Ganha impacto, perde prontidão | Melhor impacto, maior risco de escala | **Melhor equilíbrio** |
 
 *Nota = Σ(peso × escore). Exemplo do cálculo da rede colaborativa: 0,25×4 + 0,15×4 + 0,25×4 + 0,15×4 + 0,10×4 + 0,10×3 = 1,00 + 0,60 + 1,00 + 0,60 + 0,40 + 0,30 = **3,90**.*
 
 A matriz entrega três conclusões práticas:
 
 1. **Nenhum modelo vence em tudo**: o fornecedor grande vence em custo e risco documental, mas perde em impacto social;
-2. **A rede colaborativa é o único perfil que lidera** — e ela é justamente a combinação de escala com governança cooperativa;
-3. **O "prêmio de impacto" do fornecedor social pode ser absorvido pela escala** — é o que o Exemplo 1 demonstra com número.
+2. **A rede colaborativa é o único perfil que lidera**, e ela é justamente a combinação de escala com governança cooperativa;
+3. **O "prêmio de impacto" do fornecedor social pode ser absorvido pela escala**: é o que o Exemplo 1 demonstra com número.
 
 ### 6.2 Triagem na prática: o que as empresas publicam
 
@@ -338,9 +338,9 @@ O cooperativismo brasileiro é a maior infraestrutura de compra e venda solidár
 | Sobras distribuídas | **R$ 51,4 bilhões** |
 | Efeito territorial | Municípios com cooperativas têm **+R$ 5,1 mil** de PIB per capita (OCB/FIPE) |
 
-*Fonte: Sistema OCB, 2024–2025.*
+*Fonte: Sistema OCB, 2024 to 2025.*
 
-### 7.2 Exemplo 1 — cadeia encurtada: cooperativa local × atacado
+### 7.2 Exemplo 1, cadeia encurtada: cooperativa local × atacado
 
 **[SIMULAÇÃO]** Premissas: 10.000 un./mês; atacado a R$ 40,00 + frete do distribuidor de R$ 2,00; cooperativa a R$ 44,00 (+10%) + frete próprio de R$ 3,50.
 
@@ -349,18 +349,18 @@ O cooperativismo brasileiro é a maior infraestrutura de compra e venda solidár
 - **Prêmio de impacto:** **+R$ 55.000/mês = R$ 660.000/ano** de renda localizada, equivalentes a **≈ 55 cooperados a R$ 1.000/mês**;
 - **Com frete consolidado a R$ 1,80/unidade:** B = R$ 458.000 → o prêmio cai para **+9,0%**.
 
-**Conclusão:** a escala colaborativa **paga parte do impacto**. O prêmio de 13,1% cai para 9,0% sem nenhuma renúncia social — e a matriz da seção 6 explica por que a rede colaborativa pontua 3,90.
+**Conclusão:** a escala colaborativa **paga parte do impacto**. O prêmio de 13,1% cai para 9,0% sem nenhuma renúncia social, e a matriz da seção 6 explica por que a rede colaborativa pontua 3,90.
 
-### 7.3 Exemplo 2 — frete consolidado entre cooperativas
+### 7.3 Exemplo 2: frete consolidado entre cooperativas
 
 **[SIMULAÇÃO]** Cinco cooperativas, cada uma com 3 t/mês, frete a R$ 1.100/t.
 
 - **Individual:** 15 t × R$ 1.100 = **R$ 16.500/mês** (R$ 3.300 por cooperativa);
 - **Consolidado:** 15 t × R$ 620 = **R$ 9.300/mês**;
-- **Economia:** **R$ 7.200/mês = 43,6% = R$ 86.400/ano na rede** — valor que, na híbrida, não fica só na margem: é **fonte a repartir** (seção 9, Exemplo 4).
+- **Economia:** **R$ 7.200/mês = 43,6% = R$ 86.400/ano na rede**: valor que, na híbrida, não fica só na margem: é **fonte a repartir** (seção 9, Exemplo 4).
 
 > [!WARNING]
-> **Honestidade dos números:** o caso brasileiro de compras conjuntas entre cooperativas **com números auditados não foi localizado** nesta pesquisa. Os valores dos Exemplos 1 e 2 são **simulações didáticas com premissas explícitas**, não dados de fonte. Em prova e em projeto, diga "simulação" — é o que separa método de propaganda.
+> **Honestidade dos números:** o caso brasileiro de compras conjuntas entre cooperativas **com números auditados não foi localizado** nesta pesquisa. Os valores dos Exemplos 1 e 2 são **simulações didáticas com premissas explícitas**, não dados de fonte. Em prova e em projeto, diga "simulação": é o que separa método de propaganda.
 
 ---
 
@@ -370,7 +370,7 @@ O cooperativismo brasileiro é a maior infraestrutura de compra e venda solidár
 
 | Indicador | Valor | Fonte/ano |
 |---|---|---|
-| Custo logístico / PIB — Brasil | **15,5%** (R$ 1,96 trilhão) em 2025; 15,6% (2024); pico de 16% (2022–23); 10,4% (2014) | Ilos/Valor, 2025 (publicado em 2026) |
+| Custo logístico / PIB: Brasil | **15,5%** (R$ 1,96 trilhão) em 2025; 15,6% (2024); pico de 16% (2022 to 23); 10,4% (2014) | Ilos/Valor, 2025 (publicado em 2026) |
 | Composição do custo logístico (2015) | transporte 6,8% + estoque 4,5% + armazenagem 0,9% + administração 0,5% = 12,7% do PIB (R$ 749 bi) | Ilos/CNT, 2016 |
 | Custo logístico dos EUA (mesma base de 2015) | **7,8%** do PIB | Ilos/CNT, 2016 |
 | Malha rodoviária pavimentada | apenas **13%** | DNIT |
@@ -379,9 +379,9 @@ O cooperativismo brasileiro é a maior infraestrutura de compra e venda solidár
 | Impacto na cadeia de fornecimento | **2/3** do impacto positivo total | GSEA, via SSIR Brasil, 2025 |
 | Fornecedores novos triados socioambientalmente | **100%** (GRI 414-1 e 308-1) | São Martinho, safra 2024/25 |
 
-A leitura operacional é direta: com **15,5% do PIB** em logística e só **13% da malha pavimentada**, o gestor brasileiro compra eficiência com **consolidação de carga, estoque certo e fornecedor perto** — e a empresa híbrida tem um motivo adicional: **menos quilômetro é menos emissão, menos custo e mais verba liberada para impacto**.
+A leitura operacional é direta: com **15,5% do PIB** em logística e só **13% da malha pavimentada**, o gestor brasileiro compra eficiência com **consolidação de carga, estoque certo e fornecedor perto**, e a empresa híbrida tem um motivo adicional: **menos quilômetro é menos emissão, menos custo e mais verba liberada para impacto**.
 
-> **🔢 Você sabia?** Em 2014 o custo logístico brasileiro era de **10,4% do PIB**; em 2025 chegou a **15,5%**. Em termos práticos, operar a mesma cadeia custa hoje cerca de **meio ponto percentual do PIB a mais** do que no pico de 2022–2023 (16%) e mais de cinco pontos do que uma década antes — e a diferença entre 15,5% (Brasil) e 7,8% (EUA, base 2015) é, em grande parte, a conta do frete e do estoque.
+> **🔢 Você sabia?** Em 2014 o custo logístico brasileiro era de **10,4% do PIB**; em 2025 chegou a **15,5%**. Em termos práticos, operar a mesma cadeia custa hoje cerca de **meio ponto percentual do PIB a mais** do que no pico de 2022 to 2023 (16%) e mais de cinco pontos do que uma década antes, e a diferença entre 15,5% (Brasil) e 7,8% (EUA, base 2015) é, em grande parte, a conta do frete e do estoque.
 
 ---
 
@@ -391,13 +391,13 @@ A leitura operacional é direta: com **15,5% do PIB** em logística e só **13% 
 
 A manufatura enxuta classifica o desperdício em **sete categorias** e rastreia tempo de estoque, transporte e fluxo:
 
-1. **Sobreprodução** — produzir mais ou antes do pedido;
-2. **Transporte** — mover mais do que o valor exige;
-3. **Retrabalho e defeitos** — consertar o que saiu errado;
-4. **Superprocessamento** — fazer mais etapas do que o cliente paga;
-5. **Movimento** — deslocar pessoas sem necessidade;
-6. **Estoque** — capital parado e capacidade oculta de problema;
-7. **Espera** — fila, ociosidade e atraso entre etapas.
+1. **Sobreprodução**: produzir mais ou antes do pedido;
+2. **Transporte**: mover mais do que o valor exige;
+3. **Retrabalho e defeitos**: consertar o que saiu errado;
+4. **Superprocessamento**: fazer mais etapas do que o cliente paga;
+5. **Movimento**: deslocar pessoas sem necessidade;
+6. **Estoque**: capital parado e capacidade oculta de problema;
+7. **Espera**: fila, ociosidade e atraso entre etapas.
 
 Centralizar compras **não** é desperdício: é uma das formas de reduzir transporte, estoque e retrabalho. A confusão entre "centralização" e "desperdício" é o erro de leitura mais comum dessa lista.
 
@@ -429,11 +429,11 @@ Centralizar compras **não** é desperdício: é uma das formas de reduzir trans
     "4": "valor gasto"
   },
   "distractors": ["receita bruta", "estoque final", "horas trabalhadas", "valor ao acionista", "custo fixo", "capacidade instalada"],
-  "explanation": "O giro usa o custo da mercadoria vendida (CMV) sobre o estoque médio; o OEE é o produto de disponibilidade, desempenho e qualidade; e o índice de repartição compara o valor que chega ao fornecedor social com o valor total gasto na compra — é o indicador que transforma eficiência operacional em benefício social verificável."
+  "explanation": "O giro usa o custo da mercadoria vendida (CMV) sobre o estoque médio; o OEE é o produto de disponibilidade, desempenho e qualidade; e o índice de repartição compara o valor que chega ao fornecedor social com o valor total gasto na compra: é o indicador que transforma eficiência operacional em benefício social verificável."
 }
 ```
 
-### 9.3 Exemplo 4 — eficiência como fonte de valor para repartir
+### 9.3 Exemplo 4: eficiência como fonte de valor para repartir
 
 **[SIMULAÇÃO]** Premissas: receita de **R$ 100 milhões/ano**; compras de **R$ 40 milhões**; custo logístico de **15,5% do faturamento** (patamar Ilos/2025) = **R$ 15,5 milhões**.
 
@@ -443,9 +443,9 @@ Centralizar compras **não** é desperdício: é uma das formas de reduzir trans
 
 A mesma eficiência, três decisões de repartição diferentes. **A conta não muda; muda o contrato.**
 
-### 9.4 Exemplo 5 — giro e lead time na cadeia social
+### 9.4 Exemplo 5: giro e lead time na cadeia social
 
-**[SIMULAÇÃO sobre base real]** Banco de alimentos: CMV de **R$ 3,6 milhões** ÷ estoque médio de **R$ 300 mil** = **giro de 12 vezes/ano** (cobertura de ≈ 30 dias). Levando o *lead time* de **6,88 para 1,06 dias** — variação medida no caso "Print Colors", com eficiência de 85% para 91% — o estoque médio cai para **R$ 240 mil** → **giro de 15 vezes/ano**, cobertura de **24 dias**, liberando **R$ 60.000 de capital de giro**. (Base real: Quintana, Fuentes e Godínez, 2022; o extrapolado é simulação.)
+**[SIMULAÇÃO sobre base real]** Banco de alimentos: CMV de **R$ 3,6 milhões** ÷ estoque médio de **R$ 300 mil** = **giro de 12 vezes/ano** (cobertura de ≈ 30 dias). Levando o *lead time* de **6,88 para 1,06 dias**, variação medida no caso "Print Colors", com eficiência de 85% para 91%, o estoque médio cai para **R$ 240 mil** → **giro de 15 vezes/ano**, cobertura de **24 dias**, liberando **R$ 60.000 de capital de giro**. (Base real: Quintana, Fuentes e Godínez, 2022; o extrapolado é simulação.)
 
 Capital de giro liberado é, na híbrida, **verba que não precisa ser captada**: o tempo de estoque virou dinheiro de missão.
 
@@ -465,28 +465,28 @@ Capital de giro liberado é, na híbrida, **verba que não precisa ser captada**
 | Risco de cadeia | Descontinuidade de doações | Interrupção e preço de fornecimento | Dupla dependência: mercado + financiador | Elaboração didática do digesto |
 | Repartição do valor | 100% ao objeto social | 100% aos acionistas, após reinvestir | Repartição explícita com fornecedor social e comunidade | ICE/FGV (2014); Drayton & Budinich (2010) |
 
-### 10.2 Exemplo 6 — mesma operação, contas diferentes
+### 10.2 Exemplo 6: mesma operação, contas diferentes
 
 **[SIMULAÇÃO]** Programa social de custo total de **R$ 2,0 milhões/ano**.
 
 - **ONG:** 12% de custo administrativo (**R$ 240 mil**) para **2.000 beneficiários** → **R$ 1.200 por beneficiário**;
 - **Empresa híbrida**, com a mesma operação e **R$ 200 mil de eficiência** (Exemplo 4): custo de **R$ 1,8 milhão** → **R$ 900 por beneficiário (−25%)**, com o excedente reinvestido.
 
-O ganho não veio de cortar serviço: veio de **cadeia melhor**. E a diferença de 25% é o argumento mais forte da "eficiência como valor" — mede-se por beneficiário, não por dividendos. (O percentual de 12% de custo administrativo é **premissa de simulação**: não há estatística oficial para ONGs brasileiras.)
+O ganho não veio de cortar serviço: veio de **cadeia melhor**. E a diferença de 25% é o argumento mais forte da "eficiência como valor": mede-se por beneficiário, não por dividendos. (O percentual de 12% de custo administrativo é **premissa de simulação**: não há estatística oficial para ONGs brasileiras.)
 
-### 10.3 Exemplo 7 — compras corporativas de impacto: a coalizão e o bônus de diretoria
+### 10.3 Exemplo 7, compras corporativas de impacto: a coalizão e o bônus de diretoria
 
-**[CASO REAL]** O estudo *Ecoa Cenários* (Yunus Negócios Sociais, ANDE e SAP Business Network, 2025) deu origem à **Ecoa — Coalizão para Compras de Impacto**. A **L'Oréal** criou **linha de bônus no comitê executivo atrelada ao número de beneficiados** do programa de abastecimento inclusivo (famílias do Norte e do Nordeste fornecedoras de insumos naturais): a meta de compra virou **meta de diretoria**. (SSIR Brasil, 01/10/2025)
+**[CASO REAL]** O estudo *Ecoa Cenários* (Yunus Negócios Sociais, ANDE e SAP Business Network, 2025) deu origem à **Ecoa: Coalizão para Compras de Impacto**. A **L'Oréal** criou **linha de bônus no comitê executivo atrelada ao número de beneficiados** do programa de abastecimento inclusivo (famílias do Norte e do Nordeste fornecedoras de insumos naturais): a meta de compra virou **meta de diretoria**. (SSIR Brasil, 01/10/2025)
 
 A lição de gestão é cirúrgica: **o que não está no bônus de quem decide não vira rotina**. Repartir valor com a cadeia exige amarrar o indicador social à remuneração de quem assina a compra.
 
 ### 10.4 ONG no Brasil, em escala
 
-- **815.676 ONGs** no Brasil — **80,9% associações**, **17,4% religiosas**, **1,5% fundações**;
+- **815.676 ONGs** no Brasil: **80,9% associações**, **17,4% religiosas**, **1,5% fundações**;
 - **2.272.000 empregados** (FASFIL, 2016);
 - **4,27% do PIB** (FIPE). (FECAP, 15/08/2023)
 
-São quase meio trilhão de produto interno bruto atravessado por entidades que **não podem distribuir excedente** — daí a diferença estrutural da linha "destino do excedente" da tabela 10.1, e daí a importância dos indicadores de custo por beneficiário.
+São quase meio trilhão de produto interno bruto atravessado por entidades que **não podem distribuir excedente**: daí a diferença estrutural da linha "destino do excedente" da tabela 10.1, e daí a importância dos indicadores de custo por beneficiário.
 
 ---
 
@@ -494,7 +494,7 @@ São quase meio trilhão de produto interno bruto atravessado por entidades que 
 
 ### 11.1 Cinco cadeias que se deixam auditar
 
-Os casos abaixo vêm do digesto de casos do curso (12 casos verificados com fonte e ano). Todos iluminam **um elo específico** da cadeia de Porter — é isso que os torna úteis, e não a curiosidade biográfica.
+Os casos abaixo vêm do digesto de casos do curso (12 casos verificados com fonte e ano). Todos iluminam **um elo específico** da cadeia de Porter: é isso que os torna úteis, e não a curiosidade biográfica.
 
 | Caso | Elo da cadeia iluminado | Número publicado | Fonte/ano |
 |---|---|---|---|
@@ -502,25 +502,25 @@ Os casos abaixo vêm do digesto de casos do curso (12 casos verificados com font
 | **SEMCO** (Brasil, 1953) | Operações + gestão de pessoas | SEMCOPAR reparte **23%** do lucro após imposto da unidade, **2x/ano**, a 3 eleitos pelos trabalhadores; na crise de 1990 subiu para **39%**; inventário de **136 → 46 dias**; US$ 4 mi (1982) → **US$ 212 mi** (2003) | HBR/Semler; Gonçalves (1996) |
 | **COPACOL** (Brasil, 1964) | Logística de saída + repartição | **R$ 270 mi de sobras (+64%)** sobre faturamento de **R$ 10,6 bi (+8%)** em 2024, rateadas **por unidade processada**: R$ 2/saca de soja, R$ 1/milho, R$ 0,10/l de leite | O Presente Rural, 31/01/2025 |
 | **Coopercitrus** (Brasil, 1976) | Serviço + fornecedor | **321 mil atendimentos** a **28 mil produtores (+28%)** em 2023; sobras de **R$ 42,8 mi** sobre R$ 8,1 bi, rateadas por faixa **3,00 / 1,00 / 0,30** (IGP-M), art. 60 do Estatuto | Coopercitrus, Revista 450 (2024) |
-| **REI Co-op** (EUA, 1938) | Marketing, serviço e repartição no prejuízo | **US$ 189 mi** em Member Reward (tipicamente **10%**), **US$ 84,8 mi** em incentivos/*profit sharing* (+48,5%) e **US$ 8,9 mi** em +300 ONGs — mesmo com **prejuízo de US$ 156,4 mi** em 2024 | REI Newsroom, 08/05/2025 |
+| **REI Co-op** (EUA, 1938) | Marketing, serviço e repartição no prejuízo | **US$ 189 mi** em Member Reward (tipicamente **10%**), **US$ 84,8 mi** em incentivos/*profit sharing* (+48,5%) e **US$ 8,9 mi** em +300 ONGs: mesmo com **prejuízo de US$ 156,4 mi** em 2024 | REI Newsroom, 08/05/2025 |
 
 Três leituras operacionais desses números:
 
-1. **Repartir não é improvisar:** MONDRAGON, COPACOL e Coopercitrus têm o rateio escrito em relatório anual ou em estatuto — o percentual é **regra**, não generosidade de ano bom;
-2. **O rateio por unidade processada (COPACOL) é o mais legível da cadeia:** cada produtor enxerga o retorno na própria saca ou cabeça de animal, o que amarra repartição e operação no **mesmo indicador** — exatamente o que a seção 9 chamou de índice de repartição de valor;
-3. **O caso Fagor marca o limite:** dívida de **~€ 859 mi**, prejuízo de **€ 89 mi** sobre vendas de **€ 1,167 bi** (2012) e concurso de acreedores em **13/11/2013**, com **5.642 trabalhadores** — a MONDRAGON aportou ~€ 300 mi e recusou mais € 50 mi. Repartir lucro **não elimina risco de alavancagem**. *(El País; Noticias de Gipuzkoa, 2013.)*
+1. **Repartir não é improvisar:** MONDRAGON, COPACOL e Coopercitrus têm o rateio escrito em relatório anual ou em estatuto, o percentual é **regra**, não generosidade de ano bom;
+2. **O rateio por unidade processada (COPACOL) é o mais legível da cadeia:** cada produtor enxerga o retorno na própria saca ou cabeça de animal, o que amarra repartição e operação no **mesmo indicador**: exatamente o que a seção 9 chamou de índice de repartição de valor;
+3. **O caso Fagor marca o limite:** dívida de **~€ 859 mi**, prejuízo de **€ 89 mi** sobre vendas de **€ 1,167 bi** (2012) e concurso de acreedores em **13/11/2013**, com **5.642 trabalhadores**: a MONDRAGON aportou ~€ 300 mi e recusou mais € 50 mi. Repartir lucro **não elimina risco de alavancagem**. *(El País; Noticias de Gipuzkoa, 2013.)*
 
 ### 11.2 Onde cada caso entra na tabela dos cinco modelos
 
 | Caso | Modelo da seção 3 | O que ele prova na operação | Risco que expõe |
 |---|---|---|---|
-| MONDRAGON | M2 — Cooperativa | Solidariedade **autofinanceira**: o "seguro" entre unidades sai do lucro de quem prospera (≥13%) | Faixa salarial ampliada de 1:3 (1956) para **1:6 (1988)** — a igualdade tem preço negociado |
-| SEMCO | M4 — Híbrida (governança participativa) | Transparência + participação no lucro + autocrítica em crise | Repartir dinheiro só sustenta se vier com repartição de **informação e decisão** |
-| COPACOL | M2 — Cooperativa | Escala industrial com retorno rastreável por produto | Concentração agroindustrial e ciclo de commodity |
-| Coopercitrus | M2 — Cooperativa | Serviço ao fornecedor (321 mil atendimentos) como atividade primária | Sobras caem com a safra: R$ 8,1 bi com **−14%** em 2023 |
-| REI Co-op | M5 — Rede colaborativa (cooperativa de consumidores) | Repartição **cultura, não resultado do exercício** | Prejuízo de US$ 156,4 mi não suspendeu os repasses |
+| MONDRAGON | M2, Cooperativa | Solidariedade **autofinanceira**: o "seguro" entre unidades sai do lucro de quem prospera (≥13%) | Faixa salarial ampliada de 1:3 (1956) para **1:6 (1988)**, a igualdade tem preço negociado |
+| SEMCO | M4: Híbrida (governança participativa) | Transparência + participação no lucro + autocrítica em crise | Repartir dinheiro só sustenta se vier com repartição de **informação e decisão** |
+| COPACOL | M2: Cooperativa | Escala industrial com retorno rastreável por produto | Concentração agroindustrial e ciclo de commodity |
+| Coopercitrus | M2: Cooperativa | Serviço ao fornecedor (321 mil atendimentos) como atividade primária | Sobras caem com a safra: R$ 8,1 bi com **−14%** em 2023 |
+| REI Co-op | M5: Rede colaborativa (cooperativa de consumidores) | Repartição **cultura, não resultado do exercício** | Prejuízo de US$ 156,4 mi não suspendeu os repasses |
 
-> **🔢 Você sabia?** A SEMCO **dobrou o rateio para 39%** do lucro em 1990 — exatamente no ano em que cortou **40%** dos salários da direção. Repartir *mais* em crise, com transparência e eleição dos três receptores, é o inverso do gesto padrão de encolher o social para "proteger" o caixa: a rotatividade da empresa ficou **abaixo de 2%**. *(HBR/Semler; Gonçalves, 1996.)*
+> **🔢 Você sabia?** A SEMCO **dobrou o rateio para 39%** do lucro em 1990: exatamente no ano em que cortou **40%** dos salários da direção. Repartir *mais* em crise, com transparência e eleição dos três receptores, é o inverso do gesto padrão de encolher o social para "proteger" o caixa: a rotatividade da empresa ficou **abaixo de 2%**. *(HBR/Semler; Gonçalves, 1996.)*
 
 ---
 
@@ -533,14 +533,14 @@ Esta seção só traz item com **vigência confirmada** pelo digesto de atualiza
 | # | Mudança | Fonte/ano | Vigência confirmada | O que muda na operação |
 |---|---|---|---|---|
 | 1 | IBS, CBS e Imposto Seletivo | **LC 214/2025**, sancionada 16/01/2025 (alterada pela LC 227/2026) | Vigente; transição até **2033** | A tributação de consumo passa a ser lida de modo uniforme entre CNPJ lucrativo, cooperativa e ONG que comercializa |
-| 2 | Alíquotas-teste de **0,9% (CBS)** e **0,1% (IBS)** com dispensa de recolhimento | LC 214/2025, art. 348 | **01/01/2026 – 31/12/2026** | Os sistemas precisam **destacar tributo mesmo sem custo**: ano-teste para mapear processos fiscais da cadeia |
+| 2 | Alíquotas-teste de **0,9% (CBS)** e **0,1% (IBS)** com dispensa de recolhimento | LC 214/2025, art. 348 | **01/01/2026 to 31/12/2026** | Os sistemas precisam **destacar tributo mesmo sem custo**: ano-teste para mapear processos fiscais da cadeia |
 | 3 | Comitê Gestor do IBS e contencioso administrativo | **LC 227/2026** (DOU 14/01/2026) | Vigente | Governança única reduz litígio para OSCs e cooperativas, mas exige capacidade técnica |
 | 4 | Escalonamento do destaque fiscal | **Ato Conjunto RFB/CGIBS nº 4/2026** (30/07/2026) | 03/08/2026 → 01/10/2026 → 01/12/2026 → 01/01/2027 | Cronograma por espécie de documento; o Simples só entra em **01/01/2027** |
 | 5 | Reporte ESG no regime **"pratique ou explique"** | **Res. CVM 244/2026** (29/05/2026) | Vigente; regime a partir de **01/01/2027** | Cai a obrigatoriedade para companhias abertas; quem divulga adere a CBPS/ISSB, com asseguração e **3 exercícios** |
 | 6 | Greenwashing: arts. 36, 36-A/36-B e **Anexo "U"** do CBAP | **CONAR**, aprovado 24/10/2025, publicado 27/10/2025 | Vigente desde **~26/11/2025** (30 dias após publicação) | Selos, metas e campanhas de impacto exigem veracidade, qualificação, exatidão, pertinência, relevância e concretude |
-| 7 | Novos padrões globais de certificação **B Corp** | **B Lab**, publicados em abril/2025 | Em vigor em **2026**; transição até **2028** | 7 tópicos obrigatórios, auditoria independente e marcos nos anos **0, 3 e 5** — o selo deixa de ser só pontuação |
-| 8 | **Cadimpacto** — cadastro oficial de negócios de impacto | **MDIC**, 19/03/2025 | Em operação | Cadastro nacional em 3 níveis (bronze, prata, ouro) para visibilidade e captação |
-| 9 | **PLR** mantida pela Lei nº 10.101/2000 | Planalto; última alteração estrutural: **Lei nº 14.020/2020** | Vigente, sem alteração nova em 2025–2026 | IR exclusivo na fonte de **0% a 27,5%**; nenhuma isenção nova confirmada |
+| 7 | Novos padrões globais de certificação **B Corp** | **B Lab**, publicados em abril/2025 | Em vigor em **2026**; transição até **2028** | 7 tópicos obrigatórios, auditoria independente e marcos nos anos **0, 3 e 5**, o selo deixa de ser só pontuação |
+| 8 | **Cadimpacto**: cadastro oficial de negócios de impacto | **MDIC**, 19/03/2025 | Em operação | Cadastro nacional em 3 níveis (bronze, prata, ouro) para visibilidade e captação |
+| 9 | **PLR** mantida pela Lei nº 10.101/2000 | Planalto; última alteração estrutural: **Lei nº 14.020/2020** | Vigente, sem alteração nova em 2025 to 2026 | IR exclusivo na fonte de **0% a 27,5%**; nenhuma isenção nova confirmada |
 | 10 | Licença-paternidade e salário-paternidade | **Lei nº 15.371/2026** | **01/01/2027** (10 dias) → 15 (2028) → 20 (2029) | Custo social crescente para **qualquer** forma jurídica com empregados |
 | 11 | Reporte contábil de sustentabilidade (NBC TDS e NBC TAS) | **Resolução CFC nº 1.710/2023** | **Ano-calendário 2026**, sempre que houver relatório de sustentabilidade | Quem publica relatório de sustentabilidade em 2026 já cai na norma |
 | 12 | Instituições financeiras sob padrão ISSB | **Res. CMN 5.185** e **Res. BCB 435** | Vigentes desde 01/01/2025; obrigatório **2026** (segmentos 1 e 2) e **2028** (demais) | Bancos e cooperativas de crédito parceiras das híbridas já reportam sob ISSB |
@@ -562,7 +562,7 @@ A seção 7.1 continua correta **para a referência de 2024**; o ciclo seguinte 
 
 *Fonte: Sistema OCB, AnuárioCoop 2026 (dados de 31/12/2025).*
 
-> **🔢 Você sabia?** O *World Cooperative Monitor 2025* (dados FY2023) avaliou o **Top 300** das cooperativas do mundo em **US$ 2,788 trilhões** — e o **Brasil aparece com 13 organizações** no ranking por faturamento (21 quando se usa faturamento por PIB per capita). Somadas aos R$ 848,37 bilhões de ingressos de 2025, a cadeia cooperativa brasileira é uma das maiores do planeta em escala. *(ACI/WCM, 2025.)*
+> **🔢 Você sabia?** O *World Cooperative Monitor 2025* (dados FY2023) avaliou o **Top 300** das cooperativas do mundo em **US$ 2,788 trilhões**, e o **Brasil aparece com 13 organizações** no ranking por faturamento (21 quando se usa faturamento por PIB per capita). Somadas aos R$ 848,37 bilhões de ingressos de 2025, a cadeia cooperativa brasileira é uma das maiores do planeta em escala. *(ACI/WCM, 2025.)*
 
 ### 12.3 Cronograma do destaque fiscal: ordene os prazos
 
@@ -572,16 +572,16 @@ A seção 7.1 continua correta **para a referência de 2024**; o ciclo seguinte 
 {
   "question": "Ordene o escalonamento do destaque fiscal de IBS/CBS (Ato Conjunto RFB/CGIBS nº 4/2026), do primeiro ao último prazo:",
   "items": [
-    "03/08/2026 — NF-e, NFC-e e CT-e",
-    "01/10/2026 — NFCom e NFS-e com ISS",
-    "01/12/2026 — imóveis, bens imateriais e plataformas",
-    "01/01/2027 — Simples Nacional"
+    "03/08/2026: NF-e, NFC-e e CT-e",
+    "01/10/2026: NFCom e NFS-e com ISS",
+    "01/12/2026: imóveis, bens imateriais e plataformas",
+    "01/01/2027: Simples Nacional"
   ],
   "correctOrder": [
-    "03/08/2026 — NF-e, NFC-e e CT-e",
-    "01/10/2026 — NFCom e NFS-e com ISS",
-    "01/12/2026 — imóveis, bens imateriais e plataformas",
-    "01/01/2027 — Simples Nacional"
+    "03/08/2026: NF-e, NFC-e e CT-e",
+    "01/10/2026: NFCom e NFS-e com ISS",
+    "01/12/2026: imóveis, bens imateriais e plataformas",
+    "01/01/2027: Simples Nacional"
   ],
   "explanation": "O Ato Conjunto RFB/CGIBS nº 4/2026 escalona o destaque fiscal por espécie de documento: primeiro os documentos de transporte e venda ao consumidor (03/08/2026), depois o serviço com ISS (01/10/2026), em seguida imóveis, bens imateriais e plataformas (01/12/2026) e, por último, o Simples Nacional (01/01/2027). Na cadeia, o erro de data não é formalismo: é nota fiscal rejeitada e fluxo parado no recebimento."
 }
@@ -590,15 +590,15 @@ A seção 7.1 continua correta **para a referência de 2024**; o ciclo seguinte 
 ### 12.4 O que **não** está vigente (não afirmar como norma)
 
 > [!WARNING]
-> **Vigência é coisa séria — itens NÃO confirmados no digesto de atualizações (corte 05/10/2026):**
-> - **PEC do fim da escala 6x1**: aprovada na Câmara em **28/05/2026** (472×22 e 461×19), mas **pendente no Senado** — não há promulgação, logo não há transição a contar;
-> - **Isenção da PLR no IR (PL 581/2019)**: sanção e vigência **não confirmadas** — a PLR segue com tributação exclusiva na fonte de 0% a 27,5%;
-> - **PLs de greenwashing (nº 1.008, 440 e 7.090/2025)**: em tramitação na Câmara, **nenhuma vigência confirmada** — o que vale é o **CDC, art. 37** e o **Anexo "U" do CBAP**;
-> - **Alíquotas definitivas de IBS/CBS por segmento a partir de 2027**: dependem de resolução do Senado (arts. 18 e 349–369 da LC 214/2025) — **ainda não fixadas**;
+> **Vigência é coisa séria: itens NÃO confirmados no digesto de atualizações (corte 05/10/2026):**
+> - **PEC do fim da escala 6x1**: aprovada na Câmara em **28/05/2026** (472×22 e 461×19), mas **pendente no Senado**: não há promulgação, logo não há transição a contar;
+> - **Isenção da PLR no IR (PL 581/2019)**: sanção e vigência **não confirmadas**: a PLR segue com tributação exclusiva na fonte de 0% a 27,5%;
+> - **PLs de greenwashing (nº 1.008, 440 e 7.090/2025)**: em tramitação na Câmara, **nenhuma vigência confirmada**, o que vale é o **CDC, art. 37** e o **Anexo "U" do CBAP**;
+> - **Alíquotas definitivas de IBS/CBS por segmento a partir de 2027**: dependem de resolução do Senado (arts. 18 e 349 to 369 da LC 214/2025): **ainda não fixadas**;
 > - **Tratamento do ato cooperativo e de OSCs nos anexos da LC 214/2025**: revisão de anexos **não feita**;
-> - **Número de Empresas B no Brasil**: as fontes dão **~500** (fev/2026), **342** (mai/2026) e **338** (jul/2026) — cortes diferentes, **sem número único verificado**.
+> - **Número de Empresas B no Brasil**: as fontes dão **~500** (fev/2026), **342** (mai/2026) e **338** (jul/2026): cortes diferentes, **sem número único verificado**.
 
-**Itens não verificados nesta pesquisa (resumo):** proposta do CFC de retorno à obrigatoriedade do reporte em 2028 é apenas **proposta técnica**, sem norma publicada; estatísticas do IBGE sobre cooperativas para 2025–2026 não foram localizadas (os números desta lição vêm do **Sistema OCB/Sescoop**); e não há estatística oficial de "empresas de propósito" no Brasil com metodologia declarada.
+**Itens não verificados nesta pesquisa (resumo):** proposta do CFC de retorno à obrigatoriedade do reporte em 2028 é apenas **proposta técnica**, sem norma publicada; estatísticas do IBGE sobre cooperativas para 2025 to 2026 não foram localizadas (os números desta lição vêm do **Sistema OCB/Sescoop**); e não há estatística oficial de "empresas de propósito" no Brasil com metodologia declarada.
 
 ---
 
@@ -608,10 +608,10 @@ A seção 7.1 continua correta **para a referência de 2024**; o ciclo seguinte 
 > **Veredito Comparativo**
 > Diante dos **cinco modelos**, o que muda na operação é **quem compra, com qual poder e para quem o ganho volta**:
 > - **× tradicional:** a cadeia é otimizada para **menor preço e maior escala**, com fornecedores globais, lote grande e critério de fornecedor essencialmente econômico; o impacto, se existir, é **opcional** e não entra na especificação. Ganha em custo (nota 3,75 na matriz) e perde em impacto social (escore 2);
-> - **× parceria (cooperação entre empresas):** ela resolve **governança e rateio** — quem decide e como divide —, mas **não entrega por si só critério social de fornecedor**: parceria sem cláusula de impacto é apenas escala de compra;
+> - **× parceria (cooperação entre empresas):** ela resolve **governança e rateio**, quem decide e como divide, mas **não entrega por si só critério social de fornecedor**: parceria sem cláusula de impacto é apenas escala de compra;
 > - **× cooperativa:** ela nasce com **poder de compra coletivo** e destino social do excedente (sobras de **R$ 51,4 bi** em 2024), mas sofre em **prontidão documental** (escore 2 na matriz) e em risco de capacidade;
-> - **× ONG/OSC:** tem a **missão como fim** e maior precisão em custo por beneficiário, mas opera com **volume pequeno, pouco poder de barganha** e risco de **descontinuidade de doações** — e não pode distribuir resultados;
-> - **× híbrida (conclusão):** é a única que pode combinar **fornecedor social triado (GRI 414-1/308-1)**, **compras colaborativas** e **repartição explícita do ganho de eficiência** — daí a rede colaborativa pontuar **3,90**, a melhor nota da matriz. A híbrida não escolhe entre impacto e eficiência: ela **contrata a eficiência para financiar o impacto** e mede tudo com OTIF, % compras de impacto e índice de repartição.
+> - **× ONG/OSC:** tem a **missão como fim** e maior precisão em custo por beneficiário, mas opera com **volume pequeno, pouco poder de barganha** e risco de **descontinuidade de doações**, e não pode distribuir resultados;
+> - **× híbrida (conclusão):** é a única que pode combinar **fornecedor social triado (GRI 414-1/308-1)**, **compras colaborativas** e **repartição explícita do ganho de eficiência**: daí a rede colaborativa pontuar **3,90**, a melhor nota da matriz. A híbrida não escolhe entre impacto e eficiência: ela **contrata a eficiência para financiar o impacto** e mede tudo com OTIF, % compras de impacto e índice de repartição.
 
 ---
 
@@ -621,16 +621,16 @@ A seção 7.1 continua correta **para a referência de 2024**; o ciclo seguinte 
 > **Armadilhas desta lição:**
 > - **"Certificação ISO 26000" não existe**: é diretriz não certificável, com 7 temas; a própria ISO classifica a oferta de selo como uso indevido;
 > - **"SCFO" não é framework**: o modelo verificado da cadeia é o **SCOR** (planejar, abastecer, fabricar, entregar, devolver);
-> - **Compras governamentais: 9,4% do PIB (Banco Mundial/TCU) × ≈12% (AGU, 2025)** são bases e anos distintos — cite a fonte junto com o número;
-> - **Custo logístico dos EUA: 7,8%** é dado de **base 2015** (Ilos/CNT); veículo jornalístico de 2026 cita 8,8% sem método — número atual não confirmado;
-> - **15,5% do PIB é custo logístico brasileiro em 2025** (R$ 1,96 trilhão); **12,7%** é o dado de **2015** — misturar os dois corrói a análise;
+> - **Compras governamentais: 9,4% do PIB (Banco Mundial/TCU) × ≈12% (AGU, 2025)** são bases e anos distintos: cite a fonte junto com o número;
+> - **Custo logístico dos EUA: 7,8%** é dado de **base 2015** (Ilos/CNT); veículo jornalístico de 2026 cita 8,8% sem método: número atual não confirmado;
+> - **15,5% do PIB é custo logístico brasileiro em 2025** (R$ 1,96 trilhão); **12,7%** é o dado de **2015**: misturar os dois corrói a análise;
 > - **A cadeia de valor se analisa por unidade de negócio**, não pela corporação inteira;
-> - **Lean é abordagem gerencial, não exigência legal** (NIST TN 1890, 2015) — os 7 desperdícios são método, não norma;
+> - **Lean é abordagem gerencial, não exigência legal** (NIST TN 1890, 2015): os 7 desperdícios são método, não norma;
 > - **Os prêmios de +10%/+13,1% (Exemplo 1) e a repartição de 50%/66,7% (Exemplo 4) são simulações**, sem fonte empírica correspondente;
 > - **O caso brasileiro de compras entre cooperativas com números auditados não foi localizado**;
-> - **"2/3 do impacto na cadeia de fornecimento"** veio de fonte secundária (SSIR Brasil, 2025) — o relatório original não foi aberto.
+> - **"2/3 do impacto na cadeia de fornecimento"** veio de fonte secundária (SSIR Brasil, 2025), o relatório original não foi aberto.
 
-**Itens não verificados nesta pesquisa:** a ISO 20400 não foi lida em texto integral (existência e alinhamento confirmados pelo guia federal de 2025); o custo administrativo típico de ONGs brasileiras não tem estatística oficial (o Exemplo 6 usa 12% como premissa); e o material original da Aula 11 não foi acessado — este digesto foi reconstruído por pesquisa web, com 13 buscas.
+**Itens não verificados nesta pesquisa:** a ISO 20400 não foi lida em texto integral (existência e alinhamento confirmados pelo guia federal de 2025); o custo administrativo típico de ONGs brasileiras não tem estatística oficial (o Exemplo 6 usa 12% como premissa); e o material original da Aula 11 não foi acessado; este digesto foi reconstruído por pesquisa web, com 13 buscas.
 
 ---
 
@@ -696,7 +696,7 @@ A seção 7.1 continua correta **para a referência de 2024**; o ciclo seguinte 
     "7,8% do PIB"
   ],
   "correct": 2,
-  "explanation": "Em 2025 o custo logístico brasileiro foi de 15,5% do PIB, o equivalente a R$ 1,96 trilhão (15,6% em 2024; pico de 16% em 2022–2023; 10,4% em 2014). O valor de 12,7% é a composição de 2015 (transporte, estoque, armazenagem e administração) e 7,8% é o custo logístico dos EUA na mesma base de 2015. (Ilos/Valor, 13/02/2026; Ilos/CNT, 2016)"
+  "explanation": "Em 2025 o custo logístico brasileiro foi de 15,5% do PIB, o equivalente a R$ 1,96 trilhão (15,6% em 2024; pico de 16% em 2022 to 2023; 10,4% em 2014). O valor de 12,7% é a composição de 2015 (transporte, estoque, armazenagem e administração) e 7,8% é o custo logístico dos EUA na mesma base de 2015. (Ilos/Valor, 13/02/2026; Ilos/CNT, 2016)"
 }
 ```
 
@@ -776,7 +776,7 @@ A seção 7.1 continua correta **para a referência de 2024**; o ciclo seguinte 
     "Ser obrigatoriamente doado a partidos políticos"
   ],
   "correct": 1,
-  "explanation": "Entidades sem fins lucrativos (associações, fundações e OSCIP) têm vedação de distribuição de resultados — no MROSC, o art. 33 trata da destinação e a LC nº 130/2009 reforça as prestações de contas. Por isso a eficiência na ONG se mede por custo por beneficiário, não por dividendos. (FECAP, 2023; LC nº 130/2009)"
+  "explanation": "Entidades sem fins lucrativos (associações, fundações e OSCIP) têm vedação de distribuição de resultados: no MROSC, o art. 33 trata da destinação e a LC nº 130/2009 reforça as prestações de contas. Por isso a eficiência na ONG se mede por custo por beneficiário, não por dividendos. (FECAP, 2023; LC nº 130/2009)"
 }
 ```
 
@@ -792,7 +792,7 @@ A seção 7.1 continua correta **para a referência de 2024**; o ciclo seguinte 
     "Restringir-se a um único país"
   ],
   "correct": 1,
-  "explanation": "Os quatro critérios são dos autores (Ashoka/HBR, 2010), divulgados pelo Banco Mundial (2011) e difundidos no Brasil pela ICE/FGV (2014): valor econômico e social, escala, rentabilidade sustentável e nova base de competição. A rentabilidade não é abandonada — é a condição que torna o modelo sustentável. (HBR, 18/03/2010; ICE/FGV, 2014)"
+  "explanation": "Os quatro critérios são dos autores (Ashoka/HBR, 2010), divulgados pelo Banco Mundial (2011) e difundidos no Brasil pela ICE/FGV (2014): valor econômico e social, escala, rentabilidade sustentável e nova base de competição. A rentabilidade não é abandonada: é a condição que torna o modelo sustentável. (HBR, 18/03/2010; ICE/FGV, 2014)"
 }
 ```
 
@@ -819,12 +819,12 @@ A seção 7.1 continua correta **para a referência de 2024**; o ciclo seguinte 
   "question": "Na COPACOL (2024), o rateio de sobras entre os cooperados foi feito:",
   "options": [
     "Proporcionalmente ao capital de cada cooperado, em parcela única anual",
-    "Por unidade processada — por exemplo, R$ 2 por saca de soja, R$ 1 por milho e R$ 0,10 por litro de leite",
+    "Por unidade processada: por exemplo, R$ 2 por saca de soja, R$ 1 por milho e R$ 0,10 por litro de leite",
     "Igualitariamente entre os 9,6 mil cooperados, sem critério de produção",
     "Somente em bonificação em dinheiro, vedada qualquer devolução em produto"
   ],
   "correct": 1,
-  "explanation": "A COPACOL distribuiu R$ 270 milhões de sobras (+64%, maior da história) sobre faturamento de R$ 10,6 bilhões em 2024, com rateio por unidade processada: R$ 2/saca de soja, R$ 1/milho, R$ 0,50/trigo, R$ 15/café, 3,6% sobre insumos, R$ 0,10/l de leite e assim por diante — metade em dezembro. É o rateio mais legível da cadeia: o cooperado enxerga o retorno na própria saca, o que liga repartição e operação no mesmo indicador. (O Presente Rural, 31/01/2025)"
+  "explanation": "A COPACOL distribuiu R$ 270 milhões de sobras (+64%, maior da história) sobre faturamento de R$ 10,6 bilhões em 2024, com rateio por unidade processada: R$ 2/saca de soja, R$ 1/milho, R$ 0,50/trigo, R$ 15/café, 3,6% sobre insumos, R$ 0,10/l de leite e assim por diante: metade em dezembro. É o rateio mais legível da cadeia: o cooperado enxerga o retorno na própria saca, o que liga repartição e operação no mesmo indicador. (O Presente Rural, 31/01/2025)"
 }
 ```
 
@@ -832,13 +832,13 @@ A seção 7.1 continua correta **para a referência de 2024**; o ciclo seguinte 
 {
   "question": "Associe cada modelo de empresa ao seu indicador operacional típico de cadeia:",
   "pairs": [
-    {"left": "Empresa tradicional (M1)", "right": "Giro de estoque, OEE, margem e OTIF — a régua é o custo unitário"},
+    {"left": "Empresa tradicional (M1)", "right": "Giro de estoque, OEE, margem e OTIF: a régua é o custo unitário"},
     {"left": "Cooperativa (M2)", "right": "Poder de compra coletivo, sobras distribuídas e remuneração ao cooperado"},
     {"left": "ONG / OSCIP (M3)", "right": "Custo social por beneficiário e custo administrativo sobre receita"},
     {"left": "Empresa híbrida de impacto (M4)", "right": "OTIF + % de compras de impacto + beneficiários auditados por unidade"},
     {"left": "Rede colaborativa (M5)", "right": "Frete rateado, pedidos consolidados e nota ponderada de fornecedor"}
   ],
-  "explanation": "Cada modelo mede o que ele maximiza: a tradicional mede custo, a cooperativa mede retorno ao cooperado, a ONG mede beneficiário por real, a híbrida precisa medir as duas coisas ao mesmo tempo e a rede mede escala compartilhada. Trocar os indicadores entre modelos é o erro que esconde o impacto — ou o lucro."
+  "explanation": "Cada modelo mede o que ele maximiza: a tradicional mede custo, a cooperativa mede retorno ao cooperado, a ONG mede beneficiário por real, a híbrida precisa medir as duas coisas ao mesmo tempo e a rede mede escala compartilhada. Trocar os indicadores entre modelos é o erro que esconde o impacto: ou o lucro."
 }
 ```
 
@@ -846,22 +846,22 @@ A seção 7.1 continua correta **para a referência de 2024**; o ciclo seguinte 
 
 > [!WARNING]
 > **Armadilhas de prova e de prática desta lição:**
-> - **Cadeia de valor são 5 primárias + 4 de apoio** (infraestrutura, pessoas, tecnologia, aquisição) — e o nível de análise é a **unidade de negócio**;
-> - **SCOR, não SCFO**: cinco processos — planejar, abastecer, fabricar, entregar, devolver;
+> - **Cadeia de valor são 5 primárias + 4 de apoio** (infraestrutura, pessoas, tecnologia, aquisição), e o nível de análise é a **unidade de negócio**;
+> - **SCOR, não SCFO**: cinco processos: planejar, abastecer, fabricar, entregar, devolver;
 > - **ISO 26000 não é certificável**; **ISO 20400** é a base do guia federal de compras sustentáveis de 2025;
 > - **GRI 308 = ambiental, GRI 414 = social**, ambos sobre fornecedores e efetivos desde **01/07/2018**;
 > - **30% do PAA é piso legal** de compras de alimentos da agricultura familiar (Lei nº 14.628/2023);
 > - **15,5% do PIB** é o custo logístico brasileiro de **2025**; **12,7%** é de 2015;
-> - **Simulação não é dado de fonte** — os prêmios de 13,1%, 43,6%, 50% e 66,7% desta lição são didáticos;
+> - **Simulação não é dado de fonte**: os prêmios de 13,1%, 43,6%, 50% e 66,7% desta lição são didáticos;
 > - **Eficiência sem cláusula de repartição não vira impacto**: o ganho precisa de contrato, indicador e pagamento ao fornecedor social.
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
 > 1. A **cadeia de valor de Porter (1985)** tem **5 atividades primárias e 4 de apoio**, margem = valor pago − custo coletivo e se analisa por **unidade de negócio**;
 > 2. A cadeia evoluiu de logística interna para **rede interorganizacional cooperativa**, estruturada no **SCOR**: planejar, abastecer, fabricar, entregar e devolver;
-> 3. Nos **cinco modelos**, a cadeia se desenha de modo diferente quanto a quem decide, para quem se entrega e para onde vai o excedente — a tabela de cadeia comparada é a régua da lição;
+> 3. Nos **cinco modelos**, a cadeia se desenha de modo diferente quanto a quem decide, para quem se entrega e para onde vai o excedente: a tabela de cadeia comparada é a régua da lição;
 > 4. **ISO 26000** é diretriz não certificável (7 temas, reconfirmada em 2025), **ISO 20400** baseia o guia federal de compras sustentáveis, e **GRI 308/414** exigem triagem e ações de fornecedores desde 01/07/2018;
 > 5. No Brasil, **IN SLTI/MP nº 1/2010 + Decreto nº 7.746/2012 + Lei nº 14.133/2021** abrem os critérios de sustentabilidade nas compras públicas, e o **PAA garante 30%** para a agricultura familiar (Lei nº 14.628/2023);
 > 6. A **matriz de fornecedor** ordena impacto, custo e risco: a **rede colaborativa pontua 3,90**, melhor que o tradicional (3,75), a cooperativa (3,65) e a de impacto (3,60);
-> 7. O **custo logístico brasileiro é de 15,5% do PIB em 2025** (R$ 1,96 trilhão), com apenas 13% da malha rodoviária pavimentada — consolidação e fornecedor local são as alavancas;
-> 8. **Eficiência é fonte de valor repartido**: nos exemplos, −2 p.p. de logística viram R$ 2,0 milhões/ano, e a repartição pode ir de **50% para 66,7%** — medindo com OTIF, giro, OEE, % compras de impacto e índice de repartição.
+> 7. O **custo logístico brasileiro é de 15,5% do PIB em 2025** (R$ 1,96 trilhão), com apenas 13% da malha rodoviária pavimentada: consolidação e fornecedor local são as alavancas;
+> 8. **Eficiência é fonte de valor repartido**: nos exemplos, −2 p.p. de logística viram R$ 2,0 milhões/ano, e a repartição pode ir de **50% para 66,7%**: medindo com OTIF, giro, OEE, % compras de impacto e índice de repartição.

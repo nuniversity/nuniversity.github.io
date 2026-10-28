@@ -160,7 +160,7 @@ This final lesson integrates knowledge from all 12 previous lessons, challenges 
 
 ---
 
-## Practice Questions (Final Exam - Comprehensive)
+## Practice Questions (Final Exam: Comprehensive)
 
 **Q1.** Which of the following best describes the "double bottom line" in non-profit economics?
 
@@ -209,7 +209,7 @@ This final lesson integrates knowledge from all 12 previous lessons, challenges 
 - A) OSCIP
 - B) Associação
 - C) Fundação
-- D) Empresa Social (Social Enterprise - not a formal type yet)
+- D) Empresa Social (Social Enterprise: not a formal type yet)
 
 **Q8.** Which fiduciary duty requires board members to act in the organization's best interest and avoid conflicts of interest?
 
@@ -274,7 +274,7 @@ This comprehensive course has taken you through the fundamental dimensions of no
 8. **Impact Measurement**: Logic Models; Theories of Change; SROI methodology; mixed methods assessment; stakeholder analysis; common pitfalls; feedback mechanisms
 
 ### Key Takeaways for Immediate Application
-- **Diversify revenue sources** before you need it—target 3-5 significant funding streams minimum
+- **Diversify revenue sources** before you need it: target 3-5 significant funding streams minimum
 - **Maintain 3-6 months operating reserves** as a liquidity buffer against uncertainty
 - **Implement clear governance** with formal conflict-of-interest policies; term limits; board development; regular self-assessment
 - **Use Logic Models** for program planning; Theory of Change for strategic; SROI for investment cases; mix methods for credibility
@@ -292,9 +292,9 @@ This comprehensive course has taken you through the fundamental dimensions of no
 6. **Continue your learning journey** through advanced courses; conferences; peer learning groups; mentor relationships; staying current with sector trends and best practices
 
 ### Congratulations
-Upon successful completion of all course requirements, you will have gained comprehensive, practical knowledge of non-profit organization fundamentals applicable to governance, operations, financial management, and impact measurement—both globally and specifically within the Brazilian third-sector context. This knowledge positions you to lead non-profit organizations more effectively, make informed strategic decisions, enhance organizational sustainability, and maximize mission impact.
+Upon successful completion of all course requirements, you will have gained comprehensive, practical knowledge of non-profit organization fundamentals applicable to governance, operations, financial management, and impact measurement: both globally and specifically within the Brazilian third-sector context. This knowledge positions you to lead non-profit organizations more effectively, make informed strategic decisions, enhance organizational sustainability, and maximize mission impact.
 
-The non-profit sector plays a critical role in addressing society's most pressing challenges. With the knowledge and tools from this course, you are better equipped to contribute to this vital work—whether as a leader, board member, staff member, volunteer, or donor. The sector needs committed, knowledgeable practitioners like you who understand both the art and science of effective non-profit management.
+The non-profit sector plays a critical role in addressing society's most pressing challenges. With the knowledge and tools from this course, you are better equipped to contribute to this vital work: whether as a leader, board member, staff member, volunteer, or donor. The sector needs committed, knowledgeable practitioners like you who understand both the art and science of effective non-profit management.
 
 Thank you for investing in this comprehensive learning journey. Your commitment to mastering non-profit organization fundamentals strengthens the entire third-sector ecosystem and, ultimately, the communities and causes it serves.
 

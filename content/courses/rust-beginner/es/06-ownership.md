@@ -26,7 +26,7 @@ fn main() {
 ```
 
 > [!NOTE]
-> Cuando `s` sale de ámbito, Rust llama `drop()` automáticamente — como C++ RAII pero sin la gestión manual de destructores.
+> Cuando `s` sale de ámbito, Rust llama `drop()` automáticamente: como C++ RAII pero sin la gestión manual de destructores.
 
 ## Semántica de Movimiento
 
@@ -45,7 +45,7 @@ fn main() {
 Después del movimiento, `s1` es **invalidado**. El compilador previene uso-después-de-movimiento.
 
 > [!SUCCESS]
-> Los movimientos son baratos — solo copian un puntero, longitud y capacidad. Ningún dato del heap se copia. El antiguo dueño simplemente se marca como inválido en tiempo de compilación.
+> Los movimientos son baratos: solo copian un puntero, longitud y capacidad. Ningún dato del heap se copia. El antiguo dueño simplemente se marca como inválido en tiempo de compilación.
 
 ### Qué Sucede en la Memoria
 
@@ -146,7 +146,7 @@ fn main() {
 > [!WARNING]
 > Si un tipo o cualquiera de sus campos implementa `Drop`, no puede implementar `Copy`. Esto previene errores de doble liberación.
 
-## Clone — Copia Profunda Explícita
+## Clone: Copia Profunda Explícita
 
 Cuando quieres una copia profunda de datos en el heap, llama `.clone()`:
 

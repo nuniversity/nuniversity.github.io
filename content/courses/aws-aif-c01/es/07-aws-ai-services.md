@@ -1,13 +1,13 @@
 ---
 title: "Servicios de IA prefabricados de AWS: visión, lenguaje, voz y conversación"
-description: "Elige, configura y calcula el precio de los diez servicios de IA prefabricados del examen AIF-C01 — Rekognition, Comprehend, Textract, Translate, Polly, Transcribe, Lex, Personalize, Forecast y Amazon Q — con unidades de facturación, free tiers, límites duros, ejemplos resueltos de AWS y un árbol de decisión de qué servicio usar."
+description: "Elige, configura y calcula el precio de los diez servicios de IA prefabricados del examen AIF-C01, Rekognition, Comprehend, Textract, Translate, Polly, Transcribe, Lex, Personalize, Forecast y Amazon Q, con unidades de facturación, free tiers, límites duros, ejemplos resueltos de AWS y un árbol de decisión de qué servicio usar."
 order: 7
 difficulty: "intermediate"
 duration: "90 min"
 ---
 # Servicios de IA prefabricados de AWS: visión, lenguaje, voz y conversación
 
-Todo lo que has construido hasta ahora — pipelines de datos, algoritmos, trabajos de entrenamiento, endpoints — era **tuyo**: tus datos, tu modelo, tu factura de horas-instancia. Esta lección trata de la otra mitad de la superficie del AIF-C01: los servicios donde **AWS ya es dueño del modelo** y tú alquilas la respuesta por unidad. Ese único cambio de propiedad cambia cada decisión que tomas. Ya no ajustas hiperparámetros; eliges **la API correcta, el conjunto de funciones correcto dentro de esa API y el medidor correcto** — y el examen prueba exactamente eso, porque «¿qué servicio?» y «¿cuánto cuesta?» son las dos formas de pregunta que se repiten en los cinco dominios.
+Todo lo que has construido hasta ahora: pipelines de datos, algoritmos, trabajos de entrenamiento, endpoints: era **tuyo**: tus datos, tu modelo, tu factura de horas-instancia. Esta lección trata de la otra mitad de la superficie del AIF-C01: los servicios donde **AWS ya es dueño del modelo** y tú alquilas la respuesta por unidad. Ese único cambio de propiedad cambia cada decisión que tomas. Ya no ajustas hiperparámetros; eliges **la API correcta, el conjunto de funciones correcto dentro de esa API y el medidor correcto**, y el examen prueba exactamente eso, porque «¿qué servicio?» y «¿cuánto cuesta?» son las dos formas de pregunta que se repiten en los cinco dominios.
 
 ```text
 =====================================================================
@@ -32,13 +32,13 @@ Todo lo que has construido hasta ahora — pipelines de datos, algoritmos, traba
 ```
 
 > [!NOTE]
-> **Cómo leer esta lección.** Cada precio, cuota y cifra de free tier de abajo procede de una página de precios de AWS, una página de «Directrices y cuotas» de AWS, un FAQ de AWS o un ejemplo resuelto de AWS, capturados en 2026. Cuando un número circula solo en calculadoras de terceros — tarifas de streaming de Lex, algunas tarifas de nivel 2/3 de Transcribe, precios por unidad de Textract Layout y Signatures — se marca como *no memorices* en la sección donde de otro modo te tentarías a usarlo. Cuando AWS y un blog discrepan, gana AWS; cuando una página de AWS y otra página de AWS discrepan, la página de precios gana para las tarifas y la página de cuotas gana para los límites.
+> **Cómo leer esta lección.** Cada precio, cuota y cifra de free tier de abajo procede de una página de precios de AWS, una página de «Directrices y cuotas» de AWS, un FAQ de AWS o un ejemplo resuelto de AWS, capturados en 2026. Cuando un número circula solo en calculadoras de terceros, tarifas de streaming de Lex, algunas tarifas de nivel 2/3 de Transcribe, precios por unidad de Textract Layout y Signatures, se marca como *no memorices* en la sección donde de otro modo te tentarías a usarlo. Cuando AWS y un blog discrepan, gana AWS; cuando una página de AWS y otra página de AWS discrepan, la página de precios gana para las tarifas y la página de cuotas gana para los límites.
 
 Al terminar esta lección sabrás:
 
 - mapear **modalidad a servicio** y defender la elección frente a tres distractores plausibles;
 - enunciar la **unidad de facturación** de cada servicio del alcance y calcular una factura mensual a partir de los propios ejemplos resueltos de AWS;
-- recordar los **free tiers cuya duración difiere** — 12 meses para la mayoría, **3 meses para Textract**, 60 días para Amazon Q Business;
+- recordar los **free tiers cuya duración difiere**: 12 meses para la mayoría, **3 meses para Textract**, 60 días para Amazon Q Business;
 - aplicar la división de medición **Grupo 1 / Grupo 2 de Rekognition** y explicar por qué dos APIs sobre una imagen cuesta el doble;
 - elegir la **combinación correcta de API y funciones de Textract** para OCR, formularios, tablas, consultas, documentos de identidad, gastos y préstamos;
 - defender el **mínimo de 1 TPS aprovisionada de Personalize** y la respuesta sobre el **ciclo de vida de Amazon Forecast**;
@@ -63,7 +63,7 @@ El examen AIF-C01 no te pide que recuerdes nombres de métodos de API de memoria
 | **Amazon Transcribe** | Voz → texto | ASR por lotes y en vivo, transcripciones de centros de contacto, diarización, enmascaramiento, Call Analytics | Por **minuto de audio**, incrementos de 1 s | Streaming Nivel 1 **0,01 USD/min**; CA post-llamada **0,03 USD/min** |
 | **Amazon Lex** | Texto/voz de entrada | NLU de intención y slot para chatbots e IVR, con cumplimiento mediante Lambda | Por **petición** (voz o texto) | Voz **0,004 USD**; texto **0,00075 USD** |
 | **Amazon Personalize** | Interacciones | Recomendaciones en tiempo real, reordenación, personalización por lotes | Por GB / hora de entrenamiento / **1.000 peticiones** | **0,0556 USD por 1.000** (primeros 72M/mes) |
-| **Amazon Forecast** | Series temporales | Pronóstico de demanda, energía y transporte | — | **Cerrado a clientes nuevos el 29 de julio de 2024** → SageMaker Canvas |
+| **Amazon Forecast** | Series temporales | Pronóstico de demanda, energía y transporte |: | **Cerrado a clientes nuevos el 29 de julio de 2024** → SageMaker Canvas |
 | **Amazon Q** | Texto (empresa) | Asistente de Q Business con permisos, ayuda de codificación de Q Developer, asistencia de agente de Q en Connect | Por **usuario/mes** + capacidad de índice | Lite **3 USD** / Pro **20 USD** por usuario al mes |
 
 ```mermaid
@@ -96,11 +96,11 @@ Un servicio prefabricado es **una API con un contrato de salida fijo**. Envías 
 
 Tres consecuencias gobiernan el examen entero:
 
-1. **El precio es por unidad, no por hora** — imágenes, páginas, caracteres, minutos, peticiones, usuarios. Ninguna instancia que dimensionar, ningún endpoint en reposo del que olvidarte (con una excepción bien ruidosa: las campañas de Personalize, sección 8.1).
-2. **La selección de funciones dentro de un servicio cambia la factura** — Textract OCR cuesta **0,0015 USD** por página y Textract Forms cuesta **0,05 USD** por página, un multiplicador de **33×** sobre el mismo documento.
-3. **Los free tiers no son uniformes** — 12 meses para la mayoría de servicios, **3 meses para Textract**, una **prueba de 60 días** para Amazon Q Business, y **nada** para Personalize.
+1. **El precio es por unidad, no por hora**: imágenes, páginas, caracteres, minutos, peticiones, usuarios. Ninguna instancia que dimensionar, ningún endpoint en reposo del que olvidarte (con una excepción bien ruidosa: las campañas de Personalize, sección 8.1).
+2. **La selección de funciones dentro de un servicio cambia la factura**: Textract OCR cuesta **0,0015 USD** por página y Textract Forms cuesta **0,05 USD** por página, un multiplicador de **33×** sobre el mismo documento.
+3. **Los free tiers no son uniformes**: 12 meses para la mayoría de servicios, **3 meses para Textract**, una **prueba de 60 días** para Amazon Q Business, y **nada** para Personalize.
 
-- **📚 ¿Sabías que…?** La lista de servicios de IA/ML del alcance de la guía del examen AIF-C01 contiene **14 servicios**: Amazon Augmented AI (A2I), Amazon Bedrock, Amazon Comprehend, Amazon Fraud Detector, Amazon Kendra, Amazon Lex, Amazon Personalize, Amazon Polly, Amazon Q, Amazon Rekognition, Amazon SageMaker, Amazon Textract, Amazon Transcribe y Amazon Translate. Ocho de los diez servicios de esta lección salen directamente de esa lista — Amazon Forecast **no** (es una pregunta de ciclo de vida, no de construcción), y Amazon Q se añadió en una revisión posterior de la guía junto con Aurora, Bedrock AgentCore, Kiro, Strands Agents, SageMaker JumpStart y AWS Transform. Comprueba de nuevo la lista del alcance actual antes del día del examen; la lista ha cambiado antes y volverá a cambiar.
+- **📚 ¿Sabías que…?** La lista de servicios de IA/ML del alcance de la guía del examen AIF-C01 contiene **14 servicios**: Amazon Augmented AI (A2I), Amazon Bedrock, Amazon Comprehend, Amazon Fraud Detector, Amazon Kendra, Amazon Lex, Amazon Personalize, Amazon Polly, Amazon Q, Amazon Rekognition, Amazon SageMaker, Amazon Textract, Amazon Transcribe y Amazon Translate. Ocho de los diez servicios de esta lección salen directamente de esa lista: Amazon Forecast **no** (es una pregunta de ciclo de vida, no de construcción), y Amazon Q se añadió en una revisión posterior de la guía junto con Aurora, Bedrock AgentCore, Kiro, Strands Agents, SageMaker JumpStart y AWS Transform. Comprueba de nuevo la lista del alcance actual antes del día del examen; la lista ha cambiado antes y volverá a cambiar.
 
 ---
 
@@ -110,7 +110,7 @@ Tres consecuencias gobiernan el examen entero:
 
 Rekognition es el servicio con el medidor más malinterpretado de todo el conjunto prefabricado, y la razón es histórica. En la reducción de precios del **9 de noviembre de 2021** AWS dividió las APIs de imagen en dos grupos que se **miden por separado**, y esa división sigue gobernando la facturación en 2026.
 
-| Grupo 1 — APIs de cara y de usuario | Grupo 2 — APIs de detección |
+| Grupo 1, APIs de cara y de usuario | Grupo 2, APIs de detección |
 |---|---|
 | `CompareFaces`, `IndexFaces`, `SearchFaceByImage`, `SearchFaces` | `DetectFaces`, `DetectModerationLabels`, `DetectLabels` |
 | `AssociateFaces`, `DisassociateFaces`, `SearchUsersByImage`, `SearchUsers` | `DetectText`, `RecognizeCelebrities`, `DetectProtectiveEquipment` |
@@ -124,11 +124,11 @@ La regla que el examen realmente prueba: **la facturación de imagen es por imag
 | Imagen de Grupo 2, primeras 1M de imágenes/mes | **0,0010 USD por imagen** |
 | Imagen de Grupo 2, más allá de 1M | 0,0008 USD por imagen |
 | Image Properties (medidor aparte) | **0,00075 USD por imagen** primeras 1M, después 0,0006 |
-| Video almacenado — detección de etiquetas | **0,10 USD por minuto** |
-| Video almacenado — detección de planos | **0,05 USD por minuto** |
-| Video almacenado — moderación de contenido | **0,10 USD por minuto** |
+| Video almacenado: detección de etiquetas | **0,10 USD por minuto** |
+| Video almacenado: detección de planos | **0,05 USD por minuto** |
+| Video almacenado: moderación de contenido | **0,10 USD por minuto** |
 | Eventos de video en streaming (entrada de Kinesis Video Streams) | **0,00817 USD por minuto**, hasta **120 segundos** analizados por evento; Kinesis se factura aparte |
-| Almacenamiento de metadatos de cara | **0,00001 USD por cara al mes** — el *«0,01 USD por 1.000 vectores de cara al mes»* del FAQ |
+| Almacenamiento de metadatos de cara | **0,00001 USD por cara al mes**: el *«0,01 USD por 1.000 vectores de cara al mes»* del FAQ |
 
 ### 2.3 Límites duros y free tier
 
@@ -143,7 +143,7 @@ La regla que el examen realmente prueba: **la facturación de imagen es por imag
 
 ### 2.4 Ejemplos resueltos de AWS
 
-**Ejemplo 1 — 2,5 millones de imágenes de moderación.** El propio ejemplo de precios de AWS ejecuta `DetectModerationLabels` sobre 2.500.000 imágenes en un mes:
+**Ejemplo 1: 2,5 millones de imágenes de moderación.** El propio ejemplo de precios de AWS ejecuta `DetectModerationLabels` sobre 2.500.000 imágenes en un mes:
 
 $$
 1{,}000{,}000 \times \$0.0010 + 1{,}500{,}000 \times \$0.0008 = \$1{,}000 + \$1{,}200 = \$2{,}200 \text{ per month}
@@ -151,14 +151,14 @@ $$
 
 Añade una segunda API sobre las mismas imágenes (digamos `DetectText` para marcas de agua) y la factura se duplica a **4.400 USD/mes**, porque cada API factura su propio recuento de imágenes.
 
-**Ejemplo 2 — API de video frente a muestreo de fotogramas.** Para un vídeo de 60 segundos:
+**Ejemplo 2: API de video frente a muestreo de fotogramas.** Para un vídeo de 60 segundos:
 
 | Enfoque | Aritmética | Coste |
 |---|---|---|
 | API de video, detección de etiquetas | 1 minuto × 0,10 USD | **0,10 USD** |
 | Muestreo de fotogramas a 2 fps, imágenes de Grupo 2 | 120 imágenes × 0,0010 USD | **0,12 USD** + tu propio cómputo de extracción |
 
-La brecha se amplía con la duración: en un análisis del blog de AWS de **4.271 minutos** de video, la API de video costó **427,14 USD** mientras que el muestreo de imágenes a 2 fps costó **512,57 USD por las imágenes más 164,23 USD por la Lambda que las muestreó — 676,80 USD en total**. Por debajo de aproximadamente un minuto las dos están cerca; por encima, la API de video gana en precio *y* devuelve marcas de tiempo, límites de plano y seguimiento de personas que el muestreo de fotogramas no puede dar.
+La brecha se amplía con la duración: en un análisis del blog de AWS de **4.271 minutos** de video, la API de video costó **427,14 USD** mientras que el muestreo de imágenes a 2 fps costó **512,57 USD por las imágenes más 164,23 USD por la Lambda que las muestreó: 676,80 USD en total**. Por debajo de aproximadamente un minuto las dos están cerca; por encima, la API de video gana en precio *y* devuelve marcas de tiempo, límites de plano y seguimiento de personas que el muestreo de fotogramas no puede dar.
 
 ```mermaid
 flowchart TD
@@ -178,10 +178,10 @@ flowchart TD
 > [!WARNING]
 > **Las tres trampas de Rekognition que cuestan preguntas.**
 > 1. **Dos APIs sobre un activo = dos activos facturados.** Grupo 1 y Grupo 2 se miden por separado, y dentro de un grupo cada llamada a la API factura su propia imagen (o su propio minuto de video).
-> 2. **La moderación de video es una API de video, no una API de imagen.** Si la opción dice *«facturado por imagen»* para videos almacenados en S3, está describiendo muestreo de fotogramas — una elección de ingeniería válida, pero no la respuesta nativa del servicio, que es **0,10 USD por minuto de video**.
+> 2. **La moderación de video es una API de video, no una API de imagen.** Si la opción dice *«facturado por imagen»* para videos almacenados en S3, está describiendo muestreo de fotogramas: una elección de ingeniería válida, pero no la respuesta nativa del servicio, que es **0,10 USD por minuto de video**.
 > 3. **Los eventos en streaming no son de forma libre.** Cada evento disparado por Kinesis analiza como máximo **120 segundos**, cuesta **0,00817 USD/min**, y encima sigues pagando Kinesis.
 
-- **📚 ¿Sabías que…?** El medidor de metadatos de cara tiene dos grafías oficiales del mismo número: la página de precios dice **0,00001 USD por cara al mes** y el FAQ dice **0,01 USD por 1.000 vectores de cara al mes**. Son idénticos (0,01 ÷ 1.000 = 0,00001). A las opciones del examen les encanta presentar uno como descuento del otro — son el mismo precio, y ambos son *almacenamiento*: una colección de 500.000 caras cuesta **5,00 USD/mes** busques en ella o no.
+- **📚 ¿Sabías que…?** El medidor de metadatos de cara tiene dos grafías oficiales del mismo número: la página de precios dice **0,00001 USD por cara al mes** y el FAQ dice **0,01 USD por 1.000 vectores de cara al mes**. Son idénticos (0,01 ÷ 1.000 = 0,00001). A las opciones del examen les encanta presentar uno como descuento del otro: son el mismo precio, y ambos son *almacenamiento*: una colección de 500.000 caras cuesta **5,00 USD/mes** busques en ella o no.
 
 ---
 
@@ -193,7 +193,7 @@ Comprehend mide en **unidades de 100 caracteres** con un **mínimo de 3 unidades
 
 El mínimo es donde los candidatos pierden preguntas fáciles. Un tweet de 120 caracteres es una unidad de contenido real, pero se factura como **3 unidades = 0,0003 USD**. Un ticket de soporte de 600 caracteres se factura como **6 unidades = 0,0006 USD**. Las peticiones por lotes son iguales: pagas por lo que envías, redondeado al alza por petición.
 
-**Ejemplo resuelto — tickets de soporte.** 10.000 tickets de 550 caracteres cada uno: 550 ÷ 100 = 5,5 → **6 unidades por petición** → 10.000 × 6 = 60.000 unidades × 0,0001 USD = **6,00 USD al mes**. Observa lo que ese número enseña: a este volumen Comprehend es prácticamente gratis, y exactamente por eso el examen lo empareja con una pregunta de *selección de funciones* y no con una de *coste*.
+**Ejemplo resuelto: tickets de soporte.** 10.000 tickets de 550 caracteres cada uno: 550 ÷ 100 = 5,5 → **6 unidades por petición** → 10.000 × 6 = 60.000 unidades × 0,0001 USD = **6,00 USD al mes**. Observa lo que ese número enseña: a este volumen Comprehend es prácticamente gratis, y exactamente por eso el examen lo empareja con una pregunta de *selección de funciones* y no con una de *coste*.
 
 ### 3.2 Qué incluye la superficie de la API
 
@@ -221,7 +221,7 @@ El mínimo es donde los candidatos pierden preguntas fáciles. Un tweet de 120 c
 | Endpoint mientras está en marcha | Facturado en **incrementos de 1 segundo**, **mínimo de 60 segundos** |
 | Throughput aprovisionado | **1 unidad de inferencia (IU) = 100 caracteres/segundo** a **0,0005 USD por segundo** |
 | Trabajo de modelado de temas | Primeros **100 MB a precio fijo**, después **0,004 USD por MB** |
-| Free tier | **50.000 unidades (5M de caracteres) por API al mes** — **sin free tier para Custom Comprehend** |
+| Free tier | **50.000 unidades (5M de caracteres) por API al mes**; **sin free tier para Custom Comprehend** |
 
 ### 3.4 Límites que vale la pena memorizar
 
@@ -233,7 +233,7 @@ El mínimo es donde los candidatos pierden preguntas fáciles. Un tweet de 120 c
 | Endpoints | **20 por Región**, **200 IU por Región**, **50 IU por endpoint** |
 | Cuerpo de petición personalizada síncrona | **10 KB** |
 
-- **📚 ¿Sabías que…?** La **clasificación de seguridad de prompts** de Comprehend es el puente entre esta lección y Bedrock: AWS la añadió para que puedas filtrar un prompt de usuario en busca de contenido dañino *antes* de que llegue a un modelo fundacional. En el examen, una pregunta sobre «filtrar una entrada antes de la generación» tiene dos respuestas que parecen válidas y solo una es correcta — **Comprehend** clasifica y puntuúa el texto; **Bedrock Guardrails** aplica políticas en el momento de la generación. Lee con cuidado en qué lado de la llamada te coloca la pregunta.
+- **📚 ¿Sabías que…?** La **clasificación de seguridad de prompts** de Comprehend es el puente entre esta lección y Bedrock: AWS la añadió para que puedas filtrar un prompt de usuario en busca de contenido dañino *antes* de que llegue a un modelo fundacional. En el examen, una pregunta sobre «filtrar una entrada antes de la generación» tiene dos respuestas que parecen válidas y solo una es correcta: **Comprehend** clasifica y puntuúa el texto; **Bedrock Guardrails** aplica políticas en el momento de la generación. Lee con cuidado en qué lado de la llamada te coloca la pregunta.
 
 ---
 
@@ -241,7 +241,7 @@ El mínimo es donde los candidatos pierden preguntas fáciles. Un tweet de 120 c
 
 ### 4.1 Cinco APIs, un interruptor de funciones
 
-Textract expone **cinco APIs**: `Detect Document Text`, `Analyze Document`, `Analyze Expense`, `Analyze ID` y `Analyze Lending`. Solo `Analyze Document` lleva tipos de función — **Forms, Tables, Queries, Custom Queries, Signatures y Layout** —, y son combinables en una sola llamada, con precio por página *por función habilitada*.
+Textract expone **cinco APIs**: `Detect Document Text`, `Analyze Document`, `Analyze Expense`, `Analyze ID` y `Analyze Lending`. Solo `Analyze Document` lleva tipos de función, **Forms, Tables, Queries, Custom Queries, Signatures y Layout**, y son combinables en una sola llamada, con precio por página *por función habilitada*.
 
 | API | Qué devuelve | Cuándo usarla |
 |---|---|---|
@@ -263,14 +263,14 @@ Textract expone **cinco APIs**: `Detect Document Text`, `Analyze Document`, `Ana
 | Forms + Tables + Queries | **0,070 USD** |
 | Custom Queries | **0,025 USD** |
 
-De esa tabla salen dos hechos. Primero, **habilitar Forms multiplica la factura de OCR por 33×**. Segundo, **Forms + Tables + Queries a 0,070 USD es aproximadamente 47× el solo OCR** — y por eso al examen le encanta la pregunta *«¿qué funciones necesita realmente la carga de trabajo?»*.
+De esa tabla salen dos hechos. Primero, **habilitar Forms multiplica la factura de OCR por 33×**. Segundo, **Forms + Tables + Queries a 0,070 USD es aproximadamente 47× el solo OCR**, y por eso al examen le encanta la pregunta *«¿qué funciones necesita realmente la carga de trabajo?»*.
 
 > [!NOTE]
-> **Signatures y Layout.** La página pública de precios de Textract de AWS pone precio a las seis combinaciones de funciones de arriba. `Layout` a **0,004 USD/página** y `Signatures` a **0,0035 USD/página** aparecen en una plantilla de precios de ejemplo de la AWS Solutions Library, y la documentación de AWS indica que Layout es **gratis cuando Tables está habilitado**. Trata esos dos precios por unidad como *verifícalos antes de citarlos* — pero memoriza la regla: **Layout viaja junto con Tables, y cada otra función añade su propio cargo por página.**
+> **Signatures y Layout.** La página pública de precios de Textract de AWS pone precio a las seis combinaciones de funciones de arriba. `Layout` a **0,004 USD/página** y `Signatures` a **0,0035 USD/página** aparecen en una plantilla de precios de ejemplo de la AWS Solutions Library, y la documentación de AWS indica que Layout es **gratis cuando Tables está habilitado**. Trata esos dos precios por unidad como *verifícalos antes de citarlos*, pero memoriza la regla: **Layout viaja junto con Tables, y cada otra función añade su propio cargo por página.**
 
 ### 4.3 Queries: precio por página, no por respuesta
 
-Queries te permiten hacer preguntas en lenguaje natural sobre un documento — *«¿Cuál es el número de cuenta?»* — y recibir respuestas con coordenadas de página. Los límites son **15 consultas por página de forma síncrona** y **30 por página de forma asincrónica**, y la regla crítica de precios es que **se factura por página independientemente de cuántas respuestas vuelvan**. Hacer una pregunta o quince preguntas sobre la misma página cuesta lo mismo. Hacer la misma pregunta a 100.000 páginas cuesta 100.000 × 0,015 USD.
+Queries te permiten hacer preguntas en lenguaje natural sobre un documento, *«¿Cuál es el número de cuenta?»*, y recibir respuestas con coordenadas de página. Los límites son **15 consultas por página de forma síncrona** y **30 por página de forma asincrónica**, y la regla crítica de precios es que **se factura por página independientemente de cuántas respuestas vuelvan**. Hacer una pregunta o quince preguntas sobre la misma página cuesta lo mismo. Hacer la misma pregunta a 100.000 páginas cuesta 100.000 × 0,015 USD.
 
 ### 4.4 Free tier: tres meses, no doce
 
@@ -282,11 +282,11 @@ Queries te permiten hacer preguntas en lenguaje natural sobre un documento — *
 | `Analyze Expense` | 100 páginas/mes | **3 meses** |
 | `Analyze ID` | 100 páginas/mes | **3 meses** |
 | `Analyze Lending` | 2.000 páginas/mes | **3 meses** |
-| Custom Queries | **Sin free tier** | — |
+| Custom Queries | **Sin free tier** |: |
 
 El recuento de páginas es sencillo y deliberadamente favorable al examen: **una imagen (PNG, TIFF o JPEG) es una página**, y **cada página de un PDF es una página**.
 
-**Ejemplo resuelto — selección de funciones.** El OCR de 100.000 páginas cuesta **150 USD**. Forms + Tables sobre 5.000 páginas cuesta 5.000 × (0,05 + 0,015 USD) = **325 USD**. El segundo trabajo toca **20× menos páginas** y cuesta **2,2× más** — 0,065 USD por página frente a 0,0015 USD, una diferencia unitaria de **43×**. La lección no es «evita Forms»; es «habilita solo las funciones que vas a leer».
+**Ejemplo resuelto, selección de funciones.** El OCR de 100.000 páginas cuesta **150 USD**. Forms + Tables sobre 5.000 páginas cuesta 5.000 × (0,05 + 0,015 USD) = **325 USD**. El segundo trabajo toca **20× menos páginas** y cuesta **2,2× más**, 0,065 USD por página frente a 0,0015 USD, una diferencia unitaria de **43×**. La lección no es «evita Forms»; es «habilita solo las funciones que vas a leer».
 
 ```mermaid
 flowchart TD
@@ -329,7 +329,7 @@ Los caracteres incluyen espacios, así que no puedes engañar al medidor elimina
 
 ### 5.3 Por qué no se te cobra
 
-El FAQ de AWS traza una línea inusualmente precisa: **no** se te cobra cuando el **idioma de origen es igual al idioma de destino**, y **no** se te cobra cuando la llamada **falla y no devuelve ninguna traducción**. Sí se te cobra por el contenido no traducible que todavía produce salida. En la práctica eso significa que un bucle mal configurado que «traduce» inglés a inglés es gratis — y también que el examen puede preguntar por excepciones de facturación sin aritmética alguna.
+El FAQ de AWS traza una línea inusualmente precisa: **no** se te cobra cuando el **idioma de origen es igual al idioma de destino**, y **no** se te cobra cuando la llamada **falla y no devuelve ninguna traducción**. Sí se te cobra por el contenido no traducible que todavía produce salida. En la práctica eso significa que un bucle mal configurado que «traduce» inglés a inglés es gratis, y también que el examen puede preguntar por excepciones de facturación sin aritmética alguna.
 
 ### 5.4 Terminología personalizada
 
@@ -344,7 +344,7 @@ La terminología personalizada es cómo fijas nombres de marca, códigos de prod
 | Archivos por petición | **1** |
 | Emparejamiento | **Sensible a mayúsculas** |
 
-**Ejemplo resuelto — localizar un manual.** 100 páginas × 20.000 caracteres = 2.000.000 de caracteres:
+**Ejemplo resuelto: localizar un manual.** 100 páginas × 20.000 caracteres = 2.000.000 de caracteres:
 
 | Opción | Aritmética | Coste |
 |---|---|---|
@@ -358,7 +358,7 @@ La terminología personalizada es cómo fijas nombres de marca, códigos de prod
 
 Polly y Transcribe son las dos mitades del mismo problema, y al examen le gusta ponerlos en la misma lista de opciones para ver si sabes en qué dirección fluye el audio.
 
-### 6.1 Amazon Polly — texto a voz
+### 6.1 Amazon Polly: texto a voz
 
 | Motor | Precio por 1M de caracteres | Free tier al mes |
 |---|---|---|
@@ -367,9 +367,9 @@ Polly y Transcribe son las dos mitades del mismo problema, y al examen le gusta 
 | Generativo | **30,00 USD** | 100.000 caracteres (primeros 12 meses) |
 | Long-Form | **100,00 USD** | 500.000 caracteres (primeros 12 meses) |
 
-**La regla de doble facturación:** `Speech` y `Speech Marks` son **peticiones facturadas por separado**. Pedir ambos para los mismos 1.000 caracteres factura **2.000 caracteres**. Las Speech Marks son lo que un reproductor web usa para resaltar palabras en sincronía con el audio, así que el patrón es común en eLearning — y duplica la línea de Polly en la factura.
+**La regla de doble facturación:** `Speech` y `Speech Marks` son **peticiones facturadas por separado**. Pedir ambos para los mismos 1.000 caracteres factura **2.000 caracteres**. Las Speech Marks son lo que un reproductor web usa para resaltar palabras en sincronía con el audio, así que el patrón es común en eLearning, y duplica la línea de Polly en la factura.
 
-**Ejemplo resuelto — un millón de caracteres:**
+**Ejemplo resuelto: un millón de caracteres:**
 
 | Motor | Solo audio | Audio + Speech Marks |
 |---|---|---|
@@ -378,9 +378,9 @@ Polly y Transcribe son las dos mitades del mismo problema, y al examen le gusta 
 | Generativo | **30,00 USD** | 60,00 USD |
 | Long-Form | **100,00 USD** | 200,00 USD |
 
-Polly se factura **por carácter**, nunca por petición — una opción que diga «por petición de síntesis» es un distractor.
+Polly se factura **por carácter**, nunca por petición: una opción que diga «por petición de síntesis» es un distractor.
 
-### 6.2 Amazon Transcribe — voz a texto
+### 6.2 Amazon Transcribe: voz a texto
 
 Transcribe factura en **incrementos de 1 segundo sin mínimo**, algo inusual y que vale la pena memorizar por sí solo: un clip de 3 segundos cuesta tres segundos, no un minuto redondeado.
 
@@ -402,9 +402,9 @@ Transcribe factura en **incrementos de 1 segundo sin mínimo**, algo inusual y q
 | Identificación de idioma | |
 | Formatos de transcripción (JSON, TXT, SRT, VTT) | |
 
-Dos reglas estructurales: **el audio estéreo factura la duración total una vez, no por canal**, y **Call Analytics devuelve campos de información** — tiempo de habla, interrupciones, silencios, sentimiento por participante — que la transcripción simple no devuelve.
+Dos reglas estructurales: **el audio estéreo factura la duración total una vez, no por canal**, y **Call Analytics devuelve campos de información**, tiempo de habla, interrupciones, silencios, sentimiento por participante, que la transcripción simple no devuelve.
 
-**Ejemplo resuelto — un centro de contacto de 200.000 llamadas.** 200.000 llamadas × 10 minutos = **2.000.000 de minutos** de analítica post-llamada:
+**Ejemplo resuelto: un centro de contacto de 200.000 llamadas.** 200.000 llamadas × 10 minutos = **2.000.000 de minutos** de analítica post-llamada:
 
 $$
 250{,}000 \times \$0.0300 + 750{,}000 \times \$0.0186 + 1{,}000{,}000 \times \$0.0138
@@ -422,7 +422,7 @@ $$
 | Concurrencia de Call Analytics | **100 trabajos** |
 | Free tier | **60 minutos al mes durante 12 meses**, compartidos entre Transcribe, Call Analytics y Transcribe Medical; sin GovCloud, sin arrastre |
 
-- **📚 ¿Sabías que…?** El free tier **estándar de 5M de caracteres de Polly** es la única cifra de la página de precios de AWS que omite el calificativo *«primeros 12 meses»* que sí se usa para Neural, Long-Form y Generativo — mientras que páginas de terceros lo llaman con confianza «gratis para siempre». No construyas una respuesta sobre eso: memoriza la página tal como dice, y trata cualquier afirmación de un free tier de Polly permanente como sin verificar. La misma disciplina aplica a las tarifas de streaming de Lex, que circulan en calculadoras de terceros pero no están en el propio extracto de precios de AWS — los números de Lex publicados por AWS son **0,004 USD de voz** y **0,00075 USD de texto**.
+- **📚 ¿Sabías que…?** El free tier **estándar de 5M de caracteres de Polly** es la única cifra de la página de precios de AWS que omite el calificativo *«primeros 12 meses»* que sí se usa para Neural, Long-Form y Generativo, mientras que páginas de terceros lo llaman con confianza «gratis para siempre». No construyas una respuesta sobre eso: memoriza la página tal como dice, y trata cualquier afirmación de un free tier de Polly permanente como sin verificar. La misma disciplina aplica a las tarifas de streaming de Lex, que circulan en calculadoras de terceros pero no están en el propio extracto de precios de AWS, los números de Lex publicados por AWS son **0,004 USD de voz** y **0,00075 USD de texto**.
 
 ---
 
@@ -440,9 +440,9 @@ Ejemplo resuelto de AWS: **8.000 peticiones de voz + 2.000 de texto** = 8.000 ×
 ### 7.2 Qué cuenta como una petición
 
 - **Cada entrada del usuario es una petición facturada.** Cinco mensajes escritos en una conversación son cinco peticiones.
-- **En una conversación en streaming, todos los turnos viajan en una sola llamada a la API** — Lex V2 transmite sobre **HTTP/2**, y el intercambio completo es una sola llamada facturable en lugar de cinco.
+- **En una conversación en streaming, todos los turnos viajan en una sola llamada a la API**: Lex V2 transmite sobre **HTTP/2**, y el intercambio completo es una sola llamada facturable en lugar de cinco.
 - La entrada de voz está limitada a **15 segundos por petición**.
-- Las respuestas llevan puntuaciones de confianza de NLU, sentimiento y un campo `interpretationSource` que puede ser `Bedrock` o `Lex` — la pista del examen de que Lex puede estar respaldado por un modelo fundacional para el significado generativo mientras devuelve una intención estructurada.
+- Las respuestas llevan puntuaciones de confianza de NLU, sentimiento y un campo `interpretationSource` que puede ser `Bedrock` o `Lex`: la pista del examen de que Lex puede estar respaldado por un modelo fundacional para el significado generativo mientras devuelve una intención estructurada.
 
 ### 7.3 Free tier
 
@@ -450,7 +450,7 @@ Ejemplo resuelto de AWS: **8.000 peticiones de voz + 2.000 de texto** = 8.000 ×
 
 ### 7.4 Dónde termina Lex
 
-Lex responde *«¿qué quiso el usuario?»* — intención, slots, estado de sesión, estado de cumplimiento. **No** responde preguntas abiertas sobre contenido de empresa, y no genera prosa. Ese límite es el conjunto de distractores más común de esta lección: **Q Business** para respuestas que respetan permisos sobre datos de la empresa, **Bedrock** para generación abierta, **Lex** para el enrutamiento estructurado de intenciones hacia una Lambda.
+Lex responde *«¿qué quiso el usuario?»*: intención, slots, estado de sesión, estado de cumplimiento. **No** responde preguntas abiertas sobre contenido de empresa, y no genera prosa. Ese límite es el conjunto de distractores más común de esta lección: **Q Business** para respuestas que respetan permisos sobre datos de la empresa, **Bedrock** para generación abierta, **Lex** para el enrutamiento estructurado de intenciones hacia una Lambda.
 
 ---
 
@@ -466,7 +466,7 @@ Lex responde *«¿qué quiso el usuario?»* — intención, slots, estado de ses
 | Modelo de hora de recomendador | **0,375 / 0,045 / 0,018 / 0,005 USD por 100.000 usuarios**, con **4.000 / 6.000 / 9.000 / 14.000 recomendaciones gratis por hora**; los extras a **0,0833 / 0,0417 / 0,0208 USD por 1.000** |
 | Free tier | **Ninguno listado en la página de precios** |
 
-**La trampa: el throughput aprovisionado mínimo.** Por defecto, cada campaña activa debe mantener **al menos 1 transacción aprovisionada por segundo (TPS)**, y AWS afirma claramente que el mínimo aplica **«aunque no hagas ninguna petición»** — se factura el **mayor entre el mínimo y el TPS real**.
+**La trampa: el throughput aprovisionado mínimo.** Por defecto, cada campaña activa debe mantener **al menos 1 transacción aprovisionada por segundo (TPS)**, y AWS afirma claramente que el mínimo aplica **«aunque no hagas ninguna petición»**: se factura el **mayor entre el mínimo y el TPS real**.
 
 La aritmética es brutal y el propio Knowledge Center de AWS la publica: 1 TPS mantenida durante un día son
 
@@ -501,7 +501,7 @@ flowchart TD
 | Vocabulario del ciclo de vida de AWS | **Maintenance → Sunset (normalmente ~12 meses) → Full Shutdown** |
 
 > [!WARNING]
-> **No respondas «Amazon Forecast» a una pregunta de pronóstico desde cero.** Forecast está cerrado a clientes nuevos desde el **29 de julio de 2024** y aparece en la lista de mantenimiento de AWS; el camino de migración documentado es **Amazon SageMaker Canvas**. Los clientes existentes siguen ejecutando sus predictores — así que una opción que diga *«los clientes existentes deben migrar inmediatamente»* es igualmente incorrecta. La respuesta correcta del examen es siempre la pareja: **nuevos → SageMaker Canvas, existentes → seguir sin funciones nuevas**. Y Personalize *no* es un servicio de pronóstico: recomienda elementos a partir de interacciones, no proyecta una serie temporal.
+> **No respondas «Amazon Forecast» a una pregunta de pronóstico desde cero.** Forecast está cerrado a clientes nuevos desde el **29 de julio de 2024** y aparece en la lista de mantenimiento de AWS; el camino de migración documentado es **Amazon SageMaker Canvas**. Los clientes existentes siguen ejecutando sus predictores: así que una opción que diga *«los clientes existentes deben migrar inmediatamente»* es igualmente incorrecta. La respuesta correcta del examen es siempre la pareja: **nuevos → SageMaker Canvas, existentes → seguir sin funciones nuevas**. Y Personalize *no* es un servicio de pronóstico: recomienda elementos a partir de interacciones, no proyecta una serie temporal.
 
 ---
 
@@ -522,14 +522,14 @@ Amazon Q está explícitamente **dentro del alcance del AIF-C01**, y es el únic
 Tres lecturas que el examen prueba:
 
 1. **Q Business es RAG empresarial que respeta los permisos.** Responde preguntas sobre tus conectores (S3, Confluence, Salesforce y docenas más) **respetando los permisos de cada usuario**, y cita las fuentes. Ese es un producto distinto de «un chatbot público anónimo».
-2. **La prueba es de 60 días, no de 12 meses** — el periodo gratis más corto de esta lección, y el que los candidatos confunden con más frecuencia con el free tier de AWS de 12 meses.
-3. **El exceso de Q Developer Pro es por línea de código**, a **0,003 USD/LOC** sobre los 4.000 LOC/mes agrupados — un medidor que nadie espera, y por eso favorito para una opción numérica.
+2. **La prueba es de 60 días, no de 12 meses**: el periodo gratis más corto de esta lección, y el que los candidatos confunden con más frecuencia con el free tier de AWS de 12 meses.
+3. **El exceso de Q Developer Pro es por línea de código**, a **0,003 USD/LOC** sobre los 4.000 LOC/mes agrupados: un medidor que nadie espera, y por eso favorito para una opción numérica.
 
 ---
 
 ## 10. ¿Qué servicio de IA? El árbol de decisión
 
-Todo lo anterior colapsa en un diagrama. Lee la entrada primero, después la intención, después el medidor — ese orden es exactamente como el examen escribe sus opciones.
+Todo lo anterior colapsa en un diagrama. Lee la entrada primero, después la intención, después el medidor: ese orden es exactamente como el examen escribe sus opciones.
 
 ```mermaid
 flowchart TD
@@ -571,26 +571,26 @@ Practica el mapeo hasta que sea automático:
 {
   "question": "Relaciona cada frase de carga de trabajo con el servicio de AWS y su unidad de facturación:",
   "pairs": [
-    {"left": "Marcar contenido explícito en videos almacenados en S3", "right": "Moderación de contenido de Amazon Rekognition Video - facturado por minuto de video a 0,10 USD"},
-    {"left": "Extraer pares clave-valor y celdas de tablas de PDFs de préstamo escaneados", "right": "Amazon Textract AnalyzeDocument con FORMS y TABLES - facturado por página a 0,05 y 0,015 USD"},
-    {"left": "Enmascarar números de tarjeta de crédito en tickets de soporte de 550 caracteres", "right": "Detección y enmascaramiento de PII de Amazon Comprehend - facturado por unidad de 100 caracteres con un mínimo de 3 unidades"},
+    {"left": "Marcar contenido explícito en videos almacenados en S3", "right": "Moderación de contenido de Amazon Rekognition Video: facturado por minuto de video a 0,10 USD"},
+    {"left": "Extraer pares clave-valor y celdas de tablas de PDFs de préstamo escaneados", "right": "Amazon Textract AnalyzeDocument con FORMS y TABLES: facturado por página a 0,05 y 0,015 USD"},
+    {"left": "Enmascarar números de tarjeta de crédito en tickets de soporte de 550 caracteres", "right": "Detección y enmascaramiento de PII de Amazon Comprehend: facturado por unidad de 100 caracteres con un mínimo de 3 unidades"},
     {"left": "Mantener un nombre de producto fuera de un trabajo de localización de 2.000.000 de caracteres", "right": "Terminología personalizada de Amazon Translate - 10 MB por archivo, 100 archivos por cuenta por Región, 200 bytes por término"},
-    {"left": "Devolver una transcripción de chat a un supervisor con sentimiento por participante", "right": "Amazon Transcribe Call Analytics post-llamada - facturado por minuto de audio a 0,0300 USD para los primeros 250K minutos"},
-    {"left": "Enrutar una llamada de voz a la Lambda correcta por intención y slot", "right": "Amazon Lex - facturado por petición a 0,004 USD por voz y 0,00075 USD por texto"},
+    {"left": "Devolver una transcripción de chat a un supervisor con sentimiento por participante", "right": "Amazon Transcribe Call Analytics post-llamada: facturado por minuto de audio a 0,0300 USD para los primeros 250K minutos"},
+    {"left": "Enrutar una llamada de voz a la Lambda correcta por intención y slot", "right": "Amazon Lex: facturado por petición a 0,004 USD por voz y 0,00075 USD por texto"},
     {"left": "Servir recomendaciones en tiempo real mientras una campaña en reposo todavía cuesta dinero", "right": "Amazon Personalize - 0,0556 USD por 1.000 peticiones más un mínimo por defecto de 1 TPS aprovisionada por campaña"},
     {"left": "Responder a la pregunta de un empleado sobre Confluence con sus propios permisos", "right": "Amazon Q Business - 3 USD Lite o 20 USD Pro por usuario al mes más capacidad de índice por hora"}
   ],
-  "explanation": "Cada frase nombra primero un tipo de entrada: video a Rekognition, documentos a Textract, texto sin procesar a Comprehend, memoria de traducción a Translate, audio a Transcribe, enunciados del usuario a Lex, historial de interacciones a Personalize y contenido de empresa a Q Business. Una vez la entrada elige el servicio, la unidad de facturación elige la respuesta - por minuto, por página, por unidad, por carácter, por petición, por 1.000 peticiones o por usuario."
+  "explanation": "Cada frase nombra primero un tipo de entrada: video a Rekognition, documentos a Textract, texto sin procesar a Comprehend, memoria de traducción a Translate, audio a Transcribe, enunciados del usuario a Lex, historial de interacciones a Personalize y contenido de empresa a Q Business. Una vez la entrada elige el servicio, la unidad de facturación elige la respuesta: por minuto, por página, por unidad, por carácter, por petición, por 1.000 peticiones o por usuario."
 }
 ```
 
-- **📚 ¿Sabías que…?** Las respuestas de Amazon Lex V2 llevan un campo `interpretationSource` que puede leer **`Bedrock`** en lugar de **`Lex`** — el NLU del bot puede estar impulsado por un modelo fundacional mientras la respuesta sigue siendo una intención estructurada con slots y confianza. Por eso «usa Bedrock en lugar de Lex» es un distractor *parcialmente* equivocado: Bedrock te da generación y razonamiento, Lex te da la máquina de estados de la conversación, la sesión, los ganchos de cumplimiento y el medidor por petición con el que el centro de contacto presupuesta.
+- **📚 ¿Sabías que…?** Las respuestas de Amazon Lex V2 llevan un campo `interpretationSource` que puede leer **`Bedrock`** en lugar de **`Lex`**: el NLU del bot puede estar impulsado por un modelo fundacional mientras la respuesta sigue siendo una intención estructurada con slots y confianza. Por eso «usa Bedrock en lugar de Lex» es un distractor *parcialmente* equivocado: Bedrock te da generación y razonamiento, Lex te da la máquina de estados de la conversación, la sesión, los ganchos de cumplimiento y el medidor por petición con el que el centro de contacto presupuesta.
 
 ---
 
 ## 11. Free tiers, límites y los números que debes memorizar
 
-### 11.1 Free tier — memoriza los atípicos
+### 11.1 Free tier: memoriza los atípicos
 
 | Servicio | Unidad | Cantidad | Duración |
 |---|---|---|---|
@@ -603,7 +603,7 @@ Practica el mapeo hasta que sea automático:
 | Transcribe (+ Call Analytics, Medical) | minutos de audio | 60/mes | **12 meses** |
 | Lex | peticiones de texto + voz | 10.000 + 5.000/mes | primer año |
 | Amazon Q Business | usuarios + índice | 50 usuarios/app + 1.500 horas de índice | **prueba de 60 días** |
-| Personalize | — | **ninguno listado** | — |
+| Personalize |, | **ninguno listado** |, |
 
 Las tres duraciones son el regalo del examen: **12 meses** para casi todo, **3 meses** para Textract, **60 días** para Q Business.
 
@@ -652,17 +652,17 @@ Las tres duraciones son el regalo del examen: **12 meses** para casi todo, **3 m
 | Q Business | Preguntas más conectores (S3, Confluence, Salesforce, 40+) y archivos | Respuestas citadas que respetan permisos, contenido generado, Q Apps, insights de QuickSight |
 | Q Developer | Código, repos, preguntas CLI/consola, errores de compilación | Sugerencias de código, refactorizaciones, análisis de seguridad, parches de transformación Java/.NET |
 
-- **📚 ¿Sabías que…?** Dos servicios de esta lección **no te cobran cuando no pasa nada**: Translate no factura una llamada cuyo idioma de origen es igual al de destino o que falla sin devolver traducción — mientras que el **mínimo de 300 caracteres** de Comprehend significa que una petición de 40 caracteres cuesta lo mismo que una de 300. Al examen le encanta emparejar una regla de «sin cargo» con una regla de «cargo mínimo» en la misma lista de opciones para ver si estás recordando un servicio concreto o solo la sensación general del precio por unidad.
+- **📚 ¿Sabías que…?** Dos servicios de esta lección **no te cobran cuando no pasa nada**: Translate no factura una llamada cuyo idioma de origen es igual al de destino o que falla sin devolver traducción: mientras que el **mínimo de 300 caracteres** de Comprehend significa que una petición de 40 caracteres cuesta lo mismo que una de 300. Al examen le encanta emparejar una regla de «sin cargo» con una regla de «cargo mínimo» en la misma lista de opciones para ver si estás recordando un servicio concreto o solo la sensación general del precio por unidad.
 
 ---
 
 ## 12. Veredicto comparativo
 
 > [!IMPORTANT]
-> **Veredicto comparativo — servicio prefabricado frente a SageMaker a medida frente a Amazon Bedrock**
-> - **El servicio prefabricado** (Rekognition, Comprehend, Textract, Translate, Polly, Transcribe, Lex, Personalize, Q) es la respuesta cuando la tarea es **un problema conocido con una API que encaja y un contrato de salida predecible**: etiquetas con confianza, tramos de entidades, pares clave-valor, transcripciones, intenciones y slots, recomendaciones. Pagas **por unidad**, no despliegue **nada**, no entrenas **nada**, y llegas a producción en una tarde. Su modo de fallo es la **forma**: si la salida requerida no es la salida de la API — una clase de defecto de nicho, un diseño de documento propietario, una respuesta que debe citar tus propios documentos —, ningún ajuste de parámetros cambiará la respuesta, porque no hay parámetros que ajustar. Las propias cifras de AWS muestran también el techo: Textract Forms a **0,05 USD/página** frente al OCR a **0,0015 USD/página** es una prima del **33×** por la estructura.
-> - **SageMaker a medida** (Rekognition Custom Labels, algoritmos integrados, fine-tuning con JumpStart, tu propio trabajo de entrenamiento) es la respuesta cuando tienes **datos etiquetados y una tarea que las APIs prefabricadas hacen mal** — inspección de defectos visuales, un diseño de documento que nadie más usa, un modelo de sentimiento ajustado al vocabulario de tu industria. Cambias el medidor por unidad por **horas de entrenamiento y horas de endpoint**: el propio camino personalizado de Comprehend factura **3 USD/hora** para entrenar, **0,50 USD/mes** para gestionar y **0,0005 USD/segundo por unidad de inferencia** mientras un endpoint está en marcha, y los endpoints de SageMaker facturan cada segundo que existen. Su modo de fallo es el **coste fijo y la carga de MLOps**: ahora eres dueño del etiquetado de datos, la evaluación, la desviación y la factura del endpoint en reposo — la misma lección de los **305,88 USD/mes de cómputo mayormente en reposo** de la Lección 6.
-> - **Amazon Bedrock** es la respuesta cuando el trabajo es **generación abierta o razonamiento sobre tu contenido**: resúmenes, borradores, extracción con tus propias palabras, RAG sobre una base de conocimiento, agentes de varios pasos, o elección multi-modelo con throughput aprovisionado. Pagas **por token de entrada y de salida**, puedes intercambiar modelos sin reescribir la aplicación, y Guardrails/Knowledge Bases/Agents te dan la capa de gobernanza. Su modo de fallo es el **determinismo**: una respuesta generativa a «¿cuál es el número de cuenta?» es la herramienta equivocada cuando Textract Queries devuelve ese valor a **0,015 USD/página** con una coordenada de página y cero posibilidad de invención — y los tokens generativos cuestan dinero en cada llamada, donde una API de clasificación cuesta una fracción de céntimo.
+> **Veredicto comparativo: servicio prefabricado frente a SageMaker a medida frente a Amazon Bedrock**
+> - **El servicio prefabricado** (Rekognition, Comprehend, Textract, Translate, Polly, Transcribe, Lex, Personalize, Q) es la respuesta cuando la tarea es **un problema conocido con una API que encaja y un contrato de salida predecible**: etiquetas con confianza, tramos de entidades, pares clave-valor, transcripciones, intenciones y slots, recomendaciones. Pagas **por unidad**, no despliegue **nada**, no entrenas **nada**, y llegas a producción en una tarde. Su modo de fallo es la **forma**: si la salida requerida no es la salida de la API, una clase de defecto de nicho, un diseño de documento propietario, una respuesta que debe citar tus propios documentos, ningún ajuste de parámetros cambiará la respuesta, porque no hay parámetros que ajustar. Las propias cifras de AWS muestran también el techo: Textract Forms a **0,05 USD/página** frente al OCR a **0,0015 USD/página** es una prima del **33×** por la estructura.
+> - **SageMaker a medida** (Rekognition Custom Labels, algoritmos integrados, fine-tuning con JumpStart, tu propio trabajo de entrenamiento) es la respuesta cuando tienes **datos etiquetados y una tarea que las APIs prefabricadas hacen mal**, inspección de defectos visuales, un diseño de documento que nadie más usa, un modelo de sentimiento ajustado al vocabulario de tu industria. Cambias el medidor por unidad por **horas de entrenamiento y horas de endpoint**: el propio camino personalizado de Comprehend factura **3 USD/hora** para entrenar, **0,50 USD/mes** para gestionar y **0,0005 USD/segundo por unidad de inferencia** mientras un endpoint está en marcha, y los endpoints de SageMaker facturan cada segundo que existen. Su modo de fallo es el **coste fijo y la carga de MLOps**: ahora eres dueño del etiquetado de datos, la evaluación, la desviación y la factura del endpoint en reposo, la misma lección de los **305,88 USD/mes de cómputo mayormente en reposo** de la Lección 6.
+> - **Amazon Bedrock** es la respuesta cuando el trabajo es **generación abierta o razonamiento sobre tu contenido**: resúmenes, borradores, extracción con tus propias palabras, RAG sobre una base de conocimiento, agentes de varios pasos, o elección multi-modelo con throughput aprovisionado. Pagas **por token de entrada y de salida**, puedes intercambiar modelos sin reescribir la aplicación, y Guardrails/Knowledge Bases/Agents te dan la capa de gobernanza. Su modo de fallo es el **determinismo**: una respuesta generativa a «¿cuál es el número de cuenta?» es la herramienta equivocada cuando Textract Queries devuelve ese valor a **0,015 USD/página** con una coordenada de página y cero posibilidad de invención, y los tokens generativos cuestan dinero en cada llamada, donde una API de clasificación cuesta una fracción de céntimo.
 > - **Regla mnemotécnica para el examen:** *¿la pregunta describe una tarea fija con una API que encaja?* Sí → **servicio prefabricado**, y después elige el **conjunto de funciones más barato que devuelva lo que vas a leer** (OCR antes que Forms; transcripción simple antes que Call Analytics). *¿Tienes datos etiquetados y una tarea que la API hace mal?* → **SageMaker a medida**. *¿La salida es abierta, conversacional o fundamentada en tus documentos?* → **Bedrock**, o **Amazon Q Business** cuando la pregunta añade *respuestas que respetan permisos para empleados sobre datos de la empresa* a **3/20 USD por usuario al mes**. Cuando una opción ofrece «construir un modelo a medida» para una tarea con una API prefabricada dedicada, es un distractor; cuando una opción ofrece la API prefabricada para una tarea que necesita tus propias etiquetas, es el otro distractor.
 
 ---
@@ -674,15 +674,15 @@ Las tres duraciones son el regalo del examen: **12 meses** para casi todo, **3 m
 > 1. **Rekognition factura por API.** Dos APIs sobre una imagen = dos imágenes facturadas; dos APIs de video sobre un video = dos minutos facturados. Grupo 1 y Grupo 2 son **medidores separados**.
 > 2. **El mínimo de Comprehend es de 300 caracteres (3 unidades)**, así que una petición de 120 caracteres todavía factura 3 unidades a **0,0001 USD cada una**.
 > 3. **El free tier de Textract es de 3 meses, no de 12**, y **Custom Queries no tiene free tier alguno**.
-> 4. **El OCR de Textract es 0,0015 USD y Forms es 0,05 USD** — habilita solo lo que leas; Tables+Queries es **0,020 USD**, Forms+Tables+Queries es **0,070 USD**.
-> 5. **Polly factura por carácter, y Speech Marks factura por separado** — 1.000 caracteres con audio y Speech Marks = **2.000 caracteres facturados**.
+> 4. **El OCR de Textract es 0,0015 USD y Forms es 0,05 USD**: habilita solo lo que leas; Tables+Queries es **0,020 USD**, Forms+Tables+Queries es **0,070 USD**.
+> 5. **Polly factura por carácter, y Speech Marks factura por separado**: 1.000 caracteres con audio y Speech Marks = **2.000 caracteres facturados**.
 > 6. **Transcribe factura en incrementos de 1 segundo sin mínimo**, el estéreo factura **la duración total una vez**, y Call Analytics devuelve campos de información que la transcripción simple no da.
-> 7. **Lex cobra 0,004 USD por petición de voz y 0,00075 USD por petición de texto** — pero una **conversación en streaming es una sola llamada a la API**, y la entrada de voz está limitada a **15 segundos**.
-> 8. **El mínimo por defecto de Personalize es de 1 TPS aprovisionada por campaña activa, facturada incluso con cero peticiones** — 86.400 recomendaciones al día, unos **144 USD/mes** para una campaña en reposo. Borra las campañas en reposo.
-> 9. **Amazon Forecast está cerrado a clientes nuevos desde el 29 de julio de 2024** — el trabajo nuevo va a **Amazon SageMaker Canvas**, los clientes existentes siguen sin funciones nuevas.
+> 7. **Lex cobra 0,004 USD por petición de voz y 0,00075 USD por petición de texto**, pero una **conversación en streaming es una sola llamada a la API**, y la entrada de voz está limitada a **15 segundos**.
+> 8. **El mínimo por defecto de Personalize es de 1 TPS aprovisionada por campaña activa, facturada incluso con cero peticiones**: 86.400 recomendaciones al día, unos **144 USD/mes** para una campaña en reposo. Borra las campañas en reposo.
+> 9. **Amazon Forecast está cerrado a clientes nuevos desde el 29 de julio de 2024**: el trabajo nuevo va a **Amazon SageMaker Canvas**, los clientes existentes siguen sin funciones nuevas.
 > 10. **Amazon Q es por usuario, no por token**: Lite **3 USD**, Pro **20 USD**, Q Developer Pro **19 USD** con **0,003 USD/LOC** de exceso, Q in Connect **0,0015 USD por mensaje de chat** y **0,0080 USD por minuto de voz**, prueba de **60 días**.
 >
-> Y dos marcas de «no memorices»: las **tarifas de streaming de Lex** y los precios por unidad de **Textract Layout (0,004 USD) / Signatures (0,0035 USD)** proceden de rastreadores de terceros y de una plantilla de ejemplo de AWS, no de las páginas públicas de precios — AWS publica las tarifas de petición/respuesta de Lex y las seis combinaciones de funciones con precio de Textract. Verifícalos en la página de precios antes de citarlos.
+> Y dos marcas de «no memorices»: las **tarifas de streaming de Lex** y los precios por unidad de **Textract Layout (0,004 USD) / Signatures (0,0035 USD)** proceden de rastreadores de terceros y de una plantilla de ejemplo de AWS, no de las páginas públicas de precios: AWS publica las tarifas de petición/respuesta de Lex y las seis combinaciones de funciones con precio de Textract. Verifícalos en la página de precios antes de citarlos.
 
 ---
 
@@ -690,9 +690,9 @@ Las tres duraciones son el regalo del examen: **12 meses** para casi todo, **3 m
 
 AWS retira y renombra servicios de IA según un calendario publicado, y parte de este examen es distinguir un anuncio de **mantenimiento** de un **cierre total**. El vocabulario procede de la Referencia General de AWS (Service Lifecycle, actualizada por última vez el 24 de septiembre de 2026) y es el mismo vocabulario que la sección 8.2 ya usó para Amazon Forecast:
 
-- **Maintenance** — cerrado a clientes nuevos y a funciones nuevas, pero todavía soportado para los clientes existentes;
-- **Sunset** — un fin de operaciones planificado, normalmente anunciado con unos **12 meses** de antelación;
-- **Full Shutdown** — el servicio se elimina por completo del portafolio de AWS.
+- **Maintenance**: cerrado a clientes nuevos y a funciones nuevas, pero todavía soportado para los clientes existentes;
+- **Sunset**: un fin de operaciones planificado, normalmente anunciado con unos **12 meses** de antelación;
+- **Full Shutdown**: el servicio se elimina por completo del portafolio de AWS.
 
 ### Actualizaciones de 2026 (en octubre de 2026)
 
@@ -702,13 +702,13 @@ Cada fila de abajo está verificada contra una página de cambio de disponibilid
 |---|---|---|---|
 | **Amazon Forecast** | Cerrado a clientes nuevos el **29 de julio de 2024** | Mantenimiento | **Amazon SageMaker Canvas** |
 | **Amazon Kendra** | Mantenimiento el **30 de junio de 2026**; cerrado a clientes nuevos el **30 de julio de 2026** | Mantenimiento | **Amazon Bedrock Managed Knowledge Base** (Smart Parsing + API Agentic Retrieval) |
-| **Amazon Q Business** | La página de disponibilidad ahora dice **«ya no abierto a clientes nuevos»** — **AWS no ha publicado fecha de cierre** | Sin clientes nuevos | **Amazon Quick** (trae tu propia identidad); Guardrails y User Store **no** se transfieren |
+| **Amazon Q Business** | La página de disponibilidad ahora dice **«ya no abierto a clientes nuevos»**: **AWS no ha publicado fecha de cierre** | Sin clientes nuevos | **Amazon Quick** (trae tu propia identidad); Guardrails y User Store **no** se transfieren |
 | **Amazon Q Developer** | Altas bloqueadas el **15 de mayo de 2026**; funciones de IDE y de pago **fin de soporte el 30 de abril de 2027** | Ruta de Sunset | **Kiro** |
 | **SageMaker Model Monitor, Clarify, Ground Truth, A2I, Debugger, Role Manager, Geospatial, Studio Lab, Mechanical Turk, Profiler** | Cerrados a clientes nuevos el **30 de julio de 2026** (Mechanical Turk fin de soporte el **30 de septiembre de 2026**; Profiler el **30 de junio de 2027**) | **Mantenimiento, no cierre total** | Clarify → **Bedrock Model Evaluations**; Model Monitor → métricas de CloudWatch y detección de anomalías |
 | **Ground Truth Plus** | Fin de soporte el **30 de junio de 2026** | Sunset | Ground Truth |
 | **Amazon QuickSight → Quick Suite** | **9 de octubre de 2025** | Ampliado y renombrado | Amazon Quick Suite (Author Pro **50 → 40 USD**) |
 | **AWS Chatbot** | **26 de febrero de 2025** | Renombrado | **Amazon Q Developer** |
-| **Amazon MemoryDB** | Eliminado de la lista del alcance del AIF-C01 el **30 de abril de 2026** | Fuera del alcance del examen | — |
+| **Amazon MemoryDB** | Eliminado de la lista del alcance del AIF-C01 el **30 de abril de 2026** | Fuera del alcance del examen |: |
 
 El propio examen se movió al mismo tiempo. AWS publicó la guía del examen **v1.0 el 26 de marzo de 2026** y **v1.1 el 30 de abril de 2026**, y afirma que los cambios de la guía llegan al examen en vivo aproximadamente **un mes después de la publicación**:
 
@@ -722,7 +722,7 @@ El propio examen se movió al mismo tiempo. AWS publicó la guía del examen **v
 | Nuevo objetivo **5.1.5** | Detección de alucinaciones y anclaje: anclaje RAG, validación de salidas, puntuación de confianza |
 | Sin cambios | **65 preguntas (50 puntuadas + 15 sin puntuar)**, **90 minutos**, **100 USD**, se aprueba con **700/1000**, validez de 3 años, dominios ponderados **20 / 24 / 28 / 14 / 14** |
 
-Dos de las respuestas de esta lección ganaron por tanto un hermano de 2026: **Forecast → SageMaker Canvas** (cerrado el 29 de julio de 2024) y ahora **Kendra → Bedrock Managed Knowledge Base** (cerrado el 30 de julio de 2026). Ambas son preguntas de ciclo de vida, no de construcción — el examen quiere la *pareja* (clientes nuevos → reemplazo, clientes existentes → seguir funcionando, sin funciones nuevas).
+Dos de las respuestas de esta lección ganaron por tanto un hermano de 2026: **Forecast → SageMaker Canvas** (cerrado el 29 de julio de 2024) y ahora **Kendra → Bedrock Managed Knowledge Base** (cerrado el 30 de julio de 2026). Ambas son preguntas de ciclo de vida, no de construcción: el examen quiere la *pareja* (clientes nuevos → reemplazo, clientes existentes → seguir funcionando, sin funciones nuevas).
 
 ```fillblank
 {
@@ -742,17 +742,17 @@ Dos de las respuestas de esta lección ganaron por tanto un hermano de 2026: **F
     "13 de octubre de 2025",
     "Amazon Quick"
   ],
-  "explanation": "Kendra entró en mantenimiento el 30 de junio de 2026 y se cerró a clientes nuevos el 30 de julio de 2026, con Amazon Bedrock Managed Knowledge Base documentado como el camino para las aplicaciones nuevas. La guía del examen v1.1 se publicó el 30 de abril de 2026, y Model Monitor y Clarify se cerraron a clientes nuevos el 30 de julio de 2026 - mantenimiento, no cierre total. El 29 de julio de 2024 es la fecha de Amazon Forecast y SageMaker Canvas es el reemplazo de Forecast, no el de Kendra."
+  "explanation": "Kendra entró en mantenimiento el 30 de junio de 2026 y se cerró a clientes nuevos el 30 de julio de 2026, con Amazon Bedrock Managed Knowledge Base documentado como el camino para las aplicaciones nuevas. La guía del examen v1.1 se publicó el 30 de abril de 2026, y Model Monitor y Clarify se cerraron a clientes nuevos el 30 de julio de 2026: mantenimiento, no cierre total. El 29 de julio de 2024 es la fecha de Amazon Forecast y SageMaker Canvas es el reemplazo de Forecast, no el de Kendra."
 }
 ```
 
 > [!WARNING]
 > **Lee el lenguaje del ciclo de vida literalmente.**
-> 1. **«Cerrado a clientes nuevos» es mantenimiento, no cierre total.** Los clientes existentes siguen usando Model Monitor, Clarify, Kendra y Q Business mientras no llegan funciones nuevas. Una opción que diga *«el servicio fue discontinuado»* o *«los clientes existentes deben migrar inmediatamente»* es la trampa de Forecast reciclada — y es incorrecta.
+> 1. **«Cerrado a clientes nuevos» es mantenimiento, no cierre total.** Los clientes existentes siguen usando Model Monitor, Clarify, Kendra y Q Business mientras no llegan funciones nuevas. Una opción que diga *«el servicio fue discontinuado»* o *«los clientes existentes deben migrar inmediatamente»* es la trampa de Forecast reciclada, y es incorrecta.
 > 2. **Una fecha se memoriza deliberadamente poco.** La página de disponibilidad de Q Business de AWS dice **«ya no abierto a clientes nuevos»** pero no publica **ninguna fecha**, y el renombrado de Quick → Amazon Quick aparece solo en una respuesta de AWS re:Post y no en una publicación de AWS News Blog. Cualquier opción que cite una fecha de cierre concreta de Q Business en 2026 está afirmando algo que AWS no ha escrito.
-> 3. **Las decisiones de mantenimiento son respuestas de examen, no curiosidades.** Cuando un servicio de la lista del alcance entra en mantenimiento, la respuesta correcta empareja el *reemplazo documentado* con la *continuidad para los clientes existentes* — nunca una migración forzosa y nunca «todavía acepta altas nuevas».
+> 3. **Las decisiones de mantenimiento son respuestas de examen, no curiosidades.** Cuando un servicio de la lista del alcance entra en mantenimiento, la respuesta correcta empareja el *reemplazo documentado* con la *continuidad para los clientes existentes*: nunca una migración forzosa y nunca «todavía acepta altas nuevas».
 
-- **📚 ¿Sabías que…?** La logística del examen no se movió mientras el contenido sí: AIF-C01 sigue siendo de **65 preguntas (50 puntuadas + 15 sin puntuar)** en **90 minutos** por **100 USD**, nota de aprobación **700/1000**, válido durante **3 años** — pero las versiones en italiano y alemán se retiraron después del **15 de octubre de 2026**. AWS también dice que las actualizaciones de la guía llegan al examen en vivo aproximadamente un mes después de la publicación, así que los nuevos objetivos de la v1.1 — IA agéntica con **MCP**, ingeniería de contexto, precios por token, versionado de prompts y anclaje de alucinaciones — fueron examinables desde alrededor de finales de mayo de 2026.
+- **📚 ¿Sabías que…?** La logística del examen no se movió mientras el contenido sí: AIF-C01 sigue siendo de **65 preguntas (50 puntuadas + 15 sin puntuar)** en **90 minutos** por **100 USD**, nota de aprobación **700/1000**, válido durante **3 años**, pero las versiones en italiano y alemán se retiraron después del **15 de octubre de 2026**. AWS también dice que las actualizaciones de la guía llegan al examen en vivo aproximadamente un mes después de la publicación, así que los nuevos objetivos de la v1.1: IA agéntica con **MCP**, ingeniería de contexto, precios por token, versionado de prompts y anclaje de alucinaciones: fueron examinables desde alrededor de finales de mayo de 2026.
 
 ---
 
@@ -760,38 +760,38 @@ Dos de las respuestas de esta lección ganaron por tanto un hermano de 2026: **F
 
 Las tablas de precios te dicen cuánto cuesta un servicio; las historias de clientes publicadas por AWS te dicen **cuándo recurrir a él**. Cada cifra de abajo se cita del caso de estudio de AWS o de la publicación del AWS Machine Learning Blog nombrada en la columna Fuente. Todos son afirmaciones del cliente o de AWS y sin auditar, y cuando una fuente dice «hasta», trátalo como un techo y no como una expectativa.
 
-### Caso 1 — Anthem: primero el Textract prefabricado, humanos para la cola
+### Caso 1, Anthem: primero el Textract prefabricado, humanos para la cola
 
-La extracción de formularios de reclamación de Anthem costaba supuestamente millones de dólares al año y llevaba **20 minutos por reclamación** cuando se gestionaba manualmente. La arquitectura publicada por AWS enruta los documentos del portal mediante OCR de **Amazon Textract** más un paso de índice/clasificación de ML. El resultado informado: **80% del flujo automatizado**, con un objetivo del **90%+**, a través de miles de reclamaciones al día. La parte relevante para el examen es qué pasa con el resto: una tarea de extracción regulada y estructurada con una API prefabricada que encaja recibe el **servicio prefabricado primero**, y el 10–20% restante de casos difíciles va a una ruta de excepción humana — que es exactamente para lo que existe **Amazon A2I**. Fuente: `aws.amazon.com/solutions/case-studies/anthem` (sesión de re:Invent 2020).
+La extracción de formularios de reclamación de Anthem costaba supuestamente millones de dólares al año y llevaba **20 minutos por reclamación** cuando se gestionaba manualmente. La arquitectura publicada por AWS enruta los documentos del portal mediante OCR de **Amazon Textract** más un paso de índice/clasificación de ML. El resultado informado: **80% del flujo automatizado**, con un objetivo del **90%+**, a través de miles de reclamaciones al día. La parte relevante para el examen es qué pasa con el resto: una tarea de extracción regulada y estructurada con una API prefabricada que encaja recibe el **servicio prefabricado primero**, y el 10 to 20% restante de casos difíciles va a una ruta de excepción humana: que es exactamente para lo que existe **Amazon A2I**. Fuente: `aws.amazon.com/solutions/case-studies/anthem` (sesión de re:Invent 2020).
 
-### Caso 2 — Chronomics: cuatro meses de visión casera → 3–4 semanas de AutoML
+### Caso 2, Chronomics: cuatro meses de visión casera → 3 to 4 semanas de AutoML
 
-Chronomics pasó **4 meses** construyendo un modelo de visión por computador interno para leer resultados de pruebas de COVID-19 y nunca alcanzó su objetivo. Cambiar a **Amazon Rekognition Custom Labels** se entregó en **3–4 semanas** con un **96,5% de exactitud / 97,9% de F1**, puntuado con `DetectCustomLabels`. La aritmética del umbral es el detalle relevante para el examen: con un umbral de **0,99**, las predicciones aceptadas son correctas en un **99,6%** pero se **descarta** el **5%** de las predicciones; con **0,999**, la precisión sube al **99,87%** mientras se descarta el **27%**. Alguien debe decidir qué pasa con la cola descartada — la respuesta de revisión humana/A2I — antes de fijar el umbral. Fuente: AWS Machine Learning Blog, 13 de diciembre de 2022, `aws.amazon.com/blogs/machine-learning/chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels`.
+Chronomics pasó **4 meses** construyendo un modelo de visión por computador interno para leer resultados de pruebas de COVID-19 y nunca alcanzó su objetivo. Cambiar a **Amazon Rekognition Custom Labels** se entregó en **3 to 4 semanas** con un **96,5% de exactitud / 97,9% de F1**, puntuado con `DetectCustomLabels`. La aritmética del umbral es el detalle relevante para el examen: con un umbral de **0,99**, las predicciones aceptadas son correctas en un **99,6%** pero se **descarta** el **5%** de las predicciones; con **0,999**, la precisión sube al **99,87%** mientras se descarta el **27%**. Alguien debe decidir qué pasa con la cola descartada, la respuesta de revisión humana/A2I, antes de fijar el umbral. Fuente: AWS Machine Learning Blog, 13 de diciembre de 2022, `aws.amazon.com/blogs/machine-learning/chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels`.
 
-### Caso 3 — Sun Finance: la trampa del OCR solo con LLM, y la solución
+### Caso 3, Sun Finance: la trampa del OCR solo con LLM, y la solución
 
-Sun Finance (préstamos fintech en 9 países) tenía el **60% de las solicitudes de micropréstamos** necesitando revisión manual, cada una entre **10 minutos y 20 horas**. Intento 1 — enviar fotos de identidad directamente a **Claude Sonnet 4** para extracción en JSON — puntuó **61,8% general** y solo un **43%** en números de identidad, y fue **rechazado**, porque las protecciones de privacidad bloquean la extracción directa de PII. El intento 2, construido con el Generative AI Innovation Center de AWS, separa las etapas: **Textract** para OCR → **Rekognition** como respaldo y verificación de cara → el modelo fundacional **solo para estructurar** → reglas de validación, con **Titan Multimodal Embeddings** en **S3 Vectors** para similitud de fraude, evaluado sobre **585 imágenes**. Resultados: exactitud general **79,73% → 90,80%** (número de identidad **74,32% → 89,40%**, tipo de documento **78,43% → 96,40%**), **−91%** de coste por documento, **20 horas → menos de 5 segundos**, detección de fraude al **81%**. Ángulo de examen: **el OCR no es razonamiento** — la API prefabricada determinista lee los caracteres, y el modelo solo redacta la respuesta. Fuente: AWS Machine Learning Blog, 30 de abril de 2026, `aws.amazon.com/blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws`.
+Sun Finance (préstamos fintech en 9 países) tenía el **60% de las solicitudes de micropréstamos** necesitando revisión manual, cada una entre **10 minutos y 20 horas**. Intento 1: enviar fotos de identidad directamente a **Claude Sonnet 4** para extracción en JSON: puntuó **61,8% general** y solo un **43%** en números de identidad, y fue **rechazado**, porque las protecciones de privacidad bloquean la extracción directa de PII. El intento 2, construido con el Generative AI Innovation Center de AWS, separa las etapas: **Textract** para OCR → **Rekognition** como respaldo y verificación de cara → el modelo fundacional **solo para estructurar** → reglas de validación, con **Titan Multimodal Embeddings** en **S3 Vectors** para similitud de fraude, evaluado sobre **585 imágenes**. Resultados: exactitud general **79,73% → 90,80%** (número de identidad **74,32% → 89,40%**, tipo de documento **78,43% → 96,40%**), **−91%** de coste por documento, **20 horas → menos de 5 segundos**, detección de fraude al **81%**. Ángulo de examen: **el OCR no es razonamiento**: la API prefabricada determinista lee los caracteres, y el modelo solo redacta la respuesta. Fuente: AWS Machine Learning Blog, 30 de abril de 2026, `aws.amazon.com/blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws`.
 
-### Caso 4 — Alnylam: Amazon Q Business con citas bajo GxP
+### Caso 4, Alnylam: Amazon Q Business con citas bajo GxP
 
-La triaje de quejas de Alnylam Pharmaceuticals tardaba **3–4 días**, y encontrar una respuesta interna llevaba **15+ minutos**. Usando **Amazon Bedrock**, **Amazon S3** y **Amazon Q Business**, el equipo construyó un prototipo de admisión y triaje en **3 meses** bajo restricciones GxP, más **AskALNY**, un asistente de Slack que sirve a **2.000 empleados y 1.000 contratistas** y devuelve respuestas **con enlaces a las fuentes**. Resultados informados: la triaje cayó de **3–4 días a horas**, la búsqueda de información de **15 minutos a 30 segundos**, y **más de 250 casos de uso** siguieron a los dos primeros. Ángulo de examen: *«respuestas que respetan permisos sobre datos de la empresa, con citas»* es **Amazon Q Business** a **3 USD Lite / 20 USD Pro por usuario al mes** — no Lex (enrutamiento de intenciones hacia una Lambda) y no una llamada desnuda a Bedrock (sin capa de conectores ni de permisos). Fuente: `aws.amazon.com/solutions/case-studies/alnylam-case-study`.
+La triaje de quejas de Alnylam Pharmaceuticals tardaba **3 to 4 días**, y encontrar una respuesta interna llevaba **15+ minutos**. Usando **Amazon Bedrock**, **Amazon S3** y **Amazon Q Business**, el equipo construyó un prototipo de admisión y triaje en **3 meses** bajo restricciones GxP, más **AskALNY**, un asistente de Slack que sirve a **2.000 empleados y 1.000 contratistas** y devuelve respuestas **con enlaces a las fuentes**. Resultados informados: la triaje cayó de **3 to 4 días a horas**, la búsqueda de información de **15 minutos a 30 segundos**, y **más de 250 casos de uso** siguieron a los dos primeros. Ángulo de examen: *«respuestas que respetan permisos sobre datos de la empresa, con citas»* es **Amazon Q Business** a **3 USD Lite / 20 USD Pro por usuario al mes**: no Lex (enrutamiento de intenciones hacia una Lambda) y no una llamada desnuda a Bedrock (sin capa de conectores ni de permisos). Fuente: `aws.amazon.com/solutions/case-studies/alnylam-case-study`.
 
 | Caso | Nivel del árbol de decisión de esta lección | Servicios de AWS nombrados por AWS | Cifras principales | Fuente |
 |---|---|---|---|---|
 | **Anthem** (seguro de salud) | **Prefabricado** | Amazon Textract | 20 min/reclamación → **80% automatizado**, objetivo **90%+** | `aws.amazon.com/solutions/case-studies/anthem` |
-| **Chronomics** (salud digital) | **Prefabricado + AutoML** | Rekognition Custom Labels | **4 meses → 3–4 semanas**; **96,5% / 97,9% de F1**; umbral 0,99 → 99,6% (5% descartado) | AWS ML Blog, 13 de diciembre de 2022 |
+| **Chronomics** (salud digital) | **Prefabricado + AutoML** | Rekognition Custom Labels | **4 meses → 3 to 4 semanas**; **96,5% / 97,9% de F1**; umbral 0,99 → 99,6% (5% descartado) | AWS ML Blog, 13 de diciembre de 2022 |
 | **Sun Finance** (fintech) | **Híbrido: OCR prefabricado + estructuración generativa** | Textract, Rekognition, Bedrock (Claude Sonnet 4, embeddings de Titan), Lambda, Step Functions, S3 Vectors | **79,73% → 90,80%**; **−91%** de coste/doc; **20 h → <5 s**; intento solo con LLM **61,8%** rechazado | AWS ML Blog, 30 de abril de 2026 |
-| **Alnylam** (biotecnología) | **Generativo + preguntas de empresa** | Bedrock, Amazon S3, **Amazon Q Business** | triaje **3–4 d → horas**; búsqueda **15 min → 30 s**; **3.000 usuarios**; **250+** casos de uso | `aws.amazon.com/solutions/case-studies/alnylam-case-study` |
+| **Alnylam** (biotecnología) | **Generativo + preguntas de empresa** | Bedrock, Amazon S3, **Amazon Q Business** | triaje **3 to 4 d → horas**; búsqueda **15 min → 30 s**; **3.000 usuarios**; **250+** casos de uso | `aws.amazon.com/solutions/case-studies/alnylam-case-study` |
 
 | Patrón que prueba esta lección | Evidencia del caso (cifras verificadas) | La respuesta de examen que sostiene |
 |---|---|---|
 | Servicio prefabricado primero para extracción estructurada y regulada | Anthem **80% automatizado** con Textract | Elige la API prefabricada, y después diseña la ruta de excepción humana |
-| Un modelo casero es un impuesto oculto | Chronomics **4 meses → 3–4 semanas**, **96,5%** con Custom Labels | Prueba el nivel prefabricado/AutoML antes de construir; itera sobre datos, no sobre esperanza |
+| Un modelo casero es un impuesto oculto | Chronomics **4 meses → 3 to 4 semanas**, **96,5%** con Custom Labels | Prueba el nivel prefabricado/AutoML antes de construir; itera sobre datos, no sobre esperanza |
 | La extracción solo con LLM falla | Intento 1 de Sun Finance: **61,8%** general, **43%** números de identidad, rechazado | Separa OCR de razonamiento: **Textract/Rekognition leen, el modelo redacta** |
 | Respuestas que respetan permisos sobre datos de la empresa | AskALNY de Alnylam, **3.000 usuarios**, respuestas **con enlaces a las fuentes** | **Amazon Q Business**, no Lex y no una llamada cruda a Bedrock |
-| La latencia y la residencia son requisitos duros | Sun Finance **20 h → <5 s**; prototipo rechazado | Mide la referencia antes de construir — un porcentaje sin un «antes» es marketing |
+| La latencia y la residencia son requisitos duros | Sun Finance **20 h → <5 s**; prototipo rechazado | Mide la referencia antes de construir: un porcentaje sin un «antes» es marketing |
 
-- **📚 ¿Sabías que…?** La única tasa de preparación para producción que publica AWS es del **65%**: de más de **1.000** implementaciones del Generative AI Innovation Center, **el 65% llegó a producción en 2025** — algunas en tan solo **45 días** — usando el marco de **las cinco V** de AWS (**Value → Visualize → Validate → Verify → Venture**). Nunca memorices «todo piloto sale bien»: el otro **35%** es la cifra que te enseña a fijar la referencia de la métrica antes de construir, y a planificar una ruta humana para lo que el modelo hace mal.
+- **📚 ¿Sabías que…?** La única tasa de preparación para producción que publica AWS es del **65%**: de más de **1.000** implementaciones del Generative AI Innovation Center, **el 65% llegó a producción en 2025**, algunas en tan solo **45 días**, usando el marco de **las cinco V** de AWS (**Value → Visualize → Validate → Verify → Venture**). Nunca memorices «todo piloto sale bien»: el otro **35%** es la cifra que te enseña a fijar la referencia de la métrica antes de construir, y a planificar una ruta humana para lo que el modelo hace mal.
 
 ---
 
@@ -1014,7 +1014,7 @@ La triaje de quejas de Alnylam Pharmaceuticals tardaba **3–4 días**, y encont
     "Solo Amazon Rekognition DetectText, facturado por imagen a 0,0010 USD"
   ],
   "correct": 1,
-  "explanation": "Esta es la progresión documentada de Sun Finance: un primer intento solo con LLM puntuó 61,8% general y 43% en números de identidad porque las protecciones de privacidad bloquean la extracción directa de PII, mientras que el diseño aceptado separó el OCR del razonamiento - Textract lee los caracteres, Rekognition cubre el respaldo y la verificación de cara, el modelo solo estructura la respuesta, y las reglas de validación capturan lo demás, alcanzando entre 79,73% y 90,80% de exactitud con un 91% menos de coste por documento. Subir los límites de tokens y hacer fine-tuning con diez imágenes no corrige un error de elección de herramienta, Comprehend analiza texto y no lee imágenes de documentos, y DetectText por sí solo devuelve palabras sin estructura."
+  "explanation": "Esta es la progresión documentada de Sun Finance: un primer intento solo con LLM puntuó 61,8% general y 43% en números de identidad porque las protecciones de privacidad bloquean la extracción directa de PII, mientras que el diseño aceptado separó el OCR del razonamiento: Textract lee los caracteres, Rekognition cubre el respaldo y la verificación de cara, el modelo solo estructura la respuesta, y las reglas de validación capturan lo demás, alcanzando entre 79,73% y 90,80% de exactitud con un 91% menos de coste por documento. Subir los límites de tokens y hacer fine-tuning con diez imágenes no corrige un error de elección de herramienta, Comprehend analiza texto y no lee imágenes de documentos, y DetectText por sí solo devuelve palabras sin estructura."
 }
 ```
 
@@ -1039,18 +1039,18 @@ La triaje de quejas de Alnylam Pharmaceuticals tardaba **3–4 días**, y encont
 {
   "question": "Ordena estos hechos de precios de AWS desde el periodo gratis o de prueba más corto hasta el más largo:",
   "items": [
-    "Amazon Q Business - prueba de 60 días, hasta 50 usuarios por aplicación más 1.500 horas de índice",
+    "Amazon Q Business: prueba de 60 días, hasta 50 usuarios por aplicación más 1.500 horas de índice",
     "Amazon Textract - 3 meses, 1.000 páginas al mes para DetectDocumentText",
     "Amazon Polly Neural, Rekognition, Comprehend, Translate, Transcribe y Lex - 12 meses",
-    "Amazon Personalize - sin free tier listado en la página de precios"
+    "Amazon Personalize: sin free tier listado en la página de precios"
   ],
   "correctOrder": [
-    "Amazon Personalize - sin free tier listado en la página de precios",
-    "Amazon Q Business - prueba de 60 días, hasta 50 usuarios por aplicación más 1.500 horas de índice",
+    "Amazon Personalize: sin free tier listado en la página de precios",
+    "Amazon Q Business: prueba de 60 días, hasta 50 usuarios por aplicación más 1.500 horas de índice",
     "Amazon Textract - 3 meses, 1.000 páginas al mes para DetectDocumentText",
     "Amazon Polly Neural, Rekognition, Comprehend, Translate, Transcribe y Lex - 12 meses"
   ],
-  "explanation": "El orden va desde ningún periodo gratis hasta el más largo: Personalize no lista free tier, Q Business te da 60 días, Textract te da 3 meses en lugar de los 12 habituales, y el resto de los servicios prefabricados dan 12 meses. Confundir estas tres duraciones - 60 días, 3 meses y 12 meses - es el patrón de distractor más fiable que AWS usa contra el material de esta lección."
+  "explanation": "El orden va desde ningún periodo gratis hasta el más largo: Personalize no lista free tier, Q Business te da 60 días, Textract te da 3 meses en lugar de los 12 habituales, y el resto de los servicios prefabricados dan 12 meses. Confundir estas tres duraciones - 60 días, 3 meses y 12 meses: es el patrón de distractor más fiable que AWS usa contra el material de esta lección."
 }
 ```
 
@@ -1058,7 +1058,7 @@ La triaje de quejas de Alnylam Pharmaceuticals tardaba **3–4 días**, y encont
 
 > [!WARNING]
 > **Lista de verificación final de examen para esta lección:**
-> - Nombra el **tipo de entrada primero**, después el servicio, después la **unidad de facturación** — ese orden responde a toda pregunta de «¿qué servicio?»;
+> - Nombra el **tipo de entrada primero**, después el servicio, después la **unidad de facturación**: ese orden responde a toda pregunta de «¿qué servicio?»;
 > - **Rekognition**: por imagen **y** por minuto **por API**; Grupo 1 y Grupo 2 son medidores separados; moderación de video **0,10 USD/min**; eventos en streaming **0,00817 USD/min** con ventana de **120 s**; metadatos de cara **0,00001 USD por cara al mes**;
 > - **Comprehend**: unidades de 100 caracteres, **mínimo de 3 unidades**, **0,0001 USD** por unidad, entrenamiento personalizado **3 USD/hora** y gestión del modelo **0,50 USD/mes**, sin free tier para Custom;
 > - **Textract**: cinco APIs, precios por página impulsados por funciones desde **0,0015 hasta 0,070 USD**, consultas **15 síncronas / 30 asincrónicas por página** y facturadas **por página**, free tier de **3 meses** sin **nivel para Custom Queries**;
@@ -1076,5 +1076,5 @@ La triaje de quejas de Alnylam Pharmaceuticals tardaba **3–4 días**, y encont
 > 3. **Los free tiers son deliberadamente no uniformes**: **12 meses** para Rekognition (5.000 imágenes + 60 minutos de video), Comprehend (50.000 unidades por API), Translate (2M de caracteres), Polly, Transcribe (60 minutos) y Lex (10.000 texto + 5.000 voz); **3 meses** para Textract; **60 días** para Amazon Q Business; **nada** para Personalize o Custom Comprehend.
 > 4. **La selección de funciones dentro de un servicio es una decisión de precios**: OCR de Textract **0,0015 USD** frente a Forms **0,05 USD** frente a Forms+Tables+Queries **0,070 USD**; transcripción estándar de Transcribe frente a Call Analytics a **0,0300 USD/min**; Polly Estándar **4 USD** frente a Long-Form **100 USD** por millón de caracteres. Habilita solo lo que vas a leer.
 > 5. **Dos respuestas de ciclo de vida deben memorizarse literalmente**: **Amazon Forecast se cerró a clientes nuevos el 29 de julio de 2024**, listado en mantenimiento, con **Amazon SageMaker Canvas** como reemplazo documentado y los clientes existentes continuando sin funciones nuevas; **Amazon Q está en el alcance del AIF-C01**, priceado a **3 USD Lite / 20 USD Pro / 19 USD Q Developer Pro** más horas de índice y **0,0015 USD por mensaje de chat / 0,0080 USD por minuto de voz** en Connect.
-> 6. **El único mínimo por defecto de esta lección es la 1 TPS aprovisionada por campaña activa de Personalize**, facturada incluso con tráfico cero — **86.400 recomendaciones al día, aproximadamente 144 USD/mes** —, así que la primera acción del arquitecto en un lanzamiento con poco tráfico es borrar las campañas en reposo.
-> 7. **Veredicto comparativo:** tarea fija con una API que encaja → **servicio prefabricado**; datos etiquetados y una tarea que la API hace mal → **SageMaker a medida** (horas de entrenamiento y horas de endpoint); generación abierta o respuestas fundamentadas → **Bedrock**, o **Amazon Q Business** cuando la pregunta añade respuestas que respetan permisos sobre datos de la empresa — y cuando una opción ofrece construir un modelo a medida para una tarea que ya tiene una API dedicada, es un distractor.
+> 6. **El único mínimo por defecto de esta lección es la 1 TPS aprovisionada por campaña activa de Personalize**, facturada incluso con tráfico cero, **86.400 recomendaciones al día, aproximadamente 144 USD/mes**, así que la primera acción del arquitecto en un lanzamiento con poco tráfico es borrar las campañas en reposo.
+> 7. **Veredicto comparativo:** tarea fija con una API que encaja → **servicio prefabricado**; datos etiquetados y una tarea que la API hace mal → **SageMaker a medida** (horas de entrenamiento y horas de endpoint); generación abierta o respuestas fundamentadas → **Bedrock**, o **Amazon Q Business** cuando la pregunta añade respuestas que respetan permisos sobre datos de la empresa, y cuando una opción ofrece construir un modelo a medida para una tarea que ya tiene una API dedicada, es un distractor.

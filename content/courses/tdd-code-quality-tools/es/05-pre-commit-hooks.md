@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Hooks de pre-commit
 
-Los hooks de pre-commit son comprobaciones automatizadas que se ejecutan **antes** de que hagas commit del código. Detectan problemas de forma temprana — antes de que lleguen al repositorio —, lo que ahorra tiempo de revisión de código e impide que se mezcle código malo.
+Los hooks de pre-commit son comprobaciones automatizadas que se ejecutan **antes** de que hagas commit del código. Detectan problemas de forma temprana, antes de que lleguen al repositorio, lo que ahorra tiempo de revisión de código e impide que se mezcle código malo.
 
 ## ¿Qué son los hooks de Git?
 
@@ -575,7 +575,7 @@ pre-commit install --install-hooks
 
 - **Los hooks de pre-commit** detectan problemas antes de que lleguen al repositorio
 - **El framework pre-commit** hace que los hooks sean fáciles de instalar, configurar y compartir
-- **Los hooks se ejecutan solo sobre los archivos en staging** — retroalimentación rápida, comprobaciones incrementales
+- **Los hooks se ejecutan solo sobre los archivos en staging**: retroalimentación rápida, comprobaciones incrementales
 - **Habituales**: linting (ruff, flake8), formato (black, isort), seguridad (bandit, detect-secrets), comprobación de tipos (mypy)
 - **Hooks locales**: ejecutan comandos del sistema, scripts personalizados o suites de pruebas
 - **Integración con CI**: pre-commit funciona en local y en pipelines de CI

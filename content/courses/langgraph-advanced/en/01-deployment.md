@@ -367,7 +367,7 @@ def invoke(input: dict):
     "Committed to version control"
   ],
   "correct": 1,
-  "explanation": "Secrets should be stored in environment variables, a secrets manager (like AWS Secrets Manager), or Kubernetes secrets — never in code."
+  "explanation": "Secrets should be stored in environment variables, a secrets manager (like AWS Secrets Manager), or Kubernetes secrets: never in code."
 }
 ```
 
@@ -394,7 +394,7 @@ def invoke(input: dict):
   "question": "How does LangGraph Platform handle concurrent users?",
   "options": [
     "Only one user at a time",
-    "Horizontal scaling — more replicas handle more concurrent requests",
+    "Horizontal scaling: more replicas handle more concurrent requests",
     "Concurrent users are queued",
     "Each user gets a dedicated server"
   ],

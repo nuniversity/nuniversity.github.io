@@ -1,6 +1,6 @@
 ---
 title: "Pacotes dbt Essenciais para Projetos de Produção"
-description: "Domine os pacotes dbt indispensáveis para todo projeto de produção: dbt-utils, dbt-expectations, dbt-audit-helper, dbt-codegen, elementary, dbt-project-evaluator e mais — todos configurados para um ambiente Amazon Redshift."
+description: "Domine os pacotes dbt indispensáveis para todo projeto de produção: dbt-utils, dbt-expectations, dbt-audit-helper, dbt-codegen, elementary, dbt-project-evaluator e mais, todos configurados para um ambiente Amazon Redshift."
 order: 10
 duration: "55 min"
 difficulty: "advanced"
@@ -68,7 +68,7 @@ Sempre fixe versões de pacotes exatamente em `packages.yml`. Versões flutuante
 
 ## 1. dbt-utils: O Pacote Fundamental
 
-`dbt-labs/dbt_utils` é o pacote dbt mais importante — ele fornece macros e testes principais dos quais quase todos os outros pacotes dependem.
+`dbt-labs/dbt_utils` é o pacote dbt mais importante: ele fornece macros e testes principais dos quais quase todos os outros pacotes dependem.
 
 ### Surrogate Keys
 
@@ -86,7 +86,7 @@ from {{ ref('stg_customers') }}
 
 `generate_surrogate_key` produz um hash MD5 consistente entre warehouses. No Redshift ele compila para `md5(cast(coalesce(cast(user_id as varchar), '_dbt_utils_surrogate_key_null_') || '-' || ...) as varchar)`.
 
-### Star — Selecionar Todos Exceto
+### Star: Selecionar Todos Exceto
 
 ```sql
 -- Selecionar todas as colunas exceto metadados internos de carga
@@ -170,7 +170,7 @@ models:
 
 ## 2. dbt-expectations: Great Expectations para dbt
 
-`calogica/dbt_expectations` adiciona 50+ testes de qualidade de dados inspirados pela biblioteca Great Expectations — muito além dos testes genéricos integrados do dbt.
+`calogica/dbt_expectations` adiciona 50+ testes de qualidade de dados inspirados pela biblioteca Great Expectations: muito além dos testes genéricos integrados do dbt.
 
 ```yaml
 # packages.yml já inclui calogica/dbt_expectations
@@ -290,7 +290,7 @@ dbt run-operation audit_helper.compare_row_counts --args '{...}'
 
 ## 4. dbt-codegen: Elimine Código Repetitivo
 
-`dbt-labs/dbt_codegen` gera YAML e SQL a partir do schema do seu warehouse — eliminando o trabalho manual tedioso de escrever configurações de fonte e modelos base.
+`dbt-labs/dbt_codegen` gera YAML e SQL a partir do schema do seu warehouse: eliminando o trabalho manual tedioso de escrever configurações de fonte e modelos base.
 
 ### Gerar YAML de Source a partir do Redshift
 
@@ -375,7 +375,7 @@ dbt run-operation codegen.generate_model_yaml --args '{
 
 ## 5. Elementary: Observabilidade de Dados
 
-`elementary-data/elementary` adiciona detecção de anomalias como testes nativos do dbt — ele monitora seus dados quanto a anomalias de volume, frescor, schema e distribuição de valores sem ferramentas externas.
+`elementary-data/elementary` adiciona detecção de anomalias como testes nativos do dbt: ele monitora seus dados quanto a anomalias de volume, frescor, schema e distribuição de valores sem ferramentas externas.
 
 ```yaml
 # models/marts/facts/schema.yml
@@ -477,7 +477,7 @@ vars:
 
 ## 7. dbt-artifacts: Metadados de Execução no Warehouse
 
-`brooklyn-data/dbt_artifacts` carrega metadados de execução do dbt (tempos de modelo, resultados de teste, frescor de fonte) em tabelas do warehouse — permitindo dashboards sobre a saúde do pipeline.
+`brooklyn-data/dbt_artifacts` carrega metadados de execução do dbt (tempos de modelo, resultados de teste, frescor de fonte) em tabelas do warehouse: permitindo dashboards sobre a saúde do pipeline.
 
 ```yaml
 # packages.yml
@@ -577,7 +577,7 @@ packages:
   "question": "Por que as versões de pacotes devem sempre ser fixadas exatamente em packages.yml em vez de usar um intervalo como `>=1.0.0`?",
   "options": [
     "dbt deps não suporta intervalos de versão",
-    "Versões flutuantes causam builds não reproduzíveis — um lançamento de pacote com mudanças disruptivas quebra silenciosamente seu projeto",
+    "Versões flutuantes causam builds não reproduzíveis: um lançamento de pacote com mudanças disruptivas quebra silenciosamente seu projeto",
     "Versões fixadas executam mais rápido que versões flutuantes",
     "AWS Redshift exige fixação exata de versão para conformidade"
   ],
@@ -630,7 +630,7 @@ packages:
     "Mudanças de schema como colunas removidas ou renomeadas"
   ],
   "correct": 1,
-  "explanation": "dbt_utils.recency apenas verifica se o timestamp mais recente está dentro de um intervalo fixo. elementary.volume_anomalies detecta padrões incomuns relativos a uma linha de base histórica — por exemplo, uma queda de 50% no volume diário de pedidos que a recency sozinha perderia."
+  "explanation": "dbt_utils.recency apenas verifica se o timestamp mais recente está dentro de um intervalo fixo. elementary.volume_anomalies detecta padrões incomuns relativos a uma linha de base histórica: por exemplo, uma queda de 50% no volume diário de pedidos que a recency sozinha perderia."
 }
 ```
 
@@ -671,11 +671,11 @@ packages:
 [!SUCCESS]
 ### Principais Conclusões
 
-- Sempre fixe versões de pacotes exatamente em `packages.yml` — versões flutuantes causam quebras silenciosas e não reproduzíveis.
+- Sempre fixe versões de pacotes exatamente em `packages.yml`: versões flutuantes causam quebras silenciosas e não reproduzíveis.
 - `dbt-utils` é obrigatório: surrogate keys, `star()`, `date_spine`, `union_relations` e testes genéricos avançados pertencem a todo projeto.
 - `dbt-expectations` adiciona 50+ testes de dados estatísticos e estruturais que vão muito além do conjunto integrado do dbt.
-- `dbt-audit-helper` é sua rede de segurança durante refatoração — compare valores de coluna e contagens de linha entre modelos antigos e novos antes de fazer o corte.
+- `dbt-audit-helper` é sua rede de segurança durante refatoração: compare valores de coluna e contagens de linha entre modelos antigos e novos antes de fazer o corte.
 - `dbt-codegen` elimina código repetitivo: gere `sources.yml`, modelos staging base e YAML de schema a partir do catálogo do warehouse em segundos.
-- `elementary` adiciona detecção estatística de anomalias como testes nativos do dbt — picos de volume, mudanças de distribuição e anomalias de frescor são capturados sem ferramentas externas.
+- `elementary` adiciona detecção estatística de anomalias como testes nativos do dbt: picos de volume, mudanças de distribuição e anomalias de frescor são capturados sem ferramentas externas.
 - `dbt-project-evaluator` aplica padrões de qualidade de DAG e cobertura de documentação no CI, prevenindo o acúmulo de dívida arquitetural.
 - `dbt-artifacts` carrega metadados de execução em tabelas do warehouse, permitindo dashboards de saúde do pipeline baseados em SQL diretamente no Redshift.

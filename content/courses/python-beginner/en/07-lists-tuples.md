@@ -110,7 +110,7 @@ a, b = b, a     # a=2, b=1
 
 ## Real-World Examples
 
-### Shopping Cart (List — changes often)
+### Shopping Cart (List: changes often)
 ```python
 cart = []
 cart.append("laptop")
@@ -120,7 +120,7 @@ total_items = len(cart)
 print(f"Cart has {total_items} items")
 ```
 
-### RGB Color (Tuple — fixed)
+### RGB Color (Tuple: fixed)
 ```python
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)

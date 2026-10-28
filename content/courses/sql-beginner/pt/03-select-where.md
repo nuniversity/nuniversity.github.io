@@ -81,11 +81,11 @@ WHERE (status = 'pending' OR status = 'shipped')
 > [!NOTE]
 > `AND` é avaliado antes de `OR`. Sempre use parênteses para tornar sua intenção clara e evitar bugs sutis.
 
-## LIKE — Correspondência de Padrões
+## LIKE: Correspondência de Padrões
 
 `LIKE` corresponde a strings usando dois caracteres curinga:
-- `%` — corresponde a qualquer sequência de caracteres
-- `_` — corresponde exatamente a um caractere
+- `%`: corresponde a qualquer sequência de caracteres
+- `_`: corresponde exatamente a um caractere
 
 ```sql
 -- Começa com "A"
@@ -118,7 +118,7 @@ WHERE department = 'Engineering' AND salary > 85000;
 -- Retorna: Alice Johnson (95000), Carol Chen (88000)
 ```
 
-## IN — Corresponder a uma Lista
+## IN: Corresponder a uma Lista
 
 `IN` é uma abreviação para múltiplas condições `OR`:
 
@@ -141,7 +141,7 @@ SELECT name FROM users
 WHERE status NOT IN ('banned', 'suspended');
 ```
 
-## BETWEEN — Correspondência de Faixa
+## BETWEEN: Correspondência de Faixa
 
 `BETWEEN` é inclusivo em ambos os extremos:
 
@@ -163,7 +163,7 @@ WHERE order_date BETWEEN '2024-01-01' AND '2024-01-31';
 ```
 
 > [!SUCCESS]
-> `BETWEEN` é mais limpo que `>= AND <=` para faixas inclusivas. Para faixas de datas, lembre-se que `BETWEEN` inclui a meia-noite da data final — use `>= 'inicio' AND < 'fim + 1 dia'` para limites exatos.
+> `BETWEEN` é mais limpo que `>= AND <=` para faixas inclusivas. Para faixas de datas, lembre-se que `BETWEEN` inclui a meia-noite da data final: use `>= 'inicio' AND < 'fim + 1 dia'` para limites exatos.
 
 ## Juntando Tudo
 
@@ -193,7 +193,7 @@ ORDER BY stock ASC;
 
 ## Tratamento de NULL
 
-`NULL` significa **desconhecido** — não é zero, nem string vazia.
+`NULL` significa **desconhecido**: não é zero, nem string vazia.
 
 ```sql
 -- Comparações de NULL requerem IS NULL, não = NULL

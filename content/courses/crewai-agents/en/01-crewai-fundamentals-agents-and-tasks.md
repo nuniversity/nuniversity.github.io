@@ -16,9 +16,9 @@ CrewAI is a multi-agent orchestration framework that enables you to define **rol
 
 CrewAI provides three core abstractions that work together to create multi-agent systems:
 
-- **Agent** — An AI entity with a specific role, goal, and backstory. Agents use LLMs to reason, make decisions, and execute tasks.
-- **Task** — A unit of work assigned to an agent, with a description, expected output, and optional tools or context dependencies.
-- **Crew** — The orchestrator that assembles agents and tasks, manages execution flow, and returns the final results.
+- **Agent**: An AI entity with a specific role, goal, and backstory. Agents use LLMs to reason, make decisions, and execute tasks.
+- **Task**: A unit of work assigned to an agent, with a description, expected output, and optional tools or context dependencies.
+- **Crew**: The orchestrator that assembles agents and tasks, manages execution flow, and returns the final results.
 
 ```python
 from crewai import Agent, Task, Crew
@@ -56,15 +56,15 @@ Key parameters:
 
 | Parameter | Required | Purpose |
 | :--- | :--- | :--- |
-| `role` | Yes | The agent's job title — guides the LLM's persona |
-| `goal` | Yes | What the agent aims to achieve — focuses reasoning |
+| `role` | Yes | The agent's job title: guides the LLM's persona |
+| `goal` | Yes | What the agent aims to achieve: focuses reasoning |
 | `backstory` | No | Contextual narrative for the agent's personality |
 | `tools` | No | List of tools the agent can use |
 | `memory` | No | Enables cross-task memory within a crew run |
 | `verbose` | No | Enables step-by-step logging |
 
 [!TIP]
-The `role` parameter is the most influential attribute for shaping agent behavior. A role like "Senior Python Developer" produces dramatically different outputs than "Junior Code Reviewer" — even with the same `goal`. Be specific: include seniority, domain, and specialization.
+The `role` parameter is the most influential attribute for shaping agent behavior. A role like "Senior Python Developer" produces dramatically different outputs than "Junior Code Reviewer": even with the same `goal`. Be specific: include seniority, domain, and specialization.
 
 ```python
 # Compare these two agents — same goal, different roles
@@ -97,7 +97,7 @@ research_task = Task(
 )
 ```
 
-Tasks can also define `context` from other tasks, `tools`, and `callback` functions. The `expected_output` field is critically important — it tells both the agent and the framework what constitutes a successful completion.
+Tasks can also define `context` from other tasks, `tools`, and `callback` functions. The `expected_output` field is critically important; it tells both the agent and the framework what constitutes a successful completion.
 
 ```python
 # A task with context from another task
@@ -403,7 +403,7 @@ if output.json_dict:
 
 ---
 
-## Agent vs Task vs Crew — Responsibilities
+## Agent vs Task vs Crew: Responsibilities
 
 | Aspect | Agent | Task | Crew |
 | :--- | :--- | :--- | :--- |

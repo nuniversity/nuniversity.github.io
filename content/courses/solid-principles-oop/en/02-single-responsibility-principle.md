@@ -10,7 +10,7 @@ difficulty: "intermediate"
 
 > **A class should have one, and only one, reason to change.**
 
-The Single Responsibility Principle is the first of the SOLID principles. It states that every class should have exactly one responsibility — one job to do, one reason to change. When a class takes on multiple responsibilities, it becomes fragile, hard to test, and difficult to maintain.
+The Single Responsibility Principle is the first of the SOLID principles. It states that every class should have exactly one responsibility: one job to do, one reason to change. When a class takes on multiple responsibilities, it becomes fragile, hard to test, and difficult to maintain.
 
 ## The Problem: God Classes
 
@@ -672,7 +672,7 @@ class ReportRepository:
 - **Signs of violation**: class names with "And" or "Manager", unrelated methods, wide testing surfaces
 - **Refactoring**: extract each responsibility into its own class, then compose them
 - **Testing benefit**: each small class is independently testable with minimal mocking
-- **Balance**: don't over-fragment — group cohesive responsibilities together
+- **Balance**: don't over-fragment: group cohesive responsibilities together
 
 > [!SUCCESS]
 > SRP is the foundation of clean OOP design. When every class has one job, your code becomes modular, testable, and a pleasure to work with.

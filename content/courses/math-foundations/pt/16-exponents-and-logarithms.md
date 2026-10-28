@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Expoentes e Logaritmos
 
-**Gancho**: "Expoentes tornam números grandes crescerem rápido. Logaritmos são expoentes ao contrário — eles domam números grandes."
+**Gancho**: "Expoentes tornam números grandes crescerem rápido. Logaritmos são expoentes ao contrário: eles domam números grandes."
 
 ---
 
@@ -200,11 +200,11 @@ $$
 
 ## 5. Exemplos Resolvidos: Regras de Expoentes
 
-### Exemplo 1 — Multiplicação de Mesma Base
+### Exemplo 1: Multiplicação de Mesma Base
 
 **Problema:** Simplifique $5^3 \cdot 5^4$
 
-**Passo 1:** Identifique a regra — multiplicação de potências com a mesma base.
+**Passo 1:** Identifique a regra: multiplicação de potências com a mesma base.
 $$a^m \cdot a^n = a^{m+n}$$
 
 **Passo 2:** Some os expoentes:
@@ -218,11 +218,11 @@ $$5^7 = 78\,125$$
 
 ---
 
-### Exemplo 2 — Divisão de Mesma Base
+### Exemplo 2: Divisão de Mesma Base
 
 **Problema:** Simplifique $\df\frac{7^6}{7^2}$
 
-**Passo 1:** Identifique a regra — divisão de potências com a mesma base.
+**Passo 1:** Identifique a regra: divisão de potências com a mesma base.
 $$\frac{a^m}{a^n} = a^{m-n}$$
 
 **Passo 2:** Subtraia os expoentes:
@@ -236,11 +236,11 @@ $$7^4 = 2\,401$$
 
 ---
 
-### Exemplo 3 — Potência de uma Potência
+### Exemplo 3: Potência de uma Potência
 
 **Problema:** Simplifique $(3^2)^4$
 
-**Passo 1:** Identifique a regra — potência de uma potência.
+**Passo 1:** Identifique a regra: potência de uma potência.
 $$(a^m)^n = a^{mn}$$
 
 **Passo 2:** Multiplique os expoentes:
@@ -254,11 +254,11 @@ $$3^8 = 6\,561$$
 
 ---
 
-### Exemplo 4 — Expoente Negativo
+### Exemplo 4: Expoente Negativo
 
 **Problema:** Reescreva $2^{-3}$ como fração positiva.
 
-**Passo 1:** Identifique a regra — expoente negativo.
+**Passo 1:** Identifique a regra: expoente negativo.
 $$a^{-n} = \frac{1}{a^n}$$
 
 **Passo 2:** Aplique a regra:
@@ -269,7 +269,7 @@ $$2^{-3} = \frac{1}{2^3} = \frac{1}{8}$$
 
 ---
 
-### Exemplo 5 — Expoente Zero
+### Exemplo 5: Expoente Zero
 
 **Problema:** Avalie $99^{0}$
 
@@ -284,11 +284,11 @@ $$99^{0} = 1$$
 
 ---
 
-### Exemplo 6 — Expoente Fracionário
+### Exemplo 6: Expoente Fracionário
 
 **Problema:** Avalie $27^{2/3}$
 
-**Passo 1:** Interprete o expoente fracionário — a parte do numerador é potência e a parte do denominador é raiz:
+**Passo 1:** Interprete o expoente fracionário: a parte do numerador é potência e a parte do denominador é raiz:
 $$a^{m/n} = \sqrt[n]{a^m} = \left(\sqrt[n]{a}\right)^m$$
 
 **Passo 2:** Aplique:
@@ -302,7 +302,7 @@ $$27^{2/3} = \sqrt[3]{27^2} = \sqrt[3]{729} = 9 \quad \checkmark$$
 
 ---
 
-### Exemplo 7 — Combinação de Regras
+### Exemplo 7: Combinação de Regras
 
 **Problema:** Simplifique $\df\frac{(2^3)^2 \cdot 2^4}{2^5}$
 
@@ -319,7 +319,7 @@ $$\frac{2^{10}}{2^5} = 2^{10-5} = 2^5 = 32$$
 
 ## 6. Exemplos Resolvidos: Equações Logarítmicas
 
-### Exemplo 1 — Equação Simples
+### Exemplo 1: Equação Simples
 
 **Problema:** Resolva $\log_2(x) = 5$
 
@@ -333,7 +333,7 @@ $$x = 2^5 = 32$$
 
 ---
 
-### Exemplo 2 — Equação com Logaritmos dos Dois Lados
+### Exemplo 2: Equação com Logaritmos dos Dois Lados
 
 **Problema:** Resolva $\log_3(x + 6) = 2$
 
@@ -347,7 +347,7 @@ $$x = 9 - 6 = 3$$
 
 ---
 
-### Exemplo 3 — Usando Propriedades de Logaritmos
+### Exemplo 3: Usando Propriedades de Logaritmos
 
 **Problema:** Resolva $\log_2(x) + \log_2(x - 2) = 3$
 
@@ -374,7 +374,7 @@ $$x = 4 \quad \text{ou} \quad x = -2$$
 
 ---
 
-### Exemplo 4 — Mudança de Base
+### Exemplo 4: Mudança de Base
 
 **Problema:** Avalie $\log_5(20)$ usando logaritmo comum.
 
@@ -390,7 +390,7 @@ $$\log_5(20) = \frac{\log(20)}{\log(5)} = \frac{1.3010}{0.6990} \approx 1.8614$$
 
 ## 7. Exemplos Resolvidos: Aplicações
 
-### Exemplo 1 — Juros Compostos
+### Exemplo 1: Juros Compostos
 
 **Problema:** Você investe R\$ 10.000 a uma taxa de 6% ao ano, capitalizada mensalmente. Quanto terá após 5 anos?
 
@@ -417,11 +417,11 @@ $$A \approx 10\,000 \times 1{,}3489 = R\$\, 13\,489$$
 **Lucro:** $R\$\, 3\,489$ em 5 anos.
 
 > [!NOTE]
-> Com juros simples, o lucro seria apenas $R\$\, 3\,000$. Os juros compostos geram R\$ 489 a mais — e esse "bônus" cresce exponencialmente com o tempo.
+> Com juros simples, o lucro seria apenas $R\$\, 3\,000$. Os juros compostos geram R\$ 489 a mais, e esse "bônus" cresce exponencialmente com o tempo.
 
 ---
 
-### Exemplo 2 — Escala de pH
+### Exemplo 2: Escala de pH
 
 **Problema:** Uma solução de vinagre tem concentração de íons hidrogênio $[H^+] = 0{,}005$ mol/L. Qual é o pH?
 
@@ -441,7 +441,7 @@ $$\text{pH} = -(-2{,}3010) = 2{,}30$$
 
 ---
 
-### Exemplo 3 — Escala de Richter
+### Exemplo 3: Escala de Richter
 
 **Problema:** Um terremoto tem magnitude 7,0 e outro tem magnitude 5,0. Quantas vezes o terremoto maior é mais intenso?
 
@@ -461,7 +461,7 @@ $$\frac{I_1}{I_2} = 10^{7{,}0 - 5{,}0} = 10^{2} = 100$$
 
 ---
 
-### Exemplo 4 — Crescimento Populacional
+### Exemplo 4: Crescimento Populacional
 
 **Problema:** Uma colônia de bactérias tem 500 indivíduos e dobra a cada 3 horas. Qual será a população após 12 horas?
 
@@ -588,7 +588,7 @@ $$P(12) = 500 \times 16 = 8\,000$$
 
 ## Exemplos Passo a Passo: Regras de Expoentes
 
-### Exemplo — Regra do Produto: $2^3 \times 2^4$
+### Exemplo, Regra do Produto: $2^3 \times 2^4$
 
 **Problema:** Calcule $2^3 \times 2^4$
 
@@ -606,7 +606,7 @@ $$2^7 = 128$$
 
 ---
 
-### Exemplo — Regra do Quociente: $5^7 \div 5^3$
+### Exemplo, Regra do Quociente: $5^7 \div 5^3$
 
 **Problema:** Calcule $5^7 \div 5^3$
 
@@ -624,7 +624,7 @@ $$5^4 = 625$$
 
 ---
 
-### Exemplo — Regra da Potencia: $(3^2)^4$
+### Exemplo, Regra da Potencia: $(3^2)^4$
 
 **Problema:** Calcule $(3^2)^4$
 
@@ -644,7 +644,7 @@ $$3^8 = 6\,561$$
 
 ## Exemplos Passo a Passo: Equacoes Logaritmicas
 
-### Exemplo 1 — Equacao Simples: $\log_2(x) = 5$
+### Exemplo 1, Equacao Simples: $\log_2(x) = 5$
 
 **Problema:** Resolva $\log_2(x) = 5$
 
@@ -660,7 +660,7 @@ $$x = 32$$
 
 ---
 
-### Exemplo 2 — Equacao com Soma de Logaritmos: $\log_2(x) + \log_2(x-2) = 3$
+### Exemplo 2, Equacao com Soma de Logaritmos: $\log_2(x) + \log_2(x-2) = 3$
 
 **Problema:** Resolva $\log_2(x) + \log_2(x-2) = 3$
 
@@ -690,7 +690,7 @@ $$x = 4 \quad \text{ou} \quad x = -2$$
 
 ## Exemplos Passo a Passo: Aplicacoes
 
-### Exemplo — Juros Compostos
+### Exemplo: Juros Compostos
 
 **Problema:** Voce investe R\$ 1.000 a uma taxa de 5% ao mes durante 12 meses. Quanto tera no final?
 
@@ -718,7 +718,7 @@ $$A \approx 1\,000 \times 1{,}7959 = R\$\, 1\,795{,}90$$
 
 ---
 
-### Exemplo — Escala de pH
+### Exemplo: Escala de pH
 
 **Problema:** Uma solucao tem concentracao de ions hidrogenio $[H^+] = 0{,}001$ mol/L. Qual e o pH?
 
@@ -738,7 +738,7 @@ $$\text{pH} = -\log_{10}(10^{-3}) = -(-3) = 3$$
 
 ---
 
-### Exemplo — Escala de Richter
+### Exemplo: Escala de Richter
 
 **Problema:** Um terremoto tem razao de amplitude de 1.000 em relacao a um terremoto de referencia. Qual e a magnitude?
 

@@ -38,7 +38,7 @@ Machine learning projects rarely fail because a model cannot be trained. They fa
 ```
 
 > [!NOTE]
-> **Read this lesson as an operating manual, not a service catalog.** Every number in this file is an AWS-published limit taken from the SageMaker developer guide or the SageMaker API reference. Where AWS publishes two conflicting numbers, both appear and the preferred one is flagged — see section 13.
+> **Read this lesson as an operating manual, not a service catalog.** Every number in this file is an AWS-published limit taken from the SageMaker developer guide or the SageMaker API reference. Where AWS publishes two conflicting numbers, both appear and the preferred one is flagged: see section 13.
 
 By the end of this lesson you will be able to:
 
@@ -65,7 +65,7 @@ This table is the single most examinable artifact of Task 1.3. The left column i
 | 2. Data ingestion | Ground Truth **[maintenance]**, Feature Store streaming ingestion | S3, Kinesis Data Streams, IoT Core, DMS, AppFlow, API Gateway, Glue crawlers | Ground Truth closed to new customers 7/30/26; Mechanical Turk ended Sep 2026 |
 | 3. Processing & EDA | Processing jobs, Data Wrangler (inside Canvas), Studio notebooks | Glue (ETL + Data Catalog), EMR (Spark/Hadoop/Trino), Athena, DataBrew, MWAA | Glue Data Catalog is Hive-compatible |
 | 4. Feature engineering | Feature Store (online/offline), Data Wrangler export | Glue, DataBrew, Redshift | Offline store is append-only Parquet in S3 |
-| 5. Model training | Training jobs, Automatic Model Tuning, AutoML API, JumpStart, HyperPod, Managed Spot | EC2 (P/G/Trn/Inf), ECS/EKS (self-managed), Lambda (light workloads) | Spot savings published as 80% (API) and 90% (FAQ) — see section 13 |
+| 5. Model training | Training jobs, Automatic Model Tuning, AutoML API, JumpStart, HyperPod, Managed Spot | EC2 (P/G/Trn/Inf), ECS/EKS (self-managed), Lambda (light workloads) | Spot savings published as 80% (API) and 90% (FAQ): see section 13 |
 | 6. Evaluation | Clarify **[maintenance]**, Processing on hold-out data, Model Cards | Amazon Bedrock Evaluations, CloudWatch, SHAP / fmeval | Bedrock Evaluations is the managed path for foundation models |
 | 7. Deployment | Four inference options, Model Registry + CI/CD, inference components | Bedrock (serverless API), ECS/EKS (DIY), Lambda + API Gateway | Ceilings in section 7.2 |
 | 8. Monitoring | Model Monitor / Clarify **[maintenance]**, Model Dashboard, Data Capture | CloudWatch, EventBridge + SNS, Lambda, Athena + QuickSight, MLflow + Evidently | Four monitor types: data quality, model quality, bias drift, feature attribution drift |
@@ -73,7 +73,7 @@ This table is the single most examinable artifact of Task 1.3. The left column i
 
 ### 1.2 The MLOps concepts the exam tests
 
-Task 1.3 does not stop at stages. It also names seven MLOps fundamentals — each one maps to a concrete AWS mechanism:
+Task 1.3 does not stop at stages. It also names seven MLOps fundamentals: each one maps to a concrete AWS mechanism:
 
 | MLOps concept | What the exam expects you to say | AWS mechanism |
 |---|---|---|
@@ -101,7 +101,7 @@ flowchart LR
     I -->|No| G
 ```
 
-The arrow that returns from **Monitoring** to **Training** is the whole point of MLOps. A team that deploys and never returns to stage 5 has a *project*, not a *system* — and that is exactly the "technical debt" and "production readiness" language the exam uses.
+The arrow that returns from **Monitoring** to **Training** is the whole point of MLOps. A team that deploys and never returns to stage 5 has a *project*, not a *system*, and that is exactly the "technical debt" and "production readiness" language the exam uses.
 
 **Order the lifecycle before you memorize the services:**
 
@@ -140,7 +140,7 @@ The arrow that returns from **Monitoring** to **Training** is the whole point of
 
 Before you pick a service, AWS wants you to answer three questions in order. Skipping to "SageMaker" is the most common architectural anti-pattern in the exam.
 
-### 2.1 Question 1 — call an API, customize a foundation model, or build your own?
+### 2.1 Question 1: call an API, customize a foundation model, or build your own?
 
 | Path | Choose it when | Service | Pricing model |
 |---|---|---|---|
@@ -151,7 +151,7 @@ Before you pick a service, AWS wants you to answer three questions in order. Ski
 > [!WARNING]
 > **Classic exam trap:** building a custom SageMaker model for English sentiment analysis is an **anti-pattern**. Sentiment on text is a solved, pre-trained capability of **Amazon Comprehend**. The exam rewards the cheapest correct service, not the most impressive one.
 
-### 2.2 Question 2 — what is the modality of the data?
+### 2.2 Question 2: what is the modality of the data?
 
 | Data modality | Managed service | Typical exam phrasing |
 |---|---|---|
@@ -162,7 +162,7 @@ Before you pick a service, AWS wants you to answer three questions in order. Ski
 | Documents (forms, ID, tables) | Amazon Textract | "extract fields from invoices" |
 | Code and chat | Amazon Q, Amazon Bedrock | "answer internal questions from a knowledge base" |
 
-### 2.3 Question 3 — how much control do you need?
+### 2.3 Question 3: how much control do you need?
 
 AWS documents a **control ladder** that climbs from no-code to full-code:
 
@@ -184,7 +184,7 @@ AWS documents a **control ladder** that climbs from no-code to full-code:
                              dedicated endpoints, HyperPod
 ```
 
-AWS also warns in its own guidance that **Studio is the wrong starting point for a team with no ML experience — start with Canvas**.
+AWS also warns in its own guidance that **Studio is the wrong starting point for a team with no ML experience: start with Canvas**.
 
 ### 2.4 Reference architecture: one account, end to end
 
@@ -210,7 +210,7 @@ flowchart TB
     PL --> TR
 ```
 
-**📚 Did you know?** SageMaker Pipelines are literally a **JSON DAG**. The documented step types are Processing, Training, Tuning, AutoML, RegisterModel, DeployModel, Transform, Condition, Callback, Lambda, ClarifyCheck, QualityCheck, EMR, Notebook Job and Fail — and step outputs feed the inputs of downstream steps, which is what makes the loop in the diagram above automatic.
+**📚 Did you know?** SageMaker Pipelines are literally a **JSON DAG**. The documented step types are Processing, Training, Tuning, AutoML, RegisterModel, DeployModel, Transform, Condition, Callback, Lambda, ClarifyCheck, QualityCheck, EMR, Notebook Job and Fail, and step outputs feed the inputs of downstream steps, which is what makes the loop in the diagram above automatic.
 
 ---
 
@@ -242,12 +242,12 @@ flowchart TB
 
 AWS documents two online tiers:
 
-- **Standard** — the default online store configuration;
-- **InMemory** — backed by Amazon ElastiCache (Redis OSS) for the fastest reads. It is **online-only** (no online↔offline replication) and it does **not** support customer-managed KMS keys.
+- **Standard**: the default online store configuration;
+- **InMemory**: backed by Amazon ElastiCache (Redis OSS) for the fastest reads. It is **online-only** (no online↔offline replication) and it does **not** support customer-managed KMS keys.
 
-On the write path, `PutRecord.TargetStores` accepts `{OnlineStore, OfflineStore}` with a **maximum of 2 entries**, so a single call can update both stores — but only if a group has both enabled.
+On the write path, `PutRecord.TargetStores` accepts `{OnlineStore, OfflineStore}` with a **maximum of 2 entries**, so a single call can update both stores, but only if a group has both enabled.
 
-**Example 5 — feature freshness with real numbers.** A fraud model calls `GetRecord` and gets an answer in **single-digit milliseconds**. The same feature group's offline store keeps every historical version as Parquet in S3, which Athena can query for a point-in-time correct training set. A `PutRecord` issued at **14:00** reaches S3 **no later than 14:15** (15-minute buffering). Training therefore sees a slightly delayed snapshot while inference sees the newest row — which is precisely why the exam asks for **both stores enabled on one feature group**.
+**Example 5, feature freshness with real numbers.** A fraud model calls `GetRecord` and gets an answer in **single-digit milliseconds**. The same feature group's offline store keeps every historical version as Parquet in S3, which Athena can query for a point-in-time correct training set. A `PutRecord` issued at **14:00** reaches S3 **no later than 14:15** (15-minute buffering). Training therefore sees a slightly delayed snapshot while inference sees the newest row, which is precisely why the exam asks for **both stores enabled on one feature group**.
 
 ```matching
 {
@@ -262,7 +262,7 @@ On the write path, `PutRecord.TargetStores` accepts `{OnlineStore, OfflineStore}
 }
 ```
 
-**📚 Did you know?** The Feature Store identity is not just a primary key: a record is uniquely identified by the **feature identifier plus the event time**, and the offline store additionally records `write_time`, `api_invocation_time` and an `is_deleted` flag. That is what makes point-in-time joins possible — a training query at 09:00 can only see features whose event time is before 09:00, even if they were written later.
+**📚 Did you know?** The Feature Store identity is not just a primary key: a record is uniquely identified by the **feature identifier plus the event time**, and the offline store additionally records `write_time`, `api_invocation_time` and an `is_deleted` flag. That is what makes point-in-time joins possible: a training query at 09:00 can only see features whose event time is before 09:00, even if they were written later.
 
 ---
 
@@ -272,7 +272,7 @@ On the write path, `PutRecord.TargetStores` accepts `{OnlineStore, OfflineStore}
 
 | Option | Type | Best for | Code | Verified detail |
 |---|---|---|---|---|
-| SageMaker Processing | Managed jobs | Reproducible prep and evaluation inside the ML pipeline | Scripts or BYOC container | Compute is **released at completion** — you stop paying |
+| SageMaker Processing | Managed jobs | Reproducible prep and evaluation inside the ML pipeline | Scripts or BYOC container | Compute is **released at completion**; you stop paying |
 | Data Wrangler (inside Canvas) | Visual no/low-code | Cleansing, EDA, feature generation, export to Feature Store | Little or no code | Connects to S3, Athena, Redshift, Snowflake, EMR |
 | AWS Glue | Serverless ETL + Data Catalog | Crawlers and ETL feeding training tables | PySpark or visual | Spark or Ray; Hive-compatible catalog |
 | Amazon EMR | Managed clusters | Petabyte-scale Spark, Hadoop, Trino, Flink | Full control | EMR ≥ 5.8.0 can use the Glue Data Catalog |
@@ -302,10 +302,10 @@ That "compute is released" property is why Processing jobs beat a permanently at
 
 Two migrations matter for the 2026 exam:
 
-- **Data Wrangler is integrated into SageMaker Canvas** — it is no longer a separate Studio sidebar experience;
-- **Autopilot's UI moved to Canvas on 30 Nov 2023** — the AutoML API remains documented and callable, but the visual AutoML experience is Canvas.
+- **Data Wrangler is integrated into SageMaker Canvas**; it is no longer a separate Studio sidebar experience;
+- **Autopilot's UI moved to Canvas on 30 Nov 2023**: the AutoML API remains documented and callable, but the visual AutoML experience is Canvas.
 
-**📚 Did you know?** Amazon Athena charges **per query and per gigabyte scanned**, so the cheapest EDA is a partitioned Parquet table plus a `WHERE dt = '…'` filter. A full-table scan of a 1 TB CSV costs roughly 100× more than the same query over partitioned Parquet — the exam does not ask for the price, but it does ask whether Athena is "serverless SQL over S3".
+**📚 Did you know?** Amazon Athena charges **per query and per gigabyte scanned**, so the cheapest EDA is a partitioned Parquet table plus a `WHERE dt = '…'` filter. A full-table scan of a 1 TB CSV costs roughly 100× more than the same query over partitioned Parquet: the exam does not ask for the price, but it does ask whether Athena is "serverless SQL over S3".
 
 ---
 
@@ -331,7 +331,7 @@ Two migrations matter for the 2026 exam:
 | AutoML API | Algorithm selection, HPO, explainability | UI lives in Canvas since Nov 2023 |
 | JumpStart | Model hub: deployable models and prebuilt solutions | Fastest path to a working baseline |
 | HyperPod | Managed EKS/Slurm clusters for large training and inference | AWS decision-guide claims (single source): training −40%, governance −40%, goodput ≥ 95% |
-| Managed Spot Training | Interruptible capacity | Savings published as **up to 90%** (FAQ) and **up to 80%** (API) — see section 13 |
+| Managed Spot Training | Interruptible capacity | Savings published as **up to 90%** (FAQ) and **up to 80%** (API): see section 13 |
 | EC2 P/G/Trn/Inf instances | Deepest hardware control | You own OS, drivers, frameworks, serving stack |
 
 ### 5.3 Pipelines: the orchestration backbone
@@ -341,7 +341,7 @@ A SageMaker Pipeline is a **JSON DAG** whose steps exchange outputs as inputs. T
 | Pipeline feature | Verified behavior |
 |---|---|
 | Step outputs | Feed downstream step inputs automatically |
-| Caching | `CacheConfig { Enabled, ExpireAfter: "30d" }` — unchanged steps can be skipped for up to 30 days |
+| Caching | `CacheConfig { Enabled, ExpireAfter: "30d" }`: unchanged steps can be skipped for up to 30 days |
 | Typical compute in samples | `ml.m5.xlarge`, `ProcessingInstanceCount=1` |
 | Deployment gate | `ModelApprovalStatus=PendingManualApproval` until a human approves |
 | Billing | You pay for Studio plus the jobs the pipeline orchestrates |
@@ -388,9 +388,9 @@ Clarify writes JSON bias metrics, global attributions and a visual report to **S
 | **Model Cards** | An **immutable** documentation record for a model | Intended uses, **risk rating**, training details, evaluation results; default status `DRAFT`; PDF export | Active |
 | **Model Dashboard** | A portal across your estate | Models, monitors, lineage, cards, risk rating in {low, medium, high, unknown} | Active |
 | **Data Capture** | Records live request/response payloads | Feeds monitors and shadow analysis | Active |
-| Role Manager | Persona-based ML IAM roles | — | **Closed to new customers** |
+| Role Manager | Persona-based ML IAM roles |: | **Closed to new customers** |
 
-If the exam says "the model owner must *record* intended uses, risk rating, training details and evaluation results", the answer is **Model Cards** — not the Dashboard (which aggregates) and not Model Monitor (which only tracks drift).
+If the exam says "the model owner must *record* intended uses, risk rating, training details and evaluation results", the answer is **Model Cards**: not the Dashboard (which aggregates) and not Model Monitor (which only tracks drift).
 
 ---
 
@@ -406,7 +406,7 @@ This is the central service-selection topic of the whole lesson. SageMaker AI do
 | Latency | Milliseconds / interactive | Hours to days (offline) | Near real-time: seconds to minutes | Seconds; cold start possible |
 | Payload / processing ceiling | **25 MB / 60 s** (up to 8 min with response streaming) | **≤ 100 MB per request**, days of processing | **1 GB / 60 min** | **4 MB / 60 s** |
 | Capacity and billing | Instance billed continuously while the endpoint exists | Job duration only | While processing; autoscaling can scale instances to **0** | Auto **scale-to-zero** |
-| Queueing | No | Not applicable | **Yes** — requests queue while capacity is zero | No |
+| Queueing | No | Not applicable | **Yes**: requests queue while capacity is zero | No |
 | Typical workload | Fraud score, recommender API, chatbot | Nightly risk scoring, lake backfill, image tagging | Video/document processing, large payloads | Spiky, unpredictable traffic with idle periods |
 
 ### 7.2 The numeric ceilings in one place
@@ -417,8 +417,8 @@ This is the central service-selection topic of the whole lesson. SageMaker AI do
 | Serverless payload / processing | **4 MB / 60 s** | `serverless-endpoints` |
 | Asynchronous payload / processing | **1 GB / 60 min** | `hosting-faqs` |
 | Batch payload per request | **100 MB**; concurrency × payload ≤ 100 MB | `batch-transform` |
-| Serverless memory range | **1024–6144 MB** in 1024 steps; vCPUs scale with memory | `serverless-endpoints` |
-| Serverless `MaxConcurrency` / image size | **1–200** / **≤ 10 GB** | `serverless-endpoints` + API |
+| Serverless memory range | **1024 to 6144 MB** in 1024 steps; vCPUs scale with memory | `serverless-endpoints` |
+| Serverless `MaxConcurrency` / image size | **1 to 200** / **≤ 10 GB** | `serverless-endpoints` + API |
 | Provisioned Concurrency on serverless | Responds "within milliseconds"; works with Application Auto Scaling | `serverless-endpoints` |
 | Bidirectional streaming | HTTP/2 **port 8443**, session **≤ 30 min** | `realtime-endpoints-test-endpoints` |
 | Training `MaxRuntime` default / max / job total | **1 day / 28 days / 30 days** | `API_StoppingCondition` |
@@ -426,7 +426,7 @@ This is the central service-selection topic of the whole lesson. SageMaker AI do
 | Feature Store offline write to S3 | **≤ 15 min** buffered; online read **single-digit ms** | `feature-store-offline` |
 | Attribution-drift auto-alert | **NDCG < 0.90** | `clarify-model-monitor-feature-attribution-drift` |
 
-**Check the ceilings before you pick an option — the payload decides, not the latency preference:**
+**Check the ceilings before you pick an option: the payload decides, not the latency preference:**
 
 ```fillblank
 {
@@ -440,7 +440,7 @@ This is the central service-selection topic of the whole lesson. SageMaker AI do
     "5": "60"
   },
   "distractors": ["6", "100", "15", "8", "30"],
-  "explanation": "The developer guide publishes 25 MB / 60 s for real-time (up to 8 minutes with response streaming), 4 MB / 60 s for serverless and 1 GB / 60 min for asynchronous. Batch transform is the option with the 100 MB per-request ceiling, and 6 MB is the conflicting FAQ figure you should ignore — see section 13."
+  "explanation": "The developer guide publishes 25 MB / 60 s for real-time (up to 8 minutes with response streaming), 4 MB / 60 s for serverless and 1 GB / 60 min for asynchronous. Batch transform is the option with the 100 MB per-request ceiling, and 6 MB is the conflicting FAQ figure you should ignore: see section 13."
 }
 ```
 
@@ -448,7 +448,7 @@ This is the central service-selection topic of the whole lesson. SageMaker AI do
 
 - Persistent HTTPS endpoint invoked with **`InvokeEndpoint`**; response streaming uses **`InvokeEndpointWithResponseStream`**.
 - Bidirectional **HTTP/2 on port 8443**, sessions capped at **30 minutes**.
-- Several models can share one endpoint through **inference components** — the exam's answer when it asks to host multiple models without paying for multiple endpoints.
+- Several models can share one endpoint through **inference components**: the exam's answer when it asks to host multiple models without paying for multiple endpoints.
 
 ### 7.4 Serverless Inference in detail
 
@@ -458,7 +458,7 @@ Serverless has documented **exclusions**: no **GPUs**, no **AWS Marketplace** pa
 
 ### 7.5 Asynchronous Inference in detail
 
-`InvokeEndpointAsync` takes its input from **S3**, writes output to **S3**, and sends a **completion notification**. Requests **queue while capacity is zero**, and autoscaling can scale the instance count to **0** — that combination (queue + scale to zero) is what makes async the right answer for large, slow payloads.
+`InvokeEndpointAsync` takes its input from **S3**, writes output to **S3**, and sends a **completion notification**. Requests **queue while capacity is zero**, and autoscaling can scale the instance count to **0**; that combination (queue + scale to zero) is what makes async the right answer for large, slow payloads.
 
 ### 7.6 Batch transform in detail
 
@@ -481,14 +481,14 @@ flowchart TD
     Q2 -->|"Whole dataset already in S3"| BT["Batch transform: 100 MB per request, no endpoint"]
 ```
 
-**Example 1 — option choice by payload.** A fraud API receives **3 KB** payloads and must answer in under **200 ms** → **real-time** (ceilings 25 MB / 60 s). Later the same model is asked to score **800 MB videos that take 10 minutes** → that exceeds the 25 MB real-time ceiling but fits **asynchronous** (≤ 1 GB, ≤ 60 min), so you switch options and keep scale-to-zero.
+**Example 1: option choice by payload.** A fraud API receives **3 KB** payloads and must answer in under **200 ms** → **real-time** (ceilings 25 MB / 60 s). Later the same model is asked to score **800 MB videos that take 10 minutes** → that exceeds the 25 MB real-time ceiling but fits **asynchronous** (≤ 1 GB, ≤ 60 min), so you switch options and keep scale-to-zero.
 
-**Example 2 — serverless sizing.** A **3.5 GB** model needs `MemorySizeInMB=4096` (memory must be ≥ model size; the allowed range is 1024…6144). Set `MaxConcurrency=50` (allowed 1–200) with `ProvisionedConcurrency=10` (must be ≤ `MaxConcurrency`) to pre-warm part of the traffic, and keep the container image **≤ 10 GB**.
+**Example 2: serverless sizing.** A **3.5 GB** model needs `MemorySizeInMB=4096` (memory must be ≥ model size; the allowed range is 1024…6144). Set `MaxConcurrency=50` (allowed 1 to 200) with `ProvisionedConcurrency=10` (must be ≤ `MaxConcurrency`) to pre-warm part of the traffic, and keep the container image **≤ 10 GB**.
 
-**Example 3 — batch concurrency math.** With `MaxPayloadInMB=25`, the maximum legal `MaxConcurrentTransforms` is **4**, because 4 × 25 = 100 ≤ 100 MB. Setting **5** would break the documented rule (5 × 25 = 125 > 100).
+**Example 3: batch concurrency math.** With `MaxPayloadInMB=25`, the maximum legal `MaxConcurrentTransforms` is **4**, because 4 × 25 = 100 ≤ 100 MB. Setting **5** would break the documented rule (5 × 25 = 125 > 100).
 
 > [!WARNING]
-> **Do not memorize the FAQ numbers for real-time.** The developer guide says **25 MB**, while the public FAQ has circulated **6 MB** (and an async figure of 15 min instead of 60 min). Prefer the developer-guide figures and re-check them before exam day — see section 13.
+> **Do not memorize the FAQ numbers for real-time.** The developer guide says **25 MB**, while the public FAQ has circulated **6 MB** (and an async figure of 15 min instead of 60 min). Prefer the developer-guide figures and re-check them before exam day: see section 13.
 
 ---
 
@@ -503,11 +503,11 @@ flowchart TD
 | **Bias drift** | Bias metrics over time | Scheduled Clarify-style bias statistics |
 | **Feature attribution drift** | Rank of feature importance vs. baseline | Ranked by **NDCG**; auto-alarm when **NDCG < 0.90** (a fully reversed ranking scores 0.69) |
 
-All monitors emit metrics and violations to **Amazon CloudWatch**, which is the exam's answer whenever it mentions "raise an alarm on thresholds". Note also that the **prebuilt monitoring container supports tabular data only** — NLP and computer-vision models need a bring-your-own container.
+All monitors emit metrics and violations to **Amazon CloudWatch**, which is the exam's answer whenever it mentions "raise an alarm on thresholds". Note also that the **prebuilt monitoring container supports tabular data only**: NLP and computer-vision models need a bring-your-own container.
 
 ### 8.2 From alarm to retrained model
 
-**Example 6 — the drift → retrain loop with real numbers.** A Deequ baseline is computed from the training data. A scheduled monitoring job compares live traffic against it. Feature-attribution monitoring raises an automatic alarm when **NDCG drops below 0.90**. A bias example uses a **DPPL range of (−0.1, 0.1) evaluated over 2 days** with bootstrap confidence intervals. The alarm goes to **CloudWatch**, CloudWatch triggers an **EventBridge** rule, and EventBridge starts a **SageMaker Pipelines** retrain run whose new version lands in the Model Registry as `PendingManualApproval`.
+**Example 6: the drift → retrain loop with real numbers.** A Deequ baseline is computed from the training data. A scheduled monitoring job compares live traffic against it. Feature-attribution monitoring raises an automatic alarm when **NDCG drops below 0.90**. A bias example uses a **DPPL range of (−0.1, 0.1) evaluated over 2 days** with bootstrap confidence intervals. The alarm goes to **CloudWatch**, CloudWatch triggers an **EventBridge** rule, and EventBridge starts a **SageMaker Pipelines** retrain run whose new version lands in the Model Registry as `PendingManualApproval`.
 
 ```mermaid
 flowchart LR
@@ -534,7 +534,7 @@ Because Model Monitor and Clarify are closed to new customers, AWS's own availab
 | Experiments (Classic) | New SageMaker Studio + **managed MLflow 3.0** (Apps preferred, artifacts in your S3) |
 | Studio Lab | **SageMaker Studio** |
 
-**📚 Did you know?** Experiments **Classic** is available only in **Studio Classic**, and AWS now recommends managed **MLflow 3.0** with Studio Apps — experiment artifacts are stored in *your* S3 bucket, so the tracking data outlives the notebook. MLflow is also the backbone of the recommended replacement for Model Monitor.
+**📚 Did you know?** Experiments **Classic** is available only in **Studio Classic**, and AWS now recommends managed **MLflow 3.0** with Studio Apps: experiment artifacts are stored in *your* S3 bucket, so the tracking data outlives the notebook. MLflow is also the backbone of the recommended replacement for Model Monitor.
 
 ---
 
@@ -557,10 +557,10 @@ AWS's own decision criteria are: infrastructure management, compute commitments,
 > [!IMPORTANT]
 > **Comparative Verdict**
 > - **SageMaker vs. build-your-own on EC2:** both run your container, but EC2 makes *you* own the OS, drivers, GPU stack, serving framework, scaling logic, patching, and every idle second you pay for. Choose EC2 only when you need hardware or driver control SageMaker cannot expose (specialty P/G/Trn/Inf instances, kernel-level tuning). Otherwise SageMaker's managed endpoints, Processing/Training jobs, Pipelines and Model Registry are the difference between a *system* and a *hobby*. Cost is not the deciding factor either: EC2 bills per hour just as SageMaker does, and SageMaker offers Savings Plans up to 64%.
-> - **SageMaker vs. non-AWS platforms** (other clouds, managed-ML vendors, self-hosted MLOps stacks): portability is real — containers, MLflow and Kubernetes travel — but the exam's frame is AWS-native integration: IAM, S3, Glue, Kinesis, EventBridge, CloudWatch, Bedrock and free-tier credits all bind to SageMaker without glue code. If the requirement is "run anywhere", a Kubernetes stack (EKS or another orchestrator) with MLflow tracking is defensible; if the requirement is "ship fast, governed, on AWS", it is not. Note also that SageMaker models can be imported into Bedrock, so the two are not mutually exclusive.
+> - **SageMaker vs. non-AWS platforms** (other clouds, managed-ML vendors, self-hosted MLOps stacks): portability is real, containers, MLflow and Kubernetes travel, but the exam's frame is AWS-native integration: IAM, S3, Glue, Kinesis, EventBridge, CloudWatch, Bedrock and free-tier credits all bind to SageMaker without glue code. If the requirement is "run anywhere", a Kubernetes stack (EKS or another orchestrator) with MLflow tracking is defensible; if the requirement is "ship fast, governed, on AWS", it is not. Note also that SageMaker models can be imported into Bedrock, so the two are not mutually exclusive.
 > - **SageMaker vs. a manual process** (a data scientist's notebook, spreadsheets, ad-hoc scripts, hand-copied CSVs): the manual process always wins the first week and always loses afterwards. It cannot prove repeatability (no Pipelines DAG), cannot prove which version served a given prediction (no Registry lineage), cannot detect drift (no baseline, no CloudWatch alarm), and cannot be re-run by anyone else. AWS frames this exact failure as **technical debt** and **production readiness** in Task 1.3. The verdict is categorical: a manual process is acceptable only for the experimentation stage, never for deployment.
 
-### 9.2 Amazon Bedrock vs. Amazon SageMaker — the official line
+### 9.2 Amazon Bedrock vs. Amazon SageMaker: the official line
 
 | Dimension | Amazon Bedrock | Amazon SageMaker AI |
 |---|---|---|
@@ -568,7 +568,7 @@ AWS's own decision criteria are: infrastructure management, compute commitments,
 | Interaction | Serverless, API-based | Training jobs, dedicated endpoints, HyperPod clusters |
 | Infrastructure you manage | Effectively none | Containers, instance types, scaling policies |
 | Best fit | Prompting, RAG, agents, guardrails, fine-tuning, evaluations | Full control over training and serving |
-| Interoperability | — | **SageMaker models can be imported into Bedrock** |
+| Interoperability |: | **SageMaker models can be imported into Bedrock** |
 
 ### 9.3 Streaming inference architecture
 
@@ -599,7 +599,7 @@ The 2026 exam actively tests availability. Answering correctly means knowing wha
 | **Maintenance, closed to new customers** (30 Jun 2026) | A2I, Clarify, Debugger, GeoSpatial, Ground Truth, Model Monitor, Role Manager, Studio Lab |
 | Closure date stated in the docs | Ground Truth, Model Monitor: **effective 7/30/26** |
 | **End of support** | Amazon Mechanical Turk: **29 Sep 2026** (Ground Truth docs: permanent closure 30 Sep 2026) |
-| Entered sunset, dates not retrieved | SageMaker Profiler, Ground Truth Plus — see section 13 |
+| Entered sunset, dates not retrieved | SageMaker Profiler, Ground Truth Plus: see section 13 |
 | **Active** (no notice found) | Studio, Pipelines, Processing, Training, Model Registry, the four inference options, Feature Store, Model Cards, Model Dashboard, Canvas, JumpStart, HyperPod, managed MLflow |
 
 The standard maintenance wording is: *"Customers can't on-board… AWS will continue to operate and support these services… but won't enhance or add functionality."* Existing customers keep access; there are simply no new features.
@@ -630,18 +630,18 @@ The standard maintenance wording is: *"Customers can't on-board… AWS will cont
 | A2I / Debugger / GeoSpatial | Human loops / training debug / geospatial ML | **Closed to new customers** |
 
 > [!WARNING]
-> **The Ground Truth question, answered.** If a *brand-new* AWS customer asks for a SageMaker Ground Truth image-labeling job, the correct answer is: **Ground Truth is closed to new customers as of 30 July 2026, so a different labeling approach is required** — not "it works with Mechanical Turk" (Mechanical Turk ended support on **29 Sep 2026**) and not "create an endpoint first" (labeling never needed one).
+> **The Ground Truth question, answered.** If a *brand-new* AWS customer asks for a SageMaker Ground Truth image-labeling job, the correct answer is: **Ground Truth is closed to new customers as of 30 July 2026, so a different labeling approach is required**: not "it works with Mechanical Turk" (Mechanical Turk ended support on **29 Sep 2026**) and not "create an endpoint first" (labeling never needed one).
 
-**📚 Did you know?** Studio Lab — the free JupyterLab 4 environment that required **no AWS account and no credit card** — had published limits of just **12 GB RAM and 15 GB of storage**, and it is now closed to new customers with **SageMaker Studio** as the replacement. That is why "use Studio Lab for free" is a distractor in 2026 material.
+**📚 Did you know?** Studio Lab, the free JupyterLab 4 environment that required **no AWS account and no credit card**, had published limits of just **12 GB RAM and 15 GB of storage**, and it is now closed to new customers with **SageMaker Studio** as the replacement. That is why "use Studio Lab for free" is a distractor in 2026 material.
 
-### 10.3 2025–2026 Updates
+### 10.3 2025 to 2026 Updates
 
-Between December 2024 and October 2026 the SageMaker ecosystem was renamed, trimmed and re-pointed several times. Every row below comes from an AWS announcement, an AWS availability-change page or the AWS certification change history — nothing here is third-party, and dates AWS itself does not publish are deliberately omitted (see section 13).
+Between December 2024 and October 2026 the SageMaker ecosystem was renamed, trimmed and re-pointed several times. Every row below comes from an AWS announcement, an AWS availability-change page or the AWS certification change history: nothing here is third-party, and dates AWS itself does not publish are deliberately omitted (see section 13).
 
 | Change | Date (AWS-published) | What the exam wants you to know |
 |---|---|---|
 | **Amazon SageMaker renamed Amazon SageMaker AI** | 3 Dec 2024 | "SageMaker" in a question means SageMaker AI; the next-generation SageMaker (Unified Studio, Catalog, Lakehouse, zero-ETL) is the adjacent analytics platform, not a different exam topic |
-| **Bedrock Studio folded into SageMaker Unified Studio** | workspaces closed 28 Feb 2025 (docs updated 25 Mar 2025) | The standalone Bedrock Studio is gone — Bedrock now lives inside SageMaker Unified Studio or in the Bedrock IDE |
+| **Bedrock Studio folded into SageMaker Unified Studio** | workspaces closed 28 Feb 2025 (docs updated 25 Mar 2025) | The standalone Bedrock Studio is gone: Bedrock now lives inside SageMaker Unified Studio or in the Bedrock IDE |
 | **Amazon Forecast closed to new customers** | 29 Jul 2024 | Forecast-style questions now point at **SageMaker Canvas** |
 | **Amazon Kendra in maintenance, then closed to new customers** | 30 Jun → 30 Jul 2026 | Managed enterprise search and generative QA → **Amazon Bedrock Managed Knowledge Base** (Smart Parsing plus the Agentic Retrieval API) |
 | **Amazon Q Developer signups blocked; IDE/paid end of support** | 15 May 2026; EOS 30 Apr 2027 | AWS documents **Kiro** as the successor for those workloads |
@@ -653,9 +653,9 @@ Between December 2024 and October 2026 the SageMaker ecosystem was renamed, trim
 Two vocabulary facts complete the picture:
 
 - **Maintenance** = no new customers, no new features, still supported · **sunset** = planned end of operations, typically announced about a year ahead · **full shutdown** = removed from the AWS portfolio. AWS's Service Lifecycle reference defines all three, and every row above sits in the first two states.
-- Exam-guide updates land on the test about **one month** after publication, so anything AWS published on v1.1 (30 Apr 2026) is already fair game — including SageMaker JumpStart, Bedrock AgentCore, Kiro and Strands Agents on the in-scope list.
+- Exam-guide updates land on the test about **one month** after publication, so anything AWS published on v1.1 (30 Apr 2026) is already fair game: including SageMaker JumpStart, Bedrock AgentCore, Kiro and Strands Agents on the in-scope list.
 
-**📚 Did you know?** The Kendra availability page does not say "deprecated": it redirects new search applications to **Amazon Bedrock Managed Knowledge Base**, whose Smart Parsing and **Agentic Retrieval API** are documented as the Kendra replacement. "Kendra was shut down" is therefore a distractor — Kendra is in *maintenance*, which under AWS's own vocabulary means it keeps running for existing customers.
+**📚 Did you know?** The Kendra availability page does not say "deprecated": it redirects new search applications to **Amazon Bedrock Managed Knowledge Base**, whose Smart Parsing and **Agentic Retrieval API** are documented as the Kendra replacement. "Kendra was shut down" is therefore a distractor: Kendra is in *maintenance*, which under AWS's own vocabulary means it keeps running for existing customers.
 
 ---
 
@@ -677,29 +677,29 @@ Two vocabulary facts complete the picture:
 
 ### 11.2 Worked cost pattern
 
-AWS's own worked example totals **$2.38** — 2 hours of `ml.m4.4xlarge` at **$0.96** each plus 2 hours of `ml.m5.xlarge` at **$0.23** each, with built-in Debugger rules billed at **$0**. Learn the *pattern* (instance-hours × rate + job surcharges), never the rate: `ml.*` prices are region- and date-dependent.
+AWS's own worked example totals **$2.38**: 2 hours of `ml.m4.4xlarge` at **$0.96** each plus 2 hours of `ml.m5.xlarge` at **$0.23** each, with built-in Debugger rules billed at **$0**. Learn the *pattern* (instance-hours × rate + job surcharges), never the rate: `ml.*` prices are region- and date-dependent.
 
 ### 11.3 Quotas
 
-Endpoint counts, pipeline quotas, concurrent-job limits and serverless concurrency live in **Service Quotas**. Never guess a numeric quota in an exam answer or a design review — look it up.
+Endpoint counts, pipeline quotas, concurrent-job limits and serverless concurrency live in **Service Quotas**. Never guess a numeric quota in an exam answer or a design review: look it up.
 
 ---
 
 ## 12. Worked AWS examples with numbers
 
-**Example 1 — option choice by payload (section 7.7).** Fraud API: **3 KB** payloads, **< 200 ms** → real-time (25 MB / 60 s ceilings). Same model scoring **800 MB** videos that take **10 minutes** → exceeds 25 MB but fits asynchronous (≤ 1 GB, ≤ 60 min). Switch options; keep scale-to-zero.
+**Example 1: option choice by payload (section 7.7).** Fraud API: **3 KB** payloads, **< 200 ms** → real-time (25 MB / 60 s ceilings). Same model scoring **800 MB** videos that take **10 minutes** → exceeds 25 MB but fits asynchronous (≤ 1 GB, ≤ 60 min). Switch options; keep scale-to-zero.
 
-**Example 2 — serverless sizing (section 7.4).** Model **3.5 GB** → `MemorySizeInMB=4096`; `MaxConcurrency=50` (range 1–200); `ProvisionedConcurrency=10` (≤ 50) to pre-warm; container image **≤ 10 GB**.
+**Example 2: serverless sizing (section 7.4).** Model **3.5 GB** → `MemorySizeInMB=4096`; `MaxConcurrency=50` (range 1 to 200); `ProvisionedConcurrency=10` (≤ 50) to pre-warm; container image **≤ 10 GB**.
 
-**Example 3 — batch concurrency math (section 7.6).** `MaxPayloadInMB=25` → maximum `MaxConcurrentTransforms=4` because 4 × 25 = 100 ≤ 100 MB. Five workers would violate the documented rule.
+**Example 3: batch concurrency math (section 7.6).** `MaxPayloadInMB=25` → maximum `MaxConcurrentTransforms=4` because 4 × 25 = 100 ≤ 100 MB. Five workers would violate the documented rule.
 
-**Example 4 — free-tier budget.** 250 notebook hours ≈ **8.3 instance-days**; 50 training hours ≈ **six 8-hour runs**; 125 real-time hours ≈ **4.2 days** of hosting; 150,000 serverless seconds ≈ **41.7 billable hours**. Exceeding 250 notebook hours in month 1 starts metered billing.
+**Example 4: free-tier budget.** 250 notebook hours ≈ **8.3 instance-days**; 50 training hours ≈ **six 8-hour runs**; 125 real-time hours ≈ **4.2 days** of hosting; 150,000 serverless seconds ≈ **41.7 billable hours**. Exceeding 250 notebook hours in month 1 starts metered billing.
 
-**Example 5 — feature freshness (section 3.2).** Online `GetRecord` answers in **single-digit milliseconds**; the offline store keeps every version as Parquet in S3 (Athena-queryable) for point-in-time joins; a **14:00** `PutRecord` reaches S3 by **14:15** at the latest.
+**Example 5: feature freshness (section 3.2).** Online `GetRecord` answers in **single-digit milliseconds**; the offline store keeps every version as Parquet in S3 (Athena-queryable) for point-in-time joins; a **14:00** `PutRecord` reaches S3 by **14:15** at the latest.
 
-**Example 6 — drift → retrain loop (section 8.2).** Deequ baseline from training data; scheduled monitoring of live traffic; attribution drift auto-alarms below **NDCG 0.90**; bias example uses **DPPL ∈ (−0.1, 0.1) over 2 days** with bootstrap confidence intervals → CloudWatch → EventBridge → Pipelines retrain.
+**Example 6: drift → retrain loop (section 8.2).** Deequ baseline from training data; scheduled monitoring of live traffic; attribution drift auto-alarms below **NDCG 0.90**; bias example uses **DPPL ∈ (−0.1, 0.1) over 2 days** with bootstrap confidence intervals → CloudWatch → EventBridge → Pipelines retrain.
 
-**Example 7 — training cost ceiling (section 5.1).** A training job with the default `MaxRuntimeInSeconds` stops after **1 day**; the hard maximum is **28 days**, and a job cannot exceed **30 days** total. On stop SageMaker sends **`SIGTERM`** and waits **120 seconds** for your checkpoint code to finish.
+**Example 7: training cost ceiling (section 5.1).** A training job with the default `MaxRuntimeInSeconds` stops after **1 day**; the hard maximum is **28 days**, and a job cannot exceed **30 days** total. On stop SageMaker sends **`SIGTERM`** and waits **120 seconds** for your checkpoint code to finish.
 
 ---
 
@@ -710,13 +710,13 @@ Good exam candidates separate what AWS *documents* from what AWS *marketplaces*.
 | Claim | What the sources say | How to handle it |
 |---|---|---|
 | Real-time payload | Developer guide **25 MB** vs. public FAQ **6 MB** (async 15 min vs. 60 min) | Prefer the developer guide; re-check before exam day |
-| Spot savings | **Up to 90%** (FAQ/blogs) vs. **up to 80%** (CreateTrainingJob API) | Both are AWS-published; expect "up to 80–90%" |
+| Spot savings | **Up to 90%** (FAQ/blogs) vs. **up to 80%** (CreateTrainingJob API) | Both are AWS-published; expect "up to 80 to 90%" |
 | Savings Plans | Up to **64%** on SageMaker | Single AWS pricing-page figure |
 | Prices | Only AWS's worked example ($0.96, $0.23, total **$2.38**) is quoted here | Do not memorize `ml.*` rates |
-| Serverless cold start 10–60 s, latency percentiles, cost crossovers, "60–80% savings self-hosting on EKS" | **Third-party only** (devopsity.com) | Not examinable |
+| Serverless cold start 10 to 60 s, latency percentiles, cost crossovers, "60 to 80% savings self-hosting on EKS" | **Third-party only** (devopsity.com) | Not examinable |
 | Ground Truth Plus (30 Jun 2026) and SageMaker Profiler sunset | Listed by AWS as entering sunset; **dates not retrieved** | Do not state a date |
 | Experiments (Classic) status | Docs say Studio Classic-only and recommend MLflow; **no availability-change page found** | New-customer status unconfirmed |
-| Canvas / Autopilot / JumpStart / Feature Store / Pipelines | **No maintenance notice found** | Absence of a notice is not a guarantee — verify on `docs.aws.amazon.com` |
+| Canvas / Autopilot / JumpStart / Feature Store / Pipelines | **No maintenance notice found** | Absence of a notice is not a guarantee: verify on `docs.aws.amazon.com` |
 | Account quotas | Live in Service Quotas, not retrieved | Never guess a numeric quota |
 | HyperPod claims (training −40%, governance −40%, goodput ≥ 95%, inference latency −40%) | Single-source **marketing** statement in a decision guide | Treat as directional, not factual |
 | AWS re:Post articles | AWS-hosted but **perspective** content | Not normative documentation |
@@ -728,55 +728,55 @@ Primary sources for this lesson: the AIF-C01 **Exam Guide**; the SageMaker **dev
 
 ## Real-World Case Studies
 
-AWS publishes these cases on `aws.amazon.com/solutions/case-studies/` and `aws.amazon.com/blogs/machine-learning/`. They belong in this lesson because each one maps a **lifecycle stage** onto a **service choice** with a number attached — which is exactly how Task 1.3 questions are framed.
+AWS publishes these cases on `aws.amazon.com/solutions/case-studies/` and `aws.amazon.com/blogs/machine-learning/`. They belong in this lesson because each one maps a **lifecycle stage** onto a **service choice** with a number attached; which is exactly how Task 1.3 questions are framed.
 
-### Case 1 — HAYAT HOLDING: the whole train → deploy → monitor loop on a plant floor
+### Case 1, HAYAT HOLDING: the whole train → deploy → monitor loop on a plant floor
 
-Self-built ML environments were "time-consuming and cumbersome" at this MDF-panel manufacturer. The published pipeline: **194 sensors** over OPC-UA → SiteWise Edge Gateway in **AWS IoT Greengrass** → **SageMaker Model Training** + **Automatic Model Tuning** + **Model Deployment**, with **SageMaker Edge Manager** running the model on-device. Result: **$300,000 per year** saved plus higher panel quality. *Lifecycle lesson:* stages 5–8 run fully managed, and Automatic Model Tuning replaces a manual hyperparameter sweep across 194 inputs. Source: `aws.amazon.com/blogs/machine-learning/hayat-holding-uses-amazon-sagemaker-to-increase-product-quality-and-optimize-manufacturing-output-saving-300000-annually` (2023).
+Self-built ML environments were "time-consuming and cumbersome" at this MDF-panel manufacturer. The published pipeline: **194 sensors** over OPC-UA → SiteWise Edge Gateway in **AWS IoT Greengrass** → **SageMaker Model Training** + **Automatic Model Tuning** + **Model Deployment**, with **SageMaker Edge Manager** running the model on-device. Result: **$300,000 per year** saved plus higher panel quality. *Lifecycle lesson:* stages 5 to 8 run fully managed, and Automatic Model Tuning replaces a manual hyperparameter sweep across 194 inputs. Source: `aws.amazon.com/blogs/machine-learning/hayat-holding-uses-amazon-sagemaker-to-increase-product-quality-and-optimize-manufacturing-output-saving-300000-annually` (2023).
 
-### Case 2 — Forethought: DIY inference is a hidden tax
+### Case 2, Forethought: DIY inference is a hidden tax
 
-A **3-person** team supporting **30 million interactions per year** was running models *and* Kubernetes on its own **Amazon EKS** — memory exceptions and outages included. They migrated to **SageMaker multi-model endpoints** and **Serverless Inference**: **−66 %** cost on multi-model endpoints (with *better* latency), **≈ −80 %** on serverless, and **more than 80 % of GPU inference** now runs on SageMaker. *Lifecycle lesson:* stage 7 — shared endpoints and scale-to-zero beat a self-managed cluster you have to babysit. Source: `aws.amazon.com/solutions/case-studies/forethought-technologies-case-study`.
+A **3-person** team supporting **30 million interactions per year** was running models *and* Kubernetes on its own **Amazon EKS**, memory exceptions and outages included. They migrated to **SageMaker multi-model endpoints** and **Serverless Inference**: **−66 %** cost on multi-model endpoints (with *better* latency), **≈ −80 %** on serverless, and **more than 80 % of GPU inference** now runs on SageMaker. *Lifecycle lesson:* stage 7, shared endpoints and scale-to-zero beat a self-managed cluster you have to babysit. Source: `aws.amazon.com/solutions/case-studies/forethought-technologies-case-study`.
 
-### Case 3 — RareJob: the bottleneck was orchestration, not model quality
+### Case 3, RareJob: the bottleneck was orchestration, not model quality
 
-Training on a local PC allowed **one model per developer**; the EC2/ECS attempt that followed still cost too much. **AWS Glue** and **Amazon Athena** feed parallel **SageMaker Managed Spot Training** jobs. Result: **−25 %** training time, **> 10×** developer efficiency, **100 hours per month** saved, and speaking-test scores returned in **2–3 minutes**. *Lifecycle lesson:* stages 1–3 (collect → EDA → pre-process) belong to Glue and Athena; the queue, not the algorithm, was the constraint. Source: `aws.amazon.com/solutions/case-studies/rare-job-case-study` (2020).
+Training on a local PC allowed **one model per developer**; the EC2/ECS attempt that followed still cost too much. **AWS Glue** and **Amazon Athena** feed parallel **SageMaker Managed Spot Training** jobs. Result: **−25 %** training time, **> 10×** developer efficiency, **100 hours per month** saved, and speaking-test scores returned in **2 to 3 minutes**. *Lifecycle lesson:* stages 1 to 3 (collect → EDA → pre-process) belong to Glue and Athena; the queue, not the algorithm, was the constraint. Source: `aws.amazon.com/solutions/case-studies/rare-job-case-study` (2020).
 
-### Case 4 — Chronomics: when the in-house build fails, go AutoML
+### Case 4, Chronomics: when the in-house build fails, go AutoML
 
-**Four months** of in-house custom computer-vision modelling never reached the target. **Amazon Rekognition Custom Labels** shipped in **3–4 weeks** at **96.5 % accuracy / 97.9 % F1**. Raising the decision threshold to **0.99** produced **99.6 %** precision but discarded **5 %** of predictions; **0.999** gave **99.87 %** while discarding **27 %**. *Lifecycle lesson:* stage 6 — evaluation is what tells you to stop building, and the discarded tail needs a human review path. Source: `aws.amazon.com/blogs/machine-learning/chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels` (2022).
+**Four months** of in-house custom computer-vision modelling never reached the target. **Amazon Rekognition Custom Labels** shipped in **3 to 4 weeks** at **96.5 % accuracy / 97.9 % F1**. Raising the decision threshold to **0.99** produced **99.6 %** precision but discarded **5 %** of predictions; **0.999** gave **99.87 %** while discarding **27 %**. *Lifecycle lesson:* stage 6: evaluation is what tells you to stop building, and the discarded tail needs a human review path. Source: `aws.amazon.com/blogs/machine-learning/chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels` (2022).
 
-### Case 5 — Sun Finance: separate OCR from reasoning
+### Case 5, Sun Finance: separate OCR from reasoning
 
-The first attempt sent ID photos straight to **Claude Sonnet 4** and scored **61.8 %** overall (**43 %** on ID numbers) — AWS rejected it. The rebuilt pipeline: **Amazon Textract** OCR → **Amazon Rekognition** fallback and face masking → **Claude Sonnet 4** structuring → validation rules, with **Amazon Titan Multimodal Embeddings** in **S3 Vectors** for fraud similarity, evaluated on **585 images**. Result: accuracy **79.73 % → 90.80 %**, cost per document **−91 %**, processing time **20 hours → under 5 seconds**, fraud detection **81 %**. *Lifecycle lesson:* evaluation (stage 6) killed the elegant prototype, and the prebuilt service — not the model — owns extraction. Source: `aws.amazon.com/blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws` (2026).
+The first attempt sent ID photos straight to **Claude Sonnet 4** and scored **61.8 %** overall (**43 %** on ID numbers): AWS rejected it. The rebuilt pipeline: **Amazon Textract** OCR → **Amazon Rekognition** fallback and face masking → **Claude Sonnet 4** structuring → validation rules, with **Amazon Titan Multimodal Embeddings** in **S3 Vectors** for fraud similarity, evaluated on **585 images**. Result: accuracy **79.73 % → 90.80 %**, cost per document **−91 %**, processing time **20 hours → under 5 seconds**, fraud detection **81 %**. *Lifecycle lesson:* evaluation (stage 6) killed the elegant prototype, and the prebuilt service: not the model: owns extraction. Source: `aws.amazon.com/blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws` (2026).
 
-### Case 6 — Anthem: prebuilt first, humans in the tail
+### Case 6, Anthem: prebuilt first, humans in the tail
 
-Manual claim-form extraction took **20 minutes per claim**. An **Amazon Textract** pipeline (OCR plus ML index/classify behind the claims portal) automated **80 %** of the workflow with a target of **90 %+**, across thousands of claims per day. *Lifecycle lesson:* stages 1–2 — call a managed API before training anything custom, and design the human exception path for the remaining 10–20 %. Source: `aws.amazon.com/solutions/case-studies/anthem` (2021).
+Manual claim-form extraction took **20 minutes per claim**. An **Amazon Textract** pipeline (OCR plus ML index/classify behind the claims portal) automated **80 %** of the workflow with a target of **90 %+**, across thousands of claims per day. *Lifecycle lesson:* stages 1 to 2: call a managed API before training anything custom, and design the human exception path for the remaining 10 to 20 %. Source: `aws.amazon.com/solutions/case-studies/anthem` (2021).
 
 ### All six cases in one table
 
 | Case (industry, year) | Lifecycle stages exercised | AWS services (exact) | Verified numbers | Source |
 |---|---|---|---|---|
-| **HAYAT HOLDING** (manufacturing, 2023) | 5–8: train → tune → deploy → monitor at the edge | SageMaker Training, Automatic Model Tuning, Deployment, Edge Manager; AWS IoT Greengrass | **194 sensors**; **$300,000/yr** | ML blog `hayat-holding-…` |
+| **HAYAT HOLDING** (manufacturing, 2023) | 5 to 8: train → tune → deploy → monitor at the edge | SageMaker Training, Automatic Model Tuning, Deployment, Edge Manager; AWS IoT Greengrass | **194 sensors**; **$300,000/yr** | ML blog `hayat-holding-…` |
 | **Forethought** (SaaS support) | 7: deployment option choice | SageMaker multi-model endpoints, Serverless Inference (migrated off Amazon EKS) | **−66 %** MME, **≈ −80 %** serverless, **> 80 %** of GPU inference; **30 M** interactions/yr; **3-person** team | case study `forethought-technologies` |
-| **RareJob** (EdTech, 2020) | 1–5: ingest, EDA, process, train | AWS Glue, Amazon Athena, SageMaker Managed Spot Training | **−25 %** training time, **> 10×** efficiency, **100 h/month**, scores in **2–3 min** | case study `rare-job` |
-| **Chronomics** (health-tech, 2022) | 6: evaluation and the build-vs-buy decision | Amazon Rekognition Custom Labels (AutoML) | **3–4 wk** vs **4 mo**, **96.5 %** accuracy / **97.9 %** F1; threshold **0.99 → 99.6 %** discards **5 %** | ML blog `chronomics-detects-covid-19…` |
+| **RareJob** (EdTech, 2020) | 1 to 5: ingest, EDA, process, train | AWS Glue, Amazon Athena, SageMaker Managed Spot Training | **−25 %** training time, **> 10×** efficiency, **100 h/month**, scores in **2 to 3 min** | case study `rare-job` |
+| **Chronomics** (health-tech, 2022) | 6: evaluation and the build-vs-buy decision | Amazon Rekognition Custom Labels (AutoML) | **3 to 4 wk** vs **4 mo**, **96.5 %** accuracy / **97.9 %** F1; threshold **0.99 → 99.6 %** discards **5 %** | ML blog `chronomics-detects-covid-19…` |
 | **Sun Finance** (fintech, 2026) | 3, 6, 7: pre-processing, evaluation, deployment | Textract, Rekognition, Claude Sonnet 4, Titan Multimodal Embeddings, S3 Vectors, Lambda, Step Functions | **79.73 → 90.80 %**, **−91 %** cost/doc, **20 h → < 5 s**, n = **585**; LLM-only first try **61.8 %** rejected | ML blog `sun-finance-automates-id-extraction…` |
-| **Anthem** (health insurance, 2021) | 1–2: call a prebuilt API instead of training | Amazon Textract | **20 min/claim** manual → **80 %** automated, target **90 %+** | case study `anthem` |
+| **Anthem** (health insurance, 2021) | 1 to 2: call a prebuilt API instead of training | Amazon Textract | **20 min/claim** manual → **80 %** automated, target **90 %+** | case study `anthem` |
 
 > [!WARNING]
-> **Case-study numbers are customer- or AWS-claimed and unaudited.** "Up to" is a ceiling, not a forecast, and only two of these cases disclose a sample basis (Sun Finance: **585 images**; Chronomics: its own labelled test set). Always carry the "before" number with the "after" number, and do not repeat adoption statistics that AWS has never published — the only production rate AWS states is the **65 %** figure below.
+> **Case-study numbers are customer- or AWS-claimed and unaudited.** "Up to" is a ceiling, not a forecast, and only two of these cases disclose a sample basis (Sun Finance: **585 images**; Chronomics: its own labelled test set). Always carry the "before" number with the "after" number, and do not repeat adoption statistics that AWS has never published: the only production rate AWS states is the **65 %** figure below.
 
 **Five rules that recur across all six cases:**
 
-1. **Choose the tier deliberately** — prebuilt service (Anthem, Chronomics) → managed custom ML (HAYAT, RareJob, Forethought) → generative AI (Sun Finance). The exam rewards the *cheapest tier that works*.
-2. **Baseline before build** — a percentage without a "before" is marketing, not a metric.
-3. **Separate concerns** — OCR is not reasoning (Sun Finance), and retrieval is not generation.
-4. **Evaluation is a phase, not a checkbox** — Sun Finance's and Chronomics' first attempts both failed *at stage 6*.
-5. **Keep a human in the tail** — the discarded 5 % and the un-automated 10–20 % still need someone.
+1. **Choose the tier deliberately**: prebuilt service (Anthem, Chronomics) → managed custom ML (HAYAT, RareJob, Forethought) → generative AI (Sun Finance). The exam rewards the *cheapest tier that works*.
+2. **Baseline before build**: a percentage without a "before" is marketing, not a metric.
+3. **Separate concerns**: OCR is not reasoning (Sun Finance), and retrieval is not generation.
+4. **Evaluation is a phase, not a checkbox**: Sun Finance's and Chronomics' first attempts both failed *at stage 6*.
+5. **Keep a human in the tail**: the discarded 5 % and the un-automated 10 to 20 % still need someone.
 
-**📚 Did you know?** The only production rate AWS publishes for its own Generative AI Innovation Center is **65 %** of projects reaching production in 2025 — some in as little as **45 days**, out of **more than 1,000** implementations — using AWS's **Five V's** framework: **Value → Visualize → Validate → Verify → Venture**. AWS has never claimed that all pilots succeed, so any option saying "100 %" is wrong on its face.
+**📚 Did you know?** The only production rate AWS publishes for its own Generative AI Innovation Center is **65 %** of projects reaching production in 2025, some in as little as **45 days**, out of **more than 1,000** implementations, using AWS's **Five V's** framework: **Value → Visualize → Validate → Verify → Venture**. AWS has never claimed that all pilots succeed, so any option saying "100 %" is wrong on its face.
 
 ---
 
@@ -875,7 +875,7 @@ Manual claim-form extraction took **20 minutes per claim**. An **Amazon Textract
     "Autopilot"
   ],
   "correct": 1,
-  "explanation": "Model Monitor compares live traffic against a baseline computed from training data (using Deequ) and publishes metrics and violations to CloudWatch, which then fires the alarm. Model Registry stores versions and approval status, Experiments tracks training runs, and AutoML builds models — none of them observe production inputs."
+  "explanation": "Model Monitor compares live traffic against a baseline computed from training data (using Deequ) and publishes metrics and violations to CloudWatch, which then fires the alarm. Model Registry stores versions and approval status, Experiments tracks training runs, and AutoML builds models: none of them observe production inputs."
 }
 ```
 
@@ -982,7 +982,7 @@ Manual claim-form extraction took **20 minutes per claim**. An **Amazon Textract
   "question": "A three-person team that handles 30 million customer interactions per year is paying for a self-managed Amazon EKS inference cluster that keeps failing. Which migration matches the outcome AWS published for this customer?",
   "options": [
     "Move the models to Amazon EC2 GPU instances and keep Kubernetes for orchestration",
-    "SageMaker multi-model endpoints plus Serverless Inference — about 66 % and up to 80 % lower inference cost, with more than 80 % of GPU inference running on SageMaker",
+    "SageMaker multi-model endpoints plus Serverless Inference: about 66 % and up to 80 % lower inference cost, with more than 80 % of GPU inference running on SageMaker",
     "Amazon Bedrock provisioned throughput for every classifier, regardless of size",
     "A SageMaker batch transform job invoked for every live request"
   ],
@@ -1003,7 +1003,7 @@ Manual claim-form extraction took **20 minutes per claim**. An **Amazon Textract
     "Amazon Kendra was fully removed from the AWS portfolio with no documented replacement"
   ],
   "correct": 0,
-  "explanation": "AWS announced the rename of Amazon SageMaker to Amazon SageMaker AI on 3 December 2024, and the Amazon Kendra availability-change page sends new search applications to Amazon Bedrock Managed Knowledge Base (Kendra entered maintenance 30 June 2026 and closed to new customers 30 July 2026). SageMaker itself is active, not shut down; Amazon Forecast closed to new customers on 29 July 2024 with SageMaker Canvas as the migration target; and AWS's lifecycle vocabulary distinguishes maintenance, sunset and full shutdown — Kendra sits in maintenance, not removal."
+  "explanation": "AWS announced the rename of Amazon SageMaker to Amazon SageMaker AI on 3 December 2024, and the Amazon Kendra availability-change page sends new search applications to Amazon Bedrock Managed Knowledge Base (Kendra entered maintenance 30 June 2026 and closed to new customers 30 July 2026). SageMaker itself is active, not shut down; Amazon Forecast closed to new customers on 29 July 2024 with SageMaker Canvas as the migration target; and AWS's lifecycle vocabulary distinguishes maintenance, sunset and full shutdown: Kendra sits in maintenance, not removal."
 }
 ```
 
@@ -1011,7 +1011,7 @@ Manual claim-form extraction took **20 minutes per claim**. An **Amazon Textract
 > **Key Takeaways:**
 > 1. **Nine stages, one loop.** Collect → EDA → pre-process → engineer features → train → tune → evaluate → deploy → monitor, and monitoring feeds back to training. Each stage has a named SageMaker feature *and* a named non-SageMaker service.
 > 2. **Four inference options, four ceilings.** Real-time 25 MB / 60 s (8 min streaming), serverless 4 MB / 60 s, asynchronous 1 GB / 60 min, batch transform ≤ 100 MB per request with no persistent endpoint. Match the option to the traffic pattern first, then to the payload.
-> 3. **Feature Store needs both stores.** Online = latest record only, single-digit-millisecond `GetRecord`; offline = full append-only Parquet history in S3, reachable within 15 minutes — that is how you get millisecond inference *and* point-in-time-correct training.
+> 3. **Feature Store needs both stores.** Online = latest record only, single-digit-millisecond `GetRecord`; offline = full append-only Parquet history in S3, reachable within 15 minutes; that is how you get millisecond inference *and* point-in-time-correct training.
 > 4. **Monitoring is four monitors, one alarm bus.** Data quality, model quality, bias drift and feature attribution drift (auto-alarm below NDCG 0.90) all publish to CloudWatch, and EventBridge turns an alarm into a Pipelines retrain.
 > 5. **Availability is examinable in 2026.** Ground Truth, Model Monitor, Clarify, A2I, Debugger, GeoSpatial, Role Manager and Studio Lab are closed to new customers (30 Jun 2026 / docs 7/30/26); Mechanical Turk ended 29 Sep 2026; replacements are MLflow + Evidently + QuickSight + CloudWatch and Amazon Bedrock Evaluations.
 > 6. **Comparative verdict:** SageMaker beats building on EC2 on governance and operations, beats non-AWS or DIY stacks on AWS-native integration and free-tier entry, and beats any manual notebook process on repeatability, lineage, drift detection and production readiness.

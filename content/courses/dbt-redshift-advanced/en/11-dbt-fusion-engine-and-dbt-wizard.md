@@ -1,6 +1,6 @@
 ---
 title: "dbt Fusion Engine and dbt Wizard"
-description: "Adopt the next-generation dbt Fusion engine (Rust-based, up to 30x faster parsing) for local Redshift development, understand dbt Core v2 and its open-source foundations, and use dbt Wizard CLI — the AI agent built specifically for analytics engineering — to author, refactor, investigate, and validate dbt models grounded in your full project context."
+description: "Adopt the next-generation dbt Fusion engine (Rust-based, up to 30x faster parsing) for local Redshift development, understand dbt Core v2 and its open-source foundations, and use dbt Wizard CLI, the AI agent built specifically for analytics engineering, to author, refactor, investigate, and validate dbt models grounded in your full project context."
 order: 11
 duration: "55 min"
 difficulty: "advanced"
@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # dbt Fusion Engine and dbt Wizard
 
-The analytics engineering toolchain is undergoing its most significant shift since dbt itself was created. Two technologies define this new era: the **dbt Fusion engine** — a Rust-based rewrite that replaces the Python execution layer with SQL-aware, dramatically faster compilation — and **dbt Wizard** — an AI agent that understands your full dbt project before it writes a single line. Both are available to self-hosted, open-source dbt users.
+The analytics engineering toolchain is undergoing its most significant shift since dbt itself was created. Two technologies define this new era: the **dbt Fusion engine**: a Rust-based rewrite that replaces the Python execution layer with SQL-aware, dramatically faster compilation, and **dbt Wizard**: an AI agent that understands your full dbt project before it writes a single line. Both are available to self-hosted, open-source dbt users.
 
 ---
 
@@ -43,7 +43,7 @@ flowchart TD
 <cite index="78-1">dbt Fusion is distributed under the Elastic License Version 2 (ELv2). dbt Core remains under the open-source Apache 2.0 license and will continue to be maintained indefinitely.</cite>
 
 **What this means for self-hosted dbt-Redshift users:**
-- You can install the **Fusion CLI** (`dbtf`) for free — get faster parsing and compilation without any license restrictions for self-hosted use.
+- You can install the **Fusion CLI** (`dbtf`) for free: get faster parsing and compilation without any license restrictions for self-hosted use.
 - **dbt Wizard CLI** is in public beta and free to use with your own OpenAI API key (BYOK).
 - dbt-core v1.x continues to be fully supported and is the production-stable choice for large projects.
 
@@ -66,7 +66,7 @@ flowchart TD
 | Strict config validation | ❌ | ✅ | ✅ |
 | License | Apache 2.0 | Apache 2.0 | ELv2 |
 
-<cite index="71-1">v2.0 introduces a strict, well-defined language specification. It becomes impossible to silently misconfigure a key — a typo'd `desciptin` instead of `description` is caught rather than ignored.</cite>
+<cite index="71-1">v2.0 introduces a strict, well-defined language specification. It becomes impossible to silently misconfigure a key: a typo'd `desciptin` instead of `description` is caught rather than ignored.</cite>
 
 ### Redshift Adapter in Fusion
 
@@ -104,7 +104,7 @@ dbtf --version
 
 ### Running Fusion Against Redshift
 
-Your existing `profiles.yml` works without modification — Fusion reads the same file:
+Your existing `profiles.yml` works without modification: Fusion reads the same file:
 
 ```bash
 # Same commands, dramatically faster parse + compile
@@ -133,7 +133,7 @@ models:
 
 #### 2. `--sample` Flag (Fusion preview)
 
-Run your full SQL logic against a sample of rows — without modifying your models:
+Run your full SQL logic against a sample of rows: without modifying your models:
 
 ```bash
 # Run fct_orders against 1% sample of upstream data
@@ -149,7 +149,7 @@ This is particularly useful for Redshift Serverless where scanning full tables d
 
 <cite index="83-1">dbt State (preview) acts as a caching layer for data pipelines, building only what has changed. The company claims this can reduce infrastructure costs by 30 percent or more.</cite>
 
-Fusion maintains a local state cache that tracks which models need rebuilding — like Slim CI, but for local development:
+Fusion maintains a local state cache that tracks which models need rebuilding: like Slim CI, but for local development:
 
 ```bash
 # First run — builds everything, saves state
@@ -212,7 +212,7 @@ print(slow_models.to_string())
 
 <cite index="81-1">The dbt Wizard CLI is a terminal-native AI agent purpose-built for analytics engineers. Unlike general-purpose coding agents that hallucinate joins, break downstream refs, and ignore your contracts, Wizard is grounded in your dbt project's compiled state, lineage graph, and semantic definitions from the first prompt.</cite>
 
-<cite index="88-1">dbt Wizard is an AI agent purpose-built for governed data development in dbt. Unlike general-purpose coding agents, it understands your dbt project through a native metadata engine — a structured index of lineage, model health, tests, contracts, run results, and semantic definitions. Think of it like a map of your city: dbt Wizard knows how everything connects before it starts, rather than walking every street to figure out the layout.</cite>
+<cite index="88-1">dbt Wizard is an AI agent purpose-built for governed data development in dbt. Unlike general-purpose coding agents, it understands your dbt project through a native metadata engine: a structured index of lineage, model health, tests, contracts, run results, and semantic definitions. Think of it like a map of your city: dbt Wizard knows how everything connects before it starts, rather than walking every street to figure out the layout.</cite>
 
 The key difference from using Claude, Copilot, or Cursor in a dbt project:
 
@@ -455,10 +455,10 @@ diff /tmp/core_compiled.txt /tmp/fusion_compiled.txt
   "type": "multiple-choice",
   "question": "What license is the dbt Fusion engine distributed under, and what restriction does it impose?",
   "options": [
-    "Apache 2.0 — no restrictions",
-    "MIT — attribution required",
-    "ELv2 (Elastic License v2) — you cannot use it to host a managed service that competes with dbt Labs",
-    "GPL v3 — all derivative works must be open source"
+    "Apache 2.0: no restrictions",
+    "MIT: attribution required",
+    "ELv2 (Elastic License v2); you cannot use it to host a managed service that competes with dbt Labs",
+    "GPL v3: all derivative works must be open source"
   ],
   "correct": 2,
   "explanation": "The dbt Fusion engine uses the Elastic License v2 (ELv2). You can use it freely for local development and self-hosted workflows, but you cannot use it to build a managed service that competes with dbt Labs. dbt-core remains Apache 2.0."
@@ -493,7 +493,7 @@ diff /tmp/core_compiled.txt /tmp/fusion_compiled.txt
     "Generates documentation for 1% of models for faster preview"
   ],
   "correct": 1,
-  "explanation": "The --sample flag runs your SQL against a fraction of the upstream data. This enables fast iteration on model logic during development without the cost of scanning full tables — particularly valuable on Redshift Serverless."
+  "explanation": "The --sample flag runs your SQL against a fraction of the upstream data. This enables fast iteration on model logic during development without the cost of scanning full tables: particularly valuable on Redshift Serverless."
 }
 ```
 
@@ -504,12 +504,12 @@ diff /tmp/core_compiled.txt /tmp/fusion_compiled.txt
   "question": "What fundamentally separates dbt Wizard from using a general-purpose AI assistant (Claude, Copilot, Cursor) in a dbt project?",
   "options": [
     "dbt Wizard uses a more powerful LLM model",
-    "dbt Wizard reads a native metadata engine built from your project's compiled state, lineage, contracts, tests, and run results — and validates changes before presenting them",
+    "dbt Wizard reads a native metadata engine built from your project's compiled state, lineage, contracts, tests, and run results, and validates changes before presenting them",
     "dbt Wizard only works with dbt Cloud, not dbt-core",
     "dbt Wizard generates Python models instead of SQL"
   ],
   "correct": 1,
-  "explanation": "General AI assistants have no knowledge of your dbt project structure. Wizard builds a structured index of your project's lineage, grain, contracts, tests, and run history before responding — and compiles/validates generated changes before showing you a diff."
+  "explanation": "General AI assistants have no knowledge of your dbt project structure. Wizard builds a structured index of your project's lineage, grain, contracts, tests, and run history before responding, and compiles/validates generated changes before showing you a diff."
 }
 ```
 
@@ -525,7 +525,7 @@ diff /tmp/core_compiled.txt /tmp/fusion_compiled.txt
     "It configures which OpenAI model Wizard uses"
   ],
   "correct": 1,
-  "explanation": "The instructions file gives Wizard persistent context about your project's conventions — naming patterns, materialization defaults, testing requirements, coding rules. Without it, Wizard must re-learn your conventions every session."
+  "explanation": "The instructions file gives Wizard persistent context about your project's conventions: naming patterns, materialization defaults, testing requirements, coding rules. Without it, Wizard must re-learn your conventions every session."
 }
 ```
 
@@ -535,10 +535,10 @@ diff /tmp/core_compiled.txt /tmp/fusion_compiled.txt
   "type": "multiple-choice",
   "question": "For a production dbt-Redshift project with 800 models, what is the recommended approach to Fusion adoption as of June 2026?",
   "options": [
-    "Immediately migrate everything to Fusion — it is production-ready for all sizes",
+    "Immediately migrate everything to Fusion; it is production-ready for all sizes",
     "Test Fusion CLI in a development branch, use dbt-core v1.x in production CI/CD, and monitor progress toward Fusion GA",
     "Wait until Fusion reaches version 2.0 before testing",
-    "Fusion is not yet compatible with Redshift — use dbt-core only"
+    "Fusion is not yet compatible with Redshift: use dbt-core only"
   ],
   "correct": 1,
   "explanation": "At 800 models, the recommended approach is to use Fusion locally for development speed benefits while keeping the production CI/CD pipeline on stable dbt-core v1.x. Run the migration audit tool, fix any incompatibilities, and plan cutover as Fusion approaches GA."
@@ -551,10 +551,10 @@ diff /tmp/core_compiled.txt /tmp/fusion_compiled.txt
 ### Key Takeaways
 
 - The dbt Fusion engine is a Rust-based rewrite offering up to 30× faster parse and compile times. It ships as a free binary CLI (`dbtf`) under the ELv2 license.
-- dbt-core v2.0 (Apache 2.0, currently alpha) is the open-source Rust foundation Fusion builds on — it includes strict key validation, Parquet artifacts, and faster parsing.
-- The Redshift ADBC driver shipped in September 2025 — Fusion is production-compatible with Redshift provisioned clusters and Serverless.
+- dbt-core v2.0 (Apache 2.0, currently alpha) is the open-source Rust foundation Fusion builds on; it includes strict key validation, Parquet artifacts, and faster parsing.
+- The Redshift ADBC driver shipped in September 2025: Fusion is production-compatible with Redshift provisioned clusters and Serverless.
 - On Redshift, set `--threads 0` or respect user-set threads (unlike Snowflake, where Fusion auto-optimizes). Use `--sample` to develop against data subsets.
-- dbt Wizard CLI is a terminal-native AI agent grounded in your project's compiled state, lineage, contracts, and run results — not a generic coding assistant.
+- dbt Wizard CLI is a terminal-native AI agent grounded in your project's compiled state, lineage, contracts, and run results: not a generic coding assistant.
 - Wizard validates changes by compiling them before presenting a diff, preventing broken refs and contract violations from reaching your codebase.
-- For projects under 500 models, test Fusion now. For 500–3,000 models, use Fusion in development and dbt-core v1.x in production. Above 3,000 models, wait for GA.
+- For projects under 500 models, test Fusion now. For 500 to 3,000 models, use Fusion in development and dbt-core v1.x in production. Above 3,000 models, wait for GA.
 - Write `.dbt-wizard/instructions.md` to give Wizard persistent knowledge of your naming conventions, config defaults, and coding rules.

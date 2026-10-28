@@ -66,7 +66,7 @@ Liftoff! 🚀
 > [!WARNING]
 > Always ensure the loop condition eventually becomes False! Forgetting to update the loop variable creates an infinite loop:
 > ```python
-> # INFINITE LOOP - don't do this!
+> # INFINITE LOOP: don't do this!
 > count = 5
 > while count > 0:
 >     print(count)
@@ -260,7 +260,7 @@ Multiplication Table for 7:
 
 Control statements modify loop behavior.
 
-### break - Exit the Loop Immediately
+### break: Exit the Loop Immediately
 
 ```mermaid
 flowchart TD
@@ -295,7 +295,7 @@ Output:
 First even number found: 8
 ```
 
-### continue - Skip to Next Iteration
+### continue: Skip to Next Iteration
 
 ```mermaid
 flowchart TD

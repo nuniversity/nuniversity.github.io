@@ -1,12 +1,12 @@
 ---
-title: "Dominio 1.5 — Conceptos de Almacenamiento en Snowflake"
+title: "Dominio 1.5, Conceptos de Almacenamiento en Snowflake"
 description: "Domina las micro-particiones, el clustering de datos, Time Travel, Fail-Safe, la Clonación de Copia Cero y todos los tipos de tablas y vistas de Snowflake. Comprende cómo Snowflake almacena y protege tus datos."
 order: 5
 difficulty: intermediate
 duration: "75 min"
 ---
 
-# Dominio 1.5 — Conceptos de Almacenamiento en Snowflake
+# Dominio 1.5: Conceptos de Almacenamiento en Snowflake
 
 ## Peso en el Examen
 
@@ -19,17 +19,17 @@ El **Dominio 1.0** representa aproximadamente el **~31%** del examen. Los concep
 
 ## Micro-Particiones
 
-Las **micro-particiones** son la unidad fundamental de almacenamiento en Snowflake. Los datos de cada tabla se dividen automáticamente en micro-particiones — no se requiere particionamiento manual.
+Las **micro-particiones** son la unidad fundamental de almacenamiento en Snowflake. Los datos de cada tabla se dividen automáticamente en micro-particiones: no se requiere particionamiento manual.
 
 ### Características Clave
 
 | Propiedad | Valor |
 |---|---|
-| **Tamaño** | 50–500 MB (comprimido) |
+| **Tamaño** | 50 to 500 MB (comprimido) |
 | **Formato** | Columnar (orientado por columnas) |
 | **Compresión** | Automática (Snowflake elige el algoritmo) |
 | **Cifrado** | AES-256, automático |
-| **Inmutabilidad** | Inmutables — el DML crea nuevas particiones |
+| **Inmutabilidad** | Inmutables: el DML crea nuevas particiones |
 | **Metadatos** | Valores mín/máx, conteo de distintos, conteo de NULL por columna por partición |
 
 ### Almacenamiento Columnar
@@ -76,7 +76,7 @@ Esto se llama **poda de particiones** y es fundamental para el rendimiento de la
 
 ### Clustering Natural
 
-Cuando los datos se cargan en un orden consistente (p. ej., cronológicamente por `created_at`), las micro-particiones están naturalmente bien agrupadas — las consultas que filtran por esa columna se benefician de la poda.
+Cuando los datos se cargan en un orden consistente (p. ej., cronológicamente por `created_at`), las micro-particiones están naturalmente bien agrupadas: las consultas que filtran por esa columna se benefician de la poda.
 
 ### Claves de Clúster (*Cluster Keys*)
 
@@ -92,22 +92,22 @@ SELECT SYSTEM$CLUSTERING_INFORMATION('events', '(region, event_type)');
 
 ### Clustering Automático
 
-Cuando se define una clave de clúster, el servicio de **Clustering Automático** de Snowflake se ejecuta en segundo plano para **reorganizar micro-particiones** — esto consume créditos en tu nombre.
+Cuando se define una clave de clúster, el servicio de **Clustering Automático** de Snowflake se ejecuta en segundo plano para **reorganizar micro-particiones**; esto consume créditos en tu nombre.
 
 | Concepto | Descripción |
 |---|---|
-| **Profundidad del Clúster** | Número promedio de particiones superpuestas por valor — menor es mejor |
-| **Ratio de Clustering** | Fracción de columnas ordenadas dentro de las particiones — mayor es mejor |
+| **Profundidad del Clúster** | Número promedio de particiones superpuestas por valor: menor es mejor |
+| **Ratio de Clustering** | Fracción de columnas ordenadas dentro de las particiones: mayor es mejor |
 | **Clustering Automático** | Servicio en segundo plano que mantiene el clustering; se factura por separado |
 
 > [!WARNING]
-> Definir una clave de clúster en una tabla pequeña o poco consultada es **un desperdicio** — el Clustering Automático consume créditos. Solo agrupa tablas grandes (cientos de GB+) que se consultan frecuentemente por la(s) columna(s) de clave de clúster.
+> Definir una clave de clúster en una tabla pequeña o poco consultada es **un desperdicio**: el Clustering Automático consume créditos. Solo agrupa tablas grandes (cientos de GB+) que se consultan frecuentemente por la(s) columna(s) de clave de clúster.
 
 ---
 
 ## Time Travel (Viaje en el Tiempo)
 
-**Time Travel** permite consultar versiones históricas de tus datos — hasta 90 días en el pasado (dependiendo de la edición):
+**Time Travel** permite consultar versiones históricas de tus datos: hasta 90 días en el pasado (dependiendo de la edición):
 
 | Edición | Time Travel Máximo |
 |---|---|
@@ -173,8 +173,8 @@ timeline
 |---|---|
 | Duración | Siempre 7 días (no configurable) |
 | ¿Quién puede recuperar los datos? | **Solo el Soporte de Snowflake** (no el cliente) |
-| Costo | Incluido en el almacenamiento — sin cargo adicional |
-| ¿Autoservicio? | **No** — contactar al soporte |
+| Costo | Incluido en el almacenamiento; sin cargo adicional |
+| ¿Autoservicio? | **No**: contactar al soporte |
 | Aplica a | Solo tablas permanentes (no Temporales ni Transitorias) |
 
 > [!WARNING]
@@ -216,7 +216,7 @@ Original:   [Partición A]        [Partición B] [Partición C]
 ```
 
 **Beneficios:**
-- **Instantáneo** — no se copian datos
+- **Instantáneo**: no se copian datos
 - **Sin costo adicional de almacenamiento** inicialmente
 - El almacenamiento solo aumenta cuando los datos divergen entre el original y el clon
 - Perfecto para entornos de desarrollo/prueba, instantáneas previas a migraciones, auditorías
@@ -227,16 +227,16 @@ Original:   [Partición A]        [Partición B] [Partición C]
 
 | Tipo | Persistencia | Time Travel | Fail-Safe | Caso de Uso |
 |---|---|---|---|---|
-| **Permanente** | Hasta eliminación | 0–90 días | 7 días | Tablas de producción |
-| **Temporal** | Fin de sesión | 0–1 día | Ninguno | Trabajo con ámbito de sesión |
-| **Transitoria** | Hasta eliminación | 0–1 día | Ninguno | Staging, ETL intermedio |
+| **Permanente** | Hasta eliminación | 0 to 90 días | 7 días | Tablas de producción |
+| **Temporal** | Fin de sesión | 0 to 1 día | Ninguno | Trabajo con ámbito de sesión |
+| **Transitoria** | Hasta eliminación | 0 to 1 día | Ninguno | Staging, ETL intermedio |
 | **Externa** | Nunca (sin datos) | Ninguno | Ninguno | Consultar archivos en cloud storage |
 | **Apache Iceberg** | Hasta eliminación | Vía Iceberg | Vía Iceberg | Formato abierto, multi-motor |
 | **Dinámica** | Hasta eliminación | Configurable | Configurable | Materialización incremental declarativa |
 
 ### Tablas Apache Iceberg
 
-Snowflake soporta **Apache Iceberg** como formato de tabla abierto — los datos residen en tu propio cloud storage y son accesibles por múltiples motores (Spark, Trino, Snowflake):
+Snowflake soporta **Apache Iceberg** como formato de tabla abierto: los datos residen en tu propio cloud storage y son accesibles por múltiples motores (Spark, Trino, Snowflake):
 
 ```sql
 -- Tabla Iceberg usando Snowflake como catálogo
@@ -248,7 +248,7 @@ CREATE ICEBERG TABLE icebergtable (id NUMBER, name STRING)
 
 ### Tablas Dinámicas (*Dynamic Tables*)
 
-Las **Tablas Dinámicas** proporcionan **materialización incremental declarativa** — define el resultado de consulta que deseas, y Snowflake lo mantiene actualizado automáticamente:
+Las **Tablas Dinámicas** proporcionan **materialización incremental declarativa**: define el resultado de consulta que deseas, y Snowflake lo mantiene actualizado automáticamente:
 
 ```sql
 CREATE DYNAMIC TABLE customer_summary
@@ -264,8 +264,8 @@ GROUP BY customer_id;
 ```
 
 **Tablas Dinámicas vs. Streams + Tasks:**
-- Tablas Dinámicas: **enfoque declarativo más simple** — Snowflake gestiona la lógica de actualización
-- Streams + Tasks: **imperativo** — tú escribes la lógica de merge/insert explícitamente
+- Tablas Dinámicas: **enfoque declarativo más simple**: Snowflake gestiona la lógica de actualización
+- Streams + Tasks: **imperativo**: tú escribes la lógica de merge/insert explícitamente
 
 ---
 
@@ -300,7 +300,7 @@ SELECT * FROM mv_hourly_sales WHERE sale_hour > DATEADD('hour', -24, CURRENT_TIM
 
 ## Cifrado en Reposo y en Tránsito
 
-Todos los datos de Snowflake están cifrados por defecto — no se requiere configuración:
+Todos los datos de Snowflake están cifrados por defecto: no se requiere configuración:
 
 | Protección | Método |
 |---|---|
@@ -315,9 +315,9 @@ Todos los datos de Snowflake están cifrados por defecto — no se requiere conf
 
 **P1.** ¿Cuál es el rango de tamaño de una micro-partición de Snowflake?
 
-- A) 1–10 MB sin comprimir
-- B) 50–500 MB comprimido ✅
-- C) 1–5 GB sin comprimir
+- A) 1 to 10 MB sin comprimir
+- B) 50 to 500 MB comprimido ✅
+- C) 1 to 5 GB sin comprimir
 - D) Fijo en 128 MB
 
 **P2.** Después de que vence el Time Travel, ¿quién puede recuperar datos durante el período de Fail-Safe?
@@ -325,13 +325,13 @@ Todos los datos de Snowflake están cifrados por defecto — no se requiere conf
 - A) El cliente usando UNDROP
 - B) El rol ACCOUNTADMIN
 - C) Solo el Soporte de Snowflake ✅
-- D) Nadie — los datos se purgan inmediatamente
+- D) Nadie: los datos se purgan inmediatamente
 
 **P3.** Un ingeniero de datos clona una tabla de producción (`CREATE TABLE dev CLONE prod`). No se realizan modificaciones aún. ¿Cuánto almacenamiento adicional consume el clon?
 
 - A) 100% del tamaño de la tabla original
 - B) 50% del tamaño de la tabla original
-- C) Ninguno — las micro-particiones se comparten ✅
+- C) Ninguno: las micro-particiones se comparten ✅
 - D) Solo almacenamiento de metadatos
 
 **P4.** ¿Qué tipo de tabla es apropiado para almacenar resultados ETL intermedios que no necesitan Fail-Safe pero deben persistir más allá de la sesión actual?
@@ -366,9 +366,9 @@ Todos los datos de Snowflake están cifrados por defecto — no se requiere conf
 
 > [!SUCCESS]
 > **Puntos Clave para el Día del Examen:**
-> 1. Micro-particiones: **50–500 MB comprimidas, columnares, inmutables, con metadatos automáticos**
+> 1. Micro-particiones: **50 to 500 MB comprimidas, columnares, inmutables, con metadatos automáticos**
 > 2. Fail-Safe: **7 días, no configurable, solo el Soporte de Snowflake puede recuperar**
 > 3. Time Travel: **Standard = máximo 1 día | Enterprise+ = máximo 90 días**
 > 4. Clonación de Copia Cero: **instantánea, sin costo inicial de almacenamiento, Copy-on-Write para divergencia**
 > 5. Transitoria vs. Temporal: ambas sin Fail-Safe, pero Transitoria **persiste** más allá del fin de sesión
-> 6. Tablas Dinámicas: `TARGET_LAG` declarativo — más simple que Streams + Tasks
+> 6. Tablas Dinámicas: `TARGET_LAG` declarativo: más simple que Streams + Tasks

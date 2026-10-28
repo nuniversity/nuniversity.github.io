@@ -7,7 +7,7 @@ duration: "65 min"
 ---
 # Governança com Lake Formation: Permissões, Segurança em Nível de Linha/Coluna e Data Sharing
 
-As lições 01–11 construíram a máquina: buckets, formatos, tabelas Iceberg, crawlers, jobs, um motor de consulta, um warehouse e um orquestrador. Cada uma dessas camadas produziu um novo lugar onde alguém tinha que responder à mesma pergunta — *quem pode ver isto?* Esta lição responde uma vez, centralmente, com **AWS Lake Formation**. O serviço não é um substituto do IAM e não é um catálogo; é uma **camada de permissões com formato de RDBMS** que fica sobre o Glue Data Catalog e emite credenciais temporárias com escopo para motores integrados, de modo que um único statement `GRANT` signifique algo na granularidade de **database, table, column, row e cell**.
+As lições 01 to 11 construíram a máquina: buckets, formatos, tabelas Iceberg, crawlers, jobs, um motor de consulta, um warehouse e um orquestrador. Cada uma dessas camadas produziu um novo lugar onde alguém tinha que responder à mesma pergunta: *quem pode ver isto?* Esta lição responde uma vez, centralmente, com **AWS Lake Formation**. O serviço não é um substituto do IAM e não é um catálogo; é uma **camada de permissões com formato de RDBMS** que fica sobre o Glue Data Catalog e emite credenciais temporárias com escopo para motores integrados, de modo que um único statement `GRANT` signifique algo na granularidade de **database, table, column, row e cell**.
 
 A regra de ensino desta lição: **Lake Formation decide a visibilidade, IAM decide o alcance, e o motor faz a filtragem de fato.** Confunda esses três e cada sintoma desta lição vira um mistério.
 
@@ -55,7 +55,7 @@ A regra de ensino desta lição: **Lake Formation decide a visibilidade, IAM dec
 
 Nesta lição você vai:
 
-- diagnosticar **o que o Lake Formation realmente substitui** — a dispersão de políticas de IAM-mais-S3 — e o que ele deliberadamente *não* substitui;
+- diagnosticar **o que o Lake Formation realmente substitui**, a dispersão de políticas de IAM-mais-S3, e o que ele deliberadamente *não* substitui;
 - separar **localizações registradas no LF** do **modo de acesso híbrido** e prever qual plano de permissões responde a uma dada requisição;
 - subir a **escada de granularidade de permissões** (database → table → column → row filter → cell) e nomear o mecanismo em cada degrau;
 - construir a **política de analista resolvida**: `SELECT` em `gold.sales`, menos `salary`, linhas limitadas a `region = 'eu'`, como um único data filter em nível de célula;
@@ -74,7 +74,7 @@ Nesta lição você vai:
 
 Antes do Lake Formation, um lake governado na AWS era montado a partir de três superfícies de política sobrepostas, e a AWS disse isso na disponibilidade geral em **2019-08-08**:
 
-> "Antes você precisava usar políticas separadas para proteger o acesso a dados e metadados, e essas políticas só permitiam acesso em nível de tabela. Agora você pode dar acesso a cada usuário, de um local central, apenas às colunas que ele precisa usar." — AWS News Blog, *AWS Lake Formation – Now Generally Available* (2019-08-08)
+> "Antes você precisava usar políticas separadas para proteger o acesso a dados e metadados, e essas políticas só permitiam acesso em nível de tabela. Agora você pode dar acesso a cada usuário, de um local central, apenas às colunas que ele precisa usar.", AWS News Blog, *AWS Lake Formation, Now Generally Available* (2019-08-08)
 
 | Superfície | O que podia expressar | Onde não podia chegar |
 |---|---|---|
@@ -84,11 +84,11 @@ Antes do Lake Formation, um lake governado na AWS era montado a partir de três 
 
 O Lake Formation adiciona uma **quarta** superfície que é deliberadamente modelada como um sistema de grants de banco de dados relacional:
 
-> "Lake Formation fornece um modelo de permissões de sistema de gerenciamento de banco de dados relacional (RDBMS) para conceder ou revogar acesso a catálogos, databases, tabelas e colunas no Data Catalog com os dados subjacentes no Amazon S3." — Guia do Desenvolvedor do LF, *Onboarding to Lake Formation permissions* (acesso em 2026-10-11)
+> "Lake Formation fornece um modelo de permissões de sistema de gerenciamento de banco de dados relacional (RDBMS) para conceder ou revogar acesso a catálogos, databases, tabelas e colunas no Data Catalog com os dados subjacentes no Amazon S3.": Guia do Desenvolvedor do LF, *Onboarding to Lake Formation permissions* (acesso em 2026-10-11)
 
 E ele **complementa** em vez de substituir o IAM:
 
-> "Lake Formation fornece seu próprio modelo de permissões que complementa o modelo de permissões do IAM." — Guia do Desenvolvedor do LF, *Overview of data filtering* (acesso em 2026-10-11)
+> "Lake Formation fornece seu próprio modelo de permissões que complementa o modelo de permissões do IAM.": Guia do Desenvolvedor do LF, *Overview of data filtering* (acesso em 2026-10-11)
 
 A divisão de trabalho, portanto, fica fixa pelo resto da lição: **IAM autentica e controla o plano de controle** (`GrantPermissions`, `GetDataAccess`, `glue:*`), **Lake Formation controla o plano de dados** decidindo quais metadados e quais credenciais temporárias com escopo um motor integrado recebe, e **o motor executa ele mesmo a filtragem de linha/coluna/célula**.
 
@@ -115,7 +115,7 @@ Dois fatos caem direto desse diagrama e ambos são examináveis:
 1. **O registro é a única ponte entre os planos.** "A emissão de credenciais do Lake Formation não está disponível, mesmo com opt-in, a menos que a localização de dados esteja registrada no Lake Formation." (Guia do Desenvolvedor do LF, *Hybrid access workflow*, acesso em 2026-10-11.)
 2. **Lake Formation não tranca o seu bucket.** "O modelo de permissões do Lake Formation não impede o acesso a localizações do Amazon S3 pela API ou pelo console do Amazon S3 se você tem acesso a elas através de políticas de IAM ou do Amazon S3. Você pode anexar políticas de IAM a principais para bloquear esse acesso." (Guia do Desenvolvedor do LF, *Underlying data access control*, acesso em 2026-10-11.)
 
-### 1.2 Exemplo resolvido E1 — contando a dispersão, depois contando a substituição
+### 1.2 Exemplo resolvido E1: contando a dispersão, depois contando a substituição
 
 ```text
 CENÁRIO (aritmética derivada do conjunto de permissões documentado;
@@ -159,9 +159,9 @@ CUSTO DE QUALQUER UM DOS TRÊS .... $0 pelas permissões em si
    Formation (acesso em 2026-10-11)
 ```
 
-**Leitura:** a primeira vitória do Lake Formation sobre o IAM cru *não* é menos statements — na granularidade de recurso nomeado você escreve o mesmo número. A primeira vitória é **centralização mais auditabilidade** (um único `ListPermissions` em vez de três famílias de política), e a segunda vitória, que chega na Seção 5, é **reduzir a contagem** com tags. A coluna de custo é a surpresa: a camada de governança em si é de graça, então a única pergunta de orçamento é quem a mantém.
+**Leitura:** a primeira vitória do Lake Formation sobre o IAM cru *não* é menos statements: na granularidade de recurso nomeado você escreve o mesmo número. A primeira vitória é **centralização mais auditabilidade** (um único `ListPermissions` em vez de três famílias de política), e a segunda vitória, que chega na Seção 5, é **reduzir a contagem** com tags. A coluna de custo é a surpresa: a camada de governança em si é de graça, então a única pergunta de orçamento é quem a mantém.
 
-- **📚 Você sabia?** A cobrança do Lake Formation tem exatamente três itens cobráveis em out de 2026, e nenhum deles é uma permissão. A **Storage API** — o mecanismo server-side independente de filtragem usado quando nenhum serviço de analytics da AWS processa os dados — cobra "pelo número de bytes varridos pela Storage API, arredondado para o próximo megabyte, com um mínimo de 10MB"; as **Governed Tables** cobram por arquivo rastreado, por chamada de API de metadados e por byte processado pelo otimizador de storage; e o próprio otimizador de storage cobra por byte. Grants, revogações, LF-Tags, sharing entre contas e a aplicação por Athena, Redshift, Glue e EMR são todos **$0** (página de preços do Lake Formation, acesso em 2026-10-11).
+- **📚 Você sabia?** A cobrança do Lake Formation tem exatamente três itens cobráveis em out de 2026, e nenhum deles é uma permissão. A **Storage API**, o mecanismo server-side independente de filtragem usado quando nenhum serviço de analytics da AWS processa os dados, cobra "pelo número de bytes varridos pela Storage API, arredondado para o próximo megabyte, com um mínimo de 10MB"; as **Governed Tables** cobram por arquivo rastreado, por chamada de API de metadados e por byte processado pelo otimizador de storage; e o próprio otimizador de storage cobra por byte. Grants, revogações, LF-Tags, sharing entre contas e a aplicação por Athena, Redshift, Glue e EMR são todos **$0** (página de preços do Lake Formation, acesso em 2026-10-11).
 
 ---
 
@@ -171,36 +171,36 @@ Um objeto do Data Catalog tem duas perguntas **ortogonais**, e a maior parte da 
 
 | Pergunta | Resposta A | Resposta B |
 |---|---|---|
-| (a) A localização S3 subjacente está registrada? | **Registrada** — `RegisterResource` com uma role; LF assume essa role e emite credenciais temporárias | **Não registrada** — sem emissão, políticas de IAM e S3 decidem o plano de dados |
-| (b) Qual modelo de permissão se aplica? | **Modo Lake Formation** — LF é o único modelo; `IAMAllowedPrincipals` revogado em todo lugar | **Modo de acesso híbrido** — os dois modelos coexistem, com opt-in por principal |
+| (a) A localização S3 subjacente está registrada? | **Registrada**, `RegisterResource` com uma role; LF assume essa role e emite credenciais temporárias | **Não registrada**, sem emissão, políticas de IAM e S3 decidem o plano de dados |
+| (b) Qual modelo de permissão se aplica? | **Modo Lake Formation**, LF é o único modelo; `IAMAllowedPrincipals` revogado em todo lugar | **Modo de acesso híbrido**, os dois modelos coexistem, com opt-in por principal |
 
 ### 2.1 Registro: para que serve a role
 
-> "Quando você registra uma localização, você especifica uma role do IAM que concede permissões de leitura/escrita naquela localização. O Lake Formation assume aquela role ao fornecer credenciais temporárias aos serviços AWS integrados." — Guia do Desenvolvedor do LF, *Set up AWS Lake Formation* (acesso em 2026-10-11)
+> "Quando você registra uma localização, você especifica uma role do IAM que concede permissões de leitura/escrita naquela localização. O Lake Formation assume aquela role ao fornecer credenciais temporárias aos serviços AWS integrados.": Guia do Desenvolvedor do LF, *Set up AWS Lake Formation* (acesso em 2026-10-11)
 
 Consequências práticas:
 
 - a **role de registro**, não o chamador, detém as permissões duráveis de `s3:*`;
-- os chamadores ainda precisam da permissão de IAM `lakeformation:GetDataAccess`, e "você deve definir o parâmetro Resource como `*`" — qualquer outro valor de recurso não é suportado;
+- os chamadores ainda precisam da permissão de IAM `lakeformation:GetDataAccess`, e "você deve definir o parâmetro Resource como `*`": qualquer outro valor de recurso não é suportado;
 - registrar um prefixo cobre **toda tabela sob esse caminho de uma vez**, porque "várias tabelas podem compartilhar um prefixo S3. Quando você registra uma localização, todas as tabelas sob aquele caminho recebem emissão de credenciais de uma vez" (guia de melhores práticas do Lake Formation publicado pela AWS, acesso em 2026-10-11).
 
 ### 2.2 Modo de acesso híbrido: dois caminhos, principais com opt-in
 
-> "O modo de acesso híbrido do AWS Lake Formation suporta dois caminhos de permissão para os mesmos objetos do AWS Glue Data Catalog." … "O modo de acesso híbrido aplica apenas as permissões `CREATE_TABLE`, `CREATE_PARTITION`, `UPDATE_TABLE` por default." … "principais com opt-in exigirão tanto permissões do Lake Formation quanto permissões de IAM para acessar os dados, enquanto principais sem opt-in continuarão a acessar dados usando apenas permissões de IAM." — Guia do Desenvolvedor do LF, *Hybrid access mode* (acesso em 2026-10-11)
+> "O modo de acesso híbrido do AWS Lake Formation suporta dois caminhos de permissão para os mesmos objetos do AWS Glue Data Catalog." … "O modo de acesso híbrido aplica apenas as permissões `CREATE_TABLE`, `CREATE_PARTITION`, `UPDATE_TABLE` por default." … "principais com opt-in exigirão tanto permissões do Lake Formation quanto permissões de IAM para acessar os dados, enquanto principais sem opt-in continuarão a acessar dados usando apenas permissões de IAM.": Guia do Desenvolvedor do LF, *Hybrid access mode* (acesso em 2026-10-11)
 
 Aquela última frase é o modo inteiro: **híbrido é um switch por principal, não por conta**, e é a ferramenta de migração reversível que a AWS recomenda:
 
-> "Para facilitar a transição das permissões de data lake de um modelo de IAM e Amazon S3 para permissões do Lake Formation, recomendamos que você use o modo de acesso híbrido para o Data Catalog." — Guia do Desenvolvedor do LF, *Set up AWS Lake Formation* (acesso em 2026-10-11)
+> "Para facilitar a transição das permissões de data lake de um modelo de IAM e Amazon S3 para permissões do Lake Formation, recomendamos que você use o modo de acesso híbrido para o Data Catalog.": Guia do Desenvolvedor do LF, *Set up AWS Lake Formation* (acesso em 2026-10-11)
 
 | Estado | `IAMAllowedPrincipals` na tabela | Localização registrada | Principal com opt-in? | Quem decide o acesso de leitura |
 |---|---|---|---|---|
-| Legado / default | presente (`Super`) | talvez | n/a | **Apenas IAM** — permissões individuais do Lake Formation não estão em vigor |
+| Legado / default | presente (`Super`) | talvez | n/a | **Apenas IAM**: permissões individuais do Lake Formation não estão em vigor |
 | Modo Lake Formation | revogada | sim | n/a | **Apenas Lake Formation** (mais IAM para as APIs) |
 | Híbrido, sem opt-in | presente | sim | não | **Apenas IAM** |
-| Híbrido, com opt-in | presente | sim | sim | **Ambos** — LF e IAM devem permitir |
+| Híbrido, com opt-in | presente | sim | sim | **Ambos**: LF e IAM devem permitir |
 | Registrado-mas-sem-opt-in | revogada | sim | não | regras de metadados do LF, mas sem opt-in não há porta dupla |
 
-### 2.3 Exemplo resolvido E2 — levando uma role ao modo híbrido
+### 2.3 Exemplo resolvido E2: levando uma role ao modo híbrido
 
 ```bash
 # ---- Step 0: see what the table looks like today -----------------
@@ -232,7 +232,7 @@ aws lakeformation delete-lakeformation-opt-in \
   --principal DataLakePrincipalIdentifier=arn:aws:iam::111122223333:role/analyst-eu
 ```
 
-**Verificações:** (a) o analista com opt-in que tem uma política de IAM mas *sem* grant de LF agora falha — prova de que a porta dupla está ativa; (b) a role sem opt-in continua lendo só com IAM — prova de que o modo é por principal; (c) `IsRegisteredWithLakeFormation` na tabela é `true` na visão do principal com opt-in e inalterado para todo mundo mais.
+**Verificações:** (a) o analista com opt-in que tem uma política de IAM mas *sem* grant de LF agora falha, prova de que a porta dupla está ativa; (b) a role sem opt-in continua lendo só com IAM, prova de que o modo é por principal; (c) `IsRegisteredWithLakeFormation` na tabela é `true` na visão do principal com opt-in e inalterado para todo mundo mais.
 
 > [!IMPORTANT]
 > **Registrado ≠ híbrido.** O registro responde *de onde vêm as credenciais*; o híbrido responde *qual modelo de permissão se aplica*. Daí seguem três modos de falha separáveis, e cada um tem um conserto diferente:
@@ -240,7 +240,7 @@ aws lakeformation delete-lakeformation-opt-in \
 > - **Registrada, ninguém com opt-in, `IAMAllowedPrincipals` ainda detendo `Super`** → permissões do Lake Formation não são aplicadas de modo algum; os seus novos grants são inertes.
 > - **Nada disso, mas o analista mantém um `s3:GetObject` direto** → todo row filter desta lição é contornado. A limpeza de grants diretos de S3 é uma etapa da migração, não um extra opcional.
 
-- **📚 Você sabia?** Os knobs no nível da conta que mantêm um database novo no plano antigo têm nomes exatos no console: **`Use only IAM access control for new databases`** e **`Use only IAM access control for new tables in new databases`**, respaldados na API por `CreateDatabaseDefaultPermissions` e `TableDefaultPermissions`, cujo default entregue é `[{"Principal":{"DataLakePrincipalIdentifier":"IAM_ALLOWED_PRINCIPALS"},"Permissions":["ALL"]}]` (Guia do Desenvolvedor do LF, *Changing the default settings for your data lake* e a API `DataLakeSettings`, acesso em 2026-10-11). A AWS deliberadamente **não** chama esse estado de "IAMOnly" em lugar algum — ensine os nomes documentados.
+- **📚 Você sabia?** Os knobs no nível da conta que mantêm um database novo no plano antigo têm nomes exatos no console: **`Use only IAM access control for new databases`** e **`Use only IAM access control for new tables in new databases`**, respaldados na API por `CreateDatabaseDefaultPermissions` e `TableDefaultPermissions`, cujo default entregue é `[{"Principal":{"DataLakePrincipalIdentifier":"IAM_ALLOWED_PRINCIPALS"},"Permissions":["ALL"]}]` (Guia do Desenvolvedor do LF, *Changing the default settings for your data lake* e a API `DataLakeSettings`, acesso em 2026-10-11). A AWS deliberadamente **não** chama esse estado de "IAMOnly" em lugar algum: ensine os nomes documentados.
 
 ---
 
@@ -261,9 +261,9 @@ CREATE_LF_TAG_EXPRESSION  CREATE_CATALOG  SUPER_USER
 
 Três regras sobre essa lista:
 
-- `SELECT`, `INSERT` e `DELETE` são **tanto** permissões do Data Catalog **quanto** permissões de acesso a dados — são as que chegam ao S3.
+- `SELECT`, `INSERT` e `DELETE` são **tanto** permissões do Data Catalog **quanto** permissões de acesso a dados: são as que chegam ao S3.
 - `Super` é aditivo e sobrevive a revogações parciais: "quando você revoga `Super`, as permissões `SELECT` e `INSERT` permanecem" (Guia do Desenvolvedor do LF, *Access control for metadata*, acesso em 2026-10-11).
-- Conceder em **todas as tabelas de um database** concede implicitamente `DESCRIBE` nesse database — mas "essa concessão automática de permissão `DESCRIBE` não se aplica ao usar controle de acesso baseado em atributos (ABAC)".
+- Conceder em **todas as tabelas de um database** concede implicitamente `DESCRIBE` nesse database, mas "essa concessão automática de permissão `DESCRIBE` não se aplica ao usar controle de acesso baseado em atributos (ABAC)".
 
 ### 3.2 A escada, desenhada
 
@@ -280,7 +280,7 @@ flowchart TD
     M4["Mecanismo: grant de LF-Tag / expressão de tag - substitui degraus inteiros em escala"] -.-> L2
 ```
 
-Tudo abaixo de `TABLE` é **expresso por apenas dois mecanismos**: um *filtro de coluna no próprio grant* (`TableWithColumns`) ou um *objeto de data filter* (`DataCellsFilter`). Escolha entre eles com uma pergunta — **eu preciso de linhas também?**
+Tudo abaixo de `TABLE` é **expresso por apenas dois mecanismos**: um *filtro de coluna no próprio grant* (`TableWithColumns`) ou um *objeto de data filter* (`DataCellsFilter`). Escolha entre eles com uma pergunta: **eu preciso de linhas também?**
 
 | Necessidade | Mecanismo | Objeto que você escreve |
 |---|---|---|
@@ -290,7 +290,7 @@ Tudo abaixo de `TABLE` é **expresso por apenas dois mecanismos**: um *filtro de
 | Algumas colunas **e** algumas linhas | Data filter, em nível de célula | especificação de coluna **mais** `RowFilter` em um único `DataCellsFilter` |
 | Alcance em massa sobre muitas tabelas | Grant de LF-Tag | `{"LFTagPolicy": {"TagKey", "TagValues"}}` |
 
-### 3.3 Exemplo resolvido E3 — a escada de quatro grants em uma tabela
+### 3.3 Exemplo resolvido E3: a escada de quatro grants em uma tabela
 
 ```text
 Objetivo: tornar gold.sales visível, útil e corretamente estreita para role/analyst-eu.
@@ -335,13 +335,13 @@ AUDIT após cada grant:
 {
   "question": "Correlacione cada degrau de granularidade de permissão com o mecanismo do Lake Formation que o expressa:",
   "pairs": [
-    {"left": "Database", "right": "Grant de recurso nomeado de CREATE_DATABASE, ALTER, DESCRIBE ou DROP em um recurso Database - não existem linhas ou colunas neste degrau"},
-    {"left": "Table", "right": "Grant de recurso nomeado de SELECT, INSERT ou DELETE em um recurso Table - o degrau onde a maioria dos times para, e o único que o IAM cru podia aproximar"},
-    {"left": "Column", "right": "TableWithColumns com inclusão por ColumnNames ou exclusão por ColumnWildcard.ExcludedColumnNames - ou a especificação de coluna dentro de um data filter, que é a única rota que alcança camadas de struct aninhadas"},
+    {"left": "Database", "right": "Grant de recurso nomeado de CREATE_DATABASE, ALTER, DESCRIBE ou DROP em um recurso Database: não existem linhas ou colunas neste degrau"},
+    {"left": "Table", "right": "Grant de recurso nomeado de SELECT, INSERT ou DELETE em um recurso Table: o degrau onde a maioria dos times para, e o único que o IAM cru podia aproximar"},
+    {"left": "Column", "right": "TableWithColumns com inclusão por ColumnNames ou exclusão por ColumnWildcard.ExcludedColumnNames: ou a especificação de coluna dentro de um data filter, que é a única rota que alcança camadas de struct aninhadas"},
     {"left": "Row", "right": "Um data filter com um curinga de todas as colunas mais RowFilter.FilterExpression escrito no subconjunto WHERE do PartiQL, com menos de 2.048 caracteres"},
     {"left": "Cell", "right": "Um único data filter que carrega TANTO uma especificação de coluna QUANTO uma expressão de row filter, concedido com SELECT"}
   ],
-  "explanation": "Quatro degraus, dois mecanismos: grants de recurso nomeado carregam database e table; filtros de coluna e data filters carregam coluna, linha e célula. As duas armadilhas são que colunas de struct aninhadas só são alcançáveis pela especificação de coluna de um data filter, e que a segurança em nível de célula é definida como especificação de coluna MAIS row filter em um objeto - não como dois grants separados. O filtragem de coluna não pode ser aplicado a colunas de chave de partição, e um grant baseado em tag não pode carregar um data filter de modo algum."
+  "explanation": "Quatro degraus, dois mecanismos: grants de recurso nomeado carregam database e table; filtros de coluna e data filters carregam coluna, linha e célula. As duas armadilhas são que colunas de struct aninhadas só são alcançáveis pela especificação de coluna de um data filter, e que a segurança em nível de célula é definida como especificação de coluna MAIS row filter em um objeto: não como dois grants separados. O filtragem de coluna não pode ser aplicado a colunas de chave de partição, e um grant baseado em tag não pode carregar um data filter de modo algum."
 }
 ```
 
@@ -351,9 +351,9 @@ AUDIT após cada grant:
 
 ## 4. Segurança em nível de linha e de coluna: a política de analista resolvida
 
-### 4.1 A combinatoria — três controles, um tipo de objeto
+### 4.1 A combinatoria: três controles, um tipo de objeto
 
-> "Lake Formation usa filtragem de dados para alcançar segurança em nível de coluna, de linha e de célula." … "Quando você especifica o curinga 'todas as colunas' e fornece uma expressão de row filter, você está estabelecendo apenas segurança em nível de linha (filtragem de linha)." … "Quando você inclui ou exclui colunas e colunas aninhadas específicas e especifica 'todas as linhas' … você está estabelecendo segurança em nível de coluna." … "Quando você inclui ou exclui colunas específicas e também fornece uma expressão de row filter, você está estabelecendo segurança em nível de célula." — Guia do Desenvolvedor do LF, *Data filtering and cell-level security* (acesso em 2026-10-11)
+> "Lake Formation usa filtragem de dados para alcançar segurança em nível de coluna, de linha e de célula." … "Quando você especifica o curinga 'todas as colunas' e fornece uma expressão de row filter, você está estabelecendo apenas segurança em nível de linha (filtragem de linha)." … "Quando você inclui ou exclui colunas e colunas aninhadas específicas e especifica 'todas as linhas' … você está estabelecendo segurança em nível de coluna." … "Quando você inclui ou exclui colunas específicas e também fornece uma expressão de row filter, você está estabelecendo segurança em nível de célula.": Guia do Desenvolvedor do LF, *Data filtering and cell-level security* (acesso em 2026-10-11)
 
 | Campo de colunas | Campo de linhas | Controle que você obtém |
 |---|---|---|
@@ -363,7 +363,7 @@ AUDIT após cada grant:
 
 Duas clarificações que economizam tempo real de depuração:
 
-- **Filtrar coluna não é mascarar.** Excluir `salary` remove dos resultados *e* dos metadados de catálogo daquele principal. Nunca retorna um valor mascarado. Se o requisito é "mostrar apenas os quatro últimos dígitos", isso é uma view, uma transformação em camada de aplicação, ou o dynamic data masking do Amazon Redshift — não Lake Formation.
+- **Filtrar coluna não é mascarar.** Excluir `salary` remove dos resultados *e* dos metadados de catálogo daquele principal. Nunca retorna um valor mascarado. Se o requisito é "mostrar apenas os quatro últimos dígitos", isso é uma view, uma transformação em camada de aplicação, ou o dynamic data masking do Amazon Redshift: não Lake Formation.
 - **Disponibilidade:** "Cell-level security is available in all regions when using Athena engine version 3 or Amazon Redshift Spectrum." (Guia do Desenvolvedor do LF, *Data filtering limitations*, acesso em 2026-10-11.)
 
 ### 4.2 A linguagem do row filter: subconjunto do PartiQL, com arestas duras
@@ -381,7 +381,7 @@ Duas clarificações que economizam tempo real de depuração:
 | Views / resource links | segurança em nível de célula não é suportada neles |
 | Concorrência | "Se você aplica a expressão de filtro de todas-as-linhas em uma tabela concorrentemente com outras expressões de filtro com predicados, a expressão de todas-as-linhas prevalecerá" |
 
-### 4.3 Exemplo resolvido E4 — a política de analista: `gold.sales` menos `salary`, linhas = `region='eu'`
+### 4.3 Exemplo resolvido E4, a política de analista: `gold.sales` menos `salary`, linhas = `region='eu'`
 
 Isto é **segurança em nível de célula em um único objeto de data filter**, mais o grant de visibilidade que o torna utilizável.
 
@@ -421,16 +421,16 @@ aws lakeformation grant-permissions \
 | `SELECT salary FROM gold.sales` | erro / coluna ausente dos metadados | a metade de **coluna** do filtro de célula está ativa |
 | `SELECT region, count(*) FROM gold.sales GROUP BY region` | apenas contagens de `'eu'` | a metade de **linha** está ativa |
 | `SELECT * FROM gold.sales` | toda coluna **exceto** `salary`, apenas linhas da UE | as duas metades se compõem em segurança em nível de **célula** |
-| `SELECT region FROM gold.sales` | funciona — porque `region` ainda é legível | a coluna de predicado do filtro deve estar na allow-list; decida deliberadamente se `region` permanece visível para os analistas |
+| `SELECT region FROM gold.sales` | funciona: porque `region` ainda é legível | a coluna de predicado do filtro deve estar na allow-list; decida deliberadamente se `region` permanece visível para os analistas |
 
-**Contraste (mais barato, mais estreito):** conceder `TableWithColumns` com `ExcludedColumnNames = ["salary"]` entrega as colunas e nenhuma linha — uma resposta legítima quando o requisito é apenas "esconder PII", e o padrão que a FanDuel usou no **Caso B** abaixo. Adicionar `region = 'eu'` é o que te força a um data filter.
+**Contraste (mais barato, mais estreito):** conceder `TableWithColumns` com `ExcludedColumnNames = ["salary"]` entrega as colunas e nenhuma linha: uma resposta legítima quando o requisito é apenas "esconder PII", e o padrão que a FanDuel usou no **Caso B** abaixo. Adicionar `region = 'eu'` é o que te força a um data filter.
 
 > [!WARNING]
 > ⚠️ **Quatro maneiras como esta política se alarga silenciosamente de volta para acesso total:**
 > - **Tags e data filters não se misturam.** "Você não pode aplicar data filters quando usa LF-Tags para gerenciar permissões em recursos do Data Catalog." (Guia do Desenvolvedor do LF, *Using AWS Lake Formation with Amazon Athena*, acesso em 2026-10-11.) Se `gold.sales` for coberto por um grant de tag, o seu row filter não é aplicado àquele caminho.
 > - **Não existe primitiva de deny.** A permissão efetiva é a **união** dos grants de recurso nomeado, de tag-policy e de data filter. Um segundo grant simples de `SELECT` em `gold.sales` reinclui `salary` para o mesmo principal.
-> - **Grant option e filtragem de coluna.** A referência de permissões afirma que você "can't include the grant option if column filtering is applied", enquanto o guia de granting descreve um caso de grant option mais estreito — verifique o comportamento atual do console na sua conta antes de projetar grants delegados de coluna (os docs da AWS discordam aqui em 2026-10-11; trate-o como não verificado).
-> - **Colunas de chave de partição não podem receber filtragem de coluna**, e `IS [NOT] NULL` é inválido nelas — um esquema que particiona por `region` precisa que `region` permaneça legível, que é exatamente a quarta verificação acima.
+> - **Grant option e filtragem de coluna.** A referência de permissões afirma que você "can't include the grant option if column filtering is applied", enquanto o guia de granting descreve um caso de grant option mais estreito: verifique o comportamento atual do console na sua conta antes de projetar grants delegados de coluna (os docs da AWS discordam aqui em 2026-10-11; trate-o como não verificado).
+> - **Colunas de chave de partição não podem receber filtragem de coluna**, e `IS [NOT] NULL` é inválido nelas: um esquema que particiona por `region` precisa que `region` permaneça legível, que é exatamente a quarta verificação acima.
 
 ---
 
@@ -438,13 +438,13 @@ aws lakeformation grant-permissions \
 
 ### 5.1 O que é uma tag
 
-> "Cada LF-Tag é um par chave-valor, como `department=sales` ou `classification=restricted`. Uma chave pode ter múltiplos valores definidos." — Guia do Desenvolvedor do LF, *Tag-based access control (LF-TBAC)* (acesso em 2026-10-11)
+> "Cada LF-Tag é um par chave-valor, como `department=sales` ou `classification=restricted`. Uma chave pode ter múltiplos valores definidos.": Guia do Desenvolvedor do LF, *Tag-based access control (LF-TBAC)* (acesso em 2026-10-11)
 
 Tags se anexam a **databases, tabelas e colunas**. Elas devem ser pré-definidas (uma chave e seus valores são criados com `CreateLFTag` antes que qualquer coisa possa carregá-las), e são o único mecanismo desta lição que deixa você conceder em um *atributo* em vez de em um objeto nomeado.
 
 ### 5.2 Herança e as regras de correspondência
 
-> "Tabelas herdam LF-Tags de databases e colunas herdam LF-Tags de tabelas. Valores herdados podem ser sobrescritos" … "as chaves de tag são combinadas usando a operação AND, enquanto os valores são combinados usando a operação OR." — Guia do Desenvolvedor do LF, *Tag-based access control (LF-TBAC)* (acesso em 2026-10-11)
+> "Tabelas herdam LF-Tags de databases e colunas herdam LF-Tags de tabelas. Valores herdados podem ser sobrescritos" … "as chaves de tag são combinadas usando a operação AND, enquanto os valores são combinados usando a operação OR.": Guia do Desenvolvedor do LF, *Tag-based access control (LF-TBAC)* (acesso em 2026-10-11)
 
 ```mermaid
 flowchart TD
@@ -466,11 +466,11 @@ As duas regras de combinação, enunciadas uma vez e testadas para sempre:
 
 ### 5.3 Três coisas que o TBAC muda no granting
 
-1. **Você concede na tag, não na tabela.** O recurso do grant do principal é uma `LFTagPolicy` (ou uma `LFTagExpression`), então tabelas criadas *depois* — incluindo tabelas criadas por crawler — são cobertas automaticamente uma vez que herdam a tag.
+1. **Você concede na tag, não na tabela.** O recurso do grant do principal é uma `LFTagPolicy` (ou uma `LFTagExpression`), então tabelas criadas *depois*, incluindo tabelas criadas por crawler, são cobertas automaticamente uma vez que herdam a tag.
 2. **Você pode conceder a capacidade de taggear.** `ASSOCIATE` deixa um principal anexar uma tag; `DESCRIBE` deixa-o vê-la; `GRANT_WITH_LF_TAG_EXPRESSION` deixa-o usá-la como recurso de grant. Esta é a primitiva de delegação por trás dos data meshes.
-3. **Permissões de todos os métodos são unidas.** O próprio conselho de migração da AWS: "(Recomendado) Depois de verificar que os principais têm acesso aos recursos corretos pelo método LF-TBAC, revogue as permissões que foram concedidas usando o método de recurso nomeado." Verifique primeiro, revoke depois — nunca o inverso.
+3. **Permissões de todos os métodos são unidas.** O próprio conselho de migração da AWS: "(Recomendado) Depois de verificar que os principais têm acesso aos recursos corretos pelo método LF-TBAC, revogue as permissões que foram concedidas usando o método de recurso nomeado." Verifique primeiro, revoke depois: nunca o inverso.
 
-### 5.4 Exemplo resolvido E5 — reconstruindo a compressão da IAS com três tags
+### 5.4 Exemplo resolvido E5: reconstruindo a compressão da IAS com três tags
 
 ```text
 PATRIMÔNIO (aritmética derivada, em out de 2026)
@@ -501,7 +501,7 @@ A EXCEÇÃO QUE NUNCA DESAPARECE
      LISTADA para que possa ser revisada
 ```
 
-**Leitura:** o custo da rota de tags é plano no número de tabelas e linear no número de *políticas*; a rota nomeada é linear em tabelas × principais. A IAS reportou a versão real disso: **"Com os controles de acesso baseados em tags do Lake Formation, a IAS reduziu centenas de regras de permissão a precisamente duas regras"** (AWS Big Data Blog, 2021-09-23). Observe onde a lista de exceções pousa — row filters são exatamente a funcionalidade que não pode ser dirigida por tags, então um patrimônio TBAC sempre carrega uma cauda curta e deliberada de recurso nomeado.
+**Leitura:** o custo da rota de tags é plano no número de tabelas e linear no número de *políticas*; a rota nomeada é linear em tabelas × principais. A IAS reportou a versão real disso: **"Com os controles de acesso baseados em tags do Lake Formation, a IAS reduziu centenas de regras de permissão a precisamente duas regras"** (AWS Big Data Blog, 2021-09-23). Observe onde a lista de exceções pousa: row filters são exatamente a funcionalidade que não pode ser dirigida por tags, então um patrimônio TBAC sempre carrega uma cauda curta e deliberada de recurso nomeado.
 
 ```fillblank
 {
@@ -544,7 +544,7 @@ A EXCEÇÃO QUE NUNCA DESAPARECE
 }
 ```
 
-Passe o mouse sobre um par de barras: grants de recurso nomeado escalam como **principais × tabelas** (derivado: 4 × 6 = 24 até 4 × 36 = 144), enquanto a rota de tags permanece em **6 atribuições + 4 grants = 10** independentemente da contagem de tabelas (derivado da forma da IAS de duas chaves aplicadas no nível do database). A curva de cruce é imediata — a rota de tags já é menor com seis tabelas —, e é por isso que o exemplo baseado em tags da AWS é citado como simplificação *operacional* e não como uma funcionalidade de segurança.
+Passe o mouse sobre um par de barras: grants de recurso nomeado escalam como **principais × tabelas** (derivado: 4 × 6 = 24 até 4 × 36 = 144), enquanto a rota de tags permanece em **6 atribuições + 4 grants = 10** independentemente da contagem de tabelas (derivado da forma da IAS de duas chaves aplicadas no nível do database). A curva de cruce é imediata, a rota de tags já é menor com seis tabelas, e é por isso que o exemplo baseado em tags da AWS é citado como simplificação *operacional* e não como uma funcionalidade de segurança.
 
 ---
 
@@ -552,13 +552,13 @@ Passe o mouse sobre um par de barras: grants de recurso nomeado escalam como **p
 
 ### 6.1 Bancos de dados entre contas passam pelo AWS RAM
 
-> "O Lake Formation usa o serviço AWS Resource Access Manager (AWS RAM) para compartilhar o recurso. Se a conta de grantee está na mesma organização que a conta de grantor, o recurso compartilhado fica disponível imediatamente; se a conta de grantee não está na mesma organização, o AWS RAM envia um convite para a conta de grantee aceitar ou rejeitar o grant do recurso." — Guia do Desenvolvedor do LF, *Cross-account data sharing* (acesso em 2026-10-11)
+> "O Lake Formation usa o serviço AWS Resource Access Manager (AWS RAM) para compartilhar o recurso. Se a conta de grantee está na mesma organização que a conta de grantor, o recurso compartilhado fica disponível imediatamente; se a conta de grantee não está na mesma organização, o AWS RAM envia um convite para a conta de grantee aceitar ou rejeitar o grant do recurso.": Guia do Desenvolvedor do LF, *Cross-account data sharing* (acesso em 2026-10-11)
 
 Existem dois métodos de grant, e a AWS recomenda um deles por nome: **controle de acesso baseado em tags do Lake Formation (LF-TBAC) (recomendado)** versus **recursos nomeados**. O blog que documenta o trade-off diz isso simplesmente: TBAC "é recomendado quando muitos recursos e entidades estão envolvidos."
 
 **Pré-requisitos que são falhas duras, não conselhos** (Guia do Desenvolvedor do LF, *Cross-account prerequisites*, acesso em 2026-10-11):
 
-1. Revogue **todas** as permissões do Lake Formation de `IAMAllowedPrincipals` no recurso primeiro — caso contrário o Lake Formation lança `AccessDeniedException`.
+1. Revogue **todas** as permissões do Lake Formation de `IAMAllowedPrincipals` no recurso primeiro: caso contrário o Lake Formation lança `AccessDeniedException`.
 2. O grantor deve deter a política gerenciada pela AWS **`AWSLakeFormationCrossAccountManager`**.
 3. Pelo menos um usuário na conta consumidora deve ser um **administrador de data lake** para ver os recursos compartilhados; "outros principais não podem acessar recursos compartilhados até que o administrador de data lake conceda permissões a eles."
 4. Grants entre contas devem carregar a **grant option**, porque o admin do lado do consumidor re-concede localmente. "O principal que recebe o resource share não pode compartilhar o recurso com outros principais."
@@ -587,7 +587,7 @@ sequenceDiagram
   Note over P,A: logs de acesso cross-account aparecem nas DUAS contas
 ```
 
-### 6.2 Exemplo resolvido E6 — compartilhando `gold.sales` para uma conta externa
+### 6.2 Exemplo resolvido E6: compartilhando `gold.sales` para uma conta externa
 
 ```text
 PRODUTOR 111122223333 -> CONSUMIDOR 222233334444   (em out de 2026)
@@ -635,11 +635,11 @@ LIMITES PARA CITAR
   ExcludedColumnNames
 ```
 
-**Verificações:** (a) um grant tentado enquanto `IAMAllowedPrincipals` ainda detém `Super` falha com `AccessDeniedException`; (b) um grant sem `--permissions-with-grant-option` deixa o admin do consumidor incapaz de conceder nada aos próprios analistas; (c) conceder apenas no link deixa a tabela invisível para as consultas — **grant no link ≠ grant no alvo**.
+**Verificações:** (a) um grant tentado enquanto `IAMAllowedPrincipals` ainda detém `Super` falha com `AccessDeniedException`; (b) um grant sem `--permissions-with-grant-option` deixa o admin do consumidor incapaz de conceder nada aos próprios analistas; (c) conceder apenas no link deixa a tabela invisível para as consultas: **grant no link ≠ grant no alvo**.
 
 ### 6.3 Callers confiáveis e o toggle de motor externo
 
-Lake Formation emite credenciais temporárias apenas para **callers confiáveis**. "Cada um desses serviços AWS é um caller confiável para o Lake Formation, e o Lake Formation fornece acesso aos dados armazenados no Amazon S3 por meio de credenciais temporárias" — o conjunto integrado sendo Athena, Redshift Spectrum, EMR e Glue (Guia do Desenvolvedor do LF, *Working with services*, acesso em 2026-10-11).
+Lake Formation emite credenciais temporárias apenas para **callers confiáveis**. "Cada um desses serviços AWS é um caller confiável para o Lake Formation, e o Lake Formation fornece acesso aos dados armazenados no Amazon S3 por meio de credenciais temporárias", o conjunto integrado sendo Athena, Redshift Spectrum, EMR e Glue (Guia do Desenvolvedor do LF, *Working with services*, acesso em 2026-10-11).
 
 Qualquer outra coisa é opt-in, e o opt-in é um switch de três partes em `DataLakeSettings`:
 
@@ -648,11 +648,11 @@ Qualquer outra coisa é opt-in, e o opt-in é um switch de três partes em `Data
 | `AllowExternalDataFiltering` | deixa um motor de terceiros acessar metadados não filtrados e credenciais de acesso a dados | deve ser habilitada deliberadamente |
 | `ExternalDataFilteringAllowList` | IDs de conta dos motores externos permitidos | vazia = ninguém |
 | `AuthorizedSessionTagValueList` | valores de session tag que um chamador deve apresentar | a **chave** da session tag do STS é `LakeFormationAuthorizedCaller` |
-| `AllowFullTableExternalDataAccess` | deixa um motor obter credenciais **sem** uma session tag quando o chamador tem acesso total aos dados | **false** por default — mantenha-a false |
+| `AllowFullTableExternalDataAccess` | deixa um motor obter credenciais **sem** uma session tag quando o chamador tem acesso total aos dados | **false** por default: mantenha-a false |
 
-> "Se você pretende analisar … usando motores de consulta de terceiros, você deve dar opt-in para permitir que motores externos acessem dados gerenciados pelo Lake Formation." — Guia do Desenvolvedor do LF, *Set up AWS Lake Formation* (acesso em 2026-10-11)
+> "Se você pretende analisar … usando motores de consulta de terceiros, você deve dar opt-in para permitir que motores externos acessem dados gerenciados pelo Lake Formation.": Guia do Desenvolvedor do LF, *Set up AWS Lake Formation* (acesso em 2026-10-11)
 
-Uma discrepância de documentação para ser honesto: a referência da API `DataLakeSettings` mostra um exemplo de chave de session tag `LakeFormationTrustedCaller`, enquanto o guia de motores de terceiros e o blog de aplicação personalizada ambos especificam **`LakeFormationAuthorizedCaller`**. Duas fontes dizem a segunda, então use-a — mas não trate nenhum dos dois nomes como incontestado.
+Uma discrepância de documentação para ser honesto: a referência da API `DataLakeSettings` mostra um exemplo de chave de session tag `LakeFormationTrustedCaller`, enquanto o guia de motores de terceiros e o blog de aplicação personalizada ambos especificam **`LakeFormationAuthorizedCaller`**. Duas fontes dizem a segunda, então use-a, mas não trate nenhum dos dois nomes como incontestado.
 
 ### 6.4 Acesso gerenciado e os papéis de administrador
 
@@ -667,7 +667,7 @@ Uma discrepância de documentação para ser honesto: a referência da API `Data
 Duas assimetrias que valem a pena internalizar:
 
 - **Admin adicionado depois = zero acesso implícito a dados.** "administradores de data lake adicionados depois da criação do database podem conceder permissões mas não recebem automaticamente permissões de acesso a dados como SELECT ou DESCRIBE. Administradores que criam databases recebem permissões SUPER naqueles databases."
-- **Acesso gerenciado é expresso como a grant option.** O padrão — uma equipe de plataforma segurando `PermissionsWithGrantOption` e equipes de domínio re-concedendo dentro de um escopo — é como o self-service "grantable" funciona sem entregar o catálogo inteiro.
+- **Acesso gerenciado é expresso como a grant option.** O padrão, uma equipe de plataforma segurando `PermissionsWithGrantOption` e equipes de domínio re-concedendo dentro de um escopo, é como o self-service "grantable" funciona sem entregar o catálogo inteiro.
 
 - **📚 Você sabia?** A role de registro e a service-linked role são uma escolha real de design: o Lake Formation entrega uma service-linked role (`ServiceRoleForLakeFormationDataAccess`) para registro sem configuração, mas o guia de melhores práticas da AWS recomenda registrar com uma **role de gestão do cliente** quando você espera editar ou limitar o escopo dessa role depois. De qualquer forma o chamador ainda precisa de `lakeformation:GetDataAccess` com `Resource: "*"`, e adicioná-la é "um no-op quando nenhuma localização está registrada, então é seguro (e recomendado) adicioná-la desde o início" (guia de melhores práticas do Lake Formation publicado pela AWS, acesso em 2026-10-11).
 
@@ -676,7 +676,7 @@ Duas assimetrias que valem a pena internalizar:
   "question": "Ordene as etapas que levam uma localização S3 de acesso apenas-IAM a um grant governado do Lake Formation, terminando com uma consulta de analista que funciona:",
   "items": [
     "Inventariar as permissões de IAM e Glue existentes com ListPermissions e GetEffectivePermissionsForPath",
-    "Replicar essas permissões como grants do Lake Formation - deliberadamente um no-op enquanto IAMAllowedPrincipals ainda detém Super",
+    "Replicar essas permissões como grants do Lake Formation: deliberadamente um no-op enquanto IAMAllowedPrincipals ainda detém Super",
     "Adicionar lakeformation:GetDataAccess com Resource definido como * a toda política IAM de consumidor",
     "Registrar a localização S3 com uma role de IAM para que a emissão de credenciais se torne possível",
     "Revogar Super do grupo IAMAllowedPrincipals nos databases e tabelas dessa localização",
@@ -686,7 +686,7 @@ Duas assimetrias que valem a pena internalizar:
   ],
   "correctOrder": [
     "Inventariar as permissões de IAM e Glue existentes com ListPermissions e GetEffectivePermissionsForPath",
-    "Replicar essas permissões como grants do Lake Formation - deliberadamente um no-op enquanto IAMAllowedPrincipals ainda detém Super",
+    "Replicar essas permissões como grants do Lake Formation: deliberadamente um no-op enquanto IAMAllowedPrincipals ainda detém Super",
     "Adicionar lakeformation:GetDataAccess com Resource definido como * a toda política IAM de consumidor",
     "Registrar a localização S3 com uma role de IAM para que a emissão de credenciais se torne possível",
     "Revogar Super do grupo IAMAllowedPrincipals nos databases e tabelas dessa localização",
@@ -705,21 +705,21 @@ Duas assimetrias que valem a pena internalizar:
 
 ## 7. Matriz de suporte de motores: quem realmente aplica o quê
 
-> "a filtragem real de colunas nas respostas de consulta é responsabilidade do serviço integrado. Clientes do Lake Formation que suportam filtragem em nível de coluna, incluindo Amazon Athena, Amazon Redshift Spectrum e Amazon EMR, filtram os dados com base nas permissões de coluna registradas no Lake Formation" — Guia do Desenvolvedor do LF, *Limitations* (acesso em 2026-10-11)
+> "a filtragem real de colunas nas respostas de consulta é responsabilidade do serviço integrado. Clientes do Lake Formation que suportam filtragem em nível de coluna, incluindo Amazon Athena, Amazon Redshift Spectrum e Amazon EMR, filtram os dados com base nas permissões de coluna registradas no Lake Formation": Guia do Desenvolvedor do LF, *Limitations* (acesso em 2026-10-11)
 
 | Motor | Tabela | Coluna | Linha / Célula | Ressalva que você deve ser capaz de enunciar |
 |---|---|---|---|---|
 | **Athena SQL** | Leitura/escrita | Sim | Sim | Célula precisa da **versão 3 do motor do Athena**; localizações de resultados de consulta do Athena **não podem** ser registradas, então os resultados são sempre território puro-IAM |
 | **Athena Spark** | Não suportado | Não suportado | Não suportado | "O Athena Spark não suporta consultar tabelas do Data Catalog com permissões do Lake Formation." |
-| **Redshift Spectrum** (cluster provisionado ou Serverless) | Leitura/escrita | Sim | Sim | Data filters no Lake Formation governam o acesso de linha/célula do Spectrum; **as próprias políticas de linha/coluna do Redshift em um datashare compartilhado *para* o Lake Formation são ignoradas** — o admin do LF deve recriá-las |
+| **Redshift Spectrum** (cluster provisionado ou Serverless) | Leitura/escrita | Sim | Sim | Data filters no Lake Formation governam o acesso de linha/célula do Spectrum; **as próprias políticas de linha/coluna do Redshift em um datashare compartilhado *para* o Lake Formation são ignoradas**, o admin do LF deve recriá-las |
 | **Spark on EMR (EC2)** | Leitura/escrita | Sim | Sim | Proteger o próprio cluster continua sendo seu trabalho |
 | **Apache Hive on EMR (EC2)** | Leitura/escrita | Sim | **Não suportado** | Filtros de linha e de célula não se aplicam |
 | **Hive em EMR Serverless / EMR on EKS** | Não suportado | Não suportado | Não suportado | Listado como não suportado na matriz de serviços |
-| **AWS Glue ETL** | Leitura/escrita | **Acesso de leitura em Glue 5.0+** | **Acesso de leitura em Glue 5.0+** | A página de limitações ainda diz "Atualmente, o AWS Glue ETL não suporta filtragem de coluna" — trate **caminhos de leitura em 5.0+** como suportados e **pré-5.0 e caminhos de escrita** como não suportados, e verifique no seu runtime |
+| **AWS Glue ETL** | Leitura/escrita | **Acesso de leitura em Glue 5.0+** | **Acesso de leitura em Glue 5.0+** | A página de limitações ainda diz "Atualmente, o AWS Glue ETL não suporta filtragem de coluna": trate **caminhos de leitura em 5.0+** como suportados e **pré-5.0 e caminhos de escrita** como não suportados, e verifique no seu runtime |
 | **Amazon QuickSight** | Via Athena | Via Athena | Via Athena | A edição Enterprise concede permissões de FGAC a usuários e grupos do QuickSight; a edição Standard concede a roles de IAM (default `aws-quicksight-service-role-v0`) |
 | **Motores personalizados / de terceiros** | Opt-in | Opt-in | Opt-in | Session tag `LakeFormationAuthorizedCaller` mais a allow-list; nunca ligue isso como um atalho de solução de problemas |
 
-### 7.1 Exemplo resolvido E7 — posicionando oito motores na matriz
+### 7.1 Exemplo resolvido E7: posicionando oito motores na matriz
 
 ```text
 Para cada motor: ONDE ele se encaixa, e O QUE quebra se você assumir o contrário?
@@ -757,9 +757,9 @@ Para cada motor: ONDE ele se encaixa, e O QUE quebra se você assumir o contrár
                                row filters do LF não viajam para o SPICE
 ```
 
-**Regra de bolso derivada da matriz:** Lake Formation publica metadados filtrados e credenciais com escopo; **o motor poda a resposta**. Qualquer motor fora dessa lista ou recusa a consulta — ou, pior, retorna dados não filtrados se você concedeu o opt-in de motor externo.
+**Regra de bolso derivada da matriz:** Lake Formation publica metadados filtrados e credenciais com escopo; **o motor poda a resposta**. Qualquer motor fora dessa lista ou recusa a consulta: ou, pior, retorna dados não filtrados se você concedeu o opt-in de motor externo.
 
-- **📚 Você sabia?** A integração do QuickSight tem um split de edição fácil de perder: a edição **Enterprise** deixa você "conceder permissões de controle de acesso fino (FGAC) a usuários e grupos individuais do QuickSight", enquanto os grants da edição **Standard** vão para **roles de IAM**, com a service role default chamada `aws-quicksight-service-role-v0`. Uma vez que o bucket de origem está registrado, "as configurações de acesso ao Amazon S3 no QuickSight são ignoradas, incluindo políticas de IAM de escopo reduzido para usuários e grupos" — Lake Formation vira a fonte única de verdade (documentação do QuickSight e do AWS Big Data Blog, acesso em 2026-10-11).
+- **📚 Você sabia?** A integração do QuickSight tem um split de edição fácil de perder: a edição **Enterprise** deixa você "conceder permissões de controle de acesso fino (FGAC) a usuários e grupos individuais do QuickSight", enquanto os grants da edição **Standard** vão para **roles de IAM**, com a service role default chamada `aws-quicksight-service-role-v0`. Uma vez que o bucket de origem está registrado, "as configurações de acesso ao Amazon S3 no QuickSight são ignoradas, incluindo políticas de IAM de escopo reduzido para usuários e grupos": Lake Formation vira a fonte única de verdade (documentação do QuickSight e do AWS Big Data Blog, acesso em 2026-10-11).
 
 ---
 
@@ -767,11 +767,11 @@ Para cada motor: ONDE ele se encaixa, e O QUE quebra se você assumir o contrár
 
 ### 8.1 Por que seus grants parecem não fazer nada
 
-> "O Lake Formation define a permissão `Super` em todos os databases e tabelas do Data Catalog para um grupo chamado `IAMAllowedPrincipals` por default. Se essa permissão de grupo existir … todos os principais da sua conta terão acesso ao recurso através das políticas de principal do IAM para o AWS Glue." — Guia do Desenvolvedor do LF, *Permissions reference* (acesso em 2026-10-11)
+> "O Lake Formation define a permissão `Super` em todos os databases e tabelas do Data Catalog para um grupo chamado `IAMAllowedPrincipals` por default. Se essa permissão de grupo existir … todos os principais da sua conta terão acesso ao recurso através das políticas de principal do IAM para o AWS Glue.": Guia do Desenvolvedor do LF, *Permissions reference* (acesso em 2026-10-11)
 
 E a consequência, enunciada igualmente diretamente:
 
-> "Essas configurações efetivamente fazem com que o acesso a recursos do Data Catalog e a localizações do Amazon S3 seja controlado exclusivamente por políticas do AWS Identity and Access Management (IAM). Permissões individuais do Lake Formation não estão em vigor." — Guia do Desenvolvedor do LF, *Changing the default settings for your data lake* (acesso em 2026-10-11)
+> "Essas configurações efetivamente fazem com que o acesso a recursos do Data Catalog e a localizações do Amazon S3 seja controlado exclusivamente por políticas do AWS Identity and Access Management (IAM). Permissões individuais do Lake Formation não estão em vigor.": Guia do Desenvolvedor do LF, *Changing the default settings for your data lake* (acesso em 2026-10-11)
 
 Então o estado default de um lake novo ou longamente não modificado é: **Lake Formation instalado, mas desligado.** Os seus brilhantes grants são registrados, auditados e ignorados.
 
@@ -779,11 +779,11 @@ Então o estado default de um lake novo ou longamente não modificado é: **Lake
 |---|---|---|
 | "Meus grants não mudaram nada; todo mundo ainda pode ler" | `ListPermissions` → `Super` em `IAMAllowedPrincipals` ainda está lá? | Revogue-o naquele recurso, ou coloque os principais em modo híbrido |
 | "Grants funcionam para algumas roles, não para outras" | A localização está registrada? O principal tem opt-in? | Registrar + opt-in; ambos são necessários para a emissão |
-| "O row filter existe mas um analista ainda vê tudo" | Eles detêm um segundo grant simples de `SELECT`, ou um grant de tag? | A permissão efetiva é uma **união** — revogue o grant que alarga |
+| "O row filter existe mas um analista ainda vê tudo" | Eles detêm um segundo grant simples de `SELECT`, ou um grant de tag? | A permissão efetiva é uma **união**: revogue o grant que alarga |
 | "O analista contorna tudo de qualquer jeito" | Eles ainda detêm `s3:GetObject` no prefixo? | Apague as permissões diretas de S3; Lake Formation não as revoga para você |
 | "O grant entre contas lança `AccessDeniedException`" | `IAMAllowedPrincipals` no recurso compartilhado | Revogue-o **antes** do grant entre contas |
 
-### 8.2 Exemplo resolvido E8 — a migração documentada, ensaiada
+### 8.2 Exemplo resolvido E8: a migração documentada, ensaiada
 
 ```text
 MICRO-PATRIMÔNIO: 1 bucket, 2 databases, 6 tabelas, 3 roles
@@ -960,7 +960,7 @@ aws lakeformation get-effective-permissions-for-path \
   --resource-arn arn:aws:s3:::acme-lake/gold/
 ```
 
-### 10.2 Exemplo resolvido E9 — lendo de volta um grant corretamente
+### 10.2 Exemplo resolvido E9: lendo de volta um grant corretamente
 
 ```text
 ENTRADA: o analista detém DOIS grants em gold.sales
@@ -992,13 +992,13 @@ CUSTO DA AUDITORIA ... $0 (permissões, grants, revogações e
 ### Atualizações de 2026 (em outubro de 2026)
 
 > [!NOTE]
-> **O que mudou na história da governança do Lake Formation entre o fim de 2024 e outubro de 2026** — cada linha verificada contra uma fonte primária da AWS, e cada uma muda o comportamento atual:
+> **O que mudou na história da governança do Lake Formation entre o fim de 2024 e outubro de 2026**: cada linha verificada contra uma fonte primária da AWS, e cada uma muda o comportamento atual:
 > - **As Governed Tables terminaram.** Escritas e transações pararam de ser suportadas depois de **2024-12-31**, e `GetTableObjects` / `ListTransactions` foram removidos em **2025-02-17**; o substituto que a AWS recomenda são formatos abertos de tabela padrão (Iceberg, incluindo Amazon S3 Tables) com permissões do Lake Formation por cima (AWS Big Data Blog, 2024-10-02; histórico de documentos do LF, acesso em 2026-10-11).
-> - **A integração de catálogo das S3 Tables chegou em 2025-03-13.** Tabelas Iceberg gerenciadas no S3 agora se registram no Lake Formation para permissões finas — observe que o catálogo é o `s3tablescatalog`, não o catálogo Glue default, e os chamadores precisam de `glue:GetCatalog` naquele ARN de catálogo.
+> - **A integração de catálogo das S3 Tables chegou em 2025-03-13.** Tabelas Iceberg gerenciadas no S3 agora se registram no Lake Formation para permissões finas: observe que o catálogo é o `s3tablescatalog`, não o catálogo Glue default, e os chamadores precisam de `glue:GetCatalog` naquele ARN de catálogo.
 > - **A versão 5 de sharing entre contas (2026-02-11) remove o teto de tabelas.** "O Lake Formation configura um único resource share do AWS Resource Access Manager para um número ilimitado de tabelas para outra conta", atualizável pelo console ou pela API; **o downgrade não é suportado**. Shares diretos para um principal IAM externo ainda precisam de versão 3+, shares no modo híbrido de versão 4+.
-> - **Permissões de tabela agora se estendem aos dados S3 subjacentes (2026-06-11).** `GetTemporaryDataLocationCredentials` deixa principais gerenciados pelo Lake Formation obterem acesso temporário ao S3 sem carregar uma política IAM de S3 separada — a resposta mais limpa até agora para o bypass "o seu analista ainda detém `s3:GetObject`".
+> - **Permissões de tabela agora se estendem aos dados S3 subjacentes (2026-06-11).** `GetTemporaryDataLocationCredentials` deixa principais gerenciados pelo Lake Formation obterem acesso temporário ao S3 sem carregar uma política IAM de S3 separada: a resposta mais limpa até agora para o bypass "o seu analista ainda detém `s3:GetObject`".
 > - **IAM Identity Center e propagação de identidade confiável para agentes de IA (2026-10-06).** Agentes do Bedrock podem consultar dados governados pelo Lake Formation sob a **identidade do usuário final**, que é a resposta de governança para acesso de agente em vez de uma service role compartilhada.
-> - **Acesso cross-Region não é novo.** Consultar tabelas Glue/Lake Formation de outra Região por meio de resource links é documentado desde **2023-06-30**; não o apresente como uma funcionalidade de 2025–2026. O que é novo é o cross-account v5, a permissão-de-tabela-para-dados-S3 e a propagação de identidade.
+> - **Acesso cross-Region não é novo.** Consultar tabelas Glue/Lake Formation de outra Região por meio de resource links é documentado desde **2023-06-30**; não o apresente como uma funcionalidade de 2025 to 2026. O que é novo é o cross-account v5, a permissão-de-tabela-para-dados-S3 e a propagação de identidade.
 
 - **📚 Você sabia?** Duas dessas atualizações são silenciosamente estruturais para esta lição. ABAC (controle de acesso baseado em atributos via tags) foi formalmente documentado em **2025-04-17**, e é por isso que grants de expressão de tag agora aparecem ao lado de grants de recurso nomeado na mesma lista de permissões; e o pôr do sol das Governed Tables significa que qualquer requisito de "sharing ACID governado" deve agora ser respondido com **Iceberg mais grants do Lake Formation**, não com um tipo de tabela aposentado.
 
@@ -1006,9 +1006,9 @@ CUSTO DA AUDITORIA ... $0 (permissões, grants, revogações e
 
 ## Casos Reais
 
-A AWS publica como esses modelos de permissão se parecem em escala de produção. Todo número abaixo é **afirmação do cliente ou da AWS e não auditado**, com a fonte e a data nomeadas para que você possa verificar — o ponto examinável é o **padrão**, não o marketing.
+A AWS publica como esses modelos de permissão se parecem em escala de produção. Todo número abaixo é **afirmação do cliente ou da AWS e não auditado**, com a fonte e a data nomeadas para que você possa verificar, o ponto examinável é o **padrão**, não o marketing.
 
-### Caso A — Integral Ad Science: centenas de regras de permissão reduzidas a duas
+### Caso A, Integral Ad Science: centenas de regras de permissão reduzidas a duas
 
 | Elemento | Detalhe |
 |---|---|
@@ -1019,22 +1019,22 @@ A AWS publica como esses modelos de permissão se parecem em escala de produçã
 | Resultado | "Com os controles de acesso baseados em tags do Lake Formation, a IAS reduziu centenas de regras de permissão a precisamente duas regras"; "Tags são herdadas, então elas só precisam ser aplicadas no nível mais alto" |
 | Fonte | AWS Big Data Blog, *Integral Ad Science secures self-service data lake using AWS Lake Formation*, **2021-09-23** (digest 18, fonte S9; acesso em 2026-10-11) |
 
-O padrão examinável: **o ganho real do TBAC é operacional.** Uma ontologia de um punhado de tags herdadas substitui uma matriz ingovernável de grants por tabela — a aritmética da Seção 5.4 em produção. Observe também o que a IAS *não* pulou: controles em nível de coluna mais tagging carregaram a resposta de conformidade, e o grant de tag ainda precisava coexistir com quaisquer exceções em nível de linha que o negócio exigisse.
+O padrão examinável: **o ganho real do TBAC é operacional.** Uma ontologia de um punhado de tags herdadas substitui uma matriz ingovernável de grants por tabela: a aritmética da Seção 5.4 em produção. Observe também o que a IAS *não* pulou: controles em nível de coluna mais tagging carregaram a resposta de conformidade, e o grant de tag ainda precisava coexistir com quaisquer exceções em nível de linha que o negócio exigisse.
 
-### Caso B — FanDuel: grants de coluna em vez de mascaramento baseado em cópia
+### Caso B, FanDuel: grants de coluna em vez de mascaramento baseado em cópia
 
 | Elemento | Detalhe |
 |---|---|
-| Cliente | **FanDuel Group**, apostas esportivas e jogos — presença em **50 estados** e **mais de 8,5 milhões de clientes** |
-| Desafio | Três data warehouses Amazon Redshift fundidos em uma plataforma (warehouse + lake); o design anterior dividia PII em arquivos separados com tags no S3, e cada nova fonte de dados custava **100–200 horas de tempo de desenvolvimento** |
+| Cliente | **FanDuel Group**, apostas esportivas e jogos: presença em **50 estados** e **mais de 8,5 milhões de clientes** |
+| Desafio | Três data warehouses Amazon Redshift fundidos em uma plataforma (warehouse + lake); o design anterior dividia PII em arquivos separados com tags no S3, e cada nova fonte de dados custava **100 to 200 horas de tempo de desenvolvimento** |
 | Serviços | **AWS Lake Formation** (localização S3 registrada, permissões baseadas em coluna), esquemas externos **Amazon Redshift Spectrum** vinculados por role, **AWS Glue** ETL escrevendo Parquet mais crawlers, grupos IAM/Redshift para sincronização de direitos |
-| Padrão | Duas roles de analista: **`LimitedPIIAnalyst`** com acesso concedido a todas as colunas, **`NonPIIAnalyst`** com acesso concedido a colunas não-PII e atribuída aos analistas por default — um dataset, muitas views |
-| Resultado | "O controle de acesso em nível de coluna do Lake Formation permitiu que eles protegessem os dados de PII, que de outra forma teria exigido uma abordagem complexa baseada em tags no S3. Isso economizou 100–200 horas de tempo de desenvolvimento para cada nova fonte de dados e novo footprint de dados." |
+| Padrão | Duas roles de analista: **`LimitedPIIAnalyst`** com acesso concedido a todas as colunas, **`NonPIIAnalyst`** com acesso concedido a colunas não-PII e atribuída aos analistas por default: um dataset, muitas views |
+| Resultado | "O controle de acesso em nível de coluna do Lake Formation permitiu que eles protegessem os dados de PII, que de outra forma teria exigido uma abordagem complexa baseada em tags no S3. Isso economizou 100 to 200 horas de tempo de desenvolvimento para cada nova fonte de dados e novo footprint de dados." |
 | Fonte | AWS Big Data Blog, *How FanDuel Group secures personally identifiable information in a data lake using AWS Lake Formation*, **2020-12-21** (digest 18, fonte S10; acesso em 2026-10-11) |
 
-O padrão examinável: **grants em nível de coluna matam o mascaramento baseado em cópia.** O requisito "esconder PII dos analistas em geral" é satisfeito por *uma* exclusão `TableWithColumns` em *uma* tabela catalogada — sem segunda cópia dos dados, sem ritual de tagging por fonte. Esta é a alternativa mais barata da Seção 4, e é por isso que a FanDuel nunca precisou de row filters para aquele problema em particular.
+O padrão examinável: **grants em nível de coluna matam o mascaramento baseado em cópia.** O requisito "esconder PII dos analistas em geral" é satisfeito por *uma* exclusão `TableWithColumns` em *uma* tabela catalogada: sem segunda cópia dos dados, sem ritual de tagging por fonte. Esta é a alternativa mais barata da Seção 4, e é por isso que a FanDuel nunca precisou de row filters para aquele problema em particular.
 
-### Caso C — Morningstar: uma ontologia de tags, dois planos de aplicação
+### Caso C, Morningstar: uma ontologia de tags, dois planos de aplicação
 
 | Elemento | Detalhe |
 |---|---|
@@ -1044,7 +1044,7 @@ O padrão examinável: **grants em nível de coluna matam o mascaramento baseado
 | Padrão | Fonte única de política → dois planos de aplicação; "nós escolhemos o controle de acesso baseado em tags do Lake Formation (LF-TBAC)" e "construímos dois componentes que tratam do mapeamento dos controles de acesso baseados em tag para permissões do Amazon Redshift" |
 | Fonte | AWS Big Data Blog, *How Morningstar used tag-based access controls in AWS Lake Formation…*, **2023-04-06** (digest 12 fonte 49; digest 18 fonte S17; acesso em 2026-10-11) |
 
-O padrão examinável: **a ontologia de tags é portátil, a aplicação não é.** O Redshift suporta direitos baseados em recurso mas não baseados em tag, então uma equipe que quer um único modelo de governança deve construir a tradução — que é precisamente o limite que a matriz de motores da Seção 7 está desenhando.
+O padrão examinável: **a ontologia de tags é portátil, a aplicação não é.** O Redshift suporta direitos baseados em recurso mas não baseados em tag, então uma equipe que quer um único modelo de governança deve construir a tradução: que é precisamente o limite que a matriz de motores da Seção 7 está desenhando.
 
 | Caso | Padrão do Lake Formation que demonstra | Seção |
 |---|---|---|
@@ -1052,7 +1052,7 @@ O padrão examinável: **a ontologia de tags é portátil, a aplicação não é
 | FanDuel | **Grants em nível de coluna** substituindo um design de PII com tag-S3/arquivo-duplo | 4, 7 |
 | Morningstar | **Ontologia de tags mapeada para um segundo plano** (Redshift) | 5, 7 |
 
-- **📚 Você sabia?** Todos os três casos datam de **2020–2023** e devem ser apresentados dessa forma: os 8,5 milhões de clientes da FanDuel e o "centenas → duas regras" da IAS são snapshots daquelas implantações na época em que a AWS os publicou, não estados atuais daquelas plataformas. As alegações de arquitetura deles — grants de coluna, tags herdadas, um workgroup por unidade de negócio — permanecem os padrões documentados; os números deles são históricos.
+- **📚 Você sabia?** Todos os três casos datam de **2020 to 2023** e devem ser apresentados dessa forma: os 8,5 milhões de clientes da FanDuel e o "centenas → duas regras" da IAS são snapshots daquelas implantações na época em que a AWS os publicou, não estados atuais daquelas plataformas. As alegações de arquitetura deles, grants de coluna, tags herdadas, um workgroup por unidade de negócio, permanecem os padrões documentados; os números deles são históricos.
 
 ---
 
@@ -1070,7 +1070,7 @@ O padrão examinável: **a ontologia de tags é portátil, a aplicação não é
     "Ele fornece um statement de deny que pode ser anexado a qualquer coluna, sobrescrevendo todos os outros grants"
   ],
   "correct": 1,
-  "explanation": "A AWS descreve o Lake Formation como fornecedor de 'seu próprio modelo de permissões que complementa o modelo de permissões do IAM' e como um modelo de permissões RDBMS para catálogos, databases, tabelas e colunas. O IAM permanece como a Porta 1 para as APIs glue, lakeformation e s3, o Lake Formation decide a visibilidade e emite credenciais temporárias, e não existe primitiva de deny - o menor privilégio é alcançado por não conceder nada por default. O anúncio de GA é explícito de que as políticas separadas mais antigas 'só permitiam acesso em nível de tabela'."
+  "explanation": "A AWS descreve o Lake Formation como fornecedor de 'seu próprio modelo de permissões que complementa o modelo de permissões do IAM' e como um modelo de permissões RDBMS para catálogos, databases, tabelas e colunas. O IAM permanece como a Porta 1 para as APIs glue, lakeformation e s3, o Lake Formation decide a visibilidade e emite credenciais temporárias, e não existe primitiva de deny: o menor privilégio é alcançado por não conceder nada por default. O anúncio de GA é explícito de que as políticas separadas mais antigas 'só permitiam acesso em nível de tabela'."
 }
 ```
 
@@ -1102,7 +1102,7 @@ O padrão examinável: **a ontologia de tags é portátil, a aplicação não é
     "Grants devem ser reemitidos com a grant option antes de entrar em vigor"
   ],
   "correct": 1,
-  "explanation": "A referência de permissões afirma que o Lake Formation define Super para IAMAllowedPrincipals por default e que enquanto essa permissão existe, todos os principais na conta recebem Super ou All no recurso através de suas políticas de IAM do Glue - permissões individuais do Lake Formation então não estão em vigor. O conserto documentado é revogar essa permissão ou migrar para o modo de acesso híbrido com opt-ins explícitos. Políticas de bucket não podem explicar a legibilidade em todo o catálogo, e a grant option não tem nada a ver com aplicação."
+  "explanation": "A referência de permissões afirma que o Lake Formation define Super para IAMAllowedPrincipals por default e que enquanto essa permissão existe, todos os principais na conta recebem Super ou All no recurso através de suas políticas de IAM do Glue: permissões individuais do Lake Formation então não estão em vigor. O conserto documentado é revogar essa permissão ou migrar para o modo de acesso híbrido com opt-ins explícitos. Políticas de bucket não podem explicar a legibilidade em todo o catálogo, e a grant option não tem nada a ver com aplicação."
 }
 ```
 
@@ -1128,13 +1128,13 @@ O padrão examinável: **a ontologia de tags é portátil, a aplicação não é
   "type": "multiple-choice",
   "question": "Uma política deve mostrar aos analistas apenas linhas onde region = 'eu' E deve esconder a coluna salary. Qual construção produz segurança em nível de célula?",
   "options": [
-    "Dois grants separados: uma exclusão TableWithColumns para salary e um segundo grant de row filter - juntos eles formam um filtro de célula",
+    "Dois grants separados: uma exclusão TableWithColumns para salary e um segundo grant de row filter: juntos eles formam um filtro de célula",
     "Um data filter em gold.sales cujo RowFilter.FilterExpression é region = 'eu' e cujo ColumnWildcard.ExcludedColumnNames inclui salary, concedido com SELECT",
-    "Um curinga de todas as colunas mais a expressão de linha - isso é célula por definição",
-    "Uma lista de inclusão de colunas junto com AllRowsWildcard - isso é célula por definição"
+    "Um curinga de todas as colunas mais a expressão de linha: isso é célula por definição",
+    "Uma lista de inclusão de colunas junto com AllRowsWildcard: isso é célula por definição"
   ],
   "correct": 1,
-  "explanation": "A AWS define as combinações com precisão: todas as colunas mais uma expressão de linha é apenas nível de linha; colunas incluídas ou excluídas mais todas as linhas é apenas nível de coluna; colunas MAIS uma expressão de linha juntas em um único data filter é nível de célula. Dois grants separados não se compõem em um filtro de célula - eles se unem, e o grant mais amplo vence. Criar o filtro também requer SELECT com a grant option em todas as colunas da tabela, e a expressão deve ter menos de 2.048 caracteres."
+  "explanation": "A AWS define as combinações com precisão: todas as colunas mais uma expressão de linha é apenas nível de linha; colunas incluídas ou excluídas mais todas as linhas é apenas nível de coluna; colunas MAIS uma expressão de linha juntas em um único data filter é nível de célula. Dois grants separados não se compõem em um filtro de célula: eles se unem, e o grant mais amplo vence. Criar o filtro também requer SELECT com a grant option em todas as colunas da tabela, e a expressão deve ter menos de 2.048 caracteres."
 }
 ```
 
@@ -1160,9 +1160,9 @@ O padrão examinável: **a ontologia de tags é portátil, a aplicação não é
   "type": "multiple-choice",
   "question": "Uma tabela é coberta por um grant de LF-Tag, e você também quer um row filter de region = 'eu' para dois analistas. O que você deve fazer?",
   "options": [
-    "Anexar a expressão de row filter ao grant de LF-Tag - grants de tag aceitam expressões de filtro como valores",
+    "Anexar a expressão de row filter ao grant de LF-Tag: grants de tag aceitam expressões de filtro como valores",
     "Usar a rota de recurso nomeado: criar um data filter e conceder SELECT naquele DataCellsFilter aos dois analistas, porque data filters não podem ser aplicados quando LF-Tags gerenciam permissões no recurso",
-    "Codificar region como um novo valor de LF-Tag e adicioná-lo à tag policy - tags e filtros são intercambiáveis",
+    "Codificar region como um novo valor de LF-Tag e adicioná-lo à tag policy, tags e filtros são intercambiáveis",
     "Row filters funcionam ao lado de grants de tag automaticamente; nenhuma configuração adicional é necessária"
   ],
   "correct": 1,
@@ -1182,7 +1182,7 @@ O padrão examinável: **a ontologia de tags é portátil, a aplicação não é
     "Chaves separadas são combinadas com OR e múltiplos valores da mesma chave com AND; a herança vai de coluna para tabela para database"
   ],
   "correct": 2,
-  "explanation": "A AWS afirma que as chaves de tag são combinadas com a operação AND enquanto os valores são combinados com a operação OR, e que tabelas herdam LF-Tags de databases, colunas herdam de tabelas, com valores herdados sobrescrevíveis. Tags devem ser pré-definidas antes da atribuição. A direção da herança é database -> table -> column, nunca o inverso, e uma tag escrita no nível do database portanto alcança toda tabela sob ela - que é a economia inteira do caso da IAS."
+  "explanation": "A AWS afirma que as chaves de tag são combinadas com a operação AND enquanto os valores são combinados com a operação OR, e que tabelas herdam LF-Tags de databases, colunas herdam de tabelas, com valores herdados sobrescrevíveis. Tags devem ser pré-definidas antes da atribuição. A direção da herança é database -> table -> column, nunca o inverso, e uma tag escrita no nível do database portanto alcança toda tabela sob ela: que é a economia inteira do caso da IAS."
 }
 ```
 
@@ -1192,13 +1192,13 @@ O padrão examinável: **a ontologia de tags é portátil, a aplicação não é
   "type": "multiple-choice",
   "question": "Uma conta produtora tenta compartilhar gold.sales com uma conta AWS externa e recebe AccessDeniedException do Lake Formation. Qual sequência de consertos está correta?",
   "options": [
-    "Elevar a versão de cross-account para 5 primeiro, depois compartilhar - a configuração de versão sozinha remove a negação",
+    "Elevar a versão de cross-account para 5 primeiro, depois compartilhar: a configuração de versão sozinha remove a negação",
     "Revogar todas as permissões do Lake Formation de IAMAllowedPrincipals no recurso, garantir que o grantor detém AWSLakeFormationCrossAccountManager, conceder WITH GRANT OPTION, depois fazer o administrador de data lake do consumidor aceitar o share do RAM, criar um resource link e re-conceder localmente",
-    "Anexar uma política de recurso do Glue à conta consumidora e copiar a tabela para cá - o sharing entre contas não usa Lake Formation",
+    "Anexar uma política de recurso do Glue à conta consumidora e copiar a tabela para cá: o sharing entre contas não usa Lake Formation",
     "Conceder diretamente ao principal externo sem a grant option, porque grants externos não podem carregar delegação"
   ],
   "correct": 1,
-  "explanation": "A AWS lista os pré-requisitos: as permissões de IAMAllowedPrincipals devem ser revogadas primeiro ou o Lake Formation lança AccessDeniedException; o grantor deve deter a política gerenciada pela AWS AWSLakeFormationCrossAccountManager; pelo menos um administrador de data lake da conta consumidora deve existir para ver e re-conceder o share; e grants entre contas devem carregar a grant option. O Lake Formation usa o AWS RAM - shares da mesma organização aparecem imediatamente, fora de uma organização um convite deve ser aceito - e o consumidor então cria um resource link antes de conceder permissões reais no objeto compartilhado."
+  "explanation": "A AWS lista os pré-requisitos: as permissões de IAMAllowedPrincipals devem ser revogadas primeiro ou o Lake Formation lança AccessDeniedException; o grantor deve deter a política gerenciada pela AWS AWSLakeFormationCrossAccountManager; pelo menos um administrador de data lake da conta consumidora deve existir para ver e re-conceder o share; e grants entre contas devem carregar a grant option. O Lake Formation usa o AWS RAM: shares da mesma organização aparecem imediatamente, fora de uma organização um convite deve ser aceito, e o consumidor então cria um resource link antes de conceder permissões reais no objeto compartilhado."
 }
 ```
 
@@ -1214,7 +1214,7 @@ O padrão examinável: **a ontologia de tags é portátil, a aplicação não é
     "Todo serviço de analytics da AWS aplica permissões do Lake Formation de forma idêntica, porque o Lake Formation executa a filtragem centralmente antes de o motor rodar"
   ],
   "correct": 2,
-  "explanation": "O Lake Formation publica metadados filtrados e credenciais emitidas; o serviço integrado executa a filtragem de fato, e é por isso que o suporte é desigual. Athena Spark não suporta consultar tabelas do Data Catalog com permissões do Lake Formation, Hive em EMR Serverless e EMR on EKS não são suportados, Hive on EMR EC2 carece de suporte a linha e célula, segurança em nível de célula precisa da versão 3 do motor do Athena ou de Redshift Spectrum, e a documentação do Glue ainda diz 'Atualmente, o AWS Glue ETL não suporta filtragem de coluna' enquanto a matriz de serviços credita o Glue 5.0+ com acesso de leitura - então apenas caminhos de leitura em 5.0+ são seguros de afirmar."
+  "explanation": "O Lake Formation publica metadados filtrados e credenciais emitidas; o serviço integrado executa a filtragem de fato, e é por isso que o suporte é desigual. Athena Spark não suporta consultar tabelas do Data Catalog com permissões do Lake Formation, Hive em EMR Serverless e EMR on EKS não são suportados, Hive on EMR EC2 carece de suporte a linha e célula, segurança em nível de célula precisa da versão 3 do motor do Athena ou de Redshift Spectrum, e a documentação do Glue ainda diz 'Atualmente, o AWS Glue ETL não suporta filtragem de coluna' enquanto a matriz de serviços credita o Glue 5.0+ com acesso de leitura: então apenas caminhos de leitura em 5.0+ são seguros de afirmar."
 }
 ```
 
@@ -1225,12 +1225,12 @@ O padrão examinável: **a ontologia de tags é portátil, a aplicação não é
   "question": "O row filter do Lake Formation de um analista funciona no Athena, mas depois que um dashboard do QuickSight importa a tabela para o SPICE, leitores veem linhas que o filtro deveria ter removido. Qual é a explicação e o remédio corretos?",
   "options": [
     "QuickSight ignora o Lake Formation inteiramente; o conserto é reescrever o grant como uma política de IAM",
-    "SPICE congela os dados no momento da importação, então row filters do Lake Formation não podem se aplicar à cópia importada - use consulta direta, propagação de identidade confiável com IAM Identity Center e consulta direta (sem SPICE), ou replique os filtros do Lake Formation em um dataset de regras de row-level-security do QuickSight",
+    "SPICE congela os dados no momento da importação, então row filters do Lake Formation não podem se aplicar à cópia importada: use consulta direta, propagação de identidade confiável com IAM Identity Center e consulta direta (sem SPICE), ou replique os filtros do Lake Formation em um dataset de regras de row-level-security do QuickSight",
     "O row filter deve ser reaplicado no dataset do SPICE usando o mesmo objeto de data filter do Lake Formation",
     "QuickSight Enterprise não pode usar o Lake Formation de modo algum; apenas a edição Standard com roles de IAM pode"
   ],
   "correct": 1,
-  "explanation": "QuickSight alcança o Lake Formation através do Athena, e uma vez que o bucket de origem está registrado as próprias configurações de acesso ao S3 do QuickSight são ignoradas. Mas uma importação SPICE copia as linhas, então direitos do lado da origem não podem ser aplicados na cópia. As rotas documentadas pela AWS são consulta direta, propagação de identidade confiável (requer autenticação do IAM Identity Center e não pode usar SPICE, e só funciona para datasets de consulta direta), ou o padrão publicado pela AWS que replica data filters do Lake Formation em um dataset de regras de row-level-security do QuickSight. A edição Enterprise é a edição que concede FGAC a usuários e grupos do QuickSight - não é a limitação aqui."
+  "explanation": "QuickSight alcança o Lake Formation através do Athena, e uma vez que o bucket de origem está registrado as próprias configurações de acesso ao S3 do QuickSight são ignoradas. Mas uma importação SPICE copia as linhas, então direitos do lado da origem não podem ser aplicados na cópia. As rotas documentadas pela AWS são consulta direta, propagação de identidade confiável (requer autenticação do IAM Identity Center e não pode usar SPICE, e só funciona para datasets de consulta direta), ou o padrão publicado pela AWS que replica data filters do Lake Formation em um dataset de regras de row-level-security do QuickSight. A edição Enterprise é a edição que concede FGAC a usuários e grupos do QuickSight: não é a limitação aqui."
 }
 ```
 
@@ -1246,28 +1246,28 @@ O padrão examinável: **a ontologia de tags é portátil, a aplicação não é
     "Governança de terceiros é sempre preferível porque os serviços da AWS não podem ser auditados"
   ],
   "correct": 2,
-  "explanation": "As três opções diferem em escopo, não em gosto. Lake Formation explicitamente 'complementa o modelo de permissões do IAM' e cobra $0 por permissões, tags e sharing entre contas enquanto ainda exige IAM para o plano de controle; o próprio anúncio de GA da AWS diz que as políticas separadas anteriores 'só permitiam acesso em nível de tabela' e o blog de governança do Spectrum diz que políticas de bucket param de escalar conforme combinações de níveis de acesso e usuários crescem; e uma ferramenta de terceiros tem que reimplementar a emissão de credenciais de caller confiável para cada motor. IAM e políticas de bucket permanecem necessários - eles apenas não são suficientes, e o Lake Formation não revoga o s3:GetObject residual do analista."
+  "explanation": "As três opções diferem em escopo, não em gosto. Lake Formation explicitamente 'complementa o modelo de permissões do IAM' e cobra $0 por permissões, tags e sharing entre contas enquanto ainda exige IAM para o plano de controle; o próprio anúncio de GA da AWS diz que as políticas separadas anteriores 'só permitiam acesso em nível de tabela' e o blog de governança do Spectrum diz que políticas de bucket param de escalar conforme combinações de níveis de acesso e usuários crescem; e uma ferramenta de terceiros tem que reimplementar a emissão de credenciais de caller confiável para cada motor. IAM e políticas de bucket permanecem necessários: eles apenas não são suficientes, e o Lake Formation não revoga o s3:GetObject residual do analista."
 }
 ```
 
 > [!WARNING]
-> ⚠️ **Armadilhas de padrão desta lição — percorra esta lista antes de projetar qualquer coisa:**
-> - **"Meus grants não fazem nada"** quase sempre é `IAMAllowedPrincipals` ainda detendo `Super`, uma **localização não registrada**, ou um principal **sem opt-in** — nessa ordem de probabilidade.
+> ⚠️ **Armadilhas de padrão desta lição: percorra esta lista antes de projetar qualquer coisa:**
+> - **"Meus grants não fazem nada"** quase sempre é `IAMAllowedPrincipals` ainda detendo `Super`, uma **localização não registrada**, ou um principal **sem opt-in**: nessa ordem de probabilidade.
 > - **Registro ≠ híbrido.** O registro é sobre emissão de credenciais; o híbrido é sobre qual modelo de permissão se aplica, e é dado opt-in **por principal**.
 > - **Lake Formation não revoga suas chaves de S3.** Qualquer principal detendo `s3:GetObject` no prefixo contorna todo row filter que você construir; apagar essas políticas é uma etapa da migração.
-> - **Não existe statement de deny.** A permissão efetiva é a **união** dos grants de recurso nomeado, de tag-policy e de data filter — um segundo `SELECT` simples reinclui tudo o que você excluiu.
+> - **Não existe statement de deny.** A permissão efetiva é a **união** dos grants de recurso nomeado, de tag-policy e de data filter: um segundo `SELECT` simples reinclui tudo o que você excluiu.
 > - **Tags e data filters não se misturam.** Filtros de linha/coluna/célula precisam de um grant de recurso nomeado, então um patrimônio dirigido por tags sempre carrega uma lista de exceções documentada.
 > - **Aritmética de filtros:** expressão **< 2.048 caracteres**, **≤ 100 data filters por principal por tabela**, precisa de `SELECT` **com a grant option**, **sem comparação coluna-com-coluna**, **sem array/map**, strings **case-sensitive**, **sem filtragem de coluna de chave de partição**, e **todas-as-linhas prevalece** sobre um predicado concorrente.
 > - **Nível de célula precisa da versão 3 do motor do Athena ou de Redshift Spectrum**; Athena Spark, Hive em EMR Serverless e EMR on EKS não são suportados; Hive on EMR EC2 não tem linha/célula; **filtragem de coluna no Glue ETL apenas para caminhos de leitura em 5.0+**.
-> - **SPICE do QuickSight não herda row filters do Lake Formation** — a importação é a fronteira do direito.
+> - **SPICE do QuickSight não herda row filters do Lake Formation**: a importação é a fronteira do direito.
 > - **Ordem de cross-account:** revogar `IAMAllowedPrincipals` → conceder **com a grant option** → aceitar o share do RAM → resource link → re-conceder no objeto compartilhado; shares diretos para principal precisam de versão **3+**, shares híbridos **4+**, e a versão **5** (2026-02-11) remove o teto de tabelas por share com **sem downgrade**.
 > - **Admin ≠ acesso a dados:** um administrador de data lake adicionado depois que um database existe não recebe `SELECT` ou `DESCRIBE` implícitos, não pode adicionar outros administradores, e há um teto default de **30** por conta.
 
 > [!IMPORTANT]
-> **Veredito Comparativo — Lake Formation vs permissões puras de IAM + S3 vs uma plataforma de governança de terceiros**
-> - **Versus permissões puras de IAM e políticas de bucket S3:** o IAM responde *alcance* (`glue:*`, `lakeformation:GetDataAccess` com `Resource: "*"`, `s3:*`) e as políticas de bucket respondem *perímetro de rede e de conta*; nenhuma das duas tem dimensão de coluna ou de linha. O próprio post de GA da AWS diz que as políticas separadas mais antigas "só permitiam acesso em nível de tabela", e o blog de governança do Spectrum diz que políticas de bucket param de escalar "quando o número de combinações de níveis de acesso e usuários aumenta". Escolha IAM cru para o que o IAM é bom — APIs, condições, escopo de organização — e aceite que cada time adicional custa outra reafirmação de cada regra de prefixo (Seção 1.2: **156 statements → +48 por novo time**, derivado).
-> - **Versus uma plataforma de governança de terceiros:** o Lake Formation entrega a parte que um terceiro tem que reconstruir — emissão de credenciais de caller confiável para Athena, Redshift Spectrum, EMR e Glue, mais sharing entre contas dirigido pelo AWS RAM —, e as permissões em si custam **$0**, com apenas a Storage API (bytes varridos, arredondados para o MB seguinte, **mínimo de 10 MB**), as Governed Tables e o otimizador de storage cobrando. Escolha um terceiro apenas quando a governança precisar abranger catálogos não-AWS ou motores não-integrados; espere reimplementar a matriz de motores da Seção 7 você mesmo.
-> - **Versus não fazer nada (uma família de política por time):** a diferença não é nível de segurança, é *forma*. Grants do Lake Formation por recurso nomeado têm a mesma contagem que entradas de IAM até as tags chegarem; nesse ponto a contagem para de depender do volume de tabelas — o próprio exemplo da AWS colapsa em **17 permissões a partir de 5 atribuições + 8 grants**, e a IAS reporta **centenas → duas regras** (AWS Big Data Blog, 2021-09-23).
+> **Veredito Comparativo: Lake Formation vs permissões puras de IAM + S3 vs uma plataforma de governança de terceiros**
+> - **Versus permissões puras de IAM e políticas de bucket S3:** o IAM responde *alcance* (`glue:*`, `lakeformation:GetDataAccess` com `Resource: "*"`, `s3:*`) e as políticas de bucket respondem *perímetro de rede e de conta*; nenhuma das duas tem dimensão de coluna ou de linha. O próprio post de GA da AWS diz que as políticas separadas mais antigas "só permitiam acesso em nível de tabela", e o blog de governança do Spectrum diz que políticas de bucket param de escalar "quando o número de combinações de níveis de acesso e usuários aumenta". Escolha IAM cru para o que o IAM é bom, APIs, condições, escopo de organização, e aceite que cada time adicional custa outra reafirmação de cada regra de prefixo (Seção 1.2: **156 statements → +48 por novo time**, derivado).
+> - **Versus uma plataforma de governança de terceiros:** o Lake Formation entrega a parte que um terceiro tem que reconstruir, emissão de credenciais de caller confiável para Athena, Redshift Spectrum, EMR e Glue, mais sharing entre contas dirigido pelo AWS RAM, e as permissões em si custam **$0**, com apenas a Storage API (bytes varridos, arredondados para o MB seguinte, **mínimo de 10 MB**), as Governed Tables e o otimizador de storage cobrando. Escolha um terceiro apenas quando a governança precisar abranger catálogos não-AWS ou motores não-integrados; espere reimplementar a matriz de motores da Seção 7 você mesmo.
+> - **Versus não fazer nada (uma família de política por time):** a diferença não é nível de segurança, é *forma*. Grants do Lake Formation por recurso nomeado têm a mesma contagem que entradas de IAM até as tags chegarem; nesse ponto a contagem para de depender do volume de tabelas, o próprio exemplo da AWS colapsa em **17 permissões a partir de 5 atribuições + 8 grants**, e a IAS reporta **centenas → duas regras** (AWS Big Data Blog, 2021-09-23).
 > - **O veredito em uma frase:** em outubro de 2026, **mantenha o IAM para autenticação e perímetro de rede, coloque todo objeto de catálogo sob grants do Lake Formation com `IAMAllowedPrincipals` revogado e localizações registradas, dirija o alcance em massa com LF-Tags, separe regras de linha e de célula como data filters de recurso nomeado, compartilhe pelo RAM com a grant option, e recorra a uma plataforma de terceiros apenas onde não existir um motor integrado para fazer a filtragem.**
 
 > [!SUCCESS]
@@ -1276,11 +1276,11 @@ O padrão examinável: **a ontologia de tags é portátil, a aplicação não é
 > 2. **Duas perguntas ortogonais** decidem tudo: *a localização está registrada?* (emissão de credenciais) e *qual modelo de permissão se aplica?* (modo Lake Formation vs **modo de acesso híbrido**, onde principais com opt-in precisam dos **dois** planos e apenas `CREATE_TABLE`, `CREATE_PARTITION`, `UPDATE_TABLE` são aplicados por default).
 > 3. **A escada de granularidade** é catalog → database → table → column → row → cell, carregada por exatamente dois mecanismos: **grants de recurso nomeado** (incluindo filtros de coluna `TableWithColumns`) e **data filters** (`DataCellsFilter`), com **grants de LF-Tag** como a sobreposição de escala em massa.
 > 4. **Nível de linha** = curinga de todas as colunas + predicado; **nível de coluna** = especificação de coluna + todas-as-linhas; **nível de célula** = ambos em um único objeto. Sintaxe `WHERE` do PartiQL, **< 2.048 caracteres**, **≤ 100 filtros por principal por tabela**, sem comparação coluna-com-coluna, sem `array`/`map`, **case-sensitive**, **chaves de partição não podem receber filtragem de coluna**, e nível de célula precisa da **versão 3 do motor do Athena ou de Redshift Spectrum**.
-> 5. **A política de analista resolvida** é um único data filter (`region = 'eu'` mais `ExcludedColumnNames: ["salary"]`) concedido com `SELECT`, mais um `DESCRIBE` separado para visibilidade — e deve ser reauditado após cada novo grant, porque permissões se **unem** e **não existe primitiva de deny**.
-> 6. **LF-Tags** são pares chave/valor pré-definidos em databases, tabelas e colunas; a herança vai **database → table → column** e é sobrescrevível; **chaves separadas com AND, valores de uma chave com OR**; tags escalam porque grants nomeiam atributos, não tabelas — exemplo da AWS: **5 atribuições + 8 grants = 17 permissões**; IAS: **centenas de regras → duas** (2021-09-23).
-> 7. **Tags e data filters nunca se combinam** — filtros de linha/coluna/célula exigem o método de recurso nomeado, então um patrimônio TBAC carrega uma lista de exceções de recurso nomeado deliberada e revisável.
+> 5. **A política de analista resolvida** é um único data filter (`region = 'eu'` mais `ExcludedColumnNames: ["salary"]`) concedido com `SELECT`, mais um `DESCRIBE` separado para visibilidade, e deve ser reauditado após cada novo grant, porque permissões se **unem** e **não existe primitiva de deny**.
+> 6. **LF-Tags** são pares chave/valor pré-definidos em databases, tabelas e colunas; a herança vai **database → table → column** e é sobrescrevível; **chaves separadas com AND, valores de uma chave com OR**; tags escalam porque grants nomeiam atributos, não tabelas: exemplo da AWS: **5 atribuições + 8 grants = 17 permissões**; IAS: **centenas de regras → duas** (2021-09-23).
+> 7. **Tags e data filters nunca se combinam**: filtros de linha/coluna/célula exigem o método de recurso nomeado, então um patrimônio TBAC carrega uma lista de exceções de recurso nomeado deliberada e revisável.
 > 8. **Sharing entre contas** roda pelo **AWS RAM**: revogue `IAMAllowedPrincipals` primeiro (senão `AccessDeniedException`), o grantor detém `AWSLakeFormationCrossAccountManager`, conceda **com a grant option**, mesma organização é instantâneo / fora da organização precisa de um convite, o **administrador de data lake** do consumidor (teto default **30**) cria um **resource link** e re-concede localmente; versões **3+** para principais IAM diretos, **4+** para híbrido, **5** (2026-02-11) para tabelas ilimitadas com **sem downgrade**.
 > 9. **Callers confiáveis** são os motores integrados por default; motores de terceiros precisam de `AllowExternalDataFiltering` + `ExternalDataFilteringAllowList` + session tag **`LakeFormationAuthorizedCaller`** (o exemplo `LakeFormationTrustedCaller` da referência da API é uma discrepância documentada), e `AllowFullTableExternalDataAccess` deve permanecer **false**.
 > 10. **Matriz de motores:** Athena SQL, Redshift Spectrum e Spark on EMR EC2 aplicam tudo; **Athena Spark, Hive em EMR Serverless e EMR on EKS não são suportados**; **Hive on EMR EC2 não tem linha/célula**; **Glue ETL apenas para caminhos de leitura em 5.0+**; QuickSight vai **pelo Athena** (Enterprise = FGAC a usuários/grupos, Standard = roles de IAM como `aws-quicksight-service-role-v0`) e **SPICE ignora row filters do Lake Formation**.
 > 11. **A migração é em estágios e reversível:** inventário → replicar (um no-op seguro) → adicionar `GetDataAccess` → registrar → **revogar `IAMAllowedPrincipals`** → desligar os defaults *"Use only IAM access control"* → **apagar as políticas antigas de IAM/S3**; o rollback é deregistrar a localização ou apagar o opt-in. Nunca revogue antes de validar.
-> 12. **Âncoras de caso:** **Integral Ad Science** cortou "centenas de regras de permissão a precisamente duas regras" com tags `owner`/`class` no nível do database e herança (AWS Big Data Blog, 2021-09-23); **FanDuel** substituiu um design de PII com tag-S3/arquivo-duplo de 100–200 horas por fonte por duas roles de grant de coluna, `LimitedPIIAnalyst` e `NonPIIAnalyst`, em **50 estados e 8,5M+ clientes** (2020-12-21); **Morningstar** mapeou uma única ontologia LF-TBAC sobre grants do Redshift porque o Redshift não consome direitos de tag nativamente (2023-04-06) — números de cliente publicados pela AWS, com data, não auditados.
+> 12. **Âncoras de caso:** **Integral Ad Science** cortou "centenas de regras de permissão a precisamente duas regras" com tags `owner`/`class` no nível do database e herança (AWS Big Data Blog, 2021-09-23); **FanDuel** substituiu um design de PII com tag-S3/arquivo-duplo de 100 to 200 horas por fonte por duas roles de grant de coluna, `LimitedPIIAnalyst` e `NonPIIAnalyst`, em **50 estados e 8,5M+ clientes** (2020-12-21); **Morningstar** mapeou uma única ontologia LF-TBAC sobre grants do Redshift porque o Redshift não consome direitos de tag nativamente (2023-04-06): números de cliente publicados pela AWS, com data, não auditados.

@@ -1,6 +1,6 @@
 ---
 title: "Multi-Agent Basics"
-description: "Learn multi-agent architecture in LangGraph — multiple agent nodes communicating through shared state, specialized agent roles, and coordination patterns."
+description: "Learn multi-agent architecture in LangGraph, multiple agent nodes communicating through shared state, specialized agent roles, and coordination patterns."
 order: 7
 duration: "40 minutes"
 difficulty: "intermediate"
@@ -20,7 +20,7 @@ Single agents have limitations:
 2. **Role confusion**: A single agent can't be expert at everything
 3. **Modularity**: Hard to swap or upgrade parts of a monolithic agent
 
-Multi-agent architecture solves this by **dividing and conquering** — each agent has a focused role and communicates with others through shared state.
+Multi-agent architecture solves this by **dividing and conquering**: each agent has a focused role and communicates with others through shared state.
 
 ---
 
@@ -357,7 +357,7 @@ print(result["final"])
   "question": "What is the main benefit of multi-agent architecture?",
   "options": [
     "Faster execution always",
-    "Specialization — each agent focuses on one task",
+    "Specialization: each agent focuses on one task",
     "Eliminates the need for LLMs",
     "Simpler code overall"
   ],
@@ -373,7 +373,7 @@ print(result["final"])
   "question": "How do agents communicate in a LangGraph multi-agent system?",
   "options": [
     "Through direct function calls",
-    "Through the shared state — one agent writes, another reads",
+    "Through the shared state: one agent writes, another reads",
     "Via a message queue",
     "Through a REST API"
   ],
@@ -453,7 +453,7 @@ print(result["final"])
   "question": "Why might you give different agents different tool sets?",
   "options": [
     "To save money on API calls",
-    "To enforce separation of concerns — each agent can only use relevant tools",
+    "To enforce separation of concerns: each agent can only use relevant tools",
     "Tools are shared globally",
     "There's no benefit to separate tool sets"
   ],

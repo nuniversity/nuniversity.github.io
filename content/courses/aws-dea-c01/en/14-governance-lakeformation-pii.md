@@ -1,13 +1,13 @@
 ---
 title: "Governance, Lake Formation and PII Protection"
-description: "Turn Domain 4 into an operable governance layer: master the two-door rule that makes every S3-lake request pass BOTH IAM and Lake Formation, the permission anatomy at catalog, database, table, column and row level, cell-level data filters, LF-Tag attribute-based access control and its database-to-table-to-column cascade, cross-account and cross-Region sharing through AWS RAM and resource links, blue/green catalog releases and the governed-tables-to-Iceberg transition, engine enforcement across Glue, Athena, Spectrum and QuickSight, Amazon Macie discovery jobs, identifiers, findings, severity and EventBridge automation, Redshift datashares, SageMaker ML Lineage Tracking and Glue catalog versioning, and privacy at exam depth — PII tagging, data residency, erasure, CloudTrail audit and shared responsibility — with sourced October 2026 updates, four AWS customer case studies and fourteen exam-style questions."
+description: "Turn Domain 4 into an operable governance layer: master the two-door rule that makes every S3-lake request pass BOTH IAM and Lake Formation, the permission anatomy at catalog, database, table, column and row level, cell-level data filters, LF-Tag attribute-based access control and its database-to-table-to-column cascade, cross-account and cross-Region sharing through AWS RAM and resource links, blue/green catalog releases and the governed-tables-to-Iceberg transition, engine enforcement across Glue, Athena, Spectrum and QuickSight, Amazon Macie discovery jobs, identifiers, findings, severity and EventBridge automation, Redshift datashares, SageMaker ML Lineage Tracking and Glue catalog versioning, and privacy at exam depth, PII tagging, data residency, erasure, CloudTrail audit and shared responsibility, with sourced October 2026 updates, four AWS customer case studies and fourteen exam-style questions."
 order: 14
 difficulty: "intermediate"
 duration: "75 minutes"
 ---
 # Governance, Lake Formation and PII Protection
 
-Domain 4 is worth **18% of scored content**, and its last task — *Understand data privacy and governance* — is where the DEA-C01 exam stops asking "can you move the data?" and starts asking "who may see which row, in which Region, and how would you prove it a year later?" Two services carry almost all of that weight: **AWS Lake Formation**, which decides *what* a principal can see inside the lake, and **Amazon Macie**, which *finds* the sensitive data you are supposed to be protecting. Both are routinely miscast on practice tests — Lake Formation as an IAM replacement, Macie as a blocking tool — and both miscasts cost marks.
+Domain 4 is worth **18% of scored content**, and its last task, *Understand data privacy and governance*, is where the DEA-C01 exam stops asking "can you move the data?" and starts asking "who may see which row, in which Region, and how would you prove it a year later?" Two services carry almost all of that weight: **AWS Lake Formation**, which decides *what* a principal can see inside the lake, and **Amazon Macie**, which *finds* the sensitive data you are supposed to be protecting. Both are routinely miscast on practice tests, Lake Formation as an IAM replacement, Macie as a blocking tool, and both miscasts cost marks.
 
 ```text
 ====================================================================
@@ -45,7 +45,7 @@ In this lesson you will:
 - share data **cross-account and cross-Region** with AWS RAM, resource links and separate target grants;
 - reason about **governed tables**, their **December 31, 2024 end of support**, and the **blue/green catalog release pattern**;
 - place **Glue, Athena, Spectrum, QuickSight, EMR and Redshift** against Lake Formation enforcement, engine by engine;
-- operate **Amazon Macie**: automated discovery, discovery jobs, managed vs custom identifiers, findings, severity and EventBridge automation — and never call it prevention;
+- operate **Amazon Macie**: automated discovery, discovery jobs, managed vs custom identifiers, findings, severity and EventBridge automation, and never call it prevention;
 - grant **Redshift data sharing** through datashares and reconstruct **data lineage** with SageMaker ML Lineage Tracking and Glue catalog versioning;
 - execute **privacy at exam depth**: PII tagging, data residency, erasure, CloudTrail audit and shared responsibility;
 - study **four AWS customer case studies**, a sourced **October 2026 update box** and **14 exam-style questions** plus three interactive checks.
@@ -66,11 +66,11 @@ In this lesson you will:
 | **4.5.2** | "Implement PII identification (for example, Amazon Macie with Lake Formation)" | 7, 10 |
 | **4.5.3** | "Implement data privacy strategies to prevent backups or replications of data to disallowed AWS Regions" | 10 |
 | **4.5.5** | "Maintain data sovereignty" | 10 |
-| **4.5.7** | "Describe governance data framework and data sharing patterns" — **new in guide v1.1 (2025-12-12)** | 5, 10 |
+| **4.5.7** | "Describe governance data framework and data sharing patterns": **new in guide v1.1 (2025-12-12)** | 5, 10 |
 
 Two neighbouring skills are deliberately routed to other lessons: **4.5.4** (AWS Config for configuration changes) appears here only where it is contrasted with CloudTrail, and **4.5.6** (Amazon SageMaker Catalog projects) is named by the guide but is not a Lake Formation construct.
 
-### 1.2 The personas — who may grant what
+### 1.2 The personas; who may grant what
 
 | Persona | Powers | Verified constraint (accessed Oct 2026) |
 |---|---|---|
@@ -82,7 +82,7 @@ Two neighbouring skills are deliberately routed to other lessons: **4.5.4** (AWS
 
 The IAM-administrator row is the single most examined persona fact in this section: **identity expertise does not confer data-lake authority**. An engineer who can edit any IAM policy in the account still cannot grant `SELECT` on a Lake Formation table until they are a data-lake administrator.
 
-- **📚 Did you know?** Lake Formation's own **permission checks are free**; you are billed for the *integrated services* you run (Athena, Spectrum, Glue) and for the **Lake Formation Storage API**, which bills **bytes scanned rounded up to the next megabyte with a 10 MB minimum per request** (Lake Formation pricing page, accessed Oct 2026). So the governance layer is cheap to over-grant *financially* and expensive to over-grant *politically* — which is exactly why the exam tests it on correctness, not cost.
+- **📚 Did you know?** Lake Formation's own **permission checks are free**; you are billed for the *integrated services* you run (Athena, Spectrum, Glue) and for the **Lake Formation Storage API**, which bills **bytes scanned rounded up to the next megabyte with a 10 MB minimum per request** (Lake Formation pricing page, accessed Oct 2026). So the governance layer is cheap to over-grant *financially* and expensive to over-grant *politically*; which is exactly why the exam tests it on correctness, not cost.
 
 ### 1.3 The division of labour in one table
 
@@ -91,9 +91,9 @@ The IAM-administrator row is the single most examined persona fact in this secti
 | May this principal call `glue:*`, `lakeformation:*`, `s3:*`? | **IAM** | Identity policy, resource policy, session policy |
 | May it see **this database / table / column / row**? | **Lake Formation** | Grants, LF-Tags, data filters |
 | Where do the S3 credentials come from? | **Lake Formation** vends temporary credentials to integrated engines (after `GetDataAccess`) |
-| What does the S3 bucket policy alone decide? | Only whether the object is reachable by a principal whose *own* credentials allow it — **never** fine-grained lake visibility |
-| Who granted `SELECT` at 14:02 last Tuesday? | **CloudTrail** — `GrantPermissions` / `RevokePermissions` |
-| Did the S3 bucket policy or encryption setting change? | **AWS Config** — configuration state over time |
+| What does the S3 bucket policy alone decide? | Only whether the object is reachable by a principal whose *own* credentials allow it: **never** fine-grained lake visibility |
+| Who granted `SELECT` at 14:02 last Tuesday? | **CloudTrail**: `GrantPermissions` / `RevokePermissions` |
+| Did the S3 bucket policy or encryption setting change? | **AWS Config**: configuration state over time |
 
 ---
 
@@ -103,7 +103,7 @@ The IAM-administrator row is the single most examined persona fact in this secti
 
 AWS states the rule in one sentence, and every lake-access question is a variation of it:
 
-> "When a principal makes a request to access Data Catalog resources or underlying data, for the request to succeed, it must pass permission checks by **both IAM and Lake Formation**." — Lake Formation permissions overview (accessed Oct 2026)
+> "When a principal makes a request to access Data Catalog resources or underlying data, for the request to succeed, it must pass permission checks by **both IAM and Lake Formation**.": Lake Formation permissions overview (accessed Oct 2026)
 
 ```mermaid
 flowchart TD
@@ -119,8 +119,8 @@ flowchart TD
 Three corollaries fall straight out of that picture, and each one is a question:
 
 1. **A Lake Formation grant without IAM fails.** The principal still needs `glue:*` on the catalog APIs, `lakeformation:GetDataAccess` for vended credentials, and the engine's own permissions.
-2. **IAM alone cannot express fine grain.** No identity policy can say *"only rows where `region = 'EU'`"* or *"all columns except `ssn`"* — those live exclusively in Lake Formation data filters.
-3. **Not registered means not governed.** Athena result buckets, unregistered prefixes and anything outside the catalog are decided by IAM and S3 alone — and Lake Formation **does not apply when writing objects** (Athena security documentation, accessed Oct 2026).
+2. **IAM alone cannot express fine grain.** No identity policy can say *"only rows where `region = 'EU'`"* or *"all columns except `ssn`"*; those live exclusively in Lake Formation data filters.
+3. **Not registered means not governed.** Athena result buckets, unregistered prefixes and anything outside the catalog are decided by IAM and S3 alone, and Lake Formation **does not apply when writing objects** (Athena security documentation, accessed Oct 2026).
 
 ### 2.2 IAM versus Lake Formation, side by side
 
@@ -128,7 +128,7 @@ Three corollaries fall straight out of that picture, and each one is a question:
 |---|---|---|
 | Unit of control | Principal + action + resource ARN | Catalog object: database, table, column, row |
 | Fine grain | API-level (`s3:GetObject` on an ARN) | **Column exclusion, row predicates, cell level** |
-| Region scope | Policy applies where the resource lives | **"Lake Formation permissions apply only in the Region in which they were granted"** — cross-Region access needs a **resource link** in the consumer Region |
+| Region scope | Policy applies where the resource lives | **"Lake Formation permissions apply only in the Region in which they were granted"**: cross-Region access needs a **resource link** in the consumer Region |
 | Default on a fresh account | Whatever the account's IAM state is | **`Super` on every database and table is pre-granted to a group called `IAMAllowedPrincipals`** |
 | S3 credential path | The caller's own credentials | **Vended temporary credentials** to integrated engines |
 | Enforcement point | Every AWS API call | Integrated engines (Athena SQL, Spectrum, QuickSight, EMR, Redshift) |
@@ -136,11 +136,11 @@ Three corollaries fall straight out of that picture, and each one is a question:
 
 ### 2.3 The default that makes grants look broken
 
-> "Lake Formation sets **Super permission on all databases and tables in the Data Catalog to a group called `IAMAllowedPrincipals` by default** … **all principals in your account will have access … through the IAM principal policies for AWS Glue**." — Lake Formation permissions reference (accessed Oct 2026)
+> "Lake Formation sets **Super permission on all databases and tables in the Data Catalog to a group called `IAMAllowedPrincipals` by default** … **all principals in your account will have access … through the IAM principal policies for AWS Glue**.": Lake Formation permissions reference (accessed Oct 2026)
 
-Until you **revoke that group** (or switch on **hybrid access mode**), the catalog behaves as though Lake Formation were not there: every IAM-principal in the account reads every table, and your carefully written grants appear to change nothing. Hybrid access mode splits the account in two — **opted-in principals must pass both Lake Formation and IAM**, while principals that have not opted in remain governed by IAM alone.
+Until you **revoke that group** (or switch on **hybrid access mode**), the catalog behaves as though Lake Formation were not there: every IAM-principal in the account reads every table, and your carefully written grants appear to change nothing. Hybrid access mode splits the account in two: **opted-in principals must pass both Lake Formation and IAM**, while principals that have not opted in remain governed by IAM alone.
 
-### 2.4 Worked example E1 — "my grants do nothing" in four checks
+### 2.4 Worked example E1: "my grants do nothing" in four checks
 
 An analyst reports that a revocation had no effect. Work the list in this order:
 
@@ -163,7 +163,7 @@ CHECK 4  Does IAM still allow the API call?
 ```
 
 > [!WARNING]
-> ⚠️ **The two-door trap appears in three disguises.** (a) *"Add an S3 bucket policy"* — necessary, never sufficient: S3 policies cannot express row or column rules. (b) *"The Lake Formation grant is wrong"* — when the real cause is the `IAMAllowedPrincipals` default or an unregistered location. (c) *"Copy the grant to the other Region"* — Lake Formation grants are Region-local; the correct answer is a **resource link** in the consumer Region, not a duplicated grant. Read the stem for which door it is actually testing.
+> ⚠️ **The two-door trap appears in three disguises.** (a) *"Add an S3 bucket policy"*: necessary, never sufficient: S3 policies cannot express row or column rules. (b) *"The Lake Formation grant is wrong"*: when the real cause is the `IAMAllowedPrincipals` default or an unregistered location. (c) *"Copy the grant to the other Region"*: Lake Formation grants are Region-local; the correct answer is a **resource link** in the consumer Region, not a duplicated grant. Read the stem for which door it is actually testing.
 
 ---
 
@@ -179,18 +179,18 @@ CHECK 4  Does IAM still allow the API call?
 | **Table + column / data filter** | `SELECT` (plus `DESCRIBE`, `DROP` on the filter object itself) |
 | **S3 location (registration)** | `DATA_LOCATION_ACCESS` |
 | **LF-Tag or tag value** | `CREATE_LF_TAG`, `ALTER`, `DROP`; `ASSOCIATE`, `DESCRIBE` |
-| **Resource link** (distinct from its target) | `DESCRIBE`, `DROP` — **a link grant is not a target grant** |
+| **Resource link** (distinct from its target) | `DESCRIBE`, `DROP`: **a link grant is not a target grant** |
 
 Two structural rules matter more than the list itself:
 
-- **`ALL-tables` implies database `DESCRIBE`** — granting on "all tables" necessarily reveals that the database exists, and this implication does **not** hold under attribute-based (LF-Tag) grants.
-- **Revoking `Super` does not revoke everything.** A principal can be left holding plain `SELECT` and `INSERT` after Super is removed — "revoke Super" is not synonymous with "revoke access".
+- **`ALL-tables` implies database `DESCRIBE`**: granting on "all tables" necessarily reveals that the database exists, and this implication does **not** hold under attribute-based (LF-Tag) grants.
+- **Revoking `Super` does not revoke everything.** A principal can be left holding plain `SELECT` and `INSERT` after Super is removed: "revoke Super" is not synonymous with "revoke access".
 
 ### 3.2 Data filters: the column/row/cell combinatorics
 
 One **data filter** per table combines a column specification (include list, exclude list, or the all-columns wildcard) with a optional row predicate in a **PartiQL subset**, or with `AllRowsWildcard`. AWS states the combination rule directly:
 
-> "'all columns' wildcard + row filter = **row-level security** only. Include/exclude specific columns + 'all rows' = **column-level security** only. Specific columns **and** a row filter = **cell-level security**." — Data filtering (accessed Oct 2026)
+> "'all columns' wildcard + row filter = **row-level security** only. Include/exclude specific columns + 'all rows' = **column-level security** only. Specific columns **and** a row filter = **cell-level security**.": Data filtering (accessed Oct 2026)
 
 | Columns chosen | Rows chosen | Resulting control | Exam name |
 |---|---|---|---|
@@ -203,7 +203,7 @@ Constraints you must be able to quote:
 
 | Constraint | Value (accessed Oct 2026) |
 |---|---|
-| Filters grantable | **`SELECT` only** — a filter never widens access to `INSERT`/`DELETE` |
+| Filters grantable | **`SELECT` only**: a filter never widens access to `INSERT`/`DELETE` |
 | Expression length | **< 2,048 characters** |
 | Operators | `= > < >= <= <> != BETWEEN IN LIKE NOT IS [NOT] NULL` |
 | Column-to-column comparison | **Unsupported** |
@@ -214,14 +214,14 @@ Constraints you must be able to quote:
 | Cell-level everywhere | **Athena engine v3 or Redshift Spectrum** |
 | Glue 5.0+ fine-grained in jobs | **Hive and Iceberg sources only** |
 
-### 3.3 Predicate algebra — when two rules meet
+### 3.3 Predicate algebra: when two rules meet
 
-- **A principal and their own IAM group:** the row filters are **unioned** — the user sees the wider of the two.
-- **A grant to an external account intersected with a direct grant:** **intersection** — the narrower result wins.
+- **A principal and their own IAM group:** the row filters are **unioned**: the user sees the wider of the two.
+- **A grant to an external account intersected with a direct grant:** **intersection**: the narrower result wins.
 - **Two concurrent `all-rows` wildcards:** the **`all-rows` prevails**.
 - **Across engines:** enforcement happens at query time, so a filter that Athena honours still has to be re-implemented anywhere the data is read *without* Lake Formation enforcement (Section 6).
 
-### 3.4 Worked example E2 — designing cell-level protection for `ssn`
+### 3.4 Worked example E2: designing cell-level protection for `ssn`
 
 Requirement: UK analysts see customer rows only for the United Kingdom, and **nobody** in the analyst role ever sees the `ssn` column.
 
@@ -241,7 +241,7 @@ COST OF MISSTEP  Glue ETL job reading the same table is NOT column-filtered -
 
 Read the arithmetic of the rule: excluded column **plus** row predicate = **cell-level**; had we used the all-columns wildcard with the same predicate we would have shipped *row-level* protection only and leaked `ssn` to every UK row.
 
-### 3.5 Worked example E3 — the four-grant ladder on one table
+### 3.5 Worked example E3: the four-grant ladder on one table
 
 ```text
 Grant A  SELECT on table, no filter            -> sees every column, every row
@@ -255,7 +255,7 @@ Grant E  INSERT only                           -> can write, cannot read;
                                                   data filters are SELECT-only
 ```
 
-**Reading:** protection is a property of the *filter attached to the grant*, not of the table. Two analysts querying the same `customers` table can legitimately see different column sets and different row sets — which is precisely what "cell-level security" means on this exam.
+**Reading:** protection is a property of the *filter attached to the grant*, not of the table. Two analysts querying the same `customers` table can legitimately see different column sets and different row sets; which is precisely what "cell-level security" means on this exam.
 
 ---
 
@@ -263,11 +263,11 @@ Grant E  INSERT only                           -> can write, cannot read;
 
 ### 4.1 The six rules of tag-based grants (LF-TBAC)
 
-1. **Predefine first.** A key/value pair cannot be invented at assignment time — it must already exist as an LF-Tag.
+1. **Predefine first.** A key/value pair cannot be invented at assignment time; it must already exist as an LF-Tag.
 2. **One value per key per resource.** A table cannot be both `classification=public` and `classification=restricted` on the same key.
 3. **Values are stored lower-case.**
 4. **Inheritance is directional:** *"Tables inherit LF-Tags from databases and columns inherit LF-Tags from tables. Inherited values can be overridden."*
-5. **Grant on the tag, not the object:** `GRANT SELECT ON TAGS module=Sales TO analyst_role` — every table carrying that tag is covered, **including tables the crawler creates tomorrow**.
+5. **Grant on the tag, not the object:** `GRANT SELECT ON TAGS module=Sales TO analyst_role`: every table carrying that tag is covered, **including tables the crawler creates tomorrow**.
 6. **LF-Tags are not IAM tags.** AWS's wording is absolute: *"IAM tags are not the same as LF-Tags. These tags are not interchangeable."* They **compose**: both checks must allow the request.
 
 ### 4.2 The cascade, drawn
@@ -288,8 +288,8 @@ flowchart TD
 
 | Expression | Meaning |
 |---|---|
-| `ON TAGS module=Sales AND classification=Restricted` | Both keys must match — **AND** |
-| `ON TAGS (module=Sales OR module=Marketing)` | Either value of the same key — **OR** |
+| `ON TAGS module=Sales AND classification=Restricted` | Both keys must match, **AND** |
+| `ON TAGS (module=Sales OR module=Marketing)` | Either value of the same key, **OR** |
 | Nested `AND`/`OR` expressions | Allowed, and **reusable across grants since 2024-11-07** |
 | `ASSOCIATE` on a tag | Implies `DESCRIBE` on it |
 | Cross-account LF-TBAC target | Another account, an **AWS Organization**, or an **OU** |
@@ -297,7 +297,7 @@ flowchart TD
 ```fillblank
 {
   "question": "Complete the Lake Formation tag-based access control statements:",
-  "template": "Tables inherit LF-Tags from {{1}} and columns inherit LF-Tags from {{2}}; every key must be predefined before it can be assigned and values are stored in {{3}} case. One grant naming several different tag keys is an {{4}} condition, while one grant naming several values of the SAME key is an {{5}} condition. LF-Tags are explicitly {{6}} from IAM tags - both checks must allow the request.",
+  "template": "Tables inherit LF-Tags from {{1}} and columns inherit LF-Tags from {{2}}; every key must be predefined before it can be assigned and values are stored in {{3}} case. One grant naming several different tag keys is an {{4}} condition, while one grant naming several values of the SAME key is an {{5}} condition. LF-Tags are explicitly {{6}} from IAM tags: both checks must allow the request.",
   "answers": {
     "1": "databases",
     "2": "tables",
@@ -307,14 +307,14 @@ flowchart TD
     "6": "not interchangeable"
   },
   "distractors": ["schema", "catalogs", "upper", "title", "both", "either", "identical", "equivalent", "independent"],
-  "explanation": "The documented cascade is database -> table -> column with overridable inherited values, keys are predefined and values are lower-case. Different KEYS combine with AND; multiple values of one key combine with OR. AWS states directly that IAM tags and LF-Tags are not interchangeable - they compose, so both the IAM check and the Lake Formation tag check must allow the request."
+  "explanation": "The documented cascade is database -> table -> column with overridable inherited values, keys are predefined and values are lower-case. Different KEYS combine with AND; multiple values of one key combine with OR. AWS states directly that IAM tags and LF-Tags are not interchangeable: they compose, so both the IAM check and the Lake Formation tag check must allow the request."
 }
 ```
 
 
-### 4.4 Worked example E4 — named grants versus tag grants
+### 4.4 Worked example E4: named grants versus tag grants
 
-Setup: **3 analyst principals**, each needing the same access to **3 databases and 7 tables**, plus a plan to add **50 more tables** next quarter. (Derived arithmetic — this is not an AWS-published figure; the structure follows the Lake Formation TBAC documentation, accessed Oct 2026.)
+Setup: **3 analyst principals**, each needing the same access to **3 databases and 7 tables**, plus a plan to add **50 more tables** next quarter. (Derived arithmetic; this is not an AWS-published figure; the structure follows the Lake Formation TBAC documentation, accessed Oct 2026.)
 
 ```text
 NAMED ROUTE (one GrantPermissions per principal per object)
@@ -336,9 +336,9 @@ TAG ROUTE (LF-TBAC)
 
 **Reading:** the tag route collapses 180 operations into 7 because the grant attaches to an *attribute* that new objects inherit automatically. That is why skill 4.2.5 names **tag-based and attribute-based** authorization as a business-need answer: at scale, the difference is not convenience, it is whether permissions stay correct as the catalog grows.
 
-- **📚 Did you know?** AWS publishes a customer result for exactly this arithmetic: **Integral Ad Science "reduced hundreds of permission rules down to precisely two rules"** using Lake Formation tag-based access control (AWS Big Data Blog, 2021-09-23, accessed Oct 2026). Two rules is not a typo — it is what happens when the *number of objects* stops being the *number of grants*.
+- **📚 Did you know?** AWS publishes a customer result for exactly this arithmetic: **Integral Ad Science "reduced hundreds of permission rules down to precisely two rules"** using Lake Formation tag-based access control (AWS Big Data Blog, 2021-09-23, accessed Oct 2026). Two rules is not a typo; it is what happens when the *number of objects* stops being the *number of grants*.
 
-### 4.5 Worked example E5 — a tag-based multi-tenant grant
+### 4.5 Worked example E5: a tag-based multi-tenant grant
 
 ```text
 PREDEFINED TAGS   tenant = acme | globex | initech      (one value per resource)
@@ -376,8 +376,8 @@ flowchart LR
 Facts encoded in that diagram:
 
 - **Sharing stacks are either Lake Formation (RAM + resource links) or the legacy IAM-only catalog sharing**; **hybrid access mode** lets both coexist while an account migrates.
-- **Cross-Region** sharing works through **resource links created in the consumer Region** — Lake Formation permissions themselves never travel.
-- **A direct grant to a principal** (rather than a share) is unioned with any account-cascaded grant, and **only the recipient sees it — they cannot re-share it**.
+- **Cross-Region** sharing works through **resource links created in the consumer Region**: Lake Formation permissions themselves never travel.
+- **A direct grant to a principal** (rather than a share) is unioned with any account-cascaded grant, and **only the recipient sees it; they cannot re-share it**.
 - **Cross-account crawling** has its own four-step order: register the location in the *producer* account → grant `DATA_LOCATION_ACCESS` to the *consumer's* crawler role (plus `GetDataAccess`) → accept the RAM share → create the link and tick **"Use Lake Formation credentials"**.
 
 ```dragdrop
@@ -388,7 +388,7 @@ Facts encoded in that diagram:
     "Producer shares those resources through AWS RAM",
     "Consumer administrator accepts the RAM share",
     "Consumer creates a RESOURCE LINK in its own Region pointing at the producer's catalog object",
-    "Consumer grants permissions ON THE LINKED TARGET - the link grant alone is not enough",
+    "Consumer grants permissions ON THE LINKED TARGET: the link grant alone is not enough",
     "Consumer runs the Athena query and Lake Formation vends temporary S3 credentials"
   ],
   "correctOrder": [
@@ -396,24 +396,24 @@ Facts encoded in that diagram:
     "Producer shares those resources through AWS RAM",
     "Consumer administrator accepts the RAM share",
     "Consumer creates a RESOURCE LINK in its own Region pointing at the producer's catalog object",
-    "Consumer grants permissions ON THE LINKED TARGET - the link grant alone is not enough",
+    "Consumer grants permissions ON THE LINKED TARGET: the link grant alone is not enough",
     "Consumer runs the Athena query and Lake Formation vends temporary S3 credentials"
   ],
-  "explanation": "The documented order is producer grant -> AWS RAM share -> consumer accepts -> resource link in the consumer Region -> separate grant on the linked target -> query, at which point Lake Formation vends temporary S3 credentials. Two traps sit inside the sequence: a link grant is NOT a target grant (DESCRIBE/DROP on the link does not let you read data), and Lake Formation permissions never travel to another Region - the resource link does that job, with no data copy."
+  "explanation": "The documented order is producer grant -> AWS RAM share -> consumer accepts -> resource link in the consumer Region -> separate grant on the linked target -> query, at which point Lake Formation vends temporary S3 credentials. Two traps sit inside the sequence: a link grant is NOT a target grant (DESCRIBE/DROP on the link does not let you read data), and Lake Formation permissions never travel to another Region: the resource link does that job, with no data copy."
 }
 ```
 
-### 5.2 Governed tables — and the date you must quote
+### 5.2 Governed tables, and the date you must quote
 
 AWS built **governed tables** as an Amazon S3 table type with **ACID guarantees across tables** and automatic compaction, so that analytics could share consistent snapshots. AWS then announced:
 
-> "**end support for Governed Tables, effective December 31, 2024**, to focus on open source transactional table formats such as **Apache Iceberg, Apache Hudi, and Linux Foundation Delta Lake**." — AWS Big Data Blog, 2024-10-02
+> "**end support for Governed Tables, effective December 31, 2024**, to focus on open source transactional table formats such as **Apache Iceberg, Apache Hudi, and Linux Foundation Delta Lake**.": AWS Big Data Blog, 2024-10-02
 
-Exam handling: state the **deprecation with its date**, and answer open-table-format questions with **Iceberg, Hudi or Delta Lake**. Lake Formation grants — including row and cell filters — apply to cataloged Iceberg/Hudi/Delta tables, and Lake Formation manages **compaction, snapshot retention and orphan-file deletion for Iceberg**, while the engine keeps ownership of write DDL (`VACUUM`, `MERGE`, `OPTIMIZE`).
+Exam handling: state the **deprecation with its date**, and answer open-table-format questions with **Iceberg, Hudi or Delta Lake**. Lake Formation grants, including row and cell filters, apply to cataloged Iceberg/Hudi/Delta tables, and Lake Formation manages **compaction, snapshot retention and orphan-file deletion for Iceberg**, while the engine keeps ownership of write DDL (`VACUUM`, `MERGE`, `OPTIMIZE`).
 
-### 5.3 Blue/green catalog releases — a pattern, not a service
+### 5.3 Blue/green catalog releases: a pattern, not a service
 
-"Blue/green catalog deployment" is **not** an AWS feature name — nothing in the Lake Formation or Glue documentation describes a service by that name (checked Oct 2026). What the exam is really testing is whether you can *assemble* the pattern from verified building blocks:
+"Blue/green catalog deployment" is **not** an AWS feature name: nothing in the Lake Formation or Glue documentation describes a service by that name (checked Oct 2026). What the exam is really testing is whether you can *assemble* the pattern from verified building blocks:
 
 | Building block | Verified capability | Role in the pattern |
 |---|---|---|
@@ -432,7 +432,7 @@ BLUE/GREEN CATALOG RELEASE (assembled pattern)
   6. drop sales_blue (deletitive step ALWAYS last)
 ```
 
-### 5.4 Worked example E6 — share versus copy for a 20 TB dataset
+### 5.4 Worked example E6: share versus copy for a 20 TB dataset
 
 ```text
 PRODUCER holds 20 TB; consumer is in another AWS Region.
@@ -466,9 +466,9 @@ DATASHARE ROUTE (Redshift) / LAKE FORMATION SHARE (S3 lake)
 | **Amazon Redshift Spectrum** | Per-query verification plus vended credentials through the IAM role on the cluster, or a federated identity | **No role chaining** |
 | **Amazon QuickSight** | Fine-grained access control maps grants to **QuickSight users and groups in Enterprise**, and to **IAM roles (for example `aws-quicksight-service-role-v0`) in Standard**; dashboards explore the lake **through Athena** | QuickSight's own row-level security is a *BI-layer* control and is **not** a substitute for a Lake Formation row filter |
 | **AWS Glue crawlers** | Optional **"Use Lake Formation credentials"**, including for cross-account crawling | The crawler's role still needs `DATA_LOCATION_ACCESS` and `GetDataAccess` |
-| **AWS Glue ETL jobs** | Job role needs Lake Formation grants **plus** `lakeformation:GetDataAccess` | **Column filtering is NOT enforced inside Glue ETL** — drop or mask the column in the job |
+| **AWS Glue ETL jobs** | Job role needs Lake Formation grants **plus** `lakeformation:GetDataAccess` | **Column filtering is NOT enforced inside Glue ETL**: drop or mask the column in the job |
 | **Amazon EMR / Spark** | Lake Formation plugins run on the cluster | Securing the cluster itself stays the customer's job |
-| **Amazon Redshift (native)** | **Lake Formation-managed datashares** publish to the Glue catalog, so Lake Formation governs database, table, column **and row** | A plain (non–Lake Formation-managed) datashare is governed by Redshift's own grants |
+| **Amazon Redshift (native)** | **Lake Formation-managed datashares** publish to the Glue catalog, so Lake Formation governs database, table, column **and row** | A plain (non: Lake Formation-managed) datashare is governed by Redshift's own grants |
 | **Amazon SageMaker AI** | Lake Formation grants control training-time feature access | Lineage is a *separate* record (Section 9) |
 
 ```matching
@@ -477,10 +477,10 @@ DATASHARE ROUTE (Redshift) / LAKE FORMATION SHARE (S3 lake)
   "pairs": [
     {"left": "Amazon Athena (SQL)", "right": "Checks the principal, then Lake Formation vends temporary S3 credentials; the results bucket is unregistered and stays pure IAM territory"},
     {"left": "Amazon Athena Spark", "right": "Does NOT support querying Data Catalog tables that carry Lake Formation permissions"},
-    {"left": "Amazon Redshift Spectrum", "right": "Verifies per query and vends credentials through the IAM role on the cluster or a federated identity - no role chaining"},
+    {"left": "Amazon Redshift Spectrum", "right": "Verifies per query and vends credentials through the IAM role on the cluster or a federated identity: no role chaining"},
     {"left": "Amazon QuickSight", "right": "Enterprise maps grants to QuickSight users and groups; Standard maps them to IAM roles such as aws-quicksight-service-role-v0; dashboards explore through Athena"},
     {"left": "AWS Glue crawlers", "right": "Optionally use Lake Formation credentials, including for cross-account crawling, when the role holds DATA_LOCATION_ACCESS and GetDataAccess"},
-    {"left": "AWS Glue ETL jobs", "right": "Grants plus GetDataAccess are checked, but COLUMN FILTERING IS NOT ENFORCED - the job must drop or mask the column itself"}
+    {"left": "AWS Glue ETL jobs", "right": "Grants plus GetDataAccess are checked, but COLUMN FILTERING IS NOT ENFORCED: the job must drop or mask the column itself"}
   ],
   "explanation": "Enforcement is deliberately uneven. Athena SQL and Spectrum enforce column, row and cell rules (cell-level needs Athena engine v3 or Spectrum); Glue ETL never enforces column filtering; Athena Spark is unsupported; QuickSight is a BI layer that explores through Athena; crawlers can use vended credentials. Every wrong pairing in the exam is one of these caveats moved to the wrong engine."
 }
@@ -499,7 +499,7 @@ flowchart TD
     R --> O["Results land in an UNREGISTERED bucket -> pure IAM from there on"]
 ```
 
-### 6.2 Worked example E7 — what a Lake Formation-governed query actually reads
+### 6.2 Worked example E7: what a Lake Formation-governed query actually reads
 
 A 1 TB Parquet table is partitioned into **12 monthly partitions**; the analyst's predicate prunes to a single month:
 
@@ -514,9 +514,9 @@ Lake Formation Storage API billing:
      it is the ENGINE (Athena/Spectrum) that bills the data volume
 ```
 
-**Reading:** Lake Formation decides *whether* the query may run and *which rows/columns* come back; partitioning and file format decide *how many bytes* the engine reads; the Storage API's rounding rule decides the Lake Formation line item. Three different bills, one query — a classic multi-option distractor.
+**Reading:** Lake Formation decides *whether* the query may run and *which rows/columns* come back; partitioning and file format decide *how many bytes* the engine reads; the Storage API's rounding rule decides the Lake Formation line item. Three different bills, one query: a classic multi-option distractor.
 
-### 6.3 Worked example E8 — the same table through two engines
+### 6.3 Worked example E8: the same table through two engines
 
 ```text
 TABLE      sales.orders  (registered location, cell-level filter: exclude card_last4)
@@ -537,7 +537,7 @@ FIX        sc = DropFields(fields=['card_last4'])   (or a KMS/masking transform)
 
 ### 7.1 What it is, and the boundary it will not cross
 
-> Amazon Macie is "a **data security service that discovers sensitive data by using machine learning and pattern matching**." — What is Amazon Macie (accessed Oct 2026)
+> Amazon Macie is "a **data security service that discovers sensitive data by using machine learning and pattern matching**.": What is Amazon Macie (accessed Oct 2026)
 
 | | In scope for Macie | Out of scope for Macie |
 |---|---|---|
@@ -550,7 +550,7 @@ FIX        sc = DropFields(fields=['card_last4'])   (or a KMS/masking transform)
 | Engine | What it is | Exam-relevant properties |
 |---|---|---|
 | **Managed data identifiers** | AWS-maintained **ML + pattern matching** for credentials, financial data, **PII/PHI**, including per-country identity numbers | No rules to author; coverage evolves with AWS |
-| **Custom data identifiers** | Your **regex + keywords + ignore words + proximity** | **Immutable after creation** ("immutable history … for data privacy and protection audits"); **default severity Medium**; proximity **1–300 characters, default 50** |
+| **Custom data identifiers** | Your **regex + keywords + ignore words + proximity** | **Immutable after creation** ("immutable history … for data privacy and protection audits"); **default severity Medium**; proximity **1 to 300 characters, default 50** |
 | **Allow lists** | Buckets or objects that should *not* produce sensitive-data findings | The third component of every Macie job configuration |
 
 ### 7.3 Jobs, schedules and findings
@@ -563,10 +563,10 @@ FIX        sc = DropFields(fields=['card_last4'])   (or a KMS/masking transform)
 | **Policy findings** | `Policy:IAMUser/S3BucketPublic`, `…/S3BlockPublicAccessDisabled`, `…/S3BucketEncryptionDisabled`, **`…/S3BucketReplicatedExternally`** (the residency detective) |
 | **Sensitive-data findings** | `SensitiveData:S3Object/Personal`, `/Financial`, `/Credentials`, `/CustomIdentifier` |
 | **Finding retention** | **90 days**; a repeat detection **updates the count** on the existing finding |
-| **Severity scale** | **1 = Low, 2 = Medium, 3 = High** — there is **no Critical**, and it is **not** GuardDuty's 1.0–10.0 |
-| **Two different 0–100 numbers** | Bucket **sensitivity score** (−1…100) is a *bucket* metric, never a finding severity |
+| **Severity scale** | **1 = Low, 2 = Medium, 3 = High**; there is **no Critical**, and it is **not** GuardDuty's 1.0 to 10.0 |
+| **Two different 0 to 100 numbers** | Bucket **sensitivity score** (−1…100) is a *bucket* metric, never a finding severity |
 
-### 7.4 The finding flow — and where your code takes over
+### 7.4 The finding flow, and where your code takes over
 
 ```mermaid
 flowchart TD
@@ -587,7 +587,7 @@ flowchart TD
 > [!WARNING]
 > ⚠️ **Macie finds, it does not prevent.** Every option phrased *"Macie blocks the upload"*, *"Macie masks the column"* or *"Macie revokes the grant"* is wrong by construction: masking and revocation are **Lake Formation data filters** and **IAM/Lake Formation grants**, and the wiring between a Macie finding and those controls is **your** EventBridge rule plus **your** Lambda or Step Functions state machine. Also note the **two service identifiers**: findings events arrive as `source = aws.macie` with `detail-type = "Macie Finding"`, while Macie's own API calls appear in CloudTrail under **`aws.macie2`**.
 
-### 7.5 Worked example E9 — a Macie job specification
+### 7.5 Worked example E9: a Macie job specification
 
 ```text
 JOB              pii-nightly-customer-3p
@@ -611,9 +611,9 @@ OUTPUT           findings retained 90 days; EventBridge routes severity 3
 NOT IN SCOPE     this job does NOT block, mask or delete anything
 ```
 
-### 7.6 Worked example E10 — Macie monthly cost (us-east-1 example rates)
+### 7.6 Worked example E10: Macie monthly cost (us-east-1 example rates)
 
-Unit prices are AWS's published **us-east-1 examples** (Macie pricing page, accessed Oct 2026 — **verify current pricing before use**): **$0.10 per bucket per month**, **$0.01 per 100,000 objects per month**, plus tiered charges for inspected data volume.
+Unit prices are AWS's published **us-east-1 examples** (Macie pricing page, accessed Oct 2026: **verify current pricing before use**): **$0.10 per bucket per month**, **$0.01 per 100,000 objects per month**, plus tiered charges for inspected data volume.
 
 ```text
 40 buckets                40 x $0.10                     =   $  4.00
@@ -630,7 +630,7 @@ Free trial: 30 days, up to 150 GB, and DISCOVERY JOBS ARE EXCLUDED
 
 **Reading:** object count is a rounding error, bucket count is small, and **inspected data volume dominates**. That is why the exam loves the "scan everything, every hour" option: it is technically correct and economically indefensible.
 
-### 7.7 Worked example E11 — routing findings with EventBridge
+### 7.7 Worked example E11: routing findings with EventBridge
 
 ```text
 Rule 1  HIGH only          detail.severity.score = [3]
@@ -641,7 +641,7 @@ CloudTrail service name for Macie API calls: aws.macie2
 EventBridge detail-type for findings:        "Macie Finding"
 ```
 
-- **📚 Did you know?** Macie's **custom data identifiers are immutable after creation** — AWS frames that as *"immutable history … for data privacy and protection audits"* (Macie custom data identifier options, accessed Oct 2026). You cannot quietly edit a regex that produced last quarter's findings; you create a new identifier and retire the old one, which is exactly the audit property a compliance question is probing.
+- **📚 Did you know?** Macie's **custom data identifiers are immutable after creation**: AWS frames that as *"immutable history … for data privacy and protection audits"* (Macie custom data identifier options, accessed Oct 2026). You cannot quietly edit a regex that produced last quarter's findings; you create a new identifier and retire the old one, which is exactly the audit property a compliance question is probing.
 
 ---
 
@@ -649,7 +649,7 @@ EventBridge detail-type for findings:        "Macie Finding"
 
 ### 8.1 The datashare model
 
-> Redshift lets you "share access to **live data** across Amazon Redshift clusters, workgroups, AWS accounts, and AWS Regions **without manually moving or copying the data**", and "**datashare objects are read-only for data consumers**" in the basic model. — Redshift data sharing overview (accessed Oct 2026)
+> Redshift lets you "share access to **live data** across Amazon Redshift clusters, workgroups, AWS accounts, and AWS Regions **without manually moving or copying the data**", and "**datashare objects are read-only for data consumers**" in the basic model.: Redshift data sharing overview (accessed Oct 2026)
 
 | Property | Verified behaviour (accessed Oct 2026) |
 |---|---|
@@ -663,7 +663,7 @@ EventBridge detail-type for findings:        "Macie Finding"
 | Resilience | Survives cluster **resize and pause**; **no cap** on datashares per cluster; databases created from datashares are **excluded from database quotas** |
 | Cost | Consumer pays **query compute** (+ transfer if cross-Region); producer's storage is unchanged |
 
-### 8.2 Worked example E12 — the sharing lifecycle, end to end
+### 8.2 Worked example E12: the sharing lifecycle, end to end
 
 ```text
 PRODUCER (account 1111, us-east-1)
@@ -687,7 +687,7 @@ CHARGEBACK
   consumer: query compute + cross-Region transfer if the share crosses Regions
 ```
 
-**Reading:** three authorizations are involved and candidates routinely collapse them into one — the **share authorization**, the **`CREATE DATABASE`**, and the **object-level `GRANT`**. Skip any one and the analyst gets an empty schema, an empty database, or a permission error respectively.
+**Reading:** three authorizations are involved and candidates routinely collapse them into one: the **share authorization**, the **`CREATE DATABASE`**, and the **object-level `GRANT`**. Skip any one and the analyst gets an empty schema, an empty database, or a permission error respectively.
 
 ---
 
@@ -703,12 +703,12 @@ SageMaker ML Lineage Tracking records an ML workflow "**from data preparation to
 
 | Entity | Meaning | Manual-creation quota (accessed Oct 2026) |
 |---|---|---|
-| **Artifact** | Addressable data — a dataset, a model file | **6,000** |
-| **Action** | A step — a processing job, a deployment | **3,000** |
+| **Artifact** | Addressable data: a dataset, a model file | **6,000** |
+| **Action** | A step: a processing job, a deployment | **3,000** |
 | **Context** | An endpoint, model package or workflow the work happens *in* | **500** |
 | **Association** | The typed edge between two entities | **6,000** |
 
-Association types: `ContributedTo`, `Produced`, `SameAs`, `AssociatedWith`, `DerivedFrom` — where **`SameAs` is the cross-account link**. Automatic entities are not quota-limited; manual ones are, and **an Association cannot link two experiment entities**.
+Association types: `ContributedTo`, `Produced`, `SameAs`, `AssociatedWith`, `DerivedFrom`: where **`SameAs` is the cross-account link**. Automatic entities are not quota-limited; manual ones are, and **an Association cannot link two experiment entities**.
 
 ```mermaid
 flowchart LR
@@ -720,7 +720,7 @@ flowchart LR
     Q["Audit question: which dataset trained model v3?"] --> L["ListAssociations on the model artifact, walk the Produced edge back to the training dataset"]
 ```
 
-### 9.3 Worked example E13 — the manual lineage budget and the audit query
+### 9.3 Worked example E13: the manual lineage budget and the audit query
 
 ```text
 MANUAL QUOTA ARITHMETIC (derived from the published quotas)
@@ -746,18 +746,18 @@ Row-level lineage is out of reach of the catalog, but **schema-level** lineage i
 
 | Signal | What it proves |
 |---|---|
-| **`GetTableVersions`** | Which schema version was in force when a job ran — diff two versions to see a column appear, retype or vanish |
+| **`GetTableVersions`** | Which schema version was in force when a job ran: diff two versions to see a column appear, retype or vanish |
 | **Table State Change events** | A push notification that the catalog object changed (useful in Step Functions/EventBridge pipelines) |
 | **CloudTrail `GrantPermissions` / `RevokePermissions`** | Who changed *access* to that schema, and when |
 | **SageMaker lineage entities** | Which *data* produced which *model* |
 
-- **📚 Did you know?** The distinction the exam exploits: **CloudTrail answers "who granted SELECT at 14:02", AWS Config answers "did the bucket policy or encryption setting change"**. Both are governance evidence, but they are different questions — one is an *API action*, the other is *configuration state over time*. A stem that quotes a timestamp of a permission change is pointing at CloudTrail; a stem that quotes a compliance rule evaluating resource configuration is pointing at Config.
+- **📚 Did you know?** The distinction the exam exploits: **CloudTrail answers "who granted SELECT at 14:02", AWS Config answers "did the bucket policy or encryption setting change"**. Both are governance evidence, but they are different questions: one is an *API action*, the other is *configuration state over time*. A stem that quotes a timestamp of a permission change is pointing at CloudTrail; a stem that quotes a compliance rule evaluating resource configuration is pointing at Config.
 
 ---
 
 ## 10. Privacy at exam depth: PII, residency, erasure, audit, compliance
 
-### 10.1 The PII pipeline — discovery, classification, enforcement
+### 10.1 The PII pipeline: discovery, classification, enforcement
 
 ```mermaid
 flowchart TD
@@ -775,7 +775,7 @@ flowchart TD
 
 The three-service split is the whole skill: **Macie discovers, Lake Formation enforces, KMS encrypts.** Any option that moves a verb between them is testing whether you noticed.
 
-- **📚 Did you know?** *Masking* is not exclusively a Lake Formation skill. **EOS Group** masked PII with **Amazon Redshift dynamic data masking** after moving its warehouse through **AWS DMS → Amazon S3 → Amazon Redshift**, and AWS reports a **50 percent reduction in infrastructure costs** with **zero data loss** (AWS case study, accessed Oct 2026). The verb stays the same — *mask the sensitive value for this role* — but the service follows the engine: **Lake Formation data filters** for the lake, **Redshift dynamic data masking** for the warehouse, and **neither** is a job Amazon Macie will ever do.
+- **📚 Did you know?** *Masking* is not exclusively a Lake Formation skill. **EOS Group** masked PII with **Amazon Redshift dynamic data masking** after moving its warehouse through **AWS DMS → Amazon S3 → Amazon Redshift**, and AWS reports a **50 percent reduction in infrastructure costs** with **zero data loss** (AWS case study, accessed Oct 2026). The verb stays the same, *mask the sensitive value for this role*, but the service follows the engine: **Lake Formation data filters** for the lake, **Redshift dynamic data masking** for the warehouse, and **neither** is a job Amazon Macie will ever do.
 
 ### 10.2 Data residency and sovereignty (skills 4.5.3 and 4.5.5)
 
@@ -785,10 +785,10 @@ The three-service split is the whole skill: **Macie discovers, Lake Formation en
 | **S3 Cross-Region Replication** destination control | Restricts where replicas may be written | Preventive, but S3-scoped |
 | **AWS Backup / RDS cross-Region copy disabled** | Stops snapshot copies leaving the approved Regions | Preventive, service-scoped |
 | **DynamoDB global table Region selection** | Limits where replicas exist | Preventive, table-scoped |
-| **Macie `Policy:S3BucketReplicatedExternally`** | **Reports** buckets replicating outside the expected perimeter | **Detective** backstop — never the preventive control |
+| **Macie `Policy:S3BucketReplicatedExternally`** | **Reports** buckets replicating outside the expected perimeter | **Detective** backstop: never the preventive control |
 
 > [!IMPORTANT]
-> **Preventive vs detective is the entire question.** A stem that says *prevent* or *block* wants a **Control Tower Region-deny SCP** (or a service-level replication restriction). A stem that says *identify*, *detect* or *flag* wants **Macie**. Lake Formation is the wrong answer in both directions — it governs *who can query the catalog*, not *which Region a backup may land in*.
+> **Preventive vs detective is the entire question.** A stem that says *prevent* or *block* wants a **Control Tower Region-deny SCP** (or a service-level replication restriction). A stem that says *identify*, *detect* or *flag* wants **Macie**. Lake Formation is the wrong answer in both directions; it governs *who can query the catalog*, not *which Region a backup may land in*.
 
 ### 10.3 Erasure patterns (right to be forgotten)
 
@@ -805,21 +805,21 @@ CONSUMER CACHE     QuickSight SPICE extracts, Redshift copies and snapshots are
                    separate copies: erasure is not complete until they are gone too
 ```
 
-- **📚 Did you know?** Immutability and erasure pull in opposite directions. **Nasdaq's** S3-backed data lake pairs Amazon Redshift and Spectrum with **Amazon S3 Object Lock** and **Glacier** archive so that regulated market records cannot be rewritten or deleted while retention runs (AWS Nasdaq case study, accessed Oct 2026). An erasure request against a locked object is refused until the retention period expires or the legal hold is released — which is exactly why Object Lock appears as the **BLOCKER** row in the erasure pattern above, and why a compliance answer that promises both "instant right to be forgotten" and "WORM retention on the same objects" is self-contradictory.
+- **📚 Did you know?** Immutability and erasure pull in opposite directions. **Nasdaq's** S3-backed data lake pairs Amazon Redshift and Spectrum with **Amazon S3 Object Lock** and **Glacier** archive so that regulated market records cannot be rewritten or deleted while retention runs (AWS Nasdaq case study, accessed Oct 2026). An erasure request against a locked object is refused until the retention period expires or the legal hold is released; which is exactly why Object Lock appears as the **BLOCKER** row in the erasure pattern above, and why a compliance answer that promises both "instant right to be forgotten" and "WORM retention on the same objects" is self-contradictory.
 
 ### 10.4 Audit and compliance under shared responsibility
 
 | Question | Service |
 |---|---|
-| "Who granted `SELECT` on this table at 14:02?" | **CloudTrail** — Lake Formation logs `PutDataLakeSettings`, `GrantPermissions`, `RevokePermissions` |
+| "Who granted `SELECT` on this table at 14:02?" | **CloudTrail**: Lake Formation logs `PutDataLakeSettings`, `GrantPermissions`, `RevokePermissions` |
 | "Did the bucket policy or encryption setting change?" | **AWS Config** |
 | "Show the API trail for Macie configuration calls" | **CloudTrail**, service name **`aws.macie2`** |
-| "Is AWS certified for X?" | **AWS Compliance programs** — published certifications |
+| "Is AWS certified for X?" | **AWS Compliance programs**: published certifications |
 | "Are *we* compliant with X?" | **You are.** Customers "remain responsible for complying with applicable compliance laws"; AWS is the enabler, the customer classifies, restricts, retains and locates the data |
 
 That last row is the shared responsibility model applied to privacy: **AWS supplies certifications and controls; the customer supplies classification, access decisions, retention rules and residency choices.** An option claiming an AWS certification makes a customer compliant has inverted the model.
 
-### 10.5 Worked example E14 — a residency guardrail for an analytics OU
+### 10.5 Worked example E14: a residency guardrail for an analytics OU
 
 ```text
 REQUIREMENT  analytics workloads may only run and replicate in
@@ -840,24 +840,24 @@ NOT THE TOOL  Lake Formation grants - they do not constrain Regions
 ### 2026 Updates (as of October 2026)
 
 > [!NOTE]
-> **What moved in this topic between 2024 and October 2026** — every line checked against a primary AWS source in **October 2026**:
+> **What moved in this topic between 2024 and October 2026**: every line checked against a primary AWS source in **October 2026**:
 > - **Exam guide v1.1 (2025-12-12)** rewrote Domain 4: knowledge/skills lists were consolidated into one skills list per task, **eight skills were added and none removed**, including **4.5.7 "Describe governance data framework and data sharing patterns"** and **4.5.6 "Manage data access through Amazon SageMaker Catalog projects"** (AWS Certification revisions page, 2025-12-17). Revisions publish **at least one month before** they affect a live exam.
 > - **Lake Formation cross-account sharing v5 (2026-02-11)**: one AWS RAM share can now carry effectively **unlimited tables** ("hundreds of thousands"), and new grants use **wildcard patterns** instead of per-resource associations; existing shares and APIs keep working, and the upgrade is **opt-in** (AWS What's New, 2026-02-11). Cross-**Region** access still runs on **resource links** with no data copy.
-> - **Redshift × Iceberg permissions got tighter**: since Redshift gained Iceberg writes (2025-11-17), UPDATE/DELETE/MERGE (2026-04-23) and Iceberg materialized views (2026-10-05), the behaviour-changes page states that on Lake Formation tables **Iceberg DELETE needs `DELETE`**, **UPDATE/MERGE need `INSERT` + `DELETE`**, and **all Iceberg DML needs `ALTER`** (Redshift behaviour changes, accessed Oct 2026) — grants containing only `INSERT` are now insufficient.
-> - **Macie limits and identifier options**: up to **10,000 buckets per account** (Macie doc history, 2025-07-02); custom-identifier **proximity 1–300 characters, default 50**, custom identifiers **default severity MEDIUM** (Macie docs, accessed Oct 2026). Severity stays **1/2/3 — no Critical**.
-> - **Athena increasingly optimises *around* your Lake Formation rules**: Iceberg **cost-based optimization with better pruning and predicates when LF row filters and column masks are in force** (AWS What's New, 2025-11-21), **Glue Data Catalog materialized views** (2025-11-30), **managed query results that need no result bucket and cost nothing extra** (2025-06-03), and Capacity Reservations that now start at **4 DPU for 1 minute** instead of **24 DPU for 60 minutes** (AWS What's New, 2026-02-11) — all accessed Oct 2026.
-> - **Guide v1.1 also changed what is in scope**: **six services added — Aurora, Amazon Q, Bedrock, Amazon Kendra, AWS Data Exchange, Amazon S3 Tables** — and **three removed — Cloud9, CodeCommit, AWS SCT**, with nothing added to the out-of-scope list, plus new skill **2.1.7 "Manage open table formats (for example Apache Iceberg)"** (AWS Certification in-scope, out-of-scope and revisions pages, accessed Oct 2026). S3 Tables matter here because Redshift's Iceberg `UPDATE`/`DELETE`/`MERGE` (2026-04-23) explicitly covers Iceberg tables **on S3 Tables, with Lake Formation permissions**.
-> - **Macie's own changelog is quiet**: the Macie documentation history's most recent entry is **2025-07-02** and it records no custom-identifier change — so teach proximity, immutability and severity as *current behaviour*, never as "the 2026 Macie update" (Macie doc history, accessed Oct 2026).
-> - **Stale-fact warning #1 — governed tables**: AWS announced **end of support effective 2024-12-31** (AWS Big Data Blog, 2024-10-02) while the docs and pricing pages still describe them (accessed Oct 2026). Quote the **date**; answer table-format questions with **Iceberg, Hudi or Delta Lake**; never claim the feature is unavailable in some Regions.
-> - **Stale-fact warning #2 — naming**: "blue/green catalog deployment" is **not** an AWS feature (Section 5.3), **Amazon QuickSight became the Quick Suite / Quick Sight family (2025-10-09)** while the guide's in-scope list literally prints **"Amazon Quick"**, and **Amazon Kinesis Data Firehose has been Amazon Data Firehose since 2024-02-09** — accept old and new names in options.
+> - **Redshift × Iceberg permissions got tighter**: since Redshift gained Iceberg writes (2025-11-17), UPDATE/DELETE/MERGE (2026-04-23) and Iceberg materialized views (2026-10-05), the behaviour-changes page states that on Lake Formation tables **Iceberg DELETE needs `DELETE`**, **UPDATE/MERGE need `INSERT` + `DELETE`**, and **all Iceberg DML needs `ALTER`** (Redshift behaviour changes, accessed Oct 2026): grants containing only `INSERT` are now insufficient.
+> - **Macie limits and identifier options**: up to **10,000 buckets per account** (Macie doc history, 2025-07-02); custom-identifier **proximity 1 to 300 characters, default 50**, custom identifiers **default severity MEDIUM** (Macie docs, accessed Oct 2026). Severity stays **1/2/3: no Critical**.
+> - **Athena increasingly optimises *around* your Lake Formation rules**: Iceberg **cost-based optimization with better pruning and predicates when LF row filters and column masks are in force** (AWS What's New, 2025-11-21), **Glue Data Catalog materialized views** (2025-11-30), **managed query results that need no result bucket and cost nothing extra** (2025-06-03), and Capacity Reservations that now start at **4 DPU for 1 minute** instead of **24 DPU for 60 minutes** (AWS What's New, 2026-02-11): all accessed Oct 2026.
+> - **Guide v1.1 also changed what is in scope**: **six services added: Aurora, Amazon Q, Bedrock, Amazon Kendra, AWS Data Exchange, Amazon S3 Tables**, and **three removed: Cloud9, CodeCommit, AWS SCT**, with nothing added to the out-of-scope list, plus new skill **2.1.7 "Manage open table formats (for example Apache Iceberg)"** (AWS Certification in-scope, out-of-scope and revisions pages, accessed Oct 2026). S3 Tables matter here because Redshift's Iceberg `UPDATE`/`DELETE`/`MERGE` (2026-04-23) explicitly covers Iceberg tables **on S3 Tables, with Lake Formation permissions**.
+> - **Macie's own changelog is quiet**: the Macie documentation history's most recent entry is **2025-07-02** and it records no custom-identifier change, so teach proximity, immutability and severity as *current behaviour*, never as "the 2026 Macie update" (Macie doc history, accessed Oct 2026).
+> - **Stale-fact warning #1: governed tables**: AWS announced **end of support effective 2024-12-31** (AWS Big Data Blog, 2024-10-02) while the docs and pricing pages still describe them (accessed Oct 2026). Quote the **date**; answer table-format questions with **Iceberg, Hudi or Delta Lake**; never claim the feature is unavailable in some Regions.
+> - **Stale-fact warning #2, naming**: "blue/green catalog deployment" is **not** an AWS feature (Section 5.3), **Amazon QuickSight became the Quick Suite / Quick Sight family (2025-10-09)** while the guide's in-scope list literally prints **"Amazon Quick"**, and **Amazon Kinesis Data Firehose has been Amazon Data Firehose since 2024-02-09**, accept old and new names in options.
 
 ---
 
 ## Real-World Case Studies
 
-Every figure below is **customer- or AWS-claimed and unaudited**, copied from an AWS-owned property and dated so you can check it. The examinable point is the **pattern** — which control was applied, which service did the work — never the marketing number.
+Every figure below is **customer- or AWS-claimed and unaudited**, copied from an AWS-owned property and dated so you can check it. The examinable point is the **pattern**, which control was applied, which service did the work, never the marketing number.
 
-### Case A — Integral Ad Science (IAS): hundreds of rules collapsed to two
+### Case A, Integral Ad Science (IAS): hundreds of rules collapsed to two
 
 | Element | Detail |
 |---|---|
@@ -866,25 +866,25 @@ Every figure below is **customer- or AWS-claimed and unaudited**, copied from an
 | Services | **AWS Lake Formation** with **tag-based access control**, Athena, EMR, Glue Data Catalog, federated identity from Okta, and S3 access **only through a Lake Formation data access role** |
 | Pattern | **Column-level control**; database-level tags **inherited by tables and columns**; Athena workgroups per business unit so billing tags and query limits travel with the access; IdP federation feeding the principal |
 | Outcome (AWS-published) | *"With Lake Formation tag-based access controls, IAS reduced hundreds of permission rules down to precisely two rules."* |
-| Exam domain | **Domain 4** — skills 4.2.4 (manage Lake Formation permissions), 4.2.5 (tag- and attribute-based authorization), 4.5.7 (governance framework and sharing patterns) |
+| Exam domain | **Domain 4**: skills 4.2.4 (manage Lake Formation permissions), 4.2.5 (tag- and attribute-based authorization), 4.5.7 (governance framework and sharing patterns) |
 | Source | AWS Big Data Blog, 2021-09-23 (accessed Oct 2026) |
 
 Read IAS as Section 4's arithmetic made real: the "two rules" are tag-based grants, and the inheritance database → table → column is what stopped the rule count from tracking the object count.
 
-### Case B — Oportun: PII discovery that leadership could act on
+### Case B, Oportun: PII discovery that leadership could act on
 
 | Element | Detail |
 |---|---|
 | Customer | **Oportun**, fintech lender operating under FTC Safeguards and privacy obligations |
 | Challenge | Locate and prioritise sensitive data across an Amazon S3 estate without drowning teams in false positives |
-| Services | **Amazon Macie** — automated sensitive-data discovery, **managed and custom data identifiers**, bucket inventory and **bucket sensitivity scores** |
+| Services | **Amazon Macie**: automated sensitive-data discovery, **managed and custom data identifiers**, bucket inventory and **bucket sensitivity scores** |
 | Outcomes (AWS-published) | **+95% discovery accuracy**; **−80% time** to discover sensitive data; faster risk prioritisation (re:Invent 2022 session SEC215 and the Macie customer cards, accessed Oct 2026) |
-| Exam domain | **Domain 4** — skill 4.5.2 "Implement PII identification (for example, Amazon Macie with Lake Formation)" |
+| Exam domain | **Domain 4**: skill 4.5.2 "Implement PII identification (for example, Amazon Macie with Lake Formation)" |
 | Source | `aws.amazon.com/macie/` customer cards; re:Invent 2022 SEC215 slides (accessed Oct 2026) |
 
-The examinable point is the **shape** of the answer: discovery accuracy improved because *identifiers* were tuned (custom identifiers + allow lists), and the output still had to be routed through **EventBridge into a customer-built remediation** — Macie reported, it never prevented.
+The examinable point is the **shape** of the answer: discovery accuracy improved because *identifiers* were tuned (custom identifiers + allow lists), and the output still had to be routed through **EventBridge into a customer-built remediation**: Macie reported, it never prevented.
 
-### Case C — GoDaddy: a central governance account feeding a data mesh
+### Case C, GoDaddy: a central governance account feeding a data mesh
 
 | Element | Detail |
 |---|---|
@@ -893,24 +893,24 @@ The examinable point is the **shape** of the answer: discovery accuracy improved
 | Services | **AWS Lake Formation** + **Glue Data Catalog** on **Amazon S3**, cross-account publishing through **AWS RAM**, **Athena / EMR** consumers, plus **Service Catalog** and **Lambda** that auto-create the consumers' resource links |
 | Pattern | Hub-and-spoke **data mesh**: one **central governance account** publishes the shares, **hundreds of producer accounts** and **thousands of consumer accounts** hold **resource links** and never touch the producer's raw permissions |
 | Outcomes (AWS-published) | *"There are **over 2,000 data products** built on the GoDaddy data mesh on AWS … Our data mesh manages **multiple petabytes of data across hundreds of accounts**."* |
-| Exam domain | **Domain 4** — skills 4.2.4 (manage Lake Formation permissions), 4.5.1 (grant permissions for data sharing), 4.5.7 (governance framework and data sharing patterns) |
+| Exam domain | **Domain 4**: skills 4.2.4 (manage Lake Formation permissions), 4.5.1 (grant permissions for data sharing), 4.5.7 (governance framework and data sharing patterns) |
 | Source | AWS Big Data Blog, 2022-11-21 (accessed Oct 2026) |
 
-Read GoDaddy as Section 5's producer/consumer sequence running at mesh scale: producer grant → **RAM share** → accept → **resource link** → **separate grant on the linked target**, repeated thousands of times and automated with Service Catalog and Lambda so that link creation never becomes a hand-typed step. The governance lesson is that ownership decentralised while **permission semantics stayed central** — the mesh publishes, Lake Formation decides.
+Read GoDaddy as Section 5's producer/consumer sequence running at mesh scale: producer grant → **RAM share** → accept → **resource link** → **separate grant on the linked target**, repeated thousands of times and automated with Service Catalog and Lambda so that link creation never becomes a hand-typed step. The governance lesson is that ownership decentralised while **permission semantics stayed central**: the mesh publishes, Lake Formation decides.
 
-### Case D — EOS Group: PII masking after a DMS → S3 → Redshift migration
+### Case D, EOS Group: PII masking after a DMS → S3 → Redshift migration
 
 | Element | Detail |
 |---|---|
 | Customer | **EOS Group**, financial services |
 | Challenge | A growing on-premises data warehouse with **15% year-over-year data growth**, where capacity had to be guessed years ahead |
 | Services | **AWS MAP** planning plus **AWS DMS** to land the databases in **Amazon S3**, **Amazon Redshift** loading from S3, and **Redshift dynamic data masking** |
-| Pattern | **Dynamic data masking of PII driven by user permissions** — analysts query the real tables while sensitive values are masked for their role: the warehouse-side counterpart of a Lake Formation data filter (skill 4.3.1) |
+| Pattern | **Dynamic data masking of PII driven by user permissions**: analysts query the real tables while sensitive values are masked for their role: the warehouse-side counterpart of a Lake Formation data filter (skill 4.3.1) |
 | Outcomes (AWS-published) | *"By removing the need for on-premises infrastructure, EOS Group achieved a **50 percent reduction in infrastructure costs**"*, with **zero data loss** and **minimal downtime** |
-| Exam domain | **Domain 4** — skill 4.3.1 "Apply data masking and anonymization according to compliance laws or company policies"; skill 4.5.1 for the share-vs-copy vocabulary |
+| Exam domain | **Domain 4**: skill 4.3.1 "Apply data masking and anonymization according to compliance laws or company policies"; skill 4.5.1 for the share-vs-copy vocabulary |
 | Source | AWS case study, `aws.amazon.com/solutions/case-studies/eos-group-case-study/` (accessed Oct 2026) |
 
-Read EOS as the **masking verb living in a different service**: Lake Formation data filters mask *in the lake*, Redshift dynamic data masking masks *in the warehouse*, and **Macie does neither** — it only finds the PII that both masking controls exist to protect. On exam day the engine named in the stem picks the masking mechanism.
+Read EOS as the **masking verb living in a different service**: Lake Formation data filters mask *in the lake*, Redshift dynamic data masking masks *in the warehouse*, and **Macie does neither**; it only finds the PII that both masking controls exist to protect. On exam day the engine named in the stem picks the masking mechanism.
 
 | Case | Pattern it demonstrates | Skills |
 |---|---|---|
@@ -919,7 +919,7 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
 | GoDaddy | Central governance account, AWS RAM shares, resource links, data mesh at scale | 4.2.4 · 4.5.1 · 4.5.7 |
 | EOS Group | Dynamic data masking of PII by user permissions after a DMS → S3 → Redshift migration | 4.3.1 · 4.5.1 |
 
-- **📚 Did you know?** AWS's neighbouring governance case study, **GoDaddy**, reports a Lake Formation data mesh with **over 2,000 data products** across **"multiple petabytes of data across hundreds of accounts"** (AWS Big Data Blog, 2022-11-21, accessed Oct 2026). The number matters less than the topology: a **central governance account** publishing shares through **AWS RAM**, with consumers holding **resource links** — the exact Section 5 sequence at mesh scale.
+- **📚 Did you know?** AWS's neighbouring governance case study, **GoDaddy**, reports a Lake Formation data mesh with **over 2,000 data products** across **"multiple petabytes of data across hundreds of accounts"** (AWS Big Data Blog, 2022-11-21, accessed Oct 2026). The number matters less than the topology: a **central governance account** publishing shares through **AWS RAM**, with consumers holding **resource links**: the exact Section 5 sequence at mesh scale.
 
 ---
 
@@ -949,11 +949,11 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
   "options": [
     "The S3 bucket policy is too permissive and must be rewritten before Lake Formation evaluates anything",
     "The principal's IAM policy still contains s3:GetObject, which overrides Lake Formation",
-    "Lake Formation sets Super permission on all databases and tables to the group IAMAllowedPrincipals by default, so access is still flowing through IAM - revoke that group or enable hybrid access mode",
+    "Lake Formation sets Super permission on all databases and tables to the group IAMAllowedPrincipals by default, so access is still flowing through IAM; revoke that group or enable hybrid access mode",
     "Lake Formation grants are not evaluated for tables created before the service was enabled"
   ],
   "correct": 2,
-  "explanation": "On a default configuration Super is pre-granted to IAMAllowedPrincipals, which means all principals in the account read through their AWS Glue IAM policies - your new grants look ignored. Revoking that group (or switching on hybrid access mode, where opted-in principals must pass both checks) is the documented fix. An S3 policy may be part of the picture, but it cannot explain catalog-wide readability, and IAM s3:GetObject does not override Lake Formation."
+  "explanation": "On a default configuration Super is pre-granted to IAMAllowedPrincipals, which means all principals in the account read through their AWS Glue IAM policies: your new grants look ignored. Revoking that group (or switching on hybrid access mode, where opted-in principals must pass both checks) is the documented fix. An S3 policy may be part of the picture, but it cannot explain catalog-wide readability, and IAM s3:GetObject does not override Lake Formation."
 }
 ```
 
@@ -964,12 +964,12 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
   "question": "A team grants Lake Formation permissions in us-east-1, then discovers that analysts querying the same data from eu-west-1 cannot see it. Which statement is correct?",
   "options": [
     "Grants are global by default, so the eu-west-1 failure must be an IAM problem in the consumer account",
-    "Lake Formation permissions apply only in the Region in which they were granted - cross-Region access uses a resource link created in the consumer Region plus a grant on the target",
+    "Lake Formation permissions apply only in the Region in which they were granted: cross-Region access uses a resource link created in the consumer Region plus a grant on the target",
     "The permissions must be re-granted with the same principal ARN but a Region prefix in the resource ARN",
     "Cross-Region lake access requires copying the underlying S3 objects into eu-west-1 first"
   ],
   "correct": 1,
-  "explanation": "AWS is explicit that Lake Formation permissions are Region-scoped. The supported pattern is a resource link in the consumer Region pointing at the producer's CatalogId/database/table, plus a separate grant on the linked target - no data copy is involved. Duplicating the grant does not travel, IAM cannot substitute for a catalog grant, and copying objects describes replication rather than sharing."
+  "explanation": "AWS is explicit that Lake Formation permissions are Region-scoped. The supported pattern is a resource link in the consumer Region pointing at the producer's CatalogId/database/table, plus a separate grant on the linked target: no data copy is involved. Duplicating the grant does not travel, IAM cannot substitute for a catalog grant, and copying objects describes replication rather than sharing."
 }
 ```
 
@@ -981,11 +981,11 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
   "options": [
     "Tables inherit LF-Tags from databases and columns inherit LF-Tags from tables, inherited values can be overridden, and tag keys must be predefined before they can be assigned",
     "Columns inherit LF-Tags from databases directly, skipping tables, so a database tag never reaches column level",
-    "LF-Tags and IAM tags are interchangeable - either can be used in a Lake Formation grant expression",
+    "LF-Tags and IAM tags are interchangeable: either can be used in a Lake Formation grant expression",
     "A tag key can be created at assignment time, so teams may invent classification values during a grant"
   ],
   "correct": 0,
-  "explanation": "The documented cascade is database -> table -> column with overridable inherited values, and keys/values must exist before assignment (values are stored lower-case, one value per key per resource). AWS states directly that IAM tags and LF-Tags are not interchangeable - they compose, so both must allow the request. A database tag does reach columns, but through the table."
+  "explanation": "The documented cascade is database -> table -> column with overridable inherited values, and keys/values must exist before assignment (values are stored lower-case, one value per key per resource). AWS states directly that IAM tags and LF-Tags are not interchangeable: they compose, so both must allow the request. A database tag does reach columns, but through the table."
 }
 ```
 
@@ -995,8 +995,8 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
   "type": "multiple-choice",
   "question": "A single grant names two different LF-Tag keys (module=Sales AND classification=Restricted), while another names two values of the same key (module=Sales OR module=Marketing). How are they evaluated?",
   "options": [
-    "Both are AND conditions - every named tag must match",
-    "Both are OR conditions - any named tag may match",
+    "Both are AND conditions: every named tag must match",
+    "Both are OR conditions: any named tag may match",
     "Different keys in one grant are AND; multiple values of the same key in one grant are OR",
     "Different keys are OR; multiple values of the same key are AND"
   ],
@@ -1011,9 +1011,9 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
   "type": "multiple-choice",
   "question": "Analysts must never see the ssn column and must only see rows where country = 'UK'. Which combination delivers cell-level security?",
   "options": [
-    "An all-columns wildcard plus a row filter - that yields row-level security only",
+    "An all-columns wildcard plus a row filter: that yields row-level security only",
     "A data filter that excludes the ssn column AND carries the row filter country = 'UK', granted with SELECT on the table",
-    "A column include list with AllRowsWildcard - that yields column-level security only",
+    "A column include list with AllRowsWildcard: that yields column-level security only",
     "An IAM policy with s3:GetObject limited to the UK prefix, plus a table-level SELECT grant"
   ],
   "correct": 1,
@@ -1029,7 +1029,7 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
   "options": [
     "Athena Spark fully supports Lake Formation-permissioned Data Catalog tables, including row filters",
     "Glue ETL jobs enforce column filtering automatically whenever the job role holds Lake Formation grants",
-    "Athena SQL enforces cell-level rules (engine v3 or Spectrum), while Glue ETL does NOT enforce column filtering - so the job must drop or mask the column itself, and Athena Spark does not support Lake Formation-permissioned Data Catalog queries",
+    "Athena SQL enforces cell-level rules (engine v3 or Spectrum), while Glue ETL does NOT enforce column filtering: so the job must drop or mask the column itself, and Athena Spark does not support Lake Formation-permissioned Data Catalog queries",
     "QuickSight performs its own row-level security, so Lake Formation row filters are redundant for dashboards"
   ],
   "correct": 2,
@@ -1049,7 +1049,7 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
     "Both numbers are the same metric reported in different units"
   ],
   "correct": 1,
-  "explanation": "Macie finding severity scores range 1 through 3 and map directly to Low, Medium and High - there is no Critical, and it is not GuardDuty's 1.0-10.0 scale. The bucket sensitivity score is a distinct automated-discovery metric on a -1 to 100 scale. Conflating the two is a favourite distractor."
+  "explanation": "Macie finding severity scores range 1 through 3 and map directly to Low, Medium and High: there is no Critical, and it is not GuardDuty's 1.0-10.0 scale. The bucket sensitivity score is a distinct automated-discovery metric on a -1 to 100 scale. Conflating the two is a favourite distractor."
 }
 ```
 
@@ -1060,12 +1060,12 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
   "question": "A security lead asks for a control that stops employees uploading unmasked PII into a public S3 bucket. Which option is architecturally correct?",
   "options": [
     "Amazon Macie, because it detects sensitive data and blocks non-compliant uploads at ingestion",
-    "Amazon Macie to discover and report the exposure (policy findings such as Policy:IAMUser/S3BucketPublic), plus EventBridge-driven remediation - Macie reports, it does not prevent; preventive controls such as S3 Block Public Access or an SCP do the blocking",
+    "Amazon Macie to discover and report the exposure (policy findings such as Policy:IAMUser/S3BucketPublic), plus EventBridge-driven remediation: Macie reports, it does not prevent; preventive controls such as S3 Block Public Access or an SCP do the blocking",
     "Lake Formation, because it governs S3 bucket policies for public access",
     "AWS Config, because it quarantines objects containing PII"
   ],
   "correct": 1,
-  "explanation": "Macie is a discovery service: it produces policy findings and sensitive-data findings that you route through EventBridge into your own remediation. It never blocks, masks or quarantines - masking and access restrictions are Lake Formation data filters and grants, prevention is S3 Block Public Access, SCPs or similar. Lake Formation does not manage bucket policies, and Config records configuration changes rather than quarantining data."
+  "explanation": "Macie is a discovery service: it produces policy findings and sensitive-data findings that you route through EventBridge into your own remediation. It never blocks, masks or quarantines, masking and access restrictions are Lake Formation data filters and grants, prevention is S3 Block Public Access, SCPs or similar. Lake Formation does not manage bucket policies, and Config records configuration changes rather than quarantining data."
 }
 ```
 
@@ -1075,9 +1075,9 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
   "type": "multiple-choice",
   "question": "Which sequence correctly shares a Redshift dataset with a second AWS account?",
   "options": [
-    "Consumer creates the datashare, producer associates it, then the producer runs CREATE DATABASE - consumer shares are always author-initiated",
-    "Producer creates and authorizes the datashare, consumer associates it, consumer runs CREATE DATABASE ... FROM DATASHARE, then object permissions are granted - datashare objects are read-only for consumers in the basic model",
-    "Producer copies the tables to the consumer's cluster with UNLOAD/COPY - datashares are only supported inside a single account",
+    "Consumer creates the datashare, producer associates it, then the producer runs CREATE DATABASE: consumer shares are always author-initiated",
+    "Producer creates and authorizes the datashare, consumer associates it, consumer runs CREATE DATABASE... FROM DATASHARE, then object permissions are granted: datashare objects are read-only for consumers in the basic model",
+    "Producer copies the tables to the consumer's cluster with UNLOAD/COPY: datashares are only supported inside a single account",
     "The datashare becomes Active automatically once it is created, and read/write access is granted by default"
   ],
   "correct": 1,
@@ -1097,7 +1097,7 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
     "SageMaker ML Lineage Tracking, which records the entities of ML workflows"
   ],
   "correct": 1,
-  "explanation": "CloudTrail is the audit trail for API activity, and Lake Formation logs PutDataLakeSettings, GrantPermissions and RevokePermissions through it - that is a timestamped who-did-what. Config answers 'did the configuration change', Macie answers 'where is sensitive data', and SageMaker lineage answers 'which data produced which model'."
+  "explanation": "CloudTrail is the audit trail for API activity, and Lake Formation logs PutDataLakeSettings, GrantPermissions and RevokePermissions through it: that is a timestamped who-did-what. Config answers 'did the configuration change', Macie answers 'where is sensitive data', and SageMaker lineage answers 'which data produced which model'."
 }
 ```
 
@@ -1129,7 +1129,7 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
     "It removed the separate grant on the linked target, so accepting the share and creating the resource link is now sufficient for the partner to query every shared table"
   ],
   "correct": 2,
-  "explanation": "AWS announced cross-account sharing v5 on 2026-02-11: a single AWS RAM share can now carry hundreds of thousands of tables, new grants are expressed as wildcard patterns rather than per-resource associations, existing shares and APIs continue to work, and adoption is opt-in. Nothing about the two-door rule or Region scoping changed - cross-Region access still needs a resource link in the consumer Region, and the consumer still needs a separate grant on the linked target, because a link grant (DESCRIBE/DROP) is never a target grant."
+  "explanation": "AWS announced cross-account sharing v5 on 2026-02-11: a single AWS RAM share can now carry hundreds of thousands of tables, new grants are expressed as wildcard patterns rather than per-resource associations, existing shares and APIs continue to work, and adoption is opt-in. Nothing about the two-door rule or Region scoping changed: cross-Region access still needs a resource link in the consumer Region, and the consumer still needs a separate grant on the linked target, because a link grant (DESCRIBE/DROP) is never a target grant."
 }
 ```
 
@@ -1142,48 +1142,48 @@ Read EOS as the **masking verb living in a different service**: Lake Formation d
     "INSERT alone covers every Iceberg DML statement on a Lake Formation table, so the denial must come from IAM rather than Lake Formation",
     "DELETE needs DELETE permission, UPDATE and MERGE need INSERT plus DELETE, and all Iceberg DML additionally needs ALTER - Lake Formation permissions are not evaluated for Iceberg writes at all",
     "Lake Formation permissions do not apply to Iceberg DML; only the IAM policy on the Redshift cluster role and Super on the database are evaluated",
-    "Grant Super on the database to the job role - Super is the only permission Redshift checks when it writes to a cataloged Iceberg table"
+    "Grant Super on the database to the job role: Super is the only permission Redshift checks when it writes to a cataloged Iceberg table"
   ],
   "correct": 1,
-  "explanation": "Redshift's behaviour changes (Patch 202, accessed Oct 2026) tighten Lake Formation permission checks for Iceberg DML: DELETE requires DELETE, UPDATE and MERGE require INSERT + DELETE, and every Iceberg DML statement also requires ALTER. Redshift gained Iceberg writes (2025-11-17) and UPDATE/DELETE/MERGE (2026-04-23) including tables on S3 Tables, so a lab that grants only INSERT is now insufficient - and Lake Formation permissions ARE evaluated for these cataloged tables, which is why the INSERT-only grant failed."
+  "explanation": "Redshift's behaviour changes (Patch 202, accessed Oct 2026) tighten Lake Formation permission checks for Iceberg DML: DELETE requires DELETE, UPDATE and MERGE require INSERT + DELETE, and every Iceberg DML statement also requires ALTER. Redshift gained Iceberg writes (2025-11-17) and UPDATE/DELETE/MERGE (2026-04-23) including tables on S3 Tables, so a lab that grants only INSERT is now insufficient: and Lake Formation permissions ARE evaluated for these cataloged tables, which is why the INSERT-only grant failed."
 }
 ```
 
 > [!WARNING]
 > ⚠️ **Exam-day traps for this lesson:**
-> - **Two doors, always** — IAM *and* Lake Formation must both pass; a Lake Formation grant without IAM `glue:*` / `GetDataAccess` fails, and IAM alone can never express row or column rules.
-> - **`IAMAllowedPrincipals` holds `Super` by default** — "my grants do nothing" is usually that, an **unregistered location**, or the **wrong Region**.
-> - **Lake Formation permissions are Region-scoped** — cross-Region access = **resource link in the consumer Region** + grant on the target, never a data copy.
-> - **Link grant ≠ target grant** — Athena and Spectrum **require** a resource link for shared resources, and the link itself only carries `DESCRIBE`/`DROP`.
+> - **Two doors, always**: IAM *and* Lake Formation must both pass; a Lake Formation grant without IAM `glue:*` / `GetDataAccess` fails, and IAM alone can never express row or column rules.
+> - **`IAMAllowedPrincipals` holds `Super` by default**: "my grants do nothing" is usually that, an **unregistered location**, or the **wrong Region**.
+> - **Lake Formation permissions are Region-scoped**: cross-Region access = **resource link in the consumer Region** + grant on the target, never a data copy.
+> - **Link grant ≠ target grant**: Athena and Spectrum **require** a resource link for shared resources, and the link itself only carries `DESCRIBE`/`DROP`.
 > - **Cascade is database → table → column**, tags must **pre-exist**, values are **lower-case**, **one value per key per resource**; grant on the **tag** to cover crawler-created tables.
-> - **Multi-key = AND, multi-value of one key = OR**; **LF-Tags ≠ IAM tags** — they compose, both must allow.
+> - **Multi-key = AND, multi-value of one key = OR**; **LF-Tags ≠ IAM tags**; they compose, both must allow.
 > - **Filter combinatorics:** wildcard + predicate = row-level; columns + all-rows = column-level; columns + predicate = **cell-level**; filters grant **`SELECT` only**, expression **< 2,048 chars**, **≤ 100 filters per principal per table**, no column-to-column compare, **case-sensitive**, **no partition-column filtering**.
 > - **Glue ETL does not enforce column filtering**; **Athena Spark does not support** Lake Formation-permissioned catalog queries; **cell-level needs Athena engine v3 or Spectrum**.
-> - **Macie = discovery, never prevention**, and only for **S3 general purpose buckets** — not RDS, DynamoDB or EBS. Severity is **1/2/3 = Low/Medium/High, no Critical**; **0–100 is the bucket sensitivity score**; findings retained **90 days**.
-> - **`aws.macie` (findings events) vs `aws.macie2` (CloudTrail API service)** — two different identifiers, one service.
-> - **Redshift sharing is not copying** — datashares are **read-only** for consumers, statuses run Pending authorization → Authorized → Active, and the **consumer pays compute plus cross-Region transfer**.
-> - **Governed tables: end of support 2024-12-31** — quote the date, answer with **Iceberg / Hudi / Delta**; **"blue/green catalog deployment" is not an AWS feature**, it is an assembled pattern.
+> - **Macie = discovery, never prevention**, and only for **S3 general purpose buckets**: not RDS, DynamoDB or EBS. Severity is **1/2/3 = Low/Medium/High, no Critical**; **0 to 100 is the bucket sensitivity score**; findings retained **90 days**.
+> - **`aws.macie` (findings events) vs `aws.macie2` (CloudTrail API service)**: two different identifiers, one service.
+> - **Redshift sharing is not copying**: datashares are **read-only** for consumers, statuses run Pending authorization → Authorized → Active, and the **consumer pays compute plus cross-Region transfer**.
+> - **Governed tables: end of support 2024-12-31**: quote the date, answer with **Iceberg / Hudi / Delta**; **"blue/green catalog deployment" is not an AWS feature**, it is an assembled pattern.
 > - **Residency:** preventive = **Control Tower Region-deny SCP**; detective = **Macie `S3BucketReplicatedExternally`**; **Lake Formation is never the Region answer**.
 > - **Audit:** who granted what, when = **CloudTrail**; what changed in configuration = **Config**; where the sensitive data is = **Macie**.
-> - **DataZone and OpenLineage are not on the DEA-C01 in-scope list** — they cannot be the best answer.
+> - **DataZone and OpenLineage are not on the DEA-C01 in-scope list**; they cannot be the best answer.
 
-> **Comparative Verdict — how this topic compares on exam day**
-> - **Versus other clouds:** DEA-C01 tests **AWS services only**. Amazon Macie against a competitor's DLP product, or Lake Formation against an external catalog, never appears as a fair comparison — third-party DLP/catalog tools, Azure Purview, Google Data Catalog and OpenLineage are out of scope by construction. Answer with an in-scope AWS service (Lake Formation, Macie, CloudTrail, Config, Control Tower, KMS, IAM/RAM) or an AWS-documented behaviour.
-> - **Versus self-managed / on-premises:** the exam's preference is **managed, declarative and auditable over bespoke and manual** — LF-Tag grants beat hand-maintained per-table ACLs (IAS's "hundreds of rules → two"), Macie jobs beat a custom scanning script, CloudTrail beats a home-grown audit log. An option describing hand-rolled permission code is the distractor, not the bonus; the DIY answer must also re-implement what Lake Formation gives free (Region scoping, inheritance, temporary credential vending).
-> - **Versus another AWS service:** choose by *verb*, not proximity — **discover** (Macie) · **allow/deny visibility** (Lake Formation, with IAM as Door 1) · **encrypt** (KMS) · **prove an API call happened** (CloudTrail) · **prove configuration state** (AWS Config) · **prevent a Region** (Control Tower SCP) · **share warehouse data live** (Redshift datashare) · **trace model provenance** (SageMaker ML Lineage Tracking). Wrong answers almost always swap two adjacent verbs.
-> - **Versus a manual, human process:** IAS's two-rule governance and Oportun's +95% / −80% discovery results (both AWS-published customer claims, accessed Oct 2026) show the *shape* of the target architecture — tag-based grants plus identifier-tuned discovery — but every published percentage is "the customer achieved", never "AWS guarantees". On exam day, prefer the option that is **automated, inherited and evidence-producing** over the one that depends on a human remembering to re-grant.
+> **Comparative Verdict: how this topic compares on exam day**
+> - **Versus other clouds:** DEA-C01 tests **AWS services only**. Amazon Macie against a competitor's DLP product, or Lake Formation against an external catalog, never appears as a fair comparison: third-party DLP/catalog tools, Azure Purview, Google Data Catalog and OpenLineage are out of scope by construction. Answer with an in-scope AWS service (Lake Formation, Macie, CloudTrail, Config, Control Tower, KMS, IAM/RAM) or an AWS-documented behaviour.
+> - **Versus self-managed / on-premises:** the exam's preference is **managed, declarative and auditable over bespoke and manual**: LF-Tag grants beat hand-maintained per-table ACLs (IAS's "hundreds of rules → two"), Macie jobs beat a custom scanning script, CloudTrail beats a home-grown audit log. An option describing hand-rolled permission code is the distractor, not the bonus; the DIY answer must also re-implement what Lake Formation gives free (Region scoping, inheritance, temporary credential vending).
+> - **Versus another AWS service:** choose by *verb*, not proximity: **discover** (Macie) · **allow/deny visibility** (Lake Formation, with IAM as Door 1) · **encrypt** (KMS) · **prove an API call happened** (CloudTrail) · **prove configuration state** (AWS Config) · **prevent a Region** (Control Tower SCP) · **share warehouse data live** (Redshift datashare) · **trace model provenance** (SageMaker ML Lineage Tracking). Wrong answers almost always swap two adjacent verbs.
+> - **Versus a manual, human process:** IAS's two-rule governance and Oportun's +95% / −80% discovery results (both AWS-published customer claims, accessed Oct 2026) show the *shape* of the target architecture, tag-based grants plus identifier-tuned discovery, but every published percentage is "the customer achieved", never "AWS guarantees". On exam day, prefer the option that is **automated, inherited and evidence-producing** over the one that depends on a human remembering to re-grant.
 
 > [!SUCCESS]
 > **Key Takeaways:**
-> 1. Every governed request passes **two doors — IAM and Lake Formation**; IAM answers "may you call this API?", Lake Formation answers "may you see this database/table/column/row?", and Lake Formation **vends temporary S3 credentials** after `lakeformation:GetDataAccess`.
-> 2. The default that breaks everything: **`Super` on all databases and tables is pre-granted to `IAMAllowedPrincipals`** — revoke it or enable **hybrid access mode**; **unregistered locations** and **wrong-Region grants** are the other two "grants do nothing" causes, because **permissions apply only in the Region where granted**.
+> 1. Every governed request passes **two doors: IAM and Lake Formation**; IAM answers "may you call this API?", Lake Formation answers "may you see this database/table/column/row?", and Lake Formation **vends temporary S3 credentials** after `lakeformation:GetDataAccess`.
+> 2. The default that breaks everything: **`Super` on all databases and tables is pre-granted to `IAMAllowedPrincipals`**: revoke it or enable **hybrid access mode**; **unregistered locations** and **wrong-Region grants** are the other two "grants do nothing" causes, because **permissions apply only in the Region where granted**.
 > 3. Permission layers: catalog (`CREATE_CATALOG`), database (`ALL/ALTER/CREATE_TABLE/DESCRIBE/DROP`), table (`+ DELETE/INSERT/SELECT`), S3 location (`DATA_LOCATION_ACCESS`), LF-Tag (`CREATE_LF_TAG/ALTER/DROP`, `ASSOCIATE/DESCRIBE`), resource link (`DESCRIBE/DROP`); **data-lake administrators are capped at 30**, and an **IAM administrator cannot grant Lake Formation permissions** without that role.
-> 4. **Data filters** produce the three named controls — wildcard+predicate = **row-level**, columns+all-rows = **column-level**, columns+predicate = **cell-level** — are grantable with **`SELECT` only**, and are bounded by **< 2,048 chars**, **≤100 per principal per table**, **5-level structs**, **no array/map**, **no partition-column filtering**, **no column-to-column comparison**, **case-sensitive** strings.
-> 5. **LF-Tags** must be predefined, are stored **lower-case**, allow **one value per key per resource**, and cascade **database → table → column** (overridable); grant on the **tag** to cover future and crawler-created tables; **multiple keys = AND, multiple values of one key = OR**; **LF-Tags and IAM tags are not interchangeable** — they compose.
+> 4. **Data filters** produce the three named controls, wildcard+predicate = **row-level**, columns+all-rows = **column-level**, columns+predicate = **cell-level**, are grantable with **`SELECT` only**, and are bounded by **< 2,048 chars**, **≤100 per principal per table**, **5-level structs**, **no array/map**, **no partition-column filtering**, **no column-to-column comparison**, **case-sensitive** strings.
+> 5. **LF-Tags** must be predefined, are stored **lower-case**, allow **one value per key per resource**, and cascade **database → table → column** (overridable); grant on the **tag** to cover future and crawler-created tables; **multiple keys = AND, multiple values of one key = OR**; **LF-Tags and IAM tags are not interchangeable**; they compose.
 > 6. **Cross-account sharing** = producer grant → **AWS RAM** (same Organization instant, otherwise invitation) → consumer **resource link** + **separate target grant** → Athena/Spectrum (both require links); **cross-Region** uses links in the consumer Region; direct principal grants **cannot be re-shared**.
-> 7. **Governed tables** were an ACID S3 table type with **end of support on 2024-12-31** — answer table-format questions with **Iceberg, Hudi or Delta Lake**, where Lake Formation grants and filters still apply; **blue/green catalog release is an assembled pattern** (version diffs, views ≤10 base tables, swappable resource links, additive-before-deletive), not an AWS feature name.
+> 7. **Governed tables** were an ACID S3 table type with **end of support on 2024-12-31**: answer table-format questions with **Iceberg, Hudi or Delta Lake**, where Lake Formation grants and filters still apply; **blue/green catalog release is an assembled pattern** (version diffs, views ≤10 base tables, swappable resource links, additive-before-deletive), not an AWS feature name.
 > 8. **Engine enforcement is uneven:** Athena SQL and Spectrum enforce column/row/cell (cell-level needs **Athena engine v3 or Spectrum**), **Glue ETL does not enforce column filtering**, **Athena Spark is unsupported**, QuickSight Enterprise maps grants to **users/groups** (Standard to **IAM roles**) and explores **through Athena**.
-> 9. **Amazon Macie discovers, never prevents**, and only for **S3 general purpose buckets**: automated discovery plus scheduled **discovery jobs (once/daily/weekly/monthly, incremental)**, **managed + custom identifiers (immutable, proximity 1–300 chars, default severity Medium)**, policy and sensitive-data findings retained **90 days**, severity **1/2/3 = Low/Medium/High (no Critical)** vs the bucket **sensitivity score −1…100**, routed through **EventBridge `source=aws.macie`, `detail-type="Macie Finding"`** (CloudTrail service **`aws.macie2`**), with **us-east-1 example pricing** $0.10/bucket + $0.01/100k objects + tiered inspected GB.
-> 10. **Redshift datashares** share **live data without copying**, are **read-only for consumers**, run **Pending authorization → Authorized → Active**, are created with `CREATE DATABASE … FROM DATASHARE` plus separate object grants, come in **standard / AWS Data Exchange / Lake Formation-managed** flavours, and bill the **consumer for compute and cross-Region transfer** — with **no per-cluster datashare cap**.
-> 11. **Lineage** = **SageMaker ML Lineage Tracking** (Experiment → Trial → Trial Component; Artifact/Action/Context/Association with `Produced`, `DerivedFrom`, `SameAs` across accounts; manual quotas **3,000/6,000/6,000/500 = 15,500**) plus **Glue `GetTableVersions` / Table State Change** for schema lineage and **CloudTrail** for access lineage — OpenLineage and DataZone are not in scope.
+> 9. **Amazon Macie discovers, never prevents**, and only for **S3 general purpose buckets**: automated discovery plus scheduled **discovery jobs (once/daily/weekly/monthly, incremental)**, **managed + custom identifiers (immutable, proximity 1 to 300 chars, default severity Medium)**, policy and sensitive-data findings retained **90 days**, severity **1/2/3 = Low/Medium/High (no Critical)** vs the bucket **sensitivity score −1…100**, routed through **EventBridge `source=aws.macie`, `detail-type="Macie Finding"`** (CloudTrail service **`aws.macie2`**), with **us-east-1 example pricing** $0.10/bucket + $0.01/100k objects + tiered inspected GB.
+> 10. **Redshift datashares** share **live data without copying**, are **read-only for consumers**, run **Pending authorization → Authorized → Active**, are created with `CREATE DATABASE … FROM DATASHARE` plus separate object grants, come in **standard / AWS Data Exchange / Lake Formation-managed** flavours, and bill the **consumer for compute and cross-Region transfer**: with **no per-cluster datashare cap**.
+> 11. **Lineage** = **SageMaker ML Lineage Tracking** (Experiment → Trial → Trial Component; Artifact/Action/Context/Association with `Produced`, `DerivedFrom`, `SameAs` across accounts; manual quotas **3,000/6,000/6,000/500 = 15,500**) plus **Glue `GetTableVersions` / Table State Change** for schema lineage and **CloudTrail** for access lineage: OpenLineage and DataZone are not in scope.
 > 12. **Privacy is three services and one responsibility split:** **Macie discovers**, **Lake Formation enforces**, **KMS encrypts**; residency prevention = **Control Tower Region-deny SCP** (+ replication/backup switches) with Macie **`S3BucketReplicatedExternally`** as the detective; erasure = S3 lifecycle **including noncurrent versions** + **DynamoDB TTL** + re-crawl (Object Lock blocks it); audit = **CloudTrail** (`GrantPermissions`, `RevokePermissions`, `PutDataLakeSettings`) vs **Config**; and **compliance certifications from AWS never transfer the customer's own compliance obligation**.

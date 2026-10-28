@@ -1,16 +1,16 @@
 ---
-title: "Estado Compartido — Mutex, RwLock, Arc y Atómicos"
+title: "Estado Compartido, Mutex, RwLock, Arc y Atómicos"
 description: "Domine la concurrencia con estado compartido usando Mutex, RwLock, Arc y tipos atómicos para programación lock-free"
 order: 3
 duration: "90 minutos"
 difficulty: advanced
 ---
 
-# Estado Compartido — Mutex, RwLock, Arc y Atómicos
+# Estado Compartido: Mutex, RwLock, Arc y Atómicos
 
 Mientras que el paso de mensajes es excelente, el estado compartido a veces es la herramienta correcta. El sistema de tipos de Rust garantiza que el estado compartido se acceda de forma segura.
 
-## Mutex\<T\> — Exclusión Mutua
+## Mutex\<T\>: Exclusión Mutua
 
 ```rust
 use std::sync::Mutex;
@@ -72,7 +72,7 @@ fn main() {
 > [!WARNING]
 > Un mutex envenenado significa que los datos protegidos pueden estar en estado inconsistente. Usa `lock().unwrap_or_else(|e| e.into_inner())` para recuperar si estás seguro de que es seguro.
 
-### MutexGuard — Lock RAII
+### MutexGuard: Lock RAII
 
 ```rust
 use std::sync::Mutex;
@@ -92,7 +92,7 @@ fn main() {
 }
 ```
 
-## RwLock\<T\> — Lock de Lectura-Escritura
+## RwLock\<T\>: Lock de Lectura-Escritura
 
 Múltiples lectores O un escritor:
 
@@ -148,7 +148,7 @@ fn main() {
 | `write()` | Sí | <code>RwLockWriteGuard&lt;T&gt;</code> |
 | `try_write()` | No | `Result<RwLockWriteGuard<T>, TryLockError>` |
 
-## Arc — Conteo de Referencia Atómica
+## Arc: Conteo de Referencia Atómica
 
 `Arc<T>` permite propiedad compartida entre hilos:
 
@@ -188,7 +188,7 @@ ArcInner<T> {
 }
 ```
 
-### Weak — Rompiendo Ciclos
+### Weak: Rompiendo Ciclos
 
 ```rust
 use std::sync::{Arc, Weak};
@@ -208,7 +208,7 @@ fn main() {
 }
 ```
 
-## Atómicos — Programación Lock-Free
+## Atómicos: Programación Lock-Free
 
 Los tipos atómicos proporcionan operaciones thread-safe sin locks:
 

@@ -334,7 +334,7 @@ export default function AboutPageClient({ content }: AboutPageClientProps) {
                     {/* <Users className="w-12 h-12 text-white" /> */}
                     {/* The photograph is served as WebP with a PNG fallback.
                         The source files were optimised by
-                        `scripts/optimize-images.mjs` — 2.4 MB → 60 KB. */}
+                        `scripts/optimize-images.mjs`, 2.4 MB → 60 KB. */}
                     <picture>
                       <source
                         srcSet={`/team/${member.name.toLowerCase().replace(/\s+/g, '-')}.webp`}

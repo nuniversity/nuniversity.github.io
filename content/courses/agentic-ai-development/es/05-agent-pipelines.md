@@ -10,7 +10,7 @@ duration: "70 min"
 
 ## ¿Qué Son los Pipelines de Agentes?
 
-Los pipelines de agentes son flujos de trabajo estructurados que encadenan múltiples operaciones — llamadas a herramientas, ejecuciones de skills, delegaciones a subagentes — en secuencias coordinadas. Los pipelines transforman a un agente de asistente de un solo paso en un motor de automatización multi-paso capaz de flujos de trabajo complejos de ingeniería de software.
+Los pipelines de agentes son flujos de trabajo estructurados que encadenan múltiples operaciones, llamadas a herramientas, ejecuciones de skills, delegaciones a subagentes, en secuencias coordinadas. Los pipelines transforman a un agente de asistente de un solo paso en un motor de automatización multi-paso capaz de flujos de trabajo complejos de ingeniería de software.
 
 ```mermaid
 flowchart TD
@@ -652,10 +652,10 @@ OpenCode admite flujos de trabajo tipo pipeline mediante encadenamiento de skill
   "type": "multiple-choice",
   "question": "¿Qué estrategia de manejo de errores debería usarse para una etapa de despliegue a producción que falla?",
   "options": [
-    "retry — seguir intentando hasta que tenga éxito",
-    "skip — pasar a la siguiente etapa",
-    "abort — detener el pipeline inmediatamente",
-    "ignore — fingir que no pasó"
+    "retry: seguir intentando hasta que tenga éxito",
+    "skip: pasar a la siguiente etapa",
+    "abort: detener el pipeline inmediatamente",
+    "ignore: fingir que no pasó"
   ],
   "correct": 2,
   "explanation": "Un despliegue a producción fallido debería abortar el pipeline para prevenir un estado inconsistente. Reintentar indefinidamente podría empeorar las cosas. El pipeline debería detenerse, informar del error y potencialmente activar una compensación de rollback."

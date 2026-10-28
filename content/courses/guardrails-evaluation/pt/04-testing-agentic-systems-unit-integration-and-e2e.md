@@ -19,7 +19,7 @@ Sistemas agentivos introduzem dificuldades únicas:
 - **Variabilidade de latência**: Chamadas LLM podem levar de 500ms a 30s
 
 > [!WARNING]
-> Nunca use chaves de API de produção ou bancos de dados em nenhum teste — unitário, integração ou E2E. Use sempre ambientes de teste dedicados com dados isolados.
+> Nunca use chaves de API de produção ou bancos de dados em nenhum teste: unitário, integração ou E2E. Use sempre ambientes de teste dedicados com dados isolados.
 
 ---
 
@@ -356,7 +356,7 @@ jobs:
   "question": "Uma equipe escreve um teste para verificar se o grafo do agente contém todos os nós necessários. Que tipo de teste é este?",
   "options": ["Teste unitário", "Teste de integração", "Teste de estrutura do grafo", "Teste E2E"],
   "correct": 2,
-  "explanation": "Testes de estrutura do grafo validam a topologia do agente — garantindo que todos os nós necessários existam e as conexões estejam corretas."
+  "explanation": "Testes de estrutura do grafo validam a topologia do agente: garantindo que todos os nós necessários existam e as conexões estejam corretas."
 }
 ```
 
@@ -415,7 +415,7 @@ jobs:
 > - Testar agentes requer estratégia que aborde não-determinismo, efeitos colaterais, fluxos multi-etapas e estado.
 > - A pirâmide de testes para agentes tem cinco camadas: análise estática, unitário, estrutura do grafo, integração e E2E.
 > - Testes unitários devem simular chamadas LLM para testar a lógica do componente deterministicamente.
-> - Testes de estrutura do grafo validam a topologia — uma camada única para sistemas agentivos.
+> - Testes de estrutura do grafo validam a topologia: uma camada única para sistemas agentivos.
 > - Testes de integração usam ambientes sandbox para verificar execução de ferramentas.
 > - Cenários E2E simulam sessões completas contra staging; são lentos mas fornecem alta confiança.
 > - Pipelines CI/CD devem rodar análise estática e unitários em todo commit, integração em PRs, e E2E em releases.

@@ -1,6 +1,6 @@
 ---
 title: "Herramientas Básicas"
-description: "Aprende a crear y usar herramientas en LangGraph — desde funciones Python simples hasta APIs externas — y cómo los agentes las ejecutan basándose en decisiones del LLM."
+description: "Aprende a crear y usar herramientas en LangGraph, desde funciones Python simples hasta APIs externas, y cómo los agentes las ejecutan basándose en decisiones del LLM."
 order: 7
 duration: "35 minutos"
 difficulty: "iniciante"
@@ -17,7 +17,7 @@ Las herramientas son lo que hace que los agentes de IA sean útiles. Sin herrami
 Una herramienta es una función de Python con:
 
 1. Un **nombre** (el nombre de la función)
-2. Una **descripción** (el docstring — el LLM la usa para decidir)
+2. Una **descripción** (el docstring: el LLM la usa para decidir)
 3. **Parámetros** tipados (el LLM genera los argumentos)
 4. Un **valor de retorno** (enviado de vuelta al LLM)
 

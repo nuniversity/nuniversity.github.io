@@ -74,7 +74,7 @@ flowchart LR
 
 ## Generator Expressions
 
-Generators produce values lazily — one at a time — which is crucial for large or infinite sequences.
+Generators produce values lazily, one at a time, which is crucial for large or infinite sequences.
 
 ```python
 from typing import Generator, List

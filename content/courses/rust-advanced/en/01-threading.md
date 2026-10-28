@@ -1,14 +1,14 @@
 ---
-title: "Threading — spawn, join, and Send + Sync"
+title: "Threading, spawn, join, and Send + Sync"
 description: "Master OS threads in Rust: spawn, join, move closures, scoped threads, and the Send + Sync traits for data-race freedom"
 order: 1
 duration: "90 minutes"
 difficulty: advanced
 ---
 
-# Threading — spawn, join, and Send + Sync
+# Threading: spawn, join, and Send + Sync
 
-Rust provides OS threads through `std::thread`. Combined with the ownership system, it guarantees **data-race freedom** at compile time — no other language offers this without a runtime or garbage collector.
+Rust provides OS threads through `std:thread`. Combined with the ownership system, it guarantees **data-race freedom** at compile time: no other language offers this without a runtime or garbage collector.
 
 ## Basic Threading
 
@@ -105,7 +105,7 @@ fn main() {
 }
 ```
 
-## Thread Builder — Customizing Threads
+## Thread Builder: Customizing Threads
 
 ```rust
 use std::thread;
@@ -164,7 +164,7 @@ fn main() {
 > | Auto-join | No | Yes (at scope end) |
 > | Return values | Via JoinHandle | Via spawned handle |
 
-## Thread Communication — Basic Patterns
+## Thread Communication: Basic Patterns
 
 ```rust
 use std::thread;

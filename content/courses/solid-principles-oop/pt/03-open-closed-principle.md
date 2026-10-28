@@ -35,7 +35,7 @@ class ProcessadorPagamento:
 ```
 
 > [!WARNING]
-> Cada vez que um novo método de pagamento é necessário, você deve modificar a classe `ProcessadorPagamento`. Isso viola o OCP — a classe não está fechada para modificação.
+> Cada vez que um novo método de pagamento é necessário, você deve modificar a classe `ProcessadorPagamento`. Isso viola o OCP: a classe não está fechada para modificação.
 
 ### DEPOIS: Refatoração Compatível com OCP
 
@@ -107,7 +107,7 @@ class ProcessadorPagamento:
 ```
 
 > [!NOTE]
-> A classe `ProcessadorPagamento` está **fechada para modificação** — seu código nunca muda quando novos métodos de pagamento são adicionados. Está **aberta para extensão** — novos métodos são adicionados criando novas subclasses `MetodoPagamento` e registrando-as.
+> A classe `ProcessadorPagamento` está **fechada para modificação**, seu código nunca muda quando novos métodos de pagamento são adicionados. Está **aberta para extensão**, novos métodos são adicionados criando novas subclasses `MetodoPagamento` e registrando-as.
 
 ```python
 # Uso — adicionar criptomoeda não altera código existente!

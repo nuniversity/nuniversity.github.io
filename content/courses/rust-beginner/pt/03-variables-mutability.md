@@ -8,7 +8,7 @@ difficulty: "iniciante"
 
 # Variáveis e Mutabilidade
 
-Variáveis em Rust são **imutáveis por padrão**. Esta é uma das decisões centrais de design da linguagem — ela leva você a um código mais seguro e previsível.
+Variáveis em Rust são **imutáveis por padrão**. Esta é uma das decisões centrais de design da linguagem: ela leva você a um código mais seguro e previsível.
 
 ## Variáveis Imutáveis
 

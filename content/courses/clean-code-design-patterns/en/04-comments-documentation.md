@@ -8,10 +8,10 @@ difficulty: "intermediate"
 
 # Comments & Documentation
 
-Comments are a double-edged sword. Good comments explain "why" — the reasoning behind a decision. Bad comments explain "what" — which the code should already communicate. The best comment is the one you do not need to write because the code is clear.
+Comments are a double-edged sword. Good comments explain "why", the reasoning behind a decision. Bad comments explain "what", which the code should already communicate. The best comment is the one you do not need to write because the code is clear.
 
 > [!NOTE]
-> "Don't comment bad code — rewrite it." — Brian W. Kernighan
+> "Don't comment bad code, rewrite it.", Brian W. Kernighan
 
 ## Self-Documenting Code
 

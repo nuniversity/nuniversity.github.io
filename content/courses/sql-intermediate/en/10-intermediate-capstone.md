@@ -138,7 +138,7 @@ ORDER BY lifetime_value DESC;
 
 ## Challenge 2: Product Performance Report (Multiple JOINs)
 
-Show product name, category, total units sold, total revenue, total profit (revenue - cost * quantity), and current stock. Order by profit descending.
+Show product name, category, total units sold, total revenue, total profit (revenue: cost * quantity), and current stock. Order by profit descending.
 
 ```sql
 WITH product_sales AS (

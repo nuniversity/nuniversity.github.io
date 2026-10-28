@@ -58,7 +58,7 @@ result = app.invoke({"messages": ["Hola"]}, config)
 ```
 
 [!WARNING]
-MemorySaver es efímero — todos los checkpoints se pierden cuando el proceso Python termina. Usa PostgresSaver o un guardador personalizado para cargas de trabajo de producción.
+MemorySaver es efímero: todos los checkpoints se pierden cuando el proceso Python termina. Usa PostgresSaver o un guardador personalizado para cargas de trabajo de producción.
 
 ### Comparación: Backends de Checkpoint
 
@@ -115,7 +115,7 @@ app.invoke({"messages": ["Inicio thread 2"]}, {"configurable": {"thread_id": "t2
 El estado tiene namespace por thread. Los checkpoints forman una línea de tiempo dentro de cada thread.
 
 [!IMPORTANT]
-El aislamiento de thread es crítico en producción. Cada sesión de usuario recibe su propio `thread_id` — nunca compartas un `thread_id` entre usuarios. Usa un identificador único como `user_id:conversation_id` como ID del thread para garantizar aislamiento.
+El aislamiento de thread es crítico en producción. Cada sesión de usuario recibe su propio `thread_id`: nunca compartas un `thread_id` entre usuarios. Usa un identificador único como `user_id:conversation_id` como ID del thread para garantizar aislamiento.
 
 ---
 
@@ -134,7 +134,7 @@ replayed = app.invoke(
 )
 ```
 
-La reproducción **no** re-ejecuta nodos anteriores al checkpoint — reanuda desde ese estado exacto.
+La reproducción **no** re-ejecuta nodos anteriores al checkpoint: reanuda desde ese estado exacto.
 
 [!TIP]
 El replay es invaluable para pruebas y depuración. Puedes reproducir un checkpoint específico con entrada modificada para ver cómo se comportaría el grafo con datos diferentes en ese estado exacto.
@@ -214,7 +214,7 @@ La bifurcación permite **pruebas A/B de decisiones de agente**. Ejecuta múltip
 Cada ejecución de nodo crea un checkpoint de estado completo. Si tu estado es grande (vectores de embedding, historiales completos de conversación), el almacenamiento de checkpoint puede crecer rápidamente. Considera:
 - Usar PostgresSaver con particionamiento de tabla por thread_id
 - Implementar política de retención que limpie checkpoints antiguos
-- Mantener esquemas de estado ligeros — almacena solo lo que los nodos downstream necesitan
+- Mantener esquemas de estado ligeros: almacena solo lo que los nodos downstream necesitan
 - Usar guardadores personalizados con políticas de ciclo de vida S3/GCS
 
 ---

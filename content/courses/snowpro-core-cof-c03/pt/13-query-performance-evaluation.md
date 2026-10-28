@@ -1,16 +1,16 @@
 ---
-title: "Domínio 4.1 — Avaliação de Desempenho de Queries"
+title: "Domínio 4.1, Avaliação de Desempenho de Queries"
 description: "Aprenda a diagnosticar problemas de desempenho de queries no Snowflake usando Query Profile, Query History, views do ACCOUNT_USAGE e entenda os principais gargalos: data spilling, pruning ineficiente, exploding joins e queuing."
 order: 13
 difficulty: intermediate
 duration: "65 min"
 ---
 
-# Domínio 4.1 — Avaliação de Desempenho de Queries
+# Domínio 4.1: Avaliação de Desempenho de Queries
 
 ## Peso no Exame
 
-O **Domínio 4.0 — Otimização de Desempenho, Consultas e Transformação** representa **~21%** do exame — o segundo maior domínio.
+O **Domínio 4.0, Otimização de Desempenho, Consultas e Transformação** representa **~21%** do exame, o segundo maior domínio.
 
 > [!NOTE]
 > Esta lição corresponde ao **Objetivo de Exame 4.1**: *Avaliar o desempenho de queries*, incluindo Query Profile, Query Insights, views do ACCOUNT_USAGE e boas práticas de gerenciamento de workload.
@@ -73,10 +73,10 @@ O **Query Profile** é a principal ferramenta para diagnosticar o desempenho de 
 
 O Query Profile renderiza o **plano de execução da query** como uma árvore de nós operadores. Cada nó operador exibe:
 
-- **Linhas processadas** — contagens de linhas de entrada e saída
-- **Tempo** — quanto tempo o operador levou
-- **Bytes** — dados lidos/processados/escritos
-- **Estatísticas por etapa** — consumo de recursos por nó
+- **Linhas processadas**: contagens de linhas de entrada e saída
+- **Tempo**: quanto tempo o operador levou
+- **Bytes**: dados lidos/processados/escritos
+- **Estatísticas por etapa**: consumo de recursos por nó
 
 ### Principais Nós Operadores
 
@@ -96,7 +96,7 @@ O Query Profile renderiza o **plano de execução da query** como uma árvore de
 
 ### 1. Data Spilling (Derramamento de Dados para Armazenamento)
 
-**O que é:** Quando os dados da query excedem a memória e o disco local do warehouse, eles transbordam (derramam) para o armazenamento remoto — aumentando massivamente o I/O e a latência.
+**O que é:** Quando os dados da query excedem a memória e o disco local do warehouse, eles transbordam (derramam) para o armazenamento remoto: aumentando massivamente o I/O e a latência.
 
 **Como detectar:**
 - No Query Profile: `Bytes spilled to local storage` ou `Bytes spilled to remote storage` > 0
@@ -130,7 +130,7 @@ ORDER BY bytes_spilled_to_remote_storage DESC;
 
 ### 2. Pruning Ineficiente (Poda Ineficiente de Partições)
 
-**O que é:** O Snowflake não consegue ignorar micro-partições porque os valores da coluna de filtro estão distribuídos por muitas partições — a query lê mais dados do que o necessário.
+**O que é:** O Snowflake não consegue ignorar micro-partições porque os valores da coluna de filtro estão distribuídos por muitas partições: a query lê mais dados do que o necessário.
 
 **Como detectar no Query Profile:**
 - O nó `TableScan` mostra `Partitions scanned` próximo de `Partitions total`
@@ -154,7 +154,7 @@ SELECT sum(valor) FROM pedidos WHERE status = 'CONCLUIDO';
 
 ### 3. Exploding Joins (Joins Explosivos)
 
-**O que é:** Um JOIN que produz **muito mais linhas do que o esperado** — geralmente porque as chaves de join não são únicas (join muitos-para-muitos criando um produto cartesiano).
+**O que é:** Um JOIN que produz **muito mais linhas do que o esperado**: geralmente porque as chaves de join não são únicas (join muitos-para-muitos criando um produto cartesiano).
 
 **Como detectar no Query Profile:**
 - Um nó `Join` mostra linhas de saída >> linhas de entrada
@@ -342,7 +342,7 @@ GROUP BY 1;
 
 > [!SUCCESS]
 > **Pontos-Chave para o Dia do Exame:**
-> 1. **Query Profile** = ferramenta diagnóstica principal — acesse em Snowsight Activity → Query History
+> 1. **Query Profile** = ferramenta diagnóstica principal: acesse em Snowsight Activity → Query History
 > 2. **Spilling** = warehouse muito pequeno → aumentar tamanho | **Queuing** = muitas queries concorrentes → escalar horizontalmente
 > 3. **Pruning ineficiente** = alta proporção `partitions_scanned / partitions_total` → adicionar cluster key
 > 4. **Exploding join** = saída do nó join >> entrada → verificar chaves não únicas

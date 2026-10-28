@@ -157,8 +157,8 @@ export default function LessonExam({
                     key={question.id}
                     type="button"
                     onClick={() => scrollToQuestion(index)}
-                    aria-label={`${index + 1} — ${stateLabel}`}
-                    title={`${index + 1} — ${stateLabel}`}
+                    aria-label={`${index + 1}: ${stateLabel}`}
+                    title={`${index + 1}: ${stateLabel}`}
                     className={`h-9 rounded-lg text-xs font-bold border transition-colors ${
                       isAnswered
                         ? 'bg-primary/15 border-primary/40 text-primary hover:bg-primary/25'
@@ -358,7 +358,7 @@ export default function LessonExam({
             </span>
           </p>
           <p className="text-sm text-muted-foreground mt-1 break-words min-w-0">
-            {lessonDict?.start_hint || 'Answer every question — you can navigate freely and the timer counts down.'}
+            {lessonDict?.start_hint || 'Answer every question: you can navigate freely and the timer counts down.'}
           </p>
         </div>
         <button

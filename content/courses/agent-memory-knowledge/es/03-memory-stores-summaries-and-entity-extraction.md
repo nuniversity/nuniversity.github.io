@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Almacenamiento de Memoria, Resúmenes y Extracción de Entidades
 
-LangChain proporciona varias clases de memoria integradas que ofrecen a los agentes diferentes formas de recordar. Elegir el tipo de memoria correcto — o combinarlos — determina qué tan bien tu agente recuerda y utiliza información pasada.
+LangChain proporciona varias clases de memoria integradas que ofrecen a los agentes diferentes formas de recordar. Elegir el tipo de memoria correcto, o combinarlos, determina qué tan bien tu agente recuerda y utiliza información pasada.
 
 ---
 
@@ -113,7 +113,7 @@ print(vars["entities"])
 # Output: {'Alice': 'Alice is the lead engineer. Alice prefers Python over Java.'}
 ```
 
-La memoria de entidades es poderosa para la personalización — un agente puede saludar a un usuario por su nombre y recordar sus preferencias sin preguntar de nuevo.
+La memoria de entidades es poderosa para la personalización: un agente puede saludar a un usuario por su nombre y recordar sus preferencias sin preguntar de nuevo.
 
 ### Pipeline de Extracción de Entidades
 
@@ -282,10 +282,10 @@ combined = CombinedMemory(
 
 La consolidación mueve información del almacenamiento de corto plazo al de largo plazo. Un cronograma típico:
 
-1. **En cada turno** — añadir al buffer (corto plazo)
-2. **Cada N turnos** — extraer entidades y actualizar almacén
-3. **En el disparador de resumen** — comprimir buffer en memoria de resumen
-4. **Al final de la sesión** — persistir hechos de entidades en base de conocimiento permanente
+1. **En cada turno**: añadir al buffer (corto plazo)
+2. **Cada N turnos**: extraer entidades y actualizar almacén
+3. **En el disparador de resumen**: comprimir buffer en memoria de resumen
+4. **Al final de la sesión**: persistir hechos de entidades en base de conocimiento permanente
 
 ```mermaid
 stateDiagram-v2

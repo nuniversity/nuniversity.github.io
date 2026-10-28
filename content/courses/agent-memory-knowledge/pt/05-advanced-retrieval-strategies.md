@@ -127,7 +127,7 @@ def mmr_rerank(
 | :--- | :--- |
 | λ = 1.0 | Relevância pura (top-k padrão) |
 | λ = 0.0 | Diversidade pura |
-| λ = 0.5–0.8 | Equilibrado (recomendado) |
+| λ = 0.5 to 0.8 | Equilibrado (recomendado) |
 
 [!TIP]
 MMR é ideal para tarefas de sumarização onde você quer cobrir múltiplos aspectos de um tópico sem repetir a mesma informação. Use λ = 0.7 para uma ligeira preferência por relevância, ou λ = 0.5 para equilíbrio igual. Reduza λ quando a redundância é mais prejudicial do que perder um resultado ligeiramente relevante.
@@ -492,6 +492,6 @@ fused = reciprocal_rank_fusion(
 - Decomposição de consultas divide perguntas complexas em subconsultas simples e mescla resultados.
 - Recuperadores auto-consultantes extraem tanto a consulta semântica quanto filtros de metadados da linguagem natural.
 - Fusão de recuperação (RRF) combina classificações de múltiplas estratégias (BM25, vetorial, HyDE) em uma única lista.
-- Estratégias avançadas trocam latência e custo por maior relevância e diversidade — escolha com base no seu caso de uso.
+- Estratégias avançadas trocam latência e custo por maior relevância e diversidade: escolha com base no seu caso de uso.
 - Decomposição é ideal para perguntas multi-parte; multi-salto é para raciocínio encadeado; HyDE é para consultas curtas/ambíguas.
 - Sempre considere uma abordagem de fusão em produção para obter o melhor de múltiplas estratégias.

@@ -11,7 +11,7 @@ difficulty: "avançado"
 Repositórios e Serviços de Domínio são mais dois blocos de construção táticos em DDD. **Repositórios** fornecem uma abstração limpa para armazenar e recuperar agregados. **Serviços de Domínio** encapsulam lógica de domínio que não pertence naturalmente a uma Entidade ou Objeto de Valor.
 
 > [!NOTE]
-> Em DDD, um Repositório não é um DAO (Data Access Object). Um DAO é um conceito técnico para acesso a dados. Um Repositório é um **conceito de domínio** que fala a Linguagem Ubíqua — você consulta agregados por termos do domínio, não por consultas SQL.
+> Em DDD, um Repositório não é um DAO (Data Access Object). Um DAO é um conceito técnico para acesso a dados. Um Repositório é um **conceito de domínio** que fala a Linguagem Ubíqua: você consulta agregados por termos do domínio, não por consultas SQL.
 
 ## Repositórios: A Metáfora da Coleção
 

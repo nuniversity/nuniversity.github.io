@@ -12,7 +12,7 @@ Indexes are data structures that speed up data retrieval at the cost of slower w
 
 ## How Indexes Work
 
-Without an index, the database performs a sequential scan — reading every row in the table. With an index, the database navigates a tree (typically B+Tree) to find rows in logarithmic time.
+Without an index, the database performs a sequential scan: reading every row in the table. With an index, the database navigates a tree (typically B+Tree) to find rows in logarithmic time.
 
 ```
 Full Table Scan:  [Row 1] [Row 2] [Row 3] ... [Row 1,000,000]

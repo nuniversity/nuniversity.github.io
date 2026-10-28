@@ -58,4 +58,4 @@ Comparing costs?          → Start at 09_Cost_Structure.md
 | ⚠️ | Requires significant configuration or has notable caveats |
 | 🔧 | Requires third-party tooling or custom engineering |
 | 🔬 | Feature in Public/Private Preview |
-| 💰 | Significant cost driver — read carefully |
+| 💰 | Significant cost driver: read carefully |

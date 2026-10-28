@@ -28,7 +28,7 @@ ROLLBACK;
 ```
 
 > [!NOTE]
-> A maioria dos bancos de dados opera em modo auto-commit por padrão — cada declaração é sua própria transação. Use `BEGIN` para agrupar múltiplas declarações em uma transação.
+> A maioria dos bancos de dados opera em modo auto-commit por padrão: cada declaração é sua própria transação. Use `BEGIN` para agrupar múltiplas declarações em uma transação.
 
 ### Savepoints
 
@@ -269,7 +269,7 @@ SELECT * FROM accounts WHERE id = 1 FOR UPDATE NOWAIT;
 ```
 
 > [!WARNING]
-> Deadlocks não são bugs — são uma parte normal do acesso concorrente a banco de dados. A chave é minimizá-los (ordenação consistente, transações curtas) e tratá-los graciosamente (lógica de repetição).
+> Deadlocks não são bugs: são uma parte normal do acesso concorrente a banco de dados. A chave é minimizá-los (ordenação consistente, transações curtas) e tratá-los graciosamente (lógica de repetição).
 
 ## Exemplo Real: Processamento de Pedidos
 

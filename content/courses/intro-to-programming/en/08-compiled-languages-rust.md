@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Compiled Programming Languages with Rust
 
-JavaScript and Python are interpreted — an interpreter reads and executes your code line by line at runtime. Compiled languages like Rust work differently: a compiler translates your entire program into machine code before it runs.
+JavaScript and Python are interpreted: an interpreter reads and executes your code line by line at runtime. Compiled languages like Rust work differently: a compiler translates your entire program into machine code before it runs.
 
 ## Interpreted vs Compiled
 
@@ -34,7 +34,7 @@ fn main() {
 
 ## Rust's Type System
 
-Rust is statically typed — the compiler knows the type of every variable:
+Rust is statically typed: the compiler knows the type of every variable:
 
 ```rust
 fn main() {
@@ -68,7 +68,7 @@ This immutability-by-default is a deliberate design choice that prevents bugs.
 
 ## Ownership and Borrowing
 
-Rust's most distinctive feature is its ownership system — it guarantees memory safety without a garbage collector.
+Rust's most distinctive feature is its ownership system; it guarantees memory safety without a garbage collector.
 
 ### Ownership Rules
 
@@ -88,7 +88,7 @@ fn calculate_length(s: &String) -> usize {
 }
 ```
 
-The `&` symbol creates a **reference** — it borrows the value without taking ownership.
+The `&` symbol creates a **reference**; it borrows the value without taking ownership.
 
 ### Mutable References
 
@@ -162,4 +162,4 @@ fn main() {
 
 ## Next Steps
 
-The next lesson introduces declarative programming — a different way of thinking where you describe what you want, not how to get it.
+The next lesson introduces declarative programming: a different way of thinking where you describe what you want, not how to get it.

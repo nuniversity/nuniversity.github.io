@@ -591,7 +591,7 @@ print(output["final_output"])
 > - Guardrails AI offers a decorator-based validator system with XML rail specs and ~50 built-in validators; best for output structure validation.
 > - Custom guardrails in Python give you full control but require you to reimplement logging, composition, and error handling from scratch.
 > - Regex-based guardrails are fast but brittle; combine them with model-based classifiers for robust protection.
-> - Always log guardrail decisions — every redaction, rejection, and pass — for audit and improvement.
+> - Always log guardrail decisions, every redaction, rejection, and pass, for audit and improvement.
 > - Choose the simplest tool that meets your requirements; over-engineering guardrails creates maintenance burden.
 > - In production, consider hybrid approaches that combine NeMo for dialogue flow, Guardrails AI for output validation, and custom code for domain-specific rules.
 > - Measure guardrail effectiveness with precision, recall, and F1 metrics against a labeled test set to catch regressions.

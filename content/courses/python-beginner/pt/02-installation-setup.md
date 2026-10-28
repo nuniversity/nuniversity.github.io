@@ -134,7 +134,7 @@ my-project/
 ```
 
 > [!SUCCESS]
-> Um bom editor com a extensão Python oferece: realce de sintaxe, autocompletar, verificação de erros e depuração — tudo essencial para codificação produtiva.
+> Um bom editor com a extensão Python oferece: realce de sintaxe, autocompletar, verificação de erros e depuração: tudo essencial para codificação produtiva.
 
 ## Perguntas de Prática
 

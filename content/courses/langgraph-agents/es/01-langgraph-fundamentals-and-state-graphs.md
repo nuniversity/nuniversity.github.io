@@ -160,7 +160,7 @@ builder.set_finish_point("b")
 ```
 
 [!TIP]
-Las funciones de nodo **deben** retornar un diccionario (o `None`). Los valores retornados se fusionan en el estado compartido mediante una actualización superficial. Las claves no retornadas mantienen su valor anterior — así es como el estado persiste entre nodos.
+Las funciones de nodo **deben** retornar un diccionario (o `None`). Los valores retornados se fusionan en el estado compartido mediante una actualización superficial. Las claves no retornadas mantienen su valor anterior: así es como el estado persiste entre nodos.
 
 ### Ejecución Paralela de Nodos
 
@@ -228,7 +228,7 @@ print(result["messages"])
 ```
 
 [!IMPORTANT]
-El método `.compile()` congela la definición del grafo. Después de la compilación, no puedes añadir nodos o aristas — debes reconstruir el builder. Para topologías dinámicas, ve la Lección 4 sobre actualizaciones dinámicas de grafo.
+El método `.compile()` congela la definición del grafo. Después de la compilación, no puedes añadir nodos o aristas: debes reconstruir el builder. Para topologías dinámicas, ve la Lección 4 sobre actualizaciones dinámicas de grafo.
 
 ### Streaming de Resultados
 

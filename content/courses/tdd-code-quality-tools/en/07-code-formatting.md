@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Code Formatting
 
-Code formatting is the most debated yet least important aspect of programming — which is exactly why it should be **automated**. Formatters like Black and isort eliminate formatting discussions entirely by enforcing a consistent, machine-readable style.
+Code formatting is the most debated yet least important aspect of programming; which is exactly why it should be **automated**. Formatters like Black and isort eliminate formatting discussions entirely by enforcing a consistent, machine-readable style.
 
 ## Why Automate Formatting?
 
@@ -45,7 +45,7 @@ flowchart TD
 
 ## Black: The Uncompromising Formatter
 
-Black is "the uncompromising Python code formatter." It has very few configuration options by design — it produces consistent output no matter who runs it.
+Black is "the uncompromising Python code formatter." It has very few configuration options by design; it produces consistent output no matter who runs it.
 
 ### Installation
 
@@ -308,7 +308,7 @@ repos:
 
 ### Order Matters!
 
-Run isort **before** Black — or configure isort with `profile = "black"`:
+Run isort **before** Black, or configure isort with `profile = "black"`:
 
 ```bash
 # Correct order: isort first, then black
@@ -564,14 +564,14 @@ sequenceDiagram
 
 ## Summary
 
-- **Black** is the uncompromising formatter — minimal config, consistent output
+- **Black** is the uncompromising formatter: minimal config, consistent output
 - **isort** organizes imports into standard sections (stdlib, third-party, first-party)
-- **Always run isort before Black** — or configure isort with `profile = "black"`
+- **Always run isort before Black**, or configure isort with `profile = "black"`
 - **The magic trailing comma** controls vertical vs horizontal layout in Black
 - **Pre-commit hooks** automate formatting before code is committed
 - **CI checks** ensure formatting is never forgotten
 - **Ruff format** is a faster, drop-in replacement for Black
-- **Consistency beats perfection** — any automated format is better than manual formatting debates
+- **Consistency beats perfection**: any automated format is better than manual formatting debates
 
 > [!SUCCESS]
 > Automated formatting eliminates entire categories of code review comments. With Black and isort, your team spends zero time on formatting debates and 100% of review energy on what matters: logic, architecture, and correctness.

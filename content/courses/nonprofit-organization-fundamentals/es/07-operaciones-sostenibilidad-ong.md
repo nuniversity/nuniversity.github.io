@@ -168,7 +168,7 @@ La tecnología puede dramaticamente mejorar eficiencia operativa, pero las ONGs 
 
 ### El Concepto de Sostenibilidad
 
-Sostenibilidad organizacional va más allá de finanzas — incluye capacidad de mantener misión, operaciones y relevancia a lo largo del tiempo.
+Sostenibilidad organizacional va más allá de finanzas: incluye capacidad de mantener misión, operaciones y relevancia a lo largo del tiempo.
 
 #### Los Cuatro Pilares de la Sostenibilidad
 

@@ -30,7 +30,7 @@ Permissões definem quais ações os agentes podem realizar. Elas são estrutura
 ```
 
 > [!IMPORTANT]
-> As regras de permissão são avaliadas em tempo de execução para cada invocação de ferramenta. Regras deny são verificadas primeiro — se um comando corresponder a qualquer padrão deny, ele é rejeitado imediatamente independentemente de também corresponder a um padrão allow. Este design à prova de falhas previne desvios acidentais.
+> As regras de permissão são avaliadas em tempo de execução para cada invocação de ferramenta. Regras deny são verificadas primeiro: se um comando corresponder a qualquer padrão deny, ele é rejeitado imediatamente independentemente de também corresponder a um padrão allow. Este design à prova de falhas previne desvios acidentais.
 
 ### Lógica de Avaliação de Permissão
 
@@ -72,7 +72,7 @@ Padrões suportam curingas no estilo glob para correspondência flexível de reg
 | `rm -rf *`       | Exclusão recursiva forçada                 | `rm -rf node_modules`       |
 
 > [!WARNING]
-> Padrões glob são sensíveis a maiúsculas/minúsculas no Linux e insensíveis no macOS por padrão. Cuidado com extensões de arquivo — `*.KEY` NÃO corresponde a `secret.key` no Linux. Use padrões em minúsculas para compatibilidade entre plataformas.
+> Padrões glob são sensíveis a maiúsculas/minúsculas no Linux e insensíveis no macOS por padrão. Cuidado com extensões de arquivo: `*.KEY` NÃO corresponde a `secret.key` no Linux. Use padrões em minúsculas para compatibilidade entre plataformas.
 
 ---
 
@@ -132,7 +132,7 @@ Restrições de caminho limitam quais arquivos os agentes podem acessar:
 ```
 
 > [!WARNING]
-> Restrições de caminho de arquivo só se aplicam quando a ferramenta é invocada através do registro de ferramentas do OpenCode. Acesso direto ao shell desvia estas restrições — sempre combine com regras allow/deny de comando bash. Um agente com permissão para executar `bash` mas sem restrições de caminho poderia acessar qualquer arquivo executando comandos shell diretamente.
+> Restrições de caminho de arquivo só se aplicam quando a ferramenta é invocada através do registro de ferramentas do OpenCode. Acesso direto ao shell desvia estas restrições: sempre combine com regras allow/deny de comando bash. Um agente com permissão para executar `bash` mas sem restrições de caminho poderia acessar qualquer arquivo executando comandos shell diretamente.
 
 ---
 

@@ -16,8 +16,8 @@ Quando as conversas crescem além da janela de contexto do LLM, o truncamento si
 
 LLMs têm limites de tokens. Quando uma conversa excede o limite:
 
-1. **Truncamento**: Descarta as mensagens iniciais — perde contexto
-2. **Erro**: Janela de contexto excedida — a solicitação falha
+1. **Truncamento**: Descarta as mensagens iniciais: perde contexto
+2. **Erro**: Janela de contexto excedida: a solicitação falha
 
 A sumarização resolve isso comprimindo o histórico em um resumo e mantendo os detalhes importantes.
 
@@ -263,7 +263,7 @@ def update_running_summary(state: AgentState) -> dict:
 
 ## Resumo com Extração de Entidades
 
-Vá além do resumo simples — extraia entidades estruturadas:
+Vá além do resumo simples: extraia entidades estruturadas:
 
 ```python
 from pydantic import BaseModel, Field
@@ -443,7 +443,7 @@ def extract_memory(state: AgentState) -> dict:
     "The entire conversation history",
     "Only the summary",
     "The most recent messages (enough for immediate context)",
-    "Nothing — clear the list"
+    "Nothing: clear the list"
   ],
   "correct": 2,
   "explanation": "Keep the most recent messages (e.g., last 2-4 turns) so the LLM has immediate context. The summary provides the longer-term context."
@@ -477,4 +477,4 @@ def extract_memory(state: AgentState) -> dict:
 - Truncate as mensagens após o resumo para permanecer dentro das janelas de contexto
 - A extração de entidades adiciona memória estruturada ao lado dos resumos em texto livre
 - Os resumos contínuos trocam a perfeita lembrança pela eficiência de tokens
-- A sumarização custa chamadas de LLM — equilibre a frequência com o custo
+- A sumarização custa chamadas de LLM: equilibre a frequência com o custo

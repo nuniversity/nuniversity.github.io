@@ -281,6 +281,58 @@ describe('LessonAudio playback', () => {
     expect(spoken[2].text).toBe('Intro.')
   })
 
+  it('uses the section list supplied by the outline', async () => {
+    render(
+      <div data-lesson-content>
+        <LessonAudio
+          lang="en-US"
+          intro="Intro."
+          sections={[
+            { id: 'alpha', text: 'Alpha (from outline)', level: 2 },
+            { id: 'beta', text: 'Beta (from outline)', level: 2 },
+          ]}
+        />
+        <h2 id="alpha">Alpha heading</h2>
+        <p>Alpha body.</p>
+        <h2 id="beta">Beta heading</h2>
+        <p>Beta body.</p>
+      </div>
+    )
+
+    const picker = await screen.findByRole('combobox')
+    const options = Array.from(picker.querySelectorAll('option')).map(o => o.textContent)
+
+    expect(options).toContain('Alpha (from outline)')
+    expect(options).toContain('Beta (from outline)')
+  })
+
+  it('follows the outline active section when one is supplied', async () => {
+    const user = userEvent.setup()
+    render(
+      <div data-lesson-content>
+        <LessonAudio
+          lang="en-US"
+          intro="Intro."
+          sections={[
+            { id: 'alpha', text: 'Alpha', level: 2 },
+            { id: 'beta', text: 'Beta', level: 2 },
+          ]}
+          activeSectionId="beta"
+        />
+        <h2 id="alpha">Alpha heading</h2>
+        <p>Alpha body.</p>
+        <h2 id="beta">Beta heading</h2>
+        <p>Beta body.</p>
+      </div>
+    )
+
+    await user.click(screen.getByRole('button', { name: /listen/i }))
+
+    // Scroll position would pick Alpha; the outline's active id wins.
+    expect(spoken[1].text).toContain('Beta body')
+    expect(spoken[1].text).not.toContain('Alpha body')
+  })
+
   it('falls back to the English confirmation when no intro is supplied', async () => {
     const user = userEvent.setup()
 

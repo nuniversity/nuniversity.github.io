@@ -1,16 +1,16 @@
 ---
-title: "Domain 1.1 — Snowflake Architecture"
+title: "Domain 1.1, Snowflake Architecture"
 description: "Master Snowflake's three-layer architecture: Cloud Services, Compute (Virtual Warehouses), and Database Storage. Understand how separation of storage and compute drives Snowflake's core value."
 order: 1
 difficulty: intermediate
 duration: "75 min"
 ---
 
-# Domain 1.1 — Snowflake Architecture
+# Domain 1.1: Snowflake Architecture
 
 ## Exam Weight
 
-**Domain 1.0 — Snowflake AI Data Cloud Features & Architecture** accounts for **~31%** of the SnowPro Core COF-C03 exam — the largest single domain.
+**Domain 1.0, Snowflake AI Data Cloud Features & Architecture** accounts for **~31%** of the SnowPro Core COF-C03 exam, the largest single domain.
 
 > [!NOTE]
 > This lesson maps to **Exam Objective 1.1**: *Describe and use the Snowflake architecture*, including the Cloud Services layer, Compute layer, Database Storage layer, and comparison of Snowflake editions.
@@ -19,7 +19,7 @@ duration: "75 min"
 
 ## What Is Snowflake?
 
-Snowflake is a **cloud-native, fully managed data platform** delivered as Software-as-a-Service (SaaS). It was built from the ground up for the cloud — not ported from an on-premises product.
+Snowflake is a **cloud-native, fully managed data platform** delivered as Software-as-a-Service (SaaS). It was built from the ground up for the cloud: not ported from an on-premises product.
 
 Key distinctions from traditional warehouses:
 
@@ -36,7 +36,7 @@ Key distinctions from traditional warehouses:
 
 ## The Three-Layer Architecture
 
-Snowflake's architecture consists of three independently scalable layers. Understanding each layer — and the boundaries between them — is critical for the exam.
+Snowflake's architecture consists of three independently scalable layers. Understanding each layer, and the boundaries between them, is critical for the exam.
 
 ```mermaid
 flowchart TD
@@ -51,15 +51,15 @@ flowchart TD
 
 ---
 
-### Layer 1 — Database Storage Layer
+### Layer 1: Database Storage Layer
 
 This is where **all data permanently lives**. Key characteristics:
 
-- Data is stored in Snowflake's proprietary **columnar micro-partition format** — automatically compressed and optimized. Customers cannot directly access the underlying files.
+- Data is stored in Snowflake's proprietary **columnar micro-partition format**: automatically compressed and optimized. Customers cannot directly access the underlying files.
 - Storage is built on top of the cloud provider's blob storage: **Amazon S3** (AWS), **Azure Blob Storage** (Azure), or **Google Cloud Storage** (GCP).
 - **Billing is separate from compute**: you pay for storage even when no warehouses are running.
 - Snowflake manages encryption, redundancy, and durability automatically.
-- Data is reorganized into micro-partitions (50–500 MB compressed) with rich metadata about each partition (min/max values, distinct count, NULL count) to enable **partition pruning** during queries.
+- Data is reorganized into micro-partitions (50 to 500 MB compressed) with rich metadata about each partition (min/max values, distinct count, NULL count) to enable **partition pruning** during queries.
 
 **What the storage layer holds:**
 - Table data (micro-partitions)
@@ -70,14 +70,14 @@ This is where **all data permanently lives**. Key characteristics:
 
 ---
 
-### Layer 2 — Compute Layer (Virtual Warehouses)
+### Layer 2: Compute Layer (Virtual Warehouses)
 
-The compute layer consists of **Virtual Warehouses (VWs)** — named clusters of compute resources that execute SQL queries and DML operations.
+The compute layer consists of **Virtual Warehouses (VWs)**: named clusters of compute resources that execute SQL queries and DML operations.
 
 Key characteristics:
 
 - Each Virtual Warehouse is an **MPP (Massively Parallel Processing)** compute cluster consisting of one or more nodes.
-- **Multiple warehouses can read from the same storage simultaneously** — with no resource contention between them.
+- **Multiple warehouses can read from the same storage simultaneously**: with no resource contention between them.
 - Warehouses can be **suspended** (stopping billing instantly) and **resumed** (within seconds).
 - Size is expressed in T-shirt sizes: **X-Small, Small, Medium, Large, X-Large, 2X-Large, 3X-Large, 4X-Large, 5X-Large, 6X-Large**.
 - Each size-up **doubles** the compute resources (and credits per hour).
@@ -112,9 +112,9 @@ Key characteristics:
 
 ---
 
-### Layer 3 — Cloud Services Layer
+### Layer 3: Cloud Services Layer
 
-This is the **brain of Snowflake** — a collection of services that coordinate all activity across the platform. It runs on Snowflake-managed infrastructure and is **always available** even when no virtual warehouses are running.
+This is the **brain of Snowflake**: a collection of services that coordinate all activity across the platform. It runs on Snowflake-managed infrastructure and is **always available** even when no virtual warehouses are running.
 
 **Cloud Services responsibilities:**
 
@@ -137,16 +137,16 @@ SHOW TABLES IN DATABASE MY_DB;
 
 ---
 
-## Separation of Storage and Compute — Why It Matters
+## Separation of Storage and Compute: Why It Matters
 
 This is the **most architecturally significant** feature of Snowflake and appears frequently on the exam.
 
 **Benefits of separation:**
 
-1. **Independent scaling** — scale compute up/down without touching storage
-2. **Cost optimization** — suspend compute when idle; storage billing continues at low rates
-3. **Workload isolation** — multiple teams run their own warehouses against shared data
-4. **No contention** — a large analytics query on WH_ANALYTICS doesn't affect ingestion on WH_INGEST
+1. **Independent scaling**: scale compute up/down without touching storage
+2. **Cost optimization**: suspend compute when idle; storage billing continues at low rates
+3. **Workload isolation**: multiple teams run their own warehouses against shared data
+4. **No contention**: a large analytics query on WH_ANALYTICS doesn't affect ingestion on WH_INGEST
 
 ```sql
 -- Engineering ingests data on their warehouse
@@ -209,10 +209,10 @@ Snowflake accounts are deployed in a **specific cloud + region** combination. Th
 | Term | Definition |
 |---|---|
 | **Virtual Warehouse (VW)** | Named MPP compute cluster that executes queries |
-| **Micro-partition** | Fundamental storage unit: 50–500 MB compressed, columnar |
+| **Micro-partition** | Fundamental storage unit: 50 to 500 MB compressed, columnar |
 | **Cloud Services Layer** | Intelligence layer: auth, optimization, metadata, access control |
-| **SaaS** | Software as a Service — Snowflake manages all infrastructure |
-| **MPP** | Massively Parallel Processing — queries distributed across nodes |
+| **SaaS** | Software as a Service: Snowflake manages all infrastructure |
+| **MPP** | Massively Parallel Processing: queries distributed across nodes |
 | **Separation of Storage & Compute** | Storage and compute scale independently, billed separately |
 | **Credit** | Unit of Snowflake compute consumption |
 
@@ -273,9 +273,9 @@ Snowflake accounts are deployed in a **specific cloud + region** combination. Th
 
 > [!SUCCESS]
 > **Key Takeaways for Exam Day:**
-> 1. Three layers: **Cloud Services → Compute (VW) → Storage** — each independent and separately billed
-> 2. Cloud Services = brain (auth, optimization, metadata) — free up to **10%** of compute credits
-> 3. **Storage billing never stops** — even when warehouses are suspended
+> 1. Three layers: **Cloud Services → Compute (VW) → Storage**: each independent and separately billed
+> 2. Cloud Services = brain (auth, optimization, metadata): free up to **10%** of compute credits
+> 3. **Storage billing never stops**: even when warehouses are suspended
 > 4. Multi-cluster WH, Column Masking, Row Access Policies → **Enterprise+**
 > 5. HIPAA / Tri-Secret Secure → **Business Critical+**
 > 6. VPS = highest isolation, 99.99% SLA, private deployment

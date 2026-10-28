@@ -11,7 +11,7 @@ difficulty: "intermediate"
 Los comentarios son una espada de doble filo. Los buenos comentarios explican el "por qué" (el razonamiento detrás de una decisión). Los malos comentarios explican el "qué" (algo que el código ya debería comunicar). El mejor comentario es el que no necesitas escribir porque el código es claro.
 
 > [!NOTE]
-> "No comentes código malo; reescríbelo." — Brian W. Kernighan
+> "No comentes código malo; reescríbelo.": Brian W. Kernighan
 
 ## Código autodocumentado
 

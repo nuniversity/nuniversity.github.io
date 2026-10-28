@@ -1,6 +1,6 @@
 ---
 title: "Streaming de Tokens"
-description: "Domine modos de streaming do LangGraph — values, updates e streaming personalizado. Aprenda a transmitir tokens LLM de nós do grafo em tempo real."
+description: "Domine modos de streaming do LangGraph, values, updates e streaming personalizado. Aprenda a transmitir tokens LLM de nós do grafo em tempo real."
 order: 9
 duration: "35 min"
 difficulty: "intermediate"
@@ -50,7 +50,7 @@ Output:
 ```
 
 [!NOTE]
-O modo "values" é o mais abrangente — você vê o estado completo em cada passo. É ideal para depurar e entender a evolução do estado.
+O modo "values" é o mais abrangente: você vê o estado completo em cada passo. É ideal para depurar e entender a evolução do estado.
 
 ---
 

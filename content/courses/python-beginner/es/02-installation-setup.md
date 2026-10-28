@@ -134,7 +134,7 @@ my-project/
 ```
 
 > [!SUCCESS]
-> Un buen editor con la extensión Python te brinda: resaltado de sintaxis, autocompletado, verificación de errores y depuración — todo esencial para programar productivamente.
+> Un buen editor con la extensión Python te brinda: resaltado de sintaxis, autocompletado, verificación de errores y depuración: todo esencial para programar productivamente.
 
 ## Preguntas de Práctica
 

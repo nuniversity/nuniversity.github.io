@@ -14,7 +14,7 @@ difficulty: "beginner"
 
 ## Padrões e Infinito
 
-Matemáticos indianos estudaram séries infinitas. Madhava de Sangamagrama (1400 d.C.) descobriu a série Madhava-Leibniz para π/4 = 1 - 1/3 + 1/5 - 1/7 + ... três séculos antes de Leibniz. Ele também descobriu séries para seno e cosseno.
+Matemáticos indianos estudaram séries infinitas. Madhava de Sangamagrama (1400 d.C.) descobriu a série Madhava-Leibniz para π/4 = 1 - 1/3 + 1/5 - 1/7 +... três séculos antes de Leibniz. Ele também descobriu séries para seno e cosseno.
 
 > [!NOTE]
 > A descoberta de Madhava de séries infinitas é uma das conquistas matemáticas mais impressionantes da história.
@@ -180,7 +180,7 @@ Uma série converge se a soma parcial tende a um limite finito.
 
 ---
 
-## 5. Exemplos Resolvidos — Fórmulas de Soma
+## 5. Exemplos Resolvidos: Fórmulas de Soma
 
 ### Soma dos Primeiros n Inteiros
 
@@ -284,11 +284,11 @@ Embora esta série não tenha uma forma fechada simples, ela converge rapidament
 
 ### A Área de Fibonacci e o Retângulo Áureo
 
-Construa um retângulo com lados φ e 1. Ao remover um quadrado de lado 1, sobra um retângulo de dimensões 1 × (φ-1) = 1 × 1/φ. Este processo pode ser repetido indefinidamente, criando uma espiral logarítmica — a "espiral de Fibonacci" que aparece em conchas, galáxias e flores.
+Construa um retângulo com lados φ e 1. Ao remover um quadrado de lado 1, sobra um retângulo de dimensões 1 × (φ-1) = 1 × 1/φ. Este processo pode ser repetido indefinidamente, criando uma espiral logarítmica: a "espiral de Fibonacci" que aparece em conchas, galáxias e flores.
 
 ---
 
-## 7. Convergência de Séries Geométricas — Exemplos
+## 7. Convergência de Séries Geométricas: Exemplos
 
 ### Séries que Convergem
 
@@ -302,7 +302,7 @@ Uma série geométrica infinita converge se e somente se |q| < 1.
 - a₁ = 100, q = 1/2
 - S = 100/(1 - 1/2) = 100/(1/2) = **200**
 
-**Exemplo 3:** 8 - 4 + 2 - 1 + 1/2 - ...
+**Exemplo 3:** 8 - 4 + 2 - 1 + 1/2 -...
 - a₁ = 8, q = -1/2
 - S = 8/(1-(-1/2)) = 8/(3/2) = **16/3 ≈ 5.33**
 
@@ -311,7 +311,7 @@ Uma série geométrica infinita converge se e somente se |q| < 1.
 **Exemplo 1:** 1 + 2 + 4 + 8 + ...
 - q = 2 > 1 → **Diverge** (soma = ∞)
 
-**Exemplo 2:** 1 - 1 + 1 - 1 + ...
+**Exemplo 2:** 1 - 1 + 1 - 1 +...
 - q = -1 → |q| = 1 → **Diverge** (oscila entre 0 e 1)
 
 **Exemplo 3:** 1 + 1 + 1 + 1 + ...
@@ -329,7 +329,7 @@ Uma série geométrica infinita converge se e somente se |q| < 1.
 
 ---
 
-## 8. Sequências e Séries — Exercícios Interativos
+## 8. Sequências e Séries: Exercícios Interativos
 
 ### Classificador de Sequências
 
@@ -430,12 +430,12 @@ Uma série geométrica infinita converge se e somente se |q| < 1.
   "question": "Como Madhava calculou π usando séries?",
   "options": [
     "Usando medições físicas",
-    "Usando a série 1 - 1/3 + 1/5 - 1/7 + ...",
+    "Usando a série 1 - 1/3 + 1/5 - 1/7 +...",
     "Usando geometria",
     "Não calculou"
   ],
   "correct": 1,
-  "explanation": "Madhava descobriu que π/4 = 1 - 1/3 + 1/5 - 1/7 + ... séculos antes de Leibniz."
+  "explanation": "Madhava descobriu que π/4 = 1 - 1/3 + 1/5 - 1/7 +... séculos antes de Leibniz."
 }
 ```
 

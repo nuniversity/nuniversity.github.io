@@ -42,7 +42,7 @@ Los algoritmos de búsqueda encuentran un elemento concreto (o determinan que no
 
 ### Búsqueda lineal
 
-La búsqueda más simple -- comprueba cada elemento hasta encontrar lo que buscas.
+La búsqueda más simple: comprueba cada elemento hasta encontrar lo que buscas.
 
 ```
 ALGORITHM: Linear Search
@@ -194,7 +194,7 @@ Lista inicial: [5, 3, 8, 1, 2]
 
 **Pasada 4:**
 - Compara 1 y 2: sin intercambio -> [**1**, **2**, 3, 5, 8]
-- No hizo falta ningún intercambio -- ¡la lista está ordenada!
+- No hizo falta ningún intercambio: ¡la lista está ordenada!
 
 ## Patrón 3: filtrado
 

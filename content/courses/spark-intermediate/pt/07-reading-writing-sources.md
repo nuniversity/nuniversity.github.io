@@ -220,7 +220,7 @@ merged.printSchema()
 ```
 
 > [!WARNING]
-> A mesclagem de esquemas é cara — requer ler todos os arquivos para descobrir seus esquemas antes do processamento. Use-a apenas quando necessário.
+> A mesclagem de esquemas é cara: requer ler todos os arquivos para descobrir seus esquemas antes do processamento. Use-a apenas quando necessário.
 
 ## Exemplos de Conversão de Formatos
 

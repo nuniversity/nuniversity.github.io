@@ -189,7 +189,7 @@ impl Message {
 > | Enum | Data can be one of several shapes |
 > | Enum with data | Each variant carries different data |
 
-## Option — Safe Null Handling
+## Option: Safe Null Handling
 
 Rust has no `null`. Instead, use `Option<T>`:
 
@@ -227,7 +227,7 @@ fn main() {
 | `map(fn)` | Transform Some value | `Option<U>` |
 | `expect(msg)` | Unwrap with custom panic message | `T` |
 
-## Result — Error Handling
+## Result: Error Handling
 
 ```rust
 enum Result<T, E> {

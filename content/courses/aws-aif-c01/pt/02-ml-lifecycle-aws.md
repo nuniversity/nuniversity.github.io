@@ -38,7 +38,7 @@ Projetos de machine learning raramente falham porque um modelo não pode ser tre
 ```
 
 > [!NOTE]
-> **Leia esta lição como um manual operacional, não um catálogo de serviços.** Cada número neste arquivo é um limite publicado pela AWS tirado do guia de desenvolvedor do SageMaker ou da referência da API do SageMaker. Onde a AWS publica dois números conflitantes, ambos aparecem e o preferido é sinalizado — veja a seção 13.
+> **Leia esta lição como um manual operacional, não um catálogo de serviços.** Cada número neste arquivo é um limite publicado pela AWS tirado do guia de desenvolvedor do SageMaker ou da referência da API do SageMaker. Onde a AWS publica dois números conflitantes, ambos aparecem e o preferido é sinalizado: veja a seção 13.
 
 Ao final desta lição você será capaz de:
 
@@ -65,7 +65,7 @@ Esta tabela é o artefato mais examinável da Tarefa 1.3. A coluna esquerda é o
 | 2. Ingestão de dados | Ground Truth **[manutenção]**, ingestão streaming do Feature Store | S3, Kinesis Data Streams, IoT Core, DMS, AppFlow, API Gateway, Glue crawlers | Ground Truth fechado para novos clientes 7/30/26; Mechanical Turk terminou set 2026 |
 | 3. Processamento e EDA | Processing jobs, Data Wrangler (dentro do Canvas), notebooks Studio | Glue (ETL + Data Catalog), EMR (Spark/Hadoop/Trino), Athena, DataBrew, MWAA | Glue Data Catalog é compatível com Hive |
 | 4. Engenharia de atributos | Feature Store (online/offline), export Data Wrangler | Glue, DataBrew, Redshift | Offline store é Parquet append-only no S3 |
-| 5. Treinamento de modelo | Training jobs, Automatic Model Tuning, AutoML API, JumpStart, HyperPod, Managed Spot | EC2 (P/G/Trn/Inf), ECS/EKS (auto-gerenciado), Lambda (cargas leves) | Economias Spot publicadas como 80% (API) e 90% (FAQ) — veja a seção 13 |
+| 5. Treinamento de modelo | Training jobs, Automatic Model Tuning, AutoML API, JumpStart, HyperPod, Managed Spot | EC2 (P/G/Trn/Inf), ECS/EKS (auto-gerenciado), Lambda (cargas leves) | Economias Spot publicadas como 80% (API) e 90% (FAQ): veja a seção 13 |
 | 6. Avaliação | Clarify **[manutenção]**, Processing em dados hold-out, Model Cards | Amazon Bedrock Evaluations, CloudWatch, SHAP / fmeval | Bedrock Evaluations é o caminho gerenciado para foundation models |
 | 7. Implantação | Quatro opções de inferência, Model Registry + CI/CD, inference components | Bedrock (API serverless), ECS/EKS (DIY), Lambda + API Gateway | Tetos na seção 7.2 |
 | 8. Monitoramento | Model Monitor / Clarify **[manutenção]**, Model Dashboard, Data Capture | CloudWatch, EventBridge + SNS, Lambda, Athena + QuickSight, MLflow + Evidently | Quatro tipos de monitor: qualidade de dados, qualidade do modelo, deriva de viés, deriva de atribuição de atributos |
@@ -73,7 +73,7 @@ Esta tabela é o artefato mais examinável da Tarefa 1.3. A coluna esquerda é o
 
 ### 1.2 Os conceitos de MLOps que o exame testa
 
-A Tarefa 1.3 não para nos estágios. Ela também nomeia sete fundamentos de MLOps — cada um mapeia para um mecanismo AWS concreto:
+A Tarefa 1.3 não para nos estágios. Ela também nomeia sete fundamentos de MLOps: cada um mapeia para um mecanismo AWS concreto:
 
 | Conceito MLOps | O que o exame espera que você diga | Mecanismo AWS |
 |---|---|---|
@@ -101,7 +101,7 @@ flowchart LR
     I -->|Não| G
 ```
 
-A seta que retorna de **Monitoramento** para **Treinamento** é o ponto todo de MLOps. Uma equipe que implanta e nunca retorna ao estágio 5 tem um *projeto*, não um *sistema* — e essa é exatamente a linguagem de "dívida técnica" e "prontidão de produção" que o exame usa.
+A seta que retorna de **Monitoramento** para **Treinamento** é o ponto todo de MLOps. Uma equipe que implanta e nunca retorna ao estágio 5 tem um *projeto*, não um *sistema*, e essa é exatamente a linguagem de "dívida técnica" e "prontidão de produção" que o exame usa.
 
 **Ordene o ciclo de vida antes de memorizar os serviços:**
 
@@ -140,7 +140,7 @@ A seta que retorna de **Monitoramento** para **Treinamento** é o ponto todo de 
 
 Antes de escolher um serviço, a AWS quer que você responda a três perguntas em ordem. Pular direto para "SageMaker" é o anti-padrão arquitetural mais comum no exame.
 
-### 2.1 Pergunta 1 — chamar uma API, customizar um foundation model ou construir o seu?
+### 2.1 Pergunta 1: chamar uma API, customizar um foundation model ou construir o seu?
 
 | Caminho | Escolha quando | Serviço | Modelo de precificação |
 |---|---|---|---|
@@ -151,7 +151,7 @@ Antes de escolher um serviço, a AWS quer que você responda a três perguntas e
 > [!WARNING]
 > **Armadilha clássica de exame:** construir um modelo SageMaker customizado para análise de sentimento em inglês é um **anti-padrão**. Sentimento em texto é uma capacidade resolvida e pré-treinada do **Amazon Comprehend**. O exame recompensa o serviço correto mais barato, não o mais impressionante.
 
-### 2.2 Pergunta 2 — qual é a modalidade dos dados?
+### 2.2 Pergunta 2: qual é a modalidade dos dados?
 
 | Modalidade de dados | Serviço gerenciado | Formulação típica de exame |
 |---|---|---|
@@ -162,7 +162,7 @@ Antes de escolher um serviço, a AWS quer que você responda a três perguntas e
 | Documentos (formulários, documento de identidade, tabelas) | Amazon Textract | "extrair campos de faturas" |
 | Código e chat | Amazon Q, Amazon Bedrock | "responder perguntas internas de uma base de conhecimento" |
 
-### 2.3 Pergunta 3 — quanto controle você precisa?
+### 2.3 Pergunta 3: quanto controle você precisa?
 
 A AWS documenta uma **escada de controle** que sobe de zero-código para código completo:
 
@@ -184,7 +184,7 @@ A AWS documenta uma **escada de controle** que sobe de zero-código para código
                              endpoints dedicados, HyperPod
 ```
 
-A AWS também avisa em sua própria orientação que **Studio é o ponto de partida errado para uma equipe sem experiência em ML — comece com o Canvas**.
+A AWS também avisa em sua própria orientação que **Studio é o ponto de partida errado para uma equipe sem experiência em ML: comece com o Canvas**.
 
 ### 2.4 Arquitetura de referência: uma conta, extremo a extremo
 
@@ -210,7 +210,7 @@ flowchart TB
     PL --> TR
 ```
 
-**📚 Você sabia?** Os SageMaker Pipelines são literalmente um **DAG JSON**. Os tipos de passo documentados são Processing, Training, Tuning, AutoML, RegisterModel, DeployModel, Transform, Condition, Callback, Lambda, ClarifyCheck, QualityCheck, EMR, Notebook Job e Fail — e as saídas dos passos alimentam as entradas dos passos a jusante, o que é o que torna o loop no diagrama acima automático.
+**📚 Você sabia?** Os SageMaker Pipelines são literalmente um **DAG JSON**. Os tipos de passo documentados são Processing, Training, Tuning, AutoML, RegisterModel, DeployModel, Transform, Condition, Callback, Lambda, ClarifyCheck, QualityCheck, EMR, Notebook Job e Fail, e as saídas dos passos alimentam as entradas dos passos a jusante, o que é o que torna o loop no diagrama acima automático.
 
 ---
 
@@ -242,12 +242,12 @@ flowchart TB
 
 A AWS documenta duas camadas online:
 
-- **Standard** — a configuração padrão do online store;
-- **InMemory** — suportado por Amazon ElastiCache (Redis OSS) para as leituras mais rápidas. É **somente online** (sem replicação online↔offline) e **não** suporta chaves KMS gerenciadas pelo cliente.
+- **Standard**: a configuração padrão do online store;
+- **InMemory**: suportado por Amazon ElastiCache (Redis OSS) para as leituras mais rápidas. É **somente online** (sem replicação online↔offline) e **não** suporta chaves KMS gerenciadas pelo cliente.
 
-No caminho de gravação, `PutRecord.TargetStores` aceita `{OnlineStore, OfflineStore}` com um **máximo de 2 entradas**, então uma única chamada pode atualizar ambos os stores — mas somente se um grupo tiver ambos habilitados.
+No caminho de gravação, `PutRecord.TargetStores` aceita `{OnlineStore, OfflineStore}` com um **máximo de 2 entradas**, então uma única chamada pode atualizar ambos os stores, mas somente se um grupo tiver ambos habilitados.
 
-**Exemplo 5 — frescor de atributos com números reais.** Um modelo de fraude chama `GetRecord` e recebe uma resposta em **single-digit milliseconds**. O offline store do mesmo feature group mantém cada versão histórica como Parquet no S3, que o Athena pode consultar para um conjunto de treinamento point-in-time correto. Um `PutRecord` emitido às **14:00** chega ao S3 **não mais tarde que 14:15** (bufferização de 15 minutos). O treinamento, portanto, vê um snapshot ligeiramente atrasado enquanto a inferência vê a linha mais nova — o que é exatamente por que o exame pede **ambos os stores habilitados em um feature group**.
+**Exemplo 5, frescor de atributos com números reais.** Um modelo de fraude chama `GetRecord` e recebe uma resposta em **single-digit milliseconds**. O offline store do mesmo feature group mantém cada versão histórica como Parquet no S3, que o Athena pode consultar para um conjunto de treinamento point-in-time correto. Um `PutRecord` emitido às **14:00** chega ao S3 **não mais tarde que 14:15** (bufferização de 15 minutos). O treinamento, portanto, vê um snapshot ligeiramente atrasado enquanto a inferência vê a linha mais nova, o que é exatamente por que o exame pede **ambos os stores habilitados em um feature group**.
 
 ```matching
 {
@@ -262,7 +262,7 @@ No caminho de gravação, `PutRecord.TargetStores` aceita `{OnlineStore, Offline
 }
 ```
 
-**📚 Você sabia?** A identidade do Feature Store não é apenas uma chave primária: um registro é unicamente identificado pelo **identificador do atributo mais o event time**, e o offline store adicionalmente grava `write_time`, `api_invocation_time` e um indicador `is_deleted`. É isso que torna joins point-in-time possíveis — uma consulta de treinamento às 09:00 só pode ver atributos cujo event time é anterior a 09:00, mesmo que tenham sido gravados depois.
+**📚 Você sabia?** A identidade do Feature Store não é apenas uma chave primária: um registro é unicamente identificado pelo **identificador do atributo mais o event time**, e o offline store adicionalmente grava `write_time`, `api_invocation_time` e um indicador `is_deleted`. É isso que torna joins point-in-time possíveis: uma consulta de treinamento às 09:00 só pode ver atributos cujo event time é anterior a 09:00, mesmo que tenham sido gravados depois.
 
 ---
 
@@ -272,7 +272,7 @@ No caminho de gravação, `PutRecord.TargetStores` aceita `{OnlineStore, Offline
 
 | Opção | Tipo | Melhor para | Código | Detalhe verificado |
 |---|---|---|---|---|
-| SageMaker Processing | Jobs gerenciados | Preparação e avaliação reproduzíveis dentro do pipeline de ML | Scripts ou contêiner BYOC | Computação é **liberada na conclusão** — você para de pagar |
+| SageMaker Processing | Jobs gerenciados | Preparação e avaliação reproduzíveis dentro do pipeline de ML | Scripts ou contêiner BYOC | Computação é **liberada na conclusão**: você para de pagar |
 | Data Wrangler (dentro do Canvas) | Visual no/low-code | Limpeza, EDA, geração de atributos, export para Feature Store | Pouco ou nenhum código | Conecta a S3, Athena, Redshift, Snowflake, EMR |
 | AWS Glue | ETL serverless + Data Catalog | Crawlers e ETL alimentando tabelas de treinamento | PySpark ou visual | Spark ou Ray; catálogo compatível com Hive |
 | Amazon EMR | Clusters gerenciados | Spark, Hadoop, Trino, Flink em escala petabyte | Controle total | EMR ≥ 5.8.0 pode usar o Glue Data Catalog |
@@ -302,10 +302,10 @@ A propriedade "computação é liberada" é por que os Processing jobs superam u
 
 Duas migrações importam para o exame de 2026:
 
-- **O Data Wrangler está integrado ao SageMaker Canvas** — não é mais uma experiência separada na barra lateral do Studio;
-- **A UI do Autopilot mudou para o Canvas em 30 de novembro de 2023** — a AutoML API permanece documentada e invocável, mas a experiência visual de AutoML é o Canvas.
+- **O Data Wrangler está integrado ao SageMaker Canvas**: não é mais uma experiência separada na barra lateral do Studio;
+- **A UI do Autopilot mudou para o Canvas em 30 de novembro de 2023**: a AutoML API permanece documentada e invocável, mas a experiência visual de AutoML é o Canvas.
 
-**📚 Você sabia?** O Amazon Athena cobra **por consulta e por gigabyte escaneado**, então a EDA mais barata é uma tabela Parquet particionada mais um filtro `WHERE dt = '…'`. Uma varredura de tabela inteira de um CSV de 1 TB custa aproximadamente 100× mais do que a mesma consulta sobre Parquet particionado — o exame não pede o preço, mas pergunta se o Athena é "serverless SQL over S3".
+**📚 Você sabia?** O Amazon Athena cobra **por consulta e por gigabyte escaneado**, então a EDA mais barata é uma tabela Parquet particionada mais um filtro `WHERE dt = '…'`. Uma varredura de tabela inteira de um CSV de 1 TB custa aproximadamente 100× mais do que a mesma consulta sobre Parquet particionado, o exame não pede o preço, mas pergunta se o Athena é "serverless SQL over S3".
 
 ---
 
@@ -331,7 +331,7 @@ Duas migrações importam para o exame de 2026:
 | AutoML API | Seleção de algoritmo, HPO, explicabilidade | UI vive no Canvas desde nov 2023 |
 | JumpStart | Hub de modelos: modelos implantáveis e soluções pré-construídas | Caminho mais rápido até um baseline funcional |
 | HyperPod | Clusters gerenciados EKS/Slurm para grande treinamento e inferência | Alegações do decision-guide da AWS (fonte única): treinamento −40%, governança −40%, goodput ≥ 95% |
-| Managed Spot Training | Capacidade interrompível | Economias publicadas como **até 90%** (FAQ) e **até 80%** (API) — veja a seção 13 |
+| Managed Spot Training | Capacidade interrompível | Economias publicadas como **até 90%** (FAQ) e **até 80%** (API): veja a seção 13 |
 | Instancias EC2 P/G/Trn/Inf | Controle mais profundo de hardware | Você é dono de SO, drivers, frameworks, serving stack |
 
 ### 5.3 Pipelines: a espinha dorsal da orquestração
@@ -341,7 +341,7 @@ Um SageMaker Pipeline é um **DAG JSON** cujos passos trocam saídas como entrad
 | Feature de pipeline | Comportamento verificado |
 |---|---|
 | Saídas de passo | Alimentam entradas de passos a jusante automaticamente |
-| Cache | `CacheConfig { Enabled, ExpireAfter: "30d" }` — passos inalterados podem ser pulados por até 30 dias |
+| Cache | `CacheConfig { Enabled, ExpireAfter: "30d" }`: passos inalterados podem ser pulados por até 30 dias |
 | Computação típica nos exemplos | `ml.m5.xlarge`, `ProcessingInstanceCount=1` |
 | Portão de implantação | `ModelApprovalStatus=PendingManualApproval` até um humano aprovar |
 | Cobrança | Você paga pelo Studio mais os jobs que o pipeline orquestra |
@@ -388,9 +388,9 @@ O Clarify grava métricas de viés JSON, atribuições globais e um relatório v
 | **Model Cards** | Um registro de documentação **imutável** para um modelo | Usos pretendidos, **classificação de risco**, detalhes de treinamento, resultados de avaliação; status padrão `DRAFT`; export PDF | Ativo |
 | **Model Dashboard** | Um portal em todo o seu estate | Modelos, monitores, linhagem, cards, classificação de risco em {low, medium, high, unknown} | Ativo |
 | **Data Capture** | Registra payloads de requisição/resposta ao vivo | Alimenta monitores e análise shadow | Ativo |
-| Role Manager | Papéis IAM de ML baseados em persona | — | **Fechado para novos clientes** |
+| Role Manager | Papéis IAM de ML baseados em persona |: | **Fechado para novos clientes** |
 
-Se o exame diz "the model owner must *record* intended uses, risk rating, training details and evaluation results", a resposta é **Model Cards** — não o Dashboard (que agrega) e não o Model Monitor (que apenas rastreia deriva).
+Se o exame diz "the model owner must *record* intended uses, risk rating, training details and evaluation results", a resposta é **Model Cards**: não o Dashboard (que agrega) e não o Model Monitor (que apenas rastreia deriva).
 
 ---
 
@@ -406,7 +406,7 @@ Este é o tópico central de seleção de serviço de toda a lição. O SageMake
 | Latência | Milissegundos / interativo | Horas a dias (offline) | Quase tempo real: segundos a minutos | Segundos; cold start possível |
 | Teto de payload / processamento | **25 MB / 60 s** (até 8 min com streaming de resposta) | **≤ 100 MB por requisição**, dias de processamento | **1 GB / 60 min** | **4 MB / 60 s** |
 | Capacidade e cobrança | Instância cobrada continuamente enquanto o endpoint existe | Apenas duração do job | Enquanto processa; autoscaling pode escalar instâncias para **0** | Auto **scale-to-zero** |
-| Fila | Não | Não aplicável | **Sim** — requisições entram na fila enquanto a capacidade é zero | Não |
+| Fila | Não | Não aplicável | **Sim**: requisições entram na fila enquanto a capacidade é zero | Não |
 | Carga de trabalho típica | Score de fraude, API de recomendador, chatbot | Score de risco noturno, backfill de lake, tagging de imagens | Processamento de vídeo/documento, payloads grandes | Tráfego espinhoso e imprevisível com períodos ociosos |
 
 ### 7.2 Os tetos numéricos em um lugar só
@@ -417,8 +417,8 @@ Este é o tópico central de seleção de serviço de toda a lição. O SageMake
 | Payload / processamento serverless | **4 MB / 60 s** | `serverless-endpoints` |
 | Payload / processamento assíncrono | **1 GB / 60 min** | `hosting-faqs` |
 | Payload batch por requisição | **100 MB**; concorrência × payload ≤ 100 MB | `batch-transform` |
-| Faixa de memória serverless | **1024–6144 MB** em passos de 1024; vCPUs escalam com memória | `serverless-endpoints` |
-| `MaxConcurrency` serverless / tamanho da imagem | **1–200** / **≤ 10 GB** | `serverless-endpoints` + API |
+| Faixa de memória serverless | **1024 to 6144 MB** em passos de 1024; vCPUs escalam com memória | `serverless-endpoints` |
+| `MaxConcurrency` serverless / tamanho da imagem | **1 to 200** / **≤ 10 GB** | `serverless-endpoints` + API |
 | Provisioned Concurrency em serverless | Responde "within milliseconds"; funciona com Application Auto Scaling | `serverless-endpoints` |
 | Streaming bidirecional | HTTP/2 **porta 8443**, sessão **≤ 30 min** | `realtime-endpoints-test-endpoints` |
 | `MaxRuntime` de treinamento padrão / máx / total do job | **1 dia / 28 dias / 30 dias** | `API_StoppingCondition` |
@@ -426,7 +426,7 @@ Este é o tópico central de seleção de serviço de toda a lição. O SageMake
 | Gravação offline Feature Store no S3 | **≤ 15 min** bufferizada; leitura online **single-digit ms** | `feature-store-offline` |
 | Alerta automático de deriva de atribuição | **NDCG < 0,90** | `clarify-model-monitor-feature-attribution-drift` |
 
-**Verifique os tetos antes de escolher uma opção — o payload decide, não a preferência de latência:**
+**Verifique os tetos antes de escolher uma opção, o payload decide, não a preferência de latência:**
 
 ```fillblank
 {
@@ -440,7 +440,7 @@ Este é o tópico central de seleção de serviço de toda a lição. O SageMake
     "5": "60"
   },
   "distractors": ["6", "100", "15", "8", "30"],
-  "explanation": "O guia de desenvolvedor publica 25 MB / 60 s para tempo real (até 8 minutos com streaming de resposta), 4 MB / 60 s para serverless e 1 GB / 60 min para assíncrona. Batch transform é a opção com o teto de 100 MB por requisição, e 6 MB é o número conflitante da FAQ que você deve ignorar - veja a seção 13."
+  "explanation": "O guia de desenvolvedor publica 25 MB / 60 s para tempo real (até 8 minutos com streaming de resposta), 4 MB / 60 s para serverless e 1 GB / 60 min para assíncrona. Batch transform é a opção com o teto de 100 MB por requisição, e 6 MB é o número conflitante da FAQ que você deve ignorar: veja a seção 13."
 }
 ```
 
@@ -448,7 +448,7 @@ Este é o tópico central de seleção de serviço de toda a lição. O SageMake
 
 - Endpoint HTTPS persistente invocado com **`InvokeEndpoint`**; streaming de resposta usa **`InvokeEndpointWithResponseStream`**.
 - **HTTP/2 bidirecional na porta 8443**, sessões limitadas a **30 minutos**.
-- Vários modelos podem compartilhar um endpoint através de **inference components** — a resposta do exame quando ele pede hospedar múltiplos modelos sem pagar por múltiplos endpoints.
+- Vários modelos podem compartilhar um endpoint através de **inference components**: a resposta do exame quando ele pede hospedar múltiplos modelos sem pagar por múltiplos endpoints.
 
 ### 7.4 Serverless Inference em detalhe
 
@@ -458,7 +458,7 @@ Serverless tem **exclusões** documentadas: sem **GPUs**, sem pacotes do **AWS M
 
 ### 7.5 Asynchronous Inference em detalhe
 
-`InvokeEndpointAsync` pega sua entrada do **S3**, grava saída no **S3**, e envia uma **notificação de conclusão**. Requisições **entram na fila enquanto a capacidade é zero**, e o autoscaling pode escalar a contagem de instâncias para **0** — essa combinação (fila + escala para zero) é o que torna a assíncrona a resposta certa para payloads grandes e lentos.
+`InvokeEndpointAsync` pega sua entrada do **S3**, grava saída no **S3**, e envia uma **notificação de conclusão**. Requisições **entram na fila enquanto a capacidade é zero**, e o autoscaling pode escalar a contagem de instâncias para **0**: essa combinação (fila + escala para zero) é o que torna a assíncrona a resposta certa para payloads grandes e lentos.
 
 ### 7.6 Batch transform em detalhe
 
@@ -481,14 +481,14 @@ flowchart TD
     Q2 -->|"Dataset inteiro já no S3"| BT["Batch transform: 100 MB por requisição, sem endpoint"]
 ```
 
-**Exemplo 1 — escolha de opção por payload.** Uma API de fraude recebe payloads de **3 KB** e deve responder em menos de **200 ms** → **tempo real** (tetos 25 MB / 60 s). Mais tarde o mesmo modelo é pedido para pontuar **vídeos de 800 MB que levam 10 minutos** → isso excede o teto tempo real de 25 MB mas cabe na **assíncrona** (≤ 1 GB, ≤ 60 min), então você troca de opção e mantém o scale-to-zero.
+**Exemplo 1: escolha de opção por payload.** Uma API de fraude recebe payloads de **3 KB** e deve responder em menos de **200 ms** → **tempo real** (tetos 25 MB / 60 s). Mais tarde o mesmo modelo é pedido para pontuar **vídeos de 800 MB que levam 10 minutos** → isso excede o teto tempo real de 25 MB mas cabe na **assíncrona** (≤ 1 GB, ≤ 60 min), então você troca de opção e mantém o scale-to-zero.
 
-**Exemplo 2 — dimensionamento serverless.** Um modelo de **3,5 GB** precisa de `MemorySizeInMB=4096` (memória deve ser ≥ tamanho do modelo; a faixa permitida é 1024…6144). Defina `MaxConcurrency=50` (permitido 1–200) com `ProvisionedConcurrency=10` (deve ser ≤ `MaxConcurrency`) para pré-aquecer parte do tráfego, e mantenha a imagem do contêiner **≤ 10 GB**.
+**Exemplo 2: dimensionamento serverless.** Um modelo de **3,5 GB** precisa de `MemorySizeInMB=4096` (memória deve ser ≥ tamanho do modelo; a faixa permitida é 1024…6144). Defina `MaxConcurrency=50` (permitido 1 to 200) com `ProvisionedConcurrency=10` (deve ser ≤ `MaxConcurrency`) para pré-aquecer parte do tráfego, e mantenha a imagem do contêiner **≤ 10 GB**.
 
-**Exemplo 3 — matemática de concorrência batch.** Com `MaxPayloadInMB=25`, o `MaxConcurrentTransforms` máximo legal é **4**, porque 4 × 25 = 100 ≤ 100 MB. Definir **5** quebraria a regra documentada (5 × 25 = 125 > 100).
+**Exemplo 3: matemática de concorrência batch.** Com `MaxPayloadInMB=25`, o `MaxConcurrentTransforms` máximo legal é **4**, porque 4 × 25 = 100 ≤ 100 MB. Definir **5** quebraria a regra documentada (5 × 25 = 125 > 100).
 
 > [!WARNING]
-> **Não memorize os números da FAQ para tempo real.** O guia de desenvolvedor diz **25 MB**, enquanto a FAQ pública tem circulado **6 MB** (e um número assíncrono de 15 min em vez de 60 min). Prefira os números do guia de desenvolvedor e verifique-os novamente antes do dia do exame — veja a seção 13.
+> **Não memorize os números da FAQ para tempo real.** O guia de desenvolvedor diz **25 MB**, enquanto a FAQ pública tem circulado **6 MB** (e um número assíncrono de 15 min em vez de 60 min). Prefira os números do guia de desenvolvedor e verifique-os novamente antes do dia do exame: veja a seção 13.
 
 ---
 
@@ -503,11 +503,11 @@ flowchart TD
 | **Deriva de viés** | Métricas de viés ao longo do tempo | Estatísticas de viés agendadas estilo Clarify |
 | **Deriva de atribuição de atributos** | Rank da importância do atributo vs. baseline | Ranqueado por **NDCG**; alerta automático quando **NDCG < 0,90** (um ranking totalmente invertido pontua 0,69) |
 
-Todos os monitores emitem métricas e violações para o **Amazon CloudWatch**, que é a resposta do exame sempre que ele menciona "raise an alarm on thresholds". Note também que o **contêiner de monitoramento pré-construído suporta somente dados tabulares** — modelos NLP e de computer vision precisam de um contêiner traga-o-proprio.
+Todos os monitores emitem métricas e violações para o **Amazon CloudWatch**, que é a resposta do exame sempre que ele menciona "raise an alarm on thresholds". Note também que o **contêiner de monitoramento pré-construído suporta somente dados tabulares**: modelos NLP e de computer vision precisam de um contêiner traga-o-proprio.
 
 ### 8.2 Do alarme ao modelo retreinado
 
-**Exemplo 6 — o loop deriva → re-treinar com números reais.** Uma baseline Deequ é computada a partir dos dados de treinamento. Um job de monitoramento agendado compara tráfego ao vivo contra ela. O monitoramento de atribuição de atributos levanta um alerta automático quando **NDCG cai abaixo de 0,90**. Um exemplo de viés usa uma **faixa DPPL de (−0,1, 0,1) avaliada ao longo de 2 dias** com intervalos de confiança bootstrap. O alarme vai para o **CloudWatch**, o CloudWatch dispara uma regra **EventBridge**, e o EventBridge inicia uma execução de re-treinamento do **SageMaker Pipelines** cuja nova versão chega ao Model Registry como `PendingManualApproval`.
+**Exemplo 6, o loop deriva → re-treinar com números reais.** Uma baseline Deequ é computada a partir dos dados de treinamento. Um job de monitoramento agendado compara tráfego ao vivo contra ela. O monitoramento de atribuição de atributos levanta um alerta automático quando **NDCG cai abaixo de 0,90**. Um exemplo de viés usa uma **faixa DPPL de (−0,1, 0,1) avaliada ao longo de 2 dias** com intervalos de confiança bootstrap. O alarme vai para o **CloudWatch**, o CloudWatch dispara uma regra **EventBridge**, e o EventBridge inicia uma execução de re-treinamento do **SageMaker Pipelines** cuja nova versão chega ao Model Registry como `PendingManualApproval`.
 
 ```mermaid
 flowchart LR
@@ -534,7 +534,7 @@ Porque Model Monitor e Clarify estão fechados para novos clientes, a própria d
 | Experiments (Classic) | Novo SageMaker Studio + **MLflow 3.0 gerenciado** (Apps preferidos, artefatos no seu S3) |
 | Studio Lab | **SageMaker Studio** |
 
-**📚 Você sabia?** O Experiments **Classic** está disponível somente no **Studio Classic**, e a AWS agora recomenda **MLflow 3.0** gerenciado com Studio Apps — os artefatos do experimento são armazenados no *seu* bucket S3, então os dados de tracking sobrevivem ao notebook. O MLflow também é a espinha dorsal da substituição recomendada para o Model Monitor.
+**📚 Você sabia?** O Experiments **Classic** está disponível somente no **Studio Classic**, e a AWS agora recomenda **MLflow 3.0** gerenciado com Studio Apps: os artefatos do experimento são armazenados no *seu* bucket S3, então os dados de tracking sobrevivem ao notebook. O MLflow também é a espinha dorsal da substituição recomendada para o Model Monitor.
 
 ---
 
@@ -555,12 +555,12 @@ Porque Model Monitor e Clarify estão fechados para novos clientes, a própria d
 Os critérios de decisão da própria AWS são: gestão de infraestrutura, compromissos de computação, preferência de precificação, suporte à arquitetura do modelo, e controle sobre motor, configuração e infraestrutura.
 
 > [!IMPORTANT]
-> **Veredito Comparativo — quando escolher cada caminho de implantação**
+> **Veredito Comparativo: quando escolher cada caminho de implantação**
 > - **SageMaker vs. construir o seu próprio em EC2:** ambos executam o seu container, mas o EC2 faz *você* ser dono do SO, drivers, GPU stack, framework de serving, lógica de scaling, patching, e cada segundo ocioso que você paga. Escolha EC2 somente quando você precisa de hardware ou controle de driver que o SageMaker não pode expor (instâncias especializadas P/G/Trn/Inf, ajuste em nível de kernel). Caso contrário, os endpoints gerenciados, Processing/Training jobs, Pipelines e Model Registry do SageMaker são a diferença entre um *sistema* e um *hobby*. Custo também não é o fator decisório: o EC2 cobra por hora assim como o SageMaker, e o SageMaker oferece Savings Plans até 64%.
-> - **SageMaker vs. plataformas não-AWS** (outras nuvens, fornecedores de ML gerenciado, stacks MLOps auto-hospedados): a portabilidade é real — containers, MLflow e Kubernetes viajam — mas o quadro do exame é integração nativa AWS: IAM, S3, Glue, Kinesis, EventBridge, CloudWatch, Bedrock e créditos free-tier todos se amarram ao SageMaker sem código de cola. Se o requisito é "executar em qualquer lugar", um stack Kubernetes (EKS ou outro orquestrador) com tracking MLflow é defensável; se o requisito é "entregar rápido, governado, na AWS", não é. Note também que modelos SageMaker podem ser importados para o Bedrock, então os dois não são mutuamente exclusivos.
+> - **SageMaker vs. plataformas não-AWS** (outras nuvens, fornecedores de ML gerenciado, stacks MLOps auto-hospedados): a portabilidade é real, containers, MLflow e Kubernetes viajam, mas o quadro do exame é integração nativa AWS: IAM, S3, Glue, Kinesis, EventBridge, CloudWatch, Bedrock e créditos free-tier todos se amarram ao SageMaker sem código de cola. Se o requisito é "executar em qualquer lugar", um stack Kubernetes (EKS ou outro orquestrador) com tracking MLflow é defensável; se o requisito é "entregar rápido, governado, na AWS", não é. Note também que modelos SageMaker podem ser importados para o Bedrock, então os dois não são mutuamente exclusivos.
 > - **SageMaker vs. um processo manual** (o notebook de um cientista de dados, planilhas, scripts ad-hoc, CSVs copiados à mão): o processo manual sempre vence a primeira semana e sempre perde depois. Ele não consegue provar repetibilidade (sem DAG Pipelines), não consegue provar qual versão serviu uma dada previsão (sem linhagem do Registry), não consegue detectar deriva (sem baseline, sem alarme CloudWatch), e não pode ser re-executado por ninguém mais. A AWS enquadra essa falha exata como **dívida técnica** e **prontidão de produção** na Tarefa 1.3. O veredito é categórico: um processo manual é aceitável somente para o estágio de experimentação, nunca para implantação.
 
-### 9.2 Amazon Bedrock vs. Amazon SageMaker — a linha oficial
+### 9.2 Amazon Bedrock vs. Amazon SageMaker: a linha oficial
 
 | Dimensão | Amazon Bedrock | Amazon SageMaker AI |
 |---|---|---|
@@ -568,7 +568,7 @@ Os critérios de decisão da própria AWS são: gestão de infraestrutura, compr
 | Interação | Serverless, baseada em API | Training jobs, endpoints dedicados, clusters HyperPod |
 | Infraestrutura que você gerencia | Efetivamente nenhuma | Containers, tipos de instância, políticas de scaling |
 | Melhor ajuste | Prompting, RAG, agentes, guardrails, fine-tuning, avaliações | Controle total sobre treinamento e serving |
-| Interoperabilidade | — | **Modelos SageMaker podem ser importados para o Bedrock** |
+| Interoperabilidade |: | **Modelos SageMaker podem ser importados para o Bedrock** |
 
 ### 9.3 Arquitetura de inferência streaming
 
@@ -599,7 +599,7 @@ O exame de 2026 testa ativamente disponibilidade. Responder corretamente signifi
 | **Manutenção, fechado para novos clientes** (30 jun 2026) | A2I, Clarify, Debugger, GeoSpatial, Ground Truth, Model Monitor, Role Manager, Studio Lab |
 | Data de encerramento declarada nos docs | Ground Truth, Model Monitor: **efetivo 7/30/26** |
 | **Fim do suporte** | Amazon Mechanical Turk: **29 set 2026** (docs Ground Truth: encerramento permanente 30 set 2026) |
-| Entrou em sunset, datas não recuperadas | SageMaker Profiler, Ground Truth Plus — veja a seção 13 |
+| Entrou em sunset, datas não recuperadas | SageMaker Profiler, Ground Truth Plus: veja a seção 13 |
 | **Ativo** (sem aviso encontrado) | Studio, Pipelines, Processing, Training, Model Registry, as quatro opções de inferência, Feature Store, Model Cards, Model Dashboard, Canvas, JumpStart, HyperPod, MLflow gerenciado |
 
 A redação padrão de manutenção é: *"Customers can't on-board… AWS will continue to operate and support these services… but won't enhance or add functionality."* Clientes existentes mantêm o acesso; simplesmente não há novas features.
@@ -630,18 +630,18 @@ A redação padrão de manutenção é: *"Customers can't on-board… AWS will c
 | A2I / Debugger / GeoSpatial | Human loops / debug de treinamento / ML geoespacial | **Fechado para novos clientes** |
 
 > [!WARNING]
-> **A questão Ground Truth, respondida.** Se um cliente **totalmente novo** pede um job de rotulagem de imagem SageMaker Ground Truth, a resposta correta é: **Ground Truth está fechado para novos clientes a partir de 30 de julho de 2026, então uma abordagem de rotulagem diferente é necessária** — não "it works with Mechanical Turk" (Mechanical Turk terminou o suporte em **29 set 2026**) e não "crie um endpoint primeiro" (rotulagem nunca precisou de um).
+> **A questão Ground Truth, respondida.** Se um cliente **totalmente novo** pede um job de rotulagem de imagem SageMaker Ground Truth, a resposta correta é: **Ground Truth está fechado para novos clientes a partir de 30 de julho de 2026, então uma abordagem de rotulagem diferente é necessária**: não "it works with Mechanical Turk" (Mechanical Turk terminou o suporte em **29 set 2026**) e não "crie um endpoint primeiro" (rotulagem nunca precisou de um).
 
-**📚 Você sabia?** O Studio Lab — o ambiente JupyterLab 4 gratuito que exigia **conta AWS e nenhum cartão de crédito** — tinha limites publicados de apenas **12 GB de RAM e 15 GB de armazenamento**, e agora está fechado para novos clientes com **SageMaker Studio** como substituição. É por isso que "use Studio Lab for free" é um distrator em material de 2026.
+**📚 Você sabia?** O Studio Lab, o ambiente JupyterLab 4 gratuito que exigia **conta AWS e nenhum cartão de crédito**, tinha limites publicados de apenas **12 GB de RAM e 15 GB de armazenamento**, e agora está fechado para novos clientes com **SageMaker Studio** como substituição. É por isso que "use Studio Lab for free" é um distrator em material de 2026.
 
-### 10.3 Atualizações de 2025–2026
+### 10.3 Atualizações de 2025 to 2026
 
-Entre dezembro de 2024 e outubro de 2026, o ecossistema SageMaker foi renomeado, aparado e redirecionado várias vezes. Cada linha abaixo vem de um anúncio da AWS, de uma página de mudança de disponibilidade da AWS ou do histórico de mudanças de certificação da AWS — nada aqui é de terceiros, e datas que a própria AWS não publica são deliberadamente omitidas (veja a seção 13).
+Entre dezembro de 2024 e outubro de 2026, o ecossistema SageMaker foi renomeado, aparado e redirecionado várias vezes. Cada linha abaixo vem de um anúncio da AWS, de uma página de mudança de disponibilidade da AWS ou do histórico de mudanças de certificação da AWS: nada aqui é de terceiros, e datas que a própria AWS não publica são deliberadamente omitidas (veja a seção 13).
 
 | Mudança | Data (publicada pela AWS) | O que o exame quer que você saiba |
 |---|---|---|
 | **Amazon SageMaker renomeado Amazon SageMaker AI** | 3 dez 2024 | "SageMaker" em uma questão significa SageMaker AI; o SageMaker de próxima geração (Unified Studio, Catalog, Lakehouse, zero-ETL) é a plataforma de analytics adjacente, não um tópico diferente de exame |
-| **Bedrock Studio incorporado ao SageMaker Unified Studio** | workspaces fechados 28 fev 2025 (docs atualizados 25 mar 2025) | O Bedrock Studio standalone acabou — Bedrock agora vive dentro do SageMaker Unified Studio ou no Bedrock IDE |
+| **Bedrock Studio incorporado ao SageMaker Unified Studio** | workspaces fechados 28 fev 2025 (docs atualizados 25 mar 2025) | O Bedrock Studio standalone acabou: Bedrock agora vive dentro do SageMaker Unified Studio ou no Bedrock IDE |
 | **Amazon Forecast fechado para novos clientes** | 29 jul 2024 | Questões estilo Forecast agora apontam para **SageMaker Canvas** |
 | **Amazon Kendra em manutenção, depois fechado para novos clientes** | 30 jun → 30 jul 2026 | Busca corporativa gerenciada e QA generativo → **Amazon Bedrock Managed Knowledge Base** (Smart Parsing mais a Agentic Retrieval API) |
 | **Inscrições Amazon Q Developer bloqueadas; IDE/pago fim do suporte** | 15 mai 2026; EOS 30 abr 2027 | A AWS documenta **Kiro** como o sucessor para essas cargas de trabalho |
@@ -653,9 +653,9 @@ Entre dezembro de 2024 e outubro de 2026, o ecossistema SageMaker foi renomeado,
 Dois fatos de vocabulário completam o quadro:
 
 - **Manutenção** = sem novos clientes, sem novas features, ainda suportado · **sunset** = fim planejado de operações, tipicamente anunciado com cerca de um ano de antecedência · **encerramento total** = removido do portfólio da AWS. A referência de Ciclo de Vida de Serviços da AWS define todos os três, e cada linha acima está nos dois primeiros estados.
-- Atualizações do guia de exame chegam ao teste cerca de **um mês** após a publicação, então qualquer coisa que a AWS publicou na v1.1 (30 abr 2026) já está em jogo — incluindo SageMaker JumpStart, Bedrock AgentCore, Kiro e Strands Agents na lista no escopo.
+- Atualizações do guia de exame chegam ao teste cerca de **um mês** após a publicação, então qualquer coisa que a AWS publicou na v1.1 (30 abr 2026) já está em jogo: incluindo SageMaker JumpStart, Bedrock AgentCore, Kiro e Strands Agents na lista no escopo.
 
-**📚 Você sabia?** A página de disponibilidade do Kendra não diz "deprecated": ela redireciona novas aplicações de busca para o **Amazon Bedrock Managed Knowledge Base**, cujo Smart Parsing e **Agentic Retrieval API** são documentados como a substituição do Kendra. "Kendra was shut down" é, portanto, um distrator — Kendra está em *manutenção*, o que sob o próprio vocabulário da AWS significa que continua rodando para clientes existentes.
+**📚 Você sabia?** A página de disponibilidade do Kendra não diz "deprecated": ela redireciona novas aplicações de busca para o **Amazon Bedrock Managed Knowledge Base**, cujo Smart Parsing e **Agentic Retrieval API** são documentados como a substituição do Kendra. "Kendra was shut down" é, portanto, um distrator: Kendra está em *manutenção*, o que sob o próprio vocabulário da AWS significa que continua rodando para clientes existentes.
 
 ---
 
@@ -677,29 +677,29 @@ Dois fatos de vocabulário completam o quadro:
 
 ### 11.2 Padrão de custo trabalhado
 
-O exemplo trabalhado da própria AWS totaliza **$2,38** — 2 horas de `ml.m4.4xlarge` a **$0,96** cada mais 2 horas de `ml.m5.xlarge` a **$0,23** cada, com regras built-in de Debugger cobradas a **$0**. Aprenda o *padrão* (horas-de-instância × tarifa + taxas de job), nunca a tarifa: preços `ml.*` são dependentes de região e data.
+O exemplo trabalhado da própria AWS totaliza **$2,38**: 2 horas de `ml.m4.4xlarge` a **$0,96** cada mais 2 horas de `ml.m5.xlarge` a **$0,23** cada, com regras built-in de Debugger cobradas a **$0**. Aprenda o *padrão* (horas-de-instância × tarifa + taxas de job), nunca a tarifa: preços `ml.*` são dependentes de região e data.
 
 ### 11.3 Cotas
 
-Contagens de endpoints, cotas de pipeline, limites de jobs concorrentes e concorrência serverless vivem em **Service Quotas**. Nunca adivinhe uma cota numérica em uma resposta de exame ou revisão de design — procure-a.
+Contagens de endpoints, cotas de pipeline, limites de jobs concorrentes e concorrência serverless vivem em **Service Quotas**. Nunca adivinhe uma cota numérica em uma resposta de exame ou revisão de design: procure-a.
 
 ---
 
 ## 12. Exemplos AWS trabalhados com números
 
-**Exemplo 1 — escolha de opção por payload (seção 7.7).** API de fraude: payloads de **3 KB**, **< 200 ms** → tempo real (tetos 25 MB / 60 s). Mesmo modelo pontuando vídeos de **800 MB** que levam **10 minutos** → excede 25 MB mas cabe na assíncrona (≤ 1 GB, ≤ 60 min). Troque de opção; mantenha o scale-to-zero.
+**Exemplo 1: escolha de opção por payload (seção 7.7).** API de fraude: payloads de **3 KB**, **< 200 ms** → tempo real (tetos 25 MB / 60 s). Mesmo modelo pontuando vídeos de **800 MB** que levam **10 minutos** → excede 25 MB mas cabe na assíncrona (≤ 1 GB, ≤ 60 min). Troque de opção; mantenha o scale-to-zero.
 
-**Exemplo 2 — dimensionamento serverless (seção 7.4).** Modelo de **3,5 GB** → `MemorySizeInMB=4096`; `MaxConcurrency=50` (faixa 1–200); `ProvisionedConcurrency=10` (≤ 50) para pré-aquecer; imagem do contêiner **≤ 10 GB**.
+**Exemplo 2: dimensionamento serverless (seção 7.4).** Modelo de **3,5 GB** → `MemorySizeInMB=4096`; `MaxConcurrency=50` (faixa 1 to 200); `ProvisionedConcurrency=10` (≤ 50) para pré-aquecer; imagem do contêiner **≤ 10 GB**.
 
-**Exemplo 3 — matemática de concorrência batch (seção 7.6).** `MaxPayloadInMB=25` → máximo `MaxConcurrentTransforms=4` porque 4 × 25 = 100 ≤ 100 MB. Cinco workers violariam a regra documentada.
+**Exemplo 3: matemática de concorrência batch (seção 7.6).** `MaxPayloadInMB=25` → máximo `MaxConcurrentTransforms=4` porque 4 × 25 = 100 ≤ 100 MB. Cinco workers violariam a regra documentada.
 
-**Exemplo 4 — orçamento free tier.** 250 horas de notebook ≈ **8,3 dias-de-instância**; 50 horas de treinamento ≈ **seis execuções de 8 horas**; 125 horas tempo real ≈ **4,2 dias** de hosting; 150.000 segundos serverless ≈ **41,7 horas cobráveis**. Exceder 250 horas de notebook no mês 1 inicia cobrança medida.
+**Exemplo 4: orçamento free tier.** 250 horas de notebook ≈ **8,3 dias-de-instância**; 50 horas de treinamento ≈ **seis execuções de 8 horas**; 125 horas tempo real ≈ **4,2 dias** de hosting; 150.000 segundos serverless ≈ **41,7 horas cobráveis**. Exceder 250 horas de notebook no mês 1 inicia cobrança medida.
 
-**Exemplo 5 — frescor de atributos (seção 3.2).** `GetRecord` online responde em **single-digit milliseconds**; o offline store mantém cada versão como Parquet no S3 (consultável com Athena) para joins point-in-time; um `PutRecord` de **14:00** chega ao S3 até **14:15** no máximo.
+**Exemplo 5: frescor de atributos (seção 3.2).** `GetRecord` online responde em **single-digit milliseconds**; o offline store mantém cada versão como Parquet no S3 (consultável com Athena) para joins point-in-time; um `PutRecord` de **14:00** chega ao S3 até **14:15** no máximo.
 
-**Exemplo 6 — loop deriva → re-treinar (seção 8.2).** Baseline Deequ dos dados de treinamento; monitoramento agendado de tráfego ao vivo; alerta automático de deriva de atribuição abaixo de **NDCG 0,90**; exemplo de viés usa **DPPL ∈ (−0,1, 0,1) ao longo de 2 dias** com intervalos de confiança bootstrap → CloudWatch → EventBridge → re-treinamento Pipelines.
+**Exemplo 6: loop deriva → re-treinar (seção 8.2).** Baseline Deequ dos dados de treinamento; monitoramento agendado de tráfego ao vivo; alerta automático de deriva de atribuição abaixo de **NDCG 0,90**; exemplo de viés usa **DPPL ∈ (−0,1, 0,1) ao longo de 2 dias** com intervalos de confiança bootstrap → CloudWatch → EventBridge → re-treinamento Pipelines.
 
-**Exemplo 7 — teto de custo de treinamento (seção 5.1).** Um training job com o padrão `MaxRuntimeInSeconds` para após **1 dia**; o máximo rígido é **28 dias**, e um job não pode exceder **30 dias** no total. Ao parar, o SageMaker envia **`SIGTERM`** e espera **120 segundos** para o seu código de checkpoint terminar.
+**Exemplo 7: teto de custo de treinamento (seção 5.1).** Um training job com o padrão `MaxRuntimeInSeconds` para após **1 dia**; o máximo rígido é **28 dias**, e um job não pode exceder **30 dias** no total. Ao parar, o SageMaker envia **`SIGTERM`** e espera **120 segundos** para o seu código de checkpoint terminar.
 
 ---
 
@@ -710,13 +710,13 @@ Bons candidatos a exame separam o que a AWS *documenta* do que a AWS *anuncia*. 
 | Alegação | O que as fontes dizem | Como lidar |
 |---|---|---|
 | Payload tempo real | Guia de desenvolvedor **25 MB** vs. FAQ pública **6 MB** (assíncrono 15 min vs. 60 min) | Prefira o guia de desenvolvedor; verifique antes do dia do exame |
-| Economias Spot | **Até 90%** (FAQ/blogs) vs. **até 80%** (CreateTrainingJob API) | Ambos são publicados pela AWS; espere "até 80–90%" |
+| Economias Spot | **Até 90%** (FAQ/blogs) vs. **até 80%** (CreateTrainingJob API) | Ambos são publicados pela AWS; espere "até 80 to 90%" |
 | Savings Plans | Até **64%** no SageMaker | Número único da página de preços da AWS |
 | Preços | Apenas o exemplo trabalhado da AWS ($0,96, $0,23, total **$2,38**) é citado aqui | Não memorize tarifas `ml.*` |
-| Cold start serverless 10–60 s, percentis de latência, pontos de equilíbrio de custo, "economias de 60–80% auto-hospedando em EKS" | **Somente terceiros** (devopsity.com) | Não examinável |
+| Cold start serverless 10 to 60 s, percentis de latência, pontos de equilíbrio de custo, "economias de 60 to 80% auto-hospedando em EKS" | **Somente terceiros** (devopsity.com) | Não examinável |
 | Sunset do Ground Truth Plus (30 jun 2026) e do SageMaker Profiler | Listados pela AWS como entrando em sunset; **datas não recuperadas** | Não declare uma data |
 | Status do Experiments (Classic) | Docs dizem somente Studio Classic e recomendam MLflow; **nenhuma página de mudança de disponibilidade encontrada** | Status para novos clientes não confirmado |
-| Canvas / Autopilot / JumpStart / Feature Store / Pipelines | **Nenhum aviso de manutenção encontrado** | Ausência de aviso não é garantia — verifique em `docs.aws.amazon.com` |
+| Canvas / Autopilot / JumpStart / Feature Store / Pipelines | **Nenhum aviso de manutenção encontrado** | Ausência de aviso não é garantia: verifique em `docs.aws.amazon.com` |
 | Cotas de conta | Vivem em Service Quotas, não recuperadas | Nunca adivinhe uma cota numérica |
 | Alegações HyperPod (treinamento −40%, governança −40%, goodput ≥ 95%, latência de inferência −40%) | Afirmação de **marketing** de fonte única em um decision guide | Trate como direcional, não factual |
 | Artigos AWS re:Post | Hospedados pela AWS mas conteúdo de **perspectiva** | Não é documentação normativa |
@@ -728,55 +728,55 @@ Fontes primárias para esta lição: o **Guia de Exame** AIF-C01; páginas do **
 
 ## Casos Reais
 
-A AWS publica estes casos em `aws.amazon.com/solutions/case-studies/` e `aws.amazon.com/blogs/machine-learning/`. Eles pertencem a esta lição porque cada um mapeia um **estágio do ciclo de vida** para uma **escolha de serviço** com um número anexado — que é exatamente como as questões da Tarefa 1.3 são formuladas.
+A AWS publica estes casos em `aws.amazon.com/solutions/case-studies/` e `aws.amazon.com/blogs/machine-learning/`. Eles pertencem a esta lição porque cada um mapeia um **estágio do ciclo de vida** para uma **escolha de serviço** com um número anexado: que é exatamente como as questões da Tarefa 1.3 são formuladas.
 
-### Caso 1 — HAYAT HOLDING: o loop inteiro treinar → implantar → monitorar no chão de fábrica
+### Caso 1, HAYAT HOLDING: o loop inteiro treinar → implantar → monitorar no chão de fábrica
 
-Ambientes de ML construídos internamente eram "time-consuming and cumbersome" neste fabricante de painéis de MDF. O pipeline publicado: **194 sensores** via OPC-UA → SiteWise Edge Gateway em **AWS IoT Greengrass** → **SageMaker Model Training** + **Automatic Model Tuning** + **Model Deployment**, com **SageMaker Edge Manager** executando o modelo no dispositivo. Resultado: **$300.000 por ano** economizados mais qualidade de painel superior. *Lição do ciclo de vida:* estágios 5–8 executam totalmente gerenciados, e o Automatic Model Tuning substitui um sweep manual de hiperparâmetros em 194 entradas. Fonte: `aws.amazon.com/blogs/machine-learning/hayat-holding-uses-amazon-sagemaker-to-increase-product-quality-and-optimize-manufacturing-output-saving-300000-annually` (2023).
+Ambientes de ML construídos internamente eram "time-consuming and cumbersome" neste fabricante de painéis de MDF. O pipeline publicado: **194 sensores** via OPC-UA → SiteWise Edge Gateway em **AWS IoT Greengrass** → **SageMaker Model Training** + **Automatic Model Tuning** + **Model Deployment**, com **SageMaker Edge Manager** executando o modelo no dispositivo. Resultado: **$300.000 por ano** economizados mais qualidade de painel superior. *Lição do ciclo de vida:* estágios 5 to 8 executam totalmente gerenciados, e o Automatic Model Tuning substitui um sweep manual de hiperparâmetros em 194 entradas. Fonte: `aws.amazon.com/blogs/machine-learning/hayat-holding-uses-amazon-sagemaker-to-increase-product-quality-and-optimize-manufacturing-output-saving-300000-annually` (2023).
 
-### Caso 2 — Forethought: inferência DIY é um imposto oculto
+### Caso 2, Forethought: inferência DIY é um imposto oculto
 
-Uma equipe de **3 pessoas** suportando **30 milhões de interações por ano** estava executando modelos *e* Kubernetes no seu próprio **Amazon EKS** — incluindo exceções de memória e interrupções. Eles migraram para **multi-model endpoints do SageMaker** e **Serverless Inference**: **−66%** de custo em multi-model endpoints (com latência *melhor*), **≈ −80%** em serverless, e **mais de 80% da inferência GPU** agora roda no SageMaker. *Lição do ciclo de vida:* estágio 7 — endpoints compartilhados e scale-to-zero superam um cluster auto-gerenciado que você tem de babar. Fonte: `aws.amazon.com/solutions/case-studies/forethought-technologies-case-study`.
+Uma equipe de **3 pessoas** suportando **30 milhões de interações por ano** estava executando modelos *e* Kubernetes no seu próprio **Amazon EKS**, incluindo exceções de memória e interrupções. Eles migraram para **multi-model endpoints do SageMaker** e **Serverless Inference**: **−66%** de custo em multi-model endpoints (com latência *melhor*), **≈ −80%** em serverless, e **mais de 80% da inferência GPU** agora roda no SageMaker. *Lição do ciclo de vida:* estágio 7, endpoints compartilhados e scale-to-zero superam um cluster auto-gerenciado que você tem de babar. Fonte: `aws.amazon.com/solutions/case-studies/forethought-technologies-case-study`.
 
-### Caso 3 — RareJob: o gargalo era orquestração, não qualidade do modelo
+### Caso 3, RareJob: o gargalo era orquestração, não qualidade do modelo
 
-Treinar em um PC local permitia **um modelo por desenvolvedor**; a tentativa EC2/ECS que se seguiu ainda custava caro demais. **AWS Glue** e **Amazon Athena** alimentam jobs paralelos de **SageMaker Managed Spot Training**. Resultado: **−25%** de tempo de treinamento, **> 10×** de eficiência de desenvolvedor, **100 horas por mês** economizadas, e escores de teste de fala retornados em **2–3 minutos**. *Lição do ciclo de vida:* estágios 1–3 (coletar → EDA → pré-processar) pertencem ao Glue e Athena; a fila, não o algoritmo, era a restrição. Fonte: `aws.amazon.com/solutions/case-studies/rare-job-case-study` (2020).
+Treinar em um PC local permitia **um modelo por desenvolvedor**; a tentativa EC2/ECS que se seguiu ainda custava caro demais. **AWS Glue** e **Amazon Athena** alimentam jobs paralelos de **SageMaker Managed Spot Training**. Resultado: **−25%** de tempo de treinamento, **> 10×** de eficiência de desenvolvedor, **100 horas por mês** economizadas, e escores de teste de fala retornados em **2 to 3 minutos**. *Lição do ciclo de vida:* estágios 1 to 3 (coletar → EDA → pré-processar) pertencem ao Glue e Athena; a fila, não o algoritmo, era a restrição. Fonte: `aws.amazon.com/solutions/case-studies/rare-job-case-study` (2020).
 
-### Caso 4 — Chronomics: quando a construção interna falha, vá para AutoML
+### Caso 4, Chronomics: quando a construção interna falha, vá para AutoML
 
-**Quatro meses** de modelagem customizada de computer vision interna nunca atingiram o alvo. **Amazon Rekognition Custom Labels** entrou em produção em **3–4 semanas** com **96,5% de acurácia / 97,9% F1**. Elevar o limiar de decisão para **0,99** produziu **99,6%** de precisão mas descartou **5%** das previsões; **0,999** deu **99,87%** enquanto descartava **27%**. *Lição do ciclo de vida:* estágio 6 — avaliação é o que diz para parar de construir, e a cauda descartada precisa de um caminho de revisão humana. Fonte: `aws.amazon.com/blogs/machine-learning/chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels` (2022).
+**Quatro meses** de modelagem customizada de computer vision interna nunca atingiram o alvo. **Amazon Rekognition Custom Labels** entrou em produção em **3 to 4 semanas** com **96,5% de acurácia / 97,9% F1**. Elevar o limiar de decisão para **0,99** produziu **99,6%** de precisão mas descartou **5%** das previsões; **0,999** deu **99,87%** enquanto descartava **27%**. *Lição do ciclo de vida:* estágio 6: avaliação é o que diz para parar de construir, e a cauda descartada precisa de um caminho de revisão humana. Fonte: `aws.amazon.com/blogs/machine-learning/chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels` (2022).
 
-### Caso 5 — Sun Finance: separe OCR de raciocínio
+### Caso 5, Sun Finance: separe OCR de raciocínio
 
-A primeira tentativa enviou fotos de documento de identidade direto ao **Claude Sonnet 4** e pontuou **61,8%** no geral (**43%** nos números do documento) — a AWS o rejeitou. O pipeline reconstruído: OCR **Amazon Textract** → fallback e mascaramento de rosto **Amazon Rekognition** → estruturação **Claude Sonnet 4** → regras de validação, com **Amazon Titan Multimodal Embeddings** em **S3 Vectors** para similaridade de fraude, avaliado em **585 imagens**. Resultado: acurácia **79,73% → 90,80%**, custo por documento **−91%**, tempo de processamento **20 horas → menos de 5 segundos**, detecção de fraude **81%**. *Lição do ciclo de vida:* avaliação (estágio 6) matou o protótipo elegante, e o serviço pronto — não o modelo — é dono da extração. Fonte: `aws.amazon.com/blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws` (2026).
+A primeira tentativa enviou fotos de documento de identidade direto ao **Claude Sonnet 4** e pontuou **61,8%** no geral (**43%** nos números do documento): a AWS o rejeitou. O pipeline reconstruído: OCR **Amazon Textract** → fallback e mascaramento de rosto **Amazon Rekognition** → estruturação **Claude Sonnet 4** → regras de validação, com **Amazon Titan Multimodal Embeddings** em **S3 Vectors** para similaridade de fraude, avaliado em **585 imagens**. Resultado: acurácia **79,73% → 90,80%**, custo por documento **−91%**, tempo de processamento **20 horas → menos de 5 segundos**, detecção de fraude **81%**. *Lição do ciclo de vida:* avaliação (estágio 6) matou o protótipo elegante, e o serviço pronto: não o modelo: é dono da extração. Fonte: `aws.amazon.com/blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws` (2026).
 
-### Caso 6 — Anthem: pronto primeiro, humanos na cauda
+### Caso 6, Anthem: pronto primeiro, humanos na cauda
 
-Extração manual de formulários de sinistro levava **20 minutos por sinistro**. Um pipeline **Amazon Textract** (OCR mais indexação/classificação de ML atrás do portal de sinistros) automatizou **80%** do fluxo de trabalho com meta de **90%+**, em milhares de sinistros por dia. *Lição do ciclo de vida:* estágios 1–2 — chame uma API gerenciada antes de treinar qualquer coisa custom, e projete o caminho de exceção humana para os 10–20% restantes. Fonte: `aws.amazon.com/solutions/case-studies/anthem` (2021).
+Extração manual de formulários de sinistro levava **20 minutos por sinistro**. Um pipeline **Amazon Textract** (OCR mais indexação/classificação de ML atrás do portal de sinistros) automatizou **80%** do fluxo de trabalho com meta de **90%+**, em milhares de sinistros por dia. *Lição do ciclo de vida:* estágios 1 to 2: chame uma API gerenciada antes de treinar qualquer coisa custom, e projete o caminho de exceção humana para os 10 to 20% restantes. Fonte: `aws.amazon.com/solutions/case-studies/anthem` (2021).
 
 ### Todos os seis casos em uma tabela
 
 | Caso (indústria, ano) | Estágios do ciclo de vida exercitados | Serviços AWS (exatos) | Números verificados | Fonte |
 |---|---|---|---|---|
-| **HAYAT HOLDING** (manufatura, 2023) | 5–8: treinar → ajustar → implantar → monitorar na borda | SageMaker Training, Automatic Model Tuning, Deployment, Edge Manager; AWS IoT Greengrass | **194 sensores**; **$300.000/ano** | ML blog `hayat-holding-…` |
+| **HAYAT HOLDING** (manufatura, 2023) | 5 to 8: treinar → ajustar → implantar → monitorar na borda | SageMaker Training, Automatic Model Tuning, Deployment, Edge Manager; AWS IoT Greengrass | **194 sensores**; **$300.000/ano** | ML blog `hayat-holding-…` |
 | **Forethought** (suporte SaaS) | 7: escolha da opção de implantação | SageMaker multi-model endpoints, Serverless Inference (migrou do Amazon EKS) | **−66%** MME, **≈ −80%** serverless, **> 80%** da inferência GPU; **30 M** interações/ano; equipe de **3 pessoas** | case study `forethought-technologies` |
-| **RareJob** (EdTech, 2020) | 1–5: ingestão, EDA, processar, treinar | AWS Glue, Amazon Athena, SageMaker Managed Spot Training | **−25%** tempo de treinamento, **> 10×** eficiência, **100 h/mês**, escores em **2–3 min** | case study `rare-job` |
-| **Chronomics** (health-tech, 2022) | 6: avaliação e a decisão construir-vs-comprar | Amazon Rekognition Custom Labels (AutoML) | **3–4 sem** vs **4 meses**, **96,5%** acurácia / **97,9%** F1; limiar **0,99 → 99,6%** descarta **5%** | ML blog `chronomics-detects-covid-19…` |
+| **RareJob** (EdTech, 2020) | 1 to 5: ingestão, EDA, processar, treinar | AWS Glue, Amazon Athena, SageMaker Managed Spot Training | **−25%** tempo de treinamento, **> 10×** eficiência, **100 h/mês**, escores em **2 to 3 min** | case study `rare-job` |
+| **Chronomics** (health-tech, 2022) | 6: avaliação e a decisão construir-vs-comprar | Amazon Rekognition Custom Labels (AutoML) | **3 to 4 sem** vs **4 meses**, **96,5%** acurácia / **97,9%** F1; limiar **0,99 → 99,6%** descarta **5%** | ML blog `chronomics-detects-covid-19…` |
 | **Sun Finance** (fintech, 2026) | 3, 6, 7: pré-processamento, avaliação, implantação | Textract, Rekognition, Claude Sonnet 4, Titan Multimodal Embeddings, S3 Vectors, Lambda, Step Functions | **79,73 → 90,80%**, **−91%** custo/doc, **20 h → < 5 s**, n = **585**; primeira tentativa só com LLM **61,8%** rejeitada | ML blog `sun-finance-automates-id-extraction…` |
-| **Anthem** (seguros de saúde, 2021) | 1–2: chamar uma API pronta em vez de treinar | Amazon Textract | **20 min/sinistro** manual → **80%** automatizado, meta **90%+** | case study `anthem` |
+| **Anthem** (seguros de saúde, 2021) | 1 to 2: chamar uma API pronta em vez de treinar | Amazon Textract | **20 min/sinistro** manual → **80%** automatizado, meta **90%+** | case study `anthem` |
 
 > [!WARNING]
-> **Números de estudo de caso são afirmações do cliente ou da AWS e não auditados.** "Até" é um teto, não uma previsão, e apenas dois destes casos divulgam uma base amostral (Sun Finance: **585 imagens**; Chronomics: seu próprio conjunto de teste rotulado). Sempre carregue o número "antes" com o número "depois", e não repita estatísticas de adoção que a AWS nunca publicou — a única taxa de produção que a AWS declara é o número **65%** abaixo.
+> **Números de estudo de caso são afirmações do cliente ou da AWS e não auditados.** "Até" é um teto, não uma previsão, e apenas dois destes casos divulgam uma base amostral (Sun Finance: **585 imagens**; Chronomics: seu próprio conjunto de teste rotulado). Sempre carregue o número "antes" com o número "depois", e não repita estatísticas de adoção que a AWS nunca publicou: a única taxa de produção que a AWS declara é o número **65%** abaixo.
 
 **Cinco regras que recorrem em todos os seis casos:**
 
-1. **Escolha a camada deliberadamente** — serviço pronto (Anthem, Chronomics) → ML custom gerenciado (HAYAT, RareJob, Forethought) → IA generativa (Sun Finance). O exame recompensa a *camada mais barata que funciona*.
-2. **Baseline antes de construir** — uma porcentagem sem um "antes" é marketing, não métrica.
-3. **Separe responsabilidades** — OCR não é raciocínio (Sun Finance), e recuperação não é geração.
-4. **Avaliação é uma fase, não um checkbox** — as primeiras tentativas do Sun Finance e do Chronomics falharam *no estágio 6*.
-5. **Mantenha um humano na cauda** — os 5% descartados e os 10–20% não automatizados ainda precisam de alguém.
+1. **Escolha a camada deliberadamente**: serviço pronto (Anthem, Chronomics) → ML custom gerenciado (HAYAT, RareJob, Forethought) → IA generativa (Sun Finance). O exame recompensa a *camada mais barata que funciona*.
+2. **Baseline antes de construir**: uma porcentagem sem um "antes" é marketing, não métrica.
+3. **Separe responsabilidades**: OCR não é raciocínio (Sun Finance), e recuperação não é geração.
+4. **Avaliação é uma fase, não um checkbox**: as primeiras tentativas do Sun Finance e do Chronomics falharam *no estágio 6*.
+5. **Mantenha um humano na cauda**: os 5% descartados e os 10 to 20% não automatizados ainda precisam de alguém.
 
-**📚 Você sabia?** A única taxa de produção que a AWS publica para o seu próprio Generative AI Innovation Center é **65%** dos projetos chegando à produção em 2025 — alguns em apenas **45 dias**, de **mais de 1.000** implementações — usando o framework **Five V's** da AWS: **Value → Visualize → Validate → Verify → Venture**. A AWS nunca afirmou que todos os pilotos dão certo, então qualquer opção dizendo "100%" está errada de cara.
+**📚 Você sabia?** A única taxa de produção que a AWS publica para o seu próprio Generative AI Innovation Center é **65%** dos projetos chegando à produção em 2025, alguns em apenas **45 dias**, de **mais de 1.000** implementações, usando o framework **Five V's** da AWS: **Value → Visualize → Validate → Verify → Venture**. A AWS nunca afirmou que todos os pilotos dão certo, então qualquer opção dizendo "100%" está errada de cara.
 
 ---
 
@@ -875,7 +875,7 @@ Extração manual de formulários de sinistro levava **20 minutos por sinistro**
     "Autopilot"
   ],
   "correct": 1,
-  "explanation": "O Model Monitor compara tráfego ao vivo a uma baseline computada a partir dos dados de treinamento (usando Deequ) e publica métricas e violações no CloudWatch, que então dispara o alarme. O Model Registry armazena versões e status de aprovação, Experiments rastreia execuções de treinamento, e AutoML constrói modelos — nenhum deles observa entradas de produção."
+  "explanation": "O Model Monitor compara tráfego ao vivo a uma baseline computada a partir dos dados de treinamento (usando Deequ) e publica métricas e violações no CloudWatch, que então dispara o alarme. O Model Registry armazena versões e status de aprovação, Experiments rastreia execuções de treinamento, e AutoML constrói modelos: nenhum deles observa entradas de produção."
 }
 ```
 
@@ -982,7 +982,7 @@ Extração manual de formulários de sinistro levava **20 minutos por sinistro**
   "question": "Uma equipe de três pessoas que lida com 30 milhões de interações de clientes por ano está pagando por um cluster de inferência Amazon EKS auto-gerenciado que não para de falhar. Qual migração corresponde ao resultado que a AWS publicou para este cliente?",
   "options": [
     "Mover os modelos para instâncias GPU Amazon EC2 e manter Kubernetes para orquestração",
-    "Multi-model endpoints do SageMaker mais Serverless Inference — cerca de 66% e até 80% de custo de inferência menor, com mais de 80% da inferência GPU rodando no SageMaker",
+    "Multi-model endpoints do SageMaker mais Serverless Inference: cerca de 66% e até 80% de custo de inferência menor, com mais de 80% da inferência GPU rodando no SageMaker",
     "Throughput provisionado Amazon Bedrock para cada classificador, independentemente do tamanho",
     "Um job de batch transform do SageMaker invocado para cada requisição ao vivo"
   ],
@@ -1003,7 +1003,7 @@ Extração manual de formulários de sinistro levava **20 minutos por sinistro**
     "Amazon Kendra foi totalmente removido do portfólio da AWS sem substituição documentada"
   ],
   "correct": 0,
-  "explanation": "A AWS anunciou a renomeação de Amazon SageMaker para Amazon SageMaker AI em 3 de dezembro de 2024, e a página de mudança de disponibilidade do Amazon Kendra envia novas aplicações de busca para o Amazon Bedrock Managed Knowledge Base (Kendra entrou em manutenção em 30 de junho de 2026 e fechou para novos clientes em 30 de julho de 2026). O próprio SageMaker está ativo, não encerrado; Amazon Forecast fechou para novos clientes em 29 de julho de 2024 com SageMaker Canvas como alvo de migração; e o vocabulário de ciclo de vida da AWS distingue manutenção, sunset e encerramento total — Kendra está em manutenção, não em remoção."
+  "explanation": "A AWS anunciou a renomeação de Amazon SageMaker para Amazon SageMaker AI em 3 de dezembro de 2024, e a página de mudança de disponibilidade do Amazon Kendra envia novas aplicações de busca para o Amazon Bedrock Managed Knowledge Base (Kendra entrou em manutenção em 30 de junho de 2026 e fechou para novos clientes em 30 de julho de 2026). O próprio SageMaker está ativo, não encerrado; Amazon Forecast fechou para novos clientes em 29 de julho de 2024 com SageMaker Canvas como alvo de migração; e o vocabulário de ciclo de vida da AWS distingue manutenção, sunset e encerramento total: Kendra está em manutenção, não em remoção."
 }
 ```
 
@@ -1011,7 +1011,7 @@ Extração manual de formulários de sinistro levava **20 minutos por sinistro**
 > **Pontos Principais (Key Takeaways):**
 > 1. **Nove estágios, um loop.** Coletar → EDA → pré-processar → engenheirar atributos → treinar → ajustar → avaliar → implantar → monitorar, e o monitoramento realimenta o treinamento. Cada estágio tem uma feature nomeada do SageMaker *e* um serviço não-SageMaker nomeado.
 > 2. **Quatro opções de inferência, quatro tetos.** Tempo real 25 MB / 60 s (8 min streaming), serverless 4 MB / 60 s, assíncrona 1 GB / 60 min, batch transform ≤ 100 MB por requisição sem endpoint persistente. Combine a opção ao padrão de tráfego primeiro, depois ao payload.
-> 3. **Feature Store precisa dos dois stores.** Online = apenas o registro mais recente, `GetRecord` em single-digit milliseconds; offline = histórico completo somente-append Parquet no S3, alcançável em até 15 minutos — é assim que você obtém inferência em milissegundos *e* treinamento point-in-time correto.
+> 3. **Feature Store precisa dos dois stores.** Online = apenas o registro mais recente, `GetRecord` em single-digit milliseconds; offline = histórico completo somente-append Parquet no S3, alcançável em até 15 minutos: é assim que você obtém inferência em milissegundos *e* treinamento point-in-time correto.
 > 4. **Monitoramento é quatro monitores, um barramento de alarmes.** Qualidade de dados, qualidade do modelo, deriva de viés e deriva de atribuição de atributos (alerta automático abaixo de NDCG 0,90) todos publicam no CloudWatch, e o EventBridge transforma um alarme em um re-treinamento Pipelines.
 > 5. **Disponibilidade é examinável em 2026.** Ground Truth, Model Monitor, Clarify, A2I, Debugger, GeoSpatial, Role Manager e Studio Lab estão fechados para novos clientes (30 jun 2026 / docs 7/30/26); Mechanical Turk terminou em 29 set 2026; substituições são MLflow + Evidently + QuickSight + CloudWatch e Amazon Bedrock Evaluations.
 > 6. **Veredito comparativo:** SageMaker supera construir em EC2 em governança e operações, supera stacks não-AWS ou DIY em integração nativa AWS e entrada free-tier, e supera qualquer processo manual de notebook em repetibilidade, linhagem, detecção de deriva e prontidão de produção.

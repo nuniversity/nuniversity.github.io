@@ -13,7 +13,7 @@ duration: "45 min"
 El Model Context Protocol (MCP) es un estándar abierto que define cómo las aplicaciones LLM se comunican con herramientas externas y fuentes de datos. Utiliza JSON-RPC 2.0 como su protocolo de transporte.
 
 > [!NOTE]
-> MCP fue diseñado específicamente para patrones de interacción LLM-herramienta. A diferencia de las APIs REST que están diseñadas para humanos y operaciones CRUD, MCP utiliza un protocolo JSON-RPC bidireccional que soporta descubrimiento de herramientas, acceso a recursos y plantillas de prompt — primitivas que los LLMs entienden naturalmente.
+> MCP fue diseñado específicamente para patrones de interacción LLM-herramienta. A diferencia de las APIs REST que están diseñadas para humanos y operaciones CRUD, MCP utiliza un protocolo JSON-RPC bidireccional que soporta descubrimiento de herramientas, acceso a recursos y plantillas de prompt: primitivas que los LLMs entienden naturalmente.
 
 ```mermaid
 flowchart LR
@@ -129,7 +129,7 @@ Los servidores MCP se configuran en la sección `mcpServers` de `opencode.json`:
 ```
 
 > [!WARNING]
-> Los servidores MCP tienen acceso completo a las variables de entorno con las que se configuran. Nunca endurezcas secretos en `opencode.json` — siempre usa interpolación de variables de entorno (`${VAR_NAME}`). El bloque env se pasa directamente al proceso iniciado, y cualquier herramienta que se ejecute en ese proceso puede leer estos valores.
+> Los servidores MCP tienen acceso completo a las variables de entorno con las que se configuran. Nunca endurezcas secretos en `opencode.json`: siempre usa interpolación de variables de entorno (`${VAR_NAME}`). El bloque env se pasa directamente al proceso iniciado, y cualquier herramienta que se ejecute en ese proceso puede leer estos valores.
 
 ---
 
@@ -313,7 +313,7 @@ if __name__ == "__main__":
 ```
 
 > [!IMPORTANT]
-> Los esquemas de herramientas definen el contrato entre el LLM y tu servidor. Siempre incluye campos `description` claros para cada parámetro — el LLM usa estas descripciones para determinar cómo completar los argumentos. Un parámetro mal descrito resultará en que el LLM pase valores incorrectos.
+> Los esquemas de herramientas definen el contrato entre el LLM y tu servidor. Siempre incluye campos `description` claros para cada parámetro: el LLM usa estas descripciones para determinar cómo completar los argumentos. Un parámetro mal descrito resultará en que el LLM pase valores incorrectos.
 
 ---
 
@@ -336,8 +336,8 @@ Los servidores MCP sirven como el sistema de plugins para OpenCode. Cualquier ca
 
 | Componente     | Rol                                      |
 |----------------|------------------------------------------|
-| OpenCode       | Cliente MCP — inicia solicitudes         |
-| Servidor MCP   | Plugin — procesa solicitudes y devuelve  |
+| OpenCode | Cliente MCP: inicia solicitudes |
+| Servidor MCP | Plugin: procesa solicitudes y devuelve |
 | Transporte     | stdin/stdout o HTTP/SSE                  |
 | Protocolo      | JSON-RPC 2.0                             |
 

@@ -1,5 +1,5 @@
 ---
-title: "Domina la IA Conversacional – Tu Asistente Digital"
+title: "Domina la IA Conversacional, Tu Asistente Digital"
 description: "Aprende a usar herramientas de inteligencia artificial como ChatGPT y Excel para mejorar tu productividad, creatividad y resolución de problemas, sin necesidad de programar."
 order: 2
 duration: "15 minutos"
@@ -7,7 +7,7 @@ difficulty: "principiante"
 author: "Google Gemini y traducida por OpenAI Chatgpt"
 ---
 
-## Domina la IA Conversacional – Tu Asistente Digital
+## Domina la IA Conversacional: Tu Asistente Digital
 
 Aquí es donde la teoría se convierte en práctica. Herramientas como **ChatGPT, Gemini o Claude** son tus nuevos asistentes digitales. Pueden escribir, resumir, crear ideas y hasta programar. Pero, igual que con una persona, **todo depende de cómo les hables**. Aprenderás a darles instrucciones claras para obtener resultados increíbles.
 

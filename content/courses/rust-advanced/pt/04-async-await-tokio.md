@@ -108,7 +108,7 @@ fn main() {
 > | `#[tokio::main(flavor = "current_thread")]` | Runtime single-threaded |
 > | `#[tokio::main(worker_threads = 4)]` | Multi-threaded, 4 workers |
 
-## tokio::spawn — Tarefas Concorrentes
+## tokio:spawn: Tarefas Concorrentes
 
 ```rust
 use tokio::time::{sleep, Duration};

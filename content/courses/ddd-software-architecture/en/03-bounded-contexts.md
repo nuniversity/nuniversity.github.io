@@ -11,7 +11,7 @@ difficulty: "advanced"
 A Bounded Context is a **semantic boundary** within which a particular domain model applies. Inside the boundary, all terms of the Ubiquitous Language have precise, consistent meanings. Outside the boundary, different terms or different meanings may apply.
 
 > [!NOTE]
-> The term "Bounded Context" is often misunderstood. It is not the same as a microservice, a module, or a namespace — though it often maps to one. A Bounded Context is first and foremost a **linguistic boundary**. The code and services follow from that boundary.
+> The term "Bounded Context" is often misunderstood. It is not the same as a microservice, a module, or a namespace: though it often maps to one. A Bounded Context is first and foremost a **linguistic boundary**. The code and services follow from that boundary.
 
 ## Why Boundaries Matter
 
@@ -595,7 +595,7 @@ Avoid the temptation to put everything in one giant Bounded Context. The symptom
 
 3. **Build an ACL**: A legacy CRM system has a `Customer` model with fields `cust_id`, `cust_name`, `cust_email`, `cust_stat` (A=active, I=inactive). Build an Anti-Corruption Layer that translates this into a modern Sales Context `Account` model with appropriate field names and types.
 
-4. **Partnership contract**: Two teams — Payments and Fraud Detection — need to integrate. Define the shared protocol (as Python interfaces) that both teams agree on.
+4. **Partnership contract**: Two teams, Payments and Fraud Detection, need to integrate. Define the shared protocol (as Python interfaces) that both teams agree on.
 
 5. **Context boundary decision**: A company has "Product Catalog" and "Pricing Strategy". Currently they are one context. List 3 reasons why they should be split and describe the integration pattern they should use.
 

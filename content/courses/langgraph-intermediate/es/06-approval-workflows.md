@@ -446,7 +446,7 @@ app = builder.compile(checkpointer=MemorySaver())
   "options": [
     "The router function reading state['approved']",
     "The content of the interrupt response",
-    "Both — the node writes the decision to state, then a router reads it",
+    "Both: the node writes the decision to state, then a router reads it",
     "The graph topology is fixed"
   ],
   "correct": 2,

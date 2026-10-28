@@ -12,7 +12,7 @@ Even experienced developers spend significant time debugging and optimizing. Pyt
 
 ## The `logging` Module
 
-The `logging` module is the professional alternative to `print()` debugging — it's configurable, hierarchical, and production-safe.
+The `logging` module is the professional alternative to `print()` debugging; it's configurable, hierarchical, and production-safe.
 
 ```python
 import logging
@@ -80,7 +80,7 @@ logger.warning("Shows in both")           # WARNING level → both
 > |---------|---------------|
 > | `logger = logging.getLogger(__name__)` | Per-module loggers with hierarchical names |
 > | `logging.exception("...")` | Logs at ERROR level AND includes traceback |
-> | `logger.debug(f"x = {x}")` | Avoid f-strings in debug — use `%s` formatting for lazy evaluation |
+> | `logger.debug(f"x = {x}")` | Avoid f-strings in debug: use `%s` formatting for lazy evaluation |
 
 ### Structured Logging
 
@@ -135,9 +135,9 @@ import pdb; pdb.set_trace()
 | `print expr` | `p` | Evaluate and print expression |
 | `pp expr` | `pp` | Pretty-print expression |
 | `args` | `a` | Print function arguments |
-| `locals()` | — | Print all local variables |
+| `locals()` |: | Print all local variables |
 | `break lineno` | `b` | Set breakpoint at line number |
-| `disable nb` | — | Disable breakpoint by number |
+| `disable nb` |: | Disable breakpoint by number |
 | `where` | `w` | Print stack trace |
 | `up` | `u` | Move up one frame in stack |
 | `down` | `d` | Move down one frame in stack |
@@ -218,7 +218,7 @@ stats.print_stats(10)        # Show top 10
 ```
 
 > [!NOTE]
-> `cProfile` has very low overhead — typically < 1% slowdown. It's safe to use on production-like workloads.
+> `cProfile` has very low overhead: typically < 1% slowdown. It's safe to use on production-like workloads.
 
 ### Profiling from the Command Line
 
@@ -404,7 +404,7 @@ flowchart TD
 ```
 
 > [!SUCCESS]
-> "Premature optimization is the root of all evil" — Donald Knuth. Profile first, optimize second. Use `logging` for production diagnostics, `pdb` for interactive debugging, and `cProfile` for performance analysis.
+> "Premature optimization is the root of all evil": Donald Knuth. Profile first, optimize second. Use `logging` for production diagnostics, `pdb` for interactive debugging, and `cProfile` for performance analysis.
 
 ## Practice Questions
 

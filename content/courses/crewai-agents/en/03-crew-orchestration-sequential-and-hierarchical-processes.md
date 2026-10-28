@@ -273,7 +273,7 @@ flowchart TD
 | Aspect | SequentialProcess | HierarchicalProcess |
 | :--- | :--- | :--- |
 | **Execution order** | Fixed linear order | Manager decides dynamically |
-| **Agent autonomy** | Low — tasks are pre-assigned | High — manager assigns & reviews |
+| **Agent autonomy** | Low, tasks are pre-assigned | High, manager assigns & reviews |
 | **Manager required** | No | Yes (with `allow_delegation=True`) |
 | **Context passing** | Automatic between adjacent tasks | Managed by the manager agent |
 | **Best for** | Simple pipelines, well-defined steps | Complex workflows requiring coordination |
@@ -375,9 +375,9 @@ In sequential mode, agents execute in a fixed order. In hierarchical mode, the m
   "type": "multiple-choice",
   "question": "You are building a content pipeline: outline → draft → review → publish. Each step depends on the previous one. Which process should you use?",
   "options": [
-    "HierarchicalProcess — for dynamic assignment",
-    "SequentialProcess — for fixed linear steps",
-    "Neither — this requires custom code",
+    "HierarchicalProcess: for dynamic assignment",
+    "SequentialProcess: for fixed linear steps",
+    "Neither; this requires custom code",
     "Either would work equally well"
   ],
   "correct": 1,
@@ -439,7 +439,7 @@ In sequential mode, agents execute in a fixed order. In hierarchical mode, the m
   "type": "multiple-choice",
   "question": "A hierarchical crew has a manager and 3 workers. Worker A's output is substandard. What can the manager do?",
   "options": [
-    "Nothing — tasks are fixed after assignment",
+    "Nothing: tasks are fixed after assignment",
     "Re-assign the task to a different worker or request revision",
     "Remove Worker A from the crew",
     "Switch to SequentialProcess automatically"

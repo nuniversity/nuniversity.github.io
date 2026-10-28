@@ -45,7 +45,7 @@ Los datos llegan en formatos estructurados (tablas de base de datos), semiestruc
 1. **Almacenamiento**: Los sistemas de almacenamiento tradicionales no escalan económicamente a petabytes
 2. **Procesamiento**: El procesamiento en una sola máquina toma demasiado tiempo o falla por completo
 3. **Transferencia de Datos**: Mover grandes conjuntos de datos por la red crea cuellos de botella
-4. **Tolerancia a Fallos**: Las fallas de hardware son comunes a escala — los sistemas deben recuperarse automáticamente
+4. **Tolerancia a Fallos**: Las fallas de hardware son comunes a escala: los sistemas deben recuperarse automáticamente
 5. **Brecha de Habilidades**: Las herramientas de big data requieren conocimiento especializado
 
 ## El Ecosistema Hadoop
@@ -151,7 +151,7 @@ Dashboard de BI (Tableau, Superset)
 2. Hadoop proporcionó la base pero MapReduce es demasiado lento para cargas interactivas/iterativas
 3. Spark procesa datos en memoria usando un motor DAG, logrando aceleraciones de 10-100x
 4. Spark unificó lote, streaming, SQL, ML y procesamiento de grafos en un marco
-5. Spark lee de almacenamiento externo — es un motor de procesamiento, no un sistema de almacenamiento
+5. Spark lee de almacenamiento externo: es un motor de procesamiento, no un sistema de almacenamiento
 
 ## Preguntas de Práctica
 

@@ -1,6 +1,6 @@
 ---
 title: "dbt Docs: Documentation, Lineage, and the dbt Docs v2 Catalog"
-description: "Build a living documentation system for your dbt-Redshift project — from writing great YAML descriptions and docs blocks, to generating the lineage graph, hosting static docs on S3, and using the new dbt Docs v2 with column-level lineage powered by the Fusion engine."
+description: "Build a living documentation system for your dbt-Redshift project, from writing great YAML descriptions and docs blocks, to generating the lineage graph, hosting static docs on S3, and using the new dbt Docs v2 with column-level lineage powered by the Fusion engine."
 order: 9
 duration: "45 min"
 difficulty: "advanced"
@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # dbt Docs: Documentation, Lineage, and the dbt Docs v2 Catalog
 
-Documentation is not optional in a production dbt project. It is the map that lets every engineer — including you in six months — understand what every model does, where data comes from, and what breaks if you change something. dbt makes documentation a first-class citizen: it is generated from the same YAML that defines your tests and contracts, and it is always in sync with your project.
+Documentation is not optional in a production dbt project. It is the map that lets every engineer, including you in six months, understand what every model does, where data comes from, and what breaks if you change something. dbt makes documentation a first-class citizen: it is generated from the same YAML that defines your tests and contracts, and it is always in sync with your project.
 
 As of June 2026, dbt offers three documentation surfaces:
 
@@ -18,13 +18,13 @@ As of June 2026, dbt offers three documentation surfaces:
 | **dbt Docs v2 (alpha)** | dbt Core v2 + Fusion | Modern UI, column-level lineage, REST API, Parquet artifacts |
 | **Catalog** | dbt platform (paid) | Real-time, collaboration, custom views |
 
-This module covers the first two — everything available to self-hosted dbt-core + Fusion users.
+This module covers the first two: everything available to self-hosted dbt-core + Fusion users.
 
 ---
 
 ## Writing Documentation That Actually Gets Used
 
-The gap between good and bad dbt documentation is not technical — it is discipline. Follow these rules on every model.
+The gap between good and bad dbt documentation is not technical; it is discipline. Follow these rules on every model.
 
 ### Layer 1: Model-Level Descriptions
 
@@ -110,7 +110,7 @@ models:
 ```
 
 [!TIP]
-Docs blocks in `.md` files under `docs/` are version-controlled alongside your models. They can be referenced across multiple schemas — write `{{ doc('order_id') }}` once, reuse it everywhere `order_id` appears. This is the key to consistent, maintainable documentation at scale.
+Docs blocks in `.md` files under `docs/` are version-controlled alongside your models. They can be referenced across multiple schemas: write `{{ doc('order_id') }}` once, reuse it everywhere `order_id` appears. This is the key to consistent, maintainable documentation at scale.
 
 ### Layer 3: Source Documentation
 
@@ -136,7 +136,7 @@ sources:
             description: "UTC timestamp set by the client SDK. Can be up to 5 min behind server time."
 ```
 
-### Layer 4: Exposures — Document Downstream Consumers
+### Layer 4: Exposures: Document Downstream Consumers
 
 Exposures declare what consumes your dbt models, completing the lineage picture from source to dashboard.
 
@@ -202,8 +202,8 @@ dbt docs generate --empty-catalog
 
 | File | Contents |
 | :--- | :--- |
-| `manifest.json` | Full project graph — models, tests, sources, macros, docs |
-| `catalog.json` | Warehouse introspection — column types, row counts, stats |
+| `manifest.json` | Full project graph: models, tests, sources, macros, docs |
+| `catalog.json` | Warehouse introspection: column types, row counts, stats |
 
 ### Serve Locally
 
@@ -216,7 +216,7 @@ dbt docs serve --port 8090
 ```
 
 [!WARNING]
-`dbt docs serve` is for local development only — it starts an unauthenticated HTTP server. Never expose it publicly. For team-wide hosting, deploy the static files to S3 + CloudFront or an internal web server.
+`dbt docs serve` is for local development only; it starts an unauthenticated HTTP server. Never expose it publicly. For team-wide hosting, deploy the static files to S3 + CloudFront or an internal web server.
 
 ---
 
@@ -290,7 +290,7 @@ Add docs generation to your CD pipeline:
 
 ---
 
-## dbt Docs v2 (Alpha — dbt Core v2 + Fusion)
+## dbt Docs v2 (Alpha: dbt Core v2 + Fusion)
 
 <cite index="96-1">dbt Docs v2 is a modern, performant open-source catalog with a redesigned UI, Semantic Layer metadata, column-level lineage, and a REST API. It is available with the dbt Fusion engine and dbt Core v2.</cite>
 
@@ -299,14 +299,14 @@ Add docs generation to your CD pipeline:
 | Feature | dbt Docs (Legacy) | dbt Docs v2 |
 | :--- | :--- | :--- |
 | Artifact format | `manifest.json` + `catalog.json` (large JSON) | Parquet artifacts (queryable via DuckDB) |
-| Column-level lineage | No | Yes — powered by Fusion SQL parsing |
+| Column-level lineage | No | Yes: powered by Fusion SQL parsing |
 | Project scale | Struggles at 1,000+ models | Scales to arbitrary project size |
 | REST API | No | Yes |
 | UI | v1 (functional) | Redesigned (faster, filterable) |
 
 ### Parquet Artifacts
 
-<cite index="71-1">dbt v2.0 can emit Parquet artifacts as a high-performance alternative to large JSON files like manifest.json. Because they're Parquet, you can query them directly through DuckDB — a big deal for metadata tooling and AI workflows. The local docs experience has been rebuilt, powered by those new Parquet artifacts, and is now capable of scaling to projects of arbitrary size — a long-standing pain point for large dbt deployments.</cite>
+<cite index="71-1">dbt v2.0 can emit Parquet artifacts as a high-performance alternative to large JSON files like manifest.json. Because they're Parquet, you can query them directly through DuckDB, a big deal for metadata tooling and AI workflows. The local docs experience has been rebuilt, powered by those new Parquet artifacts, and is now capable of scaling to projects of arbitrary size, a long-standing pain point for large dbt deployments.</cite>
 
 Query artifacts directly with DuckDB:
 
@@ -335,7 +335,7 @@ con.execute(\"\"\"
 
 ### Column-Level Lineage
 
-With the Fusion engine, dbt Docs v2 shows which source columns flow into which mart columns — through every transformation step. This is powered by Fusion's native SQL parsing:
+With the Fusion engine, dbt Docs v2 shows which source columns flow into which mart columns: through every transformation step. This is powered by Fusion's native SQL parsing:
 
 ```mermaid
 flowchart LR
@@ -376,7 +376,7 @@ packages:
 dbt build --select package:dbt_project_evaluator
 ```
 
-This generates models like `fct_undocumented_models`, `fct_missing_primary_key_tests`, and `fct_model_fanout` — tables you can query or alert on in CI.
+This generates models like `fct_undocumented_models`, `fct_missing_primary_key_tests`, and `fct_model_fanout`: tables you can query or alert on in CI.
 
 Custom thresholds in `dbt_project_evaluator.yml`:
 
@@ -425,7 +425,7 @@ vars:
     "Redshift external tables via Spectrum"
   ],
   "correct": 1,
-  "explanation": "Exposures declare downstream consumers — dashboards, APIs, ML models — that depend on dbt mart models. They appear in the DAG, enabling full end-to-end lineage tracing from raw source to business consumer."
+  "explanation": "Exposures declare downstream consumers, dashboards, APIs, ML models, that depend on dbt mart models. They appear in the DAG, enabling full end-to-end lineage tracing from raw source to business consumer."
 }
 ```
 
@@ -441,7 +441,7 @@ vars:
     "--fast"
   ],
   "correct": 1,
-  "explanation": "--empty-catalog skips the warehouse introspection step that populates catalog.json. This removes column type and row count metadata from the docs site but is significantly faster — useful during development when column types are already known."
+  "explanation": "--empty-catalog skips the warehouse introspection step that populates catalog.json. This removes column type and row count metadata from the docs site but is significantly faster: useful during development when column types are already known."
 }
 ```
 
@@ -457,7 +457,7 @@ vars:
     "The catalog.json file, which v1 also generates but in an incompatible format"
   ],
   "correct": 1,
-  "explanation": "Column-level lineage requires parsing SQL to build an Abstract Syntax Tree (AST) and trace each column's origin. The Fusion engine does this natively across multiple SQL dialects. dbt Core v1 only renders Jinja into SQL strings — it does not parse SQL ASTs."
+  "explanation": "Column-level lineage requires parsing SQL to build an Abstract Syntax Tree (AST) and trace each column's origin. The Fusion engine does this natively across multiple SQL dialects. dbt Core v1 only renders Jinja into SQL strings; it does not parse SQL ASTs."
 }
 ```
 
@@ -468,7 +468,7 @@ vars:
   "question": "Why is `dbt docs serve` not appropriate for team-wide documentation sharing?",
   "options": [
     "It only generates documentation for the staging layer",
-    "It starts an unauthenticated HTTP server — it must not be exposed publicly",
+    "It starts an unauthenticated HTTP server; it must not be exposed publicly",
     "It requires a paid dbt platform license",
     "It is too slow for multi-user access"
   ],
@@ -499,8 +499,8 @@ vars:
 ### Key Takeaways
 
 - Write descriptions at three levels: model (what, why, who owns it), column (exact semantics, format, source), and source (raw data characteristics, volume, latency).
-- Use `docs` blocks in `.md` files for long, reusable descriptions — reference them with `{{ doc('name') }}` to avoid repetition.
+- Use `docs` blocks in `.md` files for long, reusable descriptions: reference them with `{{ doc('name') }}` to avoid repetition.
 - `exposures` complete your lineage by adding downstream consumers (dashboards, APIs, apps) to the DAG.
 - `dbt docs generate` produces `manifest.json` (project graph) and `catalog.json` (warehouse introspection). Host the static site on S3 + CloudFront for team-wide access.
-- dbt Docs v2 (available with dbt Core v2 / Fusion) introduces Parquet artifacts, column-level lineage, and a REST API — queryable directly with DuckDB.
-- `dbt-project-evaluator` enforces documentation coverage and DAG quality standards in CI — run it as part of your quality gate.
+- dbt Docs v2 (available with dbt Core v2 / Fusion) introduces Parquet artifacts, column-level lineage, and a REST API: queryable directly with DuckDB.
+- `dbt-project-evaluator` enforces documentation coverage and DAG quality standards in CI: run it as part of your quality gate.

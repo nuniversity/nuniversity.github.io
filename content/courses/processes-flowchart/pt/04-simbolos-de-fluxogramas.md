@@ -318,7 +318,7 @@ flowchart TD
 | Use cor de forma proposital | Usar cores aleatórias sem significado |
 
 > [!WARNING] Erro Comum
-> Não use um retângulo para decisões só porque é mais fácil de digitar. A forma de losango é universalmente reconhecida como ponto de decisão — usar a forma errada confunde os leitores.
+> Não use um retângulo para decisões só porque é mais fácil de digitar. A forma de losango é universalmente reconhecida como ponto de decisão: usar a forma errada confunde os leitores.
 
 ### Convenções de Codificação de Cores
 
@@ -349,12 +349,12 @@ Para cada descrição, identifique a forma correta do símbolo:
 <details>
 <summary>Clique para ver as respostas</summary>
 
-1. **Losango** `{}` — Ponto de decisão
-2. **Retângulo ondulado** `[[]]` — Documento
-3. **Retângulo arredondado** `([ ])` — Terminal (Início)
-4. **Paralelogramo** `[/ /]` — Entrada
-5. **Cilindro** `[[( )]]` — Banco de dados
-6. **Círculo** `(( ))` — Conector (ou retângulo de linha dupla para processo predefinido)
+1. **Losango** `{}`: Ponto de decisão
+2. **Retângulo ondulado** `[[]]`: Documento
+3. **Retângulo arredondado** `([ ])`: Terminal (Início)
+4. **Paralelogramo** `[/ /]`: Entrada
+5. **Cilindro** `[[( )]]`: Banco de dados
+6. **Círculo** `(( ))`: Conector (ou retângulo de linha dupla para processo predefinido)
 
 </details>
 
@@ -397,9 +397,9 @@ Crie um fluxograma para "Fazer uma chamada telefônica" usando pelo menos:
 - Fluxogramas usam **símbolos padronizados** que são universalmente compreendidos
 - O **conjunto básico de símbolos** inclui: terminais, processos, decisões, E/S, documentos, bancos de dados e conectores
 - Sempre **rotule as ramificações de decisão** claramente
-- Use **formas consistentes** — não misture símbolos para o mesmo propósito
+- Use **formas consistentes**: não misture símbolos para o mesmo propósito
 - **Codificação de cores** pode melhorar a legibilidade, mas não é obrigatória
-- Mantenha o texto dos símbolos **conciso** — use descrições fora do diagrama se necessário
+- Mantenha o texto dos símbolos **conciso**: use descrições fora do diagrama se necessário
 - Na próxima lição, aplicaremos esses símbolos para **construir seus primeiros fluxogramas** passo a passo
 
 > [!SUCCESS] Você Completou a Lição 4

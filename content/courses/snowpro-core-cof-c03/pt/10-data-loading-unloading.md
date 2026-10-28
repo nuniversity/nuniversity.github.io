@@ -1,16 +1,16 @@
 ---
-title: "Domínio 3.1 — Carregamento e Exportação de Dados"
+title: "Domínio 3.1, Carregamento e Exportação de Dados"
 description: "Domine o carregamento e exportação de dados em massa no Snowflake: formatos de arquivo, stages (internos e externos), o comando COPY INTO, opções de tratamento de erros e boas práticas para ingestão de alto throughput."
 order: 10
 difficulty: intermediate
 duration: "75 min"
 ---
 
-# Domínio 3.1 — Carregamento e Exportação de Dados
+# Domínio 3.1: Carregamento e Exportação de Dados
 
 ## Peso no Exame
 
-O **Domínio 3.0 — Carregamento, Exportação e Conectividade de Dados** representa **~18%** do exame.
+O **Domínio 3.0: Carregamento, Exportação e Conectividade de Dados** representa **~18%** do exame.
 
 > [!NOTE]
 > Esta lição corresponde ao **Objetivo de Exame 3.1**: *Realizar carregamento e exportação de dados*, incluindo formatos de arquivo, stages, o comando COPY INTO e opções de tratamento de erros.
@@ -131,7 +131,7 @@ CREATE STAGE stage_gcs
 
 ### Storage Integrations (Integrações de Armazenamento)
 
-Uma **storage integration** conecta o Snowflake ao armazenamento em nuvem de forma segura usando um **IAM role / service principal** — sem credenciais armazenadas no Snowflake:
+Uma **storage integration** conecta o Snowflake ao armazenamento em nuvem de forma segura usando um **IAM role / service principal**: sem credenciais armazenadas no Snowflake:
 
 ```sql
 CREATE STORAGE INTEGRATION minha_integracao_s3
@@ -161,7 +161,7 @@ SELECT * FROM DIRECTORY(@stage_pedidos_s3);
 
 ---
 
-## COPY INTO — Carregando Dados
+## COPY INTO: Carregando Dados
 
 `COPY INTO <tabela>` é o comando principal de carregamento em massa:
 
@@ -328,7 +328,7 @@ FILE_FORMAT = (TYPE = CSV COMPRESSION = GZIP HEADER = TRUE);
 | Configuração | Recomendação |
 |---|---|
 | `SINGLE = FALSE` | Usar múltiplos arquivos para exportações grandes (paralelo) |
-| `MAX_FILE_SIZE` | Manter arquivos em 100–500 MB para compatibilidade downstream |
+| `MAX_FILE_SIZE` | Manter arquivos em 100 to 500 MB para compatibilidade downstream |
 | Compressão | Usar GZIP ou SNAPPY para reduzir custos de transferência |
 | Nomenclatura de arquivos | Usar `INCLUDE_QUERY_ID = TRUE` para nomes de arquivo únicos |
 

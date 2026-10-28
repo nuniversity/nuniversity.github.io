@@ -26,7 +26,7 @@ fn main() {
 ```
 
 > [!NOTE]
-> When `s` goes out of scope, Rust calls `drop()` automatically — like C++ RAII but without the manual destructor management.
+> When `s` goes out of scope, Rust calls `drop()` automatically: like C++ RAII but without the manual destructor management.
 
 ## Move Semantics
 
@@ -45,7 +45,7 @@ fn main() {
 After the move, `s1` is **invalidated**. The compiler prevents use-after-move.
 
 > [!SUCCESS]
-> Moves are cheap — just copying a pointer, length, and capacity. No heap data is copied. The old owner is simply marked invalid at compile time.
+> Moves are cheap: just copying a pointer, length, and capacity. No heap data is copied. The old owner is simply marked invalid at compile time.
 
 ### What Happens in Memory
 
@@ -146,7 +146,7 @@ fn main() {
 > [!WARNING]
 > If a type or any of its fields implements `Drop`, it cannot implement `Copy`. This prevents double-free errors.
 
-## Clone — Explicit Deep Copy
+## Clone: Explicit Deep Copy
 
 When you want a deep copy of heap data, call `.clone()`:
 

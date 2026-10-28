@@ -133,9 +133,9 @@ fn main() {
 
 > [!NOTE]
 > `::` syntax is used for:
-> - Associated functions: `Type::function()`
-> - Namespace access: `std::collections::HashMap`
-> - Enum variants: `Option::Some(5)`
+> - Associated functions: `Type:function()`
+> - Namespace access: `std:collections:HashMap`
+> - Enum variants: `Option:Some(5)`
 
 ### Common Associated Functions
 
@@ -237,7 +237,7 @@ fn main() {
 
 ## Functions as Values
 
-Functions are first-class — they can be passed around:
+Functions are first-class; they can be passed around:
 
 ```rust
 fn add_one(x: i32) -> i32 { x + 1 }

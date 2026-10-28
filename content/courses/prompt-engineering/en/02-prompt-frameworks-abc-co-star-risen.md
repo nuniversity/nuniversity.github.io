@@ -29,9 +29,9 @@ Prompt frameworks provide structured templates that consistently produce high-qu
 
 | Component | Purpose | Example |
 |-----------|---------|---------|
-| **A - Action** | What the model should do | "Write a product description" |
-| **B - Background** | Context and information | "For a waterproof hiking boot" |
-| **C - Constraints** | Rules and format | "150 words, friendly tone, highlight durability" |
+| **A: Action** | What the model should do | "Write a product description" |
+| **B: Background** | Context and information | "For a waterproof hiking boot" |
+| **C: Constraints** | Rules and format | "150 words, friendly tone, highlight durability" |
 
 ### ABC Framework Flowchart
 
@@ -63,7 +63,7 @@ They're frustrated but haven't asked for a refund yet. Your company is "QuickShi
 ```
 
 [!TIP]
-ABC is ideal for tasks that have clear instructions but don't require complex role-playing. It's the fastest framework to write — perfect for quick classification, simple content generation, or straightforward email drafting.
+ABC is ideal for tasks that have clear instructions but don't require complex role-playing. It's the fastest framework to write: perfect for quick classification, simple content generation, or straightforward email drafting.
 
 ### ABC in Code
 
@@ -108,12 +108,12 @@ print(response.choices[0].message.content)
 
 | Component | Purpose | Example |
 |-----------|---------|---------|
-| **C - Context** | Background situation | "You're a marketing consultant" |
-| **O - Objective** | The goal to achieve | "Increase social media engagement" |
-| **S - Style** | Writing style | "Bullet points, actionable items" |
-| **T - Tone** | Voice/attitude | "Energetic, encouraging" |
-| **A - Audience** | Who's reading | "Small business owners new to social media" |
-| **R - Response** | Format requirement | "5 tips, each with a 'why it works' explanation" |
+| **C: Context** | Background situation | "You're a marketing consultant" |
+| **O: Objective** | The goal to achieve | "Increase social media engagement" |
+| **S: Style** | Writing style | "Bullet points, actionable items" |
+| **T: Tone** | Voice/attitude | "Energetic, encouraging" |
+| **A: Audience** | Who's reading | "Small business owners new to social media" |
+| **R: Response** | Format requirement | "5 tips, each with a 'why it works' explanation" |
 
 ### CO-STAR Framework Flowchart
 
@@ -158,11 +158,11 @@ CO-STAR excels when **tone and style matter as much as the content itself**. Mar
 
 | Component | Purpose | Example |
 |-----------|---------|---------|
-| **R - Role** | Who the AI should be | "Senior Python developer with 15 years experience" |
-| **I - Instruction** | What to do | "Review and optimize this code" |
-| **S - Steps** | Process to follow | "1. Identify bottlenecks 2. Suggest fixes 3. Show before/after" |
-| **E - End goal** | Desired outcome | "Make it run 50% faster and be more readable" |
-| **N - Narrowing** | Constraints/filters | "No external libraries, must maintain backwards compatibility" |
+| **R: Role** | Who the AI should be | "Senior Python developer with 15 years experience" |
+| **I: Instruction** | What to do | "Review and optimize this code" |
+| **S: Steps** | Process to follow | "1. Identify bottlenecks 2. Suggest fixes 3. Show before/after" |
+| **E: End goal** | Desired outcome | "Make it run 50% faster and be more readable" |
+| **N: Narrowing** | Constraints/filters | "No external libraries, must maintain backwards compatibility" |
 
 ### RISEN Framework Flowchart
 
@@ -423,7 +423,7 @@ for name, prompt in [("ABC", abc_prompt), ("CO-STAR", costar_prompt), ("RISEN", 
   "id": "pe-02-q6",
   "type": "multiple-choice",
   "question": "A prompt engineer needs to generate a response that includes a specific step-by-step diagnostic process. Only one framework has a dedicated component for specifying procedural steps. Which one?",
-  "options": ["ABC's Action component", "CO-STAR's Response component", "RISEN's Steps component", "None — steps must be included in the instruction text for all frameworks"],
+  "options": ["ABC's Action component", "CO-STAR's Response component", "RISEN's Steps component", "None: steps must be included in the instruction text for all frameworks"],
   "correct": 2,
   "explanation": "RISEN uniquely includes a dedicated Steps (S) component for specifying the exact process the AI should follow."
 }
@@ -455,7 +455,7 @@ for name, prompt in [("ABC", abc_prompt), ("CO-STAR", costar_prompt), ("RISEN", 
 {
   "id": "pe-02-q9",
   "type": "multiple-choice",
-  "question": "A prompt team needs their prompt frameworks to be testable — each component should be isolatable for A/B testing. Which framework's component structure makes this easiest?",
+  "question": "A prompt team needs their prompt frameworks to be testable: each component should be isolatable for A/B testing. Which framework's component structure makes this easiest?",
   "options": ["ABC with 3 broad components", "CO-STAR with 6 specific, separable components", "RISEN with 5 tightly-coupled components", "All frameworks are equally testable"],
   "correct": 1,
   "explanation": "CO-STAR's 6 specific and separable components (Context, Objective, Style, Tone, Audience, Response) make it easiest to isolate and A/B test individual dimensions."
@@ -483,5 +483,5 @@ for name, prompt in [("ABC", abc_prompt), ("CO-STAR", costar_prompt), ("RISEN", 
 - **RISEN** (Role, Instruction, Steps, End goal, Narrowing): Most detailed for complex, role-based expert tasks
 - Framework choice depends on task complexity and output specificity needed
 - Don't over-engineer: simple questions don't need frameworks
-- Frameworks can be combined for complex tasks — mix and match components
-- Always test and iterate — frameworks are heuristics, not guarantees
+- Frameworks can be combined for complex tasks: mix and match components
+- Always test and iterate: frameworks are heuristics, not guarantees

@@ -257,7 +257,7 @@ This table guarantees:
 - Review has a creation timestamp
 
 > [!SUCCESS]
-> Constraints are your first line of defense against bad data. Define them at the database level, not just in your application code. Database constraints apply everywhere — even if someone writes a buggy INSERT or connects from a different tool.
+> Constraints are your first line of defense against bad data. Define them at the database level, not just in your application code. Database constraints apply everywhere: even if someone writes a buggy INSERT or connects from a different tool.
 
 ## Practice Questions
 

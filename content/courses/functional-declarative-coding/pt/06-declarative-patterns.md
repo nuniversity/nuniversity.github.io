@@ -62,7 +62,7 @@ flowchart LR
 
 ## Expressões Geradoras
 
-Geradores produzem valores lazy — um de cada vez — o que é crucial para sequências grandes ou infinitas.
+Geradores produzem valores lazy, um de cada vez, o que é crucial para sequências grandes ou infinitas.
 
 ```python
 from typing import Generator

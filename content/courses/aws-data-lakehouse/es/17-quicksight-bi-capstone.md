@@ -7,7 +7,7 @@ duration: "70 min"
 ---
 # BI con QuickSight y el capstone integral del lakehouse
 
-Dieciséis lecciones construyeron algo que produce números: bronze en S3, silver y gold como tablas Iceberg, un catálogo de Glue, Step Functions sosteniendo el calendario, Lake Formation decidiendo quién puede leer cada fila, Macie encontrando los datos personales, Glue Data Quality rechazando los lotes malos y una escalera de costes que nadie tiene permitido saltarse. Nada de eso es el punto de un lakehouse. El punto es que una **gerente regional en Frankfurt** abre un enlace un lunes por la mañana y ve sus regiones, sus tiendas, sus ingresos, en menos de dos segundos — y no ve los de nadie más.
+Dieciséis lecciones construyeron algo que produce números: bronze en S3, silver y gold como tablas Iceberg, un catálogo de Glue, Step Functions sosteniendo el calendario, Lake Formation decidiendo quién puede leer cada fila, Macie encontrando los datos personales, Glue Data Quality rechazando los lotes malos y una escalera de costes que nadie tiene permitido saltarse. Nada de eso es el punto de un lakehouse. El punto es que una **gerente regional en Frankfurt** abre un enlace un lunes por la mañana y ve sus regiones, sus tiendas, sus ingresos, en menos de dos segundos, y no ve los de nadie más.
 
 Esta es la lección. La capa de BI es donde cada decisión aguas arriba o se paga sola o te avergüenza: una concesión de Lake Formation que falta aparece como un cuadro de mando vacío, una instantánea de SPICE aparece como uno obsoleto, una elección de columna de texto frente a numérico aparece como una seguridad a nivel de fila que deja de funcionar en silencio, y una consulta directa sin podar aparece en la factura de Athena tres semanas después. Configurarás QuickSight de principio a fin, y después darás un paso atrás y redibujarás todo el curso como **una arquitectura de referencia con diecisiete capas**, más el plan de 30/60/90 días que lleva a un equipo hasta allí.
 
@@ -52,14 +52,14 @@ Esta es la lección. La capa de BI es donde cada decisión aguas arriba o se pag
 ```
 
 > [!NOTE]
-> **Cómo usar esta lección.** Las secciones 1–8 son la mitad de configuración de QuickSight: léelas una vez y luego resuelve las cuatro comprobaciones interactivas a medida que aparecen (asociación de SPICE, gráfica del modo de consulta, relleno de RLS y arrastrar y soltar del orden de construcción). La sección 9 es la construcción capstone que deberías poder reproducir sobre papel. Las secciones 10–11 son el resumen del curso: un diagrama integrado y una hoja de ruta por fases. Todo aquí está fechado en **octubre de 2026**; donde las propias páginas de AWS discrepan, la discrepancia se nombra en vez de suavizarse.
+> **Cómo usar esta lección.** Las secciones 1 to 8 son la mitad de configuración de QuickSight: léelas una vez y luego resuelve las cuatro comprobaciones interactivas a medida que aparecen (asociación de SPICE, gráfica del modo de consulta, relleno de RLS y arrastrar y soltar del orden de construcción). La sección 9 es la construcción capstone que deberías poder reproducir sobre papel. Las secciones 10 to 11 son el resumen del curso: un diagrama integrado y una hoja de ruta por fases. Todo aquí está fechado en **octubre de 2026**; donde las propias páginas de AWS discrepan, la discrepancia se nombra en vez de suavizarse.
 
 Al final de esta lección sabrás:
 
 - decir qué cambió y qué **no** cambió cuando QuickSight se convirtió en Quick Suite y después en Amazon Quick, y tasar un despliegue real línea por línea;
 - elegir entre **SPICE y consulta directa** usando el medidor de bytes escaneados de Athena en lugar de una intuición, y defender la elección con aritmética;
 - dimensionar un **dataset de SPICE** a partir de una lista de columnas con la fórmula de tamaño lógico, y programar actualizaciones que ni choquen ni queden obsoletas en silencio;
-- conectar correctamente una **fuente del lakehouse** — Athena a través de Lake Formation, un manifiesto de S3 para extracts, Redshift para cargas de trabajo densas de almacén;
+- conectar correctamente una **fuente del lakehouse**: Athena a través de Lake Formation, un manifiesto de S3 para extracts, Redshift para cargas de trabajo densas de almacén;
 - construir la cadena de contenido **dataset → análisis → cuadro de mando → tema → carpeta**, y elegir una familia de visuales a propósito;
 - separar los **tres mecanismos de seguridad a nivel de fila** y decir, para cada uno, a quién aplica, qué tipos de datos restringe y cuánto te cuesta;
 - ensamblar las **diecisiete capas** en una sola arquitectura de referencia y secuenciarlas a lo largo de un plan de **30/60/90 días**;
@@ -73,11 +73,11 @@ Antes de un solo ajuste: el **2025-10-09** AWS anunció que «Amazon QuickSight 
 
 La mitad operativa de ese anuncio es la parte que realmente necesitas:
 
-> «Todo tu entorno de QuickSight, incluidos cuadros de mando, datasets y análisis, permanece sin cambios… Tus integraciones existentes de API siguen funcionando como antes, y no se requiere ninguna migración de datos.» — AWS BI Blog, 2025-10-09
+> «Todo tu entorno de QuickSight, incluidos cuadros de mando, datasets y análisis, permanece sin cambios… Tus integraciones existentes de API siguen funcionando como antes, y no se requiere ninguna migración de datos.»: AWS BI Blog, 2025-10-09
 
 y
 
-> «Todas las APIs, SDKs e integraciones existentes de QuickSight siguen funcionando sin cambios.» — Quick User Guide, consultado 2026-10-11
+> «Todas las APIs, SDKs e integraciones existentes de QuickSight siguen funcionando sin cambios.»: Quick User Guide, consultado 2026-10-11
 
 ```mermaid
 flowchart LR
@@ -92,7 +92,7 @@ Dos consecuencias para todo lo que viene abajo:
 1. **Los ARNs y las acciones de IAM siguen diciendo `quicksight`.** Un ARN de usuario sigue siendo `arn:aws:quicksight:{region}:{account}:user/{namespace}/{username}`, el rol de servicio por defecto sigue siendo `aws-quicksight-service-role-v0`, y cada API que toques en esta lección (`CreateIngestion`, `GenerateEmbedUrlForRegisteredUser`, `CreateAccountCustomization`) conserva su nombre antiguo (AWS Machine Learning Blog, 2026-06-08; AWS Builder Center, 2026-03-27).
 2. **Las tablas de precios se mudaron a la marca nueva.** Las tarifas de abajo se leyeron en la página de precios de QuickSight el **2026-10-11**, donde las trae el panel de Quick Suite.
 
-- **📚 ¿Sabías que…?** La abreviatura de «Quick Suite» a «Amazon Quick» **no tiene fecha en ninguna parte de la propia documentación de AWS**. Las publicaciones del 2025-10-09 dicen Quick Suite; la guía de usuario simplemente dice Amazon Quick, sin una fila de anuncio para el segundo renombrado. La afirmación defendible es «anunciado como Quick Suite en octubre de 2025; para octubre de 2026 la guía de usuario llama al servicio Amazon Quick» — asignar una fecha precisa a la abreviatura sería inventar una fuente.
+- **📚 ¿Sabías que…?** La abreviatura de «Quick Suite» a «Amazon Quick» **no tiene fecha en ninguna parte de la propia documentación de AWS**. Las publicaciones del 2025-10-09 dicen Quick Suite; la guía de usuario simplemente dice Amazon Quick, sin una fila de anuncio para el segundo renombrado. La afirmación defendible es «anunciado como Quick Suite en octubre de 2025; para octubre de 2026 la guía de usuario llama al servicio Amazon Quick»: asignar una fecha precisa a la abreviatura sería inventar una fuente.
 
 ---
 
@@ -104,14 +104,14 @@ Dos consecuencias para todo lo que viene abajo:
 |---|---|---|---|
 | **Author** | Conectarse a fuentes de datos, crear datasets, análisis y cuadros de mando, compartirlos | Aporta **10 GB** al pool de la cuenta | $24/usuario/mes |
 | **Author Pro** | Todo lo que hace un Author, más Q Topics, construcción de cuadros de mando en lenguaje natural, resúmenes ejecutivos, historias de datos, escenarios | Crédito de 10 GB | $40/usuario/mes |
-| **Reader** | Abrir cuadros de mando, filtrar, profundizar, exportar CSV, suscribirse a alertas — «Los lectores no tienen capacidad SPICE asignada» | **Ninguna** | $3/usuario/mes |
+| **Reader** | Abrir cuadros de mando, filtrar, profundizar, exportar CSV, suscribirse a alertas: «Los lectores no tienen capacidad SPICE asignada» | **Ninguna** | $3/usuario/mes |
 | **Reader Pro** | Reader más las capacidades de Quick Suite Professional: resúmenes, historias, escenarios | Ninguna | $20/usuario/mes |
 | **Admin** | Gestión de usuarios, compra de SPICE y de suscripciones, **más todas las capacidades de autoría** | Aporta 10 GB | «A efectos de facturación, los Autores y los Administradores de QuickSight se reconocen como Autores» |
 | **Admin Pro** | Admin más las capacidades Pro | Aporta un crédito de 10 GB | Se factura a las tarifas de Author Pro |
 
 Fuente de cada fila: página de precios de QuickSight y FAQs, consultada el **2026-10-11**.
 
-La trampa de esa tabla es la fila de Admin: un Admin que «solo gestiona usuarios» sigue siendo un Author en la factura. La segunda trampa es que **los Readers no retienen SPICE en absoluto** — SPICE es propiedad de la cuenta, no del usuario.
+La trampa de esa tabla es la fila de Admin: un Admin que «solo gestiona usuarios» sigue siendo un Author en la factura. La segunda trampa es que **los Readers no retienen SPICE en absoluto**: SPICE es propiedad de la cuenta, no del usuario.
 
 ### 2.2 Dos ediciones, y solo una de ellas hace seguridad a nivel de fila
 
@@ -126,12 +126,12 @@ La trampa de esa tabla es la fila de Admin: un Admin que «solo gestiona usuario
 | Carpetas, incrustación, carpetas restringidas | No | Sí (la incrustación es solo de Enterprise) |
 | Vía de compra | API `CreateAccountSubscription` | Valor por defecto de la consola |
 
-Fuentes: página de precios, *Data source quotas*, *Refreshing SPICE data*, *Using row-level security*, *Embedding overview* — todas consultadas el 2026-10-11.
+Fuentes: página de precios, *Data source quotas*, *Refreshing SPICE data*, *Using row-level security*, *Embedding overview*: todas consultadas el 2026-10-11.
 
 > [!IMPORTANT]
 > **Una cifra que hay que enseñar con cuidado.** La documentación de cuotas y el blog de mejores prácticas de 2024 dicen ambos que SPICE en Enterprise sostiene **2,000,000,000 de filas o 2 TB por dataset**, y el historial del documento registra la subida a 2,000,000,000 de filas el **2025-06-30**. La página de precios, leída el 2026-10-11, sigue imprimiendo «un máximo de 1,000,000,000 de filas por 1 TB de tamaño». Usa la cifra de las **docs**, nombra el conflicto y nunca cites la página de precios con su 1B/1TB como vigente.
 
-### 2.3 Ejemplo resuelto E1 — tasar un despliegue real, línea por línea
+### 2.3 Ejemplo resuelto E1: tasar un despliegue real, línea por línea
 
 Un equipo despliega **3 Authors, 1 Admin, 60 Readers**, un dataset de SPICE de **52 GB**, **sin usuarios Pro, sin topics de Q, sin Dashboard Q&A** (lista de us-east-1, en oct 2026).
 
@@ -152,7 +152,7 @@ Activar Dashboard Q&A (sin topic)         +$250.00 por cuenta al mes
                                                       TOTAL MENSUAL = $546.56
 ```
 
-La cuota de infraestructura **duplicó la factura** por una sola bandera de función. Se aplica «si tu cuenta tiene alguno de los siguientes: al menos un usuario Pro / Q&A activado mediante topics / Dashboard Q&A activado» (página de precios y FAQs, consultada 2026-10-11), y — la parte que atrapa a la gente — eliminar los usuarios Pro no la detiene mientras exista un Q Topic en **cualquier** Región de la cuenta (AWS re:Post Knowledge Center, 2026-08-27).
+La cuota de infraestructura **duplicó la factura** por una sola bandera de función. Se aplica «si tu cuenta tiene alguno de los siguientes: al menos un usuario Pro / Q&A activado mediante topics / Dashboard Q&A activado» (página de precios y FAQs, consultada 2026-10-11), y, la parte que atrapa a la gente, eliminar los usuarios Pro no la detiene mientras exista un Q Topic en **cualquier** Región de la cuenta (AWS re:Post Knowledge Center, 2026-08-27).
 
 ---
 
@@ -160,18 +160,18 @@ La cuota de infraestructura **duplicó la factura** por una sola bandera de func
 
 ### 3.1 El motor en un párrafo
 
-SPICE es el **Super-fast, Parallel, In-memory Calculation Engine**: una instantánea materializada y actualizable de tu dataset construida a partir de «una combinación de almacenamiento columnar, tecnologías en memoria… y generación de código de máquina» (AWS BI Blog, *Best practices for Amazon QuickSight SPICE and direct query mode*, 2024-07-17). En la edición Enterprise la instantánea está **cifrada en reposo** — gestionada por AWS por defecto, o con una clave gestionada por el cliente en AWS KMS — y cifrada en tránsito con TLS (misma fuente; *Importing data into SPICE*, consultado 2026-10-11).
+SPICE es el **Super-fast, Parallel, In-memory Calculation Engine**: una instantánea materializada y actualizable de tu dataset construida a partir de «una combinación de almacenamiento columnar, tecnologías en memoria… y generación de código de máquina» (AWS BI Blog, *Best practices for Amazon QuickSight SPICE and direct query mode*, 2024-07-17). En la edición Enterprise la instantánea está **cifrada en reposo**, gestionada por AWS por defecto, o con una clave gestionada por el cliente en AWS KMS, y cifrada en tránsito con TLS (misma fuente; *Importing data into SPICE*, consultado 2026-10-11).
 
 Cuatro propiedades deciden cada elección de diseño que vas a hacer:
 
 - **La capacidad se agrupa por cuenta y por Región de AWS**, no por usuario: «La capacidad de SPICE se asigna por separado para cada Región de AWS… compartida por todas las personas que usan QuickSight en una sola Región de AWS» (*Managing SPICE memory capacity*, consultado 2026-10-11).
-- **La compra automática de capacidad está activada por defecto** en las cuentas creadas desde la consola, y «la compra automática de capacidad no admite el decremento automático» — puede hacer crecer tu pool, nunca encogerlo. Desactívala con la capacidad sobreasignada y la *siguiente* ingesta o refresh fallará.
+- **La compra automática de capacidad está activada por defecto** en las cuentas creadas desde la consola, y «la compra automática de capacidad no admite el decremento automático»: puede hacer crecer tu pool, nunca encogerlo. Desactívala con la capacidad sobreasignada y la *siguiente* ingesta o refresh fallará.
 - **Se te cobra por la consulta de origen en la ingesta**, no en el momento de verla: «Si usas una fuente de datos que cobra por consulta, se te cobra por consultar los datos cuando creas el dataset y más adelante cuando actualizas el dataset» (*Importing data into SPICE*).
-- **Los cuadros de mando siguen sirviendo la instantánea anterior mientras corre un refresh** — y después de uno fallido, sin ningún banner de obsolescencia en el lienzo por defecto.
+- **Los cuadros de mando siguen sirviendo la instantánea anterior mientras corre un refresh**, y después de uno fallido, sin ningún banner de obsolescencia en el lienzo por defecto.
 
 ### 3.2 Tamaño lógico: la aritmética que decide tu factura de capacidad
 
-Lo que consume capacidad no es el fichero Parquet en S3 ni el recuento de filas — es el **tamaño lógico**, calculado después de la coerción de tipos y de las columnas calculadas:
+Lo que consume capacidad no es el fichero Parquet en S3 ni el recuento de filas: es el **tamaño lógico**, calculado después de la coerción de tipos y de las columnas calculadas:
 
 ```text
 Tamaño lógico del dataset en bytes =
@@ -182,7 +182,7 @@ Tamaño lógico del dataset en bytes =
 
 Fuente: *Importing data into SPICE*, consultado 2026-10-11. «Solo los cambios guardados en el dataset se aplican a la capacidad de SPICE».
 
-### 3.3 Ejemplo resuelto E2 — dimensionar el dataset del capstone antes de ingerirlo
+### 3.3 Ejemplo resuelto E2: dimensionar el dataset del capstone antes de ingerirlo
 
 La tabla gold del capstone `gold.sales` contiene **40,000,000 filas**, unos **3 GB de Parquet** en S3. El dataset de QuickSight usa este SQL personalizado (fíjate en lo que se descartó):
 
@@ -219,9 +219,9 @@ Trampa         = el Parquet en S3 pesa 3 GB; el TAMAÑO LÓGICO es 5.68 GB.
                 primero el tope de GB.
 ```
 
-Dos movimientos hicieron que cupiera: **descartar columnas sin uso** en el SQL (una columna de texto `customer_note` de 200 caracteres de media habría añadido `24 + 200` bytes por fila — 8.96 GB por sí sola, lo que ya habría superado el pool) y **truncar el timestamp a una fecha**, el mismo movimiento que hace posible el refresh incremental y la seguridad a nivel de fila en absoluto.
+Dos movimientos hicieron que cupiera: **descartar columnas sin uso** en el SQL (una columna de texto `customer_note` de 200 caracteres de media habría añadido `24 + 200` bytes por fila: 8.96 GB por sí sola, lo que ya habría superado el pool) y **truncar el timestamp a una fecha**, el mismo movimiento que hace posible el refresh incremental y la seguridad a nivel de fila en absoluto.
 
-- **📚 ¿Sabías que…?** Los cuatro pasos de preparación de datos **Append, Aggregate, Pivot y Unpivot no pueden ejecutarse en el momento de la consulta** — son *exclusivos de SPICE*, lo que significa que QuickSight los materializa en SPICE en lugar de ejecutarlos en cada carga de visual (*SPICE-only features*, consultado 2026-10-11). Eso los convierte en la palanca documentada de «preagregar para encoger tu dataset»: un paso de agregación aplicado en el momento de la autoría se paga una vez por refresh en lugar de en cada visualización.
+- **📚 ¿Sabías que…?** Los cuatro pasos de preparación de datos **Append, Aggregate, Pivot y Unpivot no pueden ejecutarse en el momento de la consulta**: son *exclusivos de SPICE*, lo que significa que QuickSight los materializa en SPICE en lugar de ejecutarlos en cada carga de visual (*SPICE-only features*, consultado 2026-10-11). Eso los convierte en la palanca documentada de «preagregar para encoger tu dataset»: un paso de agregación aplicado en el momento de la autoría se paga una vez por refresh en lugar de en cada visualización.
 
 ### 3.4 Refresh: calendarios, cuotas y el fallo que no verás
 
@@ -243,21 +243,21 @@ De ahí salen directamente dos reglas operativas. **Escalona los calendarios** p
 ### 3.5 Buenas prácticas de autoría en SPICE
 
 1. **Selecciona columnas en el momento de la autoría.** Cada columna de texto que arrastras al dataset se factura a `24 + longitud UTF-8` bytes por fila, para siempre. Desselecciona lo que ningún visual use.
-2. **Agrega antes de importar.** Usa el paso Aggregate exclusivo de SPICE — o agrega en la capa gold, que es aún mejor — cuando un cuadro de mando necesite medidas por día en lugar de por transacción.
+2. **Agrega antes de importar.** Usa el paso Aggregate exclusivo de SPICE, o agrega en la capa gold, que es aún mejor, cuando un cuadro de mando necesite medidas por día en lugar de por transacción.
 3. **Convierte las claves sobre las que vas a restringir.** La seguridad a nivel de fila solo funciona en campos de **texto**, así que convierte las claves de región numéricas o de fecha a cadena en el SQL del dataset (sección 7).
 4. **Programa después del ETL, nunca cerca de él.** Un refresh completo diario a las 04:00 que se dispara antes de que termine el job de silver a gold importa la instantánea equivocada y la reporta con confianza. La llamada `CreateIngestion` dirigida por eventos desde Step Functions después del job es la versión determinista; el calendario es solo el suelo.
-5. **Un dataset, muchos cuadros de mando.** El consumo en cualquier número de cuadros de mando y usuarios «no genera cargos» — el medidor es capacidad en GB-mes, no visualizaciones (página de precios, consultada 2026-10-11).
+5. **Un dataset, muchos cuadros de mando.** El consumo en cualquier número de cuadros de mando y usuarios «no genera cargos»: el medidor es capacidad en GB-mes, no visualizaciones (página de precios, consultada 2026-10-11).
 
 ```matching
 {
   "question": "Asocia cada concepto de SPICE con lo que realmente significa en QuickSight (documentación de QuickSight, consultada 2026-10-11):",
   "pairs": [
     {"left": "El propio SPICE (Super-fast, Parallel, In-memory Calculation Engine)", "right": "Una instantánea actualizable construida con almacenamiento columnar, tecnologías en memoria y generación de código de máquina; cifrada en reposo en la edición Enterprise"},
-    {"left": "Tamaño lógico", "right": "12 bytes por celda numérica o de fecha, más 24 bytes más la longitud UTF-8 por celda de texto, calculado después de la coerción de tipos y de las columnas calculadas - esto es lo que cuenta tu factura de GB"},
+    {"left": "Tamaño lógico", "right": "12 bytes por celda numérica o de fecha, más 24 bytes más la longitud UTF-8 por celda de texto, calculado después de la coerción de tipos y de las columnas calculadas: esto es lo que cuenta tu factura de GB"},
     {"left": "Capacidad incluida", "right": "10 GB aportados por cada licencia de Author o Admin aprovisionada, agrupados a nivel de cuenta y por Región de AWS; los Readers no aportan nada"},
     {"left": "Refresh incremental", "right": "solo fuentes de datos SQL; consulta únicamente la ventana de retrospectiva definida en una columna de fecha, rastreada por un checkpoint interno desde el último refresh completo"},
-    {"left": "Pasos de preparación exclusivos de SPICE", "right": "Append, Aggregate, Pivot y Unpivot - materializados en SPICE en lugar de ejecutados en el momento de la consulta, y por eso son la palanca de preagregación"},
-    {"left": "Comportamiento de la instantánea durante un refresh", "right": "Los cuadros de mando siguen sirviendo la instantánea anterior mientras corre un refresh - y después de uno fallido, sin banner de obsolescencia por defecto"}
+    {"left": "Pasos de preparación exclusivos de SPICE", "right": "Append, Aggregate, Pivot y Unpivot: materializados en SPICE en lugar de ejecutados en el momento de la consulta, y por eso son la palanca de preagregación"},
+    {"left": "Comportamiento de la instantánea durante un refresh", "right": "Los cuadros de mando siguen sirviendo la instantánea anterior mientras corre un refresh: y después de uno fallido, sin banner de obsolescencia por defecto"}
   ],
   "explanation": "Cada uno de estos seis es un lugar donde los equipos improvisan y después reciben una factura sorpresa o un cuadro de mando obsoleto. El tamaño lógico no es el tamaño del fichero (E2: 3 GB de Parquet eran 5.68 GB lógicos); la capacidad es propiedad de la cuenta, no del usuario; el refresh incremental depende de una fuente SQL más una columna de fecha; los cuatro pasos exclusivos de SPICE son la vía autorizada para encoger un dataset; y el comportamiento de la instantánea es exactamente por lo que las alertas de fallo y un cuadro de texto de «fecha de datos» son obligatorios y no opcionales."
 }
@@ -274,7 +274,7 @@ De ahí salen directamente dos reglas operativas. **Escalona los calendarios** p
 | Frescura | Desde el último refresh | En cada carga de visual |
 | Cargo de la fuente | Solo ingesta (una vez por refresh) | **Cada visualización, cada interacción** |
 | Rendimiento | Sub-segundo, consistente, miles de lectores concurrentes | Igual que el rendimiento de la fuente; la concurrencia cae en Athena o Redshift |
-| Límites duros | 2B de filas o 2 TB por dataset (Enterprise); capacidad en GB-mes | **Timeout de generación de visual de 2 minutos** — «no todos los controladores de base de datos reaccionan al timeout de 2 minutos» (una consulta de Redshift puede seguir corriendo) |
+| Límites duros | 2B de filas o 2 TB por dataset (Enterprise); capacidad en GB-mes | **Timeout de generación de visual de 2 minutos**: «no todos los controladores de base de datos reaccionan al timeout de 2 minutos» (una consulta de Redshift puede seguir corriendo) |
 | Seguridad a nivel de fila | Se aplican tus reglas de RLS de QuickSight | Se aplican **tus** reglas de RLS **y** los filtros de Lake Formation |
 | Forma del coste | Fija y predecible; escala con el tamaño del dataset | Variable; escala con **número de visualizaciones x bytes escaneados** |
 | Mejor para | Hojas de KPI, difusión amplia, ejecutivos, incrustación | Detalle con poca tolerancia a la frescura, tablas muy anchas, exploración puntual |
@@ -283,7 +283,7 @@ Fuentes: *Data source quotas* (2026-10-11); mejores prácticas del AWS BI Blog (
 
 ### 4.2 El híbrido recomendado por AWS
 
-La propia guía de AWS no es «elige uno»: usa una **hoja de aterrizaje de SPICE** para los KPI agregados actualizados diaria o incrementalmente, más una **hoja de detalle de consulta directa**, y avisa al lector de la inconsistencia de frescura entre ambas (BI Blog, 2024-07-17). El patrón existe porque los dos modos de fallo son opuestos — SPICE falla por quedar obsoleto, la consulta directa falla por ser lenta y cara.
+La propia guía de AWS no es «elige uno»: usa una **hoja de aterrizaje de SPICE** para los KPI agregados actualizados diaria o incrementalmente, más una **hoja de detalle de consulta directa**, y avisa al lector de la inconsistencia de frescura entre ambas (BI Blog, 2024-07-17). El patrón existe porque los dos modos de fallo son opuestos: SPICE falla por quedar obsoleto, la consulta directa falla por ser lenta y cara.
 
 ```mermaid
 flowchart TD
@@ -303,7 +303,7 @@ flowchart TD
     H --> P["Aterrizar las tablas gold como<br/>Parquet / Iceberg particionado de<br/>cualquier forma - ingests baratos, vistas baratas"]
 ```
 
-### 4.3 Ejemplo resuelto E3 — el mismo cuadro de mando, dos medidores
+### 4.3 Ejemplo resuelto E3: el mismo cuadro de mando, dos medidores
 
 **Escenario.** 200 lectores, 4 visualizaciones de cuadro de mando cada uno al día, cada visualización escaneando **200 MB** de Parquet con poda de particiones en modo de consulta directa, frente a los mismos datos importados en un dataset de SPICE de **6 GB**. Athena cuesta **$5.00 por TB escaneado** (precios de Amazon Athena, consultados 2026-10-11).
 
@@ -335,12 +335,12 @@ a 0.2 GB por vista  = 456 / 0.2      = 2,280 vistas / mes
                      = unas 76 vistas / día
 ```
 
-Por debajo de unas 76 vistas al día, la consulta directa es más barata **y** más fresca; por encima, SPICE gana y sigue ganando, porque la línea de SPICE es **plana en número de visualizaciones**. La columna sin podar es la que debería preocuparte: la misma forma de SQL sin poda de particiones es **15 veces la factura** — que es por lo que los reductores de la lección 09 son un prerrequisito de esta lección y no un extra opcional.
+Por debajo de unas 76 vistas al día, la consulta directa es más barata **y** más fresca; por encima, SPICE gana y sigue ganando, porque la línea de SPICE es **plana en número de visualizaciones**. La columna sin podar es la que debería preocuparte: la misma forma de SQL sin poda de particiones es **15 veces la factura**: que es por lo que los reductores de la lección 09 son un prerrequisito de esta lección y no un extra opcional.
 
 > [!WARNING]
 > ⚠️ **Nunca apuntes una población grande de lectores a una consulta directa sin podar.** Tres razones documentadas: cada carga de visual re-escanea a $5.00 por TB; QuickSight impone un **timeout de generación de visual de 2 minutos** que algunos controladores ignoran (una consulta de Redshift puede seguir corriendo más allá de él); y la concurrencia cae en la fuente, de modo que un pico de 200 lectores se convierte en un problema del grupo de trabajo de Athena. Si un cuadro de mando debe ser de consulta directa, pon los predicados de partición y la poda de columnas en el **SQL del dataset**, no en manos del lector.
 
-### 4.4 Ejemplo resuelto E4 — la factura híbrida
+### 4.4 Ejemplo resuelto E4: la factura híbrida
 
 Mismo público, **4,000 visualizaciones al día**: 3,600 aterrizan en la hoja de KPI de SPICE, 400 caen en la hoja de detalle de consulta directa a 200 MB cada una.
 
@@ -354,9 +354,9 @@ Equivalente todo-directo: 4,000 x 0.2 GB x 30 = 24 TB  = $120.00
 AHORRO                                                 $105.72 / mes
 ```
 
-Añade el cuadro de texto de la advertencia en la hoja de consulta directa — «las filas de detalle son en vivo; los mosaicos de KPI se actualizan cada día a las 04:00 UTC» — y tienes la forma recomendada por AWS con su coste cuantificado.
+Añade el cuadro de texto de la advertencia en la hoja de consulta directa, «las filas de detalle son en vivo; los mosaicos de KPI se actualizan cada día a las 04:00 UTC», y tienes la forma recomendada por AWS con su coste cuantificado.
 
-- **📚 ¿Sabías que…?** Athena factura **bytes escaneados, redondeados al megabyte más cercano, con un mínimo de 10 MB por consulta** para las fuentes federadas — así que un cuadro de mando que renderiza 40 visuales pequeños de consulta directa puede facturar 40 mínimos en lugar de un solo escaneo fusionado. Fusionar filtros y emitir menos consultas y más anchas mediante parámetros del dataset es una palanca de coste tanto como de rendimiento (precios de Amazon Athena, consultados 2026-10-11).
+- **📚 ¿Sabías que…?** Athena factura **bytes escaneados, redondeados al megabyte más cercano, con un mínimo de 10 MB por consulta** para las fuentes federadas: así que un cuadro de mando que renderiza 40 visuales pequeños de consulta directa puede facturar 40 mínimos en lugar de un solo escaneo fusionado. Fusionar filtros y emitir menos consultas y más anchas mediante parámetros del dataset es una palanca de coste tanto como de rendimiento (precios de Amazon Athena, consultados 2026-10-11).
 
 ```plot
 {
@@ -378,21 +378,21 @@ Añade el cuadro de texto de la advertencia en la hoja de consulta directa — �
 }
 ```
 
-Las líneas se cruzan en torno a **2,280 visualizaciones al mes** — unas 76 al día. A la izquierda del cruce, la consulta directa es más barata *y* más fresca; a la derecha, SPICE cuesta lo mismo si lo miran 10 personas o 10,000. La línea de SPICE también esconde un cargo fijo de ingesta de **$0.45/mes** (E3), que mueve el cruce solo marginalmente.
+Las líneas se cruzan en torno a **2,280 visualizaciones al mes**: unas 76 al día. A la izquierda del cruce, la consulta directa es más barata *y* más fresca; a la derecha, SPICE cuesta lo mismo si lo miran 10 personas o 10,000. La línea de SPICE también esconde un cargo fijo de ingesta de **$0.45/mes** (E3), que mueve el cruce solo marginalmente.
 
 ---
 
 ## 5. Fuentes del lakehouse: Athena, el manifiesto de S3 y Redshift
 
-QuickSight admite una lista larga de fuentes — Athena, Aurora, el Glue Data Catalog, OpenSearch, Redshift, Redshift Spectrum, S3, S3 Tables, RDS, más BigQuery, Databricks, Snowflake, Trino y Q Business — con una regla dura de ubicación: **«Los clústeres de Amazon Redshift, las bases de datos de Amazon Athena y las instancias de Amazon RDS deben estar en AWS»** (*Supported data sources*, consultado 2026-10-11). Para este curso, tres importan.
+QuickSight admite una lista larga de fuentes, Athena, Aurora, el Glue Data Catalog, OpenSearch, Redshift, Redshift Spectrum, S3, S3 Tables, RDS, más BigQuery, Databricks, Snowflake, Trino y Q Business, con una regla dura de ubicación: **«Los clústeres de Amazon Redshift, las bases de datos de Amazon Athena y las instancias de Amazon RDS deben estar en AWS»** (*Supported data sources*, consultado 2026-10-11). Para este curso, tres importan.
 
 | Fuente | Para qué sirve | Datos de configuración que debes conocer |
 |---|---|---|
 | **Amazon Athena** | La vía lakehouse por defecto: QuickSight a Athena al Glue Data Catalog a Iceberg/Parquet en S3 | Necesita un grupo de trabajo (`AthenaParameters.WorkGroup`), un ARN de rol y `IdentityCenterConfiguration.EnableIdentityPropagation` para la propagación de identidad de confianza. Aquí es donde se hacen cumplir los permisos de Lake Formation. |
-| **Amazon S3 vía manifiesto JSON** | Importación directa de ficheros de extracts: CSV, TSV, JSON, CLF, ELF | `fileLocations.URIs` / `URIPrefixes` más `globalUploadSettings` (formato, delimitador, cualificador de texto, `containsHeader`); **hasta 1,000 ficheros por manifiesto**. Correcto para un extract plano, **equivocado para una tabla de lakehouse gobernada** — elude por completo el catálogo, los metadatos de Iceberg y Lake Formation. |
+| **Amazon S3 vía manifiesto JSON** | Importación directa de ficheros de extracts: CSV, TSV, JSON, CLF, ELF | `fileLocations.URIs` / `URIPrefixes` más `globalUploadSettings` (formato, delimitador, cualificador de texto, `containsHeader`); **hasta 1,000 ficheros por manifiesto**. Correcto para un extract plano, **equivocado para una tabla de lakehouse gobernada**: elude por completo el catálogo, los metadatos de Iceberg y Lake Formation. |
 | **Amazon Redshift / Spectrum** | BI denso, concurrente y siempre encendido sobre tablas de almacén o tablas externas del lago | Debe estar en AWS; además es capaz de propagación de identidad de confianza, de modo que los permisos de fila y de columna del lado de la fuente se propagan en lugar de re-declararse en QuickSight. |
 
-La regla de decisión para este curso: **todo lo gobernado vive detrás de Athena** (o Redshift), nunca detrás de un manifiesto. Un manifiesto es un volcado de ficheros — sin entrada de catálogo, sin time travel, sin concesión de Lake Formation, sin filtro de datos.
+La regla de decisión para este curso: **todo lo gobernado vive detrás de Athena** (o Redshift), nunca detrás de un manifiesto. Un manifiesto es un volcado de ficheros; sin entrada de catálogo, sin time travel, sin concesión de Lake Formation, sin filtro de datos.
 
 ```json
 {
@@ -412,10 +412,10 @@ Un manifiesto como el de arriba se importa bien y sigue siendo la respuesta equi
 
 Dos detalles de conexión que fallan en silencio:
 
-- El rol de servicio de QuickSight — por defecto **`aws-quicksight-service-role-v0`** — necesita **sus propias concesiones de Lake Formation**, además de las concesiones dadas a los ARNs de usuario y de grupo de QuickSight (*Using AWS Lake Formation with Amazon QuickSight*, consultado 2026-10-11; AWS Builder Center, 2026-03-27).
+- El rol de servicio de QuickSight, por defecto **`aws-quicksight-service-role-v0`**, necesita **sus propias concesiones de Lake Formation**, además de las concesiones dadas a los ARNs de usuario y de grupo de QuickSight (*Using AWS Lake Formation with Amazon QuickSight*, consultado 2026-10-11; AWS Builder Center, 2026-03-27).
 - Con **S3 Tables** (Iceberg gestionado) el catálogo es `s3tablescatalog`, no el catálogo por defecto de Glue: necesitas `glue:GetCatalog` sobre ese ARN de catálogo, y debes usar **SQL personalizado**, porque el explorador de tablas solo muestra el catálogo por defecto (AWS Builder Center, 2026-03-27).
 
-Y la regla de ordenación de la propia guía de AWS: consigue que la consulta funcione **primero en Athena**, y después abre QuickSight — un paso que separa un problema de Lake Formation de un problema de QuickSight.
+Y la regla de ordenación de la propia guía de AWS: consigue que la consulta funcione **primero en Athena**, y después abre QuickSight: un paso que separa un problema de Lake Formation de un problema de QuickSight.
 
 ---
 
@@ -446,9 +446,9 @@ Cuadro de mando  ---- instantánea de solo lectura del análisis,
 
 **Familias de visuales** disponibles en un análisis: barras y columnas (apiladas), mapa de calor, líneas y áreas, dispersión, tartas y donuts, treemap, embudo, medidor/KPI, nube de palabras, diagrama de caja, histograma, mapa de dispersión, **mapa de capas**, **componente de imagen**, **Highcharts**, tablas y tablas dinámicas, y widgets de texto con narrativa automática (historial de documentos de la Quick User Guide y documentación de previsión/insight, consultada 2026-10-11).
 
-**Temas.** El servicio trae cuatro ARNs de temas iniciales — `arn:aws:quicksight::aws:theme/CLASSIC`, `.../MIDNIGHT`, `.../SEASIDE`, `.../RAINIER` — y el valor por defecto de la cuenta o del espacio de nombres se establece con `CreateAccountCustomization` / `UpdateAccountCustomization` mediante un `DefaultTheme`, lo que exige que el tema esté compartido primero (*Setting a default theme*, consultado 2026-10-11). Los cuadros de mando incrustados añaden **tematización en tiempo de ejecución** desde Embedding SDK 2.5.0 en adelante (`setTheme`, `setThemeOverride`, hasta cinco temas precargados).
+**Temas.** El servicio trae cuatro ARNs de temas iniciales, `arn:aws:quicksight:aws:theme/CLASSIC`, `.../MIDNIGHT`, `.../SEASIDE`, `.../RAINIER`, y el valor por defecto de la cuenta o del espacio de nombres se establece con `CreateAccountCustomization` / `UpdateAccountCustomization` mediante un `DefaultTheme`, lo que exige que el tema esté compartido primero (*Setting a default theme*, consultado 2026-10-11). Los cuadros de mando incrustados añaden **tematización en tiempo de ejecución** desde Embedding SDK 2.5.0 en adelante (`setTheme`, `setThemeOverride`, hasta cinco temas precargados).
 
-**Carpetas (Enterprise).** Carpetas personales, carpetas compartidas y **carpetas compartidas restringidas** — las restringidas se crean solo a través de la API `CreateFolder` y obligan a que los recursos creados desde su contenido permanezcan dentro del árbol de carpetas. Lee el límite con cuidado: cubre análisis, cuadros de mando, datasets, fuentes de datos y topics, pero **no** superficies más nuevas como los agentes de chat, que aún pueden recuperar detalles de un dataset dentro de una carpeta restringida (*Organizing assets into folders*, consultado 2026-10-11).
+**Carpetas (Enterprise).** Carpetas personales, carpetas compartidas y **carpetas compartidas restringidas**: las restringidas se crean solo a través de la API `CreateFolder` y obligan a que los recursos creados desde su contenido permanezcan dentro del árbol de carpetas. Lee el límite con cuidado: cubre análisis, cuadros de mando, datasets, fuentes de datos y topics, pero **no** superficies más nuevas como los agentes de chat, que aún pueden recuperar detalles de un dataset dentro de una carpeta restringida (*Organizing assets into folders*, consultado 2026-10-11).
 
 > [!NOTE]
 > **Dos límites que vale la pena memorizar porque aparecen como sorpresas.** El historial de versiones de cuadros de mando conserva hasta **1,000 versiones** (historial de documentos, 2025-03-28), y un análisis permite **500 campos calculados**, subidos de 200 el 2025-08-15. Ambos son lo bastante grandes para que nadie los toque por accidente y lo bastante pequeños para que una migración muy plantillizada acabe por alcanzarlos.
@@ -459,33 +459,33 @@ Cuadro de mando  ---- instantánea de solo lectura del análisis,
 
 Esta es la sección que decide si tu cuadro de mando del capstone es una victoria de gobernanza o una fuga de datos. Hay **tres** mecanismos a nivel de fila, resuelven problemas distintos y **ninguno de ellos se convierte en otro automáticamente**.
 
-### 7.1 Mecanismo uno — un dataset de reglas de usuario o grupo (Enterprise)
+### 7.1 Mecanismo uno: un dataset de reglas de usuario o grupo (Enterprise)
 
 Una tabla de permisos adjunta a tu dataset: una columna de identidad (`UserName` y `GroupName`, o `UserARN` y `GroupARN`) más **una columna por campo restringido**. La adjuntas con «Conceder acceso al dataset».
 
 | Regla | Valor |
 |---|---|
-| Modo de acceso | **Solo concesión de acceso** — el modo denegar se eliminó el 2020-12-06 |
+| Modo de acceso | **Solo concesión de acceso**: el modo denegar se eliminó el 2020-12-06 |
 | Valores vacíos | NULL en una columna restringida significa **todos los valores** para esa identidad |
 | Identidad ausente | Un usuario o grupo sin fila de regla ve **ninguna fila** |
 | Registros por usuario | **999 o menos** registros de regla aplicados por usuario (directos más los de vía de grupos) |
 | Valores de filtro en SPICE | **192,000 o menos** por campo restringido |
-| Tipos de datos | **Solo texto** (string/char/varchar) — «Por el momento no funciona con campos de fecha ni numéricos» |
-| Bandera del dataset de reglas | `UseAs: RLS_RULES` — una vez puesta no se puede cambiar |
+| Tipos de datos | **Solo texto** (string/char/varchar): «Por el momento no funciona con campos de fecha ni numéricos» |
+| Bandera del dataset de reglas | `UseAs: RLS_RULES`: una vez puesta no se puede cambiar |
 | Datos sucios | La ingesta a SPICE de un dataset de reglas **falla** con filas no válidas o celdas sobredimensionadas en lugar de saltárselas |
 | Reglas vacías | Se omiten como medida de seguridad; QuickSight trata NULL, cadenas vacías y cadenas como `,,,` como sin valor |
-| Propietarios del dataset | **Siguen viendo todos los datos** — a los propietarios no se les restringe |
+| Propietarios del dataset | **Siguen viendo todos los datos**: a los propietarios no se les restringe |
 | Detección de anomalías | **No admitida** en datasets que usan seguridad a nivel de fila |
 
 Fuentes: *Using row-level security* y *Using RLS with user-based rules*, consultadas 2026-10-11.
 
 Una ingesta del dataset de reglas rota deja por tanto el dataset restringido con **ninguna regla seleccionada**, lo que significa que los lectores no ven nada hasta que adjuntes reglas nuevas. Monitoriza el estado de la ingesta y activa las alertas por correo de fallo.
 
-### 7.2 Mecanismo dos — reglas basadas en etiquetas (solo incrustación anónima)
+### 7.2 Mecanismo dos: reglas basadas en etiquetas (solo incrustación anónima)
 
-Las reglas de etiquetas mapean una clave de etiqueta a una columna e inyectan valores en tiempo de ejecución a través de `SessionTags` en `GenerateEmbedUrlForAnonymousUser`, configuradas mediante `RowLevelPermissionTagConfiguration.TagRules` (`TagKey`, `ColumnName`, `TagMultiValueDelimiter`, `MatchAllValue`). La declaración de alcance de AWS es inequívoca: las reglas basadas en etiquetas existen cuando «estás usando cuadros de mando incrustados y quieres asegurar los datos de usuarios no aprovisionados (usuarios no registrados)», y se admiten **solo** para incrustación anónima — no para `GenerateEmbedURLForRegisteredUser`, no para el `GetDashboardEmbedUrl` heredado y no para la identidad de consola (*Using RLS with tag-based rules*, consultado 2026-10-11).
+Las reglas de etiquetas mapean una clave de etiqueta a una columna e inyectan valores en tiempo de ejecución a través de `SessionTags` en `GenerateEmbedUrlForAnonymousUser`, configuradas mediante `RowLevelPermissionTagConfiguration.TagRules` (`TagKey`, `ColumnName`, `TagMultiValueDelimiter`, `MatchAllValue`). La declaración de alcance de AWS es inequívoca: las reglas basadas en etiquetas existen cuando «estás usando cuadros de mando incrustados y quieres asegurar los datos de usuarios no aprovisionados (usuarios no registrados)», y se admiten **solo** para incrustación anónima: no para `GenerateEmbedURLForRegisteredUser`, no para el `GetDashboardEmbedUrl` heredado y no para la identidad de consola (*Using RLS with tag-based rules*, consultado 2026-10-11).
 
-### 7.3 Mecanismo tres — Lake Formation en el origen, a través de Athena
+### 7.3 Mecanismo tres: Lake Formation en el origen, a través de Athena
 
 Registra la ubicación de S3 en Lake Formation, revoca `IAMAllowedPrincipals`, y concede `SELECT` y `DESCRIBE` (más permisos de filtro de datos) a los **ARNs de usuario y de grupo de QuickSight** en Enterprise, y también al **rol de servicio**. Esos filtros los aplica **Athena en el momento de la consulta**, que es todo el problema y toda la oportunidad:
 
@@ -494,8 +494,8 @@ Registra la ubicación de S3 en Lake Formation, revoca `IAMAllowedPrincipals`, y
 
 AWS documenta exactamente **dos puentes** a través de ese hueco:
 
-1. **Propagación de identidad de confianza (TIP).** Solo IAM Identity Center, solo consulta directa — «no se puede usar QuickSight SPICE con la propagación de identidad de confianza». La identidad del lector se propaga a Athena, a Redshift y a Lake Formation cuando entra en juego Redshift Spectrum, de modo que los permisos a nivel de esquema, tabla, fila y columna se hacen cumplir en el origen y esto «elimina la necesidad de crear reglas adicionales de seguridad a nivel de fila y de columna en QuickSight» (AWS BI Blog, 2024-05-16; entrada del historial de documentos «Trusted identity propagation support with Athena data sources», 2025-06-30).
-2. **Replicación automatizada.** Una Lambda lee `ListDataCellFilters` y `ListPermissions`, transforma los predicados PartiQL en filas del dataset de reglas de QuickSight y actualiza un dataset de RLS de QuickSight. Funciona **con SPICE** y **sin** Identity Center — pero debe re-ejecutarse en cada cambio de Lake Formation, y la ventana de retardo es un riesgo que asumes tú.
+1. **Propagación de identidad de confianza (TIP).** Solo IAM Identity Center, solo consulta directa: «no se puede usar QuickSight SPICE con la propagación de identidad de confianza». La identidad del lector se propaga a Athena, a Redshift y a Lake Formation cuando entra en juego Redshift Spectrum, de modo que los permisos a nivel de esquema, tabla, fila y columna se hacen cumplir en el origen y esto «elimina la necesidad de crear reglas adicionales de seguridad a nivel de fila y de columna en QuickSight» (AWS BI Blog, 2024-05-16; entrada del historial de documentos «Trusted identity propagation support with Athena data sources», 2025-06-30).
+2. **Replicación automatizada.** Una Lambda lee `ListDataCellFilters` y `ListPermissions`, transforma los predicados PartiQL en filas del dataset de reglas de QuickSight y actualiza un dataset de RLS de QuickSight. Funciona **con SPICE** y **sin** Identity Center, pero debe re-ejecutarse en cada cambio de Lake Formation, y la ventana de retardo es un riesgo que asumes tú.
 
 ```mermaid
 flowchart LR
@@ -521,16 +521,16 @@ flowchart LR
     SNAP -.->|"los filtros de LF NO se vuelven a aplicar<br/>a esta instantánea"| DASH
 ```
 
-- **📚 ¿Sabías que…?** La frase «las etiquetas se convierten en RLS» describe **dos funciones no relacionadas**. Las etiquetas de Lake Formation impulsan el alcance de *tabla y columna* y no pueden llevar filtros de datos de fila en absoluto, mientras que las reglas de etiquetas de QuickSight impulsan la seguridad a nivel de fila **solo para incrustación anónima**. No hay ninguna función documentada de AWS que mapee una sobre la otra — para gerentes regionales registrados necesitas un **dataset de reglas de usuario/grupo**, punto y final (documentación de QuickSight y Lake Formation, consultada 2026-10-11).
+- **📚 ¿Sabías que…?** La frase «las etiquetas se convierten en RLS» describe **dos funciones no relacionadas**. Las etiquetas de Lake Formation impulsan el alcance de *tabla y columna* y no pueden llevar filtros de datos de fila en absoluto, mientras que las reglas de etiquetas de QuickSight impulsan la seguridad a nivel de fila **solo para incrustación anónima**. No hay ninguna función documentada de AWS que mapee una sobre la otra: para gerentes regionales registrados necesitas un **dataset de reglas de usuario/grupo**, punto y final (documentación de QuickSight y Lake Formation, consultada 2026-10-11).
 
-### 7.4 Ejemplo resuelto E5 — qué mecanismo para qué público
+### 7.4 Ejemplo resuelto E5: qué mecanismo para qué público
 
 | Público | ¿Registrado? | ¿Necesita SPICE? | Mecanismo correcto |
 |---|---|---|---|
 | Gerentes regionales que abren un enlace compartido de cuadro de mando | Sí (grupos de IAM Identity Center) | Sí, para mañanas sub-segundo | **Dataset de reglas de usuario/grupo** indexado en `GroupARN`, una columna `region` |
-| Analistas que ejecutan SQL ad-hoc en Athena con su propia identidad | Sí | No — consulta directa | **Filtros de datos de Lake Formation**, aplicados en el origen |
+| Analistas que ejecutan SQL ad-hoc en Athena con su propia identidad | Sí | No: consulta directa | **Filtros de datos de Lake Formation**, aplicados en el origen |
 | Clientes de un portal incrustado sin cuentas de QuickSight | No | Opcional | **Reglas de etiquetas** mediante `GenerateEmbedUrlForAnonymousUser` más `SessionTags` |
-| Una columna regulada como `customer_tax_id` oculta a la mayoría de los lectores | Sí | Cualquiera de los dos | **Seguridad a nivel de columna** (`ColumnLevelPermissionRule`, máximo 100 ARNs de principal) *o* permisos de columna de Lake Formation — elige una deliberadamente |
+| Una columna regulada como `customer_tax_id` oculta a la mayoría de los lectores | Sí | Cualquiera de los dos | **Seguridad a nivel de columna** (`ColumnLevelPermissionRule`, máximo 100 ARNs de principal) *o* permisos de columna de Lake Formation: elige una deliberadamente |
 
 ```fillblank
 {
@@ -560,12 +560,12 @@ flowchart LR
     "ignora",
     "vuelve a aplicar"
   ],
-  "explanation": "El mecanismo 1 es el dataset de reglas de usuario/grupo: solo concesión de acceso desde el 2020-12-06, solo campos de texto (las claves numéricas y de fecha deben convertirse primero a cadena), 999 registros de regla por usuario y 192,000 valores de filtro por campo restringido cuando el dataset vive en SPICE. El mecanismo 2 son las reglas de etiquetas, que existen solo para incrustación anónima - GenerateEmbedUrlForAnonymousUser más SessionTags, no usuarios registrados y no la consola. El mecanismo 3 es Lake Formation, aplicado por Athena en el momento de la consulta: por eso la consulta directa hereda los filtros del lado de la fuente y por eso una importación a SPICE congela las filas que su identidad de ingesta pudo ver. La seguridad a nivel de columna es un control aparte (ColumnLevelPermissionRule, hasta 100 principales por regla) y no sustituye a ninguno de los tres."
+  "explanation": "El mecanismo 1 es el dataset de reglas de usuario/grupo: solo concesión de acceso desde el 2020-12-06, solo campos de texto (las claves numéricas y de fecha deben convertirse primero a cadena), 999 registros de regla por usuario y 192,000 valores de filtro por campo restringido cuando el dataset vive en SPICE. El mecanismo 2 son las reglas de etiquetas, que existen solo para incrustación anónima: GenerateEmbedUrlForAnonymousUser más SessionTags, no usuarios registrados y no la consola. El mecanismo 3 es Lake Formation, aplicado por Athena en el momento de la consulta: por eso la consulta directa hereda los filtros del lado de la fuente y por eso una importación a SPICE congela las filas que su identidad de ingesta pudo ver. La seguridad a nivel de columna es un control aparte (ColumnLevelPermissionRule, hasta 100 principales por regla) y no sustituye a ninguno de los tres."
 }
 ```
 
 > [!WARNING]
-> ⚠️ **SPICE descarta en silencio los filtros de fila de Lake Formation.** Una importación es una instantánea de lo que la **identidad de ingesta** podía ver; después, los lectores del cuadro de mando en SPICE los gobierna solo la RLS de QuickSight, nunca los filtros de datos de Lake Formation. Tres diseños defendibles — elige uno y escríbelo: **(a)** consulta directa más propagación de identidad de confianza (solo IAM Identity Center, sin SPICE); **(b)** replicar los filtros de datos de Lake Formation a un dataset de reglas de QuickSight con un calendario y hacerte dueño de la ventana de retardo; **(c)** hacer de la RLS de QuickSight el **único** plano de control de filas para esa tabla y dejar de conceder filtros de Lake Formation por usuario para ella. Lo que no es defendible es conceder filtros de Lake Formation por usuario *e* importar a SPICE *y* asumir que se aplican ambos.
+> ⚠️ **SPICE descarta en silencio los filtros de fila de Lake Formation.** Una importación es una instantánea de lo que la **identidad de ingesta** podía ver; después, los lectores del cuadro de mando en SPICE los gobierna solo la RLS de QuickSight, nunca los filtros de datos de Lake Formation. Tres diseños defendibles: elige uno y escríbelo: **(a)** consulta directa más propagación de identidad de confianza (solo IAM Identity Center, sin SPICE); **(b)** replicar los filtros de datos de Lake Formation a un dataset de reglas de QuickSight con un calendario y hacerte dueño de la ventana de retardo; **(c)** hacer de la RLS de QuickSight el **único** plano de control de filas para esa tabla y dejar de conceder filtros de Lake Formation por usuario para ella. Lo que no es defendible es conceder filtros de Lake Formation por usuario *e* importar a SPICE *y* asumir que se aplican ambos.
 
 ---
 
@@ -575,7 +575,7 @@ flowchart LR
 
 El linaje son tres generaciones de una misma idea: QuickSight Q, después **Amazon Q in QuickSight** (GA 2024-04-30), después integrado en Amazon Quick (2025-10-09). Lo que importa operativamente en octubre de 2026:
 
-- **El Q&A está incluido en las plazas de Reader y de Author, pero activarlo cuesta dinero.** Crea **Q Topics** (modelos semánticos curados con instrucciones personalizadas, creados por **Author Pro**) o activa el **Dashboard Q&A** de un clic (disponible desde 2025-01-31, sin necesidad de topic) — y cualquiera de las dos cosas enciende la **cuota de infraestructura de $250/mes por cuenta**.
+- **El Q&A está incluido en las plazas de Reader y de Author, pero activarlo cuesta dinero.** Crea **Q Topics** (modelos semánticos curados con instrucciones personalizadas, creados por **Author Pro**) o activa el **Dashboard Q&A** de un clic (disponible desde 2025-01-31, sin necesidad de topic), y cualquiera de las dos cosas enciende la **cuota de infraestructura de $250/mes por cuenta**.
 - **Los Q Topics se facturan y siguen siendo creables.** No se encontró ninguna declaración de AWS que los deprecie, aunque el Dashboard Q&A se promocione como la vía sin topics.
 - Existe capacidad de **preguntas de Amazon Q** por lotes para escenarios incrustados y de escala: 500 preguntas/mes por $250, 60,000/año por $18,000, 600,000/año por $120,000 (página de precios, consultada 2026-10-11).
 - **Las plazas Pro** añaden construcción de cuadros de mando en lenguaje natural, resúmenes ejecutivos, historias de datos generativas y escenarios.
@@ -585,42 +585,42 @@ El linaje son tres generaciones de una misma idea: QuickSight Q, después **Amaz
 
 | Visual | Requisitos y valores por defecto | Señal de coste |
 |---|---|---|
-| **Forecast** | Punto y clic, no se requiere experiencia en ML; por defecto **14 periodos** hacia delante; estacionalidad **1–180** con Automatic como valor por defecto; banda de intervalo de predicción; límites de previsión; exclusión automática de valores atípicos e imputación de valores que faltan | Gratis dentro del visual |
+| **Forecast** | Punto y clic, no se requiere experiencia en ML; por defecto **14 periodos** hacia delante; estacionalidad **1 to 180** con Automatic como valor por defecto; banda de intervalo de predicción; límites de previsión; exclusión automática de valores atípicos e imputación de valores que faltan | Gratis dentro del visual |
 | **What-if** | Existe **solo dentro de un análisis**, nunca en un cuadro de mando; solo una métrica | Gratis dentro del análisis |
-| **Detección de anomalías** | Necesita al menos una dimensión en Time, una medida en Values y una dimensión en Categories; hasta 4 dimensiones de mayor contribución; niveles de severidad; el recálculo programado se ejecuta solo en cuadros de mando **publicados**; **no admitida en datasets que usan RLS** | Alertas y métricas de anomalía: **$0.50 por 1,000** evaluadas (nivel 1–1M), bajando a $0.05 por encima de 100M |
+| **Detección de anomalías** | Necesita al menos una dimensión en Time, una medida en Values y una dimensión en Categories; hasta 4 dimensiones de mayor contribución; niveles de severidad; el recálculo programado se ejecuta solo en cuadros de mando **publicados**; **no admitida en datasets que usan RLS** | Alertas y métricas de anomalía: **$0.50 por 1,000** evaluadas (nivel 1 to 1M), bajando a $0.05 por encima de 100M |
 | **Autonarrativas** | Resúmenes en lenguaje natural; usa ML solo cuando se incrusta en ellas un cálculo de previsión o de anomalía | Gratis |
 
-Fuentes: *Forecasting and what-if scenarios*, *Insights and anomaly detection*, página de precios — todas consultadas el 2026-10-11.
+Fuentes: *Forecasting and what-if scenarios*, *Insights and anomaly detection*, página de precios: todas consultadas el 2026-10-11.
 
 ### 8.3 Incrustación, a nivel de conciencia
 
 Solo Enterprise, con dos vías de autenticación: **usuarios registrados** (`GenerateEmbedUrlForRegisteredUser`, más copia con un clic) y **usuarios anónimos** (`GenerateEmbedUrlForAnonymousUser`, etiquetas de sesión para RLS, sin aprovisionamiento de usuarios). Las listas blancas de dominio deben usar HTTPS y admitir hasta **100 dominios**, estáticos más los añadidos en tiempo de ejecución. El `amazon-quicksight-embedding-sdk` de npm suministra callbacks, conexión de control, tematización en tiempo de ejecución y vistas incrustadas compartidas.
 
-La nota de seguridad que AWS añadió el **2026-01-27** merece tratamiento de advertencia: orientación explícita contra las **vulnerabilidades de evasión** de `AllowedEmbeddingDomains`, más orientación de RLS multitenante — porque una lista blanca permisiva combinada con RLS basada en etiquetas es exactamente la combinación en la que un portal multitenante se equivoca.
+La nota de seguridad que AWS añadió el **2026-01-27** merece tratamiento de advertencia: orientación explícita contra las **vulnerabilidades de evasión** de `AllowedEmbeddingDomains`, más orientación de RLS multitenante: porque una lista blanca permisiva combinada con RLS basada en etiquetas es exactamente la combinación en la que un portal multitenante se equivoca.
 
 **El precio para un público incrustado** son Readers aprovisionados a $3 o **capacidad de sesión de lector**: una sesión es un **periodo de 30 minutos**, 500 sesiones cuestan $250 al mes con sesiones extra a $0.50, y los planes anuales van desde 50,000/año por $20,000 hasta **$0.16 por sesión** en el plan de 1.6M/año. La capacidad anual es además lo que elimina la marca «Powered by Quick», y **el precio de capacidad es obligatorio para la actualización programática de cuadros de mando**.
 
-- **📚 ¿Sabías que…?** El precio de Reader está escrito **solo para interacciones de sesión manuales**: AWS «se reserva el derecho de cobrar por el lector a la tarifa mensual más alta de Author» si las sesiones de lector se usan para consultas programáticas o automatizadas (QuickSight FAQs, consultado 2026-10-11). Una pantalla de pared que sondea un cuadro de mando con un temporizador es la vía documentada del shock de factura — y es precisamente el uso que requiere precio de capacidad en lugar de plazas.
+- **📚 ¿Sabías que…?** El precio de Reader está escrito **solo para interacciones de sesión manuales**: AWS «se reserva el derecho de cobrar por el lector a la tarifa mensual más alta de Author» si las sesiones de lector se usan para consultas programáticas o automatizadas (QuickSight FAQs, consultado 2026-10-11). Una pantalla de pared que sondea un cuadro de mando con un temporizador es la vía documentada del shock de factura, y es precisamente el uso que requiere precio de capacidad en lugar de plazas.
 
 ---
 
 ## 9. Ejemplo resuelto capstone: de gold.sales a SPICE, a la RLS regional y al cuadro de mando del gerente
 
-Todo lo de las lecciones 01–16 converge ahora en una sola construcción. Puesta en marcha: tabla Iceberg `gold.sales` con las columnas `order_id, order_ts, region, store_id, product, qty, revenue`, **40,000,000 filas**, unos 3 GB de Parquet en S3, registrada en Lake Formation, grupo de trabajo de Athena `qs-bi`.
+Todo lo de las lecciones 01 to 16 converge ahora en una sola construcción. Puesta en marcha: tabla Iceberg `gold.sales` con las columnas `order_id, order_ts, region, store_id, product, qty, revenue`, **40,000,000 filas**, unos 3 GB de Parquet en S3, registrada en Lake Formation, grupo de trabajo de Athena `qs-bi`.
 
-**Paso 1 — Concesiones de Lake Formation.** `SELECT` y `DESCRIBE` sobre `gold.sales` al ARN del grupo `QuickSight_Authors` **y** a `aws-quicksight-service-role-v0`. Revoca `IAMAllowedPrincipals` de la ubicación registrada.
+**Paso 1: Concesiones de Lake Formation.** `SELECT` y `DESCRIBE` sobre `gold.sales` al ARN del grupo `QuickSight_Authors` **y** a `aws-quicksight-service-role-v0`. Revoca `IAMAllowedPrincipals` de la ubicación registrada.
 
-**Paso 2 — Dataset sobre Athena, en modo SPICE.** SQL personalizado con las columnas sin uso descartadas, `order_ts` truncado a `order_day`, `region` convertida a texto (la RLS necesita texto). Tamaño lógico **5.68 GB** (E2), dentro de los 20 GB del pool incluido.
+**Paso 2: Dataset sobre Athena, en modo SPICE.** SQL personalizado con las columnas sin uso descartadas, `order_ts` truncado a `order_day`, `region` convertida a texto (la RLS necesita texto). Tamaño lógico **5.68 GB** (E2), dentro de los 20 GB del pool incluido.
 
-**Paso 3 — Refresh.** Refresh completo diario a las **04:00 UTC** después del job de silver a gold, **más** una llamada `CreateIngestion` dirigida por eventos desde Step Functions cuando ese job termine — el calendario es el suelo, el evento es la verdad. Retrospectiva incremental semanal de 7 días sobre `order_day` si la tabla es de mucha inserción. Mantente por debajo del tope de **32 refreshes completos a demanda cada 24 horas**.
+**Paso 3, Refresh.** Refresh completo diario a las **04:00 UTC** después del job de silver a gold, **más** una llamada `CreateIngestion` dirigida por eventos desde Step Functions cuando ese job termine, el calendario es el suelo, el evento es la verdad. Retrospectiva incremental semanal de 7 días sobre `order_day` si la tabla es de mucha inserción. Mantente por debajo del tope de **32 refreshes completos a demanda cada 24 horas**.
 
-**Paso 4 — Dataset de reglas de RLS.** Crea `rls_region_rules` con las columnas `GroupARN, region`; las filas mapean `arn:…:group/default/regional-managers-eu` a `EU` y `…-us` a `US`; márcala con `UseAs: RLS_RULES`, lo cual es irreversible. Adjúntala al dataset con «Conceder acceso al dataset».
+**Paso 4: Dataset de reglas de RLS.** Crea `rls_region_rules` con las columnas `GroupARN, region`; las filas mapean `arn:…:group/default/regional-managers-eu` a `EU` y `…-us` a `US`; márcala con `UseAs: RLS_RULES`, lo cual es irreversible. Adjúntala al dataset con «Conceder acceso al dataset».
 
-**Paso 5 — Verificar de tres formas.** El autor ve todas las regiones (a los propietarios del dataset no se les restringe); un miembro de `regional-managers-eu` ve solo la UE; una exportación CSV respeta la misma restricción.
+**Paso 5: Verificar de tres formas.** El autor ve todas las regiones (a los propietarios del dataset no se les restringe); un miembro de `regional-managers-eu` ve solo la UE; una exportación CSV respeta la misma restricción.
 
-**Paso 6 — Construir y publicar.** Una hoja de KPI (ingresos, pedidos, valor medio de pedido por región), una hoja de tendencia con una **previsión de ML de 14 periodos** y un insight de anomalía sobre los ingresos diarios; publicar, compartir con el grupo como Reader y suscribir a los gerentes regionales a un informe de correo programado (la entrega de correo programada respeta la RLS).
+**Paso 6: Construir y publicar.** Una hoja de KPI (ingresos, pedidos, valor medio de pedido por región), una hoja de tendencia con una **previsión de ML de 14 periodos** y un insight de anomalía sobre los ingresos diarios; publicar, compartir con el grupo como Reader y suscribir a los gerentes regionales a un informe de correo programado (la entrega de correo programada respeta la RLS).
 
-**Paso 7 — Poner precio** (us-east-1, en oct 2026):
+**Paso 7: Poner precio** (us-east-1, en oct 2026):
 
 ```text
 E6 - COSTE MENSUAL DEL CAPSTONE
@@ -761,7 +761,7 @@ flowchart TB
 | 16 | 16 | Coste y ciclo de vida | Etiquetas, cascada de ciclo de vida, right-sizing | La línea de BI es la parte más pequeña de la factura |
 | 17 | 17 | **BI y capstone** | SPICE frente a consulta directa, RLS, cuadros de mando, incrustación | **La razón por la que existen las otras dieciséis** |
 
-- **📚 ¿Sabías que…?** La propia página *What is a Data Lakehouse?* de AWS nombra la misma columna vertebral que describe esta tabla — ingesta, almacenamiento, metadatos, API, semántica/consumo — y la capa semántica es donde se sientan las herramientas de BI. Las diecisiete lecciones son una expansión de las cinco capas publicadas de AWS hasta las decisiones servicio por servicio que un equipo realmente tiene que tomar, y por eso el diagrama del capstone tiene diecisiete casillas pero solo cinco columnas de flujo (páginas What-is de AWS, consultadas 2026-10-11).
+- **📚 ¿Sabías que…?** La propia página *What is a Data Lakehouse?* de AWS nombra la misma columna vertebral que describe esta tabla, ingesta, almacenamiento, metadatos, API, semántica/consumo, y la capa semántica es donde se sientan las herramientas de BI. Las diecisiete lecciones son una expansión de las cinco capas publicadas de AWS hasta las decisiones servicio por servicio que un equipo realmente tiene que tomar, y por eso el diagrama del capstone tiene diecisiete casillas pero solo cinco columnas de flujo (páginas What-is de AWS, consultadas 2026-10-11).
 
 ---
 
@@ -769,40 +769,40 @@ flowchart TB
 
 Una arquitectura de referencia es una imagen; una hoja de ruta es un orden de operaciones. La regla que gobierna la secuencia es simple: **nada aguas abajo puede construirse antes de que aquello de lo que depende exista y haya sido verificada.** No puedes conceder sobre una ubicación no registrada, no puedes refrescar antes de que haya una tabla, no puedes restringir filas sobre una columna que sigue siendo numérica.
 
-| Fase | Días | Objetivo | Criterios de salida — todos deben pasar antes de seguir |
+| Fase | Días | Objetivo | Criterios de salida: todos deben pasar antes de seguir |
 |---|---|---|---|
-| **1 — Fundamento** | 1–30 | Bronze, silver y gold en S3; formatos; catálogo; primera ingesta | Tabla gold de Iceberg consultable en Athena; reglas de ciclo de vida aplicadas; claves KMS en su sitio; bases de datos de Glue por capa de medallion; escaneo de Macie sobre bronze completado; una fuente de streaming aterrizando |
-| **2 — Datos de confianza** | 31–60 | Transformación, orquestación, gobernanza, vía de almacén | Step Functions ejecuta bronze a gold de extremo a extremo con comprobaciones de DQ; registro de Lake Formation hecho, `IAMAllowedPrincipals` revocado, concesiones dadas **tanto** a los ARNs de usuario/grupo **como** a `aws-quicksight-service-role-v0`; grupo de trabajo de Athena `qs-bi` cercado con un corte de bytes escaneados; vía de Redshift Serverless probada para BI denso |
-| **3 — Activación** | 61–90 | QuickSight, RLS, cuadros de mando, incrustación, cierre de coste | Dataset de SPICE actualizándose con un calendario dirigido por eventos; RLS verificada para tres personas; cuadros de mando publicados, tematizados y compartidos; precio de público lector elegido con el punto de equilibrio de sesiones calculado; etiquetas `CostCenter`/`Layer`/`Project` activadas y todo el stack tasado |
+| **1: Fundamento** | 1 to 30 | Bronze, silver y gold en S3; formatos; catálogo; primera ingesta | Tabla gold de Iceberg consultable en Athena; reglas de ciclo de vida aplicadas; claves KMS en su sitio; bases de datos de Glue por capa de medallion; escaneo de Macie sobre bronze completado; una fuente de streaming aterrizando |
+| **2: Datos de confianza** | 31 to 60 | Transformación, orquestación, gobernanza, vía de almacén | Step Functions ejecuta bronze a gold de extremo a extremo con comprobaciones de DQ; registro de Lake Formation hecho, `IAMAllowedPrincipals` revocado, concesiones dadas **tanto** a los ARNs de usuario/grupo **como** a `aws-quicksight-service-role-v0`; grupo de trabajo de Athena `qs-bi` cercado con un corte de bytes escaneados; vía de Redshift Serverless probada para BI denso |
+| **3: Activación** | 61 to 90 | QuickSight, RLS, cuadros de mando, incrustación, cierre de coste | Dataset de SPICE actualizándose con un calendario dirigido por eventos; RLS verificada para tres personas; cuadros de mando publicados, tematizados y compartidos; precio de público lector elegido con el punto de equilibrio de sesiones calculado; etiquetas `CostCenter`/`Layer`/`Project` activadas y todo el stack tasado |
 
 ```dragdrop
 {
   "question": "Ordena la construcción del capstone según el orden en que realmente debe ejecutarse (lecciones 02-17):",
   "items": [
-    "Día 1-30 FUNDACIÓN - buckets bronze/silver/gold, clases de almacenamiento y ciclo de vida, claves KMS, bases de datos de Glue, tablas gold de Iceberg, escaneo de Macie sobre bronze (lecciones 02, 03, 04, 07, 13)",
-    "Día 1-30 INGESTA - aterrizaje por lotes más una fuente de streaming hacia bronze, con comprobaciones de calidad de datos en el punto de entrada (lecciones 05, 06, 15)",
-    "Día 31-60 TRANSFORMAR Y ORQUESTAR - jobs de Glue de bronze a silver a gold, máquina de estados de Step Functions, calendarios de EventBridge (lecciones 08, 11)",
-    "Día 31-60 GOBERNAR - registrar ubicaciones de S3 en Lake Formation, revocar IAMAllowedPrincipals, conceder a los ARNs de usuario y de grupo de QuickSight Y a aws-quicksight-service-role-v0 (lecciones 12, 14)",
-    "Día 31-60 CONSULTAR - grupo de trabajo de Athena qs-bi con BytesScannedCutoffPerQuery y poda de particiones, más Redshift Serverless para concurrencia densa (lecciones 09, 10)",
-    "Día 61-90 ACTIVAR BI - dataset de QuickSight sobre Athena en modo SPICE, refresh después del ETL, dataset de reglas de RLS, cuadros de mando, temas, incrustación (lección 17)",
-    "Día 61-90 CERRAR EL CÍRCULO - activar las etiquetas CostCenter/Layer/Project, poner precio a todo el stack, ajustar el tamaño y re-baselinear (lección 16)"
+    "Día 1-30 FUNDACIÓN: buckets bronze/silver/gold, clases de almacenamiento y ciclo de vida, claves KMS, bases de datos de Glue, tablas gold de Iceberg, escaneo de Macie sobre bronze (lecciones 02, 03, 04, 07, 13)",
+    "Día 1-30 INGESTA: aterrizaje por lotes más una fuente de streaming hacia bronze, con comprobaciones de calidad de datos en el punto de entrada (lecciones 05, 06, 15)",
+    "Día 31-60 TRANSFORMAR Y ORQUESTAR: jobs de Glue de bronze a silver a gold, máquina de estados de Step Functions, calendarios de EventBridge (lecciones 08, 11)",
+    "Día 31-60 GOBERNAR: registrar ubicaciones de S3 en Lake Formation, revocar IAMAllowedPrincipals, conceder a los ARNs de usuario y de grupo de QuickSight Y a aws-quicksight-service-role-v0 (lecciones 12, 14)",
+    "Día 31-60 CONSULTAR: grupo de trabajo de Athena qs-bi con BytesScannedCutoffPerQuery y poda de particiones, más Redshift Serverless para concurrencia densa (lecciones 09, 10)",
+    "Día 61-90 ACTIVAR BI: dataset de QuickSight sobre Athena en modo SPICE, refresh después del ETL, dataset de reglas de RLS, cuadros de mando, temas, incrustación (lección 17)",
+    "Día 61-90 CERRAR EL CÍRCULO: activar las etiquetas CostCenter/Layer/Project, poner precio a todo el stack, ajustar el tamaño y re-baselinear (lección 16)"
   ],
   "correctOrder": [
-    "Día 1-30 FUNDACIÓN - buckets bronze/silver/gold, clases de almacenamiento y ciclo de vida, claves KMS, bases de datos de Glue, tablas gold de Iceberg, escaneo de Macie sobre bronze (lecciones 02, 03, 04, 07, 13)",
-    "Día 1-30 INGESTA - aterrizaje por lotes más una fuente de streaming hacia bronze, con comprobaciones de calidad de datos en el punto de entrada (lecciones 05, 06, 15)",
-    "Día 31-60 TRANSFORMAR Y ORQUESTAR - jobs de Glue de bronze a silver a gold, máquina de estados de Step Functions, calendarios de EventBridge (lecciones 08, 11)",
-    "Día 31-60 GOBERNAR - registrar ubicaciones de S3 en Lake Formation, revocar IAMAllowedPrincipals, conceder a los ARNs de usuario y de grupo de QuickSight Y a aws-quicksight-service-role-v0 (lecciones 12, 14)",
-    "Día 31-60 CONSULTAR - grupo de trabajo de Athena qs-bi con BytesScannedCutoffPerQuery y poda de particiones, más Redshift Serverless para concurrencia densa (lecciones 09, 10)",
-    "Día 61-90 ACTIVAR BI - dataset de QuickSight sobre Athena en modo SPICE, refresh después del ETL, dataset de reglas de RLS, cuadros de mando, temas, incrustación (lección 17)",
-    "Día 61-90 CERRAR EL CÍRCULO - activar las etiquetas CostCenter/Layer/Project, poner precio a todo el stack, ajustar el tamaño y re-baselinear (lección 16)"
+    "Día 1-30 FUNDACIÓN: buckets bronze/silver/gold, clases de almacenamiento y ciclo de vida, claves KMS, bases de datos de Glue, tablas gold de Iceberg, escaneo de Macie sobre bronze (lecciones 02, 03, 04, 07, 13)",
+    "Día 1-30 INGESTA: aterrizaje por lotes más una fuente de streaming hacia bronze, con comprobaciones de calidad de datos en el punto de entrada (lecciones 05, 06, 15)",
+    "Día 31-60 TRANSFORMAR Y ORQUESTAR: jobs de Glue de bronze a silver a gold, máquina de estados de Step Functions, calendarios de EventBridge (lecciones 08, 11)",
+    "Día 31-60 GOBERNAR: registrar ubicaciones de S3 en Lake Formation, revocar IAMAllowedPrincipals, conceder a los ARNs de usuario y de grupo de QuickSight Y a aws-quicksight-service-role-v0 (lecciones 12, 14)",
+    "Día 31-60 CONSULTAR: grupo de trabajo de Athena qs-bi con BytesScannedCutoffPerQuery y poda de particiones, más Redshift Serverless para concurrencia densa (lecciones 09, 10)",
+    "Día 61-90 ACTIVAR BI: dataset de QuickSight sobre Athena en modo SPICE, refresh después del ETL, dataset de reglas de RLS, cuadros de mando, temas, incrustación (lección 17)",
+    "Día 61-90 CERRAR EL CÍRCULO: activar las etiquetas CostCenter/Layer/Project, poner precio a todo el stack, ajustar el tamaño y re-baselinear (lección 16)"
   ],
-  "explanation": "El almacenamiento y los formatos van primero porque cada capa posterior los lee; la ingesta sigue porque una capa bronze vacía no puede transformarse; la transformación y la orquestación van antes que la conexión de gobernanza porque necesitas una tabla que exista y aterrice en calendario antes de que nadie conceda sobre ella; el registro en Lake Formation debe preceder a la conexión de QuickSight, de lo contrario el dataset se construye contra una ubicación no registrada y todo lector falla después; el grupo de trabajo de Athena debe existir antes de que los cuadros de mando apunten a él, o la cerca de coste es retroactiva; QuickSight es deliberadamente el sexto, no el primero - la capa de BI consume garantías, no las crea; y el etiquetado de coste cierra la secuencia porque es la única fase que puede poner precio a todo lo anterior."
+  "explanation": "El almacenamiento y los formatos van primero porque cada capa posterior los lee; la ingesta sigue porque una capa bronze vacía no puede transformarse; la transformación y la orquestación van antes que la conexión de gobernanza porque necesitas una tabla que exista y aterrice en calendario antes de que nadie conceda sobre ella; el registro en Lake Formation debe preceder a la conexión de QuickSight, de lo contrario el dataset se construye contra una ubicación no registrada y todo lector falla después; el grupo de trabajo de Athena debe existir antes de que los cuadros de mando apunten a él, o la cerca de coste es retroactiva; QuickSight es deliberadamente el sexto, no el primero: la capa de BI consume garantías, no las crea; y el etiquetado de coste cierra la secuencia porque es la única fase que puede poner precio a todo lo anterior."
 }
 ```
 
-### 11.1 Ejemplo resuelto E7 — dimensionar el público incrustado antes de comprar nada
+### 11.1 Ejemplo resuelto E7: dimensionar el público incrustado antes de comprar nada
 
-Un ISV incrusta un cuadro de mando en una aplicación multitenante para **50,000 visitantes mensuales**, con una media de **2 sesiones de 30 minutos** cada uno — **100,000 sesiones al mes**, o 1.2 millones al año.
+Un ISV incrusta un cuadro de mando en una aplicación multitenante para **50,000 visitantes mensuales**, con una media de **2 sesiones de 30 minutos** cada uno: **100,000 sesiones al mes**, o 1.2 millones al año.
 
 ```text
 (a) Readers aprovisionados  50,000 x $3                = $150,000 / mes
@@ -815,20 +815,20 @@ Un ISV incrusta un cuadro de mando en una aplicación multitenante para **50,000
     incrustaciones anónimas de clientes servidas con capacidad anual = personal + (c)
 ```
 
-Lee esto como un **ejercicio de aritmética, no como una fórmula publicada por AWS** — AWS no publica ninguna guía de punto de equilibrio entre capacidad y plazas, y la definición de sesión de 30 minutos significa que un usuario que reabre un cuadro de mando cuatro veces al día consume cuatro sesiones. Lo que los números sí establecen es la dirección: con 100,000 sesiones al mes, el precio por plaza no es una opción seria; la capacidad anual es unas **2.3 veces más barata** que la mensual para el mismo volumen; y solo el plan anual elimina la marca «Powered by Quick» y habilita la **actualización programática de cuadros de mando**.
+Lee esto como un **ejercicio de aritmética, no como una fórmula publicada por AWS**: AWS no publica ninguna guía de punto de equilibrio entre capacidad y plazas, y la definición de sesión de 30 minutos significa que un usuario que reabre un cuadro de mando cuatro veces al día consume cuatro sesiones. Lo que los números sí establecen es la dirección: con 100,000 sesiones al mes, el precio por plaza no es una opción seria; la capacidad anual es unas **2.3 veces más barata** que la mensual para el mismo volumen; y solo el plan anual elimina la marca «Powered by Quick» y habilita la **actualización programática de cuadros de mando**.
 
 ---
 
 ### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
-> **Qué se movió en la historia de BI entre 2025 y octubre de 2026** — cada línea con su fecha, porque cada una cambia un número o un ajuste de esta lección:
+> **Qué se movió en la historia de BI entre 2025 y octubre de 2026**: cada línea con su fecha, porque cada una cambia un número o un ajuste de esta lección:
 > - **QuickSight se convirtió en Quick Suite, y después en Amazon Quick (anunciado el 2025-10-09).** La función de BI ahora es «Quick Sight»; **las APIs, los ARNs y las acciones de IAM siguen diciendo `quicksight`**, y «no se requiere ninguna migración de datos». Los precios se movieron con la marca: **Author Pro bajó de $50 a $40/mes**, Reader Pro a $20/mes ganó las capacidades de Quick Suite Professional, mientras que **Reader ($3) y Author ($24) siguen sin cambios**, y la **cuota de infraestructura de $250/mes por cuenta** se aplica siempre que exista un usuario Pro, un topic de Q o Dashboard Q&A (AWS News Blog y AWS BI Blog, 2025-10-09; precios de QuickSight, consultados 2026-10-11).
-> - **Los límites de SPICE por dataset subieron a 2,000,000,000 de filas** (historial de documentos, 2025-06-30), con una entrada de documentación posterior de «SPICE capacity updates» el **2026-02-02** — mientras que la página de precios sigue imprimiendo «1,000,000,000 de filas por 1 TB», así que cita la página de cuotas y señala el conflicto.
-> - **Soporte de propagación de identidad de confianza con fuentes de datos de Athena** (historial de documentos, 2025-06-30) hace que los permisos de fila y de columna de Lake Formation del lado de la fuente se apliquen por lector de QuickSight — pero solo con IAM Identity Center y solo en **consulta directa**, ya que «no se puede usar QuickSight SPICE con la propagación de identidad de confianza».
-> - **Se añadió orientación de seguridad para la incrustación y el RLS multitenante el 2026-01-27**, advirtiendo específicamente de las vulnerabilidades de evasión de `AllowedEmbeddingDomains` — el cambio más importante para cualquiera que publique un portal incrustado.
+> - **Los límites de SPICE por dataset subieron a 2,000,000,000 de filas** (historial de documentos, 2025-06-30), con una entrada de documentación posterior de «SPICE capacity updates» el **2026-02-02**: mientras que la página de precios sigue imprimiendo «1,000,000,000 de filas por 1 TB», así que cita la página de cuotas y señala el conflicto.
+> - **Soporte de propagación de identidad de confianza con fuentes de datos de Athena** (historial de documentos, 2025-06-30) hace que los permisos de fila y de columna de Lake Formation del lado de la fuente se apliquen por lector de QuickSight, pero solo con IAM Identity Center y solo en **consulta directa**, ya que «no se puede usar QuickSight SPICE con la propagación de identidad de confianza».
+> - **Se añadió orientación de seguridad para la incrustación y el RLS multitenante el 2026-01-27**, advirtiendo específicamente de las vulnerabilidades de evasión de `AllowedEmbeddingDomains`: el cambio más importante para cualquiera que publique un portal incrustado.
 > - **El refresh incremental en la nueva experiencia de preparación de datos llegó el 2026-04-15**, extendiendo el patrón de ventana de retrospectiva a la superficie de autoría más nueva (historial de documentos, consultado 2026-10-11).
-> - **El acceso promocional de Author a las capacidades de Quick Enterprise dice ahora «hasta el 31 de diciembre de 2026»** en la página de precios (consultada 2026-10-11) — la publicación original del 2025-10-09 decía hasta el 30 de abril de 2026, así que trata la página posterior como vigente y la fecha anterior como historia.
+> - **El acceso promocional de Author a las capacidades de Quick Enterprise dice ahora «hasta el 31 de diciembre de 2026»** en la página de precios (consultada 2026-10-11): la publicación original del 2025-10-09 decía hasta el 30 de abril de 2026, así que trata la página posterior como vigente y la fecha anterior como historia.
 
 ---
 
@@ -836,11 +836,11 @@ Lee esto como un **ejercicio de aritmética, no como una fórmula publicada por 
 
 Cada cifra de abajo es un **resultado de cliente que AWS eligió publicar**, nunca una promesa de AWS. Las páginas de caso no llevan fecha de publicación, así que lo que llevan es una fecha de consulta: **consultado en octubre de 2026**.
 
-### Caso A — Trustly: insights 4x más rápidos, coste un 50 % menor, de 80 a 300 usuarios
+### Caso A, Trustly: insights 4x más rápidos, coste un 50 % menor, de 80 a 300 usuarios
 
 | Elemento | Detalle |
 |---|---|
-| Cliente | **Trustly**, pagos de banca abierta — «conecta con más de 8,300 comerciantes a 650 millones de consumidores y 12,000 bancos» |
+| Cliente | **Trustly**, pagos de banca abierta: «conecta con más de 8,300 comerciantes a 650 millones de consumidores y 12,000 bancos» |
 | Reto | Un equipo de datos que actuaba como cuello de botella: un analista pasaba **cuatro horas al día** manteniendo cuadros de mando, las peticiones ad-hoc se encolaban detrás de ese trabajo, y la BI se actualizaba con un calendario demasiado lento para las decisiones de riesgo y de producto |
 | Servicios | **Amazon Redshift** (migración del almacén) + **Amazon QuickSight** (cuadros de mando, SPICE) + **Amazon Q in QuickSight** (autoservicio en lenguaje natural) |
 | Migración | «Para febrero de 2023, Trustly se había migrado a Amazon Redshift e implementado QuickSight en **menos de 6 meses**» |
@@ -848,18 +848,18 @@ Cada cifra de abajo es un **resultado de cliente que AWS eligió publicar**, nun
 | Cita | «Hay una integración nativa entre Amazon Redshift y Amazon QuickSight… que redujo los problemas de datos y aumentó la calidad de los datos.» |
 | Fuente | Caso de estudio de AWS, `solutions/case-studies/trustly-using-amazon-quicksight-case-study/` (sin fecha; consultado 2026-10-11) |
 
-**Leyéndolo como un profesional.** Aquí se movieron tres palancas separadas, y vale la pena separarlas: el **ritmo de 15 minutos** es una decisión de calendario de refresh de SPICE (sección 3.4); el **crecimiento de usuarios con menor coste** es una decisión de economía por plaza frente a capacidad (ejemplo resuelto E8 más abajo); y el **89 % de precisión en 15,000 preguntas** es un *resultado de cliente sobre un conjunto de preguntas concreto* — no una garantía de precisión de Amazon Q, ni una afirmación que puedas reformular como «Amazon Q tiene un 89 % de precisión».
+**Leyéndolo como un profesional.** Aquí se movieron tres palancas separadas, y vale la pena separarlas: el **ritmo de 15 minutos** es una decisión de calendario de refresh de SPICE (sección 3.4); el **crecimiento de usuarios con menor coste** es una decisión de economía por plaza frente a capacidad (ejemplo resuelto E8 más abajo); y el **89 % de precisión en 15,000 preguntas** es un *resultado de cliente sobre un conjunto de preguntas concreto*: no una garantía de precisión de Amazon Q, ni una afirmación que puedas reformular como «Amazon Q tiene un 89 % de precisión».
 
-### Caso B — dos resultados más de QuickSight del mismo corpus
+### Caso B: dos resultados más de QuickSight del mismo corpus
 
 | Cliente | Lo que reporta AWS (consultado 2026-10-11) | Qué mecanismo de la lección 17 demuestra |
 |---|---|---|
 | **Rekor Systems** (AWS BI Blog, 2025-04-07) | Un lago de S3 con forma de **medallion bronze/silver/gold** y **Athena como fuente principal de QuickSight**; una **reducción del 85 % en los gastos anuales de herramientas de BI**; tiempos de carga de cuadro de mando un **20 % más rápidos**; **más de 400 usuarios activos**; cuadros de mando incrustados en el producto del cliente | La cadena exacta de gold a Athena a SPICE a incrustación de la sección 9 |
-| **Whole Foods Market** (AWS BI Blog, 2024-12-02) | **Más de 25,000 usuarios**, **1 millón de visualizaciones de cuadro de mando al mes**; tiempos de carga recortados un **90 %, de 2–5 minutos a 5–10 segundos**; costes reducidos un **75 %**; permisos a nivel de fila y de columna aplicados en un entorno regulado | SPICE como palanca de concurrencia (sección 4) más RLS y CLS (sección 7) |
+| **Whole Foods Market** (AWS BI Blog, 2024-12-02) | **Más de 25,000 usuarios**, **1 millón de visualizaciones de cuadro de mando al mes**; tiempos de carga recortados un **90 %, de 2 to 5 minutos a 5 to 10 segundos**; costes reducidos un **75 %**; permisos a nivel de fila y de columna aplicados en un entorno regulado | SPICE como palanca de concurrencia (sección 4) más RLS y CLS (sección 7) |
 
-Ambos son **resultados de cliente**, no garantías de nivel de servicio — y ambos describen migraciones concretas, que es la única forma en que este curso permite citar un porcentaje.
+Ambos son **resultados de cliente**, no garantías de nivel de servicio, y ambos describen migraciones concretas, que es la única forma en que este curso permite citar un porcentaje.
 
-### Caso C — el punto de equilibrio de Trustly, calculado con tarifas publicadas
+### Caso C: el punto de equilibrio de Trustly, calculado con tarifas publicadas
 
 Toma los **300 usuarios** publicados por Trustly y las tarifas de octubre de 2026 de la sección 2, y después encuentra el número de sesiones al que los Readers aprovisionados y la capacidad de sesión de lector cuestan lo mismo:
 
@@ -875,9 +875,9 @@ E8 - SESIONES FRENTE A PLAZAS (300 lectores)
                       plan de 50,000/año = $20,000/año = $1,666.67/mes -> demasiado pequeño para batir al mensual
 ```
 
-Esto es **aritmética sobre tarifas publicadas, no una fórmula de AWS** — AWS no publica ninguna guía de punto de equilibrio, y una «sesión» es un periodo de 30 minutos, de modo que un lector que reabre un cuadro de mando tres veces en una hora consume tres sesiones. La pregunta transferible para cualquier despliegue de BI es la que fuerza este ejercicio: **¿cuántas sesiones de 30 minutos consume un lector real al mes?** Mídelo antes de comprometerte, porque esa respuesta decide si un parque de 300 lectores cuesta $900, $600 o $1,500.
+Esto es **aritmética sobre tarifas publicadas, no una fórmula de AWS**: AWS no publica ninguna guía de punto de equilibrio, y una «sesión» es un periodo de 30 minutos, de modo que un lector que reabre un cuadro de mando tres veces en una hora consume tres sesiones. La pregunta transferible para cualquier despliegue de BI es la que fuerza este ejercicio: **¿cuántas sesiones de 30 minutos consume un lector real al mes?** Mídelo antes de comprometerte, porque esa respuesta decide si un parque de 300 lectores cuesta $900, $600 o $1,500.
 
-- **📚 ¿Sabías que…?** El ritmo de cuadro de mando de 15 minutos de Trustly es exactamente el **intervalo mínimo de calendario que ofrece QuickSight** — las frecuencias van de «Cada 15 minutos, cada 30 minutos, por horas, diario, semanal o mensual», y la ingesta ocurre **dentro de los 10 minutos** de la hora programada (*Refreshing SPICE data*, consultado 2026-10-11). Un cuadro de mando de «15 minutos» es en realidad un cuadro de mando de 15 a 25 minutos, y por eso una marca de tiempo visible de «fecha de datos» en el lienzo es práctica estándar y no decoración.
+- **📚 ¿Sabías que…?** El ritmo de cuadro de mando de 15 minutos de Trustly es exactamente el **intervalo mínimo de calendario que ofrece QuickSight**: las frecuencias van de «Cada 15 minutos, cada 30 minutos, por horas, diario, semanal o mensual», y la ingesta ocurre **dentro de los 10 minutos** de la hora programada (*Refreshing SPICE data*, consultado 2026-10-11). Un cuadro de mando de «15 minutos» es en realidad un cuadro de mando de 15 a 25 minutos, y por eso una marca de tiempo visible de «fecha de datos» en el lienzo es práctica estándar y no decoración.
 
 ---
 
@@ -1079,7 +1079,7 @@ Doce ítems, todos en la serie `lh-17-qN`: una respuesta correcta, tres o cuatro
 
 > [!WARNING]
 > ⚠️ **La lista de trampas de la lección 17: recórrela antes de publicar un cuadro de mando:**
-> - **SPICE descarta los filtros de fila de Lake Formation** en la ingesta: consulta directa con propagación de identidad, replica los filtros o haz de la RLS de QuickSight el único plano de control de filas — nunca asumas que se aplican los dos.
+> - **SPICE descarta los filtros de fila de Lake Formation** en la ingesta: consulta directa con propagación de identidad, replica los filtros o haz de la RLS de QuickSight el único plano de control de filas: nunca asumas que se aplican los dos.
 > - **La RLS es solo texto**, con un tope de 999 registros de regla por usuario y 192,000 valores de filtro por campo restringido en SPICE; los **propietas del dataset eluden la RLS por completo**, y la detección de anomalías no está disponible en datasets con RLS.
 > - **Las reglas de etiquetas son solo para incrustación anónima**: ni incrustación de usuario registrado, ni consola, ni ningún mapeo de etiquetas de Lake Formation.
 > - **Una ingesta del dataset de reglas rota falla cerrando**: filas no válidas o celdas sobredimensionadas detienen la ingesta y dejan el dataset restringido sin reglas seleccionadas. Monitoriza la ingesta y activa las alertas de fallo.
@@ -1091,21 +1091,21 @@ Doce ítems, todos en la serie `lh-17-qN`: una respuesta correcta, tres o cuatro
 > - **Las carpetas restringidas no son herméticas**: cubren análisis, cuadros de mando, datasets, fuentes de datos y topics, pero los agentes de chat fuera de la carpeta aún pueden recuperar detalles de datasets de carpetas restringidas.
 
 > [!IMPORTANT]
-> **Veredicto comparativo — QuickSight nativo frente a Power BI sobre AWS frente a una mezcla de Tableau más QuickSight frente a una capa de BI de terceros incrustada**
-> - **Frente a Power BI desplegado sobre AWS** (servidores de informes autoalojados o patrones de puerta de enlace sobre EC2 y S3): estás cambiando un medidor nativo de AWS, sin servidor, por usuario y capacidad, por un conjunto de licencias más máquinas virtuales que parcheas una y otra vez. El argumento de gobernanza es decisivo para *esta* arquitectura: los filtros de datos de Lake Formation los hace cumplir **Athena**, que es la misma vía que QuickSight ya usa, y la propagación de identidad de confianza lleva las identidades de IAM Identity Center hasta la fuente — capacidades que viven en el plano de control de AWS y no al lado. El modelado de filas y la amplitud de visuales de Power BI siguen siendo genuinamente fuertes, y no se cita ninguna cifra aquí porque los resúmenes de este curso no traen ninguna fuente de primera parte para su precios.
-> - **Frente a una mezcla de Tableau más QuickSight**: una división defendible donde Tableau se queda con el trabajo analítico muy personalizado y de píxel ceñido, y QuickSight lleva los cuadros de mando gobernados y de dispersión amplia del lakehouse — el patrón que ilustran Rekor y Whole Foods con 400+ y 25,000+ usuarios respectivamente. El coste que pagas son dos capas semánticas, dos implementaciones de RLS y dos pilares de incrustación; el coste que evitas es forzar visuales complejos a medida dentro de una plantilla. Elige esto solo cuando un equipo con nombre necesita de verdad esos visuales, no porque una migración sea políticamente más fácil que una decisión.
-> - **Frente a una capa de BI de terceros incrustada** (SDKs de incrustación de código abierto o de proveedor): atractivo cuando la superficie de incrustación *es* el producto y necesitas control total del DOM y de la tematización. La contraoferta de QuickSight es incrustación solo en Enterprise con rutas registradas o anónimas, una lista blanca HTTPS de 100 dominios, tematización en tiempo de ejecución desde la SDK 2.5.0, precio de capacidad de sesión hasta $0.16 por sesión en el plan anual de 1.6M/año — más la gobernanza nativa de AWS que un motor externo no puede heredar de Lake Formation. La trampa en ambos lados es la orientación del 2026-01-27 sobre la evasión de `AllowedEmbeddingDomains`: una lista blanca permisiva derrota la RLS que construiste en la sección 7.
-> - **El veredicto en una frase:** para un lakehouse cuyos datos ya viven detrás de Lake Formation, Athena e IAM Identity Center, **QuickSight es el camino más corto desde una tabla gold gobernada hasta un cuadro de mando regional gobernado** — SPICE para la dispersión y una frescura que puedes programar, consulta directa o propagación de identidad de confianza cuando los filtros de fila del lado de la fuente deban aplicarse por usuario, un dataset de reglas de usuario/grupo para audiencias registradas, reglas de etiquetas solo para incrustaciones anónimas, y la hoja híbrida cuando los dos modos de fallo (obsoleto frente a caro) importan a la vez — porque cada alternativa reintroduce un segundo plano de permisos que Lake Formation no habla.
+> **Veredicto comparativo: QuickSight nativo frente a Power BI sobre AWS frente a una mezcla de Tableau más QuickSight frente a una capa de BI de terceros incrustada**
+> - **Frente a Power BI desplegado sobre AWS** (servidores de informes autoalojados o patrones de puerta de enlace sobre EC2 y S3): estás cambiando un medidor nativo de AWS, sin servidor, por usuario y capacidad, por un conjunto de licencias más máquinas virtuales que parcheas una y otra vez. El argumento de gobernanza es decisivo para *esta* arquitectura: los filtros de datos de Lake Formation los hace cumplir **Athena**, que es la misma vía que QuickSight ya usa, y la propagación de identidad de confianza lleva las identidades de IAM Identity Center hasta la fuente: capacidades que viven en el plano de control de AWS y no al lado. El modelado de filas y la amplitud de visuales de Power BI siguen siendo genuinamente fuertes, y no se cita ninguna cifra aquí porque los resúmenes de este curso no traen ninguna fuente de primera parte para su precios.
+> - **Frente a una mezcla de Tableau más QuickSight**: una división defendible donde Tableau se queda con el trabajo analítico muy personalizado y de píxel ceñido, y QuickSight lleva los cuadros de mando gobernados y de dispersión amplia del lakehouse: el patrón que ilustran Rekor y Whole Foods con 400+ y 25,000+ usuarios respectivamente. El coste que pagas son dos capas semánticas, dos implementaciones de RLS y dos pilares de incrustación; el coste que evitas es forzar visuales complejos a medida dentro de una plantilla. Elige esto solo cuando un equipo con nombre necesita de verdad esos visuales, no porque una migración sea políticamente más fácil que una decisión.
+> - **Frente a una capa de BI de terceros incrustada** (SDKs de incrustación de código abierto o de proveedor): atractivo cuando la superficie de incrustación *es* el producto y necesitas control total del DOM y de la tematización. La contraoferta de QuickSight es incrustación solo en Enterprise con rutas registradas o anónimas, una lista blanca HTTPS de 100 dominios, tematización en tiempo de ejecución desde la SDK 2.5.0, precio de capacidad de sesión hasta $0.16 por sesión en el plan anual de 1.6M/año: más la gobernanza nativa de AWS que un motor externo no puede heredar de Lake Formation. La trampa en ambos lados es la orientación del 2026-01-27 sobre la evasión de `AllowedEmbeddingDomains`: una lista blanca permisiva derrota la RLS que construiste en la sección 7.
+> - **El veredicto en una frase:** para un lakehouse cuyos datos ya viven detrás de Lake Formation, Athena e IAM Identity Center, **QuickSight es el camino más corto desde una tabla gold gobernada hasta un cuadro de mando regional gobernado**, SPICE para la dispersión y una frescura que puedes programar, consulta directa o propagación de identidad de confianza cuando los filtros de fila del lado de la fuente deban aplicarse por usuario, un dataset de reglas de usuario/grupo para audiencias registradas, reglas de etiquetas solo para incrustaciones anónimas, y la hoja híbrida cuando los dos modos de fallo (obsoleto frente a caro) importan a la vez, porque cada alternativa reintroduce un segundo plano de permisos que Lake Formation no habla.
 
 > [!SUCCESS]
 > **Conclusiones Clave (Key Takeaways):**
-> 1. **El rebranding cambió la marca, no la arquitectura:** el servicio es Amazon Quick (anunciado como Quick Suite el 2025-10-09), la función de BI es Quick Sight, y las APIs, los ARNs, las acciones de IAM, los cuadros de mando, los datasets, SPICE, RLS e incrustación no cambian — así que sigues configurando, automatizando y certificando contra `quicksight`.
+> 1. **El rebranding cambió la marca, no la arquitectura:** el servicio es Amazon Quick (anunciado como Quick Suite el 2025-10-09), la función de BI es Quick Sight, y las APIs, los ARNs, las acciones de IAM, los cuadros de mando, los datasets, SPICE, RLS e incrustación no cambian: así que sigues configurando, automatizando y certificando contra `quicksight`.
 > 2. **Pon precio al despliegue en cuatro líneas:** Author $24, Author Pro $40, Reader $3, Reader Pro $20 (Admin se factura como Author), SPICE $0.38 por GB-mes por encima de los 10 GB que aporta cada Author a la capacidad **agrupada por cuenta y por Región**, más la **cuota de infraestructura de $250 por cuenta** que disparan un usuario Pro, un topic de Q en cualquier Región o Dashboard Q&A (us-east-1, consultado 2026-10-11).
 > 3. **SPICE es una instantánea con una fórmula:** tamaño lógico = 12 bytes por celda numérica o de fecha + 24 bytes + longitud UTF-8 por celda de texto; Enterprise admite 2,000 millones de filas o 2 TB por dataset (la página de precios con 1B/1TB está desactualizada); los pasos solo-SPICE de Append, Aggregate, Pivot y Unpivot son la vía autorizada para encoger un dataset; los calendarios de refresh van de cada 15 minutos a mensual, aterrizan dentro de los 10 minutos de la hora, se topan en cinco calendarios, y los cuadros de mando siguen sirviendo la instantánea anterior durante y después de un fallo.
-> 4. **El modo de consulta es una decisión económica, no una preferencia:** la consulta directa re-escanea a **$5.00 por TB** en cada vista e impone un timeout de visual de 2 minutos, SPICE cuesta capacidad de GB-meses y es plano respecto al número de vistas, y el cruce para un dataset de 6 GB a 200 MB por vista está en unas **2,280 vistas al mes (76 al día)** — los dos mundos de E3 son $24 frente a $2.73, y la hoja híbrida de SPICE más consulta directa con un aviso de frescura es el punto medio recomendado por AWS a $14.28 frente a $120.
-> 5. **Tres mecanismos de fila, ninguno intercambiable:** un **dataset de reglas de usuario/grupo** (solo concesión de acceso, solo texto, ≤999 registros por usuario, ≤192,000 valores de filtro por campo en SPICE, propietarios sin restricción, sin detección de anomalías); **reglas de etiquetas** solo para incrustación anónima mediante `SessionTags`; y los **filtros de datos de Lake Formation** que Athena hace cumplir en el momento de la consulta — que la consulta directa respeta y **SPICE descarta en silencio**, tendiendo puentes solo con la propagación de identidad de confianza (Identity Center, consulta directa, sin SPICE) o con la replicación con Lambda a un dataset de reglas.
+> 4. **El modo de consulta es una decisión económica, no una preferencia:** la consulta directa re-escanea a **$5.00 por TB** en cada vista e impone un timeout de visual de 2 minutos, SPICE cuesta capacidad de GB-meses y es plano respecto al número de vistas, y el cruce para un dataset de 6 GB a 200 MB por vista está en unas **2,280 vistas al mes (76 al día)**: los dos mundos de E3 son $24 frente a $2.73, y la hoja híbrida de SPICE más consulta directa con un aviso de frescura es el punto medio recomendado por AWS a $14.28 frente a $120.
+> 5. **Tres mecanismos de fila, ninguno intercambiable:** un **dataset de reglas de usuario/grupo** (solo concesión de acceso, solo texto, ≤999 registros por usuario, ≤192,000 valores de filtro por campo en SPICE, propietarios sin restricción, sin detección de anomalías); **reglas de etiquetas** solo para incrustación anónima mediante `SessionTags`; y los **filtros de datos de Lake Formation** que Athena hace cumplir en el momento de la consulta: que la consulta directa respeta y **SPICE descarta en silencio**, tendiendo puentes solo con la propagación de identidad de confianza (Identity Center, consulta directa, sin SPICE) o con la replicación con Lambda a un dataset de reglas.
 > 6. **Cablea bien la fuente:** las tablas gobernadas viven detrás de **Athena** con concesiones de Lake Formation tanto a los ARNs de usuario/grupo de QuickSight como a `aws-quicksight-service-role-v0`, y `IAMAllowedPrincipals` revocado; un **manifiesto JSON de S3** (≤1,000 ficheros) es un volcado de ficheros sin catálogo, sin metadatos de Iceberg y sin gobernanza; **Redshift/Spectrum** cubre la concurrencia densa y lleva propagación de identidad de confianza.
 > 7. **La cadena de contenido tiene una sola dirección:** dataset (modo, SQL, RLS adjunta aquí) → análisis (editable, 500 campos calculados, el what-if vive solo aquí) → cuadro de mando publicado (solo lectura, hasta 1,000 versiones) → tema (CLASSIC, MIDNIGHT, SEASIDE, RAINIER) → carpeta, donde **las carpetas compartidas restringidas son solo API y no contienen agentes de chat**.
-> 8. **La construcción del capstone funciona de extremo a extremo:** tabla gold de ventas en Iceberg → concesiones de LF a autores y al rol de servicio → dataset de SPICE a **5.68 GB lógicos** dentro de un pool de 20 GB → refresh diario a las 04:00 más `CreateIngestion` dirigido por eventos → `rls_region_rules` marcada `UseAs: RLS_RULES` → verificada para autor, gerente de la UE y exportación CSV → cuadro de mando publicado con previsión y anomalía — **$172.45 al mes** para 2 Authors, 40 Readers, ingesta y métricas.
-> 9. **Diecisiete capas, un orden:** almacenamiento y formatos, ingesta, transformación y orquestación, gobernanza y seguridad, consulta, después BI, después coste — la hoja de ruta de 30/60/90 existe porque no puedes conceder sobre una ubicación no registrada, refrescar antes de que exista una tabla ni restringir una columna numérica; y el etiquetado de coste cierra el círculo porque es la única fase que puede poner precio a las otras dieciséis.
-> 10. **Lee los casos como casos:** Trustly (consultado 2026-10-11) reporta **insights 4x más rápidos, 50 % menos de coste, de 80 a 300 usuarios, cuadros de mando de 15 minutos en lugar de tres al día, y 15,000 preguntas de Amazon Q con un 89 % de precisión** — un resultado de cliente, no una garantía; la misma disciplina se aplica a la reducción del 85 % en gastos de BI de Rekor y a las cargas un 90 % más rápidas de Whole Foods. Sus economías son reproducibles: con 300 lectores el punto de equilibrio entre plazas y sesiones está en **6 sesiones por lector al mes** — aritmética sobre tarifas publicadas, nunca una fórmula de AWS.
+> 8. **La construcción del capstone funciona de extremo a extremo:** tabla gold de ventas en Iceberg → concesiones de LF a autores y al rol de servicio → dataset de SPICE a **5.68 GB lógicos** dentro de un pool de 20 GB → refresh diario a las 04:00 más `CreateIngestion` dirigido por eventos → `rls_region_rules` marcada `UseAs: RLS_RULES` → verificada para autor, gerente de la UE y exportación CSV → cuadro de mando publicado con previsión y anomalía: **$172.45 al mes** para 2 Authors, 40 Readers, ingesta y métricas.
+> 9. **Diecisiete capas, un orden:** almacenamiento y formatos, ingesta, transformación y orquestación, gobernanza y seguridad, consulta, después BI, después coste: la hoja de ruta de 30/60/90 existe porque no puedes conceder sobre una ubicación no registrada, refrescar antes de que exista una tabla ni restringir una columna numérica; y el etiquetado de coste cierra el círculo porque es la única fase que puede poner precio a las otras dieciséis.
+> 10. **Lee los casos como casos:** Trustly (consultado 2026-10-11) reporta **insights 4x más rápidos, 50 % menos de coste, de 80 a 300 usuarios, cuadros de mando de 15 minutos en lugar de tres al día, y 15,000 preguntas de Amazon Q con un 89 % de precisión**, un resultado de cliente, no una garantía; la misma disciplina se aplica a la reducción del 85 % en gastos de BI de Rekor y a las cargas un 90 % más rápidas de Whole Foods. Sus economías son reproducibles: con 300 lectores el punto de equilibrio entre plazas y sesiones está en **6 sesiones por lector al mes**, aritmética sobre tarifas publicadas, nunca una fórmula de AWS.

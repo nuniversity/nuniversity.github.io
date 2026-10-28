@@ -14,7 +14,7 @@ Introduced by Barbara Liskov in 1987, the Liskov Substitution Principle is the t
 
 ## The Essence of LSP
 
-If you have a function that works with a base class, it should work correctly with any of its subclasses — without knowing which subclass it is.
+If you have a function that works with a base class, it should work correctly with any of its subclasses: without knowing which subclass it is.
 
 ```python
 def process_shape(shape: Shape) -> None:
@@ -22,7 +22,7 @@ def process_shape(shape: Shape) -> None:
     print(f"Perimeter: {shape.perimeter()}")
 ```
 
-This function should work correctly for `Rectangle`, `Circle`, `Triangle` — any subclass of `Shape`. If a subclass breaks this expectation, it violates LSP.
+This function should work correctly for `Rectangle`, `Circle`, `Triangle`: any subclass of `Shape`. If a subclass breaks this expectation, it violates LSP.
 
 ## BEFORE: The Classic Rectangle-Square Problem
 
@@ -93,8 +93,8 @@ flowchart TD
 
 | Method | Rectangle Postcondition | Square Postcondition | LSP? |
 |--------|------------------------|---------------------|------|
-| `set_width(w)` | `width == w` | `width == w` AND `height == w` | Violation — stronger constraint |
-| `set_height(h)` | `height == h` | `height == h` AND `width == h` | Violation — stronger constraint |
+| `set_width(w)` | `width == w` | `width == w` AND `height == w` | Violation: stronger constraint |
+| `set_height(h)` | `height == h` | `height == h` AND `width == h` | Violation: stronger constraint |
 
 ### AFTER: LSP-Compliant Design
 

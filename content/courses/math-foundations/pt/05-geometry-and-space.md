@@ -14,7 +14,7 @@ difficulty: "beginner"
 
 ## Geometria: Mais que Formas
 
-A geometria é uma das partes mais visuais e tangíveis da matemática. Ela estuda pontos, linhas, superfícies e sólidos — tudo o que podemos ver e tocar.
+A geometria é uma das partes mais visuais e tangíveis da matemática. Ela estuda pontos, linhas, superfícies e sólidos: tudo o que podemos ver e tocar.
 
 A geometria grega é famosa, mas a geometria egípcia era prática e antiga. O Papiro de Rhind mostra que eles calculavam a área de um círculo usando (16/9)² ≈ 3.16, uma boa aproximação de π. Matemáticos indianos como Aryabhata calcularam π como 3.1416 em 499 d.C.
 

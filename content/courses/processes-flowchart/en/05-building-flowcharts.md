@@ -161,7 +161,7 @@ flowchart TD
 ```
 
 > [!NOTE] Security Note
-> Notice that when the email is not found, we show a "generic message" rather than "email not found." This is a security best practice — don't reveal whether an email exists in your system.
+> Notice that when the email is not found, we show a "generic message" rather than "email not found." This is a security best practice: don't reveal whether an email exists in your system.
 
 ## Step-by-Step Example 3: API Request Processing
 
@@ -386,7 +386,7 @@ flowchart TD
 - Use **common patterns** like validation loops, retry logic, and parallel processing
 - **Review your flowchart** against the actual process to ensure accuracy
 - **Mermaid** is an excellent tool for creating version-controlled flowcharts
-- Practice makes perfect — the more flowcharts you build, the better you'll get
+- Practice makes perfect: the more flowcharts you build, the better you'll get
 
 > [!SUCCESS] You've Completed Lesson 5
-> You now know how to build flowcharts from scratch. In the final lesson of this course, we'll explore **process optimization** — how to use flowcharts to identify bottlenecks and improve processes.
+> You now know how to build flowcharts from scratch. In the final lesson of this course, we'll explore **process optimization**: how to use flowcharts to identify bottlenecks and improve processes.

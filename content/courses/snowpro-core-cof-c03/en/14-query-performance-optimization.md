@@ -1,12 +1,12 @@
 ---
-title: "Domain 4.2 — Optimizing Query Performance"
+title: "Domain 4.2, Optimizing Query Performance"
 description: "Learn Snowflake's performance optimization tools: Query Acceleration Service, Search Optimization Service, clustering keys, and Materialized Views. Know when and how to use each."
 order: 14
 difficulty: intermediate
 duration: "60 min"
 ---
 
-# Domain 4.2 — Optimizing Query Performance
+# Domain 4.2: Optimizing Query Performance
 
 ## Exam Weight
 
@@ -67,12 +67,12 @@ SHOW TABLES LIKE 'orders';
 - Join columns for large tables
 
 **Poor candidates:**
-- Very low cardinality (e.g., boolean columns — only 2 values)
-- Very high cardinality with random distribution (e.g., UUID primary keys — poor pruning)
+- Very low cardinality (e.g., boolean columns: only 2 values)
+- Very high cardinality with random distribution (e.g., UUID primary keys: poor pruning)
 - Columns rarely used in filters
 
 > [!WARNING]
-> Clustering keys trigger **Automatic Clustering** — a background service that consumes credits continuously. Only cluster tables where the query performance gain outweighs the cost.
+> Clustering keys trigger **Automatic Clustering**: a background service that consumes credits continuously. Only cluster tables where the query performance gain outweighs the cost.
 
 ### Reclustering Cost
 
@@ -149,7 +149,7 @@ SELECT * FROM SNOWFLAKE.ACCOUNT_USAGE.SEARCH_OPTIMIZATION_HISTORY;
 
 ## Query Acceleration Service (QAS)
 
-**Query Acceleration Service (QAS)** offloads portions of **outlier slow queries** to Snowflake's serverless compute — useful when a small number of queries take disproportionately long on a shared warehouse:
+**Query Acceleration Service (QAS)** offloads portions of **outlier slow queries** to Snowflake's serverless compute: useful when a small number of queries take disproportionately long on a shared warehouse:
 
 ### When to Use QAS
 
@@ -293,10 +293,10 @@ Query is slow because...
 
 **Q4.** Which clustering key candidate would provide the WORST pruning for a 1-billion-row orders table?
 
-- A) `(order_date)` — date of order
-- B) `(region)` — geographic region (20 values)
-- C) `(order_uuid)` — randomly generated UUID primary key ✅
-- D) `(product_category)` — 50 categories
+- A) `(order_date)`: date of order
+- B) `(region)`: geographic region (20 values)
+- C) `(order_uuid)`: randomly generated UUID primary key ✅
+- D) `(product_category)`: 50 categories
 
 **Q5.** Which Snowflake feature requires Enterprise edition for all of these capabilities: Materialized Views, Search Optimization, and Query Acceleration?
 

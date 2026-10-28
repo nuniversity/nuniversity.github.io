@@ -1,12 +1,12 @@
 ---
-title: "GROUP BY y HAVING — Agrupando y Filtrando Agregados"
+title: "GROUP BY y HAVING, Agrupando y Filtrando Agregados"
 description: "Domina GROUP BY, funciones agregadas (COUNT, SUM, AVG, MIN, MAX) y entiende HAVING vs WHERE"
 order: 8
 duration: "20-30 minutos"
 difficulty: "beginner"
 ---
 
-# GROUP BY y HAVING — Agrupando y Filtrando Agregados
+# GROUP BY y HAVING: Agrupando y Filtrando Agregados
 
 Los datos brutos son ruidosos. La agregación te permite resumir miles de filas en métricas significativas: totales, promedios, conteos y extremos.
 
@@ -34,7 +34,7 @@ FROM employees;
 > [!NOTE]
 > Las funciones agregadas ignoran valores `NULL` (excepto `COUNT(*)` que cuenta filas, no valores). `AVG(NULL, 10, 20)` = 15, no 10.
 
-## GROUP BY — Agrupando Filas
+## GROUP BY: Agrupando Filas
 
 `GROUP BY` divide filas en grupos y aplica funciones agregadas a cada grupo:
 
@@ -86,7 +86,7 @@ GROUP BY department;
 
 Orden de filtrado: `WHERE` → `GROUP BY` → funciones agregadas
 
-## HAVING — Filtrando Grupos
+## HAVING: Filtrando Grupos
 
 `WHERE` no puede filtrar resultados agregados porque los agregados aún no existen cuando `WHERE` se ejecuta. Usa `HAVING`:
 
@@ -197,13 +197,13 @@ ORDER BY return_rate_pct DESC;
 
 Entender el orden en que SQL procesa las cláusulas te ayuda a escribir consultas correctas:
 
-1. `FROM` / `JOIN` — identificar tablas de origen
-2. `WHERE` — filtrar filas individuales
-3. `GROUP BY` — agrupar filas
-4. `HAVING` — filtrar grupos
-5. `SELECT` — calcular expresiones y alias
-6. `ORDER BY` — ordenar resultados
-7. `LIMIT` / `OFFSET` — paginar
+1. `FROM` / `JOIN`: identificar tablas de origen
+2. `WHERE`: filtrar filas individuales
+3. `GROUP BY`: agrupar filas
+4. `HAVING`: filtrar grupos
+5. `SELECT`: calcular expresiones y alias
+6. `ORDER BY`: ordenar resultados
+7. `LIMIT` / `OFFSET`: paginar
 
 Esto explica por qué `WHERE` no puede usar alias de SELECT, pero `ORDER BY` sí.
 

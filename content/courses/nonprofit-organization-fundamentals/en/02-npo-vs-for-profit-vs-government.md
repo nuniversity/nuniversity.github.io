@@ -104,10 +104,10 @@ Understanding the fundamental differences between these three types of organizat
 
 ## Common Misconceptions
 
-- ❌ "Non-profits cannot make a profit": False — they can earn surplus, but must reinvest it in the mission
-- ❌ "For-profits cannot have social missions": False — many incorporate social/environmental goals (see: B-Corps, social enterprises)
-- ❌ "Government and non-profits are the same": False — different governance, funding, and accountability structures
-- ❌ "Tax-exempt means no tax filing": False — non-profits must still file annual information returns (e.g., Form 990)
+- ❌ "Non-profits cannot make a profit": False; they can earn surplus, but must reinvest it in the mission
+- ❌ "For-profits cannot have social missions": False: many incorporate social/environmental goals (see: B-Corps, social enterprises)
+- ❌ "Government and non-profits are the same": False: different governance, funding, and accountability structures
+- ❌ "Tax-exempt means no tax filing": False: non-profits must still file annual information returns (e.g., Form 990)
 
 ## Exam Context
 

@@ -8,14 +8,14 @@ difficulty: "advanced"
 
 # Introduction to Domain-Driven Design
 
-Domain-Driven Design (DDD) is a software development approach introduced by Eric Evans in his seminal 2003 book *Domain-Driven Design: Tackling Complexity in the Heart of Software*. DDD emphasizes that the **core complexity** of most software projects lies not in technical infrastructure but in the domain itself — the business problem the software aims to solve.
+Domain-Driven Design (DDD) is a software development approach introduced by Eric Evans in his seminal 2003 book *Domain-Driven Design: Tackling Complexity in the Heart of Software*. DDD emphasizes that the **core complexity** of most software projects lies not in technical infrastructure but in the domain itself: the business problem the software aims to solve.
 
 > [!NOTE]
 > DDD is not a technology, framework, or architecture pattern. It is a **philosophy and methodology** that places the domain model at the center of software design. The goal is to create software that reflects the mental models of domain experts.
 
 ## The Origins of DDD
 
-DDD emerged from observing failed software projects. The root cause was almost never bad technology — it was **miscommunication** between domain experts (business people) and developers. Each group spoke a different language, leading to models that did not match reality.
+DDD emerged from observing failed software projects. The root cause was almost never bad technology; it was **miscommunication** between domain experts (business people) and developers. Each group spoke a different language, leading to models that did not match reality.
 
 | Era | Problem | Solution |
 |-----|---------|----------|
@@ -233,7 +233,7 @@ class CartItem:
 
 DDD requires a shift in how developers think about software:
 
-1. **Model exploration**: The domain model is not designed upfront — it emerges through collaboration
+1. **Model exploration**: The domain model is not designed upfront; it emerges through collaboration
 2. **Continuous refinement**: The model evolves as understanding deepens
 3. **Bounded contexts**: Different parts of the system may have different models
 4. **Language matters**: The words you use shape the model you build
@@ -243,7 +243,7 @@ DDD requires a shift in how developers think about software:
 
 ## The Role of Domain Experts
 
-Domain experts are the most valuable resource in a DDD project. They are not just stakeholders — they are **co-creators** of the domain model.
+Domain experts are the most valuable resource in a DDD project. They are not just stakeholders; they are **co-creators** of the domain model.
 
 ```mermaid
 sequenceDiagram
@@ -518,7 +518,7 @@ DDD is best learned through a combination of theory and practice. Essential reso
 
 3. **Domain expert interview**: Write down 5 questions you would ask a domain expert for an online banking system. What aspects of the domain would you explore?
 
-4. **Knowledge crunching simulation**: Given this business rule — "A customer cannot place an order if their account is past due, unless the order total is under $50 and they have been a customer for more than 2 years" — model this as Python code with explicit domain rules.
+4. **Knowledge crunching simulation**: Given this business rule, "A customer cannot place an order if their account is past due, unless the order total is under $50 and they have been a customer for more than 2 years", model this as Python code with explicit domain rules.
 
 5. **Strategic vs tactical**: For each of the following, classify as strategic or tactical DDD: Bounded Context, Repository, Ubiquitous Language, Context Mapping, Entity, Domain Event, Subdomain, Aggregate.
 
@@ -540,4 +540,4 @@ DDD is best learned through a combination of theory and practice. Essential reso
    ```
 
 > [!SUCCESS]
-> You have completed Lesson 1. You now understand the foundations of Domain-Driven Design — its origins, the distinction between strategic and tactical design, and the mindset shifts required. The next lessons will dive deep into each concept.
+> You have completed Lesson 1. You now understand the foundations of Domain-Driven Design: its origins, the distinction between strategic and tactical design, and the mindset shifts required. The next lessons will dive deep into each concept.

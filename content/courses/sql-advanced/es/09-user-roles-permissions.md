@@ -148,7 +148,7 @@ FROM users;
 | Base de datos | Soporte TDE |
 |---|---|
 | PostgreSQL | Vía extensión `pg_tde` o cifrado de sistema de archivos |
-| SQL Server | TDE — transparente a nivel de almacenamiento |
+| SQL Server | TDE: transparente a nivel de almacenamiento |
 | Oracle | Cifrado de tablespace TDE |
 | MySQL | Cifrado de tablespace InnoDB |
 
@@ -213,7 +213,7 @@ SELECT * FROM users WHERE email = ''; DROP TABLE users; --'
 
 | Técnica | Descripción |
 |---|---|
-| **Prepared statements** | Más efectivo — separa código de datos |
+| **Prepared statements** | Más efectivo: separa código de datos |
 | **Validación de entrada** | Verificación de tipo, límites de tamaño, listas permitidas |
 | **Funciones de escape** | `quote_ident()`, `quote_literal()` en PostgreSQL |
 | **Menor privilegio** | Usuario de la aplicación debe tener permisos mínimos |

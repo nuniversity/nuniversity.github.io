@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Bucles (for y while)
 
-Los bucles te permiten repetir código múltiples veces — esencial para procesar datos, automatizar tareas y construir programas eficientes.
+Los bucles te permiten repetir código múltiples veces: esencial para procesar datos, automatizar tareas y construir programas eficientes.
 
 ## El Bucle for
 
@@ -66,11 +66,11 @@ print("Access granted!")
 ```
 
 > [!WARNING]
-> ¡Asegúrate siempre de que la condición del bucle while eventualmente se vuelva False — de lo contrario creas un bucle infinito!
+> ¡Asegúrate siempre de que la condición del bucle while eventualmente se vuelva False: de lo contrario creas un bucle infinito!
 
 ## break y continue
 
-### break — Sale del bucle completamente
+### break: Sale del bucle completamente
 ```python
 for i in range(100):
     if i == 5:
@@ -79,7 +79,7 @@ for i in range(100):
 # Imprime: 0 1 2 3 4
 ```
 
-### continue — Salta a la siguiente iteración
+### continue: Salta a la siguiente iteración
 ```python
 for i in range(10):
     if i % 2 == 0:
@@ -117,7 +117,7 @@ for n in range(2, 10):
         print(f"{n} is prime")
 ```
 
-## enumerate — Bucle con Índice
+## enumerate: Bucle con Índice
 
 ```python
 colors = ["red", "green", "blue"]
@@ -126,7 +126,7 @@ for index, color in enumerate(colors):
 # 0: red, 1: green, 2: blue
 ```
 
-## zip — Bucle con Múltiples Listas Simultáneamente
+## zip: Bucle con Múltiples Listas Simultáneamente
 
 ```python
 names = ["Alice", "Bob", "Charlie"]

@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Complete CI/CD Pipeline
 
-This capstone lesson brings together everything you've learned — testing, coverage, linting, formatting, type checking, and security scanning — into a complete CI/CD pipeline. You'll build a professional-grade GitHub Actions workflow with quality gates at every stage.
+This capstone lesson brings together everything you've learned, testing, coverage, linting, formatting, type checking, and security scanning, into a complete CI/CD pipeline. You'll build a professional-grade GitHub Actions workflow with quality gates at every stage.
 
 ## Pipeline Architecture
 

@@ -30,7 +30,7 @@ Assistentes tradicionais de codificação com IA são frequentemente limitados a
 | **Custo** | Assinatura necessária | Gratuito (pague apenas pelo uso da API) |
 
 > [!TIP]
-> Pense no OpenCode como o "VS Code dos assistentes de codificação com IA" — uma plataforma flexível e extensível que se adapta ao seu fluxo de trabalho em vez de forçá-lo a uma maneira específica de trabalhar.
+> Pense no OpenCode como o "VS Code dos assistentes de codificação com IA": uma plataforma flexível e extensível que se adapta ao seu fluxo de trabalho em vez de forçá-lo a uma maneira específica de trabalhar.
 
 ---
 
@@ -224,4 +224,4 @@ O OpenCode é ideal para:
 - O ciclo de vida da solicitação flui através do roteamento de agentes, seleção de ferramentas, verificações de permissão e execução
 - Habilidades são pacotes de instruções reutilizáveis que ensinam agentes tarefas específicas
 - MCP permite integração com ferramentas e fontes de dados externas
-- OpenCode é gratuito para usar — você só paga pelo uso da API LLM
+- OpenCode é gratuito para usar: você só paga pelo uso da API LLM

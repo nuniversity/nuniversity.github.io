@@ -100,7 +100,7 @@ flowchart LR
 
 ## Weak References
 
-`weakref` allows referencing an object without increasing its ref count—ideal for caches and observers.
+`weakref` allows referencing an object without increasing its ref count: ideal for caches and observers.
 
 ```python
 import weakref

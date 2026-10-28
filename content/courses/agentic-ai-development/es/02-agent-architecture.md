@@ -55,7 +55,7 @@ flowchart TD
 ```
 
 > [!NOTE]
-> El ciclo del agente no es necesariamente lineal. Los agentes modernos usan replanificación dinámica: si un paso falla, el agente no reinicia — vuelve a evaluar el plan desde el estado actual y se adapta.
+> El ciclo del agente no es necesariamente lineal. Los agentes modernos usan replanificación dinámica: si un paso falla, el agente no reinicia: vuelve a evaluar el plan desde el estado actual y se adapta.
 
 ---
 

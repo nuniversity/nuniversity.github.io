@@ -26,7 +26,7 @@ Problems:
 - **Delete anomaly**: Deleting an order also deletes customer info
 
 > [!NOTE]
-> These are called **anomalies** — data inconsistencies caused by poor design. Normalization eliminates them.
+> These are called **anomalies**: data inconsistencies caused by poor design. Normalization eliminates them.
 
 ## Entity-Relationship (ER) Diagrams
 
@@ -168,7 +168,7 @@ Tables needed:
 - `authors(id, name, email, bio)`
 - `posts(id, author_id, title, body, published_at)`
 - `categories(id, name, slug)`
-- `post_categories(post_id, category_id)` — junction table
+- `post_categories(post_id, category_id)`: junction table
 - `comments(id, post_id, author_name, body, created_at)`
 
 ```sql
@@ -253,7 +253,7 @@ categories (id, name)
 The result: 5 tables, zero redundancy, clear relationships.
 
 > [!SUCCESS]
-> Good design is invisible — you only notice it when it's missing. Take time to plan before you write a single CREATE TABLE.
+> Good design is invisible; you only notice it when it's missing. Take time to plan before you write a single CREATE TABLE.
 
 ## Practice Questions
 

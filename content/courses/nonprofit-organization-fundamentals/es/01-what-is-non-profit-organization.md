@@ -88,7 +88,7 @@ En 2020, algunas organizaciones sin fines lucrativos comenzaron a usar microblog
 
 ## Nombres Alternativos
 
-Algunas organizaciones ofrecen nuevos términos positivos-sonantes para describir el sector. El término *[organización de sociedad civil](https://en.wikipedia.org/wiki/Civil_society_organization "Organización de sociedad civil")* (OSC) ha sido usado por un creciente número de organizaciones, incluyendo el *Center for the Study of Global Governance*. El término *organización del sector de ciudadanos* (OSC) también ha sido defendido para describir el sector — como un de ciudadanos, para ciudadanos — por organizaciones incluyendo [Ashoka: Innovators for the Public](https://en.wikipedia.org/wiki/Ashoka:_Innovators_for_the_Public "Ashoka: Innovators for the Public"). Defensores argumentan que estos términos describen el sector en sus propios términos, sin relying on terminology used for the government or business sectors. Sin embargo, uso de terminología por una ONG de lenguaje auto-descriptiva que no sea legalmente compatible corre el riesgo de confundir al público sobre las capacidades, capacidades y limitaciones de las ONGs.
+Algunas organizaciones ofrecen nuevos términos positivos-sonantes para describir el sector. El término *[organización de sociedad civil](https://en.wikipedia.org/wiki/Civil_society_organization "Organización de sociedad civil")* (OSC) ha sido usado por un creciente número de organizaciones, incluyendo el *Center for the Study of Global Governance*. El término *organización del sector de ciudadanos* (OSC) también ha sido defendido para describir el sector, como un de ciudadanos, para ciudadanos, por organizaciones incluyendo [Ashoka: Innovators for the Public](https://en.wikipedia.org/wiki/Ashoka:_Innovators_for_the_Public "Ashoka: Innovators for the Public"). Defensores argumentan que estos términos describen el sector en sus propios términos, sin relying on terminology used for the government or business sectors. Sin embargo, uso de terminología por una ONG de lenguaje auto-descriptiva que no sea legalmente compatible corre el riesgo de confundir al público sobre las capacidades, capacidades y limitaciones de las ONGs.
 
 ### Mismanagement Financeiro
 
@@ -110,7 +110,7 @@ Algunas personas creen que la mayoría de las ONGs nunca será capaz de igualar 
 > 2. Superávits de receita deben ser reinvertidos en la misión (restricción de não-distribuição)
 > 3. Estructuras legales incluyen fideicomiso, asociación, corporativa o cooperativa
 > 4. Distinción clave de lucro: ninguna distribución de lucro para propietarios
-> 5. Prestación de cuentas ante doadores, beneficiarios, reguladores — y no accionistas
+> 5. Prestación de cuentas ante doadores, beneficiarios, reguladores, y no accionistas
 
 ## Preguntas Prácticas
 

@@ -636,4 +636,4 @@ print(f"Speedup: {bad_time / good_time:.1f}x")
 - Build mutable locally → freeze at boundaries → process immutably
 
 > [!SUCCESS]
-> Immutability isn't just a theoretical ideal — it's a practical tool that eliminates bugs, simplifies testing, and makes your code easier to reason about. In the next lesson, you'll combine immutability with declarative patterns for maximum expressiveness.
+> Immutability isn't just a theoretical ideal; it's a practical tool that eliminates bugs, simplifies testing, and makes your code easier to reason about. In the next lesson, you'll combine immutability with declarative patterns for maximum expressiveness.

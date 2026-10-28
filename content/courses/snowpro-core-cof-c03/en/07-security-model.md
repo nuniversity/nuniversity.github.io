@@ -1,16 +1,16 @@
 ---
-title: "Domain 2.1 — Snowflake Security Model and Principles"
+title: "Domain 2.1, Snowflake Security Model and Principles"
 description: "Master Snowflake's security model: Role-Based Access Control (RBAC), Discretionary Access Control (DAC), securable object hierarchy, system-defined roles, authentication methods, and network policies."
 order: 7
 difficulty: intermediate
 duration: "80 min"
 ---
 
-# Domain 2.1 — Snowflake Security Model and Principles
+# Domain 2.1: Snowflake Security Model and Principles
 
 ## Exam Weight
 
-**Domain 2.0 — Account Management and Data Governance** accounts for **~20%** of the exam. Security is one of the most heavily tested topics.
+**Domain 2.0: Account Management and Data Governance** accounts for **~20%** of the exam. Security is one of the most heavily tested topics.
 
 > [!NOTE]
 > This lesson maps to **Exam Objective 2.1**: *Explain Snowflake security model and principles*, including RBAC, DAC, securable object hierarchy, network policies, authentication methods, system-defined roles, functional roles, secondary roles, account identifiers, and logging/tracing.
@@ -53,13 +53,13 @@ GRANT SELECT ON TABLE analytics.public.customer_data TO ROLE analyst_role;
 ```
 
 > [!NOTE]
-> DAC means you don't need SYSADMIN to manage every grant. Object owners can self-manage access to their objects — this enables **federated administration**.
+> DAC means you don't need SYSADMIN to manage every grant. Object owners can self-manage access to their objects; this enables **federated administration**.
 
 ---
 
 ## Securable Object Hierarchy
 
-Every Snowflake object is a **securable object** — privileges can be granted on it. Objects inherit from their parent container:
+Every Snowflake object is a **securable object**: privileges can be granted on it. Objects inherit from their parent container:
 
 ```mermaid
 graph TD
@@ -125,7 +125,7 @@ Snowflake provides pre-built system roles with a fixed privilege hierarchy:
 | `SECURITYADMIN` | Manages users and roles | Create/manage users, roles, grants |
 | `SYSADMIN` | Manages warehouses and databases | Create warehouses, databases, schemas, tables |
 | `USERADMIN` | Limited user management | Create users and roles only |
-| `PUBLIC` | Default role for all users | Minimal — every user has this role |
+| `PUBLIC` | Default role for all users | Minimal: every user has this role |
 
 **Role inheritance hierarchy:**
 
@@ -154,7 +154,7 @@ flowchart TD
 
 ### Account Roles
 
-Account roles are scoped to the **entire account** — they can grant access to any object in the account:
+Account roles are scoped to the **entire account**; they can grant access to any object in the account:
 
 ```sql
 -- Create a custom account role
@@ -208,7 +208,7 @@ When secondary roles are active, the user has the **union of all privileges** fr
 
 ### Username + Password
 
-Basic authentication — username and password. Least secure but simplest.
+Basic authentication: username and password. Least secure but simplest.
 
 ```sql
 CREATE USER jane PASSWORD = 'SecurePass123!' MUST_CHANGE_PASSWORD = TRUE;
@@ -230,7 +230,7 @@ ALTER ACCOUNT SET MFA_ENROLLMENT = REQUIRED;
 
 Snowflake integrates with enterprise **Identity Providers (IdPs)** via **SAML 2.0**:
 - Okta, Azure AD, OneLogin, Ping Identity, etc.
-- Users authenticate via the IdP — Snowflake validates the SAML assertion
+- Users authenticate via the IdP: Snowflake validates the SAML assertion
 - No Snowflake password required
 
 ```sql
@@ -262,7 +262,7 @@ CREATE SECURITY INTEGRATION tableau_oauth
 
 ### Key-Pair Authentication
 
-RSA key-pair authentication for **service accounts and programmatic access** — more secure than passwords for automation:
+RSA key-pair authentication for **service accounts and programmatic access**: more secure than passwords for automation:
 
 ```bash
 # Generate key pair

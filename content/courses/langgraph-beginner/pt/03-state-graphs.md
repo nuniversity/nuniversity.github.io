@@ -127,7 +127,7 @@ Cada nó:
 | `return {}` | Nenhuma alteração no estado |
 
 [!WARNING]
-Atualizações de estado usam uma **mesclagem superficial**. Se o estado tem dicts aninhados, retornar `{"nested": {"inner": 1}}` substitui a chave `nested` inteira — não faz mesclagem profunda. Para mesclagens profundas, você precisa de redutores personalizados (abordado no curso Intermediário).
+Atualizações de estado usam uma **mesclagem superficial**. Se o estado tem dicts aninhados, retornar `{"nested": {"inner": 1}}` substitui a chave `nested` inteira: não faz mesclagem profunda. Para mesclagens profundas, você precisa de redutores personalizados (abordado no curso Intermediário).
 
 ---
 
@@ -311,7 +311,7 @@ print(result["step_count"])  # 2
 ```
 
 [!SUCCESS]
-Este padrão — definir estado, adicionar nós, adicionar arestas, compilar, invocar — é a fundação de toda aplicação LangGraph. Cada agente que você construir seguirá estes cinco passos.
+Este padrão, definir estado, adicionar nós, adicionar arestas, compilar, invocar, é a fundação de toda aplicação LangGraph. Cada agente que você construir seguirá estes cinco passos.
 
 ---
 
@@ -461,7 +461,7 @@ Sempre defina um `recursion_limit` para grafos com loops. O padrão é geralment
   "question": "Como LangGraph mescla atualizações de estado de um nó?",
   "options": [
     "Mescla profundamente dicionários aninhados",
-    "Mesclagem superficial — substitui chaves de nível superior",
+    "Mesclagem superficial: substitui chaves de nível superior",
     "Adiciona a todos os valores de lista",
     "Sobrescreve o estado inteiro"
   ],
@@ -528,6 +528,6 @@ Sempre defina um `recursion_limit` para grafos com loops. O padrão é geralment
 - Arestas (add_edge, START, END) definem a topologia de execução
 - compile() valida e congela o grafo em um objeto executável
 - invoke() executa o grafo; stream() mostra estados intermediários
-- Atualizações de estado usam mesclagem superficial — chaves de nível superior são substituídas
+- Atualizações de estado usam mesclagem superficial: chaves de nível superior são substituídas
 - Sempre defina recursion_limit para grafos com loops
 - Use get_graph().draw_mermaid() para visualizar seu grafo

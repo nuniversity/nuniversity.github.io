@@ -1,6 +1,6 @@
 ---
 title: "Borrowing and References"
-description: "Learn references, mutable references, borrowing rules, and slices — the key to using data without taking ownership"
+description: "Learn references, mutable references, borrowing rules, and slices, the key to using data without taking ownership"
 order: 7
 duration: "30 minutes"
 difficulty: "beginner"
@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Borrowing and References
 
-Borrowing allows you to use a value without taking ownership. Instead of moving data, you pass a **reference** — a pointer that follows strict rules enforced at compile time.
+Borrowing allows you to use a value without taking ownership. Instead of moving data, you pass a **reference**: a pointer that follows strict rules enforced at compile time.
 
 ## References (Immutable Borrowing)
 
@@ -163,7 +163,7 @@ fn main() {
 }
 ```
 
-## Slices — References to Contiguous Elements
+## Slices: References to Contiguous Elements
 
 Slices are references to a contiguous sequence within a collection. They are **fat pointers** (pointer + length).
 

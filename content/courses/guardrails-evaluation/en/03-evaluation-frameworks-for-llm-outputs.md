@@ -224,7 +224,7 @@ builder.save("eval_dataset.json")
 
 ### BLEU (Bilingual Evaluation Understudy)
 
-Measures n-gram precision between generated and reference text. Range: 0–1. Originally designed for machine translation.
+Measures n-gram precision between generated and reference text. Range: 0 to 1. Originally designed for machine translation.
 
 ```python
 # bleu_example.py
@@ -299,7 +299,7 @@ print(f"METEOR score: {score:.3f}")
 
 ### BERTScore
 
-Leverages pre-trained BERT embeddings to compute semantic similarity between candidate and reference — captures meaning even when wording differs completely.
+Leverages pre-trained BERT embeddings to compute semantic similarity between candidate and reference: captures meaning even when wording differs completely.
 
 ```python
 # bertscore_example.py
@@ -336,7 +336,7 @@ for i, (p, r, f) in enumerate(zip(P, R, F1)):
 - METEOR improves on synonym handling but still misses semantic meaning entirely
 - None detect hallucinations, toxicity, or factual accuracy directly
 - All require reference texts, which are expensive to produce at scale
-- All are vulnerable to stylistic differences — a perfectly valid paraphrase may score poorly
+- All are vulnerable to stylistic differences: a perfectly valid paraphrase may score poorly
 
 ---
 
@@ -537,11 +537,11 @@ human_rubric = {
 
 | Metric     | Type        | Measures        | Range    | Strengths                      | Weaknesses                     | Best Use Case          |
 |-----------|-------------|-----------------|----------|--------------------------------|--------------------------------|------------------------|
-| BLEU      | N-gram      | Precision       | 0–1      | Fast, deterministic            | Ignores recall, semantics      | Machine translation    |
-| ROUGE     | N-gram      | Recall          | 0–1      | Good for summarization         | Ignores fluency, order         | Summarization          |
-| METEOR    | N-gram+syn  | F-score         | 0–1      | Synonym handling, stem, order  | Complexity, still surface-level| Translation, captioning|
-| BERTScore | Embedding   | Semantic F1     | 0–1      | Captures paraphrases, meaning  | GPU required, slower           | Semantic similarity    |
-| LLM-as-judge | Model   | Semantic quality| 1–5      | Captures nuance, customizable  | Expensive, biased by judge     | Open-ended QA, chat    |
+| BLEU | N-gram | Precision | 0 to 1 | Fast, deterministic | Ignores recall, semantics | Machine translation |
+| ROUGE | N-gram | Recall | 0 to 1 | Good for summarization | Ignores fluency, order | Summarization |
+| METEOR | N-gram+syn | F-score | 0 to 1 | Synonym handling, stem, order | Complexity, still surface-level| Translation, captioning|
+| BERTScore | Embedding | Semantic F1 | 0 to 1 | Captures paraphrases, meaning | GPU required, slower | Semantic similarity |
+| LLM-as-judge | Model | Semantic quality| 1 to 5 | Captures nuance, customizable | Expensive, biased by judge | Open-ended QA, chat |
 | Human     | Manual      | All dimensions  | Subjective| Gold standard for quality      | Slow, expensive, inconsistent  | Safety, brand, UX      |
 
 ---
@@ -560,7 +560,7 @@ human_rubric = {
     "BLEU only works for translation tasks"
   ],
   "correct": 0,
-  "explanation": "BLEU measures n-gram precision — how many words/word-sequences overlap with a reference. It does not measure semantic quality, factual accuracy, or relevance to the user's question."
+  "explanation": "BLEU measures n-gram precision: how many words/word-sequences overlap with a reference. It does not measure semantic quality, factual accuracy, or relevance to the user's question."
 }
 ```
 
@@ -723,5 +723,5 @@ class EvalPipeline:
 > - LLM-as-judge captures semantic quality but introduces cost and judge-model bias; use temperature=0 for reproducibility.
 > - Human evaluation is the gold standard but scales poorly; use it strategically for subjective dimensions.
 > - A representative evaluation dataset is more important than a large one; invest in quality annotation with stratified sampling.
-> - Combine multiple evaluation methods — no single metric tells the full story. Use n-gram metrics for speed, BERTScore for semantics, and LLM-as-judge for nuanced quality.
+> - Combine multiple evaluation methods: no single metric tells the full story. Use n-gram metrics for speed, BERTScore for semantics, and LLM-as-judge for nuanced quality.
 > - Automate the evaluation pipeline to run on every release, tracking trends over time and alerting on regressions.

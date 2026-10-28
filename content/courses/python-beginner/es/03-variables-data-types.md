@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Variables y Tipos de Datos
 
-Las variables son contenedores para almacenar datos. Python tiene tipado dinámico, lo que significa que no necesitas declarar el tipo de una variable — Python lo infiere automáticamente.
+Las variables son contenedores para almacenar datos. Python tiene tipado dinámico, lo que significa que no necesitas declarar el tipo de una variable: Python lo infiere automáticamente.
 
 ## Variables
 
@@ -164,5 +164,5 @@ x = 3.14      # x ahora es float
 6. ¿Qué devuelve `"hello".upper()`?
 7. Verdadero o Falso: Python requiere que declares los tipos de las variables.
 8. ¿Qué representa `None` en Python?
-9. Convierte el float `99.9` a un entero — ¿cuál es el resultado?
+9. Convierte el float `99.9` a un entero: ¿cuál es el resultado?
 10. Escribe un nombre de variable en Python usando snake_case para la dirección de correo electrónico de un usuario.

@@ -16,7 +16,7 @@ The Interface Segregation Principle is the fourth SOLID principle. It states tha
 
 When an interface has many methods, implementing classes are forced to provide bodies for methods they don't need. This leads to empty implementations, `NotImplementedError` stubs, and confusing code.
 
-### BEFORE: ISP Violation — A Fat Interface
+### BEFORE: ISP Violation: A Fat Interface
 
 ```python
 from abc import ABC, abstractmethod
@@ -124,7 +124,7 @@ classDiagram
     note for RobotEmployee "Forced to implement\n4 unused methods!"
 ```
 
-### AFTER: ISP-Compliant — Segregated Interfaces
+### AFTER: ISP-Compliant: Segregated Interfaces
 
 ```python
 from abc import ABC, abstractmethod
@@ -497,7 +497,7 @@ class CompositeNotifier(EmailSender, SMSSender, PushSender, SlackSender):
 
 ## ISP and Python Protocols
 
-Python's `typing.Protocol` makes ISP natural — you don't even need explicit abstract base classes:
+Python's `typing.Protocol` makes ISP natural; you don't even need explicit abstract base classes:
 
 ```python
 from typing import Protocol
@@ -550,7 +550,7 @@ output(TextDocument())   # Works
 ```
 
 > [!TIP]
-> Python's structural subtyping (Protocols) naturally encourages ISP. Unlike nominal typing, a class doesn't need to declare it implements an interface — it just needs to have the right methods.
+> Python's structural subtyping (Protocols) naturally encourages ISP. Unlike nominal typing, a class doesn't need to declare it implements an interface; it just needs to have the right methods.
 
 ## When to Split Interfaces
 
@@ -812,4 +812,4 @@ class CheckoutService:
 - **Balance**: Split enough to avoid fat interfaces, but not so much that you create unnecessary complexity
 
 > [!SUCCESS]
-> ISP keeps your interfaces lean and your implementations honest. Each client depends on exactly what it needs — nothing more, nothing less.
+> ISP keeps your interfaces lean and your implementations honest. Each client depends on exactly what it needs: nothing more, nothing less.

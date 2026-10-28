@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Formateo de código
 
-El formateo de código es el aspecto más debatido y menos importante de la programación — y exactamente por eso debe estar **automatizado**. Formateadores como Black e isort eliminan por completo las discusiones de formateo al imponer un estilo consistente y legible por máquina.
+El formateo de código es el aspecto más debatido y menos importante de la programación, y exactamente por eso debe estar **automatizado**. Formateadores como Black e isort eliminan por completo las discusiones de formateo al imponer un estilo consistente y legible por máquina.
 
 ## ¿Por qué automatizar el formateo?
 
@@ -45,7 +45,7 @@ flowchart TD
 
 ## Black: el formateador sin concesiones
 
-Black es «el formateador de código Python sin concesiones». Tiene muy pocas opciones de configuración por diseño — produce una salida consistente sin importar quién lo ejecute.
+Black es «el formateador de código Python sin concesiones». Tiene muy pocas opciones de configuración por diseño: produce una salida consistente sin importar quién lo ejecute.
 
 ### Instalación
 
@@ -308,7 +308,7 @@ repos:
 
 ### ¡El orden importa!
 
-Ejecuta isort **antes** de Black — o configura isort con `profile = "black"`:
+Ejecuta isort **antes** de Black, o configura isort con `profile = "black"`:
 
 ```bash
 # Correct order: isort first, then black
@@ -564,14 +564,14 @@ sequenceDiagram
 
 ## Resumen
 
-- **Black** es el formateador sin concesiones — configuración mínima, salida consistente
+- **Black** es el formateador sin concesiones: configuración mínima, salida consistente
 - **isort** organiza los imports en secciones estándar (stdlib, third-party, first-party)
-- **Ejecuta siempre isort antes de Black** — o configura isort con `profile = "black"`
+- **Ejecuta siempre isort antes de Black**, o configura isort con `profile = "black"`
 - **La coma final mágica** controla el formato vertical frente al horizontal en Black
 - **Los hooks de pre-commit** automatizan el formateo antes de que el código se haga commit
 - **Las comprobaciones del CI** garantizan que el formateo nunca se olvide
 - **Ruff format** es un sustituto más rápido y directo de Black
-- **La consistencia gana a la perfección** — cualquier formato automatizado es mejor que los debates sobre formateo manual
+- **La consistencia gana a la perfección**: cualquier formato automatizado es mejor que los debates sobre formateo manual
 
 > [!SUCCESS]
 > El formateo automatizado elimina categorías enteras de comentarios de revisión de código. Con Black e isort, tu equipo dedica cero tiempo a debates de formateo y el 100% de la energía de revisión a lo que importa: la lógica, la arquitectura y la corrección.

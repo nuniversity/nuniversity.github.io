@@ -323,7 +323,7 @@ export function ThirtySixQuestionsClient({ lang, game, dict }: ThirtySixQuestion
                     }`}
                   >
                     <span className="font-medium">{set.name}</span>
-                    <span className="text-gray-500 text-sm ml-2">— {set.subtitle}</span>
+                    <span className="text-gray-500 text-sm ml-2">, {set.subtitle}</span>
                   </button>
                 ))}
               </div>

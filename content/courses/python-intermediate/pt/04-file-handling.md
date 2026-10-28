@@ -8,7 +8,7 @@ difficulty: "intermediário"
 
 # Manipulação de Arquivos e E/S
 
-E/S de arquivos é fundamental para quase toda aplicação Python — desde ler arquivos de configuração até processar grandes conjuntos de dados. A manipulação de arquivos do Python é limpa, poderosa e suporta múltiplos formatos.
+E/S de arquivos é fundamental para quase toda aplicação Python: desde ler arquivos de configuração até processar grandes conjuntos de dados. A manipulação de arquivos do Python é limpa, poderosa e suporta múltiplos formatos.
 
 ## A Função `open()`
 
@@ -29,7 +29,7 @@ file = open("example.txt", "x")    # Criação exclusiva (falha se existir)
 | `"w+"` | Sim | Sim | Sim | Sim | Início |
 | `"a+"` | Sim | Sim | Sim | Não | Fim |
 | `"x"` | Não | Sim | Sim (exclusivo) | Não | Início |
-| `"b"` | (modificador) | Modo binário | — | — | — |
+| `"b"` | (modificador) | Modo binário |: |: |: |
 
 > [!WARNING]
 > Sempre feche arquivos! A instrução `with` lida com isso automaticamente (veja abaixo).

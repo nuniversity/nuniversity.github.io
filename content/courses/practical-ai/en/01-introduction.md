@@ -7,7 +7,7 @@ difficulty: "beginner"
 author: "Google Gemini"
 ---
 
-## AI Explained - Your New Tech Superpower
+## AI Explained: Your New Tech Superpower
 
 Welcome! This course is about making AI your sidekick. Forget the complex coding and scary robots. We're going to treat AI like any other amazing tool: a **super-charged helper** that can save you time, spark ideas, and make life easier.
 
@@ -38,7 +38,7 @@ Not all AI is created equal. Think of these as different levels of tech "smarts"
 
 #### Hands-On Task
 
-Take a look at your phone. When you use **Google Maps** to avoid traffic, that's **ANI**. When **Netflix** tells you what to watch next, that's **ANI**. List one more ANI tool you used today—maybe a spam filter or face unlock—and give it a **funny nickname** based on its specific "job."
+Take a look at your phone. When you use **Google Maps** to avoid traffic, that's **ANI**. When **Netflix** tells you what to watch next, that's **ANI**. List one more ANI tool you used today, maybe a spam filter or face unlock, and give it a **funny nickname** based on its specific "job."
 
 ---
 
@@ -52,7 +52,7 @@ Take a look at your phone. When you use **Google Maps** to avoid traffic, that's
 
 Imagine teaching a toddler what a square is.
 * **Old-School Programming:** You'd have to write a rigid rule: "IF all four sides are equal AND all angles are 90 degrees, THEN it's a square."
-* **Machine Learning:** You just show the computer **millions of pictures**—some squares, some circles, some triangles—and tell it which ones are "square." The computer figures out its *own* internal rules.
+* **Machine Learning:** You just show the computer **millions of pictures**, some squares, some circles, some triangles, and tell it which ones are "square." The computer figures out its *own* internal rules.
 
 The result? ML models are **Prediction Machines**. They look at patterns in old data to predict what happens next.
 
@@ -85,7 +85,7 @@ This is the most important check-in: **AI is built by humans using human data, s
 - **Your takeaway:** Always treat AI output like a suggestion, **not the final word**. Your common sense is the ultimate filter.
 
 **The Privacy Pothole (What Happens to My Data?):**
-- **The Reality:** The data you put into many free AI tools is often used to *make the tool better*—meaning your ideas and information could become part of its learning.
+- **The Reality:** The data you put into many free AI tools is often used to *make the tool better*: meaning your ideas and information could become part of its learning.
 - **Actionable Tip:** If you wouldn't shout it in a busy coffee shop, **don't type it into a public AI chat box!** Never use public AI for passwords, sensitive company documents, or private health information.
 
 **The Automation Opportunity (AI is a Boost, not a Threat):**

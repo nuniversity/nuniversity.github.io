@@ -8,14 +8,14 @@ difficulty: "intermediário"
 
 # O que é Código Limpo?
 
-Código limpo é aquele fácil de ler, entender e manter. Não se trata de escrever linhas engenhosas ou exibir truques da linguagem — trata-se de comunicar a intenção claramente para outros desenvolvedores (incluindo você mesmo no futuro).
+Código limpo é aquele fácil de ler, entender e manter. Não se trata de escrever linhas engenhosas ou exibir truques da linguagem: trata-se de comunicar a intenção claramente para outros desenvolvedores (incluindo você mesmo no futuro).
 
 > [!NOTE]
 > Robert C. Martin (Uncle Bob) popularizou o termo em seu livro *Código Limpo*, mas a filosofia existe desde os primórdios da engenharia de software. A ideia central: **código é lido com muito mais frequência do que é escrito.**
 
 ## Por que o Código Limpo é Importante
 
-O software passa a maior parte de sua vida em modo de manutenção. Estudos mostram que desenvolvedores gastam **70–80% do tempo lendo código**, não escrevendo. Cada hora investida em escrever código limpo economiza dez horas de compreensão futura.
+O software passa a maior parte de sua vida em modo de manutenção. Estudos mostram que desenvolvedores gastam **70 to 80% do tempo lendo código**, não escrevendo. Cada hora investida em escrever código limpo economiza dez horas de compreensão futura.
 
 | Aspecto | Código Bagunçado | Código Limpo |
 |---------|-----------------|--------------|
@@ -28,7 +28,7 @@ O software passa a maior parte de sua vida em modo de manutenção. Estudos most
 ## A Regra do Escoteiro
 
 > [!TIP]
-> **"Deixe o acampamento mais limpo do que você encontrou."** — Escoteiros dos Estados Unidos
+> **"Deixe o acampamento mais limpo do que você encontrou."**: Escoteiros dos Estados Unidos
 
 Aplicado ao código: toda vez que você tocar em um módulo, deixe-o um pouco melhor do que antes. Corrija um problema de formatação, renomeie uma variável confusa, extraia uma pequena função. Pequenas melhorias se acumulam em ganhos enormes.
 
@@ -313,7 +313,7 @@ A versão refatorada reduziu as taxas de bugs em 60% e diminuiu o tempo de integ
 
 ## Mentalidade de Código Limpo
 
-Código limpo não é um destino — é uma prática contínua. Aqui estão os hábitos para cultivar:
+Código limpo não é um destino: é uma prática contínua. Aqui estão os hábitos para cultivar:
 
 1. **Leia antes de escrever**: Passe 10 minutos lendo código existente antes de adicionar novo código
 2. **Nomeie antes de digitar**: Pense no nome certo antes de escrever a variável
@@ -338,7 +338,7 @@ flowchart TD
 ```
 
 > [!SUCCESS]
-> Código limpo não é sobre perfeição — é sobre melhoria contínua. Cada commit deve deixar a base de código ligeiramente melhor do que você encontrou.
+> Código limpo não é sobre perfeição: é sobre melhoria contínua. Cada commit deve deixar a base de código ligeiramente melhor do que você encontrou.
 
 ## Exercícios Práticos
 

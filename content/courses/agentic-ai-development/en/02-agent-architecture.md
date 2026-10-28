@@ -55,7 +55,7 @@ flowchart TD
 ```
 
 > [!NOTE]
-> The agent loop is not necessarily linear. Modern agents use dynamic re-planning: if a step fails, the agent doesn't restart — it re-evaluates the plan from the current state and adapts.
+> The agent loop is not necessarily linear. Modern agents use dynamic re-planning: if a step fails, the agent doesn't restart; it re-evaluates the plan from the current state and adapts.
 
 ---
 
@@ -620,7 +620,7 @@ class ToolManager:
     "Sequential planning with no deviation",
     "Dynamic re-planning to adapt to new observations",
     "Monte Carlo simulation of all possible plans",
-    "No planning - execute all actions simultaneously"
+    "No planning: execute all actions simultaneously"
   ],
   "correct": 1,
   "explanation": "Dynamic re-planning allows the agent to adapt its plan based on new information discovered during execution. This is essential for debugging and research tasks where the path to the goal is uncertain."

@@ -216,7 +216,7 @@ print(f"Confianza: {resultado['confianza']}")
 ```
 
 [!SUCCESS]
-Este patrón — recuperar información → generar respuesta → evaluar calidad — es la base de los sistemas RAG (Retrieval-Augmented Generation).
+Este patrón, recuperar información → generar respuesta → evaluar calidad, es la base de los sistemas RAG (Retrieval-Augmented Generation).
 
 ---
 

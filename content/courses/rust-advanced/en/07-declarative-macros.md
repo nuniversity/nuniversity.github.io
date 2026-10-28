@@ -47,7 +47,7 @@ fn main() {
 ```
 
 > [!NOTE]
-> Macros are expanded at compile time. They can only do things the compiler can — they can't access runtime values.
+> Macros are expanded at compile time. They can only do things the compiler can; they can't access runtime values.
 
 ## Designators
 
@@ -131,7 +131,7 @@ fn main() {
 | `*` | Zero or more |
 | `+` | One or more |
 | `?` | Zero or one |
-| Separator | `$(x),*` — comma-separated |
+| Separator | `$(x),*`: comma-separated |
 
 ### Repetition with Multiple Patterns
 
@@ -197,7 +197,7 @@ fn main() {
 
 ## Hygiene
 
-Rust macros are **hygienic** — they can't accidentally capture or shadow variables from the calling scope:
+Rust macros are **hygienic**; they can't accidentally capture or shadow variables from the calling scope:
 
 ```rust
 macro_rules! make_local {

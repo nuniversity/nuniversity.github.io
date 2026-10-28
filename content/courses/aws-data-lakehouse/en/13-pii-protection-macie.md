@@ -7,9 +7,9 @@ duration: "60 minutes"
 ---
 # PII Protection on the Lakehouse: Amazon Macie, Masking, and Privacy Workflows
 
-Lessons 01–12 built a lakehouse that is fast, cheap and governable. That combination creates one new obligation: sooner or later somebody puts a customer's email address, phone number or national ID into `s3://lakehouse/bronze/`, and you have to be able to **say where it is, who can see it, what you did about it, and when you would have to delete it**. This lesson is the answer, and the answer is a *pipeline*, not a product.
+Lessons 01 to 12 built a lakehouse that is fast, cheap and governable. That combination creates one new obligation: sooner or later somebody puts a customer's email address, phone number or national ID into `s3://lakehouse/bronze/`, and you have to be able to **say where it is, who can see it, what you did about it, and when you would have to delete it**. This lesson is the answer, and the answer is a *pipeline*, not a product.
 
-The teaching rule for this lesson: **classify, route, protect, control, respond — five layers, each with a different service, none of them optional.** Amazon Macie only ever does the first one. Everything after a finding is *your* EventBridge rule, *your* Lambda, *your* Glue job and *your* Lake Formation grant.
+The teaching rule for this lesson: **classify, route, protect, control, respond: five layers, each with a different service, none of them optional.** Amazon Macie only ever does the first one. Everything after a finding is *your* EventBridge rule, *your* Lambda, *your* Glue job and *your* Lake Formation grant.
 
 ```text
 ====================================================================
@@ -43,13 +43,13 @@ The teaching rule for this lesson: **classify, route, protect, control, respond 
 
 In this lesson you will:
 
-- run the **five-layer pipeline** end to end and name the service that owns each layer — and name the layer that has *no* AWS service at all (routing glue);
+- run the **five-layer pipeline** end to end and name the service that owns each layer, and name the layer that has *no* AWS service at all (routing glue);
 - go deep on **Amazon Macie**: inventory and monitoring, automated discovery versus targeted jobs, sampling depth, schedules, storage-class support and the hard scope limits;
-- separate the **three numbers** students constantly confuse — finding severity (1–3), bucket sensitivity score (−1 to 100) and occurrence `count`;
+- separate the **three numbers** students constantly confuse: finding severity (1 to 3), bucket sensitivity score (−1 to 100) and occurrence `count`;
 - choose between **managed data identifiers and custom data identifiers**, write a real regex, and know exactly which identifier you must build yourself (email);
 - read the **Finding schema** and route on it with an **EventBridge** rule into a Lambda that quarantines a prefix and stamps `PII=true`;
 - price a classification programme **to the dollar**, using the three billing dimensions and the sampling-depth dial;
-- choose a **masking technique by join-fidelity requirement** — redact, hash, format-mask or tokenize — and avoid the `mask()` runtime trap on Glue 4.0 and Athena;
+- choose a **masking technique by join-fidelity requirement**, redact, hash, format-mask or tokenize, and avoid the `mask()` runtime trap on Glue 4.0 and Athena;
 - tie classification back to **Lake Formation column and row security** so a tag becomes an enforcement, not a note;
 - build the **audit trail** from CloudTrail data events, Macie findings and JSONL exports;
 - handle **GDPR, CCPA and LGPD** at AWS depth, including why S3 versioning quietly breaks erasure.
@@ -70,11 +70,11 @@ In this lesson you will:
 
 Three properties of this table are worth memorising:
 
-1. **Layers 1 and 5 are detective; layers 3 and 4 are preventive; layer 2 is the only glue.** Macie will never mask a column or revoke a grant — the wiring between a finding and a control is code you write.
+1. **Layers 1 and 5 are detective; layers 3 and 4 are preventive; layer 2 is the only glue.** Macie will never mask a column or revoke a grant: the wiring between a finding and a control is code you write.
 2. **Layer 1 splits by engine.** Macie inspects **S3 general purpose buckets**; Glue's Detect PII transform inspects **DataFrames inside a job**. Parquet in the lake and columns in the Glue Data Catalog are Glue's territory, not Macie's.
 3. **Layer 4 must exist even if layer 3 is perfect.** A beautifully masked `silver` table does nothing for the analyst who bypasses the lakehouse and reads `bronze/` with an IAM policy.
 
-### 1.2 Worked example E1 — pricing a classification programme (us-east-1, as of Oct 2026)
+### 1.2 Worked example E1: pricing a classification programme (us-east-1, as of Oct 2026)
 
 Take a bronze landing zone of **1 TB** holding **2,000,000 objects**, plus 14 smaller buckets (15 buckets total). Macie bills on three dimensions (Amazon Macie Pricing, accessed 2026-10-11):
 
@@ -103,9 +103,9 @@ TOTAL steady state (no targeted jobs)             = $41.50 / month
 TOTAL with one full-scan targeted job             = $1,066.31 once
 ```
 
-**The lesson inside the example:** automated discovery is the cheap continuous layer; targeted jobs are the expensive precision layer. The AWS cost-reduction playbook (Security Blog, 2023-03-20) is exactly this arithmetic — use automated discovery to *find* the risky buckets, sample them at **10%** (about **$102** on 1,024 GB) to validate, and reserve the full **$1/GB** scan for the handful of buckets that actually matter.
+**The lesson inside the example:** automated discovery is the cheap continuous layer; targeted jobs are the expensive precision layer. The AWS cost-reduction playbook (Security Blog, 2023-03-20) is exactly this arithmetic: use automated discovery to *find* the risky buckets, sample them at **10%** (about **$102** on 1,024 GB) to validate, and reserve the full **$1/GB** scan for the handful of buckets that actually matter.
 
-- **📚 Did you know?** The **30-day free trial** covers up to **150 GB inspected per account** and the bucket inventory dimension — but the pricing page is explicit that *"Any sensitive data discovery jobs you create will not be included in the 30-day free trial"* (Amazon Macie Pricing, accessed 2026-10-11). A demo team that runs a 200 GB, 100%-sampling job on day two of the trial has just billed itself about **$200**. The free trial covers discovery; it does not cover *your* jobs.
+- **📚 Did you know?** The **30-day free trial** covers up to **150 GB inspected per account** and the bucket inventory dimension, but the pricing page is explicit that *"Any sensitive data discovery jobs you create will not be included in the 30-day free trial"* (Amazon Macie Pricing, accessed 2026-10-11). A demo team that runs a 200 GB, 100%-sampling job on day two of the trial has just billed itself about **$200**. The free trial covers discovery; it does not cover *your* jobs.
 
 ---
 
@@ -130,24 +130,24 @@ These are different mechanisms with different bills, and conflating them is the 
 | Trigger | Continuous, on by default once enabled | You create it: **one-time (on-demand)** or **periodic (daily, weekly, monthly)** |
 | Scope | Representative sample across clustered buckets | Objects matching your criteria (size, creation date, last modified) |
 | Sampling | Statistical clustering, per-bucket profile | **Sampling depth: 1, 10 or 100 (percent)** |
-| Feeds | Bucket **sensitivity score and label** | Findings only — *"They don't reflect the results of sensitive data discovery jobs that you create and run"* |
+| Feeds | Bucket **sensitivity score and label** | Findings only: *"They don't reflect the results of sensitive data discovery jobs that you create and run"* |
 | Billing | `$0.01 / 100K objects` monitored + `$1.00/GB` inspected | `$1.00/GB` inspected, **not** in the free trial |
-| Job object criteria | n/a | Object size 0 B – 5 TB; last modified no more than 1 year ago |
+| Job object criteria | n/a | Object size 0 B: 5 TB; last modified no more than 1 year ago |
 | Incremental behaviour | n/a | Periodic jobs *"evaluate new and modified objects that match the criteria and were added to the bucket during the specified schedule"* |
 
 Job operational limits worth quoting in a design doc (Macie User Guide, *Quotas*, accessed 2026-10-11): **50 concurrent jobs**, **10,000 jobs per account**, job-creation API burst **1 per 20 seconds**, findings require objects of at least **15 bytes**, and the pattern-match window is **4 KB of text per object** (1 MB for S3 Select). Sensitive-data findings are trimmed at **15,000 findings per bucket per day**, and policy findings are deduplicated on a **15-minute** window.
 
-- **📚 Did you know?** Macie's *supported storage classes* list is a gotcha generator: Standard, Standard-IA, One Zone-IA, Intelligent-Tiering, Reduced Redundancy and **Glacier Instant Retrieval** are inspected, but **Glacier Deep Archive and Glacier Flexible Retrieval are not**, and objects in **S3 Express directory buckets are not inspected at all**. Encrypted objects are readable only *"if the objects are encrypted with SSE-KMS or DSSE-KMS keys"* (Macie User Guide, accessed 2026-10-11). An archive tier full of legacy exports is not "covered" — it is invisible until restored.
+- **📚 Did you know?** Macie's *supported storage classes* list is a gotcha generator: Standard, Standard-IA, One Zone-IA, Intelligent-Tiering, Reduced Redundancy and **Glacier Instant Retrieval** are inspected, but **Glacier Deep Archive and Glacier Flexible Retrieval are not**, and objects in **S3 Express directory buckets are not inspected at all**. Encrypted objects are readable only *"if the objects are encrypted with SSE-KMS or DSSE-KMS keys"* (Macie User Guide, accessed 2026-10-11). An archive tier full of legacy exports is not "covered"; it is invisible until restored.
 
 ### 2.3 Managed versus custom data identifiers
 
 **Managed data identifiers (MDIs)** are AWS-maintained detectors. The quick reference lists **40**, grouped into Credentials (`ACCESS_KEYS`, `AWS_ACCESS_KEYS`, `AWS_ACCOUNT_ID`, `DB_CREDENTIALS`, `ENCODED_PRIVATE_KEY`, `PRIVATE_KEY`, `SECRET_KEYS`, …), Financial information (`BANK_ACCOUNT_NUMBER`, `CREDIT_CARD_NUMBER`, `CVC_NUMBER`, …), Personal information: PHI (`DOB`, `DRIVERS_LICENSE`, `HEALTHCARE_NUMBER`, `MEDICAL_RECORD_NUMBER`, `PASSPORT_NUMBER`, `SSN`, …) and PII (`ADDRESS`, `GENDER`, `NAME`, `PHONE`, `POSTAL_CODE`, …).
 
-**Custom data identifiers (CDIs)** are yours: *"A custom data identifier helps you detect sensitive data in S3 objects… based on custom criteria that you specify"* — a **regular expression**, a **dictionary of words and phrases (keywords)**, and *"an optional list of regular expressions for text to ignore (ignore words)"* (Macie User Guide, accessed 2026-10-11).
+**Custom data identifiers (CDIs)** are yours: *"A custom data identifier helps you detect sensitive data in S3 objects… based on custom criteria that you specify"*: a **regular expression**, a **dictionary of words and phrases (keywords)**, and *"an optional list of regular expressions for text to ignore (ignore words)"* (Macie User Guide, accessed 2026-10-11).
 
 | Knob | Managed (MDI) | Custom (CDI) |
 |---|---|---|
-| Maintained by | AWS, updated for you | You — and **immutable after creation** |
+| Maintained by | AWS, updated for you | You, and **immutable after creation** |
 | Count | 40 in the quick reference | **≤ 100 per account and Region** |
 | Regex | n/a | **≤ 4,096 characters**, or **≤ 400** if a proximity window is used |
 | Keywords | n/a | **≤ 20**, total **≤ 400 characters** |
@@ -157,9 +157,9 @@ Job operational limits worth quoting in a design doc (Macie User Guide, *Quotas*
 | Allow list | n/a | **≤ 500 regexes, each ≤ 100 characters**, to suppress false positives |
 
 > [!WARNING]
-> ⚠️ **"Macie detects emails" is false out of the box.** There is **no `EMAIL` managed data identifier** in Macie. Worse, the default identifier set used by automated discovery *"excludes the NAME, EMAIL, CREDIT_CARD, IP_ADDRESS, and PHONE identifiers"* (Macie User Guide, *Automated discovery settings*, accessed 2026-10-11) — the `EMAIL` in that list is a *category label* borrowed from Glue's vocabulary. In Macie, email coverage means a **custom data identifier**; in **AWS Glue**, the managed sensitive data type **`EMAIL` does exist**. Two catalogs, two answers, and students merge them into one wrong answer constantly.
+> ⚠️ **"Macie detects emails" is false out of the box.** There is **no `EMAIL` managed data identifier** in Macie. Worse, the default identifier set used by automated discovery *"excludes the NAME, EMAIL, CREDIT_CARD, IP_ADDRESS, and PHONE identifiers"* (Macie User Guide, *Automated discovery settings*, accessed 2026-10-11): the `EMAIL` in that list is a *category label* borrowed from Glue's vocabulary. In Macie, email coverage means a **custom data identifier**; in **AWS Glue**, the managed sensitive data type **`EMAIL` does exist**. Two catalogs, two answers, and students merge them into one wrong answer constantly.
 
-### 2.4 Worked example E2 — a custom data identifier, regex by regex
+### 2.4 Worked example E2: a custom data identifier, regex by regex
 
 Requirement: detect Northwind Health member numbers of the form `NWH` followed by ten digits, in a bronze prefix of migrated policy documents, while not firing on order numbers or on test fixtures.
 
@@ -195,7 +195,7 @@ Coverage: findings from this CDI appear alongside MDI findings in
     EventBridge rule in Section 3.
 ```
 
-Two supporting facts: custom identifiers *"are unique to each customer and are not shared with other customers"* (Macie FAQ, page dated 2025-09-30) — there is no marketplace of community detectors — and false-positive control belongs to **allow lists** (up to 500 regexes, 100 characters each), not to forking the identifier.
+Two supporting facts: custom identifiers *"are unique to each customer and are not shared with other customers"* (Macie FAQ, page dated 2025-09-30), there is no marketplace of community detectors, and false-positive control belongs to **allow lists** (up to 500 regexes, 100 characters each), not to forking the identifier.
 
 ```matching
 {
@@ -204,23 +204,23 @@ Two supporting facts: custom identifiers *"are unique to each customer and are n
     {"left": "Email addresses sitting in raw JSON on S3", "right": "Macie custom data identifier (regex + keywords) - Macie has no EMAIL managed data identifier at all"},
     {"left": "Email addresses inside a Glue job over a DataFrame", "right": "AWS Glue managed sensitive data type EMAIL, used by the Detect PII transform"},
     {"left": "US Social Security Numbers in S3 objects", "right": "Macie managed data identifier SSN, and Glue's HIPAA / US categories if you are in a job"},
-    {"left": "A public bucket, or objects uploaded without SSE-KMS", "right": "Macie policy check - a Policy finding, not a SensitiveData finding"},
-    {"left": "A company-internal loyalty ID format unique to this business", "right": "Macie custom data identifier - the documented use case for CDIs is types unique to your organization"},
-    {"left": "PII columns in a cataloged Iceberg table", "right": "Glue Detect PII inside the bronze-to-silver job - Macie reads S3 objects, not Data Catalog tables"}
+    {"left": "A public bucket, or objects uploaded without SSE-KMS", "right": "Macie policy check: a Policy finding, not a SensitiveData finding"},
+    {"left": "A company-internal loyalty ID format unique to this business", "right": "Macie custom data identifier: the documented use case for CDIs is types unique to your organization"},
+    {"left": "PII columns in a cataloged Iceberg table", "right": "Glue Detect PII inside the bronze-to-silver job: Macie reads S3 objects, not Data Catalog tables"}
   ],
-  "explanation": "Three engines, three scopes: Macie managed data identifiers for standard patterns in S3 objects, Macie custom data identifiers for organization-specific patterns in S3 objects, and Glue's managed sensitive data types inside a job for tabular data. Policy findings are a fourth, separate type - bucket posture, not content. The trap answer is EMAIL: Glue has it, Macie does not."
+  "explanation": "Three engines, three scopes: Macie managed data identifiers for standard patterns in S3 objects, Macie custom data identifiers for organization-specific patterns in S3 objects, and Glue's managed sensitive data types inside a job for tabular data. Policy findings are a fourth, separate type: bucket posture, not content. The trap answer is EMAIL: Glue has it, Macie does not."
 }
 ```
 
 ### 2.5 The Finding: schema, severity, score, count
 
-A Macie finding is a JSON object. The API `Finding` model exposes `id`, `createdAt`, `updatedAt`, `partition`, `region`, `resourceArn`, `title`, `severity`, `type` — either **`SensitiveData`** or **`Policy`** — and `count`, described as *"The total number of occurrences that were observed"* and *"always 1 for sensitive data findings"* at the top level. Per-identifier occurrence detail lives in the `occurrences` sub-objects, which carry their own `count` and up to **15** `location` entries. Findings are retained for **90 days** (raised from 30 on 2021-10-01).
+A Macie finding is a JSON object. The API `Finding` model exposes `id`, `createdAt`, `updatedAt`, `partition`, `region`, `resourceArn`, `title`, `severity`, `type`, either **`SensitiveData`** or **`Policy`**, and `count`, described as *"The total number of occurrences that were observed"* and *"always 1 for sensitive data findings"* at the top level. Per-identifier occurrence detail lives in the `occurrences` sub-objects, which carry their own `count` and up to **15** `location` entries. Findings are retained for **90 days** (raised from 30 on 2021-10-01).
 
-Three numbers, three different objects — never conflate them:
+Three numbers, three different objects: never conflate them:
 
 | Number | Range | Object it describes | Source of truth |
 |---|---|---|---|
-| **Finding severity** | **1 — Low, 2 — Medium, 3 — High** (no Critical) | One finding | *"Severity levels correspond to a range of 1 to 3"*; for policy findings it combines *"the nature of the issue and the number of the affected resources"* |
+| **Finding severity** | **1: Low, 2: Medium, 3: High** (no Critical) | One finding | *"Severity levels correspond to a range of 1 to 3"*; for policy findings it combines *"the nature of the issue and the number of the affected resources"* |
 | **Sensitivity score** | **−1 … 100** | One **bucket**, automated discovery only | `-1` classification error · `1-49` not sensitive · `50` not yet analyzed · `51-99` sensitive · `100` manually assigned, never calculated |
 | **Occurrence count** | integer | One identifier inside one finding | Top-level `count` is always 1 for sensitive data findings; the detail is in `occurrences` |
 
@@ -230,7 +230,7 @@ AWS is explicit that the score *"neither… implies or otherwise indicates the c
 
 ### 2.6 EventBridge: the routing contract
 
-> "When Macie detects new sensitive data findings or policy findings… it publishes corresponding events to EventBridge. EventBridge then routes the events to targets that you specify. Targets can include AWS Lambda functions, Amazon SNS topics, and Amazon SQS queues." — Macie User Guide, *Findings, events, and EventBridge* (accessed 2026-10-11)
+> "When Macie detects new sensitive data findings or policy findings… it publishes corresponding events to EventBridge. EventBridge then routes the events to targets that you specify. Targets can include AWS Lambda functions, Amazon SNS topics, and Amazon SQS queues.": Macie User Guide, *Findings, events, and EventBridge* (accessed 2026-10-11)
 
 The two fields you filter on:
 
@@ -248,9 +248,9 @@ The two fields you filter on:
 }
 ```
 
-Documented event flavours include *new sensitive data findings*, *new occurrences of existing sensitive data findings*, *new policy findings* and *subsequent occurrences of existing policy findings* — which means **your rule must be idempotent**, because an existing finding can fire again when a new occurrence shows up. Security Hub ingests the same findings, exposes the CSPM control **`Macie.1` ("Amazon Macie should be enabled")**, and offers **custom actions** that turn a human button press into a second EventBridge rule into a Lambda (AWS Security Blog, 2022-07-18; sample repo `aws-samples/security-hub-macie-remediation`).
+Documented event flavours include *new sensitive data findings*, *new occurrences of existing sensitive data findings*, *new policy findings* and *subsequent occurrences of existing policy findings*; which means **your rule must be idempotent**, because an existing finding can fire again when a new occurrence shows up. Security Hub ingests the same findings, exposes the CSPM control **`Macie.1` ("Amazon Macie should be enabled")**, and offers **custom actions** that turn a human button press into a second EventBridge rule into a Lambda (AWS Security Blog, 2022-07-18; sample repo `aws-samples/security-hub-macie-remediation`).
 
-### 2.7 Worked example E3 — sampling depth as a cost *and* coverage dial
+### 2.7 Worked example E3: sampling depth as a cost *and* coverage dial
 
 A **200 GB** bucket, one targeted job, `$1.00 per GB inspected` (us-east-1, as of Oct 2026):
 
@@ -293,7 +293,7 @@ Spend cap: targeted discovery has a default service quota of
 }
 ```
 
-The x-axis is linear in money and *non-linear in what you learn*: going from 10% to 100% costs 10× and buys the only result you can defend in an audit. Depth is a **cost/coverage dial, not a quality setting** — there is no depth at which Macie's regexes get smarter.
+The x-axis is linear in money and *non-linear in what you learn*: going from 10% to 100% costs 10× and buys the only result you can defend in an audit. Depth is a **cost/coverage dial, not a quality setting**; there is no depth at which Macie's regexes get smarter.
 
 ---
 
@@ -320,7 +320,7 @@ flowchart TD
 
 The top half is **detection**; the bottom half is **prevention**. Both must exist, because Macie is *periodic* (up to a 48-hour warm-up, then your chosen cadence) while Glue masking in Section 4 runs *per load*. A pipeline with only the top half reports on damage; a pipeline with only the bottom half never learns about the data that arrived before the masking job existed.
 
-### 3.2 Worked example E4 — the rule and the handler
+### 3.2 Worked example E4: the rule and the handler
 
 The EventBridge rule, filtered to high-severity sensitive-data findings:
 
@@ -371,7 +371,7 @@ event detail -> extract resourceArn, region, severity, occurrences
  total: 1 rule + 1 function + 2 S3 calls + 2 LF calls + 1 publish
 ```
 
-**Cost of the routing layer itself, as of Oct 2026:** the first copy of CloudTrail management events is free; CloudTrail **S3 data events are $0.10 per 100,000 events** and are **opt-in** — without them you cannot answer *"who read the object"* after an incident (AWS CloudTrail Pricing, accessed 2026-10-11). Lambda, EventBridge rules and SNS are metered separately, but on this volume they are cents.
+**Cost of the routing layer itself, as of Oct 2026:** the first copy of CloudTrail management events is free; CloudTrail **S3 data events are $0.10 per 100,000 events** and are **opt-in**: without them you cannot answer *"who read the object"* after an incident (AWS CloudTrail Pricing, accessed 2026-10-11). Lambda, EventBridge rules and SNS are metered separately, but on this volume they are cents.
 
 ```dragdrop
 {
@@ -396,7 +396,7 @@ event detail -> extract resourceArn, region, severity, occurrences
     "SNS notifies the data owner and Security Hub records the event against control Macie.1",
     "The whole sequence is written to CloudTrail so the response timeline can be reconstructed later"
   ],
-  "explanation": "Containment precedes classification, classification precedes revocation, revocation precedes notification - and audit wraps all of it. The two ordering errors that matter: tagging (quarantine) before policy-tightening means the next write is already in flight, and notifying before revoking means the data owner is told about a window that is still open. Note also that the LF-Tag alone blocks nothing: without the matching tag-based grant (or its revocation), pii=true is a label."
+  "explanation": "Containment precedes classification, classification precedes revocation, revocation precedes notification: and audit wraps all of it. The two ordering errors that matter: tagging (quarantine) before policy-tightening means the next write is already in flight, and notifying before revoking means the data owner is told about a window that is still open. Note also that the LF-Tag alone blocks nothing: without the matching tag-based grant (or its revocation), pii=true is a label."
 }
 ```
 
@@ -422,21 +422,21 @@ flowchart TD
   LF --> SERVE["gold + serve<br/>filtered views only"]
 ```
 
-**Only these four are verified AWS patterns.** Format-preserving encryption (AES-FF1 style FPE) is *not* an AWS managed lakehouse feature — if you see it, it is a third-party or general cryptographic technique, not something Glue or Athena ships.
+**Only these four are verified AWS patterns.** Format-preserving encryption (AES-FF1 style FPE) is *not* an AWS managed lakehouse feature: if you see it, it is a third-party or general cryptographic technique, not something Glue or Athena ships.
 
-### 4.2 Pattern A — static redaction, and the Glue Detect PII transform
+### 4.2 Pattern A: static redaction, and the Glue Detect PII transform
 
 The **Detect PII transform** detects *"personally identifiable information (PII)… columns in your input data that might contain PII data"*, either on a **per-cell basis (default)** or a **per-column basis** where you supply a sampling percentage and a matching threshold. Its four actions: **`Enrich`**, **`Redact` (default, replaces sensitive data with `********`)**, **`Partial redact`**, and **`SHA-256 hash`**. Sensitivity levels are **`High`** and **`Low`**; categories are **`Universal`, `HIPAA`, `Networking`, `US`, `UK`, `CA`, `ES`, `IT`**; and *"You can also apply different transformations to different columns by using fine-grained overrides"*. In Glue 3.0/4.0 job output the reported `actionUsed` values are `DETECT`, `REDACT`, `PARTIAL_REDACT`, `SHA256_HASH`.
 
-### 4.3 Pattern B — deterministic tokenization that still joins
+### 4.3 Pattern B: deterministic tokenization that still joins
 
 Deterministic means *the same input always produces the same token*, so `GROUP BY hashed_email` still clusters a customer across tables. It also means the mapping is reversible **in principle** for low-entropy inputs: a 10-digit phone number space is enumerable, so a plain SHA-256 of a phone number is a **dictionary attack away from being plaintext**. The fixes, in order of preference:
 
-1. **Keyed HMAC with a secret salt** stored in Secrets Manager — same determinism, no rainbow table. Use this for phone, SSN, postcode-grade values.
-2. **Reserve plain `SHA256_HASH` for high-entropy identifiers** — UUIDs, account numbers with check digits.
+1. **Keyed HMAC with a secret salt** stored in Secrets Manager: same determinism, no rainbow table. Use this for phone, SSN, postcode-grade values.
+2. **Reserve plain `SHA256_HASH` for high-entropy identifiers**: UUIDs, account numbers with check digits.
 3. **Full tokenization vault** when you need reversibility *and* to remove PII from the analytical path: the AWS Guidance *Tokenization to Improve Data Security and Reduce Audit Scope on AWS* (reviewed 2024-07-23) architecture is **API Gateway → Lambda → DynamoDB token vault encrypted with KMS**, with tokens carrying an HMAC so lookups are consistent. Downstream analytics consume tokens only; the vault is the only component that can ever see the original.
 
-### 4.4 Worked example E5 — the same email, four times, and why they differ
+### 4.4 Worked example E5: the same email, four times, and why they differ
 
 ```text
 WORKED E5 - determinism, entropy and reversibility side by side
@@ -476,11 +476,11 @@ Yes/Yes -> token vault.
 ```
 
 
-### 4.5 Pattern C — format masking with Spark's `mask()`
+### 4.5 Pattern C: format masking with Spark's `mask()`
 
 Spark's SQL `mask()` function (*"New in version 3.5.0"*) *"Masks a column with default characters for letters, numbers, and 'other' characters: 'X' (uppercase), 'x' (lowercase), '0' (digit), '*' (other)"*, and accepts replacement characters as arguments: `mask(col, upperChar, lowerChar, digitChar, otherChar)`.
 
-### 4.6 Worked example E6 — one Glue job, three different protections
+### 4.6 Worked example E6: one Glue job, three different protections
 
 A DataFrame of **100,000 customer rows** leaving bronze for silver (Glue *Detect PII* API shape, accessed 2026-10-11):
 
@@ -508,16 +508,16 @@ catalog: crawler tags the columns, classification job attaches
          LF-Tag pii = true
 ```
 
-The point of the worked example: **one job produces three different outcomes** — destroyed, joinable, and merely *governed* — chosen per column by what the consumer actually needs. Redaction is irreversible; hashing preserves joins; tag-plus-grant preserves the value for entitled roles only.
+The point of the worked example: **one job produces three different outcomes**, destroyed, joinable, and merely *governed*, chosen per column by what the consumer actually needs. Redaction is irreversible; hashing preserves joins; tag-plus-grant preserves the value for entitled roles only.
 
 > [!WARNING]
-> ⚠️ **`mask()` is not where students think it is.** Spark's `mask()` is *"New in version 3.5.0"*. The Glue version matrix is **Glue 4.0 = Spark 3.3.0** (no `mask()`), **Glue 5.0 = Spark 3.5.4** (has it), **Glue 5.1 = Spark 3.5.6**, **Glue 6.0 = Spark 4.1.1** — so a `mask()` call on a Glue 4.0 job fails **at runtime, not at compile time**, because functions resolve dynamically. And **Athena cannot do it at all**: Athena engine version 3 uses the Trino scalar string function set, which contains **no `mask()` function** — use `regexp_replace` or a UDF in Athena, or push masking to Glue at write time. Two more edges: the Python reference's signature line and its prose description print *different* default characters, so pin the behaviour you rely on with explicit arguments; and there is no AWS-published benchmark comparing Glue-time `mask()` with Athena-time `regexp_replace`, so treat that as an architectural trade-off, not a measured one.
+> ⚠️ **`mask()` is not where students think it is.** Spark's `mask()` is *"New in version 3.5.0"*. The Glue version matrix is **Glue 4.0 = Spark 3.3.0** (no `mask()`), **Glue 5.0 = Spark 3.5.4** (has it), **Glue 5.1 = Spark 3.5.6**, **Glue 6.0 = Spark 4.1.1**, so a `mask()` call on a Glue 4.0 job fails **at runtime, not at compile time**, because functions resolve dynamically. And **Athena cannot do it at all**: Athena engine version 3 uses the Trino scalar string function set, which contains **no `mask()` function**, use `regexp_replace` or a UDF in Athena, or push masking to Glue at write time. Two more edges: the Python reference's signature line and its prose description print *different* default characters, so pin the behaviour you rely on with explicit arguments; and there is no AWS-published benchmark comparing Glue-time `mask()` with Athena-time `regexp_replace`, so treat that as an architectural trade-off, not a measured one.
 
-### 4.7 Pattern D — the encryption backstop
+### 4.7 Pattern D: the encryption backstop
 
-Since **2023-01-05** every new S3 upload is encrypted with **SSE-S3 by default at no additional cost**. That is not the posture you want for PII: SSE-S3 uses AWS-managed keys, gives you **no per-key audit granularity** and **no deny-by-key-policy control**. PII buckets should therefore require **SSE-KMS** — set bucket default encryption to `aws:kms` *and* add a bucket policy condition denying uploads that are not `aws:kms` — with **S3 Bucket Keys** switched on.
+Since **2023-01-05** every new S3 upload is encrypted with **SSE-S3 by default at no additional cost**. That is not the posture you want for PII: SSE-S3 uses AWS-managed keys, gives you **no per-key audit granularity** and **no deny-by-key-policy control**. PII buckets should therefore require **SSE-KMS**, set bucket default encryption to `aws:kms` *and* add a bucket policy condition denying uploads that are not `aws:kms`, with **S3 Bucket Keys** switched on.
 
-### 4.8 Worked example E7 — what the backstop costs (us-east-1, as of Oct 2026)
+### 4.8 Worked example E7: what the backstop costs (us-east-1, as of Oct 2026)
 
 ```text
 WORKED E7 - KMS bill for a read-heavy bronze bucket
@@ -559,10 +559,10 @@ Classification only becomes security when a permission consumes the classificati
 
 ### 5.1 The two mechanisms
 
-- **LF-Tags (tag-based access control, LF-TBAC)** — attach `pii = true` (or `data_class = phi`) to databases, tables and **columns**. Key and value strings are **≤ 50 characters**, stored lowercase, with **≤ 50 tags per Lake Formation resource**, **≤ 10,000 tag keys** and **≤ 1,000 values per key**. Grants then name *attributes*, so every table a crawler creates inherits the policy the moment someone tags it.
-- **Data filters** — *"Data filters in Lake Formation enable you to implement column-level, row-level and cell-level security on Data Catalog tables"*, expressed with a **PartiQL** row-filter expression, inclusion columns (column-level), exclusion columns (cell-level) and both together (cell-level). They can be shared with accounts, AWS Organizations, IAM principals and IAM roles.
+- **LF-Tags (tag-based access control, LF-TBAC)**: attach `pii = true` (or `data_class = phi`) to databases, tables and **columns**. Key and value strings are **≤ 50 characters**, stored lowercase, with **≤ 50 tags per Lake Formation resource**, **≤ 10,000 tag keys** and **≤ 1,000 values per key**. Grants then name *attributes*, so every table a crawler creates inherits the policy the moment someone tags it.
+- **Data filters**: *"Data filters in Lake Formation enable you to implement column-level, row-level and cell-level security on Data Catalog tables"*, expressed with a **PartiQL** row-filter expression, inclusion columns (column-level), exclusion columns (cell-level) and both together (cell-level). They can be shared with accounts, AWS Organizations, IAM principals and IAM roles.
 
-### 5.2 Worked example E8 — one table, two roles, one PII column
+### 5.2 Worked example E8: one table, two roles, one PII column
 
 ```text
 WORKED E8 - the PII grant shape on gold.customers (Iceberg)
@@ -595,9 +595,9 @@ AUDIT:   list-permissions after each grant; Lake Formation has
          same table re-includes what you excluded.
 ```
 
-Cell-level filters are also how you *"show the column but null out the values"* **without materialising a masked copy** — which is the cheapest possible answer to "we need the schema for the dashboard but not the data".
+Cell-level filters are also how you *"show the column but null out the values"* **without materialising a masked copy**; which is the cheapest possible answer to "we need the schema for the dashboard but not the data".
 
-- **📚 Did you know?** Lake Formation grants are cheap to over-grant *financially* and expensive to over-grant *politically*: permission checks cost nothing, while the integrated engines bill for what they scan. That asymmetry is why the PII pattern is always *over-restrict by default, then grant exceptions* — the failure mode of the opposite approach is not a bigger bill, it is an incident.
+- **📚 Did you know?** Lake Formation grants are cheap to over-grant *financially* and expensive to over-grant *politically*: permission checks cost nothing, while the integrated engines bill for what they scan. That asymmetry is why the PII pattern is always *over-restrict by default, then grant exceptions*: the failure mode of the opposite approach is not a bigger bill, it is an incident.
 
 ---
 
@@ -636,9 +636,9 @@ flowchart LR
   SH["Security Hub control Macie.1"] -.-> M
 ```
 
-Two properties of this diagram are worth stating out loud: **the export bucket is the long-term evidence store** (Macie itself keeps detailed information for up to 90 days), and **CloudTrail is the only leg that answers "who"** — Macie answers "what", never "who read it". That split is the whole reason a privacy programme needs both services.
+Two properties of this diagram are worth stating out loud: **the export bucket is the long-term evidence store** (Macie itself keeps detailed information for up to 90 days), and **CloudTrail is the only leg that answers "who"**: Macie answers "what", never "who read it". That split is the whole reason a privacy programme needs both services.
 
-### 6.3 Worked example E9 — the evidence pack for one quarter
+### 6.3 Worked example E9: the evidence pack for one quarter
 
 ```text
 WORKED E9 - quarterly PII audit pack (costs as of Oct 2026)
@@ -673,7 +673,7 @@ Assembly
   QuickSight", 2023-01-06 (DDL updated 2023-02-21).
 ```
 
-### 6.4 Worked example fill-in — the routing contract
+### 6.4 Worked example fill-in: the routing contract
 
 ```fillblank
 {
@@ -703,7 +703,7 @@ Assembly
     "1",
     "50"
   ],
-  "explanation": "EventBridge events carry detail-type 'Macie Finding' with source 'aws.macie'. Findings are retained 90 days (raised from 30 on 2021-10-01). Severity is a 1-3 scale labelled Low/Medium/High - there is no Critical and no 0. Sensitivity score runs -1 (classification error) to 100 (manual override only); 50 means 'not yet analyzed'."
+  "explanation": "EventBridge events carry detail-type 'Macie Finding' with source 'aws.macie'. Findings are retained 90 days (raised from 30 on 2021-10-01). Severity is a 1-3 scale labelled Low/Medium/High: there is no Critical and no 0. Sensitivity score runs -1 (classification error) to 100 (manual override only); 50 means 'not yet analyzed'."
 }
 ```
 
@@ -721,9 +721,9 @@ Compliance is a **mapping exercise, not a feature flag**. Each regulation maps o
 | **CCPA / CPRA** | Page last updated **2025-08-08** | AWS positions S3, CloudTrail, CloudWatch, Lambda, Glue, Athena and Lake Formation as customer-side tooling for data-subject request workflows, and states it will not "sell" or "share" personal information as defined by the CCPA/CPRA in the context of providing the services | 1 (locate), 4 (revoke), 5 (evidence) |
 | **LGPD** | **September 18, 2020** | Applies to organisations *"whether or not established in Brazil"* that process personal data for people in Brazil; the **ANPD** may set minimum technical standards; AWS explicitly offers **CloudTrail** as the tool for knowing *"who has access to their resources, when, and from where"* for breach notification | 1, 5 |
 
-AWS also maintains a **LGPD workbook** (AWS Security Blog, 2022-04-25) mapping controls to CIS v8.0, NIST CSF, the NIST Privacy Framework and AWS CAF 3.0 — useful when a regulator asks for a control *framework* rather than a list of services. And note the shared-responsibility boundary: the **HIPAA Eligible Services Reference** (last updated **September 3, 2026**) lists **Amazon Macie, AWS Lake Formation, AWS Glue, Amazon Athena, AWS Lambda, Amazon EventBridge, AWS CloudTrail, AWS KMS, Amazon S3, AWS Step Functions, Amazon GuardDuty** and more — the whole toolchain in this lesson is eligible *in the right configuration*, and eligibility never transfers your own compliance obligation.
+AWS also maintains a **LGPD workbook** (AWS Security Blog, 2022-04-25) mapping controls to CIS v8.0, NIST CSF, the NIST Privacy Framework and AWS CAF 3.0, useful when a regulator asks for a control *framework* rather than a list of services. And note the shared-responsibility boundary: the **HIPAA Eligible Services Reference** (last updated **September 3, 2026**) lists **Amazon Macie, AWS Lake Formation, AWS Glue, Amazon Athena, AWS Lambda, Amazon EventBridge, AWS CloudTrail, AWS KMS, Amazon S3, AWS Step Functions, Amazon GuardDuty** and more, the whole toolchain in this lesson is eligible *in the right configuration*, and eligibility never transfers your own compliance obligation.
 
-### 7.2 Worked example E10 — a versioning-aware erasure
+### 7.2 Worked example E10: a versioning-aware erasure
 
 Request: delete customer `C-123` from bronze and silver, under GDPR Article 17 (erasure) or LGPD/CCPA equivalents.
 
@@ -767,15 +767,15 @@ cannot both be true - document which one wins for which dataset.
 ```
 
 > [!WARNING]
-> ⚠️ **Versioning turns "delete" into a soft delete.** For versioned buckets, deleting the current version without specifying a version ID means Amazon S3 *"doesn't permanently delete the object. Instead, S3 adds a delete marker, issuing a soft delete"* — you must remove **all non-current versions and delete markers** for real erasure (Amazon S3 User Guide, *Deleting objects*, accessed 2026-10-11). The same trap catches Macie exports and QuickSight extracts: erasure is a *system-wide* operation, not an S3 operation.
+> ⚠️ **Versioning turns "delete" into a soft delete.** For versioned buckets, deleting the current version without specifying a version ID means Amazon S3 *"doesn't permanently delete the object. Instead, S3 adds a delete marker, issuing a soft delete"*; you must remove **all non-current versions and delete markers** for real erasure (Amazon S3 User Guide, *Deleting objects*, accessed 2026-10-11). The same trap catches Macie exports and QuickSight extracts: erasure is a *system-wide* operation, not an S3 operation.
 
-- **📚 Did you know?** Evidence and erasure work against each other by design. Macie's findings contain occurrence locations and are retained **90 days**; your JSONL exports contain the same detail and are retained until *your* lifecycle rule says otherwise. A defensible privacy programme therefore declares in advance **which store is the system of record for evidence, how long it lives, and what the deletion procedure is for that store too** — otherwise you will satisfy an erasure request in the lakehouse while the audit trail still holds the value.
+- **📚 Did you know?** Evidence and erasure work against each other by design. Macie's findings contain occurrence locations and are retained **90 days**; your JSONL exports contain the same detail and are retained until *your* lifecycle rule says otherwise. A defensible privacy programme therefore declares in advance **which store is the system of record for evidence, how long it lives, and what the deletion procedure is for that store too**: otherwise you will satisfy an erasure request in the lakehouse while the audit trail still holds the value.
 
 ---
 
 ## 8. The worked end-to-end flow
 
-Everything in this lesson, in one pass — bronze to serve, detection to evidence:
+Everything in this lesson, in one pass: bronze to serve, detection to evidence:
 
 ```mermaid
 flowchart LR
@@ -811,7 +811,7 @@ flowchart LR
   SNS --> AT
 ```
 
-Read it left to right once more: **every box in Layer 1 costs money only when data is inspected; every box in Layers 3–4 costs nothing until someone queries; Layer 5 is the only layer whose output you can hand to a regulator.**
+Read it left to right once more: **every box in Layer 1 costs money only when data is inspected; every box in Layers 3 to 4 costs nothing until someone queries; Layer 5 is the only layer whose output you can hand to a regulator.**
 
 ### 8.1 The decision checklist before you ship
 
@@ -842,42 +842,42 @@ COMPLIANCE  [ ] erasure runbook includes version IDs
 ### 2026 Updates (as of October 2026)
 
 > [!NOTE]
-> **What moved in the PII story between 2024 and October 2026** — each line checked against a primary AWS source:
-> - **Macie managed data identifiers for more national IDs (2025-03).** New managed data identifiers cover **Colombia, Chile, Costa Rica and Mexico** national identifiers, Brazil's **Banco Interoperabilidade de Pagamentos (SUBE)** cards and tax IDs — each one is custom-regex work you no longer have to do (Macie documentation history, accessed 2026-10-11).
+> **What moved in the PII story between 2024 and October 2026**: each line checked against a primary AWS source:
+> - **Macie managed data identifiers for more national IDs (2025-03).** New managed data identifiers cover **Colombia, Chile, Costa Rica and Mexico** national identifiers, Brazil's **Banco Interoperabilidade de Pagamentos (SUBE)** cards and tax IDs: each one is custom-regex work you no longer have to do (Macie documentation history, accessed 2026-10-11).
 > - **VPC interface endpoints for Macie in all Regions (2025-07-02).** Findings and API traffic can now stay on the AWS network, which is the usual enterprise precondition for enabling Macie account-wide in a regulated VPC design.
 > - **10,000 buckets per account and Region for preventative monitoring (2024-12-06).** The inventory ceiling that used to force bucket sub-selection at 1,000 is now large enough that most accounts can monitor everything at **$0.10/bucket/month**.
-> - **Macie's own changelog is quiet.** The most recent documentation-history entry is **2025-07-02** — so teach sampling depth, CDI immutability, 90-day retention and severity 1–3 as *current behaviour*, never as "the 2026 Macie update". Two older entries still matter: findings retention moved from 30 to **90 days on 2021-10-01**, and **DSSE-KMS** encrypted objects have been supported since **2024-01-17**.
+> - **Macie's own changelog is quiet.** The most recent documentation-history entry is **2025-07-02**, so teach sampling depth, CDI immutability, 90-day retention and severity 1 to 3 as *current behaviour*, never as "the 2026 Macie update". Two older entries still matter: findings retention moved from 30 to **90 days on 2021-10-01**, and **DSSE-KMS** encrypted objects have been supported since **2024-01-17**.
 > - **The default automated-discovery identifier set is dynamic** (since 2023-08-02): AWS updates which managed identifiers run by default. Re-verify your exclusion list after any settings change, and confirm with a **canary object** containing a known fixture rather than trusting the console.
 
 ---
 
 ## Real-World Case Studies
 
-AWS publishes what these designs look like at production scale. Every figure below is **customer- or AWS-claimed and unaudited**, with source and date named so you can check it — the examinable point is the **pattern**.
+AWS publishes what these designs look like at production scale. Every figure below is **customer- or AWS-claimed and unaudited**, with source and date named so you can check it: the examinable point is the **pattern**.
 
-### Case A — FanDuel: two roles, one column grant, the security angle
+### Case A, FanDuel: two roles, one column grant, the security angle
 
 | Element | Detail |
 |---|---|
-| Customer | **FanDuel Group**, sports betting and gaming — presence across **50 states** and **over 8.5 million customers** |
+| Customer | **FanDuel Group**, sports betting and gaming: presence across **50 states** and **over 8.5 million customers** |
 | Problem | Three Amazon Redshift warehouses merged into one platform (warehouse + data lake). Customer PII had to be walled off from general analysts **without maintaining two copies of every dataset** |
-| First design (rejected) | Separate S3 files — one with PII, one without — tagged and gated by IAM, costing **"100–200 hours of development time for every data source that was ingested"** |
+| First design (rejected) | Separate S3 files, one with PII, one without, tagged and gated by IAM, costing **"100 to 200 hours of development time for every data source that was ingested"** |
 | Services | **AWS Lake Formation** (registered S3 location, column-based permissions), **Amazon Redshift Spectrum** external schemas per role, **AWS Glue** ETL writing Parquet plus crawlers, IAM/Redshift groups for entitlement sync |
-| Pattern | Two roles on **one physical dataset**: **`LimitedPIIAnalyst`** — granted access to all columns; **`NonPIIAnalyst`** — granted access to non-PII columns **and assigned to analysts by default** |
-| Outcome | *"Lake Formation column-level access control allowed them to secure PII data, which otherwise would have taken a complex S3 tag-based approach. This saved 100–200 hours of development time for every new data source and data footprint."* |
+| Pattern | Two roles on **one physical dataset**: **`LimitedPIIAnalyst`**, granted access to all columns; **`NonPIIAnalyst`**, granted access to non-PII columns **and assigned to analysts by default** |
+| Outcome | *"Lake Formation column-level access control allowed them to secure PII data, which otherwise would have taken a complex S3 tag-based approach. This saved 100 to 200 hours of development time for every new data source and data footprint."* |
 | Source | AWS Big Data Blog, *How FanDuel Group secures personally identifiable information in a data lake using AWS Lake Formation*, **2020-12-21** (digest 18, source S10; accessed 2026-10-11) |
 
-**The security angle.** FanDuel's design is a *default-deny* structure wearing a performance costume. The dangerous property of a dual-file design is not the storage cost — it is that **the PII copy exists as a separately addressable object**, so every new source creates a second artifact that needs its own bucket policy, its own tag hygiene and its own review, and every one of those is a place where the PII-bearing copy can be left wide open. Collapsing it to **one dataset plus a column grant** removes the second artifact entirely: there is no "PII file" to mis-tag, no shadow copy drifting out of compliance, and no IAM policy that can grant the PII columns without also going through Lake Formation. The default assignment matters just as much — `NonPIIAnalyst` is what analysts get *unless somebody actively promotes them*, which is the only defensible default when the asset is a customer's personal data.
+**The security angle.** FanDuel's design is a *default-deny* structure wearing a performance costume. The dangerous property of a dual-file design is not the storage cost, it is that **the PII copy exists as a separately addressable object**, so every new source creates a second artifact that needs its own bucket policy, its own tag hygiene and its own review, and every one of those is a place where the PII-bearing copy can be left wide open. Collapsing it to **one dataset plus a column grant** removes the second artifact entirely: there is no "PII file" to mis-tag, no shadow copy drifting out of compliance, and no IAM policy that can grant the PII columns without also going through Lake Formation. The default assignment matters just as much, `NonPIIAnalyst` is what analysts get *unless somebody actively promotes them*, which is the only defensible default when the asset is a customer's personal data.
 
 That is the same lesson as Section 5.2, arrived at from the incident side: **the cheapest PII control is the one that makes the unauthorised copy unnecessary.**
 
 | Case | Pattern it demonstrates | Section |
 |---|---|---|
-| FanDuel (2020-12-21) | Two-role column grant replacing copy-based masking; 100–200 hours/source saved | 5 |
-| Expedia Group | *"Expedia used Macie for data protection at petabyte scale"* — inventory + automated discovery over hand-rolled regexes (re:Inforce 2022 TDR206) | 2 |
-| Oportun | *"Oportun increases the accuracy of sensitive-data discovery by 95% using Amazon Macie"* — accuracy comes from tuned identifiers and allow lists | 2 |
+| FanDuel (2020-12-21) | Two-role column grant replacing copy-based masking; 100 to 200 hours/source saved | 5 |
+| Expedia Group | *"Expedia used Macie for data protection at petabyte scale"*: inventory + automated discovery over hand-rolled regexes (re:Inforce 2022 TDR206) | 2 |
+| Oportun | *"Oportun increases the accuracy of sensitive-data discovery by 95% using Amazon Macie"*: accuracy comes from tuned identifiers and allow lists | 2 |
 
-- **📚 Did you know?** The **Oportun** and **Expedia** figures above are AWS *customer-story card titles*, quoted verbatim from aws.amazon.com/macie (accessed 2026-10-11). AWS does not publish the methodology behind "95%" on the card itself, so present it as a customer claim with its date — never as an AWS guarantee or a benchmark you can plan against. The durable lesson from both stories is architectural: **tuned identifiers plus allow lists, at scale, instead of one regex team.**
+- **📚 Did you know?** The **Oportun** and **Expedia** figures above are AWS *customer-story card titles*, quoted verbatim from aws.amazon.com/macie (accessed 2026-10-11). AWS does not publish the methodology behind "95%" on the card itself, so present it as a customer claim with its date: never as an AWS guarantee or a benchmark you can plan against. The durable lesson from both stories is architectural: **tuned identifiers plus allow lists, at scale, instead of one regex team.**
 
 ---
 
@@ -906,12 +906,12 @@ That is the same lesson as Section 5.2, arrived at from the incident side: **the
   "question": "A stakeholder asks why Macie is not flagging email addresses in the bronze zone. What is the correct explanation?",
   "options": [
     "Macie detects email only in CSV and Parquet objects; the bronze zone stores JSON",
-    "Macie has no EMAIL managed data identifier - email coverage requires a custom data identifier, and the default automated-discovery set excludes NAME, EMAIL, CREDIT_CARD, IP_ADDRESS and PHONE anyway; in AWS Glue the managed sensitive data type EMAIL does exist",
+    "Macie has no EMAIL managed data identifier: email coverage requires a custom data identifier, and the default automated-discovery set excludes NAME, EMAIL, CREDIT_CARD, IP_ADDRESS and PHONE anyway; in AWS Glue the managed sensitive data type EMAIL does exist",
     "Macie requires Amazon Textract to read email addresses, and Textract must be enabled per bucket",
     "Email detection is available but only through the policy finding type, not sensitive data findings"
   ],
   "correct": 1,
-  "explanation": "The managed data identifier quick reference lists 40 identifiers and none of them is EMAIL. Automated discovery's default set additionally excludes NAME, EMAIL, CREDIT_CARD, IP_ADDRESS and PHONE - the EMAIL there is a category label, not a Macie identifier. Building email detection means a custom data identifier (regex plus keywords). Glue's managed sensitive data type catalog does include EMAIL, but that catalog is used by the Detect PII transform inside a job, not by Macie."
+  "explanation": "The managed data identifier quick reference lists 40 identifiers and none of them is EMAIL. Automated discovery's default set additionally excludes NAME, EMAIL, CREDIT_CARD, IP_ADDRESS and PHONE: the EMAIL there is a category label, not a Macie identifier. Building email detection means a custom data identifier (regex plus keywords). Glue's managed sensitive data type catalog does include EMAIL, but that catalog is used by the Detect PII transform inside a job, not by Macie."
 }
 ```
 
@@ -927,7 +927,7 @@ That is the same lesson as Section 5.2, arrived at from the incident side: **the
     "source = aws.s3, detail-type = Object Created with a Macie suffix"
   ],
   "correct": 1,
-  "explanation": "Macie publishes events with detail-type 'Macie Finding' and source 'aws.macie'. You filter the rest in the rule's detail block - type (SensitiveData or Policy) and severity label. Security Hub also ingests Macie findings, but the native Macie event carries aws.macie; S3 object-created events never carry Macie content."
+  "explanation": "Macie publishes events with detail-type 'Macie Finding' and source 'aws.macie'. You filter the rest in the rule's detail block: type (SensitiveData or Policy) and severity label. Security Hub also ingests Macie findings, but the native Macie event carries aws.macie; S3 object-created events never carry Macie content."
 }
 ```
 
@@ -938,12 +938,12 @@ That is the same lesson as Section 5.2, arrived at from the incident side: **the
   "question": "A dashboard shows a bucket with sensitivity score 100, a finding with severity 3, and an occurrence count of 40. Which statement is correct?",
   "options": [
     "All three numbers describe the same object and can be compared directly",
-    "The score of 100 was manually assigned - Macie never calculates 100 - severity 3 is High on a 1-to-3 scale, and count describes occurrences within one finding; the score applies to the bucket and reflects automated discovery only",
+    "The score of 100 was manually assigned: Macie never calculates 100: severity 3 is High on a 1-to-3 scale, and count describes occurrences within one finding; the score applies to the bucket and reflects automated discovery only",
     "A score of 100 means Macie has inspected 100 percent of the bucket's objects",
     "Severity 3 means the bucket is Critical, and the score confirms it"
   ],
   "correct": 1,
-  "explanation": "The three numbers are orthogonal. Sensitivity score is a bucket-level attribute from automated discovery only, ranging -1 (classification error) through 50 (not yet analyzed) to 51-99 (sensitive), with 100 reserved for manual assignment. Severity is per finding on a 1-to-3 scale labelled Low/Medium/High - there is no Critical. Count is occurrence detail inside a finding; the top-level count is always 1 for sensitive data findings. AWS also states the score does not indicate criticality or importance."
+  "explanation": "The three numbers are orthogonal. Sensitivity score is a bucket-level attribute from automated discovery only, ranging -1 (classification error) through 50 (not yet analyzed) to 51-99 (sensitive), with 100 reserved for manual assignment. Severity is per finding on a 1-to-3 scale labelled Low/Medium/High: there is no Critical. Count is occurrence detail inside a finding; the top-level count is always 1 for sensitive data findings. AWS also states the score does not indicate criticality or importance."
 }
 ```
 
@@ -953,13 +953,13 @@ That is the same lesson as Section 5.2, arrived at from the incident side: **the
   "type": "multiple-choice",
   "question": "During the 30-day Macie free trial, a team runs a one-time targeted discovery job over a 200 GB bucket at 100% sampling depth. What is the expected charge (us-east-1, as of Oct 2026)?",
   "options": [
-    "$0 - targeted jobs are included in the 30-day free trial",
+    "$0: targeted jobs are included in the 30-day free trial",
     "About $200 for inspection, because the pricing page states that jobs you create are not included in the 30-day free trial",
     "About $20, because only 10% of the bucket is inspected by default",
     "$0.10, because bucket inventory is the only billable dimension"
   ],
   "correct": 1,
-  "explanation": "200 GB at $1.00 per GB inspected is about $200, and the pricing page explicitly says any sensitive data discovery jobs you create are not part of the 30-day free trial (which covers up to 150 GB inspected per account). Sampling depth is your choice - 10% would be about $20 and 1% about $2 - but a 100% job means 100% of the bytes are billed."
+  "explanation": "200 GB at $1.00 per GB inspected is about $200, and the pricing page explicitly says any sensitive data discovery jobs you create are not part of the 30-day free trial (which covers up to 150 GB inspected per account). Sampling depth is your choice - 10% would be about $20 and 1% about $2: but a 100% job means 100% of the bytes are billed."
 }
 ```
 
@@ -971,11 +971,11 @@ That is the same lesson as Section 5.2, arrived at from the incident side: **the
   "options": [
     "Both work; mask() is available in Glue 4.0 and in Athena's Trino engine",
     "Glue 4.0 compiles it to a redaction automatically, and Athena silently returns the unmasked value",
-    "Glue 4.0 fails at runtime because mask() is New in Spark 3.5.0 and Glue 4.0 runs Spark 3.3.0, and Athena has no mask() at all - use regexp_replace or a UDF in Athena, or push masking to Glue 5.0+",
+    "Glue 4.0 fails at runtime because mask() is New in Spark 3.5.0 and Glue 4.0 runs Spark 3.3.0, and Athena has no mask() at all: use regexp_replace or a UDF in Athena, or push masking to Glue 5.0+",
     "Both fail unless Amazon Macie is enabled on the bucket first"
   ],
   "correct": 2,
-  "explanation": "The Glue release matrix is Glue 4.0 = Spark 3.3.0, Glue 5.0 = Spark 3.5.4, Glue 5.1 = Spark 3.5.6, Glue 6.0 = Spark 4.1.1, and Spark's mask() is new in 3.5.0 - so a Glue 4.0 job fails at runtime, since functions resolve dynamically rather than at compile time. Athena engine version 3 is Trino-based and its scalar string function list contains no mask(), so query-time masking there means regexp_replace or a custom UDF."
+  "explanation": "The Glue release matrix is Glue 4.0 = Spark 3.3.0, Glue 5.0 = Spark 3.5.4, Glue 5.1 = Spark 3.5.6, Glue 6.0 = Spark 4.1.1, and Spark's mask() is new in 3.5.0: so a Glue 4.0 job fails at runtime, since functions resolve dynamically rather than at compile time. Athena engine version 3 is Trino-based and its scalar string function list contains no mask(), so query-time masking there means regexp_replace or a custom UDF."
 }
 ```
 
@@ -986,12 +986,12 @@ That is the same lesson as Section 5.2, arrived at from the incident side: **the
   "question": "Marketing needs to join silver.conversions to silver.customers on email address, but raw email must not be readable. Which technique satisfies the join?",
   "options": [
     "Glue Detect PII action REDACT, which replaces the value with ********",
-    "A deterministic hash - Glue SHA256_HASH, or an HMAC with a per-customer salt stored in Secrets Manager - so identical emails map to identical tokens",
+    "A deterministic hash: Glue SHA256_HASH, or an HMAC with a per-customer salt stored in Secrets Manager: so identical emails map to identical tokens",
     "A random token per row, because randomization is always safer than hashing",
     "Omitting the email column from silver entirely and re-reading bronze at query time"
   ],
   "correct": 1,
-  "explanation": "Join fidelity requires determinism: the same input must produce the same output in both tables. REDACT destroys the join key, and per-row random tokens guarantee the join never matches. A deterministic hash or HMAC preserves joins - and because low-entropy fields such as phone numbers are dictionary-attackable under a bare SHA-256, the salted HMAC form is the correct choice for those. Re-reading bronze at query time defeats the purpose of masking."
+  "explanation": "Join fidelity requires determinism: the same input must produce the same output in both tables. REDACT destroys the join key, and per-row random tokens guarantee the join never matches. A deterministic hash or HMAC preserves joins; and because low-entropy fields such as phone numbers are dictionary-attackable under a bare SHA-256, the salted HMAC form is the correct choice for those. Re-reading bronze at query time defeats the purpose of masking."
 }
 ```
 
@@ -1007,7 +1007,7 @@ That is the same lesson as Section 5.2, arrived at from the incident side: **the
     "Move the objects to Glacier Deep Archive; archived data is considered erased"
   ],
   "correct": 1,
-  "explanation": "With versioning on, deleting the current version without a version ID only inserts a delete marker - a soft delete that leaves prior versions intact. Real erasure requires removing all non-current versions and delete markers, plus purging every other store that materialised the value: Macie findings (90-day retention), JSONL exports carrying occurrence locations, SPICE extracts and query result caches. Disabling Macie deletes nothing and removes your ability to find the data; archiving changes the storage class, not the presence of the data."
+  "explanation": "With versioning on, deleting the current version without a version ID only inserts a delete marker: a soft delete that leaves prior versions intact. Real erasure requires removing all non-current versions and delete markers, plus purging every other store that materialised the value: Macie findings (90-day retention), JSONL exports carrying occurrence locations, SPICE extracts and query result caches. Disabling Macie deletes nothing and removes your ability to find the data; archiving changes the storage class, not the presence of the data."
 }
 ```
 
@@ -1023,7 +1023,7 @@ That is the same lesson as Section 5.2, arrived at from the incident side: **the
     "It allows row-level filtering of PII without any grant changes"
   ],
   "correct": 1,
-  "explanation": "FanDuel's earlier design split PII into separate S3 files gated by tags and IAM, costing 100-200 hours per ingested data source. The column-grant design keeps one physical dataset and expresses entitlement as a TableWithColumns inclusion, which removes the shadow copy entirely - no second object to mis-tag, and no IAM path around the governance layer. Row filtering is a separate mechanism (a data filter with a row predicate) and is not implied by a column grant."
+  "explanation": "FanDuel's earlier design split PII into separate S3 files gated by tags and IAM, costing 100-200 hours per ingested data source. The column-grant design keeps one physical dataset and expresses entitlement as a TableWithColumns inclusion, which removes the shadow copy entirely: no second object to mis-tag, and no IAM path around the governance layer. Row filtering is a separate mechanism (a data filter with a row predicate) and is not implied by a column grant."
 }
 ```
 
@@ -1039,7 +1039,7 @@ That is the same lesson as Section 5.2, arrived at from the incident side: **the
     "The job failed silently, because only 10% and 100% are valid sampling depths"
   ],
   "correct": 1,
-  "explanation": "Valid sampling depths are 1, 10 and 100 percent, so 1% is legal - and it inspects only about 4 GB of the 400 GB bucket. Absence of findings in the sample is not evidence about the remainder. Note also that targeted job results never change the bucket's sensitivity score at all: scores come from automated discovery only, and 100 on a score is always a manual assignment."
+  "explanation": "Valid sampling depths are 1, 10 and 100 percent, so 1% is legal; and it inspects only about 4 GB of the 400 GB bucket. Absence of findings in the sample is not evidence about the remainder. Note also that targeted job results never change the bucket's sensitivity score at all: scores come from automated discovery only, and 100 on a score is always a manual assignment."
 }
 ```
 
@@ -1050,12 +1050,12 @@ That is the same lesson as Section 5.2, arrived at from the incident side: **the
   "question": "You must require SSE-KMS on a PII bucket and keep KMS request costs low. Which configuration is correct?",
   "options": [
     "Set default encryption to AES256 (SSE-S3), because it uses KMS keys and is free",
-    "Set bucket default encryption to aws:kms, add a bucket policy condition denying uploads that are not aws:kms, and enable S3 Bucket Keys - noting bucket keys are not supported for DSSE-KMS",
+    "Set bucket default encryption to aws:kms, add a bucket policy condition denying uploads that are not aws:kms, and enable S3 Bucket Keys: noting bucket keys are not supported for DSSE-KMS",
     "Enable DSSE-KMS with an S3 Bucket Key, since dual-layer encryption also reduces KMS request costs by up to 99 percent",
     "Leave encryption at the SSE-S3 default and add a CloudTrail rule instead"
   ],
   "correct": 1,
-  "explanation": "AES256 is SSE-S3: AWS-managed keys, no per-key policy, no key-level CloudTrail granularity - useless for a deny-by-key-policy PII posture. The correct shape is bucket default encryption set to aws:kms plus a bucket policy denying non-KMS uploads, with Bucket Keys enabled to reduce KMS request costs by up to 99 percent. Bucket keys are explicitly not supported for DSSE-KMS, so dual-layer encryption and bucket keys are mutually exclusive choices."
+  "explanation": "AES256 is SSE-S3: AWS-managed keys, no per-key policy, no key-level CloudTrail granularity: useless for a deny-by-key-policy PII posture. The correct shape is bucket default encryption set to aws:kms plus a bucket policy denying non-KMS uploads, with Bucket Keys enabled to reduce KMS request costs by up to 99 percent. Bucket keys are explicitly not supported for DSSE-KMS, so dual-layer encryption and bucket keys are mutually exclusive choices."
 }
 ```
 
@@ -1067,47 +1067,47 @@ That is the same lesson as Section 5.2, arrived at from the incident side: **the
   "options": [
     "Amazon Macie, because Macie scans every object under the table's S3 prefix automatically",
     "Macie policy findings, because table-level issues are always reported as Policy findings",
-    "AWS Glue - the Detect PII transform and Glue's managed sensitive data types run inside the bronze-to-silver job; Macie inspects S3 general purpose bucket objects and does not read the Glue Data Catalog or Iceberg metadata",
+    "AWS Glue: the Detect PII transform and Glue's managed sensitive data types run inside the bronze-to-silver job; Macie inspects S3 general purpose bucket objects and does not read the Glue Data Catalog or Iceberg metadata",
     "Amazon Athena, which classifies columns during query planning"
   ],
   "correct": 2,
-  "explanation": "Macie's entire feature surface targets S3 general purpose buckets - inventory, monitoring, automated discovery and targeted jobs over objects. It does not read the Data Catalog, Iceberg metadata or Redshift. Tabular classification is Glue's job: the Detect PII transform plus managed sensitive data types inside a job over the DataFrame. Athena has no classification feature; masking there is query-time regexp_replace at best."
+  "explanation": "Macie's entire feature surface targets S3 general purpose buckets: inventory, monitoring, automated discovery and targeted jobs over objects. It does not read the Data Catalog, Iceberg metadata or Redshift. Tabular classification is Glue's job: the Detect PII transform plus managed sensitive data types inside a job over the DataFrame. Athena has no classification feature; masking there is query-time regexp_replace at best."
 }
 ```
 
 > [!WARNING]
-> ⚠️ **Pattern traps for this lesson — walk this list before you design anything:**
-> - **Macie finds, it never prevents.** Any option phrased *"Macie masks the column"*, *"Macie blocks the upload"* or *"Macie revokes the grant"* is wrong by construction — those are Glue, S3 bucket policy and Lake Formation, wired by **your** EventBridge rule and Lambda.
+> ⚠️ **Pattern traps for this lesson: walk this list before you design anything:**
+> - **Macie finds, it never prevents.** Any option phrased *"Macie masks the column"*, *"Macie blocks the upload"* or *"Macie revokes the grant"* is wrong by construction; those are Glue, S3 bucket policy and Lake Formation, wired by **your** EventBridge rule and Lambda.
 > - **Macie is S3 general purpose buckets only.** Not the Glue catalog, not Iceberg metadata, not Redshift, not S3 Express directory buckets, not Deep Archive or Glacier Flexible Retrieval until restored.
 > - **No `EMAIL` managed data identifier**, and the default automated-discovery set excludes NAME, EMAIL, CREDIT_CARD, IP_ADDRESS and PHONE. Email in Macie = a custom data identifier; email in Glue = the `EMAIL` managed type.
 > - **Severity ≠ score ≠ count.** 1/2/3 per finding (no Critical) · −1…100 per bucket from automated discovery only (100 is manual, 50 is "not yet analyzed") · occurrence detail with a 15-location cap per sensitive-data finding.
-> - **Free trial ≠ free jobs.** 150 GB over 30 days, and *"Any sensitive data discovery jobs you create will not be included"* — a 200 GB 100% job costs about $200 on day two.
+> - **Free trial ≠ free jobs.** 150 GB over 30 days, and *"Any sensitive data discovery jobs you create will not be included"*: a 200 GB 100% job costs about $200 on day two.
 > - **Sampling depth is coverage, not quality.** 1 / 10 / 100 percent; a 1% result describes the sample. Targeted jobs never move the sensitivity score, and the default targeted-discovery quota is **5 TB** with jobs **pausing** at the cap.
-> - **`mask()` needs Spark 3.5.0+** — Glue 5.0+ yes, Glue 4.0 no (runtime failure), Athena no (`regexp_replace` instead).
-> - **Determinism ≠ anonymisation for low-entropy fields** — salt your hashes (HMAC) or tokenize; plain SHA-256 of a phone number is enumerable.
+> - **`mask()` needs Spark 3.5.0+**: Glue 5.0+ yes, Glue 4.0 no (runtime failure), Athena no (`regexp_replace` instead).
+> - **Determinism ≠ anonymisation for low-entropy fields**: salt your hashes (HMAC) or tokenize; plain SHA-256 of a phone number is enumerable.
 > - **SSE-S3 ≠ SSE-KMS**, and **bucket keys don't work with DSSE-KMS**.
-> - **Findings and exports are themselves sensitive** — occurrence locations, 90-day retention, SSE-KMS + HMAC on exports; expire them.
-> - **Versioning makes delete a soft delete** — erase by version ID and expire non-current versions, then purge findings, exports and extracts.
-> - **CDIs are immutable and account-scoped** (≤100 per account/Region, regex ≤4,096 chars or ≤400 with proximity, ≤20 keywords, ≤25 ignore words, default Medium severity) — use **allow lists** (≤500 regexes, ≤100 chars each) to suppress false positives instead of forking identifiers.
+> - **Findings and exports are themselves sensitive**: occurrence locations, 90-day retention, SSE-KMS + HMAC on exports; expire them.
+> - **Versioning makes delete a soft delete**: erase by version ID and expire non-current versions, then purge findings, exports and extracts.
+> - **CDIs are immutable and account-scoped** (≤100 per account/Region, regex ≤4,096 chars or ≤400 with proximity, ≤20 keywords, ≤25 ignore words, default Medium severity): use **allow lists** (≤500 regexes, ≤100 chars each) to suppress false positives instead of forking identifiers.
 
 > [!IMPORTANT]
-> **Comparative Verdict — Amazon Macie vs Macie + Lake Formation vs third-party DLP vs homegrown regex scans**
-> - **Versus third-party DLP platforms:** Macie's boundary is deliberate — S3 general-purpose buckets, 40 managed identifiers plus your custom ones, findings retained 90 days, EventBridge as the only routing contract. A third-party DLP earns its place only when you must classify *outside* S3 (endpoints, SaaS, non-AWS stores) or need a single policy language spanning both. Inside an AWS lakehouse, a third party re-implements what you get here: inventory, sampling, findings, and org-wide administration through a delegated admin account.
-> - **Versus homegrown regex scans:** the arithmetic is Section 2.7. A Lambda walking 2,000,000 objects is S3 GET charges *plus* your compute *plus* the engineering to keep the pattern set current — and you still have no sensitivity score, no policy findings, no allow-list semantics, no immutable identifier history and no Security Hub control to point an auditor at. Macie's bill for that bucket estate is `$0.10/bucket + $0.01/100K objects + $1/GB inspected`, and AWS ships new managed identifiers for new national ID formats (Colombia, Chile, Costa Rica, Mexico, SUBE, tax IDs — 2025-03) while your regex repository rots.
-> - **Versus Macie alone (detection without enforcement):** this is the real comparison. Detection-only buys a dashboard; **Macie + Lake Formation** buys an enforcement — a finding that turns into `PII=true` and a revoked column grant is a control, and the same finding without the Lake Formation step is a ticket. The FanDuel result (2020-12-21) is the shape of the enforced version: column-level grants on one dataset, `NonPIIAnalyst` as the default, 100–200 hours saved per data source because there was no second copy to secure.
-> - **The one-sentence verdict:** in October 2026, **run Macie for classification on every S3 landing and bronze prefix, route its findings through EventBridge into a Lambda that quarantines and tags, mask or tokenize on the way into silver with Glue (redact for values you never need back, salted HMAC or a token vault for values that must join), enforce with Lake Formation column/row/cell filters driven by `PII=true` tags, and keep CloudTrail S3 data events on for the buckets that matter — reaching for a third-party DLP only where the data lives outside S3, and never for a hand-rolled scanner you would have to audit yourself.**
+> **Comparative Verdict: Amazon Macie vs Macie + Lake Formation vs third-party DLP vs homegrown regex scans**
+> - **Versus third-party DLP platforms:** Macie's boundary is deliberate: S3 general-purpose buckets, 40 managed identifiers plus your custom ones, findings retained 90 days, EventBridge as the only routing contract. A third-party DLP earns its place only when you must classify *outside* S3 (endpoints, SaaS, non-AWS stores) or need a single policy language spanning both. Inside an AWS lakehouse, a third party re-implements what you get here: inventory, sampling, findings, and org-wide administration through a delegated admin account.
+> - **Versus homegrown regex scans:** the arithmetic is Section 2.7. A Lambda walking 2,000,000 objects is S3 GET charges *plus* your compute *plus* the engineering to keep the pattern set current, and you still have no sensitivity score, no policy findings, no allow-list semantics, no immutable identifier history and no Security Hub control to point an auditor at. Macie's bill for that bucket estate is `$0.10/bucket + $0.01/100K objects + $1/GB inspected`, and AWS ships new managed identifiers for new national ID formats (Colombia, Chile, Costa Rica, Mexico, SUBE, tax IDs, 2025-03) while your regex repository rots.
+> - **Versus Macie alone (detection without enforcement):** this is the real comparison. Detection-only buys a dashboard; **Macie + Lake Formation** buys an enforcement: a finding that turns into `PII=true` and a revoked column grant is a control, and the same finding without the Lake Formation step is a ticket. The FanDuel result (2020-12-21) is the shape of the enforced version: column-level grants on one dataset, `NonPIIAnalyst` as the default, 100 to 200 hours saved per data source because there was no second copy to secure.
+> - **The one-sentence verdict:** in October 2026, **run Macie for classification on every S3 landing and bronze prefix, route its findings through EventBridge into a Lambda that quarantines and tags, mask or tokenize on the way into silver with Glue (redact for values you never need back, salted HMAC or a token vault for values that must join), enforce with Lake Formation column/row/cell filters driven by `PII=true` tags, and keep CloudTrail S3 data events on for the buckets that matter: reaching for a third-party DLP only where the data lives outside S3, and never for a hand-rolled scanner you would have to audit yourself.**
 
 > [!SUCCESS]
 > **Key Takeaways:**
 > 1. PII protection is **five layers, not a product**: classify (Macie for S3 objects, Glue Detect PII for tabular data) → route (EventBridge → Lambda) → protect (mask, hash, tokenize, encrypt) → control (Lake Formation filters and LF-Tags) → respond (CloudTrail, findings, exports). Macie owns layer 1 only; **Macie finds, it never prevents**.
 > 2. **Macie's three billing dimensions** (us-east-1, as of Oct 2026) are `$0.10 per bucket/month`, `$0.01 per 100,000 objects monitored` and `$1.00 per GB inspected`, with a 30-day / 150 GB free trial that **excludes jobs you create**; the targeted-discovery quota defaults to **5 TB** and jobs **pause** when reached.
 > 3. **Two discovery mechanisms**: automated discovery (clustered representative sampling, feeds the bucket **sensitivity score**, 48-hour warm-up, scores reset 30 days after disable) versus **targeted jobs** (one-time or daily/weekly/monthly, object criteria, sampling depth **1/10/100%**, results never move the score).
-> 4. **Identifiers**: 40 managed data identifiers with **no EMAIL**, versus custom data identifiers (regex ≤4,096 chars — ≤400 with a proximity window, ≤20 keywords, ≤25 ignore words of ≤40 chars, ≤100 per account, **default Medium severity, immutable after creation**); false positives are handled by **allow lists** (≤500 regexes, ≤100 chars each).
+> 4. **Identifiers**: 40 managed data identifiers with **no EMAIL**, versus custom data identifiers (regex ≤4,096 chars: ≤400 with a proximity window, ≤20 keywords, ≤25 ignore words of ≤40 chars, ≤100 per account, **default Medium severity, immutable after creation**); false positives are handled by **allow lists** (≤500 regexes, ≤100 chars each).
 > 5. **Three numbers, never conflated**: finding **severity 1/2/3 = Low/Medium/High** (no Critical) · bucket **sensitivity score −1…100** (−1 classification error, 50 not yet analyzed, 100 manual only) · occurrence **count**, where the top-level `count` is always **1** for sensitive data findings and detail carries up to **15 locations**.
-> 6. **The routing contract is EventBridge**: `detail-type = "Macie Finding"`, `source = "aws.macie"`, targets Lambda/SNS/SQS, findings retained **90 days** — and because Macie re-emits events for **new occurrences of an existing finding**, the handler must be idempotent.
+> 6. **The routing contract is EventBridge**: `detail-type = "Macie Finding"`, `source = "aws.macie"`, targets Lambda/SNS/SQS, findings retained **90 days**, and because Macie re-emits events for **new occurrences of an existing finding**, the handler must be idempotent.
 > 7. **Masking by join requirement**: no join → **REDACT** (`********` default) · joins → **SHA256_HASH**, salted with **HMAC for low-entropy fields** · shape must survive → **Spark `mask()` (Glue 5.0+/Spark 3.5.0+, absent from Glue 4.0 and Athena)** · full lookup → **token vault (API Gateway + Lambda + DynamoDB + KMS)**. Format-preserving encryption is not an AWS managed feature.
 > 8. **Encryption backstop**: require **SSE-KMS** via bucket default encryption plus a bucket-policy deny (SSE-S3 since 2023-01-05 is free but gives no key-level control), enable **Bucket Keys** for up to **99% lower KMS request costs** (not supported with **DSSE-KMS**), and note KMS at **$1/key/month + $0.03 per 10,000 requests**.
 > 9. **Lake Formation turns tags into enforcement**: LF-Tags (≤50 chars, ≤50 per resource, ≤10,000 keys, ≤1,000 values/key) on columns plus **data filters** for column-, row- and cell-level security; there is **no deny primitive**, so a later plain `SELECT` grant re-includes what you excluded.
-> 10. **Audit** = CloudTrail **S3 data events at $0.10 per 100,000** (opt-in — without them you cannot prove *who read* an object) + Macie findings (90 days) + JSONL exports (`.jsonl`, gzip, SSE-KMS, **HMAC-signed**) queried through Athena and QuickSight.
-> 11. **Compliance is mapping**: GDPR (enforceable **2018-05-25**), CCPA/CPRA (AWS page updated **2025-08-08**) and LGPD (in force **2020-09-18**, ANPD sets minimum standards, CloudTrail for breach-notification evidence) all land on the same layers — and **S3 versioning breaks erasure**: delete markers are soft deletes, so real erasure needs version-ID deletion plus lifecycle expiry of non-current versions, plus purging findings, exports and extracts.
-> 12. **Case anchor — FanDuel** (AWS Big Data Blog, **2020-12-21**): across **50 states** and **8.5M+ customers**, a dual-file S3-tag PII design costing **100–200 hours per data source** was replaced by **two Lake Formation column-grant roles** — `LimitedPIIAnalyst` (all columns) and `NonPIIAnalyst` (non-PII columns, assigned by default) — proving the security point that **one governed dataset beats two copies**.
+> 10. **Audit** = CloudTrail **S3 data events at $0.10 per 100,000** (opt-in: without them you cannot prove *who read* an object) + Macie findings (90 days) + JSONL exports (`.jsonl`, gzip, SSE-KMS, **HMAC-signed**) queried through Athena and QuickSight.
+> 11. **Compliance is mapping**: GDPR (enforceable **2018-05-25**), CCPA/CPRA (AWS page updated **2025-08-08**) and LGPD (in force **2020-09-18**, ANPD sets minimum standards, CloudTrail for breach-notification evidence) all land on the same layers, and **S3 versioning breaks erasure**: delete markers are soft deletes, so real erasure needs version-ID deletion plus lifecycle expiry of non-current versions, plus purging findings, exports and extracts.
+> 12. **Case anchor, FanDuel** (AWS Big Data Blog, **2020-12-21**): across **50 states** and **8.5M+ customers**, a dual-file S3-tag PII design costing **100 to 200 hours per data source** was replaced by **two Lake Formation column-grant roles**: `LimitedPIIAnalyst` (all columns) and `NonPIIAnalyst` (non-PII columns, assigned by default), proving the security point that **one governed dataset beats two copies**.

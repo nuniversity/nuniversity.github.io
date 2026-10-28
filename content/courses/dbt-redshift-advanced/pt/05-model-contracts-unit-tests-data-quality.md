@@ -11,9 +11,9 @@ difficulty: "advanced"
 O dbt-core fornece três mecanismos complementares para qualidade de dados: **contratos de modelo** (validação de schema em tempo de compilação), **testes unitários** (validação de lógica com dados mock, v1.8+) e **testes de dados** (asserções de dados em runtime). Juntos, eles formam um fluxo de trabalho de desenvolvimento orientado a testes para engenharia de análise que rivaliza com práticas de qualidade de engenharia de software.
 
 A ideia central é detectar problemas o mais cedo possível no pipeline:
-1. **Testes unitários** — durante o desenvolvimento, antes mesmo de tocar no warehouse
-2. **Contratos de modelo** — em tempo de compilação, antes de executar qualquer SQL
-3. **Testes de dados** — após a materialização, contra dados reais
+1. **Testes unitários**: durante o desenvolvimento, antes mesmo de tocar no warehouse
+2. **Contratos de modelo**: em tempo de compilação, antes de executar qualquer SQL
+3. **Testes de dados**: após a materialização, contra dados reais
 
 ---
 
@@ -35,7 +35,7 @@ flowchart LR
 
 | Funcionalidade | Quando executa | O que testa | Dados mock? |
 | :--- | :--- | :--- | :--- |
-| Testes unitários | Antes da materialização | Lógica de transformação SQL | Sim — inputs estáticos |
+| Testes unitários | Antes da materialização | Lógica de transformação SQL | Sim: inputs estáticos |
 | Contratos de modelo | No build/compilação | Estrutura do schema, tipos de coluna | Não |
 | Testes de dados | Após materialização | Valores de dados reais | Não |
 
@@ -43,7 +43,7 @@ flowchart LR
 
 ## Contratos de Modelo
 
-Um contrato de modelo declara o schema esperado para um modelo e o aplica em tempo de build. Quando um contrato é aplicado, o dbt valida que o SQL compilado retorna exatamente as colunas, tipos e restrições definidos — falhando antes que qualquer dado seja escrito se não corresponderem.
+Um contrato de modelo declara o schema esperado para um modelo e o aplica em tempo de build. Quando um contrato é aplicado, o dbt valida que o SQL compilado retorna exatamente as colunas, tipos e restrições definidos: falhando antes que qualquer dado seja escrito se não corresponderem.
 
 ### Definindo um Contrato
 
@@ -94,7 +94,7 @@ models:
 ```
 
 [!WARNING]
-No Redshift, as restrições `primary_key`, `foreign_key` e `unique` são **apenas informacionais** — o Redshift não as aplica no nível do banco de dados. Os contratos de modelo do dbt validam o schema em tempo de compilação, mas a integridade referencial deve ser aplicada via `data_tests` do dbt. Use `not_null` e `check` onde o Redshift as aplica.
+No Redshift, as restrições `primary_key`, `foreign_key` e `unique` são **apenas informacionais**, o Redshift não as aplica no nível do banco de dados. Os contratos de modelo do dbt validam o schema em tempo de compilação, mas a integridade referencial deve ser aplicada via `data_tests` do dbt. Use `not_null` e `check` onde o Redshift as aplica.
 
 ### Aplicando Contratos em Todo o Projeto para Marts
 
@@ -132,13 +132,13 @@ Compilation Error in model fct_orders
   - Column 'total_amount' declared as numeric(18,4) but model returns float8
 ```
 
-Isso significa que o erro é capturado **antes** de qualquer SQL ser executado contra o Redshift — economizando tempo e recursos computacionais.
+Isso significa que o erro é capturado **antes** de qualquer SQL ser executado contra o Redshift: economizando tempo e recursos computacionais.
 
 ---
 
 ## Testes Unitários (dbt-core 1.8+)
 
-Testes unitários validam sua lógica de transformação SQL usando **dados mock estáticos** — nenhum processamento no warehouse é necessário além do próprio teste. Eles permitem desenvolvimento orientado a testes: escreva o teste, escreva o modelo, execute o teste.
+Testes unitários validam sua lógica de transformação SQL usando **dados mock estáticos**: nenhum processamento no warehouse é necessário além do próprio teste. Eles permitem desenvolvimento orientado a testes: escreva o teste, escreva o modelo, execute o teste.
 
 ### Estrutura Básica de Teste Unitário
 
@@ -361,7 +361,7 @@ flowchart TD
 
 ### `dbt build` Recomendado para Quality Gate Completo
 
-`dbt build` executa modelos, testes, seeds e snapshots na ordem do DAG — modelos executam, então seus testes imediatamente:
+`dbt build` executa modelos, testes, seeds e snapshots na ordem do DAG: modelos executam, então seus testes imediatamente:
 
 ```bash
 # Build completo com todas as verificações de qualidade
@@ -407,7 +407,7 @@ dbt build \
     "not_null via uma restrição CHECK"
   ],
   "correct": 3,
-  "explanation": "O Redshift aplica restrições check (incluindo not_null, que mapeia para uma restrição NOT NULL de coluna). primary_key, foreign_key e unique são informacionais — declaradas mas não aplicadas pelo motor de armazenamento do Redshift."
+  "explanation": "O Redshift aplica restrições check (incluindo not_null, que mapeia para uma restrição NOT NULL de coluna). primary_key, foreign_key e unique são informacionais: declaradas mas não aplicadas pelo motor de armazenamento do Redshift."
 }
 ```
 
@@ -471,7 +471,7 @@ dbt build \
     "dbt build compila modelos mas não os executa"
   ],
   "correct": 1,
-  "explanation": "dbt build processa modelos na ordem do DAG, executando os testes de cada modelo imediatamente após sua construção. Se um modelo falha em seus testes, modelos downstream não são construídos — isso captura problemas mais cedo do que executar testes após todos os modelos serem concluídos."
+  "explanation": "dbt build processa modelos na ordem do DAG, executando os testes de cada modelo imediatamente após sua construção. Se um modelo falha em seus testes, modelos downstream não são construídos; isso captura problemas mais cedo do que executar testes após todos os modelos serem concluídos."
 }
 ```
 
@@ -480,10 +480,10 @@ dbt build \
 [!SUCCESS]
 ### Principais Conclusões
 
-- Contratos de modelo aplicam validação de schema em tempo de compilação — nomes de colunas, tipos de dados e restrições devem corresponder antes do SQL executar.
+- Contratos de modelo aplicam validação de schema em tempo de compilação: nomes de colunas, tipos de dados e restrições devem corresponder antes do SQL executar.
 - No Redshift, apenas restrições `not_null` e `check` são aplicadas no banco de dados. Use `primary_key`, `foreign_key` e `unique` como documentação informacional e aplique-os com testes de dados.
-- Testes unitários (v1.8+) validam lógica de transformação SQL com dados mock estáticos — nenhum processamento no warehouse é necessário além da consulta do teste em si.
+- Testes unitários (v1.8+) validam lógica de transformação SQL com dados mock estáticos: nenhum processamento no warehouse é necessário além da consulta do teste em si.
 - Sobrescreva macros não-determinísticas (`current_timestamp`) em testes unitários para garantir resultados reproduzíveis.
 - `store_failures: true` materializa linhas de teste com falha em uma tabela de auditoria no seu warehouse para depuração.
-- `dbt build` executa modelos e seus testes na ordem do DAG — os testes de um modelo executam antes de seus descendentes serem construídos.
+- `dbt build` executa modelos e seus testes na ordem do DAG: os testes de um modelo executam antes de seus descendentes serem construídos.
 - Combine testes unitários (desenvolvimento), contratos de modelo (tempo de build) e testes de dados (runtime) para um quality gate completo.

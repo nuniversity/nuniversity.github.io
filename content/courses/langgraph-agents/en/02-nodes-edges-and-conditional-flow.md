@@ -137,7 +137,7 @@ The router function **must** return a key that exists in the mapping dict. If th
 
 ## Sending to Specific Nodes with Send()
 
-For advanced dynamic fan-out, LangGraph provides `Send()` — a typed API that lets you send different state to different target nodes.
+For advanced dynamic fan-out, LangGraph provides `Send()`: a typed API that lets you send different state to different target nodes.
 
 ```python
 from langgraph.graph import Send
@@ -389,7 +389,7 @@ def branch_b(state: State) -> dict:
   "id": "lg-02-q4",
   "type": "multiple-choice",
   "question": "What happens when you add two edges from node a to nodes b and c?",
-  "options": ["Only b executes", "b and c execute in parallel", "Runtime error — multiple edges from one node not allowed", "c waits for b to finish"],
+  "options": ["Only b executes", "b and c execute in parallel", "Runtime error: multiple edges from one node not allowed", "c waits for b to finish"],
   "correct": 1,
   "explanation": "Multiple outgoing edges from one node execute their targets in parallel."
 }

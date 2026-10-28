@@ -70,7 +70,7 @@ if (score >= 90) {
 | `>=` | Greater than or equal | `10 >= 10` |
 | `<=` | Less than or equal | `5 <= 10` |
 
-Always prefer `===` over `==` — strict equality checks both value and type.
+Always prefer `===` over `==`: strict equality checks both value and type.
 
 ## Logical Operators
 
@@ -89,9 +89,9 @@ if (age < 18 || !hasLicense) {
 }
 ```
 
-- `&&` — both must be true
-- `||` — at least one must be true
-- `!` — inverts a boolean
+- `&&`: both must be true
+- `||`: at least one must be true
+- `!`: inverts a boolean
 
 ## The switch Statement
 

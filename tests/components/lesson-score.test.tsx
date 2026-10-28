@@ -83,7 +83,7 @@ describe('LessonScoreProvider', () => {
     const summary = screen.getByTestId('lesson-score-summary')
     expect(summary).toHaveTextContent('3/4 correct')
     expect(summary).toHaveTextContent('one miss')
-    expect(summary).toHaveTextContent('Nice work — mark the lesson as complete')
+    expect(summary).toHaveTextContent('Nice work: mark the lesson as complete')
     expect(summary).not.toHaveTextContent('remaining')
   })
 })
@@ -124,7 +124,7 @@ describe('QuestionBlock score reporting', () => {
     summary = screen.getByTestId('lesson-score-summary')
     expect(summary).toHaveTextContent('1/1 correct')
     expect(summary).not.toHaveTextContent('Items to review')
-    expect(summary).toHaveTextContent('Nice work — mark the lesson as complete')
+    expect(summary).toHaveTextContent('Nice work: mark the lesson as complete')
   })
 
   it('lists the question as missed when answered incorrectly and resets on Try Again', () => {

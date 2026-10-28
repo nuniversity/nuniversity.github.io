@@ -11,16 +11,16 @@ difficulty: "intermediário"
 Padrões de projeto são soluções reutilizáveis para problemas comuns no design de software. Não são designs prontos que você copia e cola, mas modelos para resolver problemas em contexto. Os padrões representam abordagens testadas e aprovadas que evoluíram ao longo de décadas.
 
 > [!NOTE]
-> O conceito de padrões de projeto foi popularizado pelo "Gang of Four" (GoF) — Erich Gamma, Richard Helm, Ralph Johnson e John Vlissides — em seu livro de 1994 *Design Patterns: Elements of Reusable Object-Oriented Software*.
+> O conceito de padrões de projeto foi popularizado pelo "Gang of Four" (GoF), Erich Gamma, Richard Helm, Ralph Johnson e John Vlissides, em seu livro de 1994 *Design Patterns: Elements of Reusable Object-Oriented Software*.
 
 ## O Que São Padrões de Projeto?
 
 Um padrão de projeto descreve um problema que ocorre repetidamente, o núcleo da solução e as consequências de aplicá-lo. Cada padrão tem quatro elementos essenciais:
 
-1. **Nome do padrão** — um identificador para descrição
-2. **Problema** — quando aplicar o padrão
-3. **Solução** — os elementos e seus relacionamentos
-4. **Consequências** — trade-offs e resultados
+1. **Nome do padrão**: um identificador para descrição
+2. **Problema**: quando aplicar o padrão
+3. **Solução**: os elementos e seus relacionamentos
+4. **Consequências**: trade-offs e resultados
 
 ```python
 # Sem padrão: abordagem ad-hoc para criar objetos
@@ -135,7 +135,7 @@ flowchart TD
 ```
 
 > [!WARNING]
-> Não abuse dos padrões. Um padrão deve resolver um problema, não criar um. Se uma função simples for suficiente, não adicione um padrão Strategy. Padrões adicionam complexidade — use-os apenas quando a complexidade valer a pena.
+> Não abuse dos padrões. Um padrão deve resolver um problema, não criar um. Se uma função simples for suficiente, não adicione um padrão Strategy. Padrões adicionam complexidade: use-os apenas quando a complexidade valer a pena.
 
 ## Padrões em Python vs Outras Linguagens
 

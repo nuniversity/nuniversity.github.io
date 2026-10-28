@@ -11,7 +11,7 @@ difficulty: "avançado"
 Um Contexto Delimitado é um **limite semântico** dentro do qual um determinado modelo de domínio se aplica. Dentro do limite, todos os termos da Linguagem Ubíqua têm significados precisos e consistentes. Fora do limite, diferentes termos ou diferentes significados podem se aplicar.
 
 > [!NOTE]
-> O termo "Contexto Delimitado" é frequentemente mal compreendido. Não é o mesmo que microsserviço, módulo ou namespace — embora frequentemente mapeie para um deles. Um Contexto Delimitado é antes de tudo um **limite linguístico**. O código e os serviços seguem a partir desse limite.
+> O termo "Contexto Delimitado" é frequentemente mal compreendido. Não é o mesmo que microsserviço, módulo ou namespace: embora frequentemente mapeie para um deles. Um Contexto Delimitado é antes de tudo um **limite linguístico**. O código e os serviços seguem a partir desse limite.
 
 ## Por que os Limites Importam
 
@@ -284,7 +284,7 @@ sequenceDiagram
 
 3. **Construa uma ACL**: Um sistema CRM legado tem um modelo `Cliente` com campos `cli_id`, `cli_nome`, `cli_email`, `cli_stat` (A=ativo, I=inativo). Construa uma Camada Anticorrupção que traduza isso para um modelo `Conta` do Contexto de Vendas moderno com nomes e tipos de campo apropriados.
 
-4. **Contrato de parceria**: Duas equipes — Pagamentos e Detecção de Fraude — precisam se integrar. Defina o protocolo compartilhado (como interfaces Python) que ambas as equipes concordam.
+4. **Contrato de parceria**: Duas equipes, Pagamentos e Detecção de Fraude, precisam se integrar. Defina o protocolo compartilhado (como interfaces Python) que ambas as equipes concordam.
 
 5. **Decisão de limite de contexto**: Uma empresa tem "Catálogo de Produtos" e "Estratégia de Preços". Atualmente são um contexto. Liste 3 razões pelas quais eles deveriam ser separados e descreva o padrão de integração que deveriam usar.
 

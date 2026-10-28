@@ -29,7 +29,7 @@ export function RedirectToQuizzes({ lang, slug, dict }: RedirectToQuizzesProps) 
     <div className="container-custom py-16">
       <div className="max-w-xl mx-auto bg-card border rounded-xl p-8 text-center">
         <p className="text-muted-foreground mb-6">
-          {texts?.quizzes?.redirect_fallback || 'This quiz has moved — continue to the Quizzes section'}
+          {texts?.quizzes?.redirect_fallback || 'This quiz has moved: continue to the Quizzes section'}
         </p>
         <a
           href={target}

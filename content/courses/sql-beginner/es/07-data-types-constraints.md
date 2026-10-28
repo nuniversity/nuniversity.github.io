@@ -257,7 +257,7 @@ Esta tabla garantiza:
 - La reseña tiene un timestamp de creación
 
 > [!SUCCESS]
-> Las restricciones son tu primera línea de defensa contra datos incorrectos. Defínelas a nivel de base de datos, no solo en el código de tu aplicación. Las restricciones de la base de datos se aplican en todas partes — incluso si alguien escribe un INSERT con errores o se conecta desde una herramienta diferente.
+> Las restricciones son tu primera línea de defensa contra datos incorrectos. Defínelas a nivel de base de datos, no solo en el código de tu aplicación. Las restricciones de la base de datos se aplican en todas partes: incluso si alguien escribe un INSERT con errores o se conecta desde una herramienta diferente.
 
 ## Preguntas de Práctica
 

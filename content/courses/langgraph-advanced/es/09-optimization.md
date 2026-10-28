@@ -1,6 +1,6 @@
 ---
 title: "Optimización"
-description: "Optimiza aplicaciones LangGraph — reduce llamadas de nodos, estrategias de caché, agrupación de solicitudes LLM, gestión de tokens y ajuste de rendimiento del grafo."
+description: "Optimiza aplicaciones LangGraph, reduce llamadas de nodos, estrategias de caché, agrupación de solicitudes LLM, gestión de tokens y ajuste de rendimiento del grafo."
 order: 9
 duration: "35 min"
 difficulty: "advanced"
@@ -336,7 +336,7 @@ Usar modelos distintos para nodos distintos puede reducir los costes en un 5-10x
   "question": "What is a good cache TTL for LLM responses?",
   "options": [
     "Cache forever",
-    "It depends — shorter for dynamic queries, longer for static knowledge",
+    "It depends: shorter for dynamic queries, longer for static knowledge",
     "Never cache LLM responses",
     "1 second"
   ],
@@ -351,7 +351,7 @@ Usar modelos distintos para nodos distintos puede reducir los costes en un 5-10x
   "type": "multiple-choice",
   "question": "When should you merge multiple nodes into one?",
   "options": [
-    "Always — fewer nodes is always better",
+    "Always: fewer nodes is always better",
     "When nodes perform trivial transformations that don't benefit from separate checkpointing",
     "Never merge nodes",
     "Only when the graph doesn't compile"

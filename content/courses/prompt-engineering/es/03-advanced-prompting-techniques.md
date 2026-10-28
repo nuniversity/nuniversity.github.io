@@ -10,7 +10,7 @@ duration: "45 min"
 
 ## ¿Por qué Técnicas Avanzadas?
 
-El prompting básico funciona para tareas simples, pero el razonamiento complejo, las salidas estructuradas y los problemas especializados requieren enfoques más sofisticados. Cada técnica en esta lección aborda una limitación específica del prompting básico — desde mejorar el razonamiento paso a paso hasta permitir exploración multi-camino.
+El prompting básico funciona para tareas simples, pero el razonamiento complejo, las salidas estructuradas y los problemas especializados requieren enfoques más sofisticados. Cada técnica en esta lección aborda una limitación específica del prompting básico: desde mejorar el razonamiento paso a paso hasta permitir exploración multi-camino.
 
 ### Cuándo el Prompting Básico es Insuficiente
 
@@ -157,7 +157,7 @@ Sentimiento:
 ```
 
 [!TIP]
-**Eligiendo los ejemplos correctos:** Selecciona ejemplos que cubran el rango de entradas esperadas. Incluye casos límite y ejemplos ambiguos. Ejemplos mal elegidos (ej: todos sentimiento positivo cuando el conjunto de prueba tiene sentimiento mixto) sesgan al modelo. Además, el orden importa — los modelos tienden a estar más influenciados por el último ejemplo (sesgo de actualidad).
+**Eligiendo los ejemplos correctos:** Selecciona ejemplos que cubran el rango de entradas esperadas. Incluye casos límite y ejemplos ambiguos. Ejemplos mal elegidos (ej: todos sentimiento positivo cuando el conjunto de prueba tiene sentimiento mixto) sesgan al modelo. Además, el orden importa: los modelos tienden a estar más influenciados por el último ejemplo (sesgo de actualidad).
 
 ### Few-Shot en Código
 
@@ -290,7 +290,7 @@ print(response.content[0].text)
 
 ## Self-Consistency
 
-Self-Consistency genera múltiples caminos de razonamiento y selecciona la respuesta más frecuente. Es como preguntar a tres expertos por separado y tomar el voto mayoritario — diversos caminos de razonamiento reducen la posibilidad de que un error único determine la respuesta final.
+Self-Consistency genera múltiples caminos de razonamiento y selecciona la respuesta más frecuente. Es como preguntar a tres expertos por separado y tomar el voto mayoritario: diversos caminos de razonamiento reducen la posibilidad de que un error único determine la respuesta final.
 
 ```
 Genera 3 soluciones diferentes para este problema, luego elige la respuesta más común:
@@ -431,7 +431,7 @@ Comienza enumerando {num_ramas} maneras diferentes de abordar este problema:
 | Resumir un documento | CoT (si complejo) o Zero-Shot | Simple generalmente es mejor |
 
 [!IMPORTANT]
-**Combinación de técnicas:** Estas técnicas no son mutuamente excluyentes. Puedes combinar CoT con Few-Shot (proporcionar cadenas de razonamiento de ejemplo), usar Self-Consistency con Modo JSON, o usar ToT con salidas estructuradas. Combinar técnicas puede componer beneficios — pero también componer costos de token.
+**Combinación de técnicas:** Estas técnicas no son mutuamente excluyentes. Puedes combinar CoT con Few-Shot (proporcionar cadenas de razonamiento de ejemplo), usar Self-Consistency con Modo JSON, o usar ToT con salidas estructuradas. Combinar técnicas puede componer beneficios, pero también componer costos de token.
 
 ---
 
@@ -530,7 +530,7 @@ Comienza enumerando {num_ramas} maneras diferentes de abordar este problema:
   "id": "pe-03-es-q9",
   "type": "multiple-choice",
   "question": "Un desarrollador usa few-shot prompting con ejemplos ordenados: NEGATIVO, POSITIVO, NEUTRO. El modelo clasifica mal la mayoría de los casos de prueba como NEUTRO. ¿Cuál es la causa más probable?",
-  "options": ["El modelo no entiende análisis de sentimiento", "Sesgo de actualidad — el modelo está más influenciado por el último ejemplo (NEUTRO)", "La temperature está demasiado alta", "NEUTRO no es una categoría de sentimiento válida"],
+  "options": ["El modelo no entiende análisis de sentimiento", "Sesgo de actualidad: el modelo está más influenciado por el último ejemplo (NEUTRO)", "La temperature está demasiado alta", "NEUTRO no es una categoría de sentimiento válida"],
   "correct": 1,
   "explanation": "Los LLMs exhiben sesgo de actualidad, lo que significa que están desproporcionadamente influenciados por los últimos ejemplos en el prompt. Reordenar ejemplos para que la categoría más frecuente o importante aparezca al final puede mejorar la precisión."
 }
@@ -557,7 +557,7 @@ Comienza enumerando {num_ramas} maneras diferentes de abordar este problema:
 - **Salidas Estructuradas (Modo JSON):** Crítico para integración programática de APIs
 - **Self-Consistency:** Genera múltiples salidas y selecciona la respuesta más frecuente
 - **Tree-of-Thoughts:** Explora múltiples ramas de razonamiento como un árbol de decisión
-- Las técnicas avanzadas cuestan más tokens — equilibra necesidades de rendimiento con costo
+- Las técnicas avanzadas cuestan más tokens: equilibra necesidades de rendimiento con costo
 - Las técnicas pueden combinarse: CoT + JSON, Few-Shot + CoT, Self-Consistency + Salidas Estructuradas
 - Para tareas simples, las técnicas más simples generalmente superan a las complejas
 - Siempre valida las salidas estructuradas antes del uso en producción

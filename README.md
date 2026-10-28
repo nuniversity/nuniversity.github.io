@@ -83,6 +83,9 @@ commit; `SKIP_BANDIT=1 git commit ...` bypasses it once. See
 | start | `npm run start` | Serve the production build |
 | lint | `npm run lint` | Run ESLint |
 | security:bandit | `npm run security:bandit` | Static security scan of the Python (Bandit) |
+| lint:content | `npm run lint:content` | Advisory report: read-aloud punctuation, long tokens |
+| check:prose | `npm run check:prose` | Dry-run the prose normaliser, with sample rewrites |
+| fix:prose | `npm run fix:prose` | Rewrite em/en dashes and spaced hyphens in lesson prose |
 
 ## Build for Production
 

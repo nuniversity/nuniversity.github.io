@@ -73,7 +73,7 @@ Index Scan using idx_orders_date on orders
   Execution Time: 0.064 ms
 ```
 
-La estimación dice 50 filas; el real fue 45 — una buena estimación. Grandes discrepancias sugieren estadísticas desactualizadas.
+La estimación dice 50 filas; el real fue 45: una buena estimación. Grandes discrepancias sugieren estadísticas desactualizadas.
 
 ## Escaneos Secuenciales vs Escaneos de Índice
 

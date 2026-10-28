@@ -30,7 +30,7 @@ fn main() {
 
 ### if é uma Expressão
 
-Todo bloco `if`/`else` retorna um valor — ambos os braços devem ser do mesmo tipo:
+Todo bloco `if`/`else` retorna um valor: ambos os braços devem ser do mesmo tipo:
 
 ```rust
 fn main() {
@@ -64,7 +64,7 @@ fn main() {
 }
 ```
 
-## loop — Loops Infinitos
+## loop: Loops Infinitos
 
 `loop` executa para sempre a menos que explicitamente interrompido:
 
@@ -110,7 +110,7 @@ fn main() {
 > [!SUCCESS]
 > Use `loop` quando precisar de padrões "tentar até sucesso" ou interromper com um valor. Para iteração contada, prefira `for`.
 
-## while — Loops Condicionais
+## while: Loops Condicionais
 
 ```rust
 fn main() {
@@ -141,9 +141,9 @@ fn main() {
 > [!WARNING]
 > O valor de break de um loop `while` é `Option<T>` porque a condição pode nunca ser verdadeira. Em `loop`, o valor de break é `T` diretamente.
 
-## for — Iteração
+## for: Iteração
 
-`for` é o loop preferido em Rust — é seguro, rápido e expressivo:
+`for` é o loop preferido em Rust: é seguro, rápido e expressivo:
 
 ```rust
 fn main() {
@@ -203,9 +203,9 @@ fn main() {
 | `while` | Baseado em condição, verificado a cada iteração | `Option<T>` |
 | `for` | Iterar sobre coleção ou intervalo | `Option<T>` |
 
-## Match — Correspondência de Padrões
+## Match: Correspondência de Padrões
 
-`match` é o poderoso switch do Rust turbinado. É **exaustivo** — todo caso possível deve ser tratado:
+`match` é o poderoso switch do Rust turbinado. É **exaustivo**: todo caso possível deve ser tratado:
 
 ```rust
 fn main() {
@@ -277,7 +277,7 @@ fn main() {
 }
 ```
 
-## if let — Correspondência Concisa
+## if let: Correspondência Concisa
 
 Quando você só se importa com um padrão:
 

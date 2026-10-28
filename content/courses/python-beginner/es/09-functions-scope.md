@@ -131,7 +131,7 @@ print(count)  # 1
 > [!NOTE]
 > | Tipo | Definida | Accesible | Mejor Práctica |
 > |---|---|---|---|
-> | Local | Dentro de la función | Solo en esa función | Predeterminado — usa para datos temporales |
+> | Local | Dentro de la función | Solo en esa función | Predeterminado: usa para datos temporales |
 > | Envolvente | En función externa | Funciones internas | Usa con closures |
 > | Global | Nivel superior | En todas partes | Evita modificar; usa parámetros en su lugar |
 > | Incorporada | El propio Python | En todas partes | No sobrescribas |

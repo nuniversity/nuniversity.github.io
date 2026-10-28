@@ -12,7 +12,7 @@ Los índices son estructuras de datos que aceleran la recuperación de datos a c
 
 ## Cómo Funcionan los Índices
 
-Sin un índice, la base de datos realiza un escaneo secuencial — leyendo cada fila de la tabla. Con un índice, la base de datos navega en un árbol (típicamente B+Tree) para encontrar filas en tiempo logarítmico.
+Sin un índice, la base de datos realiza un escaneo secuencial: leyendo cada fila de la tabla. Con un índice, la base de datos navega en un árbol (típicamente B+Tree) para encontrar filas en tiempo logarítmico.
 
 ```
 Escaneo Completo:  [Fila 1] [Fila 2] [Fila 3] ... [Fila 1,000,000]

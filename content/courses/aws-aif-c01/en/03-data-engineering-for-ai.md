@@ -1,13 +1,13 @@
 ---
 title: "Data Engineering for AI on AWS"
-description: "Collect, store, catalog, process, quality-check, label and govern data for AI workloads on AWS — with the verified limits for Glue, EMR, Athena, Lake Formation, Data Wrangler, DataBrew, Ground Truth, Feature Store, Macie and Bedrock fine-tuning datasets."
+description: "Collect, store, catalog, process, quality-check, label and govern data for AI workloads on AWS, with the verified limits for Glue, EMR, Athena, Lake Formation, Data Wrangler, DataBrew, Ground Truth, Feature Store, Macie and Bedrock fine-tuning datasets."
 order: 3
 difficulty: "intermediate"
 duration: "80 minutes"
 ---
 # Data Engineering for AI on AWS
 
-Models do not fail in training. They fail because the table they were trained on had a column that leaked the target, because a 3 TB CSV was scanned instead of 0.25 TB of Parquet, because a labeling job went out to Mechanical Turk without declaring that the images were free of personally identifiable information, or because a feature group served millisecond reads online while the offline copy was still buffering into Amazon S3. Data engineering is the stage where all four of those mistakes are cheap to fix — and the AIF-C01 exam knows it: **Domain 1 (AI/ML Foundations) is weighted 20%, Domain 2 (Generative AI) 24%, Domain 3 (Foundation Model Applications) 28%, Domain 4 (Responsible AI) 14% and Domain 5 (Security, Compliance and Governance) 14%**, and this lesson sits across Task 1.3 (ML lifecycle), Task 3.3 (fine-tuning) and Domain 5's secure-data-engineering statements.
+Models do not fail in training. They fail because the table they were trained on had a column that leaked the target, because a 3 TB CSV was scanned instead of 0.25 TB of Parquet, because a labeling job went out to Mechanical Turk without declaring that the images were free of personally identifiable information, or because a feature group served millisecond reads online while the offline copy was still buffering into Amazon S3. Data engineering is the stage where all four of those mistakes are cheap to fix, and the AIF-C01 exam knows it: **Domain 1 (AI/ML Foundations) is weighted 20%, Domain 2 (Generative AI) 24%, Domain 3 (Foundation Model Applications) 28%, Domain 4 (Responsible AI) 14% and Domain 5 (Security, Compliance and Governance) 14%**, and this lesson sits across Task 1.3 (ML lifecycle), Task 3.3 (fine-tuning) and Domain 5's secure-data-engineering statements.
 
 ```text
 =====================================================================
@@ -42,13 +42,13 @@ Models do not fail in training. They fail because the table they were trained on
 ```
 
 > [!NOTE]
-> **Read this lesson as a decision manual.** Every number below is taken from an AWS-published document (SageMaker developer guide, Glue and Athena user guides, Lake Formation and Macie user guides, Bedrock user guide, AWS pricing pages). Where a figure is derived rather than published, it is marked as derived. Where a claim is unverified, it appears in section 11 — never in the memorization set.
+> **Read this lesson as a decision manual.** Every number below is taken from an AWS-published document (SageMaker developer guide, Glue and Athena user guides, Lake Formation and Macie user guides, Bedrock user guide, AWS pricing pages). Where a figure is derived rather than published, it is marked as derived. Where a claim is unverified, it appears in section 11: never in the memorization set.
 
 By the end of this lesson you will be able to:
 
 - draw the **end-to-end data pipeline** for an AI project and name the AWS service at each hop;
 - choose between **CSV, Parquet and JSONL** and predict the cost consequence of that choice in Athena;
-- pick the right processing engine — **Glue vs. EMR vs. Athena vs. a manual script** — and defend it;
+- pick the right processing engine, **Glue vs. EMR vs. Athena vs. a manual script**, and defend it;
 - apply **Lake Formation's two-layer authorization** model and name the permission that underlying S3 access additionally requires;
 - configure a **Ground Truth labeling job** end to end, including the PII declaration that makes or breaks it;
 - size an **automated labeling** run (1,250 floor, 5,000 recommendation, 20%/10% validation split);
@@ -67,10 +67,10 @@ The AIF-C01 Exam Guide is the contract. Three statements make this lesson examin
 
 | Guide statement | What you must be able to do | Section here |
 |---|---|---|
-| Task 1.3 — "Describe components of an ML pipeline (data collection, EDA, data pre-processing, feature engineering…)" | Name the component and the AWS service for each stage | 2, 5, 6 |
-| Task 1.3 — "Identify relevant AWS services … for each stage of an ML pipeline (for example, SageMaker, Amazon SageMaker Data Wrangler, Amazon SageMaker Feature Store, Amazon SageMaker Model Monitor)" | Match stage → service under time pressure | 1.2 |
-| Task 3.3 — "Describe how to prepare data to fine-tune an FM (data curation, governance, size, labeling, representativeness, RLHF)" | Curate, govern, size, label and balance a fine-tuning dataset | 10 |
-| Domain 5 — "best practices for secure data engineering (assessing data quality, privacy-enhancing technologies, data access control, data integrity)" plus data lineage, data cataloging and Model Cards | Quality, privacy, access control, integrity, lineage, catalog | 4, 6, 9 |
+| Task 1.3: "Describe components of an ML pipeline (data collection, EDA, data pre-processing, feature engineering…)" | Name the component and the AWS service for each stage | 2, 5, 6 |
+| Task 1.3: "Identify relevant AWS services … for each stage of an ML pipeline (for example, SageMaker, Amazon SageMaker Data Wrangler, Amazon SageMaker Feature Store, Amazon SageMaker Model Monitor)" | Match stage → service under time pressure | 1.2 |
+| Task 3.3: "Describe how to prepare data to fine-tune an FM (data curation, governance, size, labeling, representativeness, RLHF)" | Curate, govern, size, label and balance a fine-tuning dataset | 10 |
+| Domain 5: "best practices for secure data engineering (assessing data quality, privacy-enhancing technologies, data access control, data integrity)" plus data lineage, data cataloging and Model Cards | Quality, privacy, access control, integrity, lineage, catalog | 4, 6, 9 |
 
 ### 1.2 The tool-per-task matrix
 
@@ -91,9 +91,9 @@ This table is the single most reusable artifact of the lesson. Learn the left co
 | Real-time feature serving | Feature Store **online store** | DynamoDB | `GetRecord`; latest record only |
 | Training / batch feature storage | Feature Store **offline store** | S3 + Athena | Parquet only; Glue = hourly, Iceberg = daily |
 | PII discovery in S3 | Amazon Macie | Amazon Comprehend PII (text) | managed + custom identifiers + allow lists |
-| GenAI fine-tuning dataset files | Bedrock JSONL in S3 | — | `.jsonl`, one JSON object per line |
+| GenAI fine-tuning dataset files | Bedrock JSONL in S3 |: | `.jsonl`, one JSON object per line |
 
-- **📚 Did you know?** The Glue Data Catalog is **Hive-compatible**, which is why Athena, EMR and the Feature Store's Glue table format can all read the same table definition. AWS's own Big Data blog (2024) documents that Glue crawlers detect schemas across **Apache Iceberg, Apache Hudi and Apache Delta Lake** — so "which table format" is now a governance decision, not a cataloging limitation.
+- **📚 Did you know?** The Glue Data Catalog is **Hive-compatible**, which is why Athena, EMR and the Feature Store's Glue table format can all read the same table definition. AWS's own Big Data blog (2024) documents that Glue crawlers detect schemas across **Apache Iceberg, Apache Hudi and Apache Delta Lake**, so "which table format" is now a governance decision, not a cataloging limitation.
 
 ---
 
@@ -132,7 +132,7 @@ Each hop exists to remove one class of failure:
 | Processing | How do raw files become analysis-ready tables? | Notebooks do production ETL |
 | Quality | Are there nulls, duplicates, outliers, imbalance, leakage? | A 99% train / 71% validation gap discovered after launch |
 | Labeling | Are the targets correct and consistent? | Noisy labels cap model accuracy regardless of architecture |
-| Feature Store | Can inference and training read the *same* features? | Train/serve skew — the classic silent bug |
+| Feature Store | Can inference and training read the *same* features? | Train/serve skew: the classic silent bug |
 | Macie | Is there PII or a credential in that bucket? | Protected data in a training corpus |
 
 ```dragdrop
@@ -163,7 +163,7 @@ Each hop exists to remove one class of failure:
 ```
 
 > [!WARNING]
-> **Do not confuse the catalog with the permission layer.** The Glue Data Catalog stores *metadata* (schema, partitions, table location). AWS Lake Formation stores *permissions* on that metadata **and** on the underlying data location. A crawler never grants access, and an IAM policy alone is not the Lake Formation model — see section 4.
+> **Do not confuse the catalog with the permission layer.** The Glue Data Catalog stores *metadata* (schema, partitions, table location). AWS Lake Formation stores *permissions* on that metadata **and** on the underlying data location. A crawler never grants access, and an IAM policy alone is not the Lake Formation model: see section 4.
 
 ---
 
@@ -196,7 +196,7 @@ Each hop exists to remove one class of failure:
 | Glue Parquet writer default `blockSize` | **134217728 bytes = 128 MB** | Glue developer guide, Parquet page |
 | Glue small-file grouping (`groupFiles`) | on by default when input **> 50,000 files** | Glue developer guide, S3 connections |
 
-**Example 1 — the format decision, with AWS's own numbers.** Take a **3 TB** uncompressed four-column text table in S3. A query that reads **one** column scans all 3 TB: 3 TB × $5/TB = **$15.00**. Apply **GZIP at 3:1** and the same table is 1 TB → **$5.00**. Convert to **Parquet** and the query reads only the referenced column: 1 TB ÷ 4 = 0.25 TB × $5/TB = **$1.25**. That is **12× cheaper** than the baseline — 3× from compression and 4× from column pruning. AWS publishes this exact worked example on its Athena pricing page.
+**Example 1, the format decision, with AWS's own numbers.** Take a **3 TB** uncompressed four-column text table in S3. A query that reads **one** column scans all 3 TB: 3 TB × $5/TB = **$15.00**. Apply **GZIP at 3:1** and the same table is 1 TB → **$5.00**. Convert to **Parquet** and the query reads only the referenced column: 1 TB ÷ 4 = 0.25 TB × $5/TB = **$1.25**. That is **12× cheaper** than the baseline, 3× from compression and 4× from column pruning. AWS publishes this exact worked example on its Athena pricing page.
 
 ```mermaid
 flowchart TD
@@ -209,7 +209,7 @@ flowchart TD
     JL --> C["trainingDataConfig.s3Uri points at the .jsonl file"]
 ```
 
-- **📚 Did you know?** Glue's `groupFiles` grouping only switches itself on automatically when the input exceeds **50,000 files**. Below that threshold you must set `"groupFiles": "inPartition"` yourself — otherwise a directory of small files becomes a directory of *many* tiny Parquet files, which is exactly the small-file problem Athena charges you to read.
+- **📚 Did you know?** Glue's `groupFiles` grouping only switches itself on automatically when the input exceeds **50,000 files**. Below that threshold you must set `"groupFiles": "inPartition"` yourself: otherwise a directory of small files becomes a directory of *many* tiny Parquet files, which is exactly the small-file problem Athena charges you to read.
 
 ---
 
@@ -251,7 +251,7 @@ flowchart LR
 > [!WARNING]
 > **Lake Formation Governed Tables are deprecated, effective 31 December 2024.** AWS's Big Data blog (2 October 2024) states that read-only APIs began failing after **17 February 2025**, and AWS steers customers to **Apache Iceberg, Apache Hudi or Apache Delta Lake** as the open table formats that provide comparable transactions and governance. If an exam answer mentions Governed Tables as a current service, treat it as a trap: prefer the Iceberg/Hudi/Delta wording.
 
-**Example 2 — column and row filtering in practice.** An HR analytics table has columns `employee_id`, `department`, `salary_band` and `ssn`. A Lake Formation `SELECT` grant with a **column filter** can exclude `ssn` entirely for the analyst role, while a **row filter** (`DataCellsFilter`) can restrict rows to `department = 'Ops'`. Neither is possible with a plain S3 prefix grant — which is precisely the "data access control" and "data integrity" language of Domain 5.
+**Example 2, column and row filtering in practice.** An HR analytics table has columns `employee_id`, `department`, `salary_band` and `ssn`. A Lake Formation `SELECT` grant with a **column filter** can exclude `ssn` entirely for the analyst role, while a **row filter** (`DataCellsFilter`) can restrict rows to `department = 'Ops'`. Neither is possible with a plain S3 prefix grant, which is precisely the "data access control" and "data integrity" language of Domain 5.
 
 - **📚 Did you know?** Lake Formation's `SELECT` permission is the only table permission documented to support **row- and cell-level data filters**. Everything else in the table-permission list (`INSERT`, `DELETE`, `ALTER`, `DROP`, `DESCRIBE`) is all-or-nothing at the table or column level.
 
@@ -267,8 +267,8 @@ flowchart LR
 | Glue Python shell | DPU (1 DPU = 16 GB) | **0.0625 DPU = 1 GB** (console default) | **0.0625 DPU** |
 | Amazon EMR | per **instance hour** + EBS storage | customer-managed cluster | 1 node |
 | EMR Serverless | vCPU + memory + storage per **second** | auto-provisioned | 1-minute minimum |
-| Athena (SQL) | **$5 per TB scanned** | — | **10 MB per query** |
-| Data Wrangler (Studio Classic) | EC2 while running | **m5.4xlarge** | — |
+| Athena (SQL) | **$5 per TB scanned** |: | **10 MB per query** |
+| Data Wrangler (Studio Classic) | EC2 while running | **m5.4xlarge** |: |
 | Wrangler Insights widget | rows analyzed | **first 10,000 rows** | 10,000 |
 
 ### 5.2 Glue worker sizes
@@ -278,9 +278,9 @@ flowchart LR
 | Standard | 4 | 16 GB | 50 GB | 2 |
 | G.1X | 4 | 16 GB | 64 GB | 1 |
 | G.2X | 8 | 32 GB | 128 GB | 1 |
-| Python shell | — | 1 DPU = 16 GB (or 0.0625 DPU = 1 GB) | — | — |
+| Python shell |: | 1 DPU = 16 GB (or 0.0625 DPU = 1 GB) |: |: |
 
-**Example 3 — right-sizing Glue.** AWS's Prescriptive Guidance Parquet-conversion pattern runs **2 workers** — the documented minimum — instead of the console default **10 × G.1X**, which is **5× fewer** allocated DPUs for the same conversion job. A Python shell job configured at **0.0625 DPU (1 GB)** instead of 1 DPU (16 GB) uses **16× less** memory and bills proportionally. The exam rewards the pattern "start at the minimum, scale on evidence", not the console default.
+**Example 3: right-sizing Glue.** AWS's Prescriptive Guidance Parquet-conversion pattern runs **2 workers**: the documented minimum: instead of the console default **10 × G.1X**, which is **5× fewer** allocated DPUs for the same conversion job. A Python shell job configured at **0.0625 DPU (1 GB)** instead of 1 DPU (16 GB) uses **16× less** memory and bills proportionally. The exam rewards the pattern "start at the minimum, scale on evidence", not the console default.
 
 ### 5.3 Athena pricing rules
 
@@ -291,10 +291,10 @@ flowchart LR
 | DDL statements | **free** |
 | Failed queries | **free** |
 | Canceled queries | **billed** |
-| Documented savings from compression + partitioning + columnar | **30%–90%** |
+| Documented savings from compression + partitioning + columnar | **30% to 90%** |
 | CTAS benchmark in the Athena docs | CSV → Parquet + Snappy partitioned by year landed at **1.2 GB**, with the same query faster and cheaper |
 
-**Example 4 — the CTAS conversion loop.** A team keeps a raw CSV table, runs **CTAS** (`CREATE TABLE … AS SELECT`) to write **Parquet with Snappy compression partitioned by year**, lands at **1.2 GB**, and points the downstream dashboard at the new table. The query scans only the referenced columns of one partition: cheaper *and* faster, with no application change. AWS documents this as the standard ETL pattern (`CTAS/INSERT INTO`).
+**Example 4: the CTAS conversion loop.** A team keeps a raw CSV table, runs **CTAS** (`CREATE TABLE … AS SELECT`) to write **Parquet with Snappy compression partitioned by year**, lands at **1.2 GB**, and points the downstream dashboard at the new table. The query scans only the referenced columns of one partition: cheaper *and* faster, with no application change. AWS documents this as the standard ETL pattern (`CTAS/INSERT INTO`).
 
 ### 5.4 Choosing the engine
 
@@ -311,10 +311,10 @@ flowchart TD
 ```
 
 > [!IMPORTANT]
-> **Comparative Verdict — Glue vs. EMR vs. Athena vs. a manual process**
+> **Comparative Verdict: Glue vs. EMR vs. Athena vs. a manual process**
 > - **AWS Glue** is the default answer for *serverless batch ETL and cataloging*. You write PySpark or Scala, AWS runs it (default 10 × G.1X workers, documented minimum 2), and you are billed in DPU-hours only while the job runs. Choose Glue when the job is Spark-shaped, the schedule is known, and nobody wants to own a cluster. The gotcha is cost-by-default: leaving 10 workers allocated when 2 suffice is a 5× overspend that AWS's own prescriptive pattern avoids.
-> - **Amazon EMR** is the answer when you need *engine choice, cluster control or scale Glue cannot express* — Hadoop, Trino, Flink, custom AMIs, specific instance families. Billing is **per instance hour plus EBS**, so an idle cluster is money burned. **EMR Serverless** removes the cluster and bills **per vCPU, memory and storage per second**, with auto-scaling and job-level isolation; it is the middle path when you want EMR engines without EMR operations.
-> - **Amazon Athena** is *query, not transform*: serverless ANSI SQL over S3 at **$5 per TB scanned** with a **10 MB per-query floor**, free DDL and free failed queries (canceled queries still bill). It is the cheapest way to explore and the wrong way to run a nightly multi-tenant ETL — but combined with **CTAS** it *becomes* a transform, writing Parquet or ORC for the next pass.
+> - **Amazon EMR** is the answer when you need *engine choice, cluster control or scale Glue cannot express*: Hadoop, Trino, Flink, custom AMIs, specific instance families. Billing is **per instance hour plus EBS**, so an idle cluster is money burned. **EMR Serverless** removes the cluster and bills **per vCPU, memory and storage per second**, with auto-scaling and job-level isolation; it is the middle path when you want EMR engines without EMR operations.
+> - **Amazon Athena** is *query, not transform*: serverless ANSI SQL over S3 at **$5 per TB scanned** with a **10 MB per-query floor**, free DDL and free failed queries (canceled queries still bill). It is the cheapest way to explore and the wrong way to run a nightly multi-tenant ETL, but combined with **CTAS** it *becomes* a transform, writing Parquet or ORC for the next pass.
 > - **A manual process** (a laptop script, a hand-run notebook, a copied CSV) wins the first week and loses afterwards: it cannot prove which version of the data produced a given model, cannot enforce column or row filters, cannot be re-run by anyone else, and silently reintroduces the full-file-scan cost that Parquet and partitioning were supposed to remove. Domain 5 frames this as failures of **data integrity, data access control and data lineage**. The verdict is categorical: manual is acceptable for exploration, never for the pipeline that feeds a model.
 
 ---
@@ -333,7 +333,7 @@ flowchart TD
 | Studio Classic analysis instance | **m5.4xlarge** |
 | Rows analyzed by the widget | **first 10,000 rows** unless all rows are selected |
 
-**Example 5 — the leakage catch.** A classifier scores **99% on training data and 71% on held-out validation**. The Data Wrangler Insights report flags a column derived from the target variable. The diagnosis is **target leakage plus overfitting**: remove or derive-safe the leaked column, then reduce overfitting with regularization or more representative data. Training longer makes it worse, and deleting the validation set only hides it — the exam's distractors propose exactly those two wrong moves.
+**Example 5, the leakage catch.** A classifier scores **99% on training data and 71% on held-out validation**. The Data Wrangler Insights report flags a column derived from the target variable. The diagnosis is **target leakage plus overfitting**: remove or derive-safe the leaked column, then reduce overfitting with regularization or more representative data. Training longer makes it worse, and deleting the validation set only hides it, the exam's distractors propose exactly those two wrong moves.
 
 ### 6.2 AWS Glue DataBrew rulesets and profile jobs
 
@@ -356,7 +356,7 @@ flowchart LR
     W --> D["Missing values, duplicates, outliers, imbalance, leakage"]
 ```
 
-**The distinction the exam tests:** **DataBrew** is the *rules and profiling* answer (a ruleset, a profile job, a JSON report, an event), while **Data Wrangler** is the *visual flow and transform* answer (300+ transforms, an Insights Report that flags leakage, exports to the Feature Store). Both are managed — neither asks you to provision a Spark cluster yourself.
+**The distinction the exam tests:** **DataBrew** is the *rules and profiling* answer (a ruleset, a profile job, a JSON report, an event), while **Data Wrangler** is the *visual flow and transform* answer (300+ transforms, an Insights Report that flags leakage, exports to the Feature Store). Both are managed: neither asks you to provision a Spark cluster yourself.
 
 - **📚 Did you know?** DataBrew column rules reject complex types: you can write a rule for a `string`, `number` or `boolean` column, but not for a nested `struct`. That is why deep JSON validation belongs in a Glue job or a Data Wrangler flow, and why the ruleset document is deliberately shallow by design.
 
@@ -394,9 +394,9 @@ flowchart LR
 | Consolidation | post-annotation Lambda; **not available for Amazon A2I** |
 | Mechanical Turk ARN pattern | `arn:aws:sagemaker:<region>:394669845002:workteam/public-crowd/default` |
 
-**Example 6 — active-learning validation split math.** **4,000** objects (< 5,000) → validation = 20% = **800** objects, leaving **3,200** in the loop. **20,000** objects → validation = 10% = **2,000**. A job with **800** objects is rejected outright (below the 1,250 floor); **5,000** is the strongly recommended floor. Note what the arithmetic does *not* say: 4,000 objects is legal but leaves only 3,200 for learning, while 5,000 costs 500 validation objects and still clears the floor with margin.
+**Example 6: active-learning validation split math.** **4,000** objects (< 5,000) → validation = 20% = **800** objects, leaving **3,200** in the loop. **20,000** objects → validation = 10% = **2,000**. A job with **800** objects is rejected outright (below the 1,250 floor); **5,000** is the strongly recommended floor. Note what the arithmetic does *not* say: 4,000 objects is legal but leaves only 3,200 for learning, while 5,000 costs 500 validation objects and still clears the floor with margin.
 
-**Example 7 — the bounding-box budget.** In AWS's official object-detection example notebook, one human bounding-box label costs **$0.08 + 5 × $0.036 = $0.26**, and one auto-label costs **$0.08**. So **100 images** labeled by humans run about **$26**, while **1,000 images** with auto-labeling land near **$200** end to end in roughly **6 hours** of total runtime (about 167 images/hour — a derived figure from a demo that also includes training and inference overhead, not an AWS SLA). Treat the per-object price tiers you may have seen as **historical**: AWS now markets Ground Truth+ without a public per-object table.
+**Example 7, the bounding-box budget.** In AWS's official object-detection example notebook, one human bounding-box label costs **$0.08 + 5 × $0.036 = $0.26**, and one auto-label costs **$0.08**. So **100 images** labeled by humans run about **$26**, while **1,000 images** with auto-labeling land near **$200** end to end in roughly **6 hours** of total runtime (about 167 images/hour, a derived figure from a demo that also includes training and inference overhead, not an AWS SLA). Treat the per-object price tiers you may have seen as **historical**: AWS now markets Ground Truth+ without a public per-object table.
 
 ### 7.3 Workflow diagram
 
@@ -417,10 +417,10 @@ flowchart LR
 
 > [!WARNING]
 > **Two Ground Truth traps that fail jobs, not just questions.**
-> (1) On the Amazon Mechanical Turk workforce, the `FreeOfPersonallyIdentifiableInformation` classifier **must** be declared — without it, AWS states the labeling job will fail. The optional `FreeOfAdultContent` attribute follows the same declaration mechanism.
-> (2) Mechanical Turk does **not** support **video frame** or **3D point cloud** labeling jobs; those require a different workforce. And remember the availability context established in Lesson 2: Ground Truth is in maintenance and closed to new customers (30 June 2026; availability-change docs state 7/30/26) and Amazon Mechanical Turk reached end of support on **29 September 2026** — so a *new* customer question points at an alternative labeling approach, while the mechanics above remain examinable vocabulary.
+> (1) On the Amazon Mechanical Turk workforce, the `FreeOfPersonallyIdentifiableInformation` classifier **must** be declared: without it, AWS states the labeling job will fail. The optional `FreeOfAdultContent` attribute follows the same declaration mechanism.
+> (2) Mechanical Turk does **not** support **video frame** or **3D point cloud** labeling jobs; those require a different workforce. And remember the availability context established in Lesson 2: Ground Truth is in maintenance and closed to new customers (30 June 2026; availability-change docs state 7/30/26) and Amazon Mechanical Turk reached end of support on **29 September 2026**, so a *new* customer question points at an alternative labeling approach, while the mechanics above remain examinable vocabulary.
 
-**The A2I distinction:** Amazon A2I is for **human review of model predictions**, created with `CreateFlowDefinition` and `StartHumanLoop`. It has **no annotation consolidation**, so it cannot be used to merge multiple worker votes into a consensus label — that capability belongs to Ground Truth's `AnnotationConsolidationLambdaArn`.
+**The A2I distinction:** Amazon A2I is for **human review of model predictions**, created with `CreateFlowDefinition` and `StartHumanLoop`. It has **no annotation consolidation**, so it cannot be used to merge multiple worker votes into a consensus label; that capability belongs to Ground Truth's `AnnotationConsolidationLambdaArn`.
 
 ---
 
@@ -439,16 +439,16 @@ flowchart LR
 | Partitioning | n/a | Glue table format → **hourly**; Apache Iceberg → **daily** |
 | Table format | n/a | `Glue` (default) or `Apache Iceberg` |
 | Sync | both enabled ⇒ stores sync (avoids train/serve skew) | same |
-| Notes | `InMemory` is online-only, no customer-managed KMS key, **~10–15 min** provisioning | Iceberg enables small-file compaction |
+| Notes | `InMemory` is online-only, no customer-managed KMS key, **~10 to 15 min** provisioning | Iceberg enables small-file compaction |
 
 ### 8.2 Write semantics and capacity modes
 
 - `PutRecord` data is **buffered, batched and written into Amazon S3 within 15 minutes**;
-- online tiers: **Standard** (default) and **InMemory** ("powered by Amazon ElastiCache (Redis OSS)"), both **online-only** — no online→offline replication and **no customer-managed KMS key** for `InMemory`;
+- online tiers: **Standard** (default) and **InMemory** ("powered by Amazon ElastiCache (Redis OSS)"), both **online-only**: no online→offline replication and **no customer-managed KMS key** for `InMemory`;
 - capacity modes: **`ON_DEMAND`** and **`PROVISIONED`** (exceeding provisioned capacity throttles); a group may be switched to on-demand **once per 24 hours**, and `PROVISIONED` is allowed only for offline-only or `Standard` groups;
-- `InMemory` takes roughly **10–15 minutes** to provision.
+- `InMemory` takes roughly **10 to 15 minutes** to provision.
 
-**Example 8 — Feature Store ingestion math.** AWS's example scale is "large batches (**1 million rows** of data or more)". Because `PutRecord` output flushes to S3 **within 15 minutes**, a training job started immediately after ingestion may wait up to 15 minutes for the offline copy, while `GetRecord` serves the online copy sooner. Over one day, a Glue-format offline store lands **24 hourly partitions**, while an Iceberg-format store lands **1 daily partition** — neither is configurable.
+**Example 8, Feature Store ingestion math.** AWS's example scale is "large batches (**1 million rows** of data or more)". Because `PutRecord` output flushes to S3 **within 15 minutes**, a training job started immediately after ingestion may wait up to 15 minutes for the offline copy, while `GetRecord` serves the online copy sooner. Over one day, a Glue-format offline store lands **24 hourly partitions**, while an Iceberg-format store lands **1 daily partition**, neither is configurable.
 
 ```mermaid
 flowchart TB
@@ -463,7 +463,7 @@ flowchart TB
 ```
 
 > [!WARNING]
-> **The offline store accepts Parquet only.** Writing CSV to the Feature Store offline store is not an option — the documented format is Parquet in S3, partitioned hourly under the default Glue table format or daily under Apache Iceberg. And the **`InMemory` tier is online-only**: if a question offers "`InMemory` plus full offline history", the answer is wrong on both counts (no replication, and no customer-managed KMS key).
+> **The offline store accepts Parquet only.** Writing CSV to the Feature Store offline store is not an option: the documented format is Parquet in S3, partitioned hourly under the default Glue table format or daily under Apache Iceberg. And the **`InMemory` tier is online-only**: if a question offers "`InMemory` plus full offline history", the answer is wrong on both counts (no replication, and no customer-managed KMS key).
 
 ---
 
@@ -481,7 +481,7 @@ flowchart TB
 
 ### 9.2 Severity: the table you must be able to predict
 
-| Data type | 1 occurrence | 2–99 | 100+ |
+| Data type | 1 occurrence | 2 to 99 | 100+ |
 |---|---|---|---|
 | Most PII (birth date, driver's license, name, address, phone, HTTP cookie) | Low | Medium | High |
 | GPS coordinates | Low | Medium | Medium |
@@ -491,7 +491,7 @@ flowchart TB
 
 Multi-type findings take the **highest** severity among the types detected.
 
-**Example 9 — the Macie triage queue.** An object with **1** full name → **Low**; **50** names → **Medium**; **150** names → **High**. A separate object with **1 SSN** → **High** immediately, because SSN-like identifiers are High at any count. One object containing **10 names (Medium)** *and* **5 passport numbers (High)** → the finding severity is **High**, because multi-type findings take the highest severity. Queues are therefore prioritized by *identifier sensitivity*, not by raw volume.
+**Example 9: the Macie triage queue.** An object with **1** full name → **Low**; **50** names → **Medium**; **150** names → **High**. A separate object with **1 SSN** → **High** immediately, because SSN-like identifiers are High at any count. One object containing **10 names (Medium)** *and* **5 passport numbers (High)** → the finding severity is **High**, because multi-type findings take the highest severity. Queues are therefore prioritized by *identifier sensitivity*, not by raw volume.
 
 ```mermaid
 flowchart TB
@@ -515,7 +515,7 @@ flowchart TB
 
 **The Domain 5 pairing:** Amazon Macie is the AWS-named service for **PII/PHI/credential discovery in S3** and appears in the AIF-C01 Domain 5 service list. Pair it with **Amazon Comprehend for PII detected inside text at inference time**, and with **Lake Formation column and row filters** (section 4) for access control. Macie discovers *what is there*; Lake Formation decides *who may see it*; KMS decides *how it is encrypted*.
 
-- **📚 Did you know?** Macie's automated discovery does not scan every object continuously — it evaluates the **S3 inventory daily with sampling**, and sensitive-data findings are retained for **90 days**. If your compliance story needs a full forensic history, export findings to S3 or Security Hub; do not assume they live in Macie forever.
+- **📚 Did you know?** Macie's automated discovery does not scan every object continuously; it evaluates the **S3 inventory daily with sampling**, and sensitive-data findings are retained for **90 days**. If your compliance story needs a full forensic history, export findings to S3 or Security Hub; do not assume they live in Macie forever.
 
 ---
 
@@ -529,25 +529,25 @@ Amazon Bedrock states it directly: *"You create `.jsonl` files, where each line 
 
 | Model | Min records | Max records | Max tokens | Max train / val file |
 |---|---|---|---|---|
-| Titan Text G1 Express / Lite (fine-tuning) | — | — | **4,096** (batch 1) | **1 GB** / **100 MB** |
+| Titan Text G1 Express / Lite (fine-tuning) |, |, | **4,096** (batch 1) | **1 GB** / **100 MB** |
 | Anthropic Claude 3 Haiku (fine-tuning) | **32** | **10,000** train / **1,000** val | **32,000** | **10 GB** / **1 GB** |
-| Meta Llama 3.1 / 3.3 (fine-tuning) | **100** | **10,000** (quotas) | **16,000** in+out | — |
-| Cohere Command (fine-tuning) | — | **10,000** train / **1,000** val | **4,096** in / **2,048** out | — |
-| Amazon Nova Understanding (fine-tuning) | **8** | **20,000** | **32k** context | — |
-| Amazon Nova reinforcement fine-tuning | **100** | **100–20,000** | — | — |
-| Titan Multimodal Embeddings G1 (fine-tuning) | **1,000** | **500,000** | — | — |
-| Titan Image Generator G1 (fine-tuning) | **5** | **10,000** | — | — |
+| Meta Llama 3.1 / 3.3 (fine-tuning) | **100** | **10,000** (quotas) | **16,000** in+out |: |
+| Cohere Command (fine-tuning) |, | **10,000** train / **1,000** val | **4,096** in / **2,048** out |, |
+| Amazon Nova Understanding (fine-tuning) | **8** | **20,000** | **32k** context |: |
+| Amazon Nova reinforcement fine-tuning | **100** | **100 to 20,000** |, |, |
+| Titan Multimodal Embeddings G1 (fine-tuning) | **1,000** | **500,000** |, |, |
+| Titan Image Generator G1 (fine-tuning) | **5** | **10,000** |, |, |
 
-A dash means *not published in that table* — never guess a value AWS has not published.
+A dash means *not published in that table*: never guess a value AWS has not published.
 
 ### 10.3 Amazon Nova specifics
 
-- **Understanding fine-tuning:** **8–20k** samples, **32k** context, up to **10 images per sample** (each ≤ **10 MB**), up to **1 video per sample** ≤ **90 seconds** and ≤ **50 MB**.
-- **Reinforcement fine-tuning:** JSONL in OpenAI chat-completion format with a `messages` array plus `reference_answer`, **minimum 100 records**, one prompt per line — and Bedrock **automatically validates** the format.
+- **Understanding fine-tuning:** **8 to 20k** samples, **32k** context, up to **10 images per sample** (each ≤ **10 MB**), up to **1 video per sample** ≤ **90 seconds** and ≤ **50 MB**.
+- **Reinforcement fine-tuning:** JSONL in OpenAI chat-completion format with a `messages` array plus `reference_answer`, **minimum 100 records**, one prompt per line, and Bedrock **automatically validates** the format.
 
-**Example 10 — sizing a Claude 3 Haiku dataset.** The floor is **32 records**, the ceiling is **10,000** training records (plus **1,000** validation), the token cap is **32,000**, and the training file cap is **10 GB**. Using AWS's **~6 characters per token** rule, a 4,096-token sample is roughly **24,576 characters** (derived), so the ~1 GB file cap binds far later than the record cap for short prompts. Llama 3.1/3.3 binds earlier: **100–10,000** records and **16,000** in+out tokens. Tokenization varies, so treat the 6-chars-per-token figure as an estimator, not a guarantee.
+**Example 10: sizing a Claude 3 Haiku dataset.** The floor is **32 records**, the ceiling is **10,000** training records (plus **1,000** validation), the token cap is **32,000**, and the training file cap is **10 GB**. Using AWS's **~6 characters per token** rule, a 4,096-token sample is roughly **24,576 characters** (derived), so the ~1 GB file cap binds far later than the record cap for short prompts. Llama 3.1/3.3 binds earlier: **100 to 10,000** records and **16,000** in+out tokens. Tokenization varies, so treat the 6-chars-per-token figure as an estimator, not a guarantee.
 
-**Example 11 — curation, governance and representativeness.** The exam guide's wording for Task 3.3 is specific: datasets should show **inclusivity, diversity, curated data sources and balanced datasets**, and preparation includes **data curation, governance, size, labeling, representativeness and RLHF**. Concretely: deduplicate before you count records (a 10,000-line file with 3,000 duplicates is 7,000 effective records, not 10,000); balance classes before you split; hold out a validation file inside the **1,000-record** ceilings above; and remove PII with Macie **before** the file reaches `trainingDataConfig.s3Uri`.
+**Example 11: curation, governance and representativeness.** The exam guide's wording for Task 3.3 is specific: datasets should show **inclusivity, diversity, curated data sources and balanced datasets**, and preparation includes **data curation, governance, size, labeling, representativeness and RLHF**. Concretely: deduplicate before you count records (a 10,000-line file with 3,000 duplicates is 7,000 effective records, not 10,000); balance classes before you split; hold out a validation file inside the **1,000-record** ceilings above; and remove PII with Macie **before** the file reaches `trainingDataConfig.s3Uri`.
 
 ```matching
 {
@@ -613,48 +613,48 @@ Primary sources for this lesson: the AIF-C01 **Exam Guide**; the SageMaker devel
 | "feature serving for a real-time endpoint" | Feature Store **online** store, with the offline store enabled as well |
 | "find PII in my S3 bucket" | Amazon Macie, managed + custom data identifiers |
 
-- **📚 Did you know?** The Athena billing floor is **10 MB per query**, rounded to the nearest MB. DDL statements and failed queries are free, but **canceled** queries are billed — so "run it, watch it, and hit cancel" is not a free strategy. The cheapest safe habit is `LIMIT` plus a partition filter before you commit to a full scan.
+- **📚 Did you know?** The Athena billing floor is **10 MB per query**, rounded to the nearest MB. DDL statements and failed queries are free, but **canceled** queries are billed, so "run it, watch it, and hit cancel" is not a free strategy. The cheapest safe habit is `LIMIT` plus a partition filter before you commit to a full scan.
 
-### 12.3 2025–2026 Updates
+### 12.3 2025 to 2026 Updates
 
-The verified 2025–2026 change set touches this lesson in exactly three places: the SageMaker quality and labeling services moved into maintenance, enterprise search moved to Bedrock, and the exam guide itself was revised. Nothing here is speculation — every row carries the AWS document it came from.
+The verified 2025 to 2026 change set touches this lesson in exactly three places: the SageMaker quality and labeling services moved into maintenance, enterprise search moved to Bedrock, and the exam guide itself was revised. Nothing here is speculation: every row carries the AWS document it came from.
 
-**Lifecycle vocabulary (AWS General Reference, "Service lifecycle", 24 Sep 2026):** **Maintenance** = no new customers, no new features, still supported · **Sunset** = planned end of operations, typically a 12-month horizon · **Full Shutdown** = removed from the portfolio. Most exam distractors get this wrong by turning "maintenance" into "discontinued" — the service still runs for existing customers.
+**Lifecycle vocabulary (AWS General Reference, "Service lifecycle", 24 Sep 2026):** **Maintenance** = no new customers, no new features, still supported · **Sunset** = planned end of operations, typically a 12-month horizon · **Full Shutdown** = removed from the portfolio. Most exam distractors get this wrong by turning "maintenance" into "discontinued": the service still runs for existing customers.
 
 | Change | Date | Status for data engineering | Direction for new customers | Source |
 |---|---|---|---|---|
-| Amazon SageMaker renamed **Amazon SageMaker AI**, with next-gen SageMaker alongside it | 3 Dec 2024 | rename only — the same services | use **SageMaker AI** in answers | AWS blog, "next generation of Amazon SageMaker" |
+| Amazon SageMaker renamed **Amazon SageMaker AI**, with next-gen SageMaker alongside it | 3 Dec 2024 | rename only: the same services | use **SageMaker AI** in answers | AWS blog, "next generation of Amazon SageMaker" |
 | **Ground Truth Plus** end of support | 30 Jun 2026 | sunset | standard Ground Truth labeling jobs | AWS What's New, service availability |
-| **Model Monitor, Clarify, Ground Truth, A2I, Studio Lab, Debugger, Role Manager, Geospatial, Profiler** no longer open to new customers | **30 Jul 2026** | **maintenance** — existing customers keep them, no new features | **Bedrock Model Evaluations** for evaluation; CloudWatch metrics and anomaly detection, Evidently, EventBridge + Lambda and SHAP for monitoring | SageMaker availability-change notices (`model-monitor-availability-change`, `clarify-availability-change`) |
+| **Model Monitor, Clarify, Ground Truth, A2I, Studio Lab, Debugger, Role Manager, Geospatial, Profiler** no longer open to new customers | **30 Jul 2026** | **maintenance**: existing customers keep them, no new features | **Bedrock Model Evaluations** for evaluation; CloudWatch metrics and anomaly detection, Evidently, EventBridge + Lambda and SHAP for monitoring | SageMaker availability-change notices (`model-monitor-availability-change`, `clarify-availability-change`) |
 | **Amazon Mechanical Turk** end of support | **30 Sep 2026** (What's New post dated 29 Sep) | sunset | Ground Truth with a vendor or private workforce, or another labeling service | AWS General Reference service lifecycle |
 | **Amazon Kendra** maintenance 30 Jun 2026 → closed to new customers 30 Jul 2026 | 2026 | maintenance, then no new customers | **Amazon Bedrock Managed Knowledge Base** (Smart Parsing, Agentic Retrieval API) | `kendra-availability-change` |
 | AIF-C01 **Exam Guide v1.1** | 30 Apr 2026 | adds objective **5.1.4** (data-leakage prevention, output validation, audit trails, toxicity), **4.2.2** (SageMaker Clarify **plus Bedrock Model Evaluations**) and the **1.3.4** service list (Bedrock, Amazon Quick, Kiro, SageMaker AI); **Amazon MemoryDB removed** from scope | study the v1.1 wording | AWS Certification exam-guide change history (v1.0 = 26 Mar 2026) |
 
-**What did *not* change:** nothing in the verified 2025–2026 update set alters the Glue, Athena, Lake Formation, Feature Store or Macie figures memorized in this lesson — Glue's **10 workers × G.1X** default (documented minimum **2**), Athena's **$5 per TB** with a **10 MB** floor, the Feature Store **15-minute** write buffer, Macie's **90-day** finding retention and Lake Formation's two-layer model all stand as written. The one genuinely new storage primitive worth knowing is **Amazon S3 Vectors**, launched at re:Invent 2025: Sun Finance stores its fraud-similarity embeddings there (section 13), and Bedrock Knowledge Bases now accepts it as a vector store.
+**What did *not* change:** nothing in the verified 2025 to 2026 update set alters the Glue, Athena, Lake Formation, Feature Store or Macie figures memorized in this lesson: Glue's **10 workers × G.1X** default (documented minimum **2**), Athena's **$5 per TB** with a **10 MB** floor, the Feature Store **15-minute** write buffer, Macie's **90-day** finding retention and Lake Formation's two-layer model all stand as written. The one genuinely new storage primitive worth knowing is **Amazon S3 Vectors**, launched at re:Invent 2025: Sun Finance stores its fraud-similarity embeddings there (section 13), and Bedrock Knowledge Bases now accepts it as a vector store.
 
-- **📚 Did you know?** AWS states that exam-guide updates appear on the exam about **one month** after publication. Exam guide v1.0 shipped **26 Mar 2026** and v1.1 shipped **30 Apr 2026**, so the seven new objectives (agentic AI and MCP, context engineering, token-based pricing, prompt versioning, hallucination detection and grounding, business-alignment metrics, traditional ML vs. FMs) were fair game from roughly late May 2026 — and the exam is still called **AIF-C01**.
+- **📚 Did you know?** AWS states that exam-guide updates appear on the exam about **one month** after publication. Exam guide v1.0 shipped **26 Mar 2026** and v1.1 shipped **30 Apr 2026**, so the seven new objectives (agentic AI and MCP, context engineering, token-based pricing, prompt versioning, hallucination detection and grounding, business-alignment metrics, traditional ML vs. FMs) were fair game from roughly late May 2026, and the exam is still called **AIF-C01**.
 
 ---
 
 ## 13. Real-World Case Studies
 
-Sections 1–12 take their numbers from AWS documentation. This section adds the other half of the evidence: what AWS *customers* published about running those same services in production. Every figure below is an AWS-published customer claim (unaudited, and "up to" figures are ceilings), retrieved 6 October 2026 from `aws.amazon.com/solutions/case-studies/*` and `aws.amazon.com/blogs/machine-learning/*`.
+Sections 1 to 12 take their numbers from AWS documentation. This section adds the other half of the evidence: what AWS *customers* published about running those same services in production. Every figure below is an AWS-published customer claim (unaudited, and "up to" figures are ceilings), retrieved 6 October 2026 from `aws.amazon.com/solutions/case-studies/*` and `aws.amazon.com/blogs/machine-learning/*`.
 
 ### 13.1 Five production pipelines: services, numbers, sources
 
 | # | Customer (industry, year) | AWS services in the pipeline | Documented outcome | Source |
 |---|---|---|---|---|
-| 1 | **Anthem** (health insurance, 2021) | **Amazon Textract** — OCR plus table and form detection | manual keying **20 min per claim** → **80 %** of the workflow automated, **90 %+** targeted, thousands of claims/day | `aws.amazon.com/solutions/case-studies/anthem` |
-| 2 | **RareJob** (EdTech, 2020) | **AWS Glue** + **Amazon Athena** feeding SageMaker **managed spot** training | training time **−25 %**, developer efficiency **>10×**, **100 h/month** saved, scores returned in **2–3 min** | `aws.amazon.com/solutions/case-studies/rare-job-case-study` |
+| 1 | **Anthem** (health insurance, 2021) | **Amazon Textract**: OCR plus table and form detection | manual keying **20 min per claim** → **80 %** of the workflow automated, **90 %+** targeted, thousands of claims/day | `aws.amazon.com/solutions/case-studies/anthem` |
+| 2 | **RareJob** (EdTech, 2020) | **AWS Glue** + **Amazon Athena** feeding SageMaker **managed spot** training | training time **−25 %**, developer efficiency **>10×**, **100 h/month** saved, scores returned in **2 to 3 min** | `aws.amazon.com/solutions/case-studies/rare-job-case-study` |
 | 3 | **Sun Finance** (fintech, 2026) | **Textract** → **Rekognition** → **Bedrock (Claude Sonnet 4)** → validation rules → **Titan Multimodal Embeddings in S3 Vectors** | accuracy **79.73 % → 90.80 %**, cost per document **−91 %**, **20 h → <5 s**, fraud caught **81 %** | AWS ML Blog, 30 Apr 2026 |
-| 4 | **Chronomics** (health-tech, 2022) | **Rekognition Custom Labels** (AutoML labeling) | in-house build stuck at **4 months** → **3–4 weeks**, **96.5 %** accuracy / **97.9 %** F1 | AWS ML Blog, 13 Dec 2022 |
+| 4 | **Chronomics** (health-tech, 2022) | **Rekognition Custom Labels** (AutoML labeling) | in-house build stuck at **4 months** → **3 to 4 weeks**, **96.5 %** accuracy / **97.9 %** F1 | AWS ML Blog, 13 Dec 2022 |
 | 5 | **Bynder** (digital asset management, 2025) | **Amazon Bedrock** + **Amazon Titan Multimodal Embeddings** over **175 M assets / 18 PB** | search time **−75 %**, usable options **~+50 %** across **4,000 customers** | `aws.amazon.com/solutions/case-studies/bynder-bedrock-case-study` |
 
-**Case file 1 — Anthem: prebuilt OCR first, humans in the tail.** Claim forms arrived as scans and images, and keying them by hand took **20 minutes per claim** at a cost AWS describes in the millions. Anthem chose the *prebuilt* tier that section 1.2 calls the default: **Amazon Textract** performs the OCR plus table and form extraction, and a classification step routes each result. The published outcome is **80 %** of the workflow automated with **90 %+** as the target across thousands of claims per day. The exam-relevant consequence is the tail: the remaining **10–20 %** still needs a human exception path, which is exactly the problem **Amazon A2I** (section 7) exists to solve.
+**Case file 1: Anthem: prebuilt OCR first, humans in the tail.** Claim forms arrived as scans and images, and keying them by hand took **20 minutes per claim** at a cost AWS describes in the millions. Anthem chose the *prebuilt* tier that section 1.2 calls the default: **Amazon Textract** performs the OCR plus table and form extraction, and a classification step routes each result. The published outcome is **80 %** of the workflow automated with **90 %+** as the target across thousands of claims per day. The exam-relevant consequence is the tail: the remaining **10 to 20 %** still needs a human exception path, which is exactly the problem **Amazon A2I** (section 7) exists to solve.
 
-**Case file 2 — RareJob: the one customer running this lesson's catalog stack.** The PROGOS speaking-test scorer first trained on a developer's local PC (one model per developer) and then on EC2 and ECS, and both bottlenecked on queueing rather than on model quality. The shipped architecture puts **AWS Glue** and **Amazon Athena** in front of **SageMaker managed spot training**: data preparation and exploratory SQL run in the managed services while parallel spot jobs replace the queue. The published result is **−25 %** training time, **>10×** developer efficiency, **100 hours per month** recovered and scores returned in **2–3 minutes**. This is the section 5 Comparative Verdict observed in production — Glue and Athena are the feeding layer, never the model.
+**Case file 2, RareJob: the one customer running this lesson's catalog stack.** The PROGOS speaking-test scorer first trained on a developer's local PC (one model per developer) and then on EC2 and ECS, and both bottlenecked on queueing rather than on model quality. The shipped architecture puts **AWS Glue** and **Amazon Athena** in front of **SageMaker managed spot training**: data preparation and exploratory SQL run in the managed services while parallel spot jobs replace the queue. The published result is **−25 %** training time, **>10×** developer efficiency, **100 hours per month** recovered and scores returned in **2 to 3 minutes**. This is the section 5 Comparative Verdict observed in production, Glue and Athena are the feeding layer, never the model.
 
-**Case file 3 — Sun Finance: the documented failed prototype.** **60 %** of microloan applications needed manual review, taking anywhere from **10 minutes to 20 hours** each. The first attempt — sending ID photos straight to **Claude Sonnet 4** for JSON extraction — scored only **61.8 %** overall and **43 %** on ID numbers on a **585-image** evaluation set, and AWS rejected it because the model's privacy protections block direct PII extraction. The shipped pipeline separates the concerns this lesson keeps separate: **Textract** for OCR, **Rekognition** as fallback and face handling, the LLM only for *structuring* the already-extracted text, explicit validation rules, and **Titan Multimodal Embeddings in Amazon S3 Vectors** for fraud-similarity search. Accuracy rose **79.73 % → 90.80 %** (ID number **74.32 % → 89.40 %**, document type **78.43 % → 96.40 %**), cost per document fell **91 %**, and processing went from **20 hours to under 5 seconds**.
+**Case file 3: Sun Finance: the documented failed prototype.** **60 %** of microloan applications needed manual review, taking anywhere from **10 minutes to 20 hours** each. The first attempt: sending ID photos straight to **Claude Sonnet 4** for JSON extraction: scored only **61.8 %** overall and **43 %** on ID numbers on a **585-image** evaluation set, and AWS rejected it because the model's privacy protections block direct PII extraction. The shipped pipeline separates the concerns this lesson keeps separate: **Textract** for OCR, **Rekognition** as fallback and face handling, the LLM only for *structuring* the already-extracted text, explicit validation rules, and **Titan Multimodal Embeddings in Amazon S3 Vectors** for fraud-similarity search. Accuracy rose **79.73 % → 90.80 %** (ID number **74.32 % → 89.40 %**, document type **78.43 % → 96.40 %**), cost per document fell **91 %**, and processing went from **20 hours to under 5 seconds**.
 
 ### 13.2 Before and after, side by side
 
@@ -662,10 +662,10 @@ Sections 1–12 take their numbers from AWS documentation. This section adds the
 |---|---|---|---|---|
 | Sun Finance | overall extraction accuracy | 79.73 % | **90.80 %** | **+11.07 pp** |
 | Sun Finance | ID-number / document-type accuracy | 74.32 % / 78.43 % | **89.40 % / 96.40 %** | +15 pp / +18 pp |
-| Sun Finance | *first attempt, LLM-only OCR* | — | *61.8 % (ID number 43 %)* | **rejected by AWS** |
-| Nippon India | assistant accuracy · hallucination | naive RAG baseline | **+>95 %** · **−90–95 %** | gain came from retrieval engineering, not a bigger model |
-| Chronomics | model build time | 4 months in-house | **3–4 weeks** with AutoML | **~4× faster** |
-| Alnylam | complaint triage · information search | 3–4 days · 15 min | **hours · 30 s** | ~10× · 30× faster |
+| Sun Finance | *first attempt, LLM-only OCR* |: | *61.8 % (ID number 43 %)* | **rejected by AWS** |
+| Nippon India | assistant accuracy · hallucination | naive RAG baseline | **+>95 %** · **−90 to 95 %** | gain came from retrieval engineering, not a bigger model |
+| Chronomics | model build time | 4 months in-house | **3 to 4 weeks** with AutoML | **~4× faster** |
+| Alnylam | complaint triage · information search | 3 to 4 days · 15 min | **hours · 30 s** | ~10× · 30× faster |
 | RareJob | training time · developer efficiency | local PC and EC2/ECS | **−25 %** · **>10×** | **100 h/month** recovered |
 
 ```plot
@@ -684,10 +684,10 @@ Sections 1–12 take their numbers from AWS documentation. This section adds the
 }
 ```
 
-- **📚 Did you know?** AWS's Generative AI Innovation Center publishes the only project-outcome rate in its whole case corpus: **65 %** of its generative AI projects reached production in 2025 (some in as little as **45 days**), out of **more than 1,000** implementations, assessed with AWS's **Five V's** framework — **Value → Visualize → Validate → Verify → Venture**. The other **35 %** did not ship, so plan for iteration rather than for a straight line from pilot to production.
+- **📚 Did you know?** AWS's Generative AI Innovation Center publishes the only project-outcome rate in its whole case corpus: **65 %** of its generative AI projects reached production in 2025 (some in as little as **45 days**), out of **more than 1,000** implementations, assessed with AWS's **Five V's** framework: **Value → Visualize → Validate → Verify → Venture**. The other **35 %** did not ship, so plan for iteration rather than for a straight line from pilot to production.
 
 > [!WARNING]
-> **Case-study numbers are marketing evidence, not exam constants — and each one has a baseline.** They are customer/AWS-claimed and unaudited, "up to" figures are ceilings rather than averages, and only Sun Finance (**n = 585**) and Adobe (own test set) disclose a sample basis. The documented failure patterns are the real lesson: do-it-yourself inference (Forethought abandoned its own Amazon EKS for SageMaker multi-model endpoints, **−66 %**, and Serverless Inference, **≈ −80 %**), LLM-only OCR (Sun Finance's **61.8 %** first attempt) and four months of in-house custom computer vision (Chronomics, before Rekognition Custom Labels delivered **96.5 %** in 3–4 weeks). Never quote a percentage without its "before", and never quote a ceiling as an average.
+> **Case-study numbers are marketing evidence, not exam constants, and each one has a baseline.** They are customer/AWS-claimed and unaudited, "up to" figures are ceilings rather than averages, and only Sun Finance (**n = 585**) and Adobe (own test set) disclose a sample basis. The documented failure patterns are the real lesson: do-it-yourself inference (Forethought abandoned its own Amazon EKS for SageMaker multi-model endpoints, **−66 %**, and Serverless Inference, **≈ −80 %**), LLM-only OCR (Sun Finance's **61.8 %** first attempt) and four months of in-house custom computer vision (Chronomics, before Rekognition Custom Labels delivered **96.5 %** in 3 to 4 weeks). Never quote a percentage without its "before", and never quote a ceiling as an average.
 
 ---
 
@@ -889,7 +889,7 @@ Sections 1–12 take their numbers from AWS documentation. This section adds the
     "Write the images to the Feature Store offline store and query them with Athena"
   ],
   "correct": 1,
-  "explanation": "Sun Finance's shipped pipeline separates OCR from reasoning: Textract extracts, Rekognition covers fallback and face handling, Claude Sonnet 4 only structures already-extracted text, and validation rules check the result — lifting accuracy from 79.73% to 90.80% while cutting cost per document by 91% and processing from 20 hours to under 5 seconds. The LLM-only attempt scored 61.8% (43% on ID numbers) and was rejected, so more tokens and a lower threshold do not fix a wrong division of labor; the Feature Store holds Parquet features for training and serving, not raw images."
+  "explanation": "Sun Finance's shipped pipeline separates OCR from reasoning: Textract extracts, Rekognition covers fallback and face handling, Claude Sonnet 4 only structures already-extracted text, and validation rules check the result: lifting accuracy from 79.73% to 90.80% while cutting cost per document by 91% and processing from 20 hours to under 5 seconds. The LLM-only attempt scored 61.8% (43% on ID numbers) and was rejected, so more tokens and a lower threshold do not fix a wrong division of labor; the Feature Store holds Parquet features for training and serving, not raw images."
 }
 ```
 
@@ -905,16 +905,16 @@ Sections 1–12 take their numbers from AWS documentation. This section adds the
     "Only Ground Truth was affected, because Clarify and Model Monitor were never part of the availability change"
   ],
   "correct": 2,
-  "explanation": "The SageMaker availability-change notices list Mechanical Turk, Ground Truth, Augmented AI (A2I), Model Monitor, Clarify, Debugger, Role Manager, Geospatial, Studio Lab and Profiler as no longer open to new customers from 30 July 2026 — that is maintenance, not shutdown and not a rebrand, and AWS points new evaluation workloads at Bedrock Model Evaluations. Mechanical Turk reached end of support on 30 September 2026 (a What's New post dated 29 September), and Ground Truth Plus ended earlier, on 30 June 2026."
+  "explanation": "The SageMaker availability-change notices list Mechanical Turk, Ground Truth, Augmented AI (A2I), Model Monitor, Clarify, Debugger, Role Manager, Geospatial, Studio Lab and Profiler as no longer open to new customers from 30 July 2026; that is maintenance, not shutdown and not a rebrand, and AWS points new evaluation workloads at Bedrock Model Evaluations. Mechanical Turk reached end of support on 30 September 2026 (a What's New post dated 29 September), and Ground Truth Plus ended earlier, on 30 June 2026."
 }
 ```
 
 > [!SUCCESS]
 > **Key Takeaways:**
 > 1. **One pipeline, named services.** S3 landing → Glue crawler → Glue Data Catalog → Lake Formation grants + IAM → Glue/EMR/Athena processing → Data Wrangler or DataBrew quality → Ground Truth labeling → Feature Store → training or fine-tuning. Every hop removes one class of failure: unknown schema, uncontrolled access, dirty data, noisy labels, train/serve skew.
-> 2. **Format is a cost decision.** CSV scans whole files, Parquet prunes columns (128 MB row groups, Glue default snappy) and JSONL feeds Bedrock. AWS's own example turns a **$15.00** query into **$1.25** — 3× from compression and 4× from column pruning.
+> 2. **Format is a cost decision.** CSV scans whole files, Parquet prunes columns (128 MB row groups, Glue default snappy) and JSONL feeds Bedrock. AWS's own example turns a **$15.00** query into **$1.25**: 3× from compression and 4× from column pruning.
 > 3. **Three engines, three billing models.** Glue is serverless DPU-hours (default 10 × G.1X, minimum 2), EMR is instance-hour + EBS (EMR Serverless is vCPU/memory/storage per second), Athena is **$5 per TB scanned** with a **10 MB** floor. A manual script is the answer only for exploration.
 > 4. **Labeling has hard floors.** Automated labeling needs **1,250** objects minimum and AWS recommends **5,000**; validation split is **20%** below 5,000 objects and **10%** above; `MaxConcurrentTaskCount` defaults to **1,000**; Mechanical Turk requires the `FreeOfPersonallyIdentifiableInformation` declaration or the job fails; consolidation does not exist in A2I.
 > 5. **Feature Store means both stores.** Online = `GetRecord`, latest record, low milliseconds, `Standard` or `InMemory`; offline = append-only **Parquet** in S3, flushed **within 15 minutes**, partitioned **hourly** (Glue) or **daily** (Iceberg). Online-only loses history; offline-only cannot serve latency.
 > 6. **Governance is two-layer and PII discovery is Macie.** Lake Formation needs LF grants **and** IAM plus `lakeformation:GetDataAccess`, with column and row filters on `SELECT`; Governed Tables are deprecated (31 Dec 2024). Macie discovers PII daily with managed and custom identifiers, keeps findings **90 days**, and rates SSN-class identifiers **High at any count**.
-> 7. **Comparative verdict:** Glue beats a manual ETL script on repeatability and catalog integration; EMR beats Glue when you need engine or cluster control; Athena beats both for ad-hoc reads and loses to them for scheduled transforms unless paired with CTAS; and no manual process can prove data lineage, column-level access control or reproducible training inputs — which is exactly how Domain 5 frames secure data engineering.
+> 7. **Comparative verdict:** Glue beats a manual ETL script on repeatability and catalog integration; EMR beats Glue when you need engine or cluster control; Athena beats both for ad-hoc reads and loses to them for scheduled transforms unless paired with CTAS; and no manual process can prove data lineage, column-level access control or reproducible training inputs; which is exactly how Domain 5 frames secure data engineering.

@@ -1,14 +1,14 @@
 ---
-title: "Hilos — spawn, join y Send + Sync"
+title: "Hilos, spawn, join y Send + Sync"
 description: "Domine los hilos de SO en Rust: spawn, join, move closures, hilos con ámbito y los traits Send + Sync para libertad de data races"
 order: 1
 duration: "90 minutos"
 difficulty: advanced
 ---
 
-# Hilos — spawn, join y Send + Sync
+# Hilos: spawn, join y Send + Sync
 
-Rust proporciona hilos de SO a través de `std::thread`. Combinado con el sistema de ownership, garantiza **libertad de data races** en tiempo de compilación — ningún otro lenguaje ofrece esto sin runtime o garbage collector.
+Rust proporciona hilos de SO a través de `std:thread`. Combinado con el sistema de ownership, garantiza **libertad de data races** en tiempo de compilación: ningún otro lenguaje ofrece esto sin runtime o garbage collector.
 
 ## Hilos Básicos
 
@@ -105,7 +105,7 @@ fn main() {
 }
 ```
 
-## Constructor de Hilo — Personalizando Hilos
+## Constructor de Hilo: Personalizando Hilos
 
 ```rust
 use std::thread;
@@ -164,7 +164,7 @@ fn main() {
 > | Auto-join | No | Sí (al final del ámbito) |
 > | Valores de retorno | Via JoinHandle | Via handle creado |
 
-## Comunicación entre Hilos — Patrones Básicos
+## Comunicación entre Hilos: Patrones Básicos
 
 ```rust
 use std::thread;

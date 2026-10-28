@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # CREATE, ALTER e DROP de Tabelas
 
-Estes comandos de **Linguagem de Definição de Dados (DDL)** definem e gerenciam a estrutura do seu banco de dados. Acertar o design do esquema é crítico — é muito mais fácil planejar com antecedência do que migrar depois.
+Estes comandos de **Linguagem de Definição de Dados (DDL)** definem e gerenciam a estrutura do seu banco de dados. Acertar o design do esquema é crítico: é muito mais fácil planejar com antecedência do que migrar depois.
 
 ## CREATE TABLE
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 ```
 
-## ALTER TABLE — Alterando a Estrutura da Tabela
+## ALTER TABLE: Alterando a Estrutura da Tabela
 
 ### ADD COLUMN
 
@@ -119,7 +119,7 @@ DROP COLUMN phone;
 ALTER TABLE users RENAME TO customers;
 ```
 
-## DROP TABLE — Removendo Tabelas
+## DROP TABLE: Removendo Tabelas
 
 ```sql
 -- Remove permanentemente a tabela e todos os seus dados

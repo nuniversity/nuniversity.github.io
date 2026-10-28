@@ -104,10 +104,10 @@ Comprender las diferencias fundamentales entre estos tres tipos de organizacione
 
 ## Conceptos Erróneos Comunes
 
-- ❌ "ONGs no pueden generar lucro": Falso — pueden generar superávit, pero deben reinvertirlo en la misión
-- ❌ "OFL no pueden tener misiones sociales": Falso — muchas incorporan objetivos sociales/ambientales (vea: B-Corps, emprendimientos sociales)
-- ❌ "Gobierno y ONGs son iguales": Falso — diferentes estructuras de gobernanza, financiación y prestación de cuentas
-- ❌ "Exención tributaria significa que no hay que declarar": Falso — ONGs aún deben presentar declaraciones anuales de información (ej: Formulario 990 en EE. UU.)
+- ❌ "ONGs no pueden generar lucro": Falso: pueden generar superávit, pero deben reinvertirlo en la misión
+- ❌ "OFL no pueden tener misiones sociales": Falso: muchas incorporan objetivos sociales/ambientales (vea: B-Corps, emprendimientos sociales)
+- ❌ "Gobierno y ONGs son iguales": Falso: diferentes estructuras de gobernanza, financiación y prestación de cuentas
+- ❌ "Exención tributaria significa que no hay que declarar": Falso: ONGs aún deben presentar declaraciones anuales de información (ej: Formulario 990 en EE. UU.)
 
 ## Contexto de Prova
 

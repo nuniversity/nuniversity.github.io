@@ -12,10 +12,10 @@ difficulty: "intermediate"
 
 Los hooks son scripts que se ejecutan automáticamente en puntos específicos del ciclo de vida de OpenCode. Permiten:
 
-- **Validación** — Verificar entradas/salidas antes del procesamiento
-- **Transformación** — Modificar datos entre pasos
-- **Protección** — Bloquear operaciones peligrosas
-- **Registro** — Rastrear actividad para auditoría
+- **Validación**: Verificar entradas/salidas antes del procesamiento
+- **Transformación**: Modificar datos entre pasos
+- **Protección**: Bloquear operaciones peligrosas
+- **Registro**: Rastrear actividad para auditoría
 
 ---
 

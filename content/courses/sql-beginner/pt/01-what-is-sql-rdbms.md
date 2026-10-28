@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # O que é SQL e Bancos de Dados Relacionais?
 
-SQL (Structured Query Language) é a linguagem padrão para gerenciar e consultar dados em sistemas de gerenciamento de bancos de dados relacionais (RDBMS). Ela permite criar, ler, atualizar e excluir dados — frequentemente chamadas de operações CRUD.
+SQL (Structured Query Language) é a linguagem padrão para gerenciar e consultar dados em sistemas de gerenciamento de bancos de dados relacionais (RDBMS). Ela permite criar, ler, atualizar e excluir dados: frequentemente chamadas de operações CRUD.
 
 ## O que é um Banco de Dados Relacional?
 
@@ -108,13 +108,13 @@ Isso retorna:
 
 Uma loja online pode ter tabelas como:
 
-- `customers` — quem compra
-- `products` — o que compram
-- `orders` — quando compram
-- `order_items` — quais produtos em cada pedido
-- `categories` — agrupamento de produtos
+- `customers`: quem compra
+- `products`, o que compram
+- `orders`: quando compram
+- `order_items`: quais produtos em cada pedido
+- `categories`: agrupamento de produtos
 
-Em vez de armazenar o nome do cliente em cada pedido, cada linha de `orders` contém uma chave estrangeira `customer_id`. Isso evita duplicação e facilita atualizações — altere o endereço em um só lugar.
+Em vez de armazenar o nome do cliente em cada pedido, cada linha de `orders` contém uma chave estrangeira `customer_id`. Isso evita duplicação e facilita atualizações: altere o endereço em um só lugar.
 
 ```sql
 -- Encontre todos os pedidos do cliente Alice

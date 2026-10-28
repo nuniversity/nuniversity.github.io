@@ -29,7 +29,7 @@ Los agentes personalizados se definen en la sección `agents` de `opencode.json`
 ```
 
 > [!TIP]
-> Usa nombres y descripciones de agentes descriptivos — sirven como el mecanismo principal de enrutamiento. Un agente bien nombrado como "security-auditor" con una descripción clara es más fácil de seleccionar tanto para humanos como para el sistema de enrutamiento.
+> Usa nombres y descripciones de agentes descriptivos: sirven como el mecanismo principal de enrutamiento. Un agente bien nombrado como "security-auditor" con una descripción clara es más fácil de seleccionar tanto para humanos como para el sistema de enrutamiento.
 
 ---
 
@@ -146,7 +146,7 @@ Las descripciones ayudan a OpenCode a enrutar tareas al agente correcto. Actúan
 ```
 
 > [!IMPORTANT]
-> Las descripciones de los agentes no son solo documentación — se usan activamente en tiempo de ejecución para enrutamiento. Una descripción vaga como "ayuda con codificación" puede hacer que las solicitudes se enruten incorrectamente. Sé específico: "Maneja diseño de esquema de base de datos y optimización SQL."
+> Las descripciones de los agentes no son solo documentación: se usan activamente en tiempo de ejecución para enrutamiento. Una descripción vaga como "ayuda con codificación" puede hacer que las solicitudes se enruten incorrectamente. Sé específico: "Maneja diseño de esquema de base de datos y optimización SQL."
 
 ---
 
@@ -296,25 +296,25 @@ Las restricciones limitan lo que un agente puede hacer, previniendo mal uso o da
 ```
 
 > [!TIP]
-> Usa restricciones de `temperature` para controlar la creatividad del agente. Valores bajos (0.1–0.3) producen salidas determinísticas y enfocadas, ideales para revisión de código y despliegue. Valores más altos (0.7–1.0) fomentan soluciones creativas para lluvia de ideas y diseño de arquitectura.
+> Usa restricciones de `temperature` para controlar la creatividad del agente. Valores bajos (0.1 to 0.3) producen salidas determinísticas y enfocadas, ideales para revisión de código y despliegue. Valores más altos (0.7 to 1.0) fomentan soluciones creativas para lluvia de ideas y diseño de arquitectura.
 
 ### Comparación: Opciones de Configuración de Agentes
 
 | Opción           | Tipo      | Obligatorio | Valor Pred.   | Descripción                              |
 |------------------|-----------|:-----------:|---------------|------------------------------------------|
-| `model`          | string    | Sí          | —             | Identificador del modelo (ej.: `gpt-4o`) |
-| `description`    | string    | Sí          | —             | Descripción para enrutamiento            |
+| `model` | string | Sí |: | Identificador del modelo (ej.: `gpt-4o`) |
+| `description` | string | Sí |: | Descripción para enrutamiento |
 | `prompt`         | string    | No          | Prompt por def.| Mensaje del sistema / instrucciones       |
 | `subagents`      | object    | No          | `{}`          | Agentes especializados anidados          |
 | `constraints`    | object    | No          | `{}`          | Límites de recursos y herramientas       |
 | `allowedTools`   | string[]  | No          | Todas         | Lista blanca de herramientas permitidas  |
 | `deniedTools`    | string[]  | No          | `[]`          | Lista negra de herramientas prohibidas   |
 | `maxTokens`      | integer   | No          | Por defecto   | Máximo de tokens de respuesta            |
-| `temperature`    | float     | No          | Por defecto   | Aleatoriedad de respuesta (0.0–2.0)     |
+| `temperature` | float | No | Por defecto | Aleatoriedad de respuesta (0.0 to 2.0) |
 | `maxFileSize`    | integer   | No          | 10MB          | Tamaño máximo de archivo que el agente lee|
 
 > [!IMPORTANT]
-> `allowedTools` y `deniedTools` son patrones mutuamente excluyentes. Si especificas `allowedTools`, todas las demás herramientas están implícitamente denegadas. Si especificas `deniedTools`, todas las herramientas excepto las listadas están implícitamente permitidas. No uses ambos en el mismo bloque de restricciones — el comportamiento es indefinido.
+> `allowedTools` y `deniedTools` son patrones mutuamente excluyentes. Si especificas `allowedTools`, todas las demás herramientas están implícitamente denegadas. Si especificas `deniedTools`, todas las herramientas excepto las listadas están implícitamente permitidas. No uses ambos en el mismo bloque de restricciones: el comportamiento es indefinido.
 
 ---
 
@@ -364,7 +364,7 @@ Las restricciones limitan lo que un agente puede hacer, previniendo mal uso o da
     "El subagente crea su propio ámbito de permisos automáticamente"
   ],
   "correct": 2,
-  "explanation": "Los subagentes heredan el ámbito de permisos del agente padre por defecto. Esto significa que si el agente primario tiene permiso para ejecutar comandos bash, el subagente también puede ejecutarlos. Esta es una consideración de seguridad — siempre delimita explícitamente los permisos del subagente para operaciones sensibles."
+  "explanation": "Los subagentes heredan el ámbito de permisos del agente padre por defecto. Esto significa que si el agente primario tiene permiso para ejecutar comandos bash, el subagente también puede ejecutarlos. Esta es una consideración de seguridad: siempre delimita explícitamente los permisos del subagente para operaciones sensibles."
 }
 ```
 
@@ -396,7 +396,7 @@ Las restricciones limitan lo que un agente puede hacer, previniendo mal uso o da
     "El agente predeterminado, porque la consulta no coincide exactamente con ninguna regla"
   ],
   "correct": 0,
-  "explanation": "Las reglas de enrutamiento se evalúan en orden. Si 'despliegue' para deploy-agent se define antes que 'despliegue producción' para prod-deploy-agent, la primera regla coincidente gana. La consulta 'hacer despliegue a producción' contiene 'despliegue', por lo que coincide con la primera regla. El orden importa — coloca reglas más específicas antes que las generales."
+  "explanation": "Las reglas de enrutamiento se evalúan en orden. Si 'despliegue' para deploy-agent se define antes que 'despliegue producción' para prod-deploy-agent, la primera regla coincidente gana. La consulta 'hacer despliegue a producción' contiene 'despliegue', por lo que coincide con la primera regla. El orden importa: coloca reglas más específicas antes que las generales."
 }
 ```
 
@@ -411,6 +411,6 @@ Las restricciones limitan lo que un agente puede hacer, previniendo mal uso o da
 - Las restricciones limitan las capacidades del agente mediante listas blancas, listas negras, límites de recursos y temperatura
 - El campo `prompt` es opcional pero esencial para guiar el comportamiento del agente más allá del predeterminado
 - Múltiples agentes pueden usar diferentes modelos de diferentes proveedores en la misma configuración
-- Las reglas de enrutamiento se evalúan en orden — coloca patrones específicos antes que los generales
+- Las reglas de enrutamiento se evalúan en orden: coloca patrones específicos antes que los generales
 - Los subagentes heredan permisos del padre por defecto, requiriendo revisión cuidadosa de seguridad
 - Las restricciones de temperatura controlan creatividad vs. determinismo en las respuestas del agente

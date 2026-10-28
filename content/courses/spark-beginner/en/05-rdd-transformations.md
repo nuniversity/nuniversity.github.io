@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # RDD Transformations
 
-Transformations create new RDDs from existing ones. They are **lazy** — Spark records the operation but does not execute it until an action triggers computation. This enables the Catalyst optimizer (for DataFrames) and DAG scheduler to build efficient execution plans.
+Transformations create new RDDs from existing ones. They are **lazy**: Spark records the operation but does not execute it until an action triggers computation. This enables the Catalyst optimizer (for DataFrames) and DAG scheduler to build efficient execution plans.
 
 ## Types of Transformations
 

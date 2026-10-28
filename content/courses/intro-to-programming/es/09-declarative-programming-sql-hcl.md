@@ -1,6 +1,6 @@
 ---
 title: "Programación Declarativa: SQL y HCL"
-description: "Aprende el paradigma declarativo: describe lo que quieres, no cómo obtenerlo — usando SQL y HCL"
+description: "Aprende el paradigma declarativo: describe lo que quieres, no cómo obtenerlo, usando SQL y HCL"
 order: 9
 duration: "35 min"
 difficulty: "intermediate"
@@ -37,7 +37,7 @@ No le dices a la base de datos cómo iterar, filtrar o recolectar resultados. Si
 
 SQL es el lenguaje declarativo más utilizado. Te permite consultar, insertar, actualizar y eliminar datos en bases de datos relacionales.
 
-### SELECT — Recuperando Datos
+### SELECT: Recuperando Datos
 
 ```sql
 SELECT nombre, edad FROM usuarios;
@@ -45,21 +45,21 @@ SELECT nombre, edad FROM usuarios;
 
 Esto devuelve las columnas `nombre` y `edad` para cada fila en la tabla `usuarios`.
 
-### WHERE — Filtrando Filas
+### WHERE: Filtrando Filas
 
 ```sql
 SELECT * FROM productos
 WHERE precio < 50 AND categoria = 'Electrónicos';
 ```
 
-### ORDER BY — Ordenando
+### ORDER BY: Ordenando
 
 ```sql
 SELECT nombre, salario FROM empleados
 ORDER BY salario DESC;
 ```
 
-### JOIN — Combinando Tablas
+### JOIN: Combinando Tablas
 
 Los datos a menudo están dispersos en múltiples tablas. `JOIN` las conecta:
 
@@ -70,7 +70,7 @@ JOIN clientes ON pedidos.cliente_id = clientes.id
 WHERE pedidos.total > 100;
 ```
 
-Esta consulta responde: "¿Qué clientes hicieron pedidos de más de $100 y cuáles fueron los montos?" — sin escribir un solo bucle.
+Esta consulta responde: "¿Qué clientes hicieron pedidos de más de $100 y cuáles fueron los montos?"; sin escribir un solo bucle.
 
 ### INSERT, UPDATE, DELETE
 
@@ -86,7 +86,7 @@ DELETE FROM usuarios WHERE edad < 18;
 ```
 
 > [!NOTE]
-> SQL es declarativa a nivel de sentencia, pero detrás de escena el motor de la base de datos crea un plan de ejecución — decide la mejor forma de ejecutar tu consulta.
+> SQL es declarativa a nivel de sentencia, pero detrás de escena el motor de la base de datos crea un plan de ejecución: decide la mejor forma de ejecutar tu consulta.
 
 ## HCL: HashiCorp Configuration Language
 
@@ -106,7 +106,7 @@ resource "aws_instance" "servidor_web" {
 }
 ```
 
-Esto define una máquina virtual: la AMI (imagen), el tamaño de la instancia y las etiquetas. No escribes código para llamar APIs de nube, manejar errores o verificar estado — Terraform se encarga de todo eso.
+Esto define una máquina virtual: la AMI (imagen), el tamaño de la instancia y las etiquetas. No escribes código para llamar APIs de nube, manejar errores o verificar estado: Terraform se encarga de todo eso.
 
 ### Variables y Salidas
 
@@ -129,10 +129,10 @@ output "ip_publico" {
 ### La Ventaja Declarativa
 
 Con Terraform, tu configuración de infraestructura es:
-- **Versionada** — almacenada en Git junto con tu código
-- **Reproducible** — misma configuración produce misma infraestructura
-- **Autodocumentada** — el archivo de configuración describe exactamente lo que existe
-- **Idempotente** — ejecutarlo de nuevo no hace cambios si nada está desactualizado
+- **Versionada**: almacenada en Git junto con tu código
+- **Reproducible**: misma configuración produce misma infraestructura
+- **Autodocumentada**: el archivo de configuración describe exactamente lo que existe
+- **Idempotente**: ejecutarlo de nuevo no hace cambios si nada está desactualizado
 
 ## Ejercicio Práctico
 
@@ -167,4 +167,4 @@ ORDER BY cantidad_productos DESC;
 
 ## Próximos Pasos
 
-Has completado el curso. Aprendiste los fundamentos de la programación — variables, funciones, flujo de control y estructuras de datos — y exploraste tres paradigmas principales: funcional (Python), compilado (Rust) y declarativo (SQL/HCL). ¡Sigue practicando y construyendo!
+Has completado el curso. Aprendiste los fundamentos de la programación, variables, funciones, flujo de control y estructuras de datos, y exploraste tres paradigmas principales: funcional (Python), compilado (Rust) y declarativo (SQL/HCL). ¡Sigue practicando y construyendo!

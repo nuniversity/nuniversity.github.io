@@ -373,4 +373,4 @@ print(json.dumps(result, indent=2))
 > - LLM-como-juiz captura qualidade semântica, mas introduz custo e viés; use temperature=0 para reprodutibilidade.
 > - Avaliação humana é o padrão ouro, mas escala mal; use-a estrategicamente para dimensões subjetivas.
 > - Um conjunto de dados de avaliação representativo é mais importante que um grande; invista em anotação de qualidade.
-> - Combine múltiplos métodos de avaliação — nenhuma métrica isolada conta a história completa.
+> - Combine múltiplos métodos de avaliação: nenhuma métrica isolada conta a história completa.

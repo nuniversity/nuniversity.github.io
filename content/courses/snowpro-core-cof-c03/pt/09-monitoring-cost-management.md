@@ -1,12 +1,12 @@
 ---
-title: "Domínio 2.3 — Monitoramento e Gerenciamento de Custos"
+title: "Domínio 2.3, Monitoramento e Gerenciamento de Custos"
 description: "Aprenda a monitorar e controlar custos do Snowflake usando Resource Monitors, views do ACCOUNT_USAGE, cálculo de créditos, monitoramento de warehouses e estratégias de atribuição de custos."
 order: 9
 difficulty: intermediate
 duration: "55 min"
 ---
 
-# Domínio 2.3 — Monitoramento e Gerenciamento de Custos
+# Domínio 2.3: Monitoramento e Gerenciamento de Custos
 
 ## Peso no Exame
 
@@ -213,7 +213,7 @@ Ambos fornecem metadados, mas com escopos diferentes:
 |---|---|---|
 | Escopo | Apenas o banco de dados atual | Conta inteira |
 | Latência | Tempo real | Até 45 minutos |
-| Retenção | Limitada (7–14 dias para histórico) | 1 ano |
+| Retenção | Limitada (7 to 14 dias para histórico) | 1 ano |
 | Acesso | Qualquer usuário com acesso ao BD | Requer ACCOUNTADMIN |
 | Objetos descartados | Não incluídos | Incluídos |
 | Caso de uso | Queries imediatas de estado atual | Análise histórica, auditoria |

@@ -8,7 +8,7 @@ difficulty: "iniciante"
 
 # Cadeias Sequenciais
 
-Embora LangGraph suporte topologias de grafo complexas, muitas aplicações são construídas sobre **cadeias sequenciais** simples — uma sequência linear de nós onde cada etapa constrói sobre a anterior.
+Embora LangGraph suporte topologias de grafo complexas, muitas aplicações são construídas sobre **cadeias sequenciais** simples: uma sequência linear de nós onde cada etapa constrói sobre a anterior.
 
 ---
 
@@ -299,7 +299,7 @@ def node_b(state: NestedState) -> dict:
   "question": "Como o estado flui em uma cadeia sequencial do LangGraph?",
   "options": [
     "Cada nó tem seu próprio estado isolado",
-    "O estado é compartilhado — cada nó lê escritas anteriores e adiciona as suas",
+    "O estado é compartilhado: cada nó lê escritas anteriores e adiciona as suas",
     "O estado é resetado entre cada nó",
     "O estado flui para trás, do último nó para o primeiro"
   ],
@@ -320,7 +320,7 @@ def node_b(state: NestedState) -> dict:
     "Um erro é lançado"
   ],
   "correct": 2,
-  "explanation": "A atualização padrão de estado é substituir — o último nó a escrever uma chave determina seu valor final."
+  "explanation": "A atualização padrão de estado é substituir, o último nó a escrever uma chave determina seu valor final."
 }
 ```
 

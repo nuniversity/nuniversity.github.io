@@ -1,6 +1,6 @@
 ---
 title: "dbt Docs: Documentação, Linhagem e o Catálogo dbt Docs v2"
-description: "Construa um sistema de documentação vivo para seu projeto dbt-Redshift — desde escrever ótimas descrições YAML e blocos docs, até gerar o gráfico de linhagem, hospedar docs estáticos no S3 e usar o novo dbt Docs v2 com linhagem em nível de coluna potencializado pelo motor Fusion."
+description: "Construa um sistema de documentação vivo para seu projeto dbt-Redshift, desde escrever ótimas descrições YAML e blocos docs, até gerar o gráfico de linhagem, hospedar docs estáticos no S3 e usar o novo dbt Docs v2 com linhagem em nível de coluna potencializado pelo motor Fusion."
 order: 9
 duration: "45 min"
 difficulty: "advanced"
@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # dbt Docs: Documentação, Linhagem e o Catálogo dbt Docs v2
 
-Documentação não é opcional em um projeto dbt de produção. É o mapa que permite que todo engenheiro — incluindo você daqui a seis meses — entenda o que cada modelo faz, de onde os dados vêm e o que quebra se você mudar algo. O dbt torna a documentação um cidadão de primeira classe: ela é gerada a partir do mesmo YAML que define seus testes e contratos, e está sempre em sincronia com seu projeto.
+Documentação não é opcional em um projeto dbt de produção. É o mapa que permite que todo engenheiro, incluindo você daqui a seis meses, entenda o que cada modelo faz, de onde os dados vêm e o que quebra se você mudar algo. O dbt torna a documentação um cidadão de primeira classe: ela é gerada a partir do mesmo YAML que define seus testes e contratos, e está sempre em sincronia com seu projeto.
 
 A partir de Junho de 2026, o dbt oferece três superfícies de documentação:
 
@@ -18,13 +18,13 @@ A partir de Junho de 2026, o dbt oferece três superfícies de documentação:
 | **dbt Docs v2 (alpha)** | dbt Core v2 + Fusion | UI moderna, linhagem em nível de coluna, API REST, artefatos Parquet |
 | **Catálogo** | Plataforma dbt (paga) | Tempo real, colaboração, visualizações customizadas |
 
-Este módulo cobre as duas primeiras — tudo disponível para usuários self-hosted de dbt-core + Fusion.
+Este módulo cobre as duas primeiras: tudo disponível para usuários self-hosted de dbt-core + Fusion.
 
 ---
 
 ## Escrevendo Documentação Que Realmente é Usada
 
-A diferença entre documentação boa e ruim no dbt não é técnica — é disciplina. Siga estas regras em todo modelo.
+A diferença entre documentação boa e ruim no dbt não é técnica: é disciplina. Siga estas regras em todo modelo.
 
 ### Camada 1: Descrições no Nível do Modelo
 
@@ -110,7 +110,7 @@ models:
 ```
 
 [!TIP]
-Blocos Docs em arquivos `.md` sob `docs/` são versionados junto com seus modelos. Eles podem ser referenciados através de múltiplos schemas — escreva `{{ doc('order_id') }}` uma vez, reutilize em todo lugar que `order_id` aparecer. Esta é a chave para documentação consistente e sustentável em escala.
+Blocos Docs em arquivos `.md` sob `docs/` são versionados junto com seus modelos. Eles podem ser referenciados através de múltiplos schemas: escreva `{{ doc('order_id') }}` uma vez, reutilize em todo lugar que `order_id` aparecer. Esta é a chave para documentação consistente e sustentável em escala.
 
 ### Camada 3: Documentação de Sources
 
@@ -136,7 +136,7 @@ sources:
             description: "Timestamp UTC definido pelo SDK do cliente. Pode estar até 5 min atrás do tempo do servidor."
 ```
 
-### Camada 4: Exposures — Documente Consumidores Downstream
+### Camada 4: Exposures: Documente Consumidores Downstream
 
 Exposures declaram o que consome seus modelos dbt, completando o quadro de linhagem da fonte ao dashboard.
 
@@ -202,8 +202,8 @@ dbt docs generate --empty-catalog
 
 | Arquivo | Conteúdo |
 | :--- | :--- |
-| `manifest.json` | Grafo completo do projeto — modelos, testes, fontes, macros, docs |
-| `catalog.json` | Introspecção do warehouse — tipos de coluna, contagens de linhas, estatísticas |
+| `manifest.json` | Grafo completo do projeto: modelos, testes, fontes, macros, docs |
+| `catalog.json` | Introspecção do warehouse: tipos de coluna, contagens de linhas, estatísticas |
 
 ### Servir Localmente
 
@@ -216,7 +216,7 @@ dbt docs serve --port 8090
 ```
 
 [!WARNING]
-`dbt docs serve` é apenas para desenvolvimento local — ele inicia um servidor HTTP não autenticado. Nunca o exponha publicamente. Para hospedagem para equipe, implante os arquivos estáticos no S3 + CloudFront ou em um servidor web interno.
+`dbt docs serve` é apenas para desenvolvimento local: ele inicia um servidor HTTP não autenticado. Nunca o exponha publicamente. Para hospedagem para equipe, implante os arquivos estáticos no S3 + CloudFront ou em um servidor web interno.
 
 ---
 
@@ -281,7 +281,7 @@ Adicione geração de docs ao seu pipeline CD:
 
 ---
 
-## dbt Docs v2 (Alpha — dbt Core v2 + Fusion)
+## dbt Docs v2 (Alpha: dbt Core v2 + Fusion)
 
 O dbt Docs v2 é um catálogo open-source moderno e performático com uma UI redesenhada, metadados da Semantic Layer, linhagem em nível de coluna e uma API REST. Está disponível com o motor dbt Fusion e dbt Core v2.
 
@@ -290,14 +290,14 @@ O dbt Docs v2 é um catálogo open-source moderno e performático com uma UI red
 | Funcionalidade | dbt Docs (Legacy) | dbt Docs v2 |
 | :--- | :--- | :--- |
 | Formato de artefato | `manifest.json` + `catalog.json` (JSON grande) | Artefatos Parquet (consultáveis via DuckDB) |
-| Linhagem em nível de coluna | Não | Sim — potencializado pelo parsing SQL do Fusion |
+| Linhagem em nível de coluna | Não | Sim: potencializado pelo parsing SQL do Fusion |
 | Escala do projeto | Dificuldade com 1.000+ modelos | Escala para projetos de tamanho arbitrário |
 | API REST | Não | Sim |
 | UI | v1 (funcional) | Redesenhada (mais rápida, filtrável) |
 
 ### Artefatos Parquet
 
-O dbt v2.0 pode emitir artefatos Parquet como uma alternativa de alta performance para grandes arquivos JSON como manifest.json. Por serem Parquet, você pode consultá-los diretamente através do DuckDB — um grande avanço para ferramentas de metadados e workflows de IA. A experiência local de docs foi reconstruída, potencializada por esses novos artefatos Parquet, e agora é capaz de escalar para projetos de tamanho arbitrário.
+O dbt v2.0 pode emitir artefatos Parquet como uma alternativa de alta performance para grandes arquivos JSON como manifest.json. Por serem Parquet, você pode consultá-los diretamente através do DuckDB: um grande avanço para ferramentas de metadados e workflows de IA. A experiência local de docs foi reconstruída, potencializada por esses novos artefatos Parquet, e agora é capaz de escalar para projetos de tamanho arbitrário.
 
 Consulte artefatos diretamente com DuckDB:
 
@@ -326,7 +326,7 @@ con.execute("""
 
 ### Linhagem em Nível de Coluna
 
-Com o motor Fusion, o dbt Docs v2 mostra quais colunas de origem fluem para quais colunas de mart — através de cada etapa de transformação. Isso é potencializado pelo parsing SQL nativo do Fusion:
+Com o motor Fusion, o dbt Docs v2 mostra quais colunas de origem fluem para quais colunas de mart: através de cada etapa de transformação. Isso é potencializado pelo parsing SQL nativo do Fusion:
 
 ```mermaid
 flowchart LR
@@ -372,7 +372,7 @@ packages:
 dbt build --select package:dbt_project_evaluator
 ```
 
-Isso gera modelos como `fct_undocumented_models`, `fct_missing_primary_key_tests`, e `fct_model_fanout` — tabelas que você pode consultar ou alertar no CI.
+Isso gera modelos como `fct_undocumented_models`, `fct_missing_primary_key_tests`, e `fct_model_fanout`: tabelas que você pode consultar ou alertar no CI.
 
 Limiares customizados no `dbt_project_evaluator.yml`:
 
@@ -421,7 +421,7 @@ vars:
     "Tabelas externas do Redshift via Spectrum"
   ],
   "correct": 1,
-  "explanation": "Exposures declaram consumidores downstream — dashboards, APIs, modelos ML — que dependem de modelos mart do dbt. Eles aparecem no DAG, permitindo rastreamento de linhagem completo de ponta a ponta da fonte bruta ao consumidor de negócio."
+  "explanation": "Exposures declaram consumidores downstream, dashboards, APIs, modelos ML, que dependem de modelos mart do dbt. Eles aparecem no DAG, permitindo rastreamento de linhagem completo de ponta a ponta da fonte bruta ao consumidor de negócio."
 }
 ```
 
@@ -437,7 +437,7 @@ vars:
     "--fast"
   ],
   "correct": 1,
-  "explanation": "--empty-catalog pula a etapa de introspecção do warehouse que popula catalog.json. Isso remove metadados de tipo de coluna e contagem de linhas do site de docs mas é significativamente mais rápido — útil durante o desenvolvimento quando os tipos de coluna já são conhecidos."
+  "explanation": "--empty-catalog pula a etapa de introspecção do warehouse que popula catalog.json. Isso remove metadados de tipo de coluna e contagem de linhas do site de docs mas é significativamente mais rápido: útil durante o desenvolvimento quando os tipos de coluna já são conhecidos."
 }
 ```
 
@@ -453,7 +453,7 @@ vars:
     "O arquivo catalog.json, que v1 também gera mas em formato incompatível"
   ],
   "correct": 1,
-  "explanation": "Linhagem em nível de coluna requer parsing de SQL para construir uma Árvore Sintática Abstrata (AST) e rastrear a origem de cada coluna. O motor Fusion faz isso nativamente através de múltiplos dialetos SQL. O dbt Core v1 apenas renderiza Jinja em strings SQL — ele não faz parsing de ASTs SQL."
+  "explanation": "Linhagem em nível de coluna requer parsing de SQL para construir uma Árvore Sintática Abstrata (AST) e rastrear a origem de cada coluna. O motor Fusion faz isso nativamente através de múltiplos dialetos SQL. O dbt Core v1 apenas renderiza Jinja em strings SQL: ele não faz parsing de ASTs SQL."
 }
 ```
 
@@ -464,7 +464,7 @@ vars:
   "question": "Por que `dbt docs serve` não é apropriado para compartilhamento de documentação em equipe?",
   "options": [
     "Ele só gera documentação para a camada staging",
-    "Ele inicia um servidor HTTP não autenticado — não deve ser exposto publicamente",
+    "Ele inicia um servidor HTTP não autenticado: não deve ser exposto publicamente",
     "Requer uma licença paga da plataforma dbt",
     "É muito lento para acesso multiusuário"
   ],
@@ -495,8 +495,8 @@ vars:
 ### Principais Conclusões
 
 - Escreva descrições em três níveis: modelo (o que, por que, quem é dono), coluna (semântica exata, formato, fonte) e source (características de dados brutos, volume, latência).
-- Use blocos `docs` em arquivos `.md` para descrições longas e reutilizáveis — referencie-os com `{{ doc('nome') }}` para evitar repetição.
+- Use blocos `docs` em arquivos `.md` para descrições longas e reutilizáveis: referencie-os com `{{ doc('nome') }}` para evitar repetição.
 - `exposures` completam sua linhagem adicionando consumidores downstream (dashboards, APIs, apps) ao DAG.
 - `dbt docs generate` produz `manifest.json` (grafo do projeto) e `catalog.json` (introspecção do warehouse). Hospede o site estático no S3 + CloudFront para acesso da equipe.
-- dbt Docs v2 (disponível com dbt Core v2 / Fusion) introduz artefatos Parquet, linhagem em nível de coluna e uma API REST — consultáveis diretamente com DuckDB.
-- `dbt-project-evaluator` aplica cobertura de documentação e padrões de qualidade de DAG no CI — execute-o como parte do seu quality gate.
+- dbt Docs v2 (disponível com dbt Core v2 / Fusion) introduz artefatos Parquet, linhagem em nível de coluna e uma API REST: consultáveis diretamente com DuckDB.
+- `dbt-project-evaluator` aplica cobertura de documentação e padrões de qualidade de DAG no CI: execute-o como parte do seu quality gate.

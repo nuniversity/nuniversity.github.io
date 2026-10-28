@@ -92,12 +92,12 @@ class GerenciadorPedidos:
 
 | Princípio | Violação | Evidência |
 |-----------|----------|-----------|
-| **SRP** | 5+ responsabilidades | Banco, descontos, email, arquivo, pagamento, envio — tudo em uma classe |
+| **SRP** | 5+ responsabilidades | Banco, descontos, email, arquivo, pagamento, envio: tudo em uma classe |
 | **OCP** | Cadeias if/elif para pagamentos e descontos | Adicionar novo método de pagamento exige modificar código existente |
 | **ISP** | Clientes dependem de toda a interface | Um "relator somente leitura" precisaria de todos os métodos |
 | **DIP** | Lógica de alto nível depende de SQLite, SMTP diretamente | Não pode testar sem banco real ou servidor de email |
 
-## Passo 1: Aplicar SRP — Separar Responsabilidades
+## Passo 1: Aplicar SRP: Separar Responsabilidades
 
 ```python
 from abc import ABC, abstractmethod
@@ -154,7 +154,7 @@ class RepositorioPedidoSQLite(RepositorioPedido):
             return cur.lastrowid
 ```
 
-## Passo 2: Aplicar OCP — Métodos de Pagamento
+## Passo 2: Aplicar OCP: Métodos de Pagamento
 
 ```python
 class MetodoPagamento(ABC):
@@ -184,7 +184,7 @@ class GatewayPagamento:
         return metodo.cobrar(quantia, detalhes)
 ```
 
-## Passo 3: Aplicar ISP — Interfaces Segregadas
+## Passo 3: Aplicar ISP: Interfaces Segregadas
 
 ```python
 class RemetenteConfirmacao(ABC):
@@ -220,7 +220,7 @@ class ServicoEnvioPadrao(ServicoEnvio):
         return rastreio
 ```
 
-## Passo 4: Aplicar DIP — Compor Tudo
+## Passo 4: Aplicar DIP: Compor Tudo
 
 ```python
 class ServicoPedido:
@@ -327,7 +327,7 @@ sistema.enviar_pedido(pedido.id)
 - **Extensibilidade**: Novos recursos adicionados via extensão, não modificação
 
 > [!SUCCESS]
-> Os princípios SOLID não são teoria acadêmica — são ferramentas práticas que transformam monólitos emaranhados em sistemas limpos, sustentáveis e extensíveis. Este estudo de caso mostra exatamente como aplicá-los em código real.
+> Os princípios SOLID não são teoria acadêmica: são ferramentas práticas que transformam monólitos emaranhados em sistemas limpos, sustentáveis e extensíveis. Este estudo de caso mostra exatamente como aplicá-los em código real.
 
 ## Additional Content
 

@@ -7,7 +7,7 @@ duration: "110 minutes"
 ---
 # Security, IAM and Compliance for AI Workloads
 
-Security is the second-heaviest domain on the AIF-C01 exam: **Domain 2 "Security, Compliance, and Governance" carries 24 %** of the score, out of a **65-question** exam (50 scored + 15 unscored) with no penalty for guessing. What makes it hard is not the vocabulary — it is that AWS phrases the *same* requirement in four different places, and the exam rewards you for knowing which place is authoritative. "Is Bedrock HIPAA compliant?" has a different correct answer depending on whether you read a marketing page, the service's own documentation, or the AWS Services in Scope table.
+Security is the second-heaviest domain on the AIF-C01 exam: **Domain 2 "Security, Compliance, and Governance" carries 24 %** of the score, out of a **65-question** exam (50 scored + 15 unscored) with no penalty for guessing. What makes it hard is not the vocabulary; it is that AWS phrases the *same* requirement in four different places, and the exam rewards you for knowing which place is authoritative. "Is Bedrock HIPAA compliant?" has a different correct answer depending on whether you read a marketing page, the service's own documentation, or the AWS Services in Scope table.
 
 ```text
 ====================================================================
@@ -37,7 +37,7 @@ Security is the second-heaviest domain on the AIF-C01 exam: **Domain 2 "Security
 ```
 
 > [!NOTE]
-> **How to read this lesson.** Three rules apply throughout. (1) **Numbers are examinable**: `1–16` subnets, `1–5` security groups, **7** PrivateLink services, **90 days** of CloudTrail event history, **100 KB** invocation-log body, **≤30 days** for `aws_review` retention, **50 %** Rekognition confidence. (2) **Wording is examinable**: "HIPAA-eligible" is never "HIPAA certified", and a page that *points* to compliance programs is not a page that *lists* them. (3) **Anything AWS does not confirm first-party is flagged**, never taught as recall material — the flags are collected at the end of the lesson.
+> **How to read this lesson.** Three rules apply throughout. (1) **Numbers are examinable**: `1–16` subnets, `1–5` security groups, **7** PrivateLink services, **90 days** of CloudTrail event history, **100 KB** invocation-log body, **≤30 days** for `aws_review` retention, **50 %** Rekognition confidence. (2) **Wording is examinable**: "HIPAA-eligible" is never "HIPAA certified", and a page that *points* to compliance programs is not a page that *lists* them. (3) **Anything AWS does not confirm first-party is flagged**, never taught as recall material: the flags are collected at the end of the lesson.
 
 By the end of this lesson you will be able to:
 
@@ -56,7 +56,7 @@ By the end of this lesson you will be able to:
 
 ### 1.1 The sentence AWS actually publishes
 
-Amazon Bedrock's own security documentation does not hand you a checklist. It says responsibility *"is determined by the sensitivity of your data, your company's compliance objectives, and applicable laws and regulations."* That sentence is the whole philosophy: AWS secures the infrastructure and the service, you secure **what you put into it and who is allowed to touch it** — and the sensitivity of an AI workload (prompts, embeddings, fine-tuning data, model outputs) is the variable the exam keeps testing.
+Amazon Bedrock's own security documentation does not hand you a checklist. It says responsibility *"is determined by the sensitivity of your data, your company's compliance objectives, and applicable laws and regulations."* That sentence is the whole philosophy: AWS secures the infrastructure and the service, you secure **what you put into it and who is allowed to touch it**, and the sensitivity of an AI workload (prompts, embeddings, fine-tuning data, model outputs) is the variable the exam keeps testing.
 
 ### 1.2 The split, layer by layer
 
@@ -71,11 +71,11 @@ Amazon Bedrock's own security documentation does not hand you a checklist. It sa
 | **Audit** | CloudTrail, Config, GuardDuty services | Turning them on, selectors, retention, log destinations | Model invocation logging is **off** by default |
 | **Compliance** | Reports, scope, Artifact | Which services you use, and your own controls | Evidence lives in **AWS Artifact** |
 
-- **📚 Did you know?** AWS publishes **143 compliance offerings** across its services. The count is a distraction on purpose: the exam never asks for the total, it asks whether *this specific service* is *in scope for this specific program* — and the only authoritative answer is the **AWS Services in Scope by Compliance Program** table, not a service marketing page.
+- **📚 Did you know?** AWS publishes **143 compliance offerings** across its services. The count is a distraction on purpose: the exam never asks for the total, it asks whether *this specific service* is *in scope for this specific program*, and the only authoritative answer is the **AWS Services in Scope by Compliance Program** table, not a service marketing page.
 
 ### 1.3 The first trap: "HIPAA certified" does not exist
 
-There is **no HIPAA certification** for AWS, for Amazon Bedrock, for SageMaker, or for any cloud service provider. The correct phrasing — and the phrasing the exam uses — is:
+There is **no HIPAA certification** for AWS, for Amazon Bedrock, for SageMaker, or for any cloud service provider. The correct phrasing, and the phrasing the exam uses, is:
 
 1. sign a **Business Associate Agreement (BAA)** with AWS, and
 2. use only **HIPAA-eligible services** to store or process protected health information (PHI).
@@ -88,25 +88,25 @@ AWS further maps the HIPAA Security Rule to **FedRAMP** and **NIST SP 800-53** (
 
 ### 2.1 The role types, in one table
 
-SageMaker alone documents four kinds of role, and Bedrock adds two more. Learn who *assumes* each one — that is what the question always tests.
+SageMaker alone documents four kinds of role, and Bedrock adds two more. Learn who *assumes* each one; that is what the question always tests.
 
 | Role type | Assumed by | Trust principal | Key permissions |
 |---|---|---|---|
 | **SageMaker execution role (job)** | SageMaker at job runtime | `sagemaker.amazonaws.com` | S3 in/out, ECR pull, CloudWatch logs, KMS |
 | **Domain / space / user role** | SageMaker for a Studio identity | `sagemaker.amazonaws.com` | per-persona via Role Manager (**3 personas**) |
 | **Pipeline execution role** | Pipelines → each step | `sagemaker.amazonaws.com` | step APIs + S3 `JsonGet`; creator needs `iam:PassRole` |
-| **Service-linked role** | SageMaker automatically | AWS-managed | narrow, fixed — **Studio Classic only** |
+| **Service-linked role** | SageMaker automatically | AWS-managed | narrow, fixed: **Studio Classic only** |
 | **Bedrock service role** (customization, agents, KB, Flows, evals) | `bedrock.amazonaws.com` | `bedrock.amazonaws.com` + `aws:SourceAccount` | your S3 buckets + KMS |
 | **Cross-account role** | other accounts via `sts:AssumeRole` | other account / `AWS:PrincipalArn` | bounded by identity **and** resource policy |
 | **Boundary-attached role** | as base role | unchanged | **capped** by the boundary |
-| **Bedrock project / bearer token** | app using an API key | — | `bedrock-mantle:*` scoped to a project ARN |
+| **Bedrock project / bearer token** | app using an API key |: | `bedrock-mantle:*` scoped to a project ARN |
 
 Two details worth memorising:
 
-- **`ExecutionRoleSessionNameMode = USER_IDENTITY`** puts the *end user* (not a shared job name) into CloudTrail — the setting that turns "the job did it" into "Priya's credentials did it".
-- The **Role Manager** personas are **Data scientist**, **MLOps** and **SageMaker AI compute** — three roles, not a free-text list.
+- **`ExecutionRoleSessionNameMode = USER_IDENTITY`** puts the *end user* (not a shared job name) into CloudTrail: the setting that turns "the job did it" into "Priya's credentials did it".
+- The **Role Manager** personas are **Data scientist**, **MLOps** and **SageMaker AI compute**: three roles, not a free-text list.
 
-### 2.2 Example 1 — a least-privilege SageMaker execution role
+### 2.2 Example 1: a least-privilege SageMaker execution role
 
 ```json
 {"Version":"2012-10-17","Statement":[
@@ -126,13 +126,13 @@ Four statements, one account (`111122223333`), one bucket (`acme-ml-artifacts`),
 
 AWS documents a specific restriction inside `AmazonSageMakerFullAccess`: **certain S3 actions are granted only on buckets and objects whose names contain `SageMaker`, `Sagemaker`, `sagemaker` or `aws-glue`**, plus a short list of actions that apply to any S3 resource. Consequences:
 
-- a bucket named `acme-ml-artifacts` is **not** covered — you must attach a second policy, exactly as in Example 1;
+- a bucket named `acme-ml-artifacts` is **not** covered; you must attach a second policy, exactly as in Example 1;
 - an option claiming "FullAccess grants `s3:*` on every bucket in the account" is **false**;
 - an option claiming "FullAccess grants no S3 permissions" is equally false.
 
 The practical lesson is broader than S3: **a managed policy is a starting point, not a design**. The exam repeatedly rewards the candidate who says "customer-managed policy scoped to the resource ARN".
 
-### 2.4 Example 2 — allow one model family, deny another
+### 2.4 Example 2: allow one model family, deny another
 
 ```json
 {"Version":"2012-10-17","Statement":[
@@ -148,7 +148,7 @@ The practical lesson is broader than S3: **a managed policy is a starting point,
 
 Note the coupling: denying `InvokeModel` **plus** `InvokeModelWithResponseStream` also denies `Converse`/`ConverseStream`, because the latter are built on the former. To enforce this org-wide you leave the account boundary and write an **SCP** over `bedrock:Invoke*`, `bedrock:Converse*` and `sagemaker:InvokeEndpoint*`.
 
-### 2.5 Example 3 — a Bedrock customization service role that resists the confused deputy
+### 2.5 Example 3: a Bedrock customization service role that resists the confused deputy
 
 ```json
 {"Version":"2012-10-17","Statement":[
@@ -164,9 +164,9 @@ Note the coupling: denying `InvokeModel` **plus** `InvokeModelWithResponseStream
 
 Three habits are packed into this policy:
 
-1. **`aws:SourceAccount`** in the trust policy — the confused-deputy guard AWS recommends for every Bedrock service role (customization, import, batch, agents, knowledge bases, Flows, evaluations);
+1. **`aws:SourceAccount`** in the trust policy: the confused-deputy guard AWS recommends for every Bedrock service role (customization, import, batch, agents, knowledge bases, Flows, evaluations);
 2. **`aws:SourceArn`** on top of it for job-level scope;
-3. for Bedrock specifically, **`iam:PassedToService = bedrock.amazonaws.com`** where the caller passes a role — and a matching **key-policy** statement so KMS actually allows the job.
+3. for Bedrock specifically, **`iam:PassedToService = bedrock.amazonaws.com`** where the caller passes a role, and a matching **key-policy** statement so KMS actually allows the job.
 
 ### 2.6 How a request is evaluated: everything caps, nothing grants
 
@@ -185,9 +185,9 @@ flowchart TD
     Y --> Z
 ```
 
-The rule the exam keeps rephrasing: **a permissions boundary, a service control policy (SCP) and a resource control policy (RCP) all cap maximum possible permissions — none of them grants anything.** A boundary with no identity policy attached gives a user *zero* effective permissions, not the boundary's permissions.
+The rule the exam keeps rephrasing: **a permissions boundary, a service control policy (SCP) and a resource control policy (RCP) all cap maximum possible permissions: none of them grants anything.** A boundary with no identity policy attached gives a user *zero* effective permissions, not the boundary's permissions.
 
-### 2.7 Example 4 — a permission boundary capping an ML developer
+### 2.7 Example 4: a permission boundary capping an ML developer
 
 ```json
 {"Version":"2012-10-17","Statement":[
@@ -203,18 +203,18 @@ Effective permission = identity policy **∩** boundary. The developer keeps wha
 {
   "question": "Order the steps of building a least-privilege SageMaker execution role, the way AWS documents them:",
   "items": [
-    "Step 3 - attach the customer-managed policy that scopes S3 to arn:aws:s3:::acme-ml-artifacts",
-    "Step 1 - create the IAM role with trust policy Principal sagemaker.amazonaws.com and sts:AssumeRole",
-    "Step 2 - decide the job's true needs: which SageMaker APIs, which bucket, which log group, which KMS key",
-    "Step 4 - optionally attach a permissions boundary that caps the role at sagemaker, s3, logs and ecr",
-    "Step 5 - pass the role to the job with iam:PassRole and verify the session name in CloudTrail"
+    "Step 3: attach the customer-managed policy that scopes S3 to arn:aws:s3:acme-ml-artifacts",
+    "Step 1: create the IAM role with trust policy Principal sagemaker.amazonaws.com and sts:AssumeRole",
+    "Step 2: decide the job's true needs: which SageMaker APIs, which bucket, which log group, which KMS key",
+    "Step 4: optionally attach a permissions boundary that caps the role at sagemaker, s3, logs and ecr",
+    "Step 5: pass the role to the job with iam:PassRole and verify the session name in CloudTrail"
   ],
   "correctOrder": [
-    "Step 1 - create the IAM role with trust policy Principal sagemaker.amazonaws.com and sts:AssumeRole",
-    "Step 2 - decide the job's true needs: which SageMaker APIs, which bucket, which log group, which KMS key",
-    "Step 3 - attach the customer-managed policy that scopes S3 to arn:aws:s3:::acme-ml-artifacts",
-    "Step 4 - optionally attach a permissions boundary that caps the role at sagemaker, s3, logs and ecr",
-    "Step 5 - pass the role to the job with iam:PassRole and verify the session name in CloudTrail"
+    "Step 1: create the IAM role with trust policy Principal sagemaker.amazonaws.com and sts:AssumeRole",
+    "Step 2: decide the job's true needs: which SageMaker APIs, which bucket, which log group, which KMS key",
+    "Step 3: attach the customer-managed policy that scopes S3 to arn:aws:s3:acme-ml-artifacts",
+    "Step 4: optionally attach a permissions boundary that caps the role at sagemaker, s3, logs and ecr",
+    "Step 5: pass the role to the job with iam:PassRole and verify the session name in CloudTrail"
   ],
   "explanation": "Trust comes first, then the honest inventory of what the job needs, then the scoped policy, then the optional cap, then the actual pass. Candidates who start with AmazonSageMakerFullAccess fail step 3: that managed policy does not cover a bucket named acme-ml-artifacts, so a second S3 statement is mandatory."
 }
@@ -224,7 +224,7 @@ Effective permission = identity policy **∩** boundary. The developer keeps wha
 
 ## 3. Bedrock identity: managed policies, resource policies and cross-account
 
-### 3.1 Seven managed policies — and their dates
+### 3.1 Seven managed policies, and their dates
 
 Amazon Bedrock ships **7 AWS managed policies**, and the exam likes the timeline:
 
@@ -236,7 +236,7 @@ Amazon Bedrock ships **7 AWS managed policies**, and the exam likes the timeline
 | `AmazonBedrockMarketplaceAccess` | marketplace models | **GA 13 Jun 2025** |
 | `AmazonBedrockMantle*` (×3) | `bedrock-mantle` project access | **GA 3 Dec 2025** |
 
-### 3.2 Identity-based and resource-based — and why guardrails need both
+### 3.2 Identity-based and resource-based, and why guardrails need both
 
 Bedrock accepts **identity-based policies** (who you are) *and* **resource-based policies** (what object is being touched). **Guardrails and inference profiles take resource policies**, and AWS states that a resource policy is **required** for organization-level enforcement: to stop an entire org from invoking a model without a guardrail attached, you attach a resource policy evaluated with `bedrock:GuardrailIdentifier` and back it with an SCP. An identity policy alone cannot express "this guardrail must be present".
 
@@ -256,9 +256,9 @@ Concretely, for a shared S3 bucket **and** a shared guardrail:
 
 1. Account B (`444455556666`) creates `role/CrossAccountBedrock` trusting `{"AWS":"arn:aws:iam::111122223333:root"}` **and** puts a resource policy on the bucket/guardrail allowing account A;
 2. Account A attaches an identity policy with `{"Action":"sts:AssumeRole","Resource":"arn:aws:iam::444455556666:role/CrossAccountBedrock"}`;
-3. both Allows are required — for KMS you must pass **your own CMK**, because an AWS-managed S3 key policy cannot be shared that way.
+3. both Allows are required: for KMS you must pass **your own CMK**, because an AWS-managed S3 key policy cannot be shared that way.
 
-**Example 5 — the missing half: the resource policy on account B's bucket.**
+**Example 5: the missing half: the resource policy on account B's bucket.**
 
 ```json
 {"Version":"2012-10-17","Statement":[
@@ -285,7 +285,7 @@ Account `111122223333` (identity) plus this statement in `444455556666` (resourc
 | **Identity policy** | an IAM identity | that identity | the actual grant | **Yes** |
 | **Resource policy** | a resource (bucket, guardrail, key) | principals reaching it | grant + conditions | **Yes** |
 
-- **📚 Did you know?** The **Role Manager** feature and the **service-linked role** path are both tied to **Studio Classic**. In Studio (the current experience) you assign **domain, space and user roles** per persona — which is why an option describing "let SageMaker create the role automatically" is a Studio Classic answer, and an option describing three personas is a Role Manager answer.
+- **📚 Did you know?** The **Role Manager** feature and the **service-linked role** path are both tied to **Studio Classic**. In Studio (the current experience) you assign **domain, space and user roles** per persona; which is why an option describing "let SageMaker create the role automatically" is a Studio Classic answer, and an option describing three personas is a Role Manager answer.
 
 ---
 
@@ -297,7 +297,7 @@ AWS states **TLS 1.2** as the minimum in transit for these services. In CloudTra
 
 ### 4.2 At rest: defaults, options and the two exceptions
 
-| Asset | At rest — default | Customer option | In transit |
+| Asset | At rest: default | Customer option | In transit |
 |---|---|---|---|
 | SageMaker notebooks, artifacts, job output | **SSE-S3** | **SSE-KMS CMK** | TLS |
 | SageMaker ML storage volumes | **transient key, discarded after encrypting** | `VolumeKmsKeyId` | n/a |
@@ -306,16 +306,16 @@ AWS states **TLS 1.2** as the minimum in transit for these services. In CloudTra
 | Bedrock invocation logs | n/a until you enable them | your S3/CloudWatch + CMK | TLS 1.2 |
 | Bedrock training / validation data | your S3 default | CMK + key-policy grant | TLS 1.2 |
 | **S3 Express One Zone** SageMaker output | **SSE-S3 only** | **SSE-KMS unsupported** | TLS |
-| Cross-Region inference payloads | per retention policy | — | **encrypted between Regions** |
+| Cross-Region inference payloads | per retention policy |: | **encrypted between Regions** |
 
 Two exceptions carry disproportionate exam weight:
 
-1. **A keyless SageMaker volume gets a transient key that is discarded after encryption** — so "SageMaker volumes are unencrypted" is false, and "you must supply a KMS key" is also false.
+1. **A keyless SageMaker volume gets a transient key that is discarded after encryption**, so "SageMaker volumes are unencrypted" is false, and "you must supply a KMS key" is also false.
 2. **Cross-account S3 access needs *your* CMK.** If account A reads account B's bucket, the default AWS-managed key policy of account B will not cooperate; account A must supply and control a customer managed key.
 
 ### 4.3 Choosing between SSE-KMS and SSE-S3 in one sentence
 
-**SSE-S3** is the default, has no key-management overhead and no KMS request charges; **SSE-KMS** gives you a customer managed key with an audit trail in CloudTrail, key policies and grants, and per-key rotation — and it is the only way to satisfy a cross-account requirement or a policy that demands CMK enforcement. AWS Config rules such as `sagemaker-endpoint-config-kms-key-required` and `sagemaker-featuregroup-encryption-at-rest` exist precisely to *detect* when you kept the default.
+**SSE-S3** is the default, has no key-management overhead and no KMS request charges; **SSE-KMS** gives you a customer managed key with an audit trail in CloudTrail, key policies and grants, and per-key rotation, and it is the only way to satisfy a cross-account requirement or a policy that demands CMK enforcement. AWS Config rules such as `sagemaker-endpoint-config-kms-key-required` and `sagemaker-featuregroup-encryption-at-rest` exist precisely to *detect* when you kept the default.
 
 ---
 
@@ -323,9 +323,9 @@ Two exceptions carry disproportionate exam weight:
 
 ### 5.1 The `VpcConfig` contract
 
-SageMaker's `VpcConfig` accepts **1–16 subnets** and **1–5 security groups**, and SageMaker creates **elastic network interfaces (ENIs)** in each subnet. The hard rule candidates miss:
+SageMaker's `VpcConfig` accepts **1 to 16 subnets** and **1 to 5 security groups**, and SageMaker creates **elastic network interfaces (ENIs)** in each subnet. The hard rule candidates miss:
 
-> **A SageMaker endpoint needs at least 2 subnets in at least 2 Availability Zones — even if you launch a single instance.**
+> **A SageMaker endpoint needs at least 2 subnets in at least 2 Availability Zones: even if you launch a single instance.**
 
 Training jobs need **at least 2 private IPs** per instance (**at least 5 with EFA**), and the security group must allow **inbound TCP 443** on the ENI path.
 
@@ -347,13 +347,13 @@ With PrivateLink you get: **no internet gateway, no NAT, no VPN or Direct Connec
 
 | Pattern | Components | Use when | Cost note |
 |---|---|---|---|
-| **A — Private subnets + S3 gateway endpoint** | ≥2 AZs, gateway endpoint + policy, SG 443, no IGW/NAT | only S3 + AWS APIs | gateway endpoint **free**; interface endpoints hourly + per-GB |
-| **B — + interface endpoints (PrivateLink)** | `bedrock`, `bedrock-runtime`, `sagemaker`, `ecr`, `logs`, `kms` per subnet | internet-free Bedrock/SageMaker | hourly + processing; **replaces NAT** |
-| **C — + public subnets & NAT gateway** | IGW, public subnets, **NAT gateway** + Elastic IP | a dependency with **no interface endpoint**, non-AWS targets | NAT hourly + per-GB + EIP |
-| **D — fully internet-free** | A or B, private package mirror / ECR, no IGW | regulated / data-residency workloads | removes NAT + IGW cost |
-| **Enforcement** | `sagemaker:VpcSubnets`; Config `…-instance-inside-vpc`, `…-no-direct-internet-access` | all of the above | — |
+| **A: Private subnets + S3 gateway endpoint** | ≥2 AZs, gateway endpoint + policy, SG 443, no IGW/NAT | only S3 + AWS APIs | gateway endpoint **free**; interface endpoints hourly + per-GB |
+| **B: + interface endpoints (PrivateLink)** | `bedrock`, `bedrock-runtime`, `sagemaker`, `ecr`, `logs`, `kms` per subnet | internet-free Bedrock/SageMaker | hourly + processing; **replaces NAT** |
+| **C: + public subnets & NAT gateway** | IGW, public subnets, **NAT gateway** + Elastic IP | a dependency with **no interface endpoint**, non-AWS targets | NAT hourly + per-GB + EIP |
+| **D: fully internet-free** | A or B, private package mirror / ECR, no IGW | regulated / data-residency workloads | removes NAT + IGW cost |
+| **Enforcement** | `sagemaker:VpcSubnets`; Config `…-instance-inside-vpc`, `…-no-direct-internet-access` | all of the above |: |
 
-### 5.4 Example 6 — a working private Bedrock + SageMaker layout (Pattern B)
+### 5.4 Example 6: a working private Bedrock + SageMaker layout (Pattern B)
 
 1. `10.20.0.0/16` with private `10.20.1.0/24` (AZ-a) and `10.20.2.0/24` (AZ-b); **no IGW route, no NAT**;
 2. **S3 gateway endpoint** attached to both route tables, with an endpoint policy limited to `arn:aws:s3:::acme-*`;
@@ -401,14 +401,14 @@ flowchart TB
 
 > [!WARNING]
 > **Two network traps that cost marks every sitting.**
-> 1. **An endpoint needs ≥2 subnets in ≥2 AZs even for one instance.** An option offering "one subnet is enough for a single-instance endpoint" is always wrong — the AZ requirement is in the API contract, not a best practice.
+> 1. **An endpoint needs ≥2 subnets in ≥2 AZs even for one instance.** An option offering "one subnet is enough for a single-instance endpoint" is always wrong: the AZ requirement is in the API contract, not a best practice.
 > 2. **"Use a NAT gateway to keep traffic private" is backwards.** A NAT gateway routes traffic to the internet through AWS; an internet-free design uses **gateway endpoints (S3, free)** and **interface endpoints / PrivateLink**, with NAT only as a **fallback** for dependencies that expose no interface endpoint. Security-group inbound on the ENI path is **443**, not 80.
 
 ---
 
 ## 6. Audit: CloudTrail, invocation logging, GuardDuty and Config
 
-### 6.1 Management vs. data events — the free/paid line
+### 6.1 Management vs. data events: the free/paid line
 
 | Call | CloudTrail event type | Cost |
 |---|---|---|
@@ -433,12 +433,12 @@ flowchart TD
 
 **Management events are free and on by default; data events are opt-in and charged.** CloudTrail **event history** retains **90 days** of management events in the console.
 
-### 6.2 Model invocation logging is a separate switch — and it is off
+### 6.2 Model invocation logging is a separate switch, and it is off
 
 Bedrock's **model invocation logging is off by default**. When you enable it:
 
 - destinations are **CloudWatch Logs and/or S3**, and they must be in the **same account and the same Region**;
-- an inline prompt/completion body of **≤100 KB** is stored inline — larger bodies go to an S3 prefix under `data/`;
+- an inline prompt/completion body of **≤100 KB** is stored inline: larger bodies go to an S3 prefix under `data/`;
 - logging is *not* CloudTrail: CloudTrail tells you *who called what*, invocation logging tells you *what was said*.
 
 ### 6.3 GuardDuty AI Protection
@@ -467,7 +467,7 @@ Config rules prefixed `sagemaker-` include:
 
 And there are three conformance packs aimed at AI: **Best Practices for Amazon Bedrock**, **Best Practices for Amazon SageMaker AI** and **Best Practices for AI/ML Supporting Infrastructure**. NIST SP 800-171 control **3.1.1** maps to `sagemaker-notebook-no-direct-internet-access`, and AWS states that sample templates **do not guarantee passing** a compliance audit.
 
-- **📚 Did you know?** A **Guardrail removal** and a **flip of model invocation logging to disabled** are both treated as security events by GuardDuty's Foundational plan. That is unusual — most "configuration drift" is only visible in Config — and it is a strong hint that the exam considers "quietly turning off your safety net" an attack, not an admin chore.
+- **📚 Did you know?** A **Guardrail removal** and a **flip of model invocation logging to disabled** are both treated as security events by GuardDuty's Foundational plan. That is unusual, most "configuration drift" is only visible in Config, and it is a strong hint that the exam considers "quietly turning off your safety net" an attack, not an admin chore.
 
 ### 6.5 Status dashboard (October 2026)
 
@@ -479,7 +479,7 @@ And there are three conformance packs aimed at AI: **Best Practices for Amazon B
 | Bedrock retention modes + condition keys | GA (API/SDK) | **no console UI at launch** |
 | `AmazonBedrockLimitedAccess` | GA **13 Jun 2025** | core-activity baseline |
 | `AmazonBedrockMantle*` policies | GA **3 Dec 2025** | 3 policies |
-| Bedrock **FedRAMP High** | Authorized — **GovCloud (US-West)** | per-model matrix tracked separately |
+| Bedrock **FedRAMP High** | Authorized: **GovCloud (US-West)** | per-model matrix tracked separately |
 | Bedrock **HIPAA eligible** | Eligible | BAA needed; "eligible" ≠ "certified" |
 | Bedrock **PCI DSS** scope | **not stated on Bedrock's own pages** | do not assert |
 | S3 Express One Zone SageMaker output | **SSE-S3 only** | SSE-KMS unsupported |
@@ -506,16 +506,16 @@ flowchart TD
 
 Three rules fall out of that diagram:
 
-1. **AWS Services in Scope** is the only authoritative "is it covered" table — ✓ means in scope in the current reports;
-2. **AWS Artifact** is where the actual SOC / ISO / FedRAMP reports live — never a service page, never a console link labelled "Compliance";
+1. **AWS Services in Scope** is the only authoritative "is it covered" table: ✓ means in scope in the current reports;
+2. **AWS Artifact** is where the actual SOC / ISO / FedRAMP reports live: never a service page, never a console link labelled "Compliance";
 3. for HIPAA you need a **BAA** plus **HIPAA-eligible services**; AWS maps the Security Rule to **FedRAMP + NIST 800-53**.
 
 ### 7.2 What Amazon Bedrock publishes
 
-Amazon Bedrock's published compliance set is: **ISO**, **SOC**, **CSA STAR Level 2**, **GDPR**, **HIPAA eligible**, and **FedRAMP High in AWS GovCloud (US-West)** — plus a **FedRAMP per-model matrix (published 18 Sep 2026)** covering Class C/D models and **IL4/IL5**.
+Amazon Bedrock's published compliance set is: **ISO**, **SOC**, **CSA STAR Level 2**, **GDPR**, **HIPAA eligible**, and **FedRAMP High in AWS GovCloud (US-West)**: plus a **FedRAMP per-model matrix (published 18 Sep 2026)** covering Class C/D models and **IL4/IL5**.
 
 > [!WARNING]
-> **The compliance-page trap.** Bedrock's `compliance-validation.html` **lists no compliance programs at all** — it contains only *pointers* to the AWS Services in Scope table and to **AWS Artifact**. An option claiming "the Bedrock compliance page enumerates every program the service is in scope for" is testing whether you actually opened the page. Likewise, **PCI DSS does not appear anywhere on Bedrock's own security-compliance page** — a 2024 conference deck and *AgentCore's* page mention PCI, neither of which proves Bedrock's scope. **Do not assert it.**
+> **The compliance-page trap.** Bedrock's `compliance-validation.html` **lists no compliance programs at all**, it contains only *pointers* to the AWS Services in Scope table and to **AWS Artifact**. An option claiming "the Bedrock compliance page enumerates every program the service is in scope for" is testing whether you actually opened the page. Likewise, **PCI DSS does not appear anywhere on Bedrock's own security-compliance page**, a 2024 conference deck and *AgentCore's* page mention PCI, neither of which proves Bedrock's scope. **Do not assert it.**
 
 ### 7.3 Numbers worth carrying into the exam
 
@@ -530,7 +530,7 @@ Amazon Bedrock's published compliance set is: **ISO**, **SOC**, **CSA STAR Level
 | CloudTrail event history | **90 days** of management events |
 | AIF-C01 Domain 2 weight | **24 %** of **65** questions |
 
-- **📚 Did you know?** The phrase "in scope" has a precise meaning: it says the *service* was included in the auditor's report for that period — not that your *workload* is compliant. That is why every compliance option that says "enabling GuardDuty achieves HIPAA compliance" is false: you can be in scope and still fail your own obligations under the shared responsibility model.
+- **📚 Did you know?** The phrase "in scope" has a precise meaning: it says the *service* was included in the auditor's report for that period: not that your *workload* is compliant. That is why every compliance option that says "enabling GuardDuty achieves HIPAA compliance" is false: you can be in scope and still fail your own obligations under the shared responsibility model.
 
 ---
 
@@ -542,10 +542,10 @@ Retention modes are `none`, `default`, `aws_review`, `provider_data_share` and `
 
 - **`aws_review` keeps data inside the AWS boundary for ≤30 days** and it is **never given to the model provider**;
 - the control plane condition keys are `bedrock:DataRetentionMode` / `bedrock-mantle:DataRetentionMode`, enforceable with SCP and IAM;
-- **fine-tuning data is used only to fine-tune** — never to train the base Titan models, and **nothing is stored after the job** — but the fine-tuned model can still **replay** it, so filter or delete sensitive rows before you start;
+- **fine-tuning data is used only to fine-tune**, never to train the base Titan models, and **nothing is stored after the job**, but the fine-tuned model can still **replay** it, so filter or delete sensitive rows before you start;
 - at launch there is **no console UI** for retention modes: API/SDK only.
 
-### 8.2 Example 7 — enforcing zero data retention org-wide (SCP)
+### 8.2 Example 7: enforcing zero data retention org-wide (SCP)
 
 ```json
 {"Version":"2012-10-17","Statement":[
@@ -577,23 +577,23 @@ CloudTrail logs the call in the **source Region**. Neither mode adds a routing s
 | **Rekognition `Start/GetContentModeration`** | stored **videos** | async moderation |
 | **GuardDuty `…PromptInjection.Direct`** | guardrail intervention on inputs | **finding/alert**, not a block |
 
-Guardrails specifics from the digest: **6 filter categories** — Hate, Insults, Sexual, Violence, Misconduct and **Prompt Attack** — plus tier `CLASSIC|STANDARD` and blocked-response messaging of **1–500 characters**. PII detection is **probabilistic ML**, which is exactly why you can choose **mask** instead of **block**.
+Guardrails specifics from the digest: **6 filter categories**, Hate, Insults, Sexual, Violence, Misconduct and **Prompt Attack**, plus tier `CLASSIC|STANDARD` and blocked-response messaging of **1 to 500 characters**. PII detection is **probabilistic ML**, which is exactly why you can choose **mask** instead of **block**.
 
 ### 8.5 Rekognition moderation limits
 
-`DetectModerationLabels` accepts **JPEG and PNG only**, uses a **3-level taxonomy** with `MinConfidence` defaulting to **50 %**, and works with Amazon A2I for human review. The hard limit AWS states in writing: the APIs **do not detect illegal content such as CSAM** — no confidence threshold fixes that, and no exam option should claim otherwise.
+`DetectModerationLabels` accepts **JPEG and PNG only**, uses a **3-level taxonomy** with `MinConfidence` defaulting to **50 %**, and works with Amazon A2I for human review. The hard limit AWS states in writing: the APIs **do not detect illegal content such as CSAM**: no confidence threshold fixes that, and no exam option should claim otherwise.
 
-- **📚 Did you know?** AWS's own guardrail guidance says: *"Disable Invocation Logs if you do not want blocked content to appear as plain text in the logs."* In other words, the log you enable for auditing can become the place where the very content you blocked is stored verbatim — a genuine design trade-off, and a rare case where AWS explicitly recommends turning a logging feature **off**.
+- **📚 Did you know?** AWS's own guardrail guidance says: *"Disable Invocation Logs if you do not want blocked content to appear as plain text in the logs."* In other words, the log you enable for auditing can become the place where the very content you blocked is stored verbatim: a genuine design trade-off, and a rare case where AWS explicitly recommends turning a logging feature **off**.
 
 ---
 
 ## 9. Comparative verdict
 
 > [!IMPORTANT]
-> **Comparative Verdict — IAM roles vs. long-lived shared keys, VPC endpoint vs. NAT gateway, SSE-KMS vs. SSE-S3**
+> **Comparative Verdict: IAM roles vs. long-lived shared keys, VPC endpoint vs. NAT gateway, SSE-KMS vs. SSE-S3**
 > - **IAM role (temporary STS credentials) vs. long-lived access keys / shared credentials.** The role is always the answer for AI workloads: an execution role is *assumed by the service* with a trust policy, its session can be named (`ExecutionRoleSessionNameMode = USER_IDENTITY`) so CloudTrail shows the end user, and credentials expire on their own. Long-lived keys leak through notebooks, git history and CI logs, cannot be scoped by trust policy, cannot express `aws:SourceAccount` confused-deputy protection, and give an attacker a credential with no session to revoke. If an option proposes "give the scientist an access key so the training job can reach S3", it has failed on every axis AWS documents.
-> - **VPC endpoint (gateway for S3, interface/PrivateLink for Bedrock & SageMaker) vs. NAT gateway.** The endpoint keeps traffic **inside the AWS network with no public IPs, no IGW and no NAT**; the S3 **gateway endpoint is free**, interface endpoints cost hourly plus processing and *replace* NAT for those services. A NAT gateway is a **fallback** for dependencies that expose no interface endpoint — it charges hourly, per GB and per Elastic IP, and it still sends traffic out toward the internet. For an internet-free, data-residency design, endpoints are the architecture; NAT is the exception you document, not the goal you aim at.
-> - **SSE-KMS (customer managed key) vs. SSE-S3 (SSE-S3 default).** SSE-S3 is the SageMaker default for notebooks, artifacts and job output: zero key management, no KMS request charges, fully encrypted. SSE-KMS adds a CMK you control, key policies, grants, rotation and per-key CloudTrail audit — and it becomes **mandatory** when you need **cross-account access** (an AWS-managed key policy cannot be shared), when a Config rule such as `sagemaker-endpoint-config-kms-key-required` enforces it, or when your policy demands customer-managed encryption. Note the two documented exceptions where the choice disappears: **S3 Express One Zone output supports SSE-S3 only**, and **SageMaker ML storage volumes use a transient key that is discarded after encryption** unless you set `VolumeKmsKeyId`.
+> - **VPC endpoint (gateway for S3, interface/PrivateLink for Bedrock & SageMaker) vs. NAT gateway.** The endpoint keeps traffic **inside the AWS network with no public IPs, no IGW and no NAT**; the S3 **gateway endpoint is free**, interface endpoints cost hourly plus processing and *replace* NAT for those services. A NAT gateway is a **fallback** for dependencies that expose no interface endpoint; it charges hourly, per GB and per Elastic IP, and it still sends traffic out toward the internet. For an internet-free, data-residency design, endpoints are the architecture; NAT is the exception you document, not the goal you aim at.
+> - **SSE-KMS (customer managed key) vs. SSE-S3 (SSE-S3 default).** SSE-S3 is the SageMaker default for notebooks, artifacts and job output: zero key management, no KMS request charges, fully encrypted. SSE-KMS adds a CMK you control, key policies, grants, rotation and per-key CloudTrail audit, and it becomes **mandatory** when you need **cross-account access** (an AWS-managed key policy cannot be shared), when a Config rule such as `sagemaker-endpoint-config-kms-key-required` enforces it, or when your policy demands customer-managed encryption. Note the two documented exceptions where the choice disappears: **S3 Express One Zone output supports SSE-S3 only**, and **SageMaker ML storage volumes use a transient key that is discarded after encryption** unless you set `VolumeKmsKeyId`.
 
 | If the question says… | Answer | Why the others fail |
 |---|---|---|
@@ -612,22 +612,22 @@ Guardrails specifics from the digest: **6 filter categories** — Hate, Insults,
 
 > [!WARNING]
 > **The traps that cost marks on this exact material:**
-> 1. **"HIPAA certified" does not exist** — for AWS or any cloud provider. The correct pair is **BAA + HIPAA-eligible service**, and AWS maps the Security Rule to **FedRAMP + NIST 800-53**.
-> 2. **Bedrock's `compliance-validation.html` lists no programs** — only pointers to *Services in Scope* and **AWS Artifact**. PCI DSS is **not** stated on Bedrock's own pages; do not assert it.
-> 3. **`Converse` / `InvokeModel` on `bedrock-runtime` are CloudTrail MANAGEMENT events (free)**; `bedrock-mantle` **Inference is a DATA event (opt-in, charged)** — the surface decides, not the verb.
-> 4. **Model invocation logging is OFF by default** — and it is not CloudTrail. Destinations must be in the **same account and Region**; inline bodies are **≤100 KB**.
+> 1. **"HIPAA certified" does not exist**: for AWS or any cloud provider. The correct pair is **BAA + HIPAA-eligible service**, and AWS maps the Security Rule to **FedRAMP + NIST 800-53**.
+> 2. **Bedrock's `compliance-validation.html` lists no programs**: only pointers to *Services in Scope* and **AWS Artifact**. PCI DSS is **not** stated on Bedrock's own pages; do not assert it.
+> 3. **`Converse` / `InvokeModel` on `bedrock-runtime` are CloudTrail MANAGEMENT events (free)**; `bedrock-mantle` **Inference is a DATA event (opt-in, charged)**: the surface decides, not the verb.
+> 4. **Model invocation logging is OFF by default**, and it is not CloudTrail. Destinations must be in the **same account and Region**; inline bodies are **≤100 KB**.
 > 5. **Cross-account needs an Allow in BOTH the identity policy AND the resource policy.** One side is always a deny.
-> 6. **SageMaker endpoints need ≥2 subnets in ≥2 AZs**, even for a single instance; `VpcConfig` accepts **1–16 subnets** and **1–5 security groups**.
-> 7. **Boundaries, SCPs and RCPs cap — they never grant.** A boundary alone yields zero permissions.
-> 8. **`AmazonSageMakerFullAccess` does not reach arbitrary buckets** — only names containing `SageMaker`/`Sagemaker`/`sagemaker`/`aws-glue`, plus a short any-resource list.
+> 6. **SageMaker endpoints need ≥2 subnets in ≥2 AZs**, even for a single instance; `VpcConfig` accepts **1 to 16 subnets** and **1 to 5 security groups**.
+> 7. **Boundaries, SCPs and RCPs cap; they never grant.** A boundary alone yields zero permissions.
+> 8. **`AmazonSageMakerFullAccess` does not reach arbitrary buckets**: only names containing `SageMaker`/`Sagemaker`/`sagemaker`/`aws-glue`, plus a short any-resource list.
 > 9. **NAT is a fallback, not a design goal**; the internet-free answer is gateway + interface endpoints, with **TCP 443** inbound on the endpoint security group.
-> 10. **GuardDuty AI Protection creates its own service-linked CloudTrail channel** — you do not configure one — and `PromptInjection.Direct` is a **finding**, not a block.
+> 10. **GuardDuty AI Protection creates its own service-linked CloudTrail channel**, you do not configure one, and `PromptInjection.Direct` is a **finding**, not a block.
 
 ### 10.1 The testable numbers
 
 | Metric | Value |
 |---|---|
-| `VpcConfig` | subnets **1–16**, security groups **1–5** |
+| `VpcConfig` | subnets **1 to 16**, security groups **1 to 5** |
 | Endpoint AZs / training private IPs | **≥2 AZs** / **≥2** (**≥5 with EFA**) |
 | Bedrock PrivateLink services / ENI SG | **7** / **TCP 443** |
 | Invocation-log inline body | **≤100 KB** (else S3 `data/`) |
@@ -650,32 +650,32 @@ To keep a research gap from becoming a wrong answer: **PCI DSS scope for Amazon 
 
 ## Real-World Case Studies
 
-Five AWS-published customer stories, retrieved for this course on 06 Oct 2026, exercise Domain 2 controls in production. Read them as **evidence, not marketing**: every percentage below is a **customer/AWS-claimed, unaudited** figure, and only Sun Finance (**n = 585** images) and Adobe (their own test set) disclose a sample basis. The exam will not ask you to recall these numbers — it asks you to recognise which **control** each one proves.
+Five AWS-published customer stories, retrieved for this course on 06 Oct 2026, exercise Domain 2 controls in production. Read them as **evidence, not marketing**: every percentage below is a **customer/AWS-claimed, unaudited** figure, and only Sun Finance (**n = 585** images) and Adobe (their own test set) disclose a sample basis. The exam will not ask you to recall these numbers; it asks you to recognise which **control** each one proves.
 
 ### Case-study evidence for Domain 2
 
 | # | Case (source) | Domain 2 control exercised | AWS services | Documented outcome |
 |---|---|---|---|---|
-| 1 | **Epilot** (energy software, Cologne) — `aws.amazon.com/solutions/case-studies/epilot-genai-case-study` | **data residency** + human approval in the loop | Bedrock (Claude Sonnet), AWS Lambda, Amazon SQS, Bedrock Evaluations | **−87 %** email handling time; **55,000** summaries/month; MVP in **2 months**; processed data kept in an **EU Region** |
-| 2 | **Alnylam Pharmaceuticals** (biotech) — `aws.amazon.com/solutions/case-studies/alnylam-case-study` | **GxP auditability**: every answer carries source links | Bedrock, Amazon S3, Amazon Q Business | triage **3 days → hours**; search **15 min → 30 s**; **2,000 employees + 1,000 contractors**; **250+** use cases |
-| 3 | **Nippon India Mutual Fund** (financial services) — ML Blog `blogs/machine-learning/how-nippon-india-mutual-fund-improved-the-accuracy-of-ai-assistant-responses-using-advanced-rag-methods-on-amazon-bedrock` | **Guardrails + grounding** as hallucination control | Bedrock Knowledge Bases, Bedrock Guardrails, Claude 3 Sonnet, reranker | accuracy **+>95 %**; hallucination **−90–95 %**; reports **2 days → ~10 minutes** |
-| 4 | **Sun Finance** (fintech lending, 9 countries) — ML Blog `blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws` | **PII is not an LLM's job**: OCR and reasoning are separated | Amazon Textract, Amazon Rekognition, Bedrock (Claude Sonnet 4), Lambda, Step Functions, S3 Vectors | accuracy **79.73 → 90.80 %**; **−91 %** cost/document; **20 h → <5 s**; fraud **81 %** |
-| 5 | **Chronomics** (health-tech) — ML Blog `blogs/machine-learning/chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels` | **human path for low-confidence output** (A2I) | Amazon Rekognition Custom Labels | **4 months → 3–4 weeks**; **96.5 %** accuracy / **97.9 %** F1; threshold **0.99** discards **5 %** of predictions |
+| 1 | **Epilot** (energy software, Cologne): `aws.amazon.com/solutions/case-studies/epilot-genai-case-study` | **data residency** + human approval in the loop | Bedrock (Claude Sonnet), AWS Lambda, Amazon SQS, Bedrock Evaluations | **−87 %** email handling time; **55,000** summaries/month; MVP in **2 months**; processed data kept in an **EU Region** |
+| 2 | **Alnylam Pharmaceuticals** (biotech): `aws.amazon.com/solutions/case-studies/alnylam-case-study` | **GxP auditability**: every answer carries source links | Bedrock, Amazon S3, Amazon Q Business | triage **3 days → hours**; search **15 min → 30 s**; **2,000 employees + 1,000 contractors**; **250+** use cases |
+| 3 | **Nippon India Mutual Fund** (financial services): ML Blog `blogs/machine-learning/how-nippon-india-mutual-fund-improved-the-accuracy-of-ai-assistant-responses-using-advanced-rag-methods-on-amazon-bedrock` | **Guardrails + grounding** as hallucination control | Bedrock Knowledge Bases, Bedrock Guardrails, Claude 3 Sonnet, reranker | accuracy **+>95 %**; hallucination **−90 to 95 %**; reports **2 days → ~10 minutes** |
+| 4 | **Sun Finance** (fintech lending, 9 countries): ML Blog `blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws` | **PII is not an LLM's job**: OCR and reasoning are separated | Amazon Textract, Amazon Rekognition, Bedrock (Claude Sonnet 4), Lambda, Step Functions, S3 Vectors | accuracy **79.73 → 90.80 %**; **−91 %** cost/document; **20 h → <5 s**; fraud **81 %** |
+| 5 | **Chronomics** (health-tech): ML Blog `blogs/machine-learning/chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels` | **human path for low-confidence output** (A2I) | Amazon Rekognition Custom Labels | **4 months → 3 to 4 weeks**; **96.5 %** accuracy / **97.9 %** F1; threshold **0.99** discards **5 %** of predictions |
 
 ### What the cases actually prove
 
 | Control question | Case evidence | The number or setting that answers it |
 |---|---|---|
-| **Where does the data live?** | Epilot | an **EU Region**, under Bedrock's default zero-retention posture — residency is an architecture choice, not a compliance afterthought |
-| **Who is allowed to write?** | Epilot | a later agent writes records **only after humans verify** — the "agent acts unattended" option is wrong |
+| **Where does the data live?** | Epilot | an **EU Region**, under Bedrock's default zero-retention posture: residency is an architecture choice, not a compliance afterthought |
+| **Who is allowed to write?** | Epilot | a later agent writes records **only after humans verify**: the "agent acts unattended" option is wrong |
 | **Is the answer auditable?** | Alnylam | **source links on every response**; GxP wants a playbook, not a black box |
-| **Does retrieval + guardrails fix hallucination?** | Nippon India | **−90–95 %** hallucination, from *retrieval engineering* rather than a bigger model |
+| **Does retrieval + guardrails fix hallucination?** | Nippon India | **−90 to 95 %** hallucination, from *retrieval engineering* rather than a bigger model |
 | **Can a foundation model read PII directly?** | Sun Finance | **No.** The LLM-only first attempt scored **61.8 %** overall (**43 %** on ID number) and was **rejected**; Textract + Rekognition + Claude reached **90.80 %** |
-| **What happens to low-confidence output?** | Chronomics | **5 %** of predictions are discarded at threshold **0.99** (27 % at 0.999) — someone must own that tail: **Amazon A2I** or an equivalent human path |
+| **What happens to low-confidence output?** | Chronomics | **5 %** of predictions are discarded at threshold **0.99** (27 % at 0.999): someone must own that tail: **Amazon A2I** or an equivalent human path |
 
-The failure patterns are as examinable as the successes: **DIY inference** (Forethought abandoned its own Amazon EKS stack for SageMaker multi-model endpoints at **−66 %** and Serverless Inference at **≈−80 %**), **LLM-only OCR** (Sun Finance, above) and **in-house custom computer vision** (Chronomics, four months versus three-to-four weeks). Each is a question about *choosing the right tier*, which is Domain 1 — but each also has a Domain 2 tail: who owns the credentials, where the data sits, and what evidence you can produce afterwards.
+The failure patterns are as examinable as the successes: **DIY inference** (Forethought abandoned its own Amazon EKS stack for SageMaker multi-model endpoints at **−66 %** and Serverless Inference at **≈−80 %**), **LLM-only OCR** (Sun Finance, above) and **in-house custom computer vision** (Chronomics, four months versus three-to-four weeks). Each is a question about *choosing the right tier*, which is Domain 1, but each also has a Domain 2 tail: who owns the credentials, where the data sits, and what evidence you can produce afterwards.
 
-- **📚 Did you know?** AWS publishes exactly **one** project-outcome rate: **65 %** of Generative AI Innovation Center projects reached production in 2025 (some in as little as **45 days**), drawn from **more than 1,000** implementations and organised around the **Five V's** framework — *Value → Visualize → Validate → Verify → Venture*. The other **35 %** did not ship. Any option claiming "all AWS generative AI pilots succeed" contradicts AWS's own blog.
+- **📚 Did you know?** AWS publishes exactly **one** project-outcome rate: **65 %** of Generative AI Innovation Center projects reached production in 2025 (some in as little as **45 days**), drawn from **more than 1,000** implementations and organised around the **Five V's** framework: *Value → Visualize → Validate → Verify → Venture*. The other **35 %** did not ship. Any option claiming "all AWS generative AI pilots succeed" contradicts AWS's own blog.
 
 ```fillblank
 {
@@ -688,7 +688,7 @@ The failure patterns are as examinable as the successes: **DIY inference** (Fore
     "4": "Amazon A2I"
   },
   "distractors": ["permissions boundary", "SCP", "Global", "AWS Artifact"],
-  "explanation": "The cross-account rule always needs an Allow in both the identity policy and the resource policy; data residency inside the EU, US or APAC geography is the job of Geographic cross-Region inference (Global mode routes worldwide for about 10% less); and the discarded low-confidence tail that Chronomics measured is exactly what Amazon A2I exists to absorb. A permissions boundary and an SCP only cap permissions - they never grant - and AWS Artifact is where audit reports live, not a human-review mechanism."
+  "explanation": "The cross-account rule always needs an Allow in both the identity policy and the resource policy; data residency inside the EU, US or APAC geography is the job of Geographic cross-Region inference (Global mode routes worldwide for about 10% less); and the discarded low-confidence tail that Chronomics measured is exactly what Amazon A2I exists to absorb. A permissions boundary and an SCP only cap permissions: they never grant: and AWS Artifact is where audit reports live, not a human-review mechanism."
 }
 ```
 
@@ -696,13 +696,13 @@ The failure patterns are as examinable as the successes: **DIY inference** (Fore
 
 ## Regulation and AWS service changes
 
-### 2025–2026 Updates
+### 2025 to 2026 Updates
 
 Everything below was verified for this course on 06 Oct 2026 and comes from first-party sources: the European Commission's regulatory-framework page, AWS's own certification and service-availability notices, and AWS product pages. Dates are **staged**, and collapsing them is the classic way to lose this mark.
 
 | Date | Change (source) | Why Domain 2 cares |
 |---|---|---|
-| **1 Feb 2024 → 1 Aug 2024** | EU AI Act (Reg. (EU) 2024/1689) **enters into force** | the clock starts; obligations phase in over 2025–2028 |
+| **1 Feb 2024 → 1 Aug 2024** | EU AI Act (Reg. (EU) 2024/1689) **enters into force** | the clock starts; obligations phase in over 2025 to 2028 |
 | **2 Feb 2025** | **Prohibited practices + AI literacy** obligations apply | banned-use screening becomes a live governance duty |
 | **10 Jul 2025** | EU **GPAI Code of Practice** final (voluntary) | the reference good practice for general-purpose models |
 | **2 Aug 2025** | **GPAI obligations + governance structure + penalties** apply; systemic-risk threshold **10²⁵ FLOP** | duties fall on *model providers*, not on every customer |
@@ -710,11 +710,11 @@ Everything below was verified for this course on 06 Oct 2026 and comes from firs
 | **2 Dec 2025** | AgentCore **Policy / Evaluations / Memory** announced | Policy intercepts Gateway tool calls with **Cedar** or natural language, *outside* the reasoning loop |
 | **3 Mar 2026 / 31 Mar 2026** | AgentCore **Policy GA** / **Evaluations GA** (13 evaluators) | enforceable agent policy and measurable quality |
 | **30 Apr 2026** | **AIF-C01 exam guide v1.1** published (v1.0 was 26 Mar 2026); AWS states new content appears on the exam **~1 month later** | adds agentic AI, **MCP**, context engineering, token-based pricing and grounding; adds AgentCore, Kiro, Strands Agents; **removes Amazon MemoryDB** |
-| **27 Jul 2026** | **Digital Omnibus** — Reg. (EU) 2026/1744 — in force (OJ 24 Jul 2026) | amends the AI Act timetable; defers the high-risk Annex III date |
+| **27 Jul 2026** | **Digital Omnibus**, Reg. (EU) 2026/1744, in force (OJ 24 Jul 2026) | amends the AI Act timetable; defers the high-risk Annex III date |
 | **30 Jul 2026** | SageMaker **Model Monitor, Clarify, Ground Truth, A2I, Debugger, Role Manager, Geospatial, Studio Lab** closed to new customers (**maintenance**); **Amazon Kendra** closed, → **Bedrock Managed Knowledge Base** | **Role Manager** is taught in §2.1 of this lesson; Clarify is superseded for new work by **Bedrock Model Evaluations** |
 | **2 Aug 2026** | EU **general application**: Article 50 transparency duties + **AI Office GPAI fining** begins | transparency and enforcement are now live |
 | **2 Dec 2026** | Art. 50(2) **marking** deadline for systems already on the market | AI-generated content must be identifiable |
-| **2 Dec 2027 / 2 Aug 2028** | **Annex III** high-risk / **Annex I** high-risk obligations | deferred by the Digital Omnibus — not 2 Aug 2026 |
+| **2 Dec 2027 / 2 Aug 2028** | **Annex III** high-risk / **Annex I** high-risk obligations | deferred by the Digital Omnibus: not 2 Aug 2026 |
 
 **Penalty ceilings under the EU AI Act:**
 
@@ -724,14 +724,14 @@ Everything below was verified for this course on 06 Oct 2026 and comes from firs
 | Most other breaches (incl. GPAI Art. 101) | **€15 M or 3 %** |
 | Supplying misleading information to the AI Office | **€7.5 M or 1 %** |
 
-Two governance frameworks sit behind those dates and are still voluntary: the **NIST AI Risk Management Framework** (AI 100-1, Jan 2023 — **Govern, Map, Measure, Manage**, **19 categories / 72 subcategories**) with its **Generative AI Profile NIST AI 600-1** (Jul 2024, **12 risks**), and **ISO/IEC 42001:2023** (Dec 2023), the **first certifiable AI Management System**. AWS's own position is unchanged by all of this: compliance evidence comes from **AWS Services in Scope** and **AWS Artifact**, and HIPAA still means **BAA + HIPAA-eligible services**.
+Two governance frameworks sit behind those dates and are still voluntary: the **NIST AI Risk Management Framework** (AI 100-1, Jan 2023: **Govern, Map, Measure, Manage**, **19 categories / 72 subcategories**) with its **Generative AI Profile NIST AI 600-1** (Jul 2024, **12 risks**), and **ISO/IEC 42001:2023** (Dec 2023), the **first certifiable AI Management System**. AWS's own position is unchanged by all of this: compliance evidence comes from **AWS Services in Scope** and **AWS Artifact**, and HIPAA still means **BAA + HIPAA-eligible services**.
 
-- **📚 Did you know?** AWS defines a three-word service lifecycle that shows up in exam options: **Maintenance** (no new customers, no new features, still supported), **Sunset** (planned end of operations, typically 12 months) and **Full Shutdown** (removed from the portfolio). On **30 Jul 2026** a large block of SageMaker features — including **Role Manager** — moved to *maintenance*, which is why old study notes describing them as "the current path for a new workload" are already wrong.
+- **📚 Did you know?** AWS defines a three-word service lifecycle that shows up in exam options: **Maintenance** (no new customers, no new features, still supported), **Sunset** (planned end of operations, typically 12 months) and **Full Shutdown** (removed from the portfolio). On **30 Jul 2026** a large block of SageMaker features, including **Role Manager**, moved to *maintenance*, which is why old study notes describing them as "the current path for a new workload" are already wrong.
 
 > [!WARNING]
 > **Two 2026 changes that invalidate older study notes.**
-> 1. **SageMaker Model Monitor, Clarify, Ground Truth, A2I, Debugger, Role Manager, Geospatial, Studio Lab and Mechanical Turk closed to new customers on 30 July 2026.** The status is **maintenance** — not a shutdown, not a rebrand: existing customers keep them, no new features are planned. An option proposing "enable SageMaker Clarify for a brand-new Bedrock workload" is a dated answer; the current paths are **Bedrock Model Evaluations** and **Bedrock Guardrails**. Likewise **Amazon Kendra** (maintenance 30 Jun 2026, closed to new customers 30 Jul 2026) routes new search workloads to **Bedrock Managed Knowledge Base**. Note the trap in the opposite direction: **Ground Truth Plus** ends support **30 Jun 2026** and Mechanical Turk **30 Sep 2026** — "maintenance" and "end of support" are different words for different things.
-> 2. **EU AI Act dates are staged — do not collapse them.** Prohibitions **2 Feb 2025**; GPAI + penalties **2 Aug 2025**; Article 50 transparency + enforcement **2 Aug 2026**; Annex III high-risk **2 Dec 2027**; Annex I high-risk **2 Aug 2028**. "The AI Act applied in full on 1 August 2024" and "high-risk duties began 2 August 2026" are both wrong — and remember the Digital Omnibus (Reg. (EU) 2026/1744, in force **27 Jul 2026**) is the reason the Annex III date moved.
+> 1. **SageMaker Model Monitor, Clarify, Ground Truth, A2I, Debugger, Role Manager, Geospatial, Studio Lab and Mechanical Turk closed to new customers on 30 July 2026.** The status is **maintenance**, not a shutdown, not a rebrand: existing customers keep them, no new features are planned. An option proposing "enable SageMaker Clarify for a brand-new Bedrock workload" is a dated answer; the current paths are **Bedrock Model Evaluations** and **Bedrock Guardrails**. Likewise **Amazon Kendra** (maintenance 30 Jun 2026, closed to new customers 30 Jul 2026) routes new search workloads to **Bedrock Managed Knowledge Base**. Note the trap in the opposite direction: **Ground Truth Plus** ends support **30 Jun 2026** and Mechanical Turk **30 Sep 2026**, "maintenance" and "end of support" are different words for different things.
+> 2. **EU AI Act dates are staged, do not collapse them.** Prohibitions **2 Feb 2025**; GPAI + penalties **2 Aug 2025**; Article 50 transparency + enforcement **2 Aug 2026**; Annex III high-risk **2 Dec 2027**; Annex I high-risk **2 Aug 2028**. "The AI Act applied in full on 1 August 2024" and "high-risk duties began 2 August 2026" are both wrong, and remember the Digital Omnibus (Reg. (EU) 2026/1744, in force **27 Jul 2026**) is the reason the Annex III date moved.
 
 ---
 
@@ -797,7 +797,7 @@ Two governance frameworks sit behind those dates and are still voluntary: the **
     "The AWS Compliance Programs marketing page"
   ],
   "correct": 2,
-  "explanation": "AWS Artifact is the repository for compliance agreements and audit reports (SOC, ISO, FedRAMP and others). Bedrock's compliance-validation page lists no programs at all - it only points to the Services in Scope table and to Artifact - and the console has no compliance report tab, while the marketing page lists programs generically without reports."
+  "explanation": "AWS Artifact is the repository for compliance agreements and audit reports (SOC, ISO, FedRAMP and others). Bedrock's compliance-validation page lists no programs at all: it only points to the Services in Scope table and to Artifact: and the console has no compliance report tab, while the marketing page lists programs generically without reports."
 }
 ```
 
@@ -807,8 +807,8 @@ Two governance frameworks sit behind those dates and are still voluntary: the **
   "type": "multiple-choice",
   "question": "A workload must never send prompts outside the EU geography. Which setting should be used, and what is the trade-off?",
   "options": [
-    "Global cross-Region inference - cheapest option, but it routes worldwide",
-    "Geographic cross-Region inference - processing stays inside the geography; Global would instead save about 10% on token prices",
+    "Global cross-Region inference: cheapest option, but it routes worldwide",
+    "Geographic cross-Region inference: processing stays inside the geography; Global would instead save about 10% on token prices",
     "An application inference profile with aws:RequestedRegion set to unspecified",
     "Model invocation logging to an S3 bucket in eu-west-1"
   ],
@@ -829,7 +829,7 @@ Two governance frameworks sit behind those dates and are still voluntary: the **
     "Amazon Bedrock does not integrate with AWS CloudTrail"
   ],
   "correct": 0,
-  "explanation": "On bedrock-runtime, Converse and InvokeModel are CloudTrail management events: recorded by default and free, and the console event history keeps 90 days of them. Advanced data-event selectors are what bedrock-mantle Inference (and knowledge-base Retrieve) need - those are opt-in and charged. Model invocation logging is a separate, off-by-default feature that captures prompt content rather than identity, and Bedrock does integrate with CloudTrail."
+  "explanation": "On bedrock-runtime, Converse and InvokeModel are CloudTrail management events: recorded by default and free, and the console event history keeps 90 days of them. Advanced data-event selectors are what bedrock-mantle Inference (and knowledge-base Retrieve) need: those are opt-in and charged. Model invocation logging is a separate, off-by-default feature that captures prompt content rather than identity, and Bedrock does integrate with CloudTrail."
 }
 ```
 
@@ -861,7 +861,7 @@ Two governance frameworks sit behind those dates and are still voluntary: the **
     "The Bedrock compliance-validation page enumerates every program the service is in scope for"
   ],
   "correct": 1,
-  "explanation": "Invocation logging is off by default, destinations must match the account and Region, and inline bodies are capped at 100 KB (larger payloads go to an S3 data/ prefix). GuardDuty AI Protection creates its own service-linked CloudTrail channel, so you do not configure one. Data events are charged (not free), and the compliance-validation page lists no programs - it only points to Services in Scope and AWS Artifact."
+  "explanation": "Invocation logging is off by default, destinations must match the account and Region, and inline bodies are capped at 100 KB (larger payloads go to an S3 data/ prefix). GuardDuty AI Protection creates its own service-linked CloudTrail channel, so you do not configure one. Data events are charged (not free), and the compliance-validation page lists no programs: it only points to Services in Scope and AWS Artifact."
 }
 ```
 
@@ -877,7 +877,7 @@ Two governance frameworks sit behind those dates and are still voluntary: the **
     "The Config rule sagemaker-endpoint-config-kms-key-required"
   ],
   "correct": 0,
-  "explanation": "The sensitive-information filter runs on inputs and outputs and can either block or mask, with predefined entities or custom regex - masking removes the SSN while still letting the conversation continue. Rekognition moderation handles JPEG/PNG images and video, not text transcripts; GuardDuty reports prompt-injection events as findings rather than redacting content; and the KMS Config rule is an encryption check."
+  "explanation": "The sensitive-information filter runs on inputs and outputs and can either block or mask, with predefined entities or custom regex: masking removes the SSN while still letting the conversation continue. Rekognition moderation handles JPEG/PNG images and video, not text transcripts; GuardDuty reports prompt-injection events as findings rather than redacting content; and the KMS Config rule is an encryption check."
 }
 ```
 
@@ -893,7 +893,7 @@ Two governance frameworks sit behind those dates and are still voluntary: the **
     "Its compliance-validation page lists 143 programs including PCI DSS"
   ],
   "correct": 0,
-  "explanation": "Bedrock's published set is ISO, SOC, CSA STAR Level 2, GDPR, HIPAA eligible and FedRAMP High in AWS GovCloud (US-West), supplemented by a per-model FedRAMP matrix published 18 September 2026. No CSP holds a HIPAA certification, PCI DSS is not stated on Bedrock's own pages (so it must not be asserted), and 143 is the count of AWS compliance offerings across all services - not programs listed on any single service page."
+  "explanation": "Bedrock's published set is ISO, SOC, CSA STAR Level 2, GDPR, HIPAA eligible and FedRAMP High in AWS GovCloud (US-West), supplemented by a per-model FedRAMP matrix published 18 September 2026. No CSP holds a HIPAA certification, PCI DSS is not stated on Bedrock's own pages (so it must not be asserted), and 143 is the count of AWS compliance offerings across all services: not programs listed on any single service page."
 }
 ```
 
@@ -905,11 +905,11 @@ Two governance frameworks sit behind those dates and are still voluntary: the **
   "options": [
     "Both remain fully open to new customers, with new features planned",
     "Both are in full shutdown and unavailable to everyone",
-    "Both closed to new customers on 30 July 2026 - status is maintenance, not shutdown - so a new workload should use Bedrock Model Evaluations and Bedrock Guardrails instead",
+    "Both closed to new customers on 30 July 2026: status is maintenance, not shutdown: so a new workload should use Bedrock Model Evaluations and Bedrock Guardrails instead",
     "Both were simply rebranded as Bedrock Model Evaluations, so the old names still work"
   ],
   "correct": 2,
-  "explanation": "AWS's availability notice lists Model Monitor, Clarify, Ground Truth, A2I, Debugger, Role Manager, Geospatial, Studio Lab and Mechanical Turk as no longer open to new customers from 30 July 2026. Maintenance means existing customers keep them with no new features - it is neither a shutdown nor a rename - so for a new workload AWS points to Bedrock Model Evaluations and Bedrock Guardrails. Related: Amazon Kendra closed to new customers the same day and directs new search workloads to Bedrock Managed Knowledge Base."
+  "explanation": "AWS's availability notice lists Model Monitor, Clarify, Ground Truth, A2I, Debugger, Role Manager, Geospatial, Studio Lab and Mechanical Turk as no longer open to new customers from 30 July 2026. Maintenance means existing customers keep them with no new features: it is neither a shutdown nor a rename: so for a new workload AWS points to Bedrock Model Evaluations and Bedrock Guardrails. Related: Amazon Kendra closed to new customers the same day and directs new search workloads to Bedrock Managed Knowledge Base."
 }
 ```
 
@@ -925,7 +925,7 @@ Two governance frameworks sit behind those dates and are still voluntary: the **
     "2 August 2025; €35 million or 7% of global annual turnover"
   ],
   "correct": 1,
-  "explanation": "The Act entered into force on 1 August 2024 and phases in: prohibitions and AI literacy 2 Feb 2025, GPAI obligations and penalties 2 Aug 2025, general application with Article 50 transparency duties and AI Office GPAI fining on 2 Aug 2026 (marking deadline 2 Dec 2026 for systems already on the market), Annex III high-risk 2 Dec 2027 and Annex I high-risk 2 Aug 2028. The Digital Omnibus deferred only the high-risk dates. Prohibited practices carry the top tier - EUR 35 million or 7% of global annual turnover - while most other breaches are EUR 15 million or 3% and misleading information to the AI Office is EUR 7.5 million or 1%."
+  "explanation": "The Act entered into force on 1 August 2024 and phases in: prohibitions and AI literacy 2 Feb 2025, GPAI obligations and penalties 2 Aug 2025, general application with Article 50 transparency duties and AI Office GPAI fining on 2 Aug 2026 (marking deadline 2 Dec 2026 for systems already on the market), Annex III high-risk 2 Dec 2027 and Annex I high-risk 2 Aug 2028. The Digital Omnibus deferred only the high-risk dates. Prohibited practices carry the top tier: EUR 35 million or 7% of global annual turnover: while most other breaches are EUR 15 million or 3% and misleading information to the AI Office is EUR 7.5 million or 1%."
 }
 ```
 
@@ -933,12 +933,12 @@ Two governance frameworks sit behind those dates and are still voluntary: the **
 {
   "question": "Match each security control to the layer it protects and its documented number:",
   "pairs": [
-    {"left": "Permissions boundary / SCP / RCP", "right": "Identity layer - caps maximum permissions, grants nothing"},
+    {"left": "Permissions boundary / SCP / RCP", "right": "Identity layer: caps maximum permissions, grants nothing"},
     {"left": "S3 gateway endpoint + PrivateLink interface endpoints", "right": "Network layer - 7 Bedrock endpoint services, inbound TCP 443, gateway endpoint free"},
-    {"left": "SSE-KMS customer managed key", "right": "Data-at-rest layer - required for cross-account S3, SSE-S3 unsupported on S3 Express One Zone"},
-    {"left": "TLS 1.2", "right": "Data-in-transit layer - AWS minimum, visible as tlsDetails.tlsVersion in CloudTrail"},
-    {"left": "CloudTrail management events", "right": "Audit layer - on by default, 90 days of event history, bedrock-runtime inference is free"},
-    {"left": "GuardDuty AI Protection", "right": "Detective layer - service-linked CloudTrail channel, MITRE ATLAS AML.T0040, findings not blocks"}
+    {"left": "SSE-KMS customer managed key", "right": "Data-at-rest layer: required for cross-account S3, SSE-S3 unsupported on S3 Express One Zone"},
+    {"left": "TLS 1.2", "right": "Data-in-transit layer: AWS minimum, visible as tlsDetails.tlsVersion in CloudTrail"},
+    {"left": "CloudTrail management events", "right": "Audit layer: on by default, 90 days of event history, bedrock-runtime inference is free"},
+    {"left": "GuardDuty AI Protection", "right": "Detective layer: service-linked CloudTrail channel, MITRE ATLAS AML.T0040, findings not blocks"}
   ],
   "explanation": "Each control sits at a different layer of the shared responsibility split, and the exam tests whether you can place it: boundaries and SCPs cap identity, endpoints remove internet dependency, SSE-KMS gives you a shareable customer key, TLS 1.2 is the in-transit floor, management events are the free default in CloudTrail, and GuardDuty AI Protection is a detective service that creates its own CloudTrail channel."
 }
@@ -948,23 +948,23 @@ Two governance frameworks sit behind those dates and are still voluntary: the **
 
 > [!WARNING]
 > **Armadilhas desta lição / Lesson traps:**
-> - **"HIPAA certified" never exists** — the answer is always **BAA + HIPAA-eligible services**, backed by FedRAMP and NIST 800-53;
-> - **AWS Artifact is where evidence lives**, never a service page — and Bedrock's `compliance-validation.html` lists **no programs**, only pointers;
+> - **"HIPAA certified" never exists**: the answer is always **BAA + HIPAA-eligible services**, backed by FedRAMP and NIST 800-53;
+> - **AWS Artifact is where evidence lives**, never a service page, and Bedrock's `compliance-validation.html` lists **no programs**, only pointers;
 > - **`bedrock-runtime` inference = management events (free)**; **`bedrock-mantle` Inference = data events (opt-in, charged)**;
 > - **Model invocation logging is off by default** and is not CloudTrail: same account, same Region, inline body **≤100 KB**;
-> - **Cross-account requires an Allow on both sides** — identity policy **and** resource policy — plus **your own CMK** for KMS;
-> - **An endpoint needs ≥2 subnets in ≥2 AZs even for one instance**; `VpcConfig` = **1–16 subnets, 1–5 security groups**, ENI inbound **443**;
-> - **Boundaries, SCPs and RCPs cap, they never grant** — and `AmazonSageMakerFullAccess` still misses buckets outside the `SageMaker`/`aws-glue` name patterns;
+> - **Cross-account requires an Allow on both sides**, identity policy **and** resource policy, plus **your own CMK** for KMS;
+> - **An endpoint needs ≥2 subnets in ≥2 AZs even for one instance**; `VpcConfig` = **1 to 16 subnets, 1 to 5 security groups**, ENI inbound **443**;
+> - **Boundaries, SCPs and RCPs cap, they never grant**, and `AmazonSageMakerFullAccess` still misses buckets outside the `SageMaker`/`aws-glue` name patterns;
 > - **NAT is a fallback**, not the private design: gateway + interface endpoints are the internet-free answer;
 > - **PII filter runs on inputs *and* outputs** (block or mask), Rekognition moderation is **JPEG/PNG only** with **50 %** default confidence, and GuardDuty's prompt-injection signal is a **finding**, not a block.
 
 > [!SUCCESS]
 > **Key Takeaways:**
 > 1. **Identity first:** AI workloads use SageMaker **execution**, **domain/space/user**, **pipeline**, **service-linked (Studio Classic)**, **Bedrock service roles** (with `aws:SourceAccount` + `aws:SourceArn`) and cross-account roles; **Role Manager** offers **3 personas**, and `ExecutionRoleSessionNameMode = USER_IDENTITY` puts the end user in CloudTrail.
-> 2. **Least privilege is the default answer:** scope policies to ARNs (bucket `acme-ml-artifacts`, log group `/aws/sagemaker/*`, account `111122223333`), remember the **`AmazonSageMakerFullAccess` name-pattern S3 caveat**, and know that **boundaries, SCPs and RCPs cap — none of them grants**.
+> 2. **Least privilege is the default answer:** scope policies to ARNs (bucket `acme-ml-artifacts`, log group `/aws/sagemaker/*`, account `111122223333`), remember the **`AmazonSageMakerFullAccess` name-pattern S3 caveat**, and know that **boundaries, SCPs and RCPs cap: none of them grants**.
 > 3. **Cross-account and Bedrock identity:** an Allow is required in the **identity policy and the resource policy**; Bedrock ships **7 managed policies** (`LimitedAccess` and `MarketplaceAccess` **13 Jun 2025**, three `Mantle*` policies **3 Dec 2025**), and **guardrails/inference profiles take resource policies, required for org-level enforcement**.
-> 4. **Encryption:** in transit **TLS 1.2** minimum; at rest **SSE-S3** is the SageMaker default and **SSE-KMS CMK** is the cross-account and Config-enforced option — with two exceptions: **S3 Express One Zone output is SSE-S3 only**, and a keyless ML volume gets a **transient key discarded after encryption**.
-> 5. **Network:** `VpcConfig` = **1–16 subnets, 1–5 SGs**; endpoints need **≥2 subnets in ≥2 AZs**; training needs **≥2 private IPs (≥5 with EFA)**; Bedrock exposes **7 PrivateLink services**; the S3 **gateway endpoint is free**, interface endpoints **replace NAT**, and NAT is only a fallback.
+> 4. **Encryption:** in transit **TLS 1.2** minimum; at rest **SSE-S3** is the SageMaker default and **SSE-KMS CMK** is the cross-account and Config-enforced option: with two exceptions: **S3 Express One Zone output is SSE-S3 only**, and a keyless ML volume gets a **transient key discarded after encryption**.
+> 5. **Network:** `VpcConfig` = **1 to 16 subnets, 1 to 5 SGs**; endpoints need **≥2 subnets in ≥2 AZs**; training needs **≥2 private IPs (≥5 with EFA)**; Bedrock exposes **7 PrivateLink services**; the S3 **gateway endpoint is free**, interface endpoints **replace NAT**, and NAT is only a fallback.
 > 6. **Audit:** CloudTrail **management events are default and free** (90 days of event history), **data events are opt-in and charged** (`bedrock-mantle` Inference, KB `Retrieve`, SageMaker endpoint/feature-group selectors); **model invocation logging is off by default** (same account + Region, **≤100 KB** inline); **GuardDuty AI Protection** creates its own service-linked channel and flags guardrail removal, logging disablement and `PromptInjection.Direct`.
-> 7. **Compliance:** evidence comes from **AWS Services in Scope + AWS Artifact**; **HIPAA = BAA + HIPAA-eligible services** (never "certified"), mapped to FedRAMP + NIST 800-53; Bedrock publishes **ISO, SOC, CSA STAR Level 2, GDPR, HIPAA eligible and FedRAMP High in GovCloud (US-West)** — and **PCI DSS is not stated**, so do not assert it.
-> 8. **Comparative verdict:** IAM roles over shared keys; **VPC endpoints over NAT** for internet-free designs; **SSE-KMS when sharing or enforcement demands it, SSE-S3 when the default is enough** — and always check which of the two documented exceptions applies.
+> 7. **Compliance:** evidence comes from **AWS Services in Scope + AWS Artifact**; **HIPAA = BAA + HIPAA-eligible services** (never "certified"), mapped to FedRAMP + NIST 800-53; Bedrock publishes **ISO, SOC, CSA STAR Level 2, GDPR, HIPAA eligible and FedRAMP High in GovCloud (US-West)**, and **PCI DSS is not stated**, so do not assert it.
+> 8. **Comparative verdict:** IAM roles over shared keys; **VPC endpoints over NAT** for internet-free designs; **SSE-KMS when sharing or enforcement demands it, SSE-S3 when the default is enough**, and always check which of the two documented exceptions applies.

@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Cobertura y calidad de las pruebas
 
-La cobertura te dice qué código ejecutan tus pruebas. Es un **indicador negativo** útil — una cobertura baja significa que definitivamente no estás probando lo suficiente — pero una cobertura alta no garantiza buenas pruebas. Esta lección cubre cómo medir, interpretar y actuar sobre los datos de cobertura.
+La cobertura te dice qué código ejecutan tus pruebas. Es un **indicador negativo** útil, una cobertura baja significa que definitivamente no estás probando lo suficiente, pero una cobertura alta no garantiza buenas pruebas. Esta lección cubre cómo medir, interpretar y actuar sobre los datos de cobertura.
 
 ## ¿Qué es la cobertura de código?
 
@@ -41,7 +41,7 @@ flowchart TD
 |--------|-----------------|---------|
 | **Cobertura de líneas** | Qué porcentaje de líneas se ejecutó | El 80 % de las líneas se ejecutó durante las pruebas |
 | **Cobertura de ramas** | Qué porcentaje de ramas if/else se recorrió | 3 de 4 ramas cubiertas (75 %) |
-| **Cobertura de condiciones** | Subexpresiones booleanas evaluadas | `A or B` — se probó A=True, A=False |
+| **Cobertura de condiciones** | Subexpresiones booleanas evaluadas | `A or B`: se probó A=True, A=False |
 | **Cobertura de funciones** | Funciones que se llamaron | 45 de 50 funciones invocadas |
 | **Cobertura de sentencias** | Sentencias individuales ejecutadas | 120 de 150 sentencias se ejecutaron |
 | **Cobertura de rutas** | Todas las rutas posibles a través del código | 8 de 16 rutas posibles probadas |
@@ -542,7 +542,7 @@ diff-cover coverage.xml --compare-branch=main --fail-under=90
 
 - **La cobertura mide qué código se ejecuta durante las pruebas**, no qué código es correcto
 - **La cobertura de líneas** es la métrica básica; **la cobertura de ramas** revela las rutas sin probar
-- **100 % de cobertura ≠ 100 % de corrección** — puedes tener cobertura perfecta y seguir teniendo bugs
+- **100 % de cobertura ≠ 100 % de corrección**: puedes tener cobertura perfecta y seguir teniendo bugs
 - **Objetivos de cobertura**: más del 80 % para el código de producción, más del 90 % para las rutas críticas
 - **La cobertura del diff** asegura que el código nuevo esté probado, no solo los números totales
 - **Las exclusiones** deberían ser raras y estar bien documentadas

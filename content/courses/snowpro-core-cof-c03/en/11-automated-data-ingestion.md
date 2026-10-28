@@ -1,12 +1,12 @@
 ---
-title: "Domain 3.2 — Automated Data Ingestion"
+title: "Domain 3.2, Automated Data Ingestion"
 description: "Learn to automate data ingestion with Snowpipe, Snowpipe Streaming, Streams, Tasks, and Dynamic Tables. Build continuous and event-driven data pipelines entirely within Snowflake."
 order: 11
 difficulty: intermediate
 duration: "70 min"
 ---
 
-# Domain 3.2 — Automated Data Ingestion
+# Domain 3.2: Automated Data Ingestion
 
 ## Exam Weight
 
@@ -22,7 +22,7 @@ duration: "70 min"
 | Tool | Trigger | Latency | Best For |
 |---|---|---|---|
 | **COPY INTO** | Manual / scheduled | Minutes to hours | Batch loads |
-| **Snowpipe** | Cloud storage event | Near-real-time (seconds–minutes) | Continuous file-based ingestion |
+| **Snowpipe** | Cloud storage event | Near-real-time (seconds: minutes) | Continuous file-based ingestion |
 | **Snowpipe Streaming** | SDK push | Sub-second | High-frequency row-level streaming |
 | **Streams + Tasks** | Time or stream condition | Configurable | CDC-based pipeline orchestration |
 | **Dynamic Tables** | Automatic (lag-based) | Configurable | Declarative incremental refresh |
@@ -31,7 +31,7 @@ duration: "70 min"
 
 ## Snowpipe
 
-**Snowpipe** is Snowflake's serverless, continuous ingestion service — it automatically loads files as they arrive in a stage.
+**Snowpipe** is Snowflake's serverless, continuous ingestion service; it automatically loads files as they arrive in a stage.
 
 ### How Snowpipe Works
 
@@ -89,7 +89,7 @@ response = manager.ingest_files([
 
 | Property | Value |
 |---|---|
-| **Warehouse needed?** | No — serverless |
+| **Warehouse needed?** | No: serverless |
 | **Billing** | Per-file compute credits (serverless rate) |
 | **Latency** | Typically < 1 minute |
 | **Deduplication** | 14-day window (files not re-processed) |
@@ -118,7 +118,7 @@ ALTER PIPE orders_pipe REFRESH;
 
 ## Snowpipe Streaming
 
-**Snowpipe Streaming** enables **row-level, sub-second ingestion** directly into Snowflake tables via the Snowflake Ingest SDK — without staging files first:
+**Snowpipe Streaming** enables **row-level, sub-second ingestion** directly into Snowflake tables via the Snowflake Ingest SDK: without staging files first:
 
 ```
 Application / Kafka / CDC tool
@@ -167,7 +167,7 @@ channel.insertRow(row, "offset_12345");
 
 ---
 
-## Streams — Change Data Capture
+## Streams: Change Data Capture
 
 A **Stream** is a Snowflake object that captures DML changes (INSERT, UPDATE, DELETE) on a source table or view. It acts as a **CDC (Change Data Capture) log**.
 
@@ -218,9 +218,9 @@ WHEN NOT MATCHED AND src.METADATA$ACTION = 'INSERT' THEN INSERT
 
 ---
 
-## Tasks — Scheduled Execution
+## Tasks: Scheduled Execution
 
-A **Task** schedules SQL execution — it is Snowflake's native job scheduler.
+A **Task** schedules SQL execution; it is Snowflake's native job scheduler.
 
 ### Task Types
 
@@ -304,7 +304,7 @@ SELECT SYSTEM$TASK_DEPENDENTS_ENABLE('root_task');
 
 ## Dynamic Tables
 
-**Dynamic Tables** provide a **declarative** approach to incremental data pipelines — define the transformation as a SELECT, set a `TARGET_LAG`, and Snowflake automatically refreshes the table:
+**Dynamic Tables** provide a **declarative** approach to incremental data pipelines: define the transformation as a SELECT, set a `TARGET_LAG`, and Snowflake automatically refreshes the table:
 
 ```sql
 -- Source table
@@ -394,6 +394,6 @@ ALTER DYNAMIC TABLE customer_metrics REFRESH;
 > 1. **Snowpipe** = file-based, serverless, near-real-time (seconds to minutes)
 > 2. **Snowpipe Streaming** = row-based, sub-second, no staging required
 > 3. Streams go **stale** if not consumed within the Time Travel window
-> 4. Tasks start **SUSPENDED** — always resume them explicitly
-> 5. **Dynamic Tables** = declarative `TARGET_LAG` approach — simpler than Streams + Tasks
+> 4. Tasks start **SUSPENDED**: always resume them explicitly
+> 5. **Dynamic Tables** = declarative `TARGET_LAG` approach: simpler than Streams + Tasks
 > 6. Task DAGs: child tasks defined with `AFTER <parent_task>`

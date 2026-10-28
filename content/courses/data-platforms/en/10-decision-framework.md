@@ -8,7 +8,7 @@ duration: "45 min"
 
 # Use Case Decision Framework
 
-> **Bottom Line:** Platform selection is not a global decision — it's a per-workload decision. The best data organisations make deliberate choices about which platform handles which job. This framework gives you the tools to make those choices rigorously.
+> **Bottom Line:** Platform selection is not a global decision; it's a per-workload decision. The best data organisations make deliberate choices about which platform handles which job. This framework gives you the tools to make those choices rigorously.
 
 ---
 
@@ -268,4 +268,4 @@ Use this to assign each platform its natural role in a multi-platform architectu
 └─────────────────────────────────────────────────────────────┘
 ```
 
-This pattern — **Kinesis/MSK → S3 → Databricks → Snowflake** — is arguably the most common "best-of-breed" architecture in large enterprises today, combining the streaming depth of AWS, the processing power of Databricks, and the serving elegance of Snowflake.
+This pattern, **Kinesis/MSK → S3 → Databricks → Snowflake**, is arguably the most common "best-of-breed" architecture in large enterprises today, combining the streaming depth of AWS, the processing power of Databricks, and the serving elegance of Snowflake.

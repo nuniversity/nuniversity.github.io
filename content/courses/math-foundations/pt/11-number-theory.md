@@ -1,6 +1,6 @@
 ---
 title: "Teoria dos Números"
-description: "Explore números primos, divisibilidade e aritmética modular — a rainha da matemática."
+description: "Explore números primos, divisibilidade e aritmética modular, a rainha da matemática."
 order: 11
 duration: "60 min"
 difficulty: "beginner"
@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Teoria dos Números
 
-**Gancho**: "A teoria dos números é a 'rainha da matemática' — o estudo das propriedades belas dos números inteiros."
+**Gancho**: "A teoria dos números é a 'rainha da matemática', o estudo das propriedades belas dos números inteiros."
 
 ---
 
@@ -41,7 +41,7 @@ Ao final desta lição, você será capaz de:
 **Primos:** 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, ...
 
 > [!WARNING]
-> O número 1 não é primo! É considerado "unidade" — nem primo nem composto.
+> O número 1 não é primo! É considerado "unidade", nem primo nem composto.
 
 ### Peneira de Eratóstenes
 
@@ -178,7 +178,7 @@ Método eficiente para calcular MDC:
 
 ---
 
-## 5. Peneira de Eratóstenes — Demonstração Visual
+## 5. Peneira de Eratóstenes: Demonstração Visual
 
 A Peneira de Eratóstenes é o método mais antigo e elegante para encontrar todos os números primos até um dado limite. Vamos demonstrar passo a passo como ela funciona para encontrar primos até 30.
 
@@ -227,7 +227,7 @@ Múltiplos de 5 riscados: 25 (10, 15, 20, 30 já foram riscados)
 
 ---
 
-## 6. Aritmética Modular — Exemplos Computacionais
+## 6. Aritmética Modular: Exemplos Computacionais
 
 ### Operações Básicas
 
@@ -280,7 +280,7 @@ Para calcular a^n mod m eficientemente, use o método de exponenciação binári
 
 ---
 
-## 7. Criptografia RSA — Passo a Passo
+## 7. Criptografia RSA: Passo a Passo
 
 O RSA é o sistema de criptografia mais usado na internet. Veja como funciona:
 
@@ -302,8 +302,8 @@ O RSA é o sistema de criptografia mais usado na internet. Veja como funciona:
 - d = 17⁻¹ mod 3120 = 2753 (porque 17 × 2753 = 46801 = 15 × 3120 + 1)
 
 **Chaves:**
-- **Chave pública:** (n, e) = (3233, 17) — pode ser compartilhada
-- **Chave privada:** (n, d) = (3233, 2753) — mantida secreta
+- **Chave pública:** (n, e) = (3233, 17): pode ser compartilhada
+- **Chave privada:** (n, d) = (3233, 2753): mantida secreta
 
 ### Criptografia e Descriptografia
 
@@ -330,7 +330,7 @@ Para primos de 2048 bits (617 dígitos), fatorar n levaria bilhões de anos com 
 
 ---
 
-## 8. Fatoração em Primos — Exercícios Interativos
+## 8. Fatoração em Primos: Exercícios Interativos
 
 ### Decomposição em Fatores Primos
 

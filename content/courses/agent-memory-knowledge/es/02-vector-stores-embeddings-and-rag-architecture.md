@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Vectores, Embeddings y Arquitectura RAG
 
-La Generación Aumentada por Recuperación (RAG) es el patrón dominante para fundamentar respuestas de LLMs en conocimiento externo. En su núcleo están los **embeddings** — representaciones numéricas del significado — y las **bases de datos vectoriales** que los indexan y buscan.
+La Generación Aumentada por Recuperación (RAG) es el patrón dominante para fundamentar respuestas de LLMs en conocimiento externo. En su núcleo están los **embeddings**, representaciones numéricas del significado, y las **bases de datos vectoriales** que los indexan y buscan.
 
 ---
 
@@ -32,7 +32,7 @@ Un embedding es un vector denso (lista de floats) que captura el significado sem
 Los modelos de embedding (ej: `text-embedding-3-small`, `all-MiniLM-L6-v2`) mapean texto a un vector de tamaño fijo independientemente de la longitud de entrada.
 
 [!NOTE]
-Los modelos de embedding tienen un límite máximo de tokens de entrada (típicamente 512 tokens para modelos open-source, 8192 para `text-embedding-3-large` de OpenAI). Los documentos más largos que este límite deben dividirse en fragmentos antes de la incrustación — esta es la razón por la que la fragmentación es una parte crítica de cualquier pipeline RAG.
+Los modelos de embedding tienen un límite máximo de tokens de entrada (típicamente 512 tokens para modelos open-source, 8192 para `text-embedding-3-large` de OpenAI). Los documentos más largos que este límite deben dividirse en fragmentos antes de la incrustación; esta es la razón por la que la fragmentación es una parte crítica de cualquier pipeline RAG.
 
 ### Modelos de Embedding Comunes
 
@@ -181,7 +181,7 @@ Las bases de datos vectoriales se especializan en almacenar vectores de embeddin
 | Escalabilidad | Nodo único | Auto-scaling | Sharding horizontal | Sharding horizontal |
 
 [!TIP]
-Para prototipado y desarrollo local, Chroma es la mejor elección — se ejecuta embebido con cero infraestructura. Para producción a escala, Pinecone o Qdrant ofrecen auto-scaling gestionado. Qdrant es preferido si necesitas auto-hospedaje.
+Para prototipado y desarrollo local, Chroma es la mejor elección: se ejecuta embebido con cero infraestructura. Para producción a escala, Pinecone o Qdrant ofrecen auto-scaling gestionado. Qdrant es preferido si necesitas auto-hospedaje.
 
 ---
 
@@ -289,7 +289,7 @@ print(rag_answer("What is the return policy?"))
 ```
 
 [!WARNING]
-Un modo común de fallo de RAG es el exceso de contexto — poner demasiados fragmentos recuperados en el prompt, lo que diluye la relación señal-ruido. Recupera solo los top-k fragmentos más relevantes (k=3 a 5 es típico) y considera agregar un umbral de puntuación de relevancia para filtrar coincidencias de baja calidad.
+Un modo común de fallo de RAG es el exceso de contexto: poner demasiados fragmentos recuperados en el prompt, lo que diluye la relación señal-ruido. Recupera solo los top-k fragmentos más relevantes (k=3 a 5 es típico) y considera agregar un umbral de puntuación de relevancia para filtrar coincidencias de baja calidad.
 
 ---
 

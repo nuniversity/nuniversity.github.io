@@ -14,7 +14,7 @@ Introduzido por Barbara Liskov em 1987, o Princípio da Substituição de Liskov
 
 ## A Essência do LSP
 
-Se você tem uma função que funciona com uma classe base, ela deve funcionar corretamente com qualquer uma de suas subclasses — sem saber qual subclasse é.
+Se você tem uma função que funciona com uma classe base, ela deve funcionar corretamente com qualquer uma de suas subclasses: sem saber qual subclasse é.
 
 ```python
 def processar_forma(forma: Forma) -> None:
@@ -22,7 +22,7 @@ def processar_forma(forma: Forma) -> None:
     print(f"Perímetro: {forma.perimetro()}")
 ```
 
-Esta função deve funcionar corretamente para `Retangulo`, `Circulo`, `Triangulo` — qualquer subclasse de `Forma`. Se uma subclasse quebra esta expectativa, ela viola o LSP.
+Esta função deve funcionar corretamente para `Retangulo`, `Circulo`, `Triangulo`: qualquer subclasse de `Forma`. Se uma subclasse quebra esta expectativa, ela viola o LSP.
 
 ## ANTES: O Problema Clássico Retângulo-Quadrado
 

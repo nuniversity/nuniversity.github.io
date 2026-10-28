@@ -3224,7 +3224,7 @@ This comprehensive material covers the spectrum from advanced SQL techniques to 
 - Fact tables store metrics; dimension tables provide context
 - Slowly Changing Dimensions (SCD) track historical changes: Type 1 (overwrite), Type 2 (new row), Type 3 (new column)
 
-### SQLite - Lightweight & Embedded
+### SQLite: Lightweight & Embedded
 
 **When to Use**
 - Embedded applications, prototyping, local storage, IoT devices
@@ -3236,7 +3236,7 @@ This comprehensive material covers the spectrum from advanced SQL techniques to 
 - FTS5 for full-text search capabilities
 - Excellent for ETL pipelines and data analysis workflows
 
-### PostgreSQL - Enterprise Database
+### PostgreSQL: Enterprise Database
 
 **Performance Features**
 - Multiple index types: B-tree (default), Hash, GiST (geometric), GIN (JSON/arrays), BRIN (time-series)

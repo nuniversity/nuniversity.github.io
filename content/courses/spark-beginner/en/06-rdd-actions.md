@@ -151,7 +151,7 @@ rdd.foreach(write_to_db)
 ```
 
 > [!NOTE]
-> `foreach()` runs on executors, so printing goes to executor logs — not your driver console. Use `foreachPartition()` for more efficient resource management (one connection per partition).
+> `foreach()` runs on executors, so printing goes to executor logs: not your driver console. Use `foreachPartition()` for more efficient resource management (one connection per partition).
 
 ## foreachPartition()
 

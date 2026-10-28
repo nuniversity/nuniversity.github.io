@@ -1,16 +1,16 @@
 ---
-title: "INSERT, UPDATE, DELETE — Data Manipulation"
+title: "INSERT, UPDATE, DELETE, Data Manipulation"
 description: "Learn INSERT INTO, UPDATE SET, DELETE FROM, TRUNCATE, and an introduction to transactions"
 order: 5
 duration: "20-30 minutes"
 difficulty: "beginner"
 ---
 
-# INSERT, UPDATE, DELETE — Data Manipulation
+# INSERT, UPDATE, DELETE: Data Manipulation
 
 Reading data is useful, but you also need to create, modify, and remove it. These operations are called **data manipulation language (DML)** and form the backbone of any application.
 
-## INSERT INTO — Adding New Rows
+## INSERT INTO: Adding New Rows
 
 ### Insert a Single Row
 
@@ -51,7 +51,7 @@ WHERE age > 60;
 > [!SUCCESS]
 > `INSERT INTO ... SELECT` is powerful for copying, archiving, and transforming data between tables. The column count and types must match.
 
-## UPDATE SET — Modifying Existing Rows
+## UPDATE SET: Modifying Existing Rows
 
 ### Basic Update
 
@@ -93,7 +93,7 @@ SET
 WHERE category = 'Electronics';
 ```
 
-## DELETE FROM — Removing Rows
+## DELETE FROM: Removing Rows
 
 ### Basic Delete
 

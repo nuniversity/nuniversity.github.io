@@ -60,7 +60,7 @@ Hoy, los diagramas de flujo se usan en prácticamente todas las industrias:
 
 ### 1. Comunicación visual
 
-Un diagrama de flujo puede comunicar un proceso complejo en segundos — algo que podría exigir páginas de texto para describirse.
+Un diagrama de flujo puede comunicar un proceso complejo en segundos: algo que podría exigir páginas de texto para describirse.
 
 ```
 Descripción en texto:               Diagrama de flujo:
@@ -78,10 +78,10 @@ Descripción en texto:               Diagrama de flujo:
 ### 2. Análisis de procesos
 
 Los diagramas de flujo facilitan detectar:
-- **Redundancias** — Pasos que se repiten de forma innecesaria
-- **Cuellos de botella** — Puntos donde el trabajo se acumula
-- **Pasos faltantes** — Huecos en el proceso
-- **Complejidad innecesaria** — Caminos excesivamente complicados
+- **Redundancias**: Pasos que se repiten de forma innecesaria
+- **Cuellos de botella**: Puntos donde el trabajo se acumula
+- **Pasos faltantes**: Huecos en el proceso
+- **Complejidad innecesaria**: Caminos excesivamente complicados
 
 ### 3. Alineación del equipo
 
@@ -300,10 +300,10 @@ Para cada escenario, determina qué tipo de diagrama de flujo sería el más apr
 <details>
 <summary>Haz clic para ver las respuestas</summary>
 
-1. **Diagrama de flujo por carriles (swimlane)** — Varios departamentos involucrados
-2. **Diagrama de flujo básico** — Proceso secuencial simple
-3. **Diagrama de flujo de datos** — Se centra en el movimiento de los datos
-4. **Diagrama de decisiones** — Lógica de decisión intensiva
+1. **Diagrama de flujo por carriles (swimlane)**: Varios departamentos involucrados
+2. **Diagrama de flujo básico**: Proceso secuencial simple
+3. **Diagrama de flujo de datos**: Se centra en el movimiento de los datos
+4. **Diagrama de decisiones**: Lógica de decisión intensiva
 
 </details>
 
@@ -336,8 +336,8 @@ Inicio → Paso A → Paso B → {¿Condición?} →|Sí| Paso C → Paso D → 
 - Los diagramas de flujo mejoran la **comunicación**, el **análisis**, la **alineación** y la **documentación**
 - Usa diagramas de flujo para la **incorporación**, la **depuración**, el **diseño** y la **mejora** de procesos
 - Elige el **tipo de diagrama de flujo** adecuado para tu situación
-- Mantén los diagramas de flujo **simples** — divide los complejos en subdiagramas
+- Mantén los diagramas de flujo **simples**: divide los complejos en subdiagramas
 - En la próxima lección, aprenderemos los **símbolos estándar** que se usan en los diagramas de flujo
 
 > [!SUCCESS] Has completado la lección 3
-> Ahora entiendes qué son los diagramas de flujo, por qué son valiosos y cuándo usarlos. En la próxima lección, profundizaremos en los **símbolos y la notación de los diagramas de flujo** — el vocabulario visual que hace que los diagramas de flujo sean universales.
+> Ahora entiendes qué son los diagramas de flujo, por qué son valiosos y cuándo usarlos. En la próxima lección, profundizaremos en los **símbolos y la notación de los diagramas de flujo**: el vocabulario visual que hace que los diagramas de flujo sean universales.

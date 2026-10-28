@@ -8,7 +8,7 @@ difficulty: "intermediário"
 
 # Pipeline CI/CD Completo
 
-Esta lição de capstone reúne tudo que você aprendeu — testes, cobertura, linting, formatação, verificação de tipo e varredura de segurança — em um pipeline CI/CD completo. Você construirá um workflow profissional do GitHub Actions com portões de qualidade em cada estágio.
+Esta lição de capstone reúne tudo que você aprendeu, testes, cobertura, linting, formatação, verificação de tipo e varredura de segurança, em um pipeline CI/CD completo. Você construirá um workflow profissional do GitHub Actions com portões de qualidade em cada estágio.
 
 ## Arquitetura do Pipeline
 

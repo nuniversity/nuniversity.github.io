@@ -30,7 +30,7 @@ Permissions define what actions agents can perform. They are structured as allow
 ```
 
 > [!IMPORTANT]
-> Permission rules are evaluated at runtime for every tool invocation. Deny rules are checked first — if a command matches any deny pattern, it is rejected immediately regardless of whether it also matches an allow pattern. This fail-safe design prevents accidental bypasses.
+> Permission rules are evaluated at runtime for every tool invocation. Deny rules are checked first: if a command matches any deny pattern, it is rejected immediately regardless of whether it also matches an allow pattern. This fail-safe design prevents accidental bypasses.
 
 ### Permission Evaluation Logic
 
@@ -72,7 +72,7 @@ Patterns support glob-style wildcards for flexible rule matching:
 | `rm -rf *`      | Recursive force delete                   | `rm -rf node_modules`    |
 
 > [!WARNING]
-> Glob patterns are case-sensitive on Linux and case-insensitive on macOS by default. Be careful with file extensions — `*.KEY` will NOT match `secret.key` on Linux. Use lowercase patterns for cross-platform compatibility.
+> Glob patterns are case-sensitive on Linux and case-insensitive on macOS by default. Be careful with file extensions: `*.KEY` will NOT match `secret.key` on Linux. Use lowercase patterns for cross-platform compatibility.
 
 ---
 
@@ -132,7 +132,7 @@ Path restrictions limit which files agents can access:
 ```
 
 > [!WARNING]
-> File path restrictions only apply when the tool is invoked through OpenCode's tool registry. Direct shell access bypasses these restrictions — always combine with bash command allow/deny rules. An agent with permission to run `bash` but no path restrictions could access any file by running shell commands directly.
+> File path restrictions only apply when the tool is invoked through OpenCode's tool registry. Direct shell access bypasses these restrictions: always combine with bash command allow/deny rules. An agent with permission to run `bash` but no path restrictions could access any file by running shell commands directly.
 
 ---
 

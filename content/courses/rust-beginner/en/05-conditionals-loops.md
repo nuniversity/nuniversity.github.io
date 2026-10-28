@@ -30,7 +30,7 @@ fn main() {
 
 ### if is an Expression
 
-Every `if`/`else` block returns a value — both arms must be the same type:
+Every `if`/`else` block returns a value: both arms must be the same type:
 
 ```rust
 fn main() {
@@ -64,7 +64,7 @@ fn main() {
 }
 ```
 
-## loop — Infinite Loops
+## loop: Infinite Loops
 
 `loop` runs forever unless explicitly exited:
 
@@ -110,7 +110,7 @@ fn main() {
 > [!SUCCESS]
 > Use `loop` when you need to "retry until success" patterns or break with a value. For counted iteration, prefer `for`.
 
-## while — Conditional Loops
+## while: Conditional Loops
 
 ```rust
 fn main() {
@@ -141,9 +141,9 @@ fn main() {
 > [!WARNING]
 > The break value from a `while` loop is `Option<T>` because the condition may never be true. In `loop`, the break value is `T` directly.
 
-## for — Iteration
+## for: Iteration
 
-`for` is the preferred loop in Rust — it's safe, fast, and expressive:
+`for` is the preferred loop in Rust; it's safe, fast, and expressive:
 
 ```rust
 fn main() {
@@ -203,9 +203,9 @@ fn main() {
 | `while` | Condition-based, checked each iteration | `Option<T>` |
 | `for` | Iterating over a collection or range | `Option<T>` |
 
-## Match — Pattern Matching
+## Match: Pattern Matching
 
-`match` is Rust's powerful switch statement on steroids. It's **exhaustive** — every possible case must be handled:
+`match` is Rust's powerful switch statement on steroids. It's **exhaustive**: every possible case must be handled:
 
 ```rust
 fn main() {
@@ -277,7 +277,7 @@ fn main() {
 }
 ```
 
-## if let — Concise Matching
+## if let: Concise Matching
 
 When you only care about one pattern:
 

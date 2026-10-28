@@ -1,12 +1,12 @@
 ---
-title: "Dominio 1.3 — Jerarquía y Tipos de Objetos de Snowflake"
+title: "Dominio 1.3, Jerarquía y Tipos de Objetos de Snowflake"
 description: "Comprende cómo Snowflake organiza los objetos: organizaciones, cuentas, bases de datos, esquemas y todos los objetos a nivel de base de datos incluyendo tablas, vistas, stages, pipes, streams, tasks y más."
 order: 3
 difficulty: intermediate
 duration: "60 min"
 ---
 
-# Dominio 1.3 — Jerarquía y Tipos de Objetos de Snowflake
+# Dominio 1.3: Jerarquía y Tipos de Objetos de Snowflake
 
 ## Peso en el Examen
 
@@ -46,7 +46,7 @@ flowchart TD
 
 ## Organización
 
-Una **Organización** es la entidad de nivel más alto en Snowflake — agrupa múltiples cuentas de Snowflake bajo un mismo paraguas:
+Una **Organización** es la entidad de nivel más alto en Snowflake: agrupa múltiples cuentas de Snowflake bajo un mismo paraguas:
 
 - Habilita **funcionalidades entre cuentas**: replicación, publicación en Snowflake Marketplace, informes de uso
 - Gestionada por el rol de sistema `ORGADMIN`
@@ -62,7 +62,7 @@ SHOW ORGANIZATION ACCOUNTS;
 
 ## Objetos a Nivel de Cuenta
 
-Estos objetos existen en el **nivel de cuenta** — no están contenidos dentro de una base de datos.
+Estos objetos existen en el **nivel de cuenta**: no están contenidos dentro de una base de datos.
 
 | Objeto | Descripción |
 |---|---|
@@ -130,13 +130,13 @@ CREATE SCHEMA ANALYTICS.MARTS;
 
 ### Tablas
 
-Snowflake tiene múltiples tipos de tablas — comprender las diferencias se evalúa ampliamente:
+Snowflake tiene múltiples tipos de tablas: comprender las diferencias se evalúa ampliamente:
 
 | Tipo de Tabla | Persistencia | Time Travel | Fail-Safe | Costo de Almacenamiento |
 |---|---|---|---|---|
-| **Permanente** | Hasta eliminación | 0–90 días | 7 días | Completo |
-| **Temporal** | Solo sesión | 0–1 día | Ninguno | Completo (mientras dure la sesión) |
-| **Transitoria** | Hasta eliminación | 0–1 día | Ninguno | Reducido |
+| **Permanente** | Hasta eliminación | 0 to 90 días | 7 días | Completo |
+| **Temporal** | Solo sesión | 0 to 1 día | Ninguno | Completo (mientras dure la sesión) |
+| **Transitoria** | Hasta eliminación | 0 to 1 día | Ninguno | Reducido |
 | **Externa** | Nunca (solo metadatos) | Ninguno | Ninguno | Mínimo (solo metadatos) |
 | **Apache Iceberg** | Hasta eliminación | Configurable | Configurable | Vía catálogo Iceberg |
 | **Dinámica** | Hasta eliminación | Configurable | Configurable | Completo |
@@ -196,7 +196,7 @@ SELECT id, name FROM customers;
 ```
 
 > [!NOTE]
-> Las **Vistas Materializadas** son mantenidas automáticamente por los servicios en segundo plano de Snowflake — no se necesita un warehouse para la actualización. Se usan para acelerar consultas costosas repetidas.
+> Las **Vistas Materializadas** son mantenidas automáticamente por los servicios en segundo plano de Snowflake: no se necesita un warehouse para la actualización. Se usan para acelerar consultas costosas repetidas.
 
 ### Stages (Áreas de Preparación de Datos)
 
@@ -204,10 +204,10 @@ Un **stage** es una ubicación con nombre donde se almacenan archivos para carga
 
 | Tipo de Stage | Ubicación | Autenticación Gestionada Por |
 |---|---|---|
-| **Interno — Usuario** | Almacenamiento gestionado por Snowflake, por usuario | Snowflake |
-| **Interno — Tabla** | Almacenamiento gestionado por Snowflake, por tabla | Snowflake |
-| **Interno — Con nombre** | Almacenamiento gestionado por Snowflake | Snowflake |
-| **Externo — Con nombre** | Bucket S3 / Azure Blob / GCS | Cliente |
+| **Interno: Usuario** | Almacenamiento gestionado por Snowflake, por usuario | Snowflake |
+| **Interno: Tabla** | Almacenamiento gestionado por Snowflake, por tabla | Snowflake |
+| **Interno: Con nombre** | Almacenamiento gestionado por Snowflake | Snowflake |
+| **Externo: Con nombre** | Bucket S3 / Azure Blob / GCS | Cliente |
 
 ```sql
 -- Stage interno con nombre
@@ -278,7 +278,7 @@ FROM orders_stream;
 ```
 
 > [!NOTE]
-> Los streams tienen un **desplazamiento** (*offset*) — una vez que consumes el stream (p. ej., en un Task o DML), el desplazamiento avanza. Los streams rastrean cambios usando internamente el **Time Travel** de Snowflake.
+> Los streams tienen un **desplazamiento** (*offset*): una vez que consumes el stream (p. ej., en un Task o DML), el desplazamiento avanza. Los streams rastrean cambios usando internamente el **Time Travel** de Snowflake.
 
 ### Tasks (Tareas Programadas)
 
@@ -373,7 +373,7 @@ CALL load_daily_data('2025-01-15');
 
 ### Shares (Recursos Compartidos)
 
-Un **Share** es un objeto que habilita el **Intercambio Seguro de Datos** (*Secure Data Sharing*) — otorga acceso de solo lectura a datos en tu cuenta a otra cuenta de Snowflake sin copiar datos:
+Un **Share** es un objeto que habilita el **Intercambio Seguro de Datos** (*Secure Data Sharing*): otorga acceso de solo lectura a datos en tu cuenta a otra cuenta de Snowflake sin copiar datos:
 
 ```sql
 -- Lado del proveedor: crear y poblar un share
@@ -392,7 +392,7 @@ ALTER SHARE sales_share ADD ACCOUNTS = consumer_account_id;
 
 ### Contexto de Sesión
 
-Snowflake mantiene el contexto para cada sesión — la cuenta activa actual, el rol, el warehouse, la base de datos y el esquema:
+Snowflake mantiene el contexto para cada sesión: la cuenta activa actual, el rol, el warehouse, la base de datos y el esquema:
 
 ```sql
 -- Ver el contexto actual

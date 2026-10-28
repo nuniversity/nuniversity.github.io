@@ -20,7 +20,7 @@ Large Language Models (LLMs) and agentic systems are powerful, but they are also
 - Enter infinite reasoning loops, wasting tokens and time
 - Fall prey to adversarial prompt injection attacks
 
-Guardrails are the programmatic boundaries that keep AI systems operating within safe, ethical, and correct behavior envelopes. They are not an afterthought — they are a fundamental architectural component that must be designed, tested, and monitored just like any other critical system.
+Guardrails are the programmatic boundaries that keep AI systems operating within safe, ethical, and correct behavior envelopes. They are not an afterthought; they are a fundamental architectural component that must be designed, tested, and monitored just like any other critical system.
 
 > [!WARNING]
 > Running an agentic system in production without guardrails is like deploying a self-driving car without brakes. Even a single hallucinated action can cause irreparable reputational and financial damage.
@@ -197,7 +197,7 @@ sequenceDiagram
 ```
 
 > [!TIP]
-> Start with simple guardrails — input validation and output toxicity filtering — before adding complex behavioral policies. A minimal guardrail set deployed today is better than a perfect one next quarter. Iterate based on real incidents and evaluation data.
+> Start with simple guardrails, input validation and output toxicity filtering, before adding complex behavioral policies. A minimal guardrail set deployed today is better than a perfect one next quarter. Iterate based on real incidents and evaluation data.
 
 > [!WARNING]
 > Over-guardrailing can cripple agent utility. If every request triggers a guardrail violation, users will abandon the system. Strike a balance: tune thresholds on production data, not theoretical worst cases. Monitor false-positive rates and adjust aggressively.

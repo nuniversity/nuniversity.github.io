@@ -8,20 +8,20 @@ difficulty: "beginner"
 
 # Foundations of Agent Memory
 
-Memory is what separates a stateless chatbot from a truly intelligent agent. Without memory, every interaction starts from scratch — the agent cannot learn, personalize, or carry context across turns.
+Memory is what separates a stateless chatbot from a truly intelligent agent. Without memory, every interaction starts from scratch: the agent cannot learn, personalize, or carry context across turns.
 
 ---
 
 ## Why Agents Need Memory
 
-Modern LLMs are stateless by nature: they process a single context window and forget everything once the response is generated. Agents, however, operate over multiple steps — they call tools, revisit earlier conclusions, and interact with users over long sessions.
+Modern LLMs are stateless by nature: they process a single context window and forget everything once the response is generated. Agents, however, operate over multiple steps; they call tools, revisit earlier conclusions, and interact with users over long sessions.
 
 Memory enables:
 
-- **Continuity** — the agent remembers what was said earlier in the conversation
-- **Personalization** — user preferences persist across sessions
-- **Learning** — facts extracted from one interaction inform future ones
-- **Coherence** — multi-step reasoning chains stay consistent
+- **Continuity**: the agent remembers what was said earlier in the conversation
+- **Personalization**: user preferences persist across sessions
+- **Learning**: facts extracted from one interaction inform future ones
+- **Coherence**: multi-step reasoning chains stay consistent
 
 [!WARNING]
 Without explicit memory, an agent cannot distinguish between "tell me about my last order" and "tell me about your capabilities." The context window alone is insufficient for persistent knowledge.
@@ -42,7 +42,7 @@ Agents, like humans, use multiple memory systems that operate at different times
 | Use case | Immediate conversation history | User profile, learned facts |
 
 [!NOTE]
-Short-term memory in agents is analogous to human working memory — it holds information temporarily while the agent processes the current task. The key difference is that agent STM is bounded by token limits, not by cognitive capacity.
+Short-term memory in agents is analogous to human working memory; it holds information temporarily while the agent processes the current task. The key difference is that agent STM is bounded by token limits, not by cognitive capacity.
 
 ---
 
@@ -50,8 +50,8 @@ Short-term memory in agents is analogous to human working memory — it holds in
 
 Another key distinction comes from cognitive science:
 
-- **Episodic memory** — stores specific events or past interactions ("the user asked about pricing on Tuesday")
-- **Semantic memory** — stores general factual knowledge ("pricing is $10/month for the pro plan")
+- **Episodic memory**: stores specific events or past interactions ("the user asked about pricing on Tuesday")
+- **Semantic memory**: stores general factual knowledge ("pricing is $10/month for the pro plan")
 
 Episodic memory helps the agent recall what happened. Semantic memory helps the agent know what is true.
 
@@ -154,13 +154,13 @@ print(structured["facts"])
 ```
 
 [!NOTE]
-The encoding strategy you choose directly impacts memory retrieval performance. Raw encoding preserves full fidelity but requires more storage and slower search. Structured encoding is compact and fast to query but loses nuanced meaning. Most production systems use a combination — raw for recent context, structured for long-term facts, and semantic embeddings for knowledge retrieval.
+The encoding strategy you choose directly impacts memory retrieval performance. Raw encoding preserves full fidelity but requires more storage and slower search. Structured encoding is compact and fast to query but loses nuanced meaning. Most production systems use a combination: raw for recent context, structured for long-term facts, and semantic embeddings for knowledge retrieval.
 
 ---
 
 ## Retrieval Cues and Memory Recall
 
-Memory recall in agents is triggered by retrieval cues — signals that indicate which memories are relevant to the current context. Good retrieval cue design is essential for effective memory usage.
+Memory recall in agents is triggered by retrieval cues: signals that indicate which memories are relevant to the current context. Good retrieval cue design is essential for effective memory usage.
 
 ```python
 class RetrievalCue:
@@ -214,7 +214,7 @@ Types of retrieval cues commonly used in agent systems:
 
 ## Working Memory in Agents
 
-Working memory is the agent's scratchpad — the temporary space where intermediate reasoning steps, tool outputs, and partial results live during a single turn.
+Working memory is the agent's scratchpad: the temporary space where intermediate reasoning steps, tool outputs, and partial results live during a single turn.
 
 ```python
 class AgentWorkingMemory:
@@ -245,7 +245,7 @@ wm.add_step("format_response", "Prepared summary")
 print(wm.get_context())
 ```
 
-Working memory is not persisted — it is cleared between turns or when the task completes.
+Working memory is not persisted; it is cleared between turns or when the task completes.
 
 ---
 
@@ -255,10 +255,10 @@ Every LLM has a fixed context window (4K, 8K, 32K, 128K tokens). When the conver
 
 Strategies:
 
-- **Sliding window** — keep the last N messages, drop older ones
-- **Summarization** — condense earlier conversation into a summary
-- **Selective retention** — keep important facts, drop filler
-- **Hybrid** — keep a summary + recent messages + retrieved facts
+- **Sliding window**: keep the last N messages, drop older ones
+- **Summarization**: condense earlier conversation into a summary
+- **Selective retention**: keep important facts, drop filler
+- **Hybrid**: keep a summary + recent messages + retrieved facts
 
 ```python
 from collections import deque
@@ -423,14 +423,14 @@ print(memory.get_context("alice_42")["facts"])
 | Deletion API | Allow users to delete their memories | GDPR/CCPA right-to-delete compliance |
 
 [!IMPORTANT]
-Memory governance is critical in production. A single memory leak — where User A's data appears in User B's context — can violate privacy regulations (GDPR, CCPA) and erode user trust. Always implement user-level memory isolation as a foundational requirement, not an afterthought.
+Memory governance is critical in production. A single memory leak, where User A's data appears in User B's context, can violate privacy regulations (GDPR, CCPA) and erode user trust. Always implement user-level memory isolation as a foundational requirement, not an afterthought.
 
 ---
 
-## Context Window vs. Memory — Key Distinction
+## Context Window vs. Memory: Key Distinction
 
 [!IMPORTANT]
-The context window is NOT memory — it is temporary storage that gets overwritten every turn. True memory requires writing to and reading from an external persistence layer. Never confuse the context window with long-term memory.
+The context window is NOT memory; it is temporary storage that gets overwritten every turn. True memory requires writing to and reading from an external persistence layer. Never confuse the context window with long-term memory.
 
 | Aspect | Context Window | Memory System |
 | :--- | :--- | :--- |
@@ -456,7 +456,7 @@ The context window is NOT memory — it is temporary storage that gets overwritt
     "They don't use context windows"
   ],
   "correct": 1,
-  "explanation": "LLMs are stateless because they process each input independently — they have no built-in mechanism to carry context or memory across interactions."
+  "explanation": "LLMs are stateless because they process each input independently; they have no built-in mechanism to carry context or memory across interactions."
 }
 ```
 
@@ -549,7 +549,7 @@ The context window is NOT memory — it is temporary storage that gets overwritt
     "Every user message",
     "Time-based expiration or explicit consolidation event",
     "Only when the agent shuts down",
-    "Never — short-term memory never moves to long-term"
+    "Never: short-term memory never moves to long-term"
   ],
   "correct": 1,
   "explanation": "Consolidation is triggered by time-based TTL or explicit events like session end or reaching a token threshold."

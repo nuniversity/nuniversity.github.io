@@ -318,7 +318,7 @@ flowchart TD
 | Usa el color con intención | Usar colores aleatorios sin significado |
 
 > [!WARNING] Error común
-> No uses un rectángulo para las decisiones solo porque es más fácil de escribir. La forma de rombo es universalmente reconocida como punto de decisión — usar la forma equivocada confunde a los lectores.
+> No uses un rectángulo para las decisiones solo porque es más fácil de escribir. La forma de rombo es universalmente reconocida como punto de decisión: usar la forma equivocada confunde a los lectores.
 
 ### Convenciones de codificación por colores
 
@@ -349,12 +349,12 @@ Para cada descripción, identifica la forma correcta del símbolo:
 <details>
 <summary>Haz clic para ver las respuestas</summary>
 
-1. **Rombo** `{}` — Punto de decisión
-2. **Rectángulo ondulado** `[[]]` — Documento
-3. **Rectángulo redondeado** `([ ])` — Terminal (Inicio)
-4. **Paralelogramo** `[/ /]` — Entrada
-5. **Cilindro** `[[( )]]` — Base de datos
-6. **Círculo** `(( ))` — Conector (o rectángulo de línea doble para un proceso predefinido)
+1. **Rombo** `{}`: Punto de decisión
+2. **Rectángulo ondulado** `[[]]`: Documento
+3. **Rectángulo redondeado** `([ ])`: Terminal (Inicio)
+4. **Paralelogramo** `[/ /]`: Entrada
+5. **Cilindro** `[[( )]]`: Base de datos
+6. **Círculo** `(( ))`: Conector (o rectángulo de línea doble para un proceso predefinido)
 
 </details>
 
@@ -397,9 +397,9 @@ Crea un diagrama de flujo para "Hacer una llamada telefónica" usando al menos:
 - Los diagramas de flujo usan **símbolos estandarizados** que se entienden universalmente
 - El **conjunto básico de símbolos** incluye: terminales, procesos, decisiones, E/S, documentos, bases de datos y conectores
 - Etiqueta siempre **las bifurcaciones de decisión** con claridad
-- Usa **formas consistentes** — no mezcles símbolos para el mismo propósito
+- Usa **formas consistentes**: no mezcles símbolos para el mismo propósito
 - La **codificación por colores** puede mejorar la legibilidad, pero no es obligatoria
-- Mantén el texto de los símbolos **conciso** — usa descripciones fuera del diagrama si es necesario
+- Mantén el texto de los símbolos **conciso**: usa descripciones fuera del diagrama si es necesario
 - En la próxima lección aplicaremos estos símbolos para **construir tus primeros diagramas de flujo** paso a paso
 
 > [!SUCCESS] Has completado la Lección 4

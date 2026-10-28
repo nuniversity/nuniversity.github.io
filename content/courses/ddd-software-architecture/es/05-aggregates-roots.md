@@ -1,6 +1,6 @@
 ---
 title: "Agregados y Raíces de Agregados"
-description: "Domina los Agregados y las Raíces de Agregado en DDD — límites de consistencia, invariantes transaccionales y cómo diseñar clústeres de entidades tratados como una sola unidad"
+description: "Domina los Agregados y las Raíces de Agregado en DDD, límites de consistencia, invariantes transaccionales y cómo diseñar clústeres de entidades tratados como una sola unidad"
 order: 5
 duration: "70 min"
 difficulty: "advanced"
@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Agregados y Raíces de Agregados
 
-Un Agregado es un **clúster de objetos de dominio** que puede tratarse como una sola unidad. Cada Agregado tiene una **Raíz de Agregado** — una única Entidad que actúa como punto de entrada y controla el acceso a todo lo que hay dentro del límite.
+Un Agregado es un **clúster de objetos de dominio** que puede tratarse como una sola unidad. Cada Agregado tiene una **Raíz de Agregado**: una única Entidad que actúa como punto de entrada y controla el acceso a todo lo que hay dentro del límite.
 
 > [!NOTE]
 > El patrón Agregado es la respuesta de DDD a la consistencia. En cualquier sistema con acceso concurrente y datos complejos, garantizar los invariantes (reglas de negocio que deben cumplirse siempre) es difícil. Los Agregados definen **límites de consistencia** claros que hacen que los invariantes sean aplicables.
@@ -238,7 +238,7 @@ class OrderWrong:
 
 ### 3. Define invariantes claros
 
-Cada agregado debe tener invariantes explícitos — reglas de negocio que deben cumplirse siempre.
+Cada agregado debe tener invariantes explícitos: reglas de negocio que deben cumplirse siempre.
 
 ```python
 class ShoppingCart:
@@ -552,7 +552,7 @@ class InventoryReservationHandler:
 ```
 
 > [!SUCCESS]
-> Los Agregados son el patrón táctico más importante de DDD para gestionar la consistencia. Definen límites claros que hacen que los invariantes sean aplicables, las transacciones manejables y el acceso concurrente predecible. Agregados pequeños, referenciados por ID, con consistencia eventual entre ellos — así se hace DDD.
+> Los Agregados son el patrón táctico más importante de DDD para gestionar la consistencia. Definen límites claros que hacen que los invariantes sean aplicables, las transacciones manejables y el acceso concurrente predecible. Agregados pequeños, referenciados por ID, con consistencia eventual entre ellos: así se hace DDD.
 
 ## Pruebas de los invariantes de Agregados
 
@@ -620,7 +620,7 @@ def test_aggregate_events_are_collected():
 
 4. **Diseño de consistencia eventual**: un sistema de comercio electrónico tiene agregados `Order` y `Customer` separados. Cuando se confirma un pedido, el `lifetime_value` del cliente debe actualizarse. Diseña esto usando eventos de dominio y consistencia eventual.
 
-5. **Límite de transacción**: dados los siguientes agregados — `Payment`, `Order`, `Shipment` — describe un escenario en el que una sola operación del usuario desencadene cambios en los tres. Muestra cómo diseñarías esto usando consistencia eventual.
+5. **Límite de transacción**: dados los siguientes agregados, `Payment`, `Order`, `Shipment`, describe un escenario en el que una sola operación del usuario desencadene cambios en los tres. Muestra cómo diseñarías esto usando consistencia eventual.
 
 6. **Redimensiona un agregado**: un agregado `ShoppingCart` contiene actualmente entidades `CartItem` con todos los datos del `Product` (name, description, image_url, price, weight, dimensions). Refactoriza el agregado para que el carrito solo contenga IDs y referencias de producto. Explica los compromisos.
 

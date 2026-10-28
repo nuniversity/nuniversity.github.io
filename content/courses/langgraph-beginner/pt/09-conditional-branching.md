@@ -181,7 +181,7 @@ Ao usar LLMs para roteamento, adicione uma etapa de pós-processamento para limp
 
 ## Loops Condicionais
 
-O uso mais comum de arestas condicionais é **looping** — repetir um nó até que uma condição seja atendida:
+O uso mais comum de arestas condicionais é **looping**: repetir um nó até que uma condição seja atendida:
 
 ```python
 class LoopState(TypedDict):
@@ -379,17 +379,17 @@ print(result["response"])  # Chat ou resultado de busca web
 ```
 
 [!SUCCESS]
-Este padrão — classificar → rotear → executar manipulador especializado — é a base de todos os agentes de roteamento inteligente.
+Este padrão, classificar → rotear → executar manipulador especializado, é a base de todos os agentes de roteamento inteligente.
 
 ---
 
 ## Melhores Práticas de Roteamento
 
-1. **Sempre trate todos os valores de rota possíveis** — faltar um mapeamento levanta um erro
+1. **Sempre trate todos os valores de rota possíveis**: faltar um mapeamento levanta um erro
 2. **Adicione uma rota padrão/fallback** para saídas inesperadas do roteador
 3. **Valide a saída do roteador** ao usar LLMs para roteamento
 4. **Use nomes de rota descritivos** que correspondam aos nomes dos nós para clareza
-5. **Limite a profundidade de roteamento** — cadeias condicionais profundamente aninhadas são difíceis de depurar
+5. **Limite a profundidade de roteamento**: cadeias condicionais profundamente aninhadas são difíceis de depurar
 6. **Registre a decisão de rota** para depuração e observabilidade
 
 ---

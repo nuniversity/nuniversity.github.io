@@ -21,9 +21,9 @@ for (let i = 0; i < 5; i++) {
 ```
 
 A `for` loop has three parts:
-1. **Initialization**: `let i = 0` — runs once before the loop
-2. **Condition**: `i < 5` — checked before each iteration
-3. **Update**: `i++` — runs after each iteration
+1. **Initialization**: `let i = 0`: runs once before the loop
+2. **Condition**: `i < 5`: checked before each iteration
+3. **Update**: `i++`: runs after each iteration
 
 ## The while Loop
 
@@ -139,4 +139,4 @@ console.log(sumTo(100)); // Output: 5050
 
 ## Next Steps
 
-Now that you can repeat actions, the next lesson covers data structures — arrays and objects for organizing data.
+Now that you can repeat actions, the next lesson covers data structures: arrays and objects for organizing data.

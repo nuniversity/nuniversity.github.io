@@ -10,7 +10,7 @@ duration: "30 min"
 
 ## ¿Qué es un Prompt?
 
-Un prompt es la entrada que proporcionas a un LLM para obtener una respuesta específica. Es la unidad fundamental de interacción con modelos de IA modernos como GPT-4, Claude y Llama. La calidad de tu prompt determina directamente la calidad de la salida del modelo — basura entra, basura sale sigue siendo tan cierto para IA como para software tradicional.
+Un prompt es la entrada que proporcionas a un LLM para obtener una respuesta específica. Es la unidad fundamental de interacción con modelos de IA modernos como GPT-4, Claude y Llama. La calidad de tu prompt determina directamente la calidad de la salida del modelo: basura entra, basura sale sigue siendo tan cierto para IA como para software tradicional.
 
 ### Flujo de Entrada/Salida del LLM
 
@@ -50,7 +50,7 @@ Cada llamada de API pasa por múltiples etapas: tokenización convierte tu texto
 
 ## Tokenización
 
-Tokenización es el proceso de dividir el texto en unidades más pequeñas (tokens) que el modelo puede entender. Diferentes modelos usan diferentes algoritmos de tokenización — GPT-4 usa Byte-Pair Encoding (BPE), mientras que otros modelos pueden usar SentencePiece o WordPiece.
+Tokenización es el proceso de dividir el texto en unidades más pequeñas (tokens) que el modelo puede entender. Diferentes modelos usan diferentes algoritmos de tokenización: GPT-4 usa Byte-Pair Encoding (BPE), mientras que otros modelos pueden usar SentencePiece o WordPiece.
 
 ### Datos sobre Tokens:
 - 1 token ≈ 4 caracteres en inglés
@@ -101,7 +101,7 @@ flowchart LR
 ```
 
 [!IMPORTANT]
-Cada modelo tiene una **ventana de contexto** (GPT-4: 8K-128K, Claude 3: 200K, Gemini: 32K-1M). La suma de tu mensaje de sistema + historial de conversación + entrada del usuario + salida generada **debe caber** dentro de esta ventana. Una vez excedida, el modelo trunca mensajes más antiguos — potencialmente perdiendo contexto importante.
+Cada modelo tiene una **ventana de contexto** (GPT-4: 8K-128K, Claude 3: 200K, Gemini: 32K-1M). La suma de tu mensaje de sistema + historial de conversación + entrada del usuario + salida generada **debe caber** dentro de esta ventana. Una vez excedida, el modelo trunca mensajes más antiguos: potencialmente perdiendo contexto importante.
 
 ---
 
@@ -116,10 +116,10 @@ Los LLMs usan un historial de conversación con tres roles distintos:
 | **Asistente** | Representa las respuestas anteriores de la IA en el historial | "Puedes usar la función sorted() o el método .sort()..." |
 
 [!NOTE]
-El mensaje de sistema es particularmente poderoso—persiste durante toda la conversación y guía cómo el modelo responde a todos los mensajes subsecuentes.
+El mensaje de sistema es particularmente poderoso: persiste durante toda la conversación y guía cómo el modelo responde a todos los mensajes subsecuentes.
 
 [!IMPORTANT]
-**Mejores prácticas de prompt de sistema:** Sé específico sobre la persona del modelo, formato de salida y restricciones. Incluye salvaguardas como "Si no sabes la respuesta, dilo." Evita instrucciones vagas como "sé útil" — en su lugar, describe cómo se ve ser útil en tu contexto.
+**Mejores prácticas de prompt de sistema:** Sé específico sobre la persona del modelo, formato de salida y restricciones. Incluye salvaguardas como "Si no sabes la respuesta, dilo." Evita instrucciones vagas como "sé útil": en su lugar, describe cómo se ve ser útil en tu contexto.
 
 ```python
 from openai import OpenAI
@@ -201,7 +201,7 @@ flowchart LR
 ```
 
 [!TIP]
-**Eligiendo valores de temperature:** Para tareas factuales (clasificación, extracción, Q&A), usa 0.0-0.3. Para tareas creativas (escritura de historias, brainstorming), usa 0.7-1.2. Evita temperatures por encima de 1.5 a menos que quieras salida casi aleatoria — la salida "creativa" rápidamente se vuelve incoherente.
+**Eligiendo valores de temperature:** Para tareas factuales (clasificación, extracción, Q&A), usa 0.0-0.3. Para tareas creativas (escritura de historias, brainstorming), usa 0.7-1.2. Evita temperatures por encima de 1.5 a menos que quieras salida casi aleatoria: la salida "creativa" rápidamente se vuelve incoherente.
 
 [!WARNING]
 Configurar temperature > 1.0 o top_p > 0.9 puede llevar a respuestas incoherentes o alucinadas. Para tareas factuales, usa temperature 0.0-0.5.
@@ -277,7 +277,7 @@ flowchart LR
 | Formatos nuevos | Malo | Modelos necesitan ejemplos de nuevas estructuras |
 
 [!NOTE]
-Zero-shot funciona sorprendentemente bien para tareas que el modelo encontró durante el entrenamiento. Le cuesta con casos límite, dominios altamente especializados o requisitos precisos de formato — ahí es donde entran las técnicas few-shot y avanzadas.
+Zero-shot funciona sorprendentemente bien para tareas que el modelo encontró durante el entrenamiento. Le cuesta con casos límite, dominios altamente especializados o requisitos precisos de formato: ahí es donde entran las técnicas few-shot y avanzadas.
 
 ---
 
@@ -387,7 +387,7 @@ Zero-shot funciona sorprendentemente bien para tareas que el modelo encontró du
   "id": "pe-01-es-q10",
   "type": "multiple-choice",
   "question": "Un ingeniero de prompts compara un modelo Llama 2 (32K vocabulario) con un GPT-4 (100K vocabulario) para una tarea de generación de código. ¿Qué trade-off deben considerar?",
-  "options": ["Llama 2 usa menos tokens por palabra de código, reduciendo costos", "El vocabulario menor de Llama 2 puede usar más tokens para código, pero requiere menos memoria", "GPT-4 no puede procesar código", "No hay diferencia — todos los tokenizadores funcionan igual en código"],
+  "options": ["Llama 2 usa menos tokens por palabra de código, reduciendo costos", "El vocabulario menor de Llama 2 puede usar más tokens para código, pero requiere menos memoria", "GPT-4 no puede procesar código", "No hay diferencia: todos los tokenizadores funcionan igual en código"],
   "correct": 1,
   "explanation": "Un vocabulario menor significa que se necesitan más tokens para representar el mismo texto, potencialmente aumentando el tiempo de inferencia. Sin embargo, vocabularios más pequeños significan tablas de embedding más pequeñas, reduciendo requisitos de memoria."
 }

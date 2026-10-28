@@ -8,7 +8,7 @@ difficulty: "intermediário"
 
 # Classes e Objetos
 
-A programação orientada a objetos (POO) é um paradigma que organiza o código em torno de objetos — pacotes de dados e comportamento. Python suporta POO com uma sintaxe limpa e intuitiva.
+A programação orientada a objetos (POO) é um paradigma que organiza o código em torno de objetos: pacotes de dados e comportamento. Python suporta POO com uma sintaxe limpa e intuitiva.
 
 ## Definindo uma Classe
 
@@ -34,11 +34,11 @@ print(my_dog.get_human_years())  # 21
 ```
 
 > [!NOTE]
-> Diferente de Java ou C++, Python não requer `new` explícito para instanciar — você simplesmente chama a classe como se fosse uma função.
+> Diferente de Java ou C++, Python não requer `new` explícito para instanciar: você simplesmente chama a classe como se fosse uma função.
 
 ## O Parâmetro `self`
 
-`self` refere-se à instância atual. Deve ser o primeiro parâmetro de todo método de instância — mas você não o passa; o Python faz isso automaticamente.
+`self` refere-se à instância atual. Deve ser o primeiro parâmetro de todo método de instância, mas você não o passa; o Python faz isso automaticamente.
 
 ```python
 class Counter:
@@ -57,7 +57,7 @@ print(c.count)  # 5
 ```
 
 > [!WARNING]
-> `self` é apenas uma convenção — você poderia nomeá-lo `this` ou qualquer outra coisa — mas **sempre use `self`** para seguir os padrões da comunidade Python.
+> `self` é apenas uma convenção, você poderia nomeá-lo `this` ou qualquer outra coisa, mas **sempre use `self`** para seguir os padrões da comunidade Python.
 
 ## Atributos de Instância vs Classe
 
@@ -124,7 +124,7 @@ print(p)         # (3.5, 7.2)  — chama __str__
 ```
 
 > [!SUCCESS]
-> Sempre implemente `__repr__` em suas classes — isso torna a depuração drasticamente mais fácil. Implemente `__str__` quando quiser uma exibição bonita.
+> Sempre implemente `__repr__` em suas classes; isso torna a depuração drasticamente mais fácil. Implemente `__str__` quando quiser uma exibição bonita.
 
 ## Decoradores de Propriedade
 
@@ -209,9 +209,9 @@ Python não possui atributos verdadeiramente privados. A convenção usa sublinh
 | Convenção | Significado |
 |-----------|-------------|
 | `name` | Atributo público |
-| `_name` | "Protegido" — uso interno (convenção apenas) |
-| `__name` | "Privado" — aciona name mangling para `_ClassName__name` |
-| `__name__` | Dunder — métodos especiais do Python, não invente os seus |
+| `_name` | "Protegido": uso interno (convenção apenas) |
+| `__name` | "Privado": aciona name mangling para `_ClassName__name` |
+| `__name__` | Dunder: métodos especiais do Python, não invente os seus |
 
 ```python
 class Person:
@@ -304,7 +304,7 @@ print(f"Total transactions: {len(acc)}")
 | Você precisa de múltiplas instâncias com mesmo comportamento | Operações pontuais |
 
 > [!SUCCESS]
-> POO é uma ferramenta, não uma regra. Python suporta múltiplos paradigmas — escolha o certo para cada problema.
+> POO é uma ferramenta, não uma regra. Python suporta múltiplos paradigmas: escolha o certo para cada problema.
 
 ## Perguntas de Prática
 

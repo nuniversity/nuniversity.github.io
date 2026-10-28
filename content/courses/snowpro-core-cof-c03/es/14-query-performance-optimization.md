@@ -1,12 +1,12 @@
 ---
-title: "Dominio 4.2 — Optimización del Rendimiento de Consultas"
+title: "Dominio 4.2, Optimización del Rendimiento de Consultas"
 description: "Aprende las herramientas de optimización de rendimiento de Snowflake: Query Acceleration Service, Search Optimization Service, claves de clúster y Vistas Materializadas. Conoce cuándo y cómo usar cada una."
 order: 14
 difficulty: intermediate
 duration: "60 min"
 ---
 
-# Dominio 4.2 — Optimización del Rendimiento de Consultas
+# Dominio 4.2: Optimización del Rendimiento de Consultas
 
 ## Peso en el Examen
 
@@ -67,12 +67,12 @@ SHOW TABLES LIKE 'orders';
 - Columnas de unión para tablas grandes
 
 **Malos candidatos:**
-- Cardinalidad muy baja (p. ej., columnas booleanas — solo 2 valores)
-- Cardinalidad muy alta con distribución aleatoria (p. ej., claves primarias UUID — poda deficiente)
+- Cardinalidad muy baja (p. ej., columnas booleanas: solo 2 valores)
+- Cardinalidad muy alta con distribución aleatoria (p. ej., claves primarias UUID: poda deficiente)
 - Columnas raramente usadas en filtros
 
 > [!WARNING]
-> Las claves de clúster activan el **Clustering Automático** — un servicio en segundo plano que consume créditos de forma continua. Solo agrupa tablas donde la ganancia en rendimiento de consultas supera el costo.
+> Las claves de clúster activan el **Clustering Automático**: un servicio en segundo plano que consume créditos de forma continua. Solo agrupa tablas donde la ganancia en rendimiento de consultas supera el costo.
 
 ### Costo del Re-clustering
 
@@ -147,9 +147,9 @@ SELECT * FROM SNOWFLAKE.ACCOUNT_USAGE.SEARCH_OPTIMIZATION_HISTORY;
 
 ---
 
-## Query Acceleration Service (Servicio de Aceleración de Consultas — QAS)
+## Query Acceleration Service (Servicio de Aceleración de Consultas: QAS)
 
-El **Query Acceleration Service (QAS)** descarga porciones de **consultas atípicamente lentas** al cómputo sin servidor de Snowflake — útil cuando un pequeño número de consultas tarda desproporcionadamente en un warehouse compartido:
+El **Query Acceleration Service (QAS)** descarga porciones de **consultas atípicamente lentas** al cómputo sin servidor de Snowflake: útil cuando un pequeño número de consultas tarda desproporcionadamente en un warehouse compartido:
 
 ### Cuándo Usar QAS
 
@@ -293,10 +293,10 @@ La consulta es lenta porque...
 
 **P4.** ¿Qué candidato de clave de clúster proporcionaría la PEOR poda para una tabla de pedidos de 1,000 millones de filas?
 
-- A) `(order_date)` — fecha del pedido
-- B) `(region)` — región geográfica (20 valores)
-- C) `(order_uuid)` — clave primaria UUID generada aleatoriamente ✅
-- D) `(product_category)` — 50 categorías
+- A) `(order_date)`: fecha del pedido
+- B) `(region)`: región geográfica (20 valores)
+- C) `(order_uuid)`: clave primaria UUID generada aleatoriamente ✅
+- D) `(product_category)`: 50 categorías
 
 **P5.** ¿Qué funcionalidades de Snowflake requieren edición Enterprise para estas tres capacidades: Vistas Materializadas, Search Optimization y Query Acceleration?
 

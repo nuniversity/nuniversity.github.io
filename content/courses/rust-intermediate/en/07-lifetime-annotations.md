@@ -12,7 +12,7 @@ Lifetimes ensure references are always valid. The borrow checker tracks them imp
 
 ## Why Lifetimes?
 
-Every reference has a **lifetime** — the scope for which the reference is valid. Most of the time, lifetimes are implicit (elided). But sometimes the compiler needs help:
+Every reference has a **lifetime**: the scope for which the reference is valid. Most of the time, lifetimes are implicit (elided). But sometimes the compiler needs help:
 
 ```rust
 // ERROR: missing lifetime specifier
@@ -148,7 +148,7 @@ fn handle<T: 'static>(t: T) { /* T has no non-'static references */ }
 ```
 
 > [!WARNING]
-> `'static` doesn't mean "lives forever at runtime" — it means "valid for the entire program's execution." Stack-allocated values with `'static` bounds can still be freed, just not while borrowed.
+> `'static` doesn't mean "lives forever at runtime"; it means "valid for the entire program's execution." Stack-allocated values with `'static` bounds can still be freed, just not while borrowed.
 
 ### Common Misconception
 

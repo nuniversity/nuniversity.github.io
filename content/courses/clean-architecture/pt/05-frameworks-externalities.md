@@ -8,7 +8,7 @@ difficulty: "intermediário"
 
 # Frameworks e Externalidades
 
-Na Arquitetura Limpa, frameworks e ferramentas externas são **detalhes** — eles são a camada mais externa, não a fundação. Esta lição mostra como manter sua lógica de negócio independente de frameworks enquanto ainda aproveita ferramentas poderosas.
+Na Arquitetura Limpa, frameworks e ferramentas externas são **detalhes**: eles são a camada mais externa, não a fundação. Esta lição mostra como manter sua lógica de negócio independente de frameworks enquanto ainda aproveita ferramentas poderosas.
 
 > [!NOTE]
 > Frameworks são ferramentas, não arquiteturas. Uma boa arquitetura permite usar um framework sem estar acoplado a ele. Você deve poder trocar Flask por FastAPI sem mudar uma linha de lógica de negócio.
@@ -259,7 +259,7 @@ def get_order(order_id: str):
 ```
 
 > [!SUCCESS]
-> Quando frameworks são tratados como detalhes, migrar do Flask para FastAPI é questão de reescrever um arquivo adaptador — não a aplicação inteira.
+> Quando frameworks são tratados como detalhes, migrar do Flask para FastAPI é questão de reescrever um arquivo adaptador: não a aplicação inteira.
 
 ## Lista de Verificação para Seleção de Framework
 

@@ -215,7 +215,7 @@ A memorização dos valores trigonométricos para 30°, 45° e 60° é essencial
 
 ---
 
-## 6. O Círculo Unitário — Explicação Detalhada
+## 6. O Círculo Unitário: Explicação Detalhada
 
 ### Construção do Círculo Unitário
 
@@ -266,14 +266,14 @@ onde θ é o ângulo medido a partir do eixo x positivo.
 
 | Quadrante | Ângulos | sen | cos | tan |
 |:---------:|:-------:|:---:|:---:|:---:|
-| I | 0°–90° | + | + | + |
-| II | 90°–180° | + | - | - |
-| III | 180°–270° | - | - | + |
-| IV | 270°–360° | - | + | - |
+| I | 0°: 90° | + | + | + |
+| II | 90°: 180° | + | - | - |
+| III | 180°: 270° | - | - | + |
+| IV | 270°: 360° | - | + | - |
 
 ---
 
-## 7. Identidade Pitagórica — sin²θ + cos²θ = 1
+## 7. Identidade Pitagórica; sin²θ + cos²θ = 1
 
 ### Prova
 
@@ -361,7 +361,7 @@ Dois navios partem do mesmo porto. Navio A viaja 50 km a leste, Navio B viaja 30
 
 ---
 
-## 9. Trigonometria — Exercícios Interativos
+## 9. Trigonometria: Exercícios Interativos
 
 ### Valores Trigonométricos
 

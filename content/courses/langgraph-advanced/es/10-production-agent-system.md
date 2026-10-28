@@ -1,6 +1,6 @@
 ---
 title: "Proyecto Final: Agente de Soporte al Cliente de Producción"
-description: "Construye un agente de soporte al cliente de nivel de producción con enrutamiento multi-agente, RAG, transferencia a humano y monitoreo — integrando todo del curso Avanzado."
+description: "Construye un agente de soporte al cliente de nivel de producción con enrutamiento multi-agente, RAG, transferencia a humano y monitoreo, integrando todo del curso Avanzado."
 order: 10
 duration: "50 min"
 difficulty: "advanced"
@@ -549,7 +549,7 @@ Este sistema de grado de producción combina enrutamiento, RAG, consultas SQL, t
   "question": "What mechanism allows human agents to handle escalated tickets?",
   "options": [
     "Email notification",
-    "The interrupt() function — pauses graph, waits for human input, resumes",
+    "The interrupt() function: pauses graph, waits for human input, resumes",
     "A separate chat system",
     "Humans are not supported"
   ],

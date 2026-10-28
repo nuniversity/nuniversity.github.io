@@ -46,7 +46,7 @@ flowchart TD
 
 ## Property 1: Input
 
-An algorithm must have **zero or more inputs** -- values or data provided to the algorithm before it begins execution.
+An algorithm must have **zero or more inputs**: values or data provided to the algorithm before it begins execution.
 
 ### Understanding Input
 
@@ -91,7 +91,7 @@ END ALGORITHM
 
 ## Property 2: Output
 
-An algorithm must produce **at least one output** -- a result that has a specified relation to the inputs.
+An algorithm must produce **at least one output**: a result that has a specified relation to the inputs.
 
 ### Why Output Matters
 
@@ -127,7 +127,7 @@ END ALGORITHM
 
 ## Property 3: Definiteness
 
-Each step of an algorithm must be **precisely defined** -- there should be no ambiguity about what to do at any point.
+Each step of an algorithm must be **precisely defined**; there should be no ambiguity about what to do at any point.
 
 ### The Problem with Ambiguity
 
@@ -174,11 +174,11 @@ END ALGORITHM
 
 ## Property 4: Finiteness
 
-An algorithm must **terminate after a finite number of steps** -- it cannot run forever.
+An algorithm must **terminate after a finite number of steps**; it cannot run forever.
 
 ### Infinite Loops
 
-The most common violation of finiteness is an infinite loop -- a loop that never ends because its termination condition is never met.
+The most common violation of finiteness is an infinite loop: a loop that never ends because its termination condition is never met.
 
 ```mermaid
 flowchart TD
@@ -235,7 +235,7 @@ STEP 2: WHILE COUNTER is not equal to 5 DO
 
 ## Property 5: Effectiveness
 
-Every step of an algorithm must be **basic enough to be carried out** -- in principle, by a person using only pencil and paper in a finite amount of time.
+Every step of an algorithm must be **basic enough to be carried out**: in principle, by a person using only pencil and paper in a finite amount of time.
 
 ### What Makes a Step Effective?
 

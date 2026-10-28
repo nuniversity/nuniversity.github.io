@@ -8,14 +8,14 @@ difficulty: "intermediate"
 
 # Introduction to Functional Programming with Python
 
-So far you have written imperative code — step-by-step instructions that change state. Functional programming is a different paradigm: it emphasizes pure functions, immutability, and transforming data through pipelines.
+So far you have written imperative code: step-by-step instructions that change state. Functional programming is a different paradigm: it emphasizes pure functions, immutability, and transforming data through pipelines.
 
 ## What is Functional Programming?
 
 Functional programming treats computation as the evaluation of mathematical functions. Key principles:
 
 - **Pure functions**: Same input always produces the same output, no side effects
-- **Immutability**: Data is never modified — instead, new data is created
+- **Immutability**: Data is never modified: instead, new data is created
 - **Function composition**: Build complex operations by combining simple functions
 
 ## Pure Functions

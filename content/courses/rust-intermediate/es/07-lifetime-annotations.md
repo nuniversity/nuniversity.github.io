@@ -12,7 +12,7 @@ Los lifetimes garantizan que las referencias son siempre válidas. El borrow che
 
 ## ¿Por qué Lifetimes?
 
-Toda referencia tiene un **lifetime** — el ámbito para el cual la referencia es válida. La mayoría del tiempo, los lifetimes son implícitos (elididos). Pero a veces el compilador necesita ayuda:
+Toda referencia tiene un **lifetime**: el ámbito para el cual la referencia es válida. La mayoría del tiempo, los lifetimes son implícitos (elididos). Pero a veces el compilador necesita ayuda:
 
 ```rust
 // ERROR: missing lifetime specifier
@@ -148,7 +148,7 @@ fn handle<T: 'static>(t: T) { /* T no tiene referencias no-'static */ }
 ```
 
 > [!WARNING]
-> `'static` no significa "vive para siempre en tiempo de ejecución" — significa "válido para toda la ejecución del programa." Los valores asignados en la pila con bounds `'static` aún pueden liberarse, solo no mientras están prestados.
+> `'static` no significa "vive para siempre en tiempo de ejecución": significa "válido para toda la ejecución del programa." Los valores asignados en la pila con bounds `'static` aún pueden liberarse, solo no mientras están prestados.
 
 ### Concepto Erróneo Común
 

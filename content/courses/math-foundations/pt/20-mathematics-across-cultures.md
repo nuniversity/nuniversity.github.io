@@ -17,7 +17,7 @@ difficulty: "beginner"
 Do Osso de Ishángo na África (20.000 a.C.) à ciência da computação moderna, a matemática foi um esforço humano compartilhádo. Ao estudar contribuições diversas, ganhámos uma compreensão mais rica deste belo assunto.
 
 > [!NOTE]
-> A matemática não pertence a uma cultura — é uma conquista da humanidade.
+> A matemática não pertence a uma cultura: é uma conquista da humanidade.
 
 ---
 
@@ -188,7 +188,7 @@ Ao final desta lição, você será capaz de:
 ---
 ## 5. Revisão Abrangente do Curso
 
-### Problema 1 — Conversão de Numeração (Aula 1)
+### Problema 1: Conversão de Numeração (Aula 1)
 
 **Problema:** Converta o número decimal 245 para binário e para o sistema sexagesimal babilônico.
 
@@ -212,7 +212,7 @@ $$245_{10} = 4 \times 60 + 5 = 4{,}5_{60}$$
 
 ---
 
-### Problema 2 — Algebra (Aula 5)
+### Problema 2: Algebra (Aula 5)
 
 **Problema:** Resolva o sistema:
 $$\begin{cases} 2x + 3y = 12 \\ x - y = 1 \end{cases}$$
@@ -229,7 +229,7 @@ $$x = 2 + 1 = 3$$
 
 ---
 
-### Problema 3 — Geometria (Aula 9)
+### Problema 3: Geometria (Aula 9)
 
 **Problema:** Um triangulo retangulo tem catetos de comprimento 5 cm e 12 cm. Encontre a hipotenusa e a area.
 
@@ -240,7 +240,7 @@ $$A = \frac{a \times b}{2} = \frac{5 \times 12}{2} = 30 \text{ cm}^2$$
 
 ---
 
-### Problema 4 — Estatistica (Aula 13)
+### Problema 4: Estatistica (Aula 13)
 
 **Problema:** Os pesos (em kg) de 6 alunos sao: 45, 52, 48, 55, 50, 47. Calcule a media, mediana e variancia.
 
@@ -251,7 +251,7 @@ $$A = \frac{a \times b}{2} = \frac{5 \times 12}{2} = 30 \text{ cm}^2$$
 
 ---
 
-### Problema 5 — Probabilidade (Aula 15)
+### Problema 5: Probabilidade (Aula 15)
 
 **Problema:** Em um saco há 5 bolas vermelhás, 3 azuis e 2 brancas. Qual é a probabilidade de sortear 2 bolas vermelhás consecutivas **sem reposicao**?
 
@@ -264,7 +264,7 @@ $$= \frac{5}{10} \times \frac{4}{9} = \frac{20}{90} = \frac{2}{9} \approx 0{,}22
 
 ## 6. Perfis de Matemáticos Modernos
 
-### Maryam Mirzakháni (1977–2017) — Iran
+### Maryam Mirzakháni (1977 to 2017): Iran
 
 Maryam Mirzakháni foi a **primeira mulher** a receber a Medalhá Fields (2014), o premio mais importante da matematica. Nascida em Teera, Iran, ela se formou na Universidade Shárif e fez seu doutorado na Harvard.
 
@@ -280,7 +280,7 @@ Mirzakháni trabalhou na Universidade Stanford e mostrou que a matematica não t
 
 ---
 
-### Aksháy Venkatesh (n. 1981) — Índia/Austrália
+### Aksháy Venkatesh (n. 1981): Índia/Austrália
 
 Aksháy Venkatesh recebeu a **Medalhá Fields** em 2018, tornando-se o segundo indiano a receber este premio (após Manjul Bhárgava).
 
@@ -293,7 +293,7 @@ Nascido em Hyderabad, India, Venkatesh se mudou para a Austrália jovem. Estudou
 
 ---
 
-### Eduardo Knipling (n. 1987) — Brasil
+### Eduardo Knipling (n. 1987): Brasil
 
 Eduardo Knipling e um matematico brasileiro que se destacou em **combinatória e teoria dos grafos**. Formado pela Universidade de Sao Paulo, ele pesquisa problemas de otimizacao em grafos.
 
@@ -305,7 +305,7 @@ Eduardo Knipling e um matematico brasileiro que se destacou em **combinatória e
 Knipling demonstra que o Brasil tem matematicos de nivel mundial e que a pesquisa matematica brasileira cresce a cada ano.
 
 > [!NOTE]
-> Estes matematicos mostram que a matematica moderna e verdadeiramente global — do Iran a India, do Brasil a todo o mundo.
+> Estes matematicos mostram que a matematica moderna e verdadeiramente global: do Iran a India, do Brasil a todo o mundo.
 
 ---
 

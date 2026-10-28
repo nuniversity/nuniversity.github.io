@@ -14,9 +14,9 @@ difficulty: "beginner"
 
 ## A Jornada dos Números
 
-Por milhares de anos, os seres humanos lutaram para responder uma pergunta simples: *como contar?* A resposta que encontraram não apenas definiu civilizações inteiras — ela moldou a forma como pensamos, construímos e entendemos o universo.
+Por milhares de anos, os seres humanos lutaram para responder uma pergunta simples: *como contar?* A resposta que encontraram não apenas definiu civilizações inteiras: ela moldou a forma como pensamos, construímos e entendemos o universo.
 
-Em torno de 3000 a.C., escribas sumérios desenvolveram um dos primeiros sistemas numéricos conhecidos. Eles usavam marcas em formato de cunha em tablets de argila — o sistema sexagesimal (base-60). Ainda hoje usamos esse sistema: 60 segundos em um minuto, 60 minutos em uma hora, 360 graus em um círculo.
+Em torno de 3000 a.C., escribas sumérios desenvolveram um dos primeiros sistemas numéricos conhecidos. Eles usavam marcas em formato de cunha em tablets de argila, o sistema sexagesimal (base-60). Ainda hoje usamos esse sistema: 60 segundos em um minuto, 60 minutos em uma hora, 360 graus em um círculo.
 
 > [!NOTE]
 > A história dos números é, na verdade, a história da humanidade aprendendo a pensar de forma abstrata. Cada sistema numérico representa um salto cognitivo monumental.
@@ -70,7 +70,7 @@ Para escrever 243, os egípcios usariam: ↊ ↊ ∩ ∩ ∩ ∩ ∩ \| \| \|
 
 ### Numerais Babilônicos (Base-60)
 
-Os sumérios e depois os babilônios criaram um dos sistemas mais influentes da história. Usando apenas dois símbolos — uma cunha vertical (|) para 1 e uma cunha horizontal (⊏) para 10 — eles construíram um sistema sexagesimal elegante:
+Os sumérios e depois os babilônios criaram um dos sistemas mais influentes da história. Usando apenas dois símbolos, uma cunha vertical (|) para 1 e uma cunha horizontal (⊏) para 10, eles construíram um sistema sexagesimal elegante:
 
 ```text
 | = 1
@@ -159,7 +159,7 @@ a ÷ 0 = ? (indefinido)
 ```
 
 > [!WARNING]
-> A divisão por zero continua sendo indefinida. Não é apenas uma convenção — é uma necessidade lógica. Se pudéssemos dividir por zero, poderíamos "provar" que 1 = 2!
+> A divisão por zero continua sendo indefinida. Não é apenas uma convenção: é uma necessidade lógica. Se pudéssemos dividir por zero, poderíamos "provar" que 1 = 2!
 
 ---
 

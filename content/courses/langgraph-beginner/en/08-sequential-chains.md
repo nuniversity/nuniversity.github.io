@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Sequential Chains
 
-While LangGraph supports complex graph topologies, many applications are built on simple **sequential chains** — a linear sequence of nodes where each step builds on the previous one.
+While LangGraph supports complex graph topologies, many applications are built on simple **sequential chains**: a linear sequence of nodes where each step builds on the previous one.
 
 ---
 
@@ -299,7 +299,7 @@ def node_b(state: NestedState) -> dict:
   "question": "How does state flow in a sequential LangGraph chain?",
   "options": [
     "Each node has its own isolated state",
-    "State is shared — each node reads previous writes and adds its own",
+    "State is shared: each node reads previous writes and adds its own",
     "State is reset between each node",
     "State flows backward from last node to first"
   ],
@@ -320,7 +320,7 @@ def node_b(state: NestedState) -> dict:
     "An error is thrown"
   ],
   "correct": 2,
-  "explanation": "Default state update is replace — the last node to write a key determines its final value."
+  "explanation": "Default state update is replace: the last node to write a key determines its final value."
 }
 ```
 

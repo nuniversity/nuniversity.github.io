@@ -1,12 +1,12 @@
 ---
-title: "Result and Option — Error Handling Combinators"
+title: "Result and Option, Error Handling Combinators"
 description: "Master Result and Option types with unwrap, expect, map, and_then, ok_or, and combinator chains"
 order: 2
 duration: "45 minutes"
 difficulty: "intermediate"
 ---
 
-# Result and Option — Error Handling Combinators
+# Result and Option: Error Handling Combinators
 
 `Result<T, E>` and `Option<T>` are the two most important enums in Rust. They represent fallible computations and optional values, respectively.
 
@@ -17,7 +17,7 @@ difficulty: "intermediate"
 | `Option<T>` | `Some(T)` | `None` | Value may be absent |
 | `Result<T, E>` | `Ok(T)` | `Err(E)` | Operation may fail |
 
-## Unwrapping — The Crutch
+## Unwrapping: The Crutch
 
 ```rust
 fn main() {
@@ -61,7 +61,7 @@ fn compute_default() -> i32 {
 }
 ```
 
-## Mapping — Transform the Inside
+## Mapping: Transform the Inside
 
 ```rust
 fn main() {
@@ -234,7 +234,7 @@ fn parse_first_number(lines: &[String]) -> Option<i32> {
 }
 ```
 
-### Mixing Result and ? — The Problem
+### Mixing Result and ?: The Problem
 
 ```rust
 // This won't compile — Result and Option don't mix with ?

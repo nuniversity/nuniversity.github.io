@@ -87,7 +87,7 @@ The CPU clock determines how many cycles per second the processor can execute:
 | 5.0 GHz | 5,000,000,000 | High-performance workstations |
 
 > [!NOTE]
-> A 3.5 GHz CPU can execute billions of instructions per second. However, modern CPUs don't execute one instruction per cycle - they use pipelining and multiple cores to process many instructions simultaneously.
+> A 3.5 GHz CPU can execute billions of instructions per second. However, modern CPUs don't execute one instruction per cycle: they use pipelining and multiple cores to process many instructions simultaneously.
 
 ## Memory (RAM)
 

@@ -151,7 +151,7 @@ WHERE c.active = true;
 ```
 
 [!NOTE]
-`IN (subquery)` can be slower than `JOIN` because the subquery is materialized. However, `IN` handles NULLs differently — test for semantic equivalence.
+`IN (subquery)` can be slower than `JOIN` because the subquery is materialized. However, `IN` handles NULLs differently: test for semantic equivalence.
 
 ### 2. Use EXISTS Instead of COUNT(*)
 

@@ -118,7 +118,7 @@ class PlaceOrderUseCase:
         return order
 ```
 
-Notice how `PlaceOrderUseCase` depends only on **abstract interfaces** (`OrderRepository` and `PaymentGateway`). The concrete implementations come later — this is dependency inversion in action.
+Notice how `PlaceOrderUseCase` depends only on **abstract interfaces** (`OrderRepository` and `PaymentGateway`). The concrete implementations come later; this is dependency inversion in action.
 
 ## The Four Layers
 
@@ -347,7 +347,7 @@ class FakeNotificationService:
 ## The Screaming Architecture
 
 > [!NOTE]
-> A well-architected system **screams** its purpose. If you see a Django project, you know it's a web app. But a Clean Architecture project screams **what it does** — ecommerce, banking, logistics — regardless of the framework.
+> A well-architected system **screams** its purpose. If you see a Django project, you know it's a web app. But a Clean Architecture project screams **what it does**, ecommerce, banking, logistics, regardless of the framework.
 
 ```
 # A Clean Architecture project structure screams "this is an ecommerce system"
@@ -469,4 +469,4 @@ graph TD
 8. **Boundary refactoring**: Take a function that mixes HTTP parsing, business logic, and database access. Split it into three layers: controller, use case, and repository. Show each layer.
 
 > [!SUCCESS]
-> You have completed Lesson 1. Remember: architecture is about the decisions that matter — and making them reversible.
+> You have completed Lesson 1. Remember: architecture is about the decisions that matter, and making them reversible.

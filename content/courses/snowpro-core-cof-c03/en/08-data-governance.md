@@ -1,12 +1,12 @@
 ---
-title: "Domain 2.2 — Data Governance Features"
+title: "Domain 2.2, Data Governance Features"
 description: "Learn how Snowflake protects and governs data: Dynamic Data Masking, Row Access Policies, object tagging, data classification, privacy policies, Trust Center, encryption key management, and data lineage."
 order: 8
 difficulty: intermediate
 duration: "70 min"
 ---
 
-# Domain 2.2 — Data Governance Features
+# Domain 2.2: Data Governance Features
 
 ## Exam Weight
 
@@ -17,9 +17,9 @@ duration: "70 min"
 
 ---
 
-## Column-Level Security — Dynamic Data Masking
+## Column-Level Security: Dynamic Data Masking
 
-**Dynamic Data Masking** hides or obfuscates sensitive column values at query time based on the user's role — without changing the underlying data:
+**Dynamic Data Masking** hides or obfuscates sensitive column values at query time based on the user's role: without changing the underlying data:
 
 ```sql
 -- Create a masking policy
@@ -39,7 +39,7 @@ ALTER TABLE customers
 
 **Key facts for the exam:**
 - Masking policies are applied at the **column level**
-- They evaluate at **query time** — original data is unchanged
+- They evaluate at **query time**: original data is unchanged
 - Requires **Enterprise edition or higher**
 - A column can have only **one masking policy** applied at a time
 - The policy can be **conditional** (different masks for different roles)
@@ -61,9 +61,9 @@ ALTER TABLE employees
 
 ---
 
-## Row-Level Security — Row Access Policies
+## Row-Level Security: Row Access Policies
 
-**Row Access Policies** control which **rows** a user can see in a table or view — without creating separate views per role:
+**Row Access Policies** control which **rows** a user can see in a table or view: without creating separate views per role:
 
 ```sql
 -- Create a row access policy
@@ -85,7 +85,7 @@ ALTER TABLE orders
 ```
 
 **Key facts for the exam:**
-- Row Access Policies filter rows **invisibly** — unauthorized rows simply don't appear
+- Row Access Policies filter rows **invisibly**: unauthorized rows simply don't appear
 - Requires **Enterprise edition or higher**
 - Applied at the **table or view level** on specific columns
 - A table can have **one row access policy** applied
@@ -147,7 +147,7 @@ Snowflake's classification engine identifies patterns like:
 
 ## Privacy Policies
 
-**Privacy policies** (also called **projection policies**) prevent certain columns from being queried directly — the column can still be used in WHERE clauses for filtering but cannot be returned in SELECT results:
+**Privacy policies** (also called **projection policies**) prevent certain columns from being queried directly: the column can still be used in WHERE clauses for filtering but cannot be returned in SELECT results:
 
 ```sql
 CREATE PROJECTION POLICY ssn_protect AS () RETURNS PROJECTION_CONSTRAINT ->
@@ -164,7 +164,7 @@ ALTER TABLE employees
 
 ## Trust Center
 
-**Trust Center** is Snowflake's built-in **security posture management** tool — it evaluates your account against Snowflake's security best practices and industry standards:
+**Trust Center** is Snowflake's built-in **security posture management** tool; it evaluates your account against Snowflake's security best practices and industry standards:
 
 ```sql
 -- Access Trust Center in Snowsight: Admin → Trust Center
@@ -183,7 +183,7 @@ Trust Center checks include:
 - Over-privileged roles
 
 > [!NOTE]
-> Trust Center is a **read-only assessment tool** — it identifies issues but doesn't automatically fix them. It aligns with CIS Snowflake benchmarks and similar security frameworks.
+> Trust Center is a **read-only assessment tool**; it identifies issues but doesn't automatically fix them. It aligns with CIS Snowflake benchmarks and similar security frameworks.
 
 ---
 
@@ -197,7 +197,7 @@ By default, Snowflake manages all encryption keys using a **hierarchical key mod
 
 ### Tri-Secret Secure (Customer-Managed Keys)
 
-**Tri-Secret Secure** allows customers to maintain a **composite master key** — the encryption key is derived from both Snowflake's key AND the customer's key:
+**Tri-Secret Secure** allows customers to maintain a **composite master key**: the encryption key is derived from both Snowflake's key AND the customer's key:
 
 - Available on **Business Critical edition only**
 - Uses AWS KMS, Azure Key Vault, or Google Cloud KMS
@@ -271,7 +271,7 @@ ALTER DATABASE analytics REFRESH;
 ALTER DATABASE analytics PRIMARY;
 ```
 
-**Replication Group** — replicate multiple databases + other objects together:
+**Replication Group**: replicate multiple databases + other objects together:
 
 ```sql
 CREATE REPLICATION GROUP my_replication_group
@@ -280,7 +280,7 @@ CREATE REPLICATION GROUP my_replication_group
     ALLOWED_ACCOUNTS = 'myorg.disaster_recovery';
 ```
 
-**Failover Group** — adds automatic failover capability:
+**Failover Group**: adds automatic failover capability:
 
 ```sql
 CREATE FAILOVER GROUP my_failover_group
@@ -298,7 +298,7 @@ Snowflake provides **data lineage** through:
 
 ### Access History
 
-`SNOWFLAKE.ACCOUNT_USAGE.ACCESS_HISTORY` — tracks which objects were accessed (read/write) in each query:
+`SNOWFLAKE.ACCOUNT_USAGE.ACCESS_HISTORY`: tracks which objects were accessed (read/write) in each query:
 
 ```sql
 SELECT

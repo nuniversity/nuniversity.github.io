@@ -60,7 +60,7 @@ Hoje, fluxogramas são usados em praticamente todas as indústrias:
 
 ### 1. Comunicação Visual
 
-Um fluxograma pode comunicar um processo complexo em segundos — algo que poderia levar páginas de texto para descrever.
+Um fluxograma pode comunicar um processo complexo em segundos: algo que poderia levar páginas de texto para descrever.
 
 ```
 Descrição em Texto:                Fluxograma:
@@ -78,10 +78,10 @@ Descrição em Texto:                Fluxograma:
 ### 2. Análise de Processos
 
 Fluxogramas facilitam identificar:
-- **Redundâncias** — Etapas repetidas desnecessariamente
-- **Gargalos** — Pontos onde o trabalho acumula
-- **Etapas faltantes** — Lacunas no processo
-- **Complexidade desnecessária** — Caminhos excessivamente complicados
+- **Redundâncias**: Etapas repetidas desnecessariamente
+- **Gargalos**: Pontos onde o trabalho acumula
+- **Etapas faltantes**: Lacunas no processo
+- **Complexidade desnecessária**: Caminhos excessivamente complicados
 
 ### 3. Alinhamento da Equipe
 
@@ -300,10 +300,10 @@ Para cada cenário, determine qual tipo de fluxograma seria mais apropriado:
 <details>
 <summary>Clique para ver as respostas</summary>
 
-1. **Fluxograma de raias (swimlane)** — Múltiplos departamentos envolvidos
-2. **Fluxograma básico** — Processo sequencial simples
-3. **Diagrama de fluxo de dados** — Foco no movimento de dados
-4. **Fluxograma de decisão** — Lógica de decisão pesada
+1. **Fluxograma de raias (swimlane)**: Múltiplos departamentos envolvidos
+2. **Fluxograma básico**: Processo sequencial simples
+3. **Diagrama de fluxo de dados**: Foco no movimento de dados
+4. **Fluxograma de decisão**: Lógica de decisão pesada
 
 </details>
 
@@ -336,8 +336,8 @@ Início → Etapa A → Etapa B → {Condição?} →|Sim| Etapa C → Etapa D �
 - Fluxogramas melhoram **comunicação**, **análise**, **alinhamento** e **documentação**
 - Use fluxogramas para **integração**, **depuração**, **design** e **melhoria** de processos
 - Escolha o **tipo certo de fluxograma** para sua situação
-- Mantenha fluxogramas **simples** — divida os complexos em sub-fluxogramas
+- Mantenha fluxogramas **simples**: divida os complexos em sub-fluxogramas
 - Na próxima lição, aprenderemos os **símbolos padrão** usados em fluxogramas
 
 > [!SUCCESS] Você Completou a Lição 3
-> Agora você entende o que são fluxogramas, por que são valiosos e quando usá-los. Na próxima lição, vamos mergulhar fundo nos **símbolos e notação de fluxogramas** — o vocabulário visual que torna os fluxogramas universais.
+> Agora você entende o que são fluxogramas, por que são valiosos e quando usá-los. Na próxima lição, vamos mergulhar fundo nos **símbolos e notação de fluxogramas**, o vocabulário visual que torna os fluxogramas universais.

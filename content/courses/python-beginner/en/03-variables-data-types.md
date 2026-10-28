@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Variables and Data Types
 
-Variables are containers for storing data. Python is dynamically typed, meaning you don't need to declare a variable's type — Python infers it automatically.
+Variables are containers for storing data. Python is dynamically typed, meaning you don't need to declare a variable's type: Python infers it automatically.
 
 ## Variables
 
@@ -164,5 +164,5 @@ x = 3.14      # x is now float
 6. What does `"hello".upper()` return?
 7. True or False: Python requires you to declare variable types.
 8. What does `None` represent in Python?
-9. Convert the float `99.9` to an integer — what's the result?
+9. Convert the float `99.9` to an integer: what's the result?
 10. Write a Python variable name using snake_case for a user's email address.

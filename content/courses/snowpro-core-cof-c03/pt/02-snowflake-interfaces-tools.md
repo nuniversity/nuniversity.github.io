@@ -1,12 +1,12 @@
 ---
-title: "Domínio 1.2 — Interfaces e Ferramentas do Snowflake"
+title: "Domínio 1.2, Interfaces e Ferramentas do Snowflake"
 description: "Conheça as principais interfaces para interagir com o Snowflake: Snowsight (interface web), Snowflake CLI e integrações com IDEs. Entenda quando e por que usar cada uma."
 order: 2
 difficulty: intermediate
 duration: "45 min"
 ---
 
-# Domínio 1.2 — Interfaces e Ferramentas do Snowflake
+# Domínio 1.2: Interfaces e Ferramentas do Snowflake
 
 ## Peso no Exame
 
@@ -19,7 +19,7 @@ O **Domínio 1.0** representa **~31%** do exame. Este subdomínio cobre as ferra
 
 ## Visão Geral das Interfaces do Snowflake
 
-O Snowflake pode ser acessado por múltiplas interfaces dependendo do caso de uso — análise interativa, scripting, automação ou fluxos de trabalho de desenvolvimento.
+O Snowflake pode ser acessado por múltiplas interfaces dependendo do caso de uso: análise interativa, scripting, automação ou fluxos de trabalho de desenvolvimento.
 
 ```mermaid
 flowchart LR
@@ -54,7 +54,7 @@ flowchart LR
 
 ---
 
-## Snowsight — A Interface Web
+## Snowsight: A Interface Web
 
 O **Snowsight** é a interface moderna do Snowflake baseada em navegador para desenvolvimento SQL e análise de dados. Substituiu o antigo "Classic Console" e é agora a principal interface web.
 
@@ -62,12 +62,12 @@ O **Snowsight** é a interface moderna do Snowflake baseada em navegador para de
 
 **Worksheets (Planilhas de Trabalho)**
 - Escreva e execute SQL com realce de sintaxe e autocompletar
-- Execução de múltiplas instruções — execute instruções individuais ou scripts completos
+- Execução de múltiplas instruções: execute instruções individuais ou scripts completos
 - Resultados de queries exibidos como tabelas, com estatísticas de colunas integradas
 - Compartilhe worksheets com colegas de equipe
 
 **Dashboards**
-- Crie dashboards visuais a partir dos resultados de queries — gráficos, scorecards, tabelas
+- Crie dashboards visuais a partir dos resultados de queries: gráficos, scorecards, tabelas
 - Programe atualização automática dos dados do dashboard
 - Não é necessária uma ferramenta de BI externa para visualizações básicas
 
@@ -168,7 +168,7 @@ snow stage copy ./arquivo_local.csv @MEU_STAGE/
 
 ---
 
-## SnowSQL — CLI Legado
+## SnowSQL: CLI Legado
 
 O **SnowSQL** é o cliente de linha de comando original para o Snowflake. Embora ainda seja suportado e amplamente utilizado, o novo Snowflake CLI é preferido para novos projetos.
 
@@ -198,7 +198,7 @@ A **Extensão Snowflake para VS Code** oferece uma experiência de desenvolvimen
 - Conecte-se a uma ou mais contas Snowflake
 - Navegue pelos objetos do Snowflake (bancos de dados, schemas, tabelas) na barra lateral
 - Execute queries SQL e visualize os resultados inline
-- Desenvolvimento **Snowpark** — escreva código Python/Java/Scala com autocompletar ciente do contexto do Snowflake
+- Desenvolvimento **Snowpark**: escreva código Python/Java/Scala com autocompletar ciente do contexto do Snowflake
 - Depure e execute funções Snowpark localmente antes de implantar
 
 **Instalação:**
@@ -231,7 +231,7 @@ df = session.table("customers")
 df.filter(df["region"] == "US-EAST").show()
 ```
 
-### dbt (data build tool — ferramenta de transformação de dados)
+### dbt (data build tool: ferramenta de transformação de dados)
 
 O dbt se integra ao Snowflake via adaptador `dbt-snowflake`, possibilitando pipelines de transformação baseados em SQL:
 
@@ -328,8 +328,8 @@ Para acesso programático, o Snowflake fornece drivers e conectores oficiais:
 
 > [!SUCCESS]
 > **Pontos-Chave para o Dia do Exame:**
-> 1. **Snowsight** = principal interface web — worksheets, dashboards, histórico de queries, notebooks
-> 2. **Snowflake CLI** (`snow`) = CLI moderno — ideal para CI/CD, implantação Snowpark
-> 3. **SnowSQL** = CLI legado — ainda válido, execução baseada em arquivo
+> 1. **Snowsight** = principal interface web: worksheets, dashboards, histórico de queries, notebooks
+> 2. **Snowflake CLI** (`snow`) = CLI moderno: ideal para CI/CD, implantação Snowpark
+> 3. **SnowSQL** = CLI legado: ainda válido, execução baseada em arquivo
 > 4. **Extensão VS Code** = integração com IDE para desenvolvimento com suporte a Snowpark
 > 5. **Query Profile** no Snowsight = ferramenta principal para diagnosticar problemas de desempenho de queries

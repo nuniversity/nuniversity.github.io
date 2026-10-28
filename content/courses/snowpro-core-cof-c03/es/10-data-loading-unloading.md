@@ -1,16 +1,16 @@
 ---
-title: "Dominio 3.1 — Carga y Descarga de Datos"
+title: "Dominio 3.1, Carga y Descarga de Datos"
 description: "Domina la carga y descarga masiva de datos en Snowflake: formatos de archivo, stages (internos y externos), el comando COPY INTO, opciones de manejo de errores y mejores prácticas para ingesta de alto rendimiento."
 order: 10
 difficulty: intermediate
 duration: "75 min"
 ---
 
-# Dominio 3.1 — Carga y Descarga de Datos
+# Dominio 3.1: Carga y Descarga de Datos
 
 ## Peso en el Examen
 
-El **Dominio 3.0 — Carga, Descarga y Conectividad de Datos** representa aproximadamente el **~18%** del examen.
+El **Dominio 3.0: Carga, Descarga y Conectividad de Datos** representa aproximadamente el **~18%** del examen.
 
 > [!NOTE]
 > Esta lección corresponde al **Objetivo de Examen 3.1**: *Realizar carga y descarga de datos*, incluyendo formatos de archivo, stages, el comando COPY INTO y opciones de manejo de errores.
@@ -131,7 +131,7 @@ CREATE STAGE gcs_stage
 
 ### Integraciones de Almacenamiento (*Storage Integrations*)
 
-Una **integración de almacenamiento** conecta Snowflake de forma segura al cloud storage usando un **rol IAM / principal de servicio** — sin credenciales almacenadas en Snowflake:
+Una **integración de almacenamiento** conecta Snowflake de forma segura al cloud storage usando un **rol IAM / principal de servicio**; sin credenciales almacenadas en Snowflake:
 
 ```sql
 CREATE STORAGE INTEGRATION my_s3_integration
@@ -161,7 +161,7 @@ SELECT * FROM DIRECTORY(@s3_orders_stage);
 
 ---
 
-## COPY INTO — Carga de Datos
+## COPY INTO: Carga de Datos
 
 `COPY INTO <tabla>` es el comando principal de carga masiva:
 
@@ -328,7 +328,7 @@ FILE_FORMAT = (TYPE = CSV COMPRESSION = GZIP HEADER = TRUE);
 | Configuración | Recomendación |
 |---|---|
 | `SINGLE = FALSE` | Usar múltiples archivos para exportaciones grandes (paralelo) |
-| `MAX_FILE_SIZE` | Mantener archivos entre 100–500 MB para compatibilidad con sistemas destino |
+| `MAX_FILE_SIZE` | Mantener archivos entre 100 to 500 MB para compatibilidad con sistemas destino |
 | Compresión | Usar GZIP o SNAPPY para reducir costos de transferencia |
 | Nomenclatura de archivos | Usar `INCLUDE_QUERY_ID = TRUE` para nombres de archivo únicos |
 

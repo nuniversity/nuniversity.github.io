@@ -1,18 +1,18 @@
 ---
-title: "Smart Pointers — Box, Rc, RefCell y Mutabilidad Interior"
+title: "Smart Pointers, Box, Rc, RefCell y Mutabilidad Interior"
 description: "Domine los smart pointers de Rust: Box para asignación en heap, Rc para propiedad compartida, RefCell para mutabilidad interior y prevención de ciclos de referencia"
 order: 9
 duration: "90 minutos"
 difficulty: advanced
 ---
 
-# Smart Pointers — Box, Rc, RefCell y Mutabilidad Interior
+# Smart Pointers: Box, Rc, RefCell y Mutabilidad Interior
 
 Los smart pointers son estructuras de datos que actúan como punteros pero proporcionan capacidades adicionales. Los smart pointers de Rust implementan los traits `Deref` y `Drop`.
 
-## Box\<T\> — Asignación en Heap
+## Box\<T\>: Asignación en Heap
 
-`Box<T>` es el smart pointer más simple — asigna datos en el heap:
+`Box<T>` es el smart pointer más simple: asigna datos en el heap:
 
 ```rust
 fn main() {
@@ -66,7 +66,7 @@ fn main() {
 }
 ```
 
-## Rc\<T\> — Conteo de Referencias
+## Rc\<T\>: Conteo de Referencias
 
 `Rc<T>` permite múltiples propiedades mediante conteo de referencias no-atómico:
 
@@ -112,7 +112,7 @@ fn main() {
 }
 ```
 
-## RefCell\<T\> — Mutabilidad Interior
+## RefCell\<T\>: Mutabilidad Interior
 
 `RefCell<T>` refuerza las reglas de borrowing en **tiempo de ejecución** en lugar de tiempo de compilación:
 
@@ -165,7 +165,7 @@ fn main() {
 ```
 
 > [!WARNING]
-> `RefCell` entra en pánico en tiempo de ejecución si violas las reglas de borrowing. Esto no es diferente de un data race — solo ocurre en tiempo de ejecución en lugar de compilación. Siempre verifica tu lógica de borrowing.
+> `RefCell` entra en pánico en tiempo de ejecución si violas las reglas de borrowing. Esto no es diferente de un data race: solo ocurre en tiempo de ejecución en lugar de compilación. Siempre verifica tu lógica de borrowing.
 
 ### Patrón de Mutabilidad Interior
 
@@ -200,7 +200,7 @@ fn main() {
 }
 ```
 
-## Cell\<T\> — Mutabilidad Interior Copia
+## Cell\<T\>: Mutabilidad Interior Copia
 
 `Cell<T>` es como `RefCell<T>` pero para tipos `Copy`:
 
@@ -228,7 +228,7 @@ fn main() {
 | Métodos | `get`, `set`, `replace` | `borrow`, `borrow_mut` |
 | Pánicos | Nunca | En borrow doble |
 
-## Weak — Rompiendo Ciclos de Referencia
+## Weak: Rompiendo Ciclos de Referencia
 
 ```rust
 use std::rc::{Rc, Weak};

@@ -189,7 +189,7 @@ impl Mensaje {
 > | Enum | Los datos pueden ser una de varias formas |
 > | Enum con datos | Cada variante lleva datos diferentes |
 
-## Option — Manejo Seguro de Null
+## Option: Manejo Seguro de Null
 
 Rust no tiene `null`. En su lugar, usa `Option<T>`:
 
@@ -227,7 +227,7 @@ fn main() {
 | `map(fn)` | Transformar valor Some | `Option<U>` |
 | `expect(msg)` | Desenvolver con mensaje de pánico personalizado | `T` |
 
-## Result — Manejo de Errores
+## Result: Manejo de Errores
 
 ```rust
 enum Result<T, E> {

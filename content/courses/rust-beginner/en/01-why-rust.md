@@ -20,10 +20,10 @@ Languages fall into two camps:
 | Garbage collected | Java, Go, Python | Safe, but unpredictable pauses and overhead |
 | **Ownership-based** | **Rust** | **Safe at compile time, zero runtime overhead** |
 
-Rust guarantees memory safety at **compile time** through its ownership system. No null pointer dereferences, no dangling pointers, no buffer overflows — without needing a garbage collector.
+Rust guarantees memory safety at **compile time** through its ownership system. No null pointer dereferences, no dangling pointers, no buffer overflows: without needing a garbage collector.
 
 > [!SUCCESS]
-> Rust's ownership model catches memory bugs at compile time. If it compiles, it's memory-safe — no runtime surprises.
+> Rust's ownership model catches memory bugs at compile time. If it compiles, it's memory-safe: no runtime surprises.
 
 ## Zero-Cost Abstractions
 
@@ -83,13 +83,13 @@ let ptr = Box::new(42);
 
 ## The Rust Ecosystem
 
-### Rustup — Toolchain Manager
+### Rustup: Toolchain Manager
 ```bash
 rustup update   # Update Rust
 rustup default nightly  # Switch to nightly
 ```
 
-### Cargo — Build System and Package Manager
+### Cargo: Build System and Package Manager
 ```bash
 cargo new my_project
 cargo build
@@ -101,11 +101,11 @@ cargo doc --open
 ### Crates.io
 The Rust package registry hosts over 150,000 crates:
 
-- **serde** — Serialization/deserialization
-- **tokio** — Async runtime
-- **rayon** — Data parallelism
-- **clap** — CLI argument parsing
-- **reqwest** — HTTP client
+- **serde**: Serialization/deserialization
+- **tokio**: Async runtime
+- **rayon**: Data parallelism
+- **clap**: CLI argument parsing
+- **reqwest**: HTTP client
 
 ## Fearless Concurrency
 
@@ -127,16 +127,16 @@ fn main() {
 
 ## Where Rust Excels
 
-- **WebAssembly** — Compile to WASM for near-native speed in the browser
-- **Embedded systems** — No runtime, predictable performance
-- **CLI tools** — Fast, small binaries (bat, ripgrep, fd, alacritty)
-- **Web backends** — Actix-web, Axum, Rocket frameworks
-- **Game engines** — Bevy, Godot bindings
-- **Operating systems** — Redox, kernel modules
-- **Blockchain** — Solana, Polkadot, Near
+- **WebAssembly**: Compile to WASM for near-native speed in the browser
+- **Embedded systems**: No runtime, predictable performance
+- **CLI tools**: Fast, small binaries (bat, ripgrep, fd, alacritty)
+- **Web backends**: Actix-web, Axum, Rocket frameworks
+- **Game engines**: Bevy, Godot bindings
+- **Operating systems**: Redox, kernel modules
+- **Blockchain**: Solana, Polkadot, Near
 
 > [!WARNING]
-> Rust has a steep learning curve. The ownership system and borrow checker will feel restrictive at first. Persist through the first few weeks — the compiler errors are actually excellent teaching tools.
+> Rust has a steep learning curve. The ownership system and borrow checker will feel restrictive at first. Persist through the first few weeks: the compiler errors are actually excellent teaching tools.
 
 ## Companies Using Rust
 

@@ -464,7 +464,7 @@ flowchart LR
   "question": "What pattern does the multi-agent research system use?",
   "options": [
     "Sequential chain (no supervisor)",
-    "Supervisor loop — supervisor routes to agents, agents return to supervisor",
+    "Supervisor loop: supervisor routes to agents, agents return to supervisor",
     "Parallel execution of all agents",
     "Random agent selection"
   ],
@@ -496,7 +496,7 @@ flowchart LR
   "question": "Why does the project use different LLMs for different agents?",
   "options": [
     "For variety",
-    "To optimize cost — cheaper models for simple tasks, advanced models for complex reasoning",
+    "To optimize cost: cheaper models for simple tasks, advanced models for complex reasoning",
     "Because each agent requires a unique API key",
     "Different models are not used"
   ],

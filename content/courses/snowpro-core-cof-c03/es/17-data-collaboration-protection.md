@@ -1,17 +1,17 @@
 ---
-title: "Dominio 5.1 — Colaboración de Datos, Replicación y Continuidad de Negocio"
+title: "Dominio 5.1, Colaboración de Datos, Replicación y Continuidad de Negocio"
 description: "Comprende las capacidades de replicación, conmutación por error/recuperación, funcionalidades entre regiones y nubes de Snowflake, y cómo las funcionalidades de colaboración apoyan las estrategias de protección de datos."
 order: 17
 difficulty: intermediate
 duration: 50
 ---
 
-# Dominio 5.1 — Colaboración de Datos, Replicación y Continuidad de Negocio
+# Dominio 5.1: Colaboración de Datos, Replicación y Continuidad de Negocio
 
 > [!NOTE]
-> **Dominio de Examen 5.1** — *Colaboración de Datos y Protección de Datos* contribuye al dominio de **Colaboración de Datos**, que representa el **10%** del examen COF-C03.
+> **Dominio de Examen 5.1**: *Colaboración de Datos y Protección de Datos* contribuye al dominio de **Colaboración de Datos**, que representa el **10%** del examen COF-C03.
 
-La arquitectura multi-nube de Snowflake permite a las organizaciones replicar datos y objetos de cuenta entre regiones y proveedores de nube, soportar la recuperación ante desastres con conmutación por error y recuperación (*failover/failback*), y compartir instantáneas de Time Travel — todo sin movimiento manual de datos.
+La arquitectura multi-nube de Snowflake permite a las organizaciones replicar datos y objetos de cuenta entre regiones y proveedores de nube, soportar la recuperación ante desastres con conmutación por error y recuperación (*failover/failback*), y compartir instantáneas de Time Travel: todo sin movimiento manual de datos.
 
 ---
 
@@ -31,7 +31,7 @@ flowchart TD
 
 ## 1. Time Travel (Contexto de Colaboración)
 
-Time Travel te permite consultar, clonar o restaurar datos **tal como existían en un punto del tiempo pasado** — útil tanto para recuperación de errores como para compartir instantáneas históricas con consumidores.
+Time Travel te permite consultar, clonar o restaurar datos **tal como existían en un punto del tiempo pasado**: útil tanto para recuperación de errores como para compartir instantáneas históricas con consumidores.
 
 ```sql
 -- Consultar datos de hace 2 horas
@@ -81,11 +81,11 @@ timeline
 
 | Propiedad | Valor |
 |---|---|
-| Duración | **7 días** — siempre, no configurable |
+| Duración | **7 días**: siempre, no configurable |
 | Accesible por | **Solo el Soporte de Snowflake** |
 | Aplica a | Tablas permanentes |
 | NO aplica a | Tablas transitorias, tablas temporales |
-| ¿Se cobra almacenamiento? | **Sí** — a tarifas estándar de almacenamiento |
+| ¿Se cobra almacenamiento? | **Sí**: a tarifas estándar de almacenamiento |
 
 > [!WARNING]
 > **Las tablas Transitorias y Temporales NO tienen Fail-Safe.** Esto es una compensación deliberada entre costo y riesgo: úsalas solo para datos efímeros donde la recuperación no es necesaria.
@@ -94,7 +94,7 @@ timeline
 
 ## 3. Clonación de Copia Cero (*Zero-Copy Cloning*)
 
-La clonación crea una **copia lógica instantánea** de una base de datos, esquema o tabla — sin duplicar datos físicos en el momento de la creación. El clon y la fuente comparten las mismas micro-particiones subyacentes hasta que cualquiera de los dos modifique datos.
+La clonación crea una **copia lógica instantánea** de una base de datos, esquema o tabla; sin duplicar datos físicos en el momento de la creación. El clon y la fuente comparten las mismas micro-particiones subyacentes hasta que cualquiera de los dos modifique datos.
 
 ```mermaid
 flowchart LR
@@ -130,7 +130,7 @@ Hechos clave:
 - La clonación es **instantánea** independientemente del tamaño de los datos.
 - No se cobra almacenamiento adicional hasta que el clon diverja.
 - Los clones **heredan** el historial de Time Travel de la fuente hasta el punto de clonación.
-- La clonación respeta los **privilegios** — el que clona necesita `CREATE` en el destino y `SELECT` en la fuente.
+- La clonación respeta los **privilegios**: el que clona necesita `CREATE` en el destino y `SELECT` en la fuente.
 
 ---
 
@@ -160,7 +160,7 @@ flowchart LR
 | Funcionalidad | Replication Group | Failover Group |
 |---|---|---|
 | Propósito | Réplicas de solo lectura | Recuperación ante desastres (con capacidad de failover) |
-| ¿La secundaria es escribible? | No | Sí — después del failover |
+| ¿La secundaria es escribible? | No | Sí: después del failover |
 | ¿Soporta failover/failback? | **No** | **Sí** |
 | ¿Incluye objetos de cuenta? | Opcional | Sí |
 
@@ -185,7 +185,7 @@ ALTER REPLICATION GROUP my_rg REFRESH;
 
 ## 5. Failover y Failback (Conmutación por Error y Recuperación)
 
-Los Failover Groups habilitan la **promoción automática o manual** de una cuenta secundaria a primaria — proporcionando continuidad de negocio.
+Los Failover Groups habilitan la **promoción automática o manual** de una cuenta secundaria a primaria: proporcionando continuidad de negocio.
 
 ```mermaid
 sequenceDiagram
@@ -215,7 +215,7 @@ ALTER FAILOVER GROUP my_fg PRIMARY;  -- ejecutar en la cuenta primaria original
 ```
 
 > [!NOTE]
-> Los Failover Groups soportan una `REPLICATION SCHEDULE` — Snowflake actualiza automáticamente la secundaria en el intervalo definido (mínimo 1 minuto).
+> Los Failover Groups soportan una `REPLICATION SCHEDULE`: Snowflake actualiza automáticamente la secundaria en el intervalo definido (mínimo 1 minuto).
 
 ---
 
@@ -237,7 +237,7 @@ mindmap
       Integraciones de notificación
 ```
 
-Esto asegura que después del failover, la cuenta secundaria tenga los mismos roles, warehouses y políticas — no solo los datos.
+Esto asegura que después del failover, la cuenta secundaria tenga los mismos roles, warehouses y políticas: no solo los datos.
 
 ---
 
@@ -278,14 +278,14 @@ Esto asegura que después del failover, la cuenta secundaria tenga los mismos ro
 
 - A) 500 GB inmediatamente
 - B) 250 GB (deduplicación del 50%)
-- C) **0 GB — no se cobra almacenamiento hasta que el clon diverja** ✅
+- C) **0 GB: no se cobra almacenamiento hasta que el clon diverja** ✅
 - D) Depende del período de retención
 
 ---
 
 **4.** ¿Qué tipo de objeto soporta el **failover** (promoción de la secundaria a primaria)?
 
-- A) Replication Group — incorrecto, este es el Failover Group
+- A) Replication Group: incorrecto, este es el Failover Group
 - B) **Failover Group** ✅
 - C) External Replication Policy
 - D) Clone Group
@@ -296,14 +296,14 @@ Esto asegura que después del failover, la cuenta secundaria tenga los mismos ro
 
 - A) Solo Time Travel
 - B) Time Travel y Fail-Safe
-- C) **Solo Time Travel — las tablas transitorias no tienen Fail-Safe** ✅
+- C) **Solo Time Travel: las tablas transitorias no tienen Fail-Safe** ✅
 - D) Ni Time Travel ni Fail-Safe
 
 ---
 
 **6.** ¿Cuál afirmación sobre la replicación entre nubes es VERDADERA?
 
-- A) Es gratuita — Snowflake no cobra tarifas de transferencia
+- A) Es gratuita: Snowflake no cobra tarifas de transferencia
 - B) Requiere que ambas cuentas usen el mismo proveedor de nube
 - C) **Se aplican tarifas de transferencia de datos para replicación entre regiones y entre nubes** ✅
 - D) Las cuentas secundarias pueden escribirse sin failover

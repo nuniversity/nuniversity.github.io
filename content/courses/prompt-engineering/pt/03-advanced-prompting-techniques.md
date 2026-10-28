@@ -10,7 +10,7 @@ duration: "45 min"
 
 ## Por que Técnicas Avançadas?
 
-Prompting básico funciona para tarefas simples, mas raciocínio complexo, saídas estruturadas e problemas especializados exigem abordagens mais sofisticadas. Cada técnica nesta lição aborda uma limitação específica do prompting básico — desde melhorar o raciocínio passo a passo até permitir exploração multi-caminho.
+Prompting básico funciona para tarefas simples, mas raciocínio complexo, saídas estruturadas e problemas especializados exigem abordagens mais sofisticadas. Cada técnica nesta lição aborda uma limitação específica do prompting básico: desde melhorar o raciocínio passo a passo até permitir exploração multi-caminho.
 
 ### Quando o Prompting Básico é Insuficiente
 
@@ -157,7 +157,7 @@ Sentimento:
 ```
 
 [!TIP]
-**Escolhendo os exemplos certos:** Selecione exemplos que cubram a gama de entradas esperadas. Inclua casos de borda e exemplos ambíguos. Exemplos mal escolhidos (ex: todos sentimento positivo quando o conjunto de teste tem sentimento misto) enviesam o modelo. Além disso, a ordem importa — modelos tendem a ser mais influenciados pelo último exemplo (viés de recência).
+**Escolhendo os exemplos certos:** Selecione exemplos que cubram a gama de entradas esperadas. Inclua casos de borda e exemplos ambíguos. Exemplos mal escolhidos (ex: todos sentimento positivo quando o conjunto de teste tem sentimento misto) enviesam o modelo. Além disso, a ordem importa: modelos tendem a ser mais influenciados pelo último exemplo (viés de recência).
 
 ### Few-Shot em Código
 
@@ -290,7 +290,7 @@ print(response.content[0].text)
 
 ## Self-Consistency
 
-Self-Consistency gera múltiplos caminhos de raciocínio e seleciona a resposta mais frequente. É como perguntar a três especialistas separadamente e tomar o voto da maioria — caminhos de raciocínio diversos reduzem a chance de qualquer erro único determinar a resposta final.
+Self-Consistency gera múltiplos caminhos de raciocínio e seleciona a resposta mais frequente. É como perguntar a três especialistas separadamente e tomar o voto da maioria: caminhos de raciocínio diversos reduzem a chance de qualquer erro único determinar a resposta final.
 
 ```
 Gere 3 soluções diferentes para este problema, depois escolha a resposta mais comum:
@@ -431,7 +431,7 @@ Comece listando {num_ramos} maneiras diferentes de abordar este problema:
 | Resumir um documento | CoT (se complexo) ou Zero-Shot | Simples geralmente é melhor |
 
 [!IMPORTANT]
-**Combinação de técnicas:** Estas técnicas não são mutuamente exclusivas. Você pode combinar CoT com Few-Shot (fornecer cadeias de raciocínio de exemplo), usar Self-Consistency com Modo JSON, ou usar ToT com saídas estruturadas. Combinar técnicas pode compor benefícios — mas também compor custos de token.
+**Combinação de técnicas:** Estas técnicas não são mutuamente exclusivas. Você pode combinar CoT com Few-Shot (fornecer cadeias de raciocínio de exemplo), usar Self-Consistency com Modo JSON, ou usar ToT com saídas estruturadas. Combinar técnicas pode compor benefícios, mas também compor custos de token.
 
 ---
 
@@ -530,7 +530,7 @@ Comece listando {num_ramos} maneiras diferentes de abordar este problema:
   "id": "pe-03-pt-q9",
   "type": "multiple-choice",
   "question": "Um desenvolvedor usa few-shot prompting com exemplos ordenados: NEGATIVO, POSITIVO, NEUTRO. O modelo classifica mal a maioria dos casos de teste como NEUTRO. Qual é a causa mais provável?",
-  "options": ["O modelo não entende análise de sentimento", "Viés de recência — o modelo é mais influenciado pelo último exemplo (NEUTRO)", "A temperature está muito alta", "NEUTRO não é uma categoria de sentimento válida"],
+  "options": ["O modelo não entende análise de sentimento", "Viés de recência, o modelo é mais influenciado pelo último exemplo (NEUTRO)", "A temperature está muito alta", "NEUTRO não é uma categoria de sentimento válida"],
   "correct": 1,
   "explanation": "LLMs exibem viés de recência, significando que são desproporcionalmente influenciados pelos últimos exemplos no prompt. Reordenar exemplos para que a categoria mais frequente ou importante apareça por último pode melhorar a precisão."
 }
@@ -557,7 +557,7 @@ Comece listando {num_ramos} maneiras diferentes de abordar este problema:
 - **Saídas Estruturadas (Modo JSON):** Crítico para integração programática de APIs
 - **Self-Consistency:** Gere múltiplas saídas e selecione a resposta mais frequente
 - **Tree-of-Thoughts:** Explore múltiplos ramos de raciocínio como uma árvore de decisão
-- Técnicas avançadas custam mais tokens—equilibre necessidades de desempenho com custo
+- Técnicas avançadas custam mais tokens: equilibre necessidades de desempenho com custo
 - Técnicas podem ser combinadas: CoT + JSON, Few-Shot + CoT, Self-Consistency + Saídas Estruturadas
 - Para tarefas simples, técnicas mais simples geralmente superam as complexas
 - Sempre valide saídas estruturadas antes do uso em produção

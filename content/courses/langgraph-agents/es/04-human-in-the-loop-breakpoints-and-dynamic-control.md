@@ -171,7 +171,7 @@ app.update_state(config, {"messages": state.values["messages"]})
 result = app.invoke(None, config)
 ```
 
-Este patrón es crítico para la **corrección humana** — el operador puede corregir errores antes de que el agente continúe.
+Este patrón es crítico para la **corrección humana**: el operador puede corregir errores antes de que el agente continúe.
 
 [!IMPORTANT]
 Llamar a `update_state()` crea un **nuevo checkpoint** con los valores modificados. El estado original se preserva en el checkpoint anterior, por lo que siempre puedes revertir si la corrección humana introdujo nuevos errores.
@@ -257,7 +257,7 @@ app2 = builder.compile(checkpointer=memory)
 Esto permite topologías de agente adaptativas donde la forma del grafo evoluciona basada en resultados de ejecuciones anteriores.
 
 [!TIP]
-Las actualizaciones dinámicas son útiles para **divulgación progresiva** — comienza con un grafo simple y añade nodos de capacidad según la conversación revela necesidades más complejas.
+Las actualizaciones dinámicas son útiles para **divulgación progresiva**: comienza con un grafo simple y añade nodos de capacidad según la conversación revela necesidades más complejas.
 
 ---
 
@@ -441,4 +441,4 @@ El grafo pausa en el nodo de interrupción, espera entrada humana y luego enruta
 - Los breakpoints pueden insertarse en nodos específicos o en cada nodo para depuración.
 - Implementa manejo de timeout para HITL en producción para evitar interrupciones abandonadas.
 - Usa `interrupt_before` y `interrupt_after` para depuración paso a paso.
-- La edición de estado crea nuevos checkpoints — el estado original siempre es recuperable.
+- La edición de estado crea nuevos checkpoints: el estado original siempre es recuperable.

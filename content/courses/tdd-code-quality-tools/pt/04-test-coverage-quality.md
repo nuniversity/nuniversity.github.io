@@ -8,7 +8,7 @@ difficulty: "intermediário"
 
 # Cobertura de Testes e Qualidade
 
-Cobertura informa qual código seus testes executam. É um **indicador negativo** útil — cobertura baixa significa que você definitivamente não está testando o suficiente — mas cobertura alta não garante bons testes. Esta lição cobre como medir, interpretar e agir com base em dados de cobertura.
+Cobertura informa qual código seus testes executam. É um **indicador negativo** útil, cobertura baixa significa que você definitivamente não está testando o suficiente, mas cobertura alta não garante bons testes. Esta lição cobre como medir, interpretar e agir com base em dados de cobertura.
 
 ## O que é Cobertura de Código?
 
@@ -41,7 +41,7 @@ flowchart TD
 |---------|-----------|---------|
 | **Cobertura de Linha** | Qual porcentagem de linhas executou | 80% das linhas rodaram durante testes |
 | **Cobertura de Branch** | Qual porcentagem de branches if/else foram tomados | 3 de 4 branches cobertos (75%) |
-| **Cobertura de Condição** | Subexpressões booleanas avaliadas | `A or B` — testado A=True, A=False |
+| **Cobertura de Condição** | Subexpressões booleanas avaliadas | `A or B`: testado A=True, A=False |
 | **Cobertura de Função** | Funções que foram chamadas | 45 de 50 funções invocadas |
 | **Cobertura de Statement** | Statements individuais executados | 120 de 150 statements rodaram |
 | **Cobertura de Caminho** | Todos os caminhos possíveis pelo código | 8 de 16 caminhos possíveis testados |
@@ -541,7 +541,7 @@ diff-cover coverage.xml --compare-branch=main --fail-under=90
 
 - **Cobertura mede qual código executa durante os testes**, não qual código está correto
 - **Cobertura de linha** é a métrica básica; **cobertura de branch** revela caminhos não testados
-- **100% de cobertura ≠ 100% de correção** — você pode ter cobertura perfeita e ainda ter bugs
+- **100% de cobertura ≠ 100% de correção**: você pode ter cobertura perfeita e ainda ter bugs
 - **Alvos de cobertura**: 80%+ para código de produção, 90%+ para caminhos críticos
 - **Cobertura de diff** garante que código novo seja testado, não apenas números totais
 - **Exclusões** devem ser raras e bem documentadas

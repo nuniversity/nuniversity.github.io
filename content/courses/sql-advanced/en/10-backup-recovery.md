@@ -10,7 +10,7 @@ difficulty: advanced
 
 ## Backup Strategies
 
-A backup strategy balances **Recovery Point Objective (RPO)** — how much data you can lose — against **Recovery Time Objective (RTO)** — how fast you recover.
+A backup strategy balances **Recovery Point Objective (RPO)**: how much data you can lose: against **Recovery Time Objective (RTO)**: how fast you recover.
 
 | Strategy | RPO | RTO | Storage | Typical Use |
 |---|---|---|---|---|
@@ -180,7 +180,7 @@ SELECT * FROM pg_stat_replication;
 
 ### Logical Replication
 
-Replicates at the row level — can filter, transform, or replicate subsets.
+Replicates at the row level: can filter, transform, or replicate subsets.
 
 ```sql
 -- Publisher

@@ -1,17 +1,17 @@
 ---
-title: "Domain 5.1 — Data Collaboration, Replication, and Business Continuity"
+title: "Domain 5.1, Data Collaboration, Replication, and Business Continuity"
 description: "Understand Snowflake's replication, failover/failback, cross-region and cross-cloud capabilities, and how collaboration features support data protection strategies."
 order: 17
 difficulty: intermediate
 duration: 50
 ---
 
-# Domain 5.1 — Data Collaboration, Replication, and Business Continuity
+# Domain 5.1: Data Collaboration, Replication, and Business Continuity
 
 > [!NOTE]
-> **Exam Domain 5.1** — *Data Collaboration and Data Protection* contributes to the **Data Collaboration** domain, which is **10%** of the COF-C03 exam.
+> **Exam Domain 5.1**: *Data Collaboration and Data Protection* contributes to the **Data Collaboration** domain, which is **10%** of the COF-C03 exam.
 
-Snowflake's multi-cloud architecture enables organisations to replicate data and account objects across regions and cloud providers, support disaster recovery with failover/failback, and share Time Travel snapshots — all without manual data movement.
+Snowflake's multi-cloud architecture enables organisations to replicate data and account objects across regions and cloud providers, support disaster recovery with failover/failback, and share Time Travel snapshots: all without manual data movement.
 
 ---
 
@@ -31,7 +31,7 @@ flowchart TD
 
 ## 1. Time Travel (Collaboration Context)
 
-Time Travel lets you query, clone, or restore data **as it existed at a past point in time** — useful for both error recovery and sharing historical snapshots with consumers.
+Time Travel lets you query, clone, or restore data **as it existed at a past point in time**: useful for both error recovery and sharing historical snapshots with consumers.
 
 ```sql
 -- Query data 2 hours ago
@@ -81,11 +81,11 @@ timeline
 
 | Property | Value |
 |---|---|
-| Duration | **7 days** — always, non-configurable |
+| Duration | **7 days**: always, non-configurable |
 | Accessible by | **Snowflake Support only** |
 | Applies to | Permanent tables |
 | Does NOT apply to | Transient tables, temporary tables |
-| Storage charged? | **Yes** — at standard storage rates |
+| Storage charged? | **Yes**: at standard storage rates |
 
 > [!WARNING]
 > **Transient and Temporary tables have NO Fail-Safe.** This is a deliberate cost/risk trade-off: use them only for ephemeral data where recovery is not required.
@@ -94,7 +94,7 @@ timeline
 
 ## 3. Zero-Copy Cloning
 
-Cloning creates an **instant logical copy** of a database, schema, or table — no physical data is duplicated at creation time. Child and parent share the same underlying micro-partitions until either side modifies data.
+Cloning creates an **instant logical copy** of a database, schema, or table: no physical data is duplicated at creation time. Child and parent share the same underlying micro-partitions until either side modifies data.
 
 ```mermaid
 flowchart LR
@@ -130,7 +130,7 @@ Key facts:
 - Cloning is **instantaneous** regardless of data size.
 - No additional storage is charged until the clone diverges.
 - Clones **inherit** the source's Time Travel history up to the clone point.
-- Cloning respects **privileges** — the cloner needs `CREATE` on the target and `SELECT` on the source.
+- Cloning respects **privileges**: the cloner needs `CREATE` on the target and `SELECT` on the source.
 
 ---
 
@@ -160,7 +160,7 @@ flowchart LR
 | Feature | Replication Group | Failover Group |
 |---|---|---|
 | Purpose | Read-only replicas | Disaster recovery (failover capable) |
-| Secondary writable? | No | Yes — after failover |
+| Secondary writable? | No | Yes: after failover |
 | Supports failover/failback? | **No** | **Yes** |
 | Account objects included? | Optional | Yes |
 
@@ -185,7 +185,7 @@ ALTER REPLICATION GROUP my_rg REFRESH;
 
 ## 5. Failover and Failback
 
-Failover Groups enable **automatic or manual promotion** of a secondary account to primary — providing business continuity.
+Failover Groups enable **automatic or manual promotion** of a secondary account to primary: providing business continuity.
 
 ```mermaid
 sequenceDiagram
@@ -215,7 +215,7 @@ ALTER FAILOVER GROUP my_fg PRIMARY;  -- run on original primary account
 ```
 
 > [!NOTE]
-> Failover Groups support a `REPLICATION SCHEDULE` — Snowflake automatically refreshes the secondary on the defined interval (minimum 1 minute).
+> Failover Groups support a `REPLICATION SCHEDULE`: Snowflake automatically refreshes the secondary on the defined interval (minimum 1 minute).
 
 ---
 
@@ -237,7 +237,7 @@ mindmap
       Notification integrations
 ```
 
-This ensures that after failover, the secondary account has all the same roles, warehouses, and policies — not just the data.
+This ensures that after failover, the secondary account has all the same roles, warehouses, and policies: not just the data.
 
 ---
 
@@ -278,14 +278,14 @@ This ensures that after failover, the secondary account has all the same roles, 
 
 - A) 500 GB immediately
 - B) 250 GB (50% deduplication)
-- C) **0 GB — no storage charged until the clone diverges** ✅
+- C) **0 GB: no storage charged until the clone diverges** ✅
 - D) Depends on retention period
 
 ---
 
 **4.** Which object type supports **failover** (promotion of secondary to primary)?
 
-- A) Replication Group ✅ incorrect — this is Failover Group
+- A) Replication Group ✅ incorrect; this is Failover Group
 - B) **Failover Group** ✅
 - C) External Replication Policy
 - D) Clone Group
@@ -296,14 +296,14 @@ This ensures that after failover, the secondary account has all the same roles, 
 
 - A) Time Travel only
 - B) Time Travel and Fail-Safe
-- C) **Time Travel only — transient tables have no Fail-Safe** ✅
+- C) **Time Travel only: transient tables have no Fail-Safe** ✅
 - D) Neither Time Travel nor Fail-Safe
 
 ---
 
 **6.** Which statement about cross-cloud replication is TRUE?
 
-- A) It is free — Snowflake does not charge transfer fees
+- A) It is free: Snowflake does not charge transfer fees
 - B) It requires both accounts to use the same cloud provider
 - C) **Data transfer fees apply for cross-region and cross-cloud replication** ✅
 - D) Secondary accounts can be written to without failover

@@ -7,7 +7,7 @@ duration: "60 min"
 ---
 # O Modelo de Responsabilidade Compartilhada da AWS
 
-Toda questão de segurança do CLF-C02 eventualmente se reduz a uma frase: *quem conserta isso?* O exame chama isso de **Domínio 2, Tarefa 2.1 — "Reconhecer os componentes do modelo de responsabilidade compartilhada da AWS"**, e o Domínio 2 vale **30% da sua pontuação (em outubro de 2026)**, então este único modelo é estatisticamente o conceito mais lucrativo de todo o teste. A AWS enuncia a premissa sem rodeios: *"Segurança e conformidade são uma responsabilidade compartilhada entre a AWS e o cliente."* Compartilhado **não** significa dividido ao meio — significa *duas organizações diferentes, cada uma totalmente responsável por sua própria camada*, e a fronteira entre essas camadas **muda dependendo do serviço que você escolher**.
+Toda questão de segurança do CLF-C02 eventualmente se reduz a uma frase: *quem conserta isso?* O exame chama isso de **Domínio 2, Tarefa 2.1, "Reconhecer os componentes do modelo de responsabilidade compartilhada da AWS"**, e o Domínio 2 vale **30% da sua pontuação (em outubro de 2026)**, então este único modelo é estatisticamente o conceito mais lucrativo de todo o teste. A AWS enuncia a premissa sem rodeios: *"Segurança e conformidade são uma responsabilidade compartilhada entre a AWS e o cliente."* Compartilhado **não** significa dividido ao meio, significa *duas organizações diferentes, cada uma totalmente responsável por sua própria camada*, e a fronteira entre essas camadas **muda dependendo do serviço que você escolher**.
 
 ```text
 ====================================================================
@@ -50,19 +50,19 @@ Toda questão de segurança do CLF-C02 eventualmente se reduz a uma frase: *quem
 ```
 
 > [!NOTE]
-> **O modelo não tem preço e nenhum serviço para ligar.** É uma *declaração de deveres*, não um produto. Tudo o que você pode comprar para *provar* seu lado — AWS Artifact para os relatórios da AWS, AWS CloudTrail, AWS Config, Amazon CloudWatch, Amazon GuardDuty, AWS Security Hub — fica do **seu** lado da linha: a AWS fornece a ferramenta, você a ativa, você age com base no que ela diz.
+> **O modelo não tem preço e nenhum serviço para ligar.** É uma *declaração de deveres*, não um produto. Tudo o que você pode comprar para *provar* seu lado, AWS Artifact para os relatórios da AWS, AWS CloudTrail, AWS Config, Amazon CloudWatch, Amazon GuardDuty, AWS Security Hub, fica do **seu** lado da linha: a AWS fornece a ferramenta, você a ativa, você age com base no que ela diz.
 
 Nesta lição você vai:
 
 - separar **segurança DA nuvem (AWS)** de **segurança NA nuvem (você)** usando a própria redação da AWS;
 - posicionar a fronteira exatamente: **do SO host e da camada de virtualização para baixo** = AWS, **do SO convidado para cima** = você;
-- ler a **tabela completa do detalhamento de responsabilidades** — instalações, hardware, hipervisor, dados, identidade, criptografia, conformidade;
+- ler a **tabela completa do detalhamento de responsabilidades**: instalações, hardware, hipervisor, dados, identidade, criptografia, conformidade;
 - observar a linha **mudar entre o Amazon EC2, o Amazon RDS, o AWS Lambda e o Amazon S3**, incluindo as nuances do RDS Custom e do modo de runtime do Lambda;
-- classificar cada controle como **herdado, compartilhado ou específico do cliente** — e entender por que *compartilhado ≠ 50/50*;
+- classificar cada controle como **herdado, compartilhado ou específico do cliente**, e entender por que *compartilhado ≠ 50/50*;
 - listar o que **os clientes ainda possuem**: classificação de dados, identidade e acesso, patch de SO no EC2, configuração de rede, escolhas de criptografia, segurança de aplicativos;
 - listar o que **a AWS possui**: instalações, hardware, virtualização e a infraestrutura dos serviços gerenciados;
 - reconhecer as **armadilhas clássicas de atribuição incorreta** que alimentam a maioria das opções erradas neste tópico;
-- estudar **quatro estudos de caso de segurança e conformidade publicados pela AWS** — dois operacionais, dois baseados em autorização;
+- estudar **quatro estudos de caso de segurança e conformidade publicados pela AWS**: dois operacionais, dois baseados em autorização;
 - conferir as **mudanças de guia e de lista de serviços de 2026** (em outubro de 2026) que decidem o que o Domínio 2 ainda testa;
 - praticar com **12 questões em formato de exame** mais quatro verificações interativas.
 
@@ -79,7 +79,7 @@ A página de conformidade da AWS define as duas metades em um único parágrafo,
 | **Segurança *da* nuvem** | **AWS** | *"A AWS é responsável por proteger a infraestrutura que executa todos os serviços oferecidos na AWS Cloud"* | Centros de dados, hardware, rede, o **sistema operacional host e a camada de virtualização**, a segurança física das instalações |
 | **Segurança *na* nuvem** | **Cliente** | *"A responsabilidade do cliente será determinada pelos serviços da AWS Cloud que um cliente seleciona"* | Seus dados, sua identidade e permissões, seu SO convidado, seu código de aplicativo, sua configuração, suas decisões de criptografia |
 
-A segunda linha é a que os alunos leem errado. Seus deveres **não são fixos** — eles são *derivados da sua escolha de serviços*. Execute o Amazon EC2 e você herda um sistema operacional para dar patch; execute o Amazon S3 e esse dever desaparece, enquanto o dever de classificar seus dados não.
+A segunda linha é a que os alunos leem errado. Seus deveres **não são fixos**: eles são *derivados da sua escolha de serviços*. Execute o Amazon EC2 e você herda um sistema operacional para dar patch; execute o Amazon S3 e esse dever desaparece, enquanto o dever de classificar seus dados não.
 
 ### 1.2 A preposição é o truque inteiro
 
@@ -97,22 +97,22 @@ flowchart TD
 > [!WARNING]
 > **Armadilha da inversão.** Qualquer opção que diga *"a AWS é responsável pela segurança na nuvem"* ou *"o cliente é responsável pela segurança da nuvem"* está **errada na cara**, antes mesmo de você ler o resto da opção. AWS = **da** (ela possui a infraestrutura). Você = **na** (você configura o que roda nela). O whitepaper de GDPR da AWS repete isso: *"Os clientes são responsáveis pela 'segurança NA nuvem'… configurando e gerenciando a segurança dos serviços da AWS que utilizam."*
 
-### 1.3 Exemplo E1 — classificando seis afirmações em menos de um minuto
+### 1.3 Exemplo E1: classificando seis afirmações em menos de um minuto
 
 Leia cada afirmação, identifique a metade e decida se ela sequer é plausível:
 
 | # | Afirmação | Metade | Veredito |
 |---|---|---|---|
-| 1 | A AWS aplica patch no hipervisor do host que executa sua instância | Da nuvem | Correto — dever da AWS |
-| 2 | Você decide se o bucket S3 que guarda registros de clientes é público | Na nuvem | Correto — dever do cliente |
-| 3 | A AWS configura as regras do grupo de segurança na sua instância EC2 | Da nuvem | **Errado** — a AWS *fornece* o firewall, **você configura** |
-| 4 | Você patrulha os corredores do centro de dados | Na nuvem | **Errado** — a segurança física é um controle *herdados* da AWS |
-| 5 | A AWS criptografa seus dados com seu consentimento e no seu cronograma | Na nuvem | **Redação errada** — a AWS fornece o KMS e a criptografia no lado do serviço; **você escolhe se criptografa**, qual chave e como as chaves são tratadas |
-| 6 | Você monitora sua própria conta com CloudTrail e CloudWatch | Na nuvem | Correto — a AWS fornece a ferramenta, você ativa e age |
+| 1 | A AWS aplica patch no hipervisor do host que executa sua instância | Da nuvem | Correto: dever da AWS |
+| 2 | Você decide se o bucket S3 que guarda registros de clientes é público | Na nuvem | Correto: dever do cliente |
+| 3 | A AWS configura as regras do grupo de segurança na sua instância EC2 | Da nuvem | **Errado**: a AWS *fornece* o firewall, **você configura** |
+| 4 | Você patrulha os corredores do centro de dados | Na nuvem | **Errado**: a segurança física é um controle *herdados* da AWS |
+| 5 | A AWS criptografa seus dados com seu consentimento e no seu cronograma | Na nuvem | **Redação errada**: a AWS fornece o KMS e a criptografia no lado do serviço; **você escolhe se criptografa**, qual chave e como as chaves são tratadas |
+| 6 | Você monitora sua própria conta com CloudTrail e CloudWatch | Na nuvem | Correto: a AWS fornece a ferramenta, você ativa e age |
 
 O padrão nas linhas 3, 4 e 5 é o exame inteiro: **a AWS fornece um recurso; você toma a decisão.** Fornecido ≠ configurado, e ferramentas ≠ responsabilidade.
 
-- **📚 Você sabia?** O modelo é *o motivo de a conformidade na nuvem ser mais barata*. A AWS escreve que ele permite que os clientes *"desloquem o gerenciamento de certos controles de TI para a AWS"* e herdem um ambiente de controle auditado em vez de construir instalações e segurança física — mantendo dados, identidade, configuração e conformidade. É também por isso que o **AWS Artifact existe como um portal de autoserviço sem custo, com acesso sob demanda aos relatórios de conformidade da AWS**: a evidência da metade da AWS já está escrita; você só precisa buscá-la.
+- **📚 Você sabia?** O modelo é *o motivo de a conformidade na nuvem ser mais barata*. A AWS escreve que ele permite que os clientes *"desloquem o gerenciamento de certos controles de TI para a AWS"* e herdem um ambiente de controle auditado em vez de construir instalações e segurança física: mantendo dados, identidade, configuração e conformidade. É também por isso que o **AWS Artifact existe como um portal de autoserviço sem custo, com acesso sob demanda aos relatórios de conformidade da AWS**: a evidência da metade da AWS já está escrita; você só precisa buscá-la.
 
 ---
 
@@ -120,7 +120,7 @@ O padrão nas linhas 3, 4 e 5 é o exame inteiro: **a AWS fornece um recurso; vo
 
 ### 2.1 A frase da fronteira
 
-A página canônica da AWS desenha a linha em uma única frase — recite-a para si mesmo até que se torne automática:
+A página canônica da AWS desenha a linha em uma única frase: recite-a para si mesmo até que se torne automática:
 
 > *"A AWS opera, gerencia e controla os componentes desde o sistema operacional host e a camada de virtualização até a segurança física das instalações em que o serviço opera. O cliente assume a responsabilidade e o gerenciamento do **sistema operacional convidado** (incluindo atualizações e patches de segurança), do outro software de aplicativo associado e da configuração do firewall de grupo de segurança fornecido pela AWS."*
 
@@ -145,8 +145,8 @@ A página canônica da AWS desenha a linha em uma única frase — recite-a para
 
 Duas consequências aparecem em toda prova:
 
-1. **O Amazon EC2 faz de você um administrador de sistemas.** Você escolheu IaaS, então as camadas 3–7 são suas, incluindo *"atualizações e patches de segurança"* do SO convidado.
-2. **A linha não é um objeto físico.** É uma *divisão contratual de deveres* que a AWS redesenha por serviço — que é a segunda metade da Tarefa 2.1 (Seção 4).
+1. **O Amazon EC2 faz de você um administrador de sistemas.** Você escolheu IaaS, então as camadas 3 to 7 são suas, incluindo *"atualizações e patches de segurança"* do SO convidado.
+2. **A linha não é um objeto físico.** É uma *divisão contratual de deveres* que a AWS redesenha por serviço: que é a segunda metade da Tarefa 2.1 (Seção 4).
 
 ### 2.2 A resiliência usa as mesmas duas preposições
 
@@ -159,9 +159,9 @@ O Pilar de Confiabilidade do Well-Architected repete a divisão para disponibili
 | Falha que evita | Um centro de dados ou AZ inteiro apagado | Seu aplicativo colapsando mesmo com a infraestrutura saudável |
 
 > [!IMPORTANT]
-> **Garantir disponibilidade pela AWS não torna seu aplicativo disponível.** A AWS fornece *primitivas* resilientes; se sua carga de trabalho as atravessa é decisão sua. A orientação da AWS para serviços financeiros torna a divisão explícita: a AWS garante que os serviços que executa *"estejam continuamente disponíveis"*, enquanto os clientes *"são responsáveis por projetar, testar e implantar seus aplicativos"* — e nomeia três ações de programa para o lado do cliente: **Validar, Demonstrar, Monitorar**.
+> **Garantir disponibilidade pela AWS não torna seu aplicativo disponível.** A AWS fornece *primitivas* resilientes; se sua carga de trabalho as atravessa é decisão sua. A orientação da AWS para serviços financeiros torna a divisão explícita: a AWS garante que os serviços que executa *"estejam continuamente disponíveis"*, enquanto os clientes *"são responsáveis por projetar, testar e implantar seus aplicativos"*, e nomeia três ações de programa para o lado do cliente: **Validar, Demonstrar, Monitorar**.
 
-### 2.3 Exemplo E2 — a aritmética das 124 AZs e o que ela *não* compra
+### 2.3 Exemplo E2: a aritmética das 124 AZs e o que ela *não* compra
 
 A AWS relata **124 Zonas de Disponibilidade em 39 Regiões Geográficas**, cada Região com *"pelo menos três Zonas de Disponibilidade independentes e fisicamente separadas"* (em outubro de 2026).
 
@@ -169,14 +169,14 @@ $$
 39 \times 3 = 117 \text{ AZs as the design minimum} \quad\Rightarrow\quad 124 - 117 = 7 \text{ AZs above the minimum}
 $$
 
-Então a AWS projetou sete domínios de falha a mais do que seu próprio piso exige — e **sua conta ainda possui a diferença na prática**. Uma implantação de uma única AZ dentro de uma Região de 3 AZs herda zero dessa engenharia. A checklist do lado do cliente depois da aritmética:
+Então a AWS projetou sete domínios de falha a mais do que seu próprio piso exige, e **sua conta ainda possui a diferença na prática**. Uma implantação de uma única AZ dentro de uma Região de 3 AZs herda zero dessa engenharia. A checklist do lado do cliente depois da aritmética:
 
 1. implante em **pelo menos duas AZs** (a própria regra de design da AWS para disponibilidade);
 2. ative **backups** e teste a restauração deles;
 3. decida se um evento em nível de **Região** precisa de uma estratégia de DR (essa é uma pergunta de Região, não de AZ);
-4. **teste** o failover — um plano não testado é uma hipótese.
+4. **teste** o failover: um plano não testado é uma hipótese.
 
-- **📚 Você sabia?** A AWS descomissiona mídia que continha dados de clientes usando técnicas detalhadas na **NIST 800-88**, o acesso físico às salas de servidores exige **autorização multifator**, e o acesso aos centros de dados é *"registrado, monitorado e retido"* — ainda que auditores externos testem a AWS contra **mais de 2.600 requisitos ao longo do ano** (em outubro de 2026). Tudo isso fica do lado da AWS, e é exatamente por isso que é um controle *herdado* para você: você recebe a garantia sem operar os leitores de crachá.
+- **📚 Você sabia?** A AWS descomissiona mídia que continha dados de clientes usando técnicas detalhadas na **NIST 800-88**, o acesso físico às salas de servidores exige **autorização multifator**, e o acesso aos centros de dados é *"registrado, monitorado e retido"*: ainda que auditores externos testem a AWS contra **mais de 2.600 requisitos ao longo do ano** (em outubro de 2026). Tudo isso fica do lado da AWS, e é exatamente por isso que é um controle *herdado* para você: você recebe a garantia sem operar os leitores de crachá.
 
 ---
 
@@ -188,26 +188,26 @@ Esta é a tabela em que a Tarefa 2.1 se apoia. Aprenda-a como três colunas de l
 
 | Item | Proprietário | Categoria de controle | Fonte (acesso em outubro de 2026) |
 |---|---|---|---|
-| Instalações físicas — crachás, câmeras, vigilantes, gaiolas | **AWS** | Herdados | Modelo de Responsabilidade Compartilhada; Trust Center; Data Layer |
+| Instalações físicas: crachás, câmeras, vigilantes, gaiolas | **AWS** | Herdados | Modelo de Responsabilidade Compartilhada; Trust Center; Data Layer |
 | Ciclo de vida do hardware e descarte de dispositivos | **AWS** | Herdados | Modelo de Responsabilidade Compartilhada; whitepaper do NHS |
 | Sanitização e destruição de mídia (NIST 800-88) | **AWS** | Herdados | AWS Trust Center |
 | Camada de virtualização / hipervisor / firmware host | **AWS** | Herdados (da nuvem) | Modelo de Responsabilidade Compartilhada |
 | Sistema operacional host (sob sua instância) | **AWS** | Herdados | Modelo de Responsabilidade Compartilhada |
-| **Dados do cliente** — conteúdo, onde moram, criptografados ou não | **Cliente** | Específico do cliente | Modelo de Responsabilidade Compartilhada; Security Quick Reference |
-| **Gerenciamento de identidade e acesso** — usuários, funções, políticas | **Cliente** | Específico do cliente | Modelo de Responsabilidade Compartilhada; whitepaper de GDPR |
+| **Dados do cliente**: conteúdo, onde moram, criptografados ou não | **Cliente** | Específico do cliente | Modelo de Responsabilidade Compartilhada; Security Quick Reference |
+| **Gerenciamento de identidade e acesso**: usuários, funções, políticas | **Cliente** | Específico do cliente | Modelo de Responsabilidade Compartilhada; whitepaper de GDPR |
 | **Patch do SO convidado** no EC2 / IaaS | **Cliente** | Compartilhado (contextos separados) | Modelo de Responsabilidade Compartilhada; Security Quick Reference |
 | **Configuração de grupo de segurança / firewall** por instância | **Cliente** | Específico do cliente | Modelo de Responsabilidade Compartilhada |
-| **Escolhas de criptografia** — no cliente; ativação no lado do servidor; tipo de chave | **Cliente** | Específico do cliente | Modelo de Responsabilidade Compartilhada; proteção de dados do EC2 |
+| **Escolhas de criptografia**: no cliente; ativação no lado do servidor; tipo de chave | **Cliente** | Específico do cliente | Modelo de Responsabilidade Compartilhada; proteção de dados do EC2 |
 | **Software de aplicativo** que você instala ou escreve | **Cliente** | Específico do cliente | Modelo de Responsabilidade Compartilhada |
-| Gerenciamento de patches (SO convidado e aplicativos) | **Compartilhado** — a AWS aplica patch na infraestrutura, você aplica patch na sua camada | Compartilhado | Modelo de Responsabilidade Compartilhada; Pilar de Segurança do Well-Architected |
-| Gerenciamento de configuração | **Compartilhado** — a AWS mantém a configuração dos dispositivos de infraestrutura, você configura SO convidado, bancos de dados e aplicativos | Compartilhado | Modelo de Responsabilidade Compartilhada |
-| Conscientização e treinamento | **Compartilhado** — a AWS treina funcionários da AWS, você treina os seus | Compartilhado | Modelo de Responsabilidade Compartilhada |
+| Gerenciamento de patches (SO convidado e aplicativos) | **Compartilhado**: a AWS aplica patch na infraestrutura, você aplica patch na sua camada | Compartilhado | Modelo de Responsabilidade Compartilhada; Pilar de Segurança do Well-Architected |
+| Gerenciamento de configuração | **Compartilhado**: a AWS mantém a configuração dos dispositivos de infraestrutura, você configura SO convidado, bancos de dados e aplicativos | Compartilhado | Modelo de Responsabilidade Compartilhada |
+| Conscientização e treinamento | **Compartilhado**: a AWS treina funcionários da AWS, você treina os seus | Compartilhado | Modelo de Responsabilidade Compartilhada |
 | Proteção de serviço e comunicações / segurança de zona | **Específico do cliente** | Específico do cliente | Modelo de Responsabilidade Compartilhada |
 | Conformidade com as leis e regulamentações aplicáveis à sua carga de trabalho | **Cliente** | Específico do cliente | AWS Compliance; Programas de Conformidade |
 | Resiliência da infraestrutura vs SLAs da AWS | **AWS** | Herdados | Pilar de Confiabilidade do Well-Architected |
 | Design Multi-AZ, backups, replicação, testes de DR | **Cliente** | Específico do cliente | Pilar de Confiabilidade do Well-Architected |
 
-### 3.2 Exemplo E3 — a mesma carga de trabalho, três colunas
+### 3.2 Exemplo E3: a mesma carga de trabalho, três colunas
 
 Uma equipe de banco de dados on-premises documenta o que cada opção de hospedagem exige. O Guia do Usuário do Amazon RDS publica exatamente esta comparação:
 
@@ -220,7 +220,7 @@ Uma equipe de banco de dados on-premises documenta o que cada opção de hospeda
 | Ciclo de vida do hardware | Cliente | AWS | **AWS** |
 | Energia, rede, refrigeração | Cliente | AWS | **AWS** |
 
-Leia as colunas da esquerda para a direita e você está vendo ** a linha subir**: três deveres do cliente se tornam deveres da AWS conforme você sai do autogerenciado para o gerenciado. Leia as *linhas* e você vê o que nunca muda — **nada nesta tabela trata dos seus dados, das suas políticas de IAM ou da sua obrigação de conformidade**, porque esses vivem acima da fronteira em toda coluna.
+Leia as colunas da esquerda para a direita e você está vendo ** a linha subir**: três deveres do cliente se tornam deveres da AWS conforme você sai do autogerenciado para o gerenciado. Leia as *linhas* e você vê o que nunca muda: **nada nesta tabela trata dos seus dados, das suas políticas de IAM ou da sua obrigação de conformidade**, porque esses vivem acima da fronteira em toda coluna.
 
 ---
 
@@ -234,7 +234,7 @@ O guia do exame nomeia **Amazon RDS, AWS Lambda e Amazon EC2** como exemplos de 
 |---|---|---|---|---|
 | Instalações, hardware, energia/refrigeração | AWS | AWS | AWS | AWS |
 | SO host + hipervisor | AWS | AWS | AWS | AWS |
-| Patch do SO convidado | **Cliente** | **AWS** | n/a — nenhum SO convidado exposto | n/a |
+| Patch do SO convidado | **Cliente** | **AWS** | n/a: nenhum SO convidado exposto | n/a |
 | Instalação e patch do motor de banco | Cliente (você instalou) | **AWS** | n/a | n/a |
 | Patch de runtime/linguagem | Cliente | Cliente (lado do aplicativo) | **AWS**, mas pode ser preciso acionar a atualização | n/a |
 | Escalabilidade, ALTA, backups automáticos | Você projeta (Auto Scaling, Multi-AZ) | **AWS** | AWS | AWS |
@@ -275,7 +275,7 @@ Quem aplica patch no sistema operacional? Seis cargas de trabalho, uma resposta 
 | **AWS Lambda** no modo **Manual**, runtime fixado | Runtime gerenciado, seu modo de controle | **Você** | *"você é responsável por atualizar sua função para usar a versão mais recente do runtime"* |
 | **Amazon S3** | Armazenamento abstraido | **AWS** (não existe SO de cliente) | Multilocatário; nada para você aplicar patch |
 
-As duas armadilhas nessa tabela — **RDS Custom** e **Lambda Manual** — valem uma seção cada.
+As duas armadilhas nessa tabela, **RDS Custom** e **Lambda Manual**, valem uma seção cada.
 
 ### 4.3 A válvula de escape do RDS Custom
 
@@ -297,17 +297,17 @@ A AWS publica o gerenciamento de runtime como um tópico de **responsabilidade c
 | **Function update** / **Manual** | Você | Observe datas de descontinuação, redesploy, teste |
 | Funções com **imagem de contêiner** | A AWS publica **imagens base** corrigidas | **Reconstrua e envie** sua imagem para receber a correção |
 
-### 4.5 Exemplo E5 — uma runtime descontinuada que ninguém corrigiu
+### 4.5 Exemplo E5: uma runtime descontinuada que ninguém corrigiu
 
 Uma função roda em uma versão de runtime que a AWS marcou para descontinuação. A AWS já publicou a correção de segurança (a metade do Lambda está cumprida). A auditoria da equipe:
 
 | Configuração | Runtime corrigida? | Proprietário da lacuna |
 |---|---|---|
-| Modo de atualização **Auto** | Sim — o Lambda aplicou | Nenhuma (monitore para detectar quebras) |
-| Modo de atualização **Manual**, ninguém redesploya | **Não** | **Cliente** — a correção existia, o dever era seu |
-| Imagem de contêiner, imagem não reconstruída | **Não** | **Cliente** — a AWS corrigiu a base, você deve reconstruir |
+| Modo de atualização **Auto** | Sim, o Lambda aplicou | Nenhuma (monitore para detectar quebras) |
+| Modo de atualização **Manual**, ninguém redesploya | **Não** | **Cliente**: a correção existia, o dever era seu |
+| Imagem de contêiner, imagem não reconstruída | **Não** | **Cliente**: a AWS corrigiu a base, você deve reconstruir |
 
-Conte as falhas: **0 falhas da AWS, 1 falha do cliente em cada uma das duas últimas linhas.** O modelo funcionou exatamente como projetado — uma correção publicada mais um dever ignorado ainda iguala uma função não corrigida, e o exame vai pedir que você nomeie o proprietário.
+Conte as falhas: **0 falhas da AWS, 1 falha do cliente em cada uma das duas últimas linhas.** O modelo funcionou exatamente como projetado: uma correção publicada mais um dever ignorado ainda iguala uma função não corrigida, e o exame vai pedir que você nomeie o proprietário.
 
 ### 4.6 Patch single-tenant versus multilocatário
 
@@ -335,13 +335,13 @@ flowchart TD
 {
   "question": "Associe cada carga de trabalho a quem aplica patch no sistema operacional (ou runtime) no exame CLF-C02:",
   "pairs": [
-    {"left": "Instância Amazon EC2", "right": "Cliente - o SO convidado e seus patches de segurança são seus no IaaS"},
-    {"left": "MySQL autogerenciado no Amazon EC2", "right": "Cliente - você instalou o motor, então aplica patch no SO e no banco de dados"},
-    {"left": "Amazon RDS (padrão)", "right": "AWS - a AWS aplica patch no SO e no motor; você só escolhe a janela de manutenção"},
-    {"left": "Amazon RDS Custom", "right": "Cliente - você gerencia o host e personaliza o SO como faz no Amazon EC2"},
-    {"left": "AWS Lambda no modo Auto", "right": "AWS - o Lambda aplica atualizações de runtime a todas as funções"},
-    {"left": "AWS Lambda no modo Manual", "right": "Cliente - você é responsável por atualizar sua função para a runtime mais recente"},
-    {"left": "Amazon S3", "right": "AWS - armazenamento abstraido multilocatário; não existe SO convidado do seu lado"}
+    {"left": "Instância Amazon EC2", "right": "Cliente, o SO convidado e seus patches de segurança são seus no IaaS"},
+    {"left": "MySQL autogerenciado no Amazon EC2", "right": "Cliente: você instalou o motor, então aplica patch no SO e no banco de dados"},
+    {"left": "Amazon RDS (padrão)", "right": "AWS: a AWS aplica patch no SO e no motor; você só escolhe a janela de manutenção"},
+    {"left": "Amazon RDS Custom", "right": "Cliente: você gerencia o host e personaliza o SO como faz no Amazon EC2"},
+    {"left": "AWS Lambda no modo Auto", "right": "AWS: o Lambda aplica atualizações de runtime a todas as funções"},
+    {"left": "AWS Lambda no modo Manual", "right": "Cliente: você é responsável por atualizar sua função para a runtime mais recente"},
+    {"left": "Amazon S3", "right": "AWS: armazenamento abstraido multilocatário; não existe SO convidado do seu lado"}
   ],
   "explanation": "A preposição nunca muda (AWS = segurança DA, você = segurança NA), mas a linha de patch muda com o serviço: mais abstração significa que a AWS absorve mais da pilha. As duas nuances deliberadas são o RDS Custom (o dever de SO volta para você) e o modo Manual do Lambda (o dever de runtime fica com você mesmo tendo a AWS publicado a correção)."
 }
@@ -362,11 +362,11 @@ flowchart TD
     "AWS Lambda (computação serverless)",
     "Amazon S3 (armazenamento abstraido)"
   ],
-  "explanation": "A escada funciona por abstração: no EC2 você possui o SO convidado, o motor, o escalonamento e os backups; no RDS a AWS assume SO, motor, escalonamento, ALTA e backups; no Lambda não há SO para gerenciar; no S3 até o runtime desaparece. O que NÃO desce na escada é seu dados, IAM, configuração de rede e escolha de criptografia - esses permanecem responsabilidade do cliente em todos os degraus."
+  "explanation": "A escada funciona por abstração: no EC2 você possui o SO convidado, o motor, o escalonamento e os backups; no RDS a AWS assume SO, motor, escalonamento, ALTA e backups; no Lambda não há SO para gerenciar; no S3 até o runtime desaparece. O que NÃO desce na escada é seu dados, IAM, configuração de rede e escolha de criptografia: esses permanecem responsabilidade do cliente em todos os degraus."
 }
 ```
 
-- **📚 Você sabia?** O mesmo modelo governa *quem remove o hardware*: a orientação da AWS alinhada ao NHS chama a segurança do centro de dados de *"inteiramente responsabilidade da AWS"* e diz que o descomissionamento e o deprovisionamento *"cabem à AWS sob o Modelo de Responsabilidade Compartilhada"*. Sua obrigação começa nos seus dados — *"Você sempre possui seus dados, incluindo a capacidade de criptografá-los, movê-los e gerenciar a retenção"* — e termina nas suas políticas de retenção e exclusão, nunca no triturador.
+- **📚 Você sabia?** O mesmo modelo governa *quem remove o hardware*: a orientação da AWS alinhada ao NHS chama a segurança do centro de dados de *"inteiramente responsabilidade da AWS"* e diz que o descomissionamento e o deprovisionamento *"cabem à AWS sob o Modelo de Responsabilidade Compartilhada"*. Sua obrigação começa nos seus dados, *"Você sempre possui seus dados, incluindo a capacidade de criptografá-los, movê-los e gerenciar a retenção"*, e termina nas suas políticas de retenção e exclusão, nunca no triturador.
 
 ---
 
@@ -384,7 +384,7 @@ A AWS não divide controles apenas em "seu/meu". A taxonomia publicada tem **qua
 | **Responsabilidade da AWS "da nuvem"** / **do cliente "na nuvem"** | A divisão de nível superior | Tudo acima se resolve em uma dessas duas metades |
 
 > [!IMPORTANT]
-> **Compartilhado ≠ 50/50.** A redação da AWS é *"em contextos completamente separados"*: a AWS executa **seu** patch de **sua** infraestrutura, você executa **seu** patch do **seu** SO convidado e aplicativos — sobre o mesmo controle abstrato, em camadas diferentes, com evidências diferentes. Uma pergunta que ofereça *"responsabilidades compartilhadas são divididas igualmente entre a AWS e o cliente"* está testando se você leu a definição.
+> **Compartilhado ≠ 50/50.** A redação da AWS é *"em contextos completamente separados"*: a AWS executa **seu** patch de **sua** infraestrutura, você executa **seu** patch do **seu** SO convidado e aplicativos: sobre o mesmo controle abstrato, em camadas diferentes, com evidências diferentes. Uma pergunta que ofereça *"responsabilidades compartilhadas são divididas igualmente entre a AWS e o cliente"* está testando se você leu a definição.
 
 ```mermaid
 flowchart TD
@@ -403,7 +403,7 @@ flowchart TD
 
 ### 5.2 A heurística das cinco perguntas
 
-Quando uma opção for desconhecida, execute esta ordem de testes — ela resolve quase todo item da Tarefa 2.1:
+Quando uma opção for desconhecida, execute esta ordem de testes: ela resolve quase todo item da Tarefa 2.1:
 
 ```text
 1. Identifique a CLASSE DE SERVIÇO:  IaaS / gerenciado / abstraido / serverless
@@ -414,7 +414,7 @@ Quando uma opção for desconhecida, execute esta ordem de testes — ela resolv
 5. Dados, IAM, criptografia, conformidade com a lei             -> CLIENTE, SEMPRE
 ```
 
-### 5.3 Exemplo E6 — classificando doze controles
+### 5.3 Exemplo E6: classificando doze controles
 
 Classifique os doze controles da Seção 3 na taxonomia e conte-os:
 
@@ -423,7 +423,7 @@ Classifique os doze controles da Seção 3 na taxonomia e conte-os:
 | **Herdados** (4) | Crachá/acesso físico · ciclo de vida do hardware · sanitização de mídia pela NIST 800-88 · SO host e hipervisor |
 | **Compartilhados** (3) | Gerenciamento de patches · gerenciamento de configuração · conscientização e treinamento |
 | **Específicos do cliente** (5) | Classificação de dados · permissões de IAM · regras de grupo de segurança · escolha de criptografia · conformidade com a lei aplicável |
-| **Inclassificável — lado errado da linha** | *"A AWS configura seu grupo de segurança"* · *"A AWS criptografa seus dados em seu nome como uma obrigação padrão"* · *"A AWS é responsável pela sua conformidade com o HIPAA"* |
+| **Inclassificável: lado errado da linha** | *"A AWS configura seu grupo de segurança"* · *"A AWS criptografa seus dados em seu nome como uma obrigação padrão"* · *"A AWS é responsável pela sua conformidade com o HIPAA"* |
 
 Quatro mais três mais cinco igualam doze, e cada uma das três afirmações "inclassificáveis" falha na tabela de armadilhas da Seção 8. Se você consegue classificar um controle em menos de dez segundos, consegue responder à pergunta.
 
@@ -437,7 +437,7 @@ Um controle só é real se executa continuamente, então o exame também testa a
 | **Gerenciamento de configuração** | Manter a configuração dos dispositivos de infraestrutura da AWS | Configurar sistemas operacionais convidados, bancos de dados e aplicativos; manter regras de grupo de segurança, NACL e VPC como código revisado | AWS: declarações de escopo SOC/ISO · Você: regras do AWS Config, modelos do CloudFormation revisados |
 | **Conscientização e treinamento** | Treinar funcionários da AWS | Treinar seus próprios funcionários sobre o modelo compartilhado, sobre o manuseio de dados e sobre higiene de conta (MFA do root, privilégio mínimo) | AWS: controles de pessoas auditados · Você: registros de treinamento dentro da sua evidência de conformidade |
 
-A orientação da AWS para serviços financeiros enquadra o lado cliente desse loop como três ações de programa repetidas: **Validar** (o controle está projetado corretamente?), **Demonstrar** (você consegue mostrar a evidência?), **Monitorar** (ainda está funcionando?). Isso é monitoramento contínuo *na* nuvem — e nada disso se transfere para a AWS, porque a AWS não pode validar uma decisão que você não tomou.
+A orientação da AWS para serviços financeiros enquadra o lado cliente desse loop como três ações de programa repetidas: **Validar** (o controle está projetado corretamente?), **Demonstrar** (você consegue mostrar a evidência?), **Monitorar** (ainda está funcionando?). Isso é monitoramento contínuo *na* nuvem, e nada disso se transfere para a AWS, porque a AWS não pode validar uma decisão que você não tomou.
 
 ```text
 LOOP DE MONITORAMENTO CONTÍNUO (lado do cliente do modelo)
@@ -463,14 +463,14 @@ LOOP DE MONITORAMENTO CONTÍNUO (lado do cliente do modelo)
 {
   "question": "Associe cada serviço da lista atual no escopo do CLF-C02 (em outubro de 2026) a onde sua divisão de responsabilidades realmente cai:",
   "pairs": [
-    {"left": "AWS PrivateLink", "right": "A AWS executa e aplica patch na infraestrutura do serviço - você possui as políticas de endpoint, quais principais e contas podem anexar, e a configuração de VPC"},
-    {"left": "AWS Transit Gateway", "right": "A AWS executa e aplica patch na infraestrutura do serviço - você possui as tabelas de roteamento, as conexões e a política de compartilhamento de recursos"},
-    {"left": "AWS Site-to-Site VPN", "right": "A AWS executa os endpoints de VPN gerenciados - você possui a configuração do gateway do cliente, o roteamento e as configurações de criptografia/autenticação que escolhe"},
-    {"left": "AWS Client VPN", "right": "A AWS executa o serviço - você possui a fonte de autenticação, as regras de autorização e quais usuários recebem um perfil"},
-    {"left": "AWS IAM Identity Center", "right": "A AWS executa o serviço - você possui a fonte de identidade, as atribuições de conjuntos de permissões e a autenticação multifator da sua força de trabalho"},
-    {"left": "AWS Support (a única entrada na categoria Customer Enablement)", "right": "A AWS fornece a organização de suporte e sua orientação - você escolhe o plano, abre os casos e age com base nas recomendações"}
+    {"left": "AWS PrivateLink", "right": "A AWS executa e aplica patch na infraestrutura do serviço: você possui as políticas de endpoint, quais principais e contas podem anexar, e a configuração de VPC"},
+    {"left": "AWS Transit Gateway", "right": "A AWS executa e aplica patch na infraestrutura do serviço: você possui as tabelas de roteamento, as conexões e a política de compartilhamento de recursos"},
+    {"left": "AWS Site-to-Site VPN", "right": "A AWS executa os endpoints de VPN gerenciados: você possui a configuração do gateway do cliente, o roteamento e as configurações de criptografia/autenticação que escolhe"},
+    {"left": "AWS Client VPN", "right": "A AWS executa o serviço: você possui a fonte de autenticação, as regras de autorização e quais usuários recebem um perfil"},
+    {"left": "AWS IAM Identity Center", "right": "A AWS executa o serviço: você possui a fonte de identidade, as atribuições de conjuntos de permissões e a autenticação multifator da sua força de trabalho"},
+    {"left": "AWS Support (a única entrada na categoria Customer Enablement)", "right": "A AWS fornece a organização de suporte e sua orientação: você escolhe o plano, abre os casos e age com base nas recomendações"}
   ],
-  "explanation": "Todo serviço se divide do mesmo jeito: a AWS possui a infraestrutura do serviço sob ele (segurança DA nuvem), e o cliente possui toda decisão tomada no topo dele - rotas, conexões, endpoints, identidades, permissões e MFA (segurança NA nuvem). Nomes novos no escopo, como AWS PrivateLink, AWS Transit Gateway, AWS Site-to-Site VPN e AWS Client VPN, mudam o que você pode ser perguntado, mas nunca mudam onde a linha se situa. Confirme a lista atual no escopo antes do uso: a AWS a rotula como não exaustiva e sujeita a alterações."
+  "explanation": "Todo serviço se divide do mesmo jeito: a AWS possui a infraestrutura do serviço sob ele (segurança DA nuvem), e o cliente possui toda decisão tomada no topo dele: rotas, conexões, endpoints, identidades, permissões e MFA (segurança NA nuvem). Nomes novos no escopo, como AWS PrivateLink, AWS Transit Gateway, AWS Site-to-Site VPN e AWS Client VPN, mudam o que você pode ser perguntado, mas nunca mudam onde a linha se situa. Confirme a lista atual no escopo antes do uso: a AWS a rotula como não exaustiva e sujeita a alterações."
 }
 ```
 
@@ -503,7 +503,7 @@ flowchart LR
     NOTE2["Monitorar SEU ambiente é uma<br/>responsabilidade do CLIENTE - a AWS não pode<br/>agir sobre um achado que você nunca coletou"]
 ```
 
-### 6.2 Exemplo E7 — a auditoria de exposição da conta root
+### 6.2 Exemplo E7: a auditoria de exposição da conta root
 
 Três achados em uma única conta (as contagens são do cenário, não métricas da AWS):
 
@@ -512,11 +512,11 @@ Três achados em uma única conta (as contagens são do cenário, não métricas
 | Usuário(s) root sem MFA | 1 | Cliente | Imponha MFA no usuário root imediatamente |
 | Chaves de acesso root de longa duração | 2 | Cliente | Exclua-as; chaves de root são um artefato só para emergências |
 | Alertas de login do root | 0 | Cliente | Ative um alerta de detecção em toda a organização (a orientação de segurança do CAF da AWS recomenda controles de detecção em logins do root) |
-| Segurança física do centro de dados no lado da AWS | funcionando | AWS (herdado) | Nada a fazer — já auditado |
+| Segurança física do centro de dados no lado da AWS | funcionando | AWS (herdado) | Nada a fazer: já auditado |
 
 **Exposição = 1 + 2 + 0 = 3 lacunas do lado do cliente, 0 lacunas do lado da AWS.** Note o que a aritmética mostra: cada lacuna é uma *decisão que ninguém tomou*, e cada correção usa uma ferramenta que a AWS já fornece. Note também o controle de cadastro do lado da AWS que **não** é seu: na criação da conta a AWS retém **1 USD (ou equivalente) por 3 a 5 dias para verificar sua conta e prevenir fraude** (em outubro de 2026).
 
-### 6.3 Verifique-se — os deveres que nunca mudam
+### 6.3 Verifique-se: os deveres que nunca mudam
 
 ```fillblank
 {
@@ -531,11 +531,11 @@ Três achados em uma única conta (as contagens são do cenário, não métricas
     "6": "aplicativo"
   },
   "distractors": ["hipervisor", "datacenter", "virtualização", "firmware", "refrigeração", "largura de banda"],
-  "explanation": "Todos os seis são responsabilidades do cliente em todo serviço: classificação de dados, gerenciamento de identidade e acesso, configuração de rede, a decisão de criptografia, patch de SO convidado no IaaS e segurança de aplicativo. Os distratores são todas camadas da AWS - hipervisor, centro de dados, virtualização, firmware e energia/refrigeração ficam do lado da segurança DA nuvem."
+  "explanation": "Todos os seis são responsabilidades do cliente em todo serviço: classificação de dados, gerenciamento de identidade e acesso, configuração de rede, a decisão de criptografia, patch de SO convidado no IaaS e segurança de aplicativo. Os distratores são todas camadas da AWS: hipervisor, centro de dados, virtualização, firmware e energia/refrigeração ficam do lado da segurança DA nuvem."
 }
 ```
 
-- **📚 Você sabia?** Sua evidência de conformidade se divide pela mesma linha. Para uma carga de trabalho PCI você puxaria evidência do lado da AWS — segurança física, destruição de mídia, patch de infraestrutura, proteção de rede, treinamento de equipe — do **AWS Artifact**, um *"portal de autoserviço sem custo, com acesso sob demanda aos relatórios de conformidade da AWS"*, enquanto fornece sua própria evidência de privilégio mínimo de IAM, regras de grupo de segurança, configurações de criptografia e retenção de logs. A AWS suporta **143 padrões de segurança e certificações de conformidade**, incluindo PCI-DSS, HIPAA/HITECH, FedRAMP, GDPR, FIPS 140-3 e NIST 800-171, e oferece **mais de 300 serviços e recursos de segurança, conformidade e governança** (todos em outubro de 2026).
+- **📚 Você sabia?** Sua evidência de conformidade se divide pela mesma linha. Para uma carga de trabalho PCI você puxaria evidência do lado da AWS, segurança física, destruição de mídia, patch de infraestrutura, proteção de rede, treinamento de equipe, do **AWS Artifact**, um *"portal de autoserviço sem custo, com acesso sob demanda aos relatórios de conformidade da AWS"*, enquanto fornece sua própria evidência de privilégio mínimo de IAM, regras de grupo de segurança, configurações de criptografia e retenção de logs. A AWS suporta **143 padrões de segurança e certificações de conformidade**, incluindo PCI-DSS, HIPAA/HITECH, FedRAMP, GDPR, FIPS 140-3 e NIST 800-171, e oferece **mais de 300 serviços e recursos de segurança, conformidade e governança** (todos em outubro de 2026).
 
 ---
 
@@ -550,11 +550,11 @@ Tudo a partir do sistema operacional host para baixo, além da maquinaria de exe
 | **Virtualização** | SO host, hipervisor, firmware sob sua instância | *"…desde o sistema operacional host e a camada de virtualização até a segurança física das instalações"* |
 | **Infraestrutura de serviços gerenciados** | Os binários do motor de banco de dados, o runtime serverless, o interior do serviço de armazenamento | O Amazon RDS aplica patch no SO e no motor; o Lambda cura e publica atualizações de segurança de runtime; serviços multilocatários aplicam patch sem ação do cliente |
 | **Resiliência da infraestrutura global** | Regiões, AZs, energia e rede redundantes | **124 Zonas de Disponibilidade em 39 Regiões Geográficas**, cada Região com pelo menos três AZs fisicamente separadas (em outubro de 2026); resiliência *da* nuvem vs SLAs da AWS |
-| **Identidade de infraestrutura** | Quem pode entrar fisicamente em um centro de dados | Controles físicos por crachá e multifator — *suas* identidades de IAM são um sistema diferente, do lado do cliente |
-| **Auditoria do lado da AWS** | Auditoria de terceiros e interna, publicação de relatórios | Auditado contra **mais de 2.600 requisitos** ao longo do ano; **185 serviços** no relatório SOC 1 do Verão de 2026 cobrindo 1º de jul. de 2025 – 30 de jun. de 2026 (publicado em 11 de ago. de 2026); **mais de 100** serviços da AWS certificados contra o CISPE Data Protection Code of Conduct |
+| **Identidade de infraestrutura** | Quem pode entrar fisicamente em um centro de dados | Controles físicos por crachá e multifator: *suas* identidades de IAM são um sistema diferente, do lado do cliente |
+| **Auditoria do lado da AWS** | Auditoria de terceiros e interna, publicação de relatórios | Auditado contra **mais de 2.600 requisitos** ao longo do ano; **185 serviços** no relatório SOC 1 do Verão de 2026 cobrindo 1º de jul. de 2025 to 30 de jun. de 2026 (publicado em 11 de ago. de 2026); **mais de 100** serviços da AWS certificados contra o CISPE Data Protection Code of Conduct |
 
 > [!NOTE]
-> **"A AWS foi auditada" não é "você está em conformidade."** A AWS publica *"Services in Scope by Compliance Program"* (SOC atualizado pela última vez em 11 de ago. de 2026, FedRAMP em 29 de set. de 2026, C5 em 13 de jan. de 2026), mas a AWS também declara claramente que *"os clientes da AWS permanecem responsáveis por cumprir as leis e regulamentações de conformidade aplicáveis"* e que *"nenhuma certificação formal está disponível para (ou distribuível por) um provedor de serviços de nuvem"* nesses domínios legais. Não existe coisa como um "provedor de nuvem certificado pelo HIPAA" — a certificação, a autorização e a responsabilidade recaem sobre **você**.
+> **"A AWS foi auditada" não é "você está em conformidade."** A AWS publica *"Services in Scope by Compliance Program"* (SOC atualizado pela última vez em 11 de ago. de 2026, FedRAMP em 29 de set. de 2026, C5 em 13 de jan. de 2026), mas a AWS também declara claramente que *"os clientes da AWS permanecem responsáveis por cumprir as leis e regulamentações de conformidade aplicáveis"* e que *"nenhuma certificação formal está disponível para (ou distribuível por) um provedor de serviços de nuvem"* nesses domínios legais. Não existe coisa como um "provedor de nuvem certificado pelo HIPAA": a certificação, a autorização e a responsabilidade recaem sobre **você**.
 
 ---
 
@@ -577,13 +577,13 @@ Estas são as atribuições incorretas que enchem os distratores. Leia a versão
 | A AWS garante disponibilidade, então meu aplicativo está disponível | A AWS fornece primitivas resilientes; **design Multi-AZ, backups, versionamento, replicação e testes de DR são seus** |
 | A atestação de terceiros da AWS significa que estamos em conformidade | Os relatórios da AWS cobrem controles da AWS; sua implementação e conformidade legal continuam sendo suas |
 
-### 8.2 Exemplo E8 — reescrevendo três distratores
+### 8.2 Exemplo E8: reescrevendo três distratores
 
 Tome um enunciado de prática: *"Uma carga de trabalho regulamentada está implantada no Amazon RDS. Qual afirmação é correta?"*
 
 | Opção como escrita | Diagnóstico | Reescrita correta |
 |---|---|---|
-| *"A AWS é responsável por criptografar o banco de dados em repouso, então o cliente não tem dever de criptografia."* | Isca meio-verdade — a AWS *oferece* criptografia | O cliente ainda decide **se** a criptografia está ligada, **qual chave** e como as chaves são tratadas |
+| *"A AWS é responsável por criptografar o banco de dados em repouso, então o cliente não tem dever de criptografia."* | Isca meio-verdade: a AWS *oferece* criptografia | O cliente ainda decide **se** a criptografia está ligada, **qual chave** e como as chaves são tratadas |
 | *"Como a AWS aplica patch no motor, o cliente não configura mais o acesso de rede."* | Confunde duas linhas | A AWS aplica patch no SO + motor; o **grupo de segurança no endpoint do banco** é configurado pelo cliente |
 | *"O relatório SOC da AWS satisfaz a obrigação regulatória do cliente."* | Erro de categoria | O relatório da AWS evidencia **controles da AWS**; o cliente fornece sua própria evidência e detém a obrigação legal |
 
@@ -613,28 +613,28 @@ classificável  ->  SEU.  Fisicamente intocável  ->  AWS.
 ```
 
 > [!WARNING]
-> **Dois red herrings a mais que circulam como material "oficial".** **Não existe "modelo CUP" publicado pela AWS** para responsabilidade compartilhada — não use essa sigla. E o serviço de auditoria é o **AWS CloudTrail**; qualquer opção que nomeie um produto de auditoria parecido é invenção. Fique na taxonomia que a AWS realmente publica: **herdados, compartilhados, específicos do cliente**.
+> **Dois red herrings a mais que circulam como material "oficial".** **Não existe "modelo CUP" publicado pela AWS** para responsabilidade compartilhada: não use essa sigla. E o serviço de auditoria é o **AWS CloudTrail**; qualquer opção que nomeie um produto de auditoria parecido é invenção. Fique na taxonomia que a AWS realmente publica: **herdados, compartilhados, específicos do cliente**.
 
 ---
 
 ## Casos Reais
 
-A AWS publica como a responsabilidade compartilhada aparece em uma conta de produção regulamentada. Cada número abaixo é **afirmado pelo cliente ou pela AWS e não auditado**, com a fonte nomeada para que você possa verificar — o ponto examinável é a **divisão** (quais controles foram herdados, quais o cliente precisou construir), não o número de marketing.
+A AWS publica como a responsabilidade compartilhada aparece em uma conta de produção regulamentada. Cada número abaixo é **afirmado pelo cliente ou pela AWS e não auditado**, com a fonte nomeada para que você possa verificar, o ponto examinável é a **divisão** (quais controles foram herdados, quais o cliente precisou construir), não o número de marketing.
 
-### Caso A — athenahealth: segurança de rede centralizada em 120 contas (Domínio 2)
+### Caso A, athenahealth: segurança de rede centralizada em 120 contas (Domínio 2)
 
 | Elemento | Detalhe |
 |---|---|
 | **Setor / contexto** software de saúde, sensível ao HIPAA | Monitoramento de egress em um vasto conjunto de VPCs, custo de inspeção em alta, equipe de segurança pequena |
 | **Serviços AWS nomeados** | **AWS Network Firewall** (centralizado), AWS Transit Gateway, **AWS RAM** (distribuição de política para **120 contas**), regras como código no CloudFormation, AWS Direct Connect; AWS Shield no roadmap |
-| **Onde termina a metade da AWS** | O *dispositivo* de firewall, seu escalonamento e a infraestrutura subjacente — capacidade de serviço gerenciado que a equipe nunca precisou dimensionar |
+| **Onde termina a metade da AWS** | O *dispositivo* de firewall, seu escalonamento e a infraestrutura subjacente: capacidade de serviço gerenciado que a equipe nunca precisou dimensionar |
 | **Onde começa a metade do cliente** | As **regras**, a **política de compartilhamento de recursos** em 120 contas, as **guardrails do CloudFormation**, a arquitetura de inspeção e a revisão de logs |
 | **Resultados principais (publicados pela AWS, afirmados pelo cliente)** | Custos de inspeção **reduzidos em 95%**; centenas de VPCs em **120 contas** implantadas *"em apenas alguns dias"*; o design e o rollout foram feitos por **oito pessoas** sem interrupções |
 | **Fonte** | aws.amazon.com/solutions/case-studies/athenahealth-case-study (acesso em outubro de 2026) |
 
-*Lição de exame:* esta é uma história de **configuração de rede do lado do cliente** executando na **infraestrutura do lado da AWS**. A citação do cliente — *"Por escalável, quero dizer que é mágica da AWS. Não precisamos pensar em escalabilidade alguma."* — trata da metade herdada; as regras como código e a distribuição de política em 120 contas são a metade "na nuvem" que nenhum provedor pode fazer por você.
+*Lição de exame:* esta é uma história de **configuração de rede do lado do cliente** executando na **infraestrutura do lado da AWS**. A citação do cliente, *"Por escalável, quero dizer que é mágica da AWS. Não precisamos pensar em escalabilidade alguma."*, trata da metade herdada; as regras como código e a distribuição de política em 120 contas são a metade "na nuvem" que nenhum provedor pode fazer por você.
 
-### Caso B — Avalon Healthcare Solutions: acesso Zero Trust a PHI (Domínio 2)
+### Caso B, Avalon Healthcare Solutions: acesso Zero Trust a PHI (Domínio 2)
 
 | Elemento | Detalhe |
 |---|---|
@@ -645,7 +645,7 @@ A AWS publica como a responsabilidade compartilhada aparece em uma conta de prod
 | **Resultados principais (publicados pela AWS, afirmados pelo cliente)** | Configuração da rede de perímetro **dias → cerca de uma hora**; muito menos tentativas de violação; **50 usuários de negócio** integrados até fevereiro de 2024 enquanto ainda atendiam **mais de 700 controles** |
 | **Fonte** | aws.amazon.com/solutions/case-studies/avalon-aws-verified-access-case-study (acesso em outubro de 2026) |
 
-*Lição de exame:* **a identidade é sempre responsabilidade do cliente**, e a Avalon mostra o padrão que o exame quer: compre o *serviço* de acesso (lado da AWS), possua o *quem* e a *evidência* (lado do cliente). Exemplo relacionado publicado pela AWS: a **Socure** relata ter *"herdado mais de 46 controles de segurança exigidos pelo FedRAMP do AWS GovCloud (US)"* (AWS Public Sector Blog, 14 de novembro de 2024) — uma contagem limpa de controles **herdados**, com tudo o resto ainda sendo dela.
+*Lição de exame:* **a identidade é sempre responsabilidade do cliente**, e a Avalon mostra o padrão que o exame quer: compre o *serviço* de acesso (lado da AWS), possua o *quem* e a *evidência* (lado do cliente). Exemplo relacionado publicado pela AWS: a **Socure** relata ter *"herdado mais de 46 controles de segurança exigidos pelo FedRAMP do AWS GovCloud (US)"* (AWS Public Sector Blog, 14 de novembro de 2024): uma contagem limpa de controles **herdados**, com tudo o resto ainda sendo dela.
 
 ### O que os dois casos compartilham
 
@@ -658,47 +658,47 @@ A AWS publica como a responsabilidade compartilhada aparece em uma conta de prod
 
 ### Dois casos a mais do Domínio 2: o par de autorização
 
-Os casos A e B são construções de segurança *operacionais*. Os próximos dois são histórias de *autorização* — mesmo modelo, evidência diferente: a metade da AWS chega pré-auditada dentro de uma Região em conformidade, e a metade do cliente é a implementação do controle **e** a própria autorização. Ambos são publicados pela AWS, ambos são afirmados pelo cliente, e ambos estão aqui porque o exame ama a palavra *herdado*.
+Os casos A e B são construções de segurança *operacionais*. Os próximos dois são histórias de *autorização*: mesmo modelo, evidência diferente: a metade da AWS chega pré-auditada dentro de uma Região em conformidade, e a metade do cliente é a implementação do controle **e** a própria autorização. Ambos são publicados pela AWS, ambos são afirmados pelo cliente, e ambos estão aqui porque o exame ama a palavra *herdado*.
 
-### Caso C — Socure: contando os 46+ controles FedRAMP que você herda (Domínio 2)
+### Caso C, Socure: contando os 46+ controles FedRAMP que você herda (Domínio 2)
 
 | Elemento | Detalhe |
 |---|---|
 | **Setor / contexto** fornecedor de verificação de identidade vendendo ao setor público dos EUA, autorização FedRAMP exigida | Construir um ambiente em conformidade com o FedRAMP escalável e seguro em vez de um sob medida |
 | **Serviços AWS nomeados** | **AWS GovCloud (US)** como ambiente operacional em conformidade; a fonte também nomeia ferramentas complementares de terceiros (a mistura de serviços não é detalhada na fonte) |
-| **Onde termina a metade da AWS** | O ambiente de controle do GovCloud que o cliente herda — *"herdamos mais de 46 controles de segurança exigidos pelo FedRAMP do AWS GovCloud (US)"* |
+| **Onde termina a metade da AWS** | O ambiente de controle do GovCloud que o cliente herda: *"herdamos mais de 46 controles de segurança exigidos pelo FedRAMP do AWS GovCloud (US)"* |
 | **Onde começa a metade do cliente** | Estrutura de conta, identidade de privilégio mínimo, logging e configuração, monitoramento contínuo da própria carga de trabalho e os controles FedRAMP restantes que deve implementar e evidenciar |
-| **Números principais (publicados pela AWS, afirmados pelo cliente)** | **46+** controles exigidos pelo FedRAMP herdados — uma *redução de trabalho de evidência*, nunca uma autorização em si |
+| **Números principais (publicados pela AWS, afirmados pelo cliente)** | **46+** controles exigidos pelo FedRAMP herdados: uma *redução de trabalho de evidência*, nunca uma autorização em si |
 | **Fonte** | AWS Public Sector Blog, 14 de novembro de 2024 (acesso em outubro de 2026) |
 
-*Lição de exame:* **a herança reduz sua evidência; ela nunca substitui sua autorização.** Os 46 controles são *herdados* (infraestrutura e camada física da AWS, já auditadas) — tudo acima da linha, mais o pacote de autorização, permanece responsabilidade do cliente. A frase examinável é a que já está na Seção 7: **FedRAMP é uma autorização governamental, não um produto da AWS.**
+*Lição de exame:* **a herança reduz sua evidência; ela nunca substitui sua autorização.** Os 46 controles são *herdados* (infraestrutura e camada física da AWS, já auditadas): tudo acima da linha, mais o pacote de autorização, permanece responsabilidade do cliente. A frase examinável é a que já está na Seção 7: **FedRAMP é uma autorização governamental, não um produto da AWS.**
 
-### Caso D — Smartsheet Gov: FedRAMP-ready em menos de 90 dias (Domínio 2)
+### Caso D, Smartsheet Gov: FedRAMP-ready em menos de 90 dias (Domínio 2)
 
 | Elemento | Detalhe |
 |---|---|
 | **Setor / contexto** SaaS de colaboração para clientes regulamentados e governamentais, entrando no AWS GovCloud (US) sem presença prévia | Alcançar prontidão FedRAMP rápido o suficiente para continuar vendendo a compradores do setor público |
 | **Serviços AWS nomeados** | **AWS GovCloud (US)** e **ATO on AWS** (o caminho de autorização empacotado da AWS); orientação da AWS Professional Services / parceiros ao lado |
-| **Onde termina a metade da AWS** | O ambiente de controle auditado da Região GovCloud e os artefatos do lado da AWS que o ATO on AWS monta — *"Ao construir no AWS GovCloud, a Smartsheet e seus clientes governamentais podem hospedar dados sensíveis e cargas de trabalho regulamentadas, atendendo a requisitos rigorosos de segurança e conformidade do governo dos EUA"* (Dave Levy, VP de Governo Federal dos EUA, AWS) |
+| **Onde termina a metade da AWS** | O ambiente de controle auditado da Região GovCloud e os artefatos do lado da AWS que o ATO on AWS monta: *"Ao construir no AWS GovCloud, a Smartsheet e seus clientes governamentais podem hospedar dados sensíveis e cargas de trabalho regulamentadas, atendendo a requisitos rigorosos de segurança e conformidade do governo dos EUA"* (Dave Levy, VP de Governo Federal dos EUA, AWS) |
 | **Onde começa a metade do cliente** | Implementar seus próprios controles, escrever e manter seu plano de segurança do sistema, coletar evidência e deter a autorização resultante |
 | **Números principais (publicados pela AWS, afirmados pelo cliente)** | Sem presença no GovCloud → **FedRAMP ready em menos de 90 dias**, contra prazos típicos *"às vezes de 12 a 18 meses"* |
 | **Fonte** | AWS Public Sector Blog, 29 de agosto de 2019 (acesso em outubro de 2026) |
 
-*Lição de exame:* **a velocidade vem da herança, a obrigação não.** Aproximadamente 4–6× mais rápido que o caminho típico de 12–18 meses (90 dias vs 360–540 dias: $360 \div 90 = 4$ a $540 \div 90 = 6$) — mas o cliente ainda *obtém* a autorização. Uma opção que diga *"o AWS GovCloud torna uma carga de trabalho autorizada pelo FedRAMP"* é o mesmo erro de categoria de *"a AWS é certificada, então estamos em conformidade."*
+*Lição de exame:* **a velocidade vem da herança, a obrigação não.** Aproximadamente 4 to 6× mais rápido que o caminho típico de 12 to 18 meses (90 dias vs 360 to 540 dias: $360 \div 90 = 4$ a $540 \div 90 = 6$), mas o cliente ainda *obtém* a autorização. Uma opção que diga *"o AWS GovCloud torna uma carga de trabalho autorizada pelo FedRAMP"* é o mesmo erro de categoria de *"a AWS é certificada, então estamos em conformidade."*
 
 ### O que o par de autorização acrescenta
 
 | Padrão de valor | Evidência | Princípio subjacente |
 |---|---|---|
 | Controles pré-auditados são contados, não reconstruídos | Socure: **46+** herdados | Controles **herdados** são controles físicos/de infraestrutura que a AWS já evidenciou |
-| A herança compra tempo de calendário | Smartsheet Gov: **<90 dias** vs 12–18 meses | Menos trabalho acima da linha = autorização mais rápida, não automática |
+| A herança compra tempo de calendário | Smartsheet Gov: **<90 dias** vs 12 to 18 meses | Menos trabalho acima da linha = autorização mais rápida, não automática |
 | A Região é da AWS, o pacote é seu | GovCloud (US) + ATO on AWS | A AWS fornece o ambiente em conformidade; **o cliente obtém a autorização** |
 | Autorização ≠ certificação do provedor | FedRAMP / ATO | *"Nenhuma certificação formal está disponível para (ou distribuível por) um provedor de serviços de nuvem"* |
 
-- **📚 Você sabia?** O ATO on AWS é o mecanismo por trás da história dos 90 dias: a AWS empacota seus próprios artefatos para que o avaliador do cliente não precise reauditar a metade da infraestrutura — a mesma razão de o **AWS Artifact** existir como um *"portal de autoserviço sem custo, com acesso sob demanda aos relatórios de conformidade da AWS"*. A herança é real (a Socure conta 46+, a Smartsheet conta semanas), mas em ambos os casos o número publicado pela AWS descreve **quanto menos o cliente precisou construir**, nunca **quem é legalmente responsável**. Datas importam também: o número da Smartsheet é de **29 de agosto de 2019** e o da Socure de **14 de novembro de 2024** — números antigos nunca devem ser apresentados como atuais, e ambos são resultados afirmados pelo cliente, não auditados.
+- **📚 Você sabia?** O ATO on AWS é o mecanismo por trás da história dos 90 dias: a AWS empacota seus próprios artefatos para que o avaliador do cliente não precise reauditar a metade da infraestrutura, a mesma razão de o **AWS Artifact** existir como um *"portal de autoserviço sem custo, com acesso sob demanda aos relatórios de conformidade da AWS"*. A herança é real (a Socure conta 46+, a Smartsheet conta semanas), mas em ambos os casos o número publicado pela AWS descreve **quanto menos o cliente precisou construir**, nunca **quem é legalmente responsável**. Datas importam também: o número da Smartsheet é de **29 de agosto de 2019** e o da Socure de **14 de novembro de 2024**, números antigos nunca devem ser apresentados como atuais, e ambos são resultados afirmados pelo cliente, não auditados.
 
 > [!WARNING]
-> **Como ler números de estudos de caso no dia do exame:** toda porcentagem aqui é **afirmada pelo cliente e não auditada**, e "até" é um teto, nunca uma média. Um caso nunca licencia uma resposta fora do escopo — você é pedido a **identificar a que lado do modelo cada ação pertence**, nunca a relembrar que os custos de inspeção caíram um número específico. Lembre-se também da armadilha da conformidade: **FedRAMP é uma autorização governamental, não um produto da AWS** — a AWS fornece a Região e os controles herdados, e **o cliente obtém a autorização**.
+> **Como ler números de estudos de caso no dia do exame:** toda porcentagem aqui é **afirmada pelo cliente e não auditada**, e "até" é um teto, nunca uma média. Um caso nunca licencia uma resposta fora do escopo, você é pedido a **identificar a que lado do modelo cada ação pertence**, nunca a relembrar que os custos de inspeção caíram um número específico. Lembre-se também da armadilha da conformidade: **FedRAMP é uma autorização governamental, não um produto da AWS**, a AWS fornece a Região e os controles herdados, e **o cliente obtém a autorização**.
 
 ---
 
@@ -706,23 +706,23 @@ Os casos A e B são construções de segurança *operacionais*. Os próximos doi
 
 ### Atualizações de 2026 (em outubro de 2026)
 
-O guia do exame é um documento em movimento: o PDF atual imprime apenas *"Copyright © 2026"* com **número de versão**, sendo o único artefato carimbado o guia da era de lançamento `Version 1.0 CLF-C02`. Então o método defensável é diferenciar essa linha de base contra as páginas que a AWS publica hoje — e cada item abaixo está carimbado com data **em outubro de 2026** com sua fonte nomeada. **Verifique o estado atual antes do uso.**
+O guia do exame é um documento em movimento: o PDF atual imprime apenas *"Copyright © 2026"* com **número de versão**, sendo o único artefato carimbado o guia da era de lançamento `Version 1.0 CLF-C02`. Então o método defensável é diferenciar essa linha de base contra as páginas que a AWS publica hoje, e cada item abaixo está carimbado com data **em outubro de 2026** com sua fonte nomeada. **Verifique o estado atual antes do uso.**
 
 > [!NOTE]
 > **Seis mudanças com fonte que afetam responsabilidade compartilhada, segurança e Domínio 2 (todas em outubro de 2026):**
-> - **O Domínio 2 ainda carrega 30%.** O guia atual mantém os pesos de lançamento inalterados — Conceitos de Nuvem 24%, **Segurança e Conformidade 30%**, Tecnologia e Serviços de Nuvem 34%, Faturamento, Precificação e Suporte 12% *(PDF atual do guia do exame, "© 2026", acesso em outubro de 2026)*. Qualquer alegação de que Segurança "caiu para 25%" ou "subiu para 34%" está citando um apêndice aposentado ou um boato de terceiros.
-> - **A lista de serviços no escopo foi reconstruída: 128 → 111 entradas, enquanto a lista explícita fora do escopo cresceu de 11 → 55** *(guia Version 1.0 da era de lançamento vs as páginas atuais In-Scope / Out-of-Scope, diferencial calculado em outubro de 2026)*. A AWS rotula a lista como *"não exaustiva e sujeita a alterações"*, então qualquer cópia de terceiros — incluindo a de onde você revisou — já é candidata a estar desatualizada.
+> - **O Domínio 2 ainda carrega 30%.** O guia atual mantém os pesos de lançamento inalterados: Conceitos de Nuvem 24%, **Segurança e Conformidade 30%**, Tecnologia e Serviços de Nuvem 34%, Faturamento, Precificação e Suporte 12% *(PDF atual do guia do exame, "© 2026", acesso em outubro de 2026)*. Qualquer alegação de que Segurança "caiu para 25%" ou "subiu para 34%" está citando um apêndice aposentado ou um boato de terceiros.
+> - **A lista de serviços no escopo foi reconstruída: 128 → 111 entradas, enquanto a lista explícita fora do escopo cresceu de 11 → 55** *(guia Version 1.0 da era de lançamento vs as páginas atuais In-Scope / Out-of-Scope, diferencial calculado em outubro de 2026)*. A AWS rotula a lista como *"não exaustiva e sujeita a alterações"*, então qualquer cópia de terceiros, incluindo a de onde você revisou, já é candidata a estar desatualizada.
 > - **Quatro serviços de rede entraram na lista no escopo: AWS PrivateLink, AWS Transit Gateway, AWS Site-to-Site VPN e AWS Client VPN** *(página In-Scope atual, acesso em outubro de 2026)*. Nenhum deles move a linha: a AWS executa e aplica patch na infraestrutura do serviço, enquanto rotas, conexões, políticas de endpoint, gateways e identidade permanecem **deveres de configuração do cliente**.
-> - **O AWS Network Firewall saiu do escopo** — agora está na lista atual fora do escopo *(verificado em outubro de 2026)*. Ele continua válido como contexto de estudo de caso (a athenahealth o usou), mas não é mais um *nome de serviço examinável*; a lição de responsabilidades que ensinou (a AWS fornece o dispositivo, você escreve as regras) se transfere para o serviço de rede no escopo que a pergunta usar.
-> - **Rebrands que mudam o vocabulário:** a categoria **"Customer Engagement" agora é "Customer Enablement" e contém apenas o AWS Support** — AWS Activate, AWS IQ e AWS Managed Services estão explicitamente fora do escopo — e o **AWS IAM Identity Center (AWS Single Sign-On)** agora é publicado simplesmente como **AWS IAM Identity Center** *(guia e listas de serviços atuais, acesso em outubro de 2026)*. Nomes antigos estão errados ou ambíguos à primeira vista.
-> - **Redação de segurança desatualizada ainda é examinável.** **"AWS Security Center" é marca obsoleta** mas ainda aparece nos itens de habilidade do Domínio 2 do guia atual — ensine-o como *"onde as informações de segurança da AWS vivem"* e reconheça-o **como escrito**. E o **AWS Well-Architected Agent** (prévia, 1 de out. de 2026), descrito pela AWS como *"a evolução de próxima geração do AWS Trusted Advisor e do AWS Well-Architected Tool"*, **não é nomeado no guia** — as ferramentas examináveis permanecem **AWS Trusted Advisor** e o **AWS Well-Architected Tool**.
+> - **O AWS Network Firewall saiu do escopo**: agora está na lista atual fora do escopo *(verificado em outubro de 2026)*. Ele continua válido como contexto de estudo de caso (a athenahealth o usou), mas não é mais um *nome de serviço examinável*; a lição de responsabilidades que ensinou (a AWS fornece o dispositivo, você escreve as regras) se transfere para o serviço de rede no escopo que a pergunta usar.
+> - **Rebrands que mudam o vocabulário:** a categoria **"Customer Engagement" agora é "Customer Enablement" e contém apenas o AWS Support**, AWS Activate, AWS IQ e AWS Managed Services estão explicitamente fora do escopo, e o **AWS IAM Identity Center (AWS Single Sign-On)** agora é publicado simplesmente como **AWS IAM Identity Center** *(guia e listas de serviços atuais, acesso em outubro de 2026)*. Nomes antigos estão errados ou ambíguos à primeira vista.
+> - **Redação de segurança desatualizada ainda é examinável.** **"AWS Security Center" é marca obsoleta** mas ainda aparece nos itens de habilidade do Domínio 2 do guia atual, ensine-o como *"onde as informações de segurança da AWS vivem"* e reconheça-o **como escrito**. E o **AWS Well-Architected Agent** (prévia, 1 de out. de 2026), descrito pela AWS como *"a evolução de próxima geração do AWS Trusted Advisor e do AWS Well-Architected Tool"*, **não é nomeado no guia**, as ferramentas examináveis permanecem **AWS Trusted Advisor** e o **AWS Well-Architected Tool**.
 
 > [!WARNING]
-> > **⚠️ A armadilha de 2026 é uma *data*, não um *conceito*.** Nenhuma mudança de 2025–2026 move a própria linha de responsabilidade compartilhada — DA vs NA, a fronteira do SO convidado, herdados / compartilhados / específicos do cliente, e os exemplos de mudança EC2 / RDS / Lambda estão todos inalterados. O que *mudou* é o **vocabulário ao redor do modelo**: quais nomes de serviço estão no escopo (AWS PrivateLink, AWS Transit Gateway, AWS Site-to-Site VPN, AWS Client VPN entram; **AWS Network Firewall** sai), qual nome de categoria você deve dizer (**Customer Enablement**, não Customer Engagement), e qual nome de produto de identidade está atual (**AWS IAM Identity Center**). Um guia desatualizado não ensina a divisão errada — ele ensina os *nomes* errados, e o exame corrige os nomes que publica hoje. Confirme a lista ao vivo no escopo antes do dia do exame: a AWS a chama de **não exaustiva e sujeita a alterações** (em outubro de 2026, verifique o estado atual antes do uso).
+> > **⚠️ A armadilha de 2026 é uma *data*, não um *conceito*.** Nenhuma mudança de 2025 to 2026 move a própria linha de responsabilidade compartilhada, DA vs NA, a fronteira do SO convidado, herdados / compartilhados / específicos do cliente, e os exemplos de mudança EC2 / RDS / Lambda estão todos inalterados. O que *mudou* é o **vocabulário ao redor do modelo**: quais nomes de serviço estão no escopo (AWS PrivateLink, AWS Transit Gateway, AWS Site-to-Site VPN, AWS Client VPN entram; **AWS Network Firewall** sai), qual nome de categoria você deve dizer (**Customer Enablement**, não Customer Engagement), e qual nome de produto de identidade está atual (**AWS IAM Identity Center**). Um guia desatualizado não ensina a divisão errada, ele ensina os *nomes* errados, e o exame corrige os nomes que publica hoje. Confirme a lista ao vivo no escopo antes do dia do exame: a AWS a chama de **não exaustiva e sujeita a alterações** (em outubro de 2026, verifique o estado atual antes do uso).
 
-Duas consequências específicas para esta lição: os *nomes de serviço* sobre os quais você pode ser testado mudaram (quatro serviços de rede entraram, o AWS Network Firewall saiu), mas o *modelo* não se moveu nada — DA/NA, herdados/compartilhados/específicos do cliente, as âncoras fixas e os exemplos de mudança (**Amazon EC2, Amazon RDS, AWS Lambda**) são idênticos. Carimbe com data cada contagem que você memorizar e reconfirme a lista ao vivo antes do dia do exame.
+Duas consequências específicas para esta lição: os *nomes de serviço* sobre os quais você pode ser testado mudaram (quatro serviços de rede entraram, o AWS Network Firewall saiu), mas o *modelo* não se moveu nada: DA/NA, herdados/compartilhados/específicos do cliente, as âncoras fixas e os exemplos de mudança (**Amazon EC2, Amazon RDS, AWS Lambda**) são idênticos. Carimbe com data cada contagem que você memorizar e reconfirme a lista ao vivo antes do dia do exame.
 
-- **📚 Você sabia?** A rotatividade do guia é aritmética mensurável: as entradas no escopo caíram **128 → 111** (−17, −13,3%) enquanto a lista negativa explícita cresceu **11 → 55** (+44), então o par se moveu por $111 + 55 = 166$ entradas documentadas versus $128 + 11 = 139$ antes — uma expansão de **27 entradas** de orientação *explícita*, quase toda nomeando o que está **fora** do escopo. É por isso que material de preparação de 2024 diz com confiança que AWS Data Exchange, Amazon MSK, AWS Local Zones, AWS Wavelength, AWS Snow Family, AWS Audit Manager e **AWS Network Firewall** estão no escopo, e é por isso que a lista atual diz o contrário (todos verificados em outubro de 2026 — verifique o estado atual antes do uso). A meta-habilidade que o exame recompensa: **o guia que você baixa hoje é o exame que você faz**, não o PDF de onde você revisou.
+- **📚 Você sabia?** A rotatividade do guia é aritmética mensurável: as entradas no escopo caíram **128 → 111** (−17, −13,3%) enquanto a lista negativa explícita cresceu **11 → 55** (+44), então o par se moveu por $111 + 55 = 166$ entradas documentadas versus $128 + 11 = 139$ antes, uma expansão de **27 entradas** de orientação *explícita*, quase toda nomeando o que está **fora** do escopo. É por isso que material de preparação de 2024 diz com confiança que AWS Data Exchange, Amazon MSK, AWS Local Zones, AWS Wavelength, AWS Snow Family, AWS Audit Manager e **AWS Network Firewall** estão no escopo, e é por isso que a lista atual diz o contrário (todos verificados em outubro de 2026, verifique o estado atual antes do uso). A meta-habilidade que o exame recompensa: **o guia que você baixa hoje é o exame que você faz**, não o PDF de onde você revisou.
 
 ---
 
@@ -740,7 +740,7 @@ Duas consequências específicas para esta lição: os *nomes de serviço* sobre
     "O cliente é responsável pela segurança da nuvem apenas ao usar o Amazon EC2"
   ],
   "correct": 1,
-  "explanation": "A própria redação da AWS é segurança DA nuvem (proteger a infraestrutura que executa todos os serviços da AWS) versus segurança NA nuvem (os deveres do cliente, determinados pelos serviços selecionados). As preposições são fixas, a divisão nunca é 50/50 - controles compartilhados aplicam-se em contextos completamente separados - e o lado do cliente existe em todo serviço, não só no EC2."
+  "explanation": "A própria redação da AWS é segurança DA nuvem (proteger a infraestrutura que executa todos os serviços da AWS) versus segurança NA nuvem (os deveres do cliente, determinados pelos serviços selecionados). As preposições são fixas, a divisão nunca é 50/50: controles compartilhados aplicam-se em contextos completamente separados, e o lado do cliente existe em todo serviço, não só no EC2."
 }
 ```
 
@@ -756,7 +756,7 @@ Duas consequências específicas para esta lição: os *nomes de serviço* sobre
     "O cliente apenas se a instância estiver em uma Zona de Disponibilidade single-tenant"
   ],
   "correct": 1,
-  "explanation": "A AWS opera e controla componentes desde o sistema operacional host e a camada de virtualização para baixo; o cliente assume a responsabilidade pelo sistema operacional convidado, incluindo atualizações e patches de segurança. O gerenciamento de patches é um controle COMPARTILHADO em contextos separados - a AWS corrige falhas na infraestrutura dela, você corrige o SO convidado - e a locatização da Zona de Disponibilidade é irrelevante para a fronteira."
+  "explanation": "A AWS opera e controla componentes desde o sistema operacional host e a camada de virtualização para baixo; o cliente assume a responsabilidade pelo sistema operacional convidado, incluindo atualizações e patches de segurança. O gerenciamento de patches é um controle COMPARTILHADO em contextos separados: a AWS corrige falhas na infraestrutura dela, você corrige o SO convidado: e a locatização da Zona de Disponibilidade é irrelevante para a fronteira."
 }
 ```
 
@@ -772,7 +772,7 @@ Duas consequências específicas para esta lição: os *nomes de serviço* sobre
     "Quem protege fisicamente o centro de dados, o que se move para o cliente em serviços serverless"
   ],
   "correct": 2,
-  "explanation": "A Tarefa 2.1 nomeia explicitamente EC2, RDS e Lambda como exemplos de mudança, e o que se move é o dever de infraestrutura: patch do SO convidado e patch do motor. Propriedade de dados, configuração de IAM e segurança física são âncoras fixas - dados, IAM e instalações nunca mudam de lado na linha."
+  "explanation": "A Tarefa 2.1 nomeia explicitamente EC2, RDS e Lambda como exemplos de mudança, e o que se move é o dever de infraestrutura: patch do SO convidado e patch do motor. Propriedade de dados, configuração de IAM e segurança física são âncoras fixas: dados, IAM e instalações nunca mudam de lado na linha."
 }
 ```
 
@@ -780,7 +780,7 @@ Duas consequências específicas para esta lição: os *nomes de serviço* sobre
 {
   "id": "clf-05-q4",
   "type": "multiple-choice",
-  "question": "Qual dos seguintes é um controle HERDADO — um que o cliente herda integralmente da AWS?",
+  "question": "Qual dos seguintes é um controle HERDADO: um que o cliente herda integralmente da AWS?",
   "options": [
     "Gerenciamento de configuração dos sistemas operacionais convidados e aplicativos do cliente",
     "Conscientização e treinamento para os próprios funcionários do cliente",
@@ -798,13 +798,13 @@ Duas consequências específicas para esta lição: os *nomes de serviço* sobre
   "type": "multiple-choice",
   "question": "Uma empresa de saúde pergunta se as certificações de conformidade da AWS cobrem suas obrigações do HIPAA. Qual resposta é correta?",
   "options": [
-    "Sim - as certificações da AWS transferem a obrigação de conformidade para a AWS em todas as cargas de trabalho",
+    "Sim: as certificações da AWS transferem a obrigação de conformidade para a AWS em todas as cargas de trabalho",
     "Nenhuma certificação formal está disponível para ou distribuível por um provedor de serviços de nuvem, então os clientes da AWS permanecem responsáveis por cumprir as leis e regulamentações de conformidade aplicáveis à sua própria carga de trabalho",
-    "Sim - o AWS Artifact emite um certificado HIPAA para cada conta de cliente automaticamente",
-    "Não - a AWS não oferece relatórios de conformidade, então o cliente deve auditar a AWS fisicamente"
+    "Sim: o AWS Artifact emite um certificado HIPAA para cada conta de cliente automaticamente",
+    "Não: a AWS não oferece relatórios de conformidade, então o cliente deve auditar a AWS fisicamente"
   ],
   "correct": 1,
-  "explanation": "A AWS declara que os clientes permanecem responsáveis por cumprir as leis e regulamentações de conformidade aplicáveis, e que nenhuma certificação formal está disponível para (ou distribuível por) um provedor de serviços de nuvem nesses domínios. O AWS Artifact é um portal de autoserviço sem custo para os próprios relatórios de conformidade da AWS - ele fornece evidência para o lado da AWS, não transfere sua obrigação legal, e não emite nenhum certificado de cliente."
+  "explanation": "A AWS declara que os clientes permanecem responsáveis por cumprir as leis e regulamentações de conformidade aplicáveis, e que nenhuma certificação formal está disponível para (ou distribuível por) um provedor de serviços de nuvem nesses domínios. O AWS Artifact é um portal de autoserviço sem custo para os próprios relatórios de conformidade da AWS: ele fornece evidência para o lado da AWS, não transfere sua obrigação legal, e não emite nenhum certificado de cliente."
 }
 ```
 
@@ -814,13 +814,13 @@ Duas consequências específicas para esta lição: os *nomes de serviço* sobre
   "type": "multiple-choice",
   "question": "Um revisor de segurança afirma que a AWS configura o firewall de grupo de segurança de uma instância Amazon EC2 porque a AWS o fornece. O que o modelo de responsabilidade compartilhada realmente diz?",
   "options": [
-    "Correto - a AWS fornece e configura todos os componentes de firewall para todo serviço",
-    "Correto - grupos de segurança são um controle herdado porque o firewall é hardware da AWS",
-    "Incorreto - o cliente é responsável pela configuração do firewall de grupo de segurança fornecido pela AWS",
-    "Incorreto - grupos de segurança são configurados pelo AWS Support em nome do cliente"
+    "Correto: a AWS fornece e configura todos os componentes de firewall para todo serviço",
+    "Correto: grupos de segurança são um controle herdado porque o firewall é hardware da AWS",
+    "Incorreto: o cliente é responsável pela configuração do firewall de grupo de segurança fornecido pela AWS",
+    "Incorreto: grupos de segurança são configurados pelo AWS Support em nome do cliente"
   ],
   "correct": 2,
-  "explanation": "O texto canônico da AWS nomeia isso diretamente: o cliente assume a responsabilidade pelo SO convidado, pelo software de aplicativo associado e pela configuração do firewall de grupo de segurança fornecido pela AWS. Fornecer um recurso não é o mesmo que configurá-lo - a configuração é responsabilidade do cliente, o que torna as regras de grupo de segurança um controle específico do cliente."
+  "explanation": "O texto canônico da AWS nomeia isso diretamente: o cliente assume a responsabilidade pelo SO convidado, pelo software de aplicativo associado e pela configuração do firewall de grupo de segurança fornecido pela AWS. Fornecer um recurso não é o mesmo que configurá-lo: a configuração é responsabilidade do cliente, o que torna as regras de grupo de segurança um controle específico do cliente."
 }
 ```
 
@@ -832,11 +832,11 @@ Duas consequências específicas para esta lição: os *nomes de serviço* sobre
   "options": [
     "Herdado, porque todo cliente herda automaticamente os programas de treinamento da AWS",
     "Específico do cliente, porque só o cliente algum dia treina alguém em uma carga de trabalho de nuvem",
-    "Compartilhado, porque a AWS treina funcionários da AWS enquanto o cliente deve treinar seus próprios funcionários - duas implementações separadas de um único controle",
+    "Compartilhado, porque a AWS treina funcionários da AWS enquanto o cliente deve treinar seus próprios funcionários: duas implementações separadas de um único controle",
     "Fora do escopo, porque treinamento nunca é um controle de conformidade"
   ],
   "correct": 2,
-  "explanation": "Conscientização e Treinamento é um dos três controles COMPARTILHADOS publicados, ao lado do gerenciamento de patches e do gerenciamento de configuração. A definição de compartilhado da AWS é 'em contextos completamente separados': a AWS treina funcionários da AWS, você treina os seus - não é uma atividade conjunta 50/50, e certamente não é herdado ou exclusivo do cliente."
+  "explanation": "Conscientização e Treinamento é um dos três controles COMPARTILHADOS publicados, ao lado do gerenciamento de patches e do gerenciamento de configuração. A definição de compartilhado da AWS é 'em contextos completamente separados': a AWS treina funcionários da AWS, você treina os seus: não é uma atividade conjunta 50/50, e certamente não é herdado ou exclusivo do cliente."
 }
 ```
 
@@ -848,11 +848,11 @@ Duas consequências específicas para esta lição: os *nomes de serviço* sobre
   "options": [
     "A AWS ainda aplica patch no SO convidado e no motor do banco de dados, exatamente como no Amazon RDS padrão",
     "O cliente gerencia o host e personaliza o SO como no Amazon EC2, então o patch de SO e o patch do software de banco de dados retornam ao cliente",
-    "Nenhuma das partes aplica patch - o RDS Custom roda sem patches por design",
+    "Nenhuma das partes aplica patch: o RDS Custom roda sem patches por design",
     "A AWS aplica patch apenas no SO, enquanto um parceiro de terceiros aplica patch no motor do banco"
   ],
   "correct": 1,
-  "explanation": "A AWS documenta o RDS Custom como usando recursos gerenciados do RDS enquanto o cliente gerencia o host e personaliza o SO como no Amazon EC2 - e sua tabela de responsabilidades devolve o patch de SO e o patch de software de banco de dados ao Cliente. Isso torna 'Amazon RDS significa que a AWS aplica patch em tudo' um absoluto falso, que é exatamente por que o RDS Custom aparece como distrator."
+  "explanation": "A AWS documenta o RDS Custom como usando recursos gerenciados do RDS enquanto o cliente gerencia o host e personaliza o SO como no Amazon EC2: e sua tabela de responsabilidades devolve o patch de SO e o patch de software de banco de dados ao Cliente. Isso torna 'Amazon RDS significa que a AWS aplica patch em tudo' um absoluto falso, que é exatamente por que o RDS Custom aparece como distrator."
 }
 ```
 
@@ -864,11 +864,11 @@ Duas consequências específicas para esta lição: os *nomes de serviço* sobre
   "options": [
     "A AWS, porque o Lambda é responsável por toda segurança de runtime independentemente do modo de atualização",
     "O AWS Support, quando o cliente abre um tíquete sobre a runtime descontinuada",
-    "O cliente - para funções configuradas para usar o modo de atualização Manual de runtime, o cliente é responsável por atualizar a função para a versão mais recente do runtime",
-    "Ninguém - runtimes do Lambda nunca recebem atualizações de segurança"
+    "O cliente: para funções configuradas para usar o modo de atualização Manual de runtime, o cliente é responsável por atualizar a função para a versão mais recente do runtime",
+    "Ninguém: runtimes do Lambda nunca recebem atualizações de segurança"
   ],
   "correct": 2,
-  "explanation": "A AWS cura e publica atualizações de segurança para runtimes gerenciados e imagens de contêiner suportados, mas no modo Manual a responsabilidade de atualizar a função fica com o cliente. No modo Auto o Lambda aplica atualizações a todas as funções, e para imagens de contêiner a AWS publica imagens base corrigidas que você deve reconstruir - a classe de serviço sozinha nunca decide a resposta."
+  "explanation": "A AWS cura e publica atualizações de segurança para runtimes gerenciados e imagens de contêiner suportados, mas no modo Manual a responsabilidade de atualizar a função fica com o cliente. No modo Auto o Lambda aplica atualizações a todas as funções, e para imagens de contêiner a AWS publica imagens base corrigidas que você deve reconstruir: a classe de serviço sozinha nunca decide a resposta."
 }
 ```
 
@@ -878,10 +878,10 @@ Duas consequências específicas para esta lição: os *nomes de serviço* sobre
   "type": "multiple-choice",
   "question": "Uma equipe de operações argumenta que, como a AWS garante a disponibilidade da infraestrutura, seu aplicativo não precisa de implantação Multi-AZ nem de backups testados. Qual resposta corresponde ao modelo?",
   "options": [
-    "Correto - os SLAs da AWS cobrem o aplicativo do cliente de ponta a ponta",
-    "Correto - resiliência é um controle compartilhado, então uma divisão 50/50 significa que a AWS cuida do design",
-    "Incorreto - a AWS é responsável pela resiliência da infraestrutura frente aos seus SLAs, enquanto o cliente é responsável por projetar, testar e implantar o aplicativo, incluindo design Multi-AZ e backups",
-    "Incorreto - o cliente é responsável pela resiliência da infraestrutura da nuvem também"
+    "Correto: os SLAs da AWS cobrem o aplicativo do cliente de ponta a ponta",
+    "Correto: resiliência é um controle compartilhado, então uma divisão 50/50 significa que a AWS cuida do design",
+    "Incorreto: a AWS é responsável pela resiliência da infraestrutura frente aos seus SLAs, enquanto o cliente é responsável por projetar, testar e implantar o aplicativo, incluindo design Multi-AZ e backups",
+    "Incorreto: o cliente é responsável pela resiliência da infraestrutura da nuvem também"
   ],
   "correct": 2,
   "explanation": "O eixo da resiliência espelha o eixo da segurança: resiliência DA nuvem (disponibilidade da infraestrutura atendendo ou excedendo os SLAs da AWS) é da AWS; resiliência NA nuvem (design Multi-AZ, backups, replicação, testes de DR) é do cliente. A cobertura de SLA da infraestrutura nunca se estende a como você implanta sobre ela, e resiliência não é um controle 50/50."
@@ -894,8 +894,8 @@ Duas consequências específicas para esta lição: os *nomes de serviço* sobre
   "type": "multiple-choice",
   "question": "A Socure, uma cliente do setor público da AWS, relata ter \"herdado mais de 46 controles de segurança exigidos pelo FedRAMP do AWS GovCloud (US)\" (AWS Public Sector Blog, 14 de novembro de 2024). Sob o modelo de responsabilidade compartilhada, qual afirmação é correta?",
   "options": [
-    "A herança completa a autorização - uma vez herdados 46 controles, a carga de trabalho está autorizada pelo FedRAMP sem nenhum trabalho adicional do cliente",
-    "Os controles herdados cobrem a metade da AWS (controles físicos, ambientais e de infraestrutura que a AWS já evidenciou), enquanto o cliente ainda implementa e evidencia seus próprios controles e obtém a autorização em si - FedRAMP é uma autorização governamental, não um produto da AWS",
+    "A herança completa a autorização: uma vez herdados 46 controles, a carga de trabalho está autorizada pelo FedRAMP sem nenhum trabalho adicional do cliente",
+    "Os controles herdados cobrem a metade da AWS (controles físicos, ambientais e de infraestrutura que a AWS já evidenciou), enquanto o cliente ainda implementa e evidencia seus próprios controles e obtém a autorização em si: FedRAMP é uma autorização governamental, não um produto da AWS",
     "O AWS GovCloud (US) é um produto de conformidade que emite automaticamente um certificado FedRAMP para cada conta de cliente",
     "Controles herdados podem ser contados duas vezes, então o cliente só precisa evidenciar o restante de seu conjunto de controles"
   ],
@@ -911,46 +911,46 @@ Duas consequências específicas para esta lição: os *nomes de serviço* sobre
   "question": "Um candidato que revisa a partir de um guia de estudos CLF-C02 da era de lançamento afirma que o exame mudou em 2026. Qual par de afirmações está correto em outubro de 2026?",
   "options": [
     "O Domínio 2 caiu de 30% para 25%, e o AWS Network Firewall foi adicionado à lista de serviços no escopo",
-    "O Domínio 2 permanece em 30% do conteúdo pontuado, enquanto a lista de serviços foi reconstruída - as entradas no escopo caíram de 128 para 111 e a lista explícita fora do escopo cresceu de 11 para 55 - e a categoria Customer Engagement foi renomeada para Customer Enablement, contendo apenas o AWS Support",
+    "O Domínio 2 permanece em 30% do conteúdo pontuado, enquanto a lista de serviços foi reconstruída: as entradas no escopo caíram de 128 para 111 e a lista explícita fora do escopo cresceu de 11 para 55: e a categoria Customer Engagement foi renomeada para Customer Enablement, contendo apenas o AWS Support",
     "O Domínio 2 subiu para 34%, e a categoria Customer Engagement foi expandida para incluir AWS Activate, AWS IQ e AWS Managed Services",
     "Os pesos de domínio foram removidos do guia inteiramente, e AWS Local Zones e AWS Wavelength estão ambos novos no escopo"
   ],
   "correct": 1,
-  "explanation": "O guia atual mantém 24/30/34/12, então Segurança e Conformidade ainda é 30% (em outubro de 2026). A lista de serviços foi genuinamente reconstruída - 128 para 111 no escopo, 11 para 55 fora do escopo - e a única renomeação de categoria é Customer Engagement para Customer Enablement contendo só o AWS Support, com AWS Activate, AWS IQ e AWS Managed Services explicitamente fora do escopo. O AWS Network Firewall saiu DO escopo, o AWS Wavelength está explicitamente fora do escopo, o AWS Local Zones não aparece em nenhuma das listas, e os pesos permanecem no guia. Lembre a regra meta: o exame testa o guia que você baixa hoje, e a AWS rotula a lista como não exaustiva e sujeita a alterações - verifique o estado atual antes do uso."
+  "explanation": "O guia atual mantém 24/30/34/12, então Segurança e Conformidade ainda é 30% (em outubro de 2026). A lista de serviços foi genuinamente reconstruída - 128 para 111 no escopo, 11 para 55 fora do escopo: e a única renomeação de categoria é Customer Engagement para Customer Enablement contendo só o AWS Support, com AWS Activate, AWS IQ e AWS Managed Services explicitamente fora do escopo. O AWS Network Firewall saiu DO escopo, o AWS Wavelength está explicitamente fora do escopo, o AWS Local Zones não aparece em nenhuma das listas, e os pesos permanecem no guia. Lembre a regra meta: o exame testa o guia que você baixa hoje, e a AWS rotula a lista como não exaustiva e sujeita a alterações, verifique o estado atual antes do uso."
 }
 ```
 
 > [!IMPORTANT]
-> > **Veredito Comparativo — responsabilidade compartilhada × on-premises × outras nuvens × DIY/autogerenciado**
-> > - **Versus on-premises:** no local o cliente possui *a pilha inteira* — instalações, ciclo de vida do hardware, energia e refrigeração, SO host, SO convidado, aplicativos, rede e segurança física — como a própria coluna do Guia do Usuário do RDS mostra (toda linha "Cliente"). Mover para a AWS converte quatro linhas — manutenção do servidor, ciclo de vida do hardware, energia/rede/refrigeração e, em serviços gerenciados, patch de SO e de banco de dados — de cliente para AWS, que é o valor inteiro de um ambiente de controle **herdado**. O trade que você aceita é que seus deveres restantes (dados, IAM, configuração de rede, criptografia, conformidade) agora são *visíveis e auditáveis*, não escondidos dentro de uma sala de servidores que você também precisava guardar.
-> > - **Versus outras nuvens:** todo grande provedor executa um modelo de responsabilidade compartilhada com a mesma divisão básica — o provedor protege a infraestrutura, você protege o que põe nela — então a diferença examinável é o **vocabulário específico e a taxonomia publicada da AWS**: *da* versus *na*, **herdados / compartilhados / específicos do cliente**, os controles compartilhados nomeados (gerenciamento de patches, gerenciamento de configuração, conscientização e treinamento), o controle específico do cliente nomeado (proteção de serviço e comunicações ou segurança de zona) e os exemplos de mudança nomeados (**Amazon EC2, Amazon RDS, AWS Lambda**). Não assuma que os rótulos, formatos de relatório ou nomes de serviço de outro provedor se transferem — a evidência da AWS chega via **AWS Artifact**, e as contagens da AWS (143 padrões e certificações, mais de 300 serviços e recursos de segurança/conformidade/governança, 185 serviços no relatório SOC 1 do Verão de 2026, todos em outubro de 2026) são números da AWS.
-> > - **Versus DIY / autogerenciado:** rodar seu próprio banco de dados em um servidor autogerenciado mantém **toda linha** da tabela de patch e configuração do seu lado — patch de SO, patch de motor, escalonamento, ALTA, backups, manutenção do servidor — com zero herança. Escolher Amazon RDS, AWS Lambda ou Amazon S3 compra responsabilidade absorvida, e escolher **RDS Custom** deliberadamente compra parte de volta. A resposta Well-Architected é consistentemente **gerenciado e com menor sobrecarga operacional**: herde o que a AWS auditará por você, e gaste seu esforço limitado nos controles que só você pode executar — classificação, identidade, regras de rede, decisões de criptografia e evidência de conformidade.
+> > **Veredito Comparativo: responsabilidade compartilhada × on-premises × outras nuvens × DIY/autogerenciado**
+> > - **Versus on-premises:** no local o cliente possui *a pilha inteira*, instalações, ciclo de vida do hardware, energia e refrigeração, SO host, SO convidado, aplicativos, rede e segurança física, como a própria coluna do Guia do Usuário do RDS mostra (toda linha "Cliente"). Mover para a AWS converte quatro linhas, manutenção do servidor, ciclo de vida do hardware, energia/rede/refrigeração e, em serviços gerenciados, patch de SO e de banco de dados, de cliente para AWS, que é o valor inteiro de um ambiente de controle **herdado**. O trade que você aceita é que seus deveres restantes (dados, IAM, configuração de rede, criptografia, conformidade) agora são *visíveis e auditáveis*, não escondidos dentro de uma sala de servidores que você também precisava guardar.
+> > - **Versus outras nuvens:** todo grande provedor executa um modelo de responsabilidade compartilhada com a mesma divisão básica, o provedor protege a infraestrutura, você protege o que põe nela, então a diferença examinável é o **vocabulário específico e a taxonomia publicada da AWS**: *da* versus *na*, **herdados / compartilhados / específicos do cliente**, os controles compartilhados nomeados (gerenciamento de patches, gerenciamento de configuração, conscientização e treinamento), o controle específico do cliente nomeado (proteção de serviço e comunicações ou segurança de zona) e os exemplos de mudança nomeados (**Amazon EC2, Amazon RDS, AWS Lambda**). Não assuma que os rótulos, formatos de relatório ou nomes de serviço de outro provedor se transferem: a evidência da AWS chega via **AWS Artifact**, e as contagens da AWS (143 padrões e certificações, mais de 300 serviços e recursos de segurança/conformidade/governança, 185 serviços no relatório SOC 1 do Verão de 2026, todos em outubro de 2026) são números da AWS.
+> > - **Versus DIY / autogerenciado:** rodar seu próprio banco de dados em um servidor autogerenciado mantém **toda linha** da tabela de patch e configuração do seu lado: patch de SO, patch de motor, escalonamento, ALTA, backups, manutenção do servidor: com zero herança. Escolher Amazon RDS, AWS Lambda ou Amazon S3 compra responsabilidade absorvida, e escolher **RDS Custom** deliberadamente compra parte de volta. A resposta Well-Architected é consistentemente **gerenciado e com menor sobrecarga operacional**: herde o que a AWS auditará por você, e gaste seu esforço limitado nos controles que só você pode executar: classificação, identidade, regras de rede, decisões de criptografia e evidência de conformidade.
 
 > [!WARNING]
 > **Armadilhas do dia do exame para esta lição:**
-> - **Inversão da vs na** — AWS = segurança *da* nuvem (infraestrutura); cliente = segurança *na* nuvem (dados, aplicativos, configuração, identidade). A troca é o jeito mais rápido de eliminar duas opções;
-> - **Fornecido ≠ configurado** — a AWS *fornece* o firewall de grupo de segurança, o KMS e o CloudTrail; **você configura, habilita e age sobre os três**;
-> - **Compartilhado ≠ 50/50** — controles compartilhados operam *"em contextos completamente separados"*: a AWS aplica patch na infraestrutura dela, você aplica patch no seu SO convidado e aplicativos;
-> - **Dados, IAM, escolha de criptografia e conformidade com a lei nunca mudam** — nenhuma quantidade de abstração os transfere para a AWS;
-> - **Amazon RDS ≠ zero de dever de patch** — você escolhe janelas de manutenção, aplica atualizações do serviço e agenda reinicializações; **RDS Custom** coloca o patch de SO e de motor de volta em você;
-> - **AWS Lambda ≠ zero de dever do cliente** — código, função de execução, dependências, reconstruções de contêiner e upgrades de runtime Manual/Function-update ficam seus;
-> - **Relatório deles ≠ sua conformidade** — a AWS atesta controles da AWS; você permanece responsável por cumprir as leis aplicáveis; não existe certificação de CSP;
-> - **SLA ≠ sua disponibilidade** — a AWS possui a resiliência *da* infraestrutura; Multi-AZ, backups, replicação e testes de DR são seus;
-> - **Controles herdados são os físicos** — crachás, energia, refrigeração, hardware, destruição de mídia (NIST 800-88); qualquer coisa que você possa configurar não é herdada;
-> - **Sem "modelo CUP", sem serviço de auditoria parecido** — o serviço de auditoria é o **AWS CloudTrail**, e a AWS não publica nenhuma sigla assim;
-> - **Contagens são carimbadas com data** — 143 padrões/certificações, 300+ serviços e recursos de segurança/conformidade/governança, 185 serviços SOC 1, 2.600+ requisitos de auditoria, 124 AZs em 39 Regiões: todos **em outubro de 2026**, verifique o estado atual antes do uso;
-> - **Números de estudos de caso são afirmados pelo cliente**, não auditados, frequentemente tetos "até" — nunca garantias da AWS, e FedRAMP é uma autorização que **o cliente** obtém.
+> - **Inversão da vs na**: AWS = segurança *da* nuvem (infraestrutura); cliente = segurança *na* nuvem (dados, aplicativos, configuração, identidade). A troca é o jeito mais rápido de eliminar duas opções;
+> - **Fornecido ≠ configurado**: a AWS *fornece* o firewall de grupo de segurança, o KMS e o CloudTrail; **você configura, habilita e age sobre os três**;
+> - **Compartilhado ≠ 50/50**: controles compartilhados operam *"em contextos completamente separados"*: a AWS aplica patch na infraestrutura dela, você aplica patch no seu SO convidado e aplicativos;
+> - **Dados, IAM, escolha de criptografia e conformidade com a lei nunca mudam**: nenhuma quantidade de abstração os transfere para a AWS;
+> - **Amazon RDS ≠ zero de dever de patch**: você escolhe janelas de manutenção, aplica atualizações do serviço e agenda reinicializações; **RDS Custom** coloca o patch de SO e de motor de volta em você;
+> - **AWS Lambda ≠ zero de dever do cliente**: código, função de execução, dependências, reconstruções de contêiner e upgrades de runtime Manual/Function-update ficam seus;
+> - **Relatório deles ≠ sua conformidade**: a AWS atesta controles da AWS; você permanece responsável por cumprir as leis aplicáveis; não existe certificação de CSP;
+> - **SLA ≠ sua disponibilidade**: a AWS possui a resiliência *da* infraestrutura; Multi-AZ, backups, replicação e testes de DR são seus;
+> - **Controles herdados são os físicos**: crachás, energia, refrigeração, hardware, destruição de mídia (NIST 800-88); qualquer coisa que você possa configurar não é herdada;
+> - **Sem "modelo CUP", sem serviço de auditoria parecido**, o serviço de auditoria é o **AWS CloudTrail**, e a AWS não publica nenhuma sigla assim;
+> - **Contagens são carimbadas com data**: 143 padrões/certificações, 300+ serviços e recursos de segurança/conformidade/governança, 185 serviços SOC 1, 2.600+ requisitos de auditoria, 124 AZs em 39 Regiões: todos **em outubro de 2026**, verifique o estado atual antes do uso;
+> - **Números de estudos de caso são afirmados pelo cliente**, não auditados, frequentemente tetos "até": nunca garantias da AWS, e FedRAMP é uma autorização que **o cliente** obtém.
 
 > [!SUCCESS]
 > > **Pontos Principais (Key Takeaways):**
 > > 1. O modelo é **uma frase com duas preposições**: a AWS é responsável pela **segurança DA nuvem** (a infraestrutura que executa todos os serviços da AWS), o cliente é responsável pela **segurança NA nuvem**, cuja extensão *"será determinada pelos serviços da AWS Cloud que um cliente seleciona"*;
 > > 2. A fronteira situa-se **no SO convidado**: a AWS opera, gerencia e controla *"desde o sistema operacional host e a camada de virtualização até a segurança física das instalações"*; o cliente gerencia o **SO convidado (atualizações e patches de segurança), o software de aplicativo e a configuração do firewall de grupo de segurança fornecido pela AWS**;
-> > 3. **Âncoras fixas** que nunca mudam — AWS: instalações, hardware, SO host, hipervisor, infraestrutura de serviços gerenciados; cliente: **dados, IAM, escolha de criptografia, configuração de rede, segurança de aplicativo e conformidade com a lei aplicável**;
+> > 3. **Âncoras fixas** que nunca mudam: AWS: instalações, hardware, SO host, hipervisor, infraestrutura de serviços gerenciados; cliente: **dados, IAM, escolha de criptografia, configuração de rede, segurança de aplicativo e conformidade com a lei aplicável**;
 > > 4. A linha **muda com o serviço**: no **Amazon EC2** você aplica patch no SO convidado e constrói escalonamento/ALTA/backups você mesmo; no **Amazon RDS** a AWS aplica patch no SO e no motor enquanto você escolhe janelas de manutenção, schema e grupos de segurança; no **AWS Lambda** a AWS executa e aplica patch no runtime mas você possui código, função de execução e upgrades Manual/Function-update; no **Amazon S3** e em outros serviços abstraidos a AWS possui a pilha inteira abaixo dos seus dados, IAM e políticas;
 > > 5. Duas nuances derrotam absolutos: o **RDS Custom** devolve o patch de SO e de banco de dados ao cliente, e o **Lambda** no modo **Manual** (ou uma imagem de contêiner não reconstruída) deixa a correção do runtime sem implantar mesmo tendo a AWS publicado;
-> > 6. A taxonomia oficial de controles é **Herdados** (controles físicos e ambientais), **Compartilhados** (gerenciamento de patches, gerenciamento de configuração, conscientização e treinamento — *"em contextos completamente separados"*, nunca 50/50) e **Específico do cliente** (proteção de serviço e comunicações / segurança de zona, mais seus dados, IAM e criptografia);
-> > 7. **A resiliência espelha a divisão**: resiliência *da* nuvem = disponibilidade da infraestrutura da AWS vs seus SLAs (124 AZs em 39 Regiões, ≥3 por Região em outubro de 2026); resiliência *na* nuvem = seu design Multi-AZ, backups, replicação e testes de DR — um aplicativo single-AZ não testado não herda nada;
-> > 8. **Monitoramento e evidência são deveres do cliente**: a AWS fornece CloudTrail, CloudWatch, AWS Config, GuardDuty, Security Hub e Trusted Advisor; você os habilita, revisa achados e corrige — proteger a **conta root com MFA** e usar o root apenas em emergências é inteiramente seu;
-> > 9. **A conformidade se divide do mesmo jeito**: a AWS suporta **143 padrões de segurança e certificações de conformidade** e **mais de 300** serviços e recursos de segurança, conformidade e governança, publica **185 serviços** no relatório SOC 1 do Verão de 2026 (1º de jul. de 2025 – 30 de jun. de 2026) e é auditada contra **mais de 2.600 requisitos** (todos em outubro de 2026) — enquanto *"os clientes da AWS permanecem responsáveis por cumprir as leis e regulamentações de conformidade aplicáveis"*, com evidência reunida para o lado da AWS via **AWS Artifact**;
-> > 10. Reconheça as nove **armadilhas de atribuição incorreta** (troca da/na, fornecido-vs-configurado, ferramenta-vs-dever, atestação-vs-conformidade, absolutos do RDS/Lambda, SLA-vs-disponibilidade) e os dois red herrings (não existe "modelo CUP", o serviço de auditoria é o **AWS CloudTrail**) — então prove a divisão em produção: a **athenahealth** construiu regras como código em 120 contas com o AWS Network Firewall (custos de inspeção −95%, equipe de 8) e a **Avalon** pareou o AWS Verified Access com identidade de propriedade do cliente para cortar a configuração do perímetro de dias para cerca de uma hora enquanto ainda atendia mais de 700 controles.
-> > 11. **A herança reduz a evidência sem transferir a obrigação, e só o vocabulário muda**: a **Socure** relata *"herdado mais de 46 controles de segurança exigidos pelo FedRAMP do AWS GovCloud (US)"* (AWS Public Sector Blog, 14 de novembro de 2024) e a **Smartsheet Gov** alcançou FedRAMP ready em **menos de 90 dias** contra prazos típicos de 12–18 meses (AWS Public Sector Blog, 29 de agosto de 2019) — ambos afirmados pelo cliente, ambos ainda a autorização a ser obtida pelo cliente; e em outubro de **2026** o Domínio 2 se mantém em **30%** enquanto o guia reconstruiu a lista de serviços (**128 → 111** no escopo, **11 → 55** fora do escopo), adicionou **AWS PrivateLink, AWS Transit Gateway, AWS Site-to-Site VPN, AWS Client VPN**, removeu o **AWS Network Firewall** do escopo, renomeou **Customer Engagement → Customer Enablement** (só AWS Support) e publica o **AWS IAM Identity Center** sem seu antigo parentesco — carimbe com data cada contagem e **verifique o estado atual antes do uso**.
+> > 6. A taxonomia oficial de controles é **Herdados** (controles físicos e ambientais), **Compartilhados** (gerenciamento de patches, gerenciamento de configuração, conscientização e treinamento: *"em contextos completamente separados"*, nunca 50/50) e **Específico do cliente** (proteção de serviço e comunicações / segurança de zona, mais seus dados, IAM e criptografia);
+> > 7. **A resiliência espelha a divisão**: resiliência *da* nuvem = disponibilidade da infraestrutura da AWS vs seus SLAs (124 AZs em 39 Regiões, ≥3 por Região em outubro de 2026); resiliência *na* nuvem = seu design Multi-AZ, backups, replicação e testes de DR: um aplicativo single-AZ não testado não herda nada;
+> > 8. **Monitoramento e evidência são deveres do cliente**: a AWS fornece CloudTrail, CloudWatch, AWS Config, GuardDuty, Security Hub e Trusted Advisor; você os habilita, revisa achados e corrige: proteger a **conta root com MFA** e usar o root apenas em emergências é inteiramente seu;
+> > 9. **A conformidade se divide do mesmo jeito**: a AWS suporta **143 padrões de segurança e certificações de conformidade** e **mais de 300** serviços e recursos de segurança, conformidade e governança, publica **185 serviços** no relatório SOC 1 do Verão de 2026 (1º de jul. de 2025 to 30 de jun. de 2026) e é auditada contra **mais de 2.600 requisitos** (todos em outubro de 2026): enquanto *"os clientes da AWS permanecem responsáveis por cumprir as leis e regulamentações de conformidade aplicáveis"*, com evidência reunida para o lado da AWS via **AWS Artifact**;
+> > 10. Reconheça as nove **armadilhas de atribuição incorreta** (troca da/na, fornecido-vs-configurado, ferramenta-vs-dever, atestação-vs-conformidade, absolutos do RDS/Lambda, SLA-vs-disponibilidade) e os dois red herrings (não existe "modelo CUP", o serviço de auditoria é o **AWS CloudTrail**), então prove a divisão em produção: a **athenahealth** construiu regras como código em 120 contas com o AWS Network Firewall (custos de inspeção −95%, equipe de 8) e a **Avalon** pareou o AWS Verified Access com identidade de propriedade do cliente para cortar a configuração do perímetro de dias para cerca de uma hora enquanto ainda atendia mais de 700 controles.
+> > 11. **A herança reduz a evidência sem transferir a obrigação, e só o vocabulário muda**: a **Socure** relata *"herdado mais de 46 controles de segurança exigidos pelo FedRAMP do AWS GovCloud (US)"* (AWS Public Sector Blog, 14 de novembro de 2024) e a **Smartsheet Gov** alcançou FedRAMP ready em **menos de 90 dias** contra prazos típicos de 12 to 18 meses (AWS Public Sector Blog, 29 de agosto de 2019), ambos afirmados pelo cliente, ambos ainda a autorização a ser obtida pelo cliente; e em outubro de **2026** o Domínio 2 se mantém em **30%** enquanto o guia reconstruiu a lista de serviços (**128 → 111** no escopo, **11 → 55** fora do escopo), adicionou **AWS PrivateLink, AWS Transit Gateway, AWS Site-to-Site VPN, AWS Client VPN**, removeu o **AWS Network Firewall** do escopo, renomeou **Customer Engagement → Customer Enablement** (só AWS Support) e publica o **AWS IAM Identity Center** sem seu antigo parentesco, carimbe com data cada contagem e **verifique o estado atual antes do uso**.

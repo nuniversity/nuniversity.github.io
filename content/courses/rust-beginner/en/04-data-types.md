@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Data Types
 
-Rust is a **statically typed** language — every variable must have a known type at compile time. The compiler is smart about inferring types, but you can always annotate them explicitly.
+Rust is a **statically typed** language: every variable must have a known type at compile time. The compiler is smart about inferring types, but you can always annotate them explicitly.
 
 ## Two Categories of Types
 
@@ -74,7 +74,7 @@ fn main() {
 | `checked_add` | Returns `Option` (None on overflow) |
 
 > [!WARNING]
-> In debug mode, integer overflow panics. In release mode, it wraps silently. Never rely on overflow behavior — use explicit methods.
+> In debug mode, integer overflow panics. In release mode, it wraps silently. Never rely on overflow behavior: use explicit methods.
 
 ### Floating-Point Types
 
@@ -96,10 +96,10 @@ fn main() {
 | `f64` | ~15 decimal digits | 8 bytes | General computation |
 
 > [!WARNING]
-> Floats do not implement `Eq` or `Ord` — NaN and precision issues make comparison unreliable. Use `f64::EPSILON` for approximate comparison:
+> Floats do not implement `Eq` or `Ord`: NaN and precision issues make comparison unreliable. Use `f64:EPSILON` for approximate comparison:
 > ```rust
 > fn approx_eq(a: f64, b: f64) -> bool {
->     (a - b).abs() < f64::EPSILON
+> (a: b).abs() < f64:EPSILON
 > }
 > ```
 
@@ -139,7 +139,7 @@ fn main() {
 ```
 
 > [!NOTE]
-> `char` is 4 bytes (not 1 like C char). It supports full Unicode but is not ASCII — use `u8` or `&[u8]` for byte-level data.
+> `char` is 4 bytes (not 1 like C char). It supports full Unicode but is not ASCII: use `u8` or `&[u8]` for byte-level data.
 
 ## Compound Types
 

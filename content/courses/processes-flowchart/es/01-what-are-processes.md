@@ -8,14 +8,14 @@ difficulty: "beginner"
 
 # ¿Qué son los procesos?
 
-Los procesos están en todas partes. Desde el momento en que te despiertas hasta el momento en que te vas a dormir, interactúas con procesos — tanto de forma consciente como de forma inconsciente. Entender qué son los procesos y cómo funcionan es una habilidad fundamental para cualquier persona que trabaje en tecnología, negocios o en cualquier campo que requiera pensamiento sistemático.
+Los procesos están en todas partes. Desde el momento en que te despiertas hasta el momento en que te vas a dormir, interactúas con procesos: tanto de forma consciente como de forma inconsciente. Entender qué son los procesos y cómo funcionan es una habilidad fundamental para cualquier persona que trabaje en tecnología, negocios o en cualquier campo que requiera pensamiento sistemático.
 
 ## Definiendo un proceso
 
 Un **proceso** es una serie de acciones o pasos realizados en un orden específico para alcanzar un fin determinado. Transforma entradas en salidas a través de una secuencia definida de operaciones.
 
 > [!NOTE] Definición clave
-> Un proceso es una **serie sistemática y repetible de acciones** diseñada para producir un resultado consistente. La palabra clave es *repetible* — si algo ocurre una vez por casualidad, no es un proceso.
+> Un proceso es una **serie sistemática y repetible de acciones** diseñada para producir un resultado consistente. La palabra clave es *repetible*: si algo ocurre una vez por casualidad, no es un proceso.
 
 ### Características fundamentales de los procesos
 
@@ -223,11 +223,11 @@ Determina cuáles de los siguientes son procesos y explica por qué:
 <details>
 <summary>Haz clic para ver las respuestas</summary>
 
-1. **Proceso** — Pasos repetibles y ordenados con un objetivo claro
-2. **No es un proceso** — No es repetible ni controlable
-3. **Proceso** — Enfoque sistemático para atender solicitudes
-4. **No es un proceso** — Sin transformación ni objetivo, solo una salida aleatoria
-5. **Proceso** — Pasos definidos para alcanzar un resultado específico
+1. **Proceso**: Pasos repetibles y ordenados con un objetivo claro
+2. **No es un proceso**: No es repetible ni controlable
+3. **Proceso**: Enfoque sistemático para atender solicitudes
+4. **No es un proceso**; Sin transformación ni objetivo, solo una salida aleatoria
+5. **Proceso**: Pasos definidos para alcanzar un resultado específico
 
 </details>
 

@@ -1,6 +1,6 @@
 ---
 title: "Agregados e Raízes de Agregados"
-description: "Domine Agregados e Raízes de Agregados em DDD — limites de consistência, invariantes transacionais e como projetar clusters de entidades tratados como uma única unidade"
+description: "Domine Agregados e Raízes de Agregados em DDD, limites de consistência, invariantes transacionais e como projetar clusters de entidades tratados como uma única unidade"
 order: 5
 duration: "70 minutos"
 difficulty: "avançado"
@@ -8,7 +8,7 @@ difficulty: "avançado"
 
 # Agregados e Raízes de Agregados
 
-Um Agregado é um **cluster de objetos de domínio** que pode ser tratado como uma única unidade. Cada Agregado tem uma **Raiz de Agregado** — uma única Entidade que atua como ponto de entrada e controla o acesso a tudo dentro do limite.
+Um Agregado é um **cluster de objetos de domínio** que pode ser tratado como uma única unidade. Cada Agregado tem uma **Raiz de Agregado**: uma única Entidade que atua como ponto de entrada e controla o acesso a tudo dentro do limite.
 
 > [!NOTE]
 > O padrão Agregado é a resposta do DDD para consistência. Em qualquer sistema com acesso concorrente e dados complexos, garantir invariantes (regras de negócio que devem sempre ser verdadeiras) é difícil. Agregados definem **limites de consistência** claros que tornam os invariantes aplicáveis.
@@ -180,7 +180,7 @@ class PedidoErrado:
 
 ### 3. Defina Invariantes Claros
 
-Cada agregado deve ter invariantes explícitos — regras de negócio que devem sempre ser verdadeiras.
+Cada agregado deve ter invariantes explícitos: regras de negócio que devem sempre ser verdadeiras.
 
 ```python
 class CarrinhoCompras:
@@ -316,7 +316,7 @@ class ManipuladorReservaEstoque:
 
 4. **Design de consistência eventual**: Um sistema de e-commerce tem agregados `Pedido` e `Cliente` separados. Quando um pedido é confirmado, o `valor_acumulado` do cliente deve ser atualizado. Projete isso usando eventos de domínio e consistência eventual.
 
-5. **Limite de transação**: Dados os seguintes agregados — `Pagamento`, `Pedido`, `Remessa` — descreva um cenário onde uma única operação do usuário aciona mudanças em todos os três. Mostre como você projetaria isso usando consistência eventual.
+5. **Limite de transação**: Dados os seguintes agregados, `Pagamento`, `Pedido`, `Remessa`, descreva um cenário onde uma única operação do usuário aciona mudanças em todos os três. Mostre como você projetaria isso usando consistência eventual.
 
 6. **Redimensione um agregado**: Um agregado `CarrinhoCompras` atualmente mantém entidades `ItemCarrinho` que contêm dados completos do `Produto` (nome, descrição, url_imagem, preco, peso, dimensoes). Refatore para que o carrinho mantenha apenas IDs de produtos e referências. Explique os trade-offs.
 

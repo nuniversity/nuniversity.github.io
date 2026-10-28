@@ -133,9 +133,9 @@ fn main() {
 
 > [!NOTE]
 > La sintaxis `::` se usa para:
-> - Funciones asociadas: `Tipo::funcion()`
-> - Acceso a namespace: `std::collections::HashMap`
-> - Variantes de enum: `Option::Some(5)`
+> - Funciones asociadas: `Tipo:funcion()`
+> - Acceso a namespace: `std:collections:HashMap`
+> - Variantes de enum: `Option:Some(5)`
 
 ### Funciones Asociadas Comunes
 
@@ -237,7 +237,7 @@ fn main() {
 
 ## Funciones como Valores
 
-Las funciones son ciudadanos de primera clase — pueden pasarse:
+Las funciones son ciudadanos de primera clase: pueden pasarse:
 
 ```rust
 fn sumar_uno(x: i32) -> i32 { x + 1 }

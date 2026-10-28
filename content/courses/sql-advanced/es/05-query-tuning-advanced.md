@@ -151,7 +151,7 @@ WHERE c.active = true;
 ```
 
 [!NOTE]
-`IN (subconsulta)` puede ser más lento que `JOIN` porque la subconsulta se materializa. Sin embargo, `IN` maneja NULLs de manera diferente — prueba para equivalencia semántica.
+`IN (subconsulta)` puede ser más lento que `JOIN` porque la subconsulta se materializa. Sin embargo, `IN` maneja NULLs de manera diferente: prueba para equivalencia semántica.
 
 ### 2. Usa EXISTS en Lugar de COUNT(*)
 

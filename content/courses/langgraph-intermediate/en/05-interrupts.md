@@ -446,7 +446,7 @@ if is_paused:
   "options": [
     "The new state replaces the paused state",
     "The new state is merged with the paused state",
-    "An error is thrown — paused threads expect None or Command",
+    "An error is thrown: paused threads expect None or Command",
     "The graph restarts from the beginning"
   ],
   "correct": 2,
@@ -466,7 +466,7 @@ if is_paused:
     "Graph visualization"
   ],
   "correct": 1,
-  "explanation": "Approval workflows are the most common use case — the agent proposes an action, the human reviews and approves or rejects it."
+  "explanation": "Approval workflows are the most common use case: the agent proposes an action, the human reviews and approves or rejects it."
 }
 ```
 

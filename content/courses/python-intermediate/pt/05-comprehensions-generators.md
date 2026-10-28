@@ -160,7 +160,7 @@ print([next(c) for _ in range(4)])  # [10, 15, 20, 25]
 
 ## Expressões Geradoras
 
-Semelhante às compreensões de lista, mas com parênteses — preguiçosas e eficientes em memória:
+Semelhante às compreensões de lista, mas com parênteses: preguiçosas e eficientes em memória:
 
 ```python
 # Compreensão de lista — cria lista inteira na memória
@@ -207,7 +207,7 @@ result = (x ** 2 for x in range(10) if x % 2 == 0)
 print(list(result))  # [0, 4, 16, 36, 64]
 ```
 
-## `yield from` — Delegando a Sub-geradores
+## `yield from`: Delegando a Sub-geradores
 
 ```python
 def chain(*iterables):
@@ -328,6 +328,6 @@ for user in paginate("https://api.example.com/users"):
 5. O que acontece quando você chama `next()` em um gerador que não tem mais itens para produzir?
 6. Escreva uma função geradora que produza os primeiros `n` números primos.
 7. Como `yield from` difere de iterar manualmente e produzir cada item?
-8. Crie um pipeline que lê um arquivo CSV, filtra linhas onde valor > 50, e eleva ao quadrado o resultado — tudo preguiçosamente.
+8. Crie um pipeline que lê um arquivo CSV, filtra linhas onde valor > 50, e eleva ao quadrado o resultado: tudo preguiçosamente.
 9. O que o método `send()` faz em um gerador? Como é diferente de `next()`?
 10. Quando você deve usar um gerador em vez de uma lista? Quando não deve?

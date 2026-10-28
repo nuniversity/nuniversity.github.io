@@ -132,12 +132,12 @@ print(profile2)
 > [!WARNING]
 > Los valores por defecto de los parámetros se evalúan solo una vez, cuando se define la función. Nunca uses valores por defecto mutables (como listas o diccionarios):
 > ```python
-> # BAD - shared list across calls!
+> # BAD: shared list across calls!
 > def add_item(item, items=[]):
 >     items.append(item)
 >     return items
 > 
-> # GOOD - create new list each time
+> # GOOD: create new list each time
 > def add_item(item, items=None):
 >     if items is None:
 >         items = []

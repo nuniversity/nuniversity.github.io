@@ -121,7 +121,7 @@ CREATE TABLE user_sessions_p3 PARTITION OF user_sessions
 ```
 
 [!NOTE]
-O particionamento HASH é ideal para distribuir uniformemente a carga de escrita no armazenamento. É ruim para consultas de intervalo — uma consulta filtrando `user_id BETWEEN 1000 AND 2000` examinará todas as partições.
+O particionamento HASH é ideal para distribuir uniformemente a carga de escrita no armazenamento. É ruim para consultas de intervalo: uma consulta filtrando `user_id BETWEEN 1000 AND 2000` examinará todas as partições.
 
 ## Subparticionamento
 
@@ -330,7 +330,7 @@ Use particionamento com índices. Cada partição recebe seus próprios índices
 2. Crie uma tabela particionada por RANGE em `sale_date` com partições trimestrais para 2024.
 3. Escreva uma consulta que verifique se a poda de partições está funcionando verificando o plano `EXPLAIN`.
 4. Dado `users` com 100M linhas, como você particionaria por `region` (NA, EU, APAC)?
-5. O que acontece quando uma consulta usa uma função na chave de partição (ex: `YEAR(order_date)`) — a poda ainda funciona?
+5. O que acontece quando uma consulta usa uma função na chave de partição (ex: `YEAR(order_date)`): a poda ainda funciona?
 6. Como adicionar uma nova partição para os dados do próximo mês em uma tabela particionada mensalmente?
 7. Explique hashing consistente e por que é melhor que módulo simples para sharding.
 8. Escreva uma consulta para desanexar e arquivar uma partição contendo dados de 2023.

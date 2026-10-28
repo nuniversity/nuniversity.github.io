@@ -318,15 +318,15 @@ class ETLPipeline:
 
 ## Lista de Verificación de Producción
 
-1. **Procesamiento incremental** — Nunca escanear completamente tablas en crecimiento
-2. **Pipelines idempotentes** — Re-ejecutar produce el mismo resultado
-3. **Evolución de esquemas** — Manejar adiciones de columnas con gracia
-4. **Seguimiento de watermark** — Almacenar marca de tiempo de última ejecución exitosa
-5. **Controles de calidad** — Validar antes de cargar
-6. **Salida particionada** — Organizar para eficiencia de consultas
-7. **Registro de auditoría** — Rastrear filas procesadas, fallos, tiempo de ejecución
-8. **Manejo de errores** — Try/catch con lógica de reintento
-9. **Configuración de recursos** — Dimensionar correctamente los recursos del ejecutor
+1. **Procesamiento incremental**: Nunca escanear completamente tablas en crecimiento
+2. **Pipelines idempotentes**: Re-ejecutar produce el mismo resultado
+3. **Evolución de esquemas**: Manejar adiciones de columnas con gracia
+4. **Seguimiento de watermark**: Almacenar marca de tiempo de última ejecución exitosa
+5. **Controles de calidad**: Validar antes de cargar
+6. **Salida particionada**: Organizar para eficiencia de consultas
+7. **Registro de auditoría**: Rastrear filas procesadas, fallos, tiempo de ejecución
+8. **Manejo de errores**: Try/catch con lógica de reintento
+9. **Configuración de recursos**: Dimensionar correctamente los recursos del ejecutor
 
 ## Preguntas de Práctica
 

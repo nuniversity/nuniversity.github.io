@@ -10,7 +10,7 @@ difficulty: "intermediate"
 
 Rust's standard library provides powerful, efficient collections. Understanding their internals and APIs is essential for productive Rust development.
 
-## Vec\<T\> — Growable Arrays
+## Vec\<T\>: Growable Arrays
 
 Vectors store elements of the same type in contiguous heap memory:
 
@@ -103,7 +103,7 @@ fn main() {
 > [!SUCCESS]
 > Pre-allocate with `Vec::with_capacity(n)` when you know the expected size. This avoids repeated reallocations.
 
-## String — UTF-8 Text
+## String: UTF-8 Text
 
 `String` is a `Vec<u8>` that guarantees valid UTF-8:
 
@@ -199,7 +199,7 @@ fn main() {
 }
 ```
 
-## HashMap\<K, V\> — Key-Value Store
+## HashMap\<K, V\>: Key-Value Store
 
 ```rust
 use std::collections::HashMap;

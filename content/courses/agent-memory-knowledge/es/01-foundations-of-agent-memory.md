@@ -8,20 +8,20 @@ difficulty: "beginner"
 
 # Fundamentos de la Memoria de Agentes
 
-La memoria es lo que separa un chatbot sin estado de un agente verdaderamente inteligente. Sin memoria, cada interacción comienza desde cero — el agente no puede aprender, personalizar ni mantener contexto entre turnos.
+La memoria es lo que separa un chatbot sin estado de un agente verdaderamente inteligente. Sin memoria, cada interacción comienza desde cero: el agente no puede aprender, personalizar ni mantener contexto entre turnos.
 
 ---
 
 ## Por Qué los Agentes Necesitan Memoria
 
-Los LLMs modernos son inherentemente sin estado: procesan una única ventana de contexto y olvidan todo una vez que generan la respuesta. Los agentes, sin embargo, operan en múltiples pasos — llaman herramientas, revisitan conclusiones anteriores e interactúan con usuarios en sesiones largas.
+Los LLMs modernos son inherentemente sin estado: procesan una única ventana de contexto y olvidan todo una vez que generan la respuesta. Los agentes, sin embargo, operan en múltiples pasos: llaman herramientas, revisitan conclusiones anteriores e interactúan con usuarios en sesiones largas.
 
 La memoria permite:
 
-- **Continuidad** — el agente recuerda lo dicho anteriormente
-- **Personalización** — las preferencias del usuario persisten entre sesiones
-- **Aprendizaje** — hechos extraídos de una interacción informan las siguientes
-- **Coherencia** — las cadenas de razonamiento multi-paso se mantienen consistentes
+- **Continuidad**: el agente recuerda lo dicho anteriormente
+- **Personalización**: las preferencias del usuario persisten entre sesiones
+- **Aprendizaje**: hechos extraídos de una interacción informan las siguientes
+- **Coherencia**: las cadenas de razonamiento multi-paso se mantienen consistentes
 
 [!WARNING]
 Sin memoria explícita, un agente no puede distinguir entre "cuéntame sobre mi último pedido" y "cuéntame sobre tus capacidades". La ventana de contexto por sí sola es insuficiente para el conocimiento persistente.
@@ -42,7 +42,7 @@ Los agentes, como los humanos, utilizan múltiples sistemas de memoria que opera
 | Uso | Historial inmediato de la conversación | Perfil del usuario, hechos aprendidos |
 
 [!NOTE]
-La memoria a corto plazo en agentes es análoga a la memoria de trabajo humana — mantiene información temporalmente mientras el agente procesa la tarea actual. La diferencia clave es que la MCP del agente está limitada por tokens, no por capacidad cognitiva.
+La memoria a corto plazo en agentes es análoga a la memoria de trabajo humana: mantiene información temporalmente mientras el agente procesa la tarea actual. La diferencia clave es que la MCP del agente está limitada por tokens, no por capacidad cognitiva.
 
 ---
 
@@ -50,8 +50,8 @@ La memoria a corto plazo en agentes es análoga a la memoria de trabajo humana �
 
 Otra distinción clave proviene de la ciencia cognitiva:
 
-- **Memoria episódica** — almacena eventos específicos o interacciones pasadas ("el usuario preguntó sobre precios el martes")
-- **Memoria semántica** — almacena conocimiento factual general ("el precio es $10/mes para el plan pro")
+- **Memoria episódica**: almacena eventos específicos o interacciones pasadas ("el usuario preguntó sobre precios el martes")
+- **Memoria semántica**: almacena conocimiento factual general ("el precio es $10/mes para el plan pro")
 
 La memoria episódica ayuda al agente a recordar lo que pasó. La memoria semántica ayuda al agente a saber lo que es verdad.
 
@@ -109,7 +109,7 @@ El orden de las operaciones importa: la recuperación ocurre *antes* de la gener
 
 ## Memoria Operativa en Agentes
 
-La memoria operativa es el bloc de notas del agente — el espacio temporal donde los pasos intermedios de razonamiento, salidas de herramientas y resultados parciales viven durante un solo turno.
+La memoria operativa es el bloc de notas del agente: el espacio temporal donde los pasos intermedios de razonamiento, salidas de herramientas y resultados parciales viven durante un solo turno.
 
 ```python
 class AgentWorkingMemory:
@@ -140,7 +140,7 @@ wm.add_step("format_response", "Prepared summary")
 print(wm.get_context())
 ```
 
-La memoria operativa no se persiste — se borra entre turnos o cuando la tarea se completa.
+La memoria operativa no se persiste: se borra entre turnos o cuando la tarea se completa.
 
 ---
 
@@ -150,10 +150,10 @@ Cada LLM tiene una ventana de contexto fija (4K, 8K, 32K, 128K tokens). Cuando l
 
 Estrategias:
 
-- **Ventana deslizante** — mantener los últimos N mensajes, descartar los más antiguos
-- **Resumir** — condensar conversaciones anteriores en un resumen
-- **Retención selectiva** — mantener hechos importantes, descartar relleno
-- **Híbrido** — mantener un resumen + mensajes recientes + hechos recuperados
+- **Ventana deslizante**: mantener los últimos N mensajes, descartar los más antiguos
+- **Resumir**: condensar conversaciones anteriores en un resumen
+- **Retención selectiva**: mantener hechos importantes, descartar relleno
+- **Híbrido**: mantener un resumen + mensajes recientes + hechos recuperados
 
 ```python
 from collections import deque
@@ -263,10 +263,10 @@ flowchart TD
 
 ---
 
-## Ventana de Contexto vs. Memoria — Distinción Clave
+## Ventana de Contexto vs. Memoria: Distinción Clave
 
 [!IMPORTANT]
-La ventana de contexto NO es memoria — es almacenamiento temporal que se sobrescribe cada turno. La memoria verdadera requiere escribir y leer de una capa de persistencia externa. Nunca confundas la ventana de contexto con la memoria a largo plazo.
+La ventana de contexto NO es memoria: es almacenamiento temporal que se sobrescribe cada turno. La memoria verdadera requiere escribir y leer de una capa de persistencia externa. Nunca confundas la ventana de contexto con la memoria a largo plazo.
 
 | Aspecto | Ventana de Contexto | Sistema de Memoria |
 | :--- | :--- | :--- |
@@ -292,7 +292,7 @@ La ventana de contexto NO es memoria — es almacenamiento temporal que se sobre
     "No usan ventanas de contexto"
   ],
   "correct": 1,
-  "explanation": "Los LLM son sin estado porque procesan cada entrada de forma independiente — no tienen un mecanismo incorporado para mantener contexto o memoria entre interacciones."
+  "explanation": "Los LLM son sin estado porque procesan cada entrada de forma independiente: no tienen un mecanismo incorporado para mantener contexto o memoria entre interacciones."
 }
 ```
 
@@ -385,7 +385,7 @@ La ventana de contexto NO es memoria — es almacenamiento temporal que se sobre
     "Cada mensaje del usuario",
     "Expiración basada en tiempo o evento explícito de consolidación",
     "Solo cuando el agente se apaga",
-    "Nunca — la memoria a corto plazo nunca va al largo plazo"
+    "Nunca: la memoria a corto plazo nunca va al largo plazo"
   ],
   "correct": 1,
   "explanation": "La consolidación se desencadena por TTL basado en tiempo o eventos explícitos como fin de sesión o alcanzar un límite de tokens."

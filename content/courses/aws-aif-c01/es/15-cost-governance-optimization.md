@@ -1,13 +1,13 @@
 ---
 title: "Optimización de costes y gobernanza para cargas de trabajo de IA"
-description: "Domina el dominio de costes y gobernanza del AIF-C01: aritmética de SageMaker bajo demanda frente a Spot frente a Savings Plans frente a Serverless Inference, palancas de tokens, Batch, caché y throughput de Amazon Bedrock, precios por unidad de los servicios de IA preconstruidos y free tier, Cost Explorer y etiquetas de asignación de costes, acciones de AWS Budgets y controles preventivos con SCP, Service Catalog y AWS Config — cada precio con fecha y cada ejemplo resuelto calculado."
+description: "Domina el dominio de costes y gobernanza del AIF-C01: aritmética de SageMaker bajo demanda frente a Spot frente a Savings Plans frente a Serverless Inference, palancas de tokens, Batch, caché y throughput de Amazon Bedrock, precios por unidad de los servicios de IA preconstruidos y free tier, Cost Explorer y etiquetas de asignación de costes, acciones de AWS Budgets y controles preventivos con SCP, Service Catalog y AWS Config, cada precio con fecha y cada ejemplo resuelto calculado."
 order: 15
 difficulty: "intermediate"
 duration: "115 min"
 ---
 # Optimización de costes y gobernanza para cargas de trabajo de IA
 
-Los costes son donde el examen AIF-C01 deja de ser abstracto. Cualquier otro dominio se puede responder con una definición; este te pide **calcular** y después elegir el control que **impide** el gasto excesivo en lugar del que solo lo informa. La buena noticia es que la aritmética es simple — multiplicación y porcentajes — y las trampas son pocas, afiladas y se evalúan repetidamente.
+Los costes son donde el examen AIF-C01 deja de ser abstracto. Cualquier otro dominio se puede responder con una definición; este te pide **calcular** y después elegir el control que **impide** el gasto excesivo en lugar del que solo lo informa. La buena noticia es que la aritmética es simple, multiplicación y porcentajes, y las trampas son pocas, afiladas y se evalúan repetidamente.
 
 ```text
 ====================================================================
@@ -40,7 +40,7 @@ Los costes son donde el examen AIF-C01 deja de ser abstracto. Cualquier otro dom
 ```
 
 > [!NOTE]
-> **Las cinco trampas principales de esta lección.** (1) **Los SCP nunca conceden** — acotan permisos y **se saltan las service-linked roles**. (2) Una **etiqueta de asignación de costes debe activarse** en la consola de Billing (hasta **24 horas** en aparecer) para que Cost Explorer pueda agrupar por ella. (3) **Spot ofrece hasta un 90 % de descuento con dos minutos de aviso**, y **el gasto en Spot no cuenta para el compromiso de un Compute Savings Plan**. (4) **Las alertas de presupuesto son gratuitas; las *acciones* de presupuesto son gratuitas solo para los dos primeros presupuestos con acciones habilitadas**, después **$0,10/día por cada extra** (6 oct 2026). (5) **Bedrock factura entrada y salida por separado**, y los tokens de salida suelen costar **4–5× el precio de los tokens de entrada**, así que `max_tokens` es un control de coste, no solo de latencia.
+> **Las cinco trampas principales de esta lección.** (1) **Los SCP nunca conceden**: acotan permisos y **se saltan las service-linked roles**. (2) Una **etiqueta de asignación de costes debe activarse** en la consola de Billing (hasta **24 horas** en aparecer) para que Cost Explorer pueda agrupar por ella. (3) **Spot ofrece hasta un 90 % de descuento con dos minutos de aviso**, y **el gasto en Spot no cuenta para el compromiso de un Compute Savings Plan**. (4) **Las alertas de presupuesto son gratuitas; las *acciones* de presupuesto son gratuitas solo para los dos primeros presupuestos con acciones habilitadas**, después **$0,10/día por cada extra** (6 oct 2026). (5) **Bedrock factura entrada y salida por separado**, y los tokens de salida suelen costar **4 to 5× el precio de los tokens de entrada**, así que `max_tokens` es un control de coste, no solo de latencia.
 
 Al terminar esta lección podrás:
 
@@ -56,7 +56,7 @@ Al terminar esta lección podrás:
 
 ## 1. Las tres familias de medidores: lo que realmente se te factura
 
-### 1.1 Familia de medidores 1 — SageMaker AI: instance-hours más almacenamiento
+### 1.1 Familia de medidores 1, SageMaker AI: instance-hours más almacenamiento
 
 SageMaker AI factura **por instance-hour** (por segundo en la mayoría de las regiones) por entrenamiento, procesamiento, notebooks y endpoints alojados, más **gigabyte-meses de EBS**. Bajo demanda no lleva **mínimo ni compromiso inicial** (aws.amazon.com/sagemaker/ai/pricing, verificado 6 oct 2026).
 
@@ -71,27 +71,27 @@ SageMaker AI factura **por instance-hour** (por segundo en la mayoría de las re
 | `ml.p6-b300.48xlarge` | **$148.54** | lista de precios del 7 oct 2026 |
 
 > [!WARNING]
-> **La fila del acelerador cambia la aritmética en un orden de magnitud.** Desde el **7 de octubre de 2026** AWS lista `ml.p6-b300.48xlarge` a **$148.54/hora** y `ml.p6-b200.48xlarge` a **$130.71/hora** — frente a `ml.p5.4xlarge` a **$6.86/hora**. Un día de un `ml.p6-b300.48xlarge` dejado encendido (**24 × $148.54 = $3,564.96**, lista de precios del 7 oct 2026) cuesta más que un mes completo de dos endpoints `ml.c5.xlarge`. Las preguntas del examen comprueban rutinariamente si notas que **la familia de instancias, no la lista de funciones, domina la factura**.
+> **La fila del acelerador cambia la aritmética en un orden de magnitud.** Desde el **7 de octubre de 2026** AWS lista `ml.p6-b300.48xlarge` a **$148.54/hora** y `ml.p6-b200.48xlarge` a **$130.71/hora**: frente a `ml.p5.4xlarge` a **$6.86/hora**. Un día de un `ml.p6-b300.48xlarge` dejado encendido (**24 × $148.54 = $3,564.96**, lista de precios del 7 oct 2026) cuesta más que un mes completo de dos endpoints `ml.c5.xlarge`. Las preguntas del examen comprueban rutinariamente si notas que **la familia de instancias, no la lista de funciones, domina la factura**.
 
-### 1.2 Familia de medidores 2 — Amazon Bedrock: tokens de entrada y tokens de salida
+### 1.2 Familia de medidores 2, Amazon Bedrock: tokens de entrada y tokens de salida
 
-Bedrock bajo demanda cobra **por token de entrada y por token de salida por separado** (aws.amazon.com/bedrock/pricing, verificado 6 oct 2026). Como la salida se genera un token a la vez, las tarifas de salida rondan **4–5× las de entrada** en los modelos de pesos abiertos — y mucho más en los modelos premium.
+Bedrock bajo demanda cobra **por token de entrada y por token de salida por separado** (aws.amazon.com/bedrock/pricing, verificado 6 oct 2026). Como la salida se genera un token a la vez, las tarifas de salida rondan **4 to 5× las de entrada** en los modelos de pesos abiertos, y mucho más en los modelos premium.
 
 | Modelo (Amazon Bedrock) | Entrada $/1M tokens | Salida $/1M tokens | Nota de Región | Verificado |
 |---|---|---|---|---|
-| NVIDIA Nemotron Nano 2 / 3 Nano 30B A3B | **$0.06 / $0.06** | **$0.23 / $0.24** | — | 6 oct 2026 |
-| NVIDIA Nemotron 3 Super 120B A12B / Nano 2 VL | **$0.15 / $0.20** | **$0.65 / $0.60** | — | 6 oct 2026 |
+| NVIDIA Nemotron Nano 2 / 3 Nano 30B A3B | **$0.06 / $0.06** | **$0.23 / $0.24** |: | 6 oct 2026 |
+| NVIDIA Nemotron 3 Super 120B A12B / Nano 2 VL | **$0.15 / $0.20** | **$0.65 / $0.60** |: | 6 oct 2026 |
 | OpenAI `gpt-oss-safeguard-20b` / `120b` | **$0.07 / $0.15** | **$0.20 / $0.60** | us-east-1/2, us-west-2 | 6 oct 2026 |
 | OpenAI `gpt-oss-20b` / `120b` | **$0.1262 / $0.2704** | **$0.5408 / $1.0815** | GovCloud (US) | 6 oct 2026 |
 | Z AI GLM 5 | **$1.00** | **$3.20** | us-east-1/2, us-west-2 | 6 oct 2026 |
-| Fine-tune de Llama 2 13B | **$1.49 / 1M entrenados** + almacenamiento **$1.95/mes** | inferencia, sin compromiso: **$23.50/hora/MU** | — | 6 oct 2026 |
+| Fine-tune de Llama 2 13B | **$1.49 / 1M entrenados** + almacenamiento **$1.95/mes** | inferencia, sin compromiso: **$23.50/hora/MU** |: | 6 oct 2026 |
 | Llama 2 13B Provisioned Throughput | **$21.18/hora/MU** (1 mes) | **$13.08/hora/MU** (6 meses) | −38,3 % frente a 1 mes | 6 oct 2026 |
 
-**Palancas de Bedrock que no son de tokens** (todas verificadas el 6 oct 2026 salvo indicación): **Batch = 50 % del precio de tokens bajo demanda** para los modelos fundacionales admitidos · lectura de caché **= 0,1×**, escritura de caché **= 1,25×** (TTL de 5 minutos) o **2×** (TTL de 1 hora) · Bedrock Guardrails en las páginas europeas de precios de AWS a **€0.2587283 por 1.000 unidades de texto** (filtros de contenido, temas denegados) y **€0.1724855 por 1.000** (información sensible, contextual grounding), con las regex y los filtros de palabras **gratuitos** (lista aws.eu, 7 ago 2026 — el equivalente en USD no se recuperó, así que trátalo como **(G)**).
+**Palancas de Bedrock que no son de tokens** (todas verificadas el 6 oct 2026 salvo indicación): **Batch = 50 % del precio de tokens bajo demanda** para los modelos fundacionales admitidos · lectura de caché **= 0,1×**, escritura de caché **= 1,25×** (TTL de 5 minutos) o **2×** (TTL de 1 hora) · Bedrock Guardrails en las páginas europeas de precios de AWS a **€0.2587283 por 1.000 unidades de texto** (filtros de contenido, temas denegados) y **€0.1724855 por 1.000** (información sensible, contextual grounding), con las regex y los filtros de palabras **gratuitos** (lista aws.eu, 7 ago 2026: el equivalente en USD no se recuperó, así que trátalo como **(G)**).
 
-### 1.3 Familia de medidores 3 — servicios de IA preconstruidos: una unidad por petición
+### 1.3 Familia de medidores 3, servicios de IA preconstruidos: una unidad por petición
 
-Rekognition, Textract, Comprehend, Transcribe, Polly y Lex facturan **por unidad de petición**, con **escalado por volumen** tras los primeros 1–10 millones de unidades (aws.amazon.com/*/pricing, verificado 6 oct 2026).
+Rekognition, Textract, Comprehend, Transcribe, Polly y Lex facturan **por unidad de petición**, con **escalado por volumen** tras los primeros 1 to 10 millones de unidades (aws.amazon.com/*/pricing, verificado 6 oct 2026).
 
 | Servicio | Unidad de facturación | Precio (primer escalón) | Verificado |
 |---|---|---|---|
@@ -100,7 +100,7 @@ Rekognition, Textract, Comprehend, Transcribe, Polly y Lex facturan **por unidad
 | Planos/pistas técnicas de Rekognition; almacenamiento de metadatos faciales | minuto; cara/mes | **$0.05**; **$0.00001** | 6 oct 2026 |
 | Textract `DetectDocumentText` | página | **$0.0015** primeros 1M/mes, **$0.0006** después (us-west-2) | 6 oct 2026 |
 | Textract `AnalyzeDocument` Tables / Forms / Tables+Forms+Queries | página | **$0.015 / $0.05 / $0.070** primeros 1M (**$0.010 / $0.040 / $0.055** después) | 6 oct 2026 |
-| NLP estándar de Comprehend | unidad de 100 caracteres (mínimo 300) | **$0.0001** primeros 10M/mes, **$0.00005** 10–50M, **$0.000025** por encima de 50M | 6 oct 2026 |
+| NLP estándar de Comprehend | unidad de 100 caracteres (mínimo 300) | **$0.0001** primeros 10M/mes, **$0.00005** 10 to 50M, **$0.000025** por encima de 50M | 6 oct 2026 |
 | Transcribe por lotes / streaming | minuto | **$0.006** / **$0.01** | 6 oct 2026 |
 | Redacción de contenido de Transcribe | minuto | **$0.0024** T1 (250K), **$0.0015** T2 (750K), **$0.00102** T3 (4M) | 6 oct 2026 |
 | Polly Standard / Neural / Generative / Long-Form | 1 millón de caracteres | **$4.00 / $16.00 / $30.00 / $100.00** | 6 oct 2026 |
@@ -108,7 +108,7 @@ Rekognition, Textract, Comprehend, Transcribe, Polly y Lex facturan **por unidad
 | Entrenamiento de diseñador de chatbots de Lex | minuto | **$0.50** | 6 oct 2026 |
 | Revisión humana de Augmented AI | página | **$0.03** primeros 100K, **$0.02** siguientes 100K | 6 oct 2026 |
 
-### 1.4 Ejemplo resuelto 1 — dos endpoints ociosos, 1.488 horas
+### 1.4 Ejemplo resuelto 1: dos endpoints ociosos, 1.488 horas
 
 Dos endpoints de tiempo real `ml.c5.xlarge` funcionan 24×7 durante un mes de 31 días a **$0.204/hora** (6 oct 2026):
 
@@ -120,14 +120,14 @@ $$
 
 | Palanca aplicada | Horas facturadas | Coste mensual | Ahorro frente a la base |
 |---|---|---|---|
-| Nada (2 instancias, siempre encendidas) | 1.488 | **$303.55** | — |
+| Nada (2 instancias, siempre encendidas) | 1.488 | **$303.55** |: |
 | (a) Autoescalado a una media de 1 instancia | 744 | **$151.78** | **−50,0 %** |
 | (b) Parar 8 horas al día (2 instancias) | 960 | **$195.84** | **−35,5 %** |
 | (c) Ambas (1 instancia, parada 8 h/día) | 480 | **$97.92** | **−67,7 %** |
 
-La lección no son los porcentajes — es que **un endpoint ocioso factura igual que uno ocupado**. Nada en el medidor sabe si alguien envió una petición.
+La lección no son los porcentajes: es que **un endpoint ocioso factura igual que uno ocupado**. Nada en el medidor sabe si alguien envió una petición.
 
-- **📚 ¿Sabías que…?** La página de precios de AWS para SageMaker factura **por segundo** en la mayoría de las regiones con un **mínimo de un minuto**, de modo que un pico de inferencia de 90 segundos cuesta un minuto, no una hora — pero un *notebook* o un *endpoint* se factura durante todo el tiempo que existe, desde su creación hasta su eliminación. Esa asimetría es la razón por la que las preguntas de «opción más barata» del examen casi siempre tienen «páralo según un horario» o «usa serverless» como respuesta.
+- **📚 ¿Sabías que…?** La página de precios de AWS para SageMaker factura **por segundo** en la mayoría de las regiones con un **mínimo de un minuto**, de modo que un pico de inferencia de 90 segundos cuesta un minuto, no una hora, pero un *notebook* o un *endpoint* se factura durante todo el tiempo que existe, desde su creación hasta su eliminación. Esa asimetría es la razón por la que las preguntas de «opción más barata» del examen casi siempre tienen «páralo según un horario» o «usa serverless» como respuesta.
 
 ---
 
@@ -148,12 +148,12 @@ No todas las palancas son iguales, y algunas se sobrevenden con frecuencia. AWS 
 | 7 | **Compute Savings Plans** | EC2 / Fargate / Lambda estables | **hasta un 66 %** | dependencia; **excluye el gasto en Spot** | Cost Explorer |
 | 8 | **Bedrock Batch** | inferencia masiva sin conexión | **50 %** | latencia asincrónica; el modelo debe admitir batch | Bedrock Batch |
 | 9 | **Caché de prompts de Bedrock** | prompts y documentos repetidos | **~90 % en la entrada cacheada** | las escrituras cuestan **1,25×**; un prefijo inestable lo mata | Registros de uso de Bedrock |
-| 10 | **Degradación / enrutamiento de modelo** | cargas generativas | la salida domina; huecos de **4–5×** entre niveles | se requieren evaluaciones de calidad | Model evaluation de Bedrock |
+| 10 | **Degradación / enrutamiento de modelo** | cargas generativas | la salida domina; huecos de **4 to 5×** entre niveles | se requieren evaluaciones de calidad | Model evaluation de Bedrock |
 | 11 | **Nivel Flex de Bedrock** | cargas no urgentes | tarifa estándar con descuento | latencia más alta | configuración de niveles de servicio |
 | 12 | **Nivel Reserved de Bedrock** | tokens garantizados por minuto | precio fijo por 1K TPM | compromiso de 1 o 3 meses | niveles de servicio |
 
 > [!IMPORTANT]
-> **Cuidado con el folclore de que «el right-saving ahorra un 30–60 %».** No existe ninguna cifra publicada por AWS sobre el ahorro por right-sizing — ese número circula solo en blogs de terceros, y es una afirmación **(G)** (no verificada). En el examen, una opción que cite un porcentaje preciso de right-sizing está comprobando si sabes que AWS no publica ninguno. Los techos **publicados** que puedes citar son: Spot **≤90 %**, EC2 Instance Savings Plans **≤72 %**, Compute Savings Plans **≤66 %**, SageMaker AI Savings Plans **≤64 %**, Bedrock Batch **50 %**, lecturas de caché de Bedrock **90 %**, Provisioned Throughput de 6 meses de Bedrock **38,3 %** en la unidad de modelo Llama 2 13B (todo en aws.amazon.com / docs.aws.amazon.com, verificado 6 oct 2026).
+> **Cuidado con el folclore de que «el right-saving ahorra un 30 to 60 %».** No existe ninguna cifra publicada por AWS sobre el ahorro por right-sizing: ese número circula solo en blogs de terceros, y es una afirmación **(G)** (no verificada). En el examen, una opción que cite un porcentaje preciso de right-sizing está comprobando si sabes que AWS no publica ninguno. Los techos **publicados** que puedes citar son: Spot **≤90 %**, EC2 Instance Savings Plans **≤72 %**, Compute Savings Plans **≤66 %**, SageMaker AI Savings Plans **≤64 %**, Bedrock Batch **50 %**, lecturas de caché de Bedrock **90 %**, Provisioned Throughput de 6 meses de Bedrock **38,3 %** en la unidad de modelo Llama 2 13B (todo en aws.amazon.com / docs.aws.amazon.com, verificado 6 oct 2026).
 
 ### 2.2 El flujo de decisión de palancas de coste
 
@@ -190,7 +190,7 @@ flowchart TD
 Tres hechos de «no puede» son oro en el examen:
 
 1. **Los Savings Plans no se acumulan sobre Spot, y el gasto en Spot no consume un compromiso de Compute Savings Plan** (docs.aws.amazon.com, 2026). Una pregunta que ofrezca «cubrir el uso de Spot con un Savings Plan» es errónea en las dos mitades de la frase.
-2. **Los servicios de IA preconstruidos no tienen ninguna opción publicada de reserva ni de Savings Plan** — se optimizan reduciendo el **volumen de unidades** (elige OCR antes que Forms, transcripción simple antes que redacción) y usando el free tier, no comprometiéndote.
+2. **Los servicios de IA preconstruidos no tienen ninguna opción publicada de reserva ni de Savings Plan**: se optimizan reduciendo el **volumen de unidades** (elige OCR antes que Forms, transcripción simple antes que redacción) y usando el free tier, no comprometiéndote.
 3. **Una acción de presupuesto no es un control en tiempo real.** Las alertas pueden basarse en previsión o en valores reales, pero la ejecución se retrasa, así que el gasto excesivo sigue siendo posible entre el umbral y la acción.
 
 ```matching
@@ -203,9 +203,9 @@ Tres hechos de «no puede» son oro en el examen:
     {"left": "SageMaker AI Savings Plans", "right": "Hasta 64% de descuento, flexible en todas las familias, tamaños, regiones y componentes ml.* durante 1 o 3 años"},
     {"left": "Database Savings Plans", "right": "Hasta 35% de descuento, solo a 1 año"},
     {"left": "Amazon Bedrock Batch", "right": "50% del precio de tokens bajo demanda para modelos admitidos, solo asincrónico"},
-    {"left": "Lectura de la caché de prompts de Amazon Bedrock", "right": "0,1x el precio de entrada - un 90% de descuento dentro del TTL cuando el prefijo coincide"}
+    {"left": "Lectura de la caché de prompts de Amazon Bedrock", "right": "0,1x el precio de entrada: un 90% de descuento dentro del TTL cuando el prefijo coincide"}
   ],
-  "explanation": "Cada número pertenece a una forma de compromiso distinta: Spot es interrumpible y no tiene compromiso, los EC2 Instance SP compran profundidad pero pierden flexibilidad, los Compute SP compran amplitud, los SageMaker SP compran flexibilidad ml.*, los Database SP son solo de 1 año, y las palancas de Bedrock tienen forma de carga de trabajo y no de cómputo. Confundirlos - por ejemplo citar 66% para SageMaker o 64% para EC2 - es la distracción clásica."
+  "explanation": "Cada número pertenece a una forma de compromiso distinta: Spot es interrumpible y no tiene compromiso, los EC2 Instance SP compran profundidad pero pierden flexibilidad, los Compute SP compran amplitud, los SageMaker SP compran flexibilidad ml.*, los Database SP son solo de 1 año, y las palancas de Bedrock tienen forma de carga de trabajo y no de cómputo. Confundirlos: por ejemplo citar 66% para SageMaker o 64% para EC2: es la distracción clásica."
 }
 ```
 
@@ -219,9 +219,9 @@ Bajo demanda es **por instance-hour, sin mínimo y sin inicial** (aws.amazon.com
 
 ### 3.2 Spot: hasta un 90 % de descuento, dos minutos de aviso
 
-EC2 Spot — y por tanto SageMaker Spot y SageMaker HyperPod Spot — se anuncia con **hasta un 90 % de descuento** sobre bajo demanda, con **dos minutos de aviso de interrupción** y una **frecuencia media histórica de interrupciones por debajo del 5 %** (aws.amazon.com/ec2/spot, 2025–26). El **HyperPod Spot de SageMaker suele tener hasta un 90 % de descuento** sobre HyperPod bajo demanda, con precio de EC2 y sin inicial (aws.amazon.com/sagemaker/ai/pricing, 6 oct 2026).
+EC2 Spot, y por tanto SageMaker Spot y SageMaker HyperPod Spot, se anuncia con **hasta un 90 % de descuento** sobre bajo demanda, con **dos minutos de aviso de interrupción** y una **frecuencia media histórica de interrupciones por debajo del 5 %** (aws.amazon.com/ec2/spot, 2025 to 26). El **HyperPod Spot de SageMaker suele tener hasta un 90 % de descuento** sobre HyperPod bajo demanda, con precio de EC2 y sin inicial (aws.amazon.com/sagemaker/ai/pricing, 6 oct 2026).
 
-Spot solo es correcto cuando el job **puede interrumpirse**: entrenamiento con checkpoints, batch transform, procesamiento sin conexión. El patrón de respuesta del examen es siempre la misma pareja — *Spot* más *checkpoint y reintento*.
+Spot solo es correcto cuando el job **puede interrumpirse**: entrenamiento con checkpoints, batch transform, procesamiento sin conexión. El patrón de respuesta del examen es siempre la misma pareja: *Spot* más *checkpoint y reintento*.
 
 ### 3.3 Savings Plans: tres descuentos distintos
 
@@ -232,28 +232,28 @@ Spot solo es correcto cuando el job **puede interrumpirse**: entrenamiento con c
 | **SageMaker AI Savings Plans** | **hasta un 64 %** | **todas las familias, tamaños, regiones y componentes `ml.*`** (notebook, entrenamiento, procesamiento, inferencia) | 1 o 3 años, $/hora | 6 oct 2026 |
 | **Database Savings Plans** | **hasta un 35 %** | cargas de base de datos | **solo 1 año** | 6 oct 2026 |
 
-Los SageMaker Savings Plans son los flexibles: como abarcan **cada familia de instancias `ml.*` en cada región**, puedes pasar de `ml.c5.xlarge` a `ml.g5.24xlarge` y conservar el descuento. Cost Explorer muestra la recomendación; el compromiso debe cubrir solo tu **base — el 70–80 % de tu gasto medio por hora de 30 días** — no tu pico.
+Los SageMaker Savings Plans son los flexibles: como abarcan **cada familia de instancias `ml.*` en cada región**, puedes pasar de `ml.c5.xlarge` a `ml.g5.24xlarge` y conservar el descuento. Cost Explorer muestra la recomendación; el compromiso debe cubrir solo tu **base, el 70 to 80 % de tu gasto medio por hora de 30 días**, no tu pico.
 
 ### 3.4 Serverless Inference: el medidor que llega a cero
 
-SageMaker **Serverless Inference escala a cero** cuando está ocioso, de modo que solo pagas el cómputo que usas, **facturado por milisegundo**, más los datos procesados. La **Provisioned Concurrency** opcional se factura por memoria, duración y concurrencia (docs.aws.amazon.com/sagemaker/latest/dg/serverless-endpoints.html, 2026). Es la respuesta correcta siempre que el tráfico sea **impredecible y bajo** — un prototipo que recibe unas pocas peticiones al día, o ninguna durante una semana.
+SageMaker **Serverless Inference escala a cero** cuando está ocioso, de modo que solo pagas el cómputo que usas, **facturado por milisegundo**, más los datos procesados. La **Provisioned Concurrency** opcional se factura por memoria, duración y concurrencia (docs.aws.amazon.com/sagemaker/latest/dg/serverless-endpoints.html, 2026). Es la respuesta correcta siempre que el tráfico sea **impredecible y bajo**: un prototipo que recibe unas pocas peticiones al día, o ninguna durante una semana.
 
 > [!WARNING]
-> **Serverless no es «gratis cuando está ocioso» por casualidad — es un contrato de diseño.** Cambias la factura de siempre encendido por **arranques en frío**, límites de carga útil y restricciones de GPU. Y observa que páginas de terceros citan tarifas de serverless (por ejemplo **$0.0000667/segundo por GB** más **$0.20/1M de peticiones**, arranque en frío de 1–5 segundos, máximo 6 GB) que **no se confirmaron en la página de precios de AWS** al 6 de octubre de 2026 — trata esas cifras como **(G)**. En una opción de examen, una tarifa de serverless sin atribución suele ser una distracción; el *comportamiento* (escala a cero, facturación por milisegundo) es lo que se evalúa.
+> **Serverless no es «gratis cuando está ocioso» por casualidad, es un contrato de diseño.** Cambias la factura de siempre encendido por **arranques en frío**, límites de carga útil y restricciones de GPU. Y observa que páginas de terceros citan tarifas de serverless (por ejemplo **$0.0000667/segundo por GB** más **$0.20/1M de peticiones**, arranque en frío de 1 to 5 segundos, máximo 6 GB) que **no se confirmaron en la página de precios de AWS** al 6 de octubre de 2026, trata esas cifras como **(G)**. En una opción de examen, una tarifa de serverless sin atribución suele ser una distracción; el *comportamiento* (escala a cero, facturación por milisegundo) es lo que se evalúa.
 
-### 3.5 Ejemplos resueltos — aritmética de SageMaker
+### 3.5 Ejemplos resueltos: aritmética de SageMaker
 
-**Ejemplo resuelto 2 — una flota de GPU siempre encendida (ejemplo resuelto de AWS).**
+**Ejemplo resuelto 2: una flota de GPU siempre encendida (ejemplo resuelto de AWS).**
 Cuatro instancias `ml.g5.24xlarge` a **$10.18/hora** (6 oct 2026) funcionan 720 horas en un mes, con 100 GB de EBS cada una a **$0.14/GB-mes** (6 oct 2026):
 
 $$
 4 \times 720 \times \$10.18 = \$29{,}318.40, \qquad 4 \times 100 \times \$0.14 = \$56.00
 $$
 
-**$29,318.40 + $56.00 = $29,374.40 al mes.** Con un **30 % de utilización** la flota puede bajar a unas **1,2 instancias ≈ $8,812/mes**, ahorrando unos **$20,560/mes** — y *después* un SageMaker Savings Plan (≤64 %, 6 oct 2026) se aplica sobre la huella ya reducida. Primero el right-sizing, después el compromiso; al revés, te comprometes con una base inflada durante tres años.
+**$29,318.40 + $56.00 = $29,374.40 al mes.** Con un **30 % de utilización** la flota puede bajar a unas **1,2 instancias ≈ $8,812/mes**, ahorrando unos **$20,560/mes**, y *después* un SageMaker Savings Plan (≤64 %, 6 oct 2026) se aplica sobre la huella ya reducida. Primero el right-sizing, después el compromiso; al revés, te comprometes con una base inflada durante tres años.
 
-**Ejemplo resuelto 3 — el consumo del endpoint personalizado ocioso.**
-Un endpoint NLP personalizado a **$0.0005 por inference-unit-second** (tarifa de terceros, cloudzero.com, 4 may 2026 — **(G)**) consume:
+**Ejemplo resuelto 3: el consumo del endpoint personalizado ocioso.**
+Un endpoint NLP personalizado a **$0.0005 por inference-unit-second** (tarifa de terceros, cloudzero.com, 4 may 2026: **(G)**) consume:
 
 $$
 \$0.0005 \times 60 = \$0.03/\text{min} \;\Rightarrow\; \$1.80/\text{hour} \;\Rightarrow\; \$43.20/\text{day} \;\Rightarrow\; \$1{,}296/30\text{ days}
@@ -261,7 +261,7 @@ $$
 
 Se factura **desde la creación del endpoint hasta su eliminación, aunque el tráfico sea cero**. Solución: prográmalo con EventBridge para encenderlo y apagarlo, o usa asincrónico/serverless para que el medidor se detenga.
 
-**Ejemplo resuelto 4 — el techo del Savings Plan del 64 %.**
+**Ejemplo resuelto 4: el techo del Savings Plan del 64 %.**
 Una instancia de clase `ml.m5.xlarge` a **$0.23/hora** (tarifa usada para este ejemplo, 6 oct 2026) durante 730 horas:
 
 | Escenario | Tarifa | Mensual | Anual | 3 años |
@@ -270,7 +270,7 @@ Una instancia de clase `ml.m5.xlarge` a **$0.23/hora** (tarifa usada para este e
 | SageMaker SP con 64 % de descuento (6 oct 2026) | $0.0828 × 730 h | **$60.44** | $725.28 | $2,175.84 |
 | **Ahorro** | | **$107.46/mes** | **$1,289.52/año** | **$3,868,56 / 3 años** |
 
-- **📚 ¿Sabías que…?** El descuento del SageMaker Savings Plan de AWS de **hasta un 64 %** (6 oct 2026) es *menor* que el techo del EC2 Instance Savings Plan de **hasta un 72 %** (6 oct 2026) — sin embargo, el plan de SageMaker suele ser la mejor compra para los equipos de IA, porque el plan de EC2 está atado a **una familia de instancias en una región**, mientras que el plan de SageMaker te sigue a través de **cada familia, tamaño, región y componente `ml.*`**. Una diferencia de 8 puntos de descuento suele valer menos que la libertad de pasar de CPU a GPU sin recomprar un compromiso.
+- **📚 ¿Sabías que…?** El descuento del SageMaker Savings Plan de AWS de **hasta un 64 %** (6 oct 2026) es *menor* que el techo del EC2 Instance Savings Plan de **hasta un 72 %** (6 oct 2026); sin embargo, el plan de SageMaker suele ser la mejor compra para los equipos de IA, porque el plan de EC2 está atado a **una familia de instancias en una región**, mientras que el plan de SageMaker te sigue a través de **cada familia, tamaño, región y componente `ml.*`**. Una diferencia de 8 puntos de descuento suele valer menos que la libertad de pasar de CPU a GPU sin recomprar un compromiso.
 
 ### 3.6 Decisión del modelo de precios para un endpoint
 
@@ -292,31 +292,31 @@ flowchart TD
 ### 3.7 Veredicto comparativo
 
 > [!IMPORTANT]
-> **Veredicto comparativo — bajo demanda frente a Spot frente a Savings Plans frente a serverless**
-> - **Bajo demanda** (por instance-hour, sin mínimo, sin inicial — p. ej. `ml.c5.xlarge` a **$0.204/hora**, 6 oct 2026) es la respuesta para **prototipos, experimentos de corta vida y los dos primeros meses de notebooks** (250 h/mes de `ml.t3.medium`, 6 oct 2026) y para cualquier cosa cuya forma aún no conoces. Su modo de fallo es **facturación por tiempo de capacidad ociosa**: $303.55 al mes por dos endpoints que quizá nunca reciban una petición.
-> - **Spot** (hasta un **90 % de descuento**, aviso de interrupción de **2 minutos**, frecuencia media histórica de interrupciones **por debajo del 5 %** — aws.amazon.com/ec2/spot, 2025–26) es la respuesta para **entrenamiento, batch transform y jobs sin conexión que hacen checkpoint**. Su modo de fallo es **la interrupción**: el servicio en tiempo real sensible a la latencia sobre Spot es siempre erróneo, y el gasto en Spot **no** descuenta un compromiso de Compute Savings Plan (docs.aws.amazon.com, 2026). Úsalo para la capa de *ráfagas*, nunca para la capa de *siempre caliente*.
-> - **Savings Plans** (Compute **≤66 %**, EC2 Instance **≤72 %**, SageMaker AI **≤64 %**, 1 o 3 años — 6 oct 2026) son la respuesta para una **base conocida y estable que no vas a abandonar**. Los SageMaker AI Savings Plans son la elección nativa de IA porque se mantienen en **todas las familias, tamaños, regiones y componentes `ml.*`**; los Compute Savings Plans son la elección correcta cuando la base incluye también EC2, Fargate o Lambda. Su modo de fallo es **sobrecomprometer**: compromete el 70–80 % de tu gasto medio por hora de 30 días, nunca tu pico, y recuerda que **no se acumulan con Spot**.
-> - **Serverless Inference** (cómputo por milisegundo, **escala a 0**, Provisioned Concurrency opcional facturada por memoria, duración y concurrencia — docs.aws.amazon.com, 2026) es la respuesta para **tráfico impredecible y de bajo volumen** donde un día ocioso debe costar **$0**. Su modo de fallo es **arranques en frío más límites de capacidad** — y observa que las tarifas por segundo publicadas que circulan en internet (**$0.0000667/segundo por GB** + **$0.20/1M de peticiones**, páginas de terceros del 6 oct 2026) son **(G)**, no confirmadas en la página de precios de AWS.
-> - **Regla práctica para el examen:** *tolerante a fallos e interrumpible* → **Spot**; *base estable de 1–3 años* → **Savings Plan** (SageMaker SP para `ml.*`, Compute SP para un parque mixto); *impredecible y disperso* → **serverless**; *todo lo demás, o cualquier cosa que aún no hayas medido* → **bajo demanda más autoescalado y parada programada**. La distracción es siempre la opción que compromete dinero con una carga de trabajo que la pregunta describe como experimental.
+> **Veredicto comparativo: bajo demanda frente a Spot frente a Savings Plans frente a serverless**
+> - **Bajo demanda** (por instance-hour, sin mínimo, sin inicial: p. ej. `ml.c5.xlarge` a **$0.204/hora**, 6 oct 2026) es la respuesta para **prototipos, experimentos de corta vida y los dos primeros meses de notebooks** (250 h/mes de `ml.t3.medium`, 6 oct 2026) y para cualquier cosa cuya forma aún no conoces. Su modo de fallo es **facturación por tiempo de capacidad ociosa**: $303.55 al mes por dos endpoints que quizá nunca reciban una petición.
+> - **Spot** (hasta un **90 % de descuento**, aviso de interrupción de **2 minutos**, frecuencia media histórica de interrupciones **por debajo del 5 %**: aws.amazon.com/ec2/spot, 2025 to 26) es la respuesta para **entrenamiento, batch transform y jobs sin conexión que hacen checkpoint**. Su modo de fallo es **la interrupción**: el servicio en tiempo real sensible a la latencia sobre Spot es siempre erróneo, y el gasto en Spot **no** descuenta un compromiso de Compute Savings Plan (docs.aws.amazon.com, 2026). Úsalo para la capa de *ráfagas*, nunca para la capa de *siempre caliente*.
+> - **Savings Plans** (Compute **≤66 %**, EC2 Instance **≤72 %**, SageMaker AI **≤64 %**, 1 o 3 años: 6 oct 2026) son la respuesta para una **base conocida y estable que no vas a abandonar**. Los SageMaker AI Savings Plans son la elección nativa de IA porque se mantienen en **todas las familias, tamaños, regiones y componentes `ml.*`**; los Compute Savings Plans son la elección correcta cuando la base incluye también EC2, Fargate o Lambda. Su modo de fallo es **sobrecomprometer**: compromete el 70 to 80 % de tu gasto medio por hora de 30 días, nunca tu pico, y recuerda que **no se acumulan con Spot**.
+> - **Serverless Inference** (cómputo por milisegundo, **escala a 0**, Provisioned Concurrency opcional facturada por memoria, duración y concurrencia, docs.aws.amazon.com, 2026) es la respuesta para **tráfico impredecible y de bajo volumen** donde un día ocioso debe costar **$0**. Su modo de fallo es **arranques en frío más límites de capacidad**, y observa que las tarifas por segundo publicadas que circulan en internet (**$0.0000667/segundo por GB** + **$0.20/1M de peticiones**, páginas de terceros del 6 oct 2026) son **(G)**, no confirmadas en la página de precios de AWS.
+> - **Regla práctica para el examen:** *tolerante a fallos e interrumpible* → **Spot**; *base estable de 1 to 3 años* → **Savings Plan** (SageMaker SP para `ml.*`, Compute SP para un parque mixto); *impredecible y disperso* → **serverless**; *todo lo demás, o cualquier cosa que aún no hayas medido* → **bajo demanda más autoescalado y parada programada**. La distracción es siempre la opción que compromete dinero con una carga de trabajo que la pregunta describe como experimental.
 
 ---
 
 ## 4. Amazon Bedrock: tokens, Batch, caché, throughput y niveles
 
-### 4.1 Ejemplo resuelto 5 — la factura de tokens, y por qué elegir modelo vence al volumen
+### 4.1 Ejemplo resuelto 5: la factura de tokens, y por qué elegir modelo vence al volumen
 
 Una carga de trabajo envía **300M de tokens de entrada** y produce **60M de tokens de salida** al mes.
 
 | Modelo (tarifas verificadas el 6 oct 2026) | Coste de entrada | Coste de salida | Total mensual |
 |---|---|---|---|
-| Nemotron Nano 2 — $0.06 / $0.23 por 1M | 300 × $0.06 = **$18.00** | 60 × $0.23 = **$13.80** | **$31.80** |
-| Z AI GLM 5 — $1.00 / $3.20 por 1M | 300 × $1.00 = **$300.00** | 60 × $3.20 = **$192.00** | **$492.00** |
+| Nemotron Nano 2 to $0.06 / $0.23 por 1M | 300 × $0.06 = **$18.00** | 60 × $0.23 = **$13.80** | **$31.80** |
+| Z AI GLM 5 to $1.00 / $3.20 por 1M | 300 × $1.00 = **$300.00** | 60 × $3.20 = **$192.00** | **$492.00** |
 
-El **mismo volumen de tokens** cuesta **15,5× más** en GLM 5. La selección de modelo, no la reducción de uso, es la palanca dominante en las cargas generativas — y es la razón por la que toda pregunta de «reducir coste» que ofrezca «cambiar a un modelo más pequeño» suele estar bien **con tal de que** se mencionen evaluaciones de calidad.
+El **mismo volumen de tokens** cuesta **15,5× más** en GLM 5. La selección de modelo, no la reducción de uso, es la palanca dominante en las cargas generativas, y es la razón por la que toda pregunta de «reducir coste» que ofrezca «cambiar a un modelo más pequeño» suele estar bien **con tal de que** se mencionen evaluaciones de calidad.
 
 Observa también que la salida es **~4× la entrada** por token en Nemotron Nano 2 ($0.23 frente a $0.06, 6 oct 2026): limitar `max_tokens`, pedir respuestas concisas y devolver salida estructurada en lugar de prosa recortan todas la mitad cara del medidor.
 
-### 4.2 Ejemplo resuelto 6 — Batch: 50 % de descuento para trabajo asincrónico
+### 4.2 Ejemplo resuelto 6, Batch: 50 % de descuento para trabajo asincrónico
 
 Un job nocturno de clasificación de documentos cuesta **$800/mes** en Bedrock bajo demanda; el modelo admite batch y nadie lee los resultados antes de la mañana.
 
@@ -324,11 +324,11 @@ $$
 \$800 \times 50\% = \$400/\text{month} \quad\Rightarrow\quad \$400/\text{month saved} = \$4{,}800/\text{year}
 $$
 
-**Bedrock Batch = 50 % del precio de tokens bajo demanda** para los modelos admitidos (aws.amazon.com/bedrock/pricing, 6 oct 2026). El precio del descuento es **latencia asincrónica** — y el modelo debe admitir batch en absoluto.
+**Bedrock Batch = 50 % del precio de tokens bajo demanda** para los modelos admitidos (aws.amazon.com/bedrock/pricing, 6 oct 2026). El precio del descuento es **latencia asincrónica**, y el modelo debe admitir batch en absoluto.
 
-### 4.3 Ejemplo resuelto 7 — caché de prompts: ~90 % de descuento, con una prima de escritura
+### 4.3 Ejemplo resuelto 7, caché de prompts: ~90 % de descuento, con una prima de escritura
 
-Esta es la aritmística de mayor rendimiento del dominio. Usando las tarifas publicadas en una publicación del AWS Builder Center para Sonnet 4.6 en Bedrock — **$3.00 por 1M de tokens de entrada, $3.75 de escritura en caché, $0.30 de lectura de caché** (2026; *no* confirmado en la página oficial de precios, véase la sección 10) — un system prompt estable de **33.000 tokens** enviado **1.000 veces al día** durante 30 días:
+Esta es la aritmística de mayor rendimiento del dominio. Usando las tarifas publicadas en una publicación del AWS Builder Center para Sonnet 4.6 en Bedrock, **$3.00 por 1M de tokens de entrada, $3.75 de escritura en caché, $0.30 de lectura de caché** (2026; *no* confirmado en la página oficial de precios, véase la sección 10), un system prompt estable de **33.000 tokens** enviado **1.000 veces al día** durante 30 días:
 
 **Sin caché:**
 
@@ -344,10 +344,10 @@ $$
 | 999 lecturas de caché al día | 33.000 × 999 = 32,967 MTok | $0.30/MTok | **$9.89** |
 | **Total** | | | **$10.05/día → $301.42/mes** |
 
-**Ahorro ≈ $2,668/mes (≈ 89,9 %).** El mecanismo (toda la documentación de caché de Bedrock, 2026): las **lecturas de caché cuestan 0,1×** el precio de entrada (**90 % de descuento**), las **escrituras de caché cuestan 1,25×** con el TTL por defecto de **5 minutos** y **2×** con el TTL opt-in de **1 hora**, el TTL por defecto es de **5 minutos**, el TTL de 1 hora es opt-in por checkpoint de caché, mínimo de **512–4.096 tokens por modelo** y máximo de **4 checkpoints**.
+**Ahorro ≈ $2,668/mes (≈ 89,9 %).** El mecanismo (toda la documentación de caché de Bedrock, 2026): las **lecturas de caché cuestan 0,1×** el precio de entrada (**90 % de descuento**), las **escrituras de caché cuestan 1,25×** con el TTL por defecto de **5 minutos** y **2×** con el TTL opt-in de **1 hora**, el TTL por defecto es de **5 minutos**, el TTL de 1 hora es opt-in por checkpoint de caché, mínimo de **512 to 4.096 tokens por modelo** y máximo de **4 checkpoints**.
 
 > [!WARNING]
-> **Un solo byte cambiado en el prefijo destruye la caché.** Si el system prompt difiere entre peticiones — una marca de tiempo, un ID de petición, una variable de entorno de CI, un salto de línea final — cada llamada falla y pagas la **prima de escritura de 1,25× en cada petición** en lugar de una escritura más 999 lecturas baratas. Este es el fallo clásico de los bucles de CI sin cabeza, y exactamente lo que el examen evalúa con la opción *«el prefijo del prompt debe coincidir byte a byte dentro del TTL»*. Los modelos GPT-5.6 en Bedrock añaden caché implícita por defecto para un prefijo estable de **≥1.024 tokens** con un **TTL de 30 minutos**, lecturas con **90 % de descuento** y escrituras a **1,25×** (AWS ML blog, 30 jul 2026).
+> **Un solo byte cambiado en el prefijo destruye la caché.** Si el system prompt difiere entre peticiones, una marca de tiempo, un ID de petición, una variable de entorno de CI, un salto de línea final, cada llamada falla y pagas la **prima de escritura de 1,25× en cada petición** en lugar de una escritura más 999 lecturas baratas. Este es el fallo clásico de los bucles de CI sin cabeza, y exactamente lo que el examen evalúa con la opción *«el prefijo del prompt debe coincidir byte a byte dentro del TTL»*. Los modelos GPT-5.6 en Bedrock añaden caché implícita por defecto para un prefijo estable de **≥1.024 tokens** con un **TTL de 30 minutos**, lecturas con **90 % de descuento** y escrituras a **1,25×** (AWS ML blog, 30 jul 2026).
 
 ### 4.4 Provisioned Throughput y niveles de servicio
 
@@ -361,7 +361,7 @@ $$
 | **Nivel Flex** | tarifa estándar con descuento | ninguno | cargas no urgentes, latencia más alta |
 | **Nivel Reserved** | precio fijo por **1K tokens-por-minuto**, facturado mensualmente | **1 o 3 meses** | TPM garantizada |
 
-Cifras concretas de Provisioned Throughput para Llama 2 13B (6 oct 2026): **$21.18/hora/MU** con compromiso de 1 mes frente a **$13.08/hora/MU** con compromiso de 6 meses — una **reducción del 38,3 %** — mientras que la inferencia sin compromiso es de **$23.50/hora/MU**. La trampa: **pagas la MU la uses o no**, así que Provisioned Throughput solo es correcto por encima de aproximadamente un 60 % de utilización (una cifra de equilibrio de terceros, **(G)**, no publicada por AWS).
+Cifras concretas de Provisioned Throughput para Llama 2 13B (6 oct 2026): **$21.18/hora/MU** con compromiso de 1 mes frente a **$13.08/hora/MU** con compromiso de 6 meses, una **reducción del 38,3 %**, mientras que la inferencia sin compromiso es de **$23.50/hora/MU**. La trampa: **pagas la MU la uses o no**, así que Provisioned Throughput solo es correcto por encima de aproximadamente un 60 % de utilización (una cifra de equilibrio de terceros, **(G)**, no publicada por AWS).
 
 ### 4.5 El consumo de cuota no es el recuento de tokens
 
@@ -397,7 +397,7 @@ flowchart TD
     A --> P["Siempre encendido: enrutamiento de modelo.<br/>La salida domina; huecos de 4-5x<br/>entre niveles; 15,5x entre<br/>Nemotron Nano 2 y GLM 5"]
 ```
 
-- **📚 ¿Sabías que…?** Bedrock **no tiene ninguna tabla de free tier publicada por AWS** (6 oct 2026) — una afirmación que encontrarás en blogs de proveedores diciendo «no hay free tier» o citando un «descuento del 30–50 % en Provisioned Throughput» es **(G)**, porque AWS no publica ninguno de los dos. Lo que AWS *sí* publica es un **descuento del 50 % en Batch**, un **90 % de descuento en lecturas de caché** y el **techo del 64 % del SageMaker SP**; esos son los números que puedes citar en el examen.
+- **📚 ¿Sabías que…?** Bedrock **no tiene ninguna tabla de free tier publicada por AWS** (6 oct 2026): una afirmación que encontrarás en blogs de proveedores diciendo «no hay free tier» o citando un «descuento del 30 to 50 % en Provisioned Throughput» es **(G)**, porque AWS no publica ninguno de los dos. Lo que AWS *sí* publica es un **descuento del 50 % en Batch**, un **90 % de descuento en lecturas de caché** y el **techo del 64 % del SageMaker SP**; esos son los números que puedes citar en el examen.
 
 ---
 
@@ -407,11 +407,11 @@ flowchart TD
 
 No hay reserva para Rekognition, Textract, Comprehend, Transcribe, Polly ni Lex. Las tres palancas son:
 
-1. **El conjunto de funciones más barato que devuelve lo que lees** — Textract `DetectDocumentText` a **$0.0015/página** (6 oct 2026) frente a `AnalyzeDocument` Forms a **$0.05/página** (6 oct 2026) es una **prima del 33×** por la estructura. Lee OCR primero; invoca Forms solo cuando necesites los pares clave-valor.
-2. **Escalado por volumen** — Comprehend baja de **$0.0001** a **$0.00005** (10–50M de unidades) y a **$0.000025** (por encima de 50M) por unidad de 100 caracteres (6 oct 2026); Textract `DetectDocumentText` baja de **$0.0015** a **$0.0006** tras el primer millón de páginas en un mes (6 oct 2026).
-3. **Free tier** — de 3 a 12 meses de cupos, convertidos a dólares en la sección 5.4.
+1. **El conjunto de funciones más barato que devuelve lo que lees**: Textract `DetectDocumentText` a **$0.0015/página** (6 oct 2026) frente a `AnalyzeDocument` Forms a **$0.05/página** (6 oct 2026) es una **prima del 33×** por la estructura. Lee OCR primero; invoca Forms solo cuando necesites los pares clave-valor.
+2. **Escalado por volumen**: Comprehend baja de **$0.0001** a **$0.00005** (10 to 50M de unidades) y a **$0.000025** (por encima de 50M) por unidad de 100 caracteres (6 oct 2026); Textract `DetectDocumentText` baja de **$0.0015** a **$0.0006** tras el primer millón de páginas en un mes (6 oct 2026).
+3. **Free tier**: de 3 a 12 meses de cupos, convertidos a dólares en la sección 5.4.
 
-### 5.2 Ejemplo resuelto 8 — aritmética de escalones de Textract
+### 5.2 Ejemplo resuelto 8: aritmética de escalones de Textract
 
 | Volumen | Cálculo | Total | Precio unitario mezclado |
 |---|---|---|---|
@@ -421,7 +421,7 @@ No hay reserva para Rekognition, Textract, Comprehend, Transcribe, Polly ni Lex.
 
 Misma API, tres facturas. La tercera fila es la que sorprende a los equipos: **la elección de funciones pesa más que el volumen**.
 
-### 5.3 Ejemplo resuelto 9 — Transcribe: por lotes, no streaming, y la redacción como complemento
+### 5.3 Ejemplo resuelto 9, Transcribe: por lotes, no streaming, y la redacción como complemento
 
 Dos millones de minutos de audio al mes (tarifas verificadas el 6 oct 2026):
 
@@ -437,34 +437,34 @@ $$
 (250{,}000 \times 0.0024) + (750{,}000 \times 0.0015) + (1{,}000{,}000 \times 0.00102) = 600 + 1{,}125 + 1{,}020 = +\$2{,}745/\text{month}
 $$
 
-La redacción es un **medidor opt-in**, facturado además del minuto de transcripción — las preguntas de «pipeline preciso más barato» del examen se sostienen en notar eso.
+La redacción es un **medidor opt-in**, facturado además del minuto de transcripción: las preguntas de «pipeline preciso más barato» del examen se sostienen en notar eso.
 
 ### 5.4 El free tier de IA, convertido en dólares
 
 | Producto | Cupo gratuito | Duración | Valor de pago del cupo | Verificado |
 |---|---|---|---|---|
 | Créditos del plan AWS Free | **$100 al instante + hasta $100 más = $200** | **6 meses** (desde el 15 jul 2025) | $200 | 6 oct 2026 |
-| Notebooks / Studio de SageMaker | **250 h/mes de `ml.t3.medium`** | los 2 primeros meses | — | 6 oct 2026 |
-| Reglas integradas de SageMaker Model Monitor | **30 horas de monitorización gratis** | continuo | — | 6 oct 2026 |
-| SageMaker Catalog | **4.000 peticiones + 20 MB + 0,2 unidades de cómputo/mes** | mensual | — | 6 oct 2026 |
+| Notebooks / Studio de SageMaker | **250 h/mes de `ml.t3.medium`** | los 2 primeros meses |: | 6 oct 2026 |
+| Reglas integradas de SageMaker Model Monitor | **30 horas de monitorización gratis** | continuo |: | 6 oct 2026 |
+| SageMaker Catalog | **4.000 peticiones + 20 MB + 0,2 unidades de cómputo/mes** | mensual |: | 6 oct 2026 |
 | Textract `DetectDocumentText` | **1.000 páginas/mes** | los 3 primeros meses | **$1.50** | 6 oct 2026 |
-| Textract Forms / Tables / Layout, Expense, ID | **100 páginas/mes cada uno** | los 3 primeros meses | $0.05–$0.10 cada uno (tarifas del 6 oct 2026) | 6 oct 2026 |
-| Textract Analyze Lending | **2.000 páginas/mes** | los 3 primeros meses | — | 6 oct 2026 |
+| Textract Forms / Tables / Layout, Expense, ID | **100 páginas/mes cada uno** | los 3 primeros meses | $0.05 to $0.10 cada uno (tarifas del 6 oct 2026) | 6 oct 2026 |
+| Textract Analyze Lending | **2.000 páginas/mes** | los 3 primeros meses |: | 6 oct 2026 |
 | Comprehend (cada API NLP) | **50.000 unidades (5M de caracteres)/mes** + 5 jobs de topic modeling ≤ 1 MB | los 12 primeros meses | **$5.00** | 6 oct 2026 |
 | Transcribe | **60 minutos/mes** | los 12 primeros meses | **$0.36 por lotes / $0.60 streaming** | 6 oct 2026 |
 | Polly Standard / Neural / Long-Form / Generative | **5M / 1M / 500K / 100K caracteres por mes** | los 12 primeros meses | **$20.00 / $16.00 / $5.00 / $3.00** (tarifas del 6 oct 2026) | 6 oct 2026 |
-| Amazon Kendra / Amazon Personalize | **750 h en los primeros 30 días** / prueba de 2 meses | 30 días / 2 meses | — | 6 oct 2026 |
+| Amazon Kendra / Amazon Personalize | **750 h en los primeros 30 días** / prueba de 2 meses | 30 días / 2 meses |: | 6 oct 2026 |
 
-**Ejemplo resuelto 10 — el techo del free tier para un piloto.**
-Polly Standard 5M de caracteres = **$20.00** más Neural 1M de caracteres = **$16.00** (tarifas del 6 oct 2026) → **$36/mes durante 12 meses** de salida de voz; Comprehend 50K de unidades = **$5.00 por API por mes** (6 oct 2026); Textract 1.000 páginas = **$1.50** (6 oct 2026); Transcribe 60 minutos = **$0.60** en streaming (6 oct 2026). Un piloto de seis meses de voz + extracción de entidades puede, por tanto, funcionar con **$0 de cómputo** — *con tal de que* te mantengas dentro del cupo, porque el free tier no te avisa antes de dejar de funcionar.
+**Ejemplo resuelto 10: el techo del free tier para un piloto.**
+Polly Standard 5M de caracteres = **$20.00** más Neural 1M de caracteres = **$16.00** (tarifas del 6 oct 2026) → **$36/mes durante 12 meses** de salida de voz; Comprehend 50K de unidades = **$5.00 por API por mes** (6 oct 2026); Textract 1.000 páginas = **$1.50** (6 oct 2026); Transcribe 60 minutos = **$0.60** en streaming (6 oct 2026). Un piloto de seis meses de voz + extracción de entidades puede, por tanto, funcionar con **$0 de cómputo**: *con tal de que* te mantengas dentro del cupo, porque el free tier no te avisa antes de dejar de funcionar.
 
-- **📚 ¿Sabías que…?** El **plan AWS Free** introducido el **15 de julio de 2025** concede hasta **$200 en créditos ($100 al instante más hasta $100 más) durante 6 meses** (aws.amazon.com/free, 6 oct 2026) — que es distinto de los free tier de *servicio*, que duran 3, 12 o 24 meses. Las opciones del examen suelen confundir «créditos gratuitos» con «free tier»; los créditos caducan según un **calendario**, los free tier caducan por **uso**.
+- **📚 ¿Sabías que…?** El **plan AWS Free** introducido el **15 de julio de 2025** concede hasta **$200 en créditos ($100 al instante más hasta $100 más) durante 6 meses** (aws.amazon.com/free, 6 oct 2026): que es distinto de los free tier de *servicio*, que duran 3, 12 o 24 meses. Las opciones del examen suelen confundir «créditos gratuitos» con «free tier»; los créditos caducan según un **calendario**, los free tier caducan por **uso**.
 
 ---
 
 ## 6. Visibilidad de costes: Cost Explorer, etiquetas de asignación de costes y presupuestos
 
-La visibilidad es **detectiva**, no preventiva — pero sin ella no puedes fijar un umbral, y sin umbral una acción de presupuesto nunca se dispara.
+La visibilidad es **detectiva**, no preventiva, pero sin ella no puedes fijar un umbral, y sin umbral una acción de presupuesto nunca se dispara.
 
 ### 6.1 Cost Explorer
 
@@ -487,7 +487,7 @@ Las etiquetas de asignación de costes vienen en dos sabores y se **activan por 
 |---|---|---|---|
 | **Generadas por AWS** | `aws:` | activar en la consola de Billing | dentro de **≤24 horas** |
 | **Definidas por el usuario** | `user:` | **activar por separado** de las generadas por AWS | dentro de **≤24 horas** |
-| Cualquier otra etiqueta | — | no activada | **nunca** (solo es una etiqueta de recurso) |
+| Cualquier otra etiqueta |: | no activada | **nunca** (solo es una etiqueta de recurso) |
 
 ```mermaid
 flowchart LR
@@ -502,7 +502,7 @@ flowchart LR
     F --> I["Trampa del examen: «la etiqueta no<br/>aparece en Cost Explorer»<br/>respuesta = nunca se activó"]
 ```
 
-**El síntoma clásico:** un ingeniero aplica una etiqueta `CostCenter` a todos los recursos ayer y aun así no aparece en Cost Explorer. La causa casi nunca es «las etiquetas no funcionan con los servicios de IA» o «la clave debe empezar por `aws:`» — es que **la etiqueta de asignación de costes definida por el usuario no se ha activado** (y puede tardar hasta **24 horas** en aparecer).
+**El síntoma clásico:** un ingeniero aplica una etiqueta `CostCenter` a todos los recursos ayer y aun así no aparece en Cost Explorer. La causa casi nunca es «las etiquetas no funcionan con los servicios de IA» o «la clave debe empezar por `aws:`»: es que **la etiqueta de asignación de costes definida por el usuario no se ha activado** (y puede tardar hasta **24 horas** en aparecer).
 
 ### 6.3 AWS Budgets: alertas gratuitas y después $0.10/día por cada acción extra
 
@@ -513,15 +513,15 @@ flowchart LR
 | Cada presupuesto adicional con acciones habilitadas | **$0.10/día** (≈ **$3.00/mes**) | 
 | Disparadores | umbrales basados en previsión o en valores reales |
 
-**Ejemplo resuelto 11 — la puerta del presupuesto.** Un equipo fija un presupuesto de **$5.000/mes** con alertas al **80 %** y al **100 %** más acciones automáticas (adjuntar un SCP, parar instancias de no producción):
+**Ejemplo resuelto 11: la puerta del presupuesto.** Un equipo fija un presupuesto de **$5.000/mes** con alertas al **80 %** y al **100 %** más acciones automáticas (adjuntar un SCP, parar instancias de no producción):
 
 - monitoreo y alertas: **$0**;
 - acciones en los **dos primeros** presupuestos con acciones habilitadas: **$0**;
 - un **tercer** presupuesto con acciones habilitadas: **$0.10/día ≈ $3.00/mes** (6 oct 2026).
 
-La respuesta de «coste mínimo de funciones» del examen es, por tanto: **alertas gratis, dos presupuestos con acciones gratis, después $0.10/día cada uno** — y recuerda que una acción de presupuesto se aplica **después** del umbral, así que es un freno, no un muro.
+La respuesta de «coste mínimo de funciones» del examen es, por tanto: **alertas gratis, dos presupuestos con acciones gratis, después $0.10/día cada uno**, y recuerda que una acción de presupuesto se aplica **después** del umbral, así que es un freno, no un muro.
 
-- **📚 ¿Sabías que…?** AWS Budgets admite **acciones de presupuesto que adjuntan un SCP o una política de IAM, o que paran recursos**, lo que lo convierte en la única herramienta de coste que *hace* algo preventivo — pero solo después de cruzar el umbral y ejecutarse la acción. Por eso el examen lo empareja con SCP: el presupuesto detecta, el SCP impone.
+- **📚 ¿Sabías que…?** AWS Budgets admite **acciones de presupuesto que adjuntan un SCP o una política de IAM, o que paran recursos**, lo que lo convierte en la única herramienta de coste que *hace* algo preventivo, pero solo después de cruzar el umbral y ejecutarse la acción. Por eso el examen lo empareja con SCP: el presupuesto detecta, el SCP impone.
 
 ---
 
@@ -531,7 +531,7 @@ La respuesta de «coste mínimo de funciones» del examen es, por tanto: **alert
 
 | Control | Impone | Ámbito | Prevenir / detectar | Coste | Trampa clave (docs.aws.amazon.com, 2026) |
 |---|---|---|---|---|---|
-| **SCP** | permisos máximos — denegar APIs de IA o Regiones fuera de una lista permitida | root / OU / cuenta | **Prevenir** | gratis | **nunca concede**; **se salta las service-linked roles**; una lista de denegación aún necesita una política de permitir adjunta |
+| **SCP** | permisos máximos: denegar APIs de IA o Regiones fuera de una lista permitida | root / OU / cuenta | **Prevenir** | gratis | **nunca concede**; **se salta las service-linked roles**; una lista de denegación aún necesita una política de permitir adjunta |
 | **RCP** | permisos máximos sobre los **recursos**, independientemente de quién llama | org / OU / cuenta | Prevenir | gratis | la cara del recurso de la misma intersección |
 | **Política opt-out de servicios de IA** | `optOut` / `optIn` por servicio de IA en toda la organización para el uso de datos | por servicio | Prevenir (uso de datos) | gratis | **no** elimina el acceso a las funciones |
 | **Amazon Bedrock policy** | aplica un **Guardrail fijado por región y versión** a cada llamada de Bedrock bajo el nodo | por región | Prevenir | gratis | el guardrail debe existir **en esa región**; sin políticas de razonamiento automatizado |
@@ -539,9 +539,9 @@ La respuesta de «coste mínimo de funciones» del examen es, por tanto: **alert
 | **Service Catalog** | solo se lanzan productos aprobados; **template constraints** limitan Región/tipo de instancia; **TagOptions** etiquetan automáticamente | portafolio → producto → usuario | Prevenir (aprovisionamiento) | servicio gratis; los recursos se facturan | SageMaker Projects y JumpStart **dependen de él** |
 | **AWS Config** | conformidad: `sagemaker-*-tagged`, cifrado, registro; **Conformance Packs** en toda la org | cuenta / región | **Detectar** (+ remediación con SSM) | reglas gratis; los config items se facturan | solo detecta salvo que se remedie; las claves de etiqueta distinguen **mayúsculas** y no pueden usar el prefijo `aws:` |
 
-**Crecimiento de las reglas de AWS Config:** AWS añadió **75 reglas nuevas en nov 2025** y **191 más en jul 2026** (AWS news, 2025–26), y los Conformance Packs despliegan grupos de reglas en toda una organización — la respuesta siempre que una pregunta pregunte cómo *detectar* deriva a escala.
+**Crecimiento de las reglas de AWS Config:** AWS añadió **75 reglas nuevas en nov 2025** y **191 más en jul 2026** (AWS news, 2025 to 26), y los Conformance Packs despliegan grupos de reglas en toda una organización: la respuesta siempre que una pregunta pregunte cómo *detectar* deriva a escala.
 
-### 7.2 Ejemplo resuelto 12 — el control correcto para cada requisito
+### 7.2 Ejemplo resuelto 12: el control correcto para cada requisito
 
 | Requisito | Control correcto | Por qué fallan los demás |
 |---|---|---|
@@ -551,14 +551,14 @@ La respuesta de «coste mínimo de funciones» del examen es, por tanto: **alert
 | «`CostCenter` debe aparecer automáticamente en todos los recursos de IA» | **TagOptions de Service Catalog** + **tag policy** | Una etiqueta de recurso simple no es automáticamente una etiqueta de **asignación de costes**; aun así debe activarse (sección 6.2) |
 | «Detén la hemorragia cuando el gasto supere los $5.000» | **AWS Budgets con una acción de presupuesto** | Cost Explorer nunca actúa; Config nunca actúa sobre el gasto |
 
-### 7.3 Service Catalog frente a SageMaker Catalog — no los confundas
+### 7.3 Service Catalog frente a SageMaker Catalog: no los confundas
 
 | | **AWS Service Catalog** | **SageMaker Catalog** |
 |---|---|---|
 | Qué gobierna | **productos** aprobados (portafolios de CloudFormation) | **activos de datos y de IA** aprobados, lineage y permisos |
 | Imposición | **template constraints** sobre parámetros, etiquetado automático con **TagOptions** | control de acceso sobre los activos del catálogo |
 | Precios (6 oct 2026) | el propio servicio es gratis; los recursos lanzados se facturan | **$10 por 100K peticiones**, **$0.40/GB**, **$1.776/unidad de cómputo**; recomendaciones **$0.015/1K tokens de entrada + $0.075/1K de salida** |
-| Cupo gratuito (6 oct 2026) | — | **4.000 peticiones, 20 MB, 0,2 unidades de cómputo/mes** |
+| Cupo gratuito (6 oct 2026) |: | **4.000 peticiones, 20 MB, 0,2 unidades de cómputo/mes** |
 | Dependencia | SageMaker **Projects y JumpStart se aprovisionan a través de él** | producto distinto; **no** es el mismo servicio |
 
 ### 7.4 Diagrama de la capa de gobernanza
@@ -588,7 +588,7 @@ flowchart TD
 ```
 
 > [!WARNING]
-> **El «SCP que solo permite us-east-1» no funciona como la gente cree.** Un SCP **nunca concede** — solo fija los permisos *máximos* que los usuarios y roles de IAM (incluido root) de las cuentas miembro pueden llegar a tener, y **no afecta a las service-linked roles** (docs.aws.amazon.com, 2026). Así que (a) un SCP de lista de denegación aún necesita una política de **permitir** adjunta al mismo elemento para que algo funcione en absoluto, y (b) una service-linked role seguirá pudiendo actuar dentro de sus propios permisos de servicio aunque «bloquees» la cuenta. En el examen, siempre que una opción diga que un SCP «concede acceso a SageMaker», es errónea.
+> **El «SCP que solo permite us-east-1» no funciona como la gente cree.** Un SCP **nunca concede**: solo fija los permisos *máximos* que los usuarios y roles de IAM (incluido root) de las cuentas miembro pueden llegar a tener, y **no afecta a las service-linked roles** (docs.aws.amazon.com, 2026). Así que (a) un SCP de lista de denegación aún necesita una política de **permitir** adjunta al mismo elemento para que algo funcione en absoluto, y (b) una service-linked role seguirá pudiendo actuar dentro de sus propios permisos de servicio aunque «bloquees» la cuenta. En el examen, siempre que una opción diga que un SCP «concede acceso a SageMaker», es errónea.
 
 ---
 
@@ -613,15 +613,15 @@ flowchart TD
 La comparación de TCO publicada por AWS (AWS ML blog y resumen ejecutivo de TCO, 2020, aún citada en 2026) afirma que el TCO a 3 años de SageMaker es **≥ 54 % menor** que el de EC2 o EKS autogestionados, y lo desglosa por tamaño del equipo: **5 científicos de datos −90 %**, **15 científicos de datos −87 % / −85 %**, **50 científicos de datos −79 % / −65 %**, **250 científicos de datos −77 % / −54 %** (EC2 / EKS respectivamente). El punto de la tabla es que **la mano de obra, la seguridad y la carga operativa dominan** en los equipos pequeños, mientras que la infraestructura domina a medida que el equipo crece.
 
 > [!WARNING]
-> **Nunca importes un porcentaje de Savings Plan de la región de China.** Exist afirman ahorros de **81 %–84 %** en planes de ahorro solo para las regiones de AWS China; las respuestas del examen son siempre los techos de las regiones comerciales: **90 / 72 / 66 / 64 / 35 %** (6 oct 2026). Asimismo, «el right-sizing ahorra un 30–60 %» **no tiene ninguna fuente publicada por AWS** — trátalo como **(G)**.
+> **Nunca importes un porcentaje de Savings Plan de la región de China.** Exist afirman ahorros de **81 %, 84 %** en planes de ahorro solo para las regiones de AWS China; las respuestas del examen son siempre los techos de las regiones comerciales: **90 / 72 / 66 / 64 / 35 %** (6 oct 2026). Asimismo, «el right-sizing ahorra un 30 to 60 %» **no tiene ninguna fuente publicada por AWS**, trátalo como **(G)**.
 
 ### 8.3 Reglas de seguridad de los compromisos
 
-1. **Compromete la base, no el pico:** 70–80 % del gasto medio por hora de 30 días.
+1. **Compromete la base, no el pico:** 70 to 80 % del gasto medio por hora de 30 días.
 2. **Nunca te comprometas con Spot:** los Savings Plans no se acumulan sobre Spot, y el gasto en Spot no consume un compromiso de Compute Savings Plan (docs.aws.amazon.com, 2026).
 3. **Prefiere el plan flexible cuando tu parque mezcle CPU y GPU:** el SageMaker AI Savings Plan abarca todas las familias, tamaños, regiones y componentes `ml.*` (6 oct 2026).
 4. **Reevalúa antes de renovar:** un Compute Savings Plan de 1 año sobre una carga de trabajo que pasa a serverless en el mes 6 es dinero quemado.
-5. **Provisioned Throughput es una apuesta por el volumen:** pagas por Model Unit por hora la uses o no — supera aproximadamente el **60 % de utilización** (cifra de terceros, **(G)**) antes de comprometerte, y recuerda que los modelos personalizados *requieren* Provisioned Throughput en absoluto.
+5. **Provisioned Throughput es una apuesta por el volumen:** pagas por Model Unit por hora la uses o no: supera aproximadamente el **60 % de utilización** (cifra de terceros, **(G)**) antes de comprometerte, y recuerda que los modelos personalizados *requieren* Provisioned Throughput en absoluto.
 
 ```text
 ESCALERA DE COMPROMISOS (lo que puedes citar, todo verificado 6 oct 2026)
@@ -661,7 +661,7 @@ ESCALERA DE COMPROMISOS (lo que puedes citar, todo verificado 6 oct 2026)
     "5": "50"
   },
   "distractors": ["72", "60", "40", "25", "80"],
-  "explanation": "Spot 90%, Compute Savings Plans 66%, SageMaker AI Savings Plans 64%, Database Savings Plans 35% y Bedrock Batch 50% son las cifras que publica AWS (aws.amazon.com y docs.aws.amazon.com, verificado 6 oct 2026). El 72% es un techo real pero pertenece a los EC2 Instance Savings Plans, no a ninguna de estas cinco palancas, y 60/40/25/80 no son en absoluto techos publicados por AWS - son los porcentajes de folclore contra los que esta lección advierte."
+  "explanation": "Spot 90%, Compute Savings Plans 66%, SageMaker AI Savings Plans 64%, Database Savings Plans 35% y Bedrock Batch 50% son las cifras que publica AWS (aws.amazon.com y docs.aws.amazon.com, verificado 6 oct 2026). El 72% es un techo real pero pertenece a los EC2 Instance Savings Plans, no a ninguna de estas cinco palancas, y 60/40/25/80 no son en absoluto techos publicados por AWS: son los porcentajes de folclore contra los que esta lección advierte."
 }
 ```
 
@@ -671,15 +671,15 @@ ESCALERA DE COMPROMISOS (lo que puedes citar, todo verificado 6 oct 2026)
 
 Júntalo todo en el bucle que el examen espera que describas:
 
-1. **Primero las etiquetas** — aplica `Project`, `Environment`, `CostCenter`; **activa** por separado las etiquetas de asignación de costes definidas por el usuario *y* generadas por AWS (≤24 h).
-2. **Mide** — Cost Explorer (consola gratis, API **$0.01/petición**, granularidad horaria ≈ **$0.01/1.000 registros/mes**, 6 oct 2026).
-3. **Umbral** — alertas de AWS Budgets (gratis) al 80 %/100 %, por previsión o por valor real.
-4. **Actúa** — acciones de presupuesto (los dos primeros presupuestos con acciones gratis, después **$0.10/día**, 6 oct 2026): adjunta un SCP o para recursos de no producción.
-5. **Previene** — SCP/RCP para listas permitidas de Región y API, template constraints de Service Catalog + TagOptions para imponerlo al lanzar, políticas de Bedrock para guardrails fijados, tag policies para estandarizar claves.
-6. **Detecta** — reglas de AWS Config y Conformance Packs (`sagemaker-feature-group-tagged`, cifrado, registro) con remediación mediante SSM.
-7. **Optimiza continuamente** — haz right-sizing, para lo ocioso, añade Spot para el trabajo tolerante a fallos, añade un Savings Plan solo para la base medida y aplica las palancas propias de Bedrock (Batch, caché, enrutamiento, niveles).
+1. **Primero las etiquetas**: aplica `Project`, `Environment`, `CostCenter`; **activa** por separado las etiquetas de asignación de costes definidas por el usuario *y* generadas por AWS (≤24 h).
+2. **Mide**: Cost Explorer (consola gratis, API **$0.01/petición**, granularidad horaria ≈ **$0.01/1.000 registros/mes**, 6 oct 2026).
+3. **Umbral**: alertas de AWS Budgets (gratis) al 80 %/100 %, por previsión o por valor real.
+4. **Actúa**: acciones de presupuesto (los dos primeros presupuestos con acciones gratis, después **$0.10/día**, 6 oct 2026): adjunta un SCP o para recursos de no producción.
+5. **Previene**: SCP/RCP para listas permitidas de Región y API, template constraints de Service Catalog + TagOptions para imponerlo al lanzar, políticas de Bedrock para guardrails fijados, tag policies para estandarizar claves.
+6. **Detecta**: reglas de AWS Config y Conformance Packs (`sagemaker-feature-group-tagged`, cifrado, registro) con remediación mediante SSM.
+7. **Optimiza continuamente**: haz right-sizing, para lo ocioso, añade Spot para el trabajo tolerante a fallos, añade un Savings Plan solo para la base medida y aplica las palancas propias de Bedrock (Batch, caché, enrutamiento, niveles).
 
-- **📚 ¿Sabías que…?** `sagemaker-feature-group-tagged` es una regla gestionada real de AWS Config — y las claves de etiqueta en Config distinguen **mayúsculas** y **no pueden usar el prefijo `aws:`**. Una regla escrita para `Project` no se disparará en `project`, y un intento de registrar una etiqueta de usuario que empiece por `aws:` se rechaza. Ese solo detalle explica todo un género de incidentes de «la regla muestra conforme pero el gasto no está atribuido».
+- **📚 ¿Sabías que…?** `sagemaker-feature-group-tagged` es una regla gestionada real de AWS Config, y las claves de etiqueta en Config distinguen **mayúsculas** y **no pueden usar el prefijo `aws:`**. Una regla escrita para `Project` no se disparará en `project`, y un intento de registrar una etiqueta de usuario que empiece por `aws:` se rechaza. Ese solo detalle explica todo un género de incidentes de «la regla muestra conforme pero el gasto no está atribuido».
 
 ---
 
@@ -689,48 +689,48 @@ El examen recompensa los **números fechados y con fuente**. Esto es exactamente
 
 | Afirmación que puedes encontrar | Estado al 6 oct 2026 |
 |---|---|
-| Tarifas de Claude en Bedrock (Opus 4.6 **$15/$75**, Sonnet 4.6 **$3/$15**, Haiku 4.5 **$0.80/$4** por 1M) | **Terceros** — costbench.com (3 ago 2026); Sonnet 4.6 **$3.00 / $3.75 escritura / $0.30 lectura** también en una publicación del AWS Builder Center, **no** en `aws.amazon.com/bedrock/pricing` |
+| Tarifas de Claude en Bedrock (Opus 4.6 **$15/$75**, Sonnet 4.6 **$3/$15**, Haiku 4.5 **$0.80/$4** por 1M) | **Terceros**: costbench.com (3 ago 2026); Sonnet 4.6 **$3.00 / $3.75 escritura / $0.30 lectura** también en una publicación del AWS Builder Center, **no** en `aws.amazon.com/bedrock/pricing` |
 | Amazon Nova Micro **$0.035/$0.14** frente a **$0.04/$0.14** | Fuentes de **terceros en conflicto** (6 oct 2026) |
-| Provisioned Throughput «30–50 % de descuento», «punto de equilibrio por encima del 60 % de utilización», «Bedrock sin free tier» | **Solo blogs de proveedores** (mar 2026) — AWS no publica ninguno de ellos |
-| Serverless Inference **$0.0000667/seg por GB** + **$0.20/1M de peticiones**, arranque en frío de 1–5 s, máx. 6 GB | **Terceros** (15 mar 2026), no confirmado en la página de AWS |
-| Escalones 3–4 de Rekognition (**$0.0006** >5M, **$0.0004** >35M) y free tier de 5.000 imágenes + 1.000 ID faciales/12 meses | **Terceros** (31 ago 2026); la página de AWS confirma solo **$0.0010** primeros 1M y **$0.0008** siguientes 1,5M (6 oct 2026) |
+| Provisioned Throughput «30 to 50 % de descuento», «punto de equilibrio por encima del 60 % de utilización», «Bedrock sin free tier» | **Solo blogs de proveedores** (mar 2026): AWS no publica ninguno de ellos |
+| Serverless Inference **$0.0000667/seg por GB** + **$0.20/1M de peticiones**, arranque en frío de 1 to 5 s, máx. 6 GB | **Terceros** (15 mar 2026), no confirmado en la página de AWS |
+| Escalones 3 to 4 de Rekognition (**$0.0006** >5M, **$0.0004** >35M) y free tier de 5.000 imágenes + 1.000 ID faciales/12 meses | **Terceros** (31 ago 2026); la página de AWS confirma solo **$0.0010** primeros 1M y **$0.0008** siguientes 1,5M (6 oct 2026) |
 | Free tier de Amazon Lex (10K texto + 5K voz/mes, 2 meses) | **Sin confirmar** en las páginas de AWS de 2026 |
 | Comprehend **$3.00/hora** de entrenamiento y **$0.0005/IU-segundo** | **Terceros** (4 may 2026) |
 | Bedrock Guardrails **€0.2587283 / €0.1724855 por 1.000 unidades de texto** | Oficial pero en **EUR** (aws.eu, 7 ago 2026); el equivalente en USD no se recuperó → **(G)** |
 | Promo de GPT-5.6 Sol **$4/$20 por 1M** hasta el 21 nov 2026 | **Agregador**, no AWS (22 ago 2026) |
-| «El right-sizing ahorra un 30–60 %» | **No existe ninguna cifra publicada por AWS** |
+| «El right-sizing ahorra un 30 to 60 %» | **No existe ninguna cifra publicada por AWS** |
 
 ---
 
-## 11. Actualizaciones de 2025–2026
+## 11. Actualizaciones de 2025 to 2026
 
-Los precios y las herramientas detrás de este dominio no se quedaron quietos entre mediados de 2025 y finales de 2026. Cada cambio de abajo lleva una fecha, porque un número sin fecha es inutilizable en este examen — y porque varias filas retiran herramientas que las guías de estudio antiguas aún recomiendan pagar.
+Los precios y las herramientas detrás de este dominio no se quedaron quietos entre mediados de 2025 y finales de 2026. Cada cambio de abajo lleva una fecha, porque un número sin fecha es inutilizable en este examen, y porque varias filas retiran herramientas que las guías de estudio antiguas aún recomiendan pagar.
 
-**Tabla A — cambios de precios, herramientas de coste y disponibilidad, cada uno con su fecha (investigado el 6 oct 2026):**
+**Tabla A: cambios de precios, herramientas de coste y disponibilidad, cada uno con su fecha (investigado el 6 oct 2026):**
 
 | Fecha | Cambio | Relevancia de coste / gobernanza |
 |---|---|---|
-| **16 jul 2025** → **13 oct 2025** | **Amazon Bedrock AgentCore** en preview → **GA** (9 Regiones, VPC, PrivateLink, MCP en Gateway, IAM) | un runtime de agents medido — con precio por uso y **sin compromiso de capacidad**, lo contrario de Provisioned Throughput (aws.amazon.com/about-aws/whats-new/2025/10/amazon-bedrock-agentcore-available/, 13 oct 2025) |
+| **16 jul 2025** → **13 oct 2025** | **Amazon Bedrock AgentCore** en preview → **GA** (9 Regiones, VPC, PrivateLink, MCP en Gateway, IAM) | un runtime de agents medido: con precio por uso y **sin compromiso de capacidad**, lo contrario de Provisioned Throughput (aws.amazon.com/about-aws/whats-new/2025/10/amazon-bedrock-agentcore-available/, 13 oct 2025) |
 | **09 oct 2025** | **Amazon QuickSight → Amazon Quick Suite** | el asiento Author Pro bajó de **$50 a $40** (aws.amazon.com/blogs/aws/reimagine-the-way-you-work-with-ai-agents-in-amazon-quick-suite/, 9 oct 2025) |
 | **02 dic 2025** | **GA de Nova 2 Sonic** (`amazon.nova-2-sonic-v1:0`, 7 idiomas) y **Nova 2 Omni en preview** | nuevos medidores de generación de voz y multimodal entran en la palanca de elección de modelo (AWS What's New, 2 dic 2025) |
-| **01 feb 2026** | Seis modelos de pesos abiertos en Bedrock — **DeepSeek V3.2, MiniMax M2.1, GLM 4.7 / 4.7 Flash, Kimi K2.5, Qwen3 Coder Next** — en **Project Mantle** | más destinos baratos de enrutamiento y degradación para la palanca de «degradar con evaluaciones» (aws.amazon.com/about-aws/whats-new/2026/02/amazon-bedrock-adds-support-six-open-weights-models/, 1 feb 2026) |
-| **17 feb 2026** | **Claude Sonnet 4.6** en Bedrock (contexto de 1M, salida de 64K) | una nueva tarifa de tokens con la que fechar tu aritmética — nunca la cites sin fecha (ficha de modelo de docs.aws.amazon.com, 17 feb 2026) |
-| **30 abr 2026** | Publicada la **guía del examen v1.1** (la v1.0 fue el 26 mar 2026) | añade el objetivo **2.1.4 — el modelo de precios basado en tokens y su efecto en el coste y el rendimiento de la inferencia**; AWS dice que las actualizaciones de la guía aparecen en el examen aproximadamente **un mes** después de publicarse (docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/, 30 abr 2026) |
-| **15 may 2026** | **Cerrados los registros de Amazon Q Developer**; los niveles IDE y de pago **terminan su soporte el 30 abr 2027** | una herramienta facturable en sunset — no construyas un modelo de coste plurianual sobre ella (aws.amazon.com/blogs/devops/amazon-q-developer-end-of-support-announcement/, 15 may 2026) |
+| **01 feb 2026** | Seis modelos de pesos abiertos en Bedrock, **DeepSeek V3.2, MiniMax M2.1, GLM 4.7 / 4.7 Flash, Kimi K2.5, Qwen3 Coder Next**, en **Project Mantle** | más destinos baratos de enrutamiento y degradación para la palanca de «degradar con evaluaciones» (aws.amazon.com/about-aws/whats-new/2026/02/amazon-bedrock-adds-support-six-open-weights-models/, 1 feb 2026) |
+| **17 feb 2026** | **Claude Sonnet 4.6** en Bedrock (contexto de 1M, salida de 64K) | una nueva tarifa de tokens con la que fechar tu aritmética: nunca la cites sin fecha (ficha de modelo de docs.aws.amazon.com, 17 feb 2026) |
+| **30 abr 2026** | Publicada la **guía del examen v1.1** (la v1.0 fue el 26 mar 2026) | añade el objetivo **2.1.4: el modelo de precios basado en tokens y su efecto en el coste y el rendimiento de la inferencia**; AWS dice que las actualizaciones de la guía aparecen en el examen aproximadamente **un mes** después de publicarse (docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/, 30 abr 2026) |
+| **15 may 2026** | **Cerrados los registros de Amazon Q Developer**; los niveles IDE y de pago **terminan su soporte el 30 abr 2027** | una herramienta facturable en sunset: no construyas un modelo de coste plurianual sobre ella (aws.amazon.com/blogs/devops/amazon-q-developer-end-of-support-announcement/, 15 may 2026) |
 | **30 jun 2026** | **Amazon Kendra** entra en modo de mantenimiento; **Ground Truth Plus** termina su soporte | los presupuestos de búsqueda empresarial y de etiquetado migran a sus sucesores (docs.aws.amazon.com/kendra/latest/dg/kendra-availability-change.html, 30 jun 2026) |
 | **30 jul 2026** | **SageMaker Model Monitor, Clarify, Ground Truth, A2I, Debugger, Role Manager, Geospatial, Studio Lab** y **Amazon Kendra** cerrados a clientes nuevos | los planes de coste de monitorización y búsqueda deben apuntar a **métricas de CloudWatch y detección de anomalías**, **Bedrock Model Evaluations** y **Bedrock Managed Knowledge Base** (docs.aws.amazon.com, 30 jul 2026) |
-| **07 sep 2026** | **Política de ciclo de vida de modelos de Bedrock**: Active → Legacy → EOL, la mayoría de modelos obtiene una ventana de **Legacy de 6 meses** | Legacy bloquea a clientes nuevos **y a Provisioned Throughput nuevo** — un compromiso de 1 o 3 años puede sobrevivir al modelo para el que se compró (docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle.html, 7 sep 2026) |
-| **08 sep 2026** / **05 oct 2026** | **OpenAI GPT-6 Astra GA** / **Z.ai GLM 5.3 GA** (753B en total, 40B activos) en Bedrock | nuevas tarifas de tokens de nivel premium — vuelve a comprobar el hueco salida frente a entrada antes de enrutar tráfico |
+| **07 sep 2026** | **Política de ciclo de vida de modelos de Bedrock**: Active → Legacy → EOL, la mayoría de modelos obtiene una ventana de **Legacy de 6 meses** | Legacy bloquea a clientes nuevos **y a Provisioned Throughput nuevo**: un compromiso de 1 o 3 años puede sobrevivir al modelo para el que se compró (docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle.html, 7 sep 2026) |
+| **08 sep 2026** / **05 oct 2026** | **OpenAI GPT-6 Astra GA** / **Z.ai GLM 5.3 GA** (753B en total, 40B activos) en Bedrock | nuevas tarifas de tokens de nivel premium: vuelve a comprobar el hueco salida frente a entrada antes de enrutar tráfico |
 | **15 oct 2026** | Retirados los idiomas **italiano y alemán** del AIF-C01 | solo un cambio de administración del examen; sigue siendo AIF-C01, **65 preguntas**, **90 minutos**, aprobación **700/1000** (aws.amazon.com/certification, 6 oct 2026) |
 
-**Tabla B — las tarifas de palancas de coste de Bedrock que puedes citar para 2025–2026 (aws.amazon.com/bedrock/pricing y blogs de AWS, verificadas el 6 oct 2026):**
+**Tabla B: las tarifas de palancas de coste de Bedrock que puedes citar para 2025 to 2026 (aws.amazon.com/bedrock/pricing y blogs de AWS, verificadas el 6 oct 2026):**
 
 | Palanca | Tarifa o regla publicada | Fecha |
 |---|---|---|
 | **Lectura** de caché de prompts (clase Claude / GPT) | **−90 %** del precio de entrada | 6 oct 2026 |
 | **Lectura** de caché de prompts (clase Nova) | **−75 %** | 6 oct 2026 |
 | **Escritura** de caché de prompts | **+25 % (1,25×)** con TTL de 5 minutos, **+100 % (2×)** con TTL de 1 hora; el TTL se refresca **gratis por acierto** | 6 oct 2026 |
-| **Inferencia Batch** | **−50 %** de bajo demanda — y **nunca combinable con la caché de prompts** | 6 oct 2026 |
+| **Inferencia Batch** | **−50 %** de bajo demanda, y **nunca combinable con la caché de prompts** | 6 oct 2026 |
 | **Intelligent Prompt Routing** | **$1.00 por 1.000 peticiones** (facturado por petición, no por token), hasta un **30 %** más barato | 6 oct 2026 |
 | **Simple Prompt Optimizer** | **$0.03 por 1.000 tokens** | 6 oct 2026 |
 | **Model Distillation** | **75 % más barato**, «500 % más rápido», **≤ 2 % de pérdida de precisión** | 6 oct 2026 |
@@ -738,33 +738,33 @@ Los precios y las herramientas detrás de este dominio no se quedaron quietos en
 | Asiento Author Pro de Quick Suite | **$50 → $40** | 9 oct 2025 |
 
 > [!WARNING]
-> **«Cerrado a clientes nuevos» no es «apagado», ni es un rebranding.** El vocabulario de ciclo de vida de servicios de AWS (docs.aws.amazon.com/general/latest/gr/service-lifecycle.html, 24 sep 2026) es exacto: **Maintenance** = sin clientes nuevos, sin funciones nuevas, sigue soportado; **Sunset** = fin de operaciones planificado, normalmente a unos 12 meses; **Full Shutdown** = eliminado del portafolio. El **30 de julio de 2026** el **Model Monitor** y **Clarify** de SageMaker entraron en *maintenance* — los clientes existentes los conservan y no se borra nada — mientras que **Amazon Kendra** se cerró a clientes nuevos el mismo día y apunta a **Bedrock Managed Knowledge Base**. Las opciones del examen que afirman que esas herramientas «se renombraron como Bedrock Model Evaluations» o «se deshabilitaron para todos» son erróneas; la respuesta correcta es *sigue siendo utilizable por los clientes existentes, sin funciones nuevas previstas*.
+> **«Cerrado a clientes nuevos» no es «apagado», ni es un rebranding.** El vocabulario de ciclo de vida de servicios de AWS (docs.aws.amazon.com/general/latest/gr/service-lifecycle.html, 24 sep 2026) es exacto: **Maintenance** = sin clientes nuevos, sin funciones nuevas, sigue soportado; **Sunset** = fin de operaciones planificado, normalmente a unos 12 meses; **Full Shutdown** = eliminado del portafolio. El **30 de julio de 2026** el **Model Monitor** y **Clarify** de SageMaker entraron en *maintenance*, los clientes existentes los conservan y no se borra nada, mientras que **Amazon Kendra** se cerró a clientes nuevos el mismo día y apunta a **Bedrock Managed Knowledge Base**. Las opciones del examen que afirman que esas herramientas «se renombraron como Bedrock Model Evaluations» o «se deshabilitaron para todos» son erróneas; la respuesta correcta es *sigue siendo utilizable por los clientes existentes, sin funciones nuevas previstas*.
 
-- **📚 ¿Sabías que…?** La **guía del examen AIF-C01 v1.1**, publicada el **30 de abril de 2026**, añadió siete objetivos — entre ellos **2.1.4 (precios basados en tokens y su efecto en coste y rendimiento)**, **2.1.5 (ingeniería de contexto)** y **2.1.6 (IA agéntica: MCP, gestión de memoria, uso de herramientas, orquestación)** — mientras que **Amazon MemoryDB** se eliminó del alcance (docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/, 30 abr 2026). Así que la aritmética de costes que has estado practicando en esta lección no es un tema heredado: AWS la escribió en la propia guía del examen, aproximadamente un mes antes de que esos objetivos empezaran a aparecer en preguntas en vivo.
+- **📚 ¿Sabías que…?** La **guía del examen AIF-C01 v1.1**, publicada el **30 de abril de 2026**, añadió siete objetivos, entre ellos **2.1.4 (precios basados en tokens y su efecto en coste y rendimiento)**, **2.1.5 (ingeniería de contexto)** y **2.1.6 (IA agéntica: MCP, gestión de memoria, uso de herramientas, orquestación)**, mientras que **Amazon MemoryDB** se eliminó del alcance (docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/, 30 abr 2026). Así que la aritmética de costes que has estado practicando en esta lección no es un tema heredado: AWS la escribió en la propia guía del examen, aproximadamente un mes antes de que esos objetivos empezaran a aparecer en preguntas en vivo.
 
 ---
 
 ## Casos Reales
 
-Una página de precios es una abstracción; estos son las mismas palancas con el nombre de un cliente pegado. Todas las cifras de abajo son **afirmadas por el cliente o por AWS y no auditadas** — solo Sun Finance (n = 585 imágenes) y Adobe (propio conjunto de pruebas) revelan una base muestral — y «**hasta**» es siempre un **techo**, nunca un promedio.
+Una página de precios es una abstracción; estos son las mismas palancas con el nombre de un cliente pegado. Todas las cifras de abajo son **afirmadas por el cliente o por AWS y no auditadas**, solo Sun Finance (n = 585 imágenes) y Adobe (propio conjunto de pruebas) revelan una base muestral, y «**hasta**» es siempre un **techo**, nunca un promedio.
 
 | Caso (fuente, año) | Servicios de AWS | Resultado de coste / eficiencia |
 |---|---|---|
-| **Forethought** — soporte al cliente SaaS, 30M de interacciones/año, equipo de 3 personas (aws.amazon.com/solutions/case-studies/forethought-technologies-case-study; **sin año en la página → (G)**) | **Endpoints multimodelo de SageMaker**, **Serverless Inference**, Model Deployment — migró **fuera de su Amazon EKS autogestionado** | **−66 %** con endpoints multimodelo, **≈−80 %** con Serverless (titular **hasta −80 %**); **>80 %** de la inferencia GPU en SageMaker |
-| **Sun Finance** — préstamos fintech, 9 países (aws.amazon.com/blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws, 30 abr 2026) | OCR con **Textract** → respaldo con **Rekognition** → estructuración con **Claude Sonnet 4** → **Titan Multimodal Embeddings** en **S3 Vectors** | **−91 %** de coste por documento; precisión **79,73 % → 90,80 %**; **20 h → <5 s**; detección de fraude **81 %** |
-| **HAYAT HOLDING** — fabricación de paneles MDF, 194 sensores (aws.amazon.com/blogs/machine-learning/hayat-holding-uses-amazon-sagemaker-to-increase-product-quality-and-optimize-manufacturing-output-saving-300000-annually, 2023) | **AWS IoT Greengrass** (SiteWise Edge Gateway) + entrenamiento con **SageMaker**, **Automatic Model Tuning**, despliegue, **Edge Manager** | **$300.000 al año** ahorrados |
-| **RareJob** — puntuación de exámenes de habla en EdTech (aws.amazon.com/solutions/case-studies/rare-job-case-study, 2020) | **Managed Spot Training de SageMaker** + **AWS Glue** + **Amazon Athena** | **−25 %** de tiempo de entrenamiento, **>10×** de eficiencia de los desarrolladores, **100 horas/mes** ahorradas, puntuaciones en 2–3 minutos |
-| **Prime Focus Technologies** — localización de medios, más de 14M de activos (aws.amazon.com/solutions/case-studies/prime-focus-case-study, 2025) | **Amazon Bedrock** + agentes de **AWS Lambda** | coste de localización **−20–30 %**, precisión **+20–30 %**, tiempo de respuesta **−30–40 %** |
+| **Forethought**, soporte al cliente SaaS, 30M de interacciones/año, equipo de 3 personas (aws.amazon.com/solutions/case-studies/forethought-technologies-case-study; **sin año en la página → (G)**) | **Endpoints multimodelo de SageMaker**, **Serverless Inference**, Model Deployment, migró **fuera de su Amazon EKS autogestionado** | **−66 %** con endpoints multimodelo, **≈−80 %** con Serverless (titular **hasta −80 %**); **>80 %** de la inferencia GPU en SageMaker |
+| **Sun Finance**: préstamos fintech, 9 países (aws.amazon.com/blogs/machine-learning/sun-finance-automates-id-extraction-and-fraud-detection-with-generative-ai-on-aws, 30 abr 2026) | OCR con **Textract** → respaldo con **Rekognition** → estructuración con **Claude Sonnet 4** → **Titan Multimodal Embeddings** en **S3 Vectors** | **−91 %** de coste por documento; precisión **79,73 % → 90,80 %**; **20 h → <5 s**; detección de fraude **81 %** |
+| **HAYAT HOLDING**: fabricación de paneles MDF, 194 sensores (aws.amazon.com/blogs/machine-learning/hayat-holding-uses-amazon-sagemaker-to-increase-product-quality-and-optimize-manufacturing-output-saving-300000-annually, 2023) | **AWS IoT Greengrass** (SiteWise Edge Gateway) + entrenamiento con **SageMaker**, **Automatic Model Tuning**, despliegue, **Edge Manager** | **$300.000 al año** ahorrados |
+| **RareJob**: puntuación de exámenes de habla en EdTech (aws.amazon.com/solutions/case-studies/rare-job-case-study, 2020) | **Managed Spot Training de SageMaker** + **AWS Glue** + **Amazon Athena** | **−25 %** de tiempo de entrenamiento, **>10×** de eficiencia de los desarrolladores, **100 horas/mes** ahorradas, puntuaciones en 2 to 3 minutos |
+| **Prime Focus Technologies**: localización de medios, más de 14M de activos (aws.amazon.com/solutions/case-studies/prime-focus-case-study, 2025) | **Amazon Bedrock** + agentes de **AWS Lambda** | coste de localización **−20 to 30 %**, precisión **+20 to 30 %**, tiempo de respuesta **−30 to 40 %** |
 
-**Forethought — el impuesto DIY.** Un equipo de tres personas ejecutaba modelos *y* Kubernetes; salir de su propio Amazon EKS hacia los **endpoints multimodelo** consolidó la capacidad de GPU (**−66 %** *con mejor latencia*), y **Serverless Inference** llevó la factura del endpoint ocioso a aproximadamente **−80 %** para los clasificadores pequeños. Esas son exactamente las dos palancas de las secciones 3.4 y 2.1 — consolidación y después escalado a cero. Observa lo que el caso **no** publica: ninguna cifra de Spot, ninguna cifra de Savings Plan. No importes los techos del 90 %/64 % de esta lección a un caso que nunca los afirmó.
+**Forethought, el impuesto DIY.** Un equipo de tres personas ejecutaba modelos *y* Kubernetes; salir de su propio Amazon EKS hacia los **endpoints multimodelo** consolidó la capacidad de GPU (**−66 %** *con mejor latencia*), y **Serverless Inference** llevó la factura del endpoint ocioso a aproximadamente **−80 %** para los clasificadores pequeños. Esas son exactamente las dos palancas de las secciones 3.4 y 2.1, consolidación y después escalado a cero. Observa lo que el caso **no** publica: ninguna cifra de Spot, ninguna cifra de Savings Plan. No importes los techos del 90 %/64 % de esta lección a un caso que nunca los afirmó.
 
-**Sun Finance — paga a cada medidor por el trabajo en el que mejor es.** Textract factura **por página** ($0.0015–$0.070 por página, 6 oct 2026) mientras Claude factura **por token**; separar OCR de estructuración recortó el coste por documento en un **91 %** y elevó la precisión del **79,73 % al 90,80 %** en un conjunto de evaluación de **585 imágenes**. El primer intento documentado — solo Claude Sonnet 4 — puntuó un **61,8 %** en general y un **43 %** en números de documento y fue **rechazado**, porque las protecciones de privacidad de AWS bloquean la extracción directa de PII. La extracción solo con LLM no es la opción barata; es un prototipo fallido con una factura de tokens pegada.
+**Sun Finance: paga a cada medidor por el trabajo en el que mejor es.** Textract factura **por página** ($0.0015 to $0.070 por página, 6 oct 2026) mientras Claude factura **por token**; separar OCR de estructuración recortó el coste por documento en un **91 %** y elevó la precisión del **79,73 % al 90,80 %** en un conjunto de evaluación de **585 imágenes**. El primer intento documentado: solo Claude Sonnet 4: puntuó un **61,8 %** en general y un **43 %** en números de documento y fue **rechazado**, porque las protecciones de privacidad de AWS bloquean la extracción directa de PII. La extracción solo con LLM no es la opción barata; es un prototipo fallido con una factura de tokens pegada.
 
-**HAYAT HOLDING — lo gestionado vence a lo construido a mano.** Los entornos de ML construidos a mano, «costosos y engorrosos», dieron paso a **Automatic Model Tuning** sobre 194 flujos de sensores OPC-UA con **SageMaker Edge Manager** ejecutando modelos en el dispositivo, para un ahorro publicado de **$300.000 al año** (2023). La palanca aquí no es un porcentaje de descuento en absoluto — es **eliminar la mano de obra** que la tabla de TCO de la sección 8.2 dice que domina en los equipos pequeños.
+**HAYAT HOLDING, lo gestionado vence a lo construido a mano.** Los entornos de ML construidos a mano, «costosos y engorrosos», dieron paso a **Automatic Model Tuning** sobre 194 flujos de sensores OPC-UA con **SageMaker Edge Manager** ejecutando modelos en el dispositivo, para un ahorro publicado de **$300.000 al año** (2023). La palanca aquí no es un porcentaje de descuento en absoluto, es **eliminar la mano de obra** que la tabla de TCO de la sección 8.2 dice que domina en los equipos pequeños.
 
-**RareJob — primero el right-sizing y el servicio gestionado, después el descuento.** El equipo pasó de PC local → EC2/ECS (todavía demasiado caro) → **Managed Spot Training de SageMaker** alimentado por Glue y Athena: **−25 %** de tiempo de entrenamiento, **>10×** de eficiencia de los desarrolladores y **100 horas al mes** de vuelta (2020). El techo publicado de Spot es **hasta un 90 % de descuento con dos minutos de aviso** (6 oct 2026), pero las propias cifras del caso son rendimiento y mano de obra, no precio por hora — cítalas así.
+**RareJob, primero el right-sizing y el servicio gestionado, después el descuento.** El equipo pasó de PC local → EC2/ECS (todavía demasiado caro) → **Managed Spot Training de SageMaker** alimentado por Glue y Athena: **−25 %** de tiempo de entrenamiento, **>10×** de eficiencia de los desarrolladores y **100 horas al mes** de vuelta (2020). El techo publicado de Spot es **hasta un 90 % de descuento con dos minutos de aviso** (6 oct 2026), pero las propias cifras del caso son rendimiento y mano de obra, no precio por hora, cítalas así.
 
-**Tabla — las cifras de palancas de Bedrock publicadas por AWS detrás de estos resultados (AWS News Blog, 2024; AWS Cloud Financial Management, 2025; todo reverificado el 6 oct 2026):**
+**Tabla: las cifras de palancas de Bedrock publicadas por AWS detrás de estos resultados (AWS News Blog, 2024; AWS Cloud Financial Management, 2025; todo reverificado el 6 oct 2026):**
 
 | Palanca | Cifra publicada por AWS |
 |---|---|
@@ -772,12 +772,12 @@ Una página de precios es una abstracción; estos son las mismas palancas con el
 | **Enrutamiento inteligente de prompts** | **−30 %** |
 | **Destilación de modelos** | **−75 %** con **≤ 2 % de pérdida de precisión** |
 | **Inferencia Batch** | **−50 %** |
-| **Provisioned Throughput** (con right-sizing) | **40–60 %** |
+| **Provisioned Throughput** (con right-sizing) | **40 to 60 %** |
 
-- **📚 ¿Sabías que…?** AWS publica exactamente **una** tasa de producción en todo su corpus de casos de IA generativa: el **65 %** de los proyectos del Generative AI Innovation Center llegó a producción en 2025 — algunos en solo **45 días** — de **más de 1.000** implementaciones, usando el marco de las **Five V's** (Value → Visualize → Validate → Verify → Venture) (aws.amazon.com/blogs/machine-learning/beyond-pilots-a-proven-framework-for-scaling-ai-to-production, 2025). El otro **35 %** implícito es la parte que las páginas de historias de clientes omiten, y AWS en sí nunca afirma una cifra más alta.
+- **📚 ¿Sabías que…?** AWS publica exactamente **una** tasa de producción en todo su corpus de casos de IA generativa: el **65 %** de los proyectos del Generative AI Innovation Center llegó a producción en 2025, algunos en solo **45 días**, de **más de 1.000** implementaciones, usando el marco de las **Five V's** (Value → Visualize → Validate → Verify → Venture) (aws.amazon.com/blogs/machine-learning/beyond-pilots-a-proven-framework-for-scaling-ai-to-production, 2025). El otro **35 %** implícito es la parte que las páginas de historias de clientes omiten, y AWS en sí nunca afirma una cifra más alta.
 
 > [!WARNING]
-> **Tres trampas dentro de los números de los casos de estudio.** (1) Las etiquetas de año de `aws.amazon.com/solutions/case-studies/*` se renderizan en el cliente, así que varias páginas (Forethought, Bynder, Prime Focus, Alnylam) muestran **sin año** en el HTML → **(G)** — cita el caso, no un año que no puedes ver. (2) Cada porcentaje es **afirmado por el cliente/AWS y no auditado**; solo Sun Finance (n = 585) y Adobe (propio conjunto de pruebas) revelan una base muestral. (3) «**Hasta**» es un techo: el titular de Forethought es *hasta* un **−80 %**, no *un promedio de* **−80 %** — y una opción de examen que convierta un techo de caso de estudio en una garantía es errónea aunque el número en sí sea real.
+> **Tres trampas dentro de los números de los casos de estudio.** (1) Las etiquetas de año de `aws.amazon.com/solutions/case-studies/*` se renderizan en el cliente, así que varias páginas (Forethought, Bynder, Prime Focus, Alnylam) muestran **sin año** en el HTML → **(G)**, cita el caso, no un año que no puedes ver. (2) Cada porcentaje es **afirmado por el cliente/AWS y no auditado**; solo Sun Finance (n = 585) y Adobe (propio conjunto de pruebas) revelan una base muestral. (3) «**Hasta**» es un techo: el titular de Forethought es *hasta* un **−80 %**, no *un promedio de* **−80 %**, y una opción de examen que convierta un techo de caso de estudio en una garantía es errónea aunque el número en sí sea real.
 
 ---
 
@@ -933,13 +933,13 @@ Una página de precios es una abstracción; estos son las mismas palancas con el
   "type": "multiple-choice",
   "question": "Un system prompt de 33.000 tokens cuesta $99 al día sin caché. Con caché de prompts (lecturas a 0,1×, una escritura al 1,25× al día, tarifas clase Sonnet de $3.00 por 1M de entrada, $3.75 por 1M de escritura en caché y $0.30 por 1M de lectura en caché según una publicación de AWS Builder Center de 2026), ¿cuál es el nuevo coste diario y cuál es el requisito?",
   "options": [
-    "$99 - no cambia nada",
-    "Unos $10 al día - el prefijo del prompt debe coincidir byte a byte dentro del TTL",
-    "$0 - la entrada en caché pasa a ser gratuita",
-    "Unos $9.90 - pero solo cuando el modo Batch también está habilitado"
+    "$99: no cambia nada",
+    "Unos $10 al día: el prefijo del prompt debe coincidir byte a byte dentro del TTL",
+    "$0: la entrada en caché pasa a ser gratuita",
+    "Unos $9.90: pero solo cuando el modo Batch también está habilitado"
   ],
   "correct": 1,
-  "explanation": "33.000 x 999 = 32,967 MTok de lecturas x $0.30 = $9.89, más una escritura de 41.250 tokens (33.000 x 1,25) x $3.75/MTok = $0.15, lo que da unos $10.05 al día - una reducción de aproximadamente el 90 % frente a $99 (tarifas de una publicación de AWS Builder Center de 2026; la mecánica oficial de la caché de Bedrock de lectura 0,1×, escritura 1,25× a 5 minutos y 2× a 1 hora está documentada para 2026). La entrada en caché se bonifica, no es gratuita; un prefijo cambiado factura la prima de escritura de 1,25× en cada petición, y la caché es independiente del modo Batch."
+  "explanation": "33.000 x 999 = 32,967 MTok de lecturas x $0.30 = $9.89, más una escritura de 41.250 tokens (33.000 x 1,25) x $3.75/MTok = $0.15, lo que da unos $10.05 al día: una reducción de aproximadamente el 90 % frente a $99 (tarifas de una publicación de AWS Builder Center de 2026; la mecánica oficial de la caché de Bedrock de lectura 0,1×, escritura 1,25× a 5 minutos y 2× a 1 hora está documentada para 2026). La entrada en caché se bonifica, no es gratuita; un prefijo cambiado factura la prima de escritura de 1,25× en cada petición, y la caché es independiente del modo Batch."
 }
 ```
 
@@ -979,14 +979,14 @@ Una página de precios es una abstracción; estos son las mismas palancas con el
 {
   "question": "Relaciona cada control de AWS con si PREVIEDE o DETECTA, y con su trampa clave (verificado el 6 oct 2026):",
   "pairs": [
-    {"left": "Service Control Policy (SCP)", "right": "PREVENE - establece permisos máximos, nunca concede, y no afecta a los service-linked roles"},
-    {"left": "Restricción de plantilla de Service Catalog", "right": "PREVENE - restringe parámetros de CloudFormation en el lanzamiento, con autoetiquetado TagOptions"},
-    {"left": "Política de Amazon Bedrock en Organizations", "right": "PREVENE - fija una región y una versión de guardrail en cada llamada a Bedrock por debajo del nodo"},
-    {"left": "Conformance pack de AWS Config", "right": "DETECTA - informa de desviaciones en toda la organización salvo que se combine con remediación de SSM"},
-    {"left": "Acción de AWS Budgets", "right": "ACTÚA DESPUÉS DEL UMBRAL - alertas gratis, los dos primeros presupuestos con acciones habilitadas gratis, después $0.10/día"},
-    {"left": "Etiquetas de asignación de costes", "right": "DETECTA - deben activarse por separado (aws: y user:) y tardan hasta 24 horas en aparecer"}
+    {"left": "Service Control Policy (SCP)", "right": "PREVENE: establece permisos máximos, nunca concede, y no afecta a los service-linked roles"},
+    {"left": "Restricción de plantilla de Service Catalog", "right": "PREVENE: restringe parámetros de CloudFormation en el lanzamiento, con autoetiquetado TagOptions"},
+    {"left": "Política de Amazon Bedrock en Organizations", "right": "PREVENE: fija una región y una versión de guardrail en cada llamada a Bedrock por debajo del nodo"},
+    {"left": "Conformance pack de AWS Config", "right": "DETECTA: informa de desviaciones en toda la organización salvo que se combine con remediación de SSM"},
+    {"left": "Acción de AWS Budgets", "right": "ACTÚA DESPUÉS DEL UMBRAL: alertas gratis, los dos primeros presupuestos con acciones habilitadas gratis, después $0.10/día"},
+    {"left": "Etiquetas de asignación de costes", "right": "DETECTA: deben activarse por separado (aws: y user:) y tardan hasta 24 horas en aparecer"}
   ],
-  "explanation": "El examen clasifica los controles en preventivos (SCPs, RCPs, opt-out de servicios de IA, políticas de Bedrock, políticas de etiquetas, Service Catalog) y detectives (AWS Config, Cost Explorer, etiquetas de asignación de costes), con AWS Budgets como híbrido que solo actúa tras un umbral. Meter la categoría mal - por ejemplo llamar detective a un SCP o esperar que Config detenga un lanzamiento que no cumple - es el fallo más común de este dominio."
+  "explanation": "El examen clasifica los controles en preventivos (SCPs, RCPs, opt-out de servicios de IA, políticas de Bedrock, políticas de etiquetas, Service Catalog) y detectives (AWS Config, Cost Explorer, etiquetas de asignación de costes), con AWS Budgets como híbrido que solo actúa tras un umbral. Meter la categoría mal: por ejemplo llamar detective a un SCP o esperar que Config detenga un lanzamiento que no cumple: es el fallo más común de este dominio."
 }
 ```
 
@@ -994,23 +994,23 @@ Una página de precios es una abstracción; estos son las mismas palancas con el
 
 > [!WARNING]
 > **Trampas de esta lección:**
-> - **Los SCP nunca conceden** — acotan los permisos de usuarios y roles de IAM (incluida la raíz) y **se saltan los service-linked roles**; un SCP de lista de denegaciones aún necesita adjunta una política de **permitir** (docs.aws.amazon.com, 2026);
-> - **Las etiquetas de asignación de costes deben activarse** — las generadas por AWS (`aws:`) y las definidas por el usuario (`user:`) se activan **por separado** y tardan **hasta 24 horas** en llegar a Cost Explorer;
-> - **Spot y Savings Plans no se acumulan** — el gasto en Spot **no consume** el compromiso de un Compute Savings Plan (docs.aws.amazon.com, 2026);
-> - **Las alertas de presupuesto son gratuitas; las acciones solo son gratuitas para los dos primeros presupuestos con acciones habilitadas**, después **$0.10/día cada uno** (6 oct 2026) — y **$0.01/petición es la tarifa de la API de Cost Explorer**, no un precio de presupuesto;
-> - **Bedrock factura entrada y salida por separado**, la salida corre **4–5× la entrada** en los modelos de pesos abiertos, y la quema de cuota es **ponderada** (15× para Claude v4.8, 10× para Claude 5 y GPT-5.6 Sol/Terra/Luna, 5× para Claude ≤ v4.7);
-> - **Las lecturas de caché son 0,1× pero las escrituras cuestan 1,25× (5 min) o 2× (1 hora)** — un solo byte cambiado en el prefijo y pagas la prima de escritura en cada llamada;
-> - **Service Catalog ≠ SageMaker Catalog** — el primero gobierna *productos* en el lanzamiento, el segundo gobierna *activos de datos e IA* y factura **$10/100K peticiones, $0.40/GB, $1.776/unidad de cómputo** (6 oct 2026);
-> - **«El right-sizing ahorra un 30–60 %» no tiene fuente de AWS**, y las afirmaciones de Savings Plans de la región China del 81 %–84 % no se aplican nunca a las regiones comerciales;
-> - **Las tarifas publicadas llevan fecha por una razón**: `ml.p6-b300.48xlarge` es de **$148.54/hora desde el 7 oct 2026** — cita la fecha junto al número.
+> - **Los SCP nunca conceden**: acotan los permisos de usuarios y roles de IAM (incluida la raíz) y **se saltan los service-linked roles**; un SCP de lista de denegaciones aún necesita adjunta una política de **permitir** (docs.aws.amazon.com, 2026);
+> - **Las etiquetas de asignación de costes deben activarse**: las generadas por AWS (`aws:`) y las definidas por el usuario (`user:`) se activan **por separado** y tardan **hasta 24 horas** en llegar a Cost Explorer;
+> - **Spot y Savings Plans no se acumulan**: el gasto en Spot **no consume** el compromiso de un Compute Savings Plan (docs.aws.amazon.com, 2026);
+> - **Las alertas de presupuesto son gratuitas; las acciones solo son gratuitas para los dos primeros presupuestos con acciones habilitadas**, después **$0.10/día cada uno** (6 oct 2026), y **$0.01/petición es la tarifa de la API de Cost Explorer**, no un precio de presupuesto;
+> - **Bedrock factura entrada y salida por separado**, la salida corre **4 to 5× la entrada** en los modelos de pesos abiertos, y la quema de cuota es **ponderada** (15× para Claude v4.8, 10× para Claude 5 y GPT-5.6 Sol/Terra/Luna, 5× para Claude ≤ v4.7);
+> - **Las lecturas de caché son 0,1× pero las escrituras cuestan 1,25× (5 min) o 2× (1 hora)**: un solo byte cambiado en el prefijo y pagas la prima de escritura en cada llamada;
+> - **Service Catalog ≠ SageMaker Catalog**: el primero gobierna *productos* en el lanzamiento, el segundo gobierna *activos de datos e IA* y factura **$10/100K peticiones, $0.40/GB, $1.776/unidad de cómputo** (6 oct 2026);
+> - **«El right-sizing ahorra un 30 to 60 %» no tiene fuente de AWS**, y las afirmaciones de Savings Plans de la región China del 81 %: 84 % no se aplican nunca a las regiones comerciales;
+> - **Las tarifas publicadas llevan fecha por una razón**: `ml.p6-b300.48xlarge` es de **$148.54/hora desde el 7 oct 2026**: cita la fecha junto al número.
 
 > [!SUCCESS]
 > **Conclusiones Clave (Key Takeaways):**
-> 1. **Tres familias de medidores:** SageMaker factura **instance-hours + EBS GB-mes** (`ml.c5.xlarge` **$0.204/hora**, `ml.g5.24xlarge` **$10.18/hora**, EBS **$0.14/GB-mes**, todo el 6 oct 2026); Bedrock factura **por 1M de tokens de entrada y por 1M de tokens de salida**; los servicios de IA preconstruidos facturan **por unidad** (imagen, página, unidad de 100 caracteres, minuto, 1M de caracteres, petición) — identifica siempre el medidor antes de calcular.
+> 1. **Tres familias de medidores:** SageMaker factura **instance-hours + EBS GB-mes** (`ml.c5.xlarge` **$0.204/hora**, `ml.g5.24xlarge` **$10.18/hora**, EBS **$0.14/GB-mes**, todo el 6 oct 2026); Bedrock factura **por 1M de tokens de entrada y por 1M de tokens de salida**; los servicios de IA preconstruidos facturan **por unidad** (imagen, página, unidad de 100 caracteres, minuto, 1M de caracteres, petición): identifica siempre el medidor antes de calcular.
 > 2. **Los techos publicados que puedes citar (6 oct 2026):** Spot **≤90 %** con aviso de **2 minutos** e interrupciones medias **<5 %**, EC2 Instance Savings Plans **≤72 %**, Compute Savings Plans **≤66 %**, SageMaker AI Savings Plans **≤64 %**, Database Savings Plans **≤35 %**, Bedrock Batch **50 %**, lecturas de caché de Bedrock **90 %**, Provisioned Throughput de Bedrock a 6 meses **38,3 %**; el right-sizing **no tiene porcentaje publicado por AWS**.
-> 3. **Elige por la forma de la carga de trabajo:** interrumpible → **Spot**; base estable de 1–3 años → **Savings Plan** (SageMaker SP para `ml.*`, Compute SP para un parque mixto, compromete solo el 70–80 % de tu media de 30 días); impredecible y dispersa → **Serverless Inference (escala a cero, facturación por milisegundo)**; desconocida → **bajo demanda más autoescalado y parada programada** — y recuerda que **Spot nunca se acumula con un Savings Plan**.
+> 3. **Elige por la forma de la carga de trabajo:** interrumpible → **Spot**; base estable de 1 to 3 años → **Savings Plan** (SageMaker SP para `ml.*`, Compute SP para un parque mixto, compromete solo el 70 to 80 % de tu media de 30 días); impredecible y dispersa → **Serverless Inference (escala a cero, facturación por milisegundo)**; desconocida → **bajo demanda más autoescalado y parada programada**, y recuerda que **Spot nunca se acumula con un Savings Plan**.
 > 4. **Las palancas propias de Bedrock:** Batch **50 %** para trabajo masivo sin conexión; caché de prompts **lectura 0,1× / escritura 1,25× (5 min) o 2× (1 hora)** con un prefijo idéntico dentro del TTL; Provisioned Throughput por Model Unit de **$21.18 → $13.08/hora/MU** para 1 → 6 meses en Llama 2 13B (6 oct 2026), con **los modelos personalizados obligados a usarlo**; niveles Priority (con prima, hasta un 25 % mejor OTPS) / Standard / Flex / Reserved (1 o 3 meses).
-> 5. **La elección de modelo domina al volumen:** los mismos 300M de tokens de entrada + 60M de salida cuestan **$31.80** en Nemotron Nano 2 y **$492.00** en GLM 5 (6 oct 2026) — una diferencia de **15,5×** —, así que enruta y degrada con evaluaciones antes de optimizar cualquier otra cosa.
+> 5. **La elección de modelo domina al volumen:** los mismos 300M de tokens de entrada + 60M de salida cuestan **$31.80** en Nemotron Nano 2 y **$492.00** en GLM 5 (6 oct 2026), una diferencia de **15,5×**, así que enruta y degrada con evaluaciones antes de optimizar cualquier otra cosa.
 > 6. **El free tier en dólares:** créditos del plan AWS Free de **$200 en 6 meses** (desde el 15 jul 2025); SageMaker **250 h/mes de `ml.t3.medium` durante 2 meses**; Textract **1.000 páginas = $1.50**, Comprehend **50K unidades = $5.00**, Transcribe **60 min = $0.60**, Polly **5M estándar = $20.00 + 1M neural = $16.00** (todo el 6 oct 2026).
 > 7. **La visibilidad es detective y las acciones se retrasan:** Cost Explorer gratuito en consola y **$0.01/petición** en API, ingesta horaria ≈ **$0.01/1,000 registros/mes**; las etiquetas necesitan **activación separada** con un retraso de **≤24 h**; alertas de Budgets gratuitas, **los dos primeros presupuestos con acciones habilitadas gratuitos y después $0.10/día** (6 oct 2026).
-> 8. **La gobernanza se divide en preventiva y detective:** preventiva = **SCPs, RCPs, AI services opt-out, políticas de Bedrock (guardrail fijado), políticas de etiquetas, restricciones de plantilla de Service Catalog + TagOptions**; detective = **reglas de AWS Config y Conformance Packs** (`sagemaker-feature-group-tagged`, 75 reglas en nov 2025 + 191 en jul 2026); y la regla de una frase para el examen — **los SCP nunca conceden y se saltan los service-linked roles**.
+> 8. **La gobernanza se divide en preventiva y detective:** preventiva = **SCPs, RCPs, AI services opt-out, políticas de Bedrock (guardrail fijado), políticas de etiquetas, restricciones de plantilla de Service Catalog + TagOptions**; detective = **reglas de AWS Config y Conformance Packs** (`sagemaker-feature-group-tagged`, 75 reglas en nov 2025 + 191 en jul 2026); y la regla de una frase para el examen: **los SCP nunca conceden y se saltan los service-linked roles**.

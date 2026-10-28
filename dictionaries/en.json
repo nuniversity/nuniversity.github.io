@@ -10,7 +10,7 @@
     },
     "contact": {
       "title": "Contact Us",
-      "description": "Get in touch with the Nuniversity team — questions, partnerships, and community support."
+      "description": "Get in touch with the Nuniversity team, questions, partnerships, and community support."
     },
     "notFound": {
       "title": "Page Not Found",
@@ -43,12 +43,12 @@
       "notFound": "Game Not Found"
     },
     "quizzes": {
-      "title": "Quizzes — Tests & Certification Practice",
+      "title": "Quizzes, Tests & Certification Practice",
       "description": "Certification quizzes, practice tests and timed exam simulations with scoring, attempt history and printable certificates.",
       "notFound": "Quiz not found"
     },
     "languages": {
-      "title": "Language Practice — Flashcards & Translation Quizzes",
+      "title": "Language Practice, Flashcards & Translation Quizzes",
       "description": "Interactive flashcards and translation quizzes for English, Portuguese, Spanish and French with progress tracking.",
       "notFound": "Language activity not found"
     }
@@ -548,7 +548,7 @@
         "Remember the order!",
         "Type the sequence back correctly",
         "Each level adds one more digit",
-        "You have {lives} lives — use them wisely!"
+        "You have {lives} lives, use them wisely!"
       ]
     },
     "math_challenge": {
@@ -578,7 +578,7 @@
   "quizzes": {
     "title": "Quizzes, Tests & Certification Practice",
     "subtitle": "Certification quizzes, practice tests and timed exam simulations with scoring and instant feedback.",
-    "redirect_fallback": "This quiz has moved — continue to the Quizzes section",
+    "redirect_fallback": "This quiz has moved, continue to the Quizzes section",
     "back_to_quizzes": "Back to Quizzes",
     "back_to_results": "Back to Results",
     "play_again": "Play Again",
@@ -632,11 +632,11 @@
       "available": "{n} questions available",
       "question_count": "Questions",
       "shuffle": "Shuffle",
-      "start_practice": "Start Practice — {n} Questions",
+      "start_practice": "Start Practice, {n} Questions",
       "best_score": "Best score",
       "mock_title": "Mock Exam",
       "exam_simulation": "Exam Simulation",
-      "mock_description": "Simulates the real {cert} exam: {count} questions, {minutes}-minute countdown, proportional domain sampling. No feedback until you submit — just like the real thing.",
+      "mock_description": "Simulates the real {cert} exam: {count} questions, {minutes}-minute countdown, proportional domain sampling. No feedback until you submit, just like the real thing.",
       "spec_questions": "{n} questions",
       "spec_fixed": "Fixed exam length",
       "spec_minutes": "{n} minutes",
@@ -653,22 +653,22 @@
       "simulation_for": "{cert} Exam Simulation",
       "rules_title": "Exam Rules",
       "rule_drawn": "{count} questions drawn proportionally from all {domains} exam domains",
-      "rule_timer": "{minutes} minutes to complete — the timer counts down from the moment you start",
-      "rule_no_feedback": "No answer feedback during the exam — results are shown only after submission",
+      "rule_timer": "{minutes} minutes to complete, the timer counts down from the moment you start",
+      "rule_no_feedback": "No answer feedback during the exam, results are shown only after submission",
       "rule_flag": "You can flag questions for review and navigate freely between all questions",
       "rule_change": "You can change any answer before submitting",
       "rule_pass": "{score}% or higher is a passing score, matching the official exam threshold",
-      "allocation_title": "Domain Allocation — {count} Questions",
+      "allocation_title": "Domain Allocation, {count} Questions",
       "qs": "{n} Qs",
       "needed_available": "{needed} needed · {available} available",
       "gap_note_label": "Note:",
       "gap_note": "Some sub-domains have fewer questions than the ideal allocation. Available questions will be used and the exam will have slightly fewer than {count} questions for those sub-domains.",
-      "begin": "Begin Exam — {time}",
+      "begin": "Begin Exam, {time}",
       "status": "{answered} answered · {remaining} remaining · {flagged} flagged",
       "submit": "Submit",
       "flag": "Flag for review",
       "flagged": "Flagged",
-      "no_reveal": "Answers are not revealed during the exam — submit to see results.",
+      "no_reveal": "Answers are not revealed during the exam, submit to see results.",
       "navigator": "Question Navigator",
       "answered": "Answered",
       "unanswered": "Unanswered",
@@ -687,7 +687,7 @@
       "submit_now": "Submit Now",
       "pass": "PASS",
       "fail": "FAIL",
-      "time_expired": "Time expired — auto-submitted",
+      "time_expired": "Time expired, auto-submitted",
       "passing_line": "Passing score: {score}% · Official {cert} threshold",
       "review_all": "Review All Answers",
       "retake": "Retake Exam",
@@ -747,9 +747,9 @@
       "review_answers": "Review Answers",
       "rating_excellent": "Excellent! Ready to certify 🚀",
       "rating_great": "Great job! Keep it up 💪",
-      "rating_good": "Good effort — review weak areas",
-      "rating_keep": "Keep studying — you'll get there!",
-      "not_scored": "Not answered — not counted in your score"
+      "rating_good": "Good effort, review weak areas",
+      "rating_keep": "Keep studying, you'll get there!",
+      "not_scored": "Not answered, not counted in your score"
     },
     "certificate": {
       "cta": "Get certificate",
@@ -768,7 +768,7 @@
     },
     "history": {
       "title": "Attempt History",
-      "empty": "No attempts yet — complete a quiz to build your history.",
+      "empty": "No attempts yet, complete a quiz to build your history.",
       "attempts_one": "1 attempt",
       "attempts_other": "{n} attempts",
       "best": "Best",
@@ -783,7 +783,7 @@
     },
     "lesson": {
       "start": "Start Exam",
-      "start_hint": "Answer every question — you can navigate freely and the timer counts down.",
+      "start_hint": "Answer every question, you can navigate freely and the timer counts down.",
       "time_remaining": "Time remaining",
       "submit": "Submit Exam",
       "confirm_title": "Submit exam?",
@@ -798,7 +798,7 @@
     "certificates": {
       "title": "My certificates",
       "description": "Certifications earned by passing mock exams",
-      "empty": "No certificates yet — pass a mock exam to earn one",
+      "empty": "No certificates yet, pass a mock exam to earn one",
       "count": "{n} certificates"
     }
   },
@@ -1079,7 +1079,7 @@
       "title": "Decision Matrix",
       "subtitle": "Evaluate options against weighted criteria to make better decisions",
       "decision_title": "Decision Title",
-      "scale": "Scale (1–{n})",
+      "scale": "Scale (1, {n})",
       "options": "Options",
       "score": "Score",
       "rank": "Rank",
@@ -1511,28 +1511,28 @@
       "title": "Matching Question",
       "drop_here": "Drop here",
       "drag_from_here": "Drag answers from here:",
-      "incorrect_feedback": "Some matches are wrong — red slots have incorrect answers."
+      "incorrect_feedback": "Some matches are wrong, red slots have incorrect answers."
     },
     "fill_blank": {
       "title": "Fill in the Blanks",
       "blank_placeholder": "blank",
       "blank_aria": "Item {i}, blank {j}",
-      "word_bank_hint": "Word Bank — drag words into the blanks above:",
-      "feedback_perfect": "Perfect — all blanks filled correctly!",
-      "feedback_incorrect_items": "Some blanks are wrong — {count} of {total} items correct.",
-      "feedback_incorrect_blanks": "Some blanks are wrong — red blanks have incorrect answers."
+      "word_bank_hint": "Word Bank, drag words into the blanks above:",
+      "feedback_perfect": "Perfect, all blanks filled correctly!",
+      "feedback_incorrect_items": "Some blanks are wrong, {count} of {total} items correct.",
+      "feedback_incorrect_blanks": "Some blanks are wrong, red blanks have incorrect answers."
     },
     "drag_order": {
       "title": "Ordering Question",
-      "incorrect_feedback": "Not quite — red items are in the wrong position."
+      "incorrect_feedback": "Not quite, red items are in the wrong position."
     },
     "bucket_drop": {
       "title": "Sort into Buckets",
-      "instruction": "Items — click an item, then click a bucket to place it:",
+      "instruction": "Items, click an item, then click a bucket to place it:",
       "empty_pool": "All items placed.",
-      "empty_bucket": "Empty — click to place the selected item",
+      "empty_bucket": "Empty, click to place the selected item",
       "bucket_aria": "Bucket: {label}",
-      "score_feedback": "{count} / {total} correct — red items are in the wrong bucket or still unplaced."
+      "score_feedback": "{count} / {total} correct, red items are in the wrong bucket or still unplaced."
     }
   },
   "languages": {
@@ -1546,7 +1546,7 @@
       "title": "Language Practice",
       "text": "Flashcards and translation quizzes for 4 language pairs with progress tracking."
     },
-    "redirect_fallback": "This activity has moved — continue to the Languages section",
+    "redirect_fallback": "This activity has moved, continue to the Languages section",
     "filters": {
       "kind": "Type",
       "all": "All",
@@ -1566,7 +1566,7 @@
     },
     "tracks": {
       "title": "Language courses",
-      "coming_soon": "Coming soon — new language tracks are on the way."
+      "coming_soon": "Coming soon, new language tracks are on the way."
     },
     "matching": {
       "cards_count": "{n} cards",
@@ -1667,7 +1667,7 @@
       "result": "{correct}/{total} correct",
       "missed": "Items to review",
       "all_done": "All questions answered",
-      "suggest_complete": "Nice work — mark the lesson as complete",
+      "suggest_complete": "Nice work, mark the lesson as complete",
       "unanswered": "{n} remaining"
     },
     "listen": "Listen to this lesson",
@@ -1696,7 +1696,7 @@
     "level_up": "Level up! You reached level {n}",
     "badges": {
       "title": "Badges",
-      "empty": "No badges yet — complete lessons to earn some",
+      "empty": "No badges yet, complete lessons to earn some",
       "awarded": "Badge earned: {name}",
       "first_lesson": "First steps",
       "first_lesson_desc": "Complete your first lesson",

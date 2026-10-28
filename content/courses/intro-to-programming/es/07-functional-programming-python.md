@@ -8,14 +8,14 @@ difficulty: "intermediate"
 
 # Introducción a la Programación Funcional con Python
 
-Hasta ahora has escrito código imperativo — instrucciones paso a paso que cambian estado. La programación funcional es un paradigma diferente: enfatiza funciones puras, inmutabilidad y transformación de datos a través de pipelines.
+Hasta ahora has escrito código imperativo: instrucciones paso a paso que cambian estado. La programación funcional es un paradigma diferente: enfatiza funciones puras, inmutabilidad y transformación de datos a través de pipelines.
 
 ## ¿Qué es la Programación Funcional?
 
 La programación funcional trata la computación como la evaluación de funciones matemáticas. Principios clave:
 
 - **Funciones puras**: Misma entrada siempre produce la misma salida, sin efectos secundarios
-- **Inmutabilidad**: Los datos nunca se modifican — se crean nuevos datos
+- **Inmutabilidad**: Los datos nunca se modifican: se crean nuevos datos
 - **Composición de funciones**: Construye operaciones complejas combinando funciones simples
 
 ## Funciones Puras

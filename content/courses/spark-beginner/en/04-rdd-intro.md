@@ -184,7 +184,7 @@ print(rdd.lookup("Alice"))     # [34]
 ```
 
 > [!WARNING]
-> Key-value operations like `reduceByKey` and `groupByKey` trigger a **shuffle** — data is redistributed across partitions by key. Shuffles are expensive and should be minimized.
+> Key-value operations like `reduceByKey` and `groupByKey` trigger a **shuffle**: data is redistributed across partitions by key. Shuffles are expensive and should be minimized.
 
 ## RDD Persistence
 
@@ -211,7 +211,7 @@ rdd_persisted = rdd.persist(StorageLevel.MEMORY_AND_DISK)
 
 1. RDDs are immutable, partitioned, and fault-tolerant collections
 2. Create RDDs via `parallelize()` (collections) or `textFile()` (files)
-3. Transformations are lazy — nothing happens until an action
+3. Transformations are lazy: nothing happens until an action
 4. Lineage tracks how to recompute any lost partition
 5. Key-value RDDs enable shuffle-based operations
 6. Persistence (cache/persist) avoids recomputation

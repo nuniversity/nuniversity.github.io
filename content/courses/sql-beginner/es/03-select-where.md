@@ -81,11 +81,11 @@ WHERE (status = 'pending' OR status = 'shipped')
 > [!NOTE]
 > `AND` se evalúa antes que `OR`. Usa siempre paréntesis para hacer tu intención clara y evitar errores sutiles.
 
-## LIKE — Coincidencia de Patrones
+## LIKE: Coincidencia de Patrones
 
 `LIKE` compara strings usando dos comodines:
-- `%` — coincide con cualquier secuencia de caracteres
-- `_` — coincide exactamente con un carácter
+- `%`: coincide con cualquier secuencia de caracteres
+- `_`: coincide exactamente con un carácter
 
 ```sql
 -- Empieza con "A"
@@ -118,7 +118,7 @@ WHERE department = 'Engineering' AND salary > 85000;
 -- Devuelve: Alice Johnson (95000), Carol Chen (88000)
 ```
 
-## IN — Coincidir con una Lista
+## IN: Coincidir con una Lista
 
 `IN` es una abreviatura para múltiples condiciones `OR`:
 
@@ -141,7 +141,7 @@ SELECT name FROM users
 WHERE status NOT IN ('banned', 'suspended');
 ```
 
-## BETWEEN — Coincidencia de Rango
+## BETWEEN: Coincidencia de Rango
 
 `BETWEEN` es inclusivo en ambos extremos:
 
@@ -163,7 +163,7 @@ WHERE order_date BETWEEN '2024-01-01' AND '2024-01-31';
 ```
 
 > [!SUCCESS]
-> `BETWEEN` es más limpio que `>= AND <=` para rangos inclusivos. Para rangos de fechas, recuerda que `BETWEEN` incluye la medianoche de la fecha final — usa `>= 'inicio' AND < 'fin + 1 día'` para límites exactos.
+> `BETWEEN` es más limpio que `>= AND <=` para rangos inclusivos. Para rangos de fechas, recuerda que `BETWEEN` incluye la medianoche de la fecha final: usa `>= 'inicio' AND < 'fin + 1 día'` para límites exactos.
 
 ## Uniendo Todo
 
@@ -193,7 +193,7 @@ ORDER BY stock ASC;
 
 ## Manejo de NULL
 
-`NULL` significa **desconocido** — no es cero, ni string vacío.
+`NULL` significa **desconocido**: no es cero, ni string vacío.
 
 ```sql
 -- Las comparaciones NULL requieren IS NULL, no = NULL

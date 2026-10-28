@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Operators and Expressions
 
-Operators perform operations on values and variables. Combined with operands, they form expressions — the building blocks of Python programs.
+Operators perform operations on values and variables. Combined with operands, they form expressions: the building blocks of Python programs.
 
 ## Arithmetic Operators
 
@@ -142,7 +142,7 @@ print(f"{number} is {'even' if is_even else 'odd'}")
 
 1. What does `17 % 5` evaluate to?
 2. What's the result of `10 + 2 * 3`?
-3. Fix this: `x = 10; if x = 5:` — what's wrong?
+3. Fix this: `x = 10; if x = 5:`: what's wrong?
 4. Write an expression that checks if a number is between 10 and 20 (inclusive).
 5. What does `(3 + 2) * 4 // 2` evaluate to?
 6. True or False: `"10" == 10` in Python?

@@ -18,8 +18,8 @@ O desempenho no Redshift é determinado por três fatores principais: (1) como o
 
 O Redshift armazena dados de tabelas em **blocos de colunas** distribuídos através de **slices** nos nós de computação. Duas propriedades governam o posicionamento físico:
 
-- **Distribution style** — para qual slice cada linha vai (afeta movimentação de dados durante joins)
-- **Sort key** — a ordenação física das linhas no disco (afeta varreduras com restrição de faixa)
+- **Distribution style**: para qual slice cada linha vai (afeta movimentação de dados durante joins)
+- **Sort key**: a ordenação física das linhas no disco (afeta varreduras com restrição de faixa)
 
 ```mermaid
 flowchart TD
@@ -43,7 +43,7 @@ Cada **slice** é uma fatia de CPU e memória que processa uma parte dos dados e
 
 O estilo de distribuição controla onde o Redshift coloca as linhas entre os slices. Escolher o estilo errado causa **redistribuição de dados em tempo de consulta**, que é o assassino de performance mais comum no Redshift.
 
-Quando ocorre a redistribuição? Basicamente, quando duas tabelas sendo joinadas não estão co-localizadas (isto é, as linhas correspondentes estão em slices diferentes). O Redshift precisa então mover dados entre os nós para completar o join — uma operação cara.
+Quando ocorre a redistribuição? Basicamente, quando duas tabelas sendo joinadas não estão co-localizadas (isto é, as linhas correspondentes estão em slices diferentes). O Redshift precisa então mover dados entre os nós para completar o join: uma operação cara.
 
 | Estilo | Configuração dbt | Comportamento | Melhor para |
 | :--- | :--- | :--- | :--- |
@@ -84,7 +84,7 @@ models:
 ```
 
 [!TIP]
-Quando `fct_orders` e `dim_customers` são consultadas juntas, defina `fct_orders.dist = customer_id` e `dim_customers.dist = all`. O Redshift pode então fazer o join sem redistribuir nenhuma linha — um **join co-localizado**. Essa é a otimização mais impactante que você pode fazer.
+Quando `fct_orders` e `dim_customers` são consultadas juntas, defina `fct_orders.dist = customer_id` e `dim_customers.dist = all`. O Redshift pode então fazer o join sem redistribuir nenhuma linha: um **join co-localizado**. Essa é a otimização mais impactante que você pode fazer.
 
 ---
 
@@ -96,7 +96,7 @@ Como as zone maps funcionam: para cada bloco de 1MB no disco, o Redshift armazen
 
 ### Compound Sort Key
 
-Linhas são ordenadas primeiramente pela primeira coluna da chave, depois pela segunda, etc. — como um índice composto.
+Linhas são ordenadas primeiramente pela primeira coluna da chave, depois pela segunda, etc.: como um índice composto.
 
 ```sql
 {{ config(
@@ -255,7 +255,7 @@ models:
       +backup: true     -- explícito; este é o padrão
 ```
 
-Esta é uma maneira simples e eficaz de reduzir custos de armazenamento de snapshot. Tabelas staging e intermediate são derivadas de fontes brutas e podem ser completamente reconstruídas — não há risco de perda de dados ao excluí-las dos snapshots.
+Esta é uma maneira simples e eficaz de reduzir custos de armazenamento de snapshot. Tabelas staging e intermediate são derivadas de fontes brutas e podem ser completamente reconstruídas: não há risco de perda de dados ao excluí-las dos snapshots.
 
 ---
 
@@ -367,7 +367,7 @@ Redshift Serverless **recupera armazenamento automaticamente** e não requer `VA
     "Ambas as tabelas: dist=auto"
   ],
   "correct": 1,
-  "explanation": "Definir fct_orders com distribuição KEY em customer_id e dim_customers com distribuição ALL cria um join co-localizado — o Redshift pode fazer o join sem nenhuma redistribuição de dados."
+  "explanation": "Definir fct_orders com distribuição KEY em customer_id e dim_customers com distribuição ALL cria um join co-localizado, o Redshift pode fazer o join sem nenhuma redistribuição de dados."
 }
 ```
 
@@ -380,7 +380,7 @@ Redshift Serverless **recupera armazenamento automaticamente** e não requer `VA
     "sort_type: interleaved, sort: [event_date, user_id]",
     "sort_type: compound, sort: [event_date]",
     "sort_type: auto",
-    "Nenhuma sort key — Redshift lida com isso automaticamente"
+    "Nenhuma sort key: Redshift lida com isso automaticamente"
   ],
   "correct": 1,
   "explanation": "Uma sort key compound com event_date como primeira coluna permite que o Redshift use zone maps para pular blocos de disco fora do intervalo de datas, reduzindo drasticamente o I/O."
@@ -426,7 +426,7 @@ Redshift Serverless **recupera armazenamento automaticamente** e não requer `VA
   "question": "Quando o Redshift Serverless exige que você execute VACUUM manualmente?",
   "options": [
     "Após toda execução dbt",
-    "Nunca — Redshift Serverless recupera armazenamento automaticamente",
+    "Nunca: Redshift Serverless recupera armazenamento automaticamente",
     "Apenas após executar comandos COPY",
     "Apenas para tabelas com sort keys interleaved"
   ],
@@ -443,7 +443,7 @@ Redshift Serverless **recupera armazenamento automaticamente** e não requer `VA
   "options": [
     "O padrão do projeto sempre vence",
     "O override no bloco config do modelo vence",
-    "Ambas são mescladas — ambos os tipos de sort são aplicados",
+    "Ambas são mescladas: ambos os tipos de sort são aplicados",
     "O arquivo modificado mais recentemente vence"
   ],
   "correct": 1,
@@ -456,10 +456,10 @@ Redshift Serverless **recupera armazenamento automaticamente** e não requer `VA
 [!SUCCESS]
 ### Principais Conclusões
 
-- O estilo de distribuição controla o posicionamento dos dados entre slices. Escolhas erradas causam redistribuição cara em runtime. Use KEY + ALL para joins fato–dimensão comuns.
+- O estilo de distribuição controla o posicionamento dos dados entre slices. Escolhas erradas causam redistribuição cara em runtime. Use KEY + ALL para joins fato: dimensão comuns.
 - Sort keys compound são a escolha mais comum; coloque sua coluna de filtro primária primeiro. Reserve interleaved para padrões de filtro multidimensionais específicos.
 - `sort_type: auto` é um padrão global seguro; faça override apenas onde você tem padrões de consulta fortes e estáveis.
 - Desabilite `backup` em tabelas staging e intermediate para reduzir custos de armazenamento de snapshot.
-- Redshift Serverless elimina a necessidade de VACUUM manual — uma vantagem operacional chave.
+- Redshift Serverless elimina a necessidade de VACUUM manual: uma vantagem operacional chave.
 - Use macros post-hook para automatizar `VACUUM` e `ANALYZE` em clusters provisionados.
-- Blocos config no nível do modelo sobrescrevem schema.yml, que sobrescreve dbt_project.yml — o mais específico vence.
+- Blocos config no nível do modelo sobrescrevem schema.yml, que sobrescreve dbt_project.yml, o mais específico vence.

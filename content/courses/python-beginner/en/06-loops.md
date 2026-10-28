@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Loops (for and while)
 
-Loops let you repeat code multiple times — essential for processing data, automating tasks, and building efficient programs.
+Loops let you repeat code multiple times: essential for processing data, automating tasks, and building efficient programs.
 
 ## The for Loop
 
@@ -66,11 +66,11 @@ print("Access granted!")
 ```
 
 > [!WARNING]
-> Always ensure your while loop condition will eventually become False — otherwise you create an infinite loop!
+> Always ensure your while loop condition will eventually become False: otherwise you create an infinite loop!
 
 ## break and continue
 
-### break — Exit the loop entirely
+### break: Exit the loop entirely
 ```python
 for i in range(100):
     if i == 5:
@@ -79,7 +79,7 @@ for i in range(100):
 # Prints: 0 1 2 3 4
 ```
 
-### continue — Skip to the next iteration
+### continue: Skip to the next iteration
 ```python
 for i in range(10):
     if i % 2 == 0:
@@ -117,7 +117,7 @@ for n in range(2, 10):
         print(f"{n} is prime")
 ```
 
-## enumerate — Loop with Index
+## enumerate: Loop with Index
 
 ```python
 colors = ["red", "green", "blue"]
@@ -126,7 +126,7 @@ for index, color in enumerate(colors):
 # 0: red, 1: green, 2: blue
 ```
 
-## zip — Loop Multiple Lists Together
+## zip: Loop Multiple Lists Together
 
 ```python
 names = ["Alice", "Bob", "Charlie"]

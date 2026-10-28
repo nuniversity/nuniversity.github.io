@@ -129,7 +129,7 @@ WHERE e.salary > (
 | Tipo de Subconsulta | Ejecutada | Rendimiento |
 |---------------|----------|-------------|
 | No correlacionada | Una vez | Rápido |
-| Correlacionada | Una vez por fila externa | Más lento — cuidado con tablas grandes |
+| Correlacionada | Una vez por fila externa | Más lento: cuidado con tablas grandes |
 
 ```sql
 -- Encontrar productos cuyo precio está por encima del promedio de su categoría
@@ -160,7 +160,7 @@ Para cada uno de los 1000 empleados:
 
 ## EXISTS y NOT EXISTS
 
-EXISTS devuelve TRUE si la subconsulta produce alguna fila. No le importan los valores — solo la existencia de filas.
+EXISTS devuelve TRUE si la subconsulta produce alguna fila. No le importan los valores: solo la existencia de filas.
 
 ```sql
 -- Encontrar departamentos que tienen al menos un empleado
@@ -183,7 +183,7 @@ WHERE NOT EXISTS (
 ```
 
 > [!SUCCESS]
-> Usa siempre `SELECT 1` (o `SELECT *`) en subconsultas EXISTS — las columnas reales no importan. La base de datos solo verifica la existencia de filas.
+> Usa siempre `SELECT 1` (o `SELECT *`) en subconsultas EXISTS: las columnas reales no importan. La base de datos solo verifica la existencia de filas.
 
 ### EXISTS vs IN
 

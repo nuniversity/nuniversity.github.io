@@ -26,7 +26,7 @@ Entender essas diferenças é fundamental porque a escolha errada pode levar a:
 | View | `view` | Nenhum (metadados apenas) | Sempre atual | Não (quebra no drop+cascade) | bind config |
 | Late-binding view | `view` + `bind: false` | Nenhum | Sempre atual | **Sim** | Apenas Redshift |
 | Incremental | `incremental` | Atualizações parciais | Atualizado incrementalmente | Parcial | Todas as estratégias |
-| Ephemeral | `ephemeral` | Nenhum (CTE) | N/A — inline | N/A | Nenhum |
+| Ephemeral | `ephemeral` | Nenhum (CTE) | N/A: inline | N/A | Nenhum |
 | Materialized view | `materialized_view` | Pré-computado | Auto ou manual | Sim (DROP CASCADE) | sort/dist/auto_refresh/backup |
 
 ---
@@ -79,13 +79,13 @@ models:
 ```
 
 [!IMPORTANT]
-Sempre use `bind: false` (late-binding views) em ambientes de produção no Redshift. Views regulares quebram quando tabelas upstream são removidas durante um full refresh — uma operação muito comum no dbt. Esta é a principal razão para preferir late-binding views para a materialização `view` no Redshift.
+Sempre use `bind: false` (late-binding views) em ambientes de produção no Redshift. Views regulares quebram quando tabelas upstream são removidas durante um full refresh: uma operação muito comum no dbt. Esta é a principal razão para preferir late-binding views para a materialização `view` no Redshift.
 
 ---
 
 ## Materialized Views do Redshift
 
-Materialized views do Redshift armazenam resultados de consultas pré-computados em disco e podem ser atualizadas automaticamente ou sob demanda. Elas são distintas da estratégia `incremental` do dbt — são um recurso nativo do Redshift.
+Materialized views do Redshift armazenam resultados de consultas pré-computados em disco e podem ser atualizadas automaticamente ou sob demanda. Elas são distintas da estratégia `incremental` do dbt: são um recurso nativo do Redshift.
 
 ### Quando usar materialized views
 
@@ -93,7 +93,7 @@ Materialized views do Redshift armazenam resultados de consultas pré-computados
 - Consultas Redshift Spectrum sobre dados no S3 que devem ser pré-computados
 - Modelos onde a latência de consulta é crítica mas a reconstrução completa é muito lenta
 
-Diferentemente de tabelas, as materialized views não precisam ser totalmente recriadas quando os dados de base mudam — elas podem ser atualizadas incrementalmente. Diferentemente de views, os resultados são armazenados em disco, então as consultas são muito mais rápidas.
+Diferentemente de tabelas, as materialized views não precisam ser totalmente recriadas quando os dados de base mudam: elas podem ser atualizadas incrementalmente. Diferentemente de views, os resultados são armazenados em disco, então as consultas são muito mais rápidas.
 
 ### Configuração no dbt
 
@@ -201,7 +201,7 @@ where region = 'EMEA'
 
 ---
 
-## Modelos Ephemeral — Quando Usar e Quando Evitar
+## Modelos Ephemeral: Quando Usar e Quando Evitar
 
 Modelos ephemeral injetam seu SQL como uma CTE nas consultas downstream. Eles **não têm armazenamento** e são computados inline no momento da consulta.
 
@@ -220,7 +220,7 @@ left join {{ ref('stg_customers') }} c using (customer_id)
 Modelos downstream que usam `ref('int_orders_enriched')` vão inlinar esta CTE automaticamente.
 
 **Use ephemeral quando:**
-- A transformação é um join leve ou renomeação de coluna usado em apenas 1–2 modelos downstream
+- A transformação é um join leve ou renomeação de coluna usado em apenas 1 to 2 modelos downstream
 - Você quer evitar materializar resultados intermediários por razões de custo
 
 **Evite ephemeral quando:**
@@ -335,12 +335,12 @@ models:
   "question": "Um modelo ephemeral é referenciado por 8 modelos downstream diferentes. Qual é o risco de performance?",
   "options": [
     "Modelos ephemeral não podem ser referenciados por mais de 3 modelos",
-    "A CTE ephemeral é inlinada e re-executada uma vez por modelo downstream — 8 vezes no total",
+    "A CTE ephemeral é inlinada e re-executada uma vez por modelo downstream: 8 vezes no total",
     "O modelo ephemeral é cacheado após a primeira execução",
     "dbt automaticamente converte para tabela se for referenciado mais de 5 vezes"
   ],
   "correct": 1,
-  "explanation": "Modelos ephemeral são CTEs inlinadas no SQL compilado de cada modelo downstream. O Redshift executa a CTE para cada modelo downstream independentemente — não há cache."
+  "explanation": "Modelos ephemeral são CTEs inlinadas no SQL compilado de cada modelo downstream. O Redshift executa a CTE para cada modelo downstream independentemente: não há cache."
 }
 ```
 
@@ -368,7 +368,7 @@ models:
   "options": [
     "bind: true",
     "dist: all",
-    "bind: false — late-binding views são necessárias para compatibilidade com tabelas externas do Spectrum",
+    "bind: false: late-binding views são necessárias para compatibilidade com tabelas externas do Spectrum",
     "auto_refresh: true"
   ],
   "correct": 2,
@@ -382,7 +382,7 @@ models:
   "type": "multiple-choice",
   "question": "Quanto pode ser a latência do auto-refresh para materialized views no Redshift Serverless?",
   "options": [
-    "Imediata — sem latência",
+    "Imediata: sem latência",
     "Até 5 minutos",
     "Até 1 hora",
     "Até 24 horas"
@@ -398,8 +398,8 @@ models:
 ### Principais Conclusões
 
 - Sempre use late-binding views (`bind: false`) em ambientes de produção no Redshift para sobreviver a operações DROP CASCADE upstream.
-- Materialized views do Redshift com `auto_refresh=true` são a melhor escolha para agregações voltadas para BI — armazenamento pré-computado, frescor automático, sem execuções dbt extras.
+- Materialized views do Redshift com `auto_refresh=true` são a melhor escolha para agregações voltadas para BI: armazenamento pré-computado, frescor automático, sem execuções dbt extras.
 - Use `on_configuration_change: fail` em pipelines CI para detectar desvios de configuração de materialized views precocemente.
-- Modelos ephemeral são CTEs inlinadas por modelo downstream — evite-os quando referenciados por muitos modelos.
+- Modelos ephemeral são CTEs inlinadas por modelo downstream: evite-os quando referenciados por muitos modelos.
 - O padrão `post_hook` com `REFRESH MATERIALIZED VIEW` garante frescor mais rigoroso que a latência de 5 minutos do auto-refresh.
 - Organize seu projeto em camadas: staging → late-binding views, intermediate → ephemeral ou views, marts/facts → tabelas, reporting → materialized views.

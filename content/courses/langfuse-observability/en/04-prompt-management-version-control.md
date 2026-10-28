@@ -8,7 +8,7 @@ duration: "30 min"
 
 # Prompt Management and Version Control
 
-Prompt engineering is iterative. LangFuse provides a centralised prompt registry with version control, deployment labels, and SDK-based fetching — so your prompts are always in sync across environments.
+Prompt engineering is iterative. LangFuse provides a centralised prompt registry with version control, deployment labels, and SDK-based fetching, so your prompts are always in sync across environments.
 
 ---
 

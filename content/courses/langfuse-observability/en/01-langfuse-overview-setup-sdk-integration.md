@@ -18,7 +18,7 @@ This lesson covers the fundamentals: what LangFuse offers, the difference betwee
 
 LangFuse helps teams:
 
-- **Trace** every step of an LLM call — from prompt construction to model response.
+- **Trace** every step of an LLM call: from prompt construction to model response.
 - **Evaluate** outputs with manual scores, LLM-as-judge, or external metrics.
 - **Manage prompts** with version control and deployment workflows.
 - **Monitor costs, latency, and error rates** in real-time dashboards.
@@ -91,7 +91,7 @@ Data is batched and flushed periodically (default every 1 second) to minimise ne
 
 | Feature | Self-Hosted (OSS) | LangFuse Cloud |
 |---|---|---|
-| Setup effort | High — requires Docker, PostgreSQL, and networking | Low — sign up and get a project |
+| Setup effort | High, requires Docker, PostgreSQL, and networking | Low, sign up and get a project |
 | Data residency | Full control | Managed by LangFuse |
 | Maintenance | You handle upgrades, backups, scaling | Handled by LangFuse |
 | Cost | Infrastructure cost only | Free tier + paid plans |
@@ -114,7 +114,7 @@ Data is batched and flushed periodically (default every 1 second) to minimise ne
 4. Navigate to **Settings → API Keys**.
 5. Generate a **public key** and a **secret key** (also called `secret_key`).
 
-Keep the secret key secure — it authorizes writes to your project.
+Keep the secret key secure; it authorizes writes to your project.
 
 > [!IMPORTANT]
 > Rotate your secret keys periodically. LangFuse Cloud allows you to generate multiple key pairs and revoke old ones. Set up a quarterly rotation reminder. If a key is compromised, revoke it immediately from **Settings → API Keys**.
@@ -140,7 +140,7 @@ The `langfuse` package provides the trace client. The `langchain-openai` package
 | REST API | HTTP | ✅ Always available | Any language can send traces via `POST /api/public/traces` |
 
 > [!NOTE]
-> This course focuses on the Python SDK, but the concepts are identical across all SDKs. The API contract is the same — each SDK is a thin wrapper around the REST endpoints.
+> This course focuses on the Python SDK, but the concepts are identical across all SDKs. The API contract is the same: each SDK is a thin wrapper around the REST endpoints.
 
 ---
 
@@ -175,8 +175,8 @@ print("LangFuse initialized:", langfuse.auth_check())
 
 | Environment Variable | Required | Default | Description |
 |---|---|---|---|
-| `LANGFUSE_SECRET_KEY` | ✅ Yes | — | Secret key for API authentication |
-| `LANGFUSE_PUBLIC_KEY` | ✅ Yes | — | Public key for API authentication |
+| `LANGFUSE_SECRET_KEY` | ✅ Yes |: | Secret key for API authentication |
+| `LANGFUSE_PUBLIC_KEY` | ✅ Yes |: | Public key for API authentication |
 | `LANGFUSE_HOST` | ❌ No | `https://cloud.langfuse.com` | Self-hosted instance URL |
 | `LANGFUSE_DEBUG` | ❌ No | `false` | Enable debug HTTP logging |
 | `LANGFUSE_FLUSH_INTERVAL` | ❌ No | `1` | Flush interval in seconds |
@@ -392,7 +392,7 @@ print("Trace ID:", trace.id)
   "question": "An LLM call in a FastAPI route handler raised an unexpected exception. Your LangFuse trace is never closed. How should you handle this?",
   "options": [
     "Wrap the trace in a try/finally block and call trace.end() or span.end(level='ERROR') in the except clause",
-    "Ignore it — LangFuse auto-closes orphaned traces",
+    "Ignore it: LangFuse auto-closes orphaned traces",
     "Restart the LangFuse SDK after every exception",
     "Set a global exception hook that sends a dummy trace"
   ],

@@ -94,7 +94,7 @@ print(result["message"])  # ¡Hola, LangGraph!
 ```
 
 [!SUCCESS]
-¡Has construido tu primer grafo LangGraph! Este patrón — definir estado, añadir nodos, conectar aristas, compilar e invocar — es la base de todo lo que construyas.
+¡Has construido tu primer grafo LangGraph! Este patrón, definir estado, añadir nodos, conectar aristas, compilar e invocar, es la base de todo lo que construyas.
 
 ---
 
@@ -191,7 +191,7 @@ En las próximas lecciones aprenderás:
     "Se reinicia después de cada nodo"
   ],
   "correct": 1,
-  "explanation": "El State es el centro de LangGraph — un diccionario compartido que cada nodo lee y modifica, fluyendo a través de todo el grafo."
+  "explanation": "El State es el centro de LangGraph: un diccionario compartido que cada nodo lee y modifica, fluyendo a través de todo el grafo."
 }
 ```
 

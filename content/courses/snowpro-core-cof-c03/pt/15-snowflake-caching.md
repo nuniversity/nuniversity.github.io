@@ -1,12 +1,12 @@
 ---
-title: "Domínio 4.3 — Cache do Snowflake"
+title: "Domínio 4.3, Cache do Snowflake"
 description: "Domine o sistema de cache de três camadas do Snowflake: Query Result Cache (camada Cloud Services), Metadata Cache e Warehouse Cache (disco local). Entenda quando cada cache é usado e como aproveitá-los."
 order: 15
 difficulty: intermediate
 duration: "45 min"
 ---
 
-# Domínio 4.3 — Cache do Snowflake
+# Domínio 4.3: Cache do Snowflake
 
 ## Peso no Exame
 
@@ -37,7 +37,7 @@ flowchart TD
 
 ## Cache 1: Query Result Cache (Cache de Resultados de Queries)
 
-O **Query Result Cache** armazena o **conjunto de resultados completo** de uma query e o retorna instantaneamente se a mesma query for submetida novamente — **sem executar a query** e **sem usar o virtual warehouse**.
+O **Query Result Cache** armazena o **conjunto de resultados completo** de uma query e o retorna instantaneamente se a mesma query for submetida novamente: **sem executar a query** e **sem usar o virtual warehouse**.
 
 ### Como Funciona
 
@@ -113,7 +113,7 @@ O **Metadata Cache** armazena **estatísticas de tabelas e metadados de objetos*
 
 ### Queries Somente de Metadados (Sem Warehouse Necessário)
 
-Essas queries são respondidas inteiramente pelo cache de metadados — sem virtual warehouse necessário:
+Essas queries são respondidas inteiramente pelo cache de metadados: sem virtual warehouse necessário:
 
 ```sql
 -- Contagem de linhas (somente metadados)
@@ -132,7 +132,7 @@ WHERE TABLE_NAME = 'PEDIDOS';
 ```
 
 > [!NOTE]
-> `COUNT(*)` em uma tabela sem cláusula WHERE é respondido pelo cache de metadados — **sem crédito de warehouse consumido**. Esta é uma pegadinha comum no exame: `COUNT(*)` = gratuito; `COUNT(nome_coluna)` com verificações de não-nulo pode requerer computação.
+> `COUNT(*)` em uma tabela sem cláusula WHERE é respondido pelo cache de metadados: **sem crédito de warehouse consumido**. Esta é uma pegadinha comum no exame: `COUNT(*)` = gratuito; `COUNT(nome_coluna)` com verificações de não-nulo pode requerer computação.
 
 ### Como o Metadata Cache Alimenta o Pruning
 
@@ -152,7 +152,7 @@ SELECT sum(valor) FROM pedidos WHERE data_pedido BETWEEN '2025-01-01' AND '2025-
 
 ---
 
-## Cache 3: Warehouse (Local Disk) Cache — Cache de Disco Local do Warehouse
+## Cache 3: Warehouse (Local Disk) Cache: Cache de Disco Local do Warehouse
 
 O **Warehouse Cache** (também chamado de **cache de disco local** ou **cache de dados**) armazena **micro-partições acessadas recentemente** no **SSD dos nós do virtual warehouse**.
 
@@ -160,7 +160,7 @@ O **Warehouse Cache** (também chamado de **cache de disco local** ou **cache de
 
 - Quando uma micro-partição é lida do armazenamento, ela é armazenada em cache no SSD local do warehouse
 - Queries subsequentes que precisam da mesma micro-partição leem do **cache local** em vez do armazenamento em nuvem → muito mais rápido
-- O cache vive no warehouse — **quando o warehouse é suspenso, o cache é perdido**
+- O cache vive no warehouse: **quando o warehouse é suspenso, o cache é perdido**
 
 ### Implicações
 
@@ -190,7 +190,7 @@ ALTER WAREHOUSE WH_BI SET AUTO_SUSPEND = 600;  -- 10 minutos
 ### Multi-Cluster Warehouses e Cache
 
 > [!NOTE]
-> Cada cluster em um multi-cluster warehouse mantém seu **próprio cache separado**. Dados em cache no Cluster 1 não estão disponíveis para o Cluster 2. É por isso que o roteamento de queries em configurações multi-cluster é importante — rotear queries similares para o mesmo cluster maximiza os cache hits.
+> Cada cluster em um multi-cluster warehouse mantém seu **próprio cache separado**. Dados em cache no Cluster 1 não estão disponíveis para o Cluster 2. É por isso que o roteamento de queries em configurações multi-cluster é importante: rotear queries similares para o mesmo cluster maximiza os cache hits.
 
 ---
 
@@ -218,7 +218,7 @@ Quando uma query é executada, o Snowflake verifica os caches nesta ordem:
 **Q1.** Uma query executada às 10h retorna resultados e o resultado é armazenado em cache. A mesma query exata é executada às 9h do dia seguinte. O que acontece?
 
 - A) O resultado em cache é retornado instantaneamente ✅
-- B) A query é reexecutada porque mais de 24 horas se passaram — 10h tem exatamente 23 horas de diferença às 9h do dia seguinte
+- B) A query é reexecutada porque mais de 24 horas se passaram: 10h tem exatamente 23 horas de diferença às 9h do dia seguinte
 - C) A query falha porque o cache expirou
 - D) O cache de resultados funciona apenas dentro da mesma sessão
 

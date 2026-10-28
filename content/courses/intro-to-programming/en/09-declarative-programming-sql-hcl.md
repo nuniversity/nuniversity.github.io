@@ -1,6 +1,6 @@
 ---
 title: "Declarative Programming: SQL and HCL"
-description: "Learn the declarative paradigm: describe what you want, not how to get it — using SQL and HCL"
+description: "Learn the declarative paradigm: describe what you want, not how to get it, using SQL and HCL"
 order: 9
 duration: "35 minutes"
 difficulty: "intermediate"
@@ -37,7 +37,7 @@ You do not tell the database how to iterate, filter, or collect results. You jus
 
 SQL is the most widely used declarative language. It lets you query, insert, update, and delete data in relational databases.
 
-### SELECT — Retrieving Data
+### SELECT: Retrieving Data
 
 ```sql
 SELECT name, age FROM users;
@@ -45,21 +45,21 @@ SELECT name, age FROM users;
 
 This returns the `name` and `age` columns for every row in the `users` table.
 
-### WHERE — Filtering Rows
+### WHERE: Filtering Rows
 
 ```sql
 SELECT * FROM products
 WHERE price < 50 AND category = 'Electronics';
 ```
 
-### ORDER BY — Sorting
+### ORDER BY: Sorting
 
 ```sql
 SELECT name, salary FROM employees
 ORDER BY salary DESC;
 ```
 
-### JOIN — Combining Tables
+### JOIN: Combining Tables
 
 Data is often spread across multiple tables. `JOIN` connects them:
 
@@ -70,7 +70,7 @@ JOIN customers ON orders.customer_id = customers.id
 WHERE orders.total > 100;
 ```
 
-This query answers: "Which customers placed orders over $100 and what were the amounts?" — without writing a single loop.
+This query answers: "Which customers placed orders over $100 and what were the amounts?": without writing a single loop.
 
 ### INSERT, UPDATE, DELETE
 
@@ -86,7 +86,7 @@ DELETE FROM users WHERE age < 18;
 ```
 
 > [!NOTE]
-> SQL is declarative at the statement level, but behind the scenes the database engine creates an execution plan — it decides the optimal way to run your query.
+> SQL is declarative at the statement level, but behind the scenes the database engine creates an execution plan; it decides the optimal way to run your query.
 
 ## HCL: HashiCorp Configuration Language
 
@@ -106,7 +106,7 @@ resource "aws_instance" "web_server" {
 }
 ```
 
-This defines a virtual machine: the AMI (image), the instance size, and tags. You do not write code to call cloud APIs, handle errors, or check state — Terraform handles all of that.
+This defines a virtual machine: the AMI (image), the instance size, and tags. You do not write code to call cloud APIs, handle errors, or check state: Terraform handles all of that.
 
 ### Variables and Outputs
 
@@ -129,10 +129,10 @@ output "public_ip" {
 ### The Declarative Advantage
 
 With Terraform, your infrastructure configuration is:
-- **Version-controlled** — stored in Git alongside your code
-- **Repeatable** — same config produces same infrastructure
-- **Self-documenting** — the config file describes exactly what exists
-- **Idempotent** — running it again makes no changes if nothing is out of date
+- **Version-controlled**: stored in Git alongside your code
+- **Repeatable**: same config produces same infrastructure
+- **Self-documenting**: the config file describes exactly what exists
+- **Idempotent**: running it again makes no changes if nothing is out of date
 
 ## Practice Exercise
 
@@ -167,4 +167,4 @@ ORDER BY product_count DESC;
 
 ## Next Steps
 
-You have now completed the course. You learned the fundamentals of programming — variables, functions, control flow, and data structures — and explored three major paradigms: functional (Python), compiled (Rust), and declarative (SQL/HCL). Keep practicing and building!
+You have now completed the course. You learned the fundamentals of programming, variables, functions, control flow, and data structures, and explored three major paradigms: functional (Python), compiled (Rust), and declarative (SQL/HCL). Keep practicing and building!

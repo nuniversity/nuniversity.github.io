@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Basic Tools
 
-Tools give LLMs the ability to interact with the outside world — search the web, run calculations, query databases, and more. This lesson covers defining, binding, and executing tools in LangGraph.
+Tools give LLMs the ability to interact with the outside world: search the web, run calculations, query databases, and more. This lesson covers defining, binding, and executing tools in LangGraph.
 
 ---
 
@@ -496,7 +496,7 @@ Always wrap tool execution in try/except. A failing tool should not crash the en
 ### Key Takeaways
 - `@tool` decorates a function with metadata the LLM uses to decide when to call it
 - `llm.bind_tools([...])` makes the LLM aware of available tools
-- LLMs only request tool calls — your node code executes them
+- LLMs only request tool calls: your node code executes them
 - Tool results go into ToolMessages linked by tool_call_id
 - ToolExecutor simplifies routing and execution of multiple tools
 - The ReAct pattern loops: LLM → tool calls → execute → ToolMessages → LLM again

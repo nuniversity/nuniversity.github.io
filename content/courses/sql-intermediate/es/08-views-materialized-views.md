@@ -34,7 +34,7 @@ ORDER BY last_name;
 ```
 
 > [!NOTE]
-> Una vista es solo una consulta almacenada. No tiene datos propios — cada consulta contra una vista ejecuta el SELECT subyacente. Las tablas referenciadas en una vista se llaman tablas base.
+> Una vista es solo una consulta almacenada. No tiene datos propios: cada consulta contra una vista ejecuta el SELECT subyacente. Las tablas referenciadas en una vista se llaman tablas base.
 
 ### ¿Por Qué Usar Vistas?
 
@@ -96,7 +96,7 @@ Una vista es actualizable cuando:
 > |-----------------------|--------|
 > | `CREATE VIEW v AS SELECT ... FROM a JOIN b` | Múltiples tablas base |
 > | `CREATE VIEW v AS SELECT DISTINCT ...` | No puede mapear de vuelta a una sola fila |
-> | `CREATE VIEW v AS SELECT SUM(...)` | Agregación — sin identidad de fila |
+> | `CREATE VIEW v AS SELECT SUM(...)` | Agregación; sin identidad de fila |
 > | `CREATE VIEW v AS SELECT ... UNION ...` | Múltiples fuentes |
 
 ## WITH CHECK OPTION

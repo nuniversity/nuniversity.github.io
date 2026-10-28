@@ -608,7 +608,7 @@ changelog:
 ```
 
 > [!SUCCESS]
-> Las skills son los bloques de construcción fundamentales de las capacidades de los agentes. Las skills bien diseñadas son modulares, testeables, versionadas y componibles — convierten a un agente de asistente de propósito general en un experto especializado.
+> Las skills son los bloques de construcción fundamentales de las capacidades de los agentes. Las skills bien diseñadas son modulares, testeables, versionadas y componibles: convierten a un agente de asistente de propósito general en un experto especializado.
 
 ---
 

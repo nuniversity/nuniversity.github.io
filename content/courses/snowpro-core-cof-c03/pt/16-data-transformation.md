@@ -1,15 +1,15 @@
 ---
-title: "Domínio 4.4 — Transformação de Dados no Snowflake"
+title: "Domínio 4.4, Transformação de Dados no Snowflake"
 description: "Domine o processamento de dados estruturados, semiestruturados e não estruturados com funções SQL, funções de janela e transformações Snowpark."
 order: 16
 difficulty: intermediate
 duration: 55
 ---
 
-# Domínio 4.4 — Transformação de Dados no Snowflake
+# Domínio 4.4: Transformação de Dados no Snowflake
 
 > [!NOTE]
-> **Domínio de Exame 4.4** — *Transformação de Dados* contribui para o domínio **Otimização de Desempenho, Consultas e Transformação**, que representa **21%** do exame COF-C03.
+> **Domínio de Exame 4.4**: *Transformação de Dados* contribui para o domínio **Otimização de Desempenho, Consultas e Transformação**, que representa **21%** do exame COF-C03.
 
 ---
 
@@ -34,7 +34,7 @@ mindmap
 
 ---
 
-## 1. Dados Semiestruturados — VARIANT
+## 1. Dados Semiestruturados: VARIANT
 
 O Snowflake armazena JSON, Avro, ORC, Parquet e XML nativamente em uma coluna **VARIANT**. Nenhuma definição de schema é necessária no momento do carregamento.
 
@@ -60,9 +60,9 @@ FROM eventos;
 ```
 
 > [!WARNING]
-> Sem a conversão `::TIPO`, as expressões retornam um **VARIANT** — comparações, ordenações e GROUP BY podem se comportar de forma inesperada.
+> Sem a conversão `:TIPO`, as expressões retornam um **VARIANT**: comparações, ordenações e GROUP BY podem se comportar de forma inesperada.
 
-### FLATTEN — Expandindo Arrays em Linhas
+### FLATTEN: Expandindo Arrays em Linhas
 
 ```mermaid
 flowchart LR
@@ -175,7 +175,7 @@ GROUP BY GROUPING SETS ((regiao), (produto), (regiao, produto), ());
 ```
 
 > [!WARNING]
-> `ROLLUP(a, b)` ≠ `ROLLUP(b, a)`. Os subtotais são gerados **da direita para a esquerda** na lista — a ordem importa.
+> `ROLLUP(a, b)` ≠ `ROLLUP(b, a)`. Os subtotais são gerados **da direita para a esquerda** na lista: a ordem importa.
 
 ---
 
@@ -215,7 +215,7 @@ FROM vendas;
 
 | Função | Empates recebem mesmo ranking? | Lacunas após empates? |
 |---|---|---|
-| `ROW_NUMBER` | Não — desempate arbitrário | Não |
+| `ROW_NUMBER` | Não: desempate arbitrário | Não |
 | `RANK` | **Sim** | **Sim** |
 | `DENSE_RANK` | **Sim** | **Não** |
 
@@ -234,7 +234,7 @@ FROM pedidos;
 ```
 
 > [!WARNING]
-> A moldura padrão do `LAST_VALUE` é `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` — ele retorna a linha **atual**, não a última. Sempre adicione `ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`.
+> A moldura padrão do `LAST_VALUE` é `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`: ele retorna a linha **atual**, não a última. Sempre adicione `ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`.
 
 ### Agregações Acumuladas (Running Aggregates)
 
@@ -322,7 +322,7 @@ resultado.write.mode("overwrite").save_as_table("resumo_receita")
 ```
 
 > [!NOTE]
-> O Snowpark usa **avaliação preguiçosa (lazy evaluation)** — as transformações constroem um plano lógico. A execução só ocorre em chamadas de ação: `.collect()`, `.show()` ou uma operação de escrita.
+> O Snowpark usa **avaliação preguiçosa (lazy evaluation)**: as transformações constroem um plano lógico. A execução só ocorre em chamadas de ação: `.collect()`, `.show()` ou uma operação de escrita.
 
 ---
 
@@ -344,7 +344,7 @@ flowchart TD
     C --> GOOD4["✅ WITH cte AS (...)\nreusar na query principal"]
 ```
 
-### Filtrar Cedo — Empurrar Predicados para Cima
+### Filtrar Cedo: Empurrar Predicados para Cima
 
 ```sql
 -- ❌ Lento: faz join de todas as linhas, depois filtra
@@ -386,7 +386,7 @@ FROM pedidos o
 JOIN clientes c ON o.id_cli = c.id;
 ```
 
-### Dynamic Tables — Atualização Incremental Declarativa
+### Dynamic Tables: Atualização Incremental Declarativa
 
 As Dynamic Tables definem um conjunto de resultados de transformação e deixam o Snowflake determinar como atualizá-lo incrementalmente.
 
@@ -413,11 +413,11 @@ AS
 
 > [!SUCCESS]
 > **Pontos-Chave para o Exame**
-> - `v:chave::TIPO` — notação de dois pontos para navegar por chave, `[n]` para índice de array, `::` para converter VARIANT em tipo SQL.
+> - `v:chave:TIPO`: notação de dois pontos para navegar por chave, `[n]` para índice de array, `:` para converter VARIANT em tipo SQL.
 > - `LATERAL FLATTEN` expande arrays/objetos em linhas; colunas de saída principais: `VALUE`, `KEY`, `INDEX`, `PATH`.
 > - `ROLLUP` gera subtotais da direita para a esquerda; `CUBE` gera todas as combinações; `GROUPING SETS` define agrupamentos explícitos.
 > - `RANK` tem lacunas após empates; `DENSE_RANK` não tem; `ROW_NUMBER` é sempre único.
-> - A moldura padrão do `LAST_VALUE` para na linha atual — sempre adicione `ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`.
+> - A moldura padrão do `LAST_VALUE` para na linha atual: sempre adicione `ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`.
 > - Snowpark = avaliação preguiçosa; a computação só é disparada em chamadas de ação (`.collect()`, `.show()`, escrita).
 > - Directory Tables expõem metadados de arquivos de stages; habilitadas com `DIRECTORY = (ENABLE = TRUE)`.
 > - Filtre cedo e projete apenas as colunas necessárias para maximizar o pruning de micro-partições.
@@ -436,7 +436,7 @@ AS
 
 ---
 
-**2.** `LATERAL FLATTEN(INPUT => v:tags)` — qual coluna contém o valor real da tag?
+**2.** `LATERAL FLATTEN(INPUT => v:tags)`: qual coluna contém o valor real da tag?
 
 - A) `KEY`
 - B) `INDEX`

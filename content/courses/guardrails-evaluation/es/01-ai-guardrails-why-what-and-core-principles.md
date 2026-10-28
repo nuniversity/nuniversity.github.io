@@ -193,7 +193,7 @@ sequenceDiagram
 ```
 
 > [!TIP]
-> Comience con guardrails simples — validación de entrada y filtro de toxicidad en la salida — antes de agregar políticas conductuales complejas. Un conjunto mínimo de guardrails implementado hoy es mejor que uno perfecto el próximo trimestre. Itere basándose en incidentes reales y datos de evaluación.
+> Comience con guardrails simples, validación de entrada y filtro de toxicidad en la salida, antes de agregar políticas conductuales complejas. Un conjunto mínimo de guardrails implementado hoy es mejor que uno perfecto el próximo trimestre. Itere basándose en incidentes reales y datos de evaluación.
 
 > [!WARNING]
 > El exceso de guardrails puede perjudicar la utilidad del agente. Si cada solicitud dispara una violación de guardrail, los usuarios abandonarán el sistema. Encuentre un equilibrio: ajuste umbrales basándose en datos de producción, no en peores escenarios teóricos. Monitoree las tasas de falsos positivos y ajuste agresivamente.

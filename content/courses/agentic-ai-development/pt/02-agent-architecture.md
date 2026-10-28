@@ -54,7 +54,7 @@ flowchart TD
 ```
 
 > [!NOTE]
-> O loop do agente nao e necessariamente linear. Agentes modernos usam replanejamento dinâmico: se uma etapa falha, o agente nao recomeca — ele reavalia o plano a partir do estado atual.
+> O loop do agente nao e necessariamente linear. Agentes modernos usam replanejamento dinâmico: se uma etapa falha, o agente nao recomeca: ele reavalia o plano a partir do estado atual.
 
 ---
 

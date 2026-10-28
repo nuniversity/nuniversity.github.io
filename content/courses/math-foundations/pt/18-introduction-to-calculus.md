@@ -17,7 +17,7 @@ difficulty: "beginner"
 Newton e Leibniz inventaram o cálculo independentemente no século XVII. Mas matemáticos indianos como Madhava (1400 d.C.) tinham descoberto expansões em séries para funções trigonométricas séculos antes. O Teorema Fundamental conecta diferenciação e integração.
 
 > [!NOTE]
-> O cálculo é usado em física, economia, medicina, engenharia — em qualquer campo que estude mudança.
+> O cálculo é usado em física, economia, medicina, engenharia: em qualquer campo que estude mudança.
 
 ---
 
@@ -194,7 +194,7 @@ $$\frac{dy}{dx} = f'(g(x)) \cdot g'(x)$$
 
 Em palavras: **derive a funcao externa mantendo a interna, e multiplique pela derivada da funcao interna.**
 
-### Exemplo 1 — Funcao Composta Simples
+### Exemplo 1: Funcao Composta Simples
 
 **Problema:** Encontre a derivada de $y = (3x + 2)^5$
 
@@ -211,7 +211,7 @@ $$y' = 5(3x+2)^4 \cdot 3 = 15(3x+2)^4$$
 
 ---
 
-### Exemplo 2 — Funcao Trigonometrica Composta
+### Exemplo 2: Funcao Trigonometrica Composta
 
 **Problema:** Encontre a derivada de $y = \sin(2x^2)$
 
@@ -228,7 +228,7 @@ $$y' = \cos(2x^2) \cdot 4x = 4x\cos(2x^2)$$
 
 ---
 
-### Exemplo 3 — Funcao Exponencial Composta
+### Exemplo 3: Funcao Exponencial Composta
 
 **Problema:** Encontre a derivada de $y = e^{3x}$
 
@@ -237,7 +237,7 @@ $$y' = e^{3x} \cdot 3 = 3e^{3x}$$
 
 ---
 
-### Exemplo 4 — Raiz Quadrada
+### Exemplo 4: Raiz Quadrada
 
 **Problema:** Encontre a derivada de $y = \sqrt{x^2 + 1}$
 
@@ -253,11 +253,11 @@ $$y' = \frac{1}{2}(x^2+1)^{-1/2} \cdot 2x = \frac{x}{\sqrt{x^2+1}}$$
 
 ## 6. Calculos Paso a Paso: Derivadas
 
-### Exemplo 1 — Multiplas Regras
+### Exemplo 1: Multiplas Regras
 
 **Problema:** Encontre a derivada de $f(x) = x^2 \cdot e^x$
 
-**Passo 1:** Identifique — e um produto: $f(x) = x^2 \cdot e^x$
+**Passo 1:** Identifique, e um produto: $f(x) = x^2 \cdot e^x$
 
 **Passo 2:** Aplique a regra do produto $(fg)' = f'g + fg'$:
 - $f'(x) = 2x$ (derivada de $x^2$)
@@ -268,7 +268,7 @@ $$f'(x) = 2x \cdot e^x + x^2 \cdot e^x = e^x(2x + x^2) = x \cdot e^x(x + 2)$$
 
 ---
 
-### Exemplo 2 — Quociente
+### Exemplo 2: Quociente
 
 **Problema:** Encontre a derivada de $f(x) = \df\frac{\sin x}{x^2}$
 
@@ -284,7 +284,7 @@ $$f'(x) = \frac{x\cos x - 2\sin x}{x^3}$$
 
 ---
 
-### Exemplo 3 — Derivada de Logaritmo Natural
+### Exemplo 3: Derivada de Logaritmo Natural
 
 **Problema:** Encontre a derivada de $f(x) = \ln(x^2 + 1)$
 
@@ -299,7 +299,7 @@ $$f'(x) = \frac{1}{x^2+1} \cdot 2x = \frac{2x}{x^2+1}$$
 
 ## 7. Exemplos Resolvidos: Integrais Definidas
 
-### Exemplo 1 — Area Sob uma Parabola
+### Exemplo 1: Area Sob uma Parabola
 
 **Problema:** Calcule $\displaystyle\int_0^3 x^2 \, dx$
 
@@ -313,7 +313,7 @@ $$\int_0^3 x^2 \, dx = F(3) - F(0) = \frac{27}{3} - \frac{0}{3} = 9$$
 
 ---
 
-### Exemplo 2 — Integral Trigonometrica
+### Exemplo 2: Integral Trigonometrica
 
 **Problema:** Calcule $\displaystyle\int_0^{\pi/2} \cos x \, dx$
 
@@ -327,7 +327,7 @@ $$= \sin\left(\frac{\pi}{2}\right) - \sin(0) = 1 - 0 = 1$$
 
 ---
 
-### Exemplo 3 — Integral com Funcao Exponencial
+### Exemplo 3: Integral com Funcao Exponencial
 
 **Problema:** Calcule $\displaystyle\int_1^2 \frac{1}{x} \, dx$
 
@@ -341,7 +341,7 @@ $$= \ln 2 - \ln 1 = \ln 2 - 0 = \ln 2 \approx 0{,}693$$
 
 ---
 
-### Exemplo 4 — Integral com Substituicao
+### Exemplo 4: Integral com Substituicao
 
 **Problema:** Calcule $\displaystyle\int_0^1 2x \cdot e^{x^2} \, dx$
 
@@ -359,7 +359,7 @@ $$= e^1 - e^0 = e - 1 \approx 1{,}718$$
 
 ## 8. Aplicacoes Adicionais do Teorema Fundamental
 
-### Exemplo 1 — Velocidade e Deslocamento
+### Exemplo 1: Velocidade e Deslocamento
 
 **Problema:** Um carro tem velocidade $v(t) = 60 + 4t$ m/s. Qual e o deslocamento entre $t = 0$ e $t = 5$ segundos?
 
@@ -370,7 +370,7 @@ $$= \left[60t + 2t^2\right]_0^5 = (300 + 50) - 0 = 350 \text{ metros}$$
 
 ---
 
-### Exemplo 2 — Custo Marginal
+### Exemplo 2: Custo Marginal
 
 **Problema:** O custo marginal de produzir $x$ unidades e $C'(x) = 2x + 10$. Se o custo fixo e R$ 100, qual e o custo total de produzir 20 unidades?
 
@@ -383,7 +383,7 @@ $$C(20) = 400 + 200 + 100 = R\$\, 700$$
 
 ---
 
-### Exemplo 3 — Area Entre Duas Curvas
+### Exemplo 3: Area Entre Duas Curvas
 
 **Problema:** Encontre a area entre $y = x^2$ e $y = x$ no intervalo $[0, 1]$.
 
@@ -414,7 +414,7 @@ $$A = \left(\frac{1}{2} - \frac{1}{3}\right) - 0 = \frac{1}{6}$$
 > [!WARNING]
 > **Erro 3: Erro na regra da cadeia**
 >
-> Ao derivar $\sin(3x)$, nao escreva apenas $\cos(3x)$. A resposta correta e $3\cos(3x)$ — voce **deve** multiplicar pela derivada da funcao interna.
+> Ao derivar $\sin(3x)$, nao escreva apenas $\cos(3x)$. A resposta correta e $3\cos(3x)$: voce **deve** multiplicar pela derivada da funcao interna.
 
 ---
 
@@ -479,7 +479,7 @@ $$A = \left(\frac{1}{2} - \frac{1}{3}\right) - 0 = \frac{1}{6}$$
 
 ---
 
-## 11. Regra da Cadeia — Resumo e Mais Exemplos
+## 11. Regra da Cadeia: Resumo e Mais Exemplos
 
 ### Formula Geral
 
@@ -491,7 +491,7 @@ Em palavras: **derive a funcao externa mantendo a interna, depois multiplique pe
 
 ---
 
-### Exemplo 1 — d/dx[sin(3x)]
+### Exemplo 1: d/dx[sin(3x)]
 
 **Problema:** Encontre a derivada de $y = \sin(3x)$.
 
@@ -507,7 +507,7 @@ $$y' = \cos(3x) \times 3 = 3\cos(3x)$$
 
 ---
 
-### Exemplo 2 — d/dx[(2x+1)⁵]
+### Exemplo 2: d/dx[(2x+1)⁵]
 
 **Problema:** Encontre a derivada de $y = (2x+1)^5$.
 
@@ -520,7 +520,7 @@ $$y' = 5(2x+1)^4 \times 2 = 10(2x+1)^4$$
 
 ---
 
-### Exemplo 3 — Regra do Produto: d/dx[x²sin(x)]
+### Exemplo 3, Regra do Produto: d/dx[x²sin(x)]
 
 **Problema:** Encontre a derivada de $y = x^2 \cdot \sin(x)$.
 
@@ -533,13 +533,13 @@ $$y' = 5(2x+1)^4 \times 2 = 10(2x+1)^4$$
 **Passo 2:** Aplique a regra do produto:
 $$y' = 2x \cdot \sin(x) + x^2 \cdot \cos(x)$$
 
-**Interpretacao:** O resultado combina dois termos — cada um tem a derivada de um fator multiplicada pelo outro fator.
+**Interpretacao:** O resultado combina dois termos: cada um tem a derivada de um fator multiplicada pelo outro fator.
 
 ---
 
-## 12. Integrais Definidas — Mais Exemplos
+## 12. Integrais Definidas: Mais Exemplos
 
-### Exemplo 1 — ∫₀³ x² dx
+### Exemplo 1: ∫₀³ x² dx
 
 **Problema:** Calcule $\displaystyle\int_0^3 x^2 \, dx$.
 
@@ -553,7 +553,7 @@ $$\int_0^3 x^2 \, dx = \left[\frac{x^3}{3}\right]_0^3 = \frac{3^3}{3} - \frac{0^
 
 ---
 
-### Exemplo 2 — ∫₁² (3x² - 2x) dx
+### Exemplo 2: ∫₁² (3x² - 2x) dx
 
 **Problema:** Calcule $\displaystyle\int_1^2 (3x^2 - 2x) \, dx$.
 

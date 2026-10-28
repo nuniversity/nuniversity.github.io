@@ -1,6 +1,6 @@
 ---
 title: "Ejemplo de arquitectura del mundo real"
-description: "Construye paso a paso una aplicación completa del mundo real con la Arquitectura Limpia — un sistema de comercio electrónico, desde las entidades hasta el despliegue"
+description: "Construye paso a paso una aplicación completa del mundo real con la Arquitectura Limpia, un sistema de comercio electrónico, desde las entidades hasta el despliegue"
 order: 7
 duration: "70 min"
 difficulty: "intermediate"
@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Ejemplo de arquitectura del mundo real
 
-Esta lección lo reúne todo construyendo un **sistema completo de gestión de pedidos de comercio electrónico** con la Arquitectura Limpia. Verás cada capa — desde las entidades hasta los adaptadores de framework — funcionando juntas en una aplicación realista.
+Esta lección lo reúne todo construyendo un **sistema completo de gestión de pedidos de comercio electrónico** con la Arquitectura Limpia. Verás cada capa, desde las entidades hasta los adaptadores de framework, funcionando juntas en una aplicación realista.
 
 > [!NOTE]
 > El sistema gestiona: el catálogo de productos, el carrito de compras, la realización de pedidos con pago, el seguimiento del pedido y las notificaciones. Toda la lógica de negocio es independiente del framework y totalmente comprobable.

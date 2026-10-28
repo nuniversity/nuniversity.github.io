@@ -1,12 +1,12 @@
 ---
-title: "Domain 1.6 — AI/ML and Application Development Features"
+title: "Domain 1.6, AI/ML and Application Development Features"
 description: "Explore Snowflake's AI and application development ecosystem: Snowpark, Snowflake Cortex (LLM functions, Cortex Search, Cortex Analyst), Snowflake ML, Streamlit, and Notebooks."
 order: 6
 difficulty: intermediate
 duration: "60 min"
 ---
 
-# Domain 1.6 — AI/ML and Application Development Features
+# Domain 1.6: AI/ML and Application Development Features
 
 ## Exam Weight
 
@@ -43,13 +43,13 @@ mindmap
 
 ## Snowpark
 
-**Snowpark** is Snowflake's developer framework that allows you to write data pipelines and transformations in **Python, Java, or Scala** using a DataFrame API — without moving data out of Snowflake.
+**Snowpark** is Snowflake's developer framework that allows you to write data pipelines and transformations in **Python, Java, or Scala** using a DataFrame API: without moving data out of Snowflake.
 
 ### Key Snowpark Concepts
 
 - Code is written in Python/Java/Scala using the Snowpark library
-- Execution happens **inside Snowflake** — data never leaves
-- Uses **lazy evaluation** — operations are built as a query plan and executed when an action is triggered
+- Execution happens **inside Snowflake**: data never leaves
+- Uses **lazy evaluation**: operations are built as a query plan and executed when an action is triggered
 - Supports User-Defined Functions (UDFs), User-Defined Table Functions (UDTFs), and Stored Procedures
 
 ```python
@@ -120,9 +120,9 @@ model.fit(df_scaled)
 
 ---
 
-## Snowflake Cortex — AI SQL Functions
+## Snowflake Cortex: AI SQL Functions
 
-**Snowflake Cortex** provides **LLM-powered SQL functions** that run directly on Snowflake data — no external API calls required from the user's perspective.
+**Snowflake Cortex** provides **LLM-powered SQL functions** that run directly on Snowflake data: no external API calls required from the user's perspective.
 
 ### Cortex AI SQL Functions
 
@@ -193,7 +193,7 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW(
 
 ### Cortex Analyst
 
-**Cortex Analyst** enables **natural language to SQL** generation — business users ask questions in plain English and Cortex Analyst returns SQL queries and results:
+**Cortex Analyst** enables **natural language to SQL** generation: business users ask questions in plain English and Cortex Analyst returns SQL queries and results:
 
 - Built on LLMs fine-tuned for SQL generation
 - Understands your Snowflake schema and semantic model
@@ -268,7 +268,7 @@ cv.fit(df_train)
 **Snowflake Notebooks** are **Jupyter-style interactive notebooks** embedded directly in Snowsight:
 
 - Supports **SQL, Python (Snowpark), and Markdown cells** in the same notebook
-- Python cells run inside Snowflake — data never leaves
+- Python cells run inside Snowflake: data never leaves
 - Access Snowflake data directly without connection setup
 - Version-controlled via **Git integration**
 - Can visualize results with popular Python libraries (matplotlib, plotly, altair)
@@ -300,7 +300,7 @@ ORDER BY 2 DESC;
 
 ## Streamlit in Snowflake
 
-**Streamlit in Snowflake** allows you to **deploy Streamlit Python applications directly inside Snowflake** — no external hosting required:
+**Streamlit in Snowflake** allows you to **deploy Streamlit Python applications directly inside Snowflake**: no external hosting required:
 
 - Python data apps run natively in Snowflake
 - Access Snowflake data securely without API keys

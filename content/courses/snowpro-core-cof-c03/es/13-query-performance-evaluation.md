@@ -1,16 +1,16 @@
 ---
-title: "Dominio 4.1 — Evaluación del Rendimiento de Consultas"
+title: "Dominio 4.1, Evaluación del Rendimiento de Consultas"
 description: "Aprende a diagnosticar problemas de rendimiento en Snowflake usando Query Profile, Query History, vistas de ACCOUNT_USAGE, y comprende los principales cuellos de botella: desbordamiento de datos, poda ineficiente, uniones explosivas y colas."
 order: 13
 difficulty: intermediate
 duration: "65 min"
 ---
 
-# Dominio 4.1 — Evaluación del Rendimiento de Consultas
+# Dominio 4.1: Evaluación del Rendimiento de Consultas
 
 ## Peso en el Examen
 
-El **Dominio 4.0 — Optimización de Rendimiento, Consultas y Transformación** representa aproximadamente el **~21%** del examen — el segundo dominio más grande.
+El **Dominio 4.0, Optimización de Rendimiento, Consultas y Transformación** representa aproximadamente el **~21%** del examen, el segundo dominio más grande.
 
 > [!NOTE]
 > Esta lección corresponde al **Objetivo de Examen 4.1**: *Evaluar el rendimiento de consultas*, incluyendo Query Profile, Query Insights, vistas de ACCOUNT_USAGE y mejores prácticas de gestión de cargas de trabajo.
@@ -73,10 +73,10 @@ El **Query Profile** es la herramienta principal para diagnosticar el rendimient
 
 El Query Profile muestra el **plan de ejecución de la consulta** como un árbol de nodos de operadores. Cada nodo de operador muestra:
 
-- **Filas procesadas** — conteos de filas de entrada y salida
-- **Tiempo** — cuánto tiempo estuvo en ejecución el operador
-- **Bytes** — datos leídos/procesados/escritos
-- **Estadísticas del paso** — consumo de recursos por nodo
+- **Filas procesadas**: conteos de filas de entrada y salida
+- **Tiempo**: cuánto tiempo estuvo en ejecución el operador
+- **Bytes**: datos leídos/procesados/escritos
+- **Estadísticas del paso**: consumo de recursos por nodo
 
 ### Nodos de Operadores Clave
 
@@ -96,7 +96,7 @@ El Query Profile muestra el **plan de ejecución de la consulta** como un árbol
 
 ### 1. Desbordamiento de Datos al Almacenamiento (*Data Spilling*)
 
-**Qué es:** Cuando los datos de una consulta superan la memoria y el disco local del warehouse, se desbordan (*spill*) al almacenamiento remoto — aumentando masivamente la E/S y la latencia.
+**Qué es:** Cuando los datos de una consulta superan la memoria y el disco local del warehouse, se desbordan (*spill*) al almacenamiento remoto: aumentando masivamente la E/S y la latencia.
 
 **Cómo detectarlo:**
 - En Query Profile: `Bytes spilled to local storage` o `Bytes spilled to remote storage` > 0
@@ -130,7 +130,7 @@ ORDER BY bytes_spilled_to_remote_storage DESC;
 
 ### 2. Poda Ineficiente (*Inefficient Pruning*)
 
-**Qué es:** Snowflake no puede omitir micro-particiones porque los valores de la columna de filtro están dispersos en muchas particiones — la consulta lee más datos de los necesarios.
+**Qué es:** Snowflake no puede omitir micro-particiones porque los valores de la columna de filtro están dispersos en muchas particiones: la consulta lee más datos de los necesarios.
 
 **Cómo detectarlo en Query Profile:**
 - El nodo `TableScan` muestra `Partitions scanned` cercano a `Partitions total`
@@ -154,7 +154,7 @@ SELECT sum(amount) FROM orders WHERE status = 'COMPLETED';
 
 ### 3. Uniones Explosivas (*Exploding Joins*)
 
-**Qué es:** Un JOIN que produce **muchas más filas de las esperadas** — frecuentemente porque las claves de unión no son únicas (unión muchos-a-muchos que crea un producto cartesiano).
+**Qué es:** Un JOIN que produce **muchas más filas de las esperadas**: frecuentemente porque las claves de unión no son únicas (unión muchos-a-muchos que crea un producto cartesiano).
 
 **Cómo detectarlo en Query Profile:**
 - Un nodo `Join` muestra filas de salida >> filas de entrada
@@ -342,7 +342,7 @@ GROUP BY 1;
 
 > [!SUCCESS]
 > **Puntos Clave para el Día del Examen:**
-> 1. **Query Profile** = herramienta de diagnóstico principal — encuéntralo en Snowsight Activity → Query History
+> 1. **Query Profile** = herramienta de diagnóstico principal: encuéntralo en Snowsight Activity → Query History
 > 2. **Desbordamiento** = warehouse demasiado pequeño → escalar verticalmente | **Colas** = demasiadas consultas concurrentes → escalar horizontalmente
 > 3. **Poda ineficiente** = alto ratio `partitions_scanned / partitions_total` → agregar clave de clúster
 > 4. **Unión explosiva** = salida del nodo join >> entrada → verificar claves no únicas

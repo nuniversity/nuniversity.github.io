@@ -42,7 +42,7 @@ Algoritmos de busca encontram um item específico (ou determinam que não existe
 
 ### Busca Linear
 
-A busca mais simples -- verifique cada item até encontrar o que procura.
+A busca mais simples: verifique cada item até encontrar o que procura.
 
 ```
 ALGORITMO: Busca Linear
@@ -194,7 +194,7 @@ Lista inicial: [5, 3, 8, 1, 2]
 
 **Passada 4:**
 - Comparar 1 e 2: sem troca -> [**1**, **2**, 3, 5, 8]
-- Nenhuma troca necessária -- lista está ordenada!
+- Nenhuma troca necessária: lista está ordenada!
 
 ## Padrão 3: Filtro
 

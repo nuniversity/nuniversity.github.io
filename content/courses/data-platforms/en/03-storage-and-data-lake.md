@@ -38,7 +38,7 @@ All three platforms ultimately store data in **cloud object storage** (S3, ADLS 
 
 ### Core S3 Concepts for Data Platforms
 
-S3 is not "just storage" — it has evolved into a sophisticated foundation for data lakes:
+S3 is not "just storage"; it has evolved into a sophisticated foundation for data lakes:
 
 ```
 s3://my-data-lake/
@@ -177,7 +177,7 @@ WHEN NOT MATCHED THEN INSERT *;
 
 Snowflake abstracts storage completely. The "database" you interact with via SQL is backed by Snowflake's internal **File/Data Node (FDN)** format, stored in Snowflake's own S3/GCS/Azure Blob tenant. Key properties:
 
-- **Immutable micro-partitions:** 50–500MB compressed blocks, automatically created on INSERT.
+- **Immutable micro-partitions:** 50 to 500MB compressed blocks, automatically created on INSERT.
 - **Automatic clustering:** Snowflake tracks the range of values in each column per micro-partition, enabling automatic partition pruning without explicit indexes.
 - **Columnar compression:** Each column within a micro-partition is compressed independently using the optimal algorithm (LZO, Zstd, etc.).
 
@@ -204,7 +204,7 @@ ALTER TABLE orders CLUSTER BY (order_date);
 
 ### Snowflake External Tables and Stages
 
-Snowflake can also query data directly from S3/GCS/ADLS without loading it — useful for landing zones:
+Snowflake can also query data directly from S3/GCS/ADLS without loading it: useful for landing zones:
 
 ```sql
 -- Step 1: Create a Storage Integration (one-time, admin task)
@@ -239,7 +239,7 @@ FILE_FORMAT = (TYPE = 'PARQUET');
 | Feature | Time Travel | Fail-Safe |
 |---------|------------|-----------|
 | **Purpose** | User-accessible history (queries, clone, undrop) | Disaster recovery (Snowflake-managed) |
-| **Duration** | 0–90 days (Standard=1, Enterprise=90) | Fixed 7 days (after Time Travel period) |
+| **Duration** | 0 to 90 days (Standard=1, Enterprise=90) | Fixed 7 days (after Time Travel period) |
 | **Accessible by** | You (via AT/BEFORE clause) | Snowflake Support only |
 | **Cost** | ✅ Included in storage cost | ✅ Included in storage cost |
 
@@ -418,7 +418,7 @@ def gold_daily_revenue():
 | Feature | AWS S3 + Lake Formation | Snowflake | Databricks Delta Lake |
 |---------|------------------------|-----------|----------------------|
 | **ACID Transactions** | ⚠️ Via Iceberg or Governed Tables | ✅ Native | ✅ Native |
-| **Time Travel** | ⚠️ Via S3 Versioning (costly) or Iceberg | ✅ 0–90 days | ✅ 30 days (default) |
+| **Time Travel** | ⚠️ Via S3 Versioning (costly) or Iceberg | ✅ 0 to 90 days | ✅ 30 days (default) |
 | **Zero-Copy Clone** | ❌ Not native | ⚡ Instant clone | ⚠️ Shallow clone (metadata only) |
 | **Auto Compaction** | ❌ Manual Glue/EMR job | ✅ Automatic | ✅ Auto Optimize (Databricks) |
 | **Schema Evolution** | ⚠️ Manual Glue update | ✅ Automatic with policy | ✅ `mergeSchema` option |

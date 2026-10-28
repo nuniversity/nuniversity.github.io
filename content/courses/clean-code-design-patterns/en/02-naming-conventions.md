@@ -386,7 +386,7 @@ flowchart TD
 ```
 
 > [!SUCCESS]
-> Good naming is the single most impactful practice for code maintainability. Spend time choosing the right name — your future self will thank you.
+> Good naming is the single most impactful practice for code maintainability. Spend time choosing the right name: your future self will thank you.
 
 ## Practice Exercises
 

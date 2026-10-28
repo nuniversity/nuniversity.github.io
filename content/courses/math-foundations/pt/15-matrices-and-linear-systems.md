@@ -115,7 +115,7 @@ A eliminação de Gauss-Jordan é um método sistemático para resolver sistemas
 2. **Zere acima da diagonal principal** - Continue até ter zeros em ambos os lados da diagonal
 3. **Normalize a diagonal** - Torne todos os elementos da diagonal iguais a 1
 
-### Eliminação Gaussiana - Exemplo Completo
+### Eliminação Gaussiana: Exemplo Completo
 
 Vamos resolver o sistema passo a passo:
 
@@ -133,7 +133,7 @@ $$
 \rightarrow \begin{pmatrix} 1 & 1 & 5 \\ 0 & 1 & 3 \end{pmatrix}
 $$
 
-**Passo 3:** R1 = R1 - R2 (para zerar acima da diagonal)
+**Passo 3:** R1 = R1: R2 (para zerar acima da diagonal)
 $$
 \rightarrow \begin{pmatrix} 1 & 0 & 2 \\ 0 & 1 & 3 \end{pmatrix}
 $$
@@ -201,7 +201,7 @@ $$
 {
   "question": "Resolva cada sistema:",
   "pairs": [
-    {"left": "x + y = 5, x - y = 1", "right": "x = 3, y = 2"},
+    {"left": "x + y = 5, x: y = 1", "right": "x = 3, y = 2"},
     {"left": "2x + y = 7, x + y = 4", "right": "x = 3, y = 1"},
     {"left": "x + 2y = 8, 2x + y = 7", "right": "x = 2, y = 3"}
   ],
@@ -284,7 +284,7 @@ $$
 {
   "id": "math-foundations-q78",
   "type": "multiple-choice",
-  "question": "Resolva: x + y = 5, 2x - y = 1",
+  "question": "Resolva: x + y = 5, 2x: y = 1",
   "options": [
     "x=2, y=3",
     "x=3, y=2",

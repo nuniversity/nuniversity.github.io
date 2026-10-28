@@ -362,7 +362,7 @@ dashboard:
 ```
 
 > [!WARNING]
-> La fatiga de alertas es un peligro real. Siga estas reglas: (1) alerte solo en métricas con línea base establecida, (2) use niveles de severidad — solo "critical" va a PagerDuty, (3) implemente histéresis, (4) revise efectividad mensualmente.
+> La fatiga de alertas es un peligro real. Siga estas reglas: (1) alerte solo en métricas con línea base establecida, (2) use niveles de severidad: solo "critical" va a PagerDuty, (3) implemente histéresis, (4) revise efectividad mensualmente.
 
 ---
 

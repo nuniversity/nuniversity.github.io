@@ -14,7 +14,7 @@ Three dbt resource types are often underutilized in advanced projects: snapshots
 
 ## Snapshots: Tracking Slowly Changing Dimensions
 
-Snapshots implement **Type 2 Slowly Changing Dimensions (SCD2)** — they track how a row changes over time by keeping all historical versions with validity timestamps.
+Snapshots implement **Type 2 Slowly Changing Dimensions (SCD2)**; they track how a row changes over time by keeping all historical versions with validity timestamps.
 
 ### The New YAML Snapshot Spec (dbt-core 1.9+)
 
@@ -413,7 +413,7 @@ Views referencing Redshift Spectrum external tables **must** use `bind: false` (
   "question": "Why must views over Redshift Spectrum external tables use `bind: false`?",
   "options": [
     "Spectrum tables are read-only and bind: true would attempt a write",
-    "Standard (bound) views cannot reference external tables — Redshift requires late-binding views for Spectrum compatibility",
+    "Standard (bound) views cannot reference external tables: Redshift requires late-binding views for Spectrum compatibility",
     "bind: false improves Spectrum query performance",
     "Redshift Serverless requires bind: false for all views"
   ],
@@ -460,10 +460,10 @@ Views referencing Redshift Spectrum external tables **must** use `bind: false` (
   "type": "multiple-choice",
   "question": "You have a seed file with 800 rows of country codes that rarely changes. Should you set dist: all or dist: even?",
   "options": [
-    "dist: even — even distribution is always the safe default",
-    "dist: all — copy the full small table to every compute node for co-located joins",
-    "dist: key — always use a key for lookup tables",
-    "No dist config — seeds use auto distribution automatically"
+    "dist: even: even distribution is always the safe default",
+    "dist: all: copy the full small table to every compute node for co-located joins",
+    "dist: key: always use a key for lookup tables",
+    "No dist config: seeds use auto distribution automatically"
   ],
   "correct": 1,
   "explanation": "Small reference tables like country codes (800 rows) benefit from dist: all. Every node gets a full copy, enabling co-located joins with any fact or dimension table regardless of that table's distribution key."
@@ -479,5 +479,5 @@ Views referencing Redshift Spectrum external tables **must** use `bind: false` (
 - Use `strategy: timestamp` when a reliable `updated_at` column exists; use `strategy: check` when you need hash-based change detection.
 - Set `invalidate_hard_deletes: true` to close historical records when rows disappear from the source.
 - Seeds are ideal for small, rarely-changing reference data (<1,000 rows). Use `dist: all` so every join with the seed is co-located.
-- Source freshness filters (`freshness.filter`) limit freshness check queries to recent partitions — essential for large, time-partitioned raw tables.
-- Views over Redshift Spectrum external tables require `bind: false` — standard views cannot reference external tables.
+- Source freshness filters (`freshness.filter`) limit freshness check queries to recent partitions: essential for large, time-partitioned raw tables.
+- Views over Redshift Spectrum external tables require `bind: false`: standard views cannot reference external tables.

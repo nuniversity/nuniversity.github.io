@@ -21,9 +21,9 @@ for (let i = 0; i < 5; i++) {
 ```
 
 Un bucle `for` tiene tres partes:
-1. **Inicialización**: `let i = 0` — se ejecuta una vez antes del bucle
-2. **Condición**: `i < 5` — se verifica antes de cada iteración
-3. **Actualización**: `i++` — se ejecuta después de cada iteración
+1. **Inicialización**: `let i = 0`: se ejecuta una vez antes del bucle
+2. **Condición**: `i < 5`: se verifica antes de cada iteración
+3. **Actualización**: `i++`: se ejecuta después de cada iteración
 
 ## El Bucle while
 
@@ -139,4 +139,4 @@ console.log(sumarHasta(100)); // Salida: 5050
 
 ## Próximos Pasos
 
-Ahora que puedes repetir acciones, la próxima lección cubre estructuras de datos — arrays y objetos para organizar datos.
+Ahora que puedes repetir acciones, la próxima lección cubre estructuras de datos: arrays y objetos para organizar datos.

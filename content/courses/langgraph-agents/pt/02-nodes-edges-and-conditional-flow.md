@@ -137,7 +137,7 @@ A função roteadora **deve** retornar uma chave que exista no dicionário de ma
 
 ## Enviando para Nós Específicos com Send()
 
-Para fan-out dinâmico avançado, LangGraph fornece `Send()` — uma API tipada que permite enviar estados diferentes para nós de destino diferentes.
+Para fan-out dinâmico avançado, LangGraph fornece `Send()`: uma API tipada que permite enviar estados diferentes para nós de destino diferentes.
 
 ```python
 from langgraph.graph import Send
@@ -389,7 +389,7 @@ def branch_b(state: State) -> dict:
   "id": "lg-02-pt-q4",
   "type": "multiple-choice",
   "question": "O que acontece quando você adiciona duas arestas do nó a para os nós b e c?",
-  "options": ["Apenas b executa", "b e c executam em paralelo", "Erro de tempo de execução — múltiplas arestas de um nó não são permitidas", "c espera b terminar"],
+  "options": ["Apenas b executa", "b e c executam em paralelo", "Erro de tempo de execução: múltiplas arestas de um nó não são permitidas", "c espera b terminar"],
   "correct": 1,
   "explanation": "Múltiplas arestas de saída de um nó executam seus destinos em paralelo."
 }

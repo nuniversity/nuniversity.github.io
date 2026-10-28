@@ -1,12 +1,12 @@
 ---
-title: "Domain 2.3 — Monitoring and Cost Management"
+title: "Domain 2.3, Monitoring and Cost Management"
 description: "Learn to monitor and control Snowflake costs using Resource Monitors, ACCOUNT_USAGE views, credit calculation, warehouse monitoring, and cost attribution strategies."
 order: 9
 difficulty: intermediate
 duration: "55 min"
 ---
 
-# Domain 2.3 — Monitoring and Cost Management
+# Domain 2.3: Monitoring and Cost Management
 
 ## Exam Weight
 
@@ -213,7 +213,7 @@ Both provide metadata, but with different scopes:
 |---|---|---|
 | Scope | Current database only | Entire account |
 | Latency | Real-time | Up to 45 minutes |
-| Retention | Limited (7–14 days for historical) | 1 year |
+| Retention | Limited (7 to 14 days for historical) | 1 year |
 | Access | Any user with DB access | Requires ACCOUNTADMIN |
 | Dropped objects | Not included | Included |
 | Use case | Immediate, current-state queries | Historical analysis, auditing |

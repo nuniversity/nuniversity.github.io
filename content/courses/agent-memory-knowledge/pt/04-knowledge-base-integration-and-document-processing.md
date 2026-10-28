@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Integração de Base de Conhecimento e Processamento de Documentos
 
-Um agente é tão conhecedor quanto os documentos que pode acessar. Construir um pipeline robusto de ingestão de documentos — de arquivos brutos a uma base de conhecimento pesquisável — é uma habilidade fundamental de engenharia para agentes de produção.
+Um agente é tão conhecedor quanto os documentos que pode acessar. Construir um pipeline robusto de ingestão de documentos, de arquivos brutos a uma base de conhecimento pesquisável, é uma habilidade fundamental de engenharia para agentes de produção.
 
 ---
 
@@ -495,7 +495,7 @@ def sanitize_document(text: str) -> str:
   "type": "multiple-choice",
   "question": "A base de conhecimento de um agente contém documentos de RH com endereços de email de funcionários. O que fazer antes de indexar?",
   "options": [
-    "Nada — o agente precisa dos emails para responder perguntas",
+    "Nada, o agente precisa dos emails para responder perguntas",
     "Sanitizar os documentos removendo ou mascarando PII",
     "Indexar tudo e adicionar um filtro depois",
     "Mudar para um modelo de embedding diferente"
@@ -512,7 +512,7 @@ def sanitize_document(text: str) -> str:
 
 - Formatos diferentes (PDF, HTML, Markdown) exigem carregadores específicos.
 - PDFs escaneados exigem processamento OCR antes da extração de texto.
-- A estratégia de divisão de texto — recursiva, baseada em tokens ou consciente de estrutura — impacta diretamente a qualidade da recuperação.
+- A estratégia de divisão de texto, recursiva, baseada em tokens ou consciente de estrutura, impacta diretamente a qualidade da recuperação.
 - Metadados (fonte, página, timestamp, hash) tornam os fragmentos filtráveis e rastreáveis.
 - A indexação incremental usa hashes de conteúdo para pular duplicatas e evitar reconstruções completas.
 - Atualizar um documento requer excluir fragmentos antigos e re-indexar o novo conteúdo.

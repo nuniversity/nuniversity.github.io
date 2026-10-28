@@ -123,7 +123,7 @@ print(3 in a)    # Teste de pertinência (muito rápido!)
 ```
 
 > [!NOTE]
-> Conjuntos são otimizados para teste de pertinência (`in`) — O(1) em média vs O(n) para listas. Use conjuntos quando a ordem não importar e duplicatas não existirem.
+> Conjuntos são otimizados para teste de pertinência (`in`), O(1) em média vs O(n) para listas. Use conjuntos quando a ordem não importar e duplicatas não existirem.
 
 ## Casos de Uso Reais
 

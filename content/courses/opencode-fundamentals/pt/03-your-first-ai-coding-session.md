@@ -50,7 +50,7 @@ Project: seu-projeto
 
 ## Exemplo de Sessão: Corrigindo um Bug
 
-Vamos percorrer um cenário do mundo real — corrigindo um bug em uma função Python.
+Vamos percorrer um cenário do mundo real: corrigindo um bug em uma função Python.
 
 ### Passo 1: Descrever o Problema
 
@@ -316,7 +316,7 @@ Se a IA pedir esclarecimentos, forneça mais detalhes:
 > ### Key Takeaways
 
 - Inicie o OpenCode no diretório do seu projeto para assistência consciente do contexto
-- Seja específico em seus prompts — inclua tipos de erro, nomes de arquivos e comportamento esperado
+- Seja específico em seus prompts: inclua tipos de erro, nomes de arquivos e comportamento esperado
 - OpenCode usa ferramentas (read, write, edit, grep, glob, bash) para interagir com seu projeto
 - Você pode salvar e carregar sessões para continuidade
 - Faça perguntas de acompanhamento para entender o raciocínio da IA

@@ -1,6 +1,6 @@
 ---
 title: "Fundamentos de AWS para Databricks: diseño de VPC, root bucket, PrivateLink, KMS e IAM"
-description: "Construye el sustrato AWS bajo un workspace de Databricks: los cuatro objetos de la consola de cuenta (compute credentials cross-account, configuración de red, configuración de almacenamiento, private access settings), las reglas de la VPC gestionada por el cliente (subredes privadas /17-/26, dos IPs por nodo, la fórmula de capacidad (addresses − 5) ÷ 2), secure cluster connectivity como modo por defecto sin IPs públicas, el conjunto obligatorio de salida STS/S3/Kinesis/RDS con la economía de endpoint gateway frente a interface, los tres sabores de PrivateLink con los límites de NCC, el SSE del root bucket y las claves gestionadas por el cliente para STORAGE vs MANAGED_SERVICES, las políticas anotadas del root bucket y de la clave KMS, y la ruta moderna de IAM (storage credentials y service credentials frente a los instance profiles heredados) — con siete ejemplos resueltos (dimensionamiento real de subredes, una factura de NAT frente a endpoints, coste del inventario de endpoints, el cálculo de KMS, el JSON de la política de confianza), una matriz de security groups, seis diagramas mermaid, cuatro comprobaciones interactivas, casos de estudio de Block y Amgen en AWS, un recuadro de actualización de 2026 y doce preguntas de práctica, todas las tarifas en octubre de 2026."
+description: "Construye el sustrato AWS bajo un workspace de Databricks: los cuatro objetos de la consola de cuenta (compute credentials cross-account, configuración de red, configuración de almacenamiento, private access settings), las reglas de la VPC gestionada por el cliente (subredes privadas /17-/26, dos IPs por nodo, la fórmula de capacidad (addresses − 5) ÷ 2), secure cluster connectivity como modo por defecto sin IPs públicas, el conjunto obligatorio de salida STS/S3/Kinesis/RDS con la economía de endpoint gateway frente a interface, los tres sabores de PrivateLink con los límites de NCC, el SSE del root bucket y las claves gestionadas por el cliente para STORAGE vs MANAGED_SERVICES, las políticas anotadas del root bucket y de la clave KMS, y la ruta moderna de IAM (storage credentials y service credentials frente a los instance profiles heredados), con siete ejemplos resueltos (dimensionamiento real de subredes, una factura de NAT frente a endpoints, coste del inventario de endpoints, el cálculo de KMS, el JSON de la política de confianza), una matriz de security groups, seis diagramas mermaid, cuatro comprobaciones interactivas, casos de estudio de Block y Amgen en AWS, un recuadro de actualización de 2026 y doce preguntas de práctica, todas las tarifas en octubre de 2026."
 order: 2
 difficulty: "intermediate"
 duration: "60 min"
@@ -9,7 +9,7 @@ duration: "60 min"
 
 Cada lakehouse de Databricks de este curso se apoya en una única premisa con forma de AWS: **el plano de datos vive en tu VPC, los datos viven en tu S3 y el plano de control habla con ambos por rutas que puedes nombrar en una pizarra**. Si te equivocas con el sustrato, nada aguas abajo te salva: los lanzamientos de clústeres fallan con errores de assume-role crípticos, un clúster de 100 nodos no puede arrancar porque una subred `/26` se quedó sin direcciones, una factura de S3 se dispara porque 1 TB al mes de tráfico de lago da vueltas por un NAT gateway a $0.045/GB, o un firewall que inspecciona TLS mata en silencio cada clúster en cuanto toca los certificados fijados del plano de control.
 
-Cada hecho de abajo proviene de la documentación AWS de Databricks (página de customer-managed VPC *última actualización: 8 oct 2026*; fase de red bien arquitecturada *11 sep 2026*; páginas de PrivateLink *9 oct 2026*), de la Databricks Security Reference Architecture y de las páginas de precios de AWS — todas consultadas en **octubre de 2026**. Haz tú mismo la aritmética; es la única manera de defender un diseño de red en una revisión.
+Cada hecho de abajo proviene de la documentación AWS de Databricks (página de customer-managed VPC *última actualización: 8 oct 2026*; fase de red bien arquitecturada *11 sep 2026*; páginas de PrivateLink *9 oct 2026*), de la Databricks Security Reference Architecture y de las páginas de precios de AWS: todas consultadas en **octubre de 2026**. Haz tú mismo la aritmética; es la única manera de defender un diseño de red en una revisión.
 
 ```text
  =============================================================
@@ -33,22 +33,22 @@ Cada hecho de abajo proviene de la documentación AWS de Databricks (página de 
 
 En esta lección vas a:
 
-- diseccionar la **anatomía del workspace** — los cuatro objetos de la consola de cuenta con los que se monta un workspace de Databricks sobre AWS y la confianza cross-account que los une;
+- diseccionar la **anatomía del workspace**: los cuatro objetos de la consola de cuenta con los que se monta un workspace de Databricks sobre AWS y la confianza cross-account que los une;
 - dimensionar una **VPC gestionada por el cliente** con la regla documentada `(addresses − 5) ÷ 2`, desde `/26` (29 nodos) hasta `/17` (16,381 nodos), y elegir subredes contra un objetivo real de nodos;
-- ejecutar correctamente **secure cluster connectivity (SCC)** — qué elimina, qué no elimina, y por qué el fijado de certificados convierte la inspección TLS en un asesino de clústeres;
+- ejecutar correctamente **secure cluster connectivity (SCC)**: qué elimina, qué no elimina, y por qué el fijado de certificados convierte la inspección TLS en un asesino de clústeres;
 - diseñar el **egress** a la manera de Databricks: endpoints **gateway** de S3 (gratis), endpoints **interface** de STS + Kinesis, la economía del NAT y la construcción air-gapped de la Opción 2;
 - cablear **los tres sabores de PrivateLink** (inbound, back-end classic, outbound/serverless) con los prerrequisitos correctos y los límites de NCC;
 - cifrar el **root bucket y los artefactos del plano de control** con los casos de uso de KMS correctos, y leer la política de la clave línea a línea;
-- escribir la **política anotada del root bucket** — la condición `aws:PrincipalTag/DatabricksAccountId` y el deny `unity-catalog/*`;
+- escribir la **política anotada del root bucket**: la condición `aws:PrincipalTag/DatabricksAccountId` y el deny `unity-catalog/*`;
 - elegir entre **instance profiles, storage credentials y service credentials**, y ver por qué la ruta moderna ata IAM a los *principals*, no a las cajas;
-- calcular a mano **siete ejemplos resueltos** — la capacidad de la subred, la factura de NAT frente a endpoints, el coste del inventario de endpoints, el coste mensual de KMS, el JSON de la política de confianza, la matriz de security groups y la política del root bucket;
+- calcular a mano **siete ejemplos resueltos**: la capacidad de la subred, la factura de NAT frente a endpoints, el coste del inventario de endpoints, el coste mensual de KMS, el JSON de la política de confianza, la matriz de security groups y la política del root bucket;
 - estudiar **dos casos de clientes de AWS con nombre propio** (Block y Amgen), leer el **recuadro de actualizaciones de 2026** y practicar con **12 preguntas tipo examen** más cuatro comprobaciones interactivas.
 
 ---
 
 ## 1. Anatomía del workspace: los cuatro objetos que realmente creas
 
-Un workspace de Databricks en AWS no es “una flota de EC2”. Es un **objeto de la consola de cuenta montado con cuatro piezas** — tres que tú suministras o apruebas, uno que crea Databricks (página de customer-managed VPC, 8 oct 2026; guía de creación de workspace, 11 sep 2026):
+Un workspace de Databricks en AWS no es “una flota de EC2”. Es un **objeto de la consola de cuenta montado con cuatro piezas**: tres que tú suministras o apruebas, uno que crea Databricks (página de customer-managed VPC, 8 oct 2026; guía de creación de workspace, 11 sep 2026):
 
 | # | Objeto | Dónde vive | Qué ata |
 |---|---|---|---|
@@ -82,11 +82,11 @@ graph TB
   K2 --> WS
 ```
 
-**Creación automática frente a manual.** La configuración automática (recomendada) usa una delegación temporal de AWS IAM para que nunca tengas que copiar políticas de confianza a mano. La configuración manual te obliga a construir cada rol y cada política tú mismo — y por eso la guía manual publica los ID de cuenta de confianza y la forma de la política de bucket que verás en la sección 7 (guía de creación de workspace, 11 sep 2026).
+**Creación automática frente a manual.** La configuración automática (recomendada) usa una delegación temporal de AWS IAM para que nunca tengas que copiar políticas de confianza a mano. La configuración manual te obliga a construir cada rol y cada política tú mismo, y por eso la guía manual publica los ID de cuenta de confianza y la forma de la política de bucket que verás en la sección 7 (guía de creación de workspace, 11 sep 2026).
 
-- **📚 ¿Sabías que…?** Los ID de cuenta de AWS de Databricks son públicos y dependen de la partición: **`414351767826`** para las regiones comerciales, `044793339203` para AWS GovCloud, `170661010020` para GovCloud DoD (guía de creación de workspace, 11 sep 2026). La cuenta de origen de las AMI para las imágenes de workspace es `601306020600`. Cualquier política de confianza que escribas para Databricks nombra una de estas — y siempre la emparejas con **`aws:ExternalId` igual al ID de *tu* cuenta de Databricks**, de modo que un segundo cliente de Databricks no pueda asumir tu rol.
+- **📚 ¿Sabías que…?** Los ID de cuenta de AWS de Databricks son públicos y dependen de la partición: **`414351767826`** para las regiones comerciales, `044793339203` para AWS GovCloud, `170661010020` para GovCloud DoD (guía de creación de workspace, 11 sep 2026). La cuenta de origen de las AMI para las imágenes de workspace es `601306020600`. Cualquier política de confianza que escribas para Databricks nombra una de estas, y siempre la emparejas con **`aws:ExternalId` igual al ID de *tu* cuenta de Databricks**, de modo que un segundo cliente de Databricks no pueda asumir tu rol.
 
-### 1.1 Ejemplo resuelto E1 — la política de confianza cross-account, línea a línea
+### 1.1 Ejemplo resuelto E1: la política de confianza cross-account, línea a línea
 
 La configuración manual pide un rol en *tu* cuenta en el que confíe Databricks. La forma esencial (patrón de la guía de creación de workspace de Databricks y de la Databricks Security Reference Architecture, consultada 2026-10):
 
@@ -110,10 +110,10 @@ La configuración manual pide un rol en *tu* cuenta en el que confíe Databricks
 }
 ```
 
-Tres comprobaciones que un revisor debe hacer sobre este JSON: (1) la cuenta del ARN es la cuenta comercial de Databricks `414351767826` (o el ID de GovCloud si estás en GovCloud); (2) el **external ID es igual al ID de tu cuenta de Databricks**, no una cadena inventada; (3) la política de permisos del rol se acota a acciones de EC2/EBS/Spot etiquetadas para Databricks donde los estándares de tu organización lo exijan — la construcción de referencia del SRA usa condiciones de etiqueta `Vendor=Databricks` para que solo las instancias lanzadas por Databricks lleven el perfil.
+Tres comprobaciones que un revisor debe hacer sobre este JSON: (1) la cuenta del ARN es la cuenta comercial de Databricks `414351767826` (o el ID de GovCloud si estás en GovCloud); (2) el **external ID es igual al ID de tu cuenta de Databricks**, no una cadena inventada; (3) la política de permisos del rol se acota a acciones de EC2/EBS/Spot etiquetadas para Databricks donde los estándares de tu organización lo exijan: la construcción de referencia del SRA usa condiciones de etiqueta `Vendor=Databricks` para que solo las instancias lanzadas por Databricks lleven el perfil.
 
 > [!IMPORTANT]
-> ⚠️ **Una configuración de red es inmutable y no reutilizable.** No puedes editar una configuración de red creada ni un registro de endpoint de VPC. Cambiar subredes o CIDR significa: terminar todos los clústeres → crear subredes nuevas → crear una configuración de red *nueva* → actualizar el workspace. Y “you cannot reuse a network configuration object across workspaces” (página de customer-managed VPC, 8 oct 2026) — incluso cuando dos workspaces comparten subredes, cada uno obtiene su propio registro. Diseña los CIDR una sola vez, con holgura, en la sección 2.
+> ⚠️ **Una configuración de red es inmutable y no reutilizable.** No puedes editar una configuración de red creada ni un registro de endpoint de VPC. Cambiar subredes o CIDR significa: terminar todos los clústeres → crear subredes nuevas → crear una configuración de red *nueva* → actualizar el workspace. Y “you cannot reuse a network configuration object across workspaces” (página de customer-managed VPC, 8 oct 2026): incluso cuando dos workspaces comparten subredes, cada uno obtiene su propio registro. Diseña los CIDR una sola vez, con holgura, en la sección 2.
 
 ---
 
@@ -128,7 +128,7 @@ Tres comprobaciones que un revisor debe hacer sobre este JSON: (1) la cuenta del
 | Subredes por AZ por workspace | Una seleccionable por AZ (puede haber más; se adjunta una) |
 | DNS de la VPC | Hostnames **y** resolución activados |
 | Tipo de subred | **Debe ser privada**; salida vía NAT+IGW o endpoints |
-| Tablas de rutas | Las subredes del workspace llevan una ruta `0.0.0.0/0` (hacia NAT o un aparato) — salvo en la Opción 2 air-gapped |
+| Tablas de rutas | Las subredes del workspace llevan una ruta `0.0.0.0/0` (hacia NAT o un aparato): salvo en la Opción 2 air-gapped |
 | NACLs | Deben permitir `0.0.0.0/0` de entrada como regla de máxima prioridad; no deben denegar los puertos de salida obligatorios |
 | Security groups | **1 a 5** por workspace; se recomiendan subredes y SG únicas por workspace |
 | IPs por nodo | **Dos** (una de gestión, una de la aplicación Spark) |
@@ -138,7 +138,7 @@ Tres comprobaciones que un revisor debe hacer sobre este JSON: (1) la cuenta del
 
 La ruta `0.0.0.0/0` es la parte que confunde a la gente: las subredes del *workspace* son privadas, pero en la Opción 1 (la configuración estándar recomendada) su tabla de rutas sigue apuntando el tráfico por defecto hacia un **NAT gateway situado en su propia subred pública** que enruta el cuadriplo cero hacia un internet gateway. Privado significa “sin IPs públicas en mis nodos”, no “sin salida”.
 
-### 2.2 Ejemplo resuelto E2 — dimensionar subredes para 450 nodos concurrentes por AZ
+### 2.2 Ejemplo resuelto E2: dimensionar subredes para 450 nodos concurrentes por AZ
 
 **Objetivo:** un equipo de plataforma quiere clústeres de hasta **450 nodos por zona de disponibilidad**, dos AZ, más margen para instance pools y SQL warehouses. Aplica la fórmula documentada `nodes = (addresses − 5) ÷ 2`:
 
@@ -160,7 +160,7 @@ Elegidas: dos subredes de trabajo /22, p. ej. 10.42.0.0/22 (AZ-a) y
 Espacio VPC restante: subredes NAT /24, una subred de endpoints, crecimiento.
 ```
 
-En esa aritmética viven dos trampas. Primero, **el suelo de `/26` es legal pero inútil** — 29 nodos por AZ mueren con la primera carga de trabajo real, pero cumple la letra de la regla de máscara, así que la validación de creación del workspace pasa y el fallo llega después como “clústeres atascados en pending”. Segundo, la capacidad también la consumen cosas **inactivas**: los instance pools mantienen capacidad caliente, los SQL warehouses retienen nodos entre consultas, y un all-purpose cluster que alguien olvidó terminar retiene IPs durante días. Dimensiona para el pico *más* la flota inactiva.
+En esa aritmética viven dos trampas. Primero, **el suelo de `/26` es legal pero inútil**: 29 nodos por AZ mueren con la primera carga de trabajo real, pero cumple la letra de la regla de máscara, así que la validación de creación del workspace pasa y el fallo llega después como “clústeres atascados en pending”. Segundo, la capacidad también la consumen cosas **inactivas**: los instance pools mantienen capacidad caliente, los SQL warehouses retienen nodos entre consultas, y un all-purpose cluster que alguien olvidó terminar retiene IPs durante días. Dimensiona para el pico *más* la flota inactiva.
 
 ```plot
 {
@@ -181,7 +181,7 @@ En esa aritmética viven dos trampas. Primero, **el suelo de `/26` es legal pero
 }
 ```
 
-- **📚 ¿Sabías que…?** El dividir a la mitad no es arbitrario: “Databricks asigna dos direcciones IP por nodo, una para el tráfico de gestión y otra para las aplicaciones de Spark. El número total de instancias para cada subred equivale a la mitad del número de direcciones IP disponibles” (página de customer-managed VPC, 8 oct 2026). Las cinco direcciones restadas están reservadas por AWS (red, enrutador, DNS, uso futuro). Así que un `/23` no son “512 nodos” — son **253**, y toda revisión de capacidad que cita la aritmética cruda del CIDR se equivoca por 2×.
+- **📚 ¿Sabías que…?** El dividir a la mitad no es arbitrario: “Databricks asigna dos direcciones IP por nodo, una para el tráfico de gestión y otra para las aplicaciones de Spark. El número total de instancias para cada subred equivale a la mitad del número de direcciones IP disponibles” (página de customer-managed VPC, 8 oct 2026). Las cinco direcciones restadas están reservadas por AWS (red, enrutador, DNS, uso futuro). Así que un `/23` no son “512 nodos”: son **253**, y toda revisión de capacidad que cita la aritmética cruda del CIDR se equivoca por 2×.
 
 ### 2.3 Security groups: la matriz de dos SG
 
@@ -190,7 +190,7 @@ De uno a cinco security groups por workspace; la forma documentada de salida y e
 | SG | Entrada | Salida |
 |---|---|---|
 | **`sg-workspace`** (adjunto a la configuración de red del workspace) | **Todo TCP y todo UDP desde sí mismo** (tráfico interno del clúster) | TCP **443** hacia `0.0.0.0/0`; **3306** (solo el Hive metastore heredado); **6666** (SCC, *solo si PrivateLink*); **8443, 8445** (cómputo → API del plano de control); **8444** (streaming de logging/lineage de Unity Catalog); opcionalmente **2443** (perfil de seguridad FIPS), **5432** (Lakebase), **53** (DNS propio) |
-| **`sg-endpoints`** (ENIs de endpoint interface) | TCP **443** desde `sg-workspace` | No se requieren reglas — los security groups son stateful |
+| **`sg-endpoints`** (ENIs de endpoint interface) | TCP **443** desde `sg-workspace` | No se requieren reglas: los security groups son stateful |
 
 No copies puertos de plantillas NSG de Azure. **3306 existe solo para el Hive metastore heredado de Databricks** (desactivado por defecto en los workspaces nuevos de Unity Catalog), **6666 es SCC solo con PrivateLink**, **8444 es el stream de lineage/logging de Unity Catalog** y **2443 es FIPS**. Un conjunto de reglas “seguro” que descarta 8443/8444 produce fallos de lanzamiento que parecen bugs del producto.
 
@@ -215,12 +215,12 @@ Tres consecuencias que los ingenieros se equivocan interpretando:
 
 1. **SCC ≠ sin internet.** SCC elimina las necesidades de *entrada*. Databricks sigue requiriendo *salida* hacia los FQDNs del relay SCC, `s3.amazonaws.com:443`, `sts.amazonaws.com:443`, Kinesis y los repositorios de librerías. Subredes privadas sin NAT ni endpoints te dan clústeres que nunca arrancan y `pip`/Maven que se quedan colgados.
 2. **Allowlist de FQDNs, no de direcciones IP.** “Always allowlist the provided domain names (FQDNs) for secure cluster connectivity (SCC) relay endpoints, rather than individual IP addresses” (página de IP addresses and domains, consultada 2026-10). Las IPs de NAT del plano de control se publican por región (p. ej. us-east-1 `3.237.73.224/28`) y sirven para las *políticas de bucket*, no para el egress de SCC.
-3. **SCC es prerrequisito de PrivateLink classic (back-end).** Si PrivateLink está en tu hoja de ruta, SCC debe estar activo desde el primer día — y un workspace existente sin SCC es una conversación de reconstrucción, no un interruptor.
+3. **SCC es prerrequisito de PrivateLink classic (back-end).** Si PrivateLink está en tu hoja de ruta, SCC debe estar activo desde el primer día, y un workspace existente sin SCC es una conversación de reconstrucción, no un interruptor.
 
 > [!WARNING]
 > ⚠️ **Nunca pongas un proxy que intercepte TLS delante del plano de control de Databricks o del relay SCC.** “Databricks control plane and SCC relay connections use TLS with certificate pinning. Do not enable TLS inspection (decrypt and re-encrypt) on traffic between your clusters and the Databricks control plane. Doing so causes cluster failures” (página de arquitectura de seguridad gestionada, consultada 2026-10). Inspecciona en cambio otras rutas de salida. Esta sola línea ahorra más horas de revisión de incidentes que cualquier otra cosa de esta página.
 
-### 3.1 Comprobación interactiva — relaciona cada puerto de salida con su función
+### 3.1 Comprobación interactiva: relaciona cada puerto de salida con su función
 
 ```matching
 {
@@ -243,21 +243,21 @@ Tres consecuencias que los ingenieros se equivocan interpretando:
 
 ### 4.1 Lo que debe alcanzar una VPC gestionada por el cliente
 
-“Hay cuatro servicios de AWS a los que debe llegar un workspace de Databricks con una VPC gestionada por el cliente: **STS, S3, Kinesis y RDS**” (página de customer-managed VPC, 8 oct 2026). RDS es solo para el **Hive metastore heredado de Databricks** — un workspace de Unity Catalog no lo necesita. Así que el conjunto obligatorio moderno es **STS + S3 + Kinesis**.
+“Hay cuatro servicios de AWS a los que debe llegar un workspace de Databricks con una VPC gestionada por el cliente: **STS, S3, Kinesis y RDS**” (página de customer-managed VPC, 8 oct 2026). RDS es solo para el **Hive metastore heredado de Databricks**: un workspace de Unity Catalog no lo necesita. Así que el conjunto obligatorio moderno es **STS + S3 + Kinesis**.
 
 La mecánica del tipo de endpoint que decide tu factura:
 
 | Servicio | Tipo de endpoint disponible | Precio (consultado 2026-10) |
 |---|---|---|
-| **S3** | **Gateway** (adjunto a tablas de rutas) | **Gratis** — “There is no additional charge for using gateway endpoints” (guía de usuario de VPC de AWS) |
-| S3 | Interface (PrivateLink) | Por hora y por AZ + procesamiento por GB — Databricks: “Unless strictly required for compliance reasons, prefer the gateway S3 VPC endpoints, which are free of charge” (11 sep 2026) |
+| **S3** | **Gateway** (adjunto a tablas de rutas) | **Gratis**: “There is no additional charge for using gateway endpoints” (guía de usuario de VPC de AWS) |
+| S3 | Interface (PrivateLink) | Por hora y por AZ + procesamiento por GB: Databricks: “Unless strictly required for compliance reasons, prefer the gateway S3 VPC endpoints, which are free of charge” (11 sep 2026) |
 | **DynamoDB** | Gateway | Gratis (el SRA lo lista como *opcional* para Databricks; documentado específicamente para acceso **serverless** en la misma región) |
-| **STS** | Solo interface | ~**$0.01/AZ-hora** (tarifa de EE. UU. publicada habitualmente — verifícala en la página de precios de tu región) + $0.01/GB en el primer PB |
+| **STS** | Solo interface | ~**$0.01/AZ-hora** (tarifa de EE. UU. publicada habitualmente: verifícala en la página de precios de tu región) + $0.01/GB en el primer PB |
 | **Kinesis** | Solo interface | El mismo precio de endpoint interface |
 
 Los endpoints gateway existen **solo para S3 y DynamoDB** (guía de usuario de VPC de AWS). Todo lo demás que quieras sacar del camino público es un endpoint interface facturado **por AZ, por hora, haya o no tráfico**.
 
-### 4.2 Ejemplo resuelto E3 — la factura de NAT frente a endpoints
+### 4.2 Ejemplo resuelto E3: la factura de NAT frente a endpoints
 
 Escenario de la orientación de red de Databricks: un workspace que mueve **1 TB/mes de tráfico S3** más **500 GB/mes de tráfico de otras APIs de AWS**, dos AZ, tarifas a oct 2026 (NAT gateway $0.045/hora + $0.045/GB; endpoints interface ~$0.01/AZ-hora; endpoints gateway gratis):
 
@@ -287,7 +287,7 @@ Escenario C - Opción 2 air-gapped: sin NAT, sin IGW
   TOTAL (solo partidas de red) ............... $ 58.40 / mes
 ```
 
-La enseñanza no es el giro de $6 — es la **forma**. El NAT cobra por hora *y* por GB para siempre; el endpoint **gateway** de S3 es gratis y saca el mayor camino de datos del NAT por completo; los endpoints interface son la única manera de mantener STS/Kinesis privados, pero los pagas por AZ incluso en reposo. En palabras de Databricks: “If most traffic through your NAT gateway is to AWS services that support interface endpoints or gateway endpoints, consider creating an interface endpoint or gateway endpoint for these services” (guía de NAT gateway de AWS). Y por GB a través de PrivateLink: primer PB **$0.01/GB**, siguientes 4 PB **$0.006**, por encima de 5 PB **$0.004** (precios de AWS PrivateLink, consultados 2026-10).
+La enseñanza no es el giro de $6: es la **forma**. El NAT cobra por hora *y* por GB para siempre; el endpoint **gateway** de S3 es gratis y saca el mayor camino de datos del NAT por completo; los endpoints interface son la única manera de mantener STS/Kinesis privados, pero los pagas por AZ incluso en reposo. En palabras de Databricks: “If most traffic through your NAT gateway is to AWS services that support interface endpoints or gateway endpoints, consider creating an interface endpoint or gateway endpoint for these services” (guía de NAT gateway de AWS). Y por GB a través de PrivateLink: primer PB **$0.01/GB**, siguientes 4 PB **$0.006**, por encima de 5 PB **$0.004** (precios de AWS PrivateLink, consultados 2026-10).
 
 ### 4.3 Opción 1 frente a Opción 2: la decisión de salida
 
@@ -308,9 +308,9 @@ flowchart TD
   F & G & H --> J[Los clústeres arrancan; pip/Maven deben venir del espejo]
 ```
 
-Las construccions air-gapped siguen debiendo salida a `s3.amazonaws.com:443`, `sts.amazonaws.com:443` y los FQDNs del relay SCC — vía endpoints, no por internet. El compromiso está explícito en la documentación: la Opción 2 elimina el coste del NAT y los caminos públicos, y te entrega *cada* endpoint como dependencia operativa.
+Las construccions air-gapped siguen debiendo salida a `s3.amazonaws.com:443`, `sts.amazonaws.com:443` y los FQDNs del relay SCC: vía endpoints, no por internet. El compromiso está explícito en la documentación: la Opción 2 elimina el coste del NAT y los caminos públicos, y te entrega *cada* endpoint como dependencia operativa.
 
-### 4.4 Comprobación interactiva — ordena una construcción air-gapped
+### 4.4 Comprobación interactiva: ordena una construcción air-gapped
 
 ```dragdrop
 {
@@ -347,7 +347,7 @@ Databricks admite **tres tipos de conectividad Private Link** (página de concep
 | **Classic (back-end)** | Clústeres en tu VPC → dos endpoints interface → plano de control | **Relay SCC** + **workspace (API REST)** | Plan Enterprise + **VPC gestionada por el cliente** + **SCC**; endpoints registrados como VPC endpoint registrations y referenciados por la configuración de red |
 | **Outbound (serverless)** | Plano de cómputo serverless → endpoints privados adjuntos a la NCC → tus buckets S3 o tu VPC | Endpoints privados vía **Network Connectivity Config (NCC)** | NCC en la cuenta; la conectividad privada de S3 estaba en **Public Preview** según la página de conceptos del 9 oct 2026 |
 
-Un cuarto tipo, más estrecho — **Service Direct** — existe para servicios intensivos en rendimiento (Zerobus Ingest, Lakebase Autoscaling). Databricks “recomienda como máximo un endpoint de cada tipo de endpoint” dentro de la misma VPC.
+Un cuarto tipo, más estrecho, **Service Direct**, existe para servicios intensivos en rendimiento (Zerobus Ingest, Lakebase Autoscaling). Databricks “recomienda como máximo un endpoint de cada tipo de endpoint” dentro de la misma VPC.
 
 ```mermaid
 graph LR
@@ -374,9 +374,9 @@ graph LR
   SP --> NCC --> PE
 ```
 
-**Límites de NCC que conviene memorizar** (página de conceptos de Private Link, 9 oct 2026): hasta **10 NCC por región por cuenta**; **50 workspaces por NCC**; **30 endpoints privados de S3 por región**; **100 endpoints privados por región para recursos de VPC**. Los VPC endpoint registrations son **inmutables una vez creados**. El puerto **3306** (HMS heredado) **no** atraviesa PrivateLink. Y según la página de private access settings (4 may 2026), el nivel de acceso privado `ANY` está obsoleto — usa **Account** (solo los endpoints de VPC registrados en tu cuenta de Databricks) o **Endpoint** (lista de permitidos explícita).
+**Límites de NCC que conviene memorizar** (página de conceptos de Private Link, 9 oct 2026): hasta **10 NCC por región por cuenta**; **50 workspaces por NCC**; **30 endpoints privados de S3 por región**; **100 endpoints privados por región para recursos de VPC**. Los VPC endpoint registrations son **inmutables una vez creados**. El puerto **3306** (HMS heredado) **no** atraviesa PrivateLink. Y según la página de private access settings (4 may 2026), el nivel de acceso privado `ANY` está obsoleto: usa **Account** (solo los endpoints de VPC registrados en tu cuenta de Databricks) o **Endpoint** (lista de permitidos explícita).
 
-### 5.1 Ejemplo resuelto E4 — inventario de endpoints y coste en reposo
+### 5.1 Ejemplo resuelto E4: inventario de endpoints y coste en reposo
 
 Toma el workspace de dos AZ de E2 y añádele el PrivateLink classic back-end. Endpoints interface a la tarifa publicada habitualmente en EE. UU. de ~$0.01/AZ-hora (**≈ $7.30 por AZ-mes**; verifica tu región en aws.amazon.com/privatelink/pricing, consultado 2026-10):
 
@@ -411,9 +411,9 @@ Databricks cifra en reposo por defecto (SSE en el root bucket; los artefactos de
 | **Managed services** | `MANAGED_SERVICES` | Datos en el plano de control de Databricks: notebooks, secretos, datos e historial de consultas SQL, almacenamiento por defecto |
 | **Workspace storage** | `STORAGE` | Tu **bucket de almacenamiento del workspace** (DBFS root, FileStore, modelos de MLflow, datos de pipelines de Lakeflow, resultados de jobs, resultados SQL, revisiones de notebook) y, opcionalmente, los **volúmenes EBS** del cómputo classic |
 
-Unity Catalog además “admite la capacidad de leer y escribir en buckets S3 con cifrado KMS habilitado” — a cada IAM role de un storage credential se le conceden las acciones `kms:` que necesita sobre la clave del bucket.
+Unity Catalog además “admite la capacidad de leer y escribir en buckets S3 con cifrado KMS habilitado”: a cada IAM role de un storage credential se le conceden las acciones `kms:` que necesita sobre la clave del bucket.
 
-### 6.1 Ejemplo resuelto E5 — coste de KMS para un entorno de tres claves
+### 6.1 Ejemplo resuelto E5: coste de KMS para un entorno de tres claves
 
 La construcción de referencia de la Databricks Security Reference Architecture usa **tres claves KMS**: almacenamiento del workspace, managed services y el catálogo del workspace de Unity Catalog. Precios de AWS KMS (consultados 2026-10): **$1.00 por clave por mes** (prorrateado por hora) más **$0.03 por cada 10,000 solicitudes**, con un free tier de 20,000 solicitudes/mes.
 
@@ -434,7 +434,7 @@ enredo de claves es el coste de auditabilidad, no la factura de KMS.
 
 ### 6.2 La línea de la política de la clave que debes acertar
 
-La guía de configuración de customer-managed-keys exige que la política de la clave permita al principal de Databricks — con una **condición de etiqueta**, no con acceso abierto (consultada 2026-10):
+La guía de configuración de customer-managed-keys exige que la política de la clave permita al principal de Databricks: con una **condición de etiqueta**, no con acceso abierto (consultada 2026-10):
 
 ```json
 {
@@ -453,22 +453,22 @@ La guía de configuración de customer-managed-keys exige que la política de la
 }
 ```
 
-Más una declaración separada acotada a tu propio rol cross-account para los usos relacionados con EBS. La condición de etiqueta es la barandilla: garantiza que solo los principals de Databricks *etiquetados con el ID de tu cuenta* puedan usar la clave — no cualquier principal de la cuenta AWS de Databricks. Emparejala con la configuración de caso de uso `MANAGED_SERVICES` frente a `STORAGE` para que notebooks-secretos-historial SQL y bucket-EBS sean rotulables de forma independiente.
+Más una declaración separada acotada a tu propio rol cross-account para los usos relacionados con EBS. La condición de etiqueta es la barandilla: garantiza que solo los principals de Databricks *etiquetados con el ID de tu cuenta* puedan usar la clave: no cualquier principal de la cuenta AWS de Databricks. Emparejala con la configuración de caso de uso `MANAGED_SERVICES` frente a `STORAGE` para que notebooks-secretos-historial SQL y bucket-EBS sean rotulables de forma independiente.
 
-- **📚 ¿Sabías que…?** En tránsito, Databricks usa TLS 1.2+ entre usuarios/APIs/herramientas de BI y entre los planos de control y de cómputo; el cifrado del shuffle entre workers es **opt-in** (nivel Enterprise — mediante un init script con AES-256/TLS 1.3, o eligiendo familias de instancias que cifran el tráfico entre nodos de forma nativa). Así que “cifrado en reposo con CMK” y “cifrado en tránsito en todas partes” son tres casillas separadas, no una.
+- **📚 ¿Sabías que…?** En tránsito, Databricks usa TLS 1.2+ entre usuarios/APIs/herramientas de BI y entre los planos de control y de cómputo; el cifrado del shuffle entre workers es **opt-in** (nivel Enterprise: mediante un init script con AES-256/TLS 1.3, o eligiendo familias de instancias que cifran el tráfico entre nodos de forma nativa). Así que “cifrado en reposo con CMK” y “cifrado en tránsito en todas partes” son tres casillas separadas, no una.
 
 ---
 
 ## 7. El root bucket: qué guarda, y la política que lo protege
 
-El **root bucket** (almacenamiento del workspace) es un bucket S3 **en tu cuenta AWS** que Databricks aprovisiona (configuración automática) o que tú registras (configuración manual: nombre del bucket + ARN de la IAM role). Almacena activos del workspace “such as data, libraries, and logs”, el **DBFS root** (FileStore, modelos de MLflow, datos de pipelines de Lakeflow), datos de sistema del workspace (resultados de jobs, resultados de Databricks SQL, revisiones de notebook) y — según la guía de creación de workspace (11 sep 2026) — **“the workspace's default catalog”**.
+El **root bucket** (almacenamiento del workspace) es un bucket S3 **en tu cuenta AWS** que Databricks aprovisiona (configuración automática) o que tú registras (configuración manual: nombre del bucket + ARN de la IAM role). Almacena activos del workspace “such as data, libraries, and logs”, el **DBFS root** (FileStore, modelos de MLflow, datos de pipelines de Lakeflow), datos de sistema del workspace (resultados de jobs, resultados de Databricks SQL, revisiones de notebook) y, según la guía de creación de workspace (11 sep 2026), **“the workspace's default catalog”**.
 
 Dos hechos sobre él que evitan dos desastres clásicos:
 
 1. **Es del cliente pero lo opera Databricks.** El plano de control de Databricks lo alcanza como principal `arn:aws:iam::414351767826:root`, a lo que tu política de bucket permite *solo* bajo la condición de etiqueta de cuenta.
-2. **No es tu lago de analítica.** DBFS root y los montajes de DBFS están **obsoletos** — “New accounts are provisioned without access to these features. Databricks recommends using Unity Catalog volumes, external locations, or workspace files instead” (página de mejores prácticas de DBFS + UC, consultada 2026-10). Y en la misma página: **“You should never load a storage account used as a DBFS root as an external location in Unity Catalog.”**
+2. **No es tu lago de analítica.** DBFS root y los montajes de DBFS están **obsoletos**: “New accounts are provisioned without access to these features. Databricks recommends using Unity Catalog volumes, external locations, or workspace files instead” (página de mejores prácticas de DBFS + UC, consultada 2026-10). Y en la misma página: **“You should never load a storage account used as a DBFS root as an external location in Unity Catalog.”**
 
-### 7.1 Ejemplo resuelto E6 — política anotada del root bucket
+### 7.1 Ejemplo resuelto E6: política anotada del root bucket
 
 Forma de la configuración manual según la guía de creación de workspace (11 sep 2026), anotada:
 
@@ -503,7 +503,7 @@ Forma de la configuración manual según la guía de creación de workspace (11 
 }
 ```
 
-Movimientos de endurecimiento vistos en diseños de producción (patrones del SRA de Databricks y de la lista documentada de claves de condición): añadir condiciones `aws:SourceIp` para el rango de NAT del plano de control de tu región (un workspace recién creado falla su aprovisionamiento si la IP de NAT del plano de control de `us-west` no está permitida), y/o `aws:sourceVpce` ligado a tu endpoint gateway de S3 para que el bucket responda solo desde dentro de la VPC. Databricks apunta que el acceso del plano de control usa **VPC IDs para S3 en la misma región** y **IPs de NAT para S3 entre regiones** — diseña la condición para el par de regiones en el que realmente trabajas.
+Movimientos de endurecimiento vistos en diseños de producción (patrones del SRA de Databricks y de la lista documentada de claves de condición): añadir condiciones `aws:SourceIp` para el rango de NAT del plano de control de tu región (un workspace recién creado falla su aprovisionamiento si la IP de NAT del plano de control de `us-west` no está permitida), y/o `aws:sourceVpce` ligado a tu endpoint gateway de S3 para que el bucket responda solo desde dentro de la VPC. Databricks apunta que el acceso del plano de control usa **VPC IDs para S3 en la misma región** y **IPs de NAT para S3 entre regiones**: diseña la condición para el par de regiones en el que realmente trabajas.
 
 ---
 
@@ -513,10 +513,10 @@ Este es el cambio conceptual más importante del material de Databricks-on-AWS d
 
 | Mecanismo | Se ata a | Estado a oct 2026 | Úsalo para |
 |---|---|---|---|
-| **Instance profile** | La **instancia EC2** (y por tanto el clúster) | **Heredado** — todavía administrable (Settings → Security), útil solo para montajes de DBFS heredados / `fs.s3a` / ACLs del HMS heredado | Nada nuevo en workspaces UC |
-| **Storage credential** (securable de UC) | Los **principals** — usuarios, grupos, service principals, vía grants de UC | **Ruta moderna** | IAM role envuelta como objeto UC, usada por los **external locations** para tablas y volúmenes |
-| **Service credential** (UC) | Los **principals** | **Ruta moderna** | Servicios de AWS que no son de almacenamiento — Kinesis, Secrets Manager, Glue |
-| **Credential passthrough** | Passthrough de identidad por usuario | **Obsoleto desde DBR 15.0** — “Databricks recommends that you upgrade to Unity Catalog” (página de archivo, 13 may 2024) | Nada — migra |
+| **Instance profile** | La **instancia EC2** (y por tanto el clúster) | **Heredado**: todavía administrable (Settings → Security), útil solo para montajes de DBFS heredados / `fs.s3a` / ACLs del HMS heredado | Nada nuevo en workspaces UC |
+| **Storage credential** (securable de UC) | Los **principals**: usuarios, grupos, service principals, vía grants de UC | **Ruta moderna** | IAM role envuelta como objeto UC, usada por los **external locations** para tablas y volúmenes |
+| **Service credential** (UC) | Los **principals** | **Ruta moderna** | Servicios de AWS que no son de almacenamiento: Kinesis, Secrets Manager, Glue |
+| **Credential passthrough** | Passthrough de identidad por usuario | **Obsoleto desde DBR 15.0**, “Databricks recommends that you upgrade to Unity Catalog” (página de archivo, 13 may 2024) | Nada, migra |
 
 Databricks enuncia el cambio sin rodeos: los service credentials son “the Unity Catalog alternative to instance profiles, with the advantage that access is not tied to a specific compute resource but instead to users, groups, or service principals” (documentación de service-credentials, consultada 2026-10). Un storage credential se define como “a Unity Catalog credential used to access external locations and tables” (referencia SQL de storage-credential, 11 sep 2026).
 
@@ -530,7 +530,7 @@ flowchart LR
   SP[Service principal para jobs] --> SVC[SERVICE CREDENTIAL<br/>Kinesis / Secrets Manager / Glue]
 ```
 
-### 8.1 Ejemplo resuelto E7 — la ruta moderna de acceso a datos, de extremo a extremo
+### 8.1 Ejemplo resuelto E7: la ruta moderna de acceso a datos, de extremo a extremo
 
 ```sql
 -- 1. The IAM role (your account) trusts Databricks with an external ID,
@@ -555,9 +555,9 @@ GRANT READ VOLUME, WRITE VOLUME
 --   spark.conf.set('fs.s3a.path.style.access', ...)  + instance profile
 ```
 
-La diferencia examinable: los grants del paso 4 siguen al **grupo**, así que el mismo notebook funciona en un clúster de jobs, en un SQL warehouse y en un cómputo serverless sin ningún adjunto de instance profile — y la revocación es un solo `REVOKE`, no un parche de clúster más una edición de la política del bucket.
+La diferencia examinable: los grants del paso 4 siguen al **grupo**, así que el mismo notebook funciona en un clúster de jobs, en un SQL warehouse y en un cómputo serverless sin ningún adjunto de instance profile, y la revocación es un solo `REVOKE`, no un parche de clúster más una edición de la política del bucket.
 
-### 8.2 Comprobación interactiva — completa los términos
+### 8.2 Comprobación interactiva: completa los términos
 
 ```fillblank
 {
@@ -580,9 +580,9 @@ La diferencia examinable: los grants del paso 4 siguen al **grupo**, así que el
 
 En el material oficial aparecen tres patrones de root bucket/cuenta (fundamentados en la guía de creación de workspace, 11 sep 2026):
 
-1. **Cuenta única** — bucket, roles y workspace todo en una cuenta AWS (flujo automático por defecto).
-2. **Política de bucket condicionada por etiqueta** — bucket en tu cuenta, permit para `414351767826:root` condicionado a `aws:PrincipalTag/DatabricksAccountId`, más el deny `unity-catalog/*` (E6).
-3. **Bucket restringido por red** — la misma política más condiciones `aws:SourceIp` (IPs de NAT del plano de control / VPN corporativa) y/o `aws:sourceVpce` (tu endpoint gateway de S3).
+1. **Cuenta única**: bucket, roles y workspace todo en una cuenta AWS (flujo automático por defecto).
+2. **Política de bucket condicionada por etiqueta**: bucket en tu cuenta, permit para `414351767826:root` condicionado a `aws:PrincipalTag/DatabricksAccountId`, más el deny `unity-catalog/*` (E6).
+3. **Bucket restringido por red**: la misma política más condiciones `aws:SourceIp` (IPs de NAT del plano de control / VPN corporativa) y/o `aws:sourceVpce` (tu endpoint gateway de S3).
 
 Para muchas unidades de negocio, la topología documentada por Databricks es hub-and-spoke: “Puedes usar una arquitectura VPC hub-and-spoke en la que todos los endpoints de VPC, los NAT gateways, los firewalls y demás, se instalan en la VPC hub. Cada workspace está asociado a subredes … en una VPC distinta, dentro de la misma cuenta de AWS o de una diferente. Las VPC spoke se conectan con la VPC hub mediante un Transit Gateway” (fase de red bien arquitecturada, 11 sep 2026). Recuerda la restricción de la sección 1: **cada workspace sigue registrando su propia configuración de red**, aunque se compartan subredes.
 
@@ -610,7 +610,7 @@ Trampas operativas recogidas de los modos de fallo documentados (sección de pit
 - **STS bloqueado = clústeres muertos.** STS es obligatorio. Imponer endpoints regionales o una regla de firewall nueva sin un endpoint interface de STS (o sin un allow para `sts.amazonaws.com:443`) hace que los fallos de assume-role detengan los lanzamientos de clústeres y el acceso a S3. La creación manual de workspace exige además el **STS endpoint activado para `us-west-2`**.
 - **NACLs que “ayudan”.** Databricks valida que las NACLs permitan `0.0.0.0/0` de entrada como regla superior; un deny en 8443/8444/6666 causa fallos de lanzamiento crípticos. Reasocia las tablas de rutas si recreas subredes.
 - **Kinesis en `us-west-1`** es entre regiones (los streams de destino viven en `us-west-2`), así que un endpoint regional de Kinesis allí se comporta de otra manera (nota de customer-managed VPC).
-- **La VPC gestionada por Databricks se está retirando:** “In a future release, Databricks plans to deprecate classic workspace creation with a Databricks-managed VPC. New classic workspaces will require a customer-managed VPC” (8 oct 2026) — y un workspace existente con VPC gestionada por Databricks **no puede convertirse in situ**; planifica una reconstrucción.
+- **La VPC gestionada por Databricks se está retirando:** “In a future release, Databricks plans to deprecate classic workspace creation with a Databricks-managed VPC. New classic workspaces will require a customer-managed VPC” (8 oct 2026), y un workspace existente con VPC gestionada por Databricks **no puede convertirse in situ**; planifica una reconstrucción.
 
 - **📚 ¿Sabías que…?** La historia de migración de VPC gestionada por Databricks → VPC gestionada por el cliente tiene un filo duro de Unity Catalog: DBFS root/montajes nunca deben convertirse en un external location de UC, el acceso por instance profile se reemplaza por storage/service credentials, y PrivateLink exige Enterprise + SCC. La ruta realista es aprovisionar un workspace nuevo en la VPC del cliente → adjuntar el metastore → recrear el acceso con storage credentials + external locations → migrar la secuencia completa es el tema de la lección 3.
 
@@ -621,7 +621,7 @@ Trampas operativas recogidas de los modos de fallo documentados (sección de pit
 | Dimensión | Plano classic de cómputo (VPC del cliente) | Serverless (SQL warehouses, jobs serverless) |
 |---|---|---|
 | Dónde corren los nodos | EC2 en **tu** VPC, subredes privadas | Plano de cómputo serverless gestionado por Databricks |
-| IPs públicas | Ninguna (SCC por defecto) | Ninguna — “Serverless SQL warehouses do not have public IP addresses” (página de SQL serverless, 13 ago 2026) |
+| IPs públicas | Ninguna (SCC por defecto) | Ninguna: “Serverless SQL warehouses do not have public IP addresses” (página de SQL serverless, 13 ago 2026) |
 | VPC gestionada por el cliente | Obligatoria para los sabores de PrivateLink | “Customer-managed VPCs are not applicable to compute resources for serverless SQL warehouses” |
 | Camino privado hacia tus datos | Endpoints S3/STS/Kinesis + PrivateLink back-end | Endpoints privados de **NCC**; network policies para el egress (`FULL_ACCESS` o destinos restringidos); DynamoDB en la misma región vía endpoints gateway |
 | Quién posee el enrutamiento | Tú | Databricks (tú suministras los endpoint registrations / reglas de NCC) |
@@ -632,24 +632,24 @@ Trampas operativas recogidas de los modos de fallo documentados (sección de pit
 
 > [!NOTE]
 > **Qué cambió en el sustrato Databricks-on-AWS del que depende esta lección:**
-> - **SCC es el modo por defecto en todas partes** — “Secure cluster connectivity (SCC) has become the default recommendation and is the default deployment mode for workspaces” (fase de red bien arquitecturada, *última actualización: 11 sep 2026*). Cualquier tutorial que abra puertos de entrada para la gestión de clústeres es material pre-SCC.
-> - **Los workspaces classic requerirán VPCs gestionadas por el cliente** — “In a future release, Databricks plans to deprecate classic workspace creation with a Databricks-managed VPC” (página de customer-managed VPC, *última actualización: 8 oct 2026*). Los diseños desde cero nunca deben empezar en una VPC gestionada por Databricks, y los existentes necesitan un plan de reconstrucción, no una actualización in situ.
-> - **Los controles de egress serverless pasaron a network policies; la lista de IPs estables de la NCC desapareció** — “La lista heredada de IPs estables del Public Preview fue retirada y ya no está disponible a través de la NCC UI ni de la Network Connectivity API”; las network policies ofrecen “Allow access to all destinations” (`FULL_ACCESS`) o “Restricted access to specific destinations” (páginas de networking serverless + manage-network-policies, *25 sep 2026*). Los runbooks antiguos con allow-lists de IPs serverless estables están caducados.
-> - **La conectividad privada de S3 para serverless está en Public Preview** — listada como capacidad del endpoint PrivateLink en la página de conceptos (*9 oct 2026*); trata las afirmaciones de GA como prematuras y vuelve a comprobarlo antes de apoyarte en ello en un diseño de cumplimiento.
-> - **Los prerrequisitos de PrivateLink se endurecieron en la documentación**: plan Enterprise tanto para inbound como para back-end classic; VPC gestionada por el cliente **y** SCC para back-end; subred de endpoints con mínimo `/27` para la opción air-gapped; nivel de acceso privado `ANY` obsoleto en favor de los niveles Account/Endpoint (páginas de PrivateLink + private-access-settings, *may–oct 2026*).
-> - **La acreditación AWS Platform Architect evalúa ahora explícitamente el alcance de esta lección** — “Customer-managed VPCs · Customer-managed keys · Cloud service integrations” a lo largo de 20 preguntas, 80% para aprobar, gratuita para clientes y partners de Databricks, válida un año (databricks.com/learn/certification/databricks-on-aws, consultado 2026-10-12).
+> - **SCC es el modo por defecto en todas partes**: “Secure cluster connectivity (SCC) has become the default recommendation and is the default deployment mode for workspaces” (fase de red bien arquitecturada, *última actualización: 11 sep 2026*). Cualquier tutorial que abra puertos de entrada para la gestión de clústeres es material pre-SCC.
+> - **Los workspaces classic requerirán VPCs gestionadas por el cliente**: “In a future release, Databricks plans to deprecate classic workspace creation with a Databricks-managed VPC” (página de customer-managed VPC, *última actualización: 8 oct 2026*). Los diseños desde cero nunca deben empezar en una VPC gestionada por Databricks, y los existentes necesitan un plan de reconstrucción, no una actualización in situ.
+> - **Los controles de egress serverless pasaron a network policies; la lista de IPs estables de la NCC desapareció**: “La lista heredada de IPs estables del Public Preview fue retirada y ya no está disponible a través de la NCC UI ni de la Network Connectivity API”; las network policies ofrecen “Allow access to all destinations” (`FULL_ACCESS`) o “Restricted access to specific destinations” (páginas de networking serverless + manage-network-policies, *25 sep 2026*). Los runbooks antiguos con allow-lists de IPs serverless estables están caducados.
+> - **La conectividad privada de S3 para serverless está en Public Preview**: listada como capacidad del endpoint PrivateLink en la página de conceptos (*9 oct 2026*); trata las afirmaciones de GA como prematuras y vuelve a comprobarlo antes de apoyarte en ello en un diseño de cumplimiento.
+> - **Los prerrequisitos de PrivateLink se endurecieron en la documentación**: plan Enterprise tanto para inbound como para back-end classic; VPC gestionada por el cliente **y** SCC para back-end; subred de endpoints con mínimo `/27` para la opción air-gapped; nivel de acceso privado `ANY` obsoleto en favor de los niveles Account/Endpoint (páginas de PrivateLink + private-access-settings, *may: oct 2026*).
+> - **La acreditación AWS Platform Architect evalúa ahora explícitamente el alcance de esta lección**: “Customer-managed VPCs · Customer-managed keys · Cloud service integrations” a lo largo de 20 preguntas, 80% para aprobar, gratuita para clientes y partners de Databricks, válida un año (databricks.com/learn/certification/databricks-on-aws, consultado 2026-10-12).
 
 ---
 
 ## Casos Reales
 
-Las páginas de clientes publican *resultados* de arquitectura, no diagramas de VPC — “Cloud: AWS” te dice que el sustrato es el sustrato de este curso, nunca qué CIDR ni qué disposición de KMS eligió una empresa. Cada cifra de abajo es declarada por el cliente, con la fuente y su fecha indicadas para que puedas verificarla.
+Las páginas de clientes publican *resultados* de arquitectura, no diagramas de VPC: “Cloud: AWS” te dice que el sustrato es el sustrato de este curso, nunca qué CIDR ni qué disposición de KMS eligió una empresa. Cada cifra de abajo es declarada por el cliente, con la fuente y su fecha indicadas para que puedas verificarla.
 
-### Caso A — Block (Square, Cash App, TIDAL): 12 PB en S3, fontanería IAM colapsada en Unity Catalog
+### Caso A, Block (Square, Cash App, TIDAL): 12 PB en S3, fontanería IAM colapsada en Unity Catalog
 
 | Elemento | Detalle |
 |---|---|
-| Cliente | **Block** (Square, Cash App, TIDAL) — servicios financieros; página de historia etiquetada **Cloud: AWS** |
+| Cliente | **Block** (Square, Cash App, TIDAL): servicios financieros; página de historia etiquetada **Cloud: AWS** |
 | Desafío | 12 PB de datos de grafos + analítica fragmentados entre unidades de negocio; un doloroso flujo IAM de dos pasos (adjuntar políticas IAM a roles, *después* a buckets S3); gobernanza de PII GDPR/CCPA |
 | Servicios | Databricks, Delta Lake, **Unity Catalog**, Spark Declarative Pipelines; **S3 como almacenamiento co-localizado** |
 | Resultado | “12X Reduction in compute cost · 20% Reduction in data egress cost · 12PB Of data managed and governed”; el tiempo de permisos de intercambio de datos pasó “from days to seconds”; “the adoption of Unity Catalog promoted the collection of data into S3 buckets, resulting in improved latency and the co-location of compute and storage” |
@@ -658,24 +658,24 @@ Las páginas de clientes publican *resultados* de arquitectura, no diagramas de 
 
 > ⏳ *Nota temporal: página de cliente sin fecha consultada en oct 2026; trata las cifras de 12×/20%/12 PB como resultados reportados, no como garantías.*
 
-### Caso B — Amgen: de más de 120 IAM roles a uno o dos, vía Unity Catalog
+### Caso B, Amgen: de más de 120 IAM roles a uno o dos, vía Unity Catalog
 
 | Elemento | Detalle |
 |---|---|
-| Cliente | **Amgen** — biofarmacéutica (verificada mediante un blog con fecha; no existe página de historia `/customers/amgen` a 2026-10) |
+| Cliente | **Amgen**: biofarmacéutica (verificada mediante un blog con fecha; no existe página de historia `/customers/amgen` a 2026-10) |
 | Desafío | **AWS Glue** como catálogo empresarial más el desorden de **AWS IAM** con un rol por caso de uso; auditar significaba analizar políticas IAM |
-| Servicios | Unity Catalog sobre un entorno AWS — el blog nombra Glue y IAM como stack anterior, así que el sustrato es AWS |
+| Servicios | Unity Catalog sobre un entorno AWS: el blog nombra Glue y IAM como stack anterior, así que el sustrato es AWS |
 | Resultado | “we didn't have to create or manage at least 120+ IAM roles … we went from hundreds of IAM roles to just one or two principal IAM role”; “This reduces the audit effort for the function by 50%”; “around ~500 objects mapped in Unity Catalog”; “90 percent of our use cases are on Databricks” |
 | Fuente | https://www.databricks.com/blog/how-databricks-unity-catalog-helped-amgen-enable-data-governance-enterprise-scale (**mayo de 2023**) |
-| Relación con esta lección | Por qué los storage/service credentials (sección 8) vencen al enredo de instance profiles — el *recuento* de roles es la métrica que los auditores entienden |
+| Relación con esta lección | Por qué los storage/service credentials (sección 8) vencen al enredo de instance profiles: el *recuento* de roles es la métrica que los auditores entienden |
 
 > ⏳ *Nota temporal: cifras de mayo de 2023; el mecanismo (principals gobernados en UC, roles colapsados) sigue siendo el patrón documentado en 2026.*
 
-### Caso C — Nubank: S3 como capa de almacenamiento de un lakehouse de fintech regulada
+### Caso C, Nubank: S3 como capa de almacenamiento de un lakehouse de fintech regulada
 
 | Elemento | Detalle |
 |---|---|
-| Cliente | **Nubank** — fintech de LATAM, más de 100MM de clientes |
+| Cliente | **Nubank**: fintech de LATAM, más de 100MM de clientes |
 | Desafío | Eficiencia de costes y continuidad en una migración de plataforma de almacén de 12 meses con cero downtime |
 | Servicios | Databricks SQL + Unity Catalog; capa de almacenamiento “mostly … AWS in S3” según una transcripción de una charla de Databricks |
 | Resultado | “+40% annual cost savings” mientras las consultas mensuales crecían de “20MM to 40MM”; 17k usuarios; “Leverage of UC for centralized data governance in highly regulated FSI industry” |
@@ -710,10 +710,10 @@ Las páginas de clientes publican *resultados* de arquitectura, no diagramas de 
   "type": "multiple-choice",
   "question": "Aplicando la regla de capacidad documentada de Databricks, ¿cuántos nodos EC2 puede soportar una subred de trabajo /22?",
   "options": [
-    "1,024 nodos - el recuento bruto de direcciones, porque Databricks usa una IP por nodo",
+    "1,024 nodos: el recuento bruto de direcciones, porque Databricks usa una IP por nodo",
     "509 nodos - (1,024 - 5) / 2, porque cada nodo ocupa una IP de gestión y una IP de Spark",
-    "512 nodos - el recuento bruto de direcciones menos solo las direcciones reservadas por AWS",
-    "253 nodos - porque la capacidad siempre se divide a la mitad dos veces: una por el reparto entre dos AZ y otra por las dos IPs"
+    "512 nodos: el recuento bruto de direcciones menos solo las direcciones reservadas por AWS",
+    "253 nodos: porque la capacidad siempre se divide a la mitad dos veces: una por el reparto entre dos AZ y otra por las dos IPs"
   ],
   "correct": 1,
   "explanation": "Databricks documenta nodos = (addresses - 5) / 2: dos IPs por nodo (gestión + Spark) y cinco direcciones reservadas por AWS. Así que /22 = (1,024 - 5) / 2 = 509. Los distractores 1,024 y 512 son las dos mitades del error que cometen los equipos en las revisiones de capacidad; la respuesta 253 es la cifra del /23, desplazada un prefijo."
@@ -726,7 +726,7 @@ Las páginas de clientes publican *resultados* de arquitectura, no diagramas de 
   "type": "multiple-choice",
   "question": "Secure cluster connectivity (SCC) está activada. ¿Qué afirmación es cierta en octubre de 2026?",
   "options": [
-    "Los clústeres ya no necesitan ninguna conectividad saliente - todo el tráfico se tuneliza hacia dentro",
+    "Los clústeres ya no necesitan ninguna conectividad saliente: todo el tráfico se tuneliza hacia dentro",
     "Los nodos classic de cómputo no necesitan IPs públicas ni puertos de entrada abiertos, pero los clústeres siguen marcando al relay SCC y a endpoints de AWS como STS y S3",
     "SCC reemplaza por completo a los endpoints de VPC, de modo que STS y S3 se alcanzan a través del plano de control",
     "SCC exige que toda subred de workspace se convierta en subred pública para que el relay pueda conectarse"
@@ -742,9 +742,9 @@ Las páginas de clientes publican *resultados* de arquitectura, no diagramas de 
   "type": "multiple-choice",
   "question": "Un equipo de plataforma quiere que 1 TB/mes de tráfico S3 se quede fuera de la internet pública con el menor coste de red. ¿Qué diseño coincide con la recomendación publicada de Databricks?",
   "options": [
-    "Endpoint interface (PrivateLink) de S3 en cada AZ - los endpoints interface son más baratos que el NAT en cualquier volumen",
-    "Endpoint gateway de S3 adjunto a las tablas de rutas del workspace - los endpoints gateway son gratis y Databricks dice preferirlos salvo que el cumplimiento exija lo contrario",
-    "Ningún endpoint - SCC tuneliza el tráfico S3, así que no hace falta ningún endpoint de VPC",
+    "Endpoint interface (PrivateLink) de S3 en cada AZ: los endpoints interface son más baratos que el NAT en cualquier volumen",
+    "Endpoint gateway de S3 adjunto a las tablas de rutas del workspace: los endpoints gateway son gratis y Databricks dice preferirlos salvo que el cumplimiento exija lo contrario",
+    "Ningún endpoint: SCC tuneliza el tráfico S3, así que no hace falta ningún endpoint de VPC",
     "Un NAT gateway por AZ con el tráfico S3 forzado a pasar por él para una inspección centralizada"
   ],
   "correct": 1,
@@ -787,11 +787,11 @@ Las páginas de clientes publican *resultados* de arquitectura, no diagramas de 
   "options": [
     "MANAGED_SERVICES cifra el root bucket y los volúmenes EBS del clúster; STORAGE cifra los notebooks y el historial SQL",
     "STORAGE cifra el bucket de almacenamiento del workspace (DBFS root, resultados de job/SQL, revisiones de notebook) y opcionalmente los EBS del clúster; MANAGED_SERVICES cifra artefactos del plano de control como notebooks, secretos y datos de consulta SQL",
-    "Ambos casos de uso cifran solo el plano de control de Databricks - los buckets del cliente siempre usan SSE-S3",
+    "Ambos casos de uso cifran solo el plano de control de Databricks: los buckets del cliente siempre usan SSE-S3",
     "STORAGE es solo para external locations de Unity Catalog; MANAGED_SERVICES es solo para DBFS root"
   ],
   "correct": 1,
-  "explanation": "Las páginas de customer-managed keys definen exactamente dos casos de uso: MANAGED_SERVICES para datos del plano de control (notebooks, secretos, datos de consulta SQL, almacenamiento por defecto) y STORAGE para tu bucket de almacenamiento del workspace - que contiene DBFS root, FileStore, modelos de MLflow, datos de pipelines de Lakeflow - más opcionalmente los volúmenes EBS del cómputo classic. El distractor intercambia los dos; la opción de “siempre SSE-S3” ignora que UC puede leer y escribir buckets cifrados con KMS y que un CMK de STORAGE lo controla el cliente."
+  "explanation": "Las páginas de customer-managed keys definen exactamente dos casos de uso: MANAGED_SERVICES para datos del plano de control (notebooks, secretos, datos de consulta SQL, almacenamiento por defecto) y STORAGE para tu bucket de almacenamiento del workspace: que contiene DBFS root, FileStore, modelos de MLflow, datos de pipelines de Lakeflow: más opcionalmente los volúmenes EBS del cómputo classic. El distractor intercambia los dos; la opción de “siempre SSE-S3” ignora que UC puede leer y escribir buckets cifrados con KMS y que un CMK de STORAGE lo controla el cliente."
 }
 ```
 
@@ -833,10 +833,10 @@ Las páginas de clientes publican *resultados* de arquitectura, no diagramas de 
   "type": "multiple-choice",
   "question": "La política manual del root bucket concede acceso a arn:aws:iam::414351767826:root. ¿Qué condición hace segura esa concesión?",
   "options": [
-    "aws:PrincipalArn que coincide con el usuario root de tu propia cuenta - Databricks siempre actúa como tu root",
-    "aws:PrincipalTag/DatabricksAccountId igual al ID de tu cuenta de Databricks - así solo los principals de Databricks etiquetados para tu cuenta pueden usar el bucket",
-    "aws:SourceIp restringido a 0.0.0.0/0 - el plano de control no tiene IPs estables",
-    "aws:RequestedRegion igual solo a la región del workspace - la región por sí sola acota la concesión"
+    "aws:PrincipalArn que coincide con el usuario root de tu propia cuenta: Databricks siempre actúa como tu root",
+    "aws:PrincipalTag/DatabricksAccountId igual al ID de tu cuenta de Databricks: así solo los principals de Databricks etiquetados para tu cuenta pueden usar el bucket",
+    "aws:SourceIp restringido a 0.0.0.0/0: el plano de control no tiene IPs estables",
+    "aws:RequestedRegion igual solo a la región del workspace: la región por sí sola acota la concesión"
   ],
   "correct": 1,
   "explanation": "La guía de creación de workspace (11 sep 2026) condiciona el allow de la política del bucket a aws:PrincipalTag/DatabricksAccountId con el valor del ID de TU cuenta de Databricks. Sin esa condición de etiqueta, la concesión permitiría a cualquier principal de la cuenta AWS de Databricks tocar tu bucket. Las condiciones de SourceIp son un buen complemento de endurecimiento (IPs de NAT del plano de control), pero acotar a 0.0.0.0/0 no significa nada, y las condiciones de región no identifican la cuenta de quien llama."
@@ -860,7 +860,7 @@ Las páginas de clientes publican *resultados* de arquitectura, no diagramas de 
   "type": "multiple-choice",
   "question": "Una fintech debe eliminar por completo los NAT gateway y los internet gateway de su VPC de analítica (Opción 2 oficial de PrivateLink). ¿Qué conjunto es obligatorio?",
   "options": [
-    "Solo PrivateLink inbound - la conectividad back-end es innecesaria una vez desactivado el acceso público",
+    "Solo PrivateLink inbound: la conectividad back-end es innecesaria una vez desactivado el acceso público",
     "Endpoint gateway de S3, endpoints interface de STS y Kinesis, PrivateLink back-end de Databricks (relay SCC + endpoints del workspace), una subred privada de endpoints de al menos /27 y una fuente interna para las librerías",
     "Solo endpoints interface para los cuatro servicios obligatorios, manteniendo el NAT para instalar librerías",
     "Una VPC gestionada por Databricks con SCC desactivada, porque los diseños air-gapped no pueden usar VPCs gestionadas por el cliente"
@@ -872,32 +872,32 @@ Las páginas de clientes publican *resultados* de arquitectura, no diagramas de 
 
 > [!WARNING]
 > ⚠️ **Trampas de día de examen y de día de diseño para esta lección:**
-> - **Dos IPs por nodo** — la capacidad es `(addresses − 5) ÷ 2`; un `/26` son **29 nodos**, un `/23` son **253**, un `/22` son **509**. Nunca cites la aritmética cruda del CIDR en una revisión de capacidad.
-> - **SCC ≠ sin internet** — la salida hacia los FQDNs del relay SCC, `s3.amazonaws.com:443`, `sts.amazonaws.com:443` y Kinesis sigue siendo obligatoria; sin NAT y sin endpoints = clústeres que nunca arrancan.
+> - **Dos IPs por nodo**: la capacidad es `(addresses − 5) ÷ 2`; un `/26` son **29 nodos**, un `/23` son **253**, un `/22` son **509**. Nunca cites la aritmética cruda del CIDR en una revisión de capacidad.
+> - **SCC ≠ sin internet**: la salida hacia los FQDNs del relay SCC, `s3.amazonaws.com:443`, `sts.amazonaws.com:443` y Kinesis sigue siendo obligatoria; sin NAT y sin endpoints = clústeres que nunca arrancan.
 > - **La inspección TLS del tráfico del plano de control/SCC causa fallos de clúster** (fijado de certificados). Allowlist de FQDNs, no de IPs, para el relay SCC.
 > - **El puerto 6666 es solo con PrivateLink**; **3306 es solo del HMS heredado y no atraviesa PrivateLink**; **8444 hace streaming del lineage/logging de Unity Catalog**; **2443 es FIPS**; **5432 es Lakebase**.
 > - **Prefiere el endpoint gateway gratis de S3**; los endpoints interface de S3 facturan por AZ por hora *y* por GB. STS/Kinesis necesitan endpoints interface.
-> - **Las configuraciones de red y los VPC endpoint registrations son inmutables y no reutilizables** entre workspaces — diseña los CIDR una vez, con holgura.
-> - **El root bucket es tuyo, operado por Databricks** — política de bucket condicionada por etiqueta; el DBFS root está obsoleto; **nunca** registres un bucket de DBFS root como external location de UC.
+> - **Las configuraciones de red y los VPC endpoint registrations son inmutables y no reutilizables** entre workspaces: diseña los CIDR una vez, con holgura.
+> - **El root bucket es tuyo, operado por Databricks**: política de bucket condicionada por etiqueta; el DBFS root está obsoleto; **nunca** registres un bucket de DBFS root como external location de UC.
 > - **IAM moderno = storage credentials + service credentials sobre principals**; los instance profiles son heredados; credential passthrough está obsoleto desde **DBR 15.0**.
 > - **PrivateLink necesita Enterprise** (inbound y back-end classic), más VPC gestionada por el cliente + SCC para back-end; espera **20 minutos** tras el estado `RUNNING` del workspace antes de usar clústeres.
-> - **STS bloqueado = clústeres muertos** — y la creación manual exige la activación regional de STS para `us-west-2`.
+> - **STS bloqueado = clústeres muertos**, y la creación manual exige la activación regional de STS para `us-west-2`.
 
 > [!IMPORTANT]
-> **Veredicto comparativo — VPC classic gestionada por el cliente frente a serverless frente a VPC gestionada por Databricks**
-> - **Classic (VPC gestionada por el cliente + SCC + endpoints, opcionalmente PrivateLink):** máximo control y el único modo en el que *tú* posees el enrutamiento, las NACLs, las políticas de endpoints y la topología hub-and-spoke — y por tanto la máxima superficie: tú posees la economía del NAT, la aritmética de capacidad `(addresses − 5) ÷ 2`, las listas de puertos de las SG y cada reconstrucción de una configuración de red inmutable. Elígelo cuando el cumplimiento mande subredes privadas, PrivateLink o rutas de salida explícitas, o cuando necesites clústeres classic all-purpose/jobs con red personalizada. Este es el objetivo de enseñanza por defecto de este curso, porque los workspaces de Unity Catalog con cómputo classic siguen requiriéndolo para los sabores de PrivateLink.
-> - **Serverless (SQL warehouses, jobs serverless):** Databricks posee el plano de cómputo; no hay IPs públicas, las VPCs gestionadas por el cliente “are not applicable” al cómputo SQL serverless, y tus palancas se desplazan a los **endpoints privados de la NCC** y a las **network policies** (FULL_ACCESS frente a destinos restringidos, modo dry-run, denegaciones en `system.access.outbound_network`). Pagas por hora de endpoint privado y por GB que pasa por ellos en vez de por ENI por AZ. Elígelo para entornos de BI/SQL y jobs con picos donde la fontanería de VPC no es el diferencial — pero recuerda que tus *datos* siguen en S3 alcanzado por esos endpoints privados, así que las decisiones de KMS y de storage credential de las secciones 6–8 no cambian.
-> - **VPC gestionada por Databricks (classic heredado):** el camino más corto hacia un primer workspace en los tutoriales antiguos, y un callejón sin salida en 2026 — Databricks planea deprecarla para la creación de workspaces classic, y un workspace existente **no puede convertirse in situ**. Nunca empieces desde cero en ella; trata cualquier existente como un elemento del backlog de migración con un plan de reconstrucción.
+> **Veredicto comparativo: VPC classic gestionada por el cliente frente a serverless frente a VPC gestionada por Databricks**
+> - **Classic (VPC gestionada por el cliente + SCC + endpoints, opcionalmente PrivateLink):** máximo control y el único modo en el que *tú* posees el enrutamiento, las NACLs, las políticas de endpoints y la topología hub-and-spoke, y por tanto la máxima superficie: tú posees la economía del NAT, la aritmética de capacidad `(addresses − 5) ÷ 2`, las listas de puertos de las SG y cada reconstrucción de una configuración de red inmutable. Elígelo cuando el cumplimiento mande subredes privadas, PrivateLink o rutas de salida explícitas, o cuando necesites clústeres classic all-purpose/jobs con red personalizada. Este es el objetivo de enseñanza por defecto de este curso, porque los workspaces de Unity Catalog con cómputo classic siguen requiriéndolo para los sabores de PrivateLink.
+> - **Serverless (SQL warehouses, jobs serverless):** Databricks posee el plano de cómputo; no hay IPs públicas, las VPCs gestionadas por el cliente “are not applicable” al cómputo SQL serverless, y tus palancas se desplazan a los **endpoints privados de la NCC** y a las **network policies** (FULL_ACCESS frente a destinos restringidos, modo dry-run, denegaciones en `system.access.outbound_network`). Pagas por hora de endpoint privado y por GB que pasa por ellos en vez de por ENI por AZ. Elígelo para entornos de BI/SQL y jobs con picos donde la fontanería de VPC no es el diferencial, pero recuerda que tus *datos* siguen en S3 alcanzado por esos endpoints privados, así que las decisiones de KMS y de storage credential de las secciones 6 to 8 no cambian.
+> - **VPC gestionada por Databricks (classic heredado):** el camino más corto hacia un primer workspace en los tutoriales antiguos, y un callejón sin salida en 2026: Databricks planea deprecarla para la creación de workspaces classic, y un workspace existente **no puede convertirse in situ**. Nunca empieces desde cero en ella; trata cualquier existente como un elemento del backlog de migración con un plan de reconstrucción.
 > - **Regla práctica:** si la pregunta es “quién enruta y quién inspecciona”, elige classic; si la pregunta es “quién opera la flota de cómputo”, elige serverless; si la respuesta es “hice clic en default en 2021”, estás mirando un ticket de reconstrucción.
 
 > [!SUCCESS]
 > **Conclusiones Clave (Key Takeaways):**
-> 1. **Un workspace = cuatro objetos:** compute credentials cross-account (confianza en `414351767826` + external ID = ID de tu cuenta de Databricks), una configuración de red inmutable (VPC + ≥2 subredes + 1–5 SG), una configuración de almacenamiento (root bucket + IAM role) y, opcionales, private access settings + configuraciones de clave de cifrado (`MANAGED_SERVICES`, `STORAGE`).
-> 2. **Reglas de la VPC gestionada por el cliente (8 oct 2026):** ≥2 subredes **privadas** en AZ distintas, máscaras **/17–/26**, DNS hostnames + resolución activados, NACLs que permitan `0.0.0.0/0` de entrada como regla superior, tablas de rutas del workspace con `0.0.0.0/0` hacia NAT (Opción 1) o solo hacia endpoints (Opción 2). Capacidad = **(addresses − 5) ÷ 2**: /26→29, /24→125, /23→253, /22→509, /17→16,381 nodos.
-> 3. **SCC es el modo por defecto** — los clústeres marcan al relay SCC, así que sin IPs públicas ni puertos de entrada; la salida hacia los FQDNs del relay, S3, STS y Kinesis sigue obligatoria; **6666 solo con PrivateLink**; **nunca inspecciones TLS** el tráfico fijado del plano de control; allowlist de FQDNs, no de IPs.
+> 1. **Un workspace = cuatro objetos:** compute credentials cross-account (confianza en `414351767826` + external ID = ID de tu cuenta de Databricks), una configuración de red inmutable (VPC + ≥2 subredes + 1 to 5 SG), una configuración de almacenamiento (root bucket + IAM role) y, opcionales, private access settings + configuraciones de clave de cifrado (`MANAGED_SERVICES`, `STORAGE`).
+> 2. **Reglas de la VPC gestionada por el cliente (8 oct 2026):** ≥2 subredes **privadas** en AZ distintas, máscaras **/17: /26**, DNS hostnames + resolución activados, NACLs que permitan `0.0.0.0/0` de entrada como regla superior, tablas de rutas del workspace con `0.0.0.0/0` hacia NAT (Opción 1) o solo hacia endpoints (Opción 2). Capacidad = **(addresses − 5) ÷ 2**: /26→29, /24→125, /23→253, /22→509, /17→16,381 nodos.
+> 3. **SCC es el modo por defecto**: los clústeres marcan al relay SCC, así que sin IPs públicas ni puertos de entrada; la salida hacia los FQDNs del relay, S3, STS y Kinesis sigue obligatoria; **6666 solo con PrivateLink**; **nunca inspecciones TLS** el tráfico fijado del plano de control; allowlist de FQDNs, no de IPs.
 > 4. **Salida obligatoria: STS, S3, Kinesis** (+ RDS solo para el HMS heredado). **Endpoint gateway de S3 = gratis**; STS/Kinesis necesitan endpoints **interface** (~$0.01/AZ-hora ≈ $7.30/AZ-mes en EE. UU., verifica por región + $0.01/GB en el primer escalón de 1 PB). E3: solo NAT ≈ **$133.20/mes** frente al recomendado ≈ **$127.40/mes** con gateway + interfaces; la Opción 2 air-gapped elimina el NAT por completo pero tú posees cada endpoint.
 > 5. **PrivateLink tiene tres sabores:** inbound/front-end (General Access; Enterprise; private access settings), back-end classic (relay SCC + endpoints del workspace; Enterprise + VPC gestionada por el cliente + SCC), outbound/serverless (endpoints privados de NCC). Límites de NCC: **10/región/cuenta**, **50 workspaces/NCC**, **30 endpoints privados de S3/región**, **100 endpoints de recursos VPC/región**; espera **20 minutos** tras `RUNNING`.
 > 6. **Cifrado:** SSE por defecto; CMK `STORAGE` cubre el root bucket (+ EBS opcional); CMK `MANAGED_SERVICES` cubre notebooks/secretos/historial SQL; la política de la clave debe permitir a `414351767826:root` condicionada a `aws:PrincipalTag/DatabricksAccountId`. KMS: **$1/clave/mes + $0.03/10k solicitudes**, free tier de 20k; un entorno de tres claves ≈ **$8.97/mes** con el propio ejemplo de 2.01M de solicitudes de AWS.
 > 7. **Root bucket:** en *tu* cuenta, operado por Databricks; contiene DBFS root + datos de sistema del workspace + catálogo por defecto; DBFS root/montajes están obsoletos y **nunca deben convertirse en un external location de UC**; política = allow condicionado por etiqueta + deny `unity-catalog/*` + endurecimiento opcional con `aws:SourceIp`/`aws:sourceVpce`.
-> 8. **Ruta moderna de IAM:** los **storage credentials** de UC (external locations) y los **service credentials** (Kinesis/Secrets Manager/Glue) se conectan a los **principals** mediante grants; los instance profiles son heredados (ligados al cómputo); credential passthrough está obsoleto desde **DBR 15.0**. El resultado publicado por Amgen — de más de 120 IAM roles a uno o dos — es la métrica que vende el cambio.
+> 8. **Ruta moderna de IAM:** los **storage credentials** de UC (external locations) y los **service credentials** (Kinesis/Secrets Manager/Glue) se conectan a los **principals** mediante grants; los instance profiles son heredados (ligados al cómputo); credential passthrough está obsoleto desde **DBR 15.0**. El resultado publicado por Amgen, de más de 120 IAM roles a uno o dos, es la métrica que vende el cambio.
 > 9. **Restricciones operativas:** las configuraciones de red y los VPC endpoint registrations son **inmutables y no reutilizables**; el hub-and-spoke con Transit Gateway es el patrón documentado para varios workspaces; un workspace con VPC gestionada por Databricks **no puede convertirse in situ**, y Databricks planea deprecar la creación classic con VPC gestionada.

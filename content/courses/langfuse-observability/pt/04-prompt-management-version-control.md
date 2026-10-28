@@ -8,7 +8,7 @@ duration: "30 min"
 
 # Gerenciamento de Prompts e Controle de Versão
 
-A engenharia de prompts é iterativa. O LangFuse fornece um registro centralizado de prompts com controle de versão, rótulos de implantação e busca via SDK — para que seus prompts estejam sempre sincronizados entre ambientes.
+A engenharia de prompts é iterativa. O LangFuse fornece um registro centralizado de prompts com controle de versão, rótulos de implantação e busca via SDK: para que seus prompts estejam sempre sincronizados entre ambientes.
 
 ---
 

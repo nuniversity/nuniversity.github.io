@@ -8,7 +8,7 @@ difficulty: "intermedio"
 
 # Manejo de Archivos y E/S
 
-La E/S de archivos es fundamental para casi toda aplicación Python — desde leer archivos de configuración hasta procesar grandes conjuntos de datos. El manejo de archivos de Python es limpio, potente y soporta múltiples formatos.
+La E/S de archivos es fundamental para casi toda aplicación Python: desde leer archivos de configuración hasta procesar grandes conjuntos de datos. El manejo de archivos de Python es limpio, potente y soporta múltiples formatos.
 
 ## La Función `open()`
 
@@ -29,7 +29,7 @@ file = open("example.txt", "x")    # Creación exclusiva (falla si existe)
 | `"w+"` | Sí | Sí | Sí | Sí | Inicio |
 | `"a+"` | Sí | Sí | Sí | No | Fin |
 | `"x"` | No | Sí | Sí (exclusivo) | No | Inicio |
-| `"b"` | (modificador) | Modo binario | — | — | — |
+| `"b"` | (modificador) | Modo binario |: |: |: |
 
 > [!WARNING]
 > ¡Siempre cierra los archivos! La declaración `with` maneja esto automáticamente (ver abajo).

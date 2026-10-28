@@ -12,7 +12,7 @@ difficulty: "intermediário"
 
 ## Como Índices Funcionam
 
-Sem um índice, o banco de dados realiza uma varredura sequencial — lendo cada linha da tabela. Com um índice, o banco de dados navega em uma árvore (tipicamente B+Tree) para encontrar linhas em tempo logarítmico.
+Sem um índice, o banco de dados realiza uma varredura sequencial: lendo cada linha da tabela. Com um índice, o banco de dados navega em uma árvore (tipicamente B+Tree) para encontrar linhas em tempo logarítmico.
 
 ```
 Varredura Completa:  [Linha 1] [Linha 2] [Linha 3] ... [Linha 1.000.000]

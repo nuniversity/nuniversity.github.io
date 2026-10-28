@@ -111,7 +111,7 @@ print(logger.logs)
 ```
 
 > [!WARNING]
-> Never forget to call `super().__init__()` in child classes — otherwise parent attributes won't be initialized.
+> Never forget to call `super().__init__()` in child classes: otherwise parent attributes won't be initialized.
 
 ## MRO (Method Resolution Order)
 

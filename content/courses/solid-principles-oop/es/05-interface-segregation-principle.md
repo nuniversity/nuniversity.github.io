@@ -16,7 +16,7 @@ El Principio de Segregación de Interfaces es el cuarto principio SOLID. Estable
 
 Cuando una interfaz tiene muchos métodos, las clases que la implementan se ven obligadas a proporcionar cuerpos para métodos que no necesitan. Esto produce implementaciones vacías, stubs con `NotImplementedError` y código confuso.
 
-### ANTES: violación del ISP — una interfaz gorda
+### ANTES: violación del ISP: una interfaz gorda
 
 ```python
 from abc import ABC, abstractmethod
@@ -124,7 +124,7 @@ classDiagram
     note for RobotEmployee "Forzado a implementar\n¡4 métodos sin usar!"
 ```
 
-### DESPUÉS: cumplimiento del ISP — interfaces segregadas
+### DESPUÉS: cumplimiento del ISP: interfaces segregadas
 
 ```python
 from abc import ABC, abstractmethod

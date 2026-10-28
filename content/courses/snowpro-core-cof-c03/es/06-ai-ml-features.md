@@ -1,12 +1,12 @@
 ---
-title: "Dominio 1.6 — Funcionalidades de IA/ML y Desarrollo de Aplicaciones"
+title: "Dominio 1.6, Funcionalidades de IA/ML y Desarrollo de Aplicaciones"
 description: "Explora el ecosistema de IA y desarrollo de aplicaciones de Snowflake: Snowpark, Snowflake Cortex (funciones LLM, Cortex Search, Cortex Analyst), Snowflake ML, Streamlit y Notebooks."
 order: 6
 difficulty: intermediate
 duration: "60 min"
 ---
 
-# Dominio 1.6 — Funcionalidades de IA/ML y Desarrollo de Aplicaciones
+# Dominio 1.6: Funcionalidades de IA/ML y Desarrollo de Aplicaciones
 
 ## Peso en el Examen
 
@@ -43,13 +43,13 @@ mindmap
 
 ## Snowpark
 
-**Snowpark** es el framework de desarrollo de Snowflake que permite escribir pipelines de datos y transformaciones en **Python, Java o Scala** usando una API DataFrame — sin mover datos fuera de Snowflake.
+**Snowpark** es el framework de desarrollo de Snowflake que permite escribir pipelines de datos y transformaciones en **Python, Java o Scala** usando una API DataFrame; sin mover datos fuera de Snowflake.
 
 ### Conceptos Clave de Snowpark
 
 - El código se escribe en Python/Java/Scala usando la librería Snowpark
-- La ejecución ocurre **dentro de Snowflake** — los datos nunca salen
-- Utiliza **evaluación perezosa** (*lazy evaluation*) — las operaciones se construyen como un plan de consulta y se ejecutan cuando se activa una acción
+- La ejecución ocurre **dentro de Snowflake**: los datos nunca salen
+- Utiliza **evaluación perezosa** (*lazy evaluation*): las operaciones se construyen como un plan de consulta y se ejecutan cuando se activa una acción
 - Soporta Funciones Definidas por el Usuario (UDFs), UDTFs (funciones de tabla) y Procedimientos Almacenados
 
 ```python
@@ -120,9 +120,9 @@ model.fit(df_scaled)
 
 ---
 
-## Snowflake Cortex — Funciones SQL de IA
+## Snowflake Cortex: Funciones SQL de IA
 
-**Snowflake Cortex** proporciona **funciones SQL potenciadas por LLM** (*Large Language Models*, modelos de lenguaje de gran escala) que se ejecutan directamente sobre datos de Snowflake — sin necesidad de llamadas a API externas desde la perspectiva del usuario.
+**Snowflake Cortex** proporciona **funciones SQL potenciadas por LLM** (*Large Language Models*, modelos de lenguaje de gran escala) que se ejecutan directamente sobre datos de Snowflake; sin necesidad de llamadas a API externas desde la perspectiva del usuario.
 
 ### Funciones SQL de Cortex AI
 
@@ -193,7 +193,7 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW(
 
 ### Cortex Analyst (Analista de Cortex)
 
-**Cortex Analyst** habilita la **generación de SQL a partir de lenguaje natural** — los usuarios de negocio hacen preguntas en español o inglés y Cortex Analyst devuelve consultas SQL y resultados:
+**Cortex Analyst** habilita la **generación de SQL a partir de lenguaje natural**: los usuarios de negocio hacen preguntas en español o inglés y Cortex Analyst devuelve consultas SQL y resultados:
 
 - Construido sobre LLMs ajustados para generación de SQL
 - Comprende tu esquema de Snowflake y modelo semántico
@@ -268,7 +268,7 @@ cv.fit(df_train)
 Los **Snowflake Notebooks** son **notebooks interactivos al estilo Jupyter** integrados directamente en Snowsight:
 
 - Soporta celdas de **SQL, Python (Snowpark) y Markdown** en el mismo notebook
-- Las celdas de Python se ejecutan dentro de Snowflake — los datos nunca salen
+- Las celdas de Python se ejecutan dentro de Snowflake: los datos nunca salen
 - Accede a datos de Snowflake directamente sin configurar una conexión
 - Con control de versiones vía **integración con Git**
 - Puede visualizar resultados con librerías populares de Python (matplotlib, plotly, altair)
@@ -300,7 +300,7 @@ ORDER BY 2 DESC;
 
 ## Streamlit en Snowflake
 
-**Streamlit en Snowflake** te permite **desplegar aplicaciones Python de Streamlit directamente dentro de Snowflake** — sin necesidad de hosting externo:
+**Streamlit en Snowflake** te permite **desplegar aplicaciones Python de Streamlit directamente dentro de Snowflake**; sin necesidad de hosting externo:
 
 - Las aplicaciones Python de datos se ejecutan de forma nativa en Snowflake
 - Accede a datos de Snowflake de forma segura sin claves API

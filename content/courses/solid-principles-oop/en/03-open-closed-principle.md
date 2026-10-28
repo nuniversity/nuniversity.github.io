@@ -66,7 +66,7 @@ class PaymentProcessor:
 ```
 
 > [!WARNING]
-> Every time a new payment method is needed (e.g., `"crypto"`, `"apple_pay"`), you must modify the `PaymentProcessor` class. This violates OCP — the class is not closed for modification.
+> Every time a new payment method is needed (e.g., `"crypto"`, `"apple_pay"`), you must modify the `PaymentProcessor` class. This violates OCP: the class is not closed for modification.
 
 ```mermaid
 flowchart TD
@@ -164,7 +164,7 @@ class PaymentProcessor:
 ```
 
 > [!NOTE]
-> The `PaymentProcessor` class is **closed for modification** — its code never changes when new payment methods are added. It's **open for extension** — new methods are added by creating new `PaymentMethod` subclasses and registering them.
+> The `PaymentProcessor` class is **closed for modification**, its code never changes when new payment methods are added. It's **open for extension**, new methods are added by creating new `PaymentMethod` subclasses and registering them.
 
 ```python
 # Usage — adding crypto doesn't touch existing code!
@@ -601,7 +601,7 @@ print(source.read())  # Original data back
 | Readability | Grows linearly worse | Stays constant |
 
 > [!NOTE]
-> OCP doesn't mean you should never change existing code. Bug fixes, refactoring for clarity, and performance optimizations are valid modifications. OCP targets *behavioral extension* — adding new features should not require rewriting existing features.
+> OCP doesn't mean you should never change existing code. Bug fixes, refactoring for clarity, and performance optimizations are valid modifications. OCP targets *behavioral extension*: adding new features should not require rewriting existing features.
 
 ```mermaid
 flowchart TD

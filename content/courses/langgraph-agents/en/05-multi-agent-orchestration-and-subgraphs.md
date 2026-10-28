@@ -143,7 +143,7 @@ builder.add_edge("writer", END)
 ```
 
 [!TIP]
-Design shared state as a **message bus**. Each agent appends to a `messages` list, creating an auditable trace of every agent's output. This makes debugging trivial — you can replay the conversation and see exactly what each agent produced.
+Design shared state as a **message bus**. Each agent appends to a `messages` list, creating an auditable trace of every agent's output. This makes debugging trivial; you can replay the conversation and see exactly what each agent produced.
 
 ---
 
@@ -369,7 +369,7 @@ class MultiAgentState(TypedDict):
 ## Subgraph Permission Boundaries
 
 [!WARNING]
-Subgraphs cannot access the parent's nodes or state directly — they only see the state passed to them. This is a **security boundary**: a subgraph cannot mutate parent state arbitrarily. Use explicit state mapping to control what each subgraph can read and write.
+Subgraphs cannot access the parent's nodes or state directly; they only see the state passed to them. This is a **security boundary**: a subgraph cannot mutate parent state arbitrarily. Use explicit state mapping to control what each subgraph can read and write.
 
 ---
 
@@ -377,11 +377,11 @@ Subgraphs cannot access the parent's nodes or state directly — they only see t
 
 | Strategy | Mechanism | Coupling | Debugging | Use Case |
 | :--- | :--- | :--- | :--- | :--- |
-| Shared state dict | `state["messages"]` | Loose (via schema) | Easy — replay state | Most agents |
-| Namespaced state keys | `state["agent_name.field"]` | Loose | Easy — per-agent traces | Multi-agent with outputs |
-| Subgraph I/O mapping | Explicit field mapping | Loose | Moderate — check mapping | Subgraph composition |
-| Direct function call | Call another node directly | Tight | Hard — hidden dependency | Not recommended |
-| Message bus pattern | Append-only messages | Very loose | Trivial — full history | Supervisor orchestrations |
+| Shared state dict | `state["messages"]` | Loose (via schema) | Easy: replay state | Most agents |
+| Namespaced state keys | `state["agent_name.field"]` | Loose | Easy: per-agent traces | Multi-agent with outputs |
+| Subgraph I/O mapping | Explicit field mapping | Loose | Moderate: check mapping | Subgraph composition |
+| Direct function call | Call another node directly | Tight | Hard: hidden dependency | Not recommended |
+| Message bus pattern | Append-only messages | Very loose | Trivial: full history | Supervisor orchestrations |
 
 ---
 

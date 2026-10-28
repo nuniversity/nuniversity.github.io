@@ -10,7 +10,7 @@ difficulty: avanzado
 
 ## ¿Por qué FastAPI?
 
-FastAPI proporciona documentación OpenAPI automática, validación de solicitudes mediante Pydantic, soporte asíncrono e inyección de dependencias—todo con alto rendimiento.
+FastAPI proporciona documentación OpenAPI automática, validación de solicitudes mediante Pydantic, soporte asíncrono e inyección de dependencias: todo con alto rendimiento.
 
 ```python
 from fastapi import FastAPI

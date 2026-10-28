@@ -10,7 +10,7 @@ difficulty: "beginner"
 
 Resultados brutos de consultas raramente estão na ordem que você precisa. Esta lição ensina como ordenar, paginar, deduplicar e renomear colunas para uma saída limpa.
 
-## ORDER BY — Ordenando Resultados
+## ORDER BY: Ordenando Resultados
 
 `ORDER BY` ordena o conjunto de resultados por uma ou mais colunas.
 
@@ -64,7 +64,7 @@ FROM employees
 ORDER BY projected_raise DESC;
 ```
 
-## LIMIT e OFFSET — Paginação
+## LIMIT e OFFSET: Paginação
 
 `LIMIT` restringe quantas linhas são retornadas. `OFFSET` pula um número de linhas antes de retornar os resultados.
 
@@ -103,7 +103,7 @@ ORDER BY salary DESC
 LIMIT 5, 10;  -- Pula 5, retorna 10
 ```
 
-## DISTINCT — Remover Duplicatas
+## DISTINCT: Remover Duplicatas
 
 `DISTINCT` retorna apenas valores únicos para as colunas selecionadas.
 

@@ -8,7 +8,7 @@ difficulty: advanced
 
 # Unsafe Rust
 
-Unsafe Rust lets you perform operations that the compiler can't verify. It's a tool of last resort — use it responsibly with careful invariants.
+Unsafe Rust lets you perform operations that the compiler can't verify. It's a tool of last resort: use it responsibly with careful invariants.
 
 ## When to Use Unsafe
 

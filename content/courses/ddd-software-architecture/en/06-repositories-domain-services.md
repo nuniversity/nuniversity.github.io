@@ -11,7 +11,7 @@ difficulty: "advanced"
 Repositories and Domain Services are two more tactical building blocks in DDD. **Repositories** provide a clean abstraction for storing and retrieving aggregates. **Domain Services** encapsulate domain logic that does not naturally belong in an Entity or Value Object.
 
 > [!NOTE]
-> In DDD, a Repository is not a DAO (Data Access Object). A DAO is a technical concept for data access. A Repository is a **domain concept** that speaks the Ubiquitous Language — you ask it for aggregates by domain terms, not by SQL queries.
+> In DDD, a Repository is not a DAO (Data Access Object). A DAO is a technical concept for data access. A Repository is a **domain concept** that speaks the Ubiquitous Language; you ask it for aggregates by domain terms, not by SQL queries.
 
 ## Repositories: The Collection Metaphor
 

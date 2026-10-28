@@ -30,7 +30,7 @@ export function RedirectToLanguages({ lang, slug, pair, dict }: RedirectToLangua
     <div className="container-custom py-16">
       <div className="max-w-xl mx-auto bg-card border rounded-xl p-8 text-center">
         <p className="text-muted-foreground mb-6">
-          {texts?.languages?.redirect_fallback || 'This activity has moved — continue to the Languages section'}
+          {texts?.languages?.redirect_fallback || 'This activity has moved: continue to the Languages section'}
         </p>
         <a
           href={target}

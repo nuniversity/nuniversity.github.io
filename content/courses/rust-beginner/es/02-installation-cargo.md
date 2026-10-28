@@ -19,10 +19,10 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 Esto instala:
-- **rustup** — El gestor de toolchains
-- **rustc** — El compilador Rust
-- **cargo** — El sistema de build y gestor de paquetes
-- **rustdoc** — El generador de documentación
+- **rustup**: El gestor de toolchains
+- **rustc**: El compilador Rust
+- **cargo**: El sistema de build y gestor de paquetes
+- **rustdoc**: El generador de documentación
 
 ### Windows (Independiente)
 
@@ -89,7 +89,7 @@ hello_rust/
 └── .git/         # Repositorio git auto-inicializado
 ```
 
-### Cargo.toml — El Manifiesto del Paquete
+### Cargo.toml: El Manifiesto del Paquete
 
 ```toml
 [package]
@@ -107,7 +107,7 @@ edition = "2021"
 | `edition` | Edición Rust (2015, 2018, 2021, 2024) |
 | `[dependencies]` | Dependencias de crates externos |
 
-### src/main.rs — Hello World
+### src/main.rs: Hello World
 
 ```rust
 fn main() {
@@ -158,7 +158,7 @@ Hello, world!
 cargo check
 ```
 
-Verifica código por errores **sin producir un binario**. Mucho más rápido que `cargo build` — úsalo frecuentemente durante el desarrollo.
+Verifica código por errores **sin producir un binario**. Mucho más rápido que `cargo build`: úsalo frecuentemente durante el desarrollo.
 
 > [!SUCCESS]
 > Usa `cargo check` para verificar rápidamente si tu código compila. Usa `cargo build` o `cargo run` solo cuando necesites el binario. Esto ahorra tiempo significativo en proyectos grandes.

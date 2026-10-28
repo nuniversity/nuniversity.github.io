@@ -9,7 +9,7 @@ duration: "100 minutes"
 ---
 # Capstone Exam Simulation (AIF-C01)
 
-Fifteen lessons gave you the content. This one gives you the **container**: how the AIF-C01 is actually built, how it is scored, how the clock behaves, and how AWS-style distractors are engineered. Everything before this lesson was domain knowledge; everything here is *test craft* — and on a compensatory 100-1,000 scale with 700 to pass, test craft is worth as much as another hour of revision.
+Fifteen lessons gave you the content. This one gives you the **container**: how the AIF-C01 is actually built, how it is scored, how the clock behaves, and how AWS-style distractors are engineered. Everything before this lesson was domain knowledge; everything here is *test craft*, and on a compensatory 100-1,000 scale with 700 to pass, test craft is worth as much as another hour of revision.
 
 ```text
 =====================================================================
@@ -30,7 +30,7 @@ Fifteen lessons gave you the content. This one gives you the **container**: how 
 ```
 
 > [!NOTE]
-> **How to use this lesson.** Read sections 1 to 6 once, then sit **Set A (section 7) under a 15-minute timer with no notes**. Grade yourself with section 8, convert the raw score with the rubric in section 9, and let section 10 tell you which lessons to reopen. Anything this lesson could not verify against a first-party AWS page is listed in section 12 — treat those as *do not assert*, not as facts to memorize.
+> **How to use this lesson.** Read sections 1 to 6 once, then sit **Set A (section 7) under a 15-minute timer with no notes**. Grade yourself with section 8, convert the raw score with the rubric in section 9, and let section 10 tell you which lessons to reopen. Anything this lesson could not verify against a first-party AWS page is listed in section 12: treat those as *do not assert*, not as facts to memorize.
 
 By the end of this lesson you will be able to:
 
@@ -55,7 +55,7 @@ Nothing in this table is folklore. Each row comes from the current exam guide (v
 | 1 | **65 questions**: **50 scored + 15 unscored** pretest items, and the unscored items are **not identified** | Exam guide v1.1 |
 | 2 | **90 minutes** to complete the exam | Cert page + exam guide |
 | 3 | Pass/fail result on a **scaled 100-1,000** range; **minimum passing score 700** | Exam guide |
-| 4 | Scoring is **compensatory** — there is no per-domain pass mark; the report may show section classifications | Exam guide |
+| 4 | Scoring is **compensatory**; there is no per-domain pass mark; the report may show section classifications | Exam guide |
 | 5 | **Unanswered items are scored as incorrect. There is no penalty for guessing.** | Exam guide |
 | 6 | Question types: **multiple choice** (1 correct, 3 distractors), **multiple response** (all correct required), **ordering** (order matters), **matching** (all pairs) | Exam guide |
 | 7 | Domain weights: **D1 20 %, D2 24 %, D3 28 %, D4 14 %, D5 14 %** | Exam guide |
@@ -71,7 +71,7 @@ Nothing in this table is folklore. Each row comes from the current exam guide (v
 | 17 | English exam plus **ESL accommodation = +30 minutes** (wording conflicts across pages; see section 12) | FAQ |
 | 18 | The in-scope services list is **non-exhaustive and subject to change**; only **domain** weights are published | In-scope page + exam guide |
 
-- **📚 Did you know?** The **15 unscored items look exactly like the 50 scored ones**. AWS does not tag them, colour them or otherwise separate them — which means the only rational strategy is to treat **every** item as scored. A pretest item you answer badly costs you nothing, and a scored item you skip costs you the full marks, so the incentive never points toward "leaving it for later and never coming back".
+- **📚 Did you know?** The **15 unscored items look exactly like the 50 scored ones**. AWS does not tag them, colour them or otherwise separate them; which means the only rational strategy is to treat **every** item as scored. A pretest item you answer badly costs you nothing, and a scored item you skip costs you the full marks, so the incentive never points toward "leaving it for later and never coming back".
 
 ### 1.2 The four mechanics that decide your score
 
@@ -80,7 +80,7 @@ Read these four sentences as the operating system of the exam:
 1. **Compensatory scoring** means a brilliant Domain 3 cannot rescue a weak Domain 4. You do not need to be great everywhere; you must not be *bad* anywhere.
 2. **No guessing penalty** means a blank is strictly worse than a guess: guessing is never a risk, it is free expected value.
 3. **Hidden pretest items** mean your raw count of "obviously right" answers maps to a scaled score you cannot see, so never compute a pass from "X of 50".
-4. **Only domain weights are published** — per-objective weights do not exist, so any study plan built on "this topic is 8 %" is built on a guess.
+4. **Only domain weights are published**: per-objective weights do not exist, so any study plan built on "this topic is 8 %" is built on a guess.
 
 ### 1.3 Booking, delivery, retake and results
 
@@ -89,7 +89,7 @@ The administrative half of the exam is examinable in the sense that it changes *
 | Situation | The rule | Practical consequence |
 |---|---|---|
 | **Choosing a venue** | Pearson VUE test center **or** online proctored | Online English proctoring runs 24x7; a test center needs a slot and a valid ID |
-| **Rescheduling** | Up to **24 h** before, maximum **2 changes** | A third change means cancel and rebook — decide before the final day |
+| **Rescheduling** | Up to **24 h** before, maximum **2 changes** | A third change means cancel and rebook: decide before the final day |
 | **Failing** | Wait **14 days**, **no attempt cap**, **full fee every time** | Budget the second attempt before you take the first |
 | **Passing** | Same exam locked **2 years**; earning **ML Engineer - Associate** recertifies | You cannot re-sit the same exam to "refresh" it early |
 | **Results** | Published within **5 business days** | Plan a quiet week; do not refresh the dashboard hourly |
@@ -113,7 +113,7 @@ The administrative half of the exam is examinable in the sense that it changes *
 | **Ordering** | 3-5 items in the correct sequence | Correct **and** in order or zero credit | 60-100 s | One swap ruins the item |
 | **Matching** | 3-7 prompts, each with its partner | **All pairs** correct | 90-150 s | Slowest format; errors compound |
 
-All 15 items in Set A are **multiple choice**, which is the format you can drill fastest. The live exam adds the other three in unpublished counts (see section 12), so practice them as *skills* — elimination, sequencing, pair-checking — rather than as a predictable quota.
+All 15 items in Set A are **multiple choice**, which is the format you can drill fastest. The live exam adds the other three in unpublished counts (see section 12), so practice them as *skills*, elimination, sequencing, pair-checking, rather than as a predictable quota.
 
 ### 2.2 The arithmetic of the clock
 
@@ -121,9 +121,9 @@ $$
 \text{seconds per item} = \frac{90 \times 60}{65} \approx 83\ \text{s}
 $$
 
-Against **scored** items only, the budget looks like $\frac{5{,}400}{50} = 108$ s — but you cannot tell which 50 are scored, so **83 s is the number you plan with**. A first pass at 60 s per item leaves 25 minutes for flags, ordering and matching, which is where the slow formats and the second-guesses live.
+Against **scored** items only, the budget looks like $\frac{5{,}400}{50} = 108$ s, but you cannot tell which 50 are scored, so **83 s is the number you plan with**. A first pass at 60 s per item leaves 25 minutes for flags, ordering and matching, which is where the slow formats and the second-guesses live.
 
-- **📚 Did you know?** Two stalls of three minutes each erase **six minutes** — that is seven multiple-choice items you will have to answer in the last third of the exam at double speed. The exam does not reward depth on one item; it rewards **coverage of all 65**, because coverage is the only way to guarantee you never convert a knowable item into a blank.
+- **📚 Did you know?** Two stalls of three minutes each erase **six minutes**; that is seven multiple-choice items you will have to answer in the last third of the exam at double speed. The exam does not reward depth on one item; it rewards **coverage of all 65**, because coverage is the only way to guarantee you never convert a knowable item into a blank.
 
 ### 2.3 Attacking the three formats Set A does not contain
 
@@ -131,11 +131,11 @@ Set A trains the single-best-answer muscle. The live exam adds three formats who
 
 | Format | The procedure that maximises credit | The mistake that zeroes it |
 |---|---|---|
-| **Multiple response** | Read every option, mark each as *definitely yes / definitely no / maybe*, then submit only when every "maybe" has been resolved — all correct options are required | Selecting two obvious answers and skipping the fifth correct one; assuming partial credit exists |
+| **Multiple response** | Read every option, mark each as *definitely yes / definitely no / maybe*, then submit only when every "maybe" has been resolved: all correct options are required | Selecting two obvious answers and skipping the fifth correct one; assuming partial credit exists |
 | **Ordering** | Fix the **anchors** first (the step that must be first, the one that must be last), then arrange the middle; re-read the sequence as a sentence | Rearranging after you have a valid order "because it looks better" |
-| **Matching** | Eliminate the pairs you are certain about first — each settled pair shrinks every remaining option list | Starting with the hardest prompt, which leaves all distractors in play |
+| **Matching** | Eliminate the pairs you are certain about first: each settled pair shrinks every remaining option list | Starting with the hardest prompt, which leaves all distractors in play |
 
-A useful habit: in matching, the *longest* right-hand side is often the most specific and therefore the least likely to be a distractor, but **verify** it against the domain knowledge rather than guessing from length alone. In ordering, if two adjacent steps could swap without changing meaning, the stem is usually telling you the criterion (by time, by dependency, by cost) — find it and apply it consistently.
+A useful habit: in matching, the *longest* right-hand side is often the most specific and therefore the least likely to be a distractor, but **verify** it against the domain knowledge rather than guessing from length alone. In ordering, if two adjacent steps could swap without changing meaning, the stem is usually telling you the criterion (by time, by dependency, by cost): find it and apply it consistently.
 
 ---
 
@@ -148,7 +148,7 @@ A useful habit: in matching, the *longest* right-hand side is often the most spe
 | **First pass** (all 65) | 0:00 - 1:05 | 65 | **~60 s per item**; flag anything over 90 s; **answer every item** |
 | **Flagged review** | 1:05 - 1:18 | 13 | Re-read the stem and confirm you answered the **asked** question, not the adjacent one |
 | **Ordering / matching buffer** | 1:18 - 1:27 | 9 | Do these **after** single-answer items; they are slower and all-or-nothing |
-| **Submit sweep** | 1:27 - 1:30 | 3 | Confirm **zero blanks** — a blank is a guaranteed zero |
+| **Submit sweep** | 1:27 - 1:30 | 3 | Confirm **zero blanks**: a blank is a guaranteed zero |
 | **Guess rule** (any time) | any | - | Down to two? Pick the **most specific, AWS-native, least absolute** option |
 | **Trap rule** (any time) | any | - | "Always", "never", "guarantees", "eliminates hallucination" absolutes usually lose |
 | **Cost rule** (any time) | any | - | Prefer the **simplest managed** answer unless the stem demands control |
@@ -168,30 +168,30 @@ flowchart TD
 {
   "question": "Order the four timed phases of the 90-minute AIF-C01 clock:",
   "items": [
-    "Submit sweep - 1:27 to 1:30 - confirm zero blanks",
-    "First pass - 0:00 to 1:05 - about 60 s per item, answer everything",
-    "Flagged review - 1:05 to 1:18 - re-read the stem, check the ASKED question",
-    "Ordering and matching buffer - 1:18 to 1:27 - all-or-nothing formats last"
+    "Submit sweep - 1:27 to 1:30: confirm zero blanks",
+    "First pass - 0:00 to 1:05: about 60 s per item, answer everything",
+    "Flagged review - 1:05 to 1:18: re-read the stem, check the ASKED question",
+    "Ordering and matching buffer - 1:18 to 1:27: all-or-nothing formats last"
   ],
   "correctOrder": [
-    "First pass - 0:00 to 1:05 - about 60 s per item, answer everything",
-    "Flagged review - 1:05 to 1:18 - re-read the stem, check the ASKED question",
-    "Ordering and matching buffer - 1:18 to 1:27 - all-or-nothing formats last",
-    "Submit sweep - 1:27 to 1:30 - confirm zero blanks"
+    "First pass - 0:00 to 1:05: about 60 s per item, answer everything",
+    "Flagged review - 1:05 to 1:18: re-read the stem, check the ASKED question",
+    "Ordering and matching buffer - 1:18 to 1:27: all-or-nothing formats last",
+    "Submit sweep - 1:27 to 1:30: confirm zero blanks"
   ],
   "explanation": "The order is fixed by risk: you must see every item before you review any of them (otherwise a late item never gets answered), the slow all-or-nothing formats need a dedicated buffer after single-answer work, and the last three minutes exist only to prove that nothing was left blank."
 }
 ```
 
-### 3.2 Worked example 1 — where the time goes
+### 3.2 Worked example 1: where the time goes
 
-5,400 seconds across 65 items is about **83 seconds each**. Plan **60 seconds** for the first pass (65 minutes), which leaves 25 minutes: 13 for flagged items, 9 for ordering and matching, 3 for the final sweep. If two items consume three minutes each, you have spent six minutes of your review budget — so the correct move is always **flag, guess, move**, never "one more careful read".
+5,400 seconds across 65 items is about **83 seconds each**. Plan **60 seconds** for the first pass (65 minutes), which leaves 25 minutes: 13 for flagged items, 9 for ordering and matching, 3 for the final sweep. If two items consume three minutes each, you have spent six minutes of your review budget, so the correct move is always **flag, guess, move**, never "one more careful read".
 
-### 3.3 Worked example 2 — the guess protocol
+### 3.3 Worked example 2: the guess protocol
 
 There is never a reason to leave an item blank. The protocol that keeps guessing disciplined:
 
-1. **Predict** the answer from the stem *before* you read the options — it stops the distractors from anchoring you.
+1. **Predict** the answer from the stem *before* you read the options; it stops the distractors from anchoring you.
 2. **Eliminate two** options and write a one-line reason for each (wrong layer, wrong rung, wrong family, over-scoped, absolute wording).
 3. If two remain, choose the one that is **most specific, most AWS-native and least absolute**.
 4. **Move within 60 seconds.** Four minutes on one item is four items lost elsewhere.
@@ -222,7 +222,7 @@ AWS does not write random wrong answers. It writes **plausible near-misses** tha
 | **Absolute wording** | "guarantees", "100 %", "eliminates hallucinations" | Prefer hedged, evidence-based wording |
 | **Out-of-scope service** | A legacy service presented as *the* answer | Check the current in-scope list; never build a key on it |
 
-### 4.1 Worked example 3 — elimination that survives contact with the options
+### 4.1 Worked example 3: elimination that survives contact with the options
 
 A fraud model's false negatives cost **50x** a false alarm. Which metric do you prioritize?
 
@@ -233,27 +233,27 @@ A fraud model's false negatives cost **50x** a false alarm. Which metric do you 
 
 Test every option against the **stem's** pain, not against general goodness: each option must answer the specific thing that hurts.
 
-### 4.2 Worked example 4 — what "700" actually means
+### 4.2 Worked example 4: what "700" actually means
 
-Exam forms are equated, so AWS never publishes how many of the 50 scored items equal 700 — any "35 of 50 = pass" claim is unsourced (section 12). What you *can* act on: compensatory scoring means a soft Domain 4 still sinks you, so target **>= 80 % on mixed practice with zero blanks**, then use the report's section classifications to pick what to revise.
+Exam forms are equated, so AWS never publishes how many of the 50 scored items equal 700: any "35 of 50 = pass" claim is unsourced (section 12). What you *can* act on: compensatory scoring means a soft Domain 4 still sinks you, so target **>= 80 % on mixed practice with zero blanks**, then use the report's section classifications to pick what to revise.
 
 ### 4.3 Three questions for every option
 
 Slow candidates read options; fast candidates interrogate them. Ask the same three questions of each choice, in this order:
 
-1. **What does this measure or do?** — name the mechanism in one clause. If you cannot, the option is a distractor you have not yet recognized.
-2. **Does that mechanism answer the *stem's* pain?** — the stem, not the topic. An option can be true and still irrelevant.
-3. **Is it scoped, hedged and AWS-native?** — the narrowest true answer beats the broadest true answer, and a hedged statement beats an absolute one.
+1. **What does this measure or do?**: name the mechanism in one clause. If you cannot, the option is a distractor you have not yet recognized.
+2. **Does that mechanism answer the *stem's* pain?**: the stem, not the topic. An option can be true and still irrelevant.
+3. **Is it scoped, hedged and AWS-native?**: the narrowest true answer beats the broadest true answer, and a hedged statement beats an absolute one.
 
 ### 4.4 The trap map, domain by domain
 
 | Domain | Trap the exam repeats most often | The correct reflex |
 |---|---|---|
 | **D1** | Reaching for a metric that does not match the error cost (accuracy under imbalance, R-squared for detection) | Translate the **cost of the error** into a metric before reading the options |
-| **D2** | Confusing the billing unit (per call, per GPU-hour, per token) or the customization trigger | Ask "what am I buying?" — tokens, hours, or capacity |
+| **D2** | Confusing the billing unit (per call, per GPU-hour, per token) or the customization trigger | Ask "what am I buying?": tokens, hours, or capacity |
 | **D3** | Jumping to fine-tuning for facts or formatting | Walk the ladder: prompt → RAG → fine-tune, then evaluate |
 | **D4** | Mistaking AWS's own documentation (AI Service Cards) for documentation of *your* model | Model Cards = yours; AI Service Cards = AWS's |
-| **D5** | Treating a detective or evidentiary tool as a preventive control | Prevent (Guardrails, IAM) / detect (Config, CloudTrail) / prove (Artifact) — pick the verb the stem uses |
+| **D5** | Treating a detective or evidentiary tool as a preventive control | Prevent (Guardrails, IAM) / detect (Config, CloudTrail) / prove (Artifact): pick the verb the stem uses |
 
 ---
 
@@ -266,7 +266,7 @@ Slow candidates read options; fast candidates interrogate them. Ask the same thr
 | **D1** Fundamentals of AI and ML | **20 %** | 10 | **3** (items 1-3) | 8.0 h | Metrics, lifecycle, service matching |
 | **D2** Fundamentals of Generative AI | **24 %** | 12 | **4** (items 4-7) | 9.6 h | Tokens, pricing, limits, AWS infrastructure |
 | **D3** Applications of Foundation Models | **28 %** | 14 | **4** (items 8-11) | 11.2 h | Prompting, RAG, agents, evaluation |
-| **D4** Guidelines for Responsible AI | **14 %** | 7 | **2** (items 12-13) | 5.6 h | Only **2 task statements** — the densest return per hour |
+| **D4** Guidelines for Responsible AI | **14 %** | 7 | **2** (items 12-13) | 5.6 h | Only **2 task statements**: the densest return per hour |
 | **D5** Security, Compliance, Governance | **14 %** | 7 | **2** (items 14-15) | 5.6 h | Injection, IAM, shared responsibility, Artifact |
 | **Total** | **100 %** | **50** | **15** | **40 h** | "Scored items" column is arithmetic, not an AWS figure |
 
@@ -283,25 +283,25 @@ pie title AIF-C01 published domain weights
 {
   "question": "Match each AIF-C01 domain to its published weight and the number of scored items it should receive on a 50-item exam:",
   "pairs": [
-    {"left": "Domain 1 - Fundamentals of AI and ML", "right": "20 percent - about 10 scored items"},
-    {"left": "Domain 2 - Fundamentals of Generative AI", "right": "24 percent - about 12 scored items"},
-    {"left": "Domain 3 - Applications of Foundation Models", "right": "28 percent - about 14 scored items"},
-    {"left": "Domain 4 - Guidelines for Responsible AI", "right": "14 percent - about 7 scored items"},
-    {"left": "Domain 5 - Security, Compliance, Governance", "right": "14 percent - about 7 scored items"}
+    {"left": "Domain 1: Fundamentals of AI and ML", "right": "20 percent: about 10 scored items"},
+    {"left": "Domain 2: Fundamentals of Generative AI", "right": "24 percent: about 12 scored items"},
+    {"left": "Domain 3: Applications of Foundation Models", "right": "28 percent: about 14 scored items"},
+    {"left": "Domain 4: Guidelines for Responsible AI", "right": "14 percent: about 7 scored items"},
+    {"left": "Domain 5: Security, Compliance, Governance", "right": "14 percent: about 7 scored items"}
   ],
-  "explanation": "Only the five domain percentages are published. The item counts are simple arithmetic on 50 scored items (20 percent of 50 = 10, and so on), which is a planning aid rather than an AWS figure - AWS states that the exam guide is not a comprehensive list of content."
+  "explanation": "Only the five domain percentages are published. The item counts are simple arithmetic on 50 scored items (20 percent of 50 = 10, and so on), which is a planning aid rather than an AWS figure: AWS states that the exam guide is not a comprehensive list of content."
 }
 ```
 
 > [!IMPORTANT]
-> **Comparative Verdict — Domain 3 (28 %) vs Domain 2 (24 %) vs Domain 1 (20 %) vs Domains 4 and 5 (14 % each)**
-> - **Domain 3, Applications of Foundation Models (28 %), is the largest single block and the one you should over-prepare.** It carries roughly 14 scored items and it is the domain where *procedure* beats *recall*: prompting technique, the prompt → RAG → fine-tune ladder, agent action groups with Lambda, retrieval-vs-generation failure diagnosis, and evaluation modes. If you only re-read one domain the night before, re-read this one — it is also where the live exam's multiple-response and ordering items are cheapest to lose.
+> **Comparative Verdict: Domain 3 (28 %) vs Domain 2 (24 %) vs Domain 1 (20 %) vs Domains 4 and 5 (14 % each)**
+> - **Domain 3, Applications of Foundation Models (28 %), is the largest single block and the one you should over-prepare.** It carries roughly 14 scored items and it is the domain where *procedure* beats *recall*: prompting technique, the prompt → RAG → fine-tune ladder, agent action groups with Lambda, retrieval-vs-generation failure diagnosis, and evaluation modes. If you only re-read one domain the night before, re-read this one; it is also where the live exam's multiple-response and ordering items are cheapest to lose.
 > - **Domain 2, Fundamentals of Generative AI (24 %), is the numbers domain.** Tokens in vs tokens out, on-demand vs batch vs provisioned throughput, context windows, temperature, prompt caching, prompt routing and MCP. Marks here are fast and binary: you either know the billing unit or you do not. It is the best domain to convert from "shaky" to "solid" in two sittings.
-> - **Domain 1, Fundamentals of AI and ML (20 %), is the classic ML core** — supervised vs unsupervised, precision/recall/F1, overfitting, drift, the ML lifecycle and the prebuilt service map (Comprehend vs Textract vs Translate vs Polly). Candidates who arrive from a GenAI-only background under-weight it and pay for that at the end.
+> - **Domain 1, Fundamentals of AI and ML (20 %), is the classic ML core**: supervised vs unsupervised, precision/recall/F1, overfitting, drift, the ML lifecycle and the prebuilt service map (Comprehend vs Textract vs Translate vs Polly). Candidates who arrive from a GenAI-only background under-weight it and pay for that at the end.
 > - **Domains 4 and 5 (14 % each) look small and are not.** Domain 4 has only **2 task statements** yet 14 % of the score, which makes it the **densest return per study hour on the entire exam**: NIST AI RMF, ISO, the EU AI Act tiers, fairness and explainability (Clarify), transparency (Model Cards, AI Service Cards) and human oversight. Domain 5 is equally concentrated: prompt injection, least privilege, the shared responsibility split and **AWS Artifact**. Because scoring is compensatory, a weak 14 % domain is the classic reason a candidate fails with an otherwise strong report.
-> - **Rule of thumb:** allocate hours in proportion to weight (**8 / 9.6 / 11.2 / 5.6 / 5.6** for a 40-hour plan), but spend your *last* week on D4 and D5 — they are the cheapest marks to add back and the most expensive to lose.
+> - **Rule of thumb:** allocate hours in proportion to weight (**8 / 9.6 / 11.2 / 5.6 / 5.6** for a 40-hour plan), but spend your *last* week on D4 and D5; they are the cheapest marks to add back and the most expensive to lose.
 
-- **📚 Did you know?** **Domain 4 is worth 14 % of the exam from just two task statements**, while Domain 1 spreads 20 % across a much longer list of objectives. That means each individual Domain 4 objective carries far more expected score than the average Domain 1 objective — and it is why a candidate who "knows ML well but never read the NIST AI RMF" can lose a passing margin in only a handful of items.
+- **📚 Did you know?** **Domain 4 is worth 14 % of the exam from just two task statements**, while Domain 1 spreads 20 % across a much longer list of objectives. That means each individual Domain 4 objective carries far more expected score than the average Domain 1 objective, and it is why a candidate who "knows ML well but never read the NIST AI RMF" can lose a passing margin in only a handful of items.
 
 ---
 
@@ -328,11 +328,11 @@ flowchart TD
 
 **RAG changes what the model knows; fine-tuning changes how it behaves.** Answer every "what should we do next?" question by asking which of those two is broken.
 
-### 6.2 Worked example 5 — the two-hour fix vs the two-week fix
+### 6.2 Worked example 5: the two-hour fix vs the two-week fix
 
-*"Answers must cite current internal policy documents the model has never seen."* A better prompt will not help, because the model has no access to those documents. The correct next step is **RAG** (Bedrock Knowledge Bases: retrieved context plus citations). Only if the *style* of the answers is still wrong after retrieval do you consider fine-tuning — and then you need Provisioned Throughput to invoke the customized model at all. Candidates who jump straight to fine-tuning answer a question nobody asked.
+*"Answers must cite current internal policy documents the model has never seen."* A better prompt will not help, because the model has no access to those documents. The correct next step is **RAG** (Bedrock Knowledge Bases: retrieved context plus citations). Only if the *style* of the answers is still wrong after retrieval do you consider fine-tuning, and then you need Provisioned Throughput to invoke the customized model at all. Candidates who jump straight to fine-tuning answer a question nobody asked.
 
-### 6.3 Worked example 6 — weight-driven hour allocation
+### 6.3 Worked example 6: weight-driven hour allocation
 
 Multiply weight by total hours: $0.20 \times 40 = 8.0$ h (D1), $0.24 \times 40 = 9.6$ h (D2), $0.28 \times 40 = 11.2$ h (D3), $0.14 \times 40 = 5.6$ h (D4), $0.14 \times 40 = 5.6$ h (D5). Split D4's 5.6 hours into about six dense sessions (NIST, ISO, EU AI Act, fairness, transparency, oversight) and D3's into prompting 3 / RAG 3 / agents 3 / evaluation 2.
 
@@ -343,7 +343,7 @@ The fastest way to lose Set A is to start reading options before you have decide
 | The stem says… | The stem is really asking | Your first move |
 |---|---|---|
 | "which metric / how should performance be evaluated" | Which error cost matters? | Convert the stated cost into precision, recall, F1 or accuracy |
-| "cheapest / most cost-effective / reduce cost" | Which lever lowers tokens, hours or commitment? | Prompt caching, routing, batch, output limits — then re-read |
+| "cheapest / most cost-effective / reduce cost" | Which lever lowers tokens, hours or commitment? | Prompt caching, routing, batch, output limits, then re-read |
 | "fresh data / internal documents / citations" | Does the model know it? | RAG via Knowledge Bases; fine-tuning is the wrong rung |
 | "consistent style / tone / format at scale" | Is it behaviour or knowledge? | Prompt for format, fine-tune for behaviour |
 | "least privilege / which policy" | Narrowest true scope | Correct action on a resource ARN, plus scoped `iam:PassRole` |
@@ -355,7 +355,7 @@ The fastest way to lose Set A is to start reading options before you have decide
 
 ## 6.5 Trap Patterns & How to Beat Them
 
-Sections 4 and 6 gave you the six distractor families and the stem lookup table. This section compresses the rest of the strategy material into three artefacts you can rehearse in the final week: **a twelve-row trap map**, **a pacing plan keyed to the item ranges you can actually see on screen**, and **a short drill** that punishes the reflexes most candidates bring into the exam hall. The map is deliberately wider than section 4's six families because the live exam *recombines* them — one item can bait you with a pricing unit and an absolute claim at the same time, and only one of the four options will fail on both counts.
+Sections 4 and 6 gave you the six distractor families and the stem lookup table. This section compresses the rest of the strategy material into three artefacts you can rehearse in the final week: **a twelve-row trap map**, **a pacing plan keyed to the item ranges you can actually see on screen**, and **a short drill** that punishes the reflexes most candidates bring into the exam hall. The map is deliberately wider than section 4's six families because the live exam *recombines* them: one item can bait you with a pricing unit and an absolute claim at the same time, and only one of the four options will fail on both counts.
 
 ### 6.5.1 The twelve trap families and the reflex that beats each one
 
@@ -367,9 +367,9 @@ Sections 4 and 6 gave you the six distractor families and the stem lookup table.
 | T4 | **Parameter direction** | Reverses the effect ("raise temperature so answers stay consistent") | **Low temperature = deterministic**; high temperature adds variance. top-k and top-p size the candidate pool | "Which knob, and which **direction**?" |
 | T5 | **RAG vs fine-tuning** | Offers fine-tuning for fresh, cited facts, or retrieval for tone and style | **Facts, citations, freshness → RAG; behaviour, style, task → fine-tune** | "New **knowledge** or new **behaviour**?" |
 | T6 | **Inference-option matrix** | Real-time offered for 1 GB payloads, batch offered for an interactive load | Key off **payload, latency and persistence** (25 MB / 60 s, 4 MB / 60 s, 1 GB / 1 h, offline) | "Payload size? Latency? Scale to zero?" |
-| T7 | **Absolute wording** | "always", "never", "must", "only", "guarantees", "100 %" | Red flag by default — prefer the hedged, evidence-based option, *unless* the rule genuinely is absolute ("never leave an item blank") | "Is this literally true with **no** exceptions?" |
-| T8 | **Near-identical options** | Two options that differ by a single qualifier | Choose the one that satisfies the stem's **exact** constraint — cost, latency, region, least privilege | "Which constraint does only **this** option satisfy?" |
-| T9 | **Responsible-AI term swaps** | Clarify, Model Monitor, Ground Truth and A2I offered interchangeably | Bias **pre-deployment** = Clarify; **drift** = Model Monitor; **labels** = Ground Truth; **human routing** = A2I | "Before, during or after deployment — and **who acts**?" |
+| T7 | **Absolute wording** | "always", "never", "must", "only", "guarantees", "100 %" | Red flag by default: prefer the hedged, evidence-based option, *unless* the rule genuinely is absolute ("never leave an item blank") | "Is this literally true with **no** exceptions?" |
+| T8 | **Near-identical options** | Two options that differ by a single qualifier | Choose the one that satisfies the stem's **exact** constraint: cost, latency, region, least privilege | "Which constraint does only **this** option satisfy?" |
+| T9 | **Responsible-AI term swaps** | Clarify, Model Monitor, Ground Truth and A2I offered interchangeably | Bias **pre-deployment** = Clarify; **drift** = Model Monitor; **labels** = Ground Truth; **human routing** = A2I | "Before, during or after deployment, and **who acts**?" |
 | T10 | **Complexity bait** | A hand-built pipeline where a managed feature already exists | Managed, least operational overhead, not over-engineered | "Can a managed service do the **whole** job?" |
 | T11 | **Metric mismatches** | BLEU for summarisation, R-squared for text, accuracy on imbalanced data | Match the **task type**: n-gram overlap, classification, regression or drift | "What **kind of output** is being scored?" |
 | T12 | **Legacy / out-of-scope service** | An old-guide favourite presented as *the* answer | Confirm against the **current** in-scope appendix; unlisted services are never the key | "Is this on the **2026** scope list?" |
@@ -399,18 +399,18 @@ Section 3.1 splits the clock into **phases**; the plan below splits the same 90 
 |---|---|---|---|---|
 | **S1 Warm-up** | 1-10 | 0:00 → 0:12 | 12 | Read fully, decide fast; **flag** anything over 90 s |
 | **S2 Core** | 11-30 | 0:12 → 0:37 | 37 | **60 s per item**; eliminate two before you choose |
-| **S3 Slog** | 31-50 | 0:37 → 1:02 | 62 | Matching and ordering live here — do them **whole**, never partially |
+| **S3 Slog** | 31-50 | 0:37 → 1:02 | 62 | Matching and ordering live here: do them **whole**, never partially |
 | **S4 Long tail** | 51-65 | 1:02 → 1:17 | 77 | Slower stems and case sets; still flag rather than stall |
 | **S5 Flag sweep** | all flagged | 1:17 → 1:27 | 87 | Re-read the stem, re-run elimination once |
-| **S6 Buffer** | — | 1:27 → 1:30 | 90 | Confirm **zero blanks**, then submit |
+| **S6 Buffer** |: | 1:27 → 1:30 | 90 | Confirm **zero blanks**, then submit |
 
-*Derived check-points (arithmetic, not an AWS figure):* the ceiling is **83 s per item**; **more than three minutes on one item costs you two items** elsewhere; a sustainable flag budget is about **one flag in every six items (roughly ten in total)**; and if S2 runs five minutes over, you cut time from S5 — never from S6's blank check.
+*Derived check-points (arithmetic, not an AWS figure):* the ceiling is **83 s per item**; **more than three minutes on one item costs you two items** elsewhere; a sustainable flag budget is about **one flag in every six items (roughly ten in total)**; and if S2 runs five minutes over, you cut time from S5: never from S6's blank check.
 
-- **📚 Did you know?** Because the average budget is **83 seconds**, three minutes spent re-reading one stem is not three minutes lost — it is **two whole items** pushed into your last ten minutes. Working backwards from that ceiling, the derived flag allowance is about **one flagged item in six, roughly ten flags across the exam**. Flag twenty and you have not identified the hard items; you have quietly scheduled a third of the paper for a review window that cannot hold it.
+- **📚 Did you know?** Because the average budget is **83 seconds**, three minutes spent re-reading one stem is not three minutes lost; it is **two whole items** pushed into your last ten minutes. Working backwards from that ceiling, the derived flag allowance is about **one flagged item in six, roughly ten flags across the exam**. Flag twenty and you have not identified the hard items; you have quietly scheduled a third of the paper for a review window that cannot hold it.
 
 ### 6.5.3 Trap mini-drill: four items that punish the usual reflexes
 
-These four are deliberately short, because the trap usually resolves in the first five seconds — the moment you notice *which* unit, *which* direction or *which* window is in play. Answer all four before reading the explanations.
+These four are deliberately short, because the trap usually resolves in the first five seconds: the moment you notice *which* unit, *which* direction or *which* window is in play. Answer all four before reading the explanations.
 
 ```question
 {
@@ -424,7 +424,7 @@ These four are deliberately short, because the trap usually resolves in the firs
     "Increase maxTokens"
   ],
   "correct": 1,
-  "explanation": "Low temperature steepens the probability distribution, so the model keeps choosing the highest-probability tokens and output becomes more deterministic. Raising temperature or top-p widens the candidate pool and adds randomness, and maxTokens only lengthens the response - it has no effect on consistency. This is trap T4, parameter direction."
+  "explanation": "Low temperature steepens the probability distribution, so the model keeps choosing the highest-probability tokens and output becomes more deterministic. Raising temperature or top-p widens the candidate pool and adds randomness, and maxTokens only lengthens the response: it has no effect on consistency. This is trap T4, parameter direction."
 }
 ```
 
@@ -440,7 +440,7 @@ These four are deliberately short, because the trap usually resolves in the firs
     "It is charged per model attached to the guardrail configuration"
   ],
   "correct": 1,
-  "explanation": "Guardrails is billed per 1,000 text units (a text unit covers a fixed block of characters), and AWS documents that the word-filter and regex-filter features add no separate charge. Per-request, per-token and per-model pricing are three different billing models that Guardrails does not use - trap T2, pricing units. Once you write the unit beside each option, three of the four die without any arithmetic."
+  "explanation": "Guardrails is billed per 1,000 text units (a text unit covers a fixed block of characters), and AWS documents that the word-filter and regex-filter features add no separate charge. Per-request, per-token and per-model pricing are three different billing models that Guardrails does not use: trap T2, pricing units. Once you write the unit beside each option, three of the four die without any arithmetic."
 }
 ```
 
@@ -472,13 +472,13 @@ These four are deliberately short, because the trap usually resolves in the firs
     "Domain weights are applied twice to the final total"
   ],
   "correct": 1,
-  "explanation": "AWS publishes a compensatory model: you need the overall pass only, with no per-domain threshold, because the published weights already shape the total. A per-domain pass mark, a dropped section and double weighting are all inventions - and believing the first one is what makes a candidate sacrifice a 14 percent domain they assume cannot sink them. Trap T7: the absolute-sounding rule that does not exist."
+  "explanation": "AWS publishes a compensatory model: you need the overall pass only, with no per-domain threshold, because the published weights already shape the total. A per-domain pass mark, a dropped section and double weighting are all inventions: and believing the first one is what makes a candidate sacrifice a 14 percent domain they assume cannot sink them. Trap T7: the absolute-sounding rule that does not exist."
 }
 ```
 
 ### 6.5.4 Where each trap already lives in this course
 
-You do not need new material for these traps; you need to reconnect them to the lesson that owns them. Read this as your revision routing table — if a row surprises you, that lesson is your next stop.
+You do not need new material for these traps; you need to reconnect them to the lesson that owns them. Read this as your revision routing table: if a row surprises you, that lesson is your next stop.
 
 | Trap family | Where you already met it | The Set A item it imitates | The reflex to rehearse |
 |---|---|---|---|
@@ -487,15 +487,15 @@ You do not need new material for these traps; you need to reconnect them to the 
 | **T4** Parameter direction | Lesson 08, tokens, temperature, context | 4 | Low temperature = deterministic |
 | **T5** RAG vs fine-tuning | Lessons 10 and 11, knowledge bases and agents | 8, 9 | Knowledge or behaviour? |
 | **T7** Absolute wording | Lesson 12, safety and guardrails | 4 | Hedged beats absolute |
-| **T9** Responsible-AI swaps | Lesson 12, responsible AI and oversight | 12 | Before, during or after — who acts? |
+| **T9** Responsible-AI swaps | Lesson 12, responsible AI and oversight | 12 | Before, during or after; who acts? |
 | **T10** Complexity bait | Lessons 13 and 15, MLOps and optimization | 8 | Simplest managed option wins |
 | **T11** Metric mismatches | Lesson 04, algorithms and evaluation | 1, 2, 3 | What kind of output is scored? |
 | **Over-scoped IAM** | Lesson 14, security and least privilege | 14 | Narrowest action on the narrowest ARN |
 | **Evidence vs assertion** | Lessons 14 and 15, governance and evidence | 15 | Artifact, Config, CloudTrail, Model Cards |
 
-### 6.5.5 2025–2026 Updates Quiz
+### 6.5.5 2025 to 2026 Updates Quiz
 
-The trap map has one more family worth its own check: **material that changed while you were studying**. Guide v1.1 (30 April 2026) added objectives, added services to the in-scope list and removed one, and several services moved into maintenance or closed to new customers during 2025–2026. Both items below come from verified 2025–2026 changes — answer them before you read the explanations.
+The trap map has one more family worth its own check: **material that changed while you were studying**. Guide v1.1 (30 April 2026) added objectives, added services to the in-scope list and removed one, and several services moved into maintenance or closed to new customers during 2025 to 2026. Both items below come from verified 2025 to 2026 changes: answer them before you read the explanations.
 
 ```question
 {
@@ -509,7 +509,7 @@ The trap map has one more family worth its own check: **material that changed wh
     "Feature-store design on a Kubernetes cluster"
   ],
   "correct": 1,
-  "explanation": "Objective 2.1.6 on agentic AI - multi-agent patterns, MCP, memory management, tool usage and orchestration - is one of the seven new v1.1 objectives, alongside token-based pricing, context engineering, prompt versioning, business-alignment metrics, hallucination detection and grounding, and traditional ML versus foundation models. The other three options are classic build-side ML topics, and the exam targets candidates who use AI rather than necessarily build it."
+  "explanation": "Objective 2.1.6 on agentic AI: multi-agent patterns, MCP, memory management, tool usage and orchestration: is one of the seven new v1.1 objectives, alongside token-based pricing, context engineering, prompt versioning, business-alignment metrics, hallucination detection and grounding, and traditional ML versus foundation models. The other three options are classic build-side ML topics, and the exam targets candidates who use AI rather than necessarily build it."
 }
 ```
 
@@ -529,20 +529,20 @@ The trap map has one more family worth its own check: **material that changed wh
 }
 ```
 
-- **📚 Did you know?** **Seven objectives** were added when the guide moved from v1.0 (26 March 2026) to v1.1 (30 April 2026): traditional ML vs foundation models, token-based pricing, context engineering, agentic AI, prompt versioning, business-alignment metrics, and hallucination detection with grounding. AWS also states that guide updates reach the live exam about **one month after publication** — so an item that feels "too recent to be examined" is precisely the item v1.1 was written to test.
+- **📚 Did you know?** **Seven objectives** were added when the guide moved from v1.0 (26 March 2026) to v1.1 (30 April 2026): traditional ML vs foundation models, token-based pricing, context engineering, agentic AI, prompt versioning, business-alignment metrics, and hallucination detection with grounding. AWS also states that guide updates reach the live exam about **one month after publication**, so an item that feels "too recent to be examined" is precisely the item v1.1 was written to test.
 
 > [!WARNING]
-> **Exam-day pitfall — stale facts and last-minute second guesses:**
-> - **A distractor can be true and still wrong** because the service behind it moved during 2025–2026. **Kendra** no longer accepts new customers (maintenance 30 June 2026, closed 30 July 2026) and AWS points new search workloads at **Bedrock Managed Knowledge Base**.
-> - **SageMaker Model Monitor** and **SageMaker Clarify** closed to new customers on **30 July 2026**. Their status is **maintenance**, not shutdown and **not** a rebrand into Bedrock Model Evaluations — but if a stem describes a *new* project, check whether the documented successor is the answer the item wants before you commit.
+> **Exam-day pitfall: stale facts and last-minute second guesses:**
+> - **A distractor can be true and still wrong** because the service behind it moved during 2025 to 2026. **Kendra** no longer accepts new customers (maintenance 30 June 2026, closed 30 July 2026) and AWS points new search workloads at **Bedrock Managed Knowledge Base**.
+> - **SageMaker Model Monitor** and **SageMaker Clarify** closed to new customers on **30 July 2026**. Their status is **maintenance**, not shutdown and **not** a rebrand into Bedrock Model Evaluations, but if a stem describes a *new* project, check whether the documented successor is the answer the item wants before you commit.
 > - **Amazon MemoryDB** was removed from the in-scope list on **30 April 2026**. Never key an item on a service the current guide does not list (trap T12, section 12).
 > - **Do not "fix" a correct answer during the submit sweep.** Re-read the stem, confirm you answered the *asked* question, and change an option only if you can state the reason in one clause.
 
 ---
 
-## 7. Practice Questions — Set A: 15 single-best-answer items
+## 7. Practice Questions, Set A: 15 single-best-answer items
 
-Set A mirrors the real exam's dominant format: **one correct response, three distractors**. It is deliberately weighted like the published domains — 3 items for D1, 4 for D2, 4 for D3, 2 for D4 and 2 for D5. **Set a 15-minute timer, answer every item, and never leave one blank.** The answer key, organized by domain, follows in section 8.
+Set A mirrors the real exam's dominant format: **one correct response, three distractors**. It is deliberately weighted like the published domains: 3 items for D1, 4 for D2, 4 for D3, 2 for D4 and 2 for D5. **Set a 15-minute timer, answer every item, and never leave one blank.** The answer key, organized by domain, follows in section 8.
 
 ### 7.1 How to sit Set A
 
@@ -550,7 +550,7 @@ Set A mirrors the real exam's dominant format: **one correct response, three dis
 |---|---|---|
 | **Timer** | **15 minutes flat** (60 s per item, the first-pass budget) | It trains the rhythm you will use for 65 items, not just 15 |
 | **Materials** | No notes, no search, no section 8 visible | Open-book scoring measures your notes, not you |
-| **Pacing** | Answer every item; flag anything over 90 seconds and keep moving | A blank is a guaranteed zero — the rule never changes with set size |
+| **Pacing** | Answer every item; flag anything over 90 seconds and keep moving | A blank is a guaranteed zero: the rule never changes with set size |
 | **Second pass** | Only after the timer stops, revisit flagged items | Simulates the 1:05-1:18 review window |
 | **Grading** | By **domain** first, total second (section 8.7) | Compensatory scoring punishes the dip, not the average |
 | **Re-sit** | 72 hours later, from memory | Shorter gaps measure recognition, not retention |
@@ -583,7 +583,7 @@ Set A mirrors the real exam's dominant format: **one correct response, three dis
     "R-squared score"
   ],
   "correct": 2,
-  "explanation": "Recall is TP/(TP+FN), so maximising recall minimises missed fraud - the expensive error in this stem. Accuracy is inflated by class imbalance in a rare-event problem, precision penalises the cheaper error (the false alarm), and R-squared is a regression metric that does not apply to a detection task."
+  "explanation": "Recall is TP/(TP+FN), so maximising recall minimises missed fraud: the expensive error in this stem. Accuracy is inflated by class imbalance in a rare-event problem, precision penalises the cheaper error (the false alarm), and R-squared is a regression metric that does not apply to a detection task."
 }
 ```
 
@@ -663,7 +663,7 @@ Set A mirrors the real exam's dominant format: **one correct response, three dis
     "Increasing guardrail filter strength"
   ],
   "correct": 2,
-  "explanation": "Intelligent Prompt Routing sends each request to the model in the family predicted to handle it best, so simple prompts land on cheaper models and the documented saving can reach about 30 percent - with no training, no fine-tuning and no commitment. Distillation and Provisioned Throughput change how the model is built or hosted, and guardrail strength has no relationship to token cost."
+  "explanation": "Intelligent Prompt Routing sends each request to the model in the family predicted to handle it best, so simple prompts land on cheaper models and the documented saving can reach about 30 percent: with no training, no fine-tuning and no commitment. Distillation and Provisioned Throughput change how the model is built or hosted, and guardrail strength has no relationship to token cost."
 }
 ```
 
@@ -679,7 +679,7 @@ Set A mirrors the real exam's dominant format: **one correct response, three dis
     "Purchase Provisioned Throughput for the model"
   ],
   "correct": 0,
-  "explanation": "In-context examples plus a stated schema anchor the output format at zero training cost - this is a formatting problem, not a knowledge or behaviour problem. Fine-tuning is premature and expensive, a vector store addresses retrieval rather than format, and Provisioned Throughput only changes how you pay for inference."
+  "explanation": "In-context examples plus a stated schema anchor the output format at zero training cost: this is a formatting problem, not a knowledge or behaviour problem. Fine-tuning is premature and expensive, a vector store addresses retrieval rather than format, and Provisioned Throughput only changes how you pay for inference."
 }
 ```
 
@@ -727,7 +727,7 @@ Set A mirrors the real exam's dominant format: **one correct response, three dis
     "Amazon Bedrock Model Evaluation"
   ],
   "correct": 3,
-  "explanation": "Bedrock Model Evaluation supports automated metrics, LLM-as-a-judge scoring and human-in-the-loop evaluation on a labelled dataset - the combination the stem asks for. CloudWatch RUM is browser telemetry, Macie is sensitive-data discovery in S3, and Cost Explorer reports spend; none of them measures model output quality."
+  "explanation": "Bedrock Model Evaluation supports automated metrics, LLM-as-a-judge scoring and human-in-the-loop evaluation on a labelled dataset: the combination the stem asks for. CloudWatch RUM is browser telemetry, Macie is sensitive-data discovery in S3, and Cost Explorer reports spend; none of them measures model output quality."
 }
 ```
 
@@ -743,7 +743,7 @@ Set A mirrors the real exam's dominant format: **one correct response, three dis
     "AWS Artifact"
   ],
   "correct": 0,
-  "explanation": "SageMaker Clarify detects bias before and after training and generates explainability attributions that show how features influenced individual predictions - exactly the fairness plus transparency requirement. Polly synthesises speech, Transcribe converts speech to text, and AWS Artifact is the repository for AWS's own compliance reports, not a model-bias tool."
+  "explanation": "SageMaker Clarify detects bias before and after training and generates explainability attributions that show how features influenced individual predictions: exactly the fairness plus transparency requirement. Polly synthesises speech, Transcribe converts speech to text, and AWS Artifact is the repository for AWS's own compliance reports, not a model-bias tool."
 }
 ```
 
@@ -791,7 +791,7 @@ Set A mirrors the real exam's dominant format: **one correct response, three dis
     "AWS Config"
   ],
   "correct": 3,
-  "explanation": "AWS Config records configuration state over time, evaluates it against rules and retains the history needed to prove compliance and detect drift. CloudTrail answers 'who did what', Config answers 'what was the state' - Budgets tracks spend, prompt flows orchestrate model calls, and Polly is text-to-speech."
+  "explanation": "AWS Config records configuration state over time, evaluates it against rules and retains the history needed to prove compliance and detect drift. CloudTrail answers 'who did what', Config answers 'what was the state': Budgets tracks spend, prompt flows orchestrate model calls, and Polly is text-to-speech."
 }
 ```
 
@@ -799,45 +799,45 @@ Set A mirrors the real exam's dominant format: **one correct response, three dis
 
 ## 8. Answer key and explanations, organized by domain
 
-### 8.1 Domain 1 - Fundamentals of AI and ML (Set A items 1-3)
+### 8.1 Domain 1: Fundamentals of AI and ML (Set A items 1-3)
 
-| Item | Answer | Why it is right - and why the alternatives fail |
+| Item | Answer | Why it is right: and why the alternatives fail |
 |---|---|---|
-| **1** | **C - Unsupervised clustering** | Segmentation of unlabelled data is textbook unsupervised learning. Supervised classification presupposes labels you do not have, reinforcement learning presupposes a reward loop, and a rules engine learns nothing. |
-| **2** | **C - Recall** | Recall = TP/(TP+FN); with false negatives 50x costlier, minimising them is the goal. Accuracy is inflated by imbalance, precision optimises the cheap error, R-squared is regression-only. |
-| **3** | **B - Regularization + more representative data** | A 99 % / 72 % gap is overfitting. More epochs and looser regularization deepen it; deploying defers a cheap fix. |
+| **1** | **C: Unsupervised clustering** | Segmentation of unlabelled data is textbook unsupervised learning. Supervised classification presupposes labels you do not have, reinforcement learning presupposes a reward loop, and a rules engine learns nothing. |
+| **2** | **C: Recall** | Recall = TP/(TP+FN); with false negatives 50x costlier, minimising them is the goal. Accuracy is inflated by imbalance, precision optimises the cheap error, R-squared is regression-only. |
+| **3** | **B: Regularization + more representative data** | A 99 % / 72 % gap is overfitting. More epochs and looser regularization deepen it; deploying defers a cheap fix. |
 
-### 8.2 Domain 2 - Fundamentals of Generative AI (Set A items 4-7)
+### 8.2 Domain 2: Fundamentals of Generative AI (Set A items 4-7)
 
-| Item | Answer | Why it is right - and why the alternatives fail |
+| Item | Answer | Why it is right: and why the alternatives fail |
 |---|---|---|
-| **4** | **B - Fluent but unverifiable output** | That is the published definition of hallucination. Injection, throttling and drift are three different risk classes with three different controls. |
-| **5** | **D - Input and output tokens, by model** | On-demand Bedrock billing is per token and per model provider; the other three describe flat-per-call, GPU-hour and latency billing models that Bedrock on-demand does not use. |
-| **6** | **A - Provisioned Throughput** | Customised models are invoked through Provisioned Throughput, billed hourly. Nothing moves to EC2 and no retraining is implied. |
-| **7** | **C - Intelligent Prompt Routing** | Routing picks the right model in the family per request, about 30 % cheaper for simple prompts, with no retraining. Distillation is training, Provisioned Throughput is a commitment, guardrails are safety. |
+| **4** | **B, Fluent but unverifiable output** | That is the published definition of hallucination. Injection, throttling and drift are three different risk classes with three different controls. |
+| **5** | **D, Input and output tokens, by model** | On-demand Bedrock billing is per token and per model provider; the other three describe flat-per-call, GPU-hour and latency billing models that Bedrock on-demand does not use. |
+| **6** | **A: Provisioned Throughput** | Customised models are invoked through Provisioned Throughput, billed hourly. Nothing moves to EC2 and no retraining is implied. |
+| **7** | **C: Intelligent Prompt Routing** | Routing picks the right model in the family per request, about 30 % cheaper for simple prompts, with no retraining. Distillation is training, Provisioned Throughput is a commitment, guardrails are safety. |
 
-### 8.3 Domain 3 - Applications of Foundation Models (Set A items 8-11)
+### 8.3 Domain 3: Applications of Foundation Models (Set A items 8-11)
 
-| Item | Answer | Why it is right - and why the alternatives fail |
+| Item | Answer | Why it is right: and why the alternatives fail |
 |---|---|---|
-| **8** | **A - Few-shot examples + explicit schema** | Format instability is fixed in-context at no training cost. Fine-tuning, vector stores and Provisioned Throughput answer different problems. |
-| **9** | **B - Bedrock Knowledge Bases (RAG)** | Retrieval at query time over a corpus the model never saw, with citations. Fine-tuning does not ground facts, longer instructions cannot invent content, higher temperature reduces reliability. |
-| **10** | **C - Agent with action groups + Lambda** | Agents orchestrate multi-step tool use; action groups execute real actions. A one-shot prompt, a static FAQ or a nightly batch cannot place an order interactively. |
-| **11** | **D - Bedrock Model Evaluation** | Automated metrics plus human side-by-side rating on a labelled dataset is exactly what Model Evaluation provides; RUM, Macie and Cost Explorer measure other things entirely. |
+| **8** | **A: Few-shot examples + explicit schema** | Format instability is fixed in-context at no training cost. Fine-tuning, vector stores and Provisioned Throughput answer different problems. |
+| **9** | **B: Bedrock Knowledge Bases (RAG)** | Retrieval at query time over a corpus the model never saw, with citations. Fine-tuning does not ground facts, longer instructions cannot invent content, higher temperature reduces reliability. |
+| **10** | **C: Agent with action groups + Lambda** | Agents orchestrate multi-step tool use; action groups execute real actions. A one-shot prompt, a static FAQ or a nightly batch cannot place an order interactively. |
+| **11** | **D: Bedrock Model Evaluation** | Automated metrics plus human side-by-side rating on a labelled dataset is exactly what Model Evaluation provides; RUM, Macie and Cost Explorer measure other things entirely. |
 
-### 8.4 Domain 4 - Guidelines for Responsible AI (Set A items 12-13)
+### 8.4 Domain 4: Guidelines for Responsible AI (Set A items 12-13)
 
-| Item | Answer | Why it is right - and why the alternatives fail |
+| Item | Answer | Why it is right: and why the alternatives fail |
 |---|---|---|
-| **12** | **A - SageMaker Clarify** | Bias detection (pre- and post-training) plus feature attributions. Polly and Transcribe are speech services; Artifact holds AWS's compliance reports, not your model's bias evidence. |
-| **13** | **B - Govern, Map, Measure, Manage** | The AI RMF 1.0 core functions. A is the NIST CSF, C is PDCA, D is a RAG pipeline. |
+| **12** | **A: SageMaker Clarify** | Bias detection (pre- and post-training) plus feature attributions. Polly and Transcribe are speech services; Artifact holds AWS's compliance reports, not your model's bias evidence. |
+| **13** | **B: Govern, Map, Measure, Manage** | The AI RMF 1.0 core functions. A is the NIST CSF, C is PDCA, D is a RAG pipeline. |
 
-### 8.5 Domain 5 - Security, Compliance and Governance (Set A items 14-15)
+### 8.5 Domain 5: Security, Compliance and Governance (Set A items 14-15)
 
-| Item | Answer | Why it is right - and why the alternatives fail |
+| Item | Answer | Why it is right: and why the alternatives fail |
 |---|---|---|
 | **14** | **C - `bedrock:InvokeModel` on the model ARN** | Least privilege = narrow action, narrow resource, scoped `iam:PassRole`. Wildcards, AdministratorAccess and shared keys all violate it. |
-| **15** | **D - AWS Config** | Config stores configuration history, evaluates compliance and proves drift over time. CloudTrail proves *who acted*, Budgets prove *what you spent*, and prompt flows do neither. |
+| **15** | **D: AWS Config** | Config stores configuration history, evaluates compliance and proves drift over time. CloudTrail proves *who acted*, Budgets prove *what you spent*, and prompt flows do neither. |
 
 ### 8.6 Rapid key for the rest of the 40-item bank (Sets B and C)
 
@@ -879,7 +879,7 @@ Set A is your graded simulation; these 25 items are your **ungraded reinforcemen
 | **13-14 / 15** | Exam-ready band | Likely comfortably above a 700-equivalent | Repair only the missed domain, then re-sit after 72 hours |
 | **11-12 / 15** | Borderline band | One weak domain is probably hiding inside the total | Break the score down by domain; reopen the lowest two |
 | **9-10 / 15** | Content gap | Recall is incomplete under time pressure | Return to the mapped lessons in section 11 before re-timing |
-| **<= 8 / 15** | Foundation gap | The ladder, the metrics or the IAM basics are not yet automatic | Restart at lessons 01, 04 and 14 — do not re-sit yet |
+| **<= 8 / 15** | Foundation gap | The ladder, the metrics or the IAM basics are not yet automatic | Restart at lessons 01, 04 and 14: do not re-sit yet |
 | **Any result with blanks** | Automatic fail signal | On the live exam a blank is a guaranteed zero | Fix the *process* first: flag, guess, move |
 
 A single wrong answer is information; a pattern of wrong answers in one domain is a **curriculum** problem, and the rubric in section 9 exists to tell those two situations apart.
@@ -900,7 +900,7 @@ A single wrong answer is information; a pattern of wrong answers in one domain i
 
 ### 9.1 How to grade yourself honestly
 
-1. **Score Set A raw first** — one point per item, no partial credit, exactly like the live exam's multiple choice.
+1. **Score Set A raw first**: one point per item, no partial credit, exactly like the live exam's multiple choice.
 2. **Convert by domain, not by total.** A 13/15 that hides two Domain 4 misses is more dangerous than an 11/15 spread evenly, because compensatory scoring punishes the dip, not the average.
 3. **Categorize every miss** as *knowledge gap* (you did not know) or *reading error* (you knew it and picked the distractor). Knowledge gaps go to the study plan in section 10; reading errors go to the distractor table in section 4.
 4. **Re-sit Set A in 72 hours.** Score inflation on an immediate re-sit is memory, not mastery; a 48-72 hour gap is the shortest honest interval.
@@ -946,19 +946,19 @@ flowchart LR
     W6 -.->|"score below 13 of 15"| W5
 ```
 
-- **📚 Did you know?** Because the exam guide updates reach the live exam roughly **one month after publication** (guide v1.1 was published 30 April 2026), a candidate testing in the same month as a revision may face items drawn from *either* version. The safe behaviour is to re-read the revision page for your course about a month before your date — and to refuse to build any answer on a service that only appears in older guides (section 12).
+- **📚 Did you know?** Because the exam guide updates reach the live exam roughly **one month after publication** (guide v1.1 was published 30 April 2026), a candidate testing in the same month as a revision may face items drawn from *either* version. The safe behaviour is to re-read the revision page for your course about a month before your date, and to refuse to build any answer on a service that only appears in older guides (section 12).
 
 ### 10.3 The last 48 hours, and the morning itself
 
 | When | Do | Do not |
 |---|---|---|
-| **T-48 h** | Re-sit Set A under time; grade by domain with section 8.7 | Start a new topic — nothing learned in 48 hours survives stress |
+| **T-48 h** | Re-sit Set A under time; grade by domain with section 8.7 | Start a new topic: nothing learned in 48 hours survives stress |
 | **T-24 h** | Re-read sections 3, 4 and 5: the clock, the distractors, the weights | Re-read anything you have never seen; it will feel familiar and be wrong |
-| **T-12 h** | Write out the five weights, the four question types, NIST's four functions and the ladder from memory | Cram unverified facts — if it is in section 12, it is not yours to assert |
+| **T-12 h** | Write out the five weights, the four question types, NIST's four functions and the ladder from memory | Cram unverified facts: if it is in section 12, it is not yours to assert |
 | **Morning of** | Eat, arrive early or log in 20 minutes early, ID ready, room clear | New flashcards, forum panics, or a "quick" full practice exam |
 | **Minute 0** | Read the first stem twice; start the 60-second-per-item rhythm immediately | Spend five minutes admiring the interface |
 
-The goal of the last 48 hours is not new knowledge — it is **retrieval practice on what you already have**, so that the four decision rules (guess protocol, ladder, least privilege, evidence-over-assertion) fire automatically at item 1.
+The goal of the last 48 hours is not new knowledge; it is **retrieval practice on what you already have**, so that the four decision rules (guess protocol, ladder, least privilege, evidence-over-assertion) fire automatically at item 1.
 
 ---
 
@@ -987,7 +987,7 @@ The goal of the last 48 hours is not new knowledge — it is **retrieval practic
 
 ### 11.2 The five threads that run through every domain
 
-1. **Choose the smallest sufficient tool.** Prompt before RAG, RAG before fine-tuning, managed before DIY, scoped ARN before wildcard — the same instinct appears in D1 (prebuilt vs custom), D3 (prompt vs train), D4 (documented control vs aspiration) and D5 (least privilege).
+1. **Choose the smallest sufficient tool.** Prompt before RAG, RAG before fine-tuning, managed before DIY, scoped ARN before wildcard: the same instinct appears in D1 (prebuilt vs custom), D3 (prompt vs train), D4 (documented control vs aspiration) and D5 (least privilege).
 2. **Know the billing unit.** D2 bills in tokens, batch is ~50 % below on-demand, Provisioned Throughput is hourly, and prompt caching can cut repeated-prefix cost dramatically. Cost questions are usually just unit questions.
 3. **Evidence beats assertion.** Compliance evidence lives in **AWS Artifact**, model evidence in **Model Cards**, bias evidence in **Clarify**, configuration evidence in **Config**, action evidence in **CloudTrail**. An option that promises a result with no artifact behind it is usually wrong.
 4. **Humans stay accountable.** Human-in-the-loop oversight, human evaluation, approval gates in MLOps, and the shared responsibility split all say the same thing: automation proposes, accountability does not transfer.
@@ -995,7 +995,7 @@ The goal of the last 48 hours is not new knowledge — it is **retrieval practic
 
 ### 11.3 Final integration drill
 
-Take any stem from Set A and name the lesson that owns it. Items 1-3 belong to lessons 01-05, items 4-7 to lessons 08-09 and 15, items 8-11 to lessons 10-11 and 13, items 12-13 to lesson 12 (with the NIST framing from lesson 01), items 14-15 to lesson 14. If you cannot place an item, you do not yet have a revision target — you have a *recognition* gap, which is the more dangerous kind, because it feels like knowledge.
+Take any stem from Set A and name the lesson that owns it. Items 1-3 belong to lessons 01-05, items 4-7 to lessons 08-09 and 15, items 8-11 to lessons 10-11 and 13, items 12-13 to lesson 12 (with the NIST framing from lesson 01), items 14-15 to lesson 14. If you cannot place an item, you do not yet have a revision target; you have a *recognition* gap, which is the more dangerous kind, because it feels like knowledge.
 
 ---
 
@@ -1018,24 +1018,24 @@ To keep an unverified claim from becoming a wrong answer, these points are delib
 ---
 
 > [!WARNING]
-> **Exam-day traps — the mistakes that cost marks on this exact material:**
+> **Exam-day traps: the mistakes that cost marks on this exact material:**
 > - **Leaving an item blank.** Blank = incorrect, and there is **no guessing penalty**. An unanswered item is the only guaranteed zero on the exam.
 > - **Treating 15 items as free.** The unscored pretest items are **unidentified**; you cannot skip them, so every item gets your full attention.
-> - **Computing a pass.** The raw-to-scaled conversion is **not published** — plan for >= 80 % in practice, not for "35 of 50".
+> - **Computing a pass.** The raw-to-scaled conversion is **not published**: plan for >= 80 % in practice, not for "35 of 50".
 > - **Sacrificing a domain.** Scoring is **compensatory**: a strong Domain 3 never rescues a weak Domain 4. Fix the dip, not the average.
-> - **Ignoring Domain 4 because it is "only 14 %".** It is 14 % from **two task statements** — the densest marks on the exam, and the easiest to lose without noticing.
-> - **Falling for absolutes.** "Guarantees", "always", "never", "eliminates hallucination" — prefer the hedged, evidence-backed option.
+> - **Ignoring Domain 4 because it is "only 14 %".** It is 14 % from **two task statements**: the densest marks on the exam, and the easiest to lose without noticing.
+> - **Falling for absolutes.** "Guarantees", "always", "never", "eliminates hallucination": prefer the hedged, evidence-backed option.
 > - **Buying the expensive answer.** A longer prompt, a fine-tune or Provisioned Throughput is wrong when few-shot examples, RAG or prompt caching would do; choose the **simplest managed** option unless control is explicitly demanded.
-> - **Mis-sequencing the clock.** Ordering and matching are all-or-nothing and slow — do them **after** single-answer items, inside the 1:18-1:27 buffer.
+> - **Mis-sequencing the clock.** Ordering and matching are all-or-nothing and slow: do them **after** single-answer items, inside the 1:18-1:27 buffer.
 > - **Asserting the unverified.** If a fact is not on a current AWS page (section 12), do not state it as recall material on exam day.
 
 > [!SUCCESS]
 > **Key Takeaways:**
 > 1. **The container:** 65 items (50 scored + 15 hidden), 90 minutes (~83 s each), scaled 100-1,000 with **700 to pass**, **compensatory** scoring, **no guessing penalty**, 100 USD, valid **3 years**, **14-day** wait after a fail, results within **5 business days**.
-> 2. **The four formats** — multiple choice, multiple response, ordering, matching — all-or-nothing in different ways; plan the clock as **65 min first pass + 13 min review + 9 min ordering/matching + 3 min no-blank sweep**.
+> 2. **The four formats**, multiple choice, multiple response, ordering, matching, all-or-nothing in different ways; plan the clock as **65 min first pass + 13 min review + 9 min ordering/matching + 3 min no-blank sweep**.
 > 3. **Never leave a blank**, and when stuck apply the protocol: predict → eliminate two → most specific, AWS-native, least absolute → move within 60 seconds.
-> 4. **Distractors are engineered**, not random: wrong layer, wrong rung, wrong family, over-scoped, absolute wording, out-of-scope service — read the *stem's* pain before reading the options.
+> 4. **Distractors are engineered**, not random: wrong layer, wrong rung, wrong family, over-scoped, absolute wording, out-of-scope service: read the *stem's* pain before reading the options.
 > 5. **Weights rule your hours:** D1 20 %, D2 24 %, D3 28 %, D4 14 %, D5 14 % → **8 / 9.6 / 11.2 / 5.6 / 5.6** hours of a 40-hour plan, with the last week spent on the dense 14 % domains.
 > 6. **Set A benchmark:** **13-15 of 15** twice, 72 hours apart, with **zero blanks**; grade by domain, not by total, because compensatory scoring punishes the dip.
-> 7. **The customization ladder never changes:** prompt for format, RAG for facts the model never saw, fine-tune for behaviour in the weights — and evaluate before and after with Bedrock Model Evaluation.
-> 8. **Evidence beats assertion:** Artifact for AWS's compliance, Model Cards for your model, Clarify for bias and attributions, Config for configuration over time, CloudTrail for who acted — and if a claim is not on a current AWS page, do not assert it.
+> 7. **The customization ladder never changes:** prompt for format, RAG for facts the model never saw, fine-tune for behaviour in the weights, and evaluate before and after with Bedrock Model Evaluation.
+> 8. **Evidence beats assertion:** Artifact for AWS's compliance, Model Cards for your model, Clarify for bias and attributions, Config for configuration over time, CloudTrail for who acted, and if a claim is not on a current AWS page, do not assert it.

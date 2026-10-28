@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Frameworks y externalidades
 
-En la Arquitectura Limpia, los frameworks y las herramientas externas son **detalles** — son la capa más externa, no la base. Esta lección muestra cómo mantener tu lógica de negocio independiente del framework sin renunciar a herramientas potentes.
+En la Arquitectura Limpia, los frameworks y las herramientas externas son **detalles**: son la capa más externa, no la base. Esta lección muestra cómo mantener tu lógica de negocio independiente del framework sin renunciar a herramientas potentes.
 
 > [!NOTE]
 > Los frameworks son herramientas, no arquitecturas. Una buena arquitectura te permite usar un framework sin quedar acoplado a él. Deberías poder cambiar Flask por FastAPI sin modificar una sola línea de lógica de negocio.
@@ -39,7 +39,7 @@ flowchart TD
     style Plugins fill:#ffccbc,color:#000
 ```
 
-Cada framework se convierte en un **plugin** que se comunica con la lógica de negocio mediante adaptadores. La lógica de negocio no sabe — ni le importa — qué framework se está usando.
+Cada framework se convierte en un **plugin** que se comunica con la lógica de negocio mediante adaptadores. La lógica de negocio no sabe, ni le importa, qué framework se está usando.
 
 ## Acoplamiento de frameworks: antes y después
 
@@ -740,7 +740,7 @@ def get_order(order_id: str):
 ```
 
 > [!SUCCESS]
-> Cuando los frameworks se tratan como detalles, migrar de Flask a FastAPI (o a cualquier otro framework) consiste en reescribir un único archivo adaptador — no toda la aplicación.
+> Cuando los frameworks se tratan como detalles, migrar de Flask a FastAPI (o a cualquier otro framework) consiste en reescribir un único archivo adaptador: no toda la aplicación.
 
 ## Lista de verificación para elegir framework
 

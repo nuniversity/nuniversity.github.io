@@ -129,7 +129,7 @@ WHERE e.salary > (
 | Subquery Type | Executed | Performance |
 |---------------|----------|-------------|
 | Non-correlated | Once | Fast |
-| Correlated | Once per outer row | Slower — watch for large tables |
+| Correlated | Once per outer row | Slower: watch for large tables |
 
 ```sql
 -- Find products whose price is above the average for their category
@@ -160,7 +160,7 @@ For each of 1000 employees:
 
 ## EXISTS and NOT EXISTS
 
-EXISTS returns TRUE if the subquery produces any rows. It doesn't care about the values — only row existence.
+EXISTS returns TRUE if the subquery produces any rows. It doesn't care about the values: only row existence.
 
 ```sql
 -- Find departments that have at least one employee
@@ -183,7 +183,7 @@ WHERE NOT EXISTS (
 ```
 
 > [!SUCCESS]
-> Always use `SELECT 1` (or `SELECT *`) in EXISTS subqueries — the actual columns don't matter. The database only checks for row existence.
+> Always use `SELECT 1` (or `SELECT *`) in EXISTS subqueries: the actual columns don't matter. The database only checks for row existence.
 
 ### EXISTS vs IN
 

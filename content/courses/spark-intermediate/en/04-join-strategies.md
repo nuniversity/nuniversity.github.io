@@ -218,7 +218,7 @@ result = employees.alias("e").join(
 
 ## Skew Join Handling
 
-Data skew — where one key has disproportionately many values — can cause long-tail tasks.
+Data skew, where one key has disproportionately many values, can cause long-tail tasks.
 
 ```python
 # Check for skew

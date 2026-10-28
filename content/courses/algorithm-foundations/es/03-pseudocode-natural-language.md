@@ -39,7 +39,7 @@ flowchart LR
 ```
 
 > [!TIP]
-> Piensa en el pseudocódigo como los planos de un edificio. Los arquitectos no empiezan colocando ladrillos -- primero crean planos detallados. El pseudocódigo es el plano de tu algoritmo.
+> Piensa en el pseudocódigo como los planos de un edificio. Los arquitectos no empiezan colocando ladrillos: primero crean planos detallados. El pseudocódigo es el plano de tu algoritmo.
 
 ## Convenciones de Pseudocódigo
 

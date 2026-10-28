@@ -1,6 +1,6 @@
 ---
 title: "Capstone: Production-Grade Customer Support Agent"
-description: "Build a production-grade customer support agent with multi-agent routing, RAG, human handoff, and monitoring — integrating everything from the Advanced course."
+description: "Build a production-grade customer support agent with multi-agent routing, RAG, human handoff, and monitoring, integrating everything from the Advanced course."
 order: 10
 duration: "50 minutes"
 difficulty: "advanced"
@@ -509,7 +509,7 @@ result = support.handle_query(
 ```
 
 [!SUCCESS]
-This production-grade system combines routing, RAG, SQL queries, human handoff, quality review, and comprehensive monitoring — all the patterns from the Advanced course working together.
+This production-grade system combines routing, RAG, SQL queries, human handoff, quality review, and comprehensive monitoring: all the patterns from the Advanced course working together.
 
 ---
 
@@ -549,7 +549,7 @@ This production-grade system combines routing, RAG, SQL queries, human handoff, 
   "question": "What mechanism allows human agents to handle escalated tickets?",
   "options": [
     "Email notification",
-    "The interrupt() function — pauses graph, waits for human input, resumes",
+    "The interrupt() function: pauses graph, waits for human input, resumes",
     "A separate chat system",
     "Humans are not supported"
   ],

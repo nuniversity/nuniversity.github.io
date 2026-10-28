@@ -11,7 +11,7 @@ difficulty: "intermediate"
 Los patrones de creación tratan con los mecanismos de creación de objetos, mientras que los patrones estructurales componen clases y objetos en estructuras más grandes. Juntos forman la base de un diseño orientado a objetos flexible y reutilizable.
 
 > [!NOTE]
-> Esta lección cubre los patrones más utilizados de las categorías de creación y estructural. Dominar estos cuatro patrones — Singleton, Factory, Observer y Adapter — resolverá la mayoría de los retos de diseño habituales.
+> Esta lección cubre los patrones más utilizados de las categorías de creación y estructural. Dominar estos cuatro patrones, Singleton, Factory, Observer y Adapter, resolverá la mayoría de los retos de diseño habituales.
 
 ## Patrón Singleton
 

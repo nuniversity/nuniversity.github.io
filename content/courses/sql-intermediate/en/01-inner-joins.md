@@ -12,7 +12,7 @@ Relational databases store data across multiple tables. JOINs let you bring that
 
 ## INNER JOIN Basics
 
-An INNER JOIN returns rows where the join condition matches — rows that don't match are dropped from both sides.
+An INNER JOIN returns rows where the join condition matches: rows that don't match are dropped from both sides.
 
 ```sql
 SELECT *
@@ -44,7 +44,7 @@ INNER JOIN departments d
     ON e.department_id = d.department_id;
 ```
 
-Equi-joins map foreign keys to primary keys. The column names need not match — only the values do.
+Equi-joins map foreign keys to primary keys. The column names need not match: only the values do.
 
 ```sql
 -- Different column names, same values
@@ -94,7 +94,7 @@ INNER JOIN tasks t ON p.project_id = t.project_id
 WHERE e.hire_date >= '2023-01-01';
 ```
 
-This query starts with employees, filters by hire date, then joins outward — the WHERE filter happens conceptually before the final projection, but the database optimizer reorders these steps.
+This query starts with employees, filters by hire date, then joins outward: the WHERE filter happens conceptually before the final projection, but the database optimizer reorders these steps.
 
 > [!NOTE]
 > The order of JOINs in your query does not guarantee execution order. Modern optimizers rearrange joins based on statistics, row counts, and available indexes.
@@ -128,7 +128,7 @@ NATURAL JOIN departments;
 
 | Pros | Cons |
 |------|------|
-| Less typing | Implicit — can break when schema changes |
+| Less typing | Implicit: can break when schema changes |
 | Clean for well-named schemas | Hard to debug unintended column matches |
 
 > [!WARNING]
@@ -191,7 +191,7 @@ ORDER BY o.order_date DESC, c.name;
 ```
 
 > [!SUCCESS]
-> Think of INNER JOIN as a filter on both tables — only matching rows survive. Every row in the result is guaranteed to have a partner on both sides.
+> Think of INNER JOIN as a filter on both tables: only matching rows survive. Every row in the result is guaranteed to have a partner on both sides.
 
 ## Practice Questions
 

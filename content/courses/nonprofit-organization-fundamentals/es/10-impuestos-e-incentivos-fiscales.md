@@ -59,7 +59,7 @@ A pesar de diversas exenciones, las ONGs brasileñas siguen obligadas a pagar ci
 - R$ 3.9 mil millones en recaudación tributaria
 - Récord: R$ 3.41 mil millones capturados en 2025
 
-### Ley de Incentivo al Esporte (LIE - Lei 11.438/2006)
+### Ley de Incentivo al Esporte (LIE: Lei 11.438/2006)
 
 #### Límites de Deducción
 - **Personas jurídicas**: 2% (aumentando a 3% desde 2028 por LC 222/2025)
@@ -95,7 +95,7 @@ A pesar de diversas exenciones, las ONGs brasileñas siguen obligadas a pagar ci
 | **Fondo del Idoso** | 3% del impuesto sobre la renta debido |
 | **LIE (Deportes)** | 7% del impuesto sobre la renta debido |
 
-### Donantes Corporativos (Pessoas Jurídicas - Lucro Real)
+### Donantes Corporativos (Pessoas Jurídicas: Lucro Real)
 
 | Finalidad | Límite de Deducción |
 |---|---|
@@ -148,7 +148,7 @@ A pesar de diversas exenciones, las ONGs brasileñas siguen obligadas a pagar ci
 - **Límites corporativos**: 10% del ingreso imponible (efectivamente 1% por ley de reconciliación de 2025)
 - **Extensos requisitos de reporte Form 990**
 
-### Reino Unido - Status de Caridad
+### Reino Unido: Status de Caridad
 
 - **Gift Aid**: Las caridades reclaman el impuesto básico (20%) sobre donaciones; contribuyentes de tarifa alta reclaman alivio adicional
 - **Business Rates**: 80% de reducción (algunas autoridades complementan al 100%)
@@ -184,7 +184,7 @@ A pesar de diversas exenciones, las ONGs brasileñas siguen obligadas a pagar ci
 
 ### Retratos da Solidariedade 2024
 
-- **R$ 23.6 mil millones** en donaciones financieras a OSCs - aumento 40% de la edición anterior
+- **R$ 23.6 mil millones** en donaciones financieras a OSCs: aumento 40% de la edición anterior
 - **58%** de los entrevistados contribuyeron a OSCs
 - **32%** de los brasileños hicieron donaciones monetarias a OSCs en 2024 (subiendo de 27% en 2023)
 - **Causa defendida por la institución** es el factor principal (29% de los donantes)

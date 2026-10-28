@@ -1,6 +1,6 @@
 ---
 title: "Real-World Architecture Example"
-description: "Walk through building a complete real-world application using Clean Architecture — an e-commerce system from entities to deployment"
+description: "Walk through building a complete real-world application using Clean Architecture, an e-commerce system from entities to deployment"
 order: 7
 duration: "70 minutes"
 difficulty: "intermediate"
@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Real-World Architecture Example
 
-This lesson brings everything together by building a complete **e-commerce order management system** using Clean Architecture. You will see every layer — from entities to framework adapters — working together in a realistic application.
+This lesson brings everything together by building a complete **e-commerce order management system** using Clean Architecture. You will see every layer, from entities to framework adapters, working together in a realistic application.
 
 > [!NOTE]
 > The system handles: product catalog management, shopping cart, order placement with payment, order tracking, and notification. All business logic is framework-independent and fully testable.

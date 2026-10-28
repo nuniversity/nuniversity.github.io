@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # What is SQL and Relational Databases?
 
-SQL (Structured Query Language) is the standard language for managing and querying data in relational database management systems (RDBMS). It lets you create, read, update, and delete data — often called CRUD operations.
+SQL (Structured Query Language) is the standard language for managing and querying data in relational database management systems (RDBMS). It lets you create, read, update, and delete data: often called CRUD operations.
 
 ## What is a Relational Database?
 
@@ -108,13 +108,13 @@ This returns:
 
 An online store might have tables like:
 
-- `customers` — who buys
-- `products` — what they buy
-- `orders` — when they buy
-- `order_items` — which products in each order
-- `categories` — product grouping
+- `customers`; who buys
+- `products`: what they buy
+- `orders`: when they buy
+- `order_items`; which products in each order
+- `categories`: product grouping
 
-Instead of storing customer name in every order, each `orders` row holds a `customer_id` foreign key. This avoids duplication and makes updates easy — change the address in one place.
+Instead of storing customer name in every order, each `orders` row holds a `customer_id` foreign key. This avoids duplication and makes updates easy: change the address in one place.
 
 ```sql
 -- Find all orders by customer Alice

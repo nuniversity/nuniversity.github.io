@@ -120,7 +120,7 @@ class Order:
 ```
 
 > [!TIP]
-> Entities should be **pure** — no imports from frameworks, no ORM mappings, no serialization logic. They are plain Python classes with business methods.
+> Entities should be **pure**: no imports from frameworks, no ORM mappings, no serialization logic. They are plain Python classes with business methods.
 
 ## Entity Design Principles
 
@@ -415,7 +415,7 @@ class UserManager:
 
 ## Use Cases and DTOs
 
-Input and output data should be simple data transfer objects (DTOs) — plain dataclasses with no behavior:
+Input and output data should be simple data transfer objects (DTOs): plain dataclasses with no behavior:
 
 ```python
 from dataclasses import dataclass
@@ -464,7 +464,7 @@ class SearchProductsOutput:
 
 ## Testing Use Cases
 
-Use cases are the most important thing to test — they contain your application's business logic:
+Use cases are the most important thing to test; they contain your application's business logic:
 
 ```python
 import pytest
@@ -712,7 +712,7 @@ class ShipOrderUseCase:
 
 2. **Create a Use Case**: Write a `TransferMoneyUseCase` that depends on `AccountRepository` (interface) and uses the `BankAccount` entity from exercise 1. Include input/output DTOs.
 
-3. **Entity vs Use Case**: Given the rule "Orders over $100 get free shipping" — should this be in an entity or a use case? Justify your answer with code.
+3. **Entity vs Use Case**: Given the rule "Orders over $100 get free shipping": should this be in an entity or a use case? Justify your answer with code.
 
 4. **Test a Use Case**: Write pytest tests for `CancelOrderUseCase`. Include tests for: successful cancellation, cancelling a confirmed order, cancelling a shipped order (should fail), and cancelling a non-existent order.
 

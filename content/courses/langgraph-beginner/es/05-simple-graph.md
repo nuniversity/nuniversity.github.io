@@ -105,7 +105,7 @@ print(resultado["texto"])
 ```
 
 [!NOTE]
-Observa cómo `contar_palabras` se ejecuta primero y escribe `recuento_palabras`. Luego `generar_analisis` lo lee. El estado fluye automáticamente — los nodos no necesitan pasarse datos explícitamente.
+Observa cómo `contar_palabras` se ejecuta primero y escribe `recuento_palabras`. Luego `generar_analisis` lo lee. El estado fluye automáticamente: los nodos no necesitan pasarse datos explícitamente.
 
 ---
 
@@ -221,7 +221,7 @@ print(analizar_texto("Uno dos tres cuatro cinco"))
 [!SUCCESS]
 ### Puntos Clave
 - Construir grafo: definir estado → añadir nodos → añadir aristas → compilar → invocar
-- El estado fluye automáticamente entre nodos — no se necesita paso explícito de datos
+- El estado fluye automáticamente entre nodos: no se necesita paso explícito de datos
 - Cada nodo se enfoca en una tarea y contribuye al estado
 - .compile() prepara el grafo; .invoke() lo ejecuta con datos iniciales
 - Los valores iniciales deben proporcionarse para todos los campos del estado

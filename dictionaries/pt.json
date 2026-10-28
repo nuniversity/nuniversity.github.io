@@ -10,7 +10,7 @@
     },
     "contact": {
       "title": "Fale Conosco",
-      "description": "Entre em contato com a equipe Nuniversity — dúvidas, parcerias e suporte da comunidade."
+      "description": "Entre em contato com a equipe Nuniversity, dúvidas, parcerias e suporte da comunidade."
     },
     "notFound": {
       "title": "Página Não Encontrada",
@@ -43,12 +43,12 @@
       "notFound": "Jogo não encontrado"
     },
     "quizzes": {
-      "title": "Quizzes — Testes e Prática de Certificação",
+      "title": "Quizzes, Testes e Prática de Certificação",
       "description": "Quizzes de certificação, testes de prática e simulações de exame cronometradas com pontuação, histórico de tentativas e certificados imprimíveis.",
       "notFound": "Quiz não encontrado"
     },
     "languages": {
-      "title": "Prática de Idiomas — Flashcards e Quizzes de Tradução",
+      "title": "Prática de Idiomas, Flashcards e Quizzes de Tradução",
       "description": "Flashcards interativos e quizzes de tradução para inglês, português, espanhol e francês com acompanhamento de progresso.",
       "notFound": "Atividade de idioma não encontrada"
     }
@@ -548,7 +548,7 @@
         "Lembre-se da ordem!",
         "Digite a sequência corretamente",
         "Cada nível acrescenta mais um dígito",
-        "Você tem {lives} vidas — use-as com sabedoria!"
+        "Você tem {lives} vidas, use-as com sabedoria!"
       ]
     },
     "math_challenge": {
@@ -578,7 +578,7 @@
   "quizzes": {
     "title": "Quizzes, Testes e Prática de Certificação",
     "subtitle": "Quizzes de certificação, testes de prática e simulações de exame cronometradas com pontuação e feedback instantâneo.",
-    "redirect_fallback": "Este quiz mudou — continue para a seção de Quizzes",
+    "redirect_fallback": "Este quiz mudou, continue para a seção de Quizzes",
     "back_to_quizzes": "Voltar aos Quizzes",
     "back_to_results": "Voltar aos Resultados",
     "play_again": "Jogar Novamente",
@@ -632,11 +632,11 @@
       "available": "{n} questões disponíveis",
       "question_count": "Questões",
       "shuffle": "Embaralhar",
-      "start_practice": "Iniciar Prática — {n} Questões",
+      "start_practice": "Iniciar Prática, {n} Questões",
       "best_score": "Melhor pontuação",
       "mock_title": "Simulado",
       "exam_simulation": "Simulação de Exame",
-      "mock_description": "Simula o exame real {cert}: {count} questões, contagem regressiva de {minutes} minutos, amostragem proporcional de domínios. Sem feedback até você enviar — igual ao exame real.",
+      "mock_description": "Simula o exame real {cert}: {count} questões, contagem regressiva de {minutes} minutos, amostragem proporcional de domínios. Sem feedback até você enviar, igual ao exame real.",
       "spec_questions": "{n} questões",
       "spec_fixed": "Duração fixa do exame",
       "spec_minutes": "{n} minutos",
@@ -650,25 +650,25 @@
       "start_mock": "Iniciar Simulado"
     },
     "exam": {
-      "simulation_for": "Simulação de Exame — {cert}",
+      "simulation_for": "Simulação de Exame, {cert}",
       "rules_title": "Regras do Exame",
       "rule_drawn": "{count} questões distribuídas proporcionalmente entre os {domains} domínios do exame",
-      "rule_timer": "{minutes} minutos para concluir — o cronômetro conta regressivamente desde o início",
-      "rule_no_feedback": "Sem feedback de respostas durante o exame — os resultados aparecem só após o envio",
+      "rule_timer": "{minutes} minutos para concluir, o cronômetro conta regressivamente desde o início",
+      "rule_no_feedback": "Sem feedback de respostas durante o exame, os resultados aparecem só após o envio",
       "rule_flag": "Você pode marcar questões para revisão e navegar livremente entre todas",
       "rule_change": "Você pode alterar qualquer resposta antes de enviar",
       "rule_pass": "{score}% ou mais é a nota mínima de aprovação, igual ao limite oficial do exame",
-      "allocation_title": "Distribuição por Domínio — {count} Questões",
+      "allocation_title": "Distribuição por Domínio, {count} Questões",
       "qs": "{n} questões",
       "needed_available": "{needed} necessárias · {available} disponíveis",
       "gap_note_label": "Nota:",
       "gap_note": "Alguns subdomínios têm menos questões que a alocação ideal. As questões disponíveis serão usadas e o exame terá um pouco menos de {count} questões nesses subdomínios.",
-      "begin": "Iniciar Exame — {time}",
+      "begin": "Iniciar Exame, {time}",
       "status": "{answered} respondidas · {remaining} restantes · {flagged} marcadas",
       "submit": "Enviar",
       "flag": "Marcar para revisão",
       "flagged": "Marcada",
-      "no_reveal": "As respostas não são reveladas durante o exame — envie para ver os resultados.",
+      "no_reveal": "As respostas não são reveladas durante o exame, envie para ver os resultados.",
       "navigator": "Navegador de Questões",
       "answered": "Respondidas",
       "unanswered": "Sem resposta",
@@ -687,7 +687,7 @@
       "submit_now": "Enviar Agora",
       "pass": "APROVADO",
       "fail": "REPROVADO",
-      "time_expired": "Tempo esgotado — enviado automaticamente",
+      "time_expired": "Tempo esgotado, enviado automaticamente",
       "passing_line": "Nota mínima: {score}% · Limite oficial do {cert}",
       "review_all": "Revisar Todas as Respostas",
       "retake": "Refazer o Exame",
@@ -747,9 +747,9 @@
       "review_answers": "Revisar Respostas",
       "rating_excellent": "Excelente! Pronto para certificar 🚀",
       "rating_great": "Muito bom! Continue assim 💪",
-      "rating_good": "Bom esforço — revise os pontos fracos",
-      "rating_keep": "Continue estudando — você consegue!",
-      "not_scored": "Sem resposta — não contabilizada na sua pontuação"
+      "rating_good": "Bom esforço, revise os pontos fracos",
+      "rating_keep": "Continue estudando, você consegue!",
+      "not_scored": "Sem resposta, não contabilizada na sua pontuação"
     },
     "certificate": {
       "cta": "Obter certificado",
@@ -768,7 +768,7 @@
     },
     "history": {
       "title": "Histórico de Tentativas",
-      "empty": "Nenhuma tentativa ainda — conclua um quiz para criar seu histórico.",
+      "empty": "Nenhuma tentativa ainda, conclua um quiz para criar seu histórico.",
       "attempts_one": "1 tentativa",
       "attempts_other": "{n} tentativas",
       "best": "Melhor",
@@ -783,7 +783,7 @@
     },
     "lesson": {
       "start": "Iniciar Exame",
-      "start_hint": "Responda todas as questões — você pode navegar livremente e o cronômetro conta regressivamente.",
+      "start_hint": "Responda todas as questões, você pode navegar livremente e o cronômetro conta regressivamente.",
       "time_remaining": "Tempo restante",
       "submit": "Enviar Exame",
       "confirm_title": "Enviar o exame?",
@@ -798,7 +798,7 @@
     "certificates": {
       "title": "Minhas certificações",
       "description": "Certificações obtidas ao aprovar simulados",
-      "empty": "Nenhuma certificação ainda — aprove em um simulado",
+      "empty": "Nenhuma certificação ainda, aprove em um simulado",
       "count": "{n} certificações"
     }
   },
@@ -1079,7 +1079,7 @@
       "title": "Matriz de Decisão",
       "subtitle": "Avalie opções com base em critérios ponderados para tomar melhores decisões",
       "decision_title": "Título da Decisão",
-      "scale": "Escala (1–{n})",
+      "scale": "Escala (1, {n})",
       "options": "Opções",
       "score": "Pontuação",
       "rank": "Posição",
@@ -1511,28 +1511,28 @@
       "title": "Questão de Correspondência",
       "drop_here": "Solte aqui",
       "drag_from_here": "Arraste as respostas daqui:",
-      "incorrect_feedback": "Algumas correspondências estão erradas — os espaços vermelhos têm respostas incorretas."
+      "incorrect_feedback": "Algumas correspondências estão erradas, os espaços vermelhos têm respostas incorretas."
     },
     "fill_blank": {
       "title": "Preencher os Espaços",
       "blank_placeholder": "espaço",
       "blank_aria": "Item {i}, espaço {j}",
-      "word_bank_hint": "Banco de Palavras — arraste as palavras para os espaços acima:",
-      "feedback_perfect": "Perfeito — todos os espaços preenchidos corretamente!",
-      "feedback_incorrect_items": "Alguns espaços estão errados — {count} de {total} itens corretos.",
-      "feedback_incorrect_blanks": "Alguns espaços estão errados — os espaços vermelhos têm respostas incorretas."
+      "word_bank_hint": "Banco de Palavras, arraste as palavras para os espaços acima:",
+      "feedback_perfect": "Perfeito, todos os espaços preenchidos corretamente!",
+      "feedback_incorrect_items": "Alguns espaços estão errados, {count} de {total} itens corretos.",
+      "feedback_incorrect_blanks": "Alguns espaços estão errados, os espaços vermelhos têm respostas incorretas."
     },
     "drag_order": {
       "title": "Questão de Ordenação",
-      "incorrect_feedback": "Quase — os itens vermelhos estão na posição errada."
+      "incorrect_feedback": "Quase, os itens vermelhos estão na posição errada."
     },
     "bucket_drop": {
       "title": "Classificar em Categorias",
-      "instruction": "Itens — clique em um item e depois clique em uma categoria para colocá-lo:",
+      "instruction": "Itens, clique em um item e depois clique em uma categoria para colocá-lo:",
       "empty_pool": "Todos os itens posicionados.",
-      "empty_bucket": "Vazio — clique para colocar o item selecionado",
+      "empty_bucket": "Vazio, clique para colocar o item selecionado",
       "bucket_aria": "Categoria: {label}",
-      "score_feedback": "{count} / {total} corretos — os itens vermelhos estão na categoria errada ou por posicionar."
+      "score_feedback": "{count} / {total} corretos, os itens vermelhos estão na categoria errada ou por posicionar."
     }
   },
   "languages": {
@@ -1546,7 +1546,7 @@
       "title": "Prática de Idiomas",
       "text": "Flashcards e quizzes de tradução para 4 pares de idiomas com acompanhamento de progresso."
     },
-    "redirect_fallback": "Esta atividade foi movida — continue na seção Idiomas",
+    "redirect_fallback": "Esta atividade foi movida, continue na seção Idiomas",
     "filters": {
       "kind": "Tipo",
       "all": "Todas",
@@ -1566,7 +1566,7 @@
     },
     "tracks": {
       "title": "Cursos de idiomas",
-      "coming_soon": "Em breve — novas trilhas de idiomas estão a caminho."
+      "coming_soon": "Em breve, novas trilhas de idiomas estão a caminho."
     },
     "matching": {
       "cards_count": "{n} cartões",
@@ -1667,7 +1667,7 @@
       "result": "{correct}/{total} corretas",
       "missed": "Itens para revisar",
       "all_done": "Todas as perguntas respondidas",
-      "suggest_complete": "Bom trabalho — marque a lição como concluída",
+      "suggest_complete": "Bom trabalho, marque a lição como concluída",
       "unanswered": "Faltam {n}"
     },
     "listen": "Ouvir esta lição",
@@ -1696,7 +1696,7 @@
     "level_up": "Subiu de nível! Você alcançou o nível {n}",
     "badges": {
       "title": "Conquistas",
-      "empty": "Nenhuma conquista ainda — conclua lições para ganhar",
+      "empty": "Nenhuma conquista ainda, conclua lições para ganhar",
       "awarded": "Conquista ganha: {name}",
       "first_lesson": "Primeiros passos",
       "first_lesson_desc": "Conclua sua primeira lição",

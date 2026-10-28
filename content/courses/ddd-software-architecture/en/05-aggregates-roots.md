@@ -1,6 +1,6 @@
 ---
 title: "Aggregates & Aggregate Roots"
-description: "Master Aggregates and Aggregate Roots in DDD — consistency boundaries, transactional invariants, and how to design clusters of entities treated as a single unit"
+description: "Master Aggregates and Aggregate Roots in DDD, consistency boundaries, transactional invariants, and how to design clusters of entities treated as a single unit"
 order: 5
 duration: "70 minutes"
 difficulty: "advanced"
@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Aggregates & Aggregate Roots
 
-An Aggregate is a **cluster of domain objects** that can be treated as a single unit. Each Aggregate has an **Aggregate Root** — a single Entity that acts as the entry point and controls access to everything inside the boundary.
+An Aggregate is a **cluster of domain objects** that can be treated as a single unit. Each Aggregate has an **Aggregate Root**: a single Entity that acts as the entry point and controls access to everything inside the boundary.
 
 > [!NOTE]
 > The Aggregate pattern is DDD's answer to consistency. In any system with concurrent access and complex data, ensuring invariants (business rules that must always hold true) is hard. Aggregates define clear **consistency boundaries** that make invariants enforceable.
@@ -238,7 +238,7 @@ class OrderWrong:
 
 ### 3. Define Clear Invariants
 
-Each aggregate should have explicit invariants — business rules that must always be true.
+Each aggregate should have explicit invariants: business rules that must always be true.
 
 ```python
 class ShoppingCart:
@@ -552,7 +552,7 @@ class InventoryReservationHandler:
 ```
 
 > [!SUCCESS]
-> Aggregates are the most important tactical pattern in DDD for managing consistency. They define clear boundaries that make invariants enforceable, transactions manageable, and concurrent access predictable. Small aggregates, referenced by ID, with eventual consistency between them — this is the DDD way.
+> Aggregates are the most important tactical pattern in DDD for managing consistency. They define clear boundaries that make invariants enforceable, transactions manageable, and concurrent access predictable. Small aggregates, referenced by ID, with eventual consistency between them; this is the DDD way.
 
 ## Testing Aggregate Invariants
 
@@ -620,7 +620,7 @@ def test_aggregate_events_are_collected():
 
 4. **Eventual consistency design**: An e-commerce system has separate `Order` and `Customer` aggregates. When an order is confirmed, the customer's `lifetime_value` should be updated. Design this using domain events and eventual consistency.
 
-5. **Transaction boundary**: Given the following aggregates — `Payment`, `Order`, `Shipment` — describe a scenario where a single user operation triggers changes to all three. Show how you would design this using eventual consistency.
+5. **Transaction boundary**: Given the following aggregates, `Payment`, `Order`, `Shipment`, describe a scenario where a single user operation triggers changes to all three. Show how you would design this using eventual consistency.
 
 6. **Resize an aggregate**: A `ShoppingCart` aggregate currently holds `CartItem` entities that contain full `Product` data (name, description, image_url, price, weight, dimensions). Refactor so the cart only holds product IDs and references. Explain the tradeoffs.
 

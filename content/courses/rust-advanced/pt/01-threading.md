@@ -1,14 +1,14 @@
 ---
-title: "Threads — spawn, join e Send + Sync"
+title: "Threads, spawn, join e Send + Sync"
 description: "Domine threads de SO em Rust: spawn, join, move closures, threads com escopo e os traits Send + Sync para liberdade de data races"
 order: 1
 duration: "90 minutos"
 difficulty: advanced
 ---
 
-# Threads — spawn, join e Send + Sync
+# Threads: spawn, join e Send + Sync
 
-Rust fornece threads de SO através de `std::thread`. Combinado com o sistema de ownership, garante **liberdade de data races** em tempo de compilação — nenhuma outra linguagem oferece isso sem runtime ou garbage collector.
+Rust fornece threads de SO através de `std:thread`. Combinado com o sistema de ownership, garante **liberdade de data races** em tempo de compilação: nenhuma outra linguagem oferece isso sem runtime ou garbage collector.
 
 ## Threads Básicas
 
@@ -105,7 +105,7 @@ fn main() {
 }
 ```
 
-## Construtor de Thread — Personalizando Threads
+## Construtor de Thread: Personalizando Threads
 
 ```rust
 use std::thread;
@@ -164,7 +164,7 @@ fn main() {
 > | Auto-join | Não | Sim (no fim do escopo) |
 > | Valores de retorno | Via JoinHandle | Via handle criado |
 
-## Comunicação entre Threads — Padrões Básicos
+## Comunicação entre Threads: Padrões Básicos
 
 ```rust
 use std::thread;

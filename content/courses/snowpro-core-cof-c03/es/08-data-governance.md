@@ -1,12 +1,12 @@
 ---
-title: "Dominio 2.2 — Funcionalidades de Gobernanza de Datos"
+title: "Dominio 2.2, Funcionalidades de Gobernanza de Datos"
 description: "Aprende cómo Snowflake protege y gobierna los datos: Enmascaramiento Dinámico de Datos, Políticas de Acceso por Fila, etiquetado de objetos, clasificación de datos, políticas de privacidad, Trust Center, gestión de claves de cifrado y linaje de datos."
 order: 8
 difficulty: intermediate
 duration: "70 min"
 ---
 
-# Dominio 2.2 — Funcionalidades de Gobernanza de Datos
+# Dominio 2.2: Funcionalidades de Gobernanza de Datos
 
 ## Peso en el Examen
 
@@ -17,9 +17,9 @@ El **Dominio 2.0** representa aproximadamente el **~20%** del examen. La goberna
 
 ---
 
-## Seguridad a Nivel de Columna — Enmascaramiento Dinámico de Datos (*Dynamic Data Masking*)
+## Seguridad a Nivel de Columna: Enmascaramiento Dinámico de Datos (*Dynamic Data Masking*)
 
-El **Enmascaramiento Dinámico de Datos** oculta u ofusca los valores de columnas sensibles en tiempo de consulta según el rol del usuario — sin cambiar los datos subyacentes:
+El **Enmascaramiento Dinámico de Datos** oculta u ofusca los valores de columnas sensibles en tiempo de consulta según el rol del usuario; sin cambiar los datos subyacentes:
 
 ```sql
 -- Crear una política de enmascaramiento
@@ -39,7 +39,7 @@ ALTER TABLE customers
 
 **Hechos clave para el examen:**
 - Las políticas de enmascaramiento se aplican a **nivel de columna**
-- Se evalúan en **tiempo de consulta** — los datos originales no cambian
+- Se evalúan en **tiempo de consulta**: los datos originales no cambian
 - Requiere **edición Enterprise o superior**
 - Una columna solo puede tener **una política de enmascaramiento** aplicada a la vez
 - La política puede ser **condicional** (diferentes máscaras para diferentes roles)
@@ -61,9 +61,9 @@ ALTER TABLE employees
 
 ---
 
-## Seguridad a Nivel de Fila — Políticas de Acceso por Fila (*Row Access Policies*)
+## Seguridad a Nivel de Fila: Políticas de Acceso por Fila (*Row Access Policies*)
 
-Las **Políticas de Acceso por Fila** controlan qué **filas** puede ver un usuario en una tabla o vista — sin necesidad de crear vistas separadas por rol:
+Las **Políticas de Acceso por Fila** controlan qué **filas** puede ver un usuario en una tabla o vista; sin necesidad de crear vistas separadas por rol:
 
 ```sql
 -- Crear una política de acceso por fila
@@ -85,7 +85,7 @@ ALTER TABLE orders
 ```
 
 **Hechos clave para el examen:**
-- Las Políticas de Acceso por Fila filtran filas de forma **invisible** — las filas no autorizadas simplemente no aparecen
+- Las Políticas de Acceso por Fila filtran filas de forma **invisible**: las filas no autorizadas simplemente no aparecen
 - Requiere **edición Enterprise o superior**
 - Se aplican a **nivel de tabla o vista** sobre columnas específicas
 - Una tabla puede tener **una política de acceso por fila** aplicada
@@ -147,7 +147,7 @@ El motor de clasificación de Snowflake identifica patrones como:
 
 ## Políticas de Privacidad (*Projection Policies*)
 
-Las **políticas de privacidad** (también llamadas **políticas de proyección**) evitan que ciertas columnas sean consultadas directamente — la columna todavía puede usarse en cláusulas WHERE para filtrar, pero no puede devolverse en resultados SELECT:
+Las **políticas de privacidad** (también llamadas **políticas de proyección**) evitan que ciertas columnas sean consultadas directamente: la columna todavía puede usarse en cláusulas WHERE para filtrar, pero no puede devolverse en resultados SELECT:
 
 ```sql
 CREATE PROJECTION POLICY ssn_protect AS () RETURNS PROJECTION_CONSTRAINT ->
@@ -164,7 +164,7 @@ ALTER TABLE employees
 
 ## Trust Center (Centro de Confianza)
 
-**Trust Center** es la herramienta de **gestión de postura de seguridad** integrada de Snowflake — evalúa tu cuenta según las mejores prácticas de seguridad de Snowflake y los estándares de la industria:
+**Trust Center** es la herramienta de **gestión de postura de seguridad** integrada de Snowflake: evalúa tu cuenta según las mejores prácticas de seguridad de Snowflake y los estándares de la industria:
 
 ```sql
 -- Acceder a Trust Center en Snowsight: Admin → Trust Center
@@ -183,7 +183,7 @@ Trust Center verifica:
 - Roles con exceso de privilegios
 
 > [!NOTE]
-> Trust Center es una **herramienta de evaluación de solo lectura** — identifica problemas pero no los soluciona automáticamente. Se alinea con los benchmarks de Snowflake del CIS y marcos de seguridad similares.
+> Trust Center es una **herramienta de evaluación de solo lectura**: identifica problemas pero no los soluciona automáticamente. Se alinea con los benchmarks de Snowflake del CIS y marcos de seguridad similares.
 
 ---
 
@@ -197,7 +197,7 @@ Por defecto, Snowflake gestiona todas las claves de cifrado usando un **modelo j
 
 ### Tri-Secret Secure (Claves Gestionadas por el Cliente)
 
-**Tri-Secret Secure** permite a los clientes mantener una **clave maestra compuesta** — la clave de cifrado se deriva tanto de la clave de Snowflake como de la clave del cliente:
+**Tri-Secret Secure** permite a los clientes mantener una **clave maestra compuesta**: la clave de cifrado se deriva tanto de la clave de Snowflake como de la clave del cliente:
 
 - Disponible solo en **edición Business Critical**
 - Usa AWS KMS, Azure Key Vault o Google Cloud KMS
@@ -271,7 +271,7 @@ ALTER DATABASE analytics REFRESH;
 ALTER DATABASE analytics PRIMARY;
 ```
 
-**Replication Group** — replica múltiples bases de datos + otros objetos juntos:
+**Replication Group**: replica múltiples bases de datos + otros objetos juntos:
 
 ```sql
 CREATE REPLICATION GROUP my_replication_group
@@ -280,7 +280,7 @@ CREATE REPLICATION GROUP my_replication_group
     ALLOWED_ACCOUNTS = 'myorg.disaster_recovery';
 ```
 
-**Failover Group** — agrega capacidad de conmutación por error automática:
+**Failover Group**: agrega capacidad de conmutación por error automática:
 
 ```sql
 CREATE FAILOVER GROUP my_failover_group
@@ -298,7 +298,7 @@ Snowflake proporciona **linaje de datos** a través de:
 
 ### Historial de Acceso
 
-`SNOWFLAKE.ACCOUNT_USAGE.ACCESS_HISTORY` — rastrea qué objetos fueron accedidos (lectura/escritura) en cada consulta:
+`SNOWFLAKE.ACCOUNT_USAGE.ACCESS_HISTORY`: rastrea qué objetos fueron accedidos (lectura/escritura) en cada consulta:
 
 ```sql
 SELECT

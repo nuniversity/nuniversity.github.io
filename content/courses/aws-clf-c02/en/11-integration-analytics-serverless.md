@@ -7,7 +7,7 @@ duration: "60 minutes"
 ---
 # Application Integration, Analytics and Other In-Scope Services
 
-Domain 3 (Cloud Technology and Services, **34%** of the score) hides two task statements that carry a huge, scattered surface area: **Task 3.7 "Identify AWS artificial intelligence and machine learning (AI/ML) services and analytics services"** — with its skill statements naming *Amazon SageMaker AI, Amazon Lex, Amazon Athena, Amazon Kinesis, AWS Glue and Amazon Quick Sight* — and **Task 3.8 "Identify services from other in-scope AWS service categories"**, which explicitly lists application integration (EventBridge, SNS, SQS), business applications (Connect, SES), customer enablement (AWS Support), developer tools (CodeBuild, CodePipeline, X-Ray), end-user computing (AppStream 2.0, WorkSpaces, WorkSpaces Secure Browser), frontend (Amplify) and IoT (IoT Core). Add **Amazon API Gateway** from the Networking row and this single lesson spans material the exam draws from **two domains**.
+Domain 3 (Cloud Technology and Services, **34%** of the score) hides two task statements that carry a huge, scattered surface area: **Task 3.7 "Identify AWS artificial intelligence and machine learning (AI/ML) services and analytics services"**, with its skill statements naming *Amazon SageMaker AI, Amazon Lex, Amazon Athena, Amazon Kinesis, AWS Glue and Amazon Quick Sight*, and **Task 3.8 "Identify services from other in-scope AWS service categories"**, which explicitly lists application integration (EventBridge, SNS, SQS), business applications (Connect, SES), customer enablement (AWS Support), developer tools (CodeBuild, CodePipeline, X-Ray), end-user computing (AppStream 2.0, WorkSpaces, WorkSpaces Secure Browser), frontend (Amplify) and IoT (IoT Core). Add **Amazon API Gateway** from the Networking row and this single lesson spans material the exam draws from **two domains**.
 
 ```text
 ====================================================================
@@ -69,7 +69,7 @@ In this lesson you will:
 - use **API Gateway** as the front door: REST vs HTTP vs WebSocket, throttling, Lambda integration;
 - price an **Athena** query and a **Glue** job, and explain why partitioning pays;
 - separate **Kinesis Data Streams from Data Firehose**, then place **OpenSearch, QuickSight, EMR and Redshift**;
-- one-line every remaining in-scope service — **ML suite, Connect, SES, DevTools, IoT Core, EUC, Amplify, Marketplace**;
+- one-line every remaining in-scope service: **ML suite, Connect, SES, DevTools, IoT Core, EUC, Amplify, Marketplace**;
 - study **five AWS-published case studies** (Capital One, Paytm, Amazon Prime Video, NASA JPL and the NFL);
 - check what the **2026 service-list changes** did to the names, categories and distractors this exam tests;
 - practise with **12 exam-style questions** plus four interactive checks.
@@ -84,22 +84,22 @@ Amazon SQS is a **pull-based, store-and-forward buffer** between a producer and 
 
 | Property | **Standard** (default) | **FIFO** |
 |---|---|---|
-| Delivery guarantee | **At-least-once** — *"a message may be delivered more than once"* | **Exactly-once processing** |
+| Delivery guarantee | **At-least-once**: *"a message may be delivered more than once"* | **Exactly-once processing** |
 | Ordering | **Best-effort** ordering only | **Strict first-in, first-out** order |
 | Throughput (as of Oct 2026) | Near-unlimited API calls per second | **300 messages/s**; **3,000/s** with batching; high-throughput mode **up to 70,000/s** |
-| Duplicate handling | None — duplicates are expected | **5-minute** deduplication interval |
+| Duplicate handling | None: duplicates are expected | **5-minute** deduplication interval |
 | Exam stem | *"scale consumers independently", "may arrive twice, out of order"* | *"exactly once, in order"* |
 
-Because standard queues deliberately hand you duplicates, AWS's own guidance is that *"you must design your applications to be idempotent"* — a duplicate must not double-charge, double-ship or double-email. **Idempotency is the consumer's job; the queue only promises persistence.**
+Because standard queues deliberately hand you duplicates, AWS's own guidance is that *"you must design your applications to be idempotent"*: a duplicate must not double-charge, double-ship or double-email. **Idempotency is the consumer's job; the queue only promises persistence.**
 
 ### 1.2 The mechanics that appear in question stems
 
 | Mechanic | Documented value (as of Oct 2026) | Why the exam cares |
 |---|---|---|
-| **Visibility timeout** | Default **30 s**, range 0 s – 12 h | A received message is *hidden*, not deleted; if the worker dies or runs long, the message **reappears** — that is where duplicates come from |
-| **Long polling** | Wait time **0 – 20 s** | Waiting instead of hammering the queue cuts empty responses and request cost |
-| **Retention** | Default **4 days**; range **60 s – 1,209,600 s (14 days)** | Unprocessed messages survive an outage for up to 14 days |
-| **Message size / delay** | **1 KiB – 1,024 KiB (1 MiB)**; delay up to **15 min** | Put large payloads in S3 and pass the key |
+| **Visibility timeout** | Default **30 s**, range 0 s, 12 h | A received message is *hidden*, not deleted; if the worker dies or runs long, the message **reappears**, that is where duplicates come from |
+| **Long polling** | Wait time **0 to 20 s** | Waiting instead of hammering the queue cuts empty responses and request cost |
+| **Retention** | Default **4 days**; range **60 s: 1,209,600 s (14 days)** | Unprocessed messages survive an outage for up to 14 days |
+| **Message size / delay** | **1 KiB: 1,024 KiB (1 MiB)**; delay up to **15 min** | Put large payloads in S3 and pass the key |
 | **Dead-letter queue** | A queue that holds repeatedly failing messages | Isolate poison messages instead of retrying forever |
 
 Pricing (as of Oct 2026, verify before use): **1 million requests per month free**, then approximately **$0.40 per million** requests.
@@ -125,9 +125,9 @@ flowchart LR
   Q -.->|"not deleted within 30 s<br/>visibility timeout"| Q
 ```
 
-**Worked example E1 — choosing the FIFO tier.** A payment stream must be processed **exactly once and in order at 4,000 messages per second**. Standard FIFO caps at **300/s**, or **3,000/s with batching** — still below the required 4,000/s — so the documented answer is **high-throughput FIFO mode, up to 70,000 messages per second with batching**. Had ordering not been required, standard queues would have absorbed the rate with no throughput ceiling to reason about.
+**Worked example E1: choosing the FIFO tier.** A payment stream must be processed **exactly once and in order at 4,000 messages per second**. Standard FIFO caps at **300/s**, or **3,000/s with batching**: still below the required 4,000/s, so the documented answer is **high-throughput FIFO mode, up to 70,000 messages per second with batching**. Had ordering not been required, standard queues would have absorbed the rate with no throughput ceiling to reason about.
 
-- **📚 Did you know?** The retention and visibility numbers explain most "duplicate message" stems on this exam: a message that is **not deleted within the 30-second default visibility timeout** becomes visible again, so duplicates are *normal* on standard queues — which is why AWS tells you to build **idempotent** consumers rather than promising you will never see a message twice (as of Oct 2026; verify current before use).
+- **📚 Did you know?** The retention and visibility numbers explain most "duplicate message" stems on this exam: a message that is **not deleted within the 30-second default visibility timeout** becomes visible again, so duplicates are *normal* on standard queues; which is why AWS tells you to build **idempotent** consumers rather than promising you will never see a message twice (as of Oct 2026; verify current before use).
 
 ---
 
@@ -135,11 +135,11 @@ flowchart LR
 
 ### 2.1 Push, not poll
 
-Amazon Simple Notification Service is the **push** counterpart to SQS's **pull**: a *publisher* sends to a *topic*, and the topic fans the message out to every *subscription*. AWS describes it as a *"push mechanism, eliminating the need to periodically check or 'poll'"*. Subscriptions can be **Amazon SQS queues, AWS Lambda functions, HTTP/S endpoints, email, SMS and mobile push** — which is why one publish can simultaneously page a human and feed a machine.
+Amazon Simple Notification Service is the **push** counterpart to SQS's **pull**: a *publisher* sends to a *topic*, and the topic fans the message out to every *subscription*. AWS describes it as a *"push mechanism, eliminating the need to periodically check or 'poll'"*. Subscriptions can be **Amazon SQS queues, AWS Lambda functions, HTTP/S endpoints, email, SMS and mobile push**; which is why one publish can simultaneously page a human and feed a machine.
 
 | | **Amazon SQS** | **Amazon SNS** |
 |---|---|---|
-| Model | **Pull** — consumers poll a queue | **Push** — topic delivers to subscribers |
+| Model | **Pull**, consumers poll a queue | **Push**, topic delivers to subscribers |
 | Message shape | Competing consumers, one gets each message | Every subscription receives a copy |
 | Documented guarantee | At-least-once (standard) | At-least-once for HTTP/S; **exactly-once for Lambda and Amazon SQS subscribers** |
 | Failure handling | Visibility timeout + dead-letter queue | Retry policy, then an **SQS dead-letter queue** on the subscription |
@@ -173,7 +173,7 @@ flowchart TD
 | **SMS** | A text message | *alert an on-call phone* |
 | **Mobile push** | A notification to a device | *reach an app user* |
 
-**Worked example E2 — fanout arithmetic and SNS billing.** One alarm publishes to **six subscriptions** (email, SMS, Lambda, three queues): SNS performs six deliveries from a single publish, and each queue retries independently. Now add billing — SNS counts each **64 KB chunk** as one request, so a **150 KB** payload bills as ceil(150 / 64) = **3 requests**. Keep payloads small, or store the body in S3 and publish the reference.
+**Worked example E2, fanout arithmetic and SNS billing.** One alarm publishes to **six subscriptions** (email, SMS, Lambda, three queues): SNS performs six deliveries from a single publish, and each queue retries independently. Now add billing, SNS counts each **64 KB chunk** as one request, so a **150 KB** payload bills as ceil(150 / 64) = **3 requests**. Keep payloads small, or store the body in S3 and publish the reference.
 
 > ⚠️ **Push and pull are the fastest marks in Domain 3.** *"Consumers poll"* ⇒ **SQS**; *"a service pushes / one publish reaches many endpoints"* ⇒ **SNS**. And remember: **fanout = SNS + SQS**, because only a queue gives each consumer an independent retry budget and a place to dead-letter its own failures.
 
@@ -195,7 +195,7 @@ Hard limits (as of Oct 2026): **a single rule can send an event to up to five ta
 
 ### 3.2 Schedules
 
-Rules can also fire on `cron` or `rate` expressions — but AWS now labels scheduled rules a **legacy feature** and steers you to **EventBridge Scheduler**, which offers **14,000,000 free invocations per month** before charging **$1.00 per million**. *"Every night at 02:00 UTC"* is a schedule question, and the current answer is EventBridge Scheduler.
+Rules can also fire on `cron` or `rate` expressions, but AWS now labels scheduled rules a **legacy feature** and steers you to **EventBridge Scheduler**, which offers **14,000,000 free invocations per month** before charging **$1.00 per million**. *"Every night at 02:00 UTC"* is a schedule question, and the current answer is EventBridge Scheduler.
 
 ```mermaid
 flowchart LR
@@ -215,13 +215,13 @@ AWS publishes a three-way decision guide, and its wording is quotable exam mater
 
 | Service | What AWS's decision guide says | Persistence | Documented guarantee |
 |---|---|---|---|
-| **Amazon SQS** | *"Messages are persisted"* | Yes — stored until consumed and deleted | **At-least-once delivery** |
-| **Amazon SNS** | *"delivered to subscribers in real-time"* | No — pushed and gone | **Exactly-once for Lambda and Amazon SQS subscribers**; at-least-once for HTTP/S |
-| **Amazon EventBridge** | *"Events do not persist; processed in real-time."* | No — matched and invoked immediately | Content filtering, schedules, SaaS and cross-account routing |
+| **Amazon SQS** | *"Messages are persisted"* | Yes: stored until consumed and deleted | **At-least-once delivery** |
+| **Amazon SNS** | *"delivered to subscribers in real-time"* | No: pushed and gone | **Exactly-once for Lambda and Amazon SQS subscribers**; at-least-once for HTTP/S |
+| **Amazon EventBridge** | *"Events do not persist; processed in real-time."* | No: matched and invoked immediately | Content filtering, schedules, SaaS and cross-account routing |
 
-**Event-driven architecture in one sentence:** producers publish *facts that happened*, never RPC calls; consumers subscribe to the facts they care about. That inversion is why EventBridge questions usually mention **content filtering, SaaS sources, cross-account routing or schedules** — things SQS and SNS do not do.
+**Event-driven architecture in one sentence:** producers publish *facts that happened*, never RPC calls; consumers subscribe to the facts they care about. That inversion is why EventBridge questions usually mention **content filtering, SaaS sources, cross-account routing or schedules**: things SQS and SNS do not do.
 
-- **📚 Did you know?** EventBridge's cheapest line item is free: **AWS management events are ingested by the event bus for free**, and **EventBridge Scheduler includes 14,000,000 free invocations per month** (as of Oct 2026). The billing surprise instead is granularity — **each 64 KB chunk of a payload is billed as one event**, so a 200 KB event counts as four events (verify current before use).
+- **📚 Did you know?** EventBridge's cheapest line item is free: **AWS management events are ingested by the event bus for free**, and **EventBridge Scheduler includes 14,000,000 free invocations per month** (as of Oct 2026). The billing surprise instead is granularity: **each 64 KB chunk of a payload is billed as one event**, so a 200 KB event counts as four events (verify current before use).
 
 ---
 
@@ -229,17 +229,17 @@ AWS publishes a three-way decision guide, and its wording is quotable exam mater
 
 ### 4.1 Standard vs Express
 
-Step Functions is **serverless workflow orchestration** written in Amazon States Language: it sequences Lambda, ECS, SQS, SNS, DynamoDB and Glue calls and adds **retries, catch blocks, Parallel and Map states, and waits**. It is *not* a queue and *not* a notifier — it is the thing that knows what step comes next.
+Step Functions is **serverless workflow orchestration** written in Amazon States Language: it sequences Lambda, ECS, SQS, SNS, DynamoDB and Glue calls and adds **retries, catch blocks, Parallel and Map states, and waits**. It is *not* a queue and *not* a notifier; it is the thing that knows what step comes next.
 
 | | **Standard** | **Express** |
 |---|---|---|
 | Maximum duration | **Up to one year** | **Up to five minutes** |
 | Execution model | **Exactly-once** workflow execution | **At-least-once** execution |
 | Start rate | 2,000 executions/s | 100,000 executions/s |
-| Billing (as of Oct 2026) | **Per state transition** — **$0.000025** each in US East (N. Virginia), **4,000 free per month** | **$1.00 per million requests** plus duration and memory |
+| Billing (as of Oct 2026) | **Per state transition**: **$0.000025** each in US East (N. Virginia), **4,000 free per month** | **$1.00 per million requests** plus duration and memory |
 | Exam stem | Long-running, human approval, audit trail | High-volume, short, fault-tolerant event processing |
 
-**Worked example E3 — pricing the same workload two ways.** A workflow runs **1,000,005 state transitions** in a month. Subtract the free allowance: 1,000,005 − 4,000 = 996,005; multiply by the unit price: 996,005 × $0.000025 ≈ **$24.90** on the Standard workflow. If every execution instead finishes in seconds and tolerates at-least-once execution, the same **1,000,000** Express requests cost **$1.00**. Same business logic, a **25×** price gap — the exam wants you to notice the *unit*: **state transitions vs requests**.
+**Worked example E3, pricing the same workload two ways.** A workflow runs **1,000,005 state transitions** in a month. Subtract the free allowance: 1,000,005 − 4,000 = 996,005; multiply by the unit price: 996,005 × $0.000025 ≈ **$24.90** on the Standard workflow. If every execution instead finishes in seconds and tolerates at-least-once execution, the same **1,000,000** Express requests cost **$1.00**. Same business logic, a **25×** price gap, the exam wants you to notice the *unit*: **state transitions vs requests**.
 
 ### 4.2 Choosing among the four integration services
 
@@ -262,7 +262,7 @@ flowchart TD
 
 > **Amazon MQ is not the answer on this exam.** Legacy AMQP/MQTT broker migration is not on the CLF-C02 in-scope list, so a *"we need an enterprise message broker"* stem still resolves to one of the four services above.
 
-### 4.3 Worked example E8 — walking a claims approval end to end
+### 4.3 Worked example E8: walking a claims approval end to end
 
 | Step | Service | Why that service |
 |---|---|---|
@@ -287,15 +287,15 @@ AWS positions API Gateway as the *"front door"* for back-end services, handling 
 |---|---|---|
 | **REST API** | API keys, **per-client throttling**, AWS WAF integration, private API endpoints, caching | Full-featured, **$3.50 per million** calls |
 | **HTTP API** | Cheapest minimal proxy to Lambda or an HTTP service, JWT authorizers | **$1.00 per million** calls |
-| **WebSocket API** | Persistent two-way connections — chat, live feeds, collaborative apps | Connect, disconnect, route to the back end |
+| **WebSocket API** | Persistent two-way connections: chat, live feeds, collaborative apps | Connect, disconnect, route to the back end |
 
 Free tier (12 months, as of Oct 2026): **1,000,000 API calls per month for REST APIs** and **1,000,000 per month for HTTP APIs**.
 
 ### 5.2 Throttling
 
-By default throttling is applied **per account per Region**: **10,000 requests per second (RPS) with an additional burst** capacity bucket of **5,000 requests** (some accounts are documented at 2,500 RPS / 1,250 burst — verify your own numbers). Exceed it and callers receive **HTTP 429 Too Many Requests**. AWS is explicit that these are *"not hard limits"* enforced on a *"best-effort basis"*, and that usage-plan quotas are also **best-effort**.
+By default throttling is applied **per account per Region**: **10,000 requests per second (RPS) with an additional burst** capacity bucket of **5,000 requests** (some accounts are documented at 2,500 RPS / 1,250 burst: verify your own numbers). Exceed it and callers receive **HTTP 429 Too Many Requests**. AWS is explicit that these are *"not hard limits"* enforced on a *"best-effort basis"*, and that usage-plan quotas are also **best-effort**.
 
-**Worked example E4 — REST vs HTTP on the same traffic.** A busy month produces **5,000,000 API calls**; the free tier absorbs the first **1,000,000** (first 12 months), leaving 4,000,000 billable. On **REST**: 4 × $3.50 = **$14.00**. On **HTTP**: 4 × $1.00 = **$4.00**. Without the free tier the totals are **$17.50** and **$5.00**. Feature for feature the answer may still be REST — API keys, per-client quotas, WAF and private endpoints are REST capabilities — but the *pricing* stem always resolves the same way.
+**Worked example E4: REST vs HTTP on the same traffic.** A busy month produces **5,000,000 API calls**; the free tier absorbs the first **1,000,000** (first 12 months), leaving 4,000,000 billable. On **REST**: 4 × $3.50 = **$14.00**. On **HTTP**: 4 × $1.00 = **$4.00**. Without the free tier the totals are **$17.50** and **$5.00**. Feature for feature the answer may still be REST: API keys, per-client quotas, WAF and private endpoints are REST capabilities, but the *pricing* stem always resolves the same way.
 
 ```mermaid
 flowchart LR
@@ -308,14 +308,14 @@ flowchart LR
 
 ### 5.3 What the front door actually handles
 
-The exam asks you to *identify* the responsibilities, not to configure them. In AWS's own list, API Gateway provides the **"front door"** experience for back-end services: **traffic management, authorization and access control, throttling, monitoring, and API version management** — in front of **Lambda, EC2 instances or any HTTP endpoint**.
+The exam asks you to *identify* the responsibilities, not to configure them. In AWS's own list, API Gateway provides the **"front door"** experience for back-end services: **traffic management, authorization and access control, throttling, monitoring, and API version management**: in front of **Lambda, EC2 instances or any HTTP endpoint**.
 
 | Responsibility | In scope for you on this exam |
 |---|---|
 | Traffic management | Know that **10,000 RPS + 5,000 burst** is the per-account, per-Region default |
-| Authorization and access control | Choose the service and the API type — API keys and per-client quotas are **REST** features |
+| Authorization and access control | Choose the service and the API type: API keys and per-client quotas are **REST** features |
 | Throttling | Excess requests ⇒ **HTTP 429 Too Many Requests**; usage-plan quotas are **best-effort** |
-| Monitoring | Listed as a Gateway responsibility — the exam asks you to recognise it, never to configure it |
+| Monitoring | Listed as a Gateway responsibility: the exam asks you to recognise it, never to configure it |
 | API version management | Also Gateway-owned; identify it as a front-door capability |
 | Lambda integration | Clients call Gateway, which invokes **Lambda, EC2 or any HTTP endpoint** |
 
@@ -325,37 +325,37 @@ The exam asks you to *identify* the responsibilities, not to configure them. In 
 
 ## 6. Serverless analytics on S3: Amazon Athena and AWS Glue
 
-### 6.1 Amazon Athena — SQL without a cluster
+### 6.1 Amazon Athena: SQL without a cluster
 
-Athena is **serverless interactive SQL over data already in Amazon S3**: *"run ad-hoc queries using ANSI SQL, without the need to aggregate or load the data into Athena"*. There is no cluster to launch and no load-before-you-can-ask — you point it at S3, define tables (usually via the Glue Data Catalog) and query.
+Athena is **serverless interactive SQL over data already in Amazon S3**: *"run ad-hoc queries using ANSI SQL, without the need to aggregate or load the data into Athena"*. There is no cluster to launch and no load-before-you-can-ask; you point it at S3, define tables (usually via the Glue Data Catalog) and query.
 
 - **Pricing (as of Oct 2026):** **$5.00 per terabyte of data scanned**, with a **10 MB minimum per query**; **DDL statements and failed queries cost $0**.
 - **Why query design is a cost decision:** AWS documents that compression, partitioning and columnar formats can **save 30% to 90% per query**.
 - **When *not* to use it:** for *"lots of joins across lots of very large tables"*, AWS says choose **Amazon Redshift**.
 
-**Worked example E5 — three ways to pay for the same 3 TB.**
+**Worked example E5: three ways to pay for the same 3 TB.**
 
 | Query design | Data scanned | Cost (as of Oct 2026) |
 |---|---|---|
 | Raw uncompressed data, full scan | 3 TB | 3 × $5.00 = **$15.00** |
 | GZIP at roughly 3:1 | ~1 TB | **$5.00** |
 | Columnar + partitioned, query reads 1 of 4 columns | ~0.25 TB | **$1.25** |
-| `CREATE TABLE` (DDL) or a query that fails | — | **$0.00** |
+| `CREATE TABLE` (DDL) or a query that fails |: | **$0.00** |
 | A query that scans only 3 MB | billed at the **10 MB minimum** | minimum charge |
 
-The pattern to memorise: **Athena charges for bytes read, so the cheapest query is the one that reads the least** — prune columns, filter on partition keys, compress and convert to Parquet or ORC.
+The pattern to memorise: **Athena charges for bytes read, so the cheapest query is the one that reads the least**: prune columns, filter on partition keys, compress and convert to Parquet or ORC.
 
-### 6.2 AWS Glue — the catalog and the ETL engine
+### 6.2 AWS Glue: the catalog and the ETL engine
 
 AWS Glue is a **serverless ETL and data-catalog service**. **Crawlers** scan data stores and write table definitions (schema, partitions, location) into the **Glue Data Catalog**, which is what lets **Athena, Amazon Redshift and Amazon EMR** treat S3 objects as tables. **ETL jobs** run Spark or Python to clean, deduplicate and format.
 
 - **Pricing (as of Oct 2026):** **$0.44 per DPU-hour**; **1 DPU = 4 vCPU and 16 GB of memory**; ETL jobs run with a **minimum of 2 DPUs** (default 10); crawlers have a **10-minute minimum**; the **first million objects stored are free** in the catalog.
 
-**Worked example E6 — pricing a crawl-and-clean job.** A job runs **15 minutes on 6 DPUs**: 6 × (15/60) hour × $0.44 = 6 × 0.25 × 0.44 = **$0.66**. Double the DPU count and the price doubles — **DPUs are the unit, wall-clock time is the multiplier**.
+**Worked example E6, pricing a crawl-and-clean job.** A job runs **15 minutes on 6 DPUs**: 6 × (15/60) hour × $0.44 = 6 × 0.25 × 0.44 = **$0.66**. Double the DPU count and the price doubles, **DPUs are the unit, wall-clock time is the multiplier**.
 
 > **The three-service sentence the exam keeps testing:** **Glue** *catalogs and prepares* the data, **Athena** *answers SQL questions* about it, **QuickSight** *draws the dashboard*. Glue never answers a query, Athena never runs a scheduled Spark transformation, and QuickSight never extracts text from a document.
 
-- **📚 Did you know?** Athena's **10 MB minimum per query** exists so that thousands of tiny queries still produce a billable unit — and it also means **DDL and failed queries are free**. A team that runs a nightly `DROP`/`CREATE` cycle pays nothing for the DDL and everything for the `SELECT` that scans the table, which is why partitioning and column pruning are the real cost controls (Athena pricing page, as of Oct 2026; verify current before use).
+- **📚 Did you know?** Athena's **10 MB minimum per query** exists so that thousands of tiny queries still produce a billable unit, and it also means **DDL and failed queries are free**. A team that runs a nightly `DROP`/`CREATE` cycle pays nothing for the DDL and everything for the `SELECT` that scans the table, which is why partitioning and column pruning are the real cost controls (Athena pricing page, as of Oct 2026; verify current before use).
 
 ---
 
@@ -369,18 +369,18 @@ This is the most reliable service-selection pair in the analytics domain.
 |---|---|---|
 | What it is | An **ordered log split into shards** | A **managed delivery pipe** into destinations |
 | Capacity unit | **Shard**: **1 MB/s and 1,000 records/s writes**, **2 MB/s reads** | No shards to size or manage |
-| Retention / replay | **24 hours by default, up to 365 days** — replay is possible | Near-real-time batching, no replay window |
+| Retention / replay | **24 hours by default, up to 365 days**: replay is possible | Near-real-time batching, no replay window |
 | Destinations | Your own consumers: Lambda, Kinesis Client Library, Firehose | **S3, Amazon Redshift, OpenSearch Service, Splunk, Snowflake** |
 | Code | You write the consumer | **No consumer code**; optional Lambda transform; Parquet/ORC conversion |
-| Naming | — | Renamed from **Amazon Kinesis Data Firehose** to **Amazon Data Firehose** in **February 2024** — old names still appear in older material |
+| Naming |, | Renamed from **Amazon Kinesis Data Firehose** to **Amazon Data Firehose** in **February 2024**, old names still appear in older material |
 
-**Worked example E7 — shard sizing.** A clickstream emits **4,000 records per second** averaging **10 KB** each: throughput = 4,000 × 10 KB = 40,000 KB/s = **40 MB/s**. Divide by the per-shard write limit: 40 ÷ 1 = **40 shards** on bandwidth, and 4,000 ÷ 1,000 = **40 shards** on record rate. Both constraints agree, so **40 shards**. Had the requirement been *"land it in S3 with no consumer code"*, the answer would be **Data Firehose** and the shard arithmetic would disappear entirely.
+**Worked example E7: shard sizing.** A clickstream emits **4,000 records per second** averaging **10 KB** each: throughput = 4,000 × 10 KB = 40,000 KB/s = **40 MB/s**. Divide by the per-shard write limit: 40 ÷ 1 = **40 shards** on bandwidth, and 4,000 ÷ 1,000 = **40 shards** on record rate. Both constraints agree, so **40 shards**. Had the requirement been *"land it in S3 with no consumer code"*, the answer would be **Data Firehose** and the shard arithmetic would disappear entirely.
 
 ### 7.2 OpenSearch, QuickSight, EMR, Redshift
 
 | Service | One-exam-depth job | Key numbers (as of Oct 2026) |
 |---|---|---|
-| **Amazon OpenSearch Service** | Managed **domains** (= clusters) for **log analytics, real-time application monitoring and clickstream analysis**, plus search and **OpenSearch Dashboards** (the Kibana successor) | Renamed from **Elasticsearch Service** on **8 September 2021**; instance prices vary by deployment — see the pricing page |
+| **Amazon OpenSearch Service** | Managed **domains** (= clusters) for **log analytics, real-time application monitoring and clickstream analysis**, plus search and **OpenSearch Dashboards** (the Kibana successor) | Renamed from **Elasticsearch Service** on **8 September 2021**; instance prices vary by deployment: see the pricing page |
 | **Amazon Quick Sight** | **BI**: visualizations and dashboards over S3, Athena, Redshift and SaaS data; **SPICE** is the in-memory engine versus direct query | **Reader $3 per user per month**; **10 GB of SPICE** with every provisioned Author (extra **$0.38/GB-month**); **a session is a 30-minute period** |
 | **Amazon EMR** | Managed **Hadoop / Spark / Hive / Presto** clusters on EC2 (or EKS or serverless) for big-data processing | **Per-second** billing with a **one-minute minimum**; you pay EC2 + EBS + the EMR uplift |
 | **Amazon Redshift** | Managed **petabyte-scale data warehouse**: columnar, massively parallel SQL for complex joins and BI | **Provisioned from $0.543 per hour**; **Serverless from $1.50 per hour**; **Spectrum** queries S3 at **$5 per TB** |
@@ -389,13 +389,13 @@ This is the most reliable service-selection pair in the analytics domain.
 
 | Question in the stem | Athena | Redshift | EMR |
 |---|---|---|---|
-| What you operate | Nothing — serverless endpoint | Managed warehouse (or Serverless) | A cluster of open-source frameworks |
+| What you operate | Nothing: serverless endpoint | Managed warehouse (or Serverless) | A cluster of open-source frameworks |
 | Billing unit (as of Oct 2026) | **$5.00 per TB scanned** | **From $0.543/h** provisioned, **$1.50/h** Serverless | EC2 + EBS + EMR uplift, **per second, 1-minute minimum** |
 | Best at | One-off questions over S3 | Persistent BI, lots of joins, petabyte scale | Spark/Hive/Presto jobs you already run |
 | Worst at | Repeated heavy joins across huge tables | Paying for idle capacity on a tiny query | Occasional ad-hoc SQL (cluster startup + cost) |
 | Catalog dependency | Reads the **Glue Data Catalog** | Spectrum reads S3 via catalog | Reads Hive metastore / Glue catalog |
 
-**Worked example E9 — QuickSight subscription arithmetic.** Five analysts need view access and two authors create dashboards (as of Oct 2026): **5 Readers × $3 per user per month = $15.00**. Each provisioned Author includes **10 GB of SPICE**; if the two authors together need **30 GB** — 20 GB beyond the included 20 GB — the extra costs **20 × $0.38 = $7.60 per month**. Note also that **a session is a 30-minute period**, so a Reader who opens five dashboards inside one half-hour window still counts as one session's worth of access.
+**Worked example E9: QuickSight subscription arithmetic.** Five analysts need view access and two authors create dashboards (as of Oct 2026): **5 Readers × $3 per user per month = $15.00**. Each provisioned Author includes **10 GB of SPICE**; if the two authors together need **30 GB**: 20 GB beyond the included 20 GB: the extra costs **20 × $0.38 = $7.60 per month**. Note also that **a session is a 30-minute period**, so a Reader who opens five dashboards inside one half-hour window still counts as one session's worth of access.
 
 ```mermaid
 flowchart LR
@@ -411,9 +411,9 @@ flowchart LR
   EMR["Amazon EMR<br/>Spark / Hadoop jobs"] -.-> S3
 ```
 
-### 7.3 Amazon AppFlow — the lookalike that is out of scope
+### 7.3 Amazon AppFlow: the lookalike that is out of scope
 
-**Amazon AppFlow** moves data between SaaS applications and AWS stores, which sounds exactly like this lesson's topic — and it is explicitly on the **out-of-scope** list. So are **Amazon MSK** (managed Kafka), **AWS Clean Rooms, AWS Data Exchange** and **Amazon DataZone** in analytics, plus **AWS AppFabric** and **Amazon Simple Workflow Service (SWF)** under application integration. Out of scope does not mean nonexistent: it means **they can only ever be a distractor, never the correct answer**.
+**Amazon AppFlow** moves data between SaaS applications and AWS stores, which sounds exactly like this lesson's topic, and it is explicitly on the **out-of-scope** list. So are **Amazon MSK** (managed Kafka), **AWS Clean Rooms, AWS Data Exchange** and **Amazon DataZone** in analytics, plus **AWS AppFabric** and **Amazon Simple Workflow Service (SWF)** under application integration. Out of scope does not mean nonexistent: it means **they can only ever be a distractor, never the correct answer**.
 
 ### 7.4 The analytics decision tree
 
@@ -435,17 +435,17 @@ flowchart TD
 
 ### 8.1 The machine learning suite (Task 3.7)
 
-AWS groups these as **purpose-built AI services** — pre-trained APIs you call with your data, requiring no ML expertise — versus **Amazon SageMaker AI**, where you build, train and deploy your own models.
+AWS groups these as **purpose-built AI services**, pre-trained APIs you call with your data, requiring no ML expertise, versus **Amazon SageMaker AI**, where you build, train and deploy your own models.
 
 | Service | One line for the exam |
 |---|---|
 | **Amazon Rekognition** | Computer vision: label, detect and analyse **images and video** |
 | **Amazon Comprehend** | Natural language processing: sentiment, entities, key phrases and **PII** in text |
 | **Amazon Textract** | Extracts **text, handwriting and data from scanned documents** into structured fields |
-| **Amazon Transcribe** | **Speech to text** — call recordings, subtitles |
+| **Amazon Transcribe** | **Speech to text**: call recordings, subtitles |
 | **Amazon Polly** | **Text to lifelike speech** |
 | **Amazon Translate** | **Neural machine translation** between languages |
-| **Amazon Lex** | Build conversational interfaces (chatbots and voice agents) — the technology that powers **Amazon Connect** |
+| **Amazon Lex** | Build conversational interfaces (chatbots and voice agents): the technology that powers **Amazon Connect** |
 | **Amazon SageMaker AI** | Fully managed ML: *"build, train, and deploy ML models into a production-ready hosted environment"* |
 | **Amazon Q** | Generative-AI powered assistants (Q Business, Q Developer); AWS documents them as *"powered by Amazon Bedrock"* |
 
@@ -456,24 +456,24 @@ AWS groups these as **purpose-built AI services** — pre-trained APIs you call 
 | Category | In-scope service | One line for the exam |
 |---|---|---|
 | Business application | **Amazon Connect** | Cloud **contact center**: voice, chat and tasks with intelligent routing and real-time agent performance tracking; **pay only for usage**, no per-seat fee |
-| Business application | **Amazon SES** | Scalable **email from within any application** — transactional, marketing and mass mail, via **API or SMTP** |
-| Developer tools | **AWS CLI** | Free command line for AWS services — the *develop and deploy* side of task 3.8 |
-| Developer tools | **AWS CodeBuild** | *"Compiles your source code, runs unit tests, and produces artifacts"* — billed **per build minute**, **100 free minutes per month** |
-| Developer tools | **AWS CodePipeline** | Managed **release workflow**: model the steps, run the stages — **V1 $1.00 per pipeline per month**, **V2 $0.002 per action-minute** |
+| Business application | **Amazon SES** | Scalable **email from within any application**: transactional, marketing and mass mail, via **API or SMTP** |
+| Developer tools | **AWS CLI** | Free command line for AWS services: the *develop and deploy* side of task 3.8 |
+| Developer tools | **AWS CodeBuild** | *"Compiles your source code, runs unit tests, and produces artifacts"*: billed **per build minute**, **100 free minutes per month** |
+| Developer tools | **AWS CodePipeline** | Managed **release workflow**: model the steps, run the stages: **V1 $1.00 per pipeline per month**, **V2 $0.002 per action-minute** |
 | Developer tools | **AWS X-Ray** | Distributed tracing: segments → traces → a **service graph**; trace data retained **30 days** |
-| IoT | **AWS IoT Core** | Managed gateway that connects devices over **MQTT or HTTP** — the *manage IoT devices* answer |
+| IoT | **AWS IoT Core** | Managed gateway that connects devices over **MQTT or HTTP**: the *manage IoT devices* answer |
 | Frontend | **AWS Amplify** | Create and deploy **frontend web and mobile** applications |
 | End-user computing | **Amazon AppStream 2.0** | Stream desktop **applications** to any browser or device **without rewriting code** |
 | End-user computing | **Amazon WorkSpaces** | Fully managed, cloud-native **persistent virtual desktops** (VDI / DaaS) |
 | End-user computing | **Amazon WorkSpaces Secure Browser** | Hosted browser where *"no HTML, document object model (DOM), or sensitive company data is transmitted to the local machine"* |
-| Cloud financial management | **AWS Marketplace** | *"Curated digital catalog"* to find, buy, deploy and manage third-party software, data and services — hourly, monthly, annual and **BYOL**, one bill, Private Marketplace, entitlements via License Manager |
+| Cloud financial management | **AWS Marketplace** | *"Curated digital catalog"* to find, buy, deploy and manage third-party software, data and services: hourly, monthly, annual and **BYOL**, one bill, Private Marketplace, entitlements via License Manager |
 | Customer enablement | **AWS Support** | The customer-enablement bullet of task 3.8; plan tiers belong to Domain 4 |
 
-**The end-user-computing stem, verbatim:** the exam asks for *"the services that can present the output of virtual machines (VMs) on end-user machines"* — that is **AppStream 2.0** (applications), **WorkSpaces** (full desktops) and **WorkSpaces Secure Browser** (browser only).
+**The end-user-computing stem, verbatim:** the exam asks for *"the services that can present the output of virtual machines (VMs) on end-user machines"*; that is **AppStream 2.0** (applications), **WorkSpaces** (full desktops) and **WorkSpaces Secure Browser** (browser only).
 
-> **Naming traps straight from the in-scope list:** the guide spells it **"Amazon Quick Sight"** (with a space) and **"Amazon SageMaker AI"** (never bare "SageMaker"). AWS's Connect documentation page also now uses the label *"Amazon Connect Customer"* for the contact-center product — tying that wording to exam phrasing is this research's inference, not a verified exam statement.
+> **Naming traps straight from the in-scope list:** the guide spells it **"Amazon Quick Sight"** (with a space) and **"Amazon SageMaker AI"** (never bare "SageMaker"). AWS's Connect documentation page also now uses the label *"Amazon Connect Customer"* for the contact-center product: tying that wording to exam phrasing is this research's inference, not a verified exam statement.
 
-### 8.3 Summary table — this lesson's full service surface
+### 8.3 Summary table; this lesson's full service surface
 
 | Category | In-scope services covered here | Depth expected |
 |---|---|---|
@@ -517,12 +517,12 @@ AWS groups these as **purpose-built AI services** — pre-trained APIs you call 
 
 > **What changed in the guide itself.** Every bullet below comes from the current CLF-C02 **in-scope** and **out-of-scope** service lists and the launch-era `Version 1.0 CLF-C02` guide, all accessed **2026-10**. Prices and limits still drift, so re-check before you sit the exam.
 >
-> - **The service list was rebuilt.** In-scope entries fell **128 → 111** while the explicit negative list grew **11 → 55** out-of-scope entries — for Domain 3 the biggest "what changed" is that AWS now writes down most of the distractors this lesson used to warn you about from memory.
-> - **Three re-spellings make old names wrong:** **Amazon SageMaker → Amazon SageMaker AI**, **Amazon WorkSpaces Web → Amazon WorkSpaces Secure Browser**, and the in-scope list prints the BI service as **"Amazon Quick Sight"** (two words) while the product name is Amazon QuickSight — whether the guide's spacing is intentional could **not** be verified.
-> - **The Machine Learning row moved from "build" to "use":** **Amazon Q was added**, **Amazon Kendra was removed from the in-scope list**, and **Amazon Bedrock appears on neither the in-scope nor the out-of-scope list** (both lists checked 2026-10) — so do not memorise Bedrock as in-scope, and treat whether generative-AI content is examined as unverified.
-> - **Developer Tools collapsed from 11 in-scope entries to 4** — **AWS CLI, AWS CodeBuild, AWS CodePipeline, AWS X-Ray** — exactly the four covered in section 8.2 of this lesson; anything still listing CodeStar, Cloud9 or a longer Developer Tools roster is quoting a superseded guide.
+> - **The service list was rebuilt.** In-scope entries fell **128 → 111** while the explicit negative list grew **11 → 55** out-of-scope entries: for Domain 3 the biggest "what changed" is that AWS now writes down most of the distractors this lesson used to warn you about from memory.
+> - **Three re-spellings make old names wrong:** **Amazon SageMaker → Amazon SageMaker AI**, **Amazon WorkSpaces Web → Amazon WorkSpaces Secure Browser**, and the in-scope list prints the BI service as **"Amazon Quick Sight"** (two words) while the product name is Amazon QuickSight: whether the guide's spacing is intentional could **not** be verified.
+> - **The Machine Learning row moved from "build" to "use":** **Amazon Q was added**, **Amazon Kendra was removed from the in-scope list**, and **Amazon Bedrock appears on neither the in-scope nor the out-of-scope list** (both lists checked 2026-10), so do not memorise Bedrock as in-scope, and treat whether generative-AI content is examined as unverified.
+> - **Developer Tools collapsed from 11 in-scope entries to 4**, **AWS CLI, AWS CodeBuild, AWS CodePipeline, AWS X-Ray**, exactly the four covered in section 8.2 of this lesson; anything still listing CodeStar, Cloud9 or a longer Developer Tools roster is quoting a superseded guide.
 > - **Formerly in-scope integration and analytics names are now distractors:** **Amazon MSK** and **AWS Data Exchange** moved from the in-scope list to the out-of-scope list, **AWS CodeDeploy, AWS CodeArtifact** and **AWS IoT Greengrass** are out of scope too, and **AWS AppSync** was removed from the in-scope list; **AWS Wavelength** is explicitly out of scope while **AWS Local Zones** appears on **neither** list.
-> - **Category rename:** `Customer Engagement` → **Customer Enablement**, which now contains only **AWS Support** — so AWS Activate, AWS IQ and AWS Managed Services are no longer in-scope answers anywhere on this exam.
+> - **Category rename:** `Customer Engagement` → **Customer Enablement**, which now contains only **AWS Support**, so AWS Activate, AWS IQ and AWS Managed Services are no longer in-scope answers anywhere on this exam.
 >
 > Sources: AWS Certified Cloud Practitioner (CLF-C02) in-scope services list, out-of-scope services list and exam guide, accessed 2026-10; baseline = launch-era `Version 1.0 CLF-C02` exam guide (accessed 2026-10).
 
@@ -532,9 +532,9 @@ AWS groups these as **purpose-built AI services** — pre-trained APIs you call 
 
 ## Real-World Case Studies
 
-AWS publishes what these patterns look like in production. Every figure below is **customer- or AWS-claimed and unaudited**, quoted with its source so you can check it — the examinable point is the **pattern** (which integration service did the work, which analytics engine was chosen, which number moved), not the marketing.
+AWS publishes what these patterns look like in production. Every figure below is **customer- or AWS-claimed and unaudited**, quoted with its source so you can check it: the examinable point is the **pattern** (which integration service did the work, which analytics engine was chosen, which number moved), not the marketing.
 
-### Case A — Capital One: serverless and application integration at bank scale
+### Case A, Capital One: serverless and application integration at bank scale
 
 | Element | Detail |
 |---|---|
@@ -545,19 +545,19 @@ AWS publishes what these patterns look like in production. Every figure below is
 | **Physical tail** | **103 tons of copper and steel recycled** from the eight data centers it exited |
 | **Source** | aws.amazon.com/solutions/case-studies/capital-one-all-in-on-aws and …/capital-one-lambda-ecs-case-study (accessed Oct 2026) |
 
-*Exam lesson:* this is what task 3.8 looks like in production — **Step Functions** coordinating the steps, **Lambda** running the steps, **SES** sending the mail, **Connect** taking the calls, **Glue** preparing the data. The exam does not ask you to reproduce the numbers; it asks you to name the service that *does each job*.
+*Exam lesson:* this is what task 3.8 looks like in production: **Step Functions** coordinating the steps, **Lambda** running the steps, **SES** sending the mail, **Connect** taking the calls, **Glue** preparing the data. The exam does not ask you to reproduce the numbers; it asks you to name the service that *does each job*.
 
-### Case B — Paytm: Graviton economics applied to EMR analytics
+### Case B, Paytm: Graviton economics applied to EMR analytics
 
 | Element | Detail |
 |---|---|
 | **Industry / context** | A payments platform with a large Amazon EC2 and **Amazon EMR** analytics estate on AWS |
-| **AWS services named** | **Amazon EMR** (analytics), **Amazon EC2 on Graviton** — with a MySQL database upgrade that had to happen first |
-| **Headline outcomes (AWS-published, customer-claimed)** | **−35%** compute cost, **60%** of EC2 running on Graviton, and **30–35%** savings on **Amazon EMR** |
+| **AWS services named** | **Amazon EMR** (analytics), **Amazon EC2 on Graviton**: with a MySQL database upgrade that had to happen first |
+| **Headline outcomes (AWS-published, customer-claimed)** | **−35%** compute cost, **60%** of EC2 running on Graviton, and **30 to 35%** savings on **Amazon EMR** |
 | **Analytics lesson** | EMR bills **the instances it runs on**, so the *compute purchasing decision* (Graviton price-performance) is part of the analytics cost conversation |
 | **Source** | aws.amazon.com/solutions/case-studies/paytm-graviton-case-study (accessed Oct 2026) |
 
-*Exam lesson:* Amazon EMR has **no flat standalone fee in this story** — it bills a per-second rate (one-minute minimum) **on top of EC2 and EBS**, so a 30–35% EMR saving is achieved by changing the instances underneath, not by flipping an EMR setting. Watch the trap: Graviton is a **price-performance** choice that needs compatibility work (Paytm had to upgrade its database first), not free money.
+*Exam lesson:* Amazon EMR has **no flat standalone fee in this story**; it bills a per-second rate (one-minute minimum) **on top of EC2 and EBS**, so a 30 to 35% EMR saving is achieved by changing the instances underneath, not by flipping an EMR setting. Watch the trap: Graviton is a **price-performance** choice that needs compatibility work (Paytm had to upgrade its database first), not free money.
 
 ### What the two cases share
 
@@ -565,64 +565,64 @@ AWS publishes what these patterns look like in production. Every figure below is
 |---|---|---|
 | Managed beats DIY | Capital One: dev environment **3 months → minutes**; **−90%** cost on one app | The Well-Architected answer is **least operational overhead** |
 | Integration services carry the load | Capital One: Step Functions, Lambda, SES, Connect, Glue | Task 3.8's services are production plumbing, not lab exercises |
-| Analytics cost follows compute cost | Paytm: **30–35%** EMR savings via Graviton | EMR = per-second instance time + EMR uplift; right-size the engine |
-| Every percentage is a *customer* result | "−90%", "30–35%", "−70%" | Never write "AWS guarantees X%" |
+| Analytics cost follows compute cost | Paytm: **30 to 35%** EMR savings via Graviton | EMR = per-second instance time + EMR uplift; right-size the engine |
+| Every percentage is a *customer* result | "−90%", "30 to 35%", "−70%" | Never write "AWS guarantees X%" |
 
-### Case C — Amazon Prime Video: integration at a global live-sports peak
+### Case C, Amazon Prime Video: integration at a global live-sports peak
 
 | Element | Detail |
 |---|---|
 | **Industry / context** | Live sports streaming, where AWS quotes its own delivery team: *"With live sporting events, reliability and low latency are absolutely critical because every lost second negatively impacts viewers"* |
 | **AWS services named** | **six AWS Regions**, Amazon CloudFront, Amazon DynamoDB, Amazon EC2, AWS Elemental MediaTailor, multi-AZ and Regional failover |
 | **Headline outcomes (AWS-published, customer-claimed)** | **11 NFL games** streamed to **18.4 million** fans in **224 countries and territories** during the 2017 NFL regular season; **300,000+ clients polling per ad break**; DynamoDB **partitions doubled from the console** at ad breaks |
-| **Integration lesson** | Hundreds of thousands of *polling* clients per ad break is exactly the traffic this exam's push/pull split exists to remove — SQS **long polling (0–20 s)** and SNS **push** are the in-scope answers to "stop hammering an endpoint" |
-| **Exam caveat** | AWS Elemental / **MediaTailor** sits in the Media Services, which are explicitly **out of scope** — name only the in-scope services the stem asks for |
+| **Integration lesson** | Hundreds of thousands of *polling* clients per ad break is exactly the traffic this exam's push/pull split exists to remove: SQS **long polling (0 to 20 s)** and SNS **push** are the in-scope answers to "stop hammering an endpoint" |
+| **Exam caveat** | AWS Elemental / **MediaTailor** sits in the Media Services, which are explicitly **out of scope**: name only the in-scope services the stem asks for |
 | **Source** | aws.amazon.com/solutions/case-studies/amazon-prime-video (accessed Oct 2026) |
 
-*Exam lesson:* the figure to carry into the exam room is not 18.4 million — it is **300,000+ clients polling per ad break**. Any stem about *many clients repeatedly checking for new state* is a push-versus-pull question: **SNS pushes**, **SQS consumers poll** (and long-poll up to **20 seconds** precisely to cut that traffic), and **EventBridge matches events with nobody polling at all**. The second lesson is elasticity: DynamoDB partitions were **doubled from the console during the game**, not after a procurement cycle — that is the Domain 1 agility story told through an integration service.
+*Exam lesson:* the figure to carry into the exam room is not 18.4 million, it is **300,000+ clients polling per ad break**. Any stem about *many clients repeatedly checking for new state* is a push-versus-pull question: **SNS pushes**, **SQS consumers poll** (and long-poll up to **20 seconds** precisely to cut that traffic), and **EventBridge matches events with nobody polling at all**. The second lesson is elasticity: DynamoDB partitions were **doubled from the console during the game**, not after a procurement cycle, that is the Domain 1 agility story told through an integration service.
 
-### Case D — NASA JPL: telemetry at analytics scale
+### Case D, NASA JPL: telemetry at analytics scale
 
 | Element | Detail |
 |---|---|
-| **Industry / context** | NASA's Jet Propulsion Laboratory (JPL) and the Perseverance rover — AWS's Public Sector Blog (2021-02-22) calls it *"the first planetary NASA mission, with mission-critical communication and transfer of telemetry data in the cloud"* |
+| **Industry / context** | NASA's Jet Propulsion Laboratory (JPL) and the Perseverance rover: AWS's Public Sector Blog (2021-02-22) calls it *"the first planetary NASA mission, with mission-critical communication and transfer of telemetry data in the cloud"* |
 | **AWS services named** | EC2 **Auto Scaling** mixing **Spot, On-Demand and Capacity Reservations**; the 2012-era NASA story on AWS also names **SWF**, CloudFront and RDS |
 | **Headline outcomes (AWS-published, customer-claimed)** | **~4.4 TB of downlinked data daily**, generating **up to 70 TB of final data products**; Spot at *"up to a 90 percent discount compared to Amazon EC2 On-Demand pricing"*; NASA separately reported *"almost a million dollars in cost savings each year"* (AWS News Blog, 2012-06-11) |
 | **Analytics lesson** | Ingest → process → data products is the pipeline shape taught here with **Kinesis Data Streams, Data Firehose, Glue and Athena**; the case study answers only the *compute* half of the story |
-| **Scope trap** | **Amazon Simple Workflow Service (SWF)** — the orchestration service in NASA's 2012 story — is now **explicitly out of scope**; on this exam the workflow answer is always **AWS Step Functions** |
-| **Source** | aws.amazon.com/solutions/case-studies/nasa-jpl-spot-case-study; aws.amazon.com/blogs/publicsector (2021-02-22); aws.amazon.com/blogs/aws (2012-06-11) — all accessed Oct 2026 |
+| **Scope trap** | **Amazon Simple Workflow Service (SWF)**, the orchestration service in NASA's 2012 story, is now **explicitly out of scope**; on this exam the workflow answer is always **AWS Step Functions** |
+| **Source** | aws.amazon.com/solutions/case-studies/nasa-jpl-spot-case-study; aws.amazon.com/blogs/publicsector (2021-02-22); aws.amazon.com/blogs/aws (2012-06-11): all accessed Oct 2026 |
 
 *Exam lesson:* two separable questions hide inside this story. **"How do you process terabytes a day?"** → the analytics stack: capture the ordered stream (**Kinesis Data Streams**), land it without consumer code (**Data Firehose**), catalog and clean it (**Glue**), ask questions (**Athena**), warehouse it (**Redshift**), chart it (**Quick Sight**). **"How do you pay for the compute underneath?"** → pricing models: **Spot** for fault-tolerant, interruptible batch (documented up to **90% off** On-Demand) with On-Demand and Capacity Reservations for the rest. Never merge the halves: Spot never answers an analytics-selection stem, and Athena never answers a pricing-model stem.
 
-### Case E — NFL: a fan-facing analytics product
+### Case E, NFL: a fan-facing analytics product
 
 | Element | Detail |
 |---|---|
 | **Industry / context** | The NFL's fan-facing digital product, built on AWS |
 | **Headline outcomes (AWS-published, customer-claimed)** | **1 million+** fans; **updates every 3 minutes**; **500 million+ data points per season** |
-| **Analytics lesson** | A season of 500 M+ data points refreshed every three minutes is a *requirement shape* — ordered capture, near-real-time delivery, then a presentable view |
+| **Analytics lesson** | A season of 500 M+ data points refreshed every three minutes is a *requirement shape*: ordered capture, near-real-time delivery, then a presentable view |
 | **Source** | aws.amazon.com/solutions/case-studies/nfl-case-study (accessed Oct 2026) |
 
-*Exam lesson:* read the stem's **cadence**, never its marketing. *"Ordered, replayable, updates every few minutes"* ⇒ **Amazon Kinesis Data Streams** (shards, **24 hours default retention up to 365 days**); *"land it in S3 with no consumer code"* ⇒ **Amazon Data Firehose**; *"charts and dashboards for a million fans"* ⇒ **Amazon Quick Sight**; *"SQL questions over what landed in S3"* ⇒ **Amazon Athena**. The case-study page is the source for the *numbers* only — the service selection is yours, and it must come from the in-scope list.
+*Exam lesson:* read the stem's **cadence**, never its marketing. *"Ordered, replayable, updates every few minutes"* ⇒ **Amazon Kinesis Data Streams** (shards, **24 hours default retention up to 365 days**); *"land it in S3 with no consumer code"* ⇒ **Amazon Data Firehose**; *"charts and dashboards for a million fans"* ⇒ **Amazon Quick Sight**; *"SQL questions over what landed in S3"* ⇒ **Amazon Athena**. The case-study page is the source for the *numbers* only: the service selection is yours, and it must come from the in-scope list.
 
-### What cases C–E add
+### What cases C, E add
 
 | Value pattern | Evidence | Underlying principle |
 |---|---|---|
-| Push beats polling at scale | Prime Video: **300,000+ clients polling per ad break** | SQS **long polling (0–20 s)** and SNS **push** exist to cut exactly that traffic |
+| Push beats polling at scale | Prime Video: **300,000+ clients polling per ad break** | SQS **long polling (0 to 20 s)** and SNS **push** exist to cut exactly that traffic |
 | The analytics pipeline shape repeats | NASA JPL: **4.4 TB/day → up to 70 TB/day** of data products; NFL: **500 M+ data points per season** | Capture → land → catalog → query → present: Kinesis, Firehose, Glue, Athena, Quick Sight |
 | Elasticity is a console action | Prime Video: DynamoDB **partitions doubled** mid-game | Managed services scale without a procurement cycle (Domain 1 agility) |
 | Pricing model ≠ service choice | NASA JPL: **Spot up to 90% off** On-Demand | Choose the in-scope service first, then the purchase option |
 | Out-of-scope names live inside real stories | AWS Elemental / MediaTailor and **SWF** both appear in AWS's own case studies | A case study never licenses an out-of-scope answer |
 
-- **📚 Did you know?** AWS's own Prime Video case study reports **300,000+ clients polling per ad break** — precisely the behaviour SQS **long polling** (wait up to **20 seconds** instead of re-polling immediately) and SNS's **push** model are documented to remove, so the page doubles as AWS's own justification for this exam's push-versus-pull split (case study accessed Oct 2026; limits as of Oct 2026 — verify current before use).
+- **📚 Did you know?** AWS's own Prime Video case study reports **300,000+ clients polling per ad break**, precisely the behaviour SQS **long polling** (wait up to **20 seconds** instead of re-polling immediately) and SNS's **push** model are documented to remove, so the page doubles as AWS's own justification for this exam's push-versus-pull split (case study accessed Oct 2026; limits as of Oct 2026, verify current before use).
 
-- **📚 Did you know?** NASA JPL's page quotes **up to a 90 percent discount** for Spot versus On-Demand, while its data pipeline runs **~4.4 TB of downlinks a day** — one story, two exam domains: a **Domain 4** pricing-model answer (Spot for fault-tolerant batch) and a **Domain 3** analytics-selection answer (Kinesis, Firehose, Glue, Athena, Redshift), and the 2012 orchestration service it used, **SWF, is now out of scope** (case study and blogs accessed Oct 2026).
+- **📚 Did you know?** NASA JPL's page quotes **up to a 90 percent discount** for Spot versus On-Demand, while its data pipeline runs **~4.4 TB of downlinks a day**: one story, two exam domains: a **Domain 4** pricing-model answer (Spot for fault-tolerant batch) and a **Domain 3** analytics-selection answer (Kinesis, Firehose, Glue, Athena, Redshift), and the 2012 orchestration service it used, **SWF, is now out of scope** (case study and blogs accessed Oct 2026).
 
-- **📚 Did you know?** Capital One's page contains both halves of this lesson at once: the **integration** half (Step Functions **80% faster** checks, one application **−90%** on Lambda) and the **business-application** half — it is one of AWS's published users of **Amazon Connect** and **Amazon SES**. AWS also documents the migration's physical tail: **103 tons of copper and steel recycled** from the eight data centers it exited (case study accessed Oct 2026).
+- **📚 Did you know?** Capital One's page contains both halves of this lesson at once: the **integration** half (Step Functions **80% faster** checks, one application **−90%** on Lambda) and the **business-application** half; it is one of AWS's published users of **Amazon Connect** and **Amazon SES**. AWS also documents the migration's physical tail: **103 tons of copper and steel recycled** from the eight data centers it exited (case study accessed Oct 2026).
 
 > [!WARNING]
-> **How to read case-study numbers on exam day:** every figure above is **customer-claimed or AWS-published and unaudited** — never a guarantee, and *"up to"* is a **ceiling**, never an average. Attribute the source and access date ("Capital One case study, accessed Oct 2026"), not "AWS proves". A case never licenses an out-of-scope answer: you are asked to **select the in-scope service**, not to reproduce the marketing figure.
+> **How to read case-study numbers on exam day:** every figure above is **customer-claimed or AWS-published and unaudited**: never a guarantee, and *"up to"* is a **ceiling**, never an average. Attribute the source and access date ("Capital One case study, accessed Oct 2026"), not "AWS proves". A case never licenses an out-of-scope answer: you are asked to **select the in-scope service**, not to reproduce the marketing figure.
 
 ---
 
@@ -651,7 +651,7 @@ AWS publishes what these patterns look like in production. Every figure below is
   "question": "One alarm must notify an email address, an SMS number, and three independent consumer services that each retry on their own schedule. Which design is correct?",
   "options": [
     "Write the alarm to a single Amazon SQS queue and let all five consumers read that queue",
-    "Publish once to an Amazon SNS topic with five subscriptions - email, SMS and three SQS queues - so each subscriber retries independently",
+    "Publish once to an Amazon SNS topic with five subscriptions: email, SMS and three SQS queues: so each subscriber retries independently",
     "Publish to Amazon EventBridge and have each destination poll the event bus",
     "Use Amazon SES to send the alert to all five destinations"
   ],
@@ -682,10 +682,10 @@ AWS publishes what these patterns look like in production. Every figure below is
   "type": "multiple-choice",
   "question": "A claims workflow validates with Lambda, waits up to three days for human approval, then notifies by SNS. Which option fits?",
   "options": [
-    "Step Functions Express - executions run up to five minutes and are billed at $1.00 per million requests",
-    "Amazon SQS with a delay - messages can be delayed for up to 15 minutes and then reappear",
-    "Step Functions Standard - executions can run up to one year, billed per state transition at $0.000025 with 4,000 free per month",
-    "Amazon EventBridge - every rule can hold an event for three days before invoking a target"
+    "Step Functions Express: executions run up to five minutes and are billed at $1.00 per million requests",
+    "Amazon SQS with a delay: messages can be delayed for up to 15 minutes and then reappear",
+    "Step Functions Standard: executions can run up to one year, billed per state transition at $0.000025 with 4,000 free per month",
+    "Amazon EventBridge: every rule can hold an event for three days before invoking a target"
   ],
   "correct": 2,
   "explanation": "A wait measured in days needs Step Functions Standard, which supports executions up to one year, exactly-once execution, and per-state-transition billing ($0.000025 in US East N. Virginia, 4,000 free per month, as of Oct 2026). Express caps at five minutes, an SQS delay caps at 15 minutes, and EventBridge rules deliver events in real time."
@@ -701,7 +701,7 @@ AWS publishes what these patterns look like in production. Every figure below is
     "It queues every request indefinitely and all of them succeed",
     "It deletes the API once the 5,000-request burst bucket is emptied",
     "It scales without limit and adds a surcharge above 10,000 RPS",
-    "It throttles against a default of 10,000 RPS plus a 5,000-request burst per account per Region, returning HTTP 429 Too Many Requests to excess calls - documented as best-effort, not a hard limit"
+    "It throttles against a default of 10,000 RPS plus a 5,000-request burst per account per Region, returning HTTP 429 Too Many Requests to excess calls: documented as best-effort, not a hard limit"
   ],
   "correct": 3,
   "explanation": "Default throttling is per account per Region at 10,000 RPS with an additional 5,000-request burst capacity; requests beyond it receive 429 Too Many Requests, and AWS states these are not hard limits and are applied on a best-effort basis. Nothing is queued indefinitely, the API is never deleted, and there is no automatic surcharge above the throttle."
@@ -720,7 +720,7 @@ AWS publishes what these patterns look like in production. Every figure below is
     "Amazon Quick Sight at $3 per user per month for each analyst"
   ],
   "correct": 1,
-  "explanation": "Athena is serverless ANSI SQL over S3 priced per query at $5.00 per TB of data scanned with a 10 MB minimum, and DDL plus failed queries cost nothing (as of Oct 2026). Glue catalogs and transforms rather than answering SQL, EMR is a cluster you operate, and Quick Sight is the dashboard layer on top - none of them bills by data scanned."
+  "explanation": "Athena is serverless ANSI SQL over S3 priced per query at $5.00 per TB of data scanned with a 10 MB minimum, and DDL plus failed queries cost nothing (as of Oct 2026). Glue catalogs and transforms rather than answering SQL, EMR is a cluster you operate, and Quick Sight is the dashboard layer on top: none of them bills by data scanned."
 }
 ```
 
@@ -768,7 +768,7 @@ AWS publishes what these patterns look like in production. Every figure below is
     "Amazon SageMaker AI, because every ML task requires building a model"
   ],
   "correct": 1,
-  "explanation": "Comprehend is the NLP service for sentiment, entities, key phrases and PII in text - no ML expertise required. Rekognition handles images and video, Textract extracts text, handwriting and data from scanned documents, and SageMaker AI is for building, training and deploying your own models rather than calling a pre-trained API."
+  "explanation": "Comprehend is the NLP service for sentiment, entities, key phrases and PII in text: no ML expertise required. Rekognition handles images and video, Textract extracts text, handwriting and data from scanned documents, and SageMaker AI is for building, training and deploying your own models rather than calling a pre-trained API."
 }
 ```
 
@@ -784,7 +784,7 @@ AWS publishes what these patterns look like in production. Every figure below is
     "Amazon AppFlow, the SaaS data-flow service"
   ],
   "correct": 3,
-  "explanation": "Amazon AppFlow sits on the official out-of-scope list even though it looks perfectly on topic, so it appears only as a distractor. CodePipeline, Athena and SES are all on the in-scope list - Developer Tools, Analytics and Business Applications respectively. Out of scope does not mean nonexistent; it means never correct."
+  "explanation": "Amazon AppFlow sits on the official out-of-scope list even though it looks perfectly on topic, so it appears only as a distractor. CodePipeline, Athena and SES are all on the in-scope list: Developer Tools, Analytics and Business Applications respectively. Out of scope does not mean nonexistent; it means never correct."
 }
 ```
 
@@ -796,7 +796,7 @@ AWS publishes what these patterns look like in production. Every figure below is
   "options": [
     "Developer Tools still lists eleven services and Amazon MSK remains in scope for streaming analytics",
     "Amazon MSK was deleted from both lists, so it can now be selected, and AWS CodeDeploy is still in scope",
-    "Developer Tools now holds exactly four entries - AWS CLI, AWS CodeBuild, AWS CodePipeline and AWS X-Ray - while Amazon MSK is on the out-of-scope list, so MSK can never be the correct answer",
+    "Developer Tools now holds exactly four entries: AWS CLI, AWS CodeBuild, AWS CodePipeline and AWS X-Ray: while Amazon MSK is on the out-of-scope list, so MSK can never be the correct answer",
     "The in-scope list grew back to 128 entries and Amazon Bedrock was added to the Machine Learning category"
   ],
   "correct": 2,
@@ -816,7 +816,7 @@ AWS publishes what these patterns look like in production. Every figure below is
     "40 shards: bandwidth gives 40,000 KB/s = 40 MB/s divided by the 1 MB/s per-shard write limit, and record rate gives 4,000 / 1,000 = 40, so both limits agree"
   ],
   "correct": 3,
-  "explanation": "Amazon Kinesis Data Streams documents 1 MB/s and 1,000 records/s writes per shard (with 2 MB/s reads): 4,000 x 10 KB = 40,000 KB/s = 40 MB/s, so 40 shards on bandwidth, and 4,000 / 1,000 = 40 shards on record rate - both constraints agree on 40. Retention of 24 hours by default, up to 365 days, is what makes replay possible. Amazon Data Firehose would remove the shard arithmetic entirely, but it has no replay window, so the ordered-with-replay requirement forces Data Streams."
+  "explanation": "Amazon Kinesis Data Streams documents 1 MB/s and 1,000 records/s writes per shard (with 2 MB/s reads): 4,000 x 10 KB = 40,000 KB/s = 40 MB/s, so 40 shards on bandwidth, and 4,000 / 1,000 = 40 shards on record rate: both constraints agree on 40. Retention of 24 hours by default, up to 365 days, is what makes replay possible. Amazon Data Firehose would remove the shard arithmetic entirely, but it has no replay window, so the ordered-with-replay requirement forces Data Streams."
 }
 ```
 
@@ -824,12 +824,12 @@ AWS publishes what these patterns look like in production. Every figure below is
 {
   "question": "Match each business problem to the single AWS service that the CLF-C02 exam treats as the answer:",
   "pairs": [
-    {"left": "Buffer work so the web tier and the workers scale independently, tolerating retries", "right": "Amazon SQS - pull-based store-and-forward queue with at-least-once delivery, visibility timeout and dead-letter queues"},
-    {"left": "One publish must reach an email address, an SMS number and several queues at once", "right": "Amazon SNS - push topic that fans out to email, SMS, HTTP/S, Lambda and SQS subscriptions"},
-    {"left": "Filter third-party SaaS events by content and run a job on a cron schedule", "right": "Amazon EventBridge - event buses, rules with up to five targets, and EventBridge Scheduler"},
+    {"left": "Buffer work so the web tier and the workers scale independently, tolerating retries", "right": "Amazon SQS: pull-based store-and-forward queue with at-least-once delivery, visibility timeout and dead-letter queues"},
+    {"left": "One publish must reach an email address, an SMS number and several queues at once", "right": "Amazon SNS: push topic that fans out to email, SMS, HTTP/S, Lambda and SQS subscriptions"},
+    {"left": "Filter third-party SaaS events by content and run a job on a cron schedule", "right": "Amazon EventBridge: event buses, rules with up to five targets, and EventBridge Scheduler"},
     {"left": "A multi-step approval process must wait days between steps and retry reliably", "right": "AWS Step Functions - Standard workflows run up to one year and bill per state transition"},
-    {"left": "Ad-hoc ANSI SQL directly over objects in S3, paid for by the data read", "right": "Amazon Athena - serverless SQL at $5.00 per terabyte scanned with a 10 MB minimum"},
-    {"left": "Turn raw S3 log files into queryable tables without running a cluster", "right": "AWS Glue - crawlers populate the Data Catalog and ETL jobs clean and format the data"}
+    {"left": "Ad-hoc ANSI SQL directly over objects in S3, paid for by the data read", "right": "Amazon Athena: serverless SQL at $5.00 per terabyte scanned with a 10 MB minimum"},
+    {"left": "Turn raw S3 log files into queryable tables without running a cluster", "right": "AWS Glue: crawlers populate the Data Catalog and ETL jobs clean and format the data"}
   ],
   "explanation": "Read the verb in the stem: buffer and pull means SQS, push to many endpoints means SNS, content-filtered events and schedules mean EventBridge, an ordered multi-step process means Step Functions, SQL over S3 means Athena, and cataloging S3 as tables means Glue."
 }
@@ -847,7 +847,7 @@ AWS publishes what these patterns look like in production. Every figure below is
     "5": "30"
   },
   "distractors": ["3.50", "64", "Registry", "Streams", "60"],
-  "explanation": "Athena is priced at $5.00 per TB scanned with a 10 MB minimum (DDL and failed queries are free); Glue crawlers write into the Glue Data Catalog that Athena reads; the service formerly called Kinesis Data Firehose was renamed Amazon Data Firehose in February 2024; and the SQS visibility timeout defaults to 30 seconds, after which an undeleted message reappears - which is why consumers must be idempotent."
+  "explanation": "Athena is priced at $5.00 per TB scanned with a 10 MB minimum (DDL and failed queries are free); Glue crawlers write into the Glue Data Catalog that Athena reads; the service formerly called Kinesis Data Firehose was renamed Amazon Data Firehose in February 2024; and the SQS visibility timeout defaults to 30 seconds, after which an undeleted message reappears: which is why consumers must be idempotent."
 }
 ```
 
@@ -878,56 +878,56 @@ AWS publishes what these patterns look like in production. Every figure below is
 {
   "question": "Match each service to its status on the current CLF-C02 service lists (in-scope and out-of-scope lists checked October 2026):",
   "pairs": [
-    {"left": "Amazon SageMaker AI", "right": "IN SCOPE - renamed from Amazon SageMaker, so the \"AI\" suffix is now part of the required name"},
-    {"left": "Amazon Q", "right": "IN SCOPE - added to the Machine Learning category since the launch-era Version 1.0 guide"},
-    {"left": "Amazon MSK (managed Apache Kafka)", "right": "OUT OF SCOPE - moved off the in-scope list, so it can only ever be a distractor"},
-    {"left": "AWS Wavelength", "right": "OUT OF SCOPE - explicitly listed as out of scope in the current guide"},
-    {"left": "AWS Local Zones", "right": "ON NEITHER LIST - absent from both the in-scope and the out-of-scope lists"},
-    {"left": "Amazon Bedrock", "right": "ON NEITHER LIST - absent from both lists, so its exam status stays unverified rather than in scope"}
+    {"left": "Amazon SageMaker AI", "right": "IN SCOPE: renamed from Amazon SageMaker, so the \"AI\" suffix is now part of the required name"},
+    {"left": "Amazon Q", "right": "IN SCOPE: added to the Machine Learning category since the launch-era Version 1.0 guide"},
+    {"left": "Amazon MSK (managed Apache Kafka)", "right": "OUT OF SCOPE: moved off the in-scope list, so it can only ever be a distractor"},
+    {"left": "AWS Wavelength", "right": "OUT OF SCOPE: explicitly listed as out of scope in the current guide"},
+    {"left": "AWS Local Zones", "right": "ON NEITHER LIST: absent from both the in-scope and the out-of-scope lists"},
+    {"left": "Amazon Bedrock", "right": "ON NEITHER LIST: absent from both lists, so its exam status stays unverified rather than in scope"}
   ],
-  "explanation": "The service lists were rebuilt: in-scope entries fell 128 to 111 while out-of-scope entries grew 11 to 55 (accessed 2026-10). SageMaker AI and Amazon Q are in scope (a rename and a genuine addition), Amazon MSK and AWS Wavelength are explicit out-of-scope distractors, and AWS Local Zones plus Amazon Bedrock appear on neither list - never present either as in-scope, and never claim the exam covers generative AI."
+  "explanation": "The service lists were rebuilt: in-scope entries fell 128 to 111 while out-of-scope entries grew 11 to 55 (accessed 2026-10). SageMaker AI and Amazon Q are in scope (a rename and a genuine addition), Amazon MSK and AWS Wavelength are explicit out-of-scope distractors, and AWS Local Zones plus Amazon Bedrock appear on neither list: never present either as in-scope, and never claim the exam covers generative AI."
 }
 ```
 
 > [!IMPORTANT]
-> **Comparative Verdict — integration and analytics × on-premises × point-to-point DIY × other clouds × managed AWS services**
-> - **Versus on-premises / self-managed middleware:** on premises you provision broker and cluster VMs, patch them, capacity-plan queues and clusters in both directions, and a spike becomes a procurement cycle. AWS replaces that with serverless endpoints — SQS queues, SNS topics, EventBridge buses and Step Functions workflows with **no broker fleet to patch**, retention and visibility handled for you, plus Athena and QuickSight where a data warehouse used to mean buying hardware and licences. Capital One's **eight exited data centers** and **3-month → minutes** development environments are the on-premises side of that trade (customer-claimed, accessed Oct 2026). You still own your message schemas, your idempotency logic and the data you put in S3.
-> - **Versus point-to-point DIY (hard-coded service A calls service B, custom retries, an EC2 cron box):** every direct call couples the two systems in time and in failure — one outage propagates, and adding a consumer means redeploying the producer. A queue decouples in time and scale; SQS gives you visibility timeouts, dead-letter queues, at-least-once semantics and the idempotency guidance as *built-in mechanics* rather than code you write once and never test. DIY retry loops have no budget, no DLQ and no observability; the managed answer has all three.
-> - **Versus other clouds:** every major provider offers queues, pub/sub, event buses, workflow engines, serverless SQL and BI, so the examinable differences are **AWS's own vocabulary and numbers** — *at-least-once delivery* versus *exactly-once **processing***, **5 targets per rule** and **300 rules per bus**, **$0.000025 per state transition**, **$5.00 per TB scanned**, **10,000 RPS + 5,000 burst**, and the guide's spellings ("Amazon Quick Sight", "Amazon SageMaker AI"). Do not transfer AWS names, limits or prices to another provider's service, and do not assume another provider's guarantees map onto AWS's.
-> - **Versus building it yourself inside AWS (a DynamoDB table as a queue, a nested-Lambda retry chain, a hand-run EMR cluster for ad-hoc SQL):** the Well-Architected answer is consistently **managed and least operational overhead** — SQS instead of a DynamoDB-as-queue shim, EventBridge Scheduler instead of an EC2 crontab, Step Functions instead of hand-rolled retry state, a Glue crawler instead of a custom schema registry, Athena instead of an always-on cluster for occasional queries. DIY inside AWS is right only when a managed service's documented constraint genuinely does not fit; otherwise you are paying for the operations you chose not to delegate.
+> **Comparative Verdict: integration and analytics × on-premises × point-to-point DIY × other clouds × managed AWS services**
+> - **Versus on-premises / self-managed middleware:** on premises you provision broker and cluster VMs, patch them, capacity-plan queues and clusters in both directions, and a spike becomes a procurement cycle. AWS replaces that with serverless endpoints: SQS queues, SNS topics, EventBridge buses and Step Functions workflows with **no broker fleet to patch**, retention and visibility handled for you, plus Athena and QuickSight where a data warehouse used to mean buying hardware and licences. Capital One's **eight exited data centers** and **3-month → minutes** development environments are the on-premises side of that trade (customer-claimed, accessed Oct 2026). You still own your message schemas, your idempotency logic and the data you put in S3.
+> - **Versus point-to-point DIY (hard-coded service A calls service B, custom retries, an EC2 cron box):** every direct call couples the two systems in time and in failure: one outage propagates, and adding a consumer means redeploying the producer. A queue decouples in time and scale; SQS gives you visibility timeouts, dead-letter queues, at-least-once semantics and the idempotency guidance as *built-in mechanics* rather than code you write once and never test. DIY retry loops have no budget, no DLQ and no observability; the managed answer has all three.
+> - **Versus other clouds:** every major provider offers queues, pub/sub, event buses, workflow engines, serverless SQL and BI, so the examinable differences are **AWS's own vocabulary and numbers**: *at-least-once delivery* versus *exactly-once **processing***, **5 targets per rule** and **300 rules per bus**, **$0.000025 per state transition**, **$5.00 per TB scanned**, **10,000 RPS + 5,000 burst**, and the guide's spellings ("Amazon Quick Sight", "Amazon SageMaker AI"). Do not transfer AWS names, limits or prices to another provider's service, and do not assume another provider's guarantees map onto AWS's.
+> - **Versus building it yourself inside AWS (a DynamoDB table as a queue, a nested-Lambda retry chain, a hand-run EMR cluster for ad-hoc SQL):** the Well-Architected answer is consistently **managed and least operational overhead**: SQS instead of a DynamoDB-as-queue shim, EventBridge Scheduler instead of an EC2 crontab, Step Functions instead of hand-rolled retry state, a Glue crawler instead of a custom schema registry, Athena instead of an always-on cluster for occasional queries. DIY inside AWS is right only when a managed service's documented constraint genuinely does not fit; otherwise you are paying for the operations you chose not to delegate.
 
 > [!WARNING]
 > **Exam-day traps for this lesson:**
-> - **SQS standard = at-least-once + best-effort ordering; FIFO = exactly-once *processing* + strict order** — "exactly-once delivery" for a standard queue is always wrong, duplicates are expected, and consumers must be **idempotent**;
+> - **SQS standard = at-least-once + best-effort ordering; FIFO = exactly-once *processing* + strict order**: "exactly-once delivery" for a standard queue is always wrong, duplicates are expected, and consumers must be **idempotent**;
 > - **Pull vs push:** consumers poll ⇒ **SQS**; a service pushes to many endpoints ⇒ **SNS**;
-> - **Fanout = SNS + SQS**, not SNS alone — each queue absorbs its consumer's retries, backlog and scaling;
+> - **Fanout = SNS + SQS**, not SNS alone: each queue absorbs its consumer's retries, backlog and scaling;
 > - **SNS vs EventBridge:** email/SMS/Lambda/SQS endpoints ⇒ SNS; content-filtered events, `cron`/`rate` schedules, SaaS partner buses, cross-account routing ⇒ EventBridge;
-> - **EventBridge limits:** **5 targets per rule**, **300 rules per bus**, AWS **management events ingested free**, **64 KB = 1 event**, and scheduled rules are **legacy** — the current answer is **EventBridge Scheduler** (14,000,000 free invocations per month);
-> - **Step Functions is neither a queue nor a notifier** — Standard bills per **state transition** (up to 1 year, exactly-once); Express runs ≤ **5 minutes** at **$1.00 per million** with at-least-once execution;
+> - **EventBridge limits:** **5 targets per rule**, **300 rules per bus**, AWS **management events ingested free**, **64 KB = 1 event**, and scheduled rules are **legacy**: the current answer is **EventBridge Scheduler** (14,000,000 free invocations per month);
+> - **Step Functions is neither a queue nor a notifier**: Standard bills per **state transition** (up to 1 year, exactly-once); Express runs ≤ **5 minutes** at **$1.00 per million** with at-least-once execution;
 > - **API Gateway:** **10,000 RPS + 5,000 burst** per account per Region, **429** on excess, quotas are **best-effort**; API keys / per-client throttling / WAF / private endpoints ⇒ **REST**; cheapest minimal Lambda proxy ⇒ **HTTP**; persistent two-way ⇒ **WebSocket**;
-> - **Athena bills per TB scanned** (10 MB minimum; DDL and failed queries **free**) — partitioning, compression and columnar formats save **30–90%**; **Glue catalogs and prepares, it never answers SQL**; **Quick Sight draws charts**;
+> - **Athena bills per TB scanned** (10 MB minimum; DDL and failed queries **free**): partitioning, compression and columnar formats save **30 to 90%**; **Glue catalogs and prepares, it never answers SQL**; **Quick Sight draws charts**;
 > - **Kinesis Data Streams vs Data Firehose:** shards, retention **24 h → 365 days** and replay vs **no shards, no consumer code** landing into S3/Redshift/OpenSearch/Splunk/Snowflake; **Firehose was renamed in February 2024**; **Amazon MSK is out of scope**;
 > - **Athena vs Redshift vs EMR:** serverless ad-hoc SQL on S3 vs managed warehouse for complex joins vs self-managed open-source clusters;
-> - **ML tiering:** pre-trained API ⇒ Rekognition (images), Textract (documents), Comprehend (text), Transcribe (speech→text), Polly (text→speech), Translate, Lex; build your own ⇒ **SageMaker AI**; gen-AI assistant ⇒ **Amazon Q** — and **Amazon Bedrock is not on the in-scope list**, so treat it as unverified territory;
+> - **ML tiering:** pre-trained API ⇒ Rekognition (images), Textract (documents), Comprehend (text), Transcribe (speech→text), Polly (text→speech), Translate, Lex; build your own ⇒ **SageMaker AI**; gen-AI assistant ⇒ **Amazon Q**, and **Amazon Bedrock is not on the in-scope list**, so treat it as unverified territory;
 > - **Naming traps:** **"Amazon Quick Sight"** (guide spelling with a space) and **"Amazon SageMaker AI"**;
-> - **Business applications:** only **Connect and SES** are in scope — **Amazon WorkDocs is out**; "email at scale" ⇒ SES, "cloud contact center" ⇒ Connect; "present the output of VMs on end-user machines" ⇒ **AppStream 2.0 / WorkSpaces / WorkSpaces Secure Browser**;
-> - **Developer tools:** in = **CLI, CodeBuild, CodePipeline, X-Ray**; out = **CodeDeploy, CodeArtifact, CodeGuru, Device Farm, CloudShell, Application Composer** — "compile and run unit tests" ⇒ CodeBuild, "model the release workflow" ⇒ CodePipeline, "trace across microservices" ⇒ X-Ray (30-day retention);
+> - **Business applications:** only **Connect and SES** are in scope: **Amazon WorkDocs is out**; "email at scale" ⇒ SES, "cloud contact center" ⇒ Connect; "present the output of VMs on end-user machines" ⇒ **AppStream 2.0 / WorkSpaces / WorkSpaces Secure Browser**;
+> - **Developer tools:** in = **CLI, CodeBuild, CodePipeline, X-Ray**; out = **CodeDeploy, CodeArtifact, CodeGuru, Device Farm, CloudShell, Application Composer**: "compile and run unit tests" ⇒ CodeBuild, "model the release workflow" ⇒ CodePipeline, "trace across microservices" ⇒ X-Ray (30-day retention);
 > - **Out-of-scope lookalikes are never correct:** **Amazon AppFlow**, Amazon MSK, SWF, AppFabric, Personalize, Fraud Detector, Lookout for Metrics, Panorama, all Media Services;
-> - **2026 list changes (checked 2026-10):** in-scope **111** entries vs out-of-scope **55**; Developer Tools = **CLI, CodeBuild, CodePipeline, X-Ray** only; **Amazon SageMaker → Amazon SageMaker AI**, **Amazon Q** added, **Amazon Kendra** removed; **Amazon MSK** and **AWS Wavelength** out, **AWS Local Zones** and **Amazon Bedrock** on neither list — the list you download on exam day, not a pre-2025 PDF, is the arbiter;
-> - **Unverified — do not memorise:** whether generative-AI content is examined (Bedrock absent from the list), **AWS CodeCommit's** status (on neither list), **SNS delivery guarantees beyond HTTP/S, Lambda and SQS**, and **Amazon Connect per-minute rates** (only "pay per usage, no per-seat fee" is sourced);
-> - **Case-study numbers are customer-claimed, unaudited ceilings** — Capital One's **−90%** and Paytm's **30–35%** are reported results, never AWS guarantees; the same rule covers Prime Video's **300,000+ polling clients**, NASA JPL's **4.4 TB/day** and the NFL's **500 M+ data points**.
+> - **2026 list changes (checked 2026-10):** in-scope **111** entries vs out-of-scope **55**; Developer Tools = **CLI, CodeBuild, CodePipeline, X-Ray** only; **Amazon SageMaker → Amazon SageMaker AI**, **Amazon Q** added, **Amazon Kendra** removed; **Amazon MSK** and **AWS Wavelength** out, **AWS Local Zones** and **Amazon Bedrock** on neither list: the list you download on exam day, not a pre-2025 PDF, is the arbiter;
+> - **Unverified: do not memorise:** whether generative-AI content is examined (Bedrock absent from the list), **AWS CodeCommit's** status (on neither list), **SNS delivery guarantees beyond HTTP/S, Lambda and SQS**, and **Amazon Connect per-minute rates** (only "pay per usage, no per-seat fee" is sourced);
+> - **Case-study numbers are customer-claimed, unaudited ceilings**: Capital One's **−90%** and Paytm's **30 to 35%** are reported results, never AWS guarantees; the same rule covers Prime Video's **300,000+ polling clients**, NASA JPL's **4.4 TB/day** and the NFL's **500 M+ data points**.
 
 > [!SUCCESS]
 > **Key Takeaways:**
 > 1. **SQS** is the pull-based buffer that decouples producers from consumers: **standard = at-least-once + best-effort ordering** (near-unlimited throughput, duplicates expected ⇒ idempotent consumers), **FIFO = exactly-once processing + strict order** (300/s, 3,000/s batching, high-throughput up to 70,000/s, 5-minute dedup);
-> 2. Queue mechanics worth memorising: **visibility timeout 30 s default (max 12 h)**, **long polling up to 20 s**, **retention 60 s–14 days (default 4 days)**, **max message 1 MiB**, **delay up to 15 minutes**, and a **dead-letter queue** for repeated failures; SQS pricing = **1 M free requests/month, then ≈$0.40/M** (as of Oct 2026);
-> 3. **SNS is push, SQS is pull**: one publish fans out to **SQS, Lambda, HTTP/S, email, SMS and mobile push** subscriptions — at-least-once for HTTP/S, **exactly-once for Lambda and SQS subscribers**; scale = **100,000 topics/account, 12.5 M subscriptions/topic**, billed **per 64 KB chunk**; **fanout = SNS → N SQS queues → N worker fleets**;
-> 4. **EventBridge** routes JSON events through **buses (default/custom/partner)** and **rules** — **5 targets per rule, 300 rules per bus**, **management events ingested free**, **$1.00/M** custom events, **64 KB = 1 event** — and schedules belong to **EventBridge Scheduler** (**14 M free invocations/month**);
+> 2. Queue mechanics worth memorising: **visibility timeout 30 s default (max 12 h)**, **long polling up to 20 s**, **retention 60 s: 14 days (default 4 days)**, **max message 1 MiB**, **delay up to 15 minutes**, and a **dead-letter queue** for repeated failures; SQS pricing = **1 M free requests/month, then ≈$0.40/M** (as of Oct 2026);
+> 3. **SNS is push, SQS is pull**: one publish fans out to **SQS, Lambda, HTTP/S, email, SMS and mobile push** subscriptions: at-least-once for HTTP/S, **exactly-once for Lambda and SQS subscribers**; scale = **100,000 topics/account, 12.5 M subscriptions/topic**, billed **per 64 KB chunk**; **fanout = SNS → N SQS queues → N worker fleets**;
+> 4. **EventBridge** routes JSON events through **buses (default/custom/partner)** and **rules**, **5 targets per rule, 300 rules per bus**, **management events ingested free**, **$1.00/M** custom events, **64 KB = 1 event**, and schedules belong to **EventBridge Scheduler** (**14 M free invocations/month**);
 > 5. **Step Functions Standard** runs up to **1 year**, exactly-once, **$0.000025 per state transition** with **4,000 free/month** (1,000,005 transitions ⇒ **≈$24.90**); **Express** runs ≤ **5 minutes**, at-least-once, **$1.00 per million requests**;
 > 6. **API Gateway** is the *front door* (throttling, auth, monitoring, versioning) for Lambda, EC2 or any HTTP endpoint: **REST** ($3.50/M, API keys, per-client quotas, WAF, private endpoints) vs **HTTP** ($1.00/M, minimal Lambda proxy) vs **WebSocket**; throttle default **10,000 RPS + 5,000 burst** per account per Region ⇒ **429**, best-effort;
-> 7. **Athena** = serverless ANSI SQL over S3 at **$5.00/TB scanned** with a **10 MB minimum** (DDL and failed queries free) — 3 TB raw **$15**, GZIP 3:1 **$5**, partitioned and column-pruned **$1.25**;
-> 8. **Glue** = serverless ETL + **Data Catalog** (**$0.44/DPU-hour**, 1 DPU = 4 vCPU + 16 GB, 2-DPU minimum, 10-minute crawler minimum) — **Glue catalogs, Athena queries, Quick Sight visualizes**;
+> 7. **Athena** = serverless ANSI SQL over S3 at **$5.00/TB scanned** with a **10 MB minimum** (DDL and failed queries free): 3 TB raw **$15**, GZIP 3:1 **$5**, partitioned and column-pruned **$1.25**;
+> 8. **Glue** = serverless ETL + **Data Catalog** (**$0.44/DPU-hour**, 1 DPU = 4 vCPU + 16 GB, 2-DPU minimum, 10-minute crawler minimum): **Glue catalogs, Athena queries, Quick Sight visualizes**;
 > 9. **Kinesis Data Streams** = ordered **shards** (**1 MB/s + 1,000 records/s write, 2 MB/s read**) with **24 h → 365 days** retention and replay; **Data Firehose** (renamed **Feb 2024**) = **no shards, no consumer code**, landing into S3/Redshift/OpenSearch/Splunk/Snowflake;
 > 10. BI and big data: **Quick Sight** (Reader **$3/user/month**, 10 GB SPICE per Author), **EMR** (per-second, 1-minute minimum, plus EC2 and EBS), **Redshift** (warehouse, **from $0.543/h** provisioned or **$1.50/h** Serverless, Spectrum **$5/TB**), **OpenSearch Service** (domains for logs and search, renamed from Elasticsearch Service in 2021);
-> 11. Everything else in one line each: **Rekognition** images · **Comprehend** NLP · **Textract** documents · **Transcribe** speech→text · **Polly** text→speech · **Translate** · **Lex** chatbots · **SageMaker AI** build/train/deploy · **Amazon Q** gen-AI assistants · **Connect** contact center · **SES** email · **CodeBuild** compile/test (per build minute) · **CodePipeline** release workflow · **X-Ray** tracing (30 days) · **IoT Core** devices · **Amplify** frontend · **AppStream 2.0 / WorkSpaces / WorkSpaces Secure Browser** VM output · **Marketplace** third-party catalog — and **AppFlow, Amazon MSK, WorkDocs, SWF, CodeDeploy and Personalize are out-of-scope distractors**, never correct answers;
-> 12. **2026 service lists (accessed Oct 2026):** in-scope **111** entries / out-of-scope **55**, **Developer Tools = CLI, CodeBuild, CodePipeline, X-Ray**, **Amazon SageMaker → Amazon SageMaker AI**, **Amazon Q** added, **Amazon Kendra** removed, **MSK** and **Wavelength** out, **Local Zones** and **Bedrock** on neither list — download the current lists, not a pre-2025 PDF.
+> 11. Everything else in one line each: **Rekognition** images · **Comprehend** NLP · **Textract** documents · **Transcribe** speech→text · **Polly** text→speech · **Translate** · **Lex** chatbots · **SageMaker AI** build/train/deploy · **Amazon Q** gen-AI assistants · **Connect** contact center · **SES** email · **CodeBuild** compile/test (per build minute) · **CodePipeline** release workflow · **X-Ray** tracing (30 days) · **IoT Core** devices · **Amplify** frontend · **AppStream 2.0 / WorkSpaces / WorkSpaces Secure Browser** VM output · **Marketplace** third-party catalog, and **AppFlow, Amazon MSK, WorkDocs, SWF, CodeDeploy and Personalize are out-of-scope distractors**, never correct answers;
+> 12. **2026 service lists (accessed Oct 2026):** in-scope **111** entries / out-of-scope **55**, **Developer Tools = CLI, CodeBuild, CodePipeline, X-Ray**, **Amazon SageMaker → Amazon SageMaker AI**, **Amazon Q** added, **Amazon Kendra** removed, **MSK** and **Wavelength** out, **Local Zones** and **Bedrock** on neither list: download the current lists, not a pre-2025 PDF.

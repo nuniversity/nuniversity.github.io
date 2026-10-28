@@ -218,7 +218,7 @@ result = employees.alias("e").join(
 
 ## Tratamento de Skew Join
 
-Skew de dados — onde uma chave tem desproporcionalmente muitos valores — pode causar tarefas de longa cauda.
+Skew de dados, onde uma chave tem desproporcionalmente muitos valores, pode causar tarefas de longa cauda.
 
 ```python
 # Verificar skew

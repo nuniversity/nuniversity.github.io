@@ -293,14 +293,14 @@ Each agent can have a completely independent LLM configuration. This lets you us
 
 ---
 
-## Temperature Settings — When to Use What
+## Temperature Settings: When to Use What
 
 | Temperature | Use Case | Example |
 | :--- | :--- | :--- |
-| 0.0 – 0.2 | Factual, deterministic tasks | Data extraction, classification |
-| 0.3 – 0.5 | Balanced reasoning | Summarization, analysis |
-| 0.6 – 0.8 | Creative generation | Marketing copy, storytelling |
-| 0.9 – 1.0 | Highly creative / brainstorming | Idea generation, poetry |
+| 0.0 to 0.2 | Factual, deterministic tasks | Data extraction, classification |
+| 0.3 to 0.5 | Balanced reasoning | Summarization, analysis |
+| 0.6 to 0.8 | Creative generation | Marketing copy, storytelling |
+| 0.9 to 1.0 | Highly creative / brainstorming | Idea generation, poetry |
 
 ```python
 # Quick reference: temperature by agent type
@@ -440,7 +440,7 @@ Testing crews with real LLM calls is slow, expensive, and non-deterministic. Use
 
 ---
 
-## Callback vs Memory vs LLM Config — Comparison
+## Callback vs Memory vs LLM Config: Comparison
 
 | Feature | Purpose | Configuration | Scope |
 | :--- | :--- | :--- | :--- |
@@ -467,7 +467,7 @@ Testing crews with real LLM calls is slow, expensive, and non-deterministic. Use
     "Switch to hierarchical process"
   ],
   "correct": 1,
-  "explanation": "Callbacks are synchronous — they block agent execution. Network calls in callbacks dramatically slow down the crew. Buffer events and flush async, or log to local storage instead."
+  "explanation": "Callbacks are synchronous; they block agent execution. Network calls in callbacks dramatically slow down the crew. Buffer events and flush async, or log to local storage instead."
 }
 ```
 
@@ -526,7 +526,7 @@ Testing crews with real LLM calls is slow, expensive, and non-deterministic. Use
   "question": "You run test_crew_kickoff_returns_string 5 times with real LLM calls. It passes 3 times and fails 2 times with different outputs. What is the issue?",
   "options": [
     "The agent has a bug",
-    "LLM outputs are non-deterministic — use mocked LLM for unit tests",
+    "LLM outputs are non-deterministic: use mocked LLM for unit tests",
     "The task description is wrong",
     "Verbose mode should be disabled in tests"
   ],
@@ -585,6 +585,6 @@ Testing crews with real LLM calls is slow, expensive, and non-deterministic. Use
 - A separate `function_calling_llm` reduces cost for tool-heavy agents.
 - Temperature from 0.0 (deterministic) to 1.0 (creative) controls output variability.
 - Testing crews with pytest ensures correctness before production deployment.
-- Callbacks are synchronous — avoid blocking operations inside them.
+- Callbacks are synchronous: avoid blocking operations inside them.
 - Match LLM model size to task complexity for cost optimization.
 - Mock LLM responses in unit tests; use real LLMs only in integration tests.

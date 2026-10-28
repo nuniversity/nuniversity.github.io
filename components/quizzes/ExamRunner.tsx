@@ -119,8 +119,8 @@ export function ExamRunner({
             <div className="space-y-3">
               {[
                 { icon: ClipboardList, text: tpl(dict.quizzes?.exam?.rule_drawn || '{count} questions drawn proportionally from all {domains} exam domains', { count: totalQuestions, domains: quiz.domains.length }) },
-                { icon: Clock, text: tpl(dict.quizzes?.exam?.rule_timer || '{minutes} minutes to complete — the timer counts down from the moment you start', { minutes: durationMinutes }) },
-                { icon: AlertTriangle, text: dict.quizzes?.exam?.rule_no_feedback || 'No answer feedback during the exam — results are shown only after submission' },
+                { icon: Clock, text: tpl(dict.quizzes?.exam?.rule_timer || '{minutes} minutes to complete, the timer counts down from the moment you start', { minutes: durationMinutes }) },
+                { icon: AlertTriangle, text: dict.quizzes?.exam?.rule_no_feedback || 'No answer feedback during the exam, results are shown only after submission' },
                 { icon: Flag, text: dict.quizzes?.exam?.rule_flag || 'You can flag questions for review and navigate freely between all questions' },
                 { icon: RotateCcw, text: dict.quizzes?.exam?.rule_change || 'You can change any answer before submitting' },
                 { icon: Trophy, text: tpl(dict.quizzes?.exam?.rule_pass || '{score}% or higher is a passing score, matching the official exam threshold', { score: quiz.passingScore }) },
@@ -135,7 +135,7 @@ export function ExamRunner({
 
           <div className="bg-card border rounded-2xl p-6 mb-6">
             <h3 className="font-bold mb-4">
-              {tpl(dict.quizzes?.exam?.allocation_title || 'Domain Allocation — {count} Questions', { count: totalQuestions })}
+              {tpl(dict.quizzes?.exam?.allocation_title || 'Domain Allocation: {count} Questions', { count: totalQuestions })}
             </h3>
             <div className="space-y-4">
               {quiz.domains.map(d => {
@@ -195,7 +195,7 @@ export function ExamRunner({
             className="w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
           >
             <Clock className="w-5 h-5" />
-            {tpl(dict.quizzes?.exam?.begin || 'Begin Exam — {time}', { time: formatCountdown(quiz.durationSeconds) })}
+            {tpl(dict.quizzes?.exam?.begin || 'Begin Exam: {time}', { time: formatCountdown(quiz.durationSeconds) })}
           </button>
         </div>
       </div>
@@ -291,7 +291,7 @@ export function ExamRunner({
             />
 
             <p className="mt-4 text-xs text-center text-muted-foreground">
-              {dict.quizzes?.exam?.no_reveal || 'Answers are not revealed during the exam — submit to see results.'}
+              {dict.quizzes?.exam?.no_reveal || 'Answers are not revealed during the exam, submit to see results.'}
             </p>
           </motion.div>
         </AnimatePresence>

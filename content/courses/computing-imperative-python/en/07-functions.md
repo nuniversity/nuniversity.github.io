@@ -132,12 +132,12 @@ print(profile2)
 > [!WARNING]
 > Default parameter values are evaluated only once, when the function is defined. Never use mutable defaults (like lists or dicts):
 > ```python
-> # BAD - shared list across calls!
+> # BAD: shared list across calls!
 > def add_item(item, items=[]):
 >     items.append(item)
 >     return items
 > 
-> # GOOD - create new list each time
+> # GOOD: create new list each time
 > def add_item(item, items=None):
 >     if items is None:
 >         items = []
@@ -171,7 +171,7 @@ Priority: high
 Please review the attached document.
 ```
 
-### *args - Variable Positional Arguments
+### *args: Variable Positional Arguments
 
 ```python
 def calculate_sum(*args):
@@ -186,7 +186,7 @@ print(f"Sum of 10, 20, 30, 40: {calculate_sum(10, 20, 30, 40)}")  # 100
 print(f"Sum of nothing: {calculate_sum()}")                  # 0
 ```
 
-### **kwargs - Variable Keyword Arguments
+### **kwargs: Variable Keyword Arguments
 
 ```python
 def create_student_record(name, **kwargs):

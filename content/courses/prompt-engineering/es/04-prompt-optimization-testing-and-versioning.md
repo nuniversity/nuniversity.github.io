@@ -419,7 +419,7 @@ flowchart LR
 5. **Monitoriza Producción**: Rastrea el rendimiento en datos reales
 
 [!IMPORTANT]
-**Evitar el sobreajuste es la habilidad más importante en la ingeniería de prompts de producción.** Un prompt que obtiene 98% en tu conjunto de prueba artesanal pero 60% en producción es peor que inútil — da falsa confianza. Siempre mantén un conjunto de prueba retenido que nunca optimices, y monitoriza continuamente el rendimiento en producción.
+**Evitar el sobreajuste es la habilidad más importante en la ingeniería de prompts de producción.** Un prompt que obtiene 98% en tu conjunto de prueba artesanal pero 60% en producción es peor que inútil: da falsa confianza. Siempre mantén un conjunto de prueba retenido que nunca optimices, y monitoriza continuamente el rendimiento en producción.
 
 ### Estudio de Caso de Sobreajuste
 
@@ -497,7 +497,7 @@ flowchart LR
   "id": "pe-04-es-q6",
   "type": "multiple-choice",
   "question": "Un ingeniero de prompts ejecuta una prueba A/B con solo 5 casos de prueba. La versión A acierta 4/5 y la versión B acierta 5/5. ¿Qué debe concluir?",
-  "options": ["La versión B es definitivamente mejor — desplegar inmediatamente", "El tamaño de la muestra es demasiado pequeño para sacar conclusiones estadísticamente significativas", "Ambas versiones son igualmente buenas", "La versión A debe descartarse permanentemente"],
+  "options": ["La versión B es definitivamente mejor: desplegar inmediatamente", "El tamaño de la muestra es demasiado pequeño para sacar conclusiones estadísticamente significativas", "Ambas versiones son igualmente buenas", "La versión A debe descartarse permanentemente"],
   "correct": 1,
   "explanation": "Con solo 5 casos de prueba, una diferencia de un resultado no prueba superioridad. Las pruebas A/B necesitan al menos 50-100 casos diversos por versión para resultados significativos."
 }
@@ -541,7 +541,7 @@ flowchart LR
   "id": "pe-04-es-q10",
   "type": "multiple-choice",
   "question": "Un ingeniero de prompts añade una instrucción compleja para manejar un caso límite raro, mejorando la precisión de 94% a 95% en el conjunto de prueba. El prompt ahora es 3x más largo. ¿Debe desplegarlo?",
-  "options": ["Sí — mayor precisión siempre gana", "No — la ganancia marginal probablemente no justifica la complejidad adicional y el riesgo potencial de sobreajuste", "Solo si también aumentan la temperature", "Sí — los prompts más largos siempre producen mejores resultados"],
+  "options": ["Sí: mayor precisión siempre gana", "No: la ganancia marginal probablemente no justifica la complejidad adicional y el riesgo potencial de sobreajuste", "Solo si también aumentan la temperature", "Sí: los prompts más largos siempre producen mejores resultados"],
   "correct": 1,
   "explanation": "Una ganancia del 1% de precisión con 3x complejidad probablemente indica sobreajuste a casos límite en el conjunto de prueba. La complejidad adicional puede perjudicar la generalización en datos no vistos. Los prompts más simples generalizan mejor."
 }
@@ -556,8 +556,8 @@ flowchart LR
 - Las pruebas A/B comparan versiones de prompts sistemáticamente usando métricas como precisión, consistencia y latencia
 - El control de versiones (Git + SemVer) es crítico para prompts de producción; siempre documenta cambios
 - Las plantillas de prompts separan estructura de datos, mejorando mantenibilidad y consistencia
-- El sobreajuste ocurre cuando los prompts funcionan en datos de prueba pero fallan en datos reales — usa validación holdout
+- El sobreajuste ocurre cuando los prompts funcionan en datos de prueba pero fallan en datos reales: usa validación holdout
 - Los sistemas de producción necesitan monitorización, registro y capacidades de rollback
-- La significancia estadística importa en pruebas A/B — no declares ganadores en muestras pequeñas
+- La significancia estadística importa en pruebas A/B: no declares ganadores en muestras pequeñas
 - Las bibliotecas de plantillas como Jinja2 permiten generación condicional compleja de prompts
-- Los prompts más simples generalizan mejor — no sobreingeniería para ganancias marginales
+- Los prompts más simples generalizan mejor: no sobreingeniería para ganancias marginales

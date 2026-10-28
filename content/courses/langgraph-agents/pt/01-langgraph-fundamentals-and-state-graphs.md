@@ -160,7 +160,7 @@ builder.set_finish_point("b")
 ```
 
 [!TIP]
-Funções de nó **devem** retornar um dicionário (ou `None`). Os valores retornados são mesclados no estado compartilhado via uma atualização superficial. Chaves não retornadas mantêm seu valor anterior — é assim que o estado persiste entre nós.
+Funções de nó **devem** retornar um dicionário (ou `None`). Os valores retornados são mesclados no estado compartilhado via uma atualização superficial. Chaves não retornadas mantêm seu valor anterior: é assim que o estado persiste entre nós.
 
 ### Execução Paralela de Nós
 
@@ -228,7 +228,7 @@ print(result["messages"])
 ```
 
 [!IMPORTANT]
-O método `.compile()` congela a definição do grafo. Após a compilação, você não pode adicionar nós ou arestas — você deve reconstruir o builder. Para topologias dinâmicas, veja a Lição 4 sobre atualizações dinâmicas de grafo.
+O método `.compile()` congela a definição do grafo. Após a compilação, você não pode adicionar nós ou arestas: você deve reconstruir o builder. Para topologias dinâmicas, veja a Lição 4 sobre atualizações dinâmicas de grafo.
 
 ### Streaming de Resultados
 

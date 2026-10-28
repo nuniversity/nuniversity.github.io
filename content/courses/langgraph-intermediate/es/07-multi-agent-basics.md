@@ -1,6 +1,6 @@
 ---
 title: "Fundamentos de Multi-Agente"
-description: "Aprende arquitectura multi-agente en LangGraph — múltiples nodos de agente comunicándose a través de estado compartido, roles especializados y patrones de coordinación."
+description: "Aprende arquitectura multi-agente en LangGraph, múltiples nodos de agente comunicándose a través de estado compartido, roles especializados y patrones de coordinación."
 order: 7
 duration: "40 min"
 difficulty: "intermediate"
@@ -357,7 +357,7 @@ print(result["final"])
   "question": "What is the main benefit of multi-agent architecture?",
   "options": [
     "Faster execution always",
-    "Specialization — each agent focuses on one task",
+    "Specialization: each agent focuses on one task",
     "Eliminates the need for LLMs",
     "Simpler code overall"
   ],
@@ -373,7 +373,7 @@ print(result["final"])
   "question": "How do agents communicate in a LangGraph multi-agent system?",
   "options": [
     "Through direct function calls",
-    "Through the shared state — one agent writes, another reads",
+    "Through the shared state: one agent writes, another reads",
     "Via a message queue",
     "Through a REST API"
   ],
@@ -453,7 +453,7 @@ print(result["final"])
   "question": "Why might you give different agents different tool sets?",
   "options": [
     "To save money on API calls",
-    "To enforce separation of concerns — each agent can only use relevant tools",
+    "To enforce separation of concerns: each agent can only use relevant tools",
     "Tools are shared globally",
     "There's no benefit to separate tool sets"
   ],

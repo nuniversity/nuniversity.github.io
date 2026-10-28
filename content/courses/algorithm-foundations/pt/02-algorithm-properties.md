@@ -46,7 +46,7 @@ flowchart TD
 
 ## Propriedade 1: Entrada
 
-Um algoritmo deve ter **zero ou mais entradas** -- valores ou dados fornecidos ao algoritmo antes de iniciar sua execução.
+Um algoritmo deve ter **zero ou mais entradas**: valores ou dados fornecidos ao algoritmo antes de iniciar sua execução.
 
 ### Compreendendo a Entrada
 
@@ -91,7 +91,7 @@ FIM ALGORITMO
 
 ## Propriedade 2: Saída
 
-Um algoritmo deve produzir **pelo menos uma saída** -- um resultado que tenha uma relação especificada com as entradas.
+Um algoritmo deve produzir **pelo menos uma saída**: um resultado que tenha uma relação especificada com as entradas.
 
 ### Por que a Saída Importa
 
@@ -127,7 +127,7 @@ FIM ALGORITMO
 
 ## Propriedade 3: Definitude
 
-Cada passo de um algoritmo deve ser **precisamente definido** -- não deve haver ambiguidade sobre o que fazer em qualquer ponto.
+Cada passo de um algoritmo deve ser **precisamente definido**: não deve haver ambiguidade sobre o que fazer em qualquer ponto.
 
 ### O Problema com Ambiguidade
 
@@ -174,11 +174,11 @@ FIM ALGORITMO
 
 ## Propriedade 4: Finitude
 
-Um algoritmo deve **terminar após um número finito de passos** -- ele não pode rodar para sempre.
+Um algoritmo deve **terminar após um número finito de passos**: ele não pode rodar para sempre.
 
 ### Loops Infinitos
 
-A violação mais comum da finitude é o loop infinito -- um loop que nunca termina porque sua condição de terminação nunca é alcançada.
+A violação mais comum da finitude é o loop infinito: um loop que nunca termina porque sua condição de terminação nunca é alcançada.
 
 ```mermaid
 flowchart TD
@@ -235,7 +235,7 @@ PASSO 2: ENQUANTO CONTADOR não for igual a 5 FAÇA
 
 ## Propriedade 5: Eficácia
 
-Cada passo de um algoritmo deve ser **básico o suficiente para ser executado** -- em princípio, por uma pessoa usando apenas lápis e papel em uma quantidade finita de tempo.
+Cada passo de um algoritmo deve ser **básico o suficiente para ser executado**: em princípio, por uma pessoa usando apenas lápis e papel em uma quantidade finita de tempo.
 
 ### O que Torna um Passo Eficaz?
 

@@ -61,7 +61,7 @@ Cada adapter implementa um conjunto de interfaces definidas em `dbt-adapters`:
 O protocolo de adapter segue o padrão de **plugins** do dbt-core. Isso significa que qualquer pessoa pode implementar um adapter para um novo warehouse sem modificar o núcleo do dbt. Você pode pensar no adapter como uma "camada de tradução" que converte comandos genéricos do dbt em SQL específico do Redshift.
 
 [!IMPORTANT]
-Em Setembro de 2025, o repositório `dbt-redshift` foi **arquivado e mesclado** em [`dbt-labs/dbt-adapters`](https://github.com/dbt-labs/dbt-adapters). Todas as issues e PRs futuros devem ser enviados para lá. O pacote PyPI `dbt-redshift` continua sendo publicado sob o mesmo nome — apenas o repositório fonte mudou.
+Em Setembro de 2025, o repositório `dbt-redshift` foi **arquivado e mesclado** em [`dbt-labs/dbt-adapters`](https://github.com/dbt-labs/dbt-adapters). Todas as issues e PRs futuros devem ser enviados para lá. O pacote PyPI `dbt-redshift` continua sendo publicado sob o mesmo nome: apenas o repositório fonte mudou.
 
 ---
 
@@ -82,7 +82,7 @@ Sempre fixe `dbt-core` e `dbt-redshift` na **mesma versão minor** em `requireme
 
 ---
 
-## profiles.yml — Métodos de Conexão
+## profiles.yml: Métodos de Conexão
 
 O dbt-redshift suporta quatro métodos de autenticação. Escolha aquele que se adequa à sua postura de segurança:
 
@@ -170,7 +170,7 @@ O Redshift Serverless não possui `cluster_id`. Remova esse campo e use `iam_rol
 
 ---
 
-## dbt_project.yml — Configuração Base do Projeto
+## dbt_project.yml: Configuração Base do Projeto
 
 ```yaml
 # dbt_project.yml
@@ -268,7 +268,7 @@ Escritas cross-database exigem o **nível de isolamento de transação SNAPSHOT*
 
 ---
 
-## Entendendo a Arquitetura Redshift — O Que o dbt Considera
+## Entendendo a Arquitetura Redshift, O Que o dbt Considera
 
 O Amazon Redshift é um data warehouse **Massively Parallel Processing (MPP)** colunar. Cada decisão de design no seu projeto dbt deve levar em conta como o Redshift armazena e consulta dados fisicamente.
 
@@ -352,7 +352,7 @@ Sempre execute `dbt debug` antes de começar um novo projeto ou após modificar 
     "Execute Against Warehouse"
   ],
   "correct": 2,
-  "explanation": "Jinja é resolvido na etapa 5 — Compile SQL — que converte arquivos de modelo (com {{ ref() }}, {{ config() }}, loops, etc.) em SQL nativo do warehouse antes da execução."
+  "explanation": "Jinja é resolvido na etapa 5, Compile SQL, que converte arquivos de modelo (com {{ ref() }}, {{ config() }}, loops, etc.) em SQL nativo do warehouse antes da execução."
 }
 ```
 
@@ -365,10 +365,10 @@ Sempre execute `dbt debug` antes de começar um novo projeto ou após modificar 
     "Usuário e senha no profiles.yml",
     "IAM Role (method: iam)",
     "Browser Identity Center",
-    "Nenhuma autenticação — ECS é confiável por padrão"
+    "Nenhuma autenticação: ECS é confiável por padrão"
   ],
   "correct": 1,
-  "explanation": "Autenticação via IAM Role (method: iam) é a abordagem recomendada para serviços computacionais como ECS Fargate. A role da tarefa é assumida automaticamente — sem necessidade de credenciais estáticas."
+  "explanation": "Autenticação via IAM Role (method: iam) é a abordagem recomendada para serviços computacionais como ECS Fargate. A role da tarefa é assumida automaticamente: sem necessidade de credenciais estáticas."
 }
 ```
 
@@ -445,5 +445,5 @@ Sempre execute `dbt debug` antes de começar um novo projeto ou após modificar 
 - O pacote `dbt-redshift` foi movido para `dbt-labs/dbt-adapters` em Setembro de 2025. O nome no PyPI permanece o mesmo.
 - Quatro métodos de autenticação são suportados: senha, IAM Role, IAM Identity Center (browser SSO) e Redshift Serverless via `iam_role_arn`.
 - Defina `datasharing: true` no profiles.yml (dbt-redshift 1.11+) para habilitar materialização de modelos cross-database e cross-cluster.
-- A arquitetura MPP do Redshift significa que cada decisão de configuração — dist style, sort key, bind, backup — tem um impacto direto na performance.
+- A arquitetura MPP do Redshift significa que cada decisão de configuração, dist style, sort key, bind, backup, tem um impacto direto na performance.
 - Sempre fixe `dbt-core` e `dbt-redshift` na mesma versão minor em seu arquivo de dependências.

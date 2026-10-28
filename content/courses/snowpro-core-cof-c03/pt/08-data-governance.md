@@ -1,12 +1,12 @@
 ---
-title: "Domínio 2.2 — Recursos de Governança de Dados"
+title: "Domínio 2.2, Recursos de Governança de Dados"
 description: "Aprenda como o Snowflake protege e governa dados: Dynamic Data Masking, Row Access Policies, marcação de objetos (object tagging), classificação de dados, políticas de privacidade, Trust Center, gerenciamento de chaves de criptografia e linhagem de dados."
 order: 8
 difficulty: intermediate
 duration: "70 min"
 ---
 
-# Domínio 2.2 — Recursos de Governança de Dados
+# Domínio 2.2: Recursos de Governança de Dados
 
 ## Peso no Exame
 
@@ -17,9 +17,9 @@ O **Domínio 2.0** representa **~20%** do exame. A governança de dados é cada 
 
 ---
 
-## Segurança em Nível de Coluna — Dynamic Data Masking (Mascaramento Dinâmico de Dados)
+## Segurança em Nível de Coluna: Dynamic Data Masking (Mascaramento Dinâmico de Dados)
 
-O **Dynamic Data Masking** oculta ou ofusca valores de colunas sensíveis no momento da query com base na role do usuário — sem alterar os dados subjacentes:
+O **Dynamic Data Masking** oculta ou ofusca valores de colunas sensíveis no momento da query com base na role do usuário: sem alterar os dados subjacentes:
 
 ```sql
 -- Criar uma masking policy (política de mascaramento)
@@ -39,7 +39,7 @@ ALTER TABLE clientes
 
 **Fatos-chave para o exame:**
 - Masking policies são aplicadas no **nível de coluna**
-- São avaliadas no **momento da query** — os dados originais não são alterados
+- São avaliadas no **momento da query**: os dados originais não são alterados
 - Requer **edição Enterprise ou superior**
 - Uma coluna pode ter apenas **uma masking policy** aplicada por vez
 - A política pode ser **condicional** (máscaras diferentes para roles diferentes)
@@ -61,9 +61,9 @@ ALTER TABLE funcionarios
 
 ---
 
-## Segurança em Nível de Linha — Row Access Policies (Políticas de Acesso por Linha)
+## Segurança em Nível de Linha: Row Access Policies (Políticas de Acesso por Linha)
 
-As **Row Access Policies** controlam quais **linhas** um usuário pode ver em uma tabela ou view — sem criar views separadas por role:
+As **Row Access Policies** controlam quais **linhas** um usuário pode ver em uma tabela ou view: sem criar views separadas por role:
 
 ```sql
 -- Criar uma row access policy
@@ -85,7 +85,7 @@ ALTER TABLE pedidos
 ```
 
 **Fatos-chave para o exame:**
-- As Row Access Policies filtram linhas **de forma invisível** — linhas não autorizadas simplesmente não aparecem
+- As Row Access Policies filtram linhas **de forma invisível**: linhas não autorizadas simplesmente não aparecem
 - Requer **edição Enterprise ou superior**
 - Aplicadas no **nível de tabela ou view** em colunas específicas
 - Uma tabela pode ter **uma row access policy** aplicada
@@ -147,7 +147,7 @@ O motor de classificação do Snowflake identifica padrões como:
 
 ## Privacy Policies (Políticas de Privacidade)
 
-As **privacy policies** (também chamadas de **projection policies**) impedem que certas colunas sejam consultadas diretamente — a coluna ainda pode ser usada em cláusulas WHERE para filtragem, mas não pode ser retornada em resultados SELECT:
+As **privacy policies** (também chamadas de **projection policies**) impedem que certas colunas sejam consultadas diretamente: a coluna ainda pode ser usada em cláusulas WHERE para filtragem, mas não pode ser retornada em resultados SELECT:
 
 ```sql
 CREATE PROJECTION POLICY proteger_cpf AS () RETURNS PROJECTION_CONSTRAINT ->
@@ -164,7 +164,7 @@ ALTER TABLE funcionarios
 
 ## Trust Center (Centro de Confiança)
 
-O **Trust Center** é a ferramenta integrada de **gerenciamento de postura de segurança** do Snowflake — avalia sua conta em relação às melhores práticas de segurança do Snowflake e padrões da indústria:
+O **Trust Center** é a ferramenta integrada de **gerenciamento de postura de segurança** do Snowflake: avalia sua conta em relação às melhores práticas de segurança do Snowflake e padrões da indústria:
 
 ```sql
 -- Acessar o Trust Center no Snowsight: Admin → Trust Center
@@ -183,7 +183,7 @@ Verificações do Trust Center incluem:
 - Roles com privilégios excessivos
 
 > [!NOTE]
-> O Trust Center é uma **ferramenta de avaliação somente leitura** — identifica problemas, mas não os corrige automaticamente. Alinha-se com benchmarks CIS do Snowflake e frameworks similares de segurança.
+> O Trust Center é uma **ferramenta de avaliação somente leitura**: identifica problemas, mas não os corrige automaticamente. Alinha-se com benchmarks CIS do Snowflake e frameworks similares de segurança.
 
 ---
 
@@ -197,7 +197,7 @@ Por padrão, o Snowflake gerencia todas as chaves de criptografia usando um **mo
 
 ### Tri-Secret Secure (Chaves Gerenciadas pelo Cliente)
 
-O **Tri-Secret Secure** permite que os clientes mantenham uma **chave mestra composta** — a chave de criptografia é derivada tanto da chave do Snowflake quanto da chave do cliente:
+O **Tri-Secret Secure** permite que os clientes mantenham uma **chave mestra composta**: a chave de criptografia é derivada tanto da chave do Snowflake quanto da chave do cliente:
 
 - Disponível apenas na **edição Business Critical**
 - Usa AWS KMS, Azure Key Vault ou Google Cloud KMS
@@ -271,7 +271,7 @@ ALTER DATABASE analytics REFRESH;
 ALTER DATABASE analytics PRIMARY;
 ```
 
-**Replication Group** — replicar múltiplos bancos de dados + outros objetos juntos:
+**Replication Group**: replicar múltiplos bancos de dados + outros objetos juntos:
 
 ```sql
 CREATE REPLICATION GROUP meu_grupo_replicacao
@@ -280,7 +280,7 @@ CREATE REPLICATION GROUP meu_grupo_replicacao
     ALLOWED_ACCOUNTS = 'minhaorg.recuperacao_desastres';
 ```
 
-**Failover Group** — adiciona capacidade de failover automático:
+**Failover Group**: adiciona capacidade de failover automático:
 
 ```sql
 CREATE FAILOVER GROUP meu_grupo_failover
@@ -298,7 +298,7 @@ O Snowflake fornece **linhagem de dados** por meio de:
 
 ### Access History
 
-`SNOWFLAKE.ACCOUNT_USAGE.ACCESS_HISTORY` — rastreia quais objetos foram acessados (leitura/escrita) em cada query:
+`SNOWFLAKE.ACCOUNT_USAGE.ACCESS_HISTORY`: rastreia quais objetos foram acessados (leitura/escrita) em cada query:
 
 ```sql
 SELECT

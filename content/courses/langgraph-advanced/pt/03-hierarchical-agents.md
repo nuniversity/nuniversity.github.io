@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Agentes Hierárquicos
 
-Agentes hierárquicos organizam o trabalho em níveis — um **agente gestor** delega tarefas a **subagentes**, que podem ser eles próprios grafos com nós internos. Isso permite sistemas de agentes escalonáveis, mantíveis e encapsulados.
+Agentes hierárquicos organizam o trabalho em níveis: um **agente gestor** delega tarefas a **subagentes**, que podem ser eles próprios grafos com nós internos. Isso permite sistemas de agentes escalonáveis, mantíveis e encapsulados.
 
 ---
 
@@ -42,7 +42,7 @@ Manager Agent
 
 ## Subgrafos
 
-Subgrafos são grafos usados como nós dentro de um grafo pai. Eles têm seu próprio estado, nós e arestas — totalmente encapsulados.
+Subgrafos são grafos usados como nós dentro de um grafo pai. Eles têm seu próprio estado, nós e arestas: totalmente encapsulados.
 
 ```python
 from langgraph.graph import StateGraph, START, END
@@ -370,7 +370,7 @@ print(result["final"])
   "question": "What is the main advantage of hierarchical agent architecture?",
   "options": [
     "Faster execution",
-    "Encapsulation — each level has its own state and concerns",
+    "Encapsulation: each level has its own state and concerns",
     "Lower LLM costs",
     "Simpler code"
   ],
@@ -385,7 +385,7 @@ print(result["final"])
   "type": "multiple-choice",
   "question": "How does a parent graph pass data to a subgraph?",
   "options": [
-    "Automatically — all state is shared",
+    "Automatically: all state is shared",
     "Explicit mapping in the parent node function that invokes the subgraph",
     "Through a global variable",
     "Subgraphs can't receive data from parents"
@@ -434,7 +434,7 @@ print(result["final"])
   "question": "How do you add a subgraph as a node to a parent graph?",
   "options": [
     "builder.add_subgraph('name', subgraph)",
-    "builder.add_node('name', subgraph) — same as adding a regular node",
+    "builder.add_node('name', subgraph): same as adding a regular node",
     "builder.attach_subgraph('name', subgraph)",
     "Subgraphs cannot be added as nodes"
   ],
@@ -452,7 +452,7 @@ print(result["final"])
     "It is replaced by the subgraph state",
     "The subgraph's output dict is merged into the parent state",
     "The parent state is reset",
-    "Nothing — subgraph state is isolated"
+    "Nothing: subgraph state is isolated"
   ],
   "correct": 1,
   "explanation": "The subgraph returns a dict (its final state). The parent node receives this and returns it as updates to the parent state."

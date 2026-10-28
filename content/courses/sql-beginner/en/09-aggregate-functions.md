@@ -34,7 +34,7 @@ FROM payments;
 ## NULL Behavior in Aggregates
 
 > [!NOTE]
-> Aggregate functions ignore NULL values — except `COUNT(*)` which counts rows regardless. This can give misleading results if you don't account for it.
+> Aggregate functions ignore NULL values: except `COUNT(*)` which counts rows regardless. This can give misleading results if you don't account for it.
 
 ```sql
 SELECT
@@ -45,7 +45,7 @@ SELECT
 FROM reviews;
 ```
 
-### COALESCE — Replace NULLs Before Aggregation
+### COALESCE: Replace NULLs Before Aggregation
 
 ```sql
 SELECT
@@ -55,9 +55,9 @@ FROM reviews;
 ```
 
 > [!WARNING]
-> Choosing between ignoring NULLs and treating them as 0 is a business decision. If a review has no rating, should it bring the average down? Usually not — it's better to exclude it.
+> Choosing between ignoring NULLs and treating them as 0 is a business decision. If a review has no rating, should it bring the average down? Usually not; it's better to exclude it.
 
-### NULLIF — Prevent Division by Zero
+### NULLIF: Prevent Division by Zero
 
 ```sql
 -- Division that might divide by zero
@@ -113,7 +113,7 @@ GROUP BY CUBE (department, status);
 
 This produces 2^n grouping rows (including all combinations), not just hierarchical ones.
 
-### GROUPING — Identify Subtotals
+### GROUPING: Identify Subtotals
 
 `GROUPING(column)` returns 1 if the column is aggregated in the current row (used in subtotal/grand total rows):
 

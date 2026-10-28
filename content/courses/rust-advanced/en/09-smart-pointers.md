@@ -1,18 +1,18 @@
 ---
-title: "Smart Pointers — Box, Rc, RefCell, and Interior Mutability"
+title: "Smart Pointers, Box, Rc, RefCell, and Interior Mutability"
 description: "Master Rust's smart pointers: Box for heap allocation, Rc for shared ownership, RefCell for interior mutability, and avoiding reference cycles"
 order: 9
 duration: "90 minutes"
 difficulty: advanced
 ---
 
-# Smart Pointers — Box, Rc, RefCell, and Interior Mutability
+# Smart Pointers: Box, Rc, RefCell, and Interior Mutability
 
 Smart pointers are data structures that act like pointers but provide additional capabilities. Rust's smart pointers implement the `Deref` and `Drop` traits.
 
-## Box\<T\> — Heap Allocation
+## Box\<T\>: Heap Allocation
 
-`Box<T>` is the simplest smart pointer — it allocates data on the heap:
+`Box<T>` is the simplest smart pointer; it allocates data on the heap:
 
 ```rust
 fn main() {
@@ -66,7 +66,7 @@ fn main() {
 }
 ```
 
-## Rc\<T\> — Reference Counting
+## Rc\<T\>: Reference Counting
 
 `Rc<T>` enables multiple ownership through non-atomic reference counting:
 
@@ -112,7 +112,7 @@ fn main() {
 }
 ```
 
-## RefCell\<T\> — Interior Mutability
+## RefCell\<T\>: Interior Mutability
 
 `RefCell<T>` enforces borrowing rules at **runtime** instead of compile time:
 
@@ -165,7 +165,7 @@ fn main() {
 ```
 
 > [!WARNING]
-> `RefCell` panics at runtime if you violate borrowing rules. This is no different from a data race — it just happens at runtime instead of compile time. Always verify your borrowing logic.
+> `RefCell` panics at runtime if you violate borrowing rules. This is no different from a data race; it just happens at runtime instead of compile time. Always verify your borrowing logic.
 
 ### Interior Mutability Pattern
 
@@ -200,7 +200,7 @@ fn main() {
 }
 ```
 
-## Cell\<T\> — Copy Interior Mutability
+## Cell\<T\>: Copy Interior Mutability
 
 `Cell<T>` is like `RefCell<T>` but for `Copy` types:
 
@@ -228,7 +228,7 @@ fn main() {
 | Methods | `get`, `set`, `replace` | `borrow`, `borrow_mut` |
 | Panics | Never | On double borrow |
 
-## Weak — Breaking Reference Cycles
+## Weak: Breaking Reference Cycles
 
 ```rust
 use std::rc::{Rc, Weak};

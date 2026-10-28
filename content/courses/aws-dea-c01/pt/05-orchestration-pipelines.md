@@ -1,13 +1,13 @@
 ---
 title: "Orquestrando Pipelines de Dados: Step Functions, EventBridge e Airflow"
-description: "Transforme a Tarefa 1.3 do Domínio 1 do DEA-C01 numa decisão que você consegue defender: quando um workflow Standard do Step Functions vence um Express e por que os medidores diferem, como os estados Task, Choice, Wait, Map e Parallel da Amazon States Language se combinam com Retry, Catch e error states para deixar um pipeline resiliente, quando o estado Map precisa mudar para o modo Distributed, como as rules do EventBridge, buses customizados, Pipes, Scheduler e dead-letter queues reagem a eventos e schedules, como os ambientes Amazon MWAA, DAGs, operators e versões do Airflow diferem da orquestração serverless, como os AWS Glue Workflows e triggers ligam jobs e crawlers num único grafo — e então aplique uma matriz de seleção de orquestração mais os padrões de retry, DLQ, idempotência e backfill, com uma caixa de atualizações de outubro de 2026 com fontes, quatro casos reais de clientes da AWS e catorze questões no estilo de exame."
+description: "Transforme a Tarefa 1.3 do Domínio 1 do DEA-C01 numa decisão que você consegue defender: quando um workflow Standard do Step Functions vence um Express e por que os medidores diferem, como os estados Task, Choice, Wait, Map e Parallel da Amazon States Language se combinam com Retry, Catch e error states para deixar um pipeline resiliente, quando o estado Map precisa mudar para o modo Distributed, como as rules do EventBridge, buses customizados, Pipes, Scheduler e dead-letter queues reagem a eventos e schedules, como os ambientes Amazon MWAA, DAGs, operators e versões do Airflow diferem da orquestração serverless, como os AWS Glue Workflows e triggers ligam jobs e crawlers num único grafo, e então aplique uma matriz de seleção de orquestração mais os padrões de retry, DLQ, idempotência e backfill, com uma caixa de atualizações de outubro de 2026 com fontes, quatro casos reais de clientes da AWS e catorze questões no estilo de exame."
 order: 5
 difficulty: "intermediate"
 duration: "75 min"
 ---
 # Orquestrando Pipelines de Dados: Step Functions, EventBridge e Airflow
 
-Um pipeline de dados que transforma corretamente mas **começa atrasado**, **roda duas vezes**, **pula em silêncio um passo que falhou** ou **não pode ser reproduzido** também falhou. Ingestão e transformação (Lições 02 e 03) decidem *o que* se move e *como* é remodelado; a orquestração decide **quando roda, em que ordem, o que acontece quando falha e como você se recupera** — e o DEA-C01 testa exatamente esse julgamento no Domínio 1, **Tarefa 1.3 "Orquestrar pipelines de dados"**, por meio de quatro habilidades: **1.3.1 serviços de orquestração** (AWS Lambda, Amazon EventBridge, Amazon MWAA, AWS Step Functions, AWS Glue workflows), **1.3.2 pipelines resilientes e escaláveis**, **1.3.3 workflows serverless** e **1.3.4 alertas via SNS e SQS** (guia do exame DEA-C01, acesso em outubro de 2026).
+Um pipeline de dados que transforma corretamente mas **começa atrasado**, **roda duas vezes**, **pula em silêncio um passo que falhou** ou **não pode ser reproduzido** também falhou. Ingestão e transformação (Lições 02 e 03) decidem *o que* se move e *como* é remodelado; a orquestração decide **quando roda, em que ordem, o que acontece quando falha e como você se recupera**, e o DEA-C01 testa exatamente esse julgamento no Domínio 1, **Tarefa 1.3 "Orquestrar pipelines de dados"**, por meio de quatro habilidades: **1.3.1 serviços de orquestração** (AWS Lambda, Amazon EventBridge, Amazon MWAA, AWS Step Functions, AWS Glue workflows), **1.3.2 pipelines resilientes e escaláveis**, **1.3.3 workflows serverless** e **1.3.4 alertas via SNS e SQS** (guia do exame DEA-C01, acesso em outubro de 2026).
 
 ```text
 ====================================================================
@@ -38,7 +38,7 @@ Um pipeline de dados que transforma corretamente mas **começa atrasado**, **rod
 Nesta lição você vai:
 
 - separar workflows **Standard e Express** por duração, garantia de entrega, cobrança e padrões de integração suportados;
-- ler e escrever **Amazon States Language** — os oito tipos de estado, `Retry`, `Catch`, nomes de erro embutidos e error states terminais;
+- ler e escrever **Amazon States Language**: os oito tipos de estado, `Retry`, `Catch`, nomes de erro embutidos e error states terminais;
 - escolher entre **`Map` inline e Distributed** e dimensionar `ItemReader`, `ItemBatcher` e `ResultWriter`;
 - construir rules do **EventBridge** sobre schedules e event patterns, entendendo **buses, targets, políticas de retry e DLQs**;
 - usar **EventBridge Pipes** para fan-out de streams/filas sem código e **EventBridge Scheduler** para schedules conscientes de fuso horário;
@@ -70,14 +70,14 @@ A categoria Application Integration na lista de serviços no escopo do DEA-C01 �
 
 A habilidade 1.3.2 espera que você nomeie os mecanismos, não que você os admire:
 
-1. **Retry com backoff e jitter** — falhas transitórias são reexecutadas automaticamente antes que alguém seja acionado.
-2. **Catch / error state** — falhas irreversíveis são roteadas para um lugar definido em vez de desaparecerem.
-3. **Dead-letter queue (DLQ)** — eventos ou mensagens que esgotaram os retries são preservados para inspeção e reprodução.
-4. **Idempotência** — a mesma entrada processada duas vezes produz a mesma saída uma única vez (escritas condicionais, chaves de idempotência, job bookmarks).
-5. **Backfill e redrive** — reexecutar deliberadamente uma janela de histórico ou um conjunto de execuções que falharam.
-6. **Alertas** — SNS para humanos, SQS para máquinas, alarmes do CloudWatch nas métricas (`ExecutionsFailed`, `ExecutionThrottled`, `FailedInvocations`, `InvocationThrottleCount`).
+1. **Retry com backoff e jitter**: falhas transitórias são reexecutadas automaticamente antes que alguém seja acionado.
+2. **Catch / error state**: falhas irreversíveis são roteadas para um lugar definido em vez de desaparecerem.
+3. **Dead-letter queue (DLQ)**: eventos ou mensagens que esgotaram os retries são preservados para inspeção e reprodução.
+4. **Idempotência**: a mesma entrada processada duas vezes produz a mesma saída uma única vez (escritas condicionais, chaves de idempotência, job bookmarks).
+5. **Backfill e redrive**: reexecutar deliberadamente uma janela de histórico ou um conjunto de execuções que falharam.
+6. **Alertas**: SNS para humanos, SQS para máquinas, alarmes do CloudWatch nas métricas (`ExecutionsFailed`, `ExecutionThrottled`, `FailedInvocations`, `InvocationThrottleCount`).
 
-- **📚 Você sabia?** Os quatro nomes de métrica do CloudWatch acima são o atalho de troubleshooting mais barato do exame: `ExecutionsFailed` e `ExecutionThrottled` pertencem ao **Step Functions**, enquanto `FailedInvocations` e `InvocationThrottleCount` pertencem aos targets e Pipes do **EventBridge**. Uma questão que associa a métrica errada ao serviço errado está testando se você sabe *qual camada* falhou — a máquina de estados ou a entrega do evento ao seu target (documentação do AWS CloudWatch, acesso em outubro de 2026).
+- **📚 Você sabia?** Os quatro nomes de métrica do CloudWatch acima são o atalho de troubleshooting mais barato do exame: `ExecutionsFailed` e `ExecutionThrottled` pertencem ao **Step Functions**, enquanto `FailedInvocations` e `InvocationThrottleCount` pertencem aos targets e Pipes do **EventBridge**. Uma questão que associa a métrica errada ao serviço errado está testando se você sabe *qual camada* falhou: a máquina de estados ou a entrega do evento ao seu target (documentação do AWS CloudWatch, acesso em outubro de 2026).
 
 ---
 
@@ -85,7 +85,7 @@ A habilidade 1.3.2 espera que você nomeie os mecanismos, não que você os admi
 
 ### 2.1 O eixo central do exame
 
-A AWS oferece dois tipos de workflow, e a diferença não é velocidade — é **duração, garantia de entrega, medidor e padrões de integração disponíveis** (guia do desenvolvedor do AWS Step Functions, *Standard vs Express*, acesso em outubro de 2026):
+A AWS oferece dois tipos de workflow, e a diferença não é velocidade: é **duração, garantia de entrega, medidor e padrões de integração disponíveis** (guia do desenvolvedor do AWS Step Functions, *Standard vs Express*, acesso em outubro de 2026):
 
 | | **Workflow Standard** | **Workflow Express** |
 |---|---|---|
@@ -104,9 +104,9 @@ A AWS oferece dois tipos de workflow, e a diferença não é velocidade — é *
 **A regra de uma linha:** tudo que precisa **esperar** (`.sync`, `.waitForTaskToken`, uma aprovação humana de dias, uma execução de um ano) ou que precisa ser **exactly-once** é um workflow **Standard**; tudo que é **curto, de alto volume e idempotente** é um workflow **Express**.
 
 > [!WARNING]
-> ⚠️ **Express não é "Standard, só que mais rápido."** Ele é **at-least-once**, limitado a **5 minutos**, **não armazena histórico de execução** e suporta **apenas integrações request-response** — sem `.sync`, sem `.waitForTaskToken`. Uma alternativa que oferece Express para um requisito de "esperar três dias pelo aceite, continuar em seguida, com trilha de auditoria completa" está errada em três pontos: o teto de 5 minutos, o padrão de callback ausente e o histórico armazenado ausente.
+> ⚠️ **Express não é "Standard, só que mais rápido."** Ele é **at-least-once**, limitado a **5 minutos**, **não armazena histórico de execução** e suporta **apenas integrações request-response**: sem `.sync`, sem `.waitForTaskToken`. Uma alternativa que oferece Express para um requisito de "esperar três dias pelo aceite, continuar em seguida, com trilha de auditoria completa" está errada em três pontos: o teto de 5 minutos, o padrão de callback ausente e o histórico armazenado ausente.
 
-### 2.2 Exemplo resolvido E1 — precificando um pipeline Standard
+### 2.2 Exemplo resolvido E1: precificando um pipeline Standard
 
 Um pipeline noturno tem **9 transições de estado por execução**; um estado faz retry **3 vezes** antes de ter sucesso, acrescentando 3 transições por execução (retries são transições de estado cobráveis). Ele roda **10,000 vezes por dia** num mês de 30 dias (preços do Step Functions, us-east-1, em outubro de 2026):
 
@@ -120,7 +120,7 @@ custo = 3,596,000 x $0.000025          = $89.90 / mês
 
 Duas lições saem daí: **retries custam dinheiro** (são transições), e um **estado `Wait` em loop** é um medidor que você liga de propósito.
 
-### 2.3 Exemplo resolvido E2 — mesmo pipeline, dois tipos de workflow
+### 2.3 Exemplo resolvido E2: mesmo pipeline, dois tipos de workflow
 
 O mesmo job de **6 estados, 4 segundos, menos de 64 MB**, rodado **1,000 vezes**:
 
@@ -131,9 +131,9 @@ Express : 6,000 requisições x $1.00 / 1,000,000                = $0.006
           total Express                                       ~= $0.006
 ```
 
-Mais de **20x mais barato** para o Express nesse formato — e a diferença cresce conforme a duração aumenta, porque o Express cobra pela duração enquanto o Standard cobra apenas transições. O próprio post de otimização de custos da AWS de 2022 ilustra a mesma assimetria com uma comparação de **$0.42 no Standard versus $0.01 no Express** (AWS News Blog, 2022-08-30). A questão de exame corolária é a inversa: um workflow que **espera 12 horas** num estado `Wait` queimaria transições se você fizesse polling, enquanto um token de callback espera de graça (veja E9).
+Mais de **20x mais barato** para o Express nesse formato, e a diferença cresce conforme a duração aumenta, porque o Express cobra pela duração enquanto o Standard cobra apenas transições. O próprio post de otimização de custos da AWS de 2022 ilustra a mesma assimetria com uma comparação de **$0.42 no Standard versus $0.01 no Express** (AWS News Blog, 2022-08-30). A questão de exame corolária é a inversa: um workflow que **espera 12 horas** num estado `Wait` queimaria transições se você fizesse polling, enquanto um token de callback espera de graça (veja E9).
 
-- **📚 Você sabia?** Os workflows Express são o único tipo de workflow que você pode iniciar com `StartSyncExecution` pelo console — e esse resultado síncrono do console **expira após 60 segundos**, então qualquer coisa mais longe pertence a uma chamada de SDK/CLI. Aninhar também é oficialmente recomendado: um **pai Standard pode iniciar um filho Express aninhado**, e iniciar um workflow aninhado custa exatamente **uma transição de estado** (páginas de preços e de boas práticas do AWS Step Functions, acesso em outubro de 2026).
+- **📚 Você sabia?** Os workflows Express são o único tipo de workflow que você pode iniciar com `StartSyncExecution` pelo console, e esse resultado síncrono do console **expira após 60 segundos**, então qualquer coisa mais longe pertence a uma chamada de SDK/CLI. Aninhar também é oficialmente recomendado: um **pai Standard pode iniciar um filho Express aninhado**, e iniciar um workflow aninhado custa exatamente **uma transição de estado** (páginas de preços e de boas práticas do AWS Step Functions, acesso em outubro de 2026).
 
 ---
 
@@ -141,22 +141,22 @@ Mais de **20x mais barato** para o Express nesse formato — e a diferença cres
 
 ### 3.1 O vocabulário
 
-Máquinas de estados são definidas em **Amazon States Language (ASL)** — uma linguagem declarativa baseada em JSON (especificação states-language.net, acesso em outubro de 2026):
+Máquinas de estados são definidas em **Amazon States Language (ASL)**: uma linguagem declarativa baseada em JSON (especificação states-language.net, acesso em outubro de 2026):
 
 | Tipo de estado | O que faz | Detalhe relevante para o exame |
 |---|---|---|
-| **`Task`** | Executa trabalho — chama Lambda, integrações do Step Functions ou o SDK | Carrega `Retry` e `Catch`; pode usar `.sync` ou `.waitForTaskToken` |
+| **`Task`** | Executa trabalho: chama Lambda, integrações do Step Functions ou o SDK | Carrega `Retry` e `Catch`; pode usar `.sync` ou `.waitForTaskToken` |
 | **`Choice`** | Faz branching sobre uma comparação | O ramo sem correspondência levanta `States.NoChoiceMatched` |
 | **`Wait`** | Pausa por segundos, por um timestamp ou até um prazo | Transições cobráveis se você puser em loop (veja E9) |
 | **`Parallel`** | Executa ramos concorrentemente e depois junta | Fan-out/fan-in; cada ramo pode ter seu próprio tratamento de erros |
 | **`Map`** | Itera um array (ou um dataset) | **40** iterações concorrentes em linha versus **10,000** no Distributed (Seção 4) |
-| **`Pass`** | Remodelagem pura de dados — sem trabalho | Injeta ou reestrutura a entrada com `Result` |
+| **`Pass`** | Remodelagem pura de dados: sem trabalho | Injeta ou reestrutura a entrada com `Result` |
 | **`Succeed`** | Sucesso terminal | Para sem erro |
 | **`Fail`** | Falha terminal | Carrega as strings `Error` e `Cause` |
 
 Cada estado declara `Type` e ou `Next` **xor** `End`, além dos filtros de entrada/saída `InputPath`, `ResultPath`, `OutputPath`, um `TimeoutSeconds` opcional e os arrays opcionais `Retry` e `Catch`. A linguagem de consulta é **JSONPath** (caminhos escritos com sufixo `.$`, por exemplo `"Bucket.$": "$.bucket"`) ou **JSONata** (blocos `{% … %}`). Caminhos de contexto alcançam a própria execução: `$$.Execution.Id`, `$$.State.Name`, **`$$.Task.Token`** e `$$.Map.Item.*`.
 
-### 3.2 Exemplo resolvido E3 — um fragmento real de ASL
+### 3.2 Exemplo resolvido E3: um fragmento real de ASL
 
 ```json
 {
@@ -205,7 +205,7 @@ Cada estado declara `Type` e ou `Next` **xor** `End`, além dos filtros de entra
 }
 ```
 
-Leia como uma história: o job do Glue roda **de forma síncrona** (`.sync` espera o job terminar), **timeouts nunca são reexecutados** enquanto todo o resto tenta de novo até 5 vezes com backoff exponencial e jitter completo, erros irreversíveis são **capturados em `$.error`** e roteados para um alerta do SNS, um `Choice` impõe um contrato de dados, e o estado terminal é um `Fail` explícito — a definição de **error state** do exame.
+Leia como uma história: o job do Glue roda **de forma síncrona** (`.sync` espera o job terminar), **timeouts nunca são reexecutados** enquanto todo o resto tenta de novo até 5 vezes com backoff exponencial e jitter completo, erros irreversíveis são **capturados em `$.error`** e roteados para um alerta do SNS, um `Choice` impõe um contrato de dados, e o estado terminal é um `Fail` explícito: a definição de **error state** do exame.
 
 ```mermaid
 stateDiagram-v2
@@ -230,7 +230,7 @@ stateDiagram-v2
 
 ### 3.3 Mecânica do retry: os arrays são varridos de cima para baixo
 
-- **Retriers** (`Retry[]`) são varridos **na ordem do array**; a **primeira** entrada cujo `ErrorEquals` casa é a que manda. É por isso que `["States.Timeout"]` com `MaxAttempts: 0` precisa vir **antes** de `["States.ALL"]` — essa é a configuração canônica de *"repetir tudo exceto timeouts"*.
+- **Retriers** (`Retry[]`) são varridos **na ordem do array**; a **primeira** entrada cujo `ErrorEquals` casa é a que manda. É por isso que `["States.Timeout"]` com `MaxAttempts: 0` precisa vir **antes** de `["States.ALL"]`: essa é a configuração canônica de *"repetir tudo exceto timeouts"*.
 - **Padrões** (quando você omite um campo): `IntervalSeconds` **1**, `MaxAttempts` **3** (ou seja, **4 tentativas no total**), `BackoffRate` **2.0** (precisa ser ≥ 1.0), `JitterStrategy` **NONE** a menos que você defina `FULL`.
 - **Catchers** (`Catch[]`) rodam **apenas** quando não há entrada de `Retry` correspondente ou os retries se esgotaram; cada um carrega `ErrorEquals`, `Next` e normalmente um `ResultPath` como `$.error`, para que o payload da falha não sobrescreva seus dados.
 
@@ -241,12 +241,12 @@ stateDiagram-v2
 | **`States.ALL`** | Precisa aparecer **sozinho** no seu array `ErrorEquals` e **por último** no array `Catch`; **não pode** capturar `States.DataLimitExceeded` nem `States.Runtime` |
 | **`States.TaskFailed`** | curinga para qualquer falha de task **exceto** `States.Timeout` |
 | **`States.Timeout`** | A task excedeu `TimeoutSeconds` (ou o heartbeat) |
-| **`States.DataLimitExceeded`** | **Terminal** — o payload do estado passou do limite de 256 KiB; não pode ser capturado por `States.ALL` |
+| **`States.DataLimitExceeded`** | **Terminal**, o payload do estado passou do limite de 256 KiB; não pode ser capturado por `States.ALL` |
 | **`States.Runtime`** | Defeito na definição da máquina de estados; **nunca** casado por `States.ALL` |
 | **`States.Permissions` / `States.BranchFailed` / `States.NoChoiceMatched`** | Falha de IAM / um ramo de `Parallel` ou `Map` falhou / `Choice` não casou com nada |
 | Específico de serviço | `Lambda.ServiceException`, `DynamoDB.ConditionalCheckFailedException`, `AmazonECS.Unknown`, … |
 
-### 3.5 Exemplo resolvido E4 — aritmética do tempo de retry
+### 3.5 Exemplo resolvido E4: aritmética do tempo de retry
 
 Com os padrões (`IntervalSeconds: 1`, `BackoffRate: 2.0`, `MaxAttempts: 3`):
 
@@ -258,11 +258,11 @@ tentativa 4 falha -> desiste após 1 + 3 = 4 tentativas no total
 espera total      = 1 + 2 + 4 = 7 segundos  (+ tempo de execução de cada tentativa)
 ```
 
-Defina `IntervalSeconds: 30`, `MaxAttempts: 5`, `BackoffRate: 2.0` e as esperas passam a ser 30 + 60 + 120 + 240 + 480 = **930 segundos (15.5 minutos)** antes de a task ser declarada falha — a configuração do E3. `JitterStrategy: "FULL"` randomiza cada atraso dentro da sua janela, para que uma frota de execuções não faça retry em uníssono (documentação de tratamento de erros do AWS Step Functions, acesso em outubro de 2026).
+Defina `IntervalSeconds: 30`, `MaxAttempts: 5`, `BackoffRate: 2.0` e as esperas passam a ser 30 + 60 + 120 + 240 + 480 = **930 segundos (15.5 minutos)** antes de a task ser declarada falha: a configuração do E3. `JitterStrategy: "FULL"` randomiza cada atraso dentro da sua janela, para que uma frota de execuções não faça retry em uníssono (documentação de tratamento de erros do AWS Step Functions, acesso em outubro de 2026).
 
 ### 3.6 Task tokens: esperar sem custar nada
 
-Para trabalho que nenhum padrão `.sync` cobre — uma aprovação humana, uma API de terceiros, um worker externo — a máquina de estados injeta o token e espera:
+Para trabalho que nenhum padrão `.sync` cobre, uma aprovação humana, uma API de terceiros, um worker externo, a máquina de estados injeta o token e espera:
 
 ```json
 {
@@ -278,25 +278,25 @@ Para trabalho que nenhum padrão `.sync` cobre — uma aprovação humana, uma A
 }
 ```
 
-Mais tarde, o worker externo chama **`SendTaskSuccess`**, **`SendTaskFailure`** ou **`SendTaskHeartbeat`**. A espera é **ilimitada** (até o limite de 1 ano do Standard), **não é cobrável** e **existe só no Standard** — então defina sempre `HeartbeatSeconds`, caso contrária um callback perdido fica pendurado até o timeout do estado em vez de falhar rápido com `States.Timeout`.
+Mais tarde, o worker externo chama **`SendTaskSuccess`**, **`SendTaskFailure`** ou **`SendTaskHeartbeat`**. A espera é **ilimitada** (até o limite de 1 ano do Standard), **não é cobrável** e **existe só no Standard**, então defina sempre `HeartbeatSeconds`, caso contrária um callback perdido fica pendurado até o timeout do estado em vez de falhar rápido com `States.Timeout`.
 
-- **📚 Você sabia?** Um estado de aprovação humana que fica aberto três dias custa **zero transições de estado por hora** — as transições foram gastas entrando e saindo do estado, não esperando dentro dele. Essa assimetria é a razão pela qual os designs de longa duração mais baratos colocam um **`.waitForTaskToken`** onde um loop de `Wait` com polling viveria: 1,000 polls por hora custam $3.00 por mês, um callback com token custa uma única transição (exemplo resolvido E9; preços do Step Functions, em outubro de 2026).
+- **📚 Você sabia?** Um estado de aprovação humana que fica aberto três dias custa **zero transições de estado por hora**: as transições foram gastas entrando e saindo do estado, não esperando dentro dele. Essa assimetria é a razão pela qual os designs de longa duração mais baratos colocam um **`.waitForTaskToken`** onde um loop de `Wait` com polling viveria: 1,000 polls por hora custam $3.00 por mês, um callback com token custa uma única transição (exemplo resolvido E9; preços do Step Functions, em outubro de 2026).
 
 ### 3.7 Integrações de serviço: qual padrão cada serviço suporta
 
-O Step Functions entrega **integrações otimizadas** (o serviço interpreta a chamada) mais uma **integração genérica de AWS SDK** que cobre **mais de 220 serviços da AWS** (AWS What's New, 2026-03-26 — **+28 serviços / 1,100+ APIs**):
+O Step Functions entrega **integrações otimizadas** (o serviço interpreta a chamada) mais uma **integração genérica de AWS SDK** que cobre **mais de 220 serviços da AWS** (AWS What's New, 2026-03-26: **+28 serviços / 1,100+ APIs**):
 
 | Integração | Request-response | `.sync` (espera a conclusão) | `.waitForTaskToken` (callback) |
 |---|---|---|---|
-| **AWS Glue** (`glue:startJobRun`) | ✔ | ✔ | — |
-| **Amazon EMR** | ✔ | ✔ (`addStep.sync`, `createCluster.sync`) | — |
+| **AWS Glue** (`glue:startJobRun`) | ✔ | ✔ |: |
+| **Amazon EMR** | ✔ | ✔ (`addStep.sync`, `createCluster.sync`) |: |
 | **Amazon ECS / AWS Batch / Amazon Athena / SageMaker / CodeBuild** | ✔ | ✔ | ✔ (ECS) |
-| **AWS Lambda** | ✔ | — (sem `.sync`) | ✔ |
-| **Amazon SQS / Amazon SNS / Amazon API Gateway / Amazon EventBridge** | ✔ | — | ✔ |
+| **AWS Lambda** | ✔ |: (sem `.sync`) | ✔ |
+| **Amazon SQS / Amazon SNS / Amazon API Gateway / Amazon EventBridge** | ✔ |: | ✔ |
 | **Amazon DynamoDB** | ✔ | **nenhum** | **nenhum** |
 | Step Functions aninhado | ✔ | ✔ | ✔ |
 
-Otimizado ≠ SDK: a integração **otimizada** do Lambda faz o parse do payload de resposta automaticamente, a integração otimizada do Glue devolve `JobName` + `JobRunID`, e o EMR renomeia `JobFlowId` para `ClusterId`. Chamadas de callback e `.sync` também precisam de permissões extras de IAM (`glue:GetJobRun`, `ecs:RunTask` mais `iam:PassRole`) — um favorito do exame quando um pipeline "funciona no console e falha em produção".
+Otimizado ≠ SDK: a integração **otimizada** do Lambda faz o parse do payload de resposta automaticamente, a integração otimizada do Glue devolve `JobName` + `JobRunID`, e o EMR renomeia `JobFlowId` para `ClusterId`. Chamadas de callback e `.sync` também precisam de permissões extras de IAM (`glue:GetJobRun`, `ecs:RunTask` mais `iam:PassRole`): um favorito do exame quando um pipeline "funciona no console e falha em produção".
 
 ---
 
@@ -311,18 +311,18 @@ Otimizado ≠ SDK: a integração **otimizada** do Lambda faz o parse do payload
 | Onde as iterações rodam | Histórico de execução do pai | **Execuções filhas** (Standard ou Express) |
 | Concorrência máxima | **40** | **10,000** (padrão não definido/0) |
 | Entrada | Array JSON, ou uma lista de objetos do S3 | Payload JSON **ou** um dataset grande no S3: CSV, JSON, JSONL, Parquet, lista de objetos, inventory |
-| Troque para Distributed quando | — | entrada **> 256 KiB**, o histórico excederia **25,000 eventos** ou a concorrência **> 40** |
+| Troque para Distributed quando |: | entrada **> 256 KiB**, o histórico excederia **25,000 eventos** ou a concorrência **> 40** |
 | Limite de payload do filho | n/a | 256 KiB por filho (8 MB por item se `ItemSelector` encolher) |
 | Resultados | Devolvidos em linha | Gravados no **S3** via **`ResultWriter`** |
 | Tolerância a falha | Tudo ou nada | `ToleratedFailureCount` / `ToleratedFailurePercentage` |
 
 A configuração fica em `ProcessorConfig: { "Mode": "DISTRIBUTED", "ExecutionType": "EXPRESS" | "STANDARD" }` mais os campos abaixo:
 
-- **`ItemReader`** (+ `ReaderConfig.InputType`) — de onde vêm os itens; `MaxItems` ≤ **100,000,000**, e `MaxItems` XOR `MaxItemsPath`.
-- **`ItemsPath` / `ItemSelector`** — quais itens, e como cada um é remodelado antes de o filho rodar.
-- **`ItemBatcher`** — `MaxItemsPerBatch`, `MaxItemsPerBatchBytes` (≤ **256 KiB**).
-- **`MaxConcurrency` / `MaxConcurrencyPath`** — nunca defina acima da capacidade a jusante.
-- **`ResultWriter`** — os resultados caem no S3, não no histórico do pai.
+- **`ItemReader`** (+ `ReaderConfig.InputType`): de onde vêm os itens; `MaxItems` ≤ **100,000,000**, e `MaxItems` XOR `MaxItemsPath`.
+- **`ItemsPath` / `ItemSelector`**: quais itens, e como cada um é remodelado antes de o filho rodar.
+- **`ItemBatcher`**: `MaxItemsPerBatch`, `MaxItemsPerBatchBytes` (≤ **256 KiB**).
+- **`MaxConcurrency` / `MaxConcurrencyPath`**: nunca defina acima da capacidade a jusante.
+- **`ResultWriter`**: os resultados caem no S3, não no histórico do pai.
 
 ```mermaid
 flowchart TD
@@ -337,7 +337,7 @@ flowchart TD
     DI --> TF["ToleratedFailureCount ou ToleratedFailurePercentage permitem sucesso parcial"]
 ```
 
-### 4.2 Exemplo resolvido E5 — aritmética do ItemBatcher
+### 4.2 Exemplo resolvido E5: aritmética do ItemBatcher
 
 Um Map Distributed faz fan-out de **1,130 objetos** com `MaxItemsPerBatch: 100`:
 
@@ -345,7 +345,7 @@ $$
 \text{batches} = \left\lceil \frac{1{,}130}{100} \right\rceil = \lceil 11.3 \rceil = \mathbf{12 \ batches}
 $$
 
-Lotes importam porque **cada lote vira uma execução filha**, e cada execução filha custa pelo menos uma transição de estado (ou, para filhos Express, uma requisição). **1,130 filhos** é 1,130 execuções; **12 filhos** é 12 — mesmo trabalho, uma fração do overhead. Para um backfill de S3 com **1,000,000 de objetos** a aritmética é diferente em natureza: o Map inline esgotaria o histórico de **25,000 eventos** muito antes do último objeto, então você precisa de `ItemReader` sobre `s3:listObjectsV2`, `ItemBatcher`, `MaxConcurrency` dimensionado para a capacidade a jusante (por exemplo 1,000), filhos com `ExecutionType: "EXPRESS"`, `ToleratedFailurePercentage: 1` e `ResultWriter` para o S3.
+Lotes importam porque **cada lote vira uma execução filha**, e cada execução filha custa pelo menos uma transição de estado (ou, para filhos Express, uma requisição). **1,130 filhos** é 1,130 execuções; **12 filhos** é 12: mesmo trabalho, uma fração do overhead. Para um backfill de S3 com **1,000,000 de objetos** a aritmética é diferente em natureza: o Map inline esgotaria o histórico de **25,000 eventos** muito antes do último objeto, então você precisa de `ItemReader` sobre `s3:listObjectsV2`, `ItemBatcher`, `MaxConcurrency` dimensionado para a capacidade a jusante (por exemplo 1,000), filhos com `ExecutionType: "EXPRESS"`, `ToleratedFailurePercentage: 1` e `ResultWriter` para o S3.
 
 > [!IMPORTANT]
 > ⚠️ **O limite de 10,000 do Distributed Map conta execuções filhas, não itens.** Os itens são limitados por `ItemReader.MaxItems` (**100,000,000**), e os limiares de troca de modo são **256 KiB de entrada**, **25,000 eventos de histórico** ou **40 iterações concorrentes**. Uma alternativa que diz "o Distributed Map está limitado a 10,000 objetos" confundiu os dois contadores.
@@ -362,9 +362,9 @@ Lotes importam porque **cada lote vira uma execução filha**, e cada execução
 | **Custom** | Eventos emitidos pelas suas aplicações | Compartilhável entre contas/regiões via resource policy |
 | **Partner** | Eventos de provedores SaaS | Via a integração do parceiro |
 
-Uma rule observa **exatamente um** bus. Schedules **nunca** são permitidos em **partner event buses**; a referência da API documenta expressões de schedule nos buses default e custom (API do AWS EventBridge `PutRule`, acesso em outubro de 2026) — então trate *"schedule num bus partner"* como sempre errado.
+Uma rule observa **exatamente um** bus. Schedules **nunca** são permitidos em **partner event buses**; a referência da API documenta expressões de schedule nos buses default e custom (API do AWS EventBridge `PutRule`, acesso em outubro de 2026), então trate *"schedule num bus partner"* como sempre errado.
 
-### 5.2 Duas formas de rule — e um schedule
+### 5.2 Duas formas de rule, e um schedule
 
 Uma rule casa com um **event pattern** (filtragem baseada em conteúdo sobre campos JSON, até **2,048 caracteres**) ou com uma **expressão de schedule**, ou ambos:
 
@@ -374,9 +374,9 @@ cron(0 20 * * ? *)       -> 20:00 UTC todo dia (a expressão que a AWS publica
                              como exemplo de schedule)
 ```
 
-### 5.3 Exemplo resolvido E6 — escrevendo a rule do cron
+### 5.3 Exemplo resolvido E6: escrevendo a rule do cron
 
-Requisição: *"iniciar o load do warehouse às 20:00 UTC todo dia, e também sempre que um arquivo aterrissar no prefixo raw."* Uma rule não faz as duas coisas limpas numa única expressão do jeito que o exame espera — você cria **duas rules no mesmo bus**:
+Requisição: *"iniciar o load do warehouse às 20:00 UTC todo dia, e também sempre que um arquivo aterrissar no prefixo raw."* Uma rule não faz as duas coisas limpas numa única expressão do jeito que o exame espera: você cria **duas rules no mesmo bus**:
 
 ```json
 {
@@ -417,12 +417,12 @@ Por target você pode sobrescrever a política de retry de entrega e anexar uma 
 
 | Configuração | Faixa | Padrão |
 |---|---|---|
-| `MaxRetryAttempts` | **0–185** | **185** (console) |
-| `MaxEventAgeInSeconds` | **60–86,400** | 86,400 (**24 horas**) |
-| Efeito dos padrões | Backoff exponencial **com jitter** por até **24 horas** e até **185 tentativas** | — |
+| `MaxRetryAttempts` | **0 to 185** | **185** (console) |
+| `MaxEventAgeInSeconds` | **60 to 86,400** | 86,400 (**24 horas**) |
+| Efeito dos padrões | Backoff exponencial **com jitter** por até **24 horas** e até **185 tentativas** |: |
 | DLQ | **Fila padrão do Amazon SQS, mesma região** | nenhuma |
 
-### 5.5 Exemplo resolvido E7 — de retries de 24 horas para uma DLQ de 10 minutos
+### 5.5 Exemplo resolvido E7: de retries de 24 horas para uma DLQ de 10 minutos
 
 Uma equipe quer que as falhas apareçam em **10 minutos**, não em um dia:
 
@@ -447,9 +447,9 @@ Esta política  : até 5 tentativas em 300 s     -> a mensagem cai na DLQ
                  o engenheiro reproduz
 ```
 
-A DLQ precisa ser uma **fila padrão do SQS na mesma região** — **uma fila FIFO não pode ser usada como DLQ do EventBridge**. As mensagens que chegam carregam atributos como `ERROR_CODE`, `EXHAUSTED_RETRY_CONDITION` e `RETRY_ATTEMPTS`, e uma fila criptografada com KMS precisa de `kms:Decrypt` para `events.amazonaws.com`.
+A DLQ precisa ser uma **fila padrão do SQS na mesma região**: **uma fila FIFO não pode ser usada como DLQ do EventBridge**. As mensagens que chegam carregam atributos como `ERROR_CODE`, `EXHAUSTED_RETRY_CONDITION` e `RETRY_ATTEMPTS`, e uma fila criptografada com KMS precisa de `kms:Decrypt` para `events.amazonaws.com`.
 
-- **📚 Você sabia?** Algumas falhas **nunca são reexecutadas** — uma permissão ausente, um recurso deletado ou DNS ruim vai **direto para a DLQ** com zero retries, e é por isso que "nenhum retry aconteceu" num ticket de suporte geralmente significa um problema de IAM ou de recurso, e não um bug na política de retry. E as DLQs do EventBridge são **filas padrão do SQS** comuns: você não pode usar uma fila FIFO, então uma questão que oferece "SQS FIFO como DLQ do EventBridge" é um distrator embutido (documentação de DLQ do AWS EventBridge, acesso em outubro de 2026).
+- **📚 Você sabia?** Algumas falhas **nunca são reexecutadas**: uma permissão ausente, um recurso deletado ou DNS ruim vai **direto para a DLQ** com zero retries, e é por isso que "nenhum retry aconteceu" num ticket de suporte geralmente significa um problema de IAM ou de recurso, e não um bug na política de retry. E as DLQs do EventBridge são **filas padrão do SQS** comuns: você não pode usar uma fila FIFO, então uma questão que oferece "SQS FIFO como DLQ do EventBridge" é um distrator embutido (documentação de DLQ do AWS EventBridge, acesso em outubro de 2026).
 
 ### 5.6 Quotas que valem a pena decorar (em outubro de 2026)
 
@@ -477,7 +477,7 @@ flowchart LR
     R2 --> DLQ
 ```
 
-- **📚 Você sabia?** O EventBridge também orquestra pipelines de *segurança*, não só de dados: o Amazon Macie emite seus findings para o bus default, e uma rule pode roteá-los para uma Lambda ou para um fluxo de remediação do Step Functions com a mesma política de retry e a mesma DLQ padrão do SQS que você usa para um load de warehouse — a conexão por trás da **95% de precisão na descoberta de dados sensíveis** e da **redução de 80% no tempo necessário para descobrir dados sensíveis** reportadas pela Oportun. A habilidade de orquestração não muda (casar em `source` / `detail-type`, limitar os retries, tornar a remediação idempotente); só o produtor muda (material de cliente do AWS Macie e o deck da sessão SEC215 do re:Invent, acesso em outubro de 2026).
+- **📚 Você sabia?** O EventBridge também orquestra pipelines de *segurança*, não só de dados: o Amazon Macie emite seus findings para o bus default, e uma rule pode roteá-los para uma Lambda ou para um fluxo de remediação do Step Functions com a mesma política de retry e a mesma DLQ padrão do SQS que você usa para um load de warehouse: a conexão por trás da **95% de precisão na descoberta de dados sensíveis** e da **redução de 80% no tempo necessário para descobrir dados sensíveis** reportadas pela Oportun. A habilidade de orquestração não muda (casar em `source` / `detail-type`, limitar os retries, tornar a remediação idempotente); só o produtor muda (material de cliente do AWS Macie e o deck da sessão SEC215 do re:Invent, acesso em outubro de 2026).
 
 ---
 
@@ -492,12 +492,12 @@ Pipes são **ponto a ponto** (não pub/sub): uma origem, um **filtro** opcional 
 | **Origens** | DynamoDB stream, stream do Kinesis, Amazon MQ (ActiveMQ/OpenWire, RabbitMQ/AMQP 0-9-1), Amazon MSK (incluindo Serverless), **SQS**, Apache Kafka autogerenciado (Confluent Cloud, Redpanda) |
 | **Destinos** | API destination, API Gateway, Batch, log group do CloudWatch, task do ECS, event bus da mesma região, Firehose, Kinesis, Lambda, Redshift Data API, SNS, SQS, **Step Functions**, Timestream |
 | **Payload** | **6 MB** nos Pipes; o limite efetivo é o **menor** entre Pipes e destino (Lambda 6 MB, event bus 1 MB, **Step Functions 256 KB**) |
-| **Batching** | O tamanho do lote da origem não pode exceder o máximo do destino — o Kinesis permite 10,000 registros, mas um destino SQS permite só 10, então o pipe fica limitado a **10** |
+| **Batching** | O tamanho do lote da origem não pode exceder o máximo do destino, o Kinesis permite 10,000 registros, mas um destino SQS permite só 10, então o pipe fica limitado a **10** |
 | **Concorrência** | DynamoDB/Kinesis = `ParallelizationFactor` × shards; Kafka = partições (teto 1,000); Amazon MQ 5; SQS 1,250 |
-| **Teto rígido** | Timeout de execução do pipe de **5 minutos**, incluindo enriquecimento e destino — não elevável |
+| **Teto rígido** | Timeout de execução do pipe de **5 minutos**, incluindo enriquecimento e destino: não elevável |
 | **Preços** | **$0.40 por milhão de requisições**, cada bloco de **64 KB** conta como uma requisição, e **apenas os eventos filtrados são cobrados** (em outubro de 2026) |
 
-### 6.2 Exemplo resolvido E8 — cobrança dos Pipes com um filtro
+### 6.2 Exemplo resolvido E8: cobrança dos Pipes com um filtro
 
 Um pipe consome **10,000,000 de mensagens SQS**, um filtro deixa passar **25%**, e o batching é de **5 mensagens por requisição** (exemplo da página de preços do Step Functions, em outubro de 2026):
 
@@ -507,7 +507,7 @@ requisições          = 2,500,000 / 5     =   500,000
 custo                = 500,000 / 1,000,000 x $0.40 = $0.20
 ```
 
-**$0.20 para dez milhões de mensagens** — porque o filtro roda antes da cobrança. O princípio examinável: **filtre cedo, faça batching até o máximo do destino e lembre-se do teto de 5 minutos do pipe.**
+**$0.20 para dez milhões de mensagens**: porque o filtro roda antes da cobrança. O princípio examinável: **filtre cedo, faça batching até o máximo do destino e lembre-se do teto de 5 minutos do pipe.**
 
 ### 6.3 Scheduler: schedules sem rule
 
@@ -517,12 +517,12 @@ A AWS recomenda o **EventBridge Scheduler** para invocar targets por schedule, e
 |---|---|---|
 | Tipos de schedule | **rate**, **cron**, **one-time** (`at(2026-11-01T09:00:00)`) | apenas `rate()` e `cron()` |
 | Fusos horários | **Fusos IANA**; horário de verão tratado automaticamente | **somente UTC** |
-| Janela flexível | `Mode: FLEXIBLE` + `MaximumWindowInMinutes` **1–1440** | nenhuma |
+| Janela flexível | `Mode: FLEXIBLE` + `MaximumWindowInMinutes` **1 to 1440** | nenhuma |
 | Targets | Templated (Lambda, SQS, Kinesis, SNS, ECS, Batch, **start do Glue**, **start do Step Functions**, SageMaker, SSM, API destination) ou universal (qualquer API da AWS) | Máx. **5** targets |
 | Retry/DLQ por target | `RetryPolicy` ≤ **185** retries, idade ≤ **24 h**, mais uma **DLQ** | Mesmas faixas de retry |
 | Quotas (em outubro de 2026) | **10,000,000** schedules/região, **500** grupos, **10 TPS** por schedule, precisão de **60 segundos** | **300** rules/bus |
 
-A **janela de tempo flexível** é o recurso em que as questões de exame se apoiam: `MaximumWindowInMinutes: 60` significa que um job noturno agendado para 01:00 pode disparar **em qualquer momento entre 01:00 e 02:00** — perfeito para janelas de batch que precisam absorver picos de carga, errado para um job que precisa começar exatamente às 01:00:00.
+A **janela de tempo flexível** é o recurso em que as questões de exame se apoiam: `MaximumWindowInMinutes: 60` significa que um job noturno agendado para 01:00 pode disparar **em qualquer momento entre 01:00 e 02:00**: perfeito para janelas de batch que precisam absorver picos de carga, errado para um job que precisa começar exatamente às 01:00:00.
 
 ### 6.4 Quatro coisas que "rodam por schedule" (não misture)
 
@@ -559,7 +559,7 @@ Um **ambiente Amazon MWAA** é um pacote de componentes gerenciados (documentaç
  ------------------------------------------------------------------
 ```
 
-Você abre mão de SSH, **imagens customizadas**, filas SQS customizadas e escolha de executor — **somente Celery** — em troca de a AWS rodar o plano de controle, o Aurora, o Fargate, o logging e a sua fiação de VPC. Atualizações em DAGs existentes são percebidas em cerca de **30 segundos**.
+Você abre mão de SSH, **imagens customizadas**, filas SQS customizadas e escolha de executor, **somente Celery**, em troca de a AWS rodar o plano de controle, o Aurora, o Fargate, o logging e a sua fiação de VPC. Atualizações em DAGs existentes são percebidas em cerca de **30 segundos**.
 
 ### 7.2 Classes de worker e autoscaling (em outubro de 2026)
 
@@ -572,7 +572,7 @@ Você abre mão de SSH, **imagens customizadas**, filas SQS customizadas e escol
 | `mw1.xlarge`  | 2,000 | 40 | Sim |
 | `mw1.2xlarge` | 4,000 | 80 | Sim |
 
-Workers são adicionados conforme `(RunningTasks + QueuedTasks) / tasks-por-worker`, até `max-workers`. O padrão de `celery.worker_autoscale` por classe (3 / 5 / 10 / 20 / 40 / 80) é o que manda, e **`celery.worker_concurrency` é sobrescrito** — definir não faz nada.
+Workers são adicionados conforme `(RunningTasks + QueuedTasks) / tasks-por-worker`, até `max-workers`. O padrão de `celery.worker_autoscale` por classe (3 / 5 / 10 / 20 / 40 / 80) é o que manda, e **`celery.worker_concurrency` é sobrescrito**: definir não faz nada.
 
 ### 7.3 Operators e dependências
 
@@ -582,7 +582,7 @@ Os DAGs ficam no **S3**, as dependências em `requirements.txt` (pip3) e `plugin
 |---|---|
 | `S3KeySensor` (frequentemente `mode="reschedule"`) | Esperar um arquivo aterrissar |
 | `GlueCrawlerOperator` / `GlueCrawlerSensor` | Rodar ou aguardar um crawler |
-| **`GlueJobOperator`** (+ `Sensor`, `deferrable=True`) | Rodar ou aguardar um job do Glue — `AWSGlueJobOperator` está **depreciado** |
+| **`GlueJobOperator`** (+ `Sensor`, `deferrable=True`) | Rodar ou aguardar um job do Glue: `AWSGlueJobOperator` está **depreciado** |
 | `RedshiftDataOperator` | Rodar SQL pela Redshift Data API |
 | `SQLExecuteQueryOperator` | Execução genérica de SQL |
 | `RedshiftToS3Operator` | Descarregar dados do warehouse para o S3 |
@@ -601,7 +601,7 @@ flowchart TD
     N --> X["DAG marcada como falha - a UI do Airflow mostra a task instance"]
 ```
 
-### 7.4 Exemplo resolvido E9 — precificando um ambiente MWAA
+### 7.4 Exemplo resolvido E9: precificando um ambiente MWAA
 
 O próprio exemplo worked da AWS para um ambiente `mw1.small` num mês de **31 dias**: **1 ambiente**, **49 workers rodando 1 hora por dia**, **10 GB** de armazenamento do banco de metadados (preços do MWAA, us-east-1, em outubro de 2026):
 
@@ -615,11 +615,11 @@ total                                   $449.11 / mês
 
 Para comparação, `mw1.large` custa **$0.99/h** para o ambiente, com workers e schedulers extras a **$0.22/h** e um web server extra a **$0.11/h**, e o MWAA Serverless cobra as AWS Managed Tasks a **$0.080 por hora de tempo de task** (mínimo de 1 minuto, cobrança de 1 segundo). Outras quotas: **10 ambientes por região** (5 de `mw1.xlarge`/`mw1.2xlarge`), **25 workers por ambiente** (50 após aumento de quota), **5 webservers**, **20 GB** de armazenamento de task.
 
-- **📚 Você sabia?** A fila Celery do MWAA é uma **fila Amazon SQS gerenciada pela AWS que você não pode criar, substituir ou configurar** — e é por isso que questões que oferecem "trazer sua própria fila SQS para o MWAA" ou "ajustar `celery.worker_concurrency`" estão erradas. O que você *ajusta* de verdade é a **classe de worker**, e essa única escolha move tanto a capacidade de DAGs quanto a concorrência padrão de tasks: `mw1.small` → `mw1.medium` muda o padrão de **5 para 10** tasks por worker (documentação do AWS MWAA, acesso em outubro de 2026).
+- **📚 Você sabia?** A fila Celery do MWAA é uma **fila Amazon SQS gerenciada pela AWS que você não pode criar, substituir ou configurar**, e é por isso que questões que oferecem "trazer sua própria fila SQS para o MWAA" ou "ajustar `celery.worker_concurrency`" estão erradas. O que você *ajusta* de verdade é a **classe de worker**, e essa única escolha move tanto a capacidade de DAGs quanto a concorrência padrão de tasks: `mw1.small` → `mw1.medium` muda o padrão de **5 para 10** tasks por worker (documentação do AWS MWAA, acesso em outubro de 2026).
 
 ### 7.5 MWAA Serverless
 
-O **MWAA Serverless** elimina o ambiente sempre ligado: DAGs em YAML mais um pacote de código no S3, agendamento **por task com pay-per-use** apoiado no EventBridge Scheduler, uma **role de execução por workflow** e computação isolada. É a resposta serverless dentro da família Airflow — mas os conceitos do Airflow, o arquivo de DAG e os operators são os mesmos. (Documentação do AWS MWAA Serverless, acesso em outubro de 2026; a disponibilidade por região não é repetida aqui porque a lista de lançamento não pôde ser verificada em outubro de 2026.)
+O **MWAA Serverless** elimina o ambiente sempre ligado: DAGs em YAML mais um pacote de código no S3, agendamento **por task com pay-per-use** apoiado no EventBridge Scheduler, uma **role de execução por workflow** e computação isolada. É a resposta serverless dentro da família Airflow, mas os conceitos do Airflow, o arquivo de DAG e os operators são os mesmos. (Documentação do AWS MWAA Serverless, acesso em outubro de 2026; a disponibilidade por região não é repetida aqui porque a lista de lançamento não pôde ser verificada em outubro de 2026.)
 
 ---
 
@@ -627,7 +627,7 @@ O **MWAA Serverless** elimina o ambiente sempre ligado: DAGs em YAML mais um pac
 
 ### 8.1 Uma entidade, dois grafos
 
-Um **workflow** do Glue rastreia **jobs + crawlers + triggers como uma única entidade** com uma visão de grafo — um grafo **estático** (design) e um grafo **dinâmico** (status de runtime por nó) (AWS Glue, *Workflows* e *Triggers*, acesso em outubro de 2026).
+Um **workflow** do Glue rastreia **jobs + crawlers + triggers como uma única entidade** com uma visão de grafo: um grafo **estático** (design) e um grafo **dinâmico** (status de runtime por nó) (AWS Glue, *Workflows* e *Triggers*, acesso em outubro de 2026).
 
 ### 8.2 Os três triggers de início
 
@@ -637,11 +637,11 @@ Um **workflow** do Glue rastreia **jobs + crawlers + triggers como uma única en
 | **On-demand** | Começa só quando você o chama; o trigger fica em `CREATED`, nunca em `ACTIVATED` |
 | **Evento do EventBridge** | Começa com um evento, com um **batch size** e uma **batch window** opcionais (padrão = máximo de **900 s / 15 min**); a primeira condição atendida dá início, e sem condições de batching o tamanho cai para **1** por padrão |
 
-Dentro do grafo, os **triggers condicionais** expressam dependências: o job J3 começa depois de **J1 AND J2 `SUCCEEDED`**; o job J4 começa depois de **J1 OR J2 `FAILED`**; um crawler começa depois que os jobs terminam. As **workflow run properties** são pares nome/valor compartilhados que os jobs leem e alteram durante a execução — passagem de estado **sem** XCom do Airflow.
+Dentro do grafo, os **triggers condicionais** expressam dependências: o job J3 começa depois de **J1 AND J2 `SUCCEEDED`**; o job J4 começa depois de **J1 OR J2 `FAILED`**; um crawler começa depois que os jobs terminam. As **workflow run properties** são pares nome/valor compartilhados que os jobs leem e alteram durante a execução: passagem de estado **sem** XCom do Airflow.
 
 ### 8.3 A regra dura
 
-> **Todos os jobs ou crawlers numa cadeia de dependência precisam ser descendentes de um único trigger agendado ou on-demand.** Dependentes disparam apenas se um trigger os iniciou — um crawler que você inicia **na mão** não vai disparar o próximo job do grafo. Cada trigger suporta **≤ 50 jobs** e **≤ 2 crawlers**, e um **Glue workflow é um target de primeira classe do EventBridge**, então uma rule do EventBridge ou um schedule do Scheduler pode iniciar o grafo inteiro.
+> **Todos os jobs ou crawlers numa cadeia de dependência precisam ser descendentes de um único trigger agendado ou on-demand.** Dependentes disparam apenas se um trigger os iniciou: um crawler que você inicia **na mão** não vai disparar o próximo job do grafo. Cada trigger suporta **≤ 50 jobs** e **≤ 2 crawlers**, e um **Glue workflow é um target de primeira classe do EventBridge**, então uma rule do EventBridge ou um schedule do Scheduler pode iniciar o grafo inteiro.
 
 ```text
 Trigger de schedule 02:00 UTC
@@ -659,11 +659,11 @@ Trigger de schedule 02:00 UTC
 
 | Requisição | Glue Workflows | Step Functions |
 |---|---|---|
-| Somente jobs e crawlers do Glue | **Sim — grátis, nativo, um grafo** | Funciona, mas você paga por transição |
+| Somente jobs e crawlers do Glue | **Sim: grátis, nativo, um grafo** | Funciona, mas você paga por transição |
 | Passos que não são do Glue (Redshift, Lambda, SNS, SQS, EMR) | Só via uma passagem pelo EventBridge | **Integrações otimizadas nativas** |
 | Aprovação humana / callback | Não | **`.waitForTaskToken`** |
 | Fan-out sobre um dataset grande | Não | **Distributed Map** |
-| Reparar / retomar um grafo parcialmente executado | **Sim — suportado** | **Redrive** (Standard, 14 dias) |
+| Reparar / retomar um grafo parcialmente executado | **Sim: suportado** | **Redrive** (Standard, 14 dias) |
 
 ---
 
@@ -705,14 +705,14 @@ flowchart TD
 {
   "question": "Associe cada requisição de pipeline ao serviço de orquestração que o exame DEA-C01 espera:",
   "pairs": [
-    {"left": "Job noturno às 01:00 America/New_York com janela flexível de 60 minutos e uma DLQ", "right": "Amazon EventBridge Scheduler - fusos IANA, janela de tempo flexível, RetryPolicy e DeadLetterConfig por target"},
-    {"left": "ETL de três passos com até 5 retries por passo, um gate Choice e uma trilha de auditoria de 14 dias", "right": "AWS Step Functions Standard - exactly-once, duração de 1 ano, histórico de 90 dias, Retry e Catch em cada Task"},
+    {"left": "Job noturno às 01:00 America/New_York com janela flexível de 60 minutos e uma DLQ", "right": "Amazon EventBridge Scheduler: fusos IANA, janela de tempo flexível, RetryPolicy e DeadLetterConfig por target"},
+    {"left": "ETL de três passos com até 5 retries por passo, um gate Choice e uma trilha de auditoria de 14 dias", "right": "AWS Step Functions Standard: exactly-once, duração de 1 ano, histórico de 90 dias, Retry e Catch em cada Task"},
     {"left": "Quarenta tarefas Python interdependentes, gatilho manual com janela de catch-up, UI para a equipe", "right": "Amazon MWAA - DAGs do Airflow no S3 com schedule_interval e backfill"},
-    {"left": "Um stream do Kinesis precisa chegar a uma Lambda para enriquecimento e depois a uma fila SQS, sem código para manter", "right": "Amazon EventBridge Pipes - origem, filtro, enriquecimento, destino dentro de uma execução de 5 minutos"},
-    {"left": "Um job do Glue seguido de um crawler, condicionado a SUCCESS, rastreado como um único grafo", "right": "AWS Glue Workflow - triggers condicionais, grafo estático e dinâmico, reparo/retomada"},
-    {"left": "Fazer fan-out de 12 jobs do Glue particionados em paralelo e depois esperar o aceite humano por até três dias", "right": "AWS Step Functions Standard com Parallel ou Map mais .waitForTaskToken - o Express não espera além de 5 minutos"}
+    {"left": "Um stream do Kinesis precisa chegar a uma Lambda para enriquecimento e depois a uma fila SQS, sem código para manter", "right": "Amazon EventBridge Pipes: origem, filtro, enriquecimento, destino dentro de uma execução de 5 minutos"},
+    {"left": "Um job do Glue seguido de um crawler, condicionado a SUCCESS, rastreado como um único grafo", "right": "AWS Glue Workflow: triggers condicionais, grafo estático e dinâmico, reparo/retomada"},
+    {"left": "Fazer fan-out de 12 jobs do Glue particionados em paralelo e depois esperar o aceite humano por até três dias", "right": "AWS Step Functions Standard com Parallel ou Map mais.waitForTaskToken: o Express não espera além de 5 minutos"}
   ],
-  "explanation": "O exame raramente pergunta qual serviço CONSEGUE fazer o trabalho; ele pergunta qual é o melhor ajuste. O Scheduler vence em fusos e schedules one-time, o Step Functions em retries/branching/auditoria, o MWAA em ergonomia de DAG e backfill, os Pipes em fan-out de stream sem código, os Glue Workflows em grafos só de Glue - e o Express é desqualificado no momento em que uma espera passa de 5 minutos ou um token de callback é necessário."
+  "explanation": "O exame raramente pergunta qual serviço CONSEGUE fazer o trabalho; ele pergunta qual é o melhor ajuste. O Scheduler vence em fusos e schedules one-time, o Step Functions em retries/branching/auditoria, o MWAA em ergonomia de DAG e backfill, os Pipes em fan-out de stream sem código, os Glue Workflows em grafos só de Glue, e o Express é desqualificado no momento em que uma espera passa de 5 minutos ou um token de callback é necessário."
 }
 ```
 
@@ -735,10 +735,10 @@ flowchart TD
 
 A entrega é **at-least-once** quase em todo lugar (execuções Express, targets do EventBridge, SQS, Pipes), então a reprodução só é segura se o processamento for idempotente:
 
-- **Escrita condicional no DynamoDB** — `ConditionExpression: attribute_not_exists(pk)` falha com `DynamoDB.ConditionalCheckFailedException`, que um `Catch` pode absorver; ramos paralelos competindo por um lock usam exatamente esse truque.
-- **`@idempotent` do Lambda Powertools com TTL** — a segunda invocação do mesmo evento devolve o resultado em cache.
+- **Escrita condicional no DynamoDB**: `ConditionExpression: attribute_not_exists(pk)` falha com `DynamoDB.ConditionalCheckFailedException`, que um `Catch` pode absorver; ramos paralelos competindo por um lock usam exatamente esse truque.
+- **`@idempotent` do Lambda Powertools com TTL**: a segunda invocação do mesmo evento devolve o resultado em cache.
 - **Cabeçalho `Idempotency-Key` a montante** para pipelines dirigidos por API.
-- **Job bookmarks do Glue** — o equivalente do lado da transformação: o estado rastreado entre `job.init` e `job.commit` evita reprocessamento (Lição 03).
+- **Job bookmarks do Glue**, o equivalente do lado da transformação: o estado rastreado entre `job.init` e `job.commit` evita reprocessamento (Lição 03).
 
 ### 10.3 Redrive, retry e replay são três coisas diferentes
 
@@ -748,9 +748,9 @@ A entrega é **at-least-once** quase em todo lugar (execuções Express, targets
 | **Redrive** | Reiniciar **execuções Standard que falharam** de onde pararam | **Somente Standard**, execuções dos **últimos 14 dias** que falharam, foram abortadas ou estouraram timeout, mesma entrada e mesma definição, histórico **< 24,999 eventos**, apenas para falhas *não tratadas* |
 | **Replay da DLQ** | Republicar uma mensagem estacionada | Mensagem nova, então o downstream precisa ser **idempotente** |
 
-O Step Functions também emite eventos de mudança de status de execução para o **bus default do EventBridge**, então uma rule pode observar `ExecutionFailed` e invocar uma Lambda que chama `RedriveExecution` — orquestração se curando sozinha.
+O Step Functions também emite eventos de mudança de status de execução para o **bus default do EventBridge**, então uma rule pode observar `ExecutionFailed` e invocar uma Lambda que chama `RedriveExecution`: orquestração se curando sozinha.
 
-### 10.4 Exemplo resolvido E10 — projetando o caminho de recuperação
+### 10.4 Exemplo resolvido E10: projetando o caminho de recuperação
 
 ```text
 Falha             : 40 execuções Standard falham em glue:startJobRun.sync
@@ -781,7 +781,7 @@ Alertas           : alarme do CloudWatch em ExecutionsFailed -> tópico SNS
 ```fillblank
 {
   "question": "Complete as afirmações de resiliência com o próprio vocabulário do exame:",
-  "template": "Um target de rule do EventBridge tenta de novo por até {{1}} horas e até {{2}} tentativas com backoff exponencial e jitter antes de o evento ser copiado para uma {{3}}, que precisa ser uma fila {{4}} na mesma região - uma fila FIFO não é permitida. Um workflow Standard do Step Functions que precisa retomar após uma falha não tratada pode ser {{5}} dentro dos últimos 14 dias, desde que seu histórico fique abaixo de 24,999 eventos.",
+  "template": "Um target de rule do EventBridge tenta de novo por até {{1}} horas e até {{2}} tentativas com backoff exponencial e jitter antes de o evento ser copiado para uma {{3}}, que precisa ser uma fila {{4}} na mesma região: uma fila FIFO não é permitida. Um workflow Standard do Step Functions que precisa retomar após uma falha não tratada pode ser {{5}} dentro dos últimos 14 dias, desde que seu histórico fique abaixo de 24,999 eventos.",
   "answers": {
     "1": "24",
     "2": "185",
@@ -790,25 +790,25 @@ Alertas           : alarme do CloudWatch em ExecutionsFailed -> tópico SNS
     "5": "redriven"
   },
   "distractors": ["12", "240", "5", "1,000", "FIFO", "partitioned", "replayed", "compensated", "throttled"],
-  "explanation": "Entrega padrão de target do EventBridge: MaxEventAgeInSeconds padrão 86,400 (24 horas), MaxRetryAttempts padrão 185, backoff exponencial com jitter e então a DLQ - que a AWS declara precisar ser uma fila padrão do SQS na mesma região (não se pode usar uma fila FIFO como DLQ no EventBridge). O redrive é somente para Standard, cobre execuções que falharam, foram abortadas ou estouraram timeout nos últimos 14 dias e exige histórico abaixo de 24,999 eventos; workflows Express não têm histórico armazenado para redrive."
+  "explanation": "Entrega padrão de target do EventBridge: MaxEventAgeInSeconds padrão 86,400 (24 horas), MaxRetryAttempts padrão 185, backoff exponencial com jitter e então a DLQ: que a AWS declara precisar ser uma fila padrão do SQS na mesma região (não se pode usar uma fila FIFO como DLQ no EventBridge). O redrive é somente para Standard, cobre execuções que falharam, foram abortadas ou estouraram timeout nos últimos 14 dias e exige histórico abaixo de 24,999 eventos; workflows Express não têm histórico armazenado para redrive."
 }
 ```
 
 > [!WARNING]
-> ⚠️ **Idempotência não é opcional, é a licença para reproduzir.** Workflows Express são **at-least-once**, targets do EventBridge podem entregar mais de uma vez, o SQS padrão é at-least-once, e o replay da DLQ cria uma mensagem **nova**. Todos os padrões desta seção — redrive, backfill, replay de DLQ, retries de Map distribuído — assumem que as escritas no destino são condicionais (`ConditionExpression` do DynamoDB), deduplicadas (chaves de idempotência do Lambda Powertools) ou rastreadas por estado (job bookmarks do Glue). Sem uma delas, um pipeline "resiliente" é simplesmente um pipeline que corrompe os dados duas vezes.
+> ⚠️ **Idempotência não é opcional, é a licença para reproduzir.** Workflows Express são **at-least-once**, targets do EventBridge podem entregar mais de uma vez, o SQS padrão é at-least-once, e o replay da DLQ cria uma mensagem **nova**. Todos os padrões desta seção, redrive, backfill, replay de DLQ, retries de Map distribuído, assumem que as escritas no destino são condicionais (`ConditionExpression` do DynamoDB), deduplicadas (chaves de idempotência do Lambda Powertools) ou rastreadas por estado (job bookmarks do Glue). Sem uma delas, um pipeline "resiliente" é simplesmente um pipeline que corrompe os dados duas vezes.
 
 ### Atualizações de 2026 (em outubro de 2026)
 
 > [!NOTE]
-> **O que mudou na orquestração entre 2024 e outubro de 2026** — cada linha foi conferida contra uma fonte primária da AWS em **outubro de 2026**, e cada uma é examinável porque o exame testa o comportamento *atual*:
-> - **O Step Functions cresceu de novo**: em **2026-03-26** foram adicionadas **28 integrações / 1,100+ APIs** ao SDK (incluindo Bedrock AgentCore e S3 Vectors), levando o total a **mais de 220 serviços da AWS** — AWS What's New, 2026-03-26; *recent launches* do Step Functions, acesso em outubro de 2026.
-> - **As fontes de dados do Distributed Map se expandiram**: em **2025-09-18** vieram fontes de **manifests do Athena e Parquet**, **iteração por prefixo do S3** (`Transformation: LOAD_AND_FLATTEN`, o prefixo precisa terminar em `/`) e **observabilidade** do Distributed Map; em **2025-02-07** chegou uma opção de saída para o Distributed Map — AWS What's New; blog da AWS, 2025-10-24 (o anúncio do `s3:listObjectsV2` com load-and-flatten).
-> - **Os limites do Map não mudaram**: o Map inline continua com **40** iterações concorrentes, o Distributed Map continua com **10,000** execuções filhas, payload do filho de **256 KiB** (8 MB por item com `ItemSelector`), teto de histórico de **25,000** eventos — quotas de serviço do AWS Step Functions e *Map state*, acesso em outubro de 2026.
-> - **As versões do Airflow no MWAA avançaram**: **Airflow 3.2** anunciado em **2026-04-01**, **Airflow 2.11.0** em **2026-01-07** com **Python 3.12** — AWS What's New, 2026-04-01; histórico de versões do MWAA, acesso em outubro de 2026. Diga "**Airflow 3.2.x e 2.11.x em outubro de 2026**"; a lista exata de patches não pôde ser verificada.
-> - **Aviso de fato obsoleto — deriva de versão do Glue**: notas de 2024 dizendo "Glue 3.0/4.0" estão desatualizadas. **O Glue 5.1 é o padrão para jobs novos desde 2025-11-26** e o **Glue 6.0 foi para GA em 2026-08-21** com **redução de preço de 30%**; Glue **0.9/1.0/2.0 chegou ao end of life em 2026-04-01**, e o Python Shell 3.6 não pode ser criado depois de 2026-03-31 — notas de versão do AWS Glue, política de suporte a versões e What's New, acesso em outubro de 2026. Um workflow que fixa uma versão do Glue em EOL é uma resposta errada.
-> - **O Glue 6.0 quebra código antigo de jobs**: no Glue **6.0** (GA **2026-08-21**) **o EMRFS foi removido** — o S3A é o único filesystem Hadoop para S3 e as opções `fs.s3.consistent.*` ficaram obsoletas — o **AWS SDK for Java v1 foi removido** (somente v2, boto3 não afetado), e o binário do Scala vai de **2.12 → 2.13** — AWS Glue, *Migrating your AWS Glue jobs to version 6.0*, acesso em outubro de 2026. Um job do Glue ligado a um workflow que ainda importa `com.amazonaws.services.*` falha no 6.0, então verifique `GlueVersion` antes de aceitar um design de pipeline.
-> - **Fósseis de nome de serviço em definições de pipeline**: o **Kinesis Data Analytics for SQL foi descontinuado em 2026-01-27** — use o **Amazon Managed Service for Apache Flink** — e embora a lista no escopo do DEA-C01 ainda imprima *Amazon Kinesis Data Firehose*, o produto é **Amazon Data Firehose** desde **2024-02-09**, **sem mudança em endpoints, APIs, CLI, policies de IAM ou métricas do CloudWatch** — página de recursos do AWS Kinesis Data Analytics (vigente a partir de 2026-01-27); AWS What's New, 2024-02-09; página de serviços no escopo do DEA-C01, acesso em outubro de 2026. Qualquer um dos nomes é válido numa alternativa de resposta; nunca "corrija" um contra o outro.
-> - **A lista no escopo de Application Integration não mudou**: na **v1.1 (2025-12-12)** do guia do exame a categoria ainda lê **Amazon AppFlow, Amazon EventBridge, Amazon MWAA, Amazon SNS, Amazon SQS, AWS Step Functions**; as adições da v1.1 (Aurora, Amazon Q, Bedrock, Kendra, Data Exchange, S3 Tables) caíram em outras categorias, e Cloud9, CodeCommit e AWS SCT saíram da lista no escopo — revisões do guia do exame DEA-C01 e páginas no escopo, acesso em outubro de 2026.
+> **O que mudou na orquestração entre 2024 e outubro de 2026**: cada linha foi conferida contra uma fonte primária da AWS em **outubro de 2026**, e cada uma é examinável porque o exame testa o comportamento *atual*:
+> - **O Step Functions cresceu de novo**: em **2026-03-26** foram adicionadas **28 integrações / 1,100+ APIs** ao SDK (incluindo Bedrock AgentCore e S3 Vectors), levando o total a **mais de 220 serviços da AWS**: AWS What's New, 2026-03-26; *recent launches* do Step Functions, acesso em outubro de 2026.
+> - **As fontes de dados do Distributed Map se expandiram**: em **2025-09-18** vieram fontes de **manifests do Athena e Parquet**, **iteração por prefixo do S3** (`Transformation: LOAD_AND_FLATTEN`, o prefixo precisa terminar em `/`) e **observabilidade** do Distributed Map; em **2025-02-07** chegou uma opção de saída para o Distributed Map: AWS What's New; blog da AWS, 2025-10-24 (o anúncio do `s3:listObjectsV2` com load-and-flatten).
+> - **Os limites do Map não mudaram**: o Map inline continua com **40** iterações concorrentes, o Distributed Map continua com **10,000** execuções filhas, payload do filho de **256 KiB** (8 MB por item com `ItemSelector`), teto de histórico de **25,000** eventos: quotas de serviço do AWS Step Functions e *Map state*, acesso em outubro de 2026.
+> - **As versões do Airflow no MWAA avançaram**: **Airflow 3.2** anunciado em **2026-04-01**, **Airflow 2.11.0** em **2026-01-07** com **Python 3.12**: AWS What's New, 2026-04-01; histórico de versões do MWAA, acesso em outubro de 2026. Diga "**Airflow 3.2.x e 2.11.x em outubro de 2026**"; a lista exata de patches não pôde ser verificada.
+> - **Aviso de fato obsoleto, deriva de versão do Glue**: notas de 2024 dizendo "Glue 3.0/4.0" estão desatualizadas. **O Glue 5.1 é o padrão para jobs novos desde 2025-11-26** e o **Glue 6.0 foi para GA em 2026-08-21** com **redução de preço de 30%**; Glue **0.9/1.0/2.0 chegou ao end of life em 2026-04-01**, e o Python Shell 3.6 não pode ser criado depois de 2026-03-31, notas de versão do AWS Glue, política de suporte a versões e What's New, acesso em outubro de 2026. Um workflow que fixa uma versão do Glue em EOL é uma resposta errada.
+> - **O Glue 6.0 quebra código antigo de jobs**: no Glue **6.0** (GA **2026-08-21**) **o EMRFS foi removido**, o S3A é o único filesystem Hadoop para S3 e as opções `fs.s3.consistent.*` ficaram obsoletas, o **AWS SDK for Java v1 foi removido** (somente v2, boto3 não afetado), e o binário do Scala vai de **2.12 → 2.13**: AWS Glue, *Migrating your AWS Glue jobs to version 6.0*, acesso em outubro de 2026. Um job do Glue ligado a um workflow que ainda importa `com.amazonaws.services.*` falha no 6.0, então verifique `GlueVersion` antes de aceitar um design de pipeline.
+> - **Fósseis de nome de serviço em definições de pipeline**: o **Kinesis Data Analytics for SQL foi descontinuado em 2026-01-27**: use o **Amazon Managed Service for Apache Flink**, e embora a lista no escopo do DEA-C01 ainda imprima *Amazon Kinesis Data Firehose*, o produto é **Amazon Data Firehose** desde **2024-02-09**, **sem mudança em endpoints, APIs, CLI, policies de IAM ou métricas do CloudWatch**: página de recursos do AWS Kinesis Data Analytics (vigente a partir de 2026-01-27); AWS What's New, 2024-02-09; página de serviços no escopo do DEA-C01, acesso em outubro de 2026. Qualquer um dos nomes é válido numa alternativa de resposta; nunca "corrija" um contra o outro.
+> - **A lista no escopo de Application Integration não mudou**: na **v1.1 (2025-12-12)** do guia do exame a categoria ainda lê **Amazon AppFlow, Amazon EventBridge, Amazon MWAA, Amazon SNS, Amazon SQS, AWS Step Functions**; as adições da v1.1 (Aurora, Amazon Q, Bedrock, Kendra, Data Exchange, S3 Tables) caíram em outras categorias, e Cloud9, CodeCommit e AWS SCT saíram da lista no escopo: revisões do guia do exame DEA-C01 e páginas no escopo, acesso em outubro de 2026.
 
 - **📚 Você sabia?** A formulação **exactly-once / at-least-once** está estável desde o lançamento do Express em **2019-12-05**, enquanto tudo ao redor mudou: a cobertura de integrações mais que dobrou para **220+ serviços**, o Distributed Map ganhou fontes do S3 e do Athena, e o MWAA passou pelo Airflow 2.4 → 2.11 → 3.0 → 3.2. Para o exame, isso significa que a tabela de *garantias* da Seção 2 é material antigo e durável, enquanto nomes de integrações e números de versão são a parte que você precisa rechecar a cada ciclo de estudos (anúncio do AWS Step Functions, 2019-12-05; recent launches do Step Functions, acesso em outubro de 2026).
 
@@ -816,9 +816,9 @@ Alertas           : alarme do CloudWatch em ExecutionsFailed -> tópico SNS
 
 ## Casos Reais
 
-A AWS publica como essas abstrações aparecem em produção. Todo número abaixo é **afirmação do cliente ou da AWS e não auditado**, com a fonte nomeada para que você possa conferir — o ponto examinável é o **padrão** (qual problema de orquestração foi resolvido, qual serviço fez o trabalho, qual número se moveu), não o marketing.
+A AWS publica como essas abstrações aparecem em produção. Todo número abaixo é **afirmação do cliente ou da AWS e não auditado**, com a fonte nomeada para que você possa conferir, o ponto examinável é o **padrão** (qual problema de orquestração foi resolvido, qual serviço fez o trabalho, qual número se moveu), não o marketing.
 
-### Caso A — Edmunds.com: um batch em fan-out serverless (700 milhões de derivativos em 8 dias)
+### Caso A, Edmunds.com: um batch em fan-out serverless (700 milhões de derivativos em 8 dias)
 
 | Elemento | Detalhe |
 |---|---|
@@ -829,9 +829,9 @@ A AWS publica como essas abstrações aparecem em produção. Todo número abaix
 | Domínio do exame | **Domínio 1** Tarefa 1.3 (orquestrar workflows serverless) com ganchos de custo do Domínio 3 |
 | Fonte | `aws.amazon.com/solutions/case-studies/edmunds-serverless/` (acesso em outubro de 2026) |
 
-Leia isto como a forma de orquestração por trás do **fan-out**: um driver enumera os itens de trabalho (a lista de objetos do S3), cada unidade roda como uma invocação independente, idempotente e curta, e o agregado completa sem um cluster. É a mesma forma de um **Distributed Map com `ItemReader` sobre um prefixo do S3** ou de um **EventBridge Pipe de um stream para uma Lambda** — a ideia examinável é *itens independentes + concorrência limitada + uma condição de conclusão definida*.
+Leia isto como a forma de orquestração por trás do **fan-out**: um driver enumera os itens de trabalho (a lista de objetos do S3), cada unidade roda como uma invocação independente, idempotente e curta, e o agregado completa sem um cluster. É a mesma forma de um **Distributed Map com `ItemReader` sobre um prefixo do S3** ou de um **EventBridge Pipe de um stream para uma Lambda**: a ideia examinável é *itens independentes + concorrência limitada + uma condição de conclusão definida*.
 
-### Caso B — EOS Group: um pipeline de migração em estágios com zero perda de dados
+### Caso B, EOS Group: um pipeline de migração em estágios com zero perda de dados
 
 | Elemento | Detalhe |
 |---|---|
@@ -842,9 +842,9 @@ Leia isto como a forma de orquestração por trás do **fan-out**: um driver enu
 | Domínio do exame | **Domínio 1** (orquestrar um pipeline de múltiplos estágios, Tarefa 1.3) com ganchos de governança do Domínio 2 |
 | Fonte | `aws.amazon.com/solutions/case-studies/eos-group-case-study/` (acesso em outubro de 2026) |
 
-O ponto examinável é a **disciplina de estágio**: full load, CDC, validação e load são *passos separados, ordenados e reexecutáveis com um gate de validação entre eles* — a mesma topologia que você construiu na Seção 3 (Task → Choice → Task → Fail), só que implementada com ferramentas de migração. "Zero perda de dados" é o que um **estado `Choice` sobre um contrato de contagem de linhas** e um **target idempotente** compram para você; "downtime mínimo" é o que **rodar os estágios como um grafo reexecutável** em vez de um script monolítico compra.
+O ponto examinável é a **disciplina de estágio**: full load, CDC, validação e load são *passos separados, ordenados e reexecutáveis com um gate de validação entre eles*: a mesma topologia que você construiu na Seção 3 (Task → Choice → Task → Fail), só que implementada com ferramentas de migração. "Zero perda de dados" é o que um **estado `Choice` sobre um contrato de contagem de linhas** e um **target idempotente** compram para você; "downtime mínimo" é o que **rodar os estágios como um grafo reexecutável** em vez de um script monolítico compra.
 
-### Caso C — Nasdaq: um batch noturno dirigido por prazo em todo o lake house
+### Caso C, Nasdaq: um batch noturno dirigido por prazo em todo o lake house
 
 | Elemento | Detalhe |
 |---|---|
@@ -855,20 +855,20 @@ O ponto examinável é a **disciplina de estágio**: full load, CDC, validação
 | Domínio do exame | **Domínio 1** Tarefa 1.3 (orquestração contra um prazo fixo) com ganchos de desacoplamento armazenamento/computação do Domínio 2 |
 | Fonte | `aws.amazon.com/solutions/case-studies/nasdaq-case-study/` (acesso em outubro de 2026) |
 
-Leia isto como um problema de **prazo**, não de ferramenta: como o caminho de escrita (S3) e o caminho de leitura (Redshift/Spectrum) estão desacoplados, carregar e consultar nunca disputam a mesma capacidade, então o orquestrador pode reiniciar um estágio que falhou sem pausar os analistas — e uma execução atrasada degrada um estágio em vez da noite inteira. É o mesmo raciocínio que torna um **grafo reexecutável com um gate de validação** (Caso B, Seção 3) a resposta padrão quando uma questão descreve um batch que simplesmente *não pode* se atrasar.
+Leia isto como um problema de **prazo**, não de ferramenta: como o caminho de escrita (S3) e o caminho de leitura (Redshift/Spectrum) estão desacoplados, carregar e consultar nunca disputam a mesma capacidade, então o orquestrador pode reiniciar um estágio que falhou sem pausar os analistas, e uma execução atrasada degrada um estágio em vez da noite inteira. É o mesmo raciocínio que torna um **grafo reexecutável com um gate de validação** (Caso B, Seção 3) a resposta padrão quando uma questão descreve um batch que simplesmente *não pode* se atrasar.
 
-### Caso D — AGCO: um pipeline de streaming que uma pessoa só consegue operar
+### Caso D, AGCO: um pipeline de streaming que uma pessoa só consegue operar
 
 | Elemento | Detalhe |
 |---|---|
 | Cliente | **AGCO**, fabricante de máquinas agrícolas |
 | Desafio | Telemetria de **centenas de milhares de máquinas**, antes medida por contratos caros de terceiros |
 | Serviços | **Kinesis Data Streams → Kinesis Data Firehose → Amazon S3**, **Kinesis Data Analytics for Apache Flink**, mais Lambda, DynamoDB, OpenSearch e ECS (nomes de serviço como a AWS os publicou na fonte) |
-| Resultados | No ar desde **janeiro de 2020**, **1,200 pontos de dados por minuto** por máquina (testado até **10,000**), **1.5 bilhão** de registros retidos, **redução de 78% no custo**, tempo de carregamento da tela **8–30 s → 600 ms**, operado por **1 pessoa em vez de 3–5** (afirmação do cliente, acesso em outubro de 2026) |
+| Resultados | No ar desde **janeiro de 2020**, **1,200 pontos de dados por minuto** por máquina (testado até **10,000**), **1.5 bilhão** de registros retidos, **redução de 78% no custo**, tempo de carregamento da tela **8 to 30 s → 600 ms**, operado por **1 pessoa em vez de 3 to 5** (afirmação do cliente, acesso em outubro de 2026) |
 | Domínio do exame | **Domínio 1** Tarefa 1.3 com **1.3.2** (pipelines resilientes e escaláveis) |
 | Fonte | AWS Architecture Monthly, dezembro de 2021 (p.10); blog AWS Industries, 2021-03-03 (acesso em outubro de 2026) |
 
-Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínua é orquestrado por back-pressure e buffering em vez de por um schedule, então a checklist de resiliência da Seção 1.2 se move para dentro dos consumidores — retries com backoff na etapa de enriquecimento da Lambda, uma zona de aterrissagem durável (S3) para que uma falha a jusante reproduza a partir do buffer, e alarmes do CloudWatch em vez de um humano olhando um painel. "Uma pessoa em vez de três a cinco" é o dividendo operacional sobre o qual o exame realmente pergunta quando testa a habilidade **1.3.2**.
+Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínua é orquestrado por back-pressure e buffering em vez de por um schedule, então a checklist de resiliência da Seção 1.2 se move para dentro dos consumidores: retries com backoff na etapa de enriquecimento da Lambda, uma zona de aterrissagem durável (S3) para que uma falha a jusante reproduza a partir do buffer, e alarmes do CloudWatch em vez de um humano olhando um painel. "Uma pessoa em vez de três a cinco" é o dividendo operacional sobre o qual o exame realmente pergunta quando testa a habilidade **1.3.2**.
 
 | Caso | Princípio de orquestração que ele demonstra | Domínio |
 |---|---|---|
@@ -892,13 +892,13 @@ Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínu
     "Gate de validação de contagem de linhas antes do load no destino",
     "Load idempotente no warehouse de destino"
   ],
-  "explanation": "A ordem é o ponto todo: o full load aterrissa primeiro, o CDC depois reproduz as mudanças que se acumularam enquanto ele rodava, o gate de validação estilo Choice prova as contagens de linhas antes de qualquer coisa ser publicada, e só então roda o load idempotente no warehouse. Cada estágio é separado e reexecutável, então uma falha reproduz um estágio em vez da migração inteira - a mesma topologia Task -> Choice -> Task -> Fail que você construiu na Seção 3, e a disciplina por trás da zero perda de dados reportada pela EOS Group."
+  "explanation": "A ordem é o ponto todo: o full load aterrissa primeiro, o CDC depois reproduz as mudanças que se acumularam enquanto ele rodava, o gate de validação estilo Choice prova as contagens de linhas antes de qualquer coisa ser publicada, e só então roda o load idempotente no warehouse. Cada estágio é separado e reexecutável, então uma falha reproduz um estágio em vez da migração inteira: a mesma topologia Task -> Choice -> Task -> Fail que você construiu na Seção 3, e a disciplina por trás da zero perda de dados reportada pela EOS Group."
 }
 ```
 
-- **📚 Você sabia?** O salto publicado pela Nasdaq de **30 bilhões para 70 bilhões de registros por dia** equivale a cerca de **810,000 registros por segundo sustentados** (70,000,000,000 ÷ 86,400 s — *aritmética derivada, não um número publicado pela AWS*) com uma parada rígida na abertura do mercado, enquanto o pipeline de streaming equivalente da AGCO é operado por **um engenheiro em vez de três a cinco**. Colocados lado a lado, eles fazem a distinção real do exame: um orquestrador de **batch** é julgado por terminar antes do seu prazo, um pipeline de **streaming** por uma pessoa conseguir mantê-lo saudável — as mesmas duas perguntas, feitas a dois modos de falha diferentes (estudo de caso da Nasdaq da AWS; AWS Architecture Monthly, dezembro de 2021, acesso em outubro de 2026).
+- **📚 Você sabia?** O salto publicado pela Nasdaq de **30 bilhões para 70 bilhões de registros por dia** equivale a cerca de **810,000 registros por segundo sustentados** (70,000,000,000 ÷ 86,400 s, *aritmética derivada, não um número publicado pela AWS*) com uma parada rígida na abertura do mercado, enquanto o pipeline de streaming equivalente da AGCO é operado por **um engenheiro em vez de três a cinco**. Colocados lado a lado, eles fazem a distinção real do exame: um orquestrador de **batch** é julgado por terminar antes do seu prazo, um pipeline de **streaming** por uma pessoa conseguir mantê-lo saudável, as mesmas duas perguntas, feitas a dois modos de falha diferentes (estudo de caso da Nasdaq da AWS; AWS Architecture Monthly, dezembro de 2021, acesso em outubro de 2026).
 
-- **📚 Você sabia?** Nenhum dos estudos de caso da AWS nomeia um orquestrador — a AWS publica os *resultados* e deixa a conexão para você. Isso é design deliberado de exame: o DEA-C01 nunca pede que você recorde a escolha de ferramenta de um cliente, ele pede que você reconheça que **700 milhões de itens independentes** implica fan-out com um limite de concorrência (Distributed Map ou Lambda), e que **zero perda de dados numa troca** implica estágios ordenados com validação e escritas idempotentes (estudos de caso da AWS, acesso em outubro de 2026).
+- **📚 Você sabia?** Nenhum dos estudos de caso da AWS nomeia um orquestrador: a AWS publica os *resultados* e deixa a conexão para você. Isso é design deliberado de exame: o DEA-C01 nunca pede que você recorde a escolha de ferramenta de um cliente, ele pede que você reconheça que **700 milhões de itens independentes** implica fan-out com um limite de concorrência (Distributed Map ou Lambda), e que **zero perda de dados numa troca** implica estágios ordenados com validação e escritas idempotentes (estudos de caso da AWS, acesso em outubro de 2026).
 
 ---
 
@@ -916,7 +916,7 @@ Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínu
     "Workflow Standard que faz polling de uma API de aprovação a cada 30 segundos em loop"
   ],
   "correct": 1,
-  "explanation": "Esperar por dias exige Standard: o Express é limitado a 5 minutos, é at-least-once, não armazena histórico e suporta apenas integrações request-response - sem .sync e sem .waitForTaskToken. O padrão de callback com $$.Task.Token mais SendTaskSuccess (e HeartbeatSeconds para que um callback perdido vire States.Timeout) espera sem custo e deixa um histórico de execução de 90 dias. Polling em loop funciona, mas queima uma transição cobrável a cada 30 segundos."
+  "explanation": "Esperar por dias exige Standard: o Express é limitado a 5 minutos, é at-least-once, não armazena histórico e suporta apenas integrações request-response: sem.sync e sem.waitForTaskToken. O padrão de callback com $$.Task.Token mais SendTaskSuccess (e HeartbeatSeconds para que um callback perdido vire States.Timeout) espera sem custo e deixa um histórico de execução de 90 dias. Polling em loop funciona, mas queima uma transição cobrável a cada 30 segundos."
 }
 ```
 
@@ -932,7 +932,7 @@ Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínu
     "Todo serviço com integração otimizada suporta os três padrões"
   ],
   "correct": 2,
-  "explanation": "A disponibilidade de padrões é específica de serviço: Glue, EMR, ECS, Athena e Batch têm .sync; Lambda tem .waitForTaskToken mas não .sync; DynamoDB não tem nenhum; workflows Express não têm nenhum dos padrões. A documentação do console mostra quais linhas oferecem request-response, .sync e .waitForTaskToken - uma alternativa que afirma suporte uniforme entre integrações otimizadas é o distrator clássico."
+  "explanation": "A disponibilidade de padrões é específica de serviço: Glue, EMR, ECS, Athena e Batch têm.sync; Lambda tem.waitForTaskToken mas não.sync; DynamoDB não tem nenhum; workflows Express não têm nenhum dos padrões. A documentação do console mostra quais linhas oferecem request-response,.sync e.waitForTaskToken: uma alternativa que afirma suporte uniforme entre integrações otimizadas é o distrator clássico."
 }
 ```
 
@@ -948,7 +948,7 @@ Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínu
     "O bloco Retry tenta de novo até MaxAttempts ser atingido"
   ],
   "correct": 1,
-  "explanation": "States.ALL é deliberadamente não universal: precisa aparecer sozinho num Catcher (e por último no array Catch), e nunca pode capturar o erro terminal States.DataLimitExceeded nem o erro de definição States.Runtime. States.DataLimitExceeded significa que o limite de payload de estado de 256 KiB foi ultrapassado, o que é uma condição terminal - a execução falha."
+  "explanation": "States.ALL é deliberadamente não universal: precisa aparecer sozinho num Catcher (e por último no array Catch), e nunca pode capturar o erro terminal States.DataLimitExceeded nem o erro de definição States.Runtime. States.DataLimitExceeded significa que o limite de payload de estado de 256 KiB foi ultrapassado, o que é uma condição terminal: a execução falha."
 }
 ```
 
@@ -991,7 +991,7 @@ Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínu
     "Sem política de retry, e um data stream do Kinesis como dead-letter queue"
   ],
   "correct": 0,
-  "explanation": "MaxEventAgeInSeconds aceita 60-86,400 (padrão 86,400 = 24 h) e MaxRetryAttempts 0-185 (padrão do console 185), então 600 segundos mais o teto de tentativas é válido. A DLQ precisa ser uma fila PADRÃO do Amazon SQS na mesma região - a AWS declara explicitamente que não se pode usar uma fila FIFO como DLQ no EventBridge - e precisa ser SQS, não Kinesis. Idade de evento de apenas 10 minutos significa que a mensagem é descartada para a DLQ depois de 10 minutos mesmo que ainda reste retries."
+  "explanation": "MaxEventAgeInSeconds aceita 60-86,400 (padrão 86,400 = 24 h) e MaxRetryAttempts 0-185 (padrão do console 185), então 600 segundos mais o teto de tentativas é válido. A DLQ precisa ser uma fila PADRÃO do Amazon SQS na mesma região: a AWS declara explicitamente que não se pode usar uma fila FIFO como DLQ no EventBridge: e precisa ser SQS, não Kinesis. Idade de evento de apenas 10 minutos significa que a mensagem é descartada para a DLQ depois de 10 minutos mesmo que ainda reste retries."
 }
 ```
 
@@ -1017,13 +1017,13 @@ Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínu
   "type": "multiple-choice",
   "question": "Um stream do Kinesis precisa ser filtrado, enriquecido por uma função Lambda e entregue a uma fila SQS sem código para manter. Qual serviço se encaixa, e qual é a principal restrição?",
   "options": [
-    "Rules do EventBridge num bus custom - limitadas a 5 targets por rule",
-    "EventBridge Pipes - um timeout de execução do pipe fixo em 5 minutos incluindo enriquecimento, e um limite de payload de 6 MB ainda reduzido pelo destino",
-    "EventBridge Scheduler - precisão de schedule de 60 segundos",
-    "AWS Glue Workflows - máximo de 50 jobs por trigger"
+    "Rules do EventBridge num bus custom: limitadas a 5 targets por rule",
+    "EventBridge Pipes: um timeout de execução do pipe fixo em 5 minutos incluindo enriquecimento, e um limite de payload de 6 MB ainda reduzido pelo destino",
+    "EventBridge Scheduler: precisão de schedule de 60 segundos",
+    "AWS Glue Workflows: máximo de 50 jobs por trigger"
   ],
   "correct": 1,
-  "explanation": "Pipes são o caminho de origem-para-destino sem código: origem (Kinesis, DynamoDB stream, SQS, MSK, Amazon MQ, Kafka) - filtro opcional - enriquecimento opcional (Lambda ou Step Functions) - destino. Os limites rígidos são uma execução de pipe de 5 minutos que não pode ser elevada e um payload de 6 MB ainda limitado pelo destino (o Step Functions aceita só 256 KB). Rules precisam de um bus e de um event pattern e não conseguem fazer polling de um stream; o Scheduler é para tempo, não para streams; Glue Workflows orquestram só Glue."
+  "explanation": "Pipes são o caminho de origem-para-destino sem código: origem (Kinesis, DynamoDB stream, SQS, MSK, Amazon MQ, Kafka) - filtro opcional: enriquecimento opcional (Lambda ou Step Functions) - destino. Os limites rígidos são uma execução de pipe de 5 minutos que não pode ser elevada e um payload de 6 MB ainda limitado pelo destino (o Step Functions aceita só 256 KB). Rules precisam de um bus e de um event pattern e não conseguem fazer polling de um stream; o Scheduler é para tempo, não para streams; Glue Workflows orquestram só Glue."
 }
 ```
 
@@ -1045,7 +1045,7 @@ Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínu
   "question": "Um ambiente MWAA está rodando workers mw1.medium e um pipeline enfileira mais tasks do que os workers absorvem. Um engenheiro edita a configuração do Airflow para aumentar celery.worker_concurrency. O que acontece?",
   "options": [
     "A concorrência de tasks sobe para o valor configurado imediatamente",
-    "Nada muda, porque celery.worker_concurrency é sobrescrito pelo MWAA - a capacidade é definida pela classe de worker e pelo celery.worker_autoscale, e o mw1.micro não tem autoscaling nenhum",
+    "Nada muda, porque celery.worker_concurrency é sobrescrito pelo MWAA: a capacidade é definida pela classe de worker e pelo celery.worker_autoscale, e o mw1.micro não tem autoscaling nenhum",
     "O ambiente falha na validação e o arquivo de configuração é rejeitado",
     "A concorrência dobra automaticamente mas o limite de contagem de DAGs cai"
   ],
@@ -1060,7 +1060,7 @@ Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínu
   "type": "multiple-choice",
   "question": "Um trigger condicional do Glue está configurado para iniciar o job2 apenas quando o job1 termina com SUCCEEDED. Um colega inicia o job1 manualmente pelo console; ele termina com sucesso, mas o job2 nunca começa. Por quê?",
   "options": [
-    "Triggers condicionais do Glue só disparam para recursos que eles mesmos iniciaram - a cadeia precisa descer de um único trigger agendado ou on-demand",
+    "Triggers condicionais do Glue só disparam para recursos que eles mesmos iniciaram: a cadeia precisa descer de um único trigger agendado ou on-demand",
     "O job2 exige uma rule do EventBridge porque triggers condicionais não podem referenciar jobs",
     "O crawler rodou primeiro, e um trigger pode conter no máximo dois crawlers",
     "Execuções manuais sempre contornam a lógica do workflow porque não são rastreadas no grafo"
@@ -1082,7 +1082,7 @@ Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínu
     "Aumentar MaxAttempts na definição da máquina de estados e reexecutar do zero, já que o redrive reexecuta o workflow inteiro"
   ],
   "correct": 0,
-  "explanation": "O redrive reinicia execuções Standard que falharam, foram abortadas ou estouraram timeout dos últimos 14 dias, a partir do estado que falhou, com a mesma entrada e a mesma definição, desde que o histórico fique abaixo de 24,999 eventos - e ele se aplica apenas a falhas não tratadas, que são estas. O Step Functions não cria DLQs para você (um Catch que publica no SQS/SNS é o padrão), o Express não tem histórico armazenado para redrive, e o redrive não reinicia do começo."
+  "explanation": "O redrive reinicia execuções Standard que falharam, foram abortadas ou estouraram timeout dos últimos 14 dias, a partir do estado que falhou, com a mesma entrada e a mesma definição, desde que o histórico fique abaixo de 24,999 eventos: e ele se aplica apenas a falhas não tratadas, que são estas. O Step Functions não cria DLQs para você (um Catch que publica no SQS/SNS é o padrão), o Express não tem histórico armazenado para redrive, e o redrive não reinicia do começo."
 }
 ```
 
@@ -1092,13 +1092,13 @@ Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínu
   "type": "multiple-choice",
   "question": "Uma task está configurada com Retry: IntervalSeconds 30, MaxAttempts 5, BackoffRate 2.0, JitterStrategy NONE. A task falha em todas as tentativas. Qual é a espera total de backoff acumulada antes de a task ser declarada falha e o Catch assumir?",
   "options": [
-    "30 segundos - apenas o primeiro backoff é aplicado",
-    "480 segundos - o backoff final domina o cronograma",
+    "30 segundos, apenas o primeiro backoff é aplicado",
+    "480 segundos: o backoff final domina o cronograma",
     "930 segundos (15.5 minutos)",
-    "465 segundos - a média das cinco esperas"
+    "465 segundos: a média das cinco esperas"
   ],
   "correct": 2,
-  "explanation": "Os retriers são aplicados após cada tentativa falha com crescimento exponencial: 30 + 60 + 120 + 240 + 480 = 930 segundos (15.5 minutos) antes de a task ser declarada falha, momento em que a entrada de Catch correspondente roda - a aritmética trabalhada na Seção 3.5. BackoffRate 2.0 dobra o intervalo a cada vez, JitterStrategy NONE significa nenhuma randomização dentro da janela (FULL randomizaria cada atraso na sua janela), e as esperas são transições de estado cobráveis, então um Wait em loop ou uma task com muitos retries é um medidor que você liga de propósito."
+  "explanation": "Os retriers são aplicados após cada tentativa falha com crescimento exponencial: 30 + 60 + 120 + 240 + 480 = 930 segundos (15.5 minutos) antes de a task ser declarada falha, momento em que a entrada de Catch correspondente roda: a aritmética trabalhada na Seção 3.5. BackoffRate 2.0 dobra o intervalo a cada vez, JitterStrategy NONE significa nenhuma randomização dentro da janela (FULL randomizaria cada atraso na sua janela), e as esperas são transições de estado cobráveis, então um Wait em loop ou uma task com muitos retries é um medidor que você liga de propósito."
 }
 ```
 
@@ -1108,48 +1108,48 @@ Aqui o gatilho é **o stream, não um cron**: um pipeline em execução contínu
   "type": "multiple-choice",
   "question": "Um pipeline precisa de um job do Glue, depois de um crawler, depois de uma aprovação de publicação de dados que um humano pode segurar por dois dias, e então de um load no Redshift. Qual escolha de orquestração está correta?",
   "options": [
-    "AWS Glue Workflow - adicionar um trigger condicional após o crawler que espera pela aprovação e então inicia o load",
-    "EventBridge Scheduler - um schedule at() para o e-mail de aprovação e um segundo para o load 48 horas depois",
+    "AWS Glue Workflow: adicionar um trigger condicional após o crawler que espera pela aprovação e então inicia o load",
+    "EventBridge Scheduler: um schedule at() para o e-mail de aprovação e um segundo para o load 48 horas depois",
     "Amazon MWAA com um GlueCrawlerOperator e um schedule_interval de dois dias",
-    "AWS Step Functions Standard - .sync no job do Glue e no crawler, depois um estado de aprovação .waitForTaskToken, e então o load no Redshift"
+    "AWS Step Functions Standard -.sync no job do Glue e no crawler, depois um estado de aprovação.waitForTaskToken, e então o load no Redshift"
   ],
   "correct": 3,
-  "explanation": "Aprovação humana com trilha de auditoria completa é o padrão de callback: workflow Standard mais .waitForTaskToken (e HeartbeatSeconds para que um callback perdido falhe rápido) - o Express não espera além de 5 minutos e não tem histórico armazenado. Glue Workflows orquestram apenas jobs e crawlers do Glue: não têm nenhuma primitiva de aprovação humana ou callback (Seção 8.4), então o design correto é ou um grafo do Step Functions ou uma passagem pelo EventBridge saindo do Glue. Um par de at() do Scheduler codifica tempo, não ordem nem estado de aprovação, e o MWAA só funcionaria acrescentando um ambiente inteiro mais um sensor para um pipeline de quatro passos."
+  "explanation": "Aprovação humana com trilha de auditoria completa é o padrão de callback: workflow Standard mais.waitForTaskToken (e HeartbeatSeconds para que um callback perdido falhe rápido) - o Express não espera além de 5 minutos e não tem histórico armazenado. Glue Workflows orquestram apenas jobs e crawlers do Glue: não têm nenhuma primitiva de aprovação humana ou callback (Seção 8.4), então o design correto é ou um grafo do Step Functions ou uma passagem pelo EventBridge saindo do Glue. Um par de at() do Scheduler codifica tempo, não ordem nem estado de aprovação, e o MWAA só funcionaria acrescentando um ambiente inteiro mais um sensor para um pipeline de quatro passos."
 }
 ```
 
 > [!WARNING]
 > ⚠️ **Armadilhas de dia de exame desta lição:**
-> - **Express ≠ "Standard, só que mais rápido"** — ele é **at-least-once**, **5 minutos no máximo**, **sem `.sync` / `.waitForTaskToken`**, **sem histórico armazenado**, e cobra **requisições + duração + blocos de 64 MB** em vez de transições de estado.
-> - **`States.ALL` não é universal** — sozinho no seu `ErrorEquals`, por último no array `Catch`, e ele **nunca** captura `States.DataLimitExceeded` nem `States.Runtime`; `States.TaskFailed` exclui `States.Timeout`.
-> - **Retry antes do Catch, a ordem do array importa** — a primeira entrada de retrier que casa é a que manda, e é por isso que `["States.Timeout"], MaxAttempts 0` precisa preceder `["States.ALL"]`.
-> - **Os gatilhos de modo do Map são três números** — entrada **> 256 KiB**, histórico **> 25,000 eventos**, concorrência **> 40**; os **10,000** do Distributed contam **execuções filhas**, não itens.
-> - **Quatro mecanismos que "rodam por schedule"** — Scheduler (fusos, janela flexível, one-time), rule agendada (UTC, 1 min, 5 targets), trigger agendado do Glue (só Glue), `schedule_interval` do Airflow (com backfill).
-> - **Os padrões de retry diferem por superfície** — target de rule do EventBridge: **24 h / 185 tentativas**; Scheduler: ≤185 retries, ≤24 h; Step Functions: **1 s / 3 tentativas / backoff 2.0**. DLQs são **SQS padrão, mesma região, nunca FIFO**.
-> - **Pipes ≠ rules** — Pipes *fazem polling* de DynamoDB/Kinesis/SQS/MSK/Kafka/MQ e podem **enriquecer**; rules precisam de um bus e de um event pattern. Teto do pipe de **5 minutos**, payload de **6 MB** (limitado ainda pelo destino).
-> - **MWAA é Celery no Fargate, e só** — sem executor Local ou Kubernetes, **`celery.worker_concurrency` é sobrescrito**, a fila SQS do Celery é gerenciada pela AWS, e o `mw1.micro` **não tem autoscaling**.
-> - **Triggers condicionais do Glue só veem recursos iniciados por um trigger** — a cadeia desce de **um** único trigger agendado ou on-demand; **≤ 50 jobs / ≤ 2 crawlers** por trigger.
-> - **Redrive ≠ retry ≠ replay** — retry é dentro de uma execução, redrive é somente Standard sobre **14 dias** com histórico **< 24,999 eventos**, o replay de DLQ republica uma mensagem **nova**.
-> - **Idempotência sustenta toda reprodução** — Express, EventBridge, SQS e Pipes são todos at-least-once; use escritas condicionais, chaves de idempotência ou job bookmarks.
-> - **Números de estudo de caso são afirmações não auditadas de clientes** — os **$6,000 / 700 milhões de derivativos** da Edmunds e os **50% / zero perda de dados** da EOS são o que esses clientes reportaram, nunca garantias.
+> - **Express ≠ "Standard, só que mais rápido"**: ele é **at-least-once**, **5 minutos no máximo**, **sem `.sync` / `.waitForTaskToken`**, **sem histórico armazenado**, e cobra **requisições + duração + blocos de 64 MB** em vez de transições de estado.
+> - **`States.ALL` não é universal**: sozinho no seu `ErrorEquals`, por último no array `Catch`, e ele **nunca** captura `States.DataLimitExceeded` nem `States.Runtime`; `States.TaskFailed` exclui `States.Timeout`.
+> - **Retry antes do Catch, a ordem do array importa**: a primeira entrada de retrier que casa é a que manda, e é por isso que `["States.Timeout"], MaxAttempts 0` precisa preceder `["States.ALL"]`.
+> - **Os gatilhos de modo do Map são três números**: entrada **> 256 KiB**, histórico **> 25,000 eventos**, concorrência **> 40**; os **10,000** do Distributed contam **execuções filhas**, não itens.
+> - **Quatro mecanismos que "rodam por schedule"**: Scheduler (fusos, janela flexível, one-time), rule agendada (UTC, 1 min, 5 targets), trigger agendado do Glue (só Glue), `schedule_interval` do Airflow (com backfill).
+> - **Os padrões de retry diferem por superfície**: target de rule do EventBridge: **24 h / 185 tentativas**; Scheduler: ≤185 retries, ≤24 h; Step Functions: **1 s / 3 tentativas / backoff 2.0**. DLQs são **SQS padrão, mesma região, nunca FIFO**.
+> - **Pipes ≠ rules**: Pipes *fazem polling* de DynamoDB/Kinesis/SQS/MSK/Kafka/MQ e podem **enriquecer**; rules precisam de um bus e de um event pattern. Teto do pipe de **5 minutos**, payload de **6 MB** (limitado ainda pelo destino).
+> - **MWAA é Celery no Fargate, e só**: sem executor Local ou Kubernetes, **`celery.worker_concurrency` é sobrescrito**, a fila SQS do Celery é gerenciada pela AWS, e o `mw1.micro` **não tem autoscaling**.
+> - **Triggers condicionais do Glue só veem recursos iniciados por um trigger**: a cadeia desce de **um** único trigger agendado ou on-demand; **≤ 50 jobs / ≤ 2 crawlers** por trigger.
+> - **Redrive ≠ retry ≠ replay**: retry é dentro de uma execução, redrive é somente Standard sobre **14 dias** com histórico **< 24,999 eventos**, o replay de DLQ republica uma mensagem **nova**.
+> - **Idempotência sustenta toda reprodução**: Express, EventBridge, SQS e Pipes são todos at-least-once; use escritas condicionais, chaves de idempotência ou job bookmarks.
+> - **Números de estudo de caso são afirmações não auditadas de clientes**: os **$6,000 / 700 milhões de derivativos** da Edmunds e os **50% / zero perda de dados** da EOS são o que esses clientes reportaram, nunca garantias.
 
 > [!IMPORTANT]
-> **Veredito Comparativo — como as escolhas de orquestração se comparam no dia do exame**
-> - **Verso outras nuvens:** o exame testa **apenas serviços da AWS** — nada no DEA-C01 compara Step Functions com Azure Data Factory ou MWAA com outro Airflow gerenciado, e a lista no escopo é o universo inteiro de nomes examináveis. Qualquer alternativa que pivote para o produto de um concorrente, ou para um benchmark de terceiros não verificado, está fora de escopo por construção; responda com um serviço da AWS no escopo.
-> - **Verso autogerenciado / on-premises:** rodar o Apache Airflow você mesmo significa operar o webserver, o scheduler, os workers, o banco de metadados, a fila e as atualizações; **o MWAA entrega à AWS o plano de controle, o Aurora, o Fargate, o logging e a VPC**, e você abre mão de SSH, **imagens customizadas**, filas SQS customizadas e escolha de executor (**somente Celery**) — documentação do AWS MWAA, acesso em outubro de 2026. A preferência do exame é pela opção gerenciada, a menos que o requisito peça explicitamente pelo controle que o serviço gerenciado remove.
-> - **Verso outro serviço da AWS:** os limites honestos são **Glue Workflows** (grátis, só Glue, ≤50 jobs/≤2 crawlers, reparo/retomada) vs **Step Functions** (qualquer serviço, retries/branching/fan-out, $0.000025 por transição em outubro de 2026) vs **MWAA** (DAGs em Python, backfill, UI para a equipe, a partir de $0.49/h para um ambiente `mw1.small` em outubro de 2026) vs **EventBridge** (a camada de gatilhos — Scheduler para tempo, Pipes para streams, rules para patterns) vs **Lambda** (a micro-tarefa). Escolha pela *forma do requisito*, nunca por hábito.
-> - **Verso um processo manual e humano:** todo resultado de cliente publicado aqui — os **8 dias por $6,000** da Edmunds, a **zero perda de dados** da EOS — é resultado de *padrões* (fan-out com concorrência limitada, estágios ordenados com gates de validação), não de uma ferramenta. Trate percentuais como "o cliente alcançou", nunca como "a AWS garante".
+> **Veredito Comparativo: como as escolhas de orquestração se comparam no dia do exame**
+> - **Verso outras nuvens:** o exame testa **apenas serviços da AWS**: nada no DEA-C01 compara Step Functions com Azure Data Factory ou MWAA com outro Airflow gerenciado, e a lista no escopo é o universo inteiro de nomes examináveis. Qualquer alternativa que pivote para o produto de um concorrente, ou para um benchmark de terceiros não verificado, está fora de escopo por construção; responda com um serviço da AWS no escopo.
+> - **Verso autogerenciado / on-premises:** rodar o Apache Airflow você mesmo significa operar o webserver, o scheduler, os workers, o banco de metadados, a fila e as atualizações; **o MWAA entrega à AWS o plano de controle, o Aurora, o Fargate, o logging e a VPC**, e você abre mão de SSH, **imagens customizadas**, filas SQS customizadas e escolha de executor (**somente Celery**): documentação do AWS MWAA, acesso em outubro de 2026. A preferência do exame é pela opção gerenciada, a menos que o requisito peça explicitamente pelo controle que o serviço gerenciado remove.
+> - **Verso outro serviço da AWS:** os limites honestos são **Glue Workflows** (grátis, só Glue, ≤50 jobs/≤2 crawlers, reparo/retomada) vs **Step Functions** (qualquer serviço, retries/branching/fan-out, $0.000025 por transição em outubro de 2026) vs **MWAA** (DAGs em Python, backfill, UI para a equipe, a partir de $0.49/h para um ambiente `mw1.small` em outubro de 2026) vs **EventBridge** (a camada de gatilhos: Scheduler para tempo, Pipes para streams, rules para patterns) vs **Lambda** (a micro-tarefa). Escolha pela *forma do requisito*, nunca por hábito.
+> - **Verso um processo manual e humano:** todo resultado de cliente publicado aqui, os **8 dias por $6,000** da Edmunds, a **zero perda de dados** da EOS, é resultado de *padrões* (fan-out com concorrência limitada, estágios ordenados com gates de validação), não de uma ferramenta. Trate percentuais como "o cliente alcançou", nunca como "a AWS garante".
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
-> 1. A Tarefa 1.3 tem quatro habilidades — **1.3.1 serviços de orquestração** (Lambda, EventBridge, MWAA, Step Functions, Glue workflows), **1.3.2 pipelines resilientes/escaláveis**, **1.3.3 workflows serverless**, **1.3.4 alertas SNS/SQS** — e o conjunto Application Integration no escopo é **EventBridge, MWAA, SNS, SQS, Step Functions**.
+> 1. A Tarefa 1.3 tem quatro habilidades, **1.3.1 serviços de orquestração** (Lambda, EventBridge, MWAA, Step Functions, Glue workflows), **1.3.2 pipelines resilientes/escaláveis**, **1.3.3 workflows serverless**, **1.3.4 alertas SNS/SQS**, e o conjunto Application Integration no escopo é **EventBridge, MWAA, SNS, SQS, Step Functions**.
 > 2. **Standard** = **1 ano**, **exactly-once**, **histórico de 90 dias / 25,000 eventos**, **$0.000025 por transição de estado** (4,000 grátis por mês), os três padrões de integração; **Express** = **5 minutos**, **at-least-once**, sem histórico armazenado, **requisições + duração + blocos de 64 MB**, somente request-response (em outubro de 2026).
-> 3. ASL tem **oito tipos de estado** — `Task`, `Choice`, `Wait`, `Succeed`, `Fail`, `Parallel`, `Map`, `Pass` — com `Next` xor `End`, caminhos JSONPath ou JSONata, e caminhos de contexto como `$$.Task.Token`.
+> 3. ASL tem **oito tipos de estado**, `Task`, `Choice`, `Wait`, `Succeed`, `Fail`, `Parallel`, `Map`, `Pass`, com `Next` xor `End`, caminhos JSONPath ou JSONata, e caminhos de contexto como `$$.Task.Token`.
 > 4. **Arrays de retry são varridos de cima para baixo** (padrões: 1 s, 3 tentativas, backoff 2.0, ou seja 4 tentativas e 7 s de espera total); **Catch** roda só quando não sobra retry; **`States.ALL`** precisa estar sozinho e por último e **não pode** capturar `States.DataLimitExceeded` nem `States.Runtime`; `States.TaskFailed` exclui `States.Timeout`.
 > 5. **`.sync`** existe para Glue, EMR, ECS, Athena, Batch e afins; **`.waitForTaskToken`** existe para Lambda, ECS, SQS, SNS e API Gateway mas **não** para DynamoDB nem Express; esperar por um token custa **zero** transições por hora.
 > 6. **Map**: o inline é limitado a **40** iterações concorrentes dentro do histórico de **25,000 eventos** do pai; o **Distributed** roda até **10,000 execuções filhas**, lê datasets do S3 pelo `ItemReader` (≤ **100,000,000** itens), agrupa com `ItemBatcher` (**1,130 ÷ 100 → 12** filhos) e grava os resultados no S3 via `ResultWriter`; troque em **>256 KiB**, **>25,000 eventos** ou concorrência **>40**.
 > 7. **EventBridge**: uma rule por bus (**default / custom / partner**, nunca um schedule num bus partner), **5 targets** por rule, **100 buses** e **300 rules** por bus por região, patterns ≤ **2,048 caracteres**, schedules com precisão de **1 minuto em UTC**; os retries do target são **24 horas / 185 tentativas** por padrão com backoff + jitter, e então uma **DLQ padrão do SQS na mesma região** (nunca FIFO).
-> 8. **Pipes** = origem → filtro → enriquecimento → destino com teto de execução de **5 minutos**, payload de **6 MB** (limitado pelo destino), **$0.40 por milhão de requisições** só em eventos filtrados — **10M de mensagens, 25% filtradas, batch 5 → $0.20**; **Scheduler** acrescenta **fusos IANA**, schedules **one-time** e uma **janela flexível de 1–1,440 minutos** com precisão de **60 segundos** e até **10,000,000 schedules** por região.
+> 8. **Pipes** = origem → filtro → enriquecimento → destino com teto de execução de **5 minutos**, payload de **6 MB** (limitado pelo destino), **$0.40 por milhão de requisições** só em eventos filtrados: **10M de mensagens, 25% filtradas, batch 5 → $0.20**; **Scheduler** acrescenta **fusos IANA**, schedules **one-time** e uma **janela flexível de 1 to 1,440 minutos** com precisão de **60 segundos** e até **10,000,000 schedules** por região.
 > 9. **MWAA** = DAGs no S3 + webserver + scheduler + workers Celery no Fargate + Aurora PostgreSQL + uma fila SQS gerenciada pela AWS que você não pode substituir; classes **mw1.micro (25/3, sem autoscaling) → mw1.2xlarge (4,000/80)**, `celery.worker_concurrency` é **sobrescrito**, `AWSGlueJobOperator` está depreciado em favor de `GlueJobOperator`, e Airflow **3.2.x / 2.11.x** estão atuais em outubro de 2026.
 > 10. **Glue Workflows** = jobs + crawlers + triggers como um grafo com visões estática e dinâmica, três tipos de início (**schedule, on-demand, EventBridge** com batch window de **900 s**), triggers condicionais que só veem **recursos iniciados por um trigger**, **≤50 jobs / ≤2 crawlers** por trigger, e **workflow run properties** compartilhadas para passagem de estado.
 > 11. A **matriz de seleção**: cron/rate/one-time → **EventBridge Scheduler**; retries em múltiplos passos, branching, auditoria → **Step Functions**; DAGs complexos com backfill → **MWAA**; fan-out de stream/fila reativo a eventos → **Pipes**; grafo só de Glue → **Glue Workflows**; micro-tarefa de menos de 15 minutos → **Lambda**.

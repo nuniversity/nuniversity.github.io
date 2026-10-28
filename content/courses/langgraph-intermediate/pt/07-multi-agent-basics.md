@@ -1,6 +1,6 @@
 ---
 title: "Fundamentos de Multi-Agentes"
-description: "Aprenda arquitetura multi-agente em LangGraph — múltiplos nós de agente comunicando através de estado compartilhado, papéis especializados e padrões de coordenação."
+description: "Aprenda arquitetura multi-agente em LangGraph, múltiplos nós de agente comunicando através de estado compartilhado, papéis especializados e padrões de coordenação."
 order: 7
 duration: "40 min"
 difficulty: "intermediate"
@@ -20,7 +20,7 @@ Agentes únicos têm limitaciones:
 2. **Confusão de papéis**: Um agente único não pode ser especialista em tudo
 3. **Modularidade**: É difícil trocar ou atualizar partes de um agente monolítico
 
-A arquitetura multi-agente resolve isso **dividindo para conquistar** — cada agente tem um papel focado e se comunica com os outros por meio do estado compartilhado.
+A arquitetura multi-agente resolve isso **dividindo para conquistar**: cada agente tem um papel focado e se comunica com os outros por meio do estado compartilhado.
 
 ---
 
@@ -357,7 +357,7 @@ print(result["final"])
   "question": "What is the main benefit of multi-agent architecture?",
   "options": [
     "Faster execution always",
-    "Specialization — each agent focuses on one task",
+    "Specialization: each agent focuses on one task",
     "Eliminates the need for LLMs",
     "Simpler code overall"
   ],
@@ -373,7 +373,7 @@ print(result["final"])
   "question": "How do agents communicate in a LangGraph multi-agent system?",
   "options": [
     "Through direct function calls",
-    "Through the shared state — one agent writes, another reads",
+    "Through the shared state: one agent writes, another reads",
     "Via a message queue",
     "Through a REST API"
   ],
@@ -453,7 +453,7 @@ print(result["final"])
   "question": "Why might you give different agents different tool sets?",
   "options": [
     "To save money on API calls",
-    "To enforce separation of concerns — each agent can only use relevant tools",
+    "To enforce separation of concerns: each agent can only use relevant tools",
     "Tools are shared globally",
     "There's no benefit to separate tool sets"
   ],

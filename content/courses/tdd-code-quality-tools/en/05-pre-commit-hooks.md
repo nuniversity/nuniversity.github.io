@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Pre-Commit Hooks
 
-Pre-commit hooks are automated checks that run **before** you commit code. They catch issues early — before they reach the repository — saving code review time and preventing bad code from being merged.
+Pre-commit hooks are automated checks that run **before** you commit code. They catch issues early, before they reach the repository, saving code review time and preventing bad code from being merged.
 
 ## What Are Git Hooks?
 
@@ -575,7 +575,7 @@ pre-commit install --install-hooks
 
 - **Pre-commit hooks** catch issues before they reach the repository
 - **The pre-commit framework** makes hooks easy to install, configure, and share
-- **Hooks run on staged files only** — fast feedback, incremental checks
+- **Hooks run on staged files only**: fast feedback, incremental checks
 - **Common hooks**: Linting (ruff, flake8), formatting (black, isort), security (bandit, detect-secrets), type checking (mypy)
 - **Local hooks**: Run system commands, custom scripts, or test suites
 - **CI integration**: pre-commit works locally and in CI pipelines

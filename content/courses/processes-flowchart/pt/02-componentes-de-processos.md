@@ -14,11 +14,11 @@ Todo processo, não importa quão simples ou complexo, é construído a partir d
 
 Todos os processos consistem em cinco elementos fundamentais:
 
-1. **Entradas** — Recursos que entram no processo
-2. **Transformações** — Ações que modificam as entradas
-3. **Saídas** — Resultados que saem do processo
-4. **Pontos de Decisão** — Locais onde o processo se ramifica
-5. **Atores** — Entidades que executam as ações
+1. **Entradas**: Recursos que entram no processo
+2. **Transformações**: Ações que modificam as entradas
+3. **Saídas**: Resultados que saem do processo
+4. **Pontos de Decisão**: Locais onde o processo se ramifica
+5. **Atores**: Entidades que executam as ações
 
 ```mermaid
 flowchart LR
@@ -348,10 +348,10 @@ Identifique o que está faltando:
 
 - Todo processo tem **cinco componentes principais**: entradas, transformações, saídas, pontos de decisão e atores
 - A **qualidade das entradas** determina diretamente a qualidade das saídas
-- **Transformações** devem ser atômicas — uma coisa por etapa
+- **Transformações** devem ser atômicas: uma coisa por etapa
 - **Pontos de decisão** devem ter critérios claros e documentados
 - **Atores** precisam de responsabilidades bem definidas (use RACI)
 - Entender componentes facilita **analisar** e **melhorar** qualquer processo
 
 > [!SUCCESS] Você Completou a Lição 2
-> Agora você entende os blocos de construção de todo processo. Na próxima lição, vamos explorar **fluxogramas** — a linguagem visual usada para documentar e comunicar processos.
+> Agora você entende os blocos de construção de todo processo. Na próxima lição, vamos explorar **fluxogramas**: a linguagem visual usada para documentar e comunicar processos.

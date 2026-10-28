@@ -237,7 +237,7 @@ spark.sql("""
 
 1. **Prefer built-in functions** whenever possible
 2. **Use Pandas UDFs** over regular UDFs for performance
-3. **Minimize UDF calls** — batch operations in one UDF rather than multiple
+3. **Minimize UDF calls**: batch operations in one UDF rather than multiple
 4. **Avoid UDFs on shuffle boundaries** when possible
 5. **Test UDFs locally** before running at scale
 6. **Set `spark.sql.execution.arrow.pyspark.enabled=true`** for Pandas UDFs

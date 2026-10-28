@@ -16,8 +16,8 @@ Every SQL query you run on Redshift either benefits from or is penalized by the 
 
 Redshift stores table data in **column blocks** distributed across **slices** on compute nodes. Two properties govern physical placement:
 
-- **Distribution style** — which slice each row goes to (affects data movement during joins)
-- **Sort key** — the physical ordering of rows on disk (affects range-restricted scans)
+- **Distribution style**; which slice each row goes to (affects data movement during joins)
+- **Sort key**: the physical ordering of rows on disk (affects range-restricted scans)
 
 ```mermaid
 flowchart TD
@@ -78,7 +78,7 @@ models:
 ```
 
 [!TIP]
-When `fct_orders` and `dim_customers` are both queried together, set `fct_orders.dist = customer_id` and `dim_customers.dist = all`. Redshift can then join them without redistributing any rows — a **co-located join**.
+When `fct_orders` and `dim_customers` are both queried together, set `fct_orders.dist = customer_id` and `dim_customers.dist = all`. Redshift can then join them without redistributing any rows: a **co-located join**.
 
 ---
 
@@ -88,7 +88,7 @@ Sort keys define the physical order of rows on disk. Redshift uses **zone maps**
 
 ### Compound Sort Key
 
-Rows are sorted primarily by the first key column, then by the second, etc. — like a composite index.
+Rows are sorted primarily by the first key column, then by the second, etc.: like a composite index.
 
 ```sql
 {{ config(
@@ -355,7 +355,7 @@ Redshift Serverless **automatically reclaims storage** and does not require manu
     "Both tables: dist=auto"
   ],
   "correct": 1,
-  "explanation": "Setting fct_orders with KEY distribution on customer_id and dim_customers with ALL distribution creates a co-located join — Redshift can join rows without any data redistribution."
+  "explanation": "Setting fct_orders with KEY distribution on customer_id and dim_customers with ALL distribution creates a co-located join: Redshift can join rows without any data redistribution."
 }
 ```
 
@@ -368,7 +368,7 @@ Redshift Serverless **automatically reclaims storage** and does not require manu
     "sort_type: interleaved, sort: [event_date, user_id]",
     "sort_type: compound, sort: [event_date]",
     "sort_type: auto",
-    "No sort key — Redshift handles this automatically"
+    "No sort key: Redshift handles this automatically"
   ],
   "correct": 1,
   "explanation": "A compound sort key with event_date as the leading column lets Redshift use zone maps to skip disk blocks outside the date range, reducing I/O dramatically."
@@ -414,7 +414,7 @@ Redshift Serverless **automatically reclaims storage** and does not require manu
   "question": "When does Redshift Serverless require you to run VACUUM manually?",
   "options": [
     "After every dbt run",
-    "Never — Redshift Serverless reclaims storage automatically",
+    "Never: Redshift Serverless reclaims storage automatically",
     "Only after running COPY commands",
     "Only for tables with interleaved sort keys"
   ],
@@ -431,7 +431,7 @@ Redshift Serverless **automatically reclaims storage** and does not require manu
   "options": [
     "The project-level default always wins",
     "The model-level config block override wins",
-    "They are merged — both sort types are applied",
+    "They are merged: both sort types are applied",
     "The most recently modified file wins"
   ],
   "correct": 1,
@@ -444,10 +444,10 @@ Redshift Serverless **automatically reclaims storage** and does not require manu
 [!SUCCESS]
 ### Key Takeaways
 
-- Distribution style controls data placement across slices. Wrong choices cause expensive runtime redistribution. Use KEY + ALL for common fact–dimension joins.
+- Distribution style controls data placement across slices. Wrong choices cause expensive runtime redistribution. Use KEY + ALL for common fact: dimension joins.
 - Compound sort keys are the most common choice; put your primary filter column first. Reserve interleaved for specific multi-dimensional filter patterns.
 - `sort_type: auto` is a safe project-wide default; override only where you have strong, stable query patterns.
 - Disable `backup` on staging and intermediate tables to reduce snapshot storage costs.
-- Redshift Serverless eliminates the need for manual VACUUM — a key operational advantage.
+- Redshift Serverless eliminates the need for manual VACUUM: a key operational advantage.
 - Use post-hook macros to automate `VACUUM` and `ANALYZE` on provisioned clusters.
-- Model-level config blocks override schema.yml, which overrides dbt_project.yml — most specific wins.
+- Model-level config blocks override schema.yml, which overrides dbt_project.yml: most specific wins.

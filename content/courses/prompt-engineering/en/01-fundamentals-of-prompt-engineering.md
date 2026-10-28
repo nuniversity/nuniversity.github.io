@@ -10,7 +10,7 @@ duration: "30 min"
 
 ## What is a Prompt?
 
-A prompt is the input you provide to an LLM to elicit a specific response. It's the fundamental unit of interaction with modern AI models like GPT-4, Claude, and Llama. The quality of your prompt directly determines the quality of the model's output — garbage in, garbage out remains as true for AI as for traditional software.
+A prompt is the input you provide to an LLM to elicit a specific response. It's the fundamental unit of interaction with modern AI models like GPT-4, Claude, and Llama. The quality of your prompt directly determines the quality of the model's output: garbage in, garbage out remains as true for AI as for traditional software.
 
 ### The LLM Input/Output Flow
 
@@ -50,7 +50,7 @@ Each API call travels through multiple stages: tokenization converts your text t
 
 ## Tokenization
 
-Tokenization is the process of breaking text into smaller units (tokens) that the model can understand. Different models use different tokenization algorithms — GPT-4 uses Byte-Pair Encoding (BPE), while other models may use SentencePiece or WordPiece.
+Tokenization is the process of breaking text into smaller units (tokens) that the model can understand. Different models use different tokenization algorithms: GPT-4 uses Byte-Pair Encoding (BPE), while other models may use SentencePiece or WordPiece.
 
 ### Token Facts:
 - 1 token ≈ 4 characters in English
@@ -101,7 +101,7 @@ flowchart LR
 ```
 
 [!IMPORTANT]
-Each model has a **context window** (GPT-4: 8K-128K, Claude 3: 200K, Gemini: 32K-1M). The sum of your system message + conversation history + user input + generated output **must fit** within this window. Once exceeded, the model truncates older messages — potentially losing important context.
+Each model has a **context window** (GPT-4: 8K-128K, Claude 3: 200K, Gemini: 32K-1M). The sum of your system message + conversation history + user input + generated output **must fit** within this window. Once exceeded, the model truncates older messages: potentially losing important context.
 
 ---
 
@@ -116,10 +116,10 @@ LLMs use a conversation history with three distinct roles:
 | **Assistant** | Represents the AI's previous responses in the conversation history | "You can use the sorted() function or .sort() method..." |
 
 [!NOTE]
-The system message is particularly powerful—it persists throughout the conversation and guides how the model responds to all subsequent messages.
+The system message is particularly powerful; it persists throughout the conversation and guides how the model responds to all subsequent messages.
 
 [!IMPORTANT]
-**System prompt best practices:** Be specific about the model's persona, output format, and constraints. Include guardrails like "If you don't know the answer, say so." Avoid vague instructions like "be helpful" — instead, describe what helpful looks like in your context.
+**System prompt best practices:** Be specific about the model's persona, output format, and constraints. Include guardrails like "If you don't know the answer, say so." Avoid vague instructions like "be helpful": instead, describe what helpful looks like in your context.
 
 ```python
 from openai import OpenAI
@@ -201,7 +201,7 @@ flowchart LR
 ```
 
 [!TIP]
-**Choosing temperature values:** For factual tasks (classification, extraction, Q&A), use 0.0-0.3. For creative tasks (story writing, brainstorming), use 0.7-1.2. Avoid temperatures above 1.5 unless you want near-random output — the "creative" output quickly becomes incoherent.
+**Choosing temperature values:** For factual tasks (classification, extraction, Q&A), use 0.0-0.3. For creative tasks (story writing, brainstorming), use 0.7-1.2. Avoid temperatures above 1.5 unless you want near-random output: the "creative" output quickly becomes incoherent.
 
 [!WARNING]
 Setting temperature > 1.0 or top_p > 0.9 can lead to incoherent or hallucinated responses. For factual tasks, use temperature 0.0-0.5.
@@ -277,7 +277,7 @@ flowchart LR
 | Novel formats | Poor | Models need examples of new output structures |
 
 [!NOTE]
-Zero-shot works surprisingly well for tasks the model encountered during training. It struggles with edge cases, highly specialized domains, or precise format requirements — that's where few-shot and advanced techniques come in.
+Zero-shot works surprisingly well for tasks the model encountered during training. It struggles with edge cases, highly specialized domains, or precise format requirements; that's where few-shot and advanced techniques come in.
 
 ---
 
@@ -387,7 +387,7 @@ Zero-shot works surprisingly well for tasks the model encountered during trainin
   "id": "pe-01-q10",
   "type": "multiple-choice",
   "question": "A prompt engineer is comparing a Llama 2 model (32K vocab) with a GPT-4 model (100K vocab) for a code generation task. What trade-off should they consider?",
-  "options": ["Llama 2 uses fewer tokens per word of code, reducing costs", "Llama 2's smaller vocabulary may use more tokens for code, but requires less memory", "GPT-4 cannot process code at all", "There is no difference — all tokenizers perform identically on code"],
+  "options": ["Llama 2 uses fewer tokens per word of code, reducing costs", "Llama 2's smaller vocabulary may use more tokens for code, but requires less memory", "GPT-4 cannot process code at all", "There is no difference: all tokenizers perform identically on code"],
   "correct": 1,
   "explanation": "A smaller vocabulary means more tokens are needed to represent the same text, potentially increasing inference time. However, smaller vocabularies mean smaller embedding tables, reducing memory requirements."
 }

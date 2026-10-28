@@ -1,6 +1,6 @@
 ---
 title: "Interface Adapters"
-description: "Learn how interface adapters translate between the inner layers and outer frameworks — controllers, presenters, gateways, and repositories"
+description: "Learn how interface adapters translate between the inner layers and outer frameworks, controllers, presenters, gateways, and repositories"
 order: 4
 duration: "60 minutes"
 difficulty: "intermediate"
@@ -194,7 +194,7 @@ class PlaceOrderUseCase:
 ```
 
 > [!TIP]
-> Having multiple presenters for the same use case output is a powerful pattern. You can have a `JSONPresenter`, `HTMLPresenter`, `CSVPresenter`, and `CLIPresenter` — all driven by the same business logic.
+> Having multiple presenters for the same use case output is a powerful pattern. You can have a `JSONPresenter`, `HTMLPresenter`, `CSVPresenter`, and `CLIPresenter`: all driven by the same business logic.
 
 ## Repositories: Bridging Data
 
@@ -765,4 +765,4 @@ flowchart LR
 8. **Refactor to Adapters**: Take a Django view that directly uses ORM and send email. Refactor it into: controller, use case, repository, and gateway adapters. Show the before and after.
 
 > [!SUCCESS]
-> Interface adapters are the plumbing that makes Clean Architecture work. They translate, transform, and isolate — keeping the business logic pure.
+> Interface adapters are the plumbing that makes Clean Architecture work. They translate, transform, and isolate: keeping the business logic pure.

@@ -211,7 +211,7 @@ Understanding the economic framework of non-profit organizations is critical for
 5. **Impact investing** exploration if aligned with mission and capacity
 
 ### For All Organizations
-1. **Diversify before you need it** — don't wait for a crisis
+1. **Diversify before you need it**: don't wait for a crisis
 2. **Maintain 3-6 months operating reserves** as liquidity buffer
 3. **Report financial health** transparently to donors and stakeholders
 4. **Align funding strategies** with strategic plan and mission priorities

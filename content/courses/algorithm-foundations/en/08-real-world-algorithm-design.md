@@ -119,7 +119,7 @@ flowchart TD
 ```
 
 > [!NOTE]
-> Notice that steps 5-8 (pasta) and steps 9-16 (sauce) can happen in parallel. This is called **concurrent execution** -- two processes running at the same time. Good cooks manage both simultaneously to finish at the same time.
+> Notice that steps 5-8 (pasta) and steps 9-16 (sauce) can happen in parallel. This is called **concurrent execution**: two processes running at the same time. Good cooks manage both simultaneously to finish at the same time.
 
 ### What Makes a Good Recipe Algorithm?
 
@@ -517,7 +517,7 @@ In this lesson, you learned:
 - **Design framework**: A systematic approach to designing algorithms for any problem
 
 > [!SUCCESS]
-> You now have the tools to recognize and design algorithms for real-world problems. Every complex system you encounter -- from traffic lights to social media feeds -- is built from the algorithmic principles you've learned in this course.
+> You now have the tools to recognize and design algorithms for real-world problems. Every complex system you encounter, from traffic lights to social media feeds, is built from the algorithmic principles you've learned in this course.
 
 ## Key Terms
 

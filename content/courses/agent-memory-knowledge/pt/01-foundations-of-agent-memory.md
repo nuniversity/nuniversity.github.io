@@ -8,20 +8,20 @@ difficulty: "beginner"
 
 # Fundamentos da Memória de Agentes
 
-A memória é o que separa um chatbot sem estado de um agente verdadeiramente inteligente. Sem memória, cada interação começa do zero — o agente não consegue aprender, personalizar ou manter contexto entre turnos.
+A memória é o que separa um chatbot sem estado de um agente verdadeiramente inteligente. Sem memória, cada interação começa do zero, o agente não consegue aprender, personalizar ou manter contexto entre turnos.
 
 ---
 
 ## Por Que Agentes Precisam de Memória
 
-LLMs modernos são sem estado por natureza: processam uma única janela de contexto e esquecem tudo após gerar a resposta. Agentes, no entanto, operam em múltiplas etapas — eles chamam ferramentas, revisitam conclusões anteriores e interagem com usuários em longas sessões.
+LLMs modernos são sem estado por natureza: processam uma única janela de contexto e esquecem tudo após gerar a resposta. Agentes, no entanto, operam em múltiplas etapas: eles chamam ferramentas, revisitam conclusões anteriores e interagem com usuários em longas sessões.
 
 A memória possibilita:
 
-- **Continuidade** — o agente lembra o que foi dito antes
-- **Personalização** — preferências do usuário persistem entre sessões
-- **Aprendizado** — fatos extraídos de uma interação informam as seguintes
-- **Coerência** — cadeias de raciocínio em várias etapas se mantêm consistentes
+- **Continuidade**, o agente lembra o que foi dito antes
+- **Personalização**: preferências do usuário persistem entre sessões
+- **Aprendizado**: fatos extraídos de uma interação informam as seguintes
+- **Coerência**: cadeias de raciocínio em várias etapas se mantêm consistentes
 
 [!WARNING]
 Sem memória explícita, um agente não consegue distinguir entre "conte-me sobre meu último pedido" e "conte-me sobre suas capacidades". A janela de contexto sozinha é insuficiente para conhecimento persistente.
@@ -42,7 +42,7 @@ Agentes, como humanos, usam múltiplos sistemas de memória que operam em difere
 | Uso | Histórico imediato da conversa | Perfil do usuário, fatos aprendidos |
 
 [!NOTE]
-A memória de curto prazo em agentes é análoga à memória de trabalho humana — ela mantém informações temporariamente enquanto o agente processa a tarefa atual. A diferença principal é que a MCP do agente é limitada por tokens, não por capacidade cognitiva.
+A memória de curto prazo em agentes é análoga à memória de trabalho humana: ela mantém informações temporariamente enquanto o agente processa a tarefa atual. A diferença principal é que a MCP do agente é limitada por tokens, não por capacidade cognitiva.
 
 ---
 
@@ -50,8 +50,8 @@ A memória de curto prazo em agentes é análoga à memória de trabalho humana 
 
 Outra distinção importante vem da ciência cognitiva:
 
-- **Memória episódica** — armazena eventos específicos ou interações passadas ("o usuário perguntou sobre preços na terça")
-- **Memória semântica** — armazena conhecimento factual geral ("o preço é R$10/mês para o plano pro")
+- **Memória episódica**: armazena eventos específicos ou interações passadas ("o usuário perguntou sobre preços na terça")
+- **Memória semântica**: armazena conhecimento factual geral ("o preço é R$10/mês para o plano pro")
 
 A memória episódica ajuda o agente a lembrar o que aconteceu. A memória semântica ajuda o agente a saber o que é verdade.
 
@@ -109,7 +109,7 @@ A ordem das operações importa: a recuperação acontece *antes* da geração, 
 
 ## Memória Operacional em Agentes
 
-A memória operacional é o rascunho do agente — o espaço temporário onde etapas intermediárias de raciocínio, saídas de ferramentas e resultados parciais vivem durante um único turno.
+A memória operacional é o rascunho do agente, o espaço temporário onde etapas intermediárias de raciocínio, saídas de ferramentas e resultados parciais vivem durante um único turno.
 
 ```python
 class AgentWorkingMemory:
@@ -140,7 +140,7 @@ wm.add_step("format_response", "Prepared summary")
 print(wm.get_context())
 ```
 
-A memória operacional não é persistida — é limpa entre turnos ou quando a tarefa é concluída.
+A memória operacional não é persistida: é limpa entre turnos ou quando a tarefa é concluída.
 
 ---
 
@@ -150,10 +150,10 @@ Todo LLM tem uma janela de contexto fixa (4K, 8K, 32K, 128K tokens). Quando a co
 
 Estratégias:
 
-- **Janela deslizante** — manter as últimas N mensagens, descartar as mais antigas
-- **Sumarização** — condensar conversas anteriores em um resumo
-- **Retenção seletiva** — manter fatos importantes, descartar preenchimento
-- **Híbrido** — manter um resumo + mensagens recentes + fatos recuperados
+- **Janela deslizante**: manter as últimas N mensagens, descartar as mais antigas
+- **Sumarização**: condensar conversas anteriores em um resumo
+- **Retenção seletiva**: manter fatos importantes, descartar preenchimento
+- **Híbrido**: manter um resumo + mensagens recentes + fatos recuperados
 
 ```python
 from collections import deque
@@ -263,10 +263,10 @@ flowchart TD
 
 ---
 
-## Janela de Contexto vs. Memória — Distinção Fundamental
+## Janela de Contexto vs. Memória: Distinção Fundamental
 
 [!IMPORTANT]
-A janela de contexto NÃO é memória — é armazenamento temporário que é sobrescrito a cada turno. Memória verdadeira requer escrita e leitura de uma camada de persistência externa. Nunca confunda a janela de contexto com memória de longo prazo.
+A janela de contexto NÃO é memória: é armazenamento temporário que é sobrescrito a cada turno. Memória verdadeira requer escrita e leitura de uma camada de persistência externa. Nunca confunda a janela de contexto com memória de longo prazo.
 
 | Aspecto | Janela de Contexto | Sistema de Memória |
 | :--- | :--- | :--- |
@@ -292,7 +292,7 @@ A janela de contexto NÃO é memória — é armazenamento temporário que é so
     "Não usam janelas de contexto"
   ],
   "correct": 1,
-  "explanation": "LLMs são sem estado porque processam cada entrada independentemente — não têm mecanismo interno para carregar contexto ou memória entre interações."
+  "explanation": "LLMs são sem estado porque processam cada entrada independentemente: não têm mecanismo interno para carregar contexto ou memória entre interações."
 }
 ```
 
@@ -385,7 +385,7 @@ A janela de contexto NÃO é memória — é armazenamento temporário que é so
     "Cada mensagem do usuário",
     "Expiração baseada em tempo ou evento explícito de consolidação",
     "Apenas quando o agente é desligado",
-    "Nunca — a memória de curto prazo nunca vai para o longo prazo"
+    "Nunca: a memória de curto prazo nunca vai para o longo prazo"
   ],
   "correct": 1,
   "explanation": "A consolidação é acionada por TTL baseado em tempo ou eventos explícitos como fim de sessão ou atingir um limite de tokens."

@@ -155,7 +155,7 @@ export function QuizHome({
                     <p className="text-sm text-muted-foreground mb-4">
                       {tpl(
                         dict.quizzes?.home?.mock_description ||
-                          'Simulates the real {cert} exam: {count} questions, {minutes}-minute countdown, proportional domain sampling. No feedback until you submit — just like the real thing.',
+                          'Simulates the real {cert} exam: {count} questions, {minutes}-minute countdown, proportional domain sampling. No feedback until you submit, just like the real thing.',
                         { cert: quiz.certification, count: totalQuestions, minutes: durationMinutes }
                       )}
                     </p>

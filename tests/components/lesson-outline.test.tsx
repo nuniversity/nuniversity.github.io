@@ -42,6 +42,11 @@ const lessons = [
   { slug: 'setup', title: 'Setup Guide' },
 ]
 
+/** The syllabus is closed by default; open it before querying its links. */
+function expandSyllabus() {
+  fireEvent.click(screen.getByRole('button', { name: /Course Content/i }))
+}
+
 function renderOutline(lessonSlug = 'setup') {
   return render(
     <LessonOutline
@@ -74,8 +79,22 @@ afterEach(() => {
 })
 
 describe('LessonOutline syllabus', () => {
+  it('starts collapsed and expands on demand', () => {
+    renderOutline()
+
+    const toggle = screen.getByRole('button', { name: /Course Content/i })
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.queryByRole('link', { name: /Introduction/ })).toBeNull()
+
+    fireEvent.click(toggle)
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByRole('link', { name: /Introduction/ })).toBeVisible()
+  })
+
   it('lists every lesson with numbering', () => {
     renderOutline()
+    expandSyllabus()
 
     const nav = screen.getByRole('navigation', { name: 'Course Content' })
     expect(nav).toHaveTextContent('01Introduction')
@@ -84,6 +103,7 @@ describe('LessonOutline syllabus', () => {
 
   it('marks the active lesson', () => {
     renderOutline('setup')
+    expandSyllabus()
 
     const active = screen.getByRole('link', { name: /Setup Guide/ })
     expect(active.className).toContain('bg-primary')
@@ -102,6 +122,7 @@ describe('LessonOutline syllabus', () => {
     markLessonComplete('aws-aif-c01', 'intro')
 
     renderOutline()
+    expandSyllabus()
 
     expect(screen.getAllByTestId('outline-check')).toHaveLength(1)
     expect(

@@ -56,9 +56,9 @@ print(sys.executable)  # Mostra qual Python está sendo usado
 > |-----------|---------|
 > | Esquecer de ativar o venv | Verifique `which python` ou `sys.executable` |
 > | Commitar `.venv` no git | Adicione `.venv/` ao `.gitignore` |
-> | Usar `sudo pip install` | Nunca faça isso — quebra pacotes do sistema! |
+> | Usar `sudo pip install` | Nunca faça isso: quebra pacotes do sistema! |
 
-## `pip` — Instalando Pacotes
+## `pip`: Instalando Pacotes
 
 ```bash
 # Instalar um pacote
@@ -126,7 +126,7 @@ pip list --format=freeze  # Mesma saída que pip freeze
 | `!=2.0.0` | Qualquer versão exceto 2.0.0 |
 | `*` | Qualquer versão (ex.: `==2.*` significa 2.x) |
 
-## `pyproject.toml` — Empacotamento Moderno em Python
+## `pyproject.toml`: Empacotamento Moderno em Python
 
 ```toml
 [build-system]
@@ -341,7 +341,7 @@ flowchart TD
 ```
 
 > [!SUCCESS]
-> Sempre use um ambiente virtual para cada projeto. É a prática mais importante do Python — prevenindo conflitos de versão, permitindo builds reproduzíveis e mantendo seu Python do sistema limpo.
+> Sempre use um ambiente virtual para cada projeto. É a prática mais importante do Python: prevenindo conflitos de versão, permitindo builds reproduzíveis e mantendo seu Python do sistema limpo.
 
 ## Perguntas de Prática
 

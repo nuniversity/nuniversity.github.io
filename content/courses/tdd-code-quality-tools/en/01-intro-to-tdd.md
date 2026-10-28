@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Introduction to TDD
 
-Test-Driven Development (TDD) is a software development approach where you write tests **before** writing the production code. This inverted workflow — test first, code second — fundamentally changes how you design, implement, and verify software.
+Test-Driven Development (TDD) is a software development approach where you write tests **before** writing the production code. This inverted workflow, test first, code second, fundamentally changes how you design, implement, and verify software.
 
 ## The TDD Mantra: Red-Green-Refactor
 
@@ -71,14 +71,14 @@ def divide(a, b):
 ```
 
 > [!SUCCESS]
-> TDD isn't about testing — it's about **design**. Writing the test first forces you to think about the interface before the implementation.
+> TDD isn't about testing; it's about **design**. Writing the test first forces you to think about the interface before the implementation.
 
 ## The Three Laws of TDD
 
 Robert C. Martin (Uncle Bob) formalized TDD with three laws:
 
 1. **Law 1**: You may not write any production code until you have written a **failing unit test**.
-2. **Law 2**: You may not write more of a unit test than is sufficient to fail — and **not compiling is failing**.
+2. **Law 2**: You may not write more of a unit test than is sufficient to fail, and **not compiling is failing**.
 3. **Law 3**: You may not write more production code than is sufficient to pass the **currently failing test**.
 
 ```mermaid
@@ -120,7 +120,7 @@ def test_empty_cart():
     assert cart.total_items() == 0
 ```
 
-Run: **Red** — `ShoppingCart` doesn't exist yet.
+Run: **Red**: `ShoppingCart` doesn't exist yet.
 
 ```python
 # shopping_cart.py
@@ -129,7 +129,7 @@ class ShoppingCart:
         return 0
 ```
 
-Run: **Green** — test passes.
+Run: **Green**: test passes.
 
 ### Cycle 2: Add items to the cart
 
@@ -148,7 +148,7 @@ def test_add_multiple_items():
     assert cart.total_items() == 2
 ```
 
-Run: **Red** — `add_item` doesn't exist.
+Run: **Red**: `add_item` doesn't exist.
 
 ```python
 class ShoppingCart:
@@ -162,7 +162,7 @@ class ShoppingCart:
         return len(self._items)
 ```
 
-Run: **Green** — all tests pass.
+Run: **Green**: all tests pass.
 
 ### Cycle 3: Calculate the total price
 
@@ -180,7 +180,7 @@ def test_empty_cart_total():
     assert cart.total_price() == 0.0
 ```
 
-Run: **Red** — `total_price` doesn't exist.
+Run: **Red**: `total_price` doesn't exist.
 
 ```python
 class ShoppingCart:
@@ -197,7 +197,7 @@ class ShoppingCart:
         return sum(item["price"] for item in self._items)
 ```
 
-Run: **Green** — everything passes.
+Run: **Green**: everything passes.
 
 ### Refactor: Improve the design
 

@@ -56,7 +56,7 @@ Proper accounting and financial management are essential for non-profit transpar
 - **Accounts payable**: Unpaid bills, vendor invoices
 - **Accrued expenses**: Salaries, taxes, interest accrued but unpaid
 - **Grant liabilities**: Unearned revenue from advance government funding
-- **Accounts payable - restricted**: Liabilities restricted by donor
+- **Accounts payable: restricted**: Liabilities restricted by donor
 - **Long-term debt**: Mortgages, loans, bonds payable
 
 ### Net Asset Accounts
@@ -65,9 +65,9 @@ Proper accounting and financial management are essential for non-profit transpar
 - **Net assets from prior period**: Beginning balance for the reporting period
 
 ### Revenue Accounts
-- **Contributions - unrestricted**: Individual, corporate donations without restrictions
-- **Contributions - temporarily restricted**: Time or purpose-restricted gifts
-- **Contributions - permanently restricted**: Endowment principal gifts
+- **Contributions: unrestricted**: Individual, corporate donations without restrictions
+- **Contributions: temporarily restricted**: Time or purpose-restricted gifts
+- **Contributions: permanently restricted**: Endowment principal gifts
 - **Government grants**: Restricted or unrestricted government funding
 - **Fee-for-service revenue**: Program fees, tuition, sales of goods
 - **Investment income**: Interest, dividends, endowment spending

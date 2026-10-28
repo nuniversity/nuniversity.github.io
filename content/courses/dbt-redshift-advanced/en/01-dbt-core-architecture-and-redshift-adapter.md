@@ -47,7 +47,7 @@ Every adapter implements a set of interfaces defined in `dbt-adapters`:
 | `ConnectionManager` | Pool and reuse connections | `keepalives_idle`, SSL options |
 
 [!IMPORTANT]
-In September 2025, the `dbt-redshift` repository was **archived and merged** into [`dbt-labs/dbt-adapters`](https://github.com/dbt-labs/dbt-adapters). All future issues and PRs go there. The PyPI package `dbt-redshift` continues to be published under the same name — only the source repository changed.
+In September 2025, the `dbt-redshift` repository was **archived and merged** into [`dbt-labs/dbt-adapters`](https://github.com/dbt-labs/dbt-adapters). All future issues and PRs go there. The PyPI package `dbt-redshift` continues to be published under the same name: only the source repository changed.
 
 ---
 
@@ -68,7 +68,7 @@ Always pin both `dbt-core` and `dbt-redshift` to the **same minor version** in `
 
 ---
 
-## profiles.yml — Connection Methods
+## profiles.yml: Connection Methods
 
 dbt-redshift supports four authentication methods. Choose the one that fits your security posture.
 
@@ -156,7 +156,7 @@ Redshift Serverless has no `cluster_id`. Remove that field and use `iam_role_arn
 
 ---
 
-## dbt_project.yml — Project Baseline
+## dbt_project.yml: Project Baseline
 
 ```yaml
 # dbt_project.yml
@@ -250,7 +250,7 @@ Cross-database writes require **SNAPSHOT transaction isolation level**. For view
 
 ---
 
-## Understanding Redshift Architecture — What dbt Cares About
+## Understanding Redshift Architecture: What dbt Cares About
 
 Amazon Redshift is a **Massively Parallel Processing (MPP)** columnar data warehouse. Every design decision in your dbt project should account for how Redshift physically stores and queries data.
 
@@ -330,7 +330,7 @@ Connection test: OK connection ok
     "Execute Against Warehouse"
   ],
   "correct": 2,
-  "explanation": "Jinja is resolved in step 5 — Compile SQL — which converts model files (with {{ ref() }}, {{ config() }}, loops, etc.) into warehouse-native SQL before execution."
+  "explanation": "Jinja is resolved in step 5, Compile SQL, which converts model files (with {{ ref() }}, {{ config() }}, loops, etc.) into warehouse-native SQL before execution."
 }
 ```
 
@@ -343,10 +343,10 @@ Connection test: OK connection ok
     "Username and password in profiles.yml",
     "IAM Role (method: iam)",
     "Browser Identity Center",
-    "No authentication — ECS is trusted by default"
+    "No authentication: ECS is trusted by default"
   ],
   "correct": 1,
-  "explanation": "IAM Role authentication (method: iam) is the recommended approach for compute services like ECS Fargate. The task role is assumed automatically — no static credentials are needed."
+  "explanation": "IAM Role authentication (method: iam) is the recommended approach for compute services like ECS Fargate. The task role is assumed automatically: no static credentials are needed."
 }
 ```
 
@@ -423,5 +423,5 @@ Connection test: OK connection ok
 - The `dbt-redshift` package moved into `dbt-labs/dbt-adapters` in September 2025. PyPI name stays the same.
 - Four authentication methods are supported: password, IAM Role, IAM Identity Center (browser SSO), and Redshift Serverless via `iam_role_arn`.
 - Set `datasharing: true` in profiles.yml (dbt-redshift 1.11+) to enable cross-database and cross-cluster model materialization.
-- Redshift's MPP architecture means every config decision — dist style, sort key, bind, backup — has a direct performance impact.
+- Redshift's MPP architecture means every config decision, dist style, sort key, bind, backup, has a direct performance impact.
 - Always pin `dbt-core` and `dbt-redshift` to the same minor version in your dependency file.

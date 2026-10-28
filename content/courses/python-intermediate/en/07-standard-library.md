@@ -1,6 +1,6 @@
 ---
 title: "The Python Standard Library"
-description: "Deep dive into os, sys, re, collections, itertools, and functools — Python's built-in modules for everyday development"
+description: "Deep dive into os, sys, re, collections, itertools, and functools, Python's built-in modules for everyday development"
 order: 7
 duration: "50 minutes"
 difficulty: "intermediate"
@@ -8,9 +8,9 @@ difficulty: "intermediate"
 
 # The Python Standard Library
 
-Python's standard library is famously comprehensive — "batteries included." These modules are available with every Python installation and solve a vast range of common problems.
+Python's standard library is famously comprehensive: "batteries included." These modules are available with every Python installation and solve a vast range of common problems.
 
-## `os` — Operating System Interface
+## `os`: Operating System Interface
 
 ```python
 import os
@@ -45,7 +45,7 @@ name, ext = os.path.splitext("data.csv")         # ("data", ".csv")
 > [!NOTE]
 > Python 3.4+ recommends `pathlib.Path` over `os.path` for most path operations. It's more intuitive and cross-platform.
 
-## `sys` — System-Specific Parameters
+## `sys`: System-Specific Parameters
 
 ```python
 import sys
@@ -77,7 +77,7 @@ print(sys.getrecursionlimit())   # 1000 default
 sys.setrecursionlimit(5000)      # Increase (use cautiously)
 ```
 
-## `re` — Regular Expressions
+## `re`: Regular Expressions
 
 ```python
 import re
@@ -140,7 +140,7 @@ print(m.groupdict())
 > [!WARNING]
 > Use raw strings (`r"pattern"`) for regex patterns to avoid escaping backslashes. `r"\d"` is correct; `"\\d"` also works but is ugly.
 
-## `collections` — Specialized Data Structures
+## `collections`: Specialized Data Structures
 
 ### Counter
 
@@ -183,7 +183,7 @@ nested["bob"]["bananas"] += 2
 ```
 
 > [!NOTE]
-> `defaultdict` never raises `KeyError` — missing keys are automatically created using the factory function. Perfect for grouping and counting.
+> `defaultdict` never raises `KeyError`: missing keys are automatically created using the factory function. Perfect for grouping and counting.
 
 ### namedtuple
 
@@ -215,7 +215,7 @@ e = Employee("Alice", 123, 75000.0)
 print(e.name, e.salary)  # Alice 75000.0
 ```
 
-## `itertools` — Iterator Tools
+## `itertools`: Iterator Tools
 
 ```python
 from itertools import count, cycle, repeat, chain, product, permutations, combinations, groupby, accumulate, islice
@@ -261,7 +261,7 @@ for key, group in groupby(data, key=lambda x: x[0]):
     print(f"{key}: {list(group)}")
 ```
 
-## `functools` — Higher-Order Functions
+## `functools`: Higher-Order Functions
 
 ```python
 from functools import partial, lru_cache, reduce, wraps

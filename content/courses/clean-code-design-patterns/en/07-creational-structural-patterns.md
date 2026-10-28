@@ -11,7 +11,7 @@ difficulty: "intermediate"
 Creational patterns deal with object creation mechanisms, while structural patterns compose classes and objects into larger structures. Together, they form the foundation of flexible, reusable object-oriented design.
 
 > [!NOTE]
-> This lesson covers the most widely used patterns from the Creational and Structural categories. Mastering these four patterns — Singleton, Factory, Observer, Adapter — will solve a majority of common design challenges.
+> This lesson covers the most widely used patterns from the Creational and Structural categories. Mastering these four patterns, Singleton, Factory, Observer, Adapter, will solve a majority of common design challenges.
 
 ## Singleton Pattern
 

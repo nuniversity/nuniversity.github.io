@@ -8,10 +8,10 @@ difficulty: "intermediário"
 
 # Formatação e Estilo de Código
 
-A formatação de código é como a pontuação na escrita — ela torna o significado claro. Um estilo consistente em toda a base de código reduz a carga cognitiva, previne debates triviais de estilo em revisões de código e ajuda a encontrar bugs mais rapidamente.
+A formatação de código é como a pontuação na escrita: ela torna o significado claro. Um estilo consistente em toda a base de código reduz a carga cognitiva, previne debates triviais de estilo em revisões de código e ajuda a encontrar bugs mais rapidamente.
 
 > [!NOTE]
-> "Formatação de código é sobre comunicação, não preferência pessoal. Um estilo consistente em uma equipe elimina uma classe inteira de discussões sem sentido." — Adaptado de *Código Limpo*
+> "Formatação de código é sobre comunicação, não preferência pessoal. Um estilo consistente em uma equipe elimina uma classe inteira de discussões sem sentido.": Adaptado de *Código Limpo*
 
 ## Por que a Formatação é Importante
 

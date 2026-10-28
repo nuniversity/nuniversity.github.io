@@ -59,7 +59,7 @@ df_parquet.write.format("delta").mode("overwrite").save("/data/delta/employees")
 ```
 
 > [!SUCCESS]
-> Tabelas Delta são autodescritivas — o esquema, histórico de versões e log de transações são armazenados junto com os dados. Nenhum metastore externo é necessário.
+> Tabelas Delta são autodescritivas, o esquema, histórico de versões e log de transações são armazenados junto com os dados. Nenhum metastore externo é necessário.
 
 ## Leitura de Tabelas Delta
 

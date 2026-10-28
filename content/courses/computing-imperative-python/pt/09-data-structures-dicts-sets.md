@@ -406,7 +406,7 @@ Dados dois dicionários, escreva código para mesclá-los. Se uma chave existe e
 Dados `A = {1, 2, 3, 4, 5}` e `B = {4, 5, 6, 7, 8}`, encontre:
 - União
 - Interseção
-- Diferença (A - B)
+- Diferença (A: B)
 - Diferença simétrica
 
 ### Exercício 5: Remover Duplicatas

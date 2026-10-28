@@ -11,6 +11,8 @@ Validates:
 - Key takeaways section exists
 - Code blocks have language identifiers
 - Interactive component blocks have valid JSON syntax
+- Prose is read-aloud friendly: no em/en dashes, no spaced hyphens, no long
+  parenthetical asides (warnings, exit 1)
 
 Environment Variables:
     OPENCODE_FILE_PATH: Path to the lesson .md file to validate
@@ -202,6 +204,141 @@ def validate_interactive_blocks(content: str) -> tuple[list[str], list[str]]:
     return errors, warnings
 
 
+
+
+INTERACTIVE_FENCES = {
+    "question", "matching", "fillblank", "dragdrop", "plot",
+    "video", "phet", "molecule", "interactive",
+}
+
+DASH_CHARS = {
+    "\u2014": "Em dash (—)",
+    "\u2013": "En dash (–)",
+}
+LONG_PARENTHETICAL = 80
+MAX_REPORTED_LINES = 3
+
+
+def _prose_lines(content: str):
+    """Yield (line_number, text) for prose, skipping fenced blocks and code spans."""
+    in_fence = False
+    fence_lang = ""
+    in_display_math = False
+    for number, line in enumerate(content.splitlines(), 1):
+        stripped = line.strip()
+        if stripped.startswith("```") or stripped.startswith("~~~"):
+            if not in_fence:
+                in_fence = True
+                fence_lang = stripped.lstrip("`~").strip().lower()
+            else:
+                in_fence = False
+                fence_lang = ""
+            continue
+        if in_fence:
+            # Quiz and widget JSON is rendered text, so its strings are prose.
+            if fence_lang not in INTERACTIVE_FENCES:
+                continue
+        if in_display_math:
+            if stripped.endswith("$$"):
+                in_display_math = False
+            continue
+        if stripped.startswith("$$"):
+            if not (len(stripped) > 4 and stripped.endswith("$$")):
+                in_display_math = True
+            continue
+        # Table separator rows and horizontal rules are structure, not prose.
+        if re.fullmatch(r"\s*\|?[\s:|-]{5,}\|?\s*", line) or re.fullmatch(r"\s*-{3,}\s*", line):
+            continue
+        # HTML comments are not rendered.
+        if "<!--" in line or "-->" in line:
+            continue
+        prose = re.sub(r"`[^`]*`", " ", line)
+        # Only maths-looking `$...$`. Currency also uses `$`, and stripping a
+        # pair of prices would hide the prose between them.
+        prose = re.sub(
+            r"\$[^$\n]{1,80}\$",
+            lambda m: " "
+            if re.search(r"[\\^_{}]", m.group(0)) or re.match(r"\$[A-Za-z\\]", m.group(0))
+            else m.group(0),
+            prose,
+        )
+        yield number, prose
+
+
+def validate_prose(content: str) -> tuple[list[str], list[str]]:
+    """Check prose for punctuation that breaks text-to-speech.
+
+    The lesson is read aloud by the browser's speech engine. Em dashes, en
+    dashes and spaced hyphens are skipped rather than voiced, so the sentence
+    loses its pause; long parenthetical asides are not voiced either. These are
+    warnings (exit 1) because the repository still contains legacy content, but
+    the skill requires zero in new lessons.
+
+    Returns:
+        Tuple of (errors, warnings). Prose issues are warnings.
+    """
+    errors: list[str] = []
+    warnings: list[str] = []
+
+    dash_hits: dict[str, list[int]] = {char: [] for char in DASH_CHARS}
+    double_hyphen_lines: list[int] = []
+    spaced_hyphen_lines: list[int] = []
+    parentheticals: list[tuple[int, int]] = []
+
+    for number, line in _prose_lines(content):
+        for char in DASH_CHARS:
+            if char in line:
+                dash_hits[char].append(number)
+        # `--flag` is a CLI flag and a table cell of dashes is a placeholder.
+        if re.search(r"(?<!-)--(?![\w-])", line) and not re.search(r"\|\s*--\s*\|", line):
+            double_hyphen_lines.append(number)
+        # Ignore the blockquote markers and the list bullet: "> - item" is not
+        # a dash. Proper names ("ML Engineer - Associate") are not dashes
+        # either.
+        stripped = re.sub(r"^\s*(?:>\s*)+", "", line)
+        stripped = re.sub(r"^\s*(?:[-*+]|\d+[.)])\s+", "", stripped)
+        if re.search(r"\S\s+-\s+\S", stripped) and not re.search(
+            r"[A-ZÀ-Þ][\w.'’]*\s+-\s+[A-ZÀ-Þ]", stripped
+        ):
+            spaced_hyphen_lines.append(number)
+        for match in re.finditer(r"\(([^()]{80,})\)", line):
+            parentheticals.append((number, len(match.group(1))))
+
+    for char, name in DASH_CHARS.items():
+        lines = dash_hits[char]
+        if lines:
+            shown = ", ".join(str(n) for n in lines[:MAX_REPORTED_LINES])
+            more = "" if len(lines) <= MAX_REPORTED_LINES else f" and {len(lines) - MAX_REPORTED_LINES} more"
+            warnings.append(
+                f"{name} used {len(lines)}x in prose (lines {shown}{more}). "
+                "Text-to-speech skips it: use a comma, semicolon, colon or full stop."
+            )
+
+    if double_hyphen_lines:
+        shown = ", ".join(str(n) for n in double_hyphen_lines[:MAX_REPORTED_LINES])
+        warnings.append(
+            f"Double hyphen (--) used {len(double_hyphen_lines)}x in prose (lines {shown}). "
+            "Replace it with a comma, semicolon, colon or full stop."
+        )
+
+    if spaced_hyphen_lines:
+        shown = ", ".join(str(n) for n in spaced_hyphen_lines[:MAX_REPORTED_LINES])
+        warnings.append(
+            f"Hyphen used as a dash {len(spaced_hyphen_lines)}x in prose (lines {shown}). "
+            "Use a comma or semicolon; a hyphen belongs inside a compound word."
+        )
+
+    if parentheticals:
+        shown = ", ".join(str(line) for line, _ in parentheticals[:MAX_REPORTED_LINES])
+        warnings.append(
+            f"{len(parentheticals)} parenthetical aside(s) longer than {LONG_PARENTHETICAL} "
+            f"characters (lines {shown}). Parentheses are not voiced: rewrite as a "
+            "clause after a comma, or as its own sentence."
+        )
+
+    return errors, warnings
+
+
 def validate_lesson(path: Path) -> tuple[list[str], list[str]]:
     """Validate a complete lesson file.
 
@@ -241,6 +378,10 @@ def validate_lesson(path: Path) -> tuple[list[str], list[str]]:
     interactive_errors, interactive_warnings = validate_interactive_blocks(content)
     errors.extend(interactive_errors)
     warnings.extend(interactive_warnings)
+
+    prose_errors, prose_warnings = validate_prose(content)
+    errors.extend(prose_errors)
+    warnings.extend(prose_warnings)
 
     return errors, warnings
 

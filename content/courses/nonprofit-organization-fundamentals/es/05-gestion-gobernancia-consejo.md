@@ -13,7 +13,7 @@ La gobernanza eficaz es quizás el factor más crítico para el éxito sostenibl
 
 ### 1. Responsabilidad Fiduciaria
 
-Los miembros del consejo de administración (o directores) de una ONG asumen **deberes fiduciarios** — obligaciones legales y éticas de actuar en el mejor interés de la organización.
+Los miembros del consejo de administración (o directores) de una ONG asumen **deberes fiduciarios**: obligaciones legales y éticas de actuar en el mejor interés de la organización.
 
 #### Deber de Lealtad
 - Los miembros del consejo deben actuar exclusivamente en el mejor interés de la organización

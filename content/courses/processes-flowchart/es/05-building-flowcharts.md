@@ -161,7 +161,7 @@ flowchart TD
 ```
 
 > [!NOTE] Nota de seguridad
-> Observa que cuando el correo no se encuentra, mostramos un "mensaje genérico" en lugar de "correo no encontrado". Esta es una buena práctica de seguridad — no reveles si un correo existe en tu sistema.
+> Observa que cuando el correo no se encuentra, mostramos un "mensaje genérico" en lugar de "correo no encontrado". Esta es una buena práctica de seguridad: no reveles si un correo existe en tu sistema.
 
 ## Ejemplo paso a paso 3: Procesamiento de peticiones a una API
 
@@ -386,7 +386,7 @@ flowchart TD
 - Usa **patrones comunes** como bucles de validación, lógica de reintentos y procesamiento paralelo
 - **Revisa tu diagrama de flujo** respecto al proceso real para garantizar la precisión
 - **Mermaid** es una excelente herramienta para crear diagramas de flujo con control de versiones
-- La práctica hace al maestro — cuanto más diagramas de flujo construyas, mejor te irá
+- La práctica hace al maestro: cuanto más diagramas de flujo construyas, mejor te irá
 
 > [!SUCCESS] Has completado la Lección 5
-> Ya sabes construir diagramas de flujo desde cero. En la lección final de este curso exploraremos la **optimización de procesos** — cómo usar los diagramas de flujo para identificar cuellos de botella y mejorar los procesos.
+> Ya sabes construir diagramas de flujo desde cero. En la lección final de este curso exploraremos la **optimización de procesos**: cómo usar los diagramas de flujo para identificar cuellos de botella y mejorar los procesos.

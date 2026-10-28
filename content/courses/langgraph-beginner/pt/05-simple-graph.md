@@ -558,5 +558,5 @@ builder.add_edge("output", END)  # CORREÇÃO
 - Sempre adicione uma aresta do último nó para END
 - Nós podem ser atualizados de determinísticos para alimentados por LLM sem alterações no grafo
 - Loops precisam de condições de terminação
-- Nunca transforme o estado diretamente — retorne um dict de atualizações
+- Nunca transforme o estado diretamente: retorne um dict de atualizações
 - Teste nós individualmente e o grafo completo como testes de integração

@@ -1,16 +1,16 @@
 ---
-title: "Domínio 2.1 — Modelo e Princípios de Segurança do Snowflake"
+title: "Domínio 2.1, Modelo e Princípios de Segurança do Snowflake"
 description: "Domine o modelo de segurança do Snowflake: RBAC, DAC, hierarquia de objetos seguráveis, roles de sistema, métodos de autenticação e network policies."
 order: 7
 difficulty: intermediate
 duration: "80 min"
 ---
 
-# Domínio 2.1 — Modelo e Princípios de Segurança do Snowflake
+# Domínio 2.1: Modelo e Princípios de Segurança do Snowflake
 
 ## Peso no Exame
 
-O **Domínio 2.0 — Gerenciamento de Conta e Governança de Dados** representa **~20%** do exame. Segurança é um dos tópicos mais testados.
+O **Domínio 2.0: Gerenciamento de Conta e Governança de Dados** representa **~20%** do exame. Segurança é um dos tópicos mais testados.
 
 > [!NOTE]
 > Esta lição corresponde ao **Objetivo de Exame 2.1**: *Explicar o modelo e os princípios de segurança do Snowflake*, incluindo RBAC, DAC, hierarquia de objetos seguráveis, network policies, métodos de autenticação, roles de sistema, roles funcionais, roles secundárias, identificadores de conta e logging/tracing.
@@ -53,13 +53,13 @@ GRANT SELECT ON TABLE analytics.public.dados_clientes TO ROLE role_analista;
 ```
 
 > [!NOTE]
-> O DAC significa que você não precisa do SYSADMIN para gerenciar cada concessão. Os proprietários de objetos podem autogerenciar o acesso a seus objetos — isso habilita a **administração federada**.
+> O DAC significa que você não precisa do SYSADMIN para gerenciar cada concessão. Os proprietários de objetos podem autogerenciar o acesso a seus objetos; isso habilita a **administração federada**.
 
 ---
 
 ## Hierarquia de Objetos Seguráveis
 
-Todo objeto do Snowflake é um **objeto segurável** — privilégios podem ser concedidos nele. Os objetos herdam do seu contêiner pai:
+Todo objeto do Snowflake é um **objeto segurável**: privilégios podem ser concedidos nele. Os objetos herdam do seu contêiner pai:
 
 ```mermaid
 graph TD
@@ -125,7 +125,7 @@ O Snowflake fornece roles de sistema pré-construídas com uma hierarquia de pri
 | `SECURITYADMIN` | Gerencia usuários e roles | Criar/gerenciar usuários, roles, concessões |
 | `SYSADMIN` | Gerencia warehouses e bancos de dados | Criar warehouses, bancos de dados, schemas, tabelas |
 | `USERADMIN` | Gerenciamento limitado de usuários | Apenas criar usuários e roles |
-| `PUBLIC` | Role padrão para todos os usuários | Mínimo — todo usuário tem esta role |
+| `PUBLIC` | Role padrão para todos os usuários | Mínimo: todo usuário tem esta role |
 
 **Hierarquia de herança de roles:**
 
@@ -154,7 +154,7 @@ flowchart TD
 
 ### Roles de Conta (Account Roles)
 
-As roles de conta têm escopo para a **conta inteira** — podem conceder acesso a qualquer objeto na conta:
+As roles de conta têm escopo para a **conta inteira**: podem conceder acesso a qualquer objeto na conta:
 
 ```sql
 -- Criar uma role de conta personalizada
@@ -208,13 +208,13 @@ Quando as roles secundárias estão ativas, o usuário tem a **união de todos o
 
 ### Nome de Usuário + Senha
 
-Autenticação básica — nome de usuário e senha. Menos seguro, mas mais simples.
+Autenticação básica: nome de usuário e senha. Menos seguro, mas mais simples.
 
 ```sql
 CREATE USER joana PASSWORD = 'SenhaSegura123!' MUST_CHANGE_PASSWORD = TRUE;
 ```
 
-### MFA — Multi-Factor Authentication (Autenticação Multifator)
+### MFA: Multi-Factor Authentication (Autenticação Multifator)
 
 O MFA adiciona um segundo fator (Duo Security) à autenticação por senha:
 
@@ -230,7 +230,7 @@ ALTER ACCOUNT SET MFA_ENROLLMENT = REQUIRED;
 
 O Snowflake integra-se com **Provedores de Identidade (IdPs)** corporativos via **SAML 2.0**:
 - Okta, Azure AD, OneLogin, Ping Identity, etc.
-- Os usuários se autenticam via IdP — o Snowflake valida a asserção SAML
+- Os usuários se autenticam via IdP, o Snowflake valida a asserção SAML
 - Nenhuma senha do Snowflake é necessária
 
 ```sql
@@ -262,7 +262,7 @@ CREATE SECURITY INTEGRATION tableau_oauth
 
 ### Autenticação por Par de Chaves (Key-Pair Authentication)
 
-A autenticação por par de chaves RSA é para **contas de serviço e acesso programático** — mais segura do que senhas para automação:
+A autenticação por par de chaves RSA é para **contas de serviço e acesso programático**: mais segura do que senhas para automação:
 
 ```bash
 # Gerar par de chaves

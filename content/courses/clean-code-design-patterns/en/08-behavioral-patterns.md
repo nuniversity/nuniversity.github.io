@@ -575,7 +575,7 @@ sequenceDiagram
 ```
 
 > [!WARNING]
-> Anti-patterns are not just "bad code" — they are common solutions to recurring problems that seem good initially but have negative consequences. Recognizing them is the first step to avoiding them.
+> Anti-patterns are not just "bad code"; they are common solutions to recurring problems that seem good initially but have negative consequences. Recognizing them is the first step to avoiding them.
 
 ## Practice Exercises
 

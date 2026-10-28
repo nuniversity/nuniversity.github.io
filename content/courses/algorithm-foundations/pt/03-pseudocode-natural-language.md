@@ -39,7 +39,7 @@ flowchart LR
 ```
 
 > [!TIP]
-> Pense no pseudocódigo como a planta de um prédio. Arquitetos não começam assentando tijolos -- eles primeiro criam planos detalhados. O pseudocódigo é a planta do seu algoritmo.
+> Pense no pseudocódigo como a planta de um prédio. Arquitetos não começam assentando tijolos: eles primeiro criam planos detalhados. O pseudocódigo é a planta do seu algoritmo.
 
 ## Convenções de Pseudocódigo
 

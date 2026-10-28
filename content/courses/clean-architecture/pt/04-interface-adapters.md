@@ -1,6 +1,6 @@
 ---
 title: "Adaptadores de Interface"
-description: "Aprenda como os adaptadores de interface traduzem entre as camadas internas e os frameworks externos — controladores, apresentadores, gateways e repositórios"
+description: "Aprenda como os adaptadores de interface traduzem entre as camadas internas e os frameworks externos, controladores, apresentadores, gateways e repositórios"
 order: 4
 duration: "60 minutos"
 difficulty: "intermediário"
@@ -304,7 +304,7 @@ class FakeUseCase:
 8. **Refatore para Adaptadores**: Pegue uma view Django que usa ORM e envia email diretamente. Refatore em controlador, caso de uso, repositório e gateway.
 
 > [!SUCCESS]
-> Adaptadores de interface são o encanamento que faz a Arquitetura Limpa funcionar. Eles traduzem, transformam e isolam — mantendo a lógica de negócio pura.
+> Adaptadores de interface são o encanamento que faz a Arquitetura Limpa funcionar. Eles traduzem, transformam e isolam: mantendo a lógica de negócio pura.
 
 ## Exemplo Completo de Adaptador de Banco de Dados
 

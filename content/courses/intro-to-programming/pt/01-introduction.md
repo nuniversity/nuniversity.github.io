@@ -26,7 +26,7 @@ Programação é o processo de escrever instruções que um computador pode segu
 
 ## Como os Computadores Entendem Código
 
-Computadores entendem apenas binário — uns e zeros. Linguagens de programação como JavaScript, Python e Rust atuam como tradutoras. Você escreve código legível para humanos, e um compilador ou interpretador o converte em instruções de máquina.
+Computadores entendem apenas binário: uns e zeros. Linguagens de programação como JavaScript, Python e Rust atuam como tradutoras. Você escreve código legível para humanos, e um compilador ou interpretador o converte em instruções de máquina.
 
 ## Seu Primeiro Programa
 
@@ -61,4 +61,4 @@ Substitua `[Seu Nome]` pelo seu nome real e imagine a saída.
 
 ## Próximos Passos
 
-Na próxima lição, você vai aprender sobre variáveis — como armazenar e manipular dados em seus programas.
+Na próxima lição, você vai aprender sobre variáveis: como armazenar e manipular dados em seus programas.

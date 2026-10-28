@@ -26,7 +26,7 @@ Problemas:
 - **Anomalia de exclusão**: Excluir um pedido também exclui as informações do cliente
 
 > [!NOTE]
-> Estas são chamadas de **anomalias** — inconsistências de dados causadas por design ruim. A normalização as elimina.
+> Estas são chamadas de **anomalias**: inconsistências de dados causadas por design ruim. A normalização as elimina.
 
 ## Diagramas Entidade-Relacionamento (ER)
 
@@ -168,7 +168,7 @@ Tabelas necessárias:
 - `authors(id, name, email, bio)`
 - `posts(id, author_id, title, body, published_at)`
 - `categories(id, name, slug)`
-- `post_categories(post_id, category_id)` — tabela de junção
+- `post_categories(post_id, category_id)`: tabela de junção
 - `comments(id, post_id, author_name, body, created_at)`
 
 ```sql
@@ -253,7 +253,7 @@ categories (id, name)
 O resultado: 5 tabelas, zero redundância, relacionamentos claros.
 
 > [!SUCCESS]
-> Um bom design é invisível — você só percebe quando ele está faltando. Reserve um tempo para planejar antes de escrever um único CREATE TABLE.
+> Um bom design é invisível: você só percebe quando ele está faltando. Reserve um tempo para planejar antes de escrever um único CREATE TABLE.
 
 ## Perguntas de Prática
 

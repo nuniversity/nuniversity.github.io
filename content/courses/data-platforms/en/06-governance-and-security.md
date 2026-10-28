@@ -8,7 +8,7 @@ duration: "60 min"
 
 # Governance, Security & Compliance
 
-> **Bottom Line:** Unity Catalog is the most ambitious governance model — unified, code-first, spanning files through to ML models. Lake Formation is the most flexible for complex AWS-native environments. Snowflake's governance is mature, well-integrated, and requires the least configuration overhead — but is bounded by the Snowflake platform.
+> **Bottom Line:** Unity Catalog is the most ambitious governance model, unified, code-first, spanning files through to ML models. Lake Formation is the most flexible for complex AWS-native environments. Snowflake's governance is mature, well-integrated, and requires the least configuration overhead, but is bounded by the Snowflake platform.
 
 ---
 
@@ -43,7 +43,7 @@ Data governance covers five critical domains. Here's how each platform addresses
 
 ### The IAM Foundation
 
-Everything in AWS governance starts with IAM (Identity and Access Management). IAM alone is insufficient for fine-grained data lake control — that's where Lake Formation adds value.
+Everything in AWS governance starts with IAM (Identity and Access Management). IAM alone is insufficient for fine-grained data lake control; that's where Lake Formation adds value.
 
 ```
 IAM alone (pre-Lake Formation):

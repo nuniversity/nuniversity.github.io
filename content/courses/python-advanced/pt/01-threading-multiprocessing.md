@@ -84,7 +84,7 @@ with ThreadPoolExecutor(max_workers=5) as pool:
 
 ## ProcessPoolExecutor
 
-Para trabalho CPU-bound, use `ProcessPoolExecutor` — ele contorna o GIL ao criar processos separados.
+Para trabalho CPU-bound, use `ProcessPoolExecutor`: ele contorna o GIL ao criar processos separados.
 
 ```python
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -120,7 +120,7 @@ with ProcessPoolExecutor(max_workers=4) as pool:
 ```
 
 [!NOTE]
-Cada processo tem seu próprio espaço de memória — você não pode compartilhar objetos Python diretamente. Use `multiprocessing.Queue`, `multiprocessing.Array` ou `Manager` para comunicação entre processos.
+Cada processo tem seu próprio espaço de memória: você não pode compartilhar objetos Python diretamente. Use `multiprocessing.Queue`, `multiprocessing.Array` ou `Manager` para comunicação entre processos.
 
 ## Threading de Baixo Nível: Locks e Filas
 
@@ -281,7 +281,7 @@ flowchart TD
 
 1. O que é o GIL e por que ele existe? Quando ele é liberado?
 2. Você tem uma lista de 10.000 URLs para baixar. Usaria `ThreadPoolExecutor` ou `ProcessPoolExecutor`? Por quê?
-3. Escreva um programa que calcula a soma dos quadrados dos números 1–10⁷ usando `ProcessPoolExecutor` e compara a velocidade com execução single-threaded.
+3. Escreva um programa que calcula a soma dos quadrados dos números 1 to 10⁷ usando `ProcessPoolExecutor` e compara a velocidade com execução single-threaded.
 4. O que acontece se duas threads chamam `counter += 1` simultaneamente sem um lock? Ilustre com um exemplo.
 5. Como `queue.Queue` difere de `multiprocessing.Queue`? Quando você usaria cada um?
 6. Implemente um padrão produtor-consumidor onde três produtores geram dados e dois consumidores os processam, usando `threading` e `queue`.

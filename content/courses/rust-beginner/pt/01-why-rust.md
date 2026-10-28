@@ -20,10 +20,10 @@ As linguagens se dividem em dois grupos:
 | Garbage collection | Java, Go, Python | Seguro, mas pausas imprevisíveis e sobrecarga |
 | **Baseada em ownership** | **Rust** | **Segura em tempo de compilação, zero sobrecarga em execução** |
 
-Rust garante segurança de memória em **tempo de compilação** através de seu sistema de ownership. Sem dereferências de ponteiro nulo, sem ponteiros soltos, sem buffer overflows — sem precisar de um garbage collector.
+Rust garante segurança de memória em **tempo de compilação** através de seu sistema de ownership. Sem dereferências de ponteiro nulo, sem ponteiros soltos, sem buffer overflows: sem precisar de um garbage collector.
 
 > [!SUCCESS]
-> O modelo de ownership do Rust captura bugs de memória em tempo de compilação. Se compila, é seguro para memória — sem surpresas em execução.
+> O modelo de ownership do Rust captura bugs de memória em tempo de compilação. Se compila, é seguro para memória: sem surpresas em execução.
 
 ## Abstrações de Custo Zero
 
@@ -83,13 +83,13 @@ let ptr = Box::new(42);
 
 ## O Ecossistema Rust
 
-### Rustup — Gerenciador de Toolchains
+### Rustup: Gerenciador de Toolchains
 ```bash
 rustup update   # Atualizar Rust
 rustup default nightly  # Mudar para nightly
 ```
 
-### Cargo — Sistema de Build e Gerenciador de Pacotes
+### Cargo: Sistema de Build e Gerenciador de Pacotes
 ```bash
 cargo new meu_projeto
 cargo build
@@ -101,11 +101,11 @@ cargo doc --open
 ### Crates.io
 O registro de pacotes Rust hospeda mais de 150.000 crates:
 
-- **serde** — Serialização/deserialização
-- **tokio** — Runtime assíncrono
-- **rayon** — Paralelismo de dados
-- **clap** — Parsing de argumentos CLI
-- **reqwest** — Cliente HTTP
+- **serde**: Serialização/deserialização
+- **tokio**: Runtime assíncrono
+- **rayon**: Paralelismo de dados
+- **clap**: Parsing de argumentos CLI
+- **reqwest**: Cliente HTTP
 
 ## Concorrência Sem Medo
 
@@ -127,16 +127,16 @@ fn main() {
 
 ## Onde Rust se Destaca
 
-- **WebAssembly** — Compila para WASM com velocidade quase nativa no navegador
-- **Sistemas embarcados** — Sem runtime, performance previsível
-- **Ferramentas CLI** — Binários rápidos e pequenos (bat, ripgrep, fd, alacritty)
-- **Backends web** — Frameworks Actix-web, Axum, Rocket
-- **Motores de jogo** — Bevy, bindings Godot
-- **Sistemas operacionais** — Redox, módulos de kernel
-- **Blockchain** — Solana, Polkadot, Near
+- **WebAssembly**: Compila para WASM com velocidade quase nativa no navegador
+- **Sistemas embarcados**: Sem runtime, performance previsível
+- **Ferramentas CLI**: Binários rápidos e pequenos (bat, ripgrep, fd, alacritty)
+- **Backends web**: Frameworks Actix-web, Axum, Rocket
+- **Motores de jogo**: Bevy, bindings Godot
+- **Sistemas operacionais**: Redox, módulos de kernel
+- **Blockchain**: Solana, Polkadot, Near
 
 > [!WARNING]
-> Rust tem uma curva de aprendizado íngreme. O sistema de ownership e o borrow checker podem parecer restritivos no início. Persista nas primeiras semanas — os erros do compilador são excelentes ferramentas de aprendizado.
+> Rust tem uma curva de aprendizado íngreme. O sistema de ownership e o borrow checker podem parecer restritivos no início. Persista nas primeiras semanas: os erros do compilador são excelentes ferramentas de aprendizado.
 
 ## Empresas Usando Rust
 

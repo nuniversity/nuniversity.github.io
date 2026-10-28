@@ -220,7 +220,7 @@ merged.printSchema()
 ```
 
 > [!WARNING]
-> La fusión de esquemas es costosa — requiere leer todos los archivos para descubrir sus esquemas antes del procesamiento. Úsala solo cuando sea necesario.
+> La fusión de esquemas es costosa: requiere leer todos los archivos para descubrir sus esquemas antes del procesamiento. Úsala solo cuando sea necesario.
 
 ## Ejemplos de Conversión de Formatos
 

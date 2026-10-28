@@ -1,6 +1,6 @@
 ---
 title: "Entities & Value Objects"
-description: "Deep dive into Entities and Value Objects — the fundamental building blocks of DDD. Learn identity, equality, immutability, and when to use each pattern"
+description: "Deep dive into Entities and Value Objects, the fundamental building blocks of DDD. Learn identity, equality, immutability, and when to use each pattern"
 order: 4
 duration: "65 minutes"
 difficulty: "advanced"
@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Entities & Value Objects
 
-Entities and Value Objects are the **two fundamental building blocks** of a domain model in DDD. Together, they form the atoms from which richer structures like Aggregates are built. Understanding the distinction between them — and applying it correctly — is essential for a clean domain model.
+Entities and Value Objects are the **two fundamental building blocks** of a domain model in DDD. Together, they form the atoms from which richer structures like Aggregates are built. Understanding the distinction between them, and applying it correctly, is essential for a clean domain model.
 
 > [!NOTE]
 > Eric Evans defines an Entity as "an object that is not defined by its attributes, but rather by a thread of continuity and identity." A Value Object is "an object that describes some characteristic or attribute but carries no concept of identity."
@@ -152,7 +152,7 @@ class WarehouseBin:
 
 ## Value Objects: Objects with Equality by Value
 
-A Value Object has **no identity**. Two Value Objects are equal if all their attributes are equal. They are immutable — once created, they cannot change.
+A Value Object has **no identity**. Two Value Objects are equal if all their attributes are equal. They are immutable: once created, they cannot change.
 
 ```python
 from dataclasses import dataclass
@@ -288,7 +288,7 @@ class Customer:
 
 ## Modeling with Value Objects
 
-Value Objects help avoid **primitive obsession** — the anti-pattern of using primitive types (strings, ints, floats) for domain concepts.
+Value Objects help avoid **primitive obsession**: the anti-pattern of using primitive types (strings, ints, floats) for domain concepts.
 
 ```python
 # Primitive obsession (BAD)

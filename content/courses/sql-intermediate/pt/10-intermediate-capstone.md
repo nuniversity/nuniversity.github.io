@@ -138,7 +138,7 @@ ORDER BY lifetime_value DESC;
 
 ## Desafio 2: Relatório de Desempenho de Produtos (Múltiplos JOINs)
 
-Mostre nome do produto, categoria, total de unidades vendidas, receita total, lucro total (receita - custo * quantidade) e estoque atual. Ordene por lucro decrescente.
+Mostre nome do produto, categoria, total de unidades vendidas, receita total, lucro total (receita: custo * quantidade) e estoque atual. Ordene por lucro decrescente.
 
 ```sql
 WITH product_sales AS (

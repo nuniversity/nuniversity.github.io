@@ -58,7 +58,7 @@ print([s["name"] for s in by_name_len])
 ```
 
 > [!NOTE]
-> Lambda bodies are limited to a single expression — you cannot use statements like `return`, `if`/`elif`/`else` (though you can use the ternary expression), or loops. If you need more complexity, use a named function.
+> Lambda bodies are limited to a single expression; you cannot use statements like `return`, `if`/`elif`/`else` (though you can use the ternary expression), or loops. If you need more complexity, use a named function.
 
 ## When to Use Lambdas
 
@@ -616,4 +616,4 @@ for r in result:
 - Closures power memoization, rate limiting, lazy initialization, and more
 
 > [!SUCCESS]
-> You now understand lambdas and closures — the foundation for function composition, partial application, and many advanced functional patterns. These tools let you create specialized functions on the fly and encapsulate state without classes.
+> You now understand lambdas and closures: the foundation for function composition, partial application, and many advanced functional patterns. These tools let you create specialized functions on the fly and encapsulate state without classes.

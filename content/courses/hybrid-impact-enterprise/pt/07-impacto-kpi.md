@@ -1,13 +1,13 @@
 ---
 title: "Impacto Social como KPI Central: Theory of Change, SROI e Relato"
-description: "Como transformar impacto social em indicador de desempenho: cadeia de resultados e Theory of Change em 11 passos, SROI com os quatro ajustes anti-superestimativa, IRIS+ e as 5 Dimensões do Impacto, GRI 3, ISO 26000, B Impact Assessment, diferença-em-diferenças, IWAF/IP&L e o painel de KPIs da empresa híbrida — com contas resolvidas, benchmarks verificados e o veredito comparativo entre os cinco modelos de empresa."
+description: "Como transformar impacto social em indicador de desempenho: cadeia de resultados e Theory of Change em 11 passos, SROI com os quatro ajustes anti-superestimativa, IRIS+ e as 5 Dimensões do Impacto, GRI 3, ISO 26000, B Impact Assessment, diferença-em-diferenças, IWAF/IP&L e o painel de KPIs da empresa híbrida, com contas resolvidas, benchmarks verificados e o veredito comparativo entre os cinco modelos de empresa."
 order: 7
 difficulty: "intermediate"
 duration: "90 min"
 ---
 # Impacto Social como KPI Central: Theory of Change, SROI e Relato
 
-Toda empresa híbrida chega a um momento incômodo: o relatório financeiro é preciso até o centavo e o relatório de impacto diz apenas que "a vida de muitas pessoas melhorou". Entre o rigor de um e a vagueza do outro mora o risco desta lição — porque **impacto sem método é opinião com planilha**. Transformar impacto em KPI não é publicar um número bonito: é construir uma cadeia lógica, medir contrafactual, aplicar ajustes que descontem o que já aconteceria de qualquer modo e escolher um quadro de referência que permita comparação.
+Toda empresa híbrida chega a um momento incômodo: o relatório financeiro é preciso até o centavo e o relatório de impacto diz apenas que "a vida de muitas pessoas melhorou". Entre o rigor de um e a vagueza do outro mora o risco desta lição: porque **impacto sem método é opinião com planilha**. Transformar impacto em KPI não é publicar um número bonito: é construir uma cadeia lógica, medir contrafactual, aplicar ajustes que descontem o que já aconteceria de qualquer modo e escolher um quadro de referência que permita comparação.
 
 ```text
 ====================================================================
@@ -41,7 +41,7 @@ Toda empresa híbrida chega a um momento incômodo: o relatório financeiro é p
 ```
 
 > [!NOTE]
-> **A cadeia padrão é fixa: insumo → atividade → output → outcome → impacto.** Outputs são entregas sob controle da organização; outcomes são mudanças fora do seu controle; impacto é o efeito de longo prazo. Trocar a ordem — em prova, em relatório ou em reunião de conselho — denuncia que quem fala não distingue entrega de mudança.
+> **A cadeia padrão é fixa: insumo → atividade → output → outcome → impacto.** Outputs são entregas sob controle da organização; outcomes são mudanças fora do seu controle; impacto é o efeito de longo prazo. Trocar a ordem, em prova, em relatório ou em reunião de conselho, denuncia que quem fala não distingue entrega de mudança.
 
 Nesta lição você vai:
 
@@ -49,12 +49,12 @@ Nesta lição você vai:
 - construir uma **Theory of Change** em **11 passos**, de trás para frente, com premissas e riscos explícitos;
 - calcular **SROI** do bruto ao líquido, com os **4 ajustes** (deadweight, attribution, displacement e drop-off) e conferir contas de casos reais;
 - usar o **IRIS+** e as **5 Dimensões do Impacto** para padronizar o que medir;
-- distinguir **GRI**, **ISO 26000** e **B Impact Assessment** — relato, orientação e certificação, três coisas diferentes;
+- distinguir **GRI**, **ISO 26000** e **B Impact Assessment**: relato, orientação e certificação, três coisas diferentes;
 - estimar impacto causal com **baseline, contrafactual e diferença-em-diferenças**;
 - ler o **IP&L** e o retorno integrado (dobro e triplo resultado);
 - montar um **painel de KPIs** que cubra os cinco níveis da cadeia, com frequência, método e meta;
 - conferir **casos reais** (Natura, REI Co-op, MONDRAGON, COPACOL) e o que cada um publica como número de impacto;
-- separar, nas **atualizações 2025–2026** de reporte ESG, o que está **vigente** do que apenas foi **anunciado**.
+- separar, nas **atualizações 2025 to 2026** de reporte ESG, o que está **vigente** do que apenas foi **anunciado**.
 
 ---
 
@@ -74,9 +74,9 @@ A distinção que resolve 90% das discussões de painel é simples: **output é 
 
 ### 1.2 A pergunta que separa indicador de impacto de indicador de atividade
 
-Pergunte, sobre qualquer KPI da sua empresa: **"e se a gente não fizesse nada, o que aconteceria?"** Se a resposta for "o número continua igual", o indicador não mede impacto — mede volume. Se a resposta for desconhecida, falta baseline. Se a resposta for estimável com um grupo de comparação, você tem um indicador de impacto.
+Pergunte, sobre qualquer KPI da sua empresa: **"e se a gente não fizesse nada, o que aconteceria?"** Se a resposta for "o número continua igual", o indicador não mede impacto: mede volume. Se a resposta for desconhecida, falta baseline. Se a resposta for estimável com um grupo de comparação, você tem um indicador de impacto.
 
-- **🔢 Você sabia?** O **mercado global de impact investing** movimenta **US$ 1,571 trilhão** em ativos sob gestão, com **mais de 3.907 organizações** e crescimento composto de **21% ao ano desde 2019** (GIIN, *Sizing 2024*, out/2024). Investidor desse mercado não aceita "mudamos vidas": pede métrica comparável — e é por isso que a cadeia de resultados deixou de ser burocracia e virou requisito de capital.
+- **🔢 Você sabia?** O **mercado global de impact investing** movimenta **US$ 1,571 trilhão** em ativos sob gestão, com **mais de 3.907 organizações** e crescimento composto de **21% ao ano desde 2019** (GIIN, *Sizing 2024*, out/2024). Investidor desse mercado não aceita "mudamos vidas": pede métrica comparável, e é por isso que a cadeia de resultados deixou de ser burocracia e virou requisito de capital.
 
 ---
 
@@ -84,7 +84,7 @@ Pergunte, sobre qualquer KPI da sua empresa: **"e se a gente não fizesse nada, 
 
 ### 2.1 O método reverso
 
-A **Theory of Change (ToC)** mapeia a sequência **atividade → output → outcome → impacto**, mas **constrói-se de trás para frente**: começa-se no impacto desejado e caminha-se até os insumos, perguntando a cada degrau "o que precisa ser verdade para o degrau anterior acontecer?". É o método reverso — e a ordem da construção importa mais que a ordem da leitura, porque uma cadeia montada do insumo para a frente quase sempre termina descrevendo o que a organização **faz**, não o que muda no mundo.
+A **Theory of Change (ToC)** mapeia a sequência **atividade → output → outcome → impacto**, mas **constrói-se de trás para frente**: começa-se no impacto desejado e caminha-se até os insumos, perguntando a cada degrau "o que precisa ser verdade para o degrau anterior acontecer?". É o método reverso, e a ordem da construção importa mais que a ordem da leitura, porque uma cadeia montada do insumo para a frente quase sempre termina descrevendo o que a organização **faz**, não o que muda no mundo.
 
 ### 2.2 Os 11 passos do toolkit britânico
 
@@ -108,9 +108,9 @@ O **UK Analysis Function ToC Toolkit** organiza a construção em **11 passos**,
 
 ### 2.3 Os 4 passos do quadro do PNUD
 
-O quadro do **UNDG/UNDAF** resume a mesma arquitetura em **quatro passos**: (1) a **mudança de alto nível** desejada; (2) **o que é necessário** para chegar lá; (3) **premissas e riscos**; (4) **parceiros e atores-chave**. Mesma lógica, granularidade menor — útil para encurtar a conversa com o conselho sem perder o essencial.
+O quadro do **UNDG/UNDAF** resume a mesma arquitetura em **quatro passos**: (1) a **mudança de alto nível** desejada; (2) **o que é necessário** para chegar lá; (3) **premissas e riscos**; (4) **parceiros e atores-chave**. Mesma lógica, granularidade menor: útil para encurtar a conversa com o conselho sem perder o essencial.
 
-- **🔢 Você sabia?** O **trabalho reverso** tem consequência prática inesperada: se você não consegue escrever, em uma frase, o impacto de longo prazo **antes** de listar as atividades, sua ToC provavelmente descreve um plano de trabalho, não uma teoria de mudança. O guia Goldilocks chama esse momento de "decidir o destino antes de ler o mapa" — e é o ponto em que a maioria das organizações descobre que nunca decidiu.
+- **🔢 Você sabia?** O **trabalho reverso** tem consequência prática inesperada: se você não consegue escrever, em uma frase, o impacto de longo prazo **antes** de listar as atividades, sua ToC provavelmente descreve um plano de trabalho, não uma teoria de mudança. O guia Goldilocks chama esse momento de "decidir o destino antes de ler o mapa", e é o ponto em que a maioria das organizações descobre que nunca decidiu.
 
 ---
 
@@ -118,13 +118,13 @@ O quadro do **UNDG/UNDAF** resume a mesma arquitetura em **quatro passos**: (1) 
 
 ### 3.1 A fórmula e as duas modalidades
 
-O **SROI (Social Return on Investment)** valora mudanças sociais e ambientais **em moeda** e devolve uma razão. A referência do guia do Cabinet Office é **3:1 — cada £1 investido entrega £3 de valor social**.
+O **SROI (Social Return on Investment)** valora mudanças sociais e ambientais **em moeda** e devolve uma razão. A referência do guia do Cabinet Office é **3:1: cada £1 investido entrega £3 de valor social**.
 
 $$
 SROI = \frac{VP\ dos\ benefícios\ sociais}{VP\ do\ investimento}
 $$
 
-Duas modalidades: **Forecast (ex ante)**, estimada antes de começar, para decidir onde investir; e **Evaluative (ex post)**, apurada depois, para prestar contas. São usos diferentes do mesmo instrumento — confundir os dois é apresentar estimativa como resultado.
+Duas modalidades: **Forecast (ex ante)**, estimada antes de começar, para decidir onde investir; e **Evaluative (ex post)**, apurada depois, para prestar contas. São usos diferentes do mesmo instrumento: confundir os dois é apresentar estimativa como resultado.
 
 ### 3.2 Os 6 estágios
 
@@ -156,13 +156,13 @@ Duas modalidades: **Forecast (ex ante)**, estimada antes de começar, para decid
     "Calcular a razão com os benefícios descontados no tempo",
     "Reportar premissas, limitações e recomendações"
   ],
-  "explanation": "A ordem é cumulativa: sem escopo não há outcomes; sem outcome valorado não há o que ajustar; e o ajuste antecede sempre o cálculo da razão. Pular o estágio 4 é o que produz SROI inflado — o 7º princípio do método proíbe superestimar."
+  "explanation": "A ordem é cumulativa: sem escopo não há outcomes; sem outcome valorado não há o que ajustar; e o ajuste antecede sempre o cálculo da razão. Pular o estágio 4 é o que produz SROI inflado, o 7º princípio do método proíbe superestimar."
 }
 ```
 
 ### 3.3 Os 7 princípios e o princípio que derruba número inflado
 
-O SROI tem **7 princípios** que governam todo o processo. O **7º** é o que proíbe a superestimativa: **não se pode reivindicar mais impacto do que a evidência sustenta**. Na prática, ele se traduz nos quatro ajustes da seção 3.4 — e é o motivo pelo qual um SROI de 18:1 publicado sem premissas deve ser tratado com a mesma desconfiança de um balanço sem auditoria.
+O SROI tem **7 princípios** que governam todo o processo. O **7º** é o que proíbe a superestimativa: **não se pode reivindicar mais impacto do que a evidência sustenta**. Na prática, ele se traduz nos quatro ajustes da seção 3.4, e é o motivo pelo qual um SROI de 18:1 publicado sem premissas deve ser tratado com a mesma desconfiança de um balanço sem auditoria.
 
 ### 3.4 Os 4 ajustes anti-superestimativa
 
@@ -195,9 +195,9 @@ $$
 }
 ```
 
-### 3.5 Exemplo 1 — cálculo completo, do bruto ao líquido
+### 3.5 Exemplo 1: cálculo completo, do bruto ao líquido
 
-Programa da empresa híbrida: investimento financeiro de **R$ 500.000** mais tempo de voluntários valorado em **R$ 100.000** — total de **R$ 600.000**. Outcome monetizado bruto de **R$ 4.000.000**. Ajustes medidos: **peso morto 40%**, **atribuição 20%**, **decaimento 25%**, **deslocamento 0%**.
+Programa da empresa híbrida: investimento financeiro de **R$ 500.000** mais tempo de voluntários valorado em **R$ 100.000**: total de **R$ 600.000**. Outcome monetizado bruto de **R$ 4.000.000**. Ajustes medidos: **peso morto 40%**, **atribuição 20%**, **decaimento 25%**, **deslocamento 0%**.
 
 $$
 4.000.000 \times 0{,}60 \times 0{,}80 \times 0{,}75 = 4.000.000 \times 0{,}36 = R\$\ 1.440.000
@@ -207,20 +207,20 @@ $$
 SROI = \frac{1.440.000}{600.000} = 2{,}40:1
 $$
 
-A razão **bruta** seria `4.000.000 ÷ 600.000 = 6,67:1` — ou seja, **superestimada em 2,78 vezes** (6,67 ÷ 2,40). É exatamente a armadilha que o 7º princípio do SROI proíbe: o mesmo programa, o mesmo dinheiro, duas narrativas, e a diferença entre elas é apenas **método**.
+A razão **bruta** seria `4.000.000 ÷ 600.000 = 6,67:1`: ou seja, **superestimada em 2,78 vezes** (6,67 ÷ 2,40). É exatamente a armadilha que o 7º princípio do SROI proíbe: o mesmo programa, o mesmo dinheiro, duas narrativas, e a diferença entre elas é apenas **método**.
 
-### 3.6 Exemplo 2 — um caso real, stakeholder por stakeholder
+### 3.6 Exemplo 2: um caso real, stakeholder por stakeholder
 
 A iniciativa **Inclusion Rugby League** (responsabilidade social corporativa do Rugby Football League), publicada no *Journal of Business Ethics* (2024), apurou **SROI total de 3,39:1**, com faixa de sensibilidade de **3,31 a 3,58**. Por linha de programa: PDRL **4,10:1**, LDRL **3,48:1**, WcRL **3,08:1**. Por stakeholder: jogadores e famílias **9,84:1**, voluntários **1,86:1**, sociedade e clubes **1,52:1**.
 
-A lição não é o 3,39 — é a **dispersão**: o mesmo programa gera de **1,52 a 9,84** dependendo de quem se olha. E a literatura varia de **3,66:1 a 124:1**: num cenário pessimista com **56% de desistência** e duração de apenas 1 ano, o 124:1 cairia para algo próximo de **20:1**. **O SROI é tão conservador quanto as suas premissas.**
+A lição não é o 3,39: é a **dispersão**: o mesmo programa gera de **1,52 a 9,84** dependendo de quem se olha. E a literatura varia de **3,66:1 a 124:1**: num cenário pessimista com **56% de desistência** e duração de apenas 1 ano, o 124:1 cairia para algo próximo de **20:1**. **O SROI é tão conservador quanto as suas premissas.**
 
-### 3.7 Exemplo 3 — três SROIs reais, com a conferência de contas
+### 3.7 Exemplo 3: três SROIs reais, com a conferência de contas
 
 | Organização | Investimento | Benefício | SROI | Fonte/ano |
 |---|---|---|---|---|
 | BaptistCare (Austrália, exercício 2022) | US$ 331 mi | US$ 733 mi | **2,22:1** | ACIL Allen, 2023 |
-| Turnstone (EUA, 2022–2024) | US$ 3,3 mi | US$ 10 mi | **3,02:1** | Transform Consulting, 2024 |
+| Turnstone (EUA, 2022 to 2024) | US$ 3,3 mi | US$ 10 mi | **3,02:1** | Transform Consulting, 2024 |
 | PT Semen Indonesia (responsabilidade social) | Rp 632.850.242 | Rp 2.190.635.617 | **3,46:1** | IJSAM, s.d. |
 
 Conferência: `733 ÷ 331 = 2,215 ≈ 2,22` · `2.190.635.617 ÷ 632.850.242 = 3,461 ≈ 3,46`.
@@ -232,7 +232,7 @@ Conferência: `733 ÷ 331 = 2,215 ≈ 2,22` · `2.190.635.617 ÷ 632.850.242 = 3
 | Média de 200 avaliações multi-setor | 1:18 | Autores alertam viés de seleção; faixa esperada **1:5 a 1:10** |
 | Cadeias de valor corporativas completas | 1:1 a 1:2 | Quanto mais sistêmico, mais modesto |
 | Carteira ponderada (8 de 12 iniciativas) | 4:1 | Maior isolada 7:1; duas abaixo de 1 |
-| Inclusion Rugby League | 3,39:1 | Sensibilidade 3,31–3,58 |
+| Inclusion Rugby League | 3,39:1 | Sensibilidade 3,31 to 3,58 |
 | BaptistCare NSW & ACT (exercício 2022) | 2,22:1 | US$ 733 mi / US$ 331 mi |
 | PT Semen Indonesia | 3,46:1 | Responsabilidade social corporativa |
 | Turnstone (terapias, EUA) | 3,02:1 | US$ 10 mi / US$ 3,3 mi |
@@ -240,7 +240,7 @@ Conferência: `733 ÷ 331 = 2,215 ≈ 2,22` · `2.190.635.617 ÷ 632.850.242 = 3
 | Referência do guia oficial | **3:1** | Cabinet Office / NEF |
 
 > [!WARNING]
-> **Faixa prudente: 2:1 a 5:1.** A média de **1:18** divulgada por levantamento de 200 avaliações (Valuing Impact, 2025) é enviesada por viés de seleção — e os próprios autores indicam **1:5 a 1:10** como faixa esperada. Reportar 18:1 sem essas ressalvas viola o 7º princípio do método. Para a empresa híbrida, o SROI **não é campanha**: é instrumento de decisão, e número só é útil quando a premissa vem declarada ao lado.
+> **Faixa prudente: 2:1 a 5:1.** A média de **1:18** divulgada por levantamento de 200 avaliações (Valuing Impact, 2025) é enviesada por viés de seleção, e os próprios autores indicam **1:5 a 1:10** como faixa esperada. Reportar 18:1 sem essas ressalvas viola o 7º princípio do método. Para a empresa híbrida, o SROI **não é campanha**: é instrumento de decisão, e número só é útil quando a premissa vem declarada ao lado.
 
 ---
 
@@ -250,9 +250,9 @@ Conferência: `733 ÷ 331 = 2,215 ≈ 2,22` · `2.190.635.617 ÷ 632.850.242 = 3
 
 O **IRIS+** é o conjunto de métricas mantido pelo **GIIN (Global Impact Investing Network)**, publicado como **bem público gratuito**. Ele "**traduz intenções de impacto em resultados mensuráveis**" e tem **três componentes**:
 
-1. **Taxonomia Temática** — a organização dos temas de impacto, ancorada nos **17 ODS**;
-2. **Conjuntos de Métricas Nucleares** (*Core Metrics Sets*) — listas curtas por Tema ou ODS, para quem quer começar sem se perder;
-3. **Catálogo de Métricas** — o inventário completo, com versão **5.3c (dez/2025)**.
+1. **Taxonomia Temática**: a organização dos temas de impacto, ancorada nos **17 ODS**;
+2. **Conjuntos de Métricas Nucleares** (*Core Metrics Sets*): listas curtas por Tema ou ODS, para quem quer começar sem se perder;
+3. **Catálogo de Métricas**, o inventário completo, com versão **5.3c (dez/2025)**.
 
 ### 4.2 As 5 Dimensões do Impacto
 
@@ -266,7 +266,7 @@ As **5 Dimensões do Impacto** nascem do Impact Management Project, que reuniu m
 | **Contribuição** | *Contribution* | Quão provável é que fomos causa? | Contrafactual e cadeia causal testados |
 | **Risco** | *Risk* | O que pode fazer o resultado não se confirmar? | Execução, contexto, dependência de parceiro |
 
-O efeito prático é imediato: **"ativamos 500 pessoas" responde só ao "quem" e ao "quanto" parcialmente**. Sem o "o quê", o "quanto" não tem unidade; sem "contribuição" e "risco", não há impacto — há apenas volume.
+O efeito prático é imediato: **"ativamos 500 pessoas" responde só ao "quem" e ao "quanto" parcialmente**. Sem o "o quê", o "quanto" não tem unidade; sem "contribuição" e "risco", não há impacto: há apenas volume.
 
 ### 4.3 Classificar a contribuição aos ODS: 3 informações e 3 níveis
 
@@ -278,15 +278,15 @@ Classificar a contribuição de uma organização a uma meta de ODS exige **trê
 | **Alinhado** | Não piora, mas não demonstra contribuição líquida positiva |
 | **Positivo** | Gera contribuição líquida a mais, frente ao limiar e à meta |
 
-- **🔢 Você sabia?** O IRIS+ é **gratuito e mantido por uma rede do setor**, não por uma norma de organismos internacionais — o que explica tanto a sua adoção (**70%** das organizações de impact investing usam alguma métrica geralmente aceita, GIIN, 2024) quanto a sua limitação: **ninguém é obrigado a usá-lo**. Padronização voluntária só produce comparação quando o usuário declara qual conjunto adotou.
+- **🔢 Você sabia?** O IRIS+ é **gratuito e mantido por uma rede do setor**, não por uma norma de organismos internacionais, o que explica tanto a sua adoção (**70%** das organizações de impact investing usam alguma métrica geralmente aceita, GIIN, 2024) quanto a sua limitação: **ninguém é obrigado a usá-lo**. Padronização voluntária só produce comparação quando o usuário declara qual conjunto adotou.
 
 ---
 
-## 5. GRI e ISO 26000: relato público e orientação — não são a mesma coisa
+## 5. GRI e ISO 26000: relato público e orientação: não são a mesma coisa
 
 ### 5.1 GRI: o relato de temas materiais
 
-Os **GRI Universal Standards 2021** foram aprovados em **2 de julho de 2021** e **vigoram para relatos desde 1º de janeiro de 2023**. A estrutura é: **GRI 1 (Fundamentos)**, **GRI 2 (Divulgações Gerais)** e **GRI 3 (Temas Materiais)**, somados a normas setoriais e temáticas — são **31 Topic Standards**.
+Os **GRI Universal Standards 2021** foram aprovados em **2 de julho de 2021** e **vigoram para relatos desde 1º de janeiro de 2023**. A estrutura é: **GRI 1 (Fundamentos)**, **GRI 2 (Divulgações Gerais)** e **GRI 3 (Temas Materiais)**, somados a normas setoriais e temáticas: são **31 Topic Standards**.
 
 O **GRI 3: Material Topics 2021** define tema material como "o impacto mais significativo sobre economia, meio ambiente e pessoas, incluindo direitos humanos" e impõe **três divulgações**:
 
@@ -300,7 +300,7 @@ O processo do GRI 3 tem **4 passos**: (1) entender o contexto; (2) identificar i
 
 ### 5.2 ISO 26000: orientação que não se certifica
 
-A **ISO 26000:2010**, publicada em novembro de 2010, é **orientação — e não é certificável**: a própria norma afirma que qualquer oferta de certificação seria **deturpação da sua finalidade**. Ela traz **7 princípios** (prestação de contas, transparência, ética, interesses dos stakeholders, Estado de direito, normas internacionais e direitos humanos) e **7 temas centrais com 37 questões**:
+A **ISO 26000:2010**, publicada em novembro de 2010, é **orientação, e não é certificável**: a própria norma afirma que qualquer oferta de certificação seria **deturpação da sua finalidade**. Ela traz **7 princípios** (prestação de contas, transparência, ética, interesses dos stakeholders, Estado de direito, normas internacionais e direitos humanos) e **7 temas centrais com 37 questões**:
 
 | Tema | Referência |
 |---|---|
@@ -313,9 +313,9 @@ A **ISO 26000:2010**, publicada em novembro de 2010, é **orientação — e nã
 | Envolvimento comunitário | 6.8 |
 
 > [!WARNING]
-> **"Certificação ISO 26000" não existe.** A ISO 26000 é orientação, sem requisitos de gestão auditáveis nem código de produto. Contrato, edital ou relatório que ofereça "selo ISO 26000" está errado — e a norma foi **confirmada como vigente em 19 de março de 2025**, o que significa que o texto de 2010 continua valendo, não que ele foi atualizado.
+> **"Certificação ISO 26000" não existe.** A ISO 26000 é orientação, sem requisitos de gestão auditáveis nem código de produto. Contrato, edital ou relatório que ofereça "selo ISO 26000" está errado, e a norma foi **confirmada como vigente em 19 de março de 2025**, o que significa que o texto de 2010 continua valendo, não que ele foi atualizado.
 
-- **🔢 Você sabia?** Enquanto a **ISO 26000 não é certificável** e a **GRI é relato com notificação formal**, o **B Impact Assessment é autoavaliação pontuada** — e esses três rótulos costumam aparecer misturados em apresentações como se fossem "três níveis do mesmo selo". São **três familias distintas**: norma de orientação, padrão de relato e ferramenta de avaliação com certificação opcional.
+- **🔢 Você sabia?** Enquanto a **ISO 26000 não é certificável** e a **GRI é relato com notificação formal**, o **B Impact Assessment é autoavaliação pontuada**, e esses três rótulos costumam aparecer misturados em apresentações como se fossem "três níveis do mesmo selo". São **três familias distintas**: norma de orientação, padrão de relato e ferramenta de avaliação com certificação opcional.
 
 ---
 
@@ -323,11 +323,11 @@ A **ISO 26000:2010**, publicada em novembro de 2010, é **orientação — e nã
 
 ### 6.1 As 5 áreas e o sistema de pontuação
 
-O **B Impact Assessment** cobre **5 áreas** — **Governança, Trabalhadores, Comunidade, Ambiente e Clientes** — com cerca de **140 pontos operacionais**. Os critérios de pontuação são: objetivo, normalizado, por materialidade, orientado a outputs/outcomes e equilibrado.
+O **B Impact Assessment** cobre **5 áreas**, **Governança, Trabalhadores, Comunidade, Ambiente e Clientes**, com cerca de **140 pontos operacionais**. Os critérios de pontuação são: objetivo, normalizado, por materialidade, orientado a outputs/outcomes e equilibrado.
 
 Para a certificação **B Corp** exige-se: **≥ 80 pontos verificados**, cumprimento do **requisito legal** (presença dos stakeholders nos atos constitutivos) e **publicação pública da pontuação**. Nos padrões antigos, a recertificação ocorre **a cada 3 anos**; nos novos padrões, a B Lab UK afirma **abandono do sistema de pontos**, com auditoria de terceira parte em ciclo de **5 anos** (anos 0, 3 e 5).
 
-### 6.2 Exemplo 4 — a pontuação, a queda da verificação e a margem de segurança
+### 6.2 Exemplo 4: a pontuação, a queda da verificação e a margem de segurança
 
 | Área | Pontos |
 |---|---|
@@ -354,7 +354,7 @@ A faixa de **75 a 80 pontos** aciona um período de melhoria de **90 dias**. **R
 | Faixa de melhoria (90 dias) | **75 a 80 pontos** |
 | Crédito do requisito legal | **7,5 a 10 pontos** |
 | Recertificação (padrões antigos) | **a cada 3 anos** |
-| Ciclo de auditoria (novos padrões) | **5 anos — anos 0, 3 e 5** |
+| Ciclo de auditoria (novos padrões) | **5 anos: anos 0, 3 e 5** |
 
 ---
 
@@ -364,13 +364,13 @@ A faixa de **75 a 80 pontos** aciona um período de melhoria de **90 dias**. **R
 
 Não basta dizer "contribuímos": é preciso sustentar a história causal. Há **três estratégias** de atribuição causal:
 
-1. **Estimar o contrafactual** — o que teria acontecido se não fôssemos;
-2. **Checar a consistência das evidências com a Theory of Change** — os dados confirmam as setas que desenhamos?
-3. **Descartar explicações alternativas** — é crescimento do mercado? é política pública? é outro programa?
+1. **Estimar o contrafactual**, o que teria acontecido se não fôssemos;
+2. **Checar a consistência das evidências com a Theory of Change**: os dados confirmam as setas que desenhamos?
+3. **Descartar explicações alternativas**: é crescimento do mercado? é política pública? é outro programa?
 
-A escolha entre **atribuição** e **contribuição** é de honestidade intelectual: **atribuição** reivindica causalidade direta ("nós causamos"); **contribuição** assume que a organização é **um dos fatores** e avalia a plausibilidade da cadeia causal. Em contextos complexos — como a maior parte dos programas de impacto — a contribuição é a posição metodologicamente defensável.
+A escolha entre **atribuição** e **contribuição** é de honestidade intelectual: **atribuição** reivindica causalidade direta ("nós causamos"); **contribuição** assume que a organização é **um dos fatores** e avalia a plausibilidade da cadeia causal. Em contextos complexos, como a maior parte dos programas de impacto, a contribuição é a posição metodologicamente defensável.
 
-### 7.2 Exemplo 5 — diferença-em-diferenças com números
+### 7.2 Exemplo 5: diferença-em-diferenças com números
 
 | Grupo | Início (T0) | Fim (T1) | Variação |
 |---|---|---|---|
@@ -381,7 +381,7 @@ $$
 Impacto\ (DiD) = (+23) - (+9) = 14\ p.p.
 $$
 
-Reportar **só os 23 p.p.** superestimaria o impacto em **64%** (`23 ÷ 14 = 1,64`). Os **9 p.p. do controle** são o contrafactual — a tendência de mercado que aconteceria de qualquer modo. O pressuposto da diferença-em-diferenças é a **tendência paralela**: se o grupo de controle seguisse trajetória diferente, a estimativa fica enviesada.
+Reportar **só os 23 p.p.** superestimaria o impacto em **64%** (`23 ÷ 14 = 1,64`). Os **9 p.p. do controle** são o contrafactual: a tendência de mercado que aconteceria de qualquer modo. O pressuposto da diferença-em-diferenças é a **tendência paralela**: se o grupo de controle seguisse trajetória diferente, a estimativa fica enviesada.
 
 > [!NOTE]
 > **Sem baseline não há avaliação causal.** O mesmo vale para a diferença-em-diferenças e para o SROI: os quatro ajustes do SROI são, em última instância, a tentativa de reconstruir o contrafactual que um bom desenho de avaliação estabeleceria desde o início. Quem começa a medir depois de iniciar o programa já perdeu a maior parte da prova.
@@ -392,7 +392,7 @@ Reportar **só os 23 p.p.** superestimaria o impacto em **64%** (`23 ÷ 14 = 1,6
 
 ### 8.1 A origem retórica e o que ela não é
 
-O **triple bottom line** foi cunhado por **John Elkington em 1994** e popularizado pelo livro *Cannibals with Forks* (**1997**); em **2018**, ele próprio pediu no *Harvard Business Review* que a ideia fosse **repensada** — porque a frase virou slogan sem método. Importante: **triple bottom line não é norma contábil**. Ele é a origem retórica da ideia, não um padrão de relatório.
+O **triple bottom line** foi cunhado por **John Elkington em 1994** e popularizado pelo livro *Cannibals with Forks* (**1997**); em **2018**, ele próprio pediu no *Harvard Business Review* que a ideia fosse **repensada**: porque a frase virou slogan sem método. Importante: **triple bottom line não é norma contábil**. Ele é a origem retórica da ideia, não um padrão de relatório.
 
 ### 8.2 O que é o IP&L
 
@@ -404,7 +404,7 @@ $$
 r = \frac{\Delta FV + \Delta SV + \Delta EV}{FV}
 $$
 
-### 8.3 Exemplo 6 — o impacto ajustado do resultado, em contas
+### 8.3 Exemplo 6, o impacto ajustado do resultado, em contas
 
 Lucro de **R$ 10.000.000**; impacto social de **+R$ 4.000.000**; impacto ambiental negativo de **−R$ 2.500.000**; capital de **R$ 50.000.000**.
 
@@ -422,13 +422,13 @@ $$
 r = \frac{10.000.000 + 4.000.000 - 6.000.000}{50.000.000} = 16{,}0\%
 $$
 
-**16% é abaixo dos 20% financeiros** — sinal de que a empresa destruiu valor social para gerar valor contábil. É exatamente esse *trade-off* que o IP&L habilita enxergar, e que um DRE isolado esconde.
+**16% é abaixo dos 20% financeiros**: sinal de que a empresa destruiu valor social para gerar valor contábil. É exatamente esse *trade-off* que o IP&L habilita enxergar, e que um DRE isolado esconde.
 
-- **🔢 Você sabia?** O **triplo resultado** tem 30 anos de história e uma virada de autor: Elkington propôs o conceito em **1994**, publicou-o no livro de **1997** e, em **2018**, pediu no *Harvard Business Review* que ele fosse **revisado** — argumentando que o conceito havia sido absorvido pelo marketing sem mudar o balanço. O IP&L é, em parte, a resposta a esse pedido: **vários "bottom lines" monetizados**, não um slogan de três palavras.
+- **🔢 Você sabia?** O **triplo resultado** tem 30 anos de história e uma virada de autor: Elkington propôs o conceito em **1994**, publicou-o no livro de **1997** e, em **2018**, pediu no *Harvard Business Review* que ele fosse **revisado**: argumentando que o conceito havia sido absorvido pelo marketing sem mudar o balanço. O IP&L é, em parte, a resposta a esse pedido: **vários "bottom lines" monetizados**, não um slogan de três palavras.
 
 ---
 
-## 9. Exemplo 7 — o painel de KPIs de uma empresa híbrida ("VerdesCo")
+## 9. Exemplo 7, o painel de KPIs de uma empresa híbrida ("VerdesCo")
 
 Empresa limitada com **40% do produto dedicado a uma cooperativa de catadores** (dados ilustrativos, com métodos verificados):
 
@@ -445,19 +445,19 @@ Empresa limitada com **40% do produto dedicado a uma cooperativa de catadores** 
 | 9 | Retorno integrado `r` | Triplo resultado | `(ΔFV + ΔSV + ΔEV) ÷ FV` | ≥ 23% | IEF, 2025 | Anual |
 | 10 | Contribuição aos ODS | Alinhamento | negativo / alinhado / positivo | 3 positivas | Impact Frontiers, 2022 | Anual |
 
-**A regra do painel:** cubra **os 5 níveis da cadeia** (KPIs 1 a 4), **um ajuste contrafactual** (KPI 5), **um padrão externo** (KPIs 6 a 8) e **uma leitura integrada** (KPIs 9 e 10). Painel que só tem outputs **não é painel de impacto** — é relatório de operação.
+**A regra do painel:** cubra **os 5 níveis da cadeia** (KPIs 1 a 4), **um ajuste contrafactual** (KPI 5), **um padrão externo** (KPIs 6 a 8) e **uma leitura integrada** (KPIs 9 e 10). Painel que só tem outputs **não é painel de impacto**: é relatório de operação.
 
 ```matching
 {
   "question": "Associe cada indicador ao nível da cadeia de resultados que ele mede:",
   "pairs": [
-    {"left": "Custo por beneficiário", "right": "Insumo / Atividade — quanto se gastou para executar"},
-    {"left": "Taxa de conclusão", "right": "Output — o que de fato foi entregue"},
-    {"left": "Δ emprego vs. baseline", "right": "Outcome — a mudança observada fora do controle"},
-    {"left": "SROI do programa", "right": "Impacto — valor social líquido com contrafactual"},
-    {"left": "Peso morto e atribuição", "right": "Ajuste contrafactual — o que não é mérito da intervenção"},
-    {"left": "Pontuação do BIA", "right": "Governança — autoavaliação em 5 áreas, até 140 pontos"},
-    {"left": "Contribuição aos ODS", "right": "Alinhamento — negativo, alinhado ou positivo"}
+    {"left": "Custo por beneficiário", "right": "Insumo / Atividade: quanto se gastou para executar"},
+    {"left": "Taxa de conclusão", "right": "Output, o que de fato foi entregue"},
+    {"left": "Δ emprego vs. baseline", "right": "Outcome: a mudança observada fora do controle"},
+    {"left": "SROI do programa", "right": "Impacto: valor social líquido com contrafactual"},
+    {"left": "Peso morto e atribuição", "right": "Ajuste contrafactual, o que não é mérito da intervenção"},
+    {"left": "Pontuação do BIA", "right": "Governança: autoavaliação em 5 áreas, até 140 pontos"},
+    {"left": "Contribuição aos ODS", "right": "Alinhamento: negativo, alinhado ou positivo"}
   ],
   "explanation": "Um painel equilibrado precisa de pelo menos um indicador por nível da cadeia, mais um ajuste contrafactual, mais um padrão externo e uma leitura integrada. Indicadores de insumo e output são necessários, mas nunca suficientes para falar em impacto."
 }
@@ -499,48 +499,48 @@ Empresa limitada com **40% do produto dedicado a uma cooperativa de catadores** 
 > [!IMPORTANT]
 > **Veredito Comparativo**
 > Diante dos **cinco modelos** de empresa, o que muda é **como cada um responde à pergunta "qual é o seu resultado?"**:
-> - **× empresa tradicional:** ela responde com **uma única linha** — o lucro —, e o impacto é externo ao sistema de mensuração; qualquer KPI socioambiental é voluntário e sem contrapartida contábil. Aqui a resposta é **uma linha só, e ela é financeira**;
-> - **× parceria (modelo John Lewis Partnership):** ela acrescenta a ideia de lucro **suficiente, não máximo** e governança compartilhada, o que melhora a **pergunta** ("quanto é suficiente?") mas **não entrega método de medição de impacto** — a parceria mede participação, não contribuição social;
-> - **× cooperativa:** ela resolve quem decide (1 associado, 1 voto) e para onde vão as sobras (fundos obrigatórios de reserva e assistência), mas a Lei nº 5.764/1971 é **sem objetivo de lucro** e **não impõe métrica de impacto** — o social aparece como destino do excedente, não como indicador auditado;
-> - **× ONG / OSC:** ela tem a missão como fim e é obrigada a prestar contas de impacto para quem financia (plano de trabalho, metas e prestação de contas no MROSC), mas **não pode distribuir resultados** — o que a torna forte em relato e fraca em dupla métrica com lucro;
-> - **Conclusão:** a empresa híbrida é a única das cinco que precisa e pode fazer **as duas coisas ao mesmo tempo** — **SROI com contrafactual** para provar impacto **e** retorno financeiro auditável para remunerar capital. Por isso o painel dela não pode ser o da tradicional (só financeiro) nem o da ONG (só relato): ele precisa cobrir a cadeia inteira, do insumo ao triplo resultado.
+> - **× empresa tradicional:** ela responde com **uma única linha**, o lucro, e o impacto é externo ao sistema de mensuração; qualquer KPI socioambiental é voluntário e sem contrapartida contábil. Aqui a resposta é **uma linha só, e ela é financeira**;
+> - **× parceria (modelo John Lewis Partnership):** ela acrescenta a ideia de lucro **suficiente, não máximo** e governança compartilhada, o que melhora a **pergunta** ("quanto é suficiente?") mas **não entrega método de medição de impacto**: a parceria mede participação, não contribuição social;
+> - **× cooperativa:** ela resolve quem decide (1 associado, 1 voto) e para onde vão as sobras (fundos obrigatórios de reserva e assistência), mas a Lei nº 5.764/1971 é **sem objetivo de lucro** e **não impõe métrica de impacto**, o social aparece como destino do excedente, não como indicador auditado;
+> - **× ONG / OSC:** ela tem a missão como fim e é obrigada a prestar contas de impacto para quem financia (plano de trabalho, metas e prestação de contas no MROSC), mas **não pode distribuir resultados**, o que a torna forte em relato e fraca em dupla métrica com lucro;
+> - **Conclusão:** a empresa híbrida é a única das cinco que precisa e pode fazer **as duas coisas ao mesmo tempo**: **SROI com contrafactual** para provar impacto **e** retorno financeiro auditável para remunerar capital. Por isso o painel dela não pode ser o da tradicional (só financeiro) nem o da ONG (só relato): ele precisa cobrir a cadeia inteira, do insumo ao triplo resultado.
 
 ---
 
 ## 11. Casos reais: como empresas híbridas medem impacto com números
 
-As seções 3 a 10 deram os instrumentos; esta dá os **resultados publicados**. Os quatro casos abaixo vêm de relatórios, releases e balanços lidos diretamente — e a primeira lição é que **cada um escolheu um instrumento diferente** para responder "qual é o seu resultado?".
+As seções 3 a 10 deram os instrumentos; esta dá os **resultados publicados**. Os quatro casos abaixo vêm de relatórios, releases e balanços lidos diretamente, e a primeira lição é que **cada um escolheu um instrumento diferente** para responder "qual é o seu resultado?".
 
 ### 11.1 Quatro casos, quatro instrumentos
 
 | Caso | Instrumento escolhido | Resultado apurado | Fonte/ano |
 |---|---|---|---|
-| **Natura &Co** (Brasil) | **iP&L** — R$ de impacto ÷ R$ de receita | **R$ 2,50 : R$ 1** → **R$ 50,5 bi** de impacto líquido; emissões escopos 1+2 **−43%** | Relatório Integrado 2024 |
+| **Natura &Co** (Brasil) | **iP&L**: R$ de impacto ÷ R$ de receita | **R$ 2,50: R$ 1** → **R$ 50,5 bi** de impacto líquido; emissões escopos 1+2 **−43%** | Relatório Integrado 2024 |
 | **REI Co-op** (EUA) | Repartição a membros/funcionários + selos externos | **US$ 189 mi** a membros (tipicamente **10%**), **US$ 84,8 mi** a funcionários (**+48,5%**), **US$ 8,9 mi** a **+300 ONGs**; CDP **Clima A−** e **Água B** | REI Newsroom, 08/05/2025 |
 | **MONDRAGON** (Espanha) | Repartição estatutária + fundação social | **≥ 13%** do lucro ao fundo de solidariedade (**€ 13,0 mi** de compensação + **€ 7,05 mi** de offset); **€ 27,8 mi** em **37 programas** | Relatório Anual 2023 |
 | **COPACOL** (Brasil) | Rateio por unidade processada | **R$ 270 mi** de sobras (**+64%**) sobre **R$ 10,6 bi** de faturamento (2024) | O Presente Rural, 31/01/2025 |
 
-### 11.2 Natura &Co — o iP&L como razão de impacto por real de receita
+### 11.2 Natura &Co, o iP&L como razão de impacto por real de receita
 
-A Natura publica no Relatório Integrado 2024 um **iP&L** de **R$ 2,50 de impacto positivo por R$ 1 de receita**, o que se traduz em **R$ 50,5 bilhões** de impacto líquido no exercício — sobre receita de grupo de **R$ 24,1 bi** e resultado subjacente de **R$ 524 mi**. O mesmo relatório registra **−43%** de emissões dos escopos 1 e 2 frente à base SBTi (meta de −42% atingida), **46 comunidades** de fornecedores e parceiros (meta de 2030 antecipada) e **18,2%** de plástico reciclado. A empresa é **Empresa B há 10 anos**.
+A Natura publica no Relatório Integrado 2024 um **iP&L** de **R$ 2,50 de impacto positivo por R$ 1 de receita**, o que se traduz em **R$ 50,5 bilhões** de impacto líquido no exercício: sobre receita de grupo de **R$ 24,1 bi** e resultado subjacente de **R$ 524 mi**. O mesmo relatório registra **−43%** de emissões dos escopos 1 e 2 frente à base SBTi (meta de −42% atingida), **46 comunidades** de fornecedores e parceiros (meta de 2030 antecipada) e **18,2%** de plástico reciclado. A empresa é **Empresa B há 10 anos**.
 
-Como o número se lê: é uma **razão** (moeda de impacto ÷ moeda de receita), da mesma família da razão SROI — só que o denominador é a receita da empresa, não o investimento numa intervenção. Ele **não substitui o SROI**, porque não aplica os quatro ajustes da seção 3.4; ele **sintetiza a cadeia inteira em uma linha**, que é exatamente o que o IP&L (seção 8) propõe.
+Como o número se lê: é uma **razão** (moeda de impacto ÷ moeda de receita), da mesma família da razão SROI: só que o denominador é a receita da empresa, não o investimento numa intervenção. Ele **não substitui o SROI**, porque não aplica os quatro ajustes da seção 3.4; ele **sintetiza a cadeia inteira em uma linha**, que é exatamente o que o IP&L (seção 8) propõe.
 
-Ponto de honestidade: a reconciliação entre o **prejuízo contábil de R$ 8,9 bi** e o **resultado subjacente de R$ 524 mi** (2024) não foi reconstruída nesta pesquisa — publicar o iP&L sem essa conciliação ao lado é o mesmo pecado de publicar SROI sem premissas.
+Ponto de honestidade: a reconciliação entre o **prejuízo contábil de R$ 8,9 bi** e o **resultado subjacente de R$ 524 mi** (2024) não foi reconstruída nesta pesquisa: publicar o iP&L sem essa conciliação ao lado é o mesmo pecado de publicar SROI sem premissas.
 
-### 11.3 REI Co-op — impacto declarado em ano de prejuízo
+### 11.3 REI Co-op: impacto declarado em ano de prejuízo
 
 Em 2024 a REI teve receita de **US$ 3,53 bi (−6,2%)** e **prejuízo de US$ 156,4 mi**, e ainda assim distribuiu **US$ 189 mi** em *Co-op Member Reward* (tipicamente **10%**) aos membros, **US$ 84,8 mi** em incentivos e *profit sharing* (**+48,5%**) aos funcionários e **US$ 8,9 mi** a **mais de 300 ONGs**, além de se tornar o **1º varejista nacional com *zero waste*** e de manter **Clima A−** e **Água B** no CDP.
 
-A lição é de desenho de painel: a **repartição** tem regra própria (ela decorre da condição de cooperativa de consumidores, não do resultado do exercício), enquanto os **selos externos** (CDP, *zero waste*) são verificação por terceiros — os dois KPIs mais baratos de auditar que uma híbrida pode ter. Reportar apenas o prejuízo de US$ 156,4 mi num painel seria, de novo, confundir a linha financeira com o resultado inteiro.
+A lição é de desenho de painel: a **repartição** tem regra própria (ela decorre da condição de cooperativa de consumidores, não do resultado do exercício), enquanto os **selos externos** (CDP, *zero waste*) são verificação por terceiros: os dois KPIs mais baratos de auditar que uma híbrida pode ter. Reportar apenas o prejuízo de US$ 156,4 mi num painel seria, de novo, confundir a linha financeira com o resultado inteiro.
 
-### 11.4 MONDRAGON — solidariedade com número no balanço
+### 11.4 MONDRAGON: solidariedade com número no balanço
 
 A federação fechou 2023 com **€ 11,056 bi** de vendas, **€ 1,486 bi** de EBITDA e **lucro recorde de € 593 mi**, cerca de **70.500 pessoas** em **81 cooperativas**. Os indicadores de impacto são **regras que viram KPI automaticamente**: no mínimo **13%** do lucro de cada cooperativa vai ao fundo divisional de solidariedade (**€ 13,0 mi** de compensação em 2023 mais **€ 7,05 mi** de offset de prejuízos); a faixa salarial fica entre **80% e 110%** da referência LagunAro, com razão mín-máx de **1:6 desde 1988**; e a Fundación MONDRAGON aplicou **€ 27,8 mi em 37 programas** de emprego, formação e habitação.
 
-Repare no mecanismo: **estatuto converte-se em indicador sem esforço de medição** — quando a regra é "no mínimo 13%", o *gap* entre o pago e o mínimo é o que precisa de apuração, não a existência do dado. É o oposto de quem inventa um KPI depois do fato.
+Repare no mecanismo: **estatuto converte-se em indicador sem esforço de medição**: quando a regra é "no mínimo 13%", o *gap* entre o pago e o mínimo é o que precisa de apuração, não a existência do dado. É o oposto de quem inventa um KPI depois do fato.
 
-### 11.5 COPACOL — o rateio que cabe numa conta de cabeça
+### 11.5 COPACOL, o rateio que cabe numa conta de cabeça
 
 Em 2024 a COPACOL distribuiu **R$ 270 milhões de sobras (maior da história, +64%)** sobre faturamento de **R$ 10,6 bilhões**, com **9,6 mil cooperados**, **R$ 390 mi** de tributos e metade do rateio paga em dezembro. A conta de repartição é direta:
 
@@ -548,7 +548,7 @@ $$
 Índice\ de\ repartição = \frac{270}{10.600} = 0{,}0255 \approx 2{,}55\%\ do\ faturamento
 $$
 
-O que torna o caso exemplar é a **granularidade do rateio**: R$ 2 por saca de soja, R$ 1 por milho, R$ 0,50 por trigo, R$ 15 por saca de café, **3,6%** sobre insumos, **2,7%** sobre supermercado e rações, R$ 0,10 por litro de leite, R$ 9,13 por leitão e R$ 0,36 por quilo suíno. Cada cooperado enxerga o impacto na **própria entrega** — é o "output" da cooperativa virando "outcome" financeiro do associado, com unidade de medida declarada.
+O que torna o caso exemplar é a **granularidade do rateio**: R$ 2 por saca de soja, R$ 1 por milho, R$ 0,50 por trigo, R$ 15 por saca de café, **3,6%** sobre insumos, **2,7%** sobre supermercado e rações, R$ 0,10 por litro de leite, R$ 9,13 por leitão e R$ 0,36 por quilo suíno. Cada cooperado enxerga o impacto na **própria entrega**: é o "output" da cooperativa virando "outcome" financeiro do associado, com unidade de medida declarada.
 
 ### 11.6 A leitura pela cadeia: onde cada caso para
 
@@ -559,49 +559,49 @@ O que torna o caso exemplar é a **granularidade do rateio**: R$ 2 por saca de s
 | **MONDRAGON** | Repartição (outcome distributivo) | ≥ 13% do lucro; € 27,8 mi em 37 programas | É regra estatutária cumprida, não efeito medido em beneficiários |
 | **COPACOL** | Repartição (índice) | 2,55% do faturamento devolvido em sobras | Índice de devolução, não mudança de condição no mundo |
 
-> **Leitura da lição:** os quatro publicam **razões e índices auditáveis** — e nenhum deles, nos documentos consultados, declara contrafactual com os quatro ajustes. Pelo critério das seções 1.2 e 3.4, eles são **indicadores de resultado muito acima da média**, mas ainda **não são SROI**: para chegar lá, faltam base, grupo de comparação e horizonte. Caso com SROI declarado é o da seção 3.6 (Inclusion Rugby League, **3,39:1** com faixa de sensibilidade de 3,31 a 3,58).
+> **Leitura da lição:** os quatro publicam **razões e índices auditáveis**, e nenhum deles, nos documentos consultados, declara contrafactual com os quatro ajustes. Pelo critério das seções 1.2 e 3.4, eles são **indicadores de resultado muito acima da média**, mas ainda **não são SROI**: para chegar lá, faltam base, grupo de comparação e horizonte. Caso com SROI declarado é o da seção 3.6 (Inclusion Rugby League, **3,39:1** com faixa de sensibilidade de 3,31 a 3,58).
 
-- **🔢 Você sabia?** A REI fechou 2024 com **prejuízo de US$ 156,4 milhões** e distribuiu **US$ 189 mi** a membros e **US$ 84,8 mi** a funcionários no mesmo ano — porque a repartição é regra de cooperativa, não decisão discricionária de lucro. No extremo oposto, a **Publix** (lucro de **US$ 4,6 bi** em 2024) tem **149.213 participantes** de ESOP com **US$ 14,3 bi** em ativos (Form 5500/2024): dois modelos de hibridize, dois KPIs diferentes — **repartição de caixa** e **propriedade acumulada**.
+- **🔢 Você sabia?** A REI fechou 2024 com **prejuízo de US$ 156,4 milhões** e distribuiu **US$ 189 mi** a membros e **US$ 84,8 mi** a funcionários no mesmo ano, porque a repartição é regra de cooperativa, não decisão discricionária de lucro. No extremo oposto, a **Publix** (lucro de **US$ 4,6 bi** em 2024) tem **149.213 participantes** de ESOP com **US$ 14,3 bi** em ativos (Form 5500/2024): dois modelos de hibridize, dois KPIs diferentes, **repartição de caixa** e **propriedade acumulada**.
 
 ---
 
-## 12. Atualizações 2025–2026: o que mudou na medição (e o que só foi anunciado)
+## 12. Atualizações 2025 to 2026: o que mudou na medição (e o que só foi anunciado)
 
-**Regra desta seção:** só entra aqui o que tem **vigência confirmada**, com fonte e data; o que está em tramitação ou sem sanção confirmada aparece explicitado como **não verificado**. Nada de transformar notícia em norma — e é justamente esse o erro que derruba a credibilidade de um painel.
+**Regra desta seção:** só entra aqui o que tem **vigência confirmada**, com fonte e data; o que está em tramitação ou sem sanção confirmada aparece explicitado como **não verificado**. Nada de transformar notícia em norma, e é justamente esse o erro que derruba a credibilidade de um painel.
 
 ### 12.1 Padrões e regras com vigência confirmada
 
 | Mudança | Fonte/data | **VIGÊNCIA** confirmada | Efeito na medição de impacto |
 |---|---|---|---|
 | Reporte de sustentabilidade das companhias abertas vira **"pratique ou explique"** | **Res. CVM 244, de 29/05/2026** (revogou o art. 2º da Res. 193/2023) | Vigente; regime a partir de **01/01/2027** | Cai a obrigatoriedade; quem divulga assume compromisso mínimo de **3 exercícios consecutivos** + **asseguração** (verificação externa) |
-| Normas brasileiras de sustentabilidade (NBC TDS e NBC TAS) | **Res. CFC 1.710/2023** | Vigente — **ano-calendário 2026** sempre que houver relatório de sustentabilidade | Quem reporta, reporta sob padrão técnico brasileiro |
+| Normas brasileiras de sustentabilidade (NBC TDS e NBC TAS) | **Res. CFC 1.710/2023** | Vigente: **ano-calendário 2026** sempre que houver relatório de sustentabilidade | Quem reporta, reporta sob padrão técnico brasileiro |
 | Instituições financeiras sob padrão ISSB | **Res. CMN 5.185** e **Res. BCB 435** | Vigentes desde **01/01/2025**; obrigatório em **2026** (segmentos 1 e 2) e **2028** (demais) | Bancos e cooperativas de crédito parceiras de híbridos já reportam sob padrão ISSB |
 | Estatais mantêm relato integrado | **Lei 13.303/2016** | Vigente, mantida após a Res. 244/2026 | Relatório integrado/de sustentabilidade **anual e obrigatório** |
-| Greenwashing: critérios de comunicação de impacto | **CBAP–CONAR, arts. 36, 36-A, 36-B e Anexo "U"** | Aprovado **24/10/2025**, publicado **27/10/2025**, vigor em 30 dias (**~26/11/2025**) | Alegações de impacto exigem **veracidade, qualificação, exatidão, pertinência, relevância e concretude**; reforça o **CDC, art. 37** |
-| Certificação B Corp endurece | **Novos padrões globais do B Lab (abril/2025)** | Em vigor em **2026**; transição até **2028** | **7 tópicos obrigatórios**, **auditoria independente** e marcos nos anos **0, 3 e 5** — o selo deixa de ser só pontuação |
-| Cadastro oficial de negócios de impacto | **Cadimpacto (MDIC)** | Em operação desde **19/03/2025** | Reconhecimento oficial em **bronze, prata e ouro** — KPI de visibilidade, não de impacto |
-| PLR permanece como está | **Lei 10.101/2000 + Lei 14.020/2020** | Vigente, **sem alteração nova confirmada** em 2025–2026 | IR exclusivo na fonte de **0% a 27,5%**; no máximo **2 vezes por ano civil**, com intervalo ≥ 1 trimestre |
+| Greenwashing: critérios de comunicação de impacto | **CBAP: CONAR, arts. 36, 36-A, 36-B e Anexo "U"** | Aprovado **24/10/2025**, publicado **27/10/2025**, vigor em 30 dias (**~26/11/2025**) | Alegações de impacto exigem **veracidade, qualificação, exatidão, pertinência, relevância e concretude**; reforça o **CDC, art. 37** |
+| Certificação B Corp endurece | **Novos padrões globais do B Lab (abril/2025)** | Em vigor em **2026**; transição até **2028** | **7 tópicos obrigatórios**, **auditoria independente** e marcos nos anos **0, 3 e 5**, o selo deixa de ser só pontuação |
+| Cadastro oficial de negócios de impacto | **Cadimpacto (MDIC)** | Em operação desde **19/03/2025** | Reconhecimento oficial em **bronze, prata e ouro**: KPI de visibilidade, não de impacto |
+| PLR permanece como está | **Lei 10.101/2000 + Lei 14.020/2020** | Vigente, **sem alteração nova confirmada** em 2025 to 2026 | IR exclusivo na fonte de **0% a 27,5%**; no máximo **2 vezes por ano civil**, com intervalo ≥ 1 trimestre |
 
 O que a lição já cobriu segue de pé: o catálogo do **IRIS+** está na versão **5.3c (dez/2025)**, a **ISO 26000** teve a vigência confirmada em **19 de março de 2025** e os **GRI Universal Standards 2021** continuam exigindo 3-1, 3-2 e 3-3 para relatos desde **1º de janeiro de 2023**.
 
-Três leituras para a empresa híbrida: primeiro, **"pratique ou explique" não é liberdade sem método** — quem escolhe divulgar se obriga a três exercícios consecutivos e a asseguração, ou seja, a comparabilidade é contratada, não improvisada. Segundo, o **B Corp deixa de ser jogo de pontos**: os 140 pontos da seção 6 continuam no histórico, mas a nova arquitetura é de requisito obrigatório com auditoria. Terceiro, o **Anexo "U" do CONAR** transforma a comunicação de impacto em matéria de prova: propósito declarado sem evidência deixa de ser erro de marketing e passa a ser risco ético e consumerista.
+Três leituras para a empresa híbrida: primeiro, **"pratique ou explique" não é liberdade sem método**: quem escolhe divulgar se obriga a três exercícios consecutivos e a asseguração, ou seja, a comparabilidade é contratada, não improvisada. Segundo, o **B Corp deixa de ser jogo de pontos**: os 140 pontos da seção 6 continuam no histórico, mas a nova arquitetura é de requisito obrigatório com auditoria. Terceiro, o **Anexo "U" do CONAR** transforma a comunicação de impacto em matéria de prova: propósito declarado sem evidência deixa de ser erro de marketing e passa a ser risco ético e consumerista.
 
 ```dragdrop
 {
-  "question": "Ordene os marcos de 2025–2026 que afetam a medição e o relato de impacto, do mais antigo ao mais recente:",
+  "question": "Ordene os marcos de 2025 to 2026 que afetam a medição e o relato de impacto, do mais antigo ao mais recente:",
   "items": [
-    "19/03/2025 — o MDIC lança o Cadimpacto (bronze, prata e ouro)",
-    "Abril/2025 — o B Lab publica os novos padrões globais de certificação",
-    "24/10/2025 — o CONAR aprova os arts. 36, 36-A, 36-B e o Anexo U do CBAP",
-    "29/05/2026 — a Res. CVM 244/2026 torna voluntário o reporte das companhias abertas",
-    "01/01/2027 — entra em vigor o regime pratique ou explique"
+    "19/03/2025, o MDIC lança o Cadimpacto (bronze, prata e ouro)",
+    "Abril/2025, o B Lab publica os novos padrões globais de certificação",
+    "24/10/2025, o CONAR aprova os arts. 36, 36-A, 36-B e o Anexo U do CBAP",
+    "29/05/2026: a Res. CVM 244/2026 torna voluntário o reporte das companhias abertas",
+    "01/01/2027: entra em vigor o regime pratique ou explique"
   ],
   "correctOrder": [
-    "19/03/2025 — o MDIC lança o Cadimpacto (bronze, prata e ouro)",
-    "Abril/2025 — o B Lab publica os novos padrões globais de certificação",
-    "24/10/2025 — o CONAR aprova os arts. 36, 36-A, 36-B e o Anexo U do CBAP",
-    "29/05/2026 — a Res. CVM 244/2026 torna voluntário o reporte das companhias abertas",
-    "01/01/2027 — entra em vigor o regime pratique ou explique"
+    "19/03/2025, o MDIC lança o Cadimpacto (bronze, prata e ouro)",
+    "Abril/2025, o B Lab publica os novos padrões globais de certificação",
+    "24/10/2025, o CONAR aprova os arts. 36, 36-A, 36-B e o Anexo U do CBAP",
+    "29/05/2026: a Res. CVM 244/2026 torna voluntário o reporte das companhias abertas",
+    "01/01/2027: entra em vigor o regime pratique ou explique"
   ],
   "explanation": "A ordem é a cronologia: cadastro oficial (mar/2025) → padrão de certificação mais rigoroso (abr/2025) → regra de comunicação de impacto (out/2025) → flexibilização do reporte obrigatório (mai/2026) → início do regime pratique ou explique (jan/2027). Repare que a última data é a única do futuro: anunciar o regime em 2026 não é o mesmo que já estar valendo."
 }
@@ -616,34 +616,34 @@ Três leituras para a empresa híbrida: primeiro, **"pratique ou explique" não 
 | Empregos diretos | **578.035** | **613,4 mil** |
 | Ingressos / serviços prestados | **R$ 757,9 bi (+9,5%)** | **R$ 848,37 bi (+11,94%)** |
 | Sobras distribuíveis | **R$ 51,4 bi (+32%)** | **R$ 61,28 bi (+14,2%)** |
-| Ativos totais | — | **R$ 1,60 trilhão (+14,9%)** |
-| Salários e encargos | — | **R$ 45,59 bi (+9,66%)** |
+| Ativos totais |: | **R$ 1,60 trilhão (+14,9%)** |
+| Salários e encargos |: | **R$ 45,59 bi (+9,66%)** |
 
-| Caso híbrido com número novo (2025–2026) | Medida publicada | Fonte/ano |
+| Caso híbrido com número novo (2025 to 2026) | Medida publicada | Fonte/ano |
 |---|---|---|
-| **Natura** (IP&L) | **R$ 86,85 bi** de impacto positivo em 2025 — **R$ 4 de benefício por R$ 1 de receita** (meta de 2030 adiantada em 5 anos); 2,8 mi de consultoras na AL, ~90% do faturamento | Exame, 15/06/2026 |
+| **Natura** (IP&L) | **R$ 86,85 bi** de impacto positivo em 2025: **R$ 4 de benefício por R$ 1 de receita** (meta de 2030 adiantada em 5 anos); 2,8 mi de consultoras na AL, ~90% do faturamento | Exame, 15/06/2026 |
 | **Solos** (startup + cooperativas de catadores) | **R$ 10 milhões** de renda gerada em 9 anos; **R$ 1 mi** do Banco do Nordeste em 2025 | Exame, 04/06/2026 |
 | **MOL Impacto** (lucro + doação) | **~R$ 90 milhões** doados a **240+ ONGs** em **18 anos**; 43 mi de exemplares em 5.000+ lojas | Folha, 13/10/2025 |
 | **Fundo Socioambiental CAIXA** | **R$ 440 mi** em **232 projetos**, **50 mi de pessoas** beneficiadas, 3,9 mi de árvores e 721 nascentes desde 2010 | CAIXA Notícias, 26/11/2025 |
 
-Leitura pelo painel: o **iP&L da Natura saltou de R$ 2,50 (2024) para R$ 4,00 (2025)** por real de receita — é a mesma razão com o mesmo método, agora com série temporal. É isso que transforma um KPI em indicador de tendência: **não o valor isolado, e sim a comparação com o próprio histórico usando a mesma régua**.
+Leitura pelo painel: o **iP&L da Natura saltou de R$ 2,50 (2024) para R$ 4,00 (2025)** por real de receita: é a mesma razão com o mesmo método, agora com série temporal. É isso que transforma um KPI em indicador de tendência: **não o valor isolado, e sim a comparação com o próprio histórico usando a mesma régua**.
 
-- **🔢 Você sabia?** As cooperativas brasileiras fecharam 2025 com **R$ 61,28 bilhões de sobras distribuíveis (+14,2%)**, **29 milhões de cooperados**, **613,4 mil empregos diretos** e ingressos de **R$ 848,37 bi (+11,94%)**, num sistema de **~4,4 mil cooperativas** (Anuário OCB 2026, dados de 31/12/2025) — contra **25,8 milhões** de cooperados e **R$ 51,4 bi** de sobras em 2024. Um ano, três recordes: repartição, sócios e faturamento. Para o painel de KPIs, isso significa que finalmente existe **série histórica doméstica** para comparar a sua própria taxa de repartição.
+- **🔢 Você sabia?** As cooperativas brasileiras fecharam 2025 com **R$ 61,28 bilhões de sobras distribuíveis (+14,2%)**, **29 milhões de cooperados**, **613,4 mil empregos diretos** e ingressos de **R$ 848,37 bi (+11,94%)**, num sistema de **~4,4 mil cooperativas** (Anuário OCB 2026, dados de 31/12/2025): contra **25,8 milhões** de cooperados e **R$ 51,4 bi** de sobras em 2024. Um ano, três recordes: repartição, sócios e faturamento. Para o painel de KPIs, isso significa que finalmente existe **série histórica doméstica** para comparar a sua própria taxa de repartição.
 
-### 12.3 O que NÃO foi verificado — não afirmar como vigente
+### 12.3 O que NÃO foi verificado: não afirmar como vigente
 
 | Item | Situação verificada |
 |---|---|
-| **PL 581/2019** — isenção da PLR no IR | Parecer favorável da CFT em **30/09/2025** localizado; **sanção e vigência não confirmadas** |
+| **PL 581/2019**: isenção da PLR no IR | Parecer favorável da CFT em **30/09/2025** localizado; **sanção e vigência não confirmadas** |
 | **PLs 1008/2025, 440/2025 e 7090/2025** (greenwashing no CDC) | **Em tramitação** na Câmara; **nenhuma vigência confirmada** |
-| **PEC do fim da escala 6x1** | Aprovada na Câmara em **28/05/2026**; **pendente no Senado** — sem promulgação |
-| **Número único de Empresas B no Brasil** | **338 (jul/2026), 342 (mai/2026) e ~500 (fev/2026)** — cortes diferentes, sem número verificado |
+| **PEC do fim da escala 6x1** | Aprovada na Câmara em **28/05/2026**; **pendente no Senado**: sem promulgação |
+| **Número único de Empresas B no Brasil** | **338 (jul/2026), 342 (mai/2026) e ~500 (fev/2026)**: cortes diferentes, sem número verificado |
 | **Retorno à obrigatoriedade do reporte em 2028** | Ofício do CFC de **jun/2026** é **proposta técnica**, sem norma publicada |
-| **Alíquotas definitivas de IBS/CBS a partir de 2027** | Dependem de resolução do Senado — **ainda não fixadas** |
-| **Mediana brasileira de SROI** | segue sem estudo nacional localizado (seção 14.2) — todos os SROIs citados são internacionais |
+| **Alíquotas definitivas de IBS/CBS a partir de 2027** | Dependem de resolução do Senado: **ainda não fixadas** |
+| **Mediana brasileira de SROI** | segue sem estudo nacional localizado (seção 14.2): todos os SROIs citados são internacionais |
 
 > [!WARNING]
-> **Novidade anunciada não é norma vigente.** A **PEC do fim da escala 6x1** foi aprovada na Câmara em 28/05/2026 e segue **pendente no Senado**; o **PL 581/2019** (isenção da PLR no IR) tem parecer favorável de 30/09/2025, mas **sanção e vigência não confirmadas**; e os **PLs de greenwashing** continuam em tramitação. Reportar qualquer um deles como fato consumado viola o mesmo princípio que derruba número inflado no SROI: **não se reivindica mais do que a evidência sustenta**. Do outro lado, o que **já está vigente** e muda a rotina de medição é isto: **Res. CVM 244/2026** (regime "pratique ou explique" a partir de 01/01/2027), **CBAP–CONAR Anexo "U"** (~26/11/2025) e **novos padrões B Corp** (2026, transição até 2028).
+> **Novidade anunciada não é norma vigente.** A **PEC do fim da escala 6x1** foi aprovada na Câmara em 28/05/2026 e segue **pendente no Senado**; o **PL 581/2019** (isenção da PLR no IR) tem parecer favorável de 30/09/2025, mas **sanção e vigência não confirmadas**; e os **PLs de greenwashing** continuam em tramitação. Reportar qualquer um deles como fato consumado viola o mesmo princípio que derruba número inflado no SROI: **não se reivindica mais do que a evidência sustenta**. Do outro lado, o que **já está vigente** e muda a rotina de medição é isto: **Res. CVM 244/2026** (regime "pratique ou explique" a partir de 01/01/2027), **CBAP: CONAR Anexo "U"** (~26/11/2025) e **novos padrões B Corp** (2026, transição até 2028).
 
 ---
 
@@ -660,9 +660,9 @@ Leitura pelo painel: o **iP&L da Natura saltou de R$ 2,50 (2024) para R$ 4,00 (2
 | Incorporam critério de impacto na governança | **mais de 2/3** | GIIN, *State of the Market 2024* |
 | Portfólio médio / mediano | **US$ 986 mi / US$ 42 mi** | GIIN, *Sizing 2024* |
 
-Duas leituras para a empresa híbrida: primeiro, **70% já usa métrica aceita** — logo, não medir é ficar fora da conversa de capital. Segundo, **mais de 2/3 coloca impacto na governança** — ou seja, a pergunta não é só "que número medimos?", mas "**quem no conselho responde por ele?**".
+Duas leituras para a empresa híbrida: primeiro, **70% já usa métrica aceita**, logo, não medir é ficar fora da conversa de capital. Segundo, **mais de 2/3 coloca impacto na governança**, ou seja, a pergunta não é só "que número medimos?", mas "**quem no conselho responde por ele?**".
 
-- **🔢 Você sabia?** O mercado de impact investing cresceu de forma composta a **21% ao ano desde 2019**, mas o portfólio **mediano** é de apenas **US$ 42 milhões** contra **US$ 986 milhões** de média — a distribuição é extremamente assimétrica. Na prática, a maior parte das organizações de impacto é pequena: para elas, o IRIS+ gratuito e o BIA com verificação paga representam custos muito diferentes do que para um fundo bilionário.
+- **🔢 Você sabia?** O mercado de impact investing cresceu de forma composta a **21% ao ano desde 2019**, mas o portfólio **mediano** é de apenas **US$ 42 milhões** contra **US$ 986 milhões** de média: a distribuição é extremamente assimétrica. Na prática, a maior parte das organizações de impacto é pequena: para elas, o IRIS+ gratuito e o BIA com verificação paga representam custos muito diferentes do que para um fundo bilionário.
 
 ---
 
@@ -670,26 +670,26 @@ Duas leituras para a empresa híbrida: primeiro, **70% já usa métrica aceita**
 
 ### 14.1 Os erros que derrubam um painel de impacto
 
-1. **Confundir cadeia de ordens** — a ordem canônica é `insumo → atividade → output → outcome → impacto`;
-2. **Reportar razão bruta de SROI** — 6,67:1 no lugar de 2,40:1 é superestimativa de 2,78 vezes;
-3. **Usar 23 p.p. em vez de 14 p.p.** — diferença-em-diferenças sem grupo de comparação superestima em 64%;
-4. **Alegar "certificação ISO 26000"** — a norma é orientação, não certificável;
-5. **Esquecer o índice de conteúdo da GRI** — sem ele, não há conformidade ("in accordance"), mesmo publicando dados;
-6. **Enviar o BIA com 85 e achar que basta** — a queda de 5 a 10 pontos na verificação pode derrubar para 75 e reprovar;
-7. **Confundir atribuição com contribuição** — reivindicar causalidade direta onde a evidência só sustenta contribuição;
-8. **Tratar triple bottom line como norma contábil** — é conceito de 1994, não padrão de relatório;
-9. **Anunciar como vigente o que está em tramitação** — PEC 6x1, PL 581/2019 (isenção de PLR) e PLs de greenwashing não têm vigência confirmada (seção 12.3).
+1. **Confundir cadeia de ordens**: a ordem canônica é `insumo → atividade → output → outcome → impacto`;
+2. **Reportar razão bruta de SROI**: 6,67:1 no lugar de 2,40:1 é superestimativa de 2,78 vezes;
+3. **Usar 23 p.p. em vez de 14 p.p.**: diferença-em-diferenças sem grupo de comparação superestima em 64%;
+4. **Alegar "certificação ISO 26000"**: a norma é orientação, não certificável;
+5. **Esquecer o índice de conteúdo da GRI**: sem ele, não há conformidade ("in accordance"), mesmo publicando dados;
+6. **Enviar o BIA com 85 e achar que basta**: a queda de 5 a 10 pontos na verificação pode derrubar para 75 e reprovar;
+7. **Confundir atribuição com contribuição**: reivindicar causalidade direta onde a evidência só sustenta contribuição;
+8. **Tratar triple bottom line como norma contábil**: é conceito de 1994, não padrão de relatório;
+9. **Anunciar como vigente o que está em tramitação**: PEC 6x1, PL 581/2019 (isenção de PLR) e PLs de greenwashing não têm vigência confirmada (seção 12.3).
 
 ### 14.2 O que a pesquisa desta lição não verificou
 
-- **Mediana brasileira de SROI** — não há estudo nacional localizado; todos os números de SROI citados são internacionais;
-- **"Impact-adjusted P&L" como padrão contábil** — **não existe padrão** com esse nome; usa-se **IP&L / IWAF**, que é framework verificado, e o termo é descritivo;
-- **Códigos individuais do IRIS+** — verificou-se a estrutura (taxonomia, conjuntos nucleares, catálogo), não cada métrica;
-- **Volume global de organizações em conformidade com a GRI** — não confirmado;
-- **Taxa de desconto padrão do SROI** — **não existe**: 4% e 3,5% são escolhas de estudos específicos;
-- **Novo sistema da B Lab (auditoria de terceira parte)** — a B Lab UK afirma o abandono do sistema de pontos, mas o material de apoio ainda descreve a versão anterior;
-- **Número de B Corps por país** — não confirmado nesta rodada;
-- **Fatores de monetização completos do IWAF** — o documento existe, mas a tabela integral não foi lida.
+- **Mediana brasileira de SROI**: não há estudo nacional localizado; todos os números de SROI citados são internacionais;
+- **"Impact-adjusted P&L" como padrão contábil**: **não existe padrão** com esse nome; usa-se **IP&L / IWAF**, que é framework verificado, e o termo é descritivo;
+- **Códigos individuais do IRIS+**: verificou-se a estrutura (taxonomia, conjuntos nucleares, catálogo), não cada métrica;
+- **Volume global de organizações em conformidade com a GRI**: não confirmado;
+- **Taxa de desconto padrão do SROI**: **não existe**: 4% e 3,5% são escolhas de estudos específicos;
+- **Novo sistema da B Lab (auditoria de terceira parte)**: a B Lab UK afirma o abandono do sistema de pontos, mas o material de apoio ainda descreve a versão anterior;
+- **Número de B Corps por país**: não confirmado nesta rodada;
+- **Fatores de monetização completos do IWAF**, o documento existe, mas a tabela integral não foi lida.
 
 ---
 
@@ -723,7 +723,7 @@ Duas leituras para a empresa híbrida: primeiro, **70% já usa métrica aceita**
     "A parte do resultado que ocorreria mesmo sem a intervenção"
   ],
   "correct": 3,
-  "explanation": "Peso morto é o que já aconteceria de qualquer modo — é o ajuste que desconta o 'de graça'. A alternativa B descreve o deslocamento (displacement); a C descreve o decaimento (drop-off); a A não é um dos quatro ajustes do método. (Cabinet Office; NEF)"
+  "explanation": "Peso morto é o que já aconteceria de qualquer modo: é o ajuste que desconta o 'de graça'. A alternativa B descreve o deslocamento (displacement); a C descreve o decaimento (drop-off); a A não é um dos quatro ajustes do método. (Cabinet Office; NEF)"
 }
 ```
 
@@ -771,7 +771,7 @@ Duas leituras para a empresa híbrida: primeiro, **70% já usa métrica aceita**
     "Foi revogada em 2025 e substituída por nova edição"
   ],
   "correct": 2,
-  "explanation": "A norma afirma que qualquer oferta de certificação seria deturpação da sua finalidade: é orientação, não um requisito auditável. Ela traz 7 princípios, 7 temas centrais e 37 questões; foi publicada em novembro de 2010 e teve a vigência confirmada em 19 de março de 2025 — vigente, mas não revista. (ISO, 2010/2025)"
+  "explanation": "A norma afirma que qualquer oferta de certificação seria deturpação da sua finalidade: é orientação, não um requisito auditável. Ela traz 7 princípios, 7 temas centrais e 37 questões; foi publicada em novembro de 2010 e teve a vigência confirmada em 19 de março de 2025: vigente, mas não revista. (ISO, 2010/2025)"
 }
 ```
 
@@ -851,7 +851,7 @@ Duas leituras para a empresa híbrida: primeiro, **70% já usa métrica aceita**
     "Exigir auditoria obrigatória certificada pela ISO 26000"
   ],
   "correct": 1,
-  "explanation": "O IP&L generaliza a demonstração do resultado em várias linhas monetárias, uma por impacto, sobre 6 capitais, com dupla materialidade e referência absoluta e marginal — produzindo o retorno integrado r = (ΔFV + ΔSV + ΔEV) ÷ FV. Ele não substitui o relato por texto, não dispensa baseline e não se apoia na ISO 26000, que é orientação não certificável. (IEF, 2025)"
+  "explanation": "O IP&L generaliza a demonstração do resultado em várias linhas monetárias, uma por impacto, sobre 6 capitais, com dupla materialidade e referência absoluta e marginal: produzindo o retorno integrado r = (ΔFV + ΔSV + ΔEV) ÷ FV. Ele não substitui o relato por texto, não dispensa baseline e não se apoia na ISO 26000, que é orientação não certificável. (IEF, 2025)"
 }
 ```
 
@@ -867,7 +867,7 @@ Duas leituras para a empresa híbrida: primeiro, **70% já usa métrica aceita**
     "≈ 6,4%"
   ],
   "correct": 1,
-  "explanation": "270 ÷ 10.600 (ambos em milhões) = 0,0255, ou seja, ≈ 2,5% — cerca de R$ 2,55 devolvidos a cada R$ 100 de faturamento. É um indicador de repartição que qualquer cooperativa calcula com o próprio balanço. A alternativa C (13%) é a regra estatutária da MONDRAGON (mínimo do lucro ao fundo de solidariedade), não da COPACOL; A erra a ordem de grandeza; D confunde a variação das sobras (+64%) com um percentual sobre o faturamento. Como todo índice, ele ainda não é impacto: falta base, grupo de comparação e horizonte. (O Presente Rural, 31/01/2025)"
+  "explanation": "270 ÷ 10.600 (ambos em milhões) = 0,0255, ou seja, ≈ 2,5%: cerca de R$ 2,55 devolvidos a cada R$ 100 de faturamento. É um indicador de repartição que qualquer cooperativa calcula com o próprio balanço. A alternativa C (13%) é a regra estatutária da MONDRAGON (mínimo do lucro ao fundo de solidariedade), não da COPACOL; A erra a ordem de grandeza; D confunde a variação das sobras (+64%) com um percentual sobre o faturamento. Como todo índice, ele ainda não é impacto: falta base, grupo de comparação e horizonte. (O Presente Rural, 31/01/2025)"
 }
 ```
 
@@ -891,25 +891,25 @@ Duas leituras para a empresa híbrida: primeiro, **70% já usa métrica aceita**
 
 > [!WARNING]
 > **Armadilhas desta lição:**
-> - **A cadeia é `insumo → atividade → output → outcome → impacto`** — qualquer outra ordem revela confusão entre entrega e mudança;
-> - **SROI bruto é engano**: sem os 4 ajustes, o mesmo programa vai de 6,67:1 para 2,40:1 — superestimativa de 2,78 vezes;
-> - **Faixa prudente de SROI: 2:1 a 5:1** — a média de 1:18 é enviesada, e os próprios autores indicam 1:5 a 1:10;
+> - **A cadeia é `insumo → atividade → output → outcome → impacto`**: qualquer outra ordem revela confusão entre entrega e mudança;
+> - **SROI bruto é engano**: sem os 4 ajustes, o mesmo programa vai de 6,67:1 para 2,40:1: superestimativa de 2,78 vezes;
+> - **Faixa prudente de SROI: 2:1 a 5:1**: a média de 1:18 é enviesada, e os próprios autores indicam 1:5 a 1:10;
 > - **"Certificação ISO 26000" não existe**: é orientação não certificável, com 7 princípios, 7 temas e 37 questões;
-> - **GRI sem índice de conteúdo não é conformidade** — e o GRI 3 exige 3-1, 3-2 e 3-3 desde 1º/01/2023;
+> - **GRI sem índice de conteúdo não é conformidade**, e o GRI 3 exige 3-1, 3-2 e 3-3 desde 1º/01/2023;
 > - **BIA: enviar com 85 pode reprovar** (queda de 5 a 10 pontos); a margem segura é ≥ 90, com o crédito do requisito legal de 7,5 a 10 pontos;
-> - **Sem baseline não há causalidade** — 23 p.p. vira 14 p.p. quando se subtrai o contrafactual, e reportar o primeiro superestima em 64%;
+> - **Sem baseline não há causalidade**: 23 p.p. vira 14 p.p. quando se subtrai o contrafactual, e reportar o primeiro superestima em 64%;
 > - **Triple bottom line não é norma contábil**: é conceito de Elkington (1994/1997), pedido de revisão em 2018;
-> - **Atribuição não é contribuição** — reivindicar causalidade direta onde a evidência só sustenta contribuição é o caminho mais curto para perder credibilidade;
-> - **Caso real não é SROI** — Natura, REI, MONDRAGON e COPACOL publicam razões e índices auditáveis, mas nenhum declara contrafactual com os 4 ajustes (seção 11.6);
-> - **Anúncio não é norma** — só vale o que tem vigência confirmada: Res. CVM 244/2026, Anexo "U" do CONAR e novos padrões B Corp valem; PEC 6x1, PL 581/2019 e PLs de greenwashing, não (seção 12.3).
+> - **Atribuição não é contribuição**: reivindicar causalidade direta onde a evidência só sustenta contribuição é o caminho mais curto para perder credibilidade;
+> - **Caso real não é SROI**: Natura, REI, MONDRAGON e COPACOL publicam razões e índices auditáveis, mas nenhum declara contrafactual com os 4 ajustes (seção 11.6);
+> - **Anúncio não é norma**: só vale o que tem vigência confirmada: Res. CVM 244/2026, Anexo "U" do CONAR e novos padrões B Corp valem; PEC 6x1, PL 581/2019 e PLs de greenwashing, não (seção 12.3).
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
-> 1. A cadeia de resultados é fixa — **insumo → atividade → output → outcome → impacto** — e cada degrau autoriza uma afirmação diferente: **output é seu, outcome é do mundo, impacto exige contrafactual**;
-> 2. A **Theory of Change** se constrói **de trás para frente**, em **11 passos** (ou 4, no quadro do UNDG), com premissas e riscos explícitos — e é revisada a cada nova evidência;
-> 3. O **SROI** tem **6 estágios**, **7 princípios** e **4 ajustes** (peso morto, atribuição, deslocamento e decaimento): no exemplo completo, **6,67:1 bruto vira 2,40:1 líquido** — faixa prudente observada: **2:1 a 5:1**;
-> 4. O **IRIS+** (GIIN, bem público gratuito) e as **5 Dimensões do Impacto** — **o quê, quem, quanto, contribuição e risco** — padronizam o que medir; classificar contribuição aos ODS exige **limiar, meta local e contribuição líquida**, em três níveis (negativo, alinhado, positivo);
+> 1. A cadeia de resultados é fixa, **insumo → atividade → output → outcome → impacto**, e cada degrau autoriza uma afirmação diferente: **output é seu, outcome é do mundo, impacto exige contrafactual**;
+> 2. A **Theory of Change** se constrói **de trás para frente**, em **11 passos** (ou 4, no quadro do UNDG), com premissas e riscos explícitos, e é revisada a cada nova evidência;
+> 3. O **SROI** tem **6 estágios**, **7 princípios** e **4 ajustes** (peso morto, atribuição, deslocamento e decaimento): no exemplo completo, **6,67:1 bruto vira 2,40:1 líquido**: faixa prudente observada: **2:1 a 5:1**;
+> 4. O **IRIS+** (GIIN, bem público gratuito) e as **5 Dimensões do Impacto**, **o quê, quem, quanto, contribuição e risco**, padronizam o que medir; classificar contribuição aos ODS exige **limiar, meta local e contribuição líquida**, em três níveis (negativo, alinhado, positivo);
 > 5. **GRI, ISO 26000 e BIA são famílias diferentes**: relato com conformidade (3-1/3-2/3-3 e 9 requisitos), orientação **não certificável** (7/37/7) e autoavaliação com certificação (**≥ 80 pontos verificados** + requisito legal + publicação do score);
 > 6. Causalidade se sustenta com **baseline, contrafactual e diferença-em-diferenças** (exemplo: **23 − 9 = 14 p.p.**) e com a escolha honesta entre **atribuição** e **contribuição**;
-> 7. O **IP&L** generaliza o resultado em **várias linhas monetárias por capital**: no exemplo, o retorno financeiro de **20%** vira **23%** integrado — e cai para **16%** se o impacto ambiental negativo subir, sinal de destruição de valor social;
-> 8. Um painel de impacto válido cobre **os 5 níveis da cadeia + um ajuste contrafactual + um padrão externo + uma leitura integrada** — painel só de outputs é relatório de operação, não medição de impacto.
+> 7. O **IP&L** generaliza o resultado em **várias linhas monetárias por capital**: no exemplo, o retorno financeiro de **20%** vira **23%** integrado, e cai para **16%** se o impacto ambiental negativo subir, sinal de destruição de valor social;
+> 8. Um painel de impacto válido cobre **os 5 níveis da cadeia + um ajuste contrafactual + um padrão externo + uma leitura integrada**: painel só de outputs é relatório de operação, não medição de impacto.

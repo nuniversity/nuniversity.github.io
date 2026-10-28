@@ -58,7 +58,7 @@ result = app.invoke({"messages": ["Olá"]}, config)
 ```
 
 [!WARNING]
-MemorySaver é efêmero — todos os checkpoints são perdidos quando o processo Python termina. Use PostgresSaver ou um salvador personalizado para cargas de trabalho de produção.
+MemorySaver é efêmero: todos os checkpoints são perdidos quando o processo Python termina. Use PostgresSaver ou um salvador personalizado para cargas de trabalho de produção.
 
 ### Comparação: Backends de Checkpoint
 
@@ -115,7 +115,7 @@ app.invoke({"messages": ["Início thread 2"]}, {"configurable": {"thread_id": "t
 O estado tem namespace por thread. Checkpoints formam uma linha do tempo dentro de cada thread.
 
 [!IMPORTANT]
-Isolamento de thread é crítico em produção. Cada sessão de usuário recebe seu próprio `thread_id` — nunca compartilhe um `thread_id` entre usuários. Use um identificador único como `user_id:conversation_id` como ID da thread para garantir isolamento.
+Isolamento de thread é crítico em produção. Cada sessão de usuário recebe seu próprio `thread_id`: nunca compartilhe um `thread_id` entre usuários. Use um identificador único como `user_id:conversation_id` como ID da thread para garantir isolamento.
 
 ---
 
@@ -134,7 +134,7 @@ replayed = app.invoke(
 )
 ```
 
-A reprodução **não** reexecuta nós anteriores ao checkpoint — ela retoma daquele estado exato.
+A reprodução **não** reexecuta nós anteriores ao checkpoint: ela retoma daquele estado exato.
 
 [!TIP]
 Replay é inestimável para teste e depuração. Você pode reproduzir um checkpoint específico com entrada modificada para ver como o grafo se comportaria com dados diferentes naquele estado exato.
@@ -214,7 +214,7 @@ Ramificação permite **teste A/B de decisões de agente**. Execute múltiplos r
 Cada execução de nó cria um checkpoint de estado completo. Se seu estado for grande (vetores de embedding, históricos completos de conversa), o armazenamento de checkpoint pode crescer rapidamente. Considere:
 - Usar PostgresSaver com particionamento de tabela por thread_id
 - Implementar política de retenção que limpa checkpoints antigos
-- Manter esquemas de estado enxutos — armazene apenas o que nós downstream precisam
+- Manter esquemas de estado enxutos: armazene apenas o que nós downstream precisam
 - Usar savers personalizados com políticas de ciclo de vida S3/GCS
 
 ---

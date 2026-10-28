@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Macros Avançadas em Jinja2 e Materializações Customizadas
 
-Jinja2 é o motor de templates do dbt — ele transforma SQL de uma linguagem de consulta estática em uma linguagem dinâmica e composável. Dominar Jinja2 é a diferença entre um projeto que escala para 500 modelos com uma equipe pequena e um que se torna insustentável. Este módulo cobre padrões de macro de nível profissional e materializações customizadas para casos de uso específicos do Redshift.
+Jinja2 é o motor de templates do dbt: ele transforma SQL de uma linguagem de consulta estática em uma linguagem dinâmica e composável. Dominar Jinja2 é a diferença entre um projeto que escala para 500 modelos com uma equipe pequena e um que se torna insustentável. Este módulo cobre padrões de macro de nível profissional e materializações customizadas para casos de uso específicos do Redshift.
 
 O Jinja2 permite que você escreva SQL parametrizado, com loops, condicionais e reutilização de código. Sem ele, você teria que copiar e colar SQL repetitivo centenas de vezes, tornando a manutenção um pesadelo.
 
@@ -466,7 +466,7 @@ dbt compile --select fct_orders  # garantir que o modelo compila primeiro
   "type": "multiple-choice",
   "question": "Por que `namespace()` é necessário ao atualizar uma variável dentro de um loop `{% for %}` no Jinja2?",
   "options": [
-    "Para performance — namespace() cacheia resultados do loop",
+    "Para performance: namespace() cacheia resultados do loop",
     "Blocos de loop no Jinja2 têm seu próprio escopo; variáveis definidas dentro de um loop não atualizam o escopo externo sem namespace()",
     "Redshift requer namespace() para consultas parametrizadas",
     "namespace() é necessário apenas para macros recursivas"
@@ -485,7 +485,7 @@ dbt compile --select fct_orders  # garantir que o modelo compila primeiro
     "require() busca o valor no warehouse; get() lê do profiles.yml",
     "require() levanta um erro se a config estiver faltando; get() retorna None ou um valor padrão",
     "require() aplica um tipo de dado; get() aceita qualquer tipo",
-    "Não há diferença — são aliases"
+    "Não há diferença: são aliases"
   ],
   "correct": 1,
   "explanation": "config.require() levanta um erro de compilação dbt se a config especificada não estiver definida no bloco config do modelo. config.get() retorna None ou um valor padrão opcional se a config estiver faltando."
@@ -499,7 +499,7 @@ dbt compile --select fct_orders  # garantir que o modelo compila primeiro
   "question": "A assinatura `{% materialization my_mat, adapter='redshift' %}` significa o quê?",
   "options": [
     "A materialização só funciona com clusters Redshift, não Serverless",
-    "Esta implementação é o override específico para Redshift — dbt a usa quando o adapter ativo é redshift, caindo de volta para a implementação padrão caso contrário",
+    "Esta implementação é o override específico para Redshift: dbt a usa quando o adapter ativo é redshift, caindo de volta para a implementação padrão caso contrário",
     "A materialização ignora todos os outros adapters completamente",
     "Requer que a versão do adapter Redshift corresponda exatamente"
   ],
@@ -561,9 +561,9 @@ dbt compile --select fct_orders  # garantir que o modelo compila primeiro
 [!SUCCESS]
 ### Principais Conclusões
 
-- Use `namespace()` para estado mutável dentro de loops `{% for %}` no Jinja2 — atribuição simples de variável não escapa do escopo do loop.
+- Use `namespace()` para estado mutável dentro de loops `{% for %}` no Jinja2: atribuição simples de variável não escapa do escopo do loop.
 - Sempre proteja chamadas `run_query()` com `{% if execute %}` para prevenir execução durante fases de parse/compilação.
-- `config.require()` levanta erro de compilação para configs ausentes; `config.get()` retorna None ou um padrão — use require() para parâmetros obrigatórios de materialização.
+- `config.require()` levanta erro de compilação para configs ausentes; `config.get()` retorna None ou um padrão: use require() para parâmetros obrigatórios de materialização.
 - A assinatura `adapter='redshift'` em `{% materialization %}` cria uma implementação específica para Redshift; outros adapters usam a implementação `default`.
 - UNLOAD para S3 é melhor implementado como uma macro post-hook, mantendo a lógica de transformação separada da etapa de exportação.
-- Documente macros em `macros/schema.yml` — elas aparecem em `dbt docs` e podem ser testadas via `dbt run-operation`.
+- Documente macros em `macros/schema.yml`: elas aparecem em `dbt docs` e podem ser testadas via `dbt run-operation`.

@@ -1,12 +1,12 @@
 ---
-title: "Dominio 1.4 — Configuración de Virtual Warehouses"
+title: "Dominio 1.4, Configuración de Virtual Warehouses"
 description: "Análisis profundo de los Virtual Warehouses de Snowflake: tipos, tamaños, políticas de escalado, auto-suspensión/reanudación, multi-cluster warehouses y mejores prácticas para diferentes patrones de carga de trabajo."
 order: 4
 difficulty: intermediate
 duration: "70 min"
 ---
 
-# Dominio 1.4 — Configuración de Virtual Warehouses
+# Dominio 1.4: Configuración de Virtual Warehouses
 
 ## Peso en el Examen
 
@@ -61,7 +61,7 @@ Los Snowpark-Optimized Warehouses están diseñados para **cargas de trabajo de 
 
 - Proporcionan **16 veces más memoria** por nodo en comparación con los warehouses estándar
 - Cada nodo tiene más RAM para grandes operaciones en memoria con Snowpark
-- **Más costosos** por crédito — úsalos solo cuando la memoria sea el cuello de botella
+- **Más costosos** por crédito: úsalos solo cuando la memoria sea el cuello de botella
 - Ideales para: entrenamiento de modelos ML, ciencia de datos a gran escala, transformaciones complejas con Snowpark
 
 ```sql
@@ -118,13 +118,13 @@ ALTER WAREHOUSE WH_BI SET AUTO_SUSPEND = 0;
 ```
 
 **Mejores prácticas:**
-- Establece la auto-suspensión **baja** (60–300 segundos) para cargas de trabajo intermitentes o impredecibles
+- Establece la auto-suspensión **baja** (60 to 300 segundos) para cargas de trabajo intermitentes o impredecibles
 - Establece la auto-suspensión **más alta** para warehouses con consultas frecuentes y consecutivas (evita el cargo mínimo de 60 segundos en cada reinicio)
 - **Nunca deshabilites** la auto-suspensión para warehouses de desarrollo o pruebas
 
 ### Auto-Reanudación
 
-`AUTO_RESUME = TRUE` significa que el warehouse **se inicia automáticamente** en el momento en que se envía una consulta — el usuario no necesita reanudarlo manualmente:
+`AUTO_RESUME = TRUE` significa que el warehouse **se inicia automáticamente** en el momento en que se envía una consulta: el usuario no necesita reanudarlo manualmente:
 
 ```sql
 ALTER WAREHOUSE WH_BI SET AUTO_RESUME = TRUE;
@@ -215,8 +215,8 @@ Modo multi-cluster:          [Clúster 1] [Clúster 2] [Clúster 3]
 
 | Modo | Descripción | Cuándo Usarlo |
 |---|---|---|
-| **Auto-Scale** | `MIN ≠ MAX` — los clústeres escalan dinámicamente | Concurrencia variable |
-| **Maximized (Maximizado)** | `MIN = MAX` — todos los clústeres siempre activos | Alta concurrencia predecible |
+| **Auto-Scale** | `MIN ≠ MAX`: los clústeres escalan dinámicamente | Concurrencia variable |
+| **Maximized (Maximizado)** | `MIN = MAX`: todos los clústeres siempre activos | Alta concurrencia predecible |
 
 ```sql
 -- Auto-scale: de 1 a 5 clústeres
@@ -287,7 +287,7 @@ CREATE WAREHOUSE WH_BI
 |---|---|
 | Consultas individuales lentas | **Escalar verticalmente** (tamaño mayor) |
 | Muchas consultas concurrentes en cola | **Escalar horizontalmente** (multi-cluster) |
-| Desarrollo/pruebas | Tamaño pequeño, auto-suspensión 60–120s |
+| Desarrollo/pruebas | Tamaño pequeño, auto-suspensión 60 to 120s |
 | Entrenamiento de modelos ML con Snowpark | Snowpark-Optimized Warehouse |
 | Lotes ETL nocturnos | Tamaño grande, deshabilitar durante el día |
 | Equipos diferentes | Warehouses dedicados y separados |

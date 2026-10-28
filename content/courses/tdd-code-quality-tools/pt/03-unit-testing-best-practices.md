@@ -270,7 +270,7 @@ def test_email_valido():
 ```
 
 > [!WARNING]
-> Excesso de mocking é um antipadrão comum. Se você mocka tudo, seus testes se tornam frágeis — eles quebram quando a implementação muda, não quando o comportamento quebra. Mocke fronteiras, não internos.
+> Excesso de mocking é um antipadrão comum. Se você mocka tudo, seus testes se tornam frágeis: eles quebram quando a implementação muda, não quando o comportamento quebra. Mocke fronteiras, não internos.
 
 ## Isolamento de Testes: Sem Estado Compartilhado
 
@@ -644,14 +644,14 @@ def test_condicional():
 
 ## Resumo
 
-- **Padrão AAA**: Arrange → Act → Assert — uma história clara por teste
+- **Padrão AAA**: Arrange → Act → Assert: uma história clara por teste
 - **Um conceito por teste**: Não uma asserção, mas um comportamento
 - **Nomes descritivos**: `test_dado_X_quando_Y_entao_Z` conta a história completa
 - **Mocke fronteiras**: Mocke dependências externas, não lógica interna
 - **Isolamento**: Estado novo por teste, sem compartilhamento, sem dependência de ordem
-- **Casos extremos**: Vazio, nulo, negativo, limite — teste todos
+- **Casos extremos**: Vazio, nulo, negativo, limite: teste todos
 - **FIRST**: Fast, Isolated, Repeatable, Self-validating, Thorough
 - **Testabilidade**: Projete código para que possa ser testado (injeção de dependência)
 
 > [!SUCCESS]
-> Testar bem é uma disciplina de design. O padrão AAA, mocking adequado e isolamento rigoroso não são custos — são investimentos que tornam cada refatoração futura segura e cada relatório de bug solucionável.
+> Testar bem é uma disciplina de design. O padrão AAA, mocking adequado e isolamento rigoroso não são custos: são investimentos que tornam cada refatoração futura segura e cada relatório de bug solucionável.

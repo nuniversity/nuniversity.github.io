@@ -518,7 +518,7 @@ DDD se aprende mejor combinando teoría y práctica. Recursos esenciales:
 
 3. **Entrevista a un experto en dominio**: Anota 5 preguntas que le harías a un experto en dominio para un sistema de banca en línea. ¿Qué aspectos del dominio explorarías?
 
-4. **Simulación de procesamiento del conocimiento**: Dada esta regla de negocio — «Un cliente no puede hacer un pedido si su cuenta está vencida, salvo que el total del pedido sea menor a $50 y que lleve más de 2 años como cliente» — modélala como código Python con reglas de dominio explícitas.
+4. **Simulación de procesamiento del conocimiento**: Dada esta regla de negocio, «Un cliente no puede hacer un pedido si su cuenta está vencida, salvo que el total del pedido sea menor a $50 y que lleve más de 2 años como cliente», modélala como código Python con reglas de dominio explícitas.
 
 5. **Estratégico vs. táctico**: Clasifica cada uno de los siguientes como DDD estratégico o táctico: contexto delimitado, repositorio, lenguaje ubicuo, mapeo de contextos, entidad, evento de dominio, subdominio, agregado.
 

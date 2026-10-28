@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Proyecto Final: Base de Datos de Biblioteca
 
-Has aprendido todos los fundamentos. Ahora es momento de juntarlos en un proyecto completo — desde el diseño de la base de datos hasta consultas analíticas.
+Has aprendido todos los fundamentos. Ahora es momento de juntarlos en un proyecto completo: desde el diseño de la base de datos hasta consultas analíticas.
 
 ## Visión General del Proyecto
 
@@ -16,7 +16,7 @@ Construye una base de datos para una biblioteca pública que gestione:
 - **Libros** en el catálogo
 - **Autores** que los escribieron
 - **Miembros** que toman prestados libros
-- **Préstamos** — quién tomó qué y cuándo
+- **Préstamos**: quién tomó qué y cuándo
 
 ## Paso 1: Diseño de la Base de Datos
 
@@ -319,7 +319,7 @@ Esto es lo que la Consulta 1 debería devolver (asumiendo fecha actual a finales
 | 1984 | Eve Martinez | 2024-06-15 | 2024-06-29 | 25 |
 
 > [!NOTE]
-> Estas consultas usan funciones de SQLite (`julianday`, `strftime`, `DATE`). En PostgreSQL usarías `EXTRACT`, `TO_CHAR` e `INTERVAL`. En MySQL, `DATEDIFF` y `DATE_FORMAT`. La lógica es la misma — solo la sintaxis difiere.
+> Estas consultas usan funciones de SQLite (`julianday`, `strftime`, `DATE`). En PostgreSQL usarías `EXTRACT`, `TO_CHAR` e `INTERVAL`. En MySQL, `DATEDIFF` y `DATE_FORMAT`. La lógica es la misma: solo la sintaxis difiere.
 
 ## Desafíos de Extensión
 

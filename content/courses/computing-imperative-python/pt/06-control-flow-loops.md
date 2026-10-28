@@ -66,7 +66,7 @@ Decolagem! 🚀
 > [!WARNING]
 > Sempre garanta que a condição do loop eventualmente se torne False! Esquecer de atualizar a variável do loop cria um loop infinito:
 > ```python
-> # LOOP INFINITO - não faça isso!
+> # LOOP INFINITO: não faça isso!
 > contador = 5
 > while contador > 0:
 >     print(contador)
@@ -260,7 +260,7 @@ Tabuada do 7:
 
 Instruções de controle modificam o comportamento do loop.
 
-### break - Sai do Loop Imediatamente
+### break: Sai do Loop Imediatamente
 
 ```mermaid
 flowchart TD
@@ -295,7 +295,7 @@ Saída:
 Primeiro número par encontrado: 8
 ```
 
-### continue - Pula para a Próxima Iteração
+### continue: Pula para a Próxima Iteração
 
 ```mermaid
 flowchart TD

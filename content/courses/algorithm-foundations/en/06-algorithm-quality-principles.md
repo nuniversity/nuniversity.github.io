@@ -40,7 +40,7 @@ flowchart TD
 
 ## Correctness: Getting the Right Answer
 
-**Correctness** means the algorithm produces the correct output for every valid input. This is the most fundamental quality -- without correctness, nothing else matters.
+**Correctness** means the algorithm produces the correct output for every valid input. This is the most fundamental quality: without correctness, nothing else matters.
 
 ### How to Verify Correctness
 

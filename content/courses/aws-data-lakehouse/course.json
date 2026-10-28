@@ -6,19 +6,19 @@
   "icon": "database",
   "en": {
     "title": "Building a Complete AWS Data Lakehouse: S3 to QuickSight",
-    "description": "End-to-end architecture and implementation course for a production AWS data lakehouse — S3 storage tiers including Glacier, open table formats (Iceberg/Hudi/Delta), Glue Data Catalog and ETL, Athena and Redshift query layers, streaming and batch ingestion, Lake Formation governance with row/column-level security, Macie-driven PII protection, orchestration, data quality, cost optimization, and QuickSight BI — with architecture diagrams, real AWS customer cases, worked pricing examples, and practice questions.",
+    "description": "End-to-end architecture and implementation course for a production AWS data lakehouse, S3 storage tiers including Glacier, open table formats (Iceberg/Hudi/Delta), Glue Data Catalog and ETL, Athena and Redshift query layers, streaming and batch ingestion, Lake Formation governance with row/column-level security, Macie-driven PII protection, orchestration, data quality, cost optimization, and QuickSight BI, with architecture diagrams, real AWS customer cases, worked pricing examples, and practice questions.",
     "difficulty": "Intermediate",
     "duration": "12 Weeks"
   },
   "pt": {
     "title": "Construindo um Data Lakehouse Completo na AWS: do S3 ao QuickSight",
-    "description": "Curso de ponta a ponta para construir e operar um data lakehouse completo na AWS: fundação S3, Lake Formation para governança e compartilhamento, Glue para catálogo e ETL, Kinesis/MSK para ingestão em streaming, EMR e Athena para processamento e análise, Redshift para cargas analíticas, QuickSight para servação e visualização, segurança, custos e uma arquitetura de referência de ponta a ponta — com diagramas, casos reais, exemplos de precificação e questões de prática.",
+    "description": "Curso de ponta a ponta para construir e operar um data lakehouse completo na AWS: fundação S3, Lake Formation para governança e compartilhamento, Glue para catálogo e ETL, Kinesis/MSK para ingestão em streaming, EMR e Athena para processamento e análise, Redshift para cargas analíticas, QuickSight para servação e visualização, segurança, custos e uma arquitetura de referência de ponta a ponta, com diagramas, casos reais, exemplos de precificação e questões de prática.",
     "difficulty": "Intermediário",
     "duration": "12 Semanas"
   },
   "es": {
     "title": "Construyendo un Data Lakehouse Completo en AWS: de S3 a QuickSight",
-    "description": "Curso de extremo a extremo para construir y operar un data lakehouse completo en AWS: fundación en S3, Lake Formation para gobernanza y compartición, Glue para catálogo y ETL, Kinesis/MSK para ingesta en streaming, EMR y Athena para procesamiento y análisis, Redshift para cargas analíticas, QuickSight para servicio y visualización de datos, seguridad, costos y una arquitectura de referencia de extremo a extremo — con diagramas, casos reales, ejemplos de precios y preguntas de práctica.",
+    "description": "Curso de extremo a extremo para construir y operar un data lakehouse completo en AWS: fundación en S3, Lake Formation para gobernanza y compartición, Glue para catálogo y ETL, Kinesis/MSK para ingesta en streaming, EMR y Athena para procesamiento y análisis, Redshift para cargas analíticas, QuickSight para servicio y visualización de datos, seguridad, costos y una arquitectura de referencia de extremo a extremo, con diagramas, casos reales, ejemplos de precios y preguntas de práctica.",
     "difficulty": "Intermedio",
     "duration": "12 Semanas"
   }

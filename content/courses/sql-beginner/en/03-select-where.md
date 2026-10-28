@@ -81,11 +81,11 @@ WHERE (status = 'pending' OR status = 'shipped')
 > [!NOTE]
 > `AND` is evaluated before `OR`. Always use parentheses to make your intent clear and avoid subtle bugs.
 
-## LIKE — Pattern Matching
+## LIKE: Pattern Matching
 
 `LIKE` matches strings using two wildcards:
-- `%` — matches any sequence of characters
-- `_` — matches exactly one character
+- `%`: matches any sequence of characters
+- `_`: matches exactly one character
 
 ```sql
 -- Starts with "A"
@@ -118,7 +118,7 @@ WHERE department = 'Engineering' AND salary > 85000;
 -- Returns: Alice Johnson (95000), Carol Chen (88000)
 ```
 
-## IN — Match a List
+## IN: Match a List
 
 `IN` is shorthand for multiple `OR` conditions:
 
@@ -141,7 +141,7 @@ SELECT name FROM users
 WHERE status NOT IN ('banned', 'suspended');
 ```
 
-## BETWEEN — Range Matching
+## BETWEEN: Range Matching
 
 `BETWEEN` is inclusive on both ends:
 
@@ -163,7 +163,7 @@ WHERE order_date BETWEEN '2024-01-01' AND '2024-01-31';
 ```
 
 > [!SUCCESS]
-> `BETWEEN` is cleaner than `>= AND <=` for inclusive ranges. For date ranges, remember that `BETWEEN` includes midnight of the end date — use `>= 'start' AND < 'end + 1 day'` for exact boundaries.
+> `BETWEEN` is cleaner than `>= AND <=` for inclusive ranges. For date ranges, remember that `BETWEEN` includes midnight of the end date: use `>= 'start' AND < 'end + 1 day'` for exact boundaries.
 
 ## Putting It All Together
 
@@ -193,7 +193,7 @@ ORDER BY stock ASC;
 
 ## NULL Handling
 
-`NULL` means **unknown** — not zero, not empty string.
+`NULL` means **unknown**: not zero, not empty string.
 
 ```sql
 -- NULL comparisons require IS NULL, not = NULL

@@ -12,7 +12,7 @@ Las bases de datos relacionales almacenan datos en múltiples tablas. Los JOINs 
 
 ## Fundamentos de INNER JOIN
 
-Un INNER JOIN devuelve filas donde la condición de unión coincide — las filas que no coinciden se descartan de ambos lados.
+Un INNER JOIN devuelve filas donde la condición de unión coincide: las filas que no coinciden se descartan de ambos lados.
 
 ```sql
 SELECT *
@@ -44,7 +44,7 @@ INNER JOIN departments d
     ON e.department_id = d.department_id;
 ```
 
-Los equi-joins mapean claves foráneas a claves primarias. Los nombres de las columnas no necesitan coincidir — solo los valores.
+Los equi-joins mapean claves foráneas a claves primarias. Los nombres de las columnas no necesitan coincidir: solo los valores.
 
 ```sql
 -- Diferentes nombres de columna, mismos valores
@@ -94,7 +94,7 @@ INNER JOIN tasks t ON p.project_id = t.project_id
 WHERE e.hire_date >= '2023-01-01';
 ```
 
-Esta consulta comienza con employees, filtra por fecha de contratación y luego une hacia afuera — el filtro WHERE ocurre conceptualmente antes de la proyección final, pero el optimizador de la base de datos reordena estos pasos.
+Esta consulta comienza con employees, filtra por fecha de contratación y luego une hacia afuera: el filtro WHERE ocurre conceptualmente antes de la proyección final, pero el optimizador de la base de datos reordena estos pasos.
 
 > [!NOTE]
 > El orden de los JOINs en tu consulta no garantiza el orden de ejecución. Los optimizadores modernos reorganizan las uniones basándose en estadísticas, recuentos de filas e índices disponibles.
@@ -128,7 +128,7 @@ NATURAL JOIN departments;
 
 | Pros | Contras |
 |------|---------|
-| Menos escritura | Implícito — puede romperse cuando el esquema cambia |
+| Menos escritura | Implícito: puede romperse cuando el esquema cambia |
 | Limpio para esquemas bien nombrados | Difícil de depurar coincidencias no intencionadas |
 
 > [!WARNING]
@@ -191,7 +191,7 @@ ORDER BY o.order_date DESC, c.name;
 ```
 
 > [!SUCCESS]
-> Piensa en INNER JOIN como un filtro en ambas tablas — solo sobreviven las filas que coinciden. Cada fila en el resultado tiene garantizado tener una pareja en ambos lados.
+> Piensa en INNER JOIN como un filtro en ambas tablas: solo sobreviven las filas que coinciden. Cada fila en el resultado tiene garantizado tener una pareja en ambos lados.
 
 ## Preguntas de Práctica
 

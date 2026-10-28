@@ -50,7 +50,7 @@ Project: your-project
 
 ## Example Session: Fixing a Bug
 
-Let's walk through a real-world scenario — fixing a bug in a Python function.
+Let's walk through a real-world scenario: fixing a bug in a Python function.
 
 ### Step 1: Describe the Problem
 
@@ -316,7 +316,7 @@ If the AI asks for clarification, provide more details:
 > ### Key Takeaways
 
 - Start OpenCode in your project directory for context-aware assistance
-- Be specific in your prompts — include error types, file names, and expected behavior
+- Be specific in your prompts: include error types, file names, and expected behavior
 - OpenCode uses tools (read, write, edit, grep, glob, bash) to interact with your project
 - You can save and load sessions for continuity
 - Ask follow-up questions to understand the AI's reasoning

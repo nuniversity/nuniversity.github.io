@@ -466,7 +466,7 @@ span.end(
 > **Key Takeaways**
 > - A trace wraps an entire request; spans capture individual operations in a tree structure.
 > - Always call `.end()` on spans, or use context managers for automatic closure.
-> - Metadata and tags make spans filterable in the dashboard — be consistent with key names.
+> - Metadata and tags make spans filterable in the dashboard: be consistent with key names.
 > - LangChain and LlamaIndex callbacks provide zero-effort instrumentation.
 > - The `@observe()` decorator gives fine-grained control over custom Python code.
 > - Use `session_id` to group multi-turn conversations and agent trajectories.

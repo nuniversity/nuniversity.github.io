@@ -143,7 +143,7 @@ builder.add_edge("writer", END)
 ```
 
 [!TIP]
-Projete o estado compartilhado como um **barramento de mensagens**. Cada agente anexa a uma lista `messages`, criando um trace auditável da saída de cada agente. Isso torna a depuração trivial — você pode reproduzir a conversa e ver exatamente o que cada agente produziu.
+Projete o estado compartilhado como um **barramento de mensagens**. Cada agente anexa a uma lista `messages`, criando um trace auditável da saída de cada agente. Isso torna a depuração trivial: você pode reproduzir a conversa e ver exatamente o que cada agente produziu.
 
 ---
 
@@ -369,7 +369,7 @@ class MultiAgentState(TypedDict):
 ## Limites de Permissão de Subgrafo
 
 [!WARNING]
-Subgrafos não podem acessar os nós ou estado do pai diretamente — eles veem apenas o estado passado a eles. Esta é uma **fronteira de segurança**: um subgrafo não pode modificar o estado do pai arbitrariamente. Use mapeamento de estado explícito para controlar o que cada subgrafo pode ler e escrever.
+Subgrafos não podem acessar os nós ou estado do pai diretamente: eles veem apenas o estado passado a eles. Esta é uma **fronteira de segurança**: um subgrafo não pode modificar o estado do pai arbitrariamente. Use mapeamento de estado explícito para controlar o que cada subgrafo pode ler e escrever.
 
 ---
 
@@ -377,11 +377,11 @@ Subgrafos não podem acessar os nós ou estado do pai diretamente — eles veem 
 
 | Estratégia | Mecanismo | Acoplamento | Depuração | Caso de Uso |
 | :--- | :--- | :--- | :--- | :--- |
-| Estado compartilhado | `state["messages"]` | Solto (via esquema) | Fácil — reproduzir estado | Maioria dos agentes |
-| Chaves com namespace | `state["agent_name.field"]` | Solto | Fácil — traços por agente | Multi-agente com saídas |
-| Mapeamento I/O subgrafo | Mapeamento explícito de campos | Solto | Moderado — verificar mapeamento | Composição de subgrafos |
-| Chamada direta de função | Chamar outro nó diretamente | Apertado | Difícil — dependência oculta | Não recomendado |
-| Padrão barramento mensagens | Mensagens append-only | Muito solto | Trivial — histórico completo | Orquestrações supervisor |
+| Estado compartilhado | `state["messages"]` | Solto (via esquema) | Fácil: reproduzir estado | Maioria dos agentes |
+| Chaves com namespace | `state["agent_name.field"]` | Solto | Fácil: traços por agente | Multi-agente com saídas |
+| Mapeamento I/O subgrafo | Mapeamento explícito de campos | Solto | Moderado: verificar mapeamento | Composição de subgrafos |
+| Chamada direta de função | Chamar outro nó diretamente | Apertado | Difícil: dependência oculta | Não recomendado |
+| Padrão barramento mensagens | Mensagens append-only | Muito solto | Trivial: histórico completo | Orquestrações supervisor |
 
 ---
 

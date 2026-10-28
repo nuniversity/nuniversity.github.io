@@ -191,7 +191,7 @@ print(df.printSchema())
 
 **Advantages**:
 - No extra pass for sampling
-- Type safety — no surprise type changes
+- Type safety: no surprise type changes
 - Better performance (no inference overhead)
 
 **Disadvantages**:

@@ -407,4 +407,4 @@ print(f"Ruim: {tempo_ruim:.3f}s, Bom: {tempo_bom:.3f}s")
 - Construa mutável localmente → congele na fronteira → processe imutavelmente
 
 > [!SUCCESS]
-> Imutabilidade não é apenas um ideal teórico — é uma ferramenta prática que elimina bugs, simplifica testes e torna seu código mais fácil de raciocinar.
+> Imutabilidade não é apenas um ideal teórico: é uma ferramenta prática que elimina bugs, simplifica testes e torna seu código mais fácil de raciocinar.

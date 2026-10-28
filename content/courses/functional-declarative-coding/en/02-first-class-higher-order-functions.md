@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # First-Class & Higher-Order Functions
 
-In Python, functions are **first-class citizens** — they can be assigned to variables, passed as arguments, returned from other functions, and stored in data structures. **Higher-order functions** take advantage of this by taking functions as arguments or returning functions as results.
+In Python, functions are **first-class citizens**; they can be assigned to variables, passed as arguments, returned from other functions, and stored in data structures. **Higher-order functions** take advantage of this by taking functions as arguments or returning functions as results.
 
 ## Functions Are Objects
 
@@ -109,7 +109,7 @@ print(by_grade)
 
 These three functions form the backbone of functional data processing in Python.
 
-### Map — Transform Every Element
+### Map: Transform Every Element
 
 ```python
 from typing import List, Callable, Iterable, Any
@@ -148,7 +148,7 @@ cleaned = list(map(clean_name, raw_names))
 print(cleaned)  # ["Alice", "Bob", "Charlie", "Diana"]
 ```
 
-### Filter — Keep Matching Elements
+### Filter: Keep Matching Elements
 
 ```python
 from typing import List, Callable
@@ -193,7 +193,7 @@ print(truthy)  # [1, "hello", [1, 2]]
 > [!TIP]
 > Prefer named predicate functions over lambdas in `filter()` when the logic is non-trivial. Named functions document intent better.
 
-### Reduce — Accumulate to a Single Value
+### Reduce: Accumulate to a Single Value
 
 ```python
 from functools import reduce

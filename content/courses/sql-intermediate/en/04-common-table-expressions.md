@@ -34,7 +34,7 @@ ORDER BY rs.total_sales DESC;
 The CTE `regional_sales` behaves like a temporary view for the duration of this query.
 
 > [!NOTE]
-> CTEs are sometimes called "WITH queries." The `WITH` clause must appear at the very beginning of the statement — only `WITH` can precede it.
+> CTEs are sometimes called "WITH queries." The `WITH` clause must appear at the very beginning of the statement: only `WITH` can precede it.
 
 ## Multiple CTEs
 
@@ -104,16 +104,16 @@ FULL OUTER JOIN sales_2024 b ON a.product_id = b.product_id;
 ```
 
 > [!NOTE]
-> Each CTE is separated by a comma — no comma after the last CTE before the main query. This is a common syntax error.
+> Each CTE is separated by a comma: no comma after the last CTE before the main query. This is a common syntax error.
 
 ## CTEs vs Subqueries
 
 | Aspect | CTE | Subquery (Derived Table) |
 |--------|-----|--------------------------|
-| Readability | Excellent — named | Poor — nested |
+| Readability | Excellent, named | Poor, nested |
 | Reusability | Referenced multiple times | Must repeat |
 | Recursion | Supported | Not supported |
-| Optimization | Inlineable — no materialization | Inlineable |
+| Optimization | Inlineable: no materialization | Inlineable |
 | Scope | Single query | Single expression |
 
 ```sql

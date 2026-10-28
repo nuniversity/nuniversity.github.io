@@ -218,7 +218,7 @@ export default function MatchingQuestion({ question, pairs, explanation, dict }:
                 : <XCircle className="w-5 h-5 text-red-600" />
               }
               <span className="font-semibold text-sm text-foreground">
-                {feedback === 'correct' ? (w?.all_correct || 'All correct!') : (m?.incorrect_feedback || 'Some matches are wrong — red slots have incorrect answers.')}
+                {feedback === 'correct' ? (w?.all_correct || 'All correct!') : (m?.incorrect_feedback || 'Some matches are wrong: red slots have incorrect answers.')}
               </span>
             </div>
             {explanation && <p className="text-sm text-muted-foreground mt-1">{explanation}</p>}

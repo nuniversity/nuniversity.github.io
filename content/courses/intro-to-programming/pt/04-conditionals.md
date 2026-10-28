@@ -70,7 +70,7 @@ if (pontuacao >= 90) {
 | `>=` | Maior ou igual | `10 >= 10` |
 | `<=` | Menor ou igual | `5 <= 10` |
 
-Prefira sempre `===` em vez de `==` — igualdade estrita verifica valor e tipo.
+Prefira sempre `===` em vez de `==`: igualdade estrita verifica valor e tipo.
 
 ## Operadores Lógicos
 
@@ -89,9 +89,9 @@ if (idade < 18 || !temCarteira) {
 }
 ```
 
-- `&&` — ambos devem ser verdadeiros
-- `||` — pelo menos um deve ser verdadeiro
-- `!` — inverte um booleano
+- `&&`: ambos devem ser verdadeiros
+- `||`: pelo menos um deve ser verdadeiro
+- `!`: inverte um booleano
 
 ## O Comando switch
 

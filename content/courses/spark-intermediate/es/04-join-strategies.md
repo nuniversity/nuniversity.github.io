@@ -218,7 +218,7 @@ result = employees.alias("e").join(
 
 ## Manejo de Skew Join
 
-El sesgo de datos — donde una clave tiene desproporcionadamente muchos valores — puede causar tareas de larga cola.
+El sesgo de datos, donde una clave tiene desproporcionadamente muchos valores, puede causar tareas de larga cola.
 
 ```python
 # Verificar skew

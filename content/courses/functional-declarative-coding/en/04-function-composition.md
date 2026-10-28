@@ -161,7 +161,7 @@ print(get_adult_names_pf(users))  # ["Alice", "Charlie"]
 ```
 
 > [!WARNING]
-> Point-free style can harm readability when overused. Use it when the pipeline is clear and the named intermediate functions are reusable. Don't force point-free — it's a tool, not a rule.
+> Point-free style can harm readability when overused. Use it when the pipeline is clear and the named intermediate functions are reusable. Don't force point-free; it's a tool, not a rule.
 
 ## Real-World Data Pipelines
 
@@ -630,7 +630,7 @@ asyncio.run(main())
 - **Decorators** are a form of function composition
 - **Method chaining** provides fluent API composition
 - **Error handling** in pipelines requires explicit strategies (Maybe, Result types)
-- Each composed function should do one thing well — composition creates the complex behavior
+- Each composed function should do one thing well: composition creates the complex behavior
 - Composed pipelines are testable at every stage
 
 > [!SUCCESS]

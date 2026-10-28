@@ -10,7 +10,7 @@ difficulty: advanced
 
 ## Visión General de Funciones de Ventana
 
-Las funciones de ventana realizan cálculos en un conjunto de filas relacionadas con la fila actual. A diferencia de las funciones de agregación con `GROUP BY`, las funciones de ventana **no colapsan filas** — cada fila de entrada conserva su identidad.
+Las funciones de ventana realizan cálculos en un conjunto de filas relacionadas con la fila actual. A diferencia de las funciones de agregación con `GROUP BY`, las funciones de ventana **no colapsan filas**: cada fila de entrada conserva su identidad.
 
 ```sql
 -- Agregación: colapsa
@@ -85,8 +85,8 @@ FROM employees;
 
 ### Casos de Uso para RANK/DENSE_RANK
 
-- **RANK**: "Dame los 5 salarios más altos" — si 3 personas empatan en el #1, el siguiente es #4.
-- **DENSE_RANK**: "Dame los 5 niveles salariales más altos" — todos en los 5 valores distintos principales.
+- **RANK**: "Dame los 5 salarios más altos": si 3 personas empatan en el #1, el siguiente es #4.
+- **DENSE_RANK**: "Dame los 5 niveles salariales más altos": todos en los 5 valores distintos principales.
 
 ```sql
 -- 5 niveles salariales distintos principales
@@ -115,7 +115,7 @@ FROM employees;
 | Grupos | Nombre | Significado |
 |---|---|---|
 | 2 | División mediana | Mitad superior/inferior |
-| 4 | Cuartiles | Q1–Q4 |
+| 4 | Cuartiles | Q1: Q4 |
 | 10 | Deciles | Top 10%, bottom 10% |
 | 100 | Percentiles | Clasificación por percentil |
 
@@ -257,7 +257,7 @@ ORDER BY product_id, range_start;
 | `RANK()` | Bajo | Misma ordenación que ROW_NUMBER |
 | `DENSE_RANK()` | Bajo | Misma ordenación que ROW_NUMBER |
 | `NTILE()` | Medio | Requiere conteo de filas + distribución |
-| Muchas particiones | Alto | Ordenación domina — indexar columnas de partición y orden |
+| Muchas particiones | Alto | Ordenación domina: indexar columnas de partición y orden |
 
 [!TIP]
 Crea un índice compuesto en `(columna_particion, columna_orden)` para que las ordenaciones de funciones de ventana usen un escaneo de índice en lugar de una ordenación completa.

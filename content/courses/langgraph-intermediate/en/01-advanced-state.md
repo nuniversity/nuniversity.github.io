@@ -123,7 +123,7 @@ def add_text(state: CounterState) -> dict:
 
 ### replace (default)
 
-The default behavior — no annotation needed:
+The default behavior: no annotation needed:
 
 ```python
 class NoReducerState(TypedDict):
@@ -314,7 +314,7 @@ saved_state = app.get_state(config)
 print(saved_state.values)
 ```
 
-Persistence is covered in depth in Lesson 2. It's mentioned here because it interacts with state reducers — persisted state is restored and reducers continue from where they left off.
+Persistence is covered in depth in Lesson 2. It's mentioned here because it interacts with state reducers: persisted state is restored and reducers continue from where they left off.
 
 ---
 
@@ -338,7 +338,7 @@ Persistence is covered in depth in Lesson 2. It's mentioned here because it inte
   "question": "What is the default state update behavior without a reducer?",
   "options": ["Append", "Merge", "Last write wins (replace)", "Average"],
   "correct": 2,
-  "explanation": "Without a reducer, the last node to write a key determines its final value — it replaces previous writes."
+  "explanation": "Without a reducer, the last node to write a key determines its final value; it replaces previous writes."
 }
 ```
 
@@ -435,7 +435,7 @@ Persistence is covered in depth in Lesson 2. It's mentioned here because it inte
   "question": "Which state approach is recommended for production systems needing serialization?",
   "options": ["TypedDict", "dataclass", "pydantic.BaseModel", "Plain dict"],
   "correct": 2,
-  "explanation": "BaseModel provides built-in .dict() and .json() serialization, validation, and schema generation — essential for production."
+  "explanation": "BaseModel provides built-in.dict() and.json() serialization, validation, and schema generation: essential for production."
 }
 ```
 

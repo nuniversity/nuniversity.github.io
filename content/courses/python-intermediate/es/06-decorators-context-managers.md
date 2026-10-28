@@ -12,7 +12,7 @@ Los decoradores y administradores de contexto son características potentes de P
 
 ## Funciones de Primera Clase
 
-En Python, las funciones son objetos — pueden asignarse, pasarse y devolverse:
+En Python, las funciones son objetos: pueden asignarse, pasarse y devolverse:
 
 ```python
 def square(x: int) -> int:
@@ -46,9 +46,9 @@ print(op(6))  # 36
 ```
 
 > [!NOTE]
-> Las funciones pueden tener atributos, almacenarse en estructuras de datos y pasarse como callbacks — como cualquier otro objeto.
+> Las funciones pueden tener atributos, almacenarse en estructuras de datos y pasarse como callbacks: como cualquier otro objeto.
 
-## Closure — Funciones que Recuerdan su Ámbito
+## Closure: Funciones que Recuerdan su Ámbito
 
 ```python
 def make_multiplier(factor: float):
@@ -63,7 +63,7 @@ print(double(5))   # 10
 print(triple(5))   # 15
 ```
 
-## Decoradores — Lo Básico
+## Decoradores: Lo Básico
 
 Un decorador es una función que toma otra función y extiende su comportamiento:
 
@@ -239,7 +239,7 @@ say("Bye")  # Call 2 of say
 print(f"Called {say.count} times")  # Called 2 times
 ```
 
-## Administradores de Contexto — La Declaración `with`
+## Administradores de Contexto: La Declaración `with`
 
 Los administradores de contexto configuran y liberan recursos automáticamente:
 

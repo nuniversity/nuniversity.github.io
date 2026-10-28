@@ -1,6 +1,6 @@
 ---
 title: "Event-Driven Architecture"
-description: "Explore Domain Events, Event Sourcing, and CQRS in DDD — how events capture domain occurrences, enable asynchronous integration, and support audit trails"
+description: "Explore Domain Events, Event Sourcing, and CQRS in DDD, how events capture domain occurrences, enable asynchronous integration, and support audit trails"
 order: 7
 duration: "75 minutes"
 difficulty: "advanced"
@@ -470,7 +470,7 @@ class OrderProcessingSaga:
 | Verb + past participle | `PaymentReceived` | Common alternative |
 
 > [!TIP]
-> Choose one naming convention and stick to it consistently. The Ubiquitous Language applies to events too — use the words domain experts use when they describe what happened.
+> Choose one naming convention and stick to it consistently. The Ubiquitous Language applies to events too: use the words domain experts use when they describe what happened.
 
 ## Event Versioning
 

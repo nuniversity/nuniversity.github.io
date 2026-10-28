@@ -1,6 +1,6 @@
 ---
 title: "Streaming Tokens"
-description: "Master LangGraph streaming modes — values, updates, and custom streaming. Learn to stream LLM tokens from graph nodes in real-time."
+description: "Master LangGraph streaming modes, values, updates, and custom streaming. Learn to stream LLM tokens from graph nodes in real-time."
 order: 9
 duration: "35 minutes"
 difficulty: "intermediate"
@@ -50,7 +50,7 @@ Output:
 ```
 
 [!NOTE]
-"values" mode is the most comprehensive — you see the full state at every step. It's ideal for debugging and understanding state evolution.
+"values" mode is the most comprehensive; you see the full state at every step. It's ideal for debugging and understanding state evolution.
 
 ---
 

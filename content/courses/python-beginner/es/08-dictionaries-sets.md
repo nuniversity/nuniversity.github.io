@@ -123,7 +123,7 @@ print(3 in a)    # Prueba de pertenencia (¡muy rápido!)
 ```
 
 > [!NOTE]
-> Los conjuntos están optimizados para pruebas de pertenencia (`in`) — O(1) promedio vs O(n) para listas. Usa conjuntos cuando el orden no importe y no deban existir duplicados.
+> Los conjuntos están optimizados para pruebas de pertenencia (`in`), O(1) promedio vs O(n) para listas. Usa conjuntos cuando el orden no importe y no deban existir duplicados.
 
 ## Casos de Uso del Mundo Real
 

@@ -191,7 +191,7 @@ Para ax² + bx + c = 0.
 {
   "question": "Resolva cada sistema mentalmente:",
   "pairs": [
-    {"left": "x + y = 5, x - y = 1", "right": "x = 3, y = 2"},
+    {"left": "x + y = 5, x: y = 1", "right": "x = 3, y = 2"},
     {"left": "2x + y = 7, x + y = 4", "right": "x = 3, y = 1"},
     {"left": "x + 2y = 8, 2x + y = 7", "right": "x = 2, y = 3"}
   ],
@@ -340,17 +340,17 @@ x + y - z = 2
 ```
 
 Passo 1: Some as equações 1 e 2 (elimina y):
-- (x + x) + (y - y) + (z + z) = 6 + 2
+- (x + x) + (y: y) + (z + z) = 6 + 2
 - 2x + 2z = 8
 - x + z = 4 ... (A)
 
 Passo 2: Some as equações 1 e 3 (elimina z):
-- (x + x) + (y + y) + (z - z) = 6 + 2
+- (x + x) + (y + y) + (z: z) = 6 + 2
 - 2x + 2y = 8
 - x + y = 4 ... (B)
 
 Passo 3: Some as equações 2 e 3 (elimina y e z):
-- (x + x) + (-y + y) + (z - z) = 2 + 2
+- (x + x) + (-y + y) + (z: z) = 2 + 2
 - 2x = 4
 - x = 2 ... (C)
 
@@ -378,7 +378,7 @@ Passo 5: Substitua x = 2 em (B):
 
 ### Contexto Histórico
 
-Muhammad ibn Musa al-Khwarizmi (780-850 d.C.) escreveu "Al-Kitab al-Mukhtasar fi Hisab al-Jabr wal-Muqabala" (O Livro Conciso sobre o Cálculo por Completação e Redução) em 820 d.C., que deu origem ao nome "álgebra". Sua abordagem para equações quadráticas era puramente **geométrica** — ele resolvia equações desenhando figuras.
+Muhammad ibn Musa al-Khwarizmi (780-850 d.C.) escreveu "Al-Kitab al-Mukhtasar fi Hisab al-Jabr wal-Muqabala" (O Livro Conciso sobre o Cálculo por Completação e Redução) em 820 d.C., que deu origem ao nome "álgebra". Sua abordagem para equações quadráticas era puramente **geométrica**: ele resolvia equações desenhando figuras.
 
 ### Exemplo Trabalhado: x² + 10x = 39
 
@@ -452,7 +452,7 @@ Passo 6: x + 5 = 8, logo x = 3.
 
 ```dragdrop
 {
-  "question": "Ordene os passos para resolver o sistema x + y = 10 e x - y = 4 pelo método de substituição:",
+  "question": "Ordene os passos para resolver o sistema x + y = 10 e x: y = 4 pelo método de substituição:",
   "items": [
     "Isole x na segunda equação: x = y + 4",
     "Substitua na primeira: (y + 4) + y = 10",

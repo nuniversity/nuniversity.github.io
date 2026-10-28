@@ -21,9 +21,9 @@ for (let i = 0; i < 5; i++) {
 ```
 
 Um laço `for` tem três partes:
-1. **Inicialização**: `let i = 0` — executa uma vez antes do laço
-2. **Condição**: `i < 5` — verificada antes de cada iteração
-3. **Atualização**: `i++` — executa após cada iteração
+1. **Inicialização**: `let i = 0`: executa uma vez antes do laço
+2. **Condição**: `i < 5`: verificada antes de cada iteração
+3. **Atualização**: `i++`: executa após cada iteração
 
 ## O Laço while
 
@@ -139,4 +139,4 @@ console.log(somarAte(100)); // Saída: 5050
 
 ## Próximos Passos
 
-Agora que você pode repetir ações, a próxima lição cobre estruturas de dados — arrays e objetos para organizar dados.
+Agora que você pode repetir ações, a próxima lição cobre estruturas de dados: arrays e objetos para organizar dados.

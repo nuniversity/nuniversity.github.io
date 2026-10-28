@@ -39,7 +39,7 @@ flowchart LR
 ```
 
 > [!TIP]
-> Think of pseudocode as the blueprint for a building. Architects don't start laying bricks -- they first create detailed plans. Pseudocode is your algorithm's blueprint.
+> Think of pseudocode as the blueprint for a building. Architects don't start laying bricks; they first create detailed plans. Pseudocode is your algorithm's blueprint.
 
 ## Pseudocode Conventions
 

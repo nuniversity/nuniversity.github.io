@@ -132,12 +132,12 @@ print(perfil2)
 > [!WARNING]
 > Valores padrão de parâmetros são avaliados apenas uma vez, quando a função é definida. Nunca use padrões mutáveis (como listas ou dicts):
 > ```python
-> # RUIM - lista compartilhada entre chamadas!
+> # RUIM: lista compartilhada entre chamadas!
 > def adicionar_item(item, itens=[]):
 >     itens.append(item)
 >     return itens
 > 
-> # BOM - cria nova lista a cada vez
+> # BOM: cria nova lista a cada vez
 > def adicionar_item(item, itens=None):
 >     if itens is None:
 >         itens = []
@@ -162,7 +162,7 @@ email = criar_email(
 print(email)
 ```
 
-### *args - Argumentos Posicionais Variáveis
+### *args: Argumentos Posicionais Variáveis
 
 ```python
 def calcular_soma(*args):
@@ -177,7 +177,7 @@ print(f"Soma de 10, 20, 30, 40: {calcular_soma(10, 20, 30, 40)}")  # 100
 print(f"Soma de nada: {calcular_soma()}")                  # 0
 ```
 
-### **kwargs - Argumentos Nomeados Variáveis
+### **kwargs: Argumentos Nomeados Variáveis
 
 ```python
 def criar_registro_estudante(nome, **kwargs):

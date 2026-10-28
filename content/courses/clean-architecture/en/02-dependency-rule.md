@@ -1,6 +1,6 @@
 ---
 title: "The Dependency Rule"
-description: "Master the Dependency Rule — source code dependencies must point only inward, toward the core. Learn cross-boundary communication, inversion of control, and plugin architectures"
+description: "Master the Dependency Rule, source code dependencies must point only inward, toward the core. Learn cross-boundary communication, inversion of control, and plugin architectures"
 order: 2
 duration: "60 minutes"
 difficulty: "intermediate"
@@ -12,10 +12,10 @@ The Dependency Rule is the single most important principle in Clean Architecture
 
 > **Source code dependencies must point only inward, toward the center of the onion.**
 
-Nothing in an inner circle can know anything about an outer circle. This includes function names, class names, variable names — anything declared in an outer circle.
+Nothing in an inner circle can know anything about an outer circle. This includes function names, class names, variable names: anything declared in an outer circle.
 
 > [!NOTE]
-> The Dependency Rule applies to **compile-time** or **source-code** dependencies, not runtime execution. Your inner code can call outer code through dependency inversion — the interface is defined in the inner layer, implemented in the outer layer.
+> The Dependency Rule applies to **compile-time** or **source-code** dependencies, not runtime execution. Your inner code can call outer code through dependency inversion: the interface is defined in the inner layer, implemented in the outer layer.
 
 ## Visualizing the Rule
 

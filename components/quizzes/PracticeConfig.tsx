@@ -128,7 +128,7 @@ export function PracticeConfig({
             className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             <Star className="w-4 h-4" />
-            {tpl(dict.quizzes?.home?.start_practice || 'Start Practice — {n} Questions', {
+            {tpl(dict.quizzes?.home?.start_practice || 'Start Practice: {n} Questions', {
               n: Math.min(questionCount, availableCount),
             })}
           </button>

@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Functions: Reusable Code Blocks
 
-Functions let you package a block of code so you can run it whenever you need — with different inputs if you want.
+Functions let you package a block of code so you can run it whenever you need: with different inputs if you want.
 
 ## Why Use Functions
 
@@ -71,7 +71,7 @@ Once `return` executes, the function stops immediately.
 
 ## Function Scope
 
-Variables declared inside a function are local to that function — they cannot be accessed outside:
+Variables declared inside a function are local to that function; they cannot be accessed outside:
 
 ```javascript
 function showMessage() {

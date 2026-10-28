@@ -1,12 +1,12 @@
 ---
-title: "Domínio 4.2 — Otimização de Desempenho de Queries"
+title: "Domínio 4.2, Otimização de Desempenho de Queries"
 description: "Conheça as ferramentas de otimização de desempenho do Snowflake: Query Acceleration Service, Search Optimization Service, clustering keys e Materialized Views. Saiba quando e como usar cada uma."
 order: 14
 difficulty: intermediate
 duration: "60 min"
 ---
 
-# Domínio 4.2 — Otimização de Desempenho de Queries
+# Domínio 4.2: Otimização de Desempenho de Queries
 
 ## Peso no Exame
 
@@ -67,12 +67,12 @@ SHOW TABLES LIKE 'pedidos';
 - Colunas de join para tabelas grandes
 
 **Maus candidatos:**
-- Cardinalidade muito baixa (ex.: colunas booleanas — apenas 2 valores)
-- Cardinalidade muito alta com distribuição aleatória (ex.: chaves primárias UUID — pruning ruim)
+- Cardinalidade muito baixa (ex.: colunas booleanas: apenas 2 valores)
+- Cardinalidade muito alta com distribuição aleatória (ex.: chaves primárias UUID: pruning ruim)
 - Colunas raramente usadas em filtros
 
 > [!WARNING]
-> As clustering keys acionam o **Automatic Clustering** — um serviço em segundo plano que consome créditos continuamente. Clusterize apenas tabelas onde o ganho de desempenho de queries supera o custo.
+> As clustering keys acionam o **Automatic Clustering**: um serviço em segundo plano que consome créditos continuamente. Clusterize apenas tabelas onde o ganho de desempenho de queries supera o custo.
 
 ### Custo do Reclustering
 
@@ -96,7 +96,7 @@ ALTER TABLE pedidos RESUME RECLUSTER;
 
 ---
 
-## Search Optimization Service (SOS — Serviço de Otimização de Busca)
+## Search Optimization Service (SOS: Serviço de Otimização de Busca)
 
 O **Search Optimization Service (SOS)** acelera **buscas pontuais de alta seletividade** e buscas por igualdade que, de outra forma, escaneariam muitas partições:
 
@@ -147,9 +147,9 @@ SELECT * FROM SNOWFLAKE.ACCOUNT_USAGE.SEARCH_OPTIMIZATION_HISTORY;
 
 ---
 
-## Query Acceleration Service (QAS — Serviço de Aceleração de Queries)
+## Query Acceleration Service (QAS: Serviço de Aceleração de Queries)
 
-O **Query Acceleration Service (QAS)** descarrega partes de **queries outlier lentas** para a computação serverless do Snowflake — útil quando um pequeno número de queries leva desproporcionalmente mais tempo em um warehouse compartilhado:
+O **Query Acceleration Service (QAS)** descarrega partes de **queries outlier lentas** para a computação serverless do Snowflake: útil quando um pequeno número de queries leva desproporcionalmente mais tempo em um warehouse compartilhado:
 
 ### Quando Usar o QAS
 
@@ -293,10 +293,10 @@ A query está lenta porque...
 
 **Q4.** Qual candidato a clustering key forneceria o PIOR pruning para uma tabela de 1 bilhão de linhas de pedidos?
 
-- A) `(data_pedido)` — data do pedido
-- B) `(regiao)` — região geográfica (20 valores)
-- C) `(uuid_pedido)` — chave primária UUID gerada aleatoriamente ✅
-- D) `(categoria_produto)` — 50 categorias
+- A) `(data_pedido)`: data do pedido
+- B) `(regiao)`: região geográfica (20 valores)
+- C) `(uuid_pedido)`: chave primária UUID gerada aleatoriamente ✅
+- D) `(categoria_produto)`: 50 categorias
 
 **Q5.** Qual recurso do Snowflake requer edição Enterprise para todas estas capacidades: Materialized Views, Search Optimization e Query Acceleration?
 

@@ -1,6 +1,6 @@
 ---
 title: "Patrón Planificar y Ejecutar"
-description: "Implementa el patrón planificar-y-ejecutar en LangGraph — un nodo de planificación crea un plan paso a paso, un nodo de ejecución ejecuta pasos y un bucle de replanificación se adapta a los resultados."
+description: "Implementa el patrón planificar-y-ejecutar en LangGraph, un nodo de planificación crea un plan paso a paso, un nodo de ejecución ejecuta pasos y un bucle de replanificación se adapta a los resultados."
 order: 7
 duration: "40 min"
 difficulty: "advanced"
@@ -372,7 +372,7 @@ print(result["final_answer"])
   "type": "multiple-choice",
   "question": "How does the planner receive context from previous results?",
   "options": [
-    "It doesn't — each plan is from scratch",
+    "It doesn't: each plan is from scratch",
     "The results from executed steps are included in the re-plan prompt",
     "Via a separate context field",
     "Results are ignored during planning"

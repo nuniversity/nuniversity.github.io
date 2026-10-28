@@ -37,7 +37,7 @@ class CalculatorTool(BaseTool):
 ```
 
 [!IMPORTANT]
-The `name` and `description` fields are critical — they are what the agent's LLM reads to decide when to use a tool. A clear, descriptive name and a detailed description of when and how to use the tool dramatically improve correct tool selection by the agent.
+The `name` and `description` fields are critical; they are what the agent's LLM reads to decide when to use a tool. A clear, descriptive name and a detailed description of when and how to use the tool dramatically improve correct tool selection by the agent.
 
 ---
 
@@ -468,7 +468,7 @@ crew.kickoff()
   "question": "You deploy a CrewAI system to production. Tool caching no longer works across user sessions. Why?",
   "options": [
     "Caching only works in development mode",
-    "Tool caching is in-memory per kickoff() call — it doesn't persist across runs",
+    "Tool caching is in-memory per kickoff() call; it doesn't persist across runs",
     "The cache_function was removed in production",
     "Production requires verbose=True for caching"
   ],
@@ -483,13 +483,13 @@ crew.kickoff()
   "type": "multiple-choice",
   "question": "An agent has both SerperDevTool (web search) and CalculatorTool. The task is 'Calculate 15% of 340'. Which tool should the agent use?",
   "options": [
-    "SerperDevTool — to search for the answer",
-    "CalculatorTool — to compute the percentage",
-    "Both — search first, then calculate",
-    "Neither — the agent computes internally"
+    "SerperDevTool: to search for the answer",
+    "CalculatorTool: to compute the percentage",
+    "Both: search first, then calculate",
+    "Neither: the agent computes internally"
   ],
   "correct": 1,
-  "explanation": "CalculatorTool is the correct choice for arithmetic operations. The agent should use tool descriptions to match the task to the right tool — CalculatorTool's description mentions arithmetic."
+  "explanation": "CalculatorTool is the correct choice for arithmetic operations. The agent should use tool descriptions to match the task to the right tool: CalculatorTool's description mentions arithmetic."
 }
 ```
 
@@ -543,5 +543,5 @@ crew.kickoff()
 - The `context` parameter on a `Task` enables explicit data flow between tasks.
 - Custom tools can encapsulate any external API or computation.
 - Always provide a clear `name` and `description` for each tool so agents use them correctly.
-- Tool descriptions are what LLMs use to decide tool selection — invest in them.
+- Tool descriptions are what LLMs use to decide tool selection: invest in them.
 - Agent-level tools can be overridden by task-level tools for specific needs.

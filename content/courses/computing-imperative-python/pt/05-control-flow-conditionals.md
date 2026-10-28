@@ -74,7 +74,7 @@ Programa continua...
 ```
 
 > [!NOTE]
-> Python usa indentação (tipicamente 4 espaços) para definir blocos de código. Isso não é opcional - é como Python sabe quais instruções pertencem ao bloco if.
+> Python usa indentação (tipicamente 4 espaços) para definir blocos de código. Isso não é opcional: é como Python sabe quais instruções pertencem ao bloco if.
 
 ## A Instrução if-else
 
@@ -229,13 +229,13 @@ Pontuação:  45 → Nota: F
 > [!WARNING]
 > As condições são verificadas em ordem! Quando uma condição True é encontrada, o resto é ignorado. Isso significa:
 > ```python
-> # ORDEM ERRADA - sempre retorna "D"
+> # ORDEM ERRADA: sempre retorna "D"
 > if pontuacao >= 60:
 >     return "D"  # 95 >= 60 é True, então isso executa!
 > elif pontuacao >= 90:
 >     return "A"  # Nunca alcançado
 > 
-> # ORDEM CORRETA - verifica o maior primeiro
+> # ORDEM CORRETA, verifica o maior primeiro
 > if pontuacao >= 90:
 >     return "A"
 > elif pontuacao >= 60:

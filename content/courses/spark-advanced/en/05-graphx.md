@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # GraphX
 
-GraphX is Spark's API for graph processing and graph-parallel computation. It extends the RDD abstraction with property graphs — directed multigraphs with user-defined properties attached to vertices and edges.
+GraphX is Spark's API for graph processing and graph-parallel computation. It extends the RDD abstraction with property graphs: directed multigraphs with user-defined properties attached to vertices and edges.
 
 ## Graph Concepts
 
@@ -173,7 +173,7 @@ tri_counts.show()
 ```
 
 > [!NOTE]
-> Triangle counting is used in social network analysis to measure "clustering" — how connected a vertex's neighbors are. High triangle counts indicate tightly knit communities.
+> Triangle counting is used in social network analysis to measure "clustering": how connected a vertex's neighbors are. High triangle counts indicate tightly knit communities.
 
 ## Graph Operations
 

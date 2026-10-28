@@ -8,10 +8,10 @@ difficulty: "intermediate"
 
 # Code Formatting & Style
 
-Code formatting is like punctuation in writing — it makes the meaning clear. Consistent style across a codebase reduces cognitive load, prevents trivial style debates in code reviews, and helps catch bugs faster.
+Code formatting is like punctuation in writing; it makes the meaning clear. Consistent style across a codebase reduces cognitive load, prevents trivial style debates in code reviews, and helps catch bugs faster.
 
 > [!NOTE]
-> "Code formatting is about communication, not personal preference. A consistent style across a team eliminates an entire class of pointless arguments." — Adapted from *Clean Code*
+> "Code formatting is about communication, not personal preference. A consistent style across a team eliminates an entire class of pointless arguments.": Adapted from *Clean Code*
 
 ## Why Formatting Matters
 
@@ -520,8 +520,8 @@ pre-commit run --all-files
 |------|-------|-------|--------|
 | Indentation | 4 spaces | 4 spaces | Checks |
 | Max line length | 79 | 88 (configurable) | 79 default |
-| Quotes | Single preferred | Double | — |
-| Trailing commas | Optional | Adds on multi-line | — |
+| Quotes | Single preferred | Double |: |
+| Trailing commas | Optional | Adds on multi-line |: |
 | Blank lines | 2 top-level, 1 method | Enforces | Checks |
 | Imports | Groups with blanks | Groups | Checks order |
 

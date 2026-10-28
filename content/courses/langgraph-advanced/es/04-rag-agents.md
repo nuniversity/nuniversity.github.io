@@ -1,6 +1,6 @@
 ---
 title: "RAG Agentic"
-description: "Construye sistemas RAG (Generación Aumentada por Recuperación) Agentic con LangGraph — nodos de recuperación, integración con almacén de documentos, planificación de consultas y recuperación en múltiples pasos."
+description: "Construye sistemas RAG (Generación Aumentada por Recuperación) Agentic con LangGraph, nodos de recuperación, integración con almacén de documentos, planificación de consultas y recuperación en múltiples pasos."
 order: 4
 duration: "40 min"
 difficulty: "advanced"
@@ -302,7 +302,7 @@ app = builder.compile(checkpointer=MemorySaver())
     "There is no difference"
   ],
   "correct": 1,
-  "explanation": "In Agentic RAG, the agent makes decisions about retrieval — whether to retrieve, what to search for, and whether retrieved results are sufficient."
+  "explanation": "In Agentic RAG, the agent makes decisions about retrieval: whether to retrieve, what to search for, and whether retrieved results are sufficient."
 }
 ```
 

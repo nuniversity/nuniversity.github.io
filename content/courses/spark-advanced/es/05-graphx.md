@@ -8,7 +8,7 @@ difficulty: "avanzado"
 
 # GraphX
 
-GraphX es la API de Spark para procesamiento de grafos y computación paralela de grafos. Extiende la abstracción RDD con grafos de propiedades — multigrafos dirigidos con propiedades definidas por el usuario adjuntas a vértices y aristas.
+GraphX es la API de Spark para procesamiento de grafos y computación paralela de grafos. Extiende la abstracción RDD con grafos de propiedades: multigrafos dirigidos con propiedades definidas por el usuario adjuntas a vértices y aristas.
 
 ## Conceptos de Grafos
 
@@ -173,7 +173,7 @@ tri_counts.show()
 ```
 
 > [!NOTE]
-> El conteo de triángulos se usa en análisis de redes sociales para medir "clusterización" — qué tan conectados están los vecinos de un vértice. Recuentos altos de triángulos indican comunidades muy unidas.
+> El conteo de triángulos se usa en análisis de redes sociales para medir "clusterización": qué tan conectados están los vecinos de un vértice. Recuentos altos de triángulos indican comunidades muy unidas.
 
 ## Operaciones de Grafos
 

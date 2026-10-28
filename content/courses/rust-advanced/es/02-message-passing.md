@@ -1,12 +1,12 @@
 ---
-title: "Paso de Mensajes — Canales y Mutex Básico"
+title: "Paso de Mensajes, Canales y Mutex Básico"
 description: "Comuníquese entre hilos con canales mpsc, comparta estado con Arc<Mutex<T>> y entienda los primitivos de concurrencia de Rust"
 order: 2
 duration: "90 minutos"
 difficulty: advanced
 ---
 
-# Paso de Mensajes — Canales y Mutex Básico
+# Paso de Mensajes: Canales y Mutex Básico
 
 Rust sigue el mantra de Go: "No se comunique compartiendo memoria; en su lugar, comparta memoria comunicándose." Los canales proporcionan concurrencia mediante paso de mensajes.
 
@@ -40,7 +40,7 @@ fn main() {
 | `recv()` | Sí (bloquea) | `Result<T, RecvError>` | Todos los senders fueron dropeados |
 | `try_recv()` | No | `Result<T, TryRecvError>` | Nada aún / cerrado |
 
-### try_recv — Recepción No Bloqueante
+### try_recv: Recepción No Bloqueante
 
 ```rust
 use std::sync::mpsc;
@@ -178,7 +178,7 @@ fn main() {
 
 ## Mutex Básico (Avance)
 
-`Mutex` proporciona exclusión mutua — solo un hilo puede acceder a los datos a la vez:
+`Mutex` proporciona exclusión mutua: solo un hilo puede acceder a los datos a la vez:
 
 ```rust
 use std::sync::Mutex;
@@ -225,7 +225,7 @@ fn main() {
 }
 ```
 
-## Arc — Conteo de Referencia Atómica
+## Arc: Conteo de Referencia Atómica
 
 `Arc<T>` permite propiedad compartida entre hilos:
 

@@ -616,13 +616,13 @@ jobs:
 
 ## Resumen
 
-- **mypy** detecta errores de tipo en tiempo de compilación — cuanto antes la anotación, más ayuda
-- **El modo estricto** (`--strict`) es el más valioso — fuerza anotaciones completas
+- **mypy** detecta errores de tipo en tiempo de compilación: cuanto antes la anotación, más ayuda
+- **El modo estricto** (`--strict`) es el más valioso: fuerza anotaciones completas
 - **bandit** encuentra problemas de seguridad: secretos hardcodeados, riesgos de inyección, APIs inseguras
 - **SonarQube** ofrece un seguimiento integral de la calidad: bugs, vulnerabilidades, deuda técnica
 - **La integración en CI** convierte el análisis estático en una parte obligatoria del proceso de desarrollo
-- **Corrige los problemas en el origen** — no suprimas los avisos sin entenderlos
-- **El análisis estático complementa las pruebas** — los tests verifican el comportamiento, el análisis estático verifica la estructura del código
+- **Corrige los problemas en el origen**: no suprimas los avisos sin entenderlos
+- **El análisis estático complementa las pruebas**: los tests verifican el comportamiento, el análisis estático verifica la estructura del código
 
 > [!SUCCESS]
 > Las herramientas de análisis estático son tus revisores de código automatizados. mypy comprueba tus tipos, bandit comprueba tu seguridad y SonarQube sigue tu calidad a lo largo del tiempo. Juntos, detectan lo que los tests no ven.

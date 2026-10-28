@@ -59,7 +59,7 @@ export function AttemptHistory({ dict, lang, history, best, onClear }: AttemptHi
       {history.length === 0 ? (
         <p className="text-sm text-muted-foreground">
           {dict.quizzes?.history?.empty ||
-            'No attempts yet — complete a quiz to build your history.'}
+            'No attempts yet: complete a quiz to build your history.'}
         </p>
       ) : (
         <div className="space-y-2">

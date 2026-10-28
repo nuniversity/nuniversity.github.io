@@ -1,6 +1,6 @@
 ---
 title: "Limites e Continuidade"
-description: "Compreenda o conceito de limites, avalie limites algebricamente e entenda continuidade — a base do cálculo."
+description: "Compreenda o conceito de limites, avalie limites algebricamente e entenda continuidade, a base do cálculo."
 order: 17
 duration: "65 min"
 difficulty: "beginner"
@@ -165,7 +165,7 @@ Se f é contínua em [a,b] e k está entre f(a) e f(b), então existe c em (a,b)
 
 ## 5. Exemplos Resolvidos: Racionalização e Técnicas de Limites
 
-### Exemplo 1 — Racionalização com Radicais
+### Exemplo 1: Racionalização com Radicais
 
 **Problema:** Avalie $\displaystyle\lim_{x \to 0} \frac{\sqrt{x+4} - 2}{x}$
 
@@ -188,7 +188,7 @@ $$\lim_{x \to 0} \frac{1}{\sqrt{x+4} + 2} = \frac{1}{\sqrt{4} + 2} = \frac{1}{4}
 
 ---
 
-### Exemplo 2 — Racionalização no Numerador e Denominador
+### Exemplo 2: Racionalização no Numerador e Denominador
 
 **Problema:** Avalie $\displaystyle\lim_{x \to 3} \frac{x - 3}{\sqrt{x} - \sqrt{3}}$
 
@@ -205,7 +205,7 @@ $$\lim_{x \to 3} (\sqrt{x} + \sqrt{3}) = \sqrt{3} + \sqrt{3} = 2\sqrt{3}$$
 
 ---
 
-### Exemplo 3 — Fatoração com Quadrática
+### Exemplo 3: Fatoração com Quadrática
 
 **Problema:** Avalie $\displaystyle\lim_{x \to 1} \frac{x^2 - 3x + 2}{x - 1}$
 
@@ -230,7 +230,7 @@ Este e um dos limites mais importantes do calculus. Ele permite resolver muitos 
 
 **Por que vale?** Geometricamente, para $x$ pequeno (em radianos), o arco $x$, o seno de $x$ e a tangente de $x$ sao quase iguais. Portanto $\sin(x) \approx x$ quando $x \approx 0$.
 
-### Exemplo 1 — Aplicacao do Limite Fundamental
+### Exemplo 1: Aplicacao do Limite Fundamental
 
 **Problema:** Avalie $\displaystyle\lim_{x \to 0} \frac{\sin(5x)}{x}$
 
@@ -242,7 +242,7 @@ $$\lim_{x \to 0} \frac{\sin(5x)}{5x} \cdot 5 = \lim_{u \to 0} \frac{\sin u}{u} \
 
 ---
 
-### Exemplo 2 — Limite com Cosseno
+### Exemplo 2: Limite com Cosseno
 
 **Problema:** Avalie $\displaystyle\lim_{x \to 0} \frac{1 - \cos x}{x^2}$
 
@@ -265,7 +265,7 @@ $$= (1)^2 \cdot \frac{1}{1+1} = \frac{1}{2}$$
 
 ---
 
-### Exemplo 3 — Limite com Tangente
+### Exemplo 3: Limite com Tangente
 
 **Problema:** Avalie $\displaystyle\lim_{x \to 0} \frac{\tan(3x)}{x}$
 
@@ -294,7 +294,7 @@ $$\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}$$
 
 desde que o limite da direita exista.
 
-### Exemplo 1 — Forma 0/0
+### Exemplo 1: Forma 0/0
 
 **Problema:** Avalie $\displaystyle\lim_{x \to 0} \frac{e^x - 1}{x}$
 
@@ -303,7 +303,7 @@ desde que o limite da direita exista.
 - Denominador: $0$
 - Forma: $\frac{0}{0}$
 
-**Passo 2:** Aplique L'Hopital — derive numerador e denominador:
+**Passo 2:** Aplique L'Hopital: derive numerador e denominador:
 $$\frac{d}{dx}(e^x - 1) = e^x \quad \text{e} \quad \frac{d}{dx}(x) = 1$$
 
 **Passo 3:** Avalie o novo limite:
@@ -311,7 +311,7 @@ $$\lim_{x \to 0} \frac{e^x}{1} = e^0 = 1$$
 
 ---
 
-### Exemplo 2 — Forma Infinito/Infinito
+### Exemplo 2: Forma Infinito/Infinito
 
 **Problema:** Avalie $\displaystyle\lim_{x \to \infty} \frac{\ln x}{x}$
 
@@ -331,7 +331,7 @@ $$\lim_{x \to \infty} \frac{1/x}{1} = \lim_{x \to \infty} \frac{1}{x} = 0$$
 
 ---
 
-### Exemplo 3 — Forma Infinito/Infinito com Exponenciais
+### Exemplo 3: Forma Infinito/Infinito com Exponenciais
 
 **Problema:** Avalie $\displaystyle\lim_{x \to \infty} \frac{e^x}{x^2}$
 
@@ -350,7 +350,7 @@ $$\lim_{x \to \infty} \frac{e^x}{2} = \infty$$
 
 ## 8. Exemplos Adicionais de Continuidade
 
-### Exemplo 1 — Descontinuidade Removivel
+### Exemplo 1: Descontinuidade Removivel
 
 **Problema:** Analise a continuidade de:
 $$f(x) = \frac{x^2 - 1}{x - 1} \text{ em } x = 1$$
@@ -364,7 +364,7 @@ $$f(x) = \frac{x^2 - 1}{x - 1} \text{ em } x = 1$$
 
 ---
 
-### Exemplo 2 — Descontinuidade de Salto
+### Exemplo 2: Descontinuidade de Salto
 
 **Problema:** Analise:
 $$g(x) = \begin{cases} x + 1 & \text{se } x < 0 \\ x - 1 & \text{se } x \geq 0 \end{cases}$$
@@ -378,7 +378,7 @@ $$g(x) = \begin{cases} x + 1 & \text{se } x < 0 \\ x - 1 & \text{se } x \geq 0 \
 
 ---
 
-### Exemplo 3 — Descontinuidade Infinita
+### Exemplo 3: Descontinuidade Infinita
 
 **Problema:** Analise $h(x) = \frac{1}{x^2}$ em $x = 0$.
 
@@ -391,7 +391,7 @@ $$g(x) = \begin{cases} x + 1 & \text{se } x < 0 \\ x - 1 & \text{se } x \geq 0 \
 
 ---
 
-### Exemplo 4 — Teorema do Valor Intermediario na Pratica
+### Exemplo 4: Teorema do Valor Intermediario na Pratica
 
 **Problema:** Prove que $f(x) = x^3 - x - 1$ tem uma raiz entre 1 e 2.
 
@@ -423,7 +423,7 @@ $$g(x) = \begin{cases} x + 1 & \text{se } x < 0 \\ x - 1 & \text{se } x \geq 0 \
 > [!WARNING]
 > **Erro 3: Aplicar L'Hopital sem verificar a forma indeterminada**
 >
-> L'Hopital so se aplica a $\frac{0}{0}$ ou $\frac{\infty}{\infty}$. Se o limite da $\frac{1}{0}$, por exemplo, L'Hopital nao se aplica — o resultado pode ser $\pm\infty$.
+> L'Hopital so se aplica a $\frac{0}{0}$ ou $\frac{\infty}{\infty}$. Se o limite da $\frac{1}{0}$, por exemplo, L'Hopital nao se aplica, o resultado pode ser $\pm\infty$.
 
 ---
 
@@ -461,7 +461,7 @@ $$g(x) = \begin{cases} x + 1 & \text{se } x < 0 \\ x - 1 & \text{se } x \geq 0 \
   "answers": {
     "1": "definido"
   },
-  "explanation": "A primeira condicao de continuidade e que f(a) deve existir — a funcao nao pode ter buraco ou ser indefinida em a."
+  "explanation": "A primeira condicao de continuidade e que f(a) deve existir: a funcao nao pode ter buraco ou ser indefinida em a."
 }
 ```
 
@@ -480,7 +480,7 @@ $$g(x) = \begin{cases} x + 1 & \text{se } x < 0 \\ x - 1 & \text{se } x \geq 0 \
 
 ## Exemplos Passo a Passo: Tecnicas de Avaliacao de Limites
 
-### Exemplo 1 — Racionalizacao: $\displaystyle\lim_{x \to 0} \frac{\sqrt{x+4} - 2}{x}$
+### Exemplo 1, Racionalizacao: $\displaystyle\lim_{x \to 0} \frac{\sqrt{x+4} - 2}{x}$
 
 **Problema:** Avalie $\displaystyle\lim_{x \to 0} \frac{\sqrt{x+4} - 2}{x}$
 
@@ -503,7 +503,7 @@ $$\lim_{x \to 0} \frac{1}{\sqrt{x+4} + 2} = \frac{1}{\sqrt{4} + 2} = \frac{1}{4}
 
 ---
 
-### Exemplo 2 — Fatoracao: $\displaystyle\lim_{x \to 3} \frac{x^2 - 9}{x - 3}$
+### Exemplo 2, Fatoracao: $\displaystyle\lim_{x \to 3} \frac{x^2 - 9}{x - 3}$
 
 **Problema:** Avalie $\displaystyle\lim_{x \to 3} \frac{x^2 - 9}{x - 3}$
 
@@ -523,7 +523,7 @@ $$\lim_{x \to 3} (x + 3) = 3 + 3 = 6$$
 
 ---
 
-### Exemplo 3 — Limite Trigonometrico: $\displaystyle\lim_{x \to 0} \frac{\sin x}{x}$
+### Exemplo 3, Limite Trigonometrico: $\displaystyle\lim_{x \to 0} \frac{\sin x}{x}$
 
 **Problema:** Avalie $\displaystyle\lim_{x \to 0} \frac{\sin x}{x}$
 

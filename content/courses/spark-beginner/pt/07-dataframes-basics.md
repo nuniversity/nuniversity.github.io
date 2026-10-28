@@ -191,7 +191,7 @@ print(df.printSchema())
 
 **Vantagens**:
 - Sem passagem extra para amostragem
-- Segurança de tipos — sem mudanças surpresa de tipo
+- Segurança de tipos: sem mudanças surpresa de tipo
 - Melhor desempenho (sem sobrecarga de inferência)
 
 **Desvantagens**:

@@ -270,7 +270,7 @@ def test_is_valid_email():
 ```
 
 > [!WARNING]
-> El sobre-mocking es un antipatrón habitual. Si haces mock de todo, tus pruebas se vuelven frágiles — se rompen cuando cambia la implementación, no cuando se rompe el comportamiento. Haz mock de los límites, no de los internos.
+> El sobre-mocking es un antipatrón habitual. Si haces mock de todo, tus pruebas se vuelven frágiles: se rompen cuando cambia la implementación, no cuando se rompe el comportamiento. Haz mock de los límites, no de los internos.
 
 ## Aislamiento de pruebas: sin estado compartido
 
@@ -644,14 +644,14 @@ def test_conditional():
 
 ## Resumen
 
-- **Patrón AAA**: Arrange → Act → Assert — una historia clara por prueba
+- **Patrón AAA**: Arrange → Act → Assert: una historia clara por prueba
 - **Un concepto por prueba**: no una aserción, sino un comportamiento
 - **Nombres descriptivos**: `test_given_X_when_Y_then_Z` cuenta la historia completa
 - **Haz mock de los límites**: simula las dependencias externas, no la lógica interna
 - **Aislamiento**: estado fresco por prueba, sin compartir, sin depender del orden
-- **Casos límite**: vacío, nulo, negativo, borde — pruébalos todos
+- **Casos límite**: vacío, nulo, negativo, borde: pruébalos todos
 - **FIRST**: Fast, Isolated, Repeatable, Self-validating, Thorough
 - **Testabilidad**: diseña el código para que pueda probarse (inyección de dependencias)
 
 > [!SUCCESS]
-> Las grandes pruebas son una disciplina de diseño. El patrón AAA, el mocking adecuado y el aislamiento estricto no son coste añadido — son inversiones que hacen que cada refactor futuro sea seguro y que cada informe de bug sea resoluble.
+> Las grandes pruebas son una disciplina de diseño. El patrón AAA, el mocking adecuado y el aislamiento estricto no son coste añadido: son inversiones que hacen que cada refactor futuro sea seguro y que cada informe de bug sea resoluble.

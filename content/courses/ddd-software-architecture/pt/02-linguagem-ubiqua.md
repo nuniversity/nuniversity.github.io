@@ -1,6 +1,6 @@
 ---
 title: "Linguagem Ubíqua"
-description: "Domine o conceito de Linguagem Ubíqua em DDD — como construir uma linguagem compartilhada entre desenvolvedores e especialistas do domínio, evitar tradução e incorporar vocabulário de domínio no código"
+description: "Domine o conceito de Linguagem Ubíqua em DDD, como construir uma linguagem compartilhada entre desenvolvedores e especialistas do domínio, evitar tradução e incorporar vocabulário de domínio no código"
 order: 2
 duration: "60 minutos"
 difficulty: "avançado"
@@ -8,7 +8,7 @@ difficulty: "avançado"
 
 # Linguagem Ubíqua
 
-A Linguagem Ubíqua é a pedra angular do Domain-Driven Design. É uma **linguagem compartilhada e estruturada** que desenvolvedores e especialistas do domínio usam juntos para descrever o domínio. Cada termo nesta linguagem tem um significado preciso e inequívoco — e esse significado é refletido diretamente no código.
+A Linguagem Ubíqua é a pedra angular do Domain-Driven Design. É uma **linguagem compartilhada e estruturada** que desenvolvedores e especialistas do domínio usam juntos para descrever o domínio. Cada termo nesta linguagem tem um significado preciso e inequívoco, e esse significado é refletido diretamente no código.
 
 > [!NOTE]
 > O termo "Linguagem Ubíqua" foi cunhado por Eric Evans em seu livro DDD. A percepção fundamental: a maioria das falhas de software é causada não por problemas técnicos, mas por **erros de tradução** entre equipes de negócio e técnicas. A Linguagem Ubíqua elimina essa tradução.
@@ -278,7 +278,7 @@ class Cliente:
 8. **Exercício de tradução**: Encontre 3 lugares em um projeto em que você trabalha onde o código usa linguagem técnica onde a linguagem de domínio deveria ser usada (ex: "executar" em vez de "fazer pedido", "dados" em vez de "fatura").
 
 > [!SUCCESS]
-> Você completou a Lição 2. A Linguagem Ubíqua é a fundação do DDD — sem ela, contextos delimitados, agregados e todos os outros padrões perdem seu poder. Mantenha a linguagem viva em cada conversa e em cada linha de código.
+> Você completou a Lição 2. A Linguagem Ubíqua é a fundação do DDD: sem ela, contextos delimitados, agregados e todos os outros padrões perdem seu poder. Mantenha a linguagem viva em cada conversa e em cada linha de código.
 
 ## A Linguagem e os Contextos Delimitados
 
@@ -336,7 +336,7 @@ class Cliente:
 
 ## Linguagem Ubíqua e Modelagem
 
-A linguagem molda diretamente o modelo. Se a linguagem mudar, o modelo deve mudar. Se o modelo divergir da linguagem, o modelo — não a linguagem — deve ser corrigido.
+A linguagem molda diretamente o modelo. Se a linguagem mudar, o modelo deve mudar. Se o modelo divergir da linguagem, o modelo, não a linguagem, deve ser corrigido.
 
 ```python
 # Exemplo: evolução da linguagem -> evolução do modelo
@@ -376,7 +376,7 @@ class ClientePremium(Cliente):
 | Silos de equipe | Equipes desenvolvem linguagens diferentes | Sessões de mapeamento entre equipes |
 
 > [!WARNING]
-> O pior destino para uma Linguagem Ubíqua é tornar-se um **documento que ninguém lê**. A linguagem deve viver no código, nas conversas e no trabalho diário — não em um PDF que foi escrito uma vez e esquecido.
+> O pior destino para uma Linguagem Ubíqua é tornar-se um **documento que ninguém lê**. A linguagem deve viver no código, nas conversas e no trabalho diário: não em um PDF que foi escrito uma vez e esquecido.
 
 ## Medindo a Qualidade da Linguagem Ubíqua
 
@@ -415,7 +415,7 @@ class AssinaturaPremium:
 
 ## O Papel dos Eventos na Linguagem
 
-Eventos de domínio são uma parte crucial da Linguagem Ubíqua porque capturam coisas que aconteceram — e os especialistas do domínio sempre descrevem processos em termos de eventos.
+Eventos de domínio são uma parte crucial da Linguagem Ubíqua porque capturam coisas que aconteceram, e os especialistas do domínio sempre descrevem processos em termos de eventos.
 
 ```python
 # Especialista diz: "Quando um cliente faz check-in, emitimos o cartão-chave"
@@ -453,4 +453,4 @@ class ServicoCheckin:
 10. **Mapeamento de linguagem entre contextos**: Em uma clínica médica, o termo "Paciente" existe no contexto de Agendamento e no contexto de Prontuário. Liste 3 atributos que existem em cada contexto e 1 comportamento específico de cada um.
 
 > [!SUCCESS]
-> Você completou a Lição 2. Lembre-se: a Linguagem Ubíqua é a fundação sobre a qual todo o DDD é construído. Invista tempo nela — o retorno é imenso.
+> Você completou a Lição 2. Lembre-se: a Linguagem Ubíqua é a fundação sobre a qual todo o DDD é construído. Invista tempo nela, o retorno é imenso.

@@ -73,7 +73,7 @@ Index Scan using idx_orders_date on orders
   Execution Time: 0.064 ms
 ```
 
-A estimativa diz 50 linhas; o real foi 45 — uma boa estimativa. Grandes discrepâncias sugerem estatísticas desatualizadas.
+A estimativa diz 50 linhas; o real foi 45: uma boa estimativa. Grandes discrepâncias sugerem estatísticas desatualizadas.
 
 ## Varreduras Sequenciais vs Varreduras de Índice
 

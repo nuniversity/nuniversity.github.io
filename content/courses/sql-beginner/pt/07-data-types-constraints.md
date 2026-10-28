@@ -257,7 +257,7 @@ Esta tabela garante:
 - A avaliação tem um timestamp de criação
 
 > [!SUCCESS]
-> Restrições são sua primeira linha de defesa contra dados ruins. Defina-as no nível do banco de dados, não apenas no código da sua aplicação. As restrições do banco de dados se aplicam em todos os lugares — mesmo se alguém escrever um INSERT com bugs ou conectar-se de uma ferramenta diferente.
+> Restrições são sua primeira linha de defesa contra dados ruins. Defina-as no nível do banco de dados, não apenas no código da sua aplicação. As restrições do banco de dados se aplicam em todos os lugares: mesmo se alguém escrever um INSERT com bugs ou conectar-se de uma ferramenta diferente.
 
 ## Perguntas de Prática
 

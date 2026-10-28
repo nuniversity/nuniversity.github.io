@@ -203,7 +203,7 @@ Alertas notificam você (via email, Slack, webhook) quando uma métrica ultrapas
 Configure alertas em **Configurações → Alertas** na interface do LangFuse.
 
 > [!WARNING]
-> Alertas verificam dados agregados e podem ter um atraso de 1–5 minutos. Eles não são em tempo real. Para alertas sub-minuto, use uma ferramenta APM dedicada junto com o LangFuse.
+> Alertas verificam dados agregados e podem ter um atraso de 1 to 5 minutos. Eles não são em tempo real. Para alertas sub-minuto, use uma ferramenta APM dedicada junto com o LangFuse.
 
 ### Comparação de Tipos de Alerta
 
@@ -338,7 +338,7 @@ Cada span registra automaticamente sua duração. Painéis do dashboard podem mo
 - Histograma de distribuição de latência.
 - Lista de traces mais lentos (ordenar por duração).
 
-Dados de latência ajudam a identificar gargalos — por exemplo, chamadas de embedding demorando mais que a geração.
+Dados de latência ajudam a identificar gargalos: por exemplo, chamadas de embedding demorando mais que a geração.
 
 ---
 
@@ -489,7 +489,7 @@ Você também pode usar a API do LangFuse diretamente (`GET /api/public/traces`)
 > [!SUCCESS]
 > **Principais Conclusões**
 > - Dashboards são construídos a partir de painéis filtráveis; use tags e metadados de forma consistente.
-> - Alertas verificam dados agregados a cada 1-2 minutos — adequados para alertas operacionais, não em tempo real.
+> - Alertas verificam dados agregados a cada 1-2 minutos: adequados para alertas operacionais, não em tempo real.
 > - O rastreamento de custos requer nomes de modelo precisos para consulta de preços.
 > - Dados de latência e taxa de erro vêm automaticamente da temporização do span e do nível do span.
 > - Exporte traces via SDK ou REST API para análise externa em pandas/ferramentas de BI.

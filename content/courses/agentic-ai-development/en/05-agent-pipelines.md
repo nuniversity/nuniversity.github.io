@@ -10,7 +10,7 @@ duration: "70 min"
 
 ## What Are Agent Pipelines?
 
-Agent pipelines are structured workflows that chain multiple operations — tool calls, skill executions, subagent delegations — into coordinated sequences. Pipelines transform an agent from a single-step assistant into a multi-step automation engine capable of complex software engineering workflows.
+Agent pipelines are structured workflows that chain multiple operations, tool calls, skill executions, subagent delegations, into coordinated sequences. Pipelines transform an agent from a single-step assistant into a multi-step automation engine capable of complex software engineering workflows.
 
 ```mermaid
 flowchart TD
@@ -652,10 +652,10 @@ OpenCode supports pipeline-like workflows through skill chaining and agent routi
   "type": "multiple-choice",
   "question": "Which error handling strategy should be used for a production deployment stage that fails?",
   "options": [
-    "retry — keep trying until it succeeds",
-    "skip — move on to the next stage",
-    "abort — stop the pipeline immediately",
-    "ignore — pretend it didn't happen"
+    "retry: keep trying until it succeeds",
+    "skip: move on to the next stage",
+    "abort: stop the pipeline immediately",
+    "ignore: pretend it didn't happen"
   ],
   "correct": 2,
   "explanation": "A failed production deployment should abort the pipeline to prevent inconsistent state. Retrying indefinitely could make things worse. The pipeline should stop, report the error, and potentially trigger a rollback compensation."

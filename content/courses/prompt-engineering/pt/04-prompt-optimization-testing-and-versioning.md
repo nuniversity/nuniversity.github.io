@@ -419,7 +419,7 @@ flowchart LR
 5. **Monitore Produção**: Acompanhe o desempenho em dados reais
 
 [!IMPORTANT]
-**Evitar overfitting é a habilidade mais importante na engenharia de prompt de produção.** Um prompt que marca 98% no seu conjunto de teste artesanal mas 60% em produção é pior que inútil — dá falsa confiança. Sempre mantenha um conjunto de teste retido que você nunca otimiza, e monitore continuamente o desempenho em produção.
+**Evitar overfitting é a habilidade mais importante na engenharia de prompt de produção.** Um prompt que marca 98% no seu conjunto de teste artesanal mas 60% em produção é pior que inútil: dá falsa confiança. Sempre mantenha um conjunto de teste retido que você nunca otimiza, e monitore continuamente o desempenho em produção.
 
 ### Estudo de Caso de Overfitting
 
@@ -497,7 +497,7 @@ flowchart LR
   "id": "pe-04-pt-q6",
   "type": "multiple-choice",
   "question": "Um engenheiro de prompt executa um teste A/B com apenas 5 casos de teste. Versão A acerta 4/5 e versão B acerta 5/5. O que eles devem concluir?",
-  "options": ["Versão B é definitivamente melhor — implante imediatamente", "O tamanho da amostra é muito pequeno para tirar conclusões estatisticamente significativas", "Ambas as versões são igualmente boas", "Versão A deve ser descartada permanentemente"],
+  "options": ["Versão B é definitivamente melhor: implante imediatamente", "O tamanho da amostra é muito pequeno para tirar conclusões estatisticamente significativas", "Ambas as versões são igualmente boas", "Versão A deve ser descartada permanentemente"],
   "correct": 1,
   "explanation": "Com apenas 5 casos de teste, uma diferença de um resultado não prova superioridade. Testes A/B precisam de pelo menos 50-100 casos diversos por versão para resultados significativos."
 }
@@ -541,7 +541,7 @@ flowchart LR
   "id": "pe-04-pt-q10",
   "type": "multiple-choice",
   "question": "Um engenheiro de prompt adiciona uma instrução complexa para lidar com um caso de borda raro, melhorando a acurácia de 94% para 95% no conjunto de teste. O prompt agora é 3x mais longo. Eles devem implantá-lo?",
-  "options": ["Sim — maior acurácia sempre vence", "Não — o ganho marginal provavelmente não justifica a complexidade adicional e o risco potencial de overfitting", "Só se também aumentarem a temperature", "Sim — prompts mais longos sempre produzem melhores resultados"],
+  "options": ["Sim: maior acurácia sempre vence", "Não, o ganho marginal provavelmente não justifica a complexidade adicional e o risco potencial de overfitting", "Só se também aumentarem a temperature", "Sim: prompts mais longos sempre produzem melhores resultados"],
   "correct": 1,
   "explanation": "Um ganho de 1% de acurácia com 3x complexidade provavelmente indica overfitting para casos de borda no conjunto de teste. A complexidade adicional pode prejudicar a generalização em dados não vistos. Prompts mais simples generalizam melhor."
 }
@@ -556,8 +556,8 @@ flowchart LR
 - Teste A/B compara versões de prompt sistematicamente usando métricas como acurácia, consistência e latência
 - Controle de versão (Git + SemVer) é crítico para prompts de produção; sempre documente mudanças
 - Templates de prompt separam estrutura de dados, melhorando manutenibilidade e consistência
-- Overfitting acontece quando prompts funcionam em dados de teste mas falham em dados reais—use validação holdout
+- Overfitting acontece quando prompts funcionam em dados de teste mas falham em dados reais: use validação holdout
 - Sistemas de produção precisam de monitoramento, logging e capacidades de rollback
-- Significância estatística importa em teste A/B — não declare vencedores em amostras pequenas
+- Significância estatística importa em teste A/B: não declare vencedores em amostras pequenas
 - Bibliotecas de template como Jinja2 permitem geração de prompt condicional complexa
-- Prompts mais simples generalizam melhor — não sobre-engenharia para ganhos marginais
+- Prompts mais simples generalizam melhor: não sobre-engenharia para ganhos marginais

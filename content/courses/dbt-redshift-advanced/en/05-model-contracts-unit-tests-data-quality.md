@@ -30,7 +30,7 @@ flowchart LR
 
 | Feature | When it runs | Tests what | Mock data? |
 | :--- | :--- | :--- | :--- |
-| Unit tests | Before materialization | SQL transformation logic | Yes — static inputs |
+| Unit tests | Before materialization | SQL transformation logic | Yes: static inputs |
 | Model contracts | At compile/build time | Schema structure, column types | No |
 | Data tests | After materialization | Actual data values | No |
 
@@ -38,7 +38,7 @@ flowchart LR
 
 ## Model Contracts
 
-A model contract declares the expected schema for a model and enforces it at build time. When a contract is enforced, dbt validates that the compiled SQL returns exactly the columns, types, and constraints defined — failing before any data is written if they don't match.
+A model contract declares the expected schema for a model and enforces it at build time. When a contract is enforced, dbt validates that the compiled SQL returns exactly the columns, types, and constraints defined: failing before any data is written if they don't match.
 
 ### Defining a Contract
 
@@ -89,7 +89,7 @@ models:
 ```
 
 [!WARNING]
-On Redshift, `primary_key`, `foreign_key`, and `unique` constraints are **informational only** — Redshift does not enforce them at the database level. dbt model contracts validate the schema at compile time, but referential integrity must be enforced via dbt `data_tests`. Use `not_null` and `check` constraints where Redshift does enforce them.
+On Redshift, `primary_key`, `foreign_key`, and `unique` constraints are **informational only**: Redshift does not enforce them at the database level. dbt model contracts validate the schema at compile time, but referential integrity must be enforced via dbt `data_tests`. Use `not_null` and `check` constraints where Redshift does enforce them.
 
 ### Enforcing Contracts Project-Wide for Marts
 
@@ -131,7 +131,7 @@ Compilation Error in model fct_orders
 
 ## Unit Tests (dbt-core 1.8+)
 
-Unit tests validate your SQL transformation logic using **static mock data** — no warehouse compute required beyond the test itself. They enable test-driven development: write the test, write the model, run the test.
+Unit tests validate your SQL transformation logic using **static mock data**: no warehouse compute required beyond the test itself. They enable test-driven development: write the test, write the model, run the test.
 
 ### Basic Unit Test Structure
 
@@ -354,7 +354,7 @@ flowchart TD
 
 ### Recommended `dbt build` for Full Quality Gate
 
-`dbt build` runs models, tests, seeds, and snapshots in DAG order — models run, then their tests immediately:
+`dbt build` runs models, tests, seeds, and snapshots in DAG order: models run, then their tests immediately:
 
 ```bash
 # Full build with all quality checks
@@ -400,7 +400,7 @@ dbt build \
     "not_null via a CHECK constraint"
   ],
   "correct": 3,
-  "explanation": "Redshift enforces check constraints (including not_null, which maps to a NOT NULL column constraint). primary_key, foreign_key, and unique are informational — declared but not enforced by Redshift's storage engine."
+  "explanation": "Redshift enforces check constraints (including not_null, which maps to a NOT NULL column constraint). primary_key, foreign_key, and unique are informational: declared but not enforced by Redshift's storage engine."
 }
 ```
 
@@ -464,7 +464,7 @@ dbt build \
     "dbt build compiles models but does not execute them"
   ],
   "correct": 1,
-  "explanation": "dbt build processes models in DAG order, running each model's tests immediately after it is built. If a model fails its tests, downstream models are not built — this catches issues earlier than running tests after all models complete."
+  "explanation": "dbt build processes models in DAG order, running each model's tests immediately after it is built. If a model fails its tests, downstream models are not built; this catches issues earlier than running tests after all models complete."
 }
 ```
 
@@ -473,10 +473,10 @@ dbt build \
 [!SUCCESS]
 ### Key Takeaways
 
-- Model contracts enforce compile-time schema validation — column names, data types, and constraints must match before SQL executes.
+- Model contracts enforce compile-time schema validation: column names, data types, and constraints must match before SQL executes.
 - On Redshift, only `not_null` and `check` constraints are database-enforced. Use `primary_key`, `foreign_key`, and `unique` as informational documentation and enforce them with data tests.
-- Unit tests (v1.8+) validate SQL transformation logic with static mock data — no warehouse compute needed beyond the test query itself.
+- Unit tests (v1.8+) validate SQL transformation logic with static mock data: no warehouse compute needed beyond the test query itself.
 - Override non-deterministic macros (`current_timestamp`) in unit tests to ensure reproducible results.
 - `store_failures: true` materializes failing test rows into an audit table in your warehouse for debugging.
-- `dbt build` runs models and their tests in DAG order — a model's tests run before its descendants are built.
+- `dbt build` runs models and their tests in DAG order: a model's tests run before its descendants are built.
 - Combine unit tests (development), model contracts (build time), and data tests (runtime) for a full quality gate.

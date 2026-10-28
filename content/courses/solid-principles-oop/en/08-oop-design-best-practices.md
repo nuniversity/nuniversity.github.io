@@ -12,7 +12,7 @@ This final lesson covers essential OOP design best practices that build on the S
 
 ## 1. Favor Composition Over Inheritance
 
-Inheritance creates tight coupling — a child class is permanently tied to its parent. Composition lets you swap behaviors at runtime.
+Inheritance creates tight coupling: a child class is permanently tied to its parent. Composition lets you swap behaviors at runtime.
 
 ### Inheritance (Tight Coupling)
 
@@ -553,7 +553,7 @@ class OrderController:
 
 ## 8. Tell, Don't Ask
 
-Don't ask an object for its data and then make decisions — tell the object what to do.
+Don't ask an object for its data and then make decisions: tell the object what to do.
 
 ### BEFORE: Asking
 
@@ -665,14 +665,14 @@ print(ic2.r)  # 70 — new instance
 
 | Smell | Problem | SOLID Fix |
 |-------|---------|-----------|
-| **Long class** | Multiple responsibilities | SRP — extract classes |
-| **Long method** | Doing too much | SRP — extract methods |
-| **Switch/elif chain** | Adding requires modification | OCP — strategy pattern |
+| **Long class** | Multiple responsibilities | SRP: extract classes |
+| **Long method** | Doing too much | SRP: extract methods |
+| **Switch/elif chain** | Adding requires modification | OCP: strategy pattern |
 | **isinstance checks** | LSP violation | Polymorphism |
 | **Empty method bodies** | ISP violation | Split interface |
 | **Hard-coded `new`** | DIP violation | Constructor injection |
 | **Feature envy** | Method uses another class's data | Move method |
-| **Shotgun surgery** | One change, many edits | SRP — consolidate |
+| **Shotgun surgery** | One change, many edits | SRP: consolidate |
 | **Data class** | Only fields, no behavior | Add methods |
 | **Refused bequest** | Subclass doesn't use parent methods | Composition instead |
 
@@ -744,7 +744,7 @@ print(ic2.r)  # 70 — new instance
 ## Summary
 
 - **Composition over inheritance**: Prefer "has-a" over "is-a"
-- **DRY**: Don't repeat logic — extract and reuse
+- **DRY**: Don't repeat logic: extract and reuse
 - **KISS**: Simpler code is better code
 - **YAGNI**: Don't build what you don't need
 - **Design Patterns**: Strategy, Observer, Factory, Decorator solve common problems
@@ -754,4 +754,4 @@ print(ic2.r)  # 70 — new instance
 - **Constructor Injection**: The preferred way to wire dependencies
 
 > [!SUCCESS]
-> You've completed the SOLID Principles & OOP course. These principles and best practices will serve you throughout your career. Remember: great OOP design is not about following rules — it's about creating code that is easy to understand, test, and change.
+> You've completed the SOLID Principles & OOP course. These principles and best practices will serve you throughout your career. Remember: great OOP design is not about following rules; it's about creating code that is easy to understand, test, and change.

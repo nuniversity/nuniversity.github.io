@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Frameworks & Externalities
 
-In Clean Architecture, frameworks and external tools are **details** — they are the outermost layer, not the foundation. This lesson shows how to keep your business logic framework-agnostic while still leveraging powerful tools.
+In Clean Architecture, frameworks and external tools are **details**; they are the outermost layer, not the foundation. This lesson shows how to keep your business logic framework-agnostic while still leveraging powerful tools.
 
 > [!NOTE]
 > Frameworks are tools, not architectures. A good architecture allows you to use a framework without being coupled to it. You should be able to swap Flask for FastAPI without changing a single line of business logic.
@@ -39,7 +39,7 @@ flowchart TD
     style Plugins fill:#ffccbc,color:#000
 ```
 
-Each framework becomes a **plugin** that communicates with the business logic through adapters. The business logic doesn't know — or care — which framework is being used.
+Each framework becomes a **plugin** that communicates with the business logic through adapters. The business logic doesn't know, or care, which framework is being used.
 
 ## Framework Coupling: Before and After
 
@@ -740,7 +740,7 @@ def get_order(order_id: str):
 ```
 
 > [!SUCCESS]
-> When frameworks are treated as details, migrating from Flask to FastAPI (or any other framework) is a matter of rewriting one adapter file — not the entire application.
+> When frameworks are treated as details, migrating from Flask to FastAPI (or any other framework) is a matter of rewriting one adapter file: not the entire application.
 
 ## Framework Selection Checklist
 

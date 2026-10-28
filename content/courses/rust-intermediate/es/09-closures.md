@@ -8,7 +8,7 @@ difficulty: "intermedio"
 
 # Closures
 
-Los closures son funciones anónimas que pueden capturar variables de su entorno. El sistema de closures de Rust es flexible y eficiente — los closures se compilan a structs simples.
+Los closures son funciones anónimas que pueden capturar variables de su entorno. El sistema de closures de Rust es flexible y eficiente: los closures se compilan a structs simples.
 
 ## Sintaxis de Closure
 
@@ -49,7 +49,7 @@ fn main() {
 
 Los closures capturan variables de su ámbito circundante. El compilador elige el modo de captura menos restrictivo:
 
-### FnOnce — Consume valores capturados
+### FnOnce: Consume valores capturados
 
 ```rust
 fn main() {
@@ -68,7 +68,7 @@ fn main() {
 > [!WARNING]
 > Los closures `FnOnce` solo se pueden llamar una vez porque consumen valores capturados. Implementan `FnOnce`, pero no `Fn` o `FnMut`.
 
-### FnMut — Toma prestado mutablemente
+### FnMut: Toma prestado mutablemente
 
 ```rust
 fn main() {
@@ -87,7 +87,7 @@ fn main() {
 }
 ```
 
-### Fn — Toma prestado inmutablemente
+### Fn: Toma prestado inmutablemente
 
 ```rust
 fn main() {

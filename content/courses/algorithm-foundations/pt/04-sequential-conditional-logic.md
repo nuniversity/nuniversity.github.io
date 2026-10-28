@@ -73,7 +73,7 @@ FIM ALGORITMO
 ```
 
 > [!NOTE]
-> Observe que este algoritmo é puramente sequencial. Ele não trata o que acontece se a senha estiver errada ou se o saldo for insuficiente. Precisamos de lógica condicional para isso -- o que veremos a seguir.
+> Observe que este algoritmo é puramente sequencial. Ele não trata o que acontece se a senha estiver errada ou se o saldo for insuficiente. Precisamos de lógica condicional para isso, o que veremos a seguir.
 
 ## Lógica Condicional: Fazendo Escolhas
 
@@ -318,7 +318,7 @@ flowchart TD
 | Aspecto | Lógica Sequencial | Lógica Condicional |
 |---|---|---|
 | **Execução** | Linear, um passo após o outro | Ramifica com base em condições |
-| **Flexibilidade** | Baixa -- sempre faz a mesma coisa | Alta -- adapta-se a diferentes situações |
+| **Flexibilidade** | Baixa, sempre faz a mesma coisa | Alta, adapta-se a diferentes situações |
 | **Complexidade** | Simples de entender e rastrear | Mais complexa, requer planejamento cuidadoso |
 | **Usar quando** | Toda situação é a mesma | Diferentes situações precisam de respostas diferentes |
 | **Exemplo** | Somar dois números | Decidir se um número é positivo ou negativo |

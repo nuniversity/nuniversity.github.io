@@ -1,6 +1,6 @@
 ---
 title: "Exemplo Real de Arquitetura"
-description: "Construa uma aplicação completa do mundo real usando Arquitetura Limpa — um sistema de e-commerce de entidades ao deploy"
+description: "Construa uma aplicação completa do mundo real usando Arquitetura Limpa, um sistema de e-commerce de entidades ao deploy"
 order: 7
 duration: "70 minutos"
 difficulty: "intermediário"
@@ -8,7 +8,7 @@ difficulty: "intermediário"
 
 # Exemplo Real de Arquitetura
 
-Esta lição reúne tudo construindo um sistema completo de **gerenciamento de pedidos de e-commerce** usando Arquitetura Limpa. Você verá cada camada — de entidades a adaptadores de framework — trabalhando juntos em uma aplicação realista.
+Esta lição reúne tudo construindo um sistema completo de **gerenciamento de pedidos de e-commerce** usando Arquitetura Limpa. Você verá cada camada, de entidades a adaptadores de framework, trabalhando juntos em uma aplicação realista.
 
 > [!NOTE]
 > O sistema lida com: catálogo de produtos, carrinho de compras, pedidos com pagamento, rastreamento e notificação. Toda a lógica de negócio é independente de framework e totalmente testável.

@@ -240,7 +240,7 @@ El sitio web de la ONG es el **hub** de todas las actividades digitales. Element
 - **Lanzamientos**: Nueva campaña, programa, reporte
 - **Foros/Painels**: Discusión de temas relevantes para la causa
 - **Eventos de agradecimiento**: Para donantes, voluntarios, socios
-- **Días de concientización**: Fechas alineadas a calendarios de causas (21 de marzo - día del árbol, etc.)
+- **Días de concientización**: Fechas alineadas a calendarios de causas (21 de marzo: día del árbol, etc.)
 
 ### Comunicación de Crisis
 
@@ -305,7 +305,7 @@ El sitio web de la ONG es el **hub** de todas las actividades digitales. Element
 
 ### Qué es el Marketing Social
 
-El **marketing social** aplica principios y técnicas de marketing comercial para lograr objetivos sociales específicos — cambio de comportamiento para beneficio de individuos o comunidad.
+El **marketing social** aplica principios y técnicas de marketing comercial para lograr objetivos sociales específicos: cambio de comportamiento para beneficio de individuos o comunidad.
 
 #### Diferencia Marketing Social vs. Marketing de ONG
 

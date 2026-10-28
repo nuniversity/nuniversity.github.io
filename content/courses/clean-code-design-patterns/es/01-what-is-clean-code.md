@@ -28,7 +28,7 @@ El software pasa la mayor parte de su vida en modo de mantenimiento. Los estudio
 ## La regla del Boy Scout
 
 > [!TIP]
-> **"Deja el camping más limpio de lo que lo encontraste."** — Boy Scouts of America
+> **"Deja el camping más limpio de lo que lo encontraste."**: Boy Scouts of America
 
 Aplicada al código: cada vez que toques un módulo, déjalo un poco mejor que antes. Corrige un problema de formato, renombra una variable poco clara, extrae una función pequeña. Las mejoras pequeñas se acumulan en ganancias enormes.
 

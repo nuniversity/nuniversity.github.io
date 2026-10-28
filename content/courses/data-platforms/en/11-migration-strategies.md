@@ -8,7 +8,7 @@ duration: "60 min"
 
 # Migration Strategies
 
-> **Bottom Line:** There is no "lift-and-shift" for data platforms. Every migration is a re-architecture. The most successful migrations treat the move as an opportunity to modernise data models, rationalise pipelines, and establish governance — not just copy SQL from one system to another.
+> **Bottom Line:** There is no "lift-and-shift" for data platforms. Every migration is a re-architecture. The most successful migrations treat the move as an opportunity to modernise data models, rationalise pipelines, and establish governance: not just copy SQL from one system to another.
 
 ---
 

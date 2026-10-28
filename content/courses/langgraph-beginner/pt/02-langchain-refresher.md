@@ -127,7 +127,7 @@ Parsers de saída transformam a saída de texto do LLM em formatos estruturados.
 
 ### StrOutputParser
 
-O parser mais simples — converte a saída do LLM em uma string simples:
+O parser mais simples: converte a saída do LLM em uma string simples:
 
 ```python
 from langchain_core.output_parsers import StrOutputParser
@@ -441,4 +441,4 @@ def node(state: State) -> dict:
 - Parsers de saída (StrOutputParser, PydanticOutputParser) convertem texto LLM em dados estruturados
 - Em LangGraph, componentes LangChain vão dentro de funções de nó, não fora do grafo
 - O parâmetro config permite configuração em tempo de execução dos parâmetros LLM
-- Evite o operador pipe para cadeias grandes dentro de LangGraph — prefira chamadas de função explícitas
+- Evite o operador pipe para cadeias grandes dentro de LangGraph: prefira chamadas de função explícitas

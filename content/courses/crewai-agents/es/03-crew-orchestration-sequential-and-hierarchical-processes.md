@@ -273,7 +273,7 @@ flowchart TD
 | Aspecto | SequentialProcess | HierarchicalProcess |
 | :--- | :--- | :--- |
 | **Orden de ejecución** | Lineal fijo | El gerente decide dinámicamente |
-| **Autonomía del agente** | Baja — tareas pre-asignadas | Alta — el gerente asigna y revisa |
+| **Autonomía del agente** | Baja, tareas pre-asignadas | Alta, el gerente asigna y revisa |
 | **Gerente necesario** | No | Sí (con `allow_delegation=True`) |
 | **Paso de contexto** | Automático entre tareas adyacentes | Gestionado por el agente gerente |
 | **Mejor para** | Tuberías simples, pasos bien definidos | Flujos complejos que requieren coordinación |
@@ -375,9 +375,9 @@ En modo secuencial, los agentes ejecutan en orden fijo. En modo jerárquico, el 
   "type": "multiple-choice",
   "question": "Estás construyendo un pipeline de contenido: esquema → borrador → revisión → publicación. Cada paso depende del anterior. ¿Qué proceso deberías usar?",
   "options": [
-    "HierarchicalProcess — para asignación dinámica",
-    "SequentialProcess — para pasos lineales fijos",
-    "Ninguno — esto requiere código personalizado",
+    "HierarchicalProcess: para asignación dinámica",
+    "SequentialProcess: para pasos lineales fijos",
+    "Ninguno; esto requiere código personalizado",
     "Cualquiera funcionaría igual de bien"
   ],
   "correct": 1,
@@ -439,7 +439,7 @@ En modo secuencial, los agentes ejecutan en orden fijo. En modo jerárquico, el 
   "type": "multiple-choice",
   "question": "Un crew jerárquico tiene un gerente y 3 trabajadores. La salida del Trabajador A es deficiente. ¿Qué puede hacer el gerente?",
   "options": [
-    "Nada — las tareas son fijas después de la asignación",
+    "Nada: las tareas son fijas después de la asignación",
     "Reasignar la tarea a un trabajador diferente o solicitar revisión",
     "Eliminar al Trabajador A del crew",
     "Cambiar a SequentialProcess automáticamente"

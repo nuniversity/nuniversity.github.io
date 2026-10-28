@@ -10,7 +10,7 @@ duration: "45 min"
 
 ## Why Advanced Techniques?
 
-Basic prompting works for simple tasks, but complex reasoning, structured outputs, and specialized problems require more sophisticated approaches. Each technique in this lesson addresses a specific limitation of basic prompting — from improving step-by-step reasoning to enabling multi-path exploration.
+Basic prompting works for simple tasks, but complex reasoning, structured outputs, and specialized problems require more sophisticated approaches. Each technique in this lesson addresses a specific limitation of basic prompting: from improving step-by-step reasoning to enabling multi-path exploration.
 
 ### When Basic Prompting Falls Short
 
@@ -157,7 +157,7 @@ Sentiment:
 ```
 
 [!TIP]
-**Choosing the right examples:** Select examples that cover the range of expected inputs. Include edge cases and ambiguous examples. Poorly chosen examples (e.g., all positive sentiment when the test set has mixed sentiment) bias the model. Also, order matters — models tend to be influenced most by the last example (recency bias).
+**Choosing the right examples:** Select examples that cover the range of expected inputs. Include edge cases and ambiguous examples. Poorly chosen examples (e.g., all positive sentiment when the test set has mixed sentiment) bias the model. Also, order matters: models tend to be influenced most by the last example (recency bias).
 
 ### Few-Shot in Code
 
@@ -294,7 +294,7 @@ print(response.content[0].text)
 
 ## Self-Consistency
 
-Self-Consistency generates multiple reasoning paths and selects the most frequent answer. It's like asking three experts separately and taking the majority vote — diverse reasoning paths reduce the chance that any single mistake determines the final answer.
+Self-Consistency generates multiple reasoning paths and selects the most frequent answer. It's like asking three experts separately and taking the majority vote: diverse reasoning paths reduce the chance that any single mistake determines the final answer.
 
 ```
 Generate 3 different solutions to this problem, then pick the most common answer:
@@ -438,7 +438,7 @@ Start by listing {num_branches} different ways to approach this problem:
 | Summarize a document | CoT (if complex) or Zero-Shot | Simpler is usually better |
 
 [!IMPORTANT]
-**Technique stacking:** These techniques are not mutually exclusive. You can combine CoT with Few-Shot (provide example reasoning chains), use Self-Consistency with JSON Mode, or use ToT with structured outputs. Stacking techniques can compound benefits — but also compound token costs.
+**Technique stacking:** These techniques are not mutually exclusive. You can combine CoT with Few-Shot (provide example reasoning chains), use Self-Consistency with JSON Mode, or use ToT with structured outputs. Stacking techniques can compound benefits, but also compound token costs.
 
 ---
 
@@ -537,7 +537,7 @@ Start by listing {num_branches} different ways to approach this problem:
   "id": "pe-03-q9",
   "type": "multiple-choice",
   "question": "A developer uses few-shot prompting with examples ordered: NEGATIVE, POSITIVE, NEUTRAL. The model misclassifies most test cases as NEUTRAL. What's the most likely cause?",
-  "options": ["The model doesn't understand sentiment analysis", "Recency bias — the model is most influenced by the last example (NEUTRAL)", "The temperature is set too high", "NEUTRAL is not a valid sentiment category"],
+  "options": ["The model doesn't understand sentiment analysis", "Recency bias: the model is most influenced by the last example (NEUTRAL)", "The temperature is set too high", "NEUTRAL is not a valid sentiment category"],
   "correct": 1,
   "explanation": "LLMs exhibit recency bias, meaning they are disproportionately influenced by the last examples in the prompt. Reordering examples so the most frequent or important category appears last can improve accuracy."
 }
@@ -564,7 +564,7 @@ Start by listing {num_branches} different ways to approach this problem:
 - **Structured Outputs (JSON Mode):** Critical for programmatic API integration
 - **Self-Consistency:** Generate multiple outputs and select the most frequent answer
 - **Tree-of-Thoughts:** Explore multiple reasoning branches like a decision tree
-- Advanced techniques cost more tokens—balance performance needs with cost
+- Advanced techniques cost more tokens: balance performance needs with cost
 - Techniques can be stacked: CoT + JSON, Few-Shot + CoT, Self-Consistency + Structured Outputs
 - For simple tasks, simpler techniques often outperform complex ones
 - Always validate structured outputs before production use

@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Knowledge Base Integration and Document Processing
 
-An agent is only as knowledgeable as the documents it can access. Building a robust document ingestion pipeline — from raw files to a searchable knowledge base — is a foundational engineering skill for production agents.
+An agent is only as knowledgeable as the documents it can access. Building a robust document ingestion pipeline, from raw files to a searchable knowledge base, is a foundational engineering skill for production agents.
 
 ---
 
@@ -631,7 +631,7 @@ def sanitize_document(text: str) -> str:
   "type": "multiple-choice",
   "question": "An agent's knowledge base contains HR documents with employee email addresses. What should you do before indexing?",
   "options": [
-    "Nothing — the agent needs the emails to answer questions",
+    "Nothing: the agent needs the emails to answer questions",
     "Sanitize the documents by removing or masking PII",
     "Index everything and add a filter later",
     "Switch to a different embedding model"
@@ -648,7 +648,7 @@ def sanitize_document(text: str) -> str:
 
 - Different document formats (PDF, HTML, Markdown) require format-specific loaders.
 - Scanned PDFs require OCR processing before text can be extracted.
-- Text splitting strategy — recursive, token-based, or structure-aware — directly impacts retrieval quality.
+- Text splitting strategy, recursive, token-based, or structure-aware, directly impacts retrieval quality.
 - Metadata (source, page, timestamp, content hash) makes chunks filterable and traceable.
 - Incremental indexing uses content hashes to skip duplicates and avoid full rebuilds.
 - Updating a document requires deleting old chunks and re-indexing the new content.

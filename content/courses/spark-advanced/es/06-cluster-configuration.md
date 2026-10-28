@@ -19,7 +19,7 @@ La configuración de Spark sigue una jerarquía:
 | 1 (Más alta) | `spark-submit --conf` | Todo lo demás |
 | 2 | `SparkSession.conf.set()` | Valores por defecto del archivo |
 | 3 | `spark-defaults.conf` | Valores por defecto duros |
-| 4 (Más baja) | Valores por defecto duros | — |
+| 4 (Más baja) | Valores por defecto duros |: |
 
 ## Configuración Principal de Recursos
 

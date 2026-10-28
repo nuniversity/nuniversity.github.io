@@ -29,7 +29,7 @@ Agentes personalizados são definidos na seção `agents` do `opencode.json`. Ca
 ```
 
 > [!TIP]
-> Use nomes e descrições de agentes descritivos — eles servem como o principal mecanismo de roteamento. Um agente bem nomeado como "security-auditor" com uma descrição clara é mais fácil de ser alvo tanto para humanos quanto para o sistema de roteamento.
+> Use nomes e descrições de agentes descritivos: eles servem como o principal mecanismo de roteamento. Um agente bem nomeado como "security-auditor" com uma descrição clara é mais fácil de ser alvo tanto para humanos quanto para o sistema de roteamento.
 
 ---
 
@@ -146,7 +146,7 @@ Descrições ajudam o OpenCode a rotear tarefas para o agente correto. Elas atua
 ```
 
 > [!IMPORTANT]
-> As descrições dos agentes não são apenas documentação — elas são usadas ativamente em tempo de execução para roteamento. Uma descrição vaga como "ajuda com codificação" pode fazer com que requisições sejam roteadas incorretamente. Seja específico: "Lida com design de schema de banco de dados e otimização SQL."
+> As descrições dos agentes não são apenas documentação: elas são usadas ativamente em tempo de execução para roteamento. Uma descrição vaga como "ajuda com codificação" pode fazer com que requisições sejam roteadas incorretamente. Seja específico: "Lida com design de schema de banco de dados e otimização SQL."
 
 ---
 
@@ -296,25 +296,25 @@ Restrições limitam o que um agente pode fazer, prevenindo uso indevido ou dano
 ```
 
 > [!TIP]
-> Use restrições de `temperature` para controlar a criatividade do agente. Valores baixos (0.1–0.3) produzem saídas determinísticas e focadas, ideais para revisão de código e deploy. Valores mais altos (0.7–1.0) incentivam soluções criativas para brainstorming e design de arquitetura.
+> Use restrições de `temperature` para controlar a criatividade do agente. Valores baixos (0.1 to 0.3) produzem saídas determinísticas e focadas, ideais para revisão de código e deploy. Valores mais altos (0.7 to 1.0) incentivam soluções criativas para brainstorming e design de arquitetura.
 
 ### Comparação: Opções de Configuração de Agentes
 
 | Opção            | Tipo      | Obrigatório | Padrão         | Descrição                                   |
 |------------------|-----------|:-----------:|----------------|---------------------------------------------|
-| `model`          | string    | Sim         | —              | Identificador do modelo (ex.: `gpt-4o`)     |
-| `description`    | string    | Sim         | —              | Descrição para roteamento de tarefas        |
+| `model` | string | Sim |: | Identificador do modelo (ex.: `gpt-4o`) |
+| `description` | string | Sim |: | Descrição para roteamento de tarefas |
 | `prompt`         | string    | Não         | Prompt padrão  | Mensagem do sistema / instruções            |
 | `subagents`      | object    | Não         | `{}`           | Agentes especializados aninhados            |
 | `constraints`    | object    | Não         | `{}`           | Limites de recursos e uso de ferramentas    |
 | `allowedTools`   | string[]  | Não         | Todas          | Whitelist de ferramentas permitidas         |
 | `deniedTools`    | string[]  | Não         | `[]`           | Blacklist de ferramentas proibidas          |
 | `maxTokens`      | integer   | Não         | Padrão modelo  | Contagem máxima de tokens de resposta       |
-| `temperature`    | float     | Não         | Padrão modelo  | Aleatoriedade da resposta (0.0–2.0)        |
+| `temperature` | float | Não | Padrão modelo | Aleatoriedade da resposta (0.0 to 2.0) |
 | `maxFileSize`    | integer   | Não         | 10MB           | Tamanho máximo de arquivo que o agente lê  |
 
 > [!IMPORTANT]
-> `allowedTools` e `deniedTools` são padrões mutuamente exclusivos. Se você especificar `allowedTools`, todas as outras ferramentas são implicitamente negadas. Se você especificar `deniedTools`, todas as ferramentas exceto as listadas são implicitamente permitidas. Não use ambos no mesmo bloco de restrições — o comportamento é indefinido.
+> `allowedTools` e `deniedTools` são padrões mutuamente exclusivos. Se você especificar `allowedTools`, todas as outras ferramentas são implicitamente negadas. Se você especificar `deniedTools`, todas as ferramentas exceto as listadas são implicitamente permitidas. Não use ambos no mesmo bloco de restrições, o comportamento é indefinido.
 
 ---
 
@@ -364,7 +364,7 @@ Restrições limitam o que um agente pode fazer, prevenindo uso indevido ou dano
     "O subagente cria seu próprio escopo de permissão automaticamente"
   ],
   "correct": 2,
-  "explanation": "Subagentes herdam o escopo de permissão do agente pai por padrão. Isso significa que se o agente primário tem permissão para executar comandos bash, o subagente também pode executá-los. Esta é uma consideração de segurança — sempre escope explicitamente as permissões do subagente para operações sensíveis."
+  "explanation": "Subagentes herdam o escopo de permissão do agente pai por padrão. Isso significa que se o agente primário tem permissão para executar comandos bash, o subagente também pode executá-los. Esta é uma consideração de segurança: sempre escope explicitamente as permissões do subagente para operações sensíveis."
 }
 ```
 
@@ -396,7 +396,7 @@ Restrições limitam o que um agente pode fazer, prevenindo uso indevido ou dano
     "O agente padrão, porque a consulta não corresponde exatamente a nenhuma regra"
   ],
   "correct": 0,
-  "explanation": "As regras de roteamento são avaliadas em ordem. Se 'deploy' para deploy-agent é definida antes de 'deploy produção' para prod-deploy-agent, a primeira regra correspondente vence. A consulta 'fazer deploy para produção' contém 'deploy', então corresponde à primeira regra. A ordem importa — coloque regras mais específicas antes das gerais."
+  "explanation": "As regras de roteamento são avaliadas em ordem. Se 'deploy' para deploy-agent é definida antes de 'deploy produção' para prod-deploy-agent, a primeira regra correspondente vence. A consulta 'fazer deploy para produção' contém 'deploy', então corresponde à primeira regra. A ordem importa: coloque regras mais específicas antes das gerais."
 }
 ```
 
@@ -411,6 +411,6 @@ Restrições limitam o que um agente pode fazer, prevenindo uso indevido ou dano
 - Restrições limitam capacidades do agente através de whitelists, blacklists, limites de recursos e temperatura
 - O campo `prompt` é opcional mas essencial para guiar o comportamento do agente além do padrão
 - Múltiplos agentes podem usar diferentes modelos de diferentes provedores na mesma configuração
-- Regras de roteamento são avaliadas em ordem — coloque padrões específicos antes dos gerais
+- Regras de roteamento são avaliadas em ordem: coloque padrões específicos antes dos gerais
 - Subagentes herdam permissões dos pais por padrão, exigindo revisão cuidadosa de segurança
 - Restrições de temperatura controlam criatividade vs. determinismo nas respostas do agente

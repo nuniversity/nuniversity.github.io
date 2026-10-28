@@ -8,20 +8,20 @@ difficulty: "beginner"
 
 # Foundations of Agent Memory
 
-Memory is what separates a stateless chatbot from a truly intelligent agent. Without memory, every interaction starts from scratch — the agent cannot learn, personalize, or carry context across turns.
+Memory is what separates a stateless chatbot from a truly intelligent agent. Without memory, every interaction starts from scratch: the agent cannot learn, personalize, or carry context across turns.
 
 ---
 
 ## Why Agents Need Memory
 
-Modern LLMs are stateless by nature: they process a single context window and forget everything once the response is generated. Agents, however, operate over multiple steps — they call tools, revisit earlier conclusions, and interact with users over long sessions.
+Modern LLMs are stateless by nature: they process a single context window and forget everything once the response is generated. Agents, however, operate over multiple steps: they call tools, revisit earlier conclusions, and interact with users over long sessions.
 
 Memory enables:
 
-- **Continuity** — the agent remembers what was said earlier in the conversation
-- **Personalization** — user preferences persist across sessions
-- **Learning** — facts extracted from one interaction inform future ones
-- **Coherence** — multi-step reasoning chains stay consistent
+- **Continuity**: the agent remembers what was said earlier in the conversation
+- **Personalization**: user preferences persist across sessions
+- **Learning**: facts extracted from one interaction inform future ones
+- **Coherence**: multi-step reasoning chains stay consistent
 
 > [!WARNING]
 > Without explicit memory, an agent cannot distinguish between "tell me about my last order" and "tell me about your capabilities." The context window alone is insufficient for persistent knowledge.
@@ -49,7 +49,7 @@ The capacity of short-term memory can be modeled mathematically:
 { "expression": "C = \\frac{T}{t_{process}}", "display": true }
 ```
 
-Where **C** is capacity (number of items), **T** is the time window available, and **t_process** is the processing time per item. This explains why LLMs have finite context windows — they can only "hold" a limited number of distinct tokens in working memory.
+Where **C** is capacity (number of items), **T** is the time window available, and **t_process** is the processing time per item. This explains why LLMs have finite context windows: they can only "hold" a limited number of distinct tokens in working memory.
 
 ---
 
@@ -103,7 +103,7 @@ Where **C** is capacity (number of items), **T** is the time window available, a
     "They don't use context windows"
   ],
   "correct": 1,
-  "explanation": "LLMs are stateless because they process each input independently — they have no built-in mechanism to carry context or memory across interactions."
+  "explanation": "LLMs are stateless because they process each input independently; they have no built-in mechanism to carry context or memory across interactions."
 }
 ```
 
@@ -119,7 +119,7 @@ Where **C** is capacity (number of items), **T** is the time window available, a
     "Semantic memory"
   ],
   "correct": 2,
-  "explanation": "Episodic memory records specific past events with temporal context — like episodes of a TV show."
+  "explanation": "Episodic memory records specific past events with temporal context, like episodes of a TV show."
 }
 ```
 
@@ -135,7 +135,7 @@ Where **C** is capacity (number of items), **T** is the time window available, a
     "It requires external databases"
   ],
   "correct": 1,
-  "explanation": "The context window has a fixed token limit and is completely reset between sessions — making it unsuitable for persistent knowledge."
+  "explanation": "The context window has a fixed token limit and is completely reset between sessions, making it unsuitable for persistent knowledge."
 }
 ```
 
@@ -151,7 +151,7 @@ Where **C** is capacity (number of items), **T** is the time window available, a
     "Working memory"
   ],
   "correct": 2,
-  "explanation": "Semantic memory stores general factual knowledge — things that are true regardless of when or where you learned them."
+  "explanation": "Semantic memory stores general factual knowledge: things that are true regardless of when or where you learned them."
 }
 ```
 
@@ -167,7 +167,7 @@ Where **C** is capacity (number of items), **T** is the time window available, a
     "More training data"
   ],
   "correct": 1,
-  "explanation": "Long-term memory allows the agent to persist user preferences, facts, and history across sessions — enabling personalization."
+  "explanation": "Long-term memory allows the agent to persist user preferences, facts, and history across sessions, enabling personalization."
 }
 ```
 

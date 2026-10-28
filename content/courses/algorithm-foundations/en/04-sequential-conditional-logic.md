@@ -73,7 +73,7 @@ END ALGORITHM
 ```
 
 > [!NOTE]
-> Notice that this algorithm is purely sequential. It does not handle what happens if the PIN is wrong or if the balance is insufficient. We need conditional logic for that -- which we'll cover next.
+> Notice that this algorithm is purely sequential. It does not handle what happens if the PIN is wrong or if the balance is insufficient. We need conditional logic for that; which we'll cover next.
 
 ## Conditional Logic: Making Choices
 
@@ -318,7 +318,7 @@ flowchart TD
 | Aspect | Sequential Logic | Conditional Logic |
 |---|---|---|
 | **Execution** | Linear, one step after another | Branches based on conditions |
-| **Flexibility** | Low -- always does the same thing | High -- adapts to different situations |
+| **Flexibility** | Low, always does the same thing | High, adapts to different situations |
 | **Complexity** | Simple to understand and trace | More complex, requires careful planning |
 | **Use when** | Every situation is the same | Different situations need different responses |
 | **Example** | Adding two numbers | Deciding if a number is positive or negative |

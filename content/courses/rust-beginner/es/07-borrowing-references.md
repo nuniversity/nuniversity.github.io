@@ -1,6 +1,6 @@
 ---
 title: "Préstamo y Referencias"
-description: "Aprende referencias, referencias mutables, reglas de préstamo y slices — la clave para usar datos sin tomar ownership"
+description: "Aprende referencias, referencias mutables, reglas de préstamo y slices, la clave para usar datos sin tomar ownership"
 order: 7
 duration: "30 minutos"
 difficulty: "principiante"
@@ -8,7 +8,7 @@ difficulty: "principiante"
 
 # Préstamo y Referencias
 
-El préstamo permite usar un valor sin tomar ownership. En lugar de mover datos, pasas una **referencia** — un puntero que sigue reglas estrictas impuestas en tiempo de compilación.
+El préstamo permite usar un valor sin tomar ownership. En lugar de mover datos, pasas una **referencia**: un puntero que sigue reglas estrictas impuestas en tiempo de compilación.
 
 ## Referencias (Préstamo Inmutable)
 
@@ -163,7 +163,7 @@ fn main() {
 }
 ```
 
-## Slices — Referencias a Elementos Contiguos
+## Slices: Referencias a Elementos Contiguos
 
 Los slices son referencias a una secuencia contigua dentro de una colección. Son **punteros gordos** (puntero + longitud).
 

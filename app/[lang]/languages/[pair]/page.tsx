@@ -33,12 +33,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
   const [source, target] = params.pair.split('-')
-  const base = dict.metadata?.languages?.title || 'Language Practice — Flashcards & Translation Quizzes'
+  const base = dict.metadata?.languages?.title || 'Language Practice: Flashcards & Translation Quizzes'
   const chip = source && target ? `${source.toUpperCase()} → ${target.toUpperCase()}` : params.pair
 
   return {
     alternates: buildAlternates(params.lang, `languages/${params.pair}`),
-    title: `${chip} — ${base}`,
+    title: `${chip}: ${base}`,
     description:
       dict.metadata?.languages?.description ||
       'Interactive flashcards and translation quizzes with progress tracking.' }

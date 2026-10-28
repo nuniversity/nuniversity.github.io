@@ -12,7 +12,7 @@ Bancos de dados relacionais armazenam dados em várias tabelas. JOINs permitem r
 
 ## Fundamentos do INNER JOIN
 
-Um INNER JOIN retorna linhas onde a condição de junção é correspondente — linhas que não correspondem são descartadas de ambos os lados.
+Um INNER JOIN retorna linhas onde a condição de junção é correspondente: linhas que não correspondem são descartadas de ambos os lados.
 
 ```sql
 SELECT *
@@ -44,7 +44,7 @@ INNER JOIN departments d
     ON e.department_id = d.department_id;
 ```
 
-Equi-joins mapeiam chaves estrangeiras para chaves primárias. Os nomes das colunas não precisam corresponder — apenas os valores.
+Equi-joins mapeiam chaves estrangeiras para chaves primárias. Os nomes das colunas não precisam corresponder: apenas os valores.
 
 ```sql
 -- Nomes de colunas diferentes, mesmos valores
@@ -94,7 +94,7 @@ INNER JOIN tasks t ON p.project_id = t.project_id
 WHERE e.hire_date >= '2023-01-01';
 ```
 
-Esta consulta começa com employees, filtra por data de contratação e então junta para fora — o filtro WHERE acontece conceitualmente antes da projeção final, mas o otimizador do banco de dados reordena essas etapas.
+Esta consulta começa com employees, filtra por data de contratação e então junta para fora, o filtro WHERE acontece conceitualmente antes da projeção final, mas o otimizador do banco de dados reordena essas etapas.
 
 > [!NOTE]
 > A ordem dos JOINs na sua consulta não garante a ordem de execução. Otimizadores modernos reorganizam joins com base em estatísticas, contagens de linhas e índices disponíveis.
@@ -128,7 +128,7 @@ NATURAL JOIN departments;
 
 | Prós | Contras |
 |------|---------|
-| Menos digitação | Implícito — pode quebrar quando o esquema muda |
+| Menos digitação | Implícito: pode quebrar quando o esquema muda |
 | Limpo para esquemas bem nomeados | Difícil de depurar correspondências não intencionais |
 
 > [!WARNING]
@@ -191,7 +191,7 @@ ORDER BY o.order_date DESC, c.name;
 ```
 
 > [!SUCCESS]
-> Pense no INNER JOIN como um filtro em ambas as tabelas — apenas linhas correspondentes sobrevivem. Cada linha no resultado tem garantia de ter um parceiro em ambos os lados.
+> Pense no INNER JOIN como um filtro em ambas as tabelas: apenas linhas correspondentes sobrevivem. Cada linha no resultado tem garantia de ter um parceiro em ambos os lados.
 
 ## Perguntas de Prática
 

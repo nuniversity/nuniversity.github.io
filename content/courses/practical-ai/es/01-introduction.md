@@ -7,7 +7,7 @@ difficulty: "principiante"
 author: "Google Gemini y traducida por OpenAI Chatgpt"
 ---
 
-## IA Explicada – Tu Nueva Superherramienta Digital
+## IA Explicada: Tu Nueva Superherramienta Digital
 
 ¡Bienvenido! Este curso es sobre cómo hacer que la Inteligencia Artificial (IA) trabaje contigo, no contra ti.  
 
@@ -63,7 +63,7 @@ Es cuando la computadora **aprende sin que nadie le diga todas las reglas paso a
 **Ejemplo simple: enseñar a un niño qué es un cuadrado.**
 
 - **Forma antigua (programación clásica):** le dices “si los cuatro lados son iguales y los ángulos son rectos, es un cuadrado.”  
-- **Machine Learning:** le muestras muchas imágenes (cuadrados, círculos, triángulos) y le dices cuáles son cuadrados. El niño –o la computadora– aprende a reconocerlos solo.
+- **Machine Learning:** le muestras muchas imágenes (cuadrados, círculos, triángulos) y le dices cuáles son cuadrados. El niño, o la computadora, aprende a reconocerlos solo.
 
 Así funcionan los modelos de ML: son **máquinas que hacen predicciones** basadas en patrones de datos pasados.
 

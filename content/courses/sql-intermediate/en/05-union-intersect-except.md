@@ -72,7 +72,7 @@ ORDER BY event_time;
 > |-------|-----------|
 > | Removes duplicates | Preserves duplicates |
 > | Sorts internally (dedup) | Appends only |
-> | Slower on large sets | Faster — no sorting overhead |
+> | Slower on large sets | Faster: no sorting overhead |
 > | Use when you want distinct rows | Use when duplicates are acceptable or desired |
 
 ### UNION vs UNION ALL: Performance
@@ -179,11 +179,11 @@ SELECT product_id FROM top_selling_products;
 
 | Expression | Meaning |
 |------------|---------|
-| `A UNION B INTERSECT C` | `A UNION (B INTERSECT C)` — INTERSECT binds tighter |
+| `A UNION B INTERSECT C` | `A UNION (B INTERSECT C)`: INTERSECT binds tighter |
 | `(A UNION B) INTERSECT C` | Union first, then intersect (override with parentheses) |
 
 > [!WARNING]
-> INTERSECT binds more tightly than UNION in SQL standard. Always use parentheses to make your intent explicit — this is one area where clarity matters more than brevity.
+> INTERSECT binds more tightly than UNION in SQL standard. Always use parentheses to make your intent explicit; this is one area where clarity matters more than brevity.
 
 ## Practical Patterns
 

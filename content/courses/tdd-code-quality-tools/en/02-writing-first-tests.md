@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Writing Your First Tests
 
-Now that you understand the TDD mindset, it's time to write real tests. We'll use **pytest** — the most popular testing framework for Python — to build a solid testing foundation.
+Now that you understand the TDD mindset, it's time to write real tests. We'll use **pytest**, the most popular testing framework for Python, to build a solid testing foundation.
 
 ## Why pytest?
 
@@ -97,7 +97,7 @@ markers =
 
 ## Core Assertions in pytest
 
-pytest uses Python's built-in `assert` with **rich introspection** — when an assertion fails, pytest shows you the values of all expressions involved.
+pytest uses Python's built-in `assert` with **rich introspection**: when an assertion fails, pytest shows you the values of all expressions involved.
 
 ```python
 # test_assertions.py

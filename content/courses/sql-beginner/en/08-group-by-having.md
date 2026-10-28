@@ -1,12 +1,12 @@
 ---
-title: "GROUP BY and HAVING — Grouping and Filtering Aggregates"
+title: "GROUP BY and HAVING, Grouping and Filtering Aggregates"
 description: "Master GROUP BY, aggregate functions (COUNT, SUM, AVG, MIN, MAX), and understand HAVING vs WHERE"
 order: 8
 duration: "20-30 minutes"
 difficulty: "beginner"
 ---
 
-# GROUP BY and HAVING — Grouping and Filtering Aggregates
+# GROUP BY and HAVING: Grouping and Filtering Aggregates
 
 Raw data is noisy. Aggregation lets you summarize thousands of rows into meaningful metrics: totals, averages, counts, and extremes.
 
@@ -34,7 +34,7 @@ FROM employees;
 > [!NOTE]
 > Aggregate functions ignore `NULL` values (except `COUNT(*)` which counts rows, not values). `AVG(NULL, 10, 20)` = 15, not 10.
 
-## GROUP BY — Grouping Rows
+## GROUP BY: Grouping Rows
 
 `GROUP BY` divides rows into groups and applies aggregate functions to each group:
 
@@ -86,7 +86,7 @@ GROUP BY department;
 
 Filtering order: `WHERE` → `GROUP BY` → aggregate functions
 
-## HAVING — Filtering Groups
+## HAVING: Filtering Groups
 
 `WHERE` cannot filter aggregate results because aggregates don't exist yet when `WHERE` runs. Use `HAVING` instead:
 
@@ -197,13 +197,13 @@ ORDER BY return_rate_pct DESC;
 
 Understanding the order in which SQL processes clauses helps you write correct queries:
 
-1. `FROM` / `JOIN` — identify source tables
-2. `WHERE` — filter individual rows
-3. `GROUP BY` — group rows
-4. `HAVING` — filter groups
-5. `SELECT` — compute expressions and aliases
-6. `ORDER BY` — sort results
-7. `LIMIT` / `OFFSET` — paginate
+1. `FROM` / `JOIN`: identify source tables
+2. `WHERE`: filter individual rows
+3. `GROUP BY`: group rows
+4. `HAVING`: filter groups
+5. `SELECT`: compute expressions and aliases
+6. `ORDER BY`: sort results
+7. `LIMIT` / `OFFSET`: paginate
 
 This explains why `WHERE` cannot use aliases from SELECT, but `ORDER BY` can.
 

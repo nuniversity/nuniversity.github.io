@@ -8,7 +8,7 @@ difficulty: "iniciante"
 
 # Laços (for e while)
 
-Laços permitem repetir código várias vezes — essencial para processar dados, automatizar tarefas e construir programas eficientes.
+Laços permitem repetir código várias vezes: essencial para processar dados, automatizar tarefas e construir programas eficientes.
 
 ## O Laço for
 
@@ -66,11 +66,11 @@ print("Access granted!")
 ```
 
 > [!WARNING]
-> Sempre garanta que a condição do laço while eventualmente se torne False — caso contrário você cria um loop infinito!
+> Sempre garanta que a condição do laço while eventualmente se torne False: caso contrário você cria um loop infinito!
 
 ## break e continue
 
-### break — Sai do laço completamente
+### break: Sai do laço completamente
 ```python
 for i in range(100):
     if i == 5:
@@ -79,7 +79,7 @@ for i in range(100):
 # Imprime: 0 1 2 3 4
 ```
 
-### continue — Pula para a próxima iteração
+### continue: Pula para a próxima iteração
 ```python
 for i in range(10):
     if i % 2 == 0:
@@ -117,7 +117,7 @@ for n in range(2, 10):
         print(f"{n} is prime")
 ```
 
-## enumerate — Laço com Índice
+## enumerate: Laço com Índice
 
 ```python
 colors = ["red", "green", "blue"]
@@ -126,7 +126,7 @@ for index, color in enumerate(colors):
 # 0: red, 1: green, 2: blue
 ```
 
-## zip — Percorrer Múltiplas Listas Juntas
+## zip: Percorrer Múltiplas Listas Juntas
 
 ```python
 names = ["Alice", "Bob", "Charlie"]

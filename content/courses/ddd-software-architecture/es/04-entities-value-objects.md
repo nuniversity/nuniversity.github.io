@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Entidades y Objetos de Valor
 
-Las entidades y los objetos de valor son los **dos bloques de construcción fundamentales** de un modelo de dominio en DDD. Juntos forman los átomos a partir de los cuales se construyen estructuras más ricas, como los agregados. Comprender la distinción entre ambos — y aplicarla correctamente — es esencial para un modelo de dominio limpio.
+Las entidades y los objetos de valor son los **dos bloques de construcción fundamentales** de un modelo de dominio en DDD. Juntos forman los átomos a partir de los cuales se construyen estructuras más ricas, como los agregados. Comprender la distinción entre ambos, y aplicarla correctamente, es esencial para un modelo de dominio limpio.
 
 > [!NOTE]
 > Eric Evans define una entidad como «un objeto que no se define por sus atributos, sino por un hilo de continuidad e identidad». Un objeto de valor es «un objeto que describe alguna característica o atributo, pero que no lleva ningún concepto de identidad».

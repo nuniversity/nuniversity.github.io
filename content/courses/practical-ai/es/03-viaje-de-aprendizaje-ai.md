@@ -15,7 +15,7 @@ Llegamos al último módulo de este recorrido. Aquí descubrirás un tipo de IA 
 
 ### Herramientas de Imagen y Creación
 
-#### IA Generativa — ¡La IA que crea desde cero!
+#### IA Generativa: ¡La IA que crea desde cero!
 
 Hasta ahora vimos cómo la IA puede analizar o resumir información ya existente. Pero la **IA generativa** va un paso más allá: puede crear algo completamente nuevo a partir de tus indicaciones.  
 
@@ -36,8 +36,8 @@ Los ejemplos más conocidos son los generadores de imágenes como **DALL·E, Mid
 
 **Tu reto creativo:** Busca una herramienta gratuita de texto a imagen (varias ofrecen créditos gratis).
 
-**Paso 1 – La idea:** Piensa en un tema (un animal, un paisaje o un objeto).  
-**Paso 2 – El prompt:** Escribe tu descripción incluyendo:  
+**Paso 1: La idea:** Piensa en un tema (un animal, un paisaje o un objeto).
+**Paso 2: El prompt:** Escribe tu descripción incluyendo:
 * **El sujeto** (ej: un barco pirata)  
 * **El estilo** (ej: pintura en acuarela)  
 * **La iluminación o el ambiente** (ej: atardecer, luces cálidas)  
@@ -65,7 +65,7 @@ Tú eres el Chef principal, la IA es tu ayudante de cocina. No dejas que ella pr
 #### Nuevos hábitos con IA
 
 1. **Antes de empezar cualquier tarea**, pregúntate:  
-   – “¿Podría la IA hacer la primera parte por mí?”  
+   – “¿Podría la IA hacer la primera parte por mí?”
    Ejemplo: antes de escribir un correo largo, pídele a ChatGPT que redacte un borrador.  
    Antes de analizar datos, prueba con **Analizar Datos** en Excel para detectar patrones.
 2. **Usa la IA para organizarte:**  

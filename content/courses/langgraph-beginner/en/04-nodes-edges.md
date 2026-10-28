@@ -340,7 +340,7 @@ START → A → B → END
          ↓
          C → END
 ```
-(Conditional edges — covered in lesson 9 — determine which path to take)
+(Conditional edges, covered in lesson 9, determine which path to take)
 
 ---
 
@@ -510,6 +510,6 @@ START → A → B → END
 - Edges define topology: `add_edge('A', 'B')` means B runs after A
 - `START` and `END` constants mark entry and exit points
 - Fan-out enables parallel execution; fan-in synchronizes multiple branches
-- Never mutate state directly — always return a dict of updates
+- Never mutate state directly: always return a dict of updates
 - Use a single responsibility per node for composability and testing
 - Multiple `add_edge(START, ...)` calls create parallel entry points

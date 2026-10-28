@@ -14,7 +14,7 @@ As regras de elisão de lifetime do Rust tornam a maioria das anotações de lif
 
 O compilador aplica estas regras automaticamente:
 
-### Regra 1 — Lifetimes de Entrada
+### Regra 1: Lifetimes de Entrada
 
 Cada referência elidida em parâmetros de função ganha um lifetime **distinto**:
 
@@ -24,7 +24,7 @@ Cada referência elidida em parâmetros de função ganha um lifetime **distinto
 fn foo<'a, 'b>(x: &'a i32, y: &'b str) {}
 ```
 
-### Regra 2 — Lifetime de Entrada Único
+### Regra 2: Lifetime de Entrada Único
 
 Se houver exatamente um lifetime de entrada, ele é atribuído a todas as referências de saída:
 
@@ -34,7 +34,7 @@ Se houver exatamente um lifetime de entrada, ele é atribuído a todas as refer�
 fn first_word<'a>(s: &'a str) -> &'a str { unimplemented!() }
 ```
 
-### Regra 3 — Receptor de Método
+### Regra 3: Receptor de Método
 
 Se houver `&self` ou `&mut self`, seu lifetime é atribuído a todas as referências de saída:
 

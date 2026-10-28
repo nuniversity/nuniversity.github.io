@@ -11,16 +11,16 @@ difficulty: "intermediate"
 Los patrones de diseño son soluciones reutilizables a problemas comunes del diseño de software. No son diseños terminados que copias y pegas, sino plantillas para resolver problemas dentro de un contexto. Los patrones representan enfoques probados en batalla que han evolucionado durante décadas.
 
 > [!NOTE]
-> El concepto de patrones de diseño lo popularizó la "Gang of Four" (GoF) — Erich Gamma, Richard Helm, Ralph Johnson y John Vlissides — en su libro de 1994 *Design Patterns: Elements of Reusable Object-Oriented Software*.
+> El concepto de patrones de diseño lo popularizó la "Gang of Four" (GoF), Erich Gamma, Richard Helm, Ralph Johnson y John Vlissides, en su libro de 1994 *Design Patterns: Elements of Reusable Object-Oriented Software*.
 
 ## ¿Qué son los patrones de diseño?
 
 Un patrón de diseño describe un problema que se repite, el núcleo de la solución y las consecuencias de aplicarla. Cada patrón tiene cuatro elementos esenciales:
 
-1. **Nombre del patrón** — una etiqueta para describirlo
-2. **Problema** — cuándo aplicar el patrón
-3. **Solución** — los elementos y sus relaciones
-4. **Consecuencias** — compensaciones y resultados
+1. **Nombre del patrón**: una etiqueta para describirlo
+2. **Problema**: cuándo aplicar el patrón
+3. **Solución**: los elementos y sus relaciones
+4. **Consecuencias**: compensaciones y resultados
 
 ```python
 # Without a pattern: ad-hoc approach to creating objects

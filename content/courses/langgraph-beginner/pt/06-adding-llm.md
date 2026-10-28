@@ -195,7 +195,7 @@ def agent_node(state: ToolState) -> dict:
 ```
 
 [!WARNING]
-Quando um LLM retorna chamadas de ferramenta, você precisa executá-las em um nó separado. O LLM apenas gera a requisição — ele não executa a ferramenta. Isso é abordado em detalhes na Lição 7.
+Quando um LLM retorna chamadas de ferramenta, você precisa executá-las em um nó separado. O LLM apenas gera a requisição: ele não executa a ferramenta. Isso é abordado em detalhes na Lição 7.
 
 ---
 
@@ -433,7 +433,7 @@ print(f"Keywords: {', '.join(result['keywords'])}")
   "type": "multiple-choice",
   "question": "Em uma cadeia LLM multi-passo, como a saída de um nó fica disponível para o próximo?",
   "options": [
-    "Através do estado compartilhado — um nó escreve no estado, outro lê",
+    "Através do estado compartilhado: um nó escreve no estado, outro lê",
     "Via chamadas de função diretas entre nós",
     "Através de uma fila de mensagens",
     "Não fica; cada nó começa do zero"

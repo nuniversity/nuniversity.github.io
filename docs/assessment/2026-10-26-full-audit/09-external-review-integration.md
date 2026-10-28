@@ -341,6 +341,21 @@ choose "1.1 O candidato alvo"   -> intro + 395 chars, starts with that heading
                                 (whole lesson = 38,595 chars)
 ```
 
+**Placement.** The control lives in the lesson outline, under the course title
+and above the lesson list — not at the top of the content card. The outline is
+sticky on desktop, so play/pause, restart and the section picker stay reachable
+while the reader scrolls; on mobile they are in the same drawer the outline
+uses. The outline already collects the headings and tracks the active one, so it
+passes both down (`sections`, `activeSectionId`): there is one definition of a
+"section" for the TOC and for the audio, and "the section I am reading" is
+whatever the outline currently highlights.
+
+**Syllabus disclosure.** The lesson list is long (16 entries for CLF-C02) and
+pushed the page outline below the fold. It is now a `<button aria-expanded>`
+disclosure — with the count in the label — that starts **collapsed** and
+remembers the reader's choice in `lesson-outline-lessons-open`. With it closed,
+the audio player and "On this page" fit above the fold.
+
 **Controls.** Play/pause, restart (↺) and stop (■) are always mounted; restart
 and stop are disabled while nothing is playing, so they are discoverable rather
 than appearing out of nowhere. Restart re-queues the current selection from its

@@ -1,12 +1,12 @@
 ---
-title: "Domain 1.3 — Snowflake Object Hierarchy and Types"
+title: "Domain 1.3, Snowflake Object Hierarchy and Types"
 description: "Understand how Snowflake organizes objects: organizations, accounts, databases, schemas, and all database-level objects including tables, views, stages, pipes, streams, tasks, and more."
 order: 3
 difficulty: intermediate
 duration: "60 min"
 ---
 
-# Domain 1.3 — Snowflake Object Hierarchy and Types
+# Domain 1.3: Snowflake Object Hierarchy and Types
 
 ## Exam Weight
 
@@ -46,7 +46,7 @@ flowchart TD
 
 ## Organization
 
-An **Organization** is the top-level Snowflake entity — it groups multiple Snowflake accounts under a single umbrella:
+An **Organization** is the top-level Snowflake entity; it groups multiple Snowflake accounts under a single umbrella:
 
 - Enables **cross-account features**: replication, Snowflake Marketplace publishing, usage reporting
 - Managed by the `ORGADMIN` system role
@@ -62,7 +62,7 @@ SHOW ORGANIZATION ACCOUNTS;
 
 ## Account-Level Objects
 
-These objects exist at the **account level** — they are not contained within a database.
+These objects exist at the **account level**; they are not contained within a database.
 
 | Object | Description |
 |---|---|
@@ -130,13 +130,13 @@ CREATE SCHEMA ANALYTICS.MARTS;
 
 ### Tables
 
-Snowflake has multiple table types — understanding the differences is heavily tested:
+Snowflake has multiple table types: understanding the differences is heavily tested:
 
 | Table Type | Persistence | Time Travel | Fail-Safe | Storage Cost |
 |---|---|---|---|---|
-| **Permanent** | Until dropped | 0–90 days | 7 days | Full |
-| **Temporary** | Session only | 0–1 day | None | Full (while session active) |
-| **Transient** | Until dropped | 0–1 day | None | Reduced |
+| **Permanent** | Until dropped | 0 to 90 days | 7 days | Full |
+| **Temporary** | Session only | 0 to 1 day | None | Full (while session active) |
+| **Transient** | Until dropped | 0 to 1 day | None | Reduced |
 | **External** | Never (metadata only) | None | None | Minimal (metadata only) |
 | **Apache Iceberg** | Until dropped | Configurable | Configurable | Via Iceberg catalog |
 | **Dynamic** | Until dropped | Configurable | Configurable | Full |
@@ -196,7 +196,7 @@ SELECT id, name FROM customers;
 ```
 
 > [!NOTE]
-> **Materialized Views** are automatically maintained by Snowflake's background services — no warehouse is needed for the refresh. They are used to accelerate repeated expensive queries.
+> **Materialized Views** are automatically maintained by Snowflake's background services: no warehouse is needed for the refresh. They are used to accelerate repeated expensive queries.
 
 ### Stages
 
@@ -204,10 +204,10 @@ A **stage** is a named location where data files are stored for loading or unloa
 
 | Stage Type | Location | Auth Managed By |
 |---|---|---|
-| **Internal — User** | Snowflake-managed storage, per user | Snowflake |
-| **Internal — Table** | Snowflake-managed storage, per table | Snowflake |
-| **Internal — Named** | Snowflake-managed storage | Snowflake |
-| **External — Named** | S3 / Azure Blob / GCS bucket | Customer |
+| **Internal: User** | Snowflake-managed storage, per user | Snowflake |
+| **Internal: Table** | Snowflake-managed storage, per table | Snowflake |
+| **Internal: Named** | Snowflake-managed storage | Snowflake |
+| **External: Named** | S3 / Azure Blob / GCS bucket | Customer |
 
 ```sql
 -- Internal named stage
@@ -278,7 +278,7 @@ FROM orders_stream;
 ```
 
 > [!NOTE]
-> Streams have an **offset** — once you consume the stream (e.g., in a Task or DML), the offset advances. Streams track changes using **Snowflake's Time Travel** internally.
+> Streams have an **offset**: once you consume the stream (e.g., in a Task or DML), the offset advances. Streams track changes using **Snowflake's Time Travel** internally.
 
 ### Tasks
 
@@ -373,7 +373,7 @@ CALL load_daily_data('2025-01-15');
 
 ### Shares
 
-A **Share** is an object that enables **Secure Data Sharing** — granting read-only access to data in your account to another Snowflake account without copying data:
+A **Share** is an object that enables **Secure Data Sharing**: granting read-only access to data in your account to another Snowflake account without copying data:
 
 ```sql
 -- Provider side: create and populate a share
@@ -392,7 +392,7 @@ ALTER SHARE sales_share ADD ACCOUNTS = consumer_account_id;
 
 ### Session Context
 
-Snowflake maintains context for each session — the currently active account, role, warehouse, database, and schema:
+Snowflake maintains context for each session: the currently active account, role, warehouse, database, and schema:
 
 ```sql
 -- View current context

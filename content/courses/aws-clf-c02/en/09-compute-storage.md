@@ -1,13 +1,13 @@
 ---
 title: "Compute and Storage Services"
-description: "Domain 3's two biggest service families in one lesson: read an EC2 instance name, pick the right family and sizing, choose between the seven purchasing options, run elasticity with Auto Scaling groups, decide Lambda versus containers versus Beanstalk, then match every workload to the right storage — S3 classes and lifecycle, EBS volume types and snapshots, instance store, EFS versus FSx, Storage Gateway, the Snow Family and AWS Backup — with a final S3 vs EBS vs EFS decision table."
+description: "Domain 3's two biggest service families in one lesson: read an EC2 instance name, pick the right family and sizing, choose between the seven purchasing options, run elasticity with Auto Scaling groups, decide Lambda versus containers versus Beanstalk, then match every workload to the right storage, S3 classes and lifecycle, EBS volume types and snapshots, instance store, EFS versus FSx, Storage Gateway, the Snow Family and AWS Backup, with a final S3 vs EBS vs EFS decision table."
 order: 9
 difficulty: "beginner"
 duration: "75 minutes"
 ---
 # Compute and Storage Services
 
-**Domain 3 (Cloud Technology and Services) carries 34% of the CLF-C02 score**, and two of its task statements do most of the work: **Task 3.3 "Identify AWS compute services"** and **Task 3.6 "Identify AWS storage services"**. Task 3.3 asks you to recognise instance types, containers, serverless options, that *"auto scaling provides elasticity"* and the purposes of load balancers; Task 3.6 asks you to identify object, block and file services, the differences between S3 storage classes, lifecycle policies and AWS Backup. Add the compute half of **Domain 4 Task 4.1** — the seven purchasing options — and this single lesson covers material that shows up across **two domains**.
+**Domain 3 (Cloud Technology and Services) carries 34% of the CLF-C02 score**, and two of its task statements do most of the work: **Task 3.3 "Identify AWS compute services"** and **Task 3.6 "Identify AWS storage services"**. Task 3.3 asks you to recognise instance types, containers, serverless options, that *"auto scaling provides elasticity"* and the purposes of load balancers; Task 3.6 asks you to identify object, block and file services, the differences between S3 storage classes, lifecycle policies and AWS Backup. Add the compute half of **Domain 4 Task 4.1**, the seven purchasing options, and this single lesson covers material that shows up across **two domains**.
 
 ```text
 ====================================================================
@@ -50,7 +50,7 @@ duration: "75 minutes"
 ```
 
 > [!NOTE]
-> **Scope discipline.** Every service presented as examinable below sits on the official CLF-C02 in-scope list or in a Domain 3/4 task statement. Two compute services — **AWS Copilot** and **AWS Wavelength** — and one storage service — **Amazon FSx for Lustre** — are explicitly **out of scope** and appear here only so you can eliminate them. The **Snow Family** appears on *neither* list, and **Amazon AppStream 2.0, Amazon WorkSpaces and Amazon WorkSpaces Secure Browser** belong to task 3.8 (virtual desktops), not to our task 3.3.
+> **Scope discipline.** Every service presented as examinable below sits on the official CLF-C02 in-scope list or in a Domain 3/4 task statement. Two compute services, **AWS Copilot** and **AWS Wavelength**, and one storage service, **Amazon FSx for Lustre**, are explicitly **out of scope** and appear here only so you can eliminate them. The **Snow Family** appears on *neither* list, and **Amazon AppStream 2.0, Amazon WorkSpaces and Amazon WorkSpaces Secure Browser** belong to task 3.8 (virtual desktops), not to our task 3.3.
 
 In this lesson you will:
 
@@ -76,54 +76,54 @@ In this lesson you will:
 
 ### 1.1 What an instance is
 
-AWS defines the building block in one sentence: *"An EC2 instance is a virtual server in the AWS Cloud."* Amazon EC2 *"provides on-demand, scalable computing capacity"*, and the single most consequential choice you make at launch is this one: *"When you launch an instance, the instance type that you specify determines the hardware of the host computer used for your instance."* Instance type is therefore not a pricing toggle — it is a **hardware decision** (CPU generation, memory ratio, local disk, GPU, network) that then determines the price.
+AWS defines the building block in one sentence: *"An EC2 instance is a virtual server in the AWS Cloud."* Amazon EC2 *"provides on-demand, scalable computing capacity"*, and the single most consequential choice you make at launch is this one: *"When you launch an instance, the instance type that you specify determines the hardware of the host computer used for your instance."* Instance type is therefore not a pricing toggle; it is a **hardware decision** (CPU generation, memory ratio, local disk, GPU, network) that then determines the price.
 
 | Term | What it means on the exam |
 |---|---|
 | **Instance** | A virtual server running on an AWS host computer |
 | **Instance type** | The hardware specification: family + size; decides CPU, memory, storage, networking |
 | **AMI** | The image that supplies the software needed to *set up and boot* the instance |
-| **Key pair** | Public key stays with AWS, private key stays with you — used to prove login identity |
+| **Key pair** | Public key stays with AWS, private key stays with you: used to prove login identity |
 | **Security group** | The virtual firewall attached to the instance's network interfaces |
-| **Launch template** | A saved recipe (AMI, type, network settings) — what an Auto Scaling group consumes |
+| **Launch template** | A saved recipe (AMI, type, network settings): what an Auto Scaling group consumes |
 
 EC2 is the textbook **IaaS** example in the shared responsibility model: AWS owns the host, you own everything from the guest operating system up.
 
-### 1.2 Reading an instance name — the most testable EC2 skill
+### 1.2 Reading an instance name: the most testable EC2 skill
 
 AWS publishes a naming grammar: **`[series][generation][options].[size]`**. The first position is the *series* (for example `c`), the second is the *generation* (for example `7`), letters after that are *options*, and everything after the period is the *instance size*.
 
 | Name | Series | Gen | Option | Size | What it tells you |
 |---|---|---|---|---|---|
-| `m7i.4xlarge` | M — general purpose | 7 | `i` = Intel | 4xlarge | Balanced CPU/memory, 7th-gen Intel |
-| `c6g.large` | C — compute optimized | 6 | `g` = Graviton | large | CPU-bound work on Arm |
-| `r7g.xlarge` | R — memory optimized | 7 | `g` = Graviton | xlarge | In-memory workloads |
-| `t3.micro` | T — burstable | 3 | — | micro | Burst above a baseline; the Free Tier home |
+| `m7i.4xlarge` | M: general purpose | 7 | `i` = Intel | 4xlarge | Balanced CPU/memory, 7th-gen Intel |
+| `c6g.large` | C: compute optimized | 6 | `g` = Graviton | large | CPU-bound work on Arm |
+| `r7g.xlarge` | R: memory optimized | 7 | `g` = Graviton | xlarge | In-memory workloads |
+| `t3.micro` | T, burstable | 3 |, | micro | Burst above a baseline; the Free Tier home |
 
-**Option letters:** **a** = AMD · **g** = Graviton · **i** = Intel · **d** = instance store volumes attached · **n** = network and EBS optimized · **e** = extra storage or memory · **z** = high CPU frequency. After the dot: `small`, `large`, `xlarge`, `2xlarge` … `4xlarge`, and `metal` means **bare metal**. Two decode rules the exam loves: **higher generation = newer hardware**, and `m7i` ≠ `m7g` — the suffix changes the **silicon *and* the operating-system support**, so a Graviton option is not a cosmetic rename.
+**Option letters:** **a** = AMD · **g** = Graviton · **i** = Intel · **d** = instance store volumes attached · **n** = network and EBS optimized · **e** = extra storage or memory · **z** = high CPU frequency. After the dot: `small`, `large`, `xlarge`, `2xlarge` … `4xlarge`, and `metal` means **bare metal**. Two decode rules the exam loves: **higher generation = newer hardware**, and `m7i` ≠ `m7g`: the suffix changes the **silicon *and* the operating-system support**, so a Graviton option is not a cosmetic rename.
 
 ### 1.3 Families → workloads
 
 | Category | Family letters | The exam stem that points at it |
 |---|---|---|
-| **General purpose** | **M**, **T** | *"balance of compute, memory and networking"* — web servers, code repositories, dev/test; **T** = burstable |
+| **General purpose** | **M**, **T** | *"balance of compute, memory and networking"*: web servers, code repositories, dev/test; **T** = burstable |
 | **Compute optimized** | **C** | CPU-bound: batch, transcoding, HPC, ML inference |
 | **Memory optimized** | **R**, **X**, **Z** | In-memory database, cache, analytics |
 | **Storage optimized** | **I**, **D**, **H** | NoSQL, data warehouse, log analytics; local disks, high IOPS |
 | **Accelerated computing** | **P**, **G**, **F**, **Inf**, **Trn** | GPU/ML training and inference, rendering |
 | **High performance computing** | **Hpc** | Large simulations, best price-performance at scale |
-| **High memory** | **U**, **Z** | Very large in-memory databases (`*tb` sizes = 3–32 TiB) |
+| **High memory** | **U**, **Z** | Very large in-memory databases (`*tb` sizes = 3 to 32 TiB) |
 
-**Worked example E1 — family from the stem (sourced wording, as of Oct 2026).** Read the requirement, pick the letter, then the option: *"an in-memory cache that must keep a working set resident"* → **R** (memory optimized) → add `g` if the workload runs on Linux/Arm → `r7g.xlarge`. *"A pegged-CPU video transcoder"* → **C** → `c6g.large`. *"An intermittent development box that must be cheap when idle"* → **T** → `t3.micro`. The exam never asks you to name a real instance family list — it asks you to read the **stem → category** mapping.
+**Worked example E1, family from the stem (sourced wording, as of Oct 2026).** Read the requirement, pick the letter, then the option: *"an in-memory cache that must keep a working set resident"* → **R** (memory optimized) → add `g` if the workload runs on Linux/Arm → `r7g.xlarge`. *"A pegged-CPU video transcoder"* → **C** → `c6g.large`. *"An intermittent development box that must be cheap when idle"* → **T** → `t3.micro`. The exam never asks you to name a real instance family list, it asks you to read the **stem → category** mapping.
 
 ### 1.4 Sizing: four decisions before you click Launch
 
 1. **Workload shape** → family (balanced / CPU / memory / storage / GPU).
 2. **Size within the family** → the number after the dot; memory-optimized families also carry a size-in-memory suffix.
-3. **AMI** — *"provides the software that is required to set up and boot an Amazon EC2 instance"* and *"you must specify an AMI when you launch an instance"*. An AMI is pinned to a **Region, operating system, architecture, root-volume type and virtualization type**, which is why you cannot launch a Windows AMI onto a Graviton instance type.
-4. **Purchase option and network** — covered in §2, plus key pair and security group below.
+3. **AMI**: *"provides the software that is required to set up and boot an Amazon EC2 instance"* and *"you must specify an AMI when you launch an instance"*. An AMI is pinned to a **Region, operating system, architecture, root-volume type and virtualization type**, which is why you cannot launch a Windows AMI onto a Graviton instance type.
+4. **Purchase option and network**: covered in §2, plus key pair and security group below.
 
-- **📚 Did you know?** The EC2 **Free Tier changed era on 15 July 2025**. Accounts created **before** that date kept the classic allowance — **750 hours per month of `t2.micro`/`t3.micro` for 12 months** plus 30 GB of EBS. Accounts created **on or after** that date get a **credit-based Free plan**: **$100 at sign-up plus up to $100 more**, for **6 months or until the credits run out**, on eligible sizes such as `t3`/`t4g.micro`, `t3`/`t4g.small`, `c7i-flex.large` and `m7i-flex.large`. A question stem that quotes "750 hours of t2.micro" is era-dependent — read the date (as of Oct 2026; verify current before use).
+- **📚 Did you know?** The EC2 **Free Tier changed era on 15 July 2025**. Accounts created **before** that date kept the classic allowance, **750 hours per month of `t2.micro`/`t3.micro` for 12 months** plus 30 GB of EBS. Accounts created **on or after** that date get a **credit-based Free plan**: **$100 at sign-up plus up to $100 more**, for **6 months or until the credits run out**, on eligible sizes such as `t3`/`t4g.micro`, `t3`/`t4g.small`, `c7i-flex.large` and `m7i-flex.large`. A question stem that quotes "750 hours of t2.micro" is era-dependent, read the date (as of Oct 2026; verify current before use).
 
 ### 1.5 The launch checklist: AMI, type, key pair, security group
 
@@ -135,9 +135,9 @@ AWS publishes a naming grammar: **`[series][generation][options].[size]`**. The 
 | **Security group** | *"A security group acts as a virtual firewall for your EC2 instances to control incoming and outgoing traffic."* | **Stateful**, **allow rules only (never deny)**, a fresh group has **no inbound rules** and an allow-all outbound rule |
 | **Launch template** | Versioned recipe: AMI, type, network settings | Required input for an **Auto Scaling group** |
 
-Two facts about security groups carry disproportionate weight: they are **stateful** (return traffic is allowed automatically), and they **cannot express a deny** — if a question needs *"block this IP"*, the answer is a **network ACL** (subnet level, allow *and* deny, stateless), not a security group.
+Two facts about security groups carry disproportionate weight: they are **stateful** (return traffic is allowed automatically), and they **cannot express a deny**: if a question needs *"block this IP"*, the answer is a **network ACL** (subnet level, allow *and* deny, stateless), not a security group.
 
-**Worked example E2 — from requirement to launch inputs.** *"A web tier needs Linux, balanced resources, and must scale across three AZs."* Inputs: AMI = Linux/x86 or Arm image pinned to the Region; family = **M** (general purpose) or **T** (burstable, if spiky and cheap-when-idle); size = whatever the traffic model needs; security group = allow inbound **443 from the load balancer's security group** (not `0.0.0.0/0` directly), allow all outbound; plus a **launch template** so an Auto Scaling group can reproduce it. Nothing in that list is optional — an Auto Scaling group without a launch template cannot launch anything.
+**Worked example E2, from requirement to launch inputs.** *"A web tier needs Linux, balanced resources, and must scale across three AZs."* Inputs: AMI = Linux/x86 or Arm image pinned to the Region; family = **M** (general purpose) or **T** (burstable, if spiky and cheap-when-idle); size = whatever the traffic model needs; security group = allow inbound **443 from the load balancer's security group** (not `0.0.0.0/0` directly), allow all outbound; plus a **launch template** so an Auto Scaling group can reproduce it. Nothing in that list is optional, an Auto Scaling group without a launch template cannot launch anything.
 
 ---
 
@@ -149,26 +149,26 @@ Domain 4 Task 4.1 names them explicitly: *"On-Demand Instances, Reserved Instanc
 
 | Option | Commitment | What it actually is | When the exam picks it | Sourced discount (as of Oct 2026) |
 |---|---|---|---|---|
-| **On-Demand** | None | Pay by the hour or second, **60-second minimum**, no long-term commitment | Unpredictable, spiky, experimental, first deployment | — (baseline for every other %) |
-| **Reserved Instances** | **1 or 3 years** | *"Not physical instances, but rather a billing discount applied to the use of On-Demand Instances"* for a consistent configuration (type + Region) | Steady-state, fixed configuration, especially when you also need an **AZ capacity reservation** | Standard **up to 72%**; Convertible **up to 66%** (Savings Plans User Guide table — another AWS page shows 54%, so always quote page + date) |
-| **Savings Plans** | **1 or 3 years**, committed **USD per hour** | A discount on a *usage amount in $/hour*, auto-applied across usage — no exchange needed | Steady-state where flexibility matters; AWS currently **recommends Savings Plans over Reserved Instances** | Compute **up to 66%** (any family/size/Region/OS/tenancy **+ Fargate + Lambda**); EC2 Instance **up to 72%** (one family, one Region); Database **up to 35%**; SageMaker AI **up to 64%** |
-| **Spot** | None | *"Spare EC2 capacity that is available for less than the On-Demand price"* — interruptible with a **2-minute notice** and **no termination protection** | Fault-tolerant, flexible, checkpointable: batch, CI/CD, big data, HPC, ML training | **Up to 90% off** On-Demand |
-| **Dedicated Hosts** | On-Demand or host reservation | A whole **physical host**; **per-host** billing; full visibility of sockets/cores for **bring-your-own-licence** | *"Per-socket or per-core licence"* requirements | — (host-level pricing) |
-| **Dedicated Instances** | On-Demand or RI | Single-tenant hardware; **per-instance** billing **+ a $2 per Region fee** | *"Dedicated hardware for compliance"* — isolation only, no licence topology needed | — |
-| **Capacity Reservations** | None, **no discount** | Reserves **AZ capacity at the On-Demand price**, and you are **charged whether or not you use it** | *"Must launch in this specific AZ"* (cluster software, regulated placement) without giving up On-Demand flexibility | — |
+| **On-Demand** | None | Pay by the hour or second, **60-second minimum**, no long-term commitment | Unpredictable, spiky, experimental, first deployment |: (baseline for every other %) |
+| **Reserved Instances** | **1 or 3 years** | *"Not physical instances, but rather a billing discount applied to the use of On-Demand Instances"* for a consistent configuration (type + Region) | Steady-state, fixed configuration, especially when you also need an **AZ capacity reservation** | Standard **up to 72%**; Convertible **up to 66%** (Savings Plans User Guide table: another AWS page shows 54%, so always quote page + date) |
+| **Savings Plans** | **1 or 3 years**, committed **USD per hour** | A discount on a *usage amount in $/hour*, auto-applied across usage: no exchange needed | Steady-state where flexibility matters; AWS currently **recommends Savings Plans over Reserved Instances** | Compute **up to 66%** (any family/size/Region/OS/tenancy **+ Fargate + Lambda**); EC2 Instance **up to 72%** (one family, one Region); Database **up to 35%**; SageMaker AI **up to 64%** |
+| **Spot** | None | *"Spare EC2 capacity that is available for less than the On-Demand price"*: interruptible with a **2-minute notice** and **no termination protection** | Fault-tolerant, flexible, checkpointable: batch, CI/CD, big data, HPC, ML training | **Up to 90% off** On-Demand |
+| **Dedicated Hosts** | On-Demand or host reservation | A whole **physical host**; **per-host** billing; full visibility of sockets/cores for **bring-your-own-licence** | *"Per-socket or per-core licence"* requirements |: (host-level pricing) |
+| **Dedicated Instances** | On-Demand or RI | Single-tenant hardware; **per-instance** billing **+ a $2 per Region fee** | *"Dedicated hardware for compliance"*, isolation only, no licence topology needed |, |
+| **Capacity Reservations** | None, **no discount** | Reserves **AZ capacity at the On-Demand price**, and you are **charged whether or not you use it** | *"Must launch in this specific AZ"* (cluster software, regulated placement) without giving up On-Demand flexibility |: |
 
-> ⚠️ **Reserved Instances are not reserved servers.** AWS's own wording is a **billing discount**, not a box in a rack. Two consequences the exam tests: an **AZ-scoped RI also reserves capacity**, a **Region-scoped RI is a discount only**, and **Savings Plans provide no capacity reservation at all**. If the stem says "guaranteed capacity in AZ X", the answer is an **AZ-scoped RI or a Capacity Reservation** — never a Savings Plan.
+> ⚠️ **Reserved Instances are not reserved servers.** AWS's own wording is a **billing discount**, not a box in a rack. Two consequences the exam tests: an **AZ-scoped RI also reserves capacity**, a **Region-scoped RI is a discount only**, and **Savings Plans provide no capacity reservation at all**. If the stem says "guaranteed capacity in AZ X", the answer is an **AZ-scoped RI or a Capacity Reservation**: never a Savings Plan.
 
-### 2.2 Reserved Instances vs Savings Plans vs Spot — the three-way tie-breaker
+### 2.2 Reserved Instances vs Savings Plans vs Spot: the three-way tie-breaker
 
 | Question the stem asks | Answer |
 |---|---|
 | Commit to a *configuration* or to a *dollar amount*? | Configuration → **RI**; $/hour → **Savings Plans** |
 | Need to exchange family/OS/tenancy later? | **Convertible RI** (smaller discount) or just use **Savings Plans** (no exchange needed) |
-| Need a capacity reservation? | **AZ-scoped RI** or **Capacity Reservation** — **not** Savings Plans |
+| Need a capacity reservation? | **AZ-scoped RI** or **Capacity Reservation**: **not** Savings Plans |
 | Can the workload be interrupted? | Yes → **Spot**; "cannot be interrupted" → On-Demand, RI or Savings Plan |
 | Does Spot count toward a Savings Plan? | **No.** Spot usage is excluded |
-| What happens at term end? | RIs **do not auto-renew** — you revert to On-Demand rates unless you act |
+| What happens at term end? | RIs **do not auto-renew**; you revert to On-Demand rates unless you act |
 
 ```mermaid
 flowchart TD
@@ -184,9 +184,9 @@ flowchart TD
   Q4 -->|"Might change attributes"| CONV["Convertible RI<br/>exchangeable,<br/>smaller discount"]
 ```
 
-### 2.3 Worked numeric examples — the arithmetic behind the discounts
+### 2.3 Worked numeric examples: the arithmetic behind the discounts
 
-**Worked example E3 — Spot savings (illustrative rate; the discount is sourced).** AWS states Spot is available at *"up to a 90% discount compared to On-Demand prices"* (as of Oct 2026). Exact EC2 On-Demand hourly prices are region-, OS- and time-dependent and were **not** collected for this lesson, so use a **labelled illustrative rate of $0.10 per hour**:
+**Worked example E3: Spot savings (illustrative rate; the discount is sourced).** AWS states Spot is available at *"up to a 90% discount compared to On-Demand prices"* (as of Oct 2026). Exact EC2 On-Demand hourly prices are region-, OS- and time-dependent and were **not** collected for this lesson, so use a **labelled illustrative rate of $0.10 per hour**:
 
 ```text
 Illustrative On-Demand rate ......... $0.10 / hour
@@ -196,9 +196,9 @@ Spot at up to 90% off ............. 100 x $0.10 x 0.10     =  $1.00
 Maximum weekly saving .............                          $9.00  (90%)
 ```
 
-Read the ceiling correctly: **"up to 90%"** is a maximum, not a quote, and you pay it with **interruption risk** — a two-minute notice, no termination protection, and **no Savings Plan coverage**.
+Read the ceiling correctly: **"up to 90%"** is a maximum, not a quote, and you pay it with **interruption risk**: a two-minute notice, no termination protection, and **no Savings Plan coverage**.
 
-**Worked example E4 — Savings Plan / RI savings (sourced ceilings, illustrative spend).** Take a steady **$1,000 per month** On-Demand run rate (illustrative base):
+**Worked example E4: Savings Plan / RI savings (sourced ceilings, illustrative spend).** Take a steady **$1,000 per month** On-Demand run rate (illustrative base):
 
 ```text
 EC2 Instance Savings Plan - up to 72% (S12, as of Oct 2026)
@@ -208,38 +208,38 @@ Compute Savings Plan - up to 66% (S12, as of Oct 2026)
 Over 1 year: $12,000 -> as low as $3,360 (EC2 Instance SP ceiling)
 ```
 
-**Worked example E5 — term arithmetic.** A commitment term is a long time, and the exam asks you to feel that:
+**Worked example E5: term arithmetic.** A commitment term is a long time, and the exam asks you to feel that:
 
 ```text
 1 year  = 31,536,000 seconds  =  8,760 hours
 3 years = 94,608,000 seconds  = 26,280 hours  (24 x 7 x 365 x 3)
 ```
 
-Before choosing a 3-year Savings Plan, answer one question: **will this exact workload configuration still be right in 26,280 hours?** If the answer might be "we will switch family or Region", Compute Savings Plans (any family, any Region) or Convertible RIs are the flexible answers; if it might be "we might not need it at all", On-Demand is cheaper than paying for unused commitment — because a **Capacity Reservation is charged whether used or not**, and an unused Savings Plan commitment simply stops saving.
+Before choosing a 3-year Savings Plan, answer one question: **will this exact workload configuration still be right in 26,280 hours?** If the answer might be "we will switch family or Region", Compute Savings Plans (any family, any Region) or Convertible RIs are the flexible answers; if it might be "we might not need it at all", On-Demand is cheaper than paying for unused commitment; because a **Capacity Reservation is charged whether used or not**, and an unused Savings Plan commitment simply stops saving.
 
-- **📚 Did you know?** The percentage you quote matters as much as the option. AWS publishes **up to 72%** (Standard RI, EC2 Instance Savings Plan), **up to 66%** (Compute Savings Plan, Convertible RI), **up to 35%** (Database Savings Plans), **up to 64%** (SageMaker AI Savings Plans) and **up to 90%** (Spot) — all *as of Oct 2026*. A separate AWS cost-optimization page still shows **"up to 75%"** for Reserved Instances; that figure is **not** corroborated anywhere else in this research, so do not memorise it. Any discount question wants the option name first and a date-stamped number second.
+- **📚 Did you know?** The percentage you quote matters as much as the option. AWS publishes **up to 72%** (Standard RI, EC2 Instance Savings Plan), **up to 66%** (Compute Savings Plan, Convertible RI), **up to 35%** (Database Savings Plans), **up to 64%** (SageMaker AI Savings Plans) and **up to 90%** (Spot): all *as of Oct 2026*. A separate AWS cost-optimization page still shows **"up to 75%"** for Reserved Instances; that figure is **not** corroborated anywhere else in this research, so do not memorise it. Any discount question wants the option name first and a date-stamped number second.
 
 ---
 
 ## 3. Auto Scaling: elasticity, min / desired / max, multi-AZ
 
-Task 3.3 lists *"Recognizing that auto scaling provides elasticity"* — so the exam's split of labour is precise: **Auto Scaling decides how many instances exist** (elasticity), a **load balancer decides where the traffic goes**. AWS documents that Elastic Load Balancing *"automatically distributes your incoming traffic across multiple targets … monitors the health of its registered targets, and routes traffic only to the healthy targets."*
+Task 3.3 lists *"Recognizing that auto scaling provides elasticity"*, so the exam's split of labour is precise: **Auto Scaling decides how many instances exist** (elasticity), a **load balancer decides where the traffic goes**. AWS documents that Elastic Load Balancing *"automatically distributes your incoming traffic across multiple targets … monitors the health of its registered targets, and routes traffic only to the healthy targets."*
 
 ### 3.1 The three numbers
 
 | Property | Definition | Documented behaviour |
 |---|---|---|
-| **Minimum size** | Floor — the group never shrinks below it | AWS's own example uses **min = 4** |
-| **Desired capacity** | The current target number of instances | *"An Auto Scaling group attempts to maintain the desired capacity"* — AWS's example uses **desired = 6** |
-| **Maximum size** | Ceiling — scaling policies cannot exceed it | AWS's example uses **max = 12** |
+| **Minimum size** | Floor: the group never shrinks below it | AWS's own example uses **min = 4** |
+| **Desired capacity** | The current target number of instances | *"An Auto Scaling group attempts to maintain the desired capacity"*: AWS's example uses **desired = 6** |
+| **Maximum size** | Ceiling: scaling policies cannot exceed it | AWS's example uses **max = 12** |
 | **Scaling policy** | Moves **desired capacity** within [min, max] in response to a signal (typically a CloudWatch alarm) | Scale-out adds instances; scale-in removes them |
 | **Replacement** | Unexpected termination is corrected | The group launches a replacement to hold desired capacity |
 
-AWS's documented configuration — **minimum four, desired six, maximum twelve** — is worth memorising as a shape: min ≤ desired ≤ max is a hard invariant, and any option that puts desired above max (or min above desired) is invalid on its face.
+AWS's documented configuration, **minimum four, desired six, maximum twelve**, is worth memorising as a shape: min ≤ desired ≤ max is a hard invariant, and any option that puts desired above max (or min above desired) is invalid on its face.
 
 ### 3.2 Why multi-AZ is the high-availability answer
 
-An Auto Scaling group spans **Availability Zones**; when one AZ degrades, the group launches replacements in the healthy AZs and rebalances. This is the standard Domain 3 pattern: **multi-AZ = survive an AZ failure**, **multi-Region = survive a Region failure**. Lifecycle order matters too: an instance goes **launch → health check → InService**, and AWS notes that an Auto Scaling group with a load balancer attached **registers the instance with the load balancer *before* marking it InService** — so traffic never reaches an unready instance.
+An Auto Scaling group spans **Availability Zones**; when one AZ degrades, the group launches replacements in the healthy AZs and rebalances. This is the standard Domain 3 pattern: **multi-AZ = survive an AZ failure**, **multi-Region = survive a Region failure**. Lifecycle order matters too: an instance goes **launch → health check → InService**, and AWS notes that an Auto Scaling group with a load balancer attached **registers the instance with the load balancer *before* marking it InService**, so traffic never reaches an unready instance.
 
 ```mermaid
 flowchart TD
@@ -253,7 +253,7 @@ flowchart TD
   ELB -.->|"instance stops or<br/>is interrupted"| RD["ASG launches a replacement<br/>to hold desired capacity"]
 ```
 
-**Worked example E6 — min / desired / max under pressure.** Using AWS's documented group (**min 4, desired 6, max 12**) spread across three AZs (2 + 2 + 2):
+**Worked example E6: min / desired / max under pressure.** Using AWS's documented group (**min 4, desired 6, max 12**) spread across three AZs (2 + 2 + 2):
 
 ```text
 Steady state .............. desired = 6   (2 per AZ)
@@ -263,28 +263,28 @@ AZ-c failure takes 2 ...... desired drops to 4 -> group relaunches
                                    in healthy AZs back toward 6
 ```
 
-Two exam points fall out of that arithmetic: the **maximum is a hard ceiling** that protects your budget, and the **minimum is a hard floor** that protects your availability — neither replaces the other.
+Two exam points fall out of that arithmetic: the **maximum is a hard ceiling** that protects your budget, and the **minimum is a hard floor** that protects your availability: neither replaces the other.
 
 ---
 
 ## 4. AWS Lambda: serverless and event-driven
 
-AWS defines it flatly: *"AWS Lambda is a serverless compute service. With Lambda, you can run code without provisioning or managing servers."* AWS owns *"server maintenance, capacity provisioning, scaling, and patching"* — you supply code plus configuration. It is **event-driven**: *"Events can trigger a Lambda function in two ways: through direct invocation (push) and event source mappings (pull)."*
+AWS defines it flatly: *"AWS Lambda is a serverless compute service. With Lambda, you can run code without provisioning or managing servers."* AWS owns *"server maintenance, capacity provisioning, scaling, and patching"*; you supply code plus configuration. It is **event-driven**: *"Events can trigger a Lambda function in two ways: through direct invocation (push) and event source mappings (pull)."*
 
 ### 4.1 What Lambda actually charges for
 
 | Dimension | AWS document (as of Oct 2026) | Consequence |
 |---|---|---|
-| **Requests** | **$0.20 per 1 million requests** | Idle costs **nothing** — you are billed only while code runs |
+| **Requests** | **$0.20 per 1 million requests** | Idle costs **nothing**; you are billed only while code runs |
 | **Duration** | Billed in **GB-seconds**, rounded up to the nearest **1 ms** | Smaller memory + shorter run = less money |
-| **Free tier (Always Free)** | **1,000,000 requests + 400,000 GB-seconds per month** | Not a 12-month trial — it recurs |
+| **Free tier (Always Free)** | **1,000,000 requests + 400,000 GB-seconds per month** | Not a 12-month trial; it recurs |
 | **Memory** | **128 MB to 10,240 MB** in 1-MB increments; **1,769 MB ≈ one vCPU** | More memory buys more CPU as well as more RAM |
 | **Timeout** | Default **3 s**, maximum **900 s (15 minutes)** | Long-running work belongs on EC2/ECS/EKS/Beanstalk |
 | **Scaling** | Up to **1,000 execution environments every 10 seconds** | Concurrency is elastic by default |
 
 AWS's guidance on fit is blunt: Lambda is *"best-suited for short invocations that last one second or less."* Stateful, long-lived or always-on processes are the classic wrong answer.
 
-**Worked example E7 — a Lambda micro-bill (sourced rates, as of Oct 2026).** 2,000,000 requests per month, each running **100 ms** at **1,024 MB (1 GB)**:
+**Worked example E7: a Lambda micro-bill (sourced rates, as of Oct 2026).** 2,000,000 requests per month, each running **100 ms** at **1,024 MB (1 GB)**:
 
 ```text
 Requests:  2,000,000 - 1,000,000 free = 1,000,000 billable
@@ -295,7 +295,7 @@ Duration:  1 GB x 0.100 s = 0.100 GB-s per call
 Total                                              = $0.20 / month
 ```
 
-**Worked example E8 — the Always-Free ceiling (sourced).** How much continuous execution does **400,000 GB-seconds** actually buy?
+**Worked example E8: the Always-Free ceiling (sourced).** How much continuous execution does **400,000 GB-seconds** actually buy?
 
 ```text
 At 512 MB (0.5 GB):  400,000 / 0.5 = 800,000 seconds  = ~9.3 days/month
@@ -314,9 +314,9 @@ flowchart LR
 ```
 
 > [!WARNING]
-> **The 15-minute wall.** Lambda's maximum timeout is **900 seconds (15 minutes)**, memory tops out at **10,240 MB**, and AWS positions it for invocations of *"one second or less"*. Any stem describing a nightly 40-minute video transcode, a long-running connection, or a workload needing a local disk or GPU is describing **EC2, ECS/EKS or Elastic Beanstalk** — not Lambda. Conversely, "no servers to manage" plus "runs only when an event arrives" plus "pay per millisecond" is the Lambda signature.
+> **The 15-minute wall.** Lambda's maximum timeout is **900 seconds (15 minutes)**, memory tops out at **10,240 MB**, and AWS positions it for invocations of *"one second or less"*. Any stem describing a nightly 40-minute video transcode, a long-running connection, or a workload needing a local disk or GPU is describing **EC2, ECS/EKS or Elastic Beanstalk**: not Lambda. Conversely, "no servers to manage" plus "runs only when an event arrives" plus "pay per millisecond" is the Lambda signature.
 
-- **📚 Did you know?** AWS's Capital One case study on Lambda and ECS reports that **one application cut its cost by 90%** after moving to Lambda, with checks running **80% faster** using AWS Step Functions, and describes **more than a third** of Capital One's applications as serverless (aws.amazon.com/solutions/case-studies/capital-one-lambda-ecs-case-study, accessed Oct 2026; customer-claimed, unaudited). The exam-shaped reading is architectural: **event-driven plus idle-costs-nothing** is why a workload belongs on Lambda at all — and a figure such as 90% is that customer's result, never an AWS guarantee.
+- **📚 Did you know?** AWS's Capital One case study on Lambda and ECS reports that **one application cut its cost by 90%** after moving to Lambda, with checks running **80% faster** using AWS Step Functions, and describes **more than a third** of Capital One's applications as serverless (aws.amazon.com/solutions/case-studies/capital-one-lambda-ecs-case-study, accessed Oct 2026; customer-claimed, unaudited). The exam-shaped reading is architectural: **event-driven plus idle-costs-nothing** is why a workload belongs on Lambda at all, and a figure such as 90% is that customer's result, never an AWS guarantee.
 
 ---
 
@@ -326,15 +326,15 @@ Task 3.3 expects four one-liners, and the exam recombines them constantly:
 
 | Service | One-line definition (AWS wording) | Exam signature |
 |---|---|---|
-| **Amazon ECS** | *"a fully managed container orchestration service"* — AWS-native | *"AWS-native orchestration"*, **$0 management fee** for Fargate and EC2 launch types |
-| **Amazon EKS** | *"a fully managed Kubernetes service"* | *"We already run Kubernetes"* — plus **$0.10 per cluster per hour** (standard support, first 14 months; $0.60/h extended) |
-| **AWS Fargate** | *"a serverless compute engine for containers that works with both Amazon ECS and Amazon EKS"* | *"No node management"* — billed **per vCPU + per GB of memory per second**, **1-minute minimum** |
-| **Amazon ECR** | *"an AWS managed container image registry service"*, private repositories with **resource-based permissions using AWS IAM** | *"Push/pull images"* — ECR is **storage for images, not orchestration** |
+| **Amazon ECS** | *"a fully managed container orchestration service"*: AWS-native | *"AWS-native orchestration"*, **$0 management fee** for Fargate and EC2 launch types |
+| **Amazon EKS** | *"a fully managed Kubernetes service"* | *"We already run Kubernetes"*: plus **$0.10 per cluster per hour** (standard support, first 14 months; $0.60/h extended) |
+| **AWS Fargate** | *"a serverless compute engine for containers that works with both Amazon ECS and Amazon EKS"* | *"No node management"*: billed **per vCPU + per GB of memory per second**, **1-minute minimum** |
+| **Amazon ECR** | *"an AWS managed container image registry service"*, private repositories with **resource-based permissions using AWS IAM** | *"Push/pull images"*: ECR is **storage for images, not orchestration** |
 | **AWS Batch** | *"plans, schedules, and runs your containerized batch ML, simulation, and analytics workloads"* on **Spot or On-Demand** instances | *"Queued, non-interactive, cost-optimised batch"* |
 
-Two responsibility distinctions carry most of the marks. **Fargate vs EC2 launch type is about who manages the nodes**, not about speed: with Fargate there are no instances to patch (per-task billing, 1-minute minimum); with the EC2 launch type you patch, scale and choose instances — and **RI/Savings Plan/Spot discounts apply** to those instances. **ECS vs EKS is about portability vs a cluster fee**: ECS is AWS-native with no orchestration fee; EKS gives you standard Kubernetes for a per-cluster hourly fee.
+Two responsibility distinctions carry most of the marks. **Fargate vs EC2 launch type is about who manages the nodes**, not about speed: with Fargate there are no instances to patch (per-task billing, 1-minute minimum); with the EC2 launch type you patch, scale and choose instances, and **RI/Savings Plan/Spot discounts apply** to those instances. **ECS vs EKS is about portability vs a cluster fee**: ECS is AWS-native with no orchestration fee; EKS gives you standard Kubernetes for a per-cluster hourly fee.
 
-**Worked example E9 — Fargate and EKS arithmetic (sourced rates, us-east-1, as of Oct 2026).**
+**Worked example E9: Fargate and EKS arithmetic (sourced rates, us-east-1, as of Oct 2026).**
 
 ```text
 Fargate: 5 tasks x 1 vCPU x 2 GB, running 600 s/day for 30 days
@@ -351,7 +351,7 @@ ECS:  $0 management fee  ->  you pay only the underlying compute
 
 That comparison is the exam's favourite container question: **EKS costs extra for the managed control plane; ECS does not**, and neither includes the cost of your nodes.
 
-- **📚 Did you know?** The Toronto AI startup **WOMBO** told AWS that it managed **12,000 GPUs** while its apps drew **74 million downloads in 10 months across more than 180 countries**, quoting: *"Our infrastructure has been largely on autopilot. Using Amazon ECS definitely saves a lot of time for us."* (aws.amazon.com/ecs/customers and aws.amazon.com/fargate/customers, accessed Oct 2026; customer voice). The exam-shaped detail is the pairing behind that quote — **ECS as the AWS-native orchestrator with Fargate as the serverless engine** — plus the reminder that viral scale first arrives as a *traffic* problem, which elasticity (§3) absorbs long before it becomes a purchasing problem (§2).
+- **📚 Did you know?** The Toronto AI startup **WOMBO** told AWS that it managed **12,000 GPUs** while its apps drew **74 million downloads in 10 months across more than 180 countries**, quoting: *"Our infrastructure has been largely on autopilot. Using Amazon ECS definitely saves a lot of time for us."* (aws.amazon.com/ecs/customers and aws.amazon.com/fargate/customers, accessed Oct 2026; customer voice). The exam-shaped detail is the pairing behind that quote, **ECS as the AWS-native orchestrator with Fargate as the serverless engine**, plus the reminder that viral scale first arrives as a *traffic* problem, which elasticity (§3) absorbs long before it becomes a purchasing problem (§2).
 
 ---
 
@@ -359,11 +359,11 @@ That comparison is the exam's favourite container question: **EKS costs extra fo
 
 | Service | What AWS does | What you do | Cost model (as of Oct 2026) | Exam signature |
 |---|---|---|---|---|
-| **AWS Elastic Beanstalk** | *"provisions Amazon EC2 instances or EKS clusters, configures load balancing … dynamically scales your environment"* | Upload code and set a few options | **$0 service charge** — you pay for the resources it creates (EC2, ELB, EBS) | *"Deploy code, not infrastructure"*; **not serverless**, and **not free to run** |
+| **AWS Elastic Beanstalk** | *"provisions Amazon EC2 instances or EKS clusters, configures load balancing … dynamically scales your environment"* | Upload code and set a few options | **$0 service charge**; you pay for the resources it creates (EC2, ELB, EBS) | *"Deploy code, not infrastructure"*; **not serverless**, and **not free to run** |
 | **Amazon Lightsail** | Delivers **flat monthly bundles**: instances, disk, transfer in one price | Pick a bundle; minimal configuration | Entry **$3.50/month** (512 MB memory, 2 vCPUs, 20 GB SSD, 1 TB transfer); **$5/month** (1 GB); 90-day trial | *"A few dozen instances or less"*, predictable price; **not** full-elastic AWS |
 | **AWS Outposts** | AWS infrastructure **on premises** | Same APIs as AWS | Priced per Outpost | The hybrid compute answer: *"data must stay on premises but wants AWS tooling"* |
 
-The expected arc on the exam is **start simple, then grow**: a personal blog or a small internal tool starts on **Lightsail** or **Elastic Beanstalk**; when you need Auto Scaling, VPC-level networking, Spot or Savings Plans, you move to **EC2 with a launch template and an Auto Scaling group**. **AWS Batch** is the fourth option in this family — queued containerised jobs that AWS scales for you on Spot or On-Demand capacity.
+The expected arc on the exam is **start simple, then grow**: a personal blog or a small internal tool starts on **Lightsail** or **Elastic Beanstalk**; when you need Auto Scaling, VPC-level networking, Spot or Savings Plans, you move to **EC2 with a launch template and an Auto Scaling group**. **AWS Batch** is the fourth option in this family: queued containerised jobs that AWS scales for you on Spot or On-Demand capacity.
 
 ---
 
@@ -371,36 +371,36 @@ The expected arc on the exam is **start simple, then grow**: a personal blog or 
 
 Task 3.6 opens with *"Identifying the uses for object storage"* and *"Recognizing the differences in Amazon S3 storage classes"*. AWS defines the anatomy: *"An object is a file and any metadata that describes the file. A bucket is a container for objects."* Objects are addressed by **key** (plus an optional **version ID**) inside a bucket whose **name is globally unique** and whose **Region is fixed at creation**. A bucket is **private by default**, with Block Public Access on and ACLs off; the bucket policy ceiling is **20 KB**. The maximum object size is **50 TB** (raised from 5 TB on **2 December 2025**); a single `PUT` is 5 GB.
 
-Durability is the number to quote: **99.999999999% (11 nines)** across **a minimum of three Availability Zones by default** — durability and availability are different things, and One Zone-IA proves it.
+Durability is the number to quote: **99.999999999% (11 nines)** across **a minimum of three Availability Zones by default**: durability and availability are different things, and One Zone-IA proves it.
 
 ### 7.1 The storage-class lineup
 
 | Class | Designed for | AZs | Minimum storage duration | Minimum billable object | Retrieval fee |
 |---|---|---|---|---|---|
-| **Standard** (default) | Accessed more than once a month, millisecond access | ≥3 | — | — | none |
-| **Intelligent-Tiering** | Unknown or changing access patterns | ≥3 | — | 128 KB (below that: never auto-tiered) | **none** (small per-object monitoring fee) |
+| **Standard** (default) | Accessed more than once a month, millisecond access | ≥3 |, |, | none |
+| **Intelligent-Tiering** | Unknown or changing access patterns | ≥3 |: | 128 KB (below that: never auto-tiered) | **none** (small per-object monitoring fee) |
 | **Standard-IA** | ~once a month, millisecond access | ≥3 | **30 days** | 128 KB | per GB |
 | **One Zone-IA** | Re-creatable data, ~once a month | **1** | **30 days** | 128 KB | per GB |
-| **Express One Zone** | Single-digit-millisecond latency, one AZ | 1 | — | — | none |
+| **Express One Zone** | Single-digit-millisecond latency, one AZ | 1 |, |, | none |
 | **Glacier Instant Retrieval** | ~once a quarter, millisecond access | ≥3 | **90 days** | 128 KB | per GB |
-| **Glacier Flexible Retrieval** | ~once a year, minutes-to-hours to restore | ≥3 | **90 days** | — | per GB (**bulk retrievals are free**) |
-| **Glacier Deep Archive** | Less than once a year, hours to restore | ≥3 | **180 days** | — | per GB |
+| **Glacier Flexible Retrieval** | ~once a year, minutes-to-hours to restore | ≥3 | **90 days** |: | per GB (**bulk retrievals are free**) |
+| **Glacier Deep Archive** | Less than once a year, hours to restore | ≥3 | **180 days** |: | per GB |
 
-**Intelligent-Tiering** is the only class that moves objects for you: **30 days** without access → Infrequent Access tier, **90 days** → Archive Instant Access (still millisecond), plus opt-in Archive (**≥90 days**) and Deep (**≥180 days**) tiers. It charges a **monitoring fee of $0.0000025 per object per month** and **no retrieval fees** — so it is perfect for unknown patterns and wrong for millions of tiny objects.
+**Intelligent-Tiering** is the only class that moves objects for you: **30 days** without access → Infrequent Access tier, **90 days** → Archive Instant Access (still millisecond), plus opt-in Archive (**≥90 days**) and Deep (**≥180 days**) tiers. It charges a **monitoring fee of $0.0000025 per object per month** and **no retrieval fees**, so it is perfect for unknown patterns and wrong for millions of tiny objects.
 
-**Glacier retrieval speeds** (as of Oct 2026): Instant = **milliseconds**; Flexible = Expedited **1–5 minutes**, Standard **3–5 hours**, **Bulk 5–12 hours and free**; Deep Archive ≈ **12 hours / 48 hours**. Note that AWS says *"We don't recommend using the Amazon Glacier service"* — the examinable answer is the **S3 Glacier storage classes**, not a separate legacy service.
+**Glacier retrieval speeds** (as of Oct 2026): Instant = **milliseconds**; Flexible = Expedited **1 to 5 minutes**, Standard **3 to 5 hours**, **Bulk 5 to 12 hours and free**; Deep Archive ≈ **12 hours / 48 hours**. Note that AWS says *"We don't recommend using the Amazon Glacier service"*: the examinable answer is the **S3 Glacier storage classes**, not a separate legacy service.
 
 ### 7.2 Versioning, lifecycle and replication
 
 - **Versioning** has three states (disabled, enabled, suspended) and *"can never return to an unversioned state"*. Deleting an object creates a **delete marker**; overwriting creates a new version; **every version is charged in full**, which is why lifecycle rules need a `NoncurrentVersionExpiration` action.
-- **Lifecycle** rules have **transition actions** (move to another class) and **expiration actions** — *"Amazon S3 deletes expired objects on your behalf"*. The model is a **one-way waterfall**: Standard → IA / Intelligent-Tiering / One Zone-IA → any Glacier class; One Zone-IA → Glacier only; Instant → Flexible → Deep; **Deep Archive can go only one way**.
-- **Replication** (CRR/SRR) requires **versioning enabled on both buckets**, skips pre-existing objects unless you use Batch Replication, and **S3 Replication Time Control** guarantees **99.99% of new objects within 15 minutes (SLA)**. Deletions replicate — so **replication is not a backup**.
+- **Lifecycle** rules have **transition actions** (move to another class) and **expiration actions**: *"Amazon S3 deletes expired objects on your behalf"*. The model is a **one-way waterfall**: Standard → IA / Intelligent-Tiering / One Zone-IA → any Glacier class; One Zone-IA → Glacier only; Instant → Flexible → Deep; **Deep Archive can go only one way**.
+- **Replication** (CRR/SRR) requires **versioning enabled on both buckets**, skips pre-existing objects unless you use Batch Replication, and **S3 Replication Time Control** guarantees **99.99% of new objects within 15 minutes (SLA)**. Deletions replicate, so **replication is not a backup**.
 
 ### 7.3 Encryption and static websites
 
-**SSE-S3 is the default encryption configuration for every bucket** (since **5 January 2023**) and costs nothing extra; **SSE-KMS** adds per-key cost and control, **SSE-C** brings your own key, and **DSSE-KMS** is double encryption. For EBS you **cannot encrypt an existing unencrypted volume or snapshot in place**. For hosting: an S3 static website needs an **index document**, **Block Public Access off** and a public-read `s3:GetObject` grant — and *"static websites support only HTTP endpoints"*, so **HTTPS requires CloudFront**.
+**SSE-S3 is the default encryption configuration for every bucket** (since **5 January 2023**) and costs nothing extra; **SSE-KMS** adds per-key cost and control, **SSE-C** brings your own key, and **DSSE-KMS** is double encryption. For EBS you **cannot encrypt an existing unencrypted volume or snapshot in place**. For hosting: an S3 static website needs an **index document**, **Block Public Access off** and a public-read `s3:GetObject` grant, and *"static websites support only HTTP endpoints"*, so **HTTPS requires CloudFront**.
 
-**Worked example E10 — one terabyte-month across classes (us-east-1, as of Oct 2026).** Storage-only, 1,000 GB, ignoring requests:
+**Worked example E10: one terabyte-month across classes (us-east-1, as of Oct 2026).** Storage-only, 1,000 GB, ignoring requests:
 
 ```text
 S3 Standard .................... $0.023/GB-mo  ->  $23.00
@@ -415,7 +415,7 @@ Intelligent-Tiering (Frequent) . $0.023        ->  $23.00
 
 S3 request prices (same region and date): **PUT/COPY/POST/LIST $0.005 per 1,000**, **GET $0.0004 per 1,000**, **DELETE free**.
 
-- **📚 Did you know?** The **30-day rule has two halves that moved independently**. AWS's storage guidance (updated **5 October 2026**) says S3 *"no longer applies a 30-day minimum storage duration for transitions"* into Standard-IA and One Zone-IA — you may transition on day 0. But the **30-day minimum storage duration *billing*** rule for IA classes is still published on the pricing pages. Moving on day 10 and deleting on day 20 still bills you the full 30 days (as of Oct 2026; verify current before use).
+- **📚 Did you know?** The **30-day rule has two halves that moved independently**. AWS's storage guidance (updated **5 October 2026**) says S3 *"no longer applies a 30-day minimum storage duration for transitions"* into Standard-IA and One Zone-IA; you may transition on day 0. But the **30-day minimum storage duration *billing*** rule for IA classes is still published on the pricing pages. Moving on day 10 and deleting on day 20 still bills you the full 30 days (as of Oct 2026; verify current before use).
 
 ```mermaid
 flowchart TD
@@ -438,7 +438,7 @@ flowchart TD
 
 ## 8. Amazon EBS and instance store: block storage
 
-Task 3.6 names the pair: *"Identifying block storage solutions (for example, Amazon EBS, instance store)"*. Block storage is **low-latency, single-attach, OS-filesystem storage** — the disk your instance sees as `/dev/xvda`.
+Task 3.6 names the pair: *"Identifying block storage solutions (for example, Amazon EBS, instance store)"*. Block storage is **low-latency, single-attach, OS-filesystem storage**: the disk your instance sees as `/dev/xvda`.
 
 **Amazon EBS** is a *"durable block volume"* for EC2. Two structural facts: a volume is **scoped to an Availability Zone** (it is *"automatically replicated within its Availability Zone"*) and may be attached to **up to 16 instances** only if they are **io1/io2 in the same AZ** (Multi-Attach, and the application must fence writes). Durability is **not** S3's 11 nines: **io2 Block Express provides 99.999%**, other volume types **99.8% to 99.9%**.
 
@@ -446,18 +446,18 @@ Task 3.6 names the pair: *"Identifying block storage solutions (for example, Ama
 
 | Type | Kind | Baseline | Use it for | Cannot be |
 |---|---|---|---|---|
-| **gp3** (default) | SSD | **3,000 IOPS and 125 MiB/s at any volume size**; up to **~20% cheaper per GB** than gp2 | Boot volumes, general purpose, most databases | — |
-| **gp2** | SSD | IOPS scale with size (3 IOPS/GB, max 16,000) | Legacy volumes — migrate to gp3 | — |
-| **io1 / io2** | Provisioned-IOPS SSD | Up to 64,000 / 256,000 IOPS; **io2 Block Express: 256,000 IOPS, 99.999% durability** | Mission-critical IOPS, databases needing a sustained ceiling | — |
+| **gp3** (default) | SSD | **3,000 IOPS and 125 MiB/s at any volume size**; up to **~20% cheaper per GB** than gp2 | Boot volumes, general purpose, most databases |: |
+| **gp2** | SSD | IOPS scale with size (3 IOPS/GB, max 16,000) | Legacy volumes, migrate to gp3 |, |
+| **io1 / io2** | Provisioned-IOPS SSD | Up to 64,000 / 256,000 IOPS; **io2 Block Express: 256,000 IOPS, 99.999% durability** | Mission-critical IOPS, databases needing a sustained ceiling |: |
 | **st1** | HDD | Throughput-optimised, up to 500 MiB/s | Big sequential streams: big data, log processing | **Boot volume** |
 | **sc1** | HDD | Cold, up to 250 MiB/s, cheapest per GB | Infrequent, sequential access | **Boot volume** |
-| **Magnetic (standard)** | Legacy HDD | — | Older workloads | — |
+| **Magnetic (standard)** | Legacy HDD |, | Older workloads |, |
 
-List prices published for gp3 **$0.08/GB-month**, gp2 **$0.10**, io1/io2 **$0.125** (plus IOPS charges), st1 **$0.045**, sc1 **$0.015** — *as published Oct 2026; the page states no Region, so verify current before use in your Region.*
+List prices published for gp3 **$0.08/GB-month**, gp2 **$0.10**, io1/io2 **$0.125** (plus IOPS charges), st1 **$0.045**, sc1 **$0.015**: *as published Oct 2026; the page states no Region, so verify current before use in your Region.*
 
 ### 8.2 Snapshots
 
-A snapshot is *"an incremental backup"* stored in **S3 — but invisible to S3 tools**: you cannot see snapshots as S3 objects, list them in a bucket, or pay S3 request rates for them. They are replicated **Region-wide** (unlike volumes, which are AZ-bound). Critically, *"AWS does not automatically back up your EBS volumes"* — you must use **Amazon Data Lifecycle Manager, AWS Backup, or a manual script**. Snapshot prices (as of Oct 2026): **$0.05 per GB-month** standard, **$0.0125 per GB-month archived** (90-day minimum), restore from archive **$0.03 per GB**.
+A snapshot is *"an incremental backup"* stored in **S3, but invisible to S3 tools**: you cannot see snapshots as S3 objects, list them in a bucket, or pay S3 request rates for them. They are replicated **Region-wide** (unlike volumes, which are AZ-bound). Critically, *"AWS does not automatically back up your EBS volumes"*, you must use **Amazon Data Lifecycle Manager, AWS Backup, or a manual script**. Snapshot prices (as of Oct 2026): **$0.05 per GB-month** standard, **$0.0125 per GB-month archived** (90-day minimum), restore from archive **$0.03 per GB**.
 
 ### 8.3 Instance store vs EBS
 
@@ -469,7 +469,7 @@ A snapshot is *"an incremental backup"* stored in **S3 — but invisible to S3 t
 | Stop/terminate behaviour | Root volume survives termination only if `DeleteOnTermination=false` | Data gone |
 | Exam stem | Persistent, boot, database | *"Temporary"*, *"scratch"*, *"lost on stop"*, highest local I/O |
 
-**Worked example E11 — gp3 vs gp2 and snapshot archive (published prices, verify region).**
+**Worked example E11: gp3 vs gp2 and snapshot archive (published prices, verify region).**
 
 ```text
 gp3 vs gp2, 500 GB volume:
@@ -484,27 +484,27 @@ Snapshot archive, 2 TB for 6 months:
              archived total              = $210.00
 ```
 
-- **📚 Did you know?** **gp3's baseline is size-independent**: 3,000 IOPS and 125 MiB/s *"at any volume size"*. Under the older gp2 model you needed a **3,000 GB** volume to get 3,000 IOPS, because IOPS scaled at 3 per GB — which is why AWS describes gp3 as *"up to 20% lower pricing per GB than existing gp2"* while also being faster out of the box (as of Oct 2026).
+- **📚 Did you know?** **gp3's baseline is size-independent**: 3,000 IOPS and 125 MiB/s *"at any volume size"*. Under the older gp2 model you needed a **3,000 GB** volume to get 3,000 IOPS, because IOPS scaled at 3 per GB; which is why AWS describes gp3 as *"up to 20% lower pricing per GB than existing gp2"* while also being faster out of the box (as of Oct 2026).
 
 ---
 
 ## 9. File, hybrid and backup: EFS, FSx, Storage Gateway, Snow Family, AWS Backup
 
-### 9.1 EFS versus FSx — the file answer
+### 9.1 EFS versus FSx: the file answer
 
 Task 3.6 says *"Identifying file services (for example, Amazon EFS, Amazon FSx)"*.
 
 | | **Amazon EFS** | **Amazon FSx** |
 |---|---|---|
-| Protocol | **NFSv4.1 / v4.0**, POSIX | Four engines: **Windows File Server (SMB)**, **NetApp ONTAP** (NFS + SMB + iSCSI), **OpenZFS** (ZFS/Linux), **Lustre** (ML/HPC — **out of scope for CLF-C02**) |
-| Clients | EC2, ECS, EKS, **Lambda**, Fargate — *"Using Amazon EFS with Microsoft Windows–based … is not supported"* | Windows Server with Active Directory, NTFS ACLs; ONTAP with snapshots and tiering |
+| Protocol | **NFSv4.1 / v4.0**, POSIX | Four engines: **Windows File Server (SMB)**, **NetApp ONTAP** (NFS + SMB + iSCSI), **OpenZFS** (ZFS/Linux), **Lustre** (ML/HPC: **out of scope for CLF-C02**) |
+| Clients | EC2, ECS, EKS, **Lambda**, Fargate, *"Using Amazon EFS with Microsoft Windows, based … is not supported"* | Windows Server with Active Directory, NTFS ACLs; ONTAP with snapshots and tiering |
 | Reach | **Regional (≥3 AZs, recommended)** or **One Zone (1 AZ)** | Single-AZ or Multi-AZ per engine |
 | Classes / price (us-east-1, as of Oct 2026) | Standard **$0.30/GB-mo**, One Zone **$0.16**, IA **$0.025**, One Zone IA **$0.0133**, Archive **$0.008**, provisioned throughput **$6/GB-mo** | Priced per file system and per throughput |
 | Exam stem | *"Shared POSIX home directories / WordPress across AZs"* | *"Lift-and-shift a Windows file server"* or *"existing NetApp"* |
 
 EFS durability is **11 nines** with **99.99% availability on the Regional class across ≥3 AZs**; its lifecycle classes **Standard → IA → Archive** apply automatically after **90 days idle**, with a **90-day minimum storage duration** for Archive.
 
-**Worked example E12 — EFS sizing (us-east-1, as of Oct 2026).**
+**Worked example E12: EFS sizing (us-east-1, as of Oct 2026).**
 
 ```text
 1.2 TB all Standard:        1,200 x $0.30            = $360.00 / month
@@ -512,7 +512,7 @@ Half cold (600 Standard + 600 IA):
                             600 x $0.30 + 600 x $0.025 = $195.00 / month
 ```
 
-### 9.2 Storage Gateway — the hybrid, cached answer
+### 9.2 Storage Gateway: the hybrid, cached answer
 
 AWS describes it as a service that *"connects an on-premises software appliance with cloud-based storage"*, and task 3.6 explicitly names *"cached file systems (for example, AWS Storage Gateway)"*.
 
@@ -520,42 +520,42 @@ AWS describes it as a service that *"connects an on-premises software appliance 
 |---|---|---|
 | **S3 File Gateway** | An NFS/SMB share locally; *"Files … become objects … with the path as the key"* | *"On-premises app wants an S3-backed NFS share"* |
 | **FSx File Gateway** | SMB backed by FSx | Windows shares with cloud backing |
-| **Volume Gateway — cached** | iSCSI volume with data in **S3** and a hot subset retained locally | **The "cached file system" answer** |
-| **Volume Gateway — stored** | Local primary copy, asynchronous snapshots to S3 | On-prem VM images, DR |
+| **Volume Gateway: cached** | iSCSI volume with data in **S3** and a hot subset retained locally | **The "cached file system" answer** |
+| **Volume Gateway: stored** | Local primary copy, asynchronous snapshots to S3 | On-prem VM images, DR |
 | **Tape Gateway** | Virtual tape library archiving to **S3 Glacier Flexible Retrieval or Deep Archive** | *"Virtual tape"* / data-centre tape retention |
 
-### 9.3 Snow Family — status matters more than specs
+### 9.3 Snow Family: status matters more than specs
 
-**AWS Snowball Edge is no longer available to new customers**, closed to new customers on **7 November 2025**, and AWS states: *"On December 31, 2026, AWS will discontinue support for AWS Snowball devices in all AWS commercial Regions."* The device itself offered roughly **210 TB** on a Storage Optimized unit, with transfer jobs completed **within 360 days**. Crucially, the **Snow Family appears on neither the in-scope nor the out-of-scope list** in the current CLF-C02 guide — so it is context, never a correct answer. AWS's directed alternatives for large offline moves are **AWS DataSync**, **Data Transfer Terminal** and **AWS Outposts**.
+**AWS Snowball Edge is no longer available to new customers**, closed to new customers on **7 November 2025**, and AWS states: *"On December 31, 2026, AWS will discontinue support for AWS Snowball devices in all AWS commercial Regions."* The device itself offered roughly **210 TB** on a Storage Optimized unit, with transfer jobs completed **within 360 days**. Crucially, the **Snow Family appears on neither the in-scope nor the out-of-scope list** in the current CLF-C02 guide, so it is context, never a correct answer. AWS's directed alternatives for large offline moves are **AWS DataSync**, **Data Transfer Terminal** and **AWS Outposts**.
 
-### 9.4 AWS Backup — one policy engine for everything
+### 9.4 AWS Backup: one policy engine for everything
 
-Task 3.6 names *"Understanding use cases for AWS Backup"*. It is a **central, policy-driven backup service**: **plans** select resources (typically **by tag**), **vaults** hold the copies (KMS-encrypted), and **AWS Backup Vault Lock** provides **write-once-read-many (WORM)** protection. Backups are **incremental** and can move **warm → cold**, run **cross-Region and cross-account**, and report through **AWS Backup Audit Manager**. It covers **EC2/EBS, S3, EFS, FSx, RDS, DynamoDB and Storage Gateway volumes** — but it *"does not govern backups you take … outside of AWS Backup"*, and it is **additive**: it duplicates native snapshot mechanisms, so it costs money on top of them.
+Task 3.6 names *"Understanding use cases for AWS Backup"*. It is a **central, policy-driven backup service**: **plans** select resources (typically **by tag**), **vaults** hold the copies (KMS-encrypted), and **AWS Backup Vault Lock** provides **write-once-read-many (WORM)** protection. Backups are **incremental** and can move **warm → cold**, run **cross-Region and cross-account**, and report through **AWS Backup Audit Manager**. It covers **EC2/EBS, S3, EFS, FSx, RDS, DynamoDB and Storage Gateway volumes**, but it *"does not govern backups you take … outside of AWS Backup"*, and it is **additive**: it duplicates native snapshot mechanisms, so it costs money on top of them.
 
-Retention numbers (as of Oct 2026): **1 day to 100 years** for snapshots; **1 to 35 days** for continuous PITR; **cold tier minimum 90 days**; a resource must sit in **warm for at least 8 days** before moving to cold. Companion service: **AWS Elastic Disaster Recovery** does *"continuous block-level replication"* with an **RPO of seconds** and an **RTO typically 5–20 minutes** — the pilot-light answer for whole servers.
+Retention numbers (as of Oct 2026): **1 day to 100 years** for snapshots; **1 to 35 days** for continuous PITR; **cold tier minimum 90 days**; a resource must sit in **warm for at least 8 days** before moving to cold. Companion service: **AWS Elastic Disaster Recovery** does *"continuous block-level replication"* with an **RPO of seconds** and an **RTO typically 5 to 20 minutes**: the pilot-light answer for whole servers.
 
-**Worked example E13 — backup retention arithmetic (sourced rule).** Cold-tier backups must be retained **at least 90 days after the cold transition**, and warm retention must be **≥8 days**:
+**Worked example E13: backup retention arithmetic (sourced rule).** Cold-tier backups must be retained **at least 90 days after the cold transition**, and warm retention must be **≥8 days**:
 
 ```text
 Requirement: 300-day total retention, cold-after = 8 days
 DeleteAfterDays >= cold-after + 90  ->  >= 308 days
 ```
 
-- **📚 Did you know?** **AWS Backup and native snapshots solve different problems.** A snapshot is a *mechanism* (incremental, Region-wide, $0.05/GB-month as of Oct 2026); AWS Backup is *governance* — tag-based selection across accounts, one retention schedule, Vault Lock for WORM compliance, and cross-Region copies. A question asking "how do you apply **one** backup policy across 40 accounts" is asking for **AWS Backup**, not for a script that calls `CreateSnapshot` 40 times.
+- **📚 Did you know?** **AWS Backup and native snapshots solve different problems.** A snapshot is a *mechanism* (incremental, Region-wide, $0.05/GB-month as of Oct 2026); AWS Backup is *governance*: tag-based selection across accounts, one retention schedule, Vault Lock for WORM compliance, and cross-Region copies. A question asking "how do you apply **one** backup policy across 40 accounts" is asking for **AWS Backup**, not for a script that calls `CreateSnapshot` 40 times.
 
 ---
 
-## 10. S3 vs EBS vs EFS — the decision table
+## 10. S3 vs EBS vs EFS: the decision table
 
 Task 3.6's three data models are the fastest way to score here: **block** = low-latency, single instance/container; **file** = hierarchical, shared, NFS/SMB; **object** = API-addressed, key + metadata, cheapest at scale.
 
 | Question | **Amazon S3** (object) | **Amazon EBS** (block) | **Amazon EFS / FSx** (file) |
 |---|---|---|---|
 | Data model | Objects: bucket → object → key (+ version ID) | Raw block devices, AZ-bound | Hierarchical files, POSIX (EFS) or SMB (FSx Windows) |
-| Access | Console, CLI, SDK, REST — **no mount** | Attach to **one instance** (Multi-Attach: io1/io2, 16 Nitro, same AZ) | **Mounted by many instances at once**, across AZs |
+| Access | Console, CLI, SDK, REST: **no mount** | Attach to **one instance** (Multi-Attach: io1/io2, 16 Nitro, same AZ) | **Mounted by many instances at once**, across AZs |
 | Typical use | Websites, backups, data lakes, archives, static hosting | Boot volumes, databases, any OS filesystem | Shared home dirs, WordPress farms, Windows shares |
-| Durability / scope | **11 nines**, ≥3 AZs by default | Replicated **within one AZ**; 99.999% (io2 Block Express) to 99.8–99.9% | EFS **11 nines**, Regional ≥3 AZs (or One Zone) |
-| Cheapest cold tier | **Glacier Deep Archive — $0.00099/GB-mo** | Snapshot archive — $0.0125/GB-mo | EFS Archive — $0.008/GB-mo |
+| Durability / scope | **11 nines**, ≥3 AZs by default | Replicated **within one AZ**; 99.999% (io2 Block Express) to 99.8 to 99.9% | EFS **11 nines**, Regional ≥3 AZs (or One Zone) |
+| Cheapest cold tier | **Glacier Deep Archive: $0.00099/GB-mo** | Snapshot archive: $0.0125/GB-mo | EFS Archive: $0.008/GB-mo |
 | Lifecycle | Built-in **rules**: transition + expiration | Snapshots (manual or DLM/AWS Backup) | EFS IA/Archive after 90 days idle |
 | Exam shorthand | *Archival, web, static, data lake* | *Database, boot, single instance* | *Shared, POSIX, multi-AZ, Windows* |
 
@@ -579,20 +579,20 @@ flowchart TD
 ### 2026 Updates (as of October 2026)
 
 > [!NOTE]
-> **Five AWS-published changes from 2025–2026 that touch the services in this lesson.** Every item is date-stamped and sourced; prices and limits drift, so re-verify before you use them:
-> - **S3 Express One Zone price cut — effective 10 April 2025.** In us-east-1, storage fell **31%** (**$0.16 → $0.11 per GB-month**), **PUT requests −55%**, **GET requests −85%**, and multipart-upload / retrieval prices **60%** (AWS News Blog *"Up to 85% price reductions for Amazon S3 Express One Zone"* plus the matching What's New post, 2025-04-10). The class itself did not change: still **one AZ** with **single-digit-millisecond** latency (§7.1) — a price change, not a redesign.
-> - **EC2 NVIDIA GPU instances — announced 5 June 2025.** On-Demand prices fell **up to 45%** — P4d/P4de **−33%**, P5 **−44%**, P5en **−25%** — with the reduced Savings Plans rates effective from 4 June 2025 (AWS News Blog, 2025-06-05). This lands on §1.3's **accelerated-computing** families (**P** and **G**).
-> - **Database Savings Plans — launched 2 December 2025.** A 1-year, no-upfront Database Savings Plan commits at **up to 35%** (serverless databases up to 35%, provisioned up to 20%) (AWS News Blog and What's New, 2025-12-02). Exam caveat: the **current CLF-C02 guide still names only "AWS Savings Plans"** — this is a pricing update inside an existing task statement, not a new task.
+> **Five AWS-published changes from 2025 to 2026 that touch the services in this lesson.** Every item is date-stamped and sourced; prices and limits drift, so re-verify before you use them:
+> - **S3 Express One Zone price cut, effective 10 April 2025.** In us-east-1, storage fell **31%** (**$0.16 → $0.11 per GB-month**), **PUT requests −55%**, **GET requests −85%**, and multipart-upload / retrieval prices **60%** (AWS News Blog *"Up to 85% price reductions for Amazon S3 Express One Zone"* plus the matching What's New post, 2025-04-10). The class itself did not change: still **one AZ** with **single-digit-millisecond** latency (§7.1), a price change, not a redesign.
+> - **EC2 NVIDIA GPU instances: announced 5 June 2025.** On-Demand prices fell **up to 45%**: P4d/P4de **−33%**, P5 **−44%**, P5en **−25%**: with the reduced Savings Plans rates effective from 4 June 2025 (AWS News Blog, 2025-06-05). This lands on §1.3's **accelerated-computing** families (**P** and **G**).
+> - **Database Savings Plans, launched 2 December 2025.** A 1-year, no-upfront Database Savings Plan commits at **up to 35%** (serverless databases up to 35%, provisioned up to 20%) (AWS News Blog and What's New, 2025-12-02). Exam caveat: the **current CLF-C02 guide still names only "AWS Savings Plans"**, this is a pricing update inside an existing task statement, not a new task.
 > - **Commitment sharing and purchase tooling.** **Savings Plans / Reserved Instances group sharing** became generally available on **19 November 2025**, and **Target Coverage** arrived in the Savings Plans Purchase Analyzer on **9 June 2026** (AWS What's New, 2025-11-19; AWS Cloud Financial Management blog, 2026-06-09). The **examinable cost-tool names do not change**: **Cost Explorer, AWS Budgets, Pricing Calculator, Trusted Advisor, Well-Architected Tool**.
-> - **Scope lists moved under three services this lesson teaches.** In the current guide, **AWS Snow Family sits on neither the in-scope nor the out-of-scope list**, **AWS Wavelength is explicitly out of scope**, and **Amazon FSx for Lustre is out of scope** (in-scope and out-of-scope service lists, accessed Oct 2026) — exactly the three distractor verdicts already flagged in this lesson's scope note.
+> - **Scope lists moved under three services this lesson teaches.** In the current guide, **AWS Snow Family sits on neither the in-scope nor the out-of-scope list**, **AWS Wavelength is explicitly out of scope**, and **Amazon FSx for Lustre is out of scope** (in-scope and out-of-scope service lists, accessed Oct 2026): exactly the three distractor verdicts already flagged in this lesson's scope note.
 
 ---
 
 ## Real-World Case Studies
 
-AWS publishes what these patterns look like in production. Every figure below is **customer- or AWS-claimed and unaudited**, quoted with its source so you can check it — the examinable point is the **pattern** (which purchasing option was chosen, which storage tier moved, which number), not the marketing.
+AWS publishes what these patterns look like in production. Every figure below is **customer- or AWS-claimed and unaudited**, quoted with its source so you can check it: the examinable point is the **pattern** (which purchasing option was chosen, which storage tier moved, which number), not the marketing.
 
-### Case A — NASA JPL: Auto Scaling with Spot, On-Demand and Capacity Reservations
+### Case A, NASA JPL: Auto Scaling with Spot, On-Demand and Capacity Reservations
 
 | Element | Detail |
 |---|---|
@@ -602,19 +602,19 @@ AWS publishes what these patterns look like in production. Every figure below is
 | **Compute lesson** | One workload, **three purchasing options at once**: Spot for the interruptible fault-tolerant bulk, On-Demand for the flexible remainder, Capacity Reservations for guaranteed AZ room |
 | **Source** | aws.amazon.com/solutions/case-studies/nasa-jpl-spot-case-study (accessed Oct 2026) |
 
-*Exam lesson:* the answer to *"which purchasing option"* is often **a blend**, not one option. Spot's **90% is a ceiling**, and it only works where the job is **fault-tolerant and checkpointable** — which is exactly why NASA's HPC-style processing is eligible and a stateful transactional database is not.
+*Exam lesson:* the answer to *"which purchasing option"* is often **a blend**, not one option. Spot's **90% is a ceiling**, and it only works where the job is **fault-tolerant and checkpointable**; which is exactly why NASA's HPC-style processing is eligible and a stateful transactional database is not.
 
-### Case B — Box: Well-Architected cost optimization, mostly in storage
+### Case B, Box: Well-Architected cost optimization, mostly in storage
 
 | Element | Detail |
 |---|---|
 | **Industry / context** | Enterprise SaaS (120,000+ enterprises): improve spend efficiency without hurting security, reliability or performance |
 | **AWS services named** | **Well-Architected Framework** + Solutions Architect reviews; **S3 and S3 Glacier tiering**; **EBS volume and snapshot hygiene**; CloudTrail event filtering; routing traffic around internet gateways |
 | **Headline outcomes (AWS-published, customer-claimed)** | **Over $2.23 million** unpacked: **$438,000** inter-AZ transfer + **over $1.1 million/year** data egress + **over $500,000/year** storage + **$192,000/year** logging |
-| **Storage lesson** | **Storage classes and snapshot hygiene are a cost lever** — the two storage lines alone are ~$692K of the total |
+| **Storage lesson** | **Storage classes and snapshot hygiene are a cost lever**: the two storage lines alone are ~$692K of the total |
 | **Source** | aws.amazon.com/solutions/case-studies/box-case-study (accessed Oct 2026) |
 
-*Exam lesson:* this is Domain 4's **cost pillar** expressed in Domain 3 services. "We moved infrequent objects to a colder class and tidied EBS snapshots" is the same decision as our §7 and §8 tables — and note that the **free** lever (architectural best practice, Well-Architected review) produced the largest share of the savings.
+*Exam lesson:* this is Domain 4's **cost pillar** expressed in Domain 3 services. "We moved infrequent objects to a colder class and tidied EBS snapshots" is the same decision as our §7 and §8 tables, and note that the **free** lever (architectural best practice, Well-Architected review) produced the largest share of the savings.
 
 ### What the two cases share
 
@@ -624,48 +624,48 @@ AWS publishes what these patterns look like in production. Every figure below is
 | Storage tiering is real money | Box: >$500K/year storage + $192K/year logging | **Lifecycle rules and cold classes** are the cheapest optimization available |
 | Managed beats DIY | NASA JPL's Auto Scaling vs a hand-rolled fleet | *"Auto scaling provides elasticity"* is a task statement, not a slogan |
 
-- **📚 Did you know?** Amazon S3 itself is a 20-year-old case study: AWS launched it on **14 March 2006** with roughly **1 PB** of capacity across about **400 storage nodes in 15 racks**, a **5 GB** maximum object size and a price of **15 cents per gigabyte**; AWS reported on **13 March 2026** that the price today is *"slightly over 2 cents per gigabyte"* — about an **85% reduction** — while *"the code you wrote for S3 in 2006 still works today, unchanged"* (aws.amazon.com/blogs/aws, accessed Oct 2026). Today's maximum object size is **50 TB**, a 10× increase made on **2 December 2025**.
+- **📚 Did you know?** Amazon S3 itself is a 20-year-old case study: AWS launched it on **14 March 2006** with roughly **1 PB** of capacity across about **400 storage nodes in 15 racks**, a **5 GB** maximum object size and a price of **15 cents per gigabyte**; AWS reported on **13 March 2026** that the price today is *"slightly over 2 cents per gigabyte"*, about an **85% reduction**, while *"the code you wrote for S3 in 2006 still works today, unchanged"* (aws.amazon.com/blogs/aws, accessed Oct 2026). Today's maximum object size is **50 TB**, a 10× increase made on **2 December 2025**.
 
 > [!WARNING]
-> **How to read case-study numbers on exam day:** every percentage here is a **customer-claimed or AWS-published, unaudited** figure — never a guarantee, and *"up to"* is a **ceiling**, never an average. Attribute the source and access date ("NASA JPL case study, accessed Oct 2026"), not "AWS proves". A case never licenses an out-of-scope answer: you are asked to **select the in-scope service and the correct purchasing option**, not to reproduce the marketing figure.
+> **How to read case-study numbers on exam day:** every percentage here is a **customer-claimed or AWS-published, unaudited** figure: never a guarantee, and *"up to"* is a **ceiling**, never an average. Attribute the source and access date ("NASA JPL case study, accessed Oct 2026"), not "AWS proves". A case never licenses an out-of-scope answer: you are asked to **select the in-scope service and the correct purchasing option**, not to reproduce the marketing figure.
 
 Three further AWS-published stories follow, and the caution above governs every number in them.
 
-### Case C — Canva: one workload, three purchasing options
+### Case C, Canva: one workload, three purchasing options
 
 | Element | Detail |
 |---|---|
 | **Industry / context** | SaaS design platform, on AWS from day one; needed cost-effective scale with a different reliability tier per user plan |
 | **AWS services named** | **Spot Instances** for interruptible free-tier projects, **On-Demand + Savings Plans** for steady Pro-user capacity, **Reserved Instances** kept as a fallback, plus AWS cost-analysis tools |
-| **Headline outcomes (AWS-published, customer-claimed)** | Compute costs **reduced by 46% in less than 2 years**; the case study also restates AWS's list figures — **up to 72%** for Reserved Instances / Savings Plans and **up to 90%** for Spot |
+| **Headline outcomes (AWS-published, customer-claimed)** | Compute costs **reduced by 46% in less than 2 years**; the case study also restates AWS's list figures: **up to 72%** for Reserved Instances / Savings Plans and **up to 90%** for Spot |
 | **Compute lesson** | The **reliability tier of the workload**, not the size of the company, picks the purchase option: interruptible → Spot, steady → commitment discount, elastic remainder → On-Demand |
 | **Source** | aws.amazon.com/solutions/case-studies/canva-cost-optimization-case-study (accessed Oct 2026) |
 
-*Exam lesson:* this is §2's tie-breaker run as an operating model — and note that Canva kept **Reserved Instances as a fallback rather than a first choice**, which mirrors AWS's current guidance to prefer **Savings Plans over Reserved Instances**. The **46%** is Canva's measured result; AWS never guarantees it.
+*Exam lesson:* this is §2's tie-breaker run as an operating model, and note that Canva kept **Reserved Instances as a fallback rather than a first choice**, which mirrors AWS's current guidance to prefer **Savings Plans over Reserved Instances**. The **46%** is Canva's measured result; AWS never guarantees it.
 
-### Case D — Shutterfly Business Solutions: 400 TB of objects plus a file-service lift-and-shift
+### Case D, Shutterfly Business Solutions: 400 TB of objects plus a file-service lift-and-shift
 
 | Element | Detail |
 |---|---|
 | **Industry / context** | E-commerce / photo printing: on-premises VMware vSphere, stand-alone stacks, more than **2,000 VMs**, and a colocation facility to evacuate |
 | **AWS services named** | **VMware Cloud on AWS** as a bridge, then **Amazon ECS**, **Amazon EC2**, **Amazon FSx for NetApp ONTAP**, CI/CD pipelines and **Amazon S3 (about 400 TB)** |
-| **Headline outcomes (AWS-published, customer-claimed)** | VM footprint cut **2,000 → 1,200**; roughly **800 systems / 400 TB** migrated natively by **March 2025 — six months early**; about **25%** operating-expense reduction; **80% of workloads on ECS**; *"no high-severity incidents"* |
-| **Storage lesson** | A migration that needed **both** data models: **S3** for ~400 TB of objects and **FSx for NetApp ONTAP** for shares that had to keep behaving like an existing filer — the §9.1 and §10 decision at production scale |
+| **Headline outcomes (AWS-published, customer-claimed)** | VM footprint cut **2,000 → 1,200**; roughly **800 systems / 400 TB** migrated natively by **March 2025: six months early**; about **25%** operating-expense reduction; **80% of workloads on ECS**; *"no high-severity incidents"* |
+| **Storage lesson** | A migration that needed **both** data models: **S3** for ~400 TB of objects and **FSx for NetApp ONTAP** for shares that had to keep behaving like an existing filer: the §9.1 and §10 decision at production scale |
 | **Source** | aws.amazon.com/solutions/case-studies/shutterfly-migration-case-study (accessed Oct 2026) |
 
-*Exam lesson:* FSx shows up in a real migration as exactly the stem §9.1 teaches — *"lift-and-shift an existing file service"* — while the ~**25% opex** cut from right-sizing and licence avoidance is Domain 4's cost pillar appearing inside a Domain 3 migration. The **VMware bridge was a step, not the destination**: the end state was native AWS.
+*Exam lesson:* FSx shows up in a real migration as exactly the stem §9.1 teaches, *"lift-and-shift an existing file service"*, while the ~**25% opex** cut from right-sizing and licence avoidance is Domain 4's cost pillar appearing inside a Domain 3 migration. The **VMware bridge was a step, not the destination**: the end state was native AWS.
 
-### Case E — FarEye: three compute levers stacked in one story
+### Case E, FarEye: three compute levers stacked in one story
 
 | Element | Detail |
 |---|---|
 | **Industry / context** | SaaS logistics: thin last-mile delivery margins and a requirement for predictable spend |
 | **AWS services named** | **Compute Savings Plans**, **EC2 Spot** and **Graviton**, run across **500+ Spot and On-Demand instances**, alongside AWS cost tooling |
 | **Headline outcomes (AWS-published, customer-claimed)** | **$1 million per year** in cloud cost savings; **AWS compute costs reduced by 65%**; Graviton delivering **30% more performance** |
-| **Compute lesson** | The levers **stack** — a commitment discount, interruptible capacity and a silicon choice are three *different* decisions, not three names for the same one |
+| **Compute lesson** | The levers **stack**: a commitment discount, interruptible capacity and a silicon choice are three *different* decisions, not three names for the same one |
 | **Source** | aws.amazon.com/solutions/case-studies/fareye-case-study (accessed Oct 2026) |
 
-*Exam lesson:* **−65% is FarEye's result, never an AWS guarantee**, and Graviton savings are not free — the `g` in `c7g` means Arm-compatible images and code (§1.2), so "just move everything to Graviton" ignores the compatibility trap entirely.
+*Exam lesson:* **−65% is FarEye's result, never an AWS guarantee**, and Graviton savings are not free: the `g` in `c7g` means Arm-compatible images and code (§1.2), so "just move everything to Graviton" ignores the compatibility trap entirely.
 
 ### Where all five stories land in this lesson
 
@@ -705,10 +705,10 @@ Three further AWS-published stories follow, and the caution above governs every 
   "type": "multiple-choice",
   "question": "A batch analytics job runs for 6 hours, tolerates interruption, checkpoints every 10 minutes, and is price-sensitive. Which purchasing option BEST fits?",
   "options": [
-    "Spot Instances - spare capacity at up to a 90% discount, with a two-minute interruption notice",
-    "Capacity Reservations - guaranteed AZ capacity at the On-Demand price, charged whether used or not",
-    "Dedicated Hosts - a whole physical host billed per host for bring-your-own-licence workloads",
-    "On-Demand Instances - pay by the second with a 60-second minimum and no interruption risk"
+    "Spot Instances: spare capacity at up to a 90% discount, with a two-minute interruption notice",
+    "Capacity Reservations: guaranteed AZ capacity at the On-Demand price, charged whether used or not",
+    "Dedicated Hosts: a whole physical host billed per host for bring-your-own-licence workloads",
+    "On-Demand Instances: pay by the second with a 60-second minimum and no interruption risk"
   ],
   "correct": 0,
   "explanation": "Fault-tolerant, flexible, checkpointable work is the textbook Spot stem: AWS documents Spot as spare capacity at up to a 90% discount with a two-minute interruption notice and no termination protection. Capacity Reservations guarantee room but give no discount and bill regardless of use; Dedicated Hosts answer a per-socket licence question; On-Demand would work but wastes the interruption tolerance the workload offers."
@@ -743,7 +743,7 @@ Three further AWS-published stories follow, and the caution above governs every 
     "The request fails and the group is deleted because min, desired and max are inconsistent"
   ],
   "correct": 1,
-  "explanation": "An Auto Scaling group attempts to maintain its desired capacity, but scaling policies only move desired capacity within the min/max bounds - six plus eight would be fourteen, so the group stops at the maximum of twelve. Minimum four is a floor, maximum twelve is a ceiling; both are respected, and unexpected terminations are replaced rather than causing the group to be deleted."
+  "explanation": "An Auto Scaling group attempts to maintain its desired capacity, but scaling policies only move desired capacity within the min/max bounds: six plus eight would be fourteen, so the group stops at the maximum of twelve. Minimum four is a floor, maximum twelve is a ceiling; both are respected, and unexpected terminations are replaced rather than causing the group to be deleted."
 }
 ```
 
@@ -753,13 +753,13 @@ Three further AWS-published stories follow, and the caution above governs every 
   "type": "multiple-choice",
   "question": "Using the Lambda pricing components verified for this lesson (as of Oct 2026), what does a month of 2,000,000 invocations at 100 ms and 1,024 MB cost?",
   "options": [
-    "About $0.20 - one million billable requests at $0.20 per million, and 200,000 GB-seconds still inside the 400,000 free allowance",
-    "About $0.60 - all two million requests are billable at $0.20 per million",
-    "About $2.00 - Lambda always bills the listed 1,000 GB-second block",
+    "About $0.20: one million billable requests at $0.20 per million, and 200,000 GB-seconds still inside the 400,000 free allowance",
+    "About $0.60: all two million requests are billable at $0.20 per million",
+    "About $2.00: Lambda always bills the listed 1,000 GB-second block",
     "Zero - Lambda is serverless, so it is never billed while a function is running"
   ],
   "correct": 0,
-  "explanation": "Requests: 2,000,000 minus the 1,000,000 Always Free requests leaves 1,000,000 x $0.20 per million = $0.20. Duration: 1 GB x 0.1 s = 0.1 GB-s per call, x 2,000,000 = 200,000 GB-s, which is under the 400,000 GB-second monthly allowance, so duration is free. Lambda bills only while code executes - idle costs nothing - but it is absolutely billed per request and per GB-second when it runs."
+  "explanation": "Requests: 2,000,000 minus the 1,000,000 Always Free requests leaves 1,000,000 x $0.20 per million = $0.20. Duration: 1 GB x 0.1 s = 0.1 GB-s per call, x 2,000,000 = 200,000 GB-s, which is under the 400,000 GB-second monthly allowance, so duration is free. Lambda bills only while code executes: idle costs nothing; but it is absolutely billed per request and per GB-second when it runs."
 }
 ```
 
@@ -769,10 +769,10 @@ Three further AWS-published stories follow, and the caution above governs every 
   "type": "multiple-choice",
   "question": "A company wants container orchestration with no cluster management fee and no worker nodes to patch, using the AWS-native orchestrator. Which combination is correct?",
   "options": [
-    "Amazon EKS with the EC2 launch type - EKS has no cluster fee and you patch nothing",
-    "Amazon ECS with AWS Fargate - no orchestration fee, and Fargate removes node management",
+    "Amazon EKS with the EC2 launch type: EKS has no cluster fee and you patch nothing",
+    "Amazon ECS with AWS Fargate: no orchestration fee, and Fargate removes node management",
     "Amazon ECR with AWS Batch - ECR orchestrates and Batch stores the images",
-    "AWS Elastic Beanstalk with Amazon Lightsail - both are serverless container platforms"
+    "AWS Elastic Beanstalk with Amazon Lightsail: both are serverless container platforms"
   ],
   "correct": 1,
   "explanation": "ECS is the AWS-native orchestrator and AWS documents no ECS management fee for Fargate or EC2 launch types; Fargate is the serverless compute engine that works with both ECS and EKS, billed per vCPU and per GB of memory per second with a one-minute minimum. EKS is managed Kubernetes and charges $0.10 per cluster per hour (standard support), ECR is an image registry rather than an orchestrator, and neither Beanstalk nor Lightsail is a serverless container platform."
@@ -855,7 +855,7 @@ Three further AWS-published stories follow, and the caution above governs every 
     "Because Reserved Instances commit to a dollar amount per hour while Savings Plans commit to a specific configuration"
   ],
   "correct": 0,
-  "explanation": "Spot's ceiling - up to 90% off - fits only fault-tolerant, checkpointable work, a Savings Plan commits to usage measured in $/hour and auto-applies without an exchange, and On-Demand remains the flexible remainder. The second option is wrong because commitment discounts are not cheapest for unpredictable or interruptible work; the third is wrong because Spot usage is explicitly excluded from Savings Plans; the fourth reverses the definitions - a Savings Plan commits to $/hour, a Reserved Instance commits to a configuration (Standard up to 72%, Convertible up to 66% as of Oct 2026)."
+  "explanation": "Spot's ceiling: up to 90% off: fits only fault-tolerant, checkpointable work, a Savings Plan commits to usage measured in $/hour and auto-applies without an exchange, and On-Demand remains the flexible remainder. The second option is wrong because commitment discounts are not cheapest for unpredictable or interruptible work; the third is wrong because Spot usage is explicitly excluded from Savings Plans; the fourth reverses the definitions: a Savings Plan commits to $/hour, a Reserved Instance commits to a configuration (Standard up to 72%, Convertible up to 66% as of Oct 2026)."
 }
 ```
 
@@ -865,13 +865,13 @@ Three further AWS-published stories follow, and the caution above governs every 
   "type": "multiple-choice",
   "question": "Two sourced 2025 price changes touch this lesson: effective 10 April 2025, Amazon S3 Express One Zone storage fell 31% ($0.16 to $0.11 per GB-month in us-east-1) with GET requests down 85%; on 5 June 2025, Amazon EC2 NVIDIA GPU instance prices fell by up to 45%. Which statement about these changes is correct?",
   "options": [
-    "Both are price-only changes: S3 Express One Zone is still a single-AZ, single-digit-millisecond class, and the GPU instances are still accelerated-compute P-family capacity - neither redesign changed what each one is for",
+    "Both are price-only changes: S3 Express One Zone is still a single-AZ, single-digit-millisecond class, and the GPU instances are still accelerated-compute P-family capacity: neither redesign changed what each one is for",
     "The Express One Zone price cut also promoted it to a three-AZ class with S3 Standard's availability profile",
     "The GPU price cut moved those instances to Spot-only capacity, so On-Demand no longer applies to them",
     "Both changes became effective in 2026, so they post-date every fact printed in this lesson's storage-class and instance-family tables"
   ],
   "correct": 0,
-  "explanation": "AWS's 10 April 2025 announcement (What's New plus the AWS News Blog item Up to 85% price reductions for Amazon S3 Express One Zone) cut storage, PUT, GET and upload/retrieval prices in us-east-1 and changed nothing about the class itself: one Availability Zone, single-digit-millisecond latency. The 5 June 2025 announcement cut On-Demand rates by up to 45% (P4d/P4de -33%, P5 -44%, P5en -25%) without altering the instances' role as accelerated-compute capacity. Express One Zone never gained a second AZ, the GPU instances stayed purchasable On-Demand, and both announcements are dated 2025 - as of Oct 2026, verify current prices before use."
+  "explanation": "AWS's 10 April 2025 announcement (What's New plus the AWS News Blog item Up to 85% price reductions for Amazon S3 Express One Zone) cut storage, PUT, GET and upload/retrieval prices in us-east-1 and changed nothing about the class itself: one Availability Zone, single-digit-millisecond latency. The 5 June 2025 announcement cut On-Demand rates by up to 45% (P4d/P4de -33%, P5 -44%, P5en -25%) without altering the instances' role as accelerated-compute capacity. Express One Zone never gained a second AZ, the GPU instances stayed purchasable On-Demand, and both announcements are dated 2025: as of Oct 2026, verify current prices before use."
 }
 ```
 
@@ -879,11 +879,11 @@ Three further AWS-published stories follow, and the caution above governs every 
 {
   "question": "Match each compute purchasing option to the stem that should make you choose it:",
   "pairs": [
-    {"left": "On-Demand Instances", "right": "Unpredictable or spiky usage with no commitment - pay by the second with a 60-second minimum"},
-    {"left": "Standard Reserved Instance", "right": "Fixed configuration for 1 or 3 years where you also want an AZ capacity reservation - up to 72% off"},
-    {"left": "Compute Savings Plans", "right": "Steady $/hour commitment that must follow you across families, Regions, operating systems, Fargate and Lambda - up to 66% off"},
-    {"left": "Spot Instances", "right": "Fault-tolerant, interruptible batch work - spare capacity at up to 90% off with a two-minute notice"},
-    {"left": "Dedicated Host", "right": "Per-socket or per-core bring-your-own-licence requirement - whole-host billing and placement control"},
+    {"left": "On-Demand Instances", "right": "Unpredictable or spiky usage with no commitment: pay by the second with a 60-second minimum"},
+    {"left": "Standard Reserved Instance", "right": "Fixed configuration for 1 or 3 years where you also want an AZ capacity reservation: up to 72% off"},
+    {"left": "Compute Savings Plans", "right": "Steady $/hour commitment that must follow you across families, Regions, operating systems, Fargate and Lambda: up to 66% off"},
+    {"left": "Spot Instances", "right": "Fault-tolerant, interruptible batch work: spare capacity at up to 90% off with a two-minute notice"},
+    {"left": "Dedicated Host", "right": "Per-socket or per-core bring-your-own-licence requirement: whole-host billing and placement control"},
     {"left": "Capacity Reservation", "right": "The workload must launch in this specific AZ - On-Demand price, charged whether used or not, no discount"}
   ],
   "explanation": "Read the stem for the constraint: no constraint means On-Demand, a dollar-per-hour steady commitment means Savings Plans, a configuration commitment plus capacity means an AZ-scoped RI, interruption tolerance means Spot, licence topology means a Dedicated Host, and a mandatory AZ with full flexibility means a Capacity Reservation."
@@ -915,7 +915,7 @@ Three further AWS-published stories follow, and the caution above governs every 
     "If Linux or containers: Amazon EFS (NFS, POSIX, Regional across at least 3 AZs)",
     "If Windows: FSx for Windows File Server (SMB, AD, NTFS ACLs)",
     "If single instance: does it need an OS filesystem with low-latency I/O?",
-    "If yes: pick an EBS volume type - gp3 for boot, io2 for mission-critical IOPS, st1/sc1 for sequential HDD"
+    "If yes: pick an EBS volume type: gp3 for boot, io2 for mission-critical IOPS, st1/sc1 for sequential HDD"
   ],
   "correctOrder": [
     "Is the data shared by more than one instance?",
@@ -923,7 +923,7 @@ Three further AWS-published stories follow, and the caution above governs every 
     "If Linux or containers: Amazon EFS (NFS, POSIX, Regional across at least 3 AZs)",
     "If Windows: FSx for Windows File Server (SMB, AD, NTFS ACLs)",
     "If single instance: does it need an OS filesystem with low-latency I/O?",
-    "If yes: pick an EBS volume type - gp3 for boot, io2 for mission-critical IOPS, st1/sc1 for sequential HDD"
+    "If yes: pick an EBS volume type: gp3 for boot, io2 for mission-critical IOPS, st1/sc1 for sequential HDD"
   ],
   "explanation": "Task 3.6 is a decision tree, not a list: first ask whether anything shares the data (block vs file), then which protocol the clients speak (NFS vs SMB), and only then tune the single-instance case by workload shape (boot, IOPS ceiling, sequential throughput). Unstructured or archival data that no instance mounts skips this whole tree and goes straight to Amazon S3."
 }
@@ -933,57 +933,57 @@ Three further AWS-published stories follow, and the caution above governs every 
 {
   "question": "Match each workload description to the S3 storage class that fits it best (rules and prices as of Oct 2026):",
   "pairs": [
-    {"left": "Unknown or changing access pattern, and the team refuses to pay per-gigabyte retrieval fees", "right": "S3 Intelligent-Tiering - automatic tiering after 30 and 90 days, small per-object monitoring fee, no retrieval fee"},
+    {"left": "Unknown or changing access pattern, and the team refuses to pay per-gigabyte retrieval fees", "right": "S3 Intelligent-Tiering: automatic tiering after 30 and 90 days, small per-object monitoring fee, no retrieval fee"},
     {"left": "Compliance archive restored at most once a year where the cheapest possible tier wins", "right": "S3 Glacier Deep Archive - 180-day minimum storage duration, hours to restore"},
     {"left": "Monthly reporting data that must come back in milliseconds", "right": "S3 Standard-IA - 30-day minimum storage duration, 128 KB minimum billable object, retrieval fee per GB"},
-    {"left": "Re-creatable analytics output where a second copy in another AZ would be wasted money", "right": "S3 One Zone-IA - one AZ, 99.5% availability, retrieval fee per GB"},
+    {"left": "Re-creatable analytics output where a second copy in another AZ would be wasted money", "right": "S3 One Zone-IA: one AZ, 99.5% availability, retrieval fee per GB"},
     {"left": "Medical images read about once a quarter but needed the instant they are opened", "right": "S3 Glacier Instant Retrieval - 90-day minimum storage duration, millisecond retrieval"},
-    {"left": "Static website assets requested constantly by the public", "right": "S3 Standard - the default class, at least 3 AZs, no minimum storage duration, no retrieval fee"}
+    {"left": "Static website assets requested constantly by the public", "right": "S3 Standard: the default class, at least 3 AZs, no minimum storage duration, no retrieval fee"}
   ],
-  "explanation": "Read the constraint, not the price tag: an unknown pattern with no retrieval fees means Intelligent-Tiering; millisecond access at a quarterly rhythm means Glacier Instant Retrieval; monthly-but-instant means Standard-IA; a disposable copy means One Zone-IA; the cheapest long-term archive means Deep Archive; constant access means Standard. Every IA and Glacier class carries a minimum storage duration of 30, 90 or 180 days, and a 128 KB minimum billable object wherever one applies - verify current pricing before use."
+  "explanation": "Read the constraint, not the price tag: an unknown pattern with no retrieval fees means Intelligent-Tiering; millisecond access at a quarterly rhythm means Glacier Instant Retrieval; monthly-but-instant means Standard-IA; a disposable copy means One Zone-IA; the cheapest long-term archive means Deep Archive; constant access means Standard. Every IA and Glacier class carries a minimum storage duration of 30, 90 or 180 days, and a 128 KB minimum billable object wherever one applies: verify current pricing before use."
 }
 ```
 
 > [!IMPORTANT]
-> **Comparative Verdict — compute and storage × on-premises × other clouds × DIY/managed**
-> - **Versus on-premises:** on premises you buy the server, wait for delivery, then own capacity planning in both directions — over-provisioned hardware sits idle, and a spike means a procurement cycle. AWS replaces that with **instances launched in minutes**, **Auto Scaling groups that move desired capacity between min and max automatically**, **purchasing options that turn commitment into up-to-72% discounts**, and **object storage with 11-nines durability across ≥3 AZs** with no storage array to rack. Capital One's **eight data centers** and Bangkok Flight Services' **multi-AZ disaster recovery** are the on-premises side of that trade (customer-claimed, accessed Oct 2026). You still own the guest OS, the filesystem choices, the encryption keys and the data you put there.
-> - **Versus other clouds:** every major provider offers VMs, block volumes, object storage and autoscaling, so the examinable differences are AWS's **specific vocabulary and rules** — the **`[series][generation][options].[size]`** naming grammar, **seven named purchasing options** with AWS's own ceilings (72% / 66% / 90% as of Oct 2026), **S3's storage-class names and their 30/90/180-day minimums**, **SSE-S3 as the default for every bucket since 5 January 2023**, **EFS as NFS-only with no Windows support**, and **AWS Backup with Vault Lock WORM**. Do not assume another provider's class names, minimum durations or discount percentages transfer.
-> - **Versus DIY / build-it-yourself:** a hand-built fleet means writing your own scaling logic, your own health checks and your own image pipeline; hand-rolled object storage means implementing erasure coding, versioning, lifecycle tiering and 11-nines durability yourself; hand-rolled backups mean cron jobs nobody tests. The Well-Architected answer is consistently **managed and least-operational-overhead**: Auto Scaling groups instead of custom scripts, S3 lifecycle rules instead of a home-grown tiering daemon, AWS Backup instead of `CreateSnapshot` loops, Fargate instead of a patched Kubernetes node group — and Elastic Beanstalk's **$0 service charge** is the cheapest possible entry to "let AWS run the platform", even though the EC2 and load-balancer resources it creates are still billed to you.
+> **Comparative Verdict: compute and storage × on-premises × other clouds × DIY/managed**
+> - **Versus on-premises:** on premises you buy the server, wait for delivery, then own capacity planning in both directions: over-provisioned hardware sits idle, and a spike means a procurement cycle. AWS replaces that with **instances launched in minutes**, **Auto Scaling groups that move desired capacity between min and max automatically**, **purchasing options that turn commitment into up-to-72% discounts**, and **object storage with 11-nines durability across ≥3 AZs** with no storage array to rack. Capital One's **eight data centers** and Bangkok Flight Services' **multi-AZ disaster recovery** are the on-premises side of that trade (customer-claimed, accessed Oct 2026). You still own the guest OS, the filesystem choices, the encryption keys and the data you put there.
+> - **Versus other clouds:** every major provider offers VMs, block volumes, object storage and autoscaling, so the examinable differences are AWS's **specific vocabulary and rules**: the **`[series][generation][options].[size]`** naming grammar, **seven named purchasing options** with AWS's own ceilings (72% / 66% / 90% as of Oct 2026), **S3's storage-class names and their 30/90/180-day minimums**, **SSE-S3 as the default for every bucket since 5 January 2023**, **EFS as NFS-only with no Windows support**, and **AWS Backup with Vault Lock WORM**. Do not assume another provider's class names, minimum durations or discount percentages transfer.
+> - **Versus DIY / build-it-yourself:** a hand-built fleet means writing your own scaling logic, your own health checks and your own image pipeline; hand-rolled object storage means implementing erasure coding, versioning, lifecycle tiering and 11-nines durability yourself; hand-rolled backups mean cron jobs nobody tests. The Well-Architected answer is consistently **managed and least-operational-overhead**: Auto Scaling groups instead of custom scripts, S3 lifecycle rules instead of a home-grown tiering daemon, AWS Backup instead of `CreateSnapshot` loops, Fargate instead of a patched Kubernetes node group, and Elastic Beanstalk's **$0 service charge** is the cheapest possible entry to "let AWS run the platform", even though the EC2 and load-balancer resources it creates are still billed to you.
 
 > [!WARNING]
 > **Exam-day traps for this lesson:**
-> - **A Reserved Instance is a billing discount, not a reserved server** — AZ-scoped RIs *and* Capacity Reservations reserve capacity; **Savings Plans reserve nothing**;
-> - **Savings Plans vs RIs** — SP = committed **$/hour**, auto-applies, no exchange, **no Spot coverage**; RI = committed **configuration**; AWS currently **recommends Savings Plans over Reserved Instances**;
-> - **Discount ceilings as of Oct 2026**: Standard RI / EC2 Instance SP **up to 72%**; Compute SP / Convertible RI **up to 66%**; Spot **up to 90%**; Database SP **up to 35%**; SageMaker AI SP **up to 64%** — and the stray **"up to 75%"** on one AWS page is uncorroborated, so never quote it;
-> - **Spot is interruptible** — two-minute notice, **no termination protection**, excluded from Savings Plans, and never correct for a stateful or non-fault-tolerant workload;
-> - **Dedicated Host vs Dedicated Instance** — AWS says there is *"no performance, security, or physical difference"*; the split is **per-host vs per-instance billing (+ $2/Region)** and **licence/placement control** ("per-socket licence" ⇒ Host);
-> - **Capacity Reservations bill whether you use them or not** and give **no discount** — "reserve capacity cheaply" is a contradiction;
-> - **Auto Scaling provides elasticity (how many); a load balancer distributes and health-checks (where)** — and an ELB-attached instance is registered with the load balancer **before** it is marked InService;
-> - **Lambda's ceiling is 900 seconds (15 minutes)** and **10,240 MB**, positioned for *"invocations that last one second or less"* — long-running, stateful or GPU work belongs on EC2/ECS/EKS/Beanstalk;
-> - **EKS has a cluster fee ($0.10/hour standard); ECS does not** — and **ECR stores images, it does not orchestrate** anything;
-> - **Beanstalk is PaaS, not serverless and not free** — $0 *service* charge, but you pay for every EC2/ELB/EBS resource it provisions; **Lightsail** is a flat-price VPS for "a few dozen instances or less";
-> - **Security groups are stateful and allow-only** with **no default inbound rules** — "block this IP" needs a **network ACL**;
-> - **S3 static websites are HTTP only** — HTTPS requires CloudFront, and hosting needs **Block Public Access off**;
-> - **SSE-S3 has been the default for every bucket since 5 January 2023** — "you must enable encryption to be compliant" is outdated for S3 (but EBS volumes **cannot** be encrypted in place);
-> - **11 nines is durability, not availability** — One Zone-IA keeps 11-nines durability while dropping to **99.5% availability in one AZ**;
-> - **Two different 30-day IA rules** — the *transition-age* minimum was removed (AWS guidance, 5 Oct 2026) but the *billing* minimum of 30 days (and the 128 KB minimum) still stands;
-> - **EBS durability is not S3 durability** — 99.8–99.9% generally, **99.999% for io2 Block Express**;
+> - **A Reserved Instance is a billing discount, not a reserved server**: AZ-scoped RIs *and* Capacity Reservations reserve capacity; **Savings Plans reserve nothing**;
+> - **Savings Plans vs RIs**: SP = committed **$/hour**, auto-applies, no exchange, **no Spot coverage**; RI = committed **configuration**; AWS currently **recommends Savings Plans over Reserved Instances**;
+> - **Discount ceilings as of Oct 2026**: Standard RI / EC2 Instance SP **up to 72%**; Compute SP / Convertible RI **up to 66%**; Spot **up to 90%**; Database SP **up to 35%**; SageMaker AI SP **up to 64%**, and the stray **"up to 75%"** on one AWS page is uncorroborated, so never quote it;
+> - **Spot is interruptible**: two-minute notice, **no termination protection**, excluded from Savings Plans, and never correct for a stateful or non-fault-tolerant workload;
+> - **Dedicated Host vs Dedicated Instance**: AWS says there is *"no performance, security, or physical difference"*; the split is **per-host vs per-instance billing (+ $2/Region)** and **licence/placement control** ("per-socket licence" ⇒ Host);
+> - **Capacity Reservations bill whether you use them or not** and give **no discount**: "reserve capacity cheaply" is a contradiction;
+> - **Auto Scaling provides elasticity (how many); a load balancer distributes and health-checks (where)**, and an ELB-attached instance is registered with the load balancer **before** it is marked InService;
+> - **Lambda's ceiling is 900 seconds (15 minutes)** and **10,240 MB**, positioned for *"invocations that last one second or less"*: long-running, stateful or GPU work belongs on EC2/ECS/EKS/Beanstalk;
+> - **EKS has a cluster fee ($0.10/hour standard); ECS does not**, and **ECR stores images, it does not orchestrate** anything;
+> - **Beanstalk is PaaS, not serverless and not free**: $0 *service* charge, but you pay for every EC2/ELB/EBS resource it provisions; **Lightsail** is a flat-price VPS for "a few dozen instances or less";
+> - **Security groups are stateful and allow-only** with **no default inbound rules**: "block this IP" needs a **network ACL**;
+> - **S3 static websites are HTTP only**: HTTPS requires CloudFront, and hosting needs **Block Public Access off**;
+> - **SSE-S3 has been the default for every bucket since 5 January 2023**: "you must enable encryption to be compliant" is outdated for S3 (but EBS volumes **cannot** be encrypted in place);
+> - **11 nines is durability, not availability**: One Zone-IA keeps 11-nines durability while dropping to **99.5% availability in one AZ**;
+> - **Two different 30-day IA rules**: the *transition-age* minimum was removed (AWS guidance, 5 Oct 2026) but the *billing* minimum of 30 days (and the 128 KB minimum) still stands;
+> - **EBS durability is not S3 durability**: 99.8 to 99.9% generally, **99.999% for io2 Block Express**;
 > - **Instance store loses everything on stop**; **st1/sc1 cannot boot an instance**; **snapshots are invisible to S3 tools** and **AWS does not auto-backup EBS**;
-> - **EFS is NFS only — no Windows clients** ⇒ Windows share = **FSx for Windows File Server**; **Amazon FSx for Lustre is out of scope** for CLF-C02;
-> - **Storage Gateway is the "cached file system" answer**; **Snow Family is on neither exam list**, closed to new customers **7 Nov 2025** with support ending **31 Dec 2026** — 2026-era answers are **DataSync, Data Transfer Terminal, Outposts**;
-> - **AWS Copilot and AWS Wavelength are out of scope** — they are distractors, never correct answers;
+> - **EFS is NFS only: no Windows clients** ⇒ Windows share = **FSx for Windows File Server**; **Amazon FSx for Lustre is out of scope** for CLF-C02;
+> - **Storage Gateway is the "cached file system" answer**; **Snow Family is on neither exam list**, closed to new customers **7 Nov 2025** with support ending **31 Dec 2026**: 2026-era answers are **DataSync, Data Transfer Terminal, Outposts**;
+> - **AWS Copilot and AWS Wavelength are out of scope**; they are distractors, never correct answers;
 > - **AWS Backup duplicates native snapshots** (extra cost) and *"does not govern backups you take outside of AWS Backup"*;
-> - **Case-study numbers are customer-claimed, unaudited ceilings** — NASA JPL's *"up to 90 percent"* and Box's **$2.23M** are reported figures, never AWS guarantees.
+> - **Case-study numbers are customer-claimed, unaudited ceilings**: NASA JPL's *"up to 90 percent"* and Box's **$2.23M** are reported figures, never AWS guarantees.
 
 > [!SUCCESS]
 > **Key Takeaways:**
 > 1. **EC2** gives you virtual servers where *"the instance type … determines the hardware"*; decode names as **`[series][generation][options].[size]`** (`m7i.4xlarge`, `c6g.large`, `t3.micro`), map families to stems (**M/T** balanced · **C** CPU · **R/X/Z** memory · **I/D/H** storage · **P/G/F/Inf/Trn** accelerated), and complete the launch checklist: **AMI → instance type → key pair → security group → launch template**;
-> 2. Security groups are **stateful, allow-only, no default inbound** — a deny rule or a subnet-level answer is a **network ACL**;
+> 2. Security groups are **stateful, allow-only, no default inbound**: a deny rule or a subnet-level answer is a **network ACL**;
 > 3. The **seven purchasing options**: **On-Demand** (no commitment, 60-s minimum), **Reserved Instances** (1/3 yr, discount, Standard **up to 72%**, AZ-scoped ⇒ capacity too), **Savings Plans** (1/3 yr **$/hour**, Compute **up to 66%** incl. Fargate + Lambda, EC2 Instance **up to 72%**, no capacity reservation, no Spot coverage), **Spot** (**up to 90% off**, 2-min notice, no termination protection), **Dedicated Host** (per-host, BYOL), **Dedicated Instance** (per-instance **+ $2/Region**), **Capacity Reservations** (AZ room at On-Demand price, billed regardless);
 > 4. **Auto Scaling = elasticity**: min ≤ **desired** ≤ max (AWS's example: 4 / 6 / 12), policies move desired capacity within those bounds, unexpected terminations are replaced, instances go **launch → health check → InService** (registered with the load balancer first), and **multi-AZ** is the default answer for surviving an AZ failure;
-> 5. **Lambda** is serverless and event-driven (push = direct invocation, pull = event source mapping), billed **$0.20 per 1 million requests + GB-seconds rounded to 1 ms**, Always Free **1,000,000 requests + 400,000 GB-s/month**, memory **128–10,240 MB** (**1,769 MB ≈ 1 vCPU**), timeout **max 900 s** — 2M × 100 ms × 1 GB costs **≈ $0.20/month**;
-> 6. Containers in four lines: **ECS** = AWS-native orchestration, **$0 management fee**; **EKS** = managed Kubernetes, **$0.10/cluster/hour**; **Fargate** = serverless nodes for ECS *and* EKS, billed per vCPU + GB-second with a **1-minute minimum**; **ECR** = image registry with IAM — plus **AWS Batch** for queued Spot/On-Demand batch work;
+> 5. **Lambda** is serverless and event-driven (push = direct invocation, pull = event source mapping), billed **$0.20 per 1 million requests + GB-seconds rounded to 1 ms**, Always Free **1,000,000 requests + 400,000 GB-s/month**, memory **128 to 10,240 MB** (**1,769 MB ≈ 1 vCPU**), timeout **max 900 s**: 2M × 100 ms × 1 GB costs **≈ $0.20/month**;
+> 6. Containers in four lines: **ECS** = AWS-native orchestration, **$0 management fee**; **EKS** = managed Kubernetes, **$0.10/cluster/hour**; **Fargate** = serverless nodes for ECS *and* EKS, billed per vCPU + GB-second with a **1-minute minimum**; **ECR** = image registry with IAM: plus **AWS Batch** for queued Spot/On-Demand batch work;
 > 7. **Elastic Beanstalk** provisions EC2/EKS, load balancing and scaling for a **$0 service charge** (you still pay for what it creates); **Lightsail** sells flat bundles from **$3.50/month** (as of Oct 2026); **Outposts** is the hybrid answer;
 > 8. **S3**: bucket → object → key, **private by default**, **11-nines durability across ≥3 AZs**, max object **50 TB** (since 2 Dec 2025); classes **Standard / Intelligent-Tiering / Standard-IA / One Zone-IA / Glacier Instant / Flexible / Deep** with **30 / 90 / 180-day** minimums, **128 KB** minimum billable object and retrieval fees on IA classes; **versioning never reverts** and every version is billed; **lifecycle is a one-way waterfall** with automatic expiration; **SSE-S3 default since 5 Jan 2023**; static sites are **HTTP-only**;
 > 9. **EBS** is AZ-bound and replicated within the AZ: **gp3 default (3,000 IOPS at any size, ~20% cheaper than gp2)**, io1/io2 for provisioned IOPS (**io2 Block Express 256,000 IOPS, 99.999%**), **st1/sc1 cannot boot**; **snapshots are incremental, Region-wide, invisible to S3 tools, $0.05/GB-month**, and **AWS never auto-backs EBS**; **instance store loses all data on stop**;
-> 10. File and hybrid tier: **EFS** = NFS/POSIX, no Windows, Regional ≥3 AZs; **FSx** = Windows/SMB/AD, ONTAP, OpenZFS (**Lustre out of scope**); **Storage Gateway** = the **cached file system** (plus S3 File, Volume, Tape); **Snow Family closed 7 Nov 2025, EOS 31 Dec 2026**; **AWS Backup** = tag-driven plans, Vault Lock **WORM**, retention **1 day–100 years**, cold **≥90 days**, warm **≥8 days**, additive to native snapshots — and the one-table rule is **one instance ⇒ EBS, many instances ⇒ EFS/FSx, unmounted/archival ⇒ S3**, as demonstrated in NASA JPL's **Spot + On-Demand + Capacity Reservation** blend and Box's **$2.23M** unpacking (customer-claimed, accessed Oct 2026).
+> 10. File and hybrid tier: **EFS** = NFS/POSIX, no Windows, Regional ≥3 AZs; **FSx** = Windows/SMB/AD, ONTAP, OpenZFS (**Lustre out of scope**); **Storage Gateway** = the **cached file system** (plus S3 File, Volume, Tape); **Snow Family closed 7 Nov 2025, EOS 31 Dec 2026**; **AWS Backup** = tag-driven plans, Vault Lock **WORM**, retention **1 day, 100 years**, cold **≥90 days**, warm **≥8 days**, additive to native snapshots, and the one-table rule is **one instance ⇒ EBS, many instances ⇒ EFS/FSx, unmounted/archival ⇒ S3**, as demonstrated in NASA JPL's **Spot + On-Demand + Capacity Reservation** blend and Box's **$2.23M** unpacking (customer-claimed, accessed Oct 2026).

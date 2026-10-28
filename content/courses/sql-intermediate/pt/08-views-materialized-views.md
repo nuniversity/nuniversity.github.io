@@ -34,7 +34,7 @@ ORDER BY last_name;
 ```
 
 > [!NOTE]
-> Uma view é apenas uma consulta armazenada. Ela não tem dados próprios — cada consulta contra uma view executa o SELECT subjacente. Tabelas referenciadas em uma view são chamadas de tabelas base.
+> Uma view é apenas uma consulta armazenada. Ela não tem dados próprios: cada consulta contra uma view executa o SELECT subjacente. Tabelas referenciadas em uma view são chamadas de tabelas base.
 
 ### Por que Usar Views?
 
@@ -96,7 +96,7 @@ Uma view é atualizável quando:
 > |-----------------------|--------|
 > | `CREATE VIEW v AS SELECT ... FROM a JOIN b` | Múltiplas tabelas base |
 > | `CREATE VIEW v AS SELECT DISTINCT ...` | Não pode mapear de volta para uma única linha |
-> | `CREATE VIEW v AS SELECT SUM(...)` | Agregação — sem identidade de linha |
+> | `CREATE VIEW v AS SELECT SUM(...)` | Agregação: sem identidade de linha |
 > | `CREATE VIEW v AS SELECT ... UNION ...` | Múltiplas fontes |
 
 ## WITH CHECK OPTION

@@ -1,5 +1,5 @@
 ---
-title: "Advanced Capstone — Concurrent Key-Value Store"
+title: "Advanced Capstone, Concurrent Key-Value Store"
 description: "Build a concurrent, thread-safe key-value store server with Tokio, persistent storage, and protocol handling"
 order: 10
 duration: "90 minutes"
@@ -381,14 +381,14 @@ mod tests {
 
 Try implementing these enhancements:
 
-1. **Snapshot persistence** — Save/load data to disk on startup/shutdown
-2. **Pub/Sub** — Add SUBSCRIBE/PUBLISH commands
-3. **Authentication** — Require AUTH with password
-4. **ACL** — Fine-grained access control
-5. **Clustering** — Shard data across multiple nodes
-6. **HTTP API** — Add a REST interface via Axum
-7. **Metrics** — Track command counts, latency, active connections
-8. **Client SDK** — Build a Rust client with the protocol
+1. **Snapshot persistence**: Save/load data to disk on startup/shutdown
+2. **Pub/Sub**: Add SUBSCRIBE/PUBLISH commands
+3. **Authentication**: Require AUTH with password
+4. **ACL**: Fine-grained access control
+5. **Clustering**: Shard data across multiple nodes
+6. **HTTP API**: Add a REST interface via Axum
+7. **Metrics**: Track command counts, latency, active connections
+8. **Client SDK**: Build a Rust client with the protocol
 
 ```rust
 // Example: snapshot persistence

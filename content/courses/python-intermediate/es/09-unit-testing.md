@@ -82,7 +82,7 @@ class TestAssertions(unittest.TestCase):
             int("invalid")
 ```
 
-## Fixtures de Prueba — `setUp` y `tearDown`
+## Fixtures de Prueba: `setUp` y `tearDown`
 
 ```python
 import unittest
@@ -175,7 +175,7 @@ class TestPaymentProcessor(unittest.TestCase):
         mock_api.send_receipt.assert_called_once_with("42", "txn_123")
 ```
 
-### Usando `patch` — reemplazando objetos temporalmente
+### Usando `patch`: reemplazando objetos temporalmente
 
 ```python
 from unittest.mock import patch

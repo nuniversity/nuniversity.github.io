@@ -18,7 +18,7 @@ Esta lección cubre los fundamentos: qué ofrece LangFuse, la diferencia entre i
 
 LangFuse ayuda a los equipos a:
 
-- **Trazar** cada paso de una llamada LLM — desde la construcción del prompt hasta la respuesta del modelo.
+- **Trazar** cada paso de una llamada LLM: desde la construcción del prompt hasta la respuesta del modelo.
 - **Evaluar** salidas con puntuaciones manuales, LLM-como-juez o métricas externas.
 - **Gestionar prompts** con control de versiones y flujos de implementación.
 - **Monitorear costos, latencia y tasas de error** en paneles en tiempo real.
@@ -91,7 +91,7 @@ Los datos se agrupan en lotes y se envían periódicamente (cada 1 segundo por d
 
 | Característica | Auto-Alojado (OSS) | LangFuse Nube |
 |---|---|---|
-| Esfuerzo de configuración | Alto — requiere Docker, PostgreSQL y redes | Bajo — regístrate y crea un proyecto |
+| Esfuerzo de configuración | Alto, requiere Docker, PostgreSQL y redes | Bajo, regístrate y crea un proyecto |
 | Residencia de datos | Control total | Gestionado por LangFuse |
 | Mantenimiento | Tú gestionas actualizaciones, respaldos, escalabilidad | Gestionado por LangFuse |
 | Costo | Solo costo de infraestructura | Plan gratuito + planes pagos |
@@ -114,7 +114,7 @@ Los datos se agrupan en lotes y se envían periódicamente (cada 1 segundo por d
 4. Navega a **Configuración → Claves de API**.
 5. Genera una **clave pública** y una **clave secreta**.
 
-Mantén la clave secreta segura — autoriza escrituras en tu proyecto.
+Mantén la clave secreta segura: autoriza escrituras en tu proyecto.
 
 > [!IMPORTANT]
 > Rota tus claves secretas periódicamente. LangFuse Nube te permite generar múltiples pares de claves y revocar las antiguas. Configura un recordatorio trimestral de rotación. Si una clave se ve comprometida, revócala inmediatamente desde **Configuración → Claves de API**.
@@ -140,7 +140,7 @@ El paquete `langfuse` proporciona el cliente de trace. El paquete `langchain-ope
 | REST API | HTTP | ✅ Siempre disponible | Cualquier lenguaje puede enviar traces vía `POST /api/public/traces` |
 
 > [!NOTE]
-> Este curso se centra en el SDK de Python, pero los conceptos son idénticos en todos los SDKs. El contrato de la API es el mismo — cada SDK es un envoltorio ligero alrededor de los endpoints REST.
+> Este curso se centra en el SDK de Python, pero los conceptos son idénticos en todos los SDKs. El contrato de la API es el mismo: cada SDK es un envoltorio ligero alrededor de los endpoints REST.
 
 ---
 
@@ -365,7 +365,7 @@ print("ID del Trace:", trace.id)
   "question": "Una llamada LLM en un manejador de ruta FastAPI lanzó una excepción inesperada. Tu trace de LangFuse nunca se cierra. ¿Cómo deberías manejar esto?",
   "options": [
     "Envolver el trace en un bloque try/finally y llamar a trace.end() o span.end(level='ERROR') en la cláusula except",
-    "Ignorarlo — LangFuse cierra automáticamente los traces huérfanos",
+    "Ignorarlo: LangFuse cierra automáticamente los traces huérfanos",
     "Reiniciar el SDK de LangFuse después de cada excepción",
     "Establecer un hook global de excepción que envíe un trace dummy"
   ],

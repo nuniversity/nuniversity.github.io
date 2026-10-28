@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Funciones: Bloques de Código Reutilizables
 
-Las funciones te permiten empaquetar un bloque de código para ejecutarlo cuando sea necesario — con diferentes entradas si lo deseas.
+Las funciones te permiten empaquetar un bloque de código para ejecutarlo cuando sea necesario: con diferentes entradas si lo deseas.
 
 ## Por qué Usar Funciones
 
@@ -71,7 +71,7 @@ Cuando `return` se ejecuta, la función se detiene inmediatamente.
 
 ## Ámbito de Función
 
-Las variables declaradas dentro de una función son locales — no pueden accederse desde fuera:
+Las variables declaradas dentro de una función son locales: no pueden accederse desde fuera:
 
 ```javascript
 function mostrarMensaje() {

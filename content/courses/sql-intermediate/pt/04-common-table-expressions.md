@@ -34,7 +34,7 @@ ORDER BY rs.total_sales DESC;
 A CTE `regional_sales` se comporta como uma visão temporária durante a execução desta consulta.
 
 > [!NOTE]
-> CTEs são às vezes chamadas de "consultas WITH". A cláusula `WITH` deve aparecer no início da declaração — apenas `WITH` pode precedê-la.
+> CTEs são às vezes chamadas de "consultas WITH". A cláusula `WITH` deve aparecer no início da declaração: apenas `WITH` pode precedê-la.
 
 ## CTEs Múltiplas
 
@@ -104,16 +104,16 @@ FULL OUTER JOIN sales_2024 b ON a.product_id = b.product_id;
 ```
 
 > [!NOTE]
-> Cada CTE é separada por uma vírgula — sem vírgula após a última CTE antes da consulta principal. Este é um erro de sintaxe comum.
+> Cada CTE é separada por uma vírgula: sem vírgula após a última CTE antes da consulta principal. Este é um erro de sintaxe comum.
 
 ## CTEs vs Subconsultas
 
 | Aspecto | CTE | Subconsulta (Tabela Derivada) |
 |--------|-----|------------------------------|
-| Legibilidade | Excelente — nomeada | Ruim — aninhada |
+| Legibilidade | Excelente, nomeada | Ruim, aninhada |
 | Reutilização | Referenciada múltiplas vezes | Deve repetir |
 | Recursão | Suportada | Não suportada |
-| Otimização | Inlineável — sem materialização | Inlineável |
+| Otimização | Inlineável: sem materialização | Inlineável |
 | Escopo | Consulta única | Expressão única |
 
 ```sql

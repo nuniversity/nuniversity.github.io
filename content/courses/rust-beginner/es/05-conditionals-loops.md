@@ -30,7 +30,7 @@ fn main() {
 
 ### if es una Expresión
 
-Todo bloque `if`/`else` devuelve un valor — ambos brazos deben ser del mismo tipo:
+Todo bloque `if`/`else` devuelve un valor: ambos brazos deben ser del mismo tipo:
 
 ```rust
 fn main() {
@@ -64,7 +64,7 @@ fn main() {
 }
 ```
 
-## loop — Bucles Infinitos
+## loop: Bucles Infinitos
 
 `loop` se ejecuta para siempre a menos que se salga explícitamente:
 
@@ -110,7 +110,7 @@ fn main() {
 > [!SUCCESS]
 > Usa `loop` cuando necesites patrones "reintentar hasta éxito" o salir con un valor. Para iteración contada, prefiere `for`.
 
-## while — Bucles Condicionales
+## while: Bucles Condicionales
 
 ```rust
 fn main() {
@@ -141,9 +141,9 @@ fn main() {
 > [!WARNING]
 > El valor de break de un bucle `while` es `Option<T>` porque la condición puede nunca ser verdadera. En `loop`, el valor de break es `T` directamente.
 
-## for — Iteración
+## for: Iteración
 
-`for` es el bucle preferido en Rust — es seguro, rápido y expresivo:
+`for` es el bucle preferido en Rust: es seguro, rápido y expresivo:
 
 ```rust
 fn main() {
@@ -203,9 +203,9 @@ fn main() {
 | `while` | Basado en condición, verificado cada iteración | `Option<T>` |
 | `for` | Iterar sobre colección o rango | `Option<T>` |
 
-## Match — Coincidencia de Patrones
+## Match: Coincidencia de Patrones
 
-`match` es el poderoso switch de Rust mejorado. Es **exhaustivo** — cada caso posible debe ser manejado:
+`match` es el poderoso switch de Rust mejorado. Es **exhaustivo**: cada caso posible debe ser manejado:
 
 ```rust
 fn main() {
@@ -277,7 +277,7 @@ fn main() {
 }
 ```
 
-## if let — Coincidencia Concisa
+## if let: Coincidencia Concisa
 
 Cuando solo te importa un patrón:
 

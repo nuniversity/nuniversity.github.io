@@ -26,7 +26,7 @@ Programming is the process of writing instructions that a computer can follow to
 
 ## How Computers Understand Code
 
-Computers only understand binary — ones and zeros. Programming languages like JavaScript, Python, and Rust act as translators. You write human-readable code, and a compiler or interpreter converts it into machine instructions.
+Computers only understand binary: ones and zeros. Programming languages like JavaScript, Python, and Rust act as translators. You write human-readable code, and a compiler or interpreter converts it into machine instructions.
 
 ## Your First Program
 
@@ -61,4 +61,4 @@ Change `[Your Name]` to your actual name and imagine the output.
 
 ## Next Steps
 
-In the next lesson, you will learn about variables — how to store and manipulate data in your programs.
+In the next lesson, you will learn about variables: how to store and manipulate data in your programs.

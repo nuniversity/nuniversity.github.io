@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Classes and Objects
 
-Object-oriented programming (OOP) is a paradigm that organizes code around objects — bundles of data and behavior. Python supports OOP with a clean, intuitive syntax.
+Object-oriented programming (OOP) is a paradigm that organizes code around objects: bundles of data and behavior. Python supports OOP with a clean, intuitive syntax.
 
 ## Defining a Class
 
@@ -34,11 +34,11 @@ print(my_dog.get_human_years())  # 21
 ```
 
 > [!NOTE]
-> Unlike Java or C++, Python does not require explicit `new` to instantiate — you simply call the class as if it were a function.
+> Unlike Java or C++, Python does not require explicit `new` to instantiate; you simply call the class as if it were a function.
 
 ## The `self` Parameter
 
-`self` refers to the current instance. It must be the first parameter of every instance method — but you don't pass it; Python does automatically.
+`self` refers to the current instance. It must be the first parameter of every instance method, but you don't pass it; Python does automatically.
 
 ```python
 class Counter:
@@ -57,7 +57,7 @@ print(c.count)  # 5
 ```
 
 > [!WARNING]
-> `self` is just a convention — you could name it `this` or anything else — but **always use `self`** to follow Python community standards.
+> `self` is just a convention, you could name it `this` or anything else, but **always use `self`** to follow Python community standards.
 
 ## Instance vs Class Attributes
 
@@ -124,7 +124,7 @@ print(p)         # (3.5, 7.2)  — calls __str__
 ```
 
 > [!SUCCESS]
-> Always implement `__repr__` on your classes — it makes debugging dramatically easier. Implement `__str__` when you want a pretty display.
+> Always implement `__repr__` on your classes; it makes debugging dramatically easier. Implement `__str__` when you want a pretty display.
 
 ## Property Decorators
 
@@ -209,9 +209,9 @@ Python has no true private attributes. Convention uses underscores:
 | Convention | Meaning |
 |-----------|---------|
 | `name` | Public attribute |
-| `_name` | "Protected" — internal use (convention only) |
-| `__name` | "Private" — triggers name mangling to `_ClassName__name` |
-| `__name__` | Dunder — Python special methods, don't invent your own |
+| `_name` | "Protected": internal use (convention only) |
+| `__name` | "Private": triggers name mangling to `_ClassName__name` |
+| `__name__` | Dunder: Python special methods, don't invent your own |
 
 ```python
 class Person:
@@ -304,7 +304,7 @@ print(f"Total transactions: {len(acc)}")
 | You need multiple instances with same behavior | One-off operations |
 
 > [!SUCCESS]
-> OOP is a tool, not a rule. Python supports multiple paradigms — choose the right one for each problem.
+> OOP is a tool, not a rule. Python supports multiple paradigms: choose the right one for each problem.
 
 ## Practice Questions
 

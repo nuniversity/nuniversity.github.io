@@ -443,7 +443,7 @@ def extract_memory(state: AgentState) -> dict:
     "The entire conversation history",
     "Only the summary",
     "The most recent messages (enough for immediate context)",
-    "Nothing — clear the list"
+    "Nothing: clear the list"
   ],
   "correct": 2,
   "explanation": "Keep the most recent messages (e.g., last 2-4 turns) so the LLM has immediate context. The summary provides the longer-term context."

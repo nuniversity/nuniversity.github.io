@@ -1,12 +1,12 @@
 ---
-title: "Domain 4.3 — Snowflake Caching"
+title: "Domain 4.3, Snowflake Caching"
 description: "Master Snowflake's three-layer caching system: Query Result Cache (Cloud Services layer), Metadata Cache, and Warehouse (local disk) Cache. Understand when each cache is used and how to leverage them."
 order: 15
 difficulty: intermediate
 duration: "45 min"
 ---
 
-# Domain 4.3 — Snowflake Caching
+# Domain 4.3: Snowflake Caching
 
 ## Exam Weight
 
@@ -37,7 +37,7 @@ flowchart TD
 
 ## Cache 1: Query Result Cache
 
-The **Query Result Cache** stores the **complete result set** of a query and returns it instantly if the exact same query is resubmitted — **without executing the query at all** and **without using the virtual warehouse**.
+The **Query Result Cache** stores the **complete result set** of a query and returns it instantly if the exact same query is resubmitted: **without executing the query at all** and **without using the virtual warehouse**.
 
 ### How It Works
 
@@ -113,7 +113,7 @@ The **Metadata Cache** stores **table statistics and object metadata** collected
 
 ### Metadata-Only Queries (No Warehouse Needed)
 
-These queries are answered entirely from the metadata cache — no virtual warehouse required:
+These queries are answered entirely from the metadata cache: no virtual warehouse required:
 
 ```sql
 -- Row count (metadata only)
@@ -132,7 +132,7 @@ WHERE TABLE_NAME = 'ORDERS';
 ```
 
 > [!NOTE]
-> `COUNT(*)` on a table without a WHERE clause is answered from the metadata cache — **no warehouse credit consumed**. This is a common exam trick: `COUNT(*)` = free; `COUNT(column_name)` with non-null checks may require compute.
+> `COUNT(*)` on a table without a WHERE clause is answered from the metadata cache: **no warehouse credit consumed**. This is a common exam trick: `COUNT(*)` = free; `COUNT(column_name)` with non-null checks may require compute.
 
 ### How Metadata Cache Powers Pruning
 
@@ -160,7 +160,7 @@ The **Warehouse Cache** (also called the **local disk cache** or **data cache**)
 
 - When a micro-partition is read from storage, it is cached on the warehouse's local SSD
 - Subsequent queries that need the same micro-partition read from the **local cache** instead of cloud storage → much faster
-- Cache lives in the warehouse — **when the warehouse is suspended, the cache is lost**
+- Cache lives in the warehouse: **when the warehouse is suspended, the cache is lost**
 
 ### Implications
 
@@ -190,7 +190,7 @@ ALTER WAREHOUSE WH_BI SET AUTO_SUSPEND = 600;  -- 10 minutes
 ### Multi-Cluster Warehouses and Caching
 
 > [!NOTE]
-> Each cluster in a multi-cluster warehouse maintains its **own separate cache**. Data cached in Cluster 1 is not available to Cluster 2. This is why query routing in multi-cluster setups is important — routing similar queries to the same cluster maximizes cache hits.
+> Each cluster in a multi-cluster warehouse maintains its **own separate cache**. Data cached in Cluster 1 is not available to Cluster 2. This is why query routing in multi-cluster setups is important: routing similar queries to the same cluster maximizes cache hits.
 
 ---
 
@@ -218,7 +218,7 @@ When a query executes, Snowflake checks caches in this order:
 **Q1.** A query executed at 10:00 AM returns results and the result is cached. The same exact query is run at 9:00 AM the next day. What happens?
 
 - A) The cached result is returned instantly ✅
-- B) The query is re-executed because more than 24 hours have passed — 10:00 AM is exactly 23 hours later at 9:00 AM next day
+- B) The query is re-executed because more than 24 hours have passed: 10:00 AM is exactly 23 hours later at 9:00 AM next day
 - C) The query fails because the cache expired
 - D) The result cache only works within the same session
 

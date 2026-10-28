@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Loops e Repetição
 
-Muitas tarefas exigem fazer a mesma coisa várias vezes. Em vez de escrever os mesmos passos repetidamente, algoritmos usam **loops** -- estruturas que repetem um conjunto de instruções até que uma condição seja atendida. Loops são uma das ferramentas mais poderosas no pensamento algorítmico.
+Muitas tarefas exigem fazer a mesma coisa várias vezes. Em vez de escrever os mesmos passos repetidamente, algoritmos usam **loops**: estruturas que repetem um conjunto de instruções até que uma condição seja atendida. Loops são uma das ferramentas mais poderosas no pensamento algorítmico.
 
 ## Por que Loops Importam
 
@@ -34,8 +34,8 @@ FIM ENQUANTO
 
 | Abordagem | Linhas de Código | Fácil de Mudar? | Propenso a Erros? |
 |---|---|---|---|
-| Sem loop | 100 | Não -- deve editar cada linha | Sim -- fácil pular ou duplicar |
-| Com loop | 4 | Sim -- mude o limite | Não -- a lógica é centralizada |
+| Sem loop | 100 | Não, deve editar cada linha | Sim, fácil pular ou duplicar |
+| Com loop | 4 | Sim, mude o limite | Não, a lógica é centralizada |
 
 ```mermaid
 flowchart TD
@@ -368,7 +368,7 @@ IMPRIMIR "Adeus!"
 ```
 
 > [!NOTE]
-> O valor -1 é chamado de "sentinela" -- um valor especial que sinaliza o fim da entrada. O usuário deve saber que deve digitar -1 para parar.
+> O valor -1 é chamado de "sentinela": um valor especial que sinaliza o fim da entrada. O usuário deve saber que deve digitar -1 para parar.
 
 ### Estratégia 3: Terminação Baseada em Flag
 

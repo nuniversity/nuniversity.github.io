@@ -1,6 +1,6 @@
 ---
 title: "Otimização"
-description: "Otimize aplicações LangGraph — reduza chamadas de nós, estratégias de cache, lotação de requisições LLM, gerenciamento de tokens e ajuste de desempenho do grafo."
+description: "Otimize aplicações LangGraph, reduza chamadas de nós, estratégias de cache, lotação de requisições LLM, gerenciamento de tokens e ajuste de desempenho do grafo."
 order: 9
 duration: "35 min"
 difficulty: "advanced"
@@ -276,7 +276,7 @@ def format_node(state: State) -> dict:
 ```
 
 [!SUCCESS]
-Usar modelos diferentes para nós diferentes pode reduzir os custos em 5-10x mantendo a qualidade — use modelos baratos para roteamento/tarefas simples e modelos caros apenas para raciocínio complexo.
+Usar modelos diferentes para nós diferentes pode reduzir os custos em 5-10x mantendo a qualidade: use modelos baratos para roteamento/tarefas simples e modelos caros apenas para raciocínio complexo.
 
 ---
 
@@ -336,7 +336,7 @@ Usar modelos diferentes para nós diferentes pode reduzir os custos em 5-10x man
   "question": "What is a good cache TTL for LLM responses?",
   "options": [
     "Cache forever",
-    "It depends — shorter for dynamic queries, longer for static knowledge",
+    "It depends: shorter for dynamic queries, longer for static knowledge",
     "Never cache LLM responses",
     "1 second"
   ],
@@ -351,7 +351,7 @@ Usar modelos diferentes para nós diferentes pode reduzir os custos em 5-10x man
   "type": "multiple-choice",
   "question": "When should you merge multiple nodes into one?",
   "options": [
-    "Always — fewer nodes is always better",
+    "Always: fewer nodes is always better",
     "When nodes perform trivial transformations that don't benefit from separate checkpointing",
     "Never merge nodes",
     "Only when the graph doesn't compile"

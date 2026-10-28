@@ -50,7 +50,7 @@ print([a["nome"] for a in por_nota])
 ```
 
 > [!NOTE]
-> O corpo de um lambda é limitado a uma única expressão — você não pode usar statements como `return`, `if`/`elif`/`else` (embora possa usar a expressão ternária) ou loops. Se precisar de mais complexidade, use uma função nomeada.
+> O corpo de um lambda é limitado a uma única expressão: você não pode usar statements como `return`, `if`/`elif`/`else` (embora possa usar a expressão ternária) ou loops. Se precisar de mais complexidade, use uma função nomeada.
 
 ## Quando Usar Lambdas
 
@@ -374,4 +374,4 @@ def tentar_novamente(max_tentativas: int = 3, espera: float = 0.1) -> Callable:
 - **Decorators** são closures que envolvem outras funções
 
 > [!SUCCESS]
-> Você agora entende lambdas e closures — a base para composição de funções, aplicação parcial e muitos padrões funcionais avançados.
+> Você agora entende lambdas e closures: a base para composição de funções, aplicação parcial e muitos padrões funcionais avançados.

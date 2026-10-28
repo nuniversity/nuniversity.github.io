@@ -1,6 +1,6 @@
 ---
 title: "Parallel Execution"
-description: "Master parallel node execution in LangGraph — fan-out/fan-in patterns, branch coordination, thread safety, and synchronization of parallel results."
+description: "Master parallel node execution in LangGraph, fan-out/fan-in patterns, branch coordination, thread safety, and synchronization of parallel results."
 order: 8
 duration: "35 minutes"
 difficulty: "advanced"
@@ -379,7 +379,7 @@ app = builder.compile()
   "options": [
     "Only the first branch's results",
     "State merged from all incoming branches that have completed",
-    "Nothing — fan-in is automatic",
+    "Nothing: fan-in is automatic",
     "State from only the fastest branch"
   ],
   "correct": 1,
@@ -464,7 +464,7 @@ app = builder.compile()
   "question": "When is parallel execution NOT beneficial?",
   "options": [
     "When tasks are independent",
-    "When task duration is very short (< 100ms) — thread overhead dominates",
+    "When task duration is very short (< 100ms): thread overhead dominates",
     "When processing large datasets",
     "When calling multiple APIs"
   ],

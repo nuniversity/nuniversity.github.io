@@ -1,6 +1,6 @@
 ---
 title: "Arquitetura Orientada a Eventos"
-description: "Explore Eventos de Domínio, Event Sourcing e CQRS em DDD — como eventos capturam ocorrências de domínio, permitem integração assíncrona e suportam trilhas de auditoria"
+description: "Explore Eventos de Domínio, Event Sourcing e CQRS em DDD, como eventos capturam ocorrências de domínio, permitem integração assíncrona e suportam trilhas de auditoria"
 order: 7
 duration: "75 minutos"
 difficulty: "avançado"
@@ -265,7 +265,7 @@ class SagaProcessamentoPedido:
 | Fonte + verbo | `Vendas.PedidoConfirmado` | Múltiplos contextos |
 
 > [!TIP]
-> Escolha uma convenção de nomenclatura e mantenha-se consistente. A Linguagem Ubíqua se aplica a eventos também — use as palavras que os especialistas do domínio usam quando descrevem o que aconteceu.
+> Escolha uma convenção de nomenclatura e mantenha-se consistente. A Linguagem Ubíqua se aplica a eventos também: use as palavras que os especialistas do domínio usam quando descrevem o que aconteceu.
 
 ## Versionamento de Eventos
 

@@ -172,7 +172,7 @@ export default function DragOrderQuestion({ question, items, correctOrder, expla
                 : <XCircle className="w-5 h-5 text-red-600" />
               }
               <span className="font-semibold text-sm text-foreground">
-                {feedback === 'correct' ? (w?.correct || 'Correct!') : (d?.incorrect_feedback || 'Not quite — red items are in the wrong position.')}
+                {feedback === 'correct' ? (w?.correct || 'Correct!') : (d?.incorrect_feedback || 'Not quite: red items are in the wrong position.')}
               </span>
             </div>
             {explanation && <p className="text-sm text-muted-foreground mt-1">{explanation}</p>}

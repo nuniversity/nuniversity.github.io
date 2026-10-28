@@ -19,7 +19,7 @@ export async function generateMetadata({
   const dict = await getDictionary(params.lang)
   return {
     alternates: buildAlternates(params.lang, 'quizzes'),
-    title: dict.metadata?.quizzes?.title || 'Quizzes — Tests & Certification Practice',
+    title: dict.metadata?.quizzes?.title || 'Quizzes: Tests & Certification Practice',
     description:
       dict.metadata?.quizzes?.description ||
       'Certification quizzes, practice tests and timed exam simulations with scoring, attempt history and printable certificates.' }

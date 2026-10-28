@@ -1,5 +1,5 @@
 ---
-title: "Beginner Project — CLI Temperature Converter"
+title: "Beginner Project, CLI Temperature Converter"
 description: "Build a complete command-line temperature converter with input validation, error handling, and unit conversions"
 order: 10
 duration: "35 minutes"
@@ -308,12 +308,12 @@ cargo test
 
 Try these enhancements:
 
-1. **Loop until quit** — Keep converting until user types "q"
-2. **Kelvin support** — Add Kelvin unit
-3. **Prettier output** — Use colored output with `colored` crate
-4. **Batch conversion** — Read multiple values from a file (`--file input.txt`)
-5. **Precision flag** — `--precision 4` controls decimal places
-6. **CLI arguments** — Use `clap` crate: `temp_converter 100 C to F`
+1. **Loop until quit**: Keep converting until user types "q"
+2. **Kelvin support**: Add Kelvin unit
+3. **Prettier output**: Use colored output with `colored` crate
+4. **Batch conversion**: Read multiple values from a file (`--file input.txt`)
+5. **Precision flag**: `--precision 4` controls decimal places
+6. **CLI arguments**: Use `clap` crate: `temp_converter 100 C to F`
 
 ```rust
 // Extension: loop until quit

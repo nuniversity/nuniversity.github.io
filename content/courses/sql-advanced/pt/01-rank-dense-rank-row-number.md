@@ -10,7 +10,7 @@ difficulty: advanced
 
 ## Visão Geral das Funções de Janela
 
-Funções de janela realizam cálculos em um conjunto de linhas relacionadas à linha atual. Diferente das funções de agregação com `GROUP BY`, as funções de janela **não colapsam linhas** — cada linha de entrada mantém sua identidade.
+Funções de janela realizam cálculos em um conjunto de linhas relacionadas à linha atual. Diferente das funções de agregação com `GROUP BY`, as funções de janela **não colapsam linhas**: cada linha de entrada mantém sua identidade.
 
 ```sql
 -- Agregação: colapsa
@@ -85,8 +85,8 @@ FROM employees;
 
 ### Casos de Uso para RANK/DENSE_RANK
 
-- **RANK**: "Mostre-me os 5 maiores salários" — se 3 pessoas empatam em 1º, o próximo é 4º.
-- **DENSE_RANK**: "Mostre-me os 5 principais níveis salariais" — todos nos 5 valores distintos principais.
+- **RANK**: "Mostre-me os 5 maiores salários": se 3 pessoas empatam em 1º, o próximo é 4º.
+- **DENSE_RANK**: "Mostre-me os 5 principais níveis salariais": todos nos 5 valores distintos principais.
 
 ```sql
 -- 5 principais níveis salariais distintos
@@ -115,7 +115,7 @@ FROM employees;
 | Buckets | Nome | Significado |
 |---|---|---|
 | 2 | Divisão mediana | Metade superior/inferior |
-| 4 | Quartis | Q1–Q4 |
+| 4 | Quartis | Q1: Q4 |
 | 10 | Decis | Top 10%, bottom 10% |
 | 100 | Percentis | Classificação por percentil |
 
@@ -257,7 +257,7 @@ ORDER BY product_id, range_start;
 | `RANK()` | Baixo | Mesma ordenação que ROW_NUMBER |
 | `DENSE_RANK()` | Baixo | Mesma ordenação que ROW_NUMBER |
 | `NTILE()` | Médio | Requer contagem de linhas + distribuição |
-| Muitas partições | Alto | Ordenação domina — indexar colunas de partição e ordem |
+| Muitas partições | Alto | Ordenação domina: indexar colunas de partição e ordem |
 
 [!TIP]
 Crie um índice composto em `(coluna_particao, coluna_ordem)` para que as ordenações das funções de janela usem uma varredura de índice em vez de uma ordenação completa.

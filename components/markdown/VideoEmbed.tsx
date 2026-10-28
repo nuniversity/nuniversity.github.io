@@ -124,7 +124,7 @@ export default function VideoEmbed({ config }: VideoEmbedProps) {
             </span>
             <span className="px-4 text-center text-sm font-semibold text-foreground">{title}</span>
             <span className="text-xs text-foreground-subtle">
-              Loads from {provider === 'youtube' ? 'YouTube' : 'Vimeo'} — nothing is requested until you press play.
+              Loads from {provider === 'youtube' ? 'YouTube' : 'Vimeo'}, nothing is requested until you press play.
             </span>
           </button>
         )}

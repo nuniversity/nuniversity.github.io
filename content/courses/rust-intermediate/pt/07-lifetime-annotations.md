@@ -12,7 +12,7 @@ Lifetimes garantem que referências são sempre válidas. O borrow checker as ra
 
 ## Por que Lifetimes?
 
-Toda referência tem um **lifetime** — o escopo para o qual a referência é válida. Na maioria das vezes, os lifetimes são implícitos (elididos). Mas às vezes o compilador precisa de ajuda:
+Toda referência tem um **lifetime**, o escopo para o qual a referência é válida. Na maioria das vezes, os lifetimes são implícitos (elididos). Mas às vezes o compilador precisa de ajuda:
 
 ```rust
 // ERROR: missing lifetime specifier
@@ -148,7 +148,7 @@ fn handle<T: 'static>(t: T) { /* T não tem referências não-'static */ }
 ```
 
 > [!WARNING]
-> `'static` não significa "vive para sempre em tempo de execução" — significa "válido para toda a execução do programa." Valores alocados na stack com bounds `'static` ainda podem ser liberados, apenas não enquanto emprestados.
+> `'static` não significa "vive para sempre em tempo de execução": significa "válido para toda a execução do programa." Valores alocados na stack com bounds `'static` ainda podem ser liberados, apenas não enquanto emprestados.
 
 ### Equívoco Comum
 

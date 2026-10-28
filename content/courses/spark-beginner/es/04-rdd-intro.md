@@ -184,7 +184,7 @@ print(rdd.lookup("Alice"))     # [34]
 ```
 
 > [!WARNING]
-> Las operaciones clave-valor como `reduceByKey` y `groupByKey` provocan un **shuffle** — los datos se redistribuyen entre particiones por clave. Los shuffles son costosos y deben minimizarse.
+> Las operaciones clave-valor como `reduceByKey` y `groupByKey` provocan un **shuffle**: los datos se redistribuyen entre particiones por clave. Los shuffles son costosos y deben minimizarse.
 
 ## Persistencia RDD
 
@@ -211,7 +211,7 @@ rdd_persisted = rdd.persist(StorageLevel.MEMORY_AND_DISK)
 
 1. Los RDDs son colecciones inmutables, particionadas y tolerantes a fallos
 2. Cree RDDs mediante `parallelize()` (colecciones) o `textFile()` (archivos)
-3. Las transformaciones son perezosas — no pasa nada hasta una acción
+3. Las transformaciones son perezosas: no pasa nada hasta una acción
 4. El linaje rastrea cómo recalcular cualquier partición perdida
 5. Los RDDs clave-valor permiten operaciones basadas en shuffle
 6. La persistencia (cache/persist) evita el recálculo

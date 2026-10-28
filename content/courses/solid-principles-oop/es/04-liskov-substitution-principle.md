@@ -93,8 +93,8 @@ flowchart TD
 
 | Método | Postcondición en Rectangle | Postcondición en Square | ¿LSP? |
 |--------|------------------------|---------------------|------|
-| `set_width(w)` | `width == w` | `width == w` AND `height == w` | Viola — restricción más fuerte |
-| `set_height(h)` | `height == h` | `height == h` AND `width == h` | Viola — restricción más fuerte |
+| `set_width(w)` | `width == w` | `width == w` AND `height == w` | Viola: restricción más fuerte |
+| `set_height(h)` | `height == h` | `height == h` AND `width == h` | Viola: restricción más fuerte |
 
 ### DESPUÉS: Diseño Compatible con el LSP
 

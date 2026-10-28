@@ -1,13 +1,13 @@
 ---
 title: "Amazon Bedrock Foundations: APIs, Model Access, Pricing, Inference Types and Evaluations"
-description: "Build a working mental model of Amazon Bedrock for the AIF-C01 exam — the single serverless API and its two endpoints, model access rules, on-demand vs batch vs provisioned throughput vs service tiers, cross-region inference profiles, model selection, customization, the three evaluation modes, and the Bedrock vs SageMaker vs prebuilt vs DIY verdict, with AWS-verified numbers and ten exam-style questions."
+description: "Build a working mental model of Amazon Bedrock for the AIF-C01 exam, the single serverless API and its two endpoints, model access rules, on-demand vs batch vs provisioned throughput vs service tiers, cross-region inference profiles, model selection, customization, the three evaluation modes, and the Bedrock vs SageMaker vs prebuilt vs DIY verdict, with AWS-verified numbers and ten exam-style questions."
 order: 9
 difficulty: "intermediate"
 duration: "110 minutes"
 ---
 # Amazon Bedrock Foundations: APIs, Model Access, Pricing, Inference Types and Evaluations
 
-Amazon Bedrock is the service the AIF-C01 exam names more than any other, and it is also the service that changes fastest. That combination is dangerous: memorising a model list or a per-token price is a study strategy with a shelf life of weeks, while memorising **mechanisms** — how on-demand, batch, provisioned throughput, service tiers and cross-region inference profiles actually behave — stays correct for years. This lesson is built around that split. Every number below is pinned to a first-party AWS source as of **October 2026**, and anything AWS does not confirm is flagged rather than taught.
+Amazon Bedrock is the service the AIF-C01 exam names more than any other, and it is also the service that changes fastest. That combination is dangerous: memorising a model list or a per-token price is a study strategy with a shelf life of weeks, while memorising **mechanisms**, how on-demand, batch, provisioned throughput, service tiers and cross-region inference profiles actually behave, stays correct for years. This lesson is built around that split. Every number below is pinned to a first-party AWS source as of **October 2026**, and anything AWS does not confirm is flagged rather than taught.
 
 ```text
 ====================================================================
@@ -39,7 +39,7 @@ By the end of this lesson you will be able to:
 
 - explain what "fully managed, serverless, single API" means operationally and name the two Bedrock endpoints;
 - state the 2026 model-access rules, including the Anthropic form most candidates forget;
-- choose between **on-demand, batch and provisioned throughput** — and between the four **service tiers** — using price, latency, commitment and feature support;
+- choose between **on-demand, batch and provisioned throughput**, and between the four **service tiers**, using price, latency, commitment and feature support;
 - pick the right **inference profile** for cost versus data residency and predict what CloudTrail will log;
 - walk a **model-selection decision tree** and defend a choice with verified per-token prices;
 - name the four customization paths and say which one requires provisioned throughput;
@@ -54,9 +54,9 @@ By the end of this lesson you will be able to:
 
 Amazon Bedrock is a **fully managed, serverless service that gives you a single API to invoke foundation models from many providers**. Three words carry the whole value proposition:
 
-- **Fully managed** — AWS runs the infrastructure, the scaling and the model hosting; you never see an instance, an endpoint URL or a GPU.
-- **Serverless** — you pay per token (on-demand and batch) or per hour (provisioned throughput); there is no idle-capacity bill unless you buy one deliberately.
-- **Single API** — one request shape, one SDK, one set of IAM actions; switching from Anthropic Claude to Amazon Nova is a change of `modelId`, not a rewrite.
+- **Fully managed**: AWS runs the infrastructure, the scaling and the model hosting; you never see an instance, an endpoint URL or a GPU.
+- **Serverless**; you pay per token (on-demand and batch) or per hour (provisioned throughput); there is no idle-capacity bill unless you buy one deliberately.
+- **Single API**: one request shape, one SDK, one set of IAM actions; switching from Anthropic Claude to Amazon Nova is a change of `modelId`, not a rewrite.
 
 That last property is the single most examinable sentence in this lesson. A question that says *"without rewriting application logic"* is pointing at the unified API, and every other option in that question (cross-region routing, provisioned throughput, model import) is a different mechanism entirely.
 
@@ -72,7 +72,7 @@ AWS lists **100+** foundation models without publishing an exact count. The firs
 | **Asian labs** | DeepSeek, MiniMax, Moonshot AI, Qwen, TwelveLabs |
 | **Your own weights** | Custom Model Import (Llama, Mistral, Mixtral, Qwen, GPT-OSS, GPTBigCode architectures) |
 
-> **📚 Did you know?** **DeepSeek is officially supported** — DeepSeek V3.2, V3.1 and R1 all appear in AWS's *Models at a glance* page, and V3.2 runs on both `bedrock-runtime` and the OpenAI-compatible `bedrock-mantle` endpoint. Candidates who skip the current catalog often assume DeepSeek is only available through a marketplace or a self-hosted stack; on the exam, "Amazon Bedrock does not host DeepSeek" is a distractor by construction.
+> **📚 Did you know?** **DeepSeek is officially supported**: DeepSeek V3.2, V3.1 and R1 all appear in AWS's *Models at a glance* page, and V3.2 runs on both `bedrock-runtime` and the OpenAI-compatible `bedrock-mantle` endpoint. Candidates who skip the current catalog often assume DeepSeek is only available through a marketplace or a self-hosted stack; on the exam, "Amazon Bedrock does not host DeepSeek" is a distractor by construction.
 
 ### 1.3 The two endpoints
 
@@ -80,10 +80,10 @@ Bedrock exposes two service endpoints, and the exam tests which operations live 
 
 | Endpoint | Operations | Purpose | AWS guidance |
 |---|---|---|---|
-| **`bedrock-runtime`** | `InvokeModel`, `InvokeModelWithResponseStream`, `Converse`, `ConverseStream`, `StartAsyncInvoke`, `InvokeModelWithBidirectionalStream` | Invoke models for inference — raw provider payloads and the provider-agnostic Converse API | **Recommended for new applications** |
+| **`bedrock-runtime`** | `InvokeModel`, `InvokeModelWithResponseStream`, `Converse`, `ConverseStream`, `StartAsyncInvoke`, `InvokeModelWithBidirectionalStream` | Invoke models for inference: raw provider payloads and the provider-agnostic Converse API | **Recommended for new applications** |
 | **`bedrock-mantle`** | OpenAI-compatible **Responses** and **Chat Completions**; Anthropic **Messages** | Drop-in compatibility: existing OpenAI or Anthropic SDK code runs against Bedrock unchanged | Use for migration of existing SDK code |
 
-The distinction matters in practice: `bedrock-mantle` exists so that an application written for the OpenAI or Anthropic SDK can point at Bedrock with a base-URL and key change, while `bedrock-runtime` is the home of Converse — the API that gives you tools, Guardrails and multi-provider parity in one request shape.
+The distinction matters in practice: `bedrock-mantle` exists so that an application written for the OpenAI or Anthropic SDK can point at Bedrock with a base-URL and key change, while `bedrock-runtime` is the home of Converse: the API that gives you tools, Guardrails and multi-provider parity in one request shape.
 
 ### 1.4 Architecture: one API, many models
 
@@ -124,9 +124,9 @@ flowchart TB
 Two commitments appear in the Bedrock documentation overview and both are exam-shaped:
 
 1. **Inputs and outputs are not shared with third-party model providers.**
-2. **Inputs and outputs are not used to train the base foundation models.** Fine-tuning, by contrast, trains a **private copy of the model that belongs to your account** — which is why a customized model is yours and why it is billed differently.
+2. **Inputs and outputs are not used to train the base foundation models.** Fine-tuning, by contrast, trains a **private copy of the model that belongs to your account**; which is why a customized model is yours and why it is billed differently.
 
-> **📚 Did you know?** The "not used to train base models" guarantee is precisely why fine-tuning is described as creating a *private custom model*: your labeled JSONL goes to S3, a training job produces a checkpoint that only your account can invoke, and the base FM that other customers use is untouched. The companion fact candidates miss is that **invoking a supervised fine-tuned model requires Provisioned Throughput** — on-demand will not run it — while **Custom Model Import** (bring your own weights) *can* run on-demand.
+> **📚 Did you know?** The "not used to train base models" guarantee is precisely why fine-tuning is described as creating a *private custom model*: your labeled JSONL goes to S3, a training job produces a checkpoint that only your account can invoke, and the base FM that other customers use is untouched. The companion fact candidates miss is that **invoking a supervised fine-tuned model requires Provisioned Throughput**, on-demand will not run it, while **Custom Model Import** (bring your own weights) *can* run on-demand.
 
 ### 1.6 Four things Bedrock is not
 
@@ -150,12 +150,12 @@ Model access used to be a click-through opt-in per model. In 2026 the flow is si
 | 1 | **Model access is on by default** in commercial AWS Regions | No action needed for most models |
 | 2 | IAM permissions for AWS Marketplace: `aws-marketplace:Subscribe`, `aws-marketplace:Unsubscribe`, `aws-marketplace:ViewSubscriptions` | Needed **only the first time** you enable a Marketplace-sourced model |
 | 3 | A **valid payment method** on the account | Always |
-| 4 | **Anthropic form-to-use (FTU) request** | **Anthropic models on `bedrock-runtime`** — not required for Anthropic Messages on `bedrock-mantle` |
+| 4 | **Anthropic form-to-use (FTU) request** | **Anthropic models on `bedrock-runtime`**: not required for Anthropic Messages on `bedrock-mantle` |
 
 After step 4, `InvokeModel`/`Converse` succeed; before it, you get an access error that looks like an IAM problem and is not one.
 
 > [!WARNING]
-> **Do not memorize the model list — memorize the access mechanism.** Bedrock's catalog, per-model feature support (streaming, tools, fine-tuning, provisioned throughput) and prices change weekly. On the exam, an option built on *"model X is unavailable in Region Y"* is almost always a stale-distractor. The durable facts are: **default-on access**, **Marketplace permissions on first enablement**, the **Anthropic FTU form**, and **a valid payment method**. When a question hinges on whether a specific new model exists, look for an option that describes a *mechanism* instead — that is almost always the intended answer.
+> **Do not memorize the model list, memorize the access mechanism.** Bedrock's catalog, per-model feature support (streaming, tools, fine-tuning, provisioned throughput) and prices change weekly. On the exam, an option built on *"model X is unavailable in Region Y"* is almost always a stale-distractor. The durable facts are: **default-on access**, **Marketplace permissions on first enablement**, the **Anthropic FTU form**, and **a valid payment method**. When a question hinges on whether a specific new model exists, look for an option that describes a *mechanism* instead, that is almost always the intended answer.
 
 ---
 
@@ -165,13 +165,13 @@ After step 4, `InvokeModel`/`Converse` succeed; before it, you get an access err
 
 | Family | Operations | Endpoint | What it is for |
 |---|---|---|---|
-| **Invoke** | `InvokeModel`, `InvokeModelWithResponseStream` | `bedrock-runtime` | Single-shot or streamed **raw provider payloads** — you build the provider's JSON yourself |
+| **Invoke** | `InvokeModel`, `InvokeModelWithResponseStream` | `bedrock-runtime` | Single-shot or streamed **raw provider payloads**; you build the provider's JSON yourself |
 | **Converse** | `Converse`, `ConverseStream` | `bedrock-runtime` | **Provider-agnostic** messages, tools, Guardrails, inference parameters |
 | **Chat Completions** | OpenAI-compatible | `bedrock-mantle` | Drop-in OpenAI SDK usage |
 | **Responses** | OpenAI-compatible | `bedrock-mantle` | OpenAI Responses API (GPT-OSS and GPT families) |
 | **Messages** | Anthropic Messages | `bedrock-mantle` | Anthropic SDK code runs against Bedrock unchanged |
 | **Async** | `StartAsyncInvoke` (subset of models) | `bedrock-runtime` | Long-running jobs with a callback destination |
-| **Bidirectional** | `InvokeModelWithBidirectionalStream` | `bedrock-runtime` | Real-time audio sessions — **not usable with Bedrock API keys** |
+| **Bidirectional** | `InvokeModelWithBidirectionalStream` | `bedrock-runtime` | Real-time audio sessions: **not usable with Bedrock API keys** |
 
 ### 3.2 Converse inference parameters: exactly four
 
@@ -180,8 +180,8 @@ The Converse API's base `InferenceConfiguration` contains **four** parameters an
 | Parameter | Type / range | Meaning |
 |---|---|---|
 | `maxTokens` | integer | Maximum tokens to **generate** |
-| `temperature` | 0–1 | Sampling randomness — lower is more deterministic |
-| `topP` | 0–1 | Nucleus sampling cutoff |
+| `temperature` | 0 to 1 | Sampling randomness: lower is more deterministic |
+| `topP` | 0 to 1 | Nucleus sampling cutoff |
 | `stopSequences` | up to **2,500** strings | Generation halts when any sequence is produced |
 
 Model-specific knobs (for example `topK` or a provider's ` thinking` budget) go into **`additionalModelRequestFields`**, which is passed through to the model. An option that claims Converse exposes five or six first-class base parameters is testing whether you know the boundary between the portable API and the provider-specific escape hatch.
@@ -206,12 +206,12 @@ That third row is a classic exam micro-fact: forcing a *named* tool is not unive
 
 Two routes exist for schema-conformant JSON:
 
-1. **Forced tool use** (`toolChoice: {any: {}}` or `{tool: {name: ...}}`) — the long-standing route, because constraining the model to a tool's JSON schema is structural rather than advisory.
-2. **Native structured output** — added to `Converse`/`ConverseStream` on **2026-02-04** via `outputConfig.textFormat.type = "json_schema"` together with `toolSpec.strict`.
+1. **Forced tool use** (`toolChoice: {any: {}}` or `{tool: {name:...}}`): the long-standing route, because constraining the model to a tool's JSON schema is structural rather than advisory.
+2. **Native structured output**: added to `Converse`/`ConverseStream` on **2026-02-04** via `outputConfig.textFormat.type = "json_schema"` together with `toolSpec.strict`.
 
-The reliability gap is large and AWS-published: a community test of **102 samples** on AWS Builder Center found prompt-only *"return valid JSON"* succeeding roughly **70–80%** of the time versus **99%+** with forced tool use. Turn that into an operations number: 10,000 invoice documents at 75% prompt-only success means about **2,500 failed parses and retries**; at 99% it means about **100**.
+The reliability gap is large and AWS-published: a community test of **102 samples** on AWS Builder Center found prompt-only *"return valid JSON"* succeeding roughly **70 to 80%** of the time versus **99%+** with forced tool use. Turn that into an operations number: 10,000 invoice documents at 75% prompt-only success means about **2,500 failed parses and retries**; at 99% it means about **100**.
 
-**Worked example 1 — choosing the right mechanism for 10,000 structured extractions.** The job needs strict JSON, no interactivity, and results by morning. Answer: **on-demand or Flex-tier Converse with `outputConfig.textFormat.type = "json_schema"`** — because **Batch inference does not support structured output or tool calling**, and it does not support provisioned models either. Two separate traps, one question.
+**Worked example 1, choosing the right mechanism for 10,000 structured extractions.** The job needs strict JSON, no interactivity, and results by morning. Answer: **on-demand or Flex-tier Converse with `outputConfig.textFormat.type = "json_schema"`**, because **Batch inference does not support structured output or tool calling**, and it does not support provisioned models either. Two separate traps, one question.
 
 ```mermaid
 flowchart TD
@@ -227,7 +227,7 @@ flowchart TD
     H --> I
 ```
 
-> **📚 Did you know?** Prompt-only JSON instruction fails for a structural reason: the model is *sampling*, not validating. Asking politely in the system prompt changes the probability of braces appearing; it does not create a constraint. Forced tool use and `json_schema` output both work because they make invalid output **impossible by construction** rather than unlikely — which is also why AWS's own reliability guidance treats "just say JSON in the prompt" as a distractor answer in every structured-output question.
+> **📚 Did you know?** Prompt-only JSON instruction fails for a structural reason: the model is *sampling*, not validating. Asking politely in the system prompt changes the probability of braces appearing; it does not create a constraint. Forced tool use and `json_schema` output both work because they make invalid output **impossible by construction** rather than unlikely; which is also why AWS's own reliability guidance treats "just say JSON in the prompt" as a distractor answer in every structured-output question.
 
 ### 3.6 Request anatomy: where each knob lives
 
@@ -264,7 +264,7 @@ Two readings of this payload matter on the exam: the **portable surface** (`syst
 
 ## 4. Pricing: four mechanisms and four service tiers
 
-Bedrock pricing is not one model — it is **an orthogonal pair of choices**: *how you buy capacity* (on-demand / batch / provisioned) and *which service tier you accept* (priority / standard / flex / reserved).
+Bedrock pricing is not one model; it is **an orthogonal pair of choices**: *how you buy capacity* (on-demand / batch / provisioned) and *which service tier you accept* (priority / standard / flex / reserved).
 
 ### 4.1 The three capacity mechanisms
 
@@ -287,13 +287,13 @@ Bedrock pricing is not one model — it is **an orthogonal pair of choices**: *h
 | Tier | `serviceTier` value | Price rule | When AWS says to use it |
 |---|---|---|---|
 | **Priority** | `priority` | Standard price **+75%**, for up to **25% better output-token throughput** | Real-time, customer-facing, mission-critical traffic |
-| **Standard** | `default` (or omitted) | Standard rate | Everyday work — the default |
+| **Standard** | `default` (or omitted) | Standard rate | Everyday work: the default |
 | **Flex** | `flex` | **−50%**, queued after Standard under load | Evaluations, summarization, background and agentic steps |
 | **Reserved** | `reserved` | Committed price, **1- or 3-month** term, overflow spills to Standard | 24/7 predictable load needing guaranteed capacity |
 
 AWS's published Reserved-tier entry conditions (secondary source: AWS Builder Center) are **≥ 100K input tokens per minute and ≥ 10K output tokens per minute**, a **1- or 3-month** commitment, **99.5%** uptime with overflow to Standard.
 
-### 4.3 Worked example 2 — pure on-demand arithmetic
+### 4.3 Worked example 2: pure on-demand arithmetic
 
 AWS's own example: **Amazon Titan Text Lite** at **$0.0003 per 1K input tokens** and **$0.0004 per 1K output tokens**.
 
@@ -307,7 +307,7 @@ $$
 \frac{10{,}000}{1{,}000}\times \$0.0125 + \frac{2{,}000}{1{,}000}\times \$0.0125 = \$0.15 \text{ per request}
 $$
 
-### 4.4 Worked example 3 — batch saves exactly 50%
+### 4.4 Worked example 3: batch saves exactly 50%
 
 **Claude 3.5 Sonnet** (Public Extended Access): **$6.00 in / $30.00 out** per 1M tokens on-demand, **$3.00 / $15.00** on batch. A **10M input + 2M output** job:
 
@@ -317,9 +317,9 @@ $$
 | Batch | $10 \times 3.00 + 2 \times 15.00$ | **$60.00** |
 | **Saving** | | **$60.00 (50%)** |
 
-Delivery is typically **within 24 hours** — and the job **cannot use tool calling or structured output**.
+Delivery is typically **within 24 hours**, and the job **cannot use tool calling or structured output**.
 
-### 4.5 Worked example 4 — provisioned throughput burns whether you use it or not
+### 4.5 Worked example 4: provisioned throughput burns whether you use it or not
 
 AWS's documented arithmetic for one model unit at **$16.20/hour**:
 
@@ -327,9 +327,9 @@ $$
 1 \times \$16.20 \times 24 \text{ h} \times 31 \text{ d} = \$12{,}052.80 \text{ per month}
 $$
 
-Published hourly rates for **Cohere Command** per model unit: **$49.50** (no commitment), **$39.60** (1-month, −20%), **$23.77** (6-month, **−52%**). **Llama 2** 13B/70B provisioned: **$21.18** (1-month) and **$13.08** (6-month). The decision rule: provisioned wins only when the idle-hour cost is less than the capacity and per-token savings you actually capture — for Claude, Nova and most modern models AWS does not publish hourly rates at all and asks you to contact the account team.
+Published hourly rates for **Cohere Command** per model unit: **$49.50** (no commitment), **$39.60** (1-month, −20%), **$23.77** (6-month, **−52%**). **Llama 2** 13B/70B provisioned: **$21.18** (1-month) and **$13.08** (6-month). The decision rule: provisioned wins only when the idle-hour cost is less than the capacity and per-token savings you actually capture: for Claude, Nova and most modern models AWS does not publish hourly rates at all and asks you to contact the account team.
 
-### 4.6 Worked example 5 — service-tier arithmetic
+### 4.6 Worked example 5: service-tier arithmetic
 
 **DeepSeek V3.1** in `ap-southeast-2` is priced at **$0.5974 in / $1.7304 out** per 1M tokens on the Standard tier. Applying the documented modifiers:
 
@@ -339,7 +339,7 @@ Published hourly rates for **Cohere Command** per model unit: **$49.50** (no com
 | Priority (+75%) | $1.0455 | $3.0282 | **$4.07** |
 | Flex (−50%) | $0.2987 | $0.8652 | **$1.16** |
 
-Send **10% of traffic to Priority, 60% to Flex and 30% to Standard** and the blend is $0.10 \times 4.07 + 0.60 \times 1.16 + 0.30 \times 2.33 \approx \$1.80$ — about **23% below** the all-Standard price of $2.33. Tier discipline, not model choice, is usually the cheapest available optimisation.
+Send **10% of traffic to Priority, 60% to Flex and 30% to Standard** and the blend is $0.10 \times 4.07 + 0.60 \times 1.16 + 0.30 \times 2.33 \approx \$1.80$: about **23% below** the all-Standard price of $2.33. Tier discipline, not model choice, is usually the cheapest available optimisation.
 
 ### 4.7 Verified token prices (USD per 1M, Standard / on-demand)
 
@@ -353,7 +353,7 @@ Send **10% of traffic to Priority, 60% to Flex and 30% to Standard** and the ble
 | Moonshot AI | Kimi K2.5 | $0.60 | $3.00 | US Regions |
 | NVIDIA | Nemotron 3 Super 120B | $0.18 | $0.78 | US Regions |
 | AI21 Labs | Jamba 1.5 Large / Mini | $2.00 / $0.20 | $8.00 / $0.40 | US Regions |
-| Cohere | Rerank 3.5 | **$2.00 per 1,000 queries** | — | 1 query covers ≤ 100 document chunks |
+| Cohere | Rerank 3.5 | **$2.00 per 1,000 queries** |: | 1 query covers ≤ 100 document chunks |
 
 Fixed and hourly prices worth knowing: **custom model storage $1.95/month**, **Titan Text Embeddings V2 $0.00002 per 1K tokens**, **Cohere Embeddings $0.0001 per 1K tokens** (a **5× gap** on the same job).
 
@@ -374,9 +374,9 @@ flowchart TD
 
 ### 4.8 Two more savings levers: routing and caching
 
-**Intelligent Prompt Routing** operates *within* a model family — Claude Sonnet ↔ Claude Haiku, Nova Pro ↔ Nova Lite — and AWS's pricing page claims it can cut cost by **up to 30%**. The arithmetic behind the claim is simple: send easy prompts to the cheap sibling and keep hard prompts on the strong model.
+**Intelligent Prompt Routing** operates *within* a model family, Claude Sonnet ↔ Claude Haiku, Nova Pro ↔ Nova Lite, and AWS's pricing page claims it can cut cost by **up to 30%**. The arithmetic behind the claim is simple: send easy prompts to the cheap sibling and keep hard prompts on the strong model.
 
-**Worked example 10 — routing arithmetic.** Use one **verified** anchor: Claude 3.5 Sonnet at **$6.00 / $30.00** per 1M tokens. The sibling's per-token rate is **not published in the sources verified for this lesson**, so assume a Haiku-class model at **$1.00 / $5.00** (illustrative) and a **10M-in / 2M-out** daily mix:
+**Worked example 10: routing arithmetic.** Use one **verified** anchor: Claude 3.5 Sonnet at **$6.00 / $30.00** per 1M tokens. The sibling's per-token rate is **not published in the sources verified for this lesson**, so assume a Haiku-class model at **$1.00 / $5.00** (illustrative) and a **10M-in / 2M-out** daily mix:
 
 | Strategy | Calculation | Daily cost |
 |---|---|---:|
@@ -384,9 +384,9 @@ flowchart TD
 | 50% of volume routed to the cheap sibling | $0.5 \times (10 \times 1.00 + 2 \times 5.00) + 0.5 \times 120.00$ | **$70.00** |
 | **Saving on this mix** | | **$50.00 (42%)** |
 
-Two readings follow. First, AWS's published claim is **"up to 30%"**, which is the conservative figure across real traffic — never quote the illustrative 42% as an AWS number. Second, routing is a *traffic-mix* lever rather than a per-request discount, which is exactly what separates it from batch (**−50%** on every token), the Flex tier (**−50%** on every token) and a global profile (**−10%** on every token).
+Two readings follow. First, AWS's published claim is **"up to 30%"**, which is the conservative figure across real traffic: never quote the illustrative 42% as an AWS number. Second, routing is a *traffic-mix* lever rather than a per-request discount, which is exactly what separates it from batch (**−50%** on every token), the Flex tier (**−50%** on every token) and a global profile (**−10%** on every token).
 
-**Prompt caching (Amazon Nova)** is the other lever, and its limits are precise: a **minimum of 1,000 tokens** per checkpoint, **at most 4 checkpoints** per request, a **5-minute** time to live and a **20,000-token** cache cap. Cached input tokens are billed at the cache-read rate — for Claude 3.5 Sonnet that is **$0.60 per 1M** versus **$6.00** uncached (a **10× reduction**), while a cache *write* costs **$7.50 per 1M** (a **25% premium**). Caching therefore pays only when a checkpoint is read repeatedly inside its TTL.
+**Prompt caching (Amazon Nova)** is the other lever, and its limits are precise: a **minimum of 1,000 tokens** per checkpoint, **at most 4 checkpoints** per request, a **5-minute** time to live and a **20,000-token** cache cap. Cached input tokens are billed at the cache-read rate: for Claude 3.5 Sonnet that is **$0.60 per 1M** versus **$6.00** uncached (a **10× reduction**), while a cache *write* costs **$7.50 per 1M** (a **25% premium**). Caching therefore pays only when a checkpoint is read repeatedly inside its TTL.
 
 Match each pricing mechanism to its documented rule:
 
@@ -418,20 +418,20 @@ Cross-Region inference is expressed through **inference profiles**, and there ar
 | Routing scope | Within a single geography: **US, EU or APAC** only | **Any commercial AWS Region** |
 | Price | Standard rates | **~10% cheaper** (input and output) |
 | Data residency | Data stays inside the geography | May be processed in a Region you have not manually enabled |
-| Surcharge | **None** — price always comes from the **source** Region | **None** — same rule |
+| Surcharge | **None**, price always comes from the **source** Region | **None**, same rule |
 | IAM | Standard regional IAM | Needs IAM with `aws:RequestedRegion: "unspecified"` |
 | Typical exam use | **Compliance / residency** questions | **Cost** questions |
 
 ### 5.2 What CloudTrail shows
 
-Cross-Region requests can route to Regions that are **not manually enabled in your account**; the data stays on the AWS network and is encrypted in transit. AWS CloudTrail records where the work actually happened in **`additionalEventData.inferenceRegion`** — which is exactly why a CloudTrail entry can show a different Region from the request's source Region without implying a billing error. **Pricing always uses the source Region**, so there is no routing surcharge.
+Cross-Region requests can route to Regions that are **not manually enabled in your account**; the data stays on the AWS network and is encrypted in transit. AWS CloudTrail records where the work actually happened in **`additionalEventData.inferenceRegion`**; which is exactly why a CloudTrail entry can show a different Region from the request's source Region without implying a billing error. **Pricing always uses the source Region**, so there is no routing surcharge.
 
 ### 5.3 Two limits candidates miss
 
 1. **Inference profiles do not support Provisioned Throughput.** Capacity reserved per model unit and cross-Region routing are separate mechanisms; you cannot combine them.
-2. **Application profiles exist for cost-allocation tagging** — a separate concept from routing profiles, used to attribute spend rather than to place compute.
+2. **Application profiles exist for cost-allocation tagging**: a separate concept from routing profiles, used to attribute spend rather than to place compute.
 
-**Worked example 6 — cross-region economics.** A geographic profile such as `us.amazon.nova-lite-v1:0` keeps processing inside the United States at standard rates. A **global** profile is roughly **10% cheaper** but may execute in any commercial Region. For an EU financial workload the choice is decided by residency, not price: choose the **geographic (EU)** profile and accept the higher rate.
+**Worked example 6: cross-region economics.** A geographic profile such as `us.amazon.nova-lite-v1:0` keeps processing inside the United States at standard rates. A **global** profile is roughly **10% cheaper** but may execute in any commercial Region. For an EU financial workload the choice is decided by residency, not price: choose the **geographic (EU)** profile and accept the higher rate.
 
 ```mermaid
 flowchart LR
@@ -444,7 +444,7 @@ flowchart LR
     L --> N["No routing surcharge;<br/>no Provisioned Throughput support"]
 ```
 
-> **📚 Did you know?** The **~10% global-profile discount** and the **"price from the source Region"** rule point in opposite directions and both are true: your bill is calculated with your source Region's price list, but the global pool's rates are published about 10% lower, so routing globally saves money without a surcharge line item. Meanwhile **Intelligent Prompt Routing** — a completely different feature — can cut cost by **up to 30%** by routing within a model family (Claude Sonnet ↔ Claude Haiku, Nova Pro ↔ Nova Lite). Three separate savings levers, three different mechanisms: batch (−50%), Flex tier (−50%), global profile (−10%), prompt routing (up to −30%).
+> **📚 Did you know?** The **~10% global-profile discount** and the **"price from the source Region"** rule point in opposite directions and both are true: your bill is calculated with your source Region's price list, but the global pool's rates are published about 10% lower, so routing globally saves money without a surcharge line item. Meanwhile **Intelligent Prompt Routing**, a completely different feature, can cut cost by **up to 30%** by routing within a model family (Claude Sonnet ↔ Claude Haiku, Nova Pro ↔ Nova Lite). Three separate savings levers, three different mechanisms: batch (−50%), Flex tier (−50%), global profile (−10%), prompt routing (up to −30%).
 
 ---
 
@@ -476,17 +476,17 @@ flowchart TD
 | **Amazon** | Nova 2 Lite / 2 Sonic / Pro / Lite / Micro / Premier, Nova Canvas, Nova Reel, Nova Multimodal Embeddings; Titan Text / Image / Embeddings | Yes | partial | **SFT + RFT (Nova 2 Lite)**; Titan image/embedding |
 | **Anthropic** | Claude Sonnet 5.5, Opus 5.5, Fable 5.1/5, Mythos 5.1/5, Opus 5, Sonnet 5; Claude 3.5 Haiku, Claude 3 Haiku | Yes | Yes (Messages) | not documented |
 | **OpenAI** | GPT-6 family, GPT-6.1 Sol, GPT-5.x family, **gpt-oss 20B/120B**, GPT-OSS Safeguard | Yes | Yes (Responses/Chat) | **RFT on `openai.gpt-oss-20b`** |
-| **Meta** | Llama 4, 3.3, 3.2, 3.1, 3, 2 | Yes | — | **SFT: 3.1 8B/70B, 3.2 1B/3B/11B-V/90B-V, 3.3 70B-V** |
+| **Meta** | Llama 4, 3.3, 3.2, 3.1, 3, 2 | Yes |: | **SFT: 3.1 8B/70B, 3.2 1B/3B/11B-V/90B-V, 3.3 70B-V** |
 | **Mistral AI** | Mistral Large 3, Mistral Small, Ministral 3B/8B/14B, Magistral Small, Devstral 2, Pixtral Large, Voxtral, Mixtral 8x7B, Mistral 7B | Yes | Yes (Chat) | import Mistral/Mixtral architectures |
-| **Cohere** | Command R, Command R+, Embed English/Multilingual/v4, **Rerank 3.5** | Yes | — | **SFT: Command, Command Light** |
-| **AI21 Labs** | Jamba 1.5 Large, Jamba 1.5 Mini | Yes | — | Jamba 1.5 Mini listed |
-| **DeepSeek** | **V3.2, V3.1, R1** | Yes | V3.2 / V3.1 only | — |
-| **Google** | Gemma 4 (31B, 26B-A4B, E2B), Gemma 3 (12B, 27B, 4B) | Gemma 3 | **Gemma 4 is mantle-only** | — |
+| **Cohere** | Command R, Command R+, Embed English/Multilingual/v4, **Rerank 3.5** | Yes |: | **SFT: Command, Command Light** |
+| **AI21 Labs** | Jamba 1.5 Large, Jamba 1.5 Mini | Yes |: | Jamba 1.5 Mini listed |
+| **DeepSeek** | **V3.2, V3.1, R1** | Yes | V3.2 / V3.1 only |: |
+| **Google** | Gemma 4 (31B, 26B-A4B, E2B), Gemma 3 (12B, 27B, 4B) | Gemma 3 | **Gemma 4 is mantle-only** |: |
 | **Qwen** | Qwen3 235B A22B, Qwen3 32B, Qwen3 Next 80B, Qwen3 Coder, Qwen3 VL | Yes | Yes | **RFT on `qwen.qwen3-32b`** |
-| **Moonshot / MiniMax / NVIDIA / xAI** | Kimi K3/K2.5, M2 family, Nemotron 3 / Nano 3, Grok 4.7/4.6/4.3 | Yes | some | — |
-| **Your model** | **Custom Model Import**: Llama 2/3/3.1/3.2/3.3, Mistral, Mixtral, Qwen2/2.5/3, GPT-OSS, GPTBigCode | Yes | — | weights < 200 GB text / < 100 GB multimodal, context < 128K |
+| **Moonshot / MiniMax / NVIDIA / xAI** | Kimi K3/K2.5, M2 family, Nemotron 3 / Nano 3, Grok 4.7/4.6/4.3 | Yes | some |: |
+| **Your model** | **Custom Model Import**: Llama 2/3/3.1/3.2/3.3, Mistral, Mixtral, Qwen2/2.5/3, GPT-OSS, GPTBigCode | Yes |: | weights < 200 GB text / < 100 GB multimodal, context < 128K |
 
-### 6.3 Worked example 7 — same job, 5× embedding cost
+### 6.3 Worked example 7: same job, 5× embedding cost
 
 An AWS blog worked a RAG ingestion of a **5M-token document** plus **0.5M query tokens** = **5.5M tokens**:
 
@@ -495,17 +495,17 @@ An AWS blog worked a RAG ingestion of a **5M-token document** plus **0.5M query 
 | Amazon Titan Text Embeddings V2 | $0.00002 | **$0.11** |
 | Cohere Embeddings | $0.0001 | **$0.55** |
 
-Same corpus, same job, **5× difference** — which is why embedding model choice, not just LLM choice, belongs in a cost question.
+Same corpus, same job, **5× difference**; which is why embedding model choice, not just LLM choice, belongs in a cost question.
 
-### 2025–2026 Updates
+### 2025 to 2026 Updates
 
-Sections 6.1–6.3 teach a decision *process* that survives catalog churn; this subsection records what actually churned between late 2025 and October 2026, so a stale model list never becomes a wrong answer. Every row below is verified against an AWS What's New post, an AWS documentation page, the Bedrock pricing page or an AWS blog — nothing here comes from a third-party tracker.
+Sections 6.1 to 6.3 teach a decision *process* that survives catalog churn; this subsection records what actually churned between late 2025 and October 2026, so a stale model list never becomes a wrong answer. Every row below is verified against an AWS What's New post, an AWS documentation page, the Bedrock pricing page or an AWS blog: nothing here comes from a third-party tracker.
 
 **Catalog changes (verified):**
 
 | Change | Verified date | What AWS published | Source |
 |---|---|---|---|
-| **Amazon Nova 2 family** | re:Invent 2025, **1–4 Dec 2025** | **Nova 2 Lite** (1M context, code interpreter, web grounding, remote MCP), **Nova 2 Sonic** speech-to-speech **GA 2 Dec 2025** (`amazon.nova-2-sonic-v1:0`, 7 languages), **Nova 2 Omni** **preview 2 Dec 2025** (text/image/video/speech in → text and image out, 200+ text languages), **Nova 2 Pro** *early access* (GA not confirmed), **Nova Forge** for custom training; gen-1 Nova models remain listed | AWS What's New and AWS Blog |
+| **Amazon Nova 2 family** | re:Invent 2025, **1 to 4 Dec 2025** | **Nova 2 Lite** (1M context, code interpreter, web grounding, remote MCP), **Nova 2 Sonic** speech-to-speech **GA 2 Dec 2025** (`amazon.nova-2-sonic-v1:0`, 7 languages), **Nova 2 Omni** **preview 2 Dec 2025** (text/image/video/speech in → text and image out, 200+ text languages), **Nova 2 Pro** *early access* (GA not confirmed), **Nova Forge** for custom training; gen-1 Nova models remain listed | AWS What's New and AWS Blog |
 | **Claude Sonnet 4.6** | **17 Feb 2026** | **1M** context window, **64K** maximum output, training cutoff Aug 2025 | Bedrock model card `model-card-anthropic-claude-sonnet-4-6` |
 | **Six open-weight models on Project Mantle** | **1 Feb 2026** | DeepSeek V3.2, MiniMax M2.1, GLM 4.7 / 4.7 Flash, Kimi K2.5 and Qwen3 Coder Next served through the OpenAI-compatible Mantle endpoint, beside the **18** open-weight models added at re:Invent 2025 | AWS What's New |
 | **OpenAI GPT-6 Astra** | **GA 8 Sep 2026** | **1M** context, computer and browser use | AWS What's New |
@@ -516,15 +516,15 @@ Sections 6.1–6.3 teach a decision *process* that survives catalog churn; this 
 
 | Capability | Verified date | What it adds |
 |---|---|---|
-| **Guardrails: six policies + `ApplyGuardrail`** | Automated Reasoning checks previewed **3 Dec 2024**; `ApplyGuardrail` and cross-account safeguards since | content moderation, prompt-attack detection, denied topics, PII/sensitive-info filters, contextual grounding and **Automated Reasoning checks** — plus an API that applies safeguards to *any* model **without invoking an FM**, and one guardrail enforced across an AWS Organization. AWS claims **up to 88%** harmful content blocked and **99%** Automated Reasoning accuracy |
+| **Guardrails: six policies + `ApplyGuardrail`** | Automated Reasoning checks previewed **3 Dec 2024**; `ApplyGuardrail` and cross-account safeguards since | content moderation, prompt-attack detection, denied topics, PII/sensitive-info filters, contextual grounding and **Automated Reasoning checks**: plus an API that applies safeguards to *any* model **without invoking an FM**, and one guardrail enforced across an AWS Organization. AWS claims **up to 88%** harmful content blocked and **99%** Automated Reasoning accuracy |
 | **Bedrock AgentCore** | preview **16 Jul 2025** → GA **13 Oct 2025** → **Policy GA 3 Mar 2026** → **Evaluations GA 31 Mar 2026** | runtime, gateway, memory and tools for agents; Policy (Cedar or natural language) intercepts Gateway tool calls *outside* the reasoning loop; Evaluations ships **13** evaluators |
-| **Knowledge Bases growth** | 2025–2026 | reranking, custom connectors, direct ingestion, **RAG evaluation with LLM-as-a-judge**, inference profiles inside `RetrieveAndGenerate`, **S3 Vectors**, and **Bedrock Managed Knowledge Base** (Smart Parsing + Agentic Retrieval API) documented as the path after **Amazon Kendra** closed to new customers **30 Jul 2026** |
-| **Pricing levers** | 2025–2026 | **Intelligent Prompt Routing billed at $1 per 1,000 requests** (up to **30%** cheaper); prompt-cache **reads −90%** (Claude/GPT) or **−75%** (Nova) with **writes at 1.25×** on the 5-minute TTL (2× on the 1-hour TTL) — and **caching is never combined with batch** |
+| **Knowledge Bases growth** | 2025 to 2026 | reranking, custom connectors, direct ingestion, **RAG evaluation with LLM-as-a-judge**, inference profiles inside `RetrieveAndGenerate`, **S3 Vectors**, and **Bedrock Managed Knowledge Base** (Smart Parsing + Agentic Retrieval API) documented as the path after **Amazon Kendra** closed to new customers **30 Jul 2026** |
+| **Pricing levers** | 2025 to 2026 | **Intelligent Prompt Routing billed at $1 per 1,000 requests** (up to **30%** cheaper); prompt-cache **reads −90%** (Claude/GPT) or **−75%** (Nova) with **writes at 1.25×** on the 5-minute TTL (2× on the 1-hour TTL), and **caching is never combined with batch** |
 | **Exam guide v1.1** | **30 Apr 2026** | new objectives: token-based pricing (**2.1.4**), context engineering (**2.1.5**), agentic AI with **MCP** (**2.1.6**), prompt versioning via **Bedrock Prompt Management** (**3.2.5**), distillation (**3.1.5**), **LLM-as-a-judge** (**3.4.2**) and hallucination grounding (**5.1.5**); AWS says guide changes reach the exam about a month after publication |
 
-**What did *not* change:** every mechanism in this lesson behaves as written — the single Converse API and its **four** base parameters, batch at **50%** with no tool calling and no structured output, provisioned throughput billed **hourly per model unit**, the **+75% / default / −50% / 1- or 3-month** tier ladder, geographic profiles for residency against global profiles at **~10%**, and the three evaluation modes over a dataset in **S3**. The catalog is the part that moves; the mechanics are the part you are examined on.
+**What did *not* change:** every mechanism in this lesson behaves as written: the single Converse API and its **four** base parameters, batch at **50%** with no tool calling and no structured output, provisioned throughput billed **hourly per model unit**, the **+75% / default / −50% / 1- or 3-month** tier ladder, geographic profiles for residency against global profiles at **~10%**, and the three evaluation modes over a dataset in **S3**. The catalog is the part that moves; the mechanics are the part you are examined on.
 
-> **📚 Did you know?** The lifecycle policy turns this lesson's "do not memorize the model list" advice into a *billing* rule: because a **Legacy** model refuses **new** Provisioned Throughput orders, a team that pins capacity to a model the day before it leaves Active can be locked out of exactly the commitment section 4.5 says fine-tuned and steady-state workloads need — while its existing model units keep running. That is why an exam option naming a specific model as "available" or "unavailable" is nearly always a distractor, and why the durable answers are mechanisms: default-on access, Marketplace permissions on first enablement, the Anthropic FTU form, a valid payment method.
+> **📚 Did you know?** The lifecycle policy turns this lesson's "do not memorize the model list" advice into a *billing* rule: because a **Legacy** model refuses **new** Provisioned Throughput orders, a team that pins capacity to a model the day before it leaves Active can be locked out of exactly the commitment section 4.5 says fine-tuned and steady-state workloads need; while its existing model units keep running. That is why an exam option naming a specific model as "available" or "unavailable" is nearly always a distractor, and why the durable answers are mechanisms: default-on access, Marketplace permissions on first enablement, the Anthropic FTU form, a valid payment method.
 
 ---
 
@@ -537,7 +537,7 @@ Sections 6.1–6.3 teach a decision *process* that survives catalog churn; this 
 | **Distillation** | A teacher model produces training data for a smaller student | Teacher outputs | AWS claims **500% faster / 75% cheaper** training versus full training (AWS claim) |
 | **Custom Model Import** | Serve **your own weights** serverlessly | Model artifacts (< 200 GB text / < 100 GB multimodal, context < 128K) | Can run **on-demand**; storage **$1.95/month** |
 
-**Worked example 8 — fine-tuning cost, AWS's own image example.** Amazon Titan Image Generator at **$0.005 per image**, **500 steps**, **batch size 64**:
+**Worked example 8: fine-tuning cost, AWS's own image example.** Amazon Titan Image Generator at **$0.005 per image**, **500 steps**, **batch size 64**:
 
 $$
 \$0.005 \times 500 \times 64 = \$160.00
@@ -546,7 +546,7 @@ $$
 plus **$1.95/month** custom model storage and **1 hour** of custom inference at **$21.00** gives **$182.95 in month one**.
 
 > [!WARNING]
-> **"Fine-tuned model + on-demand" is always the wrong pairing.** A supervised fine-tuned model must be served with **Provisioned Throughput**, which bills **per hour per model unit even when idle**. The exception is **Custom Model Import**, which can run on-demand. Questions that offer "fine-tune the model and keep paying per token on-demand" are testing exactly this boundary — and questions that offer fine-tuning as the *first* step for a document-grounded Q&A task are testing the customization spectrum from Lesson 8: **prompting and RAG come first**, because most workloads never need a custom model at all.
+> **"Fine-tuned model + on-demand" is always the wrong pairing.** A supervised fine-tuned model must be served with **Provisioned Throughput**, which bills **per hour per model unit even when idle**. The exception is **Custom Model Import**, which can run on-demand. Questions that offer "fine-tune the model and keep paying per token on-demand" are testing exactly this boundary, and questions that offer fine-tuning as the *first* step for a document-grounded Q&A task are testing the customization spectrum from Lesson 8: **prompting and RAG come first**, because most workloads never need a custom model at all.
 
 ### 7.1 Prompt caching (Amazon Nova)
 
@@ -575,7 +575,7 @@ plus **$1.95/month** custom model storage and **1 hour** of custom inference at 
 
 LLM-as-a-judge reached **GA on 2025-03-20** and AWS claims **up to 98% cost savings** with turnaround in **hours instead of weeks**. It also offers **bring-your-own-inference-response**, so you can score outputs from models that are not even hosted on Bedrock.
 
-### 8.2 Worked example 9 — which evaluation, which metric
+### 8.2 Worked example 9; which evaluation, which metric
 
 | Requirement | Correct mode | Why the others fail |
 |---|---|---|
@@ -599,18 +599,18 @@ flowchart TD
     H -- No --> J["Ship with human review in the loop"]
 ```
 
-> **📚 Did you know?** LLM-as-a-judge's **bring-your-own-inference-response** feature quietly makes Bedrock Evaluations usable as a *cross-platform* quality layer: you submit responses produced by any model — including ones running outside AWS — and a Bedrock judge scores them with an explanation and a score histogram written to S3. That is why "the evaluation must run on the same provider as the model under test" is a distractor: AWS explicitly built the opposite.
+> **📚 Did you know?** LLM-as-a-judge's **bring-your-own-inference-response** feature quietly makes Bedrock Evaluations usable as a *cross-platform* quality layer: you submit responses produced by any model, including ones running outside AWS, and a Bedrock judge scores them with an explanation and a score histogram written to S3. That is why "the evaluation must run on the same provider as the model under test" is a distractor: AWS explicitly built the opposite.
 
 ---
 
 ## 9. Comparative verdict
 
 > [!IMPORTANT]
-> **Comparative Verdict — Amazon Bedrock vs. self-hosted SageMaker vs. a prebuilt AI service vs. DIY**
-> - **Amazon Bedrock** is the answer when you want **pre-trained foundation models through a single serverless API** with **minimal infrastructure management**. You get 100+ FMs from 19 providers, on-demand/batch/provisioned pricing, cross-region profiles, service tiers, Knowledge Bases, Agents, Guardrails, Prompt Flows and Evaluations — and you never manage a GPU, an endpoint or a scaling policy. Its limits: you cannot see or control the underlying compute, provisioned models require a commitment, and some FMs (**Claude, Jurassic and other Bedrock-only models**) are exclusive to it.
-> - **Self-hosted SageMaker AI (including JumpStart)** is the answer when you need **full control over training, deployment and infrastructure** — granular compute, custom training loops, any framework, endpoint scaling policies and monitoring. It is **primarily serverful**: you deploy to an endpoint and pay per instance-hour (Serverless Inference aside). Its limits: you need working ML/infra skills, you own the endpoint's availability, and per-token economics are harder to reason about.
-> - **A prebuilt AI service** (Rekognition, Comprehend, Translate, Transcribe, Textract, Polly, Kendra) is the answer when the task is **narrow, well-defined and non-generative**: detect objects in images, detect entities in text, translate, transcribe. Cheapest and fastest to production, fully deterministic for a given input — but it cannot be prompted, fine-tuned into a conversational model or composed into a multi-step agent.
-> - **DIY (self-managed open-source models on your own compute)** is the answer only when **no hosted option is acceptable**: total price control at very high steady volume, or data/weights that cannot leave your perimeter. It costs you everything Bedrock removes — patching, scaling, quantization, serving frameworks, security, model upgrades and the people who do all of it.
+> **Comparative Verdict: Amazon Bedrock vs. self-hosted SageMaker vs. a prebuilt AI service vs. DIY**
+> - **Amazon Bedrock** is the answer when you want **pre-trained foundation models through a single serverless API** with **minimal infrastructure management**. You get 100+ FMs from 19 providers, on-demand/batch/provisioned pricing, cross-region profiles, service tiers, Knowledge Bases, Agents, Guardrails, Prompt Flows and Evaluations, and you never manage a GPU, an endpoint or a scaling policy. Its limits: you cannot see or control the underlying compute, provisioned models require a commitment, and some FMs (**Claude, Jurassic and other Bedrock-only models**) are exclusive to it.
+> - **Self-hosted SageMaker AI (including JumpStart)** is the answer when you need **full control over training, deployment and infrastructure**: granular compute, custom training loops, any framework, endpoint scaling policies and monitoring. It is **primarily serverful**: you deploy to an endpoint and pay per instance-hour (Serverless Inference aside). Its limits: you need working ML/infra skills, you own the endpoint's availability, and per-token economics are harder to reason about.
+> - **A prebuilt AI service** (Rekognition, Comprehend, Translate, Transcribe, Textract, Polly, Kendra) is the answer when the task is **narrow, well-defined and non-generative**: detect objects in images, detect entities in text, translate, transcribe. Cheapest and fastest to production, fully deterministic for a given input, but it cannot be prompted, fine-tuned into a conversational model or composed into a multi-step agent.
+> - **DIY (self-managed open-source models on your own compute)** is the answer only when **no hosted option is acceptable**: total price control at very high steady volume, or data/weights that cannot leave your perimeter. It costs you everything Bedrock removes: patching, scaling, quantization, serving frameworks, security, model upgrades and the people who do all of it.
 > - **Rule of thumb for the exam:** *need a foundation model with the least infrastructure* → **Bedrock**. *Need to train and own the model and the endpoint* → **SageMaker AI**. *Need one narrow non-generative task* → **prebuilt AI service**. *Need models with no managed provider at all* → **DIY**. AWS's decision guide states it plainly: *"Choose Bedrock if you primarily need pre-trained FMs for inference and want the FM that best fits your use case"* and *"Use SageMaker when you need full control over training, deployment and infrastructure."*
 
 | Dimension | **Amazon Bedrock** | **Self-hosted SageMaker AI (JumpStart)** | **Prebuilt AI service** | **DIY on your own compute** |
@@ -619,7 +619,7 @@ flowchart TD
 | Audience | Developers building GenAI apps via API | Data scientists / ML engineers | Any developer | ML/infra engineers |
 | Infra control | none needed | **granular** compute, scaling, monitoring | none | total |
 | Model sourcing | curated FMs from 19 providers + Custom Model Import | public + proprietary FMs, **wider selection**, plus trained models | AWS-curated, fixed capability | anything you can serve |
-| Exclusive models | **Claude, Jurassic, other Bedrock-only FMs** | — | — | depends on license |
+| Exclusive models | **Claude, Jurassic, other Bedrock-only FMs** |, |, | depends on license |
 | Deployment | serverless `modelId`, no deploy step | `deploy()` to an endpoint | service API call | build a serving stack |
 | Cost model | **per token** or **per hour per model unit** | **per instance-hour** (serverless: per inference) | per call / per page / per minute | hardware + people |
 | Built-in GenAI features | Agents, Knowledge Bases, Guardrails, Prompt Flows, Evaluations, Routing, Distillation, Web Search | Clarify evals, Canvas, Pipelines, Feature Store | task-specific only | build them yourself |
@@ -632,24 +632,24 @@ flowchart TD
 
 > [!WARNING]
 > **The traps that cost marks on this exact material:**
-> 1. **The single/Converse API is the "no rewrite" answer** — changing `modelId` is the mechanism; provisioned throughput, cross-region profiles and model import are all different mechanisms.
+> 1. **The single/Converse API is the "no rewrite" answer**: changing `modelId` is the mechanism; provisioned throughput, cross-region profiles and model import are all different mechanisms.
 > 2. **Batch = 50% off, ≤ 24 h, no SLA, no tool calling, no structured output, no provisioned models.** Any option granting batch a feature it lacks is wrong by construction.
-> 3. **Priority is +75% (for up to 25% better OTPS), Flex is −50%, global cross-region is ~10%, batch is 50%, Intelligent Prompt Routing is up to 30%.** Four savings levers, four different numbers — never mix them.
+> 3. **Priority is +75% (for up to 25% better OTPS), Flex is −50%, global cross-region is ~10%, batch is 50%, Intelligent Prompt Routing is up to 30%.** Four savings levers, four different numbers: never mix them.
 > 4. **Provisioned Throughput bills hourly even when idle, measured in model units, and is required for fine-tuned models.** Inference profiles **do not** support it.
 > 5. **Cross-region pricing uses the source Region; CloudTrail logs the processing Region in `additionalEventData.inferenceRegion`.** No routing surcharge.
 > 6. **Geographic profiles = residency (US/EU/APAC); global profiles = cost (any commercial Region).** A data-residency question pointing at the cheaper global profile is a distractor.
 > 7. **Anthropic needs an FTU form on `bedrock-runtime`**; model access is otherwise default-on with Marketplace permissions used only on first enablement.
-> 8. **Converse has exactly four base parameters** — `maxTokens`, `temperature` (0–1), `topP` (0–1), `stopSequences` (≤ 2,500) — everything else goes in `additionalModelRequestFields`.
+> 8. **Converse has exactly four base parameters**, `maxTokens`, `temperature` (0 to 1), `topP` (0 to 1), `stopSequences` (≤ 2,500), everything else goes in `additionalModelRequestFields`.
 > 9. **`toolChoice: {tool: ...}` is documented only for Anthropic Claude 3+ and Amazon Nova.**
 > 10. **Objective metrics → automatic evaluation; subjective metrics → human evaluation; cheap explained scoring → LLM-as-a-judge** (up to 98% cheaper, GA 2025-03-20).
 >
-> And one "do not memorize" flag: **provisioned-throughput hourly prices for Claude, Nova and most modern models are not published** — AWS says to contact the account team. Likewise **latency-optimized inference** is still labelled *preview, subject to change*, and the **exact model count** is never published ("100+" only). Do not spend recall budget on either.
+> And one "do not memorize" flag: **provisioned-throughput hourly prices for Claude, Nova and most modern models are not published**: AWS says to contact the account team. Likewise **latency-optimized inference** is still labelled *preview, subject to change*, and the **exact model count** is never published ("100+" only). Do not spend recall budget on either.
 
 ---
 
 ## Real-World Case Studies
 
-Sections 1–10 build the mechanisms; AWS's published customer stories show which mechanism a real team actually reached for, and with what numbers. Everything below is quoted from the AWS case study or AWS Machine Learning Blog post named in the Source column, retrieved 6 October 2026. All of these figures are customer- or AWS-claimed and unaudited, and where a source says "up to", read it as a ceiling rather than an expectation.
+Sections 1 to 10 build the mechanisms; AWS's published customer stories show which mechanism a real team actually reached for, and with what numbers. Everything below is quoted from the AWS case study or AWS Machine Learning Blog post named in the Source column, retrieved 6 October 2026. All of these figures are customer- or AWS-claimed and unaudited, and where a source says "up to", read it as a ceiling rather than an expectation.
 
 ### Cases at a glance: services, numbers, sources
 
@@ -657,22 +657,22 @@ Sections 1–10 build the mechanisms; AWS's published customer stories show whic
 |---|---|---|---|---|
 | 1 | **Epilot** (energy software, 2026) | **Bedrock (Claude Sonnet)**, **Bedrock Evaluations**, Amazon SQS, AWS Lambda, **EU Region** | handling time **−87%**, **55,000** summaries/month, MVP in **2 months**, **80%** of users say it simplifies work | `solutions/case-studies/epilot-genai-case-study` |
 | 2 | **Bynder** (digital asset management, 2025) | **Bedrock** with **Amazon Titan Multimodal Embeddings** | search time **−75%**, about **+50%** results per search; **175 M** assets / **18 PB** / **4,000** customers | `solutions/case-studies/bynder-bedrock-case-study` |
-| 3 | **Nippon India** (financial services, 2025) | **Bedrock Knowledge Bases**, **Bedrock Guardrails**, Claude 3 Sonnet, reranker | accuracy **+>95%**, hallucination **−90–95%**, reports **2 days → ~10 minutes** | ML Blog `how-nippon-india-mutual-fund-improved-the-accuracy-of-ai-assistant-responses-using-advanced-rag-methods-on-amazon-bedrock` |
+| 3 | **Nippon India** (financial services, 2025) | **Bedrock Knowledge Bases**, **Bedrock Guardrails**, Claude 3 Sonnet, reranker | accuracy **+>95%**, hallucination **−90 to 95%**, reports **2 days → ~10 minutes** | ML Blog `how-nippon-india-mutual-fund-improved-the-accuracy-of-ai-assistant-responses-using-advanced-rag-methods-on-amazon-bedrock` |
 | 4 | **Adobe** (software, 2025) | **Bedrock Knowledge Bases**, **Titan Text Embeddings V2**, Amazon OpenSearch Service, **Retrieve API** | retrieval accuracy **+20%** on Adobe's own test set; 400-token / 20%-overlap chunking won | ML Blog `adobe-enhances-developer-productivity-using-amazon-bedrock-knowledge-bases` |
-| 5 | **Prime Focus Technologies** (media, 2025) | **Bedrock** + **AWS Lambda** agents on CLEAR (**14 M+** assets) | cost **−20–30%**, accuracy **+20–30%**, turnaround **−30–40%**; external LLM APIs too slow for live tagging | `solutions/case-studies/prime-focus-case-study` |
-| 6 | **Alnylam** (biotech, 2025) | **Bedrock**, **Amazon S3**, RAG, Amazon Q Business | triage **3–4 days → hours**, search **15 min → 30 s**, **3,000** users, **250+** use cases | `solutions/case-studies/alnylam-case-study` |
+| 5 | **Prime Focus Technologies** (media, 2025) | **Bedrock** + **AWS Lambda** agents on CLEAR (**14 M+** assets) | cost **−20 to 30%**, accuracy **+20 to 30%**, turnaround **−30 to 40%**; external LLM APIs too slow for live tagging | `solutions/case-studies/prime-focus-case-study` |
+| 6 | **Alnylam** (biotech, 2025) | **Bedrock**, **Amazon S3**, RAG, Amazon Q Business | triage **3 to 4 days → hours**, search **15 min → 30 s**, **3,000** users, **250+** use cases | `solutions/case-studies/alnylam-case-study` |
 
-**Case file 1 — Epilot: choose the model with Bedrock Evaluations before production.** Energy software from Cologne summarises long customer-email chains across 170+ utility customers. The pipeline is API → **Amazon SQS** → **AWS Lambda** → **Amazon Bedrock (Claude Sonnet)**, and the model itself was selected with **Amazon Bedrock Evaluations** (human ratings across prompt versions) rather than by preference; a later agent writes records **with humans verifying**. Outcomes: handling time **−87%**, **55,000 summaries per month** at a negligible failure rate, **80%** of users saying it simplifies their work, an MVP in **2 months**, and processed data kept in an **EU Region**. Exam angle: this is section 8's evaluation modes used as a *gate*, and section 5's residency question answered up front rather than after launch. Source: `aws.amazon.com/solutions/case-studies/epilot-genai-case-study` (indexed July 2026).
+**Case file 1: Epilot: choose the model with Bedrock Evaluations before production.** Energy software from Cologne summarises long customer-email chains across 170+ utility customers. The pipeline is API → **Amazon SQS** → **AWS Lambda** → **Amazon Bedrock (Claude Sonnet)**, and the model itself was selected with **Amazon Bedrock Evaluations** (human ratings across prompt versions) rather than by preference; a later agent writes records **with humans verifying**. Outcomes: handling time **−87%**, **55,000 summaries per month** at a negligible failure rate, **80%** of users saying it simplifies their work, an MVP in **2 months**, and processed data kept in an **EU Region**. Exam angle: this is section 8's evaluation modes used as a *gate*, and section 5's residency question answered up front rather than after launch. Source: `aws.amazon.com/solutions/case-studies/epilot-genai-case-study` (indexed July 2026).
 
-**Case file 2 — Bynder: embeddings are a product feature, not just a cost line.** Bynder runs **175 million assets / 18 petabytes** for **4,000 companies**, and text search cannot express "find me more like this one". Images and queries are vectorised with **Amazon Titan Multimodal Embeddings on Bedrock** for visual plus contextual similarity search. Outcomes: search time **−75%** and roughly **+50%** usable results per search. Exam angle: §6.3's embedding arithmetic is the same price table that makes Titan Text Embeddings V2 **5×** cheaper than Cohere embeddings — and multimodal embeddings add a *visual* search axis that a text-only embedding model cannot price at all. Source: `aws.amazon.com/solutions/case-studies/bynder-bedrock-case-study` (2025).
+**Case file 2, Bynder: embeddings are a product feature, not just a cost line.** Bynder runs **175 million assets / 18 petabytes** for **4,000 companies**, and text search cannot express "find me more like this one". Images and queries are vectorised with **Amazon Titan Multimodal Embeddings on Bedrock** for visual plus contextual similarity search. Outcomes: search time **−75%** and roughly **+50%** usable results per search. Exam angle: §6.3's embedding arithmetic is the same price table that makes Titan Text Embeddings V2 **5×** cheaper than Cohere embeddings, and multimodal embeddings add a *visual* search axis that a text-only embedding model cannot price at all. Source: `aws.amazon.com/solutions/case-studies/bynder-bedrock-case-study` (2025).
 
-**Case file 3 — Nippon India: the gain came from retrieval engineering, not a bigger model.** Naive RAG degraded as document volume grew and produced hallucinations. The fix set: **FM-as-parser** parsing, query reformulation, **multi-query RAG**, **reranker** models, **GraphRAG** and metadata filtering on **Bedrock Knowledge Bases**, plus **Bedrock Guardrails** and citations. Outcomes: accuracy **+>95%**, hallucination **−90–95%**, report generation **2 days → ~10 minutes**. Exam angle: §8's **RAG evaluation** exists precisely to separate a retrieval failure from a generation failure — and AWS notes every technique above is a GA product feature, not customer-only code. Source: AWS Machine Learning Blog, 29 Jul 2025, `aws.amazon.com/blogs/machine-learning/how-nippon-india-mutual-fund-improved-the-accuracy-of-ai-assistant-responses-using-advanced-rag-methods-on-amazon-bedrock`.
+**Case file 3, Nippon India: the gain came from retrieval engineering, not a bigger model.** Naive RAG degraded as document volume grew and produced hallucinations. The fix set: **FM-as-parser** parsing, query reformulation, **multi-query RAG**, **reranker** models, **GraphRAG** and metadata filtering on **Bedrock Knowledge Bases**, plus **Bedrock Guardrails** and citations. Outcomes: accuracy **+>95%**, hallucination **−90 to 95%**, report generation **2 days → ~10 minutes**. Exam angle: §8's **RAG evaluation** exists precisely to separate a retrieval failure from a generation failure, and AWS notes every technique above is a GA product feature, not customer-only code. Source: AWS Machine Learning Blog, 29 Jul 2025, `aws.amazon.com/blogs/machine-learning/how-nippon-india-mutual-fund-improved-the-accuracy-of-ai-assistant-responses-using-advanced-rag-methods-on-amazon-bedrock`.
 
-**Case file 4 — Adobe: chunking and embedding choice decide RAG accuracy.** Thousands of developers were getting weak doc-search results. Adobe benchmarked four chunking strategies on **Bedrock Knowledge Bases** — **400-token / 20%-overlap**, 1,000-token, hierarchical and semantic — with **Amazon Titan Text Embeddings V2** written to **Amazon OpenSearch Service** and read through the **Retrieve API**. Outcome: **+20% retrieval accuracy** on Adobe's own test set, with the *simplest* strategy (400-token / 20% overlap) the most accurate. Exam angle: a knowledge-base question that offers "pick a bigger model" is answering the wrong axis; chunking, embedding choice and retrieval are the knobs, and the benchmark runs on **your** dataset. Source: AWS Machine Learning Blog, 11 Jun 2025, `aws.amazon.com/blogs/machine-learning/adobe-enhances-developer-productivity-using-amazon-bedrock-knowledge-bases`.
+**Case file 4: Adobe: chunking and embedding choice decide RAG accuracy.** Thousands of developers were getting weak doc-search results. Adobe benchmarked four chunking strategies on **Bedrock Knowledge Bases**: **400-token / 20%-overlap**, 1,000-token, hierarchical and semantic: with **Amazon Titan Text Embeddings V2** written to **Amazon OpenSearch Service** and read through the **Retrieve API**. Outcome: **+20% retrieval accuracy** on Adobe's own test set, with the *simplest* strategy (400-token / 20% overlap) the most accurate. Exam angle: a knowledge-base question that offers "pick a bigger model" is answering the wrong axis; chunking, embedding choice and retrieval are the knobs, and the benchmark runs on **your** dataset. Source: AWS Machine Learning Blog, 11 Jun 2025, `aws.amazon.com/blogs/machine-learning/adobe-enhances-developer-productivity-using-amazon-bedrock-knowledge-bases`.
 
-**Case file 5 — Prime Focus Technologies: latency decided placement before price did.** CLEAR holds **14 million+ assets** (Disney Star, CBS, Lionsgate) and covers localization plus **live** cricket tagging. **Amazon Bedrock** + **AWS Lambda** agents automated the workflows; outcomes were localization cost **−20–30%**, accuracy **+20–30%** and turnaround **−30–40%**. The documented caution matters more than the percentages: the **first attempt used external LLM APIs whose latency was too high for live tagging**, and latency "dropped dramatically" once the workload ran on Bedrock on AWS. Exam angle: §5's routing questions and §6's decision tree both start with *who is waiting* — placement is settled before pricing is compared. Source: `aws.amazon.com/solutions/case-studies/prime-focus-case-study` (2025).
+**Case file 5, Prime Focus Technologies: latency decided placement before price did.** CLEAR holds **14 million+ assets** (Disney Star, CBS, Lionsgate) and covers localization plus **live** cricket tagging. **Amazon Bedrock** + **AWS Lambda** agents automated the workflows; outcomes were localization cost **−20 to 30%**, accuracy **+20 to 30%** and turnaround **−30 to 40%**. The documented caution matters more than the percentages: the **first attempt used external LLM APIs whose latency was too high for live tagging**, and latency "dropped dramatically" once the workload ran on Bedrock on AWS. Exam angle: §5's routing questions and §6's decision tree both start with *who is waiting*, placement is settled before pricing is compared. Source: `aws.amazon.com/solutions/case-studies/prime-focus-case-study` (2025).
 
-**Case file 6 — Alnylam: citations are the compliance feature.** Complaint triage took **3–4 days** and finding one internal answer took **15+ minutes**. With **Amazon Bedrock**, **Amazon S3** and a RAG layer, the team shipped an intake-and-triage prototype in **3 months** under GxP constraints, plus the Slack assistant **AskALNY** serving **2,000 employees + 1,000 contractors** that returns answers **with source links**. Outcomes: triage **3–4 days → hours**, search **15 min → 30 s**, then **250+ use cases**. Exam angle: grounding plus citations is exactly exam-guide objective **5.1.5** (hallucination detection and grounding), and a regulated answer without a source link is not an answer. Source: `aws.amazon.com/solutions/case-studies/alnylam-case-study` (2025).
+**Case file 6: Alnylam: citations are the compliance feature.** Complaint triage took **3 to 4 days** and finding one internal answer took **15+ minutes**. With **Amazon Bedrock**, **Amazon S3** and a RAG layer, the team shipped an intake-and-triage prototype in **3 months** under GxP constraints, plus the Slack assistant **AskALNY** serving **2,000 employees + 1,000 contractors** that returns answers **with source links**. Outcomes: triage **3 to 4 days → hours**, search **15 min → 30 s**, then **250+ use cases**. Exam angle: grounding plus citations is exactly exam-guide objective **5.1.5** (hallucination detection and grounding), and a regulated answer without a source link is not an answer. Source: `aws.amazon.com/solutions/case-studies/alnylam-case-study` (2025).
 
 ### Before and after, side by side
 
@@ -680,10 +680,10 @@ Sections 1–10 build the mechanisms; AWS's published customer stories show whic
 |---|---|---|---|---|
 | **Epilot** | customer-email handling time | baseline | **−87%** | **55,000** summaries/month, MVP in 2 months |
 | **Bynder** | visual search time | text search over **175 M** assets | **−75%** | about **+50%** results per search |
-| **Nippon India** | accuracy · hallucination | naive RAG, heavy hallucination | **+>95% · −90–95%** | reports **2 d → ~10 min** |
+| **Nippon India** | accuracy · hallucination | naive RAG, heavy hallucination | **+>95% · −90 to 95%** | reports **2 d → ~10 min** |
 | **Adobe** | retrieval accuracy | incumbent doc search | **+20%** | own test set, 400-token/20% chunking |
-| **Prime Focus** | cost · accuracy · turnaround | vendor baseline | **−20–30% · +20–30% · −30–40%** | **14 M+** assets, live-tagging latency fixed |
-| **Alnylam** | triage · answer search | **3–4 d · 15 min** | **hours · 30 s** | **3,000** users, **250+** use cases |
+| **Prime Focus** | cost · accuracy · turnaround | vendor baseline | **−20 to 30% · +20 to 30% · −30 to 40%** | **14 M+** assets, live-tagging latency fixed |
+| **Alnylam** | triage · answer search | **3 to 4 d · 15 min** | **hours · 30 s** | **3,000** users, **250+** use cases |
 
 Reconstruct the Epilot architecture and its published numbers:
 
@@ -712,10 +712,10 @@ Reconstruct the Epilot architecture and its published numbers:
 > [!WARNING]
 > **Read customer case studies as evidence, not as guarantees.**
 > 1. **Every percentage here is unaudited.** Only Sun Finance (**n = 585 images**) and Adobe (its own test set) disclose a sample basis; the rest are directional. An exam option built on *"AWS guarantees a 90% saving"* is wrong whether the number is 66%, 75% or 87%.
-> 2. **"Up to" is a ceiling, never an average.** Headlines such as *up to −80%* (Forethought), *up to −30%* (Intelligent Prompt Routing) and *500% faster* distillation are best-case claims with a stated methodology gap — reproduce them as AWS claims, exactly as the reading rules at the top of this lesson require.
-> 3. **The documented failures are the real exam answers.** AWS published three: **DIY inference** (Forethought, before it moved off its own Amazon EKS), **LLM-only OCR** (Sun Finance's first attempt scored **61.8%** overall and **43%** on ID numbers and was rejected), and **four months of in-house CV** that never hit target (Chronomics → **3–4 weeks** on Rekognition Custom Labels). An option proposing any of these as the *first* step is wrong by construction: prebuilt or hosted first, evaluate before production, human in the tail.
+> 2. **"Up to" is a ceiling, never an average.** Headlines such as *up to −80%* (Forethought), *up to −30%* (Intelligent Prompt Routing) and *500% faster* distillation are best-case claims with a stated methodology gap: reproduce them as AWS claims, exactly as the reading rules at the top of this lesson require.
+> 3. **The documented failures are the real exam answers.** AWS published three: **DIY inference** (Forethought, before it moved off its own Amazon EKS), **LLM-only OCR** (Sun Finance's first attempt scored **61.8%** overall and **43%** on ID numbers and was rejected), and **four months of in-house CV** that never hit target (Chronomics → **3 to 4 weeks** on Rekognition Custom Labels). An option proposing any of these as the *first* step is wrong by construction: prebuilt or hosted first, evaluate before production, human in the tail.
 
-> **📚 Did you know?** The only production-readiness rate AWS publishes is **65%**: of more than **1,000** Generative AI Innovation Center implementations, **65% reached production in 2025** — some in as little as **45 days** — using the **Five V's** framework (**Value → Visualize → Validate → Verify → Venture**). That number is why Epilot gated its model choice on **Bedrock Evaluations**, why Sun Finance *rejected* attempt 1 instead of shipping it, and why every case file above quotes a "before" alongside the "after": the other **35%** is what you avoid by baselining the metric before you build.
+> **📚 Did you know?** The only production-readiness rate AWS publishes is **65%**: of more than **1,000** Generative AI Innovation Center implementations, **65% reached production in 2025**, some in as little as **45 days**, using the **Five V's** framework (**Value → Visualize → Validate → Verify → Venture**). That number is why Epilot gated its model choice on **Bedrock Evaluations**, why Sun Finance *rejected* attempt 1 instead of shipping it, and why every case file above quotes a "before" alongside the "after": the other **35%** is what you avoid by baselining the metric before you build.
 
 ---
 
@@ -785,7 +785,7 @@ Reconstruct the Epilot architecture and its published numbers:
     "Intelligent Prompt Routing with a Claude Haiku target"
   ],
   "correct": 1,
-  "explanation": "Geographic inference profiles route only within a single geography - US, EU or APAC - which is exactly the data-residency guarantee the workload needs while still spreading load across the Regions in that geography. A global profile may process in any commercial Region (it is about 10% cheaper, but breaks residency), batch in us-east-1 processes outside the EU, and provisioned throughput in one Region does not borrow capacity across EU Regions."
+  "explanation": "Geographic inference profiles route only within a single geography: US, EU or APAC: which is exactly the data-residency guarantee the workload needs while still spreading load across the Regions in that geography. A global profile may process in any commercial Region (it is about 10% cheaper, but breaks residency), batch in us-east-1 processes outside the EU, and provisioned throughput in one Region does not borrow capacity across EU Regions."
 }
 ```
 
@@ -802,7 +802,7 @@ Reconstruct the Epilot architecture and its published numbers:
     "Provisioned Throughput silently overflowed to a neighbor Region"
   ],
   "correct": 1,
-  "explanation": "When an inference profile routes a request, CloudTrail records where the work actually executed in additionalEventData.inferenceRegion, while billing always uses the source Region's price list - so there is no routing surcharge. Provisioned Throughput does not support inference profiles at all, JumpStart invocation would not appear as a Bedrock runtime call, and Region enablement is unrelated to where a profile may process."
+  "explanation": "When an inference profile routes a request, CloudTrail records where the work actually executed in additionalEventData.inferenceRegion, while billing always uses the source Region's price list; so there is no routing surcharge. Provisioned Throughput does not support inference profiles at all, JumpStart invocation would not appear as a Bedrock runtime call, and Region enablement is unrelated to where a profile may process."
 }
 ```
 
@@ -836,7 +836,7 @@ Reconstruct the Epilot architecture and its published numbers:
     "A human evaluation using the practitioner's own employees"
   ],
   "correct": 1,
-  "explanation": "Automatic, programmatic evaluations run a curated dataset in S3 against predefined metrics - accuracy, robustness and toxicity - with no humans involved, which matches the requirement exactly. Human evaluation (whether your own reviewers or an AWS-managed team) is for subjective criteria such as style and brand voice, an LLM-as-a-judge is subjective by design, and Intelligent Prompt Routing is a cost/latency feature, not an evaluation."
+  "explanation": "Automatic, programmatic evaluations run a curated dataset in S3 against predefined metrics: accuracy, robustness and toxicity: with no humans involved, which matches the requirement exactly. Human evaluation (whether your own reviewers or an AWS-managed team) is for subjective criteria such as style and brand voice, an LLM-as-a-judge is subjective by design, and Intelligent Prompt Routing is a cost/latency feature, not an evaluation."
 }
 ```
 
@@ -853,7 +853,7 @@ Reconstruct the Epilot architecture and its published numbers:
     "Intelligent Prompt Routing to the higher-quality model"
   ],
   "correct": 1,
-  "explanation": "AWS positions human evaluation precisely for subjective metrics - relevance, style and brand voice - and offers two staffing options: your own reviewers or an AWS-managed team. Automatic evaluations cover objective metrics such as accuracy, robustness and toxicity; provisioned throughput and batch are pricing mechanisms; and prompt routing chooses between models rather than scoring output quality."
+  "explanation": "AWS positions human evaluation precisely for subjective metrics: relevance, style and brand voice: and offers two staffing options: your own reviewers or an AWS-managed team. Automatic evaluations cover objective metrics such as accuracy, robustness and toxicity; provisioned throughput and batch are pricing mechanisms; and prompt routing chooses between models rather than scoring output quality."
 }
 ```
 
@@ -887,7 +887,7 @@ Reconstruct the Epilot architecture and its published numbers:
     "Batch inference, which cannot be used because summarization returns text"
   ],
   "correct": 0,
-  "explanation": "The Flex service tier is documented at 50% off the Standard rate and is intended exactly for non-urgent work such as evaluations, summarization and background or agentic steps, with no term commitment. Priority is 75% more expensive rather than cheaper, provisioned throughput requires a term commitment and bills hourly, a geographic profile is a routing choice at standard rates (the ~10% saving belongs to global profiles), and batch does support plain text summarization - so that last option's reasoning is false even though batch would also have been a candidate."
+  "explanation": "The Flex service tier is documented at 50% off the Standard rate and is intended exactly for non-urgent work such as evaluations, summarization and background or agentic steps, with no term commitment. Priority is 75% more expensive rather than cheaper, provisioned throughput requires a term commitment and bills hourly, a geographic profile is a routing choice at standard rates (the ~10% saving belongs to global profiles), and batch does support plain text summarization; so that last option's reasoning is false even though batch would also have been a candidate."
 }
 ```
 
@@ -904,7 +904,7 @@ Reconstruct the Epilot architecture and its published numbers:
     "Switch to a geographic cross-Region inference profile in a single EU Region"
   ],
   "correct": 2,
-  "explanation": "Nippon India's published fix was retrieval engineering on Bedrock Knowledge Bases - FM-as-parser parsing, query reformulation, multi-query RAG, reranker models, GraphRAG and metadata filtering - plus Bedrock Guardrails and citations, delivering over 95% accuracy and a 90-95% hallucination cut with reports falling from 2 days to about 10 minutes. Raising sampling parameters does not fix retrieval, batch inference is an offline discount (and cannot run tools or structured output), fine-tuning is the customization path that comes after prompting and RAG, and an inference profile changes routing and price rather than retrieval quality."
+  "explanation": "Nippon India's published fix was retrieval engineering on Bedrock Knowledge Bases - FM-as-parser parsing, query reformulation, multi-query RAG, reranker models, GraphRAG and metadata filtering: plus Bedrock Guardrails and citations, delivering over 95% accuracy and a 90-95% hallucination cut with reports falling from 2 days to about 10 minutes. Raising sampling parameters does not fix retrieval, batch inference is an offline discount (and cannot run tools or structured output), fine-tuning is the customization path that comes after prompting and RAG, and an inference profile changes routing and price rather than retrieval quality."
 }
 ```
 
@@ -921,7 +921,7 @@ Reconstruct the Epilot architecture and its published numbers:
     "Every model moves straight from Active to end-of-life after 30 days, with no Legacy stage"
   ],
   "correct": 1,
-  "explanation": "The documented lifecycle is Active, Legacy, EOL: most models get a 6-month Legacy window (some get 45 days), and Legacy blocks new customers plus new Provisioned Throughput commitments while existing usage keeps working - which is why this lesson tells you to memorize access and pricing mechanisms rather than catalog rows. Immediate deletion, an on-demand invocation ban, a custom-models-only scope and a 30-day straight-to-EOL path all contradict the published policy."
+  "explanation": "The documented lifecycle is Active, Legacy, EOL: most models get a 6-month Legacy window (some get 45 days), and Legacy blocks new customers plus new Provisioned Throughput commitments while existing usage keeps working: which is why this lesson tells you to memorize access and pricing mechanisms rather than catalog rows. Immediate deletion, an on-demand invocation ban, a custom-models-only scope and a 30-day straight-to-EOL path all contradict the published policy."
 }
 ```
 
@@ -929,18 +929,18 @@ Reconstruct the Epilot architecture and its published numbers:
 {
   "question": "Order the steps of an Amazon Bedrock evaluation job the way AWS documents them:",
   "items": [
-    "Step 4 - read the report in S3 and the Bedrock console, then iterate on prompts or models",
-    "Step 1 - prepare the dataset (prompts, references and, if needed, inference responses) in Amazon S3",
-    "Step 2 - choose the mode: automatic (programmatic), human, or LLM-as-a-judge with an evaluatorModelConfig",
-    "Step 3 - run the job; AWS-managed rubrics, your reviewers or the judge model score the outputs"
+    "Step 4: read the report in S3 and the Bedrock console, then iterate on prompts or models",
+    "Step 1: prepare the dataset (prompts, references and, if needed, inference responses) in Amazon S3",
+    "Step 2: choose the mode: automatic (programmatic), human, or LLM-as-a-judge with an evaluatorModelConfig",
+    "Step 3: run the job; AWS-managed rubrics, your reviewers or the judge model score the outputs"
   ],
   "correctOrder": [
-    "Step 1 - prepare the dataset (prompts, references and, if needed, inference responses) in Amazon S3",
-    "Step 2 - choose the mode: automatic (programmatic), human, or LLM-as-a-judge with an evaluatorModelConfig",
-    "Step 3 - run the job; AWS-managed rubrics, your reviewers or the judge model score the outputs",
-    "Step 4 - read the report in S3 and the Bedrock console, then iterate on prompts or models"
+    "Step 1: prepare the dataset (prompts, references and, if needed, inference responses) in Amazon S3",
+    "Step 2: choose the mode: automatic (programmatic), human, or LLM-as-a-judge with an evaluatorModelConfig",
+    "Step 3: run the job; AWS-managed rubrics, your reviewers or the judge model score the outputs",
+    "Step 4: read the report in S3 and the Bedrock console, then iterate on prompts or models"
   ],
-  "explanation": "Every evaluation path starts with a dataset in S3, because the job reads its inputs from object storage; then you select the mode that matches your metrics (objective automatic metrics, subjective human review, or LLM-as-a-judge for explained scoring); the job runs with the appropriate scorer; and the output is a report written to S3 plus the console. Choosing the mode before the dataset exists is the common mistake - the metric you can compute is dictated by what you prepared."
+  "explanation": "Every evaluation path starts with a dataset in S3, because the job reads its inputs from object storage; then you select the mode that matches your metrics (objective automatic metrics, subjective human review, or LLM-as-a-judge for explained scoring); the job runs with the appropriate scorer; and the output is a report written to S3 plus the console. Choosing the mode before the dataset exists is the common mistake: the metric you can compute is dictated by what you prepared."
 }
 ```
 
@@ -952,6 +952,6 @@ Reconstruct the Epilot architecture and its published numbers:
 > 2. **Model access is default-on** in commercial Regions; you need Marketplace permissions (`aws-marketplace:Subscribe/Unsubscribe/ViewSubscriptions`) **only the first time**, a valid payment method always, and an **Anthropic form-to-use (FTU) form** for Anthropic models on `bedrock-runtime`.
 > 3. **Three capacity mechanisms, four service tiers.** On-demand is per token; **batch is 50% of on-demand, typically ≤ 24 h, with no tool calling, no structured output and no provisioned models**; provisioned throughput is **hourly per model unit on a 1- or 6-month term and is required for fine-tuned models**. Tiers: **Priority +75% (up to 25% better OTPS), Standard default, Flex −50%, Reserved 1/3-month**.
 > 4. **Cross-Region inference uses profiles**: **geographic (US/EU/APAC) for residency**, **global (any commercial Region) for ~10% savings**; price comes from the **source Region**, CloudTrail logs `additionalEventData.inferenceRegion`, and **profiles do not support Provisioned Throughput**.
-> 5. **Converse's base parameters are exactly four** — `maxTokens`, `temperature` (0–1), `topP` (0–1), `stopSequences` (≤ 2,500) — with model extras in `additionalModelRequestFields`; `toolChoice: {tool: ...}` is documented for **Claude 3+ and Nova only**, and strict JSON comes from **forced tool use or native `json_schema` output (2026-02-04)**, never from a prompt instruction.
-> 6. **Customization has four paths** — SFT, RFT (**66% average accuracy gain** on Nova 2 Lite; `qwen.qwen3-32b` and `openai.gpt-oss-20b` added 2026-02-17), distillation and **Custom Model Import** ($1.95/month storage) — and evaluation has **three modes**: automatic (**accuracy, robustness, toxicity**), human (**your team or an AWS-managed team**) and **LLM-as-a-judge** (GA 2025-03-20, **up to 98% cost savings**, bring-your-own responses).
+> 5. **Converse's base parameters are exactly four**, `maxTokens`, `temperature` (0 to 1), `topP` (0 to 1), `stopSequences` (≤ 2,500), with model extras in `additionalModelRequestFields`; `toolChoice: {tool:...}` is documented for **Claude 3+ and Nova only**, and strict JSON comes from **forced tool use or native `json_schema` output (2026-02-04)**, never from a prompt instruction.
+> 6. **Customization has four paths**, SFT, RFT (**66% average accuracy gain** on Nova 2 Lite; `qwen.qwen3-32b` and `openai.gpt-oss-20b` added 2026-02-17), distillation and **Custom Model Import** ($1.95/month storage), and evaluation has **three modes**: automatic (**accuracy, robustness, toxicity**), human (**your team or an AWS-managed team**) and **LLM-as-a-judge** (GA 2025-03-20, **up to 98% cost savings**, bring-your-own responses).
 > 7. **Comparative verdict:** pre-trained FMs with minimal infra → **Bedrock**; full control over training, deployment and infrastructure → **SageMaker AI**; one narrow non-generative task → **prebuilt AI service**; no hosted option acceptable → **DIY**. Bedrock's inputs and outputs are **not shared with third-party providers and not used to train base FMs**.

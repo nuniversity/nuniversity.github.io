@@ -585,7 +585,7 @@ strategy:
     "The model charges double for the extra tokens"
   ],
   "correct": 1,
-  "explanation": "When context exceeds the limit, the oldest or lowest-priority content is typically dropped or truncated. This is why explicit context management strategies (sliding windows, summarization, prioritization) are essential — they control *what* gets dropped rather than leaving it to chance."
+  "explanation": "When context exceeds the limit, the oldest or lowest-priority content is typically dropped or truncated. This is why explicit context management strategies (sliding windows, summarization, prioritization) are essential; they control *what* gets dropped rather than leaving it to chance."
 }
 ```
 

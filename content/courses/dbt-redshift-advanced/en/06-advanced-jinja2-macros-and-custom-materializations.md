@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Advanced Jinja2 Macros and Custom Materializations
 
-Jinja2 is dbt's template engine — it transforms SQL from a static query language into a dynamic, composable one. Mastering Jinja2 is the difference between a project that scales to 500 models with a small team and one that becomes unmaintainable. This module covers production-grade macro patterns and custom materializations for Redshift-specific use cases.
+Jinja2 is dbt's template engine; it transforms SQL from a static query language into a dynamic, composable one. Mastering Jinja2 is the difference between a project that scales to 500 models with a small team and one that becomes unmaintainable. This module covers production-grade macro patterns and custom materializations for Redshift-specific use cases.
 
 ---
 
@@ -464,7 +464,7 @@ dbt compile --select fct_orders  # ensure model compiles first
   "type": "multiple-choice",
   "question": "Why is `namespace()` needed when updating a variable inside a Jinja2 `{% for %}` loop?",
   "options": [
-    "For performance — namespace() caches loop results",
+    "For performance: namespace() caches loop results",
     "Jinja2 loop blocks have their own scope; variables set inside a loop do not update the outer scope without namespace()",
     "Redshift requires namespace() for parameterized queries",
     "namespace() is only needed for recursive macros"
@@ -483,7 +483,7 @@ dbt compile --select fct_orders  # ensure model compiles first
     "require() fetches the value from the warehouse; get() reads from profiles.yml",
     "require() raises an error if the config is missing; get() returns None or a default value",
     "require() enforces a data type; get() accepts any type",
-    "There is no difference — they are aliases"
+    "There is no difference; they are aliases"
   ],
   "correct": 1,
   "explanation": "config.require() raises a dbt compilation error if the specified config is not defined in the model's config block. config.get() returns None or an optional default value if the config is missing."
@@ -497,7 +497,7 @@ dbt compile --select fct_orders  # ensure model compiles first
   "question": "The `{% materialization my_mat, adapter='redshift' %}` signature means what?",
   "options": [
     "The materialization only works with Redshift clusters, not Serverless",
-    "This implementation is the Redshift-specific override — dbt uses it when the active adapter is redshift, falling back to the default adapter implementation otherwise",
+    "This implementation is the Redshift-specific override: dbt uses it when the active adapter is redshift, falling back to the default adapter implementation otherwise",
     "The materialization ignores all other adapters completely",
     "It requires the Redshift adapter version to match exactly"
   ],
@@ -559,9 +559,9 @@ dbt compile --select fct_orders  # ensure model compiles first
 [!SUCCESS]
 ### Key Takeaways
 
-- Use `namespace()` for mutable state inside Jinja2 `{% for %}` loops — plain variable assignment does not escape loop scope.
+- Use `namespace()` for mutable state inside Jinja2 `{% for %}` loops: plain variable assignment does not escape loop scope.
 - Always guard `run_query()` calls with `{% if execute %}` to prevent execution during parse/compile phases.
-- `config.require()` raises a compilation error for missing configs; `config.get()` returns None or a default — use require() for mandatory materialization parameters.
+- `config.require()` raises a compilation error for missing configs; `config.get()` returns None or a default: use require() for mandatory materialization parameters.
 - The `adapter='redshift'` signature in `{% materialization %}` creates a Redshift-specific implementation; other adapters fall back to the `default` implementation.
 - UNLOAD to S3 is best implemented as a post-hook macro, keeping the transformation logic separate from the export step.
-- Document macros in `macros/schema.yml` — they appear in `dbt docs` and can be tested via `dbt run-operation`.
+- Document macros in `macros/schema.yml`; they appear in `dbt docs` and can be tested via `dbt run-operation`.

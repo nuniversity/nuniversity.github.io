@@ -8,14 +8,14 @@ difficulty: "avançado"
 
 # Introdução ao Domain-Driven Design
 
-Domain-Driven Design (DDD) é uma abordagem de desenvolvimento de software introduzida por Eric Evans em seu livro seminal de 2003 *Domain-Driven Design: Tackling Complexity in the Heart of Software*. O DDD enfatiza que a **complexidade central** da maioria dos projetos de software não está na infraestrutura técnica, mas no próprio domínio — o problema de negócio que o software visa resolver.
+Domain-Driven Design (DDD) é uma abordagem de desenvolvimento de software introduzida por Eric Evans em seu livro seminal de 2003 *Domain-Driven Design: Tackling Complexity in the Heart of Software*. O DDD enfatiza que a **complexidade central** da maioria dos projetos de software não está na infraestrutura técnica, mas no próprio domínio, o problema de negócio que o software visa resolver.
 
 > [!NOTE]
 > DDD não é uma tecnologia, framework ou padrão de arquitetura. É uma **filosofia e metodologia** que coloca o modelo de domínio no centro do design de software. O objetivo é criar software que reflita os modelos mentais dos especialistas do domínio.
 
 ## As Origens do DDD
 
-O DDD surgiu da observação de projetos de software fracassados. A causa raiz quase nunca era tecnologia ruim — era **falha de comunicação** entre especialistas do domínio (pessoas de negócio) e desenvolvedores. Cada grupo falava uma língua diferente, levando a modelos que não correspondiam à realidade.
+O DDD surgiu da observação de projetos de software fracassados. A causa raiz quase nunca era tecnologia ruim: era **falha de comunicação** entre especialistas do domínio (pessoas de negócio) e desenvolvedores. Cada grupo falava uma língua diferente, levando a modelos que não correspondiam à realidade.
 
 | Era | Problema | Solução |
 |-----|----------|---------|
@@ -221,7 +221,7 @@ class ItemCarrinho:
 
 DDD requer uma mudança na forma como os desenvolvedores pensam sobre software:
 
-1. **Exploração do modelo**: O modelo de domínio não é projetado antecipadamente — ele emerge através da colaboração
+1. **Exploração do modelo**: O modelo de domínio não é projetado antecipadamente: ele emerge através da colaboração
 2. **Refinamento contínuo**: O modelo evolui à medida que o entendimento se aprofunda
 3. **Contextos delimitados**: Diferentes partes do sistema podem ter modelos diferentes
 4. **Linguagem importa**: As palavras que você usa moldam o modelo que você constrói
@@ -231,7 +231,7 @@ DDD requer uma mudança na forma como os desenvolvedores pensam sobre software:
 
 ## O Papel dos Especialistas do Domínio
 
-Especialistas do domínio são o recurso mais valioso em um projeto DDD. Eles não são apenas stakeholders — são **co-criadores** do modelo de domínio.
+Especialistas do domínio são o recurso mais valioso em um projeto DDD. Eles não são apenas stakeholders: são **co-criadores** do modelo de domínio.
 
 ```mermaid
 sequenceDiagram
@@ -364,7 +364,7 @@ class EstoqueAjustado:
    ```
 
 > [!SUCCESS]
-> Você completou a Lição 1. Agora você entende os fundamentos do Domain-Driven Design — suas origens, a distinção entre design estratégico e tático, e as mudanças de mentalidade necessárias. As próximas lições mergulharão profundamente em cada conceito.
+> Você completou a Lição 1. Agora você entende os fundamentos do Domain-Driven Design: suas origens, a distinção entre design estratégico e tático, e as mudanças de mentalidade necessárias. As próximas lições mergulharão profundamente em cada conceito.
 
 ## A Linguagem Ubíqua em Código
 

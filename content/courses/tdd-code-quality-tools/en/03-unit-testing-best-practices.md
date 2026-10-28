@@ -270,7 +270,7 @@ def test_is_valid_email():
 ```
 
 > [!WARNING]
-> Over-mocking is a common antipattern. If you mock everything, your tests become brittle — they break when implementation changes, not when behavior breaks. Mock boundaries, not internals.
+> Over-mocking is a common antipattern. If you mock everything, your tests become brittle; they break when implementation changes, not when behavior breaks. Mock boundaries, not internals.
 
 ## Test Isolation: No Shared State
 
@@ -644,14 +644,14 @@ def test_conditional():
 
 ## Summary
 
-- **AAA Pattern**: Arrange → Act → Assert — one clear story per test
+- **AAA Pattern**: Arrange → Act → Assert: one clear story per test
 - **One concept per test**: Not one assertion, but one behavior
 - **Descriptive names**: `test_given_X_when_Y_then_Z` tells the full story
 - **Mock boundaries**: Mock external dependencies, not internal logic
 - **Isolation**: Fresh state per test, no sharing, no order dependence
-- **Edge cases**: Empty, null, negative, boundary — test them all
+- **Edge cases**: Empty, null, negative, boundary: test them all
 - **FIRST**: Fast, Isolated, Repeatable, Self-validating, Thorough
 - **Testability**: Design code so it can be tested (dependency injection)
 
 > [!SUCCESS]
-> Great testing is a design discipline. The AAA pattern, proper mocking, and strict isolation are not overhead — they are investments that make every future refactoring safe and every bug report solvable.
+> Great testing is a design discipline. The AAA pattern, proper mocking, and strict isolation are not overhead; they are investments that make every future refactoring safe and every bug report solvable.

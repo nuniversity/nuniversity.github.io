@@ -1,12 +1,12 @@
 ---
-title: "Dominio 3.2 — Ingesta Automatizada de Datos"
+title: "Dominio 3.2, Ingesta Automatizada de Datos"
 description: "Aprende a automatizar la ingesta de datos con Snowpipe, Snowpipe Streaming, Streams, Tasks y Tablas Dinámicas. Construye pipelines de datos continuos y orientados a eventos completamente dentro de Snowflake."
 order: 11
 difficulty: intermediate
 duration: "70 min"
 ---
 
-# Dominio 3.2 — Ingesta Automatizada de Datos
+# Dominio 3.2: Ingesta Automatizada de Datos
 
 ## Peso en el Examen
 
@@ -22,7 +22,7 @@ El **Dominio 3.0** representa aproximadamente el **~18%** del examen. Los patron
 | Herramienta | Disparador | Latencia | Ideal Para |
 |---|---|---|---|
 | **COPY INTO** | Manual / programado | Minutos a horas | Cargas por lotes |
-| **Snowpipe** | Evento de cloud storage | Casi en tiempo real (segundos–minutos) | Ingesta continua basada en archivos |
+| **Snowpipe** | Evento de cloud storage | Casi en tiempo real (segundos: minutos) | Ingesta continua basada en archivos |
 | **Snowpipe Streaming** | Inserción vía SDK | Sub-segundo | Transmisión de filas de alta frecuencia |
 | **Streams + Tasks** | Tiempo o condición de stream | Configurable | Orquestación de pipelines basada en CDC |
 | **Tablas Dinámicas** | Automático (basado en retardo) | Configurable | Actualización incremental declarativa |
@@ -31,7 +31,7 @@ El **Dominio 3.0** representa aproximadamente el **~18%** del examen. Los patron
 
 ## Snowpipe
 
-**Snowpipe** es el servicio de ingesta continua y sin servidor de Snowflake — carga automáticamente los archivos a medida que llegan a un stage.
+**Snowpipe** es el servicio de ingesta continua y sin servidor de Snowflake: carga automáticamente los archivos a medida que llegan a un stage.
 
 ### Cómo Funciona Snowpipe
 
@@ -89,7 +89,7 @@ response = manager.ingest_files([
 
 | Propiedad | Valor |
 |---|---|
-| **¿Se necesita warehouse?** | No — sin servidor |
+| **¿Se necesita warehouse?** | No; sin servidor |
 | **Facturación** | Créditos de cómputo por archivo (tarifa sin servidor) |
 | **Latencia** | Típicamente < 1 minuto |
 | **Deduplicación** | Ventana de 14 días (archivos no se reprocesan) |
@@ -118,7 +118,7 @@ ALTER PIPE orders_pipe REFRESH;
 
 ## Snowpipe Streaming
 
-**Snowpipe Streaming** habilita la **ingesta a nivel de fila con latencia sub-segundo** directamente en las tablas de Snowflake vía el SDK de Ingesta de Snowflake — sin necesidad de preparar archivos en stages primero:
+**Snowpipe Streaming** habilita la **ingesta a nivel de fila con latencia sub-segundo** directamente en las tablas de Snowflake vía el SDK de Ingesta de Snowflake; sin necesidad de preparar archivos en stages primero:
 
 ```
 Aplicación / Kafka / herramienta CDC
@@ -167,7 +167,7 @@ channel.insertRow(row, "offset_12345");
 
 ---
 
-## Streams — Captura de Datos de Cambios (CDC)
+## Streams: Captura de Datos de Cambios (CDC)
 
 Un **Stream** es un objeto de Snowflake que captura cambios DML (INSERT, UPDATE, DELETE) en una tabla o vista fuente. Actúa como un **registro de CDC** (*Change Data Capture*).
 
@@ -198,7 +198,7 @@ FROM orders_stream;
 
 ### Desplazamiento y Consumo del Stream
 
-Un stream rastrea los cambios desde su **desplazamiento** (*offset*) — su última posición consumida. Después de consumir el stream (vía DML dentro de un Task o sentencia explícita), el desplazamiento avanza:
+Un stream rastrea los cambios desde su **desplazamiento** (*offset*): su última posición consumida. Después de consumir el stream (vía DML dentro de un Task o sentencia explícita), el desplazamiento avanza:
 
 ```sql
 -- Consumir el stream en un MERGE (el patrón más común)
@@ -220,7 +220,7 @@ WHEN NOT MATCHED AND src.METADATA$ACTION = 'INSERT' THEN INSERT
 
 ## Tasks (Tareas Programadas)
 
-Un **Task** programa la ejecución de SQL — es el planificador de trabajos nativo de Snowflake.
+Un **Task** programa la ejecución de SQL: es el planificador de trabajos nativo de Snowflake.
 
 ### Tipos de Task
 
@@ -304,7 +304,7 @@ SELECT SYSTEM$TASK_DEPENDENTS_ENABLE('root_task');
 
 ## Tablas Dinámicas (*Dynamic Tables*)
 
-Las **Tablas Dinámicas** proporcionan un enfoque **declarativo** para pipelines de datos incrementales — define la transformación como un SELECT, establece un `TARGET_LAG`, y Snowflake actualiza la tabla automáticamente:
+Las **Tablas Dinámicas** proporcionan un enfoque **declarativo** para pipelines de datos incrementales: define la transformación como un SELECT, establece un `TARGET_LAG`, y Snowflake actualiza la tabla automáticamente:
 
 ```sql
 -- Tabla fuente
@@ -394,6 +394,6 @@ ALTER DYNAMIC TABLE customer_metrics REFRESH;
 > 1. **Snowpipe** = basado en archivos, sin servidor, casi en tiempo real (segundos a minutos)
 > 2. **Snowpipe Streaming** = basado en filas, sub-segundo, no requiere staging
 > 3. Los Streams se vuelven **obsoletos** si no se consumen dentro de la ventana de Time Travel
-> 4. Las Tasks comienzan **SUSPENDIDAS** — siempre reanúdalas explícitamente
-> 5. **Tablas Dinámicas** = enfoque declarativo con `TARGET_LAG` — más simple que Streams + Tasks
+> 4. Las Tasks comienzan **SUSPENDIDAS**: siempre reanúdalas explícitamente
+> 5. **Tablas Dinámicas** = enfoque declarativo con `TARGET_LAG`: más simple que Streams + Tasks
 > 6. DAGs de Tasks: las tasks hijas se definen con `AFTER <task_padre>`

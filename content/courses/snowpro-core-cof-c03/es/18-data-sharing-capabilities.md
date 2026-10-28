@@ -1,21 +1,21 @@
 ---
-title: "Dominio 5.2 — Intercambio Seguro de Datos y Data Clean Rooms"
-description: "Comprende el modelo de Intercambio Seguro de Datos de Snowflake — cuentas proveedor/consumidor/lector, shares directos y colaboración con preservación de privacidad mediante data clean rooms."
+title: "Dominio 5.2, Intercambio Seguro de Datos y Data Clean Rooms"
+description: "Comprende el modelo de Intercambio Seguro de Datos de Snowflake, cuentas proveedor/consumidor/lector, shares directos y colaboración con preservación de privacidad mediante data clean rooms."
 order: 18
 difficulty: intermediate
 duration: 50
 ---
 
-# Dominio 5.2 — Intercambio Seguro de Datos y Data Clean Rooms
+# Dominio 5.2: Intercambio Seguro de Datos y Data Clean Rooms
 
 > [!NOTE]
-> **Dominio de Examen 5.2** — *Intercambio Seguro de Datos* contribuye al dominio de **Colaboración de Datos**, que representa el **10%** del examen COF-C03.
+> **Dominio de Examen 5.2**: *Intercambio Seguro de Datos* contribuye al dominio de **Colaboración de Datos**, que representa el **10%** del examen COF-C03.
 
 ---
 
 ## Resumen: Cómo Funciona el Intercambio de Datos
 
-El Intercambio Seguro de Datos de Snowflake permite a un **proveedor** compartir datos **en vivo y de solo lectura** con un **consumidor** — sin copiar datos, sin necesidad de ETL.
+El Intercambio Seguro de Datos de Snowflake permite a un **proveedor** compartir datos **en vivo y de solo lectura** con un **consumidor**; sin copiar datos, sin necesidad de ETL.
 
 ```mermaid
 flowchart LR
@@ -35,9 +35,9 @@ flowchart LR
 ```
 
 Características clave:
-- **Copia cero de datos** — el consumidor lee directamente desde el almacenamiento del proveedor.
-- **Siempre en vivo** — los consumidores ven inserciones/actualizaciones en tiempo real.
-- **Solo lectura** — los consumidores no pueden modificar los datos compartidos.
+- **Copia cero de datos**: el consumidor lee directamente desde el almacenamiento del proveedor.
+- **Siempre en vivo**: los consumidores ven inserciones/actualizaciones en tiempo real.
+- **Solo lectura**: los consumidores no pueden modificar los datos compartidos.
 - El intercambio **entre nubes/entre regiones** requiere replicación (cubierto en la Lección 17).
 
 ---
@@ -248,12 +248,12 @@ flowchart TD
 
 > [!SUCCESS]
 > **Puntos Clave para el Examen**
-> - El intercambio es **de copia cero y en vivo** — sin ETL, sin movimiento de datos.
+> - El intercambio es **de copia cero y en vivo**; sin ETL, sin movimiento de datos.
 > - Los consumidores obtienen acceso **de solo lectura**; no pueden escribir en los objetos compartidos.
 > - Solo las **vistas SEGURAS** y las UDFs seguras pueden agregarse a shares.
 > - **Cuentas de Lector**: para consumidores sin Snowflake; el proveedor paga el cómputo.
 > - El intercambio entre nubes/entre regiones requiere **replicación** primero.
-> - Los **Data Clean Rooms** habilitan el análisis conjunto sin exponer registros crudos — los resultados son solo agregados.
+> - Los **Data Clean Rooms** habilitan el análisis conjunto sin exponer registros crudos: los resultados son solo agregados.
 
 ---
 
@@ -261,8 +261,8 @@ flowchart TD
 
 **1.** Un proveedor agrega una vista regular (no segura) a un share. ¿Qué sucede?
 
-- A) Tiene éxito — todas las vistas pueden compartirse
-- B) **Falla — solo las vistas SEGURAS pueden agregarse a shares** ✅
+- A) Tiene éxito: todas las vistas pueden compartirse
+- B) **Falla: solo las vistas SEGURAS pueden agregarse a shares** ✅
 - C) La vista se convierte automáticamente en una vista segura
 - D) Los consumidores ven los datos pero no la definición
 
@@ -272,7 +272,7 @@ flowchart TD
 
 - A) Después de la próxima actualización programada (diaria)
 - B) Después de que el consumidor vuelva a ejecutar `CREATE DATABASE FROM SHARE`
-- C) **Inmediatamente — el intercambio es en vivo y de copia cero** ✅
+- C) **Inmediatamente: el intercambio es en vivo y de copia cero** ✅
 - D) Después de que el proveedor ejecute ALTER SHARE REFRESH
 
 ---
@@ -297,9 +297,9 @@ flowchart TD
 
 **5.** El proveedor está en AWS us-east-1. El consumidor está en Azure eastus. ¿Puede el proveedor compartir directamente?
 
-- A) Sí — el intercambio funciona entre todas las nubes de forma nativa
-- B) **No — el intercambio entre nubes requiere la replicación de la base de datos primero** ✅
-- C) No — el intercambio entre nubes no está soportado en absoluto
+- A) Sí: el intercambio funciona entre todas las nubes de forma nativa
+- B) **No: el intercambio entre nubes requiere la replicación de la base de datos primero** ✅
+- C) No: el intercambio entre nubes no está soportado en absoluto
 - D) Sí, pero solo para proveedores de edición Enterprise
 
 ---

@@ -14,7 +14,7 @@ Las reglas de elisión de lifetime de Rust hacen que la mayoría de las anotacio
 
 El compilador aplica estas reglas automáticamente:
 
-### Regla 1 — Lifetimes de Entrada
+### Regla 1: Lifetimes de Entrada
 
 Cada referencia elidida en parámetros de función obtiene un lifetime **distinto**:
 
@@ -24,7 +24,7 @@ Cada referencia elidida en parámetros de función obtiene un lifetime **distint
 fn foo<'a, 'b>(x: &'a i32, y: &'b str) {}
 ```
 
-### Regla 2 — Lifetime de Entrada Único
+### Regla 2: Lifetime de Entrada Único
 
 Si hay exactamente un lifetime de entrada, se asigna a todas las referencias de salida:
 
@@ -34,7 +34,7 @@ Si hay exactamente un lifetime de entrada, se asigna a todas las referencias de 
 fn first_word<'a>(s: &'a str) -> &'a str { unimplemented!() }
 ```
 
-### Regla 3 — Receptor de Método
+### Regla 3: Receptor de Método
 
 Si hay `&self` o `&mut self`, su lifetime se asigna a todas las referencias de salida:
 

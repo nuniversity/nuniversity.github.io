@@ -8,7 +8,7 @@ duration: "60 min"
 
 # Core Architecture Deep Dive
 
-> **Bottom Line:** All three platforms embrace storage/compute separation, but the *implementation* of that separation — and what sits in between — defines their entire character. Snowflake's Cloud Services layer, Databricks' Delta Lake + Photon stack, and AWS's disaggregated service mesh are fundamentally different solutions to the same distributed systems problems.
+> **Bottom Line:** All three platforms embrace storage/compute separation, but the *implementation* of that separation, and what sits in between, defines their entire character. Snowflake's Cloud Services layer, Databricks' Delta Lake + Photon stack, and AWS's disaggregated service mesh are fundamentally different solutions to the same distributed systems problems.
 
 ---
 
@@ -36,7 +36,7 @@ The *critical difference* between the three platforms is what happens in between
 
 ## 2.2 AWS Architecture: The Service Mesh Model
 
-AWS provides storage (S3) and then offers a **menu of compute engines** that query it. There is no single "AWS data platform architecture" — you compose one.
+AWS provides storage (S3) and then offers a **menu of compute engines** that query it. There is no single "AWS data platform architecture"; you compose one.
 
 ### The Typical AWS Data Lake Architecture
 
@@ -141,7 +141,7 @@ Snowflake's architecture is its most distinctive feature and the source of almos
 
 ### Snowflake's Secret Weapon: Micro-Partitioning
 
-Snowflake automatically divides data into **micro-partitions** of 50–500MB (uncompressed), storing them in a proprietary columnar format. Critically:
+Snowflake automatically divides data into **micro-partitions** of 50 to 500MB (uncompressed), storing them in a proprietary columnar format. Critically:
 - **Automatic clustering metadata** is maintained, enabling partition pruning without manual index management.
 - **Immutability** means DML operations create new micro-partitions; Time Travel accesses old ones.
 - **Result cache** at the Cloud Services layer means identical queries re-execute for free (within 24 hours).
@@ -254,7 +254,7 @@ CREATE WAREHOUSE analytics_wh
   SCALING_POLICY = 'STANDARD'; -- 'ECONOMY' waits longer before scaling out
 ```
 
-This means 500 concurrent BI users can all get sub-second responses without any manual tuning — each cluster independently serves a subset of queries. The cost: you pay for all active clusters simultaneously. 💰
+This means 500 concurrent BI users can all get sub-second responses without any manual tuning: each cluster independently serves a subset of queries. The cost: you pay for all active clusters simultaneously. 💰
 
 ---
 
@@ -288,7 +288,7 @@ Databricks (Photon):
 | **Optimizer Type** | Cost-based | Cost-based + ML-assisted | Catalyst (cost-based) |
 | **Statistics** | Manual `ANALYZE` or auto | Fully automatic | Automatic (with delta stats) |
 | **Join Reordering** | Yes | Yes | Yes (Adaptive Query Execution) |
-| **Adaptive Execution** | Limited | Yes (automatic) | ⚡ Yes (Spark AQE — runtime plan changes) |
+| **Adaptive Execution** | Limited | Yes (automatic) | ⚡ Yes (Spark AQE: runtime plan changes) |
 | **User Hints** | Limited | Yes (`/*+ ... */`) | Yes (Spark hints) |
 | **Result Caching** | Yes (result cache node) | ⚡ Yes (24hr, Cloud Services) | Yes (Delta cache, local SSD) |
 
@@ -301,7 +301,7 @@ Databricks (Photon):
 | **Internal Format** | Parquet / ORC / Iceberg | Proprietary FDN columnar | Apache Parquet |
 | **External Table Support** | Yes (Athena, Spectrum) | Yes (S3, ADLS, GCS) | Yes (any object storage) |
 | **ACID Transactions** | Via Iceberg / LF Governed | ✅ Native (micro-partition immutability) | ✅ Native (Delta Log) |
-| **Time Travel** | Via S3 Versioning (expensive) | ✅ 0–90 days (Fail-safe + Time Travel) | ✅ 30 days default (configurable) |
+| **Time Travel** | Via S3 Versioning (expensive) | ✅ 0 to 90 days (Fail-safe + Time Travel) | ✅ 30 days default (configurable) |
 | **Schema Evolution** | Manual Glue Catalog update | ✅ Automatic with EVOLVE_SCHEMA | ✅ MERGE schema evolution |
 | **Partition Strategy** | Manual (Hive-style) | Automatic (micro-partitions) | Manual + OPTIMIZE + ZORDER |
 | **Compaction** | Manual (Glue job or EMR) | Automatic (transparent) | ✅ `OPTIMIZE` command + Auto Optimize |
@@ -332,4 +332,4 @@ Databricks has a unique security model worth understanding deeply:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-This separation means customer data **never leaves the customer's cloud account**, addressing a common enterprise security concern. Snowflake's model is different — the storage layer is managed by Snowflake on their cloud tenant (though customers can use Snowflake on their own cloud account with **Snowflake on AWS PrivateLink** or **Bring Your Own Storage** patterns).
+This separation means customer data **never leaves the customer's cloud account**, addressing a common enterprise security concern. Snowflake's model is different: the storage layer is managed by Snowflake on their cloud tenant (though customers can use Snowflake on their own cloud account with **Snowflake on AWS PrivateLink** or **Bring Your Own Storage** patterns).

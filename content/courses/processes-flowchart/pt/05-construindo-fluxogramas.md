@@ -161,7 +161,7 @@ flowchart TD
 ```
 
 > [!NOTE] Nota de Segurança
-> Observe que quando o e-mail não é encontrado, mostramos uma "mensagem genérica" em vez de "e-mail não encontrado". Esta é uma boa prática de segurança — não revele se um e-mail existe no seu sistema.
+> Observe que quando o e-mail não é encontrado, mostramos uma "mensagem genérica" em vez de "e-mail não encontrado". Esta é uma boa prática de segurança: não revele se um e-mail existe no seu sistema.
 
 ## Exemplo Passo a Passo 3: Processamento de Requisição API
 
@@ -386,7 +386,7 @@ flowchart TD
 - Use **padrões comuns** como loops de validação, lógica de retry e processamento paralelo
 - **Revise seu fluxograma** contra o processo real para garantir precisão
 - **Mermaid** é uma ferramenta excelente para criar fluxogramas versionados
-- A prática leva à perfeição — quanto mais fluxogramas você construir, melhor ficará
+- A prática leva à perfeição: quanto mais fluxogramas você construir, melhor ficará
 
 > [!SUCCESS] Você Completou a Lição 5
-> Agora você sabe como construir fluxogramas do zero. Na lição final deste curso, vamos explorar **otimização de processos** — como usar fluxogramas para identificar gargalos e melhorar processos.
+> Agora você sabe como construir fluxogramas do zero. Na lição final deste curso, vamos explorar **otimização de processos**: como usar fluxogramas para identificar gargalos e melhorar processos.

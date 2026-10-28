@@ -47,7 +47,7 @@ fn main() {
 ```
 
 > [!NOTE]
-> Macros são expandidas em tempo de compilação. Elas só podem fazer coisas que o compilador pode — não podem acessar valores em tempo de execução.
+> Macros são expandidas em tempo de compilação. Elas só podem fazer coisas que o compilador pode: não podem acessar valores em tempo de execução.
 
 ## Designadores
 
@@ -131,7 +131,7 @@ fn main() {
 | `*` | Zero ou mais |
 | `+` | Um ou mais |
 | `?` | Zero ou um |
-| Separador | `$(x),*` — separado por vírgula |
+| Separador | `$(x),*`: separado por vírgula |
 
 ### Repetição com Múltiplos Padrões
 
@@ -197,7 +197,7 @@ fn main() {
 
 ## Higiene
 
-Macros Rust são **higiênicas** — elas não podem acidentalmente capturar ou sombrear variáveis do escopo de chamada:
+Macros Rust são **higiênicas**: elas não podem acidentalmente capturar ou sombrear variáveis do escopo de chamada:
 
 ```rust
 macro_rules! make_local {

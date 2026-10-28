@@ -368,7 +368,7 @@ flowchart TD
 ```
 
 > [!SUCCESS]
-> Uma boa nomenclatura é a prática de maior impacto para a manutenibilidade do código. Invista tempo escolhendo o nome certo — seu eu do futuro agradecerá.
+> Uma boa nomenclatura é a prática de maior impacto para a manutenibilidade do código. Invista tempo escolhendo o nome certo: seu eu do futuro agradecerá.
 
 ## Exercícios Práticos
 

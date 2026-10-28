@@ -725,7 +725,7 @@ print(f"Top Category: {result.top_category} (${result.top_category_revenue})")
 - **Result monad** provides explicit error handling without exceptions
 - **Lazy evaluation** with properties and caching improves performance
 - Property-based testing and pure functions are a powerful combination
-- The goal is not purity but **practicality** — use each paradigm where it shines
+- The goal is not purity but **practicality**: use each paradigm where it shines
 
 > [!SUCCESS]
-> You've completed the course on Functional & Declarative Coding! You now have the tools to write Python that is more predictable, testable, and expressive. Remember: the best code uses the right paradigm for the right job — mix FP and OOP pragmatically.
+> You've completed the course on Functional & Declarative Coding! You now have the tools to write Python that is more predictable, testable, and expressive. Remember: the best code uses the right paradigm for the right job: mix FP and OOP pragmatically.

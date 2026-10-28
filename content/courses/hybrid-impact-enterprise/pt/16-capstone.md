@@ -1,13 +1,13 @@
 ---
 title: "Capstone: Como Construir a Empresa Híbrida Completa"
-description: "Aula final do curso: metodologias em estágios (Business Model Canvas, Lean Canvas, TLBMC, Ecocanvas, Lean Startup e Customer Development), Teoria da Mudança, plano de negócios híbrido, projeção financeira de 3 anos com rateio, governança, plano de 90 dias, matriz de riscos, rubrica ponderada e síntese das 16 lições — com checklist de etapas, casos brasileiros com números, veredito comparativo dos modelos e questões."
+description: "Aula final do curso: metodologias em estágios (Business Model Canvas, Lean Canvas, TLBMC, Ecocanvas, Lean Startup e Customer Development), Teoria da Mudança, plano de negócios híbrido, projeção financeira de 3 anos com rateio, governança, plano de 90 dias, matriz de riscos, rubrica ponderada e síntese das 16 lições, com checklist de etapas, casos brasileiros com números, veredito comparativo dos modelos e questões."
 order: 16
 difficulty: "intermediate"
 duration: "120 min"
 ---
 # Capstone: Como Construir a Empresa Híbrida Completa
 
-Todo o curso até aqui foi **diagnóstico**: forma jurídica, governança, repartição, finanças, impacto, estratégia, marketing, vendas, operações, pessoas, tributos e parcerias. Esta lição é a **síntese executável**. O capstone não pede que você decore as 15 lições anteriores — ele pede que você **monte uma empresa híbrida inteira, em estágios, com pesos, prazos, números e fontes**, e que defenda essa montagem diante de quem pergunta. E a primeira coisa que ele ensina é impiedosa: **a ideia não é o início do trabalho; a validação é.** De empresas fundadas em 2017, apenas **37,3%** estavam ativas em 2022 (IBGE, Demografia das Empresas, 2024), e **74%** das startups em estágio de validação não faturam (Observatório Sebrae Startups, 2025). Por isso o capstone é organizado em seis estágios ponderados, e nenhum deles autoriza formalizar ou investir antes de medir demanda.
+Todo o curso até aqui foi **diagnóstico**: forma jurídica, governança, repartição, finanças, impacto, estratégia, marketing, vendas, operações, pessoas, tributos e parcerias. Esta lição é a **síntese executável**. O capstone não pede que você decore as 15 lições anteriores: ele pede que você **monte uma empresa híbrida inteira, em estágios, com pesos, prazos, números e fontes**, e que defenda essa montagem diante de quem pergunta. E a primeira coisa que ele ensina é impiedosa: **a ideia não é o início do trabalho; a validação é.** De empresas fundadas em 2017, apenas **37,3%** estavam ativas em 2022 (IBGE, Demografia das Empresas, 2024), e **74%** das startups em estágio de validação não faturam (Observatório Sebrae Startups, 2025). Por isso o capstone é organizado em seis estágios ponderados, e nenhum deles autoriza formalizar ou investir antes de medir demanda.
 
 ```text
 ====================================================================
@@ -63,16 +63,16 @@ Antes de qualquer canvas, o gestor híbrido precisa olhar para a régua de sobre
 
 | Indicador | Taxa | Fonte | Ano |
 |---|---:|---|---|
-| Sobrevivência em 1, 2, 3, 4 e 5 anos (coorte de 2017) | 76,2% / 59,6% / 49,4% / 42,3% / **37,3%** | IBGE — Demografia das Empresas | 2024 (ref. 2017–2022) |
-| Sobrevivência em 5 anos — 50+ ocupados / 10–40 / 1–9 | 60,9% / 55,4% / **35,9%** | IBGE (via Valor) | 2024 |
-| Sobrevivência em 2 anos (empresas criadas 2017–2021, base RFB) | 62% | Sebrae/DataSebrae | 2023 |
-| Mortalidade em 5 anos — MEI / ME / EPP | 29% / 21,6% / 17% | Sebrae (Kaplan-Meier) | 2020 |
-| Mortalidade em 5 anos — comércio (maior) / indústria extrativa (menor) | 30,2% / 14,3% | Sebrae | 2020 |
+| Sobrevivência em 1, 2, 3, 4 e 5 anos (coorte de 2017) | 76,2% / 59,6% / 49,4% / 42,3% / **37,3%** | IBGE: Demografia das Empresas | 2024 (ref. 2017 to 2022) |
+| Sobrevivência em 5 anos: 50+ ocupados / 10 to 40 / 1 to 9 | 60,9% / 55,4% / **35,9%** | IBGE (via Valor) | 2024 |
+| Sobrevivência em 2 anos (empresas criadas 2017 to 2021, base RFB) | 62% | Sebrae/DataSebrae | 2023 |
+| Mortalidade em 5 anos: MEI / ME / EPP | 29% / 21,6% / 17% | Sebrae (Kaplan-Meier) | 2020 |
+| Mortalidade em 5 anos: comércio (maior) / indústria extrativa (menor) | 30,2% / 14,3% | Sebrae | 2020 |
 
 > [!NOTE]
-> **Ressalva de série:** a partir da referência de **2022** o IBGE passou a contar apenas **empresas empregadoras**, o que reduz a comparabilidade com edições anteriores (IBGE, 2024). Sempre que citar a taxa de sobrevivência, declare o ano-base e a abrangência — senão o número vira argumento de marketing, não evidência de gestão.
+> **Ressalva de série:** a partir da referência de **2022** o IBGE passou a contar apenas **empresas empregadoras**, o que reduz a comparabilidade com edições anteriores (IBGE, 2024). Sempre que citar a taxa de sobrevivência, declare o ano-base e a abrangência: senão o número vira argumento de marketing, não evidência de gestão.
 
-- **🔢 Você sabia?** Das **1.000** empresas criadas em 2017, apenas **373** estavam ativas em 2022 (37,3%, IBGE, Demografia das Empresas, 2024). E o tamanho muda tudo: a sobrevivência em 5 anos é de **60,9%** entre as empresas com 50 ou mais ocupados e de **35,9%** entre as de 1 a 9 — ou seja, **quase o dobro** para quem tem escala de pessoal. O capstone começa tentando tirar a empresa do grupo dos 35,9%.
+- **🔢 Você sabia?** Das **1.000** empresas criadas em 2017, apenas **373** estavam ativas em 2022 (37,3%, IBGE, Demografia das Empresas, 2024). E o tamanho muda tudo: a sobrevivência em 5 anos é de **60,9%** entre as empresas com 50 ou mais ocupados e de **35,9%** entre as de 1 a 9: ou seja, **quase o dobro** para quem tem escala de pessoal. O capstone começa tentando tirar a empresa do grupo dos 35,9%.
 
 ### 1.2 O ecossistema de inovação: faturamento é o filtro real
 
@@ -85,23 +85,23 @@ O Observatório Sebrae Startups (2025) mapeou **18.458 startups** e apurou que *
 | Crescimento | 5% | maioria entre R$ 360 mil e R$ 4,8 milhões | Observatório Sebrae Startups | 2025 |
 | Escala | 3% | 77% acima de R$ 360 mil; 35% acima de R$ 4,8 milhões | Observatório Sebrae Startups | 2025 |
 
-Ao lado disso, o Distrito (InfoMoney, 2024) registra que **8.258 startups** deixaram de existir entre **2015 e 2024**, com **vida média de 58 meses** entre as que fecharam — e **só 1 em cada 10** recebeu investimento.
+Ao lado disso, o Distrito (InfoMoney, 2024) registra que **8.258 startups** deixaram de existir entre **2015 e 2024**, com **vida média de 58 meses** entre as que fecharam, e **só 1 em cada 10** recebeu investimento.
 
 Duas leituras saem dessa tabela, e as duas entram na defesa do capstone:
 
-1. **Validação sem faturamento é normal; validação sem sinal de compra é fatal.** Estar entre os 74% que ainda não faturam no estágio de validação é esperado; chegar ao estágio de tração sem sinal pago é o problema — no estágio de tração, apenas 11% seguem sem faturamento;
-2. **A escala não corrige um modelo quebrado.** Quem entra em crescimento com custo fixo mal dimensionado repete o erro em maior escala — e é por isso que o estágio 4 (financeiro) pesa 20% na rubrica.
+1. **Validação sem faturamento é normal; validação sem sinal de compra é fatal.** Estar entre os 74% que ainda não faturam no estágio de validação é esperado; chegar ao estágio de tração sem sinal pago é o problema: no estágio de tração, apenas 11% seguem sem faturamento;
+2. **A escala não corrige um modelo quebrado.** Quem entra em crescimento com custo fixo mal dimensionado repete o erro em maior escala, e é por isso que o estágio 4 (financeiro) pesa 20% na rubrica.
 
 ### 1.3 A regra de ouro do estágio 1: validar antes de formalizar
 
 > [!WARNING]
-> **Não formalize, não contrate contador e não aporte capital antes da validação.** O erro mais caro do capstone é inverter a ordem: abrir CNPJ, registrar contrato social e assinar alvará para depois descobrir que ninguém paga pelo produto. No estágio de validação, **74%** das startups não têm faturamento (Sebrae Startups, 2025) — formalizar antes disso transforma custo fixo em sentença. A sequência correta é: **15 a 30 entrevistas de descoberta → MVP ou pré-venda paga → decisão de perseverar ou pivô → então sim, registro, enquadramento tributário e conta PJ.** A regra vale para qualquer forma jurídica: S.A., cooperativa, associação ou empresa individual.
+> **Não formalize, não contrate contador e não aporte capital antes da validação.** O erro mais caro do capstone é inverter a ordem: abrir CNPJ, registrar contrato social e assinar alvará para depois descobrir que ninguém paga pelo produto. No estágio de validação, **74%** das startups não têm faturamento (Sebrae Startups, 2025): formalizar antes disso transforma custo fixo em sentença. A sequência correta é: **15 a 30 entrevistas de descoberta → MVP ou pré-venda paga → decisão de perseverar ou pivô → então sim, registro, enquadramento tributário e conta PJ.** A regra vale para qualquer forma jurídica: S.A., cooperativa, associação ou empresa individual.
 
 ---
 
 ## 2. A caixa de ferramentas: metodologias em estágios
 
-### 2.1 Quatro canvases verificados — e por que eles não são intercambiáveis
+### 2.1 Quatro canvases verificados, e por que eles não são intercambiáveis
 
 | Ferramenta | O que ela faz | Blocos / elementos | Fonte e ano |
 |---|---|---|---|
@@ -116,8 +116,8 @@ A escolha é simples de regrar: quem está **testando hipótese** usa Lean Canva
 
 Do lado da execução, dois marcos verificados organizam o estágio 2:
 
-- **Lean Startup** (Eric Ries, *A Startup Enxuta*, 2011): ciclo **Construir–Medir–Aprender**, com **MVP** (produto mínimo viável), **pivô**, aprendizado validado e contabilidade para a inovação. A consequência prática é que **aprender também é progresso** — desde que o aprendizado seja medido;
-- **Customer Development** (Steve Blank, 2013): sequência **descoberta → validação (encaixe entre produto e mercado) → criação de cliente → criação da empresa**. A empresa só nasce no último elo — formalizar no primeiro é exatamente o erro descrito na seção 1.3.
+- **Lean Startup** (Eric Ries, *A Startup Enxuta*, 2011): ciclo **Construir: Medir: Aprender**, com **MVP** (produto mínimo viável), **pivô**, aprendizado validado e contabilidade para a inovação. A consequência prática é que **aprender também é progresso**: desde que o aprendizado seja medido;
+- **Customer Development** (Steve Blank, 2013): sequência **descoberta → validação (encaixe entre produto e mercado) → criação de cliente → criação da empresa**. A empresa só nasce no último elo: formalizar no primeiro é exatamente o erro descrito na seção 1.3.
 
 ### 2.3 O plano de negócios do Sebrae e as ferramentas digitais
 
@@ -133,20 +133,20 @@ O manual oficial de plano de negócios (Sebrae, 2021) organiza o documento em: *
     {"left": "Lean Canvas (Maurya, 2010/2012)", "right": "Remove Parcerias, Atividades, Relacionamento e Recursos e soma Problema, Solução, Métricas-chave e Vantagem injusta"},
     {"left": "TLBMC (Joyce & Paquin, 2016)", "right": "Acrescenta ao canvas as camadas ambiental (ciclo de vida) e social (partes interessadas), com coerência vertical e horizontal"},
     {"left": "Ecocanvas (Daout et al., 2020/2024)", "right": "Soma ao Business Model Canvas 3 blocos de previsão de impacto ambiental, social e econômico"},
-    {"left": "Lean Startup (Ries, 2011)", "right": "Ciclo Construir–Medir–Aprender, com MVP, pivô, aprendizado validado e contabilidade para a inovação"},
-    {"left": "Customer Development (Blank, 2013)", "right": "Sequência descoberta, validação de encaixe, criação de cliente e criação da empresa — o CNPJ vem no último elo"}
+    {"left": "Lean Startup (Ries, 2011)", "right": "Ciclo Construir, Medir, Aprender, com MVP, pivô, aprendizado validado e contabilidade para a inovação"},
+    {"left": "Customer Development (Blank, 2013)", "right": "Sequência descoberta, validação de encaixe, criação de cliente e criação da empresa, o CNPJ vem no último elo"}
   ],
   "explanation": "Cada ferramenta responde a uma pergunta diferente: como o negócio funciona (BMC), qual é a hipótese de risco (Lean Canvas), qual é o impacto (TLBMC e Ecocanvas), como testamos (Lean Startup) e em que ordem validamos (Customer Development). Usar a ferramenta errada no estágio errado é a causa mais comum de canvas bonito e invalidado em campo."
 }
 ```
 
-- **🔢 Você sabia?** Não existe **"plano padrão gov.br"** de plano de negócios do Pronampe: a verificação confirmou que o Pronampe é **linha de crédito** (Lei nº 13.999/2020) e que o **modelo oficial de plano de negócios disponível é o do Sebrae** (2021). Material que vende "plano padrão do Pronampe" está confundindo crédito com planejamento — e a diferença aparece na prestação de contas, não na capa.
+- **🔢 Você sabia?** Não existe **"plano padrão gov.br"** de plano de negócios do Pronampe: a verificação confirmou que o Pronampe é **linha de crédito** (Lei nº 13.999/2020) e que o **modelo oficial de plano de negócios disponível é o do Sebrae** (2021). Material que vende "plano padrão do Pronampe" está confundindo crédito com planejamento, e a diferença aparece na prestação de contas, não na capa.
 
 ---
 
 ## 3. A Teoria da Mudança como espinha dorsal do capstone
 
-A Teoria da Mudança é a única peça do capstone que liga o **porquê** ao **quanto**: ela organiza a cadeia **insumos → produtos → resultados intermediários → impacto** e é construída preferencialmente de **trás para frente** (*backwards mapping*) — começa-se pelo impacto desejado e retroage até os insumos necessários (PlanAPP, 2023; J-PAL). Cada elo precisa de **mecanismo, pressuposto e indicador** (PlanAPP, 2023; IDIS, 2024; UNICEF SBC).
+A Teoria da Mudança é a única peça do capstone que liga o **porquê** ao **quanto**: ela organiza a cadeia **insumos → produtos → resultados intermediários → impacto** e é construída preferencialmente de **trás para frente** (*backwards mapping*): começa-se pelo impacto desejado e retroage até os insumos necessários (PlanAPP, 2023; J-PAL). Cada elo precisa de **mecanismo, pressuposto e indicador** (PlanAPP, 2023; IDIS, 2024; UNICEF SBC).
 
 | Elo da cadeia | Pergunta que responde | Exemplo didático: “Raiz Viva Alimentos” | Indicador |
 |---|---|---|---|
@@ -172,21 +172,21 @@ A Teoria da Mudança é a única peça do capstone que liga o **porquê** ao **q
     "Produtos entregues",
     "Insumos e atividades"
   ],
-  "explanation": "O desenho começa pelo impacto e retroage: primeiro se define o que deve permanecer, depois quais resultados intermediários o produzem, depois quais produtos geram esses resultados e, por fim, quais insumos são necessários (PlanAPP, 2023; J-PAL). Desenhar na ordem inversa — do que temos orçamento para o que queremos causar — produz cadeia bonita que nenhum indicador confirma."
+  "explanation": "O desenho começa pelo impacto e retroage: primeiro se define o que deve permanecer, depois quais resultados intermediários o produzem, depois quais produtos geram esses resultados e, por fim, quais insumos são necessários (PlanAPP, 2023; J-PAL). Desenhar na ordem inversa, do que temos orçamento para o que queremos causar, produz cadeia bonita que nenhum indicador confirma."
 }
 ```
 
 Três exigências práticas fecham a seção:
 
 - **Pressuposto escrito em cada elo:** a cadeia só vale se você declarar o que precisa ser verdade para o próximo elo acontecer;
-- **Indicador por elo**, com **linha de base**, método e responsável (IDIS, 2024; J-PAL) — baseline sem responsável é desejo;
+- **Indicador por elo**, com **linha de base**, método e responsável (IDIS, 2024; J-PAL): baseline sem responsável é desejo;
 - **Coerência com o canvas:** o que está na camada social do TLBMC precisa aparecer na cadeia, e o que aparece na cadeia precisa ter custo na DRE. Sem isso, o capstone tem três histórias diferentes no mesmo dossiê.
 
 ---
 
 ## 4. Trabalho em estágios com pesos: o roteiro de execução e de avaliação
 
-O capstone é executado e avaliado **por estágio**. Os pesos abaixo são os mesmos da rubrica da seção 10, agrupados em seis frentes de trabalho — ou seja, **estudar o peso é estudar a ordem de esforço**: validação e financeiro somam 38% do total, e por isso não podem ser improvisados no fim.
+O capstone é executado e avaliado **por estágio**. Os pesos abaixo são os mesmos da rubrica da seção 10, agrupados em seis frentes de trabalho: ou seja, **estudar o peso é estudar a ordem de esforço**: validação e financeiro somam 38% do total, e por isso não podem ser improvisados no fim.
 
 | Estágio | Trabalho do capstone | Peso | Entregável mínimo | Marco de passagem para o próximo estágio |
 |---|---|---:|---|---|
@@ -204,7 +204,7 @@ $$
 18\% \times 80 + 15\% \times 70 + 15\% \times 90 + 60\% \times 75 = 14{,}4 + 10{,}5 + 13{,}5 + 45{,}0 = \mathbf{77{,}5}
 $$
 
-Ou seja, **77,5%** da nota — faixa **“Essencial”** (70–79%) nas faixas de percentual sugeridas para este curso.
+Ou seja, **77,5%** da nota: faixa **“Essencial”** (70 to 79%) nas faixas de percentual sugeridas para este curso.
 
 ---
 
@@ -213,14 +213,14 @@ Ou seja, **77,5%** da nota — faixa **“Essencial”** (70–79%) nas faixas d
 A tabela abaixo é o **roteiro operacional** do capstone: cada linha é uma ação com custo estimado, prazo e a base verificada que a sustenta.
 
 > [!WARNING]
-> **Custo é estimativa de referência de mercado, não número estatístico nem normativo.** Os valores da coluna “custo estimado” servem para dimensionar orçamento inicial e **precisam ser confirmados com contador e com a prefeitura ou Junta Comercial local** — alvarás, cartórios e honorários variam por município. Prazos de registro dependem da eficiência do cartório e da forma jurídica escolhida (Lei nº 5.764/1971; Lei nº 6.404/1976).
+> **Custo é estimativa de referência de mercado, não número estatístico nem normativo.** Os valores da coluna “custo estimado” servem para dimensionar orçamento inicial e **precisam ser confirmados com contador e com a prefeitura ou Junta Comercial local**: alvarás, cartórios e honorários variam por município. Prazos de registro dependem da eficiência do cartório e da forma jurídica escolhida (Lei nº 5.764/1971; Lei nº 6.404/1976).
 
 | Etapa | Ação | Custo estimado | Prazo | Base verificada |
 |---|---|---|---|---|
-| 0. Ideação | Teoria da Mudança preliminar + Lean Canvas v1 | R$ 0 | 1–2 semanas | PlanAPP, 2023; Maurya, 2010/2012 |
-| 1. Validação | 15 a 30 entrevistas de descoberta | R$ 0 a 500 | 2–3 semanas | Blank, 2013 |
-| 1. Validação | MVP ou pré-venda paga (testar disposição a pagar) | R$ 500 a 3.000 | 2–4 semanas | Ries, 2011 |
-| 1. Validação | Pré-viabilidade e estudo de concorrência | R$ 0 a 1.500 | 1–2 semanas | Sebrae, 2021 |
+| 0. Ideação | Teoria da Mudança preliminar + Lean Canvas v1 | R$ 0 | 1 to 2 semanas | PlanAPP, 2023; Maurya, 2010/2012 |
+| 1. Validação | 15 a 30 entrevistas de descoberta | R$ 0 a 500 | 2 to 3 semanas | Blank, 2013 |
+| 1. Validação | MVP ou pré-venda paga (testar disposição a pagar) | R$ 500 a 3.000 | 2 to 4 semanas | Ries, 2011 |
+| 1. Validação | Pré-viabilidade e estudo de concorrência | R$ 0 a 1.500 | 1 to 2 semanas | Sebrae, 2021 |
 | 2. Formalização | Contrato ou estatuto com cláusula de propósito | R$ 300 a 1.500 (registro) | 5 a 20 dias úteis | Lei nº 5.764/1971; Lei nº 6.404/1976 |
 | 2. Formalização | Enquadramento tributário e conta PJ (no Simples, opção em até 30 dias) | R$ 0 a 600 (contador) | até 30 dias | Sebrae; assessoria contábil |
 | 2. Formalização | Alvará e licenças | R$ 100 a 500 (referência local) | 5 a 15 dias úteis | Parceria com a associação comercial local |
@@ -233,7 +233,7 @@ A tabela abaixo é o **roteiro operacional** do capstone: cada linha é uma aç�
 | 6. Execução | Plano de 90 dias com 3 marcos mensais | R$ 0 | 90 dias | Estrutura 30-60-90 (Smartsheet, PT-BR) |
 | 6. Execução | Matriz de riscos viva com revisão quinzenal | R$ 0 | contínuo | PMBOK; SETIA/MPS-Brasil |
 
-Duas leituras de gestão desta tabela: **(i)** os estágios 0 e 1 somam quase **zero de custo** e é neles que 74% das startups em validação falham — o barato é onde está o risco; **(ii)** o maior custo unitário está em jurídico (R$ 1.000 a 5.000), e ele só é gasto depois da validação — o que confirma a ordem da seção 1.3.
+Duas leituras de gestão desta tabela: **(i)** os estágios 0 e 1 somam quase **zero de custo** e é neles que 74% das startups em validação falham, o barato é onde está o risco; **(ii)** o maior custo unitário está em jurídico (R$ 1.000 a 5.000), e ele só é gasto depois da validação, o que confirma a ordem da seção 1.3.
 
 ---
 
@@ -248,9 +248,9 @@ O dossiê do capstone usa **uma única página** para provar que lucro e impacto
 | **Social** | Quem é afetado e como participa? | TLBMC, camada de partes interessadas (Joyce & Paquin, 2016) | Mapa de partes interessadas, repartição de valor e indicadores por elo da TdM |
 
 > [!NOTE]
-> **“Triple-DNA” é terminologia interna deste curso, não framework da literatura.** A verificação de fontes **não localizou** o termo em obra externa; os equivalentes verificados são a *triple bottom line* (Elkington), o **TLBMC** (Joyce & Paquin, 2016) e o **Ecocanvas** (Daout et al., 2020). Em prova, em ata ou em relatório, cite sempre o nome verificado — e reserve a expressão do curso para a apresentação interna do projeto.
+> **“Triple-DNA” é terminologia interna deste curso, não framework da literatura.** A verificação de fontes **não localizou** o termo em obra externa; os equivalentes verificados são a *triple bottom line* (Elkington), o **TLBMC** (Joyce & Paquin, 2016) e o **Ecocanvas** (Daout et al., 2020). Em prova, em ata ou em relatório, cite sempre o nome verificado, e reserve a expressão do curso para a apresentação interna do projeto.
 
-A prova de coerência é simples de executar: pegue **qualquer bloco social** da camada 3 e pergunte **em que linha da DRE ele aparece**; e pegue **qualquer linha de custo** da camada 1 e pergunte **qual elo da Teoria da Mudança ela sustenta**. Se a resposta for “em nenhuma”, o canvas tem camada decorativa — e camada decorativa é exatamente o que a defesa do capstone desmonta.
+A prova de coerência é simples de executar: pegue **qualquer bloco social** da camada 3 e pergunte **em que linha da DRE ele aparece**; e pegue **qualquer linha de custo** da camada 1 e pergunte **qual elo da Teoria da Mudança ela sustenta**. Se a resposta for “em nenhuma”, o canvas tem camada decorativa, e camada decorativa é exatamente o que a defesa do capstone desmonta.
 
 ---
 
@@ -258,9 +258,9 @@ A prova de coerência é simples de executar: pegue **qualquer bloco social** da
 
 ### 7.1 Projeção de DRE em três anos
 
-O exemplo abaixo é **didático e fictício**, com números realistas: a **“Raiz Viva Alimentos Ltda”**, de snacks desidratados com frutas de agricultura familiar e contratação de pessoas em reintegração, no **Simples Nacional** (limite de **R$ 4,8 milhões** de receita bruta anual — LC nº 123/2006), com crescimento de **+80%** (ano 1 para 2) e **+60%** (ano 2 para 3).
+O exemplo abaixo é **didático e fictício**, com números realistas: a **“Raiz Viva Alimentos Ltda”**, de snacks desidratados com frutas de agricultura familiar e contratação de pessoas em reintegração, no **Simples Nacional** (limite de **R$ 4,8 milhões** de receita bruta anual: LC nº 123/2006), com crescimento de **+80%** (ano 1 para 2) e **+60%** (ano 2 para 3).
 
-**Tabela — DRE projetada (R$):**
+**Tabela: DRE projetada (R$):**
 
 | Conta | Ano 1 | Ano 2 | Ano 3 |
 |---|---:|---:|---:|
@@ -274,7 +274,7 @@ O exemplo abaixo é **didático e fictício**, com números realistas: a **“Ra
 | **Lucro antes do rateio** | **24.000** | **192.000** | **475.360** |
 | Margem líquida | 2,0% | 8,9% | 13,7% |
 
-A curva é o argumento central da defesa: **margem de 2,0% no primeiro ano** (sobrevivência) e **13,7% no terceiro** (viabilidade) — e é por isso que a rubrica cobra capital de giro e cenários, e não só a linha de receita.
+A curva é o argumento central da defesa: **margem de 2,0% no primeiro ano** (sobrevivência) e **13,7% no terceiro** (viabilidade), e é por isso que a rubrica cobra capital de giro e cenários, e não só a linha de receita.
 
 ### 7.2 Ponto de equilíbrio pelo método do Sebrae
 
@@ -288,7 +288,7 @@ Tradução de gestão: **abaixo de 17.334 unidades no Ano 1 a empresa dá preju�
 
 ### 7.3 Repartição do lucro em três anos
 
-**Tabela — destinação do lucro (R$):**
+**Tabela: destinação do lucro (R$):**
 
 | Destinação | Base legal ou pactuada | Ano 1 | Ano 2 | Ano 3 |
 |---|---|---:|---:|---:|
@@ -303,7 +303,7 @@ Tradução de gestão: **abaixo de 17.334 unidades no Ano 1 a empresa dá preju�
 ```fillblank
 {
   "question": "Complete a destinação do lucro do Ano 1 (R$ 24.000 antes do rateio):",
-  "template": "No Ano 1 o lucro antes do rateio é de R$ 24.000: a reserva legal de {{1}}% retém R$ 1.200, o rateio a colaboradores de {{2}}% retém R$ 3.600, o fundo de impacto de {{3}}% destina R$ 2.400 e sobram {{4}}% — R$ 16.800 — para os sócios.",
+  "template": "No Ano 1 o lucro antes do rateio é de R$ 24.000: a reserva legal de {{1}}% retém R$ 1.200, o rateio a colaboradores de {{2}}% retém R$ 3.600, o fundo de impacto de {{3}}% destina R$ 2.400 e sobram {{4}}%, R$ 16.800, para os sócios.",
   "answers": {
     "1": "5",
     "2": "15",
@@ -311,29 +311,29 @@ Tradução de gestão: **abaixo de 17.334 unidades no Ano 1 a empresa dá preju�
     "4": "70"
   },
   "distractors": ["1", "25", "50", "80"],
-  "explanation": "A reserva legal é de 5% do lucro líquido (Lei nº 6.404/1976, art. 193); o rateio de 15% e o fundo de impacto de 10% são percentuais pactuados internamente, somando 30% do lucro. Os 70% residuais (R$ 16.800) são o que resta aos sócios — e a soma fecha: 1.200 + 3.600 + 2.400 + 16.800 = 24.000."
+  "explanation": "A reserva legal é de 5% do lucro líquido (Lei nº 6.404/1976, art. 193); o rateio de 15% e o fundo de impacto de 10% são percentuais pactuados internamente, somando 30% do lucro. Os 70% residuais (R$ 16.800) são o que resta aos sócios, e a soma fecha: 1.200 + 3.600 + 2.400 + 16.800 = 24.000."
 }
 ```
 
-**Variante cooperativa (Lei nº 5.764/1971, art. 44)** sobre a sobra do Ano 3 (**R$ 475.360**): Fundo de Reserva de **≥10% = R$ 47.536**; Fundo de Assistência de **≥5% = R$ 23.768**; rateio **proporcional às operações** (art. 4º, VII) = **R$ 404.056**. **Conferência para a S.A.:** o piso legal de **25%** do lucro líquido (Lei nº 6.404/1976, art. 202, § 2º, quando o estatuto é omisso) seria **R$ 118.840**, **inferior** aos R$ 332.752 previstos para os sócios — o plano é compatível com a lei.
+**Variante cooperativa (Lei nº 5.764/1971, art. 44)** sobre a sobra do Ano 3 (**R$ 475.360**): Fundo de Reserva de **≥10% = R$ 47.536**; Fundo de Assistência de **≥5% = R$ 23.768**; rateio **proporcional às operações** (art. 4º, VII) = **R$ 404.056**. **Conferência para a S.A.:** o piso legal de **25%** do lucro líquido (Lei nº 6.404/1976, art. 202, § 2º, quando o estatuto é omisso) seria **R$ 118.840**, **inferior** aos R$ 332.752 previstos para os sócios, o plano é compatível com a lei.
 
-- **🔢 Você sabia?** No Ano 3, os **R$ 475.360** de lucro se dividem em **R$ 23.768** de reserva legal (5%), **R$ 71.304** de rateio a colaboradores (15%), **R$ 47.536** de fundo de impacto (10%) e **R$ 332.752** para os sócios. Se a mesma sobra caísse numa **cooperativa**, os fundos obrigatórios de **10% e 5%** da Lei nº 5.764/1971 consumiriam **R$ 71.304** antes de qualquer rateio aos cooperados — mesma verba, **bases legais diferentes**.
+- **🔢 Você sabia?** No Ano 3, os **R$ 475.360** de lucro se dividem em **R$ 23.768** de reserva legal (5%), **R$ 71.304** de rateio a colaboradores (15%), **R$ 47.536** de fundo de impacto (10%) e **R$ 332.752** para os sócios. Se a mesma sobra caísse numa **cooperativa**, os fundos obrigatórios de **10% e 5%** da Lei nº 5.764/1971 consumiriam **R$ 71.304** antes de qualquer rateio aos cooperados: mesma verba, **bases legais diferentes**.
 
 ### 7.4 Capital de giro, cenários e o limite do Simples
 
-O plano financeiro do capstone fecha com três exigências: **(i)** manter, no mínimo, **6 meses de capital de giro** (caixa ÷ custos fixos ≥ 3,0 é o indicador de alerta); **(ii)** rodar **três cenários** — conservador, base e otimista —, sem nunca publicar só o otimista; e **(iii)** respeitar o limite do **Simples Nacional** de **R$ 4,8 milhões** de receita bruta anual (LC nº 123/2006), que a projeção do Ano 3 (R$ 3.456.000) ainda respeita.
+O plano financeiro do capstone fecha com três exigências: **(i)** manter, no mínimo, **6 meses de capital de giro** (caixa ÷ custos fixos ≥ 3,0 é o indicador de alerta); **(ii)** rodar **três cenários**, conservador, base e otimista, sem nunca publicar só o otimista; e **(iii)** respeitar o limite do **Simples Nacional** de **R$ 4,8 milhões** de receita bruta anual (LC nº 123/2006), que a projeção do Ano 3 (R$ 3.456.000) ainda respeita.
 
-### 7.5 Caso resolvido — quando a projeção muda a escolha da forma jurídica
+### 7.5 Caso resolvido: quando a projeção muda a escolha da forma jurídica
 
-A projeção de três anos não serve só para mostrar lucro: ela **antecipa a decisão societária e tributária**. A Raiz Viva fecha o Ano 3 com **R$ 3.456.000** de receita bruta, dentro do teto de **R$ 4,8 milhões** do Simples (LC nº 123/2006) — mas o mesmo crescimento de **+60%** que levou o Ano 2 ao Ano 3 projetaria o Ano 4 em:
+A projeção de três anos não serve só para mostrar lucro: ela **antecipa a decisão societária e tributária**. A Raiz Viva fecha o Ano 3 com **R$ 3.456.000** de receita bruta, dentro do teto de **R$ 4,8 milhões** do Simples (LC nº 123/2006), mas o mesmo crescimento de **+60%** que levou o Ano 2 ao Ano 3 projetaria o Ano 4 em:
 
 | Cenário de crescimento do Ano 4 | Receita projetada | Situação no Simples (teto de R$ 4,8 mi) | Decisão |
 |---|---:|---|---|
-| **+60%** (mesmo ritmo do Ano 2 → 3) | **R$ 5.529.600** | **Acima do teto** — incompatível | Preparar saída: lucro presumido ou lucro real, e refazer a DRE inteira |
+| **+60%** (mesmo ritmo do Ano 2 → 3) | **R$ 5.529.600** | **Acima do teto**: incompatível | Preparar saída: lucro presumido ou lucro real, e refazer a DRE inteira |
 | **+38,9%** (ritmo exato do teto) | **R$ 4.800.000** | No limite, sem folga | Considerar a transição já no Ano 3, não no Ano 4 |
 | **+25%** (cenário conservador) | **R$ 4.320.000** | Dentro do teto, com folga | Permanecer no Simples e manter a alíquota de ~6% da projeção |
 
-A conta de referência é simples: **R$ 4.800.000 ÷ R$ 3.456.000 = 1,3889**, ou seja, **qualquer crescimento acima de 38,9%** no Ano 4 derruba a empresa para fora do Simples. A consequência sobre o capstone é direta e defensável: **o regime tributário é uma variável do estágio 2 (formalização), não do estágio 6** — porque a linha “Tributos (Simples, ~6%)” da DRE deixa de existir e todo o lucro antes do rateio é recalculado: com carga maior, os R$ 475.360 do Ano 3 caem, e cai junto o valor do rateio de 15% aos colaboradores e do fundo de impacto de 10%. Esse é o ponto em que forma jurídica, tributo e repartição de valor se tocam — e por isso a rubrica exige **base legal escrita no rateio** (15% do total) e não apenas a conta do lucro.
+A conta de referência é simples: **R$ 4.800.000 ÷ R$ 3.456.000 = 1,3889**, ou seja, **qualquer crescimento acima de 38,9%** no Ano 4 derruba a empresa para fora do Simples. A consequência sobre o capstone é direta e defensável: **o regime tributário é uma variável do estágio 2 (formalização), não do estágio 6**, porque a linha “Tributos (Simples, ~6%)” da DRE deixa de existir e todo o lucro antes do rateio é recalculado: com carga maior, os R$ 475.360 do Ano 3 caem, e cai junto o valor do rateio de 15% aos colaboradores e do fundo de impacto de 10%. Esse é o ponto em que forma jurídica, tributo e repartição de valor se tocam, e por isso a rubrica exige **base legal escrita no rateio** (15% do total) e não apenas a conta do lucro.
 
 ---
 
@@ -354,9 +354,9 @@ A empresa híbrida só é híbrida se a **repartição de valor estiver no contr
 | Empresa B certificada | **Responsável legal perante todas as partes interessadas**; estatutos desse tipo em **54 jurisdições** | Sistema B / B Lab, 2025 |
 | Certificação B | Política de governança das partes interessadas, monitorada pelo órgão de governança mais alto | Sistema B, 2025 |
 
-A leitura cruzada dessas linhas dá o desenho mínimo da governança híbrida: **assembleia com calendário, conselho (5 a 9) ou consultivo (3 a 5) com regulamento, política de distribuição de resultados, avaliação do colegiado** (IBGC, 2023) e, no topo, a **política de governança das partes interessadas** exigida pela certificação B (Sistema B, 2025). O acordo de sócios é onde tudo isso vira exigível — com quóruns, cláusula de saída e mediação de conflitos.
+A leitura cruzada dessas linhas dá o desenho mínimo da governança híbrida: **assembleia com calendário, conselho (5 a 9) ou consultivo (3 a 5) com regulamento, política de distribuição de resultados, avaliação do colegiado** (IBGC, 2023) e, no topo, a **política de governança das partes interessadas** exigida pela certificação B (Sistema B, 2025). O acordo de sócios é onde tudo isso vira exigível: com quóruns, cláusula de saída e mediação de conflitos.
 
-- **🔢 Você sabia?** O Brasil tem **mais de 338/342 Empresas B certificadas** (recortes divergentes entre as fontes) e **mais de 500 com operação local**, com **mais de 74%** das certificações concedidas **desde 2020** (Estadão; Valor; Sistema B; CicloVivo, 2025–2026). O faturamento agregado das Empresas B no país chegou a **R$ 100 bilhões** (CicloVivo, 2026) — fonte jornalística, a ser citada com ano.
+- **🔢 Você sabia?** O Brasil tem **mais de 338/342 Empresas B certificadas** (recortes divergentes entre as fontes) e **mais de 500 com operação local**, com **mais de 74%** das certificações concedidas **desde 2020** (Estadão; Valor; Sistema B; CicloVivo, 2025 to 2026). O faturamento agregado das Empresas B no país chegou a **R$ 100 bilhões** (CicloVivo, 2026): fonte jornalística, a ser citada com ano.
 
 ---
 
@@ -396,7 +396,7 @@ A matriz é **viva**: revisão quinzenal, com um responsável por risco e um ind
 
 ## 10. Rubrica do capstone: pesos, evidências e conversão de nota
 
-A rubrica abaixo é a **tabela oficial de avaliação proposta para este curso** — pesos adaptados de rubricas verificadas de projeto final de outras instituições (Insper/PFE, 2025 e 2026; Technovation Brasil, 2025; ULisboa/IST, 2022/23).
+A rubrica abaixo é a **tabela oficial de avaliação proposta para este curso**: pesos adaptados de rubricas verificadas de projeto final de outras instituições (Insper/PFE, 2025 e 2026; Technovation Brasil, 2025; ULisboa/IST, 2022/23).
 
 **RUBRICA DO CAPSTONE:**
 
@@ -416,18 +416,18 @@ A rubrica abaixo é a **tabela oficial de avaliação proposta para este curso**
 
 **Conversão verificada (Insper/PFE, 2025/2026):** I = 0,0 · D− = 2 · D = 3 · D+ = 4 · C = 5 · C+ = 6 · B = 7 · B+ = 8 · A = 9 · A+ = 10; **aprovação ≥ 5,0**, com nota ≥ 5,0 em cada objetivo.
 
-**Faixas de percentual sugeridas para este curso:** 0–49% **Insatisfatório** · 50–69% **Em desenvolvimento** · 70–79% **Essencial** · 80–89% **Proficiente** · 90–100% **Avançado** (níveis alinhados a Insper, 2025, e Technovation Brasil, 2025).
+**Faixas de percentual sugeridas para este curso:** 0 to 49% **Insatisfatório** · 50 to 69% **Em desenvolvimento** · 70 to 79% **Essencial** · 80 to 89% **Proficiente** · 90 to 100% **Avançado** (níveis alinhados a Insper, 2025, e Technovation Brasil, 2025).
 
 | Faixa de percentual | Nível | O que a defesa precisa mostrar |
 |---|---|---|
-| 0–49% | Insatisfatório | Entregáveis ausentes ou sem fonte |
-| 50–69% | Em desenvolvimento | Entregou, mas com lacunas de evidência |
-| 70–79% | Essencial | Cadeia, canvas, DRE e riscos completos e coerentes |
-| 80–89% | Proficiente | Validação forte, dados de campo e governança escrita |
-| 90–100% | Avançado | Tudo acima + indicadores auditados e defesa sem ressalvas |
+| 0 to 49% | Insatisfatório | Entregáveis ausentes ou sem fonte |
+| 50 to 69% | Em desenvolvimento | Entregou, mas com lacunas de evidência |
+| 70 to 79% | Essencial | Cadeia, canvas, DRE e riscos completos e coerentes |
+| 80 to 89% | Proficiente | Validação forte, dados de campo e governança escrita |
+| 90 to 100% | Avançado | Tudo acima + indicadores auditados e defesa sem ressalvas |
 
 > [!NOTE]
-> **Rubrica proposta, não oficial.** Não há rubrica oficial publicada deste curso: os pesos acima são **adaptação** de rubricas verificadas de outras instituições e devem ser lidos como proposta didativa. A conversão de conceitos (I a A+) e a faixa de percentual são **escalas distintas** — a primeira vem da instituição de referência, a segunda é a sugerida aqui — e não devem ser aplicadas uma sobre a outra sem declaração do critério.
+> **Rubrica proposta, não oficial.** Não há rubrica oficial publicada deste curso: os pesos acima são **adaptação** de rubricas verificadas de outras instituições e devem ser lidos como proposta didativa. A conversão de conceitos (I a A+) e a faixa de percentual são **escalas distintas**, a primeira vem da instituição de referência, a segunda é a sugerida aqui, e não devem ser aplicadas uma sobre a outra sem declaração do critério.
 
 ---
 
@@ -439,16 +439,16 @@ A rubrica abaixo é a **tabela oficial de avaliação proposta para este curso**
 | **Egalite** (empregabilidade de pessoas com deficiência) | Contrato corporativo + inserção auditável | **R$ 120 mil** de subvenção FINEP/Prime no lançamento (2010); hoje **+75 mil** inscritos e **+14 mil** inserções em 12 anos, **500 empresas** atendidas; Walmart: **900 inclusões em 18 meses**; feira com **5 mil vagas** (2020) e **13 mil** (2021) | Projeto Draft, 2022 | O **cliente corporativo paga** e o impacto é auditável |
 | **Unibes** (ONG que opera como empresa de impacto) | Receita própria + governança profissional | **+20 mil** pessoas por ano, **~300** colaboradores; o Bazar dá **1/3 do orçamento** (7 lojas, centro de distribuição próprio, **+40 mil peças/mês**); **~70%** dos jovens dos cursos saem empregados; conselho voluntário e auditoria independente | InfoMoney, 2026 | Receita própria e governança profissional convivem |
 | **eureciclo** | Repasse de valor na cadeia | Desde 2016: **+R$ 65 milhões** para **+500** organizações de catadores; em 2023: **R$ 4,3 milhões** e **+7 mil** clientes | Relatório de Desempenho, 2023 | Receita B2B com repasse verificável escala |
-| **Panosocial** | Limite do crescimento sem estrutura | Equipe de **11** pessoas, receita mensal de **~R$ 70 mil**, clientes como Greenpeace, WWF e MAM — insuficiente para cobrir todos os custos | Veja SP, 2019 | **Receita crescente não garante sustentabilidade**: 3 anos de projeção são obrigatórios |
+| **Panosocial** | Limite do crescimento sem estrutura | Equipe de **11** pessoas, receita mensal de **~R$ 70 mil**, clientes como Greenpeace, WWF e MAM: insuficiente para cobrir todos os custos | Veja SP, 2019 | **Receita crescente não garante sustentabilidade**: 3 anos de projeção são obrigatórios |
 
-- **🔢 Você sabia?** Com **R$ 120 mil** de subvenção FINEP/Prime no lançamento, a Egalite construiu, em 12 anos, **mais de 14 mil inserções** de pessoas com deficiência e **500 empresas** atendidas — incluindo **900 inclusões no Walmart em 18 meses**. É o padrão que o capstone deve copiar: **um contrato corporativo com número auditável vale mais do que mil páginas de propósito**, e é exatamente o tipo de evidência que a rubrica cobra em “validação em campo” (18%) e em “plano de impacto” (10%).
+- **🔢 Você sabia?** Com **R$ 120 mil** de subvenção FINEP/Prime no lançamento, a Egalite construiu, em 12 anos, **mais de 14 mil inserções** de pessoas com deficiência e **500 empresas** atendidas: incluindo **900 inclusões no Walmart em 18 meses**. É o padrão que o capstone deve copiar: **um contrato corporativo com número auditável vale mais do que mil páginas de propósito**, e é exatamente o tipo de evidência que a rubrica cobra em “validação em campo” (18%) e em “plano de impacto” (10%).
 
 ---
 
-## 12. Financiamento: o que o Pronampe é — e o que ele não é
+## 12. Financiamento: o que o Pronampe é, e o que ele não é
 
 > [!WARNING]
-> **Pronampe é linha de crédito, não plano de negócios.** O Pronampe foi criado pela **Lei nº 13.999/2020** como programa de crédito para **ME, EPP e MEI**, com envio de dados fiscais pela Receita às instituições financeiras e garantia pessoal. O **art. 6º, § 10** da lei **veda** a aplicação dos recursos na **distribuição de lucros**. Limites verificados: até **50% da receita bruta** (atualmente até **60%**) e, para quem tem menos de 1 ano de funcionamento, **50% do capital social ou 50% de 12 vezes a receita média mensal**; a garantia pessoal é de **100%** (até **150%** para empresas com menos de 1 ano de atividade). **Não existe “plano padrão gov.br” de plano de negócios do Pronampe** — o modelo oficial de plano de negócios disponível é o do **Sebrae** (2021). Tratar crédito como planejamento, ou usar recurso de crédito para distribuir lucro, é erro de natureza diferente e igualmente grave.
+> **Pronampe é linha de crédito, não plano de negócios.** O Pronampe foi criado pela **Lei nº 13.999/2020** como programa de crédito para **ME, EPP e MEI**, com envio de dados fiscais pela Receita às instituições financeiras e garantia pessoal. O **art. 6º, § 10** da lei **veda** a aplicação dos recursos na **distribuição de lucros**. Limites verificados: até **50% da receita bruta** (atualmente até **60%**) e, para quem tem menos de 1 ano de funcionamento, **50% do capital social ou 50% de 12 vezes a receita média mensal**; a garantia pessoal é de **100%** (até **150%** para empresas com menos de 1 ano de atividade). **Não existe “plano padrão gov.br” de plano de negócios do Pronampe**, o modelo oficial de plano de negócios disponível é o do **Sebrae** (2021). Tratar crédito como planejamento, ou usar recurso de crédito para distribuir lucro, é erro de natureza diferente e igualmente grave.
 
 ---
 
@@ -470,11 +470,11 @@ A rubrica abaixo é a **tabela oficial de avaliação proposta para este curso**
 | 12 | Pessoas e Cultura de Parceria | O rateio de 15% a colaboradores e a cultura por trás dele |
 | 13 | Tributos e Incentivos: Simples, Presumido, Cooperativa e ONG | O regime tributário da DRE (Simples, ~6%) e a variante cooperativa |
 | 14 | Parcerias e Ecossistema | Instrumentos de parceria, SROI e diligência de cadeia |
-| 15 | — (lição ainda não publicada nesta pasta) | Revisão integrada dos blocos 01 a 14 antes da defesa; o conteúdo da lição 15 **não é afirmado** nesta síntese |
+| 15 |: (lição ainda não publicada nesta pasta) | Revisão integrada dos blocos 01 a 14 antes da defesa; o conteúdo da lição 15 **não é afirmado** nesta síntese |
 | 16 | Capstone: Como Construir a Empresa Híbrida Completa (esta lição) | Integração: seis estágios ponderados, checklist, DRE, riscos, rubrica e defesa |
 
 > [!NOTE]
-> **Transparência da síntese:** a lição **15 não constava** da pasta deste curso no momento da escrita. A linha foi mantida para completar o quadro das 16 lições **sem inventar título nem conteúdo** — em vez de supor um tema, o quadro declara a ausência.
+> **Transparência da síntese:** a lição **15 não constava** da pasta deste curso no momento da escrita. A linha foi mantida para completar o quadro das 16 lições **sem inventar título nem conteúdo**: em vez de supor um tema, o quadro declara a ausência.
 
 ---
 
@@ -484,10 +484,10 @@ A rubrica abaixo é a **tabela oficial de avaliação proposta para este curso**
 > **Veredito Comparativo**
 > Diante dos **cinco modelos de empresa**, o que muda no capstone é **quem distribui, quem decide, com que base legal e o que precisa ser provado**:
 > - **× tradicional:** distribui o lucro livremente, com **reserva legal de 5%** e, se o estatuto for omisso, **dividendo obrigatório ≥25%** do lucro líquido ajustado (Lei nº 6.404/1976, arts. 193 e 202, § 2º). Decide por capital, não por cabeça de cada sócio. O impacto é **opcional** e, por isso, a rubrica não o pontua sem evidência;
-> - **× parceria (cooperação entre entes e organizações):** decide em **instância compartilhada**, com instrumento próprio e contrapartida nomeada; resolve governança e rateio, mas **não tem capital de giro próprio** — por isso o risco de paralisia decisória (severidade 12) e a exigência de quóruns e mediação;
-> - **× cooperativa:** distribui **sobras proporcionais às operações** (Lei nº 5.764/1971, art. 4º, VII) e é **obrigada** a destinar **≥10%** ao Fundo de Reserva e **≥5%** ao Fundo de Assistência (art. 44). Sobre a sobra do Ano 3 (**R$ 475.360**), isso significa **R$ 47.536** e **R$ 23.768** antes de qualquer rateio ao cooperado — destino social do excedente escrito na lei;
-> - **× ONG:** não distribui resultado; sua vantagem é **legitimidade, execução técnica e prestação de contas** (como a Unibes, **+20 mil** pessoas por ano com **~300** colaboradores e **1/3** do orçamento vindo do Bazar). Seu limite é a **dependência de doação** — daí a lição da Panosocial (**~R$ 70 mil/mês** com 11 pessoas ainda assim insuficiente);
-> - **× híbrida (conclusão):** é a única que consegue combinar, no mesmo plano, **reserva legal de 5%**, **rateio de 15% a colaboradores**, **fundo de impacto de 10%** e **lucro residual aos sócios** — como no Ano 3 da seção 7.3 (**R$ 23.768 + R$ 71.304 + R$ 47.536 + R$ 332.752 = R$ 475.360**). Ela não escolhe entre lucro e impacto: ela **escreve os percentuais no contrato, mede o impacto com baseline e defende a conta**. É essa, e só essa, a defesa que a rubrica de 100% exige.
+> - **× parceria (cooperação entre entes e organizações):** decide em **instância compartilhada**, com instrumento próprio e contrapartida nomeada; resolve governança e rateio, mas **não tem capital de giro próprio**: por isso o risco de paralisia decisória (severidade 12) e a exigência de quóruns e mediação;
+> - **× cooperativa:** distribui **sobras proporcionais às operações** (Lei nº 5.764/1971, art. 4º, VII) e é **obrigada** a destinar **≥10%** ao Fundo de Reserva e **≥5%** ao Fundo de Assistência (art. 44). Sobre a sobra do Ano 3 (**R$ 475.360**), isso significa **R$ 47.536** e **R$ 23.768** antes de qualquer rateio ao cooperado: destino social do excedente escrito na lei;
+> - **× ONG:** não distribui resultado; sua vantagem é **legitimidade, execução técnica e prestação de contas** (como a Unibes, **+20 mil** pessoas por ano com **~300** colaboradores e **1/3** do orçamento vindo do Bazar). Seu limite é a **dependência de doação**: daí a lição da Panosocial (**~R$ 70 mil/mês** com 11 pessoas ainda assim insuficiente);
+> - **× híbrida (conclusão):** é a única que consegue combinar, no mesmo plano, **reserva legal de 5%**, **rateio de 15% a colaboradores**, **fundo de impacto de 10%** e **lucro residual aos sócios**: como no Ano 3 da seção 7.3 (**R$ 23.768 + R$ 71.304 + R$ 47.536 + R$ 332.752 = R$ 475.360**). Ela não escolhe entre lucro e impacto: ela **escreve os percentuais no contrato, mede o impacto com baseline e defende a conta**. É essa, e só essa, a defesa que a rubrica de 100% exige.
 
 ---
 
@@ -496,16 +496,16 @@ A rubrica abaixo é a **tabela oficial de avaliação proposta para este curso**
 > [!WARNING]
 > **Armadilhas desta lição:**
 > - **Formalizar antes de validar** é o erro mais caro: no estágio de validação, **74%** das startups não faturam (Sebrae Startups, 2025);
-> - **Business Model Canvas tem 9 blocos** — e o Lean Canvas **remove 4** e **soma 4**; trocar um pelo outro sem dizer qual é a base confunde a defesa;
+> - **Business Model Canvas tem 9 blocos**, e o Lean Canvas **remove 4** e **soma 4**; trocar um pelo outro sem dizer qual é a base confunde a defesa;
 > - **A Teoria da Mudança é desenhada de trás para frente** (impacto → resultados → produtos → insumos), com mecanismo, pressuposto e indicador em cada elo;
-> - **Pronampe é crédito (Lei nº 13.999/2020)**, vedado a distribuição de lucros (art. 6º, § 10) — **não** é plano de negócios e **não** tem “plano padrão gov.br”;
+> - **Pronampe é crédito (Lei nº 13.999/2020)**, vedado a distribuição de lucros (art. 6º, § 10): **não** é plano de negócios e **não** tem “plano padrão gov.br”;
 > - **Reserva legal é 5%;** o piso de **25%** de dividendo só incide quando o estatuto é omisso (Lei nº 6.404/1976, arts. 193 e 202, § 2º);
 > - **Na cooperativa, os fundos vêm antes do rateio:** ≥10% de Reserva e ≥5% de Assistência (Lei nº 5.764/1971, art. 44);
 > - **Ponto de equilíbrio é conta, não estimativa:** R$ 624.000 ÷ (R$ 60 − R$ 24) = **17.334 unidades** (método Sebrae, 2021);
-> - **Risco sem indicador não é risco gerido** — toda linha da matriz precisa de probabilidade, impacto, severidade, mitigação e indicador;
+> - **Risco sem indicador não é risco gerido**: toda linha da matriz precisa de probabilidade, impacto, severidade, mitigação e indicador;
 > - **Fonte sem ano não é fonte:** a rubrica dedica **4%** do total a ética, fontes e rigor, e todo número desta lição traz fonte e ano justamente por isso.
 
-**Itens não verificados nesta pesquisa (não afirmar como fato):** o termo **“triple-DNA” não foi localizado** na literatura — é terminologia interna do curso (equivalentes verificados: *triple bottom line*, TLBMC de 2016 e Ecocanvas de 2020); **não existe “plano padrão gov.br” de Pronampe**; não há **conteúdo programático público** da aula 16 nem **rubrica oficial** deste curso (a rubrica é adaptação); o **plano de 90 dias não é metodologia normatizada**, só guia prático (Smartsheet, s.d.); o **número exato de Empresas B no Brasil diverge** entre fontes (338, 342 e mais de 500 com operação) e o **faturamento agregado de R$ 100 bilhões** vem de fonte jornalística; **custos e prazos do checklist são estimativas de referência**, não dados estatísticos; as **séries do IBGE passaram a contar apenas empresas empregadoras a partir de 2022**; e a lição **15 não constava** desta pasta na data de escrita.
+**Itens não verificados nesta pesquisa (não afirmar como fato):** o termo **“triple-DNA” não foi localizado** na literatura: é terminologia interna do curso (equivalentes verificados: *triple bottom line*, TLBMC de 2016 e Ecocanvas de 2020); **não existe “plano padrão gov.br” de Pronampe**; não há **conteúdo programático público** da aula 16 nem **rubrica oficial** deste curso (a rubrica é adaptação); o **plano de 90 dias não é metodologia normatizada**, só guia prático (Smartsheet, s.d.); o **número exato de Empresas B no Brasil diverge** entre fontes (338, 342 e mais de 500 com operação) e o **faturamento agregado de R$ 100 bilhões** vem de fonte jornalística; **custos e prazos do checklist são estimativas de referência**, não dados estatísticos; as **séries do IBGE passaram a contar apenas empresas empregadoras a partir de 2022**; e a lição **15 não constava** desta pasta na data de escrita.
 
 ---
 
@@ -525,7 +525,7 @@ O capstone se entrega em **um dossiê único**, organizado pelos seis estágios,
 **Roteiro de 10 minutos de apresentação:** 2 minutos de problema e Teoria da Mudança; 2 minutos de validação (com o número de entrevistas e o sinal de compra); 2 minutos de canvas nas 3 camadas; 2 minutos de DRE, ponto de equilíbrio e rateio; 1 minuto de matriz de riscos; 1 minuto de plano de 90 dias. Os **cinco números** que não podem faltar em qualquer resposta são: **37,3%** de sobrevivência em 5 anos (IBGE, 2024), **74%** de startups em validação sem faturamento (Sebrae Startups, 2025), **17.334 unidades** de ponto de equilíbrio, **70%** do lucro residual aos sócios no Ano 1 e **100%** dos pesos da rubrica fechados.
 
 > [!NOTE]
-> **Fonte e ano são parte da nota.** A rubrica dedica **4%** a ética, fontes e rigor — e qualquer afirmação sem fonte e ano perde esse percentual, mesmo que o conteúdo esteja certo. O hábito correto é o deste curso: **afirmação → número → fonte → ano**, e o que não foi verificado é declarado como não verificado (seção 15).
+> **Fonte e ano são parte da nota.** A rubrica dedica **4%** a ética, fontes e rigor, e qualquer afirmação sem fonte e ano perde esse percentual, mesmo que o conteúdo esteja certo. O hábito correto é o deste curso: **afirmação → número → fonte → ano**, e o que não foi verificado é declarado como não verificado (seção 15).
 
 ---
 
@@ -559,7 +559,7 @@ O capstone se entrega em **um dossiê único**, organizado pelos seis estágios,
     "Diagnosticar, tratar e operar"
   ],
   "correct": 1,
-  "explanation": "O ciclo é Construir–Medir–Aprender, com MVP, pivô, aprendizado validado e contabilidade para a inovação (Eric Ries, A Startup Enxuta, 2011). As demais sequências são nomes plausíveis, mas não pertencem à metodologia verificada."
+  "explanation": "O ciclo é Construir, Medir, Aprender, com MVP, pivô, aprendizado validado e contabilidade para a inovação (Eric Ries, A Startup Enxuta, 2011). As demais sequências são nomes plausíveis, mas não pertencem à metodologia verificada."
 }
 ```
 
@@ -607,7 +607,7 @@ O capstone se entrega em **um dossiê único**, organizado pelos seis estágios,
     "620 empresas"
   ],
   "correct": 0,
-  "explanation": "1.000 × 37,3% = 373 empresas (IBGE, Demografia das Empresas, divulgação de 2024, referente ao período 2017–2022). Os números 423 e 494 correspondem, respectivamente, às taxas de 42,3% (4 anos) e 49,4% (3 anos) da mesma série. Observe ainda a ressalva de série: a partir de 2022 o IBGE conta apenas empresas empregadoras."
+  "explanation": "1.000 × 37,3% = 373 empresas (IBGE, Demografia das Empresas, divulgação de 2024, referente ao período 2017 to 2022). Os números 423 e 494 correspondem, respectivamente, às taxas de 42,3% (4 anos) e 49,4% (3 anos) da mesma série. Observe ainda a ressalva de série: a partir de 2022 o IBGE conta apenas empresas empregadoras."
 }
 ```
 
@@ -639,7 +639,7 @@ O capstone se entrega em **um dossiê único**, organizado pelos seis estágios,
     "79,0"
   ],
   "correct": 1,
-  "explanation": "18% × 80 = 14,4; 15% × 70 = 10,5; 15% × 90 = 13,5; 60% × 75 = 45,0. A soma é 77,5 — faixa “Essencial” (70–79%) nas faixas de percentual sugeridas para o curso. A alternativa 75,5 desconsidera o peso maior da validação."
+  "explanation": "18% × 80 = 14,4; 15% × 70 = 10,5; 15% × 90 = 13,5; 60% × 75 = 45,0. A soma é 77,5: faixa “Essencial” (70 to 79%) nas faixas de percentual sugeridas para o curso. A alternativa 75,5 desconsidera o peso maior da validação."
 }
 ```
 
@@ -671,7 +671,7 @@ O capstone se entrega em **um dossiê único**, organizado pelos seis estágios,
     "7.200 unidades"
   ],
   "correct": 1,
-  "explanation": "PEP = custos fixos ÷ (preço − custo variável) = 624.000 ÷ (60 − 24) = 624.000 ÷ 36 = 17.333,33, arredondado para 17.334 unidades (método do Sebrae, 2021). Abaixo disso o Ano 1 apresenta prejuízo — daí a exigência de meta comercial compatível no plano de 90 dias."
+  "explanation": "PEP = custos fixos ÷ (preço − custo variável) = 624.000 ÷ (60 − 24) = 624.000 ÷ 36 = 17.333,33, arredondado para 17.334 unidades (método do Sebrae, 2021). Abaixo disso o Ano 1 apresenta prejuízo: daí a exigência de meta comercial compatível no plano de 90 dias."
 }
 ```
 
@@ -687,7 +687,7 @@ O capstone se entrega em **um dossiê único**, organizado pelos seis estágios,
     "Substitui o plano de negócios do Sebrae na instrução do pedido"
   ],
   "correct": 1,
-  "explanation": "O Pronampe é programa de crédito federal instituído pela Lei nº 13.999/2020, com garantia pessoal e envio de dados fiscais pela Receita às instituições financeiras; o art. 6º, § 10 veda a aplicação dos recursos na distribuição de lucros. Não existe “plano padrão gov.br” de Pronampe — o modelo oficial de plano de negócios é o do Sebrae (2021)."
+  "explanation": "O Pronampe é programa de crédito federal instituído pela Lei nº 13.999/2020, com garantia pessoal e envio de dados fiscais pela Receita às instituições financeiras; o art. 6º, § 10 veda a aplicação dos recursos na distribuição de lucros. Não existe “plano padrão gov.br” de Pronampe, o modelo oficial de plano de negócios é o do Sebrae (2021)."
 }
 ```
 
@@ -704,7 +704,7 @@ O capstone se entrega em **um dossiê único**, organizado pelos seis estágios,
     {"left": "Plano de 90 dias e matriz de riscos (8%)", "right": "3 marcos mensais e ao menos 6 riscos com probabilidade, impacto, severidade e mitigação"},
     {"left": "Repartição de valor (5%)", "right": "Percentuais, fundos obrigatórios e teto de distribuição escritos no contrato"}
   ],
-  "explanation": "A rubrica totaliza 100% e cada critério tem uma evidência mínima verificável. Os pesos maiores estão em validação de campo (18%), modelo de negócios (15%) e financeiro (15%) — justamente onde o dossiê costuma ser mais fraco e onde o erro de estágio é mais caro."
+  "explanation": "A rubrica totaliza 100% e cada critério tem uma evidência mínima verificável. Os pesos maiores estão em validação de campo (18%), modelo de negócios (15%) e financeiro (15%): justamente onde o dossiê costuma ser mais fraco e onde o erro de estágio é mais caro."
 }
 ```
 
@@ -716,19 +716,19 @@ O capstone se entrega em **um dossiê único**, organizado pelos seis estágios,
 > - **A ordem é validar e depois formalizar**: 74% das startups em validação não faturam (Sebrae Startups, 2025) e só 37,3% das empresas de 2017 estavam ativas em 2022 (IBGE, 2024);
 > - **Business Model Canvas = 9 blocos**; o Lean Canvas remove quatro e soma quatro; o TLBMC acrescenta as camadas ambiental e social;
 > - **Teoria da Mudança é desenhada de trás para frente**, com pressuposto e indicador em cada elo;
-> - **Reserva legal 5%, dividendo omisso ≥25%, Fundo de Reserva ≥10% e Fundo de Assistência ≥5%** — quatro números, três leis diferentes, e trocá-los é o erro mais frequente em prova;
+> - **Reserva legal 5%, dividendo omisso ≥25%, Fundo de Reserva ≥10% e Fundo de Assistência ≥5%**: quatro números, três leis diferentes, e trocá-los é o erro mais frequente em prova;
 > - **Ponto de equilíbrio = 17.334 unidades** no exemplo da Raiz Viva: conta, não opinião;
-> - **Severidade = Probabilidade × Impacto**, faixas 1–6, 8–12 e 15–25, e toda linha de risco precisa de indicador;
+> - **Severidade = Probabilidade × Impacto**, faixas 1 to 6, 8 to 12 e 15 to 25, e toda linha de risco precisa de indicador;
 > - **Pesos da rubrica somam 100%**: validação 18%, modelo 15%, financeiro 15%, diagnóstico 10%, governança 10%, impacto 10%, 90 dias + riscos 8%, repartição 5%, defesa 5% e ética/fontes 4%;
-> - **Custos e prazos do checklist são estimativas de referência** — confirmar com contador e com a prefeitura ou Junta Comercial local.
+> - **Custos e prazos do checklist são estimativas de referência**: confirmar com contador e com a prefeitura ou Junta Comercial local.
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
-> 1. O capstone se executa em **seis estágios com pesos** — diagnóstico 10%, validação 18%, modelo 15%, financeiro e repartição 20%, governança e impacto 20%, execução, riscos e defesa 17% — e **nada se formaliza antes da validação**;
-> 2. A **sobrevivência é a régua do empreendimento**: 37,3% em 5 anos (IBGE, 2024), 62% em 2 anos (Sebrae/DataSebrae, 2023) e **56,56%** das 18.458 startups sem faturamento (Sebrae Startups, 2025) — daí a prioridade do sinal pago sobre o investimento;
-> 3. As ferramentas são nomeadas e verificadas: **BMC com 9 blocos**, **Lean Canvas** removendo 4 e somando 4, **TLBMC** com camadas ambiental e social, **Ecocanvas** com 3 blocos de impacto, **Lean Startup** (Construir–Medir–Aprender) e **Customer Development** em quatro etapas;
+> 1. O capstone se executa em **seis estágios com pesos**, diagnóstico 10%, validação 18%, modelo 15%, financeiro e repartição 20%, governança e impacto 20%, execução, riscos e defesa 17%, e **nada se formaliza antes da validação**;
+> 2. A **sobrevivência é a régua do empreendimento**: 37,3% em 5 anos (IBGE, 2024), 62% em 2 anos (Sebrae/DataSebrae, 2023) e **56,56%** das 18.458 startups sem faturamento (Sebrae Startups, 2025): daí a prioridade do sinal pago sobre o investimento;
+> 3. As ferramentas são nomeadas e verificadas: **BMC com 9 blocos**, **Lean Canvas** removendo 4 e somando 4, **TLBMC** com camadas ambiental e social, **Ecocanvas** com 3 blocos de impacto, **Lean Startup** (Construir, Medir, Aprender) e **Customer Development** em quatro etapas;
 > 4. A **Teoria da Mudança** é desenhada de **trás para frente** (impacto → resultados → produtos → insumos) e só vale com pressuposto e indicador em cada elo, com baseline, método e responsável;
 > 5. O **plano financeiro de 3 anos** fecha a conta: DRE de R$ 1,2 milhão a R$ 3,456 milhões, margem de **2,0% a 13,7%**, ponto de equilíbrio de **17.334 unidades** e rateio do Ano 3 em **R$ 23.768 + R$ 71.304 + R$ 47.536 + R$ 332.752**;
 > 6. A **governança é percentual escrito**: conselho de **5 a 9**, consultivo de **3 a 5** (IBGC, 2023), reserva legal de **5%**, dividendo omisso de **≥25%**, Fundo de Reserva de **≥10%** e Fundo de Assistência de **≥5%**;
 > 7. A **execução é cronograma e risco**: plano de 90 dias com marcos de **≥3 indicadores**, **≥10 pré-vendas** e desvio de caixa **≤10%**, e matriz viva com **≥6 riscos** calculados por Probabilidade × Impacto;
-> 8. A **rubrica soma 100%** e cobra fonte e ano em **4%** do total: defesa fraca não se conserta com boa intenção — ela se conserta com dado, base legal e evidência de campo.
+> 8. A **rubrica soma 100%** e cobra fonte e ano em **4%** do total: defesa fraca não se conserta com boa intenção: ela se conserta com dado, base legal e evidência de campo.

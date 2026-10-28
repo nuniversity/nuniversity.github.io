@@ -15,11 +15,11 @@ Los sistemas agentivos introducen dificultades únicas que las pruebas de softwa
 - **No-determinismo**: Las salidas del LLM varían entre llamadas, modelos y temperaturas
 - **Efectos secundarios de herramientas**: Los agentes invocan APIs reales, bases de datos y servicios
 - **Flujos multi-paso**: Una consulta desencadena razonamiento, llamadas a herramientas y planificación
-- **Estado**: Los agentes mantienen memoria de conversación entre turnos — el contexto del turno 1 afecta el comportamiento en el turno 5
+- **Estado**: Los agentes mantienen memoria de conversación entre turnos: el contexto del turno 1 afecta el comportamiento en el turno 5
 - **Variabilidad de latencia**: Las llamadas LLM pueden durar de 500ms a 30s
 
 > [!WARNING]
-> Nunca use claves de API de producción o bases de datos en ninguna prueba — unitaria, integración o E2E. Use siempre entornos de prueba dedicados con datos aislados.
+> Nunca use claves de API de producción o bases de datos en ninguna prueba: unitaria, integración o E2E. Use siempre entornos de prueba dedicados con datos aislados.
 
 ---
 
@@ -374,7 +374,7 @@ jobs:
   "question": "Un equipo escribe una prueba para verificar que el grafo del agente contiene todos los nodos necesarios (classify_input, route_query, call_tool, synthesize_response). ¿Qué tipo de prueba es?",
   "options": ["Unitaria", "Integración", "Estructura del grafo", "E2E"],
   "correct": 2,
-  "explanation": "Las pruebas de estructura del grafo validan la topología del agente — asegurando que todos los nodos existan y las conexiones sean correctas."
+  "explanation": "Las pruebas de estructura del grafo validan la topología del agente: asegurando que todos los nodos existan y las conexiones sean correctas."
 }
 ```
 
@@ -427,7 +427,7 @@ jobs:
 > ## Conclusiones Clave
 > - La pirámide de pruebas para agentes tiene cinco capas: análisis estático, unitaria, estructura de grafo, integración y E2E.
 > - Pruebas unitarias deben simular LLM y herramientas para probar la lógica del componente determinísticamente.
-> - Pruebas de estructura del grafo validan la topología — capa única para sistemas agentivos.
+> - Pruebas de estructura del grafo validan la topología: capa única para sistemas agentivos.
 > - Pruebas de integración usan entornos sandbox para verificar ejecución de herramientas.
 > - Escenarios E2E simulan sesiones completas contra staging; son lentos pero de alta confianza.
 > - CI/CD: análisis estático y unitarias en cada commit, integración en PRs, E2E en releases.

@@ -18,7 +18,7 @@ Esta lição aborda os fundamentos: o que o LangFuse oferece, a diferença entre
 
 LangFuse ajuda equipes a:
 
-- **Rastrear** cada etapa de uma chamada LLM — da construção do prompt à resposta do modelo.
+- **Rastrear** cada etapa de uma chamada LLM: da construção do prompt à resposta do modelo.
 - **Avaliar** saídas com pontuações manuais, LLM-como-juiz ou métricas externas.
 - **Gerenciar prompts** com controle de versão e fluxos de implantação.
 - **Monitorar custos, latência e taxas de erro** em dashboards em tempo real.
@@ -91,7 +91,7 @@ Os dados são agrupados em lote e enviados periodicamente (a cada 1 segundo por 
 
 | Característica | Auto-Hospedado (OSS) | LangFuse Nuvem |
 |---|---|---|
-| Esforço de configuração | Alto — requer Docker, PostgreSQL e rede | Baixo — cadastre-se e crie um projeto |
+| Esforço de configuração | Alto, requer Docker, PostgreSQL e rede | Baixo, cadastre-se e crie um projeto |
 | Residência de dados | Controle total | Gerenciado pela LangFuse |
 | Manutenção | Você gerencia upgrades, backups, escalabilidade | Gerenciado pela LangFuse |
 | Custo | Apenas custo de infraestrutura | Plano gratuito + planos pagos |
@@ -114,7 +114,7 @@ Os dados são agrupados em lote e enviados periodicamente (a cada 1 segundo por 
 4. Navegue até **Configurações → Chaves de API**.
 5. Gere uma **chave pública** e uma **chave secreta**.
 
-Mantenha a chave secreta segura — ela autoriza escritas no seu projeto.
+Mantenha a chave secreta segura: ela autoriza escritas no seu projeto.
 
 > [!IMPORTANT]
 > Rotacione suas chaves secretas periodicamente. O LangFuse Nuvem permite gerar múltiplos pares de chaves e revogar os antigos. Configure um lembrete trimestral de rotação. Se uma chave for comprometida, revogue-a imediatamente em **Configurações → Chaves de API**.
@@ -140,7 +140,7 @@ O pacote `langfuse` fornece o cliente de trace. O pacote `langchain-openai` é u
 | REST API | HTTP | ✅ Sempre disponível | Qualquer linguagem pode enviar traces via `POST /api/public/traces` |
 
 > [!NOTE]
-> Este curso foca no SDK Python, mas os conceitos são idênticos em todos os SDKs. O contrato da API é o mesmo — cada SDK é um wrapper leve em torno dos endpoints REST.
+> Este curso foca no SDK Python, mas os conceitos são idênticos em todos os SDKs. O contrato da API é o mesmo: cada SDK é um wrapper leve em torno dos endpoints REST.
 
 ---
 
@@ -365,7 +365,7 @@ print("ID do Trace:", trace.id)
   "question": "Uma chamada LLM em um manipulador de rota FastAPI gerou uma exceção inesperada. Seu trace LangFuse nunca é fechado. Como você deve lidar com isso?",
   "options": [
     "Envolver o trace em um bloco try/finally e chamar trace.end() ou span.end(level='ERROR') na cláusula except",
-    "Ignorar — LangFuse fecha automaticamente traces órfãos",
+    "Ignorar: LangFuse fecha automaticamente traces órfãos",
     "Reiniciar o SDK LangFuse após cada exceção",
     "Definir um hook global de exceção que envia um trace dummy"
   ],

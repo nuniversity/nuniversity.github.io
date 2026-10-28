@@ -1,6 +1,6 @@
 ---
 title: "Agentic RAG"
-description: "Build Agentic RAG (Retrieval-Augmented Generation) systems with LangGraph — retrieval nodes, document store integration, query planning, and multi-step retrieval."
+description: "Build Agentic RAG (Retrieval-Augmented Generation) systems with LangGraph, retrieval nodes, document store integration, query planning, and multi-step retrieval."
 order: 4
 duration: "40 minutes"
 difficulty: "advanced"
@@ -302,7 +302,7 @@ app = builder.compile(checkpointer=MemorySaver())
     "There is no difference"
   ],
   "correct": 1,
-  "explanation": "In Agentic RAG, the agent makes decisions about retrieval — whether to retrieve, what to search for, and whether retrieved results are sufficient."
+  "explanation": "In Agentic RAG, the agent makes decisions about retrieval: whether to retrieve, what to search for, and whether retrieved results are sufficient."
 }
 ```
 

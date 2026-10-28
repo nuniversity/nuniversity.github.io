@@ -69,8 +69,8 @@ function getDomainAccentClass(color: string): string {
 function getScoreRating(pct: number, dict: any): { label: string; color: string } {
   if (pct >= 90) return { label: dict.quizzes?.score?.rating_excellent || 'Excellent! Ready to certify 🚀', color: 'text-green-600 dark:text-green-400' }
   if (pct >= 75) return { label: dict.quizzes?.score?.rating_great || 'Great job! Keep it up 💪', color: 'text-blue-600 dark:text-blue-400' }
-  if (pct >= 60) return { label: dict.quizzes?.score?.rating_good || 'Good effort — review weak areas', color: 'text-yellow-600 dark:text-yellow-400' }
-  return { label: dict.quizzes?.score?.rating_keep || "Keep studying — you'll get there!", color: 'text-red-600 dark:text-red-400' }
+  if (pct >= 60) return { label: dict.quizzes?.score?.rating_good || 'Good effort: review weak areas', color: 'text-yellow-600 dark:text-yellow-400' }
+  return { label: dict.quizzes?.score?.rating_keep || "Keep studying: you'll get there!", color: 'text-red-600 dark:text-red-400' }
 }
 
 export function ScoreReport(props: ScoreReportProps) {
@@ -257,7 +257,7 @@ export function ScoreReport(props: ScoreReportProps) {
 
               {!answer && (
                 <div className="mt-3 text-xs font-medium text-muted-foreground italic">
-                  — {dict.quizzes?.score?.not_scored || 'Not answered — not counted in your score'}
+{dict.quizzes?.score?.not_scored || 'Not answered: not counted in your score'}
                 </div>
               )}
 
@@ -334,7 +334,7 @@ export function ScoreReport(props: ScoreReportProps) {
 
           {mockTimedOut && (
             <div className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 mb-3">
-              <Clock className="w-3.5 h-3.5" /> {dict.quizzes?.exam?.time_expired || 'Time expired — auto-submitted'}
+              <Clock className="w-3.5 h-3.5" /> {dict.quizzes?.exam?.time_expired || 'Time expired: auto-submitted'}
             </div>
           )}
 
@@ -527,7 +527,7 @@ export function ScoreReport(props: ScoreReportProps) {
 
                     {!isAnswered(q, ans) && (
                       <div className="mb-3 text-xs font-medium text-muted-foreground italic">
-                        — {dict.quizzes?.exam?.not_answered || 'Question was not answered'}
+{dict.quizzes?.exam?.not_answered || 'Question was not answered'}
                       </div>
                     )}
 

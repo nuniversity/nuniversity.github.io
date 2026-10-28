@@ -7,7 +7,7 @@ duration: "90 min"
 ---
 # Governança Híbrida: Assembleia, Conselho, Voto e Deveres Fiduciários
 
-Governança é a parte da empresa híbrida que **não pode ser improvisada depois da captação**. Propriedade, voto, quórum e deveres são cláusulas que se escrevem antes de existir conflito — e, uma vez registradas, elas decidem quem convoca a assembleia, quem elege o conselho, quem aprova as contas e quem responde quando a decisão dá errado. Por isso esta matéria é a mais litigiosa de todo o curso: o capital acredita que comprou poder, os trabalhadores acreditam que ganharam assento e a missão acredita que tem direito de veto — e os três, muitas vezes, leram documentos diferentes.
+Governança é a parte da empresa híbrida que **não pode ser improvisada depois da captação**. Propriedade, voto, quórum e deveres são cláusulas que se escrevem antes de existir conflito, e, uma vez registradas, elas decidem quem convoca a assembleia, quem elege o conselho, quem aprova as contas e quem responde quando a decisão dá errado. Por isso esta matéria é a mais litigiosa de todo o curso: o capital acredita que comprou poder, os trabalhadores acreditam que ganharam assento e a missão acredita que tem direito de veto, e os três, muitas vezes, leram documentos diferentes.
 
 ```text
 =====================================================================
@@ -44,7 +44,7 @@ Governança é a parte da empresa híbrida que **não pode ser improvisada depoi
 ```
 
 > [!NOTE]
-> **Híbrido não é tipo societário — e por isso a governança é pactuada.** Não existe, na lei brasileira, a forma "empresa híbrida". O que existe é uma forma existente (sociedade anônima, sociedade limitada, cooperativa ou associação) à qual se **acrescentam assentos, quóruns e regras de excedente** por força do estatuto. A lição anterior mostrou que cada modelo tem anatomia própria; esta lição mostra **quem decide o quê** dentro de cada um deles.
+> **Híbrido não é tipo societário, e por isso a governança é pactuada.** Não existe, na lei brasileira, a forma "empresa híbrida". O que existe é uma forma existente (sociedade anônima, sociedade limitada, cooperativa ou associação) à qual se **acrescentam assentos, quóruns e regras de excedente** por força do estatuto. A lição anterior mostrou que cada modelo tem anatomia própria; esta lição mostra **quem decide o quê** dentro de cada um deles.
 
 Nesta lição você vai:
 
@@ -57,7 +57,7 @@ Nesta lição você vai:
 - montar a **matriz de governança dos cinco modelos** e o veredito comparativo;
 - resolver **sete casos com números** antes de escrever a primeira cláusula do seu estatuto;
 - ler **cinco casos reais** (Mondragon, SEMCO, Coopercitrus, John Lewis e Fagor) e ver o número que a assembleia, o conselho e os eleitores usaram de fato;
-- comparar a **governança híbrida no mundo**: a CIC britânica com teto de 35%, a benefit corporation norte-americana, a SCIC e a SCOP francesas — com fonte e ano para cada mecanismo.
+- comparar a **governança híbrida no mundo**: a CIC britânica com teto de 35%, a benefit corporation norte-americana, a SCIC e a SCOP francesas: com fonte e ano para cada mecanismo.
 
 ---
 
@@ -65,7 +65,7 @@ Nesta lição você vai:
 
 ### 1.1 A pergunta que a governança responde
 
-Toda organização, híbrida ou não, precisa responder cinco perguntas de poder. O que muda de um modelo para o outro é **onde** cada resposta é escrita — na lei, no contrato social ou no estatuto:
+Toda organização, híbrida ou não, precisa responder cinco perguntas de poder. O que muda de um modelo para o outro é **onde** cada resposta é escrita: na lei, no contrato social ou no estatuto:
 
 | Pergunta de poder | Quem responde | Onde se escreve a resposta |
 |---|---|---|
@@ -79,9 +79,9 @@ A regra que une as três formas estudadas no Brasil é simples e cai muito em pr
 
 ### 1.2 Por que o híbrido exige mais cláusula, não menos
 
-Uma empresa tradicional resolve a governança com uma frase: o voto segue o capital. Uma cooperativa resolve com outra: uma pessoa, um voto. A empresa híbrida **não tem frase única** — ela quer capital com retorno, trabalhador com assento, assembleia com quórum e missão com métrica. Sem cláusula expressa, cada canal interpreta o estatuto a seu favor.
+Uma empresa tradicional resolve a governança com uma frase: o voto segue o capital. Uma cooperativa resolve com outra: uma pessoa, um voto. A empresa híbrida **não tem frase única**: ela quer capital com retorno, trabalhador com assento, assembleia com quórum e missão com métrica. Sem cláusula expressa, cada canal interpreta o estatuto a seu favor.
 
-- **🔢 Você sabia?** O Brasil tem **4.400 cooperativas** e **29,0 milhões de cooperados** com direito a voto igual (OCB/AnuárioCoop, base 31/12/2025), enquanto a companhia anônima brasileira resolve o poder com a fórmula do art. 110: *"a cada ação ordinária corresponde 1 (um) voto"*. São duas democracias convivendo no mesmo ordenamento — uma conta pessoas, a outra conta ações.
+- **🔢 Você sabia?** O Brasil tem **4.400 cooperativas** e **29,0 milhões de cooperados** com direito a voto igual (OCB/AnuárioCoop, base 31/12/2025), enquanto a companhia anônima brasileira resolve o poder com a fórmula do art. 110: *"a cada ação ordinária corresponde 1 (um) voto"*. São duas democracias convivendo no mesmo ordenamento: uma conta pessoas, a outra conta ações.
 
 ### 1.3 Os cinco modelos e o órgão que cada um coloca no topo
 
@@ -97,24 +97,24 @@ Uma empresa tradicional resolve a governança com uma frase: o voto segue o capi
 
 ## 2. A companhia anônima: conselho, diretoria e assembleia
 
-### 2.1 Administração binária ou unitária — arts. 138 e 139
+### 2.1 Administração binária ou unitária: arts. 138 e 139
 
 A administração da companhia é **binária** (conselho de administração + diretoria) ou **unitária** (só diretoria, quando o estatuto não cria conselho). Três limites do art. 138 são decisivos:
 
-- **§ 1º** — nas companhias **abertas** e nas de **capital autorizado**, o conselho de administração é **obrigatório**;
-- **§§ 3º e 4º** — nas abertas é **vedado** acumular a presidência do conselho com o cargo de diretor-presidente ou de principal executivo (regra reforçada pela MP nº 1.040/2021 e pela Lei nº 14.195/2021);
-- **Art. 139** — as atribuições do conselho **não podem ser delegadas** ao diretor ou a comissão externa, salvo nos limites da lei.
+- **§ 1º**: nas companhias **abertas** e nas de **capital autorizado**, o conselho de administração é **obrigatório**;
+- **§§ 3º e 4º**: nas abertas é **vedado** acumular a presidência do conselho com o cargo de diretor-presidente ou de principal executivo (regra reforçada pela MP nº 1.040/2021 e pela Lei nº 14.195/2021);
+- **Art. 139**: as atribuições do conselho **não podem ser delegadas** ao diretor ou a comissão externa, salvo nos limites da lei.
 
 > [!IMPORTANT]
 > **Veredito Comparativo**
 > Diante dos **cinco modelos**, o desenho de governança da empresa híbrida se sustenta assim:
-> - **× empresa tradicional:** o conselho é obrigatório nas abertas e o voto segue o capital (art. 110); a híbrida **mantém a estrutura da Lei nº 6.404/1976**, mas acrescenta no estatuto assentos de trabalhadores (art. 140, único) e um comitê de impacto com poder de veto sobre a métrica — coisa que a tradicional não tem;
-> - **× parceria (modelo John Lewis Partnership):** a parceria organiza tudo por contrato e por conselho eleito, com mais de 70.000 colaboradores e busca de lucro **suficiente, não máximo**; a híbrida **não depende de fideicomisso nem de constituição privada** — ela pode chegar ao mesmo lugar por estatuto societário registrado;
-> - **× cooperativa:** a cooperativa dá a assembleia suprema e o voto por pessoa, mas a Lei nº 5.764/1971 é "sem objetivo de lucro" (art. 3º); a híbrida **pode distribuir lucro** e, por isso, precisa escrever no estatuto quanto distribui e quanto reinveste — a cooperativa resolve isso com Fundo de Reserva de **pelo menos 10%** e ATES de **5%** (art. 24, § 3º);
+> - **× empresa tradicional:** o conselho é obrigatório nas abertas e o voto segue o capital (art. 110); a híbrida **mantém a estrutura da Lei nº 6.404/1976**, mas acrescenta no estatuto assentos de trabalhadores (art. 140, único) e um comitê de impacto com poder de veto sobre a métrica: coisa que a tradicional não tem;
+> - **× parceria (modelo John Lewis Partnership):** a parceria organiza tudo por contrato e por conselho eleito, com mais de 70.000 colaboradores e busca de lucro **suficiente, não máximo**; a híbrida **não depende de fideicomisso nem de constituição privada**: ela pode chegar ao mesmo lugar por estatuto societário registrado;
+> - **× cooperativa:** a cooperativa dá a assembleia suprema e o voto por pessoa, mas a Lei nº 5.764/1971 é "sem objetivo de lucro" (art. 3º); a híbrida **pode distribuir lucro** e, por isso, precisa escrever no estatuto quanto distribui e quanto reinveste: a cooperativa resolve isso com Fundo de Reserva de **pelo menos 10%** e ATES de **5%** (art. 24, § 3º);
 > - **× ONG / associação:** a associação tem fins não econômicos (art. 53) e destina o remanescente sem dividir (art. 61); a híbrida **assume a tensão**: pode remunerar capital e, ao mesmo tempo, medir impacto, desde que o estatuto diga qual dos dois prevalece em caso de empate;
-> - **Conclusão:** a empresa híbrida é o único modelo dos cinco que usa a **mesma arquitetura legal da companhia** (assembleia, conselho, diretoria, conselho fiscal) **e** precisa de cláusulas que a lei não prevê — por isso o estatuto, e não a lei, é o documento crítico do projeto.
+> - **Conclusão:** a empresa híbrida é o único modelo dos cinco que usa a **mesma arquitetura legal da companhia** (assembleia, conselho, diretoria, conselho fiscal) **e** precisa de cláusulas que a lei não prevê: por isso o estatuto, e não a lei, é o documento crítico do projeto.
 
-### 2.2 O conselho de administração — arts. 140, 141 e 142
+### 2.2 O conselho de administração: arts. 140, 141 e 142
 
 | Regra | Conteúdo | Artigo |
 |---|---|---|
@@ -125,13 +125,13 @@ A administração da companhia é **binária** (conselho de administração + di
 | Atribuições | Orientação, eleição de diretores, fiscalização, convocação da assembleia, aprovação de contas, ações judiciais, alienação de ativo e indicação de auditores | art. 142, I a IX |
 | Prova documental | A ata tem **efeito perante terceiros** | art. 142, § 1º |
 
-Dois detalhes práticos do art. 142 escapam de vista e cobram em prova: o conselho **convoca** a assembleia quando o conselho de administração não faz (inciso IV) e **autoriza a alienação de ativos** (inciso VIII) — decisões de governança, não de gestão cotidiana.
+Dois detalhes práticos do art. 142 escapam de vista e cobram em prova: o conselho **convoca** a assembleia quando o conselho de administração não faz (inciso IV) e **autoriza a alienação de ativos** (inciso VIII): decisões de governança, não de gestão cotidiana.
 
-### 2.3 A diretoria — arts. 143 a 146
+### 2.3 A diretoria: arts. 143 a 146
 
 A diretoria é eleita pelo conselho (ou pela assembleia, se o estatuto assim quiser), com mandato de até **3 anos**; **até 1/3** dos conselheiros podem ser ao mesmo tempo diretores; os administradores eleitos são obrigatoriamente **acionistas** (art. 146) e respondem pelos **mesmos deveres** dos conselheiros (art. 145). A assimetria importa: quem entra para a diretoria continua sujeito aos arts. 153 a 160.
 
-### 2.4 A assembleia-geral e seus quóruns — arts. 121 a 137
+### 2.4 A assembleia-geral e seus quóruns: arts. 121 a 137
 
 | Deliberação | Instalação / quórum | Artigo |
 |---|---|---|
@@ -148,13 +148,13 @@ A diretoria é eleita pelo conselho (ou pela assembleia, se o estatuto assim qui
 
 Os poderes da assembleia são gerais (art. 121) e **privativos** nas matérias do art. 122: estatuto, eleição de administradores e fiscais, contas, debêntures, transformação, fusão, cisão, dissolução e falência. Nenhuma delas pode ser delegada ao conselho.
 
-- **🔢 Você sabia?** O **voto em separado** e o **voto múltiplo** existem porque o direito brasileiro desenhou a assembleia para **minorias organizadas**: 15% do capital votante elege 1 conselheiro em separado (LSA, art. 141, § 4º) e 10% do capital votante pode concentrar votos num único candidato (art. 141, caput) — mecanismos que uma cooperativa simplesmente não precisa ter, porque lá o voto já é de pessoa.
+- **🔢 Você sabia?** O **voto em separado** e o **voto múltiplo** existem porque o direito brasileiro desenhou a assembleia para **minorias organizadas**: 15% do capital votante elege 1 conselheiro em separado (LSA, art. 141, § 4º) e 10% do capital votante pode concentrar votos num único candidato (art. 141, caput): mecanismos que uma cooperativa simplesmente não precisa ter, porque lá o voto já é de pessoa.
 
-### 2.5 O conselho fiscal — o órgão da minoria (arts. 161 a 165)
+### 2.5 O conselho fiscal, o órgão da minoria (arts. 161 a 165)
 
-O conselho fiscal é o único órgão da companhia que **a minoria pode obrigar a existir**: a instalação cabe a **0,1% das ações com voto** ou a **5% das ações sem voto** (art. 161, § 2º). Ele tem de **3 a 5 membros titulares** e suplentes, eleitos pela assembleia, voto em separado para as classes (art. 161, § 4º), atribuições no art. 163 e — ponto que quase ninguém lê — **os mesmos deveres dos administradores** (art. 165).
+O conselho fiscal é o único órgão da companhia que **a minoria pode obrigar a existir**: a instalação cabe a **0,1% das ações com voto** ou a **5% das ações sem voto** (art. 161, § 2º). Ele tem de **3 a 5 membros titulares** e suplentes, eleitos pela assembleia, voto em separado para as classes (art. 161, § 4º), atribuições no art. 163 e, ponto que quase ninguém lê, **os mesmos deveres dos administradores** (art. 165).
 
-**Exemplo 1 — quanto custa obrigar a instalar o conselho fiscal.** Uma companhia com **10.000.000 de ações votantes** e **2.000.000 de preferenciais sem voto** exige, para o pedido: 0,1% × 10.000.000 = **10.000 votos** ou 5% × 2.000.000 = **100.000 ações sem voto**. Basta, portanto, reunir **10.001 votos** — cerca de **0,1% do capital votante** — para acionar o órgão de fiscalização da minoria. Já as preferenciais sem voto elegem **1** membro e os minoritários de **10%** elegem **mais 1** (art. 161, § 4º).
+**Exemplo 1: quanto custa obrigar a instalar o conselho fiscal.** Uma companhia com **10.000.000 de ações votantes** e **2.000.000 de preferenciais sem voto** exige, para o pedido: 0,1% × 10.000.000 = **10.000 votos** ou 5% × 2.000.000 = **100.000 ações sem voto**. Basta, portanto, reunir **10.001 votos**: cerca de **0,1% do capital votante**: para acionar o órgão de fiscalização da minoria. Já as preferenciais sem voto elegem **1** membro e os minoritários de **10%** elegem **mais 1** (art. 161, § 4º).
 
 ---
 
@@ -170,7 +170,7 @@ O conselho fiscal é o único órgão da companhia que **a minoria pode obrigar 
 | **Ações sem voto** | As preferenciais sem voto podem alcançar **50%** do capital votante | art. 15, § 2º |
 | **Vedação** | Companhia aberta **não** pode ter segunda classe de ações ordinárias | art. 16-A |
 
-### 3.2 Voto múltiplo e voto em separado — art. 141
+### 3.2 Voto múltiplo e voto em separado: art. 141
 
 - **Voto múltiplo:** o acionista que detém **1/10 (um décimo) do capital votante** pode acumular seus votos e aplicá-los **num só candidato** ao conselho, com requerimento protocolado **até 48 horas** antes da assembleia (art. 141, § 1º);
 - **Voto em separado:** **15%** do capital votante ou **10%** das ações sem voto elegem **um conselheiro** em separado, **excluído o controlador** (art. 141, § 4º);
@@ -178,7 +178,7 @@ O conselho fiscal é o único órgão da companhia que **a minoria pode obrigar 
 - **Composição final:** a maioria elege um número de conselheiros **igual ao dos remanescentes, mais um** (art. 141, § 7º);
 - **Dissolução do conselho:** a destituição de conselheiro obriga a **reeleger todo o conselho** (art. 141, § 3º).
 
-**Exemplo 2 — a aritmética do voto múltiplo.** Conselho de **5** membros e **10.000.000 de ações** em circulação: um acionista com **1.000.000 de ações (10% ≥ 1/10)** pode somar **10.000.000 de votos** e concentrá-los **num único candidato**. Outro bloco, com **1.500.000 de ações (15%)**, elege **1** conselheiro em separado, desde que não seja o controlador. Somados, **1.500.000 de ações** já definem **1 de 5** assentos — 20% do conselho com 15% do capital.
+**Exemplo 2, a aritmética do voto múltiplo.** Conselho de **5** membros e **10.000.000 de ações** em circulação: um acionista com **1.000.000 de ações (10% ≥ 1/10)** pode somar **10.000.000 de votos** e concentrá-los **num único candidato**. Outro bloco, com **1.500.000 de ações (15%)**, elege **1** conselheiro em separado, desde que não seja o controlador. Somados, **1.500.000 de ações** já definem **1 de 5** assentos, 20% do conselho com 15% do capital.
 
 ```fillblank
 {
@@ -197,7 +197,7 @@ O conselho fiscal é o único órgão da companhia que **a minoria pode obrigar 
 
 ### 3.3 O que o voto **não** resolve
 
-Voto majoritário não substitui dever fiduciário. O conselheiro eleito pela minoria e o diretor indicado pela maioria respondem pelos **mesmos** arts. 153 a 160 — e, se discordarem, a saída legal é **registrar a divergência em ata**: o dissidente que faz constar sua posição **exime-se** da responsabilidade solidária (art. 158, § 1º).
+Voto majoritário não substitui dever fiduciário. O conselheiro eleito pela minoria e o diretor indicado pela maioria respondem pelos **mesmos** arts. 153 a 160, e, se discordarem, a saída legal é **registrar a divergência em ata**: o dissidente que faz constar sua posição **exime-se** da responsabilidade solidária (art. 158, § 1º).
 
 ---
 
@@ -220,18 +220,18 @@ Voto majoritário não substitui dever fiduciário. O conselheiro eleito pela mi
 
 O art. 154 é a chave de leitura de qualquer empresa híbrida brasileira:
 
-- **Caput** — o administrador deve servir aos **interesses da companhia**, "satisfeitas as exigências do bem público e da função social";
-- **§ 2º, "a"** — é **vedado** ao administrador efetuar, a cargo da companhia, **liberalidade** não prevista no estatuto;
-- **§ 4º** — o mesmo parágrafo autoriza **"a prática de atos gratuitos razoáveis em benefício dos empregados ou da comunidade"**, em vista das responsabilidades sociais da empresa.
+- **Caput**, o administrador deve servir aos **interesses da companhia**, "satisfeitas as exigências do bem público e da função social";
+- **§ 2º, "a"**: é **vedado** ao administrador efetuar, a cargo da companhia, **liberalidade** não prevista no estatuto;
+- **§ 4º**, o mesmo parágrafo autoriza **"a prática de atos gratuitos razoáveis em benefício dos empregados ou da comunidade"**, em vista das responsabilidades sociais da empresa.
 
-Os dois parágrafos parecem se contradizer e não se contradizem: a palavra que reconcilia é **razoável**. Doação de passagem escolar, cesta de Natal, bolsa na comunidade do entorno e mutirão pago pela empresa cabem no § 4º; doar patrimônio a terceiro escolhido pelo diretor, não — e cai no § 2º, com anulabilidade.
+Os dois parágrafos parecem se contradizer e não se contradizem: a palavra que reconcilia é **razoável**. Doação de passagem escolar, cesta de Natal, bolsa na comunidade do entorno e mutirão pago pela empresa cabem no § 4º; doar patrimônio a terceiro escolhido pelo diretor, não, e cai no § 2º, com anulabilidade.
 
 > [!WARNING]
-> **Dever fiduciário não é cláusula de missão.** Escrever "a empresa existe para gerar impacto" no objeto social **não substitui** os arts. 153 a 156. Se o conselho não registrar em ata a decisão de aceitar margem menor em troca de impacto maior, não há prova de que a decisão foi informada e leal — e a ação de responsabilidade (art. 159) parte justamente daí. Impacto sem ata é intenção; impacto com ata é defesa.
+> **Dever fiduciário não é cláusula de missão.** Escrever "a empresa existe para gerar impacto" no objeto social **não substitui** os arts. 153 a 156. Se o conselho não registrar em ata a decisão de aceitar margem menor em troca de impacto maior, não há prova de que a decisão foi informada e leal, e a ação de responsabilidade (art. 159) parte justamente daí. Impacto sem ata é intenção; impacto com ata é defesa.
 
 ### 4.3 Atenção à numeração
 
-O art. 141 da Lei nº 6.404/1976 tem **dois §§ 7º**, não tem § 8º e tem § 9º vetado. **Nunca se cite "art. 141, § 8º"** — a referência não existe no texto consolidado e é um erro que circula em material desatualizado. Da mesma forma, a compatibilidade entre o art. 136 (10 incisos, redação da Lei nº 14.195/2021) e a remissão do art. 137 ("I a VI e IX", redação da Lei nº 10.303/2001) **não foi apurada** nesta pesquisa e não pode ser afirmada como pacífica.
+O art. 141 da Lei nº 6.404/1976 tem **dois §§ 7º**, não tem § 8º e tem § 9º vetado. **Nunca se cite "art. 141, § 8º"**: a referência não existe no texto consolidado e é um erro que circula em material desatualizado. Da mesma forma, a compatibilidade entre o art. 136 (10 incisos, redação da Lei nº 14.195/2021) e a remissão do art. 137 ("I a VI e IX", redação da Lei nº 10.303/2001) **não foi apurada** nesta pesquisa e não pode ser afirmada como pacífica.
 
 ---
 
@@ -258,19 +258,19 @@ O art. 141 da Lei nº 6.404/1976 tem **dois §§ 7º**, não tem § 8º e tem §
 | Responsabilidade | Solidária por culpa ou dolo; vedados parentes até o 2º grau na mesma diretoria | art. 49 |
 | Fiscalização | Conselho Fiscal **3 + 3**, eleitos anualmente, incompatível com a administração | art. 56 |
 
-**Exemplo 3 — as três convocações da cooperativa.** Com **1.000 associados**, a assembleia instala-se com **667** na 1ª convocação (2/3), **501** na 2ª (metade + 1) e **10** na 3ª (art. 40). Fechada a instalação, a deliberação ordinária passa a exigir apenas a **maioria dos presentes** (art. 38, § 3º) — e a reforma do estatuto, **2/3 dos presentes** (art. 46). O associado que é ao mesmo tempo **empregado da cooperativa não vota** (art. 31), e nenhum associado pode mandar procurador (art. 42, § 1º).
+**Exemplo 3, as três convocações da cooperativa.** Com **1.000 associados**, a assembleia instala-se com **667** na 1ª convocação (2/3), **501** na 2ª (metade + 1) e **10** na 3ª (art. 40). Fechada a instalação, a deliberação ordinária passa a exigir apenas a **maioria dos presentes** (art. 38, § 3º), e a reforma do estatuto, **2/3 dos presentes** (art. 46). O associado que é ao mesmo tempo **empregado da cooperativa não vota** (art. 31), e nenhum associado pode mandar procurador (art. 42, § 1º).
 
 ### 5.2 A conta de quórum é de pessoas, não de capital
 
-É aqui que a cooperativa se separa da companhia de forma mais nítida: na S.A., 25% de capital instala a assembleia (art. 125); na cooperativa, 2/3 **das pessoas** (art. 40). Um cooperado com 40% das quotas tem **um voto**, e um cooperado com uma quota mínima tem **um voto**. Se a cooperativa crescer além de **3.000 associados**, o estatuto pode autorizar voto por **delegados** (art. 42, §§ 2º a 4º) — única hipótese em que a representação é admitida.
+É aqui que a cooperativa se separa da companhia de forma mais nítida: na S.A., 25% de capital instala a assembleia (art. 125); na cooperativa, 2/3 **das pessoas** (art. 40). Um cooperado com 40% das quotas tem **um voto**, e um cooperado com uma quota mínima tem **um voto**. Se a cooperativa crescer além de **3.000 associados**, o estatuto pode autorizar voto por **delegados** (art. 42, §§ 2º a 4º): única hipótese em que a representação é admitida.
 
-- **🔢 Você sabia?** Na cooperativa, **o empregado da própria cooperativa perde o voto** (Lei nº 5.764/1971, art. 31) — enquanto na companhia anônima o empregado eleito pelo sindicato **pode** entrar no conselho (LSA, art. 140, único). A mesma pessoa, em duas formas jurídicas, tem posição oposta diante da assembleia: num caso o trabalho afasta do voto, no outro o trabalho abre assento.
+- **🔢 Você sabia?** Na cooperativa, **o empregado da própria cooperativa perde o voto** (Lei nº 5.764/1971, art. 31): enquanto na companhia anônima o empregado eleito pelo sindicato **pode** entrar no conselho (LSA, art. 140, único). A mesma pessoa, em duas formas jurídicas, tem posição oposta diante da assembleia: num caso o trabalho afasta do voto, no outro o trabalho abre assento.
 
 ---
 
 ## 6. Limitada, associação e economia solidária: os quóruns do Código Civil
 
-### 6.1 Sociedade limitada — a assembleia obrigatória
+### 6.1 Sociedade limitada: a assembleia obrigatória
 
 - **Mais de 10 sócios** → a assembleia é **obrigatória** (art. 1.072, § 1º);
 - **Instalação** com **3/4 do capital** (art. 1.074);
@@ -280,13 +280,13 @@ O art. 141 da Lei nº 6.404/1976 tem **dois §§ 7º**, não tem § 8º e tem §
 - **Contas**: assembleia anual em **4 meses**, **sem** a administração e o conselho fiscal (art. 1.078, § 2º);
 - **Convocação por minoria**: **1/5 do capital** (art. 1.073); **voto a distância** admitido (art. 1.080-A).
 
-### 6.2 Associação — a assembleia como dona da missão
+### 6.2 Associação: a assembleia como dona da missão
 
 A associação tem **fins não econômicos** (art. 53), iguais direitos entre associados e compete **privativamente à assembleia** destituir administradores e alterar o estatuto (art. 59), com convocação assegurada a **1/5 dos associados** (art. 60). A administração coletiva decide pela **maioria dos presentes** (art. 48) e as assembleias podem ser realizadas **por meio eletrônico** (art. 48-A, Lei nº 14.382/2022). Dissolvida a associação, o remanescente **não se divide**: vai a entidade de fins idênticos e, na falta, à Fazenda (art. 61).
 
 ### 6.3 Economia solidária no Código Civil
 
-O art. 44, VII (redação da **Lei nº 15.068/2024**) incluiu os **empreendimentos de economia solidária** entre as pessoas jurídicas de direito privado, e o **§ 2º** aplica a eles, **subsidiariamente**, as regras das associações — ou seja, assembleia, maioria dos presentes e destinação sem distribuição.
+O art. 44, VII (redação da **Lei nº 15.068/2024**) incluiu os **empreendimentos de economia solidária** entre as pessoas jurídicas de direito privado, e o **§ 2º** aplica a eles, **subsidiariamente**, as regras das associações: ou seja, assembleia, maioria dos presentes e destinação sem distribuição.
 
 ### 6.4 Órgãos, quóruns e legitimidade: as quatro formas lado a lado
 
@@ -307,20 +307,20 @@ O art. 44, VII (redação da **Lei nº 15.068/2024**) incluiu os **empreendiment
 
 | Regra | Alemanha (MitbestG) | S.A. privada (Brasil) | Estatal (Brasil) |
 |---|---|---|---|
-| Gatilho | **Mais de 2.000 trabalhadores** (§ 1) | **Sem gatilho** — depende do estatuto | **Toda** empresa pública e sociedade de economia mista |
+| Gatilho | **Mais de 2.000 trabalhadores** (§ 1) | **Sem gatilho**: depende do estatuto | **Toda** empresa pública e sociedade de economia mista |
 | Assentos de empregados | **Paridade**: 6+6, 8+8 ou 10+10 (§ 7) | **Facultativo** no estatuto (art. 140, único) | **Garantido** por lei (art. 19) |
 | Eleição | Delegados dos empregados e sindicatos | Voto direto **com os sindicatos** | Lei nº 12.353/2010 (remissão do art. 19, § 1º) |
 | Liderança | Presidente e vice por **2/3**; sem 2/3, 2ª volta paralela (§ 27) | Regra do estatuto | Comitê de indicação (art. 10) |
 | Gênero | Pelo menos **30% de cada sexo** (§ 7º, 3) | Sem regra geral | Pelo menos **30% de mulheres** (art. 19-A) |
-| Faixa intermediária | Abaixo de 2.000 → **1/3** (DrittelbG, 2004) | — | — |
+| Faixa intermediária | Abaixo de 2.000 → **1/3** (DrittelbG, 2004) |, |, |
 
 A Alemanha ainda detalha a composição do lado dos empregados: **4 da empresa + 2 sindicalistas** no esquema 6+6; **6 + 2** no 8+8; e **7 + 3** no 10+10 (MitbestG, § 7). E, se o empate entre os dois lados se repetir, o **presidente recebe voto adicional** (§ 29).
 
 ### 7.2 A estatal brasileira em números
 
-A Lei nº 13.303/2016 fixa conselho de **7 a 11** membros, **no mínimo 3** diretores, avaliação anual da administração, conselho fiscal permanente e comitê de auditoria, com mandato de até **2 anos** e até **3 reconduções** (art. 13). O conselho deve ter pelo menos **25% de independentes** (art. 22, § 2º), **30% de mulheres** (art. 19-A), **1 assento de acionista minoritário** (art. 19, § 2º) e assento de empregados — e as vagas de empregados **não contam** para o cálculo dos independentes (art. 22, § 3º).
+A Lei nº 13.303/2016 fixa conselho de **7 a 11** membros, **no mínimo 3** diretores, avaliação anual da administração, conselho fiscal permanente e comitê de auditoria, com mandato de até **2 anos** e até **3 reconduções** (art. 13). O conselho deve ter pelo menos **25% de independentes** (art. 22, § 2º), **30% de mulheres** (art. 19-A), **1 assento de acionista minoritário** (art. 19, § 2º) e assento de empregados, e as vagas de empregados **não contam** para o cálculo dos independentes (art. 22, § 3º).
 
-**Exemplo 5 — o conselho de 9 membros da estatal.** Faixa legal de 7 a 11 (art. 13, I): 25% × 9 = 2,25 → **2 independentes**; **1 dos minoritários** (art. 19, § 2º); 30% × 9 = 2,7 → **no mínimo 3 mulheres** (art. 19-A), porque 2/9 = 22% ficaria abaixo; e mandato de **até 2 anos**, com até **3 reconduções** (art. 13, VI). Aos administradores aplicam-se as regras da Lei nº 6.404/1976 (art. 16), com vedações do art. 17, § 2º — parlamentares, dirigente de partido, cargo em entidade sindical, fornecedores recentes e conflitos até o 3º grau.
+**Exemplo 5, o conselho de 9 membros da estatal.** Faixa legal de 7 a 11 (art. 13, I): 25% × 9 = 2,25 → **2 independentes**; **1 dos minoritários** (art. 19, § 2º); 30% × 9 = 2,7 → **no mínimo 3 mulheres** (art. 19-A), porque 2/9 = 22% ficaria abaixo; e mandato de **até 2 anos**, com até **3 reconduções** (art. 13, VI). Aos administradores aplicam-se as regras da Lei nº 6.404/1976 (art. 16), com vedações do art. 17, § 2º, parlamentares, dirigente de partido, cargo em entidade sindical, fornecedores recentes e conflitos até o 3º grau.
 
 - **🔢 Você sabia?** A Lei nº 13.303/2016 também obriga as estatais a publicarem **carta anual, política de divulgação, política de dividendos e partes relacionadas, carta de governança e relatório integrado** (art. 8º), com divulgação **permanente na internet** (§ 4º) e **canal de denúncias** reportado ao conselho (arts. 9º e 10). Quem lê essa lista lê, sem perceber, o desenho de uma empresa híbrida: prestação de contas financeira **e** social na mesma página.
 
@@ -328,7 +328,7 @@ A Lei nº 13.303/2016 fixa conselho de **7 a 11** membros, **no mínimo 3** dire
 
 ## 8. Comparados com números: Mondragon, John Lewis e a OCB
 
-### 8.1 Mondragon — um voto por pessoa
+### 8.1 Mondragon: um voto por pessoa
 
 | Indicador | 2024 | 2025 |
 |---|---:|---:|
@@ -339,7 +339,7 @@ A Lei nº 13.303/2016 fixa conselho de **7 a 11** membros, **no mínimo 3** dire
 
 *Fonte: Mondragon, relatório anual de 2024 e balanço de 2025.*
 
-### 8.2 John Lewis Partnership — o lucro "suficiente, não máximo"
+### 8.2 John Lewis Partnership, o lucro "suficiente, não máximo"
 
 | Indicador (exercício 2023/24) | Valor |
 |---|---|
@@ -350,7 +350,7 @@ A Lei nº 13.303/2016 fixa conselho de **7 a 11** membros, **no mínimo 3** dire
 
 *Fonte: John Lewis Partnership, relatório anual 2023/24.*
 
-### 8.3 Cooperativismo brasileiro — a série da OCB
+### 8.3 Cooperativismo brasileiro: a série da OCB
 
 | Indicador | 31/12/2024 | 31/12/2025 |
 |---|---:|---:|
@@ -372,11 +372,11 @@ A Lei nº 13.303/2016 fixa conselho de **7 a 11** membros, **no mínimo 3** dire
 
 *Fontes: Coamo (AGO 2025), Sicredi (2024) e Cotrijal (2024).*
 
-**Exemplo 6 — a sobra da Coamo em perspectiva.** **R$ 694.083.700,52 ÷ 32.000 ≈ R$ 21.690** por cooperado — e como o número real de cooperados é **maior** que 32 mil, a média fica **abaixo de R$ 21,7 mil**. A sobra de **R$ 2,028 bilhões** sobre a receita de **R$ 28,823 bilhões** representa cerca de **7,0%** da receita, aprovada na assembleia de **11/02/2025**. É o inverso exato do que faz a companhia anônima: ali a assembleia decide dividendos; aqui a assembleia decide sobras.
+**Exemplo 6, a sobra da Coamo em perspectiva.** **R$ 694.083.700,52 ÷ 32.000 ≈ R$ 21.690** por cooperado, e como o número real de cooperados é **maior** que 32 mil, a média fica **abaixo de R$ 21,7 mil**. A sobra de **R$ 2,028 bilhões** sobre a receita de **R$ 28,823 bilhões** representa cerca de **7,0%** da receita, aprovada na assembleia de **11/02/2025**. É o inverso exato do que faz a companhia anônima: ali a assembleia decide dividendos; aqui a assembleia decide sobras.
 
-**Exemplo 7 — a matemática da delegação na Mondragon.** `70.085 ÷ 650 ≈ 108` — **cada representante do Congresso responde por cerca de 108 pessoas**. E a conta do resultado: **€ 632 milhões ÷ 70.085 ≈ € 8.990 por pessoa**, algo próximo de **5,6% das vendas**. Na companhia anônima, 10% do capital controla 10% dos votos (art. 110); na Mondragon, o poder acompanha **pessoas**.
+**Exemplo 7, a matemática da delegação na Mondragon.** `70.085 ÷ 650 ≈ 108`, **cada representante do Congresso responde por cerca de 108 pessoas**. E a conta do resultado: **€ 632 milhões ÷ 70.085 ≈ € 8.990 por pessoa**, algo próximo de **5,6% das vendas**. Na companhia anônima, 10% do capital controla 10% dos votos (art. 110); na Mondragon, o poder acompanha **pessoas**.
 
-- **🔢 Você sabia?** O **John Lewis Partnership** reúne **mais de 70.000 colaboradores** em cerca de **60 fóruns** com ~900 representantes, e o seu conselho, com **mais de 60 membros**, decide por **voto secreto** — no exercício 2023/24, com vendas de **£ 12,4 bilhões** e lucro de **£ 56 milhões** (£ 42 milhões sem os itens excepcionais). A Constituição da parceria manda buscar lucro **"suficiente e não máximo"**: a governança, não o balanço, define quanto é suficiente.
+- **🔢 Você sabia?** O **John Lewis Partnership** reúne **mais de 70.000 colaboradores** em cerca de **60 fóruns** com ~900 representantes, e o seu conselho, com **mais de 60 membros**, decide por **voto secreto**: no exercício 2023/24, com vendas de **£ 12,4 bilhões** e lucro de **£ 56 milhões** (£ 42 milhões sem os itens excepcionais). A Constituição da parceria manda buscar lucro **"suficiente e não máximo"**: a governança, não o balanço, define quanto é suficiente.
 
 ---
 
@@ -393,9 +393,9 @@ A Lei nº 13.303/2016 fixa conselho de **7 a 11** membros, **no mínimo 3** dire
 | **Transparência** | Estatuto + CVM se aberta; ata com efeito perante terceiros (art. 142, § 1º) | Contas societárias | Livros obrigatórios + contas anuais com parecer | Relatórios de gestão e contas | Relatório **integrado**: financeiro + impacto |
 | **Base legal** | LSA + CC arts. 1.053 a 1.087 | Contrato social; sociedade de responsabilidade limitada | Lei nº 5.764/1971 | CC arts. 53 a 61; Lei nº 13.019/2014 | LSA/CC + estatuto; estatal: Lei nº 13.303/2016 |
 
-### 9.2 Onde cada modelo cede — e o que o híbrido precisa escrever
+### 9.2 Onde cada modelo cede, e o que o híbrido precisa escrever
 
-A matriz mostra que **nenhum dos quatro modelos anteriores entrega tudo**. A empresa tradicional entrega escala e capital, mas liga o voto ao dinheiro. A parceria entrega governança compartilhada, mas depende de contrato privado e de uma constituição própria. A cooperativa entrega democracia real, mas abre mão do objetivo de lucro (art. 3º da Lei nº 5.764/1971). A ONG entrega missão e veda distribuição (art. 61 do Código Civil), mas não remunera capital. O híbrido é o único que pode somar os quatro — e é justamente por isso que precisa **escrever cada soma no estatuto**, porque a lei não escreveu por ele.
+A matriz mostra que **nenhum dos quatro modelos anteriores entrega tudo**. A empresa tradicional entrega escala e capital, mas liga o voto ao dinheiro. A parceria entrega governança compartilhada, mas depende de contrato privado e de uma constituição própria. A cooperativa entrega democracia real, mas abre mão do objetivo de lucro (art. 3º da Lei nº 5.764/1971). A ONG entrega missão e veda distribuição (art. 61 do Código Civil), mas não remunera capital. O híbrido é o único que pode somar os quatro, e é justamente por isso que precisa **escrever cada soma no estatuto**, porque a lei não escreveu por ele.
 
 ---
 
@@ -413,7 +413,7 @@ A matriz mostra que **nenhum dos quatro modelos anteriores entrega tudo**. A emp
 
 ### 10.2 O Código de Boas Práticas do IBGC
 
-O Código de Boas Práticas do IBGC (5ª edição, 2015) organiza a conduta do conselho em quatro princípios: **transparência**, **equidade**, **prestação de contas** e **responsabilidade social e ambiental**. Nota a direção: dois dos quatro princípios já são, por natureza, princípios de governança híbrida — a responsabilidade social/ambiental não pertence ao direito societário tradicional, e a prestação de contas não pertence só ao terceiro setor. O código é voluntário, mas é a ponte doutrinária entre a assembleia da Lei nº 6.404/1976 e a assembleia de interessados do híbrido.
+O Código de Boas Práticas do IBGC (5ª edição, 2015) organiza a conduta do conselho em quatro princípios: **transparência**, **equidade**, **prestação de contas** e **responsabilidade social e ambiental**. Nota a direção: dois dos quatro princípios já são, por natureza, princípios de governança híbrida: a responsabilidade social/ambiental não pertence ao direito societário tradicional, e a prestação de contas não pertence só ao terceiro setor. O código é voluntário, mas é a ponte doutrinária entre a assembleia da Lei nº 6.404/1976 e a assembleia de interessados do híbrido.
 
 ---
 
@@ -433,11 +433,11 @@ O Código de Boas Práticas do IBGC (5ª edição, 2015) organiza a conduta do c
 
 ### 11.2 Os dois casos de assembleia que mais caem em prova
 
-**Exemplo 4 — a assembleia da companhia, do quórum ao voto.** Companhia com **10.000.000 de votos**: a 1ª convocação instala com **2.500.000** (1/4, art. 125). Presentes **3.000.000**, a deliberação ordinária exige **1.500.001 votos a favor** (maioria absoluta, art. 129). A reforma de estatuto exige **6.666.667 votos dos presentes** (2/3, art. 135) — e, se a matéria for uma das do art. 136, basta **metade** dos votos. Perceba a diferença: **instalar** é questão de presença; **deliberar** é questão de maioria.
+**Exemplo 4, a assembleia da companhia, do quórum ao voto.** Companhia com **10.000.000 de votos**: a 1ª convocação instala com **2.500.000** (1/4, art. 125). Presentes **3.000.000**, a deliberação ordinária exige **1.500.001 votos a favor** (maioria absoluta, art. 129). A reforma de estatuto exige **6.666.667 votos dos presentes** (2/3, art. 135), e, se a matéria for uma das do art. 136, basta **metade** dos votos. Perceba a diferença: **instalar** é questão de presença; **deliberar** é questão de maioria.
 
 **O pedido de conselho fiscal, retomado.** Já calculado na seção 2.5: **10.001 votos** (0,1%) ou **100.000 preferenciais sem voto** (5%) obrigam a instalação do órgão, que tem de **3 a 5 membros** e responde pelos **mesmos deveres** dos administradores (art. 165). É o caminho legal da minoria para **fiscalizar em vez de protestar**.
 
-### 11.3 Caso resolvido — a briga pelo assento e pelo excedente
+### 11.3 Caso resolvido: a briga pelo assento e pelo excedente
 
 **O caso.** Uma sociedade limitada com **4 sócios** (capital) e **28 trabalhadores** (missão) captou investimento prevendo, no plano de negócios, "governança paritária e distribuição de 30% do lucro". Registrado o contrato, a primeira assembleia revelou três textos diferentes na mesa:
 
@@ -445,22 +445,22 @@ O Código de Boas Práticas do IBGC (5ª edição, 2015) organiza a conduta do c
 2. **Os trabalhadores** liam o plano de negócios: "governança paritária", palavra que **não existe em nenhum artigo** citado nesta lição;
 3. **Os investidores** liam o plano financeiro: 30% de distribuição, sem dizer **quem aprova** a distribuição.
 
-**A causa.** O contrato social não continha (i) cláusula de composição do colegiado com assentos de trabalhadores (na limitada, o parágrafo único do art. 140 da LSA nem sequer se aplica — ele rege a companhia anônima); (ii) regra de quórum qualificado para a matéria do excedente (art. 1.076, II, exige **mais da metade do capital**); (iii) nem a proibição de voto em matéria própria do art. 1.074, § 2º, escrita de forma adequada à nova composição.
+**A causa.** O contrato social não continha (i) cláusula de composição do colegiado com assentos de trabalhadores (na limitada, o parágrafo único do art. 140 da LSA nem sequer se aplica: ele rege a companhia anônima); (ii) regra de quórum qualificado para a matéria do excedente (art. 1.076, II, exige **mais da metade do capital**); (iii) nem a proibição de voto em matéria própria do art. 1.074, § 2º, escrita de forma adequada à nova composição.
 
 **A correção, na ordem da seção 11.4:**
 
-- **Passo 1 — quem vota:** dois colegiados, um deliberativo (sócios, voto do capital) e um colegiado de impacto (2 sócios + 2 trabalhadores + 1 independente), com **parecer vinculante** sobre a métrica;
-- **Passo 2 — quóruns:** deliberação ordinária pela maioria dos presentes (art. 48); política do excedente por **mais da metade do capital** (art. 1.076, II);
-- **Passo 3 — conselho:** 5 membros, com **2 assentos de trabalhadores** eleitos pelos colegas de trabalho e mandato de 3 anos, com renovação de 1/3;
-- **Passo 4 — ata:** registro de que o conselho aceitou margem de **12%** em vez de **18%** previstos, em troca da meta de impacto — prova de decisão informada e leal (arts. 153 a 156);
-- **Passo 5 — excedente e relatório:** **70% reinvestidos, 30% distribuídos**, na forma do art. 1.076, II, com relatório integrado publicado anualmente.
+- **Passo 1: quem vota:** dois colegiados, um deliberativo (sócios, voto do capital) e um colegiado de impacto (2 sócios + 2 trabalhadores + 1 independente), com **parecer vinculante** sobre a métrica;
+- **Passo 2: quóruns:** deliberação ordinária pela maioria dos presentes (art. 48); política do excedente por **mais da metade do capital** (art. 1.076, II);
+- **Passo 3: conselho:** 5 membros, com **2 assentos de trabalhadores** eleitos pelos colegas de trabalho e mandato de 3 anos, com renovação de 1/3;
+- **Passo 4, ata:** registro de que o conselho aceitou margem de **12%** em vez de **18%** previstos, em troca da meta de impacto, prova de decisão informada e leal (arts. 153 a 156);
+- **Passo 5: excedente e relatório:** **70% reinvestidos, 30% distribuídos**, na forma do art. 1.076, II, com relatório integrado publicado anualmente.
 
 > [!NOTE]
-> **Nada disso foi inventado.** Cada peça usada no caso já existia: colegiado misto (LSA, art. 140, único, para a S.A.; pactuação societária, na limitada), quórum de maioria do capital (CC, art. 1.076, II), voto em matéria própria vedado (CC, art. 1.074, § 2º), deveres e ata (LSA, arts. 153 a 156) e relatório integrado (Lei nº 13.303/2016, art. 8º, como referência de transparência). A empresa híbrida **não precisa de lei nova** — precisa de redator atento.
+> **Nada disso foi inventado.** Cada peça usada no caso já existia: colegiado misto (LSA, art. 140, único, para a S.A.; pactuação societária, na limitada), quórum de maioria do capital (CC, art. 1.076, II), voto em matéria própria vedado (CC, art. 1.074, § 2º), deveres e ata (LSA, arts. 153 a 156) e relatório integrado (Lei nº 13.303/2016, art. 8º, como referência de transparência). A empresa híbrida **não precisa de lei nova**: precisa de redator atento.
 
 ### 11.4 A ordem de desenho da governança híbrida
 
-Antes de redigir qualquer cláusula, escreva as cinco decisões nesta ordem — elas se condicionam:
+Antes de redigir qualquer cláusula, escreva as cinco decisões nesta ordem: elas se condicionam:
 
 ```dragdrop
 {
@@ -479,7 +479,7 @@ Antes de redigir qualquer cláusula, escreva as cinco decisões nesta ordem — 
     "Registrar em ata os deveres e o conflito de interesses",
     "Escrever a política do excedente e o relatório integrado"
   ],
-  "explanation": "A sequência é irreversível: quem vota define o quórum; o quórum define quem forma o conselho; o conselho precisa de deveres registrados em ata para se defender; e só então faz sentido escrever para onde vai o excedente e o que se publica. Inverter a ordem produz estatuto com cláusula de impacto sem mecanismo de voto — que é a forma mais comum de projeto híbrido fracassar na primeira assembleia."
+  "explanation": "A sequência é irreversível: quem vota define o quórum; o quórum define quem forma o conselho; o conselho precisa de deveres registrados em ata para se defender; e só então faz sentido escrever para onde vai o excedente e o que se publica. Inverter a ordem produz estatuto com cláusula de impacto sem mecanismo de voto: que é a forma mais comum de projeto híbrido fracassar na primeira assembleia."
 }
 ```
 
@@ -489,24 +489,24 @@ Antes de redigir qualquer cláusula, escreva as cinco decisões nesta ordem — 
 
 ### 12.1 Os erros que mais viram processo
 
-1. **Citar "art. 141, § 8º" da Lei nº 6.404/1976** — o dispositivo não existe: há dois §§ 7º, não há § 8º e o § 9º foi vetado;
-2. **Confundir instalação com deliberação** — 1/4 (art. 125) instala; maioria absoluta (art. 129) delibera; 2/3 (art. 135) reforma;
-3. **Tratar o art. 140, único, como obrigatório** — o dispositivo diz *"poderá"*: na S.A. privada a codeterminação é **facultativa**; a obrigatoriedade só existe na estatal (Lei nº 13.303/2016, art. 19);
+1. **Citar "art. 141, § 8º" da Lei nº 6.404/1976**, o dispositivo não existe: há dois §§ 7º, não há § 8º e o § 9º foi vetado;
+2. **Confundir instalação com deliberação**: 1/4 (art. 125) instala; maioria absoluta (art. 129) delibera; 2/3 (art. 135) reforma;
+3. **Tratar o art. 140, único, como obrigatório**, o dispositivo diz *"poderá"*: na S.A. privada a codeterminação é **facultativa**; a obrigatoriedade só existe na estatal (Lei nº 13.303/2016, art. 19);
 4. **Esquecer que o empregado-cooperado não vota** (art. 31) enquanto acredita que "cooperativa é a democracia perfeita";
-5. **Distribuir sobra em associação** — o art. 61 manda o remanescente a entidade de fins idênticos, jamais a associados;
-6. **Aprovar contas com a administração votando** — proibido nas três formas (art. 134, § 1º, da LSA; art. 1.078, § 2º, do Código Civil; art. 44, § 1º, da Lei nº 5.764/1971);
-7. **Confundir voto múltiplo com voto em separado** — o primeiro concentra votos de 1/10 em **um** candidato; o segundo dá **um** assento a 15% do capital, excluído o controlador.
+5. **Distribuir sobra em associação**, o art. 61 manda o remanescente a entidade de fins idênticos, jamais a associados;
+6. **Aprovar contas com a administração votando**: proibido nas três formas (art. 134, § 1º, da LSA; art. 1.078, § 2º, do Código Civil; art. 44, § 1º, da Lei nº 5.764/1971);
+7. **Confundir voto múltiplo com voto em separado**, o primeiro concentra votos de 1/10 em **um** candidato; o segundo dá **um** assento a 15% do capital, excluído o controlador.
 
-### 12.2 O que a pesquisa **não** confirmou — e que não pode virar fato
+### 12.2 O que a pesquisa **não** confirmou, e que não pode virar fato
 
 > [!WARNING]
 > **Itens não verificados nesta aula:**
-> - **Lei nº 12.353/2010** (art. 19, § 1º da Lei nº 13.303/2016): o texto e o processo de eleição dos empregados **não foram lidos** — não descrever como os empregados são eleitos na estatal;
+> - **Lei nº 12.353/2010** (art. 19, § 1º da Lei nº 13.303/2016): o texto e o processo de eleição dos empregados **não foram lidos**: não descrever como os empregados são eleitos na estatal;
 > - **Compatibilidade entre os arts. 136 e 137 da LSA**: não apurada;
 > - **Uso efetivo do art. 140, único** por companhias brasileiras: **não pesquisado**;
-> - **Estudo latino-americano com 371 empresas (2016–2020)**: ano, título e endereço **não capturados** — não citar;
+> - **Estudo latino-americano com 371 empresas (2016 to 2020)**: ano, título e endereço **não capturados**: não citar;
 > - **Razão salarial da Mondragon** (fonte secundária): a fonte primária **não foi localizada**, portanto não afirmar;
-> - **Nº de conselheiros e razão dívida/renda do John Lewis Partnership**: há divergências entre fontes, **não reconciliadas** — usar apenas os números do relatório 2023/24;
+> - **Nº de conselheiros e razão dívida/renda do John Lewis Partnership**: há divergências entre fontes, **não reconciliadas**: usar apenas os números do relatório 2023/24;
 > - **Lei nº 15.068/2024 e Decreto nº 12.784/2025**: apenas o art. 44, VII e § 2º do Código Civil foi lido;
 > - **Projeto legislativo sobre cooperativas** em tramitação: número, ano e situação **não confirmados**;
 > - **Drittelbeteiligungsgesetz (2004)**: o ano e a regra de 1/3 confirmam-se pela remissão do MitbestG, § 1, mas o texto integral **não foi lido**;
@@ -514,62 +514,62 @@ Antes de redigir qualquer cláusula, escreva as cinco decisões nesta ordem — 
 
 ### 12.3 A regra de ouro da matéria
 
-Toda a governança desta lição cabe numa frase: **escreva no estatuto o que a lei deixou em aberto, registre em ata o que a assembleia decidiu e meça o que o estatuto prometeu.** A empresa híbrida não falha por falta de lei — ela falha por falta de cláusula, de ata e de relatório, nessa ordem.
+Toda a governança desta lição cabe numa frase: **escreva no estatuto o que a lei deixou em aberto, registre em ata o que a assembleia decidiu e meça o que o estatuto prometeu.** A empresa híbrida não falha por falta de lei: ela falha por falta de cláusula, de ata e de relatório, nessa ordem.
 
 ---
 
 ## 13. Casos reais: como decidem voto, conselho e assembleia
 
-### 13.1 Cinco casos, cinco mecanismos — todos com número na mesa
+### 13.1 Cinco casos, cinco mecanismos: todos com número na mesa
 
-Os casos abaixo não são exercícios: são decisões registradas em relatório anual, estatuto, ata de assembleia ou sentença de concurso. Cada um mostra **um canal de poder diferente** operando sobre a mesma pergunta — quem manda no excedente.
+Os casos abaixo não são exercícios: são decisões registradas em relatório anual, estatuto, ata de assembleia ou sentença de concurso. Cada um mostra **um canal de poder diferente** operando sobre a mesma pergunta: quem manda no excedente.
 
 | Caso | Quem decide | Mecanismo escrito | Número que decide | Fonte |
 |---|---|---|---|---|
 | **Mondragon** (Espanha, 1956) | Assembleia de associados | 1 pessoa = 1 voto; Congresso de **650** representantes | **≥13%** do lucro de cada cooperativa ao fundo divisional: **€ 13,0 mi** de compensação + **€ 7,05 mi** de offset de prejuízos (2023) | MONDRAGON, Relatório Anual 2023 |
 | **SEMCO** (Brasil, 1953) | **3 eleitos pelos trabalhadores** | SEMCOPAR, rateio **2x/ano** por unidade | **23%** do lucro após imposto da unidade; **39%** na crise de 1990, com corte de **40%** nos salários da direção | HBR/Semler; Gonçalves (1996) |
 | **Coopercitrus** (Brasil, 1976) | Assembleia (AGO) | Estatuto, **art. 60** | Ponderação **3,00 / 1,00 / 0,30** por faixa de movimentação, com atualização pelo **IGP-M**; sobra líquida de **R$ 42,8 mi** (2023) | Coopercitrus, Revista 450 (abr/2024) e Estatuto |
-| **John Lewis** (Reino Unido, 1929) | **Conselho** da plc | Bônus condicional a PBTBE ≥ **£ 150 mi** e dívida < **4x** | **3% = £ 46 mi** em 2021/22; **£ 0** em 2022/23, 2023/24 e 2024/25 | JLP, Annual Report and Accounts 2022–2025 |
-| **Fagor** (Espanha, 1956–2013) | Credores, em concurso de acreedores | Alavancagem da cooperativa industrial | Dívida de ~**€ 859 mi**; pedido de **€ 170 mi** negado; **concurso em 13/11/2013**; **5.642** trabalhadores | El País (2013); Noticias de Gipuzkoa (2013) |
+| **John Lewis** (Reino Unido, 1929) | **Conselho** da plc | Bônus condicional a PBTBE ≥ **£ 150 mi** e dívida < **4x** | **3% = £ 46 mi** em 2021/22; **£ 0** em 2022/23, 2023/24 e 2024/25 | JLP, Annual Report and Accounts 2022 to 2025 |
+| **Fagor** (Espanha, 1956 to 2013) | Credores, em concurso de acreedores | Alavancagem da cooperativa industrial | Dívida de ~**€ 859 mi**; pedido de **€ 170 mi** negado; **concurso em 13/11/2013**; **5.642** trabalhadores | El País (2013); Noticias de Gipuzkoa (2013) |
 
 ### 13.2 O que cada caso prova sobre a governança
 
-**Caso 1 — Mondragon: a solidariedade sai do lucro de quem prospera.** Cada cooperativa destina **no mínimo 13% do lucro** ao fundo divisional de solidariedade; em 2023 isso virou **€ 13,0 milhões** de compensação e **€ 7,05 milhões** de offset de prejuízos entre unidades. O salário oscila entre **80% e 110%** de uma referência anual (LagunAro), com razão mín-máx de **1:3 em 1956**, **1:4,5 nos anos 1970** e **1:6 desde 1988**; a Fundación MONDRAGON gastou **€ 27,8 milhões em 37 programas**. Lição: o "seguro" contra desigualdade entre unidades **não é caridade — é cláusula de rateio do lucro**, e quem decide o rateio é a assembleia de uma federação de **81 cooperativas** com ~70.500 pessoas (2023).
+**Caso 1, Mondragon: a solidariedade sai do lucro de quem prospera.** Cada cooperativa destina **no mínimo 13% do lucro** ao fundo divisional de solidariedade; em 2023 isso virou **€ 13,0 milhões** de compensação e **€ 7,05 milhões** de offset de prejuízos entre unidades. O salário oscila entre **80% e 110%** de uma referência anual (LagunAro), com razão mín-máx de **1:3 em 1956**, **1:4,5 nos anos 1970** e **1:6 desde 1988**; a Fundación MONDRAGON gastou **€ 27,8 milhões em 37 programas**. Lição: o "seguro" contra desigualdade entre unidades **não é caridade, é cláusula de rateio do lucro**, e quem decide o rateio é a assembleia de uma federação de **81 cooperativas** com ~70.500 pessoas (2023).
 
-**Caso 2 — SEMCO: quem elege também reparte.** O SEMCOPAR entrega **23% do lucro após imposto de cada unidade**, duas vezes por ano, a **3 eleitos pelos trabalhadores** — e na crise de 1990 a fatia subiu para **39%**, enquanto os salários da direção cortavam **40%**. Resultado ao longo do período: receita de **US$ 4 milhões (1982)** para **US$ 212 milhões (2003)**, de 90 para 3.000 pessoas e rotatividade **inferior a 2%**. Lição: repartir dinheiro só se sustenta quando vem com repartição de **informação e decisão** — os chefes são avaliados **2x/ano pelos subordinados** e o balanço é mensal por unidade.
+**Caso 2: SEMCO: quem elege também reparte.** O SEMCOPAR entrega **23% do lucro após imposto de cada unidade**, duas vezes por ano, a **3 eleitos pelos trabalhadores**, e na crise de 1990 a fatia subiu para **39%**, enquanto os salários da direção cortavam **40%**. Resultado ao longo do período: receita de **US$ 4 milhões (1982)** para **US$ 212 milhões (2003)**, de 90 para 3.000 pessoas e rotatividade **inferior a 2%**. Lição: repartir dinheiro só se sustenta quando vem com repartição de **informação e decisão**: os chefes são avaliados **2x/ano pelos subordinados** e o balanço é mensal por unidade.
 
-**Caso 3 — Coopercitrus: a justiça distributiva mora no artigo do estatuto.** O **art. 60** do estatuto rateia as sobras com ponderação **3,00** (até R$ 200 mil), **1,00** (até R$ 2 milhões) e **0,30** (acima de R$ 2 milhões) de movimentação, corrigida pelo **IGP-M** — ou seja, o associado que gira menos recebe mais por real movimentado. Em 2023, faturamento de **R$ 8,1 bilhões** (−14%) e **sobra líquida de R$ 42,8 milhões**; a alteração estatutária de 2023 retomou a distribuição monetária, votada na **AGO de 2025**, para **39,8 mil cooperados**. Lição: a ponderação progressiva é o instrumento estatutário de justiça distributiva autorizado pelo art. 4º, VII, da Lei nº 5.764/1971 — e ela só vale porque está **escrita e votada em assembleia**.
+**Caso 3: Coopercitrus: a justiça distributiva mora no artigo do estatuto.** O **art. 60** do estatuto rateia as sobras com ponderação **3,00** (até R$ 200 mil), **1,00** (até R$ 2 milhões) e **0,30** (acima de R$ 2 milhões) de movimentação, corrigida pelo **IGP-M**: ou seja, o associado que gira menos recebe mais por real movimentado. Em 2023, faturamento de **R$ 8,1 bilhões** (−14%) e **sobra líquida de R$ 42,8 milhões**; a alteração estatutária de 2023 retomou a distribuição monetária, votada na **AGO de 2025**, para **39,8 mil cooperados**. Lição: a ponderação progressiva é o instrumento estatutário de justiça distributiva autorizado pelo art. 4º, VII, da Lei nº 5.764/1971, e ela só vale porque está **escrita e votada em assembleia**.
 
-**Caso 4 — John Lewis: o conselho decide, e o bônus não é direito adquirido.** A propriedade está em dois *Settlements in Trust* (**1929 e 1950**) e o *Partnership Bonus* de ~**69.000 Partners** depende de duas condições fixadas pelo conselho: lucro antes de juros, impostos e excepcionais (PBTBE) **≥ £ 150 milhões** e dívida **< 4x**. Em 2021/22 o resultado foi **3% (= 1,5 semana) = £ 46 milhões**; nos três exercícios seguintes, **£ 0**. Os Partners ainda exercem **veto comunitário**: podem barrar contribuições a instituições com mais de **25%** de receitas privadas. Lição: governança híbrida madura **protege o capital social na crise** justamente porque a regra de repasse é limiar, não promessa de campanha.
+**Caso 4: John Lewis: o conselho decide, e o bônus não é direito adquirido.** A propriedade está em dois *Settlements in Trust* (**1929 e 1950**) e o *Partnership Bonus* de ~**69.000 Partners** depende de duas condições fixadas pelo conselho: lucro antes de juros, impostos e excepcionais (PBTBE) **≥ £ 150 milhões** e dívida **< 4x**. Em 2021/22 o resultado foi **3% (= 1,5 semana) = £ 46 milhões**; nos três exercícios seguintes, **£ 0**. Os Partners ainda exercem **veto comunitário**: podem barrar contribuições a instituições com mais de **25%** de receitas privadas. Lição: governança híbrida madura **protege o capital social na crise** justamente porque a regra de repasse é limiar, não promessa de campanha.
 
-**Caso 5 — Fagor: repartir lucro não elimina risco de alavancagem.** A cooperativa industrial acumulou cerca de **€ 859 milhões** de dívida, teve prejuízo de **€ 89 milhões** sobre vendas de **€ 1,167 bilhão** (2012) e teve o pedido de **€ 170 milhões** negado: o Grupo Mondragon aportou ~**€ 300 milhões** e recusou mais **€ 50 milhões**, e o **concurso de acreedores** foi decretado em **13/11/2013**, com **5.642** trabalhadores afetados e mais de 900 ex-cooperados reivindicando **€ 47,8 milhões**. Lição: o mesmo estatuto que reparte sobras com democracia de pessoas **não contém** uma regra de resgate ilimitado — sem cláusula de capital e de endividamento, a assembleia descobre o limite tarde demais.
+**Caso 5, Fagor: repartir lucro não elimina risco de alavancagem.** A cooperativa industrial acumulou cerca de **€ 859 milhões** de dívida, teve prejuízo de **€ 89 milhões** sobre vendas de **€ 1,167 bilhão** (2012) e teve o pedido de **€ 170 milhões** negado: o Grupo Mondragon aportou ~**€ 300 milhões** e recusou mais **€ 50 milhões**, e o **concurso de acreedores** foi decretado em **13/11/2013**, com **5.642** trabalhadores afetados e mais de 900 ex-cooperados reivindicando **€ 47,8 milhões**. Lição: o mesmo estatuto que reparte sobras com democracia de pessoas **não contém** uma regra de resgate ilimitado, sem cláusula de capital e de endividamento, a assembleia descobre o limite tarde demais.
 
-- **🔢 Você sabia?** Na crise de 1990 a SEMCO **aumentou** a repartição para **39%** do lucro, ao mesmo tempo em que cortou **40%** dos salários da direção — enquanto a Fagor, com **5.642** trabalhadores e **~€ 859 milhões** de dívida, foi a concurso em **13/11/2013** sem conseguir o aporte de **€ 170 milhões**. Os dois casos são cooperativas de trabalhadores: um usou a assembleia para **socializar a queda**, o outro foi vencido pelo **calendário dos credores**.
+- **🔢 Você sabia?** Na crise de 1990 a SEMCO **aumentou** a repartição para **39%** do lucro, ao mesmo tempo em que cortou **40%** dos salários da direção: enquanto a Fagor, com **5.642** trabalhadores e **~€ 859 milhões** de dívida, foi a concurso em **13/11/2013** sem conseguir o aporte de **€ 170 milhões**. Os dois casos são cooperativas de trabalhadores: um usou a assembleia para **socializar a queda**, o outro foi vencido pelo **calendário dos credores**.
 
 ---
 
 ## 14. Governança híbrida no mundo: o que outros países já escreveram na lei
 
-### 14.1 Reino Unido — a CIC: *capping* de dividendos em regulamento
+### 14.1 Reino Unido, a CIC: *capping* de dividendos em regulamento
 
-A *Community Interest Company* nasce do **CAICE Act 2004** e das **CIC Regulations 2005**, e resolve por regulamento a pergunta que no Brasil fica só no estatuto: **quanto pode sair para o capital**. O teto é agregado — **no máximo 35% dos lucros distribuíveis** (os outros 65% se reinvestem ou vão à comunidade); por ação, até **5% acima da taxa básica do Banco da Inglaterra**; juros a taxa variável limitados a **4 pontos percentuais acima da taxa base**; e a capacidade ociosa de dividendos **carrega por 5 anos**. Soma-se o *asset lock*: o **CIC Regulator** pode remover diretores, congelar ativos e pedir liquidação quando a venda ocorrer abaixo do mercado. Transparência: *community interest report* anual e registro público. Escala: **37.081 CICs em março/2025**, **8.376 aprovações** em 2024/25 (recorde), **3.832 dissoluções** (10% do registro) e **3.163 conversões** desde 2005. *Fontes: GOV.UK, Community Interest Companies Guidance (09/02/2024); CIC Regulator, Annual Report 2024 to 2025 (23/07/2025).*
+A *Community Interest Company* nasce do **CAICE Act 2004** e das **CIC Regulations 2005**, e resolve por regulamento a pergunta que no Brasil fica só no estatuto: **quanto pode sair para o capital**. O teto é agregado: **no máximo 35% dos lucros distribuíveis** (os outros 65% se reinvestem ou vão à comunidade); por ação, até **5% acima da taxa básica do Banco da Inglaterra**; juros a taxa variável limitados a **4 pontos percentuais acima da taxa base**; e a capacidade ociosa de dividendos **carrega por 5 anos**. Soma-se o *asset lock*: o **CIC Regulator** pode remover diretores, congelar ativos e pedir liquidação quando a venda ocorrer abaixo do mercado. Transparência: *community interest report* anual e registro público. Escala: **37.081 CICs em março/2025**, **8.376 aprovações** em 2024/25 (recorde), **3.832 dissoluções** (10% do registro) e **3.163 conversões** desde 2005. *Fontes: GOV.UK, Community Interest Companies Guidance (09/02/2024); CIC Regulator, Annual Report 2024 to 2025 (23/07/2025).*
 
-### 14.2 Estados Unidos — benefit corporation e ESOP: propósito com relato, propriedade com *vesting*
+### 14.2 Estados Unidos, benefit corporation e ESOP: propósito com relato, propriedade com *vesting*
 
-A **benefit corporation** começou em **Maryland, 1º estado, abril de 2010**; hoje há **41 estados** com lei (CARI, Indiana University, 02/05/2024) e **51 jurisdições globais** (B Lab, Annual Report 2024). Em Delaware, **8 Del. C. §§ 361–368** exige **declaração bienal** de benefício (§ 366); pode haver *benefit director* e *benefit officer*, e a troca de status exige *minimum status vote* classe a classe. Ponto decisivo para esta lição: **não há teto legal de dividendos** — a lei muda propósito, deveres e relato, não a distribuição. O **ESOP** é o outro caminho: **6.609 planos em 6.411 empresas**, **15,1 milhões de participantes** (10,9 milhões ativos ≈ **8% da força privada**) e **mais de US$ 2,1 trilhões** em ativos (NCEO, dados 2023, pub. 2026), com **US$ 164.946 por empregado** e **71%** recebendo *profit-sharing* contra **34%** (Rutgers, 04/04/2024). Caso-piloto do varejo: a **Publix**, com ESOP desde **01/10/1974**, tem **149.213 participantes** e **US$ 14,3 bilhões** (Form 5500/2024) — o empregado é sócio **por ação**, não por voto no dia a dia.
+A **benefit corporation** começou em **Maryland, 1º estado, abril de 2010**; hoje há **41 estados** com lei (CARI, Indiana University, 02/05/2024) e **51 jurisdições globais** (B Lab, Annual Report 2024). Em Delaware, **8 Del. C. §§ 361 to 368** exige **declaração bienal** de benefício (§ 366); pode haver *benefit director* e *benefit officer*, e a troca de status exige *minimum status vote* classe a classe. Ponto decisivo para esta lição: **não há teto legal de dividendos**, a lei muda propósito, deveres e relato, não a distribuição. O **ESOP** é o outro caminho: **6.609 planos em 6.411 empresas**, **15,1 milhões de participantes** (10,9 milhões ativos ≈ **8% da força privada**) e **mais de US$ 2,1 trilhões** em ativos (NCEO, dados 2023, pub. 2026), com **US$ 164.946 por empregado** e **71%** recebendo *profit-sharing* contra **34%** (Rutgers, 04/04/2024). Caso-piloto do varejo: a **Publix**, com ESOP desde **01/10/1974**, tem **149.213 participantes** e **US$ 14,3 bilhões** (Form 5500/2024), o empregado é sócio **por ação**, não por voto no dia a dia.
 
-### 14.3 França — SCIC e SCOP: a repartição escrita em lei, não em estatuto
+### 14.3 França, SCIC e SCOP: a repartição escrita em lei, não em estatuto
 
-A **SCIC** (*société coopérative d'intérêt collectif*), pela **loi n° 2001-624 de 17/07/2001** e o décret 2002-241, admite SARL de **3 a 100 sócios**, SAS ou SA; exige **3 categorias obrigatórias de sócios**, vota **1 pessoa = 1 voto** e destina **no mínimo 57,5% do resultado às reservas impartageáveis** (podendo chegar a 100%), com coletividades públicas detendo até **50% do capital**. A **SCOP**, pela **loi 47-1775/1947**, reparte em três chapas: **trabalho ≥ 25%**, **reservas ≥ 16%** e **dividendos de capital ≤ 33%**. Escala (Coop FR, *Chiffres clés* 2024): **1.417 SCICs** com 15.720 assalariados e € 1,6 bilhão; **2.723 SCOPs** com 62.685 assalariados e € 6,7 bilhões. E a Itália completa o quadro: a **società benefit** (L. 208/2015, commi 376–384, vigente desde 01/01/2016) obriga ***relazione di impatto*** anexada ao balanço, **sem teto de dividendos e sem incentivo fiscal** — e já soma **5.540 empresas (+20%)** e 241 mil addetti no fim de 2025 (pesquisa Nativa/Intesa Sanpaolo/InfoCamere/Univ. Pádova/Assobenefit, 18/03/2026).
+A **SCIC** (*société coopérative d'intérêt collectif*), pela **loi n° 2001-624 de 17/07/2001** e o décret 2002-241, admite SARL de **3 a 100 sócios**, SAS ou SA; exige **3 categorias obrigatórias de sócios**, vota **1 pessoa = 1 voto** e destina **no mínimo 57,5% do resultado às reservas impartageáveis** (podendo chegar a 100%), com coletividades públicas detendo até **50% do capital**. A **SCOP**, pela **loi 47-1775/1947**, reparte em três chapas: **trabalho ≥ 25%**, **reservas ≥ 16%** e **dividendos de capital ≤ 33%**. Escala (Coop FR, *Chiffres clés* 2024): **1.417 SCICs** com 15.720 assalariados e € 1,6 bilhão; **2.723 SCOPs** com 62.685 assalariados e € 6,7 bilhões. E a Itália completa o quadro: a **società benefit** (L. 208/2015, commi 376 to 384, vigente desde 01/01/2016) obriga ***relazione di impatto*** anexada ao balanço, **sem teto de dividendos e sem incentivo fiscal**, e já soma **5.540 empresas (+20%)** e 241 mil addetti no fim de 2025 (pesquisa Nativa/Intesa Sanpaolo/InfoCamere/Univ. Pádova/Assobenefit, 18/03/2026).
 
-### 14.4 Os regimes lado a lado — e a escala de cada um
+### 14.4 Os regimes lado a lado, e a escala de cada um
 
 Primeiro, o mecanismo de governança e o limite de repartição de cada forma híbrida:
 
 | País | Forma híbrida | Mecanismo de governança | Repartição / limite | Fonte |
 |---|---|---|---|---|
 | Reino Unido | **CIC** | Ltd ou plc + poderes do *CIC Regulator*; *community interest report* anual | **35%** dos lucros distribuíveis; **5%** acima do BoE por ação; juros **+4 p.p.**; capacidade ociosa por **5 anos** | GOV.UK (2024); CIC Regs 2005 |
-| EUA | **Benefit corporation** | *Benefit director*; *status vote*; relatório anual ou bienal | **Sem teto legal** de dividendos — o dever é de propósito | 8 Del. C. §§ 361–368; CARI (2024) |
+| EUA | **Benefit corporation** | *Benefit director*; *status vote*; relatório anual ou bienal | **Sem teto legal** de dividendos, o dever é de propósito | 8 Del. C. §§ 361 to 368; CARI (2024) |
 | EUA | **ESOP** | Fiduciário do plano; divulgação em **Form 5500** | *Vesting* progressivo e distribuição ao sair do plano | NCEO (2026); Rutgers (2024) |
 | França | **SCIC** | **3 categorias** de sócios; **1 = 1 voto**; revisão quinquenal | **≥ 57,5%** do resultado às reservas impartageáveis | loi 2001-624; décret 2002-241 |
 | França | **SCOP** | **1 = 1 voto** entre trabalhadores-sócios | Trabalho **≥ 25%**; reservas **≥ 16%**; capital **≤ 33%** | loi 47-1775/1947; les-scop.coop (2025) |
@@ -579,47 +579,47 @@ Depois, quantas entidades cada regime realmente move:
 
 | País / regime | Nº de entidades | Indicador-chave | Fonte / ano |
 |---|---:|---|---|
-| Reino Unido — CIC | **37.081** | 8.376 novas em 2024/25 | CIC Regulator (jul/2025) |
-| EUA — ESOP | **6.411 empresas** (6.609 planos) | 15,1 mi de participantes | NCEO (2026) |
-| EUA — benefit corp. | **41 estados** | 51 jurisdições globais | CARI (2024); B Lab (2024) |
-| França — SCIC | **1.417** | € 1,6 bi de faturamento | Coop FR (2024) |
-| França — SCOP | **2.723** | € 6,7 bi de faturamento | Coop FR (2024) |
-| Itália — società benefit | **5.540 (+20%)** | 241 mil addetti | Pesquisa nacional (mar/2026) |
-| Brasil — cooperativas | **4.384** | 25,8 mi de cooperados | Anuário OCB (2025) |
-| Mundo — cooperativas | **3 milhões** | 280 mi de empregos (10% dos ocupados) | ACI; World Cooperative Monitor 2025 |
+| Reino Unido: CIC | **37.081** | 8.376 novas em 2024/25 | CIC Regulator (jul/2025) |
+| EUA: ESOP | **6.411 empresas** (6.609 planos) | 15,1 mi de participantes | NCEO (2026) |
+| EUA: benefit corp. | **41 estados** | 51 jurisdições globais | CARI (2024); B Lab (2024) |
+| França: SCIC | **1.417** | € 1,6 bi de faturamento | Coop FR (2024) |
+| França: SCOP | **2.723** | € 6,7 bi de faturamento | Coop FR (2024) |
+| Itália: società benefit | **5.540 (+20%)** | 241 mil addetti | Pesquisa nacional (mar/2026) |
+| Brasil: cooperativas | **4.384** | 25,8 mi de cooperados | Anuário OCB (2025) |
+| Mundo: cooperativas | **3 milhões** | 280 mi de empregos (10% dos ocupados) | ACI; World Cooperative Monitor 2025 |
 
-- **🔢 Você sabia?** Uma CIC pode **carregar por 5 anos** a capacidade de dividendos que não usou no ano — o teto de **35% dos lucros distribuíveis** é anual, não vitalício. Em 2024/25 o registro britânico cresceu com **8.376 aprovações** (recorde) e fechou em **37.081 CICs**, mas também registrou **3.832 dissoluções** — 10% do total: a forma híbrida serve tanto para **começar** quanto para **encerrar** um projeto com o patrimônio travado em benefício da comunidade.
+- **🔢 Você sabia?** Uma CIC pode **carregar por 5 anos** a capacidade de dividendos que não usou no ano, o teto de **35% dos lucros distribuíveis** é anual, não vitalício. Em 2024/25 o registro britânico cresceu com **8.376 aprovações** (recorde) e fechou em **37.081 CICs**, mas também registrou **3.832 dissoluções**, 10% do total: a forma híbrida serve tanto para **começar** quanto para **encerrar** um projeto com o patrimônio travado em benefício da comunidade.
 
 ```dragdrop
 {
   "question": "Ordene as normas de governança híbrida internacional pela data de entrada em vigor, da mais antiga à mais recente:",
   "items": [
-    "França — SCOP: loi n° 47-1775 de 1947",
-    "França — SCIC: loi n° 2001-624 de 17/07/2001",
-    "Reino Unido — CIC: CAICE Act 2004 e CIC Regulations 2005",
-    "EUA — benefit corporation: Maryland, 1º estado, abril de 2010",
-    "Itália — società benefit: L. 208/2015, com vigência em 01/01/2016"
+    "França: SCOP: loi n° 47-1775 de 1947",
+    "França: SCIC: loi n° 2001-624 de 17/07/2001",
+    "Reino Unido: CIC: CAICE Act 2004 e CIC Regulations 2005",
+    "EUA: benefit corporation: Maryland, 1º estado, abril de 2010",
+    "Itália: società benefit: L. 208/2015, com vigência em 01/01/2016"
   ],
   "correctOrder": [
-    "França — SCOP: loi n° 47-1775 de 1947",
-    "França — SCIC: loi n° 2001-624 de 17/07/2001",
-    "Reino Unido — CIC: CAICE Act 2004 e CIC Regulations 2005",
-    "EUA — benefit corporation: Maryland, 1º estado, abril de 2010",
-    "Itália — società benefit: L. 208/2015, com vigência em 01/01/2016"
+    "França: SCOP: loi n° 47-1775 de 1947",
+    "França: SCIC: loi n° 2001-624 de 17/07/2001",
+    "Reino Unido: CIC: CAICE Act 2004 e CIC Regulations 2005",
+    "EUA: benefit corporation: Maryland, 1º estado, abril de 2010",
+    "Itália: società benefit: L. 208/2015, com vigência em 01/01/2016"
   ],
   "explanation": "A ordem cronológica mostra que a repartição legal de resultados nasceu no pós-guerra (SCOP, 1947), ganhou a fórmula de reservas coletivas em 2001 (SCIC), foi seguida pelo capping britânico (2004/2005), pelo propósito com relato nos EUA (Maryland, abril de 2010) e pelo relatório de impacto italiano (L. 208/2015, vigente desde 01/01/2016). Cada marco resolve um problema que o anterior deixou aberto: 1947 reparte entre trabalho e capital, 2001 obriga três categorias de sócios, 2004 trava a distribuição em 35%, 2010 cria o dever de propósito e 2015 obriga a medir o impacto no balanço."
 }
 ```
 
 > [!WARNING]
-> **O que os digests não confirmaram — não transforme em fato:**
-> - **Alemanha (eG):** não foi localizado teto legal genérico de dividendos no GenG — em regra, o limite consta da *Satzung* (estatuto); confirmar antes de afirmar;
-> - **EUA (L3C, Vermont):** a liberdade de distribuição veio de fonte de 2008 e **não foi confirmada** no texto de 11 V.S.A. §§ 4161–4163;
-> - **Reino Unido (CIC):** alíquota fiscal específica **não verificada** — afirmar apenas o *asset lock*, o capping de 35% e o relato anual;
-> - **EUA (ESOP):** incentivos fiscais na aquisição de ações **não verificados** — não citar valores de crédito;
+> **O que os digests não confirmaram: não transforme em fato:**
+> - **Alemanha (eG):** não foi localizado teto legal genérico de dividendos no GenG: em regra, o limite consta da *Satzung* (estatuto); confirmar antes de afirmar;
+> - **EUA (L3C, Vermont):** a liberdade de distribuição veio de fonte de 2008 e **não foi confirmada** no texto de 11 V.S.A. §§ 4161 to 4163;
+> - **Reino Unido (CIC):** alíquota fiscal específica **não verificada**: afirmar apenas o *asset lock*, o capping de 35% e o relato anual;
+> - **EUA (ESOP):** incentivos fiscais na aquisição de ações **não verificados**: não citar valores de crédito;
 > - **Itália (società benefit):** o texto consultado indica ausência de incentivo fiscal no momento, mas regras transitórias **não confirmadas**;
-> - **Empresas B no Brasil:** 342 (Valor, jun/2026), +350 (jun/2025) e +500 (Sistema B, mar/2026) — critérios divergem e **não foram reconciliados**;
-> - **Ano de fundação do movimento B Corp:** fontes divergem (2006 no B Lab; 2002 em matéria brasileira) — não afirmar ano sem checagem institucional.
+> - **Empresas B no Brasil:** 342 (Valor, jun/2026), +350 (jun/2025) e +500 (Sistema B, mar/2026): critérios divergem e **não foram reconciliados**;
+> - **Ano de fundação do movimento B Corp:** fontes divergem (2006 no B Lab; 2002 em matéria brasileira): não afirmar ano sem checagem institucional.
 
 ---
 
@@ -653,7 +653,7 @@ Depois, quantas entidades cada regime realmente move:
     "Só existe na Alemanha, pelo MitbestG"
   ],
   "correct": 2,
-  "explanation": "O art. 140, parágrafo único (Lei nº 10.303/2001) diz que o estatuto \"poderá\" prever empregados eleitos em votação direta com os sindicatos — é facultativo. Já o art. 19 da Lei nº 13.303/2016 garante, por lei, a participação de empregados e de acionistas minoritários (§ 2º: um assento dos minoritários) em toda empresa pública e sociedade de economia mista. E o MitbestG, na Alemanha, só se aplica acima de 2.000 trabalhadores (§ 1)."
+  "explanation": "O art. 140, parágrafo único (Lei nº 10.303/2001) diz que o estatuto \"poderá\" prever empregados eleitos em votação direta com os sindicatos: é facultativo. Já o art. 19 da Lei nº 13.303/2016 garante, por lei, a participação de empregados e de acionistas minoritários (§ 2º: um assento dos minoritários) em toda empresa pública e sociedade de economia mista. E o MitbestG, na Alemanha, só se aplica acima de 2.000 trabalhadores (§ 1)."
 }
 ```
 
@@ -733,7 +733,7 @@ Depois, quantas entidades cada regime realmente move:
     "Em todas, cabe exclusivamente ao conselho fiscal aprovar as contas"
   ],
   "correct": 2,
-  "explanation": "A mesma solução está escrita três vezes: art. 134, § 1º, da LSA; art. 1.078, § 2º, do Código Civil; e art. 44, § 1º, da Lei nº 5.764/1971. O órgão que administra esclarece, mas não vota nas contas — conflito de interesses resolvido por norma expressa. O conselho fiscal emite parecer, não aprova."
+  "explanation": "A mesma solução está escrita três vezes: art. 134, § 1º, da LSA; art. 1.078, § 2º, do Código Civil; e art. 44, § 1º, da Lei nº 5.764/1971. O órgão que administra esclarece, mas não vota nas contas: conflito de interesses resolvido por norma expressa. O conselho fiscal emite parecer, não aprova."
 }
 ```
 
@@ -749,7 +749,7 @@ Depois, quantas entidades cada regime realmente move:
     "15% das ações com direito a voto"
   ],
   "correct": 2,
-  "explanation": "O art. 161, § 2º, da LSA fixa 0,1% das ações com voto ou 5% das sem voto para requerer a instalação do conselho fiscal. Os 15% do capital votante servem ao voto em separado de conselheiro (art. 141, § 4º, I), e o 1/4 é o quórum de instalação da assembleia (art. 125) — institutos que não se confundem."
+  "explanation": "O art. 161, § 2º, da LSA fixa 0,1% das ações com voto ou 5% das sem voto para requerer a instalação do conselho fiscal. Os 15% do capital votante servem ao voto em separado de conselheiro (art. 141, § 4º, I), e o 1/4 é o quórum de instalação da assembleia (art. 125): institutos que não se confundem."
 }
 ```
 
@@ -781,7 +781,7 @@ Depois, quantas entidades cada regime realmente move:
     "A Mondragon opera como companhia anônima de capital aberto"
   ],
   "correct": 1,
-  "explanation": "Mondragon (2024): 1 voto por pessoa, Congresso de 650 representantes para 70.085 pessoas (≈ 1 por 108), vendas de € 11.213 milhões e resultado de € 632 milhões — federação de cooperativas, não companhia aberta. John Lewis Partnership (2023/24): mais de 70.000 colaboradores, cerca de 60 fóruns, conselho com mais de 60 membros e voto secreto, vendas de £ 12,4 bilhões e lucro de £ 56 milhões, com a busca de lucro suficiente e não máximo inscrita na Constituição da parceria."
+  "explanation": "Mondragon (2024): 1 voto por pessoa, Congresso de 650 representantes para 70.085 pessoas (≈ 1 por 108), vendas de € 11.213 milhões e resultado de € 632 milhões: federação de cooperativas, não companhia aberta. John Lewis Partnership (2023/24): mais de 70.000 colaboradores, cerca de 60 fóruns, conselho com mais de 60 membros e voto secreto, vendas de £ 12,4 bilhões e lucro de £ 56 milhões, com a busca de lucro suficiente e não máximo inscrita na Constituição da parceria."
 }
 ```
 
@@ -813,7 +813,7 @@ Depois, quantas entidades cada regime realmente move:
     "39%"
   ],
   "correct": 1,
-  "explanation": "13% é a regra Mondragon: em 2023 viraram € 13,0 milhões de compensação e € 7,05 milhões de offset de prejuízos entre unidades (MONDRAGON, Relatório Anual 2023). 23% é a fórmula do SEMCOPAR da SEMCO — repartição do lucro após imposto da unidade, 2x por ano, a 3 eleitos pelos trabalhadores — e 39% foi o pico dessa mesma repartição na crise de 1990, quando a direção cortou 40% do salário. 8% não corresponde a nenhum dos três mecanismos."
+  "explanation": "13% é a regra Mondragon: em 2023 viraram € 13,0 milhões de compensação e € 7,05 milhões de offset de prejuízos entre unidades (MONDRAGON, Relatório Anual 2023). 23% é a fórmula do SEMCOPAR da SEMCO, repartição do lucro após imposto da unidade, 2x por ano, a 3 eleitos pelos trabalhadores, e 39% foi o pico dessa mesma repartição na crise de 1990, quando a direção cortou 40% do salário. 8% não corresponde a nenhum dos três mecanismos."
 }
 ```
 
@@ -821,15 +821,15 @@ Depois, quantas entidades cada regime realmente move:
 {
   "question": "Associe cada instituto de governança à sua base legal correta:",
   "pairs": [
-    {"left": "Voto múltiplo de 1/10 do capital votante", "right": "LSA, art. 141, caput — acumulação de votos num só candidato ao conselho"},
-    {"left": "Voto em separado de 15% do capital votante", "right": "LSA, art. 141, § 4º — um conselheiro eleito pela minoria, excluído o controlador"},
-    {"left": "Assembleia suprema e 1 voto por associado", "right": "Lei nº 5.764/1971, arts. 38 e 42 — vedado o mandatário (art. 42, § 1º)"},
-    {"left": "Convocação da assembleia por 1/5 dos associados", "right": "Código Civil, art. 60 — direito da minoria na associação de fins não econômicos"},
-    {"left": "Assento de empregados garantido por lei", "right": "Lei nº 13.303/2016, art. 19 — estatais, com 1 assento de acionista minoritário (§ 2º)"},
-    {"left": "Paridade de 6+6, 8+8 e 10+10 no conselho", "right": "MitbestG alemão, §§ 1 e 7 — disparador de mais de 2.000 trabalhadores"},
-    {"left": "Atos gratuitos razoáveis em benefício da comunidade", "right": "LSA, art. 154, § 4º — limite do que a companhia pode dar sem liberalidade vedada"}
+    {"left": "Voto múltiplo de 1/10 do capital votante", "right": "LSA, art. 141, caput: acumulação de votos num só candidato ao conselho"},
+    {"left": "Voto em separado de 15% do capital votante", "right": "LSA, art. 141, § 4º: um conselheiro eleito pela minoria, excluído o controlador"},
+    {"left": "Assembleia suprema e 1 voto por associado", "right": "Lei nº 5.764/1971, arts. 38 e 42: vedado o mandatário (art. 42, § 1º)"},
+    {"left": "Convocação da assembleia por 1/5 dos associados", "right": "Código Civil, art. 60: direito da minoria na associação de fins não econômicos"},
+    {"left": "Assento de empregados garantido por lei", "right": "Lei nº 13.303/2016, art. 19: estatais, com 1 assento de acionista minoritário (§ 2º)"},
+    {"left": "Paridade de 6+6, 8+8 e 10+10 no conselho", "right": "MitbestG alemão, §§ 1 e 7: disparador de mais de 2.000 trabalhadores"},
+    {"left": "Atos gratuitos razoáveis em benefício da comunidade", "right": "LSA, art. 154, § 4º: limite do que a companhia pode dar sem liberalidade vedada"}
   ],
-  "explanation": "Cada mecanismo pertence a um regime diferente: minoria na companhia (art. 141), democracia de pessoas na cooperativa (arts. 38 e 42), minoria na associação (art. 60), codeterminação obrigatória na estatal (art. 19) e codeterminação por disparador na Alemanha (MitbestG). O art. 154, § 4º, é o único deles que fala de impacto — e é o que autoriza a empresa híbrida a gastar com a comunidade dentro da Lei nº 6.404/1976."
+  "explanation": "Cada mecanismo pertence a um regime diferente: minoria na companhia (art. 141), democracia de pessoas na cooperativa (arts. 38 e 42), minoria na associação (art. 60), codeterminação obrigatória na estatal (art. 19) e codeterminação por disparador na Alemanha (MitbestG). O art. 154, § 4º, é o único deles que fala de impacto, e é o que autoriza a empresa híbrida a gastar com a comunidade dentro da Lei nº 6.404/1976."
 }
 ```
 
@@ -852,23 +852,23 @@ Depois, quantas entidades cada regime realmente move:
 
 > [!WARNING]
 > **Armadilhas desta lição:**
-> - **Não existe "art. 141, § 8º"** na Lei nº 6.404/1976 — há dois §§ 7º e um § 9º vetado;
-> - **1/4 instala, maioria absoluta delibera, 2/3 reforma** — três quóruns, três artigos (125, 129 e 135);
+> - **Não existe "art. 141, § 8º"** na Lei nº 6.404/1976: há dois §§ 7º e um § 9º vetado;
+> - **1/4 instala, maioria absoluta delibera, 2/3 reforma**: três quóruns, três artigos (125, 129 e 135);
 > - **O art. 140, único, é facultativo** ("poderá"): na S.A. privada a codeterminação depende do estatuto; a obrigatoriedade é das estatais (Lei nº 13.303/2016, art. 19);
-> - **Na cooperativa, 1 voto é de pessoa e o quórum é de associados** — e o empregado da cooperativa **não vota** (art. 31);
+> - **Na cooperativa, 1 voto é de pessoa e o quórum é de associados**, e o empregado da cooperativa **não vota** (art. 31);
 > - **Quem administra não vota nas contas** nas três formas (LSA, art. 134, § 1º; CC, art. 1.078, § 2º; Lei nº 5.764/1971, art. 44, § 1º);
 > - **Voto múltiplo ≠ voto em separado**: 1/10 concentra votos num candidato; 15% elege um conselheiro em separado;
-> - **O art. 154, § 4º, não autoriza liberalidade ilimitada** — autoriza atos gratuitos **razoáveis**, sob pena de violar o § 2º, "a";
-> - **A Lei nº 12.353/2010, os arts. 136/137 e os projetos legislativos não foram verificados** — não afirme como fato.
+> - **O art. 154, § 4º, não autoriza liberalidade ilimitada**: autoriza atos gratuitos **razoáveis**, sob pena de violar o § 2º, "a";
+> - **A Lei nº 12.353/2010, os arts. 136/137 e os projetos legislativos não foram verificados**: não afirme como fato.
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
 > 1. A governança híbrida **não cria direito novo**: soma canais de voto (capital, pessoa, trabalho e sociedade civil) sobre a estrutura legal da companhia, da cooperativa ou da associação;
-> 2. Na S.A., o conselho tem **no mínimo 3 membros**, mandato de até **3 anos**, é obrigatório nas abertas (art. 138, § 1º) e **não acumula** presidência com direção-presidente — e a minoria pode obrigar o conselho fiscal com **0,1%** dos votantes (art. 161, § 2º);
+> 2. Na S.A., o conselho tem **no mínimo 3 membros**, mandato de até **3 anos**, é obrigatório nas abertas (art. 138, § 1º) e **não acumula** presidência com direção-presidente, e a minoria pode obrigar o conselho fiscal com **0,1%** dos votantes (art. 161, § 2º);
 > 3. O voto tem quatro mecanismos: **1 ação = 1 voto** (art. 110), **plural até 10** (art. 110-A), **múltiplo de 1/10** e **em separado de 15%** (art. 141);
-> 4. Os **arts. 153 a 165** são a espinha da governança: diligência, função social, lealdade, conflito, informação e responsabilidade — e o **art. 154, § 4º** é a porta legal do impacto, desde que **razoável**;
+> 4. Os **arts. 153 a 165** são a espinha da governança: diligência, função social, lealdade, conflito, informação e responsabilidade, e o **art. 154, § 4º** é a porta legal do impacto, desde que **razoável**;
 > 5. Na cooperativa, a assembleia é **órgão supremo** (art. 38), o voto é **por pessoa** (art. 42), o quórum vai de **667 a 501 a 10** para 1.000 associados (art. 40) e a administração é **só de associados** (art. 47);
 > 6. A codeterminação é **facultativa na S.A.** (art. 140, único), **obrigatória na estatal** (Lei nº 13.303/2016, art. 19, com 30% de mulheres pelo art. 19-A) e **por disparador de 2.000 trabalhadores** na Alemanha (MitbestG, §§ 1 e 7);
 > 7. Os comparados dão a escala: **Mondragon** com 70.085 pessoas, 650 representantes e € 632 milhões de resultado; **John Lewis** com mais de 70.000 colaboradores e £ 56 milhões de lucro; a **OCB** com 4.400 cooperativas, 29,0 milhões de cooperados e R$ 61,2 bilhões de sobras;
-> 8. Escreva no estatuto o que a lei deixou em aberto, **registre em ata** o que a assembleia decidiu e **meça** o que o estatuto prometeu — e trate cada item não verificado como lacuna, nunca como fato;
-> 9. Os **casos reais** confirmam a regra: Mondragon rateia **≥13%** do lucro, SEMCO reparte **23%** (e **39%** na crise) por eleição dos trabalhadores, a Coopercitrus aplica o **art. 60** do estatuto e o John Lewis só paga bônus com PBTBE ≥ **£ 150 mi** e dívida < **4x** — e no mundo a CIC trava a distribuição em **35%**, a SCOP em **33%** e a SCIC obriga **57,5%** às reservas, sempre com fonte e ano.
+> 8. Escreva no estatuto o que a lei deixou em aberto, **registre em ata** o que a assembleia decidiu e **meça** o que o estatuto prometeu, e trate cada item não verificado como lacuna, nunca como fato;
+> 9. Os **casos reais** confirmam a regra: Mondragon rateia **≥13%** do lucro, SEMCO reparte **23%** (e **39%** na crise) por eleição dos trabalhadores, a Coopercitrus aplica o **art. 60** do estatuto e o John Lewis só paga bônus com PBTBE ≥ **£ 150 mi** e dívida < **4x**, e no mundo a CIC trava a distribuição em **35%**, a SCOP em **33%** e a SCIC obriga **57,5%** às reservas, sempre com fonte e ano.

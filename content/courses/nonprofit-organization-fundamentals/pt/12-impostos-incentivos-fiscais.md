@@ -7,7 +7,7 @@ duration: "120 min"
 ---
 # Impostos e Incentivos Fiscais para ONGs
 
-Toda ONG convive, ao mesmo tempo, com dois mundos tributários: o mundo dos **benefícios** (imunidades, isenções, certificações e incentivos que fazem o doador economizar) e o mundo das **obrigações** (escrituração, declarações, retenções e prestação de contas). Separar bem esses dois mundos — e dominar a transição que está acontecendo entre eles — é o que distingue a entidade sólida da entidade que perde certificação, glosa repasse público, descobre tarde demais que a "isenção" nunca existiu ou orça compras com um custo que cresce silenciosamente.
+Toda ONG convive, ao mesmo tempo, com dois mundos tributários: o mundo dos **benefícios** (imunidades, isenções, certificações e incentivos que fazem o doador economizar) e o mundo das **obrigações** (escrituração, declarações, retenções e prestação de contas). Separar bem esses dois mundos, e dominar a transição que está acontecendo entre eles, é o que distingue a entidade sólida da entidade que perde certificação, glosa repasse público, descobre tarde demais que a "isenção" nunca existiu ou orça compras com um custo que cresce silenciosamente.
 
 O mapa completo do regime das organizações sem fins lucrativos (OSC) tem esta arquitetura em camadas:
 
@@ -39,7 +39,7 @@ O mapa completo do regime das organizações sem fins lucrativos (OSC) tem esta 
 ```
 
 > [!NOTE]
-> "Ser sem fins lucrativos" **não** é sinônimo de "não pagar nada". A imunidade é a regra geral do terceiro setor, mas ela é **condicionada e fiscalizada**: descumprir os requisitos do art. 12 da Lei nº 9.532/1997, perder a CEBAS ou deixar de entregar uma declaração obrigatória significa voltar a recolher normalmente — em certos casos com juros e multa sobre um período que a fiscalização pode cobrar retroativamente.
+> "Ser sem fins lucrativos" **não** é sinônimo de "não pagar nada". A imunidade é a regra geral do terceiro setor, mas ela é **condicionada e fiscalizada**: descumprir os requisitos do art. 12 da Lei nº 9.532/1997, perder a CEBAS ou deixar de entregar uma declaração obrigatória significa voltar a recolher normalmente: em certos casos com juros e multa sobre um período que a fiscalização pode cobrar retroativamente.
 
 Nesta lição você vai:
 
@@ -49,7 +49,7 @@ Nesta lição você vai:
 - medir **gratuidade, percentual de SUS e renovação** da CEBAS-Saúde;
 - simular **quanto o doador PF e PJ economiza** e qual o teto real de cada incentivo;
 - interpretar a **redução linear de 10%** da LC nº 224/2025 e o que a LC nº 235/2026 preservou;
-- ler a **linha do tempo da reforma tributária (2023–2033)** e orçar o **IBS/CBS no custo das compras** da entidade;
+- ler a **linha do tempo da reforma tributária (2023 to 2033)** e orçar o **IBS/CBS no custo das compras** da entidade;
 - montar o **calendário de obrigações acessórias de 2026** e a divulgação da **renúncia fiscal nas notas**;
 - calcular o **IRRF de aluguéis e salários** com a tabela de 2026 e o **redutor da Lei nº 15.270/2025**;
 - distinguir **doação, subvenção e contraprestação** e conferir os **dois tetos** de cada doação empresarial;
@@ -72,7 +72,7 @@ O erro mais caro da gestão fiscal de uma ONG não é matemático: é conceitual
 | **Não incidência** | O fato gerador **não acontece** na hipótese narrada pela lei | LC nº 116/2003, art. 2 (ISS); LC nº 214/2025, art. 6 (IBS/CBS) | Doação sem contraprestação em benefício do doador |
 | **Benefício do MROSC / qualificação** | Vantagem ligada a **instrumento, cadastro ou certificação** | Lei nº 13.019/2014, arts. 84-B e 84-C; LC nº 187/2021 (CEBAS) | Doação de empresa até 2% da receita bruta do doador; isenção da contribuição patronal |
 
-**CUIDADO:** isenção pode ser revogada por lei ordinária; imunidade constitucional só pode ser afastada por emenda (dentro dos limites do art. 60, § 4º, da CF). Já o **CEBAS é certificação**: ele não cria um benefício novo — ele **destrava** a imunidade do art. 195, § 7º, enquanto durar e enquanto os requisitos forem mantidos.
+**CUIDADO:** isenção pode ser revogada por lei ordinária; imunidade constitucional só pode ser afastada por emenda (dentro dos limites do art. 60, § 4º, da CF). Já o **CEBAS é certificação**: ele não cria um benefício novo: ele **destrava** a imunidade do art. 195, § 7º, enquanto durar e enquanto os requisitos forem mantidos.
 
 ### 1.2 A árvore de decisão do benefício
 
@@ -114,7 +114,7 @@ A ENTIDADE QUER SABER QUAL REGIME SE APLICA
 | **O que cobre** | IRPJ, CSLL e outros impostos sobre patrimônio, renda e serviços, ligados ao objeto | IRPJ, CSLL e COFINS de filantrópicas, recreativas, culturais, científicas e associações civis | Contribuições patronais sobre a folha da própria entidade (Lei nº 8.212/1991, art. 22) | Doação de empresa até 2% da receita bruta do doador; bens móveis irrecuperáveis/apreendidos da RFB |
 | **Condição-chave** | Cumprir o art. 12 (alíneas "a" a "h") | Atender as exigências legais; consta do **item 34** da IN RFB 2.307/2026 | **Certificação CEBAS** vigente + requisitos do art. 3º da LC 187/2021 | A OSC deve ter **ao menos uma das 13 finalidades** do art. 84-C |
 | **Quem controla** | RFB (imunidade é declarada e fiscalizada) | RFB | Ministério da Saúde (SAES/DCEBAS), MEC (e-CEBAS) e MDS (CGCEB) | A própria entidade e o doador |
-| **Pode perder?** | Sim — art. 14 da Lei nº 9.532/1997 (suspensão, pelo art. 32 da Lei nº 9.430/1996) | Sim — revogação legislativa | Sim — não renovação ou descumprimento de percentuais | Sim — perda de finalidade ou de regularidade |
+| **Pode perder?** | Sim, art. 14 da Lei nº 9.532/1997 (suspensão, pelo art. 32 da Lei nº 9.430/1996) | Sim, revogação legislativa | Sim, não renovação ou descumprimento de percentuais | Sim, perda de finalidade ou de regularidade |
 | **Risco típico** | Escrituração incompleta ou remuneração irregular de dirigentes | Confundir isenção com imunidade | Queda de SUS ou de gratuidade em ano de renovação | Campanha político-partidária veda o benefício (art. 84-C, parágrafo único) |
 
 - **🔢 Você sabia?** O **PIS/PASEP e a COFINS vigem até 31/12/2026**: pela EC nº 132/2023 e pela LC nº 214/2025, a CBS só passa a ser cobrada a partir de 2027, e 2026 é o último ano do sistema atual. Quem ainda calcula PIS/COFINS "para os próximos anos" está com o plano de contas um ciclo atrás.
@@ -127,7 +127,7 @@ A **CF, art. 150, VI, "c"** veda à União, aos estados, ao Distrito Federal e a
 
 A lei de regência é a **Lei nº 9.532/1997**.
 
-### 2.1 Os oito requisitos do art. 12 — checklist de auditoria
+### 2.1 Os oito requisitos do art. 12: checklist de auditoria
 
 | Alínea | Requisito | O que a fiscalização procura | Frequência do problema |
 |---|---|---|---|
@@ -141,44 +141,44 @@ A lei de regência é a **Lei nº 9.532/1997**.
 | **h** | Cumprir os demais requisitos fixados em lei | Requisitos setoriais e da certificação | Variável |
 
 > [!IMPORTANT]
-> **A alínea "f" é a grande surpresa das auditorias.** A entidade imune **continua obrigada a atuar como fonte pagadora**: retém e recolhe o IRRF dos aluguéis e serviços que paga a pessoas físicas. Deixar de reter é descumprir o art. 12, "f" — ou seja, um dos pilares da própria imunidade, e não uma irregularidade acessória qualquer.
+> **A alínea "f" é a grande surpresa das auditorias.** A entidade imune **continua obrigada a atuar como fonte pagadora**: retém e recolhe o IRRF dos aluguéis e serviços que paga a pessoas físicas. Deixar de reter é descumprir o art. 12, "f": ou seja, um dos pilares da própria imunidade, e não uma irregularidade acessória qualquer.
 
 ### 2.2 Os cinco artigos que a gestão precisa conhecer
 
 | Artigo | O que regula | Ponto crítico |
 |---|---|---|
 | **Art. 12** | Requisitos gerais da imunidade | Descumprido **qualquer** item, a imunidade deixa de ser aplicável |
-| **Art. 13** | Doações recebidas | Alínea "c" alterada pela **Lei nº 13.204/2015**: beneficiária deve ser OSC da Lei nº 13.019/2014 que cumpra os arts. 3º e 16 da Lei nº 9.790/1999 — **independentemente de certificação** |
+| **Art. 13** | Doações recebidas | Alínea "c" alterada pela **Lei nº 13.204/2015**: beneficiária deve ser OSC da Lei nº 13.019/2014 que cumpra os arts. 3º e 16 da Lei nº 9.790/1999: **independentemente de certificação** |
 | **Art. 14** | **Suspensão** da imunidade | Operacionalizada pelo **art. 32 da Lei nº 9.430/1996**: apurado o fato em processo fiscal, a imunidade fica suspensa |
 | **Art. 15** | **Isenção de IRPJ, CSLL e COFINS** | Redação alterada pela LC nº 187/2021; alcança filantrópicas, recreativas, culturais, científicas e associações civis sem fins lucrativos |
 | **Art. 22** | Limite das deduções de **pessoas físicas** | Doações (inclusive) limitadas a **6% do imposto de renda devido** |
 
-### 2.3 Exemplo 1 — quanto vale a isenção do art. 15 para uma associação cultural
+### 2.3 Exemplo 1: quanto vale a isenção do art. 15 para uma associação cultural
 
 Uma associação civil cultural sem fins lucrativos apura **superávit de R$ 300.000,00** no exercício.
 
 1. **Situação atual (com o benefício):** a entidade é isenta de IRPJ, CSLL e COFINS pelo **art. 15 da Lei nº 9.532/1997** (item 34 da IN RFB 2.307/2026, preservado pela LC nº 235/2026) → recolhimento sobre o superávit = **R$ 0,00**;
 2. **Cenário contrafactual (sem o benefício):** carga aproximada de IRPJ + CSLL sobre o resultado ≈ **34%** →
    - IRPJ/adicional e CSLL somados: 300.000 × 0,34 = **R$ 102.000,00/ano**;
-3. **Leitura de gestão:** o benefício equivale a **R$ 102.000,00 por ano** de capacidade de missão — ou a **34% de cada R$ 1,00** de superávit;
+3. **Leitura de gestão:** o benefício equivale a **R$ 102.000,00 por ano** de capacidade de missão: ou a **34% de cada R$ 1,00** de superávit;
 4. **Contrapartida:** o mesmo superávit sem escrituração regular ou com remuneração irregular de dirigentes não é "economizado": é **tributo devido + juros + multa**, calculado sobre os exercícios atingidos.
 
 > [!NOTE]
-> A isenção do art. 15 **não depende de CEBAS** — ela alcança associações civis e instituições filantrópicas, recreativas, culturais e científicas que atendam às exigências legais. Por isso ela aparece expressamente como "gasto tributário não alcançado pela redução linear" no **item 34** da IN RFB 2.307/2026.
+> A isenção do art. 15 **não depende de CEBAS**: ela alcança associações civis e instituições filantrópicas, recreativas, culturais e científicas que atendam às exigências legais. Por isso ela aparece expressamente como "gasto tributário não alcançado pela redução linear" no **item 34** da IN RFB 2.307/2026.
 
 ---
 
 ## 3. Imunidade previdenciária: CF art. 195, § 7º e LC nº 187/2021
 
-Em termos de economia real, este é o **maior benefício tributário disponível** para ONGs brasileiras — porque a folha de pagamento é o maior custo de quase toda entidade de serviço.
+Em termos de economia real, este é o **maior benefício tributário disponível** para ONGs brasileiras: porque a folha de pagamento é o maior custo de quase toda entidade de serviço.
 
 A **CF, art. 195, § 7º** isenta de contribuição para a seguridade social as entidades beneficentes que atendam às exigências estabelecidas em lei. A norma de regência é a **LC nº 187/2021**, que **revogou a Lei nº 12.101/2009** (ementa do art. 47, II).
 
 ### 3.1 Os quatro pontos essenciais da LC nº 187/2021
 
-- **Art. 1º — abrangência:** as contribuições dos **incisos I, III e IV do *caput* do art. 195** e do **art. 239 da CF**, relativas à própria entidade, a todas as suas atividades e aos seus empregados e segurados;
-- **Art. 3º — requisitos gerais:** vedação à remuneração de dirigentes; aplicação integral das rendas no País; **escrituração segregada** por fonte de recursos; certidões de regularidade; guarda de documentos por 10 anos; auditoria quando acima do limite do art. 3º, II, da LC nº 123/2006; destinação do remanescente a entidade beneficente certificada;
-- **Art. 4º — limite:** a imunidade **não se estende a outra pessoa jurídica mantida** pela entidade — filiais, empresas operacionais e mantidas separadas continuam sendo contribuintes;
+- **Art. 1º: abrangência:** as contribuições dos **incisos I, III e IV do *caput* do art. 195** e do **art. 239 da CF**, relativas à própria entidade, a todas as suas atividades e aos seus empregados e segurados;
+- **Art. 3º: requisitos gerais:** vedação à remuneração de dirigentes; aplicação integral das rendas no País; **escrituração segregada** por fonte de recursos; certidões de regularidade; guarda de documentos por 10 anos; auditoria quando acima do limite do art. 3º, II, da LC nº 123/2006; destinação do remanescente a entidade beneficente certificada;
+- **Art. 4º, limite:** a imunidade **não se estende a outra pessoa jurídica mantida** pela entidade, filiais, empresas operacionais e mantidas separadas continuam sendo contribuintes;
 - **Vedação de campanhas político-partidárias ou eleitorais**, em eco ao art. 16 da Lei nº 9.790/1999.
 
 ### 3.2 A folha sem CEBAS: alíquotas do art. 22 da Lei nº 8.212/1991
@@ -192,42 +192,42 @@ A **CF, art. 195, § 7º** isenta de contribuição para a seguridade social as 
 | Empregador doméstico | **12%** | Lei nº 8.212/1991, arts. 24 e 24º |
 
 > [!NOTE]
-> O antigo **art. 55 da Lei nº 8.212/1991** (isenção de 60% para quem atendia o SUS) está **revogado** (MP nº 446/2008 e Lei nº 12.101/2009). Hoje **não existe "benefício de 60%" na previdência**: ou a entidade tem **CEBAS** e a imunidade integral do art. 195, § 7º, ou recolhe normalmente. Se alguém repetir "60%" em palestra ou edital, pergunte a base legal — nasce daí a divergência.
+> O antigo **art. 55 da Lei nº 8.212/1991** (isenção de 60% para quem atendia o SUS) está **revogado** (MP nº 446/2008 e Lei nº 12.101/2009). Hoje **não existe "benefício de 60%" na previdência**: ou a entidade tem **CEBAS** e a imunidade integral do art. 195, § 7º, ou recolhe normalmente. Se alguém repetir "60%" em palestra ou edital, pergunte a base legal: nasce daí a divergência.
 
-### 3.3 Exemplo 2 — economia da CEBAS sobre a folha (conta completa)
+### 3.3 Exemplo 2: economia da CEBAS sobre a folha (conta completa)
 
 Hospital filantrópico com **folha anual de R$ 1.200.000,00**, classificação de risco **médio** (RAT 2%) e receita de serviços de saúde de R$ 1.200.000,00, com **62% de atendimentos ao SUS**.
 
-**Passo 1 — sem CEBAS:**
+**Passo 1: sem CEBAS:**
 
 - contribuição patronal: 1.200.000 × 20% = **R$ 240.000,00**;
 - RAT: 1.200.000 × 2% = **R$ 24.000,00**;
 - total anual: 240.000 + 24.000 = **R$ 264.000,00**.
 
-**Passo 2 — com CEBAS vigente:** a imunidade do CF art. 195, § 7º (LC 187/2021, art. 4º) elimina a contribuição patronal sobre a folha da **própria entidade** → **R$ 0,00**.
+**Passo 2: com CEBAS vigente:** a imunidade do CF art. 195, § 7º (LC 187/2021, art. 4º) elimina a contribuição patronal sobre a folha da **própria entidade** → **R$ 0,00**.
 
-**Passo 3 — economia bruta:**
+**Passo 3: economia bruta:**
 
 - por ano: 264.000 − 0 = **R$ 264.000,00**;
 - ao longo de um certificado de **3 anos**: 264.000 × 3 = **R$ 792.000,00**.
 
-**Passo 4 — a contrapartida (gratuidade, art. 12, III):** com SUS ≥ 50%, a gratuidade mínima é de **5%** da receita de serviços de saúde:
+**Passo 4: a contrapartida (gratuidade, art. 12, III):** com SUS ≥ 50%, a gratuidade mínima é de **5%** da receita de serviços de saúde:
 
 - 1.200.000 × 5% = **R$ 60.000,00/ano** (→ 180.000,00 em 3 anos).
 
-**Passo 5 — economia líquida do projeto:**
+**Passo 5: economia líquida do projeto:**
 
 - por ano: 264.000 − 60.000 = **R$ 204.000,00**;
 - em 3 anos: 792.000 − 180.000 = **R$ 612.000,00**.
 
-**Passo 6 — teste de robustez:** mesmo que a gratuidade exigida fosse a máxima (**20%**, hipótese do art. 12, I), o custo seria 1.200.000 × 20% = R$ 240.000,00 e ainda assim restaria economia de 264.000 − 240.000 = **R$ 24.000,00/ano**. A conta, portanto, costuma fechar — o que não elimina o risco de **perder** o certificado no meio do caminho.
+**Passo 6, teste de robustez:** mesmo que a gratuidade exigida fosse a máxima (**20%**, hipótese do art. 12, I), o custo seria 1.200.000 × 20% = R$ 240.000,00 e ainda assim restaria economia de 264.000 − 240.000 = **R$ 24.000,00/ano**. A conta, portanto, costuma fechar, o que não elimina o risco de **perder** o certificado no meio do caminho.
 
 ### 3.4 O limite que quase ninguém lê: o art. 4º da LC nº 187/2021
 
 > [!IMPORTANT]
 > **A imunidade é da entidade certificada, não do grupo.** Se a OSC mantiver uma **outra pessoa jurídica** (consórcio, empresa operadora, filial, sociedade empresária), essa PJ mantida **continua contribuinte** normalmente: o art. 4º da LC nº 187/2021 estende a imunidade à própria entidade, a todas as suas atividades e aos seus empregados e segurados, mas **não se estende a outra PJ mantida**. Antes de montar uma holding ou uma filial, simule a folha dessa PJ sem imunidade.
 
-Adicionalmente, o **art. 149-B, parágrafo único, da CF** (incluído pela EC nº 132/2023) estabelece que IBS e CBS observam as imunidades do art. 150, VI, **não se aplicando a ambos os tributos o disposto no art. 195, § 7º** — ou seja, a isenção de contribuições da seguridade social **não se estende a IBS/CBS**. A leitura desse comando com o art. 9º da LC nº 214/2025 é o objeto da seção 7.
+Adicionalmente, o **art. 149-B, parágrafo único, da CF** (incluído pela EC nº 132/2023) estabelece que IBS e CBS observam as imunidades do art. 150, VI, **não se aplicando a ambos os tributos o disposto no art. 195, § 7º**: ou seja, a isenção de contribuições da seguridade social **não se estende a IBS/CBS**. A leitura desse comando com o art. 9º da LC nº 214/2025 é o objeto da seção 7.
 
 ---
 
@@ -257,30 +257,30 @@ A **LC nº 187/2021** unificou o regime das entidades beneficentes em três áre
 | SUS ≥ 30% e < 50% | **10%** | art. 12, II |
 | SUS ≥ 50% | **5%** | art. 12, III |
 
-### 4.3 Exemplo 3 — quanto custa cada faixa de gratuidade
+### 4.3 Exemplo 3: quanto custa cada faixa de gratuidade
 
 Entidade com receita de serviços de saúde de **R$ 2.000.000,00**:
 
 1. **55% de atendimentos ao SUS** → art. 12, III → 2.000.000 × 5% = **R$ 100.000,00/ano**;
 2. **40% de atendimentos ao SUS** → art. 12, II → 2.000.000 × 10% = **R$ 200.000,00/ano**;
 3. **25% de atendimentos ao SUS** → art. 12, I → 2.000.000 × 20% = **R$ 400.000,00/ano**;
-4. **diferença entre as hipóteses 1 e 2:** 200.000 − 100.000 = **R$ 100.000,00/ano** — mais do que o custo de uma analista de prestação de contas;
-5. **atenção ao requisito de habilitação:** com 40% de SUS a entidade **não** satisfaz o art. 9º (que exige 60%) — nesse cenário a via de habilitação seria o art. 7º, II (serviços gratuitos) ou III (promoção da saúde), com a gratuidade do art. 12, II.
+4. **diferença entre as hipóteses 1 e 2:** 200.000 − 100.000 = **R$ 100.000,00/ano**: mais do que o custo de uma analista de prestação de contas;
+5. **atenção ao requisito de habilitação:** com 40% de SUS a entidade **não** satisfaz o art. 9º (que exige 60%): nesse cenário a via de habilitação seria o art. 7º, II (serviços gratuitos) ou III (promoção da saúde), com a gratuidade do art. 12, II.
 
 > [!WARNING]
-> **CEBAS é obrigação contínua, não diploma de parede.** Perder o percentual mínimo de serviços ao SUS ou de gratuidade derruba a imunidade de IRPJ, CSLL, PIS/COFINS e da contribuição previdenciária patronal **de uma vez só** — sobre um período que a fiscalização pode cobrar retroativamente. A regra de ouro da renovação é a do art. 11: **média do período, mínimo 60%, piso de 50% por ano**. Renovação vencida = certificado novo **antes** do fim da vigência, com os dados anuais em ordem.
+> **CEBAS é obrigação contínua, não diploma de parede.** Perder o percentual mínimo de serviços ao SUS ou de gratuidade derruba a imunidade de IRPJ, CSLL, PIS/COFINS e da contribuição previdenciária patronal **de uma vez só**: sobre um período que a fiscalização pode cobrar retroativamente. A regra de ouro da renovação é a do art. 11: **média do período, mínimo 60%, piso de 50% por ano**. Renovação vencida = certificado novo **antes** do fim da vigência, com os dados anuais em ordem.
 
-### 4.4 Exemplo 4 — a hora H da renovação
+### 4.4 Exemplo 4: a hora H da renovação
 
 Hospital com CEBAS-Saúde em vigor até 31/12/2026, com **62% de atendimentos no último exercício** e **54% no ano anterior**. A diretoria pergunta: "basta o último ano?".
 
-1. **Regra aplicável:** art. 11 da LC nº 187/2021 — se o percentual do exercício anterior não foi cumprido, avalia-se a **média de todo o período de certificação**;
+1. **Regra aplicável:** art. 11 da LC nº 187/2021: se o percentual do exercício anterior não foi cumprido, avalia-se a **média de todo o período de certificação**;
 2. **média informada:** (62% + 54%) ÷ 2 = **58%** → **abaixo do mínimo de 60%**;
-3. **piso anual:** nenhum ano pode ficar **abaixo de 50%** — 54% cumpre o piso, mas não salva a média;
+3. **piso anual:** nenhum ano pode ficar **abaixo de 50%**: 54% cumpre o piso, mas não salva a média;
 4. **consequência:** o requerimento de renovação exposto a indeferimento pela média do período;
 5. **plano de ação:** (i) elevar o percentual do ano em curso acima de 66% para recompor a média ((66 + 54) ÷ 2 = 60%); (ii) comprovar a gratuidade com **escrituração segregada** (art. 3º, IV); (iii) protocolar a renovação tempestivamente (a LC 187 fala em 360 dias anteriores ao fim do prazo no art. 37).
 
-- **🔢 Você sabia?** A **IN RFB nº 2.335, de 13/07/2026** aprovou os modelos das declarações das OSCs (dispensa de retenção) e **revogou a IN SRF nº 87/1996** — norma que as entidades usavam há três décadas. Apostila que ainda manda "observar a IN SRF 87/1996" está desatualizada desde julho de 2026.
+- **🔢 Você sabia?** A **IN RFB nº 2.335, de 13/07/2026** aprovou os modelos das declarações das OSCs (dispensa de retenção) e **revogou a IN SRF nº 87/1996**: norma que as entidades usavam há três décadas. Apostila que ainda manda "observar a IN SRF 87/1996" está desatualizada desde julho de 2026.
 
 ---
 
@@ -300,34 +300,34 @@ A política de captação de uma ONG é, em grande parte, a política de incenti
 | **PF (Rouanet, art. 26)** | **80% das doações e 60% dos patrocínios** | PJ: 40% doações / 30% patrocínios, com teto anual do Executivo | Lei nº 8.313/1991, art. 26 |
 | **PF/PJ (esporte)** | Doações e patrocínios esportivos | legislação específica | Leis nº 9.615/1998 e nº 11.484/2007 |
 
-### 5.2 Exemplo 5 — doação de PJ a ONG (IRPJ/CSLL), passo a passo
+### 5.2 Exemplo 5: doação de PJ a ONG (IRPJ/CSLL), passo a passo
 
 Empresa com **lucro operacional de R$ 1.000.000,00** doa **R$ 40.000,00** a associação sem fins lucrativos qualificada no MROSC.
 
 1. **Limite legal:** 2% × 1.000.000 = **R$ 20.000,00** (Lei nº 9.249/1995, art. 13, § 2º, III);
-2. **dedução efetiva:** **R$ 20.000,00** — os outros R$ 20.000,00 da doação **não** são dedutíveis;
+2. **dedução efetiva:** **R$ 20.000,00**: os outros R$ 20.000,00 da doação **não** são dedutíveis;
 3. **economia tributária:** 20.000 × 34% (alíquota combinada aproximada de IRPJ + CSLL) = **R$ 6.800,00**;
 4. **custo líquido da empresa:** 40.000 − 6.800 = **R$ 33.200,00** → ou seja, **83% da doação sai do bolso** da empresa;
 5. **simulação conservadora com a redução linear (LC nº 224/2025, art. 4º, § 4º, III):** a redução de base passa a valer por 90% → 18.000 dedutíveis → economia 18.000 × 34% = **R$ 6.120,00** → diferença de **R$ 680,00** em relação à conta nominal;
-6. **o que oferecer ao doador:** o item certo não é "sua doação é dedutível", e sim "**até 2% do seu lucro operacional**" — com a ressalva da redução linear de 2026 confirmada com a assessoria tributária.
+6. **o que oferecer ao doador:** o item certo não é "sua doação é dedutível", e sim "**até 2% do seu lucro operacional**": com a ressalva da redução linear de 2026 confirmada com a assessoria tributária.
 
 > [!NOTE]
-> Pelo **art. 13, VI, da Lei nº 9.249/1995**, a pessoa jurídica **não pode deduzir outras doações** — só as enquadradas nos §§ 2º (2% e 1,5%). E pelo **art. 84-B da MROSC** (incluído pela Lei nº 13.204/2015), a OSC pode receber **doações de empresas de até 2% da receita bruta do doador** e bens móveis irrecuperáveis, apreendidos, abandonados ou disponíveis administrados pela RFB — **independentemente de certificação**, desde que enquadrada em **ao menos uma das finalidades do art. 84-C**, que **veda** campanhas político-partidárias ou eleitorais (parágrafo único).
+> Pelo **art. 13, VI, da Lei nº 9.249/1995**, a pessoa jurídica **não pode deduzir outras doações**, só as enquadradas nos §§ 2º (2% e 1,5%). E pelo **art. 84-B da MROSC** (incluído pela Lei nº 13.204/2015), a OSC pode receber **doações de empresas de até 2% da receita bruta do doador** e bens móveis irrecuperáveis, apreendidos, abandonados ou disponíveis administrados pela RFB, **independentemente de certificação**, desde que enquadrada em **ao menos uma das finalidades do art. 84-C**, que **veda** campanhas político-partidárias ou eleitorais (parágrafo único).
 
-### 5.3 Exemplo 6 — doação de PF: o teto de 6% do IR devido
+### 5.3 Exemplo 6, doação de PF: o teto de 6% do IR devido
 
-Pessoa física com **imposto de renda devido de R$ 2.000,00** doa **R$ 5.000,00** a projeto cultural aprovado pelo Ministério da Cultura (Lei nº 8.313/1991, art. 18 — 100% do valor investido).
+Pessoa física com **imposto de renda devido de R$ 2.000,00** doa **R$ 5.000,00** a projeto cultural aprovado pelo Ministério da Cultura (Lei nº 8.313/1991, art. 18: 100% do valor investido).
 
 1. **teto praticado:** 6% × 2.000 = **R$ 120,00** de dedução;
 2. **imposto após a dedução:** 2.000 − 120 = **R$ 1.880,00**;
 3. **custo líquido da doação:** 5.000 − 120 = **R$ 4.880,00** → **97,6%** do valor doado sai do bolso do doador;
-4. **se enquadrado no art. 26:** primeiro se aplica o percentual — 80% × 5.000 = **R$ 4.000,00** de doação "apurada" — e **depois** o mesmo teto de R$ 120,00; a ordem importa, mas o resultado é o mesmo: **R$ 120,00**;
+4. **se enquadrado no art. 26:** primeiro se aplica o percentual, 80% × 5.000 = **R$ 4.000,00** de doação "apurada", e **depois** o mesmo teto de R$ 120,00; a ordem importa, mas o resultado é o mesmo: **R$ 120,00**;
 5. **soma de incentivos:** combinando PRONON/PRONAS e demais itens, a soma das deduções continua limitada pelos dispositivos da Lei nº 9.532/1997 (arts. 12 e 22) e pelo **§ 1º do art. 12 da Lei nº 9.250/1995** (soma dos incisos I a IV ≤ 12% do IR devido);
 6. **simulação com a redução linear de 10% (2026):** teto efetivo conservador de 6% × 90% = **5,4%** → 5,4% × 2.000 = **R$ 108,00** → IR = **R$ 1.892,00** (diferença de R$ 12,00 sobre o cenário nominal).
 
-**Leitura prática para a captação:** quanto **menor** o IR devido do doador, **menor** o incentivo — o teto é percentual sobre o imposto, não sobre o valor doado. Uma campanha de PF para doadores de baixo IR promete pouco; o desenho de campanha deve considerar isso antes de fixar metas.
+**Leitura prática para a captação:** quanto **menor** o IR devido do doador, **menor** o incentivo, o teto é percentual sobre o imposto, não sobre o valor doado. Uma campanha de PF para doadores de baixo IR promete pouco; o desenho de campanha deve considerar isso antes de fixar metas.
 
-### 5.4 Exemplo 7 — Rouanet art. 26: 80% das doações e 60% dos patrocínios
+### 5.4 Exemplo 7, Rouanet art. 26: 80% das doações e 60% dos patrocínios
 
 Um doador **pessoa física** investe **R$ 10.000,00** em projeto cultural aprovado pelo MinC, enquadrado no **art. 26** da Lei nº 8.313/1991, com teto anual de 6% do IR devido de **R$ 3.000,00**.
 
@@ -359,7 +359,7 @@ A **LC nº 224, de 26/12/2025** determinou **redução linear de 10%** de todos 
 | Regimes por % de receita (lucro presumido, REIQ etc.) | Parâmetro aumentado em 10% |
 | Bases presumidas | Aumento de 10% (§ 5º: parcela que exceder R$ 5 milhões/ano no lucro presumido) |
 
-### 6.2 Exceções do art. 4º, § 8º — onde as OSCs estão
+### 6.2 Exceções do art. 4º, § 8º: onde as OSCs estão
 
 | Inciso | Exceção |
 |---|---|
@@ -370,7 +370,7 @@ A **LC nº 224, de 26/12/2025** determinou **redução linear de 10%** de todos 
 | **XII** | CPRB |
 | **XIII** | TIC |
 
-A redação anterior do inciso V citava as **Leis nº 9.790/1999 (OSCIP) e nº 9.637/1998 (OS)**; o **art. 11 da LC nº 235/2026** acrescentou ao inciso a referência ao **art. 15 da Lei nº 9.532/1997** e aos **arts. 13, IV, e 14, X, da MP nº 2.158-35/2001** — leitura que os escritórios de advocacia tributária fazem como **preservação da isenção de IRPJ/CSLL/COFINS das OSCs**. Atenção ao ponto ainda **não verificado**: a consolidação oficial do texto da LC nº 224/2025 continua a exibir **tanto a redação antiga quanto a nova**, sem revogação expressa da anterior confirmada nesta pesquisa — confira o texto consolidado vigente antes de afirmar em peça. A ementa da LC nº 235/2026 versa sobre renúncias de receita por choque de energia, fertilizantes e Copa 2027, mas alterou especificamente esse § 8º, V.
+A redação anterior do inciso V citava as **Leis nº 9.790/1999 (OSCIP) e nº 9.637/1998 (OS)**; o **art. 11 da LC nº 235/2026** acrescentou ao inciso a referência ao **art. 15 da Lei nº 9.532/1997** e aos **arts. 13, IV, e 14, X, da MP nº 2.158-35/2001**, leitura que os escritórios de advocacia tributária fazem como **preservação da isenção de IRPJ/CSLL/COFINS das OSCs**. Atenção ao ponto ainda **não verificado**: a consolidação oficial do texto da LC nº 224/2025 continua a exibir **tanto a redação antiga quanto a nova**, sem revogação expressa da anterior confirmada nesta pesquisa, confira o texto consolidado vigente antes de afirmar em peça. A ementa da LC nº 235/2026 versa sobre renúncias de receita por choque de energia, fertilizantes e Copa 2027, mas alterou especificamente esse § 8º, V.
 
 **Regulamentação:** Decreto nº 12.808, de 29/12/2025; Portaria MF nº 3.278, de 31/12/2025; IN RFB nº 2.305, de 31/12/2025 (alterada pela **IN RFB nº 2.307, de 20/02/2026**, DOU 23/02/2026, Ed. 35, Seção 1, p. 100).
 
@@ -385,7 +385,7 @@ A redação anterior do inciso V citava as **Leis nº 9.790/1999 (OSCIP) e nº 9
 | **34** | Isenção de IRPJ, CSLL e COFINS de instituições filantrópicas, recreativas, culturais e científicas e de associações civis sem fins lucrativos | **Art. 15 da Lei nº 9.532/1997** |
 
 > [!WARNING]
-> **A IN RFB nº 2.307/2026 revogou o item 26** do anexo anterior (IN RFB nº 2.305/2025), que tratava das **doações de terceiros (PF/PJ) a OSC**. Consequência: as **deduções de doações a OSC passaram a ser alcançadas pela redução linear de 10%** em 2026 — a Receita confirmou nas Perguntas e Respostas de 12/02/2026 e na notícia oficial de 23/02/2026. Quem captava com a promessa de "doação 100% dedutível" precisa revisar a narrativa **antes** de publicar material novo. Em contrapartida, a **isenção do art. 15** permanece na lista dos itens não alcançados (item 34). O **PLC nº 11/2026**, que restringiria o art. 4º, § 8º, V da LC nº 224/2025, estava em tramitação no momento desta pesquisa.
+> **A IN RFB nº 2.307/2026 revogou o item 26** do anexo anterior (IN RFB nº 2.305/2025), que tratava das **doações de terceiros (PF/PJ) a OSC**. Consequência: as **deduções de doações a OSC passaram a ser alcançadas pela redução linear de 10%** em 2026: a Receita confirmou nas Perguntas e Respostas de 12/02/2026 e na notícia oficial de 23/02/2026. Quem captava com a promessa de "doação 100% dedutível" precisa revisar a narrativa **antes** de publicar material novo. Em contrapartida, a **isenção do art. 15** permanece na lista dos itens não alcançados (item 34). O **PLC nº 11/2026**, que restringiria o art. 4º, § 8º, V da LC nº 224/2025, estava em tramitação no momento desta pesquisa.
 
 - **🔢 Você sabia?** A **LC nº 227, de 13/01/2026** (DOU 14/01/2026) instituiu o **Comitê Gestor do Imposto sobre Bens e Serviços (CGIBS)**, disciplinou o processo administrativo tributário do IBS, a distribuição da arrecadação e normas gerais de ITCMD, além de alterar a própria LC nº 214/2025. Por isso toda citação de artigo da LC nº 214/2025 deve ser conferida **na redação atualizada**, e não no texto original de janeiro de 2025.
 
@@ -404,7 +404,7 @@ A redação anterior do inciso V citava as **Leis nº 9.790/1999 (OSCIP) e nº 9
 
 A **EC nº 132/2023** instituiu o **IBS** e a **CBS** e extinguiu PIS/PASEP e COFINS **a partir de 1º/1/2027**, na forma da **LC nº 214/2025**. 2026 é o ano-pivô: último ano do sistema atual e ano de teste do novo.
 
-### 7.1 Linha do tempo (2023–2033)
+### 7.1 Linha do tempo (2023 to 2033)
 
 ```text
 2023 ─ EC 132/2023 .......... IBS e CBS instituídos; fim do PIS/COFINS
@@ -442,13 +442,13 @@ A **EC nº 132/2023** instituiu o **IBS** e a **CBS** e extinguiu PIS/PASEP e CO
 | **2025** | LC nº 224/2025 (26/12) | Redução linear de 10% dos gastos tributários federais, com exceções do art. 4º, § 8º |
 | **2026** | Ano de teste | PIS/COFINS até **31/12/2026**; destaque de CBS 0,9% e IBS 0,1% na NF-e **sem recolhimento** |
 | **2026** | LC nº 227/2026 (13/01) | Institui o **CGIBS**; processo administrativo do IBS; altera a LC nº 214/2025 |
-| **2026** | Decreto nº 12.955/2026 (29/04) | **Regulamenta a CBS** (DOU 30/04/2026) — normas de incidência, base, créditos e documentos fiscais |
+| **2026** | Decreto nº 12.955/2026 (29/04) | **Regulamenta a CBS** (DOU 30/04/2026): normas de incidência, base, créditos e documentos fiscais |
 | **2026** | LC nº 235/2026 (27/08) | Redestina o art. 4º, § 8º, V, da LC nº 224/2025 preservando o art. 15 da Lei nº 9.532/1997 |
 | **2027** | Início da CBS | PIS/COFINS extinguem-se; créditos escriturados até 31/12/2026 seguem os arts. 378 e 381 da LC nº 214/2025 |
-| **2029–2032** | Transição de ICMS/ISS | ISS com reduções de 10%, 20%, 30% e 40% (LC nº 116/2003, art. 8-B) |
+| **2029 to 2032** | Transição de ICMS/ISS | ISS com reduções de 10%, 20%, 30% e 40% (LC nº 116/2003, art. 8-B) |
 | **2033** | Plenitude | Sistema completo, com **teto de 26,5%** |
 
-### 7.2 Exemplo 8 — teste de alíquotas de 2026: como ler a NF-e
+### 7.2 Exemplo 8, teste de alíquotas de 2026: como ler a NF-e
 
 Em 2026 a NF-e traz o **destaque** de CBS e IBS **sem recolhimento** (LC nº 214/2025, art. 408, § 1º; NT SEFAZ 2025.002). Uma ONG imune emite uma nota de serviços de **R$ 40.000,00** e recebe uma nota de compra de material de escritório no mesmo valor:
 
@@ -460,7 +460,7 @@ Em 2026 a NF-e traz o **destaque** de CBS e IBS **sem recolhimento** (LC nº 214
 | **Recolhimento exigido em 2026** | teste, sem exigência | **R$ 0,00** |
 | **Crédito da entidade imune** | art. 9º, § 4º (aquisições) | **R$ 0,00** |
 
-Se a entidade emitir NF-e de serviços ao longo de todo 2026 no total de **R$ 240.000,00**, o destaque anual somado será de 240.000 × 1% = **R$ 2.400,00** (CBS: R$ 2.160,00; IBS: R$ 240,00) — **sem recolhimento**, e **sem direito a crédito** sobre as aquisições.
+Se a entidade emitir NF-e de serviços ao longo de todo 2026 no total de **R$ 240.000,00**, o destaque anual somado será de 240.000 × 1% = **R$ 2.400,00** (CBS: R$ 2.160,00; IBS: R$ 240,00): **sem recolhimento**, e **sem direito a crédito** sobre as aquisições.
 
 **Tabela das alíquotas de teste e do regime em transição:**
 
@@ -482,21 +482,21 @@ O art. 9º da LC nº 214/2025 declara imunes ao IBS e à CBS os fornecimentos re
 - **§ 4º:** as imunidades dos incisos I a III **não se aplicam às suas aquisições** de bens materiais e imateriais, inclusive direitos, e serviços.
 
 > [!WARNING]
-> **Art. 9º, § 4º — a armadilha orçamentária da década.** A imunidade cobre as **saídas** da entidade, **não as compras**: o material, a locação, o software, a manutenção, os honorários e o mobiliário que a ONG adquire **continuam sujeitos ao IBS/CBS** — e, como a entidade imune está fora do regime regular (não tem débito a compensar), **não há crédito a tomar**. Na prática, o tributo das compras vira **custo crescente embutido no preço do fornecedor**. Orçamento que não abrir uma linha específica para isso descobrirá o descompasso no fechamento do exercício. Atenção: essa é a leitura dominante do dispositivo e ela **ainda é controversa** quanto à constitucionalidade — acompanhe a tramitação antes de qualquer tese em peça.
+> **Art. 9º, § 4º: a armadilha orçamentária da década.** A imunidade cobre as **saídas** da entidade, **não as compras**: o material, a locação, o software, a manutenção, os honorários e o mobiliário que a ONG adquire **continuam sujeitos ao IBS/CBS**, e, como a entidade imune está fora do regime regular (não tem débito a compensar), **não há crédito a tomar**. Na prática, o tributo das compras vira **custo crescente embutido no preço do fornecedor**. Orçamento que não abrir uma linha específica para isso descobrirá o descompasso no fechamento do exercício. Atenção: essa é a leitura dominante do dispositivo e ela **ainda é controversa** quanto à constitucionalidade: acompanhe a tramitação antes de qualquer tese em peça.
 
-### 7.4 Exemplo 9 — impacto do IBS/CBS no orçamento da OSC
+### 7.4 Exemplo 9: impacto do IBS/CBS no orçamento da OSC
 
 OSC imune com **compras anuais de R$ 1.200.000,00** (material de limpeza, locação, manutenção, software, mobiliário e serviços terceirizados), ou seja, **R$ 100.000,00 por mês**.
 
-**Passo 1 — o que acontece em 2026 (ano de teste):**
+**Passo 1, o que acontece em 2026 (ano de teste):**
 
 - CBS destacada: 1.200.000 × 0,9% = **R$ 10.800,00**;
 - IBS destacado: 1.200.000 × 0,1% = **R$ 1.200,00**;
 - total destacado: **R$ 12.000,00**, **sem recolhimento** e **sem crédito**.
 
-**Passo 2 — regra a partir da plenitude (art. 9º, § 4º):** cada R$ 100.000,00 mensais de compras passam a carregar o tributo **como custo**, sem contrapartida de crédito. Regra de bolso: **cada 1 p.p. de alíquota combinada = R$ 1.000,00/mês = R$ 12.000,00/ano**.
+**Passo 2: regra a partir da plenitude (art. 9º, § 4º):** cada R$ 100.000,00 mensais de compras passam a carregar o tributo **como custo**, sem contrapartida de crédito. Regra de bolso: **cada 1 p.p. de alíquota combinada = R$ 1.000,00/mês = R$ 12.000,00/ano**.
 
-**Passo 3 — cenários de sensibilidade sobre R$ 1.200.000,00 de compras:**
+**Passo 3: cenários de sensibilidade sobre R$ 1.200.000,00 de compras:**
 
 | Alíquota combinada hipotética (CBS + IBS) | Custo adicional anual | % da economia previdenciária de R$ 264.000,00 (Exemplo 2) |
 |---|---|---|
@@ -506,9 +506,9 @@ OSC imune com **compras anuais de R$ 1.200.000,00** (material de limpeza, locaç
 | 12,0% | 1.200.000 × 0,12 = **R$ 144.000,00** | 54,5% |
 | 26,5% (**teto do sistema**) | 1.200.000 × 0,265 = **R$ 318.000,00** | 120,5% |
 
-**Passo 4 — conclusão de planejamento:** num cenário de 12%, o custo adicional das compras (R$ 144.000,00) consome **mais da metade** da economia previdenciária obtida com o CEBAS (R$ 264.000,00); no teto de 26,5%, **ultrapassa** essa economia. As decisões de captação, de reajuste de contratos e de compra centralizada passam, portanto, a ter peso fiscal direto.
+**Passo 4: conclusão de planejamento:** num cenário de 12%, o custo adicional das compras (R$ 144.000,00) consome **mais da metade** da economia previdenciária obtida com o CEBAS (R$ 264.000,00); no teto de 26,5%, **ultrapassa** essa economia. As decisões de captação, de reajuste de contratos e de compra centralizada passam, portanto, a ter peso fiscal direto.
 
-**Passo 5 — ações recomendadas:**
+**Passo 5: ações recomendadas:**
 
 1. abrir **linha orçamentária própria** para "tributos embutidos em compras" a partir de 2027;
 2. negociar **preço líquido e cláusula de reajuste** nos contratos de longo prazo;
@@ -519,7 +519,7 @@ OSC imune com **compras anuais de R$ 1.200.000,00** (material de limpeza, locaç
 > [!NOTE]
 > **Créditos de PIS/COFINS escriturados até 31/12/2026** só se aproveitam se obedecidos os **arts. 378 e 381 da LC nº 214/2025**. O fechamento contábil de 2026 é, por isso, o mais importante da década para o terceiro setor: é nele que se fixa o saldo que atravessa a transição.
 
-- **🔢 Você sabia?** O **Decreto nº 12.955, de 29/04/2026** (DOU 30/04/2026) **regulamenta a CBS** — mais de 600 artigos sobre incidência, base de cálculo, créditos, regimes diferenciados, documentos fiscais e fiscalização — e foi alterado pelo **Decreto nº 13.075, de 21/07/2026**. A obrigatoriedade de inscrição em CNPJ e de emissão de documentos fiscais para pessoas físicas e produtores rurais produz efeitos **a partir de 1º/1/2027**.
+- **🔢 Você sabia?** O **Decreto nº 12.955, de 29/04/2026** (DOU 30/04/2026) **regulamenta a CBS**, mais de 600 artigos sobre incidência, base de cálculo, créditos, regimes diferenciados, documentos fiscais e fiscalização, e foi alterado pelo **Decreto nº 13.075, de 21/07/2026**. A obrigatoriedade de inscrição em CNPJ e de emissão de documentos fiscais para pessoas físicas e produtores rurais produz efeitos **a partir de 1º/1/2027**.
 
 ### 7.5 ISS: a parte que cabe ao município (LC nº 116/2003)
 
@@ -528,12 +528,12 @@ OSC imune com **compras anuais de R$ 1.200.000,00** (material de limpeza, locaç
 | Alíquota máxima | **5%** (art. 8, II) |
 | Alíquota mínima | **2%** (art. 8-A, red. LC nº 214/2025), excetuando os subitens 7.02, 7.05 e 16.01 |
 | Redução transitória | **10% em 2029, 20% em 2030, 30% em 2031 e 40% em 2032** (art. 8-B) |
-| Imunidade de livros, jornais, periódicos e papel | **Constitucional** — CF art. 156, § 6º, I (não está na LC nº 116/2003) |
+| Imunidade de livros, jornais, periódicos e papel | **Constitucional**: CF art. 156, § 6º, I (não está na LC nº 116/2003) |
 | Responsabilidade de imune/isenta | Responde como **responsável** nas retenções (art. 6º, II) |
 | Não incidência | Art. 2 |
 
 > [!NOTE]
-> **A imunidade de livros, jornais, periódicos e do papel destinado à sua impressão é constitucional** (CF art. 156, § 6º, I) e aparece também no **art. 9º, IV, da LC nº 214/2025** para o IBS/CBS. Quem cita "LC 116/2003" como fonte dessa imunidade está citando o diploma errado — ele trata de ISS e não reproduz o dispositivo constitucional.
+> **A imunidade de livros, jornais, periódicos e do papel destinado à sua impressão é constitucional** (CF art. 156, § 6º, I) e aparece também no **art. 9º, IV, da LC nº 214/2025** para o IBS/CBS. Quem cita "LC 116/2003" como fonte dessa imunidade está citando o diploma errado: ele trata de ISS e não reproduz o dispositivo constitucional.
 
 ---
 
@@ -555,7 +555,7 @@ Imune e isenta **também declara**. O equívoco mais caro do setor é tratar imu
 **Como montar o próprio calendário (método em 5 passos):**
 
 1. **liste as obrigações** da tabela acima e as específicas da área (CEBAS, MROSC, Conselho de classe);
-2. **marque o responsável** por obrigação — uma pessoa, não um departamento;
+2. **marque o responsável** por obrigação: uma pessoa, não um departamento;
 3. **calcule o "D-10"**: cada prazo ganha um alerta interno de 10 dias úteis antes;
 4. **alinhe com o fechamento contábil**: ECD e ECF dependem de livros fechados;
 5. **reconduza a revisão em fevereiro** de cada ano, quando a Receita publica a agenda tributária.
@@ -567,11 +567,11 @@ Pela **ITG 2002 (R1)** (Resolução CFC nº 1.409/2012, com revisão de 21/08/20
 - **item 8:** **regime de competência** obrigatório (não existe "regime de caixa" opcional para OSC);
 - **item 9:** doações e subvenções são reconhecidas **no resultado** (NBC TG 07);
 - **item 9A:** só subvenções particulares recebidas **a pedido** seguem a NBC TG 07;
-- **itens 22 a 25:** BP, DRE, DMPL, DFC — doações classificadas em fluxos **operacionais** — e notas;
+- **itens 22 a 25:** BP, DRE, DMPL, DFC, doações classificadas em fluxos **operacionais**, e notas;
 - **item 24:** gratuidade e serviço voluntário devem ser **destacados na DRE**;
 - **item 27:** a **renúncia fiscal deve ser divulgada nas notas explicativas**.
 
-### 8.3 Exemplo 10 — a renúncia fiscal nas notas explicativas
+### 8.3 Exemplo 10: a renúncia fiscal nas notas explicativas
 
 A entidade do Exemplo 2 (hospital, folha de R$ 1.200.000,00, CEBAS vigente) fecha o exercício com superávit de **R$ 300.000,00**. A demonstração e as notas devem tornar visível o que o Estado deixou de arrecadar:
 
@@ -587,7 +587,7 @@ A entidade do Exemplo 2 (hospital, folha de R$ 1.200.000,00, CEBAS vigente) fech
 2. classificar as doações recebidas em **fluxos operacionais** na DFC (item 25);
 3. **divulgar nas notas** o valor da renúncia fiscal, com a base legal de cada benefício (item 27);
 4. manter a **escrituração segregada** por fonte de recursos por 10 anos (art. 3º, VI, da LC nº 187/2021);
-5. cruzar o número divulgado com o **anexo de gastos tributários** da LOA — a nota e o anexo devem ser coerentes entre si.
+5. cruzar o número divulgado com o **anexo de gastos tributários** da LOA: a nota e o anexo devem ser coerentes entre si.
 
 > [!IMPORTANT]
 > **A nota explicativa é o elo entre contabilidade e tributário.** Entidade que não divulga a renúncia fiscal quebra a ITG 2002 (R1) e, simultaneamente, entrega à fiscalização um mapa do que ela deixou de pagar. Transparência bem feita é defesa: quando o número é consistente com a base legal, ele protege; quando falta, ele é preenchido pelo autuador.
@@ -598,17 +598,17 @@ A entidade do Exemplo 2 (hospital, folha de R$ 1.200.000,00, CEBAS vigente) fech
 
 ## 9. Casos resolvidos e roteiro de decisão
 
-**Caso 1 — a associação cultural que quer captar de empresas.**
+**Caso 1: a associação cultural que quer captar de empresas.**
 Meta de R$ 300.000,00 em doações empresariais. A proposta comercial correta combina três camadas: (i) dedução de até **2% do lucro operacional** do doador (Lei nº 9.249/1995, art. 13, § 2º, III); (ii) recebimento qualificado pelo **art. 84-B da MROSC** (até 2% da receita bruta do doador); e (iii) a isenção do **art. 15 da Lei nº 9.532/1997** que a própria entidade goza. Como as deduções de doações sofreram a **redução linear de 10%** em 2026 (revogação do item 26 pela IN RFB nº 2.307/2026), a assessoria tributária recalcula o incentivo **antes** de qualquer material publicitário. **Conta de referência:** uma empresa com lucro operacional de R$ 1.500.000,00 deduz 2% = R$ 30.000,00 → economia ≈ 30.000 × 34% = **R$ 10.200,00** → custo líquido de R$ 19.800,00 sobre R$ 30.000,00 doados.
 
-**Caso 2 — a OSC de assistência com folha pesada, sem CEBAS.**
-40 funcionários, folha anual de **R$ 1.500.000,00**, sem certificação. Custo previdenciário: 1.500.000 × 20% = R$ 300.000,00 + RAT 2% = R$ 30.000,00 → **R$ 330.000,00/ano**. Com o CEBAS-MDS (gratuidade e universalidade, LC nº 187/2021, art. 31), a imunidade do art. 195, § 7º zera essa conta. **Prazo de retorno:** se o custo do processo de certificação (assessoria, sistemas, segregação contábil) for de R$ 60.000,00, o retorno se dá em 60.000 ÷ 330.000 = **0,18 ano ≈ 2 meses de folha** — desde que a entidade mantenha a escrituração segregada e comprove a gratuidade.
+**Caso 2: a OSC de assistência com folha pesada, sem CEBAS.**
+40 funcionários, folha anual de **R$ 1.500.000,00**, sem certificação. Custo previdenciário: 1.500.000 × 20% = R$ 300.000,00 + RAT 2% = R$ 30.000,00 → **R$ 330.000,00/ano**. Com o CEBAS-MDS (gratuidade e universalidade, LC nº 187/2021, art. 31), a imunidade do art. 195, § 7º zera essa conta. **Prazo de retorno:** se o custo do processo de certificação (assessoria, sistemas, segregação contábil) for de R$ 60.000,00, o retorno se dá em 60.000 ÷ 330.000 = **0,18 ano ≈ 2 meses de folha**: desde que a entidade mantenha a escrituração segregada e comprove a gratuidade.
 
-**Caso 3 — a entidade imune que descobre o art. 9º, § 4º.**
+**Caso 3: a entidade imune que descobre o art. 9º, § 4º.**
 A mesma OSC planeja 2027 com compras de R$ 1.200.000,00 e nenhuma linha de "tributo embutido". Pelo Exemplo 9, num cenário de 10% a surpresa é de **R$ 120.000,00/ano**. O plano de contingência correto: (i) reabrir o orçamento em novembro de 2026; (ii) reajustar contratos com cláusula de tributos; (iii) simular a compra de ativo imobilizado **antes** e **depois** da plenitude; (iv) revisar o mix de fornecedores.
 
-**Caso 4 — o contribuinte que esquece a retenção.**
-A entidade paga R$ 8.000,00/mês de aluguel a pessoa física e não retém IRRF. Além da pendência financeira, ela descumpre o **art. 12, "f", da Lei nº 9.532/1997** — requisito da própria imunidade —, ficando exposta à suspensão do art. 14 e ao art. 32 da Lei nº 9.430/1996. A **solução** é imediata: apurar as retenções dos últimos 5 anos (prazo do art. 12, "d"), recolher com os acréscimos legais e instituir o controle mensal de retenções no fechamento.
+**Caso 4, o contribuinte que esquece a retenção.**
+A entidade paga R$ 8.000,00/mês de aluguel a pessoa física e não retém IRRF. Além da pendência financeira, ela descumpre o **art. 12, "f", da Lei nº 9.532/1997**, requisito da própria imunidade, ficando exposta à suspensão do art. 14 e ao art. 32 da Lei nº 9.430/1996. A **solução** é imediata: apurar as retenções dos últimos 5 anos (prazo do art. 12, "d"), recolher com os acréscimos legais e instituir o controle mensal de retenções no fechamento.
 
 ```text
 ROTEIRO DE DECISÃO FISCAL — RESUMO EM 6 PERGUNTAS
@@ -635,13 +635,13 @@ O roteiro não substitui o parecer: ele mostra **qual pergunta fazer primeiro** 
 
 ## 10. Retenções na fonte: o art. 12, "f" na prática
 
-A entidade imune **é fonte pagadora**. Ela não recolhe IRPJ/CSLL sobre a renda ligada ao objeto, mas continua obrigada a **reter e recolher** os tributos devidos por terceiros — e a prova disso é o que a fiscalização confere primeiro.
+A entidade imune **é fonte pagadora**. Ela não recolhe IRPJ/CSLL sobre a renda ligada ao objeto, mas continua obrigada a **reter e recolher** os tributos devidos por terceiros, e a prova disso é o que a fiscalização confere primeiro.
 
 ### 10.1 Quem retém o quê
 
 | Pagamento feito pela ONG | O que deve ser retido | Base legal | Se esquecer |
 |---|---|---|---|
-| **Aluguel a pessoa física** | IRRF pela tabela progressiva mensal (com o redutor de 2026) | Lei nº 9.250/1995; IN RFB nº 1.500/2014, art. 22, VI | Descumprimento da **alínea "f" do art. 12** da Lei nº 9.532/1997 — risco para a própria imunidade |
+| **Aluguel a pessoa física** | IRRF pela tabela progressiva mensal (com o redutor de 2026) | Lei nº 9.250/1995; IN RFB nº 1.500/2014, art. 22, VI | Descumprimento da **alínea "f" do art. 12** da Lei nº 9.532/1997: risco para a própria imunidade |
 | **Salários, 13º e aviso** | IRRF pela tabela progressiva (com o redutor de 2026) | Lei nº 9.250/1995; Lei nº 15.270/2025 | Passivo fiscal e trabalhista |
 | **Serviços prestados por PJ** (quando a ONG é responsável) | ISS retido | LC nº 116/2003, art. 6º, II | Multa e correção pelo município |
 | **Pagamento a contribuinte individual** | Contribuição previdenciária retida na fonte | Lei nº 8.212/1991 | INSS retido não recolhido = débito da própria entidade |
@@ -655,7 +655,7 @@ Desde **1º/1/2026** convivem **duas tabelas**: a progressiva tradicional (que p
 
 | Base de cálculo mensal | Alíquota | Parcela a deduzir |
 |---|---|---|
-| Até R$ 2.428,80 | — | — |
+| Até R$ 2.428,80 |, |, |
 | De R$ 2.428,81 até R$ 2.826,65 | 7,5% | R$ 182,16 |
 | De R$ 2.826,66 até R$ 3.751,05 | 15% | R$ 394,16 |
 | De R$ 3.751,06 até R$ 4.664,68 | 22,5% | R$ 675,49 |
@@ -665,37 +665,37 @@ Desde **1º/1/2026** convivem **duas tabelas**: a progressiva tradicional (que p
 
 | Rendimentos tributáveis sujeitos à incidência mensal | Redução do imposto |
 |---|---|
-| Até R$ 5.000,00 | Até **R$ 312,89** — de modo que o imposto devido seja **zero** |
-| De R$ 5.000,01 até R$ 7.350,00 | **R$ 978,62 − (0,133145 × rendimentos)** — redução decrescente, que zera a partir de R$ 7.350,00 |
+| Até R$ 5.000,00 | Até **R$ 312,89**: de modo que o imposto devido seja **zero** |
+| De R$ 5.000,01 até R$ 7.350,00 | **R$ 978,62 − (0,133145 × rendimentos)**: redução decrescente, que zera a partir de R$ 7.350,00 |
 | Acima de R$ 7.350,00 | **Sem redução** |
 
 > [!NOTE]
 > O **§ 1º do art. 3º-A** da Lei nº 9.250/1995 (red. Lei nº 15.270/2025) limita a redução ao **valor do imposto apurado**: o redutor **não gera imposto negativo nem restituição**. Há tabela anual equivalente para a declaração: rendimentos de até **R$ 60.000,00/ano** têm redução de até **R$ 2.694,15** (zerando o imposto) e de R$ 60.000,01 a R$ 88.200,00 a fórmula é **R$ 8.429,73 − (0,095575 × renda anual)**.
 
-### 10.3 Exemplo 11 — o IRRF do aluguel pago pela ONG (três cenários)
+### 10.3 Exemplo 11, o IRRF do aluguel pago pela ONG (três cenários)
 
 A ONG ocupa um imóvel alugado de uma pessoa física, paga aluguéis em três valores distintos e precisa saber quanto retém em 2026.
 
-**Cenário A — aluguel de R$ 3.500,00:**
+**Cenário A: aluguel de R$ 3.500,00:**
 
 1. **tabela progressiva:** faixa de 15% (de R$ 2.826,66 a R$ 3.751,05) → 3.500 × 15% = **R$ 525,00** − 394,16 = **R$ 130,84**;
 2. **redutor (até R$ 5.000,00):** a redução alcança até R$ 312,89, "de modo que o imposto devido seja zero" → 130,84 < 312,89 → redução limitada ao imposto;
 3. **IRRF devido: R$ 0,00/mês** → economia anual de 130,84 × 12 = **R$ 1.570,08**;
-4. **registro:** a fonte mantém o controle da operação e informa o rendimento — a redução é **mensal** e não dispensa a apuração.
+4. **registro:** a fonte mantém o controle da operação e informa o rendimento: a redução é **mensal** e não dispensa a apuração.
 
-**Cenário B — aluguel de R$ 5.500,00:**
+**Cenário B: aluguel de R$ 5.500,00:**
 
 1. **tabela progressiva:** acima de R$ 4.664,68 → 27,5% → 5.500 × 27,5% = **R$ 1.512,50** − 908,73 = **R$ 603,77**;
 2. **redutor (de R$ 5.000,01 a R$ 7.350,00):** 978,62 − (0,133145 × 5.500) = 978,62 − 732,30 = **R$ 246,32**;
 3. **IRRF devido: 603,77 − 246,32 = R$ 357,45/mês** → **R$ 4.289,40/ano**;
-4. **leitura:** o redutor corta **40,8%** do imposto apurado (246,32 ÷ 603,77) — benefício que só passou a existir em **janeiro de 2026** e raramente está previsto em contratos antigos.
+4. **leitura:** o redutor corta **40,8%** do imposto apurado (246,32 ÷ 603,77): benefício que só passou a existir em **janeiro de 2026** e raramente está previsto em contratos antigos.
 
-**Cenário C — aluguel de R$ 8.000,00:**
+**Cenário C: aluguel de R$ 8.000,00:**
 
 1. **tabela progressiva:** 8.000 × 27,5% = **R$ 2.200,00** − 908,73 = **R$ 1.291,27/mês**;
 2. **redutor:** acima de R$ 7.350,00 → **sem redução**;
 3. **IRRF devido: R$ 1.291,27/mês** → **R$ 15.495,24/ano**;
-4. **conclusão:** cerca de **16,1%** do aluguel mensal vira retenção (1.291,27 ÷ 8.000) — valor que sai do caixa junto com o aluguel e precisa estar **orçado no contrato**.
+4. **conclusão:** cerca de **16,1%** do aluguel mensal vira retenção (1.291,27 ÷ 8.000): valor que sai do caixa junto com o aluguel e precisa estar **orçado no contrato**.
 
 | Aluguel mensal | Tabela | Redutor | IRRF/mês | IRRF/ano |
 |---|---|---|---|---|
@@ -704,9 +704,9 @@ A ONG ocupa um imóvel alugado de uma pessoa física, paga aluguéis em três va
 | R$ 8.000,00 | 27,5% → 1.291,27 | sem redução | **R$ 1.291,27** | R$ 15.495,24 |
 
 > [!WARNING]
-> **Não reter não é economia: é descumprimento da alínea "f" do art. 12 da Lei nº 9.532/1997.** A retenção omitida gera a obrigação com **juros e correção**, expõe a diretoria (Lei nº 8.429/1992, para recursos públicos) e, no limite, autoriza a **suspensão da imunidade** pelo art. 14 da Lei nº 9.532/1997, operacionalizada pelo art. 32 da Lei nº 9.430/1996. O controle mensal de retenções — conferência do DARF ao pagamento e baixa no fechamento — custa menos de uma hora por mês.
+> **Não reter não é economia: é descumprimento da alínea "f" do art. 12 da Lei nº 9.532/1997.** A retenção omitida gera a obrigação com **juros e correção**, expõe a diretoria (Lei nº 8.429/1992, para recursos públicos) e, no limite, autoriza a **suspensão da imunidade** pelo art. 14 da Lei nº 9.532/1997, operacionalizada pelo art. 32 da Lei nº 9.430/1996. O controle mensal de retenções, conferência do DARF ao pagamento e baixa no fechamento, custa menos de uma hora por mês.
 
-- **🔢 Você sabia?** Como o redutor da Lei nº 15.270/2025 zera o imposto de quem auferi até **R$ 5.000,00/mês**, o doador pessoa física nessa faixa pode ter **IR devido = R$ 0,00** — e, nesse caso, **6% de R$ 0,00 = R$ 0,00** de incentivo. A pergunta certa em campanha de PF nunca é "quanto você doa?", e sim "**quanto de IR você declara como devido?**".
+- **🔢 Você sabia?** Como o redutor da Lei nº 15.270/2025 zera o imposto de quem auferi até **R$ 5.000,00/mês**, o doador pessoa física nessa faixa pode ter **IR devido = R$ 0,00**, e, nesse caso, **6% de R$ 0,00 = R$ 0,00** de incentivo. A pergunta certa em campanha de PF nunca é "quanto você doa?", e sim "**quanto de IR você declara como devido?**".
 
 ---
 
@@ -716,9 +716,9 @@ Toda doação que a entidade recebe vive sob dois tetos **independentes**: o que
 
 ### 11.1 A beneficiária precisa estar qualificada
 
-Pela **alínea "c" do art. 13 da Lei nº 9.532/1997** (redação da Lei nº 13.204/2015), a dedução do doador exige que a beneficiária seja **organização da sociedade civil** na forma da Lei nº 13.019/2014 que cumpra os **arts. 3º e 16 da Lei nº 9.790/1999** — **independentemente de certificação**. Na prática, a entidade precisa provar, a qualquer momento:
+Pela **alínea "c" do art. 13 da Lei nº 9.532/1997** (redação da Lei nº 13.204/2015), a dedução do doador exige que a beneficiária seja **organização da sociedade civil** na forma da Lei nº 13.019/2014 que cumpra os **arts. 3º e 16 da Lei nº 9.790/1999**: **independentemente de certificação**. Na prática, a entidade precisa provar, a qualquer momento:
 
-- estatuto com finalidades compatíveis (vedação a finalidades político-partidárias — art. 16 da Lei nº 9.790/1999);
+- estatuto com finalidades compatíveis (vedação a finalidades político-partidárias: art. 16 da Lei nº 9.790/1999);
 - escrituração completa de receitas e despesas (alínea "c" do art. 12);
 - prestação de contas das parcerias (MROSC), quando houver;
 - comprovação de destinação integral dos recursos ao objeto.
@@ -732,23 +732,23 @@ Pela **alínea "c" do art. 13 da Lei nº 9.532/1997** (redação da Lei nº 13.2
 | **Recepção qualificada** | A ONG (benefício do art. 84-B) | **2% da receita bruta do doador** + bens móveis irrecuperáveis/apreendidos | Lei nº 13.019/2014, art. 84-B |
 | **Redução linear de 2026** | Todos os benefícios de gasto tributário | **90%** do benefício (10% de redução) | LC nº 224/2025, art. 4º; IN RFB nº 2.307/2026 |
 
-### 11.3 Exemplo 12 — a empresa que quer doar R$ 60.000,00
+### 11.3 Exemplo 12: a empresa que quer doar R$ 60.000,00
 
 Empresa com **receita bruta de R$ 5.000.000,00** e **lucro operacional de R$ 1.500.000,00** pretende doar **R$ 60.000,00** à entidade.
 
-**Portão 1 — o que a empresa deduz (Lei nº 9.249/1995, art. 13, § 2º, III):**
+**Portão 1, o que a empresa deduz (Lei nº 9.249/1995, art. 13, § 2º, III):**
 
 1. limite: 2% × 1.500.000 = **R$ 30.000,00**;
 2. a doação de R$ 60.000,00 **excede** o limite → dedutíveis apenas **R$ 30.000,00**;
 3. economia: 30.000 × 34% = **R$ 10.200,00**;
 4. custo líquido: 60.000 − 10.200 = **R$ 49.800,00** → **83% da doação sai do bolso** da empresa.
 
-**Portão 2 — o que a entidade pode receber qualificadamente (art. 84-B):**
+**Portão 2, o que a entidade pode receber qualificadamente (art. 84-B):**
 
 1. limite: 2% × 5.000.000 = **R$ 100.000,00**;
 2. a doação de R$ 60.000,00 **cabe integralmente** nesse teto → a via do art. 84-B permanece aberta.
 
-**Cenário invertido — quando a receita bruta vira o gargalo:** se a empresa pretendesse doar **R$ 110.000,00**, a dedução pelo lucro alcançaria 2% × 1.500.000 = R$ 30.000,00, mas o **art. 84-B só alcança R$ 100.000,00** (2% da receita bruta). Para planejar, considera-se o **menor campo seguro** — **R$ 100.000,00** — e confirma-se com a assessoria tributária antes de publicar o material da campanha.
+**Cenário invertido: quando a receita bruta vira o gargalo:** se a empresa pretendesse doar **R$ 110.000,00**, a dedução pelo lucro alcançaria 2% × 1.500.000 = R$ 30.000,00, mas o **art. 84-B só alcança R$ 100.000,00** (2% da receita bruta). Para planejar, considera-se o **menor campo seguro**: **R$ 100.000,00**, e confirma-se com a assessoria tributária antes de publicar o material da campanha.
 
 **Efeito da redução linear de 10% (2026):** com o benefício de base reduzido a 90%, o limite de dedução passa a 1.500.000 × 2% × 90% = **R$ 27.000,00** → economia 27.000 × 34% = **R$ 9.180,00** → diferença de **R$ 1.020,00** sobre a conta nominal.
 
@@ -756,14 +756,14 @@ Empresa com **receita bruta de R$ 5.000.000,00** e **lucro operacional de R$ 1.5
 
 | Operação | Natureza | Efeito tributário | Regra contábil |
 |---|---|---|---|
-| **Doação privada sem contraprestação** em benefício do doador | Não incidência | ISS: LC nº 116/2003, art. 2 — **IBS/CBS: LC nº 214/2025, art. 6** | ITG 2002 (R1), item 9: reconhecimento **no resultado** |
-| **Termo de colaboração, termo de fomento ou acordo de cooperação** (MROSC) | Transferência pública com plano de trabalho | Não é receita de serviço; observar o IBS/CBS conforme a contraprestação pactuada | ITG 2002 (R1) — segregação por fonte (LC nº 187/2021, art. 3º, IV) |
+| **Doação privada sem contraprestação** em benefício do doador | Não incidência | ISS: LC nº 116/2003, art. 2: **IBS/CBS: LC nº 214/2025, art. 6** | ITG 2002 (R1), item 9: reconhecimento **no resultado** |
+| **Termo de colaboração, termo de fomento ou acordo de cooperação** (MROSC) | Transferência pública com plano de trabalho | Não é receita de serviço; observar o IBS/CBS conforme a contraprestação pactuada | ITG 2002 (R1): segregação por fonte (LC nº 187/2021, art. 3º, IV) |
 | **Prestação de serviço com contraprestação** | Receita de serviço | **ISS de 2% a 5%** (LC nº 116/2003, arts. 8, II, e 8-A) e IBS/CBS a partir da transição | ITG 2002 (R1), item 8: **competência** |
 
 > [!IMPORTANT]
-> **A fronteira entre doação e serviço é a contraprestação.** Se a entidade entrega à contrapartida um **serviço, cessão de direito ou benefício material** em benefício do doador, a operação **sai da** hipótese de não incidência e passa a ser **fato gerador de ISS** (e, na transição, de IBS/CBS). A promessa de "devolutiva" — nome de sala, verba de gestão, contrapartida publicitária material — deve ser **analisada caso a caso** e, havendo dúvida, a entidade deve optar pelo recolhimento, não pela omissão.
+> **A fronteira entre doação e serviço é a contraprestação.** Se a entidade entrega à contrapartida um **serviço, cessão de direito ou benefício material** em benefício do doador, a operação **sai da** hipótese de não incidência e passa a ser **fato gerador de ISS** (e, na transição, de IBS/CBS). A promessa de "devolutiva", nome de sala, verba de gestão, contrapartida publicitária material, deve ser **analisada caso a caso** e, havendo dúvida, a entidade deve optar pelo recolhimento, não pela omissão.
 
-- **🔢 Você sabia?** A mesma doação pode ser **dedutível para o doador** (art. 13 da Lei nº 9.532/1997) e, ao mesmo tempo, estar **fora do art. 84-B** da MROSC se o doador ultrapassar 2% da sua receita bruta: são portões diferentes, com contadores diferentes. A conferência de uma doação grande leva três perguntas — quem doa, quanto lucra e quanto fatura.
+- **🔢 Você sabia?** A mesma doação pode ser **dedutível para o doador** (art. 13 da Lei nº 9.532/1997) e, ao mesmo tempo, estar **fora do art. 84-B** da MROSC se o doador ultrapassar 2% da sua receita bruta: são portões diferentes, com contadores diferentes. A conferência de uma doação grande leva três perguntas: quem doa, quanto lucra e quanto fatura.
 
 ---
 
@@ -788,13 +788,13 @@ Empresa com **receita bruta de R$ 5.000.000,00** e **lucro operacional de R$ 1.5
 
 ### 12.2 Os sete erros que derrubam a imunidade ou custam caro
 
-1. **Tratar imunidade como dispensa de declaração** — ECD, ECF, DCTFWeb e eSocial continuam obrigatórias (seção 8);
-2. **Deixar de reter IRRF ou ISS** — descumprimento da alínea "f" do art. 12 e gatilho de suspensão (art. 14 + art. 32 da Lei nº 9.430/1996);
-3. **Remunerar dirigente sem prestação de serviço efetiva** — quebra a alínea "a" e é o erro de maior penalidade nas auditorias;
-4. **Perder o percentual de SUS ou de gratuidade no ano de renovação** — a regra é a média do período (mínimo 60%) com piso de **50% por ano** (LC nº 187/2021, art. 11);
-5. **Não segregar a escrituração por fonte** — sem segregação, a gratuidade e a subvenção são indistinguíveis na prova;
-6. **Orçar 2027 sem a linha de IBS/CBS nas compras** — o art. 9º, § 4º, da LC nº 214/2025 faz o tributo das compras virar custo **sem crédito** (seção 7);
-7. **Prometer "doação 100% dedutível" em 2026** — a IN RFB nº 2.307/2026 revogou o item 26 (doações) da lista da IN RFB nº 2.305/2025, de modo que o benefício passou a sofrer a **redução linear de 10%**.
+1. **Tratar imunidade como dispensa de declaração**: ECD, ECF, DCTFWeb e eSocial continuam obrigatórias (seção 8);
+2. **Deixar de reter IRRF ou ISS**: descumprimento da alínea "f" do art. 12 e gatilho de suspensão (art. 14 + art. 32 da Lei nº 9.430/1996);
+3. **Remunerar dirigente sem prestação de serviço efetiva**: quebra a alínea "a" e é o erro de maior penalidade nas auditorias;
+4. **Perder o percentual de SUS ou de gratuidade no ano de renovação**: a regra é a média do período (mínimo 60%) com piso de **50% por ano** (LC nº 187/2021, art. 11);
+5. **Não segregar a escrituração por fonte**: sem segregação, a gratuidade e a subvenção são indistinguíveis na prova;
+6. **Orçar 2027 sem a linha de IBS/CBS nas compras**, o art. 9º, § 4º, da LC nº 214/2025 faz o tributo das compras virar custo **sem crédito** (seção 7);
+7. **Prometer "doação 100% dedutível" em 2026**: a IN RFB nº 2.307/2026 revogou o item 26 (doações) da lista da IN RFB nº 2.305/2025, de modo que o benefício passou a sofrer a **redução linear de 10%**.
 
 ### 12.3 Plano de 90 dias
 
@@ -807,20 +807,20 @@ Empresa com **receita bruta de R$ 5.000.000,00** e **lucro operacional de R$ 1.5
 > [!IMPORTANT]
 > **A imunidade é um sistema, não uma lista de descontos.** Os requisitos do art. 12 da Lei nº 9.532/1997, os percentuais da LC nº 187/2021, as obrigações acessórias de 2026 e a escrituração da ITG 2002 (R1) **dependem uns dos outros**: cai um deles e a consequência atinge os demais. A pergunta de governança certa, todo fim de trimestre, não é "quanto economizamos?", e sim "**o que nos sustentaria diante de uma fiscalização hoje?**".
 
-- **🔢 Você sabia?** O prazo de guarda de documentos é **duplo**: **5 anos** pela alínea "d" do art. 12 da Lei nº 9.532/1997 e **10 anos** pela LC nº 187/2021 (art. 3º). Quando as duas normas se aplicam, vale o **maior** — e o arquivo deve ser montado pensando em 10 anos, não em 5.
+- **🔢 Você sabia?** O prazo de guarda de documentos é **duplo**: **5 anos** pela alínea "d" do art. 12 da Lei nº 9.532/1997 e **10 anos** pela LC nº 187/2021 (art. 3º). Quando as duas normas se aplicam, vale o **maior**, e o arquivo deve ser montado pensando em 10 anos, não em 5.
 
 ---
 
 ## 13. Atualizações 2025-2026: Status e Vigência de Tudo o que Mudou
 
-Entre janeiro de 2025 e agosto de 2026 o Congresso Nacional aprovou **quatro leis complementares** (LC nº 214/2025, LC nº 224/2025, LC nº 227/2026 e LC nº 235/2026) e, no mesmo intervalo, o Executivo publicou decretos, instruções normativas e ato conjunto de execução que **já alteraram essas próprias leis** — cada um deles mexeu em peça diferente do regime das OSCs. O resultado é que **citar "LC nº 214/2025" sozinha já não basta**: todo artigo precisa ser lido na **redação vigente**, com a data de publicação à vista. Esta seção faz exatamente isso — status, vigência e efeito de cada norma, seguidos da jurisprudência de 2023 a 2026 e do plano de preparação para a CBS de 2027, **sem nada além do que foi verificado nas fontes oficiais**.
+Entre janeiro de 2025 e agosto de 2026 o Congresso Nacional aprovou **quatro leis complementares** (LC nº 214/2025, LC nº 224/2025, LC nº 227/2026 e LC nº 235/2026) e, no mesmo intervalo, o Executivo publicou decretos, instruções normativas e ato conjunto de execução que **já alteraram essas próprias leis**, cada um deles mexeu em peça diferente do regime das OSCs. O resultado é que **citar "LC nº 214/2025" sozinha já não basta**: todo artigo precisa ser lido na **redação vigente**, com a data de publicação à vista. Esta seção faz exatamente isso, status, vigência e efeito de cada norma, seguidos da jurisprudência de 2023 a 2026 e do plano de preparação para a CBS de 2027, **sem nada além do que foi verificado nas fontes oficiais**.
 
 ### 13.1 Status e vigência, norma por norma
 
 | Norma | Publicação | Status em out/2026 | O que mudou para a OSC |
 |---|---|---|---|
 | **EC nº 132/2023** | dez/2023 | **Promulgada e em vigor** | Institui IBS e CBS, marca o fim do PIS/PASEP e da COFINS para **1º/1/2027** e inclui o art. 149-B (IBS/CBS observam o art. 150, VI, sem aplicação do art. 195, § 7º) |
-| **LC nº 214/2025** | 16/01/2025 | **Vigente, já alterada** | Regras gerais do IBS/CBS/IS, imunidade das OSC no art. 9º e transição 2026-2033; **foi alterada pela LC nº 227/2026** — citar sempre na redação atualizada |
+| **LC nº 214/2025** | 16/01/2025 | **Vigente, já alterada** | Regras gerais do IBS/CBS/IS, imunidade das OSC no art. 9º e transição 2026-2033; **foi alterada pela LC nº 227/2026**: citar sempre na redação atualizada |
 | **LC nº 224/2025** | 26/12/2025 | **Vigente, sob controle de constitucionalidade** | Redução linear de 10% dos incentivos federais (art. 4º); **ADI 7.920** (CNI) pendente no STF e **PLC nº 11/2026** em tramitação |
 | **LC nº 227/2026** | 13/01/2026 (DOU 14/01/2026) | **Vigente** | Institui o **CGIBS**, disciplina o processo administrativo tributário do IBS, a distribuição da arrecadação e normas gerais de ITCMD; **altera a própria LC nº 214/2025** |
 | **IN RFB nº 2.307/2026** | 20/02/2026 (DOU 23/02/2026) | **Vigente** | Substitui o Anexo da IN RFB nº 2.305/2025: **revoga o item 26** (doações de PF/PJ a OSC) e **mantém o item 34** (isenção do art. 15 da Lei nº 9.532/1997) |
@@ -830,7 +830,7 @@ Entre janeiro de 2025 e agosto de 2026 o Congresso Nacional aprovou **quatro lei
 | **Ato Conjunto RFB/CGIBS nº 1/2025** | 23/12/2025 | **Vigente** | Regras do ano-teste: dispensa da taxa de prova **desde que cumpridas as obrigações acessórias** |
 
 > [!NOTE]
-> **Regra de leitura para 2026:** quanto mais recente a norma, mais provável que ela tenha sido **alterada por outra do mesmo ano**. A LC nº 214/2025 (jan/2025) já foi alterada pela LC nº 227/2026 (jan/2026); a LC nº 224/2025 (dez/2025) já foi alterada pela LC nº 235/2026 (ago/2026); o Decreto nº 12.955/2026 (abr/2026) já foi alterado pelo Decreto nº 13.075/2026 (jul/2026). Antes de citar qualquer artigo em parecer, edital ou contrato, abra o **texto consolidado** — não a publicação original.
+> **Regra de leitura para 2026:** quanto mais recente a norma, mais provável que ela tenha sido **alterada por outra do mesmo ano**. A LC nº 214/2025 (jan/2025) já foi alterada pela LC nº 227/2026 (jan/2026); a LC nº 224/2025 (dez/2025) já foi alterada pela LC nº 235/2026 (ago/2026); o Decreto nº 12.955/2026 (abr/2026) já foi alterado pelo Decreto nº 13.075/2026 (jul/2026). Antes de citar qualquer artigo em parecer, edital ou contrato, abra o **texto consolidado**: não a publicação original.
 
 **Citações que já não valem em 2026:**
 
@@ -865,7 +865,7 @@ Entre janeiro de 2025 e agosto de 2026 o Congresso Nacional aprovou **quatro lei
 O ano-teste tem três características que a gestão precisa decorar:
 
 1. **Duas alíquotas de teste na NF-e:** CBS de **0,9%** (art. 582 do Decreto nº 12.955/2026) e IBS de **0,1%**, destacadas de 1º/1/2026 a 31/12/2026;
-2. **Compensação com o sistema atual:** o destaque é **compensado com o PIS/COFINS apurado no mesmo período** — os dois sistemas convivem na mesma apuração, e não um após o outro;
+2. **Compensação com o sistema atual:** o destaque é **compensado com o PIS/COFINS apurado no mesmo período**: os dois sistemas convivem na mesma apuração, e não um após o outro;
 3. **Taxa de prova condicionada:** a dispensa da taxa de prova depende do **cumprimento das obrigações acessórias** (Ato Conjunto RFB/CGIBS nº 1/2025, de 23/12/2025).
 
 | Etapa | Período | O que vale | O que a OSC deve fazer |
@@ -878,7 +878,7 @@ O ano-teste tem três características que a gestão precisa decorar:
 - **🔢 Você sabia?** Em 2026 **não existe "ano sem tributo"**: a CBS de 0,9% e o IBS de 0,1% destacados na NF-e são **compensados com o PIS/COFINS do mesmo período**, de modo que a apuração de 2026 é a única da década em que os dois sistemas aparecem **na mesma tela**. Quem trata 2026 como ano de férias fiscal descobre a conta em 2027, quando a CBS já está sendo cobrada.
 
 > [!WARNING]
-> **"Ano-teste" não significa "ano sem obrigação".** A dispensa da taxa de prova de 2026 **depende do cumprimento das obrigações acessórias** (Ato Conjunto RFB/CGIBS nº 1/2025, de 23/12/2025). Entidade que entregar ECD (30/06), ECF (31/07), DCTFWeb ou eSocial fora do prazo perde justamente o que o ano-teste oferecia — e descobre a penalidade em 2027, quando a CBS já estiver sendo cobrada e não haverá mais "período de teste" a invocar. Confirme com a assessoria a data exata de entrega de cada obrigação na agenda tributária de 2026.
+> **"Ano-teste" não significa "ano sem obrigação".** A dispensa da taxa de prova de 2026 **depende do cumprimento das obrigações acessórias** (Ato Conjunto RFB/CGIBS nº 1/2025, de 23/12/2025). Entidade que entregar ECD (30/06), ECF (31/07), DCTFWeb ou eSocial fora do prazo perde justamente o que o ano-teste oferecia, e descobre a penalidade em 2027, quando a CBS já estiver sendo cobrada e não haverá mais "período de teste" a invocar. Confirme com a assessoria a data exata de entrega de cada obrigação na agenda tributária de 2026.
 
 ### 13.4 Jurisprudência de 2023 a 2026 que muda a prática da OSC
 
@@ -891,37 +891,37 @@ As decisões abaixo foram verificadas com **número de processo, de acórdão ou
 | **TCU 6107/2025-1ª Câmara** | Associação **extinta antes da citação**: citação nula, arquivamento da entidade | Sem destinação do patrimônio (**art. 61 do Código Civil**) não há sucessora; **débito e multa ficam com os dirigentes** | Formalizar dissolução com **ata de destinação dos bens** a entidade idêntica ou semelhante |
 | **TCU 6633/2025-1ª Câmara** | Responsabilização de instituto, empresas e dirigentes | **Fachada** e sub-rogação integral; dano apurado pela **Teoria do Produto Bruto Mitigado** | Vedada a sub-rogação do objeto; prestar contas de patrocínio com rastreio |
 | **STJ, Informativo 893** (Inq 1.913/DF, 17/06/2026, rel. Min. João Otávio de Noronha) | Denúncia recebida por **peculato-desvio** (art. 312 do Código Penal) | Desvio de **R$ 6.090.142** dos **R$ 7 milhões** de acordo MPT×banco; laudos e extratos bastam para a justa causa | Prestação de contas idônea e **segregação entre gestão e contabilidade** |
-| **STJ, REsp 2.008.646** (4ª Turma, 18/11/2025) e **REsps 2.159.844** etc. (16/12/2025) | **Vedada a recuperação judicial** de associação e fundação sem fins lucrativos | Lei nº 11.101/2005 alcança só **empresários** (arts. 1º e 2º); exceção das cooperativas médicas (**ADI 7.442/STF**) | Crise financeira via acordo, reestruturação ou **dissolução limpa** — não via RJ |
-| **STJ, 3ª Turma** (REsps 2.155.284 etc., DJe 04/10/2024) | Mesma tese da vedação; manteve RJ de 5 anos pelo **fato consumado** | Segurança jurídica preserva atos consolidados — **exceção, não modelo a seguir** | Não construir plano de recuperação sobre a exceção |
+| **STJ, REsp 2.008.646** (4ª Turma, 18/11/2025) e **REsps 2.159.844** etc. (16/12/2025) | **Vedada a recuperação judicial** de associação e fundação sem fins lucrativos | Lei nº 11.101/2005 alcança só **empresários** (arts. 1º e 2º); exceção das cooperativas médicas (**ADI 7.442/STF**) | Crise financeira via acordo, reestruturação ou **dissolução limpa**: não via RJ |
+| **STJ, 3ª Turma** (REsps 2.155.284 etc., DJe 04/10/2024) | Mesma tese da vedação; manteve RJ de 5 anos pelo **fato consumado** | Segurança jurídica preserva atos consolidados: **exceção, não modelo a seguir** | Não construir plano de recuperação sobre a exceção |
 | **TST, 7ª Turma** (RR-100039-53.2019.5.01.0206, rel. Min. Evandro Valadão, 2025) | Ex-conselheiros **excluídos** da execução trabalhista | Só responde quem praticou **gestão** ou **aprovou contas** (art. 5º, II, da CF) | Guardar atas, convocações e aprovação de contas de cada mandato |
 | **STJ, REsp 1.812.929/DF** (2023) | Desconsideração da personalidade **limitada a gestores** | Art. 50 do Código Civil exige **abuso do agente**; filiação nominal ≠ gestão | Diretoria e conselho documentam a separação entre sócio nominal e gestor |
 
-Duas leituras transversais desses julgados: (i) o **TCU** tornou-se, em 2025, a principal vara fiscal das OSCs — o que se decide lá é a **forma de contratar e de prestar contas** (metas, cronograma, publicação), não a regularidade tributária em si; (ii) o **STJ e o TST** vêm limitando a responsabilidade **pessoal** de quem não geriu — mas a proteção só existe **se a gestão estiver documentada**. Ata que não existe é ato de gestão que não se prova.
+Duas leituras transversais desses julgados: (i) o **TCU** tornou-se, em 2025, a principal vara fiscal das OSCs, o que se decide lá é a **forma de contratar e de prestar contas** (metas, cronograma, publicação), não a regularidade tributária em si; (ii) o **STJ e o TST** vêm limitando a responsabilidade **pessoal** de quem não geriu, mas a proteção só existe **se a gestão estiver documentada**. Ata que não existe é ato de gestão que não se prova.
 
 > [!IMPORTANT]
 > **Medida administrativa correlata (2025):** o **acordo INSS-MPF-DPU-OAB-AGU** instituiu, em **14/05/2025**, o **PDMA** (plano de devolução) após a **Recomendação nº 18/2025 do MPF**: **9,42 milhões de benefícios** com **desconto associativo indevido** de março/2020 a março/2025 são contestáveis, e a entidade tem **15 dias úteis** para devolver os valores via GRU ou comprovar autorização na forma da IN PRES/INSS nº 162/2024 (biometria/assinatura). Quem retém mensalidade associativa de aposentados precisa inventariar as adesões **antes** da cobrança automática.
 
-### 13.5 Exemplo 13 — o plano de preparação da ONG para a CBS de 2027
+### 13.5 Exemplo 13, o plano de preparação da ONG para a CBS de 2027
 
 Uma empresa com lucro operacional de **R$ 1.000.000,00** doa **R$ 40.000,00** a uma OSC em 2026, e a diretoria da ONG precisa ajustar a captação e o orçamento até 31/12/2026.
 
-**Passo 1 — recalcular o incentivo do doador com a regra de 2026:**
+**Passo 1: recalcular o incentivo do doador com a regra de 2026:**
 
 1. limite nominal: 2% × 1.000.000 = **R$ 20.000,00** (Lei nº 9.249/1995, art. 13, § 2º, III);
 2. economia nominal: 20.000 × 34% = **R$ 6.800,00**;
 3. **redução linear (LC nº 224/2025, art. 4º, § 4º, III):** a redução de base passa a valer por **90%** → 20.000 × 90% = **R$ 18.000,00** dedutíveis;
 4. economia real: 18.000 × 34% = **R$ 6.120,00** → **diferença de R$ 680,00** sobre a conta nominal;
-5. **fundamento do corte:** a IN RFB nº 2.307/2026 **revogou o item 26** do anexo anterior — a dedução de doações de PF/PJ a OSC **entrou no corte**, enquanto o **item 34** (isenção da própria OSC) permaneceu preservado.
+5. **fundamento do corte:** a IN RFB nº 2.307/2026 **revogou o item 26** do anexo anterior: a dedução de doações de PF/PJ a OSC **entrou no corte**, enquanto o **item 34** (isenção da própria OSC) permaneceu preservado.
 
-**Passo 2 — comunicar o doador com a mensagem certa:** a frase correta não é "sua doação é 100% dedutível", e sim "**até 2% do seu lucro operacional, limitada a 90% desse benefício em 2026**" — com a ressalva de assessoria tributária e a observação de que a **ADI 7.920** e o **PLC nº 11/2026** podem alterar o desenho durante o ano.
+**Passo 2, comunicar o doador com a mensagem certa:** a frase correta não é "sua doação é 100% dedutível", e sim "**até 2% do seu lucro operacional, limitada a 90% desse benefício em 2026**", com a ressalva de assessoria tributária e a observação de que a **ADI 7.920** e o **PLC nº 11/2026** podem alterar o desenho durante o ano.
 
-**Passo 3 — abrir a linha orçamentária de 2027:** pelo art. 9º, § 4º, da LC nº 214/2025, as compras da entidade imune **continuam sujeitas ao IBS/CBS e sem direito a crédito**. Sobre compras de R$ 1.200.000,00/ano, cada **1 p.p. de alíquota combinada** custa **R$ 12.000,00/ano** (seção 7).
+**Passo 3: abrir a linha orçamentária de 2027:** pelo art. 9º, § 4º, da LC nº 214/2025, as compras da entidade imune **continuam sujeitas ao IBS/CBS e sem direito a crédito**. Sobre compras de R$ 1.200.000,00/ano, cada **1 p.p. de alíquota combinada** custa **R$ 12.000,00/ano** (seção 7).
 
-**Passo 4 — revisar contratos de longo prazo:** incluir cláusula tributária e cláusula de reajuste que mencione a transição **2027-2033**, evitando que o tributo novo seja absorvido integralmente pela entidade por omissão contratual.
+**Passo 4: revisar contratos de longo prazo:** incluir cláusula tributária e cláusula de reajuste que mencione a transição **2027-2033**, evitando que o tributo novo seja absorvido integralmente pela entidade por omissão contratual.
 
-**Passo 5 — blindar o calendário de obrigações de 2026:** ECD **30/06**, ECF **31/07**, DCTFWeb mensal e eSocial — são elas que sustentam tanto a taxa de prova isenta do ano-teste quanto a defesa da imunidade.
+**Passo 5, blindar o calendário de obrigações de 2026:** ECD **30/06**, ECF **31/07**, DCTFWeb mensal e eSocial, são elas que sustentam tanto a taxa de prova isenta do ano-teste quanto a defesa da imunidade.
 
-**Passo 6 — manter o acompanhamento normativo mensal:** ADI 7.920 (STF), PLC 11/2026 (Congresso) e eventual regulamentação complementar da LC nº 227/2026.
+**Passo 6: manter o acompanhamento normativo mensal:** ADI 7.920 (STF), PLC 11/2026 (Congresso) e eventual regulamentação complementar da LC nº 227/2026.
 
 | Prazo | Ação | Responsável | Prova que deve existir |
 |---|---|---|---|
@@ -935,19 +935,19 @@ Uma empresa com lucro operacional de **R$ 1.000.000,00** doa **R$ 40.000,00** a 
 
 **Dossiê mínimo da entidade isenta (guardar em pasta única e citar em eventual auto de infração):**
 
-1. **Item 34 do Anexo da IN RFB nº 2.307/2026** — isenção de IRPJ, CSLL e COFINS do art. 15 da Lei nº 9.532/1997 constando expressamente da lista do que **não** foi reduzido;
+1. **Item 34 do Anexo da IN RFB nº 2.307/2026**: isenção de IRPJ, CSLL e COFINS do art. 15 da Lei nº 9.532/1997 constando expressamente da lista do que **não** foi reduzido;
 2. **Inciso V do § 8º do art. 4º da LC nº 224/2025**, com a redação dada pelo **art. 11 da LC nº 235/2026**;
-3. **Perguntas e Respostas da RFB** sobre a redução dos incentivos (versão 5) — o Anexo Único **não é exaustivo**.
+3. **Perguntas e Respostas da RFB** sobre a redução dos incentivos (versão 5), o Anexo Único **não é exaustivo**.
 
 Essa pasta **não substitui** o parecer e **não se confunde** com a dedução do doador (item 26, revogado): o item 34 protege a **isenção da entidade**; o item 26 protegia a **dedutibilidade de quem doa**. Guardar os dois no mesmo dossiê, mas em abas diferentes.
 
 **O que ficou de fora por falta de confirmação (não verificado):**
 
-- **Dois incisos "V" no § 8º do art. 4º da LC nº 224/2025:** a consolidação oficial exibe a redação antiga (Leis nº 9.790/1999 e nº 9.637/1998) **e** a nova da LC nº 235/2026; **não se confirmou** a revogação da anterior — confirme no texto consolidado;
-- **CEBAS e art. 12 da Lei nº 9.532/1997:** a LC nº 235/2026 ressalvou o art. 15 e a MP nº 2.158-35/2001, mas **não foi localizada ressalva expressa ao art. 12** (IRPJ/CSLL de educação e assistência) — **não verificado**; não afirme em peça sem conferir;
+- **Dois incisos "V" no § 8º do art. 4º da LC nº 224/2025:** a consolidação oficial exibe a redação antiga (Leis nº 9.790/1999 e nº 9.637/1998) **e** a nova da LC nº 235/2026; **não se confirmou** a revogação da anterior: confirme no texto consolidado;
+- **CEBAS e art. 12 da Lei nº 9.532/1997:** a LC nº 235/2026 ressalvou o art. 15 e a MP nº 2.158-35/2001, mas **não foi localizada ressalva expressa ao art. 12** (IRPJ/CSLL de educação e assistência): **não verificado**; não afirme em peça sem conferir;
 - **Anexo Único da IN RFB nº 2.305/2025:** os itens 26, 32, 33 e 34 foram lidos, mas a **lista completa** não foi percorrida item a item.
 
-- **🔢 Você sabia?** As **Perguntas e Respostas da RFB** sobre a redução dos incentivos esclarecem que o Anexo Único **não é exaustivo** e que **associações de categoria profissional e econômica não são alcançadas** pela redução linear — resposta oficial que muda o resultado de uma fiscalização e que cabe, junto com o item 34 e o inciso V do § 8º, no dossiê de defesa da entidade.
+- **🔢 Você sabia?** As **Perguntas e Respostas da RFB** sobre a redução dos incentivos esclarecem que o Anexo Único **não é exaustivo** e que **associações de categoria profissional e econômica não são alcançadas** pela redução linear: resposta oficial que muda o resultado de uma fiscalização e que cabe, junto com o item 34 e o inciso V do § 8º, no dossiê de defesa da entidade.
 
 ### 13.7 Onde conferir a vigência antes de citar
 
@@ -961,28 +961,28 @@ Essa pasta **não substitui** o parecer e **não se confunde** com a dedução d
 | Situação da **ADI 7.920** contra a LC nº 224/2025 | Portal de notícias do **STF** | A decisão pode alterar o desenho das exceções do art. 4º, § 8º |
 
 > [!NOTE]
-> **Hábito de governança fiscal:** agende uma **revisão mensal de 30 minutos** em 2026 apenas para conferir vigência — texto consolidado, agenda tributária da Receita e situação da ADI 7.920. Custo baixo, e evita a hipótese mais cara de todas: sustentar uma decisão com dispositivo já superado.
+> **Hábito de governança fiscal:** agende uma **revisão mensal de 30 minutos** em 2026 apenas para conferir vigência: texto consolidado, agenda tributária da Receita e situação da ADI 7.920. Custo baixo, e evita a hipótese mais cara de todas: sustentar uma decisão com dispositivo já superado.
 
 ```dragdrop
 {
   "question": "Ordene a cronologia da reforma tributária e das normas que afetam as OSCs, do primeiro marco ao início da cobrança da CBS:",
   "items": [
-    "EC nº 132/2023 — institui IBS e CBS e prevê o fim do PIS/COFINS",
-    "LC nº 214/2025 (16/01/2025) — regras gerais, imunidade das OSC e transição 2026-2033",
-    "LC nº 224/2025 (26/12/2025) — redução linear de 10% dos incentivos federais",
-    "LC nº 227/2026 (13/01/2026) — cria o CGIBS e altera a LC nº 214/2025",
-    "Decreto nº 12.955/2026 (29/04/2026) — regulamenta a CBS e fixa 0,9% no ano-teste",
-    "LC nº 235/2026 (27/08/2026) — reescreve o inciso V do § 8º do art. 4º da LC nº 224/2025",
-    "1º/1/2027 — fim do PIS/COFINS e início da cobrança da CBS"
+    "EC nº 132/2023: institui IBS e CBS e prevê o fim do PIS/COFINS",
+    "LC nº 214/2025 (16/01/2025): regras gerais, imunidade das OSC e transição 2026-2033",
+    "LC nº 224/2025 (26/12/2025): redução linear de 10% dos incentivos federais",
+    "LC nº 227/2026 (13/01/2026): cria o CGIBS e altera a LC nº 214/2025",
+    "Decreto nº 12.955/2026 (29/04/2026): regulamenta a CBS e fixa 0,9% no ano-teste",
+    "LC nº 235/2026 (27/08/2026): reescreve o inciso V do § 8º do art. 4º da LC nº 224/2025",
+    "1º/1/2027: fim do PIS/COFINS e início da cobrança da CBS"
   ],
   "correctOrder": [
-    "EC nº 132/2023 — institui IBS e CBS e prevê o fim do PIS/COFINS",
-    "LC nº 214/2025 (16/01/2025) — regras gerais, imunidade das OSC e transição 2026-2033",
-    "LC nº 224/2025 (26/12/2025) — redução linear de 10% dos incentivos federais",
-    "LC nº 227/2026 (13/01/2026) — cria o CGIBS e altera a LC nº 214/2025",
-    "Decreto nº 12.955/2026 (29/04/2026) — regulamenta a CBS e fixa 0,9% no ano-teste",
-    "LC nº 235/2026 (27/08/2026) — reescreve o inciso V do § 8º do art. 4º da LC nº 224/2025",
-    "1º/1/2027 — fim do PIS/COFINS e início da cobrança da CBS"
+    "EC nº 132/2023: institui IBS e CBS e prevê o fim do PIS/COFINS",
+    "LC nº 214/2025 (16/01/2025): regras gerais, imunidade das OSC e transição 2026-2033",
+    "LC nº 224/2025 (26/12/2025): redução linear de 10% dos incentivos federais",
+    "LC nº 227/2026 (13/01/2026): cria o CGIBS e altera a LC nº 214/2025",
+    "Decreto nº 12.955/2026 (29/04/2026): regulamenta a CBS e fixa 0,9% no ano-teste",
+    "LC nº 235/2026 (27/08/2026): reescreve o inciso V do § 8º do art. 4º da LC nº 224/2025",
+    "1º/1/2027: fim do PIS/COFINS e início da cobrança da CBS"
   ],
   "explanation": "A ordem importa porque cada norma modifica a anterior: a EC 132/2023 só ganhou regra de execução com a LC 214/2025; o corte de 10% veio da LC 224/2025; o CGIBS e o Decreto da CBS vieram em 2026; e a LC 235/2026 reescreveu a exceção que protege o art. 15 da Lei nº 9.532/1997. Errar a ordem é citar dispositivo ainda não aplicável ou usar a redação já superada."
 }
@@ -992,7 +992,7 @@ Essa pasta **não substitui** o parecer e **não se confunde** com a dedução d
 
 ## Perguntas Práticas (Practice Questions)
 
-Resolva com o raciocínio passo a passo de cada seção — e confira a base legal antes de olhar o gabarito.
+Resolva com o raciocínio passo a passo de cada seção, e confira a base legal antes de olhar o gabarito.
 
 ```question
 {
@@ -1022,7 +1022,7 @@ Resolva com o raciocínio passo a passo de cada seção — e confira a base leg
     "31 de dezembro de 2033"
   ],
   "correct": 1,
-  "explanation": "Pela EC nº 132/2023 e pela LC nº 214/2025, a CBS só passa a ser cobrada a partir de 1º/1/2027 — logo, PIS/PASEP e COFINS vigem até 31/12/2026. 2033 é o ano da plenitude do novo sistema (teto de 26,5%)."
+  "explanation": "Pela EC nº 132/2023 e pela LC nº 214/2025, a CBS só passa a ser cobrada a partir de 1º/1/2027: logo, PIS/PASEP e COFINS vigem até 31/12/2026. 2033 é o ano da plenitude do novo sistema (teto de 26,5%)."
 }
 ```
 
@@ -1070,7 +1070,7 @@ Resolva com o raciocínio passo a passo de cada seção — e confira a base leg
     "Redestinou o dispositivo preservando o art. 15 da Lei nº 9.532/1997"
   ],
   "correct": 3,
-  "explanation": "A LC nº 235/2026 (27/08/2026) alterou o inciso V do art. 4º, § 8º, da LC nº 224/2025, passando a citar o art. 15 da Lei nº 9.532/1997 — leitura confirmada pela IN RFB nº 2.307/2026 (item 34) como preservação da isenção de IRPJ, CSLL e COFINS. O CGIBS veio da LC nº 227/2026."
+  "explanation": "A LC nº 235/2026 (27/08/2026) alterou o inciso V do art. 4º, § 8º, da LC nº 224/2025, passando a citar o art. 15 da Lei nº 9.532/1997: leitura confirmada pela IN RFB nº 2.307/2026 (item 34) como preservação da isenção de IRPJ, CSLL e COFINS. O CGIBS veio da LC nº 227/2026."
 }
 ```
 
@@ -1086,7 +1086,7 @@ Resolva com o raciocínio passo a passo de cada seção — e confira a base leg
     "31 de agosto de 2026"
   ],
   "correct": 1,
-  "explanation": "A ECD vence em 30/06/2026 (último dia útil de junho) e a ECF em 31/07/2026 — esta última obrigatória também para pessoas jurídicas imunes e isentas."
+  "explanation": "A ECD vence em 30/06/2026 (último dia útil de junho) e a ECF em 31/07/2026; esta última obrigatória também para pessoas jurídicas imunes e isentas."
 }
 ```
 
@@ -1099,7 +1099,7 @@ Resolva com o raciocínio passo a passo de cada seção — e confira a base leg
     "20%",
     "10%",
     "5%",
-    "Nenhuma — o percentual de SUS dispensa gratuidade"
+    "Nenhuma, o percentual de SUS dispensa gratuidade"
   ],
   "correct": 2,
   "explanation": "Com SUS ≥ 50%, aplica-se o art. 12, III, da LC nº 187/2021: gratuidade mínima de 5%. SUS entre 30% e 50% exige 10%; sem interesse de contratação ou SUS < 30%, exige 20%."
@@ -1118,7 +1118,7 @@ Resolva com o raciocínio passo a passo de cada seção — e confira a base leg
     "passam a se aplicar somente a partir de 2033"
   ],
   "correct": 0,
-  "explanation": "O § 4º afasta as imunidades das aquisições da entidade — materiais, imateriais, inclusive direitos, e serviços. Como a entidade imune não é contribuinte regular do novo sistema, não há crédito a tomar e o tributo das compras vira custo embutido no preço do fornecedor (seção 7)."
+  "explanation": "O § 4º afasta as imunidades das aquisições da entidade: materiais, imateriais, inclusive direitos, e serviços. Como a entidade imune não é contribuinte regular do novo sistema, não há crédito a tomar e o tributo das compras vira custo embutido no preço do fornecedor (seção 7)."
 }
 ```
 
@@ -1150,7 +1150,7 @@ Resolva com o raciocínio passo a passo de cada seção — e confira a base leg
     "Ausência de certificado CEBAS vigente"
   ],
   "correct": 1,
-  "explanation": "No Acórdão 1355/2025-Plenário (TC 009.123/2025-3, 18/06/2025), o TCU suspendeu repasses por fomento sem metas cronológicas (arts. 22, II-IV, da Lei nº 13.019/2014), sem cronograma de desembolso (art. 42, III) e em parcela única. A lição prática é assinar apenas com metas, cronograma e aderência ao plano de trabalho — a ausência de CEBAS não estava na decisão."
+  "explanation": "No Acórdão 1355/2025-Plenário (TC 009.123/2025-3, 18/06/2025), o TCU suspendeu repasses por fomento sem metas cronológicas (arts. 22, II-IV, da Lei nº 13.019/2014), sem cronograma de desembolso (art. 42, III) e em parcela única. A lição prática é assinar apenas com metas, cronograma e aderência ao plano de trabalho: a ausência de CEBAS não estava na decisão."
 }
 ```
 
@@ -1160,11 +1160,11 @@ Resolva com o raciocínio passo a passo de cada seção — e confira a base leg
   "pairs": [
     {"left": "Imunidade de impostos das OSC", "right": "CF art. 150, VI, \"c\", e Lei nº 9.532/1997, art. 12 (alíneas a a h)"},
     {"left": "Imunidade previdenciária (base do CEBAS)", "right": "CF art. 195, § 7º, e LC nº 187/2021, art. 4º"},
-    {"left": "Dedução da doação da pessoa jurídica", "right": "Lei nº 9.249/1995, art. 13, § 2º, III — 2% do lucro operacional"},
-    {"left": "Dedução da doação da pessoa física", "right": "Lei nº 9.532/1997, arts. 12 e 22 — 6% do IR devido"},
+    {"left": "Dedução da doação da pessoa jurídica", "right": "Lei nº 9.249/1995, art. 13, § 2º, III: 2% do lucro operacional"},
+    {"left": "Dedução da doação da pessoa física", "right": "Lei nº 9.532/1997, arts. 12 e 22: 6% do IR devido"},
     {"left": "Isenção de IRPJ, CSLL e COFINS das filantrópicas e associações civis", "right": "Lei nº 9.532/1997, art. 15 (item 34 da IN RFB nº 2.307/2026)"},
     {"left": "Redução linear de 10% dos incentivos federais em 2026", "right": "LC nº 224/2025, art. 4º (com as exceções do § 8º)"},
-    {"left": "IBS/CBS devidos nas aquisições da entidade imune", "right": "LC nº 214/2025, art. 9º, § 4º — sem direito a crédito"}
+    {"left": "IBS/CBS devidos nas aquisições da entidade imune", "right": "LC nº 214/2025, art. 9º, § 4º: sem direito a crédito"}
   ],
   "explanation": "Cada instituto tem fonte própria: Constituição (imunidades), leis ordinárias e complementares (deduções e isenções), LC nº 224/2025 (redução de 10%) e LC nº 214/2025 (IBS/CBS na cadeia de compras). Trocar as bases legais é o erro que invalida pareceres, editais e notas explicativas."
 }
@@ -1188,21 +1188,21 @@ Resolva com o raciocínio passo a passo de cada seção — e confira a base leg
 
 > [!WARNING]
 > **Armadilhas desta lição:**
-> - **Imunidade não é dispensa de declaração** — ECD (30/06), ECF (31/07), DCTFWeb e eSocial continuam obrigatórias;
+> - **Imunidade não é dispensa de declaração**: ECD (30/06), ECF (31/07), DCTFWeb e eSocial continuam obrigatórias;
 > - **A alínea "f" do art. 12** pega a entidade: não reter IRRF de aluguéis e ISS é descumprimento da própria imunidade, com suspensão pelo art. 14 e pelo art. 32 da Lei nº 9.430/1996;
-> - **CEBAS é obrigação contínua** — média do período ≥ 60%, piso de 50% por ano e gratuidade segregada;
-> - **As compras da entidade imune continuam com IBS/CBS** (LC nº 214/2025, art. 9º, § 4º) e **sem crédito** — abra a linha orçamentária antes de 2027;
-> - **Em 2026 a doação não é mais "100% dedutível"** — a IN RFB nº 2.307/2026 revogou o item 26 (doações) da IN RFB nº 2.305/2025 e o benefício sofre a redução linear de 10%;
+> - **CEBAS é obrigação contínua**: média do período ≥ 60%, piso de 50% por ano e gratuidade segregada;
+> - **As compras da entidade imune continuam com IBS/CBS** (LC nº 214/2025, art. 9º, § 4º) e **sem crédito**: abra a linha orçamentária antes de 2027;
+> - **Em 2026 a doação não é mais "100% dedutível"**: a IN RFB nº 2.307/2026 revogou o item 26 (doações) da IN RFB nº 2.305/2025 e o benefício sofre a redução linear de 10%;
 > - **Redutor de IRRF não é regra geral:** quem ganha acima de R$ 7.350,00/mês não tem redução, e a redução é limitada ao imposto apurado;
-> - **Renúncia fiscal é nota explicativa** (ITG 2002 (R1), item 27) — o que a entidade não divulga, a fiscalização calcula.
+> - **Renúncia fiscal é nota explicativa** (ITG 2002 (R1), item 27), o que a entidade não divulga, a fiscalização calcula.
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
-> 1. **Imunidade, isenção, não incidência e benefício do MROSC** são quatro institutos com fontes e efeitos diferentes — confundi-los é o erro mais caro da gestão fiscal;
+> 1. **Imunidade, isenção, não incidência e benefício do MROSC** são quatro institutos com fontes e efeitos diferentes: confundi-los é o erro mais caro da gestão fiscal;
 > 2. A imunidade de impostos (CF art. 150, VI, "c") depende dos **oito requisitos do art. 12 da Lei nº 9.532/1997**, e a alínea "f" (retenções) derruba a entidade que mais parece cumprir tudo;
-> 3. A **imunidade previdenciária** vale cerca de **R$ 264.000,00/ano** para uma folha de R$ 1.200.000,00 (20% + RAT 2%) — e a contrapartida de gratuidade de 5% deixa **R$ 204.000,00/ano** líquidos;
-> 4. O doador PJ deduz **2% do lucro operacional** (Lei nº 9.249/1995) e o doador PF **6% do IR devido** (Lei nº 9.532/1997) — em 2026, ambos alcançados pela **redução linear de 10%**;
+> 3. A **imunidade previdenciária** vale cerca de **R$ 264.000,00/ano** para uma folha de R$ 1.200.000,00 (20% + RAT 2%), e a contrapartida de gratuidade de 5% deixa **R$ 204.000,00/ano** líquidos;
+> 4. O doador PJ deduz **2% do lucro operacional** (Lei nº 9.249/1995) e o doador PF **6% do IR devido** (Lei nº 9.532/1997): em 2026, ambos alcançados pela **redução linear de 10%**;
 > 5. **2026 é ano-pivô:** PIS/COFINS até 31/12/2026, destaque de CBS 0,9% e IBS 0,1% na NF-e sem recolhimento, e LC 227/2026, Decreto 12.955/2026 e IN RFB 2.307/2026 no mesmo calendário;
-> 6. O **art. 9º, § 4º, da LC nº 214/2025** faz o IBS/CBS das compras virar **custo sem crédito** — num cenário de 12%, R$ 144.000,00/ano sobre compras de R$ 1.200.000,00;
+> 6. O **art. 9º, § 4º, da LC nº 214/2025** faz o IBS/CBS das compras virar **custo sem crédito**: num cenário de 12%, R$ 144.000,00/ano sobre compras de R$ 1.200.000,00;
 > 7. A **renúncia fiscal é divulgada nas notas** (ITG 2002 (R1), item 27): no exemplo do hospital, **R$ 366.000,00** de benefício tornam-se informação pública e prova de regularidade;
 > 8. Governança fiscal é calendário e evidência: **checklist, responsável, D-10 e prova arquivada por 10 anos** sustentam a imunidade diante de qualquer fiscalização.

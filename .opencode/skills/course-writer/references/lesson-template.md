@@ -1,5 +1,18 @@
 # Lesson Template Reference
 
+## Read-aloud and level rules (apply to every lesson)
+
+- **No em dashes (`—`), en dashes (`–`) or `--` in prose.** The read-aloud
+  engine skips them, so the sentence loses its pause. Use a comma, semicolon,
+  colon or full stop. Hyphens inside compound words (`read-only`) are fine.
+- **Open with a hook**, a real situation or a surprising number. Definitions
+  come after the reader has a reason to care.
+- **Follow the level profile** in `skill.md`: beginner uses daily-life
+  comparisons, intermediate is complete and practical, advanced is deep and
+  precise.
+- **Visual explanations**: a mechanism with three or more parts gets a Mermaid
+  diagram; three or more options get a table or a `plot`.
+
 ## File Structure
 
 Every lesson file follows this exact structure:
@@ -99,7 +112,7 @@ Examples:
 
 ## Publication-Grade Lesson Skeleton (exam-course pattern)
 
-The validator minimum is 5 questions + 1 interactive + Key Takeaways. Publication-grade lessons (see `content/courses/aws-dea-c01/en/`) go further — use this skeleton for full course builds:
+The validator minimum is 5 questions + 1 interactive + Key Takeaways. Publication-grade lessons (see `content/courses/aws-dea-c01/en/`) go further; use this skeleton for full course builds:
 
 ````markdown
 ---
@@ -111,7 +124,7 @@ duration: "60 minutes"
 ---
 # <Full lesson title>
 
-## 1. <Teaching section — concept + table + mermaid diagram>
+## 1. <Teaching section: concept + table + mermaid diagram>
 
 Prose with inline math where natural ($...$), a ```sql / ```python worked
 example with real numbers, then the interactive block that drills the concept
@@ -135,15 +148,15 @@ example with real numbers, then the interactive block that drills the concept
 ...
 
 > **Comparative Verdict:** <this-service/platform> vs <alternative-cloud> vs
-> <self-managed/on-prem> — when the exam prefers each.
+> <self-managed/on-prem>: when the exam prefers each.
 
 ## Real-World Case Studies
 
-### <Named company> — <one-line outcome>
+### <Named company>: <one-line outcome>
 <challenge / services / AWS-published metrics with source date / which domain it illustrates>
 
 ### 2026 Updates (as of October 2026)
-- <3–6 sourced bullets: rebrands, new limits, exam-guide revisions>
+- <3 to 6 sourced bullets: rebrands, new limits, exam-guide revisions>
 
 ⚠️ WARNING (or IMPORTANT) box with the sharpest trap for this topic.
 
@@ -164,4 +177,4 @@ Mandatory closers for publication-grade work:
 
 - Bare ` ``` ` fence closers everywhere (never ` ```text ` as a closer)
 - `> [!SUCCESS]` block containing the literal string `Key Takeaways` as the LAST content
-- Heading matching `^## .*Practice Questions` (e.g. `## Practice Questions`, `## 2. Practice Questions — Set A`)
+- Heading matching `^## .*Practice Questions` (e.g. `## Practice Questions`, `## 2. Practice Questions: Set A`)

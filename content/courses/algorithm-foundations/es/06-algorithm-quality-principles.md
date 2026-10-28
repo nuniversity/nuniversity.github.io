@@ -40,7 +40,7 @@ flowchart TD
 
 ## Corrección: obtener la respuesta correcta
 
-**Corrección** significa que el algoritmo produce la salida correcta para cada entrada válida. Esta es la cualidad más fundamental -- sin corrección, nada más importa.
+**Corrección** significa que el algoritmo produce la salida correcta para cada entrada válida. Esta es la cualidad más fundamental; sin corrección, nada más importa.
 
 ### Cómo verificar la corrección
 

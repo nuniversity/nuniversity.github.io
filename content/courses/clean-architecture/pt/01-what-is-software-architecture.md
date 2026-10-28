@@ -265,7 +265,7 @@ def test_purchase_product():
 ## A Arquitetura que Grita
 
 > [!NOTE]
-> Um sistema bem arquitetado **grita** seu propósito. Se você vê um projeto Django, sabe que é uma aplicação web. Mas um projeto de Arquitetura Limpa grita **o que ele faz** — e-commerce, banco, logística — independente do framework.
+> Um sistema bem arquitetado **grita** seu propósito. Se você vê um projeto Django, sabe que é uma aplicação web. Mas um projeto de Arquitetura Limpa grita **o que ele faz**, e-commerce, banco, logística, independente do framework.
 
 ```
 src/
@@ -336,7 +336,7 @@ src/
 8. **Refatoração de limite**: Pegue uma função que mistura parsing HTTP, lógica de negócio e acesso a banco de dados. Divida em três camadas.
 
 > [!SUCCESS]
-> Você completou a Lição 1. Lembre-se: arquitetura é sobre as decisões que importam — e torná-las reversíveis.
+> Você completou a Lição 1. Lembre-se: arquitetura é sobre as decisões que importam, e torná-las reversíveis.
 
 ## Comparação Detalhada de Estilos Arquiteturais
 
@@ -408,7 +408,7 @@ def test_place_order_use_case():
 1. **Comece pequeno**: Não superprojete antecipadamente. Extraia interfaces quando precisar delas.
 2. **Mantenha os limites claros**: Use Protocols para definir contratos entre camadas.
 3. **Teste sem infraestrutura**: Se você precisa de um banco de dados para testar lógica de negócio, sua arquitetura está errada.
-4. **Refatore continuamente**: Arquitetura não é um destino — é uma prática contínua.
+4. **Refatore continuamente**: Arquitetura não é um destino: é uma prática contínua.
 5. **Documente as decisões**: Use ADRs (Architecture Decision Records) para registrar decisões importantes.
 
 > [!SUCCESS]

@@ -74,7 +74,7 @@ Program continues...
 ```
 
 > [!NOTE]
-> Python uses indentation (typically 4 spaces) to define code blocks. This is not optional - it's how Python knows which statements belong to the if block.
+> Python uses indentation (typically 4 spaces) to define code blocks. This is not optional: it's how Python knows which statements belong to the if block.
 
 ## The if-else Statement
 
@@ -229,13 +229,13 @@ Score:  45 → Grade: F
 > [!WARNING]
 > Conditions are checked in order! Once a True condition is found, the rest are skipped. This means:
 > ```python
-> # WRONG ORDER - always returns "A"
+> # WRONG ORDER: always returns "A"
 > if score >= 60:
 >     return "D"  # 95 >= 60 is True, so this executes!
 > elif score >= 90:
 >     return "A"  # Never reached
 > 
-> # CORRECT ORDER - check highest first
+> # CORRECT ORDER: check highest first
 > if score >= 90:
 >     return "A"
 > elif score >= 60:

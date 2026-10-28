@@ -8,10 +8,10 @@ difficulty: "intermediário"
 
 # Comentários e Documentação
 
-Comentários são uma faca de dois gumes. Bons comentários explicam "por quê" — a justificativa por trás de uma decisão. Comentários ruins explicam "o quê" — que o código já deveria comunicar. O melhor comentário é aquele que você não precisa escrever porque o código já está claro.
+Comentários são uma faca de dois gumes. Bons comentários explicam "por quê", a justificativa por trás de uma decisão. Comentários ruins explicam "o quê", que o código já deveria comunicar. O melhor comentário é aquele que você não precisa escrever porque o código já está claro.
 
 > [!NOTE]
-> "Não comente código ruim — reescreva-o." — Brian W. Kernighan
+> "Não comente código ruim, reescreva-o.", Brian W. Kernighan
 
 ## Código Autodocumentável
 

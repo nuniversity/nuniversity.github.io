@@ -127,7 +127,7 @@ def mmr_rerank(
 | :--- | :--- |
 | λ = 1.0 | Pure relevance (standard top-k) |
 | λ = 0.0 | Pure diversity |
-| λ = 0.5–0.8 | Balanced (recommended) |
+| λ = 0.5 to 0.8 | Balanced (recommended) |
 
 [!TIP]
 MMR is ideal for summarization tasks where you want to cover multiple aspects of a topic without repeating the same information. Use λ = 0.7 for a slight relevance preference, or λ = 0.5 for equal balance. Lower λ when redundancy is more harmful than missing a slightly relevant result.
@@ -402,7 +402,7 @@ def contextualize_chunks(
 | Summary prefix | "This section covers..." | +5% overall relevance |
 
 [!TIP]
-Contextual retrieval is one of the highest-ROI improvements you can make to a RAG system. It requires zero additional infrastructure — just modify your chunking pipeline to prepend context before embedding. The cost is a small increase in embedding token usage (typically 20-50 extra tokens per chunk).
+Contextual retrieval is one of the highest-ROI improvements you can make to a RAG system. It requires zero additional infrastructure: just modify your chunking pipeline to prepend context before embedding. The cost is a small increase in embedding token usage (typically 20-50 extra tokens per chunk).
 
 ---
 
@@ -605,6 +605,6 @@ class AdaptiveRetriever:
 - Query decomposition splits complex questions into simpler sub-queries and merges results.
 - Self-querying retrievers extract both the semantic query and metadata filters from natural language.
 - Fusion retrieval (RRF) combines rankings from multiple strategies (BM25, vector, HyDE) into a single ranked list.
-- Advanced strategies trade latency and cost for higher relevance and diversity — choose based on your use case.
+- Advanced strategies trade latency and cost for higher relevance and diversity: choose based on your use case.
 - Query decomposition is ideal for multi-part questions; multi-hop is for chained reasoning; HyDE is for short/ambiguous queries.
 - Always consider a fusion approach in production to get the best of multiple strategies.

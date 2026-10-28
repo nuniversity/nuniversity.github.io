@@ -340,7 +340,7 @@ START → A → B → END
          ↓
          C → END
 ```
-(Arestas condicionais — abordadas na lição 9 — determinam qual caminho seguir)
+(Arestas condicionais, abordadas na lição 9, determinam qual caminho seguir)
 
 ---
 
@@ -510,6 +510,6 @@ START → A → B → END
 - Arestas definem topologia: `add_edge('A', 'B')` significa que B executa após A
 - Constantes `START` e `END` marcam pontos de entrada e saída
 - Fan-out permite execução paralela; fan-in sincroniza múltiplos ramos
-- Nunca transforme o estado diretamente — sempre retorne um dict de atualizações
+- Nunca transforme o estado diretamente: sempre retorne um dict de atualizações
 - Use uma única responsabilidade por nó para composabilidade e teste
 - Múltiplas chamadas `add_edge(START, ...)` criam pontos de entrada paralelos

@@ -288,14 +288,14 @@ Cada agente pode ter uma configuração de LLM completamente independente. Isso 
 
 ---
 
-## Configurações de Temperatura — Quando Usar
+## Configurações de Temperatura: Quando Usar
 
 | Temperatura | Caso de Uso | Exemplo |
 | :--- | :--- | :--- |
-| 0.0 – 0.2 | Tarefas factuais e determinísticas | Extração de dados, classificação |
-| 0.3 – 0.5 | Raciocínio equilibrado | Sumarização, análise |
-| 0.6 – 0.8 | Geração criativa | Marketing, narrativas |
-| 0.9 – 1.0 | Altamente criativo / brainstorming | Geração de ideias, poesia |
+| 0.0 to 0.2 | Tarefas factuais e determinísticas | Extração de dados, classificação |
+| 0.3 to 0.5 | Raciocínio equilibrado | Sumarização, análise |
+| 0.6 to 0.8 | Geração criativa | Marketing, narrativas |
+| 0.9 to 1.0 | Altamente criativo / brainstorming | Geração de ideias, poesia |
 
 ```python
 # Referência rápida: temperatura por tipo de agente
@@ -433,7 +433,7 @@ Testar crews com chamadas LLM reais é lento, caro e não-determinístico. Use r
 
 ---
 
-## Callback vs Memória vs Config LLM — Comparação
+## Callback vs Memória vs Config LLM: Comparação
 
 | Recurso | Propósito | Configuração | Escopo |
 | :--- | :--- | :--- | :--- |
@@ -460,7 +460,7 @@ Testar crews com chamadas LLM reais é lento, caro e não-determinístico. Use r
     "Mudar para processo hierárquico"
   ],
   "correct": 1,
-  "explanation": "Callbacks são síncronos — eles bloqueiam a execução do agente. Chamadas de rede em callbacks diminuem drasticamente a crew. Armazene eventos em buffer e descarregue de forma assíncrona, ou registre em armazenamento local."
+  "explanation": "Callbacks são síncronos: eles bloqueiam a execução do agente. Chamadas de rede em callbacks diminuem drasticamente a crew. Armazene eventos em buffer e descarregue de forma assíncrona, ou registre em armazenamento local."
 }
 ```
 
@@ -519,7 +519,7 @@ Testar crews com chamadas LLM reais é lento, caro e não-determinístico. Use r
   "question": "Você executa test_crew_kickoff_retorna_string 5 vezes com chamadas LLM reais. Passa 3 vezes e falha 2 vezes com saídas diferentes. Qual é o problema?",
   "options": [
     "O agente tem um bug",
-    "Saídas LLM são não-determinísticas — use LLM simulado para testes unitários",
+    "Saídas LLM são não-determinísticas: use LLM simulado para testes unitários",
     "A descrição da tarefa está errada",
     "O modo verbose deve ser desabilitado em testes"
   ],
@@ -578,6 +578,6 @@ Testar crews com chamadas LLM reais é lento, caro e não-determinístico. Use r
 - Um `function_calling_llm` separado reduz custos para agentes que usam muitas ferramentas.
 - Temperatura de 0.0 (determinística) a 1.0 (criativa) controla a variabilidade da saída.
 - Testar crews com pytest garante corretude antes da implantação em produção.
-- Callbacks são síncronos — evite operações bloqueantes dentro deles.
+- Callbacks são síncronos: evite operações bloqueantes dentro deles.
 - Corresponda o tamanho do modelo LLM à complexidade da tarefa para otimização de custos.
 - Simule respostas LLM em testes unitários; use LLMs reais apenas em testes de integração.

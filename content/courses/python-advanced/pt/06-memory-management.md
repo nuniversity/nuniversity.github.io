@@ -100,7 +100,7 @@ flowchart LR
 
 ## Referências Fracas
 
-`weakref` permite referenciar um objeto sem aumentar sua contagem de referências — ideal para caches e observadores.
+`weakref` permite referenciar um objeto sem aumentar sua contagem de referências: ideal para caches e observadores.
 
 ```python
 import weakref

@@ -16,9 +16,9 @@ CrewAI es un framework de orquestración multi-agente que permite definir **agen
 
 CrewAI proporciona tres abstracciones principales que trabajan juntas para crear sistemas multi-agente:
 
-- **Agent** — Una entidad de IA con un rol, objetivo e historia específicos. Los agentes usan LLMs para razonar, tomar decisiones y ejecutar tareas.
-- **Task** — Una unidad de trabajo asignada a un agente, con descripción, salida esperada y herramientas o dependencias de contexto opcionales.
-- **Crew** — El orquestador que ensambla agentes y tareas, gestiona el flujo de ejecución y devuelve los resultados finales.
+- **Agent**: Una entidad de IA con un rol, objetivo e historia específicos. Los agentes usan LLMs para razonar, tomar decisiones y ejecutar tareas.
+- **Task**: Una unidad de trabajo asignada a un agente, con descripción, salida esperada y herramientas o dependencias de contexto opcionales.
+- **Crew**: El orquestador que ensambla agentes y tareas, gestiona el flujo de ejecución y devuelve los resultados finales.
 
 ```python
 from crewai import Agent, Task, Crew
@@ -56,15 +56,15 @@ Parámetros principales:
 
 | Parámetro | Obligatorio | Propósito |
 | :--- | :--- | :--- |
-| `role` | Sí | El cargo/función del agente — guía la personalidad del LLM |
-| `goal` | Sí | Lo que el agente pretende lograr — enfoca el razonamiento |
+| `role` | Sí | El cargo/función del agente: guía la personalidad del LLM |
+| `goal` | Sí | Lo que el agente pretende lograr: enfoca el razonamiento |
 | `backstory` | No | Narrativa contextual para la personalidad del agente |
 | `tools` | No | Lista de herramientas que el agente puede usar |
 | `memory` | No | Activa memoria entre tareas en una ejecución |
 | `verbose` | No | Activa registro paso a paso |
 
 [!TIP]
-El parámetro `role` es el atributo más influyente para moldear el comportamiento del agente. Un rol como "Desarrollador Python Senior" produce salidas dramáticamente diferentes que "Revisor de Código Junior" — incluso con el mismo `goal`. Sé específico: incluye senioridad, dominio y especialización.
+El parámetro `role` es el atributo más influyente para moldear el comportamiento del agente. Un rol como "Desarrollador Python Senior" produce salidas dramáticamente diferentes que "Revisor de Código Junior": incluso con el mismo `goal`. Sé específico: incluye senioridad, dominio y especialización.
 
 ```python
 # Compara estos dos agentes — mismo goal, roles diferentes
@@ -97,7 +97,7 @@ tarea_investigacion = Task(
 )
 ```
 
-Las tareas también pueden definir `context` de otras tareas, `tools` y funciones `callback`. El campo `expected_output` es extremadamente importante — le dice tanto al agente como al framework lo que constituye una finalización exitosa.
+Las tareas también pueden definir `context` de otras tareas, `tools` y funciones `callback`. El campo `expected_output` es extremadamente importante: le dice tanto al agente como al framework lo que constituye una finalización exitosa.
 
 ```python
 # Una tarea con contexto de otra tarea
@@ -405,7 +405,7 @@ if output.json_dict:
 
 ---
 
-## Agente vs Tarea vs Crew — Responsabilidades
+## Agente vs Tarea vs Crew: Responsabilidades
 
 | Aspecto | Agent | Task | Crew |
 | :--- | :--- | :--- | :--- |

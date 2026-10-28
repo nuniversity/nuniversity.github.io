@@ -1,21 +1,21 @@
 ---
-title: "Domain 5.2 — Secure Data Sharing and Data Clean Rooms"
-description: "Understand Snowflake's Secure Data Sharing model — provider/consumer/reader accounts, direct shares, and privacy-preserving collaboration with data clean rooms."
+title: "Domain 5.2, Secure Data Sharing and Data Clean Rooms"
+description: "Understand Snowflake's Secure Data Sharing model, provider/consumer/reader accounts, direct shares, and privacy-preserving collaboration with data clean rooms."
 order: 18
 difficulty: intermediate
 duration: 50
 ---
 
-# Domain 5.2 — Secure Data Sharing and Data Clean Rooms
+# Domain 5.2: Secure Data Sharing and Data Clean Rooms
 
 > [!NOTE]
-> **Exam Domain 5.2** — *Secure Data Sharing* contributes to the **Data Collaboration** domain, which is **10%** of the COF-C03 exam.
+> **Exam Domain 5.2**: *Secure Data Sharing* contributes to the **Data Collaboration** domain, which is **10%** of the COF-C03 exam.
 
 ---
 
 ## Overview: How Sharing Works
 
-Snowflake Secure Data Sharing lets a **provider** share **live, read-only** data with a **consumer** — no data is copied, no ETL is required.
+Snowflake Secure Data Sharing lets a **provider** share **live, read-only** data with a **consumer**: no data is copied, no ETL is required.
 
 ```mermaid
 flowchart LR
@@ -35,9 +35,9 @@ flowchart LR
 ```
 
 Key characteristics:
-- **Zero data copy** — consumer reads directly from provider's storage.
-- **Always live** — consumers see inserts/updates in real time.
-- **Read-only** — consumers cannot modify shared data.
+- **Zero data copy**: consumer reads directly from provider's storage.
+- **Always live**: consumers see inserts/updates in real time.
+- **Read-only**: consumers cannot modify shared data.
 - **Cross-cloud/cross-region** requires replication (covered in Lesson 17).
 
 ---
@@ -248,12 +248,12 @@ flowchart TD
 
 > [!SUCCESS]
 > **Key Takeaways for the Exam**
-> - Sharing is **zero-copy and live** — no ETL, no data movement.
+> - Sharing is **zero-copy and live**: no ETL, no data movement.
 > - Consumers get **read-only** access; they cannot write to shared objects.
 > - Only **SECURE views** and secure UDFs can be added to shares.
 > - **Reader Accounts**: for non-Snowflake consumers; provider pays compute.
 > - Cross-cloud/cross-region sharing requires **replication** first.
-> - **Data Clean Rooms** enable joint analysis without exposing raw records — results are aggregate only.
+> - **Data Clean Rooms** enable joint analysis without exposing raw records: results are aggregate only.
 
 ---
 
@@ -261,8 +261,8 @@ flowchart TD
 
 **1.** A provider adds a regular (non-secure) view to a share. What happens?
 
-- A) It succeeds — all views can be shared
-- B) **It fails — only SECURE views can be added to shares** ✅
+- A) It succeeds: all views can be shared
+- B) **It fails: only SECURE views can be added to shares** ✅
 - C) The view is automatically converted to a secure view
 - D) Consumers see the data but not the definition
 
@@ -272,7 +272,7 @@ flowchart TD
 
 - A) After the next scheduled refresh (daily)
 - B) After the consumer re-runs `CREATE DATABASE FROM SHARE`
-- C) **Immediately — sharing is live and zero-copy** ✅
+- C) **Immediately: sharing is live and zero-copy** ✅
 - D) After the provider runs ALTER SHARE REFRESH
 
 ---
@@ -297,9 +297,9 @@ flowchart TD
 
 **5.** Provider is on AWS us-east-1. Consumer is on Azure eastus. Can the provider share directly?
 
-- A) Yes — sharing works across all clouds natively
-- B) **No — cross-cloud sharing requires database replication first** ✅
-- C) No — cross-cloud sharing is not supported at all
+- A) Yes: sharing works across all clouds natively
+- B) **No: cross-cloud sharing requires database replication first** ✅
+- C) No: cross-cloud sharing is not supported at all
 - D) Yes, but only for Enterprise edition providers
 
 ---

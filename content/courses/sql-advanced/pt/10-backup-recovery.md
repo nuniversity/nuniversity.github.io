@@ -10,7 +10,7 @@ difficulty: advanced
 
 ## Estratégias de Backup
 
-Uma estratégia de backup equilibra o **Objetivo de Ponto de Recuperação (RPO)** — quantos dados você pode perder — contra o **Objetivo de Tempo de Recuperação (RTO)** — quão rápido você recupera.
+Uma estratégia de backup equilibra o **Objetivo de Ponto de Recuperação (RPO)**: quantos dados você pode perder: contra o **Objetivo de Tempo de Recuperação (RTO)**: quão rápido você recupera.
 
 | Estratégia | RPO | RTO | Armazenamento | Uso Típico |
 |---|---|---|---|---|
@@ -180,7 +180,7 @@ SELECT * FROM pg_stat_replication;
 
 ### Replicação Lógica
 
-Replica em nível de linha — pode filtrar, transformar ou replicar subconjuntos.
+Replica em nível de linha: pode filtrar, transformar ou replicar subconjuntos.
 
 ```sql
 -- Publicador

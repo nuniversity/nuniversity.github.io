@@ -8,7 +8,7 @@ difficulty: "iniciante"
 
 # Repaso de LangChain
 
-LangChain es la biblioteca hermana de LangGraph. Proporciona los componentes básicos — LLMs, prompts, herramientas — que usarás dentro de tus nodos de LangGraph.
+LangChain es la biblioteca hermana de LangGraph. Proporciona los componentes básicos, LLMs, prompts, herramientas, que usarás dentro de tus nodos de LangGraph.
 
 ---
 

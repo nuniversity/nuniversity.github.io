@@ -74,7 +74,7 @@ flowchart LR
 
 ## Expresiones generadoras
 
-Los generadores producen valores de forma perezosa (lazy) —uno a la vez—, lo cual es crucial para secuencias grandes o infinitas.
+Los generadores producen valores de forma perezosa (lazy), uno a la vez, lo cual es crucial para secuencias grandes o infinitas.
 
 ```python
 from typing import Generator, List

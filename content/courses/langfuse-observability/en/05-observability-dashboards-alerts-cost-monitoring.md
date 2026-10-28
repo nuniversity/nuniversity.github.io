@@ -214,7 +214,7 @@ Alerts notify you (via email, Slack, webhook) when a metric crosses a threshold.
 Configure alerts in **Settings → Alerts** in the LangFuse UI.
 
 > [!WARNING]
-> Alerts check aggregated data and may have a delay of 1–5 minutes. They are not real-time. For sub-minute alerting, use a dedicated APM tool alongside LangFuse.
+> Alerts check aggregated data and may have a delay of 1 to 5 minutes. They are not real-time. For sub-minute alerting, use a dedicated APM tool alongside LangFuse.
 
 ### Alert Types Comparison
 
@@ -371,7 +371,7 @@ Each span automatically records its duration. Dashboard panels can show:
 - Latency distribution histogram.
 - Slowest traces list (sort by duration).
 
-Latency data helps identify bottlenecks — e.g. embedding calls taking longer than generation.
+Latency data helps identify bottlenecks, e.g. embedding calls taking longer than generation.
 
 ---
 
@@ -522,7 +522,7 @@ You can also use the LangFuse API directly (`GET /api/public/traces`) for large 
 > [!SUCCESS]
 > **Key Takeaways**
 > - Dashboards are built from filterable panels; use tags and metadata consistently.
-> - Alerts check aggregated data every 1-2 minutes — suitable for operational alerts, not real-time.
+> - Alerts check aggregated data every 1-2 minutes: suitable for operational alerts, not real-time.
 > - Cost tracking requires accurate model names for pricing lookup.
 > - Latency and error rate data come automatically from span timing and span level.
 > - Export traces via SDK or REST API for external analysis in pandas/BI tools.

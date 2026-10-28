@@ -86,7 +86,7 @@ describe('FillBlankQuestion items mode', () => {
     fillAllCorrectly()
     fireEvent.click(screen.getByRole('button', { name: 'Check Answers' }))
 
-    expect(screen.getByText('Perfect — all blanks filled correctly!')).toBeInTheDocument()
+    expect(screen.getByText('Perfect: all blanks filled correctly!')).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'Check Answers' })).not.toBeInTheDocument()
     expect(screen.getAllByRole('textbox').every(input => (input as HTMLInputElement).disabled)).toBe(true)
     expect(screen.getByRole('button', { name: 'Try Again' })).toBeInTheDocument()
@@ -99,7 +99,7 @@ describe('FillBlankQuestion items mode', () => {
     fireEvent.change(screen.getByLabelText('Item 4, blank 1'), { target: { value: '2.0' } })
     fireEvent.click(screen.getByRole('button', { name: 'Check Answers' }))
 
-    expect(screen.getByText('Some blanks are wrong — 7 of 8 items correct.')).toBeInTheDocument()
+    expect(screen.getByText('Some blanks are wrong: 7 of 8 items correct.')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Try Again' })).toBeInTheDocument()
   })
 
@@ -117,7 +117,7 @@ describe('FillBlankQuestion items mode', () => {
     expect(inputs).toHaveLength(12)
     expect(inputs.every(input => (input as HTMLInputElement).value === '')).toBe(true)
     expect(inputs.every(input => !(input as HTMLInputElement).disabled)).toBe(true)
-    expect(screen.queryByText('Perfect — all blanks filled correctly!')).not.toBeInTheDocument()
+    expect(screen.queryByText('Perfect: all blanks filled correctly!')).not.toBeInTheDocument()
   })
 
   it('grades case-insensitively with surrounding whitespace', () => {
@@ -131,7 +131,7 @@ describe('FillBlankQuestion items mode', () => {
     fireEvent.change(screen.getByRole('textbox'), { target: { value: '  first attempt ' } })
     fireEvent.click(screen.getByRole('button', { name: 'Check Answers' }))
 
-    expect(screen.getByText('Perfect — all blanks filled correctly!')).toBeInTheDocument()
+    expect(screen.getByText('Perfect: all blanks filled correctly!')).toBeInTheDocument()
   })
 })
 
@@ -206,7 +206,7 @@ describe('BucketDropQuestion', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Check Answers' }))
 
-    expect(screen.getByText('1 / 2 correct — red items are in the wrong bucket or still unplaced.')).toBeInTheDocument()
+    expect(screen.getByText('1 / 2 correct, red items are in the wrong bucket or still unplaced.')).toBeInTheDocument()
     expect(screen.getByText('Correct: Trap pairs re-derived from framing')).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'Check Answers' })).not.toBeInTheDocument()
     expect(screen.getByRole('status')).toBeInTheDocument()

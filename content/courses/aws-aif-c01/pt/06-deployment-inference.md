@@ -7,7 +7,7 @@ duration: "85 min"
 ---
 # Implantação e Inferência no Amazon SageMaker
 
-O treinamento produz um artefato; **a inferência é onde o modelo encontra um chamador e onde a fatura começa**. No exame AIF-C01 este é território do Domínio 2 — *"Tarefa 2.1: selecione a opção de implantação apropriada para uma solução de IA/ML"* — e é a tarefa de seleção de serviços mais densa de todo o guia. O modo de falha nunca é "você não sabia que o SageMaker hospeda um modelo". É que você escolheu **serverless** para um payload de 800 MB, **batch** para uma interface de chat com latência abaixo de um segundo, **tempo real** para um trabalho que roda duas vezes por noite, ou configurou um canário em **60%** da frota verde e nunca percebeu que o número é limitado.
+O treinamento produz um artefato; **a inferência é onde o modelo encontra um chamador e onde a fatura começa**. No exame AIF-C01 este é território do Domínio 2, *"Tarefa 2.1: selecione a opção de implantação apropriada para uma solução de IA/ML"*, e é a tarefa de seleção de serviços mais densa de todo o guia. O modo de falha nunca é "você não sabia que o SageMaker hospeda um modelo". É que você escolheu **serverless** para um payload de 800 MB, **batch** para uma interface de chat com latência abaixo de um segundo, **tempo real** para um trabalho que roda duas vezes por noite, ou configurou um canário em **60%** da frota verde e nunca percebeu que o número é limitado.
 
 ```text
 =====================================================================
@@ -34,7 +34,7 @@ O treinamento produz um artefato; **a inferência é onde o modelo encontra um c
 ```
 
 > [!NOTE]
-> **Como ler esta lição.** Todo teto, timeout e preço abaixo é um número publicado pela AWS, tirado do guia de desenvolvedor do SageMaker, da referência da API do SageMaker ou da página de preços do SageMaker. Onde a AWS publicou uma *mudança* — e em 2026 ela publicou duas grandes, o fechamento do Model Monitor para novos clientes e a descontinuação do Edge Manager — a mudança está marcada na seção onde você de outro modo usaria o fato antigo.
+> **Como ler esta lição.** Todo teto, timeout e preço abaixo é um número publicado pela AWS, tirado do guia de desenvolvedor do SageMaker, da referência da API do SageMaker ou da página de preços do SageMaker. Onde a AWS publicou uma *mudança*, e em 2026 ela publicou duas grandes, o fechamento do Model Monitor para novos clientes e a descontinuação do Edge Manager, a mudança está marcada na seção onde você de outro modo usaria o fato antigo.
 
 Ao final desta lição você será capaz de:
 
@@ -43,7 +43,7 @@ Ao final desta lição você será capaz de:
 - escolher entre as **cinco topologias** por trás de um endpoint (modelo único, multimodelo, multicontêiner, pipeline serial, componentes de inferência) com seus limites de contêiner e variante;
 - configurar o **auto scaling** na dimensão escalável certa, incluindo os alvos de métrica que a própria AWS documenta;
 - executar **testes A/B, variantes shadow e rollouts blue/green com guardrails**, incluindo os limites de porcentagem do canário e do linear;
-- explicar o **data capture** e os quatro tipos do **Model Monitor** — e a mudança de disponibilidade de 2026 que os fecha para novos clientes;
+- explicar o **data capture** e os quatro tipos do **Model Monitor**, e a mudança de disponibilidade de 2026 que os fecha para novos clientes;
 - calcular o custo real de um endpoint em tempo real, um endpoint serverless e uma configuração de Provisioned Concurrency a partir dos próprios exemplos resolvidos da AWS;
 - ligar **SageMaker Projects, operadores do EKS e Neo** a uma história de CI/CD e de borda;
 - defender um **veredito comparativo** entre tempo real vs. serverless vs. batch vs. assíncrono vs. borda;
@@ -66,7 +66,7 @@ A implantação no SageMaker não é um único botão. É uma cadeia de três ch
 
 Duas chamadas de acompanhamento importam tanto quanto as três acima:
 
-- **`UpdateEndpointWeightsAndCapacities`** re-pesa variantes vivas *sem* substituir o endpoint — esta é a alavanca do A/B;
+- **`UpdateEndpointWeightsAndCapacities`** re-pesa variantes vivas *sem* substituir o endpoint; esta é a alavanca do A/B;
 - **`UpdateEndpoint` + `DeploymentConfig`** troca a frota inteira por trás do endpoint usando uma configuração de roteamento de tráfego com guardrails.
 
 ### 1.2 A arquitetura de implantação
@@ -88,7 +88,7 @@ flowchart TD
 
 ### 1.3 Onde mora a chave assíncrona
 
-A presença de `AsyncInferenceConfig` dentro da configuração do endpoint é o que torna um endpoint **somente assíncrono**. Esse campo carrega `S3OutputPath`, tópicos SNS opcionais `SuccessTopic`/`ErrorTopic`, `ClientConfig` (`MaxConcurrentInvocationsPerInstance`) e o TTL da requisição. Um endpoint criado com ele aceita **apenas `InvokeEndpointAsync`** — chamadas síncronas `Invoke` não fazem parte do contrato.
+A presença de `AsyncInferenceConfig` dentro da configuração do endpoint é o que torna um endpoint **somente assíncrono**. Esse campo carrega `S3OutputPath`, tópicos SNS opcionais `SuccessTopic`/`ErrorTopic`, `ClientConfig` (`MaxConcurrentInvocationsPerInstance`) e o TTL da requisição. Um endpoint criado com ele aceita **apenas `InvokeEndpointAsync`**: chamadas síncronas `Invoke` não fazem parte do contrato.
 
 - **📚 Você sabia?** A fila de requisições assíncronas é sustentada por **Amazon SQS** com um TTL documentado de **6 horas** (`RequestTTLSeconds` máx. **21.600**), e a invocação em si expira por timeout em **900 segundos** por padrão, com máximo de **3.600 segundos**. É por isso que a AWS descreve o assíncrono como *"enfileirado, quase em tempo real"* e não como um substituto de batch: a fila esquece a sua requisição na marca das 6 horas, mesmo que o seu modelo eventualmente terminaria.
 
@@ -98,7 +98,7 @@ A presença de `AsyncInferenceConfig` dentro da configuração do endpoint é o 
 
 ### 2.1 Endpoints em tempo real
 
-Um endpoint em tempo real é um **endpoint REST persistente** com latência em milissegundos, destinado a **tráfego contínuo e previsível**. Você escolhe o tipo e a contagem de instâncias, habilita o auto scaling, e obtém data capture, Model Monitor, variantes shadow e rollouts com guardrails. Você também paga por ele **todo segundo em que ele existe** — a cobrança em tempo real é a instância-hora enquanto roda, medida por segundo com um mínimo de um minuto, mais o volume de EBS e a transferência de dados.
+Um endpoint em tempo real é um **endpoint REST persistente** com latência em milissegundos, destinado a **tráfego contínuo e previsível**. Você escolhe o tipo e a contagem de instâncias, habilita o auto scaling, e obtém data capture, Model Monitor, variantes shadow e rollouts com guardrails. Você também paga por ele **todo segundo em que ele existe**: a cobrança em tempo real é a instância-hora enquanto roda, medida por segundo com um mínimo de um minuto, mais o volume de EBS e a transferência de dados.
 
 ### 2.2 Serverless Inference
 
@@ -117,21 +117,21 @@ As exclusões são a lista favorita do exame, porque cada uma delas mata uma op�
 | Pipelines de inferência (serial) | tempo real |
 
 > [!WARNING]
-> **O Serverless é de mão única.** Criar uma configuração de endpoint que misture uma variante serverless com as funcionalidades acima lança um **`ValidationError`**. E a conversão é assimétrica por design: você pode ir *de* uma configuração em tempo real *para* serverless descartando as peças não suportadas, mas a AWS documenta a direção contrária como uma porta de mão única. Lembre também dos tetos duros antes de se comprometer — payload de **4 MB** e **60 segundos** de processamento, contra **25 MB** do tempo real.
+> **O Serverless é de mão única.** Criar uma configuração de endpoint que misture uma variante serverless com as funcionalidades acima lança um **`ValidationError`**. E a conversão é assimétrica por design: você pode ir *de* uma configuração em tempo real *para* serverless descartando as peças não suportadas, mas a AWS documenta a direção contrária como uma porta de mão única. Lembre também dos tetos duros antes de se comprometer: payload de **4 MB** e **60 segundos** de processamento, contra **25 MB** do tempo real.
 
-**Exemplo resolvido 1 — a fatura mensal do serverless (exemplo de preços da AWS).** 10.000.000 requisições × 100 ms = **1.000.000 segundos** de computação × **$0.00004/segundo** = **$40.00**; 10 GB de transferência de dados × **$0.016/GB** = **$0.16** → **$40.16 por mês**, e **$0.00 enquanto ocioso**. O mesmo tráfego em um endpoint em tempo real é cobrado da mesma forma, seja ele 10 requisições ou 10 milhões — e esse é todo o argumento do serverless em carga intermitente.
+**Exemplo resolvido 1, a fatura mensal do serverless (exemplo de preços da AWS).** 10.000.000 requisições × 100 ms = **1.000.000 segundos** de computação × **$0.00004/segundo** = **$40.00**; 10 GB de transferência de dados × **$0.016/GB** = **$0.16** → **$40.16 por mês**, e **$0.00 enquanto ocioso**. O mesmo tráfego em um endpoint em tempo real é cobrado da mesma forma, seja ele 10 requisições ou 10 milhões, e esse é todo o argumento do serverless em carga intermitente.
 
 ### 2.3 Batch transform
 
 O batch transform **não tem endpoint**. Você aponta um trabalho de transformação para dados já em repouso, ele sobe instâncias, grava os resultados no S3 como **`<input>.out`** (por exemplo `input.csv.out`), e a computação desaparece com o trabalho. O payload é por lote via **`MaxPayloadInMB`** (até **100 MB**), o teto do trabalho é **3.600 segundos**, e é a resposta correta sempre que os dados estão disponíveis de antemão e ninguém está esperando.
 
-**Exemplo resolvido 7 — aritmética de payload do batch.** A regra documentada é `MaxConcurrentTransforms × MaxPayloadInMB ≤ 100 MB`: **4 × 25 MB = 100 MB é legal**, **4 × 50 MB = 200 MB é rejeitado**. Definir `MaxPayloadInMB: 0` muda para streaming em blocos, que os algoritmos incorporados **não** suportam — então o caminho padrão é o limitado.
+**Exemplo resolvido 7, aritmética de payload do batch.** A regra documentada é `MaxConcurrentTransforms × MaxPayloadInMB ≤ 100 MB`: **4 × 25 MB = 100 MB é legal**, **4 × 50 MB = 200 MB é rejeitado**. Definir `MaxPayloadInMB: 0` muda para streaming em blocos, que os algoritmos incorporados **não** suportam, então o caminho padrão é o limitado.
 
 ### 2.4 Inferência assíncrona
 
 A inferência assíncrona recebe uma requisição grande, **enfileira-a**, e deixa o chamador tanto consultar o S3 quanto receber uma mensagem SNS. É a opção com o maior payload (**1 GB**) e a maior janela de processamento (**60 minutos** por padrão **900 s**, máximo **3.600 s**), ela escala até **zero** entre rajadas, e é a única opção cujo *caminho de sucesso* é assíncrono por construção.
 
-**Exemplo resolvido 3 — quando só o assíncrono serve.** Um modelo de vídeo tem que aceitar um arquivo de **800 MB**, pode rodar **40 minutos**, e o chamador quer uma notificação SNS. O tempo real para em **25 MB / 60 s**; o serverless para em **4 MB**; o batch limita o payload por lote a **100 MB**. O assíncrono a **1 GB / 60 min** com `S3OutputPath` e `SuccessTopic` é a única configuração que passa pelos três requisitos.
+**Exemplo resolvido 3: quando só o assíncrono serve.** Um modelo de vídeo tem que aceitar um arquivo de **800 MB**, pode rodar **40 minutos**, e o chamador quer uma notificação SNS. O tempo real para em **25 MB / 60 s**; o serverless para em **4 MB**; o batch limita o payload por lote a **100 MB**. O assíncrono a **1 GB / 60 min** com `S3OutputPath` e `SuccessTopic` é a única configuração que passa pelos três requisitos.
 
 ### 2.5 Os tetos lado a lado
 
@@ -141,7 +141,7 @@ A inferência assíncrona recebe uma requisição grande, **enfileira-a**, e dei
 | Tempo de processamento | **60 s** (8 min com streaming) | **60 s** | **60 min** (padrão 900 s) | trabalho de **3.600 s** |
 | Padrão de tráfego | contínuo | intermitente | enfileirado | GBs, até dias |
 | Endpoint persiste | sim | sim (escala até 0 quando ocioso) | sim (escala até 0) | não (somente o trabalho) |
-| TTL da fila | — | — | **6 h** (máx. 21.600 s) | — |
+| TTL da fila |: |: | **6 h** (máx. 21.600 s) |: |
 | GPU | sim | **não** | sim | sim |
 | Data capture / Model Monitor | sim | **não** | sim | capture no trabalho |
 | Saída | síncrona | síncrona | S3 + **SNS** opcional | S3 `.out` |
@@ -194,11 +194,11 @@ As quatro opções são apenas metade da história. Depois que você sabe *quand
   "question": "Relacione cada descrição de carga de trabalho à opção de implantação que a AWS documenta para ela:",
   "pairs": [
     {"left": "Interface de chat estável, respostas abaixo de um segundo, precisa de métricas de latência por variante", "right": "Endpoint em tempo real com variantes de produção - 25 MB, latência em ms, autoscaling"},
-    {"left": "O tráfego fica zero por 26 dias e espeteça no fim do mês", "right": "Serverless com Provisioned Concurrency - escala até 0, aquecido em milissegundos"},
-    {"left": "Pontuação noturna de um arquivo de 6 GB, ninguém esperando", "right": "Batch transform - sem endpoint, GBs de dados, resultados como arquivos .out no S3"},
-    {"left": "Vídeo de 800 MB, 40 minutos de processamento, callback SNS", "right": "Inferência assíncrona - payload de 1 GB, teto de 60 min, saída no S3 mais tópicos SNS"},
-    {"left": "460 modelos de locatários, cerca de 2% chamados em qualquer dia", "right": "Endpoint multimodelo por framework - contêiner compartilhado, carga e descarga a partir do S3"},
-    {"left": "Comparar um candidato à produção sem que usuários vejam suas respostas", "right": "Variante de produção shadow - cópia amostrada, apenas a resposta de produção é retornada"}
+    {"left": "O tráfego fica zero por 26 dias e espeteça no fim do mês", "right": "Serverless com Provisioned Concurrency: escala até 0, aquecido em milissegundos"},
+    {"left": "Pontuação noturna de um arquivo de 6 GB, ninguém esperando", "right": "Batch transform: sem endpoint, GBs de dados, resultados como arquivos.out no S3"},
+    {"left": "Vídeo de 800 MB, 40 minutos de processamento, callback SNS", "right": "Inferência assíncrona: payload de 1 GB, teto de 60 min, saída no S3 mais tópicos SNS"},
+    {"left": "460 modelos de locatários, cerca de 2% chamados em qualquer dia", "right": "Endpoint multimodelo por framework: contêiner compartilhado, carga e descarga a partir do S3"},
+    {"left": "Comparar um candidato à produção sem que usuários vejam suas respostas", "right": "Variante de produção shadow: cópia amostrada, apenas a resposta de produção é retornada"}
   ],
   "explanation": "O tempo real é a resposta de baixa latência contínua; o serverless é o dono do caso de lacuna ociosa e ganha previsibilidade com o Provisioned Concurrency; o batch é o dono dos dados em repouso; o assíncrono é o dono de payloads grandes com callback; os endpoints multimodelo são o dono de muitos modelos do mesmo framework com tráfego misto de quentes e frios; as variantes shadow são o único mecanismo que avalia um candidato em tráfego vivo sem nunca retornar sua saída."
 }
@@ -217,15 +217,15 @@ Um único nome DNS de endpoint pode frontear muito mais do que um modelo. A AWS 
 | Frameworks | qualquer | **o mesmo** (NVIDIA Triton para GPU) | heterogêneos | heterogêneos | heterogêneos |
 | Adicionar modelo sem atualizar o endpoint | não | **sim** (upload para o S3) | não | **sim** (componente novo) | não |
 | Cold start | não | **sim** (carga/descarga) | não | não | não |
-| Escopo de IAM | — | `sagemaker:TargetModel` | `sagemaker:TargetContainerHostname` | CPU/memória por componente | instâncias por variante |
+| Escopo de IAM |: | `sagemaker:TargetModel` | `sagemaker:TargetContainerHostname` | CPU/memória por componente | instâncias por variante |
 | A/B + guardrails | via atualização | limitado | limitado | via componentes | **nativo** |
 | Uso típico | um modelo | muitos modelos de locatários | alguns modelos de pouco tráfego | modelos de fundação em uma frota compartilhada | teste e rollout |
 
-*Fontes: `model-deploy-feature-matrix`, `multi-model-endpoints`, `multi-container-create` (2026). A frase **"multi-access endpoint"** não aparece em nenhum lugar da documentação da AWS — os três nomes reais são multi-model, multi-container e inference component.*
+*Fontes: `model-deploy-feature-matrix`, `multi-model-endpoints`, `multi-container-create` (2026). A frase **"multi-access endpoint"** não aparece em nenhum lugar da documentação da AWS: os três nomes reais são multi-model, multi-container e inference component.*
 
 ### 4.1 Endpoints multimodelo
 
-Um MME coloca **um contêiner de servição compartilhado** por trás do endpoint e carrega/descarrega modelos a partir do S3 **na invocação**, então você pode adicionar ou aposentar modelos enviando um objeto — **sem atualizar o endpoint**. Os modelos têm de compartilhar um framework; o uso de GPU exige **NVIDIA Triton**. O custo é o cold start no primeiro acesso a um modelo que não está residente, e a restrição é que **um pipeline serial pode conter no máximo um MME**.
+Um MME coloca **um contêiner de servição compartilhado** por trás do endpoint e carrega/descarrega modelos a partir do S3 **na invocação**, então você pode adicionar ou aposentar modelos enviando um objeto: **sem atualizar o endpoint**. Os modelos têm de compartilhar um framework; o uso de GPU exige **NVIDIA Triton**. O custo é o cold start no primeiro acesso a um modelo que não está residente, e a restrição é que **um pipeline serial pode conter no máximo um MME**.
 
 ### 4.2 Endpoints multicontêiner
 
@@ -253,7 +253,7 @@ flowchart TD
     IC1 --> S2["Auto scaling em<br/>sagemaker:inference-component:DesiredCopyCount"]
 ```
 
-- **📚 Você sabia?** O teto de **~10 variantes de produção** vem de um post do AWS Machine Learning Blog (2022), não de uma página de cotas — a AWS o publica como orientação e não como cota de serviço. Trate-o como "cerca de dez, não projete além disso", e lembre de que cada variante carrega seu próprio tipo de instância, contagem, peso e dimensão do CloudWatch.
+- **📚 Você sabia?** O teto de **~10 variantes de produção** vem de um post do AWS Machine Learning Blog (2022), não de uma página de cotas: a AWS o publica como orientação e não como cota de serviço. Trate-o como "cerca de dez, não projete além disso", e lembre de que cada variante carrega seu próprio tipo de instância, contagem, peso e dimensão do CloudWatch.
 
 ---
 
@@ -267,10 +267,10 @@ A AWS documenta a mesma sequência para todo alvo de escalonamento do SageMaker:
 |---|---|---|
 | Variante de produção | `sagemaker:variant:DesiredInstanceCount` | `SageMakerVariantInvocationsPerInstance` (alvo de exemplo **70**/min), `ConcurrentRequestsPerModel`, `CPUUtilization` |
 | Componente de inferência | `sagemaker:inference-component:DesiredCopyCount` | `SageMakerInferenceComponentInvocationsPerCopy` (exemplo **1**), mínimo **0** |
-| Provisioned Concurrency serverless | `sagemaker:variant:DesiredProvisionedConcurrency` | target tracking em unidades de PC (exemplo 1–10) |
+| Provisioned Concurrency serverless | `sagemaker:variant:DesiredProvisionedConcurrency` | target tracking em unidades de PC (exemplo 1 to 10) |
 | Endpoint explicável | dimensão da variante | `ExplanationsPerInstance` (com `EnableExplanations`) |
-| Recuperação de escala até zero | — | `NoCapacityInvocationFailures` → **step scaling** |
-| Excluído | — | instâncias **burstable T2** |
+| Recuperação de escala até zero |: | `NoCapacityInvocationFailures` → **step scaling** |
+| Excluído |: | instâncias **burstable T2** |
 
 *Fontes: `endpoint-auto-scaling-policy`, `endpoint-auto-scaling-add-code-define`, `endpoint-auto-scaling-zero-instances` (2026).*
 
@@ -278,7 +278,7 @@ A AWS documenta a mesma sequência para todo alvo de escalonamento do SageMaker:
 
 A escala até zero se aplica às cópias **serverless, assíncronas e de componentes de inferência**. Em uma variante de tempo real o console impõe uma **contagem mínima de instâncias ≥ 1**, e **instâncias burstable T2 não podem ser escaladas de forma automática de jeito nenhum**. A recuperação a partir do zero não é instantânea: o CloudWatch emite **`NoCapacityInvocationFailures`**, a política de **step scaling** reage, e a AWS documenta a recuperação como levando *"vários minutos"*.
 
-**Exemplo resolvido 6 — aritmética do target tracking.** Target tracking em `SageMakerVariantInvocationsPerInstance` com `TargetValue = 70` mantém cada instância perto de **70 invocações por minuto**; `ScaleOutCooldown` de **300 s** e `ScaleInCooldown` de **600 s** evitam que a frota fique oscilando. Registrar `MinCapacity = 1`, `MaxCapacity = 8` limita o gasto a 8 × **$0.204/h** = **$1.63/h** de computação — a configuração legal em tempo real mais barata, e ainda assim infinitamente mais cara que um endpoint serverless parado em zero.
+**Exemplo resolvido 6, aritmética do target tracking.** Target tracking em `SageMakerVariantInvocationsPerInstance` com `TargetValue = 70` mantém cada instância perto de **70 invocações por minuto**; `ScaleOutCooldown` de **300 s** e `ScaleInCooldown` de **600 s** evitam que a frota fique oscilando. Registrar `MinCapacity = 1`, `MaxCapacity = 8` limita o gasto a 8 × **$0.204/h** = **$1.63/h** de computação, a configuração legal em tempo real mais barata, e ainda assim infinitamente mais cara que um endpoint serverless parado em zero.
 
 ```fillblank
 {
@@ -304,11 +304,11 @@ A escala até zero se aplica às cópias **serverless, assíncronas e de compone
 
 O teste A/B é apenas **pesos de variante**: `InitialVariantWeight` divide o tráfego (o próprio walkthrough da AWS começa em **1 / 1 = 50/50**), `TargetVariant` fixa um chamador específico a uma variante específica independentemente do peso, e `UpdateEndpointWeightsAndCapacities` re-pesa a divisão **ao vivo, sem substituir o endpoint**. Métricas por variante caem no CloudWatch sob a dimensão da variante.
 
-**Exemplo resolvido 5 — o walkthrough dos pesos.** Duas variantes com `InitialVariantWeight 1/1` → **50/50**. A Variante 2 vence a comparação → `UpdateEndpointWeightsAndCapacities` define **25/75**, movendo **75%** do tráfego para a Variante 2. O passo final **0/1** dá tudo à Variante 2, e a Variante 1 é excluída. `TargetVariant` sobrescreve os pesos para um chamador fixado.
+**Exemplo resolvido 5, o walkthrough dos pesos.** Duas variantes com `InitialVariantWeight 1/1` → **50/50**. A Variante 2 vence a comparação → `UpdateEndpointWeightsAndCapacities` define **25/75**, movendo **75%** do tráfego para a Variante 2. O passo final **0/1** dá tudo à Variante 2, e a Variante 1 é excluída. `TargetVariant` sobrescreve os pesos para um chamador fixado.
 
 ### 6.2 Implantações shadow
 
-`ShadowProductionVariants` na configuração do endpoint envia uma **cópia amostrada** do tráfego vivo para o candidato. O comportamento crítico — e a frase favorita do exame sobre este tópico — é que **somente a resposta da variante de produção chega ao chamador**; a saída da shadow é registrada ou descartada. As atualizações shadow em si são **blue/green**: a configuração do endpoint muda nos bastidores.
+`ShadowProductionVariants` na configuração do endpoint envia uma **cópia amostrada** do tráfego vivo para o candidato. O comportamento crítico, e a frase favorita do exame sobre este tópico, é que **somente a resposta da variante de produção chega ao chamador**; a saída da shadow é registrada ou descartada. As atualizações shadow em si são **blue/green**: a configuração do endpoint muda nos bastidores.
 
 ### 6.3 Guardrails de implantação
 
@@ -316,17 +316,17 @@ Guardrails são a forma de você colocar um modelo em produção sem apostar o e
 
 | Modo | Unidade do deslocamento | Limite | Assamento | Em alarme |
 |---|---|---|---|---|
-| `ALL_AT_ONCE` | 100% do tráfego | — | um intervalo de assamento | → 100% de volta ao blue |
+| `ALL_AT_ONCE` | 100% do tráfego |: | um intervalo de assamento | → 100% de volta ao blue |
 | `CANARY` | % da **frota verde** | **≤ 50%** | `WaitIntervalInSeconds` (exemplo 600 s) | → 100% de volta ao blue |
-| `LINEAR` | % do verde por passo | **10–50%** por passo | por passo (exemplo 300 s) | → 100% de volta ao blue |
+| `LINEAR` | % do verde por passo | **10 to 50%** por passo | por passo (exemplo 300 s) | → 100% de volta ao blue |
 | Rolling | lotes de instância/capacidade | tamanho de lote do cliente | por lote | frota antiga mantida até o fim do assamento |
 | Plano de implantação de borda | % da frota ou dispositivos nomeados | plano em estágios | por estágio | `ROLLBACK_ON_FAILURE` |
 
 *Fontes: `deployment-guardrails`, `deployment-guardrails-blue-green-canary`, `deployment-guardrails-blue-green-linear` (2026). Controles: `WaitIntervalInSeconds`, `MaximumExecutionTimeoutInSeconds`, `AutoRollbackConfiguration.Alarms[]`.*
 
-**Exemplo resolvido 3 (rollout) — cronograma do canary.** `Type: CANARY`, `CanarySize: 30%`, `WaitIntervalInSeconds: 600`, `TerminationWaitInSeconds: 600`, `MaximumExecutionTimeoutInSeconds: 1800`: **30% da frota verde** recebe tráfego por **10 minutos**, o resto só se move se nenhum alarme disparar, a frota blue morre **10 minutos** depois do corte, e a implantação inteira aborta em **30 minutos**. 30% é válido porque o teto é **≤ 50%**.
+**Exemplo resolvido 3 (rollout): cronograma do canary.** `Type: CANARY`, `CanarySize: 30%`, `WaitIntervalInSeconds: 600`, `TerminationWaitInSeconds: 600`, `MaximumExecutionTimeoutInSeconds: 1800`: **30% da frota verde** recebe tráfego por **10 minutos**, o resto só se move se nenhum alarme disparar, a frota blue morre **10 minutos** depois do corte, e a implantação inteira aborta em **30 minutos**. 30% é válido porque o teto é **≤ 50%**.
 
-**Exemplo resolvido 4 (rollout) — o piso do linear.** `LinearStepSize: 20%` com `WaitIntervalInSeconds: 300` significa 100 / 20 = **5 passos × 5 minutos = pelo menos 25 minutos** de assamento, confortavelmente dentro de um `MaximumExecutionTimeoutInSeconds` de uma hora. Um passo fora de **10–50%** é inválido — 5% e 60% são ambos rejeitados.
+**Exemplo resolvido 4 (rollout), o piso do linear.** `LinearStepSize: 20%` com `WaitIntervalInSeconds: 300` significa 100 / 20 = **5 passos × 5 minutos = pelo menos 25 minutos** de assamento, confortavelmente dentro de um `MaximumExecutionTimeoutInSeconds` de uma hora. Um passo fora de **10 to 50%** é inválido, 5% e 60% são ambos rejeitados.
 
 ```mermaid
 flowchart TD
@@ -346,7 +346,7 @@ flowchart TD
     K["ShadowProductionVariants"] -.->|cópias amostradas, resposta descartada| B
 ```
 
-- **📚 Você sabia?** Um canary é medido contra a frota **verde**, não contra o tráfego total — o limite da AWS é *"não mais que 50% da frota verde"*, e é por isso que uma questão sobre uma frota verde de 8 instâncias aceita `CAPACITY_PERCENT 50` e rejeita `60` e `80`. É uma porcentagem de dois passos: primeiro do verde, depois do endpoint inteiro.
+- **📚 Você sabia?** Um canary é medido contra a frota **verde**, não contra o tráfego total, o limite da AWS é *"não mais que 50% da frota verde"*, e é por isso que uma questão sobre uma frota verde de 8 instâncias aceita `CAPACITY_PERCENT 50` e rejeita `60` e `80`. É uma porcentagem de dois passos: primeiro do verde, depois do endpoint inteiro.
 
 ---
 
@@ -354,7 +354,7 @@ flowchart TD
 
 ### 7.1 O data capture é a pré-condição
 
-`DataCaptureConfig` vive na configuração do endpoint e tem três campos: `EnableCapture`, `InitialSamplingPercentage` (0–100) e `DestinationS3Uri`. A **amostragem padrão do SDK é de 20%**, os registros são gravados como **JSONL** sob `s3://…/{endpoint}/{variant}/yyyy/mm/dd/hh/`, e o capture **para acima de 75% de uso de disco**. Sem capture, sem monitoramento: o Model Monitor lê o que o capture gravou.
+`DataCaptureConfig` vive na configuração do endpoint e tem três campos: `EnableCapture`, `InitialSamplingPercentage` (0 to 100) e `DestinationS3Uri`. A **amostragem padrão do SDK é de 20%**, os registros são gravados como **JSONL** sob `s3://…/{endpoint}/{variant}/yyyy/mm/dd/hh/`, e o capture **para acima de 75% de uso de disco**. Sem capture, sem monitoramento: o Model Monitor lê o que o capture gravou.
 
 ### 7.2 Os quatro tipos de monitor
 
@@ -393,21 +393,21 @@ flowchart LR
     GU --> EP
 ```
 
-- **📚 Você sabia?** O desvio de atribuição de atributo é pontuado com **NDCG** sobre ranqueamentos SHAP, e o limiar de alerta documentado pela AWS é **NDCG < 0,90** — um valor de 0,69 significa que a importância viva dos atributos divergiu materialmente do treinamento. O Model Monitor em si produz apenas métricas **tabulares**, então um modelo cujos atributos são embeddings de texto fica inteiramente fora do seu motor estatístico.
+- **📚 Você sabia?** O desvio de atribuição de atributo é pontuado com **NDCG** sobre ranqueamentos SHAP, e o limiar de alerta documentado pela AWS é **NDCG < 0,90**: um valor de 0,69 significa que a importância viva dos atributos divergiu materialmente do treinamento. O Model Monitor em si produz apenas métricas **tabulares**, então um modelo cujos atributos são embeddings de texto fica inteiramente fora do seu motor estatístico.
 
 ### 7.5 Atualizações de 2026 (em outubro de 2026)
 
-As seções 7.1–7.4 descrevem o que o Model Monitor *faz*; esta subseção descreve o que a AWS *fez* com ele, porque os dois já não andam juntos. O aviso de fim de suporte do SageMaker AI da AWS lista **Model Monitor** e **Clarify** — junto com Mechanical Turk, Ground Truth, Augmented AI (A2I), Studio Lab, Debugger, Role Manager, Geospatial e Profiler — entre as funcionalidades **"no longer open to new customers starting July 30, 2026"**. O status que a AWS lhes atribui é **manutenção**: clientes existentes os mantêm, nenhuma funcionalidade nova é lançada, nada é desligado e nada é rebatizado.
+As seções 7.1 to 7.4 descrevem o que o Model Monitor *faz*; esta subseção descreve o que a AWS *fez* com ele, porque os dois já não andam juntos. O aviso de fim de suporte do SageMaker AI da AWS lista **Model Monitor** e **Clarify**, junto com Mechanical Turk, Ground Truth, Augmented AI (A2I), Studio Lab, Debugger, Role Manager, Geospatial e Profiler, entre as funcionalidades **"no longer open to new customers starting July 30, 2026"**. O status que a AWS lhes atribui é **manutenção**: clientes existentes os mantêm, nenhuma funcionalidade nova é lançada, nada é desligado e nada é rebatizado.
 
 | Funcionalidade no aviso | Data documentada | Estado do ciclo de vida | Direção documentada para trabalho novo |
 |---|---|---|---|
 | SageMaker **Model Monitor** | fechado para novos clientes em **30 de julho de 2026** | **Manutenção** | Métricas do CloudWatch e detecção de anomalias, Amazon Evidently, EventBridge + Lambda, baselines SHAP |
 | SageMaker **Clarify** | fechado para novos clientes em **30 de julho de 2026** | **Manutenção** | **Bedrock Model Evaluations**, SHAP, Bedrock Guardrails |
-| Ground Truth, **A2I (Augmented AI)**, Studio Lab, Debugger, Role Manager, Geospatial | fechados para novos clientes em **30 de julho de 2026** | **Manutenção** — ainda suportados, sem funcionalidades novas | página de cada funcionalidade; a revisão humana do A2I vira uma fila mais um aplicativo que você constrói |
+| Ground Truth, **A2I (Augmented AI)**, Studio Lab, Debugger, Role Manager, Geospatial | fechados para novos clientes em **30 de julho de 2026** | **Manutenção**: ainda suportados, sem funcionalidades novas | página de cada funcionalidade; a revisão humana do A2I vira uma fila mais um aplicativo que você constrói |
 | SageMaker **Mechanical Turk** | fechado para novos clientes em **30 de julho de 2026**, **EOS em 30 de setembro de 2026** (post What's New datado de 29 de setembro) | fim de suporte | Ground Truth com um fornecedor ou força de trabalho privada, ou outro serviço de rotulagem |
 | Ground Truth Plus | **EOS em 30 de junho de 2026** | fim de suporte | trabalhos de rotulagem do Ground Truth padrão |
 | SageMaker **Profiler** | **EOS em 30 de junho de 2027** | pôr do sol | alternativas de observabilidade do SageMaker |
-| Amazon **Forecast** (distrator — não é um serviço de monitoramento) | fechado para novos clientes em **29 de julho de 2024** | manutenção | SageMaker Canvas |
+| Amazon **Forecast** (distrator: não é um serviço de monitoramento) | fechado para novos clientes em **29 de julho de 2024** | manutenção | SageMaker Canvas |
 
 *Fontes: a página de funcionalidades do SageMaker AI, `model-monitor-availability-change`, `clarify-availability-change`, os anúncios de disponibilidade de serviços do AWS What's New de junho e setembro de 2026, e a página `service-lifecycle` do AWS General Reference (24 de setembro de 2026). O conflito de 29 vs. 30 de setembro no Mechanical Turk é da própria AWS e não é resolvido aqui.*
 
@@ -416,7 +416,7 @@ A AWS define o vocabulário de ciclo de vida em exatamente um documento, e o exa
 | Estado do ciclo de vida | O que a AWS diz que significa | Como responder no exame |
 |---|---|---|
 | **Manutenção** | sem novos clientes, sem funcionalidades novas, **ainda suportado** | "fechado para novos clientes" não é "morto": uma conta criada antes de 30 de julho de 2026 ainda pode rodar um agendamento do Model Monitor |
-| **Sunset** | fim planejado de operações com data publicada, tipicamente um horizonte de 12 meses | existe um prazo e a funcionalidade ainda funciona até ele — o SageMaker Profiler roda até **30 de junho de 2027** |
+| **Sunset** | fim planejado de operações com data publicada, tipicamente um horizonte de 12 meses | existe um prazo e a funcionalidade ainda funciona até ele, o SageMaker Profiler roda até **30 de junho de 2027** |
 | **Full Shutdown** | removido do portfólio da AWS | a API e o console se foram; nunca uma resposta válida para uma construção nova |
 
 **Onde a mordida da mudança pega uma resposta de exame:**
@@ -426,17 +426,17 @@ A AWS define o vocabulário de ciclo de vida em exatamente um documento, e o exa
 - *"Roteirizar previsões de baixa confiança para um humano"* → o **A2I** está no mesmo aviso, então uma construção nova alcança uma fila mais um aplicativo de revisão, ou o Ground Truth, em vez do Augmented AI;
 - *"Cliente existente, 2026, mantém seus agendamentos do Model Monitor"* → correto: **manutenção** significa suportado, e apenas novos cadastros são bloqueados.
 
-**O que *não* mudou:** toda a mecânica memorizada acima ainda se comporta como escrito — o `DataCaptureConfig` com sua amostragem padrão do SDK de **20%**, o layout JSONL sob `{endpoint}/{variant}/…`, a parada acima de **75% de disco**, os quatro tipos de monitor e seus motores (estatísticas e restrições, restrições de métrica, intervalos bootstrap do Clarify, **NDCG < 0,90**), o loop de desvio pelo EventBridge até um SageMaker Pipeline e os `DriftCheckBaselines` do Model Registry, e a limitação de **somente tabular** do motor estatístico do Model Monitor. O aviso de 2026 muda *quem pode se cadastrar*, não o que o software faz — e essa é toda a distinção entre *manutenção* e *desligamento*.
+**O que *não* mudou:** toda a mecânica memorizada acima ainda se comporta como escrito, o `DataCaptureConfig` com sua amostragem padrão do SDK de **20%**, o layout JSONL sob `{endpoint}/{variant}/…`, a parada acima de **75% de disco**, os quatro tipos de monitor e seus motores (estatísticas e restrições, restrições de métrica, intervalos bootstrap do Clarify, **NDCG < 0,90**), o loop de desvio pelo EventBridge até um SageMaker Pipeline e os `DriftCheckBaselines` do Model Registry, e a limitação de **somente tabular** do motor estatístico do Model Monitor. O aviso de 2026 muda *quem pode se cadastrar*, não o que o software faz, e essa é toda a distinção entre *manutenção* e *desligamento*.
 
 **Formulação do guia do exame que você vai encontrar agora (v1.1, publicado em 30 de abril de 2026):**
 
-- o objetivo **1.1.3** mudou seus exemplos resolvidos para **inferência assíncrona e serverless** — duas das quatro opções desta lição — então o vocabulário de implantação agora aparece mais cedo no guia do que aparecia antes do v1.1;
+- o objetivo **1.1.3** mudou seus exemplos resolvidos para **inferência assíncrona e serverless**, duas das quatro opções desta lição, então o vocabulário de implantação agora aparece mais cedo no guia do que aparecia antes do v1.1;
 - o objetivo **4.2.2** diz **Clarify mais Bedrock Model Evaluations**, e o objetivo **1.3.4** lista **Bedrock, Amazon Quick, Kiro e SageMaker AI** como o conjunto de serviços;
 - o histórico de mudanças do guia afirma que atualizações chegam ao exame cerca de **um mês** após a publicação, e o exame ainda se chama **AIF-C01** (65 questões, 90 minutos, aprovação em 700/1000).
 
-Por fim, o nome do produto: desde **3 de dezembro de 2024** a AWS documenta que *"o Amazon SageMaker atual foi renomeado para **Amazon SageMaker AI**"*, com o SageMaker de nova geração (Unified Studio, Catalog, Lakehouse, zero-ETL) ao lado dele. Toda chamada de API da seção 1 permanece intocada — `CreateModel`, `CreateEndpointConfig` e `CreateEndpoint` ainda vivem no namespace `sagemaker` —, mas o console, a página de serviço e a lista de serviços do exame dizem **SageMaker AI**.
+Por fim, o nome do produto: desde **3 de dezembro de 2024** a AWS documenta que *"o Amazon SageMaker atual foi renomeado para **Amazon SageMaker AI**"*, com o SageMaker de nova geração (Unified Studio, Catalog, Lakehouse, zero-ETL) ao lado dele. Toda chamada de API da seção 1 permanece intocada, `CreateModel`, `CreateEndpointConfig` e `CreateEndpoint` ainda vivem no namespace `sagemaker`, mas o console, a página de serviço e a lista de serviços do exame dizem **SageMaker AI**.
 
-- **📚 Você sabia?** A AWS define os três estados do ciclo de vida em exatamente um lugar — a página **`service-lifecycle`** do AWS General Reference, atualizada pela última vez em **24 de setembro de 2026** —, e o Model Monitor está no estado mais suave, **Manutenção**. Uma funcionalidade em **Sunset** já carrega uma data final publicada (SageMaker Profiler, **30 de junho de 2027**), enquanto **Full Shutdown** significa que a API se foi do portfólio. É por isso que *"o Model Monitor foi descontinuado"* e *"o Model Monitor foi rebatizado como Bedrock Model Evaluations"* estão ambos errados: ele está fechado para clientes *novos*, inalterado para os existentes, e a dupla com Bedrock vive na formulação do guia do exame e não em um rebatismo.
+- **📚 Você sabia?** A AWS define os três estados do ciclo de vida em exatamente um lugar, a página **`service-lifecycle`** do AWS General Reference, atualizada pela última vez em **24 de setembro de 2026**, e o Model Monitor está no estado mais suave, **Manutenção**. Uma funcionalidade em **Sunset** já carrega uma data final publicada (SageMaker Profiler, **30 de junho de 2027**), enquanto **Full Shutdown** significa que a API se foi do portfólio. É por isso que *"o Model Monitor foi descontinuado"* e *"o Model Monitor foi rebatizado como Bedrock Model Evaluations"* estão ambos errados: ele está fechado para clientes *novos*, inalterado para os existentes, e a dupla com Bedrock vive na formulação do guia do exame e não em um rebatismo.
 
 ---
 
@@ -459,15 +459,15 @@ Por fim, o nome do produto: desde **3 de dezembro de 2024** a AWS documenta que 
 
 *Os preços são os próprios exemplos resolvidos da AWS e são exemplos específicos de Região, não uma tabela de tarifas. Savings Plans (1 ou 3 anos, compromissos de $/hora) cobrem endpoints em tempo real, batch transform, treinamento e processamento.*
 
-**Exemplo resolvido 2 — a fatura mensal em tempo real.** 2 × `ml.c5.xlarge` × 24 h × 31 d = **1.488 instância-horas** × **$0.204** = **$303.52**; um trabalho do Model Monitor de **2,5 h** × **$0.922** = **$2.31**; dados de 3.100 MB na entrada + 310 MB na saída ≈ **$0.06** → **≈ $305.88 por mês**. O monitoramento fica abaixo de **1%** da fatura; a computação ociosa é cerca de **99%** dela. Compare com o exemplo serverless de **$40.16** e você tem todo o argumento de custo em dois números.
+**Exemplo resolvido 2: a fatura mensal em tempo real.** 2 × `ml.c5.xlarge` × 24 h × 31 d = **1.488 instância-horas** × **$0.204** = **$303.52**; um trabalho do Model Monitor de **2,5 h** × **$0.922** = **$2.31**; dados de 3.100 MB na entrada + 310 MB na saída ≈ **$0.06** → **≈ $305.88 por mês**. O monitoramento fica abaixo de **1%** da fatura; a computação ociosa é cerca de **99%** dela. Compare com o exemplo serverless de **$40.16** e você tem todo o argumento de custo em dois números.
 
-**Exemplo resolvido 8 — cold start versus Provisioned Concurrency.** Ocioso → escala até zero → a próxima requisição paga o download do modelo e o start do contêiner (*"alguns segundos extras"*). Comprar determinismo em vez disso: Provisioned Concurrency de **$144** + computação da PC de **$0.000023/s** + sob demanda de **$6** depois dos **150.000 segundos gratuitos** = **$173.20 por mês** — cerca de **4×** a linha de computação sob demanda, e só vale a pena quando um cold start quebraria um SLA.
+**Exemplo resolvido 8, cold start versus Provisioned Concurrency.** Ocioso → escala até zero → a próxima requisição paga o download do modelo e o start do contêiner (*"alguns segundos extras"*). Comprar determinismo em vez disso: Provisioned Concurrency de **$144** + computação da PC de **$0.000023/s** + sob demanda de **$6** depois dos **150.000 segundos gratuitos** = **$173.20 por mês**, cerca de **4×** a linha de computação sob demanda, e só vale a pena quando um cold start quebraria um SLA.
 
 ### 8.2 Inference Recommender
 
-Antes de você chutar uma instância, execute um trabalho de recomendação. Um trabalho **`Default`** leva **até 45 minutos** e começa a partir de um ARN de Model Package; um trabalho **`Advanced`** roda cerca de **2 horas** com testes de carga. Saída: tipo e contagem de instâncias recomendados, latência, **custo por hora e custo por inferência**, mais utilização de CPU e memória — exatamente a evidência que uma questão de dimensionamento quer.
+Antes de você chutar uma instância, execute um trabalho de recomendação. Um trabalho **`Default`** leva **até 45 minutos** e começa a partir de um ARN de Model Package; um trabalho **`Advanced`** roda cerca de **2 horas** com testes de carga. Saída: tipo e contagem de instâncias recomendados, latência, **custo por hora e custo por inferência**, mais utilização de CPU e memória: exatamente a evidência que uma questão de dimensionamento quer.
 
-- **📚 Você sabia?** Endpoints em tempo real são cobrados **por segundo, com um mínimo de um minuto**, enquanto existem, e é por isso que o exame trata um endpoint não escalado e sempre ligado como um problema de *custo* e não de *desempenho*. Um endpoint que não serve nada às 03:00 ainda paga instância-horas, EBS e dados — e essa é a frase por trás de toda questão sobre "qual opção evita custo de ociosidade": serverless, assíncrono e cópias de componentes de inferência são os três que podem chegar a **zero**.
+- **📚 Você sabia?** Endpoints em tempo real são cobrados **por segundo, com um mínimo de um minuto**, enquanto existem, e é por isso que o exame trata um endpoint não escalado e sempre ligado como um problema de *custo* e não de *desempenho*. Um endpoint que não serve nada às 03:00 ainda paga instância-horas, EBS e dados, e essa é a frase por trás de toda questão sobre "qual opção evita custo de ociosidade": serverless, assíncrono e cópias de componentes de inferência são os três que podem chegar a **zero**.
 
 ---
 
@@ -504,28 +504,28 @@ O SageMaker **Projects** traz templates que provisionam **AWS CodePipeline** (ou
 
 ### 9.2 Kubernetes
 
-O caminho suportado são os **SageMaker Operators baseados em ACK**: o `kubectl apply` de um recurso customizado **`HostingDeployment`** cria ou atualiza um endpoint — a AWS documenta a reconciliação levando **até 15 minutos** —, enquanto componentes do **Kubeflow** dirigem trabalhos de treinamento, ajuste e batch transform. Esta é a resposta quando a questão diz *"a equipe já roda Kubernetes e quer endpoints do SageMaker gerenciados a partir dele"*.
+O caminho suportado são os **SageMaker Operators baseados em ACK**: o `kubectl apply` de um recurso customizado **`HostingDeployment`** cria ou atualiza um endpoint, a AWS documenta a reconciliação levando **até 15 minutos**, enquanto componentes do **Kubeflow** dirigem trabalhos de treinamento, ajuste e batch transform. Esta é a resposta quando a questão diz *"a equipe já roda Kubernetes e quer endpoints do SageMaker gerenciados a partir dele"*.
 
 ### 9.3 Borda: Neo e a descontinuação do Edge Manager
 
 O **Neo** compila um modelo treinado para um alvo com `CreateCompilationJob`, onde **`TargetDevice` e `TargetPlatform` são mutuamente exclusivos**. Alvos de nuvem incluem `ml_c5`; alvos de borda incluem `jetson_nano`, `rasp3b` / `rasp4b` e `coreml`. A compilação sobrevive; a frota gerenciada ao redor dela, não.
 
 > [!WARNING]
-> **O Amazon SageMaker Edge Manager foi descontinuado em 26 de abril de 2024.** A compilação do Neo ainda existe e ainda é a resposta correta para *"compilar um modelo para câmeras, robôs ou Raspberry Pi"* — mas frotas de dispositivos do Edge Manager, implantações de modelo e o console de administração associado não são uma resposta válida em 2026. Mecânicas legadas que ainda podem aparecer em material antigo: `CreateEdgeDeploymentPlan` com rollouts em estágios (porcentagens ou nomes de dispositivo), `ROLLBACK_ON_FAILURE` e `StartEdgeDeploymentStage`. Se uma opção oferece **Edge Manager** para uma implantação nova, é um distrator histórico.
+> **O Amazon SageMaker Edge Manager foi descontinuado em 26 de abril de 2024.** A compilação do Neo ainda existe e ainda é a resposta correta para *"compilar um modelo para câmeras, robôs ou Raspberry Pi"*, mas frotas de dispositivos do Edge Manager, implantações de modelo e o console de administração associado não são uma resposta válida em 2026. Mecânicas legadas que ainda podem aparecer em material antigo: `CreateEdgeDeploymentPlan` com rollouts em estágios (porcentagens ou nomes de dispositivo), `ROLLBACK_ON_FAILURE` e `StartEdgeDeploymentStage`. Se uma opção oferece **Edge Manager** para uma implantação nova, é um distrator histórico.
 
-- **📚 Você sabia?** O `CreateCompilationJob` devolve um artefato de modelo que você pode hospedar **tanto** na nuvem **quanto** em um dispositivo — a mesma família de trabalhos de compilação cobre instâncias de inferência `ml_c5` e placas `rasp4b`. Essa simetria é a razão de o Neo aparecer tanto em uma questão de dimensionamento de nuvem quanto em uma questão de IoT, e de `TargetDevice` XOR `TargetPlatform` ser uma regra real de API e não prosa de documentação.
+- **📚 Você sabia?** O `CreateCompilationJob` devolve um artefato de modelo que você pode hospedar **tanto** na nuvem **quanto** em um dispositivo: a mesma família de trabalhos de compilação cobre instâncias de inferência `ml_c5` e placas `rasp4b`. Essa simetria é a razão de o Neo aparecer tanto em uma questão de dimensionamento de nuvem quanto em uma questão de IoT, e de `TargetDevice` XOR `TargetPlatform` ser uma regra real de API e não prosa de documentação.
 
 ---
 
 ## 10. Veredito comparativo
 
 > [!IMPORTANT]
-> **Veredito Comparativo — tempo real vs. serverless vs. batch vs. assíncrono vs. borda**
+> **Veredito Comparativo: tempo real vs. serverless vs. batch vs. assíncrono vs. borda**
 > - **Tempo real** é a resposta sempre que um humano ou um cliente síncrono está esperando: tráfego contínuo, **25 MB / 60 s**, escolha de instância, auto scaling por target tracking, data capture, Model Monitor, variantes shadow e rollouts canary com guardrails vivem todos aqui, e em mais nenhum outro lugar com força total. O seu modo de falha é financeiro, não funcional: instância-horas acumulam a cada segundo em que o endpoint existe, e o próprio exemplo da AWS é de **$305.88/mês**, dos quais cerca de **99%** é computação pela qual você estava pagando enquanto ocioso.
-> - **Serverless** vence em tráfego **intermitente**: sem tipo de instância, dimensionamento só de memória (1024–6144 MB), escala até **zero**, e o exemplo resolvido da AWS de **$40.16/mês** para 10 milhões de requisições de 100 ms com **$0** enquanto ocioso. O seu modo de falha é capacidade e cold start: **sem GPU, sem endpoints multimodelo, sem configuração de VPC, sem data capture, sem Model Monitor, sem variantes A/B**, um teto de **4 MB / 60 s** — e um cold start medido apenas como *"alguns segundos extras"*. Acrescente **Provisioned Concurrency** quando uma rajada nunca pode pagar esse cold start (**$173.20/mês** no exemplo da AWS, aquecido *"em milissegundos"*).
-> - **Batch transform** é a resposta quando os dados já estão em repouso e ninguém está esperando: nenhum endpoint, **100 MB por payload** sob a regra `MaxConcurrentTransforms × MaxPayloadInMB ≤ 100 MB`, trabalhos de até **3.600 s**, resultados como `input.csv.out` no S3. O seu modo de falha é ser pedida uma resposta interativa — batch não tem endpoint para chamar.
-> - **Assíncrono** é a resposta quando o payload ou o tempo de processamento quebra toda opção síncrona: **1 GB / 60 minutos**, enfileirado com TTL de **6 horas**, saída no S3, tópicos SNS de sucesso e erro, e escala até zero entre rajadas. O seu modo de falha é um SLA abaixo de um segundo — a fila é a funcionalidade, não o defeito.
-> - **Borda** é a resposta quando o modelo tem que rodar **sem chamadas à nuvem**: o **Neo** compila para `jetson_nano`, `rasp3b`/`rasp4b` ou `coreml`, com planos em estágios e `ROLLBACK_ON_FAILURE` para rollout de frota — mas o **próprio Edge Manager foi descontinuado em 26 de abril de 2024**, então a compilação do Neo é a parte durável da história. O seu modo de falha é modelos em desvio que você não pode monitorar, e é exatamente por isso que uma escolha de borda deve ser pareada com uma história de retreinamento.
+> - **Serverless** vence em tráfego **intermitente**: sem tipo de instância, dimensionamento só de memória (1024 to 6144 MB), escala até **zero**, e o exemplo resolvido da AWS de **$40.16/mês** para 10 milhões de requisições de 100 ms com **$0** enquanto ocioso. O seu modo de falha é capacidade e cold start: **sem GPU, sem endpoints multimodelo, sem configuração de VPC, sem data capture, sem Model Monitor, sem variantes A/B**, um teto de **4 MB / 60 s**, e um cold start medido apenas como *"alguns segundos extras"*. Acrescente **Provisioned Concurrency** quando uma rajada nunca pode pagar esse cold start (**$173.20/mês** no exemplo da AWS, aquecido *"em milissegundos"*).
+> - **Batch transform** é a resposta quando os dados já estão em repouso e ninguém está esperando: nenhum endpoint, **100 MB por payload** sob a regra `MaxConcurrentTransforms × MaxPayloadInMB ≤ 100 MB`, trabalhos de até **3.600 s**, resultados como `input.csv.out` no S3. O seu modo de falha é ser pedida uma resposta interativa: batch não tem endpoint para chamar.
+> - **Assíncrono** é a resposta quando o payload ou o tempo de processamento quebra toda opção síncrona: **1 GB / 60 minutos**, enfileirado com TTL de **6 horas**, saída no S3, tópicos SNS de sucesso e erro, e escala até zero entre rajadas. O seu modo de falha é um SLA abaixo de um segundo: a fila é a funcionalidade, não o defeito.
+> - **Borda** é a resposta quando o modelo tem que rodar **sem chamadas à nuvem**: o **Neo** compila para `jetson_nano`, `rasp3b`/`rasp4b` ou `coreml`, com planos em estágios e `ROLLBACK_ON_FAILURE` para rollout de frota, mas o **próprio Edge Manager foi descontinuado em 26 de abril de 2024**, então a compilação do Neo é a parte durável da história. O seu modo de falha é modelos em desvio que você não pode monitorar, e é exatamente por isso que uma escolha de borda deve ser pareada com uma história de retreinamento.
 > - **Regra prática para o exame:** *quem está esperando, e quão grande é o payload?* Humano esperando abaixo de 25 MB → **tempo real**; humano esperando com orçamento para ociosidade → **serverless**; ninguém esperando com dados em repouso → **batch**; ninguém esperando mas o payload é enorme → **assíncrono**; ninguém esperando porque não há rede → **borda**.
 
 ---
@@ -566,7 +566,7 @@ Fontes primárias desta lição: as páginas do **guia de desenvolvedor** do Sag
 
 ## 13. Casos Reais
 
-As seções 1–12 tiram seus tetos da documentação da AWS. Esta seção acrescenta a outra metade da evidência: o que os *clientes* da AWS publicaram sobre servir modelos em produção com esses mesmos serviços. Todo número abaixo é uma afirmação de cliente publicada pela AWS, recuperada em 6 de outubro de 2026 de `aws.amazon.com/solutions/case-studies/*` e `aws.amazon.com/blogs/machine-learning/*`, e cada um é não auditado — "de até" é um teto, não uma média.
+As seções 1 to 12 tiram seus tetos da documentação da AWS. Esta seção acrescenta a outra metade da evidência: o que os *clientes* da AWS publicaram sobre servir modelos em produção com esses mesmos serviços. Todo número abaixo é uma afirmação de cliente publicada pela AWS, recuperada em 6 de outubro de 2026 de `aws.amazon.com/solutions/case-studies/*` e `aws.amazon.com/blogs/machine-learning/*`, e cada um é não auditado: "de até" é um teto, não uma média.
 
 ### 13.1 Cinco casos de implantação: serviços, números, fontes
 
@@ -574,43 +574,43 @@ As seções 1–12 tiram seus tetos da documentação da AWS. Esta seção acres
 |---|---|---|---|---|
 | 1 | **Forethought** (suporte de clientes SaaS, ano não publicado na página) | saída do próprio **Amazon EKS** → SageMaker **multi-model endpoints** + **Serverless Inference** | MME de **−66%** com latência melhor, serverless de **≈ −80%** (manchete **de até −80%**), **>80%** da inferência em GPU no SageMaker, **30 milhões** de interações/ano, equipe de **3 pessoas** | `solutions/case-studies/forethought-technologies-case-study` |
 | 2 | **HAYAT HOLDING** (manufatura de MDF, 2023) | **OPC-UA → AWS IoT Greengrass** SiteWise Edge Gateway → SageMaker Training + **Automatic Model Tuning** + Deployment + **Edge Manager** no dispositivo | **194 sensores** monitorados, **$300.000/ano** economizados | ML Blog `hayat-holding-uses-amazon-sagemaker-to-increase-product-quality-and-optimize-manufacturing-output-saving-300000-annually` |
-| 3 | **Prime Focus Technologies** (mídia, 2025) | **Amazon Bedrock** + agentes **AWS Lambda** no CLEAR, **14 milhões+** de ativos | custo de localização de **−20–30%**, precisão de **+20–30%**, turnaround de **−30–40%**; a primeira tentativa em APIs externas de LLM foi **lenta demais para tagging ao vivo** | `solutions/case-studies/prime-focus-case-study` |
+| 3 | **Prime Focus Technologies** (mídia, 2025) | **Amazon Bedrock** + agentes **AWS Lambda** no CLEAR, **14 milhões+** de ativos | custo de localização de **−20 to 30%**, precisão de **+20 to 30%**, turnaround de **−30 to 40%**; a primeira tentativa em APIs externas de LLM foi **lenta demais para tagging ao vivo** | `solutions/case-studies/prime-focus-case-study` |
 | 4 | **Epilot** (software de energia, 2026) | API → **Amazon SQS** → **AWS Lambda** → **Bedrock (Claude Sonnet)**, modelo escolhido com **Bedrock Evaluations**, dados em uma **Região da UE** | tempo de atendimento de **−87%**, **55.000** resumos/mês, MVP em **2 meses**, **80%** dos usuários dizem que simplifica o trabalho | `solutions/case-studies/epilot-genai-case-study` |
-| 5 | **Chronomics** (health-tech, 2022) | **Amazon Rekognition Custom Labels** com um limiar de pontuação e uma cauda humana | **4 meses** internos → **3–4 semanas**, precisão de **96,5%** / F1 de **97,9%**; limiar de **0,99 → 99,6%** (**5%** descartados), **0,999 → 99,87%** (**27%** descartados) | ML Blog `chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels` |
+| 5 | **Chronomics** (health-tech, 2022) | **Amazon Rekognition Custom Labels** com um limiar de pontuação e uma cauda humana | **4 meses** internos → **3 to 4 semanas**, precisão de **96,5%** / F1 de **97,9%**; limiar de **0,99 → 99,6%** (**5%** descartados), **0,999 → 99,87%** (**27%** descartados) | ML Blog `chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels` |
 
-**Caso 1 — Forethought: inferência faça você mesmo é um imposto que você pode citar.**
+**Caso 1: Forethought: inferência faça você mesmo é um imposto que você pode citar.**
 - **Contexto:** o SupportGPT lida com **30 milhões de interações por ano** com vários modelos por cliente, operado por uma **equipe de 3 pessoas** que também tinha que operar o Amazon EKS através de exceções de memória e quedas.
 - **Movimento de implantação:** saída do próprio EKS para **endpoints multimodelo** do SageMaker (um contêiner compartilhado, modelos adicionados por upload ao S3 sem atualizar o endpoint) mais **Serverless Inference** para os classificadores pequenos.
 - **Números:** **−66%** em MME *com latência melhor*, **≈ −80%** em serverless, manchete de **até −80%**, e **mais de 80%** da inferência em GPU agora no SageMaker.
-- **Mapeia para:** §4.1 para a topologia, §2.2 para a escala até zero, e §8 para o argumento de custo — um endpoint sempre ligado é cobrado quer o tráfego chegue ou não.
+- **Mapeia para:** §4.1 para a topologia, §2.2 para a escala até zero, e §8 para o argumento de custo: um endpoint sempre ligado é cobrado quer o tráfego chegue ou não.
 - **Fonte:** `aws.amazon.com/solutions/case-studies/forethought-technologies-case-study` (nenhum ano é publicado na página).
 
-**Caso 2 — HAYAT HOLDING: um padrão de borda que sobreviveu ao nome do seu produto.**
+**Caso 2: HAYAT HOLDING: um padrão de borda que sobreviveu ao nome do seu produto.**
 - **Contexto:** manufatura de painéis de MDF; o cliente chamava seus ambientes de ML construídos internamente de "demorados e complicados".
 - **Pipeline:** **194 sensores** via **OPC-UA** → SiteWise Edge Gateway dentro do **AWS IoT Greengrass** → SageMaker Model Training com **Automatic Model Tuning** → Model Deployment com o **SageMaker Edge Manager** rodando o modelo no dispositivo.
-- **Números:** **$300.000 por ano** economizados, com qualidade de painel mais alta e produção otimizada — o ajuste automático substituiu as varreduras manuais de hiperparâmetros em 194 entradas.
-- **Mapeia para:** §9.3 — o *padrão* (treinamento gerenciado, ajuste automático, compilar e enviar ao dispositivo) está atual, mas o **Edge Manager foi descontinuado em 26 de abril de 2024**, então o nome do produto dentro de um caso de 2023 é um distrator para uma construção em 2026, enquanto a compilação do **Neo** sobrevive.
+- **Números:** **$300.000 por ano** economizados, com qualidade de painel mais alta e produção otimizada, o ajuste automático substituiu as varreduras manuais de hiperparâmetros em 194 entradas.
+- **Mapeia para:** §9.3, o *padrão* (treinamento gerenciado, ajuste automático, compilar e enviar ao dispositivo) está atual, mas o **Edge Manager foi descontinuado em 26 de abril de 2024**, então o nome do produto dentro de um caso de 2023 é um distrator para uma construção em 2026, enquanto a compilação do **Neo** sobrevive.
 - **Fonte:** AWS Machine Learning Blog, `hayat-holding-uses-amazon-sagemaker-to-increase-product-quality-and-optimize-manufacturing-output-saving-300000-annually` (2023).
 
-**Caso 3 — Prime Focus Technologies: a latência decidiu o placement antes de a matriz de opções rodar.**
+**Caso 3: Prime Focus Technologies: a latência decidiu o placement antes de a matriz de opções rodar.**
 - **Contexto:** a plataforma CLEAR mantém **14 milhões+ de ativos** (Disney Star, CBS, Lionsgate) e cobre localização mais tagging de cricket **ao vivo**.
-- **Números:** **custo de localização −20–30%**, **precisão +20–30%**, **turnaround −30–40%**.
+- **Números:** **custo de localização −20 to 30%**, **precisão +20 to 30%**, **turnaround −30 to 40%**.
 - **A frase de implantação:** a **primeira tentativa usou APIs externas de LLM cuja latência era alta demais para tagging ao vivo**, e a latência *"caiu dramaticamente"* quando a carga de trabalho rodou na AWS por trás do **Amazon Bedrock** e de agentes **AWS Lambda**.
-- **Mapeia para:** a primeira questão da §2 — *quem está esperando?* Um tagger ao vivo é um chamador de latência abaixo de um segundo, então qualquer placement fora do orçamento de latência é eliminado **antes** que tempo real, serverless, assíncrono e batch sejam sequer comparados.
+- **Mapeia para:** a primeira questão da §2: *quem está esperando?* Um tagger ao vivo é um chamador de latência abaixo de um segundo, então qualquer placement fora do orçamento de latência é eliminado **antes** que tempo real, serverless, assíncrono e batch sejam sequer comparados.
 - **Fonte:** `aws.amazon.com/solutions/case-studies/prime-focus-case-study` (2025).
 
-**Caso 4 — Epilot: uma cadeia orientada a eventos onde a fila é a arquitetura.**
+**Caso 4: Epilot: uma cadeia orientada a eventos onde a fila é a arquitetura.**
 - **Contexto:** software de energia de Colônia, resumindo longas cadeias de e-mails de clientes em mais de 170 clientes de utilidades.
-- **Pipeline:** API → **Amazon SQS** → **AWS Lambda** → **Amazon Bedrock (Claude Sonnet)**; o modelo foi escolhido com **Amazon Bedrock Evaluations** (avaliações humanas entre versões de prompt), e um agente posterior grava registros **com humanos verificando** — nenhum agente grava sem supervisão.
+- **Pipeline:** API → **Amazon SQS** → **AWS Lambda** → **Amazon Bedrock (Claude Sonnet)**; o modelo foi escolhido com **Amazon Bedrock Evaluations** (avaliações humanas entre versões de prompt), e um agente posterior grava registros **com humanos verificando**: nenhum agente grava sem supervisão.
 - **Números:** tempo de atendimento de **−87%**, **55.000 resumos por mês** com taxa de falha desprezível, **80%** dos usuários dizem que simplifica o trabalho, MVP em **2 meses**, dados processados mantidos em uma **Região da UE**.
-- **Mapeia para:** a lógica de fila da §2.4 em um contexto serverless — desacople o chamador do trabalho com **SQS**, mantenha a peça tolerante a frio no **Lambda**, e trate *residência* e *avaliação* como gates pré-implantação e não como pensamento tardio.
+- **Mapeia para:** a lógica de fila da §2.4 em um contexto serverless: desacople o chamador do trabalho com **SQS**, mantenha a peça tolerante a frio no **Lambda**, e trate *residência* e *avaliação* como gates pré-implantação e não como pensamento tardio.
 - **Fonte:** `aws.amazon.com/solutions/case-studies/epilot-genai-case-study` (indexado em julho de 2026).
 
-**Caso 5 — Chronomics: a cauda de monitoramento que você tem que decidir antes de implantar.**
+**Caso 5: Chronomics: a cauda de monitoramento que você tem que decidir antes de implantar.**
 - **Contexto:** um leitor de resultados de testes de COVID para o qual **4 meses** de visão computacional customizada interna nunca atingiram a meta.
-- **Movimento:** **Amazon Rekognition Custom Labels** (AutoML) entregue em **3–4 semanas** com **96,5% de precisão / F1 de 97,9%**, pontuado por `DetectCustomLabels`.
-- **A decisão de monitoramento:** limiar de **0,99 → 99,6%** com **5%** das previsões descartadas, limiar de **0,999 → 99,87%** com **27%** descartados — precisão é comprada com cobertura, e alguém tem que ser dono da cauda descartada.
-- **Mapeia para:** §7, onde um limiar de violação é igualmente uma escolha de precisão-versus-cobertura — e o caminho humano documentado, **A2I** (GA 2020, **mais de 60 workflows**), está ele próprio fechado para novos clientes a partir de **30 de julho de 2026** (§7.5).
+- **Movimento:** **Amazon Rekognition Custom Labels** (AutoML) entregue em **3 to 4 semanas** com **96,5% de precisão / F1 de 97,9%**, pontuado por `DetectCustomLabels`.
+- **A decisão de monitoramento:** limiar de **0,99 → 99,6%** com **5%** das previsões descartadas, limiar de **0,999 → 99,87%** com **27%** descartados: precisão é comprada com cobertura, e alguém tem que ser dono da cauda descartada.
+- **Mapeia para:** §7, onde um limiar de violação é igualmente uma escolha de precisão-versus-cobertura, e o caminho humano documentado, **A2I** (GA 2020, **mais de 60 workflows**), está ele próprio fechado para novos clientes a partir de **30 de julho de 2026** (§7.5).
 - **Fonte:** AWS Machine Learning Blog, `chronomics-detects-covid-19-test-results-with-amazon-rekognition-custom-labels` (13 de dezembro de 2022).
 
 ### 13.2 Antes e depois, lado a lado
@@ -620,9 +620,9 @@ As seções 1–12 tiram seus tetos da documentação da AWS. Esta seção acres
 | Forethought | custo de inferência, modelos compartilhados | Amazon EKS autogerenciado, GPU sempre ligada | **−66%** com latência melhor | **de até −80%** de manchete |
 | Forethought | classificadores pequenos | servição autogerenciada | **≈ −80%** no Serverless Inference | **>80%** da inferência em GPU no SageMaker |
 | HAYAT | custo operacional anual | ambientes de ML construídos internamente | **−$300.000/ano** | **194 sensores** em um pipeline de borda |
-| Prime Focus | custo de localização · precisão · turnaround | linha de base do fornecedor | **−20–30% · +20–30% · −30–40%** | **14 milhões+** de ativos, latência de tagging ao vivo |
+| Prime Focus | custo de localização · precisão · turnaround | linha de base do fornecedor | **−20 to 30% · +20 to 30% · −30 to 40%** | **14 milhões+** de ativos, latência de tagging ao vivo |
 | Epilot | tempo de atendimento de e-mails de clientes | linha de base | **−87%** | **55.000** resumos por mês |
-| Chronomics | tempo de construção | 4 meses internos, nunca na meta | **3–4 semanas** | precisão de **96,5%** / F1 de **97,9%** |
+| Chronomics | tempo de construção | 4 meses internos, nunca na meta | **3 to 4 semanas** | precisão de **96,5%** / F1 de **97,9%** |
 
 ### 13.3 O que cada caso prova para a Tarefa 2.1
 
@@ -637,18 +637,18 @@ As seções 1–12 tiram seus tetos da documentação da AWS. Esta seção acres
 **Cinco regras que você pode levar para o exame a partir destes arquivos:**
 
 - **Topologia antes do tipo de instância.** O Forethought economizou dois terços da sua fatura mudando *como os modelos dividem a computação* (multimodelo, serverless), não negociando um preço melhor de instância;
-- **O custo de ociosidade é o modo de falha padrão.** Toda economia publicada acima vem de remover capacidade que rodava para ninguém — a mesma aritmética do $305.88 contra $40.16 da §8;
+- **O custo de ociosidade é o modo de falha padrão.** Toda economia publicada acima vem de remover capacidade que rodava para ninguém: a mesma aritmética do $305.88 contra $40.16 da §8;
 - **Placement precede a seleção de opção.** O Prime Focus não conseguia avaliar nenhuma das quatro opções até que o modelo rodasse em algum lugar rápido o suficiente; latência é um *filtro*, não uma *pontuação*;
-- **Uma arquitetura publicada pode anteceder uma aposentadoria.** O pipeline da HAYAT está correto como padrão e desatualizado como lista de produtos — confira o aviso de disponibilidade antes de citar os nomes de serviço de um caso;
+- **Uma arquitetura publicada pode anteceder uma aposentadoria.** O pipeline da HAYAT está correto como padrão e desatualizado como lista de produtos: confira o aviso de disponibilidade antes de citar os nomes de serviço de um caso;
 - **Toda porcentagem precisa de uma linha de base e de uma cauda humana.** O Chronomics comprou 3,1 pontos de precisão descartando 5% das previsões, e a própria primeira tentativa do Sun Finance pontuou apenas 61,8% antes de o pipeline ser dividido.
 
-- **📚 Você sabia?** O Generative AI Innovation Center da AWS publica a única taxa de resultado de projetos em todo o seu corpus de casos: **65%** dos seus projetos de IA generativa chegaram à produção em 2025 (alguns em apenas **45 dias**) de **mais de 1.000** implementações, avaliados com o framework dos **Five V's** da AWS — **Value → Visualize → Validate → Verify → Venture**. Os outros **35%** não entraram em produção, então planeje para iteração em vez de para uma linha reta do piloto à produção.
+- **📚 Você sabia?** O Generative AI Innovation Center da AWS publica a única taxa de resultado de projetos em todo o seu corpus de casos: **65%** dos seus projetos de IA generativa chegaram à produção em 2025 (alguns em apenas **45 dias**) de **mais de 1.000** implementações, avaliados com o framework dos **Five V's** da AWS: **Value → Visualize → Validate → Verify → Venture**. Os outros **35%** não entraram em produção, então planeje para iteração em vez de para uma linha reta do piloto à produção.
 
 > [!WARNING]
 > **Três armadilhas nos casos acima.**
 > - **Os números são evidência de marketing, não constantes de exame.** Eles são afirmados pelo cliente/pela AWS e não auditados, "de até" é um teto e não uma média (a manchete do Forethought é *de até* −80%), e apenas Sun Finance (**n = 585**) e Adobe (próprio conjunto de testes) divulgam uma base amostral. Nunca cite uma porcentagem sem o seu "antes";
 > - **A lista de serviços de um caso envelhece mais rápido que a sua arquitetura.** O pipeline de 2023 da HAYAT roda o **SageMaker Edge Manager**, descontinuado em **26 de abril de 2024**, então repetir o nome do produto do caso é um distrator de 2026, mesmo que o padrão de borda por trás dele ainda se sustente;
-> - **A decisão de implantação já pode ter terminado antes de a matriz rodar.** A primeira tentativa do Prime Focus falhou no *placement* — APIs externas de LLM eram lentas demais para tagging ao vivo —, então uma questão construída sobre um orçamento de latência pode eliminar todas as opções exceto a que pode ser colocada perto o suficiente.
+> - **A decisão de implantação já pode ter terminado antes de a matriz rodar.** A primeira tentativa do Prime Focus falhou no *placement*, APIs externas de LLM eram lentas demais para tagging ao vivo, então uma questão construída sobre um orçamento de latência pode eliminar todas as opções exceto a que pode ser colocada perto o suficiente.
 
 ---
 
@@ -865,13 +865,13 @@ As seções 1–12 tiram seus tetos da documentação da AWS. Esta seção acres
 {
   "question": "Relacione cada número de implantação ao que ele limita:",
   "pairs": [
-    {"left": "25 MB", "right": "Teto de payload em tempo real - payloads maiores precisam ir para o assíncrono ou batch"},
+    {"left": "25 MB", "right": "Teto de payload em tempo real: payloads maiores precisam ir para o assíncrono ou batch"},
     {"left": "4 MB", "right": "Teto de payload do serverless, ao lado de um limite de processamento de 60 segundos"},
     {"left": "1 GB", "right": "Teto de payload da inferência assíncrona, com até 60 minutos de processamento"},
     {"left": "100 MB", "right": "MaxPayloadInMB do batch transform, e MaxConcurrentTransforms x MaxPayloadInMB tem de ficar em ou abaixo dele"},
     {"left": "50 por cento", "right": "CanarySize máximo como fração da frota verde"},
     {"left": "15 contêineres", "right": "Máximo de contêineres atrás de um endpoint multicontêiner"},
-    {"left": "6 horas", "right": "TTL da fila de requisições assíncronas - RequestTTLSeconds máximo 21.600"}
+    {"left": "6 horas", "right": "TTL da fila de requisições assíncronas: RequestTTLSeconds máximo 21.600"}
   ],
   "explanation": "Estes são os tetos que o exame testa diretamente: 25 MB em tempo real, 4 MB serverless, 1 GB assíncrono, 100 MB por lote, canary limitado a 50 por cento do verde, 15 contêineres por endpoint multicontêiner e um TTL de fila assíncrona de 6 horas. Cada um deles é um limite duro documentado, não uma orientação."
 }
@@ -881,25 +881,25 @@ As seções 1–12 tiram seus tetos da documentação da AWS. Esta seção acres
 
 > [!WARNING]
 > **Armadilhas do dia do exame para esta lição:**
-> - **Exatamente quatro** opções de implantação: tempo real, serverless, batch transform, assíncrona — "multi-access endpoint" não é um termo da AWS de jeito nenhum;
+> - **Exatamente quatro** opções de implantação: tempo real, serverless, batch transform, assíncrona: "multi-access endpoint" não é um termo da AWS de jeito nenhum;
 > - **Tetos de payload:** tempo real **25 MB**, serverless **4 MB**, assíncrono **1 GB**, batch **100 MB** por lote; processamento de **60 s / 60 s / 60 min / trabalho de 3.600 s**;
 > - **O assíncrono é um endpoint diferente**: `AsyncInferenceConfig` presente significa `InvokeEndpointAsync`, TTL de fila de **6 horas** e timeout de invocação de **900 s** por padrão (3.600 s no máximo);
-> - **Exclusões do serverless**: sem GPU, sem Marketplace ou registros privados, sem MME, sem configuração de VPC, sem data capture, sem Model Monitor, sem múltiplas variantes, sem pipelines de inferência — e o caminho de migração é **de mão única**;
+> - **Exclusões do serverless**: sem GPU, sem Marketplace ou registros privados, sem MME, sem configuração de VPC, sem data capture, sem Model Monitor, sem múltiplas variantes, sem pipelines de inferência, e o caminho de migração é **de mão única**;
 > - **Auto scaling**: target tracking é recomendado em `SageMakerVariantInvocationsPerInstance` (alvo de exemplo **70**), **burstable T2** é excluído, e o mínimo do console em tempo real é **≥ 1** instância;
-> - **Canary ≤ 50%** da **frota verde**, passos lineares de **10–50%** — ambos são limites duros, e qualquer alarme em `AutoRollbackConfiguration.Alarms[]` devolve o tráfego ao blue;
+> - **Canary ≤ 50%** da **frota verde**, passos lineares de **10 to 50%**: ambos são limites duros, e qualquer alarme em `AutoRollbackConfiguration.Alarms[]` devolve o tráfego ao blue;
 > - **Variantes shadow nunca respondem a um chamador**; variantes ponderadas e canaries ambos respondem;
 > - **O data capture é a pré-condição para o Model Monitor**, a amostragem padrão do SDK é **20%**, layout JSONL sob o prefixo do endpoint e da variante, e o capture para acima de **75% de disco**;
-> - **Model Monitor e Clarify estão fechados para novos clientes a partir de 30 de julho de 2026** — construções novas usam MLflow Apps, Evidently AI, QuickSight e CloudWatch;
+> - **Model Monitor e Clarify estão fechados para novos clientes a partir de 30 de julho de 2026**: construções novas usam MLflow Apps, Evidently AI, QuickSight e CloudWatch;
 > - **Alertas de desvio de atribuição de atributo abaixo de NDCG 0,90**; as métricas do Model Monitor são **somente tabulares**;
-> - **O Edge Manager foi descontinuado em 26 de abril de 2024** — o Neo (`CreateCompilationJob`, `TargetDevice` XOR `TargetPlatform`) é a resposta de borda sobrevivente;
-> - **`TargetModel`** seleciona um modelo em um MME, **`TargetContainerHostname`** seleciona um contêiner em um MCE, **`TargetVariant`** seleciona uma variante — três cabeçalhos diferentes para três topologias diferentes.
+> - **O Edge Manager foi descontinuado em 26 de abril de 2024**, o Neo (`CreateCompilationJob`, `TargetDevice` XOR `TargetPlatform`) é a resposta de borda sobrevivente;
+> - **`TargetModel`** seleciona um modelo em um MME, **`TargetContainerHostname`** seleciona um contêiner em um MCE, **`TargetVariant`** seleciona uma variante: três cabeçalhos diferentes para três topologias diferentes.
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
-> 1. **Quatro opções, quatro formatos:** **tempo real** (REST persistente, 25 MB / 60 s, tráfego contínuo, GPU, monitoramento e guardrails), **serverless** (4 MB / 60 s, escala até 0, sem GPU, sem Model Monitor, memória de 1024–6144 MB), **assíncrono** (`InvokeEndpointAsync`, 1 GB / 60 min, TTL de fila de 6 horas, S3 + SNS, escala até 0) e **batch transform** (sem endpoint, 100 MB por lote, trabalho de 3.600 s, resultados como `.out` no S3).
+> 1. **Quatro opções, quatro formatos:** **tempo real** (REST persistente, 25 MB / 60 s, tráfego contínuo, GPU, monitoramento e guardrails), **serverless** (4 MB / 60 s, escala até 0, sem GPU, sem Model Monitor, memória de 1024 to 6144 MB), **assíncrono** (`InvokeEndpointAsync`, 1 GB / 60 min, TTL de fila de 6 horas, S3 + SNS, escala até 0) e **batch transform** (sem endpoint, 100 MB por lote, trabalho de 3.600 s, resultados como `.out` no S3).
 > 2. **O modelo de objetos é `CreateModel` → `CreateEndpointConfig` → `CreateEndpoint`**, com `CreateInferenceComponent` opcional; a configuração do endpoint é onde vivem `ProductionVariants`, `ShadowProductionVariants`, `DataCaptureConfig` e `AsyncInferenceConfig`, e onde uma topologia é escolhida entre modelo único, multimodelo (≤ muitos modelos do mesmo framework, um contêiner compartilhado, carga/descarga no S3), multicontêiner (≤ **15**, `TargetContainerHostname`), pipeline serial e componentes de inferência (`CopyCount`, pisos de CPU/memória, escala até 0).
 > 3. **O escalonamento tem dois regimes:** variantes de produção escalam em `sagemaker:variant:DesiredInstanceCount` com target tracking em `SageMakerVariantInvocationsPerInstance` (exemplo documentado **70**), nunca em **burstable T2**, e nunca abaixo de **1** instância; serverless, assíncrono e componentes de inferência chegam a **zero**, recuperando através de `NoCapacityInvocationFailures` em step scaling ao longo de *"vários minutos"*.
-> 4. **A segurança do rollout é aritmética limitada:** A/B via `InitialVariantWeight`, `TargetVariant` e `UpdateEndpointWeightsAndCapacidades`; variantes shadow onde **somente a resposta de produção chega ao chamador**; guardrails com `ALL_AT_ONCE`, **CANARY ≤ 50% do verde** e **LINEAR 10–50% por passo**, cada um com `WaitIntervalInSeconds`, `MaximumExecutionTimeoutInSeconds` e `AutoRollbackConfiguration.Alarms[]` para rollback automático.
-> 5. **O monitoramento precisa do capture primeiro:** `DataCaptureConfig` (`InitialSamplingPercentage`, padrão do SDK de **20%**, para em **75% de disco**) alimenta os quatro tipos de monitor — qualidade de dados, qualidade de modelo, desvio de viés, desvio de atribuição de atributo (**alerta abaixo de NDCG 0,90**) —, e o alarme de desvio fecha o loop pelo EventBridge até um SageMaker Pipeline, `QualityCheck`/`ClarifyCheck`, os `DriftCheckBaselines` do Model Registry e uma aprovação manual. **Em 30 de julho de 2026, Model Monitor e Clarify estão fechados para novos clientes.**
+> 4. **A segurança do rollout é aritmética limitada:** A/B via `InitialVariantWeight`, `TargetVariant` e `UpdateEndpointWeightsAndCapacidades`; variantes shadow onde **somente a resposta de produção chega ao chamador**; guardrails com `ALL_AT_ONCE`, **CANARY ≤ 50% do verde** e **LINEAR 10 to 50% por passo**, cada um com `WaitIntervalInSeconds`, `MaximumExecutionTimeoutInSeconds` e `AutoRollbackConfiguration.Alarms[]` para rollback automático.
+> 5. **O monitoramento precisa do capture primeiro:** `DataCaptureConfig` (`InitialSamplingPercentage`, padrão do SDK de **20%**, para em **75% de disco**) alimenta os quatro tipos de monitor, qualidade de dados, qualidade de modelo, desvio de viés, desvio de atribuição de atributo (**alerta abaixo de NDCG 0,90**), e o alarme de desvio fecha o loop pelo EventBridge até um SageMaker Pipeline, `QualityCheck`/`ClarifyCheck`, os `DriftCheckBaselines` do Model Registry e uma aprovação manual. **Em 30 de julho de 2026, Model Monitor e Clarify estão fechados para novos clientes.**
 > 6. **O custo é o verdadeiro seletor:** os próprios exemplos da AWS dão **$305.88/mês** para dois `ml.c5.xlarge` ociosos (cerca de **99%** de computação) contra **$40.16/mês** para 10 milhões de requisições serverless com **$0** ocioso, e **$173.20/mês** quando o Provisioned Concurrency compra aquecimento *"em milissegundos"*; o Inference Recommender quantifica a escolha com um trabalho Default de **45 minutos** ou Advanced de **~2 horas**.
-> 7. **Veredito comparativo:** *quem está esperando e quão grande é o payload?* Humano esperando abaixo de 25 MB → **tempo real**; orçamento para ociosidade → **serverless** (+ Provisioned Concurrency para garantir aquecimento); dados em repouso, ninguém esperando → **batch**; payload enorme ou execução longa → **assíncrono**; nenhuma rede → **borda compilada com Neo** (Edge Manager descontinuado em 26 de abril de 2024) — e coloque-a em produção através do **SageMaker Projects** com CodePipeline, staging, um gate de aprovação manual e produção com guardrails.
+> 7. **Veredito comparativo:** *quem está esperando e quão grande é o payload?* Humano esperando abaixo de 25 MB → **tempo real**; orçamento para ociosidade → **serverless** (+ Provisioned Concurrency para garantir aquecimento); dados em repouso, ninguém esperando → **batch**; payload enorme ou execução longa → **assíncrono**; nenhuma rede → **borda compilada com Neo** (Edge Manager descontinuado em 26 de abril de 2024), e coloque-a em produção através do **SageMaker Projects** com CodePipeline, staging, um gate de aprovação manual e produção com guardrails.

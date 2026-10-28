@@ -92,7 +92,7 @@ class Order:
 ```
 
 > [!TIP]
-> Entidades devem ser **puras** — sem imports de frameworks, sem mapeamentos ORM, sem lógica de serialização. São classes Python simples com métodos de negócio.
+> Entidades devem ser **puras**: sem imports de frameworks, sem mapeamentos ORM, sem lógica de serialização. São classes Python simples com métodos de negócio.
 
 ## Princípios de Design de Entidades
 

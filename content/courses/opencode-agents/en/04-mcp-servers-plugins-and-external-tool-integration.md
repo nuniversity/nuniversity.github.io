@@ -13,7 +13,7 @@ duration: "45 min"
 The Model Context Protocol (MCP) is an open standard that defines how LLM applications communicate with external tools and data sources. It uses JSON-RPC 2.0 as its wire protocol.
 
 > [!NOTE]
-> MCP was designed specifically for LLM-tool interaction patterns. Unlike REST APIs which are designed for humans and CRUD operations, MCP uses a bidirectional JSON-RPC protocol that supports tool discovery, resource access, and prompt templates — all primitives that LLMs naturally understand.
+> MCP was designed specifically for LLM-tool interaction patterns. Unlike REST APIs which are designed for humans and CRUD operations, MCP uses a bidirectional JSON-RPC protocol that supports tool discovery, resource access, and prompt templates: all primitives that LLMs naturally understand.
 
 ```mermaid
 flowchart LR
@@ -129,7 +129,7 @@ MCP servers are configured in the `mcpServers` section of `opencode.json`:
 ```
 
 > [!WARNING]
-> MCP servers have full access to the environment variables they are configured with. Never hardcode secrets in `opencode.json` — always use environment variable interpolation (`${VAR_NAME}`). The env block is passed directly to the spawned process, and any tool running in that process can read these values.
+> MCP servers have full access to the environment variables they are configured with. Never hardcode secrets in `opencode.json`: always use environment variable interpolation (`${VAR_NAME}`). The env block is passed directly to the spawned process, and any tool running in that process can read these values.
 
 ---
 
@@ -316,7 +316,7 @@ if __name__ == "__main__":
 ```
 
 > [!IMPORTANT]
-> Tool schemas define the contract between the LLM and your server. Always include clear `description` fields for each parameter — the LLM uses these descriptions to determine how to populate arguments. A poorly described parameter will result in the LLM passing incorrect values.
+> Tool schemas define the contract between the LLM and your server. Always include clear `description` fields for each parameter: the LLM uses these descriptions to determine how to populate arguments. A poorly described parameter will result in the LLM passing incorrect values.
 
 ---
 
@@ -339,8 +339,8 @@ MCP servers serve as the plugin system for OpenCode. Any external capability can
 
 | Component     | Role                                      |
 |---------------|-------------------------------------------|
-| OpenCode      | MCP client — initiates requests           |
-| MCP Server    | Plugin — processes requests and returns   |
+| OpenCode | MCP client: initiates requests |
+| MCP Server | Plugin: processes requests and returns |
 | Transport     | stdin/stdout or HTTP/SSE                  |
 | Protocol      | JSON-RPC 2.0                              |
 

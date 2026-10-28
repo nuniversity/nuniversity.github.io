@@ -1,5 +1,5 @@
 ---
-title: "Capstone Avançado — Armazenamento Chave-Valor Concorrente"
+title: "Capstone Avançado, Armazenamento Chave-Valor Concorrente"
 description: "Construa um servidor de armazenamento chave-valor concorrente e thread-safe com Tokio, armazenamento persistente e manipulação de protocolo"
 order: 10
 duration: "90 minutos"
@@ -381,14 +381,14 @@ mod tests {
 
 Tente implementar estas melhorias:
 
-1. **Persistência de snapshot** — Salvar/carregar dados em disco na inicialização/desligamento
-2. **Pub/Sub** — Adicionar comandos SUBSCRIBE/PUBLISH
-3. **Autenticação** — Exigir AUTH com senha
-4. **ACL** — Controle de acesso refinado
-5. **Clusterização** — Shard de dados entre múltiplos nós
-6. **API HTTP** — Adicionar uma interface REST via Axum
-7. **Métricas** — Rastrear contagens de comando, latência, conexões ativas
-8. **SDK de Cliente** — Construir um cliente Rust com o protocolo
+1. **Persistência de snapshot**: Salvar/carregar dados em disco na inicialização/desligamento
+2. **Pub/Sub**: Adicionar comandos SUBSCRIBE/PUBLISH
+3. **Autenticação**: Exigir AUTH com senha
+4. **ACL**: Controle de acesso refinado
+5. **Clusterização**: Shard de dados entre múltiplos nós
+6. **API HTTP**: Adicionar uma interface REST via Axum
+7. **Métricas**: Rastrear contagens de comando, latência, conexões ativas
+8. **SDK de Cliente**: Construir um cliente Rust com o protocolo
 
 ```rust
 // Exemplo: persistência de snapshot

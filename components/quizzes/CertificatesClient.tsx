@@ -85,7 +85,7 @@ export function CertificatesClient({ lang, dict, quizzes }: CertificatesClientPr
         {bests && passed.length === 0 && (
           <div className="border border-dashed rounded-2xl p-10 text-center" data-testid="certificates-empty">
             <p className="text-muted-foreground">
-              {dict?.quizzes?.certificates?.empty || 'No certificates yet — pass a mock exam to earn one'}
+              {dict?.quizzes?.certificates?.empty || 'No certificates yet: pass a mock exam to earn one'}
             </p>
             <Link
               href={`/${lang}/quizzes/`}

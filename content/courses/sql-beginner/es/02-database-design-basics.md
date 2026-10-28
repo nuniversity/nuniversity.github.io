@@ -26,7 +26,7 @@ Problemas:
 - **Anomalía de eliminación**: Eliminar un pedido también elimina la información del cliente
 
 > [!NOTE]
-> Estas se llaman **anomalías** — inconsistencias de datos causadas por un diseño deficiente. La normalización las elimina.
+> Estas se llaman **anomalías**: inconsistencias de datos causadas por un diseño deficiente. La normalización las elimina.
 
 ## Diagramas Entidad-Relación (ER)
 
@@ -168,7 +168,7 @@ Tablas necesarias:
 - `authors(id, name, email, bio)`
 - `posts(id, author_id, title, body, published_at)`
 - `categories(id, name, slug)`
-- `post_categories(post_id, category_id)` — tabla de unión
+- `post_categories(post_id, category_id)`: tabla de unión
 - `comments(id, post_id, author_name, body, created_at)`
 
 ```sql
@@ -253,7 +253,7 @@ categories (id, name)
 El resultado: 5 tablas, cero redundancia, relaciones claras.
 
 > [!SUCCESS]
-> Un buen diseño es invisible — solo lo notas cuando falta. Tómate tiempo para planificar antes de escribir un solo CREATE TABLE.
+> Un buen diseño es invisible: solo lo notas cuando falta. Tómate tiempo para planificar antes de escribir un solo CREATE TABLE.
 
 ## Preguntas de Práctica
 

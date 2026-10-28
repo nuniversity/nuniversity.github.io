@@ -1,6 +1,6 @@
 ---
 title: "Agentes SQL"
-description: "Construa agentes de consulta SQL com LangGraph — vinculação de ferramentas de banco de dados, geração texto-para-SQL, validação e execução de consultas e interpretação de resultados."
+description: "Construa agentes de consulta SQL com LangGraph, vinculação de ferramentas de banco de dados, geração texto-para-SQL, validação e execução de consultas e interpretação de resultados."
 order: 5
 duration: "40 min"
 difficulty: "advanced"
@@ -238,7 +238,7 @@ print(result["messages"][-1].content)
 ```
 
 [!SUCCESS]
-O agente descobre o schema de forma autônoma, gera o SQL, valida e executa, e depois explica os resultados — tudo em um laço até que a pergunta do usuário seja respondida.
+O agente descobre o schema de forma autônoma, gera o SQL, valida e executa, e depois explica os resultados: tudo em um laço até que a pergunta do usuário seja respondida.
 
 ---
 
@@ -436,7 +436,7 @@ Acompanhe as tentativas de erro no estado. Após N falhas, tente uma abordagem d
     "It caches query results"
   ],
   "correct": 1,
-  "explanation": "The LLM cannot generate valid SQL without knowing the database schema — what tables exist, what columns they have, and their data types."
+  "explanation": "The LLM cannot generate valid SQL without knowing the database schema: what tables exist, what columns they have, and their data types."
 }
 ```
 

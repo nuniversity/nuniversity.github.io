@@ -7,7 +7,7 @@ duration: "90 min"
 ---
 # Vendas e Modelos de Receita: Preço com Propósito, Funil e Canal
 
-Missão declarada não paga fornecedor. A diferença entre uma empresa híbrida e uma boa intenção é a **receita de venda**: dinheiro que entra porque alguém escolheu pagar, de livre vontade, por um produto ou serviço — e que, por isso, precisa de preço, de funil, de canal e de conformidade, exatamente como qualquer outro negócio. Nesta lição, a venda é tratada como **governança**: cada escolha de preço, de canal e de promessa de impacto é uma decisão sobre quem recebe valor, quanto fica na empresa e quanto chega à causa.
+Missão declarada não paga fornecedor. A diferença entre uma empresa híbrida e uma boa intenção é a **receita de venda**: dinheiro que entra porque alguém escolheu pagar, de livre vontade, por um produto ou serviço, e que, por isso, precisa de preço, de funil, de canal e de conformidade, exatamente como qualquer outro negócio. Nesta lição, a venda é tratada como **governança**: cada escolha de preço, de canal e de promessa de impacto é uma decisão sobre quem recebe valor, quanto fica na empresa e quanto chega à causa.
 
 ```text
 ====================================================================
@@ -60,7 +60,7 @@ Nesta lição você vai:
 
 ### 1.1 Por que a venda é critério de definição
 
-A definição britânica de empresa social (**DCMS, Reino Unido, 2023**) é objetiva: missão social + **pelo menos 50% da receita vinda de atividade comercial** + **pelo menos 50% do excedente reinvestido**. Aplicada aos pequenos negócios empregadores do Reino Unido, **6,2%** se qualificam — e **80,1%** delas apuraram lucro. A lição prática é incômoda para quem confunde causa com prejuízo: **comercializar é parte da definição**, e a lucratividade convive com a missão.
+A definição britânica de empresa social (**DCMS, Reino Unido, 2023**) é objetiva: missão social + **pelo menos 50% da receita vinda de atividade comercial** + **pelo menos 50% do excedente reinvestido**. Aplicada aos pequenos negócios empregadores do Reino Unido, **6,2%** se qualificam, e **80,1%** delas apuraram lucro. A lição prática é incômoda para quem confunde causa com prejuízo: **comercializar é parte da definição**, e a lucratividade convive com a missão.
 
 Na Austrália, o levantamento do **Social Traders (2025)** mostra como esse financiamento se distribui:
 
@@ -71,11 +71,11 @@ Na Austrália, o levantamento do **Social Traders (2025)** mostra como esse fina
 | **Não comercial** (só apoios e doações) | **23%** | Dependência de terceiros para sobreviver |
 | Venderam mais e **também gastaram mais** com impacto | **71%** | A venda puxa o investimento social, não o substitui |
 
-- **🔢 Você sabia?** A empresa híbrida no mundo é estimada em cerca de **10 milhões de organizações**, **US$ 2 trilhões por ano** de atividade e **cerca de 200 milhões de empregos** — e **1 em cada 2** é liderada por mulher, contra **1 em cada 5** nas empresas convencionais (Fórum Econômico Mundial, 2024). Nunca houve tamanho crítico tão grande para quem vende com propósito.
+- **🔢 Você sabia?** A empresa híbrida no mundo é estimada em cerca de **10 milhões de organizações**, **US$ 2 trilhões por ano** de atividade e **cerca de 200 milhões de empregos**, e **1 em cada 2** é liderada por mulher, contra **1 em cada 5** nas empresas convencionais (Fórum Econômico Mundial, 2024). Nunca houve tamanho crítico tão grande para quem vende com propósito.
 
-### 1.2 A venda reduz dependência — e cria dependência nova
+### 1.2 A venda reduz dependência, e cria dependência nova
 
-A receita de venda **diversifica a base** e reduz a dependência de apoios pontuais (Fonte Reserva Federal de San Francisco; Lyons). Mas ela troca um risco por outro: quem dependia de um doador passa a depender de um **cliente, de um canal ou de um contrato**. A gestão de receita híbrida é, por isso, a gestão de **duas concentrações simultâneas** — a dos apoios e a das vendas.
+A receita de venda **diversifica a base** e reduz a dependência de apoios pontuais (Fonte Reserva Federal de San Francisco; Lyons). Mas ela troca um risco por outro: quem dependia de um doador passa a depender de um **cliente, de um canal ou de um contrato**. A gestão de receita híbrida é, por isso, a gestão de **duas concentrações simultâneas**: a dos apoios e a das vendas.
 
 | Fonte de receita | Risco dominante | Indicador de vigilância | Cuidado típico |
 |---|---|---|---|
@@ -86,13 +86,13 @@ A receita de venda **diversifica a base** e reduz a dependência de apoios pontu
 | Assinatura | **Perda de clientes** | Perda mensal; receita recorrente | Somar clientes sem olhar saída |
 
 > [!IMPORTANT]
-> **Veredito Comparativo — receita: a empresa híbrida × tradicional, parceria, cooperativa e ONG.**
+> **Veredito Comparativo: receita: a empresa híbrida × tradicional, parceria, cooperativa e ONG.**
 >
 > - **× Empresa tradicional:** ela é a **campeã de margem pura** e de liberdade total de preço, mas não tem resposta quando o cliente pergunta "o que acontece com o meu dinheiro?". A híbrida **perde um pouco de margem por escolha deliberada** (o percentual de impacto sai do preço) e ganha algo que a tradicional precisa comprar depois: adesão, recorrência e defesa de preço.
 > - **× Parceria (aliança):** a parceria entrega **escala e redução de custo de transação**, mas o preço passa a ser **negociado bilateralmente** e a margem é disputada no contrato. A híbrida usa parceria para **canal**, não para **identidade**: vende pelo parceiro sem entregar a definição do preço nem a narrativa de impacto.
-> - **× Cooperativa:** a cooperativa tem a **maior prova de escala comercial do Brasil** — **R$ 848,4 bilhões** de ingressos em 2025 (**+12%**), **4.400 cooperativas** e **29 milhões de cooperados** (Sistema OCB, AnuárioCoop 2026) —, com repasse rateado e sobras. O preço é conhecido: **autonomia reduzida** de preço e de marca. A híbrida pega a **escala sem abrir a mão da marca**, vendendo direto no volume que justifica.
+> - **× Cooperativa:** a cooperativa tem a **maior prova de escala comercial do Brasil**, **R$ 848,4 bilhões** de ingressos em 2025 (**+12%**), **4.400 cooperativas** e **29 milhões de cooperados** (Sistema OCB, AnuárioCoop 2026), com repasse rateado e sobras. O preço é conhecido: **autonomia reduzida** de preço e de marca. A híbrida pega a **escala sem abrir a mão da marca**, vendendo direto no volume que justifica.
 > - **× ONG / OSC:** a ONG é **campeã de legitimidade para pedir**, mas prisioneira da **dependência de apoios**: só 23% das organizações do setor vivem só de não-vendas (Social Traders, 2025). A híbrida é o único modelo do quadro que **fatura no mercado e ainda assim remunera a causa no preço**, com teto, prazo e repasse divulgados.
-> - **Veredito:** a **tradicional vence em margem livre**, a **parceria vence em custo de canal**, a **cooperativa vence em escala** e a **ONG vence em captação**. A empresa híbrida vence na **única linha que nenhuma delas cobre sozinha**: transformar a venda em **fonte principal de financiamento do impacto** — acima de 50% (critério DCMS) — mantendo preço, canal e promessa auditáveis.
+> - **Veredito:** a **tradicional vence em margem livre**, a **parceria vence em custo de canal**, a **cooperativa vence em escala** e a **ONG vence em captação**. A empresa híbrida vence na **única linha que nenhuma delas cobre sozinha**: transformar a venda em **fonte principal de financiamento do impacto**, acima de 50% (critério DCMS), mantendo preço, canal e promessa auditáveis.
 
 ---
 
@@ -137,7 +137,7 @@ A receita de venda **diversifica a base** e reduz a dependência de apoios pontu
 }
 ```
 
-- **🔢 Você sabia?** O cooperativismo brasileiro movimentou **R$ 848,4 bilhões** de ingressos em 2025 (**+12%**), com **4.400 cooperativas**, **29 milhões de cooperados** (13,6% da população) e **613.373 empregos diretos**. Só o ramo agropecuário responde por **R$ 487,3 bilhões** (**57,4%** do total, +11,2%) — e a presença de cooperativa associa-se a **+R$ 5,1 mil de PIB per capita** e a um multiplicador de **R$ 1,65 por R$ 1 investido** (Sistema OCB/FIPE, 2023).
+- **🔢 Você sabia?** O cooperativismo brasileiro movimentou **R$ 848,4 bilhões** de ingressos em 2025 (**+12%**), com **4.400 cooperativas**, **29 milhões de cooperados** (13,6% da população) e **613.373 empregos diretos**. Só o ramo agropecuário responde por **R$ 487,3 bilhões** (**57,4%** do total, +11,2%), e a presença de cooperativa associa-se a **+R$ 5,1 mil de PIB per capita** e a um multiplicador de **R$ 1,65 por R$ 1 investido** (Sistema OCB/FIPE, 2023).
 
 ### 2.3 Por onde começar: o modelo inicial
 
@@ -152,7 +152,7 @@ Nenhuma empresa híbrida nasce com os seis modelos. A escolha do primeiro modelo
 | Método ou marca replicável | Licença | Receita por licenciado | Concentrar tudo em um só parceiro |
 | Produto com diferencial social provável | Causa-marketing | Conversão com e sem a promessa | Prometer percentual que a margem não banca |
 
-**Regra de sequência:** comece pelo modelo que dá **previsibilidade** (recorrência ou contrato longo), use o segundo modelo para **diversificar** e deixe causa-marketing como **camada sobreposta** — ele é regra de comunicação, não linha isolada de receita.
+**Regra de sequência:** comece pelo modelo que dá **previsibilidade** (recorrência ou contrato longo), use o segundo modelo para **diversificar** e deixe causa-marketing como **camada sobreposta**: ele é regra de comunicação, não linha isolada de receita.
 
 ---
 
@@ -170,9 +170,9 @@ Nenhuma empresa híbrida nasce com os seis modelos. A escolha do primeiro modelo
 | **Margem de contribuição** | preço − variável precisa cobrir os fixos | R$ 12,00 − R$ 6,50 = **R$ 5,50**; fixos R$ 4.000 → equilíbrio em **728 unidades** | canal com taxa sobre a venda | usar junto do custo total |
 
 > [!WARNING]
-> **Markup aleatório é o erro silencioso da empresa híbrida.** Somar "uns 30%" sem ter a **estrutura de custos** na mão (diretos **e** indiretos) produz três falhas em sequência: preço abaixo do custo total, margem insuficiente para o compromisso de impacto e promessa que a operação não banca. A boa prática verificável é: **somar todos os custos (diretos + estrutura) e acrescentar margem justificada** (Forbes Nonprofit Council, 2024) — e só então abrir a conta do percentual de impacto.
+> **Markup aleatório é o erro silencioso da empresa híbrida.** Somar "uns 30%" sem ter a **estrutura de custos** na mão (diretos **e** indiretos) produz três falhas em sequência: preço abaixo do custo total, margem insuficiente para o compromisso de impacto e promessa que a operação não banca. A boa prática verificável é: **somar todos os custos (diretos + estrutura) e acrescentar margem justificada** (Forbes Nonprofit Council, 2024), e só então abrir a conta do percentual de impacto.
 
-### 3.2 Exemplo 1 — preço de produto com percentual de impacto (1%)
+### 3.2 Exemplo 1: preço de produto com percentual de impacto (1%)
 
 Custo direto **R$ 22,00** + indiretos **R$ 8,00** = **R$ 30,00**; margem desejada de 30% → preço-base **R$ 39,00**. Compromisso público de doar **1% das vendas** (regra da rede 1% for the Planet):
 
@@ -181,16 +181,16 @@ Custo direto **R$ 22,00** + indiretos **R$ 8,00** = **R$ 30,00**; margem desejad
 3. Em **1.000 unidades/mês**: **R$ 400/mês** e **R$ 4.800/ano** de repasse;
 4. Margem por unidade: 39,90 − 30,00 − 0,40 = **R$ 9,50** (**23,8%** do preço);
 5. Concorrência sem causa a R$ 35,60 → prêmio de **+12,1%**, compatível com os **55% a 78%** de brasileiros dispostos a pagar mais por sustentabilidade;
-6. Se o compromisso subir para **5%**: $P = 39{,}00 \div 0{,}95$ = **R$ 41,05** — o prêmio sobre a concorrência salta para **+15,3%**.
+6. Se o compromisso subir para **5%**: $P = 39{,}00 \div 0{,}95$ = **R$ 41,05**, o prêmio sobre a concorrência salta para **+15,3%**.
 
 **Leitura:** cada ponto percentual de compromisso custa cerca de **R$ 0,40 a R$ 0,45** por unidade neste preço. É barato a 1% e começa a apertar a partir de 5%.
 
-### 3.3 Exemplo 2 — preço justo com valor percebido
+### 3.3 Exemplo 2: preço justo com valor percebido
 
 Custo **R$ 52,00**; margem mínima de 15% → piso **R$ 59,80**; teto pesquisado com clientes **R$ 78,00** → pratica-se **R$ 69,00** (margem de **R$ 17,00 = 24,6%**), dos quais **R$ 7,00 por unidade (10,1%)** vão ao fundo de impacto.
 
 - Em **500 unidades/mês**: margem de **R$ 8.900** no piso contra **R$ 10.700** no valor percebido (**+20,2%**), **e** **R$ 3.500/mês** de impacto (7,00 × 500);
-- a faixa social (R$ 49,00 para quem não pode pagar o cheio) fica **acima do custo de R$ 52,00** apenas se for subsidiada pela diferença — por isso o preço justo usa **média ponderada**, não preço único;
+- a faixa social (R$ 49,00 para quem não pode pagar o cheio) fica **acima do custo de R$ 52,00** apenas se for subsidiada pela diferença: por isso o preço justo usa **média ponderada**, não preço único;
 - a lição de fundo (Alliance, 2014): o preço está **entre o custo e o valor gerado**, e remunerar o **valor**, não o custo, é o que permite escala e captação de capital.
 
 ```fillblank
@@ -207,7 +207,7 @@ Custo **R$ 52,00**; margem mínima de 15% → piso **R$ 59,80**; teto pesquisado
 }
 ```
 
-- **🔢 Você sabia?** **64%** dos brasileiros pagariam acima da média por alimento sustentável (média mundial de 61%), mas a disposição de pagar mais por marca sustentável **caiu de 60% para 55%** (Akatu/GlobeScan, n=1.000, 2022). E a BCG (2025, n=1.829 no Brasil) mostra a tensão de mesa de refeição: **63%** se preocupam com sustentabilidade, mas só **39%** acham que isso muda seus gastos. O prêmio existe — mas ele é **declarado com mais entusiasmo do que pago**.
+- **🔢 Você sabia?** **64%** dos brasileiros pagariam acima da média por alimento sustentável (média mundial de 61%), mas a disposição de pagar mais por marca sustentável **caiu de 60% para 55%** (Akatu/GlobeScan, n=1.000, 2022). E a BCG (2025, n=1.829 no Brasil) mostra a tensão de mesa de refeição: **63%** se preocupam com sustentabilidade, mas só **39%** acham que isso muda seus gastos. O prêmio existe, mas ele é **declarado com mais entusiasmo do que pago**.
 
 ---
 
@@ -217,13 +217,13 @@ Custo **R$ 52,00**; margem mínima de 15% → piso **R$ 59,80**; teto pesquisado
 
 | Etapa | Volume | Taxa | Origem da taxa | Receita |
 |---|---|---|---|---|
-| Visitantes por mês | 1.000 | — | — | — |
-| Contatos captados | **25** | **2,5%** | Leadster, 2025 (mediana brasileira) | — |
-| Reuniões realizadas | **8** | **30%** | Next Leads, 2026 | — |
+| Visitantes por mês | 1.000 |: |: |: |
+| Contatos captados | **25** | **2,5%** | Leadster, 2025 (mediana brasileira) |: |
+| Reuniões realizadas | **8** | **30%** | Next Leads, 2026 |: |
 | Clientes fechados | **2** | **25%** | Next Leads, 2026 | **R$ 90.000/ano** (2 × R$ 45.000) |
-| Conversão composta | **0,2%** dos visitantes; **8%** dos contatos | — | faixa de consultorias: 6% a 12% | — |
-| Comercial anual de R$ 72.000 | — | — | premissa | **CAC = R$ 36.000** |
-| LTV (3 anos, margem de 70%) | 45.000 × 3 × 70% = **R$ 94.500** | — | — | **LTV : CAC = 2,6:1** |
+| Conversão composta | **0,2%** dos visitantes; **8%** dos contatos |, | faixa de consultorias: 6% a 12% |, |
+| Comercial anual de R$ 72.000 |, |, | premissa | **CAC = R$ 36.000** |
+| LTV (3 anos, margem de 70%) | 45.000 × 3 × 70% = **R$ 94.500** |, |, | **LTV: CAC = 2,6:1** |
 
 ### 4.2 Os benchmarks brasileiros do funil
 
@@ -239,7 +239,7 @@ Custo **R$ 52,00**; margem mínima de 15% → piso **R$ 59,80**; teto pesquisado
 | Ciclo médio de compra empresa para empresa | **10,1 meses** (era 11,3 em 2024) | Brasil e global | 6Sense, 2025 |
 | Taxa de vitória / cobertura do funil | **21%** / **3 a 5×** a meta | global | HubSpot 2024; Hyperbound 2025 |
 
-**Diagnóstico do exemplo:** LTV : CAC de **2,6:1** fica **abaixo do 3:1** de referência (mediana brasileira de **3,2:1**, N=939 — Optifai, 2026). Duas saídas: derrubar o CAC para **≤ R$ 31.500** (**−12,5%**) ou subir o valor anual do contrato para **≥ R$ 53.500**.
+**Diagnóstico do exemplo:** LTV: CAC de **2,6:1** fica **abaixo do 3:1** de referência (mediana brasileira de **3,2:1**, N=939: Optifai, 2026). Duas saídas: derrubar o CAC para **≤ R$ 31.500** (**−12,5%**) ou subir o valor anual do contrato para **≥ R$ 53.500**.
 
 ```dragdrop
 {
@@ -262,11 +262,11 @@ Custo **R$ 52,00**; margem mínima de 15% → piso **R$ 59,80**; teto pesquisado
 }
 ```
 
-### 4.3 Exemplo 3 — o funil consultivo e o custo de aquisição
+### 4.3 Exemplo 3, o funil consultivo e o custo de aquisição
 
 Com **1.000 visitantes/mês**: 1.000 × 2,5% = **25 contatos**; 25 × 30% = **8 reuniões**; 8 × 25% = **2 clientes** → **8%** dos contatos e **0,2%** dos visitantes. Contrato de **R$ 45.000/ano** → **R$ 90.000/ano** de receita. Comercial de R$ 6.000/mês (**R$ 72.000/ano**) dividido por 2 clientes → **CAC de R$ 36.000**. LTV com margem de 70% em 3 anos: 45.000 × 3 × 0,70 = **R$ 94.500** → **2,6:1**.
 
-**Consequência híbrida:** um funil abaixo de 3:1 significa que a empresa gasta mais para vender do que devolve em margem — e o percentual de impacto, que sai do **preço**, passa a disputar espaço com o CAC. Antes de prometer 5% de doação, conserte o funil.
+**Consequência híbrida:** um funil abaixo de 3:1 significa que a empresa gasta mais para vender do que devolve em margem, e o percentual de impacto, que sai do **preço**, passa a disputar espaço com o CAC. Antes de prometer 5% de doação, conserte o funil.
 
 ### 4.4 O funil de trás para frente: da meta ao volume de visitas
 
@@ -281,9 +281,9 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 | 5. Contatos necessários | reuniões ÷ 30% de contato→reunião | 8 ÷ 0,30 ≈ **27 contatos/mês** |
 | 6. Visitantes necessários | contatos ÷ **2,5%** | 27 ÷ 0,025 ≈ **1.080 visitantes/mês** |
 
-**Leitura:** a meta de 2 contratos por mês exige cerca de **1.080 visitantes por mês** — praticamente o cenário de 1.000 visitantes já simulado. Se a meta subir para 3 contratos, os visitantes precisam subir para **~1.620**; se a conversão do site melhorar de 2,5% para 3,5%, o mesmo volume de visitas fecha a meta com **~30% menos tráfego**. Cada ponto de conversão ganho vale mais que cada real de mídia gasto.
+**Leitura:** a meta de 2 contratos por mês exige cerca de **1.080 visitantes por mês**: praticamente o cenário de 1.000 visitantes já simulado. Se a meta subir para 3 contratos, os visitantes precisam subir para **~1.620**; se a conversão do site melhorar de 2,5% para 3,5%, o mesmo volume de visitas fecha a meta com **~30% menos tráfego**. Cada ponto de conversão ganho vale mais que cada real de mídia gasto.
 
-- **🔢 Você sabia?** O comprador decidiu **antes de falar com você**: **83% a 85%** definem requisitos sem o vendedor, o **fornecedor preferido vence em 77%** das escolhas e o grupo de decisão tem **10,9 pessoas** — **76%** dizem que mais de três pessoas decidem (Green Hat/6sense, 2025; Mixology, n=511, 2025). Isso significa que vender bem, hoje, é **estar presente quando a decisão já está sendo formada**.
+- **🔢 Você sabia?** O comprador decidiu **antes de falar com você**: **83% a 85%** definem requisitos sem o vendedor, o **fornecedor preferido vence em 77%** das escolhas e o grupo de decisão tem **10,9 pessoas**: **76%** dizem que mais de três pessoas decidem (Green Hat/6sense, 2025; Mixology, n=511, 2025). Isso significa que vender bem, hoje, é **estar presente quando a decisão já está sendo formada**.
 
 ---
 
@@ -303,10 +303,10 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 | Relatam **inconsistência** entre site e vendedor | **69%** | Uma versão só da mensagem | Gartner, 2025 |
 | Fontes consultadas por compra | **7 médias**; **45%** usaram inteligência artificial generativa | Prova documentada e comparável | Gartner, 2025/2026 |
 
-**Tradução para a empresa híbrida:** a promessa de impacto precisa estar **no site, no material e na fala do vendedor com o mesmo número**. Se o site diz 2% e o vendedor diz "algo em torno disso", **69% dos compradores detectam a inconsistência** — e a causa é a primeira a ser julgada por isso.
+**Tradução para a empresa híbrida:** a promessa de impacto precisa estar **no site, no material e na fala do vendedor com o mesmo número**. Se o site diz 2% e o vendedor diz "algo em torno disso", **69% dos compradores detectam a inconsistência**, e a causa é a primeira a ser julgada por isso.
 
 > [!NOTE]
-> **O papel do vendedor mudou, não sumiu.** Com 67% preferindo comprar sem vendedor e 70% usando autoatendimento, a tendência é reduzir a pressão de venda; mas **69% ainda recorrem ao vendedor para validar** o que encontraram sozinhos — inclusive o que a inteligência artificial gerou. O vendedor híbrido é **auditor de informação**: chega com números, com o cálculo do impacto e com a regra de repasse na mão.
+> **O papel do vendedor mudou, não sumiu.** Com 67% preferindo comprar sem vendedor e 70% usando autoatendimento, a tendência é reduzir a pressão de venda; mas **69% ainda recorrem ao vendedor para validar** o que encontraram sozinhos: inclusive o que a inteligência artificial gerou. O vendedor híbrido é **auditor de informação**: chega com números, com o cálculo do impacto e com a regra de repasse na mão.
 
 ### 5.2 Da pesquisa à operação comercial
 
@@ -320,7 +320,7 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 | Consulta 7 fontes e usa inteligência artificial (45%) | Página de transparência: base de cálculo, critério e valor repassado | Fonte verificável é a fonte vencedora |
 | Prefere comprar sem vendedor (67%) | Autoatendimento completo, com confirmação imediata do pedido | Menos pressão, mais conversão |
 
-**Tradução operacional:** a equipe de vendas deixa de ser o **canal único** de informação e passa a ser o **validador** — 69% ainda recorrem ao vendedor para confirmar o que encontraram sozinhos. A promessa de impacto, por isso, precisa existir **antes** da conversa: escrita, calculada e auditável.
+**Tradução operacional:** a equipe de vendas deixa de ser o **canal único** de informação e passa a ser o **validador**: 69% ainda recorrem ao vendedor para confirmar o que encontraram sozinhos. A promessa de impacto, por isso, precisa existir **antes** da conversa: escrita, calculada e auditável.
 
 ---
 
@@ -337,10 +337,10 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 | Fração da perda causada por **pagamento falho** | **20% a 40%** | Recurly, 2025 |
 | Perda mensal por porte: pequena / médio / grande | **3,2% / 1,0% / 0,5%** | ChartMogul 2024; KeyBanc 2024 |
 | Perda anual por faixa de receita recorrente | **13,2% / 8,8% / 6,5%** | ChartMogul, 2024 |
-| Receita líquida de retenção (mediana) | **~106%**; **102%** para contratos de US$ 25–50 mil | Stripo 2026; SaaS Capital 2025 |
-| LTV : CAC — referência / mediana brasileira / líderes | **3:1 / 3,2:1 / 4:1 a 6:1** | Optifai 2026 (N=939); Bessemer 2026 |
+| Receita líquida de retenção (mediana) | **~106%**; **102%** para contratos de US$ 25 to 50 mil | Stripo 2026; SaaS Capital 2025 |
+| LTV: CAC: referência / mediana brasileira / líderes | **3:1 / 3,2:1 / 4:1 a 6:1** | Optifai 2026 (N=939); Bessemer 2026 |
 
-### 6.2 Exemplo 4 — assinatura: receita recorrente, perda e valor vitalício
+### 6.2 Exemplo 4, assinatura: receita recorrente, perda e valor vitalício
 
 **300 assinantes × R$ 89** = **receita recorrente de R$ 26.700/mês**. Com perda de **4% ao mês** (faixa de pequenas empresas):
 
@@ -351,17 +351,17 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 5. Retenção em 12 meses: $0{,}96^{12}$ = **61,3%** → restariam **~184 dos 300** assinantes;
 6. Recuperar **1/3** da perda involuntária (20% a 40% é pagamento falho) = **+2 a 3 assinantes/mês**, sem nenhum real de marketing novo.
 
-**Leitura híbrida:** em assinatura, a primeira fonte de impacto financeiro não é vender mais — é **deixar de perder por motivo administrativo**. Um serviço de cobrança retry bem feito financia sozinho parte do fundo de impacto.
+**Leitura híbrida:** em assinatura, a primeira fonte de impacto financeiro não é vender mais: é **deixar de perder por motivo administrativo**. Um serviço de cobrança retry bem feito financia sozinho parte do fundo de impacto.
 
 > [!WARNING]
-> **Receita recorrente não é receita garantida.** Com **3,5%** de perda mensal, em doze meses sobram **~65%** da base original; com 4%, sobram **61,3%**. Planos que prometem destinação de impacto anual sem calcular perda descobrem em dezembro que a base encolheu — e a promessa, não. Calcule a destinação sobre a **receita realizada**, e nunca sobre a receita planejada.
+> **Receita recorrente não é receita garantida.** Com **3,5%** de perda mensal, em doze meses sobram **~65%** da base original; com 4%, sobram **61,3%**. Planos que prometem destinação de impacto anual sem calcular perda descobrem em dezembro que a base encolheu, e a promessa, não. Calcule a destinação sobre a **receita realizada**, e nunca sobre a receita planejada.
 
 ---
 
 ### 6.3 A regra de ouro da recorrência
 
 > [!NOTE]
-> **Receita recorrente é compromisso recorrente.** Em assinatura, a empresa promete entrega mês após mês **e** destinação mês após mês. Antes de fixar o percentual de impacto sobre a receita recorrente, responda três contas: (1) qual a perda mensal real (**3,5%** de mediana em software para outras empresas); (2) quanto da perda é administrativa (pagamento falho responde por **20% a 40%**); (3) qual o LTV : CAC atual (**3:1** de referência, **3,2:1** de mediana brasileira). Se o LTV estiver abaixo de 3:1, o primeiro compromisso de impacto a cumprir é **consertar a cobrança e o funil** — não anunciar um percentual maior.
+> **Receita recorrente é compromisso recorrente.** Em assinatura, a empresa promete entrega mês após mês **e** destinação mês após mês. Antes de fixar o percentual de impacto sobre a receita recorrente, responda três contas: (1) qual a perda mensal real (**3,5%** de mediana em software para outras empresas); (2) quanto da perda é administrativa (pagamento falho responde por **20% a 40%**); (3) qual o LTV: CAC atual (**3:1** de referência, **3,2:1** de mediana brasileira). Se o LTV estiver abaixo de 3:1, o primeiro compromisso de impacto a cumprir é **consertar a cobrança e o funil**: não anunciar um percentual maior.
 
 **Sequência recomendada para o primeiro ano de recorrência:**
 
@@ -385,7 +385,7 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 | Escala | depende de investimento | alta: **R$ 848,4 bilhões/ano** (OCB, 2026) | comunidade, volume menor |
 | Risco | CAC alto; 67% preferem comprar sem vendedor (Gartner, 2026) | autonomia reduzida; dependência do canal | agenda mista; clareza exigida (CONAR, art. 13) |
 
-### 7.1 Exemplo 5 — canal direto × cooperativa para um produtor (1.000 unidades)
+### 7.1 Exemplo 5: canal direto × cooperativa para um produtor (1.000 unidades)
 
 **Canal direto** (R$ 14,00 por unidade):
 
@@ -397,7 +397,7 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 
 - 12.000 × 80% = R$ 9.600 − embalagem R$ 400 = **R$ 9.200 líquidos**
 
-**Resultado:** o direto supera em **R$ 210 (+2,3%)** — mas com custo fixo recorrente (marketing e estrutura). A cooperativa entrega volume **quase sem custo comercial**, sobre um sistema de **R$ 848,4 bilhões/ano**. O ponto de equilíbrio do direto é **≥ 870 unidades/mês**; abaixo disso, a cooperativa vence por unidade.
+**Resultado:** o direto supera em **R$ 210 (+2,3%)**, mas com custo fixo recorrente (marketing e estrutura). A cooperativa entrega volume **quase sem custo comercial**, sobre um sistema de **R$ 848,4 bilhões/ano**. O ponto de equilíbrio do direto é **≥ 870 unidades/mês**; abaixo disso, a cooperativa vence por unidade.
 
 ### 7.2 O canal da internet, em números
 
@@ -408,15 +408,15 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 | Projeção do comércio eletrônico em 2025 | **R$ 224,7 bilhões** e **435 milhões de compras** | ABComm, 2025 |
 | Crescimento do comércio eletrônico | **+286% entre 2016 e 2023** | FecomercioSP/ONC, 2024 |
 
-**Leitura:** o canal direto pela internet dobrou de fatia desde a pré-pandemia (9,2% → 17,8%), o que reduz a objeção de "custo fixo alto" do canal direto — mas **não elimina o CAC**: o custo de aquisição migra do vendedor para a mídia e para a conversão do site.
+**Leitura:** o canal direto pela internet dobrou de fatia desde a pré-pandemia (9,2% → 17,8%), o que reduz a objeção de "custo fixo alto" do canal direto, mas **não elimina o CAC**: o custo de aquisição migra do vendedor para a mídia e para a conversão do site.
 
-- **🔢 Você sabia?** A rede 1% for the Planet exige doar **pelo menos 1% das VENDAS anuais** — e não do lucro — a uma organização certificada, com certificação anual. Em 2024 foram **US$ 110 milhões** certificados e mais de **US$ 823 milhões** acumulados desde a fundação; **70% dos membros cresceram em receita** depois de aderir. O compromisso é público, contábil e verificável — é o oposto da promessa vaga.
+- **🔢 Você sabia?** A rede 1% for the Planet exige doar **pelo menos 1% das VENDAS anuais**, e não do lucro: a uma organização certificada, com certificação anual. Em 2024 foram **US$ 110 milhões** certificados e mais de **US$ 823 milhões** acumulados desde a fundação; **70% dos membros cresceram em receita** depois de aderir. O compromisso é público, contábil e verificável: é o oposto da promessa vaga.
 
 ---
 
 ## 8. Diversificação: receita mista, concentração e dependência
 
-### 8.1 Exemplo 6 — a receita mista de um mês
+### 8.1 Exemplo 6: a receita mista de um mês
 
 | Fonte | Receita mensal | Participação |
 |---|---|---|
@@ -433,13 +433,13 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 
 **Regra prática:** teto por fonte e por cliente (ex.: **≤ 30%**), com receita recorrente como colchão. Diversificação sem teto é apenas repartição do mesmo risco.
 
-### 8.2 Exemplo 7 — quanto o propósito paga (causa-marketing)
+### 8.2 Exemplo 7: quanto o propósito paga (causa-marketing)
 
 **3.000 pedidos × R$ 180 = R$ 540.000/mês.**
 
 1. Doar **2%** = **R$ 10.800/mês** (**R$ 129.600/ano**);
 2. Prêmio de propósito de **3%** (R$ 180 → R$ 185,40) gera **R$ 16.200/mês** → cobre a doação de 2% com **folga de R$ 5.400**;
-3. Promessa de **5%** = **R$ 27.000/mês**: o prêmio de 3% cobre só **60%**; faltam **R$ 10.800** da margem ou um prêmio de **20%** — **incompatível** com o prêmio médio de sustentabilidade de **9,7%** (PwC, 2024);
+3. Promessa de **5%** = **R$ 27.000/mês**: o prêmio de 3% cobre só **60%**; faltam **R$ 10.800** da margem ou um prêmio de **20%**: **incompatível** com o prêmio médio de sustentabilidade de **9,7%** (PwC, 2024);
 4. **Conclusão: o teto da promessa é a margem, não a vontade.**
 
 **Sequência correta de decisão:** (a) calcular a margem por venda; (b) pesquisar o prêmio que o mercado paga; (c) fixar o percentual de doação **dentro** do que o prêmio cobre; (d) divulgar **teto, prazo, critério de apuração e valor efetivamente repassado**.
@@ -486,9 +486,9 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 | **CONAR, Anexo "U"** | Causa-marketing: divulgar **teto, prazo, critério de apuração e valor efetivamente repassado**, acessíveis ao público | "Parte da venda vai para a causa", sem número |
 
 > [!NOTE]
-> **O CONAR é autorregulação voluntária e não aplica multas**: recomenda ajuste, corte, suspensão ou retirada; a sanção pecuniária vem do microssistema de defesa do consumidor. Isso não torna a regra opcional — torna a **reputação** o verdadeiro tribunal da promessa de impacto. E o art. 13 do Código Brasileiro de Autorregulamentação Publicitária deixa claro que **publicidade de causa é publicidade**, com todas as obrigações.
+> **O CONAR é autorregulação voluntária e não aplica multas**: recomenda ajuste, corte, suspensão ou retirada; a sanção pecuniária vem do microssistema de defesa do consumidor. Isso não torna a regra opcional: torna a **reputação** o verdadeiro tribunal da promessa de impacto. E o art. 13 do Código Brasileiro de Autorregulamentação Publicitária deixa claro que **publicidade de causa é publicidade**, com todas as obrigações.
 
-- **🔢 Você sabia?** No Brasil **não há lei específica de causa-marketing** com percentual obrigatório de repasse: a moldura vigente é o **CDC + o Código do CONAR (arts. 13 e 36-A) + o Anexo "U"**. Ou seja, o que protege o comprador que acredita na promessa é a **regra geral de publicidade e de relação de consumo** — e uma promessa de 2% sem teto divulgado já é, em tese, incompleta.
+- **🔢 Você sabia?** No Brasil **não há lei específica de causa-marketing** com percentual obrigatório de repasse: a moldura vigente é o **CDC + o Código do CONAR (arts. 13 e 36-A) + o Anexo "U"**. Ou seja, o que protege o comprador que acredita na promessa é a **regra geral de publicidade e de relação de consumo**, e uma promessa de 2% sem teto divulgado já é, em tese, incompleta.
 
 ---
 
@@ -501,15 +501,15 @@ A forma correta de planejar não é começar pelos visitantes, e sim pela **meta
 | **Critério de apuração** | como se calcula a base | "2% do faturamento líquido dos pedidos da campanha" | Cálculo irreproduzível |
 | **Valor efetivamente repassado** | número divulgado ao público | "R$ 10.800 repassados em janeiro" | Alegação sem prova = risco de lavagem verde |
 
-**Regra prática:** publique os quatro elementos **na mesma página do produto**, não em relatório anual difícil de achar. O art. 13 do Código do CONAR submete a publicidade de causas ao Código inteiro, e o art. 36-A autoriza apenas alegações **corretas** — correção que se demonstra com número.
+**Regra prática:** publique os quatro elementos **na mesma página do produto**, não em relatório anual difícil de achar. O art. 13 do Código do CONAR submete a publicidade de causas ao Código inteiro, e o art. 36-A autoriza apenas alegações **corretas**: correção que se demonstra com número.
 
 ---
 
 ## 10. Casos Reais: como ganham dinheiro e quanto repartem
 
-Teoria de receita só vale quando bate no balanço de alguém. Os casos abaixo são organizações híbridas reais — federações cooperativas, cooperativa de consumidores, corporação de propriedade dos funcionários e cooperativas agroindustriais brasileiras — e cada um responde às duas perguntas desta lição: **como a organização ganha dinheiro** e **quanto devolve, com qual conta**. Todos os números vêm de relatórios anuais e registros oficiais de 2023 a 2026.
+Teoria de receita só vale quando bate no balanço de alguém. Os casos abaixo são organizações híbridas reais, federações cooperativas, cooperativa de consumidores, corporação de propriedade dos funcionários e cooperativas agroindustriais brasileiras, e cada um responde às duas perguntas desta lição: **como a organização ganha dinheiro** e **quanto devolve, com qual conta**. Todos os números vêm de relatórios anuais e registros oficiais de 2023 a 2026.
 
-### 10.1 MONDRAGON (Espanha, 1956) — a solidariedade sai do lucro
+### 10.1 MONDRAGON (Espanha, 1956): a solidariedade sai do lucro
 
 **Como ganha:** federação de **81 cooperativas** autogovernadas de indústria, retalho e serviços, com **€ 11.056 milhões** de vendas, **EBITDA de € 1.486 milhões** e **lucro recorde de € 593 milhões** em 2023, e cerca de **70.500 pessoas**. Uma pessoa, um voto; capital instrumental e subordinado.
 
@@ -517,23 +517,23 @@ Teoria de receita só vale quando bate no balanço de alguém. Os casos abaixo s
 
 **Contas:** 1.486 ÷ 11.056 = **13,4% de margem EBITDA**; 593 ÷ 11.056 = **5,4% de margem líquida**; 13,0 + 7,05 = **€ 20,05 milhões** de solidariedade direta no fundo, e 20,05 + 27,8 = **€ 47,85 milhões** somando a ação social. A desigualdade também é calculada: salários entre **80% e 110%** de uma referência e razão mín-máx de **1:6** desde 1988.
 
-### 10.2 REI Co-op (EUA, 1938) — repartir no ano do prejuízo
+### 10.2 REI Co-op (EUA, 1938): repartir no ano do prejuízo
 
-**Como ganha:** cooperativa de consumidores de lazer; o sócio paga **US$ 30** de anuidade (renovação a partir do 2º ano) e compra em **187 lojas** com cerca de 14 mil funcionários. Receita de **US$ 3,53 bilhões** em 2024 — ano de **prejuízo de US$ 156,4 milhões**.
+**Como ganha:** cooperativa de consumidores de lazer; o sócio paga **US$ 30** de anuidade (renovação a partir do 2º ano) e compra em **187 lojas** com cerca de 14 mil funcionários. Receita de **US$ 3,53 bilhões** em 2024: ano de **prejuízo de US$ 156,4 milhões**.
 
 **Quanto reparte:** **US$ 189 milhões** em Co-op Member Reward (tipicamente **10%** de volta ao membro), **US$ 84,8 milhões** em incentivos e *profit sharing* (**+48,5%** no ano) e **US$ 8,9 milhões** para mais de **300 ONGs**. Foi o 1º varejista nacional dos EUA a alcançar *zero waste*.
 
-**Conta:** 189 + 84,8 + 8,9 = **US$ 282,7 milhões**; 282,7 ÷ 3.530 = **8,0% da receita** devolvida a membros, funcionários e comunidade **no mesmo ano em que houve prejuízo**. A lição: a repartição não é o resíduo do lucro, é regra de cultura — e por isso sobrevive a um exercício negativo.
+**Conta:** 189 + 84,8 + 8,9 = **US$ 282,7 milhões**; 282,7 ÷ 3.530 = **8,0% da receita** devolvida a membros, funcionários e comunidade **no mesmo ano em que houve prejuízo**. A lição: a repartição não é o resíduo do lucro, é regra de cultura, e por isso sobrevive a um exercício negativo.
 
-### 10.3 Publix (EUA, 1930) — o trabalho vira propriedade
+### 10.3 Publix (EUA, 1930), o trabalho vira propriedade
 
-**Como ganha:** supermercados próprios, **1.392 lojas** e mais de **255.000 pessoas**; vendas de **US$ 59,7 bilhões** e lucro de **US$ 4,6 bilhões** em 2024 — margem de **7,7%** (4,6 ÷ 59,7).
+**Como ganha:** supermercados próprios, **1.392 lojas** e mais de **255.000 pessoas**; vendas de **US$ 59,7 bilhões** e lucro de **US$ 4,6 bilhões** em 2024: margem de **7,7%** (4,6 ÷ 59,7).
 
 **Quanto reparte:** ESOP (**Publix PROFIT Plan**) desde **01/10/1974**, com **149.213 participantes** e **US$ 14,3 bilhões** em ativos (Form 5500/2024), PLR de até **12% do salário-base** e *put option* de **US$ 669 milhões**. Maior empresa de propriedade dos funcionários dos EUA.
 
-**Conta:** 14,3 bi ÷ 149.213 = **US$ 95.836** de propriedade por participante, em média. Em 50 anos de plano, o ESOP converteu trabalho em patrimônio **sem mudar a forma jurídica** — mas o empregado é sócio por ação, **não por voto** no dia a dia.
+**Conta:** 14,3 bi ÷ 149.213 = **US$ 95.836** de propriedade por participante, em média. Em 50 anos de plano, o ESOP converteu trabalho em patrimônio **sem mudar a forma jurídica**, mas o empregado é sócio por ação, **não por voto** no dia a dia.
 
-### 10.4 SEMCO (Brasil, 1953) — repartir para decidir junto
+### 10.4 SEMCO (Brasil, 1953): repartir para decidir junto
 
 **Como ganha:** indústria diversificada que passou de **US$ 4 milhões** (1982) para **US$ 212 milhões** (2003), com o quadro indo de 90 para 3.000 pessoas e rotatividade **abaixo de 2%**; inventário de 136 para 46 dias.
 
@@ -541,11 +541,11 @@ Teoria de receita só vale quando bate no balanço de alguém. Os casos abaixo s
 
 **Conta:** 212 ÷ 4 = **53 vezes** o faturamento em 21 anos; na crise, 39 − 23 = **+16 pontos percentuais** de repasse justamente quando o caixa apertou. Repartir dinheiro só sustenta se vier com repartição de **informação e decisão** (balanço mensal por unidade; chefes avaliados duas vezes por ano pelos subordinados).
 
-### 10.5 Coopercitrus, COPACOL e LAR (Brasil) — o rateio que o produtor enxerga
+### 10.5 Coopercitrus, COPACOL e LAR (Brasil), o rateio que o produtor enxerga
 
 - **Coopercitrus (1976):** agroindústria com **39,8 mil cooperados** e **R$ 8,1 bilhões** de faturamento em 2023; sobras líquidas de **R$ 42,8 milhões** rateadas pelo Estatuto art. 60 com ponderação **3,00 / 1,00 / 0,30** por faixa de movimentação (atualização pelo IGP-M). **Conta:** 42,8 ÷ 8.100 = **0,5% do faturamento**.
-- **COPACOL (1964):** frigorífico de **9,6 mil cooperados** com **R$ 10,6 bilhões** de faturamento (+8%) em 2024 e **R$ 270 milhões de sobras** (+64%, maior da história), metade paga em dezembro. **Conta:** 270 ÷ 10.600 = **2,5% do faturamento** voltou aos cooperados, rateado **por unidade processada** — R$ 0,10 por litro de leite, R$ 2 por saca de soja, R$ 15 por saca de café, 3,6% sobre insumos. Ainda **R$ 390 milhões** de tributos.
-- **LAR (1964):** agroindústria com **R$ 23,2 bilhões** de receita (+14,4% em 2025) e **R$ 335,9 milhões** devolvidos = R$ 101,3 milhões de sobras + **R$ 59 milhões de devolução de capital a 225 jubilados** + bonificações, cesta e créditos. **Conta:** 335,9 ÷ 23.200 = **1,4% da receita**; 59 mi ÷ 225 = **R$ 262.222** por jubilado — quem saiu mantém o vínculo patrimonial.
+- **COPACOL (1964):** frigorífico de **9,6 mil cooperados** com **R$ 10,6 bilhões** de faturamento (+8%) em 2024 e **R$ 270 milhões de sobras** (+64%, maior da história), metade paga em dezembro. **Conta:** 270 ÷ 10.600 = **2,5% do faturamento** voltou aos cooperados, rateado **por unidade processada**: R$ 0,10 por litro de leite, R$ 2 por saca de soja, R$ 15 por saca de café, 3,6% sobre insumos. Ainda **R$ 390 milhões** de tributos.
+- **LAR (1964):** agroindústria com **R$ 23,2 bilhões** de receita (+14,4% em 2025) e **R$ 335,9 milhões** devolvidos = R$ 101,3 milhões de sobras + **R$ 59 milhões de devolução de capital a 225 jubilados** + bonificações, cesta e créditos. **Conta:** 335,9 ÷ 23.200 = **1,4% da receita**; 59 mi ÷ 225 = **R$ 262.222** por jubilado: quem saiu mantém o vínculo patrimonial.
 
 ### 10.6 O quadro comparativo dos casos
 
@@ -554,34 +554,34 @@ Teoria de receita só vale quando bate no balanço de alguém. Os casos abaixo s
 | **MONDRAGON** (Espanha, 2023) | 81 cooperativas; vendas de **€ 11.056 mi** | € 13,0 mi de compensação + € 7,05 mi de offset + € 27,8 mi em 37 programas | Margem EBITDA **13,4%** e líquida **5,4%**; **€ 47,85 mi** no total da solidariedade |
 | **REI Co-op** (EUA, 2024) | Cooperativa de lazer, anuidade de US$ 30; receita de **US$ 3,53 bi** | US$ 189 mi aos membros + US$ 84,8 mi a funcionários + US$ 8,9 mi a +300 ONGs | 282,7 ÷ 3.530 = **8,0% da receita**, no ano de prejuízo de US$ 156,4 mi |
 | **Publix** (EUA, 2024) | Supermercados; vendas de **US$ 59,7 bi** e lucro de US$ 4,6 bi | ESOP: US$ 14,3 bi a 149.213 participantes; PLR até 12% do salário | 14,3 bi ÷ 149.213 = **US$ 95.836** por participante |
-| **SEMCO** (Brasil, 1982–2003) | Indústria: US$ 4 mi → US$ 212 mi | SEMCOPAR: **23% do lucro** pós-imposto da unidade, 2×/ano, a 3 eleitos | 212 ÷ 4 = **53×** o faturamento; na crise de 1990 subiu para **39%** |
+| **SEMCO** (Brasil, 1982 to 2003) | Indústria: US$ 4 mi → US$ 212 mi | SEMCOPAR: **23% do lucro** pós-imposto da unidade, 2×/ano, a 3 eleitos | 212 ÷ 4 = **53×** o faturamento; na crise de 1990 subiu para **39%** |
 | **Coopercitrus** (Brasil, 2023) | Agroindústria; faturamento de **R$ 8,1 bi** | Sobras líquidas de **R$ 42,8 mi**, rateadas 3,00/1,00/0,30 | 42,8 ÷ 8.100 = **0,5% do faturamento** |
 | **COPACOL** (Brasil, 2024) | Frigorífico de 9,6 mil cooperados; **R$ 10,6 bi** | **R$ 270 mi** de sobras (+64%), por unidade processada | 270 ÷ 10.600 = **2,5% do faturamento** |
 | **LAR** (Brasil, 2025) | Agroindústria; receita de **R$ 23,2 bi** | **R$ 335,9 mi**: R$ 101,3 mi de sobras + R$ 59 mi a 225 jubilados | 335,9 ÷ 23.200 = **1,4% da receita**; 59 mi ÷ 225 = **R$ 262.222** por jubilado |
 
-**Leitura para a empresa híbrida:** os casos se parecem em uma coisa só — **ninguém reparte por vontade, reparte por regra** (estatuto, plano acionário, *trust* ou cláusula). E a faixa real de reparte sobre a receita vai de **0,5%** (Coopercitrus) a **8,0%** (REI): o "quanto devolver" é uma decisão de regime, não um número universal.
+**Leitura para a empresa híbrida:** os casos se parecem em uma coisa só: **ninguém reparte por vontade, reparte por regra** (estatuto, plano acionário, *trust* ou cláusula). E a faixa real de reparte sobre a receita vai de **0,5%** (Coopercitrus) a **8,0%** (REI): o "quanto devolver" é uma decisão de regime, não um número universal.
 
-- **🔢 Você sabia?** O John Lewis Partnership (Reino Unido) pagou *Partnership Bonus* de **3% (≈ 1,5 semana) = £ 46 milhões** em 2021/22 e **£ 0** nos três exercícios seguintes — mesmo com o lucro operacional antes do bônus (PBTBE) tendo **triplicado, de £ 42 mi para £ 126 mi**, em 2024/25. O bônus é condicional a **PBTBE ≥ £ 150 milhões e dívida < 4×** (JLP, *Annual Report 2025*). Reparte com condição, não com esperança: ~69.000 *Partners* entenderam que o repasse é governança, não direito adquirido.
+- **🔢 Você sabia?** O John Lewis Partnership (Reino Unido) pagou *Partnership Bonus* de **3% (≈ 1,5 semana) = £ 46 milhões** em 2021/22 e **£ 0** nos três exercícios seguintes: mesmo com o lucro operacional antes do bônus (PBTBE) tendo **triplicado, de £ 42 mi para £ 126 mi**, em 2024/25. O bônus é condicional a **PBTBE ≥ £ 150 milhões e dívida < 4×** (JLP, *Annual Report 2025*). Reparte com condição, não com esperança: ~69.000 *Partners* entenderam que o repasse é governança, não direito adquirido.
 
 ---
 
 ## 11. Modelos de Receita no Mundo: regimes, tetos e dados internacionais
 
-O Brasil não é o único país a regular quanto do lucro pode sair de uma empresa de propósito. Reino Unido, EUA, Espanha, França, Alemanha e Itália criaram **formas jurídicas híbridas** com regras diferentes de **teto de distribuição, governança e transparência** — e a escolha do regime decide, na prática, **quanto dinheiro fica para a causa e quanto pode ir ao sócio**.
+O Brasil não é o único país a regular quanto do lucro pode sair de uma empresa de propósito. Reino Unido, EUA, Espanha, França, Alemanha e Itália criaram **formas jurídicas híbridas** com regras diferentes de **teto de distribuição, governança e transparência**, e a escolha do regime decide, na prática, **quanto dinheiro fica para a causa e quanto pode ir ao sócio**.
 
 ### 11.1 Regime × país × teto de distribuição
 
 | País | Forma híbrida | Base legal verificada | Teto de distribuição ao capital | Transparência exigida |
 |---|---|---|---|---|
 | **Reino Unido** | CIC | CAICE Act 2004 + CIC Regs 2005 | **35% dos lucros distribuíveis**; por ação até 5% acima da taxa do BoE; juros +4 p.p.; capacidade ociosa carrega **5 anos** | *community interest report* anual + registro público |
-| **EUA** | Benefit / PBC | Maryland (**abr/2010**, 1º estado); 8 Del. C. §§ 361–368; D.C. Law 19-305 | **sem teto legal** — muda propósito, deveres e relato | relatório anual/bienal + padrão de terceiros |
-| **EUA** | L3C | Vermont 11 V.S.A. §§ 4161–4163 | **sem teto legal** — a renda não pode ser propósito significativo | registro estatal |
+| **EUA** | Benefit / PBC | Maryland (**abr/2010**, 1º estado); 8 Del. C. §§ 361 to 368; D.C. Law 19-305 | **sem teto legal**: muda propósito, deveres e relato | relatório anual/bienal + padrão de terceiros |
+| **EUA** | L3C | Vermont 11 V.S.A. §§ 4161 to 4163 | **sem teto legal**: a renda não pode ser propósito significativo | registro estatal |
 | **EUA** | ESOP | ERISA / plano previdenciário | fiducária com *vesting*; distribuição ao sair do plano | divulgação em Form 5500 |
 | **França** | SCIC | loi 2001-624 + décret 2002-241 | **≥57,5% do resultado** às reservas impartageáveis (até 100%) | balanço + revisão quinquenal; 3 categorias de sócios, 1 pessoa = 1 voto |
 | **França** | SCOP | loi 47-1775/1947 + loi 78-763 | trabalho **≥25%**, reservas **≥16%**, capital **≤33%** | relato anual |
 | **Espanha** | Cooperativa | Ley 27/1999 + Ley 20/1990 | juros ≤ taxa básica do Banco de España **+3 p.p. (sócios) / +5 p.p. (associados)**; distribuir reservas irrepartíveis perde a proteção fiscal | relatório anual público |
 | **Alemanha** | eG (Genossenschaft) | GenG; mínimo de **3 membros** (§ 4) | conforme a *Satzung*; ingresso exige **parecer prévio de associação de auditoria** | registro + auditoria do Prüfungsverband |
-| **Itália** | Società benefit | L. 208/2015, commi 376–384 (vig. 01/01/2016) | **sem teto legal** e **sem incentivo fiscal** | *relazione di impatto* anual anexada ao balanço |
+| **Itália** | Società benefit | L. 208/2015, commi 376 to 384 (vig. 01/01/2016) | **sem teto legal** e **sem incentivo fiscal** | *relazione di impatto* anual anexada ao balanço |
 | **Brasil** | Cooperativa | Lei nº 5.764/1971 | **nada** às quotas-parte, salvo **juros ≤ 12% a.a.** (art. 24 §3º); **10%** de Fundo de Reserva + **5%** de FATES (art. 28) | balanço + prestação de contas; voto singular |
 
 **Leitura:** repartição com propósito não é declaração de intenção, é **limite escrito em lei ou em regulamento**. A CIC britânica deixa **65%** dos lucros distribuíveis fora do alcance do sócio; a SCOP francesa fatia o resultado em três pedaços fixos; e a cooperativa brasileira não distribui nada às quotas, separando ainda **15%** das sobras líquidas em dois fundos indivisíveis.
@@ -590,32 +590,32 @@ O Brasil não é o único país a regular quanto do lucro pode sair de uma empre
 
 | País / regime | Nº de entidades | Indicador-chave | Fonte e ano |
 |---|---|---|---|
-| Reino Unido — CIC | **37.081** (mar/2025) | 8.376 aprovações em 2024/25 (recorde) e 3.832 dissoluções | CIC Regulator, 2025 |
-| EUA — ESOP | **6.411 empresas** (6.609 planos) | **15,1 mi** de participantes; **US$ 2,1 tri** em ativos | NCEO, dados 2023 (pub. 2026) |
-| EUA — benefit corporation | **41 estados** + DC | **51 jurisdições** no mundo | CARI/IU, 2024; B Lab, 2024 |
-| França — SCIC | **1.417** | **€ 1,6 bi** de faturamento | Coop FR, 2024 |
-| França — SCOP | **2.723** | **€ 6,7 bi** de faturamento | Coop FR, 2024 |
-| Alemanha — eG | **~7.700** | **22,6 mi** de membros | Springer, 2023 |
-| Itália — società benefit | **5.540 (+20%)** | **241 mil** addetti; faturamento mediano +14,6% (2022–2024) | pesquisa nacional, 2026 |
-| Brasil — cooperativas | **4.384** | **25,8 mi** de cooperados; R$ 757,9 bi de ingressos | Anuário OCB, 2025 |
-| Brasil — empresas B | **342 a +500** | **+74%** desde 2020 | Valor, 2026; Sistema B, 2026 |
-| Mundo — B Corps | **9.500 → 10.700+** | **102 → 104 países**; +1 milhão de trabalhadores | B Lab, 2025–2026 |
-| Mundo — cooperativas | **3 milhões** | **280 mi de empregos (10% dos ocupados)**; Top 300 com US$ 2,79 tri | ACI/ICA e World Cooperative Monitor, 2025 |
+| Reino Unido: CIC | **37.081** (mar/2025) | 8.376 aprovações em 2024/25 (recorde) e 3.832 dissoluções | CIC Regulator, 2025 |
+| EUA: ESOP | **6.411 empresas** (6.609 planos) | **15,1 mi** de participantes; **US$ 2,1 tri** em ativos | NCEO, dados 2023 (pub. 2026) |
+| EUA: benefit corporation | **41 estados** + DC | **51 jurisdições** no mundo | CARI/IU, 2024; B Lab, 2024 |
+| França: SCIC | **1.417** | **€ 1,6 bi** de faturamento | Coop FR, 2024 |
+| França: SCOP | **2.723** | **€ 6,7 bi** de faturamento | Coop FR, 2024 |
+| Alemanha: eG | **~7.700** | **22,6 mi** de membros | Springer, 2023 |
+| Itália: società benefit | **5.540 (+20%)** | **241 mil** addetti; faturamento mediano +14,6% (2022 to 2024) | pesquisa nacional, 2026 |
+| Brasil: cooperativas | **4.384** | **25,8 mi** de cooperados; R$ 757,9 bi de ingressos | Anuário OCB, 2025 |
+| Brasil: empresas B | **342 a +500** | **+74%** desde 2020 | Valor, 2026; Sistema B, 2026 |
+| Mundo: B Corps | **9.500 → 10.700+** | **102 → 104 países**; +1 milhão de trabalhadores | B Lab, 2025 to 2026 |
+| Mundo: cooperativas | **3 milhões** | **280 mi de empregos (10% dos ocupados)**; Top 300 com US$ 2,79 tri | ACI/ICA e World Cooperative Monitor, 2025 |
 
 ### 11.3 Como isso muda a conta da empresa híbrida
 
 **Regra de leitura em três passos:**
 
-1. se a forma tem **teto** (CIC 35%, SCOP 33%, SCIC 57,5% às reservas, Brasil 12% de juros e 15% de fundos), o percentual de impacto precisa caber **dentro** da fatia que sobra depois do capital — é o análogo estrangeiro do "o teto da promessa é a margem";
-2. se a forma **não tem teto** (benefit corporation, L3C, società benefit), a contenção vem da **promessa pública e do relato de impacto** — e aí o pacote do Anexo "U" do CONAR (teto, prazo, critério e valor repassado) é o instrumento que transforma a venda em financiamento verificável;
+1. se a forma tem **teto** (CIC 35%, SCOP 33%, SCIC 57,5% às reservas, Brasil 12% de juros e 15% de fundos), o percentual de impacto precisa caber **dentro** da fatia que sobra depois do capital: é o análogo estrangeiro do "o teto da promessa é a margem";
+2. se a forma **não tem teto** (benefit corporation, L3C, società benefit), a contenção vem da **promessa pública e do relato de impacto**, e aí o pacote do Anexo "U" do CONAR (teto, prazo, critério e valor repassado) é o instrumento que transforma a venda em financiamento verificável;
 3. em qualquer regime, quem decide **quanto sai** é a forma jurídica escolhida **antes** do primeiro preço, não a campanha de marketing lançada depois dele.
 
-**E o que sai como doação, não como repasse:** a filantropia corporativa dos EUA somou **US$ 44,40 bilhões** em 2024 (+9,1%) sobre um total de US$ 592,50 bilhões — **7,5%** de todas as doações americanas — e **US$ 43,67 bilhões** em 2025 (+3,1%) sobre US$ 617,20 bilhões, ou **7,1%** (Giving USA 2025 e 2026). É dinheiro que sai da **margem**, fora do preço. Já na empresa híbrida o impacto verificável sai do **preço**: por isso as duas contas nunca podem ser confundidas no plano de receita.
+**E o que sai como doação, não como repasse:** a filantropia corporativa dos EUA somou **US$ 44,40 bilhões** em 2024 (+9,1%) sobre um total de US$ 592,50 bilhões, **7,5%** de todas as doações americanas, e **US$ 43,67 bilhões** em 2025 (+3,1%) sobre US$ 617,20 bilhões, ou **7,1%** (Giving USA 2025 e 2026). É dinheiro que sai da **margem**, fora do preço. Já na empresa híbrida o impacto verificável sai do **preço**: por isso as duas contas nunca podem ser confundidas no plano de receita.
 
-- **🔢 Você sabia?** O cooperativismo mundial reúne **3 milhões de cooperativas**, cobre **pelo menos 12% da humanidade**, sustenta **280 milhões de empregos (10% dos ocupados do planeta)** e as 300 maiores faturam **US$ 2,79 trilhões** — enquanto as B Corps passaram de **9.368 (2024)** para **9.500 em 102 países (2025)** e **mais de 10.700 em 104 países (2026)**, já com **mais de 1 milhão de trabalhadores**. No Brasil, as empresas com selo B foram de **342** para **mais de 500** entre 2024 e março de 2026 (**+74%** desde 2020) (ACI/ICA; *World Cooperative Monitor 2025*; B Lab, 2024–2026; Sistema B, 2026).
+- **🔢 Você sabia?** O cooperativismo mundial reúne **3 milhões de cooperativas**, cobre **pelo menos 12% da humanidade**, sustenta **280 milhões de empregos (10% dos ocupados do planeta)** e as 300 maiores faturam **US$ 2,79 trilhões**: enquanto as B Corps passaram de **9.368 (2024)** para **9.500 em 102 países (2025)** e **mais de 10.700 em 104 países (2026)**, já com **mais de 1 milhão de trabalhadores**. No Brasil, as empresas com selo B foram de **342** para **mais de 500** entre 2024 e março de 2026 (**+74%** desde 2020) (ACI/ICA; *World Cooperative Monitor 2025*; B Lab, 2024 to 2026; Sistema B, 2026).
 
 > [!WARNING]
-> **Forma híbrida não é sinônimo de teto de lucro.** As *benefit corporations* e as L3C dos EUA e a *società benefit* italiana **não têm teto legal de distribuição**: elas obrigam **propósito declarado e relato de impacto**, não limitação de dividendos. Quem precisa de limite real de saída precisa escolher a forma certa — **CIC (35% dos lucros distribuíveis)**, **SCOP francesa (capital ≤ 33%)** ou **cooperativa brasileira (Lei nº 5.764/1971: nada às quotas, salvo juros ≤ 12% a.a., com 10% de Fundo de Reserva e 5% de FATES)**. Trocar de regime sem trocar a conta é o caminho mais rápido para prometer impacto que a estrutura não garante.
+> **Forma híbrida não é sinônimo de teto de lucro.** As *benefit corporations* e as L3C dos EUA e a *società benefit* italiana **não têm teto legal de distribuição**: elas obrigam **propósito declarado e relato de impacto**, não limitação de dividendos. Quem precisa de limite real de saída precisa escolher a forma certa: **CIC (35% dos lucros distribuíveis)**, **SCOP francesa (capital ≤ 33%)** ou **cooperativa brasileira (Lei nº 5.764/1971: nada às quotas, salvo juros ≤ 12% a.a., com 10% de Fundo de Reserva e 5% de FATES)**. Trocar de regime sem trocar a conta é o caminho mais rápido para prometer impacto que a estrutura não garante.
 
 ```dragdrop
 {
@@ -661,10 +661,10 @@ O Brasil não é o único país a regular quanto do lucro pode sair de uma empre
 > - **Custo com impacto ≠ desconto do lucro**: o percentual sai do **preço** (R$ 39,00 ÷ 0,99 = R$ 39,39); tirá-lo do lucro transforma promessa em prejuízo;
 > - **Markup aleatório** sem estrutura de custos é a causa número um de preço inviável (Forbes, 2024);
 > - **O teto da promessa é a margem**: 2% cabe num prêmio de 3%, 5% não cabe (R$ 27.000/mês contra R$ 16.200);
-> - **Funil abaixo de 3:1** derruba a capacidade de financiar impacto — mediana brasileira é **3,2:1** (Optifai, 2026);
+> - **Funil abaixo de 3:1** derruba a capacidade de financiar impacto: mediana brasileira é **3,2:1** (Optifai, 2026);
 > - **Diversificação sem teto não protege**: 41% em um contrato significa **18,3%** de perda total se ele sair;
 > - **Intenção não é pagamento**: 64% pagariam mais por alimento sustentável, mas a disposição por marca sustentável **caiu de 60% para 55%** (Akatu, 2022), e só **39%** acham que sustentabilidade muda seus gastos (BCG, 2025);
-> - **Arrependimento de 7 dias e preço total visível** não são opcionalidades de comércio eletrônico — são regra (art. 49 do CDC; Decreto nº 7.962/2013);
+> - **Arrependimento de 7 dias e preço total visível** não são opcionalidades de comércio eletrônico: são regra (art. 49 do CDC; Decreto nº 7.962/2013);
 > - **Itens não verificados nesta rodada:** não existe benchmark único de "mix ideal" de receita (as participações do Exemplo 6 são **simulação**); a lei das cooperativas (Lei nº 5.764/1971) **não foi conferida** no texto original; não há lei brasileira específica de causa-marketing; conversão e valor de pedido da venda cooperativa no varejo **não foram levantados**; a taxa de devolução do comércio eletrônico brasileiro por categoria **não foi apurada**; e as projeções da ABComm são de setor, não apuração final.
 
 ---
@@ -827,7 +827,7 @@ O Brasil não é o único país a regular quanto do lucro pode sair de uma empre
     "Deve encerrar a venda empresa para empresa para eliminar o risco"
   ],
   "correct": 1,
-  "explanation": "Há diversificação (índice de Herfindahl de 0,292), mas a concentração gera risco de caixa: se 45% desse contrato sair, a perda é de 18,3% da receita total. A regra prática é teto por fonte e por cliente (ex.: ≤30%) com receita recorrente como colchão — coerente com o critério DCMS (2023) e com a leitura do Social Traders (2025). Encerrar a fonte principal não elimina risco: transfere o problema para o funil."
+  "explanation": "Há diversificação (índice de Herfindahl de 0,292), mas a concentração gera risco de caixa: se 45% desse contrato sair, a perda é de 18,3% da receita total. A regra prática é teto por fonte e por cliente (ex.: ≤30%) com receita recorrente como colchão: coerente com o critério DCMS (2023) e com a leitura do Social Traders (2025). Encerrar a fonte principal não elimina risco: transfere o problema para o funil."
 }
 ```
 
@@ -843,7 +843,7 @@ O Brasil não é o único país a regular quanto do lucro pode sair de uma empre
     "16,1%"
   ],
   "correct": 1,
-  "explanation": "189 + 84,8 + 8,9 = US$ 282,7 milhões, e 282,7 ÷ 3.530 = 8,0% da receita do exercício. O dado importa porque o repasse ocorreu num ano de prejuízo de US$ 156,4 milhões: na REI Co-op a devolução é regra de cultura (Co-op Member Reward tipicamente de 10% e profit sharing +48,5% no ano), não o resíduo do lucro — o oposto de prometer percentual só quando sobra."
+  "explanation": "189 + 84,8 + 8,9 = US$ 282,7 milhões, e 282,7 ÷ 3.530 = 8,0% da receita do exercício. O dado importa porque o repasse ocorreu num ano de prejuízo de US$ 156,4 milhões: na REI Co-op a devolução é regra de cultura (Co-op Member Reward tipicamente de 10% e profit sharing +48,5% no ano), não o resíduo do lucro, o oposto de prometer percentual só quando sobra."
 }
 ```
 
@@ -871,16 +871,16 @@ O Brasil não é o único país a regular quanto do lucro pode sair de uma empre
 > - **Não se promete o que a margem não banca**: 5% de doação exige R$ 27.000/mês quando o prêmio de 3% gera R$ 16.200;
 > - **Não se vende sem conformidade**: 7 dias de arrependimento (art. 49 do CDC), preço total visível e confirmação imediata do pedido (Decreto nº 7.962/2013), descontos por prazo de pagamento informados (Lei nº 13.455/2017) e teto/prazo/critério/repasse divulgados (CONAR, Anexo "U");
 > - **Não se confunde intenção com receita**: a disposição de pagar mais por marca sustentável caiu de 60% para 55%, e só 39% dizem que sustentabilidade muda seus gastos;
-> - **Não se confunde funil com meta**: 1.000 visitantes dão 2 clientes na mediana — planeje CAC, não entusiasmo;
+> - **Não se confunde funil com meta**: 1.000 visitantes dão 2 clientes na mediana: planeje CAC, não entusiasmo;
 > - **Não se aceita concentração sem teto**: 41% em um contrato é 18,3% da receita em risco.
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
-> 1. A **receita de venda é critério de definição**, não enfeite: a regra britânica (DCMS, 2023) exige **≥50% da receita de atividade comercial** e **≥50% do excedente reinvestido** — e 80,1% das que se qualificam apuram lucro;
+> 1. A **receita de venda é critério de definição**, não enfeite: a regra britânica (DCMS, 2023) exige **≥50% da receita de atividade comercial** e **≥50% do excedente reinvestido**, e 80,1% das que se qualificam apuram lucro;
 > 2. Existem **seis modelos de receita** (empresa para empresa, consumidor final, cooperativa, assinatura, licença e causa-marketing) e **a empresa híbrida é a única que usa os seis** com um indicador por linha;
 > 3. O preço com propósito segue **seis métodos**, e o percentual de impacto **sai do preço**: R$ 39,00 ÷ 0,99 = **R$ 39,39** (na prática R$ 39,90), gerando **R$ 4.800/ano** de repasse a 1.000 unidades/mês;
 > 4. O funil brasileiro mediano é **2,5% → 30% → 25%**: **1.000 visitantes, 25 contatos, 8 reuniões, 2 clientes** (0,2%), com ciclo de **10,1 meses** e vitória de **21%**;
 > 5. Saúde de aquisição: **LTV : CAC ≥ 3:1** (mediana brasileira **3,2:1**), perda mensal mediana de **3,5%** em software empresa para empresa e **20% a 40%** da perda causada por pagamento falho;
-> 6. O canal se decide por conta: direto dá **R$ 9.410** líquidos contra **R$ 9.200** da cooperativa em 1.000 unidades, mas o equilíbrio do direto só vem **acima de 870 unidades/mês** — a cooperativa escala sobre **R$ 848,4 bilhões/ano**;
+> 6. O canal se decide por conta: direto dá **R$ 9.410** líquidos contra **R$ 9.200** da cooperativa em 1.000 unidades, mas o equilíbrio do direto só vem **acima de 870 unidades/mês**: a cooperativa escala sobre **R$ 848,4 bilhões/ano**;
 > 7. Diversificar exige **teto**: 41% em um contrato significa **18,3%** de perda total se ele sair; o índice de Herfindahl da receita mista foi de **0,292**;
-> 8. **O teto da promessa é a margem**: 2% de doação cabe num prêmio de 3% (folga de R$ 5.400), 5% não cabe — e toda promessa exige **teto, prazo, critério de apuração e valor efetivamente repassado** (CONAR, arts. 13 e 36-A, Anexo "U").
+> 8. **O teto da promessa é a margem**: 2% de doação cabe num prêmio de 3% (folga de R$ 5.400), 5% não cabe, e toda promessa exige **teto, prazo, critério de apuração e valor efetivamente repassado** (CONAR, arts. 13 e 36-A, Anexo "U").

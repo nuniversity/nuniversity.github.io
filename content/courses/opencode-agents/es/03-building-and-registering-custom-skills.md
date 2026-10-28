@@ -78,13 +78,13 @@ resources:
 ```
 
 > [!IMPORTANT]
-> El campo `instructions` es la parte más crítica de una skill. Se inyecta directamente en el contexto del agente. Mantén las instrucciones concisas y accionables — cada token consumido por la skill es un token no disponible para la conversación. Apunta a no más de 500-1000 palabras por skill.
+> El campo `instructions` es la parte más crítica de una skill. Se inyecta directamente en el contexto del agente. Mantén las instrucciones concisas y accionables: cada token consumido por la skill es un token no disponible para la conversación. Apunta a no más de 500-1000 palabras por skill.
 
 ### Comparación: Formatos de Manifiesto YAML vs JSON
 
 | Aspecto            | YAML (`skill.yaml`)                | JSON (`skill.json`)                |
 |--------------------|-------------------------------------|-------------------------------------|
-| **Legibilidad**    | Excelente — natural para texto largo | Buena — familiar para devs JS/TS  |
+| **Legibilidad** | Excelente, natural para texto largo | Buena, familiar para devs JS/TS |
 | **Comentarios**    | Soportados (`# comment`)            | No soportados                      |
 | **Multi-línea**    | Nativo (`|` y `>` block scalars)  | Escape `\n` o usa arrays          |
 | **Validación schema**| Herramientas limitadas           | JSON Schema, muchos validadores   |

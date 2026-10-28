@@ -87,7 +87,7 @@ O clock da CPU determina quantos ciclos por segundo o processador pode executar:
 | 5,0 GHz | 5.000.000.000 | Estações de trabalho de alto desempenho |
 
 > [!NOTE]
-> Uma CPU de 3,5 GHz pode executar bilhões de instruções por segundo. No entanto, CPUs modernas não executam uma instrução por ciclo - elas usam pipeline e múltiplos núcleos para processar muitas instruções simultaneamente.
+> Uma CPU de 3,5 GHz pode executar bilhões de instruções por segundo. No entanto, CPUs modernas não executam uma instrução por ciclo: elas usam pipeline e múltiplos núcleos para processar muitas instruções simultaneamente.
 
 ## Memória (RAM)
 

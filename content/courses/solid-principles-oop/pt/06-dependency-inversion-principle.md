@@ -331,14 +331,14 @@ def test_manipulador_pagamento():
 ## Resumo
 
 - **DIP**: Módulos de alto nível não devem depender de módulos de baixo nível. Ambos devem depender de abstrações
-- **Mecanismo**: Injeção de Dependência — passe dependências via construtor, setter ou parâmetro de método
+- **Mecanismo**: Injeção de Dependência: passe dependências via construtor, setter ou parâmetro de método
 - **Composition Root**: Único lugar para montar todo o grafo de dependências
 - **Benefícios**: Testabilidade, flexibilidade, capacidade de troca, acoplamento reduzido
 - **Testes**: Mock abstrações, não classes concretas
 - **DIP + Outros SOLID**: DIP habilita OCP (novas implementações sem modificar clientes) e depende de LSP/ISP para as abstrações
 
 > [!SUCCESS]
-> DIP é a pedra angular da arquitetura limpa. Ao inverter dependências em direção a abstrações, você cria um sistema onde a lógica de negócio é independente da infraestrutura — tornando-o testável, flexível e resiliente a mudanças.
+> DIP é a pedra angular da arquitetura limpa. Ao inverter dependências em direção a abstrações, você cria um sistema onde a lógica de negócio é independente da infraestrutura: tornando-o testável, flexível e resiliente a mudanças.
 
 ## Additional Content
 

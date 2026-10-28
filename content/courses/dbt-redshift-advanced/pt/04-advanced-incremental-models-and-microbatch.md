@@ -1,6 +1,6 @@
 ---
 title: "Modelos Incrementais Avançados e a Estratégia Microbatch"
-description: "Domine as estratégias de materialização incremental do dbt no Redshift — append, delete+insert, merge — e aprenda a nova estratégia microbatch introduzida no dbt-core 1.9 para processar dados de eventos em períodos de tempo discretos."
+description: "Domine as estratégias de materialização incremental do dbt no Redshift, append, delete+insert, merge, e aprenda a nova estratégia microbatch introduzida no dbt-core 1.9 para processar dados de eventos em períodos de tempo discretos."
 order: 4
 duration: "65 min"
 difficulty: "advanced"
@@ -8,7 +8,7 @@ difficulty: "advanced"
 
 # Modelos Incrementais Avançados e a Estratégia Microbatch
 
-Modelos incrementais são a ferramenta central para lidar com conjuntos de dados grandes demais para serem reconstruídos do zero a cada execução. O dbt-core 1.9 introduziu a **estratégia microbatch**, um padrão de primeira classe para processar dados de eventos em janelas de tempo isoladas — cada batch é sua própria instrução SQL, independentemente retentável. Este módulo cobre todas as estratégias incrementais disponíveis no Redshift e explica quando usar cada uma.
+Modelos incrementais são a ferramenta central para lidar com conjuntos de dados grandes demais para serem reconstruídos do zero a cada execução. O dbt-core 1.9 introduziu a **estratégia microbatch**, um padrão de primeira classe para processar dados de eventos em janelas de tempo isoladas: cada batch é sua própria instrução SQL, independentemente retentável. Este módulo cobre todas as estratégias incrementais disponíveis no Redshift e explica quando usar cada uma.
 
 A escolha da estratégia incremental correta depende de três fatores: (1) a natureza dos dados de origem (imutáveis ou atualizáveis?), (2) o volume de dados por execução e (3) a tolerância a duplicatas.
 
@@ -58,7 +58,7 @@ from {{ ref('stg_raw_events') }}
 {% endif %}
 ```
 
-Use `append` apenas quando os dados de origem são verdadeiramente imutáveis — cada event_id aparece exatamente uma vez e nunca é atualizado. Exemplos típicos incluem logs de servidor web, eventos de clickstream e mensagens de fila.
+Use `append` apenas quando os dados de origem são verdadeiramente imutáveis: cada event_id aparece exatamente uma vez e nunca é atualizado. Exemplos típicos incluem logs de servidor web, eventos de clickstream e mensagens de fila.
 
 ---
 
@@ -139,7 +139,7 @@ from {{ ref('stg_orders') }}
 {% endif %}
 ```
 
-A configuração `merge_update_columns` limita quais colunas são atualizadas em caso de match — eficiente quando apenas algumas colunas mudam com frequência. Por exemplo, se apenas `status` e `updated_at` mudam, não há necessidade de re-escrever `customer_id` ou `total_amount`.
+A configuração `merge_update_columns` limita quais colunas são atualizadas em caso de match: eficiente quando apenas algumas colunas mudam com frequência. Por exemplo, se apenas `status` e `updated_at` mudam, não há necessidade de re-escrever `customer_id` ou `total_amount`.
 
 [!NOTE]
 O Redshift suporta MERGE desde 2022 (lançamento das funcionalidades de conformidade com PostgreSQL). Em clusters mais antigos, pode ser necessário usar `delete+insert` como fallback.
@@ -172,7 +172,7 @@ Cada batch:
 - Executa concorrentemente até o limite de `threads`
 - Não requer um bloco `is_incremental()`
 
-A principal vantagem do microbatch sobre o incremental tradicional é o isolamento de falhas. Se um batch falha (por exemplo, dados corrompidos em um dia específico), apenas aquele dia precisa ser corrigido e reexecutado — os batches adjacentes não são afetados.
+A principal vantagem do microbatch sobre o incremental tradicional é o isolamento de falhas. Se um batch falha (por exemplo, dados corrompidos em um dia específico), apenas aquele dia precisa ser corrigido e reexecutado: os batches adjacentes não são afetados.
 
 ### Configuração Microbatch
 
@@ -269,7 +269,7 @@ Se modelos `ref()` upstream também declararem `event_time`, o dbt passa a faixa
 select * from {{ source('raw', 'events') }}
 ```
 
-Agora, quando o microbatch processar o batch de 2024-03-15, `stg_raw_events` é automaticamente filtrado para aquele dia — o dbt adiciona o predicado `WHERE event_timestamp >= ... AND event_timestamp < ...` na consulta de origem.
+Agora, quando o microbatch processar o batch de 2024-03-15, `stg_raw_events` é automaticamente filtrado para aquele dia, o dbt adiciona o predicado `WHERE event_timestamp >=... AND event_timestamp <...` na consulta de origem.
 
 ---
 
@@ -372,7 +372,7 @@ for r in results['results']:
   "question": "Você executa `dbt run --full-refresh` em um modelo microbatch configurado com `full_refresh: false`. O que acontece?",
   "options": [
     "dbt reconstrói toda a tabela a partir da data begin",
-    "dbt levanta um erro — full refresh é bloqueado pela config full_refresh: false",
+    "dbt levanta um erro: full refresh é bloqueado pela config full_refresh: false",
     "dbt reconstrói apenas os últimos 3 batches",
     "dbt ignora a flag e executa normalmente"
   ],
@@ -393,7 +393,7 @@ for r in results['results']:
     "Permite que o modelo execute sem unique_key"
   ],
   "correct": 1,
-  "explanation": "Quando a chave de distribuição corresponde à chave do join do merge (unique_key), o Redshift pode fazer o join das tabelas alvo e temporária sem redistribuir linhas entre nós — um hash join co-localizado."
+  "explanation": "Quando a chave de distribuição corresponde à chave do join do merge (unique_key), o Redshift pode fazer o join das tabelas alvo e temporária sem redistribuir linhas entre nós: um hash join co-localizado."
 }
 ```
 
@@ -419,7 +419,7 @@ for r in results['results']:
   "type": "multiple-choice",
   "question": "Quando o dbt filtra automaticamente um modelo ref() upstream em uma execução microbatch?",
   "options": [
-    "Sempre — todos os refs são automaticamente filtrados",
+    "Sempre: todos os refs são automaticamente filtrados",
     "Apenas quando o modelo upstream usa a materialização incremental",
     "Quando o modelo upstream também declara uma configuração event_time",
     "Apenas quando o modelo upstream é uma source (não um ref)"
@@ -451,9 +451,9 @@ for r in results['results']:
 ### Principais Conclusões
 
 - O dbt-redshift suporta quatro estratégias incrementais: append, delete+insert, merge e microbatch (1.9+).
-- Microbatch gera uma consulta SQL por período de tempo — sem bloco `is_incremental()`; cada batch é independentemente retentável.
+- Microbatch gera uma consulta SQL por período de tempo: sem bloco `is_incremental()`; cada batch é independentemente retentável.
 - Configure `lookback` para reprocessar batches recentes e capturar dados tardios.
 - Proteja modelos microbatch com `full_refresh: false`; use `--event-time-start` / `--event-time-end` para reconstruções limitadas.
 - Para performance de merge no Redshift, alinhe `dist` com `unique_key` para habilitar joins co-localizados.
 - Use `coalesce(max(col), 'fallback_date')` em filtros `is_incremental()` para lidar com casos de primeira execução (tabela vazia).
-- Refs upstream com `event_time` correspondente são automaticamente filtrados em execuções microbatch — declare event_time em todas as suas views staging.
+- Refs upstream com `event_time` correspondente são automaticamente filtrados em execuções microbatch: declare event_time em todas as suas views staging.

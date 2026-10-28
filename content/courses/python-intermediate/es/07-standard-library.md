@@ -1,6 +1,6 @@
 ---
 title: "La Biblioteca Estándar de Python"
-description: "Inmersión profunda en os, sys, re, collections, itertools y functools — los módulos integrados de Python para el desarrollo diario"
+description: "Inmersión profunda en os, sys, re, collections, itertools y functools, los módulos integrados de Python para el desarrollo diario"
 order: 7
 duration: "50 minutos"
 difficulty: "intermedio"
@@ -8,9 +8,9 @@ difficulty: "intermedio"
 
 # La Biblioteca Estándar de Python
 
-La biblioteca estándar de Python es famosamente completa — "baterías incluidas". Estos módulos están disponibles en cada instalación de Python y resuelven una amplia gama de problemas comunes.
+La biblioteca estándar de Python es famosamente completa: "baterías incluidas". Estos módulos están disponibles en cada instalación de Python y resuelven una amplia gama de problemas comunes.
 
-## `os` — Interfaz del Sistema Operativo
+## `os`: Interfaz del Sistema Operativo
 
 ```python
 import os
@@ -45,7 +45,7 @@ name, ext = os.path.splitext("data.csv")         # ("data", ".csv")
 > [!NOTE]
 > Python 3.4+ recomienda `pathlib.Path` sobre `os.path` para la mayoría de operaciones de ruta. Es más intuitivo y multiplataforma.
 
-## `sys` — Parámetros Específicos del Sistema
+## `sys`: Parámetros Específicos del Sistema
 
 ```python
 import sys
@@ -77,7 +77,7 @@ print(sys.getrecursionlimit())   # 1000 predeterminado
 sys.setrecursionlimit(5000)      # Aumentar (usar con cuidado)
 ```
 
-## `re` — Expresiones Regulares
+## `re`: Expresiones Regulares
 
 ```python
 import re
@@ -140,7 +140,7 @@ print(m.groupdict())
 > [!WARNING]
 > Usa cadenas raw (`r"pattern"`) para patrones regex para evitar escapar barras invertidas. `r"\d"` es correcto; `"\\d"` también funciona pero es feo.
 
-## `collections` — Estructuras de Datos Especializadas
+## `collections`: Estructuras de Datos Especializadas
 
 ### Counter
 
@@ -183,7 +183,7 @@ nested["bob"]["bananas"] += 2
 ```
 
 > [!NOTE]
-> `defaultdict` nunca lanza `KeyError` — las claves ausentes se crean automáticamente usando la función de fábrica. Perfecto para agrupar y contar.
+> `defaultdict` nunca lanza `KeyError`: las claves ausentes se crean automáticamente usando la función de fábrica. Perfecto para agrupar y contar.
 
 ### namedtuple
 
@@ -215,7 +215,7 @@ e = Employee("Alice", 123, 75000.0)
 print(e.name, e.salary)  # Alice 75000.0
 ```
 
-## `itertools` — Herramientas de Iterador
+## `itertools`: Herramientas de Iterador
 
 ```python
 from itertools import count, cycle, repeat, chain, product, permutations, combinations, groupby, accumulate, islice
@@ -261,7 +261,7 @@ for key, group in groupby(data, key=lambda x: x[0]):
     print(f"{key}: {list(group)}")
 ```
 
-## `functools` — Funciones de Orden Superior
+## `functools`: Funciones de Orden Superior
 
 ```python
 from functools import partial, lru_cache, reduce, wraps

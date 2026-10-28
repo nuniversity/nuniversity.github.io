@@ -1,6 +1,6 @@
 ---
 title: "Arquitectura orientada a eventos"
-description: "Explora los Eventos de Dominio, el Event Sourcing y CQRS en DDD — cómo los eventos capturan ocurrencias de dominio, habilitan la integración asíncrona y respaldan los registros de auditoría"
+description: "Explora los Eventos de Dominio, el Event Sourcing y CQRS en DDD, cómo los eventos capturan ocurrencias de dominio, habilitan la integración asíncrona y respaldan los registros de auditoría"
 order: 7
 duration: "75 min"
 difficulty: "advanced"

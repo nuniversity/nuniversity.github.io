@@ -8,7 +8,7 @@ duration: "75 min"
 
 # AI & Machine Learning Capabilities
 
-> **Bottom Line:** Databricks is the most complete end-to-end ML platform — from feature engineering to model training, tracking, serving, and monitoring. Snowflake Cortex offers the lowest-friction path to LLM-powered analytics for SQL teams. AWS Bedrock + SageMaker is the most comprehensive enterprise AI infrastructure, but requires the most assembly.
+> **Bottom Line:** Databricks is the most complete end-to-end ML platform: from feature engineering to model training, tracking, serving, and monitoring. Snowflake Cortex offers the lowest-friction path to LLM-powered analytics for SQL teams. AWS Bedrock + SageMaker is the most comprehensive enterprise AI infrastructure, but requires the most assembly.
 
 ---
 
@@ -31,7 +31,7 @@ Databricks:  ████████   Spark/Pandas | Feature Store | MLflow | 
 
 ## 7.2 AWS AI/ML: Bedrock + SageMaker
 
-### Amazon Bedrock — Foundation Models as a Service
+### Amazon Bedrock: Foundation Models as a Service
 
 Bedrock provides access to leading foundation models via a unified API, without managing infrastructure:
 
@@ -86,9 +86,9 @@ print(rag_response['output']['text'])
 # Stability: Stable Diffusion XL
 ```
 
-### Amazon SageMaker — Enterprise MLOps
+### Amazon SageMaker: Enterprise MLOps
 
-SageMaker is AWS's comprehensive ML platform — covering every stage of the ML lifecycle:
+SageMaker is AWS's comprehensive ML platform: covering every stage of the ML lifecycle:
 
 ```python
 import sagemaker
@@ -147,9 +147,9 @@ result = predictor.predict({'customer_id': 'cust-001', 'features': [...]})
 
 ## 7.3 Snowflake AI: Cortex + Snowpark ML
 
-### Snowflake Cortex — LLM Functions in SQL
+### Snowflake Cortex: LLM Functions in SQL
 
-Cortex brings LLM capabilities directly into Snowflake SQL — no Python, no infrastructure:
+Cortex brings LLM capabilities directly into Snowflake SQL: no Python, no infrastructure:
 
 ```sql
 -- Text Summarisation
@@ -197,7 +197,7 @@ SELECT
 FROM german_reviews;
 ```
 
-### Cortex Complete — Prompt-Based LLM Calls
+### Cortex Complete: Prompt-Based LLM Calls
 
 ```sql
 -- Call an LLM directly from SQL with a custom prompt
@@ -218,7 +218,7 @@ FROM delayed_orders
 WHERE delay_days > 5;
 ```
 
-### Snowflake Cortex Search — RAG in Snowflake
+### Snowflake Cortex Search: RAG in Snowflake
 
 ```sql
 -- Create a Cortex Search Service on a table containing documents
@@ -246,7 +246,7 @@ SELECT PARSE_JSON(
 ) AS search_results;
 ```
 
-### Snowpark ML — Python ML in Snowflake
+### Snowpark ML: Python ML in Snowflake
 
 ```python
 from snowflake.ml.modeling.preprocessing import StandardScaler, OrdinalEncoder
@@ -302,7 +302,7 @@ registry.get_model("customer_churn_model").version("v3").run(
 
 Databricks' AI platform (branded Mosaic AI) is the most integrated data + ML platform available:
 
-### MLflow — The Universal Experiment Tracker
+### MLflow: The Universal Experiment Tracker
 
 MLflow originated at Databricks and is now the industry standard for ML experiment tracking:
 
@@ -388,7 +388,7 @@ training_set = fe.create_training_set(
 training_df = training_set.load_df().toPandas()
 ```
 
-### Model Serving — Real-Time Inference
+### Model Serving: Real-Time Inference
 
 ```python
 # Register model to Unity Catalog Model Registry

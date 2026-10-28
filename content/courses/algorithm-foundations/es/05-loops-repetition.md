@@ -8,7 +8,7 @@ difficulty: "beginner"
 
 # Bucles y repetición
 
-Muchas tareas exigen hacer la misma cosa varias veces. En lugar de escribir los mismos pasos una y otra vez, los algoritmos usan **bucles** -- estructuras que repiten un conjunto de instrucciones hasta que se cumple una condición. Los bucles son una de las herramientas más poderosas del pensamiento algorítmico.
+Muchas tareas exigen hacer la misma cosa varias veces. En lugar de escribir los mismos pasos una y otra vez, los algoritmos usan **bucles**: estructuras que repiten un conjunto de instrucciones hasta que se cumple una condición. Los bucles son una de las herramientas más poderosas del pensamiento algorítmico.
 
 ## Por qué importan los bucles
 
@@ -34,8 +34,8 @@ END WHILE
 
 | Enfoque | Líneas de código | ¿Fácil de cambiar? | ¿Propenso a errores? |
 |---|---|---|---|
-| Sin bucle | 100 | No -- hay que editar cada línea | Sí -- es fácil saltar o duplicar |
-| Con bucle | 4 | Sí -- cambia el límite | No -- la lógica está centralizada |
+| Sin bucle | 100 | No, hay que editar cada línea | Sí, es fácil saltar o duplicar |
+| Con bucle | 4 | Sí, cambia el límite | No, la lógica está centralizada |
 
 ```mermaid
 flowchart TD
@@ -368,7 +368,7 @@ PRINT "Goodbye!"
 ```
 
 > [!NOTE]
-> El valor -1 se llama "centinela" -- un valor especial que señala el final de la entrada. El usuario debe saber que debe introducir -1 para detenerse.
+> El valor -1 se llama "centinela": un valor especial que señala el final de la entrada. El usuario debe saber que debe introducir -1 para detenerse.
 
 ### Estrategia 3: terminación basada en una bandera
 

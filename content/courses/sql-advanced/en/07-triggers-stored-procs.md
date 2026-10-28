@@ -332,7 +332,7 @@ CREATE TRIGGER trg_transaction_balance
 
 | Practice | Why |
 |---|---|
-| Keep triggers fast | They run in the same transaction — slow triggers block everything |
+| Keep triggers fast | They run in the same transaction: slow triggers block everything |
 | Avoid recursive triggers | Trigger on A → inserts into B → trigger on B → inserts into A |
 | Document side effects | Triggers are invisible to application code; document them |
 | Test thoroughly | Triggers can break bulk operations and imports |

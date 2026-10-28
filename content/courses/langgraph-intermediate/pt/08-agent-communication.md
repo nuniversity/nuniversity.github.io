@@ -115,7 +115,7 @@ def writer_agent(state: SupervisorState) -> dict:
 ```
 
 [!SUCCESS]
-O supervisor atua como um **roteador** — ele lê a conversa, decide o próximo passo e o grafo roteia a execução de acordo.
+O supervisor atua como um **roteador**: ele lê a conversa, decide o próximo passo e o grafo roteia a execução de acordo.
 
 ---
 

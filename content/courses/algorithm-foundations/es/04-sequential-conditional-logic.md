@@ -73,7 +73,7 @@ FIN ALGORITMO
 ```
 
 > [!NOTE]
-> Observa que este algoritmo es puramente secuencial. No maneja qué sucede si el PIN es incorrecto o si el saldo es insuficiente. Para eso necesitamos lógica condicional -- lo que veremos a continuación.
+> Observa que este algoritmo es puramente secuencial. No maneja qué sucede si el PIN es incorrecto o si el saldo es insuficiente. Para eso necesitamos lógica condicional: lo que veremos a continuación.
 
 ## Lógica Condicional: Tomar Decisiones
 
@@ -318,7 +318,7 @@ flowchart TD
 | Aspecto | Lógica Secuencial | Lógica Condicional |
 |---|---|---|
 | **Ejecución** | Lineal, un paso tras otro | Se ramifica según las condiciones |
-| **Flexibilidad** | Baja -- siempre hace lo mismo | Alta -- se adapta a diferentes situaciones |
+| **Flexibilidad** | Baja, siempre hace lo mismo | Alta, se adapta a diferentes situaciones |
 | **Complejidad** | Sencilla de entender y rastrear | Más compleja, requiere una planificación cuidadosa |
 | **Cuándo usarla** | Todas las situaciones son iguales | Diferentes situaciones requieren respuestas distintas |
 | **Ejemplo** | Sumar dos números | Decidir si un número es positivo o negativo |

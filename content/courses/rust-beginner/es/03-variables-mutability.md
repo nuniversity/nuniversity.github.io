@@ -8,7 +8,7 @@ difficulty: "principiante"
 
 # Variables y Mutabilidad
 
-Las variables en Rust son **inmutables por defecto**. Esta es una de las decisiones centrales de diseño del lenguaje — te empuja hacia un código más seguro y predecible.
+Las variables en Rust son **inmutables por defecto**. Esta es una de las decisiones centrales de diseño del lenguaje: te empuja hacia un código más seguro y predecible.
 
 ## Variables Inmutables
 

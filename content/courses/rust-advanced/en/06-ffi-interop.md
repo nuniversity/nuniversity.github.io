@@ -227,7 +227,7 @@ fn main() {
 > [!WARNING]
 > `#[repr(C)]` guarantees C-compatible layout. Without it, Rust may reorder fields. Always use `#[repr(C)]` for FFI structs.
 
-## Callbacks — Rust to C
+## Callbacks: Rust to C
 
 ```rust
 // Define callback type
@@ -282,7 +282,7 @@ fn main() {
 }
 ```
 
-## bindgen — Automatic Bindings
+## bindgen: Automatic Bindings
 
 For large C headers, use `bindgen` to generate bindings automatically:
 

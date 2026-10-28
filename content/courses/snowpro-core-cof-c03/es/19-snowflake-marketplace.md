@@ -1,15 +1,15 @@
 ---
-title: "Dominio 5.3 — Snowflake Marketplace y Native Apps"
-description: "Explora el ecosistema del Snowflake Marketplace — listings públicos y privados, cómo publicar y consumir productos de datos, y el Native App Framework."
+title: "Dominio 5.3, Snowflake Marketplace y Native Apps"
+description: "Explora el ecosistema del Snowflake Marketplace, listings públicos y privados, cómo publicar y consumir productos de datos, y el Native App Framework."
 order: 19
 difficulty: intermediate
 duration: 45
 ---
 
-# Dominio 5.3 — Snowflake Marketplace y Native Apps
+# Dominio 5.3: Snowflake Marketplace y Native Apps
 
 > [!NOTE]
-> **Dominio de Examen 5.3** — *Snowflake Marketplace e Intercambio de Datos* contribuye al dominio de **Colaboración de Datos**, que representa el **10%** del examen COF-C03.
+> **Dominio de Examen 5.3**: *Snowflake Marketplace e Intercambio de Datos* contribuye al dominio de **Colaboración de Datos**, que representa el **10%** del examen COF-C03.
 
 ---
 
@@ -42,15 +42,15 @@ flowchart TD
 
 ## 1. ¿Qué es el Snowflake Marketplace?
 
-El **Snowflake Marketplace** es un catálogo global de productos de datos en vivo y listos para consultar, accesibles directamente dentro de Snowflake. Los consumidores pueden descubrir, probar y adjuntar conjuntos de datos sin ningún ETL — los datos viven en la cuenta del proveedor y se sirven vía Intercambio Seguro de Datos.
+El **Snowflake Marketplace** es un catálogo global de productos de datos en vivo y listos para consultar, accesibles directamente dentro de Snowflake. Los consumidores pueden descubrir, probar y adjuntar conjuntos de datos sin ningún ETL: los datos viven en la cuenta del proveedor y se sirven vía Intercambio Seguro de Datos.
 
 ### Características Clave
 
 | Propiedad | Detalle |
 |---|---|
-| Movimiento de datos | **Cero** — sin copia, sin pipeline |
-| Frescura | **En vivo** — siempre los datos más recientes del proveedor |
-| Incorporación | Segundos — "Obtener" → base de datos montada instantáneamente |
+| Movimiento de datos | **Cero**; sin copia, sin pipeline |
+| Frescura | **En vivo**: siempre los datos más recientes del proveedor |
+| Incorporación | Segundos: "Obtener" → base de datos montada instantáneamente |
 | Datos de prueba | Los proveedores pueden ofrecer conjuntos de datos de muestra gratuitos |
 | Listings de pago | Facturados a través de Snowflake; el proveedor fija el precio |
 
@@ -70,7 +70,7 @@ flowchart LR
 
 ### Listings Públicos
 
-Abiertos a cualquier cliente de Snowflake. Los consumidores buscan en el Marketplace, hacen clic en **Obtener** y reciben una base de datos importada — no se requiere paso de aprobación para listings gratuitos.
+Abiertos a cualquier cliente de Snowflake. Los consumidores buscan en el Marketplace, hacen clic en **Obtener** y reciben una base de datos importada: no se requiere paso de aprobación para listings gratuitos.
 
 ### Listings Privados
 
@@ -131,13 +131,13 @@ WHERE date >= CURRENT_DATE - 7;
 ```
 
 > [!NOTE]
-> El **consumidor paga el cómputo** (créditos del Virtual Warehouse) para consultar datos del marketplace. El **proveedor paga el almacenamiento** de los datos subyacentes. No hay cargos de regalías por consulta a nivel de infraestructura — el licenciamiento/precio se gestiona a nivel del listing.
+> El **consumidor paga el cómputo** (créditos del Virtual Warehouse) para consultar datos del marketplace. El **proveedor paga el almacenamiento** de los datos subyacentes. No hay cargos de regalías por consulta a nivel de infraestructura: el licenciamiento/precio se gestiona a nivel del listing.
 
 ---
 
 ## 5. Data Exchange (Intercambio de Datos Privado)
 
-Un **Data Exchange** es un **marketplace privado solo por invitación** que una organización configura para un grupo definido de proveedores y consumidores — por ejemplo, un consorcio de socios de la industria.
+Un **Data Exchange** es un **marketplace privado solo por invitación** que una organización configura para un grupo definido de proveedores y consumidores: por ejemplo, un consorcio de socios de la industria.
 
 ```mermaid
 flowchart LR
@@ -161,7 +161,7 @@ flowchart LR
 
 ## 6. Native App Framework (Marco de Aplicaciones Nativas)
 
-El **Snowflake Native App Framework** permite a los proveedores agrupar **lógica de aplicación** (procedimientos almacenados, UDFs, UI de Streamlit) junto con datos en una única aplicación instalable — entregada vía el Marketplace.
+El **Snowflake Native App Framework** permite a los proveedores agrupar **lógica de aplicación** (procedimientos almacenados, UDFs, UI de Streamlit) junto con datos en una única aplicación instalable: entregada vía el Marketplace.
 
 ### Arquitectura
 
@@ -189,7 +189,7 @@ flowchart TD
 
 | Propiedad | Detalle |
 |---|---|
-| Se ejecuta en | **La cuenta del consumidor** — el código del proveedor se ejecuta allí |
+| Se ejecuta en | **La cuenta del consumidor**: el código del proveedor se ejecuta allí |
 | Acceso a datos | La app puede acceder a los datos del consumidor (con permiso) |
 | Visibilidad del proveedor | El proveedor **no puede** ver los datos del consumidor |
 | Versionado | El proveedor publica actualizaciones; el consumidor actualiza |
@@ -230,7 +230,7 @@ flowchart TD
 | | Share de Datos Seguro | Native App |
 |---|---|---|
 | Qué se entrega | Solo datos | Datos + código + UI |
-| ¿Se ejecuta en la cuenta del consumidor? | No — el consumidor consulta el almacenamiento del proveedor | **Sí** |
+| ¿Se ejecuta en la cuenta del consumidor? | No: el consumidor consulta el almacenamiento del proveedor | **Sí** |
 | Acceso a datos del consumidor | Ninguno | La app puede solicitar acceso |
 | UI de Streamlit | No | **Sí** |
 | Versionado | No aplica | **Sí** |
@@ -257,7 +257,7 @@ flowchart LR
 
 > [!SUCCESS]
 > **Puntos Clave para el Examen**
-> - Los listings del Marketplace son **de copia cero y en vivo** — mismo mecanismo de intercambio que el Intercambio Seguro de Datos.
+> - Los listings del Marketplace son **de copia cero y en vivo**: mismo mecanismo de intercambio que el Intercambio Seguro de Datos.
 > - **Listings públicos**: abiertos a todos; **Listings privados**: solo por invitación; **Listings de Native App**: código + datos.
 > - **Data Exchange**: marketplace privado gestionado por una organización para un grupo controlado.
 > - **Native Apps**: el proveedor agrupa código + datos en una app instalable que se ejecuta en la **cuenta del consumidor**.
@@ -272,7 +272,7 @@ flowchart LR
 
 - A) Se transfiere una copia completa a la cuenta del consumidor
 - B) Se configura un pipeline ETL nocturno
-- C) **Se monta una base de datos de solo lectura — no se copian datos** ✅
+- C) **Se monta una base de datos de solo lectura: no se copian datos** ✅
 - D) El consumidor descarga una exportación CSV
 
 ---
@@ -286,7 +286,7 @@ flowchart LR
 
 ---
 
-**3.** Una organización quiere crear un hub de datos privado para 20 socios de la industria — no abierto a todos los clientes de Snowflake. ¿Qué funcionalidad deben usar?
+**3.** Una organización quiere crear un hub de datos privado para 20 socios de la industria: no abierto a todos los clientes de Snowflake. ¿Qué funcionalidad deben usar?
 
 - A) Snowflake Marketplace
 - B) **Data Exchange** ✅
@@ -326,5 +326,5 @@ flowchart LR
 
 - A) Snowflake no soporta listings de pago
 - B) Solo suscripciones anuales de tarifa plana
-- C) **Precios gratuitos, de tarifa plana o basados en uso — facturados a través de Snowflake** ✅
+- C) **Precios gratuitos, de tarifa plana o basados en uso: facturados a través de Snowflake** ✅
 - D) Los proveedores deben gestionar la facturación fuera de Snowflake

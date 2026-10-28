@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Introducción al TDD
 
-El Desarrollo Dirigido por Testes (Test-Driven Development, TDD) es un enfoque de desarrollo de software en el que escribes las pruebas **antes** de escribir el código de producción. Este flujo de trabajo invertido — primero las pruebas, después el código — cambia fundamentalmente cómo diseñas, implementas y verificas el software.
+El Desarrollo Dirigido por Testes (Test-Driven Development, TDD) es un enfoque de desarrollo de software en el que escribes las pruebas **antes** de escribir el código de producción. Este flujo de trabajo invertido, primero las pruebas, después el código, cambia fundamentalmente cómo diseñas, implementas y verificas el software.
 
 ## El mantra del TDD: Red-Green-Refactor
 
@@ -71,14 +71,14 @@ def divide(a, b):
 ```
 
 > [!SUCCESS]
-> El TDD no consiste en testar — consiste en el **diseño**. Escribir primero la prueba te obliga a pensar en la interfaz antes que en la implementación.
+> El TDD no consiste en testar: consiste en el **diseño**. Escribir primero la prueba te obliga a pensar en la interfaz antes que en la implementación.
 
 ## Las tres leyes del TDD
 
 Robert C. Martin (Uncle Bob) formalizó el TDD con tres leyes:
 
 1. **Ley 1**: No puedes escribir código de producción hasta haber escrito una **prueba unitaria que falle**.
-2. **Ley 2**: No puedes escribir más de una prueba unitaria de lo necesario para que falle — y **no compilar cuenta como fallar**.
+2. **Ley 2**: No puedes escribir más de una prueba unitaria de lo necesario para que falle, y **no compilar cuenta como fallar**.
 3. **Ley 3**: No puedes escribir más código de producción de lo necesario para que pase la **prueba que está fallando en este momento**.
 
 ```mermaid
@@ -120,7 +120,7 @@ def test_empty_cart():
     assert cart.total_items() == 0
 ```
 
-Ejecuta: **Red** — `ShoppingCart` todavía no existe.
+Ejecuta: **Red**: `ShoppingCart` todavía no existe.
 
 ```python
 # shopping_cart.py
@@ -129,7 +129,7 @@ class ShoppingCart:
         return 0
 ```
 
-Ejecuta: **Green** — la prueba pasa.
+Ejecuta: **Green**: la prueba pasa.
 
 ### Ciclo 2: Añadir artículos al carrito
 
@@ -148,7 +148,7 @@ def test_add_multiple_items():
     assert cart.total_items() == 2
 ```
 
-Ejecuta: **Red** — `add_item` no existe.
+Ejecuta: **Red**: `add_item` no existe.
 
 ```python
 class ShoppingCart:
@@ -162,7 +162,7 @@ class ShoppingCart:
         return len(self._items)
 ```
 
-Ejecuta: **Green** — todas las pruebas pasan.
+Ejecuta: **Green**: todas las pruebas pasan.
 
 ### Ciclo 3: Calcular el precio total
 
@@ -180,7 +180,7 @@ def test_empty_cart_total():
     assert cart.total_price() == 0.0
 ```
 
-Ejecuta: **Red** — `total_price` no existe.
+Ejecuta: **Red**: `total_price` no existe.
 
 ```python
 class ShoppingCart:
@@ -197,7 +197,7 @@ class ShoppingCart:
         return sum(item["price"] for item in self._items)
 ```
 
-Ejecuta: **Green** — todo pasa.
+Ejecuta: **Green**: todo pasa.
 
 ### Refactor: Mejorar el diseño
 

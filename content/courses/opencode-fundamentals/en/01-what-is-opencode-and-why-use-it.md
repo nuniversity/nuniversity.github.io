@@ -30,7 +30,7 @@ Traditional AI coding assistants are often limited to specific editors or platfo
 | **Cost** | Subscription required | Free (pay only for API usage) |
 
 > [!TIP]
-> Think of OpenCode as the "VS Code of AI coding assistants" — a flexible, extensible platform that adapts to your workflow rather than forcing you into a specific way of working.
+> Think of OpenCode as the "VS Code of AI coding assistants": a flexible, extensible platform that adapts to your workflow rather than forcing you into a specific way of working.
 
 ---
 
@@ -224,4 +224,4 @@ OpenCode is ideal for:
 - The request lifecycle flows through agent routing, tool selection, permission checks, and execution
 - Skills are reusable instruction packages that teach agents specific tasks
 - MCP enables integration with external tools and data sources
-- OpenCode is free to use — you only pay for LLM API usage
+- OpenCode is free to use; you only pay for LLM API usage

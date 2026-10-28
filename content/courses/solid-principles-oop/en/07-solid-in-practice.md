@@ -185,7 +185,7 @@ manager.ship_order(order_id)
 
 | Principle | Violation | Evidence |
 |-----------|-----------|----------|
-| **SRP** | 5+ responsibilities | Database, discounts, email, file export, payment, shipping — all in one class |
+| **SRP** | 5+ responsibilities | Database, discounts, email, file export, payment, shipping: all in one class |
 | **OCP** | if/elif chains for payment types and discounts | Adding a new payment type or discount requires modifying existing code |
 | **LSP** | Not directly applicable yet, but potential if we create naive subclasses | Any subclass of this monolith would be impossible |
 | **ISP** | All clients depend on the entire interface | A "read-only order reporter" would need all methods |
@@ -208,7 +208,7 @@ flowchart TD
     style G fill:#bbdefb
 ```
 
-## Step 1: Apply SRP — Separate Responsibilities
+## Step 1: Apply SRP: Separate Responsibilities
 
 ```python
 from abc import ABC, abstractmethod
@@ -381,7 +381,7 @@ class DiscountEngine:
 > [!SUCCESS]
 > **SRP satisfied**: Each class has one responsibility. **OCP satisfied**: New discounts are added by creating new strategy classes, not by modifying existing code.
 
-## Step 2: Apply OCP — Payment Methods
+## Step 2: Apply OCP: Payment Methods
 
 ```python
 # --- Responsibility 3: Payment (OCP, strategy pattern) ---
@@ -449,7 +449,7 @@ class PaymentGateway:
 > [!SUCCESS]
 > **OCP satisfied**: New payment methods are added by creating new subclasses and registering them. No existing code is modified.
 
-## Step 3: Apply ISP — Segregated Interfaces
+## Step 3: Apply ISP: Segregated Interfaces
 
 ```python
 # --- Responsibility 4: Notifications (ISP) ---
@@ -554,7 +554,7 @@ class StandardShippingService(ShippingService):
 > [!SUCCESS]
 > **ISP satisfied**: Each interface is small and focused. Notification senders and exporters each have exactly the methods they need.
 
-## Step 4: Apply DIP — Compose Everything
+## Step 4: Apply DIP: Compose Everything
 
 ```python
 # --- Responsibility 7: Business Logic (high-level, depends on abstractions) ---
@@ -870,7 +870,7 @@ order_system._discounts.register(FreeShippingDiscount())
 ```
 
 > [!SUCCESS]
-> Adding `ApplePayPayment` and `FreeShippingDiscount` required zero changes to existing classes — just new subclasses and registration. This is the power of SOLID design.
+> Adding `ApplePayPayment` and `FreeShippingDiscount` required zero changes to existing classes: just new subclasses and registration. This is the power of SOLID design.
 
 ## Practice Exercises
 
@@ -903,7 +903,7 @@ order_system._discounts.register(FreeShippingDiscount())
 
 5. Write a unit test for the `OrderService.create_order()` method that verifies the `ConfirmationSender.send_confirmation()` is called exactly once.
 
-6. The current system uses email notifications. Add an `SMSConfirmationSender` using ISP — it should implement only the notification interfaces it needs.
+6. The current system uses email notifications. Add an `SMSConfirmationSender` using ISP; it should implement only the notification interfaces it needs.
 
 7. How would you add an audit logging feature to the order system? Every order creation, payment, and shipment should be logged. Design it using SOLID principles.
 
@@ -920,4 +920,4 @@ order_system._discounts.register(FreeShippingDiscount())
 - **Extensibility**: New features are added via extension, not modification
 
 > [!SUCCESS]
-> The SOLID principles aren't academic theory — they're practical tools that transform tangled monoliths into clean, maintainable, and extensible systems. This case study shows exactly how to apply them in real-world code.
+> The SOLID principles aren't academic theory; they're practical tools that transform tangled monoliths into clean, maintainable, and extensible systems. This case study shows exactly how to apply them in real-world code.

@@ -1,16 +1,16 @@
 ---
-title: "Dominio 1.1 — Arquitectura de Snowflake"
+title: "Dominio 1.1, Arquitectura de Snowflake"
 description: "Domina la arquitectura de tres capas de Snowflake: Servicios en la Nube, Cómputo (Virtual Warehouses) y Almacenamiento de Base de Datos. Comprende cómo la separación entre almacenamiento y cómputo impulsa el valor central de Snowflake."
 order: 1
 difficulty: intermediate
 duration: "75 min"
 ---
 
-# Dominio 1.1 — Arquitectura de Snowflake
+# Dominio 1.1: Arquitectura de Snowflake
 
 ## Peso en el Examen
 
-**Dominio 1.0 — Características y Arquitectura de Snowflake AI Data Cloud** representa aproximadamente el **~31%** del examen SnowPro Core COF-C03 — el dominio individual más grande.
+**Dominio 1.0, Características y Arquitectura de Snowflake AI Data Cloud** representa aproximadamente el **~31%** del examen SnowPro Core COF-C03, el dominio individual más grande.
 
 > [!NOTE]
 > Esta lección corresponde al **Objetivo de Examen 1.1**: *Describir y utilizar la arquitectura de Snowflake*, incluyendo la capa de Cloud Services (Servicios en la Nube), la capa de Cómputo, la capa de Almacenamiento de Base de Datos y la comparación entre ediciones de Snowflake.
@@ -19,7 +19,7 @@ duration: "75 min"
 
 ## ¿Qué es Snowflake?
 
-Snowflake es una **plataforma de datos nativa en la nube, completamente gestionada**, entregada como Software como Servicio (SaaS). Fue construida desde cero para la nube — no portada desde un producto local (*on-premises*).
+Snowflake es una **plataforma de datos nativa en la nube, completamente gestionada**, entregada como Software como Servicio (SaaS). Fue construida desde cero para la nube: no portada desde un producto local (*on-premises*).
 
 Diferencias clave con los almacenes de datos tradicionales:
 
@@ -36,7 +36,7 @@ Diferencias clave con los almacenes de datos tradicionales:
 
 ## La Arquitectura de Tres Capas
 
-La arquitectura de Snowflake consta de tres capas escalables de forma independiente. Comprender cada capa —y los límites entre ellas— es fundamental para el examen.
+La arquitectura de Snowflake consta de tres capas escalables de forma independiente. Comprender cada capa, y los límites entre ellas, es fundamental para el examen.
 
 ```mermaid
 flowchart TD
@@ -51,15 +51,15 @@ flowchart TD
 
 ---
 
-### Capa 1 — Capa de Almacenamiento de Base de Datos
+### Capa 1: Capa de Almacenamiento de Base de Datos
 
 Aquí es donde **todos los datos residen permanentemente**. Características clave:
 
-- Los datos se almacenan en el formato propietario de Snowflake de **micro-particiones columnares** — comprimido y optimizado automáticamente. Los clientes no pueden acceder directamente a los archivos subyacentes.
+- Los datos se almacenan en el formato propietario de Snowflake de **micro-particiones columnares**: comprimido y optimizado automáticamente. Los clientes no pueden acceder directamente a los archivos subyacentes.
 - El almacenamiento está construido sobre el servicio de blob storage del proveedor de nube: **Amazon S3** (AWS), **Azure Blob Storage** (Azure) o **Google Cloud Storage** (GCP).
 - **La facturación es independiente del cómputo**: se paga por el almacenamiento incluso cuando no hay Virtual Warehouses (almacenes de cómputo) en ejecución.
 - Snowflake gestiona automáticamente el cifrado, la redundancia y la durabilidad.
-- Los datos se reorganizan en micro-particiones (50–500 MB comprimidos) con metadatos ricos sobre cada partición (valores mín/máx, conteo de distintos, conteo de NULL) para habilitar la **poda de particiones** (*partition pruning*) durante las consultas.
+- Los datos se reorganizan en micro-particiones (50 to 500 MB comprimidos) con metadatos ricos sobre cada partición (valores mín/máx, conteo de distintos, conteo de NULL) para habilitar la **poda de particiones** (*partition pruning*) durante las consultas.
 
 **Qué contiene la capa de almacenamiento:**
 - Datos de tablas (micro-particiones)
@@ -70,14 +70,14 @@ Aquí es donde **todos los datos residen permanentemente**. Características cla
 
 ---
 
-### Capa 2 — Capa de Cómputo (Virtual Warehouses)
+### Capa 2: Capa de Cómputo (Virtual Warehouses)
 
-La capa de cómputo consiste en **Virtual Warehouses (VW)** — clústeres de recursos de cómputo con nombre que ejecutan consultas SQL y operaciones DML.
+La capa de cómputo consiste en **Virtual Warehouses (VW)**: clústeres de recursos de cómputo con nombre que ejecutan consultas SQL y operaciones DML.
 
 Características clave:
 
 - Cada Virtual Warehouse es un clúster de cómputo **MPP (Procesamiento Masivamente Paralelo)** compuesto por uno o más nodos.
-- **Múltiples warehouses pueden leer del mismo almacenamiento simultáneamente** — sin contención de recursos entre ellos.
+- **Múltiples warehouses pueden leer del mismo almacenamiento simultáneamente**; sin contención de recursos entre ellos.
 - Los warehouses pueden **suspenderse** (deteniendo la facturación al instante) y **reanudarse** (en segundos).
 - El tamaño se expresa en tallas de camiseta: **X-Small, Small, Medium, Large, X-Large, 2X-Large, 3X-Large, 4X-Large, 5X-Large, 6X-Large**.
 - Cada incremento de tamaño **duplica** los recursos de cómputo (y los créditos por hora).
@@ -112,9 +112,9 @@ Características clave:
 
 ---
 
-### Capa 3 — Capa de Cloud Services (Servicios en la Nube)
+### Capa 3: Capa de Cloud Services (Servicios en la Nube)
 
-Este es el **cerebro de Snowflake** — una colección de servicios que coordinan toda la actividad en la plataforma. Funciona en la infraestructura gestionada por Snowflake y **siempre está disponible**, incluso cuando no hay Virtual Warehouses en ejecución.
+Este es el **cerebro de Snowflake**: una colección de servicios que coordinan toda la actividad en la plataforma. Funciona en la infraestructura gestionada por Snowflake y **siempre está disponible**, incluso cuando no hay Virtual Warehouses en ejecución.
 
 **Responsabilidades de Cloud Services:**
 
@@ -137,16 +137,16 @@ SHOW TABLES IN DATABASE MY_DB;
 
 ---
 
-## Separación de Almacenamiento y Cómputo — Por Qué Importa
+## Separación de Almacenamiento y Cómputo: Por Qué Importa
 
 Esta es la característica **arquitectónicamente más significativa** de Snowflake y aparece con frecuencia en el examen.
 
 **Beneficios de la separación:**
 
-1. **Escalado independiente** — escala el cómputo hacia arriba/abajo sin tocar el almacenamiento
-2. **Optimización de costos** — suspende el cómputo cuando está inactivo; la facturación del almacenamiento continúa a tarifas bajas
-3. **Aislamiento de cargas de trabajo** — múltiples equipos ejecutan sus propios warehouses contra datos compartidos
-4. **Sin contención** — una consulta analítica grande en WH_ANALYTICS no afecta la ingesta en WH_INGEST
+1. **Escalado independiente**: escala el cómputo hacia arriba/abajo sin tocar el almacenamiento
+2. **Optimización de costos**: suspende el cómputo cuando está inactivo; la facturación del almacenamiento continúa a tarifas bajas
+3. **Aislamiento de cargas de trabajo**: múltiples equipos ejecutan sus propios warehouses contra datos compartidos
+4. **Sin contención**: una consulta analítica grande en WH_ANALYTICS no afecta la ingesta en WH_INGEST
 
 ```sql
 -- Ingeniería ingesta datos en su warehouse
@@ -209,10 +209,10 @@ Las cuentas de Snowflake se despliegan en una combinación específica de **nube
 | Término | Definición |
 |---|---|
 | **Virtual Warehouse (VW)** | Clúster de cómputo MPP con nombre que ejecuta consultas |
-| **Micro-partición** | Unidad fundamental de almacenamiento: 50–500 MB comprimida, columnar |
+| **Micro-partición** | Unidad fundamental de almacenamiento: 50 to 500 MB comprimida, columnar |
 | **Capa de Cloud Services** | Capa de inteligencia: autenticación, optimización, metadatos, control de acceso |
-| **SaaS** | Software como Servicio — Snowflake gestiona toda la infraestructura |
-| **MPP** | Procesamiento Masivamente Paralelo — consultas distribuidas entre nodos |
+| **SaaS** | Software como Servicio: Snowflake gestiona toda la infraestructura |
+| **MPP** | Procesamiento Masivamente Paralelo: consultas distribuidas entre nodos |
 | **Separación de Almacenamiento y Cómputo** | El almacenamiento y el cómputo escalan de forma independiente y se facturan por separado |
 | **Crédito** | Unidad de consumo de cómputo de Snowflake |
 
@@ -273,9 +273,9 @@ Las cuentas de Snowflake se despliegan en una combinación específica de **nube
 
 > [!SUCCESS]
 > **Puntos Clave para el Día del Examen:**
-> 1. Tres capas: **Cloud Services → Cómputo (VW) → Almacenamiento** — cada una independiente y facturada por separado
-> 2. Cloud Services = cerebro (autenticación, optimización, metadatos) — gratuito hasta el **10%** de los créditos de cómputo
-> 3. **La facturación del almacenamiento nunca se detiene** — incluso cuando los warehouses están suspendidos
+> 1. Tres capas: **Cloud Services → Cómputo (VW) → Almacenamiento**: cada una independiente y facturada por separado
+> 2. Cloud Services = cerebro (autenticación, optimización, metadatos): gratuito hasta el **10%** de los créditos de cómputo
+> 3. **La facturación del almacenamiento nunca se detiene**: incluso cuando los warehouses están suspendidos
 > 4. Multi-cluster WH, Column Masking, Row Access Policies → **Enterprise+**
 > 5. HIPAA / Tri-Secret Secure → **Business Critical+**
 > 6. VPS = mayor aislamiento, SLA del 99.99%, despliegue privado

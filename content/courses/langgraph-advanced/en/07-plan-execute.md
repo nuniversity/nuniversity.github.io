@@ -1,6 +1,6 @@
 ---
 title: "Plan and Execute Pattern"
-description: "Implement the plan-and-execute pattern in LangGraph — a planning node creates a step-by-step plan, an execution node runs steps, and a re-planning loop adapts to results."
+description: "Implement the plan-and-execute pattern in LangGraph, a planning node creates a step-by-step plan, an execution node runs steps, and a re-planning loop adapts to results."
 order: 7
 duration: "40 minutes"
 difficulty: "advanced"
@@ -372,7 +372,7 @@ print(result["final_answer"])
   "type": "multiple-choice",
   "question": "How does the planner receive context from previous results?",
   "options": [
-    "It doesn't — each plan is from scratch",
+    "It doesn't: each plan is from scratch",
     "The results from executed steps are included in the re-plan prompt",
     "Via a separate context field",
     "Results are ignored during planning"

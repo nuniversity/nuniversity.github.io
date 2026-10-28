@@ -1,6 +1,6 @@
 ---
 title: "Execução Paralela"
-description: "Domine a execução paralela de nós em LangGraph — padrões de fan-out/fan-in, coordenação de ramos, segurança de thread e sincronização de resultados paralelos."
+description: "Domine a execução paralela de nós em LangGraph, padrões de fan-out/fan-in, coordenação de ramos, segurança de thread e sincronização de resultados paralelos."
 order: 8
 duration: "35 min"
 difficulty: "advanced"
@@ -379,7 +379,7 @@ app = builder.compile()
   "options": [
     "Only the first branch's results",
     "State merged from all incoming branches that have completed",
-    "Nothing — fan-in is automatic",
+    "Nothing: fan-in is automatic",
     "State from only the fastest branch"
   ],
   "correct": 1,
@@ -464,7 +464,7 @@ app = builder.compile()
   "question": "When is parallel execution NOT beneficial?",
   "options": [
     "When tasks are independent",
-    "When task duration is very short (< 100ms) — thread overhead dominates",
+    "When task duration is very short (< 100ms): thread overhead dominates",
     "When processing large datasets",
     "When calling multiple APIs"
   ],

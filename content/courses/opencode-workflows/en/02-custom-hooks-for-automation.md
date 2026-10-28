@@ -12,10 +12,10 @@ difficulty: "intermediate"
 
 Hooks are scripts that run automatically at specific points in the OpenCode lifecycle. They enable:
 
-- **Validation** — Check inputs/outputs before processing
-- **Transformation** — Modify data between steps
-- **Guarding** — Block dangerous operations
-- **Logging** — Track activity for auditing
+- **Validation**: Check inputs/outputs before processing
+- **Transformation**: Modify data between steps
+- **Guarding**: Block dangerous operations
+- **Logging**: Track activity for auditing
 
 ---
 

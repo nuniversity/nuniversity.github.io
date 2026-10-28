@@ -1,12 +1,12 @@
 ---
-title: "Domínio 3.2 — Ingestão Automatizada de Dados"
+title: "Domínio 3.2, Ingestão Automatizada de Dados"
 description: "Aprenda a automatizar a ingestão de dados com Snowpipe, Snowpipe Streaming, Streams, Tasks e Dynamic Tables. Construa pipelines contínuos e orientados a eventos inteiramente dentro do Snowflake."
 order: 11
 difficulty: intermediate
 duration: "70 min"
 ---
 
-# Domínio 3.2 — Ingestão Automatizada de Dados
+# Domínio 3.2: Ingestão Automatizada de Dados
 
 ## Peso no Exame
 
@@ -22,7 +22,7 @@ O **Domínio 3.0** representa **~18%** do exame. Os padrões de ingestão automa
 | Ferramenta | Gatilho | Latência | Melhor Para |
 |---|---|---|---|
 | **COPY INTO** | Manual / agendado | Minutos a horas | Cargas em lote |
-| **Snowpipe** | Evento de armazenamento em nuvem | Quase em tempo real (segundos–minutos) | Ingestão contínua baseada em arquivo |
+| **Snowpipe** | Evento de armazenamento em nuvem | Quase em tempo real (segundos: minutos) | Ingestão contínua baseada em arquivo |
 | **Snowpipe Streaming** | Push via SDK | Subsegundo | Streaming de alto volume em nível de linha |
 | **Streams + Tasks** | Tempo ou condição de stream | Configurável | Orquestração de pipeline baseada em CDC |
 | **Dynamic Tables** | Automático (baseado em lag) | Configurável | Atualização incremental declarativa |
@@ -31,7 +31,7 @@ O **Domínio 3.0** representa **~18%** do exame. Os padrões de ingestão automa
 
 ## Snowpipe
 
-O **Snowpipe** é o serviço serverless de ingestão contínua do Snowflake — carrega arquivos automaticamente conforme chegam em um stage.
+O **Snowpipe** é o serviço serverless de ingestão contínua do Snowflake: carrega arquivos automaticamente conforme chegam em um stage.
 
 ### Como o Snowpipe Funciona
 
@@ -89,7 +89,7 @@ response = manager.ingest_files([
 
 | Propriedade | Valor |
 |---|---|
-| **Warehouse necessário?** | Não — serverless |
+| **Warehouse necessário?** | Não: serverless |
 | **Cobrança** | Créditos de computação por arquivo (taxa serverless) |
 | **Latência** | Tipicamente < 1 minuto |
 | **Deduplicação** | Janela de 14 dias (arquivos não são reprocessados) |
@@ -118,7 +118,7 @@ ALTER PIPE pipe_pedidos REFRESH;
 
 ## Snowpipe Streaming
 
-O **Snowpipe Streaming** habilita a **ingestão em nível de linha com latência subsegundo** diretamente em tabelas do Snowflake via Snowflake Ingest SDK — sem fazer staging de arquivos primeiro:
+O **Snowpipe Streaming** habilita a **ingestão em nível de linha com latência subsegundo** diretamente em tabelas do Snowflake via Snowflake Ingest SDK: sem fazer staging de arquivos primeiro:
 
 ```
 Aplicação / Kafka / Ferramenta CDC
@@ -167,7 +167,7 @@ channel.insertRow(linha, "offset_12345");
 
 ---
 
-## Streams — Change Data Capture (Captura de Alterações de Dados)
+## Streams: Change Data Capture (Captura de Alterações de Dados)
 
 Um **Stream** é um objeto do Snowflake que captura alterações DML (INSERT, UPDATE, DELETE) em uma tabela ou view de origem. Ele age como um **log de CDC**.
 
@@ -218,9 +218,9 @@ WHEN NOT MATCHED AND src.METADATA$ACTION = 'INSERT' THEN INSERT
 
 ---
 
-## Tasks — Execução Agendada
+## Tasks: Execução Agendada
 
-Uma **Task** agenda a execução de SQL — é o agendador de jobs nativo do Snowflake.
+Uma **Task** agenda a execução de SQL: é o agendador de jobs nativo do Snowflake.
 
 ### Tipos de Task
 
@@ -304,7 +304,7 @@ SELECT SYSTEM$TASK_DEPENDENTS_ENABLE('task_raiz');
 
 ## Dynamic Tables (Tabelas Dinâmicas)
 
-As **Dynamic Tables** fornecem uma abordagem **declarativa** para pipelines de dados incrementais — defina a transformação como um SELECT, configure um `TARGET_LAG`, e o Snowflake atualiza a tabela automaticamente:
+As **Dynamic Tables** fornecem uma abordagem **declarativa** para pipelines de dados incrementais: defina a transformação como um SELECT, configure um `TARGET_LAG`, e o Snowflake atualiza a tabela automaticamente:
 
 ```sql
 -- Tabela de origem
@@ -394,6 +394,6 @@ ALTER DYNAMIC TABLE metricas_clientes REFRESH;
 > 1. **Snowpipe** = baseado em arquivo, serverless, quase em tempo real (segundos a minutos)
 > 2. **Snowpipe Streaming** = baseado em linha, subsegundo, sem staging necessário
 > 3. Streams ficam **obsoletos (stale)** se não forem consumidos dentro da janela do Time Travel
-> 4. Tasks iniciam **SUSPENDED** — sempre as retome explicitamente
-> 5. **Dynamic Tables** = abordagem `TARGET_LAG` declarativa — mais simples que Streams + Tasks
+> 4. Tasks iniciam **SUSPENDED**: sempre as retome explicitamente
+> 5. **Dynamic Tables** = abordagem `TARGET_LAG` declarativa: mais simples que Streams + Tasks
 > 6. DAGs de Tasks: tasks filhas definidas com `AFTER <task_pai>`

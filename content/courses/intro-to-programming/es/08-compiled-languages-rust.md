@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Lenguajes de Programación Compilados con Rust
 
-JavaScript y Python son interpretados — un intérprete lee y ejecuta tu código línea por línea en tiempo de ejecución. Los lenguajes compilados como Rust funcionan de manera diferente: un compilador traduce todo tu programa a código máquina antes de ejecutarlo.
+JavaScript y Python son interpretados: un intérprete lee y ejecuta tu código línea por línea en tiempo de ejecución. Los lenguajes compilados como Rust funcionan de manera diferente: un compilador traduce todo tu programa a código máquina antes de ejecutarlo.
 
 ## Interpretado vs Compilado
 
@@ -34,7 +34,7 @@ fn main() {
 
 ## Sistema de Tipos de Rust
 
-Rust está tipado estáticamente — el compilador conoce el tipo de cada variable:
+Rust está tipado estáticamente: el compilador conoce el tipo de cada variable:
 
 ```rust
 fn main() {
@@ -68,7 +68,7 @@ Esta inmutabilidad por defecto es una decisión de diseño deliberada que previe
 
 ## Propiedad y Préstamo
 
-La característica más distintiva de Rust es su sistema de propiedad — garantiza seguridad de memoria sin un recolector de basura.
+La característica más distintiva de Rust es su sistema de propiedad: garantiza seguridad de memoria sin un recolector de basura.
 
 ### Reglas de Propiedad
 
@@ -88,7 +88,7 @@ fn calcular_longitud(s: &String) -> usize {
 }
 ```
 
-El símbolo `&` crea una **referencia** — presta el valor sin tomar posesión.
+El símbolo `&` crea una **referencia**: presta el valor sin tomar posesión.
 
 ### Referencias Mutables
 
@@ -162,4 +162,4 @@ fn main() {
 
 ## Próximos Pasos
 
-La próxima lección introduce programación declarativa — una forma diferente de pensar donde describes qué quieres, no cómo obtenerlo.
+La próxima lección introduce programación declarativa: una forma diferente de pensar donde describes qué quieres, no cómo obtenerlo.

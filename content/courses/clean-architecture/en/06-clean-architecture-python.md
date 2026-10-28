@@ -11,7 +11,7 @@ difficulty: "intermediate"
 Python is an excellent language for Clean Architecture. Its dynamic typing, Protocol classes, and simple syntax make it easy to define boundaries, invert dependencies, and keep business logic pure.
 
 > [!NOTE]
-> Python's philosophy aligns naturally with Clean Architecture: simplicity, readability, and practicality. You don't need a heavyweight DI container — Python's duck typing and dataclasses are enough.
+> Python's philosophy aligns naturally with Clean Architecture: simplicity, readability, and practicality. You don't need a heavyweight DI container: Python's duck typing and dataclasses are enough.
 
 ## Project Structure
 
@@ -69,7 +69,7 @@ my_project/
 
 ## Using Protocols for Boundaries
 
-Python's `typing.Protocol` (PEP 544) provides structural subtyping — you don't need explicit inheritance:
+Python's `typing.Protocol` (PEP 544) provides structural subtyping; you don't need explicit inheritance:
 
 ```python
 from typing import Protocol, runtime_checkable
@@ -129,7 +129,7 @@ class FakeOrderRepository:
 ```
 
 > [!NOTE]
-> Unlike ABCs, Protocols use **structural subtyping** — an object is considered to implement the protocol if it has the right methods, regardless of its class hierarchy. This is more Pythonic and flexible.
+> Unlike ABCs, Protocols use **structural subtyping**: an object is considered to implement the protocol if it has the right methods, regardless of its class hierarchy. This is more Pythonic and flexible.
 
 ## Dataclasses for DTOs and Entities
 
@@ -243,7 +243,7 @@ class PlaceOrderOutput:
 
 ## Dependency Injection Without a Framework
 
-Python doesn't need a DI framework — manual injection is clean and explicit:
+Python doesn't need a DI framework: manual injection is clean and explicit:
 
 ```python
 # --- composition_root.py ---
@@ -735,7 +735,7 @@ class PlaceOrderOutput(BaseModel):
 
 | Concern | Python Solution | Impact |
 |---------|---------------|--------|
-| Boundary overhead | Protocol calls | Minimal — Python dynamic dispatch |
+| Boundary overhead | Protocol calls | Minimal: Python dynamic dispatch |
 | DI container | Manual injection | Zero overhead |
 | DTO creation | Dataclass instantiation | Negligible |
 | Repository pattern | SQL vs ORM | ORM adds 10-30% latency |
@@ -846,4 +846,4 @@ flowchart LR
 8. **Unit of Work pattern**: Implement a `UnitOfWork` context manager and use it in a repository. Write a test that verifies rollback on failure.
 
 > [!SUCCESS]
-> Python and Clean Architecture are a natural fit. Python's Protocol, dataclasses, and simplicity let you focus on what matters — clean, testable business logic.
+> Python and Clean Architecture are a natural fit. Python's Protocol, dataclasses, and simplicity let you focus on what matters: clean, testable business logic.

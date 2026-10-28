@@ -1,15 +1,15 @@
 ---
-title: "Domain 5.3 — Snowflake Marketplace and Native Apps"
-description: "Explore the Snowflake Marketplace ecosystem — public and private data listings, how to publish and consume data products, and the Native App Framework."
+title: "Domain 5.3, Snowflake Marketplace and Native Apps"
+description: "Explore the Snowflake Marketplace ecosystem, public and private data listings, how to publish and consume data products, and the Native App Framework."
 order: 19
 difficulty: intermediate
 duration: 45
 ---
 
-# Domain 5.3 — Snowflake Marketplace and Native Apps
+# Domain 5.3: Snowflake Marketplace and Native Apps
 
 > [!NOTE]
-> **Exam Domain 5.3** — *Snowflake Marketplace and Data Exchange* contributes to the **Data Collaboration** domain, which is **10%** of the COF-C03 exam.
+> **Exam Domain 5.3**: *Snowflake Marketplace and Data Exchange* contributes to the **Data Collaboration** domain, which is **10%** of the COF-C03 exam.
 
 ---
 
@@ -42,15 +42,15 @@ flowchart TD
 
 ## 1. What Is the Snowflake Marketplace?
 
-The **Snowflake Marketplace** is a global catalogue of live, ready-to-query data products accessible directly within Snowflake. Consumers can discover, trial, and attach datasets without any ETL — the data lives in the provider's account and is served via Secure Data Sharing.
+The **Snowflake Marketplace** is a global catalogue of live, ready-to-query data products accessible directly within Snowflake. Consumers can discover, trial, and attach datasets without any ETL: the data lives in the provider's account and is served via Secure Data Sharing.
 
 ### Key Characteristics
 
 | Property | Detail |
 |---|---|
-| Data movement | **Zero** — no copy, no pipeline |
-| Freshness | **Live** — always the provider's latest data |
-| Onboarding | Seconds — "Get" → database mounted instantly |
+| Data movement | **Zero**: no copy, no pipeline |
+| Freshness | **Live**: always the provider's latest data |
+| Onboarding | Seconds: "Get" → database mounted instantly |
 | Trial data | Providers can offer free sample datasets |
 | Paid listings | Billed through Snowflake; provider sets price |
 
@@ -70,7 +70,7 @@ flowchart LR
 
 ### Public Listings
 
-Open to any Snowflake customer. Consumers search the Marketplace, click **Get**, and receive an imported database — no approval step required for free listings.
+Open to any Snowflake customer. Consumers search the Marketplace, click **Get**, and receive an imported database: no approval step required for free listings.
 
 ### Private Listings
 
@@ -131,13 +131,13 @@ WHERE date >= CURRENT_DATE - 7;
 ```
 
 > [!NOTE]
-> The **consumer pays compute** (virtual warehouse credits) to query marketplace data. The **provider pays storage** for the underlying data. There are no per-query royalty charges at the infrastructure level — licensing/pricing is handled at the listing level.
+> The **consumer pays compute** (virtual warehouse credits) to query marketplace data. The **provider pays storage** for the underlying data. There are no per-query royalty charges at the infrastructure level: licensing/pricing is handled at the listing level.
 
 ---
 
 ## 5. Data Exchange
 
-A **Data Exchange** is a **private, invitation-only marketplace** that an organisation sets up for a defined group of providers and consumers — for example, a consortium of industry partners.
+A **Data Exchange** is a **private, invitation-only marketplace** that an organisation sets up for a defined group of providers and consumers: for example, a consortium of industry partners.
 
 ```mermaid
 flowchart LR
@@ -161,7 +161,7 @@ flowchart LR
 
 ## 6. Native App Framework
 
-The **Snowflake Native App Framework** enables providers to bundle **application logic** (stored procedures, UDFs, Streamlit UI) together with data into a single installable app — delivered via the Marketplace.
+The **Snowflake Native App Framework** enables providers to bundle **application logic** (stored procedures, UDFs, Streamlit UI) together with data into a single installable app: delivered via the Marketplace.
 
 ### Architecture
 
@@ -189,7 +189,7 @@ flowchart TD
 
 | Property | Detail |
 |---|---|
-| Runs in | **Consumer's account** — provider code executes there |
+| Runs in | **Consumer's account**: provider code executes there |
 | Data access | App can access consumer's data (with permission) |
 | Provider visibility | Provider **cannot** see consumer's data |
 | Versioning | Provider pushes updates; consumer upgrades |
@@ -230,7 +230,7 @@ flowchart TD
 | | Secure Data Share | Native App |
 |---|---|---|
 | What is delivered | Data only | Data + code + UI |
-| Runs in consumer account? | No — consumer queries provider storage | **Yes** |
+| Runs in consumer account? | No: consumer queries provider storage | **Yes** |
 | Consumer data access | None | App can request access |
 | Streamlit UI | No | **Yes** |
 | Versioning | Not applicable | **Yes** |
@@ -257,7 +257,7 @@ flowchart LR
 
 > [!SUCCESS]
 > **Key Takeaways for the Exam**
-> - Marketplace listings are **zero-copy and live** — same sharing mechanism as Secure Data Sharing.
+> - Marketplace listings are **zero-copy and live**: same sharing mechanism as Secure Data Sharing.
 > - **Public listings**: open to all; **Private listings**: invite-only; **Native App listings**: code + data.
 > - **Data Exchange**: private marketplace run by an organisation for a controlled group.
 > - **Native Apps**: provider bundles code + data into an installable app that runs in the **consumer's account**.
@@ -272,7 +272,7 @@ flowchart LR
 
 - A) A full copy is transferred to the consumer's account
 - B) A nightly ETL pipeline is configured
-- C) **A read-only database is mounted — no data is copied** ✅
+- C) **A read-only database is mounted: no data is copied** ✅
 - D) The consumer downloads a CSV export
 
 ---
@@ -286,7 +286,7 @@ flowchart LR
 
 ---
 
-**3.** An organisation wants to create a private data hub for 20 industry partners — not open to all Snowflake customers. Which feature should they use?
+**3.** An organisation wants to create a private data hub for 20 industry partners: not open to all Snowflake customers. Which feature should they use?
 
 - A) Snowflake Marketplace
 - B) **Data Exchange** ✅
@@ -326,5 +326,5 @@ flowchart LR
 
 - A) Snowflake does not support paid listings
 - B) Only annual flat-fee subscriptions
-- C) **Free, flat-fee, or usage-based pricing — billed through Snowflake** ✅
+- C) **Free, flat-fee, or usage-based pricing: billed through Snowflake** ✅
 - D) Providers must manage billing outside of Snowflake

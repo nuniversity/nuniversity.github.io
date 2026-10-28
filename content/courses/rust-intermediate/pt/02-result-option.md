@@ -1,12 +1,12 @@
 ---
-title: "Result e Option — Combinadores de Tratamento de Erros"
+title: "Result e Option, Combinadores de Tratamento de Erros"
 description: "Domine os tipos Result e Option com unwrap, expect, map, and_then, ok_or e cadeias de combinadores"
 order: 2
 duration: "45 minutos"
 difficulty: "intermediário"
 ---
 
-# Result e Option — Combinadores de Tratamento de Erros
+# Result e Option: Combinadores de Tratamento de Erros
 
 `Result<T, E>` e `Option<T>` são os dois enums mais importantes em Rust. Eles representam computações fallíveis e valores opcionais, respectivamente.
 
@@ -17,7 +17,7 @@ difficulty: "intermediário"
 | `Option<T>` | `Some(T)` | `None` | Valor pode estar ausente |
 | `Result<T, E>` | `Ok(T)` | `Err(E)` | Operação pode falhar |
 
-## Desencapsulamento — A Muleta
+## Desencapsulamento: A Muleta
 
 ```rust
 fn main() {
@@ -61,7 +61,7 @@ fn computar_padrao() -> i32 {
 }
 ```
 
-## Mapeamento — Transforme o Interior
+## Mapeamento: Transforme o Interior
 
 ```rust
 fn main() {
@@ -234,7 +234,7 @@ fn analisar_primeiro_numero(linhas: &[String]) -> Option<i32> {
 }
 ```
 
-### Misturando Result e ? — O Problema
+### Misturando Result e ?, O Problema
 
 ```rust
 // Isso não compila — Result e Option não se misturam com ?

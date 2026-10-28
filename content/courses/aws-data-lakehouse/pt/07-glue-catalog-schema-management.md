@@ -1,13 +1,13 @@
 ---
 title: "Glue Data Catalog: Crawlers, Partições e Gestão de Schema"
-description: "Domine a camada de metadados do lakehouse: o modelo de objetos do AWS Glue Data Catalog (database, table, partitions, StorageDescriptor, SerDe, SchemaReference), como crawlers classificam e escrevem schema (ordem de classificadores customizados antes dos built-ins, pontuação de certainty, recrawls incrementais e por eventos do S3, o padrão de propriedade exclusiva, e a precificação de DPU com o piso de 10 minutos), como particionamento e partition indexes mantêm o GetPartitions barato, como versionamento de tabelas mais tabelas shadow blue/green e trocas via resource link permitem mudar um schema sem quebrar consumidores, o Glue Schema Registry e seus oito modos de compatibilidade para SerDes de streaming e lote, a passagem de permissões para o Lake Formation que decide quem é dono de quê, a ligação do Glue como catálogo do Iceberg com as tabelas de metadados do Athena, e um fluxo completo de crawl até consulta no Athena com uma história de evolução de schema segura versus quebradora — sete exemplos resolvidos com preços de outubro de 2026, material de caso do BMW Group, uma caixa de atualização de 2026 com fontes e doze questões no estilo de exame."
+description: "Domine a camada de metadados do lakehouse: o modelo de objetos do AWS Glue Data Catalog (database, table, partitions, StorageDescriptor, SerDe, SchemaReference), como crawlers classificam e escrevem schema (ordem de classificadores customizados antes dos built-ins, pontuação de certainty, recrawls incrementais e por eventos do S3, o padrão de propriedade exclusiva, e a precificação de DPU com o piso de 10 minutos), como particionamento e partition indexes mantêm o GetPartitions barato, como versionamento de tabelas mais tabelas shadow blue/green e trocas via resource link permitem mudar um schema sem quebrar consumidores, o Glue Schema Registry e seus oito modos de compatibilidade para SerDes de streaming e lote, a passagem de permissões para o Lake Formation que decide quem é dono de quê, a ligação do Glue como catálogo do Iceberg com as tabelas de metadados do Athena, e um fluxo completo de crawl até consulta no Athena com uma história de evolução de schema segura versus quebradora, sete exemplos resolvidos com preços de outubro de 2026, material de caso do BMW Group, uma caixa de atualização de 2026 com fontes e doze questões no estilo de exame."
 order: 7
 difficulty: "intermediate"
 duration: "55 min"
 ---
 # Glue Data Catalog: Crawlers, Partições e Gestão de Schema
 
-As lições 02 até 06 colocaram bytes no Amazon S3: classes de armazenamento, formatos, formatos de tabela, ingestão em lote e streaming. Nada disso é consultável por um usuário de SQL até que outra coisa exista — uma **descrição** de onde os arquivos estão, o que eles contêm, como desserializá-los e quais deles valem a pena ler. Essa descrição é o **AWS Glue Data Catalog**, e esta lição é sobre possuí-la: o que um objeto de catálogo de fato é, como um crawler escreve um, como partições e partition indexes evitam que o `GetPartitions` carregue o mundo inteiro, como versões de tabela permitem que uma mudança de schema seja auditada e movida para *frente*, como o Schema Registry estende a mesma disciplina para streams, e onde o Lake Formation tira as permissões de você e as dá para uma tabela de grants.
+As lições 02 até 06 colocaram bytes no Amazon S3: classes de armazenamento, formatos, formatos de tabela, ingestão em lote e streaming. Nada disso é consultável por um usuário de SQL até que outra coisa exista: uma **descrição** de onde os arquivos estão, o que eles contêm, como desserializá-los e quais deles valem a pena ler. Essa descrição é o **AWS Glue Data Catalog**, e esta lição é sobre possuí-la: o que um objeto de catálogo de fato é, como um crawler escreve um, como partições e partition indexes evitam que o `GetPartitions` carregue o mundo inteiro, como versões de tabela permitem que uma mudança de schema seja auditada e movida para *frente*, como o Schema Registry estende a mesma disciplina para streams, e onde o Lake Formation tira as permissões de você e as dá para uma tabela de grants.
 
 ```text
 ====================================================================
@@ -51,16 +51,16 @@ As lições 02 até 06 colocaram bytes no Amazon S3: classes de armazenamento, f
 
 Nesta lição você vai:
 
-- ler o **modelo de objetos do Data Catalog** — catalog, database, table, partitions, `StorageDescriptor`, `SerDeInfo`, `SchemaReference`, `Parameters`, `TableType` — e os limites de bytes que o moldam;
+- ler o **modelo de objetos do Data Catalog**, catalog, database, table, partitions, `StorageDescriptor`, `SerDeInfo`, `SchemaReference`, `Parameters`, `TableType`, e os limites de bytes que o moldam;
 - rodar um crawler na sua cabeça: **classificadores customizados na ordem que você especifica, o primeiro sucesso vence, pontuação de certainty**, heurísticas de agrupamento por pasta e os três ajustes de política (`RecrawlPolicy`, `SchemaChangePolicy`, `Configuration`);
-- precificar um crawler corretamente — **$0.44 por DPU-hour, por segundo, com piso de 10 minutos** — e saber que a API é uma alternativa gratuita;
+- precificar um crawler corretamente, **$0.44 por DPU-hour, por segundo, com piso de 10 minutos**, e saber que a API é uma alternativa gratuita;
 - separar **crawls incrementais** de **crawls por eventos do S3**, incluindo o que cada um é cego para ver;
 - defender um **padrão de design de propriedade exclusiva** para crawlers sem pretender que a AWS entrega um toggle de "crawler exclusivo";
 - usar **partition indexes** do jeito que o motor realmente os usa: regra da primeira key, só `AND`, máximo de três por tabela e o flag de opt-in do Athena;
 - operar **versões de tabela**: o que o `UpdateTable` arquiva, por que não existe rollback e como um **deploy blue/green de metadados** é montado a partir de uma tabela shadow mais uma troca de resource link;
 - governar schema de streaming com o **Glue Schema Registry**: hierarquia, cotas, os oito modos de compatibilidade e o caminho de SerDe de producer/consumer;
 - fazer a passagem para o **Lake Formation** de forma limpa: quem é dono dos objetos, quem é dono dos grants e o que um resource link dá e não dá para você;
-- ligar o **Glue como catálogo do Iceberg** e ler as tabelas de metadados de Iceberg do Athena — incluindo onde o Lake Formation as bloqueia;
+- ligar o **Glue como catálogo do Iceberg** e ler as tabelas de metadados de Iceberg do Athena: incluindo onde o Lake Formation as bloqueia;
 - executar um fluxo **crawl → registro → Athena** de ponta a ponta e depois classificar uma mudança de schema como **segura ou quebradora**;
 - estudar o caso do **BMW Group** e uma **caixa de atualização de outubro de 2026 com fontes**;
 - praticar com **12 questões no estilo de exame** mais três verificações interativas.
@@ -71,7 +71,7 @@ Nesta lição você vai:
 
 ### 1.1 A árvore, e a frase da qual tudo depende
 
-A AWS descreve o Data Catalog como um serviço que *"captura e gerencia automaticamente o schema das suas fontes de dados, incluindo inferência, evolução e versionamento de schema"* e lista os consumidores dele como Amazon Athena (*"Armazene e consulte metadados de tabelas no Data Catalog para os dados do Amazon S3 usando SQL"*), Amazon Lake Formation (*"Defina e gerencie centralmente políticas de acesso a dados de granulação fina"*) e Amazon EMR (*"Acesse fontes de dados definidas no Data Catalog para processamento de big data"*) (docs do AWS Glue Data Catalog, acesso em 2026-10). Uma camada de metadados, vários motores — essa é a aposta arquitetural inteira.
+A AWS descreve o Data Catalog como um serviço que *"captura e gerencia automaticamente o schema das suas fontes de dados, incluindo inferência, evolução e versionamento de schema"* e lista os consumidores dele como Amazon Athena (*"Armazene e consulte metadados de tabelas no Data Catalog para os dados do Amazon S3 usando SQL"*), Amazon Lake Formation (*"Defina e gerencie centralmente políticas de acesso a dados de granulação fina"*) e Amazon EMR (*"Acesse fontes de dados definidas no Data Catalog para processamento de big data"*) (docs do AWS Glue Data Catalog, acesso em 2026-10). Uma camada de metadados, vários motores: essa é a aposta arquitetural inteira.
 
 A propriedade que sustenta tudo é esta: **uma tabela de catálogo não é dados.** Ela é um registro de *como encontrar e interpretar* dados que vivem em outro lugar, quase sempre um prefixo S3. Apagar a tabela não apaga os objetos; dois databases podem apontar para o mesmo prefixo; e uma tabela cujo `Location` está errado ainda "existe" e ainda retorna zero linhas.
 
@@ -96,21 +96,21 @@ flowchart TD
 | `StorageDescriptor` | **O contrato físico**: colunas, location, formato de arquivo, SerDe | `Location` ≤ **2056 bytes**; `AdditionalLocations` carrega os caminhos de tabelas Delta |
 | `PartitionKeys` | A ordem das chaves estilo Hive, separada das colunas de dados | *"Apenas tipos primitivos são suportados como partition keys"*; para o Athena sem chaves você ainda precisa passar uma **lista vazia** |
 | `Parameters` | Propriedades livres da tabela | *"Cada valor é uma string UTF-8, com no máximo **512000** bytes"* |
-| `TableType` | Quem se considera o dono | `EXTERNAL_TABLE` para tabelas criadas pelo Glue; `GOVERNED` — *"Usado pelo AWS Lake Formation. O AWS Glue Data Catalog entende `GOVERNED`"* |
+| `TableType` | Quem se considera o dono | `EXTERNAL_TABLE` para tabelas criadas pelo Glue; `GOVERNED`: *"Usado pelo AWS Lake Formation. O AWS Glue Data Catalog entende `GOVERNED`"* |
 | `IsRegisteredWithLakeFormation` | Se as permissões do LF se aplicam | Flag booleana definida no registro |
 | `VersionId` | Qual revisão esta linha é | Inteiro como string, incrementado em 1 |
 | `IcebergTableMetadata` | O estado Iceberg mais recente | format version, schemas, partition specifications, sort orders |
 
 Dentro do `StorageDescriptor`, as peças que você realmente vai tocar são poucas:
 
-- **`Columns`** — a lista inline de colunas. Pode legitimamente estar *vazia*, porque…
-- **`SchemaReference`** — *"Um objeto que referencia um schema armazenado no AWS Glue Schema Registry. Ao criar uma tabela, você pode passar uma lista vazia de colunas para o schema e usar uma schema reference."* Esta é a dobradiça entre o catálogo de lote e o registry de streaming (Seção 5).
-- **`Location`** — a URI do S3 (ou o handle JDBC/DynamoDB) que a tabela lê.
-- **`InputFormat` / `OutputFormat`** — nomes de classes Hive como `TextInputFormat` / `IgnoreKeyTextOutputFormat`. O catálogo é com formato Hive de propósito: nomes em minúsculas, classes de I/O Hive, nomes de SerDe Hive.
-- **`SerdeInfo`** — `Name`, `Parameters` e `SerializationLibrary`, por exemplo `org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe`, ou `LazySimpleSerDe` (o padrão do classificador CSV built-in) e `OpenCSVSerde` (o que você troca quando os campos do CSV são entre aspas).
-- **`Compressed`, `BucketColumns`, `SortColumns`, `SkewedInfo`, `StoredAsSubDirectories`** — dicas físicas do Hive que o motor pode ou não explorar.
+- **`Columns`**: a lista inline de colunas. Pode legitimamente estar *vazia*, porque…
+- **`SchemaReference`**: *"Um objeto que referencia um schema armazenado no AWS Glue Schema Registry. Ao criar uma tabela, você pode passar uma lista vazia de colunas para o schema e usar uma schema reference."* Esta é a dobradiça entre o catálogo de lote e o registry de streaming (Seção 5).
+- **`Location`**: a URI do S3 (ou o handle JDBC/DynamoDB) que a tabela lê.
+- **`InputFormat` / `OutputFormat`**: nomes de classes Hive como `TextInputFormat` / `IgnoreKeyTextOutputFormat`. O catálogo é com formato Hive de propósito: nomes em minúsculas, classes de I/O Hive, nomes de SerDe Hive.
+- **`SerdeInfo`**: `Name`, `Parameters` e `SerializationLibrary`, por exemplo `org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe`, ou `LazySimpleSerDe` (o padrão do classificador CSV built-in) e `OpenCSVSerde` (o que você troca quando os campos do CSV são entre aspas).
+- **`Compressed`, `BucketColumns`, `SortColumns`, `SkewedInfo`, `StoredAsSubDirectories`**: dicas físicas do Hive que o motor pode ou não explorar.
 
-- **📚 Você sabia?** Os `Parameters` da tabela são onde os achados do crawler pousam, e a AWS diz exatamente quais deles são para você: *"Esperamos que os usuários consumam as propriedades `classification` e `compressionType`. Outras propriedades, incluindo estimativas de tamanho da tabela, são usadas para cálculos internos, e não garantimos a precisão delas."* Então `recordCount`, `sizeKey`, `objectCount` e `averageRecordSize` são dicas para a aritmética do próprio crawler — nunca insumos de um plano de capacidade. As duas nas quais você deve se basear são `classification` (como fazer o parse dos arquivos) e `compressionType` (se um *arquivo inteiro* foi comprimido — a compressão interna do Parquet deliberadamente não o preenche) (docs de propriedades de tabela do crawler do AWS Glue, acesso em 2026-10).
+- **📚 Você sabia?** Os `Parameters` da tabela são onde os achados do crawler pousam, e a AWS diz exatamente quais deles são para você: *"Esperamos que os usuários consumam as propriedades `classification` e `compressionType`. Outras propriedades, incluindo estimativas de tamanho da tabela, são usadas para cálculos internos, e não garantimos a precisão delas."* Então `recordCount`, `sizeKey`, `objectCount` e `averageRecordSize` são dicas para a aritmética do próprio crawler, nunca insumos de um plano de capacidade. As duas nas quais você deve se basear são `classification` (como fazer o parse dos arquivos) e `compressionType` (se um *arquivo inteiro* foi comprimido, a compressão interna do Parquet deliberadamente não o preenche) (docs de propriedades de tabela do crawler do AWS Glue, acesso em 2026-10).
 
 ```text
 E0  LENDO UM OBJETO DE TABELA (o que importa, o que é decoração)
@@ -169,7 +169,7 @@ Um classificador *"lê os dados em um data store. Se reconhecer o formato dos da
 
 Os classificadores built-in são tentados em uma ordem documentada que passa por Avro, ORC, Parquet, JSON, BSON, XML, Amazon Ion, formatos de log, CSV, Redshift, MySQL, PostgreSQL, Oracle, SQL Server e DynamoDB. Formatos comprimidos que ainda podem ser classificados são **ZIP (apenas arquivos single-file), BZIP, GZIP, LZ4 e Snappy**.
 
-O CSV tem três gates documentados que derrubam as pessoas: o schema precisa ter **pelo menos duas colunas e duas linhas**; as heurísticas de header precisam casar (colunas de header inteiro lidas como STRING, menos de 150 caracteres exceto a última, nomes válidos por regex, e o header deve diferir das linhas de dados) ou as colunas degradam para `col1`, `col2`, …; e o classificador CSV built-in emite **`LazySimpleSerDe`**, que estraga strings entre aspas — *"se os dados do CSV contiverem strings entre aspas, edite a definição da tabela e troque a biblioteca do SerDe para `OpenCSVSerde`."*
+O CSV tem três gates documentados que derrubam as pessoas: o schema precisa ter **pelo menos duas colunas e duas linhas**; as heurísticas de header precisam casar (colunas de header inteiro lidas como STRING, menos de 150 caracteres exceto a última, nomes válidos por regex, e o header deve diferir das linhas de dados) ou as colunas degradam para `col1`, `col2`, …; e o classificador CSV built-in emite **`LazySimpleSerDe`**, que estraga strings entre aspas: *"se os dados do CSV contiverem strings entre aspas, edite a definição da tabela e troque a biblioteca do SerDe para `OpenCSVSerde`."*
 
 E a armadilha de prateleira longa: *"Se você mudar a definição de um classificador, quaisquer dados que foram previamente crawled usando o classificador não são reclassificados."* Editar a regra não reescreve o histórico; você precisa apontar um crawler para os dados antigos de novo.
 
@@ -194,7 +194,7 @@ Nomes gerados por crawler seguem regras duras: *"Apenas caracteres alfanumérico
 
 Agrupamento é votação majoritária, não regra: *"Quando a maioria dos schemas em um nível de pasta é similar, o crawler cria partições de uma tabela em vez de tabelas separadas. Para influenciar o crawler a criar tabelas separadas, adicione a pasta raiz de cada tabela como um data store separado."* Erre isso e você herda o aviso explícito da AWS: *"Se objetos tiverem schemas diferentes, o Athena não reconhece objetos diferentes dentro do mesmo prefixo como tabelas separadas… Isso pode levar a consultas no Athena que retornam zero resultados."*
 
-- **📚 Você sabia?** O crawler é o caminho padrão, não o único. A página de preços diz isso com todas as letras: *"O uso dos crawlers do Amazon Glue é opcional, e você pode popular o Amazon Glue Data Catalog diretamente pela API."* Isso importa para custo e para controle — o `CreateTable` escreve exatamente o schema que você pretende, sem loteria de classificador, sem votação majoritária de pasta e sem piso de cobrança de 10 minutos. Times que curam um punhado de tabelas de alto valor devem escrevê-las à mão e reservar os crawlers para a cauda longa (página de preços do AWS Glue e mirror da partição China, acesso em 2026-10-11).
+- **📚 Você sabia?** O crawler é o caminho padrão, não o único. A página de preços diz isso com todas as letras: *"O uso dos crawlers do Amazon Glue é opcional, e você pode popular o Amazon Glue Data Catalog diretamente pela API."* Isso importa para custo e para controle, o `CreateTable` escreve exatamente o schema que você pretende, sem loteria de classificador, sem votação majoritária de pasta e sem piso de cobrança de 10 minutos. Times que curam um punhado de tabelas de alto valor devem escrevê-las à mão e reservar os crawlers para a cauda longa (página de preços do AWS Glue e mirror da partição China, acesso em 2026-10-11).
 
 ### 2.4 Políticas de recrawl: incremental versus evento do S3
 
@@ -206,14 +206,14 @@ São duas otimizações diferentes, e elas falham em duas direções diferentes.
 | Execuções seguintes | Adiciona **apenas partições novas** | Lista **apenas a subpasta que disparou o evento** |
 | Cego para | Modificações **e** exclusões de partições existentes | Qualquer coisa que não produziu um evento; partições excluídas são recriadas a menos que *"All object removal events"* estejam configurados |
 | Força | `UpdateBehavior=LOG`, `DeleteBehavior=LOG`; *"você não pode mudar os data stores alvo do Amazon S3 ao editar o crawler"* | *"Apenas um único alvo é suportado pelo crawler"*; alvos do Data Catalog precisam estar todos no mesmo bucket |
-| Teto | — | **100.000 mensagens por crawl**; curinga `s3://%` não suportado; SQS em uma VPC privada não suportado |
+| Teto |: | **100.000 mensagens por crawl**; curinga `s3://%` não suportado; SQS em uma VPC privada não suportado |
 | Forma de custo | Uma execução agendada por vez | *"Não haverá custo se não houver eventos na fila"* |
 
 A forma da CLI para o modo incremental é `--recrawl-policy RecrawlBehavior=CRAWL_NEW_FOLDERS_ONLY --schema-change-policy UpdateBehavior=LOG,DeleteBehavior=LOG`.
 
 ### 2.5 Política de mudança de schema: três comportamentos, um documento JSON
 
-Por padrão *"crawlers atualizam o schema no Data Catalog para casar com a fonte de dados sendo crawled"* — o que significa que um retipo em um arquivo novo pode reescrever sua tabela em silêncio e cunhar uma nova versão. Os ajustes da API são `SchemaChangePolicy.UpdateBehavior ∈ {LOG, UPDATE_IN_DATABASE}` e `DeleteBehavior ∈ {LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE}`. O *"Add new columns only"* e o *"Ignorar a mudança e não atualizar a tabela no Data Catalog"* da console são faces de UI dos mesmos campos, expressos no documento `Configuration`:
+Por padrão *"crawlers atualizam o schema no Data Catalog para casar com a fonte de dados sendo crawled"*, o que significa que um retipo em um arquivo novo pode reescrever sua tabela em silêncio e cunhar uma nova versão. Os ajustes da API são `SchemaChangePolicy.UpdateBehavior ∈ {LOG, UPDATE_IN_DATABASE}` e `DeleteBehavior ∈ {LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE}`. O *"Add new columns only"* e o *"Ignorar a mudança e não atualizar a tabela no Data Catalog"* da console são faces de UI dos mesmos campos, expressos no documento `Configuration`:
 
 ```json
 {
@@ -233,7 +233,7 @@ Por padrão *"crawlers atualizam o schema no Data Catalog para casar com a fonte
 > ⚠️ **Três armadilhas de crawler que aparecem em produção, não em tutoriais:**
 > - **`UpdateBehavior=LOG` não para tabelas novas nem partições novas.** Ele para *updates em tabelas existentes*. Adicione `"Partitions": {"AddOrUpdateBehavior": "InheritFromTable"}` ao documento `Configuration` se você também quiser que os metadados das partições fiquem congelados.
 > - **Editar um classificador nunca reclassifica o histórico.** Dados previamente crawled mantêm a classificação antiga; você precisa de um novo crawler apontado para o prefixo antigo.
-> - **Dois crawlers escrevendo uma tabela é legal e com condição de corrida.** Nada na API impede isso. A única restrição de *single-writer* documentada é a regra do Iceberg na Seção 7.2 — e é exatamente por isso que o padrão de propriedade da próxima subseção é uma escolha de design que você precisa impor você mesmo.
+> - **Dois crawlers escrevendo uma tabela é legal e com condição de corrida.** Nada na API impede isso. A única restrição de *single-writer* documentada é a regra do Iceberg na Seção 7.2, e é exatamente por isso que o padrão de propriedade da próxima subseção é uma escolha de design que você precisa impor você mesmo.
 
 ### 2.6 Crawlers "exclusivos": um padrão de design, não um recurso da AWS
 
@@ -243,9 +243,9 @@ Uma nota importante de honestidade: **a AWS não entrega uma opção de crawler 
 2. **Crawlers por eventos do S3:** *"Apenas um único alvo é suportado pelo crawler, seja para alvos do Amazon S3 ou do Data Catalog."*
 3. **Crawlers com credenciais do Lake Formation:** *"Atualmente, apenas um único alvo de catálogo com uma única tabela de catálogo é permitido ao usar uma tabela do Data Catalog como alvo de um crawler."*
 
-Tudo mais amplo — "um crawler é dono de uma tabela", "uma tabela tem exatamente um writer", "o prefixo bronze é crawled apenas pelo `nightly_sales_crawler`" — é o **padrão de propriedade exclusiva**: uma convenção onde você dá a cada tabela um único crawler, um único `TablePrefix` e uma única `Configuration`, para que churn de versão e corridas de classificação não possam ocorrer. Adote-o deliberadamente; não o cite como um recurso da AWS.
+Tudo mais amplo, "um crawler é dono de uma tabela", "uma tabela tem exatamente um writer", "o prefixo bronze é crawled apenas pelo `nightly_sales_crawler`", é o **padrão de propriedade exclusiva**: uma convenção onde você dá a cada tabela um único crawler, um único `TablePrefix` e uma única `Configuration`, para que churn de versão e corridas de classificação não possam ocorrer. Adote-o deliberadamente; não o cite como um recurso da AWS.
 
-### 2.7 Exemplo resolvido E1 — o que um crawler realmente custa
+### 2.7 Exemplo resolvido E1, o que um crawler realmente custa
 
 ```text
 E1  CUSTO DE UM CRAWLER COM O PISO DE 10 MINUTOS  (us-east-1, em out 2026)
@@ -292,7 +292,7 @@ agendamento, troque para CRAWL_EVENT_MODE, ou caia no DDL do CreateTable.
 }
 ```
 
-A segunda barra assume 30 crawls disparados por evento por mês — um por dia de mudança real — no mesmo piso de $0.147. Leia como uma forma, não como uma previsão: **você está pagando por agendamentos, não por descoberta.**
+A segunda barra assume 30 crawls disparados por evento por mês, um por dia de mudança real, no mesmo piso de $0.147. Leia como uma forma, não como uma previsão: **você está pagando por agendamentos, não por descoberta.**
 
 ---
 
@@ -304,7 +304,7 @@ Segmentos de pasta estilo Hive `key=value/` são descobertos pelo crawler quando
 
 Crawlers também constroem a camada de desempenho para você: *"Um crawler cria partition indexes para alvos do Amazon S3 e do Delta Lake por padrão"*, desabilitável com `--configuration '{"Version": 1.0, "CreatePartitionIndex": false}'`.
 
-### 3.2 O que um partition index faz — e quando ele não faz nada
+### 3.2 O que um partition index faz, e quando ele não faz nada
 
 Sem um index, *"o AWS Glue carrega todas as partições da tabela e depois filtra as partições carregadas usando a expressão da consulta."* Com um, o catálogo busca um subconjunto. As regras são estreitas e todas testáveis:
 
@@ -312,16 +312,16 @@ Sem um index, *"o AWS Glue carrega todas as partições da tabela e depois filtr
 |---|---|
 | O que é | *"Um partition index é uma sublista de partition keys definidas na tabela"* |
 | Máximo por tabela | **3** |
-| Tipos de key suportados | Date (`YYYY-MM-DD`, intervalo `0000-01-01`–`9999-12-31`), String/Char/Varchar, Numérico (int, bigint, long, tinyint, smallint) |
+| Tipos de key suportados | Date (`YYYY-MM-DD`, intervalo `0000-01-01`: `9999-12-31`), String/Char/Varchar, Numérico (int, bigint, long, tinyint, smallint) |
 | Operadores lógicos | *"A solução de indexação atualmente suporta apenas o operador lógico `AND`. Sub-expressões com os operadores `LIKE`, `IN`, `OR` e `NOT` são ignoradas."* |
 | Regra da primeira key | *"A primeira key do index deve ser passada na expressão para que os indexes sejam usados no filtro."* |
 | Custo | *"Para uma tabela com 'n' partições, 1 partition index resultará em 'n' itens de partition index. 'm' partition indexes na mesma tabela resultarão em 'm*n' itens de partition index. Cada item de partition index será cobrado…"* |
-| Motores que o usam | Redshift Spectrum, Amazon EMR, AWS Glue ETL Spark DataFrames — *"…[Athena] e dynamic frames do AWS Glue ETL exigem que você siga passos extras"* |
+| Motores que o usam | Redshift Spectrum, Amazon EMR, AWS Glue ETL Spark DataFrames: *"…[Athena] e dynamic frames do AWS Glue ETL exigem que você siga passos extras"* |
 | Passo extra do Athena | `ALTER TABLE … SET TBLPROPERTIES ('partition_filtering.enabled' = 'true')` |
 | Partições criptografadas | *"Criar partition indexes para partições criptografadas não é suportado."* |
 | Memória de falha | Códigos de falha `ENCRYPTED_PARTITION_ERROR`, `INVALID_PARTITION_TYPE_DATA_ERROR`, `MISSING_PARTITION_VALUE_ERROR`, `UNSUPPORTED_PARTITION_CHARACTER_ERROR`, `INTERNAL_ERROR`; *"Cada tabela armazena os últimos 10 indexes com falha."* |
 
-E um aviso de lock-in: tabelas criadas por crawler *"não têm a variável `partition_filtering.enabled` por padrão"* — então um crawler pode construir o index e o Athena ainda o ignorará até você virar a propriedade.
+E um aviso de lock-in: tabelas criadas por crawler *"não têm a variável `partition_filtering.enabled` por padrão"*, então um crawler pode construir o index e o Athena ainda o ignorará até você virar a propriedade.
 
 ```mermaid
 flowchart TD
@@ -339,13 +339,13 @@ flowchart TD
     A2 --> OUT
 ```
 
-- **📚 Você sabia?** Partition indexes são *objetos de metadados cobráveis*, e eles se multiplicam. Uma tabela com 50.000 partições e 3 indexes consome 50.000 partições **mais 150.000 itens de index** — mais a tabela, as versões dela, o database dela. O free tier do Data Catalog conta *"uma tabela, versão de tabela, partição, partition indexes, estatísticas, database ou catálogo"* como objetos separados, então o design de index é uma decisão de custo tanto quanto de desempenho (docs de preços do AWS Glue e de partition index, acesso em 2026-10).
+- **📚 Você sabia?** Partition indexes são *objetos de metadados cobráveis*, e eles se multiplicam. Uma tabela com 50.000 partições e 3 indexes consome 50.000 partições **mais 150.000 itens de index**: mais a tabela, as versões dela, o database dela. O free tier do Data Catalog conta *"uma tabela, versão de tabela, partição, partition indexes, estatísticas, database ou catálogo"* como objetos separados, então o design de index é uma decisão de custo tanto quanto de desempenho (docs de preços do AWS Glue e de partition index, acesso em 2026-10).
 
 ### 3.3 Partition projection: a via que contorna o catálogo
 
-Existe um terceiro jeito de colocar valores de partição em uma consulta, e ele está deliberadamente fora do escopo aqui: **a partition projection do Amazon Athena**, que computa valores e localizações de partição em tempo de consulta em vez de ler metadados registrados. A própria lista de recursos do AWS Glue a coloca ao lado do partition filtering sob o título do Athena e aponta para a documentação do Athena. Esta lição é dona do lado do *catálogo* — partições registradas e os indexes sobre elas; a configuração de projeção em si pertence à lição da camada de consulta (ver Lição 09). Por agora, segure uma distinção: um index deixa o `GetPartitions` mais barato, a projeção deixa o `GetPartitions` desnecessário.
+Existe um terceiro jeito de colocar valores de partição em uma consulta, e ele está deliberadamente fora do escopo aqui: **a partition projection do Amazon Athena**, que computa valores e localizações de partição em tempo de consulta em vez de ler metadados registrados. A própria lista de recursos do AWS Glue a coloca ao lado do partition filtering sob o título do Athena e aponta para a documentação do Athena. Esta lição é dona do lado do *catálogo*: partições registradas e os indexes sobre elas; a configuração de projeção em si pertence à lição da camada de consulta (ver Lição 09). Por agora, segure uma distinção: um index deixa o `GetPartitions` mais barato, a projeção deixa o `GetPartitions` desnecessário.
 
-### 3.4 Exemplo resolvido E2 — a conta dos objetos de metadados
+### 3.4 Exemplo resolvido E2: a conta dos objetos de metadados
 
 ```text
 E2  O QUE O "FREE TIER" REALMENTE CONTA  (em out 2026)
@@ -382,13 +382,13 @@ objetos cobráveis. Derrubar o index inteiro remove 1.095.
 
 ### 4.1 O versionamento é automático e só avança
 
-Todo `UpdateTable` arquiva a linha anterior e incrementa o `VersionId` — *"Um `VersionId` é a representação em string de um inteiro. Cada versão é incrementada em 1."* A recuperação é `GetTableVersion` / `GetTableVersions` (*"Recupera uma lista de strings que identificam as versões disponíveis de uma tabela especificada"*, `MaxResults` **1–100**), cada entrada sendo um `Table` completo mais o seu `VersionId`. O serviço é documentado para *"manter um histórico de versões de schema para que você possa entender como seus dados mudaram ao longo do tempo."*
+Todo `UpdateTable` arquiva a linha anterior e incrementa o `VersionId`: *"Um `VersionId` é a representação em string de um inteiro. Cada versão é incrementada em 1."* A recuperação é `GetTableVersion` / `GetTableVersions` (*"Recupera uma lista de strings que identificam as versões disponíveis de uma tabela especificada"*, `MaxResults` **1 to 100**), cada entrada sendo um `Table` completo mais o seu `VersionId`. O serviço é documentado para *"manter um histórico de versões de schema para que você possa entender como seus dados mudaram ao longo do tempo."*
 
-### 4.2 Não existe rollback — só publicar para frente
+### 4.2 Não existe rollback: só publicar para frente
 
 Este é o fato que os times descobrem em um incidente. Uma thread do re:Post respondida pela AWS (2023-11-22, revisada pela AWS) afirma: *"Não é possível 'rollback' para uma versão anterior per se, e também não é possível deletar a versão mais recente da tabela (nem na console nem via API/CLI), então a única opção é publicar uma nova versão de schema idêntica àquela para a qual você quer restaurar."* O caminho documentado é pela console: navegue até a versão que você quer, **Edit Schema as JSON**, depois **Save as new table version**.
 
-Então "rollback" é um nome errado. O deploy de metadados é **append-only na prática**: você pode ler cada versão histórica, difar duas delas e publicar uma nova — mas não consegue remover o head.
+Então "rollback" é um nome errado. O deploy de metadados é **append-only na prática**: você pode ler cada versão histórica, difar duas delas e publicar uma nova, mas não consegue remover o head.
 
 ### 4.3 Dois padrões blue/green, ambos montados com partes documentadas
 
@@ -409,7 +409,7 @@ flowchart LR
     NOTE["Sem rollback, sem delete-latest: restaurar = publicar uma NOVA versão cujo JSON iguala o antigo"]
 ```
 
-### 4.4 Exemplo resolvido E3 — um cutover blue/green de metadados com resource link
+### 4.4 Exemplo resolvido E3: um cutover blue/green de metadados com resource link
 
 ```text
 E3  BLUE/GREEN ENTRE CONTAS EM UMA TABELA GOVERNED
@@ -477,7 +477,7 @@ A compatibilidade é imposta no registro: para todo modo exceto `DISABLED`, *"a 
     "10": "DISABLED"
   },
   "distractors": ["STRICT", "BACKWARD_COMPATIBLE", "FORWARD_ALL", "FULL_TRANSITIVE", "LATEST", "FIRST", "SCHEMA_REGISTRY", "AVRO", "JSON", "PROTOBUF", "default-registry", "SCHEMA_CHECKPOINT"],
-  "explanation": "A AWS documenta exatamente oito modos: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL. BACKWARD significa que leitores novos lidam com dados atuais + anteriores, FORWARD significa que leitores atuais lidam com dados atuais + próximos, FULL é ambos, e as variantes _ALL comparam contra todas as versões anteriores em vez de apenas o checkpoint. A validação começa na SEGUNDA versão porque não há nada com o que ser compatível na v1; DISABLED é um congelamento, que é útil como intenção e fatal como engano. NONE não faz nenhuma checagem - tudo bem para um registry de dev, nunca para um compartilhado."
+  "explanation": "A AWS documenta exatamente oito modos: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL. BACKWARD significa que leitores novos lidam com dados atuais + anteriores, FORWARD significa que leitores atuais lidam com dados atuais + próximos, FULL é ambos, e as variantes _ALL comparam contra todas as versões anteriores em vez de apenas o checkpoint. A validação começa na SEGUNDA versão porque não há nada com o que ser compatível na v1; DISABLED é um congelamento, que é útil como intenção e fatal como engano. NONE não faz nenhuma checagem: tudo bem para um registry de dev, nunca para um compartilhado."
 }
 ```
 
@@ -494,9 +494,9 @@ flowchart LR
     CAT --> ENG["Athena / Amazon EMR / Redshift Spectrum / Glue Spark"]
 ```
 
-Duas propriedades desse diagrama são fáceis de perder. Primeiro, o registry **não é só de streaming**: *"você pode criar ou atualizar tabelas e partições do AWS Glue usando schemas armazenados no registry"*, e uma tabela de catálogo pode delegar sua lista de colunas inteiramente a um `SchemaReference`. Segundo, o acesso entre contas tem uma forma dura — *"o AWS Glue Schema Registry não suporta políticas baseadas em recurso"*, então um registry entre contas é alcançado assumindo um role baseado em identidade na conta dona, não por uma política de recurso.
+Duas propriedades desse diagrama são fáceis de perder. Primeiro, o registry **não é só de streaming**: *"você pode criar ou atualizar tabelas e partições do AWS Glue usando schemas armazenados no registry"*, e uma tabela de catálogo pode delegar sua lista de colunas inteiramente a um `SchemaReference`. Segundo, o acesso entre contas tem uma forma dura: *"o AWS Glue Schema Registry não suporta políticas baseadas em recurso"*, então um registry entre contas é alcançado assumindo um role baseado em identidade na conta dona, não por uma política de recurso.
 
-### 5.3 Exemplo resolvido E4 — um exercício de compatibilidade em um schema Avro
+### 5.3 Exemplo resolvido E4: um exercício de compatibilidade em um schema Avro
 
 ```text
 E4  EXERCÍCIO DE COMPATIBILIDADE DO REGISTRY  (modo aplicado no RegisterSchemaVersion)
@@ -529,7 +529,7 @@ Notas práticas:
 --------------------------------------------------------------------
 ```
 
-- **📚 Você sabia?** O free tier do registry não é uma promoção, é a arquitetura: o Schema Registry é *"serverless e gratuito para usar"*, enquanto o Data Catalog ao lado cobra por objetos e o crawler que o popula cobra por DPU-second. Então a governança de schema mais barata na AWS é a de streaming — um time pode registrar milhares de versões Avro sob `BACKWARD_ALL` de graça e ainda gastar seis dígitos com crawlers escaneando o mesmo dado conceitual em partições (docs do AWS Glue Schema Registry e de preços, acesso em 2026-10).
+- **📚 Você sabia?** O free tier do registry não é uma promoção, é a arquitetura: o Schema Registry é *"serverless e gratuito para usar"*, enquanto o Data Catalog ao lado cobra por objetos e o crawler que o popula cobra por DPU-second. Então a governança de schema mais barata na AWS é a de streaming: um time pode registrar milhares de versões Avro sob `BACKWARD_ALL` de graça e ainda gastar seis dígitos com crawlers escaneando o mesmo dado conceitual em partições (docs do AWS Glue Schema Registry e de preços, acesso em 2026-10).
 
 ---
 
@@ -537,7 +537,7 @@ Notas práticas:
 
 ### 6.1 Um catálogo, dois donos
 
-A frase única que resolve a maior parte da confusão: *"As tabelas de metadados do AWS Lake Formation contêm informações sobre dados no data lake, incluindo informações de schema, informações de partição e localização dos dados. Estas tabelas são armazenadas no AWS Glue Data Catalog."* O Lake Formation não tem uma segunda cópia dos seus metadados — ele tem uma **camada de permissões sobre os mesmos objetos**.
+A frase única que resolve a maior parte da confusão: *"As tabelas de metadados do AWS Lake Formation contêm informações sobre dados no data lake, incluindo informações de schema, informações de partição e localização dos dados. Estas tabelas são armazenadas no AWS Glue Data Catalog."* O Lake Formation não tem uma segunda cópia dos seus metadados: ele tem uma **camada de permissões sobre os mesmos objetos**.
 
 | Preocupação | Dono | Evidência no objeto |
 |---|---|---|
@@ -564,7 +564,7 @@ O fluxo entre contas roda via **AWS RAM**: *"Se a sua conta estiver na mesma org
 Um crawler pode rodar *com* permissões do Lake Formation em vez de IAM cru do S3. O setup documentado é: registrar a localização S3 no Lake Formation; conceder a permissão **Data location** à role do crawler; conceder à role o `Create` no database de saída; adicionar `lakeformation:GetDataAccess` à role; então habilitar *"Use Lake Formation credentials for crawling Amazon S3 data source"* (`LakeFormationConfiguration.UseLakeFormationCredentials=true`). Lembre da restrição da Seção 2.6: apenas um único alvo de catálogo com uma única tabela de catálogo é permitido neste modo.
 
 > [!IMPORTANT]
-> **A passagem em uma linha:** o Glue é dono do **objeto** e das **versões** dele; o Lake Formation é dono dos **grants** naquele objeto; o IAM é dono do **principal**; o S3 é dono dos **bytes**. Um problema de permissão quase nunca é consertado na console do Glue — cheque `IsRegisteredWithLakeFormation` primeiro, depois o grant, depois o role.
+> **A passagem em uma linha:** o Glue é dono do **objeto** e das **versões** dele; o Lake Formation é dono dos **grants** naquele objeto; o IAM é dono do **principal**; o S3 é dono dos **bytes**. Um problema de permissão quase nunca é consertado na console do Glue: cheque `IsRegisteredWithLakeFormation` primeiro, depois o grant, depois o role.
 
 ---
 
@@ -574,13 +574,13 @@ Um crawler pode rodar *com* permissões do Lake Formation em vez de IAM cru do S
 
 Existem duas formas documentadas de colocar uma tabela Iceberg no catálogo:
 
-- **API do Glue** — `OpenTableFormatInput.IcebergInput` com `MetadataOperation=CREATE` (`Version` padrão 2). O objeto `Table` então carrega `IcebergTableMetadata`: format version, schemas, partition specifications, sort orders.
-- **Amazon Athena** — *"O Athena cria tabelas Iceberg v2"*, e a pista é a propriedade: defina `'table_type' = 'ICEBERG'` em `TBLPROPERTIES`. Tentar a rota de tabela externa falha: *"Executar CREATE EXTERNAL TABLE resulta na mensagem de erro External keyword not supported for table type ICEBERG."*
-- **Crawler do Glue** — aponte um crawler `IcebergTargets` para *"um caminho do Amazon S3 que contém o metadata das suas tabelas Iceberg"*; ele *"registra no Data Catalog"* e *"suporta merge de schemas entre snapshots e atualiza o local do arquivo de metadata mais recente no Amazon Glue Data Catalog."* O suporte é Apache Iceberg **1.10**, tabelas v2 e v3 incluindo `VARIANT`, `UNKNOWN`, `Geography` e `Geometry` — sujeito à **regra do sole writer** da Seção 2.6.
+- **API do Glue**: `OpenTableFormatInput.IcebergInput` com `MetadataOperation=CREATE` (`Version` padrão 2). O objeto `Table` então carrega `IcebergTableMetadata`: format version, schemas, partition specifications, sort orders.
+- **Amazon Athena**: *"O Athena cria tabelas Iceberg v2"*, e a pista é a propriedade: defina `'table_type' = 'ICEBERG'` em `TBLPROPERTIES`. Tentar a rota de tabela externa falha: *"Executar CREATE EXTERNAL TABLE resulta na mensagem de erro External keyword not supported for table type ICEBERG."*
+- **Crawler do Glue**, aponte um crawler `IcebergTargets` para *"um caminho do Amazon S3 que contém o metadata das suas tabelas Iceberg"*; ele *"registra no Data Catalog"* e *"suporta merge de schemas entre snapshots e atualiza o local do arquivo de metadata mais recente no Amazon Glue Data Catalog."* O suporte é Apache Iceberg **1.10**, tabelas v2 e v3 incluindo `VARIANT`, `UNKNOWN`, `Geography` e `Geometry`, sujeito à **regra do sole writer** da Seção 2.6.
 
 ### 7.2 Tabelas de metadados do Athena, e onde o Lake Formation as corta
 
-O Athena expõe internos do Iceberg como pseudo-tabelas anexadas ao nome real: **`$files`, `$manifests`, `$history`, `$partitions`, `$snapshots`, `$refs`** — `SELECT * FROM "dbname"."tablename$files"`. A versão do motor 3 suporta Parquet, ORC e Avro para Iceberg.
+O Athena expõe internos do Iceberg como pseudo-tabelas anexadas ao nome real: **`$files`, `$manifests`, `$history`, `$partitions`, `$snapshots`, `$refs`**: `SELECT * FROM "dbname"."tablename$files"`. A versão do motor 3 suporta Parquet, ORC e Avro para Iceberg.
 
 A pegadilha é uma fronteira de governança: *"O Lake Formation não avalia as tabelas de metadados do Iceberg. Portanto, as tabelas de metadados do Iceberg são restritas se houver quaisquer filtros de linha ou célula do Lake Formation na tabela base, ou se você não tiver permissões para ver todas as colunas na tabela base. Nestes casos, quando você consulta as tabelas de metadados do Iceberg $partitions, $files, $manifests e $snapshots, ela falha e você recebe um erro AccessDeniedException. Além disso, a coluna de metadados $path tem as mesmas restrições do Lake Formation."*
 
@@ -597,7 +597,7 @@ flowchart TD
     LF --> ERR["$partitions / $files / $manifests / $snapshots e $path lançam AccessDeniedException"]
 ```
 
-### 7.3 Exemplo resolvido E5 — promovendo o bronze para um silver Iceberg
+### 7.3 Exemplo resolvido E5: promovendo o bronze para um silver Iceberg
 
 ```text
 E5  PROMOÇÃO, LADO DO CATÁLOGO  (Amazon Athena, em out 2026)
@@ -634,7 +634,7 @@ a evolução de schema pertence.
 
 ---
 
-## 8. Exemplo resolvido E6 — crawl → registro → Athena, de ponta a ponta
+## 8. Exemplo resolvido E6: crawl → registro → Athena, de ponta a ponta
 
 ```mermaid
 flowchart LR
@@ -697,7 +697,7 @@ mínimo de 10 minutos - veja E1 antes de colocar isso em um cron.
 
 ---
 
-## 9. Exemplo resolvido E7 — evolução de schema, seguro versus quebrador
+## 9. Exemplo resolvido E7: evolução de schema, seguro versus quebrador
 
 ### 9.1 A tabela de auditoria
 
@@ -724,13 +724,13 @@ A mesma divisão em três existe do lado do crawler, e ela decide se uma mudanç
 | `LOG` | Nada existente é atualizado; humanos decidem | Tabelas curadas onde um retipo precisa ser revisado |
 | `UPDATE_IN_DATABASE` (padrão) | Update completo, nova versão cunhada | Você confia completamente no schema da fonte |
 
-Para silvers Iceberg, `ALTER TABLE ADD/DROP/CHANGE COLUMN` é metadata-only e não reescreve nada — é por isso que a evolução pertence lá em vez de um bronze dono de crawler.
+Para silvers Iceberg, `ALTER TABLE ADD/DROP/CHANGE COLUMN` é metadata-only e não reescreve nada: é por isso que a evolução pertence lá em vez de um bronze dono de crawler.
 
 ```dragdrop
 {
   "question": "Ordene os passos de uma evolução de schema SEGURA em uma tabela externa estilo Hive catalogada por um crawler do Glue (como desenhada nesta lição):",
   "items": [
-    "Classificar a mudança: aditiva (segura) ou quebradora - nunca comece rodando o crawler",
+    "Classificar a mudança: aditiva (segura) ou quebradora: nunca comece rodando o crawler",
     "Definir ou confirmar o comportamento de mudança de schema do crawler: MergeNewColumns para aditiva, LOG quando um humano precisa revisar",
     "Aplicar ALTER TABLE ... ADD COLUMNS para que a coluna nova caia depois das colunas existentes e antes das colunas de partição",
     "Escrever dados novos sob uma partição NOVA para que os arquivos antigos continuem lendo NULL para a coluna nova",
@@ -738,7 +738,7 @@ Para silvers Iceberg, `ALTER TABLE ADD/DROP/CHANGE COLUMN` é metadata-only e n�
     "Difar as versões resultantes com GetTableVersions para confirmar que apenas as colunas pretendidas mudaram"
   ],
   "correctOrder": [
-    "Classificar a mudança: aditiva (segura) ou quebradora - nunca comece rodando o crawler",
+    "Classificar a mudança: aditiva (segura) ou quebradora: nunca comece rodando o crawler",
     "Definir ou confirmar o comportamento de mudança de schema do crawler: MergeNewColumns para aditiva, LOG quando um humano precisa revisar",
     "Aplicar ALTER TABLE ... ADD COLUMNS para que a coluna nova caia depois das colunas existentes e antes das colunas de partição",
     "Escrever dados novos sob uma partição NOVA para que os arquivos antigos continuem lendo NULL para a coluna nova",
@@ -749,7 +749,7 @@ Para silvers Iceberg, `ALTER TABLE ADD/DROP/CHANGE COLUMN` é metadata-only e n�
 }
 ```
 
-- **📚 Você sabia?** A distinção segura/quebradora não é cosmética para custo: em uma tabela externa estilo Hive um `ADD COLUMNS` "seguro" não custa nada porque nenhum arquivo de dado é reescrito, enquanto em formatos sem schema-no-metadata a mesma mudança pode forçar uma reescrita. O Iceberg fica na ponta barata — o `ALTER TABLE` lá é uma operação de metadata — e é por isso que a forma recomendada é *evoluir no silver, congelar o bronze* (docs do `ALTER TABLE` do AWS Athena e de evolução de schema do Iceberg, acesso em 2026-10).
+- **📚 Você sabia?** A distinção segura/quebradora não é cosmética para custo: em uma tabela externa estilo Hive um `ADD COLUMNS` "seguro" não custa nada porque nenhum arquivo de dado é reescrito, enquanto em formatos sem schema-no-metadata a mesma mudança pode forçar uma reescrita. O Iceberg fica na ponta barata, o `ALTER TABLE` lá é uma operação de metadata, e é por isso que a forma recomendada é *evoluir no silver, congelar o bronze* (docs do `ALTER TABLE` do AWS Athena e de evolução de schema do Iceberg, acesso em 2026-10).
 
 ---
 
@@ -766,7 +766,7 @@ flowchart LR
     RAY["Glue for Ray - fechado para novos clientes 2026-04-30"] -.->|Ray no Amazon EKS| G60
 ```
 
-### Exemplo resolvido E8 — o caminho de upgrade que um time de catálogo realmente roda
+### Exemplo resolvido E8, o caminho de upgrade que um time de catálogo realmente roda
 
 ```text
 E8  GLUE 4.0 -> 6.0, CHECKLIST RELEVANTE PARA CATÁLOGO  (em out 2026)
@@ -810,37 +810,37 @@ E8  GLUE 4.0 -> 6.0, CHECKLIST RELEVANTE PARA CATÁLOGO  (em out 2026)
 ### Atualizações de 2026 (em outubro de 2026)
 
 > [!NOTE]
-> **O que mudou no Glue Data Catalog entre 2025 e outubro de 2026 — cada linha com fonte e data:**
-> - **21 de agosto de 2026 — AWS Glue 6.0 ficou GA com redução de preço de 30% e Iceberg v3.** *"AWS Glue 6.0 is now generally available, delivering a 30% price reduction and introducing full support for Apache Iceberg v3, newer versions of Apache Hudi and Delta Lake… AWS Glue 6.0 also upgrades runtime to Apache Spark 4.1, Python 3.13, and Scala 2.13."* As release notes fixam **Spark 4.1.1 / Python 3.13 / Scala 2.13.17**, **Iceberg 1.11.0 / Hudi 1.1.1 / Delta 4.2.0**, e **EMRFS foi removido**; *"Available in all AWS Commercial, AWS GovCloud (US), and AWS China regions."* (AWS News Blog, 2026-08-21; release notes do Glue, acesso em 2026-10-11.)
-> - **26 de novembro de 2025 — Glue 5.1 virou a versão padrão para jobs novos** (Spark 3.5.6, Python 3.11), então um crawler ou job novo que você crie hoje não está no 4.0 a menos que você peça (release notes / histórico de documentos do Glue, acesso em 2026-10-11).
-> - **1 de abril de 2026 — Glue 0.9, 1.0 e 2.0 atingiram end of life**, com end of support datado de 1º de junho de 2022 para 0.9/1.0: *"AWS Glue will stop existing job runs and interactive sessions on EOL versions. EOL versions will be removed from AWS Glue SDKs and APIs."* **Python shell 3.6** atingiu end of support em **31 de março de 2026**, e **Glue for Ray fechou para novos clientes em 30 de abril de 2026** (páginas de política de suporte de versões do Glue e de disponibilidade do Ray, acesso em 2026-10-11).
-> - **2026 — a ferramenta de upgrade analysis é o ponto de entrada documentado da migração**: *"AWS Glue upgrade analysis"* analisa jobs do Glue ≥ 2.0 e recomenda migração para a versão mais recente, via console ou CLI, ao lado do Spark Upgrade Agent (AWS Glue User Guide, acesso em 2026-10-11).
-> - **A partir de 13 de março de 2025 — o catálogo S3 Tables é um segundo catálogo, não o padrão.** S3 Tables vivem no **`s3tablescatalog`**, registram no Lake Formation para permissões de granulação fina, e exigem a permissão IAM **`glue:GetCatalog`** naquele catálogo ARN — o Firehose ganhou suporte a *"Glue multi-catalog hierarchy"* em **14 de maio de 2025** para poder escrever em catálogos não padrão (AWS Big Data Blog, 2025-03-13; histórico de documentos do Firehose, acesso em 2026-10-11).
+> **O que mudou no Glue Data Catalog entre 2025 e outubro de 2026: cada linha com fonte e data:**
+> - **21 de agosto de 2026: AWS Glue 6.0 ficou GA com redução de preço de 30% e Iceberg v3.** *"AWS Glue 6.0 is now generally available, delivering a 30% price reduction and introducing full support for Apache Iceberg v3, newer versions of Apache Hudi and Delta Lake… AWS Glue 6.0 also upgrades runtime to Apache Spark 4.1, Python 3.13, and Scala 2.13."* As release notes fixam **Spark 4.1.1 / Python 3.13 / Scala 2.13.17**, **Iceberg 1.11.0 / Hudi 1.1.1 / Delta 4.2.0**, e **EMRFS foi removido**; *"Available in all AWS Commercial, AWS GovCloud (US), and AWS China regions."* (AWS News Blog, 2026-08-21; release notes do Glue, acesso em 2026-10-11.)
+> - **26 de novembro de 2025: Glue 5.1 virou a versão padrão para jobs novos** (Spark 3.5.6, Python 3.11), então um crawler ou job novo que você crie hoje não está no 4.0 a menos que você peça (release notes / histórico de documentos do Glue, acesso em 2026-10-11).
+> - **1 de abril de 2026: Glue 0.9, 1.0 e 2.0 atingiram end of life**, com end of support datado de 1º de junho de 2022 para 0.9/1.0: *"AWS Glue will stop existing job runs and interactive sessions on EOL versions. EOL versions will be removed from AWS Glue SDKs and APIs."* **Python shell 3.6** atingiu end of support em **31 de março de 2026**, e **Glue for Ray fechou para novos clientes em 30 de abril de 2026** (páginas de política de suporte de versões do Glue e de disponibilidade do Ray, acesso em 2026-10-11).
+> - **2026: a ferramenta de upgrade analysis é o ponto de entrada documentado da migração**: *"AWS Glue upgrade analysis"* analisa jobs do Glue ≥ 2.0 e recomenda migração para a versão mais recente, via console ou CLI, ao lado do Spark Upgrade Agent (AWS Glue User Guide, acesso em 2026-10-11).
+> - **A partir de 13 de março de 2025, o catálogo S3 Tables é um segundo catálogo, não o padrão.** S3 Tables vivem no **`s3tablescatalog`**, registram no Lake Formation para permissões de granulação fina, e exigem a permissão IAM **`glue:GetCatalog`** naquele catálogo ARN, o Firehose ganhou suporte a *"Glue multi-catalog hierarchy"* em **14 de maio de 2025** para poder escrever em catálogos não padrão (AWS Big Data Blog, 2025-03-13; histórico de documentos do Firehose, acesso em 2026-10-11).
 > - **Preços em 2026-10-11:** crawlers, Spark ETL e Python shell a **$0.44 por DPU-hour**; requisições do Data Catalog listadas a **$1.00 por 100.000 Catalog requests** com os primeiros 1.000.000 de objetos de metadados grátis; **Glue Data Quality a $0.22 por DPU-hour**; Schema Registry e permissões do Lake Formation continuam grátis (página de preços do AWS Glue, acesso em 2026-10-11).
 
 ---
 
 ## Casos Reais
 
-### Caso A — BMW Group: o catálogo é o produto, não o subproduto
+### Caso A, BMW Group: o catálogo é o produto, não o subproduto
 
-**BMW Group (veículos conectados).** O estudo de caso da AWS abre com a escala: *"O BMW Group usa a AWS para processar 10 TB de dados diariamente de 1,2 milhão de veículos."* O trabalho anterior foi uma tentativa de 2015 — *"em 2015 o BMW Group criou um data lake centralizado on-premises que coleta e combina dados anonimizados de sensores em veículos, sistemas operacionais e data warehouses"* — que não conseguiu carregar a demanda multi-tenant.
+**BMW Group (veículos conectados).** O estudo de caso da AWS abre com a escala: *"O BMW Group usa a AWS para processar 10 TB de dados diariamente de 1,2 milhão de veículos."* O trabalho anterior foi uma tentativa de 2015, *"em 2015 o BMW Group criou um data lake centralizado on-premises que coleta e combina dados anonimizados de sensores em veículos, sistemas operacionais e data warehouses"*, que não conseguiu carregar a demanda multi-tenant.
 
-A frase que faz deste um caso da Lição 07 e não um caso de arquitetura: *"As camadas individuais de dados são armazenadas em buckets do Amazon S3, e seus schemas são registrados no AWS Glue Data Catalog."* Providers e consumidores são separados de propósito: *"Providers de dados ingerem e transformam dados com serviços da AWS como Amazon Kinesis Data Firehose, AWS Lambda, AWS Glue e Amazon EMR. Consumers de dados podem então usar serviços como Amazon Athena, Amazon SageMaker, AWS Glue e Amazon EMR."* Repare no que é compartilhado entre os dois lados — **o catálogo**, não as contas.
+A frase que faz deste um caso da Lição 07 e não um caso de arquitetura: *"As camadas individuais de dados são armazenadas em buckets do Amazon S3, e seus schemas são registrados no AWS Glue Data Catalog."* Providers e consumidores são separados de propósito: *"Providers de dados ingerem e transformam dados com serviços da AWS como Amazon Kinesis Data Firehose, AWS Lambda, AWS Glue e Amazon EMR. Consumers de dados podem então usar serviços como Amazon Athena, Amazon SageMaker, AWS Glue e Amazon EMR."* Repare no que é compartilhado entre os dois lados, **o catálogo**, não as contas.
 
 E a camada de adoção em cima dele: um Data Portal *"oferecendo um 'popularity index' baseado em padrões de uso de dados para mais de 500 usuários em toda a organização."* A popularidade é computada a partir do *uso dos dados catalogados*, que é o detalhe que transforma uma lista de tabelas em um produto.
 
-Ângulo da lição: **um lake S3 catalogado pelo Glue mais um portal legível por humanos é o que de fato democratiza um lake.** Providers registram os schemas uma vez; consumidores em contas separadas os descobrem pela mesma camada de metadados; o popularity index do portal responde à pergunta que sozinho o catálogo não consegue — *qual dessas 300 tabelas alguém está usando?* Os 10 TB/dia da BMW de 1,2 milhão de veículos é o volume; o portal de 500 usuários é o mecanismo de adoção. Reconstrua essa forma com o E6 (crawl e registro) e o E3 (compartilhar sem copiar).
+Ângulo da lição: **um lake S3 catalogado pelo Glue mais um portal legível por humanos é o que de fato democratiza um lake.** Providers registram os schemas uma vez; consumidores em contas separadas os descobrem pela mesma camada de metadados; o popularity index do portal responde à pergunta que sozinho o catálogo não consegue: *qual dessas 300 tabelas alguém está usando?* Os 10 TB/dia da BMW de 1,2 milhão de veículos é o volume; o portal de 500 usuários é o mecanismo de adoção. Reconstrua essa forma com o E6 (crawl e registro) e o E3 (compartilhar sem copiar).
 
 *Números relatados pelo cliente em uma página de estudo de caso da AWS (sem data, acesso em 2026-10-11); não é um compromisso da AWS.*
 
 ---
 
-### Caso B — Vanguard FAS 360: de um data swamp para produtos de dados catalogados
+### Caso B, Vanguard FAS 360: de um data swamp para produtos de dados catalogados
 
-**Vanguard (Financial Advisor Services, "FAS 360").** O AWS Big Data Blog (2026-03-18) abre no estado antes: *"A primeira onda de modernização da Vanguard estabeleceu o FAS 360 como um data warehouse corporativo centralizado, migrando de um 'data swamp' fragmentado de arquivos Parquet no Amazon Simple Storage Service (Amazon S3) para um sistema unificado e estruturado."* O catálogo foi o que tornou o estado depois sobrevivível. Dois anos depois, os números publicados são: *"20 TB de volume de dados no Amazon Redshift e outros 150 TB no data lake do S3 · 600+ jobs do AWS Glue ETL (um aumento de 30x)… · 300+ tabelas (crescimento de 3x)… · 250+ materialized views do Amazon Redshift otimizando o desempenho de consultas… 500.000+ consultas de usuários/mês"* — e a camada de curadoria em cima: *"A Vanguard está curando produtos de dados no data lake usando o formato Apache Iceberg e aproveitando o AWS Glue para computação de métricas e integração do data lake."*
+**Vanguard (Financial Advisor Services, "FAS 360").** O AWS Big Data Blog (2026-03-18) abre no estado antes: *"A primeira onda de modernização da Vanguard estabeleceu o FAS 360 como um data warehouse corporativo centralizado, migrando de um 'data swamp' fragmentado de arquivos Parquet no Amazon Simple Storage Service (Amazon S3) para um sistema unificado e estruturado."* O catálogo foi o que tornou o estado depois sobrevivível. Dois anos depois, os números publicados são: *"20 TB de volume de dados no Amazon Redshift e outros 150 TB no data lake do S3 · 600+ jobs do AWS Glue ETL (um aumento de 30x)… · 300+ tabelas (crescimento de 3x)… · 250+ materialized views do Amazon Redshift otimizando o desempenho de consultas… 500.000+ consultas de usuários/mês"*, e a camada de curadoria em cima: *"A Vanguard está curando produtos de dados no data lake usando o formato Apache Iceberg e aproveitando o AWS Glue para computação de métricas e integração do data lake."*
 
-Ângulo da lição: **um salto de 30x em jobs de ETL e um salto de 3x em tabelas só é seguro quando cada job lê através do catálogo, nunca através de caminhos ad-hoc.** A BMW mostra o catálogo como a superfície de adoção para 500 humanos; a Vanguard mostra o catálogo como o contrato para 600 jobs automatizados. Mesmo AWS Glue Data Catalog, dois motivos diferentes para ele existir: descoberta para pessoas, *estabilidade para pipelines*. Os produtos de dados curados com Iceberg são o endpoint desse contrato — a evolução de schema vira metadata-only (Seção 9), e o Glue computa as métricas que a camada multi-warehouse do Redshift então serve.
+Ângulo da lição: **um salto de 30x em jobs de ETL e um salto de 3x em tabelas só é seguro quando cada job lê através do catálogo, nunca através de caminhos ad-hoc.** A BMW mostra o catálogo como a superfície de adoção para 500 humanos; a Vanguard mostra o catálogo como o contrato para 600 jobs automatizados. Mesmo AWS Glue Data Catalog, dois motivos diferentes para ele existir: descoberta para pessoas, *estabilidade para pipelines*. Os produtos de dados curados com Iceberg são o endpoint desse contrato: a evolução de schema vira metadata-only (Seção 9), e o Glue computa as métricas que a camada multi-warehouse do Redshift então serve.
 
 *Números relatados pela AWS no AWS Big Data Blog, publicado em 2026-03-18 (acesso em 2026-10-11); relatados pelo cliente, não é um compromisso da AWS.*
 
@@ -876,7 +876,7 @@ E a camada de adoção em cima dele: um Data Portal *"oferecendo um 'popularity 
     "Nenhum roda; apenas classificadores built-in são consultados quando existem classificadores customizados"
   ],
   "correct": 1,
-  "explanation": "A AWS afirma que o crawler roda os classificadores customizados 'in the order that you specify' e que 'The first custom classifier to successfully recognize the structure of the data is used to create a schema. Custom classifiers lower in the list are skipped.' A pontuação de certainty (1.0 vence de imediato, senão o maior, senão UNKNOWN) governa a seleção de classificador DENTRO do fallback built-in e entre classificadores que realmente casam - ela não sobrepõe a sua ordenação explícita dos classificadores customizados. Classificadores built-in só são tentados quando nenhum classificador customizado casou."
+  "explanation": "A AWS afirma que o crawler roda os classificadores customizados 'in the order that you specify' e que 'The first custom classifier to successfully recognize the structure of the data is used to create a schema. Custom classifiers lower in the list are skipped.' A pontuação de certainty (1.0 vence de imediato, senão o maior, senão UNKNOWN) governa a seleção de classificador DENTRO do fallback built-in e entre classificadores que realmente casam: ela não sobrepõe a sua ordenação explícita dos classificadores customizados. Classificadores built-in só são tentados quando nenhum classificador customizado casou."
 }
 ```
 
@@ -935,7 +935,7 @@ E a camada de adoção em cima dele: um Data Portal *"oferecendo um 'popularity 
   "question": "Uma tabela tem partition keys (region, dt) e um partition index em (region, dt). Quais consultas o index realmente vai servir?",
   "options": [
     "Qualquer consulta com uma cláusula WHERE que toca dt de qualquer forma, porque a ordem do index não importa",
-    "Apenas consultas cujo predicado contém region - a PRIMEIRA key do index - e apenas onde o operador do index é AND; sub-expressões LIKE, IN, OR e NOT são ignoradas, e um máximo de 3 indexes existe por tabela",
+    "Apenas consultas cujo predicado contém region: a PRIMEIRA key do index: e apenas onde o operador do index é AND; sub-expressões LIKE, IN, OR e NOT são ignoradas, e um máximo de 3 indexes existe por tabela",
     "Toda consulta, uma vez que partition_filtering.enabled está definido na tabela",
     "Apenas consultas que usam BETWEEN, porque indexes suportam exclusivamente operadores de intervalo"
   ],
@@ -956,7 +956,7 @@ E a camada de adoção em cima dele: um Data Portal *"oferecendo um 'popularity 
     "O crawler deleta a tabela e a recria do zero, perdendo todas as partições"
   ],
   "correct": 2,
-  "explanation": "A AWS documenta que 'By default, crawlers updates the schema in the Data Catalog to match the data source being crawled', com UpdateBehavior em {LOG, UPDATE_IN_DATABASE} e DeleteBehavior em {LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE}. Todo UpdateTable arquiva a linha anterior e incrementa o VersionId ('a string representation of an integer... incremented by 1'), então a mudança é visível - através do GetTableVersions. O 'Add new columns only' e o 'Ignore the change and don't update the table' da console mapeiam para CrawlerOutput.Tables.AddOrUpdateBehavior = MergeNewColumns no Configuration JSON ou para UpdateBehavior=LOG."
+  "explanation": "A AWS documenta que 'By default, crawlers updates the schema in the Data Catalog to match the data source being crawled', com UpdateBehavior em {LOG, UPDATE_IN_DATABASE} e DeleteBehavior em {LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE}. Todo UpdateTable arquiva a linha anterior e incrementa o VersionId ('a string representation of an integer... incremented by 1'), então a mudança é visível: através do GetTableVersions. O 'Add new columns only' e o 'Ignore the change and don't update the table' da console mapeiam para CrawlerOutput.Tables.AddOrUpdateBehavior = MergeNewColumns no Configuration JSON ou para UpdateBehavior=LOG."
 }
 ```
 
@@ -967,12 +967,12 @@ E a camada de adoção em cima dele: um Data Portal *"oferecendo um 'popularity 
   "question": "Uma versão de schema precisa ser restaurada após uma edição ruim de tabela. O que a AWS documenta em outubro de 2026?",
   "options": [
     "Chamar DeleteTableVersion na versão mais recente, depois recriar a anterior pela console",
-    "Rollback não é possível e a versão mais recente não pode ser deletada via console, API ou CLI; publique uma NOVA versão idêntica à alvo - por exemplo Edit Schema as JSON na versão antiga, depois Save as new table version",
+    "Rollback não é possível e a versão mais recente não pode ser deletada via console, API ou CLI; publique uma NOVA versão idêntica à alvo: por exemplo Edit Schema as JSON na versão antiga, depois Save as new table version",
     "Versões expiram automaticamente após 24 horas, então esperar restaura o schema anterior",
     "A restauração só é possível deletando e recriando o database, o que cascata para todas as tabelas"
   ],
   "correct": 1,
-  "explanation": "Uma thread do re:Post respondida e revisada pela AWS (2023-11-22) afirma: 'It is not possible to rollback to a previous version per se and also you cannot delete the latest version of the table (neither on the console nor via API/CLI) so the only option is to publish a new schema version that is identical to the one you want to restore back to', com a rota pela console sendo Edit Schema as JSON e depois Save as new table version. É por isso que o blue/green de metadados (E3) é construído para frente - uma tabela shadow mais uma troca de resource link - em vez de por reversão."
+  "explanation": "Uma thread do re:Post respondida e revisada pela AWS (2023-11-22) afirma: 'It is not possible to rollback to a previous version per se and also you cannot delete the latest version of the table (neither on the console nor via API/CLI) so the only option is to publish a new schema version that is identical to the one you want to restore back to', com a rota pela console sendo Edit Schema as JSON e depois Save as new table version. É por isso que o blue/green de metadados (E3) é construído para frente: uma tabela shadow mais uma troca de resource link: em vez de por reversão."
 }
 ```
 
@@ -988,7 +988,7 @@ E a camada de adoção em cima dele: um Data Portal *"oferecendo um 'popularity 
     "Nada registra; apenas NONE e DISABLED permitem mudanças após a versão 1"
   ],
   "correct": 1,
-  "explanation": "BACKWARD significa que leitores novos precisam lidar tanto com dados atuais quanto anteriores. Derrubar um campo required é seguro para eles (eles simplesmente não o procuram em mensagens antigas), então registra; adicionar um campo required é inseguro (mensagens antigas não têm esse campo), então RegisterSchemaVersion retorna um erro; adicionar um campo optional registra porque leitores toleram a ausência dele. A AWS documenta oito modos - NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL - e observa que a validação 'will be applied only from the second version onwards', com DISABLED bloqueando toda versão após a primeira."
+  "explanation": "BACKWARD significa que leitores novos precisam lidar tanto com dados atuais quanto anteriores. Derrubar um campo required é seguro para eles (eles simplesmente não o procuram em mensagens antigas), então registra; adicionar um campo required é inseguro (mensagens antigas não têm esse campo), então RegisterSchemaVersion retorna um erro; adicionar um campo optional registra porque leitores toleram a ausência dele. A AWS documenta oito modos: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL: e observa que a validação 'will be applied only from the second version onwards', com DISABLED bloqueando toda versão após a primeira."
 }
 ```
 
@@ -999,7 +999,7 @@ E a camada de adoção em cima dele: um Data Portal *"oferecendo um 'popularity 
   "question": "A Conta B precisa consultar uma tabela do Lake Formation compartilhada pela Conta A. Qual sequência está correta?",
   "options": [
     "A Conta A concede SELECT no seu resource link na Conta B, e as permissões do alvo são herdadas automaticamente",
-    "A Conta A compartilha a tabela via AWS RAM e concede permissões na tabela ALVO; a Conta B cria um resource link local para ela e concede DESCRIBE naquele link - permissões de link (apenas DESCRIBE e DROP) e permissões do alvo são separadas, e deletar o link nunca deleta o alvo",
+    "A Conta A compartilha a tabela via AWS RAM e concede permissões na tabela ALVO; a Conta B cria um resource link local para ela e concede DESCRIBE naquele link: permissões de link (apenas DESCRIBE e DROP) e permissões do alvo são separadas, e deletar o link nunca deleta o alvo",
     "A Conta B cria um resource link primeiro; o Lake Formation então auto-cria a tabela alvo no catálogo da Conta B",
     "A Conta A pode compartilhar a tabela com uma política de bucket S3 sozinha; nenhum grant do Lake Formation é necessário uma vez que o RAM entregou o share"
   ],
@@ -1015,12 +1015,12 @@ E a camada de adoção em cima dele: um Data Portal *"oferecendo um 'popularity 
   "question": "Um time quer evoluir o schema de uma tabela Iceberg a partir do Amazon Athena. Qual afirmação está correta?",
   "options": [
     "CREATE EXTERNAL TABLE é a instrução exigida para qualquer tabela Iceberg, e ALTER TABLE reescreve todos os arquivos de dados",
-    "O Athena cria tabelas Iceberg v2 e exige TBLPROPERTIES ('table_type'='ICEBERG') - CREATE EXTERNAL TABLE é rejeitado para esse tipo - enquanto ALTER TABLE ADD/DROP/CHANGE COLUMN é metadata-only; note que ADD COLUMNS não funciona para colunas date, então use timestamp",
+    "O Athena cria tabelas Iceberg v2 e exige TBLPROPERTIES ('table_type'='ICEBERG') - CREATE EXTERNAL TABLE é rejeitado para esse tipo: enquanto ALTER TABLE ADD/DROP/CHANGE COLUMN é metadata-only; note que ADD COLUMNS não funciona para colunas date, então use timestamp",
     "O Athena suporta apenas tabelas Iceberg v3, e toda mudança de schema força uma reescrita completa da tabela",
     "Tabelas Iceberg não são registradas no Glue Data Catalog de todo; elas vivem apenas no S3"
   ],
   "correct": 1,
-  "explanation": "A AWS afirma 'Athena creates Iceberg v2 tables' e que 'Running CREATE EXTERNAL TABLE results in the error message External keyword not supported for table type ICEBERG', com a correção sendo table_type='ICEBERG' em TBLPROPERTIES. A evolução de schema no Athena é ALTER TABLE ADD COLUMNS / DROP COLUMN / CHANGE COLUMN, e 'ALTER TABLE ADD COLUMNS does not work for columns with the date datatype. To workaround this issue, use the timestamp datatype instead.' Tabelas Iceberg SÃO catalogadas no Glue - o objeto Table carrega IcebergTableMetadata, e um crawler pode registrar o caminho de metadata de uma tabela Iceberg (apenas sole writer)."
+  "explanation": "A AWS afirma 'Athena creates Iceberg v2 tables' e que 'Running CREATE EXTERNAL TABLE results in the error message External keyword not supported for table type ICEBERG', com a correção sendo table_type='ICEBERG' em TBLPROPERTIES. A evolução de schema no Athena é ALTER TABLE ADD COLUMNS / DROP COLUMN / CHANGE COLUMN, e 'ALTER TABLE ADD COLUMNS does not work for columns with the date datatype. To workaround this issue, use the timestamp datatype instead.' Tabelas Iceberg SÃO catalogadas no Glue: o objeto Table carrega IcebergTableMetadata, e um crawler pode registrar o caminho de metadata de uma tabela Iceberg (apenas sole writer)."
 }
 ```
 
@@ -1036,19 +1036,19 @@ E a camada de adoção em cima dele: um Data Portal *"oferecendo um 'popularity 
     "Glue Data Catalog, tabelas nativas do Athena e um Hive metastore são três stores diferentes que cada um precisa ser populado separadamente"
   ],
   "correct": 2,
-  "explanation": "A AWS lista Athena, Lake Formation e EMR como consumidores do Data Catalog, e a própria documentação do Lake Formation diz que suas tabelas de metadados 'are stored in the AWS Glue Data Catalog' - então o Athena é um CAMINHO de criação/consulta para o Glue, não um store concorrente (uma das cinco maneiras documentadas de criar uma tabela LF é 'Create a table using Amazon Athena'). O Glue é com formato Hive por design: nomes de tabela em minúsculas, InputFormat/OutputFormat e nomes de classes SerDe do Hive, tipos EXTERNAL_TABLE. Crawlers são opcionais ('you can populate the Amazon Glue Data Catalog directly through the API') e medidos a $0.44/DPU-hour com mínimo de 10 minutos. Um Hive metastore auto-gerenciado remove esse medidor e adiciona o serviço que você opera, dá backup e aplica patch. O S3 Tables fica no s3tablescatalog separado, que precisa de glue:GetCatalog e registro no Lake Formation."
+  "explanation": "A AWS lista Athena, Lake Formation e EMR como consumidores do Data Catalog, e a própria documentação do Lake Formation diz que suas tabelas de metadados 'are stored in the AWS Glue Data Catalog', então o Athena é um CAMINHO de criação/consulta para o Glue, não um store concorrente (uma das cinco maneiras documentadas de criar uma tabela LF é 'Create a table using Amazon Athena'). O Glue é com formato Hive por design: nomes de tabela em minúsculas, InputFormat/OutputFormat e nomes de classes SerDe do Hive, tipos EXTERNAL_TABLE. Crawlers são opcionais ('you can populate the Amazon Glue Data Catalog directly through the API') e medidos a $0.44/DPU-hour com mínimo de 10 minutos. Um Hive metastore auto-gerenciado remove esse medidor e adiciona o serviço que você opera, dá backup e aplica patch. O S3 Tables fica no s3tablescatalog separado, que precisa de glue:GetCatalog e registro no Lake Formation."
 }
 ```
 
 > [!WARNING]
-> ⚠️ **Armadilhas de padrão desta lição — percorra esta lista antes de tocar em um catálogo:**
+> ⚠️ **Armadilhas de padrão desta lição: percorra esta lista antes de tocar em um catálogo:**
 > - **O crawler não é o único writer.** Crawlers são opcionais; o `CreateTable` é isento da loteria de classificador *e* do piso de cobrança de 10 minutos.
 > - **`UpdateBehavior=LOG` não é um congelamento.** Tabelas e partições novas ainda aparecem; pareie-o com `CrawlerOutput.Partitions.AddOrUpdateBehavior=InheritFromTable`.
 > - **Editar um classificador nunca reclassifica o histórico.** Aponte um novo crawler para o prefixo antigo.
 > - **Crawls incrementais são cegos para edições e exclusões.** Uma mudança de schema one-off exige um crawl completo temporário.
 > - **Crawls por eventos do S3 deletam apenas o que contam para você.** Sem *"All object removal events"*, o próximo crawl recria a partição; apenas um alvo é permitido.
 > - **`partition_filtering.enabled` é trabalho seu, não do crawler.** Crawlers constroem o index; o Athena o ignora até você definir a propriedade da tabela.
-> - **A forma do index é com forma de consulta.** Máx 3 por tabela, a primeira key deve aparecer no predicado, só `AND` — e uma vez que um index existe você não pode renomear nem retipar suas keys.
+> - **A forma do index é com forma de consulta.** Máx 3 por tabela, a primeira key deve aparecer no predicado, só `AND`, e uma vez que um index existe você não pode renomear nem retipar suas keys.
 > - **Todo item de index é cobrável.** `m` indexes × `n` partições = `m × n` objetos cobrados após o primeiro milhão.
 > - **Nunca existe rollback.** Você não pode deletar a versão mais recente da tabela; restauração significa publicar uma nova versão.
 > - **Resource links não são permissões.** DESCRIBE/DROP no link, mais um grant separado no alvo.
@@ -1056,23 +1056,23 @@ E a camada de adoção em cima dele: um Data Portal *"oferecendo um 'popularity 
 > - **`CREATE EXTERNAL TABLE` falha no Iceberg**, e `ALTER TABLE ADD COLUMNS` falha em `date`.
 
 > [!IMPORTANT]
-> **Veredito Comparativo — Glue Data Catalog versus tabelas nativas do Athena versus um Hive metastore auto-gerenciado versus um catálogo de terceiros/alternativo**
-> - **Versus tabelas nativas do Athena:** este é um *caminho de criação*, não um metastore concorrente. Uma das cinco maneiras documentadas de criar uma tabela do Lake Formation é *"Criar uma tabela usando o Amazon Athena"*, e tabelas Iceberg criadas pelo Athena chegam ao Glue com `table_type='ICEBERG'`. O que você ganha é sem conta de crawler e sem loteria de classificador — você escreve exatamente o schema que pretende. O que você não ganha é independência: o objeto, o histórico de `VersionId` dele, as partições e os grants do LF ainda são do Glue. Escolha isto para tabelas curadas que você consegue descrever em DDL; mantenha crawlers para a cauda longa. **O passo 7 do E6** é o padrão.
-> - **Versus um Hive metastore auto-gerenciado:** você remove o medidor de DPU e herda o serviço — um processo de metastore, o store de backing, backups, upgrades, e a encanagem de IAM que todo motor precisa para alcançá-lo. O Glue é deliberadamente com formato Hive (nomes de tabela em minúsculas, `InputFormat`/`OutputFormat` do Hive, nomes de classes SerDe do Hive, `EXTERNAL_TABLE`), então o schema portável é real; a operação não é. O próprio material de caso da AWS mostra o trade em escala: a FINRA rodava *"herd, our open source data catalog and orchestration tool"* como sua fonte única de verdade ao lado de S3 e EMR — uma escolha defensável para um ambiente altamente regulado que precisa ser dono de suas ferramentas de metadados, e exatamente o workload que o Glue agora absorve. Escolha auto-gerenciado apenas quando ser dono do metastore for em si um requisito.
-> - **Versus catálogos de terceiros e alternativos:** um **catálogo open source que você opera** (um deployment de Hive metastore ou um produto de catálogo de terceiros) compra portabilidade entre nuvens e motores ao preço do trabalho de governança da Seção 6 — Lake Formation, resource links e compartilhamento via RAM simplesmente não existem lá. Um **catálogo AWS alternativo** é o movimento oposto: as Amazon S3 Tables vivem no **`s3tablescatalog`**, não no catálogo Glue padrão, registram no Lake Formation para permissões de granulação fina, e precisam da permissão IAM **`glue:GetCatalog`** naquele catálogo ARN — você está comprando operações de formato de tabela *gerenciadas* (compactação, tratamento de snapshots) em vez de um modelo de metadados diferente. Um **catálogo de glossário de negócio/governança** (Amazon DataZone, agora a espinha dorsal de governança do SageMaker Unified Studio) é uma camada *acima* de qualquer um desses, não um substituto de nenhum.
-> - **O veredito de uma frase:** em outubro de 2026, **padronize no Glue Data Catalog com Lake Formation por cima — é o único dos quatro que é simultaneamente o metastore do Athena/EMR/Spectrum/Lake Formation; crie tabelas curadas através do Athena ou da API e crawled apenas a cauda longa; recorra ao `s3tablescatalog` quando quiser operações Iceberg gerenciadas para você; e Hive auto-gerenciado apenas quando ser dono do metastore for um requisito declarado que sobreponha a conta de operações.**
+> **Veredito Comparativo: Glue Data Catalog versus tabelas nativas do Athena versus um Hive metastore auto-gerenciado versus um catálogo de terceiros/alternativo**
+> - **Versus tabelas nativas do Athena:** este é um *caminho de criação*, não um metastore concorrente. Uma das cinco maneiras documentadas de criar uma tabela do Lake Formation é *"Criar uma tabela usando o Amazon Athena"*, e tabelas Iceberg criadas pelo Athena chegam ao Glue com `table_type='ICEBERG'`. O que você ganha é sem conta de crawler e sem loteria de classificador: você escreve exatamente o schema que pretende. O que você não ganha é independência: o objeto, o histórico de `VersionId` dele, as partições e os grants do LF ainda são do Glue. Escolha isto para tabelas curadas que você consegue descrever em DDL; mantenha crawlers para a cauda longa. **O passo 7 do E6** é o padrão.
+> - **Versus um Hive metastore auto-gerenciado:** você remove o medidor de DPU e herda o serviço, um processo de metastore, o store de backing, backups, upgrades, e a encanagem de IAM que todo motor precisa para alcançá-lo. O Glue é deliberadamente com formato Hive (nomes de tabela em minúsculas, `InputFormat`/`OutputFormat` do Hive, nomes de classes SerDe do Hive, `EXTERNAL_TABLE`), então o schema portável é real; a operação não é. O próprio material de caso da AWS mostra o trade em escala: a FINRA rodava *"herd, our open source data catalog and orchestration tool"* como sua fonte única de verdade ao lado de S3 e EMR, uma escolha defensável para um ambiente altamente regulado que precisa ser dono de suas ferramentas de metadados, e exatamente o workload que o Glue agora absorve. Escolha auto-gerenciado apenas quando ser dono do metastore for em si um requisito.
+> - **Versus catálogos de terceiros e alternativos:** um **catálogo open source que você opera** (um deployment de Hive metastore ou um produto de catálogo de terceiros) compra portabilidade entre nuvens e motores ao preço do trabalho de governança da Seção 6, Lake Formation, resource links e compartilhamento via RAM simplesmente não existem lá. Um **catálogo AWS alternativo** é o movimento oposto: as Amazon S3 Tables vivem no **`s3tablescatalog`**, não no catálogo Glue padrão, registram no Lake Formation para permissões de granulação fina, e precisam da permissão IAM **`glue:GetCatalog`** naquele catálogo ARN, você está comprando operações de formato de tabela *gerenciadas* (compactação, tratamento de snapshots) em vez de um modelo de metadados diferente. Um **catálogo de glossário de negócio/governança** (Amazon DataZone, agora a espinha dorsal de governança do SageMaker Unified Studio) é uma camada *acima* de qualquer um desses, não um substituto de nenhum.
+> - **O veredito de uma frase:** em outubro de 2026, **padronize no Glue Data Catalog com Lake Formation por cima: é o único dos quatro que é simultaneamente o metastore do Athena/EMR/Spectrum/Lake Formation; crie tabelas curadas através do Athena ou da API e crawled apenas a cauda longa; recorra ao `s3tablescatalog` quando quiser operações Iceberg gerenciadas para você; e Hive auto-gerenciado apenas quando ser dono do metastore for um requisito declarado que sobreponha a conta de operações.**
 
 > [!SUCCESS]
 > **Pontos Principais (Key Takeaways):**
 > 1. **Uma tabela de catálogo é metadados, nunca dados.** O modelo de objetos é `account/Region → catalog → database → table → partitions`, onde a tabela carrega um `StorageDescriptor` (Location ≤ 2056 bytes, `InputFormat`/`OutputFormat` do Hive, `SerdeInfo.SerializationLibrary`, `SchemaReference` opcional), `PartitionKeys` apenas primitivos (o Athena ainda quer uma lista vazia se você não tem nenhuma), `Parameters` de forma livre (≤ 512.000 bytes por valor), `TableType` (`EXTERNAL_TABLE` ou `GOVERNED`) e um `VersionId`.
-> 2. **Crawlers rodam classificadores customizados primeiro, na sua ordem — o primeiro sucesso vence.** Certainty decide o resto: `1.0` vence de imediato, senão o maior valor, senão `classification=UNKNOWN`. Agrupamento por pasta é votação majoritária, e *"Se objetos tiverem schemas diferentes, o Athena… pode levar a consultas no Athena que retornam zero resultados."* Editar um classificador nunca reclassifica o histórico.
-> 3. **A precificação de crawler é um problema de piso, não de taxa:** **$0.44/DPU-hour, por segundo, mínimo de 10 minutos por crawl**, 1 DPU = 4 vCPU/16 GB. E1: 2 DPUs × 95 s ainda cobra 600 s = **$0.147**; um cron horário do mesmo crawler = **$3.52/dia ≈ $106/mês**. Crawlers são opcionais — a API é isenta tanto do piso quanto da loteria de classificador.
+> 2. **Crawlers rodam classificadores customizados primeiro, na sua ordem, o primeiro sucesso vence.** Certainty decide o resto: `1.0` vence de imediato, senão o maior valor, senão `classification=UNKNOWN`. Agrupamento por pasta é votação majoritária, e *"Se objetos tiverem schemas diferentes, o Athena… pode levar a consultas no Athena que retornam zero resultados."* Editar um classificador nunca reclassifica o histórico.
+> 3. **A precificação de crawler é um problema de piso, não de taxa:** **$0.44/DPU-hour, por segundo, mínimo de 10 minutos por crawl**, 1 DPU = 4 vCPU/16 GB. E1: 2 DPUs × 95 s ainda cobra 600 s = **$0.147**; um cron horário do mesmo crawler = **$3.52/dia ≈ $106/mês**. Crawlers são opcionais: a API é isenta tanto do piso quanto da loteria de classificador.
 > 4. **Dois modos de recrawl, duas cegueiras.** `CRAWL_NEW_FOLDERS_ONLY` adiciona apenas partições novas e nunca vê edições nem exclusões (e trava seus alvos S3); `CRAWL_EVENT_MODE` lista apenas a subpasta disparada a partir do SQS, limita a **100.000 mensagens/crawl**, permite um único alvo, e *"Não haverá custo se não houver eventos na fila."*
 > 5. **"Crawler exclusivo" é um padrão de design, não uma opção da AWS.** As únicas regras documentadas de single-writer são o requisito de **sole writer** do Iceberg, o alvo único do crawler por eventos do S3, e a única tabela de catálogo do crawler com credenciais do Lake Formation.
-> 6. **Partition indexes são estreitos por design:** máx **3 por tabela**, uma sublista de partition keys, só `AND` (`LIKE`/`IN`/`OR`/`NOT` ignorados), a **primeira key do index precisa estar no predicado**, `m × n` itens de index cobráveis — e o Athena precisa de `'partition_filtering.enabled'='true'`, que crawlers **não** definem. Indexes deixam o `GetPartitions` mais barato; a projeção (Lição 09) o torna desnecessário.
-> 7. **Metadados são append-only.** Todo `UpdateTable` cunha `VersionId + 1`; não existe rollback nem delete-latest. Blue/green portanto significa ou uma **tabela shadow mais uma troca de resource link** (permissões de link são DESCRIBE/DROP, separadas do grant do alvo) ou **publicar a versão N+1** após validação, difada com `GetTableVersions` (`MaxResults` 1–100).
-> 8. **O Schema Registry é grátis e com formato de streaming, mas não é só de streaming:** 8 modos de compatibilidade (`NONE`, `DISABLED`, `BACKWARD`, `BACKWARD_ALL`, `FORWARD`, `FORWARD_ALL`, `FULL`, `FULL_ALL`), AVRO 1.11.4 / JSON Draft-04-06-07 / Protobuf proto2–proto3, **100 registries e 10.000 versões de schema por Região, payload de 170 KB**, criptografado com KMS em repouso, validação apenas a partir da **segunda** versão, sem políticas de recurso (entre contas = role assumption). E4: sob BACKWARD, derrubar required registra, adicionar required falha.
+> 6. **Partition indexes são estreitos por design:** máx **3 por tabela**, uma sublista de partition keys, só `AND` (`LIKE`/`IN`/`OR`/`NOT` ignorados), a **primeira key do index precisa estar no predicado**, `m × n` itens de index cobráveis, e o Athena precisa de `'partition_filtering.enabled'='true'`, que crawlers **não** definem. Indexes deixam o `GetPartitions` mais barato; a projeção (Lição 09) o torna desnecessário.
+> 7. **Metadados são append-only.** Todo `UpdateTable` cunha `VersionId + 1`; não existe rollback nem delete-latest. Blue/green portanto significa ou uma **tabela shadow mais uma troca de resource link** (permissões de link são DESCRIBE/DROP, separadas do grant do alvo) ou **publicar a versão N+1** após validação, difada com `GetTableVersions` (`MaxResults` 1 to 100).
+> 8. **O Schema Registry é grátis e com formato de streaming, mas não é só de streaming:** 8 modos de compatibilidade (`NONE`, `DISABLED`, `BACKWARD`, `BACKWARD_ALL`, `FORWARD`, `FORWARD_ALL`, `FULL`, `FULL_ALL`), AVRO 1.11.4 / JSON Draft-04-06-07 / Protobuf proto2: proto3, **100 registries e 10.000 versões de schema por Região, payload de 170 KB**, criptografado com KMS em repouso, validação apenas a partir da **segunda** versão, sem políticas de recurso (entre contas = role assumption). E4: sob BACKWARD, derrubar required registra, adicionar required falha.
 > 9. **Lake Formation é dono dos grants, Glue é dono dos objetos, IAM é dono dos principals, S3 é dono dos bytes.** As tabelas de metadados do LF *"are stored in the AWS Glue Data Catalog"*; o criador da tabela recebe todas as permissões do LF; entre contas roda via AWS RAM; um resource link é um nome, não uma permissão.
-> 10. **Ligações do Iceberg:** o Athena cria tabelas **v2** via `TBLPROPERTIES ('table_type'='ICEBERG')` — `CREATE EXTERNAL TABLE` é rejeitado — crawlers registram um caminho de metadata Iceberg **apenas como sole writer**, e o Athena expõe `$files`, `$manifests`, `$history`, `$partitions`, `$snapshots`, `$refs`; filtros de linha/célula do Lake Formation ou grants parciais de coluna fazem `$partitions`/`$files`/`$manifests`/`$snapshots` e `$path` lançarem `AccessDeniedException`.
-> 11. **Seguro versus quebrador:** `ALTER TABLE … ADD COLUMNS` aditivo (cai antes das colunas de partição), partições novas e ampliação de tipo são seguros; retipes, drops, renomes de partition key após um index existir e mudanças de `Location` são quebradores — e `date` não pode ser adicionado de todo no Athena (use `timestamp`). Do lado do crawler: `MergeNewColumns` = aditivo, `LOG` = revisão, padrão `UPDATE_IN_DATABASE` = pode retipar nas suas costas.
-> 12. **Estado da plataforma em outubro de 2026:** Glue 6.0 GA em **2026-08-21** (Spark 4.1.1, Python 3.13, Iceberg 1.11.0, Iceberg v3, redução de preço de 30%, EMRFS removido); **5.1** é o padrão para jobs novos desde **2025-11-26**; **0.9/1.0/2.0 atingiram end of life em 2026-04-01**; Python shell 3.6 EOS em **2026-03-31**; Glue for Ray fechou para novos clientes em **2026-04-30**; `s3tablescatalog` é um catálogo separado que precisa de `glue:GetCatalog`; e o BMW Group registra os schemas por trás de **10 TB/dia de 1,2 milhão de veículos** neste catálogo enquanto um Data Portal mostra um popularity index para **500+ usuários** — o catálogo é o produto.
+> 10. **Ligações do Iceberg:** o Athena cria tabelas **v2** via `TBLPROPERTIES ('table_type'='ICEBERG')`, `CREATE EXTERNAL TABLE` é rejeitado, crawlers registram um caminho de metadata Iceberg **apenas como sole writer**, e o Athena expõe `$files`, `$manifests`, `$history`, `$partitions`, `$snapshots`, `$refs`; filtros de linha/célula do Lake Formation ou grants parciais de coluna fazem `$partitions`/`$files`/`$manifests`/`$snapshots` e `$path` lançarem `AccessDeniedException`.
+> 11. **Seguro versus quebrador:** `ALTER TABLE … ADD COLUMNS` aditivo (cai antes das colunas de partição), partições novas e ampliação de tipo são seguros; retipes, drops, renomes de partition key após um index existir e mudanças de `Location` são quebradores, e `date` não pode ser adicionado de todo no Athena (use `timestamp`). Do lado do crawler: `MergeNewColumns` = aditivo, `LOG` = revisão, padrão `UPDATE_IN_DATABASE` = pode retipar nas suas costas.
+> 12. **Estado da plataforma em outubro de 2026:** Glue 6.0 GA em **2026-08-21** (Spark 4.1.1, Python 3.13, Iceberg 1.11.0, Iceberg v3, redução de preço de 30%, EMRFS removido); **5.1** é o padrão para jobs novos desde **2025-11-26**; **0.9/1.0/2.0 atingiram end of life em 2026-04-01**; Python shell 3.6 EOS em **2026-03-31**; Glue for Ray fechou para novos clientes em **2026-04-30**; `s3tablescatalog` é um catálogo separado que precisa de `glue:GetCatalog`; e o BMW Group registra os schemas por trás de **10 TB/dia de 1,2 milhão de veículos** neste catálogo enquanto um Data Portal mostra um popularity index para **500+ usuários**, o catálogo é o produto.

@@ -1,13 +1,13 @@
 ---
 title: "Seguridad, cifrado e IAM para pipelines de datos"
-description: "Convierte el Dominio 4 del DEA-C01 en un modelo de autorización que funciona: domina los tres niveles de propiedad de las claves de AWS KMS (administradas por el cliente, administradas por AWS, propiedad de AWS), las políticas de clave frente a las políticas IAM frente a las concesiones, el cifrado de sobre y la rotación; construye la matriz de cifrado en reposo por servicio para S3, Glue, Redshift, Kinesis, DynamoDB, EMR y Athena más el cumplimiento de TLS en tránsito; escribe funciones de servicio y políticas de pipeline con ámbito de mínimo privilegio y de prefijo que evitan el antipatrón AmazonS3FullAccess; conecta el intercambio de CMK entre cuentas, las políticas de bucket de S3, la retirada de ACL, los extremos VPC, las URL prefirmadas, Secrets Manager frente a Parameter Store SecureString y los controles de grupo de seguridad/PrivateLink — con los precios de KMS de octubre de 2026 con su fuente, aritmética de coste resuelta, extractos de políticas, cuatro casos de clientes de AWS (IAS, FINRA, Oportun, GoDaddy), catorce preguntas estilo examen y tres comprobaciones interactivas."
+description: "Convierte el Dominio 4 del DEA-C01 en un modelo de autorización que funciona: domina los tres niveles de propiedad de las claves de AWS KMS (administradas por el cliente, administradas por AWS, propiedad de AWS), las políticas de clave frente a las políticas IAM frente a las concesiones, el cifrado de sobre y la rotación; construye la matriz de cifrado en reposo por servicio para S3, Glue, Redshift, Kinesis, DynamoDB, EMR y Athena más el cumplimiento de TLS en tránsito; escribe funciones de servicio y políticas de pipeline con ámbito de mínimo privilegio y de prefijo que evitan el antipatrón AmazonS3FullAccess; conecta el intercambio de CMK entre cuentas, las políticas de bucket de S3, la retirada de ACL, los extremos VPC, las URL prefirmadas, Secrets Manager frente a Parameter Store SecureString y los controles de grupo de seguridad/PrivateLink, con los precios de KMS de octubre de 2026 con su fuente, aritmética de coste resuelta, extractos de políticas, cuatro casos de clientes de AWS (IAS, FINRA, Oportun, GoDaddy), catorce preguntas estilo examen y tres comprobaciones interactivas."
 order: 13
 difficulty: "intermediate"
 duration: "75 min"
 ---
 # Seguridad, cifrado e IAM para pipelines de datos
 
-Todo pipeline es una cadena de llamadas autorizadas: un job de Glue asume una función, descifra una clave de datos envuelta por una CMK, lee `s3://raw/`, escribe `s3://curated/` y entrega a Redshift un manifiesto. Rompe cualquier eslabón — una política de clave que nunca habilitó IAM, una concesión que nadie revocó, una política de bucket que deniega `aws:SecureTransport` — y el pipeline falla con un mensaje de error que nombra el *último* salto, no la causa real. El Dominio 4 de la guía del examen DEA-C01 (18% del contenido puntuado) prueba exactamente esta cadena: **autenticación (4.1), autorización (4.2), cifrado y enmascaramiento (4.3), registros de auditoría (4.4) y privacidad/gobernanza (4.5)** (guía del examen DEA-C01, consultada en octubre de 2026). Esta lección enseña la cadena tal como la plantea el examen — como decisiones, valores por defecto y números, cada uno con su fuente.
+Todo pipeline es una cadena de llamadas autorizadas: un job de Glue asume una función, descifra una clave de datos envuelta por una CMK, lee `s3://raw/`, escribe `s3://curated/` y entrega a Redshift un manifiesto. Rompe cualquier eslabón: una política de clave que nunca habilitó IAM, una concesión que nadie revocó, una política de bucket que deniega `aws:SecureTransport`, y el pipeline falla con un mensaje de error que nombra el *último* salto, no la causa real. El Dominio 4 de la guía del examen DEA-C01 (18% del contenido puntuado) prueba exactamente esta cadena: **autenticación (4.1), autorización (4.2), cifrado y enmascaramiento (4.3), registros de auditoría (4.4) y privacidad/gobernanza (4.5)** (guía del examen DEA-C01, consultada en octubre de 2026). Esta lección enseña la cadena tal como la plantea el examen: como decisiones, valores por defecto y números, cada uno con su fuente.
 
 ```text
 ====================================================================
@@ -46,13 +46,13 @@ Todo pipeline es una cadena de llamadas autorizadas: un job de Glue asume una fu
 
 En esta lección vas a:
 
-- separar las claves de KMS **administradas por el cliente, administradas por AWS y propiedad de AWS** — quién las posee, quién paga, quién puede compartirlas;
+- separar las claves de KMS **administradas por el cliente, administradas por AWS y propiedad de AWS**: quién las posee, quién paga, quién puede compartirlas;
 - evaluar el acceso como lo hace KMS: **primero la política de clave, luego IAM y las concesiones, con el Deny explícito siempre ganando**;
 - aplicar el **cifrado de sobre**, su tope de 4.096 bytes en la API directa, y aquello que la rotación *no* vuelve a cifrar;
-- calcular el precio de KMS **por uso** — cuota de clave, cuota de solicitudes, free tier, Bucket Keys — con las cifras de octubre de 2026;
+- calcular el precio de KMS **por uso**, cuota de clave, cuota de solicitudes, free tier, Bucket Keys, con las cifras de octubre de 2026;
 - construir la **matriz en reposo** para S3, Glue, Redshift, Kinesis, DynamoDB, EMR y Athena;
 - hacer cumplir **TLS en tránsito**, incluida la trampa de redacción de `aws:SecureTransport` que rompe la replicación;
-- escribir **funciones de pipeline de mínimo privilegio** — S3 con ámbito de prefijo, acciones de KMS sobre el ARN de la clave, sin `AmazonS3FullAccess`;
+- escribir **funciones de pipeline de mínimo privilegio**: S3 con ámbito de prefijo, acciones de KMS sobre el ARN de la clave, sin `AmazonS3FullAccess`;
 - conectar el acceso **entre cuentas** a través de los cuatro documentos que deben coincidir;
 - controlar el acceso a S3 con **políticas de bucket, ACL retiradas, Block Public Access, extremos VPC y URL prefirmadas**;
 - elegir entre **Secrets Manager y Parameter Store SecureString** por funciones *y* por precio;
@@ -63,13 +63,13 @@ En esta lección vas a:
 
 ## 1. El mapa de tareas del Dominio 4: dónde encaja esta lección
 
-La guía del examen asigna cinco tareas al Dominio 4; esta lección es el núcleo técnico de 4.1–4.3, y aporta la maquinaria de identidad que consumen 4.4 (auditoría) y 4.5 (gobernanza).
+La guía del examen asigna cinco tareas al Dominio 4; esta lección es el núcleo técnico de 4.1 to 4.3, y aporta la maquinaria de identidad que consumen 4.4 (auditoría) y 4.5 (gobernanza).
 
 | Tarea | Lo que pide la guía | Dónde está en esta lección |
 |---|---|---|
 | **4.1 Aplicar autenticación** | Grupos de seguridad de VPC; grupos/funciones/extremos de IAM; rotación de credenciales; funciones de IAM para Lambda, API Gateway, CLI, CloudFormation; políticas sobre funciones/extremos/servicios (S3 Access Points, PrivateLink) | Secciones 9, 11, 12, 13 |
 | **4.2 Aplicar autorización** | Políticas IAM personalizadas; credenciales de app/BD (Secrets Manager, Parameter Store); usuarios de BD de Redshift; permisos de Lake Formation; RBAC/etiquetas/ABAC; **políticas personalizadas de mínimo privilegio** | Secciones 3, 9, 10, 12 |
-| **4.3 Garantizar el cifrado y el enmascaramiento de datos** | Enmascaramiento/anonimización; **claves (AWS KMS)**; **cifrado entre límites de cuenta**; **cifrado en tránsito / antes del tránsito** | Secciones 2–8, 10 |
+| **4.3 Garantizar el cifrado y el enmascaramiento de datos** | Enmascaramiento/anonimización; **claves (AWS KMS)**; **cifrado entre límites de cuenta**; **cifrado en tránsito / antes del tránsito** | Secciones 2 to 8, 10 |
 | **4.4 Preparar registros para auditoría** | CloudTrail, CloudWatch Logs, CloudTrail Lake, Athena/OpenSearch/Logs Insights | Fuera de alcance aquí (Lección 10) |
 | **4.5 Privacidad y gobernanza de datos** | Permisos de intercambio de datos de Redshift, Macie + Lake Formation PII, soberanía de datos/fijación de Región, AWS Config | Avisado en las secciones 10 y 14 (la Lección 14 posee Lake Formation) |
 
@@ -97,7 +97,7 @@ AWS KMS ofrece tres niveles de clave, y el examen DEA-C01 los distingue en cinco
 | Dónde vive | **Tu cuenta**, creada por ti | **Tu cuenta**, creada por un servicio integrado en tu nombre | **Una cuenta de servicio de AWS**, no tuya |
 | Visibilidad | Completa: metadatos, política, concesiones, alias, etiquetas | Ver metadatos, política y uso en CloudTrail, nada más | **Invisible** |
 | Control de la política de clave | **La posees** | Solo lectura; no puedes editarla | Ninguno |
-| Rotación | **Opcional**; la habilitas tú; personalizada de 90–2.560 días | **Automática ~365 días**, no se puede desactivar | Controlada por el servicio, anual en la mayoría de servicios |
+| Rotación | **Opcional**; la habilitas tú; personalizada de 90 to 2.560 días | **Automática ~365 días**, no se puede desactivar | Controlada por el servicio, anual en la mayoría de servicios |
 | Intercambio entre cuentas | **Sí**, mediante la política de clave | **No** | Sí de forma transparente (gestionada por el servicio) |
 | Costo (en octubre de 2026) | **$1.00/clave/mes** prorrateado por hora + **$0.03 por cada 10.000 solicitudes** | **Sin cuota de almacenamiento**; se factura el uso (algunos servicios lo absorben) | **Gratis** |
 | Comprobación de identidad | `DescribeKey` → `KeyManager=CUSTOMER` | alias `aws/<service>` | no consultable |
@@ -119,7 +119,7 @@ flowchart TD
     C1 --> F["El examen lo elige cuando: cero complicaciones con claves y no se necesita auditoría por clave"]
 ```
 
-- **📚 ¿Sabías que…?** El nivel administrado por AWS es un **patrón heredado**: la documentación de KMS de AWS señala que **desde 2021 no se crean claves administradas por AWS para nuevas integraciones de servicios** — las integraciones nuevas usan por defecto claves propiedad de AWS (gratis) o te piden que aportes una CMK. Por eso el valor por defecto de DynamoDB es **propiedad de AWS** (rotadas ~365 días, AES-256, no se pueden desactivar) mientras que la opción administrada de S3 sigue siendo la clave administrada por AWS `aws/s3` (conceptos de KMS; documentación de cifrado de DynamoDB, consultada en octubre de 2026).
+- **📚 ¿Sabías que…?** El nivel administrado por AWS es un **patrón heredado**: la documentación de KMS de AWS señala que **desde 2021 no se crean claves administradas por AWS para nuevas integraciones de servicios**: las integraciones nuevas usan por defecto claves propiedad de AWS (gratis) o te piden que aportes una CMK. Por eso el valor por defecto de DynamoDB es **propiedad de AWS** (rotadas ~365 días, AES-256, no se pueden desactivar) mientras que la opción administrada de S3 sigue siendo la clave administrada por AWS `aws/s3` (conceptos de KMS; documentación de cifrado de DynamoDB, consultada en octubre de 2026).
 
 ---
 
@@ -162,9 +162,9 @@ La sentencia predeterminada que trae cada CMK nueva nombra la **cuenta**, no al 
 }
 ```
 
-Lee `arn:aws:iam::<account-id>:root` como «**esta cuenta, a través de sus políticas IAM**» — delega en IAM para que las políticas de identidad de la cuenta puedan conceder acciones sobre claves. **No** otorga al usuario raíz una posición especial más allá de lo que IAM ya permite, y sustituirlo por `"Principal": "*"` en una sentencia Allow es el agujero canónico (visión general de la política de clave de KMS, consultada en octubre de 2026).
+Lee `arn:aws:iam:<account-id>:root` como «**esta cuenta, a través de sus políticas IAM**»: delega en IAM para que las políticas de identidad de la cuenta puedan conceder acciones sobre claves. **No** otorga al usuario raíz una posición especial más allá de lo que IAM ya permite, y sustituirlo por `"Principal": "*"` en una sentencia Allow es el agujero canónico (visión general de la política de clave de KMS, consultada en octubre de 2026).
 
-### 3.4 Ejemplo resuelto E1 — una política de identidad que parece correcta y no hace nada
+### 3.4 Ejemplo resuelto E1: una política de identidad que parece correcta y no hace nada
 
 La política IAM de un analista en la cuenta B:
 
@@ -176,9 +176,9 @@ La política IAM de un analista en la cuenta B:
 }
 ```
 
-Si la política de clave de la CMK de la cuenta A nunca nombró a la cuenta B ni a `arn:aws:iam::B:role/AnalystRole`, esta política está **inerte**. El analista recibe `AccessDenied` con la pista engañosa «not authorized to perform kms:Decrypt» — la solución nunca está en la política IAM; está en la **política de clave** (y, para los datos propiamente dichos, en la **política de bucket**). Redacción de examen: «¿Qué cambio concede acceso al analista entre cuentas?» — responde **política de clave** primero.
+Si la política de clave de la CMK de la cuenta A nunca nombró a la cuenta B ni a `arn:aws:iam:B:role/AnalystRole`, esta política está **inerte**. El analista recibe `AccessDenied` con la pista engañosa «not authorized to perform kms:Decrypt», la solución nunca está en la política IAM; está en la **política de clave** (y, para los datos propiamente dichos, en la **política de bucket**). Redacción de examen: «¿Qué cambio concede acceso al analista entre cuentas?», responde **política de clave** primero.
 
-- **📚 ¿Sabías que…?** Los tres mecanismos tienen verbos distintos a propósito: las **políticas** son JSON declarativo evaluado en cada llamada; las **funciones** son identidades asumibles cuya *política de confianza* decide quién puede crear una sesión; las **concesiones** son tickets específicos de KMS, solo de permitir y pensados para máquinas, que los servicios integrados crean en tu nombre — `RetireGrant` y `RevokeGrant` son las APIs de limpieza, y una concesión duplicada olvidada es una escalada de privilegios permanente (documento de mejores prácticas de concesiones de KMS, consultado en octubre de 2026).
+- **📚 ¿Sabías que…?** Los tres mecanismos tienen verbos distintos a propósito: las **políticas** son JSON declarativo evaluado en cada llamada; las **funciones** son identidades asumibles cuya *política de confianza* decide quién puede crear una sesión; las **concesiones** son tickets específicos de KMS, solo de permitir y pensados para máquinas, que los servicios integrados crean en tu nombre: `RetireGrant` y `RevokeGrant` son las APIs de limpieza, y una concesión duplicada olvidada es una escalada de privilegios permanente (documento de mejores prácticas de concesiones de KMS, consultado en octubre de 2026).
 
 ```dragdrop
 {
@@ -220,7 +220,7 @@ Lo que esto significa para los escenarios de examen:
 - **La CMK envuelve la clave de datos, no tus datos.** `kms:Decrypt` sobre la clave es necesario pero no suficiente: el llamante también necesita la clave de datos cifrada almacenada con el objeto (S3 hace esto por ti bajo SSE-KMS).
 - **`ReEncrypt*` son dos permisos, no uno.** Reenvolver una clave de datos bajo una nueva clave exige **a la vez** `kms:ReEncryptFrom` y `kms:ReEncryptTo` (referencia de permisos de la API de KMS, consultada en octubre de 2026).
 - **La rotación nunca reescribe el cifrado.** El material nuevo cifra las claves de datos **futuras**; el cifrado antiguo se descifra para siempre con la clave de respaldo antigua conservada. Nada en «habilitar la rotación» migra tus objetos.
-- **El cifrado del lado del cliente (CSE-KMS)** es la misma matemática ejecutada enteramente de tu lado — AWS nunca ve el texto plano — y por eso CSE-KMS es el nivel de resultados «más fuerte» de Athena y una opción de EMRFS.
+- **El cifrado del lado del cliente (CSE-KMS)** es la misma matemática ejecutada enteramente de tu lado, AWS nunca ve el texto plano, y por eso CSE-KMS es el nivel de resultados «más fuerte» de Athena y una opción de EMRFS.
 
 ---
 
@@ -230,7 +230,7 @@ Lo que esto significa para los escenarios de examen:
 
 | Tipo de clave | Rotación | Control |
 |---|---|---|
-| **CMK (simétrica, origen `AWS_KMS`)** | **Desactivada por defecto**; al habilitarla, material nuevo cada **365 días** (personalizada **90–2.560**); primera rotación un año después de habilitarla | Tú llamas a `EnableKeyRotation` |
+| **CMK (simétrica, origen `AWS_KMS`)** | **Desactivada por defecto**; al habilitarla, material nuevo cada **365 días** (personalizada **90 to 2.560**); primera rotación un año después de habilitarla | Tú llamas a `EnableKeyRotation` |
 | **CMK (asimétrica, HMAC, importada, almacén de claves personalizado)** | **No elegible** para rotación automática | Rotación manual o `RotateKeyOnDemand` |
 | **Clave administrada por AWS** | **Siempre ~365 días**, no se puede desactivar (antes era ~1.095 días, hasta mayo de 2022) | Ninguna |
 | **Clave propiedad de AWS** | Controlada por el servicio, ~anual | Ninguna |
@@ -245,7 +245,7 @@ La rotación es **transparente**: el cifrado existente nunca se vuelve a cifrar 
 - Límites: **50.000 concesiones por clave**; `CreateGrant` es aproximadamente tan potente como `PutKeyPolicy`, así que condiciónnelo con `kms:GranteePrincipal`, `kms:GrantOperations`, `kms:GrantConstraintType` y `kms:GrantIsForAWSResource`.
 - Un `GrantToken` devuelto por `CreateGrant` esquiva la consistencia eventual posterior a la creación dentro del mismo flujo de trabajo.
 
-### 5.3 Ejemplo resuelto E2 — lo que «habilitar la rotación» cuesta y lo que no hace
+### 5.3 Ejemplo resuelto E2: lo que «habilitar la rotación» cuesta y lo que no hace
 
 Un equipo habilita la rotación automática en una CMK simétrica el 2026-01-15, la rota cinco veces en tres años y almacena 40 TB de objetos de S3 bajo SSE-KMS con esa clave.
 
@@ -271,15 +271,15 @@ Cada cifra de esta sección procede de la página de precios de AWS KMS, **en oc
 
 | Cargo | Valor (en octubre de 2026) |
 |---|---|
-| Almacenamiento de clave administrada por el cliente | **$1.00 por clave al mes**, prorrateado por hora — se aplica a la clave primaria **multi-Región y a sus réplicas**, al material importado y a los almacenes de claves externos |
+| Almacenamiento de clave administrada por el cliente | **$1.00 por clave al mes**, prorrateado por hora: se aplica a la clave primaria **multi-Región y a sus réplicas**, al material importado y a los almacenes de claves externos |
 | Recargo por rotación | La **primera y la segunda** rotaciones automáticas o bajo demanda añaden **$1.00/mes cada una**, **con tope en la segunda**; las rotaciones posteriores son gratis |
 | Uso simétrico | **$0.03 por cada 10.000 solicitudes** |
 | Uso de firma asimétrica | **$0.15 por cada 10.000 solicitudes** |
 | Free tier | **20.000 solicitudes de KMS al mes, todas las Regiones sumadas** (excluye `Sign`/`Verify` y `GenerateDataKeyPair*` asimétricos) |
 | Administrada por AWS / propiedad de AWS | **Sin cuota de almacenamiento**; el uso de la administrada por AWS se factura igualmente salvo que un servicio lo absorba |
-| Entre cuentas | «**Se factura a la cuenta de AWS que hace la solicitud de la API**» — paga quien llama |
+| Entre cuentas | «**Se factura a la cuenta de AWS que hace la solicitud de la API**»: paga quien llama |
 
-### 6.1 Ejemplo resuelto E3 — la factura mensual de KMS para un lago SSE-KMS
+### 6.1 Ejemplo resuelto E3: la factura mensual de KMS para un lago SSE-KMS
 
 Una CMK y un mes ocupado con **2.010.000** llamadas a KMS (los GET y los PUT desencadenan operaciones de clave de datos):
 
@@ -290,7 +290,7 @@ Cuota de la clave      = $1.00
 Total mensual          = $1.00 + $5.97 = $6.97   (en octubre de 2026)
 ```
 
-### 6.2 Ejemplo resuelto E4 — el mismo lago con un S3 Bucket Key
+### 6.2 Ejemplo resuelto E4: el mismo lago con un S3 Bucket Key
 
 Los S3 Bucket Keys reducen hasta un **99%** el número de solicitudes de KMS que llegan a tu clave, porque S3 reenvía una sola clave de datos en lugar de una por operación de objeto. No se admiten con DSSE-KMS; sí con SSE-KMS.
 
@@ -302,7 +302,7 @@ El mismo lago con SSE-S3 por defecto (claves propiedad de AWS) = $0 de coste de 
 Ahorro frente a E3 = $6.97 - ~$1.05 ~= $5.92 al mes, ~85% de la factura de claves
 ```
 
-Planteamiento de examen (y la solución en el Caso A más abajo): «¿Qué único cambio reduce más el coste de KMS de un bucket SSE-KMS sin debilitar el postura de cifrado?» — **habilitar los S3 Bucket Keys**.
+Planteamiento de examen (y la solución en el Caso A más abajo): «¿Qué único cambio reduce más el coste de KMS de un bucket SSE-KMS sin debilitar el postura de cifrado?»: **habilitar los S3 Bucket Keys**.
 
 > [!IMPORTANT]
 > **⚠️ Trampas de coste:** rotar una CMK **dos veces** añade $2/mes y después aplica el tope; **los llamantes entre cuentas pagan en su propia cuenta**; el free tier es **por cuenta, todas las Regiones sumadas**, no por clave; y las claves administradas por AWS siguen facturando el **uso** salvo que el servicio integrante pague por ti (precios de AWS KMS, consultados en octubre de 2026).
@@ -318,7 +318,7 @@ El cifrado en reposo en este examen es un juego de **valores por defecto**. Obse
 | **Amazon S3** | **SSE-S3 en todos los buckets desde 2023-01-05**, AES-256-GCM, **sin cuota** | SSE-KMS (`aws/s3` o tu CMK), DSSE-KMS (doble capa), SSE-C (aportas la clave en cada solicitud) | **Los Bucket Keys reducen hasta un 99% las llamadas a KMS**; cambiar el valor por defecto del bucket **no vuelve a cifrar los objetos existentes**; DSSE-KMS no admite Bucket Keys |
 | **AWS Glue** | **Ninguno hasta que lo configures** | Configuración de seguridad: datos de S3 con SSE-S3/SSE-KMS, CloudWatch Logs con KMS, **bookmarks del job con CSE-KMS**, Data Quality con KMS; Catálogo `DISABLED \| SSE-KMS \| SSE-KMS-WITH-SERVICE-ROLE`; contraseñas de conexión vía CMK | **Solo CMK simétricas**; la configuración de seguridad **anula** cualquier parámetro SSE-S3 del job; la **función del job** necesita los permisos de KMS |
 | **Amazon Redshift** | **Cifrado por defecto** (AES-256) en clústeres nuevos | Clave propiedad de AWS, **tu CMK** o CloudHSM | Jerarquía de cuatro niveles raíz → CEK → DEK → claves de datos; solo sale de KMS el CEK cifrado; **desactiva la copia de instantáneas entre Regiones antes** de cambiar de clave; la rotación del CEK **reinicia el clúster** |
-| **Kinesis Data Streams** | **Desactivado hasta que habilites SSE** | `aws/kinesis` (clave gratis, uso facturado) o una **CMK** | Cifra **solo los registros nuevos** — los registros previos quedan sin cifrar; **≤25 cambios de clave cada 24 horas móviles**; compartir mediante política de recurso exige una **CMK** |
+| **Kinesis Data Streams** | **Desactivado hasta que habilites SSE** | `aws/kinesis` (clave gratis, uso facturado) o una **CMK** | Cifra **solo los registros nuevos**: los registros previos quedan sin cifrar; **≤25 cambios de clave cada 24 horas móviles**; compartir mediante política de recurso exige una **CMK** |
 | **Amazon DynamoDB** | **Clave propiedad de AWS, siempre activa, no se puede desactivar** (AES-256) | `aws/dynamodb` o una CMK por tabla | La CMK cubre índices, streams y copias de seguridad; **DAX no puede usar una CMK**; la clave puede cambiarse en cualquier momento |
 | **Amazon EMR** | **Ninguno hasta una configuración de seguridad** (EMR ≥ 4.8.0) | EMRFS SSE-S3 / SSE-KMS / CSE-KMS / CSE-C; EBS en reposo; WAL `SSE-EMR-WAL` (por defecto) o `SSE-KMS` | **Solo claves simétricas**, en la misma Región que el clúster **y** que los buckets; el cifrado transparente de HDFS (≥ 4.1.0) usa **Hadoop KMS, no AWS KMS** |
 | **Amazon Athena** | Los resultados siguen la configuración de consulta/workgroup | SSE-S3, **SSE-KMS (recomendado)**, CSE-KMS; los resultados de consulta gestionados los gestiona el servicio y vienen cifrados | Manda la anulación del workgroup; niveles Básico = SSE_S3, Intermedio = SSE_KMS, Avanzado = CSE_KMS; **las lecturas de tablas siguen el cifrado de la tabla**, no la configuración de resultados; muchos objetos pequeños de resultados en KMS pueden limitar las consultas |
@@ -338,7 +338,7 @@ flowchart TD
     KD --> BK4["Palanca de mejora: SSE con CMK y después reemitir los registros antiguos si hace falta"]
 ```
 
-### 7.1 Ejemplo resuelto E5 — la migración que no re-cifró
+### 7.1 Ejemplo resuelto E5: la migración que no re-cifró
 
 Un equipo de cumplimiento cambia el cifrado por defecto de un bucket de S3 existente de SSE-S3 a SSE-KMS con una CMK el 2026-10-01 y declara el lago conforme.
 
@@ -362,15 +362,15 @@ Contraejemplo: DynamoDB SÍ puede cambiar el material de clave en
 {
   "question": "Relaciona cada servicio de datos con su estado de cifrado en reposo POR DEFECTO en DEA-C01 (en octubre de 2026):",
   "pairs": [
-    {"left": "Amazon S3", "right": "SSE-S3 en todos los buckets desde 2023-01-05 - AES-256-GCM, sin cuota, claves de S3"},
-    {"left": "Amazon DynamoDB", "right": "Clave propiedad de AWS, siempre activa, no se puede desactivar - la CMK es una mejora opcional por tabla"},
-    {"left": "Amazon Redshift", "right": "Cifrado por defecto con una clave propiedad de AWS - jerarquía de cuatro niveles; SSL SIN embargo NO es obligatorio por defecto"},
-    {"left": "Amazon Kinesis Data Streams", "right": "Cifrado del lado del servidor DESACTIVADO hasta que se habilite - y cifra solo los registros NUEVOS"},
-    {"left": "AWS Glue", "right": "Nada cifrado hasta que adjuntes una configuración de seguridad - solo CMK simétricas"},
-    {"left": "Amazon EMR", "right": "Nada cifrado hasta que exista una configuración de seguridad - el cifrado transparente de HDFS usa Hadoop KMS, no AWS KMS"},
-    {"left": "Amazon Athena", "right": "Los resultados de consulta siguen la configuración del workgroup - pero las LECTURAS de tablas siguen el cifrado de la propia tabla"}
+    {"left": "Amazon S3", "right": "SSE-S3 en todos los buckets desde 2023-01-05: AES-256-GCM, sin cuota, claves de S3"},
+    {"left": "Amazon DynamoDB", "right": "Clave propiedad de AWS, siempre activa, no se puede desactivar: la CMK es una mejora opcional por tabla"},
+    {"left": "Amazon Redshift", "right": "Cifrado por defecto con una clave propiedad de AWS: jerarquía de cuatro niveles; SSL SIN embargo NO es obligatorio por defecto"},
+    {"left": "Amazon Kinesis Data Streams", "right": "Cifrado del lado del servidor DESACTIVADO hasta que se habilite: y cifra solo los registros NUEVOS"},
+    {"left": "AWS Glue", "right": "Nada cifrado hasta que adjuntes una configuración de seguridad: solo CMK simétricas"},
+    {"left": "Amazon EMR", "right": "Nada cifrado hasta que exista una configuración de seguridad: el cifrado transparente de HDFS usa Hadoop KMS, no AWS KMS"},
+    {"left": "Amazon Athena", "right": "Los resultados de consulta siguen la configuración del workgroup: pero las LECTURAS de tablas siguen el cifrado de la propia tabla"}
   ],
-  "explanation": "El examen prueba los VALORES POR DEFECTO más la dirección de la mejora. S3 y DynamoDB cifran sin configuración (niveles de clave distintos: SSE-S3 usa claves propiedad de AWS; el valor por defecto de DynamoDB también es propiedad de AWS). Redshift cifra pero deja SSL opcional (require_SSL=true es cosa tuya). Kinesis y Glue/EMR no hacen nada hasta que se configuran, y Kinesis nunca rellena los registros antiguos. Athena separa el cifrado de resultados del cifrado de la tabla de origen - un distractor favorito."
+  "explanation": "El examen prueba los VALORES POR DEFECTO más la dirección de la mejora. S3 y DynamoDB cifran sin configuración (niveles de clave distintos: SSE-S3 usa claves propiedad de AWS; el valor por defecto de DynamoDB también es propiedad de AWS). Redshift cifra pero deja SSL opcional (require_SSL=true es cosa tuya). Kinesis y Glue/EMR no hacen nada hasta que se configuran, y Kinesis nunca rellena los registros antiguos. Athena separa el cifrado de resultados del cifrado de la tabla de origen: un distractor favorito."
 }
 ```
 
@@ -378,14 +378,14 @@ Contraejemplo: DynamoDB SÍ puede cambiar el material de clave en
 
 ## 8. Cifrado en tránsito: TLS en todas partes y los dos patrones de cumplimiento
 
-La línea base de AWS: **S3 acepta TLS 1.2 y 1.3** en sus extremos, y **todos los extremos de API de servicios de AWS exigen como mínimo TLS 1.2 desde 2024-02-27**. Kinesis **exige TLS 1.2 y recomienda 1.3**. Redshift, sin embargo, **acepta conexiones no SSL por defecto** — tienes que fijar `require_SSL=true` en el grupo de parámetros del clúster. Al examen le encanta esa asimetría.
+La línea base de AWS: **S3 acepta TLS 1.2 y 1.3** en sus extremos, y **todos los extremos de API de servicios de AWS exigen como mínimo TLS 1.2 desde 2024-02-27**. Kinesis **exige TLS 1.2 y recomienda 1.3**. Redshift, sin embargo, **acepta conexiones no SSL por defecto**: tienes que fijar `require_SSL=true` en el grupo de parámetros del clúster. Al examen le encanta esa asimetría.
 
 ### 8.1 Del lado del servidor frente a del lado del cliente, en una línea cada uno
 
 - **Del lado del servidor (SSE-\*)**: el servicio cifra al recibir y descifra al servir; tú nunca sostienes texto plano.
-- **Del lado del cliente (CSE-KMS, cliente de cifrado de S3, `COPY` de Redshift sobre archivos cifrados por el cliente, CSE de EMRFS)**: cifras antes de subir; **AWS no puede leer el texto plano** — y por eso CSE es a la vez el postura más fuerte y la más difícil de operar.
+- **Del lado del cliente (CSE-KMS, cliente de cifrado de S3, `COPY` de Redshift sobre archivos cifrados por el cliente, CSE de EMRFS)**: cifras antes de subir; **AWS no puede leer el texto plano**, y por eso CSE es a la vez el postura más fuerte y la más difícil de operar.
 
-### 8.2 Ejemplo resuelto E6 — un Deny de `aws:SecureTransport` que rompió la replicación
+### 8.2 Ejemplo resuelto E6, un Deny de `aws:SecureTransport` que rompió la replicación
 
 Política del equipo: denegar cualquier solicitud que no sea HTTPS.
 
@@ -400,7 +400,7 @@ Política del equipo: denegar cualquier solicitud que no sea HTTPS.
 }
 ```
 
-La polaridad de la condición es correcta — `aws:SecureTransport` es **true** para HTTPS — pero la **replicación** de S3 después no logra escribir su configuración. Motivo, según la documentación de S3: *«Cuando los servicios de AWS hacen llamadas a otros servicios de AWS en tu nombre (llamadas de servicio a servicio), cierto contexto de autorización específico de la red se redacta, incluidos `s3:TlsVersion`, `aws:SecureTransport`, `aws:SourceIp` y `aws:VpcSourceIp`»*. El principal del servicio de replicación **no** presenta ningún valor de `aws:SecureTransport`, así que el Deny coincide. Solución:
+La polaridad de la condición es correcta, `aws:SecureTransport` es **true** para HTTPS, pero la **replicación** de S3 después no logra escribir su configuración. Motivo, según la documentación de S3: *«Cuando los servicios de AWS hacen llamadas a otros servicios de AWS en tu nombre (llamadas de servicio a servicio), cierto contexto de autorización específico de la red se redacta, incluidos `s3:TlsVersion`, `aws:SecureTransport`, `aws:SourceIp` y `aws:VpcSourceIp`»*. El principal del servicio de replicación **no** presenta ningún valor de `aws:SecureTransport`, así que el Deny coincide. Solución:
 
 ```json
 "Condition": {
@@ -431,15 +431,15 @@ Existe automatización de configuración para las dos palancas más examinadas: 
 
 | Concepto | Qué es en este examen |
 |---|---|
-| **Política** | Documento JSON de permisos — basada en identidad (adjunta a un principal) o basada en recurso (adjunta a un bucket, una clave, una cola…) |
+| **Política** | Documento JSON de permisos: basada en identidad (adjunta a un principal) o basada en recurso (adjunta a un bucket, una clave, una cola…) |
 | **Función** | Identidad asumible = **política de confianza** (quién puede asumirla) + políticas de permiso (qué puede hacer una sesión) + **credenciales temporales** vía STS |
-| **Función de servicio** | Una función **que el servicio asume para actuar en tu nombre** — job de Glue, instancia de replicación de DMS, `COPY IAM_ROLE=…` de Redshift, función de ejecución de Lambda |
+| **Función de servicio** | Una función **que el servicio asume para actuar en tu nombre**: job de Glue, instancia de replicación de DMS, `COPY IAM_ROLE=…` de Redshift, función de ejecución de Lambda |
 | **Función vinculada al servicio** | Variante gestionada por AWS; el servicio define la confianza y los permisos; no puedes editarlos |
 | **Regla de identidad de la carga de trabajo** | Las cargas de trabajo usan **funciones, nunca claves de acceso a largo plazo incrustadas**; las personas se federan a través de IAM Identity Center |
 
 ### 9.2 El patrón `AWSGlueServiceRole` y el antipatrón `AmazonS3FullAccess`
 
-Históricamente, la consola de AWS adjunta `AmazonS3FullAccess` a los jobs de Glue de demostración. La propia documentación de Glue matiza esto: *«Es posible que quieras proporcionar tu propia política para acceder a recursos concretos de Amazon S3»*. La **`AWSGlueServiceRole` gestionada** concede Glue más un S3 limitado (sus propios buckets de scripts y temporales `aws-glue-*`), CloudWatch y el cableado de ENI — **no es un concesión de acceso a datos**. Patrón de producción:
+Históricamente, la consola de AWS adjunta `AmazonS3FullAccess` a los jobs de Glue de demostración. La propia documentación de Glue matiza esto: *«Es posible que quieras proporcionar tu propia política para acceder a recursos concretos de Amazon S3»*. La **`AWSGlueServiceRole` gestionada** concede Glue más un S3 limitado (sus propios buckets de scripts y temporales `aws-glue-*`), CloudWatch y el cableado de ENI: **no es un concesión de acceso a datos**. Patrón de producción:
 
 ```json
 {
@@ -477,7 +477,7 @@ Históricamente, la consola de AWS adjunta `AmazonS3FullAccess` a los jobs de Gl
 }
 ```
 
-Tres cosas que este extracto hace bien y que `AmazonS3FullAccess` hace mal: **ARN de `Resource` con ámbito de prefijo**, **`s3:ListBucket` sobre el ARN del bucket emparejado con `s3:GetObject`/`PutObject` sobre el ARN del objeto** (el modelo de permisos de S3 de dos niveles) y **acciones de KMS atadas al ARN concreto de la clave** — que la política de clave también debe permitir (Sección 3).
+Tres cosas que este extracto hace bien y que `AmazonS3FullAccess` hace mal: **ARN de `Resource` con ámbito de prefijo**, **`s3:ListBucket` sobre el ARN del bucket emparejado con `s3:GetObject`/`PutObject` sobre el ARN del objeto** (el modelo de permisos de S3 de dos niveles) y **acciones de KMS atadas al ARN concreto de la clave**: que la política de clave también debe permitir (Sección 3).
 
 Los mínimos propios de AWS para un job de Glue coinciden con esa división: *«Las fuentes de datos requieren los permisos `s3:ListBucket` y `s3:GetObject`. Los destinos de datos requieren `s3:ListBucket`, `s3:PutObject` y `s3:DeleteObject`»*. Y si pasas una función por la consola, su nombre debe llevar el **prefijo `AWSGlueServiceRole`** (documentación de IAM de Glue, consultada en octubre de 2026).
 
@@ -506,7 +506,7 @@ El conjunto mínimo de acciones según la forma de la carga de trabajo (referenc
 | **Leer** objetos SSE-KMS | `kms:Decrypt`, `kms:DescribeKey` |
 | **Escribir** objetos SSE-KMS | `kms:GenerateDataKey*`, `kms:Encrypt`, más `kms:DescribeKey`; `kms:ReEncrypt*` al reenvolver |
 | **Clave de resultados gestionados de Athena** | `kms:Decrypt`, `kms:GenerateDataKey`, `kms:DescribeKey` |
-| **Configuración de seguridad de Glue** | Todo lo anterior para **cada** clave nombrada en la configuración — adjunta a la **función del job**, no al usuario de la consola que pulsó Run |
+| **Configuración de seguridad de Glue** | Todo lo anterior para **cada** clave nombrada en la configuración: adjunta a la **función del job**, no al usuario de la consola que pulsó Run |
 
 - **📚 ¿Sabías que…?** El modelo de permisos de dos niveles de S3 es un fallo silencioso frecuente: `s3:ListBucket` se autoriza contra el **ARN del bucket** (`arn:aws:s3:::lake-raw`), mientras que `s3:GetObject`/`s3:PutObject` se autorizan contra **ARN de objeto** (`arn:aws:s3:::lake-raw/raw/*`). Conceder solo los ARN de objeto deja `ListBucket` fallando; la división fuente/destino de la documentación de AWS Glue existe precisamente porque los crawlers y la proyección de particiones llaman a `ListBucket` constantemente (documento de mínimos privilegios de Glue, consultado en octubre de 2026).
 
@@ -524,7 +524,7 @@ El conjunto mínimo de acciones según la forma de la carga de trabajo (referenc
     "7": "clave"
   },
   "distractors": ["policy", "grant", "resource", "permanent", "session", "s3:GetObject", "s3:PutObject", "AmazonS3FullAccess", "bucket", "principal"],
-  "explanation": "Las funciones = política de confianza + políticas de permiso + credenciales temporales de STS, y por eso AWS prohíbe claves a largo plazo en las cargas de trabajo. Los mínimos documentados de Glue son exactamente ListBucket+GetObject para fuentes y ListBucket+PutObject+DeleteObject para destinos, y las funciones de Glue pasadas por la consola deben empezar por AWSGlueServiceRole. Los derechos de KMS deben atarse al ARN DE LA CLAVE en la política de identidad y a la vez permitirse en la política de clave - cualquiera de los dos documentos a solas deja el pipeline con AccessDenied."
+  "explanation": "Las funciones = política de confianza + políticas de permiso + credenciales temporales de STS, y por eso AWS prohíbe claves a largo plazo en las cargas de trabajo. Los mínimos documentados de Glue son exactamente ListBucket+GetObject para fuentes y ListBucket+PutObject+DeleteObject para destinos, y las funciones de Glue pasadas por la consola deben empezar por AWSGlueServiceRole. Los derechos de KMS deben atarse al ARN DE LA CLAVE en la política de identidad y a la vez permitirse en la política de clave: cualquiera de los dos documentos a solas deja el pipeline con AccessDenied."
 }
 ```
 
@@ -538,7 +538,7 @@ El acceso entre cuentas es el «cifrado entre límites de cuenta» de la tarea 4
 |---|---|---|
 | 1 | **Política de clave** de la CMK de A | Permitir a `arn:aws:iam::B:role/AnalystRole` (o a la raíz de la cuenta B + delegación) `kms:Decrypt`, `kms:DescribeKey` |
 | 2 | **Política de bucket** del bucket de A | Permitir a ese principal `s3:GetObject` sobre `curated/*` |
-| 3 | **Política IAM** de la función de B | Permitir `kms:Decrypt`/`kms:DescribeKey` sobre el ARN de la clave de A y `s3:GetObject` sobre los ARN del bucket de A — *«El acceso entre cuentas requiere permiso en la política de clave de la clave de KMS y en una política IAM en la cuenta del usuario externo»* |
+| 3 | **Política IAM** de la función de B | Permitir `kms:Decrypt`/`kms:DescribeKey` sobre el ARN de la clave de A y `s3:GetObject` sobre los ARN del bucket de A: *«El acceso entre cuentas requiere permiso en la política de clave de la clave de KMS y en una política IAM en la cuenta del usuario externo»* |
 | 4 | **Política de confianza** de la función de B | Permitir a los usuarios/grupos de analistas hacer `sts:AssumeRole` |
 
 ```mermaid
@@ -575,9 +575,9 @@ Las ACL son heredadas. Desde que AWS activó por defecto **Object Ownership = Bu
 | On-premises sobre Direct Connect/VPN | **No** | **Sí** |
 | Entre Regiones | No | Vía peering/Transit Gateway |
 | Capa extra de autenticación | Política de extremo | Política de extremo |
-| Claves de condición | `aws:sourceVpce` funciona; **`aws:SourceIp` no** — usa **`aws:VpcSourceIp`** | Misma precaución en la vía del gateway |
+| Claves de condición | `aws:sourceVpce` funciona; **`aws:SourceIp` no**: usa **`aws:VpcSourceIp`** | Misma precaución en la vía del gateway |
 
-### 11.3 Ejemplo resuelto E7 — vigencia de las URL prefirmadas
+### 11.3 Ejemplo resuelto E7: vigencia de las URL prefirmadas
 
 Una URL prefirmada delega los permisos del **prefirmante** para una operación concreta; nunca los amplía, y la vigencia se vuelve a comprobar en cada solicitud (siguen aplicándose los Deny de la política de bucket y Block Public Access).
 
@@ -611,13 +611,13 @@ Ambos almacenan texto cifrado bajo KMS; divergen en **rotación, entre cuentas, 
 |---|---|---|
 | Tipos | String, StringList, **SecureString** | Secreto (llano o clave/valor JSON) |
 | Cifrado | SecureString vía KMS, solo simétricas; por defecto `aws/ssm` o tu CMK; el nivel estándar se cifra bajo la clave, el nivel avanzado añade sobre más AWS Encryption SDK | Siempre KMS (administrada por AWS o tu CMK) |
-| **Rotación** | **Ninguna** — el cron lo posees tú | **Rotación con Lambda** + integraciones nativas de RDS/OpenSearch |
+| **Rotación** | **Ninguna**: el cron lo posees tú | **Rotación con Lambda** + integraciones nativas de RDS/OpenSearch |
 | Entre cuentas / replicación | **Solo nivel avanzado** | Sí |
-| Tamaño | Estándar **4 KB**, avanzado **8 KB** | No es el factor decisivo — este examen elige el almacén por rotación y entre cuentas, no por tamaño de la carga |
-| Costo (en octubre de 2026) | Estándar **gratis** — 10.000 parámetros/cuenta/Región; avanzado **$0.05/parámetro/mes**, 100.000 parámetros, políticas de parámetro | **$0.40/secreto/mes** (prorrateado por hora) + **$0.05 por cada 10.000 llamadas a la API**; **prueba de 30 días**; las **versiones de rotación no se facturan** |
+| Tamaño | Estándar **4 KB**, avanzado **8 KB** | No es el factor decisivo; este examen elige el almacén por rotación y entre cuentas, no por tamaño de la carga |
+| Costo (en octubre de 2026) | Estándar **gratis**: 10.000 parámetros/cuenta/Región; avanzado **$0.05/parámetro/mes**, 100.000 parámetros, políticas de parámetro | **$0.40/secreto/mes** (prorrateado por hora) + **$0.05 por cada 10.000 llamadas a la API**; **prueba de 30 días**; las **versiones de rotación no se facturan** |
 | Elige para | Valores de configuración, feature flags, texto que no sea secreto | Credenciales de BD, claves API, tokens OAuth/JWT, todo lo que necesite rotación o auditoría por secreto |
 
-### 12.1 Ejemplo resuelto E8 — 50 credenciales de base de datos, doce meses
+### 12.1 Ejemplo resuelto E8: 50 credenciales de base de datos, doce meses
 
 Un job nocturno de Glue y tres pasos de EMR rotan 50 credenciales de almacén/servicio.
 
@@ -654,49 +654,49 @@ Los controles de red son la primera habilidad de la tarea 4.1.1 («actualizar gr
 
 | Componente | Regla de entrada que realmente hace falta | Trampa |
 |---|---|---|
-| **Redshift** | Puerto de cliente **5439** (rangos RA3 **5431–5455 / 8191–8215**) desde el grupo de seguridad del cliente o el CIDR de la VPN | SG por defecto = solo intra-grupo; nunca abras 5439 a `0.0.0.0/0` |
-| **DMS** | Grupo de seguridad de la instancia de replicación referenciado por los **grupos de seguridad de la BD de origen/destino** en el puerto de la BD; salida de la instancia de replicación en el puerto de la BD | La salida del grupo de replicación por defecto es `0.0.0.0/0` en todos los puertos — estrechalo |
+| **Redshift** | Puerto de cliente **5439** (rangos RA3 **5431 to 5455 / 8191 to 8215**) desde el grupo de seguridad del cliente o el CIDR de la VPN | SG por defecto = solo intra-grupo; nunca abras 5439 a `0.0.0.0/0` |
+| **DMS** | Grupo de seguridad de la instancia de replicación referenciado por los **grupos de seguridad de la BD de origen/destino** en el puerto de la BD; salida de la instancia de replicación en el puerto de la BD | La salida del grupo de replicación por defecto es `0.0.0.0/0` en todos los puertos: estrechalo |
 | **EMR** | Grupos gestionados `ElasticMapReduce-primary` / `-core` (+ `-Private`), autorreferenciados; acceso al servicio por **TCP 9443** en versiones ≥ 5.30.0 | Elimina el puerto 22 desde cualquier lugar heredado; **EMR block public access** detiene el tráfico entrante público en subredes públicas |
-| **S3/KMS vía extremo** | Nada de entrada — los extremos enrutan por tablas de rutas | Sobre un extremo gateway usa `aws:VpcSourceIp`, no `aws:SourceIp` |
+| **S3/KMS vía extremo** | Nada de entrada: los extremos enrutan por tablas de rutas | Sobre un extremo gateway usa `aws:VpcSourceIp`, no `aws:SourceIp` |
 
-**PrivateLink** (extremos de interfaz) mantiene el tráfico en la red de AWS, añade una **política de extremo** sobre tus políticas de bucket/clave y — con **el DNS privado habilitado** — hace que las llamadas del SDK se resuelvan de forma privada para que nunca toquen internet. Es la respuesta correcta siempre que los clientes on-premises sobre Direct Connect/VPN deban alcanzar los servicios del pipeline; el **extremo gateway** gratuito es la respuesta correcta para la salida pura de S3/DynamoDB desde un VPC sin requisito on-premises.
+**PrivateLink** (extremos de interfaz) mantiene el tráfico en la red de AWS, añade una **política de extremo** sobre tus políticas de bucket/clave y, con **el DNS privado habilitado**, hace que las llamadas del SDK se resuelvan de forma privada para que nunca toquen internet. Es la respuesta correcta siempre que los clientes on-premises sobre Direct Connect/VPN deban alcanzar los servicios del pipeline; el **extremo gateway** gratuito es la respuesta correcta para la salida pura de S3/DynamoDB desde un VPC sin requisito on-premises.
 
 ---
 
 ### Actualizaciones de 2026 (en octubre de 2026)
 
 > [!NOTE]
-> **Qué cambió en la seguridad del Dominio 4 entre 2024 y octubre de 2026** — cada línea verificada contra una fuente primaria de AWS en **octubre de 2026**, y cada una es examinable porque el examen prueba el comportamiento actual:
-> - **La propia guía del examen se revisó**: la guía DEA-C01 **v1.1 (2025-12-12)** consolidó conocimientos/habilidades en una sola lista de habilidades y añadió **8 habilidades sin eliminar ninguna**; el Dominio 4 ganó **4.1.7 (dominios de SageMaker Unified Studio)**, **4.5.6 (proyectos de SageMaker Catalog)** y **4.5.7 (marco de gobernanza de datos y patrones de intercambio de datos)** — página de revisiones de la guía DEA-C01, consultada en octubre de 2026.
-> - **Delta de la lista de servicios en alcance**: se añadieron **Aurora, Amazon Q, Bedrock, Kendra, AWS Data Exchange, Amazon S3 Tables**; se eliminaron **Cloud9, CodeCommit, AWS SCT** — así que las respuestas basadas en SCT están desactualizadas, mientras que IAM, KMS, Secrets Manager, Macie, Shield y WAF siguen siendo el núcleo del Dominio 4 (páginas de servicios en alcance/fuera de alcance de la guía, consultadas en octubre de 2026).
-> - **Intercambio entre cuentas de Lake Formation v5 (2026-02-11)**: un solo share de AWS RAM puede llevar ahora tablas ilimitadas mediante patrones comodín, y el acceso entre Regiones (enlaces de recurso, sin copia) se compone con el intercambio entre cuentas — la respuesta moderna a «compartir la tabla curada y sus archivos envueltos por KMS con otra cuenta» (AWS What's New, consultado en octubre de 2026).
-> - **Los permisos DML de Iceberg se endurecieron (Patch 202)**: `DELETE` sobre tablas de Lake Formation necesita permiso **DELETE**, `UPDATE`/`MERGE` necesitan **INSERT + DELETE** y todo DML de Iceberg necesita **ALTER** — los laboratorios que solo conceden INSERT ahora fallan, lo cual es la autorización (4.2) encontrándose con tablas de lago gobernadas por cifrado (documentación de cambios de comportamiento de Redshift, consultada en octubre de 2026).
-> - **Resultados de consulta gestionados de Athena (2025-06-03)**: los resultados pueden estar gestionados por el servicio y cifrados **sin coste adicional y sin necesidad de un bucket de resultados en S3** — pero la configuración de cifrado mínimo de tu workgroup sigue mandando cuando aportas tu propio bucket (AWS What's New; documentación de Athena, consultada en octubre de 2026).
-> - **El mínimo privilegio se convirtió en una *habilidad*, no en un ítem de conocimiento**: la guía del examen **v1.1 (2025-12-12)** fusionó *«Conocimiento de: principio de mínimo privilegio…»* en la **Habilidad 4.2.6 — «Construir políticas personalizadas que cumplan el principio de mínimo privilegio»**, de modo que el Dominio 4.2 ahora espera que *escribas* la política con ámbito de prefijo y atada al ARN de la clave de la Sección 9.2 (y que sepas que **`DELETE` de Iceberg sobre tablas de Lake Formation necesita DELETE**, `UPDATE`/`MERGE` necesitan **INSERT + DELETE** y todo DML de Iceberg necesita **ALTER**) en lugar de simplemente nombrar el principio — página de revisiones de la guía DEA-C01 (2025-12-12) y documentación de cambios de comportamiento de Redshift (Patch 202), consultadas en octubre de 2026.
-> - **Los precios de S3 y las Regiones cambiaron; el cifrado por defecto no**: los recortes de S3 Express One Zone (**2025-04-10**) bajaron el almacenamiento **−31%**, el PUT **−55%**, el GET **−85%** y la subida/recuperación **−60%**, con las Regiones de Express One Zone pasando de **8 → 15 el 2026-09-17** — mientras que el cifrado en reposo sigue exactamente como se enseñó arriba (SSE-S3 en todos los buckets desde **2023-01-05**, gratis; **los Bucket Keys siguen siendo la palanca de coste de SSE-KMS** y DSSE-KMS sigue sin poder usarlos; cambiar el valor por defecto de un bucket sigue **sin** re-cifrar los objetos antiguos) (AWS What's New; documentación de S3 y KMS, consultada en octubre de 2026).
-> - **Macie — decláralo como *comportamiento actual*, no como «cambio de 2026»**: el descubrimiento inventaría hasta **10.000 buckets por cuenta**, los identificadores de datos personalizados aceptan **1–300 caracteres (50 por defecto)** y los hallazgos vienen por defecto con severidad **MEDIA** — pero la última entrada del historial de la documentación de Macie es **2025-07-02**, así que una opción redactada «los identificadores personalizados de Macie cambiaron en 2026» es un cebo obsoleto; trata las cifras como lo que Macie hace hoy (documentación de Amazon Macie: cobertura de buckets, opciones de identificador personalizado, historial de documentos; consultada en octubre de 2026).
-> - **Los anclas de precios usadas arriba están vigentes a octubre de 2026**: KMS **$1.00/clave/mes + $0.03/10.000 solicitudes simétricas** con **free tier mensual de 20.000 solicitudes**; Secrets Manager **$0.40/secreto/mes + $0.05/10.000 llamadas a la API**; Parameter Store avanzado **$0.05/parámetro/mes**. AWS reprecificó servicios analíticos afines varias veces en 2025–2026 (Glue 6.0 −30%, S3 Express hasta −85%), así que vuelve a verificar las páginas de KMS y Secrets antes de citar un diseño posterior a esta fecha (páginas de precios de AWS, consultadas en octubre de 2026).
+> **Qué cambió en la seguridad del Dominio 4 entre 2024 y octubre de 2026**: cada línea verificada contra una fuente primaria de AWS en **octubre de 2026**, y cada una es examinable porque el examen prueba el comportamiento actual:
+> - **La propia guía del examen se revisó**: la guía DEA-C01 **v1.1 (2025-12-12)** consolidó conocimientos/habilidades en una sola lista de habilidades y añadió **8 habilidades sin eliminar ninguna**; el Dominio 4 ganó **4.1.7 (dominios de SageMaker Unified Studio)**, **4.5.6 (proyectos de SageMaker Catalog)** y **4.5.7 (marco de gobernanza de datos y patrones de intercambio de datos)**: página de revisiones de la guía DEA-C01, consultada en octubre de 2026.
+> - **Delta de la lista de servicios en alcance**: se añadieron **Aurora, Amazon Q, Bedrock, Kendra, AWS Data Exchange, Amazon S3 Tables**; se eliminaron **Cloud9, CodeCommit, AWS SCT**: así que las respuestas basadas en SCT están desactualizadas, mientras que IAM, KMS, Secrets Manager, Macie, Shield y WAF siguen siendo el núcleo del Dominio 4 (páginas de servicios en alcance/fuera de alcance de la guía, consultadas en octubre de 2026).
+> - **Intercambio entre cuentas de Lake Formation v5 (2026-02-11)**: un solo share de AWS RAM puede llevar ahora tablas ilimitadas mediante patrones comodín, y el acceso entre Regiones (enlaces de recurso, sin copia) se compone con el intercambio entre cuentas: la respuesta moderna a «compartir la tabla curada y sus archivos envueltos por KMS con otra cuenta» (AWS What's New, consultado en octubre de 2026).
+> - **Los permisos DML de Iceberg se endurecieron (Patch 202)**: `DELETE` sobre tablas de Lake Formation necesita permiso **DELETE**, `UPDATE`/`MERGE` necesitan **INSERT + DELETE** y todo DML de Iceberg necesita **ALTER**: los laboratorios que solo conceden INSERT ahora fallan, lo cual es la autorización (4.2) encontrándose con tablas de lago gobernadas por cifrado (documentación de cambios de comportamiento de Redshift, consultada en octubre de 2026).
+> - **Resultados de consulta gestionados de Athena (2025-06-03)**: los resultados pueden estar gestionados por el servicio y cifrados **sin coste adicional y sin necesidad de un bucket de resultados en S3**, pero la configuración de cifrado mínimo de tu workgroup sigue mandando cuando aportas tu propio bucket (AWS What's New; documentación de Athena, consultada en octubre de 2026).
+> - **El mínimo privilegio se convirtió en una *habilidad*, no en un ítem de conocimiento**: la guía del examen **v1.1 (2025-12-12)** fusionó *«Conocimiento de: principio de mínimo privilegio…»* en la **Habilidad 4.2.6, «Construir políticas personalizadas que cumplan el principio de mínimo privilegio»**, de modo que el Dominio 4.2 ahora espera que *escribas* la política con ámbito de prefijo y atada al ARN de la clave de la Sección 9.2 (y que sepas que **`DELETE` de Iceberg sobre tablas de Lake Formation necesita DELETE**, `UPDATE`/`MERGE` necesitan **INSERT + DELETE** y todo DML de Iceberg necesita **ALTER**) en lugar de simplemente nombrar el principio, página de revisiones de la guía DEA-C01 (2025-12-12) y documentación de cambios de comportamiento de Redshift (Patch 202), consultadas en octubre de 2026.
+> - **Los precios de S3 y las Regiones cambiaron; el cifrado por defecto no**: los recortes de S3 Express One Zone (**2025-04-10**) bajaron el almacenamiento **−31%**, el PUT **−55%**, el GET **−85%** y la subida/recuperación **−60%**, con las Regiones de Express One Zone pasando de **8 → 15 el 2026-09-17**: mientras que el cifrado en reposo sigue exactamente como se enseñó arriba (SSE-S3 en todos los buckets desde **2023-01-05**, gratis; **los Bucket Keys siguen siendo la palanca de coste de SSE-KMS** y DSSE-KMS sigue sin poder usarlos; cambiar el valor por defecto de un bucket sigue **sin** re-cifrar los objetos antiguos) (AWS What's New; documentación de S3 y KMS, consultada en octubre de 2026).
+> - **Macie, decláralo como *comportamiento actual*, no como «cambio de 2026»**: el descubrimiento inventaría hasta **10.000 buckets por cuenta**, los identificadores de datos personalizados aceptan **1 to 300 caracteres (50 por defecto)** y los hallazgos vienen por defecto con severidad **MEDIA**, pero la última entrada del historial de la documentación de Macie es **2025-07-02**, así que una opción redactada «los identificadores personalizados de Macie cambiaron en 2026» es un cebo obsoleto; trata las cifras como lo que Macie hace hoy (documentación de Amazon Macie: cobertura de buckets, opciones de identificador personalizado, historial de documentos; consultada en octubre de 2026).
+> - **Los anclas de precios usadas arriba están vigentes a octubre de 2026**: KMS **$1.00/clave/mes + $0.03/10.000 solicitudes simétricas** con **free tier mensual de 20.000 solicitudes**; Secrets Manager **$0.40/secreto/mes + $0.05/10.000 llamadas a la API**; Parameter Store avanzado **$0.05/parámetro/mes**. AWS reprecificó servicios analíticos afines varias veces en 2025 to 2026 (Glue 6.0 −30%, S3 Express hasta −85%), así que vuelve a verificar las páginas de KMS y Secrets antes de citar un diseño posterior a esta fecha (páginas de precios de AWS, consultadas en octubre de 2026).
 
 ---
 
 ## Casos Reales
 
-AWS publica cómo se ven estas abstracciones en producción. Cada cifra de abajo está **afirmada por el cliente o por AWS y sin auditar**, con la fuente indicada para que puedas comprobarla — el punto examinable es el **patrón** (qué control era la restricción vinculante, qué servicio hizo el trabajo, qué número se movió), no el marketing.
+AWS publica cómo se ven estas abstracciones en producción. Cada cifra de abajo está **afirmada por el cliente o por AWS y sin auditar**, con la fuente indicada para que puedas comprobarla: el punto examinable es el **patrón** (qué control era la restricción vinculante, qué servicio hizo el trabajo, qué número se movió), no el marketing.
 
-### Caso A — Integral Ad Science: de cientos de reglas de permiso a dos
+### Caso A, Integral Ad Science: de cientos de reglas de permiso a dos
 
 | Elemento | Detalle |
 |---|---|
 | Cliente | **Integral Ad Science (IAS)**, empresa de medición de adtech |
-| Reto | Un data lake de autoservicio que abarcaba cuentas de productor y consumidor bajo **GDPR y CCPA**, donde el acceso tenía que seguir la **clasificación y el rol del trabajo** — no ACL de bucket improvisadas |
+| Reto | Un data lake de autoservicio que abarcaba cuentas de productor y consumidor bajo **GDPR y CCPA**, donde el acceso tenía que seguir la **clasificación y el rol del trabajo**: no ACL de bucket improvisadas |
 | Servicios | **AWS Lake Formation + controles de acceso por etiquetas (LF-TBAC)**, Amazon Athena, Amazon EMR, AWS Glue Data Catalog, federación con Okta; S3 se accedía solo a través de una **función de acceso a datos de Lake Formation** |
 | Resultados | **«Con los controles de acceso por etiquetas de Lake Formation, IAS redujo cientos de reglas de permiso a precisamente dos reglas»**; **control a nivel de columna**; etiquetas a nivel de base de datos **heredadas** por tablas y columnas; workgroups de Athena por unidad de negocio que a la vez sirven como etiquetas de facturación y límites de consulta |
 | Dominio de examen | **Dominio 4**, tareas 4.2 (autorización: RBAC/por etiquetas/ABAC) y 4.5 (gobernanza, PII) |
 | Fuente | AWS Big Data Blog, `blogs/big-data/integral-ad-science-secures-self-service-data-lake-using-aws-lake-formation` (2021-09-23, consultado en octubre de 2026) |
 
-Lee IAS como la historia de **eliminación de antipatrones**: cada «cientos de reglas» que un entorno acumula es candidata a una etiqueta (`classification=PII`) más un rol (analista), que es exactamente el patrón ABAC que nombra la tarea 4.2.5. El lado del cifrado está implícito: los objetos de S3 bajo SSE-KMS se descifran solo a través de funciones gobernadas por Lake Formation que además poseen `kms:Decrypt` sobre la clave del bucket — el conjunto de cuatro documentos de la Sección 10, automatizado.
+Lee IAS como la historia de **eliminación de antipatrones**: cada «cientos de reglas» que un entorno acumula es candidata a una etiqueta (`classification=PII`) más un rol (analista), que es exactamente el patrón ABAC que nombra la tarea 4.2.5. El lado del cifrado está implícito: los objetos de S3 bajo SSE-KMS se descifran solo a través de funciones gobernadas por Lake Formation que además poseen `kms:Decrypt` sobre la clave del bucket: el conjunto de cuatro documentos de la Sección 10, automatizado.
 
-### Caso B — FINRA: una pila de vigilancia regulada sobre KMS, GuardDuty y CloudTrail
+### Caso B, FINRA: una pila de vigilancia regulada sobre KMS, GuardDuty y CloudTrail
 
 | Elemento | Detalle |
 |---|---|
@@ -705,28 +705,28 @@ Lee IAS como la historia de **eliminación de antipatrones**: cada «cientos de 
 | Servicios | **Amazon S3 + Amazon EMR** (Hive, Presto, HBase); el programa Consolidated Audit Trail (CAT) añade **Amazon Redshift, AWS KMS, Amazon GuardDuty y AWS CloudTrail** |
 | Resultados | **~6 TB y 37.000 millones de registros** en un día promedio, **más de 75.000 millones** en días ocupados; consultas interactivas sobre **billones de registros / más de 600 TB**; HBase sobre EMR aportó **ahorros de coste superiores al 60%**; CAT ingiere **más de 100.000 millones de eventos al día** de 22 bolsas y 1.500 broker-dealers |
 | Dominio de examen | **Dominio 4**, tareas 4.3 (cifrado: KMS) y 4.4 (auditoría: CloudTrail) en una historia de escala de los Dominios 1/3 |
-| Fuente | AWS Public Sector Blog parte 1 (2017-10-03); comunicado de prensa de AWS sobre CAT (2019-12-04); blog de HBase (2016-11-21) — todos consultados en octubre de 2026 |
+| Fuente | AWS Public Sector Blog parte 1 (2017-10-03); comunicado de prensa de AWS sobre CAT (2019-12-04); blog de HBase (2016-11-21): todos consultados en octubre de 2026 |
 
-> «FINRA procesa aproximadamente **6 terabytes de datos y 37.000 millones de registros** en un día promedio … En los días ocupados, los mercados bursátiles pueden generar **más de 75.000 millones de registros**». — John Brady, VP Cyber Security/CISO, FINRA (blog de AWS, consultado en octubre de 2026)
+> «FINRA procesa aproximadamente **6 terabytes de datos y 37.000 millones de registros** en un día promedio … En los días ocupados, los mercados bursátiles pueden generar **más de 75.000 millones de registros**».: John Brady, VP Cyber Security/CISO, FINRA (blog de AWS, consultado en octubre de 2026)
 
-El patrón examinable es **qué control hace qué trabajo**: KMS cifra los objetos del almacén y del lago (4.3), CloudTrail registra quién descifró qué (4.4), GuardDuty vigila comportamientos anómalos de la API dentro de la cuenta (4.1/4.4) y los grupos de seguridad mantienen el clúster EMR/HBase fuera de internet público (4.1). Ningún servicio «hace seguridad» a solas — lo hace la cadena.
+El patrón examinable es **qué control hace qué trabajo**: KMS cifra los objetos del almacén y del lago (4.3), CloudTrail registra quién descifró qué (4.4), GuardDuty vigila comportamientos anómalos de la API dentro de la cuenta (4.1/4.4) y los grupos de seguridad mantienen el clúster EMR/HBase fuera de internet público (4.1). Ningún servicio «hace seguridad» a solas: lo hace la cadena.
 
-### Caso C — Oportun: encontrar las PII antes que el regulador
+### Caso C, Oportun: encontrar las PII antes que el regulador
 
 | Elemento | Detalle |
 |---|---|
 | Cliente | **Oportun**, prestamista de finanzas al consumidor en EE. UU. |
 | Reto | Descubrir y clasificar las PII residentes en S3 con una tasa baja de falsos positivos para la **FTC Safeguards Rule** y las obligaciones de privacidad, y después priorizar el riesgo con la suficiente rapidez como para actuar |
-| Servicios | **Amazon Macie** — descubrimiento automatizado de datos sensibles, **identificadores gestionados y personalizados**, inventario de buckets y una **puntuación de sensibilidad** por bucket; los hallazgos se entregan a una remediación dirigida por EventBridge |
+| Servicios | **Amazon Macie**: descubrimiento automatizado de datos sensibles, **identificadores gestionados y personalizados**, inventario de buckets y una **puntuación de sensibilidad** por bucket; los hallazgos se entregan a una remediación dirigida por EventBridge |
 | Resultados | El material de caso publicado por AWS afirma **+95% de precisión de descubrimiento** y **−80% de tiempo** para descubrir datos sensibles, con una priorización de riesgo más rápida |
 | Dominio de examen | **Dominio 4**, tareas 4.5 (privacidad/gobernanza: descubrimiento de PII con Macie) y 4.3 (decisiones de enmascaramiento impulsadas por esos hallazgos) |
 | Fuente | Ficha de caso de la página de producto de Amazon Macie (`macie/`) y presentación de re:Invent 2022 `SEC215_NEW-LAUNCH!-Automate-data-discovery-with-Amazon-Macie` (d1.awsstatic.com/events/aws-reinvent-2022/), ambas consultadas en octubre de 2026 |
 
-Lee Oportun como la historia de **descubrimiento antes de la autorización**: Macie te dice *qué* está clasificado como sensible (Dominio 4.5), y solo entonces las decisiones de cifrado de la Sección 7 y las políticas de mínimo privilegio de la Sección 9 pueden nombrar los prefijos, etiquetas y claves correctos. Observa la disciplina de alcance que el examen premia: **Macie descubre dentro de Amazon S3** — no escanea de forma nativa RDS ni Redshift — y alimenta el bucle de gobernanza en lugar de sustituirlo (documentación y material de caso de AWS Macie, consultado en octubre de 2026).
+Lee Oportun como la historia de **descubrimiento antes de la autorización**: Macie te dice *qué* está clasificado como sensible (Dominio 4.5), y solo entonces las decisiones de cifrado de la Sección 7 y las políticas de mínimo privilegio de la Sección 9 pueden nombrar los prefijos, etiquetas y claves correctos. Observa la disciplina de alcance que el examen premia: **Macie descubre dentro de Amazon S3**, no escanea de forma nativa RDS ni Redshift, y alimenta el bucle de gobernanza en lugar de sustituirlo (documentación y material de caso de AWS Macie, consultado en octubre de 2026).
 
-- **📚 ¿Sabías que…?** La aceleración de Oportun es un resultado de *herramientas*, no de política: el **−80%** informado procede de sustituir el muestreo manual por un **descubrimiento automatizado con inventario de buckets** que puntúa cada bucket por sensibilidad, mientras que el **+95%** es *precisión de descubrimiento en S3* — **no** una afirmación sobre prevención de pérdida de datos de propósito general en todos los almacenes de AWS. El enlace dedicado al caso de Oportun redirige ahora al índice general de casos, de modo que la ficha de producto de Macie de AWS y la presentación de re:Invent 2022 siguen siendo las fuentes de registro de ambas cifras (material de caso de Amazon Macie, consultado en octubre de 2026).
+- **📚 ¿Sabías que…?** La aceleración de Oportun es un resultado de *herramientas*, no de política: el **−80%** informado procede de sustituir el muestreo manual por un **descubrimiento automatizado con inventario de buckets** que puntúa cada bucket por sensibilidad, mientras que el **+95%** es *precisión de descubrimiento en S3*: **no** una afirmación sobre prevención de pérdida de datos de propósito general en todos los almacenes de AWS. El enlace dedicado al caso de Oportun redirige ahora al índice general de casos, de modo que la ficha de producto de Macie de AWS y la presentación de re:Invent 2022 siguen siendo las fuentes de registro de ambas cifras (material de caso de Amazon Macie, consultado en octubre de 2026).
 
-### Caso D — GoDaddy: gobernanza central sobre un data mesh de varios petabytes
+### Caso D, GoDaddy: gobernanza central sobre un data mesh de varios petabytes
 
 | Elemento | Detalle |
 |---|---|
@@ -737,9 +737,9 @@ Lee Oportun como la historia de **descubrimiento antes de la autorización**: Ma
 | Dominio de examen | **Dominio 4**, tareas 4.2 (autorización entre cuentas, enlaces de recurso, RBAC) y 4.5 (gobernanza y patrones de intercambio de datos) |
 | Fuente | AWS Big Data Blog, `blogs/big-data/how-godaddy-built-a-data-mesh-to-decentralize-data-ownership-using-aws-lake-formation` (2022-11-21, consultado en octubre de 2026) |
 
-GoDaddy es la **respuesta de escala al Caso A**: donde IAS colapsó cientos de reglas en dos *etiquetas*, GoDaddy colapsa la dispersión de permisos en *una sola cuenta de gobernanza* cuyas concesiones de Lake Formation y shares de RAM son la única carretera hacia el lago. Los consumidores nunca tocan la política de bucket en bruto — reciben un **enlace de recurso**, de modo que los «cuatro documentos que deben coincidir» de la Sección 10 se mantienen una vez, de forma central, en lugar de una vez por cuenta de consumidor.
+GoDaddy es la **respuesta de escala al Caso A**: donde IAS colapsó cientos de reglas en dos *etiquetas*, GoDaddy colapsa la dispersión de permisos en *una sola cuenta de gobernanza* cuyas concesiones de Lake Formation y shares de RAM son la única carretera hacia el lago. Los consumidores nunca tocan la política de bucket en bruto: reciben un **enlace de recurso**, de modo que los «cuatro documentos que deben coincidir» de la Sección 10 se mantienen una vez, de forma central, en lugar de una vez por cuenta de consumidor.
 
-- **📚 ¿Sabías que…?** Los recuentos titulares del mesh — **más de 2.000 productos de datos**, **varios petabytes**, **cientos de cuentas** — son exactamente por qué las ACL escritas a mano por recurso fallan: a esa anchura, la autorización deja de ser una lista de principales y se convierte en un **catálogo de concesiones sobre shares** (share de AWS RAM → enlace de recurso → permiso de Lake Formation), que es la misma forma que la pregunta del examen sobre KMS entre cuentas pero aplicada a *tablas* en lugar de *claves*. La respuesta de AWS de 2026 para esa forma es el intercambio de Lake Formation **v5**, donde un share de RAM lleva tablas ilimitadas (AWS Big Data Blog, consultado en octubre de 2026; AWS What's New, 2026-02-11, consultado en octubre de 2026).
+- **📚 ¿Sabías que…?** Los recuentos titulares del mesh, **más de 2.000 productos de datos**, **varios petabytes**, **cientos de cuentas**, son exactamente por qué las ACL escritas a mano por recurso fallan: a esa anchura, la autorización deja de ser una lista de principales y se convierte en un **catálogo de concesiones sobre shares** (share de AWS RAM → enlace de recurso → permiso de Lake Formation), que es la misma forma que la pregunta del examen sobre KMS entre cuentas pero aplicada a *tablas* en lugar de *claves*. La respuesta de AWS de 2026 para esa forma es el intercambio de Lake Formation **v5**, donde un share de RAM lleva tablas ilimitadas (AWS Big Data Blog, consultado en octubre de 2026; AWS What's New, 2026-02-11, consultado en octubre de 2026).
 
 | Caso | Principio que demuestra | Tarea |
 |---|---|---|
@@ -748,7 +748,7 @@ GoDaddy es la **respuesta de escala al Caso A**: donde IAS colapsó cientos de r
 | Oportun | Descubrimiento de PII dirigido por Macie con inventario de buckets y puntuación de sensibilidad que alimenta la remediación | 4.5 Privacidad, 4.3 Enmascaramiento |
 | GoDaddy | Una cuenta de gobernanza central, shares de RAM y enlaces de recurso en lugar de datos copiados y ACL improvisadas | 4.2 Autorización, 4.5 Gobernanza |
 
-- **📚 ¿Sabías que…?** Ni uno solo de estos cuatro casos de cliente cita una política de clave de KMS ni una política IAM — AWS publica los **resultados** y deja el cableado en tus manos. Eso es diseño de examen deliberado: DEA-C01 nunca te pide reproducir el JSON de la política de FINRA, te pide reconocer que **un requisito de auditoría de un regulador implica CloudTrail en cada acción de KMS**, que **«cientos de reglas» implica control de acceso por etiquetas** y que **«más de 2.000 productos de datos en cientos de cuentas» implica una cuenta de gobernanza más shares de RAM** (material de caso publicado por AWS, consultado en octubre de 2026).
+- **📚 ¿Sabías que…?** Ni uno solo de estos cuatro casos de cliente cita una política de clave de KMS ni una política IAM: AWS publica los **resultados** y deja el cableado en tus manos. Eso es diseño de examen deliberado: DEA-C01 nunca te pide reproducir el JSON de la política de FINRA, te pide reconocer que **un requisito de auditoría de un regulador implica CloudTrail en cada acción de KMS**, que **«cientos de reglas» implica control de acceso por etiquetas** y que **«más de 2.000 productos de datos en cientos de cuentas» implica una cuenta de gobernanza más shares de RAM** (material de caso publicado por AWS, consultado en octubre de 2026).
 
 ---
 
@@ -766,7 +766,7 @@ GoDaddy es la **respuesta de escala al Caso A**: donde IAS colapsó cientos de r
     "Nada la cifra hasta que se habiliten las DynamoDB Streams"
   ],
   "correct": 1,
-  "explanation": "DynamoDB: «el cifrado del lado del servidor en reposo está habilitado en todos los datos de tabla de DynamoDB y no puede desactivarse», y «clave propiedad de AWS: tipo de cifrado por defecto», rotada ~365 días. La distinción examinable: el valor por defecto de DynamoDB es PROPIEDAD DE AWS (gratis, invisible, no gestionable), no administrada por AWS — un distractor clásico. Una CMK (aws/dynamodb o la tuya) es una mejora opcional que además cubre índices, streams y copias de seguridad, pero DAX no puede usar una CMK."
+  "explanation": "DynamoDB: «el cifrado del lado del servidor en reposo está habilitado en todos los datos de tabla de DynamoDB y no puede desactivarse», y «clave propiedad de AWS: tipo de cifrado por defecto», rotada ~365 días. La distinción examinable: el valor por defecto de DynamoDB es PROPIEDAD DE AWS (gratis, invisible, no gestionable), no administrada por AWS: un distractor clásico. Una CMK (aws/dynamodb o la tuya) es una mejora opcional que además cubre índices, streams y copias de seguridad, pero DAX no puede usar una CMK."
 }
 ```
 
@@ -798,7 +798,7 @@ GoDaddy es la **respuesta de escala al Caso A**: donde IAS colapsó cientos de r
     "Las concesiones solo pueden emitirse a usuarios de IAM, nunca a principales de servicio"
   ],
   "correct": 1,
-  "explanation": "Documentación de concesiones de KMS: «una concesión puede permitir el acceso a una clave de KMS, pero no denegarlo», «cada concesión permite el acceso a exactamente una clave de KMS» y «las concesiones no caducan automáticamente». El límite por clave es de 50.000. Los concesionarios pueden ser identidades de IAM O principales de servicio — así obtienen Glue, DMS y Redshift acceso con ámbito — y las concesiones duplicadas que sobran son un riesgo de escalada de privilegios, de ahí que la higiene con RetireGrant/RevokeGrant importe."
+  "explanation": "Documentación de concesiones de KMS: «una concesión puede permitir el acceso a una clave de KMS, pero no denegarlo», «cada concesión permite el acceso a exactamente una clave de KMS» y «las concesiones no caducan automáticamente». El límite por clave es de 50.000. Los concesionarios pueden ser identidades de IAM O principales de servicio, así obtienen Glue, DMS y Redshift acceso con ámbito, y las concesiones duplicadas que sobran son un riesgo de escalada de privilegios, de ahí que la higiene con RetireGrant/RevokeGrant importe."
 }
 ```
 
@@ -910,7 +910,7 @@ GoDaddy es la **respuesta de escala al Caso A**: donde IAS colapsó cientos de r
     "Doce horas: el techo de la consola se aplica a toda URL prefirmada sin importar quién firme"
   ],
   "correct": 1,
-  "explanation": "Las URL prefirmadas llevan los permisos y las restricciones de vigencia del PRECONFIRMANTE. Con credenciales de usuario de IAM a largo plazo (SigV4 de CLI/SDK) el techo es de 7 días (consola: 1 minuto-12 horas). Con credenciales temporales — una sesión de función de una hora, o un perfil de instancia EC2 típicamente de ~6 horas — la URL muere con la sesión sin importar qué caducidad se pidiera. La URL tampoco amplía nunca los permisos del prefirmante."
+  "explanation": "Las URL prefirmadas llevan los permisos y las restricciones de vigencia del PRECONFIRMANTE. Con credenciales de usuario de IAM a largo plazo (SigV4 de CLI/SDK) el techo es de 7 días (consola: 1 minuto-12 horas). Con credenciales temporales, una sesión de función de una hora, o un perfil de instancia EC2 típicamente de ~6 horas, la URL muere con la sesión sin importar qué caducidad se pidiera. La URL tampoco amplía nunca los permisos del prefirmante."
 }
 ```
 
@@ -926,7 +926,7 @@ GoDaddy es la **respuesta de escala al Caso A**: donde IAS colapsó cientos de r
     "No hace falta ningún extremo: las subredes privadas alcanzan S3 por la ruta predeterminada automáticamente"
   ],
   "correct": 0,
-  "explanation": "Para la salida pura de S3/DynamoDB desde una VPC sin requisito on-premises, la respuesta es el extremo gateway: sin cargo, adhesión a la tabla de rutas, el tráfico nunca toca internet. Detalle: por un extremo gateway aws:SourceIp no funciona — usa aws:VpcSourceIp (o aws:sourceVpce). Los extremos de interfaz (PrivateLink) son la elección cuando se requiere on-premises sobre Direct Connect/VPN o entre Regiones, y se facturan por AZ. Las ACL siguen desactivadas en cualquier caso."
+  "explanation": "Para la salida pura de S3/DynamoDB desde una VPC sin requisito on-premises, la respuesta es el extremo gateway: sin cargo, adhesión a la tabla de rutas, el tráfico nunca toca internet. Detalle: por un extremo gateway aws:SourceIp no funciona: usa aws:VpcSourceIp (o aws:sourceVpce). Los extremos de interfaz (PrivateLink) son la elección cuando se requiere on-premises sobre Direct Connect/VPN o entre Regiones, y se facturan por AZ. Las ACL siguen desactivadas en cualquier caso."
 }
 ```
 
@@ -958,7 +958,7 @@ GoDaddy es la **respuesta de escala al Caso A**: donde IAS colapsó cientos de r
     "Amazon Inspector: inventaría las PII en S3 como parte de sus escaneos de vulnerabilidades de EC2 y contenedores y escribe el resultado en Lake Formation"
   ],
   "correct": 2,
-  "explanation": "Macie es el servicio de descubrimiento de datos sensibles y su alcance es Amazon S3 (inventario de buckets, identificadores gestionados/personalizados, puntuación de sensibilidad) — no escanea de forma nativa RDS ni Redshift, así que las respuestas de «DLP en cualquier almacén» son erróneas. Las cifras publicadas por AWS sobre Oportun son +95% de precisión de descubrimiento y −80% de tiempo de descubrimiento, y son números de descubrimiento en S3, no DLP general. GuardDuty detecta amenazas y actividad API anómala, Config registra el estado de cumplimiento de los recursos (puede afirmar que un bucket ESTÁ cifrado, no qué contiene dentro) y Inspector es gestión de vulnerabilidades de EC2/contenedores/imágenes."
+  "explanation": "Macie es el servicio de descubrimiento de datos sensibles y su alcance es Amazon S3 (inventario de buckets, identificadores gestionados/personalizados, puntuación de sensibilidad): no escanea de forma nativa RDS ni Redshift, así que las respuestas de «DLP en cualquier almacén» son erróneas. Las cifras publicadas por AWS sobre Oportun son +95% de precisión de descubrimiento y −80% de tiempo de descubrimiento, y son números de descubrimiento en S3, no DLP general. GuardDuty detecta amenazas y actividad API anómala, Config registra el estado de cumplimiento de los recursos (puede afirmar que un bucket ESTÁ cifrado, no qué contiene dentro) y Inspector es gestión de vulnerabilidades de EC2/contenedores/imágenes."
 }
 ```
 
@@ -980,36 +980,36 @@ GoDaddy es la **respuesta de escala al Caso A**: donde IAS colapsó cientos de r
 
 > [!WARNING]
 > ⚠️ **Trampas de examen de esta lección:**
-> - **Propiedad de AWS ≠ administrada por AWS** — el valor por defecto de DynamoDB es propiedad de AWS (gratis, invisible, no se puede desactivar); `aws/s3` y `aws/kinesis` son administradas por AWS (en tu cuenta, solo lectura, uso facturado, no compartibles entre cuentas).
-> - **La política de clave es la puerta** — un Allow de IAM sobre el ARN de la clave está **inerte** hasta que la política de clave permite al principal o a su cuenta; un Deny explícito gana en todas partes; las políticas de clave son **Regionales** e IAM es global.
-> - **`arn:aws:iam::ACCOUNT:root` en una política de clave significa la cuenta, no al usuario raíz** — habilita la delegación de IAM; `"Principal": "*"` en un Allow es un agujero.
-> - **Concesiones: solo permitir, una clave, un concesionario, sin caducidad automática** — y `kms:CreateGrant` es casi tan potente como `PutKeyPolicy`.
-> - **Rotación ≠ re-cifrado** — el material nuevo cubre solo datos futuros; los cambios del valor por defecto de S3 no tocan los objetos antiguos; el SSE de Kinesis se salta los registros previos; DynamoDB *sí* puede cambiar de clave en caliente.
+> - **Propiedad de AWS ≠ administrada por AWS**: el valor por defecto de DynamoDB es propiedad de AWS (gratis, invisible, no se puede desactivar); `aws/s3` y `aws/kinesis` son administradas por AWS (en tu cuenta, solo lectura, uso facturado, no compartibles entre cuentas).
+> - **La política de clave es la puerta**: un Allow de IAM sobre el ARN de la clave está **inerte** hasta que la política de clave permite al principal o a su cuenta; un Deny explícito gana en todas partes; las políticas de clave son **Regionales** e IAM es global.
+> - **`arn:aws:iam:ACCOUNT:root` en una política de clave significa la cuenta, no al usuario raíz**: habilita la delegación de IAM; `"Principal": "*"` en un Allow es un agujero.
+> - **Concesiones: solo permitir, una clave, un concesionario, sin caducidad automática**, y `kms:CreateGrant` es casi tan potente como `PutKeyPolicy`.
+> - **Rotación ≠ re-cifrado**: el material nuevo cubre solo datos futuros; los cambios del valor por defecto de S3 no tocan los objetos antiguos; el SSE de Kinesis se salta los registros previos; DynamoDB *sí* puede cambiar de clave en caliente.
 > - **S3 es SSE-S3 por defecto desde 2023-01-05, gratis**; Redshift está **cifrado por defecto pero SSL no es obligatorio por defecto** (`require_SSL=true`); el SSE de Kinesis está **desactivado** por defecto; Glue/EMR no cifran **nada** hasta que existe una configuración de seguridad.
 > - **Glue: solo CMK simétricas; la configuración de seguridad anula el parámetro SSE-S3 del job; el nombre de la función debe empezar por `AWSGlueServiceRole`; los permisos de KMS los necesita la FUNCIÓN del job.**
-> - **`aws:SecureTransport = true` significa HTTPS** — deniega sobre `false` y recuerda que a los principales de servicio se les redacta ese contexto (añade `aws:PrincipalIsAWSService`).
-> - **Las ACL están desactivadas por defecto** — las escrituras en ACL fallan con `AccessControlListNotSupported`; migra las concesiones a políticas de bucket.
-> - **Los extremos gateway son gratis y cubren solo S3/DynamoDB; no son PrivateLink** — y `aws:SourceIp` falla por ellos, así que usa `aws:VpcSourceIp`.
-> - **URL prefirmadas: 7 días solo con credenciales a largo plazo** — las URLs basadas en funciones mueren con la sesión; la URL nunca supera los permisos del prefirmante.
-> - **Parameter Store no tiene rotación en ningún nivel** — la rotación, el acceso entre cuentas y la auditoría por secreto son las señas de Secrets Manager (en octubre de 2026).
+> - **`aws:SecureTransport = true` significa HTTPS**: deniega sobre `false` y recuerda que a los principales de servicio se les redacta ese contexto (añade `aws:PrincipalIsAWSService`).
+> - **Las ACL están desactivadas por defecto**: las escrituras en ACL fallan con `AccessControlListNotSupported`; migra las concesiones a políticas de bucket.
+> - **Los extremos gateway son gratis y cubren solo S3/DynamoDB; no son PrivateLink**, y `aws:SourceIp` falla por ellos, así que usa `aws:VpcSourceIp`.
+> - **URL prefirmadas: 7 días solo con credenciales a largo plazo**: las URLs basadas en funciones mueren con la sesión; la URL nunca supera los permisos del prefirmante.
+> - **Parameter Store no tiene rotación en ningún nivel**: la rotación, el acceso entre cuentas y la auditoría por secreto son las señas de Secrets Manager (en octubre de 2026).
 
-> **Veredicto comparativo — cómo se compara este tema el día del examen**
-> - **Frente a otra nube:** DEA-C01 prueba **solo servicios de AWS** — nada te pide comparar KMS con el KMS de un competidor ni IAM con el IAM de otro proveedor. Responde con un servicio de AWS, un valor por defecto documentado por AWS o un precio de AWS a octubre de 2026; cualquier opción que gire hacia un benchmark de terceros sin verificar o un sistema de claves que no sea de AWS está fuera de alcance por construcción.
-> - **Frente a la gestión de claves autogestionada / on-premises:** la respuesta de AWS es **gestionada, auditable y por uso** frente a operar HSM a medida — una CMK con eventos de CloudTrail por clave gana a un servidor de claves casero, porque la rotación, las concesiones y el intercambio entre cuentas tienen forma de API y son revisables. Una opción que describa claves que parcheas tú es el distractor, no el extra.
-> - **Frente a otro servicio de AWS:** elige por *superficie de control*, no por prestigio — **CMK** cuando necesites control de la política de clave, auditoría por clave o intercambio entre cuentas; **propiedad de AWS** (SSE-S3, valor por defecto de DynamoDB) cuando sea aceptable cero complicación con claves; **Secrets Manager** cuando se requiera rotación o entre cuentas, **Parameter Store** para configuración estática barata; **extremo gateway** para la salida de S3/DynamoDB solo en la VPC, **PrivateLink** cuando los clientes on-premises o de otra Región deban conectarse. El cifrado en reposo nunca implica cifrado en tránsito (Redshift lo demuestra) y el cifrado de resultados nunca implica cifrado de la tabla (Athena lo demuestra).
+> **Veredicto comparativo: cómo se compara este tema el día del examen**
+> - **Frente a otra nube:** DEA-C01 prueba **solo servicios de AWS**: nada te pide comparar KMS con el KMS de un competidor ni IAM con el IAM de otro proveedor. Responde con un servicio de AWS, un valor por defecto documentado por AWS o un precio de AWS a octubre de 2026; cualquier opción que gire hacia un benchmark de terceros sin verificar o un sistema de claves que no sea de AWS está fuera de alcance por construcción.
+> - **Frente a la gestión de claves autogestionada / on-premises:** la respuesta de AWS es **gestionada, auditable y por uso** frente a operar HSM a medida: una CMK con eventos de CloudTrail por clave gana a un servidor de claves casero, porque la rotación, las concesiones y el intercambio entre cuentas tienen forma de API y son revisables. Una opción que describa claves que parcheas tú es el distractor, no el extra.
+> - **Frente a otro servicio de AWS:** elige por *superficie de control*, no por prestigio: **CMK** cuando necesites control de la política de clave, auditoría por clave o intercambio entre cuentas; **propiedad de AWS** (SSE-S3, valor por defecto de DynamoDB) cuando sea aceptable cero complicación con claves; **Secrets Manager** cuando se requiera rotación o entre cuentas, **Parameter Store** para configuración estática barata; **extremo gateway** para la salida de S3/DynamoDB solo en la VPC, **PrivateLink** cuando los clientes on-premises o de otra Región deban conectarse. El cifrado en reposo nunca implica cifrado en tránsito (Redshift lo demuestra) y el cifrado de resultados nunca implica cifrado de la tabla (Athena lo demuestra).
 > - **Frente a un proceso manual y humano:** el «cientos de reglas → dos» de IAS y la cadena de auditoría KMS+CloudTrail de FINRA (ambos afirmados por el cliente, consultados en octubre de 2026) muestran por qué el examen prefiere el **control de acceso por etiquetas y el cifrado automatizado** a la revisión humana: las personas triagean hallazgos, no descifran ni autorizan a la velocidad de un pipeline. Trata cada cifra publicada como «lo que logró el cliente», nunca como «lo que garantiza AWS».
 
 > [!SUCCESS]
 > **Conclusiones Clave (Key Takeaways):**
-> 1. El Dominio 4 es el **18% de DEA-C01** en cinco tareas (autenticación, autorización, cifrado/enmascaramiento, auditoría, privacidad); esta lección posee el núcleo técnico de 4.1–4.3 — niveles de clave, evaluación de políticas, matrices en reposo/en tránsito, IAM del pipeline y secretos.
-> 2. **Tres niveles de KMS, cinco ejes**: CMK (tu cuenta, posees la política, $1.00/clave/mes + $0.03/10k solicitudes a octubre de 2026, compartible, rotación opcional); administrada por AWS (tu cuenta, solo lectura, almacenamiento gratis, uso facturado, rotación anual, **no compartible**); propiedad de AWS (cuenta de servicio de AWS, invisible, gratis, compartible) — el valor por defecto de DynamoDB es **propiedad de AWS**.
+> 1. El Dominio 4 es el **18% de DEA-C01** en cinco tareas (autenticación, autorización, cifrado/enmascaramiento, auditoría, privacidad); esta lección posee el núcleo técnico de 4.1 to 4.3: niveles de clave, evaluación de políticas, matrices en reposo/en tránsito, IAM del pipeline y secretos.
+> 2. **Tres niveles de KMS, cinco ejes**: CMK (tu cuenta, posees la política, $1.00/clave/mes + $0.03/10k solicitudes a octubre de 2026, compartible, rotación opcional); administrada por AWS (tu cuenta, solo lectura, almacenamiento gratis, uso facturado, rotación anual, **no compartible**); propiedad de AWS (cuenta de servicio de AWS, invisible, gratis, compartible): el valor por defecto de DynamoDB es **propiedad de AWS**.
 > 3. **Primero la política de clave**: cada clave tiene exactamente una política de clave (Regional); sin ella el Allow de IAM está inerte; un Deny explícito siempre gana; `:root` en una política significa la cuenta; las concesiones solo permiten, una clave, sin caducidad automática, ≤50.000/clave.
 > 4. **El cifrado de sobre** es obligatorio más allá de **4.096 bytes**: `GenerateDataKey` devuelve claves de datos en claro y cifradas, los datos masivos se cifran localmente y solo se almacena la clave de datos cifrada; `ReEncrypt*` necesita **a la vez** los permisos From y To; las claves nunca salen sin cifrar de los HSM FIPS 140-3 Nivel 3.
-> 5. **La rotación es transparente**: la rotación de CMK está desactivada por defecto (365 días al habilitarla, personalizada 90–2.560, solo origen simétrico `AWS_KMS`); las claves administradas por AWS rotan ~anualmente y no se pueden parar; **nada vuelve a cifrar el cifrado existente** — la 1.ª y la 2.ª rotación cuestan +$1.00 cada una, después gratis.
+> 5. **La rotación es transparente**: la rotación de CMK está desactivada por defecto (365 días al habilitarla, personalizada 90 to 2.560, solo origen simétrico `AWS_KMS`); las claves administradas por AWS rotan ~anualmente y no se pueden parar; **nada vuelve a cifrar el cifrado existente**: la 1.ª y la 2.ª rotación cuestan +$1.00 cada una, después gratis.
 > 6. **Valores por defecto en reposo**: SSE-S3 de S3 en todas partes desde **2023-01-05** (gratis, AES-256-GCM, Bucket Keys hasta un **99%** más barato); Redshift cifrado por defecto (mejora a CMK = `modify-cluster --encrypted`, desactiva antes la copia de instantáneas entre Regiones, la rotación del CEK reinicia el clúster); SSE de Kinesis desactivado, solo registros nuevos, **≤25 cambios de clave/24 h**; Glue/EMR necesitan una **configuración de seguridad** (CMK simétricas, la configuración de Glue anula los parámetros del job); los resultados de Athena siguen el workgroup, **las lecturas de tablas siguen a la tabla**.
-> 7. **En tránsito**: TLS 1.2 mínimo en todos los extremos de API de servicios de AWS desde **2024-02-27**; S3/TLS 1.2–1.3; Kinesis exige 1.2 (recomienda 1.3); **Redshift acepta no SSL hasta `require_SSL=true`**; deniega lo inseguro con `aws:SecureTransport=false` más `aws:PrincipalIsAWSService` para sobrevivir a la redacción entre servicios.
+> 7. **En tránsito**: TLS 1.2 mínimo en todos los extremos de API de servicios de AWS desde **2024-02-27**; S3/TLS 1.2 to 1.3; Kinesis exige 1.2 (recomienda 1.3); **Redshift acepta no SSL hasta `require_SSL=true`**; deniega lo inseguro con `aws:SecureTransport=false` más `aws:PrincipalIsAWSService` para sobrevivir a la redacción entre servicios.
 > 8. **IAM de pipeline con mínimo privilegio**: las cargas de trabajo asumen **funciones** (política de confianza + credenciales temporales); acota S3 por prefijo (`ListBucket` sobre ARN de bucket, Get/Put/Delete sobre ARN de objeto, condiciones `s3:prefix`); ata las acciones de KMS al ARN de la clave; **`AWSGlueServiceRole` es cableado, no acceso a datos**; `AmazonS3FullAccess` es el antipatrón; los nombres de función de Glue deben empezar por `AWSGlueServiceRole`.
 > 9. **Entre cuentas = cuatro documentos**: permiso en la política de clave + permiso en la política de bucket + permiso de IAM del llamante + política de confianza de la función; las claves administradas por AWS no pueden compartirse (usa una CMK); **la cuenta que solicita paga** el uso de KMS.
 > 10. **Acceso a S3**: las ACL son heredadas y están desactivadas por defecto (`AccessControlListNotSupported`); Block Public Access con los cuatro activados; extremos gateway gratis (solo S3/DynamoDB, `aws:VpcSourceIp` y no `aws:SourceIp`); extremos de interfaz/PrivateLink facturados y listos para on-premises; las URL prefirmadas se limitan a **7 días** con credenciales a largo plazo y mueren con la sesión de una función.
-> 11. **Secretos**: Parameter Store estándar es gratis (10.000 × 4 KB) pero **no tiene rotación**; el avanzado cuesta $0.05/parámetro/mes con entre cuentas; Secrets Manager cuesta **$0.40/secreto/mes + $0.05/10.000 llamadas a la API** con rotación Lambda, **prueba de 30 días** y versiones de rotación gratis — 50 secretos durante un año ≈ **$241.83**.
-> 12. **Actualidad de 2026**: la guía **v1.1 (2025-12-12)** añadió habilidades de gobernanza de SageMaker Unified Studio/Catalog y **Aurora, Amazon Q, Bedrock, Kendra, Data Exchange, S3 Tables** al alcance, mientras eliminaba Cloud9/CodeCommit/SCT; el **intercambio de Lake Formation v5 (2026-02-11)** moderniza las concesiones entre cuentas; el DML de Iceberg en Redshift ahora necesita DELETE/INSERT+DELETE/ALTER; los resultados gestionados de Athena son gratis y cifrados por el servicio — todo consultado en octubre de 2026.
+> 11. **Secretos**: Parameter Store estándar es gratis (10.000 × 4 KB) pero **no tiene rotación**; el avanzado cuesta $0.05/parámetro/mes con entre cuentas; Secrets Manager cuesta **$0.40/secreto/mes + $0.05/10.000 llamadas a la API** con rotación Lambda, **prueba de 30 días** y versiones de rotación gratis: 50 secretos durante un año ≈ **$241.83**.
+> 12. **Actualidad de 2026**: la guía **v1.1 (2025-12-12)** añadió habilidades de gobernanza de SageMaker Unified Studio/Catalog y **Aurora, Amazon Q, Bedrock, Kendra, Data Exchange, S3 Tables** al alcance, mientras eliminaba Cloud9/CodeCommit/SCT; el **intercambio de Lake Formation v5 (2026-02-11)** moderniza las concesiones entre cuentas; el DML de Iceberg en Redshift ahora necesita DELETE/INSERT+DELETE/ALTER; los resultados gestionados de Athena son gratis y cifrados por el servicio: todo consultado en octubre de 2026.

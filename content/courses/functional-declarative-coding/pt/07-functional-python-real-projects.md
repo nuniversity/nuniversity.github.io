@@ -474,7 +474,7 @@ print(f"Top Categoria: {resultado.top_categoria} (${resultado.receita_top})")
 - **Padrão Pipeline** cria transformações de dados testáveis e compostas
 - **Event Sourcing** funciona naturalmente com eventos imutáveis e redutores puros
 - **Result monad** fornece tratamento de erros explícito sem exceções
-- O objetivo não é a pureza, mas a **praticidade** — use cada paradigma onde ele brilha
+- O objetivo não é a pureza, mas a **praticidade**: use cada paradigma onde ele brilha
 
 > [!SUCCESS]
-> Você completou o curso de Programação Funcional e Declarativa! Agora você tem as ferramentas para escrever Python mais previsível, testável e expressivo. Lembre-se: o melhor código usa o paradigma certo para o trabalho certo — misture PF e POO pragmaticamente.
+> Você completou o curso de Programação Funcional e Declarativa! Agora você tem as ferramentas para escrever Python mais previsível, testável e expressivo. Lembre-se: o melhor código usa o paradigma certo para o trabalho certo: misture PF e POO pragmaticamente.

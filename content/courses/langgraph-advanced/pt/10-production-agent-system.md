@@ -1,6 +1,6 @@
 ---
 title: "Projeto Final: Agente de Suporte ao Cliente de Produção"
-description: "Construa um agente de suporte ao cliente de nível de produção com roteamento multi-agente, RAG, transferência para humano e monitoramento — integrando tudo do curso Avançado."
+description: "Construa um agente de suporte ao cliente de nível de produção com roteamento multi-agente, RAG, transferência para humano e monitoramento, integrando tudo do curso Avançado."
 order: 10
 duration: "50 min"
 difficulty: "advanced"
@@ -509,7 +509,7 @@ result = support.handle_query(
 ```
 
 [!SUCCESS]
-Este sistema de nível de produção combina roteamento, RAG, consultas SQL, repasse para humano, revisão de qualidade e monitoramento abrangente — todos os padrões do curso Avançado trabalhando juntos.
+Este sistema de nível de produção combina roteamento, RAG, consultas SQL, repasse para humano, revisão de qualidade e monitoramento abrangente: todos os padrões do curso Avançado trabalhando juntos.
 
 ---
 
@@ -549,7 +549,7 @@ Este sistema de nível de produção combina roteamento, RAG, consultas SQL, rep
   "question": "What mechanism allows human agents to handle escalated tickets?",
   "options": [
     "Email notification",
-    "The interrupt() function — pauses graph, waits for human input, resumes",
+    "The interrupt() function: pauses graph, waits for human input, resumes",
     "A separate chat system",
     "Humans are not supported"
   ],

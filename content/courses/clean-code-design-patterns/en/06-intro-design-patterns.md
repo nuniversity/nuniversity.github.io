@@ -11,16 +11,16 @@ difficulty: "intermediate"
 Design patterns are reusable solutions to common problems in software design. They are not finished designs that you copy-paste, but templates for solving problems in context. Patterns represent battle-tested approaches that have evolved over decades.
 
 > [!NOTE]
-> The concept of design patterns was popularized by the "Gang of Four" (GoF) — Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides — in their 1994 book *Design Patterns: Elements of Reusable Object-Oriented Software*.
+> The concept of design patterns was popularized by the "Gang of Four" (GoF), Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides, in their 1994 book *Design Patterns: Elements of Reusable Object-Oriented Software*.
 
 ## What Are Design Patterns?
 
 A design pattern describes a problem that occurs repeatedly, the core of the solution, and the consequences of applying it. Each pattern has four essential elements:
 
-1. **Pattern name** — a handle for description
-2. **Problem** — when to apply the pattern
-3. **Solution** — the elements and their relationships
-4. **Consequences** — trade-offs and results
+1. **Pattern name**: a handle for description
+2. **Problem**: when to apply the pattern
+3. **Solution**: the elements and their relationships
+4. **Consequences**: trade-offs and results
 
 ```python
 # Without a pattern: ad-hoc approach to creating objects
@@ -135,7 +135,7 @@ flowchart TD
 ```
 
 > [!WARNING]
-> Do not overuse patterns. A pattern should solve a problem, not create one. If a simple function suffices, do not add a Strategy pattern. Patterns add complexity — use them only when the complexity pays off.
+> Do not overuse patterns. A pattern should solve a problem, not create one. If a simple function suffices, do not add a Strategy pattern. Patterns add complexity: use them only when the complexity pays off.
 
 ## Pattern Selection Guide
 
@@ -416,7 +416,7 @@ flowchart TD
 
 2. **GoF catalog**: Research one pattern from each category (Creational, Structural, Behavioral) and write a one-paragraph summary of each.
 
-3. **Pattern vs simple**: Take a piece of code that uses a simple if-else chain. Implement it with a Strategy pattern. Compare the two approaches — which is better?
+3. **Pattern vs simple**: Take a piece of code that uses a simple if-else chain. Implement it with a Strategy pattern. Compare the two approaches; which is better?
 
 4. **Anti-pattern hunt**: Find a place in your codebase where a pattern is overused or misapplied. Simplify it.
 

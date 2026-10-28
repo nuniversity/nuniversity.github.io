@@ -20,7 +20,7 @@ Modelos de Linguagem de Grande Escala (LLMs) e sistemas agentivos são poderosos
 - Entrar em loops infinitos de raciocínio, desperdiçando tokens e tempo
 - Sofrer ataques adversariais de injeção de prompt
 
-Guardrails são as fronteiras programáticas que mantêm os sistemas de IA operando dentro de envelopes de comportamento seguros, éticos e corretos. Não são um pensamento posterior — são um componente arquitetural fundamental que deve ser projetado, testado e monitorado como qualquer outro sistema crítico.
+Guardrails são as fronteiras programáticas que mantêm os sistemas de IA operando dentro de envelopes de comportamento seguros, éticos e corretos. Não são um pensamento posterior: são um componente arquitetural fundamental que deve ser projetado, testado e monitorado como qualquer outro sistema crítico.
 
 > [!WARNING]
 > Executar um sistema agentivo em produção sem guardrails é como implantar um carro autônomo sem freios. Mesmo uma única ação alucinada pode causar danos reputacionais e financeiros irreparáveis.
@@ -193,7 +193,7 @@ sequenceDiagram
 ```
 
 > [!TIP]
-> Comece com guardrails simples — validação de entrada e filtro de toxicidade na saída — antes de adicionar políticas comportamentais complexas. Um conjunto mínimo de guardrails implantado hoje é melhor que um perfeito no próximo trimestre. Itere com base em incidentes reais e dados de avaliação.
+> Comece com guardrails simples, validação de entrada e filtro de toxicidade na saída, antes de adicionar políticas comportamentais complexas. Um conjunto mínimo de guardrails implantado hoje é melhor que um perfeito no próximo trimestre. Itere com base em incidentes reais e dados de avaliação.
 
 > [!WARNING]
 > O excesso de guardrails pode prejudicar a utilidade do agente. Se cada solicitação disparar uma violação de guardrail, os usuários abandonarão o sistema. Encontre um equilíbrio: ajuste limites com base em dados de produção, não em piores cenários teóricos. Monitore taxas de falso positivo e ajuste agressivamente.

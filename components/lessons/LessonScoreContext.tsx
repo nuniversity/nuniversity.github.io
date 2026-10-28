@@ -167,7 +167,7 @@ export function LessonScoreSummary({ dict }: LessonScoreSummaryProps) {
       )}
 
       {suggestComplete && (
-        <p className="text-sm font-medium text-green-700 dark:text-green-400">{s?.suggest_complete || 'Nice work — mark the lesson as complete'}</p>
+        <p className="text-sm font-medium text-green-700 dark:text-green-400">{s?.suggest_complete || 'Nice work: mark the lesson as complete'}</p>
       )}
     </div>
   )

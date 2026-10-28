@@ -8,7 +8,7 @@ difficulty: "intermediate"
 
 # Persistência e Checkpointing
 
-Uma das funções mais poderosas do LangGraph é a persistência — a capacidade de salvar e restaurar o estado do grafo em qualquer momento da execução. Isso viabiliza agentes de longa duração, fluxos de trabalho com humano no loop e sistemas tolerantes a falhas.
+Uma das funções mais poderosas do LangGraph é a persistência: a capacidade de salvar e restaurar o estado do grafo em qualquer momento da execução. Isso viabiliza agentes de longa duração, fluxos de trabalho com humano no loop e sistemas tolerantes a falhas.
 
 ---
 
@@ -127,7 +127,7 @@ result = app.invoke({"messages": ["New message"]}, config)
 ```
 
 [!SUCCESS]
-`update_state()` permite intervir no estado de um agente — útil para feedback humano, correção de erros ou testes.
+`update_state()` permite intervir no estado de um agente: útil para feedback humano, correção de erros ou testes.
 
 ---
 
@@ -439,6 +439,6 @@ app.invoke({"messages": [("human", "What's my name?")]}, session2)
 - Os checkpoints são salvos após cada execução de nó por padrão
 - get_state() recupera o estado atual; get_state_history() lista todos os checkpoints
 - update_state() injeta estado manualmente em um thread
-- Threads diferentes têm estados isolados — eles não compartilham contexto
+- Threads diferentes têm estados isolados: eles não compartilham contexto
 - Checkpointers baseados em banco de dados exigem checkpointer.setup() antes do primeiro uso
 - O checkpointing viabiliza conversas com múltiplos turnos, humano no loop e tolerância a falhas

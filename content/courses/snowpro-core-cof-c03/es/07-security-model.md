@@ -1,16 +1,16 @@
 ---
-title: "Dominio 2.1 — Modelo y Principios de Seguridad de Snowflake"
+title: "Dominio 2.1, Modelo y Principios de Seguridad de Snowflake"
 description: "Domina el modelo de seguridad de Snowflake: Control de Acceso Basado en Roles (RBAC), Control de Acceso Discrecional (DAC), jerarquía de objetos asegurables, roles definidos por el sistema, métodos de autenticación y políticas de red."
 order: 7
 difficulty: intermediate
 duration: "80 min"
 ---
 
-# Dominio 2.1 — Modelo y Principios de Seguridad de Snowflake
+# Dominio 2.1: Modelo y Principios de Seguridad de Snowflake
 
 ## Peso en el Examen
 
-El **Dominio 2.0 — Gestión de Cuenta y Gobernanza de Datos** representa aproximadamente el **~20%** del examen. La seguridad es uno de los temas más evaluados.
+El **Dominio 2.0: Gestión de Cuenta y Gobernanza de Datos** representa aproximadamente el **~20%** del examen. La seguridad es uno de los temas más evaluados.
 
 > [!NOTE]
 > Esta lección corresponde al **Objetivo de Examen 2.1**: *Explicar el modelo y principios de seguridad de Snowflake*, incluyendo RBAC, DAC, jerarquía de objetos asegurables, políticas de red, métodos de autenticación, roles definidos por el sistema, roles funcionales, roles secundarios, identificadores de cuenta y registro/rastreo.
@@ -53,13 +53,13 @@ GRANT SELECT ON TABLE analytics.public.customer_data TO ROLE analyst_role;
 ```
 
 > [!NOTE]
-> El DAC significa que no necesitas a SYSADMIN para gestionar cada otorgamiento. Los propietarios de objetos pueden auto-gestionar el acceso a sus objetos — esto habilita la **administración federada**.
+> El DAC significa que no necesitas a SYSADMIN para gestionar cada otorgamiento. Los propietarios de objetos pueden auto-gestionar el acceso a sus objetos; esto habilita la **administración federada**.
 
 ---
 
 ## Jerarquía de Objetos Asegurables
 
-Cada objeto de Snowflake es un **objeto asegurable** — se pueden otorgar privilegios sobre él. Los objetos heredan de su contenedor padre:
+Cada objeto de Snowflake es un **objeto asegurable**: se pueden otorgar privilegios sobre él. Los objetos heredan de su contenedor padre:
 
 ```mermaid
 graph TD
@@ -125,7 +125,7 @@ Snowflake proporciona roles integrados con una jerarquía de privilegios fija:
 | `SECURITYADMIN` | Gestiona usuarios y roles | Crear/gestionar usuarios, roles, otorgamientos |
 | `SYSADMIN` | Gestiona warehouses y bases de datos | Crear warehouses, bases de datos, esquemas, tablas |
 | `USERADMIN` | Gestión limitada de usuarios | Solo crear usuarios y roles |
-| `PUBLIC` | Rol predeterminado para todos los usuarios | Mínimo — todos los usuarios tienen este rol |
+| `PUBLIC` | Rol predeterminado para todos los usuarios | Mínimo: todos los usuarios tienen este rol |
 
 **Jerarquía de herencia de roles:**
 
@@ -154,7 +154,7 @@ flowchart TD
 
 ### Roles de Cuenta
 
-Los roles de cuenta tienen alcance en toda la **cuenta** — pueden otorgar acceso a cualquier objeto en la cuenta:
+Los roles de cuenta tienen alcance en toda la **cuenta**: pueden otorgar acceso a cualquier objeto en la cuenta:
 
 ```sql
 -- Crear un rol de cuenta personalizado
@@ -208,7 +208,7 @@ Cuando los roles secundarios están activos, el usuario tiene la **unión de tod
 
 ### Usuario + Contraseña
 
-Autenticación básica — nombre de usuario y contraseña. La menos segura pero la más simple.
+Autenticación básica: nombre de usuario y contraseña. La menos segura pero la más simple.
 
 ```sql
 CREATE USER jane PASSWORD = 'SecurePass123!' MUST_CHANGE_PASSWORD = TRUE;
@@ -230,7 +230,7 @@ ALTER ACCOUNT SET MFA_ENROLLMENT = REQUIRED;
 
 Snowflake se integra con **Proveedores de Identidad (IdPs)** empresariales vía **SAML 2.0**:
 - Okta, Azure AD, OneLogin, Ping Identity, etc.
-- Los usuarios se autentican vía el IdP — Snowflake valida la afirmación SAML
+- Los usuarios se autentican vía el IdP: Snowflake valida la afirmación SAML
 - No se requiere contraseña de Snowflake
 
 ```sql
@@ -262,7 +262,7 @@ CREATE SECURITY INTEGRATION tableau_oauth
 
 ### Autenticación por Clave-Par RSA
 
-La autenticación por clave-par RSA es para **cuentas de servicio y acceso programático** — más segura que las contraseñas para la automatización:
+La autenticación por clave-par RSA es para **cuentas de servicio y acceso programático**: más segura que las contraseñas para la automatización:
 
 ```bash
 # Generar par de claves

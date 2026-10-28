@@ -1,12 +1,12 @@
 ---
-title: "Message Passing — Channels and Mutex Basics"
+title: "Message Passing, Channels and Mutex Basics"
 description: "Communicate between threads with mpsc channels, share state with Arc<Mutex<T>>, and understand Rust's concurrency primitives"
 order: 2
 duration: "90 minutes"
 difficulty: advanced
 ---
 
-# Message Passing — Channels and Mutex Basics
+# Message Passing: Channels and Mutex Basics
 
 Rust follows the Go mantra: "Do not communicate by sharing memory; instead, share memory by communicating." Channels provide message-passing concurrency.
 
@@ -40,7 +40,7 @@ fn main() {
 | `recv()` | Yes (blocks) | `Result<T, RecvError>` | All senders dropped |
 | `try_recv()` | No | `Result<T, TryRecvError>` | Nothing yet / closed |
 
-### try_recv — Non-Blocking Receive
+### try_recv: Non-Blocking Receive
 
 ```rust
 use std::sync::mpsc;
@@ -178,7 +178,7 @@ fn main() {
 
 ## Mutex Basics (Preview)
 
-`Mutex` provides mutual exclusion — only one thread can access the data at a time:
+`Mutex` provides mutual exclusion: only one thread can access the data at a time:
 
 ```rust
 use std::sync::Mutex;
@@ -225,7 +225,7 @@ fn main() {
 }
 ```
 
-## Arc — Atomic Reference Counting
+## Arc: Atomic Reference Counting
 
 `Arc<T>` enables shared ownership across threads:
 

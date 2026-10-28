@@ -1,15 +1,15 @@
 ---
-title: "Dominando o LLM – Seu Assistente Digital"
-description: "Aprenda a usar ferramentas acessíveis como ChatGPT e Excel com IA para aumentar sua produtividade, criatividade e resolver problemas — sem precisar programar."
+title: "Dominando o LLM, Seu Assistente Digital"
+description: "Aprenda a usar ferramentas acessíveis como ChatGPT e Excel com IA para aumentar sua produtividade, criatividade e resolver problemas, sem precisar programar."
 order: 2
 duration: "15 minutos"
 difficulty: "iniciante"
 author: "Google Gemini, Translate for OpenAI ChatGPT"
 ---
 
-## Dominando o LLM – Seu Assistente Digital
+## Dominando o LLM: Seu Assistente Digital
 
-Agora é hora da prática! Ferramentas como **ChatGPT, Gemini** e **Claude** são os novos **assistentes digitais inteligentes**. Eles escrevem textos, resumem conteúdos, criam ideias e até ajudam a programar — mas, assim como um bom assistente humano, precisam de **instruções claras**. É isso que você vai aprender aqui.
+Agora é hora da prática! Ferramentas como **ChatGPT, Gemini** e **Claude** são os novos **assistentes digitais inteligentes**. Eles escrevem textos, resumem conteúdos, criam ideias e até ajudam a programar, mas, assim como um bom assistente humano, precisam de **instruções claras**. É isso que você vai aprender aqui.
 
 ---
 
@@ -21,18 +21,18 @@ Mas afinal, o que é um **LLM (Large Language Model)**? É um programa gigantesc
 
 💡 **Pense assim: um LLM é um “autocompletar” turbinado.**
 
-Sabe quando o celular completa sua frase? Você digita “Hoje eu vou ao super...” e ele sugere “mercado”. O LLM faz isso, mas em outro nível. Se você digitar: “Escreva uma história curta sobre um cachorro detetive...”, ele continua com palavras como “que”, “adorava”, “ossos” — e assim cria uma história completa!
+Sabe quando o celular completa sua frase? Você digita “Hoje eu vou ao super...” e ele sugere “mercado”. O LLM faz isso, mas em outro nível. Se você digitar: “Escreva uma história curta sobre um cachorro detetive...”, ele continua com palavras como “que”, “adorava”, “ossos”, e assim cria uma história completa!
 
 ---
 
 ### As duas regras de ouro ao usar LLMs
 
 **Regra #1: O perigo da “alucinação” (quando ele mente bonito)**  
-- **O problema:** O LLM **não é um buscador** como o Google. Ele não consulta a internet — ele prevê palavras com base no que aprendeu. Às vezes, inventa respostas **muito convincentes, mas totalmente erradas**.  
+- **O problema:** O LLM **não é um buscador** como o Google. Ele não consulta a internet: ele prevê palavras com base no que aprendeu. Às vezes, inventa respostas **muito convincentes, mas totalmente erradas**.
 - **O que fazer:** Sempre **confira fatos, nomes e datas** em fontes confiáveis. Use o ChatGPT para pensar e criar, mas confirme tudo que for importante.
 
 **Regra #2: A janela de contexto (a memória curta)**  
-- **O que é:** O LLM tem memória limitada — ele só lembra o que está dentro da conversa atual.  
+- **O que é:** O LLM tem memória limitada: ele só lembra o que está dentro da conversa atual.
 - **O que fazer:** Se você abrir um novo chat, ele esquece o que foi dito antes. Então, mantenha a conversa no mesmo tópico ou **reenvie as informações importantes**.
 
 ---
@@ -48,7 +48,7 @@ Percebeu? Ele lembrou do contexto e adaptou a história!
 
 ---
 
-### Prompt Engineering 101 — O ABC da Comunicação com IA
+### Prompt Engineering 101, O ABC da Comunicação com IA
 
 #### Falando com a IA como um chefe 😎
 
@@ -75,7 +75,7 @@ Tente criar um tweet vendendo este curso com três tipos de prompt:
 3. **O Melhor (A + B + C):**  
    “Aja como um especialista em marketing digital. Escreva um tweet sobre um curso de IA prática com LLMs e Excel. Use um tom leve, até 250 caracteres, e destaque que é voltado para iniciantes que querem economizar tempo.”  
 
-Compare os resultados — o terceiro sempre vai brilhar!
+Compare os resultados, o terceiro sempre vai brilhar!
 
 ---
 
@@ -106,7 +106,7 @@ O LLM é perfeito para lidar com **textos longos** e transformar informação br
 
 #### O LLM como parceiro criativo
 
-Quando faltar inspiração, use a IA como **parceira de brainstorming**. Ela gera ideias, nomes, personagens, soluções e muito mais — basta explicar bem o que você quer.
+Quando faltar inspiração, use a IA como **parceira de brainstorming**. Ela gera ideias, nomes, personagens, soluções e muito mais: basta explicar bem o que você quer.
 
 **Exemplo prático: Consultor de Renda Extra**
 
@@ -125,4 +125,4 @@ Você recebe ideias sob medida para suas habilidades, tempo e orçamento. É com
 
 ---
 
-🎉 **Parabéns!** Agora você domina a arte de conversar com a IA. Com bons prompts, você pode transformar o ChatGPT ou qualquer outro LLM no seu **assistente digital pessoal** — pronto pra organizar, criar e resolver junto com você.
+🎉 **Parabéns!** Agora você domina a arte de conversar com a IA. Com bons prompts, você pode transformar o ChatGPT ou qualquer outro LLM no seu **assistente digital pessoal**: pronto pra organizar, criar e resolver junto com você.

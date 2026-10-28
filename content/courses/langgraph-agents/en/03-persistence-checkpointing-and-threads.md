@@ -58,7 +58,7 @@ result = app.invoke({"messages": ["Hello"]}, config)
 ```
 
 [!WARNING]
-MemorySaver is ephemeral — all checkpoints are lost when the Python process ends. Use PostgresSaver or a custom saver for production workloads.
+MemorySaver is ephemeral: all checkpoints are lost when the Python process ends. Use PostgresSaver or a custom saver for production workloads.
 
 ### Comparison: Checkpoint Backends
 
@@ -115,7 +115,7 @@ app.invoke({"messages": ["Thread 2 start"]}, {"configurable": {"thread_id": "t2"
 State is namespaced per thread. Checkpoints form a timeline within each thread.
 
 [!IMPORTANT]
-Thread isolation is critical in production. Each user session gets its own `thread_id` — never share a `thread_id` across users. Use a unique identifier like `user_id:conversation_id` as the thread ID to guarantee isolation.
+Thread isolation is critical in production. Each user session gets its own `thread_id`: never share a `thread_id` across users. Use a unique identifier like `user_id:conversation_id` as the thread ID to guarantee isolation.
 
 ---
 
@@ -134,7 +134,7 @@ replayed = app.invoke(
 )
 ```
 
-Replay does **not** re-execute nodes before the checkpoint — it resumes from that exact state.
+Replay does **not** re-execute nodes before the checkpoint; it resumes from that exact state.
 
 [!TIP]
 Replay is invaluable for testing and debugging. You can replay a specific checkpoint with modified input to see how the graph would behave with different data at that exact state.
@@ -214,7 +214,7 @@ Branching enables **A/B testing of agent decisions**. Run multiple branches from
 Every node execution creates a full state checkpoint. If your state is large (e.g., embedding vectors, full conversation histories), checkpoint storage can grow quickly. Consider:
 - Using PostgresSaver with table partitioning by thread_id
 - Implementing a retention policy that prunes old checkpoints
-- Keeping state schemas lean — only store what downstream nodes need
+- Keeping state schemas lean: only store what downstream nodes need
 - Using custom savers with S3/GCS lifecycle policies
 
 ---

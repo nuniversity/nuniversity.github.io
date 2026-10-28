@@ -318,15 +318,15 @@ class ETLPipeline:
 
 ## Production Checklist
 
-1. **Incremental processing** — Never full-scan growing tables
-2. **Idempotent pipelines** — Re-running produces same result
-3. **Schema evolution** — Handle column additions gracefully
-4. **Watermark tracking** — Store last successful run timestamp
-5. **Quality checks** — Validate before loading
-6. **Partitioned output** — Organize for query efficiency
-7. **Audit logging** — Track rows processed, failures, runtime
-8. **Error handling** — Try/catch with retry logic
-9. **Resource configuration** — Right-size executor resources
+1. **Incremental processing**: Never full-scan growing tables
+2. **Idempotent pipelines**: Re-running produces same result
+3. **Schema evolution**: Handle column additions gracefully
+4. **Watermark tracking**: Store last successful run timestamp
+5. **Quality checks**: Validate before loading
+6. **Partitioned output**: Organize for query efficiency
+7. **Audit logging**: Track rows processed, failures, runtime
+8. **Error handling**: Try/catch with retry logic
+9. **Resource configuration**: Right-size executor resources
 
 ## Practice Questions
 

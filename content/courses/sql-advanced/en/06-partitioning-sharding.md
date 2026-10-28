@@ -121,7 +121,7 @@ CREATE TABLE user_sessions_p3 PARTITION OF user_sessions
 ```
 
 [!NOTE]
-HASH partitioning is ideal for evenly distributing write load across storage. It's poor for range queries — a query filtering `user_id BETWEEN 1000 AND 2000` will scan all partitions.
+HASH partitioning is ideal for evenly distributing write load across storage. It's poor for range queries: a query filtering `user_id BETWEEN 1000 AND 2000` will scan all partitions.
 
 ## Subpartitioning
 
@@ -330,7 +330,7 @@ Use partitioning with indexes. Each partition gets its own indexes, and partitio
 2. Create a table partitioned by RANGE on `sale_date` with quarterly partitions for 2024.
 3. Write a query that verifies partition pruning is working by checking the `EXPLAIN` plan.
 4. Given `users` with 100M rows, how would you partition by `region` (NA, EU, APAC)?
-5. What happens when a query uses a function on the partition key (e.g., `YEAR(order_date)`) — does pruning still work?
+5. What happens when a query uses a function on the partition key (e.g., `YEAR(order_date)`): does pruning still work?
 6. How do you add a new partition for next month's data in a monthly-partitioned table?
 7. Explain consistent hashing and why it's better than simple modulus for sharding.
 8. Write a query to detach and archive a partition containing 2023 data.

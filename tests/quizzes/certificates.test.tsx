@@ -28,7 +28,7 @@ describe('CertificatesClient', () => {
     render(<CertificatesClient lang="en" dict={dict} quizzes={quizzes} />)
 
     expect(await screen.findByTestId('certificates-empty')).toHaveTextContent(
-      'No certificates yet — pass a mock exam to earn one'
+      dict.quizzes.certificates.empty
     )
     expect(screen.getByTestId('certificates-count')).toHaveTextContent('0 certificates')
     expect(screen.queryByTestId('certificates-print')).not.toBeInTheDocument()

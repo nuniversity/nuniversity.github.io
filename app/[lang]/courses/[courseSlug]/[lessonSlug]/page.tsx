@@ -6,7 +6,6 @@ import MarkdownRenderer from '@/components/markdown/MarkdownRenderer'
 import LessonExam from '@/components/quizzes/LessonExam'
 import { LessonScoreProvider, LessonScoreSummary } from '@/components/lessons/LessonScoreContext'
 import LessonOutline from '@/components/lessons/LessonOutline'
-import LessonAudio from '@/components/lessons/LessonAudio'
 import FocusableScrollers from '@/components/lessons/FocusableScrollers'
 import {
   LessonScrollProgress,
@@ -107,7 +106,6 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
 
   // BCP-47 tag for the reading voice. The spoken text itself is extracted in
   // the browser so the lesson body is not serialised into the RSC payload.
-  const speechLocale = lang === 'pt' ? 'pt-BR' : lang === 'es' ? 'es-ES' : 'en-US'
 
   // Load all lessons in this course
   const coursesWithLessons = await getAllLessons(courseSlug, lang)
@@ -266,20 +264,6 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
             data-lesson-content
           >
             <div className="prose-measure">
-            <LessonAudio
-              lang={speechLocale}
-              label={dict.lesson?.listen || 'Listen to this lesson'}
-              description={dict.lesson?.listen_hint || 'Read the lesson aloud using your browser’s speech engine.'}
-              intro={dict.lesson?.listen_intro || 'Audio is on. Reading this lesson aloud.'}
-              voiceNote={dict.lesson?.listen_voice_missing}
-              sectionLabel={dict.lesson?.listen_section || 'Section'}
-              sectionAutoLabel={dict.lesson?.listen_section_auto || 'The section I am reading'}
-              sectionAllLabel={dict.lesson?.listen_section_all || 'The whole lesson'}
-              stopLabel={dict.lesson?.listen_stop || 'Stop'}
-              restartLabel={dict.lesson?.listen_restart || 'Restart'}
-              readingLabel={dict.lesson?.listen_reading || 'Reading'}
-              pausedLabel={dict.lesson?.listen_paused || 'Paused'}
-            />
             {lesson.metadata.exam && lessonQuestions.length > 0 ? (
               <LessonExam
                 lang={lang}

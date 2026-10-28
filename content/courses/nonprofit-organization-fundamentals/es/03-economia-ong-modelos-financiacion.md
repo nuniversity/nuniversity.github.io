@@ -211,7 +211,7 @@ Comprender el framework económico de las organizaciones no gubernamentales es c
 5. **Explorar inversión de impacto** si alineado con misión y capacidad
 
 ### Para Todas las Organizaciones
-1. **Diversifiquen antes de necesitar** — no esperen por una crisis
+1. **Diversifiquen antes de necesitar**: no esperen por una crisis
 2. **Mantengan 3-6 meses de reservas operativas** como buffer de liquidez
 3. **Reporten salud financiera** transparentemente a doantes y partes interesadas
 4. **Alinzen estrategias de financiamiento** con plan estratégico y prioridades de la misión

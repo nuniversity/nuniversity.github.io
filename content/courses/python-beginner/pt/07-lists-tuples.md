@@ -110,7 +110,7 @@ a, b = b, a     # a=2, b=1
 
 ## Exemplos do Mundo Real
 
-### Carrinho de Compras (Lista — muda frequentemente)
+### Carrinho de Compras (Lista: muda frequentemente)
 ```python
 cart = []
 cart.append("laptop")
@@ -120,7 +120,7 @@ total_items = len(cart)
 print(f"Cart has {total_items} items")
 ```
 
-### Cor RGB (Tupla — fixa)
+### Cor RGB (Tupla: fixa)
 ```python
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)

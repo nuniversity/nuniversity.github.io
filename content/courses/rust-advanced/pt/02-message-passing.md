@@ -1,12 +1,12 @@
 ---
-title: "Passagem de Mensagens — Canais e Mutex Básico"
+title: "Passagem de Mensagens, Canais e Mutex Básico"
 description: "Comunique-se entre threads com canais mpsc, compartilhe estado com Arc<Mutex<T>> e entenda os primitivos de concorrência do Rust"
 order: 2
 duration: "90 minutos"
 difficulty: advanced
 ---
 
-# Passagem de Mensagens — Canais e Mutex Básico
+# Passagem de Mensagens: Canais e Mutex Básico
 
 Rust segue o mantra do Go: "Não se comunique compartilhando memória; em vez disso, compartilhe memória se comunicando." Canais fornecem concorrência por passagem de mensagens.
 
@@ -40,7 +40,7 @@ fn main() {
 | `recv()` | Sim (bloqueia) | `Result<T, RecvError>` | Todos os senders foram dropped |
 | `try_recv()` | Não | `Result<T, TryRecvError>` | Nada ainda / fechado |
 
-### try_recv — Recepção Não-Bloqueante
+### try_recv: Recepção Não-Bloqueante
 
 ```rust
 use std::sync::mpsc;
@@ -178,7 +178,7 @@ fn main() {
 
 ## Mutex Básico (Prévia)
 
-`Mutex` fornece exclusão mútua — apenas uma thread pode acessar os dados por vez:
+`Mutex` fornece exclusão mútua: apenas uma thread pode acessar os dados por vez:
 
 ```rust
 use std::sync::Mutex;
@@ -225,7 +225,7 @@ fn main() {
 }
 ```
 
-## Arc — Contagem de Referência Atômica
+## Arc: Contagem de Referência Atômica
 
 `Arc<T>` permite ownership compartilhada entre threads:
 
