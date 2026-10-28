@@ -35,6 +35,9 @@ description: "{description}"
 order: {order}
 duration: "{duration}"
 difficulty: "{difficulty}"
+# skills: [topic-tag]        # 1-3 kebab-case tags from course.json "skills"
+# objectives:                # 2-4 measurable outcomes
+#   - "Explain ..."
 ---
 
 # {title}
@@ -44,6 +47,8 @@ difficulty: "{difficulty}"
 ## Overview
 
 This lesson covers the fundamentals of {title_lower}.
+
+<!-- Add a ```glossary block with 3-12 key terms before their first use. -->
 
 ---
 

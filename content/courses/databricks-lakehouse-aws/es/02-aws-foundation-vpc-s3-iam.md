@@ -4,6 +4,8 @@ description: "Construye el sustrato AWS bajo un workspace de Databricks: los cua
 order: 2
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - lakehouse-architecture
 ---
 # Fundamentos de AWS para Databricks: diseño de VPC, root bucket, PrivateLink, KMS e IAM
 

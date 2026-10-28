@@ -4,6 +4,8 @@ description: "Construa um modelo mental funcional do Amazon Bedrock para o exame
 order: 9
 difficulty: "intermediate"
 duration: "110 min"
+skills:
+  - bedrock
 ---
 # Fundamentos do Amazon Bedrock: APIs, Acesso a Modelos, Preços, Tipos de Inferência e Avaliações
 

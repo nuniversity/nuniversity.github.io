@@ -17,6 +17,7 @@
 | `author` | string | Author name | `"Nuniversity"` |
 | `duration` | string | Human-readable duration | `"4 weeks"` |
 | `icon` | string | Icon identifier | `"code"` |
+| `skills` | string[] | Optional course-scoped skill taxonomy; every lesson `skills` tag must come from this list | `["sql-basics", "joins", "indexes"]` |
 | `pt.*` | object | Portuguese translations | See below |
 | `es.*` | object | Spanish translations | See below |
 
@@ -40,6 +41,9 @@ Each locale (`en`, `pt`, `es`) contains:
 3. `area`, `en.title`, and `en.description` are required
 4. Each locale section should have `title` and `description`
 5. `author` should be `"Nuniversity"` for new courses
+6. `skills` is optional; when present it must be a list of unique, kebab-case strings
+7. Every lesson's `skills` tags must be a subset of the course `skills` list (validator warning)
+8. Prefer 5–12 taxonomy entries per course; more than that usually means the course is really two courses
 
 ## Example
 

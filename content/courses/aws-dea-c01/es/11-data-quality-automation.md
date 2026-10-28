@@ -4,6 +4,11 @@ description: "Convierte la Tarea 3.4 del Dominio 3 en un sistema de control auto
 order: 11
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - data-quality
+objectives:
+  - "Automate quality checks with Glue Data Quality"
+  - "Quarantine bad records without stopping the pipeline"
 ---
 # Automatización de la calidad de datos en pipelines
 

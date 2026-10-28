@@ -4,6 +4,11 @@ description: "Master DEA-C01 Domain 2 Task 2.3 end to end: build S3 Lifecycle ru
 order: 9
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - data-lifecycle
+objectives:
+  - "Design S3 lifecycle rules for cost and retention"
+  - "Plan a migration that preserves lineage"
 ---
 # Data Lifecycle, Migration and Lake Organization
 

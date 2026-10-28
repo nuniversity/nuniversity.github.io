@@ -4,6 +4,8 @@ description: "Transforme uma pilha de Parquet no Amazon S3 em uma tabela transac
 order: 4
 difficulty: "intermediate"
 duration: "65 min"
+skills:
+  - data-formats
 ---
 # Formatos de Tabela Abertos: Iceberg, Hudi e Delta no Lakehouse
 

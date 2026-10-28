@@ -42,6 +42,7 @@ The Nuniversity renderer (`components/markdown/MarkdownRenderer.tsx`) is far ric
 - **Callout variety** — not just WARNING; use TIP, IMPORTANT, NOTE as appropriate.
 - **Interactive charts (`plot`)** for any quantitative comparison — domain weights, cost curves, latency numbers.
 - **≥1 media asset or video** where it genuinely aids understanding — see "Media and video" below.
+- **Engine-aware extras (platform v1.1)** — `glossary` before first use of new terms, a `resources` block per course, and `codeexercise` on JS-capable hands-on lessons. These fences render via `GlossaryBlock`, `ResourcesBlock`, and the sandboxed `CodeExerciseBlock`.
 
 ### Diagram types — pick the shape that fits the concept
 
@@ -449,6 +450,11 @@ Per lesson (minimum; exam-grade courses used higher):
 | `### 2026 Updates (as of October 2026)` | — | ≥1 sourced bullet box |
 | `> **Comparative Verdict`** | — | × alternative × self-managed × other-service |
 | Last block | `> [!SUCCESS]` + literal `Key Takeaways` | numbered list, LAST content |
+| `skills` frontmatter | 1–3 course-taxonomy tags (warning if absent) | required for engine-aware courses |
+| `objectives` frontmatter | 2–4 measurable outcomes | recommended |
+| Code exercise (programming courses) | — | ≥1 per hands-on lesson, JS-only |
+| Glossary block (concept-dense lessons) | — | ≥1 before the first use of new terms |
+| `resources` block | — | ≥1 per course, linking real Library items |
 
 Question ids: unique per course, pattern `<prefix>-NN-qN` (e.g. `dea-01-q1`). `correct` is 0-based int in range; 4–5 options; explanation says why correct AND why the top distractor traps.
 
@@ -468,6 +474,9 @@ Six JSON-configured quiz/sim types + math. Full field schemas live in `reference
 | `phet` | PhET sim iframe | `slug`, `title?`, `language?` |
 | `molecule` | 3Dmol protein | `pdbId`, `style?` (`cartoon`\|`stick`\|`sphere`\|`line`\|`cartoon+stick`), `color?`, `height?`, `label?`, `background?` |
 | `video` | YouTube / Vimeo player | `provider` (`youtube`\|`vimeo`), `id` **or** `url`, `title?`, `start?`, `end?`, `caption?` |
+| `codeexercise` | Sandboxed JS exercise | `id`, `title`, `instructions`, `language: "javascript"`, `starter`, `tests[{name,call,expected}]` (2–6), `solution?`, `explanation?` |
+| `glossary` | Key-terms accordion (pre-training) | `terms[{term,definition}]` (3–12) |
+| `resources` | Library cross-links | `heading?`, `items[{type,title,url,source?,minutes?}]` (1–8) |
 
 Rules:
 
@@ -498,11 +507,40 @@ Example (matching):
 
 ---
 
+## Pedagogy Checklist (evidence-based, enforced by review)
+
+Every lesson must satisfy the six strategies where they apply:
+
+1. **Retrieval practice** — ≥5 `question` blocks with divergent options and explanations that say why the correct answer works and why the top distractor traps.
+2. **Spaced practice** — every question carries a stable `id`; ids are permanent and never renumbered (the platform schedules reviews by id).
+3. **Interleaving** — the Practice Questions section ends with 1–2 spiral questions drawn from an earlier lesson's `skills`.
+4. **Elaboration** — at least one "why" or "how" explanation per major concept, not just a definition.
+5. **Dual coding** — a diagram, plot, or image for every mechanism with three or more parts.
+6. **Concrete examples** — worked examples with real numbers, dated where prices or versions are involved.
+
+Review-readiness (new): review sessions show a question without the lesson around it, so every stem must be self-contained. Avoid "as mentioned above", "in this lesson", and pronouns whose referent lives in surrounding prose.
+
+Mayer checklist (multimedia):
+- Coherence: remove decorative visuals that do not teach.
+- Signaling: headings and callouts mark the essentials.
+- Segmenting: long topics split into `##` sections that can stand alone.
+- Pre-training: `glossary` before first use; prerequisites stated in the hook.
+- Spatial/temporal contiguity: labels and explanations sit next to the visual they describe.
+
+UDL checklist (learner variability):
+- Representation: the lesson works as text, as audio (voice-first rules), and as diagrams.
+- Engagement: at least one choice point (worked example vs exercise, or an optional `resources` block).
+- Action & expression: at least one non-MCQ interaction (matching, fillblank, dragdrop, or codeexercise) in hands-on lessons.
+- Accessibility: no meaning is carried by color alone; tables have header rows; alt text is descriptive.
+
+---
+
 ## Validation & Exit Codes
 
 - validate_lesson rules: frontmatter `title`+`order`; `difficulty` ∈ beginner/intermediate/advanced; H1 == title; heading matching `^## .*Practice Questions`; ≥5 ` ```question `; `> [!SUCCESS]` containing literal `Key Takeaways`; ≥1 interactive of type `math|phet|plot|molecule|dragdrop|matching|fillblank` (else rc 1); filename pattern above; all interactive JSON valid; bare closers.
+- v1.1 additions: `skills`/`objectives` must be lists of strings when present (missing `skills` = warning); `codeexercise` must be JS-only with 2–6 tests and no network/eval APIs; `glossary` 3–12 terms; `resources` 1–8 https items with known types; no image/video = warning.
 - validate_course rules: course.json with `area`, `en.title`, `en.description`; root `difficulty` lowercase; `en.difficulty` capitalized; sequential orders; naming pattern.
-- **Exit codes: 0 clean · 1 warnings only · 2 error.** EN-only courses get rc 1 (missing pt/es) — expected; never block on rc 1. CI fails only on rc 2. Every lesson must be rc 0.
+- **Exit codes: 0 clean · 1 warnings only · 2 error.** EN-only courses get rc 1 (missing pt/es) — expected; never block on rc 1. CI fails only on rc 2. New and edited lessons must be rc 0; legacy lessons may return rc 1 until the rollout adds `skills`/`objectives`/media.
 
 Skill self-test:
 
@@ -519,26 +557,27 @@ Production recipe used for `aws-aif-c01` → `aws-clf-c02` → `aws-dea-c01`. De
 ### P0 — Setup
 
 1. `mkdir -p .scratch/<slug> content/courses/<slug>/en`
-2. Write course.json (area, author, difficulty, duration, icon, en block).
+2. Write course.json (area, author, difficulty, duration, icon, en block; optional `skills` taxonomy for engine-aware courses).
 3. Write .scratch/<slug>/SPEC.md — condensed digest spec + bars + ops rules (~3 KB) so agent prompts stay <2,500 chars.
 4. Write the build master prompt into .scratch/<slug>/MASTER-PROMPT.md (scratch outside the repo is wiped by reboots; `.scratch/` is gitignored).
 
 ### P1 — Deep-research digests (waves of ≤3 task agents)
 
 - Path: .scratch/<slug>/NN-<slug>.md, 18–30 KB each, sections exactly:
-  `## A. Official / primary sources` (URLs + access date; exact quotes for exam facts) · `## B. Core facts & concepts` · `## C. Numbers, prices, limits` (each with source + date) · `## D. Real-world examples / case material` · `## E. In-scope services/topics` · `## F. Exam traps & common confusions` · `## G. Could NOT verify` (**never state as fact in lessons**) · `## H. Suggested worked examples & diagram ideas`.
-- Verify each wave: `wc -c` ≥ 18000, `grep -c '^## '` = 8, tail not truncated.
+  `## A. Official / primary sources` (URLs + access date; exact quotes for exam facts) · `## B. Core facts & concepts` · `## C. Numbers, prices, limits` (each with source + date) · `## D. Real-world examples / case material` · `## E. In-scope services/topics` · `## F. Exam traps & common confusions` · `## G. Could NOT verify` (**never state as fact in lessons**) · `## H. Suggested worked examples & diagram ideas` · `## I. Review-ready facts` (atomic, self-contained facts phrased for question stems).
+- Verify each wave: `wc -c` ≥ 18000, `grep -c '^## '` = 9, tail not truncated.
 - Prefer `docs.aws.amazon.com` / official vendor pages over blogs; date-stamp prices "as of Oct 2026"; conflicts go to section G.
 
 ### P2 — Lessons (waves of ≤3 writers)
 
 - Writer prompt pattern: "READ .scratch/<slug>/SPEC.md, then gold lesson X **for tone only**, then digests Y…, then WRITE file Z, then run scripts/validate_lesson.py in a loop until exit 0, reply ONE line."
 - Gold lessons = tone/structure only — **never copy facts** from another course's lessons.
+- Engine-aware writers also emit `skills` (from the course taxonomy) and `objectives`, place `glossary` before first use, and add 1–2 spiral questions from earlier lessons.
 - After each wave, verify yourself: line counts, question/interactive/mermaid counts, unique ids — **never trust the agent's reply alone**.
 
 ### P3 — Enhancement (additive pass)
 
-First-write waves in prior builds were systematically missing `### 2026 Updates` boxes and `## Real-World Case Studies`. Audit table first (lines/q/int/mermaid/cases/updates), then per lesson: add missing case sections and update boxes from digests, +2 questions, +1 interactive, +2 curiosities, grow to bar. **Never delete validated content**; re-validate to rc 0 after edits.
+First-write waves in prior builds were systematically missing `### 2026 Updates` boxes and `## Real-World Case Studies`. Audit table first (lines/q/int/mermaid/cases/updates), then per lesson: add missing case sections and update boxes from digests, +2 questions, +1 interactive, +2 curiosities, grow to bar. Add `resources` blocks (verified Library links) to every course and `codeexercise` to JS-capable hands-on lessons. **Never delete validated content**; re-validate to rc 0 after edits.
 
 ### P4 — Docs
 
@@ -547,8 +586,8 @@ One docs page per course (e.g. docs/aws-courses/<id>.md, 900–1,400 lines): met
 ### P5 — Verification (run yourself, not via agents)
 
 ```bash
-# per-lesson gate
-for f in content/courses/<slug>/en/*.md; do OPENCODE_FILE_PATH=$f python3 .opencode/skills/course-writer/scripts/validate_lesson.py || echo FAIL $f; done
+# per-lesson gate (rc 2 fails; rc 1 = warnings to backfill)
+for f in content/courses/<slug>/en/*.md; do OPENCODE_FILE_PATH=$f python3 .opencode/skills/course-writer/scripts/validate_lesson.py; rc=$?; [ $rc -eq 2 ] && echo FAIL $f; done
 # course gate (expect rc=1 for EN-only)
 OPENCODE_SKILL_DIR=content/courses/<slug> python3 .opencode/skills/course-writer/scripts/validate_course.py; echo rc=$?
 # integrity: unique ids, correct in range, options>=4, H1==title, bare-fence parity, JSON parse of every interactive block
@@ -560,7 +599,7 @@ find out -path '*<slug>*' -name index.html | grep -c '/en/'
 
 ### P6 — CI
 
-`.github/workflows/nextjs.yml` step "Validate course content (course-writer skill)" loops course:locale entries (`"aws-dea-c01:en"` style). Add one entry per course; rc 2 fails, rc 1 tolerated, every lesson must be rc 0. Simulate the exact step locally with a bash for-loop before finishing.
+`.github/workflows/nextjs.yml` runs `npm run validate:courses` (course-writer gate). It is strict for **engine-adopted** lessons (those with `skills` frontmatter) and reports legacy rc 2 as a migration count; `node scripts/validate-courses.mjs --strict` enforces every lesson and becomes the target once the rollout waves complete. rc 1 (warnings) is always tolerated.
 
 ### Hard operational rules (these broke real runs when violated)
 

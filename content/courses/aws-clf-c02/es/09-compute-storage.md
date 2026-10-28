@@ -4,6 +4,8 @@ description: "Las dos familias de servicios más grandes del Dominio 3 en una so
 order: 9
 difficulty: "beginner"
 duration: "75 min"
+skills:
+  - compute-storage
 ---
 # Servicios de cómputo y almacenamiento
 

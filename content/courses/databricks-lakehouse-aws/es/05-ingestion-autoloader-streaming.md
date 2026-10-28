@@ -4,6 +4,8 @@ description: "Construye la capa de ingesta de un lakehouse de Databricks sobre A
 order: 5
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - ingestion-streaming
 ---
 # Ingestión en AWS: Auto Loader, file events, Kafka/MSK y sinks idempotentes
 

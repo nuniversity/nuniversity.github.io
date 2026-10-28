@@ -4,6 +4,8 @@ description: "O núcleo de custo do Domínio 4: os quatro princípios gerais de 
 order: 13
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - cloud-economics
 ---
 # Modelos de Preços da AWS e Ferramentas de Custo
 

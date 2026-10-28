@@ -4,6 +4,8 @@ description: "Execute e prove a carga de trabalho: métricas, alarmes, dashboard
 order: 12
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - deployment-operations
 ---
 # Monitoramento, Operações, Suporte e o Well-Architected Framework
 

@@ -4,6 +4,7 @@
   "difficulty": "intermediate",
   "duration": "12 weeks",
   "icon": "database",
+  "skills": ["lakehouse-architecture","s3-storage","data-formats","ingestion","streaming","catalog-schema","transformation","query-serving","orchestration","governance-security","data-quality","cost-lifecycle"],
   "en": {
     "title": "Building a Complete AWS Data Lakehouse: S3 to QuickSight",
     "description": "End-to-end architecture and implementation course for a production AWS data lakehouse, S3 storage tiers including Glacier, open table formats (Iceberg/Hudi/Delta), Glue Data Catalog and ETL, Athena and Redshift query layers, streaming and batch ingestion, Lake Formation governance with row/column-level security, Macie-driven PII protection, orchestration, data quality, cost optimization, and QuickSight BI, with architecture diagrams, real AWS customer cases, worked pricing examples, and practice questions.",

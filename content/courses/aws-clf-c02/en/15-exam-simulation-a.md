@@ -6,6 +6,8 @@ examMinutes: 90
 difficulty: "beginner"
 description: "Sit Set A, 20 exam-style CLF-C02 items arranged in published domain-weight order with a per-option teardown after every block, then learn the test craft that decides the real 65: the 83-second pacing math, the flag-and-sweep protocol, how to read 'most cost-effective', 'least operationally intensive' and 'first MUST' stems, a rubric that grades Set A by domain instead of by total, and a comparative verdict on self-study versus bootcamp versus AWS training."
 duration: "90 minutes"
+skills:
+  - exam-strategy
 ---
 # Exam Simulation A: Full-Length Practice Set + Strategy
 

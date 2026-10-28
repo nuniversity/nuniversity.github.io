@@ -4,6 +4,8 @@ description: "Build the ingestion layer of a Databricks-on-AWS lakehouse: a work
 order: 5
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - ingestion-streaming
 ---
 # Ingestion on AWS: Auto Loader, File Events, Kafka/MSK and Idempotent Sinks
 

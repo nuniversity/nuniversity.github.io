@@ -4,6 +4,8 @@ description: "Domain 3's two biggest service families in one lesson: read an EC2
 order: 9
 difficulty: "beginner"
 duration: "75 minutes"
+skills:
+  - compute-storage
 ---
 # Compute and Storage Services
 

@@ -4,6 +4,8 @@ description: "Feche o lakehouse com a sua camada de consumo e depois reconstrua 
 order: 17
 difficulty: "intermediate"
 duration: "70 min"
+skills:
+  - query-serving
 ---
 # BI com QuickSight e o Capstone Ponta a Ponta do Lakehouse
 

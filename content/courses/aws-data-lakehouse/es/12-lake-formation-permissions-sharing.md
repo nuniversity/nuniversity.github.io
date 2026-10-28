@@ -4,6 +4,8 @@ description: "Gobierna el lakehouse de AWS como se gobierna una base de datos: l
 order: 12
 difficulty: "intermediate"
 duration: "65 min"
+skills:
+  - governance-security
 ---
 # Gobernanza de Lake Formation: Permisos, Seguridad por Filas/Columnas y Compartición de Datos
 

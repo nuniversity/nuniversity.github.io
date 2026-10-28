@@ -4,6 +4,8 @@ description: "Aprenda a automatizar a ingestão de dados com Snowpipe, Snowpipe 
 order: 11
 difficulty: intermediate
 duration: "70 min"
+skills:
+  - data-loading
 ---
 
 # Domínio 3.2: Ingestão Automatizada de Dados

@@ -4,6 +4,8 @@ description: "Escolha e opere os motores que transformam um lake pousado em um l
 order: 8
 difficulty: "intermediate"
 duration: "65 min"
+skills:
+  - transformation
 ---
 # Transformação em Escala: AWS Glue, EMR Serverless e Lambda
 

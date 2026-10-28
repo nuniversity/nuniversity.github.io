@@ -4,6 +4,8 @@ description: "Assemble the full Databricks-on-AWS lakehouse as of October 2026: 
 order: 17
 difficulty: "intermediate"
 duration: "80 minutes"
+skills:
+  - lakehouse-architecture
 ---
 # Capstone Reference Architecture: Observability, ML Activation and the 90-Day Plan for Databricks on AWS
 

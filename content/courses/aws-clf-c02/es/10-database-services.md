@@ -4,6 +4,8 @@ description: "La tarea 3.4 del Dominio 3 convertida en decisiones: qué compra d
 order: 10
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - databases
 ---
 # Servicios de bases de datos: elegir el almacén adecuado
 

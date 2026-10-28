@@ -4,6 +4,8 @@ description: "Escolha a classe de armazenamento S3 certa para cada zona do lake 
 order: 2
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - s3-storage
 ---
 # S3 como Fundação do Data Lake: Classes de Armazenamento, Glacier e Durabilidade
 

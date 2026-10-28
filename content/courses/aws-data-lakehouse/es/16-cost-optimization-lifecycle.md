@@ -4,6 +4,8 @@ description: "Ejecuta la capa económica del lakehouse de AWS: la anatomía de c
 order: 16
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - cost-lifecycle
 ---
 # Optimización de costes y ciclo de vida: de los prefijos calientes a Glacier Deep Archive
 

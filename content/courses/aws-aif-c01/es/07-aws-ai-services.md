@@ -4,6 +4,8 @@ description: "Elige, configura y calcula el precio de los diez servicios de IA p
 order: 7
 difficulty: "intermediate"
 duration: "90 min"
+skills:
+  - aws-ai-services
 ---
 # Servicios de IA prefabricados de AWS: visión, lenguaje, voz y conversación
 

@@ -4,6 +4,8 @@ description: "Explore Snowflake's AI and application development ecosystem: Snow
 order: 6
 difficulty: intermediate
 duration: "60 min"
+skills:
+  - ai-ml-features
 ---
 
 # Domain 1.6: AI/ML and Application Development Features

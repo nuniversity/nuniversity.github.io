@@ -4,6 +4,8 @@ description: "Master Snowflake's three-layer caching system: Query Result Cache 
 order: 15
 difficulty: intermediate
 duration: "45 min"
+skills:
+  - caching
 ---
 
 # Domain 4.3: Snowflake Caching

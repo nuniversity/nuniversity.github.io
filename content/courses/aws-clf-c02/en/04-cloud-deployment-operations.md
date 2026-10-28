@@ -4,6 +4,8 @@ description: "Master CLF-C02 Domain 3 Task 3.1, the four cloud deployment models
 order: 4
 difficulty: "beginner"
 duration: "60 minutes"
+skills:
+  - deployment-operations
 ---
 # Cloud Deployment Models and Operating on AWS
 

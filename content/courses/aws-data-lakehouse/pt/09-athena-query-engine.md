@@ -4,6 +4,8 @@ description: "Execute a camada SQL do lakehouse: como o Athena engine version 3 
 order: 9
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - query-serving
 ---
 # Athena como o Motor de Consulta do Lakehouse: Custo, Desempenho e Iceberg SQL
 

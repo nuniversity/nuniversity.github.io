@@ -4,6 +4,8 @@ description: "Own the highest-yield task in Domain 2 (30% of CLF-C02): split eve
 order: 5
 difficulty: "beginner"
 duration: "60 minutes"
+skills:
+  - shared-responsibility
 ---
 # The AWS Shared Responsibility Model
 

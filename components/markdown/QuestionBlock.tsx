@@ -41,8 +41,9 @@ export default function QuestionBlock({ data, dict, reveal = true, onAnswer }: Q
       correct: isCorrect ? 1 : 0,
       missed: answered && !isCorrect ? [data.question] : [],
       answered,
+      key: data.id,
     })
-  }, [reveal, scoreId, data.question, data.correct, answered, selected, report])
+  }, [reveal, scoreId, data.id, data.question, data.correct, answered, selected, report])
 
   const showFeedback = reveal && answered
 

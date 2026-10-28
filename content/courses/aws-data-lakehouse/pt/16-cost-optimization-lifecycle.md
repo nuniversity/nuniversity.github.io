@@ -4,6 +4,8 @@ description: "Execute a camada de dinheiro do lakehouse da AWS: a anatomia de cu
 order: 16
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - cost-lifecycle
 ---
 # Otimização de Custo e Lifecycle: dos Prefixos Quentes ao Glacier Deep Archive
 

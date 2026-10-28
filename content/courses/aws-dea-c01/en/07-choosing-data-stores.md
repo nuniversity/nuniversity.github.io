@@ -4,6 +4,11 @@ description: "Domain 2 task 2.1 turned into a decision procedure: map every acce
 order: 7
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - data-store-design
+objectives:
+  - "Match access patterns to S3, Redshift, DynamoDB, and RDS"
+  - "Choose a storage format for analytical reads"
 ---
 # Choosing Data Stores and Storage Formats
 

@@ -4,6 +4,8 @@ description: "Entenda as capacidades de replicação, failover/failback, entre r
 order: 17
 difficulty: intermediate
 duration: 50
+skills:
+  - collaboration-sharing
 ---
 
 # Domínio 5.1: Colaboração de Dados, Replicação e Continuidade de Negócios

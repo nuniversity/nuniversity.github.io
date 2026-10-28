@@ -4,6 +4,11 @@ description: "A tarefa 2.1 do Domínio 2 virada em procedimento de decisão: map
 order: 7
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - data-store-design
+objectives:
+  - "Match access patterns to S3, Redshift, DynamoDB, and RDS"
+  - "Choose a storage format for analytical reads"
 ---
 # Escolhendo os Armazenamentos e os Formatos de Arquivo
 

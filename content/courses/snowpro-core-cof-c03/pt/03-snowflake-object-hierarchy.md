@@ -4,6 +4,8 @@ description: "Entenda como o Snowflake organiza seus objetos: organizações, co
 order: 3
 difficulty: intermediate
 duration: "60 min"
+skills:
+  - object-hierarchy
 ---
 
 # Domínio 1.3: Hierarquia e Tipos de Objetos do Snowflake

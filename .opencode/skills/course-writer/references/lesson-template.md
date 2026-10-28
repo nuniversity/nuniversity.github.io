@@ -12,6 +12,13 @@
   precise.
 - **Visual explanations**: a mechanism with three or more parts gets a Mermaid
   diagram; three or more options get a table or a `plot`.
+- **Stable ids**: question ids are permanent keys for the spaced-review queue.
+  Never renumber or reuse a published id; add a new question instead.
+- **Self-contained stems**: review sessions show the question without the
+  lesson around it, so avoid "as mentioned above" and context-dependent
+  pronouns.
+- **Spiral review**: end the Practice Questions section with 1–2 questions
+  from an earlier lesson's `skills` (interleaving).
 
 ## File Structure
 
@@ -24,6 +31,11 @@ description: "Concise description for SEO and course listing (1-2 sentences)"
 order: 1
 duration: "30 min"
 difficulty: "beginner" | "intermediate" | "advanced"
+skills:
+  - course-taxonomy-tag
+objectives:
+  - "Explain ..."
+  - "Apply ..."
 ---
 
 # Lesson Title
@@ -33,6 +45,11 @@ difficulty: "beginner" | "intermediate" | "advanced"
 ## Overview
 
 Brief introduction to what this lesson covers.
+
+<!-- Optional pre-training glossary: 3-12 terms, placed before first use. -->
+```glossary
+{"terms":[{"term":"Term","definition":"One-sentence definition."},{"term":"Term 2","definition":"One-sentence definition."},{"term":"Term 3","definition":"One-sentence definition."}]}
+```
 
 ---
 
@@ -44,10 +61,10 @@ Brief introduction to what this lesson covers.
 {
   "id": "course-slug-q1",
   "type": "multiple-choice",
-  "question": "Question text?",
+  "question": "Self-contained question text?",
   "options": ["Option A", "Option B", "Option C", "Option D"],
   "correct": 0,
-  "explanation": "Explanation of the correct answer."
+  "explanation": "Why the answer works and why the top distractor traps."
 }
 ```
 
@@ -70,6 +87,8 @@ Brief introduction to what this lesson covers.
 | `description` | No | string | SEO description |
 | `duration` | No | string | Estimated duration |
 | `difficulty` | No | string | beginner, intermediate, advanced |
+| `skills` | No | string[] | 1–3 kebab-case tags from the course `skills` taxonomy |
+| `objectives` | No | string[] | 2–4 measurable outcomes ("Explain…", "Build…") |
 
 ## Body Sections
 

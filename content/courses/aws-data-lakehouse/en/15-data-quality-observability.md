@@ -4,6 +4,8 @@ description: "Turn the finished lakehouse into a system that can prove its own n
 order: 15
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - data-quality
 ---
 # Data Quality and Observability: DQDL, Quarantine, Lineage, and SLOs
 

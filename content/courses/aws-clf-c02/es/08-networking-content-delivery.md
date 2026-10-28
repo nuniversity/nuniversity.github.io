@@ -4,6 +4,8 @@ description: "La mitad de red del Dominio 3 a profundidad de examen: construye u
 order: 8
 difficulty: "beginner"
 duration: "75 min"
+skills:
+  - networking
 ---
 # Red, entrega de contenido y conectividad híbrida
 

@@ -4,6 +4,8 @@ description: "Domina el modelo de seguridad de Snowflake: Control de Acceso Basa
 order: 7
 difficulty: intermediate
 duration: "80 min"
+skills:
+  - security-governance
 ---
 
 # Dominio 2.1: Modelo y Principios de Seguridad de Snowflake

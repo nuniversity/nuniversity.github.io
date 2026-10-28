@@ -4,6 +4,8 @@ description: "Run the SQL layer of the lakehouse: how Athena engine version 3 (T
 order: 9
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - query-serving
 ---
 # Athena as the Lakehouse Query Engine: Cost, Performance, and Iceberg SQL
 

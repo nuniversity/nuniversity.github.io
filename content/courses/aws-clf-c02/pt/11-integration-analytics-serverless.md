@@ -4,6 +4,8 @@ description: "Como a AWS move dados entre aplicações e como ela transforma dad
 order: 11
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - integration-analytics
 ---
 # Integração de Aplicações, Análise de Dados e Outros Serviços no Escopo
 

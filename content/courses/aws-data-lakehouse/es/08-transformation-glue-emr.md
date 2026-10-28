@@ -4,6 +4,8 @@ description: "Elige y opera los motores que convierten un lago aterrizado en uno
 order: 8
 difficulty: "intermediate"
 duration: "65 min"
+skills:
+  - transformation
 ---
 # Transformación a escala: AWS Glue, EMR Serverless y Lambda
 

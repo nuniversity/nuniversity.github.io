@@ -4,6 +4,8 @@ description: "Explore o ecossistema de IA e desenvolvimento de aplicações do S
 order: 6
 difficulty: intermediate
 duration: "60 min"
+skills:
+  - ai-ml-features
 ---
 
 # Domínio 1.6: Recursos de IA/ML e Desenvolvimento de Aplicações

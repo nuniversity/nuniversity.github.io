@@ -21,6 +21,9 @@ import DragOrderQuestion from './DragOrderQuestion'
 import MatchingQuestion from './MatchingQuestion'
 import FillBlankQuestion from './FillBlankQuestion'
 import BucketDropQuestion from './BucketDropQuestion'
+import CodeExerciseBlock, { type CodeExerciseConfig } from './CodeExerciseBlock'
+import GlossaryBlock, { type GlossaryConfig } from './GlossaryBlock'
+import ResourcesBlock, { type ResourcesConfig } from './ResourcesBlock'
 import type { LessonQuestion } from './QuestionBlock'
 import { rehypeHeadingIds } from '@/lib/lessons/heading-ids'
 
@@ -63,6 +66,9 @@ const langMap: Record<string, string> = {
   matching: 'matching',
   fillblank: 'fillblank',
   interactive: 'interactive',
+  codeexercise: 'codeexercise',
+  glossary: 'glossary',
+  resources: 'resources',
   sql: 'sql',
   psql: 'sql',
   postgresql: 'sql',
@@ -1102,6 +1108,45 @@ export default function MarkdownRenderer({
                 return (
                   <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
                     Invalid interactive config: {(e as Error).message}
+                  </div>
+                )
+              }
+            }
+
+            if (language === 'codeexercise') {
+              try {
+                const config = JSON.parse(codeString) as CodeExerciseConfig
+                return <CodeExerciseBlock data={config} dict={dict} />
+              } catch (e) {
+                return (
+                  <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
+                    Invalid codeexercise config: {(e as Error).message}
+                  </div>
+                )
+              }
+            }
+
+            if (language === 'glossary') {
+              try {
+                const config = JSON.parse(codeString) as GlossaryConfig
+                return <GlossaryBlock data={config} dict={dict} />
+              } catch (e) {
+                return (
+                  <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
+                    Invalid glossary config: {(e as Error).message}
+                  </div>
+                )
+              }
+            }
+
+            if (language === 'resources') {
+              try {
+                const config = JSON.parse(codeString) as ResourcesConfig
+                return <ResourcesBlock data={config} dict={dict} />
+              } catch (e) {
+                return (
+                  <div className="my-6 p-4 border border-red-500 rounded-lg text-red-600 bg-red-50">
+                    Invalid resources config: {(e as Error).message}
                   </div>
                 )
               }

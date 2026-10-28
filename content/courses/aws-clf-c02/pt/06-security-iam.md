@@ -4,6 +4,8 @@ description: "O Domínio 2 na prática: trave o usuário root, escolha entre usu
 order: 6
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - security-iam
 ---
 # Identidade, Controle de Acesso e Proteção de Dados
 

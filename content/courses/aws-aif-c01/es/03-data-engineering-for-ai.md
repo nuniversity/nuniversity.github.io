@@ -4,6 +4,8 @@ description: "Recopila, almacena, cataloga, procesa, controla la calidad, etique
 order: 3
 difficulty: "intermediate"
 duration: "80 min"
+skills:
+  - ml-lifecycle
 ---
 # Ingeniería de datos para IA en AWS
 

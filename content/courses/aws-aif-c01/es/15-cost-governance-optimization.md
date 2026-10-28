@@ -4,6 +4,8 @@ description: "Domina el dominio de costes y gobernanza del AIF-C01: aritmética 
 order: 15
 difficulty: "intermediate"
 duration: "115 min"
+skills:
+  - security-cost
 ---
 # Optimización de costes y gobernanza para cargas de trabajo de IA
 

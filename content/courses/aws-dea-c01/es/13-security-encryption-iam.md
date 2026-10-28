@@ -4,6 +4,11 @@ description: "Convierte el Dominio 4 del DEA-C01 en un modelo de autorización q
 order: 13
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - security-governance
+objectives:
+  - "Apply least-privilege IAM to pipeline roles"
+  - "Choose encryption at rest and in transit per service"
 ---
 # Seguridad, cifrado e IAM para pipelines de datos
 

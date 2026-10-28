@@ -4,6 +4,8 @@ description: "O núcleo de governança de uma lakehouse Databricks-on-AWS, ensin
 order: 3
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - unity-catalog
 ---
 # Fundamentos do Unity Catalog: Metastore, Hierarquia, Grants, Storage Credentials e External Locations
 

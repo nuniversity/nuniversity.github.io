@@ -4,6 +4,8 @@ description: "Domine o carregamento e exportação de dados em massa no Snowflak
 order: 10
 difficulty: intermediate
 duration: "75 min"
+skills:
+  - data-loading
 ---
 
 # Domínio 3.1: Carregamento e Exportação de Dados

@@ -4,6 +4,8 @@ description: "Cierra el lakehouse con su capa de consumo y reconstruye después 
 order: 17
 difficulty: "intermediate"
 duration: "70 min"
+skills:
+  - query-serving
 ---
 # BI con QuickSight y el capstone integral del lakehouse
 

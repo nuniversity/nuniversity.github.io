@@ -4,6 +4,8 @@ description: "Leia o guia oficial do exame CLF-C02 como um redator de exames o f
 order: 1
 difficulty: "beginner"
 duration: "90 min"
+skills:
+  - cloud-concepts
 ---
 # Guia do Exame CLF-C02 e Conceitos de Nuvem
 

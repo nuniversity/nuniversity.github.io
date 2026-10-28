@@ -4,6 +4,8 @@ description: "Master the AIF-C01 cost and governance domain: SageMaker on-demand
 order: 15
 difficulty: "intermediate"
 duration: "115 minutes"
+skills:
+  - security-cost
 ---
 # Cost Optimization and Governance for AI Workloads
 

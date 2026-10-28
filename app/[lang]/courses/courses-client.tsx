@@ -7,6 +7,7 @@ import { BookOpen, Search, Clock, Target, GraduationCap, Sparkles, User, ArrowRi
 import { type Locale } from '@/lib/i18n/config'
 import { getAreaGradient } from '@/lib/courses/area-colors'
 import CourseProgressBadge from '@/components/courses/CourseProgressBadge'
+import ReviewDueCard from '@/components/review/ReviewDueCard'
 
 interface Course {
   slug: string
@@ -109,6 +110,8 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
             </div>
           </div>
         </div>
+
+        <ReviewDueCard lang={lang} />
 
         {/* Filters Section */}
         <div className="bg-card border rounded-2xl p-6 mb-10">

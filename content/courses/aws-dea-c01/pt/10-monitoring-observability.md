@@ -4,6 +4,11 @@ description: "Instrumente cada estágio de um pipeline de dados do jeito que a T
 order: 10
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - observability
+objectives:
+  - "Instrument pipelines with CloudWatch metrics and alarms"
+  - "Diagnose a stalled ingestion job from logs"
 ---
 # Monitoramento e Observabilidade para Pipelines de Dados
 

@@ -4,6 +4,8 @@ description: "Own the three October 2026 collaboration surfaces of a Databricks 
 order: 12
 difficulty: "intermediate"
 duration: "80 minutes"
+skills:
+  - data-sharing
 ---
 # Data Sharing on Databricks on AWS: OpenSharing, Marketplace, and Lakehouse Federation
 

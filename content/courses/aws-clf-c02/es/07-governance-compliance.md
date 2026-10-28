@@ -4,6 +4,8 @@ description: "Dominio 2 tarea 2.2 de extremo a extremo: registra quién hizo qu�
 order: 7
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - governance-compliance
 ---
 # Gobernanza, auditoría y cumplimiento en AWS
 

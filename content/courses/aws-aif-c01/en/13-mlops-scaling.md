@@ -4,6 +4,8 @@ description: "Master MLOps and scaling for the AIF-C01 exam, SageMaker Pipelines
 order: 13
 difficulty: "intermediate"
 duration: "110 minutes"
+skills:
+  - mlops
 ---
 # MLOps and Scaling on AWS
 

@@ -4,6 +4,8 @@ description: "El núcleo de coste del Dominio 4: los cuatro principios generales
 order: 13
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - cloud-economics
 ---
 # Modelos de precios de AWS y herramientas de coste
 

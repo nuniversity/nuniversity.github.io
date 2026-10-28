@@ -4,6 +4,12 @@ description: "Lleva la ruta de carga de la Lección 3 hasta el almacén: cómo e
 order: 4
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - data-transformation
+  - data-store-design
+objectives:
+  - "Design distribution and sort keys for a Redshift workload"
+  - "Write warehouse SQL that avoids full scans"
 ---
 # Amazon Redshift: SQL de almacén y transformación de datos
 

@@ -4,6 +4,8 @@ description: "Govern the AWS lakehouse the way a database is governed: what AWS 
 order: 12
 difficulty: "intermediate"
 duration: "65 minutes"
+skills:
+  - governance-security
 ---
 # Lake Formation Governance: Permissions, Row/Column Security, and Data Sharing
 

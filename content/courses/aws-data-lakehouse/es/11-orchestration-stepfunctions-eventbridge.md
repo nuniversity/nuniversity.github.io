@@ -4,6 +4,8 @@ description: "Decide, defiende y precifica una capa de orquestación para el lak
 order: 11
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - orchestration
 ---
 # Orquestar el lakehouse: Step Functions, EventBridge y MWAA
 

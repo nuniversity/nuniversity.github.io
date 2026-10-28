@@ -4,6 +4,8 @@ description: "Construa um modelo mental funcional de geração aumentada por rec
 order: 10
 difficulty: "intermediate"
 duration: "115 min"
+skills:
+  - rag
 ---
 # RAG e Knowledge Bases no Amazon Bedrock: Chunking, Embeddings, Recuperação e Avaliação
 

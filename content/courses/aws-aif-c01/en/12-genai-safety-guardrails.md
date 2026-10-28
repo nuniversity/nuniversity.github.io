@@ -4,6 +4,8 @@ description: "Master generative AI safety for the AIF-C01 exam, the six Amazon B
 order: 12
 difficulty: "intermediate"
 duration: "110 minutes"
+skills:
+  - responsible-ai
 ---
 # Generative AI Safety, Guardrails and Responsible AI
 

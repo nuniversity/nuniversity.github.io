@@ -4,6 +4,8 @@ description: "Master the official AWS Certified AI Practitioner (AIF-C01) exam g
 order: 1
 difficulty: "intermediate"
 duration: "90 minutes"
+skills:
+  - exam-strategy
 ---
 # AIF-C01 Exam Guide and AI/ML Fundamentals
 

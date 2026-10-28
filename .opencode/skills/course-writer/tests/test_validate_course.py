@@ -257,5 +257,51 @@ class TestValidateCourseCLI:
         assert result.returncode == 2
 
 
+class TestSkillTaxonomy:
+    """Optional course-level skills taxonomy (learning engine)."""
+
+    def test_valid_taxonomy(self, valid_course_json):
+        valid_course_json["skills"] = ["sql-basics", "joins"]
+        errors, _ = validate_course_json(valid_course_json)
+        assert errors == []
+
+    def test_taxonomy_must_be_list_of_strings(self, valid_course_json):
+        valid_course_json["skills"] = "sql-basics"
+        errors, _ = validate_course_json(valid_course_json)
+        assert any("skills" in e for e in errors)
+
+    def test_duplicate_taxonomy_warns(self, valid_course_json):
+        valid_course_json["skills"] = ["a", "a"]
+        errors, warnings = validate_course_json(valid_course_json)
+        assert errors == []
+        assert any("duplicate" in w.lower() for w in warnings)
+
+    def _course_with_taxonomy(self, tmp_path, lesson_skills):
+        course_dir = tmp_path / "tax"
+        course_dir.mkdir()
+        (course_dir / "course.json").write_text(json.dumps({
+            "area": "Test",
+            "skills": ["sql-basics"],
+            "en": {"title": "Test", "description": "Test"},
+        }))
+        en_dir = course_dir / "en"
+        en_dir.mkdir()
+        skill_lines = "\n".join(f"  - {skill}" for skill in lesson_skills)
+        (en_dir / "01-first.md").write_text(
+            f'---\ntitle: "First"\norder: 1\nskills:\n{skill_lines}\n---\n\n# First\n'
+        )
+        return course_dir
+
+    def test_unknown_lesson_skill_warns(self, tmp_path):
+        course_dir = self._course_with_taxonomy(tmp_path, ["joins"])
+        _, warnings = validate_directory_structure(course_dir)
+        assert any("joins" in w and "taxonomy" in w for w in warnings)
+
+    def test_known_lesson_skill_is_clean(self, tmp_path):
+        course_dir = self._course_with_taxonomy(tmp_path, ["sql-basics"])
+        _, warnings = validate_directory_structure(course_dir)
+        assert not any("taxonomy" in w for w in warnings)
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

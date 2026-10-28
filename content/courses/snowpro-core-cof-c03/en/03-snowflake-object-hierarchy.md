@@ -4,6 +4,8 @@ description: "Understand how Snowflake organizes objects: organizations, account
 order: 3
 difficulty: intermediate
 duration: "60 min"
+skills:
+  - object-hierarchy
 ---
 
 # Domain 1.3: Snowflake Object Hierarchy and Types

@@ -4,6 +4,8 @@ description: "Lee la guía oficial del examen CLF-C02 como la leería quien reda
 order: 1
 difficulty: "beginner"
 duration: "90 min"
+skills:
+  - cloud-concepts
 ---
 # Guía del examen CLF-C02 y conceptos de la nube
 

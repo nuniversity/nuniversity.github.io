@@ -6,6 +6,11 @@ examMinutes: 90
 difficulty: "intermediate"
 description: "Faça o Conjunto A, vinte itens no estilo do exame DEA-C01 arranjados na ordem de peso publicada dos domínios (D1 7 / D2 5 / D3 4 / D4 4), com uma análise alternativa por alternativa depois de cada bloco, e então aprenda o ofício do exame que decide os 130 minutos reais: a aritmética de ritmo de 120 segundos, o protocolo de duas passadas com marcação e varredura, como ler enunciados com MOST appropriate, LEAST costly e FIRST step, o procedimento de cinco movimentos para múltipla resposta que sobrevive à pontuação tudo-ou-nada, uma rubrica que avalia o Conjunto A por domínio em vez de por total, um quadro de atualizações de outubro de 2026 com fonte citada sobre o guia de exame v1.1, e um veredito comparativo sobre preparação oficial gratuita versus cursos pagos versus experiência multi-nuvem e on-premises."
 duration: "90 min"
+skills:
+  - exam-strategy
+objectives:
+  - "Apply a time-boxed strategy to scenario questions"
+  - "Review missed domains with targeted practice"
 ---
 # Simulado A: Conjunto de Prática e Estratégia
 

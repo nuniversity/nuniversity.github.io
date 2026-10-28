@@ -4,6 +4,8 @@ description: "Decide, defend and cost an orchestration layer for the AWS lakehou
 order: 11
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - orchestration
 ---
 # Orchestrating the Lakehouse: Step Functions, EventBridge, and MWAA
 

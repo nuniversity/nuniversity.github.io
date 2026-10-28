@@ -483,3 +483,55 @@ Students drag words from a word bank into blank slots within a template text.
 - **Inline blanks** — blanks appear within the template text
 - **Word bank** — draggable answer chips with distractors
 - **Per-blank feedback** — correct/incorrect highlighting per slot
+---
+
+## Learning-Engine Fences (v1.1)
+
+Three fences were added for the practice/mastery engine. They are validated by
+`.opencode/skills/course-writer/scripts/validate_lesson.py`.
+
+### `codeexercise` (JavaScript, sandboxed)
+
+Runs learner JavaScript in `public/code-sandbox.html`, loaded through
+`<iframe sandbox="allow-scripts">` (opaque origin, no storage/network/parent DOM).
+The frame carries the site's only `'unsafe-eval'`; the global policy in
+`lib/security/csp.mjs` keeps it out. The parent enforces a 3s timeout by
+reloading the frame, and replies are accepted only when
+`event.source === iframe.contentWindow` plus a per-run nonce.
+
+```json
+{
+  "id": "js-01-ex1",
+  "title": "Sum an array",
+  "instructions": "Write sum(nums).",
+  "language": "javascript",
+  "starter": "function sum(nums) {}",
+  "tests": [
+    {"name": "empty", "call": "sum([])", "expected": 0},
+    {"name": "basic", "call": "sum([1,2])", "expected": 3}
+  ],
+  "solution": "function sum(nums) { return nums.reduce((a,b)=>a+b,0) }",
+  "explanation": "reduce folds the array into a running total."
+}
+```
+
+The component registers with `LessonScoreContext`, so results feed the mastery
+bar and the FSRS review queue.
+
+### `glossary`
+
+Pre-training key terms (3–12). Rendered as an accordion and skipped by the
+read-aloud engine (`data-audio-skip`).
+
+```json
+{"terms": [{"term": "Idempotency", "definition": "Repeating an operation gives the same result."}]}
+```
+
+### `resources`
+
+Verified external links using the Library taxonomy. Opens in a new tab; the
+only sanctioned way to include external links in a lesson.
+
+```json
+{"heading": "Dig deeper", "items": [{"type": "video", "title": "…", "url": "https://…", "source": "YouTube", "minutes": 10}]}
+```

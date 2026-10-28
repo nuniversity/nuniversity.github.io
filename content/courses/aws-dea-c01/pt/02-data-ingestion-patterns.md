@@ -4,6 +4,11 @@ description: "Faça a escolha da Tarefa 1.1 do Domínio 1 entre lote limitado e 
 order: 2
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - data-ingestion
+objectives:
+  - "Choose batch, streaming, or hybrid ingestion for a workload"
+  - "Compare Kinesis, MSK, DMS, and DataSync trade-offs"
 ---
 # Ingestão de Dados: Padrões em Lote e Streaming
 

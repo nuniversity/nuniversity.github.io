@@ -4,6 +4,8 @@ description: "Domina la Tarea 3.1 del Dominio 3 de CLF-C02, los cuatro modelos d
 order: 4
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - deployment-operations
 ---
 # Modelos de despliegue en la nube y operar en AWS
 

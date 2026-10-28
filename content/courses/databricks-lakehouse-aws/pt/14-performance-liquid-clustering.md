@@ -4,6 +4,8 @@ description: "Otimize um lakehouse Databricks na AWS camada por camada: tamanhos
 order: 14
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - performance-cost
 ---
 # Otimização de Desempenho na Databricks/AWS: Liquid Clustering, Layout de Arquivos, Skew e Ajuste de Warehouse
 

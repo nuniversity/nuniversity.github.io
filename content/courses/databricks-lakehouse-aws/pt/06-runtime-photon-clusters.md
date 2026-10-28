@@ -4,6 +4,8 @@ description: "Domine a camada de compute da Databricks na AWS: leia a tabela de 
 order: 6
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - compute-runtime
 ---
 # Databricks Runtime, Photon e Clusters: DBR/LTS, Políticas, Pools e a Forma do Custo de Compute
 

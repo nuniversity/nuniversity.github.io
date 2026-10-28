@@ -4,6 +4,8 @@ description: "Aprende las herramientas de optimización de rendimiento de Snowfl
 order: 14
 difficulty: intermediate
 duration: "60 min"
+skills:
+  - query-performance
 ---
 
 # Dominio 4.2: Optimización del Rendimiento de Consultas

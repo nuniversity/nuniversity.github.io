@@ -4,6 +4,8 @@ description: "El Dominio 1 del CLF-C02 de principio a fin, la propuesta de valor
 order: 2
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - cloud-economics
 ---
 # Economía de la nube, estrategias de migración y el viaje a la nube
 

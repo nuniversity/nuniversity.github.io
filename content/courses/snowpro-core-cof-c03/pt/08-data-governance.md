@@ -4,6 +4,8 @@ description: "Aprenda como o Snowflake protege e governa dados: Dynamic Data Mas
 order: 8
 difficulty: intermediate
 duration: "70 min"
+skills:
+  - security-governance
 ---
 
 # Domínio 2.2: Recursos de Governança de Dados

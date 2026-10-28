@@ -39,7 +39,13 @@ except ImportError:
 REQUIRED_FRONTMATTER_FIELDS = ["title", "order"]
 VALID_DIFFICULTIES = {"beginner", "intermediate", "advanced"}
 MIN_PRACTICE_QUESTIONS = 5
-INTERACTIVE_BLOCK_TYPES = {"math", "phet", "plot", "molecule", "dragdrop", "matching", "fillblank"}
+INTERACTIVE_BLOCK_TYPES = {
+    "math", "phet", "plot", "molecule", "dragdrop", "matching", "fillblank",
+    "codeexercise", "glossary", "resources",
+}
+FORBIDDEN_CODE_API = re.compile(
+    r"\b(fetch|XMLHttpRequest|WebSocket|importScripts|eval|Function)\s*\("
+)
 
 
 def extract_frontmatter(content: str) -> tuple[dict | None, str | None]:
@@ -48,7 +54,7 @@ def extract_frontmatter(content: str) -> tuple[dict | None, str | None]:
     Returns:
         Tuple of (frontmatter_dict, error_message). error is None on success.
     """
-    match = re.match(r"^---\n(.*?)\n---", content, re.DOTALL)
+    match = re.match(r"^---\r?\n(.*?)\r?\n---", content, re.DOTALL)
     if not match:
         return None, "Missing frontmatter (expected --- delimiters)"
     try:
@@ -58,6 +64,33 @@ def extract_frontmatter(content: str) -> tuple[dict | None, str | None]:
         return frontmatter, None
     except yaml.YAMLError as e:
         return None, f"Invalid YAML: {e}"
+
+
+def check_learning_metadata(data: dict) -> tuple[list[str], list[str]]:
+    """Validate learning-engine frontmatter (skills, objectives).
+
+    Both fields are optional so legacy lessons keep passing:
+    - absent  -> warning (recommended for new lessons)
+    - present -> must be a non-empty list of strings (error otherwise)
+    """
+    errors: list[str] = []
+    warnings: list[str] = []
+    for field in ("skills", "objectives"):
+        if field not in data:
+            warnings.append(
+                f"frontmatter: optional '{field}' list missing (recommended)"
+            )
+            continue
+        value = data[field]
+        if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
+            errors.append(f"frontmatter: '{field}' must be a list of strings")
+        elif not value:
+            errors.append(f"frontmatter: '{field}' must not be empty when present")
+        elif field == "skills" and len(value) > 3:
+            warnings.append(
+                f"frontmatter: {len(value)} 'skills' tags; prefer 1-3 focused tags"
+            )
+    return errors, warnings
 
 
 def validate_frontmatter(data: dict) -> tuple[list[str], list[str]]:
@@ -105,6 +138,10 @@ def validate_frontmatter(data: dict) -> tuple[list[str], list[str]]:
         duration = str(data["duration"]).strip()
         if not duration:
             warnings.append("Duration is empty")
+
+    meta_errors, meta_warnings = check_learning_metadata(data)
+    errors.extend(meta_errors)
+    warnings.extend(meta_warnings)
 
     return errors, warnings
 
@@ -156,7 +193,93 @@ def validate_body(content: str, frontmatter: dict) -> tuple[list[str], list[str]
             "Missing '## Key Takeaways' or '> [!SUCCESS] Key Takeaways' section"
         )
 
+    # Multimedia principle: a visual anchor for every lesson. Warning only, so
+    # legacy narrative lessons keep passing (exit 1, not 2).
+    has_media = bool(re.search(r"!\[[^\]]*\]\([^)]+\)", content)) or bool(
+        re.search(r"```video\b", content)
+    )
+    if not has_media:
+        warnings.append(
+            "No image or video embed (Mayer multimedia principle): add one where it aids understanding"
+        )
+
     return errors, warnings
+
+
+def _validate_codeexercise(parsed) -> list[str]:
+    """Schema for ```codeexercise (JavaScript-only sandboxed exercise)."""
+    errors: list[str] = []
+    if not isinstance(parsed, dict):
+        return ["codeexercise: config must be a JSON object"]
+    for field in ("id", "title", "instructions", "starter", "language", "tests"):
+        if field not in parsed:
+            errors.append(f"codeexercise: missing '{field}'")
+    if parsed.get("language") != "javascript":
+        errors.append("codeexercise: 'language' must be 'javascript' (JS-only runner)")
+    tests = parsed.get("tests")
+    if not isinstance(tests, list) or not (2 <= len(tests) <= 6):
+        errors.append("codeexercise: 'tests' must be a list of 2-6 test objects")
+    else:
+        for index, test in enumerate(tests):
+            if not isinstance(test, dict) or not all(
+                key in test for key in ("name", "call", "expected")
+            ):
+                errors.append(
+                    f"codeexercise: test {index} must have name, call, expected"
+                )
+    if FORBIDDEN_CODE_API.search(json.dumps(parsed)):
+        errors.append(
+            "codeexercise: forbidden network/eval API "
+            "(fetch, XMLHttpRequest, WebSocket, importScripts, eval, Function)"
+        )
+    return errors
+
+
+def _validate_glossary(parsed) -> list[str]:
+    """Schema for ```glossary (pre-training key terms)."""
+    if not isinstance(parsed, dict) or not isinstance(parsed.get("terms"), list):
+        return ["glossary: expected {'terms': [...]}"]
+    terms = parsed["terms"]
+    if not (3 <= len(terms) <= 12):
+        return ["glossary: 'terms' must contain 3-12 entries"]
+    errors: list[str] = []
+    for index, term in enumerate(terms):
+        if (
+            not isinstance(term, dict)
+            or not isinstance(term.get("term"), str)
+            or not term.get("term").strip()
+            or not isinstance(term.get("definition"), str)
+            or not term.get("definition").strip()
+        ):
+            errors.append(
+                f"glossary: term {index} must have non-empty string 'term' and 'definition'"
+            )
+    return errors
+
+
+def _validate_resources(parsed) -> list[str]:
+    """Schema for ```resources (Library cross-links)."""
+    if not isinstance(parsed, dict) or not isinstance(parsed.get("items"), list):
+        return ["resources: expected {'items': [...]}"]
+    items = parsed["items"]
+    if not (1 <= len(items) <= 8):
+        return ["resources: 'items' must contain 1-8 entries"]
+    allowed = {"video", "ebook", "course", "blog", "repository", "podcast", "article"}
+    errors: list[str] = []
+    for index, item in enumerate(items):
+        if not isinstance(item, dict):
+            errors.append(f"resources: item {index} must be an object")
+            continue
+        if item.get("type") not in allowed:
+            errors.append(
+                f"resources: item {index} type must be one of {sorted(allowed)}"
+            )
+        if not isinstance(item.get("title"), str) or not item.get("title").strip():
+            errors.append(f"resources: item {index} needs a non-empty title")
+        url = item.get("url")
+        if not isinstance(url, str) or not url.startswith("https://"):
+            errors.append(f"resources: item {index} url must start with https://")
+    return errors
 
 
 def validate_interactive_blocks(content: str) -> tuple[list[str], list[str]]:
@@ -169,7 +292,7 @@ def validate_interactive_blocks(content: str) -> tuple[list[str], list[str]]:
     warnings = []
 
     interactive_blocks = []
-    for match in re.finditer(r"```(\w+)\n(.*?)```", content, re.DOTALL):
+    for match in re.finditer(r"```(\w+)\r?\n(.*?)```", content, re.DOTALL):
         lang = match.group(1).lower()
         if lang in INTERACTIVE_BLOCK_TYPES:
             code = match.group(2).strip()
@@ -193,12 +316,18 @@ def validate_interactive_blocks(content: str) -> tuple[list[str], list[str]]:
                         f"type '{qtype}' (id {qid}) — use ```{qtype} fence "
                         f"instead (renderer routes by fence language)"
                     )
+            if lang == "codeexercise":
+                errors.extend(_validate_codeexercise(parsed))
+            elif lang == "glossary":
+                errors.extend(_validate_glossary(parsed))
+            elif lang == "resources":
+                errors.extend(_validate_resources(parsed))
 
     if not interactive_blocks:
         warnings.append(
             "No interactive components found — STEM lessons should include "
             "at least 1 interactive block (math, phet, plot, molecule, "
-            "dragdrop, matching, fillblank)"
+            "dragdrop, matching, fillblank, codeexercise, glossary, resources)"
         )
 
     return errors, warnings

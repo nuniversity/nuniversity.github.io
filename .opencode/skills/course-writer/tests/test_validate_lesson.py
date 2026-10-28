@@ -10,9 +10,11 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 from validate_lesson import (
+    check_learning_metadata,
     extract_frontmatter,
     validate_frontmatter,
     validate_body,
+    validate_interactive_blocks,
     validate_lesson,
     validate_prose,
 )
@@ -56,6 +58,15 @@ class TestExtractFrontmatter:
         data, err = extract_frontmatter(content)
         assert data is None
         assert "mapping" in err.lower() or "dict" in err.lower()
+
+    def test_crlf_frontmatter(self):
+        """Windows line endings are accepted (real course files use CRLF)."""
+        content = "---\r\ntitle: Test\r\norder: 1\r\n---\r\n\r\nBody"
+        data, err = extract_frontmatter(content)
+        assert err is None
+        assert data is not None
+        assert data["title"] == "Test"
+        assert data["order"] == 1
 
 
 class TestValidateFrontmatter:
@@ -349,6 +360,169 @@ class TestValidateLessonCLI:
             env=env, capture_output=True, text=True,
         )
         assert result.returncode == 2
+
+
+class TestLearningMetadata:
+    """Learning-engine frontmatter rules."""
+
+    def test_missing_is_warning_only(self):
+        errors, warnings = check_learning_metadata({"title": "T"})
+        assert errors == []
+        assert any("skills" in w for w in warnings)
+        assert any("objectives" in w for w in warnings)
+
+    def test_valid_lists(self):
+        errors, warnings = check_learning_metadata(
+            {"skills": ["sql-basics"], "objectives": ["Write a query"]}
+        )
+        assert errors == []
+        assert warnings == []
+
+    def test_wrong_type_is_error(self):
+        errors, _ = check_learning_metadata({"skills": "sql-basics"})
+        assert any("skills" in e for e in errors)
+
+    def test_empty_list_is_error(self):
+        errors, _ = check_learning_metadata({"skills": [], "objectives": []})
+        assert len(errors) == 2
+
+    def test_many_skills_warns(self):
+        errors, warnings = check_learning_metadata(
+            {"skills": ["a", "b", "c", "d"], "objectives": ["x"]}
+        )
+        assert errors == []
+        assert any("1-3" in w for w in warnings)
+
+
+class TestNewFences:
+    """Schemas for codeexercise, glossary and resources."""
+
+    @staticmethod
+    def _fence(lang, payload):
+        import json
+
+        return f"```{lang}\n{json.dumps(payload)}\n```\n"
+
+    def test_valid_codeexercise(self):
+        content = self._fence(
+            "codeexercise",
+            {
+                "id": "js-01-e1",
+                "title": "Sum",
+                "instructions": "Write sum(nums).",
+                "language": "javascript",
+                "starter": "function sum(nums) {}",
+                "tests": [
+                    {"name": "empty", "call": "sum([])", "expected": 0},
+                    {"name": "basic", "call": "sum([1,2])", "expected": 3},
+                ],
+            },
+        )
+        errors, _ = validate_interactive_blocks(content)
+        assert errors == []
+
+    def test_codeexercise_requires_javascript(self):
+        content = self._fence(
+            "codeexercise",
+            {
+                "id": "py-01-e1",
+                "title": "Sum",
+                "instructions": "Write sum(nums).",
+                "language": "python",
+                "starter": "def sum(nums): pass",
+                "tests": [
+                    {"name": "a", "call": "sum([])", "expected": 0},
+                    {"name": "b", "call": "sum([1,2])", "expected": 3},
+                ],
+            },
+        )
+        errors, _ = validate_interactive_blocks(content)
+        assert any("javascript" in e for e in errors)
+
+    def test_codeexercise_forbids_network_api(self):
+        content = self._fence(
+            "codeexercise",
+            {
+                "id": "js-01-e2",
+                "title": "Fetch",
+                "instructions": "Fetch data.",
+                "language": "javascript",
+                "starter": "fetch('/x')",
+                "tests": [
+                    {"name": "a", "call": "1", "expected": 1},
+                    {"name": "b", "call": "2", "expected": 2},
+                ],
+            },
+        )
+        errors, _ = validate_interactive_blocks(content)
+        assert any("forbidden" in e for e in errors)
+
+    def test_valid_glossary(self):
+        content = self._fence(
+            "glossary",
+            {"terms": [{"term": f"t{i}", "definition": f"d{i}"} for i in range(3)]},
+        )
+        errors, _ = validate_interactive_blocks(content)
+        assert errors == []
+
+    def test_glossary_requires_three_terms(self):
+        content = self._fence(
+            "glossary", {"terms": [{"term": "a", "definition": "b"}]}
+        )
+        errors, _ = validate_interactive_blocks(content)
+        assert any("3-12" in e for e in errors)
+
+    def test_valid_resources(self):
+        content = self._fence(
+            "resources",
+            {
+                "items": [
+                    {
+                        "type": "video",
+                        "title": "Kinesis in 10 minutes",
+                        "url": "https://example.com/v",
+                    }
+                ]
+            },
+        )
+        errors, _ = validate_interactive_blocks(content)
+        assert errors == []
+
+    def test_resources_requires_https(self):
+        content = self._fence(
+            "resources",
+            {"items": [{"type": "video", "title": "x", "url": "http://example.com"}]},
+        )
+        errors, _ = validate_interactive_blocks(content)
+        assert any("https://" in e for e in errors)
+
+    def test_resources_rejects_unknown_type(self):
+        content = self._fence(
+            "resources",
+            {"items": [{"type": "tweet", "title": "x", "url": "https://example.com"}]},
+        )
+        errors, _ = validate_interactive_blocks(content)
+        assert any("type" in e for e in errors)
+
+
+class TestMediaWarning:
+    """Multimedia warning lives in validate_body."""
+
+    def test_missing_media_warns(self):
+        content = (
+            "# Title\n\nBody\n\n## Practice Questions\n\n"
+            + "```question\n{}\n```\n" * 5
+        )
+        _, warnings = validate_body(content, {"title": "Title"})
+        assert any("multimedia" in w.lower() for w in warnings)
+
+    def test_image_satisfies_media(self):
+        content = (
+            "# Title\n\n![Diagram](/media/x/y.png)\n\n## Practice Questions\n\n"
+            + "```question\n{}\n```\n" * 5
+        )
+        _, warnings = validate_body(content, {"title": "Title"})
+        assert not any("multimedia" in w.lower() for w in warnings)
 
 
 if __name__ == "__main__":

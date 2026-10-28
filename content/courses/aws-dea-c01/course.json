@@ -4,6 +4,7 @@
   "difficulty": "intermediate",
   "duration": "12 weeks",
   "icon": "database",
+  "skills": ["exam-strategy", "data-ingestion", "data-transformation", "data-store-design", "data-modeling", "orchestration", "data-quality", "observability", "performance-cost", "security-governance", "programming-for-data", "data-lifecycle"],
   "en": {
     "title": "AWS Certified Data Engineer, Associate (DEA-C01) Complete Course",
     "description": "Comprehensive preparation for the AWS Certified Data Engineer, Associate (DEA-C01) exam covering data ingestion and transformation, data store management, data operations and support, and data security and governance, with architecture diagrams, real AWS customer case studies, worked pipeline examples, and exam-style practice questions including multiple-response drills.",

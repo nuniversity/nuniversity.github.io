@@ -4,6 +4,8 @@ description: "Ajusta un lakehouse de Databricks en AWS capa por capa: tamaños d
 order: 14
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - performance-cost
 ---
 # Optimización del rendimiento en Databricks/AWS: liquid clustering, diseño de archivos, skew y ajuste de warehouses
 

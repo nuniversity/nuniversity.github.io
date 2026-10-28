@@ -4,6 +4,11 @@ description: "Understand why AI agents need memory and learn the key distinction
 order: 1
 duration: "30 min"
 difficulty: "beginner"
+skills:
+  - agent-memory
+objectives:
+  - "Distinguish short-term from long-term agent memory"
+  - "Map episodic and semantic memory to storage designs"
 ---
 
 # Foundations of Agent Memory
@@ -15,6 +20,16 @@ Memory is what separates a stateless chatbot from a truly intelligent agent. Wit
 ## Why Agents Need Memory
 
 Modern LLMs are stateless by nature: they process a single context window and forget everything once the response is generated. Agents, however, operate over multiple steps: they call tools, revisit earlier conclusions, and interact with users over long sessions.
+
+```glossary
+{
+  "terms": [
+    {"term": "Context window", "definition": "The fixed amount of text an LLM can consider at once."},
+    {"term": "Episodic memory", "definition": "Memory for specific past events with time and place."},
+    {"term": "Semantic memory", "definition": "Memory for general facts that are true regardless of when they were learned."}
+  ]
+}
+```
 
 Memory enables:
 
@@ -29,6 +44,8 @@ Memory enables:
 ---
 
 ## Short-Term vs Long-Term Memory
+
+![Memory types and where they live](/media/agent-memory-knowledge/memory-types.png)
 
 | Feature | Short-Term Memory | Long-Term Memory |
 | :--- | :--- | :--- |

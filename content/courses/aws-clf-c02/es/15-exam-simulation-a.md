@@ -6,6 +6,8 @@ examMinutes: 90
 difficulty: "beginner"
 description: "Pasa el conjunto A: 20 ítems tipo CLF-C02 ordenados según la ponderación publicada por dominio, con un desglose opción a opción tras cada bloque; después aprende el oficio del examen que decide el 65 real: la aritmética de ritmo de 83 segundos, el protocolo de marcar y barrer, cómo leer los enunciados «más rentable», «menos intensivo operativamente» y «primero DEBE», una rúbrica que puntúa el conjunto A por dominio en lugar del total, y un veredicto comparativo entre el autoaprendizaje, el bootcamp y la formación de AWS."
 duration: "90 min"
+skills:
+  - exam-strategy
 ---
 # Simulacro de examen A: conjunto de práctica completo + estrategia
 

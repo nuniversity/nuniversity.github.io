@@ -4,6 +4,8 @@ description: "Find, route, mask and prove: the five-layer PII pipeline for an AW
 order: 13
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - governance-security
 ---
 # PII Protection on the Lakehouse: Amazon Macie, Masking, and Privacy Workflows
 

@@ -4,6 +4,8 @@ description: "Domina la tarea de mayor rendimiento del Dominio 2 (30% del CLF-C0
 order: 5
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - shared-responsibility
 ---
 # El modelo de responsabilidad compartida de AWS
 

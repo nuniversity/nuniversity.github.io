@@ -4,6 +4,8 @@ description: "Domina la arquitectura de tres capas de Snowflake: Servicios en la
 order: 1
 difficulty: intermediate
 duration: "75 min"
+skills:
+  - architecture
 ---
 
 # Dominio 1.1: Arquitectura de Snowflake

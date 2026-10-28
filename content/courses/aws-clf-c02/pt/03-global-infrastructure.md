@@ -4,6 +4,8 @@ description: "Mapeie as três camadas da infraestrutura global da AWS, Regiões,
 order: 3
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - global-infrastructure
 ---
 # Infraestrutura Global da AWS e Resiliência
 

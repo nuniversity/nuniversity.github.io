@@ -100,6 +100,11 @@ The platform supports 7 interactive component types via fenced code blocks with 
 | `correct` | int | Yes | 0-based index of the correct option |
 | `explanation` | string | Recommended | Why correct + why the top distractor traps |
 
+> [!IMPORTANT]
+> **Ids are permanent.** Every answered question becomes a spaced-review card keyed by `<course-slug>::<id>`. Never renumber, reuse, or delete a published id; add a new id instead.
+>
+> **Stems must be self-contained.** Review sessions show the question without the lesson around it. Avoid "as mentioned above", "in this lesson", and pronouns whose referent lives in surrounding prose. One self-contained question per retrieval event, no cue-heavy wording that gives the answer away.
+
 ---
 
 ### Math Equations (KaTeX)
@@ -413,3 +418,62 @@ Students drag words from a word bank into blank slots within a template text. Su
 7. **Accessibility:** All interactive components support keyboard navigation
 8. **Closing fences:** MUST be bare ` ``` ` — never ` ```text ` or any text after backticks
 9. **Worked examples:** pair interactives with real SQL/CLI/config snippets in highlighted languages (sql, python, bash, terraform, …)
+
+---
+
+## Learning-Engine Extensions (v1.1)
+
+These three fences feed the platform's mastery model and spaced-review queue. Schemas are validated by `validate_lesson.py`. **Availability:** they render via `CodeExerciseBlock`, `GlossaryBlock`, and `ResourcesBlock` in `components/markdown/`.
+
+### Code Exercises (JavaScript only)
+
+**Tag:** ` ```codeexercise `
+
+```json
+{
+  "id": "js-01-ex1",
+  "title": "Sum an array",
+  "instructions": "Write a function sum(nums) that returns the total.",
+  "language": "javascript",
+  "starter": "function sum(nums) {\n  // your code here\n}",
+  "solution": "function sum(nums) {\n  return nums.reduce((a, b) => a + b, 0)\n}",
+  "tests": [
+    {"name": "empty array", "call": "sum([])", "expected": 0},
+    {"name": "three numbers", "call": "sum([1, 2, 3])", "expected": 6}
+  ],
+  "explanation": "reduce folds the array into a single running total."
+}
+```
+
+Rules: `language` MUST be `"javascript"` (JS-only sandbox); 2–6 deterministic tests; `expected` must be JSON-serializable; code strings must not contain `fetch`, `XMLHttpRequest`, `WebSocket`, `importScripts`, `eval`, or `Function(`; exercises run in a closed sandbox with no network or storage. Do not use this fence on Python, SQL, or Rust courses; those keep `matching`, `fillblank`, and `dragdrop`.
+
+### Key Terms (Glossary)
+
+**Tag:** ` ```glossary `
+
+```json
+{
+  "terms": [
+    {"term": "Idempotency", "definition": "Repeating the same operation produces the same result."},
+    {"term": "Shard", "definition": "A horizontal partition of a data stream or table."}
+  ]
+}
+```
+
+Rules: 3–12 terms; place before the first use of the terms (pre-training principle); definitions of 1–2 sentences; no circular definitions.
+
+### Further Resources
+
+**Tag:** ` ```resources `
+
+```json
+{
+  "heading": "Dig deeper",
+  "items": [
+    {"type": "video", "title": "Kinesis in 10 minutes", "url": "https://www.youtube.com/watch?v=...", "source": "YouTube", "minutes": 10},
+    {"type": "ebook", "title": "Designing Data-Intensive Applications", "url": "https://dataintensive.net/", "source": "O'Reilly"}
+  ]
+}
+```
+
+Rules: `type` uses the Library taxonomy (`video`, `ebook`, `course`, `blog`, `repository`, `podcast`, `article`); `url` must start with `https://`; 1–8 items; only link resources you have verified exist; place near the end of the lesson as optional depth (UDL choice point).

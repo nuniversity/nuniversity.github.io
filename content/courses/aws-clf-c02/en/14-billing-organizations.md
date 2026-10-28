@@ -4,6 +4,8 @@ description: "Read the AWS bill the way an examiner does: the Bills page and bil
 order: 14
 difficulty: "beginner"
 duration: "60 minutes"
+skills:
+  - cloud-economics
 ---
 # Billing, AWS Organizations and Cost Governance
 

@@ -4,6 +4,8 @@ description: "Domina los agentes, Flows y la orquestación de Amazon Bedrock par
 order: 11
 difficulty: "intermediate"
 duration: "110 min"
+skills:
+  - agents-orchestration
 ---
 # Agentes, Flows y orquestación en Amazon Bedrock
 

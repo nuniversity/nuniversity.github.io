@@ -4,6 +4,8 @@ description: "Master Domain 2 of the AIF-C01 exam: IAM role types and least priv
 order: 14
 difficulty: "intermediate"
 duration: "110 minutes"
+skills:
+  - security-cost
 ---
 # Security, IAM and Compliance for AI Workloads
 

@@ -4,6 +4,8 @@ description: "Learn Snowflake's performance optimization tools: Query Accelerati
 order: 14
 difficulty: intermediate
 duration: "60 min"
+skills:
+  - query-performance
 ---
 
 # Domain 4.2: Optimizing Query Performance

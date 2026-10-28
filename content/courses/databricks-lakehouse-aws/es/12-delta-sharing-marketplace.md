@@ -4,6 +4,8 @@ description: "Domina de principio a fin las tres superficies de colaboración de
 order: 12
 difficulty: "intermediate"
 duration: "80 min"
+skills:
+  - data-sharing
 ---
 # Intercambio de datos en Databricks sobre AWS: OpenSharing, Marketplace y Lakehouse Federation
 

@@ -4,6 +4,8 @@ description: "Learn to diagnose Snowflake query performance issues using Query P
 order: 13
 difficulty: intermediate
 duration: "65 min"
+skills:
+  - query-performance
 ---
 
 # Domain 4.1: Evaluating Query Performance

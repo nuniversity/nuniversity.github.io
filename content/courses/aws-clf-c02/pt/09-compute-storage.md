@@ -4,6 +4,8 @@ description: "As duas maiores famílias de serviços do Domínio 3 em uma liçã
 order: 9
 difficulty: "beginner"
 duration: "75 min"
+skills:
+  - compute-storage
 ---
 # Serviços de Computação e Armazenamento
 

@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, useScroll } from 'framer-motion'
-import { Check, CheckCircle2 } from 'lucide-react'
+import { AlertTriangle, Check, CheckCircle2 } from 'lucide-react'
 import { isLessonComplete, markLessonComplete, markLessonIncomplete, recordVisit } from '@/lib/progress/storage'
 import { recordAndEmit } from '@/lib/gamification/bus'
+import { useLessonScore } from '@/components/lessons/LessonScoreContext'
 
 export function LessonScrollProgress() {
   const { scrollYProgress } = useScroll()
@@ -56,11 +57,22 @@ export function LessonCompleteButton({ courseSlug, lessonSlug, lessonSlugs, dict
 }) {
   const [completed, setCompleted] = useState(false)
   const [hydrated, setHydrated] = useState(false)
+  const { registered, results } = useLessonScore()
 
   useEffect(() => {
     setCompleted(isLessonComplete(courseSlug, lessonSlug))
     setHydrated(true)
   }, [courseSlug, lessonSlug])
+
+  // Soft mastery signal: completion is never blocked (locked decision).
+  const score = (() => {
+    const widgets = Object.values(registered)
+    const answered = widgets.filter((w) => results[w.id]?.answered === true)
+    if (widgets.length === 0 || answered.length < widgets.length) return null
+    const correct = answered.reduce((sum, w) => sum + (results[w.id]?.correct ?? 0), 0)
+    const total = answered.reduce((sum, w) => sum + (results[w.id]?.total ?? 0), 0)
+    return total > 0 ? correct / total : null
+  })()
 
   const toggle = () => {
     if (completed) {
@@ -103,6 +115,12 @@ export function LessonCompleteButton({ courseSlug, lessonSlug, lessonSlugs, dict
         <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-1 text-xs font-medium text-green-700 dark:bg-green-900 dark:text-green-300">
           <Check className="h-3 w-3" />
           {dict?.lesson?.completed_badge || 'Completed'}
+        </span>
+      )}
+      {completed && score !== null && score < 0.8 && (
+        <span className="inline-flex items-center gap-1 rounded-full bg-yellow-100 px-2.5 py-1 text-xs font-medium text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+          <AlertTriangle className="h-3 w-3" />
+          {dict?.lesson?.mastery?.review || 'Review recommended'}
         </span>
       )}
     </div>

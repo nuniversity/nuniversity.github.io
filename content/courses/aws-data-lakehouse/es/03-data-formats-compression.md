@@ -4,6 +4,8 @@ description: "Por qué los bytes en S3 deciden la factura de Athena, anatomía d
 order: 3
 difficulty: "intermediate"
 duration: "55 min"
+skills:
+  - data-formats
 ---
 # Formatos de datos y compresión: CSV, JSON, Avro, Parquet y ORC
 

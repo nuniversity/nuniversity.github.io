@@ -4,6 +4,8 @@ description: "Leia a fatura AWS como um examinador: a página Bills e o painel d
 order: 14
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - cloud-economics
 ---
 # Cobrança, AWS Organizations e Governança de Custos
 

@@ -4,6 +4,11 @@ description: "Transforme a Tarefa 1.3 do Domínio 1 do DEA-C01 numa decisão que
 order: 5
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - orchestration
+objectives:
+  - "Orchestrate a multi-step pipeline with Step Functions"
+  - "Choose between EventBridge, Step Functions, and MWAA"
 ---
 # Orquestrando Pipelines de Dados: Step Functions, EventBridge e Airflow
 

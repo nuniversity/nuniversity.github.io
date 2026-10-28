@@ -4,6 +4,8 @@ description: "Domina MLOps y el escalado para el examen AIF-C01, SageMaker Pipel
 order: 13
 difficulty: "intermediate"
 duration: "110 min"
+skills:
+  - mlops
 ---
 # MLOps y escalado en AWS
 

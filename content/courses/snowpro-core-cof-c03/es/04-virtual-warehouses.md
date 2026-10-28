@@ -4,6 +4,8 @@ description: "Análisis profundo de los Virtual Warehouses de Snowflake: tipos, 
 order: 4
 difficulty: intermediate
 duration: "70 min"
+skills:
+  - virtual-warehouses
 ---
 
 # Dominio 1.4: Configuración de Virtual Warehouses

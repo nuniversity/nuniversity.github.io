@@ -4,6 +4,8 @@ description: "Domine o sistema de cache de três camadas do Snowflake: Query Res
 order: 15
 difficulty: intermediate
 duration: "45 min"
+skills:
+  - caching
 ---
 
 # Domínio 4.3: Cache do Snowflake

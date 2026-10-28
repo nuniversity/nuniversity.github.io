@@ -4,6 +4,8 @@ description: "Construye un modelo mental de trabajo del retrieval-augmented gene
 order: 10
 difficulty: "intermediate"
 duration: "115 min"
+skills:
+  - rag
 ---
 # RAG y Knowledge Bases en Amazon Bedrock: Troceado, embeddings, recuperación y evaluación
 

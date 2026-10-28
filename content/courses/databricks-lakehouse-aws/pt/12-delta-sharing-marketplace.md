@@ -4,6 +4,8 @@ description: "Domine, de ponta a ponta, as três superfícies de colaboração d
 order: 12
 difficulty: "intermediate"
 duration: "80 min"
+skills:
+  - data-sharing
 ---
 # Compartilhamento de Dados na Databricks on AWS: OpenSharing, Marketplace e Lakehouse Federation
 

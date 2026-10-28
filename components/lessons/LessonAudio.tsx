@@ -73,6 +73,10 @@ export function collectSpokenText(root: HTMLElement): string {
   const SKIP = new Set(['PRE', 'CODE', 'TABLE', 'FIGURE', 'SVG', 'SCRIPT', 'STYLE', 'NAV'])
   const KEEP = new Set(['P', 'LI', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'BLOCKQUOTE', 'DD', 'DT'])
 
+  // Focus mode hides sections with display:none; listening must match what is
+  // visible on screen, otherwise audio and text disagree.
+  if (root.hidden || root.style.display === 'none') return ''
+
   // Callers may hand over a single readable element (a section's paragraph)
   // rather than a container, so read it directly instead of walking its text
   // children — those are text nodes and would be skipped.
@@ -87,6 +91,7 @@ export function collectSpokenText(root: HTMLElement): string {
     if (node.nodeType !== Node.ELEMENT_NODE) return
     const el = node as HTMLElement
     if (SKIP.has(el.tagName)) return
+    if (el.hidden || el.style.display === 'none') return
     // The audio control's own labels ("Listen to this lesson", "Reading
     // aloud…", the hint) are UI chrome. Reading them aloud is what made the
     // engine start by narrating its own buttons.

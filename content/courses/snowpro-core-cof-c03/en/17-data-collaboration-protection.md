@@ -4,9 +4,11 @@ description: "Understand Snowflake's replication, failover/failback, cross-regio
 order: 17
 difficulty: intermediate
 duration: 50
+skills:
+  - collaboration-sharing
 ---
 
-# Domain 5.1: Data Collaboration, Replication, and Business Continuity
+# Domain 5.1, Data Collaboration, Replication, and Business Continuity
 
 > [!NOTE]
 > **Exam Domain 5.1**: *Data Collaboration and Data Protection* contributes to the **Data Collaboration** domain, which is **10%** of the COF-C03 exam.
@@ -256,63 +258,92 @@ This ensures that after failover, the secondary account has all the same roles, 
 
 ## Practice Questions
 
-**1.** A Standard edition account drops a table with default retention. For how many days can a user restore it via Time Travel?
+```question
+{
+  "id": "snowpro-core-cof-c03-17-q1",
+  "type": "multiple-choice",
+  "question": "A Standard edition account drops a table with default retention. For how many days can a user restore it via Time Travel?",
+  "options": [
+    "0",
+    "1",
+    "7",
+    "90"
+  ],
+  "correct": 1
+}
+```
 
-- A) 0
-- B) **1** ✅
-- C) 7
-- D) 90
+```question
+{
+  "id": "snowpro-core-cof-c03-17-q2",
+  "type": "multiple-choice",
+  "question": "After Time Travel expires on a dropped table, what additional protection exists?",
+  "options": [
+    "Replication group backup",
+    "Snowflake Fail-Safe for 7 days",
+    "Zero-Copy Clone automatic backup",
+    "No further protection"
+  ],
+  "correct": 1
+}
+```
 
----
+```question
+{
+  "id": "snowpro-core-cof-c03-17-q3",
+  "type": "multiple-choice",
+  "question": "A developer clones a 500 GB production table. How much additional storage is charged at clone creation?",
+  "options": [
+    "500 GB immediately",
+    "250 GB (50% deduplication)",
+    "0 GB: no storage charged until the clone diverges",
+    "Depends on retention period"
+  ],
+  "correct": 2
+}
+```
 
-**2.** After Time Travel expires on a dropped table, what additional protection exists?
+```question
+{
+  "id": "snowpro-core-cof-c03-17-q4",
+  "type": "multiple-choice",
+  "question": "A transient table is dropped. What recovery options exist?",
+  "options": [
+    "Time Travel only",
+    "Time Travel and Fail-Safe",
+    "Time Travel only: transient tables have no Fail-Safe",
+    "Neither Time Travel nor Fail-Safe"
+  ],
+  "correct": 2
+}
+```
 
-- A) Replication group backup
-- B) Snowflake Fail-Safe for 7 days ✅
-- C) Zero-Copy Clone automatic backup
-- D) No further protection
+```question
+{
+  "id": "snowpro-core-cof-c03-17-q5",
+  "type": "multiple-choice",
+  "question": "Which statement about cross-cloud replication is TRUE?",
+  "options": [
+    "It is free: Snowflake does not charge transfer fees",
+    "It requires both accounts to use the same cloud provider",
+    "Data transfer fees apply for cross-region and cross-cloud replication",
+    "Secondary accounts can be written to without failover"
+  ],
+  "correct": 2
+}
+```
 
----
-
-**3.** A developer clones a 500 GB production table. How much additional storage is charged at clone creation?
-
-- A) 500 GB immediately
-- B) 250 GB (50% deduplication)
-- C) **0 GB: no storage charged until the clone diverges** ✅
-- D) Depends on retention period
-
----
-
-**4.** Which object type supports **failover** (promotion of secondary to primary)?
-
-- A) Replication Group ✅ incorrect; this is Failover Group
-- B) **Failover Group** ✅
-- C) External Replication Policy
-- D) Clone Group
-
----
-
-**5.** A transient table is dropped. What recovery options exist?
-
-- A) Time Travel only
-- B) Time Travel and Fail-Safe
-- C) **Time Travel only: transient tables have no Fail-Safe** ✅
-- D) Neither Time Travel nor Fail-Safe
-
----
-
-**6.** Which statement about cross-cloud replication is TRUE?
-
-- A) It is free: Snowflake does not charge transfer fees
-- B) It requires both accounts to use the same cloud provider
-- C) **Data transfer fees apply for cross-region and cross-cloud replication** ✅
-- D) Secondary accounts can be written to without failover
-
----
-
-**7.** A Failover Group is configured with `REPLICATION SCHEDULE = '10 MINUTE'`. What does this mean?
-
-- A) Manual refresh must be triggered every 10 minutes
-- B) **Snowflake automatically refreshes the secondary every 10 minutes** ✅
-- C) Failover occurs automatically after 10 minutes of primary downtime
-- D) Replication is batched into 10-minute windows with no intermediate sync
+```question
+{
+  "id": "snowpro-core-cof-c03-17-q6",
+  "type": "multiple-choice",
+  "question": "A Failover Group is configured with `REPLICATION SCHEDULE = '10 MINUTE'`. What does this mean?",
+  "options": [
+    "Manual refresh must be triggered every 10 minutes",
+    "Snowflake automatically refreshes the secondary every 10 minutes",
+    "Failover occurs automatically after 10 minutes of primary downtime",
+    "Replication is batched into 10-minute windows with no intermediate sync"
+  ],
+  "correct": 1
+}
+```

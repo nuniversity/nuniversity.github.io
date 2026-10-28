@@ -4,6 +4,8 @@ description: "El Dominio 2 hecho práctico: asegura el usuario root, elige entre
 order: 6
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - security-iam
 ---
 # Identidad, control de acceso y protección de datos
 

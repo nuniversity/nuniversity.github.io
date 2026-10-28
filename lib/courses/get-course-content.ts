@@ -21,6 +21,10 @@ export interface CourseMetadata {
   difficulty?: 'beginner' | 'intermediate' | 'advanced'
   exam?: boolean
   examMinutes?: number
+  /** Skill tags used by the practice mastery model. Optional; old lessons omit it. */
+  skills?: string[]
+  /** Learning objectives shown in future UI. Optional. */
+  objectives?: string[]
 }
 
 export interface CourseContent {

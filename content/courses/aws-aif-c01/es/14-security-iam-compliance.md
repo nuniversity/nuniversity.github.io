@@ -4,6 +4,8 @@ description: "Domina el Dominio 2 del examen AIF-C01: tipos de roles de IAM y m√
 order: 14
 difficulty: "intermediate"
 duration: "110 min"
+skills:
+  - security-cost
 ---
 # Seguridad, IAM y cumplimiento para cargas de trabajo de IA
 

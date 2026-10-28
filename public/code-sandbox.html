@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="robots" content="noindex"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval'; style-src 'none'; img-src 'none'; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"/>
+<title>Code sandbox</title>
+</head>
+<body>
+<script>
+/* Runs inside <iframe sandbox="allow-scripts">. The frame has an opaque origin:
+   no storage, cookies, network, or parent DOM access. It receives
+   {nonce, code, tests} and replies {nonce, type:'done'|'error', results?}.
+   Learner code is evaluated once per test so one throwing test cannot hide
+   the others. This is the ONLY place on the site allowed to use eval/Function;
+   the global policy in lib/security/csp.mjs still excludes 'unsafe-eval'. */
+window.addEventListener('message', (event) => {
+  if (event.source !== parent) return
+  const data = event.data
+  if (!data || typeof data.nonce !== 'string' || typeof data.code !== 'string' || !Array.isArray(data.tests)) {
+    return
+  }
+
+  function deepEqual(a, b) {
+    if (a === b) return true
+    if (typeof a !== typeof b) return false
+    if (a === null || b === null || typeof a !== 'object') {
+      return Number.isNaN(a) && Number.isNaN(b)
+    }
+    if (Array.isArray(a) !== Array.isArray(b)) return false
+    const keysA = Object.keys(a)
+    const keysB = Object.keys(b)
+    if (keysA.length !== keysB.length) return false
+    return keysA.every(
+      (key) => Object.prototype.hasOwnProperty.call(b, key) && deepEqual(a[key], b[key])
+    )
+  }
+
+  const results = []
+  for (const test of data.tests) {
+    const name = typeof test.name === 'string' ? test.name : 'test'
+    const call = typeof test.call === 'string' ? test.call : ''
+    try {
+      const run = new Function('"use strict";\n' + data.code + '\n;return (' + call + ');')
+      const value = run()
+      let actual = null
+      try {
+        actual = JSON.parse(JSON.stringify(value === undefined ? null : value))
+      } catch {
+        actual = String(value)
+      }
+      results.push({ name, passed: deepEqual(value, test.expected), actual })
+    } catch (error) {
+      results.push({
+        name,
+        passed: false,
+        error: String((error && error.message) || error),
+      })
+    }
+  }
+
+  parent.postMessage({ nonce: data.nonce, type: 'done', results }, '*')
+})
+</script>
+</body>
+</html>

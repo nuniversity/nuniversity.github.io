@@ -4,6 +4,8 @@ description: "Pick the right S3 storage class for every lake zone with the full 
 order: 2
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - s3-storage
 ---
 # S3 as the Data Lake Foundation: Storage Classes, Glacier, and Durability
 

@@ -4,6 +4,11 @@ description: "Instrumenta cada etapa de un pipeline de datos tal como lo exigen 
 order: 10
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - observability
+objectives:
+  - "Instrument pipelines with CloudWatch metrics and alarms"
+  - "Diagnose a stalled ingestion job from logs"
 ---
 # Monitorización y observabilidad de pipelines de datos
 

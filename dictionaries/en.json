@@ -1683,7 +1683,16 @@
     "listen_paused": "Paused",
     "hide_outline": "Hide course outline",
     "show_outline": "Show outline",
-    "resize_outline": "Resize course outline"
+    "resize_outline": "Resize course outline",
+    "mastery": {
+      "title": "Practice mastery",
+      "pending": "Answer the practice questions to measure your mastery",
+      "strong": "Mastery reached",
+      "solid": "Solid progress: review the missed items to reach 80% mastery",
+      "review": "Review recommended before moving on"
+    },
+    "focus_on": "Focus mode",
+    "focus_off": "Show full lesson"
   },
   "gamification": {
     "xp": "{n} XP",
@@ -1709,5 +1718,35 @@
       "streak_7": "On fire",
       "streak_7_desc": "Keep a 7-day learning streak"
     }
+  },
+  "review": {
+    "heading": "Daily review",
+    "subtitle": "Spaced repetition across all your courses.",
+    "title": "Daily review",
+    "mixed_title": "Mixed practice",
+    "mixed_heading": "Mixed practice",
+    "mixed_cta": "Mixed practice",
+    "empty": "Nothing due for review right now. Finish a lesson to start building your review deck.",
+    "mixed_empty": "No practice questions found for this course.",
+    "correct": "Correct",
+    "incorrect": "Incorrect",
+    "next": "Next",
+    "finish": "Finish",
+    "done": "Session complete.",
+    "again": "Practice again"
+  },
+  "codeExercise": {
+    "run": "Run tests",
+    "running": "Running…",
+    "reset": "Reset",
+    "passed": "tests passed",
+    "forbidden": "Remove network or eval calls: exercises run in a closed sandbox.",
+    "editor": "Code editor"
+  },
+  "glossary": {
+    "title": "Key terms"
+  },
+  "resources": {
+    "title": "Dig deeper"
   }
 }

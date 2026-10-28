@@ -4,6 +4,8 @@ description: "Domine o modelo de custo da Databricks na AWS: o que é um DBU e c
 order: 15
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - performance-cost
 ---
 # Otimização de Custo e Economia de DBU na AWS
 

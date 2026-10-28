@@ -4,6 +4,7 @@
   "difficulty": "intermediate",
   "duration": "12 weeks",
   "icon": "database",
+  "skills": ["lakehouse-architecture","unity-catalog","delta-lake","ingestion-streaming","compute-runtime","pipelines-jobs","sql-serving","data-quality","security-governance","data-sharing","performance-cost","cicd"],
   "en": {
     "title": "Building a Databricks Data Lakehouse on AWS: Unity Catalog to Production",
     "description": "End-to-end course for building and operating a production Databricks Lakehouse deployed on AWS, Unity Catalog governance, Delta Lake (ACID, CDF, liquid clustering), Auto Loader and Structured Streaming ingestion, Databricks Runtime/Photon transformation, Lakeflow/DLT pipelines, Databricks SQL serverless warehouses and Lakeview, workflows-as-code with asset bundles, data quality expectations, Delta Sharing and Marketplace, performance and DBU cost optimization, CI/CD with Terraform, and a full capstone reference architecture, with architecture diagrams, real customer cases, worked pricing examples, and practice questions.",

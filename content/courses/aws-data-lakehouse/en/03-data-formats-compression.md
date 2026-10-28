@@ -4,6 +4,8 @@ description: "Why the bytes on S3 decide the Athena bill, row versus columnar an
 order: 3
 difficulty: "intermediate"
 duration: "55 minutes"
+skills:
+  - data-formats
 ---
 # Data Formats and Compression: CSV, JSON, Avro, Parquet, and ORC
 

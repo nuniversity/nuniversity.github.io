@@ -4,6 +4,8 @@ description: "Domina la seguridad de la IA generativa para el examen AIF-C01: la
 order: 12
 difficulty: "intermediate"
 duration: "110 min"
+skills:
+  - responsible-ai
 ---
 # Seguridad de la IA generativa, guardrails y IA responsable
 

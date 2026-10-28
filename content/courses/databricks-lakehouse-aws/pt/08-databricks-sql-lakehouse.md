@@ -4,6 +4,8 @@ description: "Execute a camada de serviço de um lakehouse de dados Databricks n
 order: 8
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - sql-serving
 ---
 # Databricks SQL Warehouses e a Camada de Serviço: Serverless, Escalabilidade, Dashboards, BI e Federação
 

@@ -4,6 +4,8 @@ description: "Ejecuta la capa SQL del lakehouse: en qué se diferencian el motor
 order: 9
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - query-serving
 ---
 # Athena como motor de consultas del lakehouse: coste, rendimiento y SQL de Iceberg
 

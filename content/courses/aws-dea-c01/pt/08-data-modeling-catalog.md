@@ -4,6 +4,12 @@ description: "Construa a camada de metadados que o Domínio 2 realmente é: o mo
 order: 8
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - data-modeling
+  - data-store-design
+objectives:
+  - "Model dimensions and facts for a lakehouse"
+  - "Track schema evolution through the Glue Data Catalog"
 ---
 # Modelagem de Dados, Catálogo Glue e Evolução de Schema
 

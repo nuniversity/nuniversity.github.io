@@ -4,6 +4,8 @@ description: "Domina el núcleo de IA generativa del AIF-C01, tokens, transforme
 order: 8
 difficulty: "intermediate"
 duration: "100 min"
+skills:
+  - generative-ai
 ---
 # Fundamentos de IA generativa: tokens, transformers, prompting y modelos fundacionales
 

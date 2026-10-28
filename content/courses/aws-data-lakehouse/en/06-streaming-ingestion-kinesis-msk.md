@@ -4,6 +4,8 @@ description: "Move events into the lakehouse without losing order, money or slee
 order: 6
 difficulty: "intermediate"
 duration: "65 minutes"
+skills:
+  - streaming
 ---
 # Streaming Ingestion: Kinesis, Amazon MSK, and Landing Streams in the Lake
 

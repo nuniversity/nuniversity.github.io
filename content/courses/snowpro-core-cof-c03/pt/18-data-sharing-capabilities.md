@@ -4,6 +4,8 @@ description: "Entenda o modelo de Secure Data Sharing do Snowflake, contas de pr
 order: 18
 difficulty: intermediate
 duration: 50
+skills:
+  - collaboration-sharing
 ---
 
 # Domínio 5.2: Compartilhamento Seguro de Dados e Data Clean Rooms

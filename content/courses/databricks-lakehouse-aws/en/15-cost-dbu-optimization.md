@@ -4,6 +4,8 @@ description: "Master the Databricks cost model on AWS: what a DBU is and how it 
 order: 15
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - performance-cost
 ---
 # Cost Optimization and DBU Economics on AWS
 

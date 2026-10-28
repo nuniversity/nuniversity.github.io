@@ -86,6 +86,13 @@ class TestGenerateLesson:
         content = generate_lesson("Test", 1)
         assert content.count("```question") == 5
 
+    def test_learning_metadata_guidance(self):
+        """Template points authors at skills/objectives and glossary."""
+        content = generate_lesson("Test", 1)
+        assert "# skills:" in content
+        assert "# objectives:" in content
+        assert "glossary" in content
+
 
 class TestValidateInputs:
     """Tests for validate_inputs function."""

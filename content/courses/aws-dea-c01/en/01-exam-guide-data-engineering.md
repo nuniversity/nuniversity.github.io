@@ -4,6 +4,11 @@ description: "Read the official DEA-C01 exam guide the way an exam writer does, 
 order: 1
 difficulty: "intermediate"
 duration: "90 minutes"
+skills:
+  - exam-strategy
+objectives:
+  - "Map the four DEA-C01 domains and their exam weights"
+  - "Plan a study sequence that matches the data engineer role"
 ---
 # DEA-C01 Exam Guide and the Data Engineer Role
 

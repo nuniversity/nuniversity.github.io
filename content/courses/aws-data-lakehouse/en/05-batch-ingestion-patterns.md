@@ -4,6 +4,8 @@ description: "Pick the right batch mover for every source type you will ever mee
 order: 5
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - ingestion
 ---
 # Batch Ingestion Patterns: DMS, AppFlow, DataSync, and Transfer Family
 

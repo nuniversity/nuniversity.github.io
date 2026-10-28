@@ -4,6 +4,8 @@ description: "Run the serving layer of a Databricks lakehouse on AWS: choose bet
 order: 8
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - sql-serving
 ---
 # Databricks SQL Warehouses and the Serving Layer: Serverless, Scaling, Dashboards, BI and Federation
 

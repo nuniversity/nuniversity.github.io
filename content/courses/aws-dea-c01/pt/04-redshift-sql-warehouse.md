@@ -4,6 +4,12 @@ description: "Leve o caminho de carga da Lição 3 até dentro do warehouse: com
 order: 4
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - data-transformation
+  - data-store-design
+objectives:
+  - "Design distribution and sort keys for a Redshift workload"
+  - "Write warehouse SQL that avoids full scans"
 ---
 # Amazon Redshift: SQL de Data Warehouse e Transformação de Dados
 

@@ -4,6 +4,8 @@ description: "Domina el sistema de caché de tres capas de Snowflake: Caché de 
 order: 15
 difficulty: intermediate
 duration: "45 min"
+skills:
+  - caching
 ---
 
 # Dominio 4.3: Caché en Snowflake

@@ -4,6 +4,8 @@ description: "Master Amazon Bedrock agents, Flows and orchestration for the AIF-
 order: 11
 difficulty: "intermediate"
 duration: "110 minutes"
+skills:
+  - agents-orchestration
 ---
 # Amazon Bedrock Agents, Flows and Orchestration
 

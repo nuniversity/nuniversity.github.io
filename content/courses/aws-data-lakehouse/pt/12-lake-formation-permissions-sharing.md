@@ -4,6 +4,8 @@ description: "Governancie o AWS lakehouse da mesma forma que um banco de dados �
 order: 12
 difficulty: "intermediate"
 duration: "65 min"
+skills:
+  - governance-security
 ---
 # Governança com Lake Formation: Permissões, Segurança em Nível de Linha/Coluna e Data Sharing
 

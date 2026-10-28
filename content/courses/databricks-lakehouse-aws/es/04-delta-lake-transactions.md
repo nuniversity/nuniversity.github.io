@@ -4,6 +4,8 @@ description: "Domina el mecanismo de Delta Lake bajo cada tabla de Databricks so
 order: 4
 difficulty: "intermediate"
 duration: "70 min"
+skills:
+  - delta-lake
 ---
 # Transacciones Delta Lake en AWS: anatomía del registro, time travel, CDF, clustering y VACUUM
 

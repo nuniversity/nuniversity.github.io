@@ -4,6 +4,8 @@ description: "Collect, store, catalog, process, quality-check, label and govern 
 order: 3
 difficulty: "intermediate"
 duration: "80 minutes"
+skills:
+  - ml-lifecycle
 ---
 # Data Engineering for AI on AWS
 

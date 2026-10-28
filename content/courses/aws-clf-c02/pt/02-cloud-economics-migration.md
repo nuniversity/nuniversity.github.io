@@ -4,6 +4,8 @@ description: "Domínio 1 do CLF-C02 de ponta a ponta, a proposta de valor da AWS
 order: 2
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - cloud-economics
 ---
 # Economia de Nuvem, Estratégias de Migração e a Jornada de Nuvem
 

@@ -4,6 +4,11 @@ description: "Domina la Tarea 2.3 del Dominio 2 del DEA-C01 de principio a fin: 
 order: 9
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - data-lifecycle
+objectives:
+  - "Design S3 lifecycle rules for cost and retention"
+  - "Plan a migration that preserves lineage"
 ---
 # Ciclo de vida, migración y organización de lagos de datos
 

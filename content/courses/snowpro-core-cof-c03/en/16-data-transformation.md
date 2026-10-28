@@ -4,9 +4,11 @@ description: "Master structured, semi-structured, and unstructured data processi
 order: 16
 difficulty: intermediate
 duration: 55
+skills:
+  - transformation
 ---
 
-# Domain 4.4: Data Transformation in Snowflake
+# Domain 4.4, Data Transformation in Snowflake
 
 > [!NOTE]
 > **Exam Domain 4.4**: *Data Transformation* contributes to the **Performance Optimization, Querying, and Transformation** domain, which is **21%** of the COF-C03 exam.
@@ -427,81 +429,138 @@ AS
 
 ## Practice Questions
 
-**1.** JSON: `{"tags":["sql","python","cloud"]}`. Which returns `"python"`?
+```question
+{
+  "id": "snowpro-core-cof-c03-16-q1",
+  "type": "multiple-choice",
+  "question": "JSON: `{\"tags\":[\"sql\",\"python\",\"cloud\"]}`. Which returns `\"python\"`?",
+  "options": [
+    "`v:tags::VARCHAR`",
+    "`v:tags[1]::VARCHAR`",
+    "`v:tags[2]::VARCHAR`",
+    "`v.tags[1]::VARCHAR`"
+  ],
+  "correct": 1
+}
+```
 
-- A) `v:tags::VARCHAR`
-- B) `v:tags[1]::VARCHAR` ✅
-- C) `v:tags[2]::VARCHAR`
-- D) `v.tags[1]::VARCHAR`
+```question
+{
+  "id": "snowpro-core-cof-c03-16-q2",
+  "type": "multiple-choice",
+  "question": "`LATERAL FLATTEN(INPUT => v:tags)`; which column holds the actual tag value?",
+  "options": [
+    "`KEY`",
+    "`INDEX`",
+    "`VALUE`",
+    "`PATH`"
+  ],
+  "correct": 2
+}
+```
 
----
+```question
+{
+  "id": "snowpro-core-cof-c03-16-q3",
+  "type": "multiple-choice",
+  "question": "Data: `(A,100),(A,100),(B,200)` DESC. What does `RANK()` return for both `A` rows?",
+  "options": [
+    "2, 3",
+    "2, 2",
+    "1, 2",
+    "1, 1"
+  ],
+  "correct": 1
+}
+```
 
-**2.** `LATERAL FLATTEN(INPUT => v:tags)`; which column holds the actual tag value?
+```question
+{
+  "id": "snowpro-core-cof-c03-16-q4",
+  "type": "multiple-choice",
+  "question": "`GROUP BY ROLLUP(region, country)` with 3 regions × 4 countries produces how many groupings?",
+  "options": [
+    "12",
+    "16",
+    "17",
+    "24"
+  ],
+  "correct": 2,
+  "explanation": "12 detail + 3 region subtotals + 1 grand total"
+}
+```
 
-- A) `KEY`
-- B) `INDEX`
-- C) `VALUE` ✅
-- D) `PATH`
+```question
+{
+  "id": "snowpro-core-cof-c03-16-q5",
+  "type": "multiple-choice",
+  "question": "`LAST_VALUE` returns the current row instead of the last row in a partition. What is the cause?",
+  "options": [
+    "Missing `PARTITION BY` clause",
+    "Default frame ends at `CURRENT ROW`",
+    "`ORDER BY` is descending",
+    "`LAST_VALUE` only works with `RANK()`"
+  ],
+  "correct": 1
+}
+```
 
----
+```question
+{
+  "id": "snowpro-core-cof-c03-16-q6",
+  "type": "multiple-choice",
+  "question": "A Snowpark script calls `.filter().group_by().agg()` but no data is returned until `.collect()`. This describes:",
+  "options": [
+    "Eager evaluation",
+    "Lazy evaluation",
+    "Deferred compilation",
+    "Async pipelining"
+  ],
+  "correct": 1
+}
+```
 
-**3.** Data: `(A,100),(A,100),(B,200)` DESC. What does `RANK()` return for both `A` rows?
+```question
+{
+  "id": "snowpro-core-cof-c03-16-q7",
+  "type": "multiple-choice",
+  "question": "Which function converts an array stored in a VARIANT column into individual rows?",
+  "options": [
+    "`PARSE_JSON`",
+    "`ARRAY_AGG`",
+    "`LATERAL FLATTEN`",
+    "`OBJECT_CONSTRUCT`"
+  ],
+  "correct": 2
+}
+```
 
-- A) 2, 3
-- B) 2, 2 ✅
-- C) 1, 2
-- D) 1, 1
+```question
+{
+  "id": "snowpro-core-cof-c03-16-q8",
+  "type": "multiple-choice",
+  "question": "A developer writes a query that joins two large tables and then applies a WHERE clause to filter by date. A colleague rewrites the filter into a CTE applied before the join. What is the primary benefit of the rewrite?",
+  "options": [
+    "The rewrite enables result cache usage",
+    "The rewrite allows Snowflake to prune micro-partitions before the join, reducing data scanned",
+    "The rewrite avoids Cloud Services costs",
+    "CTEs always execute faster than subqueries regardless of position"
+  ],
+  "correct": 1
+}
+```
 
----
-
-**4.** `GROUP BY ROLLUP(region, country)` with 3 regions × 4 countries produces how many groupings?
-
-- A) 12
-- B) 16
-- C) 17 ✅ *(12 detail + 3 region subtotals + 1 grand total)*
-- D) 24
-
----
-
-**5.** `LAST_VALUE` returns the current row instead of the last row in a partition. What is the cause?
-
-- A) Missing `PARTITION BY` clause
-- B) Default frame ends at `CURRENT ROW` ✅
-- C) `ORDER BY` is descending
-- D) `LAST_VALUE` only works with `RANK()`
-
----
-
-**6.** A Snowpark script calls `.filter().group_by().agg()` but no data is returned until `.collect()`. This describes:
-
-- A) Eager evaluation
-- B) Lazy evaluation ✅
-- C) Deferred compilation
-- D) Async pipelining
-
----
-
-**7.** Which function converts an array stored in a VARIANT column into individual rows?
-
-- A) `PARSE_JSON`
-- B) `ARRAY_AGG`
-- C) `LATERAL FLATTEN` ✅
-- D) `OBJECT_CONSTRUCT`
-
----
-
-**8.** A developer writes a query that joins two large tables and then applies a WHERE clause to filter by date. A colleague rewrites the filter into a CTE applied before the join. What is the primary benefit of the rewrite?
-
-- A) The rewrite enables result cache usage
-- B) The rewrite allows Snowflake to prune micro-partitions before the join, reducing data scanned ✅
-- C) The rewrite avoids Cloud Services costs
-- D) CTEs always execute faster than subqueries regardless of position
-
----
-
-**9.** Which Snowflake feature lets you define a transformation as a SQL query and configure a target lag, with Snowflake automatically handling incremental refresh?
-
-- A) Streams and Tasks
-- B) Snowpipe Streaming
-- C) Materialized Views
-- D) Dynamic Tables ✅
+```question
+{
+  "id": "snowpro-core-cof-c03-16-q9",
+  "type": "multiple-choice",
+  "question": "Which Snowflake feature lets you define a transformation as a SQL query and configure a target lag, with Snowflake automatically handling incremental refresh?",
+  "options": [
+    "Streams and Tasks",
+    "Snowpipe Streaming",
+    "Materialized Views",
+    "Dynamic Tables"
+  ],
+  "correct": 3
+}
+```

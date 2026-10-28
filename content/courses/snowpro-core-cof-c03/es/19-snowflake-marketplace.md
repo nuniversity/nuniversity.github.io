@@ -4,6 +4,8 @@ description: "Explora el ecosistema del Snowflake Marketplace, listings público
 order: 19
 difficulty: intermediate
 duration: 45
+skills:
+  - collaboration-sharing
 ---
 
 # Dominio 5.3: Snowflake Marketplace y Native Apps

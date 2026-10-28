@@ -4,6 +4,8 @@ description: "Master micro-partitions, data clustering, Time Travel, Fail-Safe, 
 order: 5
 difficulty: intermediate
 duration: "75 min"
+skills:
+  - storage
 ---
 
 # Domain 1.5: Snowflake Storage Concepts

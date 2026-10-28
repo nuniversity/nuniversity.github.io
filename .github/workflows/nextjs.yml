@@ -77,6 +77,10 @@ jobs:
           python3 -m pip install --quiet pytest pyyaml jsonschema
           python3 -m pytest tests -q --ignore=tests/library/test_link_exceptions.py
 
+      - name: Course-writer validators
+        # rc 1 (warnings to backfill) is tolerated; rc 2 fails the build.
+        run: npm run validate:courses
+
       - name: Dependency audit (advisory)
         # Non-blocking: every current advisory is dev-only, build-only, or
         # requires a server runtime this static site does not have. The report

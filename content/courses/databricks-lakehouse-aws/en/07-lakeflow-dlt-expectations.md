@@ -4,6 +4,8 @@ description: "Own the Databricks declarative pipeline layer on AWS as of October
 order: 7
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - pipelines-jobs
 ---
 # Lakeflow Declarative Pipelines (formerly Delta Live Tables): Expectations, Modes and the DLT vs Jobs Decision
 

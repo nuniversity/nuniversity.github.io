@@ -4,6 +4,8 @@ description: "Run and prove the workload: Amazon CloudWatch metrics, alarms, das
 order: 12
 difficulty: "beginner"
 duration: "60 minutes"
+skills:
+  - deployment-operations
 ---
 # Monitoring, Operations, Support and the Well-Architected Framework
 

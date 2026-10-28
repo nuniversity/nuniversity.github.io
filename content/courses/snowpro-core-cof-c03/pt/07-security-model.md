@@ -4,6 +4,8 @@ description: "Domine o modelo de segurança do Snowflake: RBAC, DAC, hierarquia 
 order: 7
 difficulty: intermediate
 duration: "80 min"
+skills:
+  - security-governance
 ---
 
 # Domínio 2.1: Modelo e Princípios de Segurança do Snowflake

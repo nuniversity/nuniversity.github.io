@@ -4,6 +4,8 @@ description: "Master Snowflake's security model: Role-Based Access Control (RBAC
 order: 7
 difficulty: intermediate
 duration: "80 min"
+skills:
+  - security-governance
 ---
 
 # Domain 2.1: Snowflake Security Model and Principles

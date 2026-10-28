@@ -46,6 +46,9 @@ description: "{One sentence describing exactly what this lesson covers.}"
 order: {integer — lesson position in the course, starting at 1}
 difficulty: {beginner | intermediate | advanced}
 duration: "{estimated reading + study time in minutes, e.g. '45 min'}"
+# skills: [topic-tag]        # optional learning-engine tags (1-3, from course.json "skills")
+# objectives:                # optional measurable outcomes
+#   - "Explain ..."
 ---
 ```
 
@@ -55,6 +58,8 @@ duration: "{estimated reading + study time in minutes, e.g. '45 min'}"
 - `order` must be an integer, not a string
 - `difficulty` must be exactly one of: `beginner`, `intermediate`, `advanced`
 - `duration` must be a quoted string in the format `"N min"` (e.g., `"45 min"`, `"90 min"`)
+- `skills` (optional) is a list of 1–3 kebab-case tags drawn from the course `skills` taxonomy; the platform uses it for practice mastery
+- `objectives` (optional) is a list of 2–4 measurable outcomes
 
 ### 2. H1 Heading
 
@@ -250,6 +255,10 @@ For STEM courses (Math, Physics, Chemistry, Biology, Engineering), include at le
 - Place after explanatory text, not before
 - Vary types across lessons — don't repeat the same type in consecutive lessons
 - Use double backslashes (`\\`) for LaTeX commands in math expressions
+- For the learning engine (platform v1.1), three additional fences exist:
+  - `codeexercise` — sandboxed JavaScript exercise (`id`, `title`, `instructions`, `language: "javascript"`, `starter`, 2–6 `tests[{name,call,expected}]`, optional `solution`, `explanation`). No `fetch`/`eval`/`Function(` in code. Never use on Python/SQL/Rust courses.
+  - `glossary` — 3–12 `{term, definition}` entries placed before first use of the terms.
+  - `resources` — 1–8 verified Library links (`type` is one of `video|ebook|course|blog|repository|podcast|article`; `url` starts with `https://`).
 
 ### Alert Boxes
 
@@ -342,6 +351,7 @@ When asked to create a **new course**, output a `course.json` file (instead of a
   "difficulty": "{beginner | intermediate | advanced}",
   "duration": "{e.g. 8 weeks}",
   "icon": "{lucide icon name, e.g. database}",
+  "skills": ["{kebab-case skill}", "{another-skill}"],
   "en": {
     "title": "{Course title in English}",
     "description": "{2-3 sentence course description in English}",
@@ -483,6 +493,10 @@ Before producing output, verify:
 - [ ] Comparison tables for every feature with multiple variants
 - [ ] STEM lessons include at least 2 interactive components (math, phet, plot, molecule, dragdrop, matching, fillblank)
 - [ ] All interactive blocks have valid JSON configs
+- [ ] Question ids are unique, permanent, and stems are self-contained (review sessions show them without the lesson)
+- [ ] `skills` tags (1–3) come from the course taxonomy; `objectives` has 2–4 outcomes
+- [ ] Concept-dense lessons include a `glossary` before first use; every course has a `resources` block with verified https links
+- [ ] Code exercises are JavaScript-only, have 2–6 deterministic tests, and contain no network/eval calls
 - [ ] Minimum 5 practice questions in correct format with exactly one ✅ per question
 - [ ] Closing `[!SUCCESS]` Key Takeaways with minimum 5 bullet points
 - [ ] `SAVE AS:` path stated after the file
@@ -497,7 +511,7 @@ Before producing output, verify:
 - ❌ Do NOT use H1 anywhere except the lesson title
 - ❌ Do NOT include more than one `[!SUCCESS]` block
 - ❌ Do NOT make up numbers — if an exact value is unknown, state "verify against official documentation"
-- ❌ Do NOT include external links in lesson content (the platform renders lessons offline-capable)
+- ❌ Do NOT include external links in prose; link external resources **only** through a `resources` fence (verified `https://` items)
 - ❌ Do NOT mix languages in a single file — each file is monolingual
 
 ---

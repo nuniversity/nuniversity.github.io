@@ -4,6 +4,8 @@ description: "Operate production Databricks orchestration on AWS as of October 2
 order: 9
 difficulty: "intermediate"
 duration: "80 minutes"
+skills:
+  - pipelines-jobs
 ---
 # Lakeflow Jobs (formerly Databricks Workflows): Multi-Task Jobs as Code, Triggers, Retries and the Scheduler Decision Matrix
 

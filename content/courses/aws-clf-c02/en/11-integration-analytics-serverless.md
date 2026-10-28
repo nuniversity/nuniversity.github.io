@@ -4,6 +4,8 @@ description: "How AWS moves data between applications and how it turns raw data 
 order: 11
 difficulty: "beginner"
 duration: "60 minutes"
+skills:
+  - integration-analytics
 ---
 # Application Integration, Analytics and Other In-Scope Services
 

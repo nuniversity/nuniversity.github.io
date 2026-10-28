@@ -4,6 +4,8 @@ description: "Transforme o lakehouse já construído em um sistema que consegue 
 order: 15
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - data-quality
 ---
 # Qualidade de Dados e Observabilidade: DQDL, Quarentena, Lineage e SLOs
 

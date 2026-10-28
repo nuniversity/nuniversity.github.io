@@ -4,6 +4,8 @@ description: "Encontre, rotule, mascare e prove: o pipeline de PII em cinco cama
 order: 13
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - governance-security
 ---
 # Proteção de PII no Lakehouse: Amazon Macie, Mascaramento e Workflows de Privacidade
 

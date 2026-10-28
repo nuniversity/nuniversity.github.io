@@ -26,6 +26,11 @@ import re
 import sys
 from pathlib import Path
 
+try:
+    import yaml
+except ImportError:  # pragma: no cover - pyyaml is a declared dependency
+    yaml = None
+
 VALID_DIFFICULTIES = {"beginner", "intermediate", "advanced"}
 VALID_CAPITALIZED_DIFFICULTIES = {"Beginner", "Intermediate", "Advanced"}
 VALID_LOCALES = {"en", "pt", "es"}
@@ -84,7 +89,37 @@ def validate_course_json(data: dict) -> tuple[list[str], list[str]]:
             if not locale_data.get("description"):
                 warnings.append(f"Missing {locale}.description")
 
+    # Optional skill taxonomy consumed by the practice mastery model. When
+    # present, lesson `skills` tags must be a subset of it (checked in
+    # validate_directory_structure). Absent taxonomy is valid for old courses.
+    if "skills" in data:
+        skills = data["skills"]
+        if not isinstance(skills, list) or not all(
+            isinstance(skill, str) and skill.strip() for skill in skills
+        ):
+            errors.append("course.json 'skills' must be a list of non-empty strings")
+        elif len(skills) != len(set(skills)):
+            warnings.append("course.json 'skills' contains duplicate entries")
+
     return errors, warnings
+
+
+def _read_frontmatter(path: Path) -> dict:
+    """Best-effort frontmatter reader for taxonomy subset checks."""
+    if yaml is None:
+        return {}
+    try:
+        text = path.read_text(encoding="utf-8")
+    except Exception:
+        return {}
+    match = re.match(r"^---\r?\n(.*?)\r?\n---", text, re.DOTALL)
+    if not match:
+        return {}
+    try:
+        data = yaml.safe_load(match.group(1))
+    except Exception:
+        return {}
+    return data if isinstance(data, dict) else {}
 
 
 def validate_lesson_naming(lesson_files: list[Path]) -> tuple[list[str], list[str]]:
@@ -162,6 +197,23 @@ def validate_directory_structure(
                 naming_errors, naming_warnings = validate_lesson_naming(lesson_files)
                 errors.extend(naming_errors)
                 warnings.extend(naming_warnings)
+
+    taxonomy = data.get("skills")
+    if isinstance(taxonomy, list) and taxonomy:
+        declared = {skill for skill in taxonomy if isinstance(skill, str)}
+        en_dir = course_dir / "en"
+        lesson_paths = sorted(en_dir.glob("*.md")) if en_dir.exists() else []
+        for lesson in lesson_paths:
+            frontmatter = _read_frontmatter(lesson)
+            lesson_skills = frontmatter.get("skills")
+            if not isinstance(lesson_skills, list):
+                continue
+            for skill in lesson_skills:
+                if isinstance(skill, str) and skill not in declared:
+                    warnings.append(
+                        f"{lesson.name}: skill '{skill}' is not in the "
+                        f"course.json skills taxonomy"
+                    )
 
     return errors, warnings
 

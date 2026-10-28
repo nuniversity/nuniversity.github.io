@@ -5,6 +5,10 @@ import { getDictionary } from '@/lib/i18n/get-dictionary'
 import MarkdownRenderer from '@/components/markdown/MarkdownRenderer'
 import LessonExam from '@/components/quizzes/LessonExam'
 import { LessonScoreProvider, LessonScoreSummary } from '@/components/lessons/LessonScoreContext'
+import LessonErrorBoundary from '@/components/lessons/LessonErrorBoundary'
+import PracticeRecorder from '@/components/lessons/PracticeRecorder'
+import LessonMasteryHint from '@/components/lessons/LessonMasteryHint'
+import FocusModeToggle from '@/components/lessons/FocusModeToggle'
 import LessonOutline from '@/components/lessons/LessonOutline'
 import FocusableScrollers from '@/components/lessons/FocusableScrollers'
 import {
@@ -249,6 +253,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
                   {dict.courses?.lesson || 'Lesson'} {currentIndex + 1} {dict.common?.of || 'of'} {allLessons.length}
                 </span>
               )}
+              <FocusModeToggle dict={dict} />
             </div>
             <h1 className="text-4xl font-bold mb-4">{lesson.metadata.title}</h1>
             {lesson.metadata.description && (
@@ -258,12 +263,14 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
             )}
           </div>
 
+          <LessonScoreProvider key={`${courseSlug}/${lessonSlug}`}>
           {/* Lesson Content */}
           <div
             className="bg-card rounded-2xl border border-border p-6 sm:p-8 mb-8 shadow-sm overflow-x-clip"
             data-lesson-content
           >
             <div className="prose-measure">
+            <LessonErrorBoundary>
             {lesson.metadata.exam && lessonQuestions.length > 0 ? (
               <LessonExam
                 lang={lang}
@@ -280,7 +287,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
                 />
               </LessonExam>
             ) : (
-              <LessonScoreProvider key={`${courseSlug}/${lessonSlug}`}>
+              <>
                 <MarkdownRenderer
                   content={lesson.content}
                   lang={lang}
@@ -288,20 +295,33 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
                   pageTitle={lesson.metadata.title}
                 />
                 <LessonScoreSummary dict={dict} />
-              </LessonScoreProvider>
+              </>
             )}
+            </LessonErrorBoundary>
             </div>
           </div>
 
           {/* Completion CTA */}
           <div className="mb-8">
-            <LessonCompleteButton
+            {!lesson.metadata.exam && <LessonMasteryHint dict={dict} />}
+            <div className="mt-4">
+              <LessonCompleteButton
+                courseSlug={courseSlug}
+                lessonSlug={lessonSlug}
+                lessonSlugs={allLessons.map(lesson => lesson.slug)}
+                dict={dict}
+              />
+            </div>
+          </div>
+
+          {!lesson.metadata.exam && (
+            <PracticeRecorder
               courseSlug={courseSlug}
               lessonSlug={lessonSlug}
-              lessonSlugs={allLessons.map(lesson => lesson.slug)}
-              dict={dict}
+              skills={lesson.metadata.skills ?? []}
             />
-          </div>
+          )}
+          </LessonScoreProvider>
 
           {/* Feedback */}
           <LessonFeedback slug={`${courseSlug}/${lessonSlug}`} dict={dict} />

@@ -4,6 +4,8 @@ description: "Posee la capa de metadatos del lakehouse: el modelo de objetos del
 order: 7
 difficulty: "intermediate"
 duration: "55 min"
+skills:
+  - catalog-schema
 ---
 # AWS Glue Data Catalog: crawlers, particiones y gestión de esquemas
 

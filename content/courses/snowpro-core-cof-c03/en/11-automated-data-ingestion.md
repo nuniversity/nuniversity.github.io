@@ -4,6 +4,8 @@ description: "Learn to automate data ingestion with Snowpipe, Snowpipe Streaming
 order: 11
 difficulty: intermediate
 duration: "70 min"
+skills:
+  - data-loading
 ---
 
 # Domain 3.2: Automated Data Ingestion

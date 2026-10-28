@@ -4,6 +4,8 @@ description: "Build a working mental model of Amazon Bedrock for the AIF-C01 exa
 order: 9
 difficulty: "intermediate"
 duration: "110 minutes"
+skills:
+  - bedrock
 ---
 # Amazon Bedrock Foundations: APIs, Model Access, Pricing, Inference Types and Evaluations
 

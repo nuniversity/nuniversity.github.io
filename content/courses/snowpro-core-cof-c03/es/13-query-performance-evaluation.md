@@ -4,6 +4,8 @@ description: "Aprende a diagnosticar problemas de rendimiento en Snowflake usand
 order: 13
 difficulty: intermediate
 duration: "65 min"
+skills:
+  - query-performance
 ---
 
 # Dominio 4.1: Evaluación del Rendimiento de Consultas

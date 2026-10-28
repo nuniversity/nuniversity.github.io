@@ -4,6 +4,11 @@ description: "Turn DEA-C01 Domain 4 into a working authorisation model: master t
 order: 13
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - security-governance
+objectives:
+  - "Apply least-privilege IAM to pipeline roles"
+  - "Choose encryption at rest and in transit per service"
 ---
 # Security, Encryption and IAM for Data Pipelines
 

@@ -4,6 +4,8 @@ description: "Lakehouse vs data lake vs data warehouse on AWS, a decision table 
 order: 1
 difficulty: "intermediate"
 duration: "55 minutes"
+skills:
+  - lakehouse-architecture
 ---
 # Lakehouse Architecture Fundamentals: Lakes, Warehouses, and the Medallion Pattern
 

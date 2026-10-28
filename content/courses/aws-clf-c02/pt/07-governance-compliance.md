@@ -4,6 +4,8 @@ description: "A tarefa 2.2 do Domínio 2 de ponta a ponta: registre quem fez o q
 order: 7
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - governance-compliance
 ---
 # Governança, Auditoria e Conformidade na AWS
 

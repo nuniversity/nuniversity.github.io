@@ -4,6 +4,8 @@ description: "Learn to monitor and control Snowflake costs using Resource Monito
 order: 9
 difficulty: intermediate
 duration: "55 min"
+skills:
+  - monitoring-cost
 ---
 
 # Domain 2.3: Monitoring and Cost Management

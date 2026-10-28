@@ -4,6 +4,8 @@ description: "Convierte el lakehouse terminado en un sistema que puede demostrar
 order: 15
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - data-quality
 ---
 # Calidad de datos y observabilidad: DQDL, cuarentena, linaje y SLOs
 

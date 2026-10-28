@@ -4,6 +4,11 @@ description: "Transforme a Tarefa 1.4 do Domínio 1 do DEA-C01 em decisões que 
 order: 6
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - programming-for-data
+objectives:
+  - "Read and adapt PySpark and SQL transformations"
+  - "Use boto3 patterns safely in pipeline code"
 ---
 # Conceitos de Programação para Operações de Dados
 

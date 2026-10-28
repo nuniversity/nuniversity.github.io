@@ -4,6 +4,8 @@ description: "Tune a Databricks lakehouse on AWS layer by layer: target file siz
 order: 14
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - performance-cost
 ---
 # Performance Optimization on Databricks/AWS: Liquid Clustering, File Layout, Skew and Warehouse Tuning
 

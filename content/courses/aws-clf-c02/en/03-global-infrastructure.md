@@ -4,6 +4,8 @@ description: "Map the three layers of AWS global infrastructure, Regions, Availa
 order: 3
 difficulty: "beginner"
 duration: "60 minutes"
+skills:
+  - global-infrastructure
 ---
 # AWS Global Infrastructure and Resilience
 

@@ -4,6 +4,8 @@ description: "Select the right algorithm family for a task, route it to the corr
 order: 4
 difficulty: "intermediate"
 duration: "80 minutes"
+skills:
+  - model-evaluation
 ---
 # ML Algorithms and Model Evaluation on AWS
 

@@ -4,6 +4,8 @@ description: "Domine a segurança de IA generativa para o exame AIF-C01, as seis
 order: 12
 difficulty: "intermediate"
 duration: "110 min"
+skills:
+  - responsible-ai
 ---
 # Segurança de IA Generativa, Guardrails e IA Responsável
 

@@ -4,6 +4,8 @@ description: "Aprende las interfaces principales para interactuar con Snowflake:
 order: 2
 difficulty: intermediate
 duration: "45 min"
+skills:
+  - architecture
 ---
 
 # Dominio 1.2: Interfaces y Herramientas de Snowflake

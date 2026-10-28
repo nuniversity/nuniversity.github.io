@@ -4,6 +4,11 @@ description: "La tarea 2.1 del Dominio 2 convertida en un procedimiento de decis
 order: 7
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - data-store-design
+objectives:
+  - "Match access patterns to S3, Redshift, DynamoDB, and RDS"
+  - "Choose a storage format for analytical reads"
 ---
 # Elección de almacenes de datos y formatos de almacenamiento
 

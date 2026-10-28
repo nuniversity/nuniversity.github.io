@@ -4,6 +4,8 @@ description: "Construye el modelo mental del que dependen las otras dieciséis l
 order: 1
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - lakehouse-architecture
 ---
 # Arquitectura Lakehouse en Databricks: Planos, Pilares y el Sustrato AWS
 

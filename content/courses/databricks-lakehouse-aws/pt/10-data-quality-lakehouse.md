@@ -4,6 +4,8 @@ description: "Domine ponta a ponta a pilha de qualidade de dados de outubro de 2
 order: 10
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - data-quality
 ---
 # Qualidade de Dados no Lakehouse da Databricks: Constraints, Expectations, Quarentena e Monitoramento
 

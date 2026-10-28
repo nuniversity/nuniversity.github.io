@@ -4,6 +4,8 @@ description: "Elige entre tiempo real, serverless, transformación por lotes e i
 order: 6
 difficulty: "intermediate"
 duration: "85 min"
+skills:
+  - sagemaker
 ---
 # Despliegue e inferencia en Amazon SageMaker
 

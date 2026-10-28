@@ -4,6 +4,11 @@ description: "Build Domain 1 transformation judgment from the ground up: how the
 order: 3
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - data-transformation
+objectives:
+  - "Build a Glue ETL job that writes partitioned output"
+  - "Use DataBrew for no-code profiling and cleaning"
 ---
 # Serverless Transformation with AWS Glue and DataBrew
 

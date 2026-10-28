@@ -4,6 +4,12 @@ description: "Take the load path from Lesson 3 all the way into the warehouse: h
 order: 4
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - data-transformation
+  - data-store-design
+objectives:
+  - "Design distribution and sort keys for a Redshift workload"
+  - "Write warehouse SQL that avoids full scans"
 ---
 # Amazon Redshift: Warehouse SQL and Data Transformation
 

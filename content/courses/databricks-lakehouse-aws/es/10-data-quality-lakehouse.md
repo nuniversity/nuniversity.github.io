@@ -4,6 +4,8 @@ description: "Domina de punta a punta el stack de calidad de datos de Databricks
 order: 10
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - data-quality
 ---
 # Calidad de datos en el lakehouse de Databricks: restricciones, expectations, cuarentena y monitoreo
 

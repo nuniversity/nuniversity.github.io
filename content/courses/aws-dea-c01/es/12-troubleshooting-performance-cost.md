@@ -4,6 +4,11 @@ description: "Diagnostica y corrige pipelines de datos lentos o fallidos como lo
 order: 12
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - performance-cost
+objectives:
+  - "Diagnose shuffle, skew, and small-file problems"
+  - "Reduce cost without breaking SLAs"
 ---
 # Resolución de problemas, rendimiento y optimización de costes
 

@@ -4,6 +4,8 @@ description: "Close the lakehouse with its consumption layer and then rebuild al
 order: 17
 difficulty: "intermediate"
 duration: "70 minutes"
+skills:
+  - query-serving
 ---
 # QuickSight BI and the End-to-End Lakehouse Capstone
 

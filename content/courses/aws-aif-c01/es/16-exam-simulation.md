@@ -6,6 +6,8 @@ exam: true
 examMinutes: 100
 difficulty: "intermediate"
 duration: "100 min"
+skills:
+  - exam-strategy
 ---
 # Simulación de examen final (AIF-C01)
 

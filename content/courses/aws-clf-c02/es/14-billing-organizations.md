@@ -4,6 +4,8 @@ description: "Lee la factura de AWS como la lee un examinador: la página Bills 
 order: 14
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - cloud-economics
 ---
 # Facturación, AWS Organizations y gobernanza de costes
 

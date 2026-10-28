@@ -4,6 +4,11 @@ description: "Turn DEA-C01 Domain 1 Task 1.3 into a decision you can defend: whe
 order: 5
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - orchestration
+objectives:
+  - "Orchestrate a multi-step pipeline with Step Functions"
+  - "Choose between EventBridge, Step Functions, and MWAA"
 ---
 # Orchestrating Data Pipelines: Step Functions, EventBridge and Airflow
 

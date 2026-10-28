@@ -6,6 +6,8 @@ exam: true
 examMinutes: 100
 difficulty: "intermediate"
 duration: "100 minutes"
+skills:
+  - exam-strategy
 ---
 # Capstone Exam Simulation (AIF-C01)
 

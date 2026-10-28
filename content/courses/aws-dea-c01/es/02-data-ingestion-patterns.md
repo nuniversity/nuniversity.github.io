@@ -4,6 +4,11 @@ description: "Decide en la Tarea 1.1 del Dominio 1 entre el lote acotado y el st
 order: 2
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - data-ingestion
+objectives:
+  - "Choose batch, streaming, or hybrid ingestion for a workload"
+  - "Compare Kinesis, MSK, DMS, and DataSync trade-offs"
 ---
 # Ingestión de datos: patrones por lotes y de streaming
 

@@ -4,6 +4,8 @@ description: "Selecione a família de algoritmos certa para uma tarefa, roteie-a
 order: 4
 difficulty: "intermediate"
 duration: "80 min"
+skills:
+  - model-evaluation
 ---
 # Algoritmos de ML e Avaliação de Modelos na AWS
 

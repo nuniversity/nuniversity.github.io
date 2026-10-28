@@ -4,6 +4,8 @@ description: "Coletar, armazenar, catalogar, processar, verificar qualidade, rot
 order: 3
 difficulty: "intermediate"
 duration: "80 min"
+skills:
+  - ml-lifecycle
 ---
 # Engenharia de Dados para IA na AWS
 

@@ -4,9 +4,11 @@ description: "Explore the Snowflake Marketplace ecosystem, public and private da
 order: 19
 difficulty: intermediate
 duration: 45
+skills:
+  - collaboration-sharing
 ---
 
-# Domain 5.3: Snowflake Marketplace and Native Apps
+# Domain 5.3, Snowflake Marketplace and Native Apps
 
 > [!NOTE]
 > **Exam Domain 5.3**: *Snowflake Marketplace and Data Exchange* contributes to the **Data Collaboration** domain, which is **10%** of the COF-C03 exam.
@@ -268,63 +270,107 @@ flowchart LR
 
 ## Practice Questions
 
-**1.** A consumer clicks "Get" on a free Marketplace listing. What happens to the data?
+```question
+{
+  "id": "snowpro-core-cof-c03-19-q1",
+  "type": "multiple-choice",
+  "question": "A consumer clicks \"Get\" on a free Marketplace listing. What happens to the data?",
+  "options": [
+    "A full copy is transferred to the consumer's account",
+    "A nightly ETL pipeline is configured",
+    "A read-only database is mounted: no data is copied",
+    "The consumer downloads a CSV export"
+  ],
+  "correct": 2
+}
+```
 
-- A) A full copy is transferred to the consumer's account
-- B) A nightly ETL pipeline is configured
-- C) **A read-only database is mounted: no data is copied** ✅
-- D) The consumer downloads a CSV export
+```question
+{
+  "id": "snowpro-core-cof-c03-19-q2",
+  "type": "multiple-choice",
+  "question": "Which listing type is visible only to specific Snowflake accounts that have been explicitly invited?",
+  "options": [
+    "Public listing",
+    "Private listing",
+    "Freemium listing",
+    "Native App listing"
+  ],
+  "correct": 1
+}
+```
 
----
+```question
+{
+  "id": "snowpro-core-cof-c03-19-q3",
+  "type": "multiple-choice",
+  "question": "An organisation wants to create a private data hub for 20 industry partners: not open to all Snowflake customers. Which feature should they use?",
+  "options": [
+    "Snowflake Marketplace",
+    "Data Exchange",
+    "Replication Group",
+    "Private Share"
+  ],
+  "correct": 1
+}
+```
 
-**2.** Which listing type is visible only to specific Snowflake accounts that have been explicitly invited?
+```question
+{
+  "id": "snowpro-core-cof-c03-19-q4",
+  "type": "multiple-choice",
+  "question": "A Native App is installed by a consumer. Where does the application code execute?",
+  "options": [
+    "In the provider's account",
+    "In Snowflake's neutral hosting environment",
+    "In the consumer's account",
+    "In an external compute environment"
+  ],
+  "correct": 2
+}
+```
 
-- A) Public listing
-- B) **Private listing** ✅
-- C) Freemium listing
-- D) Native App listing
+```question
+{
+  "id": "snowpro-core-cof-c03-19-q5",
+  "type": "multiple-choice",
+  "question": "Which is a capability of the Native App Framework that standard Secure Data Sharing does NOT support?",
+  "options": [
+    "Zero data copy",
+    "Live data access",
+    "Streamlit-based UI included in the delivered product",
+    "Cross-account data access"
+  ],
+  "correct": 2
+}
+```
 
----
+```question
+{
+  "id": "snowpro-core-cof-c03-19-q6",
+  "type": "multiple-choice",
+  "question": "Who pays the compute cost when a consumer queries data from a Marketplace listing?",
+  "options": [
+    "The provider",
+    "Snowflake subsidises it",
+    "The consumer",
+    "Split equally between provider and consumer"
+  ],
+  "correct": 2
+}
+```
 
-**3.** An organisation wants to create a private data hub for 20 industry partners: not open to all Snowflake customers. Which feature should they use?
-
-- A) Snowflake Marketplace
-- B) **Data Exchange** ✅
-- C) Replication Group
-- D) Private Share
-
----
-
-**4.** A Native App is installed by a consumer. Where does the application code execute?
-
-- A) In the provider's account
-- B) In Snowflake's neutral hosting environment
-- C) **In the consumer's account** ✅
-- D) In an external compute environment
-
----
-
-**5.** Which is a capability of the Native App Framework that standard Secure Data Sharing does NOT support?
-
-- A) Zero data copy
-- B) Live data access
-- C) **Streamlit-based UI included in the delivered product** ✅
-- D) Cross-account data access
-
----
-
-**6.** Who pays the compute cost when a consumer queries data from a Marketplace listing?
-
-- A) The provider
-- B) Snowflake subsidises it
-- C) **The consumer** ✅
-- D) Split equally between provider and consumer
-
----
-
-**7.** A provider wants to share a dataset with paying customers through the Snowflake Marketplace. Which billing model is available?
-
-- A) Snowflake does not support paid listings
-- B) Only annual flat-fee subscriptions
-- C) **Free, flat-fee, or usage-based pricing: billed through Snowflake** ✅
-- D) Providers must manage billing outside of Snowflake
+```question
+{
+  "id": "snowpro-core-cof-c03-19-q7",
+  "type": "multiple-choice",
+  "question": "A provider wants to share a dataset with paying customers through the Snowflake Marketplace. Which billing model is available?",
+  "options": [
+    "Snowflake does not support paid listings",
+    "Only annual flat-fee subscriptions",
+    "Free, flat-fee, or usage-based pricing: billed through Snowflake",
+    "Providers must manage billing outside of Snowflake"
+  ],
+  "correct": 2
+}
+```

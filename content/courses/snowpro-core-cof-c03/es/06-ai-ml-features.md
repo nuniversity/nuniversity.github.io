@@ -4,6 +4,8 @@ description: "Explora el ecosistema de IA y desarrollo de aplicaciones de Snowfl
 order: 6
 difficulty: intermediate
 duration: "60 min"
+skills:
+  - ai-ml-features
 ---
 
 # Dominio 1.6: Funcionalidades de IA/ML y Desarrollo de Aplicaciones

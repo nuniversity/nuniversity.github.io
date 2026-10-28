@@ -4,6 +4,8 @@ description: "Domine a arquitetura de três camadas do Snowflake: Cloud Services
 order: 1
 difficulty: intermediate
 duration: "75 min"
+skills:
+  - architecture
 ---
 
 # Domínio 1.1: Arquitetura do Snowflake

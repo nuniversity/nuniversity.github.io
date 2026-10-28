@@ -4,6 +4,8 @@ description: "Build the mental model the other sixteen lessons depend on - what 
 order: 1
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - lakehouse-architecture
 ---
 # Lakehouse Architecture on Databricks: Planes, Pillars, and the AWS Substrate
 

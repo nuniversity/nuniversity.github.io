@@ -4,6 +4,8 @@ description: "Turn a pile of Parquet on Amazon S3 into a transactional table: wh
 order: 4
 difficulty: "intermediate"
 duration: "65 minutes"
+skills:
+  - data-formats
 ---
 # Open Table Formats: Iceberg, Hudi, and Delta on the Lakehouse
 

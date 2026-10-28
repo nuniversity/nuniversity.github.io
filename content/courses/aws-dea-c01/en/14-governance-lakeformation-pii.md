@@ -4,6 +4,11 @@ description: "Turn Domain 4 into an operable governance layer: master the two-do
 order: 14
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - security-governance
+objectives:
+  - "Enforce column-level access with Lake Formation"
+  - "Detect and mask PII in a data lake"
 ---
 # Governance, Lake Formation and PII Protection
 

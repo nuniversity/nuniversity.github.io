@@ -6,6 +6,11 @@ examMinutes: 90
 difficulty: "intermediate"
 description: "Faça o Conjunto B, vinte itens no estilo do exame DEA-C01 na ordem de peso publicada (7 / 5 / 4 / 4) com uma análise alternativa por alternativa depois de cada bloco, então treine os vinte pares de armadilhas que decidem a maioria das perdas, percorra a lista oficial do dia do exame (documentos, check-in, horário do resultado), corrija o Conjunto B contra limiares explícitos de pronto versus não pronto, e termine com um plano de estudos de 7 dias dirigido pela queda, para a semana em que você realmente faz o exame."
 duration: "90 min"
+skills:
+  - exam-strategy
+objectives:
+  - "Recognize common distractor patterns under time pressure"
+  - "Plan the final week before exam day"
 ---
 # Simulado B: Segundo Conjunto, Armadilhas e Dia do Exame
 

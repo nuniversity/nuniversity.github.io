@@ -4,6 +4,11 @@ description: "Turn Domain 3 Task 3.4 into an automated control system: map the s
 order: 11
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - data-quality
+objectives:
+  - "Automate quality checks with Glue Data Quality"
+  - "Quarantine bad records without stopping the pipeline"
 ---
 # Automating Data Quality in Pipelines
 

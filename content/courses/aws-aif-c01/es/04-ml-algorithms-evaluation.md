@@ -4,6 +4,8 @@ description: "Selecciona la familia de algoritmos correcta para una tarea, enrú
 order: 4
 difficulty: "intermediate"
 duration: "80 min"
+skills:
+  - model-evaluation
 ---
 # Algoritmos de ML y evaluación de modelos en AWS
 

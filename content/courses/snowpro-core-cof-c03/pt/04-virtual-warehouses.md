@@ -4,6 +4,8 @@ description: "Mergulho profundo nos Virtual Warehouses do Snowflake: tipos, tama
 order: 4
 difficulty: intermediate
 duration: "70 min"
+skills:
+  - virtual-warehouses
 ---
 
 # Domínio 1.4: Configurando Virtual Warehouses

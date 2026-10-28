@@ -4,6 +4,8 @@ description: "Encuentra, enruta, enmascara y demuestra: el pipeline de PII de ci
 order: 13
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - governance-security
 ---
 # Protección de PII en el Lakehouse: Amazon Macie, Enmascarado y Flujos de Privacidad
 

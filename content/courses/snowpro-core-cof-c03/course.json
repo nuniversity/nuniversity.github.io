@@ -4,6 +4,7 @@
   "difficulty": "intermediate",
   "duration": "8 weeks",
   "icon": "snowflake",
+  "skills": ["architecture","object-hierarchy","virtual-warehouses","storage","ai-ml-features","security-governance","monitoring-cost","data-loading","query-performance","caching","transformation","collaboration-sharing"],
   "en": {
     "title": "SnowPro Core Certification (COF-C03)",
     "description": "Comprehensive preparation for the Snowflake SnowPro Core COF-C03 certification exam. Master Snowflake's architecture, data loading, performance tuning, security, and data sharing concepts.",

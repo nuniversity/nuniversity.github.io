@@ -4,6 +4,8 @@ description: "Mapea las tres capas de la infraestructura global de AWS, Regiones
 order: 3
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - global-infrastructure
 ---
 # Infraestructura global de AWS y resiliencia
 

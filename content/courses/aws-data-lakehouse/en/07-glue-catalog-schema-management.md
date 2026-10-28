@@ -4,6 +4,8 @@ description: "Own the metadata layer of the lakehouse: the AWS Glue Data Catalog
 order: 7
 difficulty: "intermediate"
 duration: "55 minutes"
+skills:
+  - catalog-schema
 ---
 # Glue Data Catalog: Crawlers, Partitions, and Schema Management
 

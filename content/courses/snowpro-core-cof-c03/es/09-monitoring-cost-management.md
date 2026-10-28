@@ -4,6 +4,8 @@ description: "Aprende a monitorear y controlar los costos de Snowflake usando Mo
 order: 9
 difficulty: intermediate
 duration: "55 min"
+skills:
+  - monitoring-cost
 ---
 
 # Dominio 2.3: Monitoreo y Gestión de Costos

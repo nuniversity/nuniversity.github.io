@@ -4,6 +4,8 @@ description: "Domine agentes, Flows e orquestração do Amazon Bedrock para o ex
 order: 11
 difficulty: "intermediate"
 duration: "110 min"
+skills:
+  - agents-orchestration
 ---
 # Amazon Bedrock Agents, Flows e Orquestração
 

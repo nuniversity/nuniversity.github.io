@@ -4,6 +4,8 @@ description: "Domain 4's cost core: the four general pricing principles (pay-as-
 order: 13
 difficulty: "beginner"
 duration: "60 minutes"
+skills:
+  - cloud-economics
 ---
 # AWS Pricing Models and Cost Tools
 

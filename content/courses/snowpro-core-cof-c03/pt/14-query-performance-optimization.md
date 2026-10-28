@@ -4,6 +4,8 @@ description: "Conheça as ferramentas de otimização de desempenho do Snowflake
 order: 14
 difficulty: intermediate
 duration: "60 min"
+skills:
+  - query-performance
 ---
 
 # Domínio 4.2: Otimização de Desempenho de Queries

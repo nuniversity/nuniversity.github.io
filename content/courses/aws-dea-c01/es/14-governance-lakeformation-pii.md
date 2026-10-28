@@ -4,6 +4,11 @@ description: "Convierte el Dominio 4 en una capa de gobernanza operable: domina 
 order: 14
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - security-governance
+objectives:
+  - "Enforce column-level access with Lake Formation"
+  - "Detect and mask PII in a data lake"
 ---
 # Gobernanza, Lake Formation y protección de PII
 

@@ -4,6 +4,8 @@ description: "Choose, configure and price the ten prebuilt AI services on the AI
 order: 7
 difficulty: "intermediate"
 duration: "90 minutes"
+skills:
+  - aws-ai-services
 ---
 # Prebuilt AWS AI Services: Vision, Language, Speech and Conversation
 

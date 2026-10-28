@@ -4,6 +4,8 @@ description: "Run the money layer of the AWS lakehouse: the per-service cost ana
 order: 16
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - cost-lifecycle
 ---
 # Cost Optimization and Lifecycle: From Hot Prefixes to Glacier Deep Archive
 

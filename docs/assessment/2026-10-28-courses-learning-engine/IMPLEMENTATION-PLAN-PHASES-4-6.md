@@ -78,11 +78,82 @@ Next copies `public/` verbatim into `out/`; `scripts/postbuild.mjs` `ensureCsp()
 
 ## 3. Phase 4 — Multimodal & interactivity
 
+> **STATUS (2026-10-28, after decision audit):** decisions D9 (sandbox), D10 (quiz schema) and the CSP constraint below were validated. **Read the revision block in P4-S1 first — it supersedes the three-file sandbox design in that step.** Phase 0–3 are implemented; Phases 4–6 remain.
+
 ### P4-S1 — JavaScript code exercises (sandboxed)
 
-`CONTEXT:` `components/markdown/MarkdownRenderer.tsx` (dispatch pattern at §1.1), `components/markdown/QuestionBlock.tsx` (score-widget pattern), `lib/security/csp.mjs`, `scripts/postbuild.mjs` (ensureCsp)
+> **REVISION (supersedes subsections 1–3 below).** Two findings changed the design:
+> 1. The global CSP's `frame-src` does **not** include `'self'`, so a same-origin sandbox iframe would be blocked. `lib/security/csp.mjs` must change `frame-src` to `frame-src 'self' ${REMOTE.phet} ${REMOTE.youtube} ${REMOTE.vimeo}` (add `'self'` only).
+> 2. One HTML file is enough, and it avoids questions about `'self'` inside an opaque-origin document: inline the controller and evaluate code on the sandbox page's own thread.
+>
+> **IMPLEMENTED (2026-10-28, final):** `public/code-sandbox.html` is the single file; there is **no worker and no blob URL**. Eval runs inline on the sandbox page's thread (the 3s parent timeout reloads the iframe, which terminates runaway code). `scripts/verify-csp.mjs` has an explicit `code-sandbox.html` branch that asserts `'unsafe-eval'`, `connect-src 'none'`, and no external scripts instead of the shared required-origin checks. See `docs/features/MARKDOWN-RENDERER.md`.
+>
+> **Final `public/code-sandbox.html`:**
+>
+> ```html
+> <!doctype html>
+> <html lang="en">
+> <head>
+> <meta charset="utf-8"/>
+> <meta name="robots" content="noindex"/>
+> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self' https://formspree.io https://files.rcsb.org; frame-src https://phet.colorado.edu https://www.youtube-nocookie.com https://player.vimeo.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests"/>
+> <title>Code sandbox</title>
+> </head>
+> <body>
+> <script>
+> const WORKER_SOURCE = `
+> function deepEqual(a, b) {
+>   if (a === b) return true;
+>   if (typeof a !== typeof b) return false;
+>   if (a === null || b === null || typeof a !== 'object') return Number.isNaN(a) && Number.isNaN(b);
+>   if (Array.isArray(a) !== Array.isArray(b)) return false;
+>   const ka = Object.keys(a), kb = Object.keys(b);
+>   if (ka.length !== kb.length) return false;
+>   return ka.every((k) => Object.prototype.hasOwnProperty.call(b, k) && deepEqual(a[k], b[k]));
+> }
+> function show(v) { try { return JSON.parse(JSON.stringify(v)); } catch { return String(v); } }
+> self.onmessage = (event) => {
+>   const { code, tests } = event.data || {};
+>   if (typeof code !== 'string' || !Array.isArray(tests)) { self.postMessage({ type: 'error', error: 'Invalid payload' }); return; }
+>   const results = [];
+>   for (const test of tests) {
+>     const name = typeof test.name === 'string' ? test.name : 'test';
+>     const call = typeof test.call === 'string' ? test.call : '';
+>     try {
+>       const run = new Function('"use strict";\\n' + code + '\\n;return (' + call + ');');
+>       const value = run();
+>       results.push({ name, passed: deepEqual(value, test.expected), actual: show(value) });
+>     } catch (e) {
+>       results.push({ name, passed: false, error: String((e && e.message) || e) });
+>     }
+>   }
+>   self.postMessage({ type: 'done', results });
+> };
+> `;
+> let worker = null;
+> function stopWorker() { if (worker) { worker.terminate(); worker = null; } }
+> window.addEventListener('message', (event) => {
+>   const data = event.data;
+>   if (!data || typeof data !== 'object' || typeof data.nonce !== 'string') return;
+>   stopWorker();
+>   try { worker = new Worker(URL.createObjectURL(new Blob([WORKER_SOURCE], { type: 'text/javascript' }))); }
+>   catch { parent.postMessage({ nonce: data.nonce, type: 'error', error: 'Worker unavailable' }, '*'); return; }
+>   worker.onmessage = (msg) => { parent.postMessage({ nonce: data.nonce, ...(msg.data || {}) }, '*'); stopWorker(); };
+>   worker.onerror = () => { parent.postMessage({ nonce: data.nonce, type: 'error', error: 'Sandbox worker crashed' }, '*'); stopWorker(); };
+>   worker.postMessage({ code: data.code, tests: data.tests });
+> });
+> </script>
+> </body>
+> </html>
+> ```
+>
+> **Component iframe:** `<iframe ref={iframeRef} src="/code-sandbox.html" sandbox="allow-scripts" referrerPolicy="no-referrer" title="Code sandbox" className="hidden" />`
+>
+> **Runner hardening:** in `createSandboxRunner`'s message listener, ignore events unless `event.source === iframe.contentWindow`. Keep the 3 s timeout and the iframe reload on timeout.
+>
+> **Verification:** `npm run build` must show `verify-csp: ... pages carry a valid Content-Security-Policy` with the sandbox page included; the global policy file must still contain no `'unsafe-eval'`.
 
-#### 1. Sandbox page — `public/code-sandbox.html` (exact)
+#### 1. Sandbox page — `public/code-sandbox.html` (SUPERSEDED by the revision above)
 
 ```html
 <!doctype html>
@@ -101,7 +172,7 @@ Next copies `public/` verbatim into `out/`; `scripts/postbuild.mjs` `ensureCsp()
 
 Note: `scripts/verify-csp.mjs` requires every HTML file to carry the standard directives and origins. This policy contains all of them, plus `'unsafe-eval'` and `worker-src`. Do not remove the Formspree/rcsb/PhET/YouTube/Vimeo origins — the verifier will fail.
 
-#### 2. Sandbox controller — `public/code-sandbox.js` (exact)
+#### 2. Sandbox controller — `public/code-sandbox.js` (SUPERSEDED — inlined in the revision above)
 
 ```js
 /* Runs inside <iframe sandbox="allow-scripts">. Opaque origin: no storage,
@@ -146,7 +217,7 @@ window.addEventListener('message', (event) => {
 })
 ```
 
-#### 3. Worker — `public/code-sandbox-worker.js` (exact)
+#### 3. Worker — `public/code-sandbox-worker.js` (SUPERSEDED — inlined in the revision above)
 
 ```js
 /* Evaluates learner code with new Function. Each test call is compiled
@@ -977,14 +1048,14 @@ for (const file of fs.readdirSync(INDEX_DIR).filter((f) => f.endsWith('.json')))
     color: 'blue',
     subdomains: lessons,
   }]
-  const allocations = lessons.map((lesson, i) => ({
-    domain: lesson,
-    percent: i === lessons.length - 1 ? 100 - perLesson * (lessons.length - 1) : perLesson,
-  }))
+  const allocations: Record<string, number> = {}
+  lessons.forEach((lesson, i) => {
+    allocations[lesson] = i === lessons.length - 1 ? 100 - perLesson * (lessons.length - 1) : perLesson
+  })
   const payload = {
     id: index.course,
     slug: index.course,
-    kind: 'course',
+    kind: 'practice',
     category: 'course-practice',
     title: index.course,
     description: `Practice questions extracted from the ${index.course} course lessons.`,

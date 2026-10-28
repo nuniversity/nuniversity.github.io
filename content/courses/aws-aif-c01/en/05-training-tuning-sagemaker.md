@@ -4,6 +4,8 @@ description: "Master SageMaker training jobs end to end: input modes and channel
 order: 5
 difficulty: "intermediate"
 duration: "80 minutes"
+skills:
+  - sagemaker
 ---
 # Training and Hyperparameter Tuning on Amazon SageMaker
 

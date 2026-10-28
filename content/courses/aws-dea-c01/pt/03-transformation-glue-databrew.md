@@ -4,6 +4,11 @@ description: "Construa o julgamento de transformação do Domínio 1 desde a bas
 order: 3
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - data-transformation
+objectives:
+  - "Build a Glue ETL job that writes partitioned output"
+  - "Use DataBrew for no-code profiling and cleaning"
 ---
 # Transformação Serverless com AWS Glue e DataBrew
 

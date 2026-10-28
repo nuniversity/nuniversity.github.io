@@ -4,6 +4,8 @@ description: "Own the Databricks compute layer on AWS: read the supported DBR ta
 order: 6
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - compute-runtime
 ---
 # Databricks Runtime, Photon and Clusters: DBR/LTS, Policies, Pools and Compute Cost Shape
 

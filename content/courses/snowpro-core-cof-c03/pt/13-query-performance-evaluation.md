@@ -4,6 +4,8 @@ description: "Aprenda a diagnosticar problemas de desempenho de queries no Snowf
 order: 13
 difficulty: intermediate
 duration: "65 min"
+skills:
+  - query-performance
 ---
 
 # Domínio 4.1: Avaliação de Desempenho de Queries

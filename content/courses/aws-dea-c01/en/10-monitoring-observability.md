@@ -4,6 +4,11 @@ description: "Instrument every stage of a data pipeline the way DEA-C01 Domain 3
 order: 10
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - observability
+objectives:
+  - "Instrument pipelines with CloudWatch metrics and alarms"
+  - "Diagnose a stalled ingestion job from logs"
 ---
 # Monitoring and Observability for Data Pipelines
 

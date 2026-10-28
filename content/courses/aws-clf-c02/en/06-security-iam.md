@@ -4,6 +4,8 @@ description: "Domain 2 made practical: lock down the root user, choose between I
 order: 6
 difficulty: "beginner"
 duration: "60 minutes"
+skills:
+  - security-iam
 ---
 # Identity, Access Control and Data Protection
 

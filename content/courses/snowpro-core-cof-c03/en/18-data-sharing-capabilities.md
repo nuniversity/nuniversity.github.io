@@ -4,9 +4,11 @@ description: "Understand Snowflake's Secure Data Sharing model, provider/consume
 order: 18
 difficulty: intermediate
 duration: 50
+skills:
+  - collaboration-sharing
 ---
 
-# Domain 5.2: Secure Data Sharing and Data Clean Rooms
+# Domain 5.2, Secure Data Sharing and Data Clean Rooms
 
 > [!NOTE]
 > **Exam Domain 5.2**: *Secure Data Sharing* contributes to the **Data Collaboration** domain, which is **10%** of the COF-C03 exam.
@@ -259,64 +261,92 @@ flowchart TD
 
 ## Practice Questions
 
-**1.** A provider adds a regular (non-secure) view to a share. What happens?
+```question
+{
+  "id": "snowpro-core-cof-c03-18-q1",
+  "type": "multiple-choice",
+  "question": "A provider adds a regular (non-secure) view to a share. What happens?",
+  "options": [
+    "It succeeds: all views can be shared",
+    "It fails: only SECURE views can be added to shares",
+    "The view is automatically converted to a secure view",
+    "Consumers see the data but not the definition"
+  ],
+  "correct": 1
+}
+```
 
-- A) It succeeds: all views can be shared
-- B) **It fails: only SECURE views can be added to shares** ✅
-- C) The view is automatically converted to a secure view
-- D) Consumers see the data but not the definition
+```question
+{
+  "id": "snowpro-core-cof-c03-18-q2",
+  "type": "multiple-choice",
+  "question": "A consumer mounts a provider's share. 10 minutes later the provider inserts new rows. When does the consumer see the new rows?",
+  "options": [
+    "After the next scheduled refresh (daily)",
+    "After the consumer re-runs `CREATE DATABASE FROM SHARE`",
+    "Immediately: sharing is live and zero-copy",
+    "After the provider runs ALTER SHARE REFRESH"
+  ],
+  "correct": 2
+}
+```
 
----
+```question
+{
+  "id": "snowpro-core-cof-c03-18-q3",
+  "type": "multiple-choice",
+  "question": "Which account type allows a provider to share data with a customer who has no Snowflake account?",
+  "options": [
+    "Secondary account",
+    "Managed account",
+    "Reader account",
+    "Business Critical account"
+  ],
+  "correct": 2
+}
+```
 
-**2.** A consumer mounts a provider's share. 10 minutes later the provider inserts new rows. When does the consumer see the new rows?
+```question
+{
+  "id": "snowpro-core-cof-c03-18-q4",
+  "type": "multiple-choice",
+  "question": "Who pays for the compute costs in a Reader Account?",
+  "options": [
+    "The reader/consumer",
+    "Snowflake automatically",
+    "The provider",
+    "Split 50/50 between provider and consumer"
+  ],
+  "correct": 2
+}
+```
 
-- A) After the next scheduled refresh (daily)
-- B) After the consumer re-runs `CREATE DATABASE FROM SHARE`
-- C) **Immediately: sharing is live and zero-copy** ✅
-- D) After the provider runs ALTER SHARE REFRESH
+```question
+{
+  "id": "snowpro-core-cof-c03-18-q5",
+  "type": "multiple-choice",
+  "question": "Provider is on AWS us-east-1. Consumer is on Azure eastus. Can the provider share directly?",
+  "options": [
+    "Yes: sharing works across all clouds natively",
+    "No: cross-cloud sharing requires database replication first",
+    "No: cross-cloud sharing is not supported at all",
+    "Yes, but only for Enterprise edition providers"
+  ],
+  "correct": 1
+}
+```
 
----
-
-**3.** Which account type allows a provider to share data with a customer who has no Snowflake account?
-
-- A) Secondary account
-- B) Managed account
-- C) **Reader account** ✅
-- D) Business Critical account
-
----
-
-**4.** Who pays for the compute costs in a Reader Account?
-
-- A) The reader/consumer
-- B) Snowflake automatically
-- C) **The provider** ✅
-- D) Split 50/50 between provider and consumer
-
----
-
-**5.** Provider is on AWS us-east-1. Consumer is on Azure eastus. Can the provider share directly?
-
-- A) Yes: sharing works across all clouds natively
-- B) **No: cross-cloud sharing requires database replication first** ✅
-- C) No: cross-cloud sharing is not supported at all
-- D) Yes, but only for Enterprise edition providers
-
----
-
-**6.** In a Data Clean Room, why can neither party see the other's raw data?
-
-- A) Data is encrypted with different keys
-- B) Results are routed through a third-party broker
-- C) **Aggregation thresholds and secure views restrict output to aggregate results** ✅
-- D) Individual rows are hashed before being shared
-
----
-
-**7.** Which Snowflake object types can be included in a share? (Select all that apply)
-
-- A) Tables ✅
-- B) Secure views ✅
-- C) Stages
-- D) External tables ✅
-- E) Streams
+```question
+{
+  "id": "snowpro-core-cof-c03-18-q6",
+  "type": "multiple-choice",
+  "question": "In a Data Clean Room, why can neither party see the other's raw data?",
+  "options": [
+    "Data is encrypted with different keys",
+    "Results are routed through a third-party broker",
+    "Aggregation thresholds and secure views restrict output to aggregate results",
+    "Individual rows are hashed before being shared"
+  ],
+  "correct": 2
+}
+```

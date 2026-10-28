@@ -4,6 +4,8 @@ description: "Elige el mueve-datos correcto para cada tipo de fuente que encontr
 order: 5
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - ingestion
 ---
 # Patrones de ingesta por lotes: DMS, AppFlow, DataSync y Transfer Family
 

@@ -4,6 +4,8 @@ description: "Comprende el ecosistema de drivers, conectores e integraciones de 
 order: 12
 difficulty: intermediate
 duration: "50 min"
+skills:
+  - data-loading
 ---
 
 # Dominio 3.3: Conectores e Integraciones de Snowflake

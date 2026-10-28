@@ -4,6 +4,8 @@ description: "Mapea cada etapa del ciclo de vida del machine learning a servicio
 order: 2
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - ml-lifecycle
 ---
 # Ciclo de vida de ML de extremo a extremo en AWS
 

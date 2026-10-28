@@ -4,6 +4,8 @@ description: "Learn how Snowflake protects and governs data: Dynamic Data Maskin
 order: 8
 difficulty: intermediate
 duration: "70 min"
+skills:
+  - security-governance
 ---
 
 # Domain 2.2: Data Governance Features

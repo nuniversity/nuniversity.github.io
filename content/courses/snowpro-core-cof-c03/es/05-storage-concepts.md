@@ -4,6 +4,8 @@ description: "Domina las micro-particiones, el clustering de datos, Time Travel,
 order: 5
 difficulty: intermediate
 duration: "75 min"
+skills:
+  - storage
 ---
 
 # Dominio 1.5: Conceptos de Almacenamiento en Snowflake

@@ -4,6 +4,8 @@ description: "Govern a Databricks lakehouse on AWS the way October 2026 document
 order: 11
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - security-governance
 ---
 # Unity Catalog Security: Row and Column Controls, Tags, Auditing, Lineage and Secrets
 

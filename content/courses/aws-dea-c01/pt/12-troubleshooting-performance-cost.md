@@ -4,6 +4,11 @@ description: "Diagnostique e conserte pipelines de dados falhos ou lentos do jei
 order: 12
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - performance-cost
+objectives:
+  - "Diagnose shuffle, skew, and small-file problems"
+  - "Reduce cost without breaking SLAs"
 ---
 # Solução de Problemas, Desempenho e Otimização de Custo
 

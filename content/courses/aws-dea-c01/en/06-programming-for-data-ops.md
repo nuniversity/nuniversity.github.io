@@ -4,6 +4,11 @@ description: "Turn DEA-C01 Domain 1 Task 1.4 into decisions you can defend on ex
 order: 6
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - programming-for-data
+objectives:
+  - "Read and adapt PySpark and SQL transformations"
+  - "Use boto3 patterns safely in pipeline code"
 ---
 # Programming Concepts for Data Operations
 

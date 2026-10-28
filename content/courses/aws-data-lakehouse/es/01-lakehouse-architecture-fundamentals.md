@@ -4,6 +4,8 @@ description: "Lakehouse frente a data lake frente a data warehouse en AWS, una t
 order: 1
 difficulty: "intermediate"
 duration: "55 min"
+skills:
+  - lakehouse-architecture
 ---
 # Fundamentos de la arquitectura lakehouse: lagos, data warehouses y el patrón medallion
 

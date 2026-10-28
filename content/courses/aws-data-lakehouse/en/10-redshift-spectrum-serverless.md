@@ -4,6 +4,8 @@ description: "Use Amazon Redshift as the governed, stateful half of the lakehous
 order: 10
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - query-serving
 ---
 # Redshift in the Lakehouse: Spectrum, Serverless, Data Sharing, and Federation
 

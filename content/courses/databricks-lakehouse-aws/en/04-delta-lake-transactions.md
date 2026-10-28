@@ -4,6 +4,8 @@ description: "Master the Delta Lake machinery under every Databricks-on-AWS tabl
 order: 4
 difficulty: "intermediate"
 duration: "70 minutes"
+skills:
+  - delta-lake
 ---
 # Delta Lake Transactions on AWS: Log Anatomy, Time Travel, CDF, Clustering and VACUUM
 

@@ -4,6 +4,8 @@ description: "Master Snowflake's three-layer architecture: Cloud Services, Compu
 order: 1
 difficulty: intermediate
 duration: "75 min"
+skills:
+  - architecture
 ---
 
 # Domain 1.1: Snowflake Architecture

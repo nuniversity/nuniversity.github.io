@@ -4,6 +4,8 @@ description: "Ensamba el lakehouse completo de Databricks en AWS a octubre de 20
 order: 17
 difficulty: "intermediate"
 duration: "80 min"
+skills:
+  - lakehouse-architecture
 ---
 # Arquitectura de referencia del capstone: observabilidad, activación de ML y el plan de 90 días para Databricks en AWS
 

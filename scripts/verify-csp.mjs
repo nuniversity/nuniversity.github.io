@@ -103,6 +103,22 @@ for (const file of files) {
   const rel = path.relative(OUT, file)
   checked += 1
 
+  // The code sandbox is intentionally stricter than the site policy: it loads
+  // no origins at all and carries the site's only 'unsafe-eval'. Verify its own
+  // invariants instead of the shared required origins.
+  if (rel === 'code-sandbox.html') {
+    if (!/'unsafe-eval'/.test(html)) {
+      problems.push(`${rel}: missing 'unsafe-eval' (sandbox eval will be blocked)`)
+    }
+    if (!/connect-src 'none'/.test(html)) {
+      problems.push(`${rel}: connect-src must be 'none'`)
+    }
+    if (/<script\s+src=/i.test(html)) {
+      problems.push(`${rel}: must not load external scripts`)
+    }
+    continue
+  }
+
   // 1. The policy must be present.
   //    The policy itself contains single quotes, so the attribute value is
   //    matched with a quote-aware pattern rather than a naive character class.

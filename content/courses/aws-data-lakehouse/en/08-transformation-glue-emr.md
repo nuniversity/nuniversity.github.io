@@ -4,6 +4,8 @@ description: "Choose and operate the engines that turn a landed lake into a cura
 order: 8
 difficulty: "intermediate"
 duration: "65 minutes"
+skills:
+  - transformation
 ---
 # Transformation at Scale: AWS Glue, EMR Serverless, and Lambda
 

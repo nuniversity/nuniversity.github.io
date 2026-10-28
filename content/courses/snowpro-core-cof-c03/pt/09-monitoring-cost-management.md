@@ -4,6 +4,8 @@ description: "Aprenda a monitorar e controlar custos do Snowflake usando Resourc
 order: 9
 difficulty: intermediate
 duration: "55 min"
+skills:
+  - monitoring-cost
 ---
 
 # Domínio 2.3: Monitoramento e Gerenciamento de Custos

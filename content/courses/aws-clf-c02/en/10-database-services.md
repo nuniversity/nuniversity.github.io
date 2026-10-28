@@ -4,6 +4,8 @@ description: "Domain 3 Task 3.4 turned into decisions: what managed really buys 
 order: 10
 difficulty: "beginner"
 duration: "60 minutes"
+skills:
+  - databases
 ---
 # Database Services: Choosing the Right Store
 

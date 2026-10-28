@@ -4,6 +4,8 @@ description: "Comprende las capacidades de replicación, conmutación por error/
 order: 17
 difficulty: intermediate
 duration: 50
+skills:
+  - collaboration-sharing
 ---
 
 # Dominio 5.1: Colaboración de Datos, Replicación y Continuidad de Negocio

@@ -4,6 +4,8 @@ description: "Deep dive into Snowflake Virtual Warehouses: types, sizes, scaling
 order: 4
 difficulty: intermediate
 duration: "70 min"
+skills:
+  - virtual-warehouses
 ---
 
 # Domain 1.4: Configuring Virtual Warehouses

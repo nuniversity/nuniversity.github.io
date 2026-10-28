@@ -1683,7 +1683,16 @@
     "listen_paused": "Pausado",
     "hide_outline": "Ocultar sumário do curso",
     "show_outline": "Mostrar sumário",
-    "resize_outline": "Redimensionar o sumário do curso"
+    "resize_outline": "Redimensionar o sumário do curso",
+    "mastery": {
+      "title": "Domínio da prática",
+      "pending": "Responda as questões de prática para medir seu domínio",
+      "strong": "Domínio alcançado",
+      "solid": "Progresso sólido: revise os itens errados para alcançar 80% de domínio",
+      "review": "Recomendado revisar antes de avançar"
+    },
+    "focus_on": "Modo foco",
+    "focus_off": "Mostrar lição completa"
   },
   "gamification": {
     "xp": "{n} XP",
@@ -1709,5 +1718,35 @@
       "streak_7": "Em chamas",
       "streak_7_desc": "Mantenha uma sequência de 7 dias"
     }
+  },
+  "review": {
+    "heading": "Revisão diária",
+    "subtitle": "Repetição espaçada em todos os seus cursos.",
+    "title": "Revisão diária",
+    "mixed_title": "Prática mista",
+    "mixed_heading": "Prática mista",
+    "mixed_cta": "Prática mista",
+    "empty": "Nada para revisar agora. Conclua uma lição para começar a construir seu baralho de revisão.",
+    "mixed_empty": "Nenhuma questão de prática encontrada neste curso.",
+    "correct": "Correto",
+    "incorrect": "Incorreto",
+    "next": "Próxima",
+    "finish": "Concluir",
+    "done": "Sessão concluída.",
+    "again": "Praticar novamente"
+  },
+  "codeExercise": {
+    "run": "Executar testes",
+    "running": "Executando…",
+    "reset": "Redefinir",
+    "passed": "testes aprovados",
+    "forbidden": "Remova chamadas de rede ou eval: os exercícios rodam em um sandbox fechado.",
+    "editor": "Editor de código"
+  },
+  "glossary": {
+    "title": "Termos-chave"
+  },
+  "resources": {
+    "title": "Aprofundar"
   }
 }

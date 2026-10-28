@@ -4,6 +4,8 @@ description: "Domine o Domínio 3, Tarefa 3.1 do CLF-C02, os quatro modelos de i
 order: 4
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - deployment-operations
 ---
 # Modelos de Implantação em Nuvem e Operação na AWS
 

@@ -4,6 +4,8 @@ description: "Domina de principio a fin los trabajos de entrenamiento de SageMak
 order: 5
 difficulty: "intermediate"
 duration: "80 min"
+skills:
+  - sagemaker
 ---
 # Entrenamiento y ajuste de hiperparámetros en Amazon SageMaker
 

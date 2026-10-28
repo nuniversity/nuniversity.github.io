@@ -4,6 +4,11 @@ description: "Construye desde cero el criterio de transformación del Dominio 1:
 order: 3
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - data-transformation
+objectives:
+  - "Build a Glue ETL job that writes partitioned output"
+  - "Use DataBrew for no-code profiling and cleaning"
 ---
 # Transformación serverless con AWS Glue y DataBrew
 

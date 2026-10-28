@@ -4,6 +4,8 @@ description: "Harden the finished lakehouse at four layers that actually stop at
 order: 14
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - governance-security
 ---
 # Security Hardening: KMS, Least-Privilege IAM, and Network isolation
 

@@ -4,6 +4,8 @@ description: "Domina la capa de cómputo de Databricks sobre AWS: lee la tabla d
 order: 6
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - compute-runtime
 ---
 # Databricks Runtime, Photon y clusters: DBR/LTS, políticas, pools y forma del coste de cómputo
 

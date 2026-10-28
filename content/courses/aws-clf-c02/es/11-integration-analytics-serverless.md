@@ -4,6 +4,8 @@ description: "Cómo mueve AWS los datos entre aplicaciones y cómo convierte los
 order: 11
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - integration-analytics
 ---
 # Integración de aplicaciones, analítica y otros servicios en alcance
 

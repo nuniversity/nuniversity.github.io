@@ -4,6 +4,8 @@ description: "Domina la capa de pipelines declarativos de Databricks sobre AWS e
 order: 7
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - pipelines-jobs
 ---
 # Lakeflow Declarative Pipelines (antes Delta Live Tables): expectations, modos y la decisión DLT frente a Jobs
 

@@ -4,6 +4,11 @@ description: "Leia o guia oficial do exame DEA-C01 como um redator de exames o f
 order: 1
 difficulty: "intermediate"
 duration: "90 min"
+skills:
+  - exam-strategy
+objectives:
+  - "Map the four DEA-C01 domains and their exam weights"
+  - "Plan a study sequence that matches the data engineer role"
 ---
 # Guia do Exame DEA-C01 e o Papel do Engenheiro de Dados
 

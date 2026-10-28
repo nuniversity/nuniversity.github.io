@@ -4,6 +4,8 @@ description: "Choose between real-time, serverless, batch transform and asynchro
 order: 6
 difficulty: "intermediate"
 duration: "85 minutes"
+skills:
+  - sagemaker
 ---
 # Deployment and Inference on Amazon SageMaker
 

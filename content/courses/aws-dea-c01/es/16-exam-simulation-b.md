@@ -6,6 +6,11 @@ examMinutes: 90
 difficulty: "intermediate"
 description: "Resuelve el Conjunto B: 20 ítems al estilo del examen DEA-C01 en el orden de peso publicado (7 / 5 / 4 / 4) con un desglose opción a opción tras cada bloque; después entrena los veinte pares de trampas que deciden la mayoría de los suspensos, recorre la lista oficial del día del examen (documentos, registro, momento de los resultados), corrige el Conjunto B contra umbrales explícitos de listo frente a no listo y termina con un plan de estudio de 7 días dirigido por tus caídas para la semana en la que de verdad te sientas."
 duration: "90 min"
+skills:
+  - exam-strategy
+objectives:
+  - "Recognize common distractor patterns under time pressure"
+  - "Plan the final week before exam day"
 ---
 # Simulacro de examen B: segundo conjunto, trampas y día del examen
 

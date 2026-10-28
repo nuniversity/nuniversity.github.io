@@ -6,6 +6,11 @@ examMinutes: 90
 difficulty: "intermediate"
 description: "Sit Set A, twenty DEA-C01 exam-style items arranged in published domain-weight order (D1 7 / D2 5 / D3 4 / D4 4) with a per-option teardown after every block, then learn the test craft that decides the real 130 minutes: the 120-second pacing math, the two-pass flag-and-sweep protocol, how to read 'MOST appropriate', 'LEAST costly' and 'FIRST step' stems, the five-move multiple-response procedure that survives all-or-nothing scoring, a rubric that grades Set A by domain instead of by total, a sourced October-2026 update box on exam guide v1.1, and a comparative verdict on free official preparation versus paid courses versus cross-cloud and on-premises experience."
 duration: "90 minutes"
+skills:
+  - exam-strategy
+objectives:
+  - "Apply a time-boxed strategy to scenario questions"
+  - "Review missed domains with targeted practice"
 ---
 # Exam Simulation A: Practice Set and Strategy
 

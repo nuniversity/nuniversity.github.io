@@ -4,6 +4,8 @@ description: "Governance um lakehouse da Databricks na AWS do jeito que a docume
 order: 11
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - security-governance
 ---
 # Segurança no Unity Catalog: Controles de Linha e Coluna, Tags, Auditoria, Lineage e Segredos
 

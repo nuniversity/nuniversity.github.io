@@ -4,6 +4,8 @@ description: "Lakehouse versus data lake versus data warehouse na AWS, uma tabel
 order: 1
 difficulty: "intermediate"
 duration: "55 min"
+skills:
+  - lakehouse-architecture
 ---
 # Fundamentos da Arquitetura Lakehouse: Lakes, Warehouses e o Padrão Medalhão
 

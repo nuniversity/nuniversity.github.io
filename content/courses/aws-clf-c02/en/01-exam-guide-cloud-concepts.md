@@ -4,6 +4,8 @@ description: "Read the official CLF-C02 exam guide the way an exam writer does, 
 order: 1
 difficulty: "beginner"
 duration: "90 minutes"
+skills:
+  - cloud-concepts
 ---
 # CLF-C02 Exam Guide and Cloud Concepts
 

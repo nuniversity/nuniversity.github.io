@@ -4,6 +4,8 @@ description: "Ejecuta la capa de servicio de un lakehouse de Databricks sobre AW
 order: 8
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - sql-serving
 ---
 # SQL warehouses de Databricks y la capa de servicio: serverless, escalado, dashboards, BI y federación
 

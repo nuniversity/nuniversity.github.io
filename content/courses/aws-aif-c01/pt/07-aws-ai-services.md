@@ -4,6 +4,8 @@ description: "Escolha, configure e precifique os dez serviços pré-construídos
 order: 7
 difficulty: "intermediate"
 duration: "90 min"
+skills:
+  - aws-ai-services
 ---
 # Serviços Pré-Construídos de IA da AWS: Visão, Linguagem, Fala e Conversação
 

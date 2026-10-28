@@ -4,6 +4,8 @@ description: "Domine os trabalhos de treinamento do SageMaker de ponta a ponta: 
 order: 5
 difficulty: "intermediate"
 duration: "80 min"
+skills:
+  - sagemaker
 ---
 # Treinamento e Ajuste de Hiperparâmetros no Amazon SageMaker
 

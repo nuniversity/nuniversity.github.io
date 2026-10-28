@@ -4,6 +4,8 @@ description: "Domine a tarefa de maior rendimento do Domínio 2 (30% do CLF-C02)
 order: 5
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - shared-responsibility
 ---
 # O Modelo de Responsabilidade Compartilhada da AWS
 

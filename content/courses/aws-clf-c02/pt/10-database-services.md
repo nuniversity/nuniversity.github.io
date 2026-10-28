@@ -4,6 +4,8 @@ description: "A Tarefa 3.4 do Domínio 3 transformada em decisões: o que o gere
 order: 10
 difficulty: "beginner"
 duration: "60 min"
+skills:
+  - databases
 ---
 # Serviços de Bancos de Dados: Escolhendo o Armazenamento Certo
 

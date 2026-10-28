@@ -4,6 +4,12 @@ description: "Construye la capa de metadatos de la que de verdad trata el Domini
 order: 8
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - data-modeling
+  - data-store-design
+objectives:
+  - "Model dimensions and facts for a lakehouse"
+  - "Track schema evolution through the Glue Data Catalog"
 ---
 # Modelado de datos, catálogo Glue y evolución de esquemas
 

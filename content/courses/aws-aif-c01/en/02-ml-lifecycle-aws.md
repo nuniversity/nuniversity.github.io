@@ -4,6 +4,8 @@ description: "Map every stage of the machine learning lifecycle onto verified AW
 order: 2
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - ml-lifecycle
 ---
 # End-to-End ML Lifecycle on AWS
 

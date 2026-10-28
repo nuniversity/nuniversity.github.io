@@ -4,6 +4,8 @@ description: "Ship the Databricks-on-AWS lakehouse like software as of October 2
 order: 16
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - cicd
 ---
 # CI/CD for the Databricks Lakehouse on AWS: Declarative Automation Bundles, Terraform and GitHub Actions
 

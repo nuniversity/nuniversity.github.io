@@ -4,6 +4,8 @@ description: "Escolha o mover em lote certo para cada tipo de origem que você v
 order: 5
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - ingestion
 ---
 # Padrões de Ingestão em Lote: DMS, AppFlow, DataSync e Transfer Family
 

@@ -4,6 +4,8 @@ description: "Entrega el lakehouse de Databricks en AWS como software a octubre 
 order: 16
 difficulty: "intermediate"
 duration: "75 min"
+skills:
+  - cicd
 ---
 # CI/CD para el lakehouse de Databricks en AWS: Declarative Automation Bundles, Terraform y GitHub Actions
 

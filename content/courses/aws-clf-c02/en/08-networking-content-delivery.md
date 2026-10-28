@@ -4,6 +4,8 @@ description: "Domain 3's networking half at exam depth: build a VPC the way AWS 
 order: 8
 difficulty: "beginner"
 duration: "75 minutes"
+skills:
+  - networking
 ---
 # Networking, Content Delivery and Hybrid Connectivity
 

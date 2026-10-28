@@ -4,6 +4,8 @@ description: "Build a working mental model of retrieval-augmented generation on 
 order: 10
 difficulty: "intermediate"
 duration: "115 minutes"
+skills:
+  - rag
 ---
 # RAG and Knowledge Bases on Amazon Bedrock: Chunking, Embeddings, Retrieval and Evaluation
 

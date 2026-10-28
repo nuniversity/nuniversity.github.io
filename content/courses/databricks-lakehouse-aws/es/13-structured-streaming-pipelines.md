@@ -4,6 +4,8 @@ description: "Opera Structured Streaming en producción sobre Databricks-on-AWS:
 order: 13
 difficulty: "intermediate"
 duration: "80 min"
+skills:
+  - ingestion-streaming
 ---
 # Structured Streaming en el lakehouse de AWS: triggers, checkpoints, foreachBatch y exactly-once
 

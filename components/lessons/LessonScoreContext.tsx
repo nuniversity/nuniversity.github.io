@@ -15,6 +15,8 @@ export interface LessonWidgetResult {
   correct: number
   missed: string[]
   answered: boolean
+  /** Authored, stable identifier (e.g. the question fence's `id`). Optional. */
+  key?: string
 }
 
 export interface LessonScoreValue {

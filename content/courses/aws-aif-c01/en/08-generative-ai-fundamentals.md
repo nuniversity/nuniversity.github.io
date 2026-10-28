@@ -4,6 +4,8 @@ description: "Master the AIF-C01 generative AI core, tokens, transformers, embed
 order: 8
 difficulty: "intermediate"
 duration: "100 minutes"
+skills:
+  - generative-ai
 ---
 # Generative AI Fundamentals: Tokens, Transformers, Prompting and Foundation Models
 

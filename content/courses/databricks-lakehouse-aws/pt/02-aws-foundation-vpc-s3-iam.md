@@ -4,6 +4,8 @@ description: "Construa o substrato AWS sob um workspace Databricks: os quatro ob
 order: 2
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - lakehouse-architecture
 ---
 # Fundação AWS para Databricks: Design de VPC, Bucket Raiz, PrivateLink, KMS e IAM
 

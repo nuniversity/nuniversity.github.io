@@ -4,6 +4,8 @@ description: "Domain 2 task 2.2 end to end: record who did what with AWS CloudTr
 order: 7
 difficulty: "beginner"
 duration: "60 minutes"
+skills:
+  - governance-compliance
 ---
 # Governance, Auditing and Compliance on AWS
 

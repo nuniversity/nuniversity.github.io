@@ -4,6 +4,12 @@ description: "Build the metadata layer Domain 2 is really about: the AWS Glue Da
 order: 8
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - data-modeling
+  - data-store-design
+objectives:
+  - "Model dimensions and facts for a lakehouse"
+  - "Track schema evolution through the Glue Data Catalog"
 ---
 # Data Modeling, Glue Catalog and Schema Evolution
 

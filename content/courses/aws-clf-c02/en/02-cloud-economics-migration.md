@@ -4,6 +4,8 @@ description: "Domain 1 of CLF-C02 end to end, the AWS value proposition and six 
 order: 2
 difficulty: "beginner"
 duration: "60 minutes"
+skills:
+  - cloud-economics
 ---
 # Cloud Economics, Migration Strategies and the Cloud Journey
 

@@ -4,6 +4,8 @@ description: "Master Snowflake's bulk data loading and unloading: file formats, 
 order: 10
 difficulty: intermediate
 duration: "75 min"
+skills:
+  - data-loading
 ---
 
 # Domain 3.1: Data Loading and Unloading

@@ -4,6 +4,8 @@ description: "Build the AWS substrate under a Databricks workspace: the four acc
 order: 2
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - lakehouse-architecture
 ---
 # AWS Foundation for Databricks: VPC Design, Root Bucket, PrivateLink, KMS and IAM
 

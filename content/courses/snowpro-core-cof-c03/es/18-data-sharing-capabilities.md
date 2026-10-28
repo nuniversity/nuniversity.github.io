@@ -4,6 +4,8 @@ description: "Comprende el modelo de Intercambio Seguro de Datos de Snowflake, c
 order: 18
 difficulty: intermediate
 duration: 50
+skills:
+  - collaboration-sharing
 ---
 
 # Dominio 5.2: Intercambio Seguro de Datos y Data Clean Rooms

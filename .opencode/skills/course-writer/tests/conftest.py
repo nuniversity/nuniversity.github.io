@@ -165,11 +165,17 @@ description: "A test lesson for validation"
 order: 1
 duration: "30 min"
 difficulty: "beginner"
+skills:
+  - math-basics
+objectives:
+  - "Explain the test concept"
 ---
 
 # Test Lesson
 
 This is a test lesson with valid structure.
+
+![Diagram](/media/test-course/diagram.png)
 
 ```math
 { "expression": "2 + 2 = 4", "display": true }

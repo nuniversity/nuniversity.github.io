@@ -8,6 +8,13 @@
   - Learning-science research synthesis (Dunlosky et al. 2013 six strategies; Bloom 2-sigma mastery learning; Mayer multimedia principles; CAST UDL 3.0; FSRS scheduler; Self-Determination Theory)
   - Prior planning conversation (2026-10-28): full program approved; soft mastery gates at 70%; JavaScript-only code runner in a later phase.
 
+> **STATUS (2026-10-28, after implementation + decision audit):** Phases 0–2 and the core of Phase 3 are **implemented and verified** (`npm test` 1,418 passed · `npm run build` 1,779 pages · `verify-csp` green). Where this document and `DECISIONS.md` disagree, **`DECISIONS.md` and the code win**. Deviations now live in code:
+> - mastery is the **Beta posterior mean** `(correct+1)/(attempts+2)`, field `mastery` (not EWMA/`ewma`);
+> - FSRS runs `enable_short_term: false`, `maximum_interval: 180` (D2);
+> - practice keys are course-prefixed `course::id`; the question index emits the same ids (D7);
+> - the mastery bar is 80%, with a 70–79% "solid" state (D4);
+> - `lib/gamification/profile.ts` needs no change — only `types.ts` gained the event and XP entry (D11).
+
 ---
 
 ## 0. Execution protocol for small models — READ THIS FIRST
@@ -308,6 +315,8 @@ npm run build && npx tsc --noEmit
 
 ### P0-S3 — Practice types + answer store
 
+> **Implemented deviation (D3):** the store now uses a **Beta posterior mean** `mastery = (correct+1)/(attempts+2)` and the field is named `mastery`, not `ewma`. The code below is the original plan; `lib/practice/record.ts` and `lib/practice/types.ts` are the source of truth.
+
 **Create** `lib/practice/types.ts` with exactly the schema block from §1.4 as TypeScript:
 
 ```ts
@@ -599,6 +608,8 @@ function deserializeCard(state: ReviewCardState): Card {
 ```
 
 Version note: on `ts-fsrs@4.5.0`, `Rating` is a numeric enum (`Again=1, Hard=2, Good=3, Easy=4`) and `scheduler.repeat(card, now)` returns a `RecordLog` keyed by those values. **Never use string keys (`'Good'`)** — that silently returns `undefined` and crashes on `.card`. If the installed 4.x exposes `Grades` instead of `Rating`, alias it in the import (`Rating as Grades`) rather than changing any other file.
+
+**Implemented deviation (verified during implementation):** the production file uses `scheduler.next(card, now, toRating(correct))`, because indexing `repeat()` with the `Rating` union fails TypeScript (`Rating.Manual` is not in `IPreview`). It also configures `enable_short_term: false` and `maximum_interval: 180` (DECISIONS.md D2). `lib/practice/fsrs.ts` is the source of truth.
 
 **Create** `lib/practice/cards.ts`:
 
@@ -1066,7 +1077,7 @@ const score = (() => {
 })()
 ```
 
-3. Below the existing "Completed" badge, render the review-recommended chip when the learner completes a lesson under threshold:
+3. Below the existing "Completed" badge, render the review-recommended chip when the learner completes a lesson under threshold (implemented threshold: **0.8**, per DECISIONS.md D4):
 
 ```tsx
 {completed && score !== null && score < 0.7 && (

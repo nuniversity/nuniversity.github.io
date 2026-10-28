@@ -4,6 +4,11 @@ description: "Diagnose and fix failing or slow data pipelines the way DEA-C01 Do
 order: 12
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - performance-cost
+objectives:
+  - "Diagnose shuffle, skew, and small-file problems"
+  - "Reduce cost without breaking SLAs"
 ---
 # Troubleshooting, Performance and Cost Optimization
 

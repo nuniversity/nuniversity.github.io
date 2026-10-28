@@ -4,6 +4,8 @@ description: "Decida, defenda e precifique uma camada de orquestração para o A
 order: 11
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - orchestration
 ---
 # Orquestrando o Lakehouse: Step Functions, EventBridge e MWAA
 

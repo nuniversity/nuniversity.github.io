@@ -4,6 +4,8 @@ description: "A metade de rede do Domínio 3 em profundidade de exame: construa 
 order: 8
 difficulty: "beginner"
 duration: "75 min"
+skills:
+  - networking
 ---
 # Rede, Entrega de Conteúdo e Conectividade Híbrida
 

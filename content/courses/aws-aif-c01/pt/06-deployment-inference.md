@@ -4,6 +4,8 @@ description: "Escolha entre inferência em tempo real, serverless, batch transfo
 order: 6
 difficulty: "intermediate"
 duration: "85 min"
+skills:
+  - sagemaker
 ---
 # Implantação e Inferência no Amazon SageMaker
 

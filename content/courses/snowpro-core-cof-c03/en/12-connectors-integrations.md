@@ -4,6 +4,8 @@ description: "Understand Snowflake's ecosystem of drivers, connectors, and integ
 order: 12
 difficulty: intermediate
 duration: "50 min"
+skills:
+  - data-loading
 ---
 
 # Domain 3.3: Snowflake Connectors and Integrations

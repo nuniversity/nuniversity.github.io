@@ -4,6 +4,8 @@ description: "The governance core of a Databricks-on-AWS lakehouse, taught as a 
 order: 3
 difficulty: "intermediate"
 duration: "60 minutes"
+skills:
+  - unity-catalog
 ---
 # Unity Catalog Fundamentals: Metastore, Hierarchy, Grants, Storage Credentials and External Locations
 

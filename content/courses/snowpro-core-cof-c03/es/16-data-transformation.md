@@ -4,6 +4,8 @@ description: "Domina el procesamiento de datos estructurados, semi-estructurados
 order: 16
 difficulty: intermediate
 duration: 55
+skills:
+  - transformation
 ---
 
 # Dominio 4.4: Transformación de Datos en Snowflake

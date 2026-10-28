@@ -4,6 +4,8 @@ description: "Construye un modelo mental operativo de Amazon Bedrock para el exa
 order: 9
 difficulty: "intermediate"
 duration: "110 min"
+skills:
+  - bedrock
 ---
 # Fundamentos de Amazon Bedrock: APIs, acceso a modelos, precios, tipos de inferencia y evaluaciones
 

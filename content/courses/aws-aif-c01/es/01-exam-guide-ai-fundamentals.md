@@ -4,6 +4,8 @@ description: "Domina la guía oficial del examen AWS Certified AI Practitioner (
 order: 1
 difficulty: "intermediate"
 duration: "90 min"
+skills:
+  - exam-strategy
 ---
 # Guía del examen AIF-C01 y fundamentos de IA/ML
 

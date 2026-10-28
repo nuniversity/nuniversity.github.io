@@ -4,6 +4,8 @@ description: "Domine a camada de metadados do lakehouse: o modelo de objetos do 
 order: 7
 difficulty: "intermediate"
 duration: "55 min"
+skills:
+  - catalog-schema
 ---
 # Glue Data Catalog: Crawlers, Partições e Gestão de Schema
 

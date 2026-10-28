@@ -4,6 +4,8 @@ description: "Mova eventos para o lakehouse sem perder ordem, dinheiro nem sono:
 order: 6
 difficulty: "intermediate"
 duration: "65 min"
+skills:
+  - streaming
 ---
 # Ingestão de Streaming: Kinesis, Amazon MSK e Landing de Streams no Lake
 

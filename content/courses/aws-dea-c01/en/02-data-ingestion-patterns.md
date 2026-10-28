@@ -4,6 +4,11 @@ description: "Make the Domain 1 Task 1.1 call between bounded batch and unbounde
 order: 2
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - data-ingestion
+objectives:
+  - "Choose batch, streaming, or hybrid ingestion for a workload"
+  - "Compare Kinesis, MSK, DMS, and DataSync trade-offs"
 ---
 # Data Ingestion: Batch and Streaming Patterns
 

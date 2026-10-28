@@ -4,6 +4,8 @@ description: "Monte o lakehouse Databricks-on-AWS completo em outubro de 2026: c
 order: 17
 difficulty: "intermediate"
 duration: "80 min"
+skills:
+  - lakehouse-architecture
 ---
 # Arquitetura de Referência do Capstone: Observabilidade, Ativação de ML e o Plano de 90 Dias para Databricks na AWS
 

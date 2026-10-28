@@ -4,6 +4,8 @@ description: "Aprende cómo Snowflake protege y gobierna los datos: Enmascaramie
 order: 8
 difficulty: intermediate
 duration: "70 min"
+skills:
+  - security-governance
 ---
 
 # Dominio 2.2: Funcionalidades de Gobernanza de Datos

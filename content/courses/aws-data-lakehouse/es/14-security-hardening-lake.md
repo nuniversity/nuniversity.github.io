@@ -4,6 +4,8 @@ description: "Endurece el lakehouse terminado en cuatro capas que de verdad deti
 order: 14
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - governance-security
 ---
 # Endurecimiento de seguridad: KMS, IAM de mínimo privilegio y aislamiento de red
 

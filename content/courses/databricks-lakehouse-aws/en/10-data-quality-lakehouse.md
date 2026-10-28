@@ -4,6 +4,8 @@ description: "Own the October 2026 data-quality stack on Databricks on AWS end t
 order: 10
 difficulty: "intermediate"
 duration: "75 minutes"
+skills:
+  - data-quality
 ---
 # Data Quality in the Databricks Lakehouse: Constraints, Expectations, Quarantine and Monitoring
 

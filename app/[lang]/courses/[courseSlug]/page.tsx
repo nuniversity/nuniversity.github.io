@@ -184,6 +184,13 @@ export default async function CourseLandingPage({
             lessonCount={lessons.length}
             dict={dict}
           />
+          <Link
+            href={`/${lang}/courses/${course.slug}/practice/`}
+            className="mt-4 inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-accent"
+          >
+            <Target className="h-4 w-4" />
+            {dict.review?.mixed_cta || 'Mixed practice'}
+          </Link>
         </div>
 
         <div>

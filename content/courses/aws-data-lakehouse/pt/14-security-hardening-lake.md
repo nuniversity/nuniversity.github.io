@@ -4,6 +4,8 @@ description: "Endureça o lakehouse pronto em quatro camadas que realmente param
 order: 14
 difficulty: "intermediate"
 duration: "60 min"
+skills:
+  - governance-security
 ---
 # Hardening de segurança: KMS, IAM de mínimo privilégio e isolamento de rede
 

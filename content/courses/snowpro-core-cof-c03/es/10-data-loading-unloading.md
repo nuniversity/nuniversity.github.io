@@ -4,6 +4,8 @@ description: "Domina la carga y descarga masiva de datos en Snowflake: formatos 
 order: 10
 difficulty: intermediate
 duration: "75 min"
+skills:
+  - data-loading
 ---
 
 # Dominio 3.1: Carga y Descarga de Datos
