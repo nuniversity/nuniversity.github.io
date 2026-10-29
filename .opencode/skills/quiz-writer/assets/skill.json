@@ -1,0 +1,16 @@
+{
+  "name": "quiz-writer",
+  "version": "1.1.0",
+  "description": "Creates and expands exam-blueprint quiz JSON files in content/quizzes, with quota grids, dedup gating and a deterministic merge",
+  "type": "skill",
+  "triggers": [
+    "content/quizzes/**"
+  ],
+  "dependencies": [
+    "pytest"
+  ],
+  "metadata": {
+    "category": "content-creation",
+    "audience": "developers"
+  }
+}

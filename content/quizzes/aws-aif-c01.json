@@ -1462,19 +1462,19 @@
       "type": "ordering",
       "question": "Place these steps of the automated re-training loop, from the first drift alarm to the updated endpoint, in order.",
       "options": [
-        "A CloudWatch alarm fires because captured production inputs have drifted from the baseline",
         "An EventBridge rule matches the alarm and starts a new SageMaker Pipelines execution",
         "The pipeline trains a candidate model on refreshed data and evaluates it on held-out data",
         "The new version is registered with its evaluation metrics and set to await manual approval",
         "A reviewer approves the version and it replaces the model currently serving traffic",
-        "The team stops sampling production traffic so that no further comparison is possible"
+        "The team stops sampling production traffic so that no further comparison is possible",
+        "A CloudWatch alarm fires because captured production inputs have drifted from the baseline"
       ],
       "correct": [
+        5,
         0,
         1,
         2,
-        3,
-        4
+        3
       ],
       "explanation": "This is the canonical MLOps loop: captured traffic establishes a baseline, CloudWatch detects the deviation, EventBridge starts the pipeline, the registry holds the evaluated version until a human approves it, and only then does the endpoint change. Stopping traffic sampling would disable the monitoring that started the loop."
     },
@@ -1484,17 +1484,17 @@
       "type": "ordering",
       "question": "Sequence these staged model promotion steps, from validation on staging to the full traffic cutover.",
       "options": [
-        "Deploy the registered model version to a staging endpoint for validation",
         "Shift a small percentage of live traffic to the new version",
         "Compare latency and quality metrics between the old and the new version",
         "Route all traffic to the new version once the comparison passes",
-        "Delete the previous model version before any traffic is shifted"
+        "Delete the previous model version before any traffic is shifted",
+        "Deploy the registered model version to a staging endpoint for validation"
       ],
       "correct": [
+        4,
         0,
         1,
-        2,
-        3
+        2
       ],
       "explanation": "Promotion validates the version on staging first, then shifts a small share of live traffic, then compares metrics, and finally cuts over fully once the evidence supports it. Retiring the previous version first would remove the rollback path that the comparison depends on."
     },
@@ -1504,17 +1504,17 @@
       "type": "ordering",
       "question": "Sequence these steps to show how one feature travels from source records to a live prediction.",
       "options": [
-        "A processing job cleans and transforms the raw source records",
         "Engineered features are written to the offline store as files in Amazon S3",
         "A training job reads a point-in-time correct snapshot from the offline store",
         "A real-time request reads the latest feature values from the online store and scores the row",
-        "Every inference request recomputes each feature from the raw source records"
+        "Every inference request recomputes each feature from the raw source records",
+        "A processing job cleans and transforms the raw source records"
       ],
       "correct": [
+        4,
         0,
         1,
-        2,
-        3
+        2
       ],
       "explanation": "Features are engineered and persisted in the offline store so training gets a point-in-time correct snapshot, and the online store then serves the latest values at inference time in single-digit milliseconds. Recomputing every feature from raw source data on each request would defeat the purpose of a feature store and could not meet a real-time latency budget."
     },
@@ -1524,17 +1524,17 @@
       "type": "ordering",
       "question": "Sequence these activities as a team works through one experimentation cycle for model improvement.",
       "options": [
-        "State the hypothesis and the metric that will decide whether it held",
         "Run a tracked training experiment with its parameters and data version recorded",
         "Compare the run's metrics against previous runs and the baseline",
         "Adopt the winning configuration and feed it into the repeatable pipeline",
-        "Publish the unreviewed experiment notebook straight to the endpoint"
+        "Publish the unreviewed experiment notebook straight to the endpoint",
+        "State the hypothesis and the metric that will decide whether it held"
       ],
       "correct": [
+        4,
         0,
         1,
-        2,
-        3
+        2
       ],
       "explanation": "Experimentation starts with a stated hypothesis and a deciding metric, proceeds to a tracked run, then compares that run against prior runs, and only then adopts the winner into a repeatable pipeline. Shipping an unreviewed notebook skips tracking, comparison, and production readiness in a single step."
     },
@@ -2147,17 +2147,17 @@
       "type": "ordering",
       "question": "Sequence one model-initiated tool call, from the outgoing request through to the final answer.",
       "options": [
-        "Your application sends the request with the tool definitions and their input schema",
         "The model returns a tool-use stop reason together with a proposed JSON call",
         "Your application executes the function and returns the result to the model",
         "The model uses the result to produce the final natural-language answer",
-        "The model executes the function inside its own sandbox without your code"
+        "The model executes the function inside its own sandbox without your code",
+        "Your application sends the request with the tool definitions and their input schema"
       ],
       "correct": [
+        4,
         0,
         1,
-        2,
-        3
+        2
       ],
       "explanation": "With Converse tool configuration, your code supplies the tool schema, the model only proposes a JSON call, your application executes it, and the model turns the returned result into the answer. The model never executes the function itself, which is the boundary that defines raw tool use."
     },
@@ -2167,17 +2167,17 @@
       "type": "ordering",
       "question": "Sequence one supervisor-based multi-agent interaction, from the customer question to the delivered answer.",
       "options": [
-        "A customer question reaches the supervisor agent",
         "The supervisor selects one collaborator agent for the request",
         "The collaborator runs its action group and returns a result",
         "The supervisor synthesizes the result into a single answer for the customer",
-        "The collaborator becomes the entry point for every future customer question"
+        "The collaborator becomes the entry point for every future customer question",
+        "A customer question reaches the supervisor agent"
       ],
       "correct": [
+        4,
         0,
         1,
-        2,
-        3
+        2
       ],
       "explanation": "In supervisor with routing mode the supervisor stays the entry point, picks one collaborator, receives its result, and synthesizes the final answer for the customer. A collaborator never becomes the entry point, because clients always invoke the supervisor's alias."
     },
@@ -4158,18 +4158,18 @@
       "type": "ordering",
       "question": "Place the steps for summarizing a document that is longer than the model's context window in the order they occur.",
       "options": [
-        "Split the document into sections that each fit within the context window",
         "Raise the temperature until the whole document fits in one prompt",
         "Summarize each section in its own model call",
         "Combine the section summaries into a single prompt",
         "Generate the final summary from the combined summaries",
-        "Fine-tune the model on the document so it no longer needs the text"
+        "Fine-tune the model on the document so it no longer needs the text",
+        "Split the document into sections that each fit within the context window"
       ],
       "correct": [
-        0,
+        5,
+        1,
         2,
-        3,
-        4
+        3
       ],
       "explanation": "Map-reduce summarization splits the document, summarizes each part within the context limit, then combines the partial summaries. The model never needs the full document in one prompt.",
       "id": "q228"
@@ -6883,19 +6883,19 @@
       "type": "ordering",
       "question": "Place the steps of a pre-deployment subgroup bias assessment in the order they occur.",
       "options": [
-        "Define the demographic groups and the metrics that will be compared",
         "Audit label quality for those groups against the written guidelines",
         "Compute error and outcome rates separately for each subgroup",
         "Compare subgroup results against the agreed fairness threshold",
         "Document the findings and the remediation plan before release",
-        "Raise the model's sampling temperature to widen output diversity"
+        "Raise the model's sampling temperature to widen output diversity",
+        "Define the demographic groups and the metrics that will be compared"
       ],
       "correct": [
+        5,
         0,
         1,
         2,
-        3,
-        4
+        3
       ],
       "explanation": "Assessment fixes the groups and metrics first, then checks whether the labels are trustworthy, then measures per-group outcomes, then judges them against a threshold, and only then documents the result; changing sampling temperature is unrelated to bias assessment.",
       "id": "q381"
@@ -6905,19 +6905,19 @@
       "type": "ordering",
       "question": "Place the steps of a responsible foundation model selection review in the order they occur.",
       "options": [
-        "State the accuracy, safety and transparency requirements for the use case",
         "Shortlist candidate models that satisfy the stated requirements",
         "Evaluate the shortlisted models against the same test criteria",
         "Of the models that pass evaluation, compare footprint and resource efficiency",
         "Record the selection and its tradeoffs in a model card",
-        "Fine-tune the selected model on proprietary customer data"
+        "Fine-tune the selected model on proprietary customer data",
+        "State the accuracy, safety and transparency requirements for the use case"
       ],
       "correct": [
+        5,
         0,
         1,
         2,
-        3,
-        4
+        3
       ],
       "explanation": "Requirements come first, then a shortlist, then a common evaluation, then the environmental and efficiency comparison among survivors, and finally documentation; fine-tuning is an implementation step that happens after the selection review ends.",
       "id": "q382"
@@ -7182,19 +7182,19 @@
       "type": "ordering",
       "question": "Place the steps of rolling out an Amazon Bedrock guardrail in the order the team carries them out.",
       "options": [
-        "The guardrail is created and opens as the automatically created DRAFT version",
         "Safeguards such as content filters, denied topics and grounding are configured on the DRAFT",
         "Candidate inputs and outputs are passed to ApplyGuardrail so the team can see which interventions fire",
         "A numbered version is created from the tested DRAFT",
         "The running workload is pinned to that numeric version rather than to DRAFT",
-        "The guardrail is deleted and re-created at every release so the configuration starts fresh"
+        "The guardrail is deleted and re-created at every release so the configuration starts fresh",
+        "The guardrail is created and opens as the automatically created DRAFT version"
       ],
       "correct": [
+        5,
         0,
         1,
         2,
-        3,
-        4
+        3
       ],
       "explanation": "The guardrail starts life as DRAFT, gets configured, is exercised with ApplyGuardrail to observe the interventions, is published as an immutable numbered version, and only then is that version pinned by the workload, because re-creating the guardrail would discard the tested configuration.",
       "id": "q397"
@@ -7539,19 +7539,19 @@
       "type": "ordering",
       "question": "Place the steps that turn model attributions into a user-facing explanation in the order they occur.",
       "options": [
-        "Compute local attributions for the individual decision",
         "Select the inputs that contributed most strongly to that decision",
         "Rewrite the technical feature names into the user's own terms",
         "Present the reasons alongside the outcome the user received",
         "Attach the explanation to the decision record for later audit",
-        "Retrain the model immediately on the user's feedback"
+        "Retrain the model immediately on the user's feedback",
+        "Compute local attributions for the individual decision"
       ],
       "correct": [
+        5,
         0,
         1,
         2,
-        3,
-        4
+        3
       ],
       "explanation": "The pipeline runs from computation to selection to translation to presentation, with the explanation recorded for audit afterward; retraining on feedback is a separate model-maintenance activity, not part of producing an explanation.",
       "id": "q416"
@@ -7561,17 +7561,17 @@
       "type": "ordering",
       "question": "Place the steps of a licensing and openness due diligence review in the order they occur.",
       "options": [
-        "Identify which candidate models publish open weights, documentation and evaluations",
         "For those models, compare license terms and usage restrictions",
         "Assess what your team can verify independently instead of trusting the provider",
         "Record any remaining reliance on provider-only disclosures in the model card",
-        "Fine-tune the selected model on proprietary customer data"
+        "Fine-tune the selected model on proprietary customer data",
+        "Identify which candidate models publish open weights, documentation and evaluations"
       ],
       "correct": [
+        4,
         0,
         1,
-        2,
-        3
+        2
       ],
       "explanation": "Openness facts are gathered first, then license terms are compared, then the team judges what it can verify itself, and the residual reliance is documented; fine-tuning happens only after the review concludes.",
       "id": "q417"

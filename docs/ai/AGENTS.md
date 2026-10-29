@@ -34,6 +34,7 @@ Nuniversity uses specialized AI agents to generate publication-ready course cont
 | `skill-builder` | Meta-skill for creating new skills | `.opencode/skills/**` |
 | `course-writer` | Generates lesson files | `content/courses/**` |
 | `game-builder` | Generates language activity JSON | `content/languages/**` |
+| `quiz-writer` | Creates and expands exam-blueprint quiz JSON (bootstrap, quota grid, dedup gate, verify, merge) | `content/quizzes/**` |
 | `i18n-translator` | Handles localization | `dictionaries/**` |
 | `platform-engineer` | TypeScript/Next.js guidance | `lib/**`, `src/**` |
 | `mermaid-js` | Creates and validates diagrams | `**/*.md`, `docs/**` |
@@ -322,7 +323,7 @@ Nuniversity uses OpenCode for automated deterministic workflows.
 ```
 .opencode/
 ├── hooks/          # 9 Python-based validation hooks
-├── skills/         # 10 skills (skill-builder, course-writer, game-builder, etc.)
+├── skills/         # 11 skills (skill-builder, course-writer, game-builder, quiz-writer, etc.)
 ├── plugins/        # nuniversity-plugin
 ├── memory/         # MEMORY.md with project state
 └── package.json    # @opencode-ai/plugin dependency

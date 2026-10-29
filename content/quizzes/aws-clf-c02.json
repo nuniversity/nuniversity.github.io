@@ -1,0 +1,2470 @@
+{
+  "id": "aws-clf-c02",
+  "slug": "aws-clf-c02",
+  "kind": "certification",
+  "category": "cloud-computing",
+  "title": "AWS Cloud Practitioner (CLF-C02)",
+  "description": "Exam-style questions for the AWS Certified Cloud Practitioner (CLF-C02) exam covering cloud concepts and economics, security and compliance, AWS global infrastructure and core services, and billing, pricing, and support.",
+  "difficulty": "beginner",
+  "topic": "AWS",
+  "certification": "AWS Certified Cloud Practitioner (CLF-C02)",
+  "durationSeconds": 5400,
+  "passingScore": 70,
+  "mockQuestionCount": 65,
+  "domains": [
+    {
+      "id": "1.0",
+      "name": "1.0 Cloud Concepts",
+      "color": "blue",
+      "subdomains": [
+        "1.1 - Benefits of the AWS Cloud",
+        "1.2 - Design principles of the AWS Cloud",
+        "1.3 - Migration benefits and strategies",
+        "1.4 - Cloud economics"
+      ]
+    },
+    {
+      "id": "2.0",
+      "name": "2.0 Security and Compliance",
+      "color": "purple",
+      "subdomains": [
+        "2.1 - Shared responsibility model",
+        "2.2 - Security, governance, compliance concepts",
+        "2.3 - Access management capabilities",
+        "2.4 - Components and resources for security"
+      ]
+    },
+    {
+      "id": "3.0",
+      "name": "3.0 Cloud Technology and Services",
+      "color": "teal",
+      "subdomains": [
+        "3.1 - Deploying and operating in the cloud",
+        "3.2 - Global infrastructure",
+        "3.3 - Compute services",
+        "3.4 - Database services",
+        "3.5 - Network services",
+        "3.6 - Storage services",
+        "3.7 - AI/ML and analytics services",
+        "3.8 - Other in-scope service categories"
+      ]
+    },
+    {
+      "id": "4.0",
+      "name": "4.0 Billing, Pricing, and Support",
+      "color": "orange",
+      "subdomains": [
+        "4.1 - Compare AWS pricing models",
+        "4.2 - Billing, budget, cost management",
+        "4.3 - Technical resources and AWS Support"
+      ]
+    }
+  ],
+  "allocations": {
+    "1.1 - Benefits of the AWS Cloud": 6,
+    "1.2 - Design principles of the AWS Cloud": 6,
+    "1.3 - Migration benefits and strategies": 6,
+    "1.4 - Cloud economics": 6,
+    "2.1 - Shared responsibility model": 8,
+    "2.2 - Security, governance, compliance concepts": 8,
+    "2.3 - Access management capabilities": 7,
+    "2.4 - Components and resources for security": 7,
+    "3.1 - Deploying and operating in the cloud": 5,
+    "3.2 - Global infrastructure": 5,
+    "3.3 - Compute services": 4,
+    "3.4 - Database services": 4,
+    "3.5 - Network services": 4,
+    "3.6 - Storage services": 4,
+    "3.7 - AI/ML and analytics services": 4,
+    "3.8 - Other in-scope service categories": 4,
+    "4.1 - Compare AWS pricing models": 4,
+    "4.2 - Billing, budget, cost management": 4,
+    "4.3 - Technical resources and AWS Support": 4
+  },
+  "questions": [
+    {
+      "id": "q001",
+      "subdomain": "1.1 - Benefits of the AWS Cloud",
+      "type": "mcq",
+      "question": "A team provisions 150 vCPU against a 100 vCPU peak forecast and averages 15% utilization. Which pair of figures does this illustrate?",
+      "options": [
+        "20%-50% over-provisioning versus peak-predicted demand, and 12%-18% typical on-premises utilization: roughly 85% of the fleet idle",
+        "Elasticity working as designed, with 85% of capacity absorbed by auto scaling",
+        "A rightsizing success: 15% utilization means the estate is correctly sized",
+        "A Spot-instance discount of up to 90% applied to on-demand capacity"
+      ],
+      "correct": 0,
+      "explanation": "AWS documents on-premises procurement as 20%-50% over peak-predicted demand and average server utilization of 12%-18% (with 'under 15%' cited for on-premises data centers). 150 x 0.15 = 22.5 vCPU of useful work, so about 127.5 vCPU (85%) is idle but still paid for: the argument behind 'stop guessing capacity' and behind rightsizing."
+    },
+    {
+      "id": "q002",
+      "subdomain": "1.1 - Benefits of the AWS Cloud",
+      "type": "mcq",
+      "question": "An executive asks why the AWS Cloud can offer lower pay-as-you-go prices than a single company building its own data center. Which statement BEST matches the AWS wording?",
+      "options": [
+        "AWS passes volume discounts on because usage from hundreds of thousands of customers is aggregated in the cloud, producing massive economies of scale",
+        "AWS charges less than cost for compute during off-peak hours",
+        "AWS reuses decommissioned hardware from other customers without warranty",
+        "AWS avoids paying for power and cooling in Regions where energy is cheap"
+      ],
+      "correct": 0,
+      "explanation": "The six advantages state that usage from hundreds of thousands of customers is aggregated in the cloud, and that this lets AWS offer lower pay-as-you-go prices: economies of scale are structural, not a promotion. The other options invent mechanisms AWS does not describe."
+    },
+    {
+      "id": "q003",
+      "subdomain": "1.1 - Benefits of the AWS Cloud",
+      "type": "mcq",
+      "question": "Capital One reports that it 'reduced the average time needed to build a development environment from 3 months to only minutes' after going all in on AWS. In Task 3.1 terms, which explanation matches the skill the exam tests?",
+      "options": [
+        "The workload became a repeatable process: environments are provisioned the same way on demand instead of assembled by hand as one-time operations",
+        "The company adopted multi-cloud, so a second provider could build the development environments in parallel",
+        "The team switched to one-time Console operations, because the AWS Management Console is the most common access method",
+        "AWS took over application optimization, so the environment no longer had to be built at all"
+      ],
+      "correct": 0,
+      "explanation": "The exam-guide skill is to 'evaluate requirements to determine whether to use one-time operations or repeatable processes'. A bespoke, hand-built environment takes as long as the queue and the clicking take; the same environment produced by a repeatable process takes minutes: which is AWS's own IaC argument that you 'write your IaC code once and deploy that same code to hundreds of environments in a fraction of the time'. Multi-cloud needs two or more third-party public providers (Capital One runs on AWS only), the Console suits one-time visual work and would not shrink a 3-month queue, and application optimization never moves to AWS in any column of the responsibility matrix. Figures are AWS-published, customer-claimed, accessed Oct 2026."
+    },
+    {
+      "id": "q004",
+      "subdomain": "1.1 - Benefits of the AWS Cloud",
+      "type": "mcq",
+      "question": "A product team proposes launching Amazon EC2 instances at an AWS edge location so users in remote cities get the lowest possible latency. A solutions architect objects. Which explanation matches AWS documentation as of Oct 2026?",
+      "options": [
+        "Yes: every edge location is a small Region with at least three Availability Zones, so any instance type runs there",
+        "No: edge locations were retired in 2026, and CloudFront now caches only inside Availability Zones",
+        "Yes: Global Accelerator runs 130 edge points that accept EC2 launches for anycast workloads",
+        "No: edge locations give latency and offload for content delivery only; compute runs in Regions and their Availability Zones"
+      ],
+      "correct": 3,
+      "explanation": "The dossier states that the benefits of edge locations are latency and offload for delivery only, and that you cannot launch an EC2 instance at an edge location (CloudFront 750+ PoPs and Global Accelerator 130 PoPs, as of Oct 2026). Option B confuses tiers: the minimum of three isolated, physically separate Availability Zones belongs to a Region, not an edge location. Option C is numeric bait: the true 130 figure is Global Accelerator PoPs, which route traffic rather than host instances. Option D is a stale-version trap: edge locations are current, which is why CloudFront still counts 750+ of them."
+    },
+    {
+      "id": "q005",
+      "subdomain": "1.1 - Benefits of the AWS Cloud",
+      "type": "multi",
+      "question": "A startup writes an internal glossary so its engineers stop mixing four words that the exam keeps apart. Which statements in the glossary are correct?",
+      "options": [
+        "Elasticity means capacity grows AND shrinks automatically as demand changes",
+        "Scalability is the ability to handle growth, with no requirement to shrink",
+        "High availability is reached by spanning multiple Availability Zones to survive a component failure",
+        "Agility is a service a team buys, priced per provisioned unit",
+        "Global reach equals high availability, because both words suggest redundancy",
+        "Agility means deployment time falls from seconds to milliseconds"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The dossier keeps four words apart: elasticity is grow AND shrink automatically, scalability is growth only, high availability is surviving a component failure using multiple Availability Zones, and agility is provisioning speed from weeks to just minutes. Option D fails because agility is an organizational benefit, not a service: teams iterate because the cost of a failed trial is metered. Option E fails because global reach means going global in minutes across Regions, while cross-Region redundancy is disaster recovery, not high availability. Option F fails on the wording: speed of deployment is published as 'from weeks to just minutes' and must never be quoted as seconds."
+    },
+    {
+      "id": "q006",
+      "subdomain": "1.1 - Benefits of the AWS Cloud",
+      "type": "multi",
+      "question": "An analyst refreshes a slide deck of AWS platform and pricing claims before an internal briefing. Which statements are accurate as of Oct 2026?",
+      "options": [
+        "AWS offers over 1,000 fully featured services",
+        "Amazon S3 launched on 14 March 2006 at 15 cents per gigabyte",
+        "Code written for S3 in 2006 must be rewritten before it runs today",
+        "AWS's March 2026 post puts S3 at slightly over 2 cents per gigabyte, roughly 85 percent lower",
+        "AWS describes the platform as offering over 200 fully featured services",
+        "Speed of deployment is published as seconds, not minutes"
+      ],
+      "correct": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "The dossier records the S3 launch on 14 March 2006 at 15 cents per gigabyte, the March 2026 post at slightly over 2 cents per gigabyte (about an 85 percent reduction, as of Oct 2026, verify current pricing before use), and AWS's wording of over 200 fully featured services. Option A is the designed numeric bait: the dossier says a claim of over 1,000 services is easy to eliminate. Option C reverses the fact: the S3 code written in 2006 still works unchanged. Option F repeats the seconds trap, since deployment time is published as weeks to just minutes."
+    },
+    {
+      "id": "q007",
+      "subdomain": "1.1 - Benefits of the AWS Cloud",
+      "type": "ordering",
+      "question": "A study group is rehearsing the six advantages of cloud computing in the order AWS publishes them. Which sequence is correct for the cards on the table?",
+      "options": [
+        "Go global in minutes",
+        "Stop guessing capacity",
+        "Trade fixed expense for variable expense",
+        "Minimize the environmental impact of cloud workloads",
+        "Benefit from massive economies of scale",
+        "Increase speed and agility"
+      ],
+      "correct": [
+        2,
+        4,
+        1,
+        5,
+        0
+      ],
+      "explanation": "The dossier publishes the fixed order: trade fixed expense for variable expense, then benefit from massive economies of scale, then stop guessing capacity, then increase speed and agility, then stop spending money running and maintaining data centers, then go global in minutes. The five keyed cards therefore read 2, 4, 1, 5, 0 in that published order. The distractor card (index 3) is not one of the six: minimizing environmental impact is the Well-Architected Sustainability pillar vocabulary, which is a different list entirely. Two further traps: 'go global in minutes' is last in the published list even though it sits first on the table, and 'stop guessing capacity' is third, not first, so a card layout never decides the answer."
+    },
+    {
+      "id": "q008",
+      "subdomain": "1.1 - Benefits of the AWS Cloud",
+      "type": "matching",
+      "question": "An instructor builds a flash-card deck of the dated global-infrastructure numbers for Domain 1. Match each statement to the figure AWS published as of Oct 2026.",
+      "prompts": [
+        "Number of AWS Regions as of Oct 2026",
+        "Number of Availability Zones as of Oct 2026",
+        "Minimum AZs inside every AWS Region",
+        "Maximum distance between AZs in a Region",
+        "Announced but not yet open as of Oct 2026"
+      ],
+      "options": [
+        "39 Regions",
+        "Three isolated, physically separate AZs",
+        "Two announced Regions: Saudi Arabia and Chile",
+        "Within 100 km (60 miles)",
+        "124 Availability Zones"
+      ],
+      "correct": [
+        0,
+        4,
+        1,
+        3,
+        2
+      ],
+      "explanation": "As of Oct 2026 the dossier lists 39 Regions and 124 Availability Zones, each Region carrying a minimum of three isolated, physically separate AZs all within 100 km (60 miles) of each other, with plans for 2 more Regions (Kingdom of Saudi Arabia and Chile) and 7 more AZs announced but not yet open. Every card is a dated figure, so each answer keeps its Oct 2026 label. The plausible mis-cards are the announced Regions, which students read as already open, and the AZ minimum of three, which is easily confused with the 100 km distance because both describe AZ layout inside one Region."
+    },
+    {
+      "id": "q009",
+      "subdomain": "1.2 - Design principles of the AWS Cloud",
+      "type": "mcq",
+      "question": "A Python team wants to define cloud infrastructure in code but still have AWS provision and configure it natively. Which pairing is correct?",
+      "options": [
+        "AWS CDK: it defines infrastructure in code and provisions it through AWS CloudFormation, in languages including Python",
+        "AWS CloudShell: it runs Python interactively against the AWS APIs",
+        "HashiCorp Terraform; because it is the only AWS-native infrastructure-as-code framework",
+        "AWS Elastic Beanstalk; because it compiles Python into a CloudFormation template"
+      ],
+      "correct": 0,
+      "explanation": "AWS CDK is 'an open-source software development framework for defining cloud infrastructure in code and provisioning it through AWS CloudFormation', with TypeScript, JavaScript, Python, Java, C#/.NET and Go supported (six languages as of Oct 2026). CDK synthesizes a CloudFormation template: it does not rival it. CloudShell is out of scope, Terraform is third-party and platform agnostic (absent from the in-scope list), and Elastic Beanstalk deploys application code rather than compiling infrastructure."
+    },
+    {
+      "id": "q010",
+      "subdomain": "1.2 - Design principles of the AWS Cloud",
+      "type": "mcq",
+      "question": "A platform team must apply an identical networking change every month across 20 AWS accounts, and the change must be auditable. Which approach does Task 3.1 expect?",
+      "options": [
+        "AWS Management Console, because it is the most common method and shows the change visually",
+        "AWS CloudShell, because a browser shell can script the change across accounts",
+        "Infrastructure as code with AWS CloudFormation, because the process is repeatable and the template is a text file you can track and diff",
+        "Amazon EC2, because the change can be made from an instance in each account"
+      ],
+      "correct": 2,
+      "explanation": "The exam-guide skill is to evaluate whether to use one-time operations or repeatable processes. Monthly change across 20 accounts is the definition of repeatable, and AWS says IaC makes environments 'repeatable, reliable, and consistent' and lets you 'write your IaC code once and deploy that same code to hundreds of environments'. The Console suits one-time work, not standardized repetition. CloudShell is on the out-of-scope list, and EC2 is not an access method at all."
+    },
+    {
+      "id": "q011",
+      "subdomain": "1.2 - Design principles of the AWS Cloud",
+      "type": "mcq",
+      "question": "Keeping three hot spare instances idle so a failure never reaches users will be judged how by the Well-Architected pillars?",
+      "options": [
+        "It has no pillar impact; spare capacity is an operations-only concern",
+        "It improves Reliability while worsening Cost Optimization: the pillars trade off and are not interchangeable",
+        "It improves Sustainability because idle instances consume no power",
+        "It improves Security and Cost Optimization simultaneously"
+      ],
+      "correct": 1,
+      "explanation": "Task 1.2 tests 'identifying differences between the pillars'. Spare capacity raises Reliability (failure is absorbed) and lowers Cost Optimization (illustrative 400 USD/month = 4,800 USD/year as of Oct 2026: a teaching figure, not an AWS list price: buys nothing). There is no universally winning pillar: the exam wants a deliberate, measured trade-off."
+    },
+    {
+      "id": "q012",
+      "subdomain": "1.2 - Design principles of the AWS Cloud",
+      "type": "mcq",
+      "question": "Which statement about the AWS Well-Architected Framework is correct?",
+      "options": [
+        "A Well-Architected review is an audit mechanism you pass or fail, and the Well-Architected Tool is billed per review",
+        "It documents best practices for secure, reliable, efficient, cost-effective and sustainable workloads; the review is a constructive conversation, and the Well-Architected Tool is free",
+        "Its six pillars are Business, People, Governance, Platform, Security and Operations",
+        "Its pillars must be satisfied in order, beginning with Cost Optimization"
+      ],
+      "correct": 1,
+      "explanation": "AWS describes the Framework as best practices for secure, reliable, efficient, cost-effective and sustainable workloads, and states a review is 'a constructive conversation ... not an audit mechanism'. The Tool is free and in scope. Option C lists the AWS CAF perspectives, not the Well-Architected pillars, and no pillar has priority."
+    },
+    {
+      "id": "q013",
+      "subdomain": "1.2 - Design principles of the AWS Cloud",
+      "type": "multi",
+      "question": "A reviewer notices that her notes mix three different AWS lists. Which statements correctly keep the three lists apart?",
+      "options": [
+        "The Well-Architected Framework lists six pillars that judge the quality of a workload",
+        "The AWS CAF lists six perspectives that judge organizational readiness",
+        "The Cloud Value Framework has five pillars, and cost savings is only the first of the five",
+        "Governance is a Well-Architected pillar that sits alongside Security and Reliability",
+        "Sustainability is one of the six AWS CAF perspectives",
+        "Scalability is one of the six Well-Architected pillars"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The dossier warns that three lists are never to mix: Well-Architected 6 pillars (workload quality), AWS CAF 6 perspectives (Business, People, Governance, Platform, Security, Operations: organizational readiness), and the Cloud Value Framework 5 pillars, where cost savings (TCO) is only pillar 1 of 5. Option D fails because Governance exists only in the CAF; the six pillars are Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization and Sustainability. Option E fails for the mirror reason: Sustainability is a Well-Architected pillar, not a CAF perspective. Option F is a designed distractor from the dossier: scalability is a Domain 1 cloud benefit, never one of the six pillars."
+    },
+    {
+      "id": "q014",
+      "subdomain": "1.2 - Design principles of the AWS Cloud",
+      "type": "multi",
+      "question": "An SRE team is rewriting its reliability playbook and wants every line traceable to the Well-Architected reliability design principles as of Oct 2026. Which statements belong in that playbook?",
+      "options": [
+        "Configure the workload to recover from failure automatically",
+        "Test recovery procedures instead of assuming they work",
+        "Scale horizontally to increase aggregate workload availability",
+        "Scale vertically first, because vertical scaling is the published principle",
+        "Skip recovery testing in production, because testing risks the customer",
+        "Design for zero downtime, because the framework promises uninterrupted service"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The dossier's five reliability design principles as of Oct 2026 are: automatically recover from failure; test recovery procedures; scale horizontally to increase aggregate workload availability; stop guessing capacity; and manage change through automation, all framed by Werner Vogels's 'Everything fails, all the time' and the need to remove single points of failure. Option D inverts the published wording: the principle is horizontal scaling, which raises aggregate availability. Option E contradicts 'test recovery procedures' outright. Option F is an over-claim: the framework prepares a workload for failure rather than promising uninterrupted service, and availability is a shared responsibility."
+    },
+    {
+      "id": "q015",
+      "subdomain": "1.2 - Design principles of the AWS Cloud",
+      "type": "ordering",
+      "question": "A platform team turns the Well-Architected general design principles into a wall chart. Which sequence matches the published order for the cards shown?",
+      "options": [
+        "Consider evolutionary architectures",
+        "Buy capacity against a three-year forecast",
+        "Stop guessing your capacity needs",
+        "Test systems at production scale",
+        "Automate with architectural experimentation in mind"
+      ],
+      "correct": [
+        2,
+        3,
+        4,
+        0
+      ],
+      "explanation": "The dossier publishes the six general design principles in this order: stop guessing your capacity needs, test systems at production scale, automate with architectural experimentation in mind, consider evolutionary architectures, drive architectures using data, improve through game days. The four keyed cards therefore run 2, 3, 4, 0. The distractor at index 1 is the habit each principle replaces: the dossier says all six principles convert upfront, fixed, idle spend into metered, on-demand, evidence-driven spend, so buying capacity against a forecast is what 'stop guessing your capacity needs' exists to end. The card layout is shuffled, so position on the chart never signals position in the list."
+    },
+    {
+      "id": "q016",
+      "subdomain": "1.2 - Design principles of the AWS Cloud",
+      "type": "matching",
+      "question": "During a Well-Architected workshop each participant describes one worry in plain language. Match each worry to the pillar that owns it.",
+      "prompts": [
+        "Run, monitor and continually improve the workload",
+        "Protect confidentiality, integrity and availability of systems",
+        "Do what the workload should do and recover from failure",
+        "Use computing resources efficiently as needs change",
+        "Avoid unnecessary cost across the workload",
+        "Minimize the environmental impact of cloud workloads"
+      ],
+      "options": [
+        "Operational Excellence",
+        "Reliability",
+        "Sustainability",
+        "Security",
+        "Cost Optimization",
+        "Performance Efficiency"
+      ],
+      "correct": [
+        0,
+        3,
+        1,
+        5,
+        4,
+        2
+      ],
+      "explanation": "The dossier maps the six pillars to what they protect: Operational Excellence runs, monitors and continually improves the workload including automating change and response; Security protects information and systems; Reliability does what the workload is supposed to do and recovers quickly from failure; Performance Efficiency uses computing resources efficiently as demand, technology and business requirements change; Cost Optimization avoids unnecessary cost; Sustainability minimizes environmental impact. The two confusion pairs are deliberate: Security and Reliability both sound like 'resilience', while Sustainability and Cost Optimization both talk about reduction, so the stem's wording decides the pillar. 'Right-sized spend' and 'lower total cost of ownership' are values delivered by Performance Efficiency and Cost Optimization respectively, not spare pillars."
+    },
+    {
+      "id": "q017",
+      "subdomain": "1.3 - Migration benefits and strategies",
+      "type": "mcq",
+      "question": "A question asks: which is NOT one of the 6 Rs for migrating applications to the cloud?",
+      "options": [
+        "Refactor",
+        "Relocate",
+        "Repurchase",
+        "Replatform"
+      ],
+      "correct": 1,
+      "explanation": "The 6 Rs are Rehost, Replatform, Repurchase, Refactor, Retire and Retain. Relocate: the hypervisor-level lift and shift: was added when AWS moved to the 7 Rs in AWS Prescriptive Guidance. It is the designed bait for this exact stem."
+    },
+    {
+      "id": "q018",
+      "subdomain": "1.3 - Migration benefits and strategies",
+      "type": "mcq",
+      "question": "A regulated workload cannot change yet but must be reviewed again in eighteen months. Which migration strategy fits, and which list does it come from?",
+      "options": [
+        "Retire, from the 6 Rs",
+        "Retain, from the 6 Rs (and the 7 Rs)",
+        "Relocate, from the 6 Rs",
+        "Replatform, from the 7 Rs"
+      ],
+      "correct": 1,
+      "explanation": "Retain means 'keep it and revisit later': correct for a critical workload you cannot change now. Retain is in BOTH the 6 Rs (2016 blog) and the 7 Rs (current Prescriptive Guidance). Relocate is the 7 Rs-only strategy, so it cannot come from the 6 Rs; Retire means decommissioning, and Replatform implies an optimization you have just ruled out."
+    },
+    {
+      "id": "q019",
+      "subdomain": "1.3 - Migration benefits and strategies",
+      "type": "mcq",
+      "question": "The exam guide lists 'database replication' as an example of a migration strategy. Which service pair implements it?",
+      "options": [
+        "AWS Migration Hub Refactor Spaces and AWS Transfer Family",
+        "AWS Snowball Edge and AWS Storage Gateway",
+        "AWS Database Migration Service (DMS) for continuous replication and AWS Schema Conversion Tool (SCT) for schema conversion",
+        "AWS Application Migration Service (MGN) and AWS DataSync"
+      ],
+      "correct": 2,
+      "explanation": "Database replication is DMS (continuous replication while the application keeps running) plus SCT (schema and code conversion so the target accepts it). MGN is the rehost tool, not a database tool; Snowball is physical data transfer; Migration Hub Refactor Spaces and AWS Transfer Family are explicitly OUT OF SCOPE for this exam."
+    },
+    {
+      "id": "q020",
+      "subdomain": "1.3 - Migration benefits and strategies",
+      "type": "mcq",
+      "question": "Which list correctly names the six perspectives of the AWS Cloud Adoption Framework (CAF)?",
+      "options": [
+        "Business, People, Culture, Platform, Security, Operations",
+        "Business, Process, People, Platform, Operations, Security",
+        "Business, People, Governance, Platform, Security, Operations",
+        "Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, Sustainability"
+      ],
+      "correct": 2,
+      "explanation": "AWS CAF groups its capabilities in six perspectives: Business, People, Governance, Platform, Security and Operations. Option C is the Well-Architected pillar set. Option D is the six dimensions named by the MAP Assess phase: close, but 'process' is not a CAF perspective and 'Governance' is missing."
+    },
+    {
+      "id": "q021",
+      "subdomain": "1.3 - Migration benefits and strategies",
+      "type": "multi",
+      "question": "A transformation office reports progress against the AWS Cloud Adoption Framework and the Migration Acceleration Program. Which statements are accurate as of Oct 2026?",
+      "options": [
+        "Process is one of the six AWS CAF perspectives",
+        "A CAF-led program targets reduced business risk",
+        "The MAP Assess phase lists Governance among its six dimensions",
+        "A CAF-led program targets improved environmental, social and governance performance",
+        "MAP credit amounts are published by AWS, so quote them in the business case",
+        "A CAF-led program targets increased revenue and increased operational efficiency"
+      ],
+      "correct": [
+        1,
+        3,
+        5
+      ],
+      "explanation": "The dossier names four examinable outcomes of a CAF-led program: reduced business risk; improved ESG performance; increased revenue; increased operational efficiency. Option A fails because the CAF perspectives are Business, People, Governance, Platform, Security and Operations: 'process' belongs to the six MAP Assess dimensions (business, process, people, platform, operations, security), which are explicitly NOT the CAF six. Option C fails for the mirror reason: Governance is missing from the MAP dimension list. Option E violates the dossier warning: AWS publishes only 'financial investments', so no MAP credit amount may ever be quoted."
+    },
+    {
+      "id": "q022",
+      "subdomain": "1.3 - Migration benefits and strategies",
+      "type": "multi",
+      "question": "A logistics company planning a large offline data transfer has read three different AWS pages about AWS Snowball. Which statements are correct as of Oct 2026?",
+      "options": [
+        "One Snowball Edge Storage Optimized device moves approximately 210 TB",
+        "Snowball Edge is currently available to every new AWS customer",
+        "A Snowball job must be completed within 360 days of being prepared",
+        "The device appears on this exam's current in-scope services list",
+        "AWS will discontinue support for Snowball in all AWS commercial Regions on 31 December 2026",
+        "The PDF exam guide still names use of AWS Snowball in Task 1.3"
+      ],
+      "correct": [
+        0,
+        2,
+        4,
+        5
+      ],
+      "explanation": "The dossier's Snowball reality check states that one Snowball Edge Storage Optimized device moves approximately 210 TB (as of Oct 2026), that a job must be completed within 360 days of being prepared, that AWS will discontinue support for Snowball devices in all AWS commercial Regions on December 31, 2026 (GovCloud and ADC Region customers with active jobs unaffected, announcement as of Oct 2026), and that the PDF exam guide names 'use of AWS Snowball' in Task 1.3. Option B fails against the documentation banner that the device is no longer available to new customers. Option D fails because the device is on neither the in-scope nor the out-of-scope list, which makes it a trap in both directions rather than an in-scope answer."
+    },
+    {
+      "id": "q023",
+      "subdomain": "1.3 - Migration benefits and strategies",
+      "type": "ordering",
+      "question": "A program board wants the migration journey drawn in the order AWS publishes it. Which sequence is correct for the cards on the whiteboard?",
+      "options": [
+        "Mobilize",
+        "Retire applications that are no longer useful",
+        "Assess",
+        "Migrate and Modernize"
+      ],
+      "correct": [
+        2,
+        0,
+        3
+      ],
+      "explanation": "The dossier gives the journey as Assess, then Mobilize, then Migrate and Modernize, because the gaps found in Assess have to be closed before migration starts, which is exactly why Mobilize sits between the business case and the first wave. The keyed sequence is therefore 2, 0, 3. The distractor at index 1 is a migration strategy (Retire, one of the 6 Rs), not a phase of the journey, so it belongs in a strategy conversation rather than on the journey timeline. Note also that the board's layout puts Mobilize first and Assess third: card position never overrides the published phase order."
+    },
+    {
+      "id": "q024",
+      "subdomain": "1.3 - Migration benefits and strategies",
+      "type": "matching",
+      "question": "A consultancy maps its delivery teams onto AWS CAF perspectives before a migration engagement. Match each responsibility to the perspective that owns it.",
+      "prompts": [
+        "Strategy, transformation and value realization",
+        "Culture, organization structure and workforce skills",
+        "Maximize benefits, minimize risk and portfolio management",
+        "Scalable hybrid platform, modernization and migration factory",
+        "Services delivered at agreed business levels",
+        "Confidentiality, integrity and availability"
+      ],
+      "options": [
+        "People",
+        "Security",
+        "Operations",
+        "Business",
+        "Governance",
+        "Platform"
+      ],
+      "correct": [
+        3,
+        0,
+        4,
+        5,
+        2,
+        1
+      ],
+      "explanation": "The dossier pairs the six CAF perspectives with their typical owners: Business (CEO, CFO, COO, CIO, CTO: strategy, transformation, value realization), People (HR and culture leads), Governance (risk, finance, compliance), Platform (architects: scalable hybrid platform, modernization, migration factory), Security (CISO and security teams), Operations (IT operations: services delivered at agreed business levels). Two traps decide most misses: 'risk, finance, compliance' belongs to Governance rather than Security, and 'migration factory' belongs to Platform rather than Operations, because Platform owns the build-out machinery of the migration itself. The published capability counts (People 7, Governance 7, Platform 7, Security 9, Operations 9 as of Oct 2026) never substitute for ownership, and no Business-perspective count is published."
+    },
+    {
+      "id": "q025",
+      "subdomain": "1.4 - Cloud economics",
+      "type": "mcq",
+      "question": "A colleague refreshed their notes in 2024. Which statement is TRUE as of October 2026?",
+      "options": [
+        "The Domain 4 support task still names Developer Support and Enterprise On-Ramp as the paid support options candidates must recognize",
+        "Every AWS account gets the legacy 12-month Free Tier with t2.micro, regardless of when the account was created",
+        "AWS Database Savings Plans replaced Compute and EC2 Instance Savings Plans, so the 'up to 72%' Savings Plans figure no longer applies",
+        "Accounts created on or after 2025-07-15 get a 6-month Free Tier plus up to USD 200 in credits, while accounts created before that date keep the legacy 12-month tier"
+      ],
+      "correct": 3,
+      "explanation": "The Free Tier change took effect 2025-07-15: newer accounts get 6 months (or until credits run out) with a USD 100 sign-up credit plus up to USD 100 earned, on t3.micro/t3.small/t4g.micro/t4g.small/c7i-flex.large/m7i-flex.large; older accounts keep the legacy 12-month tier (AWS News Blog, 2025-07-15; EC2 User Guide 'before and after July 15, 2025'). Option A is stale: the current guide's Task 4.3 names Basic Support, AWS Business Support+, AWS Enterprise Support and AWS Unified Operations (classic Developer/Business/Enterprise On-Ramp closed to new subscriptions after 2025-12-02). Option C is false: Database Savings Plans (launched 2025-12-02, up to 35% on a 1-year commitment) are an addition, not a replacement. Free Tier and support-plan behaviour is date-stamped: verify current before use."
+    },
+    {
+      "id": "q026",
+      "subdomain": "1.4 - Cloud economics",
+      "type": "mcq",
+      "question": "AWS's Box case study is titled 'Unpacks over 2.23 USD Million in Savings'. Which breakdown of that total matches the AWS publication (figures as published, accessed Oct 2026)?",
+      "options": [
+        "438,000 USD from rightsizing + 1.1 USD million from storage tiering + 500,000 USD from egress + 192,000 USD from logging",
+        "1,100,000 USD from inter-AZ transfer + 500,000 USD from egress + 438,000 USD from storage + 192,000 USD from logging",
+        "438,000 USD inter-AZ transfer + 1.1 USD million per year internet egress + over 500,000 USD per year storage + 192,000 USD per year logging",
+        "2,230,000 USD from a single Spot-instance commitment that covers all four categories at once"
+      ],
+      "correct": 2,
+      "explanation": "AWS publishes Box's 2.23 USD million as four separate billing concepts: 438,000 USD of inter-AZ data transfer, 1.1 USD million per year of internet egress, over 500,000 USD per year of storage (S3/S3 Glacier tiering), and 192,000 USD per year of logging (AWS case study, accessed Oct 2026). The distractors scramble the pairs, and Option D is wrong twice over: Box's savings came from a Well-Architected review and architecture fixes: the free lever: not from an interruptible-capacity purchase, and no single mechanism produced the total. As with every case study, these are customer-claimed, unaudited figures, never an AWS guarantee."
+    },
+    {
+      "id": "q027",
+      "subdomain": "1.4 - Cloud economics",
+      "type": "mcq",
+      "question": "Canva's AWS-published cost case study (accessed Oct 2026) reports compute costs down 46% in under two years after the company split its workloads across three purchase options: Spot for interruptible free-tier projects, On-Demand plus Savings Plans for steady Pro-user capacity, and Reserved Instances as a fallback. Why is that mix the correct design?",
+      "options": [
+        "Because Reserved Instances commit to a dollar amount per hour while Savings Plans commit to a specific configuration",
+        "Because Savings Plans are always the cheapest option, so any workload not covered by one is automatically overpaying",
+        "Because buying a Savings Plan removes Spot interruption risk whenever both are purchased for the same workload",
+        "Because each option answers a different constraint: Spot buys interruptible capacity at up to 90% off with a two-minute notice, a Savings Plan discounts a steady USD per hour commitment, and On-Demand keeps unmatched spiky capacity flexible"
+      ],
+      "correct": 3,
+      "explanation": "Spot's ceiling: up to 90% off: fits only fault-tolerant, checkpointable work, a Savings Plan commits to usage measured in USD per hour and auto-applies without an exchange, and On-Demand remains the flexible remainder. The second option is wrong because commitment discounts are not cheapest for unpredictable or interruptible work; the third is wrong because Spot usage is explicitly excluded from Savings Plans; the fourth reverses the definitions: a Savings Plan commits to USD per hour, a Reserved Instance commits to a configuration (Standard up to 72%, Convertible up to 66% as of Oct 2026)."
+    },
+    {
+      "id": "q028",
+      "subdomain": "1.4 - Cloud economics",
+      "type": "mcq",
+      "question": "Using the illustrative TCO table in this lesson (on-premises 233,500 USD vs AWS 117,000 USD over five years, migration investment 25,000 USD: teaching figures, as of Oct 2026, not AWS list prices), what are the five-year ROI and the simple payback period?",
+      "options": [
+        "ROI 366%; payback about 5 years",
+        "ROI 49.9%; payback about 5 years",
+        "ROI 49.9%; payback about 13 months",
+        "ROI 366%; payback about 13 months"
+      ],
+      "correct": 3,
+      "explanation": "Net benefit = 116,500 USD - 25,000 USD = 91,500 USD; ROI = 91,500 / 25,000 x 100 = 366%. Average annual saving = 116,500 / 5 = 23,300 USD; payback = 25,000 / 23,300 = 1.07 years, about 13 months. The 49.9% figure is the TCO reduction percentage (116,500 / 233,500), not the ROI: the exam deliberately confuses the two."
+    },
+    {
+      "id": "q029",
+      "subdomain": "1.4 - Cloud economics",
+      "type": "multi",
+      "question": "A finance team builds a five-year cost model before approving an on-premises refresh. Which inputs does Task 1.4 require the model to include?",
+      "options": [
+        "Only the server purchase price compared against an hourly cloud rate",
+        "Hardware and annual maintenance contracts",
+        "Nothing beyond depreciation, because facilities belong to the landlord",
+        "Operating system, hypervisor and application licences",
+        "Space, power and cooling, plus IT labour",
+        "The five-year refresh cycle and the cost of capital"
+      ],
+      "correct": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "explanation": "Task 1.4's named on-premises cost drivers are hardware, annual maintenance, operating system and hypervisor licences, application licences (often the largest single line), space, power and cooling, IT labour, the five-year refresh cycle, six to nine months procurement lead time, 20% to 50% over-provisioning, cost of capital and bandwidth. Option A is the flawed comparison the dossier says AWS warns about: the hidden-inputs example reaches a 193,500 USD subtotal before software licences, the year-5 refresh, cost of capital and bandwidth (illustrative teaching figures, as of Oct 2026, not AWS list prices). Option C fails because space, power and cooling is a named driver, so a model that hands it to the landlord understates the estate."
+    },
+    {
+      "id": "q030",
+      "subdomain": "1.4 - Cloud economics",
+      "type": "ordering",
+      "question": "A cost team drafts the runbook it will follow before renewing any commitment. Which sequence matches the order AWS's FinOps guidance gives for the levers shown?",
+      "options": [
+        "Move fault-tolerant batch work to interruptible capacity",
+        "Commit to a discount before measuring utilisation",
+        "Rightsize against measured utilisation",
+        "Add a commitment discount for steady baseline usage",
+        "Freeze the current instance shapes so the discount applies cleanly"
+      ],
+      "correct": [
+        2,
+        3,
+        0
+      ],
+      "explanation": "The dossier gives the canonical FinOps ordering as rightsizing first, then commitment, then interruptible capacity, because committing to a discount on an oversized instance buys a discount on waste. The keyed sequence is therefore 2, 3, 0. Option 1 commits before measuring, which reverses the order of operations: rightsizing matches instance size and type to measured utilisation while still meeting performance requirements, and only then does a commitment make sense. Option 4 freezes the estate in place, which is the opposite of rightsizing and matches no published step. The table layout puts the last lever at the top, so position on the page never decides rank."
+    },
+    {
+      "id": "q031",
+      "subdomain": "1.4 - Cloud economics",
+      "type": "matching",
+      "question": "A regulated company is deciding how to run licensed software on AWS. Match each need to the option or tool AWS names for it.",
+      "prompts": [
+        "You own the licence and the media, and you own compliance",
+        "Licence cost is bundled into the instance price while it runs",
+        "Rightsizing recommendations plus idle-resource identification",
+        "Licence position tracked across AWS, on-premises and other clouds"
+      ],
+      "options": [
+        "AWS License Manager",
+        "License-included pricing",
+        "AWS Compute Optimizer",
+        "Bring your own licence"
+      ],
+      "correct": [
+        3,
+        1,
+        2,
+        0
+      ],
+      "explanation": "The dossier separates the licensing choices cleanly: with BYOL you bring the licence and the media, you own compliance, and the marginal licence cost is about zero; with license-included pricing the licence is bundled into the instance price, AWS owns licensing compliance, and you pay only while the instance runs. AWS License Manager is the free in-scope tool that tracks licences across AWS, on-premises and other clouds, while AWS Compute Optimizer provides rightsizing recommendations and identifies idle resources. The trap is responsibility flipping in either direction: compliance never moves to AWS when you bring your own licence, and AWS never audits an estate you do not report into License Manager. The illustrative break-even in the dossier (a 150 USD per month licence divided by 0.75 - 0.40 USD per hour, about 428.6 hours or roughly 59 percent uptime, teaching figures as of Oct 2026) only decides which pricing option wins on cost."
+    },
+    {
+      "id": "q032",
+      "subdomain": "2.1 - Shared responsibility model",
+      "type": "mcq",
+      "question": "A new team member summarizes the AWS shared responsibility model as follows. Which statement is correct?",
+      "options": [
+        "AWS is responsible for security in the cloud, and the customer is responsible for security of the cloud",
+        "AWS is responsible for security of the cloud, and the customer is responsible for security in the cloud",
+        "AWS and the customer split security equally, 50/50, regardless of the services used",
+        "The customer is responsible for security of the cloud only when using Amazon EC2"
+      ],
+      "correct": 1,
+      "explanation": "AWS's own wording is security OF the cloud (protecting the infrastructure that runs all AWS services) versus security IN the cloud (the customer's duties, determined by the services selected). The prepositions are fixed, the split is never 50/50: shared controls apply in completely separate contexts: and the customer side exists on every service, not just EC2."
+    },
+    {
+      "id": "q033",
+      "subdomain": "2.1 - Shared responsibility model",
+      "type": "mcq",
+      "question": "A security reviewer claims AWS configures the security group firewall for an Amazon EC2 instance because AWS provides it. What does the shared responsibility model actually say?",
+      "options": [
+        "Correct - AWS provides and configures all firewall components for every service",
+        "Correct: security groups are an inherited control because the firewall is AWS hardware",
+        "Incorrect: the customer is responsible for the configuration of the AWS-provided security group firewall",
+        "Incorrect: security groups are configured by AWS Support on the customer's behalf"
+      ],
+      "correct": 2,
+      "explanation": "AWS's canonical text names it directly: the customer assumes responsibility for the guest OS, associated application software, and the configuration of the AWS provided security group firewall. Providing a capability is not the same as configuring it: the configuration is customer responsibility, which makes security group rules a customer-specific control."
+    },
+    {
+      "id": "q034",
+      "subdomain": "2.1 - Shared responsibility model",
+      "type": "mcq",
+      "question": "A team moves a legacy Oracle database to Amazon RDS Custom because it needs privileged operating-system access. What happens to patching responsibility?",
+      "options": [
+        "AWS still patches the guest OS and the database engine, exactly as with standard Amazon RDS",
+        "The customer manages the host and customizes the OS as in Amazon EC2, so OS patching and database software patching return to the customer",
+        "Neither party patches it: RDS Custom runs without patches by design",
+        "AWS patches the OS only, while a third-party partner patches the database engine"
+      ],
+      "correct": 1,
+      "explanation": "AWS documents RDS Custom as using managed RDS features while the customer manages the host and customizes the OS as in Amazon EC2: and its responsibility table flips OS patching and DB software patching to Customer. That makes 'Amazon RDS means AWS patches everything' a false absolute, which is exactly why RDS Custom appears as a distractor."
+    },
+    {
+      "id": "q035",
+      "subdomain": "2.1 - Shared responsibility model",
+      "type": "mcq",
+      "question": "An Amazon EC2 instance runs a customer application and needs a security patch for its guest operating system. Who is responsible for applying it?",
+      "options": [
+        "AWS, because AWS owns the infrastructure beneath the instance",
+        "The customer, because the guest operating system (including updates and security patches) is customer responsibility",
+        "AWS, because patch management is listed as an AWS-only control",
+        "The customer only if the instance is in a single-tenant Availability Zone"
+      ],
+      "correct": 1,
+      "explanation": "AWS operates and controls components from the host operating system and virtualization layer downward; the customer assumes responsibility for the guest operating system including updates and security patches. Patch management is a SHARED control in separate contexts: AWS fixes flaws in its infrastructure, you fix your guest OS: and Availability Zone tenancy is irrelevant to the boundary."
+    },
+    {
+      "id": "q036",
+      "subdomain": "2.1 - Shared responsibility model",
+      "type": "mcq",
+      "question": "The CLF-C02 exam guide says AWS and customer responsibilities can shift depending on the service used. Which responsibility shifts across Amazon EC2, Amazon RDS and AWS Lambda?",
+      "options": [
+        "Who owns customer data, which is always the customer",
+        "Who configures IAM permissions, which is always the customer",
+        "Who performs guest OS and runtime patching, which is the customer on EC2, AWS on standard Amazon RDS, and AWS (with customer-triggered updates in some Lambda modes) for Lambda",
+        "Who physically secures the data centre, which moves to the customer on serverless services"
+      ],
+      "correct": 2,
+      "explanation": "Task 2.1 explicitly names EC2, RDS and Lambda as shift examples, and what moves is the infrastructure duty: guest OS patching and engine patching. Data ownership, IAM configuration and physical security are fixed anchors: data, IAM and facilities never move across the line."
+    },
+    {
+      "id": "q037",
+      "subdomain": "2.1 - Shared responsibility model",
+      "type": "multi",
+      "question": "After a regional outage review, a resilience lead splits a slide into guarantees on one side and duties on the other. Which entries belong to resiliency OF the cloud, the half AWS commits to itself?",
+      "options": [
+        "Service availability that meets or exceeds AWS Service Level Agreements",
+        "At least three physically separate Availability Zones engineered into every Region",
+        "An N+1 power and cooling standard inside every AWS data centre",
+        "A multi-AZ database topology that your own team switches on",
+        "Quarterly failover tests scheduled and executed by your engineers",
+        "Backup, versioning and replication settings chosen on your storage"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The dossier's resiliency OF the cloud is infrastructure availability meeting or exceeding AWS Service Level Agreements, with at least three physically separate Availability Zones per Region and an N+1 data-centre standard, all engineered by AWS. The three distractors are resiliency IN the cloud: AWS never designs your multi-AZ topology, schedules your failover tests, or picks your backup, versioning and replication settings, because that half is described as customers designing, testing and deploying their own applications."
+    },
+    {
+      "id": "q038",
+      "subdomain": "2.1 - Shared responsibility model",
+      "type": "multi",
+      "question": "A vendor pitch claims managed services absorb every operational chore. The architecture review strikes parts of that list. Which duties still sit with your engineers on every service you run?",
+      "options": [
+        "Classifying the data your application stores before it is uploaded",
+        "Deciding whether stored data is encrypted, and which key type to use",
+        "Granting least-privilege permissions to an IAM role",
+        "Patching the hypervisor that sits beneath your instances",
+        "Applying engine patches to a standard Amazon RDS database",
+        "Sanitizing retired media that held customer data, under NIST 800-88"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The dossier lists six duties that never move off the customer: data classification, identity and access management, OS patching on customer-run layers, network configuration, encryption choices and application security. So classifying stored data, choosing the encryption and key type, and granting permissions stay yours on every service. The distractors are AWS-side infrastructure: AWS owns the hypervisor under your instances, patches the host OS and database engine on standard Amazon RDS, and decommissions media under NIST 800-88 as an inherited physical control."
+    },
+    {
+      "id": "q039",
+      "subdomain": "2.1 - Shared responsibility model",
+      "type": "ordering",
+      "question": "A security operations lead is standing up a fresh account and writes the recurring monitoring checklist for that account. Put these steps in the order the team actually performs them.",
+      "options": [
+        "Review the findings your monitoring tools have collected",
+        "Remediate: rotate keys, tighten rules, patch, close public exposure",
+        "Enable the AWS monitoring tools for this account",
+        "Evidence the work: retain the logs and export reports for auditors",
+        "AWS supplies the monitoring tools the program will call on",
+        "Wait for AWS Support to remediate each finding on your behalf"
+      ],
+      "correct": [
+        4,
+        2,
+        0,
+        1,
+        3
+      ],
+      "explanation": "The dossier's customer-side loop runs AWS supplies the tools, then the CUSTOMER enables them, reviews findings, remediates by rotating, tightening, patching and closing exposure, and finally evidences the work with retained logs and exported reports, before gaps feed back into the next enablement pass. That gives supply, enable, review, remediate, evidence. The decoy fails because the loop is entirely customer-run once the tools exist: findings you never collect are findings nobody remediates, and AWS Support is not a remediation service."
+    },
+    {
+      "id": "q040",
+      "subdomain": "2.1 - Shared responsibility model",
+      "type": "ordering",
+      "question": "A new engineer sketches the responsibility boundary as stacked layers. Reading from the top of the customer's side down to AWS, what is the correct sequence of these four layers?",
+      "options": [
+        "Physical facility: power, cooling and floor security",
+        "Guest operating system: updates and security patches",
+        "Application software your developers write and run",
+        "Host operating system and virtualization layer"
+      ],
+      "correct": [
+        2,
+        1,
+        3,
+        0
+      ],
+      "explanation": "The dossier's canonical sentence gives AWS everything from the host operating system and virtualization layer down to physical security, while the customer takes the guest OS, associated application software and configuration above that line; in stack form layers 3 to 7 are yours and the lower layers are AWS's. Reading top-down therefore gives application software, then guest OS, then host OS plus virtualization layer, then the facility. Placing the facility or the hypervisor on the customer's side reverses the boundary."
+    },
+    {
+      "id": "q041",
+      "subdomain": "2.1 - Shared responsibility model",
+      "type": "matching",
+      "question": "Match each control below to the category AWS's own definitions place it in: inherited, shared in separate contexts, or customer specific:",
+      "prompts": [
+        "Badge readers, guards and cameras at the facility",
+        "Patch management carried out on both sides of the line",
+        "Configuration management applied by both parties",
+        "Awareness and training programs for the workforce",
+        "Data classification, IAM and encryption decisions"
+      ],
+      "options": [
+        "Shared: patch management, separate contexts",
+        "Inherited: fully from AWS, no customer work",
+        "Shared: configuration management, separate contexts",
+        "Customer specific: data, IAM and encryption choices",
+        "Shared: awareness and training, separate contexts"
+      ],
+      "correct": [
+        1,
+        0,
+        2,
+        4,
+        3
+      ],
+      "explanation": "The dossier gives the official wording: inherited controls are those a customer fully inherits from AWS, with physical and environmental controls such as badges, guards, cameras, power and cooling as the canonical example. Shared controls apply to both layers but in completely separate contexts, and there are exactly three: patch management, configuration management, and awareness and training. Customer specific controls cover service and communications protection plus data classification, IAM and encryption decisions, which is why the last prompt lands there rather than on a shared control."
+    },
+    {
+      "id": "q042",
+      "subdomain": "2.2 - Security, governance, compliance concepts",
+      "type": "mcq",
+      "question": "A company wants to stop member accounts from launching resources outside two approved Regions, without granting any new permissions. The organization uses the all-features set. What should you do?",
+      "options": [
+        "Attach a deny-only Service Control Policy at the relevant OU or the root",
+        "Attach an SCP that allows only the two approved Regions, because SCPs grant permissions",
+        "Attach an IAM policy to every user in every member account",
+        "Move the accounts into a new OU, because OU membership itself blocks Region launches"
+      ],
+      "correct": 0,
+      "explanation": "SCPs are a deny-only ceiling: AWS says 'SCPs do not grant permissions', effective permissions are the intersection with IAM, and any Deny anywhere wins. An SCP that says 'allow' changes nothing on its own. OU structure alone never restricts anything, and per-user IAM policies do not give organization-wide governance. Note also that SCPs have no effect on the management account."
+    },
+    {
+      "id": "q043",
+      "subdomain": "2.2 - Security, governance, compliance concepts",
+      "type": "mcq",
+      "question": "A healthcare startup asks whether AWS is HIPAA certified and what it must do to process protected health information. Which response is correct?",
+      "options": [
+        "No cloud service provider can hold a HIPAA certification; AWS will sign a standard BAA that you accept in AWS Artifact, you may use only HIPAA-eligible services for PHI, and you remain responsible for your share of compliance",
+        "Yes: the HIPAA certificate is downloadable from AWS Config conformance packs",
+        "Yes - AWS holds a HIPAA certification in every Region, so no further action is needed once you select a Region",
+        "No - HIPAA applies only to on-premises systems, so the question does not arise on AWS"
+      ],
+      "correct": 0,
+      "explanation": "AWS states explicitly: 'There is no HIPAA certification for a cloud service provider (CSP) such as AWS.' AWS aligns with HHS rules, will sign a standard BAA accepted in AWS Artifact, and only HIPAA-eligible services may process PHI: while the customer keeps its own obligations. Conformance packs are AWS Config artifacts, not certification stores."
+    },
+    {
+      "id": "q044",
+      "subdomain": "2.2 - Security, governance, compliance concepts",
+      "type": "mcq",
+      "question": "A regulated workload must ensure customer data is never stored or processed outside eu-central-1. Which combination BEST enforces this?",
+      "options": [
+        "Enable eu-central-1 and rely on engineers to select it, then monitor with CloudWatch alarms on data transfer",
+        "Download the residency statement from AWS Artifact and file it with the auditor",
+        "A weekly AWS Trusted Advisor refresh plus a conformance pack in the management account",
+        "Control Tower data-residency guardrails (preventive controls delivered as SCPs), the workload isolated in its own account or OU, and cross-Region networking restricted"
+      ],
+      "correct": 3,
+      "explanation": "AWS states that AWS Control Tower provides governance and controls for data residency, and its residency guardrails are preventive controls whose artifact is an SCP: so a Region-leaving action is denied and logged in CloudTrail. Isolating the workload and restricting cross-Region networking complete the control. CloudWatch monitors, Trusted Advisor advises, and Artifact only holds AWS's own documents."
+    },
+    {
+      "id": "q045",
+      "subdomain": "2.2 - Security, governance, compliance concepts",
+      "type": "mcq",
+      "question": "Which statement about AWS Organizations service control policies (SCPs) is correct?",
+      "options": [
+        "An SCP attached to an OU grants the permissions it lists to every IAM role in the accounts beneath it",
+        "SCPs replace IAM entirely, so member-account identity policies become redundant",
+        "SCPs apply only to the management account, because member accounts keep their own policies",
+        "An SCP sets the maximum available permissions: it never grants, an explicit deny at any level wins, and it does not affect users or roles in the management account"
+      ],
+      "correct": 3,
+      "explanation": "AWS states that SCPs provide central control over the maximum available permissions and that no permissions are granted by an SCP: effective permissions are the intersection with identity and resource policies, and a Deny at any level wins. SCPs do not affect users or roles in the management account (only member accounts, including their root user), and IAM remains the layer that actually grants access."
+    },
+    {
+      "id": "q046",
+      "subdomain": "2.2 - Security, governance, compliance concepts",
+      "type": "mcq",
+      "question": "You need AWS's SOC 2 report, its ISO 27001 certificate and a PCI Attestation of Compliance, and you must sign a Business Associate Agreement for your account and 20 member accounts. Where do you go?",
+      "options": [
+        "AWS Artifact: free, self-service on-demand downloads of AWS security and compliance documents plus agreements",
+        "AWS Trusted Advisor: the Security category publishes attestations",
+        "AWS Config: conformance packs export the reports",
+        "AWS Organizations: consolidated billing includes the agreements"
+      ],
+      "correct": 0,
+      "explanation": "AWS Artifact provides on-demand downloads of AWS security and compliance documents (ISO, PCI, SOC reports and certifications from accreditation bodies) free of charge, and it is where you review, accept and track agreements such as the BAA and NDA across accounts in your organization. Trusted Advisor advises, Config evaluates your resources, and Organizations handles structure and billing."
+    },
+    {
+      "id": "q047",
+      "subdomain": "2.2 - Security, governance, compliance concepts",
+      "type": "multi",
+      "question": "A platform team on the Basic support plan drafts an internal memo about AWS Trusted Advisor. Which sentences in that memo survive a fact check as of Oct 2026?",
+      "options": [
+        "The check categories are cost, performance, security, fault tolerance, service limits and operational excellence",
+        "It only advises, because enforcement comes from Config rules, SCPs and Control Tower guardrails",
+        "Basic and Developer plans get console access with manual refresh plus a named subset of checks",
+        "Compliance is the seventh check category added for regulated workloads",
+        "It remediates each failed check automatically without any action from you",
+        "Every plan includes API and CLI access with weekly automatic refresh"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The dossier states Trusted Advisor has exactly six check categories, cost optimization, performance, security, fault tolerance, service limits and operational excellence, so an invented seventh compliance category is false; the service is advisory only, with enforcement coming from Config rules and remediation, SCPs and Control Tower guardrails; and depth is gated by plan, with Basic and Developer getting console only, manual refresh, all service-limit checks and six named checks. The automatic-remediation sentence fails because nothing is enforced, and the API plus weekly-refresh sentence is Business and above, not every plan."
+    },
+    {
+      "id": "q048",
+      "subdomain": "2.2 - Security, governance, compliance concepts",
+      "type": "multi",
+      "question": "A cloud platform group switches AWS Config on across a dozen accounts and writes a short design note for the team. Which claims in that note are accurate?",
+      "options": [
+        "Continuous mode records a configuration item on every change, while Periodic records at best once a day",
+        "The recorder writes configuration items to Amazon S3 and notifies through Amazon SNS",
+        "A conformance pack deploys a bundle of Config rules and remediation actions as one entity",
+        "Managed rules run your own Lambda logic, while custom rules run AWS-published logic",
+        "An aggregator keeps each account's results separate and cannot merge them",
+        "Turning Config off leaves every Trusted Advisor check working unchanged"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The dossier records that the recorder writes configuration items to Amazon S3 and notifies through Amazon SNS, that Continuous mode writes one per configuration change while Periodic writes at best once every 24 hours and only if the resource changed, and that a conformance pack is a collection of AWS Config rules and remediation actions deployed as a single entity. The rule-type claim is inverted: managed rules are AWS-published and custom rules are your own Lambda logic. The aggregator claim is backwards, since an aggregator is precisely one cross-account, cross-Region view, and some Trusted Advisor checks are powered by AWS Config, so switching Config off degrades that advice."
+    },
+    {
+      "id": "q049",
+      "subdomain": "2.2 - Security, governance, compliance concepts",
+      "type": "ordering",
+      "question": "A developer traces how one 1 GB object stays protected under a customer managed KMS key. Put these steps of a write-then-read cycle in order, finishing with what rotation changes.",
+      "options": [
+        "KMS returns a plaintext data key plus that key encrypted under the KMS key",
+        "The wrapped data key is stored alongside the ciphertext of the object",
+        "Rotation rewraps only the data key, so the 1 GB object is never rewritten",
+        "The application encrypts the object with the plaintext key, then discards it",
+        "Later, only the wrapped key returns to KMS, which hands back the plaintext key"
+      ],
+      "correct": [
+        0,
+        3,
+        1,
+        4,
+        2
+      ],
+      "explanation": "The dossier's envelope-encryption sequence: the application calls KMS GenerateDataKey and gets a plaintext data key plus the same key encrypted under the customer managed KMS key, encrypts the 1 GB object with the plaintext key and discards it, stores the wrapped key next to the ciphertext, and later sends only that wrapped key back to KMS Decrypt to recover the plaintext key. Rotating the KMS key changes only the wrapping in that final retrieval, because rotating a key never re-encrypts bulk data, so the decoy about rewriting the object on rotation contradicts the flow."
+    },
+    {
+      "id": "q050",
+      "subdomain": "2.2 - Security, governance, compliance concepts",
+      "type": "ordering",
+      "question": "A governance engineer has 40 member accounts to bring under one audit trail. Put these build-out steps in the order they should be executed.",
+      "options": [
+        "Switch on log-file validation and lock the bucket policy to the service role and organization ID",
+        "Create a multi-Region organization trail from the management account",
+        "Run the lookup query for last quarter's bucket deletions, with principal and source IP",
+        "Point one S3 bucket with a folder per account at the trail, plus one CloudWatch Logs group",
+        "Confirm member administrators can view the trail but cannot stop or edit it"
+      ],
+      "correct": [
+        1,
+        3,
+        0,
+        4,
+        2
+      ],
+      "explanation": "The dossier's evidence build-out starts with the management account creating a multi-Region organization trail, then one S3 bucket with a folder per member account ID plus one CloudWatch Logs group receiving everything, then log-file validation staying on with a bucket policy that admits only AWSServiceRoleForCloudTrail and the organization ID, then member admins seeing but never modifying the trail, and only then an Athena or lookup-events query answering which principal deleted which bucket. Running the query before the trail exists leaves nothing to search, and locking the bucket down before the trail writes to it breaks delivery."
+    },
+    {
+      "id": "q051",
+      "subdomain": "2.2 - Security, governance, compliance concepts",
+      "type": "matching",
+      "question": "Match each recurring auditor question to the AWS service whose job that question actually is:",
+      "prompts": [
+        "Is this alarm breaching its threshold right now?",
+        "How was this resource configured, and has it drifted?",
+        "Where does this account diverge from AWS best practices?",
+        "Which user changed this setting, and when did it happen?",
+        "Pull every service's findings into one security view?"
+      ],
+      "options": [
+        "AWS CloudTrail: who did what, and when",
+        "Amazon CloudWatch: metrics, thresholds and alarms",
+        "AWS Config: configuration state and drift history",
+        "AWS Trusted Advisor: best-practice gap checks",
+        "AWS Security Hub: aggregated findings and standards"
+      ],
+      "correct": [
+        1,
+        2,
+        3,
+        0,
+        4
+      ],
+      "explanation": "The dossier's tool-to-question table keys each one by its verb: CloudWatch answers whether the workload is healthy right now through metrics, thresholds and alarms; Config answers how a resource was configured and whether it drifted; Trusted Advisor answers where the account diverges from AWS best practices including MFA on root; CloudTrail answers who performed what action on which resource and when; Security Hub consolidates findings from GuardDuty and others and checks them against security standards. CloudWatch never answers who acted, Config never answers what is breaching a threshold at this moment, and Trusted Advisor cannot consolidate findings from other services."
+    },
+    {
+      "id": "q052",
+      "subdomain": "2.3 - Access management capabilities",
+      "type": "mcq",
+      "question": "A company has 12 AWS accounts and 400 employees, while a separate consumer app needs customer sign-up and limited access to S3. Which pairing is correct?",
+      "options": [
+        "Employees: IAM Identity Center with permission sets and one login; customers: Amazon Cognito user pool for authentication plus an identity pool for temporary AWS credentials",
+        "Employees: a shared IAM user per department; customers: AWS Directory Service Simple AD",
+        "Employees: Amazon Cognito user pools; customers: IAM Identity Center permission sets",
+        "Employees: IAM users in every account with the same password; customers: root user credentials for the app"
+      ],
+      "correct": 0,
+      "explanation": "IAM Identity Center is the workforce answer: one login across many accounts, federated identity source, permission sets that become roles with temporary credentials. Cognito is customer identity: the user pool is the directory plus authentication (issuing JWTs), and the identity pool exchanges a token for temporary, limited-privilege AWS credentials via STS. Directory Service is enterprise Active Directory, and sharing IAM users: or using root: is never correct."
+    },
+    {
+      "id": "q053",
+      "subdomain": "2.3 - Access management capabilities",
+      "type": "mcq",
+      "question": "A lead proposes attaching a service control policy (SCP) to give an audit team read-only access to a member account. Why is this wrong?",
+      "options": [
+        "SCPs can only be attached to IAM users, not to organizational units",
+        "SCPs never grant permissions: they only filter what an identity in the account could otherwise do, and the audit team still needs an identity or role that allows the actions",
+        "SCPs apply only to the root user of the management account",
+        "SCPs are resource-based policies and therefore cannot name a principal in another account"
+      ],
+      "correct": 1,
+      "explanation": "SCPs are a ceiling: they intersect with whatever the identity is allowed, and they grant nothing on their own. Access still requires an identity-based policy or a role in the member account, plus (for cross-account) an allow on both sides. SCPs attach to OUs, accounts or the root of an organization: not to IAM users."
+    },
+    {
+      "id": "q054",
+      "subdomain": "2.3 - Access management capabilities",
+      "type": "mcq",
+      "question": "A team lead asks which of the following actions can ONLY be performed by the account root user. Which answer is correct?",
+      "options": [
+        "Enabling MFA Delete on an S3 bucket, and creating an administrative IAM user",
+        "Attaching a permissions policy to an IAM group, and closing a standalone account",
+        "Changing the root password and access keys, closing a standalone account, and restoring IAM user permissions after a last-administrator lockout",
+        "Stopping an Amazon EC2 instance and enabling Amazon GuardDuty"
+      ],
+      "correct": 2,
+      "explanation": "Root-only tasks include managing the root credentials themselves, closing or reopening a standalone account, restoring IAM user permissions (the lockout recovery), activating IAM access to billing, viewing certain tax invoices, EC2 Reserved Instances Marketplace registration and S3 MFA Delete. Creating IAM users and attaching policies are normal administrative tasks, and stopping EC2 or enabling GuardDuty never requires root."
+    },
+    {
+      "id": "q055",
+      "subdomain": "2.3 - Access management capabilities",
+      "type": "mcq",
+      "question": "An IAM identity policy allows s3:GetObject on reports/*, but the bucket policy denies s3:* whenever aws:SecureTransport is false, and the request is made over plain HTTP. What is the result?",
+      "options": [
+        "Allowed: the identity policy is evaluated first and identity policies take precedence over resource policies",
+        "Denied - AWS first checks all applicable policies for an explicit Deny, and one Deny beats every Allow",
+        "Allowed: identity-based and resource-based policies are combined by intersection, and the identity Allow is enough",
+        "Denied: all S3 bucket policies automatically deny non-HTTPS requests regardless of any policy content"
+      ],
+      "correct": 1,
+      "explanation": "AWS evaluates by collecting every applicable policy and checking for an explicit Deny first; a single Deny in any applicable document wins over all Allows. Identity and resource policies form a UNION (either can allow), not an intersection, and nothing is denied merely because it is an S3 request: the bucket policy text is what denies it."
+    },
+    {
+      "id": "q056",
+      "subdomain": "2.3 - Access management capabilities",
+      "type": "mcq",
+      "question": "An application running on Amazon EC2 must read objects from one S3 bucket, and no long-term credentials may be shipped with the code. Which design fits the exam's best practice?",
+      "options": [
+        "Create an IAM user with one access key, store the secret in the application configuration, and rotate it once a year",
+        "Create a role that trusts ec2.amazonaws.com with a policy allowing s3:GetObject on that bucket only, and attach it to the instance through an instance profile so temporary credentials are auto-refreshed from the metadata service",
+        "Use the account root access keys so the application never runs out of permissions",
+        "Attach an AWS managed administrator policy to the instance role to avoid future permission changes"
+      ],
+      "correct": 1,
+      "explanation": "Roles plus an instance profile give the workload temporary security credentials that refresh automatically, with a blast radius defined by a narrow policy. Access keys are long-term (maximum two per IAM user) and must not be embedded, root access keys should never exist, and attaching an administrator policy violates the principle of least privilege."
+    },
+    {
+      "id": "q057",
+      "subdomain": "2.3 - Access management capabilities",
+      "type": "multi",
+      "question": "A compliance reviewer audits how the team uses IAM and drafts six statements. Which of them are accurate as of Oct 2026?",
+      "options": [
+        "An IAM group can share one identity policy with several users, but the group holds no credentials and cannot appear as a Principal",
+        "An IAM role pairs a permissions policy with a trust policy and hands out temporary security credentials through AWS STS",
+        "A permissions boundary is a managed policy that sets the maximum an identity policy may grant, and it grants nothing by itself",
+        "A resource-based policy sits on the resource itself, is always inline, and can name a principal in another AWS account",
+        "IAM groups nest up to five levels deep, and every new account ships with a default group of administrators",
+        "Attaching a permissions boundary to the account narrows every existing IAM user policy automatically"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "The dossier's IAM object list keys statements 0 to 3: a group is a collection of users sharing one identity policy, with no credentials, no nesting, no default group and no place as a Principal; a role is a permissions policy plus a trust policy that yields STS temporary security credentials; a boundary is a ceiling that grants nothing on its own; and resource-based policies live on the resource, are inline only and may name a cross-account principal (2.3, IAM objects and boundaries). Statement 4 borrows the five-level nesting limit, which belongs to organizational units in AWS Organizations, not to groups, and no default group exists (numeric bait). Statement 5 flips what a boundary is: because it grants nothing by itself, it cannot narrow anyone's existing policy; its exam job is safe delegation."
+    },
+    {
+      "id": "q058",
+      "subdomain": "2.3 - Access management capabilities",
+      "type": "multi",
+      "question": "A security lead has a backlog of over-broad permissions policies to close this quarter. Which moves actually narrow them?",
+      "options": [
+        "Start from an AWS managed job-function policy, then delete the actions the identity never performs",
+        "Generate a candidate policy from the account's CloudTrail activity with IAM Access Analyzer and trim it to the buckets and actions actually used",
+        "Drop the permissions that last-accessed information shows nobody has used in months",
+        "Attach the same AWS managed administrator policy to every new role, because AWS maintains it and it never needs review",
+        "Rewrite the permissions as inline policies, since inline policies are maintained by AWS on your behalf",
+        "Turn on CloudTrail and wait, because recording API activity revokes the permissions nobody uses"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The least-privilege toolkit in the dossier is exactly 0 to 2: begin from a broad AWS managed job-function policy and carve it down, let IAM Access Analyzer generate a policy from CloudTrail activity and preview exposure, then use last-accessed information to delete permissions nobody uses (2.3, least-privilege narrowing). Option 3 over-claims: AWS managed policies are broad starting points, so attaching an administrator policy everywhere is the opposite of narrowing. Option 4 is a responsibility flip: inline policies are embedded in the principal and deleted with it, and they are dangerous as a default, not AWS-maintained. Option 5 is true-but-irrelevant: CloudTrail records the activity that feeds the next narrowing pass, but nothing in a trail revokes a permission by itself."
+    },
+    {
+      "id": "q059",
+      "subdomain": "2.3 - Access management capabilities",
+      "type": "ordering",
+      "question": "A platform team is writing up how AWS decides whether one API request is allowed. Put the steps in the order AWS evaluates them.",
+      "options": [
+        "Union the identity-based and resource-based allows, because either document can allow the action",
+        "Authenticate the caller, then collect every applicable policy: identity-based, resource-based, SCP, RCP, permissions boundary and session policy",
+        "Intersect the identity policy with the service control policy first, then look for a Deny",
+        "Check every collected policy for an explicit Deny; a single Deny ends the evaluation",
+        "Intersect the union with the ceilings, so the permissions boundary, SCP and RCP must all allow",
+        "Return implicit deny when no policy allows the action"
+      ],
+      "correct": [
+        1,
+        3,
+        0,
+        4,
+        5
+      ],
+      "explanation": "The dossier's evaluation order is: authenticate the caller, gather every applicable policy, let any explicit Deny win immediately, union the identity-based and resource-based allows, then intersect that union with the ceilings (permissions boundary, SCP and RCP must all allow), and fall back to implicit deny when nothing allows (2.3, policy evaluation). Option 2 is the trap step: it looks for the Deny only after an intersection, but AWS first checks all policies for a Deny, and an SCP is a ceiling that intersects later rather than a partner for the identity policy, because service control policies filter and never grant. Option 0 is a true step, but it belongs third, not first: union runs only after the Deny check."
+    },
+    {
+      "id": "q060",
+      "subdomain": "2.3 - Access management capabilities",
+      "type": "ordering",
+      "question": "An outside analytics firm needs read-only access to production account 2222 from its own account 1111. Sequence the build.",
+      "options": [
+        "In account 1111, attach an identity policy to the firm's group allowing sts:AssumeRole on that role ARN",
+        "In account 2222, create AuditorRole whose trust policy allows sts:AssumeRole for account 1111 with an external ID",
+        "In account 1111, create an IAM user per auditor and hand out long-term access keys",
+        "In account 2222, attach the read-only permissions policy to AuditorRole"
+      ],
+      "correct": [
+        1,
+        3,
+        0
+      ],
+      "explanation": "The dossier's cross-account audit role build runs in this order: create the role in 2222 with a resource-based trust policy naming account 1111 and an external ID because a third party is involved, attach the role's read-only permissions policy in 2222, then attach an identity policy in 1111 that allows sts:AssumeRole on that role ARN (2.3, cross-account role). Either policy alone fails: trust without the identity grant returns not authorized to perform sts:AssumeRole, and an identity grant without trust returns you are not authorized. The distractor step is the anti-pattern: long-term access keys shipped to an external firm are exactly what roles replace, since the resulting session is temporary and expires on its own."
+    },
+    {
+      "id": "q061",
+      "subdomain": "2.3 - Access management capabilities",
+      "type": "matching",
+      "question": "Match each credential need the security team describes to the mechanism the exam expects:",
+      "prompts": [
+        "A database password that application code reads when it starts",
+        "A build pipeline parameter injected at deploy time, encrypted at rest",
+        "Long-term CLI access for a legacy tool that cannot assume roles",
+        "A role session that must expire by itself inside 12 hours",
+        "A phishing-resistant factor for administrator sign-in",
+        "Identities that already live in the corporate directory"
+      ],
+      "options": [
+        "STS temporary security credentials",
+        "AWS Directory Service",
+        "Passkey or FIDO security key",
+        "AWS Secrets Manager",
+        "IAM access keys, maximum two per user",
+        "Systems Manager Parameter Store"
+      ],
+      "correct": [
+        3,
+        5,
+        4,
+        0,
+        2,
+        1
+      ],
+      "explanation": "Task 2.3 names credential storage and the authentication options in the dossier: secrets live in AWS Secrets Manager or AWS Systems Manager Parameter Store (SecureString), access keys are long-term with a maximum of two per IAM user, STS temporary credentials last minutes to 12 hours, passkeys and FIDO security keys are the phishing-resistant recommended factors, and Directory Service covers enterprise directory identities (2.3, credential options). The traps: access keys are the legacy fallback, not the answer for a session that must expire, because they are long-term and the secret is shown only once; and SMS MFA is no longer offered in IAM, so any choice resting on text-message codes is stale."
+    },
+    {
+      "id": "q062",
+      "subdomain": "2.4 - Components and resources for security",
+      "type": "mcq",
+      "question": "A security engineer asks which service records every API call made in the account, including the caller, the time and the source IP. Which service BEST answers that question?",
+      "options": [
+        "AWS CloudTrail, because actions taken by a user, role or AWS service are recorded as events",
+        "AWS Trusted Advisor, because it identifies security issues in the account",
+        "Amazon CloudWatch, because it stores every log the account produces",
+        "AWS Config, because it records the state of every resource"
+      ],
+      "correct": 0,
+      "explanation": "CloudTrail records actions: events with an identity, action, time and source: across console, CLI, SDK and AWS-service calls, which AWS names as enabling operational and risk auditing, governance and compliance. CloudWatch handles metrics and alarms, Trusted Advisor recommends fixes, and Config records configuration state rather than API calls."
+    },
+    {
+      "id": "q063",
+      "subdomain": "2.4 - Components and resources for security",
+      "type": "mcq",
+      "question": "A security team wants free, automatic DDoS protection for its AWS workloads with no subscription and no configuration. Which statement matches AWS's documentation?",
+      "options": [
+        "Enable Shield Advanced first, then downgrade to Shield Standard if no attack occurs",
+        "Purchase AWS Firewall Manager, which includes free DDoS protection for all accounts",
+        "Shield Standard is provided automatically and at no extra charge; Shield Advanced is the paid option with a 1-year commitment, DDoS cost protection and the Shield Response Team, which requires Business or Enterprise Support",
+        "Subscribe to Shield Standard and configure its mitigation rules"
+      ],
+      "correct": 2,
+      "explanation": "Shield Standard comes automatically at no extra charge and cannot be subscribed to or configured. Shield Advanced costs 3,000 USD/month per payer with a 1-year commitment (as of Oct 2026), adds automatic Layer 7 mitigation, DDoS cost protection and up to 50 billion WAF requests per month, and its Shield Response Team requires Business or Enterprise Support. Firewall Manager manages policy across an organization; it is not the DDoS protection itself."
+    },
+    {
+      "id": "q064",
+      "subdomain": "2.4 - Components and resources for security",
+      "type": "mcq",
+      "question": "A team provisions 1 AWS WAF web ACL with 5 rules and inspects 10 million requests in a month. Using the pricing components verified for this lesson (as of Oct 2026), what is the monthly total?",
+      "options": [
+        "16.00 USD - 5 USD for the web ACL, 5 USD for the rules and 6 USD for the requests",
+        "11.00 USD: rules are free and only the ACL and requests are billed",
+        "30.00 USD: AWS always bills the published 19-rule example total",
+        "60.00 USD: WAF bills 5 USD per rule plus a flat 55 USD request fee"
+      ],
+      "correct": 0,
+      "explanation": "The verified components are 5.00 USD per web ACL per month, 1.00 USD per rule per month and 0.60 USD per 1 million requests: 5 USD + (5 x 1 USD) + (10 x 0.60 USD) = 16.00 USD. AWS's own worked example with 19 rules and 10 million requests totals 30.00 USD, and security groups and network ACLs remain free: so neither 30.00 USD nor a rule-free total is correct here."
+    },
+    {
+      "id": "q065",
+      "subdomain": "2.4 - Components and resources for security",
+      "type": "mcq",
+      "question": "An auditor asks: 'Was port 3306 open to 0.0.0.0/0 on 1 March, and when did it close?' Which service can answer?",
+      "options": [
+        "AWS Trusted Advisor, because it checks for unrestricted security-group ports",
+        "AWS CloudTrail, because it logs every AuthorizeSecurityGroupIngress call",
+        "Amazon CloudWatch, because it alarms on security-group changes",
+        "AWS Config, because continuous recording stores configuration items that show how the security group was configured over time"
+      ],
+      "correct": 3,
+      "explanation": "This is a configuration-state-over-a-period question, which only AWS Config answers through configuration items captured by the recorder. CloudTrail records that a change was made (the action), Trusted Advisor advises on the current gap, and CloudWatch monitors metrics: none of them reconstruct a duration."
+    },
+    {
+      "id": "q066",
+      "subdomain": "2.4 - Components and resources for security",
+      "type": "mcq",
+      "question": "Which set of statements about AWS KMS key types is correct (as of Oct 2026)?",
+      "options": [
+        "AWS owned keys live in your account and can be deleted on a schedule; customer managed keys are free of monthly charges",
+        "AWS managed keys are stored outside your account and customer managed keys never rotate",
+        "All three key types are identical in control, and only the alias differs",
+        "Customer managed keys carry a monthly fee plus usage charges and give you key-policy control; AWS managed keys use aliases like aws/ebs, rotate about every 365 days, have no monthly key fee and cannot be deleted by you; AWS owned keys are neither visible nor auditable by you"
+      ],
+      "correct": 3,
+      "explanation": "Customer managed keys are yours: key policy control, enable/disable, scheduled deletion and custom rotation, billed monthly (hourly prorated) plus usage. AWS managed keys live in your account under aliases such as aws/ebs, rotate about every 365 days, have no monthly key fee and cannot be edited or deleted by you. AWS owned keys belong to the service's own account: free, invisible and undeletable by you."
+    },
+    {
+      "id": "q067",
+      "subdomain": "2.4 - Components and resources for security",
+      "type": "multi",
+      "question": "A team debugging why its default VPC filtering allows more traffic than expected records six claims. Which are true as of Oct 2026?",
+      "options": [
+        "The default security group allows all outbound traffic and inbound traffic only from itself",
+        "The default network ACL allows all traffic in and out, with its star DENY rules sitting at the bottom of the list",
+        "Neither layer filters DNS, DHCP, the instance metadata service or ECS task metadata",
+        "A security group can reference another security group, while a network ACL cannot",
+        "A deny rule can be added to the security group to block a known-bad range",
+        "The default network ACL denies every packet that no rule explicitly allows, because its star DENY rules evaluate first"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "The dossier's filter defaults and bypasses key 0 to 3: the default security group allows all outbound and inbound only from itself, the default network ACL allows all traffic in and out with the star DENY rules at the bottom of the list, neither layer filters DNS, DHCP, the instance metadata service or ECS task metadata, and only security groups can reference other security groups (2.4, filter defaults). Claim 4 is the layer error the lesson flags as always wrong: security groups are allow-only, so a known-bad range belongs in a network ACL deny rule. Claim 5 reverses the default network ACL twice: it is permissive by default, and although numbered rules with first match are a network ACL property, the star DENY entries sit last, not first."
+    },
+    {
+      "id": "q068",
+      "subdomain": "2.4 - Components and resources for security",
+      "type": "multi",
+      "question": "A holding company wants one rule set pushed to every subsidiary account before those accounts launch workloads. Which statements about AWS Firewall Manager are correct?",
+      "options": [
+        "It requires AWS Organizations to be enabled, and it manages WAF, Shield Advanced, security group and network ACL policies across the organization",
+        "Resources created after a policy is pushed are covered automatically, with no second configuration pass",
+        "It costs 100 US dollars per policy per Region per month as of Oct 2026",
+        "It pushes policy to accounts rather than inspecting packets or filtering traffic itself",
+        "It is free of charge, because Shield Standard already includes organization-wide policy management",
+        "It can be attached to a single IAM user, so only that user's resources receive the rules"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "The dossier describes Firewall Manager as an organization-wide policy pusher: AWS Organizations must be enabled, it manages WAF, Shield Advanced, security group and network ACL policies across the organization, it auto-covers new resources, and it costs 100 US dollars per policy per Region per month as of Oct 2026 (2.4, Firewall Manager). Option 4 pairs a true fact with a false one: Shield Standard is free and automatic, but it is Layer 3/4 DDoS protection, not policy management, so it cannot make a management service free. Option 5 reverses the scope: Firewall Manager works at the organization and OU level through policies, never per IAM user, and its phrasing test is apply this rule set to every account in the organization."
+    },
+    {
+      "id": "q069",
+      "subdomain": "2.4 - Components and resources for security",
+      "type": "ordering",
+      "question": "A solutions architect is sequencing a layered network defence from the outside in. Place the steps in the order the lesson gives.",
+      "options": [
+        "Security group on the database tier allowing 5432 from the application security group only",
+        "Network ACL at the public subnet edge denying a known-bad CIDR in numbered rule 100",
+        "Allow port 22 from 0.0.0.0/0 on the database security group so administrators can connect",
+        "Security group on the application load balancer allowing 443 from 0.0.0.0/0 only",
+        "AWS WAF web ACL on the load balancer with managed rules and a rate-based rule",
+        "Security group on the application tier allowing 8080 from the load balancer security group"
+      ],
+      "correct": [
+        3,
+        5,
+        0,
+        1,
+        4
+      ],
+      "explanation": "The dossier's layered defence runs outermost to innermost: security group on the load balancer for 443, security group on the app tier referencing the load balancer security group, security group on the database for 5432 from the app tier, then the network ACL at the subnet edge with a numbered deny for a known-bad CIDR, then the AWS WAF web ACL on the load balancer (2.4, layered network defence). Security group referencing is what makes step 5 follow step 3, and numbered rules with first-match are a network ACL property, which is why the deny belongs there and not in a security group. The distractor step is disqualified by the defence-in-depth checklist, which scores 0.0.0.0/0 on port 22 as a finding: fix it with a bastion security group or SSM Session Manager instead."
+    },
+    {
+      "id": "q070",
+      "subdomain": "2.4 - Components and resources for security",
+      "type": "matching",
+      "question": "Match each finding the security operations team receives to the AWS service that produces it:",
+      "prompts": [
+        "Correlates CloudTrail, VPC flow logs and DNS logs for threat intel",
+        "Scans workloads and container images for known CVEs and exposure",
+        "Finds sensitive data such as PII and credentials inside S3 buckets",
+        "Builds a behaviour graph so an analyst can trace a root cause",
+        "Consolidates findings, then checks them against security standards"
+      ],
+      "options": [
+        "Amazon Macie",
+        "AWS Security Hub",
+        "Amazon Detective",
+        "Amazon GuardDuty",
+        "Amazon Inspector"
+      ],
+      "correct": [
+        3,
+        4,
+        0,
+        2,
+        1
+      ],
+      "explanation": "The dossier's one-liners decide every pair: GuardDuty detects by correlating CloudTrail management events, VPC Flow Logs and DNS logs with threat intelligence and machine learning; Inspector scans EC2, container images and functions for CVEs and network exposure; Macie finds sensitive data in S3 with machine learning and pattern matching; Detective builds a behaviour graph for investigation; Security Hub aggregates and prioritises findings and checks them against standards (2.4, security service jobs). The mnemonic that stops swaps: GuardDuty detects, Inspector scans, Macie finds sensitive data, Detective explains, Security Hub aggregates. Sibling services lose on the verb: Trusted Advisor only advises and CloudTrail only records, so neither builds a behaviour graph or scans for CVEs."
+    },
+    {
+      "id": "q071",
+      "subdomain": "3.1 - Deploying and operating in the cloud",
+      "type": "mcq",
+      "question": "A checkout service's 95th-percentile latency crosses a threshold your team configured in your own account, and you want a notification plus an automated recovery action. Which service should you use?",
+      "options": [
+        "Amazon CloudWatch: an alarm on your metric with an SNS or EC2 action",
+        "AWS Health Dashboard - Service health view",
+        "AWS Trusted Advisor: cost optimization category",
+        "AWS CloudTrail: event history"
+      ],
+      "correct": 0,
+      "explanation": "CloudWatch is the monitoring answer: alarms watch a metric against a user-defined threshold and fire actions on state change: SNS for notification, plus EC2 stop/terminate/reboot/recover, Auto Scaling, Lambda or an SSM OpsItem. AWS Health covers AWS's own service events, Trusted Advisor reports best-practice gaps, and CloudTrail records who called which API."
+    },
+    {
+      "id": "q072",
+      "subdomain": "3.1 - Deploying and operating in the cloud",
+      "type": "mcq",
+      "question": "A company runs its web tier in AWS while a regulated data store remains in its own virtualized data centre, and both sides are operated as one estate. Which cloud deployment model best describes this?",
+      "options": [
+        "Public cloud, because part of the workload runs in an AWS Region",
+        "Private cloud, because part of the estate is dedicated to a single organization on premises",
+        "Hybrid cloud, because it seamlessly integrates the company's public and private clouds",
+        "Multi-cloud, because two infrastructure platforms are involved"
+      ],
+      "correct": 2,
+      "explanation": "AWS defines hybrid cloud as an IT infrastructure design that seamlessly integrates a company's public and private clouds, and hybrid management 'can be done using services from a single cloud provider'. Two platforms alone do not make multi-cloud: multi-cloud requires services from different THIRD-PARTY cloud providers (two or more public providers). Private cloud describes only the on-premises half, and public cloud describes only the AWS half."
+    },
+    {
+      "id": "q073",
+      "subdomain": "3.1 - Deploying and operating in the cloud",
+      "type": "mcq",
+      "question": "A developer launches Amazon EC2, Amazon RDS and AWS Lambda and asks which service model each illustrates. Which mapping is correct?",
+      "options": [
+        "EC2 = PaaS, RDS = IaaS, Lambda = SaaS",
+        "EC2 = IaaS, RDS = a managed database service where AWS patches the OS and database but application optimization stays with the customer, Lambda = abstracted service where AWS runs the OS and platform",
+        "EC2 = SaaS, RDS = PaaS, Lambda = IaaS",
+        "All three are IaaS because the customer still owns data and IAM in every case"
+      ],
+      "correct": 1,
+      "explanation": "AWS categorizes Amazon EC2 as IaaS and says it 'requires the customer to perform all of the necessary security configuration and management tasks' (guest OS, software, security group configuration). For RDS the matrix gives AWS OS patching, database patching, backups, scaling and high availability, while application optimization stays Customer in every column. Lambda is abstracted: AWS manages the infrastructure, the OS and the application platform; the customer owns code, function IAM and data. Nothing here is SaaS - AWS states it does not offer SaaS services."
+    },
+    {
+      "id": "q074",
+      "subdomain": "3.1 - Deploying and operating in the cloud",
+      "type": "multi",
+      "question": "An audit finds that six months of console tweaks have left a running stack out of step with the CloudFormation template that created it. Which statements guide the team's remediation correctly?",
+      "options": [
+        "Configuration drift means the configuration that provisioned the environment no longer matches the actual environment",
+        "Re-applying the template is the documented remedy, because the template is a text file the team can diff",
+        "Hand-editing the drifted resource back into place re-creates the drift at the next change",
+        "Manual resource creation is error prone, which is why template-managed environments stay repeatable and consistent",
+        "The team must delete the stack first, because CloudFormation cannot reconcile resources it did not just create",
+        "AWS CodeDeploy is the credited tool for detecting and repairing configuration drift"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "The lesson defines configuration drift as the configuration that provisioned your environment no longer matching the actual environment, and the operating rule is to RE-APPLY THE TEMPLATE: the template is a text file you can diff, manual creation is error prone, and a hand edit of the drifted resource simply re-creates the drift. The delete-first option fails because deletion is how a stack removes the resources it created, not how drift is repaired; the stated remedy starts from the template you still have. The CodeDeploy option fails on scope: CodeDeploy sits on the out-of-scope list for CLF-C02, so a deployment-shaped name can never be credited (T3 naming trap)."
+    },
+    {
+      "id": "q075",
+      "subdomain": "3.1 - Deploying and operating in the cloud",
+      "type": "ordering",
+      "question": "A governance reviewer is ranking four deployment targets from the most infrastructure the customer must operate down to the least. Put them in the order the shared responsibility matrix gives, most customer responsibility first.",
+      "options": [
+        "Amazon EC2: AWS owns hardware, power and cooling while the customer patches the guest OS",
+        "On-premises data centre: the customer carries all nine responsibility rows",
+        "AWS Lambda: AWS runs infrastructure, OS and platform; the customer owns code and IAM",
+        "Amazon RDS: AWS adds OS and database patching, backups, scaling and high availability"
+      ],
+      "correct": [
+        1,
+        0,
+        3,
+        2
+      ],
+      "explanation": "AWS's nine-row matrix gives the customer 9 of 9 rows on premises, 6 of 9 on Amazon EC2 (AWS takes server maintenance, hardware lifecycle and power, network and cooling), 3 of 9 on Amazon RDS (AWS adds OS patching, database patching, backups, scaling and high availability), and the abstracted tier for Lambda where AWS runs the infrastructure, OS and platform. So the ladder is on-premises, then EC2, then RDS, then Lambda. Swapping EC2 and RDS fails because it reverses who patches the guest operating system, and putting Lambda before RDS fails because AWS takes strictly more of the stack on the abstracted tier than on the managed database tier; application optimization stays with the customer in every column, so it never reorders the ladder."
+    },
+    {
+      "id": "q076",
+      "subdomain": "3.1 - Deploying and operating in the cloud",
+      "type": "matching",
+      "question": "A platform lead is writing an access standard for the team. Match each situation to the AWS access route the deployment lesson prescribes for it.",
+      "prompts": [
+        "One exploratory change made at 2 a.m. in the browser",
+        "The same change repeated monthly across 20 AWS accounts",
+        "A running application that creates its own bucket",
+        "A shell step wired into a CI pipeline",
+        "A custom tool that signs its own HTTPS requests"
+      ],
+      "options": [
+        "AWS SDK - the application calls AWS from its own code",
+        "AWS CLI - commands run inside a command-line shell",
+        "AWS Management Console - centralized service consoles",
+        "AWS API - signed HTTPS requests sent directly",
+        "Infrastructure as code - a reusable CloudFormation template"
+      ],
+      "correct": [
+        2,
+        4,
+        0,
+        1,
+        3
+      ],
+      "explanation": "Each pair is decided by one qualifier. Exploratory and urgent means one-time work in the AWS Management Console, which IAM calls the most common method. The same change every month across 20 accounts is repeatable, so a CloudFormation template is reused in a consistent and repeatable manner. A running application reaching AWS at runtime uses an AWS SDK, a shell step inside a pipeline uses the AWS CLI, and a custom tool that signs its own HTTPS requests uses the AWS API. A pre-authenticated browser shell would be AWS CloudShell, which is explicitly out of scope for CLF-C02 and therefore never earns credit here."
+    },
+    {
+      "id": "q077",
+      "subdomain": "3.2 - Global infrastructure",
+      "type": "mcq",
+      "question": "A regulated workload must keep all personal data inside a specific national jurisdiction, and the business also wants low latency for local users. Which Region-selection factor takes priority?",
+      "options": [
+        "Price: the Well-Architected cost pillar says to deploy in the cheapest Region available",
+        "Compliance and data residency: a stated legal boundary beats latency and price, with latency as the next consideration",
+        "Service count: always pick the Region with the most services regardless of jurisdiction",
+        "Opt-in status: only the 17 Regions enabled by default may hold regulated data"
+      ],
+      "correct": 1,
+      "explanation": "The Region decision set is compliance/residency, latency, price, features and opt-in status: and a legal or regulatory boundary always wins. COST07-BP02 says the opposite of option A: deploy in higher-cost Regions only when latency, data residency or sovereignty requires it, because pricing differs due to land, fiber, electricity and taxes. Opt-in status determines visibility, not legality, and service availability is a constraint rather than a priority."
+    },
+    {
+      "id": "q078",
+      "subdomain": "3.2 - Global infrastructure",
+      "type": "mcq",
+      "question": "A solutions architect is drawing the AWS global infrastructure for a new team. Which statement is correct as of Oct 2026?",
+      "options": [
+        "Each AWS Region consists of a minimum of three isolated, physically separate Availability Zones, and 124 AZs span 39 launched Regions",
+        "Each AWS Region contains exactly one Availability Zone, and edge locations are additional Availability Zones in other countries",
+        "Availability Zones are physically the same site in every Region, and a Region is a single data centre",
+        "There are more Regions than Availability Zones because every Region must contain at least two Regions"
+      ],
+      "correct": 0,
+      "explanation": "AWS states each Region has a minimum of three isolated, physically separate AZs, and its statistics block reports 124 AZs across 39 launched Regions as of Oct 2026 (plus announced plans for 7 more AZs and 2 more Regions in Saudi Arabia and Chile). Regions cluster multiple data centres, AZs are discrete data centres with independent power, cooling and physical security, and edge locations are delivery points: not AZs."
+    },
+    {
+      "id": "q079",
+      "subdomain": "3.2 - Global infrastructure",
+      "type": "mcq",
+      "question": "An engineer claims to have deployed 'the application across 1,140 edge locations for maximum availability'. Which correction is accurate as of Oct 2026?",
+      "options": [
+        "1,140 is the number of AWS Regions with edge caches; availability is improved by adding more Regions",
+        "1,140+ refers to CloudFront's embedded PoPs inside ISPs: a delivery and caching layer you cannot deploy workloads into; availability comes from running across at least two Availability Zones (of the minimum three per Region)",
+        "1,140 is the Global Accelerator PoP count, and Global Accelerator provides availability by running EC2 instances",
+        "Edge locations are Availability Zones in other countries, so 1,140 edge locations means 1,140 AZs"
+      ],
+      "correct": 1,
+      "explanation": "As of Oct 2026 the counts are: CloudFront 750+ PoPs (100+ cities, 50+ countries), 1,140+ embedded PoPs across 300+ cities, 15 Regional edge caches; Global Accelerator 130 PoPs; Route 53 about 93 locations counted from AWS's feature page (AWS publishes no official total). Edge locations deliver and cache: you cannot launch EC2 there: and workload availability is a job for multiple AZs within a Region."
+    },
+    {
+      "id": "q080",
+      "subdomain": "3.2 - Global infrastructure",
+      "type": "multi",
+      "question": "Two teams in different AWS accounts must place their instances in the same physical data centres, and an Application Load Balancer deployment keeps failing its subnet check. Which statements are correct as of Oct 2026?",
+      "options": [
+        "AZ codes such as us-east-1a are account-relative, so one account's letter can be a different site in another account",
+        "AZ IDs such as euw1-az1 identify the same physical location in every account",
+        "The Application Load Balancer console requires subnets from at least two Availability Zones",
+        "AZ ID tables list 109 AZ IDs across the 34 standard Regions",
+        "us-east-1a names the identical physical data centre in every AWS account",
+        "Every account sees all 39 launched Regions with no opt-in step"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "AZ codes are account-relative: accounts created before November 2025 see different physical data centres for the same letter, while an AZ ID such as euw1-az1 names the same physical location in every account, so a cross-account placement question is answered with AZ IDs. The load balancer check is real: the ALB console enforces subnets from at least two Availability Zones. As of Oct 2026 the AZ ID tables list 109 AZ IDs across the 34 standard Regions. The identical-site option fails because it asserts exactly what account-relative codes deny, and the all-39-Regions option fails twice: a standard commercial account sees 34 Regions (39 minus 2 GovCloud, 2 China and 1 European Sovereign), and only 17 are enabled by default while 17 must be opted into."
+    },
+    {
+      "id": "q081",
+      "subdomain": "3.2 - Global infrastructure",
+      "type": "ordering",
+      "question": "A content team is tracing how a CloudFront delivery actually reaches a user and where the cache tiers sit. Order the steps as the global infrastructure lesson describes them, starting from the user's request.",
+      "options": [
+        "On a cache miss the PoP fetches from your origin, possibly via a Regional edge cache",
+        "The user's browser asks DNS to resolve the site name",
+        "The origin returns the object and caches it for the next request",
+        "DNS resolves the user to the nearest point of presence"
+      ],
+      "correct": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "explanation": "The request path starts with the user asking DNS, then DNS resolves the user to the nearest point of presence, where a cache hit is answered by the PoP itself. On a cache miss the PoP fetches from your origin (Amazon S3, an ALB or a media origin), optionally one tier back through a Regional edge cache, and the origin caches the result for next time. Resolving after the fetch fails because the PoP cannot answer before DNS has pointed the user at it, and treating the Regional edge cache as the front door fails because those 15 caches sit inside a Region, one tier behind the edge PoPs, not in front of them."
+    },
+    {
+      "id": "q082",
+      "subdomain": "3.2 - Global infrastructure",
+      "type": "matching",
+      "question": "A network architect is mapping exam triggers to the right global-infrastructure component. Match each need to the component the lesson pairs it with, using the counts as of Oct 2026.",
+      "prompts": [
+        "Deliver cached content from the nearest point of presence",
+        "Fail over fast on static anycast IPs with no DNS wait",
+        "Resolve a domain name and route by latency or failover",
+        "Run workloads in a fault-isolated unit with its own power",
+        "A delivery tier in front of the Regions where no EC2 runs"
+      ],
+      "options": [
+        "Amazon CloudFront - 750+ PoPs caching at the edge",
+        "Amazon Route 53 - global DNS with latency and failover routing",
+        "AWS Global Accelerator - 130 PoPs and static anycast IPs",
+        "Edge location - a point of presence in front of the Regions",
+        "Availability Zone - fault isolation with independent power"
+      ],
+      "correct": [
+        0,
+        2,
+        1,
+        4,
+        3
+      ],
+      "explanation": "CloudFront is the cache and CDN plane with 750+ PoPs that answer from the nearest point of presence and fetch from an origin on a miss. Route 53 is the DNS plane with latency, failover, geoproximity, weighted and IP-based routing, and its failover speed is bounded by the DNS TTL you configured. Global Accelerator is the anycast IP plane with 130 PoPs and static anycast IPs, so failover never waits on a DNS cache. The Availability Zone is the deployable fault-isolation unit inside a Region, minimum three per Region with independent power, cooling and physical security, while an edge location is a delivery point in front of the Regions where you cannot launch an EC2 instance. Confusing CloudFront with Global Accelerator fails because only CloudFront caches; confusing the edge location with an AZ fails because only the AZ is deployable."
+    },
+    {
+      "id": "q083",
+      "subdomain": "3.3 - Compute services",
+      "type": "mcq",
+      "question": "A company wants container orchestration with no cluster management fee and no worker nodes to patch, using the AWS-native orchestrator. Which combination is correct?",
+      "options": [
+        "AWS Elastic Beanstalk with Amazon Lightsail: both are serverless container platforms",
+        "Amazon ECR with AWS Batch - ECR orchestrates and Batch stores the images",
+        "Amazon ECS with AWS Fargate: no orchestration fee, and Fargate removes node management",
+        "Amazon EKS with the EC2 launch type: EKS has no cluster fee and you patch nothing"
+      ],
+      "correct": 2,
+      "explanation": "ECS is the AWS-native orchestrator and AWS documents no ECS management fee for Fargate or EC2 launch types; Fargate is the serverless compute engine that works with both ECS and EKS, billed per vCPU and per GB of memory per second with a one-minute minimum. EKS is managed Kubernetes and charges 0.10 USD per cluster per hour (standard support), ECR is an image registry rather than an orchestrator, and neither Beanstalk nor Lightsail is a serverless container platform."
+    },
+    {
+      "id": "q084",
+      "subdomain": "3.3 - Compute services",
+      "type": "mcq",
+      "question": "A data engineer sees the instance name `r7g.xlarge` and must confirm what it implies before launching. Which statement is correct?",
+      "options": [
+        "R = memory-optimized family, 7 = generation, g = Graviton (Arm) processor, xlarge = size within the family",
+        "R = reserved instance, 7 = seven-year licence, g = GPU, xlarge = seven times normal memory",
+        "R = storage-optimized family, 7 = number of attached volumes, g = general purpose, xlarge = 4x large disk",
+        "R = running total, 7 = seven Availability Zones, g = glibc-only image, xlarge = extra network bandwidth"
+      ],
+      "correct": 0,
+      "explanation": "AWS names instance types by [series][generation][options].[size]: the first position is the series (R = memory optimized), the second is the generation (higher = newer), the letter suffix is the option (g = Graviton), and everything after the dot is the size. Graviton changes both silicon and operating-system support, so m7i and m7g are not interchangeable."
+    },
+    {
+      "id": "q085",
+      "subdomain": "3.3 - Compute services",
+      "type": "mcq",
+      "question": "An Auto Scaling group is documented with a minimum size of four, a desired capacity of six and a maximum size of twelve. A scaling policy requests that capacity rise by eight instances. What happens?",
+      "options": [
+        "The request fails and the group is deleted because min, desired and max are inconsistent",
+        "Desired capacity becomes fourteen, because policies override the maximum",
+        "Desired capacity is capped at twelve, because the maximum is a hard ceiling",
+        "The group terminates two instances to keep the ratio stable"
+      ],
+      "correct": 2,
+      "explanation": "An Auto Scaling group attempts to maintain its desired capacity, but scaling policies only move desired capacity within the min/max bounds: six plus eight would be fourteen, so the group stops at the maximum of twelve. Minimum four is a floor, maximum twelve is a ceiling; both are respected, and unexpected terminations are replaced rather than causing the group to be deleted."
+    },
+    {
+      "id": "q086",
+      "subdomain": "3.3 - Compute services",
+      "type": "multi",
+      "question": "A team is wiring an AWS Lambda function into an event-driven pipeline and asks which published limits and billing details it must design around. Which statements are correct as of Oct 2026?",
+      "options": [
+        "Memory can be configured from 128 MB to 10,240 MB in 1 MB increments",
+        "The timeout defaults to 3 seconds and can be raised to a maximum of 900 seconds",
+        "Billing is 0.20 USD per 1 million requests plus GB-seconds rounded up to the nearest 1 ms",
+        "Always Free covers 1,000,000 requests and 400,000 GB-seconds per month",
+        "The function runs for up to 15 minutes by default with no timeout change",
+        "AWS Lambda sizes a fixed cluster of servers in advance that the team then manages"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "All four keyed statements are the lesson's dated Lambda figures: memory 128 MB to 10,240 MB in 1-MB steps, a 3-second default timeout with a 900-second ceiling, 0.20 USD per 1 million requests plus GB-seconds rounded to the nearest 1 ms, and an Always Free allocation of 1,000,000 requests plus 400,000 GB-seconds each month. The 15-minute option fails as a numeric bait: 900 seconds is the maximum a team can raise the timeout TO, while the default is 3 seconds, so nothing runs for 15 minutes without a configuration change. The fixed-cluster option fails on the service model: Lambda is serverless and event-driven, invoked directly or through event source mappings, with no servers to provision or manage."
+    },
+    {
+      "id": "q087",
+      "subdomain": "3.3 - Compute services",
+      "type": "ordering",
+      "question": "During a flash sale the operations team watches an Auto Scaling group absorb a traffic spike. Order the steps as the compute lesson describes them, from the metric crossing its threshold to traffic flowing.",
+      "options": [
+        "The policy moves desired capacity inside the configured minimum and maximum",
+        "A traffic spike drives the watched metric past its threshold",
+        "The load balancer takes the new instance and sends traffic only to healthy targets",
+        "An instance launches from the launch template and passes its health check",
+        "The alarm on that metric fires and triggers the group's scaling policy"
+      ],
+      "correct": [
+        1,
+        4,
+        0,
+        3,
+        2
+      ],
+      "explanation": "The sequence is spike, alarm, policy, launch, traffic: the metric crosses its threshold, the CloudWatch alarm fires into the scaling policy, the policy moves desired capacity while respecting the configured minimum and maximum, an instance launches from the launch template (the required input for an Auto Scaling group) and passes its health check, and Elastic Load Balancing then routes traffic only to the healthy targets. Alarm before policy fails because the alarm is what triggers the policy, and traffic before registration fails because routing to an unready instance breaks the guarantee that the balancer sends traffic only to healthy targets; Auto Scaling decides HOW MANY instances exist, while the load balancer decides WHERE the traffic goes."
+    },
+    {
+      "id": "q088",
+      "subdomain": "3.3 - Compute services",
+      "type": "matching",
+      "question": "A finance engineer is pairing each requirement with the EC2 purchasing option that satisfies it. Match them, using the commitment and discount figures as of Oct 2026.",
+      "prompts": [
+        "Unpredictable spiky usage, no commitment, 60-second minimum",
+        "Batch work that can restart after a two-minute notice",
+        "Steady per-hour commitment that must follow the team across Regions",
+        "Bring-your-own-licence work priced per socket or per core",
+        "Capacity reserved in one specific AZ, billed whether used or not",
+        "Fixed configuration for 1 or 3 years plus AZ capacity reservation"
+      ],
+      "options": [
+        "AWS Savings Plans (Compute) - up to 66 percent off",
+        "Dedicated Host - whole-host billing exposing sockets and cores",
+        "Capacity Reservation - On-Demand price with no discount",
+        "On-Demand Instances - pay by hour or second, no commitment",
+        "Spot Instances - up to 90 percent off with a two-minute notice",
+        "Standard Reserved Instance - up to 72 percent off for 1 or 3 years"
+      ],
+      "correct": [
+        3,
+        4,
+        0,
+        1,
+        2,
+        5
+      ],
+      "explanation": "Unpredictable usage with no commitment is On-Demand, which bills by the hour or second with a 60-second minimum. Interruptible batch work that can absorb a two-minute interruption notice is Spot, up to 90 percent off. A steady per-hour commitment that must survive changes of family, Region, operating system, Fargate and Lambda is a Compute Savings Plan, up to 66 percent off. Per-socket or per-core licensing is the Dedicated Host, billed per host with sockets and cores exposed. A reservation of capacity in one specific AZ at the On-Demand price, charged whether or not you use it, is a Capacity Reservation. And a fixed configuration for 1 or 3 years that must also reserve AZ capacity is a Standard Reserved Instance, up to 72 percent off. Two mix-ups fail: Compute Savings Plans give NO capacity reservation, and a Region-scoped Reserved Instance is a discount only, so an AZ requirement selects the options the stem names."
+    },
+    {
+      "id": "q089",
+      "subdomain": "3.4 - Database services",
+      "type": "mcq",
+      "question": "A brand-new application has an unpredictable traffic pattern, no reliable usage history, and the team refuses to pay for throughput while the app is idle. Which DynamoDB configuration should they choose?",
+      "options": [
+        "Provisioned capacity with auto scaling, because provisioned is always cheaper at this scale",
+        "Provisioned capacity with a target utilization of 100%, so no capacity is ever wasted",
+        "On-demand capacity mode, which bills a fixed hourly price whether or not traffic arrives",
+        "On-demand capacity mode: the default, billed per request, which scales to zero when traffic stops"
+      ],
+      "correct": 3,
+      "explanation": "On-demand is DynamoDB's default capacity mode: you pay per request with no capacity planning, the table scales to zero so idle costs nothing, and it can burst instantly to twice the previous peak. Provisioned capacity bills RCU and WCU per hour whether they are used or not: the opposite of the stated requirement: and AWS recommends a 70% auto-scaling target rather than 100%, because a 100% target leaves no headroom for bursts."
+    },
+    {
+      "id": "q090",
+      "subdomain": "3.4 - Database services",
+      "type": "mcq",
+      "question": "A company wants a relational database where AWS owns backups, software patching, automatic failure detection and recovery, while the company keeps responsibility for schema and application tuning. Which option matches AWS's own responsibility table?",
+      "options": [
+        "On-premises hardware: AWS manages the facilities while the customer patches the engine",
+        "Amazon S3 with a SQL layer: AWS patches the engine and the customer owns nothing",
+        "Run PostgreSQL on Amazon EC2, AWS then owns patching and backups",
+        "Amazon RDS - AWS owns scaling, high availability, backups and database/OS patching, and the customer still owns application optimization"
+      ],
+      "correct": 3,
+      "explanation": "In AWS's published comparison, application optimization belongs to the customer in all three columns, while scaling, high availability, backups and database/OS patching belong to AWS for RDS and to the customer for both EC2-hosted and on-premises databases. AWS therefore recommends Amazon RDS as the default for most relational deployments. On EC2 you own patching and backups; on premises you own hardware and power too."
+    },
+    {
+      "id": "q091",
+      "subdomain": "3.4 - Database services",
+      "type": "mcq",
+      "question": "An Amazon RDS primary is at 95% CPU because a reporting job runs heavy SELECTs every night. Management proposes enabling Multi-AZ to fix it. What is the BEST response?",
+      "options": [
+        "Enable Multi-AZ and add a second standby, because standbys double read capacity",
+        "Do nothing: Multi-AZ also scales reads, so the proposal already works",
+        "Enable Multi-AZ: the standby replica absorbs the read traffic automatically",
+        "Create a read replica and point the reporting job at it, because a Multi-AZ standby serves no read traffic"
+      ],
+      "correct": 3,
+      "explanation": "AWS states directly: 'The high availability option isn't a scaling solution for read-only scenarios. You can't use a standby replica to serve read traffic. To serve read-only traffic, use a Multi-AZ DB cluster or a read replica instead.' A Multi-AZ instance standby replicates synchronously and exists only for failover; a read replica replicates asynchronously and accepts SELECTs, which is what the reporting job needs."
+    },
+    {
+      "id": "q092",
+      "subdomain": "3.4 - Database services",
+      "type": "ordering",
+      "question": "A bank is planning a low-downtime exit from an on-premises Oracle database to Aurora. Order the migration steps as the database lesson lays them out, starting with schema conversion.",
+      "options": [
+        "AWS DMS creates source and target endpoints and runs the initial load",
+        "AWS SCT converts the Oracle schema and PL/SQL procedures to PostgreSQL",
+        "The application switches to Aurora once replication lag is effectively zero",
+        "The SCT assessment report flags the objects a human must rewrite",
+        "DMS keeps replicating ongoing changes while replication lag is watched"
+      ],
+      "correct": [
+        1,
+        3,
+        0,
+        4,
+        2
+      ],
+      "explanation": "The lesson's sequence is convert, then move, then cut over: AWS SCT converts the schema and code from one database engine to another and its assessment report lists what it cannot convert, so a human rewrites those objects next. AWS DMS then creates source and target endpoints, performs the initial load, and keeps replicating ongoing changes; once lag is effectively zero the application switches to Aurora. Skipping SCT fails because DMS alone leaves unrunnable SQL in the target, and cutting over before replication settles fails because ongoing changes would still be missing; SCT without DMS leaves an empty target, which is why the conversion step cannot be the whole migration."
+    },
+    {
+      "id": "q093",
+      "subdomain": "3.4 - Database services",
+      "type": "matching",
+      "question": "A data team is choosing a datastore for five workloads. Match each requirement to the service the database lesson names for it.",
+      "prompts": [
+        "Petabyte dashboards aggregating three years of sales",
+        "A shopping cart that must cost nothing while idle",
+        "A rate limiter needing TTLs, sorted sets and automatic failover",
+        "Fraud ring traversal from account to device to IP and back",
+        "A MySQL order system needing AWS-managed patching and backups"
+      ],
+      "options": [
+        "Amazon Neptune - managed graph database for traversals",
+        "Amazon RDS - managed relational engine with AWS backups",
+        "Amazon Redshift - columnar OLAP warehouse for analytics",
+        "Amazon ElastiCache - in-memory store with Redis OSS",
+        "Amazon DynamoDB - NoSQL in on-demand capacity mode"
+      ],
+      "correct": [
+        2,
+        4,
+        3,
+        0,
+        1
+      ],
+      "explanation": "Aggregating years of history at petabyte scale is OLAP, so Amazon Redshift, the columnar warehouse filed under Analytics with Spectrum for files in Amazon S3. A cart with unpredictable spikes, no joins and zero idle cost is Amazon DynamoDB in on-demand capacity mode, which scales to zero and bills per request. TTLs, sorted sets and automatic failover belong to Amazon ElastiCache with the Redis OSS or Valkey engine; a fraud ring traversed account to device to IP is a graph walk, so Amazon Neptune; and a MySQL order system that wants AWS to own patching, backups and Multi-AZ failover is Amazon RDS. Two near misses fail: Redshift omits OLTP features such as efficient single-row manipulation, and ElastiCache is an ephemeral cache that is never the system of record."
+    },
+    {
+      "id": "q094",
+      "subdomain": "3.4 - Database services",
+      "type": "multi",
+      "question": "A team is sizing Amazon Aurora for a 120 TiB relational estate with a heavy read tail and wants to know which published behaviours it may design around. Which statements are correct as of Oct 2026?",
+      "options": [
+        "The single cluster volume auto-grows to 256 TiB and is independent of the database instances",
+        "Aurora is compatible with MySQL and PostgreSQL and provisions through the RDS console, CLI and API",
+        "The cluster supports up to 15 Aurora Replicas reading from the shared volume",
+        "I/O-Optimized becomes worth switching to when I/O spending is 25 percent or more of Aurora DB spend",
+        "Failover takes about five minutes because three Availability Zones must re-synchronise",
+        "Storage grows only in manual 10 GB steps that the team must request"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Those four statements are the dossier's dated Aurora facts: one cluster volume replicated across three Availability Zones, independent of the instances, auto-growing to 256 TiB; MySQL and PostgreSQL compatibility provisioned through the same RDS console, CLI and API; up to 15 Aurora Replicas; and the 25 percent I/O-spend rule for I/O-Optimized. The five-minute failover option fails on numbers: AWS reports failover typically under 60 seconds and often under 30 seconds, with replica rebuild typically under 10 minutes, so five minutes is invented. The manual 10 GB option fails as a sibling-service trap: the 10 GB storage step belongs to Amazon DocumentDB, and even there growth is automatic rather than requested, while Aurora's own storage simply auto-grows."
+    },
+    {
+      "id": "q095",
+      "subdomain": "3.5 - Network services",
+      "type": "mcq",
+      "question": "A financial workload requires a dedicated private connection to an on-premises data center with consistent bandwidth, bypassing internet service providers in the network path. Which service should the architect select?",
+      "options": [
+        "AWS Site-to-Site VPN: two IPsec tunnels established over the public internet in minutes",
+        "AWS Direct Connect: a dedicated private connection with consistent bandwidth",
+        "AWS Client VPN: a managed remote-access VPN for individual users",
+        "AWS Transit Gateway: a hub that interconnects VPCs and on-premises networks"
+      ],
+      "correct": 1,
+      "explanation": "Direct Connect is the dedicated private link that bypasses ISPs and provides consistent bandwidth; note that it is NOT encrypted by default. Site-to-Site VPN is the fast, always-encrypted, best-effort option with two tunnels of up to 1.25 Gbps each. Client VPN serves individual laptops, and Transit Gateway is the many-VPC-plus-on-premises hub rather than a dedicated point-to-point circuit."
+    },
+    {
+      "id": "q096",
+      "subdomain": "3.5 - Network services",
+      "type": "mcq",
+      "question": "A private subnet must read objects from Amazon S3 with no internet gateway, no NAT gateway and no public IP addresses, at zero hourly and zero per-GB endpoint charge. Which option fits?",
+      "options": [
+        "An interface endpoint (AWS PrivateLink) for Amazon S3 in each Availability Zone",
+        "A gateway VPC endpoint for Amazon S3, whose route is added to the subnet's route table, with no hourly charge and no per-GB charge",
+        "A NAT gateway in the public subnet plus an internet gateway route",
+        "A VPC peering connection with a VPC that already has internet access"
+      ],
+      "correct": 1,
+      "explanation": "Gateway VPC endpoints are available only for Amazon S3 and Amazon DynamoDB, require no internet gateway or NAT device, and cost nothing hourly or per GB. Interface endpoints charge roughly 0.01 USD per hour per Availability Zone plus 0.01 USD per GB processed, NAT gateways add both an hourly and a per-GB charge, and peering never provides edge-to-edge internet access."
+    },
+    {
+      "id": "q097",
+      "subdomain": "3.5 - Network services",
+      "type": "mcq",
+      "question": "Instances in a private subnet must download operating-system patches, but nothing on the internet must be able to reach those instances. Which design meets the requirement?",
+      "options": [
+        "Attach an internet gateway to the VPC and add a 0.0.0.0/0 route to the internet gateway in the private subnet's route table",
+        "Place a NAT gateway with an Elastic IP in a public subnet and point the private subnet's 0.0.0.0/0 route at it, giving outbound-only access",
+        "Assign public IPv4 addresses to the instances and open port 22 in their security group",
+        "Peer the private VPC with a third VPC that has internet access, using edge-to-edge routing"
+      ],
+      "correct": 1,
+      "explanation": "A NAT gateway is outbound-only: external services cannot initiate a connection with the private instances, while the instances can still reach the internet. Adding an internet gateway route would make the subnet public, assigning public IPv4 addresses exposes the instances, and peering never grants edge-to-edge access: a peer cannot borrow another VPC's internet gateway."
+    },
+    {
+      "id": "q098",
+      "subdomain": "3.5 - Network services",
+      "type": "multi",
+      "question": "Two application teams have built separate VPCs and propose relaying traffic through a third VPC so that the three networks behave as one fabric. Which statements about that design are accurate as documented?",
+      "options": [
+        "A peering connection is strictly one-to-one, and transitive peering relationships are not supported",
+        "Overlapping CIDR blocks cannot be peered, and a peer cannot borrow your internet gateway",
+        "A peering request that nobody accepts expires after 7 days",
+        "Creating a peering connection charges an hourly fee for as long as the connection exists",
+        "A peer VPC can route through your NAT gateway, giving the pair edge-to-edge internet access",
+        "AWS Transit Gateway is charged 0.01 US dollars per attachment-hour"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The dossier's peering facts make the first three statements true: peering is a strict one-to-one relationship with no transitive peering, overlapping CIDRs are rejected, there is no edge-to-edge (a peer cannot use your internet gateway, NAT gateway, VPN, Direct Connect or gateway endpoint), and an unaccepted request expires after 7 days. The hourly-fee option fails because creating the peering connection is free; only cross-AZ data transfer through it bills, at 0.01 US dollars per GB with same-AZ transfer free. The NAT gateway option is the responsibility flip the lesson warns about: NAT is outbound for your own subnets and never a service a peer may borrow. Transit Gateway bills 0.05 US dollars per attachment-hour (about 36.50 US dollars per month), so 0.01 is the numeric bait attached to a true service name."
+    },
+    {
+      "id": "q099",
+      "subdomain": "3.5 - Network services",
+      "type": "matching",
+      "question": "Match each traffic-shaping requirement to the Amazon Route 53 routing policy that implements it: five trigger phrases teams routinely mix up:",
+      "prompts": [
+        "Active-passive service with a health check on the primary",
+        "Canary release sending 10 percent of traffic to a new build",
+        "Reply with up to eight healthy records picked at random",
+        "Send each user to the Region that serves them lowest latency",
+        "Route by the country the requester IP address resolves to"
+      ],
+      "options": [
+        "Weighted routing",
+        "Latency routing",
+        "Failover routing",
+        "Geolocation routing",
+        "Multivalue answer routing"
+      ],
+      "correct": [
+        2,
+        0,
+        4,
+        1,
+        3
+      ],
+      "explanation": "Route 53 has exactly eight routing policies and each has one trigger phrase: active-passive plus a health check on the primary selects failover; in the proportions that you specify (canary and A-B splits) selects weighted; up to eight healthy records returned at random selects multivalue answer, a DNS-level alternative to a load balancer; multiple Regions with best latency selects latency; and the location of your users selects geolocation. The plausible mix-ups fail on their qualifiers: geoproximity routes by the location of your resources with a bias, not by the requester country; simple routing is one resource with no health check, so it cannot do active-passive; and multivalue cannot replace Elastic Load Balancing when the stem asks for path-based routing or connection draining."
+    },
+    {
+      "id": "q100",
+      "subdomain": "3.6 - Storage services",
+      "type": "mcq",
+      "question": "A Linux application needs a boot volume, sustained database IOPS, and the ability to snapshot for restore. Which block-storage answer is correct?",
+      "options": [
+        "Instance store, because it offers the highest local I/O and survives an instance stop",
+        "An st1 throughput-optimized HDD volume, because HDD is always the cheapest boot option",
+        "A gp3 volume for boot plus io2 where a provisioned IOPS ceiling is required, backed by incremental snapshots",
+        "An S3 Glacier Deep Archive mount, because archive classes can be attached to EC2"
+      ],
+      "correct": 2,
+      "explanation": "gp3 is the default boot-capable SSD with 3,000 IOPS and 125 MiB/s at any volume size; io1/io2 (io2 Block Express up to 256,000 IOPS, 99.999% durability) answer a mission-critical IOPS ceiling. Snapshots are incremental and AWS does NOT automatically back up EBS volumes. Instance store loses all data when the instance is stopped and cannot be snapshotted, st1 and sc1 cannot be boot volumes, and S3 cannot be mounted as a block device."
+    },
+    {
+      "id": "q101",
+      "subdomain": "3.6 - Storage services",
+      "type": "mcq",
+      "question": "An operations team needs to overwrite-and-audit objects, automatically delete expired ones, and make sure deleting an object does not destroy its history. Which combination delivers that?",
+      "options": [
+        "Enable versioning for history, add a lifecycle rule with expiration and noncurrent-version expiration actions, and rely on delete markers instead of hard deletes",
+        "Enable replication only, because replication deletes old versions automatically",
+        "Turn off encryption, because encrypted objects cannot be expired",
+        "Use S3 One Zone-IA, which stores a second copy in another AZ"
+      ],
+      "correct": 0,
+      "explanation": "Versioning can never be reversed once enabled, a delete only adds a delete marker so prior versions remain, lifecycle expiration actions delete expired objects on your behalf and NoncurrentVersionExpiration clears old versions (every version is billed in full). Replication requires versioning on both ends and replicates deletions, so it is not a backup; encryption state is irrelevant to expiry and encrypted objects stay encrypted; One Zone-IA uses one AZ, not two."
+    },
+    {
+      "id": "q102",
+      "subdomain": "3.6 - Storage services",
+      "type": "mcq",
+      "question": "Data-lake objects have an unknown and changing access pattern, and the team refuses to pay per-gigabyte retrieval fees. Which S3 storage class fits?",
+      "options": [
+        "S3 Standard-IA, because infrequent access is always cheaper",
+        "S3 Glacier Deep Archive, because it is the cheapest class overall",
+        "S3 Intelligent-Tiering, which moves objects automatically and charges no retrieval fees",
+        "S3 One Zone-IA, because one Availability Zone reduces cost without affecting durability"
+      ],
+      "correct": 2,
+      "explanation": "Intelligent-Tiering is designed for unknown or changing patterns: objects move to Infrequent Access after 30 days and to Archive Instant after 90 days, with no retrieval fees and only a small per-object monitoring charge. Standard-IA and One Zone-IA both charge retrieval fees and both require a 30-day minimum storage duration; Deep Archive is the cheapest but requires up to hours to restore; and One Zone-IA keeps 11-nines durability while dropping availability to 99.5% by using a single AZ."
+    },
+    {
+      "id": "q103",
+      "subdomain": "3.6 - Storage services",
+      "type": "multi",
+      "question": "A marketing team wants to publish a static brochure site from Amazon S3 and asks an architect to confirm the defaults, the public-access posture and the HTTPS story. Which statements are accurate?",
+      "options": [
+        "An S3 static website needs an index document, Block Public Access turned off and a public-read s3:GetObject grant",
+        "S3 static websites serve only HTTP endpoints, so HTTPS requires a CDN such as Amazon CloudFront",
+        "SSE-S3 has been the default encryption configuration for every bucket since 5 January 2023 at no extra charge",
+        "A new bucket starts open to the internet, because public access is an opt-out setting",
+        "SSE-KMS reuses the S3 default key, so it never adds a key charge",
+        "The bucket Region can be changed later, because only the bucket name is global"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "All three keyed statements come straight from the storage dossier: a static website requires an index document plus Block Public Access off and a public-read s3:GetObject grant; static websites support only HTTP endpoints, so HTTPS needs CloudFront in front; and SSE-S3 has encrypted every new object by default since 5 January 2023 at no extra cost. The open-by-default option reverses the real posture, because a bucket is private by default with Block Public Access on and ACLs off. The SSE-KMS option is numeric bait: SSE-KMS adds per-key cost, SSE-C brings your own key, and only SSE-S3 is free. The Region option fails because a bucket Region is fixed at creation even though the globally unique name suggests otherwise, which is why the exam's Region choice comes before the bucket is created."
+    },
+    {
+      "id": "q104",
+      "subdomain": "3.6 - Storage services",
+      "type": "matching",
+      "question": "Match each file requirement to the AWS service that satisfies it: the file and gateway answers this exam expects:",
+      "prompts": [
+        "Lift and shift a Windows file server with AD and NTFS permissions",
+        "One NFS file system mounted by hundreds of Linux containers",
+        "NFS and SMB from a single engine for a mixed protocol team",
+        "An on-premises share whose saved files land as S3 objects",
+        "A virtual tape library that archives to Glacier over time"
+      ],
+      "options": [
+        "Amazon EFS",
+        "Amazon FSx for Windows File Server",
+        "Amazon S3 File Gateway",
+        "Amazon FSx for NetApp ONTAP",
+        "AWS Storage Gateway Tape Gateway"
+      ],
+      "correct": [
+        1,
+        0,
+        3,
+        2,
+        4
+      ],
+      "explanation": "Each prompt carries the qualifier that picks its service: Windows with Active Directory and NTFS ACLs is FSx for Windows File Server; a POSIX NFS file system shared by many Linux containers is Amazon EFS, which is Regional across at least three Availability Zones; NFS plus SMB from one engine is FSx for NetApp ONTAP; a local share whose files become S3 objects with the path as the key is the S3 File Gateway; and a virtual tape library archiving into Glacier Flexible Retrieval or Deep Archive is the Tape Gateway. The traps are layer and scope errors: Amazon EFS is not supported with Microsoft Windows, so it cannot answer the lift-and-shift prompt, and FSx for Lustre is on the out-of-scope list, so no option may credit it even though it is a real FSx engine."
+    },
+    {
+      "id": "q105",
+      "subdomain": "3.7 - AI/ML and analytics services",
+      "type": "mcq",
+      "question": "A support team wants the sentiment and key phrases of thousands of free-text tickets, with no ML experience. Which in-scope service fits?",
+      "options": [
+        "Amazon Comprehend, a natural language processing service that finds sentiment, entities and PII in text",
+        "Amazon SageMaker AI, because every ML task requires building a model",
+        "Amazon Textract, because the tickets contain unstructured text",
+        "Amazon Rekognition, because it analyses support content"
+      ],
+      "correct": 0,
+      "explanation": "Comprehend is the NLP service for sentiment, entities, key phrases and PII in text: no ML expertise required. Rekognition handles images and video, Textract extracts text, handwriting and data from scanned documents, and SageMaker AI is for building, training and deploying your own models rather than calling a pre-trained API."
+    },
+    {
+      "id": "q106",
+      "subdomain": "3.7 - AI/ML and analytics services",
+      "type": "mcq",
+      "question": "Analysts need ad-hoc ANSI SQL directly over objects in Amazon S3, with cost proportional to the data actually read. Which service and cost driver apply?",
+      "options": [
+        "Amazon Quick Sight at 3 USD per user per month for each analyst",
+        "Amazon EMR at a per-second rate with a one-minute minimum",
+        "AWS Glue at 0.44 USD per DPU-hour, because SQL over S3 requires an ETL cluster",
+        "Amazon Athena at 5.00 USD per terabyte scanned, with a 10 MB minimum per query"
+      ],
+      "correct": 3,
+      "explanation": "Athena is serverless ANSI SQL over S3 priced per query at 5.00 USD per TB of data scanned with a 10 MB minimum, and DDL plus failed queries cost nothing (as of Oct 2026). Glue catalogs and transforms rather than answering SQL, EMR is a cluster you operate, and Quick Sight is the dashboard layer on top: none of them bills by data scanned."
+    },
+    {
+      "id": "q107",
+      "subdomain": "3.7 - AI/ML and analytics services",
+      "type": "multi",
+      "question": "A media company needs labels for uploaded photos, a chatbot on its support site, and an in-house model that forecasts churn from its own transaction history. Which statements are accurate?",
+      "options": [
+        "Amazon Rekognition labels and detects objects in the uploaded images and video",
+        "Amazon Lex builds the conversational interface and is the technology that powers Amazon Connect",
+        "The churn forecast should call a pre-trained API instead of training a model",
+        "Amazon SageMaker AI is where the team builds, trains and deploys its own model",
+        "Amazon Q is the service chosen to build a custom forecasting model from company data",
+        "Amazon Textract labels objects in the uploaded video frames"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "The dossier's ML tiering rule decides every option: images go to Rekognition (computer vision), the chatbot goes to Lex (conversational interfaces, and the same technology behind Amazon Connect), and a model built from the company's own data goes to Amazon SageMaker AI, whose AWS wording is build, train and deploy ML models. The pre-trained-API option inverts the rule for this third need, because a custom forecast on proprietary data is the build-your-own case, while the pre-trained tier covers Rekognition, Comprehend, Textract, Transcribe, Translate, Polly and Lex. Amazon Q is generative-AI assistants (Q Business and Q Developer), not a modeller, so it cannot own the churn model. Textract extracts text, handwriting and data from scanned documents; it never labels video frames."
+    },
+    {
+      "id": "q108",
+      "subdomain": "3.7 - AI/ML and analytics services",
+      "type": "ordering",
+      "question": "A product team is building a serverless analytics path for clickstream records, from the moment the application writes a line to the moment an executive sees a chart. Put the documented pipeline in order and drop the step that does not belong:",
+      "options": [
+        "AWS Glue crawlers catalog the landed objects as tables",
+        "Amazon EMR provisions a Hadoop cluster to clean the raw records",
+        "Amazon Kinesis Data Streams receives the ordered event log",
+        "Amazon Athena runs SQL over the cataloged tables",
+        "Amazon Data Firehose batches records and writes them to Amazon S3",
+        "Amazon Quick Sight builds the executive dashboard"
+      ],
+      "correct": [
+        2,
+        4,
+        0,
+        3,
+        5
+      ],
+      "explanation": "The documented serverless analytics pipeline is: records are produced, Amazon Kinesis Data Streams receives them in ordered shards, Amazon Data Firehose batches and writes them to Amazon S3 with no consumer code to write, an AWS Glue crawler catalogs the objects as tables, Amazon Athena runs ANSI SQL over that cataloged data, and Amazon Quick Sight draws the dashboard. Amazon EMR is the step that does not belong: it is a managed Hadoop, Spark, Hive and Presto cluster you operate for big-data processing, and it is not part of this documented chain, so leaving it out is what the ordering tests. Skipping the Glue step is the classic failure, because Athena can only query tables it can see and the Glue Data Catalog is how it sees them, while Glue itself never answers a query."
+    },
+    {
+      "id": "q109",
+      "subdomain": "3.7 - AI/ML and analytics services",
+      "type": "matching",
+      "question": "Match each language, speech or document task to the pre-trained AI service that performs it, with no model training:",
+      "prompts": [
+        "Pull text, handwriting and form fields out of scanned pages",
+        "Turn a recorded podcast into timestamped written text",
+        "Narrate a training video in a lifelike synthetic voice",
+        "Localise the help centre into other languages on demand",
+        "Flag entities and sensitive details inside chat transcripts"
+      ],
+      "options": [
+        "Amazon Comprehend",
+        "Amazon Translate",
+        "Amazon Textract",
+        "Amazon Transcribe",
+        "Amazon Polly"
+      ],
+      "correct": [
+        2,
+        3,
+        4,
+        1,
+        0
+      ],
+      "explanation": "Each prompt names its data type, and the dossier's rule is never to swap the data type: scanned pages with handwriting and form fields go to Amazon Textract; audio to written text goes to Amazon Transcribe; written text to lifelike speech goes to Amazon Polly; on-demand translation between languages goes to Amazon Translate; and sentiment, entities, key phrases and PII in text go to Amazon Comprehend. The near-misses fail on the same axis: Comprehend cannot read a scanned page's layout, Textract does not listen to audio, and Transcribe produces text rather than speech, so it cannot narrate the video. All five are in-scope purpose-built AI services you call with your data, which is exactly why no SageMaker AI model appears in this list."
+    },
+    {
+      "id": "q110",
+      "subdomain": "3.8 - Other in-scope service categories",
+      "type": "mcq",
+      "question": "A SaaS vendor's events must trigger a Lambda function only when a specific field matches, and a batch job must run nightly at 02:00 UTC. Which service and which documented limits apply?",
+      "options": [
+        "Amazon SNS, because topics support cron expressions and up to five subscriptions",
+        "AWS Step Functions, because one state can wait until 02:00 UTC",
+        "Amazon SQS, because long polling can wait up to 20 seconds for a schedule",
+        "Amazon EventBridge: a rule can have up to five targets, there are up to 300 rules per event bus, and scheduled rules are handled by EventBridge Scheduler"
+      ],
+      "correct": 3,
+      "explanation": "Content-filtered JSON events, SaaS partner sources and schedules are EventBridge's job: a single rule can send an event to up to five targets, an event bus holds up to 300 rules, and AWS steers scheduled rules to EventBridge Scheduler with 14,000,000 free invocations per month. SNS has no cron, Step Functions is for multi-step processes, and SQS long polling is a 20-second receive wait, not a scheduler."
+    },
+    {
+      "id": "q111",
+      "subdomain": "3.8 - Other in-scope service categories",
+      "type": "mcq",
+      "question": "A developer claims a standard Amazon SQS queue processes every message exactly once, in the order it was sent. Which correction is accurate?",
+      "options": [
+        "Standard queues give at-least-once delivery with best-effort ordering, while FIFO queues give exactly-once processing with strict FIFO order",
+        "Both queue types guarantee exactly-once delivery; FIFO only adds strict ordering",
+        "Standard queues are exactly-once and FIFO queues are at-least-once",
+        "Both types are best-effort and ordering is always the caller's responsibility"
+      ],
+      "correct": 0,
+      "explanation": "AWS documents standard queues as at-least-once delivery where a message may be delivered more than once, with best-effort ordering, and FIFO queues as exactly-once processing with strict order plus a 5-minute deduplication interval. Duplicates on standard queues are expected, so consumers must be idempotent."
+    },
+    {
+      "id": "q112",
+      "subdomain": "3.8 - Other in-scope service categories",
+      "type": "multi",
+      "question": "A company must present the output of its virtual machines on staff laptops and tablets without shipping hardware, and it wants a browser-only option for contractors. Which statements are accurate?",
+      "options": [
+        "Amazon WorkSpaces delivers fully managed persistent virtual desktops to end users",
+        "Amazon AppStream 2.0 streams desktop applications to any browser or device without rewriting code",
+        "Amazon WorkSpaces Secure Browser keeps HTML and document object model data off the local machine",
+        "AWS Amplify presents virtual desktop sessions inside a browser tab",
+        "Amazon WorkDocs supplies the in-scope virtual desktop for the contractors",
+        "Amazon WorkSpaces Secure Browser transmits the document object model to the user device"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The end-user-computing stem in the dossier is verbatim: the services that present the output of virtual machines on end-user machines are Amazon AppStream 2.0 for applications, Amazon WorkSpaces for full desktops, and Amazon WorkSpaces Secure Browser for browser only, and that hosted browser transmits no HTML, document object model or sensitive company data to the local machine. AWS Amplify fails on category: it creates and deploys frontend web and mobile applications, so it builds the client rather than presenting a virtual machine. Amazon WorkDocs fails on scope: it is explicitly out of scope, and the in-scope storage and enablement rows never credit it. The last option is a straight contradiction of the Secure Browser guarantee, which is the claim the exam tests when a stem mentions contractor access."
+    },
+    {
+      "id": "q113",
+      "subdomain": "3.8 - Other in-scope service categories",
+      "type": "ordering",
+      "question": "A warehouse team wants a StockUnavailable line in its application log to become a notification to the on-call channel. Order the documented chain from the log line to the delivered message and ignore the step that is not part of it:",
+      "options": [
+        "An Amazon SNS topic delivers the notification to subscribers",
+        "AWS Health reports a service disruption in the Region",
+        "A CloudWatch alarm evaluates the metric and changes state",
+        "A log event arrives in the CloudWatch Logs group",
+        "A metric filter counts matching log lines and emits a metric"
+      ],
+      "correct": [
+        3,
+        4,
+        2,
+        0
+      ],
+      "explanation": "The dossier documents the chain as log event, metric filter, alarm, then SNS action: the line lands in a CloudWatch Logs group, a metric filter turns matching lines into a metric such as OutOfStockError, the alarm evaluates that metric and changes state, and the alarm action publishes to an Amazon SNS topic that reaches email, SMS, HTTP or Lambda subscribers. AWS Health is the step that does not belong, because it answers is AWS's stuff working rather than is my application working, so it never sits inside your own log-to-notification path. Order matters too: the alarm cannot evaluate a metric the filter has not yet emitted, and the SNS topic is only reached after the alarm acts, which is why actions fire on state change rather than on every breaching minute."
+    },
+    {
+      "id": "q114",
+      "subdomain": "3.8 - Other in-scope service categories",
+      "type": "matching",
+      "question": "Match each delivery or diagnostic need to the in-scope service that answers it, using the 2026 task 3.8 categories:",
+      "prompts": [
+        "Compile source code and run unit tests in the build stage",
+        "Trace a request across microservices for 30 days",
+        "Hold a workflow that waits three days for human approval",
+        "Build and deploy a frontend web or mobile application",
+        "Connect field devices that speak MQTT or HTTP to the cloud"
+      ],
+      "options": [
+        "AWS X-Ray",
+        "AWS Amplify",
+        "AWS CodeBuild",
+        "AWS IoT Core",
+        "AWS Step Functions"
+      ],
+      "correct": [
+        2,
+        0,
+        4,
+        1,
+        3
+      ],
+      "explanation": "Each prompt maps to one documented task 3.8 answer: AWS CodeBuild compiles your source code, runs unit tests and produces artifacts, billed per build minute with 100 free minutes per month; AWS X-Ray is distributed tracing, segments to traces to a service graph, with trace data retained 30 days; AWS Step Functions Standard runs up to one year with exactly-once execution, which is what a three-day human approval wait needs; AWS Amplify creates and deploys frontend web and mobile applications; and AWS IoT Core is the managed gateway that connects devices over MQTT or HTTP. The plausible alternatives fail on layer: an Amazon SQS delay tops out at 15 minutes and a three-day wait is not a queue's job, AWS CodePipeline models the release stages rather than compiling code, and Amazon WorkSpaces presents desktops instead of connecting devices. Also note the 2026 Developer Tools row holds only AWS CLI, AWS CodeBuild, AWS CodePipeline and AWS X-Ray, so older rosters naming CodeStar or Cloud9 are superseded."
+    },
+    {
+      "id": "q115",
+      "subdomain": "4.1 - Compare AWS pricing models",
+      "type": "mcq",
+      "question": "A team stops their Amazon RDS database every night to save money, but the bill barely moves. Which statement explains the remaining charges?",
+      "options": [
+        "Stopped RDS instances are billed for provisioned storage and backup storage: only DB instance hours stop",
+        "RDS bills a 10-minute minimum for every stop and start operation performed",
+        "RDS converts the instance to Spot pricing while stopped, which is not cheaper",
+        "Backup storage is free for the first 12 months regardless of account age"
+      ],
+      "correct": 0,
+      "explanation": "AWS states that while a database instance is stopped you are charged for provisioned storage and backup storage, but not for DB instance hours. Instance billing runs in 1-second increments with a 10-minute minimum while running, but that minimum is not what generates the stopped-instance charge: and longer backup retention simply increases it."
+    },
+    {
+      "id": "q116",
+      "subdomain": "4.1 - Compare AWS pricing models",
+      "type": "mcq",
+      "question": "Which combination gives BOTH a discount and a guaranteed capacity reservation in a specific Availability Zone?",
+      "options": [
+        "A Compute Savings Plan plus an On-Demand instance",
+        "An On-Demand Capacity Reservation purchased at a discounted rate",
+        "A Standard Reserved Instance scoped to a specific Availability Zone",
+        "A Spot Instance fleet spread across three Availability Zones"
+      ],
+      "correct": 2,
+      "explanation": "Only an AZ-scoped Standard Reserved Instance delivers both: the discount (up to 72% as of Oct 2026) and the capacity reservation. Savings Plans reserve nothing; an On-Demand Capacity Reservation reserves AZ capacity but bills at the full On-Demand price with no discount; Spot capacity can be reclaimed at any time."
+    },
+    {
+      "id": "q117",
+      "subdomain": "4.1 - Compare AWS pricing models",
+      "type": "mcq",
+      "question": "Which statement BEST captures AWS's general pricing principles in AWS's own sequence?",
+      "options": [
+        "Pay a fixed annual contract, then negotiate volume rebates annually",
+        "Pay as you go, pay for what you use, pay less as you use more, and pay even less when you reserve capacity",
+        "Pay upfront for all capacity, then receive credits for unused hours",
+        "Pay per user seat, with discounts applied only by enterprise agreement"
+      ],
+      "correct": 1,
+      "explanation": "AWS's How AWS Pricing Works whitepaper (published 24 February 2023) states exactly that sequence, and the live pricing page adds that pay-as-you-go works 'without requiring long-term contracts'. The three cost drivers are compute, storage and outbound data transfer, with inbound transfer free of charge."
+    },
+    {
+      "id": "q118",
+      "subdomain": "4.1 - Compare AWS pricing models",
+      "type": "multi",
+      "question": "A platform team is forecasting egress for a new media pipeline, and its finance lead asks which statements about AWS data-transfer billing hold true as of October 2026. Which statements are correct?",
+      "options": [
+        "Data transferred into AWS from the internet is free of charge",
+        "The free outbound allowance is granted separately to every AWS Region",
+        "Traffic between two services inside one Availability Zone costs nothing",
+        "Data transferred out to the internet is billed at one flat rate",
+        "Inter-Region outbound transfer draws on its own separate free allowance"
+      ],
+      "correct": [
+        0,
+        2
+      ],
+      "explanation": "Inbound transfer from the internet is never charged, and traffic between services in the same Availability Zone is free, so those two statements are the correct pair. The outbound allowance is 100 GB per month aggregated across all AWS services and all Regions (excluding the China Regions and GovCloud), not granted per Region, so the second option is numeric bait (T6) on a true figure. Outbound transfer is tiered per GB - us-east-1 steps down as monthly volume rises - so the flat-rate option fails on structure, and Inter-Region outbound transfer is billed per GB out of that same global allowance rather than a second free pool."
+    },
+    {
+      "id": "q119",
+      "subdomain": "4.1 - Compare AWS pricing models",
+      "type": "ordering",
+      "question": "A team must choose an EC2 purchase option for several unrelated workloads and decides to walk AWS's purchase-option decision tree. Put the tree's branches in the order the tree visits them.",
+      "options": [
+        "Steady and predictable workloads committed for one or three years",
+        "A temporary lab, a course exercise or a first prototype",
+        "Guaranteed launch room in a single Availability Zone",
+        "Fault-tolerant work that can be interrupted safely",
+        "Everything else with an unknown or short-lived pattern"
+      ],
+      "correct": [
+        1,
+        3,
+        0,
+        2,
+        4
+      ],
+      "explanation": "The tree opens with the free, no-risk branch: a temporary lab, learning exercise or first prototype goes to the Free Tier, which never answers a production-workload question. Next comes fault-tolerant, interruptible work, which is Spot (repriced about every 5 minutes, up to 90 percent off). Only then does it consider a steady, predictable workload needing a 1- or 3-year commitment: Standard Reserved Instance or EC2 Instance Savings Plan up to 72 percent, Compute Savings Plan or Convertible RI up to 66 percent. Guaranteed room in a single Availability Zone sits after the discount decision because an On-Demand Capacity Reservation grants no discount and bills whether the capacity is used or not; everything left over falls to On-Demand, the baseline with zero percent discount. The plausible wrong order - buying the deepest-discount commitment first - fails because the tree clears the free and interruptible options before any multi-year commitment."
+    },
+    {
+      "id": "q120",
+      "subdomain": "4.1 - Compare AWS pricing models",
+      "type": "matching",
+      "question": "Match each monthly billing pattern an S3 or RDS owner reports to the charge dimension that explains it:",
+      "prompts": [
+        "Bytes held in an S3 storage class during the month",
+        "A PUT request sent to an S3 bucket",
+        "Objects pulled back from an infrequent-access class",
+        "An Amazon RDS instance switched off for the month"
+      ],
+      "options": [
+        "Requests per 1,000; DELETE and CANCEL are free",
+        "Only instance hours stop; storage keeps billing",
+        "Storage in GB-month, priced by storage class",
+        "Retrieval per GB plus a minimum storage duration"
+      ],
+      "correct": [
+        2,
+        0,
+        3,
+        1
+      ],
+      "explanation": "Every S3 storage class bills in GB-month at its own monthly rate, so stored bytes match the storage dimension. A PUT is a request charge counted per 1,000 requests, and DELETE and CANCEL requests are free while LIST bills at the PUT rate, so the PUT matches the request dimension. Reading data back out of an infrequent-access or archive class adds a per-GB retrieval charge plus a minimum storage duration, so retrieval is the third match. The stopped RDS instance is the trap: only DB instance hours stop, while provisioned storage and backup storage keep billing - and a stopped EC2 instance is no different, because EBS volumes, snapshots and data transfer continue. The second plausible miss is pricing GET at the PUT rate: GET and HEAD are far cheaper than PUT, COPY, POST and LIST."
+    },
+    {
+      "id": "q121",
+      "subdomain": "4.2 - Billing, budget, cost management",
+      "type": "mcq",
+      "question": "Requirement: notify the finance channel at 80% of a 50,000 USD monthly budget AND automatically prevent the creation of additional resources if the budget is breached. Which combination satisfies it?",
+      "options": [
+        "AWS Cost Explorer with a forecast alert and an SNS topic",
+        "AWS Budgets with a threshold notification plus a budget action that applies an IAM policy denying provisioning",
+        "An SCP alone, because SCPs cap spending",
+        "The Cost and Usage Report delivered daily to S3"
+      ],
+      "correct": 1,
+      "explanation": "AWS's documented pattern is to notify at 80 percent of the budgeted amount and apply an action: for example a custom IAM policy that denies provisioning additional resources. Budget actions can run programmatically or with approval and can apply IAM policies, SCPs or AWS resources, integrating with AWS Chatbot. Cost Explorer explores and forecasts but never enforces; an SCP can deny provisioning actions yet it cannot watch a spend target or notify anyone; the CUR is only an export."
+    },
+    {
+      "id": "q122",
+      "subdomain": "4.2 - Billing, budget, cost management",
+      "type": "mcq",
+      "question": "You need the PDF invoice, the tax lines and the issued-versus-pending status of this month's AWS bill. Which page do you open?",
+      "options": [
+        "The Bills page",
+        "Payment preferences",
+        "AWS Cost Explorer default report",
+        "The Billing dashboard Home page"
+      ],
+      "correct": 0,
+      "explanation": "The Bills page holds the bill summary (Issued vs Pending), payment information, charges by service (drillable to Region), charges by account (management account only), downloadable PDF invoices, savings and taxes. Home is the exploratory widget view, Cost Explorer answers 'why did cost move', and Payment preferences is where you change method or currency."
+    },
+    {
+      "id": "q123",
+      "subdomain": "4.2 - Billing, budget, cost management",
+      "type": "multi",
+      "question": "A finance lead asks what actually changes when five subsidiary accounts move under AWS Organizations with consolidated billing. Which statements about that change are correct as of October 2026?",
+      "options": [
+        "AWS treats every account as one account when it applies volume tier thresholds",
+        "A Reserved Instance bought by one account can discount other accounts' usage",
+        "AWS Marketplace charges land on the same consolidated bill",
+        "Support fees are pooled and charged once for the whole organization",
+        "Consolidated billing adds a separate monthly fee on top of usage",
+        "Each member account reaches volume thresholds on its own bill"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "AWS treats all accounts in an organization as a single account, so member accounts do not reach tier thresholds individually - pooling is correct. Consolidated billing shares volume discounts, Reserved Instance discounts and Savings Plans across accounts, so an RI bought by one account can discount another account's usage - correct. AWS Marketplace usage is billed on the same invoice because one bill covers each seller of record - correct. Support is the documented exception: AWS calculates support fees independently for each member account and each account subscribes independently, so pooled support fails. Consolidated billing carries no extra fee as of October 2026, so the surcharge option fails, and the last option is a responsibility flip: it restates pre-consolidation behaviour, since aggregation is per service and every month starts at zero."
+    },
+    {
+      "id": "q124",
+      "subdomain": "4.2 - Billing, budget, cost management",
+      "type": "ordering",
+      "question": "A cloud finance analyst wants to split last month's shared platform spend between two product teams using a single tag. Put the required steps in the order they must happen.",
+      "options": [
+        "Activate the user-defined tag as a cost allocation tag",
+        "Restructure the organizational units so each team is billed separately",
+        "Tag every billable resource with one consistent key",
+        "Group last month's spend by that tag in Cost Explorer",
+        "Wait up to 24 hours for the tag to reach cost data"
+      ],
+      "correct": [
+        2,
+        0,
+        4,
+        3
+      ],
+      "explanation": "The tag must exist on every billable resource first, with one consistent key. Second it is activated as a cost allocation tag - and activation lives in the management account or a standalone account, because member accounts cannot activate tags. Third, allow up to 24 hours for the activated tag to start flowing into cost data. Fourth, group by that tag in Cost Explorer, or read it in the Cost and Usage Report, then reconcile against the Bills page. The restructure option is the trap: AWS states your bill will not reflect the structure you have defined in your organization, so adding or reshaping OUs never splits spend - activated cost allocation tags or cost categories do. Expect an untagged row too: resources tagged after the fact and non-tagging services never appear under the key."
+    },
+    {
+      "id": "q125",
+      "subdomain": "4.2 - Billing, budget, cost management",
+      "type": "matching",
+      "question": "Match each cost-management question a team asks to the AWS tool that answers it:",
+      "prompts": [
+        "Estimate a three-tier application before it is built",
+        "Send raw hourly line items to a bucket you control",
+        "Explain a bill increase, filtered by Region",
+        "Alert the team when forecast spend passes a target",
+        "Split Marketplace monthly fees that tags cannot cover"
+      ],
+      "options": [
+        "AWS Cost and Usage Report, daily CSV or Parquet to your bucket",
+        "AWS Budgets, notifications by email or Amazon SNS",
+        "AWS Pricing Calculator, free and needs no AWS account",
+        "AWS Cost Explorer, filter by service, Region and tag",
+        "Cost categories, since tags cannot allocate monthly fees"
+      ],
+      "correct": [
+        2,
+        0,
+        3,
+        1,
+        4
+      ],
+      "explanation": "Estimating an application that does not exist yet is the Pricing Calculator: a free web tool that needs no AWS account, assumes 730 hours in a month and does not assume the Free Tier, while Cost Explorer reads actual usage. Raw hourly line items delivered at least daily to your own S3 bucket in CSV or Parquet is the Cost and Usage Report, which carries both unblended and blended rates. Explaining a movement by Region, service or tag is Cost Explorer, whose console clicks are free (only API calls are billed) and whose data reflects usage up to the previous day. A threshold alert is AWS Budgets: monitoring and notifications are free, but an alert is a notification, not a cap - stopping spend needs a budget action. Finally, subscription-based charges such as AWS Support and AWS Marketplace monthly fees cannot be allocated by tags, so the escape hatch is a cost category."
+    },
+    {
+      "id": "q126",
+      "subdomain": "4.3 - Technical resources and AWS Support",
+      "type": "mcq",
+      "question": "A customer on the Basic Support plan suffers a production outage and wants to escalate to AWS immediately. Which statement is correct?",
+      "options": [
+        "Basic includes a designated Technical Account Manager",
+        "Basic includes the full Trusted Advisor check set, so the case is unnecessary",
+        "Basic cannot open technical support cases: it covers billing and account help, quota increases, forums, documentation and service health",
+        "Basic includes a first response within 1 hour for production system down"
+      ],
+      "correct": 2,
+      "explanation": "Customers with the Basic Support plan cannot open technical support cases. What Basic does include, 24x7, is billing and account support, quota increases, forums, documentation and service health: plus Trusted Advisor core checks (all accounts get 56 free checks). Response-time ladders and TAMs only exist on plans that can open technical cases."
+    },
+    {
+      "id": "q127",
+      "subdomain": "4.3 - Technical resources and AWS Support",
+      "type": "mcq",
+      "question": "Which statement about AWS Trusted Advisor availability is correct as of Oct 2026?",
+      "options": [
+        "Customers on the Basic Support plan get no Trusted Advisor checks at all",
+        "Business Support+ includes TA Priority as well as the full check set",
+        "Trusted Advisor is available only on Enterprise Support, including TA Priority on every plan",
+        "All AWS accounts get 56 checks, Business Support+ unlocks the full set, and TA Priority is reserved for Enterprise and Unified Operations"
+      ],
+      "correct": 3,
+      "explanation": "All AWS accounts get 56 Trusted Advisor checks and Business Support+ and above unlock an additional 426 (482 total on AWS's check page, which elsewhere advertises 'more than 500'). Basic gets core checks: including all Service Limits checks and selected Security and Fault tolerance checks: so 'no checks at all' is false. TA Priority is an Enterprise and Unified Operations feature, not a Business Support+ one."
+    },
+    {
+      "id": "q128",
+      "subdomain": "4.3 - Technical resources and AWS Support",
+      "type": "multi",
+      "question": "A production team is comparing the four support plans in the 2026 lineup before renewing. Which statements about those plans are correct as of October 2026?",
+      "options": [
+        "Business Support+ has a published monthly minimum of 29 USD per account",
+        "Enterprise Support includes a named Technical Account Manager",
+        "Business Support+ handles technical cases by phone, web and chat 24x7",
+        "Unified Operations carries a monthly minimum of 5,000 USD",
+        "Enterprise Support gives a first response under 5 minutes for a business-critical outage",
+        "Developer Support is available for new subscriptions as of October 2026"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Business Support+ costs a 29 USD monthly minimum per account with a 30-day minimum commitment and answers technical cases 24x7 by phone, web and chat, so the first and third statements hold. Enterprise Support includes a Technical Account Manager, so the second statement holds. The traps: the 50,000 USD monthly minimum with a 90-day commitment belongs to Unified Operations while Enterprise is 5,000 USD, so that option swaps in the Enterprise figure against the wrong plan (T6 numeric bait); the 5-minute first response comes from a Unified Operations Incident Management Engineer while Enterprise commits to under 15 minutes for a business-critical system down (T4 over-claim); and Developer Support stopped taking new subscriptions after 2 December 2025 and is discontinued 1 January 2027, so it is the stale-version trap. First response is a response, not a resolution, and AWS commits only to every reasonable effort."
+    },
+    {
+      "id": "q129",
+      "subdomain": "4.3 - Technical resources and AWS Support",
+      "type": "ordering",
+      "question": "During an incident, a team follows the five-step drill used to decide whether the fault is theirs or AWS's. Put the steps in the order the drill walks them.",
+      "options": [
+        "Check the CloudWatch alarm state for your own metric",
+        "Review Trusted Advisor for gaps in your own configuration",
+        "Subscribe to the AWS Health API before starting the triage",
+        "Open service health to look for a public AWS service event",
+        "Open your account health for account-specific issues",
+        "Raise a case in the AWS Support Center as the last resort"
+      ],
+      "correct": [
+        0,
+        3,
+        4,
+        1,
+        5
+      ],
+      "explanation": "Step 1 is CloudWatch: is my own metric breaching? Step 2, only if that is green, is Health service health, the public view that needs no sign-in and shows events that are not specific to an AWS account. Step 3 is Your account health for account-specific issues and scheduled changes. Step 4 is Trusted Advisor, when the gap is in my own configuration - it advises only and never enforces. Step 5 is a Support Center case, where the severity I choose sets the first-response clock, and on Basic Support no technical case can be opened at all. The Health API option is not a step: the dashboard is free for all customers while the AWS Health API requires Business Support+ (receiving health events through Amazon EventBridge is free), and skipping straight to step 5 fails on a free plan."
+    },
+    {
+      "id": "q130",
+      "subdomain": "4.3 - Technical resources and AWS Support",
+      "type": "matching",
+      "question": "Match each request a team needs to send to the AWS channel that actually handles it:",
+      "prompts": [
+        "Ask a general how-to question such as tagging 400 instances",
+        "Report someone reselling a stolen machine image",
+        "Record a workload review with high-risk issues and milestones",
+        "Open an account-and-billing case about our own invoice",
+        "Have a partner open technical cases for our account"
+      ],
+      "options": [
+        "AWS Support Center console for account cases",
+        "AWS re:Post, the AWS managed community",
+        "AWS Partner-Led Support on an eligible plan",
+        "AWS Well-Architected Tool, available at no cost",
+        "AWS Trust and Safety team, separate from support"
+      ],
+      "correct": [
+        1,
+        4,
+        3,
+        0,
+        2
+      ],
+      "explanation": "A general how-to question belongs on AWS re:Post, the managed community with the Knowledge Center articles - it is not for time-sensitive or account-specific questions. Abuse such as a stolen image being resold goes to the AWS Trust and Safety team, which is separate from AWS Support. A workload review that captures high-risk issues, an improvement plan and a milestone is the Well-Architected Tool, and that tool costs nothing. An invoice problem with our own account is an account-and-billing case in the Support Center - Basic Support can open billing and account cases around the clock even though it cannot open technical cases. Partner-Led Support lets an eligible partner open cases on our behalf; Professional Services and solutions architects are engagement offerings, not case channels."
+    }
+  ]
+}

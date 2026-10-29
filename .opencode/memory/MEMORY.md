@@ -29,7 +29,7 @@ Config: `pyproject.toml` (ruff, pytest, bandit), `.pre-commit-config.yaml`
 ## Project Status
 - **38 courses** across programming, AI/ML, data engineering, architecture
 - **7 games** (6 categories: coding, conversation, logic, math, physics, puzzles)
-- **1 quiz** (content/quizzes/snowpro-core-cof-c03.json) — Quizzes app at /[lang]/quizzes/ (hub, detail, redirect stubs from /games/quiz/*)
+- **3 quizzes** — `snowpro-core-cof-c03.json` (833 questions), `aws-aif-c01.json` (500 questions, expanded 350 → 500 on 2026-10-29 with blueprint-exact domains 100/120/140/70/70 and types 50/20/15/15; 12 giveaway ordering items de-rotated) and `aws-clf-c02.json` (130 questions, created 2026-10-29 as 2x the 65-question exam: 19 CLF-C02 task statements, types 65/26/20/19, allocations 24/30/34/12, 64 mcq mined from the Oct-2026 seed bank + 66 authored fresh) — Quizzes app at /[lang]/quizzes/ (hub, detail, redirect stubs from /games/quiz/*)
 - **10 tools** (decision matrices, timers, habit trackers, prompt builders)
 - **3 languages** (English, Portuguese, Spanish)
 - 3 language dictionaries (en.json, es.json, pt.json)
@@ -113,10 +113,11 @@ dictionaries/       # Language translation files
 
 **Note**: 2/10 hooks have dedicated pytest suites (validate-quiz-json, validate-languages; gap to fill)
 
-## Skills (10 implemented)
+## Skills (11 implemented)
 - `skill-builder`: Meta-skill for creating new skills (95% complete, 4 scripts, 36 tests)
 - `course-writer`: Generates lesson files (prompt-only, no scripts)
 - `game-builder`: Generates language activity (vocabulary) JSON for content/languages/ (quiz generation moved to the Quizzes app)
+- `quiz-writer`: Creates and expands exam-blueprint quiz JSON in content/quizzes (v1.1.0: 5 scripts, 150 tests; bootstrap + quota grid + Jaccard dedup gate + deterministic merge/renumber + final verifier)
 - `i18n-translator`: Handles localization (prompt-only, no scripts)
 - `platform-engineer`: Guides TypeScript/Next.js development (prompt-only)
 - `mermaid-js`: Creates Mermaid.js diagrams (1 script, no tests)
@@ -127,6 +128,7 @@ dictionaries/       # Language translation files
 
 ## Test Coverage
 - skill-builder: 36 tests (comprehensive)
+- quiz-writer: 150 tests (bootstrap + grid + batch gate + verify + merge)
 - pytest: 13 tests
 - vitest: 1 test
 - Hooks: 2 suites (validate-quiz-json 9 tests, validate-languages 35 tests) + validate-coverage suite
