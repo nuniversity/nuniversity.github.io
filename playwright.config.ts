@@ -6,6 +6,14 @@ import { defineConfig, devices } from '@playwright/test'
 //   npm run build && npm run test:e2e
 // In CI the workflow builds first, so the same artifact that gets deployed
 // is the one under test.
+//
+// The server is always started fresh by default: reusing whatever happens to
+// be listening on the port is how a stale build silently passes the suite.
+// Opt in explicitly with E2E_REUSE_SERVER=1.
+
+const PORT = Number(process.env.E2E_PORT || 4310)
+const BASE_URL = process.env.E2E_BASE_URL || `http://127.0.0.1:${PORT}`
+const EXTERNAL_SERVER = Boolean(process.env.E2E_BASE_URL)
 
 export default defineConfig({
   testDir: './tests/e2e',
@@ -23,7 +31,7 @@ export default defineConfig({
       ]
     : [['html', { outputFolder: 'playwright-report', open: 'on-failure' }]],
   use: {
-    baseURL: 'http://127.0.0.1:3000',
+    baseURL: BASE_URL,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'off',
@@ -37,6 +45,11 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
     {
+      name: 'mobile-chrome',
+      default: false,
+      use: { ...devices['Pixel 7'] },
+    },
+    {
       name: 'firefox',
       default: false,
       use: { ...devices['Desktop Firefox'] },
@@ -47,10 +60,12 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
   ],
-  webServer: {
-    command: 'node tests/support/static-server.mjs out 3000',
-    url: 'http://127.0.0.1:3000/en/',
-    reuseExistingServer: !process.env.CI,
-    timeout: 30_000,
-  },
+  webServer: EXTERNAL_SERVER
+    ? undefined
+    : {
+        command: `node tests/support/static-server.mjs out ${PORT}`,
+        url: `${BASE_URL}/en/`,
+        reuseExistingServer: process.env.E2E_REUSE_SERVER === '1',
+        timeout: 30_000,
+      },
 })

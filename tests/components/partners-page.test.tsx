@@ -1,10 +1,8 @@
-import React from 'react'
 import { describe, expect, it, vi, beforeAll } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import PartnersPage from '@/components/partners/PartnersPage'
 import en from '@/dictionaries/en.json'
 
-vi.stubGlobal('React', React)
 
 vi.mock('next/link', () => ({
   default: ({ children, href, ...props }: any) => (

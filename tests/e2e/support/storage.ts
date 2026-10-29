@@ -13,12 +13,14 @@ export function wipeScript(): string {
   return `
     (() => {
       try {
+        if (sessionStorage.getItem('__e2e_storage_wiped') === '1') return;
         const doomed = [];
         for (let i = 0; i < localStorage.length; i++) {
           const k = localStorage.key(i);
           if (k && (k.startsWith('${STORAGE_NAMESPACE}') || k === '${THEME_KEY}')) doomed.push(k);
         }
         doomed.forEach((k) => localStorage.removeItem(k));
+        sessionStorage.setItem('__e2e_storage_wiped', '1');
       } catch (_) {
         /* storage unavailable — nothing to wipe */
       }

@@ -393,7 +393,7 @@
     --callout-success-bg: var(--success-soft);
     --callout-success-fg: var(--success-foreground);
     --callout-success-border: var(--green-500);
-    --callout-success-heading: var(--green-700);
+    --callout-success-heading: var(--success-foreground);
 
     --callout-tip-bg: var(--teal-50);
     --callout-tip-fg: var(--teal-800);

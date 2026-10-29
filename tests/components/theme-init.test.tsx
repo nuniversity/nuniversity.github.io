@@ -1,10 +1,8 @@
-import React from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { Providers, useTheme } from '@/components/providers/Providers'
 import { THEME_INIT_SCRIPT, THEME_STORAGE_KEY } from '@/lib/theme/theme'
 
-vi.stubGlobal('React', React)
 
 function Probe() {
   const { theme, ready, toggleTheme } = useTheme()
@@ -65,7 +63,7 @@ describe('theme initialisation', () => {
     await waitFor(() => expect(screen.getByTestId('probe')).not.toHaveTextContent('pending'))
 
     const before = screen.getByTestId('probe').textContent
-    screen.getByTestId('probe').click()
+    fireEvent.click(screen.getByTestId('probe'))
 
     await waitFor(() => {
       expect(screen.getByTestId('probe').textContent).not.toBe(before)

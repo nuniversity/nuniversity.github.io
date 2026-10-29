@@ -1,10 +1,8 @@
-import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { renderToString } from 'react-dom/server'
 import { render, screen, waitFor } from '@testing-library/react'
 import { useMountShuffle } from '@/lib/hooks/use-mount-shuffle'
 
-vi.stubGlobal('React', React)
 
 /**
  * Shuffling during render made the server and client produce different orders,

@@ -18,7 +18,7 @@ export class HomePage {
     this.heroSearch = page.getByTestId('hero-search-input')
     this.searchTrigger = page.getByTestId('search-trigger')
     this.themeToggle = page.getByRole('button', { name: /toggle theme|switch to (dark|light) theme/i })
-    this.languageSwitcher = page.getByRole('button', { name: 'Change language' })
+    this.languageSwitcher = page.getByRole('button', { name: /Change language/ })
     this.navCourses = page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Courses' })
     this.mobileMenuButton = page.getByRole('button', { name: /open menu|close menu/i })
   }

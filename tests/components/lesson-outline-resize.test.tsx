@@ -1,9 +1,7 @@
-import React from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { fireEvent, render, screen } from '@testing-library/react'
 import LessonOutline from '@/components/lessons/LessonOutline'
 
-vi.stubGlobal('React', React)
 
 vi.mock('next/link', () => ({
   default: ({ children, href, ...props }: any) => (

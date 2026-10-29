@@ -1,10 +1,8 @@
-import React from 'react'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, fireEvent, act } from '@testing-library/react'
 import { VocabularyGameClient } from '@/components/languages/vocabulary-game-client'
 import type { VocabularyGame } from '@/lib/languages/types'
 
-vi.stubGlobal('React', React)
 
 const game: VocabularyGame = {
   id: 'test-vocab',

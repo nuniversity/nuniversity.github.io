@@ -1,9 +1,7 @@
-import React from 'react'
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import QuestionBlock, { type LessonQuestion } from '@/components/markdown/QuestionBlock'
 
-vi.stubGlobal('React', React)
 
 const baseData: LessonQuestion = {
   id: 'q-1',

@@ -1,11 +1,9 @@
-import React from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { StepSpeak } from '@/components/language-course/steps-production'
 import type { SpeakStep } from '@/lib/language-courses/types'
 
-vi.stubGlobal('React', React)
 
 const step: SpeakStep = {
   id: 's01',
@@ -51,7 +49,6 @@ function stubObjectUrls() {
 
 beforeEach(() => {
   window.localStorage.clear()
-  vi.stubGlobal('React', React)
 })
 
 afterEach(() => {

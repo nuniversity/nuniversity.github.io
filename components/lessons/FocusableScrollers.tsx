@@ -33,9 +33,11 @@ export default function FocusableScrollers({
         const overflows = el.scrollWidth > el.clientWidth + 1
         if (overflows && !el.hasAttribute('tabindex')) {
           el.setAttribute('tabindex', '0')
+          el.setAttribute('role', 'region')
           el.setAttribute('aria-label', 'Scrollable content')
         } else if (!overflows && el.getAttribute('aria-label') === 'Scrollable content') {
           el.removeAttribute('tabindex')
+          el.removeAttribute('role')
           el.removeAttribute('aria-label')
         }
       }

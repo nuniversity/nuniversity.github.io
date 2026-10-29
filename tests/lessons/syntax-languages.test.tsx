@@ -1,11 +1,9 @@
-import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { render } from '@testing-library/react'
 import { PrismLight } from 'react-syntax-highlighter'
 import { Prism as PrismFull } from 'react-syntax-highlighter'
 import SyntaxHighlighterWrapper from '@/components/markdown/FixWrapper'
 
-vi.stubGlobal('React', React)
 
 /**
  * The `Prism` entry point bundles all 277 refractor grammars — a ~1.2 MB

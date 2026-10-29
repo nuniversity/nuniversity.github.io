@@ -1,4 +1,3 @@
-import React from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import ResumeCta from '@/components/courses/ResumeCta'
@@ -7,7 +6,6 @@ import ContinueLearning from '@/components/home/ContinueLearning'
 import CourseContentList from '@/components/lessons/CourseContentList'
 import { markLessonComplete, recordVisit } from '@/lib/progress/storage'
 
-vi.stubGlobal('React', React)
 
 const dict = {
   courses: {

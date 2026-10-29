@@ -1,10 +1,8 @@
-import React from 'react'
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import HeroSearch from '@/components/home/HeroSearch'
 import type { SearchDoc } from '@/lib/search/matcher'
 
-vi.stubGlobal('React', React)
 
 const mocks = { push: vi.fn() }
 vi.mock('next/navigation', () => ({

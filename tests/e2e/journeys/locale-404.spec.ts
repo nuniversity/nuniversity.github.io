@@ -3,6 +3,9 @@
 // URL path prefix → NEXT_LOCALE cookie → navigator.language.
 import { test, expect } from '../support/fixtures'
 
+// The missing path is expected to return HTTP 404; the browser logs it.
+test.use({ allowedConsoleErrors: [/404 \(Not Found\)/] })
+
 test.describe('404 journey', () => {
   test('missing path under /en/ lands on the localized 404 with the requested path', async ({ page }) => {
     await page.goto('/en/definitely-missing-page/')

@@ -440,7 +440,7 @@ function MermaidDiagram({ code }: MermaidDiagramProps) {
         <button onClick={handleZoomIn} className="zoom-btn" title="Zoom In" aria-label="Zoom in" disabled={zoom >= 4}>
           <ZoomIn className="w-4 h-4" />
         </button>
-        <button onClick={handleResetZoom} className="zoom-btn" title="Reset Zoom" aria-label="Reset zoom">1:1</button>
+        <button onClick={handleResetZoom} className="zoom-btn" title="Reset Zoom" aria-label="Reset zoom to 1:1">1:1</button>
         <div className="zoom-divider" />
         <button onClick={toggleFullscreen} className="zoom-btn" title="Toggle Fullscreen" aria-label="Toggle fullscreen">
           <Maximize2 className="w-4 h-4" />

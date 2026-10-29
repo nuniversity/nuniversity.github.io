@@ -1,9 +1,7 @@
-import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { render } from '@testing-library/react'
 import MarkdownRenderer from '@/components/markdown/MarkdownRenderer'
 
-vi.stubGlobal('React', React)
 
 /**
  * Course prose writes money as `US$ 499.999` / `R$ 1.000`. remark-math reads

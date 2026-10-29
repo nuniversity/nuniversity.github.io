@@ -14,8 +14,15 @@ export const ROOT = path.resolve(
   '../../..'
 )
 export const OUT = path.join(ROOT, 'out')
-// The suites are skipped (with a clear message) when no build exists.
+const REQUIRED = Boolean(process.env.CI) || process.env.EXPECT_ARTIFACT === '1'
+// The suites are skipped locally when no build exists, but CI must never
+// silently pass because a previous step forgot to build.
 export const OUT_READY = fs.existsSync(path.join(OUT, 'en', 'index.html'))
+if (REQUIRED && !OUT_READY) {
+  throw new Error(
+    'artifact tests: out/ is missing — run `npm run build` before `npm run test:artifact` (CI must fail, not skip)'
+  )
+}
 export const ORIGIN = 'https://nuniversity.github.io'
 export const LOCALES = ['en', 'pt', 'es']
 

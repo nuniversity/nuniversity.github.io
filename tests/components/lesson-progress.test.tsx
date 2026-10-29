@@ -1,4 +1,3 @@
-import React from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import {
@@ -15,7 +14,6 @@ import {
 } from '@/lib/progress/storage'
 import { getProfile } from '@/lib/gamification/profile'
 
-vi.stubGlobal('React', React)
 
 const mocks = vi.hoisted(() => ({
   push: vi.fn<[string], void>(),

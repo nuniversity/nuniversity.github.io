@@ -1,9 +1,7 @@
-import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import HeroSearch from '@/components/home/HeroSearch'
 
-vi.stubGlobal('React', React)
 
 const mocks = { push: vi.fn() }
 vi.mock('next/navigation', () => ({
@@ -38,11 +36,10 @@ describe('HeroSearch metadata rendering', () => {
     )
 
     const input = screen.getByTestId('hero-search-input')
-    input.focus()
+    fireEvent.focus(input)
     await vi.waitFor(() => expect(globalThis.fetch).toHaveBeenCalled())
 
     // Type to trigger the results.
-    const { fireEvent } = await import('@testing-library/react')
     fireEvent.change(input, { target: { value: 'memory' } })
 
     await screen.findByText('Advanced Memory Tuning')

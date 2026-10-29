@@ -30,6 +30,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -63,13 +64,25 @@ jobs:
         run: npm ci
 
       - name: Type-check
-        run: npx tsc --noEmit
+        # run: npx tsc --noEmit
+        run: npm run typecheck
+        # run: |
+        #   npm run typecheck
+        #   npm run typecheck:e2e
 
       - name: Lint
         run: npm run lint
 
-      - name: Unit tests
-        run: npm test
+      - name: Unit tests + coverage
+        run: npm run test:coverage
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: .coverage
+          if-no-files-found: ignore
 
       - name: Content validators
         run: |
@@ -92,6 +105,45 @@ jobs:
         # `npm run build` = prebuild (media + search index) → next build →
         # postbuild (404 stub + CSP) → verify-css → verify-csp.
         run: npm run build
+
+      # ---------------------------------------------------------------------
+      # Integration gates (artifact + browser E2E) are disabled for now.
+      #
+      # They live in the pre-commit hook while the browser suite stabilises.
+      # To re-enable in CI, uncomment this block. It expects the build above.
+      # ---------------------------------------------------------------------
+      # - name: Artifact integration tests
+      #   run: npm run test:artifact
+      #
+      # - name: Cache Playwright browsers
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ~/.cache/ms-playwright
+      #     key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-playwright-
+      #
+      # - name: Install Playwright browser
+      #   run: npx playwright install --with-deps chromium
+      #
+      # - name: Browser E2E
+      #   # Fresh static server on E2E_PORT (default 4310); reusing an existing
+      #   # server is opt-in so a stale build cannot pass the suite.
+      #   run: npm run test:e2e
+      #
+      # - name: Browser E2E (mobile smoke)
+      #   if: github.event_name != 'pull_request'
+      #   run: npm run test:e2e:mobile-smoke
+      #
+      # - name: Upload test reports
+      #   if: failure()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: test-reports
+      #     path: |
+      #       playwright-report
+      #       test-results
+      #     if-no-files-found: ignore
 
       - name: Check published size
         # GitHub Pages rejects sites over 1 GB.

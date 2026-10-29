@@ -1,4 +1,3 @@
-import React from 'react'
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { splitAnswer } from '@/lib/markdown/split-answer'
@@ -6,7 +5,6 @@ import FillBlankQuestion from '@/components/markdown/FillBlankQuestion'
 import BucketDropQuestion from '@/components/markdown/BucketDropQuestion'
 import MarkdownRenderer from '@/components/markdown/MarkdownRenderer'
 
-vi.stubGlobal('React', React)
 
 describe('splitAnswer', () => {
   it('returns the whole trimmed answer when there is at most one blank', () => {

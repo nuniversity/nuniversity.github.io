@@ -279,7 +279,7 @@ export default function Header({ lang, dict }: HeaderProps) {
             <button
               type="button"
               onClick={openSearch}
-              aria-label={dict.search.trigger}
+              aria-label={`${dict.search.trigger} ${isMac ? '⌘K' : 'Ctrl K'}`}
               className="flex h-10 items-center gap-2 rounded-lg px-2.5 text-foreground-muted transition-colors duration-150 hover:bg-surface-sunken hover:text-foreground"
               data-testid="search-trigger"
             >

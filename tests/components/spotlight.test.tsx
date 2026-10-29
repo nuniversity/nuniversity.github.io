@@ -1,9 +1,7 @@
-import React from 'react'
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, fireEvent, render, screen } from '@testing-library/react'
 import Spotlight from '@/components/home/Spotlight'
 
-vi.stubGlobal('React', React)
 
 vi.mock('next/link', () => ({
   default: ({ children, href, ...props }: any) => (

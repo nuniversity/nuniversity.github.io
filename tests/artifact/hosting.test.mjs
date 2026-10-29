@@ -6,10 +6,10 @@ import path from 'node:path'
 import { OUT, OUT_READY, ORIGIN, exists, read } from './support/helpers.mjs'
 
 describe.skipIf(!OUT_READY)('hosting artifacts', () => {
-  it('ships .nojekyll (or the Pages action injects it into the artifact)', () => {
-    // actions/upload-pages-artifact adds .nojekyll to the deployed tarball
-    // automatically; the repo-root copy is the durable source of truth.
-    expect(exists('.nojekyll') || fs.existsSync(path.join(OUT, '..', '.nojekyll'))).toBe(true)
+  it('ships .nojekyll in the export', () => {
+    // postbuild writes the marker so a branch/directory deploy cannot run
+    // Jekyll and drop `_next/`.
+    expect(exists('.nojekyll')).toBe(true)
   })
 
   it('ships a root locale-redirect index.html', () => {

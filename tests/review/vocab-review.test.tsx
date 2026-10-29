@@ -1,4 +1,3 @@
-import React from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -6,7 +5,6 @@ import ReviewClient from '@/components/review/ReviewClient'
 import { saveReviewCard } from '@/lib/practice/cards'
 import { newCard } from '@/lib/practice/fsrs'
 
-vi.stubGlobal('React', React)
 
 /** Puts one due vocab card in the shared store, as a finished lesson would. */
 function seedDueVocabCard() {
@@ -22,7 +20,6 @@ const vocabIndex = {
 }
 
 beforeEach(() => {
-  vi.stubGlobal('React', React)
   window.localStorage.clear()
   vi.stubGlobal('fetch', vi.fn(async (url: string) => {
     if (String(url).includes('/vocab-index/pt-en.json')) {

@@ -4,7 +4,7 @@
 import { describe, expect, it } from 'vitest'
 import fs from 'node:fs'
 import path from 'node:path'
-import { OUT, OUT_READY, htmlFiles } from './support/helpers.mjs'
+import { OUT, OUT_READY, htmlFiles, walk } from './support/helpers.mjs'
 
 const GB = 1_000_000_000
 const MB = 1_000_000
@@ -43,5 +43,30 @@ describe.skipIf(!OUT_READY)('published size budgets', () => {
       .map(({ f, size }) => `${path.relative(OUT, f)} ${(size / MB).toFixed(2)} MB`)
     // Largest known today: ~1.0 MB (intro-to-data-engineering SQL lesson).
     expect(heavy.join(' | ')).toEqual('')
+  })
+
+  it('stays inside the Cloudflare Pages file-count limit', () => {
+    const count = walk(OUT).length
+    console.log(`  published files: ${count}`)
+    expect(count).toBeLessThan(20_000)
+  })
+
+  it('no file exceeds the Cloudflare Pages 25 MiB per-file limit', () => {
+    const oversized = walk(OUT)
+      .map((file) => ({ file, size: fs.statSync(file).size }))
+      .filter(({ size }) => size > 25 * 1024 * 1024)
+      .map(({ file, size }) => `${path.relative(OUT, file)} ${(size / MB).toFixed(1)} MB`)
+    expect(oversized.join(' | ')).toEqual('')
+  })
+
+  it('prunes the duplicated RSC .txt payloads', () => {
+    const payloads = walk(OUT).filter(
+      (file) =>
+        file.endsWith('.txt') &&
+        !file.endsWith(`${path.sep}robots.txt`) &&
+        !file.endsWith(`${path.sep}ads.txt`)
+    )
+    // Leaving these in doubles the page data and pushed the deploy over 1 GB.
+    expect(payloads.map((file) => path.relative(OUT, file))).toEqual([])
   })
 })

@@ -1,10 +1,8 @@
-import React from 'react'
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { fireEvent, render, screen } from '@testing-library/react'
 import Header from '@/components/layout/Header'
 import { Providers } from '@/components/providers/Providers'
 
-vi.stubGlobal('React', React)
 
 const mocks = { pathname: '/en/' }
 vi.mock('next/navigation', () => ({

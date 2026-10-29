@@ -1,10 +1,8 @@
-import React from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import LessonFeedback from '@/components/lessons/LessonFeedback'
 import { getLessonFeedback, getLessonFeedbacks } from '@/lib/lessons/feedback'
 
-vi.stubGlobal('React', React)
 
 const dict = {
   lesson: {

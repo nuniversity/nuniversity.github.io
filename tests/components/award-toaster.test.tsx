@@ -1,10 +1,8 @@
-import React from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { act, render, screen } from '@testing-library/react'
 import AwardToaster from '@/components/gamification/AwardToaster'
 import { emitAward } from '@/lib/gamification/bus'
 
-vi.stubGlobal('React', React)
 
 const dict = {
   gamification: {

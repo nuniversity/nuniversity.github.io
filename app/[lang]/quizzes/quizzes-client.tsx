@@ -256,7 +256,7 @@ export function QuizzesClient({ lang, quizzes, dict }: QuizzesClientProps) {
                         <span
                           key={domain.id}
                           title={domain.name}
-                          className="max-w-[12rem] truncate px-2 py-0.5 rounded-md bg-primary/10 text-primary text-xs"
+                          className="max-w-[12rem] truncate px-2 py-0.5 rounded-md bg-primary/10 text-blue-700 dark:text-blue-300 text-xs"
                         >
                           {domain.name}
                         </span>

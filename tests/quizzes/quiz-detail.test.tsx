@@ -1,11 +1,9 @@
-import React from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { QuizDetail } from '@/components/quizzes/QuizDetail'
 import type { QuizData } from '@/lib/quizzes/types'
 import dict from '../../dictionaries/en.json'
 
-vi.stubGlobal('React', React)
 
 const quiz: QuizData = {
   id: 'aif-c01-test',

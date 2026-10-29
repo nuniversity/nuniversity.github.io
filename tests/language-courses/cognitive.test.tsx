@@ -1,4 +1,3 @@
-import React from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -7,7 +6,6 @@ import { StepReview } from '@/components/language-course/steps-interactive'
 import type { VocabItem } from '@/lib/language-courses/types'
 import type { ReviewCardState } from '@/lib/practice/types'
 
-vi.stubGlobal('React', React)
 
 const baseProps = {
   lang: 'pt',
@@ -22,7 +20,6 @@ const baseProps = {
 
 beforeEach(() => {
   window.localStorage.clear()
-  vi.stubGlobal('React', React)
   baseProps.onResult.mockClear()
   baseProps.onComplete.mockClear()
 })

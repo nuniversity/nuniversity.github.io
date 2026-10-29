@@ -1,4 +1,3 @@
-import React from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -14,7 +13,6 @@ import { getProfile } from '@/lib/gamification/profile'
 import { getCourseProgress } from '@/lib/language-courses/storage'
 import { getReviewCards } from '@/lib/practice/cards'
 
-vi.stubGlobal('React', React)
 
 const vocab: VocabItem[] = [
   { id: 'w001', source: 'hello', target: 'olá', level: 'A1', topics: ['greetings'] },

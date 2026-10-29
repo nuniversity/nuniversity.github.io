@@ -6,6 +6,9 @@ import { test, expect } from '../support/fixtures'
 import { ContactPage } from '../support/page-objects/ContactPage'
 import type { Page } from '@playwright/test'
 
+// One case mocks a 400 response; the browser logs the failed request.
+test.use({ allowedConsoleErrors: [/400 \(Bad Request\)/] })
+
 test.describe('contact form (Formspree mocked)', () => {
   /**
    * The contact component hydrates later than the header (separate chunk +

@@ -1,4 +1,3 @@
-import React from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, render, screen, waitFor } from '@testing-library/react'
 import { LanguageCourseCard } from '@/components/language-course/language-course-card'
@@ -7,7 +6,6 @@ import { saveLessonResult } from '@/lib/language-courses/storage'
 import { newCard, reviewCard } from '@/lib/practice/fsrs'
 import { saveReviewCard } from '@/lib/practice/cards'
 
-vi.stubGlobal('React', React)
 
 const course: LanguageCourseSummary = {
   id: 'english-for-pt',
@@ -30,7 +28,6 @@ function renderCard() {
 
 beforeEach(() => {
   window.localStorage.clear()
-  vi.stubGlobal('React', React)
 })
 
 afterEach(() => {

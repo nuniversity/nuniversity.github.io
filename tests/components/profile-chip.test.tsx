@@ -1,11 +1,9 @@
-import React from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, fireEvent, render, screen } from '@testing-library/react'
 import ProfileChip from '@/components/gamification/ProfileChip'
 import { recordAndEmit } from '@/lib/gamification/bus'
 import { clearProfile, saveProfile } from '@/lib/gamification/profile'
 
-vi.stubGlobal('React', React)
 
 const dict = {
   gamification: {

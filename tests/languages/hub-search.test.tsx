@@ -1,4 +1,3 @@
-import React from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -6,7 +5,6 @@ import { LanguagesHubClient } from '@/app/[lang]/languages/languages-hub-client'
 import type { LanguageActivity } from '@/lib/languages/get-language-content'
 import type { LanguageCourseSummary } from '@/lib/language-courses/get-language-course'
 
-vi.stubGlobal('React', React)
 
 const course: LanguageCourseSummary = {
   id: 'english-for-pt',
@@ -43,7 +41,6 @@ function renderHub() {
 
 beforeEach(() => {
   window.localStorage.clear()
-  vi.stubGlobal('React', React)
 })
 
 afterEach(() => {

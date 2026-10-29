@@ -28,7 +28,15 @@
     "validate:language": "node scripts/validate-language-course.mjs",
     "backfill:skills": "node scripts/add-lesson-skills.mjs",
     "convert:questions": "node scripts/convert-prose-questions.mjs",
-    "export:quizzes": "node scripts/export-quiz-bank.mjs"
+    "export:quizzes": "node scripts/export-quiz-bank.mjs",
+    "typecheck": "tsc --noEmit",
+    "typecheck:e2e": "tsc -p tsconfig.e2e.json --noEmit",
+    "test:unit": "vitest run",
+    "test:e2e:mobile": "bash scripts/with-playwright-libs.sh playwright test --project=mobile-chrome",
+    "test:e2e:matrix": "bash scripts/with-playwright-libs.sh playwright test --project=firefox --project=webkit --project=mobile-chrome",
+    "verify:full": "npm run test:artifact && npm run test:e2e",
+    "test:ci": "npm run typecheck && npm run typecheck:e2e && npm run test:coverage && npm run test:artifact",
+    "test:e2e:mobile-smoke": "bash scripts/with-playwright-libs.sh playwright test tests/e2e/integration/mobile-nav.spec.ts --project=mobile-chrome"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -59,6 +67,7 @@
     "ts-fsrs": "4.5.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@playwright/test": "1.64.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^14.3.1",
@@ -67,6 +76,7 @@
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
     "@types/react-syntax-highlighter": "^15.5.11",
+    "@vitest/coverage-v8": "^1.6.1",
     "eslint": "^8.56.0",
     "eslint-config-next": "14.0.4",
     "husky": "^9.1.7",

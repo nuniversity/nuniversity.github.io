@@ -1,6 +1,5 @@
-import React from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { cleanup, render, screen, waitFor } from '@testing-library/react'
+import { act, cleanup, render, screen, waitFor } from '@testing-library/react'
 import {
   cancelSpeech,
   detectVoiceGender,
@@ -20,7 +19,6 @@ import {
 } from '@/lib/speech/speech'
 import { useSpeechVoices } from '@/lib/speech/use-speech'
 
-vi.stubGlobal('React', React)
 
 class FakeUtterance {
   text: string
@@ -332,7 +330,9 @@ describe('useSpeechVoices', () => {
     expect(screen.getByTestId('count').textContent).toBe('1')
 
     voices = [...voices, { lang: 'pt-BR', name: 'BR' }]
-    listeners.forEach((fn) => fn())
+    await act(async () => {
+      listeners.forEach((fn) => fn())
+    })
     await waitFor(() => expect(screen.getByTestId('count').textContent).toBe('2'))
   })
 })

@@ -1,10 +1,7 @@
-import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { PracticeChooser, type PracticeLesson } from '@/components/language-course/practice-chooser'
-
-vi.stubGlobal('React', React)
 
 const lessons: PracticeLesson[] = [
   {

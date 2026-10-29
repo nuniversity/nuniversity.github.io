@@ -1,9 +1,7 @@
-import React from 'react'
 import { afterAll, describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import StatCounter from '@/components/home/StatCounter'
 
-vi.stubGlobal('React', React)
 
 describe('StatCounter', () => {
   afterAll(() => {

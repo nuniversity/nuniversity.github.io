@@ -1,10 +1,8 @@
-import React from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen, fireEvent, cleanup, act } from '@testing-library/react'
 import LessonOutline from '@/components/lessons/LessonOutline'
 import { markLessonComplete } from '@/lib/progress/storage'
 
-vi.stubGlobal('React', React)
 
 class MockIntersectionObserver {
   static instances: MockIntersectionObserver[] = []

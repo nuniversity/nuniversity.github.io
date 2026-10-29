@@ -16,7 +16,7 @@ function dict(locale: string): Dict {
 }
 
 async function openLanguageMenu(page: Page) {
-  await page.getByRole('button', { name: 'Change language' }).click()
+  await page.getByRole('button', { name: /Change language/ }).click()
   // Dropdown panel: one button per locale, flagged names.
   return page.getByRole('button', { name: /Português|Español|English/ })
 }

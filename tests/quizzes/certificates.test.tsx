@@ -1,4 +1,3 @@
-import React from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { CertificatesClient } from '@/components/quizzes/CertificatesClient'
@@ -6,7 +5,6 @@ import { QuizzesClient } from '@/app/[lang]/quizzes/quizzes-client'
 import { quizBestKey } from '@/lib/quizzes/storage'
 import dict from '../../dictionaries/en.json'
 
-vi.stubGlobal('React', React)
 
 const SNOWPRO = 'snowpro-core-cof-c03'
 

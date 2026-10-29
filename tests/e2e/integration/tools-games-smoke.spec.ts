@@ -63,9 +63,7 @@ test.describe('tools smoke (all 10)', () => {
     const timerText = page.getByText(/\d{1,2}:\d{2}/).first()
     await expect(timerText).toBeVisible()
     const t1 = await timerText.textContent()
-    await page.waitForTimeout(2100)
-    const t2 = await timerText.textContent()
-    expect(t2, 'timer ticks').not.toBe(t1)
+    await expect.poll(async () => timerText.textContent(), { timeout: 5_000 }).not.toBe(t1)
   })
 })
 

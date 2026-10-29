@@ -1,10 +1,8 @@
-import React from 'react'
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, fireEvent, render, screen } from '@testing-library/react'
 import CommandPalette from '@/components/search/CommandPalette'
 import type { SearchDoc } from '@/lib/search/matcher'
 
-vi.stubGlobal('React', React)
 
 const mocks = { push: vi.fn() }
 vi.mock('next/navigation', () => ({
@@ -81,6 +79,10 @@ afterAll(() => {
 beforeEach(() => {
   mocks.push.mockClear()
   document.body.style.overflow = ''
+  // Default: never resolve. Tests that need results install their own mock;
+  // an accidental real fetch would update state after the test and trip the
+  // act() guard.
+  globalThis.fetch = vi.fn(() => new Promise(() => {})) as typeof fetch
 })
 
 const renderPalette = (open: boolean, onClose = vi.fn()) => {

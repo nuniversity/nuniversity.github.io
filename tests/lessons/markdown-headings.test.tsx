@@ -1,9 +1,7 @@
-import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { render } from '@testing-library/react'
 import MarkdownRenderer from '@/components/markdown/MarkdownRenderer'
 
-vi.stubGlobal('React', React)
 
 function headingIds(container: HTMLElement): (string | null)[] {
   return Array.from(container.querySelectorAll('h2, h3')).map(el => el.getAttribute('id'))

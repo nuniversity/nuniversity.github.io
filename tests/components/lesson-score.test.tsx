@@ -10,7 +10,6 @@ import {
   useLessonScoreWidget,
 } from '@/components/lessons/LessonScoreContext'
 
-vi.stubGlobal('React', React)
 
 function Probe({ label, total, correct, missed, answered }: {
   label: string

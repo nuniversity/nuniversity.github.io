@@ -1,10 +1,8 @@
-import React from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { SpeechSetupNote } from '@/components/language-course/speech-setup-note'
 
-vi.stubGlobal('React', React)
 
 function installVoices(voices: Array<{ lang: string; name: string }>) {
   Object.defineProperty(window, 'speechSynthesis', {
@@ -15,7 +13,6 @@ function installVoices(voices: Array<{ lang: string; name: string }>) {
 
 beforeEach(() => {
   window.localStorage.clear()
-  vi.stubGlobal('React', React)
 })
 
 afterEach(() => {

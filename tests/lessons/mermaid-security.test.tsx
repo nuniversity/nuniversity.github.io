@@ -1,9 +1,7 @@
-import React from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, waitFor } from '@testing-library/react'
 import MarkdownRenderer from '@/components/markdown/MarkdownRenderer'
 
-vi.stubGlobal('React', React)
 
 const mermaidMocks = vi.hoisted(() => ({
   initialize: vi.fn(),
