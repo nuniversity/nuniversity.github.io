@@ -8,7 +8,6 @@ import { LessonScoreProvider, LessonScoreSummary } from '@/components/lessons/Le
 import LessonErrorBoundary from '@/components/lessons/LessonErrorBoundary'
 import PracticeRecorder from '@/components/lessons/PracticeRecorder'
 import LessonMasteryHint from '@/components/lessons/LessonMasteryHint'
-import FocusModeToggle from '@/components/lessons/FocusModeToggle'
 import LessonOutline from '@/components/lessons/LessonOutline'
 import FocusableScrollers from '@/components/lessons/FocusableScrollers'
 import {
@@ -253,7 +252,6 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
                   {dict.courses?.lesson || 'Lesson'} {currentIndex + 1} {dict.common?.of || 'of'} {allLessons.length}
                 </span>
               )}
-              <FocusModeToggle dict={dict} />
             </div>
             <h1 className="text-4xl font-bold mb-4">{lesson.metadata.title}</h1>
             {lesson.metadata.description && (

@@ -17,11 +17,13 @@ import { DAILY_GOAL_XP } from '@/lib/gamification/types'
 import { getXpToday } from '@/lib/gamification/profile'
 import { SpeechSetupNote } from './speech-setup-note'
 import { FlagPair } from './flag-pair'
+import { PracticeChooser, type PracticeLesson } from './practice-chooser'
 
 interface CourseOverviewProps {
   lang: Locale
   course: LanguageCourseMeta
   dict: any
+  practiceLessons: PracticeLesson[]
 }
 
 /** Percent ring for a value 0..100. */
@@ -52,7 +54,7 @@ function ProgressRing({ percent, label }: { percent: number; label: string }) {
   )
 }
 
-export function CourseOverview({ lang, course, dict }: CourseOverviewProps) {
+export function CourseOverview({ lang, course, dict, practiceLessons }: CourseOverviewProps) {
   const t = useMemo(() => dict?.languageCourse ?? {}, [dict])
   const [progress, setProgress] = useState<LanguageCourseProgress | null>(null)
   const [xpToday, setXpToday] = useState(0)
@@ -160,6 +162,13 @@ export function CourseOverview({ lang, course, dict }: CourseOverviewProps) {
           <ArrowRight className="h-5 w-5" />
         </Link>
       )}
+
+      <PracticeChooser
+        lang={lang}
+        courseId={course.id}
+        lessons={practiceLessons}
+        dict={dict}
+      />
 
       <div className="space-y-6">
         {course.units.map((unit) => {

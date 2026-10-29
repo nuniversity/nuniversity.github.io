@@ -7,6 +7,7 @@ import {
   getVoices,
   hasVoiceFor,
   isSpeechSupported,
+  MAX_SPEECH_CHUNK,
   pauseSpeech,
   pickNarratorVoice,
   pickVoice,
@@ -14,6 +15,7 @@ import {
   speak,
   speakSequence,
   speakTurns,
+  splitForSpeech,
   toSpeechLang,
 } from '@/lib/speech/speech'
 import { useSpeechVoices } from '@/lib/speech/use-speech'
@@ -88,6 +90,29 @@ describe('voice helpers', () => {
     expect(hasVoiceFor('es-ES', [])).toBe(true)
     expect(hasVoiceFor('es-ES', [{ lang: 'en-US', name: 'US' }] as unknown as SpeechSynthesisVoice[])).toBe(false)
     expect(hasVoiceFor('es-ES', [{ lang: 'es-MX', name: 'MX' }] as unknown as SpeechSynthesisVoice[])).toBe(true)
+  })
+})
+
+describe('splitForSpeech', () => {
+  it('keeps short text intact and drops blank input', () => {
+    expect(splitForSpeech('Hello world.')).toEqual(['Hello world.'])
+    expect(splitForSpeech('   ')).toEqual([])
+  })
+
+  it('splits long prose into sentence-sized chunks', () => {
+    const sentence = 'This is a sentence that should stay whole. '
+    const text = sentence.repeat(8)
+    const chunks = splitForSpeech(text)
+
+    expect(chunks.length).toBeGreaterThan(1)
+    expect(chunks.every((chunk) => chunk.length <= MAX_SPEECH_CHUNK)).toBe(true)
+    expect(chunks.join(' ')).toContain('This is a sentence that should stay whole.')
+  })
+
+  it('hard-wraps a single oversized sentence', () => {
+    const chunks = splitForSpeech('x'.repeat(MAX_SPEECH_CHUNK * 2 + 10))
+    expect(chunks).toHaveLength(3)
+    expect(chunks.every((chunk) => chunk.length <= MAX_SPEECH_CHUNK)).toBe(true)
   })
 })
 

@@ -221,6 +221,47 @@ export function speakSequence(texts: string[], options: SpeakOptions = {}): void
 }
 
 /**
+ * Splits a long text into utterance-sized chunks.
+ *
+ * Chrome/Edge silently stop a single utterance after ~15 seconds, especially
+ * with remote voices: the control stays "Reading" but no audio comes out.
+ * Sentence-sized chunks keep the queue alive and let `onend` fire on the last
+ * one. Chunks prefer sentence boundaries and hard-wrap only when a sentence is
+ * longer than the limit.
+ */
+export const MAX_SPEECH_CHUNK = 220
+
+export function splitForSpeech(text: string): string[] {
+  const trimmed = text.replace(/\s+/g, ' ').trim()
+  if (!trimmed) return []
+  if (trimmed.length <= MAX_SPEECH_CHUNK) return [trimmed]
+
+  const sentences = trimmed.match(/[^.!?…]+[.!?…]+["')\]]*|[^.!?…]+$/g) ?? [trimmed]
+  const chunks: string[] = []
+  let buffer = ''
+
+  const flush = () => {
+    if (buffer.trim()) chunks.push(buffer.trim())
+    buffer = ''
+  }
+
+  for (const sentence of sentences) {
+    if (sentence.length > MAX_SPEECH_CHUNK) {
+      flush()
+      for (let i = 0; i < sentence.length; i += MAX_SPEECH_CHUNK) {
+        const piece = sentence.slice(i, i + MAX_SPEECH_CHUNK).trim()
+        if (piece) chunks.push(piece)
+      }
+      continue
+    }
+    if ((buffer + sentence).length > MAX_SPEECH_CHUNK) flush()
+    buffer += sentence
+  }
+  flush()
+  return chunks
+}
+
+/**
  * Speaks turns with per-turn voice selection: each turn resolves its own
  * voice (honouring `gender`) and pitch. `onEnd` fires when the last turn
  * finishes (or fails). `onStart` fires when the first is queued.
@@ -233,8 +274,11 @@ export function speakTurns(turns: SpeakTurn[], options: SpeakOptions = {}): void
     return
   }
   const synth = window.speechSynthesis
-  const usable = turns.filter((turn) => turn.text.trim().length > 0)
-  if (usable.length === 0) {
+  const chunks: Array<{ turn: SpeakTurn; text: string }> = []
+  for (const turn of turns) {
+    for (const text of splitForSpeech(turn.text)) chunks.push({ turn, text })
+  }
+  if (chunks.length === 0) {
     options.onStart?.()
     options.onEnd?.()
     return
@@ -246,7 +290,7 @@ export function speakTurns(turns: SpeakTurn[], options: SpeakOptions = {}): void
 
   const rate = options.rate && options.rate > 0 ? Math.min(2, Math.max(0.5, options.rate)) : 1
 
-  usable.forEach((turn, index) => {
+  chunks.forEach(({ turn, text }, index) => {
     const lang = turn.lang ?? options.lang
     const voices = getVoices()
 
@@ -270,7 +314,7 @@ export function speakTurns(turns: SpeakTurn[], options: SpeakOptions = {}): void
     const turnRate =
       turn.rate && turn.rate > 0 ? Math.min(2, Math.max(0.5, turn.rate)) : rate
 
-    const utterance = new SpeechSynthesisUtterance(turn.text)
+    const utterance = new SpeechSynthesisUtterance(text)
     if (lang) utterance.lang = lang
     utterance.rate = turnRate
     utterance.pitch = Math.min(2, Math.max(0, pitch))
@@ -282,7 +326,7 @@ export function speakTurns(turns: SpeakTurn[], options: SpeakOptions = {}): void
         // the default voice is better than not speaking at all.
       }
     }
-    if (index === usable.length - 1) {
+    if (index === chunks.length - 1) {
       utterance.onend = () => options.onEnd?.()
       utterance.onerror = () => options.onEnd?.()
     }

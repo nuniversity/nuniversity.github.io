@@ -537,6 +537,7 @@
     "progress": "Progress",
     "course_content": "Course Content",
     "back_to_courses": "Back to Courses",
+    "back_to_course": "Back to course",
     "labels": {
       "author": "Author",
       "level": "Level",
@@ -1853,8 +1854,6 @@
       "solid": "Solid progress: review the missed items to reach 80% mastery",
       "review": "Review recommended before moving on"
     },
-    "focus_on": "Focus mode",
-    "focus_off": "Show full lesson",
     "listen_slow": "Slower",
     "listen_normal": "Normal",
     "listen_fast": "Faster"
@@ -2011,6 +2010,15 @@
     "already_done": "Already completed",
     "correct_answer": "Correct answer",
     "replay_title": "Fix the mistakes",
-    "replay_hint": "One more try at what you missed. It will not change your score."
+    "replay_hint": "One more try at what you missed. It will not change your score.",
+    "practice_title": "Practice by level and subject",
+    "practice_hint": "Pick a level, a subject and a skill to find a matching exercise.",
+    "all_levels": "All levels",
+    "all_subjects": "All subjects",
+    "all_skills": "All skills",
+    "subject": "Subject",
+    "skill": "Skill",
+    "practice_count": "{n} exercises",
+    "practice_empty": "No exercise matches these filters yet."
   }
 }

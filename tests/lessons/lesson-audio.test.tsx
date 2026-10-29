@@ -186,6 +186,36 @@ describe('LessonAudio playback', () => {
     expect(spoken[1].text).not.toContain('Alpha body')
   })
 
+  it('falls back to the current DOM section when the outline id is empty', async () => {
+    const user = userEvent.setup()
+    render(
+      <div data-lesson-content>
+        <LessonAudio
+          lang="en-US"
+          intro="Intro."
+          sections={[
+            { id: 'alpha', text: 'Alpha', level: 2 },
+            { id: 'beta', text: 'Beta', level: 2 },
+          ]}
+          activeSectionId=""
+        />
+        <h2 id="alpha">Alpha section</h2>
+        <p>Alpha body.</p>
+        <h2 id="beta">Beta section</h2>
+        <p id="beta-body">Beta body.</p>
+      </div>
+    )
+
+    document.getElementById('alpha')!.getBoundingClientRect = () => ({ top: 60 } as DOMRect)
+    document.getElementById('beta')!.getBoundingClientRect = () => ({ top: 600 } as DOMRect)
+
+    await user.click(screen.getByRole('button', { name: /listen/i }))
+
+    expect(spoken[1].text).toContain('Alpha section')
+    expect(spoken[1].text).toContain('Alpha body.')
+    expect(spoken[1].text).not.toContain('Beta body.')
+  })
+
   it('reads the whole lesson when asked', async () => {
     const user = userEvent.setup()
     renderLesson()
@@ -279,6 +309,35 @@ describe('LessonAudio playback', () => {
 
     expect(spoken).toHaveLength(4)
     expect(spoken[2].text).toBe('Intro.')
+  })
+
+  it('applies a speed change to the next playback', async () => {
+    const user = userEvent.setup()
+    renderLesson()
+
+    await user.click(screen.getByRole('button', { name: 'Slower' }))
+    await user.click(screen.getByRole('button', { name: /listen/i }))
+
+    expect(spoken[0].rate).toBe(0.75)
+    expect(spoken[1].rate).toBe(0.75)
+  })
+
+  it('restarts the current section at the new speed while playing', async () => {
+    const user = userEvent.setup()
+    renderLesson()
+
+    await user.click(screen.getByRole('button', { name: /listen/i }))
+    expect(spoken[1].rate).toBe(1)
+
+    await user.click(screen.getByRole('button', { name: 'Slower' }))
+    expect(spoken).toHaveLength(4)
+    expect(spoken[2].rate).toBe(0.75)
+    expect(spoken[3].rate).toBe(0.75)
+
+    await user.click(screen.getByRole('button', { name: 'Faster' }))
+    expect(spoken).toHaveLength(6)
+    expect(spoken[4].rate).toBe(1.25)
+    expect(spoken[5].rate).toBe(1.25)
   })
 
   it('uses the section list supplied by the outline', async () => {

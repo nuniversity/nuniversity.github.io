@@ -25,8 +25,8 @@ test.describe('language course journey', () => {
     await card.click()
     await expect(page).toHaveURL(new RegExp(`/pt/languages/courses/${COURSE}/$`))
     await expect(page.getByTestId('language-course-overview')).toBeVisible()
-    await expect(page.getByText('Primeiros Passos')).toBeVisible()
-    await expect(page.getByText('Pessoas e Rotinas')).toBeVisible()
+    await expect(page.getByTestId('unit-01-first-steps')).toContainText('Primeiros Passos')
+    await expect(page.getByTestId('unit-02-people-routines')).toContainText('Pessoas e Rotinas')
     await expect(page.getByTestId('daily-goal')).toBeVisible()
   })
 

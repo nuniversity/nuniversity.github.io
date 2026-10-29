@@ -537,6 +537,7 @@
     "progress": "Progreso",
     "course_content": "Contenido del Curso",
     "back_to_courses": "Volver a Cursos",
+    "back_to_course": "Volver al curso",
     "total_courses": "cursos",
     "count": {
       "course": "{n} curso",
@@ -1853,8 +1854,6 @@
       "solid": "Progreso sólido: repasa los ítems fallados para alcanzar el 80% de dominio",
       "review": "Se recomienda repasar antes de avanzar"
     },
-    "focus_on": "Modo enfoque",
-    "focus_off": "Mostrar lección completa",
     "listen_slow": "Más lento",
     "listen_normal": "Normal",
     "listen_fast": "Más rápido"
@@ -2011,6 +2010,15 @@
     "already_done": "Paso ya completado",
     "correct_answer": "Respuesta correcta",
     "replay_title": "Corrige los errores",
-    "replay_hint": "Un intento más en lo que fallaste. No cambia tu puntuación."
+    "replay_hint": "Un intento más en lo que fallaste. No cambia tu puntuación.",
+    "practice_title": "Practica por nivel y tema",
+    "practice_hint": "Elige un nivel, un tema y una destreza para encontrar un ejercicio.",
+    "all_levels": "Todos los niveles",
+    "all_subjects": "Todos los temas",
+    "all_skills": "Todas las destrezas",
+    "subject": "Tema",
+    "skill": "Destreza",
+    "practice_count": "{n} ejercicios",
+    "practice_empty": "Ningún ejercicio coincide con estos filtros todavía."
   }
 }

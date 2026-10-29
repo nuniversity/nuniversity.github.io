@@ -1,8 +1,9 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { CheckCircle2, Layers, RefreshCw, XCircle } from 'lucide-react'
+import { CheckCircle2, Layers, RefreshCw, XCircle, ArrowLeft, BookOpen } from 'lucide-react'
 import type { Locale } from '@/lib/i18n/config'
+import Link from '@/components/navigation/AppLink'
 import { recordAndEmit } from '@/lib/gamification/bus'
 import { dayKey } from '@/lib/gamification/profile'
 import { listCoursesWithPractice } from '@/lib/practice/record'
@@ -273,6 +274,24 @@ export default function ReviewClient({ lang, dict, courseSlug }: ReviewClientPro
           <RefreshCw className="h-4 w-4" />
           {t?.again || 'Practice again'}
         </button>
+        {courseSlug && (
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href={`/${lang}/courses/${courseSlug}/`}
+              className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-accent"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              {dict?.courses?.back_to_course || 'Back to course'}
+            </Link>
+            <Link
+              href={`/${lang}/courses/`}
+              className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-accent"
+            >
+              <BookOpen className="h-4 w-4" />
+              {dict?.courses?.back_to_courses || 'Back to courses'}
+            </Link>
+          </div>
+        )}
       </div>
     )
   }

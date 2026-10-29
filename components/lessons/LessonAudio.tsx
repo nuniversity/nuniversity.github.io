@@ -88,7 +88,7 @@ export function collectSpokenText(root: HTMLElement): string {
   const SKIP = new Set(['PRE', 'CODE', 'TABLE', 'FIGURE', 'SVG', 'SCRIPT', 'STYLE', 'NAV'])
   const KEEP = new Set(['P', 'LI', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'BLOCKQUOTE', 'DD', 'DT'])
 
-  // Focus mode hides sections with display:none; listening must match what is
+  // Content can be hidden with display:none; listening must match what is
   // visible on screen, otherwise audio and text disagree.
   if (root.hidden || root.style.display === 'none') return ''
 
@@ -248,7 +248,7 @@ export default function LessonAudio({
   }, [])
 
   const speak = useCallback(
-    (nextSelection?: Selection) => {
+    (nextSelection?: Selection, nextRate: number = rate) => {
       if (!isSpeechSupported()) return
 
       const root = document.querySelector<HTMLElement>(selector)
@@ -257,19 +257,36 @@ export default function LessonAudio({
       const choice = nextSelection ?? selection
       let text = ''
       let title: string | null = null
-
-      if (choice === 'all' || sections.length === 0) {
+      if (choice === 'all') {
         text = collectSpokenText(root)
       } else {
-        const id =
-          choice === 'auto'
-            ? activeSectionId ?? findCurrentSectionId(root, sections)
-            : choice
-        if (id) {
-          text = collectSectionText(root, id)
-          title = sections.find(section => section.id === id)?.text ?? null
+        // Read the headings from the DOM at click time. The outline's list is
+        // collected in a passive effect and the first click can still hold the
+        // previous (empty) render, which made "the section I am reading" fall
+        // back to the whole lesson and queue hundreds of utterances.
+        const available = Array.from(
+          root.querySelectorAll<HTMLElement>('h2[id], h3[id]')
+        ).map((heading) => ({
+          id: heading.id,
+          text: (heading.textContent ?? '').replace(/\s+/g, ' ').trim(),
+          level: Number(heading.tagName[1]),
+        }))
+        if (available.length === 0) {
+          text = collectSpokenText(root)
+        } else {
+          // `activeSectionId` is `''` until the observer sees a heading, so
+          // `??` would keep the empty string and skip the current-section
+          // fallback. The empty string is not a section id.
+          const id =
+            choice === 'auto'
+              ? activeSectionId || findCurrentSectionId(root, available)
+              : choice
+          if (id) {
+            text = collectSectionText(root, id)
+            title = available.find(section => section.id === id)?.text ?? null
+          }
+          if (!text) text = collectSpokenText(root)
         }
-        if (!text) text = collectSpokenText(root)
       }
 
       if (!text) return
@@ -279,7 +296,7 @@ export default function LessonAudio({
       // never mixed into the lesson text itself.
       speakSequence([intro, text], {
         lang,
-        rate,
+        rate: nextRate,
         onEnd: () => {
           setNowReading(null)
           setStatus('idle')
@@ -324,7 +341,10 @@ export default function LessonAudio({
   const changeRate = useCallback(
     (next: number) => {
       setRate(next)
-      if (status !== 'idle') speak()
+      // `speak` closes over the previous render's `rate`, so pass the new
+      // value explicitly; without it the buttons changed the highlighted
+      // state but the next utterance kept the old speed.
+      if (status !== 'idle') speak(undefined, next)
     },
     [status, speak]
   )
