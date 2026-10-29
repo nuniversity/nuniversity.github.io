@@ -3,6 +3,15 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Volume2, Pause, Square, RotateCcw } from 'lucide-react'
+import {
+  cancelSpeech,
+  hasVoiceFor,
+  isSpeechSupported,
+  pauseSpeech,
+  resumeSpeech,
+  speakSequence,
+} from '@/lib/speech/speech'
+import { useSpeechVoices } from '@/lib/speech/use-speech'
 
 interface LessonAudioProps {
   /**
@@ -44,6 +53,12 @@ interface LessonAudioProps {
   readingLabel?: string
   /** Status shown while paused. */
   pausedLabel?: string
+  /** Rate control: slower playback label. */
+  rateSlowLabel?: string
+  /** Rate control: normal playback label. */
+  rateNormalLabel?: string
+  /** Rate control: faster playback label. */
+  rateFastLabel?: string
   /**
    * Sections to offer. The lesson outline already collects the headings and
    * tracks which one is in view, so it owns the list; when omitted the
@@ -180,24 +195,25 @@ export default function LessonAudio({
   restartLabel = 'Restart',
   readingLabel = 'Reading',
   pausedLabel = 'Paused',
+  rateSlowLabel = 'Slower',
+  rateNormalLabel = 'Normal',
+  rateFastLabel = 'Faster',
   sections: providedSections,
   activeSectionId = null,
 }: LessonAudioProps) {
   const [status, setStatus] = useState<Status>('idle')
+  const [rate, setRate] = useState(1)
   const [supported, setSupported] = useState(true)
-  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
   const [domSections, setDomSections] = useState<AudioSection[]>([])
   const [selection, setSelection] = useState<Selection>('auto')
   const [nowReading, setNowReading] = useState<string | null>(null)
-  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
   const selectId = useRef(`lesson-audio-section-${Math.random().toString(36).slice(2, 8)}`)
+  const voices = useSpeechVoices()
 
   useEffect(() => {
-    setSupported(typeof window !== 'undefined' && 'speechSynthesis' in window)
+    setSupported(isSpeechSupported())
     return () => {
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel()
-      }
+      cancelSpeech()
     }
   }, [])
 
@@ -219,46 +235,21 @@ export default function LessonAudio({
 
   const sections = providedSections ?? domSections
 
-  // Chrome populates the voice list asynchronously and fires `voiceschanged`
-  // once it has. Reading it only at play time missed the first click.
-  useEffect(() => {
-    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
-    const synth = window.speechSynthesis
-    const load = () => setVoices(synth.getVoices())
-    load()
-    synth.addEventListener?.('voiceschanged', load)
-    return () => synth.removeEventListener?.('voiceschanged', load)
-  }, [])
-
-  /** Picks the best available voice for the lesson language. */
-  const pickVoice = useCallback((): SpeechSynthesisVoice | null => {
-    if (voices.length === 0) return null
-    const base = lang.split('-')[0].toLowerCase()
-    return (
-      voices.find(v => v.lang.toLowerCase() === lang.toLowerCase()) ??
-      voices.find(v => v.lang.toLowerCase().startsWith(base)) ??
-      voices.find(v => v.lang.toLowerCase().includes(base)) ??
-      null
-    )
-  }, [lang, voices])
+  // Voice loading lives in `useSpeechVoices` (shared speech service), which
+  // also re-reads the list when the OS fires `voiceschanged`.
 
   /** True when the browser has voices, but none for the lesson's language. */
-  const languageVoiceMissing =
-    voices.length > 0 &&
-    !voices.some(v => v.lang.toLowerCase().startsWith(lang.split('-')[0].toLowerCase()))
+  const languageVoiceMissing = voices.length > 0 && !hasVoiceFor(lang, voices)
 
   const stop = useCallback(() => {
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel()
-    }
-    utteranceRef.current = null
+    cancelSpeech()
     setNowReading(null)
     setStatus('idle')
   }, [])
 
   const speak = useCallback(
     (nextSelection?: Selection) => {
-      if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
+      if (!isSpeechSupported()) return
 
       const root = document.querySelector<HTMLElement>(selector)
       if (!root) return
@@ -283,60 +274,31 @@ export default function LessonAudio({
 
       if (!text) return
 
-      window.speechSynthesis.cancel()
-
-      const voice = pickVoice()
-      const configure = (value: string) => {
-        const utterance = new SpeechSynthesisUtterance(value)
-        utterance.lang = lang
-        utterance.rate = 1
-        if (voice) {
-          try {
-            utterance.voice = voice
-          } catch {
-            // Some browsers expose a voice that cannot be assigned. Speaking
-            // with the default voice is better than not speaking at all.
-          }
-        }
-        return utterance
-      }
-
       // Two utterances, queued: a one-line confirmation, then the section. The
       // learner hears what is happening immediately, and the confirmation is
       // never mixed into the lesson text itself.
-      const announcement = configure(intro)
-      const utterance = configure(text)
-
-      utterance.onend = () => {
-        setNowReading(null)
-        setStatus('idle')
-      }
-      utterance.onerror = () => {
-        setNowReading(null)
-        setStatus('idle')
-      }
-
-      utteranceRef.current = utterance
+      speakSequence([intro, text], {
+        lang,
+        rate,
+        onEnd: () => {
+          setNowReading(null)
+          setStatus('idle')
+        },
+      })
       setNowReading(title)
-      window.speechSynthesis.speak(announcement)
-      window.speechSynthesis.speak(utterance)
       setStatus('speaking')
     },
-    [selector, lang, pickVoice, intro, selection, sections, activeSectionId]
+    [selector, lang, rate, intro, selection, sections, activeSectionId]
   )
 
   const toggle = useCallback(() => {
     if (status === 'speaking') {
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.pause()
-      }
+      pauseSpeech()
       setStatus('paused')
       return
     }
     if (status === 'paused') {
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.resume()
-      }
+      resumeSpeech()
       setStatus('speaking')
       return
     }
@@ -354,6 +316,15 @@ export default function LessonAudio({
       // Changing the section while listening restarts with the new choice,
       // rather than leaving the previous section playing under a new label.
       if (status !== 'idle') speak(next)
+    },
+    [status, speak]
+  )
+
+  /** Changing the speed while listening restarts the current selection. */
+  const changeRate = useCallback(
+    (next: number) => {
+      setRate(next)
+      if (status !== 'idle') speak()
     },
     [status, speak]
   )
@@ -418,6 +389,35 @@ export default function LessonAudio({
         >
           <Square className="h-4 w-4" aria-hidden="true" />
         </button>
+      </div>
+
+      <div
+        role="group"
+        aria-label="Playback speed"
+        className="mt-2 flex items-center gap-1"
+        data-audio-skip
+      >
+        {(
+          [
+            [0.75, rateSlowLabel],
+            [1, rateNormalLabel],
+            [1.25, rateFastLabel],
+          ] as const
+        ).map(([value, label]) => (
+          <button
+            key={value}
+            type="button"
+            onClick={() => changeRate(value)}
+            aria-pressed={rate === value}
+            className={`rounded-md px-2 py-1 text-xs transition-colors ${
+              rate === value
+                ? 'bg-primary-soft font-medium text-primary'
+                : 'text-foreground-muted hover:bg-surface-sunken hover:text-foreground'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
       {sections.length > 0 && (

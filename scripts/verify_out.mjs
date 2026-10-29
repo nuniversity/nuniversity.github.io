@@ -178,21 +178,60 @@ if (!coreOnly) {
       ok(stubHtml.includes(`href="/${loc}/languages/${LANG_PAIR}/${LANG_SLUG}/"`), `${loc} language stub links to new URL`)
     }
   }
-  let languageActivityCount = 0
-  if (exists('en/languages')) {
-    const countPlayers = (dir) => {
-      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-        const full = path.join(dir, entry.name)
-        if (entry.isDirectory()) countPlayers(full)
-        else if (entry.name === 'index.html' && path.dirname(full) !== path.join(OUT, 'en', 'languages')) {
-          const rel = path.relative(path.join(OUT, 'en', 'languages'), full).split(path.sep).join('/')
-          if (rel.split('/').length === 3) languageActivityCount++
+
+  const contentRoot = path.join(process.cwd(), 'content')
+  const lessonSlugFrom = (file) => file.replace(/\.json$/, '').replace(/^\d{2}-/, '')
+
+  // Vocabulary activity players: one export per deck manifest, per locale.
+  // The deck JSONs are the parameters (id, language_pair); nothing is listed
+  // here by hand, so adding or removing a deck updates the gate on its own.
+  const vocabDir = path.join(contentRoot, 'languages', 'vocabulary')
+  if (fs.existsSync(vocabDir)) {
+    for (const file of fs.readdirSync(vocabDir).filter((f) => f.endsWith('.json'))) {
+      const deck = JSON.parse(fs.readFileSync(path.join(vocabDir, file), 'utf-8'))
+      const pair = `${deck.language_pair?.source}-${deck.language_pair?.target}`
+      for (const loc of locales) {
+        ok(
+          exists(`${loc}/languages/${pair}/${deck.id}/index.html`),
+          `${loc} vocabulary player exported: ${deck.id}`
+        )
+      }
+    }
+  }
+
+  // Language courses: every unit and lesson declared in each course manifest
+  // must be exported for every locale. New courses are picked up by adding
+  // their manifest, never by editing this script.
+  const courseRoot = path.join(contentRoot, 'language-courses')
+  if (fs.existsSync(courseRoot)) {
+    for (const entry of fs.readdirSync(courseRoot, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue
+      const manifestPath = path.join(courseRoot, entry.name, 'course.json')
+      if (!fs.existsSync(manifestPath)) continue
+      const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'))
+      for (const loc of locales) {
+        ok(
+          exists(`${loc}/languages/courses/${entry.name}/index.html`),
+          `${loc} language course exported: ${entry.name}`
+        )
+      }
+      for (const unit of manifest.units ?? []) {
+        const lessonDir = path.join(courseRoot, entry.name, 'units', unit.slug, 'lessons')
+        const lessonFiles = fs.existsSync(lessonDir)
+          ? fs.readdirSync(lessonDir).filter((f) => f.endsWith('.json'))
+          : []
+        for (const file of lessonFiles) {
+          const slug = lessonSlugFrom(file)
+          for (const loc of locales) {
+            ok(
+              exists(`${loc}/languages/courses/${entry.name}/${unit.slug}/${slug}/index.html`),
+              `${loc} language lesson exported: ${entry.name}/${unit.slug}/${slug}`
+            )
+          }
         }
       }
     }
-    countPlayers(path.join(OUT, 'en', 'languages'))
   }
-  ok(languageActivityCount === 5, `5 language players exported under en/languages (found ${languageActivityCount})`)
   const examLessonEn = 'en/courses/aws-clf-c02/15-exam-simulation-a/index.html'
   const examLessonPt = 'pt/courses/aws-clf-c02/15-exam-simulation-a/index.html'
   if (exists(examLessonEn)) {

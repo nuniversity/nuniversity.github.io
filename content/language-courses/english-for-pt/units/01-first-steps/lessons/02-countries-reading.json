@@ -1,0 +1,277 @@
+{
+  "id": "english-for-pt::01-first-steps::countries-reading",
+  "slug": "countries-reading",
+  "unit": "01-first-steps",
+  "order": 2,
+  "title": {
+    "en": "Where are you from?",
+    "pt": "De onde você é?",
+    "es": "¿De dónde eres?"
+  },
+  "goal": {
+    "en": "Say where you are from and understand short texts about countries.",
+    "pt": "Dizer de onde você é e entender textos curtos sobre países.",
+    "es": "Decir de dónde eres y entender textos cortos sobre países."
+  },
+  "objectives": [
+    "Say where you are from with from",
+    "Understand a short text about two people",
+    "Hear the difference between think and sink"
+  ],
+  "vocabIds": [
+    "w015",
+    "w016",
+    "w017",
+    "w018",
+    "w019",
+    "w020"
+  ],
+  "reviewVocabIds": [
+    "w001",
+    "w003",
+    "w013"
+  ],
+  "grammarIds": [
+    "g-prepositions-in-at"
+  ],
+  "xp": 20,
+  "steps": [
+    {
+      "id": "s01",
+      "type": "knowledge",
+      "skill": "reading",
+      "title": {
+        "en": "The biggest country in South America",
+        "pt": "O maior país da América do Sul",
+        "es": "El país más grande de Sudamérica"
+      },
+      "text": "Brazil is the biggest country in South America. About 213 million people live there, and most of them live in cities. São Paulo is the biggest city in Brazil, with more than 12 million people.",
+      "translation": {
+        "en": "Brazil is the biggest country in South America. About 213 million people live there, and most of them live in cities. São Paulo is the biggest city in Brazil, with more than 12 million people.",
+        "pt": "O Brasil é o maior país da América do Sul. Cerca de 213 milhões de pessoas moram lá, e a maioria mora em cidades. São Paulo é a maior cidade do Brasil, com mais de 12 milhões de pessoas.",
+        "es": "Brasil es el país más grande de Sudamérica. Unos 213 millones de personas viven allí."
+      },
+      "emoji": "🇧🇷"
+    },
+    {
+      "id": "s02",
+      "type": "vocab",
+      "skill": "vocabulary",
+      "vocabIds": [
+        "w015",
+        "w016",
+        "w017",
+        "w018",
+        "w019",
+        "w020"
+      ]
+    },
+    {
+      "id": "s03",
+      "type": "input",
+      "skill": "reading",
+      "title": {
+        "en": "Mara and Jack",
+        "pt": "Mara e Jack",
+        "es": "Mara y Jack"
+      },
+      "lines": [
+        {
+          "speaker": "Narrator",
+          "text": "Mara is from Brazil. She is from São Paulo, a very big city.",
+          "translation": "Mara é do Brasil. Ela é de São Paulo, uma cidade muito grande.",
+          "enhance": [
+            "is from"
+          ]
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Jack is from the United States. He is from New York.",
+          "translation": "Jack é dos Estados Unidos. Ele é de Nova York.",
+          "enhance": [
+            "is from"
+          ]
+        },
+        {
+          "speaker": "Jack",
+          "text": "Hello, Mara! Are you from England?",
+          "translation": "Olá, Mara! Você é da Inglaterra?",
+          "gender": "male",
+          "enhance": [
+            "Are"
+          ]
+        },
+        {
+          "speaker": "Mara",
+          "text": "No, I am not. I am from Brazil.",
+          "translation": "Não, não sou. Sou do Brasil.",
+          "gender": "female",
+          "enhance": [
+            "am"
+          ]
+        },
+        {
+          "speaker": "Jack",
+          "text": "Brazil! Is São Paulo a beautiful city?",
+          "translation": "Brasil! São Paulo é uma cidade bonita?",
+          "gender": "male",
+          "enhance": [
+            "Is"
+          ]
+        },
+        {
+          "speaker": "Mara",
+          "text": "Yes, it is. Thank you!",
+          "translation": "Sim, é! Obrigada!",
+          "gender": "female",
+          "enhance": [
+            "is"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "type": "select",
+      "skill": "reading",
+      "prompt": {
+        "en": "Choose the correct answer",
+        "pt": "Escolha a resposta correta",
+        "es": "Elige la respuesta correcta"
+      },
+      "question": "Where is Mara from?",
+      "options": [
+        "She is from São Paulo, Brazil.",
+        "She is from New York.",
+        "She is from England."
+      ],
+      "correct": 0,
+      "explanation": {
+        "en": "The text says: Mara is from Brazil. She is from São Paulo.",
+        "pt": "O texto diz: Mara é do Brasil. Ela é de São Paulo.",
+        "es": "El texto dice: Mara es de Brasil."
+      }
+    },
+    {
+      "id": "s05",
+      "type": "fillblank",
+      "skill": "writing",
+      "sentence": "Jack is ___ the United States.",
+      "options": [
+        "from",
+        "in",
+        "of"
+      ],
+      "correct": 0,
+      "translation": {
+        "en": "Jack is from the United States.",
+        "pt": "Jack é dos Estados Unidos.",
+        "es": "Jack es de los Estados Unidos."
+      },
+      "explanation": {
+        "en": "FROM marks origin: I am from Brazil.",
+        "pt": "FROM marca origem: I am from Brazil (eu sou do Brasil).",
+        "es": "FROM marca origen: I am from Brazil."
+      }
+    },
+    {
+      "id": "s06",
+      "type": "tip",
+      "skill": "grammar",
+      "grammarId": "g-prepositions-in-at"
+    },
+    {
+      "id": "s07",
+      "type": "grammar",
+      "skill": "grammar",
+      "prompt": {
+        "en": "What does this sentence mean?",
+        "pt": "O que esta frase quer dizer?",
+        "es": "¿Qué significa esta frase?"
+      },
+      "question": "My friend is at home.",
+      "options": [
+        {
+          "en": "My friend is in his own house.",
+          "pt": "Meu amigo está em casa (na casa dele).",
+          "es": "Mi amigo está en su casa."
+        },
+        {
+          "en": "My friend is inside any house.",
+          "pt": "Meu amigo está dentro de uma casa qualquer.",
+          "es": "Mi amigo está dentro de una casa."
+        }
+      ],
+      "correct": 0,
+      "speak": true,
+      "explanation": {
+        "en": "AT HOME is a fixed pair: at home means em casa, nunca in home.",
+        "pt": "AT HOME é uma dupla fixa: at home significa em casa, nunca in home.",
+        "es": "AT HOME es una pareja fija: at home significa en casa."
+      }
+    },
+    {
+      "id": "s08",
+      "type": "dictation",
+      "skill": "writing",
+      "audio": "I am from Brazil.",
+      "answer": "I am from Brazil.",
+      "hint": {
+        "en": "Four words plus I.",
+        "pt": "Quatro palavras depois de I.",
+        "es": "Cuatro palabras después de I."
+      }
+    },
+    {
+      "id": "s09",
+      "type": "pairs",
+      "skill": "listening",
+      "prompt": {
+        "en": "Which word did you hear?",
+        "pt": "Qual palavra você ouviu?",
+        "es": "¿Qué palabra oíste?"
+      },
+      "trials": [
+        {
+          "audio": "think",
+          "choiceA": "think",
+          "choiceB": "sink",
+          "correct": "a"
+        },
+        {
+          "audio": "they",
+          "choiceA": "day",
+          "choiceB": "they",
+          "correct": "b"
+        },
+        {
+          "audio": "three",
+          "choiceA": "three",
+          "choiceB": "tree",
+          "correct": "a"
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "type": "speak",
+      "skill": "speaking",
+      "prompt": {
+        "en": "Speak: repeat after the audio",
+        "pt": "Fale: repita depois do áudio",
+        "es": "Habla: repite después del audio"
+      },
+      "mode": "shadow",
+      "lines": [
+        {
+          "text": "I am from Brazil.",
+          "translation": "Eu sou do Brasil."
+        },
+        {
+          "text": "My name is Mara. I am from São Paulo.",
+          "translation": "Meu nome é Mara. Sou de São Paulo."
+        }
+      ]
+    }
+  ]
+}

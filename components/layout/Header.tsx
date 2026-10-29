@@ -88,14 +88,15 @@ export default function Header({ lang, dict }: HeaderProps) {
   ]
 
   // Everything that is discovered rather than browsed lives in one panel,
-  // so the top bar stays at two items plus Explore.
+  // so the top bar stays at two items plus Explore. Language courses lead
+  // the panel: they are the main learning resource of the site.
   const exploreNavigation: NavItem[] = [
+    { id: 'languages', name: dict.navigation.languages || 'Languages', href: `/${lang}/languages` },
     { id: 'tools', name: dict.navigation.tools, href: `/${lang}/tools` },
     { id: 'games', name: dict.navigation.games, href: `/${lang}/games` },
     { id: 'quizzes', name: dict.navigation.quizzes, href: `/${lang}/quizzes` },
     { id: 'library', name: dict.navigation.library || 'Library', href: `/${lang}/library` },
     { id: 'roadmaps', name: dict.navigation.roadmaps || 'Roadmaps', href: `/${lang}/roadmaps` },
-    { id: 'languages', name: dict.navigation.languages || 'Languages', href: `/${lang}/languages` },
   ]
 
   // Site pages live after Explore and use their own icons rather than a
@@ -194,7 +195,7 @@ export default function Header({ lang, dict }: HeaderProps) {
                 />
               </button>
               {isMoreOpen && (
-                <div className="absolute right-0 top-full mt-3 z-50 w-[34rem] overflow-hidden rounded-2xl border border-border bg-popover shadow-xl animate-slide-down">
+                <div className="absolute left-1/2 top-full z-50 mt-3 w-[34rem] max-w-[calc(100vw-2rem)] -translate-x-1/2 overflow-hidden rounded-2xl border border-border bg-popover shadow-xl animate-slide-down">
                   {/* Discoverable sections, shown as colour-coded cards so the
                       site's colour map is legible from the navigation. */}
                   <ul className="grid grid-cols-2 gap-1 p-2">

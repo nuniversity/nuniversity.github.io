@@ -314,6 +314,9 @@ export default function LessonOutline({
                 restartLabel={dict?.lesson?.listen_restart || 'Restart'}
                 readingLabel={dict?.lesson?.listen_reading || 'Reading'}
                 pausedLabel={dict?.lesson?.listen_paused || 'Paused'}
+                rateSlowLabel={dict?.lesson?.listen_slow || 'Slower'}
+                rateNormalLabel={dict?.lesson?.listen_normal || 'Normal'}
+                rateFastLabel={dict?.lesson?.listen_fast || 'Faster'}
                 sections={headings}
                 activeSectionId={activeId}
               />

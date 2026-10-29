@@ -6,7 +6,8 @@ import { ArrowLeftRight, ArrowRight, Layers, Trophy } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type LanguageActivity } from '@/lib/languages/get-language-content'
 import { getMatchingBest, getFlashcardProgress, LEARNED_THRESHOLD } from '@/lib/languages/storage'
-import { pairChipLabel, tpl } from '@/lib/languages/format'
+import { tpl } from '@/lib/languages/format'
+import { PairFlags } from './pair-flags'
 
 interface LanguageActivityCardProps {
   lang: Locale
@@ -90,9 +91,12 @@ export function LanguageActivityCard({ lang, activity, dict }: LanguageActivityC
           <span className="px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
             {wordsLabel}
           </span>
-          <span className="px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-            {pairChipLabel(activity.languagePair)}
-          </span>
+          <PairFlags
+            source={activity.languagePair.source}
+            target={activity.languagePair.target}
+            size={14}
+            className="px-1"
+          />
         </div>
         <div className="flex flex-wrap gap-1.5 mb-4 min-w-0">
           {activity.localesAvailable.map(locale => (

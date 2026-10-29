@@ -1,0 +1,289 @@
+{
+  "id": "english-for-pt::01-first-steps::greetings-1",
+  "slug": "greetings-1",
+  "unit": "01-first-steps",
+  "order": 1,
+  "title": {
+    "en": "Hello! My name is...",
+    "pt": "Olá! Meu nome é...",
+    "es": "¡Hola! Me llamo..."
+  },
+  "goal": {
+    "en": "Greet someone and say your name in English.",
+    "pt": "Cumprimentar alguém e dizer seu nome em inglês.",
+    "es": "Saludar a alguien y decir tu nombre en inglés."
+  },
+  "objectives": [
+    "Greet people at different times of the day",
+    "Say your name with I am and My name is"
+  ],
+  "vocabIds": [
+    "w001",
+    "w003",
+    "w006",
+    "w007",
+    "w013"
+  ],
+  "reviewVocabIds": [],
+  "grammarIds": [
+    "g-subject-pronouns",
+    "g-be-present"
+  ],
+  "xp": 20,
+  "steps": [
+    {
+      "id": "s01",
+      "type": "knowledge",
+      "skill": "reading",
+      "title": {
+        "en": "English connects the world",
+        "pt": "O inglês conecta o mundo",
+        "es": "El inglés conecta el mundo"
+      },
+      "text": "English is spoken in more than 60 countries. About 1.5 billion people use it to work, study and travel. It is the official language of the United States and England, and it is the most studied language in Brazil.",
+      "translation": {
+        "en": "English is spoken in more than 60 countries. About 1.5 billion people use it to work, study and travel. It is the official language of the United States and England, and it is the most studied language in Brazil.",
+        "pt": "O inglês é falado em mais de 60 países. Cerca de 1,5 bilhão de pessoas o usam para trabalhar, estudar e viajar. É a língua oficial dos Estados Unidos e da Inglaterra, e é o idioma mais estudado no Brasil.",
+        "es": "El inglés se habla en más de 60 países. Unas 1.500 millones de personas lo usan para trabajar, estudiar y viajar."
+      },
+      "emoji": "🌍"
+    },
+    {
+      "id": "s02",
+      "type": "input",
+      "skill": "listening",
+      "title": {
+        "en": "At the coffee shop",
+        "pt": "Na cafeteria",
+        "es": "En la cafetería"
+      },
+      "lines": [
+        {
+          "speaker": "Tom",
+          "text": "Hello! Good morning!",
+          "translation": "Olá! Bom dia!",
+          "gender": "male"
+        },
+        {
+          "speaker": "Ana",
+          "text": "Good morning! I am Ana.",
+          "translation": "Bom dia! Eu sou a Ana.",
+          "gender": "female",
+          "enhance": [
+            "am"
+          ]
+        },
+        {
+          "speaker": "Tom",
+          "text": "Nice to meet you, Ana. My name is Tom.",
+          "translation": "Prazer em conhecer você, Ana. Meu nome é Tom.",
+          "gender": "male",
+          "enhance": [
+            "is"
+          ]
+        },
+        {
+          "speaker": "Ana",
+          "text": "Are you from the United States?",
+          "translation": "Você é dos Estados Unidos?",
+          "gender": "female",
+          "enhance": [
+            "Are"
+          ]
+        },
+        {
+          "speaker": "Tom",
+          "text": "Yes, I am. I am from New York.",
+          "translation": "Sim, sou. Sou de Nova York.",
+          "gender": "male",
+          "enhance": [
+            "am"
+          ]
+        },
+        {
+          "speaker": "Ana",
+          "text": "Thank you, Tom. See you!",
+          "translation": "Obrigada, Tom. Até mais!",
+          "gender": "female"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "type": "vocab",
+      "skill": "vocabulary",
+      "vocabIds": [
+        "w001",
+        "w003",
+        "w006",
+        "w007",
+        "w013"
+      ]
+    },
+    {
+      "id": "s04",
+      "type": "match",
+      "skill": "vocabulary",
+      "prompt": {
+        "en": "Match the words",
+        "pt": "Ligue as palavras",
+        "es": "Une las palabras"
+      },
+      "pairs": [
+        {
+          "source": "hello",
+          "target": "olá"
+        },
+        {
+          "source": "good morning",
+          "target": "bom dia"
+        },
+        {
+          "source": "please",
+          "target": "por favor"
+        },
+        {
+          "source": "thank you",
+          "target": "obrigado(a)"
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "type": "tip",
+      "skill": "grammar",
+      "grammarId": "g-subject-pronouns"
+    },
+    {
+      "id": "s06",
+      "type": "grammar",
+      "skill": "grammar",
+      "prompt": {
+        "en": "What does this sentence mean?",
+        "pt": "O que esta frase quer dizer?",
+        "es": "¿Qué significa esta frase?"
+      },
+      "question": "She is my friend.",
+      "options": [
+        {
+          "en": "She is my friend (a woman).",
+          "pt": "Ela é minha amiga.",
+          "es": "Ella es mi amiga."
+        },
+        {
+          "en": "He is my friend (a man).",
+          "pt": "Ele é meu amigo.",
+          "es": "Él es mi amigo."
+        },
+        {
+          "en": "They are my friends.",
+          "pt": "Eles são meus amigos.",
+          "es": "Ellos son mis amigos."
+        }
+      ],
+      "correct": 0,
+      "speak": true,
+      "explanation": {
+        "en": "The pronoun SHE tells you the person is a woman. The form carries the meaning.",
+        "pt": "O pronome SHE indica que a pessoa é mulher. A forma carrega o significado.",
+        "es": "El pronombre SHE indica que la persona es mujer."
+      }
+    },
+    {
+      "id": "s07",
+      "type": "grammar",
+      "skill": "grammar",
+      "prompt": {
+        "en": "What does this sentence mean?",
+        "pt": "O que esta frase quer dizer?",
+        "es": "¿Qué significa esta frase?"
+      },
+      "question": "I am 25 years old.",
+      "options": [
+        {
+          "en": "I have 25 years.",
+          "pt": "Eu tenho 25 anos.",
+          "es": "Tengo 25 años."
+        },
+        {
+          "en": "I am 25 years (as a permanent quality).",
+          "pt": "Eu sou 25 anos.",
+          "es": "Soy 25 años."
+        }
+      ],
+      "correct": 0,
+      "speak": true,
+      "explanation": {
+        "en": "English says I AM 25 with the verb BE. Portuguese uses ter (tenho), English uses am.",
+        "pt": "O inglês diz I AM 25 com o verbo BE. O português usa ter (tenho); o inglês usa am.",
+        "es": "El inglés dice I AM 25 con el verbo BE. El portugués usa tener; el inglés usa am."
+      }
+    },
+    {
+      "id": "s08",
+      "type": "listen",
+      "skill": "listening",
+      "prompt": {
+        "en": "Listen and choose what you heard",
+        "pt": "Ouça e escolha o que você ouviu",
+        "es": "Escucha y elige lo que oíste"
+      },
+      "audio": "Good morning! My name is Ana.",
+      "options": [
+        "Good morning! My name is Ana.",
+        "Good night! My name is Ana.",
+        "Good morning! Your name is Ana."
+      ],
+      "correct": 0,
+      "maxPlays": 3
+    },
+    {
+      "id": "s09",
+      "type": "build",
+      "skill": "writing",
+      "prompt": {
+        "en": "Translate this sentence",
+        "pt": "Traduza esta frase",
+        "es": "Traduce esta frase"
+      },
+      "source": "Eu sou do Brasil.",
+      "answer": "I am from Brazil",
+      "bank": [
+        "I",
+        "am",
+        "from",
+        "Brazil",
+        "is",
+        "are",
+        "you"
+      ]
+    },
+    {
+      "id": "s10",
+      "type": "speak",
+      "skill": "speaking",
+      "prompt": {
+        "en": "Speak: repeat after the audio",
+        "pt": "Fale: repita depois do áudio",
+        "es": "Habla: repite después del audio"
+      },
+      "mode": "shadow",
+      "lines": [
+        {
+          "text": "Hello! My name is Ana.",
+          "translation": "Olá! Meu nome é Ana."
+        },
+        {
+          "text": "I am from Brazil.",
+          "translation": "Eu sou do Brasil."
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "type": "review",
+      "skill": "vocabulary",
+      "count": 3
+    }
+  ]
+}

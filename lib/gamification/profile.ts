@@ -82,6 +82,7 @@ export function evaluateBadges(profile: GamificationProfile, event: Gamification
   const has = (id: BadgeId) => profile.badges[id] !== undefined
   if (event.type === 'lesson-complete' && !has('first-lesson')) earned.push('first-lesson')
   if (event.type === 'course-complete' && !has('course-complete')) earned.push('course-complete')
+  if (event.type === 'language-lesson-complete' && !has('polyglot-start')) earned.push('polyglot-start')
   if (event.type === 'quiz-pass') {
     if (!has('quiz-pass')) earned.push('quiz-pass')
     if (event.percent >= 100 && !has('perfect-quiz')) earned.push('perfect-quiz')
@@ -104,5 +105,45 @@ export function applyEvent(profile: GamificationProfile, event: GamificationEven
 export function recordEvent(event: GamificationEvent, now: Date = new Date()): EventResult {
   const result = applyEvent(getProfile(), event, now)
   saveProfile(result.profile)
+  addXpToLog(result.gainedXp, now)
   return result
+}
+
+// ---------------------------------------------------------------------------
+// Daily XP log (v1:xp-log): powers the LanguageCourse daily-goal ring.
+// One entry per local day, so `{ '2026-10-28': 35 }`. Capped defensively.
+// ---------------------------------------------------------------------------
+
+export const XP_LOG_KEY = 'v1:xp-log'
+const XP_LOG_MAX_DAYS = 60
+
+function sanitizeXpLog(raw: unknown): Record<string, number> {
+  const log = createSafeMap<number>()
+  if (typeof raw !== 'object' || raw === null) return log
+  for (const [day, xp] of Object.entries(raw as Record<string, unknown>)) {
+    if (!isSafeKey(day) || !/^\d{4}-\d{2}-\d{2}$/.test(day)) continue
+    if (typeof xp === 'number' && Number.isFinite(xp) && xp >= 0) log[day] = Math.floor(xp)
+  }
+  return log
+}
+
+function addXpToLog(xp: number, now: Date): void {
+  if (xp <= 0) return
+  const log = readJson<Record<string, number>>(XP_LOG_KEY, sanitizeXpLog) ?? createSafeMap<number>()
+  const today = dayKey(now)
+  log[today] = (log[today] ?? 0) + xp
+  // Keep only the most recent days (keys sort chronologically).
+  const days = Object.keys(log).sort()
+  while (days.length > XP_LOG_MAX_DAYS) {
+    const oldest = days.shift()
+    if (oldest) delete log[oldest]
+  }
+  safeSet(XP_LOG_KEY, JSON.stringify(log))
+}
+
+/** XP earned today (local time), for the daily-goal ring. */
+export function getXpToday(now: Date = new Date()): number {
+  const log = readJson<Record<string, number>>(XP_LOG_KEY, sanitizeXpLog)
+  if (!log) return 0
+  return log[dayKey(now)] ?? 0
 }

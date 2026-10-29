@@ -111,7 +111,7 @@ export function CoursesClient({ lang, courses, dict }: CoursesClientProps) {
           </div>
         </div>
 
-        <ReviewDueCard lang={lang} />
+        <ReviewDueCard lang={lang} dict={dict} />
 
         {/* Filters Section */}
         <div className="bg-card border rounded-2xl p-6 mb-10">

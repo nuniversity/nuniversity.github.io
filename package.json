@@ -7,7 +7,7 @@
     "build": "next build && node scripts/postbuild.mjs && node scripts/verify-css.mjs && node scripts/verify-csp.mjs",
     "start": "npx serve out -l 3000",
     "lint": "next lint",
-    "prebuild": "node scripts/publish-media.mjs && node scripts/generate-search-index.mjs && node scripts/build-question-index.mjs",
+    "prebuild": "node scripts/publish-media.mjs && node scripts/generate-search-index.mjs && node scripts/build-question-index.mjs && node scripts/build-vocab-index.mjs",
     "prepare": "husky",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -25,6 +25,7 @@
     "report:media": "node scripts/report-media-coverage.mjs",
     "report:coverage": "node scripts/report-content-coverage.mjs",
     "validate:courses": "node scripts/validate-courses.mjs",
+    "validate:language": "node scripts/validate-language-course.mjs",
     "backfill:skills": "node scripts/add-lesson-skills.mjs",
     "convert:questions": "node scripts/convert-prose-questions.mjs",
     "export:quizzes": "node scripts/export-quiz-bank.mjs"

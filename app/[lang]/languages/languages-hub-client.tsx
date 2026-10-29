@@ -5,13 +5,18 @@ import Link from 'next/link'
 import { ArrowRight, GraduationCap, Languages as LanguagesIcon, Search } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type LanguageActivity } from '@/lib/languages/get-language-content'
+import type { LanguageCourseSummary } from '@/lib/language-courses/get-language-course'
 import { LanguageActivityCard } from '@/components/languages/language-activity-card'
+import { LanguageCourseCard } from '@/components/language-course/language-course-card'
+import { PairFlags } from '@/components/languages/pair-flags'
 import { pairChipLabel } from '@/lib/languages/format'
+// LanguageCourseCard renders the flag pair itself (SVG flags, emoji fallback).
 
 interface LanguagesHubClientProps {
   lang: Locale
   activities: LanguageActivity[]
   dict: any
+  courses?: LanguageCourseSummary[]
 }
 
 type KindFilter = 'all' | 'flashcards' | 'matching'
@@ -26,12 +31,13 @@ function tpl(template: string, vars?: Record<string, string | number>): string {
   return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
 }
 
-export function LanguagesHubClient({ lang, activities, dict }: LanguagesHubClientProps) {
+export function LanguagesHubClient({ lang, activities, dict, courses = [] }: LanguagesHubClientProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [kindFilter, setKindFilter] = useState<KindFilter>('all')
   const [difficultyFilter, setDifficultyFilter] = useState<DifficultyFilter>('all')
 
   const languages = dict?.languages ?? {}
+  const languageCourseT = dict?.languageCourse ?? {}
 
   const filteredActivities = useMemo(() => {
     const query = searchQuery.toLowerCase().trim()
@@ -43,6 +49,30 @@ export function LanguagesHubClient({ lang, activities, dict }: LanguagesHubClien
       return matchesQuery && matchesKind && matchesDifficulty
     })
   }, [activities, searchQuery, kindFilter, difficultyFilter])
+
+  // The search reaches the courses too: name and description in every
+  // localized variant, plus the id and the language codes, so "inglês",
+  // "english" and "en-pt" all find the English course.
+  const filteredCourses = useMemo(() => {
+    const query = searchQuery.toLowerCase().trim()
+    if (!query) return courses
+    return courses.filter(course => {
+      const haystack = [
+        course.name.en,
+        course.name.pt,
+        course.name.es ?? '',
+        course.description.en,
+        course.description.pt,
+        course.description.es ?? '',
+        course.id,
+        course.source,
+        course.target,
+      ]
+        .join(' ')
+        .toLowerCase()
+      return haystack.includes(query)
+    })
+  }, [courses, searchQuery])
 
   const groups = useMemo(() => {
     const map = new Map<string, LanguageActivity[]>()
@@ -138,6 +168,23 @@ export function LanguagesHubClient({ lang, activities, dict }: LanguagesHubClien
           </div>
         </div>
 
+        {filteredCourses.length > 0 && (
+          <section className="mb-10" data-testid="language-courses-section">
+            <div className="mb-4 flex items-center gap-2">
+              <GraduationCap className="h-5 w-5 text-primary" />
+              <h2 className="text-xl font-bold">{languageCourseT?.title || 'Language courses'}</h2>
+              <span className="hidden text-sm text-muted-foreground sm:inline">
+                {languageCourseT?.subtitle || 'Learn a language by doing: listen, read, write and speak.'}
+              </span>
+            </div>
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2" data-testid="language-course-cards">
+              {filteredCourses.map((course) => (
+                <LanguageCourseCard key={course.id} lang={lang} course={course} dict={dict} />
+              ))}
+            </div>
+          </section>
+        )}
+
         {activities.length === 0 ? (
           <div className="text-center py-20">
             <LanguagesIcon className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
@@ -145,7 +192,7 @@ export function LanguagesHubClient({ lang, activities, dict }: LanguagesHubClien
               {languages.no_results || 'No activities match your search'}
             </p>
           </div>
-        ) : filteredActivities.length === 0 ? (
+        ) : filteredActivities.length === 0 && filteredCourses.length === 0 ? (
           <div className="text-center py-20">
             <Search className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
             <p className="text-muted-foreground text-lg">
@@ -160,9 +207,7 @@ export function LanguagesHubClient({ lang, activities, dict }: LanguagesHubClien
                 <section key={pair} aria-label={pairChipLabel({ source, target })}>
                   <div className="flex items-center justify-between gap-3 mb-4 min-w-0">
                     <div className="flex items-center gap-3 min-w-0">
-                      <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-muted font-semibold text-sm">
-                        {pairChipLabel({ source, target })}
-                      </span>
+                      <PairFlags source={source} target={target} size={18} />
                       <span className="text-sm text-muted-foreground truncate">
                         {tpl(languages.card?.activities_count || '{n} activities', { n: groupActivities.length })}
                       </span>
@@ -190,18 +235,6 @@ export function LanguagesHubClient({ lang, activities, dict }: LanguagesHubClien
             })}
           </div>
         )}
-
-        <section className="mt-12 bg-card border rounded-2xl p-8 text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-muted mb-4">
-            <GraduationCap className="w-6 h-6 text-muted-foreground" />
-          </div>
-          <h2 className="text-xl font-semibold mb-2">
-            {languages.tracks?.title || 'Language courses'}
-          </h2>
-          <p className="text-muted-foreground">
-            {languages.tracks?.coming_soon || 'Coming soon: new language tracks are on the way.'}
-          </p>
-        </section>
       </div>
     </div>
   )

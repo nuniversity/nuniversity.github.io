@@ -1,0 +1,379 @@
+[
+  {
+    "id": "w001",
+    "source": "hello",
+    "target": "olá",
+    "pos": "expr",
+    "emoji": "👋",
+    "level": "A1",
+    "topics": [
+      "greetings"
+    ]
+  },
+  {
+    "id": "w002",
+    "source": "hi",
+    "target": "oi",
+    "pos": "expr",
+    "emoji": "🙋",
+    "level": "A1",
+    "topics": [
+      "greetings"
+    ]
+  },
+  {
+    "id": "w003",
+    "source": "good morning",
+    "target": "bom dia",
+    "pos": "expr",
+    "emoji": "🌅",
+    "level": "A1",
+    "topics": [
+      "greetings"
+    ]
+  },
+  {
+    "id": "w004",
+    "source": "good afternoon",
+    "target": "boa tarde",
+    "pos": "expr",
+    "emoji": "☀️",
+    "level": "A1",
+    "topics": [
+      "greetings"
+    ]
+  },
+  {
+    "id": "w005",
+    "source": "good night",
+    "target": "boa noite",
+    "pos": "expr",
+    "emoji": "🌙",
+    "level": "A1",
+    "topics": [
+      "greetings"
+    ]
+  },
+  {
+    "id": "w006",
+    "source": "please",
+    "target": "por favor",
+    "pos": "adv",
+    "emoji": "🙏",
+    "level": "A1",
+    "topics": [
+      "politeness"
+    ]
+  },
+  {
+    "id": "w007",
+    "source": "thank you",
+    "target": "obrigado(a)",
+    "pos": "expr",
+    "emoji": "💛",
+    "level": "A1",
+    "topics": [
+      "politeness"
+    ]
+  },
+  {
+    "id": "w008",
+    "source": "sorry",
+    "target": "desculpe",
+    "pos": "expr",
+    "emoji": "😔",
+    "level": "A1",
+    "topics": [
+      "politeness"
+    ]
+  },
+  {
+    "id": "w009",
+    "source": "yes",
+    "target": "sim",
+    "pos": "other",
+    "emoji": "✅",
+    "level": "A1",
+    "topics": [
+      "basics"
+    ]
+  },
+  {
+    "id": "w010",
+    "source": "no",
+    "target": "não",
+    "pos": "other",
+    "emoji": "❌",
+    "level": "A1",
+    "topics": [
+      "basics"
+    ]
+  },
+  {
+    "id": "w011",
+    "source": "my",
+    "target": "meu, minha",
+    "pos": "pron",
+    "level": "A1",
+    "topics": [
+      "basics"
+    ]
+  },
+  {
+    "id": "w012",
+    "source": "your",
+    "target": "seu, sua",
+    "pos": "pron",
+    "level": "A1",
+    "topics": [
+      "basics"
+    ]
+  },
+  {
+    "id": "w013",
+    "source": "name",
+    "target": "nome",
+    "pos": "noun",
+    "emoji": "🏷️",
+    "level": "A1",
+    "topics": [
+      "people"
+    ],
+    "example": "My name is Ana.",
+    "exampleTarget": "Meu nome é Ana."
+  },
+  {
+    "id": "w014",
+    "source": "friend",
+    "target": "amigo, amiga",
+    "pos": "noun",
+    "emoji": "🤝",
+    "level": "A1",
+    "topics": [
+      "people"
+    ],
+    "example": "She is my friend.",
+    "exampleTarget": "Ela é minha amiga."
+  },
+  {
+    "id": "w015",
+    "source": "Brazil",
+    "target": "Brasil",
+    "pos": "noun",
+    "emoji": "🇧🇷",
+    "level": "A1",
+    "topics": [
+      "countries"
+    ]
+  },
+  {
+    "id": "w016",
+    "source": "country",
+    "target": "país",
+    "pos": "noun",
+    "emoji": "🌍",
+    "level": "A1",
+    "topics": [
+      "countries"
+    ],
+    "example": "Brazil is a big country.",
+    "exampleTarget": "O Brasil é um país grande."
+  },
+  {
+    "id": "w017",
+    "source": "city",
+    "target": "cidade",
+    "pos": "noun",
+    "emoji": "🏙️",
+    "level": "A1",
+    "topics": [
+      "countries"
+    ],
+    "example": "São Paulo is a big city.",
+    "exampleTarget": "São Paulo é uma cidade grande."
+  },
+  {
+    "id": "w018",
+    "source": "from",
+    "target": "de (origem)",
+    "pos": "prep",
+    "level": "A1",
+    "topics": [
+      "countries"
+    ],
+    "example": "I am from Brazil.",
+    "exampleTarget": "Eu sou do Brasil.",
+    "mnemonic": {
+      "en": "FROM points to the origin: I am FROM Brazil (eu SOU DO Brasil).",
+      "pt": "FROM aponta a origem: I am FROM Brazil (eu sou do Brasil)."
+    }
+  },
+  {
+    "id": "w019",
+    "source": "the United States",
+    "target": "os Estados Unidos",
+    "pos": "noun",
+    "emoji": "🇺🇸",
+    "level": "A1",
+    "topics": [
+      "countries"
+    ]
+  },
+  {
+    "id": "w020",
+    "source": "England",
+    "target": "Inglaterra",
+    "pos": "noun",
+    "emoji": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    "level": "A1",
+    "topics": [
+      "countries"
+    ]
+  },
+  {
+    "id": "w021",
+    "source": "teacher",
+    "target": "professor, professora",
+    "pos": "noun",
+    "emoji": "👩‍🏫",
+    "level": "A1",
+    "topics": [
+      "jobs"
+    ],
+    "example": "My mother is a teacher.",
+    "exampleTarget": "Minha mãe é professora.",
+    "mnemonic": {
+      "en": "TEACH (ensinar) + ER = the person who teaches.",
+      "pt": "TEACH (ensinar) + ER = a pessoa que ensina."
+    }
+  },
+  {
+    "id": "w022",
+    "source": "student",
+    "target": "estudante, aluno(a)",
+    "pos": "noun",
+    "emoji": "🎓",
+    "level": "A1",
+    "topics": [
+      "jobs"
+    ],
+    "example": "I am a student.",
+    "exampleTarget": "Eu sou estudante."
+  },
+  {
+    "id": "w023",
+    "source": "doctor",
+    "target": "médico, médica",
+    "pos": "noun",
+    "emoji": "🩺",
+    "level": "A1",
+    "topics": [
+      "jobs"
+    ],
+    "example": "My father is a doctor.",
+    "exampleTarget": "Meu pai é médico."
+  },
+  {
+    "id": "w024",
+    "source": "engineer",
+    "target": "engenheiro, engenheira",
+    "pos": "noun",
+    "emoji": "👷",
+    "level": "A1",
+    "topics": [
+      "jobs"
+    ],
+    "example": "My brother is an engineer.",
+    "exampleTarget": "Meu irmão é engenheiro."
+  },
+  {
+    "id": "w025",
+    "source": "family",
+    "target": "família",
+    "pos": "noun",
+    "emoji": "👨‍👩‍👧",
+    "level": "A1",
+    "topics": [
+      "family"
+    ],
+    "example": "My family is big.",
+    "exampleTarget": "Minha família é grande."
+  },
+  {
+    "id": "w026",
+    "source": "work",
+    "target": "trabalhar; trabalho (local)",
+    "pos": "verb",
+    "emoji": "💼",
+    "level": "A1",
+    "topics": [
+      "jobs"
+    ],
+    "example": "I work every day.",
+    "exampleTarget": "Eu trabalho todos os dias.",
+    "mnemonic": {
+      "en": "WORK is the activity or the place; JOB is the position (emprego).",
+      "pt": "WORK é a atividade ou o lugar; JOB é o emprego (o cargo)."
+    }
+  },
+  {
+    "id": "w027",
+    "source": "job",
+    "target": "emprego",
+    "pos": "noun",
+    "emoji": "📄",
+    "level": "A1",
+    "topics": [
+      "jobs"
+    ],
+    "example": "She has a new job.",
+    "exampleTarget": "Ela tem um emprego novo.",
+    "mnemonic": {
+      "en": "JOB is the position you are hired for; WORK is what you do.",
+      "pt": "JOB é o cargo pelo qual você é contratado; WORK é o que você faz."
+    }
+  },
+  {
+    "id": "w028",
+    "source": "every day",
+    "target": "todos os dias",
+    "pos": "phrase",
+    "emoji": "📅",
+    "level": "A1",
+    "topics": [
+      "routines"
+    ],
+    "example": "I study every day.",
+    "exampleTarget": "Eu estudo todos os dias."
+  },
+  {
+    "id": "w029",
+    "source": "home",
+    "target": "casa",
+    "pos": "noun",
+    "emoji": "🏠",
+    "level": "A1",
+    "topics": [
+      "places"
+    ],
+    "example": "I am at home.",
+    "exampleTarget": "Eu estou em casa.",
+    "mnemonic": {
+      "en": "AT HOME is a fixed pair: never IN HOME.",
+      "pt": "AT HOME é uma dupla fixa: nunca IN HOME."
+    }
+  },
+  {
+    "id": "w030",
+    "source": "school",
+    "target": "escola",
+    "pos": "noun",
+    "emoji": "🏫",
+    "level": "A1",
+    "topics": [
+      "places"
+    ],
+    "example": "The school is big.",
+    "exampleTarget": "A escola é grande."
+  }
+]

@@ -88,22 +88,10 @@
       "context": "independence"
     },
     {
-      "id": "64",
-      "source": "Confidence",
-      "target": "Confiança",
-      "context": "trust"
-    },
-    {
       "id": "65",
       "source": "Productivity",
       "target": "Produtividade",
       "context": "efficiency"
-    },
-    {
-      "id": "66",
-      "source": "Creativity",
-      "target": "Criatividade",
-      "context": "originality"
     },
     {
       "id": "67",
@@ -142,12 +130,6 @@
       "context": "difficulty"
     },
     {
-      "id": "73",
-      "source": "Confidence",
-      "target": "Confiança",
-      "context": "assurance"
-    },
-    {
       "id": "74",
       "source": "Achievement",
       "target": "Conquista",
@@ -170,12 +152,6 @@
       "source": "Observation",
       "target": "Observação",
       "context": "notice"
-    },
-    {
-      "id": "78",
-      "source": "Confidence",
-      "target": "Confiança",
-      "context": "belief"
     },
     {
       "id": "79",
@@ -254,18 +230,6 @@
       "source": "Preparation",
       "target": "Preparação",
       "context": "readiness"
-    },
-    {
-      "id": "92",
-      "source": "Improvement",
-      "target": "Melhoria",
-      "context": "enhancement"
-    },
-    {
-      "id": "93",
-      "source": "Observation",
-      "target": "Observação",
-      "context": "attention"
     },
     {
       "id": "94",
@@ -400,18 +364,6 @@
       "context": "data"
     },
     {
-      "id": "116",
-      "source": "Experience",
-      "target": "Experiência",
-      "context": "knowledge"
-    },
-    {
-      "id": "118",
-      "source": "Community",
-      "target": "Comunidade",
-      "context": "group"
-    },
-    {
       "id": "119",
       "source": "Stability",
       "target": "Estabilidade",
@@ -430,12 +382,6 @@
       "context": "variety"
     },
     {
-      "id": "123",
-      "source": "Connection",
-      "target": "Conexão",
-      "context": "relation"
-    },
-    {
       "id": "124",
       "source": "Security",
       "target": "Segurança",
@@ -446,12 +392,6 @@
       "source": "Quality",
       "target": "Qualidade",
       "context": "standard"
-    },
-    {
-      "id": "126",
-      "source": "Creativity",
-      "target": "Criatividade",
-      "context": "imagination"
     },
     {
       "id": "127",
@@ -502,12 +442,6 @@
       "context": "attention"
     },
     {
-      "id": "135",
-      "source": "Patience",
-      "target": "Paciência",
-      "context": "tolerance"
-    },
-    {
       "id": "136",
       "source": "Belief",
       "target": "Crença",
@@ -536,12 +470,6 @@
       "source": "Goal",
       "target": "Meta",
       "context": "objective"
-    },
-    {
-      "id": "141",
-      "source": "Decision",
-      "target": "Decisão",
-      "context": "judgment"
     },
     {
       "id": "142",
@@ -584,12 +512,6 @@
       "source": "Respect",
       "target": "Respeito",
       "context": "admiration"
-    },
-    {
-      "id": "149",
-      "source": "Justice",
-      "target": "Justiça",
-      "context": "law"
     },
     {
       "id": "150",
@@ -736,12 +658,6 @@
       "context": "action"
     },
     {
-      "id": "176",
-      "source": "Innovation",
-      "target": "Inovação",
-      "context": "creativity"
-    },
-    {
       "id": "177",
       "source": "Competitiveness",
       "target": "Competitividade",
@@ -760,34 +676,16 @@
       "context": "dedication"
     },
     {
-      "id": "180",
-      "source": "Accountability",
-      "target": "Prestação de contas",
-      "context": "responsibility"
-    },
-    {
       "id": "181",
       "source": "Efficiency",
       "target": "Eficiência",
       "context": "effectiveness"
     },
     {
-      "id": "182",
-      "source": "Collaboration",
-      "target": "Colaboração",
-      "context": "teamwork"
-    },
-    {
       "id": "183",
       "source": "Imagination",
       "target": "Imaginação",
       "context": "creativity"
-    },
-    {
-      "id": "184",
-      "source": "Skepticism",
-      "target": "Ceticismo",
-      "context": "critical thinking"
     },
     {
       "id": "185",
@@ -806,12 +704,6 @@
       "source": "Empowerment",
       "target": "Empoderamento",
       "context": "strengthening"
-    },
-    {
-      "id": "188",
-      "source": "Authenticity",
-      "target": "Autenticidade",
-      "context": "truthfulness"
     },
     {
       "id": "189",
@@ -836,12 +728,6 @@
       "source": "Influence",
       "target": "Influência",
       "context": "impact"
-    },
-    {
-      "id": "194",
-      "source": "Innovation",
-      "target": "Inovação",
-      "context": "originality"
     },
     {
       "id": "195",
@@ -904,12 +790,6 @@
       "context": "morality"
     },
     {
-      "id": "205",
-      "source": "Perspective",
-      "target": "Perspectiva",
-      "context": "viewpoint"
-    },
-    {
       "id": "206",
       "source": "Philosophy",
       "target": "Filosofia",
@@ -958,18 +838,6 @@
       "context": "uncertainty"
     },
     {
-      "id": "214",
-      "source": "Complexity",
-      "target": "Complexidade",
-      "context": "intricacy"
-    },
-    {
-      "id": "215",
-      "source": "Innovation",
-      "target": "Inovação",
-      "context": "improvement"
-    },
-    {
       "id": "216",
       "source": "Revolution",
       "target": "Revolução",
@@ -980,12 +848,6 @@
       "source": "Evolution",
       "target": "Evolução",
       "context": "progress"
-    },
-    {
-      "id": "218",
-      "source": "Contradiction",
-      "target": "Contradição",
-      "context": "conflict"
     },
     {
       "id": "219",
@@ -1072,18 +934,6 @@
       "context": "understanding"
     },
     {
-      "id": "234",
-      "source": "Innovation",
-      "target": "Inovação",
-      "context": "newness"
-    },
-    {
-      "id": "235",
-      "source": "Paradigm",
-      "target": "Paradigma",
-      "context": "framework"
-    },
-    {
       "id": "236",
       "source": "Phenomenon",
       "target": "Fenômeno",
@@ -1094,12 +944,6 @@
       "source": "Significance",
       "target": "Significado",
       "context": "importance"
-    },
-    {
-      "id": "238",
-      "source": "Synthesis",
-      "target": "Síntese",
-      "context": "integration"
     },
     {
       "id": "239",
@@ -1118,18 +962,6 @@
       "source": "Methodology",
       "target": "Metodologia",
       "context": "approach"
-    },
-    {
-      "id": "242",
-      "source": "Hypothesis",
-      "target": "Hipótese",
-      "context": "assumption"
-    },
-    {
-      "id": "243",
-      "source": "Validation",
-      "target": "Validação",
-      "context": "verification"
     },
     {
       "id": "245",
@@ -1154,12 +986,6 @@
       "source": "Relevance",
       "target": "Relevância",
       "context": "importance"
-    },
-    {
-      "id": "250",
-      "source": "Significance",
-      "target": "Importância",
-      "context": "meaning"
     }
   ],
   "locales": {

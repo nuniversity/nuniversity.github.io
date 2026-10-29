@@ -1,0 +1,157 @@
+{
+  "id": "english-for-pt::02-people-routines::routine-review",
+  "slug": "routine-review",
+  "unit": "02-people-routines",
+  "order": 2,
+  "title": {
+    "en": "Unit challenge",
+    "pt": "Desafio da unidade",
+    "es": "Desafío de la unidad"
+  },
+  "goal": {
+    "en": "Review units 1 and 2: greetings, origins, jobs and the verb BE.",
+    "pt": "Revise as unidades 1 e 2: cumprimentos, origens, profissões e o verbo BE.",
+    "es": "Repasa las unidades 1 y 2: saludos, orígenes, profesiones y el verbo BE."
+  },
+  "objectives": [
+    "Answer mixed questions about the first two units",
+    "Dictate and say full sentences"
+  ],
+  "vocabIds": [],
+  "reviewVocabIds": ["w021", "w023", "w026", "w015", "w003"],
+  "grammarIds": ["g-be-present", "g-present-simple"],
+  "xp": 30,
+  "steps": [
+    {
+      "id": "s01",
+      "type": "quiz",
+      "skill": "writing",
+      "question": {
+        "en": "Choose the correct translation of: Eu sou do Brasil.",
+        "pt": "Escolha a tradução de: Eu sou do Brasil.",
+        "es": "Elige la traducción de: Soy de Brasil."
+      },
+      "options": ["I am from Brazil.", "I have from Brazil.", "I is from Brazil."],
+      "correct": 0,
+      "explanation": {
+        "en": "English uses BE for origin: I am from Brazil.",
+        "pt": "O inglês usa BE para origem: I am from Brazil.",
+        "es": "El inglés usa BE para el origen: I am from Brazil."
+      }
+    },
+    {
+      "id": "s02",
+      "type": "quiz",
+      "skill": "grammar",
+      "question": {
+        "en": "Complete: She ___ a teacher.",
+        "pt": "Complete: She ___ a teacher.",
+        "es": "Completa: She ___ a teacher."
+      },
+      "options": ["is", "are", "am"],
+      "correct": 0,
+      "explanation": {
+        "en": "With she, BE becomes is.",
+        "pt": "Com she, o BE vira is.",
+        "es": "Con she, BE se convierte en is."
+      }
+    },
+    {
+      "id": "s03",
+      "type": "quiz",
+      "skill": "vocabulary",
+      "question": {
+        "en": "Which word means a position of employment?",
+        "pt": "Qual palavra significa cargo/emprego (posição)?",
+        "es": "¿Qué palabra significa empleo (posición)?"
+      },
+      "options": ["job", "work", "home"],
+      "correct": 0,
+      "explanation": {
+        "en": "JOB is the position; WORK is the activity or the place.",
+        "pt": "JOB é o emprego (posição); WORK é a atividade ou o local.",
+        "es": "JOB es el empleo; WORK es la actividad o el lugar."
+      }
+    },
+    {
+      "id": "s04",
+      "type": "quiz",
+      "skill": "grammar",
+      "question": {
+        "en": "Complete: ___ you from England?",
+        "pt": "Complete: ___ you from England?",
+        "es": "Completa: ___ you from England?"
+      },
+      "options": ["Are", "Is", "Am"],
+      "correct": 0,
+      "explanation": {
+        "en": "With you, questions start with ARE.",
+        "pt": "Com you, as perguntas começam com ARE.",
+        "es": "Con you, las preguntas empiezan con ARE."
+      }
+    },
+    {
+      "id": "s05",
+      "type": "quiz",
+      "skill": "grammar",
+      "question": {
+        "en": "Which sentence is correct?",
+        "pt": "Qual frase está correta?",
+        "es": "¿Qué frase es correcta?"
+      },
+      "options": [
+        "My sister works every day.",
+        "My sister work every day.",
+        "My sister working every day."
+      ],
+      "correct": 0,
+      "explanation": {
+        "en": "With she and he, the verb takes S: she works.",
+        "pt": "Com she e he, o verbo ganha S: she works.",
+        "es": "Con she y he, el verbo lleva S: she works."
+      }
+    },
+    {
+      "id": "s06",
+      "type": "pairs",
+      "skill": "listening",
+      "prompt": {
+        "en": "Which word did you hear?",
+        "pt": "Qual palavra você ouviu?",
+        "es": "¿Qué palabra oíste?"
+      },
+      "trials": [
+        { "audio": "this", "choiceA": "this", "choiceB": "dis", "correct": "a" },
+        { "audio": "day", "choiceA": "day", "choiceB": "they", "correct": "a" },
+        { "audio": "these", "choiceA": "zees", "choiceB": "these", "correct": "b" }
+      ]
+    },
+    {
+      "id": "s07",
+      "type": "dictation",
+      "skill": "writing",
+      "audio": "She is a doctor.",
+      "answer": "She is a doctor.",
+      "hint": {
+        "en": "Four words.",
+        "pt": "Quatro palavras.",
+        "es": "Cuatro palabras."
+      }
+    },
+    {
+      "id": "s08",
+      "type": "speak",
+      "skill": "speaking",
+      "prompt": {
+        "en": "Speak: finish strong",
+        "pt": "Fale: termine com estilo",
+        "es": "Habla: termina con fuerza"
+      },
+      "mode": "shadow",
+      "lines": [
+        { "text": "I am from Brazil.", "translation": "Eu sou do Brasil." },
+        { "text": "My sister works every day.", "translation": "Minha irmã trabalha todos os dias." }
+      ]
+    }
+  ]
+}

@@ -6,8 +6,11 @@ import type { Locale } from '@/lib/i18n/config'
 import { recordAndEmit } from '@/lib/gamification/bus'
 import { dayKey } from '@/lib/gamification/profile'
 import { listCoursesWithPractice } from '@/lib/practice/record'
-import { getReviewCards, saveReviewCard } from '@/lib/practice/cards'
+import { getDueCards, getReviewCards, saveReviewCard } from '@/lib/practice/cards'
 import { newCard, reviewCard } from '@/lib/practice/fsrs'
+import { isVocabCard, parseVocabCardKey } from '@/lib/language-courses/schedule'
+import { isVocabReviewItem, VocabReviewCard, type VocabReviewItem } from './VocabReviewCard'
+import type { ReviewCardState } from '@/lib/practice/types'
 
 interface IndexQuestion {
   id: string
@@ -19,6 +22,8 @@ interface IndexQuestion {
   correct: number
   explanation?: string
 }
+
+type SessionItem = IndexQuestion | VocabReviewItem
 
 interface QuestionIndex {
   course: string
@@ -50,8 +55,8 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 /** Round-robin interleave across courses (interleaving principle). */
-function interleave(groups: IndexQuestion[][]): IndexQuestion[] {
-  const out: IndexQuestion[] = []
+function interleave(groups: SessionItem[][]): SessionItem[] {
+  const out: SessionItem[] = []
   let added = true
   for (let i = 0; added; i++) {
     added = false
@@ -65,6 +70,53 @@ function interleave(groups: IndexQuestion[][]): IndexQuestion[] {
   return out
 }
 
+interface VocabIndex {
+  pair: string
+  course: string
+  items: Array<{ key: string; source: string; target: string }>
+}
+
+/**
+ * Loads the static vocab index for each pair that has due cards, and turns
+ * the due `lang::` cards into recall items interleaved with question cards.
+ */
+async function loadVocabItems(
+  dueCards: ReviewCardState[],
+  now: Date
+): Promise<VocabReviewItem[]> {
+  const pairs = new Set<string>()
+  for (const card of dueCards) {
+    const parsed = parseVocabCardKey(card.key)
+    if (parsed && new Date(card.due).getTime() <= now.getTime()) pairs.add(parsed.pair)
+  }
+  const items: VocabReviewItem[] = []
+  for (const pair of Array.from(pairs)) {
+    try {
+      const res = await fetch(`/vocab-index/${pair}.json`)
+      if (!res.ok) continue
+      const payload = (await res.json()) as VocabIndex
+      const byKey = new Map(payload.items.map((item) => [item.key, item]))
+      for (const card of dueCards) {
+        const parsed = parseVocabCardKey(card.key)
+        if (!parsed || parsed.pair !== pair) continue
+        const vocab = byKey.get(card.key)
+        if (!vocab) continue
+        items.push({
+          kind: 'vocab',
+          key: card.key,
+          pair,
+          course: payload.course,
+          source: vocab.source,
+          target: vocab.target,
+        })
+      }
+    } catch {
+      // offline or missing index: skip this pair
+    }
+  }
+  return items
+}
+
 /**
  * Daily review (FSRS-due, cross-course, interleaved) and per-course mixed
  * practice. All state is client-side; content comes from the static question
@@ -73,7 +125,7 @@ function interleave(groups: IndexQuestion[][]): IndexQuestion[] {
 export default function ReviewClient({ lang, dict, courseSlug }: ReviewClientProps) {
   const t = dict?.review
   const [phase, setPhase] = useState<Phase>('loading')
-  const [session, setSession] = useState<IndexQuestion[]>([])
+  const [session, setSession] = useState<SessionItem[]>([])
   const [index, setIndex] = useState(0)
   const [selected, setSelected] = useState<number | null>(null)
   const [revealed, setRevealed] = useState(false)
@@ -81,10 +133,11 @@ export default function ReviewClient({ lang, dict, courseSlug }: ReviewClientPro
   const load = useCallback(async () => {
     setPhase('loading')
     const slugs = courseSlug ? [courseSlug] : listCoursesWithPractice()
-    const dueCards = getReviewCards()
+    const allCards = getReviewCards()
+    const dueCards = Object.values(allCards)
     const now = new Date()
 
-    const groups: IndexQuestion[][] = []
+    const groups: SessionItem[][] = []
     for (const slug of slugs) {
       try {
         const res = await fetch(`/question-index/${lang}/${slug}.json`)
@@ -97,13 +150,19 @@ export default function ReviewClient({ lang, dict, courseSlug }: ReviewClientPro
         const pool = courseSlug
           ? questions
           : questions.filter((question) => {
-              const card = dueCards[question.id]
+              const card = allCards[question.id]
               return card !== undefined && new Date(card.due).getTime() <= now.getTime()
             })
         if (pool.length > 0) groups.push(pool)
       } catch {
         // offline or missing index: skip this course
       }
+    }
+
+    // Vocabulary scheduled by language lessons joins the daily queue.
+    if (!courseSlug) {
+      const vocabItems = await loadVocabItems(dueCards.filter(isVocabCard), now)
+      if (vocabItems.length > 0) groups.push(vocabItems)
     }
 
     const mixed = interleave(groups.map(shuffle))
@@ -124,7 +183,7 @@ export default function ReviewClient({ lang, dict, courseSlug }: ReviewClientPro
   const current = session[index]
 
   const answer = (optionIndex: number) => {
-    if (revealed || !current) return
+    if (revealed || !current || isVocabReviewItem(current)) return
     setSelected(optionIndex)
     setRevealed(true)
 
@@ -134,6 +193,18 @@ export default function ReviewClient({ lang, dict, courseSlug }: ReviewClientPro
     const { next } = existing
       ? reviewCard(existing, correct)
       : reviewCard(newCard(current.id, current.course ?? courseSlug ?? '', current.lesson), correct)
+    saveReviewCard(next)
+  }
+
+  /** Vocab recall cards are self-graded (knew it / still learning). */
+  const gradeVocab = (correct: boolean) => {
+    if (!current || !isVocabReviewItem(current)) return
+    setRevealed(true)
+    const cards = getReviewCards()
+    const existing = cards[current.key]
+    const { next } = existing
+      ? reviewCard(existing, correct)
+      : reviewCard(newCard(current.key, current.course, 'vocabulary'), correct)
     saveReviewCard(next)
   }
 
@@ -206,7 +277,7 @@ export default function ReviewClient({ lang, dict, courseSlug }: ReviewClientPro
     )
   }
 
-  const correct = revealed && selected === current.correct
+  const correct = revealed && !isVocabReviewItem(current) && selected === current.correct
   return (
     <div className="rounded-xl border bg-card shadow-sm" data-testid="review-session" data-audio-skip>
       <div className="flex items-center justify-between border-b px-4 py-3">
@@ -218,6 +289,23 @@ export default function ReviewClient({ lang, dict, courseSlug }: ReviewClientPro
           {index + 1} / {session.length}
         </span>
       </div>
+      {isVocabReviewItem(current) ? (
+        <>
+          <VocabReviewCard item={current} dict={dict} onGrade={gradeVocab} />
+          {revealed && (
+            <div className="border-t p-4" aria-live="polite">
+              <button
+                type="button"
+                onClick={next}
+                data-testid="vocab-next"
+                className="w-full rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {index + 1 < session.length ? t?.next || 'Next' : t?.finish || 'Finish'}
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
       <div className="p-4 sm:p-6">
         <p className="mb-4 font-medium leading-relaxed">{current.question}</p>
         <div className="space-y-2">
@@ -271,6 +359,7 @@ export default function ReviewClient({ lang, dict, courseSlug }: ReviewClientPro
           )}
         </div>
       </div>
+      )}
     </div>
   )
 }

@@ -1,0 +1,304 @@
+{
+  "id": "english-for-pt",
+  "name": {
+    "en": "English for Portuguese Speakers",
+    "pt": "Inglês para Falantes de Português",
+    "es": "Inglés para Hablantes de Portugués"
+  },
+  "description": {
+    "en": "Learn English from zero by listening, reading, writing and speaking, with grammar taught through practice.",
+    "pt": "Aprenda inglês do zero ouvindo, lendo, escrevendo e falando, com gramática ensinada na prática.",
+    "es": "Aprende inglés desde cero escuchando, leyendo, escribiendo y hablando, con gramática práctica."
+  },
+  "source": "pt",
+  "target": "en",
+  "cefrTarget": "A1",
+  "difficulty": "beginner",
+  "emoji": "🇬🇧",
+  "units": [
+    {
+      "slug": "01-first-steps",
+      "order": 1,
+      "title": {
+        "en": "First Steps",
+        "pt": "Primeiros Passos",
+        "es": "Primeros Pasos"
+      },
+      "description": {
+        "en": "Greet people, say your name and talk about where you are from.",
+        "pt": "Cumprimente pessoas, diga seu nome e fale de onde você é.",
+        "es": "Saluda a la gente, di tu nombre y habla de dónde eres."
+      },
+      "emoji": "👋",
+      "cefr": "A1",
+      "objectives": [
+        "Greet people and introduce yourself in English",
+        "Say where you are from"
+      ],
+      "lessons": [
+        {
+          "slug": "greetings-1",
+          "title": {
+            "en": "Hello! My name is...",
+            "pt": "Olá! Meu nome é...",
+            "es": "¡Hola! Me llamo..."
+          },
+          "kind": "core"
+        },
+        {
+          "slug": "countries-reading",
+          "title": {
+            "en": "Where are you from?",
+            "pt": "De onde você é?",
+            "es": "¿De dónde eres?"
+          },
+          "kind": "reading"
+        }
+      ]
+    },
+    {
+      "slug": "02-people-routines",
+      "order": 2,
+      "title": {
+        "en": "People and Routines",
+        "pt": "Pessoas e Rotinas",
+        "es": "Personas y Rutinas"
+      },
+      "description": {
+        "en": "Talk about jobs, family and everyday work.",
+        "pt": "Fale sobre profissões, família e o trabalho do dia a dia.",
+        "es": "Habla sobre profesiones, familia y el trabajo diario."
+      },
+      "emoji": "👨‍👩‍👧",
+      "cefr": "A1",
+      "objectives": [
+        "Talk about jobs and family",
+        "Describe simple routines"
+      ],
+      "lessons": [
+        {
+          "slug": "family-work",
+          "title": {
+            "en": "My family works",
+            "pt": "Minha família trabalha",
+            "es": "Mi familia trabaja"
+          },
+          "kind": "core"
+        },
+        {
+          "slug": "routine-review",
+          "title": {
+            "en": "Unit challenge",
+            "pt": "Desafio da unidade",
+            "es": "Desafío de la unidad"
+          },
+          "kind": "review"
+        }
+      ]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "g-subject-pronouns",
+      "title": {
+        "en": "Subject pronouns",
+        "pt": "Pronomes sujeitos",
+        "es": "Pronombres sujeto"
+      },
+      "pattern": "I am | You are | He is | She is | It is | We are | They are",
+      "tip": {
+        "en": "English always needs the subject pronoun. Portuguese can drop it, English cannot.",
+        "pt": "O inglês sempre precisa do pronome sujeito. O português pode deixar de fora; o inglês não.",
+        "es": "El inglés siempre necesita el pronombre sujeto. El portugués puede omitirlo; el inglés no."
+      },
+      "compare": {
+        "pt": "Trabalho aqui.",
+        "en": "I work here.",
+        "note": {
+          "en": "The Portuguese sentence has no subject. In English, \"I\" is required.",
+          "pt": "A frase em português não tem sujeito. Em inglês, o \"I\" é obrigatório.",
+          "es": "La frase en portugués no tiene sujeto. En inglés, el \"I\" es obligatorio."
+        }
+      },
+      "examples": [
+        {
+          "en": "I am Ana.",
+          "pt": "Eu sou a Ana."
+        },
+        {
+          "en": "She is my friend.",
+          "pt": "Ela é minha amiga."
+        }
+      ]
+    },
+    {
+      "id": "g-be-present",
+      "title": {
+        "en": "The verb BE (am, is, are)",
+        "pt": "O verbo BE (am, is, are)",
+        "es": "El verbo BE (am, is, are)"
+      },
+      "pattern": "I am | You are | He is / She is | We are | They are",
+      "tip": {
+        "en": "English uses BE for age and feelings: I am 25, I am hungry. Portuguese uses ter and ter fome.",
+        "pt": "O inglês usa BE para idade e sensações: I am 25, I am hungry. O português usa ter e ter fome.",
+        "es": "El inglés usa BE para la edad y sensaciones: I am 25, I am hungry. El portugués usa tener."
+      },
+      "compare": {
+        "pt": "Eu tenho 25 anos.",
+        "en": "I am 25 years old.",
+        "note": {
+          "en": "Never translate ter anos as have. English says am.",
+          "pt": "Nunca traduza ter anos como have. O inglês usa am.",
+          "es": "Nunca traduzcas tener años como have. El inglés usa am."
+        }
+      },
+      "examples": [
+        {
+          "en": "I am a student.",
+          "pt": "Eu sou estudante."
+        },
+        {
+          "en": "They are happy.",
+          "pt": "Eles estão felizes."
+        }
+      ]
+    },
+    {
+      "id": "g-articles-a-an",
+      "title": {
+        "en": "A and AN",
+        "pt": "A e AN",
+        "es": "A y AN"
+      },
+      "pattern": "a book | an apple | a teacher | an hour",
+      "tip": {
+        "en": "Use AN before a vowel sound, A before a consonant sound. The sound matters, not the letter.",
+        "pt": "Use AN antes de som de vogal, A antes de som de consoante. O som importa, não a letra.",
+        "es": "Usa AN antes de sonido vocálico, A antes de sonido consonántico. Importa el sonido, no la letra."
+      },
+      "compare": {
+        "pt": "um livro",
+        "en": "a book",
+        "note": {
+          "en": "Portuguese um/uma becomes a or an in English.",
+          "pt": "O português um/uma vira a ou an em inglês.",
+          "es": "El portugués um/uma se convierte en a o an en inglés."
+        }
+      },
+      "examples": [
+        {
+          "en": "She is a doctor.",
+          "pt": "Ela é médica."
+        },
+        {
+          "en": "It is an apple.",
+          "pt": "É uma maçã."
+        }
+      ]
+    },
+    {
+      "id": "g-questions-be",
+      "title": {
+        "en": "Questions with BE",
+        "pt": "Perguntas com BE",
+        "es": "Preguntas con BE"
+      },
+      "pattern": "Are you...? | Is she...? | Am I...?",
+      "tip": {
+        "en": "To ask a question, put BE before the subject. Portuguese only changes the voice.",
+        "pt": "Para perguntar, coloque o BE antes do sujeito. O português só muda a entonação.",
+        "es": "Para preguntar, pon BE antes del sujeto. El portugués solo cambia la entonación."
+      },
+      "compare": {
+        "pt": "Você é do Brasil?",
+        "en": "Are you from Brazil?",
+        "note": {
+          "en": "English moves the verb ARE to the front.",
+          "pt": "O inglês move o verbo ARE para o início.",
+          "es": "El inglés mueve el verbo ARE al principio."
+        }
+      },
+      "examples": [
+        {
+          "en": "Are you a teacher?",
+          "pt": "Você é professor?"
+        },
+        {
+          "en": "Is she at home?",
+          "pt": "Ela está em casa?"
+        }
+      ]
+    },
+    {
+      "id": "g-present-simple",
+      "title": {
+        "en": "Present simple with HE, SHE, IT",
+        "pt": "Presente simples com HE, SHE, IT",
+        "es": "Presente simple con HE, SHE, IT"
+      },
+      "pattern": "I work | You work | She works | He works",
+      "tip": {
+        "en": "With he, she and it, the verb takes S: she works. Portuguese never changes here, English always does.",
+        "pt": "Com he, she e it, o verbo ganha S: she works. O português não muda aqui; o inglês sempre muda.",
+        "es": "Con he, she e it, el verbo lleva S: she works. El portugués no cambia aquí; el inglés siempre."
+      },
+      "compare": {
+        "pt": "Ela trabalha.",
+        "en": "She works.",
+        "note": {
+          "en": "Never say she work. The S is required with she.",
+          "pt": "Nunca diga she work. O S é obrigatório com she.",
+          "es": "Nunca digas she work. La S es obligatoria con she."
+        }
+      },
+      "examples": [
+        {
+          "en": "My sister works at a school.",
+          "pt": "Minha irmã trabalha em uma escola."
+        },
+        {
+          "en": "I work every day.",
+          "pt": "Eu trabalho todos os dias."
+        }
+      ]
+    },
+    {
+      "id": "g-prepositions-in-at",
+      "title": {
+        "en": "IN and AT for places",
+        "pt": "IN e AT para lugares",
+        "es": "IN y AT para lugares"
+      },
+      "pattern": "in a city / in a country | at home / at work",
+      "tip": {
+        "en": "Portuguese uses em for everything. English splits it: in for big places, at for a point like home or work.",
+        "pt": "O português usa em para tudo. O inglês divide: in para lugares grandes, at para um ponto como home ou work.",
+        "es": "El portugués usa em para todo. El inglés lo divide: in para lugares grandes, at para un punto como home."
+      },
+      "compare": {
+        "pt": "Estou em casa.",
+        "en": "I am at home.",
+        "note": {
+          "en": "Say at home, never in home.",
+          "pt": "Diga at home, nunca in home.",
+          "es": "Di at home, nunca in home."
+        }
+      },
+      "examples": [
+        {
+          "en": "I live in São Paulo.",
+          "pt": "Eu moro em São Paulo."
+        },
+        {
+          "en": "She is at work.",
+          "pt": "Ela está no trabalho."
+        }
+      ]
+    }
+  ],
+  "flags": {
+    "source": "br",
+    "target": "gb"
+  }
+}

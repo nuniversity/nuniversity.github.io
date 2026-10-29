@@ -1,0 +1,331 @@
+/* Generated from react-syntax-highlighter vscDarkPlus (prism) for useInlineStyles={false}. */
+
+.prismjs {
+  color: #d4d4d4;
+  font-size: 13px;
+  text-shadow: none;
+  font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  ms-hyphens: none;
+  hyphens: none;
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  background: #1e1e1e;
+  position: relative;
+  z-index: 1;
+}
+
+.prismjs code {
+  color: #d4d4d4;
+  font-size: 13px;
+  text-shadow: none;
+  font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  ms-hyphens: none;
+  hyphens: none;
+}
+
+.prismjs::selection {
+  text-shadow: none;
+  background: #264F78;
+}
+
+.prismjs *::selection {
+  text-shadow: none;
+  background: #264F78;
+}
+
+.prismjs .namespace {
+  -opacity: .7;
+  color: #4ec9b0;
+}
+
+.prismjs .doctype.doctype-tag {
+  color: #569CD6;
+}
+
+.prismjs .doctype.name {
+  color: #9cdcfe;
+}
+
+.prismjs .comment {
+  color: #6a9955;
+}
+
+.prismjs .prolog {
+  color: #6a9955;
+}
+
+.prismjs .punctuation {
+  color: #d4d4d4;
+}
+
+.prismjs .language-html .language-css .token.punctuation {
+  color: #d4d4d4;
+}
+
+.prismjs .language-html .language-javascript .token.punctuation {
+  color: #d4d4d4;
+}
+
+.prismjs .property {
+  color: #9cdcfe;
+}
+
+.prismjs .tag {
+  color: #569cd6;
+}
+
+.prismjs .boolean {
+  color: #569cd6;
+}
+
+.prismjs .number {
+  color: #b5cea8;
+}
+
+.prismjs .constant {
+  color: #9cdcfe;
+}
+
+.prismjs .symbol {
+  color: #b5cea8;
+}
+
+.prismjs .inserted {
+  color: #b5cea8;
+}
+
+.prismjs .unit {
+  color: #b5cea8;
+}
+
+.prismjs .selector {
+  color: #d7ba7d;
+}
+
+.prismjs .attr-name {
+  color: #9cdcfe;
+}
+
+.prismjs .string {
+  color: #ce9178;
+}
+
+.prismjs .char {
+  color: #ce9178;
+}
+
+.prismjs .builtin {
+  color: #ce9178;
+}
+
+.prismjs .deleted {
+  color: #ce9178;
+}
+
+.prismjs .language-css .token.string.url {
+  text-decoration: underline;
+}
+
+.prismjs .operator {
+  color: #d4d4d4;
+}
+
+.prismjs .entity {
+  color: #569cd6;
+}
+
+.prismjs .operator.arrow {
+  color: #569CD6;
+}
+
+.prismjs .atrule {
+  color: #ce9178;
+}
+
+.prismjs .atrule.rule {
+  color: #c586c0;
+}
+
+.prismjs .atrule.url {
+  color: #9cdcfe;
+}
+
+.prismjs .atrule.url.function {
+  color: #dcdcaa;
+}
+
+.prismjs .atrule.url.punctuation {
+  color: #d4d4d4;
+}
+
+.prismjs .keyword {
+  color: #569CD6;
+}
+
+.prismjs .keyword.module {
+  color: #c586c0;
+}
+
+.prismjs .keyword.control-flow {
+  color: #c586c0;
+}
+
+.prismjs .function {
+  color: #dcdcaa;
+}
+
+.prismjs .function.maybe-class-name {
+  color: #dcdcaa;
+}
+
+.prismjs .regex {
+  color: #d16969;
+}
+
+.prismjs .important {
+  color: #569cd6;
+}
+
+.prismjs .italic {
+  font-style: italic;
+}
+
+.prismjs .class-name {
+  color: #4ec9b0;
+}
+
+.prismjs .maybe-class-name {
+  color: #4ec9b0;
+}
+
+.prismjs .console {
+  color: #9cdcfe;
+}
+
+.prismjs .parameter {
+  color: #9cdcfe;
+}
+
+.prismjs .interpolation {
+  color: #9cdcfe;
+}
+
+.prismjs .punctuation.interpolation-punctuation {
+  color: #569cd6;
+}
+
+.prismjs .variable {
+  color: #9cdcfe;
+}
+
+.prismjs .imports.maybe-class-name {
+  color: #9cdcfe;
+}
+
+.prismjs .exports.maybe-class-name {
+  color: #9cdcfe;
+}
+
+.prismjs .escape {
+  color: #d7ba7d;
+}
+
+.prismjs .tag.punctuation {
+  color: #808080;
+}
+
+.prismjs .cdata {
+  color: #808080;
+}
+
+.prismjs .attr-value {
+  color: #ce9178;
+}
+
+.prismjs .attr-value.punctuation {
+  color: #ce9178;
+}
+
+.prismjs .attr-value.punctuation.attr-equals {
+  color: #d4d4d4;
+}
+
+.prismjs .pre[class*="language-javascript"] {
+  color: #9cdcfe;
+}
+
+.prismjs .code[class*="language-javascript"] {
+  color: #9cdcfe;
+}
+
+.prismjs .pre[class*="language-jsx"] {
+  color: #9cdcfe;
+}
+
+.prismjs .code[class*="language-jsx"] {
+  color: #9cdcfe;
+}
+
+.prismjs .pre[class*="language-typescript"] {
+  color: #9cdcfe;
+}
+
+.prismjs .code[class*="language-typescript"] {
+  color: #9cdcfe;
+}
+
+.prismjs .pre[class*="language-tsx"] {
+  color: #9cdcfe;
+}
+
+.prismjs .code[class*="language-tsx"] {
+  color: #9cdcfe;
+}
+
+.prismjs .pre[class*="language-css"] {
+  color: #ce9178;
+}
+
+.prismjs .code[class*="language-css"] {
+  color: #ce9178;
+}
+
+.prismjs .pre[class*="language-html"] {
+  color: #d4d4d4;
+}
+
+.prismjs .code[class*="language-html"] {
+  color: #d4d4d4;
+}
+
+.prismjs .language-regex .token.anchor {
+  color: #dcdcaa;
+}
+
+.prismjs .language-html .token.punctuation {
+  color: #808080;
+}
+

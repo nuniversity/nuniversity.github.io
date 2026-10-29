@@ -53,8 +53,9 @@ function buildGrid(words: string[]): { grid: string[][]; placements: WordPlaceme
 
   for (const word of words) {
     let placed = false
-    const attempts = 0
+    let attempts = 0
     while (!placed && attempts < 200) {
+      attempts += 1
       const dir = DIRS[Math.floor(Math.random() * DIRS.length)]
       const row = Math.floor(Math.random() * GRID_SIZE)
       const col = Math.floor(Math.random() * GRID_SIZE)

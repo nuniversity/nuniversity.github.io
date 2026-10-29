@@ -4,6 +4,7 @@ export const revalidate = false
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import { type Locale } from '@/lib/i18n/config'
 import { getAllLanguageActivities } from '@/lib/languages/get-language-content'
+import { getAllLanguageCourses } from '@/lib/language-courses/get-language-course'
 import { Metadata } from 'next'
 import { LanguagesHubClient } from './languages-hub-client'
 import { buildAlternates } from '@/lib/seo/alternates'
@@ -30,6 +31,7 @@ export default async function LanguagesPage({ params }: LanguagesPageProps) {
   const dict = await getDictionary(lang)
 
   const activities = await getAllLanguageActivities(lang)
+  const languageCourses = getAllLanguageCourses(lang)
 
-  return <LanguagesHubClient lang={lang} activities={activities} dict={dict} />
+  return <LanguagesHubClient lang={lang} activities={activities} dict={dict} courses={languageCourses} />
 }

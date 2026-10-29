@@ -1,0 +1,294 @@
+{
+  "id": "english-for-pt::02-people-routines::family-work",
+  "slug": "family-work",
+  "unit": "02-people-routines",
+  "order": 1,
+  "title": {
+    "en": "My family works",
+    "pt": "Minha família trabalha",
+    "es": "Mi familia trabaja"
+  },
+  "goal": {
+    "en": "Talk about jobs and what your family does.",
+    "pt": "Falar sobre profissões e o que sua família faz.",
+    "es": "Hablar sobre profesiones y lo que hace tu familia."
+  },
+  "objectives": [
+    "Name common jobs in English",
+    "Use works with he and she",
+    "Know the difference between work and job"
+  ],
+  "vocabIds": [
+    "w021",
+    "w022",
+    "w023",
+    "w024",
+    "w025",
+    "w026",
+    "w027"
+  ],
+  "reviewVocabIds": [
+    "w011",
+    "w013",
+    "w015"
+  ],
+  "grammarIds": [
+    "g-present-simple",
+    "g-articles-a-an"
+  ],
+  "xp": 20,
+  "steps": [
+    {
+      "id": "s01",
+      "type": "knowledge",
+      "skill": "reading",
+      "title": {
+        "en": "The most common jobs in the world",
+        "pt": "As profissões mais comuns do mundo",
+        "es": "Las profesiones más comunes del mundo"
+      },
+      "text": "What do people do? In many countries, the most common jobs are in shops and schools. About 70 million people in the world are teachers. Doctors and engineers are important jobs too, but there are fewer of them.",
+      "translation": {
+        "en": "What do people do? In many countries, the most common jobs are in shops and schools. About 70 million people in the world are teachers. Doctors and engineers are important jobs too, but there are fewer of them.",
+        "pt": "O que as pessoas fazem? Em muitos países, os empregos mais comuns são em lojas e escolas. Cerca de 70 milhões de pessoas no mundo são professoras. Médicos e engenheiros também são profissões importantes, mas existem em menor número.",
+        "es": "¿Qué hace la gente? En muchos países, los empleos más comunes están en tiendas y escuelas."
+      },
+      "emoji": "🧑‍🏭"
+    },
+    {
+      "id": "s02",
+      "type": "input",
+      "skill": "listening",
+      "title": {
+        "en": "About the family",
+        "pt": "Sobre a família",
+        "es": "Sobre la familia"
+      },
+      "lines": [
+        {
+          "speaker": "Ana",
+          "text": "Tom, is your family big?",
+          "translation": "Tom, sua família é grande?",
+          "gender": "female",
+          "enhance": [
+            "is"
+          ]
+        },
+        {
+          "speaker": "Tom",
+          "text": "Yes! My father is a doctor and my mother is a teacher.",
+          "translation": "Sim! Meu pai é médico e minha mãe é professora.",
+          "gender": "male",
+          "enhance": [
+            "is a"
+          ]
+        },
+        {
+          "speaker": "Ana",
+          "text": "My mother is a teacher too! And your sister?",
+          "translation": "Minha mãe também é professora! E sua irmã?",
+          "gender": "female",
+          "enhance": [
+            "is a"
+          ]
+        },
+        {
+          "speaker": "Tom",
+          "text": "My sister works at a hospital. She is a doctor.",
+          "translation": "Minha irmã trabalha em um hospital. Ela é médica.",
+          "gender": "male",
+          "enhance": [
+            "works"
+          ]
+        },
+        {
+          "speaker": "Ana",
+          "text": "And you? What is your job?",
+          "translation": "E você? Qual é seu emprego?",
+          "gender": "female",
+          "enhance": [
+            "is"
+          ]
+        },
+        {
+          "speaker": "Tom",
+          "text": "I am an engineer. I work every day at a big company.",
+          "translation": "Sou engenheiro. Trabalho todos os dias em uma empresa grande.",
+          "gender": "male",
+          "enhance": [
+            "am"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "type": "vocab",
+      "skill": "vocabulary",
+      "vocabIds": [
+        "w021",
+        "w022",
+        "w023",
+        "w024",
+        "w025",
+        "w026",
+        "w027"
+      ]
+    },
+    {
+      "id": "s04",
+      "type": "select",
+      "skill": "vocabulary",
+      "prompt": {
+        "en": "Choose the correct answer",
+        "pt": "Escolha a resposta correta",
+        "es": "Elige la respuesta correcta"
+      },
+      "question": "professora em inglês é:",
+      "options": [
+        "teacher",
+        "doctor",
+        "engineer"
+      ],
+      "correct": 0,
+      "explanation": {
+        "en": "Teacher = professor/professora.",
+        "pt": "Teacher = professor/professora.",
+        "es": "Teacher = profesor/profesora."
+      }
+    },
+    {
+      "id": "s05",
+      "type": "tip",
+      "skill": "grammar",
+      "grammarId": "g-present-simple"
+    },
+    {
+      "id": "s06",
+      "type": "grammar",
+      "skill": "grammar",
+      "prompt": {
+        "en": "What does this sentence mean?",
+        "pt": "O que esta frase quer dizer?",
+        "es": "¿Qué significa esta frase?"
+      },
+      "question": "My sister works at a hospital.",
+      "options": [
+        {
+          "en": "My sister (female) works at a hospital.",
+          "pt": "Minha irmã trabalha em um hospital.",
+          "es": "Mi hermana trabaja en un hospital."
+        },
+        {
+          "en": "My brother (male) works at a hospital.",
+          "pt": "Meu irmão trabalha em um hospital.",
+          "es": "Mi hermano trabaja en un hospital."
+        }
+      ],
+      "correct": 0,
+      "speak": true,
+      "explanation": {
+        "en": "SISTER means a female sibling; the word itself carries the meaning.",
+        "pt": "SISTER quer dizer irmã; a palavra em si carrega o significado.",
+        "es": "SISTER significa hermana; la palabra lleva el significado."
+      }
+    },
+    {
+      "id": "s07",
+      "type": "grammar",
+      "skill": "grammar",
+      "prompt": {
+        "en": "What does this sentence mean?",
+        "pt": "O que esta frase quer dizer?",
+        "es": "¿Qué significa esta frase?"
+      },
+      "question": "I need a new job.",
+      "options": [
+        {
+          "en": "I need new employment (a position).",
+          "pt": "Preciso de um novo emprego.",
+          "es": "Necesito un nuevo empleo."
+        },
+        {
+          "en": "I need to work again (the activity).",
+          "pt": "Preciso trabalhar de novo.",
+          "es": "Necesito trabajar de nuevo."
+        }
+      ],
+      "correct": 0,
+      "speak": true,
+      "explanation": {
+        "en": "JOB is the position (emprego); WORK is the activity or the place. Portuguese uses trabalho for both.",
+        "pt": "JOB é o emprego (o cargo); WORK é a atividade ou o local. O português usa trabalho para os dois.",
+        "es": "JOB es el empleo; WORK es la actividad o el lugar."
+      }
+    },
+    {
+      "id": "s08",
+      "type": "listen",
+      "skill": "listening",
+      "prompt": {
+        "en": "Listen and choose what you heard",
+        "pt": "Ouça e escolha o que você ouviu",
+        "es": "Escucha y elige lo que oíste"
+      },
+      "audio": "My father is a doctor.",
+      "options": [
+        "My father is a doctor.",
+        "My father is a teacher.",
+        "My mother is a doctor."
+      ],
+      "correct": 0,
+      "maxPlays": 3
+    },
+    {
+      "id": "s09",
+      "type": "build",
+      "skill": "writing",
+      "prompt": {
+        "en": "Translate this sentence",
+        "pt": "Traduza esta frase",
+        "es": "Traduce esta frase"
+      },
+      "source": "Minha mãe é professora.",
+      "answer": "My mother is a teacher",
+      "bank": [
+        "My",
+        "mother",
+        "is",
+        "a",
+        "teacher",
+        "father",
+        "an",
+        "the"
+      ]
+    },
+    {
+      "id": "s10",
+      "type": "speak",
+      "skill": "speaking",
+      "prompt": {
+        "en": "Speak: repeat after the audio",
+        "pt": "Fale: repita depois do áudio",
+        "es": "Habla: repite después del audio"
+      },
+      "mode": "shadow",
+      "lines": [
+        {
+          "text": "My sister is a teacher.",
+          "translation": "Minha irmã é professora."
+        },
+        {
+          "text": "I am a student. I work every day.",
+          "translation": "Sou estudante. Trabalho todos os dias."
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "type": "review",
+      "skill": "vocabulary",
+      "count": 3
+    }
+  ]
+}

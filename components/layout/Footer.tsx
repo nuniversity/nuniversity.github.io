@@ -24,12 +24,12 @@ export default function Footer({ lang, dict }: FooterProps) {
   const footerLinks = {
     platform: [
       { name: dict.footer.links.courses, href: `/${lang}/courses`, icon: BookOpen },
+      { name: dict.footer.links.languages, href: `/${lang}/languages`, icon: Languages },
       { name: dict.footer.links.tools, href: `/${lang}/tools`, icon: Code },
       { name: dict.footer.links.games, href: `/${lang}/games`, icon: GamepadIcon },
       { name: dict.footer.links.quizzes, href: `/${lang}/quizzes`, icon: Award },
       { name: dict.library?.title || 'Library', href: `/${lang}/library`, icon: Library },
       { name: dict.footer.links.roadmaps, href: `/${lang}/roadmaps`, icon: Route },
-      { name: dict.footer.links.languages, href: `/${lang}/languages`, icon: Languages },
     ],
     subjects: [
       { name: dict.footer.links.computerScience, href: `/${lang}/courses` },

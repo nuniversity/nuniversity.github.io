@@ -5,6 +5,8 @@ import { motion, AnimatePresence, useMotionValue, useTransform, type PanInfo } f
 import { ArrowLeft, RotateCcw, Download, Upload, BarChart3, Sparkles, Eye, EyeOff, Volume2 } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { VocabularyGame, VocabularyWord } from '@/lib/languages/types'
+import { tpl } from '@/lib/languages/format'
+import { speak, toSpeechLang } from '@/lib/speech/speech'
 import {
   getFlashcardProgress,
   setFlashcardProgress,
@@ -34,9 +36,9 @@ function shuffleArray<T>(arr: T[]): T[] {
   return a
 }
 
-function t(template: string, vars?: Record<string, string | number>): string {
-  if (!vars) return template
-  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
+/** Plays the word with the in-app speech engine (no external TTS service). */
+function playWord(word: string, locale: string): void {
+  speak(word, { lang: toSpeechLang(locale), rate: 1 })
 }
 
 const cardVariants = {
@@ -263,23 +265,13 @@ export function FlashcardGameClient({ lang, game, dict, pair: pairProp }: Flashc
     return { total, newCount, learning, learned }
   }, [game.words, progress])
 
-  const getGoogleImagesUrl = (word: string) => `https://www.google.com/search?q=${encodeURIComponent(`${word} + significado`)}&tbm=isch`
-  const getPronunciationUrl = (word: string, fromLang: string, toLang: string) => {
-    const params = new URLSearchParams({
-      sl: fromLang,
-      tl: toLang,
-      text: word,
-      op: 'translations',
-      hl: lang,
-    })
-    return `https://translate.google.com/?${params.toString()}`
-  }
+  const getGoogleImagesUrl = (word: string) => `https://www.google.com/search?q=${encodeURIComponent(word)}&tbm=isch`
 
   const boxConfigs = [
-    { mode: 'all' as StudyMode, count: stats.total, label: t(fc.mode_all ?? 'All', { n: stats.total }), color: 'indigo', bgActive: 'bg-primary', borderActive: 'border-primary', textActive: 'text-primary' },
-    { mode: 'new' as StudyMode, count: stats.newCount, label: fc.new ?? 'New', color: 'green', bgActive: 'bg-green-600', borderActive: 'border-green-600', textActive: 'text-green-600' },
-    { mode: 'learning' as StudyMode, count: stats.learning, label: fc.learning ?? 'Learning', color: 'blue', bgActive: 'bg-blue-600', borderActive: 'border-blue-600', textActive: 'text-blue-600' },
-    { mode: 'learned' as StudyMode, count: stats.learned, label: fc.learned ?? 'Learned', color: 'purple', bgActive: 'bg-primary', borderActive: 'border-primary', textActive: 'text-primary' },
+    { mode: 'all' as StudyMode, count: stats.total, label: tpl(fc.mode_all ?? 'All', { n: stats.total }), bgActive: 'bg-primary', textActive: 'text-primary' },
+    { mode: 'new' as StudyMode, count: stats.newCount, label: fc.new ?? 'New', bgActive: 'bg-green-600', textActive: 'text-green-600' },
+    { mode: 'learning' as StudyMode, count: stats.learning, label: fc.learning ?? 'Learning', bgActive: 'bg-blue-600', textActive: 'text-blue-600' },
+    { mode: 'learned' as StudyMode, count: stats.learned, label: fc.learned ?? 'Learned', bgActive: 'bg-primary', textActive: 'text-primary' },
   ]
 
   if (showStats) {
@@ -351,8 +343,8 @@ export function FlashcardGameClient({ lang, game, dict, pair: pairProp }: Flashc
                 onClick={() => setStudyMode(box.mode)}
                 className={`flex-1 py-3 px-2 rounded-xl text-center transition-all duration-200 cursor-pointer select-none ${
                   isActive
-                    ? `${box.bgActive} text-white shadow-lg ring-2 ring-offset-2 ring-${box.color}-300 dark:ring-${box.color}-700`
-                    : `bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-${box.color}-400 hover:shadow-md active:scale-95`
+                    ? `${box.bgActive} text-white shadow-lg ring-2 ring-offset-2 ring-primary/40`
+                    : `bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-primary/50 hover:shadow-md active:scale-95`
                 }`}
               >
                 <div className={`text-2xl font-extrabold ${isActive ? 'text-white' : box.textActive}`}>{box.count}</div>
@@ -378,8 +370,8 @@ export function FlashcardGameClient({ lang, game, dict, pair: pairProp }: Flashc
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-10 text-center">
             <Sparkles className="w-16 h-16 mx-auto mb-4 text-primary" />
             <h2 className="text-2xl font-bold mb-2">{fc.session_complete ?? 'Session complete!'}</h2>
-            <p className="text-gray-500 mb-2">{t(fc.reviewed_n_cards ?? 'You reviewed {n} cards this session.', { n: sessionStats.reviewed })}</p>
-            <p className="text-sm text-gray-400 mb-6">{t(fc.n_correct_n_errors ?? '{n} correct \u00b7 {n} errors', { n: sessionStats.correct, n2: sessionStats.incorrect })}</p>
+            <p className="text-gray-500 mb-2">{tpl(fc.reviewed_n_cards ?? 'You reviewed {n} cards this session.', { n: sessionStats.reviewed })}</p>
+            <p className="text-sm text-gray-400 mb-6">{tpl(fc.n_correct_n_errors ?? '{n} correct \u00b7 {n2} errors', { n: sessionStats.correct, n2: sessionStats.incorrect })}</p>
             <div className="flex gap-3 justify-center">
               <button onClick={() => { setCurrentIndex(0); setIsComplete(false); setSessionStats({ reviewed: 0, correct: 0, incorrect: 0 }) }} className="px-6 py-2 rounded-lg bg-primary text-white hover:bg-primary-hover">{fc.restart ?? 'Restart'}</button>
               <button onClick={() => setShowStats(true)} className="px-6 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600">{fc.view_statistics ?? 'View Statistics'}</button>
@@ -388,7 +380,7 @@ export function FlashcardGameClient({ lang, game, dict, pair: pairProp }: Flashc
         ) : currentWord ? (
           <div>
             <div className="text-center mb-3">
-              <span className="text-sm text-gray-500">{t(fc.progress_of ?? '{current} of {total}', { current: currentIndex + 1, total: filteredWords.length })}</span>
+              <span className="text-sm text-gray-500">{tpl(fc.progress_of ?? '{current} of {total}', { current: currentIndex + 1, total: filteredWords.length })}</span>
               <div className="w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full mt-2">
                 <div className="h-1.5 bg-primary rounded-full transition-all" style={{ width: `${((currentIndex + 1) / filteredWords.length) * 100}%` }} />
               </div>
@@ -431,9 +423,15 @@ export function FlashcardGameClient({ lang, game, dict, pair: pairProp }: Flashc
                   {!isFlipped ? (
                     <>
                       <div className="absolute top-3 right-3 flex gap-1">
-                        <a href={getPronunciationUrl(currentWord.source, game.language_pair.source, game.language_pair.target)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-400 hover:text-primary" title={fc.listen_pronunciation ?? 'Listen pronunciation'}>
+                        <button
+                          type="button"
+                          onClick={e => { e.stopPropagation(); playWord(currentWord.source, game.language_pair.source) }}
+                          className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-400 hover:text-primary"
+                          title={fc.listen_pronunciation ?? 'Listen pronunciation'}
+                          aria-label={fc.listen_pronunciation ?? 'Listen pronunciation'}
+                        >
                           <Volume2 className="w-5 h-5" />
-                        </a>
+                        </button>
                         <a href={getGoogleImagesUrl(currentWord.source)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-400 hover:text-primary" title={fc.view_images ?? 'View images'}>
                           <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
                         </a>
@@ -446,9 +444,15 @@ export function FlashcardGameClient({ lang, game, dict, pair: pairProp }: Flashc
                   ) : (
                     <>
                       <div className="absolute top-3 right-3 flex gap-1">
-                        <a href={getPronunciationUrl(currentWord.target, game.language_pair.target, game.language_pair.source)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-400 hover:text-primary" title={fc.listen_pronunciation ?? 'Listen pronunciation'}>
+                        <button
+                          type="button"
+                          onClick={e => { e.stopPropagation(); playWord(currentWord.target, game.language_pair.target) }}
+                          className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-400 hover:text-primary"
+                          title={fc.listen_pronunciation ?? 'Listen pronunciation'}
+                          aria-label={fc.listen_pronunciation ?? 'Listen pronunciation'}
+                        >
                           <Volume2 className="w-5 h-5" />
-                        </a>
+                        </button>
                       </div>
                       {currentWord.emoji && <span className="text-4xl mb-3">{currentWord.emoji}</span>}
                       <h2 className="text-2xl font-bold text-primary dark:text-primary mb-2">{currentWord.target}</h2>

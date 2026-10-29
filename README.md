@@ -106,6 +106,8 @@ The build generates a fully static site in the `out/` directory. The site is dep
 ## Features
 
 - **Multi-language**: English, Portuguese, Spanish — with automatic locale detection and redirect
+- **Language Courses**: interactive courses at /[lang]/languages/courses/ — listening, reading, writing & speaking with FSRS vocabulary and grammar-by-practice ([docs](./docs/features/LANGUAGE-COURSES.md))
+- **Shared speech service**: browser TTS with rate control powers lesson read-aloud, flashcards and language exercises
 - **Courses**: 38 Markdown-driven learning paths with enhanced rendering (code highlighting, Mermaid diagrams, alert boxes)
 - **Interactive Tools**: 10 tools — Eisenhower Matrix, SWOT, LLM Prompt Builder, Pomodoro Timer, Habit Tracker, Flashcards, Regex Tester, Unit Converter, Decision Matrix, Brain Writing
 - **Games**: 7 games across 6 categories — coding, conversation, math, logic, physics, puzzles

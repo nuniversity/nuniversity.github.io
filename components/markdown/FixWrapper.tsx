@@ -5,6 +5,8 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import type { SyntaxHighlighterProps } from 'react-syntax-highlighter'
 
+import './prism-token-colors.css'
+
 // Only the grammars the content actually uses are registered.
 //
 // The default `Prism` entry point bundles every one of refractor's 277
@@ -58,5 +60,5 @@ for (const [name, grammar] of Object.entries(LANGUAGES)) {
 }
 
 export default function SyntaxHighlighterWrapper(props: SyntaxHighlighterProps) {
-  return <SyntaxHighlighter {...props} style={vscDarkPlus as any} />
+  return <SyntaxHighlighter {...props} style={vscDarkPlus as any} useInlineStyles={false} />
 }

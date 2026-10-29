@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Crown, Flame, ShieldCheck, Sparkles, Trophy } from 'lucide-react'
+import { Crown, Flame, Languages, ShieldCheck, Sparkles, Trophy } from 'lucide-react'
 import { getProfile, levelFromXp } from '@/lib/gamification/profile'
 import { onAward } from '@/lib/gamification/bus'
 import { BADGE_IDS, type BadgeId, type GamificationProfile } from '@/lib/gamification/types'
@@ -12,6 +12,7 @@ const BADGE_ICON: Record<BadgeId, typeof Trophy> = {
   'perfect-quiz': Crown,
   'course-complete': Trophy,
   'streak-7': Flame,
+  'polyglot-start': Languages,
 }
 
 function tpl(template: string, vars?: Record<string, string | number>): string {

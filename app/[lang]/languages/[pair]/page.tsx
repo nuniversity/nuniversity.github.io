@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import { LanguageActivityCard } from '@/components/languages/language-activity-card'
 import { pairChipLabel, tpl } from '@/lib/languages/format'
+import { PairFlags } from '@/components/languages/pair-flags'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface LanguagePairPageProps {
@@ -72,9 +73,7 @@ export default async function LanguagePairPage({ params }: LanguagePairPageProps
 
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-3">
-            <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-muted font-semibold">
-              {pairChipLabel({ source, target })}
-            </span>
+            <PairFlags source={source} target={target} size={20} />
             <span className="text-sm text-muted-foreground">
               {tpl(languages?.card?.activities_count || '{n} activities', { n: activities.length })}
             </span>
