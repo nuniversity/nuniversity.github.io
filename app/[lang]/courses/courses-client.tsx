@@ -2,7 +2,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { BookOpen, Search, Clock, Target, GraduationCap, Sparkles, User, ArrowRight } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { getAreaGradient } from '@/lib/courses/area-colors'

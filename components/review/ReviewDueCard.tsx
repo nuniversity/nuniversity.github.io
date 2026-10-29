@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { CalendarClock } from 'lucide-react'
 import type { Locale } from '@/lib/i18n/config'
 import { getDueCards } from '@/lib/practice/cards'

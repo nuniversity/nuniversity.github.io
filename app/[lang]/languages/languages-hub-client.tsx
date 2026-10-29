@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { ArrowRight, GraduationCap, Languages as LanguagesIcon, Search } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type LanguageActivity } from '@/lib/languages/get-language-content'

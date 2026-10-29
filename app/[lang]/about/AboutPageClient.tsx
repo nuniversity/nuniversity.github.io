@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import Image from "next/image"
 import { motion } from 'framer-motion';
 import { Rocket, Target, Zap, Users, Award, Heart, ArrowRight, Sparkles } from 'lucide-react';

@@ -1,7 +1,7 @@
 // components/home/SectionMap.tsx
 'use client'
 
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { ArrowUpRight } from 'lucide-react'
 import { sections, sectionOrder, type SectionId } from '@/lib/navigation/sections'
 import { type Locale } from '@/lib/i18n/config'

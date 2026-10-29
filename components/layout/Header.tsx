@@ -1,7 +1,7 @@
 // components/layout/Header.tsx
 'use client'
 
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import dynamicImport from 'next/dynamic'
 import { Menu, X, Sun, Moon, Search, ChevronDown, Info, Mail, Compass, HeartHandshake } from 'lucide-react'

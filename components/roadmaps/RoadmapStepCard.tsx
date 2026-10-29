@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle, Circle, Lock, ChevronDown, ChevronUp, ExternalLink, Lightbulb, MessageCircle, GitBranch, BookOpen } from 'lucide-react'
 import { type RoadmapStep, type RoadmapRelationship, STEP_TYPE_CONFIG } from '@/lib/roadmaps/types'

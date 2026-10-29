@@ -85,7 +85,7 @@ describe('quizzes hub certificates link', () => {
     )
 
     const link = screen.getByTestId('certificates-link')
-    expect(link).toHaveAttribute('href', '/en/quizzes/certificates')
+    expect(link).toHaveAttribute('href', '/en/quizzes/certificates/')
     expect(link).toHaveTextContent('My certificates')
   })
 })

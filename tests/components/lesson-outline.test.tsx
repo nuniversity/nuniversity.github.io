@@ -115,7 +115,7 @@ describe('LessonOutline syllabus', () => {
     renderOutline()
 
     expect(screen.getByText('AWS AIF C01')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Back to Courses' })).toHaveAttribute('href', '/en/courses')
+    expect(screen.getByRole('link', { name: 'Back to Courses' })).toHaveAttribute('href', '/en/courses/')
   })
 
   it('shows a check on completed syllabus lessons', () => {

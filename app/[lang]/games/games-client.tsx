@@ -2,7 +2,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { Gamepad2, Search, Trophy, Target, Brain, Code, BookOpen, Sparkles, Zap, Atom, Heart, ArrowRight, Languages } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { GameMetadata } from '@/lib/games/get-game-content'

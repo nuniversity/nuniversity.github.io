@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Trophy, RotateCcw, ArrowLeft, CheckCircle2, XCircle, Shuffle, Target } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 
 type Mode = 'dec-to-bin' | 'bin-to-dec' | 'dec-to-hex' | 'hex-to-dec' | 'bin-to-hex' | 'hex-to-bin'
 

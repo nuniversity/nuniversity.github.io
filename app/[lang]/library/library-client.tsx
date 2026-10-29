@@ -2,7 +2,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { 
   Search, Library, Video, BookOpen, GraduationCap, FileText, 
   Github, Headphones, Newspaper, Filter, X, ExternalLink,

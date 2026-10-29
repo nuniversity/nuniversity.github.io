@@ -2,7 +2,7 @@ import { getRoadmapContent, getAllRoadmaps } from '@/lib/roadmaps/get-roadmap-co
 import { RoadmapTimeline } from '@/components/roadmaps/RoadmapTimeline'
 import { i18n, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/get-dictionary'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import { Metadata } from 'next'

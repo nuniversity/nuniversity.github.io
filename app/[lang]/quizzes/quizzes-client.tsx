@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { Search, Trophy, ArrowRight, FileQuestion, Award } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { type QuizKind, type QuizSummary } from '@/lib/quizzes/types'

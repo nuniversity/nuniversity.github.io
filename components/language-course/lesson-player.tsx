@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { ArrowLeft, ArrowRight, Trophy } from 'lucide-react'
 import type { Locale } from '@/lib/i18n/config'
 import type {

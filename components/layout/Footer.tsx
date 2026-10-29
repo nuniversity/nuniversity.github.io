@@ -1,5 +1,5 @@
 // components/layout/Footer.tsx
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { Github, Twitter, Linkedin, Mail, BookOpen, Code, Calculator, GamepadIcon, Library, Award, Route, Languages } from 'lucide-react'
 import { MapPin, Youtube, Globe, Instagram, Send, CheckCircle } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'

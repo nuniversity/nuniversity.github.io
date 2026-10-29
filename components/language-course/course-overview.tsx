@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { ArrowRight, BookOpen, CheckCircle2, Circle, Flame, Target } from 'lucide-react'
 import type { Locale } from '@/lib/i18n/config'
 import type { LanguageCourseMeta } from '@/lib/language-courses/types'

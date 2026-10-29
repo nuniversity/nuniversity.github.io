@@ -122,6 +122,15 @@ export default async function RootLayout({
           constant string and runs synchronously in <head>.
         */}
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        {/*
+          Warms the destination HTML when a visitor hovers or focuses an
+          internal link. The RSC `.txt` payloads Next would normally prefetch
+          are pruned from the artifact (see `scripts/postbuild.mjs`), so links
+          fall back to document navigation — this keeps that feel fast. Served
+          from `public/`, so it is one cached file rather than inline bytes on
+          every page. The site is deployed at the domain root.
+        */}
+        <script src="/nav-prefetch.js" defer />
         <JsonLd
           data={[
             organizationSchema(

@@ -117,7 +117,7 @@ dictionaries/       # Language translation files
 - `skill-builder`: Meta-skill for creating new skills (95% complete, 4 scripts, 36 tests)
 - `course-writer`: Generates lesson files (prompt-only, no scripts)
 - `game-builder`: Generates language activity (vocabulary) JSON for content/languages/ (quiz generation moved to the Quizzes app)
-- `quiz-writer`: Creates and expands exam-blueprint quiz JSON in content/quizzes (v1.1.0: 5 scripts, 150 tests; bootstrap + quota grid + Jaccard dedup gate + deterministic merge/renumber + final verifier)
+- `quiz-writer`: Creates and expands exam-blueprint quiz JSON in content/quizzes (v1.1.0: 5 scripts, 151 tests; bootstrap + quota grid + Jaccard dedup gate + deterministic merge/renumber + final verifier)
 - `i18n-translator`: Handles localization (prompt-only, no scripts)
 - `platform-engineer`: Guides TypeScript/Next.js development (prompt-only)
 - `mermaid-js`: Creates Mermaid.js diagrams (1 script, no tests)
@@ -128,7 +128,7 @@ dictionaries/       # Language translation files
 
 ## Test Coverage
 - skill-builder: 36 tests (comprehensive)
-- quiz-writer: 150 tests (bootstrap + grid + batch gate + verify + merge)
+- quiz-writer: 151 tests (bootstrap + grid + batch gate + verify + merge)
 - pytest: 13 tests
 - vitest: 1 test
 - Hooks: 2 suites (validate-quiz-json 9 tests, validate-languages 35 tests) + validate-coverage suite

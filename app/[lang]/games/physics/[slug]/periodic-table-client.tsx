@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Trophy, RotateCcw, ArrowLeft, CheckCircle2, XCircle, Atom, Target } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 
 type Mode = 'symbol-to-name' | 'name-to-symbol' | 'number-to-element' | 'element-to-number'
 

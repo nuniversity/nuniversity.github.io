@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { Map, Search, Clock, TrendingUp, BookOpen, ArrowRight } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 

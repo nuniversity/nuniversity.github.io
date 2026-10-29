@@ -14,7 +14,7 @@ import {
   LEARNED_THRESHOLD,
   type FlashcardProgressMap,
 } from '@/lib/languages/storage'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 
 interface FlashcardGameClientProps {
   lang: Locale

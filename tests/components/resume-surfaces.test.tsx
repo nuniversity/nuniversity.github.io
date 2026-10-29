@@ -38,7 +38,7 @@ describe('ResumeCta', () => {
     )
 
     const link = screen.getByRole('link', { name: /Start Learning/ })
-    expect(link).toHaveAttribute('href', '/en/courses/aws-aif-c01/intro')
+    expect(link).toHaveAttribute('href', '/en/courses/aws-aif-c01/intro/')
     expect(screen.queryByTestId('resume-cta')).not.toBeInTheDocument()
     expect(screen.queryByTestId('resume-percent')).not.toBeInTheDocument()
   })
@@ -52,7 +52,7 @@ describe('ResumeCta', () => {
 
     const link = screen.getByTestId('resume-cta')
     expect(link).toHaveTextContent('Continue')
-    expect(link).toHaveAttribute('href', '/en/courses/aws-aif-c01/setup')
+    expect(link).toHaveAttribute('href', '/en/courses/aws-aif-c01/setup/')
   })
 
   it('falls back to the first lesson when lastLesson is not in the list', () => {
@@ -62,7 +62,7 @@ describe('ResumeCta', () => {
       <ResumeCta lang="en" courseSlug="aws-aif-c01" lessonSlugs={lessonSlugs} lessonCount={3} dict={dict} />
     )
 
-    expect(screen.getByTestId('resume-cta')).toHaveAttribute('href', '/en/courses/aws-aif-c01/intro')
+    expect(screen.getByTestId('resume-cta')).toHaveAttribute('href', '/en/courses/aws-aif-c01/intro/')
   })
 
   it('shows percent from completed lessons', () => {
@@ -134,7 +134,7 @@ describe('ContinueLearning', () => {
     expect(section).toHaveTextContent('1 of 4 completed')
     expect(screen.getByRole('link', { name: /Continue/ })).toHaveAttribute(
       'href',
-      '/en/courses/aws-aif-c01/setup'
+      '/en/courses/aws-aif-c01/setup/'
     )
   })
 
@@ -150,7 +150,7 @@ describe('ContinueLearning', () => {
     expect(section).toHaveTextContent('setup')
     expect(screen.getByRole('link', { name: /Continue/ })).toHaveAttribute(
       'href',
-      '/en/courses/aws-aif-c01/setup'
+      '/en/courses/aws-aif-c01/setup/'
     )
   })
 

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Trophy, RotateCcw, ArrowLeft, Brain, Star, Target, Zap, Eye, EyeOff } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { safeGet, safeSet } from '@/lib/storage/safe-storage'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 
 interface NumberSequenceClientProps {
   lang: Locale

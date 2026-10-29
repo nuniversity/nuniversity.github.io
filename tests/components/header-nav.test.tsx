@@ -126,7 +126,7 @@ describe('Header navigation active state', () => {
   it('renders the Partners link as a site page', () => {
     mocks.pathname = '/en/partners/'
     renderHeader()
-    expect(link('Partners')).toHaveAttribute('href', '/en/partners')
+    expect(link('Partners')).toHaveAttribute('href', '/en/partners/')
     expect(link('Partners')).toHaveAttribute('aria-current', 'page')
     expect(link('About')).not.toHaveAttribute('aria-current')
   })

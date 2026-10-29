@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Trophy, RotateCcw, Clock, Zap, Target, CheckCircle2, XCircle, Star, ArrowLeft } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 
 interface Question {
   a: number

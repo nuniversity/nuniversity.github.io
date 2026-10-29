@@ -6,7 +6,7 @@ import { mockExamSize, scaledTargets } from '@/lib/quizzes/draw'
 import type { QuizAttempt, QuizBest } from '@/lib/quizzes/storage'
 import { PracticeConfig } from './PracticeConfig'
 import { AttemptHistory } from './AttemptHistory'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 
 interface QuizHomeProps {
   lang: Locale

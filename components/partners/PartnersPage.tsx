@@ -1,7 +1,7 @@
 // components/partners/PartnersPage.tsx
 'use client'
 
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { motion } from 'framer-motion'
 import {
   HeartHandshake,

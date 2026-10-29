@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, Heart, Users, User, SkipForward, Clock, Download, RotateCcw, Play, Pause, Eye, ChevronRight, Trophy, Sparkles } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { ConversationGame, ConversationSet } from '@/lib/games/get-game-content'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 
 interface ThirtySixQuestionsClientProps {
   lang: Locale

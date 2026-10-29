@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Trophy, RotateCcw, ArrowLeft, Clock, Keyboard, Code, CheckCircle2, XCircle } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 
 interface TypingSpeedClientProps {
   lang: Locale

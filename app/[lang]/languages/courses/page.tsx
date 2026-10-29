@@ -7,7 +7,7 @@ import { getAllLanguageCourses } from '@/lib/language-courses/get-language-cours
 import { pairChipLabel } from '@/lib/languages/format'
 import { PairFlags } from '@/components/languages/pair-flags'
 import { Metadata } from 'next'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { ArrowRight, Languages } from 'lucide-react'
 import { buildAlternates } from '@/lib/seo/alternates'
 

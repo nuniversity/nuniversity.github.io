@@ -107,4 +107,4 @@ treats rc 1 as "warnings tolerated" (see `validate_lesson.py` and the CI comment
 - `skill.md` rewritten: Phase 0 branches (new quiz vs expand), allocations-vs-counts
   doctrine (allocations drive the mock-exam draw scaled to `mockQuestionCount`),
   price-symbol doctrine, AIF lesson map demoted to a worked example.
-- Tests grew 65 → 150.
+- Tests grew 65 → 151.

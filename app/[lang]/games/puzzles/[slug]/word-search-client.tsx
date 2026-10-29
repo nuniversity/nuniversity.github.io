@@ -4,7 +4,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Trophy, RotateCcw, ArrowLeft, Search, CheckCircle2, Clock, List } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 
 interface GridCell {
   char: string

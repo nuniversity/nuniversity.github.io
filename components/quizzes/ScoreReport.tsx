@@ -9,7 +9,7 @@ import type { QuizData, QuizQuestion, QuizResponse, UserAnswer } from '@/lib/qui
 import { gradeAnswer, isAnswered } from '@/lib/quizzes/grade'
 import { CertificateCard } from './CertificateCard'
 import { QuestionBody } from './QuestionBody'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 
 interface ScoreReportProps {
   lang: Locale

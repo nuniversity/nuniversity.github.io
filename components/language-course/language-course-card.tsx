@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { ArrowRight, BookOpen, Layers } from 'lucide-react'
 import type { Locale } from '@/lib/i18n/config'
 import type { LanguageCourseSummary } from '@/lib/language-courses/get-language-course'

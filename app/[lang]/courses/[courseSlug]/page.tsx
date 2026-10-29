@@ -1,7 +1,7 @@
 import { getAllCourses, getAllLessons } from '@/lib/courses/get-course-content'
 import { i18n, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/get-dictionary'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import ResumeCta from '@/components/courses/ResumeCta'

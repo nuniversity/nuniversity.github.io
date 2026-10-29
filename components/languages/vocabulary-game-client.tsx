@@ -6,7 +6,7 @@ import { ArrowLeft, Trophy, RotateCcw, CheckCircle2, Clock, Star } from 'lucide-
 import { type Locale } from '@/lib/i18n/config'
 import { VocabularyGame, VocabularyWord } from '@/lib/languages/types'
 import { getMatchingBest, recordMatchingBest, type MatchingBest } from '@/lib/languages/storage'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 
 interface VocabularyGameClientProps {
   lang: Locale

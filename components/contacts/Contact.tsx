@@ -1,7 +1,7 @@
 // components/home/Contact.tsx
 'use client'
 
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { motion } from 'framer-motion'
 import { Mail, MapPin, Linkedin, Github, Youtube, Globe, Instagram, Send, CheckCircle } from 'lucide-react'
 import { useForm, ValidationError } from '@formspree/react'

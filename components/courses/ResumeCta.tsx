@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
+import Link from '@/components/navigation/AppLink'
 import { BookOpen, ArrowRight, Play } from 'lucide-react'
 import { coursePercent, getCourseProgress } from '@/lib/progress/storage'
 
