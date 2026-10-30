@@ -2,12 +2,19 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import { type Locale } from '@/lib/i18n/config'
-import { type RoadmapMetadata, type RoadmapStep } from './types'
+import {
+  type RelationshipType,
+  type RoadmapMetadata,
+  type RoadmapRelationship,
+  type RoadmapStep,
+  type StepType,
+} from './types'
 
 const ROADMAPS_DIR = path.join(process.cwd(), 'content', 'roadmaps')
 
 export interface RoadmapInfo {
   id: string
+  order: number
   title: string
   description: string
   icon: string
@@ -43,7 +50,19 @@ function parseRoadmapFile(filePath: string, locale: Locale): RoadmapMetadata | n
   }
 }
 
-function parseSteps(markdownContent: string): RoadmapStep[] {
+function parseList(value: string | undefined): string[] {
+  if (!value?.trim()) return []
+  return value
+    .split(',')
+    .map((item) => item.trim().replace(/"/g, ''))
+    .filter(Boolean)
+}
+
+const STEP_TYPES: StepType[] = ['concept', 'course', 'tool', 'game', 'library', 'milestone']
+const RELATION_TYPES: RelationshipType[] = ['required', 'optional', 'branch']
+
+/** Exported for parser tests; content files are the only production input. */
+export function parseSteps(markdownContent: string): RoadmapStep[] {
   const steps: RoadmapStep[] = []
   const stepRegex = /## Step:\s*(.+?)\n([\s\S]*?)(?=## Step:|$)/g
   let match
@@ -63,13 +82,14 @@ function parseSteps(markdownContent: string): RoadmapStep[] {
     const ideasMatch = stepContent.match(/- ideas:\s*\[([^\]]*)\]/)
     const durationMatch = stepContent.match(/- estimatedDuration:\s*(.+)/)
 
-    const relationships: any[] = []
+    const relationships: RoadmapRelationship[] = []
     const relRegex = /- leadsTo:\s*(.+?)\n\s+type:\s*(.+)(?:\n\s+label:\s*(.*))?/g
     let relMatch
     while ((relMatch = relRegex.exec(stepContent)) !== null) {
+      const relationType = relMatch[2].trim() as RelationshipType
       relationships.push({
         leadsTo: relMatch[1].trim(),
-        type: relMatch[2].trim(),
+        type: RELATION_TYPES.includes(relationType) ? relationType : 'required',
         label: relMatch[3]?.trim(),
       })
     }
@@ -77,14 +97,16 @@ function parseSteps(markdownContent: string): RoadmapStep[] {
     steps.push({
       id: idMatch?.[1].trim() || title.toLowerCase().replace(/\s+/g, '-'),
       title,
-      type: (typeMatch?.[1].trim() || 'concept') as any,
+      type: STEP_TYPES.includes(typeMatch?.[1].trim() as StepType)
+        ? (typeMatch?.[1].trim() as StepType)
+        : 'concept',
       contentRef: contentRefMatch?.[1].trim() === 'null' ? null : contentRefMatch?.[1].trim(),
       externalUrl: externalUrlMatch?.[1].trim(),
       description: descriptionMatch?.[1].trim() || '',
-      prerequisites: prerequisitesMatch?.[1].split(',').map(s => s.trim().replace(/"/g, '')) || [],
-      conditionals: conditionalsMatch?.[1].split(',').map(s => s.trim().replace(/"/g, '')) || [],
+      prerequisites: parseList(prerequisitesMatch?.[1]),
+      conditionals: parseList(conditionalsMatch?.[1]),
       comments: commentsMatch?.[1].trim() || '',
-      ideas: ideasMatch?.[1].split(',').map(s => s.trim().replace(/"/g, '')) || [],
+      ideas: parseList(ideasMatch?.[1]),
       relationships,
       estimatedDuration: durationMatch?.[1].trim(),
     })
@@ -114,6 +136,7 @@ export async function getAllRoadmaps(locale: Locale): Promise<RoadmapInfo[]> {
           title: roadmap.title,
           description: roadmap.description,
           icon: roadmap.icon,
+          order: roadmap.order,
           difficulty: roadmap.difficulty,
           estimatedDuration: roadmap.estimatedDuration,
           stepCount: roadmap.steps.length,
@@ -121,7 +144,7 @@ export async function getAllRoadmaps(locale: Locale): Promise<RoadmapInfo[]> {
       }
     }
 
-    return roadmaps.sort((a, b) => a.id.localeCompare(b.id))
+    return roadmaps.sort((a, b) => a.order - b.order || a.id.localeCompare(b.id))
   } catch (error) {
     console.error('Error reading roadmaps:', error)
     return []

@@ -571,7 +571,10 @@
       "view_all": "Ver Todos los Cursos",
       "start_learning": "Comenzar a Aprender",
       "back_to_areas": "Volver a Áreas"
-    }
+    },
+    "print_course": "Descargar curso en PDF",
+    "preparing_pdf": "Preparando PDF…",
+    "pdf_error": "No se pudo preparar el PDF. Inténtalo de nuevo."
   },
   "games": {
     "title": "Juegos Educativos",
@@ -1653,7 +1656,17 @@
       "advanced": "Avanzado"
     },
     "goToCourse": "Ir al Curso",
-    "notFound": "Hoja de ruta no encontrada"
+    "notFound": "Hoja de ruta no encontrada",
+    "continue": "Continuar",
+    "yourProgress": "Tu progreso",
+    "shareStep": "Compartir paso",
+    "linkCopied": "Copiado",
+    "current": "Actual",
+    "locked": "Bloqueado",
+    "available": "Disponible",
+    "openResource": "Abrir recurso",
+    "markIncomplete": "Marcar paso como no completado",
+    "lockedHint": "Completa estos pasos primero:"
   },
   "widgets": {
     "multiple_choice": {
@@ -1856,7 +1869,8 @@
     },
     "listen_slow": "Más lento",
     "listen_normal": "Normal",
-    "listen_fast": "Más rápido"
+    "listen_fast": "Más rápido",
+    "print_lesson": "Guardar lección en PDF"
   },
   "gamification": {
     "xp": "{n} XP",
@@ -1882,7 +1896,9 @@
       "streak_7": "En llamas",
       "streak_7_desc": "Mantén una racha de 7 días",
       "polyglot_start": "Primer paso políglota",
-      "polyglot_start_desc": "Completaste tu primera lección de idiomas"
+      "polyglot_start_desc": "Completaste tu primera lección de idiomas",
+      "roadmap_complete": "Finalizador de ruta",
+      "roadmap_complete_desc": "Completa todos los pasos de una ruta"
     }
   },
   "review": {

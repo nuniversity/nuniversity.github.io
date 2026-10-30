@@ -17,6 +17,7 @@ import { buildAlternates } from '@/lib/seo/alternates'
 import { pageMetadata } from '@/lib/seo/metadata'
 import JsonLd from '@/components/seo/JsonLd'
 import { breadcrumbSchema, courseSchema } from '@/lib/seo/json-ld'
+import { PdfExportButton } from '@/components/pdf/PdfExportButton'
 
 interface CourseLandingPageProps {
   params: {
@@ -184,13 +185,28 @@ export default async function CourseLandingPage({
             lessonCount={lessons.length}
             dict={dict}
           />
-          <Link
-            href={`/${lang}/courses/${course.slug}/practice/`}
-            className="mt-4 inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-accent"
-          >
-            <Target className="h-4 w-4" />
-            {dict.review?.mixed_cta || 'Mixed practice'}
-          </Link>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link
+              href={`/${lang}/courses/${course.slug}/practice/`}
+              className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-accent"
+            >
+              <Target className="h-4 w-4" />
+              {dict.review?.mixed_cta || 'Mixed practice'}
+            </Link>
+            <PdfExportButton
+              mode="course"
+              lang={lang}
+              courseSlug={course.slug}
+              courseTitle={course.title}
+              courseDescription={course.description}
+              lessons={lessons.map((lesson) => ({
+                slug: lesson.slug,
+                title: lesson.metadata.title,
+                description: lesson.metadata.description,
+              }))}
+              dict={dict}
+            />
+          </div>
         </div>
 
         <div>

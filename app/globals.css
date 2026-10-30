@@ -321,15 +321,15 @@
     --section-games: 22 92% 38%;
     --section-games-soft: 24 95% 94%;
 
-    --section-quizzes-from: 160 84% 30%;
-    --section-quizzes-to: 158 64% 42%;
-    --section-quizzes: 160 84% 26%;
-    --section-quizzes-soft: 142 79% 94%;
+    --section-quizzes-from: 214 89% 46%;
+    --section-quizzes-to: 210 92% 62%;
+    --section-quizzes: 214 89% 33%;
+    --section-quizzes-soft: 212 91% 95%;
 
-    --section-library-from: 199 89% 42%;
-    --section-library-to: 198 93% 60%;
-    --section-library: 199 89% 34%;
-    --section-library-soft: 187 86% 95%;
+    --section-library-from: 38 96% 55%;
+    --section-library-to: 46 97% 60%;
+    --section-library: 41 94% 27%;
+    --section-library-soft: 44 87% 95%;
 
     --section-roadmaps-from: 343 75% 45%;
     --section-roadmaps-to: 350 89% 60%;
@@ -356,11 +356,11 @@
     --section-games: 32 95% 62%;
     --section-games-soft: 24 45% 14%;
 
-    --section-quizzes: 158 64% 52%;
-    --section-quizzes-soft: 158 45% 13%;
+    --section-quizzes: 214 91% 66%;
+    --section-quizzes-soft: 214 45% 15%;
 
-    --section-library: 199 89% 60%;
-    --section-library-soft: 199 60% 15%;
+    --section-library: 42 95% 58%;
+    --section-library-soft: 45 45% 15%;
 
     --section-roadmaps: 350 89% 68%;
     --section-roadmaps-soft: 343 45% 15%;
@@ -1484,4 +1484,132 @@
   color: hsl(var(--danger));
   font-family: monospace;
   font-size: 0.875rem;
+}
+
+/* ── PDF export ──────────────────────────────────────────────────────── */
+/* The print sheet is portalled to <body> only while exporting. On screen it
+   is hidden; in print mode every other body child is removed from the layout,
+   so the browser cannot print the app chrome, sticky outline or controls. */
+.pdf-sheet-root {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 16mm 14mm;
+  }
+
+  html.pdf-export-mode,
+  html.pdf-export-mode body {
+    background: #fff !important;
+  }
+
+  html.pdf-export-mode body > *:not(.pdf-sheet-root) {
+    display: none !important;
+  }
+
+  html.pdf-export-mode body > .pdf-sheet-root {
+    display: block !important;
+    color: #111;
+    background: #fff;
+    font-size: 11pt;
+    line-height: 1.55;
+  }
+
+  .pdf-sheet-root * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .pdf-cover {
+    break-after: page;
+    padding-top: 30mm;
+  }
+
+  .pdf-cover h1 {
+    margin: 0 0 4mm;
+    font-size: 28pt;
+    line-height: 1.15;
+  }
+
+  .pdf-cover p {
+    max-width: 150mm;
+    margin: 0 0 3mm;
+    color: #333;
+    font-size: 12pt;
+  }
+
+  .pdf-cover-kicker {
+    margin: 0 0 2mm !important;
+    color: #555 !important;
+    font-size: 9pt !important;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pdf-cover-meta {
+    margin-top: 12mm !important;
+    color: #666 !important;
+    font-size: 10pt !important;
+  }
+
+  .pdf-lesson + .pdf-lesson {
+    break-before: page;
+  }
+
+  .pdf-lesson-header {
+    margin-bottom: 6mm;
+    padding-bottom: 3mm;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .pdf-lesson-header h2 {
+    margin: 0 0 2mm;
+    font-size: 20pt;
+    line-height: 1.25;
+  }
+
+  .pdf-lesson-header p {
+    margin: 0;
+    color: #444;
+    font-size: 11pt;
+  }
+
+  .pdf-lesson-content {
+    max-width: none;
+    color: #111;
+  }
+
+  .pdf-lesson-content a {
+    color: #1d4ed8;
+    text-decoration: underline;
+  }
+
+  .pdf-lesson-content img,
+  .pdf-lesson-content svg,
+  .pdf-lesson-content table,
+  .pdf-lesson-content pre,
+  .pdf-lesson-content blockquote,
+  .pdf-lesson-content .katex-display,
+  .pdf-lesson-content .callout {
+    break-inside: avoid;
+  }
+
+  .pdf-lesson-content h1,
+  .pdf-lesson-content h2,
+  .pdf-lesson-content h3 {
+    break-after: avoid;
+  }
+
+  .pdf-lesson-content pre {
+    overflow: visible !important;
+    white-space: pre-wrap !important;
+    word-break: break-word;
+  }
+
+  .pdf-lesson-content table {
+    width: 100%;
+  }
 }

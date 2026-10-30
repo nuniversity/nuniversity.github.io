@@ -152,6 +152,12 @@ describe('applyEvent', () => {
     expect(result.awardedBadges).toEqual(['course-complete'])
   })
 
+  it('awards roadmap-complete with XP and a badge', () => {
+    const result = applyEvent(profile(), { type: 'roadmap-complete', roadmapId: 'r' }, day)
+    expect(result.gainedXp).toBe(100)
+    expect(result.awardedBadges).toEqual(['roadmap-complete'])
+  })
+
   it('never re-awards existing badges', () => {
     const seed = profile({ badges: { 'first-lesson': day.toISOString() } })
     const result = applyEvent(seed, { type: 'lesson-complete', courseSlug: 'c', lessonSlug: '01' }, day)

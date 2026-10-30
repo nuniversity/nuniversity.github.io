@@ -59,8 +59,8 @@ describe('cognitive features', () => {
       { id: 'w003', source: 'name', target: 'nome', level: 'A1', topics: ['people'] },
     ]
     const cards: ReviewCardState[] = [
-      { key: 'lang::pt-en::w001', courseSlug: 'c', lessonSlug: 'vocabulary', due: new Date().toISOString(), stability: 1, difficulty: 1, elapsed_days: 0, scheduled_days: 0, reps: 1, lapses: 0, state: 0, lastReview: null },
-      { key: 'lang::pt-en::w002', courseSlug: 'c', lessonSlug: 'vocabulary', due: new Date().toISOString(), stability: 1, difficulty: 1, elapsed_days: 0, scheduled_days: 0, reps: 1, lapses: 0, state: 0, lastReview: null },
+      { key: 'lang::pt-en::w001', courseSlug: 'c', lessonSlug: 'vocabulary', due: '2026-01-01T00:00:00.000Z', stability: 1, difficulty: 1, elapsed_days: 0, scheduled_days: 0, reps: 1, lapses: 0, state: 0, lastReview: null },
+      { key: 'lang::pt-en::w002', courseSlug: 'c', lessonSlug: 'vocabulary', due: '2026-01-01T00:00:00.000Z', stability: 1, difficulty: 1, elapsed_days: 0, scheduled_days: 0, reps: 1, lapses: 0, state: 0, lastReview: null },
     ]
     const onReviewGrade = vi.fn()
     const vocabById = new Map(vocab.map((item) => [item.id, item]))

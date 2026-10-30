@@ -23,7 +23,7 @@ function tpl(template: string, vars?: Record<string, string | number>): string {
 }
 
 const KIND_BADGES: Record<QuizKind, string> = {
-  certification: 'bg-primary-soft text-primary-soft-foreground dark:bg-primary/15 dark:text-primary',
+  certification: 'bg-primary-soft text-primary-soft-foreground dark:bg-primary/15 dark:text-primary-soft-foreground',
   practice: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300',
   'course-exam': 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
 }

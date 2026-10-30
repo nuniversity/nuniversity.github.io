@@ -26,9 +26,9 @@ export default defineConfig({
       // so a change that removes coverage fails even while untested areas are
       // still being filled in. Raise them as suites are added.
       thresholds: {
-        lines: 54,
-        statements: 54,
-        functions: 70,
+        lines: 56,
+        statements: 56,
+        functions: 71,
         branches: 72,
       },
       include: ['lib/**/*.{ts,tsx}', 'components/**/*.{ts,tsx}'],

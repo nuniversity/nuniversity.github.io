@@ -9,6 +9,7 @@ import LessonErrorBoundary from '@/components/lessons/LessonErrorBoundary'
 import PracticeRecorder from '@/components/lessons/PracticeRecorder'
 import LessonMasteryHint from '@/components/lessons/LessonMasteryHint'
 import LessonOutline from '@/components/lessons/LessonOutline'
+import { PdfExportButton } from '@/components/pdf/PdfExportButton'
 import FocusableScrollers from '@/components/lessons/FocusableScrollers'
 import {
   LessonScrollProgress,
@@ -252,6 +253,15 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
                   {dict.courses?.lesson || 'Lesson'} {currentIndex + 1} {dict.common?.of || 'of'} {allLessons.length}
                 </span>
               )}
+              <PdfExportButton
+                mode="lesson"
+                lang={lang}
+                courseSlug={courseSlug}
+                lessonSlug={lessonSlug}
+                lessonTitle={lesson.metadata.title}
+                lessonDescription={lesson.metadata.description ?? ''}
+                dict={dict}
+              />
             </div>
             <h1 className="text-4xl font-bold mb-4">{lesson.metadata.title}</h1>
             {lesson.metadata.description && (

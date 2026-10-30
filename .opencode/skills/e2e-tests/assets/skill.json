@@ -1,0 +1,20 @@
+{
+  "name": "e2e-tests",
+  "version": "1.0.0",
+  "description": "Plans, writes, hardens and runs Playwright browser journeys with deterministic fixtures, locator policy, console guards and axe accessibility gates",
+  "type": "skill",
+  "triggers": [
+    "tests/e2e/**",
+    "playwright.config.ts",
+    "tests/support/static-server.mjs",
+    "tests/e2e/support/**"
+  ],
+  "dependencies": [
+    "pytest"
+  ],
+  "metadata": {
+    "category": "testing",
+    "audience": "agents",
+    "difficulty": "advanced"
+  }
+}

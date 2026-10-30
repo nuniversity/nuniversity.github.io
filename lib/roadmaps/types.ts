@@ -42,12 +42,12 @@ export interface RoadmapProgress {
 }
 
 export const STEP_TYPE_CONFIG: Record<StepType, { label: string; color: string }> = {
-  concept: { label: 'Concept', color: 'bg-blue-500' },
-  course: { label: 'Course', color: 'bg-green-500' },
-  tool: { label: 'Tool', color: 'bg-purple-500' },
-  game: { label: 'Game', color: 'bg-yellow-500' },
-  library: { label: 'Library', color: 'bg-indigo-500' },
-  milestone: { label: 'Milestone', color: 'bg-red-500' },
+  concept: { label: 'Concept', color: 'bg-blue-700' },
+  course: { label: 'Course', color: 'bg-green-700' },
+  tool: { label: 'Tool', color: 'bg-purple-700' },
+  game: { label: 'Game', color: 'bg-amber-700' },
+  library: { label: 'Library', color: 'bg-indigo-700' },
+  milestone: { label: 'Milestone', color: 'bg-red-700' },
 }
 
 export const RELATIONSHIP_TYPE_CONFIG: Record<RelationshipType, { label: string; style: string }> = {

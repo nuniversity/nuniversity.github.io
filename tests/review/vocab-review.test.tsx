@@ -60,7 +60,7 @@ describe('ReviewClient with vocabulary cards', () => {
     const reviewed = stored['lang::pt-en::w001']
     expect(reviewed).toBeDefined()
     expect(reviewed.reps).toBeGreaterThan(0)
-    expect(new Date(reviewed.due).getTime()).toBeGreaterThan(Date.now())
+    expect(new Date(reviewed.due).getTime()).toBeGreaterThan(new Date('2026-01-01T00:00:00Z').getTime())
   })
 
   it('shows the empty state when only foreign cards exist and none are due', async () => {

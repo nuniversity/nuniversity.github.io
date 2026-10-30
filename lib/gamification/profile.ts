@@ -82,6 +82,7 @@ export function evaluateBadges(profile: GamificationProfile, event: Gamification
   const has = (id: BadgeId) => profile.badges[id] !== undefined
   if (event.type === 'lesson-complete' && !has('first-lesson')) earned.push('first-lesson')
   if (event.type === 'course-complete' && !has('course-complete')) earned.push('course-complete')
+  if (event.type === 'roadmap-complete' && !has('roadmap-complete')) earned.push('roadmap-complete')
   if (event.type === 'language-lesson-complete' && !has('polyglot-start')) earned.push('polyglot-start')
   if (event.type === 'quiz-pass') {
     if (!has('quiz-pass')) earned.push('quiz-pass')

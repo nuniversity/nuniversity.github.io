@@ -571,7 +571,10 @@
     "try_different_filters": "Try adjusting your filters",
     "check_back_soon": "Check back soon for new content",
     "clear_filters": "Clear Filters",
-    "start_learning": "Start"
+    "start_learning": "Start",
+    "print_course": "Download course PDF",
+    "preparing_pdf": "Preparing PDF…",
+    "pdf_error": "Could not prepare the PDF. Try again."
   },
   "games": {
     "title": "Learning Games",
@@ -1653,7 +1656,17 @@
       "intermediate": "Intermediate",
       "advanced": "Advanced"
     },
-    "notFound": "Roadmap Not Found"
+    "notFound": "Roadmap Not Found",
+    "continue": "Continue",
+    "yourProgress": "Your progress",
+    "shareStep": "Share step",
+    "linkCopied": "Copied",
+    "current": "Current",
+    "locked": "Locked",
+    "available": "Available",
+    "openResource": "Open resource",
+    "markIncomplete": "Mark step as not complete",
+    "lockedHint": "Finish these steps first:"
   },
   "widgets": {
     "multiple_choice": {
@@ -1856,7 +1869,8 @@
     },
     "listen_slow": "Slower",
     "listen_normal": "Normal",
-    "listen_fast": "Faster"
+    "listen_fast": "Faster",
+    "print_lesson": "Save lesson as PDF"
   },
   "gamification": {
     "xp": "{n} XP",
@@ -1882,7 +1896,9 @@
       "streak_7": "On fire",
       "streak_7_desc": "Keep a 7-day learning streak",
       "polyglot_start": "Polyglot start",
-      "polyglot_start_desc": "Completed your first language lesson"
+      "polyglot_start_desc": "Completed your first language lesson",
+      "roadmap_complete": "Roadmap finisher",
+      "roadmap_complete_desc": "Complete every step in a roadmap"
     }
   },
   "review": {

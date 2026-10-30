@@ -1,6 +1,7 @@
 # Test suite conventions
 
-Five layers, each with a different job:
+Five layers, each with a different job. Repo-specific agent skills live in
+`.opencode/skills/unit-tests` and `.opencode/skills/e2e-tests`.
 
 | Layer | Command | Runs in |
 |---|---|---|
@@ -44,3 +45,13 @@ Five layers, each with a different job:
 Run the narrowest layer while iterating; run `npm run verify:full` before
 committing changes that touch production code (the pre-commit hook also runs
 artifact + E2E when a build exists).
+
+## PDF export
+
+PDF export is **native browser print**, not a server-side generator: the lesson
+button prints a portalled sheet holding the current `[data-lesson-content]`;
+the course button fetches the existing lesson pages, strips controls/scripts and
+prints one sheet with all lessons. This keeps the static export lean and
+preserves KaTeX/code typography. Tests stub `window.print()`; see
+`tests/components/pdf-export-button.test.tsx` and
+`tests/e2e/journeys/pdf-export.spec.ts`.

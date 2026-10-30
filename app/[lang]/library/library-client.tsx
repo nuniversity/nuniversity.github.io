@@ -359,7 +359,7 @@ export function LibraryClient({ lang, resources, dict }: LibraryClientProps) {
                   {resource.tags.length > 0 && (
                     <div className="flex flex-wrap gap-1 mb-4">
                       {resource.tags.slice(0, 3).map(tag => (
-                        <span key={tag} className="px-2 py-0.5 rounded-md bg-primary/10 text-primary text-xs">
+                        <span key={tag} className="px-2 py-0.5 rounded-md bg-primary/10 text-blue-700 dark:text-blue-300 text-xs">
                           {tag}
                         </span>
                       ))}

@@ -1,0 +1,9 @@
+{
+  "allow": [
+    {
+      "rule": "console-log",
+      "path": "tests/e2e/support/quiz-player.ts",
+      "reason": "diagnostic trace is already guarded by process.env.QUIZ_DEBUG"
+    }
+  ]
+}

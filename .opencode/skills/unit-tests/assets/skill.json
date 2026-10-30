@@ -1,0 +1,22 @@
+{
+  "name": "unit-tests",
+  "version": "1.0.0",
+  "description": "Plans, writes, hardens and gates Vitest unit, component and built-artifact tests with deterministic clock, storage, console and coverage guardrails",
+  "type": "skill",
+  "triggers": [
+    "tests/**",
+    "vitest.config.ts",
+    "vitest.artifact.config.ts",
+    "src/test-setup.ts",
+    "tests/setup/**",
+    "package.json"
+  ],
+  "dependencies": [
+    "pytest"
+  ],
+  "metadata": {
+    "category": "testing",
+    "audience": "agents",
+    "difficulty": "advanced"
+  }
+}

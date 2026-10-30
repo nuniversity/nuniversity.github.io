@@ -14,6 +14,7 @@ export type GamificationEvent =
   | { type: 'lesson-complete'; courseSlug: string; lessonSlug: string }
   | { type: 'quiz-pass'; quizSlug: string; percent: number; mode: 'practice' | 'exam' | 'course-exam' }
   | { type: 'course-complete'; courseSlug: string }
+  | { type: 'roadmap-complete'; roadmapId: string }
   | { type: 'review-complete'; reviewed: number }
   | { type: 'language-lesson-complete'; courseSlug: string; unitSlug: string; lessonSlug: string; percent: number }
   | { type: 'language-course-complete'; courseSlug: string }
@@ -29,6 +30,7 @@ export const XP_GAINS = {
   'lesson-complete': 10,
   'quiz-pass': 20,
   'course-complete': 100,
+  'roadmap-complete': 100,
   'review-complete': 10,
   'language-lesson-complete': 15,
   'language-course-complete': 100,
@@ -39,6 +41,7 @@ export const BADGE_IDS = [
   'quiz-pass',
   'perfect-quiz',
   'course-complete',
+  'roadmap-complete',
   'streak-7',
   'polyglot-start',
 ] as const
