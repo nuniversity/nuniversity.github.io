@@ -1,6 +1,12 @@
 import '@testing-library/jest-dom/vitest'
 import { afterEach } from 'vitest'
 import { cleanup } from '@testing-library/react'
+import { MotionGlobalConfig } from 'framer-motion'
+
+// Vitest 4+ schedules animation frames outside React's act() scope, which the
+// console guard correctly reports as violations. Animations are irrelevant to
+// behavioural assertions, so run them synchronously (no scheduled frames).
+MotionGlobalConfig.skipAnimations = true
 
 // Do not rely on Testing Library's optional auto-cleanup registration: make
 // the unmount explicit so one test can never see the previous test's DOM.

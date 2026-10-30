@@ -83,6 +83,8 @@ export function parseSteps(markdownContent: string): RoadmapStep[] {
     const durationMatch = stepContent.match(/- estimatedDuration:\s*(.+)/)
 
     const relationships: RoadmapRelationship[] = []
+    // Non-greedy capture over a small frontmatter block; reviewed as safe.
+    // eslint-disable-next-line security/detect-unsafe-regex
     const relRegex = /- leadsTo:\s*(.+?)\n\s+type:\s*(.+)(?:\n\s+label:\s*(.*))?/g
     let relMatch
     while ((relMatch = relRegex.exec(stepContent)) !== null) {

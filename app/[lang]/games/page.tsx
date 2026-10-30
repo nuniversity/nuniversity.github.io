@@ -10,13 +10,15 @@ import { GamesClient } from './games-client'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface GamesPageProps {
-  params: { lang: Locale }
+  params: Promise<{ lang: Locale }>
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   return {
     alternates: buildAlternates(params.lang, 'games'),
@@ -24,10 +26,11 @@ export async function generateMetadata({
     description: dict.metadata?.games?.description || 'Interactive learning games for vocabulary, math, coding, and more' }
 }
 
-export default async function GamesPage({ params }: GamesPageProps) {
+export default async function GamesPage(props: GamesPageProps) {
+  const params = await props.params;
   const { lang } = params
   const dict = await getDictionary(lang)
-  
+
   // Get all games at build time
   const allGames = await getAllGames(lang)
 

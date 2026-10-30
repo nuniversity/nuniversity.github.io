@@ -1,8 +1,14 @@
 'use client'
 
-import React, { useState, useRef } from 'react';
-import { Clock, Zap, Calendar, Trash2, Plus, Edit2, Save, X, Download, CheckCircle2, Circle, Grid3x3, List, AlertCircle, Upload, FileJson, FileSpreadsheet } from 'lucide-react';
+import React, { useState } from 'react';
+import { Clock, Zap, Calendar, Trash2, Plus, Edit2, Save, X, Download, CheckCircle2, Circle, Grid3x3, List, Upload } from 'lucide-react';
 import { type Locale } from '@/lib/i18n/config';
+import { usePersistentState } from '@/lib/tools/use-persistent-state';
+import { createId } from '@/lib/tools/ids';
+import { csvToRecords, toCsv } from '@/lib/tools/csv';
+import { downloadCsv, downloadJson } from '@/lib/tools/download';
+import { ToolHeader } from './shared/ToolHeader';
+import { ImportDialog } from './shared/ImportDialog';
 
 interface EisenhowerMatrixProps {
   lang: Locale;
@@ -18,596 +24,511 @@ interface Task {
   createdAt: string;
 }
 
-interface ImportedTask {
-  quadrant?: string;
-  task: string;
-  completed?: boolean;
-  createdAt?: string;
+type TaskBoard = Record<QuadrantKey, Task[]>;
+
+const QUADRANT_KEYS: QuadrantKey[] = ['doFirst', 'schedule', 'delegate', 'eliminate'];
+
+const EMPTY_BOARD: TaskBoard = {
+  doFirst: [],
+  schedule: [],
+  delegate: [],
+  eliminate: [],
+};
+
+function isQuadrantKey(value: unknown): value is QuadrantKey {
+  return typeof value === 'string' && (QUADRANT_KEYS as string[]).includes(value);
+}
+
+function validateBoard(raw: unknown): TaskBoard | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const source = raw as Partial<TaskBoard>;
+  const board: TaskBoard = { doFirst: [], schedule: [], delegate: [], eliminate: [] };
+  let found = false;
+  for (const quadrant of QUADRANT_KEYS) {
+    const list = source[quadrant];
+    if (!Array.isArray(list)) continue;
+    found = true;
+    board[quadrant] = list
+      .filter(
+        (task): task is Task =>
+          Boolean(task) &&
+          typeof task === 'object' &&
+          typeof (task as Task).id === 'number' &&
+          typeof (task as Task).text === 'string'
+      )
+      .map((task) => ({
+        id: task.id,
+        text: task.text,
+        completed: Boolean(task.completed),
+        createdAt: typeof task.createdAt === 'string' ? task.createdAt : new Date().toISOString(),
+      }));
+  }
+  return found ? board : null;
 }
 
 const EisenhowerMatrix = ({ dict = {} }: EisenhowerMatrixProps) => {
-  const [tasks, setTasks] = useState<Record<QuadrantKey, Task[]>>({
-    doFirst: [],
-    schedule: [],
-    delegate: [],
-    eliminate: []
-  });
+  const t = dict.tools?.eisenhower_matrix || {};
+  const tc = dict.tools?.common || {};
+  const c = dict.common || {};
+
+  const [tasks, setTasks] = usePersistentState<TaskBoard>(
+    'mimir:tools:eisenhower_matrix',
+    EMPTY_BOARD,
+    validateBoard
+  );
   const [newTask, setNewTask] = useState<Record<QuadrantKey, string>>({
     doFirst: '',
     schedule: '',
     delegate: '',
-    eliminate: ''
+    eliminate: '',
   });
-  const [editingTask, setEditingTask] = useState<{ quadrant: QuadrantKey; id: number } | null>(null);
-  const [editingText, setEditingText] = useState('');
-  const [view, setView] = useState('matrix');
+  const [editing, setEditing] = useState<{ quadrant: QuadrantKey; id: number; text: string; target: QuadrantKey } | null>(null);
+  const [view, setView] = useState<'matrix' | 'list'>('matrix');
   const [showCompleted, setShowCompleted] = useState(true);
-  const [showImportModal, setShowImportModal] = useState(false);
-  const [importError, setImportError] = useState('');
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  const t = dict.tools?.eisenhower_matrix || {};
-
-  const addTask = (quadrant: QuadrantKey) => {
-    if (newTask[quadrant].trim()) {
-      setTasks({
-        ...tasks,
-        [quadrant]: [...tasks[quadrant], { 
-          id: Date.now(), 
-          text: newTask[quadrant].trim(), 
-          completed: false,
-          createdAt: new Date().toISOString()
-        }]
-      });
-      setNewTask({ ...newTask, [quadrant]: '' });
-    }
-  };
-
-  const removeTask = (quadrant: QuadrantKey, id: number) => {
-    setTasks({
-      ...tasks,
-      [quadrant]: tasks[quadrant].filter(task => task.id !== id)
-    });
-  };
-
-  const toggleComplete = (quadrant: QuadrantKey, id: number) => {
-    setTasks({
-      ...tasks,
-      [quadrant]: tasks[quadrant].map(task => 
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    });
-  };
-
-  const startEditing = (quadrant: QuadrantKey, task: Task) => {
-    setEditingTask({ quadrant, id: task.id });
-    setEditingText(task.text);
-  };
-
-  const saveEdit = () => {
-    if (editingTask && editingText.trim()) {
-      const { quadrant, id } = editingTask;
-      setTasks({
-        ...tasks,
-        [quadrant]: tasks[quadrant].map(task =>
-          task.id === id ? { ...task, text: editingText.trim() } : task
-        )
-      });
-    }
-    setEditingTask(null);
-    setEditingText('');
-  };
-
-  const cancelEdit = () => {
-    setEditingTask(null);
-    setEditingText('');
-  };
-
-  const exportData = (format: string) => {
-    const allTasks: { quadrant: string; task: string; completed: boolean; createdAt: string }[] = [];
-    Object.entries(tasks).forEach(([quadrant, taskList]) => {
-      taskList.forEach(task => {
-        allTasks.push({
-          quadrant,
-          task: task.text,
-          completed: task.completed,
-          createdAt: task.createdAt
-        });
-      });
-    });
-
-    if (format === 'json') {
-      const blob = new Blob([JSON.stringify({ tasks: allTasks, exportedAt: new Date().toISOString() }, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `eisenhower-matrix-${Date.now()}.json`;
-      a.click();
-      URL.revokeObjectURL(url);
-    } else if (format === 'csv') {
-      let csv = 'Quadrant,Task,Completed,Created At\n';
-      allTasks.forEach(({ quadrant, task, completed, createdAt }) => {
-        csv += `"${quadrant}","${task.replace(/"/g, '""')}","${completed}","${createdAt}"\n`;
-      });
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `eisenhower-matrix-${Date.now()}.csv`;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-  };
-
-  const clearAll = () => {
-    if (confirm(t.confirmClear || 'Are you sure you want to clear all tasks?')) {
-      setTasks({
-        doFirst: [],
-        schedule: [],
-        delegate: [],
-        eliminate: []
-      });
-    }
-  };
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const content = e.target?.result;
-        importData(content as string, file.name);
-      } catch (error) {
-        setImportError(t.importError);
-      }
-    };
-    reader.readAsText(file);
-  };
-
-  const importData = (content: string, filename: string) => {
-    setImportError('');
-    try {
-      if (filename.endsWith('.json')) {
-        const data = JSON.parse(content);
-        
-        if (data.tasks && Array.isArray(data.tasks)) {
-          const imported: Record<string, Task[]> = {
-            doFirst: [],
-            schedule: [],
-            delegate: [],
-            eliminate: []
-          };
-          
-          data.tasks.forEach((item: ImportedTask) => {
-            const quadrant = item.quadrant;
-            if (quadrant && imported[quadrant]) {
-              imported[quadrant].push({
-                id: Date.now() + Math.random(),
-                text: item.task,
-                completed: item.completed || false,
-                createdAt: item.createdAt || new Date().toISOString()
-              });
-            }
-          });
-          
-          setTasks(imported);
-          setShowImportModal(false);
-          alert(t.importSuccess);
-        } else {
-          setImportError(t.importError);
-        }
-      } else if (filename.endsWith('.csv')) {
-        const lines = content.split('\n').filter(line => line.trim());
-        const imported: Record<string, Task[]> = {
-          doFirst: [],
-          schedule: [],
-          delegate: [],
-          eliminate: []
-        };
-        
-        for (let i = 1; i < lines.length; i++) {
-          const line = lines[i];
-          const matches = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
-          
-          if (matches && matches.length >= 2) {
-            const quadrant = matches[0].replace(/"/g, '');
-            const taskText = matches[1].replace(/"/g, '');
-            const completed = matches[2]?.replace(/"/g, '') === 'true';
-            const createdAt = matches[3]?.replace(/"/g, '') || new Date().toISOString();
-            
-            if (imported[quadrant]) {
-              imported[quadrant].push({
-                id: Date.now() + Math.random(),
-                text: taskText,
-                completed: completed,
-                createdAt: createdAt
-              });
-            }
-          }
-        }
-        
-        setTasks(imported);
-        setShowImportModal(false);
-        alert(t.importSuccess);
-      } else {
-        setImportError(t.importError);
-      }
-    } catch (error) {
-      console.error('Import error:', error);
-      setImportError(t.importError);
-    }
-  };
+  const [showImport, setShowImport] = useState(false);
+  const [confirmClear, setConfirmClear] = useState(false);
 
   const quadrants = [
     {
       key: 'doFirst' as const,
-      title: t.doFirst,
+      title: t.doFirst || 'Do First',
       desc: t.doFirstDesc,
       explain: t.doFirstExplain,
       icon: Zap,
-      color: 'from-red-500 to-rose-600',
-      bgColor: 'bg-red-50',
-      borderColor: 'border-red-300',
-      textColor: 'text-red-700',
-      badgeColor: 'bg-red-500'
+      gradient: 'from-red-500 to-rose-600',
+      bg: 'bg-red-50 dark:bg-red-900/20',
+      border: 'border-red-300 dark:border-red-800',
+      text: 'text-red-700 dark:text-red-300',
+      badge: 'bg-red-500',
     },
     {
       key: 'schedule' as const,
-      title: t.schedule,
+      title: t.schedule || 'Schedule',
       desc: t.scheduleDesc,
       explain: t.scheduleExplain,
       icon: Calendar,
-      color: 'from-blue-500 to-cyan-600',
-      bgColor: 'bg-blue-50',
-      borderColor: 'border-blue-300',
-      textColor: 'text-blue-700',
-      badgeColor: 'bg-blue-500'
+      gradient: 'from-blue-500 to-cyan-600',
+      bg: 'bg-blue-50 dark:bg-blue-900/20',
+      border: 'border-blue-300 dark:border-blue-800',
+      text: 'text-blue-700 dark:text-blue-300',
+      badge: 'bg-blue-500',
     },
     {
       key: 'delegate' as const,
-      title: t.delegate,
+      title: t.delegate || 'Delegate',
       desc: t.delegateDesc,
       explain: t.delegateExplain,
       icon: Clock,
-      color: 'from-yellow-500 to-amber-600',
-      bgColor: 'bg-yellow-50',
-      borderColor: 'border-yellow-300',
-      textColor: 'text-yellow-700',
-      badgeColor: 'bg-yellow-500'
+      gradient: 'from-amber-500 to-yellow-600',
+      bg: 'bg-amber-50 dark:bg-amber-900/20',
+      border: 'border-amber-300 dark:border-amber-800',
+      text: 'text-amber-700 dark:text-amber-300',
+      badge: 'bg-amber-500',
     },
     {
       key: 'eliminate' as const,
-      title: t.eliminate,
+      title: t.eliminate || 'Eliminate',
       desc: t.eliminateDesc,
       explain: t.eliminateExplain,
       icon: Trash2,
-      color: 'from-gray-500 to-slate-600',
-      bgColor: 'bg-gray-50',
-      borderColor: 'border-gray-300',
-      textColor: 'text-gray-700',
-      badgeColor: 'bg-gray-500'
-    }
+      gradient: 'from-slate-500 to-slate-600',
+      bg: 'bg-slate-50 dark:bg-slate-800/60',
+      border: 'border-slate-300 dark:border-slate-700',
+      text: 'text-slate-700 dark:text-slate-300',
+      badge: 'bg-slate-500',
+    },
   ];
 
-  const getFilteredTasks = (taskList: Task[]) => {
-    return showCompleted ? taskList : taskList.filter(task => !task.completed);
+  const addTask = (quadrant: QuadrantKey) => {
+    const text = newTask[quadrant].trim();
+    if (!text) return;
+    const task: Task = { id: createId(), text, completed: false, createdAt: new Date().toISOString() };
+    setTasks((prev) => ({ ...prev, [quadrant]: [...prev[quadrant], task] }));
+    setNewTask((prev) => ({ ...prev, [quadrant]: '' }));
   };
 
-  const totalTasks = Object.values(tasks).reduce((sum, arr) => sum + arr.length, 0);
-  const completedTasks = Object.values(tasks).reduce((sum, arr) => sum + arr.filter(t => t.completed).length, 0);
+  const removeTask = (quadrant: QuadrantKey, id: number) => {
+    setTasks((prev) => ({ ...prev, [quadrant]: prev[quadrant].filter((task) => task.id !== id) }));
+  };
+
+  const toggleComplete = (quadrant: QuadrantKey, id: number) => {
+    setTasks((prev) => ({
+      ...prev,
+      [quadrant]: prev[quadrant].map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      ),
+    }));
+  };
+
+  const saveEdit = () => {
+    if (!editing || !editing.text.trim()) {
+      setEditing(null);
+      return;
+    }
+    const { quadrant, id, text, target } = editing;
+    setTasks((prev) => {
+      const current = prev[quadrant].find((task) => task.id === id);
+      if (!current) return prev;
+      const updated = { ...current, text: text.trim() };
+      if (quadrant === target) {
+        return { ...prev, [quadrant]: prev[quadrant].map((task) => (task.id === id ? updated : task)) };
+      }
+      return {
+        ...prev,
+        [quadrant]: prev[quadrant].filter((task) => task.id !== id),
+        [target]: [...prev[target], updated],
+      };
+    });
+    setEditing(null);
+  };
+
+  const clearAll = () => {
+    setTasks(EMPTY_BOARD);
+    setConfirmClear(false);
+  };
+
+  const importData = (content: string, filename: string): string | null => {
+    const board: TaskBoard = { doFirst: [], schedule: [], delegate: [], eliminate: [] };
+
+    try {
+      if (filename.toLowerCase().endsWith('.json')) {
+        const data = JSON.parse(content) as { tasks?: unknown };
+        if (!Array.isArray(data.tasks)) return t.importError || 'Invalid import file';
+        for (const item of data.tasks) {
+          if (!item || typeof item !== 'object') continue;
+          const record = item as Record<string, unknown>;
+          if (!isQuadrantKey(record.quadrant) || typeof record.task !== 'string') continue;
+          board[record.quadrant].push({
+            id: createId(),
+            text: record.task,
+            completed: record.completed === true,
+            createdAt: typeof record.createdAt === 'string' ? record.createdAt : new Date().toISOString(),
+          });
+        }
+      } else if (filename.toLowerCase().endsWith('.csv')) {
+        for (const record of csvToRecords(content)) {
+          const quadrant = record.quadrant;
+          if (!isQuadrantKey(quadrant) || !record.task) continue;
+          board[quadrant].push({
+            id: createId(),
+            text: record.task,
+            completed: record.completed?.toLowerCase() === 'true',
+            createdAt: record['created at'] || new Date().toISOString(),
+          });
+        }
+      } else {
+        return t.importError || 'Invalid import file';
+      }
+
+      const total = QUADRANT_KEYS.reduce((sum, key) => sum + board[key].length, 0);
+      if (total === 0) return t.importError || 'Invalid import file';
+      setTasks(board);
+      return null;
+    } catch {
+      return t.importError || 'Invalid import file';
+    }
+  };
+
+  const exportJSON = () => {
+    const allTasks = QUADRANT_KEYS.flatMap((quadrant) =>
+      tasks[quadrant].map((task) => ({ quadrant, task: task.text, completed: task.completed, createdAt: task.createdAt }))
+    );
+    downloadJson({ tasks: allTasks, exportedAt: new Date().toISOString() }, 'eisenhower-matrix.json');
+  };
+
+  const exportCSV = () => {
+    const rows: Array<Array<string | boolean>> = [['Quadrant', 'Task', 'Completed', 'Created At']];
+    for (const quadrant of QUADRANT_KEYS) {
+      for (const task of tasks[quadrant]) {
+        rows.push([quadrant, task.text, task.completed, task.createdAt]);
+      }
+    }
+    downloadCsv(toCsv(rows), 'eisenhower-matrix.csv');
+  };
+
+  const totalTasks = QUADRANT_KEYS.reduce((sum, key) => sum + tasks[key].length, 0);
+  const completedTasks = QUADRANT_KEYS.reduce(
+    (sum, key) => sum + tasks[key].filter((task) => task.completed).length,
+    0
+  );
   const completionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 py-12 px-4">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-mark mb-4">
-            <Grid3x3 className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-4xl font-bold mb-2 bg-brand bg-clip-text text-transparent">
-            {t.title}
-          </h1>
-          <p className="text-gray-600 text-lg">
-            {t.subtitle}
-          </p>
-        </div>
+  const visibleTasks = (list: Task[]) => (showCompleted ? list : list.filter((task) => !task.completed));
 
-        {/* Stats and Controls */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 py-8 px-4">
+      <div className="max-w-7xl mx-auto">
+        <ToolHeader
+          icon={Grid3x3}
+          title={t.title || 'Eisenhower Matrix'}
+          subtitle={t.subtitle || 'Prioritise by urgency and importance'}
+          variant="brand"
+        />
+
+        <div className="bg-card border border-border rounded-2xl shadow-xl p-6 mb-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-            <div className="bg-gradient-to-br from-primary-soft to-cyan-50 rounded-xl p-4 border border-primary/25">
-              <div className="text-sm text-gray-600 mb-1">{t.totalTasks}</div>
+            <div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
+              <div className="text-sm text-muted-foreground mb-1">{t.totalTasks || 'Total Tasks'}</div>
               <div className="text-2xl font-bold text-primary">{totalTasks}</div>
             </div>
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-4 border border-green-200">
-              <div className="text-sm text-gray-600 mb-1">{t.completed}</div>
-              <div className="text-2xl font-bold text-green-600">{completedTasks}</div>
+            <div className="bg-success/10 rounded-xl p-4 border border-success/20">
+              <div className="text-sm text-muted-foreground mb-1">{t.completed || 'Completed'}</div>
+              <div className="text-2xl font-bold text-success-foreground">{completedTasks}</div>
             </div>
-            <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-4 border border-orange-200">
-              <div className="text-sm text-gray-600 mb-1">{t.pending}</div>
-              <div className="text-2xl font-bold text-orange-600">{totalTasks - completedTasks}</div>
+            <div className="bg-warning/10 rounded-xl p-4 border border-warning/20">
+              <div className="text-sm text-muted-foreground mb-1">{t.pending || 'Pending'}</div>
+              <div className="text-2xl font-bold text-warning-foreground">{totalTasks - completedTasks}</div>
             </div>
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-4 border border-blue-200">
-              <div className="text-sm text-gray-600 mb-1">{t.completionRate}</div>
-              <div className="text-2xl font-bold text-blue-600">{completionRate}%</div>
+            <div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
+              <div className="text-sm text-muted-foreground mb-1">{t.completionRate || 'Completion Rate'}</div>
+              <div className="text-2xl font-bold text-primary">{completionRate}%</div>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-2">
             <button
-              onClick={() => setView(view === 'matrix' ? 'list' : 'matrix')}
-              className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition-colors flex items-center gap-2"
+              onClick={() => setView((prev) => (prev === 'matrix' ? 'list' : 'matrix'))}
+              className="px-4 py-2 rounded-lg bg-muted hover:opacity-80 transition-opacity flex items-center gap-2"
             >
-              {view === 'matrix' ? <List className="w-4 h-4" /> : <Grid3x3 className="w-4 h-4" />}
-              {view === 'matrix' ? t.listView : t.matrixView}
+              {view === 'matrix' ? <List className="w-4 h-4" aria-hidden="true" /> : <Grid3x3 className="w-4 h-4" aria-hidden="true" />}
+              {view === 'matrix' ? t.listView || 'List View' : t.matrixView || 'Matrix View'}
             </button>
 
             <button
-              onClick={() => setShowCompleted(!showCompleted)}
+              onClick={() => setShowCompleted((prev) => !prev)}
+              aria-pressed={!showCompleted}
               className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${
-                showCompleted 
-                  ? 'bg-green-100 text-green-700' 
-                  : 'bg-gray-200 text-gray-700'
+                showCompleted ? 'bg-muted text-foreground' : 'bg-success-soft text-success-foreground'
               }`}
             >
-              <CheckCircle2 className="w-4 h-4" />
-              {showCompleted ? t.hideCompleted : t.showCompleted}
+              <CheckCircle2 className="w-4 h-4" aria-hidden="true" />
+              {showCompleted ? t.hideCompleted || 'Hide Completed' : t.showCompleted || 'Show Completed'}
             </button>
 
             {totalTasks > 0 && (
               <>
                 <button
-                  onClick={() => exportData('json')}
-                  className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors flex items-center gap-2"
+                  onClick={exportJSON}
+                  className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary-hover transition-colors flex items-center gap-2"
                 >
-                  <Download className="w-4 h-4" />
-                  {dict.tools?.common?.json || 'JSON'}
+                  <Download className="w-4 h-4" aria-hidden="true" />
+                  {tc.json || 'JSON'}
                 </button>
                 <button
-                  onClick={() => exportData('csv')}
-                  className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors flex items-center gap-2"
+                  onClick={exportCSV}
+                  className="px-4 py-2 rounded-lg bg-green-700 text-white hover:bg-green-800 transition-colors flex items-center gap-2"
                 >
-                  <Download className="w-4 h-4" />
-                  {dict.tools?.common?.csv || 'CSV'}
+                  <Download className="w-4 h-4" aria-hidden="true" />
+                  {tc.csv || 'CSV'}
                 </button>
               </>
             )}
 
             <button
-              onClick={() => setShowImportModal(true)}
-              className="px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors flex items-center gap-2"
+              onClick={() => setShowImport(true)}
+              className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary-hover transition-colors flex items-center gap-2"
             >
-              <Upload className="w-4 h-4" />
-              {t.import}
+              <Upload className="w-4 h-4" aria-hidden="true" />
+              {t.import || 'Import'}
             </button>
 
-            <button
-              onClick={clearAll}
-              className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors flex items-center gap-2 ml-auto"
-            >
-              <Trash2 className="w-4 h-4" />
-              {t.clear}
-            </button>
+            {confirmClear ? (
+              <span className="flex gap-1 ml-auto">
+                <button onClick={clearAll} className="px-4 py-2 rounded-lg bg-red-600 text-white transition-colors">
+                  {c.delete || 'Delete'}
+                </button>
+                <button onClick={() => setConfirmClear(false)} className="px-4 py-2 rounded-lg bg-muted transition-colors">
+                  {c.cancel || 'Cancel'}
+                </button>
+              </span>
+            ) : (
+              <button
+                onClick={() => setConfirmClear(true)}
+                disabled={totalTasks === 0}
+                className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors flex items-center gap-2 ml-auto disabled:opacity-50"
+              >
+                <Trash2 className="w-4 h-4" aria-hidden="true" />
+                {t.clear || 'Clear All'}
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Axis Labels */}
         {view === 'matrix' && (
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div className="text-center">
-              <div className="inline-block px-4 py-2 rounded-full bg-red-100 text-red-700 font-bold text-sm">
-                {t.urgent}
+              <div className="inline-block px-4 py-2 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 font-bold text-sm">
+                {t.urgent || 'URGENT'}
               </div>
             </div>
             <div className="text-center">
-              <div className="inline-block px-4 py-2 rounded-full bg-gray-100 text-gray-700 font-bold text-sm">
-                {t.notUrgent}
+              <div className="inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-sm">
+                {t.notUrgent || 'NOT URGENT'}
               </div>
             </div>
           </div>
         )}
 
-        {/* Matrix Grid */}
         <div className={view === 'matrix' ? 'grid md:grid-cols-2 gap-6 relative' : 'space-y-6'}>
           {view === 'matrix' && (
             <>
-              <div className="absolute -left-24 top-1/4 hidden lg:block">
-                <div className="-rotate-90 px-4 py-2 rounded-full bg-green-100 text-green-700 font-bold text-sm whitespace-nowrap">
-                  {t.important}
+              <div className="absolute -left-24 top-1/4 hidden lg:block" aria-hidden="true">
+                <div className="-rotate-90 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 font-bold text-sm whitespace-nowrap">
+                  {t.important || 'IMPORTANT'}
                 </div>
               </div>
-              <div className="absolute -left-24 bottom-1/4 hidden lg:block">
-                <div className="-rotate-90 px-4 py-2 rounded-full bg-gray-100 text-gray-700 font-bold text-sm whitespace-nowrap">
-                  {t.notImportant}
+              <div className="absolute -left-24 bottom-1/4 hidden lg:block" aria-hidden="true">
+                <div className="-rotate-90 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-sm whitespace-nowrap">
+                  {t.notImportant || 'NOT IMPORTANT'}
                 </div>
               </div>
             </>
           )}
 
-          {quadrants.map(({ key, title, desc, explain, icon: Icon, color, bgColor, borderColor, textColor, badgeColor }) => {
-            const filteredTasks = getFilteredTasks(tasks[key]);
-            return (
-              <div key={key} className={`bg-white rounded-2xl shadow-xl overflow-hidden border-2 ${borderColor}`}>
-                <div className={`bg-gradient-to-r ${color} p-4`}>
-                  <div className="flex items-center gap-3">
-                    <Icon className="w-6 h-6 text-white" />
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white">{title}</h3>
-                      <p className="text-xs text-white/80">{desc}</p>
-                    </div>
-                    <div className={`${badgeColor} text-white px-3 py-1 rounded-full text-xs font-bold`}>
-                      {tasks[key].length}
-                    </div>
+          {quadrants.map(({ key, title, desc, explain, icon: Icon, gradient, bg, border, text, badge }) => (
+            <div key={key} className={`bg-card rounded-2xl shadow-xl overflow-hidden border-2 ${border}`}>
+              <div className={`bg-gradient-to-r ${gradient} p-4`}>
+                <div className="flex items-center gap-3">
+                  <Icon className="w-6 h-6 text-white" aria-hidden="true" />
+                  <div className="flex-1">
+                    <h2 className="text-xl font-bold text-white">{title}</h2>
+                    <p className="text-xs text-white/80">{desc}</p>
                   </div>
-                  <p className="text-xs text-white/70 mt-2">{explain}</p>
+                  <div className={`${badge} text-white px-3 py-1 rounded-full text-xs font-bold`}>
+                    {tasks[key].length}
+                  </div>
+                </div>
+                <p className="text-xs text-white/70 mt-2">{explain}</p>
+              </div>
+
+              <div className="p-4">
+                <div className="flex gap-2 mb-4">
+                  <label htmlFor={`eisenhower-${key}`} className="sr-only">
+                    {`${t.addTask || 'Add task'} — ${title}`}
+                  </label>
+                  <input
+                    id={`eisenhower-${key}`}
+                    type="text"
+                    value={newTask[key]}
+                    onChange={(event) => setNewTask((prev) => ({ ...prev, [key]: event.target.value }))}
+                    onKeyDown={(event) => event.key === 'Enter' && addTask(key)}
+                    placeholder={`${t.addTask || 'Add task'}...`}
+                    className="flex-1 px-3 py-2 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary outline-none text-sm"
+                  />
+                  <button
+                    onClick={() => addTask(key)}
+                    aria-label={`${t.addTask || 'Add task'} — ${title}`}
+                    className={`px-4 py-2 rounded-lg bg-gradient-to-r ${gradient} text-white hover:shadow-lg transition-all flex items-center gap-2`}
+                  >
+                    <Plus className="w-4 h-4" aria-hidden="true" />
+                  </button>
                 </div>
 
-                <div className="p-4">
-                  <div className="flex gap-2 mb-4">
-                    <input
-                      type="text"
-                      value={newTask[key]}
-                      onChange={(e) => setNewTask({ ...newTask, [key]: e.target.value })}
-                      onKeyPress={(e) => e.key === 'Enter' && addTask(key)}
-                      placeholder={`${t.addTask}...`}
-                      className="flex-1 px-3 py-2 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-primary outline-none text-sm"
-                    />
-                    <button
-                      onClick={() => addTask(key)}
-                      className={`px-4 py-2 rounded-lg bg-gradient-to-r ${color} text-white hover:shadow-lg transition-all flex items-center gap-2`}
-                    >
-                      <Plus className="w-4 h-4" />
-                    </button>
-                  </div>
-
-                  <div className="space-y-2 max-h-80 overflow-y-auto">
-                    {filteredTasks.length === 0 ? (
-                      <div className={`${bgColor} rounded-lg p-8 text-center`}>
-                        <p className={`${textColor} text-sm font-medium`}>{t.noTasks}</p>
-                        <p className="text-xs text-gray-500 mt-1">{t.clickToAdd}</p>
-                      </div>
-                    ) : (
-                      filteredTasks.map((task) => (
-                        <div
-                          key={task.id}
-                          className={`${bgColor} rounded-lg p-3 border ${borderColor} group hover:shadow-md transition-all ${
-                            task.completed ? 'opacity-60' : ''
-                          }`}
-                        >
-                          {editingTask?.quadrant === key && editingTask?.id === task.id ? (
-                            <div className="flex gap-2">
-                              <input
-                                type="text"
-                                value={editingText}
-                                onChange={(e) => setEditingText(e.target.value)}
-                                onKeyPress={(e) => e.key === 'Enter' && saveEdit()}
-                                className="flex-1 px-2 py-1 rounded border border-gray-300 bg-white focus:ring-2 focus:ring-primary outline-none text-sm"
-                                autoFocus
-                              />
-                              <button onClick={saveEdit} className="p-1 rounded bg-green-500 text-white hover:bg-green-600">
-                                <Save className="w-4 h-4" />
-                              </button>
-                              <button onClick={cancelEdit} className="p-1 rounded bg-gray-500 text-white hover:bg-gray-600">
-                                <X className="w-4 h-4" />
-                              </button>
-                            </div>
-                          ) : (
-                            <div className="flex items-start gap-2">
-                              <button
-                                onClick={() => toggleComplete(key, task.id)}
-                                className="mt-0.5 flex-shrink-0"
+                <div className="space-y-2 max-h-80 overflow-y-auto">
+                  {visibleTasks(tasks[key]).length === 0 ? (
+                    <div className={`${bg} rounded-lg p-8 text-center`}>
+                      <p className={`${text} text-sm font-medium`}>{t.noTasks || 'No tasks yet'}</p>
+                      <p className="text-xs text-muted-foreground mt-1">{t.clickToAdd || 'Add your first task'}</p>
+                    </div>
+                  ) : (
+                    visibleTasks(tasks[key]).map((task) => (
+                      <div
+                        key={task.id}
+                        className={`${bg} rounded-lg p-3 border ${border} group hover:shadow-md transition-all ${
+                          task.completed ? 'opacity-70' : ''
+                        }`}
+                      >
+                        {editing?.quadrant === key && editing.id === task.id ? (
+                          <div className="space-y-2">
+                            <input
+                              type="text"
+                              value={editing.text}
+                              onChange={(event) => setEditing((prev) => (prev ? { ...prev, text: event.target.value } : prev))}
+                              onKeyDown={(event) => event.key === 'Enter' && saveEdit()}
+                              aria-label={c.edit || 'Edit task'}
+                              className="w-full px-2 py-1 rounded border border-border bg-background focus:ring-2 focus:ring-primary outline-none text-sm"
+                              autoFocus
+                            />
+                            <label className="flex items-center gap-2 text-xs text-muted-foreground">
+                              {t.moveTo || 'Move to'}
+                              <select
+                                value={editing.target}
+                                onChange={(event) =>
+                                  setEditing((prev) =>
+                                    prev ? { ...prev, target: event.target.value as QuadrantKey } : prev
+                                  )
+                                }
+                                className="flex-1 px-2 py-1 rounded border border-border bg-background"
                               >
-                                {task.completed ? (
-                                  <CheckCircle2 className="w-5 h-5 text-green-500" />
-                                ) : (
-                                  <Circle className="w-5 h-5 text-gray-400 hover:text-gray-600" />
-                                )}
+                                {quadrants.map((quadrant) => (
+                                  <option key={quadrant.key} value={quadrant.key}>
+                                    {quadrant.title}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <div className="flex gap-2">
+                              <button onClick={saveEdit} className="p-1 rounded bg-green-500 text-white hover:bg-green-600" aria-label={c.save || 'Save'}>
+                                <Save className="w-4 h-4" aria-hidden="true" />
                               </button>
-                              <p className={`${textColor} text-sm flex-1 ${task.completed ? 'line-through' : ''}`}>
-                                {task.text}
-                              </p>
-                              <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button
-                                  onClick={() => startEditing(key, task)}
-                                  className="p-1 rounded hover:bg-white/50"
-                                >
-                                  <Edit2 className="w-3 h-3" />
-                                </button>
-                                <button
-                                  onClick={() => removeTask(key, task.id)}
-                                  className="p-1 rounded hover:bg-red-100"
-                                >
-                                  <Trash2 className="w-3 h-3 text-red-600" />
-                                </button>
-                              </div>
+                              <button onClick={() => setEditing(null)} className="p-1 rounded bg-muted text-foreground hover:opacity-80" aria-label={c.cancel || 'Cancel'}>
+                                <X className="w-4 h-4" aria-hidden="true" />
+                              </button>
                             </div>
-                          )}
-                        </div>
-                      ))
-                    )}
-                  </div>
+                          </div>
+                        ) : (
+                          <div className="flex items-start gap-2">
+                            <button
+                              onClick={() => toggleComplete(key, task.id)}
+                              aria-pressed={task.completed}
+                              aria-label={`${task.completed ? t.completed || 'Completed' : t.pending || 'Pending'}: ${task.text}`}
+                              className="mt-0.5 flex-shrink-0"
+                            >
+                              {task.completed ? (
+                                <CheckCircle2 className="w-5 h-5 text-green-500" aria-hidden="true" />
+                              ) : (
+                                <Circle className="w-5 h-5 text-muted-foreground hover:text-foreground" aria-hidden="true" />
+                              )}
+                            </button>
+                            <p className={`${text} text-sm flex-1 ${task.completed ? 'line-through' : ''}`}>{task.text}</p>
+                            <div className="flex gap-1 opacity-60 sm:opacity-0 sm:group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
+                              <button
+                                onClick={() => setEditing({ quadrant: key, id: task.id, text: task.text, target: key })}
+                                aria-label={`${c.edit || 'Edit'}: ${task.text}`}
+                                className="p-1 rounded hover:bg-white/50 dark:hover:bg-slate-700"
+                              >
+                                <Edit2 className="w-3 h-3" aria-hidden="true" />
+                              </button>
+                              <button
+                                onClick={() => removeTask(key, task.id)}
+                                aria-label={`${c.delete || 'Delete'}: ${task.text}`}
+                                className="p-1 rounded hover:bg-red-100 dark:hover:bg-red-900/40"
+                              >
+                                <Trash2 className="w-3 h-3 text-red-600" aria-hidden="true" />
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))
+                  )}
                 </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Import Modal */}
-        {showImportModal && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold">{t.importData}</h3>
-                <button
-                  onClick={() => {
-                    setShowImportModal(false);
-                    setImportError('');
-                  }}
-                  className="p-1 rounded-lg hover:bg-gray-100"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              <p className="text-sm text-gray-600 mb-4">
-                {t.importDesc}
-              </p>
-
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".json,.csv"
-                onChange={handleFileUpload}
-                className="hidden"
-              />
-
-              <div
-                onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-primary transition-colors"
-              >
-                <div className="flex flex-col items-center gap-3">
-                  <div className="flex gap-2">
-                    <FileJson className="w-8 h-8 text-primary" />
-                    <FileSpreadsheet className="w-8 h-8 text-green-500" />
-                  </div>
-                  <div>
-                    <p className="font-medium mb-1">{t.dragDrop}</p>
-                    <p className="text-xs text-gray-500">{t.supportedFormats}</p>
-                  </div>
-                </div>
-              </div>
-
-              {importError && (
-                <div className="mt-4 p-3 rounded-lg bg-red-50 border border-red-200 flex items-start gap-2">
-                  <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-red-600">{importError}</p>
-                </div>
-              )}
-
-              <div className="flex gap-2 mt-6">
-                <button
-                  onClick={() => {
-                    setShowImportModal(false);
-                    setImportError('');
-                  }}
-                  className="flex-1 px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition-colors"
-                >
-                  {t.cancel}
-                </button>
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="flex-1 px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors flex items-center justify-center gap-2"
-                >
-                  <Upload className="w-4 h-4" />
-                  {t.selectFile}
-                </button>
               </div>
             </div>
-          </div>
-        )}
+          ))}
+        </div>
+
+        <ImportDialog
+          open={showImport}
+          onClose={() => setShowImport(false)}
+          onImport={importData}
+          title={t.importData || 'Import'}
+          description={t.importDesc || ''}
+          cancelLabel={t.cancel || 'Cancel'}
+          selectLabel={t.selectFile || 'Select file'}
+          dragDropLabel={t.dragDrop || 'Drag & drop or click to choose a file'}
+          supportedLabel={t.supportedFormats || 'JSON or CSV'}
+        />
       </div>
     </div>
   );

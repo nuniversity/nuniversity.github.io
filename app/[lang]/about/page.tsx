@@ -4,12 +4,14 @@ import { type Locale } from '@/lib/i18n/config';
 import AboutPageClient from './AboutPageClient';
 import { buildAlternates } from '@/lib/seo/alternates'
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang);
-  
+
   return {
     alternates: buildAlternates(params.lang, 'about'),
     title: dict.metadata.about.title,
@@ -21,11 +23,13 @@ export async function generateMetadata({
       locale: params.lang === 'en' ? 'en_US' : params.lang === 'pt' ? 'pt_BR' : 'es_ES' } };
 }
 
-export default async function AboutPage({
-  params }: {
-  params: { lang: Locale }
-}) {
+export default async function AboutPage(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+) {
+  const params = await props.params;
   const dict = await getDictionary(params.lang);
-  
+
   return <AboutPageClient content={dict.about} />;
 }

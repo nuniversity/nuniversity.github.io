@@ -11,11 +11,11 @@ import { FlashcardGameClient } from '@/components/languages/flashcard-game-clien
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface LanguageActivityPageProps {
-  params: {
+  params: Promise<{
     lang: Locale
     pair: string
     activitySlug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -27,10 +27,12 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale; pair: string; activitySlug: string }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale; pair: string; activitySlug: string }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   const game = await getLanguageActivity(params.activitySlug, params.lang)
 
@@ -46,7 +48,8 @@ export async function generateMetadata({
     description: game.description }
 }
 
-export default async function LanguageActivityPage({ params }: LanguageActivityPageProps) {
+export default async function LanguageActivityPage(props: LanguageActivityPageProps) {
+  const params = await props.params;
   const { lang, pair, activitySlug } = params
   const dict = await getDictionary(lang)
 

@@ -8,19 +8,21 @@ import { buildAlternates } from '@/lib/seo/alternates'
 export const dynamic = 'force-static'
 
 interface RoadmapsPageProps {
-  params: {
+  params: Promise<{
     lang: Locale
-  }
+  }>
 }
 
 export async function generateStaticParams() {
   return i18n.locales.map(locale => ({ lang: locale }))
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
 
   return {
@@ -29,7 +31,8 @@ export async function generateMetadata({
     description: dict.roadmaps?.subtitle || 'Structured learning paths' }
 }
 
-export default async function RoadmapsPage({ params }: RoadmapsPageProps) {
+export default async function RoadmapsPage(props: RoadmapsPageProps) {
+  const params = await props.params;
   const { lang } = params
   const roadmaps = await getAllRoadmaps(lang)
   const dict = await getDictionary(lang)

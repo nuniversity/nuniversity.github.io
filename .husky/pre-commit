@@ -1,15 +1,20 @@
 # Husky pre-commit hook.
 #
-# 1. lint-staged: vitest related + eslint for staged TS, Bandit for Python.
-# 2. Integration gates (artifact tests + Chromium E2E) against the build in
+# 1. Secret scan: pinned, checksum-verified gitleaks against the staged diff.
+# 2. lint-staged: vitest related + eslint (incl. security rules) for staged
+#    TS/TSX, Bandit for Python, and signature/audit checks for dependency
+#    changes (package.json / package-lock.json).
+# 3. Integration gates (artifact tests + Chromium E2E) against the build in
 #    out/. They run only when a build exists, so content-only commits without
 #    a build are not blocked.
 #
 # The browser suite lives here (not in GitHub Actions) while it stabilises;
 # the workflow keeps a commented copy of those steps for later.
 #
-# Bypass once:  SKIP_INTEGRATION=1 git commit ...
+# Bypass once:  SKIP_GITLEAKS=1 / SKIP_BANDIT=1 / SKIP_SECURITY_LOCKFILE=1 /
+#               SKIP_INTEGRATION=1 git commit ...
 # Bypass all:   git commit --no-verify
+node scripts/security-gitleaks.mjs || exit 1
 npx lint-staged
 
 if [ "$SKIP_INTEGRATION" = "1" ]; then

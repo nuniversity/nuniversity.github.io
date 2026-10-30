@@ -11,7 +11,7 @@ import { TypingSpeedClient } from './typing-speed-client'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface GamePageProps {
-  params: { lang: Locale; slug: string }
+  params: Promise<{ lang: Locale; slug: string }>
 }
 
 export async function generateStaticParams() {
@@ -19,7 +19,8 @@ export async function generateStaticParams() {
   return allGames.filter(g => g.category === 'coding').map(g => ({ slug: g.slug }))
 }
 
-export async function generateMetadata({ params }: { params: { lang: Locale; slug: string } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ lang: Locale; slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   const game = await getGameFile<GameFileData>('coding', params.slug, params.lang)
   if (!game) return {
@@ -34,7 +35,8 @@ const clients: Record<string, any> = {
   'binary-hex-game': BinaryHexClient,
   'code-typing-speed': TypingSpeedClient }
 
-export default async function CodingGamePage({ params }: GamePageProps) {
+export default async function CodingGamePage(props: GamePageProps) {
+  const params = await props.params;
   const { lang, slug } = params
   const dict = await getDictionary(lang)
   const game = await getGameFile<GameFileData>('coding', slug, lang)

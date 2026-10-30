@@ -19,12 +19,14 @@ import type { StatItem } from '@/components/home/Stats'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
-  
+
   return {
     alternates: buildAlternates(params.lang, ''),
     title: dict.metadata.home.title,
@@ -41,10 +43,12 @@ function formatCount(n: number): string {
   return `${n}+`
 }
 
-export default async function HomePage({
-  params }: {
-  params: { lang: Locale }
-}) {
+export default async function HomePage(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+) {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   const [courses, tools, games, resources] = await Promise.all([
     getAllCourses(params.lang),

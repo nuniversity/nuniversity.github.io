@@ -1,7 +1,13 @@
 'use client'
 
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Plus, Trash2, Download, RotateCcw, BarChart3, GripVertical } from 'lucide-react';
+import { usePersistentState } from '@/lib/tools/use-persistent-state';
+import { createId } from '@/lib/tools/ids';
+import { interpolate as tpl } from '@/lib/tools/template';
+import { toCsv } from '@/lib/tools/csv';
+import { downloadCsv, downloadJson } from '@/lib/tools/download';
+import { ToolHeader } from './shared/ToolHeader';
 
 interface Option {
   id: number;
@@ -14,10 +20,13 @@ interface Criterion {
   weight: number;
 }
 
-interface Score {
-  optionId: number;
-  criterionId: number;
-  value: number;
+interface DecisionState {
+  title: string;
+  options: Option[];
+  criteria: Criterion[];
+  /** Keyed `${optionId}-${criterionId}`. */
+  scores: Record<string, number>;
+  scale: number;
 }
 
 interface DecisionMatrixProps {
@@ -25,9 +34,44 @@ interface DecisionMatrixProps {
   dict: any;
 }
 
-function tpl(template: string, vars?: Record<string, string | number>): string {
-  if (!vars) return template
-  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
+const SCALES = [3, 5, 10];
+
+function validateState(raw: unknown): DecisionState | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const value = raw as Partial<DecisionState>;
+  if (!Array.isArray(value.options) || !Array.isArray(value.criteria)) return null;
+
+  const options = value.options
+    .filter((option): option is Option => Boolean(option) && typeof (option as Option).id === 'number' && typeof (option as Option).name === 'string')
+    .map((option) => ({ id: option.id, name: option.name }));
+  const criteria = value.criteria
+    .filter(
+      (criterion): criterion is Criterion =>
+        Boolean(criterion) &&
+        typeof (criterion as Criterion).id === 'number' &&
+        typeof (criterion as Criterion).name === 'string'
+    )
+    .map((criterion) => ({
+      id: criterion.id,
+      name: criterion.name,
+      weight: Math.max(1, Math.min(10, Math.round(criterion.weight) || 1)),
+    }));
+
+  const scale = SCALES.includes(Number(value.scale)) ? Number(value.scale) : 5;
+  const scores: Record<string, number> = {};
+  if (value.scores && typeof value.scores === 'object') {
+    for (const [key, score] of Object.entries(value.scores)) {
+      if (typeof score === 'number' && score >= 1 && score <= scale) scores[key] = score;
+    }
+  }
+
+  return {
+    title: typeof value.title === 'string' ? value.title : '',
+    options,
+    criteria,
+    scores,
+    scale,
+  };
 }
 
 const DecisionMatrix = ({ lang = 'en', dict = {} }: DecisionMatrixProps) => {
@@ -35,236 +79,340 @@ const DecisionMatrix = ({ lang = 'en', dict = {} }: DecisionMatrixProps) => {
   const tc = dict.tools?.common || {};
   const c = dict.common || {};
 
-  const [title, setTitle] = useState(t.default_title || 'Project Decision');
-  const [options, setOptions] = useState<Option[]>([
-    { id: 1, name: t.option_a || 'Option A' },
-    { id: 2, name: t.option_b || 'Option B' },
-    { id: 3, name: t.option_c || 'Option C' },
-  ]);
-  const [criteria, setCriteria] = useState<Criterion[]>([
-    { id: 1, name: t.criterion_cost || 'Cost', weight: 3 },
-    { id: 2, name: t.criterion_impact || 'Impact', weight: 5 },
-    { id: 3, name: t.criterion_effort || 'Effort', weight: 2 },
-  ]);
-  const [scores, setScores] = useState<Record<string, number>>({});
+  const defaults: DecisionState = {
+    title: t.default_title || 'Project Decision',
+    options: [
+      { id: 1, name: t.option_a || 'Option A' },
+      { id: 2, name: t.option_b || 'Option B' },
+      { id: 3, name: t.option_c || 'Option C' },
+    ],
+    criteria: [
+      { id: 1, name: t.criterion_cost || 'Cost', weight: 3 },
+      { id: 2, name: t.criterion_impact || 'Impact', weight: 5 },
+      { id: 3, name: t.criterion_effort || 'Effort', weight: 2 },
+    ],
+    scores: {},
+    scale: 5,
+  };
+
+  const [state, setState] = usePersistentState<DecisionState>(
+    'mimir:tools:decision_matrix',
+    defaults,
+    validateState
+  );
   const [newOptionName, setNewOptionName] = useState('');
   const [newCriterionName, setNewCriterionName] = useState('');
-  const [scale, setScale] = useState(5);
+  const [confirmReset, setConfirmReset] = useState(false);
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
 
-  const nextOptionId = useMemo(() => Math.max(...options.map(o => o.id), 0) + 1, [options]);
-  const nextCriterionId = useMemo(() => Math.max(...criteria.map(c => c.id), 0) + 1, [criteria]);
+  // Once hydrated an empty decision starts from the localised defaults.
+  const title = state.title || defaults.title;
 
-  const getScore = (optionId: number, criterionId: number) => {
-    return scores[`${optionId}-${criterionId}`] ?? null;
-  };
+  const getScore = (optionId: number, criterionId: number): number | null =>
+    state.scores[`${optionId}-${criterionId}`] ?? null;
 
   const setScore = (optionId: number, criterionId: number, value: number | null) => {
     const key = `${optionId}-${criterionId}`;
-    setScores(prev => {
-      const next = { ...prev };
-      if (value === null) {
-        delete next[key];
-      } else {
-        next[key] = value;
-      }
-      return next;
+    setState((prev) => {
+      const next = { ...prev.scores };
+      if (value === null) delete next[key];
+      else next[key] = value;
+      return { ...prev, scores: next };
     });
   };
 
   const results = useMemo(() => {
-    return options.map(option => {
-      let totalWeighted = 0;
-      let totalWeight = 0;
-      let count = 0;
-      for (const criterion of criteria) {
-        const score = scores[`${option.id}-${criterion.id}`] ?? null;
-        if (score !== null) {
-          totalWeighted += score * criterion.weight;
-          totalWeight += criterion.weight;
-          count++;
+    return state.options
+      .map((option) => {
+        let totalWeighted = 0;
+        let totalWeight = 0;
+        let scoredCount = 0;
+        for (const criterion of state.criteria) {
+          const score = state.scores[`${option.id}-${criterion.id}`] ?? null;
+          if (score !== null) {
+            totalWeighted += score * criterion.weight;
+            totalWeight += criterion.weight;
+            scoredCount += 1;
+          }
         }
-      }
-      const weightedScore = totalWeight > 0 ? totalWeighted / totalWeight : 0;
-      const maxScore = scale;
-      const percentage = totalWeight > 0 ? (totalWeighted / (totalWeight * maxScore)) * 100 : 0;
-      return { ...option, weightedScore, percentage, scoredCount: count };
-    }).sort((a, b) => b.weightedScore - a.weightedScore);
-  }, [options, criteria, scores, scale]);
+        const weightedScore = totalWeight > 0 ? totalWeighted / totalWeight : 0;
+        const percentage = totalWeight > 0 ? Math.min(100, (totalWeighted / (totalWeight * state.scale)) * 100) : 0;
+        return { ...option, weightedScore, percentage, scoredCount };
+      })
+      .sort((a, b) => b.weightedScore - a.weightedScore);
+  }, [state.options, state.criteria, state.scores, state.scale]);
 
   const addOption = () => {
-    if (newOptionName.trim()) {
-      setOptions(prev => [...prev, { id: nextOptionId, name: newOptionName.trim() }]);
-      setNewOptionName('');
-    }
+    if (!newOptionName.trim()) return;
+    setState((prev) => ({
+      ...prev,
+      options: [...prev.options, { id: createId(), name: newOptionName.trim() }],
+    }));
+    setNewOptionName('');
   };
 
   const removeOption = (id: number) => {
-    setOptions(prev => prev.filter(o => o.id !== id));
-    setScores(prev => {
-      const next = { ...prev };
-      Object.keys(next).forEach(key => {
-        if (key.startsWith(`${id}-`)) delete next[key];
+    setState((prev) => {
+      const nextScores = { ...prev.scores };
+      Object.keys(nextScores).forEach((key) => {
+        if (key.startsWith(`${id}-`)) delete nextScores[key];
       });
-      return next;
+      return { ...prev, options: prev.options.filter((option) => option.id !== id), scores: nextScores };
     });
   };
 
   const addCriterion = () => {
-    if (newCriterionName.trim()) {
-      setCriteria(prev => [...prev, { id: nextCriterionId, name: newCriterionName.trim(), weight: 1 }]);
-      setNewCriterionName('');
-    }
+    if (!newCriterionName.trim()) return;
+    setState((prev) => ({
+      ...prev,
+      criteria: [...prev.criteria, { id: createId(), name: newCriterionName.trim(), weight: 1 }],
+    }));
+    setNewCriterionName('');
   };
 
   const removeCriterion = (id: number) => {
-    setCriteria(prev => prev.filter(c => c.id !== id));
-    setScores(prev => {
-      const next = { ...prev };
-      Object.keys(next).forEach(key => {
-        if (key.endsWith(`-${id}`)) delete next[key];
+    setState((prev) => {
+      const nextScores = { ...prev.scores };
+      Object.keys(nextScores).forEach((key) => {
+        if (key.endsWith(`-${id}`)) delete nextScores[key];
       });
-      return next;
+      return {
+        ...prev,
+        criteria: prev.criteria.filter((criterion) => criterion.id !== id),
+        scores: nextScores,
+      };
     });
   };
 
   const updateWeight = (id: number, weight: number) => {
-    setCriteria(prev => prev.map(c => c.id === id ? { ...c, weight: Math.max(1, Math.min(10, weight)) } : c));
+    setState((prev) => ({
+      ...prev,
+      criteria: prev.criteria.map((criterion) =>
+        criterion.id === id ? { ...criterion, weight: Math.max(1, Math.min(10, weight)) } : criterion
+      ),
+    }));
   };
 
-  const exportJSON = () => {
-    const data = { title, options, criteria, scores, scale, exportedAt: new Date().toISOString() };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `decision-matrix-${Date.now()}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const changeScale = (scale: number) => {
+    setState((prev) => {
+      // Clamp to the new maximum so percentages stay valid.
+      const scores: Record<string, number> = {};
+      for (const [key, score] of Object.entries(prev.scores)) {
+        scores[key] = Math.min(score, scale);
+      }
+      return { ...prev, scale, scores };
+    });
   };
+
+  const moveOption = (from: number, to: number) => {
+    if (from === to) return;
+    setState((prev) => {
+      const options = [...prev.options];
+      const [moved] = options.splice(from, 1);
+      options.splice(to, 0, moved);
+      return { ...prev, options };
+    });
+  };
+
+  const exportJSON = () => downloadJson({ ...state, title, exportedAt: new Date().toISOString() }, 'decision-matrix.json');
 
   const exportCSV = () => {
-    let csv = `Option,${criteria.map(c => `${c.name} (w:${c.weight})`).join(',')},Weighted Score,Rank\n`;
-    results.forEach((opt, i) => {
-      const row = criteria.map(c => getScore(opt.id, c.id) ?? '').join(',');
-      csv += `"${opt.name}",${row},${opt.weightedScore.toFixed(2)},${i + 1}\n`;
-    });
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `decision-matrix-${Date.now()}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const header = ['Option', ...state.criteria.map((criterion) => `${criterion.name} (w:${criterion.weight})`), 'Weighted Score', 'Rank'];
+    const rows = results.map((option, index) => [
+      option.name,
+      ...state.criteria.map((criterion) => getScore(option.id, criterion.id) ?? ''),
+      option.weightedScore.toFixed(2),
+      index + 1,
+    ]);
+    downloadCsv(toCsv([header, ...rows]), 'decision-matrix.csv');
   };
 
   const resetAll = () => {
-    setScores({});
-    setOptions([{ id: 1, name: t.option_a || 'Option A' }, { id: 2, name: t.option_b || 'Option B' }, { id: 3, name: t.option_c || 'Option C' }]);
-    setCriteria([{ id: 1, name: t.criterion_cost || 'Cost', weight: 3 }, { id: 2, name: t.criterion_impact || 'Impact', weight: 5 }, { id: 3, name: t.criterion_effort || 'Effort', weight: 2 }]);
-    setTitle(t.default_title || 'Project Decision');
+    setState(defaults);
+    setConfirmReset(false);
   };
 
-  const allScored = options.every(o => criteria.every(c => getScore(o.id, c.id) !== null));
+  const allScored =
+    state.options.length > 0 &&
+    state.options.every((option) => state.criteria.every((criterion) => getScore(option.id, criterion.id) !== null));
+
+  const bestOptionId = allScored && (results[0]?.weightedScore ?? 0) > 0 ? results[0].id : null;
+  const rankOf = (optionId: number): number => results.findIndex((result) => result.id === optionId) + 1;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 py-8 px-4">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-teal-600 to-emerald-600 mb-4">
-            <BarChart3 className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent">
-            {t.title || 'Decision Matrix'}
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            {t.subtitle || 'Evaluate options against weighted criteria to make better decisions'}
-          </p>
-        </div>
+        <ToolHeader
+          icon={BarChart3}
+          title={t.title || 'Decision Matrix'}
+          subtitle={t.subtitle || 'Evaluate options against weighted criteria to make better decisions'}
+          gradient="from-teal-600 to-emerald-600"
+        />
 
-        {/* Title and Scale */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-6">
-          <div className="flex flex-wrap items-center gap-4">
+        <div className="bg-card border border-border rounded-2xl shadow-xl p-6 mb-6">
+          <div className="flex flex-wrap items-end gap-4">
             <div className="flex-1 min-w-[200px]">
-              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">{t.decision_title || 'Decision Title'}</label>
+              <label htmlFor="decision-title" className="block text-sm font-medium text-muted-foreground mb-1">
+                {t.decision_title || 'Decision Title'}
+              </label>
               <input
+                id="decision-title"
                 type="text"
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 font-semibold focus:ring-2 focus:ring-emerald-500 outline-none"
+                onChange={(event) => setState((prev) => ({ ...prev, title: event.target.value }))}
+                className="w-full px-4 py-2 rounded-lg border border-border bg-background font-semibold focus:ring-2 focus:ring-primary outline-none"
               />
             </div>
             <div className="w-32">
-              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">{tpl(t.scale || 'Scale (1–{n})', { n: scale })}</label>
-              <select value={scale} onChange={(e) => setScale(Number(e.target.value))} className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-emerald-500 outline-none">
-                <option value={3}>1–3</option>
-                <option value={5}>1–5</option>
-                <option value={10}>1–10</option>
+              <label htmlFor="decision-scale" className="block text-sm font-medium text-muted-foreground mb-1">
+                {tpl(t.scale || 'Scale (1–{n})', { n: state.scale })}
+              </label>
+              <select
+                id="decision-scale"
+                value={state.scale}
+                onChange={(event) => changeScale(Number(event.target.value))}
+                className="w-full px-3 py-2 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary outline-none"
+              >
+                {SCALES.map((scale) => (
+                  <option key={scale} value={scale}>
+                    1–{scale}
+                  </option>
+                ))}
               </select>
             </div>
-            <div className="flex gap-2 ml-auto">
-              <button onClick={exportJSON} className="px-4 py-2 rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-colors text-sm flex items-center gap-1"><Download className="w-4 h-4" /> {tc.json || 'JSON'}</button>
-              <button onClick={exportCSV} className="px-4 py-2 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors text-sm flex items-center gap-1"><Download className="w-4 h-4" /> {tc.csv || 'CSV'}</button>
-              <button onClick={resetAll} className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors text-sm flex items-center gap-1"><RotateCcw className="w-4 h-4" /> {tc.reset || 'Reset'}</button>
+            <div className="flex flex-wrap gap-2 ml-auto">
+              <button
+                onClick={exportJSON}
+                className="px-4 py-2 rounded-lg bg-teal-700 text-white hover:bg-teal-800 transition-colors text-sm flex items-center gap-1"
+              >
+                <Download className="w-4 h-4" aria-hidden="true" /> {tc.json || 'JSON'}
+              </button>
+              <button
+                onClick={exportCSV}
+                className="px-4 py-2 rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 transition-colors text-sm flex items-center gap-1"
+              >
+                <Download className="w-4 h-4" aria-hidden="true" /> {tc.csv || 'CSV'}
+              </button>
+              {confirmReset ? (
+                <span className="flex gap-1">
+                  <button
+                    onClick={resetAll}
+                    className="px-3 py-2 rounded-lg bg-red-600 text-white text-sm"
+                  >
+                    {tc.reset || 'Reset'}
+                  </button>
+                  <button
+                    onClick={() => setConfirmReset(false)}
+                    className="px-3 py-2 rounded-lg bg-muted text-sm"
+                  >
+                    {c.cancel || 'Cancel'}
+                  </button>
+                </span>
+              ) : (
+                <button
+                  onClick={() => setConfirmReset(true)}
+                  className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors text-sm flex items-center gap-1"
+                >
+                  <RotateCcw className="w-4 h-4" aria-hidden="true" /> {tc.reset || 'Reset'}
+                </button>
+              )}
             </div>
           </div>
         </div>
 
         <div className="grid lg:grid-cols-[1fr,300px] gap-6">
-          {/* Matrix */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+          <div className="bg-card border border-border rounded-2xl shadow-xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
+                <caption className="sr-only">{tpl(t.results_summary || 'Results Summary', {})}</caption>
                 <thead>
                   <tr className="bg-gradient-to-r from-teal-500 to-emerald-600 text-white">
-                    <th className="p-4 text-left font-semibold min-w-[160px]">{t.options || 'Options'}</th>
-                    {criteria.map(c => (
-                      <th key={c.id} className="p-4 text-center font-semibold min-w-[120px]">
+                    <th scope="col" className="p-4 text-left font-semibold min-w-[160px]">
+                      {t.options || 'Options'}
+                    </th>
+                    {state.criteria.map((criterion) => (
+                      <th key={criterion.id} scope="col" className="p-4 text-center font-semibold min-w-[130px]">
                         <div className="flex items-center justify-center gap-2">
-                          <span>{c.name}</span>
-                          <span className="text-xs text-white/70">w:{c.weight}</span>
-                          <button onClick={() => removeCriterion(c.id)} className="p-0.5 rounded hover:bg-white/20 transition-colors"><Trash2 className="w-3 h-3" /></button>
+                          <span>{criterion.name}</span>
+                          <span className="text-xs text-white/70">w:{criterion.weight}</span>
+                          <button
+                            onClick={() => removeCriterion(criterion.id)}
+                            aria-label={`${c.delete || 'Delete'} ${criterion.name}`}
+                            className="p-0.5 rounded hover:bg-white/20 transition-colors"
+                          >
+                            <Trash2 className="w-3 h-3" aria-hidden="true" />
+                          </button>
                         </div>
                       </th>
                     ))}
-                    <th className="p-4 text-center font-semibold min-w-[100px] bg-teal-700">{t.score || 'Score'}</th>
-                    <th className="p-4 text-center font-semibold min-w-[80px] bg-teal-800">{t.rank || 'Rank'}</th>
+                    <th scope="col" className="p-4 text-center font-semibold min-w-[100px] bg-teal-700">
+                      {t.score || 'Score'}
+                    </th>
+                    <th scope="col" className="p-4 text-center font-semibold min-w-[80px] bg-teal-800">
+                      {t.rank || 'Rank'}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {options.map((option, idx) => {
-                    const result = results.find(r => r.id === option.id)!;
-                    const isBest = idx === 0 && allScored && result.weightedScore > 0;
+                  {state.options.map((option, index) => {
+                    const result = results.find((item) => item.id === option.id);
+                    const isBest = option.id === bestOptionId;
                     return (
-                      <tr key={option.id} className={`border-t border-gray-200 dark:border-gray-700 ${isBest ? 'bg-emerald-50 dark:bg-emerald-900/20' : idx % 2 === 1 ? 'bg-gray-50 dark:bg-gray-800/50' : ''}`}>
+                      <tr
+                        key={option.id}
+                        draggable
+                        onDragStart={() => setDragIndex(index)}
+                        onDragOver={(event) => event.preventDefault()}
+                        onDrop={() => {
+                          if (dragIndex !== null) moveOption(dragIndex, index);
+                          setDragIndex(null);
+                        }}
+                        className={`border-t border-border ${isBest ? 'bg-emerald-50 dark:bg-emerald-900/20' : index % 2 === 1 ? 'bg-muted/30' : ''}`}
+                      >
                         <td className="p-3">
                           <div className="flex items-center gap-2">
-                            <GripVertical className="w-4 h-4 text-gray-400 cursor-move" />
+                            <GripVertical className="w-4 h-4 text-muted-foreground cursor-move" aria-hidden="true" />
                             <input
                               type="text"
                               value={option.name}
-                              onChange={(e) => setOptions(prev => prev.map(o => o.id === option.id ? { ...o, name: e.target.value } : o))}
-                              className="flex-1 px-2 py-1 rounded border border-gray-200 dark:border-gray-600 bg-transparent font-medium focus:ring-2 focus:ring-emerald-500 outline-none"
+                              onChange={(event) =>
+                                setState((prev) => ({
+                                  ...prev,
+                                  options: prev.options.map((item) =>
+                                    item.id === option.id ? { ...item, name: event.target.value } : item
+                                  ),
+                                }))
+                              }
+                              aria-label={`${t.options || 'Options'} ${index + 1}`}
+                              className="flex-1 px-2 py-1 rounded border border-border bg-transparent font-medium focus:ring-2 focus:ring-primary outline-none"
                             />
-                            <button onClick={() => removeOption(option.id)} className="p-1 rounded hover:bg-red-100 dark:hover:bg-red-900 transition-colors"><Trash2 className="w-3.5 h-3.5 text-red-500" /></button>
+                            <button
+                              onClick={() => removeOption(option.id)}
+                              aria-label={`${c.delete || 'Delete'} ${option.name}`}
+                              className="p-1 rounded hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
+                            >
+                              <Trash2 className="w-3.5 h-3.5 text-red-500" aria-hidden="true" />
+                            </button>
                           </div>
                         </td>
-                        {criteria.map(c => {
-                          const score = getScore(option.id, c.id);
+                        {state.criteria.map((criterion) => {
+                          const score = getScore(option.id, criterion.id);
                           return (
-                            <td key={c.id} className="p-3 text-center">
-                              <div className="flex gap-1 justify-center">
-                                {Array.from({ length: scale }, (_, i) => i + 1).map(v => (
+                            <td key={criterion.id} className="p-3 text-center">
+                              <div className="flex gap-1 justify-center flex-wrap">
+                                {Array.from({ length: state.scale }, (_, i) => i + 1).map((value) => (
                                   <button
-                                    key={v}
-                                    onClick={() => setScore(option.id, c.id, score === v ? null : v)}
+                                    key={value}
+                                    onClick={() => setScore(option.id, criterion.id, score === value ? null : value)}
+                                    aria-pressed={score === value}
+                                    aria-label={`${option.name} — ${criterion.name}: ${value}`}
                                     className={`w-7 h-7 rounded text-xs font-medium transition-all ${
-                                      score === v
-                                        ? 'bg-emerald-500 text-white shadow-sm scale-110'
-                                        : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
+                                      score === value
+                                        ? 'bg-emerald-700 text-white shadow-sm scale-110'
+                                        : 'bg-muted text-muted-foreground hover:opacity-80'
                                     }`}
                                   >
-                                    {v}
+                                    {value}
                                   </button>
                                 ))}
                               </div>
@@ -272,14 +420,20 @@ const DecisionMatrix = ({ lang = 'en', dict = {} }: DecisionMatrixProps) => {
                           );
                         })}
                         <td className={`p-3 text-center font-bold text-lg ${isBest ? 'text-emerald-600' : ''}`}>
-                          {result.weightedScore > 0 ? result.weightedScore.toFixed(1) : ', '}
+                          {(result?.weightedScore ?? 0) > 0 ? result?.weightedScore.toFixed(1) : ''}
                         </td>
                         <td className="p-3 text-center">
-                          {allScored && result.weightedScore > 0 ? (
-                            <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full font-bold text-sm ${isBest ? 'bg-emerald-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'}`}>
-                              {idx + 1}
+                          {allScored && (result?.weightedScore ?? 0) > 0 ? (
+                            <span
+                              className={`inline-flex items-center justify-center w-8 h-8 rounded-full font-bold text-sm ${
+                                isBest ? 'bg-emerald-700 text-white' : 'bg-muted text-foreground'
+                              }`}
+                            >
+                              {rankOf(option.id)}
                             </span>
-                          ) : ', '}
+                          ) : (
+                            ''
+                          )}
                         </td>
                       </tr>
                     );
@@ -288,74 +442,124 @@ const DecisionMatrix = ({ lang = 'en', dict = {} }: DecisionMatrixProps) => {
               </table>
             </div>
 
-            {/* Add Option */}
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="p-4 border-t border-border">
               <div className="flex gap-2">
+                <label htmlFor="decision-new-option" className="sr-only">
+                  {t.add_option_placeholder || 'Add new option...'}
+                </label>
                 <input
+                  id="decision-new-option"
                   type="text"
                   value={newOptionName}
-                  onChange={(e) => setNewOptionName(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && addOption()}
+                  onChange={(event) => setNewOptionName(event.target.value)}
+                  onKeyDown={(event) => event.key === 'Enter' && addOption()}
                   placeholder={t.add_option_placeholder || 'Add new option...'}
-                  className="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="flex-1 px-3 py-2 rounded-lg border border-border bg-background text-sm focus:ring-2 focus:ring-primary outline-none"
                 />
-                <button onClick={addOption} className="px-4 py-2 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors text-sm flex items-center gap-1"><Plus className="w-4 h-4" /> {tc.add || 'Add'}</button>
+                <button
+                  onClick={addOption}
+                  className="px-4 py-2 rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 transition-colors text-sm flex items-center gap-1"
+                >
+                  <Plus className="w-4 h-4" aria-hidden="true" /> {tc.add || 'Add'}
+                </button>
               </div>
             </div>
           </div>
 
-          {/* Sidebar: Criteria Management */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">{t.criteria || 'Criteria'}</h3>
+          <div className="bg-card border border-border rounded-2xl shadow-xl p-6">
+            <h2 className="text-lg font-semibold mb-4">{t.criteria || 'Criteria'}</h2>
             <div className="space-y-3 mb-4">
-              {criteria.map(c => (
-                <div key={c.id} className="flex items-center gap-2 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-700">
+              {state.criteria.map((criterion) => (
+                <div key={criterion.id} className="flex items-center gap-2 p-3 rounded-lg bg-muted/50 border border-border">
                   <input
                     type="text"
-                    value={c.name}
-                    onChange={(e) => setCriteria(prev => prev.map(cr => cr.id === c.id ? { ...cr, name: e.target.value } : cr))}
-                    className="flex-1 px-2 py-1 rounded border border-gray-200 dark:border-gray-600 bg-transparent text-sm font-medium focus:ring-2 focus:ring-emerald-500 outline-none"
+                    value={criterion.name}
+                    onChange={(event) =>
+                      setState((prev) => ({
+                        ...prev,
+                        criteria: prev.criteria.map((item) =>
+                          item.id === criterion.id ? { ...item, name: event.target.value } : item
+                        ),
+                      }))
+                    }
+                    aria-label={`${t.criteria || 'Criteria'} ${criterion.name}`}
+                    className="flex-1 min-w-0 px-2 py-1 rounded border border-border bg-transparent text-sm font-medium focus:ring-2 focus:ring-primary outline-none"
                   />
                   <div className="flex items-center gap-1">
-                    <button onClick={() => updateWeight(c.id, c.weight - 1)} className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-600 text-xs font-bold">−</button>
-                    <span className="w-6 text-center text-sm font-bold text-emerald-600">{c.weight}</span>
-                    <button onClick={() => updateWeight(c.id, c.weight + 1)} className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-600 text-xs font-bold">+</button>
+                    <button
+                      onClick={() => updateWeight(criterion.id, criterion.weight - 1)}
+                      aria-label={`${criterion.name}: ${t.weight || 'weight'} -1`}
+                      className="p-1 rounded hover:bg-muted text-xs font-bold"
+                    >
+                      −
+                    </button>
+                    <span className="w-6 text-center text-sm font-bold text-emerald-600">{criterion.weight}</span>
+                    <button
+                      onClick={() => updateWeight(criterion.id, criterion.weight + 1)}
+                      aria-label={`${criterion.name}: ${t.weight || 'weight'} +1`}
+                      className="p-1 rounded hover:bg-muted text-xs font-bold"
+                    >
+                      +
+                    </button>
                   </div>
-                  <button onClick={() => removeCriterion(c.id)} className="p-1 rounded hover:bg-red-100 dark:hover:bg-red-900 transition-colors"><Trash2 className="w-3.5 h-3.5 text-red-500" /></button>
+                  <button
+                    onClick={() => removeCriterion(criterion.id)}
+                    aria-label={`${c.delete || 'Delete'} ${criterion.name}`}
+                    className="p-1 rounded hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
+                  >
+                    <Trash2 className="w-3.5 h-3.5 text-red-500" aria-hidden="true" />
+                  </button>
                 </div>
               ))}
             </div>
             <div className="flex gap-2">
+              <label htmlFor="decision-new-criterion" className="sr-only">
+                {t.new_criterion_placeholder || 'New criterion...'}
+              </label>
               <input
+                id="decision-new-criterion"
                 type="text"
                 value={newCriterionName}
-                onChange={(e) => setNewCriterionName(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && addCriterion()}
+                onChange={(event) => setNewCriterionName(event.target.value)}
+                onKeyDown={(event) => event.key === 'Enter' && addCriterion()}
                 placeholder={t.new_criterion_placeholder || 'New criterion...'}
-                className="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
+                className="flex-1 px-3 py-2 rounded-lg border border-border bg-background text-sm focus:ring-2 focus:ring-primary outline-none"
               />
-              <button onClick={addCriterion} className="px-3 py-2 rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-colors text-sm"><Plus className="w-4 h-4" /></button>
+              <button
+                onClick={addCriterion}
+                aria-label={tc.add || 'Add'}
+                className="px-3 py-2 rounded-lg bg-teal-700 text-white hover:bg-teal-800 transition-colors text-sm"
+              >
+                <Plus className="w-4 h-4" aria-hidden="true" />
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Results Summary */}
         {allScored && (
-          <div className="mt-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">{t.results_summary || 'Results Summary'}</h3>
+          <div className="mt-6 bg-card border border-border rounded-2xl shadow-xl p-6">
+            <h2 className="text-lg font-semibold mb-4">{t.results_summary || 'Results Summary'}</h2>
             <div className="space-y-3">
-              {results.map((r, i) => (
-                <div key={r.id} className="flex items-center gap-4">
-                  <span className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${i === 0 ? 'bg-emerald-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300'}`}>{i + 1}</span>
+              {results.map((result, index) => (
+                <div key={result.id} className="flex items-center gap-4">
+                  <span
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                      index === 0 ? 'bg-emerald-700 text-white' : 'bg-muted text-foreground'
+                    }`}
+                  >
+                    {index + 1}
+                  </span>
                   <div className="flex-1">
                     <div className="flex justify-between mb-1">
-                      <span className="font-medium">{r.name}</span>
-                      <span className="text-sm text-gray-500">{r.weightedScore.toFixed(1)} ({r.percentage.toFixed(0)}%)</span>
+                      <span className="font-medium">{result.name}</span>
+                      <span className="text-sm text-muted-foreground">
+                        {result.weightedScore.toFixed(1)} ({result.percentage.toFixed(0)}%)
+                      </span>
                     </div>
-                    <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                    <div className="h-2 rounded-full bg-muted overflow-hidden">
                       <div
-                        className={`h-full rounded-full transition-all ${i === 0 ? 'bg-emerald-500' : 'bg-teal-400'}`}
-                        style={{ width: `${r.percentage}%` }}
+                        className={`h-full rounded-full transition-all ${index === 0 ? 'bg-emerald-500' : 'bg-teal-400'}`}
+                        style={{ width: `${result.percentage}%` }}
                       />
                     </div>
                   </div>

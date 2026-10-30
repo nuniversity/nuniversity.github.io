@@ -106,7 +106,8 @@ describe('StepSpeak recording', () => {
     stubMediaDevices(vi.fn().mockResolvedValue({ getTracks: () => [] }))
     stubObjectUrls()
     const playSpy = vi.fn().mockResolvedValue(undefined)
-    vi.stubGlobal('Audio', vi.fn().mockImplementation(() => ({ play: playSpy })))
+    // Vitest 4 warns when a constructor-style stub is an arrow function.
+    vi.stubGlobal('Audio', vi.fn(function FakeAudio() { return { play: playSpy } }))
 
     renderSpeak()
     await user.click(screen.getByTestId('speak-record'))

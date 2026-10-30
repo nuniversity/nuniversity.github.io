@@ -1,10 +1,17 @@
 #!/usr/bin/env node
 /**
- * Generates the favicon set from `app/icon.svg`.
+ * Generates the favicon set from `public/icon.svg`.
  *
  * Produces:
- *   app/favicon.ico            16 / 32 / 48 px, multi-resolution
- *   app/apple-icon.png         180 px, opaque (iOS composites it on a tile)
+ *   public/favicon.ico            16 / 32 / 48 px, multi-resolution
+ *   public/apple-icon.png         180 px, opaque (iOS composites it on a tile)
+ *   public/icons/favicon-*.png    16 / 32 / 48 / 96 px for browsers that
+ *                                 ignore SVG favicons
+ *   public/icons/icon-*.png       192 / 512 px for the web app manifest
+ *
+ * Icons live in `public/` rather than `app/` on purpose: Next gives
+ * file-convention icons priority over `metadata.icons`, which would make the
+ * explicit, cache-busted icon set in the layout impossible to declare.
  *
  * The ICO container is packed by hand — the format allows a PNG payload per
  * entry since Vista, so no encoder dependency is needed.
@@ -16,14 +23,16 @@ import fs from 'node:fs'
 import path from 'node:path'
 import sharp from 'sharp'
 
-const APP = path.join(process.cwd(), 'app')
 const PUBLIC = path.join(process.cwd(), 'public')
-const SVG = path.join(APP, 'icon.svg')
-const ICO = path.join(APP, 'favicon.ico')
-const APPLE = path.join(APP, 'apple-icon.png')
+const ICONS = path.join(PUBLIC, 'icons')
+const SVG = path.join(PUBLIC, 'icon.svg')
+const ICO = path.join(PUBLIC, 'favicon.ico')
+const APPLE = path.join(PUBLIC, 'apple-icon.png')
+
+fs.mkdirSync(ICONS, { recursive: true })
 
 if (!fs.existsSync(SVG)) {
-  console.error('make-favicons: app/icon.svg not found')
+  console.error('make-favicons: public/icon.svg not found')
   process.exit(1)
 }
 
@@ -84,6 +93,28 @@ await sharp(svg, { density: 384 })
   .png({ compressionLevel: 9 })
   .toFile(APPLE)
 console.log(`apple-icon.png: 180 px, ${(fs.statSync(APPLE).size / 1024).toFixed(1)} KB`)
+
+// ── PNG favicons ──────────────────────────────────────────────────────────
+// Browsers that do not render SVG favicons (older Safari, some embedded
+// webviews) need a raster fallback; the manifest needs 192/512 px.
+const PNG_SIZES = [16, 32, 48, 96, 192, 512]
+for (const size of PNG_SIZES) {
+  const name = size <= 96 ? `favicon-${size}x${size}.png` : `icon-${size}.png`
+  await sharp(svg, { density: 384 })
+    .resize(size, size, { fit: 'cover' })
+    .png({ compressionLevel: 9 })
+    .toFile(path.join(ICONS, name))
+}
+console.log(`icons: ${PNG_SIZES.map((size) => `${size}px`).join(', ')}`)
+
+// Maskable icon: keep the glyph inside the 80% safe zone Android crops to.
+await sharp(svg, { density: 384 })
+  .resize(410, 410, { fit: 'cover' })
+  .flatten({ background: '#1d4ed8' })
+  .extend({ top: 51, bottom: 51, left: 51, right: 51, background: '#1d4ed8' })
+  .png({ compressionLevel: 9 })
+  .toFile(path.join(ICONS, 'icon-maskable-512.png'))
+console.log('icon-maskable-512.png: 512 px, safe-zone padded')
 
 // ── sanity check: the icon must not be blank ──────────────────────────────
 const stats = await sharp(icoEntries[1].data).stats()

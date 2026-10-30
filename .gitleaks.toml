@@ -1,0 +1,24 @@
+# Gitleaks configuration for Nuniversity.
+#
+# `scripts/security-gitleaks.mjs` runs the pinned, checksum-verified gitleaks
+# binary against the staged diff before every commit. Run a whole-repository
+# scan with: npm run security:scan
+#
+# The allowlist is intentionally small: build output/local caches plus the one
+# lesson that teaches static analysis using a deliberately fake API key.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Build output, local tool caches, and the intentional teaching example"
+paths = [
+  '''^\.next/''',
+  '''^out/''',
+  '''^node_modules/''',
+  '''^\.venv/''',
+  '''^playwright-report/''',
+  '''^test-results/''',
+  '''^_backup/''',
+  '''^content/courses/tdd-code-quality-tools/(en|pt|es)/08-static-analysis-scanning\.md$''',
+]

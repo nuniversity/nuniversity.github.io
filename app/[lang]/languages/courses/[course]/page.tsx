@@ -17,7 +17,7 @@ import type { PracticeLesson } from '@/components/language-course/practice-choos
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface CoursePageProps {
-  params: { lang: Locale; course: string }
+  params: Promise<{ lang: Locale; course: string }>
 }
 
 export async function generateStaticParams() {
@@ -26,11 +26,12 @@ export async function generateStaticParams() {
   )
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { lang: Locale; course: string }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale; course: string }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const summary = getLanguageCourseSummary(params.course, params.lang)
   const name = summary ? summary.name[params.lang] || summary.name.en : params.course
   const description = summary
@@ -43,7 +44,8 @@ export async function generateMetadata({
   }
 }
 
-export default async function LanguageCoursePage({ params }: CoursePageProps) {
+export default async function LanguageCoursePage(props: CoursePageProps) {
+  const params = await props.params;
   const { lang, course: courseId } = params
   const dict = await getDictionary(lang)
 

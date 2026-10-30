@@ -1,6 +1,6 @@
 # Nuniversity Platform
 
-Multilingual educational platform built with **Next.js 14** (App Router), deployed as a static site on GitHub Pages.
+Multilingual educational platform built with **Next.js 15** (App Router), deployed as a static site on GitHub Pages.
 
 [Website](https://nuniversity.github.io/en)
 
@@ -90,10 +90,34 @@ commit; `SKIP_BANDIT=1 git commit ...` bypasses it once. See
 | build | `npm run build` | Build static site to `/out` |
 | start | `npm run start` | Serve the production build |
 | lint | `npm run lint` | Run ESLint |
-| security:bandit | `npm run security:bandit` | Static security scan of the Python (Bandit) |
+| security:bandit | `npm run security:bandit` | Bandit scan of staged Python (also runs in pre-commit) |
+| security:gitleaks | `npm run security:gitleaks` | Pinned, checksum-verified gitleaks scan of the staged diff |
+| security:lockfile | `npm run security:lockfile` | Registry signatures + high/critical production audit for dependency changes |
+| security:scan | `npm run security:scan` | Whole-repository gitleaks scan |
 | lint:content | `npm run lint:content` | Advisory report: read-aloud punctuation, long tokens |
 | check:prose | `npm run check:prose` | Dry-run the prose normaliser, with sample rewrites |
 | fix:prose | `npm run fix:prose` | Rewrite em/en dashes and spaced hyphens in lesson prose |
+
+## Pre-commit security gates
+
+`.husky/pre-commit` runs, in order:
+
+1. **gitleaks** against the staged diff. The binary is pinned to an official
+   release, its SHA-256 is checked before execution, and it is cached under
+   `node_modules/.cache`. Unknown binaries on `PATH` are not executed.
+2. **lint-staged**: `vitest related` + ESLint (including the curated
+   `eslint-plugin-security` and `eslint-plugin-no-unsanitized` rules) for
+   staged TS/TSX, Bandit for Python, and `npm audit signatures` +
+   `npm audit --omit=dev --audit-level=high` when `package.json` or the lockfile
+   changes.
+3. **Artifact + Playwright E2E** when a build exists in `out/`.
+
+CI repeats the dependency gates (`npm audit signatures`,
+`npm audit --omit=dev --audit-level=high`) and adds Dependabot update PRs.
+
+Bypass one gate for a single commit with `SKIP_GITLEAKS=1`, `SKIP_BANDIT=1`,
+`SKIP_SECURITY_LOCKFILE=1` or `SKIP_INTEGRATION=1`; bypass everything with
+`git commit --no-verify` (use sparingly).
 
 ## Build for Production
 
@@ -166,7 +190,7 @@ Full documentation is available in the [`docs/`](./docs) directory:
 
 | Layer | Technology |
 |---|---|
-| Framework | Next.js 14 (App Router) |
+| Framework | Next.js 15 (App Router) + React 19 |
 | Language | TypeScript 5 |
 | Styling | Tailwind CSS + DaisyUI + HeroUI |
 | Markdown | react-markdown + remark-gfm + rehype-raw |

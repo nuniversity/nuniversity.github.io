@@ -13,3 +13,9 @@ repos:
         args: [-c, pyproject.toml]
         additional_dependencies: ["bandit[toml]"]
 
+  # Also available through the Husky hook (`npm run security:gitleaks`), which
+  # pins and checksum-verifies the same release for non-Python contributors.
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks

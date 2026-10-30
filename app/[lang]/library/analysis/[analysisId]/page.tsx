@@ -16,7 +16,7 @@ export const dynamic = 'force-static'
 export const revalidate = false
 
 interface AnalysisPageProps {
-  params: { lang: Locale; analysisId: string }
+  params: Promise<{ lang: Locale; analysisId: string }>
 }
 
 export async function generateStaticParams() {
@@ -29,7 +29,8 @@ export async function generateStaticParams() {
   return params
 }
 
-export async function generateMetadata({ params }: AnalysisPageProps): Promise<Metadata> {
+export async function generateMetadata(props: AnalysisPageProps): Promise<Metadata> {
+  const params = await props.params;
   const analysis = await getAnalysis(params.analysisId, params.lang)
   if (!analysis) return { title: 'Analysis' }
   return {
@@ -46,7 +47,8 @@ export async function generateMetadata({ params }: AnalysisPageProps): Promise<M
   }
 }
 
-export default async function LibraryAnalysisPage({ params }: AnalysisPageProps) {
+export default async function LibraryAnalysisPage(props: AnalysisPageProps) {
+  const params = await props.params;
   const { lang, analysisId } = params
   const analysis = await getAnalysis(analysisId, lang)
   if (!analysis) notFound()

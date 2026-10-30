@@ -11,10 +11,10 @@ import { notFound } from 'next/navigation'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface ConversationGamePageProps {
-  params: {
+  params: Promise<{
     lang: Locale
     slug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -26,10 +26,12 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale; slug: string }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale; slug: string }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   const game = await getConversationGame(params.slug, params.lang)
 
@@ -45,7 +47,8 @@ export async function generateMetadata({
     description: game.description }
 }
 
-export default async function ConversationGamePage({ params }: ConversationGamePageProps) {
+export default async function ConversationGamePage(props: ConversationGamePageProps) {
+  const params = await props.params;
   const { lang, slug } = params
   const dict = await getDictionary(lang)
 

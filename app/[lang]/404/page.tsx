@@ -8,10 +8,12 @@ export function generateStaticParams() {
   return i18n.locales.map((lang) => ({ lang }))
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
 
   return {
@@ -20,10 +22,12 @@ export async function generateMetadata({
     description: dict.metadata.notFound.description }
 }
 
-export default async function Localized404Page({
-  params }: {
-  params: { lang: Locale }
-}) {
+export default async function Localized404Page(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+) {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
 
   return <NotFoundClient lang={params.lang} dict={{ notFound: dict.notFound }} />

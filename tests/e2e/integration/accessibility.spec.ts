@@ -17,6 +17,10 @@ const SURFACES = [
   { name: 'library analysis', path: '/en/library/analysis/cs50-fast-start/' },
   { name: 'roadmaps hub', path: '/en/roadmaps/' },
   { name: 'roadmap detail', path: '/en/roadmaps/intro-to-software-engineering/' },
+  { name: 'tools hub', path: '/en/tools/' },
+  { name: 'pomodoro tool', path: '/en/tools/pomodoro-timer/' },
+  { name: 'decision matrix tool', path: '/en/tools/decision-matrix/' },
+  { name: 'flashcard tool', path: '/en/tools/flashcard-maker/' },
 ] as const
 
 test.describe('accessibility', () => {
@@ -54,6 +58,8 @@ test.describe('section palette in dark mode', () => {
     { name: 'quizzes', path: '/en/quizzes/' },
     { name: 'library', path: '/en/library/' },
   { name: 'library analysis', path: '/en/library/analysis/cs50-fast-start/' },
+    { name: 'eisenhower tool', path: '/en/tools/eisenhower-matrix/' },
+    { name: 'swot tool', path: '/en/tools/swot-matrix/' },
   ]) {
     test(`${surface.name} keeps axe contrast in dark mode`, async ({ page, makeAxeBuilder }, testInfo) => {
       await page.emulateMedia({ colorScheme: 'dark' })
@@ -69,7 +75,13 @@ test.describe('section palette in dark mode', () => {
       const serious = results.violations.filter(
         (violation) => violation.impact === 'serious' || violation.impact === 'critical'
       )
-      expect(serious.map((violation) => `${violation.id}: ${violation.help}`)).toEqual([])
+      expect(
+        serious.map(
+          (violation) =>
+            `${violation.impact} ${violation.id}: ${violation.nodes.map((node) => node.target.join(' ')).join('; ')}`
+        ),
+        `axe dark violations on ${surface.path}`
+      ).toEqual([])
     })
   }
 })

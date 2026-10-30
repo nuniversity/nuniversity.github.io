@@ -217,6 +217,8 @@ export function breadcrumbSchema(entries: BreadcrumbEntry[]): JsonLdObject {
  * Returns `null` when the value cannot be interpreted.
  */
 export function toIsoDuration(value: string): string | null {
+  // Anchored duration parser with bounded numeric/unit quantifiers.
+  // eslint-disable-next-line security/detect-unsafe-regex
   const match = /^\s*(\d+(?:\.\d+)?)\s*(minute|min|hour|hr|day|week|month|year)s?\s*$/i.exec(value)
   if (!match) return null
   const amount = Number(match[1])

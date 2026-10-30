@@ -18,7 +18,8 @@ export async function generateStaticParams() {
   return params
 }
 
-export default async function PracticePage({ params }: { params: { lang: Locale; courseSlug: string } }) {
+export default async function PracticePage(props: { params: Promise<{ lang: Locale; courseSlug: string }> }) {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   return (
     <div className="container-custom py-12">

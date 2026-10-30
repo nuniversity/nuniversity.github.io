@@ -13,10 +13,10 @@ import JsonLd from '@/components/seo/JsonLd'
 import { quizSchema } from '@/lib/seo/json-ld'
 
 interface QuizPageProps {
-  params: {
+  params: Promise<{
     lang: Locale
     quizSlug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -24,11 +24,12 @@ export async function generateStaticParams() {
   return quizzes.map(quiz => ({ quizSlug: quiz.slug }))
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { lang: Locale; quizSlug: string }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale; quizSlug: string }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   const quiz = await getQuiz(params.quizSlug, params.lang)
   const path = `quizzes/${params.quizSlug}`
@@ -50,7 +51,8 @@ export async function generateMetadata({
   })
 }
 
-export default async function QuizPage({ params }: QuizPageProps) {
+export default async function QuizPage(props: QuizPageProps) {
+  const params = await props.params;
   const { lang, quizSlug } = params
   const dict = await getDictionary(lang)
   const quiz = await getQuiz(quizSlug, lang)

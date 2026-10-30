@@ -63,6 +63,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify dependency provenance
+        # Registry signatures/attestations catch a tampered or unpublished
+        # package; the audit gate blocks new high/critical production issues.
+        # The five known low KaTeX advisories are accepted (trusted content,
+        # no compatible upstream fix).
+        run: |
+          npm audit signatures
+          npm audit --omit=dev --audit-level=high
+
       - name: Type-check
         # run: npx tsc --noEmit
         run: npm run typecheck

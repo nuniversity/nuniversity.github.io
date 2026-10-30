@@ -14,10 +14,10 @@ import { PairFlags } from '@/components/languages/pair-flags'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface LanguagePairPageProps {
-  params: {
+  params: Promise<{
     lang: Locale
     pair: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -28,10 +28,12 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale; pair: string }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale; pair: string }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   const [source, target] = params.pair.split('-')
   const base = dict.metadata?.languages?.title || 'Language Practice: Flashcards & Translation Quizzes'
@@ -45,7 +47,8 @@ export async function generateMetadata({
       'Interactive flashcards and translation quizzes with progress tracking.' }
 }
 
-export default async function LanguagePairPage({ params }: LanguagePairPageProps) {
+export default async function LanguagePairPage(props: LanguagePairPageProps) {
+  const params = await props.params;
   const { lang, pair } = params
   const dict = await getDictionary(lang)
 

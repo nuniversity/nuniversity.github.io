@@ -17,7 +17,8 @@ import {
   Clock,
   Grid3x3,
   BookOpen,
-  ArrowRight
+  ArrowRight,
+  X
 } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import { getToolIcon } from '@/lib/tools/tool-icons'
@@ -133,12 +134,23 @@ export function ToolsClient({ lang, tools, dict }: ToolsClientProps) {
           <div className="relative">
             <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground pointer-events-none" />
             <input
-              type="text"
+              type="search"
+              aria-label={dict.tools?.search_placeholder || 'Search tools...'}
               placeholder={dict.tools?.search_placeholder || 'Search tools...'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-lg border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full pl-10 pr-12 py-3 rounded-lg border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                aria-label={dict.tools?.clear_search || 'Clear Search'}
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-lg text-muted-foreground hover:bg-muted"
+              >
+                <X className="h-4 w-4" aria-hidden="true" />
+              </button>
+            )}
           </div>
         </div>
 
@@ -192,7 +204,6 @@ export function ToolsClient({ lang, tools, dict }: ToolsClientProps) {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {group.tools.map((tool) => {
                     const ToolIconComponent = getToolIcon(tool.icon, IconComponent)
-                    const colorClass = getCategoryColor(categoryKey)
 
                     return (
                       <Link

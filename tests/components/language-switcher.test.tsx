@@ -5,7 +5,7 @@ import LanguageSwitcher from '@/components/language/LanguageSwitcher'
 
 const mocks = vi.hoisted(() => ({
   pathname: '/pt/courses/aws-aif-c01',
-  push: vi.fn<[string], void>(),
+  push: vi.fn<(value: string) => void>(),
 }))
 
 vi.mock('next/navigation', () => ({

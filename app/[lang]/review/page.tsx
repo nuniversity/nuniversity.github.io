@@ -11,7 +11,8 @@ export async function generateStaticParams() {
   return i18n.locales.map((lang) => ({ lang }))
 }
 
-export async function generateMetadata({ params }: { params: { lang: Locale } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
+  const params = await props.params;
   return pageMetadata({
     lang: params.lang,
     path: 'review',
@@ -21,7 +22,8 @@ export async function generateMetadata({ params }: { params: { lang: Locale } })
   })
 }
 
-export default async function ReviewPage({ params }: { params: { lang: Locale } }) {
+export default async function ReviewPage(props: { params: Promise<{ lang: Locale }> }) {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   return (
     <div className="container-custom py-12">

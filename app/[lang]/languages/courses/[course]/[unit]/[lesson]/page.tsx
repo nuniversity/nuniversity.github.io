@@ -17,7 +17,7 @@ import { LessonPlayer } from '@/components/language-course/lesson-player'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface LessonPageProps {
-  params: { lang: Locale; course: string; unit: string; lesson: string }
+  params: Promise<{ lang: Locale; course: string; unit: string; lesson: string }>
 }
 
 export async function generateStaticParams() {
@@ -28,11 +28,12 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { lang: Locale; course: string; unit: string; lesson: string }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale; course: string; unit: string; lesson: string }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   let title = params.lesson
   let description = 'Interactive language lesson.'
   try {
@@ -50,9 +51,8 @@ export async function generateMetadata({
 }
 
 /** Steps reference vocab and grammar by id; the page resolves those slices. */
-export default async function LanguageLessonPage({
-  params,
-}: LessonPageProps) {
+export default async function LanguageLessonPage(props: LessonPageProps) {
+  const params = await props.params;
   const { lang, course: courseId, unit: unitSlug, lesson: lessonSlug } = params
   const dict = await getDictionary(lang)
 

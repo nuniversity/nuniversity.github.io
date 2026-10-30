@@ -10,25 +10,28 @@ import { CoursesClient } from './courses-client'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface CoursesPageProps {
-  params: { lang: Locale }
+  params: Promise<{ lang: Locale }>
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
-  
+
   return {
     alternates: buildAlternates(params.lang, 'courses'),
     title: dict.courses?.title || 'Courses',
     description: dict.courses?.subtitle || 'Explore all available learning paths' }
 }
 
-export default async function CoursesPage({ params }: CoursesPageProps) {
+export default async function CoursesPage(props: CoursesPageProps) {
+  const params = await props.params;
   const { lang } = params
   const dict = await getDictionary(lang)
-  
+
   // Get all courses at build time
   const allCourses = await getAllCourses(lang)
 

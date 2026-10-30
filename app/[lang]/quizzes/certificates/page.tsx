@@ -9,13 +9,15 @@ import { CertificatesClient } from '@/components/quizzes/CertificatesClient'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface CertificatesPageProps {
-  params: { lang: Locale }
+  params: Promise<{ lang: Locale }>
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   return {
     alternates: buildAlternates(params.lang, 'quizzes/certificates'),
@@ -25,7 +27,8 @@ export async function generateMetadata({
       'Certifications earned by passing mock exams' }
 }
 
-export default async function CertificatesPage({ params }: CertificatesPageProps) {
+export default async function CertificatesPage(props: CertificatesPageProps) {
+  const params = await props.params;
   const { lang } = params
   const dict = await getDictionary(lang)
   const quizzes = await getAllQuizzes(lang)

@@ -30,11 +30,11 @@ import { breadcrumbSchema, lessonSchema } from '@/lib/seo/json-ld'
 
 
 interface CoursePageProps {
-  params: {
+  params: Promise<{
     lang: Locale
     courseSlug: string
     lessonSlug: string
-  }
+  }>
 }
 
 
@@ -65,9 +65,8 @@ export async function generateStaticParams() {
   return params
 }
 
-export async function generateMetadata({
-  params,
-}: CoursePageProps): Promise<Metadata> {
+export async function generateMetadata(props: CoursePageProps): Promise<Metadata> {
+  const params = await props.params;
   const { lang, courseSlug, lessonSlug } = params
   const path = `courses/${courseSlug}/${lessonSlug}`
 
@@ -96,7 +95,8 @@ export async function generateMetadata({
   }
 }
 
-export default async function CourseLessonPage({ params }: CoursePageProps) {
+export default async function CourseLessonPage(props: CoursePageProps) {
+  const params = await props.params;
   const { lang, courseSlug, lessonSlug } = params
   const dict = await getDictionary(lang)
 
@@ -113,7 +113,7 @@ export default async function CourseLessonPage({ params }: CoursePageProps) {
 
   // Load all lessons in this course
   const coursesWithLessons = await getAllLessons(courseSlug, lang)
-  
+
   // Get the current course's lessons
   const currentCourse = coursesWithLessons.find(c => c.slug === courseSlug)
   if (!currentCourse) {

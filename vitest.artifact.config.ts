@@ -12,6 +12,8 @@ export default defineConfig({
   test: {
     environment: 'node',
     globals: true,
+    // These suites scan the entire export (1,800+ pages); 5s is too tight.
+    testTimeout: 60_000,
     include: ['tests/artifact/**/*.test.mjs'],
   },
   resolve: {

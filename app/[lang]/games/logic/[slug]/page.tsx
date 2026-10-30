@@ -10,7 +10,7 @@ import { NumberSequenceClient } from './number-sequence-client'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface GamePageProps {
-  params: { lang: Locale; slug: string }
+  params: Promise<{ lang: Locale; slug: string }>
 }
 
 export async function generateStaticParams() {
@@ -18,7 +18,8 @@ export async function generateStaticParams() {
   return allGames.filter(g => g.category === 'logic').map(g => ({ slug: g.slug }))
 }
 
-export async function generateMetadata({ params }: { params: { lang: Locale; slug: string } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ lang: Locale; slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   const game = await getGameFile<GameFileData>('logic', params.slug, params.lang)
   if (!game) return {
@@ -29,7 +30,8 @@ export async function generateMetadata({ params }: { params: { lang: Locale; slu
     title: game.title, description: game.description }
 }
 
-export default async function LogicGamePage({ params }: GamePageProps) {
+export default async function LogicGamePage(props: GamePageProps) {
+  const params = await props.params;
   const { lang, slug } = params
   const dict = await getDictionary(lang)
   const game = await getGameFile<GameFileData>('logic', slug, lang)

@@ -10,25 +10,28 @@ import { ToolsClient } from './tools-client'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface ToolsPageProps {
-  params: { lang: Locale }
+  params: Promise<{ lang: Locale }>
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
-  
+
   return {
     alternates: buildAlternates(params.lang, 'tools'),
     title: dict.tools?.title || 'Tools',
     description: dict.tools?.subtitle || 'Powerful tools to enhance your learning' }
 }
 
-export default async function ToolsPage({ params }: ToolsPageProps) {
+export default async function ToolsPage(props: ToolsPageProps) {
+  const params = await props.params;
   const { lang } = params
   const dict = await getDictionary(lang)
-  
+
   const allTools = await getAllTools(lang)
 
   return (

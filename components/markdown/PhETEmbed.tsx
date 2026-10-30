@@ -12,8 +12,12 @@ interface PhETEmbedProps {
 const PHET_BASE = 'https://phet.colorado.edu/sims/html'
 
 /** PhET simulation slugs are lowercase words separated by single hyphens. */
+// Anchored, hyphen-separated words; not vulnerable to catastrophic backtracking.
+// eslint-disable-next-line security/detect-unsafe-regex
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 /** PhET ships localised simulations with these two-letter codes. */
+// Anchored two-letter locale; bounded quantifiers only.
+// eslint-disable-next-line security/detect-unsafe-regex
 const LANGUAGE_RE = /^[a-z]{2}(?:-[a-z]{2})?$/
 
 /** How long to wait for the frame before treating it as failed. */

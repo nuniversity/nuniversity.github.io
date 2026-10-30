@@ -12,14 +12,15 @@ import { ArrowRight, Languages } from 'lucide-react'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface LanguageCoursesPageProps {
-  params: { lang: Locale }
+  params: Promise<{ lang: Locale }>
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { lang: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   const t = dict.languageCourse
   return {
@@ -29,7 +30,8 @@ export async function generateMetadata({
   }
 }
 
-export default function LanguageCoursesPage({ params }: LanguageCoursesPageProps) {
+export default async function LanguageCoursesPage(props: LanguageCoursesPageProps) {
+  const params = await props.params;
   const { lang } = params
   const courses = getAllLanguageCourses(lang)
   const t = (name: string, fallback: string) => (coursesNames[lang]?.[name] ?? fallback)

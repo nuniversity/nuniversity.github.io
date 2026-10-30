@@ -9,10 +9,10 @@ import { RedirectToLanguages } from '@/components/languages/RedirectToLanguages'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface LanguageRedirectPageProps {
-  params: {
+  params: Promise<{
     lang: Locale
     slug: string
-  }
+  }>
 }
 
 interface MetadataLanguagesTexts {
@@ -31,10 +31,12 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale; slug: string }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale; slug: string }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   const metadata = dict.metadata as unknown as MetadataLanguagesTexts | undefined
 
@@ -44,7 +46,8 @@ export async function generateMetadata({
     robots: { index: false, follow: false } }
 }
 
-export default async function LanguageRedirectPage({ params }: LanguageRedirectPageProps) {
+export default async function LanguageRedirectPage(props: LanguageRedirectPageProps) {
+  const params = await props.params;
   const { lang, slug } = params
   const dict = await getDictionary(lang)
   const pair = await getPairForSlug(slug)

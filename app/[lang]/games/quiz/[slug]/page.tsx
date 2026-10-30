@@ -9,10 +9,10 @@ import { RedirectToQuizzes } from '@/components/quizzes/RedirectToQuizzes'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface QuizRedirectPageProps {
-  params: {
+  params: Promise<{
     lang: Locale
     slug: string
-  }
+  }>
 }
 
 interface MetadataQuizzesTexts {
@@ -30,10 +30,12 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale; slug: string }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale; slug: string }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   const metadata = dict.metadata as unknown as MetadataQuizzesTexts | undefined
 
@@ -43,7 +45,8 @@ export async function generateMetadata({
     robots: { index: false, follow: false } }
 }
 
-export default async function QuizRedirectPage({ params }: QuizRedirectPageProps) {
+export default async function QuizRedirectPage(props: QuizRedirectPageProps) {
+  const params = await props.params;
   const { lang, slug } = params
   const dict = await getDictionary(lang)
 

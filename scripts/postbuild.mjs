@@ -26,9 +26,12 @@ function write404() {
 <meta name="robots" content="noindex"/>
 <meta http-equiv="Content-Security-Policy" content="${CSP}"/>
 <meta name="referrer" content="strict-origin-when-cross-origin"/>
-<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"/>
-<link rel="icon" href="/icon.svg" type="image/svg+xml"/>
-<link rel="apple-touch-icon" href="/apple-icon.png"/>
+<link rel="icon" href="/icons/favicon-32x32.png?v=2" sizes="32x32" type="image/png"/>
+<link rel="icon" href="/icons/favicon-16x16.png?v=2" sizes="16x16" type="image/png"/>
+<link rel="icon" href="/favicon.ico?v=2" sizes="16x16 32x32 48x48"/>
+<link rel="icon" href="/icon.svg?v=2" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-icon.png?v=2" sizes="180x180"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
 <title>404 — Nuniversity</title>
 <script>
 (function () {
@@ -115,9 +118,12 @@ function ensureCsp() {
  * code sandbox is deliberately stricter and is skipped).
  */
 const ICON_LINKS = [
-  '<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"/>',
-  '<link rel="icon" href="/icon.svg" type="image/svg+xml"/>',
-  '<link rel="apple-touch-icon" href="/apple-icon.png"/>',
+  '<link rel="icon" href="/icons/favicon-32x32.png?v=2" sizes="32x32" type="image/png"/>',
+  '<link rel="icon" href="/icons/favicon-16x16.png?v=2" sizes="16x16" type="image/png"/>',
+  '<link rel="icon" href="/favicon.ico?v=2" sizes="16x16 32x32 48x48"/>',
+  '<link rel="icon" href="/icon.svg?v=2" type="image/svg+xml"/>',
+  '<link rel="apple-touch-icon" href="/apple-icon.png?v=2" sizes="180x180"/>',
+  '<link rel="manifest" href="/manifest.webmanifest"/>',
 ].join('\n')
 
 function ensureIcons() {
@@ -160,6 +166,10 @@ function writeHeaders() {
 
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
+
+/manifest.webmanifest
+  Content-Type: application/manifest+json
+  Cache-Control: public, max-age=3600
 
 /media/*
   Cache-Control: public, max-age=86400

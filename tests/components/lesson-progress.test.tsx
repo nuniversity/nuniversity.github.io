@@ -16,7 +16,7 @@ import { getProfile } from '@/lib/gamification/profile'
 
 
 const mocks = vi.hoisted(() => ({
-  push: vi.fn<[string], void>(),
+  push: vi.fn<(value: string) => void>(),
 }))
 
 vi.mock('next/navigation', () => ({

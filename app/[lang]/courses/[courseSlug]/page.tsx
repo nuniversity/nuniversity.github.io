@@ -20,10 +20,10 @@ import { breadcrumbSchema, courseSchema } from '@/lib/seo/json-ld'
 import { PdfExportButton } from '@/components/pdf/PdfExportButton'
 
 interface CourseLandingPageProps {
-  params: {
+  params: Promise<{
     lang: Locale
     courseSlug: string
-  }
+  }>
 }
 
 export const dynamic = 'force-static'
@@ -46,9 +46,8 @@ export async function generateStaticParams() {
   return params
 }
 
-export async function generateMetadata({
-  params,
-}: CourseLandingPageProps): Promise<Metadata> {
+export async function generateMetadata(props: CourseLandingPageProps): Promise<Metadata> {
+  const params = await props.params;
   const { lang, courseSlug } = params
   const courses = await getAllCourses(lang)
   const course = courses.find((c) => c.slug === courseSlug)
@@ -82,8 +81,8 @@ function difficultyClasses(difficulty?: string): string {
   return 'bg-muted text-muted-foreground'
 }
 
-export default async function CourseLandingPage({
-  params }: CourseLandingPageProps) {
+export default async function CourseLandingPage(props: CourseLandingPageProps) {
+  const params = await props.params;
   const { lang, courseSlug } = params
   const dict = await getDictionary(lang)
 

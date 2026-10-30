@@ -5,10 +5,12 @@ import { getDictionary } from '@/lib/i18n/get-dictionary'
 import { type Locale } from '@/lib/i18n/config'
 import { buildAlternates } from '@/lib/seo/alternates'
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
 
   return {
@@ -22,10 +24,12 @@ export async function generateMetadata({
       locale: params.lang === 'en' ? 'en_US' : params.lang === 'pt' ? 'pt_BR' : 'es_ES' } }
 }
 
-export default async function PartnersPage({
-  params }: {
-  params: { lang: Locale }
-}) {
+export default async function PartnersPage(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+) {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
 
   return <PartnersView lang={params.lang} dict={dict} />

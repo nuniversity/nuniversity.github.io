@@ -1022,6 +1022,7 @@
       "generatedPrompt": "Prompt Gerado",
       "optional": "(Opcional)",
       "required": "Obrigatório",
+      "copy_failed": "Não foi possível copiar automaticamente — selecione o texto e copie manualmente.",
       "labels": {
         "objective": "Objetivo",
         "context": "Contexto",
@@ -1069,7 +1070,8 @@
         "casual": "Casual",
         "technical": "Técnico",
         "creative": "Criativo",
-        "educational": "Educacional"
+        "educational": "Educacional",
+        "none": "Não especificado"
       },
       "buttons": {
         "generate": "Gerar Prompt",
@@ -1130,6 +1132,7 @@
       "importError": "Erro ao importar dados. Verifique o formato do arquivo.",
       "importSuccess": "Dados importados com sucesso!",
       "important": "IMPORTANTE",
+      "moveTo": "Mover para",
       "listView": "Visualização em Lista",
       "matrixView": "Visualização em Matriz",
       "noTasks": "Nenhuma tarefa ainda",
@@ -1254,7 +1257,9 @@
       "start_round": "Iniciar Rodada {n}",
       "session_complete": "Sessão Concluída! 🎉",
       "session_complete_text": "Ótimo trabalho! Você completou todas as {rounds} rodadas com {participants} participantes.",
-      "new_session": "Nova Sessão"
+      "new_session": "Nova Sessão",
+      "inherited_idea": "da rodada anterior",
+      "inherited_hint": "As ideias da rodada anterior foram passadas para o próximo participante — construa sobre elas e adicione as suas abaixo."
     },
     "decision_matrix": {
       "default_title": "Decisão do Projeto",
@@ -1278,6 +1283,9 @@
     },
     "flashcards": {
       "confirm_delete_deck": "Excluir este baralho e todos os seus cartões?",
+      "delete": "Excluir",
+      "export_deck": "Exportar baralho como JSON",
+      "confirm_short": "Excluir",
       "title": "Criador de Flashcards",
       "subtitle": "Crie, estude e domine com repetição espaciada",
       "back_to_decks": "Baralhos",
@@ -1413,6 +1421,7 @@
       "chars_count": "({n} caracteres)",
       "no_matches": "Nenhuma correspondência encontrada",
       "invalid_pattern": "Padrão regex inválido",
+      "timeout": "A avaliação excedeu o tempo limite. Simplifique o padrão para evitar retrocesso catastrófico.",
       "more_matches": "...e mais {n} correspondências",
       "captured_groups": "Grupos Capturados",
       "replaced": "Substituído",
@@ -1558,6 +1567,7 @@
       "from": "De",
       "to": "Para",
       "common_conversions": "Conversões Comuns",
+      "copy_failed": "Não foi possível copiar o resultado.",
       "categories": {
         "length": "Comprimento",
         "mass": "Massa",
@@ -1641,7 +1651,10 @@
       }
     },
     "tool_count": "ferramentas",
-    "tool_singular": "ferramenta"
+    "tool_singular": "ferramenta",
+    "not_found": "Ferramenta não encontrada",
+    "coming_soon": "Esta ferramenta estará disponível em breve...",
+    "about_tool": "Sobre esta ferramenta"
   },
   "roadmaps": {
     "title": "Roadmaps",

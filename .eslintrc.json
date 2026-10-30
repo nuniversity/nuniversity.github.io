@@ -1,7 +1,26 @@
 {
   "extends": "next/core-web-vitals",
+  "plugins": ["security", "no-unsanitized"],
   "rules": {
     "@next/next/no-img-element": "off",
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+
+    "security/detect-bidi-characters": "error",
+    "security/detect-child-process": "error",
+    "security/detect-eval-with-expression": "error",
+    "security/detect-unsafe-regex": "error",
+    "security/detect-new-buffer": "error",
+    "security/detect-buffer-noassert": "error",
+    "security/detect-pseudoRandomBytes": "error",
+    "security/detect-non-literal-regexp": "warn",
+    "security/detect-non-literal-fs-filename": "warn",
+    "security/detect-object-injection": "off",
+    "security/detect-possible-timing-attacks": "off",
+    "security/detect-disable-mustache-escape": "off",
+    "security/detect-no-csrf-before-method-override": "off",
+    "security/detect-non-literal-require": "off",
+
+    "no-unsanitized/method": "error",
+    "no-unsanitized/property": "error"
   }
 }

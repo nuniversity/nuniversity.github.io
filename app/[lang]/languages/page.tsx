@@ -10,13 +10,15 @@ import { LanguagesHubClient } from './languages-hub-client'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface LanguagesPageProps {
-  params: { lang: Locale }
+  params: Promise<{ lang: Locale }>
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
   return {
     alternates: buildAlternates(params.lang, 'languages'),
@@ -26,7 +28,8 @@ export async function generateMetadata({
       'Interactive flashcards and translation quizzes for English, Portuguese, Spanish and French with progress tracking.' }
 }
 
-export default async function LanguagesPage({ params }: LanguagesPageProps) {
+export default async function LanguagesPage(props: LanguagesPageProps) {
+  const params = await props.params;
   const { lang } = params
   const dict = await getDictionary(lang)
 

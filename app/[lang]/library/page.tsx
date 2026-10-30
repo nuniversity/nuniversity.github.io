@@ -10,15 +10,17 @@ import { LibraryClient } from './library-client'
 import { buildAlternates } from '@/lib/seo/alternates'
 
 interface LibraryPageProps {
-  params: { lang: Locale }
+  params: Promise<{ lang: Locale }>
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const dict = await getDictionary(params.lang)
-  
+
   return {
     alternates: buildAlternates(params.lang, 'library'),
     title: dict.library?.title || 'Learning Library',
@@ -29,10 +31,11 @@ export async function generateMetadata({
       type: 'website' } }
 }
 
-export default async function LibraryPage({ params }: LibraryPageProps) {
+export default async function LibraryPage(props: LibraryPageProps) {
+  const params = await props.params;
   const { lang } = params
   const dict = await getDictionary(lang)
-  
+
   const allResources = await getAllResources(lang)
 
   return (

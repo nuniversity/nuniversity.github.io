@@ -1022,6 +1022,7 @@
       "generatedPrompt": "Generated Prompt",
       "optional": "(Optional)",
       "required": "Required",
+      "copy_failed": "Could not copy automatically — select the text and copy it manually.",
       "labels": {
         "objective": "Objective",
         "context": "Context",
@@ -1069,7 +1070,8 @@
         "casual": "Casual",
         "technical": "Technical",
         "creative": "Creative",
-        "educational": "Educational"
+        "educational": "Educational",
+        "none": "Not specified"
       },
       "buttons": {
         "generate": "Generate Prompt",
@@ -1130,6 +1132,7 @@
       "importError": "Error importing data. Please check file format.",
       "importSuccess": "Data imported successfully!",
       "important": "IMPORTANT",
+      "moveTo": "Move to",
       "listView": "List View",
       "matrixView": "Matrix View",
       "noTasks": "No tasks yet",
@@ -1254,7 +1257,9 @@
       "start_round": "Start Round {n}",
       "session_complete": "Session Complete! 🎉",
       "session_complete_text": "Great work! You've completed all {rounds} rounds with {participants} participants.",
-      "new_session": "New Session"
+      "new_session": "New Session",
+      "inherited_idea": "from previous round",
+      "inherited_hint": "Ideas from the previous round were passed to the next participant — build on them and add yours below."
     },
     "decision_matrix": {
       "default_title": "Project Decision",
@@ -1278,6 +1283,9 @@
     },
     "flashcards": {
       "confirm_delete_deck": "Delete this deck and all its cards?",
+      "delete": "Delete",
+      "export_deck": "Export deck as JSON",
+      "confirm_short": "Delete",
       "title": "Flashcard Maker",
       "subtitle": "Create, study, and master with spaced repetition",
       "back_to_decks": "Decks",
@@ -1413,6 +1421,7 @@
       "chars_count": "({n} chars)",
       "no_matches": "No matches found",
       "invalid_pattern": "Invalid regex pattern",
+      "timeout": "Evaluation timed out. Simplify the pattern to avoid catastrophic backtracking.",
       "more_matches": "...and {n} more matches",
       "captured_groups": "Captured Groups",
       "replaced": "Replaced",
@@ -1558,6 +1567,7 @@
       "from": "From",
       "to": "To",
       "common_conversions": "Common Conversions",
+      "copy_failed": "Could not copy the result.",
       "categories": {
         "length": "Length",
         "mass": "Mass",
@@ -1641,7 +1651,10 @@
       }
     },
     "tool_count": "tools",
-    "tool_singular": "tool"
+    "tool_singular": "tool",
+    "not_found": "Tool Not Found",
+    "coming_soon": "This tool is coming soon...",
+    "about_tool": "About this tool"
   },
   "roadmaps": {
     "title": "Roadmaps",

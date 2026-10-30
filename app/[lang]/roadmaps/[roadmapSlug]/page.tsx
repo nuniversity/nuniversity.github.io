@@ -11,10 +11,10 @@ import { buildAlternates } from '@/lib/seo/alternates'
 export const dynamic = 'force-static'
 
 interface RoadmapViewerPageProps {
-  params: {
+  params: Promise<{
     lang: Locale
     roadmapSlug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -32,10 +32,12 @@ export async function generateStaticParams() {
   return allParams
 }
 
-export async function generateMetadata({
-  params }: {
-  params: { lang: Locale; roadmapSlug: string }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale; roadmapSlug: string }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const roadmap = await getRoadmapContent(params.roadmapSlug, params.lang)
 
   if (!roadmap) {
@@ -51,7 +53,8 @@ export async function generateMetadata({
     description: roadmap.description || undefined }
 }
 
-export default async function RoadmapViewerPage({ params }: RoadmapViewerPageProps) {
+export default async function RoadmapViewerPage(props: RoadmapViewerPageProps) {
+  const params = await props.params;
   const { lang, roadmapSlug } = params
   const roadmap = await getRoadmapContent(roadmapSlug, lang)
   const dict = await getDictionary(lang)
