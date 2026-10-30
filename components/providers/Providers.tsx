@@ -34,6 +34,9 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
+    // A stable hydration signal for browser tests. It is set after mount and
+    // never affects rendering.
+    document.documentElement.dataset.hydrated = 'true'
     // The init script already put the correct class on <html>, so trust the
     // DOM rather than re-deriving and risk a second, contradicting decision.
     const applied = readAppliedTheme()

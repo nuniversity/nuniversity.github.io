@@ -3,13 +3,24 @@
 import { describe, expect, it } from 'vitest'
 import fs from 'node:fs'
 import path from 'node:path'
-import { OUT, OUT_READY, ORIGIN, exists, read } from './support/helpers.mjs'
+import { OUT, OUT_READY, ORIGIN, exists, read, htmlFiles } from './support/helpers.mjs'
 
 describe.skipIf(!OUT_READY)('hosting artifacts', () => {
   it('ships .nojekyll in the export', () => {
     // postbuild writes the marker so a branch/directory deploy cannot run
     // Jekyll and drop `_next/`.
     expect(exists('.nojekyll')).toBe(true)
+  })
+
+  it('links the Nuniversity icon on every page', () => {
+    const missing = htmlFiles()
+      .filter((file) => !file.endsWith('code-sandbox.html'))
+      .filter((file) => {
+        const html = fs.readFileSync(file, 'utf8')
+        return !/rel=["'](?:icon|apple-touch-icon)["']/.test(html)
+      })
+      .map((file) => path.relative(OUT, file))
+    expect(missing).toEqual([])
   })
 
   it('ships a root locale-redirect index.html', () => {

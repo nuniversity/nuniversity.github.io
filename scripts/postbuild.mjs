@@ -26,6 +26,9 @@ function write404() {
 <meta name="robots" content="noindex"/>
 <meta http-equiv="Content-Security-Policy" content="${CSP}"/>
 <meta name="referrer" content="strict-origin-when-cross-origin"/>
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"/>
+<link rel="icon" href="/icon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-icon.png"/>
 <title>404 — Nuniversity</title>
 <script>
 (function () {
@@ -101,6 +104,35 @@ function ensureCsp() {
     patched += 1
   }
   console.log(`csp: ${patched} page(s) patched`)
+}
+
+/**
+ * Ensures every exported page advertises the Nuniversity icon.
+ *
+ * Next's file-convention metadata covers pages rendered through the locale
+ * layout, but the root not-found route is emitted without it. Injecting the
+ * links here keeps the browser tab consistent on every page (the standalone
+ * code sandbox is deliberately stricter and is skipped).
+ */
+const ICON_LINKS = [
+  '<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"/>',
+  '<link rel="icon" href="/icon.svg" type="image/svg+xml"/>',
+  '<link rel="apple-touch-icon" href="/apple-icon.png"/>',
+].join('\n')
+
+function ensureIcons() {
+  let patched = 0
+  for (const file of walkHtml(OUT)) {
+    if (file.endsWith('code-sandbox.html')) continue
+    const html = fs.readFileSync(file, 'utf8')
+    if (/rel=["'](?:icon|apple-touch-icon)["']/i.test(html)) continue
+    const next = html.includes('</head>')
+      ? html.replace('</head>', `  ${ICON_LINKS}\n</head>`)
+      : html
+    fs.writeFileSync(file, next)
+    patched += 1
+  }
+  console.log(`icons: ${patched} page(s) patched`)
 }
 
 /**
@@ -195,6 +227,7 @@ if (!fs.existsSync(OUT)) {
 // (see lib/seo/alternates.ts), so the old HTML-rewriting pass is gone.
 write404()
 ensureCsp()
+ensureIcons()
 writeHeaders()
 sitemapFallback()
 pruneRscPayloads()

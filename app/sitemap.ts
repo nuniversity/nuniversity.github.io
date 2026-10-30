@@ -5,6 +5,7 @@ import { getAllGames } from '@/lib/games/get-game-content'
 import { getAllQuizzes } from '@/lib/quizzes/get-quiz-content'
 import { getAllRoadmaps } from '@/lib/roadmaps/get-roadmap-content'
 import { getAllLanguageActivities, getAllPairs } from '@/lib/languages/get-language-content'
+import { getAllAnalyses } from '@/lib/library/get-library-resources'
 import {
   getAllLanguageCourses,
   getLanguageCourse,
@@ -70,6 +71,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const roadmap of await getAllRoadmaps(lang)) {
       entries.push({
         url: `${base}${prefix}/roadmaps/${roadmap.id}/`,
+        changeFrequency: 'monthly',
+        priority: 0.6,
+      })
+    }
+    for (const analysis of await getAllAnalyses(lang)) {
+      entries.push({
+        url: `${base}${prefix}/library/analysis/${analysis.id}/`,
         changeFrequency: 'monthly',
         priority: 0.6,
       })

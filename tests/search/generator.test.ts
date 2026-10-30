@@ -34,10 +34,10 @@ describe('search index generator', () => {
     }
   })
 
-  it('covers all eight entry types in en', () => {
+  it('covers all nine entry types in en', () => {
     const types = new Set(indexes.en.map(entry => entry.type))
     expect(Array.from(types).sort()).toEqual(
-      ['course', 'game', 'language', 'lesson', 'library', 'quiz', 'roadmap', 'tool'].sort()
+      ['course', 'game', 'language', 'lesson', 'library', 'analysis', 'quiz', 'roadmap', 'tool'].sort()
     )
   })
 
@@ -66,6 +66,12 @@ describe('search index generator', () => {
       expect(entry.courseSlug).toBeTruthy()
       expect(entry.url).toContain(`/courses/${entry.courseSlug}/`)
     }
+  })
+
+  it('indexes analysis entries with internal routes', () => {
+    const analyses = indexes.en.filter(entry => entry.type === 'analysis')
+    expect(analyses.length).toBeGreaterThan(0)
+    expect(analyses.every(entry => entry.url.startsWith('/en/library/analysis/'))).toBe(true)
   })
 
   it('keeps library entries external', () => {

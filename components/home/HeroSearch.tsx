@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import {
   Search,
   BookOpen,
+  BookOpenCheck,
   FileText,
   Award,
   Calculator,
@@ -29,6 +30,7 @@ const TYPE_ICON: Record<SearchDocType, typeof BookOpen> = {
   tool: Calculator,
   roadmap: MapIcon,
   library: Library,
+  analysis: BookOpenCheck,
   game: GamepadIcon,
   language: Languages,
 }

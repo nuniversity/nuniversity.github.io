@@ -447,7 +447,14 @@ function MermaidDiagram({ code }: MermaidDiagramProps) {
         </button>
       </div>
 
-      <div ref={scrollRef} className="mermaid-scroll-container" onWheel={handleWheel}>
+      <div
+        ref={scrollRef}
+        className="mermaid-scroll-container"
+        tabIndex={0}
+        role="region"
+        aria-label="Scrollable content"
+        onWheel={handleWheel}
+      >
         <div style={sizedStyle}>
           <div ref={containerRef} className="mermaid-content" />
         </div>

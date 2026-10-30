@@ -25,7 +25,7 @@ export default function FocusableScrollers({
     if (!root) return
 
     const candidates = root.querySelectorAll<HTMLElement>(
-      '.katex-display, .mermaid-scroll-container, table, pre'
+      '.katex-display, .mermaid-scroll-container, table, pre, .not-prose[class*="overflow-x"]'
     )
 
     const apply = () => {
@@ -35,10 +35,12 @@ export default function FocusableScrollers({
           el.setAttribute('tabindex', '0')
           el.setAttribute('role', 'region')
           el.setAttribute('aria-label', 'Scrollable content')
-        } else if (!overflows && el.getAttribute('aria-label') === 'Scrollable content') {
+          el.dataset.focusAuto = 'true'
+        } else if (!overflows && el.dataset.focusAuto === 'true') {
           el.removeAttribute('tabindex')
           el.removeAttribute('role')
           el.removeAttribute('aria-label')
+          delete el.dataset.focusAuto
         }
       }
     }

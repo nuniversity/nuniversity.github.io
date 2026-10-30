@@ -58,6 +58,9 @@ export function resultChips(doc: SearchDoc): ResultChip[] {
     case 'library':
       if (doc.category) chips.push({ label: doc.category })
       break
+    case 'analysis':
+      if (doc.category) chips.push({ label: doc.category })
+      break
     case 'roadmap':
       pushDifficulty()
       if (doc.duration) chips.push({ label: doc.duration })
@@ -108,5 +111,7 @@ export function typeLabel(type: SearchDocType, dict: any): string {
       return dict?.navigation?.games ?? 'Games'
     case 'language':
       return dict?.navigation?.languages ?? 'Languages'
+    case 'analysis':
+      return dict?.library?.resource_types?.analysis ?? 'Analyses'
   }
 }

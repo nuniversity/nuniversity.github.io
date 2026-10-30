@@ -453,7 +453,7 @@
   },
   "library": {
     "title": "Learning Library",
-    "subtitle": "Curated collection of educational resources from across the web",
+    "subtitle": "Curated resources from across the web, plus every Nuniversity course",
     "search_placeholder": "Search resources, authors, topics...",
     "no_results": "No resources found",
     "no_resources": "No resources available yet",
@@ -461,6 +461,7 @@
     "check_back_soon": "Check back soon for new resources",
     "clear_filters": "Clear Filters",
     "view_resource": "View Resource",
+    "open_course": "Open course",
     "external_link": "Open External Link",
     "back_to_library": "Back to Library",
     "total_resources": "resources",
@@ -480,7 +481,8 @@
       "repository": "Code Repositories",
       "podcast": "Podcasts",
       "article": "Articles",
-      "all": "All Resources"
+      "all": "All Resources",
+      "analysis": "Analyses"
     },
     "difficulty": {
       "beginner": "Beginner",
@@ -514,7 +516,29 @@
       "title_asc": "Title (A-Z)",
       "title_desc": "Title (Z-A)",
       "rating": "Highest Rated"
-    }
+    },
+    "unknown_author": "Unknown author",
+    "unknown_platform": "Unknown platform",
+    "unknown_category": "Uncategorized",
+    "unknown_difficulty": "Unknown level",
+    "untitled_resource": "Untitled resource",
+    "no_description": "No description yet.",
+    "read_analysis": "Read analysis",
+    "with_analysis": "With study notes",
+    "all_platforms": "All Platforms",
+    "all_languages": "All Languages",
+    "source_resource": "Source resource",
+    "key_takeaways": "Key takeaways",
+    "learning_objectives": "Learning objectives",
+    "analysis_quiz": "Check your understanding",
+    "analysis_quiz_hint": "Answer the questions, then reveal the explanations.",
+    "submit_quiz": "Check answers",
+    "your_score": "Your score",
+    "correct": "Correct",
+    "incorrect": "Incorrect",
+    "try_again": "Try again",
+    "answer_all": "Answer every question first.",
+    "best_score": "Best score"
   },
   "courses": {
     "title": "Courses",

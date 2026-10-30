@@ -7,6 +7,7 @@ export type SearchDocType =
   | 'library'
   | 'game'
   | 'language'
+  | 'analysis'
 
 export interface SearchDoc {
   id: string
@@ -49,6 +50,7 @@ export const SEARCH_TYPES: SearchDocType[] = [
   'library',
   'game',
   'language',
+  'analysis',
 ]
 
 const TYPE_WEIGHT: Record<SearchDocType, number> = {
@@ -60,6 +62,7 @@ const TYPE_WEIGHT: Record<SearchDocType, number> = {
   library: 3,
   game: 2,
   language: 2,
+  analysis: 3,
 }
 
 export function fold(value: string): string {
@@ -71,7 +74,7 @@ export function fold(value: string): string {
     .trim()
 }
 
-function tokenize(query: string): string[] {
+export function tokenize(query: string): string[] {
   return fold(query)
     .split(' ')
     .filter(Boolean)

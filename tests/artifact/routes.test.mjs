@@ -92,6 +92,22 @@ describe.skipIf(!OUT_READY)('emitted routes cover content', () => {
     }
   })
 
+
+  it('exports every library analysis page', () => {
+    for (const locale of LOCALES) {
+      const analysisDir = path.join(OUT, '..', 'content', 'library', locale, 'analysis')
+      if (!fs.existsSync(analysisDir)) continue
+      for (const file of fs.readdirSync(analysisDir)) {
+        if (!file.endsWith('.md')) continue
+        const id = file.replace(/\.md$/, '')
+        expect(
+          exists(`${locale}/library/analysis/${id}/index.html`),
+          `${locale}/library/analysis/${id}/`
+        ).toBe(true)
+      }
+    }
+  })
+
   it('exports every roadmap page', () => {
     const roadmapsDir = path.join(OUT, '..', 'content', 'roadmaps')
     const slugs = fs

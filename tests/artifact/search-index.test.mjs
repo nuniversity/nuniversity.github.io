@@ -19,6 +19,7 @@ const VALID_TYPES = [
   'library',
   'game',
   'language',
+  'analysis',
 ]
 
 function loadIndex(locale) {

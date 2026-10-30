@@ -453,7 +453,7 @@
   },
   "library": {
     "title": "Biblioteca de Aprendizado",
-    "subtitle": "Coleção curada de recursos educacionais da web",
+    "subtitle": "Recursos selecionados da web e todos os cursos da Nuniversity",
     "search_placeholder": "Buscar recursos, autores, tópicos...",
     "no_results": "Nenhum recurso encontrado",
     "no_resources": "Nenhum recurso disponível ainda",
@@ -461,6 +461,7 @@
     "check_back_soon": "Volte em breve para novos recursos",
     "clear_filters": "Limpar Filtros",
     "view_resource": "Ver Recurso",
+    "open_course": "Abrir curso",
     "external_link": "Abrir Link Externo",
     "back_to_library": "Voltar para Biblioteca",
     "total_resources": "recursos",
@@ -480,7 +481,8 @@
       "repository": "Repositórios de Código",
       "podcast": "Podcasts",
       "article": "Artigos",
-      "all": "Todos os Recursos"
+      "all": "Todos os Recursos",
+      "analysis": "Análises"
     },
     "difficulty": {
       "beginner": "Iniciante",
@@ -514,7 +516,29 @@
       "title_asc": "Título (A-Z)",
       "title_desc": "Título (Z-A)",
       "rating": "Melhor Avaliados"
-    }
+    },
+    "unknown_author": "Autor desconhecido",
+    "unknown_platform": "Plataforma desconhecida",
+    "unknown_category": "Sem categoria",
+    "unknown_difficulty": "Nível desconhecido",
+    "untitled_resource": "Recurso sem título",
+    "no_description": "Ainda sem descrição.",
+    "read_analysis": "Ler análise",
+    "with_analysis": "Com notas de estudo",
+    "all_platforms": "Todas as plataformas",
+    "all_languages": "Todos os idiomas",
+    "source_resource": "Recurso original",
+    "key_takeaways": "Principais aprendizados",
+    "learning_objectives": "Objetivos de aprendizagem",
+    "analysis_quiz": "Teste seu entendimento",
+    "analysis_quiz_hint": "Responda às perguntas e depois veja as explicações.",
+    "submit_quiz": "Conferir respostas",
+    "your_score": "Sua pontuação",
+    "correct": "Correto",
+    "incorrect": "Incorreto",
+    "try_again": "Tentar novamente",
+    "answer_all": "Responda todas as perguntas primeiro.",
+    "best_score": "Melhor pontuação"
   },
   "courses": {
     "title": "Cursos",

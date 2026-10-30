@@ -34,17 +34,19 @@ interface LiveEntry {
 
 const entries: LiveEntry[] = walk(LIBRARY_DIR)
   .sort((a, b) => a.localeCompare(b))
-  .map((file) => {
+  .flatMap((file) => {
     const parsed = matter(fs.readFileSync(file, 'utf8'));
     if (!isRecord(parsed.data)) {
       throw new Error(`${file}: frontmatter must be a YAML object`);
     }
+    // Analysis companions are internal pages, not external links.
+    if (parsed.data.type === 'analysis') return [];
     const relative = path.relative(LIBRARY_DIR, file).split(path.sep).join('/');
     const url = parsed.data.url;
     if (typeof url !== 'string' || url.trim().length === 0) {
       throw new Error(`${relative}: url must be a non-empty string`);
     }
-    return { file, relative, url };
+    return [{ file, relative, url }];
   });
 
 const loadExceptionUrls = (): Set<string> => {

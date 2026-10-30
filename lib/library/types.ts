@@ -7,6 +7,7 @@ export type ResourceType =
   | 'repository' 
   | 'podcast'
   | 'article'
+  | 'analysis'
 
 export type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced' | 'all'
 
@@ -29,6 +30,27 @@ export interface LibraryResource {
   isPaid: boolean
   rating?: number
   platform?: string // YouTube, Udemy, GitHub, Medium, etc.
+  /** Markdown body, used by the analysis reader. */
+  content?: string
+  /** Extra learning data for the `analysis` resource type. */
+  analysis?: LibraryAnalysisMeta
+}
+
+export interface LibraryAnalysisQuestion {
+  id: string
+  question: string
+  options: string[]
+  correct: number
+  explanation?: string
+}
+
+export interface LibraryAnalysisMeta {
+  resourceId?: string
+  resourceType?: ResourceType
+  summary?: string
+  objectives: string[]
+  takeaways: string[]
+  quiz: LibraryAnalysisQuestion[]
 }
 
 export interface LibraryFilters {
@@ -48,6 +70,7 @@ export const RESOURCE_TYPES: Record<ResourceType, { label: string; icon: string 
   repository: { label: 'Code Repository', icon: 'Github' },
   podcast: { label: 'Podcast', icon: 'Headphones' },
   article: { label: 'Article', icon: 'Newspaper' },
+  analysis: { label: 'Analysis', icon: 'NotebookPen' },
 }
 
 export const CATEGORIES = [

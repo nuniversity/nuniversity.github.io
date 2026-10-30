@@ -87,5 +87,6 @@ describe('typeLabel', () => {
     expect(typeLabel('course', dict)).toBe('Courses')
     expect(typeLabel('lesson', dict)).toBe('Lessons')
     expect(typeLabel('tool', {})).toBe('Tools')
+    expect(typeLabel('analysis', { library: { resource_types: { analysis: 'Analyses' } } })).toBe('Analyses')
   })
 })

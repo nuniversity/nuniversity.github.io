@@ -1,5 +1,8 @@
 import { test, expect } from '../support/fixtures'
 
+// Reduced motion keeps entrance animations from racing the axe scan.
+test.use({ reducedMotion: 'reduce' })
+
 const SURFACES = [
   { name: 'home', path: '/en/' },
   { name: 'courses hub', path: '/en/courses/' },
@@ -11,6 +14,7 @@ const SURFACES = [
   { name: 'language course', path: '/en/languages/courses/english-for-pt/' },
   { name: 'quiz hub', path: '/en/quizzes/' },
   { name: 'library', path: '/en/library/' },
+  { name: 'library analysis', path: '/en/library/analysis/cs50-fast-start/' },
   { name: 'roadmaps hub', path: '/en/roadmaps/' },
   { name: 'roadmap detail', path: '/en/roadmaps/intro-to-software-engineering/' },
 ] as const
@@ -22,6 +26,7 @@ test.describe('accessibility', () => {
       testInfo
     ) => {
       await page.goto(surface.path)
+      await page.waitForSelector('html[data-hydrated="true"]')
       await expect(page.locator('main')).toBeVisible()
 
       const results = await makeAxeBuilder().analyze()
@@ -34,7 +39,10 @@ test.describe('accessibility', () => {
         (violation) => violation.impact === 'serious' || violation.impact === 'critical'
       )
       expect(
-        serious.map((violation) => `${violation.impact} ${violation.id}: ${violation.help}`),
+        serious.map(
+          (violation) =>
+            `${violation.impact} ${violation.id}: ${violation.nodes.map((node) => node.target.join(' ')).join('; ')}`
+        ),
         `axe violations on ${surface.path}`
       ).toEqual([])
     })
@@ -45,10 +53,12 @@ test.describe('section palette in dark mode', () => {
   for (const surface of [
     { name: 'quizzes', path: '/en/quizzes/' },
     { name: 'library', path: '/en/library/' },
+  { name: 'library analysis', path: '/en/library/analysis/cs50-fast-start/' },
   ]) {
     test(`${surface.name} keeps axe contrast in dark mode`, async ({ page, makeAxeBuilder }, testInfo) => {
       await page.emulateMedia({ colorScheme: 'dark' })
       await page.goto(surface.path)
+      await page.waitForSelector('html[data-hydrated="true"]')
       await expect(page.locator('main')).toBeVisible()
 
       const results = await makeAxeBuilder().analyze()

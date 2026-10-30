@@ -237,6 +237,31 @@ for (const lang of LOCALES) {
   }
 }
 
+// Analysis / study companions live under content/library/<lang>/analysis and
+// have an internal URL, so they are indexed separately from external resources.
+for (const lang of LOCALES) {
+  const langDir = path.join(ROOT, 'content', 'library', lang)
+  const targetDir = fs.existsSync(langDir) ? langDir : path.join(ROOT, 'content', 'library', 'en')
+  const analysisDir = path.join(targetDir, 'analysis')
+  if (!fs.existsSync(analysisDir)) continue
+  for (const file of listFiles(analysisDir, '.md')) {
+    const parsed = readMatter(path.join(analysisDir, file))
+    if (!parsed) continue
+    const id = parsed.data.id || file.replace(/\.md$/, '')
+    push(
+      lang,
+      'analysis',
+      parsed.data.title || id,
+      parsed.data.description || parsed.data.summary || excerpt(parsed.content),
+      `/${lang}/library/analysis/${id}/`,
+      excerpt(parsed.content),
+      id,
+      undefined,
+      { category: parsed.data.category, difficulty: parsed.data.difficulty, duration: parsed.data.duration }
+    )
+  }
+}
+
 const vocabDir = path.join(ROOT, 'content', 'languages', 'vocabulary')
 for (const file of listFiles(vocabDir, '.json')) {
   const data = readJson(path.join(vocabDir, file))

@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import { describe, expect, it } from 'vitest';
 
 const LIBRARY_DIR = path.join(process.cwd(), 'content', 'library');
-const REQUIRED_STRING_FIELDS = ['id', 'title', 'description', 'url', 'category', 'language'];
+const REQUIRED_STRING_FIELDS = ['id', 'title', 'description', 'category', 'language'];
 const PLACEHOLDER_PATTERN = /(localhost|127\.0\.0\.1|example\.(com|org|net)|yourdomain|placeholder|changeme)/i;
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -70,7 +70,11 @@ describe('content/library frontmatter link hygiene', () => {
       expect(Array.isArray(entry.data.tags), `${entry.relative}: tags must be an array`).toBe(true);
     });
 
-    it(`url is a valid http(s) URL: ${entry.relative}`, () => {
+    it(`url is a valid http(s) URL or analysis route: ${entry.relative}`, () => {
+      if (entry.data.type === 'analysis') {
+        expect(entry.relative.split('/')[1], `${entry.relative}: analysis lives under /analysis/`).toBe('analysis');
+        return;
+      }
       const url = entry.data.url;
       expect(isNonEmptyString(url), `${entry.relative}: url must be a non-empty string`).toBe(true);
       if (isNonEmptyString(url)) {
