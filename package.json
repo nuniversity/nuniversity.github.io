@@ -50,7 +50,7 @@
     "3dmol": "^2.5.5",
     "framer-motion": "^12.23.12",
     "katex": "^0.16.47",
-    "lucide-react": "^0.575.0",
+    "lucide-react": "^1.62.0",
     "mermaid": "^11.12.0",
     "next": "^15.5.28",
     "react": "^19.3.1",
