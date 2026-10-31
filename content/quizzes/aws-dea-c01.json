@@ -1,0 +1,1141 @@
+{
+  "id": "aws-dea-c01",
+  "slug": "aws-dea-c01",
+  "kind": "certification",
+  "category": "data-analytics",
+  "title": "AWS Data Engineer Associate (DEA-C01)",
+  "description": "Exam-style questions for the AWS Certified Data Engineer - Associate (DEA-C01) exam covering data ingestion and transformation, data store management, data operations and support, and data security and governance.",
+  "difficulty": "intermediate",
+  "topic": "AWS",
+  "certification": "AWS Certified Data Engineer - Associate (DEA-C01)",
+  "durationSeconds": 7800,
+  "passingScore": 70,
+  "mockQuestionCount": 65,
+  "domains": [
+    {
+      "id": "1.0",
+      "name": "1.0 Data Ingestion and Transformation",
+      "color": "blue",
+      "subdomains": [
+        "1.1 - Perform data ingestion",
+        "1.2 - Transform and process data",
+        "1.3 - Orchestrate data pipelines",
+        "1.4 - Apply programming concepts"
+      ]
+    },
+    {
+      "id": "2.0",
+      "name": "2.0 Data Store Management",
+      "color": "purple",
+      "subdomains": [
+        "2.1 - Choose a data store",
+        "2.2 - Understand data cataloging systems",
+        "2.3 - Manage the lifecycle of data",
+        "2.4 - Design data models and schema evolution"
+      ]
+    },
+    {
+      "id": "3.0",
+      "name": "3.0 Data Operations and Support",
+      "color": "teal",
+      "subdomains": [
+        "3.1 - Automate data processing by using AWS services",
+        "3.2 - Analyze data by using AWS services",
+        "3.3 - Maintain and monitor data pipelines",
+        "3.4 - Ensure data quality"
+      ]
+    },
+    {
+      "id": "4.0",
+      "name": "4.0 Data Security and Governance",
+      "color": "orange",
+      "subdomains": [
+        "4.1 - Apply authentication mechanisms",
+        "4.2 - Apply authorization mechanisms",
+        "4.3 - Ensure data encryption and masking",
+        "4.4 - Prepare logs for audit",
+        "4.5 - Understand data privacy and governance"
+      ]
+    }
+  ],
+  "allocations": {
+    "1.1 - Perform data ingestion": 11,
+    "1.2 - Transform and process data": 9,
+    "1.3 - Orchestrate data pipelines": 4,
+    "1.4 - Apply programming concepts": 10,
+    "2.1 - Choose a data store": 8,
+    "2.2 - Understand data cataloging systems": 6,
+    "2.3 - Manage the lifecycle of data": 6,
+    "2.4 - Design data models and schema evolution": 6,
+    "3.1 - Automate data processing by using AWS services": 8,
+    "3.2 - Analyze data by using AWS services": 4,
+    "3.3 - Maintain and monitor data pipelines": 6,
+    "3.4 - Ensure data quality": 4,
+    "4.1 - Apply authentication mechanisms": 5,
+    "4.2 - Apply authorization mechanisms": 4,
+    "4.3 - Ensure data encryption and masking": 2,
+    "4.4 - Prepare logs for audit": 3,
+    "4.5 - Understand data privacy and governance": 4
+  },
+  "questions": [
+    {
+      "id": "q001",
+      "subdomain": "1.1 - Perform data ingestion",
+      "type": "mcq",
+      "question": "A runbook still says Kinesis Data Firehose, but the console now shows Amazon Data Firehose. Which statement explains the difference?",
+      "options": [
+        "The service was retired in 2024 and replaced by Kinesis Data Streams",
+        "The rename required new IAM policy actions and new CloudWatch metric names",
+        "It is the same service: renamed Amazon Data Firehose on 9 February 2024 with no API, endpoint, CLI, IAM or metric changes",
+        "Amazon Data Firehose is a new managed Kafka service that supersedes Amazon MSK"
+      ],
+      "correct": 2,
+      "explanation": "AWS renamed Kinesis Data Firehose to Amazon Data Firehose on 9 February 2024 and explicitly kept the API, endpoints, CLI, IAM policy actions and CloudWatch metrics unchanged, so either name is acceptable on the exam. Options A, B and D invent a retirement, a breaking rename or a Kafka product; Amazon MSK remains the Kafka service and Firehose remains the managed delivery service."
+    },
+    {
+      "id": "q002",
+      "subdomain": "1.1 - Perform data ingestion",
+      "type": "mcq",
+      "question": "A stream has plenty of shards, yet one partition key emits 1,500 records/s and its writes throttle while every other key is fine. What explains the throttle?",
+      "options": [
+        "The stream needs more shards, because 1,500 records/s exceeds the total stream capacity",
+        "The Firehose buffer is too small, so delivery back-pressure reaches the producer",
+        "The consumer has exhausted its shared read throughput and is stalling the producer",
+        "MD5 of that key always selects the same shard, and one shard caps at 1,000 records/s"
+      ],
+      "correct": 3,
+      "explanation": "A partition key is hashed with MD5 to one shard, and each shard accepts at most 1 MB/s and 1,000 records/s regardless of how many shards the stream has, so a hot key throttles at 1,000 records/s. Adding shards does not split one key, Firehose is downstream delivery rather than the producer limit, and shared reads affect consumers, not producers. The fix is a two-level or salted key that spreads one logical entity across shards."
+    },
+    {
+      "id": "q003",
+      "subdomain": "1.1 - Perform data ingestion",
+      "type": "multi",
+      "question": "A team is designing recovery and replay for a streaming ingestion pipeline. Which statements are correct?",
+      "options": [
+        "Kinesis Data Streams replays by opening a new shard iterator at an earlier sequence number inside the retention window",
+        "Amazon Data Firehose offers consumer-side replay through its consumer API",
+        "Firehose recovery relies on the S3 backup and error prefixes because the service has no consumer API",
+        "Kinesis Data Streams retention defaults to 24 hours and can be extended to 8,760 hours",
+        "Firehose delivers as soon as the size threshold is reached and ignores the buffer interval",
+        "Replaying a Kinesis stream rewrites the records back into the log"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Replay on Kinesis is a read: a new shard iterator at an earlier sequence number, inside retention that runs from a 24-hour default to 8,760 hours. Firehose has no shards and no consumer API, so the only recovery artefacts are its S3 backup and error prefixes, and its buffer fires on size or interval, whichever comes first. Replay never rewrites the log, and Firehose has no consumer API to replay through."
+    },
+    {
+      "id": "q004",
+      "subdomain": "1.1 - Perform data ingestion",
+      "type": "mcq",
+      "question": "A team must move an on-premises Oracle database to Aurora PostgreSQL and keep the target in sync during cutover. Which sequence matches AWS guidance?",
+      "options": [
+        "Run a full load only, then re-run the full load whenever the target falls behind",
+        "Convert the schema and code with DMS Schema Conversion, then run a full load + CDC task",
+        "Start a CDC-only task immediately, because CDC also copies the existing rows",
+        "Point an Amazon Data Firehose database source at Oracle and stream the changes"
+      ],
+      "correct": 1,
+      "explanation": "Heterogeneous migrations are a two-step answer: convert schema and code first with DMS Schema Conversion, then move the data with a full load + CDC task that captures changes while the load runs. CDC only moves transaction-log changes, so it does not load existing rows; a second full load would miss changes between runs; and the Firehose database-source preview was withdrawn on 24 September 2025, so Firehose is not a database source."
+    },
+    {
+      "id": "q005",
+      "subdomain": "1.1 - Perform data ingestion",
+      "type": "multi",
+      "question": "A data lake uses S3 Event Notifications to start ingestion jobs. Which statements about that trigger path are correct?",
+      "options": [
+        "One notification configuration supports a single destination type",
+        "An SQS FIFO queue can be configured as the notification destination",
+        "A Lambda destination must be in the same Region as the bucket",
+        "A newly created notification configuration can take about five minutes to take effect",
+        "The service sends an s3:TestEvent that the handler should tolerate",
+        "S3 can invoke a Glue crawler directly as a notification destination"
+      ],
+      "correct": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "A notification configuration has one destination type, SQS FIFO is not supported (standard queues only), a Lambda destination must share the bucket's Region, propagation takes about five minutes, and the initial s3:TestEvent must be handled. S3 cannot invoke a Glue crawler directly: the supported destinations are SNS, SQS, Lambda and EventBridge, and EventBridge can then route to a crawler."
+    },
+    {
+      "id": "q006",
+      "subdomain": "1.1 - Perform data ingestion",
+      "type": "mcq",
+      "question": "A Firehose stream ingests 750 KB/s into S3 with default settings. Which statement describes when objects are delivered?",
+      "options": [
+        "The 300-second interval always fires first because records are batched for five minutes",
+        "Each record is delivered individually as soon as it is written",
+        "Size and interval are raced: the default 5 MB buffer fills in about seven seconds, so size fires first",
+        "The 5 MiB/s direct-PUT ceiling sets the delivery cadence"
+      ],
+      "correct": 2,
+      "explanation": "Firehose buffers on size or interval, whichever hits first. At 750 KB/s the default 5 MB S3 buffer fills in roughly 6.7 seconds, well before the 300-second default interval, so size wins. Firehose never delivers record at a time, the direct-PUT ceiling is a throughput limit rather than a cadence, and the interval only wins when the buffer is large relative to the rate, as with the 128 MB default used for Parquet conversion."
+    },
+    {
+      "id": "q007",
+      "subdomain": "1.1 - Perform data ingestion",
+      "type": "multi",
+      "question": "A team is choosing capacity and read patterns for streaming ingestion. Which statements are correct?",
+      "options": [
+        "Provisioned Kinesis Data Streams capacity is sized in shards, while on-demand modes bill per GB ingested",
+        "MSK Serverless requires IAM access control and does not support Kafka ACLs",
+        "Enhanced fan-out gives each registered consumer a dedicated 2 MB/s read throughput",
+        "Shared Kinesis reads allow five GetRecords requests per second per shard across all consumers",
+        "A Kinesis capacity-mode switch can be applied as often as once per minute",
+        "MSK Serverless supports SASL/SCRAM authentication with Kafka ACLs"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Provisioned streams are sized by shard, on-demand modes bill by volume, MSK Serverless mandates IAM and rejects Kafka ACLs, enhanced fan-out gives each consumer a dedicated 2 MB/s, and shared reads are capped at five GetRecords calls per second per shard across every consumer. Capacity-mode switches are limited to two per stream per 24 hours, and SASL/SCRAM with ACLs is an option on provisioned clusters only, so those two options are the traps."
+    },
+    {
+      "id": "q008",
+      "subdomain": "1.2 - Transform and process data",
+      "type": "multi",
+      "question": "A data engineer proposes several pipeline changes that involve a large language model. Which changes fall within the DEA-C01 scope of integrating LLMs for data processing?",
+      "options": [
+        "Call a pre-trained Amazon Bedrock model from a Glue job to classify support tickets in an ETL step",
+        "Fine-tune a foundation model on a curated labeled dataset to improve its accuracy",
+        "Generate embeddings for records so downstream consumers can run semantic search",
+        "Design a new transformer architecture and train it from scratch on the corpus",
+        "Invoke an LLM to summarize free-text fields before loading them into the warehouse",
+        "Decide which product line the company should launch from the model's sentiment output"
+      ],
+      "correct": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "Skill 1.2.10 makes LLM integration in scope, while the guide still lists ML training and inference as out-of-scope job tasks, so calling or embedding a pre-trained model inside a pipeline is examinable and fine-tuning or architecture work is not. Options A, C and E integrate a model into data processing; B and D are training and model-design work; F is drawing a business conclusion, which the guide also puts out of scope."
+    },
+    {
+      "id": "q009",
+      "subdomain": "1.2 - Transform and process data",
+      "type": "mcq",
+      "question": "A Glue Spark job fails with out-of-memory errors while processing skewed partitions. Which change addresses memory per vCPU?",
+      "options": [
+        "Move from G.1X workers to R workers, which double memory for the same vCPU count",
+        "Move from G.1X workers to G.8X workers, which double the memory-to-vCPU ratio",
+        "Replace the worker sizing with the legacy MaxCapacity field",
+        "Convert the job to a Python shell job so it uses a single process"
+      ],
+      "correct": 0,
+      "explanation": "Every G-family worker keeps the same 4 vCPU to 16 GB ratio, so climbing from G.1X to G.8X adds capacity without improving memory per vCPU; the R family is the memory-optimized option at 4 vCPU to 32 GB. MaxCapacity is a legacy Glue 1.0 sizing field, and Python shell is single-process, so neither fixes a distributed out-of-memory failure."
+    },
+    {
+      "id": "q010",
+      "subdomain": "1.2 - Transform and process data",
+      "type": "multi",
+      "question": "A Glue ETL job uses job bookmarks. Which statements about that mechanism are correct?",
+      "options": [
+        "Bookmarks are disabled by default, so a job that reprocesses everything usually has them off",
+        "The script must call job.init at the start and job.commit at the end for bookmarks to work",
+        "Bookmarks track source files, not the output targets the job writes",
+        "The reset-job-bookmark command deletes the outputs already written by earlier runs",
+        "Two concurrent runs are safe because bookmark commits are atomic",
+        "Pause mode reprocesses the entire dataset on every run"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Bookmarks default to Disable, state is read by job.init and written by job.commit, and only source files are tracked. reset-job-bookmark resets every transformation in the job but deletes no outputs, concurrent runs race on commits and state becomes unreliable, and Pause processes only the delta without advancing state, so the whole dataset is not reprocessed."
+    },
+    {
+      "id": "q011",
+      "subdomain": "1.2 - Transform and process data",
+      "type": "mcq",
+      "question": "A crawler inferred provider_id as long, but some rows hold strings and the DynamicFrame reports choice<long,string>. Which sequence produces a typed DataFrame without silently forcing strings?",
+      "options": [
+        "Call toDF() first, then resolveChoice on the resulting DataFrame column",
+        "Call resolveChoice with cast:long, then apply_mapping, then toDF()",
+        "Call apply_mapping first, then toDF(), then project the choice type",
+        "Call Relationalize, then toDF(), then write the nested struct"
+      ],
+      "correct": 1,
+      "explanation": "The documented order is resolveChoice, then apply_mapping, then toDF: choices must be settled before a schema is fixed. Converting to a DataFrame first forces the ambiguous column to a general type such as string and defeats the later cast, apply_mapping assumes one type per column, and Relationalize is for nested structures, not choice resolution."
+    },
+    {
+      "id": "q012",
+      "subdomain": "1.2 - Transform and process data",
+      "type": "mcq",
+      "question": "Which statement about AWS Glue DataBrew is correct?",
+      "options": [
+        "A recipe can hold up to 1,000 transformations before it must be split",
+        "Recipe jobs are billed in DPU-hours exactly like Glue Spark jobs",
+        "DataBrew exposes six core objects and has no object called a data flow",
+        "Cron schedules can run a recipe job as often as once per minute"
+      ],
+      "correct": 2,
+      "explanation": "DataBrew's documented objects are project, dataset, recipe, job, data lineage and data profile; data flow is not one of them. A recipe caps at 100 transformations and 100 published versions, recipe jobs bill per node-hour (0.48 USD per node-hour with a five-node default) rather than per DPU-hour, and cron schedules cannot run more often than every five minutes."
+    },
+    {
+      "id": "q013",
+      "subdomain": "1.2 - Transform and process data",
+      "type": "mcq",
+      "question": "An engineer raises MaxConcurrentRuns on a Glue job that uses bookmarks, so two runs execute at once. What is the risk?",
+      "options": [
+        "Bookmarks automatically serialize the runs, so the only change is higher cost",
+        "Concurrent runs share one checkpoint, so the second run resumes mid-file",
+        "Bookmark state lives in the script, so each run keeps its own private copy",
+        "Commits race and bookmark state becomes unreliable, which is why the default is one run"
+      ],
+      "correct": 3,
+      "explanation": "Bookmark state is held by the service and keyed by job name, transformation_ctx and version; concurrent runs race on commits and corrupt the incremental picture, which is why MaxConcurrentRuns defaults to 1. Bookmarks do not serialize runs, there is no shared checkpoint in a batch job, and the state is not stored in the script."
+    },
+    {
+      "id": "q014",
+      "subdomain": "1.3 - Orchestrate data pipelines",
+      "type": "mcq",
+      "question": "A pipeline must wait up to three days for a human approval, then continue, with a full audit trail. Which Step Functions configuration fits?",
+      "options": [
+        "An Express workflow using a .sync service integration",
+        "A Standard workflow that polls with a Wait state every minute",
+        "A Standard workflow using a .waitForTaskToken callback",
+        "An Express workflow with a Wait state loop"
+      ],
+      "correct": 2,
+      "explanation": "A callback token lets the state machine wait for days without consuming transitions, and Standard workflows store execution history and support .waitForTaskToken. Express caps at five minutes, stores no execution history and supports request-response integrations only, so it cannot wait or offer the audit trail; polling with a Wait state works but burns billable transitions every minute."
+    },
+    {
+      "id": "q015",
+      "subdomain": "1.3 - Orchestrate data pipelines",
+      "type": "mcq",
+      "question": "A nightly load must start at 01:00 local time in a Region that observes daylight saving, with a one-hour flexible window. Which scheduler fits?",
+      "options": [
+        "An EventBridge scheduled rule with cron(0 1 * * ? *), because rules follow local time",
+        "A Glue scheduled trigger, because Glue owns the jobs in the pipeline",
+        "Amazon MWAA, because only Airflow understands daylight saving",
+        "EventBridge Scheduler with an IANA time zone and a flexible window"
+      ],
+      "correct": 3,
+      "explanation": "EventBridge Scheduler supports IANA time zones with automatic daylight-saving handling, one-time schedules and a flexible window of 1 to 1,440 minutes. Scheduled rules run on one-minute precision in UTC and have no flexible window, Glue triggers only start Glue jobs and crawlers on a Glue cron, and MWAA can schedule the job but is far heavier than the requirement."
+    },
+    {
+      "id": "q016",
+      "subdomain": "1.3 - Orchestrate data pipelines",
+      "type": "multi",
+      "question": "A Step Functions Distributed Map fans out over a large S3 dataset. Which statements are correct?",
+      "options": [
+        "Inline Map caps at 40 concurrent iterations, while Distributed Map allows 10,000 child executions",
+        "The 10,000 limit on Distributed Map counts input items rather than child executions",
+        "ResultWriter sends child results to S3 instead of storing them in the parent history",
+        "Switch to Distributed when input exceeds 256 KiB, history would exceed 25,000 events, or concurrency exceeds 40",
+        "ItemBatcher groups items before dispatch, with a per-batch byte ceiling of 256 KiB",
+        "Distributed Map still requires the whole input to fit inside the 256 KiB state payload"
+      ],
+      "correct": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "Inline Map runs iterations in the parent history with 40-way concurrency; Distributed Map runs child executions up to 10,000 and writes results to S3 through ResultWriter. The 10,000 figure counts child executions, not items, and a Distributed Map can read large S3 datasets through ItemReader, so the 256 KiB payload limit does not apply to the input. ItemBatcher can group items, but each batch's byte size stays at or below 256 KiB."
+    },
+    {
+      "id": "q017",
+      "subdomain": "1.4 - Apply programming concepts",
+      "type": "mcq",
+      "question": "A Lambda function must process one file for up to 20 minutes on a single node. Which runtime fits?",
+      "options": [
+        "AWS Lambda with the timeout raised to 1,200 seconds",
+        "AWS Lambda with provisioned concurrency, which extends the timeout",
+        "AWS Glue Python shell at 0.0625 or 1 DPU, because the job is single-node and exceeds 15 minutes",
+        "AWS Glue Spark with G.8X workers to gain memory per vCPU"
+      ],
+      "correct": 2,
+      "explanation": "Lambda's timeout ceiling is 900 seconds, and neither the timeout setting nor provisioned concurrency can exceed it. A single-node job longer than 15 minutes on roughly 10 GB or less fits the Glue Python shell at 0.0625 or 1 DPU, which has a far longer timeout; Glue Spark is distributed and adds a two-to-three-minute startup plus at least two DPUs for work that does not need a cluster."
+    },
+    {
+      "id": "q018",
+      "subdomain": "1.4 - Apply programming concepts",
+      "type": "mcq",
+      "question": "A Lambda function configured at 1,024 MB is CPU-bound. Which change adds CPU capacity?",
+      "options": [
+        "Raise the memory setting toward 1,769 MB, because CPU scales with memory",
+        "Set the function's vCPU parameter to 2",
+        "Enable provisioned concurrency to add CPU per invocation",
+        "Mount an Amazon EFS volume to offload CPU work"
+      ],
+      "correct": 0,
+      "explanation": "Lambda has no vCPU setting: CPU, network and GPU scale with the memory allocation, and about 1,769 MB corresponds to roughly one vCPU. Provisioned concurrency pre-warms environments to reduce cold starts but does not add CPU to an invocation, and EFS mounting adds durable storage rather than compute."
+    },
+    {
+      "id": "q019",
+      "subdomain": "1.4 - Apply programming concepts",
+      "type": "mcq",
+      "question": "A Lambda event source mapping on a Kinesis stream keeps failing on one poison record. What is the first symptom?",
+      "options": [
+        "The error rate spikes and Kinesis deletes the affected shard",
+        "IteratorAge rises because the failed batch pauses its shard",
+        "ParallelizationFactor drops to 1 for the whole stream",
+        "The record is automatically moved to a dead-letter queue by default"
+      ],
+      "correct": 1,
+      "explanation": "On failure Lambda reprocesses the whole batch and pauses the shard, so records behind the poison record age and IteratorAge climbs before any error-rate alarm fires. Shards are not deleted, ParallelizationFactor is a configuration rather than a reaction, and there is no default dead-letter queue: you configure OnFailure or ReportBatchItemFailures explicitly."
+    },
+    {
+      "id": "q020",
+      "subdomain": "1.4 - Apply programming concepts",
+      "type": "mcq",
+      "question": "A nightly job must reload one day's partition after a partial failure without duplicating rows. Which approach gives an idempotent effect?",
+      "options": [
+        "Append the re-run rows and rely on SELECT DISTINCT at read time",
+        "Generate a fresh UUID for every re-run row so duplicates are distinguishable",
+        "Increase MaxRetries so failed batches are retried until they succeed",
+        "Overwrite the day's partition so the re-run replaces instead of appending"
+      ],
+      "correct": 3,
+      "explanation": "Idempotency means the same input produces the same output once: overwriting the affected partition or using MERGE on a deterministic key achieves that. Appending and deduplicating later leaves duplicate storage and query cost, fresh UUIDs guarantee new rows rather than replacing them, and retries repeat the original non-idempotent write."
+    },
+    {
+      "id": "q021",
+      "subdomain": "1.4 - Apply programming concepts",
+      "type": "multi",
+      "question": "A platform team is configuring Lambda concurrency for a data pipeline. Which statements are correct?",
+      "options": [
+        "The account pool is 1,000 concurrent executions per Region, with an unreserved floor of 100",
+        "Reserved concurrency sets both a minimum and a maximum for one function",
+        "Provisioned concurrency pre-warms execution environments and is charged for them",
+        "Reserved concurrency is free and can exceed the account pool",
+        "Provisioned concurrency applies to function versions and aliases",
+        "One function may reserve the entire 1,000-unit pool, leaving nothing unreserved"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "The account pool is 1,000 per Region with 100 kept unreserved, reserved concurrency is a free hard minimum and maximum for one function, provisioned concurrency pre-warms environments at a charge, and it attaches to versions and aliases. Reserving the full 1,000 violates the unreserved floor, and reserved concurrency cannot exceed the pool, so those two options are the traps."
+    },
+    {
+      "id": "q022",
+      "subdomain": "1.4 - Apply programming concepts",
+      "type": "multi",
+      "question": "A Spark team is tuning partition counts and file formats. Which statements are correct?",
+      "options": [
+        "One partition equals one task, and two to three times the core count is a good target",
+        "coalesce performs a full shuffle to reach an exact partition count",
+        "Gzip files are unsplittable, so one gzip file becomes one task",
+        "Avro and JSON are suited to moving data, while Parquet and ORC are suited to reading it",
+        "More partitions always means faster processing",
+        "The default shuffle partition count is 200"
+      ],
+      "correct": [
+        0,
+        2,
+        3,
+        5
+      ],
+      "explanation": "Spark maps one partition to one task and targets roughly two to three times the cores; gzip is unsplittable; Avro and JSON move data while columnar Parquet and ORC serve reads; and the default shuffle partition count is 200. repartition, not coalesce, performs a full shuffle to an exact count, and past two to three times the cores extra partitions add scheduling and small-file overhead rather than speed."
+    },
+    {
+      "id": "q023",
+      "subdomain": "2.1 - Choose a data store",
+      "type": "mcq",
+      "question": "A team wants managed Apache Iceberg tables on Amazon S3 with table maintenance handled for them. Which in-scope service fits best?",
+      "options": [
+        "Amazon S3 Tables",
+        "AWS Glue DataBrew",
+        "Amazon Redshift Spectrum",
+        "Amazon EMR running on Amazon EC2"
+      ],
+      "correct": 0,
+      "explanation": "Amazon S3 Tables, added to the in-scope list at guide v1.1, provides managed Iceberg tables on S3 with automated table maintenance such as compaction. DataBrew is a visual data-preparation tool, Spectrum lets Redshift query S3 without managing Iceberg table upkeep, and EMR on EC2 leaves cluster and table maintenance to the team."
+    },
+    {
+      "id": "q024",
+      "subdomain": "2.1 - Choose a data store",
+      "type": "multi",
+      "question": "A team is choosing a vector index for semantic search on Amazon Aurora PostgreSQL. Which statements about HNSW and IVF are correct?",
+      "options": [
+        "HNSW builds a hierarchical proximity graph and searches it approximately",
+        "IVF groups vectors into inverted lists or clusters and probes a subset at query time",
+        "HNSW returns exact nearest neighbors because it scans every vector",
+        "IVF stores vectors in a columnar format that replaces the need for embeddings",
+        "Both index types trade some recall for faster nearest-neighbor search",
+        "Vector indexes remove the need to generate embeddings before ingestion"
+      ],
+      "correct": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "Skill 2.1.8 asks you to describe HNSW and IVF. HNSW is a hierarchical graph index, IVF partitions vectors into inverted lists and probes likely partitions, and both are approximate nearest-neighbor structures that trade recall for speed. Option C is backwards because HNSW does not scan every vector, and D and F confuse a storage format or the embeddings themselves with the index, which still consumes vectors produced by an embedding model."
+    },
+    {
+      "id": "q025",
+      "subdomain": "2.1 - Choose a data store",
+      "type": "mcq",
+      "question": "A service stores session documents of about 900 KB keyed by session ID and needs single-digit-millisecond lookups. Which design fits?",
+      "options": [
+        "Keep session_id and small attributes in DynamoDB, and store the blob in S3 with the key as a pointer",
+        "Raise the DynamoDB item size limit for the table to 1 MB",
+        "Store the whole document as one compressed binary attribute in DynamoDB",
+        "Move the sessions to Redshift with a DISTKEY on session_id"
+      ],
+      "correct": 0,
+      "explanation": "DynamoDB caps an item at 400 KB including attribute names, and there is no setting to raise it, so a 900 KB document must be split: keep the key and small attributes in the item and put the blob in S3. Compression might fit some payloads but is not a guaranteed design, and Redshift is a columnar warehouse for large joins and BI, not single-digit-millisecond key lookups."
+    },
+    {
+      "id": "q026",
+      "subdomain": "2.1 - Choose a data store",
+      "type": "mcq",
+      "question": "A dashboard scans 3 TB of CSV in S3 to read one of four columns. Which change cuts Athena cost most without changing the dashboard?",
+      "options": [
+        "Add more DPUs to the Athena workgroup",
+        "Convert the data to Parquet so only the referenced column is read, cutting bytes scanned to a fraction",
+        "Compress the CSV with GZIP and leave the row format unchanged",
+        "Move the files to S3 Glacier Deep Archive and query them in place"
+      ],
+      "correct": 1,
+      "explanation": "Athena bills per TB scanned with a 10 MB minimum per query, so the biggest lever is a columnar layout that lets the engine read only the columns the query names. GZIP alone gives roughly a threefold reduction but still scans every row, Athena has no DPU setting, and Deep Archive objects must be restored before they can be queried at all."
+    },
+    {
+      "id": "q027",
+      "subdomain": "2.1 - Choose a data store",
+      "type": "multi",
+      "question": "A team is matching access patterns to stores and table formats. Which statements are correct?",
+      "options": [
+        "Amazon Aurora PostgreSQL supports HNSW and IVF vector indexes for similarity search",
+        "MemoryDB for Redis is a volatile cache that loses its data when a node fails",
+        "Apache Iceberg adds snapshots, time travel and hidden partitioning on top of files in S3",
+        "Amazon S3 Tables provides managed Iceberg tables on S3",
+        "A Kinesis data stream is the right store for three years of clickstream kept for quarterly reporting",
+        "Parquet is row-oriented and best suited to complete-record ingestion"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Aurora PostgreSQL carries HNSW and IVF indexes, Iceberg layers snapshots, time travel and hidden partitioning over S3 files, and S3 Tables is the managed Iceberg option added at guide v1.1. MemoryDB is the durable Multi-AZ primary rather than a volatile cache, a stream is transport rather than long-term storage, and Parquet is columnar and built for analytics reads."
+    },
+    {
+      "id": "q028",
+      "subdomain": "2.2 - Understand data cataloging systems",
+      "type": "mcq",
+      "question": "Business analysts need a curated catalog of datasets described in business terms, separate from the technical table metadata. Which v1.1 service is designed for that?",
+      "options": [
+        "AWS Glue Data Catalog",
+        "Amazon SageMaker Catalog",
+        "Apache Hive metastore",
+        "AWS Data Exchange"
+      ],
+      "correct": 1,
+      "explanation": "Skill 2.2.6 adds business data catalogs and names Amazon SageMaker Catalog, which layers business context and projects over technical assets. Glue Data Catalog and Hive metastore are technical catalogs of schemas and partitions, and AWS Data Exchange is for subscribing to third-party datasets rather than describing your own in business terms."
+    },
+    {
+      "id": "q029",
+      "subdomain": "2.2 - Understand data cataloging systems",
+      "type": "mcq",
+      "question": "A crawler must parse semicolon-delimited CSV and must not let a JSON classifier win first. What controls the outcome?",
+      "options": [
+        "The crawler always tries built-in classifiers before any custom classifier",
+        "Setting UpdateBehavior to LOG selects the CSV classifier",
+        "Custom classifiers are tried in the order listed, and the first successful match wins",
+        "The crawler picks whichever classifier reports the highest confidence score"
+      ],
+      "correct": 2,
+      "explanation": "The crawler runs the custom classifiers in the order you list them, and the first one that recognizes the structure is used while everything below is skipped; built-in classifiers are tried only when no custom classifier matches. UpdateBehavior is a schema-change policy, not a classifier selector, and there is no confidence-score ranking between classifiers."
+    },
+    {
+      "id": "q030",
+      "subdomain": "2.2 - Understand data cataloging systems",
+      "type": "mcq",
+      "question": "A table has 400,000 partitions and queries filter on country, category and year. Which Athena feature avoids fetching partition metadata at all?",
+      "options": [
+        "A partition index whose first key is category",
+        "Running MSCK REPAIR TABLE before every query",
+        "Setting the crawler's UpdateBehavior to LOG",
+        "Partition projection configured through table properties"
+      ],
+      "correct": 3,
+      "explanation": "Partition projection has Athena compute partition values and locations in memory from table properties, and it ignores any partition metadata registered in the catalog. A partition index still needs GetPartitions and its first key must appear in the predicate, MSCK REPAIR scans and registers partitions rather than avoiding them, and UpdateBehavior governs crawler schema updates."
+    },
+    {
+      "id": "q031",
+      "subdomain": "2.2 - Understand data cataloging systems",
+      "type": "multi",
+      "question": "Which statements about the AWS Glue Data Catalog are correct?",
+      "options": [
+        "A catalog table stores metadata and points at data through a Location; it does not contain the rows",
+        "A resource link needs DESCRIBE on the link plus a separate grant on the target table",
+        "Deleting a catalog table also deletes the underlying S3 objects",
+        "A partition index supports at most three keys per table",
+        "A chain of resource links resolves through every link in order",
+        "UpdateBehavior set to LOG also prevents new partitions from being created"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Catalog tables are metadata only and point at S3 through Location and format fields; a resource link needs DESCRIBE on the link and an independent grant on the target; and a table carries at most three partition indexes. Deleting a table leaves the objects in place, APIs follow only the first resource link, and LOG stops updates to existing tables but still adds new partitions unless AddOrUpdateBehavior is also set to InheritFromTable."
+    },
+    {
+      "id": "q032",
+      "subdomain": "2.3 - Manage the lifecycle of data",
+      "type": "mcq",
+      "question": "A versioned bucket expires every object daily, yet the bill keeps rising. What is missing?",
+      "options": [
+        "NoncurrentVersionExpiration, because Expiration only adds delete markers",
+        "A second Expiration rule with a shorter Days value",
+        "MFA Delete, because it purges old versions automatically",
+        "Switching the bucket to S3 Intelligent-Tiering"
+      ],
+      "correct": 0,
+      "explanation": "In a versioned bucket an Expiration action writes a delete marker and leaves the previous versions stored and billed, so the missing piece is NoncurrentVersionExpiration with NoncurrentDays and NewerNoncurrentVersions. A shorter Expiration adds markers faster, MFA Delete only controls who may purge versions, and Intelligent-Tiering changes storage class rather than removing versions."
+    },
+    {
+      "id": "q033",
+      "subdomain": "2.3 - Manage the lifecycle of data",
+      "type": "mcq",
+      "question": "A DynamoDB table uses TTL for retention. Which attribute value does the service honor?",
+      "options": [
+        "A String containing an ISO-8601 timestamp",
+        "A Number holding Unix time in milliseconds",
+        "A Number holding Unix epoch seconds",
+        "A Boolean flag named expired set to true"
+      ],
+      "correct": 2,
+      "explanation": "TTL reads one case-sensitive attribute whose value must be a Number holding Unix time in seconds; a String is ignored entirely and a millisecond value parses but never expires. Deletion is free and typically happens within two days, so expired items can still appear in reads until the purge lands."
+    },
+    {
+      "id": "q034",
+      "subdomain": "2.3 - Manage the lifecycle of data",
+      "type": "mcq",
+      "question": "A team must bulk load 640 GB of gzip CSV into Amazon Redshift. Which approach follows AWS guidance?",
+      "options": [
+        "Issue one INSERT per row inside a single transaction",
+        "Run one COPY from S3 with files between 1 MB and 1 GB and a count near a multiple of the slices",
+        "Split the load into 20 concurrent COPY commands against the same table",
+        "UNLOAD the CSV to another S3 prefix first, then COPY it back"
+      ],
+      "correct": 1,
+      "explanation": "COPY is the documented bulk-load path: it runs in parallel across slices, wants files between 1 MB and 1 GB, and expects a file count near a multiple of the slice count. Row-by-row INSERTs are prohibitively slow, concurrent COPYs against the same table serialize rather than help, and UNLOAD exports data from Redshift instead of loading it."
+    },
+    {
+      "id": "q035",
+      "subdomain": "2.3 - Manage the lifecycle of data",
+      "type": "multi",
+      "question": "Which statements about S3 lifecycle and replication are correct?",
+      "options": [
+        "A lifecycle configuration holds up to 1,000 rules per bucket",
+        "Expiration in a versioned bucket permanently deletes every version of the object",
+        "Replication requires versioning on both the source and the destination bucket",
+        "Replication is retroactive and copies objects that existed before the rule was created",
+        "S3 Replication Time Control commits to replicating 99.99 percent of new objects within 15 minutes",
+        "An object moved to Standard-IA on day 0 and deleted on day 7 bills only seven days, because the 30-day minimum was removed in 2026"
+      ],
+      "correct": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "A bucket has one lifecycle configuration with up to 1,000 rules, replication needs versioning on both buckets, and Replication Time Control carries the 15-minute, 99.99 percent SLA. Expiration in a versioned bucket only adds a delete marker, replication is not retroactive and needs S3 Batch Replication for a backfill, and the 2026 change removed the transition eligibility age while the 30-day minimum storage duration still bills."
+    },
+    {
+      "id": "q036",
+      "subdomain": "2.4 - Design data models and schema evolution",
+      "type": "mcq",
+      "question": "A retrieval-augmented pipeline must turn documents into embeddings and retrieve semantically similar chunks. Which capability covers that flow end to end?",
+      "options": [
+        "AWS Glue DataBrew profiling",
+        "Amazon Athena federated queries",
+        "Amazon Bedrock knowledge bases",
+        "Amazon Macie sensitive-data discovery"
+      ],
+      "correct": 2,
+      "explanation": "Skill 2.4.6 introduces vectorization concepts and names Amazon Bedrock knowledge bases, which chunk source documents, create embeddings and store them in a vector store for semantic retrieval. DataBrew profiles and prepares tabular data, Athena runs SQL over data sources, and Macie identifies sensitive data rather than building a retrieval index."
+    },
+    {
+      "id": "q037",
+      "subdomain": "2.4 - Design data models and schema evolution",
+      "type": "mcq",
+      "question": "A customer dimension must preserve history so historical facts join the version in force at the time. Which SCD design fits?",
+      "options": [
+        "Type 1: overwrite the changed attributes in the existing row",
+        "Type 3: keep the current and one previous value in two columns",
+        "Type 0: treat the attributes as fixed and never change them",
+        "Type 2: add a new row per change with effective and expiry dates and an active flag"
+      ],
+      "correct": 3,
+      "explanation": "Type 2 records every change as a new row with record start and end dates plus an active flag, so a historical fact can join the dimension version that was current when the event occurred. Type 1 destroys the audit trail, Type 3 can show only one step back, and Type 0 assumes the attribute never changes at all."
+    },
+    {
+      "id": "q038",
+      "subdomain": "2.4 - Design data models and schema evolution",
+      "type": "mcq",
+      "question": "Which statement about schema evolution on an Apache Iceberg table is correct?",
+      "options": [
+        "Adding a nullable column and renaming a column are metadata-only changes that do not rewrite data files",
+        "Moving from daily to hourly partitions requires a new table, exactly as with Hive-style partitioning",
+        "Iceberg permits narrowing a decimal column from DECIMAL(12,2) to DECIMAL(9,2)",
+        "Dropping a column rewrites every data file immediately"
+      ],
+      "correct": 0,
+      "explanation": "Iceberg schema updates are metadata-only and rest on stable field IDs, so adding a nullable column or renaming one leaves the files untouched. Partition evolution is also metadata: old files keep their layout under the old spec while new data uses the new one, which is why a Hive-style partition change needs a new table by contrast. Only widening promotions are allowed, and dropping a column is metadata-only rather than an eager rewrite."
+    },
+    {
+      "id": "q039",
+      "subdomain": "2.4 - Design data models and schema evolution",
+      "type": "multi",
+      "question": "A team is modeling dimensions and evolving a lakehouse schema. Which statements are correct?",
+      "options": [
+        "Decide the grain before choosing keys, and load dimension tables before fact tables",
+        "A star schema keeps dimensions flat and needs fewer joins than a fully normalized snowflake",
+        "Redshift enforces declared primary and foreign keys and rejects orphan rows",
+        "Additive schema changes ship before the consumer code deploy, and deletive changes after it",
+        "In Redshift, give the fact table a DISTKEY on the foreign key of the largest frequently joined dimension",
+        "Hive-style partition keys can be changed in place without rewriting the object prefixes"
+      ],
+      "correct": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "Grain fixes the keys and dimensions load before facts so a failed dimension blocks the fact load; a star's flat dimensions mean fewer joins than a snowflake; additive changes go out before the consumer deploy and deletive ones after; and collocating the fact's largest joined dimension via DISTKEY avoids redistribution. Redshift does not enforce declared keys even though the optimizer uses them, and Hive-style partition keys are the object prefixes, so changing them means a new table and rewritten queries."
+    },
+    {
+      "id": "q040",
+      "subdomain": "3.1 - Automate data processing by using AWS services",
+      "type": "mcq",
+      "question": "A team wants to bring its own SQS queue and choose the executor for an Airflow environment. Which statement is correct?",
+      "options": [
+        "Amazon MWAA manages the Celery queue and executor, so those components cannot be replaced",
+        "MWAA lets you replace the Celery queue but not the executor",
+        "MWAA supports choosing KubernetesExecutor per environment",
+        "MWAA allows a custom SQS queue through a VPC endpoint"
+      ],
+      "correct": 0,
+      "explanation": "MWAA is Celery-only and runs the queue as an AWS-managed SQS queue that you cannot create, replace or configure; there are no custom images and no executor choice. The tuning lever is the worker class, which sets DAG capacity and the default tasks per worker, so the other options describe controls that MWAA deliberately withholds."
+    },
+    {
+      "id": "q041",
+      "subdomain": "3.1 - Automate data processing by using AWS services",
+      "type": "mcq",
+      "question": "Events from an SQS queue must be filtered, enriched by a Lambda function, and delivered to Step Functions with no orchestration code. Which service fits?",
+      "options": [
+        "An EventBridge rule on the default bus",
+        "An EventBridge Pipe from the queue to Step Functions",
+        "A Step Functions Express workflow polling the queue",
+        "An SQS FIFO queue with a Lambda trigger"
+      ],
+      "correct": 1,
+      "explanation": "EventBridge Pipes are point-to-point: a source, an optional filter, an optional enrichment and a target, with no code to write and a five-minute execution cap. A rule matches events published to a bus rather than polling a queue, Express workflows cannot poll SQS, and a Lambda trigger still leaves filtering and enrichment code to you."
+    },
+    {
+      "id": "q042",
+      "subdomain": "3.1 - Automate data processing by using AWS services",
+      "type": "mcq",
+      "question": "A Glue workflow has a scheduled root trigger, a crawler, and a downstream job. The downstream job never fires when the team starts the preceding job manually for testing. Why?",
+      "options": [
+        "A conditional trigger supports only two crawlers, and adding a third blocks the chain",
+        "The downstream job must be started by an EventBridge rule instead of a Glue trigger",
+        "Every job in the chain must be started by a trigger descending from the single scheduled root, and a manually started job does not fire dependents",
+        "The crawler must complete before the scheduled trigger can activate"
+      ],
+      "correct": 2,
+      "explanation": "Dependents fire only when a trigger started them, and the whole chain must descend from a single scheduled or on-demand root, so a hand-started test run breaks the chain. The crawler limit is two per trigger rather than a blocker here, EventBridge is optional rather than required, and the crawler is not what makes the root trigger activate."
+    },
+    {
+      "id": "q043",
+      "subdomain": "3.1 - Automate data processing by using AWS services",
+      "type": "multi",
+      "question": "Which statements about automating data processing with EventBridge and Glue are correct?",
+      "options": [
+        "EventBridge Pipes filter events before billing, and a pipe execution is capped at five minutes",
+        "EventBridge Scheduler supports one-time schedules and IANA time zones",
+        "A Glue workflow can be started directly by an EventBridge rule or Scheduler schedule",
+        "Scheduled EventBridge rules support IANA time zones and a flexible time window",
+        "EventBridge Pipes can deliver a 6 MB payload to Step Functions unchanged",
+        "A Glue conditional trigger fires for manually started jobs as well as trigger-started jobs"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Pipes run source, filter, enrichment and target in one point-to-point flow, billing only filtered events and capping execution at five minutes; Scheduler adds one-time schedules and time zones; and a Glue workflow is a first-class EventBridge target. Scheduled rules are UTC-only with no flexible window, the effective Pipes payload is the smaller of the pipe and target limits, so Step Functions caps it at 256 KB, and conditional triggers fire only for trigger-started jobs."
+    },
+    {
+      "id": "q044",
+      "subdomain": "3.1 - Automate data processing by using AWS services",
+      "type": "multi",
+      "question": "Which statements about managed workflow services are correct?",
+      "options": [
+        "MWAA stores DAGs in S3 and runs its metadata database on Amazon Aurora PostgreSQL",
+        "mw1.micro is the one MWAA worker class without auto scaling",
+        "Step Functions Standard supports .sync and .waitForTaskToken, while Express supports request-response only",
+        "MWAA supports custom container images and a choice of executors",
+        "An Express workflow can run for up to one year",
+        "Setting celery.worker_concurrency overrides the worker class default"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "An MWAA environment keeps DAGs in S3 and its metadata in managed Aurora PostgreSQL, mw1.micro is the only class without auto scaling, and Standard workflows own the waiting integration patterns that Express lacks. MWAA is Celery-only with no custom images, Express caps at five minutes, and MWAA overrides celery.worker_concurrency in favour of the per-class autoscale default."
+    },
+    {
+      "id": "q045",
+      "subdomain": "3.2 - Analyze data by using AWS services",
+      "type": "mcq",
+      "question": "A candidate reads the in-scope services page and sees the Analytics entry printed as Amazon Quick. What is the safe exam reading?",
+      "options": [
+        "The guide renamed Athena to Amazon Quick",
+        "Only Amazon QuickSight dashboards are in scope, and Quick Suite features are out of scope",
+        "The entry is a typo, so the whole Quick family should be treated as out of scope",
+        "The Quick family is in scope: QuickSight evolved into Amazon Quick Suite, while the guide prints the shorter Amazon Quick string"
+      ],
+      "correct": 3,
+      "explanation": "The in-scope page literally prints Amazon Quick in Analytics, while Task 3.2.1 still says Amazon QuickSight, and Amazon QuickSight evolved into Amazon Quick Suite on 9 October 2025 with existing APIs and dashboards unchanged. The safe rule is to treat any Quick-family name as in scope and never claim the guide prints Amazon QuickSight verbatim. Options A, B and C either rename Athena, narrow scope incorrectly or dismiss the family as out of scope."
+    },
+    {
+      "id": "q046",
+      "subdomain": "3.2 - Analyze data by using AWS services",
+      "type": "mcq",
+      "question": "Analysts need the top three orders per customer per day from Amazon Redshift. Which SQL shape is correct?",
+      "options": [
+        "A self-join that compares each order against every other order for the customer",
+        "GROUP BY customer_id, order_date with MAX(amount) to pick the largest order",
+        "A PIVOT over customer_id using SUM(amount) to rank the orders",
+        "ROW_NUMBER OVER (PARTITION BY customer_id, order_date ORDER BY amount DESC), filtered to rank at most three"
+      ],
+      "correct": 3,
+      "explanation": "A window function ranks rows per partition, and filtering the rank to three returns the top N per customer per day; PARTITION BY also lets Redshift run the window across slices in parallel. MAX returns one aggregate row per group rather than three orders, PIVOT reshapes columns instead of ranking, and a self-join is quadratic work the window function avoids."
+    },
+    {
+      "id": "q047",
+      "subdomain": "3.2 - Analyze data by using AWS services",
+      "type": "multi",
+      "question": "Which statements about analyzing data with AWS services are correct?",
+      "options": [
+        "Amazon Athena is serverless and bills per terabyte of data scanned",
+        "Athena notebooks can use Apache Spark to explore data",
+        "Redshift PIVOT supports COUNT, SUM, MIN, MAX and AVG as aggregates",
+        "A rolling average is computed with a window function over an ordered window",
+        "AWS Glue DataBrew is a relational data warehouse built for BI queries",
+        "Redshift window functions may be used directly inside a WHERE clause"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Athena is serverless and charges by bytes scanned, Athena notebooks can run Apache Spark, Redshift PIVOT accepts only COUNT, SUM, MIN, MAX and AVG, and a rolling average comes from a window function over an ordered frame. DataBrew is a no-code preparation service rather than a warehouse, and window functions are legal in the SELECT list or final ORDER BY rather than in WHERE."
+    },
+    {
+      "id": "q048",
+      "subdomain": "3.3 - Maintain and monitor data pipelines",
+      "type": "mcq",
+      "question": "An investigator must prove which principal called s3:GetObject on one object yesterday. What is required?",
+      "options": [
+        "CloudTrail data events, because object-level API calls are not part of management events",
+        "CloudTrail management events, which include all S3 object reads by default",
+        "CloudWatch Logs Insights over the bucket's access logs, which CloudTrail ingests automatically",
+        "AWS Config configuration history, which records every object read"
+      ],
+      "correct": 0,
+      "explanation": "Management events cover control-plane calls such as creating or deleting resources, while object-level calls like s3:GetObject require data events, which are opt-in and charged. CloudTrail does not ingest S3 access logs, and AWS Config records resource configuration changes rather than read activity, so neither can answer who read the object."
+    },
+    {
+      "id": "q049",
+      "subdomain": "3.3 - Maintain and monitor data pipelines",
+      "type": "mcq",
+      "question": "A Kinesis consumer is falling behind. Which metric directly measures stream lag?",
+      "options": [
+        "GetRecords.Latency, the duration of a single GetRecords call",
+        "GetRecords.IteratorAgeMilliseconds, how far the slowest reader trails the stream head",
+        "WriteProvisionedThroughputExceeded, which counts throttled producer writes",
+        "IncomingRecords, the number of records written to the stream"
+      ],
+      "correct": 1,
+      "explanation": "Iterator age is the lag metric: a value near zero means the reader is caught up, and AWS recommends alarming on the Maximum statistic once it passes about half the retention period. GetRecords.Latency measures API call duration rather than lag, write throttling is a producer concern, and incoming volume says nothing about how far behind the consumer is."
+    },
+    {
+      "id": "q050",
+      "subdomain": "3.3 - Maintain and monitor data pipelines",
+      "type": "multi",
+      "question": "Which statements about monitoring and logging a pipeline are correct?",
+      "options": [
+        "CloudTrail management events are logged by default, while S3 object-level data events are opt-in and charged",
+        "CloudWatch Logs retention defaults to never expire",
+        "A metric filter retroactively counts errors logged before the filter was created",
+        "CloudWatch Logs Insights bills by uncompressed bytes scanned and keeps query results for seven days",
+        "A CloudWatch alarm invokes its actions on every evaluation while the state remains ALARM",
+        "AWS X-Ray is the in-scope service for tracing Glue job calls"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Management events are on by default and data events must be enabled and paid for, log retention defaults to indefinite unless set per group, and Insights charges by uncompressed bytes scanned with seven-day result retention. Metric filters only count events arriving after creation, alarms act on state changes rather than every evaluation, and X-Ray is out of scope for DEA-C01."
+    },
+    {
+      "id": "q051",
+      "subdomain": "3.3 - Maintain and monitor data pipelines",
+      "type": "multi",
+      "question": "A nightly Glue job reports success but reads zero records. Which statements are correct?",
+      "options": [
+        "A bookmark can skip all input, so alarm on glue.driver.aggregate.recordsRead falling to zero against the expected volume",
+        "Glue publishes metrics every 30 seconds as deltas, so the Sum statistic per minute is the right reading",
+        "Routing Glue Job State Change events through EventBridge to SNS is the canonical failure alert",
+        "CloudWatch automatically publishes a JobFailed metric for every Glue job",
+        "DMS target latency is always lower than source latency",
+        "Adding DPUs is the first fix when a bookmark skips the input"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "A bookmark watermark can make a run succeed while reading nothing, which is why recordsRead is alarmed against expected volume; Glue metrics are 30-second deltas, so a per-minute Sum is correct; and there is no default failure metric, so a Glue Job State Change rule is the alert. JobFailed does not exist, target latency is greater than or equal to source latency, and DPUs do nothing about a bookmark that skipped the files."
+    },
+    {
+      "id": "q052",
+      "subdomain": "3.4 - Ensure data quality",
+      "type": "mcq",
+      "question": "A Glue Data Quality rule set fails during a job run, yet the job still reports SUCCEEDED. Why?",
+      "options": [
+        "The rules were attached to a recipe job instead of a profile job",
+        "CloudWatch metrics are disabled, so the job cannot detect a failure",
+        "The default action on rule-set failure is None, so the job continues despite the failed rules",
+        "Row-level outcomes are produced only by Catalog evaluations"
+      ],
+      "correct": 2,
+      "explanation": "The documented default failure action is None, which lets the job continue and report success even when every rule fails; the fix is an explicit fail action, an assertion, or a workflow branch on the published state. Results publishing is on by default while CloudWatch metrics are off, neither of which changes the job outcome, and row-level outcomes are produced in ETL jobs, not Catalog evaluations."
+    },
+    {
+      "id": "q053",
+      "subdomain": "3.4 - Ensure data quality",
+      "type": "multi",
+      "question": "Which statements about data quality tooling are correct?",
+      "options": [
+        "A data quality score is the percentage of rules that pass, expressed on a scale from 0 to 1.0",
+        "DataBrew rule sets run in profile jobs rather than recipe jobs",
+        "Row-level outcomes that identify failed records are available only from an ETL job evaluation",
+        "Redshift enforces primary key and unique constraints when duplicate rows are loaded",
+        "DataBrew project previews default to the first 500 rows",
+        "A blank CSV string is treated as NULL by a completeness rule"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "The score is passed rules divided by evaluated rules on a 0 to 1.0 scale, DataBrew rulesets attach to profile jobs, row-level outcomes come from an ETL job only, and DataBrew previews the first 500 rows by default. Redshift treats primary key and unique constraints as informational, and an empty CSV field reads as an empty string rather than NULL, so it can pass a completeness rule unless the type is coerced or the EMPTY keyword is used."
+    },
+    {
+      "id": "q054",
+      "subdomain": "4.1 - Apply authentication mechanisms",
+      "type": "mcq",
+      "question": "A governance team wants to isolate business units and their data projects inside SageMaker Unified Studio. Which hierarchy runs from broadest to narrowest?",
+      "options": [
+        "Domain, then domain unit, then project",
+        "Project, then domain unit, then domain",
+        "Domain unit, then domain, then project",
+        "Project, then domain, then domain unit"
+      ],
+      "correct": 0,
+      "explanation": "Skill 4.1.7 names domains, domain units and projects in that order: the domain is the top-level boundary, domain units subdivide it, typically by business unit, and projects live inside domain units. The other options invert at least one level of that containment chain."
+    },
+    {
+      "id": "q055",
+      "subdomain": "4.1 - Apply authentication mechanisms",
+      "type": "mcq",
+      "question": "An analyst in account B must decrypt objects encrypted with account A's AWS KMS key. Which key tier makes that possible?",
+      "options": [
+        "A customer managed key in account A, shared through its key policy",
+        "An AWS managed key in account A, because service keys are shareable",
+        "An AWS owned key, because it is invisible and managed by AWS",
+        "A key alias, because aliases carry cross-account permissions"
+      ],
+      "correct": 0,
+      "explanation": "Only a customer managed key can be shared across accounts, through its key policy delegating to the other account or naming the principal. AWS managed keys cannot be shared cross-account, AWS owned keys are invisible to KMS policy configuration, and an alias is just a friendly name with no permissions of its own."
+    },
+    {
+      "id": "q056",
+      "subdomain": "4.1 - Apply authentication mechanisms",
+      "type": "multi",
+      "question": "Which statements about authenticating data pipeline workloads are correct?",
+      "options": [
+        "Workloads should use IAM roles with temporary STS credentials rather than embedded long-term access keys",
+        "A gateway VPC endpoint serves S3 and DynamoDB with no hourly charge, while interface endpoints use PrivateLink ENIs",
+        "A Lambda execution role can be replaced by storing access keys in environment variables",
+        "AWS Secrets Manager can rotate database credentials on a schedule",
+        "S3 Access Points are a key management service that rotates KMS keys",
+        "Security groups are stateless, so return traffic must be allowed by a separate rule"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Roles issue temporary credentials through STS, gateway endpoints cover S3 and DynamoDB with no endpoint charge while interface endpoints are billed ENIs, and Secrets Manager rotates credentials on a schedule. Long-term keys in environment variables, S3 Access Points as a KMS feature, and stateless security groups are all misconceptions: security groups are stateful, and Access Points are named network endpoints for shared bucket access."
+    },
+    {
+      "id": "q057",
+      "subdomain": "4.2 - Apply authorization mechanisms",
+      "type": "multi",
+      "question": "A lake house team manages analyst access with AWS Lake Formation. Which controls can Lake Formation enforce?",
+      "options": [
+        "Database-level permissions on the data catalog",
+        "Table-level SELECT or DESCRIBE grants",
+        "Row-level filters that hide records from a query",
+        "Column-level masks that redact sensitive values",
+        "VPC security group rules for the analytics subnet",
+        "Password rotation for IAM Identity Center users"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Lake Formation's permission model covers catalog databases and tables plus row filters and column masks, which is why it is the authorization layer for Athena, Redshift, EMR and S3 access. Options E and F belong to networking and identity management, security groups and IAM Identity Center, not to Lake Formation grants, so they can be plausible distractors for authorization questions but not for this service."
+    },
+    {
+      "id": "q058",
+      "subdomain": "4.2 - Apply authorization mechanisms",
+      "type": "mcq",
+      "question": "Account B's role has an IAM policy allowing kms:Decrypt on account A's key, but the calls still fail. What must also allow the action?",
+      "options": [
+        "Nothing, because an attached IAM allow is sufficient once it exists",
+        "The key policy on account A's key must allow the principal or delegate to its account",
+        "The role's trust policy must list kms:Decrypt as a trusted action",
+        "An S3 bucket policy must include the KMS actions"
+      ],
+      "correct": 1,
+      "explanation": "KMS evaluates the key policy first: an IAM allow is inert until the key policy permits the principal or delegates permission to its account. A trust policy governs who may assume a role rather than which key actions are allowed, and bucket policies do not grant KMS permissions, so neither can close the gap."
+    },
+    {
+      "id": "q059",
+      "subdomain": "4.2 - Apply authorization mechanisms",
+      "type": "mcq",
+      "question": "Which IAM policy detail follows least privilege for a Glue job that reads s3://lake-raw/raw/ and writes s3://lake-curated/curated/?",
+      "options": [
+        "Attach the AmazonS3FullAccess managed policy to the job role",
+        "Grant s3: on all resources so future prefixes are never blocked",
+        "Grant ListBucket on the bucket ARNs and GetObject or PutObject on the exact prefix ARNs",
+        "Run the job with the account root user's access keys stored in the script"
+      ],
+      "correct": 2,
+      "explanation": "S3's two-level model authorizes ListBucket against the bucket ARN and object actions against object ARNs, so prefix-scoped resources with the matching actions are the least-privilege shape. AmazonS3FullAccess and s3: on all resources grant far more than the job needs, and embedding root credentials is the anti-pattern that roles exist to eliminate."
+    },
+    {
+      "id": "q060",
+      "subdomain": "4.3 - Ensure data encryption and masking",
+      "type": "mcq",
+      "question": "Which statement about encryption at rest is correct?",
+      "options": [
+        "Enabling KMS key rotation re-encrypts all existing objects with new key material",
+        "Kinesis Data Streams encrypts existing records as soon as server-side encryption is enabled",
+        "Changing an S3 bucket default to SSE-KMS re-encrypts the objects already in the bucket",
+        "S3 encrypts new objects with SSE-S3 by default, and Bucket Keys cut KMS request volume"
+      ],
+      "correct": 3,
+      "explanation": "S3 has applied SSE-S3 to new objects by default since 2023, and S3 Bucket Keys reduce the KMS requests that reach the key by up to 99 percent. Key rotation never rewrites existing ciphertext, Kinesis SSE protects only records written after it is enabled, and changing a bucket default does not re-encrypt existing objects, which needs a deliberate re-encryption job."
+    },
+    {
+      "id": "q061",
+      "subdomain": "4.4 - Prepare logs for audit",
+      "type": "mcq",
+      "question": "A security team needs to run SQL over years of CloudTrail events without operating a separate query stack. Which service fits?",
+      "options": [
+        "AWS CloudTrail Lake, which stores events in a queryable data store with SQL",
+        "CloudWatch Logs Insights, because it stores CloudTrail management events by default",
+        "AWS Config, which keeps an SQL-queryable history of every API call",
+        "Amazon Macie, which indexes API calls for audit reporting"
+      ],
+      "correct": 0,
+      "explanation": "CloudTrail Lake is the managed event data store built for SQL queries over CloudTrail events, so it needs no separate database or crawler. Logs Insights works over CloudWatch Logs rather than CloudTrail's event store, Config records resource configuration state, and Macie discovers sensitive data in S3 rather than auditing API calls."
+    },
+    {
+      "id": "q062",
+      "subdomain": "4.4 - Prepare logs for audit",
+      "type": "multi",
+      "question": "Which statements about preparing logs for audit are correct?",
+      "options": [
+        "CloudTrail Event history covers 90 days of management events for the signed-in account",
+        "CloudTrail data events are enabled by default and free of charge",
+        "An organization trail can deliver logs from every account into one S3 bucket",
+        "CloudWatch Logs retention must be set per log group, because the default never expires",
+        "Amazon Athena can query CloudTrail log files stored in S3 for custom analysis",
+        "CloudTrail Lake charges nothing for event ingestion"
+      ],
+      "correct": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "Event history holds 90 days of management events for the signed-in account, an organization trail centralizes every account's logs in one bucket, log groups default to indefinite retention unless set, and Athena can query the JSON log files in S3. Data events are opt-in and charged, and CloudTrail Lake bills for ingestion and storage, so those two options are the traps."
+    },
+    {
+      "id": "q063",
+      "subdomain": "4.5 - Understand data privacy and governance",
+      "type": "mcq",
+      "question": "A compliance team must locate PII across an S3 data lake and then hide sensitive columns from analysts. Which pairing does that?",
+      "options": [
+        "AWS Config for discovery and AWS KMS for masking",
+        "Amazon Macie for PII discovery and Lake Formation column-level controls for masking",
+        "AWS CloudTrail for discovery and S3 ACLs for masking",
+        "Amazon Inspector for discovery and IAM permission boundaries for masking"
+      ],
+      "correct": 1,
+      "explanation": "Skill 4.5.2 pairs PII identification by Amazon Macie with Lake Formation, whose column-level controls mask values for downstream analytics. Config records configuration history, KMS encrypts data rather than hiding columns, CloudTrail audits API calls, S3 ACLs are coarse object grants, and Inspector scans workloads for vulnerabilities, so none of those pairs performs both jobs."
+    },
+    {
+      "id": "q064",
+      "subdomain": "4.5 - Understand data privacy and governance",
+      "type": "mcq",
+      "question": "A team wants Amazon Macie findings to automatically mask an SSN column for analysts. What is missing from that plan?",
+      "options": [
+        "Nothing, because Macie masks columns when it finds PII",
+        "Macie only discovers and reports, so masking needs a Lake Formation data filter wired through an EventBridge-triggered remediation",
+        "Macie can mask columns only after the bucket has versioning enabled",
+        "Macie masks only when the data is encrypted with a customer managed key"
+      ],
+      "correct": 1,
+      "explanation": "Macie finds sensitive data and publishes findings; it never blocks, masks or revokes access. The control path is a Macie finding routed through EventBridge to a Lambda or Step Functions remediation that applies an LF-Tag or a Lake Formation data filter, so the other options misstate both the boundary and the trigger for masking."
+    },
+    {
+      "id": "q065",
+      "subdomain": "4.5 - Understand data privacy and governance",
+      "type": "multi",
+      "question": "Which statements about data governance and sharing are correct?",
+      "options": [
+        "Redshift data sharing exposes live data across accounts without copying it",
+        "Lake Formation permissions are global and apply automatically in every Region",
+        "A cross-Region consumer needs a resource link created in its own Region",
+        "AWS Config records configuration changes, while CloudTrail records API calls",
+        "Governed Tables remain the recommended format for ACID transactions across tables",
+        "Macie findings are retained for 90 days by default"
+      ],
+      "correct": [
+        0,
+        2,
+        3,
+        5
+      ],
+      "explanation": "Redshift data sharing gives live access without a copy, cross-Region lake access needs a resource link in the consumer Region, Config tracks configuration state while CloudTrail tracks API calls, and Macie keeps findings for 90 days. Lake Formation permissions are Region-local, and Governed Tables reached end of support on 31 December 2024 in favour of Iceberg, Hudi and Delta Lake."
+    }
+  ]
+}

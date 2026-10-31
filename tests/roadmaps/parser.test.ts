@@ -1,3 +1,5 @@
+import fs from 'fs'
+import path from 'path'
 import { describe, expect, it } from 'vitest'
 import { getRoadmapContent, parseSteps } from '@/lib/roadmaps/get-roadmap-content'
 import { stepContentTarget } from '@/lib/roadmaps/resolve-content-url'
@@ -89,6 +91,64 @@ describe('roadmap parser', () => {
         expect(ids).toContain(relationship.leadsTo)
       }
       expect(stepContentTarget(step, locale)).not.toBeNull()
+    }
+  })
+
+  it('parses the AI agentic development roadmap', async () => {
+    const roadmap = await getRoadmapContent('ai-agentic-development', 'en')
+
+    expect(roadmap?.steps).toHaveLength(19)
+    expect(roadmap?.steps[0].id).toBe('ai-literacy')
+    expect(roadmap?.steps.at(-1)?.id).toBe('production-agentic-engineer')
+    expect(roadmap?.steps.filter((step) => step.type === 'milestone')).toHaveLength(3)
+    expect(roadmap?.steps.every((step) => step.title.length > 0 && step.description.length > 0)).toBe(true)
+  })
+
+  it.each(['en', 'pt', 'es'] as const)('%s AI agentic roadmap: same step ids and resolvable refs', async (locale) => {
+    const roadmap = await getRoadmapContent('ai-agentic-development', locale)
+    expect(roadmap).not.toBeNull()
+    const ids = roadmap!.steps.map((step) => step.id)
+    expect(ids).toEqual([
+      'ai-literacy',
+      'prompt-engineering',
+      'python-foundations',
+      'python-intermediate',
+      'python-advanced',
+      'llm-native-developer',
+      'langgraph-fundamentals',
+      'langgraph-intermediate',
+      'agent-memory-rag',
+      'crewai-multi-agent',
+      'opencode-fundamentals',
+      'opencode-agents',
+      'multi-agent-systems',
+      'langfuse-observability',
+      'guardrails-evaluation',
+      'opencode-workflows',
+      'langgraph-advanced',
+      'agentic-ai-capstone',
+      'production-agentic-engineer',
+    ])
+
+    for (const step of roadmap!.steps) {
+      for (const prerequisite of step.prerequisites) {
+        expect(ids).toContain(prerequisite)
+      }
+      for (const relationship of step.relationships) {
+        expect(ids).toContain(relationship.leadsTo)
+      }
+      const target = stepContentTarget(step, locale)
+      if (step.type === 'milestone') {
+        expect(step.contentRef).toBeNull()
+      } else {
+        expect(target).not.toBeNull()
+        // Every course ref must resolve to a real lesson file in this locale
+        // (or fall back to the English lesson, matching getCourseContent).
+        const [courseSlug, lessonSlug] = step.contentRef!.split('/')
+        const lessonsDir = path.join(process.cwd(), 'content', 'courses', courseSlug)
+        const exists = (dir: string) => fs.existsSync(path.join(lessonsDir, dir, `${lessonSlug}.md`))
+        expect(exists(locale) || exists('en')).toBe(true)
+      }
     }
   })
 })
