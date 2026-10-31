@@ -1,6 +1,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { CSP_POLICY as CSP } from '../lib/security/csp.mjs'
+import { CSP_POLICY } from '../lib/security/csp.mjs'
+import { CSP_POLICY_HEADERS } from '../lib/security/csp.mjs'
+import { FRAME_GUARD_SCRIPT } from '../lib/security/frame-guard.mjs'
 
 const OUT = path.join(process.cwd(), 'out')
 const ORIGIN = 'https://nuniversity.github.io'
@@ -24,7 +26,7 @@ function write404() {
 <head>
 <meta charset="utf-8"/>
 <meta name="robots" content="noindex"/>
-<meta http-equiv="Content-Security-Policy" content="${CSP}"/>
+<meta http-equiv="Content-Security-Policy" content="${CSP_POLICY}"/>
 <meta name="referrer" content="strict-origin-when-cross-origin"/>
 <link rel="icon" href="/icons/favicon-32x32.png?v=2" sizes="32x32" type="image/png"/>
 <link rel="icon" href="/icons/favicon-16x16.png?v=2" sizes="16x16" type="image/png"/>
@@ -32,6 +34,7 @@ function write404() {
 <link rel="icon" href="/icon.svg?v=2" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-icon.png?v=2" sizes="180x180"/>
 <link rel="manifest" href="/manifest.webmanifest"/>
+<script>${FRAME_GUARD_SCRIPT}</script>
 <title>404 — Nuniversity</title>
 <script>
 (function () {
@@ -99,7 +102,7 @@ function ensureCsp() {
     if (file.endsWith('404.html')) continue // written by write404()
     const html = fs.readFileSync(file, 'utf8')
     if (/http-equiv=["']Content-Security-Policy["']/i.test(html)) continue
-    const meta = `<meta http-equiv="Content-Security-Policy" content="${CSP}"/>`
+    const meta = `<meta http-equiv="Content-Security-Policy" content="${CSP_POLICY}"/>`
     const next = html.includes('</head>')
       ? html.replace('</head>', `  ${meta}\n</head>`)
       : html.replace(/<meta charset=/, `${meta}\n<meta charset=`)
@@ -162,7 +165,7 @@ function writeHeaders() {
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=(), browsing-topics=()
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: ${CSP}
+  Content-Security-Policy: ${CSP_POLICY_HEADERS}
 
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable

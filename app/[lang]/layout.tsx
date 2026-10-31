@@ -12,6 +12,7 @@ import { organizationSchema, websiteSchema } from '@/lib/seo/json-ld'
 import { buildAlternates } from '@/lib/seo/alternates'
 import { SITE_ORIGIN, SITE_NAME } from '@/lib/seo/site'
 import { CSP_POLICY } from '@/lib/security/csp.mjs'
+import { FRAME_GUARD_SCRIPT } from '@/lib/security/frame-guard.mjs'
 import { THEME_INIT_SCRIPT } from '@/lib/theme/theme'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -140,6 +141,7 @@ export default async function RootLayout(
           the light theme until React hydrates and adds it. The script is a
           constant string and runs synchronously in <head>.
         */}
+        <script dangerouslySetInnerHTML={{ __html: FRAME_GUARD_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         {/*
           Warms the destination HTML when a visitor hovers or focuses an
