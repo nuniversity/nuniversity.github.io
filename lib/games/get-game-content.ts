@@ -78,11 +78,13 @@ interface GameListItem extends GameFileData {
 const gamesDirectory = path.join(process.cwd(), 'content/games')
 
 /**
- * Get all available games metadata
+ * Get all available games metadata, deterministically ordered by category and
+ * id so hub rendering never depends on `fs.readdirSync` enumeration order
+ * (which is platform-dependent).
  */
 export async function getAllGames(locale?: string): Promise<GameMetadata[]> {
   const games: GameMetadata[] = []
-  
+
   try {
     // Check if games directory exists
     if (!fs.existsSync(gamesDirectory)) {
@@ -93,11 +95,13 @@ export async function getAllGames(locale?: string): Promise<GameMetadata[]> {
     const gameTypes = fs.readdirSync(gamesDirectory, { withFileTypes: true })
       .filter(dirent => dirent.isDirectory())
       .map(dirent => dirent.name)
+      .sort()
 
     for (const gameType of gameTypes) {
       const gameTypePath = path.join(gamesDirectory, gameType)
       const gameFiles = fs.readdirSync(gameTypePath)
         .filter(file => file.endsWith('.json'))
+        .sort()
 
       for (const file of gameFiles) {
         const filePath = path.join(gameTypePath, file)
@@ -124,7 +128,7 @@ export async function getAllGames(locale?: string): Promise<GameMetadata[]> {
     console.error('Error reading games:', error)
   }
 
-  return games
+  return games.sort((a, b) => a.category.localeCompare(b.category) || a.slug.localeCompare(b.slug))
 }
 
 /**
@@ -195,7 +199,7 @@ export async function getConversationGame(slug: string, locale?: string): Promis
 }
 
 /**
- * Get all games by category
+ * Get all games by category.
  */
 export async function getGamesByCategory(category: string, locale?: string): Promise<GameMetadata[]> {
   const allGames = await getAllGames(locale)

@@ -13,11 +13,23 @@
   "locales": {
     "pt": {
       "title": "Caça-Palavras",
-      "description": "Encontre palavras escondidas em uma grade de letras. Escolha entre várias categorias ou use listas de vocabulário."
+      "description": "Encontre palavras escondidas em uma grade de letras. Escolha entre várias categorias ou use listas de vocabulário.",
+      "category_labels": {
+        "programming": "Programação",
+        "science": "Ciência",
+        "geography": "Geografia",
+        "mathematics": "Matemática"
+      }
     },
     "es": {
       "title": "Sopa de Letras",
-      "description": "Encuentra palabras ocultas en una cuadrícula de letras. Elige entre varias categorías o usa listas de vocabulario."
+      "description": "Encuentra palabras ocultas en una cuadrícula de letras. Elige entre varias categorías o usa listas de vocabulario.",
+      "category_labels": {
+        "programming": "Programación",
+        "science": "Ciencia",
+        "geography": "Geografía",
+        "mathematics": "Matemáticas"
+      }
     }
   }
 }

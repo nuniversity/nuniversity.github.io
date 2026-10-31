@@ -29,7 +29,7 @@ Config: `pyproject.toml` (ruff, pytest, bandit), `.pre-commit-config.yaml`
 ## Project Status
 - **38 courses** across programming, AI/ML, data engineering, architecture
 - **7 games** (6 categories: coding, conversation, logic, math, physics, puzzles)
-- **3 quizzes** — `snowpro-core-cof-c03.json` (833 questions), `aws-aif-c01.json` (500 questions, expanded 350 → 500 on 2026-10-29 with blueprint-exact domains 100/120/140/70/70 and types 50/20/15/15; 12 giveaway ordering items de-rotated) and `aws-clf-c02.json` (130 questions, created 2026-10-29 as 2x the 65-question exam: 19 CLF-C02 task statements, types 65/26/20/19, allocations 24/30/34/12, 64 mcq mined from the Oct-2026 seed bank + 66 authored fresh) — Quizzes app at /[lang]/quizzes/ (hub, detail, redirect stubs from /games/quiz/*)
+- **3 quizzes** — `snowpro-core-cof-c03.json` (833 questions), `aws-aif-c01.json` (500 questions, expanded 350 → 500 on 2026-10-29 with blueprint-exact domains 100/120/140/70/70 and types 50/20/15/15; 12 giveaway ordering items de-rotated) and `aws-clf-c02.json` (260 questions: created 2026-10-29 as 2x the 65-question exam — 19 CLF-C02 task statements, types 65/26/20/19, allocations 24/30/34/12, 64 mcq mined from the Oct-2026 seed bank + 66 authored fresh; expanded 130 → 260 on 2026-10-31 with a second 2x tranche — types 65/26/20/19 again, `grid2.json` quotas + `grid-full.json` cellwise sum as final gate, 30 mined seeds (regression-proved: tranche b unchanged) + 100 fresh authored in seven batches c1a-c6, each grid-gated with all siblings at bank Jaccard ≤ 0.30, every keyed fact traced to the `facts/d1-d4` dossiers, doctrine audit + mock-draw gates PASS) — Quizzes app at /[lang]/quizzes/ (hub, detail, redirect stubs from /games/quiz/*)
 - **10 tools** (decision matrices, timers, habit trackers, prompt builders)
 - **3 languages** (English, Portuguese, Spanish)
 - 3 language dictionaries (en.json, es.json, pt.json)
@@ -118,6 +118,7 @@ dictionaries/       # Language translation files
 - `course-writer`: Generates lesson files (prompt-only, no scripts)
 - `game-builder`: Generates language activity (vocabulary) JSON for content/languages/ (quiz generation moved to the Quizzes app)
 - `quiz-writer`: Creates and expands exam-blueprint quiz JSON in content/quizzes (v1.1.0: 5 scripts, 151 tests; bootstrap + quota grid + Jaccard dedup gate + deterministic merge/renumber + final verifier)
+  - CLF-C02 doctrine (tranche-2, 2026-10-31): exam guide v1.3 (2026-10-29) removed 8 names from the out-of-scope list (Elastic Transcoder, Elemental MediaStore, Lookout for Metrics, Lumberyard, Monitron, Panorama, RoboMaker, WorkDocs) — never key them AND never claim they are out-of-scope; out-of-scope services appear only as wrong options; `.scratch/clf-questions/audit_doctrine.py` checks asserted text only (stem + explanation + keyed options) for ASCII/`$`/banned phrases/scope keying/v1.3/§1.7/giveaways; option-reference labels may mix letters and 0-based numerics (the bank does) — fix mismatches individually, never mass-convert
 - `i18n-translator`: Handles localization (prompt-only, no scripts)
 - `platform-engineer`: Guides TypeScript/Next.js development (prompt-only)
 - `mermaid-js`: Creates Mermaid.js diagrams (1 script, no tests)

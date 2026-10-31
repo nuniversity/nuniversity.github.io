@@ -722,7 +722,8 @@
       "language": "Language",
       "duration": "Duration",
       "get_ready": "Get ready to type...",
-      "type_placeholder": "Type the code above here..."
+      "type_placeholder": "Type the code above here...",
+      "best_wpm": "Best WPM: {wpm}"
     },
     "number_sequence": {
       "enter_sequence": "Enter the sequence",
@@ -760,8 +761,13 @@
       "puzzle_complete": "Puzzle Complete!",
       "found_all": "You found all {n} words!",
       "time_with_n": "Time: {time}",
-      "words_count": "{n} words"
-    }
+      "words_count": "{n} words",
+      "best_time": "Best Time: {time}",
+      "keyboard_hint": "Keyboard: arrow keys to move, Enter to anchor and check, Escape to clear.",
+      "skipped_n": "{n} skipped",
+      "cell_label": "Row {row}, column {col}"
+    },
+    "best_score": "Best Score: {score}"
   },
   "quizzes": {
     "title": "Quizzes, Tests & Certification Practice",

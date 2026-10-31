@@ -1,10 +1,13 @@
 'use client'
 
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Trophy, RotateCcw, ArrowLeft, CheckCircle2, XCircle, Shuffle, Target } from 'lucide-react'
+import { Trophy, RotateCcw, ArrowLeft, CheckCircle2, XCircle, Shuffle } from 'lucide-react'
 import { type Locale } from '@/lib/i18n/config'
 import Link from '@/components/navigation/AppLink'
+import { tpl } from '@/lib/games/tpl'
+import { useSafeTimeouts } from '@/lib/games/use-safe-timeouts'
+import { getGameBest, saveGameBestIfNew, GAME_ID } from '@/lib/games/storage'
 
 type Mode = 'dec-to-bin' | 'bin-to-dec' | 'dec-to-hex' | 'hex-to-dec' | 'bin-to-hex' | 'hex-to-bin'
 
@@ -17,13 +20,13 @@ interface Question {
 
 interface BinaryHexClientProps {
   lang: Locale
-  game: any
+  game: {
+    title: string
+    description: string
+    modes?: Mode[]
+    difficultyLevels?: Record<string, { maxBits: number }>
+  }
   dict: any
-}
-
-function t(template: string, vars?: Record<string, string | number>): string {
-  if (!vars) return template
-  return Object.entries(vars).reduce((str, [key, val]) => str.replace(new RegExp(`\\{${key}\\}`, 'g'), String(val)), template)
 }
 
 const modeColors: Record<Mode, string> = {
@@ -55,6 +58,14 @@ function generateQuestion(mode: Mode, maxBits: number): Question {
   }
 }
 
+function normalizeBaseInput(input: string): string {
+  // Trim, uppercase and strip insignificant leading zeros so '0101' matches
+  // binary answers and '0A' matches hex answers semantically.
+  const cleaned = input.trim().toUpperCase()
+  if (cleaned.length > 1) return cleaned.replace(/^0+(?=[0-9A-F])/, '')
+  return cleaned
+}
+
 export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
   const [selectedModes, setSelectedModes] = useState<Mode[]>(['bin-to-dec'])
   const [difficulty, setDifficulty] = useState<string>('beginner')
@@ -66,8 +77,14 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
   const [total, setTotal] = useState(0)
   const [feedback, setFeedback] = useState<'correct' | 'wrong' | null>(null)
   const [questionsAnswered, setQuestionsAnswered] = useState(0)
+  const [bestScore, setBestScore] = useState<number | null>(null)
   const totalQuestions = 15
+  // Mirrors questionsAnswered so the delayed round-end check never reads a
+  // stale render-scope value (the original stale-closure bug that could end
+  // the round at the wrong question).
+  const answeredRef = useRef(0)
   const inputRef = useRef<HTMLInputElement>(null)
+  const { setSafeTimeout, clearAll } = useSafeTimeouts()
 
   const g = dict?.games ?? {}
   const bh = g?.binary_hex ?? {}
@@ -80,19 +97,22 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
     'hex-to-bin': bh.mode_hex_bin || 'Hex → Binary',
   }
 
-  const maxBits = game.difficultyLevels[difficulty]?.maxBits || 4
+  const maxBits = game.difficultyLevels?.[difficulty]?.maxBits || 4
+  const allModes = game.modes ?? (['dec-to-bin', 'bin-to-dec', 'dec-to-hex', 'hex-to-dec', 'bin-to-hex', 'hex-to-bin'] as Mode[])
 
   const startGame = () => {
+    clearAll()
     setGameMode('playing')
     setScore(0)
     setCorrect(0)
     setTotal(0)
     setQuestionsAnswered(0)
+    answeredRef.current = 0
     setUserAnswer('')
     setFeedback(null)
     const mode = selectedModes[Math.floor(Math.random() * selectedModes.length)]
     setQuestion(generateQuestion(mode, maxBits))
-    setTimeout(() => inputRef.current?.focus(), 100)
+    setSafeTimeout(() => inputRef.current?.focus(), 100)
   }
 
   const nextQuestion = () => {
@@ -100,26 +120,29 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
     setQuestion(generateQuestion(mode, maxBits))
     setUserAnswer('')
     setFeedback(null)
-    setTimeout(() => inputRef.current?.focus(), 50)
+    setSafeTimeout(() => inputRef.current?.focus(), 50)
   }
 
   const handleSubmit = (e?: React.FormEvent) => {
     e?.preventDefault()
-    if (!question || !userAnswer.trim()) return
+    // The input stays mounted during the feedback window; this lock (plus the
+    // disabled submit button) makes the double-submit race impossible.
+    if (!question || !userAnswer.trim() || feedback) return
 
-    setTotal(prev => prev + 1)
-    setQuestionsAnswered(prev => prev + 1)
+    setTotal((prev) => prev + 1)
+    answeredRef.current += 1
+    setQuestionsAnswered(answeredRef.current)
 
-    if (userAnswer.trim().toUpperCase() === question.answer) {
-      setScore(prev => prev + 10)
-      setCorrect(prev => prev + 1)
+    if (normalizeBaseInput(userAnswer) === question.answer) {
+      setScore((prev) => prev + 10)
+      setCorrect((prev) => prev + 1)
       setFeedback('correct')
     } else {
       setFeedback('wrong')
     }
 
-    setTimeout(() => {
-      if (questionsAnswered + 1 >= totalQuestions) {
+    setSafeTimeout(() => {
+      if (answeredRef.current >= totalQuestions) {
         setGameMode('complete')
       } else {
         nextQuestion()
@@ -128,6 +151,19 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
   }
 
   const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0
+
+  const quitGame = () => {
+    clearAll()
+    setGameMode('config')
+  }
+
+  // Load the persisted best score outside of render (the read performs the
+  // one-time legacy-key migration, a side effect).
+  useEffect(() => {
+    if (gameMode === 'config' || gameMode === 'complete') {
+      setBestScore(getGameBest(GAME_ID.binaryHex, 'score'))
+    }
+  }, [gameMode])
 
   return (
     <div className="container-custom py-12">
@@ -142,6 +178,7 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
           </div>
           <h1 className="text-4xl font-bold mb-2">{game.title}</h1>
           <p className="text-muted-foreground">{game.description}</p>
+          <BestScoreLine best={bestScore} template={g.best_score} />
         </div>
 
         {gameMode === 'config' && (
@@ -149,11 +186,12 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
             <h2 className="text-2xl font-semibold mb-6">{g.game_setup || 'Game Setup'}</h2>
             <div className="mb-6">
               <label className="block font-medium mb-3">{bh.conversion_modes || 'Conversion Modes'}</label>
-              <div className="flex flex-wrap gap-2">
-                {game.modes.map((mode: Mode) => (
+              <div className="flex flex-wrap gap-2" role="group" aria-label={bh.conversion_modes || 'Conversion Modes'}>
+                {allModes.map((mode: Mode) => (
                   <button
                     key={mode}
-                    onClick={() => setSelectedModes(prev => prev.includes(mode) ? prev.filter(m => m !== mode) : [...prev, mode])}
+                    onClick={() => setSelectedModes((prev) => (prev.includes(mode) ? prev.filter((m) => m !== mode) : [...prev, mode]))}
+                    aria-pressed={selectedModes.includes(mode)}
                     className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${selectedModes.includes(mode) ? `bg-gradient-to-r ${modeColors[mode]} text-white shadow-lg` : 'bg-gray-100 dark:bg-gray-800 text-gray-500 hover:bg-gray-200'}`}
                   >
                     {modeLabels[mode]}
@@ -163,34 +201,36 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
             </div>
             <div className="mb-8">
               <label className="block font-medium mb-3">{g.difficulty_label || 'Difficulty'}</label>
-              <div className="flex gap-2">
-                {['beginner', 'intermediate', 'advanced'].map(d => (
+              <div className="flex gap-2" role="group" aria-label={g.difficulty_label || 'Difficulty'}>
+                {['beginner', 'intermediate', 'advanced'].map((d) => (
                   <button
                     key={d}
                     onClick={() => setDifficulty(d)}
+                    aria-pressed={difficulty === d}
                     className={`flex-1 py-3 rounded-xl font-medium transition-all ${difficulty === d ? 'bg-primary text-white shadow-lg' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
                   >
                     <div className="capitalize">{g.difficulty?.[d] || d}</div>
-                    <div className="text-xs opacity-70 mt-1">{game.difficultyLevels[d].maxBits} bits</div>
+                    <div className="text-xs opacity-70 mt-1">{game.difficultyLevels?.[d]?.maxBits} bits</div>
                   </button>
                 ))}
               </div>
             </div>
             <button onClick={startGame} disabled={selectedModes.length === 0} className="w-full py-4 rounded-xl bg-brand text-white text-lg font-bold hover:shadow-lg transition-all disabled:opacity-50">
-              {t(g.start_challenge_n || 'Start Challenge ({n} questions)', { n: totalQuestions })}
+              {tpl(g.start_challenge_n || 'Start Challenge ({n} questions)', { n: totalQuestions })}
             </button>
           </div>
         )}
 
         {gameMode === 'playing' && question && (
           <div>
-            {/* Progress */}
+            {/* Progress: width now reflects questions *answered* including the
+                one on screen — previously it stayed at 0% for question 1. */}
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm text-muted-foreground">{t(g.question_of || 'Question {current} of {total}', { current: questionsAnswered + 1, total: totalQuestions })}</span>
-              <span className="text-sm font-semibold">{t(g.score_value || 'Score: {score}', { score })}</span>
+              <span className="text-sm text-muted-foreground">{tpl(g.question_of || 'Question {current} of {total}', { current: Math.min(questionsAnswered + 1, totalQuestions), total: totalQuestions })}</span>
+              <span className="text-sm font-semibold">{tpl(g.score_value || 'Score: {score}', { score })}</span>
             </div>
             <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full mb-8 overflow-hidden">
-              <div className="h-full bg-brand rounded-full transition-all" style={{ width: `${((questionsAnswered) / totalQuestions) * 100}%` }} />
+              <div className="h-full bg-brand rounded-full transition-all" style={{ width: `${Math.max(((questionsAnswered + 1) / totalQuestions) * 100, (1 / totalQuestions) * 100)}%` }} />
             </div>
 
             {/* Mode Badge */}
@@ -202,13 +242,13 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
 
             {/* Question */}
             <motion.div
-              key={question.display + feedback}
+              key={question.display + String(feedback)}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               className="bg-card border rounded-2xl p-10 text-center mb-6"
             >
-              <div className="text-sm text-muted-foreground mb-2">{bh.convert_label || 'Convert:'}</div>
-              <div className="text-5xl font-mono font-bold mb-6 tracking-wider">{question.display}</div>
+              <div dir="ltr" className="text-sm text-muted-foreground mb-2">{bh.convert_label || 'Convert:'}</div>
+              <div dir="ltr" className="text-5xl font-mono font-bold mb-6 tracking-wider">{question.display}</div>
 
               <form onSubmit={handleSubmit} className="flex gap-3 max-w-sm mx-auto">
                 <input
@@ -217,28 +257,34 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit() }}
+                  disabled={feedback !== null}
+                  aria-label={bh.answer_placeholder || 'Answer...'}
                   placeholder={bh.answer_placeholder || 'Answer...'}
-                  className={`flex-1 px-4 py-3 rounded-xl border-2 text-2xl font-mono font-bold text-center outline-none transition-all ${
+                  className={`flex-1 px-4 py-3 rounded-xl border-2 text-2xl font-mono font-bold text-center outline-none transition-all disabled:opacity-70 ${
                     feedback === 'correct' ? 'border-green-500 bg-green-50 dark:bg-green-900/20' :
                     feedback === 'wrong' ? 'border-red-500 bg-red-50 dark:bg-red-900/20' :
                     'border-border focus:border-primary'
                   }`}
                   autoFocus
                 />
-                <button type="submit" className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-all">{g.ok || 'OK'}</button>
+                <button type="submit" disabled={feedback !== null} className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed">{g.ok || 'OK'}</button>
               </form>
 
               {feedback && (
-                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className={`mt-4 font-semibold flex items-center justify-center gap-2 ${feedback === 'correct' ? 'text-green-600' : 'text-red-600'}`}>
-                  {feedback === 'correct' ? <><CheckCircle2 className="w-5 h-5" /> {g.correct_exclamation || 'Correct!'}</> : <><XCircle className="w-5 h-5" /> {t(g.answer_with_value || 'Answer: {answer}', { answer: question.answer })}</>}
+                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} aria-live="polite" className={`mt-4 font-semibold flex items-center justify-center gap-2 ${feedback === 'correct' ? 'text-green-600' : 'text-red-600'}`}>
+                  {feedback === 'correct' ? <><CheckCircle2 className="w-5 h-5" /> {g.correct_exclamation || 'Correct!'}</> : <><XCircle className="w-5 h-5" /> {tpl(g.answer_with_value || 'Answer: {answer}', { answer: question.answer })}</>}
                 </motion.div>
               )}
             </motion.div>
+
+            <button onClick={quitGame} className="w-full py-3 rounded-xl bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors flex items-center justify-center gap-2">
+              <RotateCcw className="w-4 h-4" /> {g.quit || 'Quit'}
+            </button>
           </div>
         )}
 
         {gameMode === 'complete' && (
-          <div className="bg-card border rounded-2xl p-8 text-center">
+          <div className="bg-card border rounded-2xl p-8 text-center" aria-live="polite">
             <div className="w-20 h-20 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mx-auto mb-6">
               <Trophy className="w-10 h-10 text-white" />
             </div>
@@ -257,14 +303,42 @@ export function BinaryHexClient({ lang, game, dict }: BinaryHexClientProps) {
                 <div className="text-sm text-muted-foreground">{g.stats?.accuracy || 'Accuracy'}</div>
               </div>
             </div>
-            <div className="text-2xl font-bold mb-6">{t(g.score_value || 'Score: {score}', { score })}</div>
+            <div className="text-2xl font-bold mb-6">{tpl(g.score_value || 'Score: {score}', { score })}</div>
+            <BestScoreLine best={bestScore} template={g.best_score} current={score} />
             <div className="flex gap-3">
-              <button onClick={startGame} className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all">{g.play_again || 'Play Again'}</button>
-              <Link href={`/${lang}/games`} className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors text-center">{g.more_games || 'More Games'}</Link>
+              <button
+                onClick={() => {
+                  if (total > 0 && saveGameBestIfNew(GAME_ID.binaryHex, 'score', score)) setBestScore(score)
+                  startGame()
+                }}
+                className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all"
+              >
+                {g.play_again || 'Play Again'}
+              </button>
+              <button
+                onClick={() => {
+                  if (total > 0) saveGameBestIfNew(GAME_ID.binaryHex, 'score', score)
+                  quitGame()
+                }}
+                className="flex-1 py-3 rounded-xl border font-semibold hover:bg-muted transition-colors"
+              >
+                {g.back_to_games || 'Back to Games'}
+              </button>
             </div>
           </div>
         )}
       </div>
     </div>
+  )
+}
+
+function BestScoreLine({ best, template, current }: { best: number | null; template?: string; current?: number }) {
+  if (best === null || best <= 0) return null
+  const isNew = current !== undefined && current >= best && current > 0
+  return (
+    <p className={`text-sm font-semibold mt-2 ${isNew ? 'text-amber-600' : 'text-primary'}`}>
+      🏆 {tpl(template || 'Best Score: {score}', { score: best })}
+      {isNew ? ' ★' : ''}
+    </p>
   )
 }

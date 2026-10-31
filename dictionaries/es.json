@@ -722,7 +722,8 @@
       "language": "Idioma",
       "duration": "Duración",
       "get_ready": "Prepárate para escribir...",
-      "type_placeholder": "Escribe el código de arriba aquí..."
+      "type_placeholder": "Escribe el código de arriba aquí...",
+      "best_wpm": "Mejor PPM: {wpm}"
     },
     "number_sequence": {
       "enter_sequence": "Escribe la secuencia",
@@ -760,8 +761,13 @@
       "puzzle_complete": "¡Rompecabezas Completado!",
       "found_all": "¡Encontraste todas las {n} palabras!",
       "time_with_n": "Tiempo: {time}",
-      "words_count": "{n} palabras"
-    }
+      "words_count": "{n} palabras",
+      "best_time": "Mejor Tiempo: {time}",
+      "keyboard_hint": "Teclado: flechas para mover, Enter para marcar y validar, Esc para limpiar.",
+      "skipped_n": "{n} omitidas",
+      "cell_label": "Fila {row}, columna {col}"
+    },
+    "best_score": "Mejor Puntuación: {score}"
   },
   "quizzes": {
     "title": "Cuestionarios, Exámenes y Práctica de Certificación",

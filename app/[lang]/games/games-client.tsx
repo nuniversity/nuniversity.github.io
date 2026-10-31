@@ -29,21 +29,20 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
     )
   }, [games, searchQuery])
 
-  // Group games by category
-  const groupedByCategory = useMemo(() => {
-    const grouped: Record<string, GameMetadata[]> = {}
-    
-    for (const game of filteredGames) {
-      const categoryLabel = dict.games?.categories?.[game.category] || game.category
-      
-      if (!grouped[categoryLabel]) {
-        grouped[categoryLabel] = []
-      }
-      grouped[categoryLabel].push(game)
+  // Group games by category (keys are stable category ids, not display text, so
+// an unfortunate localized-label collision can never merge two categories)
+const groupedByCategory = useMemo(() => {
+  const grouped: Record<string, GameMetadata[]> = {}
+
+  for (const game of filteredGames) {
+    if (!grouped[game.category]) {
+      grouped[game.category] = []
     }
-    
-    return grouped
-  }, [filteredGames, dict])
+    grouped[game.category].push(game)
+  }
+
+  return grouped
+}, [filteredGames])
 
   // Category icons
   function getCategoryIcon(category: string) {
@@ -95,7 +94,8 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
         <div className="relative mb-10">
           <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground pointer-events-none" />
           <input
-            type="text"
+            type="search"
+            aria-label={dict.games.search_placeholder || 'Search games'}
             placeholder={dict.games.search_placeholder}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -118,15 +118,16 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
         {/* Grouped Games */}
         <div className="space-y-12">
           {Object.entries(groupedByCategory).map(([category, categoryGames]) => {
-            const Icon = getCategoryIcon(categoryGames[0]?.category || 'fun')
-            
+            const Icon = getCategoryIcon(category)
+            const categoryLabel = dict.games?.categories?.[category] || category
+
             return (
               <div key={category}>
                 <h2 className="text-2xl font-semibold mb-6 flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-gradient-section-games flex items-center justify-center">
                     <Icon className="w-5 h-5 text-white" />
                   </div>
-                  {category}
+                  {categoryLabel}
                 </h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {categoryGames.map((game) => (
@@ -138,7 +139,9 @@ export function GamesClient({ lang, games, dict }: GamesClientProps) {
                       {/* Header with icon and difficulty */}
                       <div className="flex items-center justify-between mb-4">
                         <div className="w-12 h-12 rounded-lg bg-gradient-section-games flex items-center justify-center">
-                          <Gamepad2 className="w-6 h-6 text-white" />
+                          {/* Per-category icon (page-matching); the generic
+                              gamepad hid the card's identity. */}
+                          <Icon className="w-6 h-6 text-white" />
                         </div>
                         {game.difficulty && (
                           <span className={`text-xs font-medium px-3 py-1 rounded-full ${getDifficultyColor(game.difficulty)}`}>

@@ -722,7 +722,8 @@
       "language": "Idioma",
       "duration": "Duração",
       "get_ready": "Prepare-se para digitar...",
-      "type_placeholder": "Digite o código acima aqui..."
+      "type_placeholder": "Digite o código acima aqui...",
+      "best_wpm": "Melhor PPM: {wpm}"
     },
     "number_sequence": {
       "enter_sequence": "Digite a sequência",
@@ -760,8 +761,13 @@
       "puzzle_complete": "Enigma Concluído!",
       "found_all": "Você encontrou todas as {n} palavras!",
       "time_with_n": "Tempo: {time}",
-      "words_count": "{n} palavras"
-    }
+      "words_count": "{n} palavras",
+      "best_time": "Melhor Tempo: {time}",
+      "keyboard_hint": "Teclado: setas para mover, Enter para marcar e verificar, Esc para limpar.",
+      "skipped_n": "{n} ignoradas",
+      "cell_label": "Linha {row}, coluna {col}"
+    },
+    "best_score": "Melhor Pontuação: {score}"
   },
   "quizzes": {
     "title": "Quizzes, Testes e Prática de Certificação",
